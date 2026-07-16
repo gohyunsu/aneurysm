@@ -7,14 +7,14 @@ import argparse
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import meshio
 import numpy as np
+import pyvista as pv
 import trimesh
 
 
 def points_for(path: Path) -> np.ndarray:
     if path.suffix.lower() == ".vtp":
-        return np.asarray(meshio.read(path).points)
+        return np.asarray(pv.read(path).points)
     mesh = trimesh.load(path, process=False)
     if isinstance(mesh, trimesh.Scene):
         mesh = trimesh.util.concatenate(tuple(mesh.geometry.values()))
