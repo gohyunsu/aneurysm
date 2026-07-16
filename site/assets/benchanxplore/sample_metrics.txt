@@ -1,0 +1,6 @@
+points=16470
+tetrahedra=81797
+frames=80
+wall_fraction=0.38743168
+mean_speed_min=111.08070374
+mean_speed_max=272.39697266
