@@ -9,6 +9,7 @@
 
 - 연구 맥락과 비판적 검토: [`docs/research-map.md`](docs/research-map.md)
 - 데이터셋 인벤토리·통합 원칙: [`docs/datasets.md`](docs/datasets.md)
+- 데이터 획득 우선순위·저장공간 계획: [`docs/data-acquisition.md`](docs/data-acquisition.md)
 - 재현 실험 기록: [`docs/reproduction.md`](docs/reproduction.md)
 - 표준 데이터 계약: [`data/schema/README.md`](data/schema/README.md)
 - 사이트: [`site/index.html`](site/index.html)

@@ -1,0 +1,22 @@
+# Large and potentially restricted research data
+data/raw/
+data/extracted/
+data/derivatives/
+data/scratch/
+*.h5
+*.xdmf
+*.cas
+*.cas.gz
+*.nii
+*.nii.gz
+*.dcm
+*.stl
+*.vtp
+*.vti
+*.zip
+*.rar
+
+# Local experiment outputs
+runs/
+checkpoints/
+wandb/
