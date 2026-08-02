@@ -38,6 +38,16 @@
 - G1의 음수 exploratory evidence와 conditional C3 결정을 gate·실험·변경
   이력에 반영했다.
 
+### Deployment
+
+- content commit: `c9a998b`
+- GitHub quality workflow: success
+- GitHub Pages workflow: success
+- production verification: main, 11-chapter guide, aggregate result JSON all
+  returned HTTP 200
+- production guide:
+  `https://gohyunsu.github.io/aneurysm/site/learn.html`
+
 ## 2026-08-03 · Research reset: AURORA
 
 ### Changed

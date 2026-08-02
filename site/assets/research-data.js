@@ -125,6 +125,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.03",
+      category: "site",
+      title: "Production field guide and aggregate result verified",
+      copy: "Content commit c9a998b의 quality와 GitHub Pages workflow가 성공했고, production main·11장 상세 가이드·aggregate G1 JSON의 HTTP 200 응답을 확인했다.",
+      files: ["CHANGELOG.md", "site/learn.html", "results/cmha_g1_exploratory_20260803.json"]
+    },
+    {
+      date: "2026.08.03",
       category: "experiment",
       title: "CMHA G1 exploratory signal does not support real-CFD increment",
       copy: "99명/105병변 patient-grouped 5×5 linear sensitivity에서 C+M AUPRC 0.759, C+M+H 0.717, Δ −0.0419 [−0.1083, 0.0066]을 관찰했다. 공식 case map이 없어 confirmatory G1은 unresolved로 유지하고 C3를 conditional secondary로 낮췄다.",
