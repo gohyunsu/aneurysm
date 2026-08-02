@@ -194,6 +194,8 @@ def load_cmha_cohort(data_root: Path) -> Cohort:
     x_clinical_morphology = np.concatenate(
         [x_clinical, x_context, x_morphology], axis=1
     )
+    x_morphology_only = np.concatenate([x_context, x_morphology], axis=1)
+    x_clinical_hemodynamic = np.concatenate([x_clinical, x_hemodynamic], axis=1)
     x_full = np.concatenate([x_clinical_morphology, x_hemodynamic], axis=1)
 
     group_sizes = Counter(groups.tolist())
@@ -235,12 +237,18 @@ def load_cmha_cohort(data_root: Path) -> Cohort:
         groups=groups,
         matrices={
             "clinical": x_clinical,
+            "morphology": x_morphology_only,
+            "hemodynamics": x_hemodynamic,
             "clinical_morphology": x_clinical_morphology,
+            "clinical_hemodynamics": x_clinical_hemodynamic,
             "clinical_morphology_hemodynamics": x_full,
         },
         feature_names={
             "clinical": n_clinical,
+            "morphology": n_context + n_morphology,
+            "hemodynamics": n_hemodynamic,
             "clinical_morphology": n_clinical + n_context + n_morphology,
+            "clinical_hemodynamics": n_clinical + n_hemodynamic,
             "clinical_morphology_hemodynamics": (
                 n_clinical + n_context + n_morphology + n_hemodynamic
             ),
@@ -666,10 +674,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--outer-splits", type=int, default=5)
     parser.add_argument("--inner-splits", type=int, default=3)
-    parser.add_argument("--repeats", type=int, default=3)
+    parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--epochs", type=int, default=250)
     parser.add_argument("--learning-rate", type=float, default=0.03)
-    parser.add_argument("--l2", type=float, nargs="+", default=[1e-4, 1e-3, 1e-2, 1e-1])
+    parser.add_argument(
+        "--l2",
+        type=float,
+        nargs="+",
+        default=[1e-4, 1e-3, 1e-2, 1e-1, 1.0, 10.0],
+    )
     parser.add_argument("--bootstrap-samples", type=int, default=1000)
     parser.add_argument("--require-cuda", action="store_true")
     return parser
