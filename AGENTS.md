@@ -175,3 +175,26 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   generic BC까지 patient-specific이라고 부르지 않는다.
 - `clinical utility`: 외부·전향 검증 전 사용 금지. 대신 `research utility`,
   `downstream association`, `functional sufficiency`를 쓴다.
+
+## 11. 서버와 실행 기준선
+
+- private 운영 가이드는 Git에서 제외된 `SERVER_GUIDE.md`다. endpoint,
+  password, private key, 내부 데이터 절대경로를 공개 문서에 옮기지 않는다.
+- `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사한다.
+- GPU 실험은 `junjinyong`의 PBS scheduler allocation에서 실행한다. login
+  node에서 GPU 학습이나 `nvidia-smi`를 실행하지 않는다.
+- pinned Singularity image를 사용하고 code/data는 read-only, output만
+  writable로 bind한다.
+- run은 commit, command, environment, config, dataset checksum, status,
+  aggregate metrics를 남긴다. 실패 run도 provenance로 보존한다.
+- 2026-08-03 smoke 기준은 RTX A6000, PyTorch 2.5.1+cu118, CUDA 11.8이다.
+  사양은 매 job에서 다시 기록한다.
+- CMHA 통계표는 105 lesion/99 patient, 6 multi-lesion patient로 감사됐다.
+  split/bootstrap은 patient group 단위다. 공식 case map 확인 전 row-aligned
+  G1은 exploratory다.
+- CMHA `PHASE`, `ELAPSS`는 정의가 확인되지 않았고 target과 거의 결정적
+  관계를 보여 baseline에서 제외한다.
+- 2026-08-03 exploratory G1은 `C+M` AUPRC 0.759, `C+M+H` 0.717,
+  `Δ=-0.0419 [−0.1083, 0.0066]`이었다. Confirmatory G1은 unresolved이며
+  C3는 conditional secondary다. 공식 case map과 second model family 전에는
+  risk-retention을 계산하거나 C3를 primary claim으로 복원하지 않는다.

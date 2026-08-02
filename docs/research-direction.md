@@ -2,7 +2,13 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: 연구 가설 및 사전 실험 설계, 결과 없음
+상태: architecture contract + exploratory G1 diagnostic 완료
+
+2026-08-03 CMHA 표 기반 exploratory G1은 real-CFD summary의 incremental
+utility를 지지하지 않았다(`ΔAUPRC=-0.0419`, patient-bootstrap 95% CI
+`[-0.1083, 0.0066]`). 공식 case map과 second model family가 없는 진단
+결과이므로 confirmatory gate는 `unresolved`다. 그동안 C3 risk-aligned
+branch는 conditional secondary hypothesis로 낮추고 C1/C2를 우선한다.
 
 ## 1. 한 문장 연구 질문
 
@@ -94,7 +100,7 @@ calibrated rupture-status score + uncertainty / abstention
 population prior를 적분한다. 출력은 field sample의 집합이며 평균 field만
 보고하지 않는다.
 
-## 4. 예상 contribution
+## 4. contribution 가설과 현재 우선순위
 
 ### C1. Missing-BC distributional operator
 
@@ -122,7 +128,7 @@ cycle을 8개 temporal Fourier mode로 압축해 한 번에 계수를 예측한�
 full transient tensor를 매 step decode하지 않으므로 메모리와 drift를 줄이고,
 TAWSS/OSI를 differentiable하게 복원한다.
 
-### C3. Task-aligned functional sufficiency
+### C3. Task-aligned functional sufficiency · conditional secondary
 
 surrogate 선택 기준을 “CFD imitation”에서 “CFD가 downstream task에
 제공하는 정보 보존”으로 확장한다.
@@ -139,6 +145,8 @@ surrogate 선택 기준을 “CFD imitation”에서 “CFD가 downstream task�
 
 \(M\)은 primary metric인 AUPRC다. 분모가 양수라는 G1 gate를 통과할 때만
 해석한다. RR이 높아도 absolute utility가 작으면 성공으로 부르지 않는다.
+현재 exploratory G1의 분모는 음수이므로 C3를 실험하거나 risk-retention을
+보고하지 않는다.
 
 ## 5. 무엇이 실제 novelty인가
 
@@ -216,11 +224,13 @@ Task-Aligned Intracranial Aneurysm Hemodynamics**
 
 ## 8. 현실적인 진행 순서
 
-1. CMHA real-CFD incremental utility gate를 작은 통계 모델로 먼저 확인
-2. 동일 geometry/다중 BC가 있는 Aneumo subset으로 missing-BC pilot
-3. deterministic Transolver/GNOT 계열과 probabilistic wrapper 비교
+1. CMHA 공식 case map·feature provenance를 해결하고 second model family로
+   confirmatory G1 여부를 결정
+2. 그와 병렬로 동일 geometry/다중 BC가 있는 Aneumo subset의 C1
+   missing-BC pilot을 우선
+3. deterministic operator와 probabilistic wrapper를 geometry/BC OOD에서 비교
 4. temporal basis decoder를 selected AneuG-Flow/BenchAnXplore에 검증
-5. CMHA field availability에 따라 paired fine-tuning 또는 summary validation
-6. gate 통과 뒤에만 task-aligned training과 AneuX stress test 수행
+5. G1이 양수일 때만 CMHA task alignment와 risk-retention을 재개
+6. C1/C2가 독립적으로 통과하면 status branch 없이 operator paper로 진행
 
 가장 비싼 full-scale 학습은 1–3단계가 성공한 뒤 시작한다.

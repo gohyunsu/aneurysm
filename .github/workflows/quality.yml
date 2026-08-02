@@ -30,3 +30,4 @@ jobs:
         run: |
           node --check site/assets/aurora.js
           node --check site/assets/research-data.js
+          node --check site/assets/learn.js

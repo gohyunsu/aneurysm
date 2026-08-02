@@ -4,6 +4,40 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Asset audit, G1 diagnostic, and field guide
+
+### Experiment
+
+- `introai9`에서 Aneumo, AneuG-Flow, BenchAnXplore, CMHA, AneuX,
+  Aneurisk 자산을 읽기 전용으로 확인했다.
+- `junjinyong`의 PBS A6000 allocation에서 pinned PyTorch/CUDA smoke와 CMHA
+  G1 exploratory sensitivity를 실행했다.
+- 99 patient/105 lesion을 patient-grouped 5×5 split으로 평가한 결과
+  `clinical+morphology` AUPRC 0.759, `+real-CFD summary` 0.717,
+  `Δ=-0.0419 [−0.1083, 0.0066]`이었다.
+- 공식 case map과 second model family 전까지 confirmatory G1은
+  `unresolved`다. C3를 conditional secondary로 낮추고 C1/C2를 우선한다.
+- 정의가 확인되지 않고 target을 거의 분리한 `PHASE`, `ELAPSS`를
+  baseline에서 제외했다.
+
+### Implementation
+
+- patient-grouped nested-CV linear pilot, patient bootstrap, CUDA smoke, PBS
+  template과 aggregate result contract를 추가했다.
+- grouped splitter의 empty-fold 오류를 unit/data smoke로 발견·수정했고 실패
+  run도 provenance로 보존했다.
+- 공개 aggregate result:
+  `results/cmha_g1_exploratory_20260803.json`
+
+### Site
+
+- 한 장 요약을 유지하면서, 배경지식이 없는 독자를 위한 11개 상세 설명 창과
+  16개 용어 glossary를 `site/learn.html`에 추가했다.
+- 메인 architecture에 “GNN local encoder + attention + neural-operator
+  decoder” 분류와 각 모듈의 상세 링크를 추가했다.
+- G1의 음수 exploratory evidence와 conditional C3 결정을 gate·실험·변경
+  이력에 반영했다.
+
 ## 2026-08-03 · Research reset: AURORA
 
 ### Changed

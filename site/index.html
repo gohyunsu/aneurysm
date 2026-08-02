@@ -20,6 +20,7 @@
       <span>AURORA <small>Aneurysm research</small></span>
     </a>
     <nav class="nav" aria-label="주요 탐색">
+      <a href="learn.html">Learn</a>
       <a href="#thesis">Thesis</a>
       <a href="#lineage">Lineage</a>
       <a href="#architecture">Architecture</a>
@@ -50,7 +51,8 @@
           검증한다.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#architecture">모델 아키텍처 보기</a>
+          <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
         </div>
       </div>
@@ -206,6 +208,16 @@
         </p>
       </div>
 
+      <div class="architecture-verdict">
+        <span>IS IT A GNN?</span>
+        <strong>GNN을 포함하지만, 순수 GNN은 아니다.</strong>
+        <p>
+          Local surface는 graph message passing, 장거리 anatomy는 physics-token
+          attention, 임의 좌표의 field는 neural-operator query decoder가 담당한다.
+        </p>
+        <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
+      </div>
+
       <div class="mode-switch" role="group" aria-label="Boundary condition 모드">
         <button class="active" type="button" data-mode="missing">Missing BC</button>
         <button type="button" data-mode="observed">Observed BC</button>
@@ -221,6 +233,7 @@
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
+          <a class="arch-learn" href="learn.html#graph">Mesh → graph 설명</a>
         </article>
         <div class="arch-connector"><span>local frame</span></div>
         <article class="arch-node">
@@ -229,6 +242,7 @@
           <h3>Multi-scale physics tokens</h3>
           <p>4096 → 1024 → 256 nodes, 128 latent tokens, anatomy-preserving pooling</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <a class="arch-learn" href="learn.html#gnn">GNN과 token 설명</a>
         </article>
         <div class="arch-connector accent"><span id="bc-connector-label">sample z<sub>BC</sub></span></div>
         <article class="arch-node uncertainty-node">
@@ -240,6 +254,7 @@
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
+          <a class="arch-learn" href="learn.html#uncertainty">Missing BC 설명</a>
         </article>
         <div class="arch-connector"><span>FiLM</span></div>
         <article class="arch-node dual-node">
@@ -251,6 +266,7 @@
             <span><b>Wall</b>WSS · local hotspot</span>
           </div>
           <p>8 temporal Fourier modes; no autoregressive rollout</p>
+          <a class="arch-learn" href="learn.html#temporal">One-shot cycle 설명</a>
         </article>
         <div class="arch-connector"><span>derive</span></div>
         <article class="arch-node output-node">
@@ -259,6 +275,7 @@
           <h3>Functional sufficiency</h3>
           <p>TAWSS · OSI · LSA · RRT distribution, oracle ranking, calibration</p>
           <div class="output-meter"><i></i><span>risk-retention</span><b>predefined gate</b></div>
+          <a class="arch-learn" href="learn.html#functionals">지표와 sufficiency 설명</a>
         </article>
       </div>
 
@@ -276,7 +293,10 @@
           <p>uncertainty는 높은 rupture probability가 아니라 BC/OOD 불확실성이다.</p>
         </article>
       </div>
-      <a class="text-link on-dark-link" href="../docs/model-spec.md">Tensor·module·loss 전체 명세 ↗</a>
+      <div class="architecture-links">
+        <a class="text-link on-dark-link" href="learn.html#architecture">입문자용 전체 구조 ↗</a>
+        <a class="text-link on-dark-link" href="../docs/model-spec.md">Tensor·module·loss 명세 ↗</a>
+      </div>
     </section>
 
     <section class="section experiment-section" id="experiments">
@@ -290,6 +310,29 @@
       </div>
 
       <div class="gate-list" id="gate-list"></div>
+
+      <article class="g1-result">
+        <div class="g1-result-head">
+          <p class="eyebrow">G1 · EXPLORATORY DIAGNOSTIC · COMPLETE</p>
+          <span>not a confirmatory gate verdict</span>
+        </div>
+        <div class="g1-result-metrics">
+          <div><span>Clinical + morphology</span><b>0.759</b><small>AUPRC</small></div>
+          <i>→</i>
+          <div><span>+ real-CFD summary</span><b>0.717</b><small>AUPRC</small></div>
+          <div class="delta negative"><span>Increment</span><b>−0.0419</b><small>95% CI −0.1083 to 0.0066</small></div>
+        </div>
+        <div class="g1-result-decision">
+          <strong>현재 evidence는 incremental utility를 지지하지 않는다.</strong>
+          <p>
+            C3 risk-aligned branch를 conditional secondary로 낮추고 C1 missing-BC
+            operator와 C2 one-shot fidelity를 우선한다. 공식 case map과 second
+            model family 전까지 G1은 unresolved다.
+          </p>
+          <a href="learn.html#experiments">결과와 해석을 차근차근 읽기 →</a>
+          <a href="../results/cmha_g1_exploratory_20260803.json">Aggregate JSON ↗</a>
+        </div>
+      </article>
 
       <div class="experiment-grid">
         <article class="experiment-card large">
@@ -333,6 +376,11 @@
         <code>PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json</code>
         <a href="../configs/aurora_v1.json">Open config ↗</a>
       </div>
+      <a class="detail-prompt" href="learn.html#experiments">
+        <span>BACKGROUND GUIDE</span>
+        <b>Nested CV, gate, AUPRC, calibration이 낯설다면</b>
+        <i>실험을 처음부터 읽기 →</i>
+      </a>
     </section>
 
     <section class="section paper-section" id="paper">
@@ -344,7 +392,7 @@
       <div class="contribution-grid">
         <article><span>C1</span><h3>Distribution, not imputation</h3><p>Missing BC를 함수공간 분포로 모델링하고 observed/missing mode를 같은 operator에서 평가한다.</p></article>
         <article><span>C2</span><h3>Cycle, not rollout</h3><p>One-shot dual-domain temporal coefficients로 전역 flow와 국소 wall shear를 연결한다.</p></article>
-        <article><span>C3</span><h3>Sufficiency, not RMSE alone</h3><p>real-CFD의 incremental status signal을 얼마나 보존했는지 risk-retention으로 측정한다.</p></article>
+        <article><span>C3 · CONDITIONAL</span><h3>Sufficiency, if justified</h3><p>Confirmatory G1이 양수일 때만 real-CFD의 incremental status signal을 surrogate가 보존하는지 측정한다.</p></article>
       </div>
       <div class="scope-line">
         <span>Allowed</span><b>cross-sectional rupture-status stratification</b>
@@ -363,6 +411,8 @@
           <button class="active" type="button" data-filter="all">All</button>
           <button type="button" data-filter="research">Research</button>
           <button type="button" data-filter="model">Model</button>
+          <button type="button" data-filter="data">Data</button>
+          <button type="button" data-filter="experiment">Experiment</button>
           <button type="button" data-filter="site">Site</button>
         </div>
         <a href="../CHANGELOG.md">Raw changelog ↗</a>
@@ -377,6 +427,7 @@
       <p>Research protocol · not a clinical decision system.</p>
     </div>
     <div class="footer-links">
+      <a href="learn.html">Beginner field guide</a>
       <a href="../docs/research-direction.md">Research direction</a>
       <a href="../docs/model-spec.md">Model spec</a>
       <a href="../docs/experiment-protocol.md">Experiment protocol</a>

@@ -69,8 +69,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G1",
       title: "Does real CFD add information?",
-      copy: "CMHA에서 clinical+morphology+real CFD가 clinical+morphology보다 incremental AUPRC를 보이는지 먼저 확인한다.",
-      state: "First experiment",
+      copy: "Exploratory CMHA linear pilot의 ΔAUPRC는 −0.0419 [−0.1083, 0.0066]이었다. 공식 case map과 second family로 confirmatory 여부를 결정한다.",
+      state: "Negative signal · unresolved",
       blocking: true
     },
     {
@@ -99,30 +99,58 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일/유사 geometry × 8 steady BC로 sensitivity pilot",
-      provenance: "synthetic CFD"
+      provenance: "asset found · G0 pending"
     },
     {
       name: "AneuG-Flow",
       role: "selected steady/pulsatile operator pretraining",
-      provenance: "synthetic CFD"
+      provenance: "geometry found · G0 pending"
     },
     {
       name: "BenchAnXplore",
       role: "105 semi-idealized transient reproduction 및 GNN baseline",
-      provenance: "synthetic CFD"
+      provenance: "HDF5/XDMF found · manifest partial"
     },
     {
       name: "CMHA",
       role: "patient-specific real-CFD bridge와 G1 downstream gate",
-      provenance: "real CFD"
+      provenance: "tables audited · case map pending"
     },
     {
       name: "AneuX",
       role: "750 geometry/status external association stress test",
-      provenance: "no real CFD"
+      provenance: "metadata/mesh found · no real CFD"
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "CMHA G1 exploratory signal does not support real-CFD increment",
+      copy: "99명/105병변 patient-grouped 5×5 linear sensitivity에서 C+M AUPRC 0.759, C+M+H 0.717, Δ −0.0419 [−0.1083, 0.0066]을 관찰했다. 공식 case map이 없어 confirmatory G1은 unresolved로 유지하고 C3를 conditional secondary로 낮췄다.",
+      files: ["results/cmha_g1_exploratory_20260803.json", "docs/experiment-protocol.md", "docs/research-direction.md"]
+    },
+    {
+      date: "2026.08.03",
+      category: "data",
+      title: "Aneurysm asset registry audited on introai9",
+      copy: "Aneumo, AneuG-Flow, BenchAnXplore, CMHA, AneuX, Aneurisk 자산을 읽기 전용으로 확인했다. CMHA의 99 patient/105 lesion 구조와 불명확한 PHASE·ELAPSS leakage 후보를 식별했다.",
+      files: ["docs/server-execution.md", "docs/datasets.md", "AGENTS.md"]
+    },
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Scheduler GPU execution established on junjinyong",
+      copy: "Pinned container와 PBS A6000 allocation에서 CUDA smoke, patient-grouped unit/data smoke, 5-repeat G1 sensitivity를 실행하고 commit·config·environment·manifest·status·metrics artifact를 남겼다.",
+      files: ["cluster/", "experiments/", "src/aurora/cmha_pilot.py"]
+    },
+    {
+      date: "2026.08.03",
+      category: "site",
+      title: "Zero-assumption field guide adds eleven detailed windows",
+      copy: "동맥류·CFD부터 mesh/graph, GNN, hybrid operator, missing BC, temporal basis, functionals, datasets, literature gap, experiment gates, server provenance까지 독립 URL과 용어집으로 확장했다.",
+      files: ["site/learn.html", "site/assets/learn.css", "site/assets/learn.js"]
+    },
     {
       date: "2026.08.03",
       category: "research",

@@ -80,6 +80,27 @@ def check_site(root: Path) -> list[str]:
     missing_mounts = required_mounts - app.ids
     if missing_mounts:
         errors.append(f"site/index.html: missing app mounts {sorted(missing_mounts)}")
+
+    guide = parsed[(root / "site" / "learn.html").resolve()]
+    required_guide_panels = {
+        "foundation",
+        "graph",
+        "gnn",
+        "architecture",
+        "uncertainty",
+        "temporal",
+        "functionals",
+        "datasets",
+        "evidence",
+        "experiments",
+        "provenance",
+        "glossary",
+    }
+    missing_guide_panels = required_guide_panels - guide.ids
+    if missing_guide_panels:
+        errors.append(
+            f"site/learn.html: missing guide panels {sorted(missing_guide_panels)}"
+        )
     return errors
 
 

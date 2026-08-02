@@ -51,6 +51,41 @@ Gate: bootstrap 95% CI와 fold consistency를 함께 보고 판단
 
 분모가 0에 가깝거나 음수면 risk-retention을 계산하지 않는다.
 
+#### 2026-08-03 exploratory diagnostic
+
+G0의 공식 case map이 해결되기 전에 표 구조와 pipeline을 검증하기 위한
+penalized linear pilot을 `junjinyong`의 scheduler GPU allocation에서
+실행했다. 이 결과는 confirmatory G1이 아니다.
+
+| 입력 | AUPRC | AUROC | Brier | ECE |
+|---|---:|---:|---:|---:|
+| clinical | 0.777 | 0.615 | 0.207 | 0.165 |
+| morphology | 0.756 | 0.540 | 0.218 | 0.163 |
+| hemodynamics | 0.649 | 0.364 | 0.237 | 0.192 |
+| clinical + morphology | 0.759 | 0.559 | 0.226 | 0.193 |
+| clinical + morphology + hemodynamics | 0.717 | 0.462 | 0.242 | 0.189 |
+
+Primary exploratory difference는 `−0.0419`, patient-bootstrap 95% CI는
+`[−0.1083, 0.0066]`이었다. 현재 표 기반 real-CFD summary의 incremental
+utility를 지지하지 않는다.
+
+중간 audit에서 정의가 확인되지 않은 `PHASE`, `ELAPSS` 조합이 status를 거의
+결정적으로 분리해 두 열을 제외했다. 105 lesion은 99 patient에 속하며
+6 multi-lesion patient는 병변별 status가 달라 patient-group split을
+사용했다.
+
+결정:
+
+- C3 task-aligned risk-retention은 현재 primary contribution이 아니라
+  confirmatory G1에 종속된 secondary hypothesis다.
+- C1 missing-BC operator와 C2 one-shot field/functional fidelity를 우선한다.
+- 공식 case map, feature definition, gradient-boosted second family와 frozen
+  confirmatory protocol 전에는 G1을 최종 실패로 선언하지 않는다.
+- 분모가 양수가 아니므로 이 run에서 risk-retention을 계산하지 않는다.
+
+공개 aggregate artifact:
+`results/cmha_g1_exploratory_20260803.json`
+
 ### G2. same-geometry BC pilot
 
 Aneumo에서 geometry 100개 × BC 8개 pilot을 구성한다.

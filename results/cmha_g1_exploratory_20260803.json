@@ -1,0 +1,134 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "cmha_g1_exploratory_20260803",
+  "evidence_status": "exploratory",
+  "source_commit": "900fedc",
+  "task": "cross_sectional_rupture_status",
+  "cohort": {
+    "patients": 99,
+    "lesions": 105,
+    "ruptured": 77,
+    "unruptured": 28,
+    "multi_lesion_patients": 6,
+    "patients_with_mixed_lesion_status": 6,
+    "split_unit": "patient"
+  },
+  "data_audit": {
+    "clinical_hemodynamic_exact_row_ids": 104,
+    "morphology_patient_or_lesion_suffix_compatible": 105,
+    "expected_rows": 105,
+    "official_case_map_verified": false,
+    "excluded_uncertain_derived_fields": [
+      "PHASE",
+      "ELAPSS"
+    ]
+  },
+  "configuration": {
+    "model": "linear_logistic_regression",
+    "outer_splits": 5,
+    "repeats": 5,
+    "inner_splits": 3,
+    "epochs": 250,
+    "learning_rate": 0.03,
+    "l2_candidates": [
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "selection_metric": "inner_oof_auprc",
+    "bootstrap_samples": 1000,
+    "bootstrap_unit": "patient"
+  },
+  "hardware": {
+    "device": "NVIDIA RTX A6000",
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8",
+    "scheduler_allocation": true
+  },
+  "metrics": {
+    "clinical": {
+      "feature_count": 12,
+      "auprc": 0.7771260422988523,
+      "auroc": 0.6145640074211502,
+      "balanced_accuracy": 0.5795454545454546,
+      "brier": 0.20689099649792378,
+      "ece_10": 0.1648691125994638
+    },
+    "morphology": {
+      "feature_count": 31,
+      "auprc": 0.7561225066914056,
+      "auroc": 0.5403525046382189,
+      "balanced_accuracy": 0.5211038961038961,
+      "brier": 0.21813602731247414,
+      "ece_10": 0.162780121514751
+    },
+    "hemodynamics": {
+      "feature_count": 19,
+      "auprc": 0.6494246360742847,
+      "auroc": 0.36363636363636365,
+      "balanced_accuracy": 0.4805194805194805,
+      "brier": 0.23697330999665206,
+      "ece_10": 0.1917444742590722
+    },
+    "clinical_hemodynamics": {
+      "feature_count": 31,
+      "auprc": 0.71738080275854,
+      "auroc": 0.5185528756957328,
+      "balanced_accuracy": 0.5649350649350648,
+      "brier": 0.22213817773620614,
+      "ece_10": 0.16511239817995202
+    },
+    "clinical_morphology": {
+      "feature_count": 43,
+      "auprc": 0.759173156040642,
+      "auroc": 0.5589053803339518,
+      "balanced_accuracy": 0.599025974025974,
+      "brier": 0.22628824246521667,
+      "ece_10": 0.19328394538235102
+    },
+    "clinical_morphology_hemodynamics": {
+      "feature_count": 62,
+      "auprc": 0.717280427232404,
+      "auroc": 0.462430426716141,
+      "balanced_accuracy": 0.5064935064935066,
+      "brier": 0.24220973849884805,
+      "ece_10": 0.18944847227637057
+    }
+  },
+  "primary_comparison": {
+    "metric": "delta_auprc",
+    "candidate": "clinical_morphology_hemodynamics",
+    "reference": "clinical_morphology",
+    "estimate": -0.04189272880823791,
+    "patient_bootstrap_ci95": [
+      -0.10834451623085975,
+      0.0066417582682770275
+    ],
+    "interpretation": "does_not_establish_incremental_utility"
+  },
+  "decision": {
+    "confirmatory_g1_status": "unresolved",
+    "current_signal": "negative",
+    "c3_risk_aligned_branch": "conditional_secondary",
+    "primary_priority": [
+      "c1_missing_bc_distributional_operator",
+      "c2_one_shot_field_and_functional_fidelity"
+    ],
+    "required_before_confirmatory_g1": [
+      "official_case_map",
+      "verified_feature_definitions",
+      "second_predeclared_model_family",
+      "frozen_confirmatory_protocol"
+    ]
+  },
+  "limitations": [
+    "Released-table row alignment is not yet confirmed by a formal case map.",
+    "PHASE and ELAPSS were excluded because their definitions are unverified.",
+    "The cohort is single-center and the endpoint is cross-sectional status.",
+    "This linear pilot is not the AURORA neural operator.",
+    "Only aggregate exploratory evidence may be cited from this artifact."
+  ]
+}

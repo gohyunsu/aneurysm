@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08121f">
+  <meta name="description" content="뇌동맥류, CFD, GNN, neural operator부터 AURORA 아키텍처와 실험까지 단계별로 읽는 입문 가이드.">
+  <title>AURORA Field Guide · 처음부터 이해하기</title>
+  <link rel="stylesheet" href="assets/aurora.css">
+  <link rel="stylesheet" href="assets/learn.css">
+  <script defer src="assets/learn.js"></script>
+</head>
+<body class="learn-page">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <div class="page-noise" aria-hidden="true"></div>
+
+  <header class="topbar" data-topbar>
+    <a class="brand" href="index.html" aria-label="AURORA 홈">
+      <span class="brand-mark">AU</span>
+      <span>AURORA <small>Field guide</small></span>
+    </a>
+    <nav class="nav" aria-label="가이드 탐색">
+      <a href="index.html">Research hub</a>
+      <a href="#architecture" data-chapter-link>Architecture</a>
+      <a href="#datasets" data-chapter-link>Data</a>
+      <a href="#experiments" data-chapter-link>Experiments</a>
+      <a href="#glossary">Glossary</a>
+    </nav>
+    <a class="repo-link" href="https://github.com/gohyunsu/aneurysm">
+      GitHub <span aria-hidden="true">↗</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-label="메뉴 열기">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="learn-hero dark" id="start">
+      <div class="learn-hero-copy">
+        <p class="eyebrow"><span>START HERE</span> ZERO-ASSUMPTION GUIDE</p>
+        <h1><span>혈관에서 그래프까지</span><br><em>한 단계씩.</em></h1>
+        <p>
+          이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
+          않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
+          AURORA가 무엇을 학습하고 무엇은 알 수 없는지 순서대로 설명합니다.
+        </p>
+        <div class="answer-card">
+          <span>짧은 답</span>
+          <strong>현재 아키텍처는 GNN을 사용하지만, 순수 GNN 모델은 아닙니다.</strong>
+          <p>
+            국소 혈관 표면은 GNN으로 읽고, 멀리 떨어진 영역은 attention으로
+            연결하며, 임의의 공간 좌표에서 유동장을 묻는 부분은 neural
+            operator로 복원하는 <b>hybrid geometry–operator architecture</b>입니다.
+          </p>
+        </div>
+      </div>
+      <div class="learning-map" aria-label="가이드 학습 경로">
+        <p class="eyebrow">READING MAP · ABOUT 35 MIN</p>
+        <ol>
+          <li><span>01</span><b>문제</b><small>동맥류와 혈류</small></li>
+          <li><span>02</span><b>표현</b><small>mesh를 graph로</small></li>
+          <li><span>03</span><b>모델</b><small>GNN + operator</small></li>
+          <li><span>04</span><b>불확실성</b><small>missing BC</small></li>
+          <li><span>05</span><b>검증</b><small>field → decision</small></li>
+        </ol>
+        <a class="button primary" href="#foundation" data-chapter-link>첫 장 시작하기</a>
+      </div>
+    </section>
+
+    <section class="learn-shell" aria-label="AURORA 상세 가이드">
+      <aside class="chapter-rail">
+        <div class="rail-head">
+          <span>FIELD GUIDE</span>
+          <b id="chapter-progress">01 / 10</b>
+        </div>
+        <div class="chapter-tabs" role="tablist" aria-label="가이드 장 선택">
+          <button id="tab-foundation" class="active" type="button" role="tab"
+                  aria-selected="true" aria-controls="foundation" data-chapter="foundation">
+            <span>01</span><b>동맥류와 CFD</b><small>문제의 출발점</small>
+          </button>
+          <button id="tab-graph" type="button" role="tab"
+                  aria-selected="false" aria-controls="graph" data-chapter="graph">
+            <span>02</span><b>Mesh와 graph</b><small>3D 혈관의 표현</small>
+          </button>
+          <button id="tab-gnn" type="button" role="tab"
+                  aria-selected="false" aria-controls="gnn" data-chapter="gnn">
+            <span>03</span><b>GNN의 역할</b><small>국소 정보 전달</small>
+          </button>
+          <button id="tab-architecture" type="button" role="tab"
+                  aria-selected="false" aria-controls="architecture" data-chapter="architecture">
+            <span>04</span><b>AURORA 전체</b><small>hybrid architecture</small>
+          </button>
+          <button id="tab-uncertainty" type="button" role="tab"
+                  aria-selected="false" aria-controls="uncertainty" data-chapter="uncertainty">
+            <span>05</span><b>Missing BC</b><small>왜 분포인가</small>
+          </button>
+          <button id="tab-temporal" type="button" role="tab"
+                  aria-selected="false" aria-controls="temporal" data-chapter="temporal">
+            <span>06</span><b>한 번에 한 주기</b><small>temporal basis</small>
+          </button>
+          <button id="tab-functionals" type="button" role="tab"
+                  aria-selected="false" aria-controls="functionals" data-chapter="functionals">
+            <span>07</span><b>벽면과 지표</b><small>WSS · OSI · RRT</small>
+          </button>
+          <button id="tab-datasets" type="button" role="tab"
+                  aria-selected="false" aria-controls="datasets" data-chapter="datasets">
+            <span>08</span><b>데이터 계보</b><small>각 자료의 역할</small>
+          </button>
+          <button id="tab-evidence" type="button" role="tab"
+                  aria-selected="false" aria-controls="evidence" data-chapter="evidence">
+            <span>09</span><b>선행연구와 gap</b><small>어디까지 해결됐나</small>
+          </button>
+          <button id="tab-experiments" type="button" role="tab"
+                  aria-selected="false" aria-controls="experiments" data-chapter="experiments">
+            <span>10</span><b>실험과 gate</b><small>어떻게 반증하는가</small>
+          </button>
+          <button id="tab-provenance" type="button" role="tab"
+                  aria-selected="false" aria-controls="provenance" data-chapter="provenance">
+            <span>11</span><b>서버와 재현성</b><small>어디서 어떻게 실행하나</small>
+          </button>
+        </div>
+        <p class="rail-note">각 장은 독립 URL입니다. 주소를 복사하면 같은 설명 창이 바로 열립니다.</p>
+      </aside>
+
+      <div class="chapter-stage">
+        <section class="chapter-panel active" id="foundation" role="tabpanel"
+                 aria-labelledby="tab-foundation" data-chapter-panel tabindex="-1">
+          <header class="chapter-header">
+            <p class="eyebrow">01 · FOUNDATION</p>
+            <h2>먼저, 무엇을<br><em>예측하려는가?</em></h2>
+            <p>
+              “동맥류가 있다”와 “그 안에서 피가 어떻게 흐른다”는 서로 다른
+              질문입니다. AURORA는 두 질문 사이의 연결을 다룹니다.
+            </p>
+          </header>
+
+          <div class="concept-grid two">
+            <article class="concept-card">
+              <span class="concept-index">ANATOMY</span>
+              <h3>뇌동맥류</h3>
+              <p>
+                뇌혈관 벽 일부가 주머니처럼 부풀어 오른 구조입니다. 위치, 목의
+                폭, 크기, 비대칭성, 주변 가지의 각도는 병변마다 다릅니다.
+                이 3차원 <b>형태</b>는 CTA나 MRA에서 분할한 표면 mesh로 표현할
+                수 있습니다.
+              </p>
+            </article>
+            <article class="concept-card">
+              <span class="concept-index">PHYSIOLOGY</span>
+              <h3>혈류역학</h3>
+              <p>
+                같은 모양에서도 유입 유량, 심장 박동 파형, 출구별 유량 분배,
+                혈액 점도가 달라지면 속도·압력·벽면 전단응력이 달라집니다.
+                즉, anatomy는 중요한 원인이지만 혈류를 혼자 결정하지는 않습니다.
+              </p>
+            </article>
+          </div>
+
+          <div class="explain-block">
+            <div>
+              <p class="eyebrow">CFD IN PLAIN LANGUAGE</p>
+              <h3>CFD는 “가상 풍동”에 가깝습니다.</h3>
+            </div>
+            <div class="prose">
+              <p>
+                <b>Computational Fluid Dynamics</b>는 혈관 내부를 아주 작은
+                계산 요소로 나눈 뒤, 질량과 운동량 보존 방정식을 수치적으로
+                풉니다. 입구에는 시간에 따른 유량이나 속도, 출구에는 압력 또는
+                유량 분배, 벽에는 보통 no-slip 조건을 둡니다.
+              </p>
+              <p>
+                결과는 한 환자당 하나의 숫자가 아니라, 공간과 시간마다 달라지는
+                속도 벡터와 압력장입니다. 정확한 CFD는 유용하지만 mesh 생성,
+                경계조건 설정, solver 실행에 많은 시간이 듭니다. neural
+                surrogate는 이 계산을 학습해 빠르게 근사하려는 모델입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="causal-ladder" aria-label="영상에서 연구 endpoint까지의 흐름">
+            <span><b>CTA/MRA</b><small>영상</small></span>
+            <i>→</i>
+            <span><b>3D mesh</b><small>형태</small></span>
+            <i>→</i>
+            <span><b>CFD / surrogate</b><small>혈류장</small></span>
+            <i>→</i>
+            <span><b>Functionals</b><small>WSS·OSI</small></span>
+            <i>→</i>
+            <span><b>Status analysis</b><small>연관성</small></span>
+          </div>
+
+          <aside class="honesty-note">
+            <b>중요한 범위 제한</b>
+            <p>
+              현재 공개 데이터의 endpoint는 촬영 시점의 ruptured/unruptured
+              상태입니다. 이 연구는 2년 또는 5년 뒤 파열을 예측하는 전향적
+              위험 모델이 아니며, 임상 의사결정 도구도 아닙니다.
+            </p>
+          </aside>
+          <button class="chapter-next" type="button" data-next="graph">다음 · Mesh가 graph가 되는 법 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="graph" role="tabpanel"
+                 aria-labelledby="tab-graph" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">02 · REPRESENTATION</p>
+            <h2>혈관 표면을<br><em>점과 선으로 읽는다.</em></h2>
+            <p>
+              GNN을 이해하려면 먼저 mesh와 graph를 구분하면 됩니다. mesh는
+              실제 표면의 기하이고, graph는 신경망이 그 기하를 읽는 계산 구조입니다.
+            </p>
+          </header>
+
+          <div class="mesh-lesson">
+            <div class="mesh-demo" aria-label="삼각형 mesh를 graph node와 edge로 바꾸는 개념도">
+              <svg viewBox="0 0 520 330" role="img">
+                <g class="mesh-lines">
+                  <path d="M70 245 L155 82 L238 230 Z"/>
+                  <path d="M155 82 L315 66 L238 230 Z"/>
+                  <path d="M315 66 L425 180 L238 230 Z"/>
+                  <path d="M238 230 L425 180 L365 282 Z"/>
+                </g>
+                <g class="mesh-points">
+                  <circle cx="70" cy="245" r="9"/><circle cx="155" cy="82" r="9"/>
+                  <circle cx="238" cy="230" r="9"/><circle cx="315" cy="66" r="9"/>
+                  <circle cx="425" cy="180" r="9"/><circle cx="365" cy="282" r="9"/>
+                </g>
+                <text x="44" y="285">node</text>
+                <text x="256" y="155">edge</text>
+              </svg>
+            </div>
+            <div class="mesh-steps">
+              <article><span>1</span><div><h3>Node</h3><p>표면의 점입니다. 좌표, 법선 방향, 곡률, 목까지의 거리, inlet·wall·outlet 종류를 가집니다.</p></div></article>
+              <article><span>2</span><div><h3>Edge</h3><p>삼각형에서 이웃한 점 또는 k-nearest neighbor를 연결합니다. 상대 위치와 거리, 법선 각도는 혈관의 국소 모양을 설명합니다.</p></div></article>
+              <article><span>3</span><div><h3>Query</h3><p>출력을 알고 싶은 위치입니다. 표면 node일 수도 있고 혈관 내부의 임의 좌표일 수도 있습니다.</p></div></article>
+            </div>
+          </div>
+
+          <div class="worked-example">
+            <p class="eyebrow">A TINY EXAMPLE</p>
+            <h3>한 점이 혼자서는 알 수 없는 것</h3>
+            <div class="example-row">
+              <span><b>중앙 node</b><small>곡률 0.34</small></span>
+              <i>+</i>
+              <span><b>이웃 16개</b><small>상대 위치·법선</small></span>
+              <i>→</i>
+              <span><b>국소 주머니</b><small>neck인지 dome인지</small></span>
+            </div>
+            <p>
+              좌표 하나만 보면 그 점이 동맥류 꼭대기인지 부모 혈관의 평평한
+              부분인지 알기 어렵습니다. 이웃과의 관계를 모으면 곡면의 방향과
+              구조가 보입니다. 이것이 message passing의 직관입니다.
+            </p>
+          </div>
+
+          <details class="question">
+            <summary>왜 3D voxel CNN을 바로 쓰지 않나요?</summary>
+            <p>
+              혈관은 가늘고 비어 있는 공간이 많습니다. 균일 voxel grid는 메모리를
+              많이 쓰고 표면의 미세한 곡률을 흐릴 수 있습니다. mesh/graph는 실제
+              표면에 계산을 집중합니다. 다만 영상 자체의 질감이 필요하면 CNN
+              encoder를 별도로 결합할 수 있습니다.
+            </p>
+          </details>
+          <button class="chapter-next" type="button" data-next="gnn">다음 · GNN이 실제로 하는 일 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="gnn" role="tabpanel"
+                 aria-labelledby="tab-gnn" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">03 · LOCAL REASONING</p>
+            <h2>GNN은 이웃의 말을<br><em>모아 듣는다.</em></h2>
+            <p>
+              각 node가 이웃으로부터 메시지를 받고 자기 표현을 갱신하는 과정을
+              여러 번 반복합니다. AURORA에서는 이 단계가 geometry encoder의
+              앞부분입니다.
+            </p>
+          </header>
+
+          <div class="message-equation">
+            <div><span>메시지</span><b>m<sub>ij</sub> = MLP(h<sub>i</sub>, h<sub>j</sub>, e<sub>ij</sub>)</b><p>나, 이웃, 둘 사이 관계를 작은 신경망에 넣습니다.</p></div>
+            <i>→</i>
+            <div><span>모으기</span><b>m<sub>i</sub> = Σ<sub>j∈N(i)</sub> m<sub>ij</sub></b><p>이웃 순서와 무관하게 메시지를 합칩니다.</p></div>
+            <i>→</i>
+            <div><span>갱신</span><b>h′<sub>i</sub> = U(h<sub>i</sub>, m<sub>i</sub>)</b><p>새로운 node 표현을 만듭니다.</p></div>
+          </div>
+
+          <div class="compare-table-wrap">
+            <table class="guide-table">
+              <thead><tr><th>질문</th><th>일반 GNN</th><th>AURORA에서의 처리</th></tr></thead>
+              <tbody>
+                <tr><td>가까운 표면 관계</td><td>message passing에 강함</td><td>4개 residual edge-message block</td></tr>
+                <tr><td>동맥류 꼭대기 ↔ 먼 outlet</td><td>많은 layer가 필요해 정보가 흐려질 수 있음</td><td>physics-token attention으로 장거리 연결</td></tr>
+                <tr><td>mesh에 없던 좌표의 값</td><td>기존 node 출력에 자연스러움</td><td>query decoder가 임의 좌표에서 field를 평가</td></tr>
+                <tr><td>하나의 입력에서 여러 가능한 flow</td><td>보통 point prediction</td><td>BC latent를 샘플링해 field distribution 출력</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="verdict-panel">
+            <p class="eyebrow">VERDICT</p>
+            <h3>그래서 “GNN 기반”이라는 말은 반만 맞습니다.</h3>
+            <p>
+              <b>맞는 부분:</b> surface node와 edge, message passing이 geometry
+              encoder의 핵심 국소 연산입니다. <b>부족한 부분:</b> 모델의 출력은
+              고정 graph node의 다음 timestep이 아니라, BC를 조건으로 임의
+              query 위치의 전체 cardiac-cycle field를 내는 operator입니다.
+            </p>
+            <div class="model-labels">
+              <span class="yes">GNN-based local encoder</span>
+              <span class="yes">Attention global mixer</span>
+              <span class="yes">Neural-operator decoder</span>
+              <span class="no">Pure autoregressive GNN</span>
+            </div>
+          </div>
+          <button class="chapter-next" type="button" data-next="architecture">다음 · AURORA 전체 구조 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="architecture" role="tabpanel"
+                 aria-labelledby="tab-architecture" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">04 · THE HYBRID</p>
+            <h2>Local graph.<br><em>Global operator.</em></h2>
+            <p>
+              전체 구조는 다섯 단계입니다. 각 단계는 하나의 “fancy module”을
+              더하기 위한 장식이 아니라, 입력에서 최종 검증까지 생기는 구체적인
+              실패를 막기 위해 존재합니다.
+            </p>
+          </header>
+
+          <div class="architecture-stack">
+            <article>
+              <span>01 · NORMALIZE</span>
+              <div><h3>해부학적 local frame</h3><p>neck 중심을 원점으로 두고 부모 혈관 지름으로 크기를 정규화합니다. 스캐너 좌표의 임의 회전·이동을 모델이 외우지 않게 합니다.</p></div>
+              <b>입력</b><small>surface position · normal · curvature · landmarks</small>
+            </article>
+            <article>
+              <span>02 · ENCODE</span>
+              <div><h3>Multi-scale GNN stem</h3><p>4096개 표면 점에서 가까운 곡면 관계를 읽고, 1024·256개 점으로 줄이면서 neck·inlet·outlet·dome의 중요한 점은 보존합니다.</p></div>
+              <b>이유</b><small>hotspot을 잃지 않고 계산량 줄이기</small>
+            </article>
+            <article>
+              <span>03 · MIX</span>
+              <div><h3>128 physics tokens</h3><p>표면 전체를 128개 latent token으로 압축하고 attention으로 멀리 떨어진 inlet, aneurysm sac, outlet의 관계를 연결합니다.</p></div>
+              <b>이유</b><small>long-range flow dependence</small>
+            </article>
+            <article>
+              <span>04 · CONDITION</span>
+              <div><h3>Observed / missing BC latent</h3><p>측정된 파형이 있으면 직접 encode하고, 없으면 해부학적 맥락에 맞는 여러 BC scenario를 샘플링합니다. 이 latent가 decoder의 각 층을 FiLM으로 조절합니다.</p></div>
+              <b>출력 수</b><small>evaluation에서 기본 K=8 scenarios</small>
+            </article>
+            <article>
+              <span>05 · QUERY</span>
+              <div><h3>Dual-domain operator decoder</h3><p>임의 volume query에는 속도·압력, 원래 wall query에는 WSS의 시간 계수를 예측합니다. graph가 바뀌어도 같은 연산자가 좌표에서 field를 묻는 구조입니다.</p></div>
+              <b>출력</b><small>volume field + wall field + uncertainty</small>
+            </article>
+          </div>
+
+          <div class="why-fancy">
+            <h3>Fancy함의 기준은 모듈 수가 아닙니다.</h3>
+            <div>
+              <p><b>구조적 novelty</b><span>missing BC를 함수공간 분포로 주변화</span></p>
+              <p><b>계산적 novelty</b><span>autoregressive rollout 없이 한 주기 계수를 동시 생성</span></p>
+              <p><b>평가적 novelty</b><span>field RMSE가 아니라 real-CFD signal 보존까지 검증</span></p>
+            </div>
+          </div>
+
+          <aside class="honesty-note">
+            <b>현재 구현 상태</b>
+            <p>
+              이 페이지는 architecture contract를 설명합니다. 현재 공개 구현은
+              protocol validator와 G1 exploratory pilot까지이며, full
+              GNN–operator는 gate를 통과한 뒤 단계 1부터 구현합니다. “proposed”와
+              “implemented”를 구분합니다.
+            </p>
+          </aside>
+          <button class="chapter-next" type="button" data-next="uncertainty">다음 · Missing BC를 분포로 다루는 이유 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="uncertainty" role="tabpanel"
+                 aria-labelledby="tab-uncertainty" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">05 · IDENTIFIABILITY</p>
+            <h2>같은 혈관에도<br><em>여러 흐름이 가능하다.</em></h2>
+            <p>
+              Boundary condition, 즉 경계조건은 계산 영역의 입구와 출구에서
+              혈액이 어떻게 들어오고 나가는지 정합니다. geometry-only 배포에서는
+              이 값이 흔히 없습니다.
+            </p>
+          </header>
+
+          <div class="scenario-demo">
+            <div class="scenario-geometry"><span>고정된 geometry</span><b>G</b><small>같은 3D 혈관</small></div>
+            <i>+</i>
+            <div class="scenario-list">
+              <span style="--level:32%"><b>B₁</b><small>낮은 유입</small></span>
+              <span style="--level:58%"><b>B₂</b><small>중앙 파형</small></span>
+              <span style="--level:84%"><b>B₃</b><small>높은 peak</small></span>
+            </div>
+            <i>→</i>
+            <div class="scenario-output"><span>여러 plausible field</span><b>H₁, H₂, H₃</b><small>평균 하나가 아님</small></div>
+          </div>
+
+          <div class="explain-block">
+            <div><p class="eyebrow">THE CENTRAL EQUATION</p><h3>모르는 BC를 적분해 없앤다.</h3></div>
+            <div class="prose">
+              <div class="large-equation">p(H | G) = ∫ p(H | G, B) p(B | A) dB</div>
+              <p>
+                <b>G</b>는 geometry, <b>B</b>는 boundary condition, <b>H</b>는
+                hemodynamic field, <b>A</b>는 위치·부모 혈관 지름 같은 anatomy
+                context입니다. 실제 계산에서는 적분을 정확히 풀지 않고 BC
+                scenario를 여러 번 샘플링해 근사합니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="mistake-grid">
+            <article><span>잘못된 단순화</span><h3>모든 사람에게 평균 파형</h3><p>출력은 안정적으로 보이지만 실제 불확실성보다 지나치게 좁습니다. 틀렸는데 확신하는 모델이 될 수 있습니다.</p></article>
+            <article><span>AURORA의 가설</span><h3>조건부 BC distribution</h3><p>train fold에서만 얻은 empirical prior를 사용하고, held-out BC coverage와 interval width를 함께 평가합니다.</p></article>
+          </div>
+
+          <details class="question">
+            <summary>이 불확실성이 “파열 확률”인가요?</summary>
+            <p>
+              아닙니다. BC scenario 간 차이는 입력 생리정보 부족에서 오는
+              <b>hemodynamic uncertainty</b>입니다. rupture-status probability의
+              불확실성과 별도로 측정하며 서로 바꾸어 말하지 않습니다.
+            </p>
+          </details>
+          <button class="chapter-next" type="button" data-next="temporal">다음 · 80번 예측하지 않는 시간 모델 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="temporal" role="tabpanel"
+                 aria-labelledby="tab-temporal" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">06 · ONE-SHOT CYCLE</p>
+            <h2>다음 순간 대신,<br><em>주기 전체의 모양을.</em></h2>
+            <p>
+              일반적인 rollout 모델은 t=0에서 t=1을 예측하고, 그 예측을 다시
+              입력해 t=2를 만듭니다. 작은 오차가 80번 누적될 수 있습니다.
+            </p>
+          </header>
+
+          <div class="time-compare">
+            <article>
+              <p class="eyebrow">AUTOREGRESSIVE</p>
+              <div class="rollout-chain"><span>t₀</span><i>→</i><span>t₁</span><i>→</i><span>t₂</span><i>···</i><span>t₈₀</span></div>
+              <h3>한 걸음씩 80번</h3>
+              <p>앞 단계의 오차가 다음 입력이 됩니다. 긴 rollout에서 drift와 위상 오차가 커질 수 있습니다.</p>
+            </article>
+            <article>
+              <p class="eyebrow">AURORA</p>
+              <div class="basis-bars" aria-label="시간 Fourier 계수"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <h3>17개 계수를 한 번에</h3>
+              <p>상수항 1개와 8개 주파수의 sine/cosine 계수 16개로 cardiac cycle을 복원합니다.</p>
+            </article>
+          </div>
+
+          <div class="large-equation boxed">
+            h(x,t) = a₀(x) + Σ<sub>k=1…8</sub>[a<sub>k</sub>(x)cos(2πkt/T) + b<sub>k</sub>(x)sin(2πkt/T)]
+          </div>
+
+          <div class="interpretation-list">
+            <article><span>a₀</span><div><h3>평균 수준</h3><p>한 주기 동안의 기본 속도·압력·WSS 수준입니다.</p></div></article>
+            <article><span>k=1</span><div><h3>주된 심장 박동</h3><p>한 주기에 한 번 반복되는 가장 큰 파형 변화를 담습니다.</p></div></article>
+            <article><span>k=2…8</span><div><h3>세부 파형</h3><p>peak의 날카로움, 지연, 복잡한 진동을 더합니다.</p></div></article>
+          </div>
+
+          <aside class="honesty-note">
+            <b>Fourier가 항상 정답은 아닙니다.</b>
+            <p>
+              파형이 주기적이라는 가정이 맞는지, 4·8·12 mode 중 어느 수가
+              충분한지 ablation합니다. 비주기적 과도현상이나 심한 부정맥에는
+              다른 basis가 필요할 수 있습니다.
+            </p>
+          </aside>
+          <button class="chapter-next" type="button" data-next="functionals">다음 · Wall field가 중요한 이유 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="functionals" role="tabpanel"
+                 aria-labelledby="tab-functionals" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">07 · DUAL DOMAIN</p>
+            <h2>혈관 안과 벽을<br><em>서로 다르게 본다.</em></h2>
+            <p>
+              속도·압력은 혈관 내부의 전역 흐름을 설명하지만, WSS는 벽 바로
+              근처의 속도 기울기에 민감합니다. 하나의 coarse decoder로 모두
+              해결하면 작은 hotspot을 놓칠 수 있습니다.
+            </p>
+          </header>
+
+          <div class="domain-split">
+            <article class="volume-domain">
+              <span>VOLUME BRANCH</span>
+              <h3>내부 유동</h3>
+              <p>희소한 volume query에서 속도 u와 압력 p의 시간 계수를 복원합니다.</p>
+              <ul><li>질량 유량 보존</li><li>divergence</li><li>전역 vortex·pressure</li></ul>
+            </article>
+            <div class="consistency-bridge"><span>cross-consistency</span><b>∇u → WSS</b></div>
+            <article class="wall-domain">
+              <span>WALL BRANCH</span>
+              <h3>벽면 전단</h3>
+              <p>원래 고해상도 surface query에서 vector WSS를 직접 복원합니다.</p>
+              <ul><li>neck·dome oversampling</li><li>국소 hotspot</li><li>면적 가중 평가</li></ul>
+            </article>
+          </div>
+
+          <div class="functional-cards">
+            <article><span>TAWSS</span><h3>평균 전단응력 크기</h3><p>한 cardiac cycle 동안 WSS 크기를 시간 평균합니다.</p></article>
+            <article><span>OSI</span><h3>방향 진동</h3><p>전단 방향이 한 주기 동안 얼마나 앞뒤로 바뀌는지 나타냅니다.</p></article>
+            <article><span>LSA</span><h3>낮은 WSS 면적</h3><p>정한 기준보다 WSS가 낮은 벽면의 면적 비율입니다.</p></article>
+            <article><span>RRT</span><h3>상대 체류 경향</h3><p>낮고 진동하는 shear를 결합한 파생 지표입니다.</p></article>
+          </div>
+
+          <div class="sufficiency-example">
+            <p class="eyebrow">WHY RMSE IS NOT ENOUGH</p>
+            <h3>평균 오차가 작아도 중요한 hotspot은 틀릴 수 있습니다.</h3>
+            <div>
+              <span><b>모델 A</b><small>낮은 전체 RMSE · hotspot 위치 오류</small></span>
+              <span><b>모델 B</b><small>조금 높은 RMSE · hotspot/OSI 보존</small></span>
+            </div>
+            <p>
+              AURORA는 field error와 함께 hotspot overlap, functional error,
+              real-CFD 기반 status model의 ranking·calibration 보존을 봅니다.
+              이를 <b>functional sufficiency</b>라고 부릅니다.
+            </p>
+          </div>
+          <button class="chapter-next" type="button" data-next="datasets">다음 · 데이터셋은 왜 합치지 않는가 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="datasets" role="tabpanel"
+                 aria-labelledby="tab-datasets" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">08 · DATA LINEAGE</p>
+            <h2>하나의 거대 dataset이<br><em>아니라 증거의 사다리.</em></h2>
+            <p>
+              공개 자료는 서로 다른 환자와 생성 과정을 가집니다. 파일명이
+              비슷하다고 병합하지 않고, 각 데이터가 답할 수 있는 질문만 맡깁니다.
+            </p>
+          </header>
+
+          <div class="dataset-ladder">
+            <article><span>P0 · SENSITIVITY</span><h3>Aneumo</h3><p>동일·유사 geometry에 여러 steady BC를 적용한 자료로, BC가 바뀌면 wall field가 얼마나 달라지는지 먼저 학습합니다.</p><small>synthetic CFD · clinical evidence 아님</small></article>
+            <article><span>P1 · SCALE</span><h3>AneuG-Flow</h3><p>대규모 synthetic geometry를 geometry encoder pretraining과 분포 stress test에 사용합니다.</p><small>synthetic transfer 확인 필요</small></article>
+            <article><span>P2 · TRANSIENT</span><h3>BenchAnXplore</h3><p>105개 semi-idealized transient CFD case로 autoregressive GNN baseline과 one-shot cycle decoder를 같은 조건에서 비교합니다.</p><small>80 frames/case · geometry-disjoint split</small></article>
+            <article><span>P3 · REAL-CFD BRIDGE</span><h3>CMHA</h3><p>clinical·morphology·real-CFD summary를 가진 cohort입니다. real CFD가 status 분석에 실제 추가 정보를 주는지 G1에서 먼저 검증합니다.</p><small>single-center · patient-grouped analysis</small></article>
+            <article><span>P4 · EXTERNAL STRESS</span><h3>AneuX</h3><p>750개 geometry/status에서 direct geometry baseline과 missing-BC surrogate representation을 외부 연관성 stress test로 비교합니다.</p><small>real CFD 없음 · surrogate를 real로 부르지 않음</small></article>
+          </div>
+
+          <div class="data-status">
+            <div><p class="eyebrow">ASSET AUDIT · 03 AUG 2026</p><h3>필요한 핵심 자산은 `introai9`에서 확인했습니다.</h3></div>
+            <p>
+              Aneumo, AneuG-Flow, BenchAnXplore, CMHA, AneuX, Aneurisk의 원본
+              또는 추출본이 존재합니다. 존재 확인은 곧 G0 통과를 뜻하지 않습니다.
+              현재 매니페스트는 BenchAnXplore 일부만 있어, 데이터셋별 checksum,
+              license, unit, case map, boundary marker를 추가 감사해야 합니다.
+            </p>
+          </div>
+
+          <div class="never-merge">
+            <h3>절대 섞지 않는 세 가지</h3>
+            <ul>
+              <li><b>환자 ID</b><span>출처가 다른 동일 문자열을 같은 환자로 추정하지 않습니다.</span></li>
+              <li><b>Field provenance</b><span>real CFD, synthetic CFD, surrogate를 별도 필드로 기록합니다.</span></li>
+              <li><b>Endpoint</b><span>현재 rupture status와 미래 rupture risk를 같은 label로 두지 않습니다.</span></li>
+            </ul>
+          </div>
+          <button class="chapter-next" type="button" data-next="evidence">다음 · 선행연구가 남긴 빈칸 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="evidence" role="tabpanel"
+                 aria-labelledby="tab-evidence" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">09 · EVIDENCE LINEAGE</p>
+            <h2>새 모듈이 아니라<br><em>남은 문제에서 시작한다.</em></h2>
+            <p>
+              AURORA의 novelty는 GNN, attention, Fourier basis를 처음 썼다는
+              주장이 아닙니다. 각 계보가 해결한 것과 아직 함께 해결하지 못한
+              것을 분리해 연구 질문을 만듭니다.
+            </p>
+          </header>
+
+          <div class="evidence-timeline">
+            <article>
+              <span>2011–2021</span>
+              <div><h3>Morphology + CFD association</h3><p>크기·형태·WSS·OSI와 rupture status의 retrospective 연관성을 분석했습니다. 그러나 CFD 비용과 BC 측정 문제는 그대로 남았습니다.</p></div>
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3021316/">Primary source ↗</a>
+            </article>
+            <article>
+              <span>2021</span>
+              <div><h3>MeshGraphNet</h3><p>비정형 mesh에서 encode–process–decode와 autoregressive simulator learning을 정립했습니다. 장기 rollout drift와 aneurysm-specific clinical bridge는 범위 밖입니다.</p></div>
+              <a href="https://arxiv.org/abs/2010.03409">Paper ↗</a>
+            </article>
+            <article>
+              <span>2023–2024</span>
+              <div><h3>Operator transformer</h3><p>GNOT·Transolver 계열은 irregular geometry와 physics-aware token에서 함수 간 mapping을 확장했습니다. missing physiological BC의 calibrated marginalization은 별도 문제입니다.</p></div>
+              <a href="https://proceedings.mlr.press/v235/wu24r.html">Proceedings ↗</a>
+            </article>
+            <article>
+              <span>2025–2026</span>
+              <div><h3>Aneurysm graph surrogate</h3><p>In-PI-MGN과 graph transformer가 transient velocity, WSS, OSI를 빠르게 근사했습니다. 주로 inflow 또는 current field가 주어진 conditional simulation입니다.</p></div>
+              <a href="https://www.nature.com/articles/s41746-026-02404-z">npj Digital Medicine ↗</a>
+            </article>
+            <article>
+              <span>2025–2026</span>
+              <div><h3>Probabilistic neural operators</h3><p>latent conditioning과 proper scoring rule로 함수공간의 다중 가능한 출력을 다루는 토대가 생겼습니다. aneurysm의 BC uncertainty와 downstream sufficiency에 맞춘 검증은 남아 있습니다.</p></div>
+              <a href="https://arxiv.org/abs/2502.12902">Preprint ↗</a>
+            </article>
+          </div>
+
+          <div class="gap-matrix">
+            <div class="gap-head"><span>연구 축</span><b>기존 강점</b><b>남은 빈칸</b><b>AURORA의 검증</b></div>
+            <div><span>입력 조건</span><p>Known inflow 기반 simulation</p><p>Geometry-only에서 BC가 없음</p><p>Observed / partial / missing mode</p></div>
+            <div><span>시간</span><p>Next-step autoregressive field</p><p>장기 rollout drift</p><p>One-shot cycle coefficient</p></div>
+            <div><span>공간</span><p>Graph node field prediction</p><p>전역 flow와 wall hotspot trade-off</p><p>Volume/wall dual decoder</p></div>
+            <div><span>평가</span><p>Velocity·WSS·OSI error</p><p>Downstream signal 보존 여부</p><p>Real-CFD oracle risk-retention</p></div>
+          </div>
+
+          <aside class="honesty-note">
+            <b>Novelty 표현 원칙</b>
+            <p>
+              세 구성요소 각각에 prior art가 있습니다. 최종 contribution은 이들을
+              aneurysm의 missing-BC identifiability와 functional sufficiency라는
+              하나의 falsifiable 문제로 결합하고, 직접 경쟁작 대비 실험으로
+              입증할 때만 성립합니다.
+            </p>
+          </aside>
+          <button class="chapter-next" type="button" data-next="experiments">다음 · Gate가 연구를 멈추게 하는 법 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="experiments" role="tabpanel"
+                 aria-labelledby="tab-experiments" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">10 · FALSIFICATION PLAN</p>
+            <h2>성공 순서가 아니라<br><em>중단 조건을 설계한다.</em></h2>
+            <p>
+              full model을 먼저 학습하면 실패 원인을 분리하기 어렵습니다.
+              AURORA는 더 싼 질문부터 차례로 묻고, 답이 “아니오”면 큰 주장을
+              내립니다.
+            </p>
+          </header>
+
+          <div class="gate-explainer">
+            <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>case mapping, 단위, boundary marker, license, patient split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
+            <article><span>G1</span><div><h3>Real CFD가 정보를 더하는가?</h3><p>CMHA에서 clinical+morphology와 여기에 real-CFD summary를 더한 모델을 patient-grouped nested CV로 비교합니다.</p></div><b>첫 blocking experiment</b></article>
+            <article><span>G2</span><div><h3>Operator가 OOD에서도 정직한가?</h3><p>처음 보는 geometry와 BC에서 field·functional error와 90% interval coverage를 함께 봅니다.</p></div><b>surrogate 배포 전</b></article>
+            <article><span>G3</span><div><h3>CFD signal을 보존하는가?</h3><p>G1에서 real CFD의 증가분이 양수일 때만 surrogate의 risk-retention을 계산합니다.</p></div><b>conditional gate</b></article>
+            <article><span>G4</span><div><h3>Geometry만 본 모델보다 나은가?</h3><p>직접 geometry→status baseline을 이기지 못하면 hemodynamics bridge 주장을 철회합니다.</p></div><b>non-redundancy</b></article>
+          </div>
+
+          <div class="pilot-result">
+            <div>
+              <p class="eyebrow">CURRENT EVIDENCE · EXPLORATORY</p>
+              <h3>Real-CFD summary의 추가 효용은 아직 보이지 않았습니다.</h3>
+              <p>99 patient · 105 lesion · patient-grouped 5×5 linear sensitivity</p>
+            </div>
+            <div class="pilot-numbers">
+              <span><small>C + M</small><b>0.759</b><i>AUPRC</i></span>
+              <span><small>C + M + H</small><b>0.717</b><i>AUPRC</i></span>
+              <span class="negative"><small>Δ AUPRC</small><b>−0.0419</b><i>CI −0.1083 · 0.0066</i></span>
+            </div>
+            <p>
+              결과는 C3를 지지하지 않습니다. 다만 공식 case map과
+              gradient-boosted second family가 없으므로 confirmatory failure로
+              확정하지 않고 unresolved로 둡니다. PHASE·ELAPSS는 정의가 불명확하고
+              target을 거의 분리해 제외했습니다.
+            </p>
+            <a href="../results/cmha_g1_exploratory_20260803.json">공개 aggregate result 열기 ↗</a>
+          </div>
+
+          <div class="nested-cv">
+            <div>
+              <p class="eyebrow">NESTED CV, VISUALLY</p>
+              <h3>Test fold는 마지막까지 잠급니다.</h3>
+            </div>
+            <div class="fold-diagram">
+              <span class="train">train</span><span class="train">train</span><span class="valid">inner validation</span><span class="test">outer test</span>
+              <small>hyperparameter 선택 ↖</small><small>최종 평가 ↗</small>
+            </div>
+            <p>
+              여러 병변이 같은 환자에게 있으면 모두 같은 fold에 둡니다.
+              timestep, BC, mesh cut도 원 geometry와 분리하지 않습니다. 이 규칙을
+              어기면 모델이 환자를 외워 성능이 부풀 수 있습니다.
+            </p>
+          </div>
+
+          <div class="metric-dictionary">
+            <article><b>AUPRC</b><p>양성 비율이 불균형할 때 precision과 recall의 순위를 요약합니다.</p></article>
+            <article><b>AUROC</b><p>임의의 양성 case가 음성보다 높은 점수를 받을 확률에 대응합니다.</p></article>
+            <article><b>Brier</b><p>예측 확률과 실제 0/1의 제곱 오차로, 낮을수록 좋습니다.</p></article>
+            <article><b>ECE</b><p>예측한 확률과 실제 빈도가 얼마나 맞는지 구간별로 봅니다.</p></article>
+            <article><b>Coverage</b><p>예측 interval이 실제 field를 약속한 비율만큼 포함하는지 봅니다.</p></article>
+            <article><b>Risk-retention</b><p>real-CFD의 status 성능 증가분 중 surrogate가 보존한 비율입니다.</p></article>
+          </div>
+          <button class="chapter-next" type="button" data-next="provenance">다음 · 실제 서버 실행과 재현성 <span>→</span></button>
+        </section>
+
+        <section class="chapter-panel" id="provenance" role="tabpanel"
+                 aria-labelledby="tab-provenance" data-chapter-panel tabindex="-1" hidden>
+          <header class="chapter-header">
+            <p class="eyebrow">11 · COMPUTE &amp; PROVENANCE</p>
+            <h2>데이터를 찾는 곳과<br><em>학습하는 곳을 분리한다.</em></h2>
+            <p>
+              서버 주소나 credential은 공개하지 않습니다. 대신 어떤 역할의
+              서버에서 어떤 절차로 실행했는지, 재현에 필요한 commit·container·
+              manifest·config를 기록합니다.
+            </p>
+          </header>
+
+          <div class="server-roles">
+            <article>
+              <span>SOURCE AUDIT</span>
+              <h3>introai9</h3>
+              <p>뇌동맥류 원본·추출본·기존 매니페스트의 존재와 구조를 읽기 전용으로 확인합니다.</p>
+              <ul><li>원본 수정 금지</li><li>dataset별 file/size audit</li><li>필요 자산만 read-only 공유</li></ul>
+            </article>
+            <div class="server-arrow"><b>manifest + read-only asset</b><span>→</span></div>
+            <article>
+              <span>SCHEDULED COMPUTE</span>
+              <h3>junjinyong</h3>
+              <p>PBS scheduler가 할당한 A6000 compute node에서 smoke와 실험을 실행합니다.</p>
+              <ul><li>login node GPU 사용 금지</li><li>pinned Singularity image</li><li>output만 writable</li></ul>
+            </article>
+          </div>
+
+          <div class="run-record">
+            <p class="eyebrow">EVERY RUN MUST LEAVE</p>
+            <div>
+              <code>git_commit.txt</code><span>실행 코드의 정확한 버전</span>
+              <code>dataset_manifest.sha256</code><span>입력 표의 무결성</span>
+              <code>run_config.json</code><span>split·seed·hyperparameter</span>
+              <code>environment.json</code><span>Python·Torch·CUDA·GPU</span>
+              <code>metrics.json</code><span>집계 결과와 한계</span>
+              <code>status.json</code><span>running·complete·failed 상태</span>
+            </div>
+          </div>
+
+          <div class="compute-status">
+            <span class="status-dot complete"></span>
+            <div><p class="eyebrow">GPU SMOKE · COMPLETE</p><h3>RTX A6000 · PyTorch 2.5.1 · CUDA 11.8</h3><p>scheduler allocation 안에서 2048×2048 CUDA matrix multiplication과 finite-value 검사를 통과했습니다.</p></div>
+          </div>
+          <div class="compute-status warning">
+            <span class="status-dot warning"></span>
+            <div><p class="eyebrow">G1 EXPLORATORY · COMPLETE</p><h3>Negative signal · confirmatory gate unresolved</h3><p>C+M 대비 +real-CFD summary의 ΔAUPRC는 −0.0419 [−0.1083, 0.0066]이었습니다. C3는 조건부 secondary로 유지합니다.</p></div>
+          </div>
+
+          <div class="repro-chain">
+            <span><b>Commit</b><small>immutable code</small></span><i>+</i>
+            <span><b>Manifest</b><small>immutable input</small></span><i>+</i>
+            <span><b>Config</b><small>declared choices</small></span><i>→</i>
+            <span><b>Run artifact</b><small>auditable result</small></span>
+          </div>
+
+          <aside class="honesty-note">
+            <b>공개 범위</b>
+            <p>
+              공개 사이트에는 aggregate result와 방법만 기록합니다. 환자별
+              prediction, 원본 데이터 경로, SSH endpoint, key, password는 Git과
+              사이트에 올리지 않습니다.
+            </p>
+          </aside>
+          <a class="chapter-next link" href="../docs/experiment-protocol.md">전체 실험 프로토콜 읽기 <span>↗</span></a>
+        </section>
+      </div>
+    </section>
+
+    <section class="glossary-section" id="glossary">
+      <div class="glossary-heading">
+        <p class="eyebrow">GLOSSARY · 16 TERMS</p>
+        <h2>용어가 막힐 때<br><em>여기로 돌아오세요.</em></h2>
+      </div>
+      <div class="glossary-grid">
+        <details><summary>Boundary condition · BC</summary><p>계산 영역의 입구와 출구에서 유량·속도·압력 등이 어떻게 주어지는지 정하는 조건.</p></details>
+        <details><summary>Calibration</summary><p>0.7로 예측한 집단에서 실제 양성이 약 70%인지처럼, 확률의 크기가 현실 빈도와 맞는 성질.</p></details>
+        <details><summary>CFD</summary><p>유체의 보존 방정식을 mesh 위에서 수치적으로 풀어 속도·압력장을 얻는 계산.</p></details>
+        <details><summary>Cross-sectional status</summary><p>한 시점에 관측된 ruptured/unruptured 상태. 미래 발생 시간을 예측하는 risk와 다름.</p></details>
+        <details><summary>Edge</summary><p>graph에서 두 node의 관계. mesh의 삼각형 이웃 또는 가까운 점을 연결.</p></details>
+        <details><summary>Functional</summary><p>전체 field에서 계산한 TAWSS, OSI, hotspot 면적 같은 요약 함수.</p></details>
+        <details><summary>GNN</summary><p>node가 edge를 따라 이웃의 정보를 모으고 표현을 갱신하는 신경망.</p></details>
+        <details><summary>Latent variable</summary><p>직접 관측하지 않지만 모델 내부에서 변화 원인을 나타내는 숨은 변수. AURORA에서는 BC scenario를 표현.</p></details>
+        <details><summary>Mesh</summary><p>3차원 표면이나 부피를 점, 선, 삼각형, 사면체 등으로 나눈 계산 표현.</p></details>
+        <details><summary>Message passing</summary><p>이웃 node의 특징과 edge 관계로 메시지를 만들고 합쳐 현재 node를 갱신하는 연산.</p></details>
+        <details><summary>Neural operator</summary><p>고정 크기 벡터가 아니라 입력 함수·geometry에서 출력 함수를 학습하는 모델 계열.</p></details>
+        <details><summary>OOD</summary><p>학습 분포 밖의 geometry, BC, 기관 등 처음 보는 조건.</p></details>
+        <details><summary>OSI</summary><p>한 cardiac cycle 동안 WSS 방향이 얼마나 진동하는지 나타내는 지표.</p></details>
+        <details><summary>Query point</summary><p>학습된 operator에 “이 좌표의 값은?”이라고 묻는 공간 위치.</p></details>
+        <details><summary>Surrogate</summary><p>비싼 CFD solver의 입력–출력 관계를 학습해 빠르게 근사하는 모델.</p></details>
+        <details><summary>WSS</summary><p>흐르는 혈액이 혈관 벽을 접선 방향으로 미는 단위 면적당 힘, wall shear stress.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <a class="brand footer-brand" href="index.html"><span class="brand-mark">AU</span><span>AURORA</span></a>
+      <p>Research field guide · not a clinical decision system.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Research hub</a>
+      <a href="../docs/model-spec.md">Model spec</a>
+      <a href="../docs/experiment-protocol.md">Experiment protocol</a>
+      <a href="#start">가이드 처음으로</a>
+    </div>
+    <div class="footer-meta">
+      <span>Guide updated</span>
+      <b>03 August 2026 · KST</b>
+    </div>
+  </footer>
+</body>
+</html>

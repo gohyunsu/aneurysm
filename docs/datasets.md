@@ -6,6 +6,12 @@
 > AneuX는 external rupture-status stress test로 분리한다. 현재 실험 계약은
 > [`experiment-protocol.md`](experiment-protocol.md)를 따른다.
 
+> **2026-08-03 asset audit:** `introai9`에서 Aneumo, AneuG-Flow,
+> BenchAnXplore, CMHA, AneuX, Aneurisk의 원본 또는 추출 자산을 확인했다.
+> 내부 경로는 공개하지 않는다. 자산 존재만으로 G0를 통과한 것은 아니며,
+> manifest·license·unit·case mapping 검증 상태는
+> [`server-execution.md`](server-execution.md)에 기록한다.
+
 ## 핵심 비교
 
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |
@@ -46,6 +52,16 @@ dataset_root/
 - rupture label, future rupture risk, treatment decision을 같은 `label` 필드로 뭉치지 않는다.
 - node-level CFD와 case-level summary를 같은 학습 split에 섞지 않는다.
 - image–mesh–CFD를 매핑할 수 없는 case는 삭제하지 말고 `unmatched`로 보고한다.
+
+## CMHA 현재 주의사항
+
+- aneurysm 통계표는 105개 병변/99명 환자로 관찰됐다.
+- 6명은 다병변이며 병변별 status가 달라 patient-group split이 필수다.
+- morphology table의 lesion suffix와 clinical/hemodynamic table의 반복
+  patient identifier는 row alignment로는 호환되지만 공식 case map 확인 전
+  exploratory로만 사용한다.
+- 정의가 확인되지 않은 `PHASE`, `ELAPSS` 열은 target을 거의 분리하므로
+  baseline에서 제외한다.
 
 ## 단계별 통합
 

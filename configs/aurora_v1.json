@@ -17,6 +17,28 @@
       "clinical_utility"
     ]
   },
+  "evidence_snapshot": {
+    "as_of": "2026-08-03",
+    "g1_exploratory": {
+      "result_id": "cmha_g1_exploratory_20260803",
+      "confirmatory_status": "unresolved",
+      "current_signal": "negative",
+      "delta_auprc": -0.04189272880823791,
+      "patient_bootstrap_ci95": [
+        -0.10834451623085975,
+        0.0066417582682770275
+      ]
+    },
+    "contribution_priority": {
+      "primary": [
+        "C1_missing_bc_distribution",
+        "C2_one_shot_field_functional_fidelity"
+      ],
+      "conditional_secondary": [
+        "C3_task_aligned_functional_sufficiency"
+      ]
+    }
+  },
   "datasets": [
     {
       "name": "aneumo",

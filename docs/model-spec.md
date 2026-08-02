@@ -4,6 +4,22 @@
 
 연결 설정: `configs/aurora_v1.json`
 
+## 0. 아키텍처 분류
+
+AURORA v1은 **GNN을 국소 geometry encoder로 사용하는 hybrid neural
+operator**다. 다음 세 연산을 구분한다.
+
+| 범위 | 연산 | 역할 |
+|---|---|---|
+| local surface | edge message-passing GNN | 인접 표면의 곡률·법선·neck 관계 encode |
+| global anatomy | latent physics-token attention | 멀리 떨어진 inlet–sac–outlet 정보 교환 |
+| continuous output | cross-attention query neural operator | 임의 volume/wall 좌표에서 cycle coefficient 복원 |
+
+따라서 “GNN 기반”은 local stem을 설명할 때는 맞지만, 전체 모델을
+autoregressive MeshGraphNet으로 분류하면 틀리다. 출력은 고정 mesh의
+next-step node state가 아니라 BC-conditioned continuous field
+distribution이다.
+
 ## 1. 입력과 출력
 
 ### 입력
