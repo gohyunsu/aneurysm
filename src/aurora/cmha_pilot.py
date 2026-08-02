@@ -37,6 +37,11 @@ CLINICAL_EXCLUDE = {
     "Has aneurysm",
     "Shape",
     "location",
+    # The release does not document these two fields as standard PHASES/ELAPSS
+    # scores.  Their joint table almost deterministically encodes rupture status,
+    # so they are excluded until provenance and computation are verified.
+    "PHASE",
+    "ELAPSS",
 }
 MORPHOLOGY_CONTEXT = {"Shape", "location"}
 
@@ -214,6 +219,11 @@ def load_cmha_cohort(data_root: Path) -> Cohort:
         "identifier_policy": (
             "Source identifiers remain in memory only; splits and artifacts use "
             "integer group indices and anonymous row indices."
+        ),
+        "excluded_uncertain_derived_fields": ["PHASE", "ELAPSS"],
+        "derived_field_audit": (
+            "PHASE and ELAPSS are excluded because the released definitions are "
+            "unverified and their joint cross-tab nearly separates the target."
         ),
         "evidence_status": (
             "exploratory_row_alignment; confirm against the release data dictionary "
@@ -617,6 +627,7 @@ def run(args: argparse.Namespace) -> dict[str, object]:
         "g1_incremental_hemodynamic_auprc": {**delta, "pilot_interpretation": gate},
         "limitations": [
             "Released-table row alignment is audited but not yet confirmed by a formal case map.",
+            "PHASE and ELAPSS are excluded pending a verified release definition.",
             "This is a single-center, cross-sectional status analysis, not prospective risk.",
             "The linear pilot tests incremental signal; it is not the AURORA operator.",
             "Feature vocabulary is derived without outcomes from the full released table.",
