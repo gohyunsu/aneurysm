@@ -1,5 +1,9 @@
 # In-PI-MGN 재현 실험
 
+> 이 재현은 AURORA의 autoregressive baseline으로 보존한다. attention,
+> masking, multigrid를 추가한 변형은 primary method가 아니며, 현재 모델
+> 명세는 [`model-spec.md`](model-spec.md)를 따른다.
+
 ## 원 논문 설정
 
 BenchAnXplore: 105 geometry, case당 80 frame, Δt=0.01 s, 95 train/10 test, light mesh는 25k nodes·120k elements 미만. hidden/latent 128, message passing 15, Adam 1e-4, 20 epochs, noise 0.003로 정리되어 있다.

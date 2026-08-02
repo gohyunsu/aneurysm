@@ -1,0 +1,32 @@
+name: Research contract and site quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate research protocol
+        run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
+      - name: Run protocol tests
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+      - name: Check local site graph
+        run: python scripts/check_site.py --root .
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check site/assets/aurora.js
+          node --check site/assets/research-data.js

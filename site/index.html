@@ -1,1 +1,391 @@
-<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=hub.html"><link rel="canonical" href="hub.html"><title>Aneurysm Research Hub</title></head><body><a href="hub.html">Open Aneurysm Research Hub</a></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08121f">
+  <meta name="description" content="AURORA — boundary-condition uncertainty를 반영하는 task-aligned 뇌동맥류 hemodynamics neural operator 연구.">
+  <title>AURORA · Aneurysm Research</title>
+  <link rel="stylesheet" href="assets/aurora.css">
+  <script defer src="assets/research-data.js"></script>
+  <script defer src="assets/aurora.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <div class="page-noise" aria-hidden="true"></div>
+
+  <header class="topbar" data-topbar>
+    <a class="brand" href="#top" aria-label="AURORA 홈">
+      <span class="brand-mark">AU</span>
+      <span>AURORA <small>Aneurysm research</small></span>
+    </a>
+    <nav class="nav" aria-label="주요 탐색">
+      <a href="#thesis">Thesis</a>
+      <a href="#lineage">Lineage</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#experiments">Experiments</a>
+      <a href="#changelog">Changes</a>
+    </nav>
+    <a class="repo-link" href="https://github.com/gohyunsu/aneurysm">
+      GitHub <span aria-hidden="true">↗</span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-label="메뉴 열기">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="hero dark" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span>Research reset</span> 03 AUG 2026 · PROTOCOL V1</p>
+        <h1>
+          One geometry.<br>
+          <em>Many plausible flows.</em>
+        </h1>
+        <p class="hero-lede">
+          관측되지 않은 boundary condition을 하나의 정답처럼 가정하지 않는다.
+          AURORA는 가능한 hemodynamic field의 <strong>분포</strong>를 만들고,
+          real CFD가 rupture-status 분석에 주는 정보를 얼마나 보존하는지
+          검증한다.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#architecture">모델 아키텍처 보기</a>
+          <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="하나의 geometry에서 여러 가능한 혈류장이 생성되는 개념도">
+        <div class="visual-caption">MISSING-BC POSTERIOR</div>
+        <div class="vessel-shell">
+          <svg viewBox="0 0 520 420" role="img" aria-label="뇌동맥류 혈관 형상과 불확실한 유동 샘플">
+            <defs>
+              <linearGradient id="vesselFill" x1="0" x2="1">
+                <stop offset="0" stop-color="#254057"/>
+                <stop offset="1" stop-color="#122537"/>
+              </linearGradient>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="6" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <path class="vessel" d="M52 333 C144 323 165 278 185 210 C199 160 218 136 260 134 C302 132 323 157 335 194 C350 238 370 260 469 258 L469 327 C350 333 303 305 287 257 C277 226 267 211 249 211 C229 211 219 230 211 260 C196 317 143 377 52 385 Z"/>
+            <path class="aneurysm" d="M260 137 C238 91 258 42 310 34 C364 26 402 67 392 120 C384 161 353 185 319 181 C293 177 275 161 260 137 Z"/>
+            <path class="stream stream-a" d="M70 354 C160 346 178 280 198 223 C215 177 241 160 273 164 C313 169 332 143 339 105"/>
+            <path class="stream stream-b" d="M68 366 C153 362 191 314 211 255 C228 205 247 185 279 189 C329 195 340 257 452 285"/>
+            <path class="stream stream-c" d="M73 341 C145 333 183 292 192 239 C202 179 222 151 265 151 C305 151 341 135 360 91"/>
+            <circle class="sample sample-1" cx="337" cy="83" r="5"/>
+            <circle class="sample sample-2" cx="288" cy="186" r="4"/>
+            <circle class="sample sample-3" cx="414" cy="280" r="4"/>
+          </svg>
+          <div class="posterior-card card-a">
+            <b>q<sub>0.18</sub></b><span>low inflow</span>
+          </div>
+          <div class="posterior-card card-b">
+            <b>q<sub>0.51</sub></b><span>median field</span>
+          </div>
+          <div class="posterior-card card-c">
+            <b>q<sub>0.87</sub></b><span>high shear</span>
+          </div>
+        </div>
+        <div class="visual-legend">
+          <span><i class="dot lime"></i> field sample</span>
+          <span><i class="dot coral"></i> uncertainty</span>
+          <span>not a clinical output</span>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <div><span>Primary endpoint</span><b>Rupture status</b></div>
+        <div><span>Core shift</span><b>Point → Distribution</b></div>
+        <div><span>First gate</span><b>Real-CFD utility</b></div>
+        <div><span>Evidence</span><b>Reviewed 2026.08.03</b></div>
+      </div>
+    </section>
+
+    <section class="section thesis" id="thesis">
+      <div class="section-heading">
+        <p class="eyebrow">01 · THE THESIS</p>
+        <h2>좋은 모델보다 먼저,<br><em>맞는 문제를 정의한다.</em></h2>
+        <p>
+          geometry-only 입력에서 혈류는 유일하지 않다. 이 구조적 불확실성을
+          숨긴 채 GNN의 RMSE만 줄이는 대신, 무엇을 알고 무엇을 모르는지
+          모델의 출력에 남긴다.
+        </p>
+      </div>
+
+      <div class="pivot-grid">
+        <article class="pivot-card rejected">
+          <div class="card-index">OLD / REJECTED</div>
+          <h3>Module stacking</h3>
+          <p>In-PI-MGN 위에 attention, masking, multigrid를 계속 쌓는다.</p>
+          <ul>
+            <li>배포 때 initial flow와 inlet이 없음</li>
+            <li>2026 경쟁작과 방법 novelty가 겹침</li>
+            <li>rollout RMSE와 임상 signal 사이가 비어 있음</li>
+          </ul>
+        </article>
+        <article class="pivot-card adopted">
+          <div class="card-index">NEW / ADOPTED</div>
+          <h3>Distributional sufficiency</h3>
+          <p>BC uncertainty를 주변화하고 downstream에 충분한 field를 학습한다.</p>
+          <ul>
+            <li>observed / partial / missing BC를 같은 모델로 처리</li>
+            <li>one-shot cycle coefficient로 rollout drift 제거</li>
+            <li>field → functional → decision을 모두 검증</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="claims-strip">
+        <p>논문이 답할 세 질문</p>
+        <ol>
+          <li><span>01</span> Missing BC를 분포로 다루면 OOD calibration이 좋아지는가?</li>
+          <li><span>02</span> One-shot cycle이 wall functional을 더 잘 보존하는가?</li>
+          <li><span>03</span> Surrogate가 real-CFD의 incremental signal을 유지하는가?</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section evidence-section" id="lineage">
+      <div class="section-heading compact">
+        <p class="eyebrow">02 · EVIDENCE LINEAGE</p>
+        <h2>Novelty is a gap,<br><em>not a decoration.</em></h2>
+        <p>
+          각 계보가 해결한 문제와 남긴 빈칸을 분리한다. 2026년 arXiv
+          preprint는 peer-reviewed evidence로 과장하지 않되 직접 경쟁작으로
+          포함했다.
+        </p>
+      </div>
+
+      <div class="lineage-layout">
+        <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
+        <aside class="gap-panel">
+          <p class="eyebrow">THE OPEN GAP</p>
+          <h3>Unknown physiology is not model noise.</h3>
+          <p>
+            Inflow waveform과 outlet split은 geometry가 결정하지 않는다.
+            missing BC를 평균값으로 채우면 좁고 그럴듯한 오답을 만들 수 있다.
+          </p>
+          <div class="gap-equation" aria-label="경계조건을 주변화한 혈류 분포">
+            <span>p(H | G)</span>
+            <i>=</i>
+            <span>∫ p(H | G, B)<br>p(B | A) dB</span>
+          </div>
+          <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
+        </aside>
+      </div>
+
+      <div class="competition-table-wrap">
+        <div class="table-title">
+          <p class="eyebrow">DIRECT COMPETITION</p>
+          <span>Swipe horizontally on mobile</span>
+        </div>
+        <table class="competition-table">
+          <thead>
+            <tr>
+              <th>Axis</th>
+              <th>In-PI-MGN · 2026</th>
+              <th>Graph transformer · 2025 preprint</th>
+              <th>PINN multimodal · 2026 preprint</th>
+              <th>AURORA · proposed</th>
+            </tr>
+          </thead>
+          <tbody id="competition-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="architecture dark" id="architecture">
+      <div class="section-heading on-dark">
+        <p class="eyebrow">03 · MODEL ARCHITECTURE</p>
+        <h2>A distribution over fields.<br><em>A test of sufficiency.</em></h2>
+        <p>
+          surface geometry에서 전역 유동과 벽면 shear를 함께 복원하고,
+          cardiac cycle 전체를 temporal basis로 한 번에 생성한다.
+        </p>
+      </div>
+
+      <div class="mode-switch" role="group" aria-label="Boundary condition 모드">
+        <button class="active" type="button" data-mode="missing">Missing BC</button>
+        <button type="button" data-mode="observed">Observed BC</button>
+        <span id="mode-description">Population-conditioned BC scenarios를 샘플링합니다.</span>
+      </div>
+
+      <div class="architecture-flow">
+        <article class="arch-node input-node">
+          <span class="arch-number">01</span>
+          <p class="arch-label">INPUT</p>
+          <h3>Anatomical geometry</h3>
+          <p>Surface mesh, sparse volume queries, neck·inlet·outlet landmarks</p>
+          <div class="mesh-mini" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </article>
+        <div class="arch-connector"><span>local frame</span></div>
+        <article class="arch-node">
+          <span class="arch-number">02</span>
+          <p class="arch-label">ENCODE</p>
+          <h3>Multi-scale physics tokens</h3>
+          <p>4096 → 1024 → 256 nodes, 128 latent tokens, anatomy-preserving pooling</p>
+          <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+        <div class="arch-connector accent"><span id="bc-connector-label">sample z<sub>BC</sub></span></div>
+        <article class="arch-node uncertainty-node">
+          <span class="arch-number">03</span>
+          <p class="arch-label">CONDITION</p>
+          <h3 id="bc-node-title">BC posterior scenarios</h3>
+          <p id="bc-node-copy">Site·diameter-conditioned empirical prior, 8 samples at evaluation</p>
+          <div class="scenario-row" aria-hidden="true">
+            <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
+            <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
+          </div>
+        </article>
+        <div class="arch-connector"><span>FiLM</span></div>
+        <article class="arch-node dual-node">
+          <span class="arch-number">04</span>
+          <p class="arch-label">DECODE ONCE</p>
+          <h3>Dual-domain cycle operator</h3>
+          <div class="dual-branch">
+            <span><b>Volume</b>u, p · global physics</span>
+            <span><b>Wall</b>WSS · local hotspot</span>
+          </div>
+          <p>8 temporal Fourier modes; no autoregressive rollout</p>
+        </article>
+        <div class="arch-connector"><span>derive</span></div>
+        <article class="arch-node output-node">
+          <span class="arch-number">05</span>
+          <p class="arch-label">VERIFY</p>
+          <h3>Functional sufficiency</h3>
+          <p>TAWSS · OSI · LSA · RRT distribution, oracle ranking, calibration</p>
+          <div class="output-meter"><i></i><span>risk-retention</span><b>predefined gate</b></div>
+        </article>
+      </div>
+
+      <div class="architecture-notes">
+        <article>
+          <span>ONE-SHOT TEMPORAL BASIS</span>
+          <p>80개의 next-step을 반복하지 않고 17개 coefficient로 cycle을 복원한다.</p>
+        </article>
+        <article>
+          <span>DUAL-DOMAIN CONSISTENCY</span>
+          <p>volume gradient에서 계산한 shear와 wall decoder의 WSS가 일치해야 한다.</p>
+        </article>
+        <article>
+          <span>HONEST UNCERTAINTY</span>
+          <p>uncertainty는 높은 rupture probability가 아니라 BC/OOD 불확실성이다.</p>
+        </article>
+      </div>
+      <a class="text-link on-dark-link" href="../docs/model-spec.md">Tensor·module·loss 전체 명세 ↗</a>
+    </section>
+
+    <section class="section experiment-section" id="experiments">
+      <div class="section-heading">
+        <p class="eyebrow">04 · EXPERIMENTS</p>
+        <h2>Expensive training begins<br><em>only after the gates pass.</em></h2>
+        <p>
+          이 프로젝트의 우선순위는 전체 모델 구현이 아니라 가설을 가장 싸고
+          빠르게 반증하는 것이다.
+        </p>
+      </div>
+
+      <div class="gate-list" id="gate-list"></div>
+
+      <div class="experiment-grid">
+        <article class="experiment-card large">
+          <div>
+            <p class="eyebrow">PRIMARY COMPARISON</p>
+            <h3>Field → Function → Decision</h3>
+            <p>세 층을 통과하지 못한 성능 개선은 headline contribution이 아니다.</p>
+          </div>
+          <div class="metric-layers">
+            <span><i>01</i><b>Field</b>velocity · pressure · WSS</span>
+            <span><i>02</i><b>Function</b>TAWSS · OSI · hotspot</span>
+            <span><i>03</i><b>Decision</b>AUPRC · Brier · calibration</span>
+          </div>
+        </article>
+        <article class="experiment-card">
+          <p class="eyebrow">LEAKAGE CONTROL</p>
+          <h3>Split the cause, not the rows.</h3>
+          <p>동일 geometry의 BC·timestep·cut은 한 fold에만 둔다. clinical split과 bootstrap은 patient 단위다.</p>
+        </article>
+        <article class="experiment-card">
+          <p class="eyebrow">MANDATORY BASELINE</p>
+          <h3>Direct geometry → status</h3>
+          <p>이 baseline을 이기지 못하면 surrogate hemodynamics가 독립 정보를 준다는 주장을 철회한다.</p>
+        </article>
+      </div>
+
+      <div class="dataset-roles">
+        <div class="dataset-intro">
+          <p class="eyebrow">DATASET ROLES</p>
+          <h3>통합은 합치기가 아니라<br>역할의 분리다.</h3>
+          <p>환자를 섞지 않고 provenance-aware schema 안에서 각 데이터의 증거 범위를 고정한다.</p>
+        </div>
+        <div class="dataset-list" id="dataset-list"></div>
+      </div>
+
+      <div class="protocol-callout">
+        <div>
+          <p class="eyebrow">EXECUTABLE CONTRACT</p>
+          <h3>Claims are checked before runs.</h3>
+        </div>
+        <code>PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json</code>
+        <a href="../configs/aurora_v1.json">Open config ↗</a>
+      </div>
+    </section>
+
+    <section class="section paper-section" id="paper">
+      <div class="paper-title">
+        <p class="eyebrow">05 · PAPER BLUEPRINT</p>
+        <h2>AURORA</h2>
+        <p>Boundary-Condition Marginalized Neural Operators for Task-Aligned Intracranial Aneurysm Hemodynamics</p>
+      </div>
+      <div class="contribution-grid">
+        <article><span>C1</span><h3>Distribution, not imputation</h3><p>Missing BC를 함수공간 분포로 모델링하고 observed/missing mode를 같은 operator에서 평가한다.</p></article>
+        <article><span>C2</span><h3>Cycle, not rollout</h3><p>One-shot dual-domain temporal coefficients로 전역 flow와 국소 wall shear를 연결한다.</p></article>
+        <article><span>C3</span><h3>Sufficiency, not RMSE alone</h3><p>real-CFD의 incremental status signal을 얼마나 보존했는지 risk-retention으로 측정한다.</p></article>
+      </div>
+      <div class="scope-line">
+        <span>Allowed</span><b>cross-sectional rupture-status stratification</b>
+        <span>Not allowed</span><b>2-year / 5-year prospective rupture probability</b>
+      </div>
+    </section>
+
+    <section class="section changelog-section" id="changelog">
+      <div class="section-heading compact">
+        <p class="eyebrow">06 · DECISION HISTORY</p>
+        <h2>Every pivot leaves<br><em>a readable trace.</em></h2>
+        <p>방향·모델·데이터·사이트 변경을 이유와 영향 파일까지 함께 기록한다.</p>
+      </div>
+      <div class="change-toolbar">
+        <div class="filter-group" role="group" aria-label="변경 이력 필터">
+          <button class="active" type="button" data-filter="all">All</button>
+          <button type="button" data-filter="research">Research</button>
+          <button type="button" data-filter="model">Model</button>
+          <button type="button" data-filter="site">Site</button>
+        </div>
+        <a href="../CHANGELOG.md">Raw changelog ↗</a>
+      </div>
+      <div class="change-list" id="change-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      <a class="brand footer-brand" href="#top"><span class="brand-mark">AU</span><span>AURORA</span></a>
+      <p>Research protocol · not a clinical decision system.</p>
+    </div>
+    <div class="footer-links">
+      <a href="../docs/research-direction.md">Research direction</a>
+      <a href="../docs/model-spec.md">Model spec</a>
+      <a href="../docs/experiment-protocol.md">Experiment protocol</a>
+      <a href="https://github.com/gohyunsu/aneurysm">Repository ↗</a>
+    </div>
+    <div class="footer-meta">
+      <span>Last evidence review</span>
+      <b>03 August 2026 · KST</b>
+    </div>
+  </footer>
+</body>
+</html>

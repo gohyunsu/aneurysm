@@ -1,5 +1,11 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-03 AURORA 역할 갱신:** 데이터셋은 하나의 end-to-end cohort로
+> 합치지 않는다. Aneumo/AneuG-Flow는 BC-aware operator pretraining,
+> BenchAnXplore는 transient baseline, CMHA는 real-CFD utility gate,
+> AneuX는 external rupture-status stress test로 분리한다. 현재 실험 계약은
+> [`experiment-protocol.md`](experiment-protocol.md)를 따른다.
+
 ## 핵심 비교
 
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |

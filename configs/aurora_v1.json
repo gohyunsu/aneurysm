@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "name": "AURORA",
+    "expanded_name": "Aneurysm Uncertainty-aware Risk-aligned Operator for Rapid Assessment",
+    "status": "protocol",
+    "as_of": "2026-08-03",
+    "clinical_use": false
+  },
+  "task": {
+    "endpoint": "cross_sectional_rupture_status",
+    "primary_metric": "auprc",
+    "forbidden_claims": [
+      "prospective_rupture_risk",
+      "two_year_rupture_probability",
+      "five_year_rupture_probability",
+      "clinical_utility"
+    ]
+  },
+  "datasets": [
+    {
+      "name": "aneumo",
+      "role": "multi_bc_steady_pretraining",
+      "field_provenance": "synthetic_cfd",
+      "split_unit": "generator_seed_geometry"
+    },
+    {
+      "name": "aneug_flow",
+      "role": "steady_and_selected_pulsatile_pretraining",
+      "field_provenance": "synthetic_cfd",
+      "split_unit": "generator_seed_geometry"
+    },
+    {
+      "name": "benchanxplore",
+      "role": "transient_reproduction_and_baseline",
+      "field_provenance": "synthetic_cfd",
+      "split_unit": "geometry"
+    },
+    {
+      "name": "cmha",
+      "role": "real_cfd_bridge_and_status_gate",
+      "field_provenance": "real_cfd",
+      "split_unit": "patient"
+    },
+    {
+      "name": "aneux",
+      "role": "external_status_stress_test",
+      "field_provenance": "none",
+      "split_unit": "patient"
+    }
+  ],
+  "model": {
+    "surface_queries": 4096,
+    "volume_queries": 8192,
+    "knn": 16,
+    "latent_tokens": 128,
+    "hidden_dim": 256,
+    "attention_layers": 8,
+    "attention_heads": 8,
+    "temporal_fourier_modes": 8,
+    "bc_latent_dim": 16,
+    "bc_mixture_components": 4,
+    "bc_samples_train": 4,
+    "bc_samples_eval": 8,
+    "physics_collocation_points": 512
+  },
+  "loss": {
+    "field": 1.0,
+    "functional": 0.2,
+    "physics": 0.05,
+    "energy": 0.1,
+    "cross_consistency": 0.1,
+    "task_alignment": 0.1,
+    "note": "Pilot weights; select only inside inner folds and report sensitivity."
+  },
+  "gates": [
+    {
+      "id": "G0",
+      "name": "asset_integrity",
+      "blocking": true,
+      "requirements": [
+        "case_mapping",
+        "units",
+        "boundary_markers",
+        "label_definition",
+        "license",
+        "split_identity"
+      ]
+    },
+    {
+      "id": "G1",
+      "name": "real_cfd_incremental_utility",
+      "blocking": true,
+      "metric": "delta_auprc",
+      "target": 0.02,
+      "min_positive_outer_fold_fraction": 0.67
+    },
+    {
+      "id": "G2",
+      "name": "operator_distributional_fidelity",
+      "blocking": true,
+      "nominal_coverage": 0.9,
+      "minimum_empirical_coverage": 0.85,
+      "requires_ood_geometry": true,
+      "requires_ood_bc": true
+    },
+    {
+      "id": "G3",
+      "name": "surrogate_functional_sufficiency",
+      "blocking": false,
+      "metric": "risk_retention_auprc",
+      "target": 0.75,
+      "minimum": 0.5,
+      "requires_g1_positive_denominator": true
+    },
+    {
+      "id": "G4",
+      "name": "non_redundancy",
+      "blocking": false,
+      "comparison": "full_aurora_minus_direct_geometry",
+      "target_delta_auprc": 0.01,
+      "requires_calibration_noninferiority": true
+    }
+  ],
+  "evaluation": {
+    "operator_outer_split": "geometry_disjoint",
+    "clinical_outer_folds": 5,
+    "clinical_outer_repeats": 3,
+    "clinical_inner_folds": 4,
+    "bootstrap_unit": "patient",
+    "bootstrap_replicates": 2000,
+    "primary_field_distribution_metric": "functional_energy_score",
+    "headline_seeds": 5,
+    "calibration_metrics": [
+      "brier",
+      "ece",
+      "calibration_slope",
+      "calibration_intercept"
+    ]
+  },
+  "phases": [
+    {
+      "id": "P0",
+      "name": "audit_and_feasibility",
+      "requires": ["G0"],
+      "outputs": ["cmha_incremental_utility", "multi_bc_pilot"]
+    },
+    {
+      "id": "P1",
+      "name": "steady_distributional_operator",
+      "requires": ["G0"],
+      "outputs": ["wall_field_distribution", "bc_coverage"]
+    },
+    {
+      "id": "P2",
+      "name": "one_shot_transient_dual_domain",
+      "requires": ["G2"],
+      "outputs": ["cycle_coefficients", "wall_volume_consistency"]
+    },
+    {
+      "id": "P3",
+      "name": "clinical_functional_sufficiency",
+      "requires": ["G1", "G2"],
+      "outputs": ["risk_retention", "external_stress_test"]
+    }
+  ]
+}

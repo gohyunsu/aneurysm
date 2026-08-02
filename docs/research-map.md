@@ -1,5 +1,11 @@
 # 연구 지형과 현재 작업
 
+> **2026-08-03 방향 변경:** 이 문서는 초기 In-PI-MGN 재현 맥락을 보존한다.
+> 현재 primary method와 contribution은
+> [`research-direction.md`](research-direction.md), 모델은
+> [`model-spec.md`](model-spec.md), 실험은
+> [`experiment-protocol.md`](experiment-protocol.md)를 기준으로 한다.
+
 ## 1. 연구가 진행되는 맥락
 
 뇌동맥류의 임상적 난점은 비파열 동맥류를 발견한 뒤 치료의 이득과 시술 위험을 비교해야 한다는 점이다. 크기·모양·위치·환자 임상정보만으로는 개인별 위험을 충분히 설명하기 어렵고, 혈류가 벽에 가하는 힘(WSS, OSI, pressure/velocity field)이 보완 정보를 제공할 가능성이 있다. 그러나 CFD는 geometry segmentation, meshing, 경계조건 설정과 수치해석에 시간·전문성이 필요하다.

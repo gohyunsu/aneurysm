@@ -20,3 +20,18 @@ data/scratch/
 runs/
 checkpoints/
 wandb/
+
+# Private team context and machine-specific operations
+tmp/
+SERVER_GUIDE.md
+.env
+.env.*
+!.env.example
+
+# Python and editor artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+.DS_Store
