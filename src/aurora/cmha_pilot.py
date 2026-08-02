@@ -261,26 +261,35 @@ def grouped_stratified_folds(
         records.append((int(group), indices, positive, negative, rng.random()))
     records.sort(key=lambda item: (-len(item[1]), -abs(item[2] - item[3]), item[4]))
 
-    target_positive = float(labels.sum()) / n_splits
-    target_negative = float((1 - labels).sum()) / n_splits
     folds: list[list[int]] = [[] for _ in range(n_splits)]
     fold_positive = [0] * n_splits
     fold_negative = [0] * n_splits
+    initial_order = list(range(n_splits))
+    rng.shuffle(initial_order)
 
-    for _, indices, positive, negative, _ in records:
-        order = list(range(n_splits))
-        rng.shuffle(order)
+    for record_index, (_, indices, positive, negative, _) in enumerate(records):
+        if record_index < n_splits:
+            # Seed every fold before the variance-minimizing greedy assignment.
+            chosen = initial_order[record_index]
+        else:
+            order = list(range(n_splits))
+            rng.shuffle(order)
 
-        def score(fold: int) -> tuple[float, int]:
-            class_cost = (
-                ((fold_positive[fold] + positive - target_positive) ** 2)
-                / (target_positive + 1.0)
-                + ((fold_negative[fold] + negative - target_negative) ** 2)
-                / (target_negative + 1.0)
-            )
-            return class_cost, len(folds[fold])
+            def score(fold: int) -> tuple[float, int]:
+                candidate_positive = np.asarray(fold_positive, dtype=np.float64)
+                candidate_negative = np.asarray(fold_negative, dtype=np.float64)
+                candidate_size = np.asarray([len(item) for item in folds], dtype=np.float64)
+                candidate_positive[fold] += positive
+                candidate_negative[fold] += negative
+                candidate_size[fold] += len(indices)
+                class_cost = (
+                    float(np.var(candidate_positive)) / (float(labels.sum()) + 1.0)
+                    + float(np.var(candidate_negative)) / (float((1 - labels).sum()) + 1.0)
+                    + 0.01 * float(np.var(candidate_size))
+                )
+                return class_cost, len(folds[fold])
 
-        chosen = min(order, key=score)
+            chosen = min(order, key=score)
         folds[chosen].extend(indices.tolist())
         fold_positive[chosen] += positive
         fold_negative[chosen] += negative
