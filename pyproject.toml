@@ -9,6 +9,12 @@ description = "Research protocol and data contracts for AURORA"
 requires-python = ">=3.10"
 license = {text = "Research use; see dataset-specific licenses"}
 
+[project.optional-dependencies]
+experiment = [
+  "numpy>=1.24",
+  "torch>=2.1",
+]
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

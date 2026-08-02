@@ -18,3 +18,5 @@ dependencies:
   - openpyxl
   - tqdm
   - pip
+  - pip:
+      - torch>=2.1

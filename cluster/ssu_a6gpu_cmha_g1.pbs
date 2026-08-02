@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+#PBS -N aurora_cmha_g1
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=32gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=00:30:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_DATA_ROOT:?set AURORA_DATA_ROOT}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+
+mkdir -p "$AURORA_OUTPUT_ROOT"
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_DATA_ROOT:/data:ro" \
+  --bind "$AURORA_OUTPUT_ROOT:/output" \
+  "$AURORA_SIF" \
+  env PYTHONPATH=/workspace/src \
+  python /workspace/experiments/run_cmha_g1.py \
+    --data-root "/data/extracted/cmha/v2/statistical results" \
+    --output /output \
+    --require-cuda
