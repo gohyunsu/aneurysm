@@ -325,7 +325,8 @@ N0는 solver·PDE·BC·functional이 비자명한지만 판정한다. 통과하�
 comparison 등록만 허용한다. Method novelty, baseline superiority,
 irregular-3D headline은 허용하지 않는다.
 
-첫 scheduler/GPU 실행 전 구현 감사를 통해 선언된
+첫 dependency-complete PBS contract test는 GMM tensor API 오류로 exit 1을
+반환했고, scientific N0 metric은 생성하지 않았다. 재실행 전에 선언된
 \(a_G\in[0.7,1.3]\), \(\lambda_G\in[8,40]\) envelope를 코드와 일치시켰고,
 경계 gradient가 아니라 물리적 right-boundary outward diffusive flux
 \(-a_G\partial_nu\)를 계산하도록 바로잡았다. Seed, 표본 수, threshold,

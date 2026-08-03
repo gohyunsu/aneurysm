@@ -4,13 +4,13 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
-## 2026-08-03 · N0 implementation audit is corrected before execution
+## 2026-08-03 · N0 contract failure is corrected before metric access
 
 ### Pre-execution amendment
 
-- 아직 scheduler/GPU job이 제출되기 전에 tensor runtime test에서 경계 GMM의
-  Python scalar `.pow` 오류를 발견해 tensor-safe alternating sign으로
-  교정했다.
+- 첫 dependency-complete PBS contract job은 새 GMM tensor path의 Python
+  scalar `.pow` 오류를 검출해 exit 1로 끝났다. N0 scientific metric job은
+  제출하지 않았으며 tensor-safe alternating sign으로 교정했다.
 - 선언된 \(a_G\in[0.7,1.3]\), \(\lambda_G\in[8,40]\) envelope와 실제
   context mapping을 일치시켰다.
 - `right_boundary_flux`는 단순 gradient가 아니라 outward diffusive flux

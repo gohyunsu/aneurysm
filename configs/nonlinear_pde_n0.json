@@ -2,7 +2,7 @@
   "schema_version": "aurora.nonlinear_pde_n0.v1",
   "experiment_id": "nonlinear_multicomponent_n0_solver_gate_v1",
   "status": "preregistered_before_gpu_run",
-  "pre_execution_amendment": "Before any scheduler/GPU execution, commit d21cd6a was amended to make the implementation match the already declared coefficient envelopes, compute physical -a*du/dn rather than an unweighted boundary gradient, and exercise the tensor runtime in tests. No seed, sample count, success threshold, or decision rule changed.",
+  "pre_metric_amendment": "The first dependency-complete PBS contract test exited 1 before any N0 metric run because the new GMM tensor path called a Python scalar API. The implementation was then amended to match the already declared coefficient envelopes and compute physical -a*du/dn rather than an unweighted boundary gradient. No scientific metric was generated and no seed, sample count, success threshold, or decision rule changed.",
   "source_gate": "G1s",
   "source_result": "../results/controlled_pde_g1s_20260803.json",
   "source_result_sha256": "7e9797abaaf4ff6b7f2c5ab38fa75d768b24af0d6f0d00f74276ec488d6ba7a9",
