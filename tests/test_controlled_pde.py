@@ -5,7 +5,11 @@ try:
 except ImportError:  # pragma: no cover - lightweight local environment
     torch = None
 
-from aurora.controlled_pde import condition_gaussian, poisson_solution
+from aurora.controlled_pde import (
+    _distribution_metrics,
+    condition_gaussian,
+    poisson_solution,
+)
 
 
 @unittest.skipIf(torch is None, "controlled PDE tests require torch")
@@ -29,6 +33,23 @@ class ControlledPDETests(unittest.TestCase):
         self.assertAlmostEqual(float(conditional_mean[0, 1]), 1.0, places=6)
         self.assertAlmostEqual(
             float(conditional_covariance[0, 1, 1]), 0.75, places=6
+        )
+
+    def test_distribution_metrics_include_geometry_bootstrap_intervals(self) -> None:
+        target = torch.tensor([[0.0, 1.0], [0.2, 0.8], [1.0, 0.0], [0.8, 0.2]])
+        samples = target[:, None, :] + 0.1 * torch.randn(4, 16, 2)
+        metrics = _distribution_metrics(
+            samples,
+            target,
+            target,
+            0.9,
+            conditions_per_geometry=2,
+            bootstrap_replicates=100,
+            seed=17,
+        )
+        self.assertIn("geometry_bootstrap_ci95", metrics)
+        self.assertEqual(
+            len(metrics["geometry_bootstrap_ci95"]["energy_score"]), 2
         )
 
 

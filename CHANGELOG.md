@@ -42,6 +42,11 @@
   direct masked Gaussian baseline을 구현했다.
 - Pinned experiment container에서 2-epoch CPU runtime smoke를 완료해
   tensor shape, conditioning, sampling, metric serialization을 검증했다.
+- 첫 G1 submission은 GPU 실행 전 `Q` 상태에서 2,000회 geometry-bootstrap
+  CI가 result JSON에 빠지는 것을 발견해 취소했다. Point estimate를 본 뒤
+  고치는 일을 피하기 위한 pre-run correction이다.
+- Geometry-family cluster bootstrap과 95% CI 직렬화를 구현하고 pinned
+  container smoke에서 `geometry_bootstrap_ci95` 생성을 확인했다.
 
 ### Site
 

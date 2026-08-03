@@ -346,32 +346,100 @@ def _oracle_field_mean(
     return poisson_solution(geometry, conditional_mean, grid)
 
 
-def _distribution_metrics(
-    samples: Any, target: Any, oracle_mean: Any, coverage: float
+def _cluster_summary(
+    values: Any, *, bootstrap_replicates: int, seed: int
 ) -> dict[str, float]:
+    np, _ = _imports()
+    array = values.detach().cpu().numpy().astype(np.float64, copy=False)
+    generator = np.random.default_rng(seed)
+    indices = generator.integers(
+        0, array.size, size=(bootstrap_replicates, array.size)
+    )
+    bootstrap = np.mean(array[indices], axis=1)
+    return {
+        "mean": float(np.mean(array)),
+        "ci95_low": float(np.quantile(bootstrap, 0.025)),
+        "ci95_high": float(np.quantile(bootstrap, 0.975)),
+    }
+
+
+def _distribution_metrics(
+    samples: Any,
+    target: Any,
+    oracle_mean: Any,
+    coverage: float,
+    *,
+    conditions_per_geometry: int,
+    bootstrap_replicates: int,
+    seed: int,
+) -> dict[str, Any]:
     _, torch = _imports()
+    if target.shape[0] % conditions_per_geometry:
+        raise ControlledPDEError("Evaluation rows do not form complete geometry families.")
+    geometries = target.shape[0] // conditions_per_geometry
     predicted_mean = samples.mean(dim=1)
-    mean_error = torch.sqrt(torch.mean((predicted_mean - oracle_mean).square()))
-    scale = torch.sqrt(torch.mean(oracle_mean.square())).clamp_min(1e-6)
-    mean_relative_error = mean_error / scale
+    squared_mean_error = (predicted_mean - oracle_mean).square().reshape(
+        geometries, conditions_per_geometry, -1
+    )
+    squared_oracle = oracle_mean.square().reshape(
+        geometries, conditions_per_geometry, -1
+    )
+    geometry_mean_error = torch.sqrt(
+        torch.mean(squared_mean_error, dim=(1, 2))
+    ) / torch.sqrt(torch.mean(squared_oracle, dim=(1, 2))).clamp_min(1e-6)
     alpha = (1.0 - coverage) / 2.0
     lower = torch.quantile(samples, alpha, dim=1)
     upper = torch.quantile(samples, 1.0 - alpha, dim=1)
-    empirical_coverage = torch.mean(
-        ((target >= lower) & (target <= upper)).float()
+    geometry_coverage = (
+        ((target >= lower) & (target <= upper))
+        .float()
+        .reshape(geometries, conditions_per_geometry, -1)
+        .mean(dim=(1, 2))
     )
     distance_to_target = torch.linalg.vector_norm(
         samples - target[:, None, :], dim=-1
-    ).mean()
+    ).mean(dim=1)
     paired = torch.roll(samples, shifts=1, dims=1)
-    sample_spread = torch.linalg.vector_norm(samples - paired, dim=-1).mean()
-    energy_score = distance_to_target - 0.5 * sample_spread
+    sample_spread = torch.linalg.vector_norm(samples - paired, dim=-1).mean(dim=1)
+    geometry_energy = (distance_to_target - 0.5 * sample_spread).reshape(
+        geometries, conditions_per_geometry
+    ).mean(dim=1)
+    geometry_width = (upper - lower).reshape(
+        geometries, conditions_per_geometry, -1
+    ).mean(dim=(1, 2))
+    summaries = {
+        "standardized_mean_error": _cluster_summary(
+            geometry_mean_error,
+            bootstrap_replicates=bootstrap_replicates,
+            seed=seed,
+        ),
+        "empirical_coverage": _cluster_summary(
+            geometry_coverage,
+            bootstrap_replicates=bootstrap_replicates,
+            seed=seed + 1,
+        ),
+        "energy_score": _cluster_summary(
+            geometry_energy,
+            bootstrap_replicates=bootstrap_replicates,
+            seed=seed + 2,
+        ),
+        "mean_interval_width": _cluster_summary(
+            geometry_width,
+            bootstrap_replicates=bootstrap_replicates,
+            seed=seed + 3,
+        ),
+    }
+    empirical_coverage = summaries["empirical_coverage"]["mean"]
     return {
-        "standardized_mean_error": float(mean_relative_error.item()),
-        "empirical_coverage": float(empirical_coverage.item()),
-        "coverage_error": float(abs(empirical_coverage.item() - coverage)),
-        "energy_score": float(energy_score.item()),
-        "mean_interval_width": float(torch.mean(upper - lower).item()),
+        "standardized_mean_error": summaries["standardized_mean_error"]["mean"],
+        "empirical_coverage": empirical_coverage,
+        "coverage_error": float(abs(empirical_coverage - coverage)),
+        "energy_score": summaries["energy_score"]["mean"],
+        "mean_interval_width": summaries["mean_interval_width"]["mean"],
+        "geometry_bootstrap_ci95": {
+            name: [summary["ci95_low"], summary["ci95_high"]]
+            for name, summary in summaries.items()
+        },
     }
 
 
@@ -412,6 +480,8 @@ def evaluate_seed(
     geometry, boundary, target = _flatten(split)
     samples = int(config["bc_samples_eval"])
     coverage = float(config["coverage"])
+    conditions = int(config["conditions_per_geometry"])
+    bootstrap_replicates = int(config["bootstrap_replicates"])
     generator = torch.Generator(device=geometry.device).manual_seed(seed + 91)
     masks_result: dict[str, Any] = {}
 
@@ -444,10 +514,22 @@ def evaluate_seed(
             )
             masks_result[name] = {
                 "aurora": _distribution_metrics(
-                    coherent_samples, target, oracle_mean, coverage
+                    coherent_samples,
+                    target,
+                    oracle_mean,
+                    coverage,
+                    conditions_per_geometry=conditions,
+                    bootstrap_replicates=bootstrap_replicates,
+                    seed=seed + 1000 * (len(masks_result) + 1),
                 ),
                 "direct_mask_gaussian": _distribution_metrics(
-                    direct_samples, target, oracle_mean, coverage
+                    direct_samples,
+                    target,
+                    oracle_mean,
+                    coverage,
+                    conditions_per_geometry=conditions,
+                    bootstrap_replicates=bootstrap_replicates,
+                    seed=seed + 2000 * (len(masks_result) + 1),
                 ),
             }
 
