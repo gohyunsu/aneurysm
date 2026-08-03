@@ -1,0 +1,104 @@
+{
+  "schema_version": "aurora.controlled_pde_g1s.v1",
+  "experiment_id": "controlled_pde_g1s_data_adequacy_v1",
+  "status": "preregistered_before_fresh_test",
+  "source_gate": "G1r",
+  "source_diagnostic": "DA2",
+  "may_relabel_g1_or_g1r": false,
+  "may_claim_data_quantity_as_method_contribution": false,
+  "g1r_config": "controlled_pde_g1r.json",
+  "g1r_config_sha256": "7f5779d53143b6b77d0b1f9ac4c5d1a98b0b7fce908fcd68891e33270ec58b8a",
+  "g1r_result": "../results/controlled_pde_g1r_20260803.json",
+  "g1r_result_sha256": "8404464b0b38fda3676a5ffedf06d12acdb91b297d3989f0e5d46cb1687e127e",
+  "da1_result": "../results/controlled_pde_density_attribution_20260803.json",
+  "da1_result_sha256": "65b579f090b1f70770fd4da40614743167638f811d9f7611e45fa053b6b71187",
+  "da2_config": "controlled_pde_density_development.json",
+  "da2_config_sha256": "76cf2c2d40407d3ce4b9e78d679f68f9dd9611e70cd4f3e82844d7b76e939f1d",
+  "da2_result": "../results/controlled_pde_density_development_20260803.json",
+  "da2_result_sha256": "8d8ced1fb439749adbfc646dfc2e301160b97be8fd735166a667f26351d3de26",
+  "changes_from_g1r": [
+    "five_entirely_fresh_simulation_family_seeds",
+    "training_geometries_increased_from_768_to_3072"
+  ],
+  "density_estimator": "empirical_nll",
+  "seeds": [51080321, 51080322, 51080323, 51080324, 51080325],
+  "split_seed_offsets": {
+    "train": 0,
+    "validation": 100000,
+    "test": 200000
+  },
+  "grid_points": 64,
+  "train_geometries": 3072,
+  "validation_geometries": 192,
+  "test_geometries": 192,
+  "conditions_per_geometry": 8,
+  "hidden_dim": 128,
+  "observation_masks": {
+    "missing": [0, 0],
+    "left_observed": [1, 0],
+    "right_observed": [0, 1],
+    "full": [1, 1]
+  },
+  "primary_masks": ["missing", "left_observed", "right_observed"],
+  "density_training": {
+    "maximum_epochs": 2500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.00001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "operator_training": {
+    "maximum_epochs": 1500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "paired_response_weight": 0.5,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.000001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "direct_baseline_training": {
+    "maximum_epochs": 1500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.000001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "evaluation": {
+    "coverage": 0.9,
+    "bc_samples": 2048,
+    "gauss_hermite_order": 12,
+    "projective_samples": 1024,
+    "projective_geometries": 64,
+    "projective_replicates": 8,
+    "sliced_projections": 32,
+    "nested_routes": ["left_then_right", "right_then_left"],
+    "bootstrap_replicates": 2000
+  },
+  "success_thresholds": {
+    "maximum_density_only_standardized_mean_error": 0.05,
+    "maximum_density_only_coverage_error": 0.03,
+    "maximum_end_to_end_quadrature_mean_error": 0.05,
+    "maximum_end_to_end_sampled_coverage_error": 0.03,
+    "maximum_full_bc_operator_error": 0.03,
+    "maximum_projective_excess_ci95_upper": 0.01,
+    "maximum_analytic_nested_moment_residual": 0.000001
+  },
+  "decision_rule": {
+    "worst_seed_or_route_decides": true,
+    "pass_authorizes_progression_to_nonlinear_and_irregular_3d_experiments": true,
+    "pass_does_not_establish_method_novelty_or_baseline_superiority": true,
+    "failure_keeps_nonlinear_and_irregular_3d_confirmation_blocked": true
+  },
+  "interpretation": "Fresh five-seed exact-data adequacy sanity after failed G1/G1r and threshold-free DA1/DA2. The original empirical-NLL estimator, model families, optimization, validation/test sizes, metrics, and thresholds remain unchanged. Only fresh seeds and training geometries increase. A pass may authorize separately registered next-domain experiments, but data quantity is not a method contribution and cannot relabel G1 or G1r."
+}

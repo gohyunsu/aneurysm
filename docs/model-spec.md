@@ -244,6 +244,17 @@ NLL 대비 평균 density-only error 개선은 0.23%에 그쳤고 1/3 seed에서
 NLL만 최악 0.02706으로 안정화됐다. 다음 exact re-entry는 architecture
 변경 없이 3,072×8 data adequacy만 fresh seed에서 검증한다.
 
+Executable re-entry는 `configs/controlled_pde_g1s.json`이다. G1s는 새
+estimator나 architecture를 도입하지 않는다. Density는 G1r과 동일한
+5-output Gaussian MLP와 empirical NLL, operator/direct baseline도 동일한
+model·loss·optimizer를 사용한다. 유일한 training-side 변화는 독립
+geometry 768→3,072이며 condition 수는 geometry당 8로 유지한다.
+Validation과 fresh test는 기존 192/192 geometry다. Threshold, analytic
+conditional moments, Gauss–Hermite mean,
+sampled coverage와 matched-IID-floor projective metric은 G1r과 동일하다.
+따라서 통과 시에도 이 절은 engineering/data sufficiency evidence이며
+Module B–D의 novelty 증거가 아니다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

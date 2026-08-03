@@ -144,6 +144,14 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   excess NLL도 더 나빴다. 이를 method로 승격하지 않는다. 3,072×8의 기존
   empirical NLL은 평균 0.02575, 최악 0.02706으로 안정화돼 다음 fresh
   exact sanity는 estimator novelty가 아니라 data adequacy를 검사한다.
+  이 fresh sanity는 `G1s`로 분리해
+  `configs/controlled_pde_g1s.json`에 결과 전에 고정한다. 이전
+  G1/G1r/DA1/DA2와 겹치지 않는 5개 seed, empirical NLL, 3,072 geometry
+  × 8 condition, 기존 G1r model·optimizer·mask·threshold와
+  validation-only selection을 유지한다. Validation/test size도 192/192로
+  유지해 training geometry 수 외의 차이를 만들지 않는다. G1s가 통과해도
+  data/pipeline adequacy이지 novelty가 아니며, 실패한 G1/G1r은 그대로다.
+  완료 전에는 nonlinear/3D confirmatory 학습을 허용하지 않는다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야

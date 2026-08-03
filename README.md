@@ -168,6 +168,16 @@ DA2도 완료됐습니다. 고정 규칙상 shrinkage 0.50이 선택됐지만 �
 [`results/controlled_pde_density_development_20260803.json`](results/controlled_pde_density_development_20260803.json)이며,
 다음 fresh gate는 새 방법이 아니라 데이터 충분성을 검증합니다.
 
+그 fresh gate는
+[`configs/controlled_pde_g1s.json`](configs/controlled_pde_g1s.json)에
+실행 전에 고정했습니다. 이전 실험과 겹치지 않는 5개 seed에서 original
+empirical NLL, 3,072 geometry × 8 condition을 사용하고 G1r의 model,
+optimizer, validation/test size, metric, threshold를 그대로 유지합니다.
+Checkpoint 선택 뒤 기존과 같은 192-geometry fresh test를 생성합니다.
+G1s는 아직 실행 전이며 완전한 pass
+전에는 nonlinear/3D 학습을 허용하지 않습니다. 통과하더라도 이는
+data/pipeline sanity이지 논문의 독립 novelty가 아닙니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에

@@ -257,6 +257,25 @@ Population excess NLL도 악화됐으므로 estimator benefit을 지지하지 �
 high-data budget만 고정하고, shrinkage 결과를 baseline win이나 novelty로
 사용하지 않는다.
 
+#### G1s · prospective data-adequacy re-entry
+
+G1s는 DA2 결과를 본 뒤 등록한 **새 fresh-test protocol**이다. 실패한
+G1/G1r을 다시 채점하지 않으며 grouped/shrinkage estimator를 사용하지
+않는다. `configs/controlled_pde_g1s.json`에 다음을 실행 전에 고정한다.
+
+- 모든 G1/G1r/DA1/DA2 seed와 겹치지 않는 5개 seed
+- original empirical NLL과 3,072 training geometry × 8 conditions
+- G1r과 같은 192 validation geometry, model family, training schedule,
+  observation mask, metric estimator와 threshold
+- validation selection 이후에만 생성하는 기존 192-geometry fresh test
+- worst-seed gate와 양방향 projective CI rule
+
+Seed와 training geometry 수 외의 validation/test size, model, optimization,
+estimator와 threshold는 G1r과 동일하다. 완전한 pass만 다음
+nonlinear regular-grid protocol 등록을 허용하며, pass를 estimator
+innovation·baseline superiority·AAAI novelty로 해석하지 않는다. Fail이면
+nonlinear/3D 학습은 계속 금지한다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
@@ -510,11 +529,12 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 
 1. D0/G1/G1r 판정과 G1b/D0b 진단 **(완료)**
 2. Aneumo selective cache와 train-only scaling audit **(완료; velocity only)**
-3. Exact density representation/optimization/sample-scaling attribution
-4. 새 prospective exact sanity가 양수일 때 nonlinear regular-grid C1/C2
-5. 그 뒤 velocity-only G2 ablation과 irregular-3D backbone
-6. G3 learned transient 비교
-7. G4 cross-domain 통합 table
+3. Exact density attribution과 estimator development **(완료; method gain 없음)**
+4. G1s fresh 5-seed data-adequacy sanity **(사전등록; 실행 전)**
+5. G1s가 양수일 때 nonlinear regular-grid C1/C2
+6. 그 뒤 velocity-only G2 ablation과 irregular-3D backbone
+7. G3 learned transient 비교
+8. G4 cross-domain 통합 table
 
 GPU는 PBS allocation 안에서만 사용한다. 각 run은 commit, command,
 environment, config, dataset checksum, status, aggregate metric을 남긴다.

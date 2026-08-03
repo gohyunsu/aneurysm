@@ -90,15 +90,15 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G1",
       title: "Is condition–marginal coherence exact?",
-      copy: "DA1에서 population-NLL은 최악 0.00495를 회복했지만 empirical NLL은 0.04401–0.04855였다. Capacity보다 finite condition information이 병목이다.",
-      state: "G1/G1r failed · DA2 found no material estimator gain · data gate next",
+      copy: "DA2에서 새 estimator의 material gain은 없었지만 3,072×8 empirical NLL은 최악 0.02706이었다. 같은 estimator와 threshold를 유지한 fresh 5-seed G1s가 data adequacy를 검증한다.",
+      state: "G1/G1r failed · G1s preregistered and unrun",
       blocking: true
     },
     {
       id: "G2",
       title: "Does paired response improve?",
       copy: "Train-only strong scaling audit에서 velocity residual은 0.2112 [0.2001, 0.2243]로 통과했지만 pressure는 0.1369 [0.1190, 0.1496]로 실패했다.",
-      state: "Velocity-only eligible · learned G2 still blocked by G1r",
+      state: "Velocity-only eligible · learned G2 blocked until G1s passes",
       blocking: true
     },
     {
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "G1s freezes a fresh data-adequacy sanity before execution",
+      copy: "이전 G1/G1r/DA1/DA2와 겹치지 않는 5개 seed, original empirical NLL, 3,072×8 training budget을 고정했다. G1r model·optimizer·validation/test size·metric·threshold는 모두 유지한다. Pass는 next-domain 실행 권한일 뿐 novelty나 과거 gate relabel이 아니다.",
+      files: ["configs/controlled_pde_g1s.json", "src/aurora/controlled_pde_sufficiency_gate.py", "docs/experiment-protocol.md", "cluster/ssu_a6gpu_controlled_g1s.pbs", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "result",

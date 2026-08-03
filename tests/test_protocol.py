@@ -227,6 +227,74 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "missing"):
             validate_protocol(candidate)
 
+    def test_g1s_must_retain_empirical_nll(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        g1s = next(
+            item
+            for item in candidate["prospective_reentry_protocols"]
+            if item["id"] == "G1s"
+        )
+        g1s["density_estimator"] = "grouped_shrinkage_050"
+        with self.assertRaisesRegex(ProtocolError, "empirical NLL"):
+            validate_protocol(candidate)
+
+    def test_g1s_must_retain_data_adequacy_budget(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        g1s = next(
+            item
+            for item in candidate["prospective_reentry_protocols"]
+            if item["id"] == "G1s"
+        )
+        g1s["train_geometries"] = 768
+        with self.assertRaisesRegex(ProtocolError, "3072x8"):
+            validate_protocol(candidate)
+
+    def test_g1s_thresholds_cannot_change(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        g1s = next(
+            item
+            for item in candidate["prospective_reentry_protocols"]
+            if item["id"] == "G1s"
+        )
+        g1s["success_thresholds"][
+            "maximum_density_only_standardized_mean_error"
+        ] = 0.051
+        with self.assertRaisesRegex(ProtocolError, "original G1r thresholds"):
+            validate_protocol(candidate)
+
+    def test_unrun_g1s_cannot_authorize_complex_confirmation(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        g1s = next(
+            item
+            for item in candidate["prospective_reentry_protocols"]
+            if item["id"] == "G1s"
+        )
+        g1s["nonlinear_or_3d_confirmatory_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "Unrun G1s"):
+            validate_protocol(candidate)
+
+    def test_g1s_cannot_change_fresh_test_size(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        g1s = next(
+            item
+            for item in candidate["prospective_reentry_protocols"]
+            if item["id"] == "G1s"
+        )
+        g1s["test_geometries"] = 512
+        with self.assertRaisesRegex(ProtocolError, "unchanged 192/192"):
+            validate_protocol(candidate)
+
+    def test_g1s_cannot_promote_data_quantity_to_contribution(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        g1s = next(
+            item
+            for item in candidate["prospective_reentry_protocols"]
+            if item["id"] == "G1s"
+        )
+        g1s["may_claim_data_quantity_as_method_contribution"] = True
+        with self.assertRaisesRegex(ProtocolError, "method contribution"):
+            validate_protocol(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

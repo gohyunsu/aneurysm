@@ -4,6 +4,25 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · G1s fresh data-adequacy sanity is preregistered
+
+### Experiment
+
+- G1/G1r/DA1/DA2와 겹치지 않는 다섯 seed, original empirical NLL,
+  3,072 geometry × 8 condition을 결과 전에 동결했다.
+- G1r의 model, optimizer, validation-only checkpoint selection, mask,
+  metric estimator와 모든 threshold를 그대로 유지한다.
+- Checkpoint 선택 뒤 생성하는 192-geometry fresh test까지 G1r과 동일하게
+  유지해 training geometry 수 외의 실험 차이를 제거했다.
+
+### Scope
+
+- G1s는 estimator innovation이 아니라 data/pipeline adequacy sanity다.
+  통과해도 실패한 G1/G1r을 relabel하거나 data scaling을 novelty로
+  주장하지 않는다.
+- 완전한 5-seed pass 전에는 nonlinear/3D confirmatory 학습을 실행하지
+  않는다.
+
 ## 2026-08-03 · DA2 finds data adequacy, not a new estimator
 
 ### Result

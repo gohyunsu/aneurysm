@@ -503,9 +503,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     reentries = protocol["prospective_reentry_protocols"]
     reentry_ids = _unique_ids(reentries, "id", "prospective_reentry_protocols")
-    if reentry_ids != {"G1r"}:
-        raise ProtocolError("Schema v2 must retain the prospectively registered G1r.")
-    g1r = reentries[0]
+    if reentry_ids != {"G1r", "G1s"}:
+        raise ProtocolError(
+            "Schema v2 must retain failed G1r and the data-adequacy G1s."
+        )
+    g1r = next(item for item in reentries if item["id"] == "G1r")
     _require_keys(
         g1r,
         [
@@ -585,7 +587,93 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 )
         elif g1r["failed_checks"]:
             raise ProtocolError("Passed G1r cannot retain failed checks.")
-    checks.append("prospective G1 re-entry non-inflation contract")
+    g1s = next(item for item in reentries if item["id"] == "G1s")
+    _require_keys(
+        g1s,
+        [
+            "status",
+            "source_gate",
+            "source_diagnostic",
+            "may_relabel_g1_or_g1r",
+            "may_claim_data_quantity_as_method_contribution",
+            "config",
+            "fresh_test_seeds",
+            "test_access_during_selection",
+            "density_estimator",
+            "train_geometries",
+            "validation_geometries",
+            "conditions_per_geometry",
+            "test_geometries",
+            "changes_from_g1r",
+            "pass_interpretation",
+            "success_thresholds",
+            "nonlinear_or_3d_confirmatory_training_authorized",
+        ],
+        "G1s prospective data-adequacy re-entry",
+    )
+    if g1s["status"] not in allowed_reentry_status:
+        raise ProtocolError("G1s must retain a registered or completed status.")
+    if (
+        g1s["source_gate"] != "G1r"
+        or g1s["source_diagnostic"] != "DA2"
+        or g1s["may_relabel_g1_or_g1r"] is not False
+    ):
+        raise ProtocolError("G1s cannot relabel failed G1/G1r and must follow DA2.")
+    if g1s["may_claim_data_quantity_as_method_contribution"] is not False:
+        raise ProtocolError("G1s cannot promote data quantity to a method contribution.")
+    if g1s["config"] != "configs/controlled_pde_g1s.json":
+        raise ProtocolError("G1s must point to its executable frozen config.")
+    if g1s["fresh_test_seeds"] != 5 or g1s["test_access_during_selection"] is not False:
+        raise ProtocolError("G1s requires five fresh seeds and validation-only selection.")
+    if g1s["density_estimator"] != "empirical_nll":
+        raise ProtocolError("G1s must retain empirical NLL; DA2 found no new method.")
+    if (
+        g1s["train_geometries"] != 3072
+        or g1s["validation_geometries"] != 192
+        or g1s["conditions_per_geometry"] != 8
+        or g1s["test_geometries"] != 192
+    ):
+        raise ProtocolError(
+            "G1s freezes the 3072x8 train and unchanged 192/192 validation/test budget."
+        )
+    if g1s["changes_from_g1r"] != [
+        "five_entirely_fresh_simulation_family_seeds",
+        "training_geometries_increased_from_768_to_3072",
+    ]:
+        raise ProtocolError("G1s may change only fresh seeds and training-data adequacy.")
+    if g1s["pass_interpretation"] != (
+        "data_adequacy_sanity_not_method_novelty_or_baseline_superiority"
+    ):
+        raise ProtocolError("G1s cannot inflate a data-adequacy pass into novelty.")
+    if g1s["success_thresholds"] != expected_reentry_thresholds:
+        raise ProtocolError("G1s must retain the original G1r thresholds.")
+    if g1s["status"] == "preregistered_before_fresh_test":
+        if g1s["nonlinear_or_3d_confirmatory_training_authorized"] is not False:
+            raise ProtocolError("Unrun G1s cannot authorize nonlinear or 3D training.")
+        for forbidden_key in ("result", "source_commit", "failed_checks"):
+            if forbidden_key in g1s:
+                raise ProtocolError("Unrun G1s cannot contain post-result fields.")
+    else:
+        _require_keys(
+            g1s,
+            ["result", "source_commit", "failed_checks"],
+            "completed G1s",
+        )
+        if g1s["result"] != "results/controlled_pde_g1s_20260803.json":
+            raise ProtocolError("Completed G1s must point to its public aggregate.")
+        if len(g1s["source_commit"]) != 40:
+            raise ProtocolError("Completed G1s must retain its exact source commit.")
+        if g1s["status"] == "completed_failed":
+            if not g1s["failed_checks"]:
+                raise ProtocolError("Failed G1s must retain its failed checks.")
+            if g1s["nonlinear_or_3d_confirmatory_training_authorized"] is not False:
+                raise ProtocolError("Failed G1s cannot authorize complex confirmation.")
+        else:
+            if g1s["failed_checks"]:
+                raise ProtocolError("Passed G1s cannot retain failed checks.")
+            if g1s["nonlinear_or_3d_confirmatory_training_authorized"] is not True:
+                raise ProtocolError("A completed G1s pass must authorize the next domain.")
+    checks.append("prospective G1 re-entry non-inflation and data-adequacy contract")
 
     evaluation = protocol["evaluation"]
     _require_keys(

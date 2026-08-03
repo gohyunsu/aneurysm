@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: exact G1/G1r failed · G1b/D0b complete · Aneumo scaling audit velocity-only positive · density attribution next
+상태: exact G1/G1r failed · DA1/DA2 complete · G1s data-adequacy sanity preregistered · Aneumo velocity-only eligible
 
 ## 1. 현재 판정
 
@@ -267,6 +267,22 @@ seed-robust한 estimator 개선이 아니다. Grouped unbiased moment는 평균
 3,072×8 data budget만 사전에 고정해 data adequacy를 검증한다. 이 pass가
 성립해도 data quantity는 contribution이 아니며, 그 뒤 nonlinear/3D에서
 핵심 mechanism의 독립적 이득을 입증해야 한다.
+
+이 후속 sanity는 `G1s`다. `configs/controlled_pde_g1s.json`은 실행 전에
+다음을 동결한다.
+
+- G1/G1r/DA1/DA2와 겹치지 않는 5개 새 seed
+- 기존 empirical NLL density estimator와 3,072×8 training budget
+- G1r과 동일한 model family, optimizer, validation-only checkpoint,
+  mask, analytic/quadrature/projective estimator와 모든 threshold
+- G1r과 동일한 192 validation/192 fresh-test geometry
+- 5개 seed 중 최악값 판정 및 G1/G1r non-relabeling
+
+따라서 seed와 training geometry 수 외에는 G1r의 pipeline을 바꾸지 않는다.
+G1s pass는 nonlinear regular-grid 실험을 시작할 최소 pipeline
+권한만 주며, data scaling이나 exact toy 성능을 contribution으로 만들지
+않는다. G1s가 실패하면 architecture를 더 화려하게 만들거나 3D로 우회하지
+않고 exact-domain density estimation을 다시 중단·재검토한다.
 
 ### G2 · paired response
 

@@ -59,7 +59,8 @@
       "benchanxplore_d0b_status": "completed_train_only_pod_representation_eligible",
       "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
       "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains",
-      "controlled_pde_g1r_status": "completed_failed"
+      "controlled_pde_g1r_status": "completed_failed",
+      "controlled_pde_g1s_status": "preregistered_before_fresh_test"
     },
     "contribution_priority": {
       "primary": [
@@ -355,6 +356,37 @@
       ],
       "worst_seed_density_only_standardized_mean_error": 0.07532723248004913,
       "worst_seed_end_to_end_quadrature_mean_error": 0.07517702877521515,
+      "nonlinear_or_3d_confirmatory_training_authorized": false
+    },
+    {
+      "id": "G1s",
+      "status": "preregistered_before_fresh_test",
+      "source_gate": "G1r",
+      "source_diagnostic": "DA2",
+      "may_relabel_g1_or_g1r": false,
+      "may_claim_data_quantity_as_method_contribution": false,
+      "config": "configs/controlled_pde_g1s.json",
+      "fresh_test_seeds": 5,
+      "test_access_during_selection": false,
+      "density_estimator": "empirical_nll",
+      "train_geometries": 3072,
+      "validation_geometries": 192,
+      "conditions_per_geometry": 8,
+      "test_geometries": 192,
+      "changes_from_g1r": [
+        "five_entirely_fresh_simulation_family_seeds",
+        "training_geometries_increased_from_768_to_3072"
+      ],
+      "pass_interpretation": "data_adequacy_sanity_not_method_novelty_or_baseline_superiority",
+      "success_thresholds": {
+        "maximum_density_only_standardized_mean_error": 0.05,
+        "maximum_density_only_coverage_error": 0.03,
+        "maximum_end_to_end_quadrature_mean_error": 0.05,
+        "maximum_end_to_end_sampled_coverage_error": 0.03,
+        "maximum_full_bc_operator_error": 0.03,
+        "maximum_projective_excess_ci95_upper": 0.01,
+        "maximum_analytic_nested_moment_residual": 0.000001
+      },
       "nonlinear_or_3d_confirmatory_training_authorized": false
     }
   ],
