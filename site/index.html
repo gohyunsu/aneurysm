@@ -371,6 +371,32 @@
         </div>
       </article>
 
+      <article class="g1-result">
+        <div class="g1-result-head">
+          <p class="eyebrow">ANEUMO RESPONSE ELIGIBILITY · TRAIN ONLY</p>
+          <span>channel-scoped evidence; not learned G2</span>
+        </div>
+        <div class="g1-result-metrics">
+          <div><span>Velocity residual</span><b>21.12%</b><small>CI95 20.01–22.43% · eligible</small></div>
+          <i>≠</i>
+          <div><span>Pressure residual</span><b>13.69%</b><small>CI95 11.90–14.96% · fail</small></div>
+          <div class="delta negative"><span>3D training</span><b>Blocked</b><small>failed G1/G1r</small></div>
+        </div>
+        <div class="g1-result-decision">
+          <strong>미래 irregular-3D 검증은 velocity response로만 좁힌다.</strong>
+          <p>
+            같은 case의 anchor field와 train-tuned global power까지 허용한
+            강한 scaling oracle 뒤에도 velocity 변화는 남았지만 pressure는
+            고정 기준을 넘지 못했다. 이는 response의 비자명성만 확인한
+            train-family 결과다. 새 exact sanity를 통과하기 전에는 learned
+            model 성능이나 G2 evidence로 해석하지 않는다.
+          </p>
+          <a href="../results/aneumo_scaling_audit_20260803.json">Scaling audit aggregate ↗</a>
+          <a href="../configs/aneumo_scaling_audit_v1.json">Frozen audit contract ↗</a>
+          <a href="learn.html#evidence">데이터와 해석을 자세히 읽기 →</a>
+        </div>
+      </article>
+
       <div class="experiment-grid">
         <article class="experiment-card large">
           <div>

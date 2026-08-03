@@ -31,6 +31,27 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "AneuX"):
             validate_protocol(candidate)
 
+    def test_aneumo_must_split_by_base_family(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        aneumo = next(item for item in candidate["datasets"] if item["name"] == "aneumo")
+        aneumo["split_unit"] = "generator_seed_geometry"
+        with self.assertRaisesRegex(ProtocolError, "base family"):
+            validate_protocol(candidate)
+
+    def test_aneumo_pressure_cannot_return_after_scaling_audit(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        output = candidate["model"]["irregular_3d_output_contract"]
+        output["aneumo_current_candidate_channels"].append("pressure")
+        with self.assertRaisesRegex(ProtocolError, "velocity-only"):
+            validate_protocol(candidate)
+
+    def test_aneumo_learning_remains_blocked_by_exact_sanity(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        output = candidate["model"]["irregular_3d_output_contract"]
+        output["activation_condition"] = "run_immediately"
+        with self.assertRaisesRegex(ProtocolError, "exact sanity"):
+            validate_protocol(candidate)
+
     def test_patient_bootstrap_is_required(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["evaluation"]["clinical_bootstrap_unit"] = "aneurysm"

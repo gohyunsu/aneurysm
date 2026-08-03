@@ -48,3 +48,17 @@ quadrature mean 0.07518이 사전 기준 0.05를 넘었다. 상대 baseline 개�
 D0b 통과는 learned one-shot 성능이나 novelty를 뜻하지 않는다. 같은
 105-case benchmark의 후속 learned 비교는 exploratory이며 fresh transient
 confirmation이 필요하다.
+
+현재 Aneumo response-eligibility 결과:
+
+- `aneumo_scaling_audit_20260803.json`: 20 train base family·40 case만 읽은
+  사전등록 strong physical-scaling audit
+- velocity: tuned \(Q^{1.075}\) residual 0.2112,
+  family-bootstrap CI95 [0.2001, 0.2243] · channel eligibility 통과
+- pressure: gauge-removed tuned \(Q^{1.75}\) residual 0.1369,
+  CI95 [0.1190, 0.1496] · eligibility 실패
+
+이는 같은-case anchor field까지 사용하는 강한 물리 baseline 뒤에도
+velocity response가 남는다는 train-only 결과다. Learned model 성능이나
+G2 통과가 아니며, failed G1/G1r 때문에 3D confirmatory training은
+허용되지 않는다.

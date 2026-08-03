@@ -31,6 +31,7 @@ ALLOWED_SPLIT_UNITS = {
     "geometry",
     "generator_seed_geometry",
     "simulation_family",
+    "aneux_base_family",
 }
 REQUIRED_GATES = {"G0", "G1", "G2", "G3", "G4"}
 REQUIRED_DATASETS = {
@@ -164,10 +165,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             )
     cmha = next(item for item in datasets if item["name"] == "cmha")
     aneux = next(item for item in datasets if item["name"] == "aneux")
+    aneumo = next(item for item in datasets if item["name"] == "aneumo")
     if cmha["field_provenance"] != "real_cfd":
         raise ProtocolError("CMHA is the declared real-CFD bridge in protocol v1.")
     if aneux["field_provenance"] != "none":
         raise ProtocolError("AneuX must not be declared as real-CFD data.")
+    if aneumo["split_unit"] != "aneux_base_family":
+        raise ProtocolError(
+            "Aneumo split must keep both deformations of an AneuX base family "
+            "in one fold."
+        )
+    if aneumo.get("pressure_head_status") != (
+        "excluded_after_train_only_scaling_audit"
+    ):
+        raise ProtocolError(
+            "Aneumo pressure must remain excluded after the scaling audit."
+        )
     checks.append("dataset provenance and split units")
 
     model = protocol["model"]
@@ -179,7 +192,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ]
     _require_keys(
         model,
-        [*numeric_model_keys, "observation_modes", "temporal_representation"],
+        [
+            *numeric_model_keys,
+            "observation_modes",
+            "temporal_representation",
+            "irregular_3d_output_contract",
+        ],
         "model",
     )
     for key in numeric_model_keys:
@@ -215,6 +233,33 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("D0b must compare the frozen equal budgets 17 and 25.")
     if temporal["leakage_rule"] != "pod_fit_on_training_geometries_only":
         raise ProtocolError("Temporal POD must be fit on training geometries only.")
+    irregular_3d = model["irregular_3d_output_contract"]
+    _require_keys(
+        irregular_3d,
+        [
+            "aneumo_current_candidate_channels",
+            "excluded_headline_channels",
+            "mandatory_baseline",
+            "activation_condition",
+        ],
+        "model.irregular_3d_output_contract",
+    )
+    if irregular_3d["aneumo_current_candidate_channels"] != ["velocity"]:
+        raise ProtocolError(
+            "The Aneumo candidate must remain velocity-only after the scaling audit."
+        )
+    if "pressure" not in irregular_3d["excluded_headline_channels"]:
+        raise ProtocolError("Aneumo pressure must not return as a headline output.")
+    if irregular_3d["mandatory_baseline"] != (
+        "same_case_anchor_train_tuned_global_power"
+    ):
+        raise ProtocolError("The strong Aneumo physical-scaling baseline is mandatory.")
+    if irregular_3d["activation_condition"] != (
+        "new_exact_coherence_sanity_passes_before_any_learned_g2_run"
+    ):
+        raise ProtocolError(
+            "Aneumo learning must remain blocked until a new exact sanity passes."
+        )
     checks.append("model dimensional contract")
 
     loss = protocol["loss"]

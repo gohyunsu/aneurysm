@@ -25,6 +25,14 @@
   G1/G1r 실패가 남아 있으므로 3D confirmatory 학습은 아직 허용하지 않고
   density attribution을 먼저 완료한다.
 
+### Contract and site
+
+- `configs/aurora_v1.json`의 asset snapshot, dataset split unit과
+  irregular-3D 출력 계약을 32 base-family cache 및 velocity-only 판정에
+  맞췄다.
+- `docs/model-spec.md`, aggregate-result index와 첫 화면에 pressure head
+  제외, mandatory scaling oracle, learned G2 blocking 조건을 명시했다.
+
 ## 2026-08-03 · Aneumo cache integrity and physical-scaling preregistration
 
 ### Data

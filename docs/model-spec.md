@@ -251,6 +251,27 @@ counterpart끼리 비교한다.
 이는 관측 연구의 causal effect가 아니다. 데이터 생성 simulator 안에서
 BC를 바꾼 **paired simulator response**로만 해석한다.
 
+### 7.1 Aneumo의 현재 출력 계약
+
+Train-family만 사용한 사전등록 physical-scaling audit에서, 같은 case의
+anchor field와 train-tuned global power를 함께 허용한 뒤에도 velocity
+response residual은 0.2112, family-bootstrap CI95
+\([0.2001, 0.2243]\)가 남았다. 반면 gauge를 제거한 pressure residual은
+0.1369 \([0.1190, 0.1496]\)로 eligibility 기준 0.15를 통과하지 못했다.
+
+따라서 향후 exact sanity를 새로 통과해 irregular-3D 실험이 허용되더라도
+Aneumo의 학습·평가 대상은 **velocity response만**이다.
+
+- Pressure head와 pressure/full-field novelty 문구는 headline에서 제외한다.
+- 같은-case anchor + train-tuned global power를 반드시 강한 baseline으로
+  유지한다.
+- 학습 모델은 절대 velocity field뿐 아니라 anchor 대비
+  \(\Delta u\)를 개선해야 한다.
+- 이 audit은 train-only nontriviality screen이다. Learned accuracy,
+  validation/test generalization, G2 통과를 뜻하지 않는다.
+- 현재 G1/G1r이 실패했으므로 velocity-only 3D training도 아직 실행하지
+  않는다.
+
 ## 8. Module E — uncertainty decomposition
 
 Ensemble member \(e\), BC completion \(k\)의 prediction을
@@ -341,7 +362,8 @@ inference sample 수를 맞춘다.
 
 1. Exact controlled PDE에서 analytic BC conditioning과 metric 검증
 2. MLP/FNO backbone으로 nonlinear regular-grid paired-condition pilot
-3. Same geometry multi-BC 자산에서 pair sampler와 response loss
+3. 새 exact sanity를 통과한 경우에만 Aneumo velocity-only pair sampler와
+   response loss; pressure head는 새 사전등록 근거 전까지 제외
 4. GNN+latent-token irregular 3D operator
 5. D0b와 learned compute-matched 비교를 모두 통과할 때만 선택된
    one-shot transient decoder

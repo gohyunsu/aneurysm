@@ -41,9 +41,16 @@
       ]
     },
     "asset_audit": {
-      "aneumo_local_scope": "zip64_range_audited_32_base_family_pilot_registered_staging_pending",
+      "aneumo_local_scope": "selective_cache_verified_train_only_scaling_audit_completed_velocity_only",
       "aneumo_full_g2_ready": false,
       "aneumo_pilot_config": "configs/aneumo_g2_pilot_v1.json",
+      "aneumo_cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+      "aneumo_scaling_audit_config": "configs/aneumo_scaling_audit_v1.json",
+      "aneumo_scaling_audit_result": "results/aneumo_scaling_audit_20260803.json",
+      "aneumo_scaling_audit_source_commit": "e12ff0ad9688857a7c287d64595341e8a753a8fa",
+      "aneumo_velocity_response_eligible": true,
+      "aneumo_pressure_response_eligible": false,
+      "aneumo_confirmatory_3d_training_authorized": false,
       "aneug_flow_bc_variation": false,
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,
@@ -52,7 +59,7 @@
       "benchanxplore_d0b_status": "completed_train_only_pod_representation_eligible",
       "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
       "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains",
-      "controlled_pde_g1r_status": "prospectively_registered_fresh_test_unrun"
+      "controlled_pde_g1r_status": "completed_failed"
     },
     "contribution_priority": {
       "primary": [
@@ -84,9 +91,11 @@
     },
     {
       "name": "aneumo",
-      "role": "paired_bc_steady_irregular_3d",
+      "role": "velocity_only_paired_bc_response_eligibility_for_future_irregular_3d",
       "field_provenance": "synthetic_cfd",
-      "split_unit": "generator_seed_geometry"
+      "split_unit": "aneux_base_family",
+      "pressure_head_status": "excluded_after_train_only_scaling_audit",
+      "learned_g2_status": "blocked_by_failed_exact_coherence_gate"
     },
     {
       "name": "aneug_flow",
@@ -148,6 +157,16 @@
       ],
       "selection_metric": "bulge_relative_l2",
       "leakage_rule": "pod_fit_on_training_geometries_only"
+    },
+    "irregular_3d_output_contract": {
+      "aneumo_current_candidate_channels": [
+        "velocity"
+      ],
+      "excluded_headline_channels": [
+        "pressure"
+      ],
+      "mandatory_baseline": "same_case_anchor_train_tuned_global_power",
+      "activation_condition": "new_exact_coherence_sanity_passes_before_any_learned_g2_run"
     }
   },
   "loss": {
