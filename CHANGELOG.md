@@ -4,6 +4,30 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Aneumo cache integrity and physical-scaling preregistration
+
+### Data
+
+- 전체 multi-terabyte release를 복제하지 않고, 사전등록한 64 case의
+  512 internal member만 selective ZIP64 range-read했다.
+- Compact HDF5는 32 base family, 64 case, case당 8 condition과 4,096
+  node를 포함한다. Family-disjoint split은 train/validation/test
+  20/6/6 family, 40/12/12 case이며 모든 field와 coordinate가 finite다.
+- Cache SHA-256은
+  `9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9`다.
+  CC BY-NC-ND 원시·compact field는 공개 저장소에 재배포하지 않는다.
+
+### Experiment
+
+- Learned G2보다 먼저 train-family field만 읽는 물리 스케일링 감사를
+  등록했다. Validation/test field access는 코드에서 금지한다.
+- Same-case anchor oracle에 analytic \(v\propto Q,\ p\propto Q^2\)와
+  train-tuned global power law를 적용하고, pressure는 spatial gauge
+  offset을 제거한다.
+- Base-family bootstrap CI95 lower가 paired-response norm의 0.15 이상
+  남는 채널만 learned response의 근거로 허용한다. 두 채널 모두 실패하면
+  Aneumo G2 학습을 중단하며 threshold는 결과 뒤에 조정하지 않는다.
+
 ## 2026-08-03 · Prospective G1r negative result
 
 ### Experiment

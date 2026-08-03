@@ -87,9 +87,12 @@ risk alignment는 논문의 primary contribution에서 제외했습니다.
 감사했습니다. 첫 shard에서 geometry당 8개 steady mass-flow condition과
 실제 internal NPY의 좌표·압력·속도·CRC contract를 확인했고, 32개 AneuX
 base family × 2 deformation의 family-disjoint selective pilot을 결과 확인
-전에 등록했습니다. Compact cache는 dataset license에 따라 공개
-재배포하지 않습니다. BenchAnXplore 105-case HDF5/XDMF archive는 무결성을
-확인해 결과 확인 전에 D0를 등록하고 실행했습니다.
+전에 등록했습니다. 이후 512 member를 selective range-read해 64 case,
+case당 8 condition과 4,096 node의 compact cache를 완성했고, 40/12/12
+case family-disjoint split과 finite field를 검증했습니다. Compact cache는
+dataset license에 따라 공개 재배포하지 않습니다. BenchAnXplore 105-case
+HDF5/XDMF archive는 무결성을 확인해 결과 확인 전에 D0를 등록하고
+실행했습니다.
 Fixed Fourier는 실패했으며, 후속 D0b도 표현 가능성만 판단할 뿐 모델 성능
 또는 novelty로 해석하지 않습니다. Main method는 exact controlled PDE →
 nonlinear PDE → paired-BC irregular 3D 순서로 검증합니다.

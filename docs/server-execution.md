@@ -23,7 +23,7 @@ writable로 둔다.
 
 | 데이터 | 확인된 상태 | 다음 G0 작업 |
 |---|---|---|
-| Aneumo | 코드와 geometry 1개 × steady BC 2개 sample | 전체 multi-BC release 확보와 checksum |
+| Aneumo | 32 family/64 case selective cache, case당 steady BC 8개, checksum 검증 | train-only physical-scaling audit; learned G2 보류 |
 | AneuG-Flow | geometry archive | CFD field release subset 확보 |
 | BenchAnXplore | archive와 105-case × 80-step HDF5/XDMF | unit·boundary semantics; D0 audit |
 | CMHA | archive, statistical table, patient 추출본 | 공식 case map, field/summary provenance |
@@ -116,6 +116,26 @@ Exact commit `951ace1`의 full G1r은 A6000에서 정상 완료됐지만 gate는
 architecture 선택에 재사용하지 않으며, 다음 GPU job은 별도의 post-result
 density attribution만 허용한다. Aneumo 학습과 nonlinear/3D confirmatory
 job은 새 exact sanity 근거 전까지 제출하지 않는다.
+
+## Aneumo selective-cache contract
+
+사전등록한 32 AneuX base family × 2 deformation의 selective range staging은
+완료됐다. 전체 release를 복제하지 않고 필요한 512 internal member만 읽어
+64 case × 8 mass-flow condition × 4,096 node의 compact HDF5를 만들었다.
+Train/validation/test는 20/6/6 base family와 40/12/12 case이며, 모든
+coordinate와 pressure/velocity field가 finite이고 condition 간 coordinate
+contract가 일치한다. Cache SHA-256은
+`9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9`다.
+License의 CC BY-NC-ND 제약 때문에 raw/compact field와 derived rendering은
+공개 저장소에 넣지 않는다.
+
+이 무결성 통과는 learned response의 필요성을 뜻하지 않는다. 먼저
+`configs/aneumo_scaling_audit_v1.json`에 사전등록한 CPU audit이 train
+family field만 읽고, same-case anchor를 가진 analytic 및 train-tuned
+power-law scaling이 설명하지 못한 paired response를 측정한다.
+Validation/test field access는 금지하고, 결과는 base-family bootstrap
+aggregate만 저장한다. 두 채널 모두 고정된 0.15 lower-bound 기준을
+실패하면 Aneumo G2 학습은 중단한다.
 
 template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
 `AURORA_DATA_ROOT`, `AURORA_OUTPUT_ROOT`, `AURORA_SIF`를 제출 시 주입한다.

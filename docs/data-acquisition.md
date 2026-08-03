@@ -90,6 +90,22 @@ merely the synthetic-geometry level. The staging code reads ZIP64 central
 directories and required members with HTTP Range, verifies every CRC32, checks
 that all eight conditions share coordinates, and writes one compact HDF5 cache.
 
+The preregistered staging completed on 2026-08-03: 512 members formed 64 cases
+from 32 base families, with 40/12/12 train/validation/test cases and
+20/6/6 disjoint families. Every coordinate and field tensor was finite and had
+the expected `(8, 4096, 4)` field shape. The compact-cache SHA-256 is
+`9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9`.
+Neither the cache nor derived field renderings are redistributed.
+
 The pilot supports steady same-geometry mass-flow response only. One scalar mass
 flow has no nontrivial partial-component mask lattice, so the pilot cannot
 support the full partial-BC coherence claim.
+
+Before any learned G2 fit, `configs/aneumo_scaling_audit_v1.json` permits reads
+from the 20 train base families only. It gives a physical baseline the same-case
+anchor field, removes pressure gauge offsets, and tests both analytic
+\(v\propto Q,\ p\propto Q^2\) scaling and a stronger train-tuned global power
+law. A channel is eligible only when the base-family-bootstrap lower confidence
+bound leaves at least 15% of paired-response norm unexplained. Full
+pressure--velocity learning requires both channels; if neither passes, Aneumo
+is retained only as ingestion/runtime evidence rather than a novelty result.

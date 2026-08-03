@@ -256,10 +256,16 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와
-  `(N,7)=xyz+pressure+velocity` contract를 실제 검증했다. 32개 AneuX
-  base family × 2 deformation selective pilot만 사전 등록했으며,
-  synthetic case가 아니라 base family 단위로 split한다. Raw/compact
-  field는 CC BY-NC-ND 조건에 따라 공개 저장소에 재배포하지 않는다.
+  `(N,7)=xyz+pressure+velocity` contract를 실제 검증했다. 이후 32개
+  AneuX base family × 2 deformation, 8 condition, 4,096 node의 selective
+  pilot staging을 완료했다. 64 case와 512 member가 모두 검증됐고
+  family-disjoint split은 20/6/6 family와 40/12/12 case다. Compact-cache
+  SHA-256은
+  `9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9`다.
+  Raw/compact field는 CC BY-NC-ND 조건에 따라 공개 저장소에 재배포하지
+  않는다. Learned G2 전에 train-family field만 읽는 same-case-anchor
+  physical-scaling audit을 실행하며 validation/test field read는 금지한다.
+  두 채널 모두 비자명성 기준을 실패하면 Aneumo response 학습을 중단한다.
 - BenchAnXplore coarse archive는 105 geometry × 80 timestep,
   velocity/wall-mask HDF5와 XDMF 210개로 확인했다. archive checksum과
   외부 `h5py==3.12.1` dependency layer를 run provenance에 고정한다.

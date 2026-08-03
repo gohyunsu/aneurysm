@@ -97,8 +97,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "ID partial/missing에서는 calibration을, supplied full-BC support shift에서는 field와 같은-형상 ΔH를, hidden-law shift에서는 detection/abstention을 각각 검증한다.",
-      state: "64-case Aneumo pilot registered · training blocked by G1r",
+      copy: "64-case cache는 검증됐지만, 먼저 train family만 사용해 same-case anchor physical scaling이 남기지 못한 response가 있는지 판정한다.",
+      state: "Cache verified · scaling audit preregistered · learning blocked",
       blocking: true
     },
     {
@@ -120,7 +120,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "32 base family × 2 deformation registered · range staging pending"
+      provenance: "32 base family × 2 deformation staged · 64 cases/512 members verified"
     },
     {
       name: "AneuG-Flow",
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "data",
+      title: "Aneumo selective cache is integrity-complete before learning",
+      copy: "사전등록한 32 base family × 2 deformation의 512 member만 range-read해 64 case × 8 condition × 4,096 node cache를 완성했다. Split 20/6/6 family와 40/12/12 case, finite field, coordinate contract와 cache SHA-256을 검증했다. Learned G2 전에 train-only same-case-anchor physical-scaling audit을 고정했으며 raw/compact field는 재배포하지 않는다.",
+      files: ["configs/aneumo_g2_pilot_v1.json", "configs/aneumo_scaling_audit_v1.json", "src/aurora/aneumo_scaling_audit.py", "docs/data-acquisition.md"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",
@@ -246,7 +253,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.03",
       category: "experiment",
       title: "BenchAnXplore one-shot representation gate preregistered",
-      copy: "105 geometry × 80 timestep archive를 검증하고, 모델 학습 전 Fourier 4/8/12-mode oracle loss로 one-shot 표현 가능성을 판정하는 D0와 K=8 threshold를 고정했다. Aneumo는 현재 1 geometry × 2 BC sample뿐이라 full G2를 blocked로 유지한다.",
+      copy: "105 geometry × 80 timestep archive를 검증하고, 모델 학습 전 Fourier 4/8/12-mode oracle loss로 one-shot 표현 가능성을 판정하는 D0와 K=8 threshold를 고정했다. 당시 Aneumo는 1 geometry × 2 BC sample뿐이어서 full G2를 blocked로 유지했다. 이후 selective 64-case cache를 별도 검증했지만 learned G2는 여전히 physical-scaling audit과 exact sanity에 의해 blocked다.",
       files: ["configs/benchanxplore_d0.json", "src/aurora/benchanxplore.py", "cluster/ssu_a6gpu_benchanxplore_d0.pbs"]
     },
     {

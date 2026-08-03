@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: exact G1/G1r failed · G1b/D0b complete · density attribution next · Aneumo staging held
+상태: exact G1/G1r failed · G1b/D0b complete · Aneumo cache verified · train-only scaling audit next
 
 ## 1. 현재 판정
 
@@ -278,11 +278,14 @@ method가 strong baseline을 일관되게 개선해야 한다.
 
 6. **paired-BC pilot의 family diversity와 license**
 
-   Aneumo ZIP64 audit로 8 steady mass-flow 조건은 확인됐지만 synthetic
-   deformation끼리 base AneuX anatomy를 공유한다. Split은 synthetic case가
-   아니라 base family에서 끊는다. 현재 32 family × 2 deformation pilot은
-   C2의 방향성만 평가하며 full-release 또는 임상 일반화를 주장하지 않는다.
-   CC BY-NC-ND 원시·compact field는 공개 저장소에 재배포하지 않는다.
+   Aneumo ZIP64 selective cache에서 64 case × 8 steady mass-flow 조건을
+   검증했지만 synthetic deformation끼리 base AneuX anatomy를 공유한다.
+   Split은 synthetic case가 아니라 base family에서 끊었다. 현재 32
+   family × 2 deformation pilot은 C2의 방향성만 평가하며 full-release
+   또는 임상 일반화를 주장하지 않는다. CC BY-NC-ND 원시·compact field와
+   derived rendering은 공개 저장소에 재배포하지 않는다. Learned G2 전에
+   same-case anchor를 가진 analytic/train-tuned power scaling이 남기지
+   못한 response가 있는지 train family에서만 감사한다.
 
 ## 9. 논문 포지셔닝
 
@@ -301,9 +304,11 @@ Conditions**
 6. exact → nonlinear → irregular 3D → transient 실험
 7. failure cases와 의료 해석 경계
 
-AAAI-27 main author kit은 2026-08-03 현재 공식 게시가 확인되지 않았다.
-원고는 AAAI-26의 7-page two-column 구조를 임시 기준으로 관리하고,
-AAAI-27 kit이 공개되면 style만 교체한다.
+AAAI-27 공식 author kit의 `aaai2027` style과 reproducibility checklist를
+사용한다. 본문은 최대 7페이지이고 이후 최대 2페이지는 references만
+허용된다. 2026-08-03 기준 abstract/full-paper/supplement 마감은 이미
+지났으므로, 유효한 기존 submission이 없다면 이 원고를 새 AAAI-27
+submission이라고 표현하지 않고 다음 cycle 또는 다른 venue용으로 준비한다.
 
 ## 10. 실행 우선순위
 
@@ -314,8 +319,9 @@ AAAI-27 kit이 공개되면 style만 교체한다.
    **(완료 · 실패)**
 4. Density representation/optimization/data-sufficiency attribution을
    test-free diagnostic으로 실행 **(현재 우선순위)**
-5. 등록된 Aneumo base-family-disjoint selective cache는 read-only
-   staging까지만 진행하고 학습은 G1 재진입 근거 뒤로 보류
+5. 완료·검증된 Aneumo base-family-disjoint selective cache에서 train-only
+   physical-scaling audit을 실행하고, learned response의 비자명성을 먼저
+   판정 **(현재 우선순위 · 학습은 보류)**
 6. 새 prospective exact sanity와 G2가 양수일 때만 irregular 3D backbone과
    transient 학습
 7. CMHA status branch는 공식 case map과 positive real-CFD increment가

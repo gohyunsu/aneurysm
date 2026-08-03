@@ -1,0 +1,66 @@
+{
+  "schema_version": "aurora.aneumo_scaling_audit.v1",
+  "experiment_id": "aneumo_train_family_physical_scaling_audit_v1",
+  "status": "preregistered_before_train_field_audit",
+  "as_of": "2026-08-03",
+  "source": {
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "cache_sha256_from_completed_integrity_stage": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+    "allowed_split": "train",
+    "forbid_validation_and_test_field_reads": true,
+    "expected_base_families": 20,
+    "expected_cases": 40,
+    "expected_conditions": 8
+  },
+  "anchor_mass_flow_kg_s": 0.0025,
+  "channels": {
+    "velocity": {
+      "columns": [1, 2, 3],
+      "analytic_power": 1.0,
+      "remove_spatial_mean": false
+    },
+    "pressure": {
+      "columns": [0],
+      "analytic_power": 2.0,
+      "remove_spatial_mean": true,
+      "reason": "Pressure gauge offsets are not a hemodynamic response."
+    }
+  },
+  "strong_oracle_baseline": {
+    "uses_same_case_anchor_field": true,
+    "interpretation": "This is deliberately stronger than an inference-time geometry-only baseline. If it explains the response, Aneumo does not provide nontrivial C2 evidence.",
+    "global_power_search": {
+      "velocity": {
+        "minimum": 0.25,
+        "maximum": 2.5,
+        "step": 0.025
+      },
+      "pressure": {
+        "minimum": 0.5,
+        "maximum": 3.5,
+        "step": 0.025
+      },
+      "selection_data": "train_base_families_only",
+      "objective": "minimum_median_base_family_relative_response_residual"
+    }
+  },
+  "metrics": {
+    "primary": "relative_response_residual",
+    "definition": "norm(true_delta - power_law_delta) / norm(true_delta)",
+    "case_condition_aggregation": "median_within_base_family",
+    "population_aggregation": "median_across_base_families",
+    "bootstrap_unit": "aneux_base_family",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260803,
+    "confidence": 0.95
+  },
+  "eligibility_gate": {
+    "minimum_tuned_power_residual_ci95_lower": 0.15,
+    "full_pressure_velocity_learning_requires_both_channels": true,
+    "single_channel_learning_requires_that_channel": true,
+    "if_neither_channel_passes": "stop_aneumo_g2_as_novelty_evidence",
+    "if_only_one_channel_passes": "restrict_claim_and_learning_target_to_that_channel"
+  },
+  "interpretation": "A pass only establishes that a global physical power law, even with an oracle same-case anchor field, leaves material train-family response structure. It is not a learned-model result and does not inspect validation or test fields."
+}
