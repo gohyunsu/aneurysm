@@ -225,6 +225,18 @@ development candidate는 다음처럼 제한한다.
 후 단일 estimator를 고정하고 별도 fresh exact sanity를 통과해야 한다.
 Non-Gaussian evidence 없이 conditional flow를 추가하지 않는다.
 
+Executable DA2 contract는
+`configs/controlled_pde_density_development.json`이다. 기존 empirical NLL,
+unbiased grouped moments, covariance shrinkage 0.25/0.50을 동일한
+5-output Gaussian density network와 optimizer budget에서 비교한다. 모든
+checkpoint는 sampled validation NLL로 선택하며 768×8과 3,072×8 두
+training cell에서 평가한다. Estimator 선택은 기존 G1r과 동일한 768×8에서
+수행하고 3,072×8은 data-sufficiency control로만 사용해 방법 변경과
+4배 geometry 증가를 혼동하지 않는다. Pairwise-difference U-statistic은 unbiased
+sample covariance와 동일한 통계량이므로 그 자체를 novelty로 부르지 않는다.
+DA2의 최선 estimator도 별도 fresh-seed exact gate 전에는 method로
+확정하거나 nonlinear/3D 학습을 허용하지 않는다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

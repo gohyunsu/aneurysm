@@ -1,0 +1,112 @@
+{
+  "schema_version": "aurora.controlled_pde_density_development.v1",
+  "experiment_id": "controlled_pde_density_estimator_development_v1",
+  "status": "development_only_estimator_selection",
+  "source_diagnostic": "DA1",
+  "source_config": "controlled_pde_density_attribution.json",
+  "source_config_sha256": "87b5eed93481bf5a0a51cfc42467fe4d5d299f0f720e3ec53c8eb4ce1a943701",
+  "source_result": "../results/controlled_pde_density_attribution_20260803.json",
+  "source_result_sha256": "65b579f090b1f70770fd4da40614743167638f811d9f7611e45fa053b6b71187",
+  "may_relabel_g1_or_g1r": false,
+  "may_define_or_pass_a_gate": false,
+  "may_authorize_nonlinear_or_3d_training": false,
+  "seeds": [42080311, 42080312, 42080313],
+  "split_seed_offsets": {
+    "train": 0,
+    "validation": 100000,
+    "analysis": 300000
+  },
+  "grid_points": 64,
+  "hidden_dim": 128,
+  "validation": {
+    "geometries": 192,
+    "conditions_per_geometry": 8
+  },
+  "analysis": {
+    "geometries": 512,
+    "conditions_per_geometry": 16
+  },
+  "training": {
+    "maximum_epochs": 2500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.00001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "cells": [
+    {
+      "id": "g768_c8",
+      "train_geometries": 768,
+      "conditions_per_geometry": 8,
+      "role": "original_g1r_budget"
+    },
+    {
+      "id": "g3072_c8",
+      "train_geometries": 3072,
+      "conditions_per_geometry": 8,
+      "role": "data_sufficiency_control_not_primary_selection"
+    }
+  ],
+  "estimators": [
+    {
+      "id": "empirical_nll",
+      "train_objective": "empirical_nll",
+      "validation_objective": "empirical_nll",
+      "covariance_shrinkage": null
+    },
+    {
+      "id": "grouped_unbiased",
+      "train_objective": "grouped_moments",
+      "validation_objective": "empirical_nll",
+      "covariance_shrinkage": 0.0
+    },
+    {
+      "id": "grouped_shrinkage_025",
+      "train_objective": "grouped_moments",
+      "validation_objective": "empirical_nll",
+      "covariance_shrinkage": 0.25
+    },
+    {
+      "id": "grouped_shrinkage_050",
+      "train_objective": "grouped_moments",
+      "validation_objective": "empirical_nll",
+      "covariance_shrinkage": 0.5
+    }
+  ],
+  "grouped_objective": {
+    "mean_target": "geometry_sample_mean",
+    "covariance_target": "unbiased_within_geometry_pairwise_difference_u_statistic",
+    "shrinkage_target": "training_geometry_mean_within_covariance",
+    "mean_scale": "training_pooled_boundary_variance",
+    "covariance_loss_weight": 1.0
+  },
+  "observation_masks": {
+    "missing": [0, 0],
+    "left_observed": [1, 0],
+    "right_observed": [0, 1]
+  },
+  "primary_masks": ["missing", "left_observed", "right_observed"],
+  "selection_rule": {
+    "cell_id": "g768_c8",
+    "primary_metric": "maximum_density_only_standardized_mean_error",
+    "aggregate": "mean_across_development_seeds",
+    "direction": "minimize",
+    "tie_breaker": "analytic_population_excess_nll"
+  },
+  "reporting": {
+    "parameter_metrics": [
+      "mean_normalized_rmse",
+      "covariance_normalized_frobenius",
+      "correlation_mae"
+    ],
+    "distribution_metric": "analytic_population_excess_nll",
+    "solution_metric": "maximum_density_only_standardized_mean_error",
+    "aggregate_across_seeds": ["mean", "std", "min", "max"],
+    "success_thresholds": null
+  },
+  "interpretation": "Development-only estimator comparison after DA1. The estimator is selected at the original G1r 768x8 data budget so statistical engineering is not confounded with four-times more geometries; 3072x8 is a data-sufficiency control only. Grouped moment regression and covariance shrinkage are not novelty claims. The selected estimator must be frozen in a separately versioned exact-data protocol with entirely fresh seeds; no DA2 outcome can relabel G1/G1r or authorize nonlinear/3D confirmation."
+}

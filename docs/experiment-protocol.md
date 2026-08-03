@@ -236,6 +236,18 @@ analysis seed는 선택에 재사용하지 않고, 선택된 한 estimator만 �
 exact-sanity protocol에 들어간다. DA1 결과 자체는 G1/G1r 상태나
 nonlinear/3D 실행 권한을 바꾸지 않는다.
 
+DA2는 `configs/controlled_pde_density_development.json`에 결과 확인 전에
+고정한다. G1/G1r/DA1과 겹치지 않는 세 development seed에서
+empirical NLL, unbiased grouped moments, covariance shrinkage
+0.25/0.50을 768×8과 3,072×8에 교차 적용한다. Network, maximum epoch,
+optimizer와 sampled-validation checkpoint objective는 동일하다. 선택
+규칙은 원래 G1r budget인 768×8 cell의 seed-평균 maximum density-only
+error 최소화,
+동률이면 analytic population excess NLL 최소화다. 이는 estimator
+development rule이지 success threshold가 아니다. 3,072×8은 estimator
+선택에 쓰지 않는 data-sufficiency control이며, 결과와 무관하게 별도 fresh
+exact protocol이 필요하다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

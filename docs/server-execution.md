@@ -104,6 +104,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_benchanxplore_d0.pbs`
 - `cluster/ssu_a6gpu_controlled_g1r.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
+- `cluster/ssu_a6gpu_controlled_density_development.pbs`
 
 G1r template은 기존 G1 실패를 덮어쓰지 않는다. Public source commit과
 `configs/controlled_pde_g1r.json`을 read-only로 bind하고 새 output
@@ -127,6 +128,14 @@ Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은
 development-only grouped-moment estimator 비교다.
+
+DA2는 exact committed source를 read-only bind해 empirical NLL과 세 grouped
+moment/shrinkage 후보를 768×8/3,072×8에서 비교한다. 세 seed×여덟 task의
+24개 학습을 한 A6000 allocation에 직렬 배치해 scheduler overhead와 idle
+GPU를 줄인다. Run은 descriptive development selection을 기록할 수 있지만
+selection은 768×8에서만 수행하고 3,072×8은 data-sufficiency control이다.
+`new_gate_defined_or_passed=false`와
+`nonlinear_or_3d_training_authorized=false`를 항상 보존한다.
 
 ## Aneumo selective-cache contract
 

@@ -91,7 +91,7 @@ window.AURORA_DATA = Object.freeze({
       id: "G1",
       title: "Is condition–marginal coherence exact?",
       copy: "DA1에서 population-NLL은 최악 0.00495를 회복했지만 empirical NLL은 0.04401–0.04855였다. Capacity보다 finite condition information이 병목이다.",
-      state: "G1/G1r failed · DA1 attribution complete · new gate pending",
+      state: "G1/G1r failed · DA1 complete · DA2 development registered",
       blocking: true
     },
     {
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "DA2 freezes a sample-only estimator development comparison",
+      copy: "세 새 development seed에서 empirical NLL과 grouped unbiased/shrinkage 0.25/0.50을 동일 network·optimizer로 비교한다. 원래 G1r budget인 768×8에서 estimator를 선택하고 3,072×8은 data-sufficiency control로만 쓴다. 모든 checkpoint는 sampled validation NLL로 선택하며 DA2에는 threshold가 없다.",
+      files: ["configs/controlled_pde_density_development.json", "src/aurora/controlled_pde_density_development.py", "cluster/ssu_a6gpu_controlled_density_development.pbs", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "result",

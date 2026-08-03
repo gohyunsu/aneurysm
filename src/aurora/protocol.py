@@ -303,9 +303,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     diagnostics = protocol["post_result_diagnostics"]
     diagnostic_ids = _unique_ids(diagnostics, "id", "post_result_diagnostics")
-    if diagnostic_ids != {"G1b", "DA1", "D0b"}:
+    if diagnostic_ids != {"G1b", "DA1", "DA2", "D0b"}:
         raise ProtocolError(
-            "Schema v2 must retain G1b, DA1, and D0b diagnostics."
+            "Schema v2 must retain G1b, DA1, DA2, and D0b diagnostics."
         )
     g1b = next(item for item in diagnostics if item["id"] == "G1b")
     _require_keys(
@@ -387,6 +387,63 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             raise ProtocolError(
                 "Exploratory DA1 cannot authorize nonlinear or 3D confirmation."
             )
+    da2 = next(item for item in diagnostics if item["id"] == "DA2")
+    _require_keys(
+        da2,
+        [
+            "status",
+            "source_diagnostic",
+            "may_reopen_or_relabel_source_gate",
+            "may_define_or_pass_new_gate",
+            "may_authorize_nonlinear_or_3d_confirmatory_training",
+            "config",
+            "development_seeds",
+            "success_thresholds",
+            "estimators",
+            "data_cells",
+            "checkpoint_objective",
+            "estimator_selection_cell",
+            "higher_data_cell_role",
+            "fresh_exact_gate_required_after_selection",
+        ],
+        "DA2 density estimator development",
+    )
+    if da2["status"] not in {
+        "registered_development_only_unrun",
+        "completed_development_only",
+    }:
+        raise ProtocolError("DA2 must remain development-only.")
+    if da2["source_diagnostic"] != "DA1":
+        raise ProtocolError("DA2 must remain linked to DA1.")
+    if (
+        da2["may_reopen_or_relabel_source_gate"] is not False
+        or da2["may_define_or_pass_new_gate"] is not False
+        or da2["may_authorize_nonlinear_or_3d_confirmatory_training"] is not False
+    ):
+        raise ProtocolError(
+            "Development-only DA2 cannot pass a gate or authorize confirmation."
+        )
+    if da2["config"] != "configs/controlled_pde_density_development.json":
+        raise ProtocolError("DA2 must point to its executable development config.")
+    if da2["development_seeds"] != 3 or da2["success_thresholds"] is not None:
+        raise ProtocolError("DA2 requires three development seeds and no threshold.")
+    if da2["estimators"] != [
+        "empirical_nll",
+        "grouped_unbiased",
+        "grouped_shrinkage_025",
+        "grouped_shrinkage_050",
+    ]:
+        raise ProtocolError("DA2 estimator comparison changed.")
+    if da2["data_cells"] != ["768x8", "3072x8"]:
+        raise ProtocolError("DA2 data cells changed.")
+    if da2["checkpoint_objective"] != "sampled_validation_nll":
+        raise ProtocolError("DA2 must use sampled validation NLL checkpoints.")
+    if da2["estimator_selection_cell"] != "768x8_original_g1r_budget":
+        raise ProtocolError("DA2 must select estimators at the original G1r budget.")
+    if da2["higher_data_cell_role"] != "data_sufficiency_control_only":
+        raise ProtocolError("The DA2 high-data cell cannot select the estimator.")
+    if da2["fresh_exact_gate_required_after_selection"] is not True:
+        raise ProtocolError("DA2 selection must be followed by a fresh exact gate.")
     d0b = next(item for item in diagnostics if item["id"] == "D0b")
     _require_keys(
         d0b,

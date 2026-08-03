@@ -151,6 +151,15 @@ G1/G1r을 relabel하지 않습니다. 공개 aggregate는
 [`results/controlled_pde_density_attribution_20260803.json`](results/controlled_pde_density_attribution_20260803.json)에
 있습니다.
 
+후속 DA2는
+[`configs/controlled_pde_density_development.json`](configs/controlled_pde_density_development.json)에
+development-only로 등록했습니다. 세 새 seed에서 empirical NLL과 grouped
+unbiased/shrinkage estimator를 같은 network·optimizer로 비교하며,
+원래 G1r과 같은 768×8에서 후보를 선택합니다. 3,072×8은 데이터 증가
+효과만 보는 control입니다. 결과에는 pass threshold가 없고,
+선택된 estimator도 별도 fresh exact gate 전에는 nonlinear/3D 학습을
+허용하지 않습니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에

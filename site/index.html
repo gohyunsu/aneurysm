@@ -360,7 +360,10 @@
             DA1에서 population-NLL은 최악 0.495%를 회복했지만 empirical
             NLL은 4.40–4.86%였다. 따라서 capacity가 아니라 유한 condition
             정보와 결합 mean·covariance 추정이 주 병목이다. G1은
-            재개방하지 않는다. D0b의
+            재개방하지 않는다. DA2는 세 새 development seed에서 동일
+            network·sampled-validation 조건으로 empirical NLL과 grouped
+            moment/shrinkage를 비교하도록 등록했지만 새 gate는 아니다.
+            D0b의
             train-only POD는 표현 기준만 통과했으며 learned 비교와 fresh
             transient confirmation은 아직 남아 있다.
           </p>
@@ -370,6 +373,7 @@
           <a href="../configs/controlled_pde_g1r.json">G1r frozen config ↗</a>
           <a href="../results/controlled_pde_density_attribution_20260803.json">DA1 attribution result ↗</a>
           <a href="../configs/controlled_pde_density_attribution.json">DA1 frozen contract ↗</a>
+          <a href="../configs/controlled_pde_density_development.json">DA2 development contract ↗</a>
           <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
           <a href="../results/benchanxplore_d0b_20260803.json">D0b POD aggregate ↗</a>
         </div>

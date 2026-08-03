@@ -134,6 +134,39 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cannot authorize"):
             validate_protocol(candidate)
 
+    def test_density_development_cannot_pass_a_gate(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        da2 = next(
+            item
+            for item in candidate["post_result_diagnostics"]
+            if item["id"] == "DA2"
+        )
+        da2["may_define_or_pass_new_gate"] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot pass a gate"):
+            validate_protocol(candidate)
+
+    def test_density_development_requires_a_fresh_exact_gate(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        da2 = next(
+            item
+            for item in candidate["post_result_diagnostics"]
+            if item["id"] == "DA2"
+        )
+        da2["fresh_exact_gate_required_after_selection"] = False
+        with self.assertRaisesRegex(ProtocolError, "fresh exact gate"):
+            validate_protocol(candidate)
+
+    def test_density_development_selects_at_original_data_budget(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        da2 = next(
+            item
+            for item in candidate["post_result_diagnostics"]
+            if item["id"] == "DA2"
+        )
+        da2["estimator_selection_cell"] = "3072x8"
+        with self.assertRaisesRegex(ProtocolError, "original G1r budget"):
+            validate_protocol(candidate)
+
     def test_post_result_d0b_cannot_relabel_d0(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         d0b = next(

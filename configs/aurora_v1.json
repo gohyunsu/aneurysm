@@ -274,6 +274,31 @@
       "nonlinear_or_3d_confirmatory_training_authorized": false
     },
     {
+      "id": "DA2",
+      "status": "registered_development_only_unrun",
+      "source_diagnostic": "DA1",
+      "may_reopen_or_relabel_source_gate": false,
+      "may_define_or_pass_new_gate": false,
+      "may_authorize_nonlinear_or_3d_confirmatory_training": false,
+      "config": "configs/controlled_pde_density_development.json",
+      "development_seeds": 3,
+      "success_thresholds": null,
+      "estimators": [
+        "empirical_nll",
+        "grouped_unbiased",
+        "grouped_shrinkage_025",
+        "grouped_shrinkage_050"
+      ],
+      "data_cells": [
+        "768x8",
+        "3072x8"
+      ],
+      "checkpoint_objective": "sampled_validation_nll",
+      "estimator_selection_cell": "768x8_original_g1r_budget",
+      "higher_data_cell_role": "data_sufficiency_control_only",
+      "fresh_exact_gate_required_after_selection": true
+    },
+    {
       "id": "D0b",
       "status": "completed_train_only_pod_representation_eligible",
       "source_gate": "G3",

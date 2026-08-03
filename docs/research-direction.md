@@ -240,6 +240,18 @@ Estimator 선택은 DA1 analysis seed를 재사용하지 않는 development spli
 끝내고, 선택 뒤 별도 fresh exact-sanity protocol을 등록한다. 단순히
 Gaussian을 flow로 교체하거나 threshold를 완화하지 않는다.
 
+이 비교는 DA2로 실행 가능하게 고정했다. 세 새 development seed, 768×8과
+3,072×8 data cell, empirical NLL 및 grouped covariance shrinkage
+0/0.25/0.50을 사용한다. 모든 후보는 같은 Gaussian network와
+sampled-validation checkpoint를 사용한다. Estimator는 기존 G1r과 같은
+768×8에서 선택하고 3,072×8은 data-sufficiency control로만 사용한다.
+따라서 estimator 변화와 4배 geometry 증가를 같은 효과로 세지 않는다.
+U-statistic covariance나
+shrinkage 자체는 고전적 estimator이므로 contribution 후보가 아니다.
+독립 novelty는 이후 fresh gate와 nonlinear/irregular-3D에서 coherent
+condition pushforward와 paired response가 strong probabilistic operator를
+실제로 이길 때만 성립한다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.

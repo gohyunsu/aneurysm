@@ -622,6 +622,13 @@
               오차가 줄었습니다. 따라서 capacity보다 유한 표본에서
               mean·covariance를 함께 추정하는 과정이 병목입니다. 이
               진단에는 pass threshold가 없으며 G1/G1r은 계속 실패입니다.
+              후속 DA2는 세 새 development seed에서 empirical NLL과
+              geometry-grouped unbiased/shrinkage estimator를 동일한
+              network와 sampled-validation 기준으로 비교합니다. 방법은
+              원래 G1r과 같은 768×8에서 선택하고 3,072×8은 데이터 증가
+              control로만 사용합니다. Pairwise U-statistic covariance는
+              unbiased sample covariance와 같은 통계량입니다. 이는
+              estimator 선택용이며 성공 판정이나 3D 실행 권한이 아닙니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>

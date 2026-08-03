@@ -130,6 +130,14 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   가장 안정적이었고, fixed-axis 결과는 geometry 수와 반복 condition이 모두
   필요함을 보였다. 이는 capacity보다 finite empirical information과
   allocation이 주 병목이라는 attribution이며 새 gate 통과가 아니다.
+  후속 `DA2`는 G1/G1r/DA1과 겹치지 않는 세 development seed에서 기존
+  empirical NLL, geometry-grouped unbiased moment, covariance shrinkage
+  0.25/0.50을 같은 density network와 sampled-validation checkpoint로
+  비교한다. Estimator는 원래 G1r budget인 768×8에서만 선택하고,
+  3,072×8은 data-sufficiency control로 둔다. Success threshold는 없다.
+  Pairwise-difference U-statistic은 unbiased sample covariance와 같은
+  통계량이므로 novelty가 아니다. DA2가 한 estimator를 선택해도 별도
+  fresh exact gate 전에는 nonlinear/3D confirmatory 학습을 허용하지 않는다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야

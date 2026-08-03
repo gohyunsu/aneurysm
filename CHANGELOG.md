@@ -4,6 +4,25 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · DA2 estimator development contract
+
+### Experiment
+
+- G1/G1r/DA1과 겹치지 않는 세 development seed에서 empirical NLL,
+  unbiased grouped moments, covariance shrinkage 0.25/0.50을 비교한다.
+- 768×8과 3,072×8 cell에 동일한 5-output Gaussian network, optimizer,
+  epoch budget과 sampled-validation NLL checkpoint selection을 적용한다.
+- 원래 G1r budget인 768×8의 seed-평균 density-only error로 한 estimator를
+  기술적으로 선택하고 analytic population excess NLL을 tie-breaker로
+  사용한다. 3,072×8은 data-sufficiency control로만 둔다.
+
+### Scope
+
+- Pairwise-difference U-statistic은 unbiased sample covariance와 같은
+  통계량이므로 novelty로 주장하지 않는다.
+- DA2에는 success threshold가 없으며 G1/G1r을 relabel하거나 nonlinear/3D
+  실행을 허용하지 않는다. 선택 뒤 별도 fresh exact gate를 등록한다.
+
 ## 2026-08-03 · DA1 attributes G1r error to finite empirical information
 
 ### Result
