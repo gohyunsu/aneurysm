@@ -323,8 +323,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ],
         "G1r prospective re-entry",
     )
-    if g1r["status"] != "preregistered_before_fresh_test":
-        raise ProtocolError("G1r must be registered before fresh-test access.")
+    allowed_reentry_status = {
+        "preregistered_before_fresh_test",
+        "completed_passed",
+        "completed_failed",
+    }
+    if g1r["status"] not in allowed_reentry_status:
+        raise ProtocolError("G1r must retain a registered or completed status.")
     if g1r["source_gate"] != "G1" or g1r["may_relabel_failed_source_gate"] is not False:
         raise ProtocolError("G1r cannot relabel the failed frozen G1.")
     if g1r["config"] != "configs/controlled_pde_g1r.json":
@@ -356,6 +361,30 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     }
     if g1r["success_thresholds"] != expected_reentry_thresholds:
         raise ProtocolError("G1r thresholds changed after prospective registration.")
+    if g1r["status"].startswith("completed_"):
+        _require_keys(
+            g1r,
+            [
+                "result",
+                "source_commit",
+                "failed_checks",
+                "nonlinear_or_3d_confirmatory_training_authorized",
+            ],
+            "completed G1r",
+        )
+        if g1r["result"] != "results/controlled_pde_g1r_20260803.json":
+            raise ProtocolError("Completed G1r must point to its public aggregate.")
+        if len(g1r["source_commit"]) != 40:
+            raise ProtocolError("Completed G1r must retain its exact source commit.")
+        if g1r["status"] == "completed_failed":
+            if not g1r["failed_checks"]:
+                raise ProtocolError("Failed G1r must retain its failed checks.")
+            if g1r["nonlinear_or_3d_confirmatory_training_authorized"] is not False:
+                raise ProtocolError(
+                    "Failed G1r cannot authorize nonlinear or 3D confirmation."
+                )
+        elif g1r["failed_checks"]:
+            raise ProtocolError("Passed G1r cannot retain failed checks.")
     checks.append("prospective G1 re-entry non-inflation contract")
 
     evaluation = protocol["evaluation"]

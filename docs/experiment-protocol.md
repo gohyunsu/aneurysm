@@ -182,6 +182,36 @@ exact-domain pipeline sanity evidence일 뿐 C1 superiority나 AAAI novelty
 증거가 아니다. 실패하면 nonlinear/3D confirmatory branch로 가지 않고
 density family·data sufficiency를 다시 분석한다.
 
+#### G1r 결과 · prospective negative
+
+Public source commit `951ace1`, config SHA-256
+`7f5779d53143b6b77d0b1f9ac4c5d1a98b0b7fce908fcd68891e33270ec58b8a`의
+5-seed A6000 run은 exit 0으로 완료됐고 gate는 실패했다.
+
+| 사전등록 metric | 최악 seed/route | 기준 | 판정 |
+|---|---:|---:|---|
+| density-only standardized mean | 0.07533 | 0.05 | fail |
+| density-only 90% coverage error | 0.01605 | 0.03 | pass |
+| end-to-end quadrature mean | 0.07518 | 0.05 | fail |
+| end-to-end sampled coverage error | 0.01808 | 0.03 | pass |
+| full-BC operator error | 0.00375 | 0.03 | pass |
+| projective excess CI95 upper | 0.000202 | 0.01 | pass |
+| analytic nesting residual | \(7.45\times10^{-9}\) | \(10^{-6}\) | pass |
+
+Mean 관련 두 실패는 같은 seed에서 나타났고 다섯 seed 중 두 seed가 0.05를
+넘었다. 다섯 seed 평균 density-only error 0.04921이 기준 아래여도
+worst-seed contract를 사후 변경하지 않는다. 15개 seed×mask 셀의 descriptive
+비교에서는 AURORA가 direct masked Gaussian보다 mean error와 energy score가
+각각 15/15에서 낮았지만, 상대 개선은 absolute gate 실패를 상쇄하지 않는다.
+결과는 `results/controlled_pde_g1r_20260803.json`에 공개한다.
+
+다음 단계는 새로운 confirmatory run이 아니라 post-result density
+attribution이다. Oracle-parameter regression, analytic population NLL,
+geometry×condition sample-scaling으로 representation, optimization,
+finite-data 요인을 분리한다. 이 진단에 fresh gate seed를 사용하지 않으며,
+결과를 본 뒤 선택한 estimator는 다시 독립된 protocol과 seed를 고정해야
+한다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

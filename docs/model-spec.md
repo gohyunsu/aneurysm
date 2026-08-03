@@ -185,6 +185,27 @@ error가 가장 큰 잔여 항으로 확인됐으므로, prospective G1r은 구�
 protocol이다. 통과해도 architecture novelty나 baseline superiority가
 아니다.
 
+G1r 결과는 density-only mean 0.07533, end-to-end quadrature mean
+0.07518의 최악 seed로 실패했다. 반면 full-BC operator error 0.00375,
+analytic nesting residual \(7.45\times10^{-9}\), projective-excess CI
+upper 0.000202와 coverage는 통과했다. 따라서 현재 architecture에서
+operator decoder나 nesting algebra를 복잡하게 만드는 것은 근거가 없다.
+수정 대상은 BC-density estimator의 **seed-robust mean estimation**이다.
+
+새 density family는 다음 diagnostic 순서 뒤에만 선택한다.
+
+1. true mean/covariance target regression으로 현 MLP 표현력과 optimizer
+   ceiling을 측정한다.
+2. true Gaussian 사이 analytic cross-entropy로 empirical BC sampling
+   noise를 제거한 population objective를 측정한다.
+3. geometry count와 condition-per-geometry count를 분리한 sample-scaling
+   곡선으로 필요한 관측 구조를 추정한다.
+
+Correctly specified Gaussian에서도 이 ceiling이 회복되지 않으면 구현 또는
+optimization을 수정한다. Population objective는 통과하고 empirical NLL만
+실패하면 geometry-aware shrinkage/hierarchical estimator를 검토한다.
+Non-Gaussian evidence 없이 conditional flow를 추가하지 않는다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

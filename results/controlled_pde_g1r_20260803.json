@@ -1,0 +1,193 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "controlled_pde_g1r_20260803",
+  "experiment_id": "controlled_pde_g1r_prospective_v1",
+  "evidence_status": "prospective_gate_completed_failed",
+  "source_commit": "951ace169f5d48acc4cc44063358d10b5cc355d9",
+  "source_config_sha256": "7f5779d53143b6b77d0b1f9ac4c5d1a98b0b7fce908fcd68891e33270ec58b8a",
+  "source_metrics_sha256": "df29b757605cb5b6f53ac0d5bccecde2508980108762c11ae07097a7418b9fc3",
+  "scheduler": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "elapsed_seconds_from_run_timestamps": 46.740935
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8"
+  },
+  "configuration": {
+    "seeds": [
+      31080301,
+      31080302,
+      31080303,
+      31080304,
+      31080305
+    ],
+    "train_validation_test_geometries": [
+      768,
+      192,
+      192
+    ],
+    "conditions_per_geometry": 8,
+    "bc_samples": 2048,
+    "projective_samples": 1024,
+    "test_access_during_selection": false,
+    "worst_seed_decides_gate": true
+  },
+  "gate": {
+    "passed": false,
+    "checks": {
+      "maximum_density_only_standardized_mean_error": false,
+      "maximum_density_only_coverage_error": true,
+      "maximum_end_to_end_quadrature_mean_error": false,
+      "maximum_end_to_end_sampled_coverage_error": true,
+      "maximum_full_bc_operator_error": true,
+      "maximum_projective_excess_ci95_upper": true,
+      "maximum_analytic_nested_moment_residual": true
+    },
+    "worst_seed_metrics": {
+      "maximum_density_only_standardized_mean_error": 0.07532723248004913,
+      "maximum_density_only_coverage_error": 0.016046142578124978,
+      "maximum_end_to_end_quadrature_mean_error": 0.07517702877521515,
+      "maximum_end_to_end_sampled_coverage_error": 0.018082682291666652,
+      "maximum_full_bc_operator_error": 0.0037450878880918026,
+      "maximum_projective_excess_ci95_upper": 0.00020160553976893424,
+      "maximum_analytic_nested_moment_residual": 7.450580596923828e-09
+    },
+    "thresholds": {
+      "maximum_density_only_standardized_mean_error": 0.05,
+      "maximum_density_only_coverage_error": 0.03,
+      "maximum_end_to_end_quadrature_mean_error": 0.05,
+      "maximum_end_to_end_sampled_coverage_error": 0.03,
+      "maximum_full_bc_operator_error": 0.03,
+      "maximum_projective_excess_ci95_upper": 0.01,
+      "maximum_analytic_nested_moment_residual": 0.000001
+    }
+  },
+  "seed_gate_metrics": [
+    {
+      "seed": 31080301,
+      "density_only_mean": 0.07532723248004913,
+      "end_to_end_quadrature_mean": 0.07517702877521515,
+      "density_coverage": 0.016046142578124978,
+      "sampled_coverage": 0.009344482421875022,
+      "full_bc_operator": 0.0037450878880918026
+    },
+    {
+      "seed": 31080302,
+      "density_only_mean": 0.05210631340742111,
+      "end_to_end_quadrature_mean": 0.05226316303014755,
+      "density_coverage": 0.0051615397135416075,
+      "sampled_coverage": 0.006262207031250022,
+      "full_bc_operator": 0.0031179464422166348
+    },
+    {
+      "seed": 31080303,
+      "density_only_mean": 0.031877703964710236,
+      "end_to_end_quadrature_mean": 0.032141488045454025,
+      "density_coverage": 0.010870361328125022,
+      "sampled_coverage": 0.018082682291666652,
+      "full_bc_operator": 0.003262446029111743
+    },
+    {
+      "seed": 31080304,
+      "density_only_mean": 0.04346107691526413,
+      "end_to_end_quadrature_mean": 0.04358571767807007,
+      "density_coverage": 0.005814615885416652,
+      "sampled_coverage": 0.008052571614583393,
+      "full_bc_operator": 0.0029835919849574566
+    },
+    {
+      "seed": 31080305,
+      "density_only_mean": 0.04328728839755058,
+      "end_to_end_quadrature_mean": 0.043455176055431366,
+      "density_coverage": 0.008355712890624978,
+      "sampled_coverage": 0.006972249348958348,
+      "full_bc_operator": 0.0036092903465032578
+    }
+  ],
+  "projective_routes": {
+    "left_then_right": {
+      "signed_excess_mean": -0.00008602263405919076,
+      "signed_excess_ci95": [
+        -0.000359820295125246,
+        0.00017971592023968697
+      ],
+      "direct_vs_nested_mean": 0.03635392589494586,
+      "iid_floor_mean": 0.03643994852900505
+    },
+    "right_then_left": {
+      "signed_excess_mean": -0.0001245744526386261,
+      "signed_excess_ci95": [
+        -0.00042592072859406473,
+        0.00020160553976893424
+      ],
+      "direct_vs_nested_mean": 0.035891374573111534,
+      "iid_floor_mean": 0.03601594902575016
+    }
+  },
+  "descriptive_baseline_comparison": {
+    "cells": 15,
+    "cell_definition": "five seeds times three partial-or-missing masks",
+    "aurora_sampled": {
+      "standardized_mean_error_mean": 0.0385371458697288,
+      "coverage_error_mean": 0.0066757541232638955,
+      "energy_score_mean": 0.7517298377119004
+    },
+    "direct_mask_gaussian": {
+      "standardized_mean_error_mean": 0.16225443746273716,
+      "coverage_error_mean": 0.024778781467013903,
+      "energy_score_mean": 0.8566681019237473
+    },
+    "aurora_lower_error_cells": {
+      "standardized_mean_error": 15,
+      "absolute_coverage_error": 13,
+      "energy_score": 15
+    },
+    "interpretation": "The relative baseline result is descriptive and cannot override the preregistered absolute gate."
+  },
+  "density_checkpoint_diagnostic": [
+    {
+      "seed": 31080301,
+      "best_epoch": 575,
+      "epochs_executed": 975,
+      "best_validation_nll": -0.022855481132864952
+    },
+    {
+      "seed": 31080302,
+      "best_epoch": 100,
+      "epochs_executed": 500,
+      "best_validation_nll": -0.010836226865649223
+    },
+    {
+      "seed": 31080303,
+      "best_epoch": 75,
+      "epochs_executed": 475,
+      "best_validation_nll": -0.02905433438718319
+    },
+    {
+      "seed": 31080304,
+      "best_epoch": 75,
+      "epochs_executed": 475,
+      "best_validation_nll": -0.055210359394550323
+    },
+    {
+      "seed": 31080305,
+      "best_epoch": 100,
+      "epochs_executed": 500,
+      "best_validation_nll": -0.03052174672484398
+    }
+  ],
+  "scientific_verdict": "structural_coherence_and_calibration_pass_but_absolute_conditional_mean_accuracy_is_not_seed_robust",
+  "decision": {
+    "failed_g1_relabeled": false,
+    "g1r_passed": false,
+    "nonlinear_or_3d_confirmatory_training_authorized": false,
+    "supported": "The joint Gaussian construction is analytically nested, sampled coverage is within tolerance, the full-BC operator is accurate, and projective discrepancy is indistinguishable from the matched IID floor.",
+    "unsupported": "The learned BC density does not recover the absolute conditional mean robustly across fresh seeds; two of five seeds exceed the 0.05 mean threshold.",
+    "next_step": "Use post-result oracle-population, oracle-parameter, and empirical sample-scaling diagnostics to separate density representation, optimization, and finite-data error before preregistering any new gate."
+  },
+  "interpretation": "G1r is a valid prospective negative result. It narrows the remaining failure to seed-sensitive BC-density mean estimation and does not establish C1 novelty, AAAI readiness, or permission to scale to nonlinear or aneurysm-domain confirmatory experiments."
+}

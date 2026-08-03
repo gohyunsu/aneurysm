@@ -248,10 +248,12 @@
   "prospective_reentry_protocols": [
     {
       "id": "G1r",
-      "status": "preregistered_before_fresh_test",
+      "status": "completed_failed",
       "source_gate": "G1",
       "may_relabel_failed_source_gate": false,
       "config": "configs/controlled_pde_g1r.json",
+      "result": "results/controlled_pde_g1r_20260803.json",
+      "source_commit": "951ace169f5d48acc4cc44063358d10b5cc355d9",
       "fresh_test_seeds": 5,
       "test_access_during_selection": false,
       "density_checkpoint_selection": "validation_nll_on_disjoint_geometries",
@@ -266,7 +268,14 @@
         "maximum_full_bc_operator_error": 0.03,
         "maximum_projective_excess_ci95_upper": 0.01,
         "maximum_analytic_nested_moment_residual": 0.000001
-      }
+      },
+      "failed_checks": [
+        "maximum_density_only_standardized_mean_error",
+        "maximum_end_to_end_quadrature_mean_error"
+      ],
+      "worst_seed_density_only_standardized_mean_error": 0.07532723248004913,
+      "worst_seed_end_to_end_quadrature_mean_error": 0.07517702877521515,
+      "nonlinear_or_3d_confirmatory_training_authorized": false
     }
   ],
   "evaluation": {

@@ -28,8 +28,15 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 - `controlled_pde_g1_attempt2_20260803.json`: frozen G1 실패
 - `controlled_pde_g1b_20260803.json`: raw estimator floor와
   density/operator/MC attribution만 수행한 post-result diagnostic
+- `controlled_pde_g1r_20260803.json`: fresh seed와 validation-only
+  selection을 고정한 prospective re-entry 실패
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
+G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
+통과했지만, 최악 seed의 density-only mean 0.07533과 end-to-end
+quadrature mean 0.07518이 사전 기준 0.05를 넘었다. 상대 baseline 개선으로
+이 absolute 실패를 덮지 않으며 nonlinear/3D confirmatory 학습은 계속
+보류한다.
 
 현재 temporal representation 결과:
 

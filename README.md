@@ -127,8 +127,15 @@ distance는 iid floor로 설명됐지만, K=2048 missing-mask mean error가
 Density와 operator는 validation geometry로만 checkpoint를 선택하고,
 density-only moment·coverage는 analytic하게, end-to-end mean은
 Gauss–Hermite quadrature로, projective error는 matched iid floor 대비
-95% CI upper bound로 평가합니다. 실행 전 상태이므로 현재 G1은 여전히
-실패입니다.
+95% CI upper bound로 평가했습니다. Exact commit `951ace1`의 prospective
+run은 정상 완료됐지만 실패했습니다. Coverage, full-BC operator, analytic
+nesting, projective-excess는 통과한 반면, 최악 seed의 density-only mean
+0.07533과 end-to-end quadrature mean 0.07518이 고정 기준 0.05를
+넘었습니다. 다섯 seed 평균이 기준 아래라는 이유로 gate를 완화하지 않으며,
+공개 aggregate는
+[`results/controlled_pde_g1r_20260803.json`](results/controlled_pde_g1r_20260803.json)에
+있습니다. Density estimation의 representation·optimization·finite-data
+오차를 분해하기 전까지 nonlinear/3D confirmatory 학습은 보류합니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
@@ -144,6 +151,16 @@ Aneumo pilot의 고정 split과 허용 범위는
 이 steady scalar-BC pilot은 same-geometry response C2와 irregular-3D
 일반화만 검사하며, multicomponent partial-BC C1이나 transient 효율을
 뒷받침하지 않습니다.
+
+학습에 앞서
+[`configs/aneumo_scaling_audit_v1.json`](configs/aneumo_scaling_audit_v1.json)
+은 train base family만 읽는 비자명성 gate를 고정합니다. 같은 case의 한
+anchor field까지 제공한 강한 oracle에 대해 velocity-linear,
+gauge-invariant pressure-quadratic scaling과 train-tuned global power
+law를 검사합니다. Tuned scaling이 response norm의 15%도 남기지 않으면
+해당 채널은 G2 novelty 근거에서 제외하며, 두 채널 모두 실패하면 Aneumo
+학습을 중단합니다. 이는 단순 물리 스케일링을 새 방법의 성과로 오인하지
+않기 위한 사전 감사입니다.
 
 ## 해석의 경계
 

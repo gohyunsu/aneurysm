@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: exact G1 failed · G1b/D0b complete · G1r preregistered · Aneumo paired-BC staging next
+상태: exact G1/G1r failed · G1b/D0b complete · density attribution next · Aneumo staging held
 
 ## 1. 현재 판정
 
@@ -187,6 +187,33 @@ raw two-sample distance가 아니라 matched iid floor 대비 signed excess의
 G1은 failed로 남고, 이는 C1 novelty가 아니라 다음 domain으로 갈 최소 sanity
 근거다.
 
+G1r은 exact public commit `951ace1`의 A6000 run에서 정상 완료됐지만
+**실패했다**. Coverage, full-BC operator, analytic nesting,
+matched-IID-floor projective-excess의 네 축은 통과했다. 그러나 최악 seed의
+density-only conditional-mean error는 0.07533, Gauss–Hermite
+end-to-end mean error는 0.07518로 사전 기준 0.05를 넘었다. 다섯 seed
+평균은 각각 0.04921, 0.04932였지만 gate는 결과 전에 최악 seed 기준으로
+고정했으므로 평균으로 판정을 바꾸지 않는다. 두 seed가 mean 기준을 넘었고,
+operator error는 최악 0.00375였으므로 남은 병목은 seed-sensitive BC-density
+mean estimation이다. 이 음성 결과는
+`results/controlled_pde_g1r_20260803.json`에 보존한다.
+
+다음 실험은 새 architecture를 즉시 붙이는 것이 아니다. Controlled
+generator에서만 가능한 세 개의 post-result upper-bound diagnostic으로
+오차를 분리한다.
+
+1. true Gaussian parameter를 target으로 회귀해 representation/optimizer
+   ceiling을 측정한다.
+2. empirical sample 대신 analytic population cross-entropy를 사용해
+   finite-condition noise를 제거한다.
+3. geometry 수와 geometry당 condition 수를 factorial하게 바꾸되 총
+   boundary sample budget을 맞춰 geometry coverage와 repeated-condition
+   information을 분리한다.
+
+이 분해에서 empirical data insufficiency가 확인될 때만 shrinkage 또는
+hierarchical density estimator를 새 fresh gate로 사전등록한다. 단순히
+Gaussian을 flow로 교체하거나 threshold를 완화하지 않는다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.
@@ -284,10 +311,12 @@ AAAI-27 kit이 공개되면 style만 교체한다.
 2. G1b oracle-floor/error-attribution 진단과 equal-budget temporal D0b를
    exploratory로 실행 **(완료)**
 3. Prospective G1r을 fresh test에서 실행하고 gate를 냉정하게 판정
-   **(현재 우선순위)**
-4. 등록된 Aneumo base-family-disjoint selective cache를 range ingestion
-5. Aneumo steady C2와 nonlinear public PDE C1/C2 pilot을 분리 실행
-6. corrected sanity와 G2가 양수일 때만 irregular 3D full backbone과
+   **(완료 · 실패)**
+4. Density representation/optimization/data-sufficiency attribution을
+   test-free diagnostic으로 실행 **(현재 우선순위)**
+5. 등록된 Aneumo base-family-disjoint selective cache는 read-only
+   staging까지만 진행하고 학습은 G1 재진입 근거 뒤로 보류
+6. 새 prospective exact sanity와 G2가 양수일 때만 irregular 3D backbone과
    transient 학습
 7. CMHA status branch는 공식 case map과 positive real-CFD increment가
    확인될 때만 secondary로 복원

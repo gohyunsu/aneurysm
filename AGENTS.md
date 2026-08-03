@@ -26,8 +26,13 @@
   density-only 0.0754가 지배적이므로 G1은 닫힌 상태다. 별도 `G1r`은
   fresh seed, validation-only checkpoint selection, analytic
   density moment/coverage, Gauss–Hermite end-to-end mean, iid-floor-calibrated
-  projective metric을 결과 전에 고정한 prospective re-entry다. G1r 결과는
-  frozen G1을 소급해 pass로 바꾸지 않는다.
+  projective metric을 결과 전에 고정한 prospective re-entry다. G1r도
+  2026-08-03 fresh 5-seed run에서 실패했다. Coverage, full-BC operator,
+  analytic nesting, projective-excess는 통과했지만 최악 seed의 density-only
+  mean 0.07533과 end-to-end quadrature mean 0.07518이 기준 0.05를
+  넘었다. 다섯 seed 중 두 seed가 mean 기준을 넘었으므로 평균 0.0492를
+  근거로 pass라 하지 않는다. Frozen G1을 소급해 바꾸지 않으며
+  nonlinear/3D confirmatory 학습은 계속 보류한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -68,6 +73,15 @@ one-shot Fourier는 선행 구성요소 또는 engineering choice다. contributi
 실패했으며, 다른 temporal decoder도 새 representation gate와
 compute-matched 이득이 있을 때만 남긴다.
 
+AAAI-26 LANO, NeurIPS-25 PaPQS·DeltaPhi, arbitrary-conditioning generative
+model, 2026 conditioning-consistency 연구를 고려하면 partial observation,
+joint density의 analytic conditioning, tower-property 검사, paired
+residual, active acquisition을 각각 단독 novelty로 주장할 수 없다. 현재
+C1–C3는 **검증할 연구 가설**이지 확정 contribution이 아니다. 독립적
+novelty는 이들을 PDE solution functional에 맞게 결합했을 때 생기는 새
+문제 정의·보장·알고리즘과 strong baseline 대비 양수 결과가 함께 있을
+때만 확정한다.
+
 ## 3. 데이터셋의 역할
 
 | 데이터 | 허용된 주 역할 | 금지된 해석 |
@@ -98,6 +112,13 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   test access 전에 고정한 새 evidence다. Density/operator checkpoint는
   disjoint validation geometry로만 고르고 test split은 선택이 끝난 뒤
   생성한다.
+  2026-08-03 G1r은 exact public commit `951ace1`의 PBS A6000 run에서
+  정상 완료됐지만 gate는 실패했다. 최악 seed density-only mean
+  0.07533, end-to-end quadrature mean 0.07518로 두 항이 0.05를 넘었다.
+  Coverage 0.01809 이하, full-BC operator 0.00375 이하, analytic nesting
+  \(7.45\times10^{-9}\), projective-excess CI upper 0.000202는 통과했다.
+  다음 단계는 representation·optimization·finite-data error를 분리하는
+  post-result density diagnostic이며, 새 fresh gate를 즉시 반복하지 않는다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야
@@ -260,7 +281,9 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - G1r은 frozen G1/G1b artifact checksum을 pin한 별도 prospective
   protocol이다. `preregistered_before_fresh_test` 상태와 seed·threshold를
   실행 전에 public commit으로 고정하며, 결과를 본 뒤 변경하면 새 버전과
-  exploratory 표기가 필요하다.
+  exploratory 표기가 필요하다. Exact public commit `951ace1`의 run은
+  exit 0, elapsed 46.74초였으나 gate는 실패했다. Public aggregate는
+  `results/controlled_pde_g1r_20260803.json`이다.
 - D0b 구현은 DCT-II/POD orthonormality, held-out covariance exclusion,
   synthetic two-pass runtime을 pinned container에서 통과했다. Exact public
   commit `1dfc856`의 105-case run은 exit 0, walltime 3분 49초였다.

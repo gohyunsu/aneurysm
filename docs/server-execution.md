@@ -110,6 +110,13 @@ directory만 writable로 둔다. Density/operator checkpoint selection이 끝난
 뒤 fresh test split을 생성하며, scheduler artifact에는 config checksum과
 `failed_g1_relabeled=false`를 남긴다.
 
+Exact commit `951ace1`의 full G1r은 A6000에서 정상 완료됐지만 gate는
+실패했다. Public aggregate는
+`results/controlled_pde_g1r_20260803.json`이다. 동일 fresh seed를
+architecture 선택에 재사용하지 않으며, 다음 GPU job은 별도의 post-result
+density attribution만 허용한다. Aneumo 학습과 nonlinear/3D confirmatory
+job은 새 exact sanity 근거 전까지 제출하지 않는다.
+
 template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
 `AURORA_DATA_ROOT`, `AURORA_OUTPUT_ROOT`, `AURORA_SIF`를 제출 시 주입한다.
 

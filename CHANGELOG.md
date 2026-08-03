@@ -4,6 +4,39 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Prospective G1r negative result
+
+### Experiment
+
+- Exact public commit `951ace1`과 사전등록 config checksum을 사용한 5-seed
+  A6000 run이 정상 완료됐다. Frozen G1은 relabel하지 않는다.
+- Density-only coverage error 0.01605, sampled coverage error 0.01808,
+  full-BC operator error 0.00375, projective-excess CI95 upper 0.000202,
+  analytic nesting residual \(7.45\times10^{-9}\)는 고정 기준을 통과했다.
+- 최악 seed의 density-only standardized mean error 0.07533과 end-to-end
+  quadrature mean error 0.07518이 기준 0.05를 넘어 G1r은 실패했다.
+  다섯 seed 평균이 약 0.049라는 이유로 worst-seed 판정을 바꾸지 않는다.
+- AURORA는 descriptive 15개 seed×mask 셀에서 direct masked Gaussian보다
+  mean error와 energy score가 모두 낮았지만, 상대 개선으로 absolute
+  gate 실패를 덮지 않는다.
+
+### Decision
+
+- Nonlinear/3D confirmatory 학습은 허용하지 않는다. Oracle-parameter,
+  analytic population-NLL, geometry×condition scaling diagnostic으로
+  density representation·optimization·finite-data error를 먼저 분리한다.
+- AAAI-26 LANO, NeurIPS-25 PaPQS·DeltaPhi, arbitrary-conditioning과
+  conditioning-consistency 선행연구를 반영해 analytic conditioning,
+  paired residual, active acquisition을 각각 단독 novelty로 주장하지
+  않는다. Solution-functional value-of-boundary-information은 아직 audit
+  대상 후보이며 확정 contribution이 아니다.
+
+### Site
+
+- Gate, evidence ledger, learn page, result link를 “G1r completed · failed”로
+  갱신하고 두 실패 지표와 다음 density diagnostic을 독자가 바로 확인할
+  수 있게 한다.
+
 ## 2026-08-03 · Prospective exact-G1 re-entry registration
 
 ### Experiment

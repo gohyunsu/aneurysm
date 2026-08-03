@@ -113,6 +113,20 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "thresholds changed"):
             validate_protocol(candidate)
 
+    def test_failed_g1r_cannot_authorize_complex_confirmation(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["prospective_reentry_protocols"][0][
+            "nonlinear_or_3d_confirmatory_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot authorize"):
+            validate_protocol(candidate)
+
+    def test_completed_g1r_must_retain_public_result(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        del candidate["prospective_reentry_protocols"][0]["result"]
+        with self.assertRaisesRegex(ProtocolError, "missing"):
+            validate_protocol(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

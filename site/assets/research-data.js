@@ -53,7 +53,7 @@ window.AURORA_DATA = Object.freeze({
       year: "2026.04–07",
       title: "Partial-input, conditioning & residual priors",
       copy: "AAAI LANO, NOP, conditioning operator, learned boundary extension, GNO와 DeltaPhi가 partial input·conditioning·residual learning 자체의 novelty를 제거했다.",
-      status: "AAAI / NeurIPS / TMLR + arXiv · direct scope threats",
+      status: "AAAI / NeurIPS + arXiv · direct scope threats",
       url: "https://ojs.aaai.org/index.php/AAAI/article/view/37001"
     },
     {
@@ -90,15 +90,15 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G1",
       title: "Is condition–marginal coherence exact?",
-      copy: "정답 conditional distribution을 계산할 수 있는 controlled PDE에서 mean, coverage, nested-mask tower property를 먼저 검증한다.",
-      state: "Frozen gate failed · prospective G1r registered, unrun",
+      copy: "G1r은 coverage·operator·analytic nesting·projective 항을 통과했지만, 최악 seed의 density-only/end-to-end mean 0.07533/0.07518로 실패했다.",
+      state: "Frozen G1 failed · prospective G1r also failed",
       blocking: true
     },
     {
       id: "G2",
       title: "Does paired response improve?",
       copy: "ID partial/missing에서는 calibration을, supplied full-BC support shift에서는 field와 같은-형상 ΔH를, hidden-law shift에서는 detection/abstention을 각각 검증한다.",
-      state: "64-case Aneumo pilot registered · staging pending",
+      state: "64-case Aneumo pilot registered · training blocked by G1r",
       blocking: true
     },
     {
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Prospective G1r completes and fails the absolute mean gate",
+      copy: "Exact commit 951ace1의 fresh 5-seed run에서 coverage, full-BC operator, analytic nesting, IID-floor-calibrated projective 검사는 통과했다. 그러나 최악 seed density-only mean 0.07533과 end-to-end quadrature mean 0.07518이 고정 기준 0.05를 넘었다. 상대 baseline 개선으로 판정을 바꾸지 않고 density representation·optimization·data sufficiency를 먼저 분해한다.",
+      files: ["results/controlled_pde_g1r_20260803.json", "docs/experiment-protocol.md", "docs/model-spec.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",
