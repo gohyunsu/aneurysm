@@ -1,3 +1,4 @@
+import copy
 import json
 import unittest
 from pathlib import Path
@@ -18,6 +19,7 @@ from aurora.controlled_pde_reentry import (
     analytic_field_moments,
     gauss_hermite_operator_mean,
     load_config,
+    run_experiment,
 )
 
 
@@ -96,6 +98,42 @@ class ControlledPDEReentryMathTests(unittest.TestCase):
         )
         expected = poisson_solution(geometry, mean, grid)
         self.assertTrue(torch.allclose(estimate, expected, atol=1e-6))
+
+    def test_tiny_runtime_uses_only_nonregistered_smoke_seed(self) -> None:
+        config = copy.deepcopy(load_config(CONFIG))
+        registered = set(config["seeds"])
+        smoke_seed = 9917301
+        self.assertNotIn(smoke_seed, registered)
+        config["seeds"] = [smoke_seed]
+        config["train_geometries"] = 8
+        config["validation_geometries"] = 4
+        config["test_geometries"] = 4
+        config["conditions_per_geometry"] = 2
+        config["hidden_dim"] = 16
+        for name in (
+            "density_training",
+            "operator_training",
+            "direct_baseline_training",
+        ):
+            config[name]["maximum_epochs"] = 2
+            config[name]["validation_interval"] = 1
+            config[name]["early_stopping_patience"] = 2
+        evaluation = config["evaluation"]
+        evaluation["bc_samples"] = 16
+        evaluation["gauss_hermite_order"] = 3
+        evaluation["projective_samples"] = 8
+        evaluation["projective_geometries"] = 4
+        evaluation["projective_replicates"] = 2
+        evaluation["sliced_projections"] = 4
+        evaluation["bootstrap_replicates"] = 20
+        result = run_experiment(config, require_cuda=False)
+        self.assertFalse(result["failed_g1_relabeled"])
+        self.assertEqual(result["seeds"][0]["seed"], smoke_seed)
+        self.assertTrue(
+            registered.isdisjoint(
+                result["seeds"][0]["split_seeds"].values()
+            )
+        )
 
 
 if __name__ == "__main__":

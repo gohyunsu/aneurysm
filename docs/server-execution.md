@@ -99,6 +99,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 공개 PBS template:
 
 - `cluster/ssu_a6gpu_smoke.pbs`
+- `cluster/ssu_a6gpu_contract_tests.pbs`
 - `cluster/ssu_a6gpu_cmha_g1.pbs`
 - `cluster/ssu_a6gpu_benchanxplore_d0.pbs`
 - `cluster/ssu_a6gpu_controlled_g1r.pbs`

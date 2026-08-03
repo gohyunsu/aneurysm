@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+#PBS -N aurora_contract_test
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=2:mem=16gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=00:20:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+
+mkdir -p "$AURORA_OUTPUT_ROOT/tmp"
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_OUTPUT_ROOT:/output" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace/src" TMPDIR="/output/tmp" \
+  python -m unittest discover -s /workspace/tests -v
+
+printf '%s\n' "$AURORA_GIT_COMMIT" > "$AURORA_OUTPUT_ROOT/git_commit.txt"
+printf '%s\n' '{"state":"tests_completed"}' > "$AURORA_OUTPUT_ROOT/status.json"
