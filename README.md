@@ -78,6 +78,12 @@ utility를 지지하지 않았습니다(`ΔAUPRC=-0.0419`, patient-bootstrap 95%
 family가 없어 unresolved입니다. 따라서 현재 우선순위는 C1 missing-BC
 operator와 C2 one-shot fidelity이며, C3 risk alignment는 조건부입니다.
 
+현재 source audit에서 Aneumo는 전체 학습 release가 아니라 geometry 1개 ×
+steady BC 2개 sample만 확인됐습니다. 반면 BenchAnXplore 105-case
+HDF5/XDMF archive는 무결성을 확인해, 학습 전 단계인 D0 temporal-basis
+audit을 `configs/benchanxplore_d0.json`에 결과 확인 전에 등록했습니다.
+이 audit은 Fourier 표현 가능성만 판단하며 모델 성능으로 해석하지 않습니다.
+
 ## 해석의 경계
 
 현재 공개 데이터의 ruptured/unruptured label은 **cross-sectional rupture

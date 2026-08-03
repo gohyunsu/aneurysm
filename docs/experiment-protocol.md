@@ -98,6 +98,26 @@ Aneumo에서 geometry 100개 × BC 8개 pilot을 구성한다.
 
 G2 실패 시 transient/clinical 단계로 확장하지 않는다.
 
+현재 `introai9`에서 확인된 Aneumo는 geometry 1개 × BC 2개 sample뿐이므로
+이 자산만으로 위 G2를 실행하지 않는다. 전체 multi-BC subset과 split
+manifest를 확보하기 전 G2는 blocked다.
+
+### D0. one-shot temporal representation gate
+
+BenchAnXplore 전체 105 geometry × 80 timestep에서 모델을 학습하기 전에
+Fourier 4/8/12 mode의 **oracle reconstruction**을 실행한다. primary는
+`K=8`이며 설정과 threshold는 `configs/benchanxplore_d0.json`에 결과 확인
+전에 고정했다.
+
+- full-domain relative L2 ≤ 0.01
+- retained temporal energy ≥ 0.995
+- cycle mean/peak speed relative MAE 각각 ≤ 0.02
+- bulge relative L2 ≤ 0.02
+
+통과는 temporal representation이 병목이 아님을 뜻할 뿐 learned operator
+성능을 뜻하지 않는다. 실패하면 mode 수를 늘리거나 one-shot Fourier
+decoder를 폐기한다.
+
 ## 3. 데이터 split
 
 ### Operator pretraining

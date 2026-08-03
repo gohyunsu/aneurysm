@@ -13,6 +13,7 @@ license = {text = "Research use; see dataset-specific licenses"}
 experiment = [
   "numpy>=1.24",
   "torch>=2.1",
+  "h5py==3.12.1",
 ]
 
 [tool.setuptools.packages.find]

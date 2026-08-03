@@ -4,6 +4,22 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · BenchAnXplore D0 preregistration
+
+### Data
+
+- Aneumo의 현재 서버 자산이 전체 release가 아니라 geometry 1개 × steady
+  BC 2개 sample임을 확인해 full G2를 blocked로 표시했다.
+- BenchAnXplore archive의 105 HDF5 + 105 XDMF, 80 velocity timestep,
+  checksum을 확인하고 `junjinyong`의 read-only input cache를 준비했다.
+
+### Experiment
+
+- one-shot 모델 학습 전 Fourier 4/8/12-mode 표현 손실을 판정하는 D0
+  audit과 `K=8` 성공 threshold를 결과 확인 전에 등록했다.
+- pinned container는 수정하지 않고 `h5py==3.12.1` 외부 dependency layer를
+  사용하도록 PBS template과 aggregate-only result contract를 추가했다.
+
 ## 2026-08-03 · Asset audit, G1 diagnostic, and field guide
 
 ### Experiment

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "benchanxplore_d0_temporal_basis",
+  "status": "preregistered",
+  "as_of": "2026-08-03",
+  "purpose": "Decide whether a one-shot temporal basis can represent the 80-step BenchAnXplore velocity cycle before training an operator.",
+  "dataset": {
+    "name": "BenchAnXplore",
+    "expected_cases": 105,
+    "timesteps": 80,
+    "field": "velocity_mm_per_s",
+    "archive_sha256": "2116bf9e4feb4cd937b3a47a307821359a1010bcf6cc75d94fea70bcc639e579"
+  },
+  "temporal_modes": [4, 8, 12],
+  "primary_mode": 8,
+  "regions": {
+    "full": "all mesh nodes",
+    "parent": "y < 7.0 mm",
+    "neck": "7.0 <= y < 8.5 mm",
+    "bulge": "y >= 8.5 mm"
+  },
+  "bootstrap_replicates": 2000,
+  "seed": 20260803,
+  "success_thresholds": {
+    "full_relative_l2_max": 0.01,
+    "full_energy_retained_min": 0.995,
+    "full_cycle_mean_speed_relative_mae_max": 0.02,
+    "full_cycle_peak_speed_relative_mae_max": 0.02,
+    "bulge_relative_l2_max": 0.02
+  },
+  "interpretation": {
+    "pass": "The temporal representation is viable; this does not establish learned operator performance.",
+    "fail": "Increase basis capacity or abandon the one-shot Fourier decoder before model training."
+  }
+}

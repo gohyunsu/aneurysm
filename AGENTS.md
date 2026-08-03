@@ -189,6 +189,12 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   aggregate metrics를 남긴다. 실패 run도 provenance로 보존한다.
 - 2026-08-03 smoke 기준은 RTX A6000, PyTorch 2.5.1+cu118, CUDA 11.8이다.
   사양은 매 job에서 다시 기록한다.
+- 2026-08-03 source audit에서 Aneumo는 전체 multi-BC release가 아니라
+  geometry 1개 × steady BC 2개 sample만 확인됐다. 100 geometry × 8 BC
+  G2를 이 자산만으로 실행하거나 성능을 주장하지 않는다.
+- BenchAnXplore coarse archive는 105 geometry × 80 timestep,
+  velocity/wall-mask HDF5와 XDMF 210개로 확인했다. archive checksum과
+  외부 `h5py==3.12.1` dependency layer를 run provenance에 고정한다.
 - CMHA 통계표는 105 lesion/99 patient, 6 multi-lesion patient로 감사됐다.
   split/bootstrap은 patient group 단위다. 공식 case map 확인 전 row-aligned
   G1은 exploratory다.

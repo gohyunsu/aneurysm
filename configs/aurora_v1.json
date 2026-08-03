@@ -29,6 +29,14 @@
         0.0066417582682770275
       ]
     },
+    "asset_audit": {
+      "aneumo_local_scope": "one_geometry_two_steady_bc_samples",
+      "aneumo_full_g2_ready": false,
+      "aneug_flow_local_scope": "geometry_archive_only",
+      "benchanxplore_cases": 105,
+      "benchanxplore_timesteps": 80,
+      "benchanxplore_d0_status": "preregistered"
+    },
     "contribution_priority": {
       "primary": [
         "C1_missing_bc_distribution",

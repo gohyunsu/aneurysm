@@ -23,9 +23,9 @@ writable로 둔다.
 
 | 데이터 | 확인된 상태 | 다음 G0 작업 |
 |---|---|---|
-| Aneumo | source repository와 preprocessing/baseline 자산 | CFD case/BC 수와 field checksum |
-| AneuG-Flow | geometry archive와 추출 geometry | CFD field availability와 release subset |
-| BenchAnXplore | 원 archive와 HDF5/XDMF 105-case 추출본 | 전체 manifest, unit, boundary mask |
+| Aneumo | 코드와 geometry 1개 × steady BC 2개 sample | 전체 multi-BC release 확보와 checksum |
+| AneuG-Flow | geometry archive | CFD field release subset 확보 |
+| BenchAnXplore | archive와 105-case × 80-step HDF5/XDMF | unit·boundary semantics; D0 audit |
 | CMHA | archive, statistical table, patient 추출본 | 공식 case map, field/summary provenance |
 | AneuX | metadata와 geometry archive/추출본 | patient/source split과 license |
 | Aneurisk | source-native repository | AneuX overlap과 asset provenance |
@@ -53,6 +53,18 @@ confirmatory G1 전에 release data dictionary 또는 공식 case map으로
 또한 정의가 확인되지 않은 `PHASE`, `ELAPSS` 두 열의 조합이 target을 거의
 결정적으로 분리했다. 표준 PHASES/ELAPSS 계산임을 확인하기 전까지 이 두
 열은 baseline에서 제외한다.
+
+## BenchAnXplore D0 준비
+
+- coarse archive: 105 HDF5 + 105 XDMF
+- case tensor: 80 timestep velocity, tetrahedral coordinates/connectivity,
+  repeated binary boundary mask
+- archive SHA-256: `2116bf9e4feb4cd937b3a47a307821359a1010bcf6cc75d94fea70bcc639e579`
+- runtime: pinned PyTorch container + read-only external `h5py==3.12.1` layer
+- preregistration: `configs/benchanxplore_d0.json`
+
+D0는 Fourier 4/8/12-mode reconstruction의 표현 손실만 측정한다. 학습된
+operator 또는 In-PI-MGN 대비 성능으로 해석하지 않는다.
 
 ## GPU smoke
 
@@ -88,6 +100,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 
 - `cluster/ssu_a6gpu_smoke.pbs`
 - `cluster/ssu_a6gpu_cmha_g1.pbs`
+- `cluster/ssu_a6gpu_benchanxplore_d0.pbs`
 
 template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
 `AURORA_DATA_ROOT`, `AURORA_OUTPUT_ROOT`, `AURORA_SIF`를 제출 시 주입한다.

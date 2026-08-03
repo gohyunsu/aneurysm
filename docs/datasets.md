@@ -12,6 +12,12 @@
 > manifest·license·unit·case mapping 검증 상태는
 > [`server-execution.md`](server-execution.md)에 기록한다.
 
+> **가용 범위 정정:** 현재 Aneumo 자산은 전체 95,940 simulation release가
+> 아니라 geometry 1개에 대한 steady BC 2개 sample과 코드다. AneuG-Flow
+> 자산도 geometry archive만 확인됐다. 반면 BenchAnXplore coarse archive는
+> 105개 HDF5/XDMF case, case당 80 velocity timestep이 완전하게 확인됐다.
+> “논문상 공개 규모”와 “현재 서버에서 학습 가능한 범위”를 구분한다.
+
 ## 핵심 비교
 
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |
@@ -20,7 +26,7 @@
 | AneuX | aneurysm/vessel mesh, morphology·clinical table, rupture label | 750 models | geometry 규모 확장, morphology/rupture 연구 | CTA 원본·CFD가 없는 geometry dataset |
 | CMHA / Gong et al. 2024 | CTA, 3D model, clinical/morphology/hemodynamic data | 99 IA + 44 controls | multimodal clinical/CFD 연결 | 다운로드 14.49 GB, 파일 매핑·license 기록 필요 |
 | BenchAnXplore / npj DM 2026 | 105 semi-idealized geometry의 coarse CFD trajectories | 80 frames/case, 0.01 s | GNN surrogate benchmark | ICA sidewall 중심; patient CTA 입력자료가 아님 |
-| AneuG-Flow / 관련 synthetic set | geometry와 steady/transient CFD field | 대규모 synthetic | pretraining·surrogate stress test | synthetic→clinical transfer 검증 필수 |
+| AneuG-Flow / 관련 synthetic set | 현재 서버에는 geometry archive; 논문 release에는 CFD field 기술 | 대규모 synthetic | full field 확보 후 pretraining | synthetic→clinical transfer 검증 필수 |
 
 숫자와 확장자는 원 배포본을 받은 뒤 자동 inventory로 확정한다. 정리글의 “Aneurisk CFD 포함”은 현재 프로젝트의 샘플 관찰만으로 확인되지 않았으므로 `unknown`으로 시작한다.
 

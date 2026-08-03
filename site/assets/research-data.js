@@ -76,8 +76,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Is the operator calibrated OOD?",
-      copy: "Held-out geometry와 held-out BC에서 field, functional, 90% coverage를 동시에 검증한다.",
-      state: "Pre-clinical gate",
+      copy: "Held-out geometry와 held-out BC에서 field, functional, 90% coverage를 검증한다. 현재 full Aneumo BC field가 없어 G2는 blocked이고 BenchAnXplore D0를 먼저 실행한다.",
+      state: "D0 preregistered · full G2 blocked",
       blocking: true
     },
     {
@@ -98,18 +98,18 @@ window.AURORA_DATA = Object.freeze({
   datasets: [
     {
       name: "Aneumo",
-      role: "동일/유사 geometry × 8 steady BC로 sensitivity pilot",
-      provenance: "asset found · G0 pending"
+      role: "전체 release 확보 후 동일 geometry × 8 steady BC sensitivity",
+      provenance: "현재 1 geometry × 2 BC sample only"
     },
     {
       name: "AneuG-Flow",
       role: "selected steady/pulsatile operator pretraining",
-      provenance: "geometry found · G0 pending"
+      provenance: "geometry archive only · field absent"
     },
     {
       name: "BenchAnXplore",
       role: "105 semi-idealized transient reproduction 및 GNN baseline",
-      provenance: "HDF5/XDMF found · manifest partial"
+      provenance: "105 × 80 HDF5/XDMF audited · D0 ready"
     },
     {
       name: "CMHA",
@@ -123,6 +123,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "BenchAnXplore one-shot representation gate preregistered",
+      copy: "105 geometry × 80 timestep archive를 검증하고, 모델 학습 전 Fourier 4/8/12-mode oracle loss로 one-shot 표현 가능성을 판정하는 D0와 K=8 threshold를 고정했다. Aneumo는 현재 1 geometry × 2 BC sample뿐이라 full G2를 blocked로 유지한다.",
+      files: ["configs/benchanxplore_d0.json", "src/aurora/benchanxplore.py", "cluster/ssu_a6gpu_benchanxplore_d0.pbs"]
+    },
     {
       date: "2026.08.03",
       category: "site",
