@@ -13,6 +13,8 @@ import json
 import os
 import platform
 import random
+import shlex
+import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -390,6 +392,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     config = load_config(args.config)
     args.output.mkdir(parents=True, exist_ok=True)
+    (args.output / "run_config.json").write_text(
+        json.dumps(config, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (args.output / "git_commit.txt").write_text(
+        f"{args.git_commit}\n", encoding="utf-8"
+    )
+    (args.output / "dataset_manifest.sha256").write_text(
+        f"{config['dataset']['archive_sha256']}  BenchAnXplore-release-archive\n",
+        encoding="utf-8",
+    )
+    command = " ".join(shlex.quote(value) for value in sys.argv)
+    (args.output / "command.txt").write_text(f"{command}\n", encoding="utf-8")
     try:
         result = run_audit(
             data_root=args.data_root,
@@ -426,6 +441,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             indent=2,
         )
         + "\n",
+        encoding="utf-8",
+    )
+    (args.output / "environment.json").write_text(
+        json.dumps(result["runtime"], ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     print(serialized)
