@@ -247,11 +247,13 @@
     },
     {
       "id": "DA1",
-      "status": "preregistered_post_result_unrun",
+      "status": "completed_post_result_exploratory",
       "source_gate": "G1r",
       "may_reopen_or_relabel_source_gate": false,
       "may_define_new_gate": false,
       "config": "configs/controlled_pde_density_attribution.json",
+      "result": "results/controlled_pde_density_attribution_20260803.json",
+      "source_commit": "cf675af4e4f01e560e76cefc4f5535550c40aa79",
       "diagnostic_seeds": 3,
       "success_thresholds": null,
       "questions": [
@@ -264,7 +266,12 @@
         "192x32",
         "768x8",
         "3072x2"
-      ]
+      ],
+      "maximum_population_objective_density_error": 0.004946218337863684,
+      "maximum_empirical_population_selected_density_error": 0.04401358217000961,
+      "maximum_empirical_sampled_selected_density_error": 0.04855314642190933,
+      "attribution": "finite_empirical_condition_information_and_allocation_are_material_while_capacity_is_not_primary",
+      "nonlinear_or_3d_confirmatory_training_authorized": false
     },
     {
       "id": "D0b",

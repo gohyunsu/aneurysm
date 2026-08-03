@@ -363,6 +363,30 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "3072x2",
     ]:
         raise ProtocolError("DA1 matched-budget cells changed.")
+    if da1["status"] == "completed_post_result_exploratory":
+        _require_keys(
+            da1,
+            [
+                "result",
+                "source_commit",
+                "maximum_population_objective_density_error",
+                "maximum_empirical_population_selected_density_error",
+                "maximum_empirical_sampled_selected_density_error",
+                "attribution",
+                "nonlinear_or_3d_confirmatory_training_authorized",
+            ],
+            "completed DA1",
+        )
+        if da1["result"] != (
+            "results/controlled_pde_density_attribution_20260803.json"
+        ):
+            raise ProtocolError("Completed DA1 must retain its public aggregate.")
+        if len(da1["source_commit"]) != 40:
+            raise ProtocolError("Completed DA1 must retain its exact source commit.")
+        if da1["nonlinear_or_3d_confirmatory_training_authorized"] is not False:
+            raise ProtocolError(
+                "Exploratory DA1 cannot authorize nonlinear or 3D confirmation."
+            )
     d0b = next(item for item in diagnostics if item["id"] == "D0b")
     _require_keys(
         d0b,

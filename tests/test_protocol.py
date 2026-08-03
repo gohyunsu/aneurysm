@@ -123,6 +123,17 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "no threshold"):
             validate_protocol(candidate)
 
+    def test_completed_density_attribution_cannot_authorize_3d(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        da1 = next(
+            item
+            for item in candidate["post_result_diagnostics"]
+            if item["id"] == "DA1"
+        )
+        da1["nonlinear_or_3d_confirmatory_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot authorize"):
+            validate_protocol(candidate)
+
     def test_post_result_d0b_cannot_relabel_d0(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         d0b = next(

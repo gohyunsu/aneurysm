@@ -206,9 +206,23 @@ operator decoder나 nesting algebra를 복잡하게 만드는 것은 근거가 �
 세 diagnostic seed와 결과 해석에는 pass threshold가 없고 G1/G1r을
 재개방할 수 없다.
 
-Correctly specified Gaussian에서도 이 ceiling이 회복되지 않으면 구현 또는
-optimization을 수정한다. Population objective는 통과하고 empirical NLL만
-실패하면 geometry-aware shrinkage/hierarchical estimator를 검토한다.
+DA1에서 analytic population NLL의 최악 density-only error는 0.00495로
+회복됐지만 empirical NLL은 checkpoint 선택법에 따라 최악
+0.04401/0.04855였다. 따라서 현 density family의 capacity보다 유한 condition
+정보에서 mean과 covariance를 함께 추정하는 과정이 병목이다. 다음
+development candidate는 다음처럼 제한한다.
+
+1. Geometry별 BC sample mean을 target으로 mean network를 별도 학습한다.
+2. 서로 다른 condition의 차이
+   \(\tfrac12(B_i-B_j)(B_i-B_j)^\top\)를 사용한 unbiased U-statistic으로
+   covariance target을 만들고 mean-estimation noise와 분리한다.
+3. Condition 수에 따른 target variance를 반영한 shrinkage와
+   geometry-disjoint validation을 사용한다.
+4. 최종 Gaussian likelihood는 평가와 calibration에 유지하고 empirical-NLL
+   baseline과 동일 network·budget에서 비교한다.
+
+이는 아직 선택된 method나 contribution이 아니다. Development-only 비교
+후 단일 estimator를 고정하고 별도 fresh exact sanity를 통과해야 한다.
 Non-Gaussian evidence 없이 conditional flow를 추가하지 않는다.
 
 ## 6. Module C — conditional solution operator

@@ -123,6 +123,13 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   없이 고정한다. True-parameter, population-NLL, empirical-NLL supervision과
   192×32/768×8/3,072×2 matched-budget scaling을 비교하며, G1/G1r seed를
   재사용하거나 어느 실패도 relabel하지 않는다.
+  Exact commit `cf675af`의 DA1은 A6000에서 30개 task를 정상 완료했다.
+  Analytic population NLL은 최악 density-only mean error 0.00495를
+  회복했지만 empirical NLL은 population-selected 0.04401,
+  sampled-selected 0.04855였다. 동일 6,144 record에서는 768×8이 기술적으로
+  가장 안정적이었고, fixed-axis 결과는 geometry 수와 반복 condition이 모두
+  필요함을 보였다. 이는 capacity보다 finite empirical information과
+  allocation이 주 병목이라는 attribution이며 새 gate 통과가 아니다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야

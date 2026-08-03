@@ -1,0 +1,162 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "controlled_pde_density_attribution_20260803",
+  "experiment_id": "controlled_pde_post_g1r_density_attribution_v1",
+  "evidence_status": "post_result_exploratory_attribution_completed",
+  "source_gate": "G1r",
+  "source_commit": "cf675af4e4f01e560e76cefc4f5535550c40aa79",
+  "source_config_sha256": "87b5eed93481bf5a0a51cfc42467fe4d5d299f0f720e3ec53c8eb4ce1a943701",
+  "source_metrics_sha256": "035273038c7dcf19acc5a20143cc29e20f4ddd9dc4a2c2f6ea84fa55093ba2a3",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-03T07:59:11.411287+00:00",
+    "ended_utc": "2026-08-03T08:00:13.351819+00:00",
+    "records": 30
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "contract": {
+    "diagnostic_seeds": 3,
+    "reference_train_geometries": 768,
+    "reference_conditions_per_geometry": 8,
+    "analysis_geometries": 512,
+    "analysis_conditions_per_geometry": 16,
+    "success_thresholds": null,
+    "g1_relabeled": false,
+    "g1r_relabeled": false,
+    "new_gate_defined": false
+  },
+  "reference_objectives": {
+    "oracle_parameter_regression": {
+      "maximum_density_only_standardized_mean_error": {
+        "mean": 0.0196082703769207,
+        "std": 0.0031099717760336657,
+        "min": 0.016017667949199677,
+        "max": 0.02145461179316044
+      },
+      "analytic_population_excess_nll": {
+        "mean": 0.00022415824544926485,
+        "std": 0.00002977536965017407,
+        "min": 0.00020307861268520355,
+        "max": 0.00025822059251368046
+      },
+      "mean_normalized_rmse_mean": 0.015684417138497036
+    },
+    "analytic_population_nll": {
+      "maximum_density_only_standardized_mean_error": {
+        "mean": 0.004328519726792972,
+        "std": 0.0006939906927591784,
+        "min": 0.003577562514692545,
+        "max": 0.004946218337863684
+      },
+      "analytic_population_excess_nll": {
+        "mean": 0.000013852181533972422,
+        "std": 0.000002435178098771593,
+        "min": 0.000011084135621786118,
+        "max": 0.000015664612874388695
+      },
+      "mean_normalized_rmse_mean": 0.0034658420675744614
+    },
+    "empirical_nll_population_selected": {
+      "maximum_density_only_standardized_mean_error": {
+        "mean": 0.03612483603258928,
+        "std": 0.008648650092927104,
+        "min": 0.02687717042863369,
+        "max": 0.04401358217000961
+      },
+      "analytic_population_excess_nll": {
+        "mean": 0.0021776099844525256,
+        "std": 0.0009847231425349164,
+        "min": 0.0015111023094505072,
+        "max": 0.0033086766488850117
+      },
+      "mean_normalized_rmse_mean": 0.035204242914915085
+    },
+    "empirical_nll_sampled_selected": {
+      "maximum_density_only_standardized_mean_error": {
+        "mean": 0.03625668833653132,
+        "std": 0.011265836015326977,
+        "min": 0.02643192559480667,
+        "max": 0.04855314642190933
+      },
+      "analytic_population_excess_nll": {
+        "mean": 0.002452156816919645,
+        "std": 0.0009631978528459214,
+        "min": 0.0017350530251860619,
+        "max": 0.0035469639115035534
+      },
+      "mean_normalized_rmse_mean": 0.037793188045422234
+    }
+  },
+  "sample_scaling": {
+    "matched_6144_boundary_records": {
+      "g192_c32": {
+        "mean_density_only_error": 0.05010755111773809,
+        "maximum_seed_error": 0.0717511773109436,
+        "mean_population_excess_nll": 0.0022633271291851997
+      },
+      "g768_c8": {
+        "mean_density_only_error": 0.03612483603258928,
+        "maximum_seed_error": 0.04401358217000961,
+        "mean_population_excess_nll": 0.0021776099844525256
+      },
+      "g3072_c2": {
+        "mean_density_only_error": 0.04715283028781414,
+        "maximum_seed_error": 0.0558389276266098,
+        "mean_population_excess_nll": 0.0024157445101688304
+      }
+    },
+    "fixed_768_geometries": {
+      "c2": {
+        "mean_density_only_error": 0.09244270871082942,
+        "maximum_seed_error": 0.10034395009279251,
+        "mean_population_excess_nll": 0.008166291750967503
+      },
+      "c8": {
+        "mean_density_only_error": 0.03612483603258928,
+        "maximum_seed_error": 0.04401358217000961,
+        "mean_population_excess_nll": 0.0021776099844525256
+      },
+      "c32": {
+        "mean_density_only_error": 0.027437116329868633,
+        "maximum_seed_error": 0.029313066974282265,
+        "mean_population_excess_nll": 0.0008104867301881313
+      }
+    },
+    "fixed_8_conditions": {
+      "g192": {
+        "mean_density_only_error": 0.09456772605578105,
+        "maximum_seed_error": 0.13108056783676147,
+        "mean_population_excess_nll": 0.008213179806868235
+      },
+      "g768": {
+        "mean_density_only_error": 0.03612483603258928,
+        "maximum_seed_error": 0.04401358217000961,
+        "mean_population_excess_nll": 0.0021776099844525256
+      },
+      "g3072": {
+        "mean_density_only_error": 0.028080295771360397,
+        "maximum_seed_error": 0.03366982936859131,
+        "mean_population_excess_nll": 0.0007735126807043949
+      }
+    }
+  },
+  "scientific_verdict": {
+    "capacity_or_optimizer_ceiling": "not_the_primary_bottleneck",
+    "finite_empirical_condition_information": "material_bottleneck",
+    "checkpoint_selection_noise": "secondary_in_this_three_seed_diagnostic",
+    "matched_budget_result": "balanced_geometry_and_repeat_allocation_was_descriptively_best",
+    "interpretation_limit": "The three diagnostic seeds do not establish an optimal universal allocation or a new gate."
+  },
+  "decision": {
+    "g1_status": "failed_unchanged",
+    "g1r_status": "failed_unchanged",
+    "nonlinear_or_3d_confirmatory_training_authorized": false,
+    "next_step": "Develop mean-covariance decoupled and group-aware shrinkage estimators on development-only seeds, then register a separate fresh exact-sanity protocol before any nonlinear or irregular-3D confirmation."
+  }
+}

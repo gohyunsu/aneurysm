@@ -357,8 +357,10 @@
             별도 G1r도 fresh 5-seed에서 coverage·operator·analytic
             nesting·projective 항은 통과했지만, 최악 seed density-only
             mean 7.53%와 quadrature mean 7.52%가 기준 5%를 넘어 실패했다.
-            따라서 G1은 재개방하지 않으며 density estimator의 표현력,
-            optimization, finite-data error를 먼저 분리한다. D0b의
+            DA1에서 population-NLL은 최악 0.495%를 회복했지만 empirical
+            NLL은 4.40–4.86%였다. 따라서 capacity가 아니라 유한 condition
+            정보와 결합 mean·covariance 추정이 주 병목이다. G1은
+            재개방하지 않는다. D0b의
             train-only POD는 표현 기준만 통과했으며 learned 비교와 fresh
             transient confirmation은 아직 남아 있다.
           </p>
@@ -366,6 +368,8 @@
           <a href="../results/controlled_pde_g1b_20260803.json">G1b attribution aggregate ↗</a>
           <a href="../results/controlled_pde_g1r_20260803.json">G1r prospective result ↗</a>
           <a href="../configs/controlled_pde_g1r.json">G1r frozen config ↗</a>
+          <a href="../results/controlled_pde_density_attribution_20260803.json">DA1 attribution result ↗</a>
+          <a href="../configs/controlled_pde_density_attribution.json">DA1 frozen contract ↗</a>
           <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
           <a href="../results/benchanxplore_d0b_20260803.json">D0b POD aggregate ↗</a>
         </div>

@@ -142,11 +142,14 @@ nesting, projective-excess는 통과한 반면, 최악 seed의 density-only mean
 
 Post-G1r density attribution은
 [`configs/controlled_pde_density_attribution.json`](configs/controlled_pde_density_attribution.json)에
-별도로 고정했습니다. True-parameter regression과 analytic population NLL로
-capacity/optimization 및 finite-condition noise를 분리하고, 동일 6,144
-boundary sample에서 192×32, 768×8, 3,072×2를 비교해 geometry coverage와
-repeated-condition information을 구분합니다. 이는 threshold가 없는
-post-result diagnostic이며 실패한 G1/G1r을 relabel하지 않습니다.
+별도로 고정해 완료했습니다. Analytic population NLL은 최악 density-only
+error 0.00495를 회복했지만 empirical NLL은 0.04401–0.04855였습니다.
+동일 6,144 boundary sample의 192×32, 768×8, 3,072×2와 fixed-axis 비교는
+geometry coverage와 repeated-condition information이 모두 필요함을
+보였습니다. 이는 threshold가 없는 post-result attribution이며 실패한
+G1/G1r을 relabel하지 않습니다. 공개 aggregate는
+[`results/controlled_pde_density_attribution_20260803.json`](results/controlled_pde_density_attribution_20260803.json)에
+있습니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

@@ -30,6 +30,9 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   density/operator/MC attribution만 수행한 post-result diagnostic
 - `controlled_pde_g1r_20260803.json`: fresh seed와 validation-only
   selection을 고정한 prospective re-entry 실패
+- `controlled_pde_density_attribution_20260803.json`: threshold 없이
+  capacity, finite-condition noise와 geometry×condition allocation을 분리한
+  post-result DA1
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -37,6 +40,12 @@ G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
 quadrature mean 0.07518이 사전 기준 0.05를 넘었다. 상대 baseline 개선으로
 이 absolute 실패를 덮지 않으며 nonlinear/3D confirmatory 학습은 계속
 보류한다.
+
+DA1에서는 같은 density network가 analytic population NLL로 최악
+density-only error 0.00495를 회복했지만 empirical NLL은
+0.04401–0.04855였다. Fixed-axis scaling은 geometry 수와 반복 condition
+수가 모두 오차를 줄임을 보였다. 이 attribution은 새 gate가 아니며,
+development-only estimator 선택 뒤 별도 fresh exact sanity가 필요하다.
 
 현재 temporal representation 결과:
 

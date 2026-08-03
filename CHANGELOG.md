@@ -4,6 +4,30 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · DA1 attributes G1r error to finite empirical information
+
+### Result
+
+- Exact public commit `cf675af`의 A6000 run이 30개 task를 3개 diagnostic
+  seed에서 정상 완료했다.
+- Analytic population NLL은 최악 density-only mean error 0.00495를
+  회복했다. 같은 network의 empirical NLL은 population-selected에서
+  0.04401, sampled-selected에서 0.04855였다.
+- 6,144 record matched comparison의 seed-평균은 192×32 0.05011,
+  768×8 0.03612, 3,072×2 0.04715였다. Fixed-axis 비교에서는 geometry와
+  반복 condition을 각각 늘릴 때 모두 개선됐다.
+
+### Decision
+
+- Density family/MLP capacity는 주 병목이 아니다. Finite empirical
+  condition information과 mean--covariance 결합 추정을 먼저 수정한다.
+- 3-seed matched-budget 순위를 보편적 optimum으로 주장하지 않는다.
+  G1/G1r은 failed로 유지하며 nonlinear/3D confirmatory 학습을 허용하지
+  않는다.
+- 다음 후보는 grouped mean regression과 pairwise-difference U-statistic
+  covariance target이다. Development-only 선택 뒤 별도 fresh exact-sanity
+  protocol을 등록한다.
+
 ## 2026-08-03 · Post-G1r density attribution contract
 
 ### Experiment

@@ -221,6 +221,21 @@ Sample scaling은 총 6,144 boundary record를 맞춘 192×32, 768×8,
 3,072×2와 fixed-geometry/fixed-condition 축을 사용한다. 세 diagnostic
 seed는 G1/G1r seed와 겹치지 않으며, 이 contract에는 pass threshold가 없다.
 
+DA1은 exact commit `cf675af`에서 30개 task를 정상 완료했다. Population
+objective의 최악 density-only error는 0.00495, empirical NLL의
+population-selected/sample-selected 최악값은 0.04401/0.04855였다. 따라서
+capacity failure가 아니라 finite empirical condition information을 주
+병목으로 귀속한다. Fixed-axis scaling에서 geometry 수와 condition 반복 수를
+각각 늘릴 때 모두 오차가 줄었지만, 3-seed matched-budget 순위를 보편적
+sample-allocation 법칙으로 일반화하지 않는다.
+
+후속 estimator development는 새 development seed에서만 수행한다.
+Grouped mean regression, pairwise-difference U-statistic covariance와
+empirical NLL을 같은 architecture·optimization budget으로 비교한다. DA1
+analysis seed는 선택에 재사용하지 않고, 선택된 한 estimator만 별도 fresh
+exact-sanity protocol에 들어간다. DA1 결과 자체는 G1/G1r 상태나
+nonlinear/3D 실행 권한을 바꾸지 않는다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

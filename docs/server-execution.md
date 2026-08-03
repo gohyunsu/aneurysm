@@ -123,6 +123,10 @@ network만 학습한다. True-parameter, analytic population NLL, empirical
 NLL과 matched-budget geometry×condition cells를 비교하며 result threshold가
 없다. Exact commit, config checksum, environment, status와 aggregate
 metric을 남기되 G1/G1r status는 항상 failed로 보존한다.
+Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
+aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
+이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은
+development-only grouped-moment estimator 비교다.
 
 ## Aneumo selective-cache contract
 

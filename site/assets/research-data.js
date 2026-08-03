@@ -90,8 +90,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G1",
       title: "Is condition–marginal coherence exact?",
-      copy: "G1r은 mean gate로 실패했다. Threshold 없는 post-result 진단이 true-parameter, population-NLL, matched-budget geometry×condition scaling으로 원인을 분리한다.",
-      state: "G1/G1r failed · density attribution registered",
+      copy: "DA1에서 population-NLL은 최악 0.00495를 회복했지만 empirical NLL은 0.04401–0.04855였다. Capacity보다 finite condition information이 병목이다.",
+      state: "G1/G1r failed · DA1 attribution complete · new gate pending",
       blocking: true
     },
     {
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "result",
+      title: "DA1 rules out density capacity as the primary bottleneck",
+      copy: "Exact cf675af의 A6000 30-task run에서 analytic population-NLL은 최악 density-only error 0.00495를 회복했지만 empirical NLL은 0.04401–0.04855였다. Fixed-axis 결과는 geometry와 repeated condition이 모두 필요함을 보였고, matched 6,144-record 비교의 768×8 우위는 3-seed descriptive 결과로만 남긴다. G1/G1r은 계속 failed다.",
+      files: ["results/controlled_pde_density_attribution_20260803.json", "docs/research-direction.md", "docs/model-spec.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

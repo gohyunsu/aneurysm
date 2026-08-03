@@ -216,8 +216,28 @@ NLL은 sampled-validation 선택과 analytic-population 선택을 모두 두어
 finite training data와 checkpoint noise를 분리한다. 세 diagnostic seed는
 G1/G1r과 겹치지 않으며 이 post-result 분석에는 통과 기준이 없다.
 
-이 분해에서 empirical data insufficiency가 확인될 때만 shrinkage 또는
-hierarchical density estimator를 새 fresh gate로 사전등록한다. 단순히
+DA1은 exact commit `cf675af`의 A6000 run에서 30개 학습 task를 exit 0으로
+완료했다. Analytic population NLL은 최악 seed의 density-only mean error를
+0.00495까지 낮춰 현 Gaussian family·MLP·optimizer가 정답 분포를 표현할
+수 있음을 보였다. 반면 empirical NLL은 population-validation 선택에서
+최악 0.04401, sampled-validation 선택에서 0.04855였다. Checkpoint 선택법
+차이의 seed 평균은 작았으므로 주 병목은 selection보다 finite empirical
+condition information이다.
+
+동일 6,144 boundary record에서 192×32, 768×8, 3,072×2의 seed-평균
+density-only error는 각각 0.05011, 0.03612, 0.04715였다. 세 seed뿐인
+exploratory 결과이므로 768×8을 보편적 optimum이라고 주장하지 않는다.
+다만 geometry를 768로 고정하면 condition 2→8→32에서
+0.09244→0.03612→0.02744, condition을 8로 고정하면 geometry
+192→768→3,072에서 0.09457→0.03612→0.02808로 개선됐다. Geometry
+coverage와 repeated-condition information이 모두 필요하다는 진단은
+분명하다.
+
+따라서 다음 development branch는 mean/covariance를 결합 NLL 하나로
+추정하지 않고, geometry-grouped mean regression과 pairwise-difference
+U-statistic covariance target을 분리한 shrinkage estimator를 비교한다.
+Estimator 선택은 DA1 analysis seed를 재사용하지 않는 development split에서
+끝내고, 선택 뒤 별도 fresh exact-sanity protocol을 등록한다. 단순히
 Gaussian을 flow로 교체하거나 threshold를 완화하지 않는다.
 
 ### G2 · paired response
