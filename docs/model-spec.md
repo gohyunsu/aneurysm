@@ -231,23 +231,24 @@ Aleatoric/epistemic이라는 넓은 용어보다 원인이 분명한
 
 ## 9. 시간 표현의 위치
 
-Transient field는 D0가 통과할 때만
+Fixed Fourier \(K=4/8/12\)는 frozen D0에서 localized bulge error를
+회복하지 못해 현행 architecture에서 제거했다. Global retained energy가
+0.9997이어도 bulge relative L2가 0.0616이면 의료적으로 중요한 국소
+파형을 보존했다고 볼 수 없다는 것이 이 결정의 근거다.
 
-\[
-h(x,t)=a_0(x)+\sum_{k=1}^{K}
-[a_k(x)\cos(2\pi kt/T)+b_k(x)\sin(2\pi kt/T)]
-\]
+D0b는 17/25 coefficient의 두 equal-budget 후보만 진단한다.
 
-로 decode한다. \(K=4,8,12\)를 비교한다.
+| 후보 | 정의 | leakage 방지 |
+|---|---|---|
+| DCT-II | 유한 구간의 비주기 cosine basis | 고정 변환 |
+| train-only POD | training field covariance의 상위 singular vector | test geometry를 basis fit에서 제외 |
 
-Fourier는 method novelty가 아니며 다음 두 조건이 필요하다.
-
-1. Oracle reconstruction에서 field, region, cycle-functional threshold 통과
-2. Learned compute-matched comparison에서 autoregressive rollout보다
-   fidelity–latency trade-off 개선
-
-주기 끝점이 불연속이거나 peak를 잃으면 spline/wavelet/direct-time query로
-교체한다.
+각 후보는 동일한 full L2, retained energy, cycle mean/peak, bulge L2로
+평가한다. 하나가 통과해도 곧바로 모델에 채택하지 않는다. Learned
+compute-matched 비교에서 autoregressive rollout보다 fidelity–latency
+Pareto frontier가 좋아야 선택한다. 아무 후보도 통과하지 않으면
+direct-time query 또는 autoregressive decoder를 사용하며, one-shot
+temporal representation은 contribution에서 완전히 제외한다.
 
 ## 10. 학습 목적
 
@@ -285,7 +286,8 @@ inference sample 수를 맞춘다.
 2. MLP/FNO backbone으로 nonlinear regular-grid paired-condition pilot
 3. Same geometry multi-BC 자산에서 pair sampler와 response loss
 4. GNN+latent-token irregular 3D operator
-5. D0 통과 시 one-shot transient decoder
+5. D0b와 learned compute-matched 비교를 모두 통과할 때만 선택된
+   one-shot transient decoder
 6. Secondary real-CFD/status analysis는 operator evidence가 확보된 뒤 재검토
 
 전체 architecture를 한 번에 학습하지 않는다. 각 단계는 이전 단계보다

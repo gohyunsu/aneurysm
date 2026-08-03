@@ -80,7 +80,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
 - **G1 · Exact-coherence sanity**: 정답 conditional distribution을 계산할
   수 있는 controlled PDE에서 oracle moment·coverage·nested-mask coherence를
   회복하지 못하면 복잡한 aneurysm 실험으로 확장하지 않는다. 현재 frozen
-  run은 실패했으므로 원인 분해 전까지 gate는 닫혀 있다.
+  run은 실패했으므로 원인 분해 전까지 gate는 닫혀 있다. `G1b`는
+  \(K=128/512/2048\)의 iid Monte Carlo floor와 sampling/BC-density/operator
+  오차를 분해하는 post-result diagnostic일 뿐이며 G1을 재개방하거나
+  소급해 relabel할 수 없다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야
@@ -88,7 +91,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
-  실패했으므로 현재 닫혀 있다.
+  실패했으므로 현재 닫혀 있다. D0b는 Fourier 8/12의 실수 계수 수와 같은
+  17/25 budget에서 DCT-II와 train-geometry-only POD를 geometry-disjoint로
+  비교한다. 이 새 representation gate를 통과하기 전에는 temporal
+  one-shot decoder를 선택하지 않는다.
 - **G4 · Cross-domain generality**: controlled PDE, nonlinear PDE, irregular
   3D aneurysm 중 적어도 세 domain에서 같은 method가 유효해야 한다.
 

@@ -47,7 +47,8 @@
       "benchanxplore_cases": 105,
       "benchanxplore_timesteps": 80,
       "benchanxplore_d0_status": "frozen_k8_gate_failed",
-      "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive"
+      "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
+      "controlled_pde_g1b_status": "implemented_container_smoke_passed_gpu_pending"
     },
     "contribution_priority": {
       "primary": [
@@ -116,7 +117,6 @@
     "hidden_dim": 256,
     "attention_layers": 8,
     "attention_heads": 8,
-    "temporal_fourier_modes": 8,
     "bc_basis_dim": 16,
     "bc_mixture_components": 4,
     "bc_covariance_rank": 4,
@@ -128,7 +128,21 @@
       "full",
       "partial",
       "missing"
-    ]
+    ],
+    "temporal_representation": {
+      "status": "exploratory_nonperiodic_gate_pending",
+      "fixed_fourier": "rejected_by_frozen_d0",
+      "candidate_bases": [
+        "dct_ii",
+        "train_only_pod"
+      ],
+      "coefficient_budgets": [
+        17,
+        25
+      ],
+      "selection_metric": "bulge_relative_l2",
+      "leakage_rule": "pod_fit_on_training_geometries_only"
+    }
   },
   "loss": {
     "full_field": 1.0,
@@ -185,6 +199,23 @@
         "controlled_pde",
         "nonlinear_pde",
         "irregular_3d"
+      ]
+    }
+  ],
+  "post_result_diagnostics": [
+    {
+      "id": "G1b",
+      "status": "implemented_container_smoke_passed_gpu_pending",
+      "source_gate": "G1",
+      "may_reopen_or_relabel_source_gate": false,
+      "questions": [
+        "finite_sample_projective_distance_floor",
+        "sampling_density_operator_mean_error_attribution"
+      ],
+      "sample_counts": [
+        128,
+        512,
+        2048
       ]
     }
   ],

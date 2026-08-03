@@ -36,8 +36,9 @@ AURORA는 다음 세 질문을 한 모델과 실험 프로토콜로 연결합니
 3. BC-induced structural uncertainty와 finite-data/model uncertainty를
    분리했을 때 각각 실제 BC shift와 geometry OOD를 추적하는가?
 
-One-shot Fourier cycle은 핵심 novelty가 아닙니다. D0 oracle 표현력 gate와
-compute-matched learned 비교를 모두 통과할 때만 효율 구성요소로 남깁니다.
+Fixed Fourier cycle은 frozen D0의 localized bulge gate를 실패해 제거했습니다.
+17/25 coefficient의 DCT-II·train-only POD가 새 D0b와 compute-matched learned
+비교를 모두 통과할 때만 one-shot temporal branch를 다시 검토합니다.
 
 ## 문서 읽는 순서
 
@@ -81,12 +82,11 @@ patient-bootstrap 95% CI `[-0.1083, 0.0066]`). 이 결과 때문에 downstream
 risk alignment는 논문의 primary contribution에서 제외했습니다.
 
 현재 source audit에서 Aneumo는 전체 학습 release가 아니라 geometry 1개 ×
-steady BC 2개 sample만 확인됐습니다. 반면 BenchAnXplore 105-case
-HDF5/XDMF archive는 무결성을 확인해, 학습 전 단계인 D0 temporal-basis
-audit을 `configs/benchanxplore_d0.json`에 결과 확인 전에 등록했습니다.
-이 audit은 Fourier 표현 가능성만 판단하며 모델 성능으로 해석하지
-않습니다. Main method는 exact controlled PDE → nonlinear PDE → paired-BC
-irregular 3D 순서로 검증합니다.
+steady BC 2개 sample만 확인됐습니다. BenchAnXplore 105-case HDF5/XDMF
+archive는 무결성을 확인해 결과 확인 전에 D0를 등록하고 실행했습니다.
+Fixed Fourier는 실패했으며, 후속 D0b도 표현 가능성만 판단할 뿐 모델 성능
+또는 novelty로 해석하지 않습니다. Main method는 exact controlled PDE →
+nonlinear PDE → paired-BC irregular 3D 순서로 검증합니다.
 
 D0 첫 실행은 scheduler walltime으로 종료되어 metric이 없었습니다.
 동일 protocol의 attempt 2는 정상 완료됐지만 frozen \(K=8\) gate를
@@ -108,8 +108,9 @@ Frozen 5-seed run은 absolute mean, coverage, raw projective gate를 모두
 통과하지 못했습니다. Direct baseline보다 일관된 상대 개선은 있었지만
 claim은 `unsupported`이며 결과는
 [`results/controlled_pde_g1_attempt2_20260803.json`](results/controlled_pde_g1_attempt2_20260803.json)에
-있습니다. 다음 G1b는 finite-sample metric floor와 density/operator/MC
-error를 분해하는 exploratory diagnostic입니다.
+있습니다. G1b는 finite-sample metric floor와 density/operator/MC error를
+분해하도록 구현돼 pinned-container smoke를 통과했으며, GPU 결과와 무관하게
+기존 G1 실패를 재개방하지 않는 exploratory diagnostic입니다.
 
 ## 해석의 경계
 

@@ -86,8 +86,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     _require_keys(
         protocol,
-        ["schema_version", "project", "task", "datasets", "model", "loss", "gates",
-         "evaluation", "phases"],
+        [
+            "schema_version",
+            "project",
+            "task",
+            "datasets",
+            "model",
+            "loss",
+            "gates",
+            "post_result_diagnostics",
+            "evaluation",
+            "phases",
+        ],
         "protocol",
     )
     checks: list[str] = []
@@ -162,12 +172,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     model = protocol["model"]
     numeric_model_keys = [
         "surface_queries", "volume_queries", "knn", "latent_tokens", "hidden_dim",
-        "attention_layers", "attention_heads", "temporal_fourier_modes",
-        "bc_basis_dim", "bc_mixture_components", "bc_covariance_rank",
-        "bc_samples_train", "bc_samples_eval", "ensemble_members",
-        "physics_collocation_points",
+        "attention_layers", "attention_heads", "bc_basis_dim",
+        "bc_mixture_components", "bc_covariance_rank", "bc_samples_train",
+        "bc_samples_eval", "ensemble_members", "physics_collocation_points",
     ]
-    _require_keys(model, [*numeric_model_keys, "observation_modes"], "model")
+    _require_keys(
+        model,
+        [*numeric_model_keys, "observation_modes", "temporal_representation"],
+        "model",
+    )
     for key in numeric_model_keys:
         if not isinstance(model[key], int) or model[key] <= 0:
             raise ProtocolError(f"model.{key} must be a positive integer.")
@@ -177,6 +190,27 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("Evaluation must use at least as many BC samples as training.")
     if set(model["observation_modes"]) != {"full", "partial", "missing"}:
         raise ProtocolError("Model must support full, partial, and missing BC modes.")
+    temporal = model["temporal_representation"]
+    _require_keys(
+        temporal,
+        [
+            "status",
+            "fixed_fourier",
+            "candidate_bases",
+            "coefficient_budgets",
+            "selection_metric",
+            "leakage_rule",
+        ],
+        "model.temporal_representation",
+    )
+    if temporal["fixed_fourier"] != "rejected_by_frozen_d0":
+        raise ProtocolError("Frozen D0 requires fixed Fourier to remain rejected.")
+    if set(temporal["candidate_bases"]) != {"dct_ii", "train_only_pod"}:
+        raise ProtocolError("D0b candidates must remain DCT-II and train-only POD.")
+    if temporal["coefficient_budgets"] != [17, 25]:
+        raise ProtocolError("D0b must compare the frozen equal budgets 17 and 25.")
+    if temporal["leakage_rule"] != "pod_fit_on_training_geometries_only":
+        raise ProtocolError("Temporal POD must be fit on training geometries only.")
     checks.append("model dimensional contract")
 
     loss = protocol["loss"]
@@ -210,6 +244,30 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if set(g4.get("required_domains", [])) != required_domains:
         raise ProtocolError("G4 must retain controlled, nonlinear, and irregular-3D tests.")
     checks.append("coherence and cross-domain blocking gates")
+
+    diagnostics = protocol["post_result_diagnostics"]
+    diagnostic_ids = _unique_ids(diagnostics, "id", "post_result_diagnostics")
+    if diagnostic_ids != {"G1b"}:
+        raise ProtocolError("Schema v2 must retain only the registered G1b diagnostic.")
+    g1b = diagnostics[0]
+    _require_keys(
+        g1b,
+        [
+            "status",
+            "source_gate",
+            "may_reopen_or_relabel_source_gate",
+            "questions",
+            "sample_counts",
+        ],
+        "G1b diagnostic",
+    )
+    if g1b["source_gate"] != "G1":
+        raise ProtocolError("G1b must remain attributed to the failed G1 gate.")
+    if g1b["may_reopen_or_relabel_source_gate"] is not False:
+        raise ProtocolError("A post-result diagnostic cannot reopen or relabel G1.")
+    if g1b["sample_counts"] != [128, 512, 2048]:
+        raise ProtocolError("G1b sample counts are frozen at 128, 512, and 2048.")
+    checks.append("post-result diagnostic non-inflation contract")
 
     evaluation = protocol["evaluation"]
     _require_keys(

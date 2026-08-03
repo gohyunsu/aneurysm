@@ -380,7 +380,7 @@
             <p>
               이 페이지는 architecture contract를 설명합니다. 현재 공개 구현은
               protocol validator, secondary clinical diagnostic, D0 temporal
-              audit까지이며, full
+              audit, G1b attribution diagnostic까지이며, full
               GNN–operator는 gate를 통과한 뒤 단계 1부터 구현합니다. “proposed”와
               “implemented”를 구분합니다.
             </p>
@@ -458,11 +458,13 @@
         <section class="chapter-panel" id="temporal" role="tabpanel"
                  aria-labelledby="tab-temporal" data-chapter-panel tabindex="-1" hidden>
           <header class="chapter-header">
-            <p class="eyebrow">06 · ONE-SHOT CYCLE</p>
-            <h2>다음 순간 대신,<br><em>주기 전체의 모양을.</em></h2>
+            <p class="eyebrow">06 · TEMPORAL REPRESENTATION AUDIT</p>
+            <h2>멋진 decoder보다 먼저,<br><em>정보가 보존되는가?</em></h2>
             <p>
               일반적인 rollout 모델은 t=0에서 t=1을 예측하고, 그 예측을 다시
-              입력해 t=2를 만듭니다. 작은 오차가 80번 누적될 수 있습니다.
+              입력해 t=2를 만듭니다. 반대로 one-shot basis는 빠르지만, 적은
+              coefficient 안에 국소 peak와 bulge 흐름을 잃을 수 있습니다.
+              AURORA는 어느 쪽도 결과 전에 정답으로 정하지 않습니다.
             </p>
           </header>
 
@@ -474,29 +476,30 @@
               <p>앞 단계의 오차가 다음 입력이 됩니다. 긴 rollout에서 drift와 위상 오차가 커질 수 있습니다.</p>
             </article>
             <article>
-              <p class="eyebrow">AURORA</p>
-              <div class="basis-bars" aria-label="시간 Fourier 계수"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <h3>17개 계수를 한 번에</h3>
-              <p>상수항 1개와 8개 주파수의 sine/cosine 계수 16개로 cardiac cycle을 복원합니다.</p>
+              <p class="eyebrow">FROZEN D0 · REJECTED</p>
+              <div class="basis-bars" aria-label="폐기된 fixed Fourier 계수"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <h3>Fixed Fourier는 선택되지 않았습니다.</h3>
+              <p>K=8은 global energy 99.97%를 보존했지만 bulge L2가 6.16%였습니다. K=12도 2.93%로 2% 기준을 넘었습니다.</p>
             </article>
           </div>
 
           <div class="large-equation boxed">
-            h(x,t) = a₀(x) + Σ<sub>k=1…8</sub>[a<sub>k</sub>(x)cos(2πkt/T) + b<sub>k</sub>(x)sin(2πkt/T)]
+            높은 global energy ≠ 국소 혈류 파형 보존
           </div>
 
           <div class="interpretation-list">
-            <article><span>a₀</span><div><h3>평균 수준</h3><p>한 주기 동안의 기본 속도·압력·WSS 수준입니다.</p></div></article>
-            <article><span>k=1</span><div><h3>주된 심장 박동</h3><p>한 주기에 한 번 반복되는 가장 큰 파형 변화를 담습니다.</p></div></article>
-            <article><span>k=2…8</span><div><h3>세부 파형</h3><p>peak의 날카로움, 지연, 복잡한 진동을 더합니다.</p></div></article>
+            <article><span>DCT</span><div><h3>유한 구간의 비주기 후보</h3><p>DCT-II는 주기 끝점이 정확히 이어진다고 강제하지 않습니다. 17·25개 coefficient에서 비교합니다.</p></div></article>
+            <article><span>POD</span><div><h3>데이터가 배운 시간 basis</h3><p>Temporal POD는 training geometry의 covariance에서만 basis를 구합니다. Test case는 basis 학습에 절대 쓰지 않습니다.</p></div></article>
+            <article><span>Gate</span><div><h3>같은 budget, 같은 기준</h3><p>Full L2뿐 아니라 retained energy, cycle mean·peak, bulge L2를 모두 통과해야 learned 비교로 갑니다.</p></div></article>
           </div>
 
           <aside class="honesty-note">
-            <b>Fourier는 novelty가 아니라 조건부 engineering choice입니다.</b>
+            <b>D0b도 novelty가 아니라 representation 진단입니다.</b>
             <p>
-              먼저 105 case 전체의 oracle D0에서 4·8·12 mode를 평가합니다.
-              K=8이 사전 threshold를 통과하고, learned compute-matched
-              autoregressive 비교에서도 이득이 있을 때만 유지합니다.
+              DCT-II 또는 train-only POD가 oracle threshold를 통과하고,
+              learned compute-matched 비교에서 rollout보다
+              fidelity–latency Pareto frontier가 좋을 때만 one-shot branch를
+              복원합니다. 통과 후보가 없으면 temporal one-shot을 버립니다.
             </p>
           </aside>
           <button class="chapter-next" type="button" data-next="functionals">다음 · Wall field가 중요한 이유 <span>→</span></button>
@@ -688,7 +691,7 @@
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
             <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>ID partial/missing calibration과, 값을 제공한 unseen-BC의 same-geometry ΔH를 strong baseline과 비교합니다. 숨은 BC 법칙 자체가 바뀌면 detection만 평가합니다.</p></div><b>primary evidence</b></article>
-            <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>D0 oracle과 learned compute-matched 비교를 모두 통과할 때만 Fourier cycle branch를 유지합니다.</p></div><b>secondary efficiency</b></article>
+            <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>Fixed Fourier는 이미 탈락했습니다. Equal-budget DCT/POD의 D0b와 learned compute-matched 비교를 모두 통과할 때만 새 temporal branch를 선택합니다.</p></div><b>현재 닫힘</b></article>
             <article><span>G4</span><div><h3>의료 전용 trick은 아닌가?</h3><p>Controlled PDE, nonlinear PDE, irregular 3D에서 같은 coherence·response method를 검증합니다.</p></div><b>AAAI generality</b></article>
           </div>
 
@@ -787,6 +790,10 @@
           <div class="compute-status warning">
             <span class="status-dot warning"></span>
             <div><p class="eyebrow">LEGACY CLINICAL DIAGNOSTIC · COMPLETE</p><h3>Negative signal · removed from primary method</h3><p>C+M 대비 +real-CFD summary의 ΔAUPRC는 −0.0419 [−0.1083, 0.0066]이었습니다. v2의 G1은 별도의 exact-coherence gate입니다.</p></div>
+          </div>
+          <div class="compute-status">
+            <span class="status-dot complete"></span>
+            <div><p class="eyebrow">G1B ATTRIBUTION · IMPLEMENTED</p><h3>Container smoke passed · GPU run pending</h3><p>Frozen G1을 바꾸지 않은 채 K=128/512/2048의 iid distance floor와 sampling·BC-density·operator mean error를 분해합니다. 완료돼도 G1을 재개방하지 않습니다.</p></div>
           </div>
 
           <div class="repro-chain">

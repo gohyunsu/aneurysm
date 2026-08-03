@@ -4,6 +4,38 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Failed-G1 attribution and temporal-contract correction
+
+### Experiment
+
+- `G1b`를 frozen G1 뒤의 명시적 post-result diagnostic으로 구현했다.
+  Frozen model·5 seeds·geometry split·500 epoch를 그대로 재학습하고
+  \(K=128/512/2048\)에서 iid two-sample floor와 양방향 nested sampling을
+  비교한다.
+- Exact Poisson의 선형성을 이용해 conditional-mean error를 sampling only,
+  BC-density only, operator only, end-to-end로 분해한다. G1b는 새 gate가
+  아니며 완료·양수 결과 모두 기존 G1 실패를 재개방하거나 relabel하지 않는다.
+- Pinned Singularity 환경에서 G1b tensor test 4개와 축소 end-to-end
+  학습→sampling→attribution→aggregation smoke를 통과했다. 전체 suite의
+  나머지 오류 2개는 기본 SIF에 BenchAnXplore용 외부 `h5py` layer가 없는
+  기존 환경 차이로 분리했다.
+
+### Model
+
+- Frozen D0 실패 뒤에도 `configs/aurora_v1.json`과 상세 사이트에 남아 있던
+  `temporal_fourier_modes=8` 현행 표시를 제거했다.
+- D0b는 17/25 equal coefficient budget의 DCT-II와
+  train-geometry-only temporal POD만 geometry-disjoint로 비교한다. 새
+  oracle gate와 learned compute-matched 비교 전에는 one-shot temporal
+  branch를 선택하지 않는다.
+
+### Site
+
+- 11장 상세 가이드의 temporal 창을 계획형 Fourier 설명에서 실제 실패
+  수치, global-energy 함정, DCT/POD 후보, leakage 방지 규칙으로 교체했다.
+- G1b 구현·container smoke 상태와 “G1 재개방 불가” 경계를 변경 이력과
+  실행 상태 창에 추가했다.
+
 ## 2026-08-03 · Novelty reset: coherent partial-condition operators
 
 ### Research

@@ -110,9 +110,17 @@ BC completion sample과 model ensemble을 두 축으로 유지한다.
 
 ### Temporal representation
 
-D0에서 80-step field를 Fourier 4/8/12 mode로 oracle reconstruction한다.
-Primary \(K=8\)이 사전 threshold를 통과할 때만 learned one-shot branch를
-유지한다. 통과는 모델 성능이 아니라 representation feasibility다.
+Frozen D0에서 Fourier \(K=4/8/12\)를 80-step field에 oracle projection한
+결과, \(K=8\)은 full·peak·bulge 기준을 실패했고 \(K=12\)도 bulge relative
+L2 0.0293으로 0.02 기준을 넘었다. 따라서 fixed Fourier decoder는 현재
+architecture에서 제거했다.
+
+Post-result exploratory D0b는 Fourier \(K=8/12\)의 실수 coefficient 수와
+같은 17/25 budget으로 DCT-II와 train-only POD를 비교한다. POD basis는
+각 geometry-disjoint fold의 training geometry에서만 추정한다. 동일한
+full·energy·cycle mean/peak·bulge 기준을 모두 통과한 표현만 learned
+compute-matched 단계로 보낸다. 통과 후보가 없으면 one-shot temporal
+branch 자체를 버린다.
 
 ## 6. AAAI에 필요한 일반성
 
@@ -164,7 +172,7 @@ Field만 좋아지거나 pair response만 좋아지면 핵심 주장을 축소�
 
 ### G3 · transient efficiency
 
-- D0 oracle representation 통과
+- D0b의 equal-budget nonperiodic/train-only oracle representation 통과
 - compute-matched autoregressive baseline 대비 cycle field/peak error와
   latency의 Pareto improvement
 

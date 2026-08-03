@@ -53,6 +53,18 @@ relative L2 0.0293으로 0.02 기준을 넘었다. Fixed Fourier branch는
 중단하고 equal-coefficient nonperiodic/train-only basis만 exploratory
 D0b에서 비교한다.
 
+D0b의 coefficient budget은 결과를 본 뒤 임의로 늘리지 않는다.
+
+| 후보 | budget | fit 범위 | 평가 |
+|---|---:|---|---|
+| DCT-II | 17, 25 | 고정 basis | held-out geometry |
+| Temporal POD | 17, 25 | train geometry covariance only | held-out geometry |
+
+105 geometry를 고정된 geometry-disjoint fold로 나누고, POD는 매 fold의
+training case만으로 fit한다. Frozen D0와 같은 full L2, retained energy,
+cycle mean/peak, bulge L2 기준을 사용한다. D0b는 D0 실패 뒤 설계한
+exploratory representation diagnostic이며 D0를 대체하지 않는다.
+
 ### G1 · exact condition–marginal coherence
 
 정답 conditional distribution을 계산 가능한 controlled PDE에서 평가한다.
@@ -84,6 +96,27 @@ raw projective distance 0.1129로 실패했다. Direct masked Gaussian보다
 모든 mask의 error/energy score는 개선했지만 이는 gate pass가 아니다.
 Finite-sample two-sample floor와 density/operator error를 분해하는 G1b는
 명시적으로 post-result exploratory diagnostic으로 기록한다.
+
+#### G1b · 실패 원인 귀속만 수행
+
+G1b는 frozen G1의 같은 5 seeds, train/test geometry, epoch, model을
+재학습한다. threshold를 조정하지 않고 다음만 계산한다.
+
+1. \(K=128,512,2048\)에서 두 iid sample set의 sliced-distance를
+   finite-sample floor로 측정한다.
+2. joint direct sampling과 `left→right`, `right→left` nested sampling의
+   raw distance에서 같은-\(K\) iid floor를 함께 보고한다. Gaussian
+   nested factorization의 mean/covariance residual은 analytic하게
+   별도 확인한다.
+3. exact Poisson의 선형성을 이용해 conditional-mean error를
+   `sampling only`, `learned BC density only`, `learned operator only`,
+   `end-to-end`로 분해한다.
+4. 각 distance는 8회 sampling replicate와 32개 고정 random projection을
+   사용한다.
+
+`G1b complete`는 `G1 passed`를 뜻하지 않는다. 새로운 absolute threshold를
+설정하거나 G1 결과를 소급해 바꾸려면 독립된 새 confirmatory protocol과
+새 데이터 생성이 필요하다.
 
 ### G2 · paired response fidelity
 

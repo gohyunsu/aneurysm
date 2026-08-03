@@ -104,8 +104,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G3",
       title: "Is one-shot actually efficient?",
-      copy: "D0 oracle gate와 learned compute-matched 비교를 모두 통과할 때만 Fourier cycle decoder를 유지한다.",
-      state: "K=8 failed · fixed Fourier rejected",
+      copy: "Fixed Fourier는 폐기했다. Equal-budget DCT-II/train-only POD의 D0b와 learned compute-matched 비교를 통과할 때만 temporal branch를 선택한다.",
+      state: "Fixed Fourier rejected · D0b pending",
       blocking: false
     },
     {
@@ -144,6 +144,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Failed-G1 attribution diagnostic is implementation-complete",
+      copy: "Frozen G1의 같은 model·seed·split을 재학습해 K=128/512/2048 iid distance floor, 양방향 nested Gaussian factorization, sampling/BC-density/operator conditional-mean error를 분해하도록 구현했다. Pinned container의 tensor test와 축소 end-to-end smoke를 통과했으며 이 진단은 G1을 재개방하지 않는다.",
+      files: ["configs/controlled_pde_g1b_diagnostic.json", "src/aurora/controlled_pde_diagnostic.py", "tests/test_controlled_pde_diagnostic.py", "cluster/ssu_a6gpu_controlled_g1b.pbs"]
+    },
+    {
+      date: "2026.08.03",
+      category: "model",
+      title: "Temporal contract removes the failed fixed-Fourier decoder",
+      copy: "문서만이 아니라 machine-readable model contract와 상세 가이드에서도 K=8 Fourier를 제거했다. D0b는 동일한 17/25 coefficient budget에서 DCT-II와 train-geometry-only POD를 비교하며, 통과 전에는 one-shot temporal branch가 없다.",
+      files: ["configs/aurora_v1.json", "docs/model-spec.md", "docs/experiment-protocol.md", "site/learn.html"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

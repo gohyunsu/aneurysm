@@ -49,6 +49,20 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "duplicate"):
             validate_protocol(candidate)
 
+    def test_fixed_fourier_cannot_return_without_a_new_contract(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["model"]["temporal_representation"]["fixed_fourier"] = "selected"
+        with self.assertRaisesRegex(ProtocolError, "fixed Fourier"):
+            validate_protocol(candidate)
+
+    def test_post_result_diagnostic_cannot_reopen_g1(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["post_result_diagnostics"][0][
+            "may_reopen_or_relabel_source_gate"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot reopen"):
+            validate_protocol(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

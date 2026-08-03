@@ -1,0 +1,16 @@
+{
+  "experiment_id": "controlled_pde_g1b_attribution_v1",
+  "status": "post_result_exploratory_diagnostic",
+  "base_experiment_id": "controlled_pde_g1_v1",
+  "base_config": "controlled_pde_g1.json",
+  "base_config_sha256": "b0a60188cf8b9b4c9bd504338d7798b0b912c693f07f4178f5035c948e8e63bc",
+  "failed_result": "../results/controlled_pde_g1_attempt2_20260803.json",
+  "failed_result_sha256": "1c6e16a0be033c5ee744cdab049887d56102a5be66ea1b83688bf42fbcda335d",
+  "sample_counts": [128, 512, 2048],
+  "attribution_geometries": 64,
+  "distance_replicates": 8,
+  "sliced_projections": 32,
+  "operator_sample_chunk": 256,
+  "nested_routes": ["left_then_right", "right_then_left"],
+  "interpretation": "Post-result diagnosis of the failed frozen G1 gate. This run estimates finite-sample distance floors and separates sampling, learned-BC-density, and learned-operator contributions. It cannot reopen, replace, or relabel G1."
+}
