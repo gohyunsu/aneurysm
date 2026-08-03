@@ -149,7 +149,7 @@ window.AURORA_DATA = Object.freeze({
       category: "experiment",
       title: "Density attribution separates capacity, objective noise, and sample allocation",
       copy: "G1/G1r과 겹치지 않는 세 diagnostic seed에서 true-parameter regression, analytic population NLL, empirical NLL을 같은 density network로 비교한다. 6,144 boundary sample을 고정한 192×32, 768×8, 3,072×2와 fixed-axis cells를 등록했다. Success threshold가 없으며 G1/G1r을 relabel할 수 없다.",
-      files: ["configs/controlled_pde_density_attribution.json", "src/aurora/controlled_pde_density_attribution.py", "cluster/ssu_a6gpu_controlled_density_attribution.pbs", "docs/experiment-protocol.md"]
+      files: ["configs/aurora_v1.json", "configs/controlled_pde_density_attribution.json", "src/aurora/controlled_pde_density_attribution.py", "cluster/ssu_a6gpu_controlled_density_attribution.pbs", "docs/model-spec.md", "docs/experiment-protocol.md"]
     },
     {
       date: "2026.08.03",

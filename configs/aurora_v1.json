@@ -246,6 +246,27 @@
       ]
     },
     {
+      "id": "DA1",
+      "status": "preregistered_post_result_unrun",
+      "source_gate": "G1r",
+      "may_reopen_or_relabel_source_gate": false,
+      "may_define_new_gate": false,
+      "config": "configs/controlled_pde_density_attribution.json",
+      "diagnostic_seeds": 3,
+      "success_thresholds": null,
+      "questions": [
+        "density_representation_and_optimizer_ceiling",
+        "empirical_condition_sampling_noise",
+        "geometry_coverage_vs_repeated_condition_information",
+        "checkpoint_selection_noise"
+      ],
+      "matched_boundary_record_cells": [
+        "192x32",
+        "768x8",
+        "3072x2"
+      ]
+    },
+    {
       "id": "D0b",
       "status": "completed_train_only_pod_representation_eligible",
       "source_gate": "G3",

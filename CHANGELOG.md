@@ -23,6 +23,8 @@
   geometry coverage, repeated-condition information만 분리한다.
 - 어떤 결과도 G1/G1r을 relabel하거나 nonlinear/3D 학습을 허용하지 않는다.
   결과가 estimator 변경을 시사하면 새 protocol과 fresh seed가 필요하다.
+- Main protocol은 이를 threshold 없는 `DA1`로 고정하고, validator가 seed
+  수·matched-budget cell·non-relabeling 계약을 강제한다.
 
 ## 2026-08-03 · Aneumo physical-scaling audit is velocity-only positive
 

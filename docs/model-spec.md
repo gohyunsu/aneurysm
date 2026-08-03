@@ -201,6 +201,11 @@ operator decoder나 nesting algebra를 복잡하게 만드는 것은 근거가 �
 3. geometry count와 condition-per-geometry count를 분리한 sample-scaling
    곡선으로 필요한 관측 구조를 추정한다.
 
+이 post-result 계약은
+`configs/controlled_pde_density_attribution.json`에 `DA1`로 고정한다.
+세 diagnostic seed와 결과 해석에는 pass threshold가 없고 G1/G1r을
+재개방할 수 없다.
+
 Correctly specified Gaussian에서도 이 ceiling이 회복되지 않으면 구현 또는
 optimization을 수정한다. Population objective는 통과하고 empirical NLL만
 실패하면 geometry-aware shrinkage/hierarchical estimator를 검토한다.

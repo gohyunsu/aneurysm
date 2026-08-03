@@ -303,8 +303,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     diagnostics = protocol["post_result_diagnostics"]
     diagnostic_ids = _unique_ids(diagnostics, "id", "post_result_diagnostics")
-    if diagnostic_ids != {"G1b", "D0b"}:
-        raise ProtocolError("Schema v2 must retain the registered G1b and D0b diagnostics.")
+    if diagnostic_ids != {"G1b", "DA1", "D0b"}:
+        raise ProtocolError(
+            "Schema v2 must retain G1b, DA1, and D0b diagnostics."
+        )
     g1b = next(item for item in diagnostics if item["id"] == "G1b")
     _require_keys(
         g1b,
@@ -323,6 +325,44 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("A post-result diagnostic cannot reopen or relabel G1.")
     if g1b["sample_counts"] != [128, 512, 2048]:
         raise ProtocolError("G1b sample counts are frozen at 128, 512, and 2048.")
+    da1 = next(item for item in diagnostics if item["id"] == "DA1")
+    _require_keys(
+        da1,
+        [
+            "status",
+            "source_gate",
+            "may_reopen_or_relabel_source_gate",
+            "may_define_new_gate",
+            "config",
+            "diagnostic_seeds",
+            "success_thresholds",
+            "questions",
+            "matched_boundary_record_cells",
+        ],
+        "DA1 density attribution",
+    )
+    if da1["status"] not in {
+        "preregistered_post_result_unrun",
+        "completed_post_result_exploratory",
+    }:
+        raise ProtocolError("DA1 must retain a registered or exploratory status.")
+    if da1["source_gate"] != "G1r":
+        raise ProtocolError("DA1 must remain attributed to failed G1r.")
+    if (
+        da1["may_reopen_or_relabel_source_gate"] is not False
+        or da1["may_define_new_gate"] is not False
+    ):
+        raise ProtocolError("DA1 cannot relabel a failure or define a new gate.")
+    if da1["config"] != "configs/controlled_pde_density_attribution.json":
+        raise ProtocolError("DA1 must point to its executable frozen config.")
+    if da1["diagnostic_seeds"] != 3 or da1["success_thresholds"] is not None:
+        raise ProtocolError("DA1 requires three diagnostic seeds and no threshold.")
+    if da1["matched_boundary_record_cells"] != [
+        "192x32",
+        "768x8",
+        "3072x2",
+    ]:
+        raise ProtocolError("DA1 matched-budget cells changed.")
     d0b = next(item for item in diagnostics if item["id"] == "D0b")
     _require_keys(
         d0b,

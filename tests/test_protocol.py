@@ -99,6 +99,30 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cannot reopen"):
             validate_protocol(candidate)
 
+    def test_density_attribution_cannot_define_a_gate(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        da1 = next(
+            item
+            for item in candidate["post_result_diagnostics"]
+            if item["id"] == "DA1"
+        )
+        da1["may_define_new_gate"] = True
+        with self.assertRaisesRegex(ProtocolError, "define a new gate"):
+            validate_protocol(candidate)
+
+    def test_density_attribution_cannot_add_a_threshold(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        da1 = next(
+            item
+            for item in candidate["post_result_diagnostics"]
+            if item["id"] == "DA1"
+        )
+        da1["success_thresholds"] = {
+            "maximum_density_only_standardized_mean_error": 0.05
+        }
+        with self.assertRaisesRegex(ProtocolError, "no threshold"):
+            validate_protocol(candidate)
+
     def test_post_result_d0b_cannot_relabel_d0(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         d0b = next(
