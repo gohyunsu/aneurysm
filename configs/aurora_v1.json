@@ -50,7 +50,8 @@
       "aneumo_scaling_audit_source_commit": "e12ff0ad9688857a7c287d64595341e8a753a8fa",
       "aneumo_velocity_response_eligible": true,
       "aneumo_pressure_response_eligible": false,
-      "aneumo_confirmatory_3d_training_authorized": true,
+      "aneumo_velocity_only_protocol_registration_authorized": true,
+      "aneumo_confirmatory_3d_headline_authorized": false,
       "aneug_flow_bc_variation": false,
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,
@@ -74,7 +75,14 @@
       ],
       "secondary_only": [
         "rupture_status_functional_sufficiency"
-      ]
+      ],
+      "candidate_not_yet_contribution": {
+        "name": "solution_functional_decision_consequence_of_conditioning_inconsistency",
+        "required_theory": "bounded_loss_Bayes_regret_bound_from_route_posterior_divergence",
+        "required_algorithm": "coherent_test_time_boundary_component_acquisition",
+        "required_evidence": "N1_strong_baselines_then_irregular_3d",
+        "active_acquisition_alone_is_novel": false
+      }
     }
   },
   "datasets": [
@@ -167,7 +175,9 @@
         "pressure"
       ],
       "mandatory_baseline": "same_case_anchor_train_tuned_global_power",
-      "activation_condition": "g1s_completed_passed_before_any_learned_g2_run"
+      "protocol_registration_condition": "g1s_completed_passed",
+      "headline_activation_condition": "n1_nonlinear_strong_baseline_gate_passed",
+      "headline_authorized": false
     }
   },
   "loss": {
@@ -393,6 +403,66 @@
       "worst_seed_density_only_standardized_mean_error": 0.028633680194616318,
       "worst_seed_end_to_end_quadrature_mean_error": 0.029765237122774124,
       "nonlinear_or_3d_confirmatory_training_authorized": true
+    }
+  ],
+  "nonlinear_protocols": [
+    {
+      "id": "N0",
+      "name": "semilinear_multicomponent_solver_nontriviality",
+      "status": "preregistered_before_gpu_run",
+      "source_gate": "G1s",
+      "config": "configs/nonlinear_pde_n0.json",
+      "pde": "-div(a_G grad u) + lambda_G u^3 = f_G",
+      "context_dim": 5,
+      "boundary_components": 8,
+      "boundary_density": "context_conditioned_two_component_gaussian_mixture",
+      "conditioning": "analytic_for_arbitrary_component_masks",
+      "functionals": [
+        "domain_mean",
+        "central_hotspot",
+        "smooth_maximum",
+        "right_boundary_flux"
+      ],
+      "checks": [
+        "solver_residual",
+        "nested_grid_discretization",
+        "nonlinear_departure",
+        "all_component_response",
+        "response_effective_rank",
+        "functional_winner_diversity",
+        "analytic_conditioning_route_residual"
+      ],
+      "may_establish_method_novelty": false,
+      "may_authorize_irregular_3d_headline": false,
+      "pass_authorizes": "N1_learned_model_and_strong_baseline_registration"
+    },
+    {
+      "id": "N1",
+      "name": "learned_conditioning_decision_consistency",
+      "status": "blocked_pending_N0",
+      "source_gate": "N0",
+      "primary_question": "does_route_consistent_partial_condition_inference_reduce_solution_functional_risk_and_acquisition_regret",
+      "mandatory_baselines": [
+        "conditional_mean_imputation",
+        "independent_mask_heads",
+        "LANO_style_partial_observation",
+        "NOP_style_latent_conditioning",
+        "compute_matched_generic_probabilistic_operator",
+        "ACFlow_style_generative_active_feature_acquisition",
+        "acquisition_conditioned_oracle"
+      ],
+      "paired_controls": [
+        "pair_loss_zero",
+        "random_cross_context_pairs",
+        "DeltaPhi_style_residual"
+      ],
+      "headline_metrics": [
+        "functional_energy_score",
+        "paired_response_relative_l2",
+        "route_posterior_divergence",
+        "solution_functional_acquisition_regret"
+      ],
+      "five_seed_confirmation_required": true
     }
   ],
   "evaluation": {

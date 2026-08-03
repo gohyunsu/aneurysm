@@ -589,8 +589,8 @@
               audit에서 velocity는 21.12% [20.01%, 22.43%]가 남아
               통과했지만 pressure는 13.69% [11.90%, 14.96%]로
               실패했습니다. 따라서 미래 G2는 velocity-only 후보이고,
-              G1s가 fresh exact sanity를 통과했지만, nonlinear
-              multicomponent C1/C2와 strong baseline을 먼저 검증합니다.
+              G1s가 fresh exact sanity를 통과했지만, 8-component semilinear
+              N0와 N1 strong baseline을 먼저 검증합니다.
               이후 learned 3D는 velocity-only로 제한합니다.
               AneuG-Flow는
               geometry archive만 확인됐고 BC variation이 없어 paired-BC
@@ -638,8 +638,9 @@
               training budget에서 7개 frozen check를 모두 통과했습니다.
               최악 density/end-to-end mean은 2.86%/2.98%, coverage error는
               0.84%/1.29%였습니다. 과거 G1/G1r은 failed로 보존하고 이
-              data-adequacy pass를 novelty로 세지 않습니다. 다음은
-              multicomponent nonlinear C1/C2의 strong-baseline 검증입니다.
+              data-adequacy pass를 novelty로 세지 않습니다. 다음은 학습 전
+              nonlinear N0 solver/nontriviality gate이고, 통과 뒤에만 N1의
+              strong partial-observation/probabilistic/AFA 비교를 엽니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>
@@ -698,6 +699,11 @@
               <div><h3>Consistency & boundary-indexed operators</h3><p>CNP conditioning gap, partial-observation Neural Operator Processes, explicit-BC operator와 varying-BC 비식별성이 직접 연구되었습니다. “부분 관측”, “missing BC”, “consistency”라는 이름 자체는 더 이상 novelty가 아닙니다.</p></div>
               <a href="https://openreview.net/forum?id=lDjWQ9UxRy">ICLR 2026 ↗</a>
             </article>
+            <article>
+              <span>2021–2024</span>
+              <div><h3>Active feature acquisition</h3><p>Generative-surrogate AFA와 acquisition-conditioned oracle가 test-time feature 선택과 general decision cost를 이미 다룹니다. “다음 BC를 고른다”는 것만으로는 novelty가 아닙니다.</p></div>
+              <a href="https://proceedings.mlr.press/v235/valancius24a.html">ICML 2024 ↗</a>
+            </article>
           </div>
 
           <div class="gap-matrix">
@@ -712,9 +718,10 @@
             <b>Novelty 표현 원칙</b>
             <p>
               확률적 operator와 consistency에는 직접 prior art가 있습니다.
-              최종 contribution은 arbitrary physical-condition mask의 구조적
-              coherence, paired simulator response, uncertainty attribution이
-              strong generic baseline보다 실질적으로 나을 때만 성립합니다.
+              현재 후보는 conditioning-route 불일치가 PDE
+              solution-functional Bayes action과 acquisition ranking에 만드는
+              regret입니다. 이론적 risk bound와 oracle risk, LANO/NOP/generic
+              operator/AFA 대비 N1 양수 결과가 함께 있을 때만 성립합니다.
             </p>
           </aside>
           <button class="chapter-next" type="button" data-next="experiments">다음 · Gate가 연구를 멈추게 하는 법 <span>→</span></button>
@@ -735,6 +742,7 @@
           <div class="gate-explainer">
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
+            <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>33/65 grid solver, nonlinear departure, 8개 BC 방향, functional diversity와 analytic conditioning을 학습 전에 검사합니다.</p></div><b>N1 전 수치 gate</b></article>
             <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>ID partial/missing calibration과, 값을 제공한 unseen-BC의 same-geometry ΔH를 strong baseline과 비교합니다. 숨은 BC 법칙 자체가 바뀌면 detection만 평가합니다.</p></div><b>primary evidence</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
             <article><span>G4</span><div><h3>의료 전용 trick은 아닌가?</h3><p>Controlled PDE, nonlinear PDE, irregular 3D에서 같은 coherence·response method를 검증합니다.</p></div><b>AAAI generality</b></article>

@@ -97,6 +97,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "gates",
             "post_result_diagnostics",
             "prospective_reentry_protocols",
+            "nonlinear_protocols",
             "evaluation",
             "phases",
         ],
@@ -240,7 +241,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneumo_current_candidate_channels",
             "excluded_headline_channels",
             "mandatory_baseline",
-            "activation_condition",
+            "protocol_registration_condition",
+            "headline_activation_condition",
+            "headline_authorized",
         ],
         "model.irregular_3d_output_contract",
     )
@@ -254,11 +257,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "same_case_anchor_train_tuned_global_power"
     ):
         raise ProtocolError("The strong Aneumo physical-scaling baseline is mandatory.")
-    if irregular_3d["activation_condition"] != (
-        "g1s_completed_passed_before_any_learned_g2_run"
+    if irregular_3d["protocol_registration_condition"] != "g1s_completed_passed":
+        raise ProtocolError(
+            "Aneumo protocol registration must remain linked to the G1s pass."
+        )
+    if (
+        irregular_3d["headline_activation_condition"]
+        != "n1_nonlinear_strong_baseline_gate_passed"
+        or irregular_3d["headline_authorized"] is not False
     ):
         raise ProtocolError(
-            "Aneumo learning must remain linked to the completed G1s pass."
+            "Irregular-3D headline must remain deferred until a positive N1 gate."
         )
     checks.append("model dimensional contract")
 
@@ -674,6 +683,63 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             if g1s["nonlinear_or_3d_confirmatory_training_authorized"] is not True:
                 raise ProtocolError("A completed G1s pass must authorize the next domain.")
     checks.append("prospective G1 re-entry non-inflation and data-adequacy contract")
+
+    nonlinear = protocol["nonlinear_protocols"]
+    nonlinear_ids = _unique_ids(nonlinear, "id", "nonlinear_protocols")
+    if nonlinear_ids != {"N0", "N1"}:
+        raise ProtocolError("Nonlinear evidence ladder must contain only N0 and N1.")
+    n0 = next(item for item in nonlinear if item["id"] == "N0")
+    _require_keys(
+        n0,
+        [
+            "status",
+            "source_gate",
+            "config",
+            "context_dim",
+            "boundary_components",
+            "conditioning",
+            "functionals",
+            "checks",
+            "may_establish_method_novelty",
+            "may_authorize_irregular_3d_headline",
+            "pass_authorizes",
+        ],
+        "N0 nonlinear protocol",
+    )
+    if (
+        n0["status"] != "preregistered_before_gpu_run"
+        or n0["source_gate"] != "G1s"
+        or n0["config"] != "configs/nonlinear_pde_n0.json"
+    ):
+        raise ProtocolError("N0 must remain a preregistered executable after G1s.")
+    if n0["context_dim"] != 5 or n0["boundary_components"] != 8:
+        raise ProtocolError("N0 freezes five context and eight boundary components.")
+    if n0["conditioning"] != "analytic_for_arbitrary_component_masks":
+        raise ProtocolError("N0 must retain analytic component-mask conditioning.")
+    if (
+        n0["may_establish_method_novelty"] is not False
+        or n0["may_authorize_irregular_3d_headline"] is not False
+    ):
+        raise ProtocolError("N0 is numerical adequacy, not novelty or a 3D gate.")
+    if n0["pass_authorizes"] != "N1_learned_model_and_strong_baseline_registration":
+        raise ProtocolError("N0 may authorize only N1 registration.")
+    n1 = next(item for item in nonlinear if item["id"] == "N1")
+    if n1["status"] != "blocked_pending_N0" or n1["source_gate"] != "N0":
+        raise ProtocolError("N1 must remain blocked until N0 passes.")
+    required_n1_baselines = {
+        "conditional_mean_imputation",
+        "independent_mask_heads",
+        "LANO_style_partial_observation",
+        "NOP_style_latent_conditioning",
+        "compute_matched_generic_probabilistic_operator",
+        "ACFlow_style_generative_active_feature_acquisition",
+        "acquisition_conditioned_oracle",
+    }
+    if set(n1["mandatory_baselines"]) != required_n1_baselines:
+        raise ProtocolError("N1 must retain strong partial-observation and AFA baselines.")
+    if n1["five_seed_confirmation_required"] is not True:
+        raise ProtocolError("N1 requires five-seed confirmation.")
+    checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 
     evaluation = protocol["evaluation"]
     _require_keys(

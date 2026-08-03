@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Nonlinear N0 is frozen before learning
+
+### Research decision
+
+- Active BC acquisition 자체는 ICML active-feature-acquisition 계보와
+  PaPQS/UNED 때문에 novelty가 아니다.
+- 남겨 둔 후보는 같은 최종 BC mask에서 conditioning route가 달라질 때
+  solution-functional Bayes action과 acquisition ranking에 생기는 regret다.
+  TV/KL 기반 bounded-loss risk bound와 N1 strong-baseline evidence가 함께
+  있어야만 contribution으로 승격한다.
+
+### Experiment
+
+- 33/65 nested grid의
+  \(-\nabla\cdot(a_G\nabla u)+\lambda_Gu^3=f_G\), 네 edge × 두 sine mode의
+  8-component BC, context-conditioned 2-GMM을 N0로 동결했다.
+- 세 numerical-audit seed에서 solver residual, discretization, nonlinear
+  departure, 모든 component response, response effective rank, functional
+  winner diversity, analytic direct/sequential conditioning을 모두 검사한다.
+- N0 pass는 N1 model/strong-baseline 등록만 허용한다. Learned superiority,
+  method novelty, irregular-3D headline은 허용하지 않는다.
+
 ## 2026-08-03 · G1s passes every frozen exact-data check
 
 ### Result

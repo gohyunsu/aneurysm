@@ -182,6 +182,17 @@ check를 통과했습니다. 최악 density-only/end-to-end mean은
 이 결과는 nonlinear/3D protocol 등록을 허용하지만 data/pipeline sanity이지
 논문의 독립 novelty가 아닙니다. G1/G1r 실패는 그대로 보존합니다.
 
+다음 단계는 학습이 아니라
+[`configs/nonlinear_pde_n0.json`](configs/nonlinear_pde_n0.json)의 N0입니다.
+33/65 nested grid semilinear PDE, 8-component edge BC,
+context-conditioned 2-GMM에서 solver accuracy, nonlinear departure, 모든
+BC 방향의 response, functional diversity와 analytic conditioning route를
+먼저 판정합니다. N0가 통과해야 LANO/NOP/generic probabilistic operator와
+active-feature-acquisition baseline을 포함한 N1을 등록합니다. 후보 novelty는
+active acquisition 자체가 아니라 conditioning-route 불일치가 PDE
+solution-functional decision과 acquisition regret에 만드는 결과입니다.
+N0 통과만으로 이를 contribution이라 하지 않으며 3D headline도 열지 않습니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에
@@ -213,7 +224,7 @@ base-family bootstrap 95% CI `[0.2001, 0.2243]`로 기준을 통과했습니다.
 Pressure는 tuned \(Q^{1.75}\)에서 0.1369 `[0.1190, 0.1496]`로
 실패했습니다. 따라서 미래 Aneumo G2는 velocity-only 후보이며
 pressure/full-field novelty는 제외합니다. 이 결과는 learned 성능이 아니고
-G1s pass 뒤 protocol 등록은 가능하지만 nonlinear C1/C2 strong-baseline
+G1s pass 뒤 protocol 등록은 가능하지만 nonlinear N0/N1 strong-baseline
 검증을 먼저 수행하므로 3D headline 학습은 순서상 보류합니다. 공개
 aggregate는
 [`results/aneumo_scaling_audit_20260803.json`](results/aneumo_scaling_audit_20260803.json)에

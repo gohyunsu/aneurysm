@@ -48,8 +48,33 @@ class ProtocolTests(unittest.TestCase):
     def test_aneumo_learning_remains_linked_to_g1s_pass(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         output = candidate["model"]["irregular_3d_output_contract"]
-        output["activation_condition"] = "run_immediately"
+        output["protocol_registration_condition"] = "run_immediately"
         with self.assertRaisesRegex(ProtocolError, "G1s pass"):
+            validate_protocol(candidate)
+
+    def test_irregular_3d_headline_requires_positive_n1(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        output = candidate["model"]["irregular_3d_output_contract"]
+        output["headline_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "positive N1"):
+            validate_protocol(candidate)
+
+    def test_n0_cannot_establish_novelty(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0"
+        )
+        n0["may_establish_method_novelty"] = True
+        with self.assertRaisesRegex(ProtocolError, "numerical adequacy"):
+            validate_protocol(candidate)
+
+    def test_n1_cannot_drop_active_feature_baseline(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["mandatory_baselines"].remove("acquisition_conditioned_oracle")
+        with self.assertRaisesRegex(ProtocolError, "AFA baselines"):
             validate_protocol(candidate)
 
     def test_patient_bootstrap_is_required(self) -> None:

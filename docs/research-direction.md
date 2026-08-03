@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: exact G1/G1r failed preserved · G1s data-adequacy pass · nonlinear C1/C2 next · Aneumo velocity-only eligible
+상태: G1/G1r failed preserved · G1s pass · nonlinear N0 preregistered · N1/3D blocked
 
 ## 1. 현재 판정
 
@@ -303,6 +303,33 @@ mean error, coverage error가 모두 낮았지만 이 baseline만으로 superior
 operator를 포함하는 nonlinear comparison이 다음 falsification 단계다.
 G1/G1r은 historical failed evidence로 그대로 남는다.
 
+### N0 → N1 · 비선형 evidence ladder
+
+학습부터 시작하지 않는다. `configs/nonlinear_pde_n0.json`은
+\(-\nabla\cdot(a_G\nabla u)+\lambda_Gu^3=f_G\)를 33×33 grid와 nested
+65×65 reference에서 푸는 numerical/problem-design gate다. 두 sine mode를
+네 edge에 배치한 8-component BC와 context-conditioned 2-component GMM을
+사용한다. 세 audit seed에서 다음을 모두 통과해야 N1을 등록한다.
+
+- normalized solver residual과 coarse/reference relative \(L_2\)
+- 같은 context·BC의 linear solution 대비 material nonlinear departure
+- 여덟 BC component 각각의 paired response와 response effective rank
+- domain mean, hotspot, smooth maximum, right flux의 winner diversity
+- GMM을 \(\{0,2,5,7\}\)에 직접 condition한 moment와
+  \(\{0,2\}\rightarrow\{5,7\}\) 순차 condition한 moment의 일치
+
+N0 통과는 solver와 문제가 N1을 시험할 만큼 비자명하다는 뜻뿐이다.
+Learned performance, AURORA novelty, 3D 진행 권한이 아니다.
+
+N1의 후보 정체성은 active acquisition 자체가 아니라
+**conditioning inconsistency가 solution-functional Bayes decision과 다음
+BC 측정 선택에 만드는 regret**이다. Bounded loss에서 posterior TV/KL로
+Bayes-regret를 제한하는 분석과, coherent joint model이 실제 oracle
+functional risk와 acquisition regret를 함께 줄이는 실험을 결합한다.
+LANO, NOP, compute-matched probabilistic operator, generative AFA,
+acquisition-conditioned oracle가 필수 비교다. 이 중 하나라도 빠지면
+“active BC”를 contribution으로 주장하지 않는다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.
@@ -327,7 +354,7 @@ CI95 `[0.2001, 0.2243]`가 남아 0.15 하한을 통과했다. Pressure는 0.136
 velocity-only 후보이며 pressure/full-field response novelty는 폐기한다.
 이 train-only 결과는 model 성능이 아니며 G1/G1r을 재개방하지 않는다.
 G1s가 새 exact pipeline sanity를 통과했으므로 learned protocol 등록은
-가능하다. 그러나 multicomponent nonlinear C1/C2를 먼저 검증하고,
+가능하다. 그러나 multicomponent nonlinear N0/N1을 먼저 검증하고,
 velocity-only 3D는 그 결과와 strong physical baseline 뒤에 실행한다.
 
 ### G3 · transient efficiency
@@ -421,7 +448,8 @@ submission이라고 표현하지 않고 다음 cycle 또는 다른 venue용으�
 5. 완료·검증된 Aneumo base-family-disjoint selective cache에서 train-only
    physical-scaling audit을 실행하고, learned response의 비자명성을 먼저
    판정 **(완료 · velocity만 eligible, pressure 탈락)**
-6. Multicomponent nonlinear C1/C2를 먼저 사전등록·실행하고, 양수일 때
-   velocity-only irregular 3D backbone과 transient 학습
-7. CMHA status branch는 공식 case map과 positive real-CFD increment가
+6. Multicomponent nonlinear N0 solver gate를 먼저 실행하고, 통과 시 N1의
+   strong partial-observation/probabilistic/AFA comparison을 사전등록
+7. N1이 양수일 때만 velocity-only irregular 3D backbone과 transient 학습
+8. CMHA status branch는 공식 case map과 positive real-CFD increment가
    확인될 때만 secondary로 복원

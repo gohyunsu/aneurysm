@@ -368,8 +368,12 @@
             3,072×8 training budget에서 7개 check를 모두 통과했다.
             최악 density/end-to-end mean은 2.86%/2.98%였다. G1/G1r은
             failed로 유지하고 data scale은 novelty로 채택하지 않는다.
-            다음은 multicomponent nonlinear PDE에서 LANO, NOP와 generic
-            probabilistic operator를 포함한 C1/C2 falsification이다.
+            다음은 학습이 아니라 8-component semilinear N0의
+            solver·nonlinearity·functional-diversity gate다. 통과하면 LANO,
+            NOP, generic probabilistic operator와 AFA baseline을 포함한 N1을
+            등록한다. 후보 novelty는 active acquisition이 아니라
+            conditioning-route 불일치가 solution-functional decision과
+            acquisition regret에 만드는 결과다.
             D0b의
             train-only POD는 표현 기준만 통과했으며 learned 비교와 fresh
             transient confirmation은 아직 남아 있다.
@@ -384,6 +388,7 @@
           <a href="../results/controlled_pde_density_development_20260803.json">DA2 development result ↗</a>
           <a href="../results/controlled_pde_g1s_20260803.json">G1s prospective pass ↗</a>
           <a href="../configs/controlled_pde_g1s.json">G1s frozen config ↗</a>
+          <a href="../configs/nonlinear_pde_n0.json">Nonlinear N0 preregistration ↗</a>
           <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
           <a href="../results/benchanxplore_d0b_20260803.json">D0b POD aggregate ↗</a>
         </div>
@@ -407,8 +412,8 @@
             강한 scaling oracle 뒤에도 velocity 변화는 남았지만 pressure는
             고정 기준을 넘지 못했다. 이는 response의 비자명성만 확인한
             train-family 결과다. G1s exact sanity는 통과했지만
-            multicomponent nonlinear C1/C2와 strong baseline을 먼저
-            검증한 뒤 velocity-only learned 3D를 실행한다.
+            nonlinear N0와 N1 strong-baseline gate를 먼저 검증한 뒤에만
+            velocity-only learned 3D headline을 연다.
           </p>
           <a href="../results/aneumo_scaling_audit_20260803.json">Scaling audit aggregate ↗</a>
           <a href="../configs/aneumo_scaling_audit_v1.json">Frozen audit contract ↗</a>

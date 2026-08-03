@@ -263,6 +263,27 @@ Exact `b0e555a` G1s는 fresh 5 seeds에서 모든 frozen check를 통과했다.
 최소 안정성은 확보했다. 이 결과로 Gaussian MLP나 data scale을
 architecture contribution으로 승격하지 않는다.
 
+### 5.6 Nonlinear N0 tensor/solver contract
+
+N0는 학습 architecture가 아니라 다음 domain의 입력·출력 식별성과 numerical
+reference를 고정한다.
+
+- context \(G\in\mathbb R^5\): forcing 위치·폭·세기, diffusivity bump,
+  semilinear coefficient를 결정
+- BC \(B\in\mathbb R^8\): 네 edge마다 corner-zero sine basis 두 개
+- BC law: \(G\)에 따라 weight/mean/covariance가 바뀌는 2-Gaussian mixture
+- field \(u\in\mathbb R^{33\times33}\), reference
+  \(u_{\mathrm{ref}}\in\mathbb R^{65\times65}\)
+- registered functionals: domain mean, central hotspot, smooth maximum,
+  right-boundary flux
+
+Damped Jacobi–Newton update는 variable diffusivity face flux와
+\(\lambda_Gu^3\)를 함께 푼다. N0에서 convergence, normalized residual,
+nested-grid error, nonlinear departure, 여덟 component response, response
+effective rank, functional winner diversity를 확인한다. Analytic GMM
+conditioning은 direct-union route와 sequential route의 mixture moment가
+일치하는지 별도로 검사한다. N0 출력은 learned score가 아니다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.
@@ -327,7 +348,7 @@ Aneumo의 학습·평가 대상은 **velocity response만**이다.
 - 이 audit은 train-only nontriviality screen이다. Learned accuracy,
   validation/test generalization, G2 통과를 뜻하지 않는다.
 - G1s pass로 velocity-only 3D protocol 등록은 허용됐다. 다만
-  multicomponent nonlinear C1/C2와 strong baseline을 먼저 검증하고,
+  multicomponent nonlinear N0/N1과 strong baseline을 먼저 검증하고,
   해당 결과 없이 3D pilot을 headline evidence로 사용하지 않는다.
 
 ## 8. Module E — uncertainty decomposition
@@ -419,14 +440,15 @@ inference sample 수를 맞춘다.
 ## 12. 구현 순서
 
 1. Exact controlled PDE에서 analytic BC conditioning과 metric 검증
-2. MLP/FNO backbone으로 nonlinear regular-grid paired-condition pilot
-3. G1s pass 뒤 multicomponent nonlinear pair/mask experiment를 먼저
-   실행하고, 양수일 때 Aneumo velocity-only pair sampler와 response loss;
+2. Semilinear 8-component N0 solver/nontriviality gate
+3. N0 pass 뒤 MLP/FNO backbone과 LANO/NOP/generic probabilistic/AFA
+   baseline을 갖춘 N1 pair/mask/decision-regret experiment
+4. N1이 양수일 때 Aneumo velocity-only pair sampler와 response loss;
    pressure head는 새 사전등록 근거 전까지 제외
-4. GNN+latent-token irregular 3D operator
-5. D0b와 learned compute-matched 비교를 모두 통과할 때만 선택된
+5. GNN+latent-token irregular 3D operator
+6. D0b와 learned compute-matched 비교를 모두 통과할 때만 선택된
    one-shot transient decoder
-6. Secondary real-CFD/status analysis는 operator evidence가 확보된 뒤 재검토
+7. Secondary real-CFD/status analysis는 operator evidence가 확보된 뒤 재검토
 
 전체 architecture를 한 번에 학습하지 않는다. 각 단계는 이전 단계보다
 어떤 claim을 새로 지지하는지와 중단 기준을 함께 기록한다.

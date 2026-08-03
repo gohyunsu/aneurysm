@@ -31,8 +31,12 @@
   analytic nesting, projective-excess는 통과했지만 최악 seed의 density-only
   mean 0.07533과 end-to-end quadrature mean 0.07518이 기준 0.05를
   넘었다. 다섯 seed 중 두 seed가 mean 기준을 넘었으므로 평균 0.0492를
-  근거로 pass라 하지 않는다. Frozen G1을 소급해 바꾸지 않으며
-  nonlinear/3D confirmatory 학습은 계속 보류한다.
+  근거로 pass라 하지 않는다. 후속 DA1/DA2는 finite condition information이
+  병목이며 estimator novelty가 없음을 보였다. 별도 fresh G1s는 G1r 대비
+  seed와 training geometry 768→3,072만 바꾸고 7/7 check를 통과했다.
+  G1/G1r은 실패로 보존하며 G1s는 data adequacy일 뿐이다. 현재 허용된
+  다음 단계는 비선형 N0 solver/nontriviality gate이며, irregular-3D
+  headline은 N1 strong-baseline 결과 전까지 보류한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -81,6 +85,17 @@ C1–C3는 **검증할 연구 가설**이지 확정 contribution이 아니다. �
 novelty는 이들을 PDE solution functional에 맞게 결합했을 때 생기는 새
 문제 정의·보장·알고리즘과 strong baseline 대비 양수 결과가 함께 있을
 때만 확정한다.
+
+현재 가장 유망하지만 아직 확정하지 않은 paper identity는
+**conditioning inconsistency의 solution-functional decision consequence**다.
+경로가 다른 posterior가 같은 최종 관측 mask에서 달라질 때 bounded
+functional loss의 Bayes action과 다음 BC component의 value-of-information가
+얼마나 흔들리는지를 regret으로 정의한다. Posterior TV/KL에서
+Bayes-regret를 제한하는 보장, joint BC–solution model의 route
+compatibility, N1의 실제 regret 감소가 함께 있어야 한다. Test-time active
+feature acquisition 자체, path independence 자체, 이름만 붙인 acquisition
+head는 novelty가 아니다. ACFlow류 generative AFA와 ICML-24 acquisition
+conditioned oracle를 필수 baseline으로 둔다.
 
 ## 3. 데이터셋의 역할
 
@@ -167,6 +182,13 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   후보이며 pressure/full-field novelty는 주장하지 않는다. G1s pass로
   velocity-only learned protocol 등록은 가능하지만, nonlinear domain과
   strong baseline을 먼저 통과하지 않은 3D 결과를 headline으로 올리지 않는다.
+  `N0`는 33/65 nested grid의
+  \(-\nabla\cdot(a_G\nabla u)+\lambda_Gu^3=f_G\), 8-component edge basis,
+  context-conditioned 2-GMM BC law를 학습 전에 감사한다. Solver residual,
+  discretization, nonlinear departure, 모든 BC component response,
+  response effective rank, functional winner diversity, analytic
+  direct/sequential conditioning을 모두 통과해야 N1을 등록한다. N0는
+  numerical/problem adequacy일 뿐 method claim이 아니다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

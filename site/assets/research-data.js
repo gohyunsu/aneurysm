@@ -57,6 +57,13 @@ window.AURORA_DATA = Object.freeze({
       url: "https://ojs.aaai.org/index.php/AAAI/article/view/37001"
     },
     {
+      year: "2021–24",
+      title: "Active feature acquisition",
+      copy: "Generative-surrogate AFA와 acquisition-conditioned oracle가 test-time feature 선택과 일반 decision cost를 이미 다룬다. Active BC 자체는 novelty가 아니다.",
+      status: "ICML · mandatory decision baselines",
+      url: "https://proceedings.mlr.press/v235/valancius24a.html"
+    },
+    {
       year: "2024–25",
       title: "PDE uncertainty & conditional consistency",
       copy: "OOD PDE uncertainty와 neural-process의 marginal/conditional consistency가 이미 독립 연구 축을 이룬다.",
@@ -97,8 +104,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "Train-only strong scaling audit에서 velocity residual은 0.2112 [0.2001, 0.2243]로 통과했지만 pressure는 0.1369 [0.1190, 0.1496]로 실패했다.",
-      state: "Velocity-only eligible · nonlinear C1/C2 first",
+      copy: "N0는 8-component semilinear PDE의 solver·nonlinearity·functional diversity를 학습 전에 검사한다. 통과해야 N1 strong-baseline learning을 열며, 3D headline은 계속 닫는다.",
+      state: "N0 preregistered · N1 and 3D blocked",
       blocking: true
     },
     {
@@ -146,9 +153,16 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.03",
+      category: "experiment",
+      title: "N0 freezes the nonlinear problem before any learned comparison",
+      copy: "33/65 nested grid에서 variable-diffusivity semilinear PDE, 8-component edge BC, context-conditioned 2-GMM을 고정했다. 세 seed의 residual·discretization·nonlinear departure·all-component response·effective rank·functional diversity·analytic conditioning을 모두 통과해야 N1을 등록한다. Active acquisition 자체는 선행연구이며 N0는 method evidence가 아니다.",
+      files: ["configs/nonlinear_pde_n0.json", "src/aurora/nonlinear_pde.py", "cluster/ssu_a6gpu_nonlinear_pde_n0.pbs", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
+    {
+      date: "2026.08.03",
       category: "result",
       title: "G1s passes all seven frozen exact-data checks",
-      copy: "Exact b0e555a의 fresh 5-seed A6000 run에서 worst density/end-to-end mean 0.02863/0.02977, coverage errors 0.00836/0.01294, projective CI upper 0.000674로 모두 통과했다. G1/G1r은 failed로 보존하며 data quantity는 contribution이 아니다. 다음은 multicomponent nonlinear C1/C2와 LANO·NOP·generic probabilistic baseline이다.",
+      copy: "Exact b0e555a의 fresh 5-seed A6000 run에서 worst density/end-to-end mean 0.02863/0.02977, coverage errors 0.00836/0.01294, projective CI upper 0.000674로 모두 통과했다. G1/G1r은 failed로 보존하며 data quantity는 contribution이 아니다. 다음은 nonlinear N0이며 통과 뒤 N1에서 LANO·NOP·generic probabilistic/AFA baseline을 비교한다.",
       files: ["results/controlled_pde_g1s_20260803.json", "docs/research-direction.md", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
     },
     {
@@ -190,7 +204,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.03",
       category: "experiment",
       title: "Strong physical scaling leaves nontrivial velocity response only",
-      copy: "Exact e12ff0a의 train-only audit에서 same-case anchor와 tuned global power까지 허용했다. Velocity는 Q^1.075 뒤 residual 0.2112, family-bootstrap CI95 [0.2001, 0.2243]로 0.15 기준을 통과했다. Pressure는 Q^1.75에서 0.1369 [0.1190, 0.1496]로 실패했다. G1s pass 뒤에도 nonlinear C1/C2를 먼저 검증하며 future 3D G2는 velocity-only다.",
+      copy: "Exact e12ff0a의 train-only audit에서 same-case anchor와 tuned global power까지 허용했다. Velocity는 Q^1.075 뒤 residual 0.2112, family-bootstrap CI95 [0.2001, 0.2243]로 0.15 기준을 통과했다. Pressure는 Q^1.75에서 0.1369 [0.1190, 0.1496]로 실패했다. Nonlinear N0/N1을 먼저 검증하며 future 3D G2는 velocity-only다.",
       files: ["results/aneumo_scaling_audit_20260803.json", "configs/aurora_v1.json", "configs/aneumo_scaling_audit_v1.json", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/research-direction.md"]
     },
     {
@@ -302,7 +316,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.03",
       category: "experiment",
       title: "BenchAnXplore one-shot representation gate preregistered",
-      copy: "105 geometry × 80 timestep archive를 검증하고, 모델 학습 전 Fourier 4/8/12-mode oracle loss로 one-shot 표현 가능성을 판정하는 D0와 K=8 threshold를 고정했다. 이후 selective 64-case Aneumo cache와 velocity scaling eligibility, G1s exact pass를 확보했다. Learned 3D는 nonlinear C1/C2와 strong baseline 뒤에만 진행한다.",
+      copy: "105 geometry × 80 timestep archive를 검증하고, 모델 학습 전 Fourier 4/8/12-mode oracle loss로 one-shot 표현 가능성을 판정하는 D0와 K=8 threshold를 고정했다. 이후 selective 64-case Aneumo cache와 velocity scaling eligibility, G1s exact pass를 확보했다. Learned 3D는 nonlinear N0/N1 strong baseline 뒤에만 진행한다.",
       files: ["configs/benchanxplore_d0.json", "src/aurora/benchanxplore.py", "cluster/ssu_a6gpu_benchanxplore_d0.pbs"]
     },
     {

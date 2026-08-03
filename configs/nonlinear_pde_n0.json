@@ -1,0 +1,74 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n0.v1",
+  "experiment_id": "nonlinear_multicomponent_n0_solver_gate_v1",
+  "status": "preregistered_before_gpu_run",
+  "source_gate": "G1s",
+  "source_result": "../results/controlled_pde_g1s_20260803.json",
+  "source_result_sha256": "7e9797abaaf4ff6b7f2c5ab38fa75d768b24af0d6f0d00f74276ec488d6ba7a9",
+  "stage": "solver_nontriviality",
+  "may_establish_method_novelty": false,
+  "may_authorize_irregular_3d_headline": false,
+  "seeds": [62080311, 62080312, 62080313],
+  "pde": {
+    "equation": "-div(a_G grad u) + lambda_G u^3 = f_G on [0,1]^2",
+    "grid_points": 33,
+    "reference_grid_points": 65,
+    "context_dim": 5,
+    "boundary_components": 8,
+    "boundary_modes_per_edge": 2,
+    "boundary_basis": "two corner-zero sine modes on each of four edges",
+    "dtype": "float32",
+    "maximum_iterations": 5000,
+    "reference_maximum_iterations": 12000,
+    "convergence_tolerance": 0.000002,
+    "residual_check_interval": 50,
+    "relaxation": 0.9,
+    "nonlinearity_range": [8.0, 40.0],
+    "diffusivity_range": [0.7, 1.3]
+  },
+  "boundary_law": {
+    "mixture_components": 2,
+    "dimension": 8,
+    "context_conditioned_weights_means_covariances": true,
+    "conditioning": "analytic_gaussian_mixture",
+    "observation_semantics": "physical boundary coefficient components, not spatial pixel masks"
+  },
+  "sampling": {
+    "contexts_per_seed": 24,
+    "conditions_per_context": 12,
+    "reference_cases_per_seed": 12,
+    "paired_base_cases_per_seed": 48,
+    "paired_component_perturbation": 0.15,
+    "all_conditions_of_one_context_remain_grouped": true
+  },
+  "functionals": [
+    "domain_mean",
+    "central_hotspot",
+    "smooth_maximum",
+    "right_boundary_flux"
+  ],
+  "conditioning_check": {
+    "initial_observed_components": [0, 2],
+    "additional_components": [5, 7],
+    "routes": ["direct_union", "sequential_5_then_7"],
+    "comparison": "mixture_mean_and_covariance_max_absolute_residual"
+  },
+  "success_thresholds": {
+    "maximum_solver_normalized_residual": 0.0005,
+    "maximum_coarse_reference_relative_l2": 0.04,
+    "minimum_median_nonlinear_departure": 0.01,
+    "minimum_worst_component_response_median": 0.01,
+    "minimum_response_effective_rank": 3.0,
+    "minimum_functional_winner_components": 3,
+    "maximum_dominant_functional_winner_share": 0.75,
+    "maximum_analytic_conditioning_route_residual": 0.00002
+  },
+  "decision_rule": {
+    "all_checks_required": true,
+    "pass_authorizes_n1_model_and_strong_baseline_registration": true,
+    "pass_does_not_establish_novelty_or_baseline_superiority": true,
+    "failure_requires_pde_or_solver_redesign_before_learning": true,
+    "irregular_3d_remains_deferred_until_n1_positive": true
+  },
+  "interpretation": "N0 verifies a converged and grid-stable semilinear solver, material nonlinear departure, eight non-dead boundary-response directions, solution-functional diversity, and direct-versus-sequential analytic GMM conditioning before any learned N1 comparison. Passing N0 is numerical and problem-design adequacy only. It cannot establish the AURORA method, active-acquisition novelty, strong-baseline superiority, or an irregular-3D claim."
+}

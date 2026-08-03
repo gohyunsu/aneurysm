@@ -157,7 +157,16 @@ fresh 5-seed run을 모두 exit 0으로 완료했다. 일곱 frozen check가 모
 통과해 다음 nonlinear/3D protocol 등록이 허용됐다. Raw run은 계속
 비공개 provenance로 보존하고 공개 aggregate만
 `results/controlled_pde_g1s_20260803.json`에 둔다. 과거 G1/G1r은
-relabel하지 않으며 다음 GPU 우선순위는 nonlinear multicomponent C1/C2다.
+relabel하지 않으며 다음 GPU 우선순위는 nonlinear N0다.
+
+Nonlinear 단계는 learned model부터 제출하지 않는다.
+`cluster/ssu_a6gpu_nonlinear_pde_n0.pbs`가 exact committed source와
+`configs/nonlinear_pde_n0.json`을 read-only bind해 한 A6000 allocation에서
+세 numerical-audit seed를 실행한다. 33×33 solver, nested 65×65 reference,
+linear counterfactual, 8-component paired perturbation을 같은 job에 묶는다.
+Output에는 command, commit, config hash, environment, aggregate metric과
+실패 여부를 남긴다. N0가 통과해도 N1 등록만 허용하며 3D headline job은
+제출하지 않는다.
 
 ## Aneumo selective-cache contract
 

@@ -200,7 +200,29 @@ neural operator를 function-valued Gaussian process로 선형화한 연구가 �
 축과 model ensemble 축을 분리하고 각각 condition error와 geometry OOD
 error를 추적하는지 falsification해야 한다.
 
-### 1.11 직접적인 2026 multimodal 경쟁작
+### 1.11 active feature acquisition과 decision consistency
+
+ICML 2021의 generative-surrogate AFA는 미관측 feature를 test-time에
+순차 획득하는 정책을 generative model로 학습했다. ICML 2024의 Acquisition
+Conditioned Oracle은 greedy 정보이득을 넘어 prediction과 일반 decision을
+위한 non-greedy feature acquisition을 직접 다룬다. PaPQS와 UNED는 각각
+training PDE setting과 sensor design의 정보가치를 최적화한다.
+
+- [Active Feature Acquisition with Generative Surrogate Models
+  (ICML, 2021)](https://proceedings.mlr.press/v139/li21p.html)
+- [Acquisition Conditioned Oracle for Nongreedy Active Feature Acquisition
+  (ICML, 2024)](https://proceedings.mlr.press/v235/valancius24a.html)
+- [A Plug-and-Play Query Synthesis Active Learning Framework for Neural PDE
+  Solvers (NeurIPS, 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/6a1b224b153e55c40a6359f9c9fb9d8c-Abstract-Conference.html)
+
+**영향:** 다음 BC component를 고르는 것, entropy/variance/expected-risk
+acquisition을 쓰는 것, path independence만 재는 것은 novelty가 아니다.
+AURORA의 살아남는 후보는 같은 최종 BC mask로 가는 route posterior의
+불일치가 PDE solution-functional Bayes action과 acquisition ranking에
+만드는 regret를 정량화하고, coherent joint law가 이를 실제 oracle risk와
+함께 줄이는지 보이는 것이다.
+
+### 1.12 직접적인 2026 multimodal 경쟁작
 
 2026-07 arXiv preprint는 PointNeXt geometry, unsteady PINN descriptors,
 clinical variables를 late fusion하여 rupture-status prediction을
@@ -247,6 +269,7 @@ clinical variables를 late fusion하여 rupture-status prediction을
 | probabilistic operator | function-space UQ/generative sampling | condition-source attribution | coherent BC pushforward |
 | NOP/NP consistency | partial-response reconstruction·conditioning gap | physical-input mask compatibility | nested masks + paired response |
 | DeltaPhi | similar-state residual learning | geometry-controlled BC response without label retrieval | paired \(\Delta H\) controls |
+| active feature acquisition | test-time feature 선택과 general decision cost | route-inconsistent PDE functional posterior의 decision consequence | functional regret + AFA controls |
 | PDE UQ/OOD | model uncertainty와 OOD 분석 | BC-induced vs model-induced 분리 | two-axis falsification |
 | synthetic CFD | 같은 geometry의 multiple BC | response supervision/generalization | paired \(\Delta H\) |
 

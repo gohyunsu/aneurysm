@@ -298,6 +298,46 @@ contribution으로 주장하지 않는다. 다음 단계는 동일 mechanism을
 multicomponent nonlinear PDE에서 LANO/NOP/generic probabilistic operator와
 비교하는 새 protocol이다.
 
+#### N0 · semilinear solver/nontriviality gate
+
+Executable contract는 `configs/nonlinear_pde_n0.json`이다. 학습 전 세 seed에서
+33×33 damped Jacobi–Newton solution을 nested 65×65 solution과 비교한다.
+PDE는
+\(-\nabla\cdot(a_G\nabla u)+\lambda_Gu^3=f_G\), BC는 네 edge의 두 sine
+mode로 만든 8-vector, population law는 analytic conditioning이 가능한
+context-conditioned 2-GMM이다.
+
+모든 solver batch의 convergence와 아래 8개 threshold check가 동시에
+필요하다.
+
+| check | frozen threshold |
+|---|---:|
+| maximum normalized residual | 0.0005 |
+| maximum coarse/reference relative \(L_2\) | 0.04 |
+| minimum seed-wise median nonlinear departure | 0.01 |
+| minimum worst-component response median | 0.01 |
+| minimum response effective rank | 3.0 |
+| minimum functional winner components | 3 |
+| maximum dominant functional winner share | 0.75 |
+| maximum analytic conditioning-route residual | 0.00002 |
+
+N0는 solver·PDE·BC·functional이 비자명한지만 판정한다. 통과하면 N1 learned
+comparison 등록만 허용한다. Method novelty, baseline superiority,
+irregular-3D headline은 허용하지 않는다.
+
+#### N1 · learned decision-consistency falsification
+
+N1은 N0 결과 전에 세부 hyperparameter나 fresh seed를 열지 않는다. Primary
+question은 같은 최종 BC mask의 route posterior 불일치가
+solution-functional Bayes risk와 다음 component acquisition regret를
+악화시키는지, coherent joint law가 이를 줄이는지다. 필수 baseline은
+conditional-mean imputation, independent mask heads, LANO, NOP,
+compute-matched generic probabilistic operator, generative-surrogate AFA,
+ICML-24 acquisition-conditioned oracle다. Pair-loss-zero, random
+cross-context pair, DeltaPhi-style residual을 같은 backbone·example budget로
+비교한다. 다섯 seed에서 field distribution과 paired response가 함께
+개선되지 않으면 decision identity를 폐기한다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
@@ -333,7 +373,7 @@ relative-response residual은 0.2112, family-bootstrap CI95
 `[0.2001, 0.2243]`로 0.15 하한을 통과했다. Gauge-invariant pressure는
 0.1369 `[0.1190, 0.1496]`로 실패했다. 따라서 향후 learned G2는
 velocity-only로 제한한다. G1s pass로 protocol 등록은 허용됐지만,
-nonlinear C1/C2와 strong baseline을 먼저 검증한 뒤 실행한다.
+nonlinear N0/N1과 strong baseline을 먼저 검증한 뒤 실행한다.
 
 ### G3 · transient efficiency
 
@@ -361,7 +401,7 @@ paper로 범위를 축소하고 AAAI general method claim을 하지 않는다.
 | 데이터 | 역할 | 현재 상태 |
 |---|---|---|
 | Controlled PDE | exact conditional/marginal oracle | 구현 우선 |
-| Nonlinear PDE | ID mask calibration + supplied-BC shift response | semilinear/Burgers pilot 사전 등록 예정 |
+| Nonlinear PDE | ID mask calibration + supplied-BC shift response | N0 solver gate preregistered; N1 blocked |
 | Aneumo | same-geometry × 8 steady BC | 64-case cache verified; scaling audit에서 velocity만 eligible |
 | AneuG-Flow | irregular 3D pretraining | geometry archive만 local; BC variation 없음 |
 | BenchAnXplore | transient GNN baseline/D0 | 105×80 audited; D0 실행 |
@@ -554,10 +594,11 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 2. Aneumo selective cache와 train-only scaling audit **(완료; velocity only)**
 3. Exact density attribution과 estimator development **(완료; method gain 없음)**
 4. G1s fresh 5-seed data-adequacy sanity **(완료 · 통과)**
-5. Nonlinear regular-grid C1/C2 **(다음 사전등록 우선순위)**
-6. 그 뒤 velocity-only G2 ablation과 irregular-3D backbone
-7. G3 learned transient 비교
-8. G4 cross-domain 통합 table
+5. Nonlinear regular-grid N0 **(사전등록 완료 · 다음 GPU 우선순위)**
+6. N0 통과 시 N1 learned strong-baseline comparison
+7. 그 뒤 velocity-only G2 ablation과 irregular-3D backbone
+8. G3 learned transient 비교
+9. G4 cross-domain 통합 table
 
 GPU는 PBS allocation 안에서만 사용한다. 각 run은 commit, command,
 environment, config, dataset checksum, status, aggregate metric을 남긴다.
