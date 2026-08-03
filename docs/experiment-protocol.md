@@ -276,6 +276,28 @@ nonlinear regular-grid protocol 등록을 허용하며, pass를 estimator
 innovation·baseline superiority·AAAI novelty로 해석하지 않는다. Fail이면
 nonlinear/3D 학습은 계속 금지한다.
 
+#### G1s 결과 · prospective pass
+
+Exact public commit `b0e555a`, config SHA-256
+`34195056606c046491d607a85af191dd57e3e97450281bb2c0353c156892196e`의
+fresh 5-seed A6000 run은 exit 0으로 완료됐다.
+
+| 사전등록 metric | 최악 seed/route | 기준 | 판정 |
+|---|---:|---:|---|
+| density-only standardized mean | 0.02863 | 0.05 | pass |
+| density-only 90% coverage error | 0.00836 | 0.03 | pass |
+| end-to-end quadrature mean | 0.02977 | 0.05 | pass |
+| end-to-end sampled coverage error | 0.01294 | 0.03 | pass |
+| full-BC operator error | 0.00410 | 0.03 | pass |
+| projective excess CI95 upper | 0.000674 | 0.01 | pass |
+| analytic nesting residual | \(7.45\times10^{-9}\) | \(10^{-6}\) | pass |
+
+이 결과는 data adequacy에 의해 exact pipeline이 안정화됐음을 보인다.
+G1/G1r을 소급해 relabel하지 않고, 3,072×8이나 empirical NLL을
+contribution으로 주장하지 않는다. 다음 단계는 동일 mechanism을
+multicomponent nonlinear PDE에서 LANO/NOP/generic probabilistic operator와
+비교하는 새 protocol이다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
@@ -310,7 +332,8 @@ Exact commit `e12ff0a`의 사전등록 감사는 train 20 base family/40 case만
 relative-response residual은 0.2112, family-bootstrap CI95
 `[0.2001, 0.2243]`로 0.15 하한을 통과했다. Gauge-invariant pressure는
 0.1369 `[0.1190, 0.1496]`로 실패했다. 따라서 향후 learned G2는
-velocity-only로 제한하며, G1/G1r 실패가 해결되기 전에는 실행하지 않는다.
+velocity-only로 제한한다. G1s pass로 protocol 등록은 허용됐지만,
+nonlinear C1/C2와 strong baseline을 먼저 검증한 뒤 실행한다.
 
 ### G3 · transient efficiency
 
@@ -530,8 +553,8 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 1. D0/G1/G1r 판정과 G1b/D0b 진단 **(완료)**
 2. Aneumo selective cache와 train-only scaling audit **(완료; velocity only)**
 3. Exact density attribution과 estimator development **(완료; method gain 없음)**
-4. G1s fresh 5-seed data-adequacy sanity **(사전등록; 실행 전)**
-5. G1s가 양수일 때 nonlinear regular-grid C1/C2
+4. G1s fresh 5-seed data-adequacy sanity **(완료 · 통과)**
+5. Nonlinear regular-grid C1/C2 **(다음 사전등록 우선순위)**
 6. 그 뒤 velocity-only G2 ablation과 irregular-3D backbone
 7. G3 learned transient 비교
 8. G4 cross-domain 통합 table

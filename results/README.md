@@ -35,6 +35,8 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   post-result DA1
 - `controlled_pde_density_development_20260803.json`: grouped moment와
   shrinkage를 original budget에서 비교하고 high-data control을 분리한 DA2
+- `controlled_pde_g1s_20260803.json`: G1r pipeline을 유지하고 training
+  geometry만 768→3,072로 늘린 fresh 5-seed prospective data-adequacy pass
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -53,6 +55,13 @@ DA2의 formal selection은 grouped shrinkage 0.50이었지만 empirical NLL
 대비 평균 개선은 0.23%뿐이고 seed-robust하지 않았으므로 method로 승격하지
 않는다. 3,072×8 empirical NLL의 최악 error 0.02706만 data-adequacy
 후보를 지지한다. 이는 새 gate 통과나 novelty evidence가 아니다.
+
+G1s는 이전 모든 seed와 겹치지 않는 5개 seed에서 7개 frozen check를 모두
+통과했다. 최악 density-only/end-to-end mean은 0.02863/0.02977,
+coverage error는 0.00836/0.01294, projective CI upper는 0.000674였다.
+G1/G1r은 failed로 유지한다. 이 결과는 nonlinear/3D protocol 등록을
+허용하는 data/pipeline sanity이며, data quantity나 exact toy 성능은
+method contribution이 아니다.
 
 현재 temporal representation 결과:
 
@@ -76,5 +85,5 @@ confirmation이 필요하다.
 
 이는 같은-case anchor field까지 사용하는 강한 물리 baseline 뒤에도
 velocity response가 남는다는 train-only 결과다. Learned model 성능이나
-G2 통과가 아니며, failed G1/G1r 때문에 3D confirmatory training은
-허용되지 않는다.
+G2 통과는 아니다. G1s pass로 velocity-only protocol 등록은 가능하지만
+nonlinear C1/C2 strong-baseline 검증을 먼저 수행한다.

@@ -255,10 +255,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         raise ProtocolError("The strong Aneumo physical-scaling baseline is mandatory.")
     if irregular_3d["activation_condition"] != (
-        "new_exact_coherence_sanity_passes_before_any_learned_g2_run"
+        "g1s_completed_passed_before_any_learned_g2_run"
     ):
         raise ProtocolError(
-            "Aneumo learning must remain blocked until a new exact sanity passes."
+            "Aneumo learning must remain linked to the completed G1s pass."
         )
     checks.append("model dimensional contract")
 

@@ -347,7 +347,7 @@
           <div class="delta negative"><span>Exact G1</span><b>0 / 5</b><small>seeds passed frozen gate</small></div>
         </div>
         <div class="g1-result-decision">
-          <strong>복잡한 3D 모델로 넘어갈 근거는 아직 없다.</strong>
+          <strong>Exact pipeline은 통과했다. 이제 novelty를 nonlinear domain에서 검증한다.</strong>
           <p>
             G1은 direct mask baseline보다 모든 mask에서 상대 개선됐지만
             absolute gate를 통과하지 못했다. Fixed Fourier K=4/8/12도
@@ -364,8 +364,12 @@
             network·sampled-validation 조건으로 empirical NLL과 grouped
             moment/shrinkage를 비교했다. Shrinkage의 평균 이득은 0.23%로
             material하지 않았고, 3,072×8 original empirical NLL만 최악
-            2.71%로 안정화됐다. 다음은 data-adequacy fresh gate이며
-            shrinkage를 novelty로 채택하지 않는다.
+            2.71%로 안정화됐다. Fresh G1s는 같은 estimator와 threshold,
+            3,072×8 training budget에서 7개 check를 모두 통과했다.
+            최악 density/end-to-end mean은 2.86%/2.98%였다. G1/G1r은
+            failed로 유지하고 data scale은 novelty로 채택하지 않는다.
+            다음은 multicomponent nonlinear PDE에서 LANO, NOP와 generic
+            probabilistic operator를 포함한 C1/C2 falsification이다.
             D0b의
             train-only POD는 표현 기준만 통과했으며 learned 비교와 fresh
             transient confirmation은 아직 남아 있다.
@@ -378,6 +382,8 @@
           <a href="../configs/controlled_pde_density_attribution.json">DA1 frozen contract ↗</a>
           <a href="../configs/controlled_pde_density_development.json">DA2 development contract ↗</a>
           <a href="../results/controlled_pde_density_development_20260803.json">DA2 development result ↗</a>
+          <a href="../results/controlled_pde_g1s_20260803.json">G1s prospective pass ↗</a>
+          <a href="../configs/controlled_pde_g1s.json">G1s frozen config ↗</a>
           <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
           <a href="../results/benchanxplore_d0b_20260803.json">D0b POD aggregate ↗</a>
         </div>
@@ -392,7 +398,7 @@
           <div><span>Velocity residual</span><b>21.12%</b><small>CI95 20.01–22.43% · eligible</small></div>
           <i>≠</i>
           <div><span>Pressure residual</span><b>13.69%</b><small>CI95 11.90–14.96% · fail</small></div>
-          <div class="delta negative"><span>3D training</span><b>Blocked</b><small>failed G1/G1r</small></div>
+          <div class="delta positive"><span>Exact re-entry</span><b>Passed</b><small>G1s · nonlinear test next</small></div>
         </div>
         <div class="g1-result-decision">
           <strong>미래 irregular-3D 검증은 velocity response로만 좁힌다.</strong>
@@ -400,8 +406,9 @@
             같은 case의 anchor field와 train-tuned global power까지 허용한
             강한 scaling oracle 뒤에도 velocity 변화는 남았지만 pressure는
             고정 기준을 넘지 못했다. 이는 response의 비자명성만 확인한
-            train-family 결과다. 새 exact sanity를 통과하기 전에는 learned
-            model 성능이나 G2 evidence로 해석하지 않는다.
+            train-family 결과다. G1s exact sanity는 통과했지만
+            multicomponent nonlinear C1/C2와 strong baseline을 먼저
+            검증한 뒤 velocity-only learned 3D를 실행한다.
           </p>
           <a href="../results/aneumo_scaling_audit_20260803.json">Scaling audit aggregate ↗</a>
           <a href="../configs/aneumo_scaling_audit_v1.json">Frozen audit contract ↗</a>

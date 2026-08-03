@@ -255,6 +255,14 @@ sampled coverage와 matched-IID-floor projective metric은 G1r과 동일하다.
 따라서 통과 시에도 이 절은 engineering/data sufficiency evidence이며
 Module B–D의 novelty 증거가 아니다.
 
+Exact `b0e555a` G1s는 fresh 5 seeds에서 모든 frozen check를 통과했다.
+최악 density-only/end-to-end mean은 0.02863/0.02977, coverage error는
+0.00836/0.01294였다. Analytic nesting residual은
+\(7.45\times10^{-9}\), projective excess CI upper는 0.000674였다.
+따라서 동일 empirical-NLL pipeline을 다음 nonlinear domain에 사용할
+최소 안정성은 확보했다. 이 결과로 Gaussian MLP나 data scale을
+architecture contribution으로 승격하지 않는다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.
@@ -318,8 +326,9 @@ Aneumo의 학습·평가 대상은 **velocity response만**이다.
   \(\Delta u\)를 개선해야 한다.
 - 이 audit은 train-only nontriviality screen이다. Learned accuracy,
   validation/test generalization, G2 통과를 뜻하지 않는다.
-- 현재 G1/G1r이 실패했으므로 velocity-only 3D training도 아직 실행하지
-  않는다.
+- G1s pass로 velocity-only 3D protocol 등록은 허용됐다. 다만
+  multicomponent nonlinear C1/C2와 strong baseline을 먼저 검증하고,
+  해당 결과 없이 3D pilot을 headline evidence로 사용하지 않는다.
 
 ## 8. Module E — uncertainty decomposition
 
@@ -411,8 +420,9 @@ inference sample 수를 맞춘다.
 
 1. Exact controlled PDE에서 analytic BC conditioning과 metric 검증
 2. MLP/FNO backbone으로 nonlinear regular-grid paired-condition pilot
-3. 새 exact sanity를 통과한 경우에만 Aneumo velocity-only pair sampler와
-   response loss; pressure head는 새 사전등록 근거 전까지 제외
+3. G1s pass 뒤 multicomponent nonlinear pair/mask experiment를 먼저
+   실행하고, 양수일 때 Aneumo velocity-only pair sampler와 response loss;
+   pressure head는 새 사전등록 근거 전까지 제외
 4. GNN+latent-token irregular 3D operator
 5. D0b와 learned compute-matched 비교를 모두 통과할 때만 선택된
    one-shot transient decoder

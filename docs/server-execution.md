@@ -152,6 +152,13 @@ Validation/test 192/192, empirical NLL, model, optimizer, metric과 threshold는
 유지한다. 다섯 seed 전체 gate가 끝나기 전에는 nonlinear/3D job을 제출하지
 않고, pass하더라도 data quantity를 method contribution으로 기록하지 않는다.
 
+Exact `b0e555a`의 G1s는 dependency-complete 82-test contract와 A6000
+fresh 5-seed run을 모두 exit 0으로 완료했다. 일곱 frozen check가 모두
+통과해 다음 nonlinear/3D protocol 등록이 허용됐다. Raw run은 계속
+비공개 provenance로 보존하고 공개 aggregate만
+`results/controlled_pde_g1s_20260803.json`에 둔다. 과거 G1/G1r은
+relabel하지 않으며 다음 GPU 우선순위는 nonlinear multicomponent C1/C2다.
+
 ## Aneumo selective-cache contract
 
 사전등록한 32 AneuX base family × 2 deformation의 selective range staging은

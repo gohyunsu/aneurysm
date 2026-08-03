@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: exact G1/G1r failed · DA1/DA2 complete · G1s data-adequacy sanity preregistered · Aneumo velocity-only eligible
+상태: exact G1/G1r failed preserved · G1s data-adequacy pass · nonlinear C1/C2 next · Aneumo velocity-only eligible
 
 ## 1. 현재 판정
 
@@ -284,6 +284,25 @@ G1s pass는 nonlinear regular-grid 실험을 시작할 최소 pipeline
 않는다. G1s가 실패하면 architecture를 더 화려하게 만들거나 3D로 우회하지
 않고 exact-domain density estimation을 다시 중단·재검토한다.
 
+G1s는 exact public commit `b0e555a`에서 fresh 5-seed A6000 run을
+exit 0으로 완료했고 모든 frozen check를 통과했다.
+
+| frozen check | 최악 seed/route | 기준 |
+|---|---:|---:|
+| density-only mean | 0.02863 | 0.05 |
+| density-only coverage error | 0.00836 | 0.03 |
+| end-to-end quadrature mean | 0.02977 | 0.05 |
+| sampled coverage error | 0.01294 | 0.03 |
+| full-BC operator | 0.00410 | 0.03 |
+| projective excess CI95 upper | 0.000674 | 0.01 |
+| analytic nesting residual | \(7.45\times10^{-9}\) | \(10^{-6}\) |
+
+Direct masked Gaussian과의 15개 seed×mask descriptive cell에서는 energy,
+mean error, coverage error가 모두 낮았지만 이 baseline만으로 superiority를
+주장하지 않는다. LANO, NOP와 compute-matched generic probabilistic
+operator를 포함하는 nonlinear comparison이 다음 falsification 단계다.
+G1/G1r은 historical failed evidence로 그대로 남는다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.
@@ -307,6 +326,9 @@ CI95 `[0.2001, 0.2243]`가 남아 0.15 하한을 통과했다. Pressure는 0.136
 `[0.1190, 0.1496]`로 실패했다. 따라서 future irregular-3D G2는
 velocity-only 후보이며 pressure/full-field response novelty는 폐기한다.
 이 train-only 결과는 model 성능이 아니며 G1/G1r을 재개방하지 않는다.
+G1s가 새 exact pipeline sanity를 통과했으므로 learned protocol 등록은
+가능하다. 그러나 multicomponent nonlinear C1/C2를 먼저 검증하고,
+velocity-only 3D는 그 결과와 strong physical baseline 뒤에 실행한다.
 
 ### G3 · transient efficiency
 
@@ -394,12 +416,12 @@ submission이라고 표현하지 않고 다음 cycle 또는 다른 venue용으�
    exploratory로 실행 **(완료)**
 3. Prospective G1r을 fresh test에서 실행하고 gate를 냉정하게 판정
    **(완료 · 실패)**
-4. Density representation/optimization/data-sufficiency attribution을
-   test-free diagnostic으로 실행 **(현재 우선순위)**
+4. Density representation/optimization/data-sufficiency attribution과
+   G1s fresh exact sanity **(완료 · G1s 통과)**
 5. 완료·검증된 Aneumo base-family-disjoint selective cache에서 train-only
    physical-scaling audit을 실행하고, learned response의 비자명성을 먼저
    판정 **(완료 · velocity만 eligible, pressure 탈락)**
-6. 새 prospective exact sanity와 G2가 양수일 때만 irregular 3D backbone과
-   transient 학습
+6. Multicomponent nonlinear C1/C2를 먼저 사전등록·실행하고, 양수일 때
+   velocity-only irregular 3D backbone과 transient 학습
 7. CMHA status branch는 공식 case map과 positive real-CFD increment가
    확인될 때만 secondary로 복원

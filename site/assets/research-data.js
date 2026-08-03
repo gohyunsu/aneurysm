@@ -90,15 +90,15 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G1",
       title: "Is condition–marginal coherence exact?",
-      copy: "DA2에서 새 estimator의 material gain은 없었지만 3,072×8 empirical NLL은 최악 0.02706이었다. 같은 estimator와 threshold를 유지한 fresh 5-seed G1s가 data adequacy를 검증한다.",
-      state: "G1/G1r failed · G1s preregistered and unrun",
+      copy: "Fresh 5-seed G1s가 7개 frozen check를 모두 통과했다. 최악 density/end-to-end mean은 0.02863/0.02977였다. 과거 G1/G1r은 failed로 유지하고 data scale은 novelty로 세지 않는다.",
+      state: "G1s passed · nonlinear strong-baseline test next",
       blocking: true
     },
     {
       id: "G2",
       title: "Does paired response improve?",
       copy: "Train-only strong scaling audit에서 velocity residual은 0.2112 [0.2001, 0.2243]로 통과했지만 pressure는 0.1369 [0.1190, 0.1496]로 실패했다.",
-      state: "Velocity-only eligible · learned G2 blocked until G1s passes",
+      state: "Velocity-only eligible · nonlinear C1/C2 first",
       blocking: true
     },
     {
@@ -146,6 +146,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.03",
+      category: "result",
+      title: "G1s passes all seven frozen exact-data checks",
+      copy: "Exact b0e555a의 fresh 5-seed A6000 run에서 worst density/end-to-end mean 0.02863/0.02977, coverage errors 0.00836/0.01294, projective CI upper 0.000674로 모두 통과했다. G1/G1r은 failed로 보존하며 data quantity는 contribution이 아니다. 다음은 multicomponent nonlinear C1/C2와 LANO·NOP·generic probabilistic baseline이다.",
+      files: ["results/controlled_pde_g1s_20260803.json", "docs/research-direction.md", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
+    {
+      date: "2026.08.03",
       category: "experiment",
       title: "G1s freezes a fresh data-adequacy sanity before execution",
       copy: "이전 G1/G1r/DA1/DA2와 겹치지 않는 5개 seed, original empirical NLL, 3,072×8 training budget을 고정했다. G1r model·optimizer·validation/test size·metric·threshold는 모두 유지한다. Pass는 next-domain 실행 권한일 뿐 novelty나 과거 gate relabel이 아니다.",
@@ -183,7 +190,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.03",
       category: "experiment",
       title: "Strong physical scaling leaves nontrivial velocity response only",
-      copy: "Exact e12ff0a의 train-only audit에서 same-case anchor와 tuned global power까지 허용했다. Velocity는 Q^1.075 뒤 residual 0.2112, family-bootstrap CI95 [0.2001, 0.2243]로 0.15 기준을 통과했다. Pressure는 Q^1.75에서 0.1369 [0.1190, 0.1496]로 실패했다. 따라서 future G2는 velocity-only이며 learned 3D 실행은 G1r 실패 때문에 계속 보류한다.",
+      copy: "Exact e12ff0a의 train-only audit에서 same-case anchor와 tuned global power까지 허용했다. Velocity는 Q^1.075 뒤 residual 0.2112, family-bootstrap CI95 [0.2001, 0.2243]로 0.15 기준을 통과했다. Pressure는 Q^1.75에서 0.1369 [0.1190, 0.1496]로 실패했다. G1s pass 뒤에도 nonlinear C1/C2를 먼저 검증하며 future 3D G2는 velocity-only다.",
       files: ["results/aneumo_scaling_audit_20260803.json", "configs/aurora_v1.json", "configs/aneumo_scaling_audit_v1.json", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/research-direction.md"]
     },
     {
@@ -295,7 +302,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.03",
       category: "experiment",
       title: "BenchAnXplore one-shot representation gate preregistered",
-      copy: "105 geometry × 80 timestep archive를 검증하고, 모델 학습 전 Fourier 4/8/12-mode oracle loss로 one-shot 표현 가능성을 판정하는 D0와 K=8 threshold를 고정했다. 당시 Aneumo는 1 geometry × 2 BC sample뿐이어서 full G2를 blocked로 유지했다. 이후 selective 64-case cache를 별도 검증했지만 learned G2는 여전히 physical-scaling audit과 exact sanity에 의해 blocked다.",
+      copy: "105 geometry × 80 timestep archive를 검증하고, 모델 학습 전 Fourier 4/8/12-mode oracle loss로 one-shot 표현 가능성을 판정하는 D0와 K=8 threshold를 고정했다. 이후 selective 64-case Aneumo cache와 velocity scaling eligibility, G1s exact pass를 확보했다. Learned 3D는 nonlinear C1/C2와 strong baseline 뒤에만 진행한다.",
       files: ["configs/benchanxplore_d0.json", "src/aurora/benchanxplore.py", "cluster/ssu_a6gpu_benchanxplore_d0.pbs"]
     },
     {

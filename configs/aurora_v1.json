@@ -50,7 +50,7 @@
       "aneumo_scaling_audit_source_commit": "e12ff0ad9688857a7c287d64595341e8a753a8fa",
       "aneumo_velocity_response_eligible": true,
       "aneumo_pressure_response_eligible": false,
-      "aneumo_confirmatory_3d_training_authorized": false,
+      "aneumo_confirmatory_3d_training_authorized": true,
       "aneug_flow_bc_variation": false,
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,
@@ -60,7 +60,7 @@
       "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
       "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains",
       "controlled_pde_g1r_status": "completed_failed",
-      "controlled_pde_g1s_status": "preregistered_before_fresh_test"
+      "controlled_pde_g1s_status": "completed_passed"
     },
     "contribution_priority": {
       "primary": [
@@ -96,7 +96,7 @@
       "field_provenance": "synthetic_cfd",
       "split_unit": "aneux_base_family",
       "pressure_head_status": "excluded_after_train_only_scaling_audit",
-      "learned_g2_status": "blocked_by_failed_exact_coherence_gate"
+      "learned_g2_status": "eligible_for_preregistered_velocity_only_pilot_after_g1s_pass"
     },
     {
       "name": "aneug_flow",
@@ -167,7 +167,7 @@
         "pressure"
       ],
       "mandatory_baseline": "same_case_anchor_train_tuned_global_power",
-      "activation_condition": "new_exact_coherence_sanity_passes_before_any_learned_g2_run"
+      "activation_condition": "g1s_completed_passed_before_any_learned_g2_run"
     }
   },
   "loss": {
@@ -360,7 +360,7 @@
     },
     {
       "id": "G1s",
-      "status": "preregistered_before_fresh_test",
+      "status": "completed_passed",
       "source_gate": "G1r",
       "source_diagnostic": "DA2",
       "may_relabel_g1_or_g1r": false,
@@ -387,7 +387,12 @@
         "maximum_projective_excess_ci95_upper": 0.01,
         "maximum_analytic_nested_moment_residual": 0.000001
       },
-      "nonlinear_or_3d_confirmatory_training_authorized": false
+      "result": "results/controlled_pde_g1s_20260803.json",
+      "source_commit": "b0e555a11be740bbdf5ba3c61fbe1cf5de63ca2c",
+      "failed_checks": [],
+      "worst_seed_density_only_standardized_mean_error": 0.028633680194616318,
+      "worst_seed_end_to_end_quadrature_mean_error": 0.029765237122774124,
+      "nonlinear_or_3d_confirmatory_training_authorized": true
     }
   ],
   "evaluation": {

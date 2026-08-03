@@ -174,9 +174,13 @@ DA2도 완료됐습니다. 고정 규칙상 shrinkage 0.50이 선택됐지만 �
 empirical NLL, 3,072 geometry × 8 condition을 사용하고 G1r의 model,
 optimizer, validation/test size, metric, threshold를 그대로 유지합니다.
 Checkpoint 선택 뒤 기존과 같은 192-geometry fresh test를 생성합니다.
-G1s는 아직 실행 전이며 완전한 pass
-전에는 nonlinear/3D 학습을 허용하지 않습니다. 통과하더라도 이는
-data/pipeline sanity이지 논문의 독립 novelty가 아닙니다.
+G1s는 exact commit `b0e555a`의 fresh 5-seed A6000 run에서 모든 frozen
+check를 통과했습니다. 최악 density-only/end-to-end mean은
+0.02863/0.02977, coverage error는 0.00836/0.01294, projective CI upper는
+0.000674였습니다. 공개 aggregate는
+[`results/controlled_pde_g1s_20260803.json`](results/controlled_pde_g1s_20260803.json)입니다.
+이 결과는 nonlinear/3D protocol 등록을 허용하지만 data/pipeline sanity이지
+논문의 독립 novelty가 아닙니다. G1/G1r 실패는 그대로 보존합니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
@@ -209,7 +213,8 @@ base-family bootstrap 95% CI `[0.2001, 0.2243]`로 기준을 통과했습니다.
 Pressure는 tuned \(Q^{1.75}\)에서 0.1369 `[0.1190, 0.1496]`로
 실패했습니다. 따라서 미래 Aneumo G2는 velocity-only 후보이며
 pressure/full-field novelty는 제외합니다. 이 결과는 learned 성능이 아니고
-G1/G1r 실패도 해소하지 않으므로 3D 학습은 여전히 보류합니다. 공개
+G1s pass 뒤 protocol 등록은 가능하지만 nonlinear C1/C2 strong-baseline
+검증을 먼저 수행하므로 3D headline 학습은 순서상 보류합니다. 공개
 aggregate는
 [`results/aneumo_scaling_audit_20260803.json`](results/aneumo_scaling_audit_20260803.json)에
 있습니다.

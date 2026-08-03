@@ -4,6 +4,26 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · G1s passes every frozen exact-data check
+
+### Result
+
+- Exact `b0e555a`의 fresh 5-seed A6000 run이 exit 0으로 완료됐다.
+- 최악 density-only/end-to-end mean은 0.02863/0.02977로 0.05 기준을
+  통과했다. Density/sample coverage error는 0.00836/0.01294,
+  full-BC operator는 0.00410, projective CI upper는 0.000674,
+  analytic nesting residual은 \(7.45\times10^{-9}\)였다.
+- Pinned container에서 82개 전체 test와 GitHub quality/Pages가
+  같은 source commit으로 통과했다.
+
+### Decision
+
+- G1/G1r 실패는 그대로 보존한다. G1s는 training geometry 768→3,072의
+  data adequacy를 확인했으며 method novelty나 baseline superiority가 아니다.
+- Nonlinear/3D protocol 등록은 허용한다. 우선순위는 multicomponent
+  nonlinear C1/C2와 strong probabilistic/partial-observation baseline이며,
+  그 결과 전에는 aneurysm 3D를 headline evidence로 만들지 않는다.
+
 ## 2026-08-03 · G1s fresh data-adequacy sanity is preregistered
 
 ### Experiment

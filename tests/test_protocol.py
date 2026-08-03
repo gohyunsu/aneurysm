@@ -45,11 +45,11 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "velocity-only"):
             validate_protocol(candidate)
 
-    def test_aneumo_learning_remains_blocked_by_exact_sanity(self) -> None:
+    def test_aneumo_learning_remains_linked_to_g1s_pass(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         output = candidate["model"]["irregular_3d_output_contract"]
         output["activation_condition"] = "run_immediately"
-        with self.assertRaisesRegex(ProtocolError, "exact sanity"):
+        with self.assertRaisesRegex(ProtocolError, "G1s pass"):
             validate_protocol(candidate)
 
     def test_patient_bootstrap_is_required(self) -> None:
@@ -262,15 +262,15 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "original G1r thresholds"):
             validate_protocol(candidate)
 
-    def test_unrun_g1s_cannot_authorize_complex_confirmation(self) -> None:
+    def test_passed_g1s_must_authorize_next_domain(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         g1s = next(
             item
             for item in candidate["prospective_reentry_protocols"]
             if item["id"] == "G1s"
         )
-        g1s["nonlinear_or_3d_confirmatory_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "Unrun G1s"):
+        g1s["nonlinear_or_3d_confirmatory_training_authorized"] = False
+        with self.assertRaisesRegex(ProtocolError, "completed G1s pass"):
             validate_protocol(candidate)
 
     def test_g1s_cannot_change_fresh_test_size(self) -> None:

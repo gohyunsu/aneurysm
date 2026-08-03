@@ -151,7 +151,12 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   validation-only selection을 유지한다. Validation/test size도 192/192로
   유지해 training geometry 수 외의 차이를 만들지 않는다. G1s가 통과해도
   data/pipeline adequacy이지 novelty가 아니며, 실패한 G1/G1r은 그대로다.
-  완료 전에는 nonlinear/3D confirmatory 학습을 허용하지 않는다.
+  Exact commit `b0e555a`의 G1s는 A6000 fresh 5-seed run에서 7개 check를
+  모두 통과했다. 최악 density-only/end-to-end mean은
+  0.02863/0.02977, density/sampled coverage error는
+  0.00836/0.01294, projective CI upper는 0.000674였다. G1/G1r은
+  failed로 유지한다. 이 pass는 nonlinear/3D protocol 등록을 허용하지만
+  data scaling이나 exact toy result를 contribution으로 만들지 않는다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야
@@ -159,8 +164,9 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   train-only physical-scaling audit에서 velocity tuned residual은
   0.2112, CI95 `[0.2001, 0.2243]`로 0.15 기준을 통과했지만 pressure는
   0.1369 `[0.1190, 0.1496]`로 실패했다. 따라서 향후 G2는 velocity-only
-  후보이며 pressure/full-field novelty는 주장하지 않는다. G1/G1r 실패
-  때문에 learned 3D 실행은 여전히 blocked다.
+  후보이며 pressure/full-field novelty는 주장하지 않는다. G1s pass로
+  velocity-only learned protocol 등록은 가능하지만, nonlinear domain과
+  strong baseline을 먼저 통과하지 않은 3D 결과를 headline으로 올리지 않는다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

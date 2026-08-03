@@ -589,7 +589,9 @@
               audit에서 velocity는 21.12% [20.01%, 22.43%]가 남아
               통과했지만 pressure는 13.69% [11.90%, 14.96%]로
               실패했습니다. 따라서 미래 G2는 velocity-only 후보이고,
-              G1r 실패 때문에 learned 3D 학습은 여전히 보류합니다.
+              G1s가 fresh exact sanity를 통과했지만, nonlinear
+              multicomponent C1/C2와 strong baseline을 먼저 검증합니다.
+              이후 learned 3D는 velocity-only로 제한합니다.
               AneuG-Flow는
               geometry archive만 확인됐고 BC variation이 없어 paired-BC
               evidence로 쓰지 않습니다.
@@ -632,8 +634,12 @@
               실제 결과에서 shrinkage 0.50의 평균 개선은 0.23%뿐이고
               한 seed에서는 악화돼 새 method로 채택하지 않았습니다.
               Geometry를 3,072로 늘린 원래 empirical NLL만 최악 2.71%로
-              안정화됐습니다. 다음 fresh 실험은 새 이름의 모델이 아니라
-              충분한 데이터에서 같은 estimator가 재현되는지 검사합니다.
+              안정화됐습니다. Fresh G1s는 같은 estimator와 3,072×8
+              training budget에서 7개 frozen check를 모두 통과했습니다.
+              최악 density/end-to-end mean은 2.86%/2.98%, coverage error는
+              0.84%/1.29%였습니다. 과거 G1/G1r은 failed로 보존하고 이
+              data-adequacy pass를 novelty로 세지 않습니다. 다음은
+              multicomponent nonlinear C1/C2의 strong-baseline 검증입니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>

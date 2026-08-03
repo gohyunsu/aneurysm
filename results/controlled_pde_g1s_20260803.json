@@ -1,0 +1,185 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "controlled_pde_g1s_20260803",
+  "experiment_id": "controlled_pde_g1s_data_adequacy_v1",
+  "evidence_status": "prospective_fresh_exact_data_adequacy_gate_completed_passed",
+  "source_gate": "G1r",
+  "source_diagnostic": "DA2",
+  "source_commit": "b0e555a11be740bbdf5ba3c61fbe1cf5de63ca2c",
+  "source_config_sha256": "34195056606c046491d607a85af191dd57e3e97450281bb2c0353c156892196e",
+  "source_metrics_sha256": "c1df947fb3a55a6ddabf50980e2bb498214c7d1eb4e5a0ad0eed667be2f804a8",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-03T08:46:40.138304+00:00",
+    "ended_utc": "2026-08-03T08:48:06.438907+00:00",
+    "seeds": 5,
+    "walltime": "00:01:30"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "pbs_container_contract_tests": {
+      "status": "passed",
+      "exit_status": 0,
+      "tests": 82,
+      "tests_log_sha256": "968eae3269585bddb96930bdae9f5d8a36005bd94cfbd5daffa2110f8237ad8b",
+      "dependency_layer": "h5py_3_12_1"
+    },
+    "github_research_contract_and_site_quality": "passed",
+    "github_pages_deployment": "passed"
+  },
+  "contract": {
+    "fresh_seeds": 5,
+    "train_geometries": 3072,
+    "validation_geometries": 192,
+    "test_geometries": 192,
+    "conditions_per_geometry": 8,
+    "density_estimator": "empirical_nll",
+    "only_changes_from_g1r": [
+      "five_entirely_fresh_simulation_family_seeds",
+      "training_geometries_increased_from_768_to_3072"
+    ],
+    "worst_seed_or_route_decides": true,
+    "g1_relabeled": false,
+    "g1r_relabeled": false,
+    "data_quantity_claimed_as_method_contribution": false
+  },
+  "gate": {
+    "passed": true,
+    "checks": {
+      "maximum_density_only_standardized_mean_error": {
+        "observed": 0.028633680194616318,
+        "threshold": 0.05,
+        "passed": true
+      },
+      "maximum_density_only_coverage_error": {
+        "observed": 0.008355712890624978,
+        "threshold": 0.03,
+        "passed": true
+      },
+      "maximum_end_to_end_quadrature_mean_error": {
+        "observed": 0.029765237122774124,
+        "threshold": 0.05,
+        "passed": true
+      },
+      "maximum_end_to_end_sampled_coverage_error": {
+        "observed": 0.012935384114583393,
+        "threshold": 0.03,
+        "passed": true
+      },
+      "maximum_full_bc_operator_error": {
+        "observed": 0.004104215651750565,
+        "threshold": 0.03,
+        "passed": true
+      },
+      "maximum_projective_excess_ci95_upper": {
+        "observed": 0.0006743100471794605,
+        "threshold": 0.01,
+        "passed": true
+      },
+      "maximum_analytic_nested_moment_residual": {
+        "observed": 7.450580596923828e-09,
+        "threshold": 1e-06,
+        "passed": true
+      }
+    }
+  },
+  "across_seed_summary": {
+    "maximum_density_only_standardized_mean_error": {
+      "mean": 0.02408161275088787,
+      "std": 0.003460687642715084,
+      "min": 0.02066774293780327,
+      "max": 0.028633680194616318
+    },
+    "maximum_end_to_end_quadrature_mean_error": {
+      "mean": 0.024593064188957216,
+      "std": 0.003568578537605296,
+      "min": 0.021676473319530487,
+      "max": 0.029765237122774124
+    },
+    "maximum_density_only_coverage_error": {
+      "mean": 0.005595703124999995,
+      "std": 0.0031897332501327207,
+      "min": 0.0013061523437499778,
+      "max": 0.008355712890624978
+    },
+    "maximum_end_to_end_sampled_coverage_error": {
+      "mean": 0.00792805989583334,
+      "std": 0.0034229119900605716,
+      "min": 0.004968261718749978,
+      "max": 0.012935384114583393
+    },
+    "maximum_full_bc_operator_error": {
+      "mean": 0.0034740007016807795,
+      "std": 0.0004384862688518174,
+      "min": 0.0029463949613273144,
+      "max": 0.004104215651750565
+    }
+  },
+  "projective_routes": {
+    "left_then_right": {
+      "mean_signed_excess": 1.0298937559127807e-05,
+      "ci95": [
+        -0.0006984403356909752,
+        0.0006743100471794605
+      ]
+    },
+    "right_then_left": {
+      "mean_signed_excess": 0.00022519519552588463,
+      "ci95": [
+        -3.505581989884377e-05,
+        0.00043284231796860697
+      ]
+    }
+  },
+  "descriptive_direct_mask_gaussian_comparison": {
+    "scope": "same_five_seeds_and_three_primary_masks_not_the_headline_strong_probabilistic_baseline",
+    "cells": 15,
+    "aurora_lower_energy_score_cells": 15,
+    "aurora_lower_standardized_mean_error_cells": 15,
+    "aurora_lower_coverage_error_cells": 15,
+    "pooled_relative_energy_score_improvement": 0.12090264388566296,
+    "pooled_relative_standardized_mean_error_improvement": 0.838594229161769,
+    "mask_means": {
+      "missing": {
+        "aurora_energy_score": 1.052662428592642,
+        "direct_energy_score": 1.161136690651377,
+        "aurora_standardized_mean_error": 0.04225791157514323,
+        "direct_standardized_mean_error": 0.22003272198295845,
+        "aurora_coverage_error": 0.0031754557291666873,
+        "direct_coverage_error": 0.013590494791666675
+      },
+      "left_observed": {
+        "aurora_energy_score": 0.5540472911360363,
+        "direct_energy_score": 0.6550245927957198,
+        "aurora_standardized_mean_error": 0.015538729051089223,
+        "direct_standardized_mean_error": 0.14608557931690788,
+        "aurora_coverage_error": 0.006217447916666697,
+        "direct_coverage_error": 0.03615315755208335
+      },
+      "right_observed": {
+        "aurora_energy_score": 0.6580569139060874,
+        "direct_energy_score": 0.7600796958742042,
+        "aurora_standardized_mean_error": 0.020182606915477665,
+        "direct_standardized_mean_error": 0.11700722225941718,
+        "aurora_coverage_error": 0.005030924479166687,
+        "direct_coverage_error": 0.037198893229166696
+      }
+    },
+    "interpretation_limit": "This baseline is useful pipeline evidence but does not establish superiority to LANO, Neural Operator Processes, or a compute-matched generic probabilistic operator."
+  },
+  "decision": {
+    "g1_status": "failed_unchanged",
+    "g1r_status": "failed_unchanged",
+    "g1s_status": "completed_passed",
+    "nonlinear_or_3d_protocol_registration_authorized": true,
+    "promote_data_scale_to_contribution": false,
+    "accept_ready": false,
+    "next_step": "Preregister and execute a nonlinear multi-component boundary-condition experiment that tests solution-functional mask compatibility and same-geometry response against strong partial-observation and probabilistic-operator baselines before any irregular-3D headline claim."
+  }
+}
