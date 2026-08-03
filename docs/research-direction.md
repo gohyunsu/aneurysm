@@ -153,6 +153,17 @@ score가 좋았지만, claim은 `unsupported`로 유지한다. Raw two-sample sl
 distance의 finite-\(K\) floor와 sampled-mean 오차를 분해하는 G1b는
 post-result exploratory diagnostic이며 원래 실패를 소급해 바꾸지 않는다.
 
+G1b 결과, \(K=128\)의 learned direct-vs-nested distance 0.1006은 iid
+two-sample floor 0.1013과 구분되지 않았고 반대 nesting 방향도 같았다.
+Analytic Gaussian moment residual은 \(7.45\times10^{-9}\)였다. 즉 raw
+projective failure는 coherence violation보다 estimator floor였다.
+
+하지만 \(K=2048\) missing-mask end-to-end mean error는 0.0853이었고,
+density-only 0.0754, operator-only 0.0341, sampling-only 0.0325였다.
+BC-density estimation error가 남아 exact conditional distribution
+정확성은 여전히 `unsupported`다. Coverage 귀속은 G1b 범위 밖이므로 frozen
+coverage failure도 unresolved다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.

@@ -1,0 +1,152 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "controlled_pde_g1b_20260803",
+  "experiment_id": "controlled_pde_g1b_attribution_v1",
+  "evidence_status": "post_result_exploratory_diagnostic",
+  "source_commit": "8e2495087c1df1e72533141900922257864de67d",
+  "source_metrics_sha256": "8bf6132e9839e04b22c836b268059970e9d3ccea786837ff69c3cb6573d52239",
+  "scheduler": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "walltime": "00:00:45"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8"
+  },
+  "configuration": {
+    "seeds": 5,
+    "sample_counts": [
+      128,
+      512,
+      2048
+    ],
+    "attribution_geometries": 64,
+    "conditions_per_geometry": 6,
+    "distance_replicates": 8,
+    "sliced_projections": 32,
+    "nested_routes": [
+      "left_then_right",
+      "right_then_left"
+    ]
+  },
+  "analytic_nested_factorization": {
+    "maximum_mean_residual": 0.0,
+    "maximum_covariance_residual": 7.450580596923828e-09,
+    "interpretation": "Both nesting orders reconstruct the learned and oracle bivariate Gaussian moments to numerical precision."
+  },
+  "projective_distance_floor": {
+    "128": {
+      "left_then_right": {
+        "learned_direct_vs_nested_mean": 0.10060403645038604,
+        "learned_iid_floor_mean": 0.10133495554327965,
+        "learned_signed_excess_mean": -0.0007309190928936005,
+        "oracle_signed_excess_mean": 0.0002417735755443573
+      },
+      "right_then_left": {
+        "learned_direct_vs_nested_mean": 0.10168831013143062,
+        "learned_iid_floor_mean": 0.1015593245625496,
+        "learned_signed_excess_mean": 0.00012898556888103486,
+        "oracle_signed_excess_mean": 0.0003129282966256142
+      }
+    },
+    "512": {
+      "left_then_right": {
+        "learned_direct_vs_nested_mean": 0.05213963463902473,
+        "learned_iid_floor_mean": 0.05199196459725499,
+        "learned_signed_excess_mean": 0.00014767004176974297,
+        "oracle_signed_excess_mean": 0.0002086605876684189
+      },
+      "right_then_left": {
+        "learned_direct_vs_nested_mean": 0.052136560715734956,
+        "learned_iid_floor_mean": 0.05161687768995762,
+        "learned_signed_excess_mean": 0.00051968302577734,
+        "oracle_signed_excess_mean": -0.00018926234915852546
+      }
+    },
+    "2048": {
+      "left_then_right": {
+        "learned_direct_vs_nested_mean": 0.025961882853880524,
+        "learned_iid_floor_mean": 0.026195438066497444,
+        "learned_signed_excess_mean": -0.00023355521261692047,
+        "oracle_signed_excess_mean": 0.00036736768670380114
+      },
+      "right_then_left": {
+        "learned_direct_vs_nested_mean": 0.0260695718228817,
+        "learned_iid_floor_mean": 0.026268905960023403,
+        "learned_signed_excess_mean": -0.00019933413714170455,
+        "oracle_signed_excess_mean": 0.00015256637707352638
+      }
+    }
+  },
+  "conditional_mean_attribution_at_k2048": {
+    "missing": {
+      "sampling_only_mean_std": [
+        0.03245691768825054,
+        0.0029059615550347307
+      ],
+      "density_only_mean_std": [
+        0.07540331557393073,
+        0.02268418148869338
+      ],
+      "operator_only_mean_std": [
+        0.03405032977461815,
+        0.002808616025029882
+      ],
+      "end_to_end_mean_std": [
+        0.08530437499284745,
+        0.021608333377882573
+      ],
+      "end_to_end_max_seed": 0.10671065747737885
+    },
+    "left_observed": {
+      "sampling_only_mean_std": [
+        0.010517343878746033,
+        0.0008807320518224773
+      ],
+      "density_only_mean_std": [
+        0.033011046797037126,
+        0.0055893168969797695
+      ],
+      "operator_only_mean_std": [
+        0.013098157197237014,
+        0.00033409743313556506
+      ],
+      "end_to_end_mean_std": [
+        0.03608063794672489,
+        0.004923567140281542
+      ],
+      "end_to_end_max_seed": 0.041352398693561554
+    },
+    "right_observed": {
+      "sampling_only_mean_std": [
+        0.013191537745296956,
+        0.0007416442238889024
+      ],
+      "density_only_mean_std": [
+        0.041358964145183565,
+        0.012831687107565127
+      ],
+      "operator_only_mean_std": [
+        0.015980236046016217,
+        0.0005488790873238012
+      ],
+      "end_to_end_mean_std": [
+        0.045951297134161,
+        0.012466830461654473
+      ],
+      "end_to_end_max_seed": 0.06577442586421967
+    }
+  },
+  "scientific_verdict": "raw_projective_failure_is_sampling_floor_but_learned_distribution_remains_inaccurate",
+  "decision": {
+    "frozen_g1_reopened": false,
+    "structural_implementation": "The joint Gaussian and shared pushforward show no detectable excess direct-versus-nested discrepancy beyond the iid finite-sample floor.",
+    "learned_distribution": "Unsupported. At K=2048, missing-mask mean error remains 0.0853 and is dominated by learned BC-density estimation error.",
+    "coverage_attribution": "Not evaluated by this diagnostic; the frozen worst-seed coverage failure remains unresolved.",
+    "next_step": "Diagnose density optimization separately, replace raw two-sample thresholds only in a prospectively versioned fresh-data gate, and retain the original G1 failure."
+  },
+  "interpretation": "G1b explains why the raw projective metric failed at K=128, but it does not establish accurate conditional distributions and cannot replace or relabel frozen G1."
+}

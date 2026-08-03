@@ -351,11 +351,13 @@
           <p>
             G1은 direct mask baseline보다 모든 mask에서 상대 개선됐지만
             absolute gate를 통과하지 못했다. Fixed Fourier K=4/8/12도
-            localized bulge gate를 만족하지 못해 폐기한다. 다음 실행은
-            threshold 완화가 아니라 estimator-floor/error attribution과
-            equal-budget temporal basis 비교다.
+            localized bulge gate를 만족하지 못해 폐기한다. G1b에서 raw
+            projective distance는 iid sampling floor로 설명됐지만 K=2048
+            missing-mask mean error 8.53%, density-only 7.54%가 남았다.
+            따라서 G1은 재개방하지 않고 D0b만 별도 진단한다.
           </p>
           <a href="../results/controlled_pde_g1_attempt2_20260803.json">Exact G1 aggregate ↗</a>
+          <a href="../results/controlled_pde_g1b_20260803.json">G1b attribution aggregate ↗</a>
           <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
         </div>
       </article>

@@ -250,6 +250,13 @@ Pareto frontier가 좋아야 선택한다. 아무 후보도 통과하지 않으�
 direct-time query 또는 autoregressive decoder를 사용하며, one-shot
 temporal representation은 contribution에서 완전히 제외한다.
 
+현재 D0b 구현은 5-fold geometry assignment, case-normalized uncentered
+temporal second moment, fold별 train-only eigendecomposition, DCT/POD
+projection을 포함한다. Mean vector를 rank 밖의 무료 parameter로 추가하지
+않는다. Pinned container에서 orthonormality, held-out covariance exclusion,
+synthetic two-pass runtime을 통과했지만 실제 105-case 결과 전까지
+representation은 선택되지 않은 상태다.
+
 ## 10. 학습 목적
 
 \[

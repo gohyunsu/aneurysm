@@ -20,7 +20,10 @@
   same-geometry paired response supervision.
 - 현재 증거: D0 frozen \(K=8\)과 exact G1 absolute gate가 모두 실패했다.
   G1은 direct masked Gaussian보다 모든 mask에서 상대적으로 좋았지만 claim은
-  `unsupported`다. G1b estimator attribution은 exploratory로만 취급한다.
+  `unsupported`다. G1b에서 \(K=128\) raw projective distance가 iid sampling
+  floor와 같고 analytic nesting residual이 \(7.45\times10^{-9}\)임을
+  확인했다. 그러나 \(K=2048\) missing-mask mean error는 0.0853이며
+  density-only 0.0754가 지배적이므로 G1은 닫힌 상태다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   또는 train-only basis는 D0b를 새로 통과할 때만 복원한다.
@@ -83,7 +86,8 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   run은 실패했으므로 원인 분해 전까지 gate는 닫혀 있다. `G1b`는
   \(K=128/512/2048\)의 iid Monte Carlo floor와 sampling/BC-density/operator
   오차를 분해하는 post-result diagnostic일 뿐이며 G1을 재개방하거나
-  소급해 relabel할 수 없다.
+  소급해 relabel할 수 없다. G1b가 coverage attribution을 수행하지 않았으므로
+  frozen worst-seed coverage failure도 unresolved로 남긴다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야
@@ -232,3 +236,12 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   v2의 G1은 exact-coherence gate이므로 둘을 혼동하지 않는다. 공식 case
   map과 second model family 전에는 risk-retention을 계산하거나 status
   alignment를 primary claim으로 복원하지 않는다.
+- Exact G1b는 공개 commit `8e24950`의 PBS A6000 run에서 exit 0,
+  walltime 45초로 완료됐다. Public aggregate는
+  `results/controlled_pde_g1b_20260803.json`이며 raw metrics checksum은
+  그 artifact 안에만 기록한다. 결과를 근거로 frozen G1 threshold를
+  완화하지 않는다.
+- D0b 구현은 DCT-II/POD orthonormality, held-out covariance exclusion,
+  synthetic two-pass runtime을 pinned container에서 통과했다. 실제
+  BenchAnXplore run 전까지 상태는 `implemented`, 결과 후에만
+  `completed`로 바꾼다.

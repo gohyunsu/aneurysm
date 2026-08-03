@@ -63,6 +63,17 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cannot reopen"):
             validate_protocol(candidate)
 
+    def test_post_result_d0b_cannot_relabel_d0(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        d0b = next(
+            item
+            for item in candidate["post_result_diagnostics"]
+            if item["id"] == "D0b"
+        )
+        d0b["may_reopen_or_relabel_source_gate"] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot relabel"):
+            validate_protocol(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

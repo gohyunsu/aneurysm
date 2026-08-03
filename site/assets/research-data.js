@@ -91,7 +91,7 @@ window.AURORA_DATA = Object.freeze({
       id: "G1",
       title: "Is condition–marginal coherence exact?",
       copy: "정답 conditional distribution을 계산할 수 있는 controlled PDE에서 mean, coverage, nested-mask tower property를 먼저 검증한다.",
-      state: "Frozen gate failed · attribution diagnostic next",
+      state: "Frozen gate failed · density error remains after G1b",
       blocking: true
     },
     {
@@ -130,7 +130,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "BenchAnXplore",
       role: "105 semi-idealized transient reproduction 및 GNN baseline",
-      provenance: "105 × 80 HDF5/XDMF audited · D0 ready"
+      provenance: "105 × 80 audited · fixed Fourier failed · D0b implemented"
     },
     {
       name: "CMHA",
@@ -144,6 +144,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "G1b separates a flawed raw metric from remaining density error",
+      copy: "K=128 learned direct-vs-nested distance 0.1006은 iid floor 0.1013과 구분되지 않았고 analytic moment residual은 7.45e−9였다. 그러나 K=2048 missing-mask end-to-end mean error 0.0853 중 density-only가 0.0754로 남아 frozen G1은 닫힌 상태다. Coverage attribution도 아직 unresolved다.",
+      files: ["results/controlled_pde_g1b_20260803.json", "docs/research-direction.md", "docs/experiment-protocol.md", "AGENTS.md"]
+    },
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Equal-budget D0b passes implementation and leakage smoke",
+      copy: "17/25 coefficient DCT-II와 5-fold train-only POD의 two-pass audit을 구현했다. Pinned container에서 orthonormality, span reconstruction, held-out covariance exclusion, synthetic full runtime을 통과했으며 실제 105-case 결과 전에는 temporal branch를 선택하지 않는다.",
+      files: ["configs/benchanxplore_d0b.json", "src/aurora/benchanxplore_d0b.py", "tests/test_benchanxplore_d0b.py", "cluster/ssu_a6gpu_benchanxplore_d0b.pbs"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

@@ -19,6 +19,13 @@
   학습→sampling→attribution→aggregation smoke를 통과했다. 전체 suite의
   나머지 오류 2개는 기본 SIF에 BenchAnXplore용 외부 `h5py` layer가 없는
   기존 환경 차이로 분리했다.
+- Exact commit `8e24950`의 G1b가 PBS A6000에서 exit 0, walltime 45초로
+  완료됐다. \(K=128\) learned direct-vs-nested 0.1006은 iid floor
+  0.1013과 같고 analytic moment residual은 \(7.45\times10^{-9}\)였다.
+- 그러나 \(K=2048\) missing-mask end-to-end mean error 0.0853 중
+  density-only가 0.0754로 남았다. Raw projective metric의 실패는
+  설명했지만 learned conditional distribution은 지지되지 않으므로 G1을
+  재개방하지 않았다. Coverage attribution도 unresolved로 명시했다.
 
 ### Model
 
@@ -28,13 +35,17 @@
   train-geometry-only temporal POD만 geometry-disjoint로 비교한다. 새
   oracle gate와 learned compute-matched 비교 전에는 one-shot temporal
   branch를 선택하지 않는다.
+- 5-fold POD covariance fit과 held-out evaluation의 two-pass 실행을
+  구현했다. Pinned container에서 DCT orthonormality, span reconstruction,
+  held-out covariance exclusion, 4-case synthetic runtime의 9개 검사를
+  통과했다.
 
 ### Site
 
 - 11장 상세 가이드의 temporal 창을 계획형 Fourier 설명에서 실제 실패
   수치, global-energy 함정, DCT/POD 후보, leakage 방지 규칙으로 교체했다.
-- G1b 구현·container smoke 상태와 “G1 재개방 불가” 경계를 변경 이력과
-  실행 상태 창에 추가했다.
+- G1b aggregate 결과와 “projective floor 설명 ≠ learned distribution
+  성공” 경계를 변경 이력과 실행 상태 창에 추가했다.
 
 ## 2026-08-03 · Novelty reset: coherent partial-condition operators
 

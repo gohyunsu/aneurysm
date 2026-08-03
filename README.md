@@ -109,8 +109,15 @@ Frozen 5-seed run은 absolute mean, coverage, raw projective gate를 모두
 claim은 `unsupported`이며 결과는
 [`results/controlled_pde_g1_attempt2_20260803.json`](results/controlled_pde_g1_attempt2_20260803.json)에
 있습니다. G1b는 finite-sample metric floor와 density/operator/MC error를
-분해하도록 구현돼 pinned-container smoke를 통과했으며, GPU 결과와 무관하게
-기존 G1 실패를 재개방하지 않는 exploratory diagnostic입니다.
+분해하는 exploratory diagnostic으로 완료됐습니다. K=128 raw projective
+distance는 iid floor로 설명됐지만, K=2048 missing-mask mean error가
+0.0853이고 density estimation error가 지배적이어서 기존 G1 실패는 그대로
+유지합니다. 공개 aggregate는
+[`results/controlled_pde_g1b_20260803.json`](results/controlled_pde_g1b_20260803.json)입니다.
+
+D0b의 DCT-II·train-only POD 구현은 pinned-container 수학·leakage·two-pass
+runtime smoke를 통과했습니다. 실제 105-case GPU 결과 전까지 temporal
+representation은 선택되지 않은 상태입니다.
 
 ## 해석의 경계
 

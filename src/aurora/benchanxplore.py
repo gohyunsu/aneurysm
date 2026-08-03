@@ -47,6 +47,22 @@ def _imports() -> tuple[Any, Any, Any]:
     return h5py, np, torch
 
 
+def _numpy_import() -> Any:
+    try:
+        import numpy as np
+    except ImportError as exc:  # pragma: no cover - server runtime
+        raise BenchAnXploreError("D0 requires numpy.") from exc
+    return np
+
+
+def _torch_import() -> Any:
+    try:
+        import torch
+    except ImportError as exc:  # pragma: no cover - server runtime
+        raise BenchAnXploreError("D0 requires torch.") from exc
+    return torch
+
+
 def discover_cases(data_root: str | Path) -> list[Path]:
     """Return a stable case list without depending on patient-derived IDs."""
 
@@ -111,7 +127,7 @@ def load_case(path: str | Path, expected_timesteps: int = 80) -> CaseArrays:
 def fourier_reconstruct(signal: Any, modes: int) -> Any:
     """Project ``[T, ...]`` onto DC plus ``modes`` positive Fourier modes."""
 
-    _, _, torch = _imports()
+    torch = _torch_import()
     if signal.ndim < 1:
         raise BenchAnXploreError("Signal needs a temporal dimension.")
     maximum = signal.shape[0] // 2
@@ -130,7 +146,7 @@ def _safe_ratio(numerator: Any, denominator: Any, epsilon: float = 1e-12) -> Any
 def region_masks(coordinates: Any) -> dict[str, Any]:
     """Use the public benchmark's y-plane anatomical partition."""
 
-    _, _, torch = _imports()
+    torch = _torch_import()
     y = coordinates[:, 1]
     return {
         "full": torch.ones_like(y, dtype=torch.bool),
@@ -143,7 +159,7 @@ def region_masks(coordinates: Any) -> dict[str, Any]:
 def reconstruction_metrics(target: Any, prediction: Any, node_mask: Any) -> dict[str, float]:
     """Compute field, spectral, and cycle-functional preservation metrics."""
 
-    _, _, torch = _imports()
+    torch = _torch_import()
     truth = target[:, node_mask, :]
     estimate = prediction[:, node_mask, :]
     if truth.numel() == 0:
@@ -180,7 +196,7 @@ def reconstruction_metrics(target: Any, prediction: Any, node_mask: Any) -> dict
 def _summarize(
     values: Sequence[float], *, rng: Any, bootstrap_replicates: int
 ) -> dict[str, float]:
-    _, np, _ = _imports()
+    np = _numpy_import()
     array = np.asarray(values, dtype=np.float64)
     if array.size == 0:
         raise BenchAnXploreError("Cannot summarize an empty metric.")

@@ -61,9 +61,11 @@ D0b의 coefficient budget은 결과를 본 뒤 임의로 늘리지 않는다.
 | Temporal POD | 17, 25 | train geometry covariance only | held-out geometry |
 
 105 geometry를 고정된 geometry-disjoint fold로 나누고, POD는 매 fold의
-training case만으로 fit한다. Frozen D0와 같은 full L2, retained energy,
-cycle mean/peak, bulge L2 기준을 사용한다. D0b는 D0 실패 뒤 설계한
-exploratory representation diagnostic이며 D0를 대체하지 않는다.
+training case만으로 fit한다. Mean을 별도 무료 parameter로 더하지 않고
+uncentered second moment의 rank 안에 포함해 coefficient budget을 지킨다.
+Frozen D0와 같은 full L2, retained energy, cycle mean/peak, bulge L2
+기준을 사용한다. D0b는 D0 실패 뒤 설계한 exploratory representation
+diagnostic이며 D0를 대체하지 않는다.
 
 ### G1 · exact condition–marginal coherence
 
@@ -117,6 +119,18 @@ G1b는 frozen G1의 같은 5 seeds, train/test geometry, epoch, model을
 `G1b complete`는 `G1 passed`를 뜻하지 않는다. 새로운 absolute threshold를
 설정하거나 G1 결과를 소급해 바꾸려면 독립된 새 confirmatory protocol과
 새 데이터 생성이 필요하다.
+
+2026-08-03 G1b는 5 seeds에서 정상 완료됐다. \(K=128\)의 learned
+direct-vs-nested distance는 0.1006, iid floor는 0.1013, signed excess는
+−0.00073이었다. 반대 nesting 방향 signed excess도 0.00013이었고 analytic
+moment residual은 \(7.45\times10^{-9}\)였다. Raw projective threshold
+실패는 finite-sample floor로 귀속됐다.
+
+반면 \(K=2048\) missing-mask mean error는 end-to-end 0.0853,
+density-only 0.0754, operator-only 0.0341, sampling-only 0.0325였다.
+Density estimation이 주 잔여 오차이며 G1은 닫힌 상태다. G1b는 coverage
+귀속을 포함하지 않았으므로 frozen worst-seed coverage failure를 해결했다고
+표현하지 않는다.
 
 ### G2 · paired response fidelity
 

@@ -47,8 +47,9 @@
       "benchanxplore_cases": 105,
       "benchanxplore_timesteps": 80,
       "benchanxplore_d0_status": "frozen_k8_gate_failed",
+      "benchanxplore_d0b_status": "implemented_container_smoke_passed_gpu_pending",
       "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
-      "controlled_pde_g1b_status": "implemented_container_smoke_passed_gpu_pending"
+      "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains"
     },
     "contribution_priority": {
       "primary": [
@@ -205,7 +206,7 @@
   "post_result_diagnostics": [
     {
       "id": "G1b",
-      "status": "implemented_container_smoke_passed_gpu_pending",
+      "status": "completed_projective_floor_explained_density_error_remains",
       "source_gate": "G1",
       "may_reopen_or_relabel_source_gate": false,
       "questions": [
@@ -216,6 +217,24 @@
         128,
         512,
         2048
+      ]
+    },
+    {
+      "id": "D0b",
+      "status": "implemented_container_smoke_passed_gpu_pending",
+      "source_gate": "G3",
+      "may_reopen_or_relabel_source_gate": false,
+      "questions": [
+        "equal_budget_nonperiodic_representation",
+        "train_only_temporal_basis_without_geometry_leakage"
+      ],
+      "candidate_bases": [
+        "dct_ii",
+        "train_only_pod"
+      ],
+      "coefficient_budgets": [
+        17,
+        25
       ]
     }
   ],

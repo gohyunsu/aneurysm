@@ -594,8 +594,9 @@
               실패했고 K=12도 bulge 2.93%였습니다. Exact G1은 direct
               masked Gaussian보다 모든 mask에서 나았지만 5개 seed 모두
               absolute gate를 통과하지 못했습니다. 따라서 fixed Fourier는
-              제거하고, G1은 finite-sample floor와 density/operator error를
-              분해하기 전까지 unsupported입니다.
+              제거했습니다. G1b에서 raw projective error는 iid sampling
+              floor로 설명됐지만 K=2048 missing-mask error 8.53%와
+              density-only error 7.54%가 남아 G1은 여전히 unsupported입니다.
             </p>
           </div>
 
@@ -793,7 +794,11 @@
           </div>
           <div class="compute-status">
             <span class="status-dot complete"></span>
-            <div><p class="eyebrow">G1B ATTRIBUTION · IMPLEMENTED</p><h3>Container smoke passed · GPU run pending</h3><p>Frozen G1을 바꾸지 않은 채 K=128/512/2048의 iid distance floor와 sampling·BC-density·operator mean error를 분해합니다. 완료돼도 G1을 재개방하지 않습니다.</p></div>
+            <div><p class="eyebrow">G1B ATTRIBUTION · COMPLETE</p><h3>Projective floor explained · density error remains</h3><p>K=128 raw distance 0.1006은 iid floor 0.1013과 같았습니다. 그러나 K=2048 missing-mask error는 0.0853이고 density-only가 0.0754여서 G1은 닫힌 상태입니다.</p><a href="../results/controlled_pde_g1b_20260803.json">공개 aggregate 열기 ↗</a></div>
+          </div>
+          <div class="compute-status">
+            <span class="status-dot complete"></span>
+            <div><p class="eyebrow">D0B · IMPLEMENTED</p><h3>DCT-II + train-only POD · GPU run pending</h3><p>17/25 coefficient, 5-fold geometry split, test covariance exclusion, synthetic two-pass runtime을 검증했습니다. 실제 105-case 결과 전에는 temporal branch가 선택되지 않습니다.</p></div>
           </div>
 
           <div class="repro-chain">

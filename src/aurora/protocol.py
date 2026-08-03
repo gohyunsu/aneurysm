@@ -247,9 +247,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     diagnostics = protocol["post_result_diagnostics"]
     diagnostic_ids = _unique_ids(diagnostics, "id", "post_result_diagnostics")
-    if diagnostic_ids != {"G1b"}:
-        raise ProtocolError("Schema v2 must retain only the registered G1b diagnostic.")
-    g1b = diagnostics[0]
+    if diagnostic_ids != {"G1b", "D0b"}:
+        raise ProtocolError("Schema v2 must retain the registered G1b and D0b diagnostics.")
+    g1b = next(item for item in diagnostics if item["id"] == "G1b")
     _require_keys(
         g1b,
         [
@@ -267,6 +267,27 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("A post-result diagnostic cannot reopen or relabel G1.")
     if g1b["sample_counts"] != [128, 512, 2048]:
         raise ProtocolError("G1b sample counts are frozen at 128, 512, and 2048.")
+    d0b = next(item for item in diagnostics if item["id"] == "D0b")
+    _require_keys(
+        d0b,
+        [
+            "status",
+            "source_gate",
+            "may_reopen_or_relabel_source_gate",
+            "questions",
+            "candidate_bases",
+            "coefficient_budgets",
+        ],
+        "D0b diagnostic",
+    )
+    if d0b["source_gate"] != "G3":
+        raise ProtocolError("D0b must remain attributed to the transient G3 branch.")
+    if d0b["may_reopen_or_relabel_source_gate"] is not False:
+        raise ProtocolError("A post-result diagnostic cannot relabel the failed D0.")
+    if d0b["candidate_bases"] != ["dct_ii", "train_only_pod"]:
+        raise ProtocolError("D0b candidates are frozen to DCT-II and train-only POD.")
+    if d0b["coefficient_budgets"] != [17, 25]:
+        raise ProtocolError("D0b coefficient budgets are frozen at 17 and 25.")
     checks.append("post-result diagnostic non-inflation contract")
 
     evaluation = protocol["evaluation"]
