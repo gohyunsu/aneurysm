@@ -103,6 +103,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_cmha_g1.pbs`
 - `cluster/ssu_a6gpu_benchanxplore_d0.pbs`
 - `cluster/ssu_a6gpu_controlled_g1r.pbs`
+- `cluster/ssu_a6gpu_controlled_g1s.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_development.pbs`
 
@@ -143,6 +144,13 @@ bind되지 않아 환경 실패했고, 같은 commit의 attempt 2는 pinned
 `h5py==3.12.1` layer와 72 tests를 모두 통과했다. Scientific result는
 첫 test attempt와 무관하게 full run exit 0 및 두 번째 test pass가 함께
 확인된 뒤에만 채택했다.
+
+G1s는 DA2의 data-sufficiency 신호를 별도 fresh exact test로 검증한다.
+등록된 public commit과 `configs/controlled_pde_g1s.json`을 read-only로
+bind하며, G1r 대비 fresh seed와 training geometry 768→3,072만 바꾼다.
+Validation/test 192/192, empirical NLL, model, optimizer, metric과 threshold는
+유지한다. 다섯 seed 전체 gate가 끝나기 전에는 nonlinear/3D job을 제출하지
+않고, pass하더라도 data quantity를 method contribution으로 기록하지 않는다.
 
 ## Aneumo selective-cache contract
 
