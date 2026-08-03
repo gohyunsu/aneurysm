@@ -1,0 +1,146 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "nonlinear_pde_n0_20260803",
+  "experiment_id": "nonlinear_multicomponent_n0_solver_gate_v1",
+  "evidence_status": "frozen_numerical_problem_design_gate_completed_failed",
+  "source_gate": "G1s",
+  "source_commit": "0ead6874a2dc6edd74870a8be18d21ae81f5038a",
+  "source_config_sha256": "cb5d6b0891083bc9460d5557d5c04b708c25dffa09e90e0b951af0dc3dcfcaaf",
+  "source_metrics_sha256": "5a9dc63cdc43e7551fc6d4c0588caccca9508b7f65d1693af448412bfc530f3b",
+  "source_run_config_sha256": "f1c7fe1bf41f00acd208df59578582c060de4595c0dd5a75f18cffa0d8458cd7",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-03T10:32:23.099119+00:00",
+    "ended_utc": "2026-08-03T10:32:31.853620+00:00",
+    "seeds": 3,
+    "walltime": "00:00:11"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "pbs_container_contract_tests": {
+      "status": "passed",
+      "exit_status": 0,
+      "tests": 90,
+      "tests_log_sha256": "f0eca7a22a0de3ea20c5d04c07d15953c69e499623ccfe028e039af549e4d645"
+    },
+    "metric_job_source_commit_exact": true
+  },
+  "contract": {
+    "contexts_per_seed": 24,
+    "conditions_per_context": 12,
+    "reference_cases_per_seed": 12,
+    "paired_base_cases_per_seed": 48,
+    "grid_points": 33,
+    "reference_grid_points": 65,
+    "boundary_components": 8,
+    "all_checks_required": true,
+    "worst_seed_decides": true,
+    "thresholds_changed_after_result": false
+  },
+  "gate": {
+    "passed": false,
+    "failed_checks": [
+      "minimum_median_nonlinear_departure"
+    ],
+    "checks": {
+      "all_solver_batches_converged": {
+        "observed": true,
+        "passed": true
+      },
+      "maximum_solver_normalized_residual": {
+        "observed": 0.000003322402108096867,
+        "threshold": 0.0005,
+        "passed": true
+      },
+      "maximum_coarse_reference_relative_l2": {
+        "observed": 0.005685607437044382,
+        "threshold": 0.04,
+        "passed": true
+      },
+      "minimum_median_nonlinear_departure": {
+        "observed": 0.007267271634191275,
+        "threshold": 0.01,
+        "passed": false
+      },
+      "minimum_worst_component_response_median": {
+        "observed": 0.1774754524230957,
+        "threshold": 0.01,
+        "passed": true
+      },
+      "minimum_response_effective_rank": {
+        "observed": 7.024121284484863,
+        "threshold": 3.0,
+        "passed": true
+      },
+      "minimum_functional_winner_components": {
+        "observed": 6,
+        "threshold": 3,
+        "passed": true
+      },
+      "maximum_dominant_functional_winner_share": {
+        "observed": 0.515625,
+        "threshold": 0.75,
+        "passed": true
+      },
+      "maximum_analytic_conditioning_route_residual": {
+        "observed": 8.940696716308594e-08,
+        "threshold": 0.00002,
+        "passed": true
+      }
+    }
+  },
+  "seed_summary": [
+    {
+      "seed": 62080311,
+      "median_nonlinear_departure": 0.023193903267383575,
+      "maximum_discretization_relative_l2": 0.004796680994331837,
+      "worst_component_response_median": 0.18207046389579773,
+      "response_effective_rank": 7.0513763427734375,
+      "functional_winner_components": 7,
+      "dominant_functional_winner_share": 0.515625,
+      "analytic_conditioning_route_residual": 5.960464477539063e-08
+    },
+    {
+      "seed": 62080312,
+      "median_nonlinear_departure": 0.02364608272910118,
+      "maximum_discretization_relative_l2": 0.0048218984156847,
+      "worst_component_response_median": 0.1774754524230957,
+      "response_effective_rank": 7.106285095214844,
+      "functional_winner_components": 6,
+      "dominant_functional_winner_share": 0.5052083134651184,
+      "analytic_conditioning_route_residual": 8.940696716308594e-08
+    },
+    {
+      "seed": 62080313,
+      "median_nonlinear_departure": 0.007267271634191275,
+      "maximum_discretization_relative_l2": 0.005685607437044382,
+      "worst_component_response_median": 0.18403521180152893,
+      "response_effective_rank": 7.024121284484863,
+      "functional_winner_components": 8,
+      "dominant_functional_winner_share": 0.515625,
+      "analytic_conditioning_route_residual": 4.0978193283081055e-08
+    }
+  ],
+  "post_result_sampling_audit": {
+    "status": "diagnostic_hypothesis_not_gate_evidence",
+    "finding": "Flattened case order is context-major. The first 12 reference cases therefore contain all 12 conditions from context 0, while the first 48 paired cases cover only contexts 0 through 3.",
+    "risk": "The frozen nonlinear-departure statistic is a single-context statistic for each seed and can confound context sensitivity with seed robustness.",
+    "may_relabel_n0": false,
+    "may_authorize_n1": false,
+    "next_diagnostic": "Run a threshold-free all-context attribution, then preregister a context-stratified N0 re-entry with entirely fresh seeds and unchanged scientific thresholds."
+  },
+  "decision": {
+    "n0_status": "completed_failed",
+    "n1_model_and_strong_baseline_registration_authorized": false,
+    "irregular_3d_headline_authorized": false,
+    "method_novelty_established": false,
+    "accept_ready": false,
+    "next_step": "Preserve N0 as failed; quantify context sensitivity without a gate, then freeze a context-stratified fresh-seed re-entry before any learned comparison."
+  }
+}

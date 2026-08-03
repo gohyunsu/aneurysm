@@ -284,6 +284,14 @@ effective rank, functional winner diversity를 확인한다. Analytic GMM
 conditioning은 direct-union route와 sequential route의 mixture moment가
 일치하는지 별도로 검사한다. N0 출력은 learned score가 아니다.
 
+Frozen N0의 solver와 8-component response는 안정적이었지만
+nonlinear-departure worst-seed gate가 실패했다. 구현 감사 결과,
+context-major flatten tensor를 앞에서 연속 slice해 reference 12개가
+단일 context에 몰렸다. 이 실패를 보존하며, operator tensor 계약에
+**context와 condition 축을 명시적으로 유지하는 stratified selector**를
+추가하기 전에는 N1 architecture를 구현하지 않는다. Selector 수정은
+새 seed의 N0r에서만 gate evidence가 된다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

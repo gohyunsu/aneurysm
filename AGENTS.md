@@ -35,8 +35,10 @@
   병목이며 estimator novelty가 없음을 보였다. 별도 fresh G1s는 G1r 대비
   seed와 training geometry 768→3,072만 바꾸고 7/7 check를 통과했다.
   G1/G1r은 실패로 보존하며 G1s는 data adequacy일 뿐이다. 현재 허용된
-  다음 단계는 비선형 N0 solver/nontriviality gate이며, irregular-3D
-  headline은 N1 strong-baseline 결과 전까지 보류한다.
+  N0는 8/9 check를 통과했지만 worst-seed nonlinear departure가
+  0.00727 < 0.01이어서 failed다. 다음 단계는 threshold-free N0a
+  all-context attribution과 fresh-seed context-stratified N0r이며,
+  irregular-3D headline은 N1 strong-baseline 결과 전까지 보류한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -188,7 +190,11 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   discretization, nonlinear departure, 모든 BC component response,
   response effective rank, functional winner diversity, analytic
   direct/sequential conditioning을 모두 통과해야 N1을 등록한다. N0는
-  numerical/problem adequacy일 뿐 method claim이 아니다.
+  numerical/problem adequacy일 뿐 method claim이 아니다. Frozen N0는
+  nonlinear departure 한 항목에서 실패했다. Context-major contiguous
+  slicing을 발견했지만 threshold를 낮추거나 N0를 relabel하지 않는다.
+  N0a는 attribution만, N0r는 fresh seed와 context-stratified selector를
+  결과 전에 고정한 re-entry만 허용한다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

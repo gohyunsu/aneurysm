@@ -68,6 +68,24 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "numerical adequacy"):
             validate_protocol(candidate)
 
+    def test_failed_n0_cannot_authorize_n1(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0"
+        )
+        n0["n1_registration_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot authorize N1"):
+            validate_protocol(candidate)
+
+    def test_failed_n0_requires_failed_checks(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0"
+        )
+        n0["failed_checks"] = []
+        with self.assertRaisesRegex(ProtocolError, "failed checks"):
+            validate_protocol(candidate)
+
     def test_n1_cannot_drop_active_feature_baseline(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         n1 = next(

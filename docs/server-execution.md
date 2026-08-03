@@ -104,6 +104,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_benchanxplore_d0.pbs`
 - `cluster/ssu_a6gpu_controlled_g1r.pbs`
 - `cluster/ssu_a6gpu_controlled_g1s.pbs`
+- `cluster/ssu_a6gpu_nonlinear_pde_n0.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_development.pbs`
 
@@ -125,6 +126,13 @@ network만 학습한다. True-parameter, analytic population NLL, empirical
 NLL과 matched-budget geometry×condition cells를 비교하며 result threshold가
 없다. Exact commit, config checksum, environment, status와 aggregate
 metric을 남기되 G1/G1r status는 항상 failed로 보존한다.
+
+Nonlinear N0는 exact `0ead687` source와 pinned container로 실행했다.
+Dependency-complete contract 90개와 metric job은 모두 exit 0이었으나
+worst-seed nonlinear departure가 frozen threshold를 통과하지 못했다.
+공개 aggregate는 `results/nonlinear_pde_n0_20260803.json`이다. 완료된
+solver 실행을 성공한 method 실험으로 표현하지 않으며 N1과 3D job은
+N0 re-entry 전까지 제출하지 않는다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

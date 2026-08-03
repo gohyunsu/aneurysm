@@ -638,9 +638,11 @@
               training budget에서 7개 frozen check를 모두 통과했습니다.
               최악 density/end-to-end mean은 2.86%/2.98%, coverage error는
               0.84%/1.29%였습니다. 과거 G1/G1r은 failed로 보존하고 이
-              data-adequacy pass를 novelty로 세지 않습니다. 다음은 학습 전
-              nonlinear N0 solver/nontriviality gate이고, 통과 뒤에만 N1의
-              strong partial-observation/probabilistic/AFA 비교를 엽니다.
+              data-adequacy pass를 novelty로 세지 않습니다. 이후 nonlinear
+              N0는 9개 check 중 8개를 통과했지만 worst-seed nonlinear
+              departure가 실패했습니다. All-context attribution과
+              fresh-seed context-stratified N0r를 통과한 뒤에만 N1의 strong
+              partial-observation/probabilistic/AFA 비교를 엽니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>
@@ -742,7 +744,7 @@
           <div class="gate-explainer">
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
-            <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>33/65 grid solver, nonlinear departure, 8개 BC 방향, functional diversity와 analytic conditioning을 학습 전에 검사합니다.</p></div><b>N1 전 수치 gate</b></article>
+            <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>33/65 grid solver, nonlinear departure, 8개 BC 방향, functional diversity와 analytic conditioning을 검사했습니다. 8/9 check를 통과했지만 worst-seed nonlinear departure가 실패해 N0a attribution과 fresh-seed N0r를 진행합니다.</p></div><b>failed · N1 차단</b></article>
             <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>ID partial/missing calibration과, 값을 제공한 unseen-BC의 same-geometry ΔH를 strong baseline과 비교합니다. 숨은 BC 법칙 자체가 바뀌면 detection만 평가합니다.</p></div><b>primary evidence</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
             <article><span>G4</span><div><h3>의료 전용 trick은 아닌가?</h3><p>Controlled PDE, nonlinear PDE, irregular 3D에서 같은 coherence·response method를 검증합니다.</p></div><b>AAAI generality</b></article>

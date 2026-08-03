@@ -104,8 +104,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "N0는 8-component semilinear PDE의 solver·nonlinearity·functional diversity를 학습 전에 검사한다. 통과해야 N1 strong-baseline learning을 열며, 3D headline은 계속 닫는다.",
-      state: "N0 preregistered · N1 and 3D blocked",
+      copy: "Frozen N0는 solver·8-component response 등 8/9 check를 통과했지만 worst-seed nonlinear departure 0.00727이 기준 0.01에 못 미쳤다. N0는 failed로 보존하고 all-context attribution 뒤 fresh-seed stratified N0r만 허용한다.",
+      state: "N0 failed · N0a next · N1 and 3D blocked",
       blocking: true
     },
     {
@@ -151,6 +151,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "result",
+      title: "Frozen nonlinear N0 fails one of nine checks",
+      copy: "Exact 0ead687의 3-seed A6000 run은 solver·grid error·8-component response·effective rank·functional diversity·analytic conditioning을 통과했지만 seed별 nonlinear departure 0.02319/0.02365/0.00727 중 최악 값이 frozen 0.01 기준을 넘지 못했다. N1/3D는 차단한다. Context-major contiguous slice는 실패를 소급 변경하지 않으며, threshold-free N0a와 fresh-seed context-stratified N0r로만 원인을 분리한다.",
+      files: ["results/nonlinear_pde_n0_20260803.json", "docs/research-direction.md", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

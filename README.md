@@ -182,16 +182,25 @@ check를 통과했습니다. 최악 density-only/end-to-end mean은
 이 결과는 nonlinear/3D protocol 등록을 허용하지만 data/pipeline sanity이지
 논문의 독립 novelty가 아닙니다. G1/G1r 실패는 그대로 보존합니다.
 
-다음 단계는 학습이 아니라
-[`configs/nonlinear_pde_n0.json`](configs/nonlinear_pde_n0.json)의 N0입니다.
+다음 단계는 학습이 아니라 nonlinear gate 실패 원인 분해입니다.
+[`configs/nonlinear_pde_n0.json`](configs/nonlinear_pde_n0.json)의 N0는
 33/65 nested grid semilinear PDE, 8-component edge BC,
 context-conditioned 2-GMM에서 solver accuracy, nonlinear departure, 모든
 BC 방향의 response, functional diversity와 analytic conditioning route를
-먼저 판정합니다. N0가 통과해야 LANO/NOP/generic probabilistic operator와
+판정했습니다. Exact `0ead687`의 3-seed run은 9개 중 8개를 통과했지만
+worst-seed nonlinear departure 0.00727이 frozen 0.01 기준을 넘지 못해
+실패했습니다. 공개 aggregate는
+[`results/nonlinear_pde_n0_20260803.json`](results/nonlinear_pde_n0_20260803.json)입니다.
+
+연속 slice 때문에 nonlinear reference 12개가 단일 context에 몰렸다는
+사후 진단이 있으나 N0를 합격으로 바꾸지 않습니다. Threshold 없는
+all-context attribution 뒤, 새로운 seed와 context-stratified sampling을
+동결한 N0r가 통과해야 LANO/NOP/generic probabilistic operator와
 active-feature-acquisition baseline을 포함한 N1을 등록합니다. 후보 novelty는
 active acquisition 자체가 아니라 conditioning-route 불일치가 PDE
 solution-functional decision과 acquisition regret에 만드는 결과입니다.
-N0 통과만으로 이를 contribution이라 하지 않으며 3D headline도 열지 않습니다.
+N0/N0r 통과만으로 이를 contribution이라 하지 않으며 3D headline도 열지
+않습니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

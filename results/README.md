@@ -37,6 +37,9 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   shrinkage를 original budget에서 비교하고 high-data control을 분리한 DA2
 - `controlled_pde_g1s_20260803.json`: G1r pipeline을 유지하고 training
   geometry만 768→3,072로 늘린 fresh 5-seed prospective data-adequacy pass
+- `nonlinear_pde_n0_20260803.json`: 8/9 numerical/problem-design check를
+  통과했지만 worst-seed nonlinear departure가 frozen 기준에 못 미친
+  prospective N0 실패
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -62,6 +65,12 @@ coverage error는 0.00836/0.01294, projective CI upper는 0.000674였다.
 G1/G1r은 failed로 유지한다. 이 결과는 nonlinear/3D protocol 등록을
 허용하는 data/pipeline sanity이며, data quantity나 exact toy 성능은
 method contribution이 아니다.
+
+N0는 solver와 multicomponent response가 안정적이었지만 seed-wise
+nonlinear-departure minimum 0.00727이 threshold 0.01보다 낮아 실패했다.
+사후에 발견한 context-major contiguous slicing은 attribution 대상이지
+소급 합격 사유가 아니다. N1/3D는 차단하고, threshold-free all-context
+diagnostic과 fresh-seed stratified N0r만 허용한다.
 
 현재 temporal representation 결과:
 

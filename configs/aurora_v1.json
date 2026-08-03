@@ -409,9 +409,14 @@
     {
       "id": "N0",
       "name": "semilinear_multicomponent_solver_nontriviality",
-      "status": "preregistered_before_gpu_run",
+      "status": "completed_failed",
       "source_gate": "G1s",
       "config": "configs/nonlinear_pde_n0.json",
+      "result": "results/nonlinear_pde_n0_20260803.json",
+      "source_commit": "0ead6874a2dc6edd74870a8be18d21ae81f5038a",
+      "failed_checks": [
+        "minimum_median_nonlinear_departure"
+      ],
       "pde": "-div(a_G grad u) + lambda_G u^3 = f_G",
       "context_dim": 5,
       "boundary_components": 8,
@@ -434,12 +439,15 @@
       ],
       "may_establish_method_novelty": false,
       "may_authorize_irregular_3d_headline": false,
-      "pass_authorizes": "N1_learned_model_and_strong_baseline_registration"
+      "pass_authorizes": "N1_learned_model_and_strong_baseline_registration",
+      "n1_registration_authorized": false,
+      "post_result_sampling_audit": "reference statistic used one context per seed because context-major flattened cases were sliced contiguously",
+      "next_step": "threshold_free_all_context_attribution_then_fresh_seed_context_stratified_reentry"
     },
     {
       "id": "N1",
       "name": "learned_conditioning_decision_consistency",
-      "status": "blocked_pending_N0",
+      "status": "blocked_after_failed_N0",
       "source_gate": "N0",
       "primary_question": "does_route_consistent_partial_condition_inference_reduce_solution_functional_risk_and_acquisition_regret",
       "mandatory_baselines": [

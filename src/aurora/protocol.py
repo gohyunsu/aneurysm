@@ -707,11 +707,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "N0 nonlinear protocol",
     )
     if (
-        n0["status"] != "preregistered_before_gpu_run"
+        n0["status"] not in {"preregistered_before_gpu_run", "completed_failed"}
         or n0["source_gate"] != "G1s"
         or n0["config"] != "configs/nonlinear_pde_n0.json"
     ):
-        raise ProtocolError("N0 must remain a preregistered executable after G1s.")
+        raise ProtocolError("N0 must retain its executable and prospective status after G1s.")
     if n0["context_dim"] != 5 or n0["boundary_components"] != 8:
         raise ProtocolError("N0 freezes five context and eight boundary components.")
     if n0["conditioning"] != "analytic_for_arbitrary_component_masks":
@@ -723,8 +723,43 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("N0 is numerical adequacy, not novelty or a 3D gate.")
     if n0["pass_authorizes"] != "N1_learned_model_and_strong_baseline_registration":
         raise ProtocolError("N0 may authorize only N1 registration.")
+    if n0["status"] == "completed_failed":
+        _require_keys(
+            n0,
+            [
+                "result",
+                "source_commit",
+                "failed_checks",
+                "n1_registration_authorized",
+                "post_result_sampling_audit",
+                "next_step",
+            ],
+            "completed failed N0",
+        )
+        if n0["result"] != "results/nonlinear_pde_n0_20260803.json":
+            raise ProtocolError("Failed N0 must point to its public aggregate.")
+        if len(n0["source_commit"]) != 40 or not n0["failed_checks"]:
+            raise ProtocolError("Failed N0 must retain exact source and failed checks.")
+        if n0["n1_registration_authorized"] is not False:
+            raise ProtocolError("Failed N0 cannot authorize N1.")
+    else:
+        for forbidden_key in (
+            "result",
+            "source_commit",
+            "failed_checks",
+            "n1_registration_authorized",
+            "post_result_sampling_audit",
+            "next_step",
+        ):
+            if forbidden_key in n0:
+                raise ProtocolError("Unrun N0 cannot contain post-result fields.")
     n1 = next(item for item in nonlinear if item["id"] == "N1")
-    if n1["status"] != "blocked_pending_N0" or n1["source_gate"] != "N0":
+    expected_n1_status = (
+        "blocked_after_failed_N0"
+        if n0["status"] == "completed_failed"
+        else "blocked_pending_N0"
+    )
+    if n1["status"] != expected_n1_status or n1["source_gate"] != "N0":
         raise ProtocolError("N1 must remain blocked until N0 passes.")
     required_n1_baselines = {
         "conditional_mean_imputation",

@@ -368,9 +368,11 @@
             3,072×8 training budget에서 7개 check를 모두 통과했다.
             최악 density/end-to-end mean은 2.86%/2.98%였다. G1/G1r은
             failed로 유지하고 data scale은 novelty로 채택하지 않는다.
-            다음은 학습이 아니라 8-component semilinear N0의
-            solver·nonlinearity·functional-diversity gate다. 통과하면 LANO,
-            NOP, generic probabilistic operator와 AFA baseline을 포함한 N1을
+            8-component semilinear N0는 9개 check 중 8개를 통과했지만
+            worst-seed nonlinear departure 0.73%가 frozen 1% 기준에
+            못 미쳐 실패했다. 현재는 all-context attribution과 fresh-seed
+            stratified N0r까지만 허용한다. N0r가 통과하면 LANO, NOP,
+            generic probabilistic operator와 AFA baseline을 포함한 N1을
             등록한다. 후보 novelty는 active acquisition이 아니라
             conditioning-route 불일치가 solution-functional decision과
             acquisition regret에 만드는 결과다.
@@ -380,6 +382,7 @@
           </p>
           <a href="../results/controlled_pde_g1_attempt2_20260803.json">Exact G1 aggregate ↗</a>
           <a href="../results/controlled_pde_g1b_20260803.json">G1b attribution aggregate ↗</a>
+          <a href="../results/nonlinear_pde_n0_20260803.json">Nonlinear N0 failed aggregate ↗</a>
           <a href="../results/controlled_pde_g1r_20260803.json">G1r prospective result ↗</a>
           <a href="../configs/controlled_pde_g1r.json">G1r frozen config ↗</a>
           <a href="../results/controlled_pde_density_attribution_20260803.json">DA1 attribution result ↗</a>

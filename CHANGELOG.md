@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Frozen nonlinear N0 fails one of nine checks
+
+### Result
+
+- Exact `0ead687`의 3-seed A6000 run과 90-test contract가 exit 0으로
+  완료됐다. Solver convergence, residual, 33/65-grid error, 8-component
+  response, effective rank, functional diversity와 analytic conditioning은
+  통과했다.
+- Seed별 nonlinear departure 중앙값은 0.02319, 0.02365, 0.00727이었다.
+  최악 seed가 frozen 0.01 기준을 넘지 못했으므로 N0는 실패다. Threshold를
+  결과 뒤에 낮추거나 2/3 seed 다수결로 바꾸지 않는다.
+
+### Decision
+
+- N1 learned comparison과 irregular-3D headline은 계속 차단한다.
+- Post-result code audit에서 context-major로 펼친 case의 앞 12개가 모두
+  context 0이고, 앞 48개가 context 0–3뿐임을 확인했다. 이는 N0를
+  relabel하는 근거가 아니라 단일-context statistic의 취약성 가설이다.
+- 다음 실행은 threshold 없는 all-context N0a attribution이다. 그 결과와
+  무관하게 re-entry는 새로운 seed, context-stratified sampling, 같은
+  scientific threshold를 별도 사전등록한 N0r로만 가능하다.
+
 ## 2026-08-03 · N0 contract failure is corrected before metric access
 
 ### Pre-execution amendment

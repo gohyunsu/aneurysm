@@ -332,6 +332,22 @@ irregular-3D headline은 허용하지 않는다.
 \(-a_G\partial_nu\)를 계산하도록 바로잡았다. Seed, 표본 수, threshold,
 decision rule은 바꾸지 않았다.
 
+Exact `0ead687`의 3-seed A6000 run은 exit 0으로 완료됐으나 N0는
+**failed**다. 9개 check 중 solver convergence, normalized residual,
+coarse/reference error, all-component response, effective rank, functional
+diversity, analytic route consistency의 8개가 통과했다. Seed-wise median
+nonlinear departure는 0.02319, 0.02365, 0.00727이었고 마지막 값이 frozen
+minimum 0.01을 넘지 못했다. 결과 뒤 threshold를 바꾸지 않으며 N1/3D는
+계속 차단한다.
+
+사후 sampling audit에서 `contexts × conditions`를 context-major로 flatten한
+뒤 앞 12개를 택해 nonlinear/discretization을 계산했으므로 각 seed에서
+context 0 하나만 검사했다. Paired 48개도 앞 네 context에 한정됐다. 이
+관찰은 N0를 다시 판정하지 않는 diagnostic hypothesis다. 다음 순서는
+(1) threshold 없는 all-context N0a, (2) 새로운 seed와 명시적
+context-stratified selector를 고정한 N0r다. N0r는 PDE, case count,
+scientific threshold를 유지하며 결과 전에 독립 실행 계약으로 등록한다.
+
 #### N1 · learned decision-consistency falsification
 
 N1은 N0 결과 전에 세부 hyperparameter나 fresh seed를 열지 않는다. Primary
