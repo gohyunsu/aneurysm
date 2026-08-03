@@ -27,7 +27,13 @@ Expected raw archive total for P0 + P1 is about 17.4 GB. Extraction and derivati
 
 - **TopAneu 2026:** acquire only under the official challenge terms, keep separate from the general research corpus, and never publish data or labels to this repository.
 - **ADAM / CADA:** download only when starting the CTA/MRA detection and segmentation task. They do not provide the CFD fields needed for In-PI-MGN reproduction.
-- **AneuG-Flow / Aneumo:** useful later for synthetic pretraining and stress tests, but should not be the first source for a clinically interpreted risk model.
+- **AneuG-Flow full archive:** useful for known-condition geometry pretraining,
+  but its released BC policy does not vary across cases and it cannot support
+  paired-BC C2.
+- **Aneumo full archive:** do not download the multi-terabyte release. Use
+  `scripts/stage_aneumo_range.py` with the pinned pilot config to range-read
+  only selected internal NPY members. The compact fields remain
+  non-redistributable under the dataset-specific license.
 - **CFD Rupture Challenge:** small and useful for qualitative checks, but too small for a primary training set.
 
 ## Canonical layout
@@ -74,3 +80,16 @@ The Git repository keeps only `docs/`, `scripts/`, `manifests/` (without protect
 2. Generate `datasets.csv` with SHA-256 and license data.
 3. Inspect one HDF5 case and one AneuX mesh in a notebook/script.
 4. Only then acquire AneuX models and CMHA patients on external storage.
+
+## Aneumo selective paired-BC pilot
+
+`configs/aneumo_g2_pilot_v1.json` fixes 32 distinct AneuX base families, two
+deformations per family, eight mass-flow conditions, and 4,096 nodes per case.
+The train/validation/test split is disjoint at the **base-family** level, not
+merely the synthetic-geometry level. The staging code reads ZIP64 central
+directories and required members with HTTP Range, verifies every CRC32, checks
+that all eight conditions share coordinates, and writes one compact HDF5 cache.
+
+The pilot supports steady same-geometry mass-flow response only. One scalar mass
+flow has no nontrivial partial-component mask lattice, so the pilot cannot
+support the full partial-BC coherence claim.

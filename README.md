@@ -37,8 +37,10 @@ AURORA는 다음 세 질문을 한 모델과 실험 프로토콜로 연결합니
    분리했을 때 각각 실제 BC shift와 geometry OOD를 추적하는가?
 
 Fixed Fourier cycle은 frozen D0의 localized bulge gate를 실패해 제거했습니다.
-17/25 coefficient의 DCT-II·train-only POD가 새 D0b와 compute-matched learned
-비교를 모두 통과할 때만 one-shot temporal branch를 다시 검토합니다.
+D0b에서는 DCT-II 17/25가 탈락하고 train-only POD 17/25만 oracle
+representation gate를 통과했습니다. POD는 아직 learned superiority나
+선택된 architecture가 아니며, compute-matched 비교와 fresh transient
+확인을 통과할 때만 one-shot temporal branch를 다시 검토합니다.
 
 ## 문서 읽는 순서
 
@@ -81,9 +83,13 @@ rupture-status utility를 지지하지 않았습니다(`ΔAUPRC=-0.0419`,
 patient-bootstrap 95% CI `[-0.1083, 0.0066]`). 이 결과 때문에 downstream
 risk alignment는 논문의 primary contribution에서 제외했습니다.
 
-현재 source audit에서 Aneumo는 전체 학습 release가 아니라 geometry 1개 ×
-steady BC 2개 sample만 확인됐습니다. BenchAnXplore 105-case HDF5/XDMF
-archive는 무결성을 확인해 결과 확인 전에 D0를 등록하고 실행했습니다.
+현재 Aneumo ZIP64 release는 전체 archive를 내려받지 않고 byte-range로
+감사했습니다. 첫 shard에서 geometry당 8개 steady mass-flow condition과
+실제 internal NPY의 좌표·압력·속도·CRC contract를 확인했고, 32개 AneuX
+base family × 2 deformation의 family-disjoint selective pilot을 결과 확인
+전에 등록했습니다. Compact cache는 dataset license에 따라 공개
+재배포하지 않습니다. BenchAnXplore 105-case HDF5/XDMF archive는 무결성을
+확인해 결과 확인 전에 D0를 등록하고 실행했습니다.
 Fixed Fourier는 실패했으며, 후속 D0b도 표현 가능성만 판단할 뿐 모델 성능
 또는 novelty로 해석하지 않습니다. Main method는 exact controlled PDE →
 nonlinear PDE → paired-BC irregular 3D 순서로 검증합니다.
@@ -115,12 +121,29 @@ distance는 iid floor로 설명됐지만, K=2048 missing-mask mean error가
 유지합니다. 공개 aggregate는
 [`results/controlled_pde_g1b_20260803.json`](results/controlled_pde_g1b_20260803.json)입니다.
 
+후속 [`G1r`](configs/controlled_pde_g1r.json)은 기존 G1을 다시 채점하지
+않습니다. G1b가 드러낸 density optimization과 estimator-floor 문제만
+수정하고, 서로 겹치지 않는 5개 fresh seed를 결과 전에 고정했습니다.
+Density와 operator는 validation geometry로만 checkpoint를 선택하고,
+density-only moment·coverage는 analytic하게, end-to-end mean은
+Gauss–Hermite quadrature로, projective error는 matched iid floor 대비
+95% CI upper bound로 평가합니다. 실행 전 상태이므로 현재 G1은 여전히
+실패입니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에
 쓰였으므로 BenchAnXplore learned 비교는 exploratory이며, confirmatory
 효율 주장은 fresh transient test가 필요합니다. 공개 aggregate는
 [`results/benchanxplore_d0b_20260803.json`](results/benchanxplore_d0b_20260803.json)입니다.
+
+Aneumo pilot의 고정 split과 허용 범위는
+[`configs/aneumo_g2_pilot_v1.json`](configs/aneumo_g2_pilot_v1.json)에,
+선택적 ZIP64 range ingestion은
+[`scripts/stage_aneumo_range.py`](scripts/stage_aneumo_range.py)에 있습니다.
+이 steady scalar-BC pilot은 same-geometry response C2와 irregular-3D
+일반화만 검사하며, multicomponent partial-BC C1이나 transient 효율을
+뒷받침하지 않습니다.
 
 ## 해석의 경계
 

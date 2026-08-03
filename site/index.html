@@ -338,8 +338,8 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">PRIMARY SANITY GATES · COMPLETE</p>
-          <span>failures retained; claims remain unsupported</span>
+          <p class="eyebrow">FROZEN SANITY GATES · COMPLETE</p>
+          <span>failures retained; fresh G1r is registered but unrun</span>
         </div>
         <div class="g1-result-metrics">
           <div><span>D0 · Fourier K=8</span><b>1.62%</b><small>full relative L2 · fail</small></div>
@@ -356,10 +356,13 @@
             missing-mask mean error 8.53%, density-only 7.54%가 남았다.
             따라서 G1은 재개방하지 않는다. D0b의 train-only POD는 표현
             기준만 통과했으며 learned 비교와 fresh transient confirmation은
-            아직 남아 있다.
+            아직 남아 있다. 별도 G1r은 validation-only density selection,
+            analytic coverage, quadrature mean, IID-floor excess CI와 5개
+            fresh seed를 실행 전에 고정했으며 아직 test 결과를 보지 않았다.
           </p>
           <a href="../results/controlled_pde_g1_attempt2_20260803.json">Exact G1 aggregate ↗</a>
           <a href="../results/controlled_pde_g1b_20260803.json">G1b attribution aggregate ↗</a>
+          <a href="../configs/controlled_pde_g1r.json">G1r preregistered config ↗</a>
           <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
           <a href="../results/benchanxplore_d0b_20260803.json">D0b POD aggregate ↗</a>
         </div>

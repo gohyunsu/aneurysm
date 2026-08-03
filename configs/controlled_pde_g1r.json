@@ -1,0 +1,94 @@
+{
+  "schema_version": "aurora.controlled_pde_g1r.v1",
+  "experiment_id": "controlled_pde_g1r_prospective_v1",
+  "status": "preregistered_before_fresh_test",
+  "source_gate": "G1",
+  "may_relabel_failed_source_gate": false,
+  "failed_g1_config": "controlled_pde_g1.json",
+  "failed_g1_config_sha256": "b0a60188cf8b9b4c9bd504338d7798b0b912c693f07f4178f5035c948e8e63bc",
+  "failed_g1_result": "../results/controlled_pde_g1_attempt2_20260803.json",
+  "failed_g1_result_sha256": "1c6e16a0be033c5ee744cdab049887d56102a5be66ea1b83688bf42fbcda335d",
+  "g1b_result": "../results/controlled_pde_g1b_20260803.json",
+  "g1b_result_sha256": "1e169a8bece605adbe2a432c6add5f55defd353062c6b6a41c9cb9b80622d3a7",
+  "changes_from_failed_g1": [
+    "density_nll_is_optimized_and_selected_separately_on_validation_geometries",
+    "operator_and_density_checkpoints_are_selected_without_test_access",
+    "conditional_density_moments_and_coverage_are_evaluated_analytically",
+    "end_to_end_mean_is_evaluated_by_deterministic_gauss_hermite_quadrature",
+    "projective_distance_is_reported_as_excess_over_a_matched_iid_floor"
+  ],
+  "seeds": [31080301, 31080302, 31080303, 31080304, 31080305],
+  "split_seed_offsets": {
+    "train": 0,
+    "validation": 100000,
+    "test": 200000
+  },
+  "grid_points": 64,
+  "train_geometries": 768,
+  "validation_geometries": 192,
+  "test_geometries": 192,
+  "conditions_per_geometry": 8,
+  "hidden_dim": 128,
+  "observation_masks": {
+    "missing": [0, 0],
+    "left_observed": [1, 0],
+    "right_observed": [0, 1],
+    "full": [1, 1]
+  },
+  "primary_masks": ["missing", "left_observed", "right_observed"],
+  "density_training": {
+    "maximum_epochs": 2500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.00001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "operator_training": {
+    "maximum_epochs": 1500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "paired_response_weight": 0.5,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.000001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "direct_baseline_training": {
+    "maximum_epochs": 1500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.000001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "evaluation": {
+    "coverage": 0.9,
+    "bc_samples": 2048,
+    "gauss_hermite_order": 12,
+    "projective_samples": 1024,
+    "projective_geometries": 64,
+    "projective_replicates": 8,
+    "sliced_projections": 32,
+    "nested_routes": ["left_then_right", "right_then_left"],
+    "bootstrap_replicates": 2000
+  },
+  "success_thresholds": {
+    "maximum_density_only_standardized_mean_error": 0.05,
+    "maximum_density_only_coverage_error": 0.03,
+    "maximum_end_to_end_quadrature_mean_error": 0.05,
+    "maximum_end_to_end_sampled_coverage_error": 0.03,
+    "maximum_full_bc_operator_error": 0.03,
+    "maximum_projective_excess_ci95_upper": 0.01,
+    "maximum_analytic_nested_moment_residual": 0.000001
+  },
+  "interpretation": "Prospectively versioned re-entry after the failed frozen G1 and exploratory G1b. A pass can support a fresh exact-domain sanity result but cannot relabel G1, establish superiority, or establish AAAI novelty."
+}

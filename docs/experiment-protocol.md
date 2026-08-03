@@ -147,6 +147,41 @@ Density estimation이 주 잔여 오차이며 G1은 닫힌 상태다. G1b는 cov
 귀속을 포함하지 않았으므로 frozen worst-seed coverage failure를 해결했다고
 표현하지 않는다.
 
+#### G1r · prospective fresh-test re-entry
+
+G1r은 G1b 결과를 본 뒤 만든 **새 protocol**이며 frozen G1을 수정하거나
+소급해 pass로 바꾸지 않는다. 실행 전
+`configs/controlled_pde_g1r.json`에 다음을 고정한다.
+
+- frozen G1 config/result와 G1b result checksum
+- 기존 G1과 겹치지 않는 5개 seed, train/validation/test seed offset
+- 768/192/192 geometry family와 geometry당 8 conditions
+- density NLL과 operator objective의 분리 학습 및 disjoint-validation
+  early stopping; test는 checkpoint 선택 뒤에만 생성
+- analytic density-only conditional moment·coverage
+- 12-point-per-axis Gauss–Hermite end-to-end conditional mean
+- \(K=2048\) sampled coverage
+- 양방향 nesting의 \(K=1024\) direct-vs-nested distance에서 matched iid
+  floor를 뺀 across-seed 95% CI upper bound
+
+Frozen thresholds:
+
+| metric | 최대 허용값 |
+|---|---:|
+| density-only standardized mean error | 0.05 |
+| density-only 90% coverage error | 0.03 |
+| end-to-end quadrature mean error | 0.05 |
+| end-to-end sampled coverage error | 0.03 |
+| full-BC operator error | 0.03 |
+| projective signed-excess 95% CI upper | 0.01 |
+| analytic nesting moment residual | \(10^{-6}\) |
+
+한 seed의 최선값이 아니라 5개 seed 중 최악값을 gate에 사용한다. Projective
+항만 route별 seed mean의 bootstrap CI upper bound를 쓴다. Pass는 새로운
+exact-domain pipeline sanity evidence일 뿐 C1 superiority나 AAAI novelty
+증거가 아니다. 실패하면 nonlinear/3D confirmatory branch로 가지 않고
+density family·data sufficiency를 다시 분석한다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
@@ -201,8 +236,8 @@ paper로 범위를 축소하고 AAAI general method claim을 하지 않는다.
 |---|---|---|
 | Controlled PDE | exact conditional/marginal oracle | 구현 우선 |
 | Nonlinear PDE | ID mask calibration + supplied-BC shift response | semilinear/Burgers pilot 사전 등록 예정 |
-| Aneumo | same-geometry × 8 steady BC | local은 1×2 sample; full G2 blocked |
-| AneuG-Flow | irregular 3D pretraining | geometry archive만 local에 존재 |
+| Aneumo | same-geometry × 8 steady BC | 32 base-family × 2 deformation selective pilot 등록; staging pending |
+| AneuG-Flow | irregular 3D pretraining | geometry archive만 local; BC variation 없음 |
 | BenchAnXplore | transient GNN baseline/D0 | 105×80 audited; D0 실행 |
 | CMHA | secondary real-CFD/status diagnostic | exploratory increment negative |
 | AneuX | secondary external association stress | real CFD 없음 |

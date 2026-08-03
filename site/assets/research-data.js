@@ -46,15 +46,15 @@ window.AURORA_DATA = Object.freeze({
       year: "2026",
       title: "Boundary-indexed operator families",
       copy: "Varying BC의 operator family와 support 밖 비식별성을 정식화해 missing-BC 문제 제기 자체가 novelty가 아님을 보였다.",
-      status: "ICLR · direct problem prior art",
+      status: "AI&PDE at ICLR workshop · direct problem prior art",
       url: "https://openreview.net/forum?id=lDjWQ9UxRy"
     },
     {
       year: "2026.04–07",
-      title: "Conditioning gap, NOP & explicit-BC operators",
-      copy: "CNP conditioning gap, partial-observation Neural Operator Processes, learned boundary extension과 Generalized Neural Operator가 직접 경쟁 범위를 좁혔다.",
-      status: "TMLR + arXiv · direct scope threats",
-      url: "https://arxiv.org/abs/2606.22946"
+      title: "Partial-input, conditioning & residual priors",
+      copy: "AAAI LANO, NOP, conditioning operator, learned boundary extension, GNO와 DeltaPhi가 partial input·conditioning·residual learning 자체의 novelty를 제거했다.",
+      status: "AAAI / NeurIPS / TMLR + arXiv · direct scope threats",
+      url: "https://ojs.aaai.org/index.php/AAAI/article/view/37001"
     },
     {
       year: "2024–25",
@@ -91,14 +91,14 @@ window.AURORA_DATA = Object.freeze({
       id: "G1",
       title: "Is condition–marginal coherence exact?",
       copy: "정답 conditional distribution을 계산할 수 있는 controlled PDE에서 mean, coverage, nested-mask tower property를 먼저 검증한다.",
-      state: "Frozen gate failed · density error remains after G1b",
+      state: "Frozen gate failed · prospective G1r registered, unrun",
       blocking: true
     },
     {
       id: "G2",
       title: "Does paired response improve?",
       copy: "ID partial/missing에서는 calibration을, supplied full-BC support shift에서는 field와 같은-형상 ΔH를, hidden-law shift에서는 detection/abstention을 각각 검증한다.",
-      state: "Full paired-BC asset blocked",
+      state: "64-case Aneumo pilot registered · staging pending",
       blocking: true
     },
     {
@@ -119,8 +119,8 @@ window.AURORA_DATA = Object.freeze({
   datasets: [
     {
       name: "Aneumo",
-      role: "전체 release 확보 후 동일 geometry × 8 steady BC sensitivity",
-      provenance: "현재 1 geometry × 2 BC sample only"
+      role: "동일 geometry × 8 steady BC response pilot",
+      provenance: "32 base family × 2 deformation registered · range staging pending"
     },
     {
       name: "AneuG-Flow",
@@ -144,6 +144,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Fresh-test G1r is prospectively frozen before execution",
+      copy: "Failed G1은 그대로 보존한다. 겹치지 않는 5개 fresh seed, validation-only density/operator checkpoint selection, analytic density moment·coverage, Gauss–Hermite end-to-end mean, matched-IID-floor projective CI와 absolute threshold를 실행 전에 고정했다.",
+      files: ["configs/controlled_pde_g1r.json", "src/aurora/controlled_pde_reentry.py", "docs/experiment-protocol.md", "cluster/ssu_a6gpu_controlled_g1r.pbs"]
+    },
+    {
+      date: "2026.08.03",
+      category: "data",
+      title: "Aneumo paired-BC pilot is family-disjoint and preregistered",
+      copy: "ZIP64 range audit에서 geometry당 8 steady mass-flow condition과 internal NPY CRC·좌표·field contract를 확인했다. 32 AneuX base family × 2 deformation을 family-disjoint하게 고정하고 필요한 member만 선택 수집한다. Compact field는 재배포하지 않으며 이 pilot은 C2만 지원한다.",
+      files: ["configs/aneumo_g2_pilot_v1.json", "src/aurora/aneumo_range.py", "docs/data-acquisition.md", "docs/experiment-protocol.md"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

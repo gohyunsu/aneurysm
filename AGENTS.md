@@ -23,7 +23,11 @@
   `unsupported`다. G1b에서 \(K=128\) raw projective distance가 iid sampling
   floor와 같고 analytic nesting residual이 \(7.45\times10^{-9}\)임을
   확인했다. 그러나 \(K=2048\) missing-mask mean error는 0.0853이며
-  density-only 0.0754가 지배적이므로 G1은 닫힌 상태다.
+  density-only 0.0754가 지배적이므로 G1은 닫힌 상태다. 별도 `G1r`은
+  fresh seed, validation-only checkpoint selection, analytic
+  density moment/coverage, Gauss–Hermite end-to-end mean, iid-floor-calibrated
+  projective metric을 결과 전에 고정한 prospective re-entry다. G1r 결과는
+  frozen G1을 소급해 pass로 바꾸지 않는다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -89,7 +93,11 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   \(K=128/512/2048\)의 iid Monte Carlo floor와 sampling/BC-density/operator
   오차를 분해하는 post-result diagnostic일 뿐이며 G1을 재개방하거나
   소급해 relabel할 수 없다. G1b가 coverage attribution을 수행하지 않았으므로
-  frozen worst-seed coverage failure도 unresolved로 남긴다.
+  frozen worst-seed coverage failure도 unresolved로 남긴다. `G1r`은
+  `configs/controlled_pde_g1r.json`의 다섯 fresh seed와 threshold를
+  test access 전에 고정한 새 evidence다. Density/operator checkpoint는
+  disjoint validation geometry로만 고르고 test split은 선택이 끝난 뒤
+  생성한다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야
@@ -224,9 +232,13 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   aggregate metrics를 남긴다. 실패 run도 provenance로 보존한다.
 - 2026-08-03 smoke 기준은 RTX A6000, PyTorch 2.5.1+cu118, CUDA 11.8이다.
   사양은 매 job에서 다시 기록한다.
-- 2026-08-03 source audit에서 Aneumo는 전체 multi-BC release가 아니라
-  geometry 1개 × steady BC 2개 sample만 확인됐다. 100 geometry × 8 BC
-  G2를 이 자산만으로 실행하거나 성능을 주장하지 않는다.
+- 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
+  shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
+  확인했다. Geometry 1의 두 internal NPY는 CRC와
+  `(N,7)=xyz+pressure+velocity` contract를 실제 검증했다. 32개 AneuX
+  base family × 2 deformation selective pilot만 사전 등록했으며,
+  synthetic case가 아니라 base family 단위로 split한다. Raw/compact
+  field는 CC BY-NC-ND 조건에 따라 공개 저장소에 재배포하지 않는다.
 - BenchAnXplore coarse archive는 105 geometry × 80 timestep,
   velocity/wall-mask HDF5와 XDMF 210개로 확인했다. archive checksum과
   외부 `h5py==3.12.1` dependency layer를 run provenance에 고정한다.
@@ -245,6 +257,10 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   `results/controlled_pde_g1b_20260803.json`이며 raw metrics checksum은
   그 artifact 안에만 기록한다. 결과를 근거로 frozen G1 threshold를
   완화하지 않는다.
+- G1r은 frozen G1/G1b artifact checksum을 pin한 별도 prospective
+  protocol이다. `preregistered_before_fresh_test` 상태와 seed·threshold를
+  실행 전에 public commit으로 고정하며, 결과를 본 뒤 변경하면 새 버전과
+  exploratory 표기가 필요하다.
 - D0b 구현은 DCT-II/POD orthonormality, held-out covariance exclusion,
   synthetic two-pass runtime을 pinned container에서 통과했다. Exact public
   commit `1dfc856`의 105-case run은 exit 0, walltime 3분 49초였다.

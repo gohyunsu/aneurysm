@@ -4,6 +4,69 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Prospective exact-G1 re-entry registration
+
+### Experiment
+
+- Frozen G1과 exploratory G1b의 config/result checksum을 pin하고, 기존
+  seed와 겹치지 않는 5개 fresh seed를 `controlled_pde_g1r.json`에 실행
+  전에 고정했다. Failed G1은 relabel하지 않는다.
+- Boundary density는 full-BC NLL로 별도 학습하고 geometry-disjoint
+  validation NLL로 checkpoint를 선택한다. Operator와 direct baseline도
+  validation split에서만 early stopping하며 test split은 선택 뒤 생성한다.
+- Density-only conditional moment·coverage는 exact affine Poisson
+  pushforward로, end-to-end mean은 Gauss–Hermite quadrature로 계산한다.
+  Projective metric은 raw two-sample distance가 아니라 matched iid floor
+  대비 signed excess의 across-seed 95% CI upper bound다.
+- Mean 0.05, coverage 0.03, full-BC operator 0.03, projective excess upper
+  0.01, analytic nesting residual \(10^{-6}\) threshold를 결과 전에
+  machine-readable protocol과 validator에 고정했다.
+
+### Scope
+
+- G1r pass는 새 exact-domain sanity evidence일 뿐 frozen G1 pass, baseline
+  superiority, C1 novelty 또는 AAAI readiness를 뜻하지 않는다.
+- G1r failure 시 nonlinear/3D confirmatory 학습으로 확장하지 않고 density
+  family와 data sufficiency를 다시 분석한다.
+
+### Site
+
+- 공개 gate와 실행 상태 창에 “G1 failed / G1b diagnostic complete / G1r
+  preregistered and unrun”을 분리해 표시했다.
+
+## 2026-08-03 · Aneumo selective paired-BC pilot registration
+
+### Data
+
+- 공식 Aneumo ZIP64 release의 중앙 디렉터리를 HTTP byte-range로 감사해
+  첫 shard의 40 geometry 각각에 동일 좌표의 8개 steady mass-flow
+  condition이 있음을 확인했다.
+- Geometry 1의 두 internal NPY member를 실제 range-read해 CRC32,
+  `(N,7)=xyz+pressure+velocity`, condition 간 좌표 동일성을 확인했다.
+- Upstream `Connection.csv`의 AneuX ancestry를 반영해 synthetic case가
+  아니라 32개 base family에서 split하고, family마다 두 deformation만
+  선택하는 64-case 파일럿을 학습 결과 전에 등록했다.
+
+### Implementation
+
+- 전체 multi-terabyte release를 받지 않고 필요한 ZIP member만 읽는
+  ZIP64 range ingester를 추가했다. Exact `206 Content-Range`, central/local
+  record 일치, member CRC, condition 좌표 일치와 compact-cache SHA-256을
+  검증한다.
+- 8 conditions × 4,096 nodes를 compact HDF5로 기록하되 raw/derived field를
+  CC BY-NC-ND 조건 아래 공개 저장소에 재배포하지 않는 계약을 고정했다.
+- 이 파일럿은 steady same-geometry response C2와 base-family-disjoint
+  irregular-3D 평가만 지원한다. Multicomponent partial-BC C1, transient
+  efficiency, clinical utility의 근거로 사용하지 않는다.
+
+### Research
+
+- AAAI-26 LANO, NeurIPS-25 DeltaPhi, 2026 conditioning-operator 선행연구를
+  반영해 partial observation, residual pair learning, analytic
+  conditioning 자체를 novelty에서 제외했다.
+- C2는 DeltaPhi-style residual baseline, pair-loss-zero, random
+  cross-geometry pair를 matched data/compute로 모두 이겨야 유지한다.
+
 ## 2026-08-03 · Failed-G1 attribution and temporal-contract correction
 
 ### Experiment

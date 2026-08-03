@@ -41,15 +41,18 @@
       ]
     },
     "asset_audit": {
-      "aneumo_local_scope": "one_geometry_two_steady_bc_samples",
+      "aneumo_local_scope": "zip64_range_audited_32_base_family_pilot_registered_staging_pending",
       "aneumo_full_g2_ready": false,
+      "aneumo_pilot_config": "configs/aneumo_g2_pilot_v1.json",
+      "aneug_flow_bc_variation": false,
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,
       "benchanxplore_timesteps": 80,
       "benchanxplore_d0_status": "frozen_k8_gate_failed",
       "benchanxplore_d0b_status": "completed_train_only_pod_representation_eligible",
       "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
-      "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains"
+      "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains",
+      "controlled_pde_g1r_status": "prospectively_registered_fresh_test_unrun"
     },
     "contribution_priority": {
       "primary": [
@@ -240,6 +243,30 @@
         17,
         25
       ]
+    }
+  ],
+  "prospective_reentry_protocols": [
+    {
+      "id": "G1r",
+      "status": "preregistered_before_fresh_test",
+      "source_gate": "G1",
+      "may_relabel_failed_source_gate": false,
+      "config": "configs/controlled_pde_g1r.json",
+      "fresh_test_seeds": 5,
+      "test_access_during_selection": false,
+      "density_checkpoint_selection": "validation_nll_on_disjoint_geometries",
+      "conditional_moment_evaluation": "analytic_exact_poisson_pushforward",
+      "end_to_end_mean_evaluation": "gauss_hermite_quadrature",
+      "projective_metric": "signed_excess_over_matched_iid_floor_ci95_upper",
+      "success_thresholds": {
+        "maximum_density_only_standardized_mean_error": 0.05,
+        "maximum_density_only_coverage_error": 0.03,
+        "maximum_end_to_end_quadrature_mean_error": 0.05,
+        "maximum_end_to_end_sampled_coverage_error": 0.03,
+        "maximum_full_bc_operator_error": 0.03,
+        "maximum_projective_excess_ci95_upper": 0.01,
+        "maximum_analytic_nested_moment_residual": 0.000001
+      }
     }
   ],
   "evaluation": {

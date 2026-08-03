@@ -145,6 +145,8 @@ q_\phi(B\mid A)
 
 - pilot: \(C=4\), covariance rank 4
 - full BC training record의 negative log likelihood로 학습
+- boundary density checkpoint는 field/operator loss와 섞어 test에서
+  선택하지 않고, geometry-disjoint validation NLL로 별도 선택
 - diagonal-only, unconditional empirical Gaussian, KDE를 baseline으로 비교
 - 데이터가 density 복잡성을 지지하기 전에는 flow/diffusion prior를 쓰지 않음
 
@@ -161,6 +163,27 @@ partial, missing mode가 하나의 joint density를 공유한다.
 이 구조는 별도 mask head의 경험적 consistency regularizer보다 단순하고
 검증 가능하다. Non-Gaussian tail이 필요하다는 증거가 생기면 coherent
 conditional sampler로 확장하되, coherence test를 먼저 유지한다.
+
+### 5.4 exact-domain estimation contract
+
+Frozen G1은 density NLL을 field objective와 함께 0.1 weight로 최적화했고
+validation split을 checkpoint selection에 쓰지 않았다. G1b에서 density
+error가 가장 큰 잔여 항으로 확인됐으므로, prospective G1r은 구조를
+복잡하게 만들지 않고 optimization과 평가만 분리한다.
+
+- density: full-BC NLL만으로 학습하고 disjoint validation geometry의 NLL로
+  early stopping
+- operator: full field + paired response로 별도 학습하고 validation field
+  objective로 early stopping
+- density-only conditional mean·coverage: exact affine Poisson
+  pushforward로 analytic 평가
+- end-to-end mean: 2-D Gauss–Hermite quadrature로 Monte Carlo mean noise 제거
+- nested projective discrepancy: raw distance가 아니라 같은 \(K\)의 iid
+  floor를 뺀 signed excess의 across-seed 95% CI upper bound
+
+이는 failed G1을 relabel하는 변경이 아니라 fresh seed를 고정한 새 sanity
+protocol이다. 통과해도 architecture novelty나 baseline superiority가
+아니다.
 
 ## 6. Module C — conditional solution operator
 

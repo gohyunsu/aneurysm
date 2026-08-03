@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: novelty reset · D0 K=8 failed · exact G1 gate failed · G1b diagnostic next
+상태: exact G1 failed · G1b/D0b complete · G1r preregistered · Aneumo paired-BC staging next
 
 ## 1. 현재 판정
 
@@ -176,6 +176,17 @@ BC-density estimation error가 남아 exact conditional distribution
 정확성은 여전히 `unsupported`다. Coverage 귀속은 G1b 범위 밖이므로 frozen
 coverage failure도 unresolved다.
 
+새 `G1r`은 이 실패를 숨기지 않고 별도 prospective evidence로 재검증한다.
+기존 seed와 겹치지 않는 5개 fresh seed를 미리 고정하고, density NLL과
+operator objective를 분리해 geometry-disjoint validation으로만 checkpoint를
+고른다. Density-only moment·coverage는 exact Poisson pushforward로,
+end-to-end mean은 Gauss–Hermite quadrature로 계산하며, projective metric은
+raw two-sample distance가 아니라 matched iid floor 대비 signed excess의
+95% CI upper bound를 사용한다. Threshold와 split은
+`configs/controlled_pde_g1r.json`에 고정되어 있다. G1r이 통과해도 frozen
+G1은 failed로 남고, 이는 C1 novelty가 아니라 다음 domain으로 갈 최소 sanity
+근거다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.
@@ -238,10 +249,13 @@ method가 strong baseline을 일관되게 개선해야 한다.
 
    비의료 PDE 두 축에서 같은 method와 metric을 먼저 제시한다.
 
-6. **대규모 paired-BC 자산 부재**
+6. **paired-BC pilot의 family diversity와 license**
 
-   현재 introai9 Aneumo는 1 geometry × 2 BC sample뿐이다. Full release의
-   shard·license·manifest를 확인하기 전 100×8 결과를 주장하지 않는다.
+   Aneumo ZIP64 audit로 8 steady mass-flow 조건은 확인됐지만 synthetic
+   deformation끼리 base AneuX anatomy를 공유한다. Split은 synthetic case가
+   아니라 base family에서 끊는다. 현재 32 family × 2 deformation pilot은
+   C2의 방향성만 평가하며 full-release 또는 임상 일반화를 주장하지 않는다.
+   CC BY-NC-ND 원시·compact field는 공개 저장소에 재배포하지 않는다.
 
 ## 9. 논문 포지셔닝
 
@@ -266,13 +280,14 @@ AAAI-27 kit이 공개되면 style만 교체한다.
 
 ## 10. 실행 우선순위
 
-1. 실패한 D0·G1 결과를 aggregate artifact로 보존
+1. 실패한 D0·G1 결과를 aggregate artifact로 보존 **(완료)**
 2. G1b oracle-floor/error-attribution 진단과 equal-budget temporal D0b를
-   exploratory로 실행
-3. Hugging Face full Aneumo의 shard 크기와 subset 가능성을 metadata-only로
-   감사
-4. paired-BC 자산 확보 전에는 nonlinear public PDE에서 C1/C2 pilot
-5. corrected sanity와 G2가 양수일 때만 irregular 3D full backbone과
+   exploratory로 실행 **(완료)**
+3. Prospective G1r을 fresh test에서 실행하고 gate를 냉정하게 판정
+   **(현재 우선순위)**
+4. 등록된 Aneumo base-family-disjoint selective cache를 range ingestion
+5. Aneumo steady C2와 nonlinear public PDE C1/C2 pilot을 분리 실행
+6. corrected sanity와 G2가 양수일 때만 irregular 3D full backbone과
    transient 학습
-6. CMHA status branch는 공식 case map과 positive real-CFD increment가
+7. CMHA status branch는 공식 case map과 positive real-CFD increment가
    확인될 때만 secondary로 복원

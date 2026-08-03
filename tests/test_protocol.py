@@ -89,6 +89,30 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cannot relabel"):
             validate_protocol(candidate)
 
+    def test_prospective_g1r_cannot_relabel_failed_g1(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["prospective_reentry_protocols"][0][
+            "may_relabel_failed_source_gate"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot relabel"):
+            validate_protocol(candidate)
+
+    def test_prospective_g1r_cannot_select_on_fresh_test(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["prospective_reentry_protocols"][0][
+            "test_access_during_selection"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "validation-only"):
+            validate_protocol(candidate)
+
+    def test_prospective_g1r_thresholds_are_frozen(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["prospective_reentry_protocols"][0]["success_thresholds"][
+            "maximum_density_only_standardized_mean_error"
+        ] = 0.1
+        with self.assertRaisesRegex(ProtocolError, "thresholds changed"):
+            validate_protocol(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

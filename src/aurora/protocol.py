@@ -95,6 +95,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "loss",
             "gates",
             "post_result_diagnostics",
+            "prospective_reentry_protocols",
             "evaluation",
             "phases",
         ],
@@ -299,6 +300,63 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if d0b["coefficient_budgets"] != [17, 25]:
         raise ProtocolError("D0b coefficient budgets are frozen at 17 and 25.")
     checks.append("post-result diagnostic non-inflation contract")
+
+    reentries = protocol["prospective_reentry_protocols"]
+    reentry_ids = _unique_ids(reentries, "id", "prospective_reentry_protocols")
+    if reentry_ids != {"G1r"}:
+        raise ProtocolError("Schema v2 must retain the prospectively registered G1r.")
+    g1r = reentries[0]
+    _require_keys(
+        g1r,
+        [
+            "status",
+            "source_gate",
+            "may_relabel_failed_source_gate",
+            "config",
+            "fresh_test_seeds",
+            "test_access_during_selection",
+            "density_checkpoint_selection",
+            "conditional_moment_evaluation",
+            "end_to_end_mean_evaluation",
+            "projective_metric",
+            "success_thresholds",
+        ],
+        "G1r prospective re-entry",
+    )
+    if g1r["status"] != "preregistered_before_fresh_test":
+        raise ProtocolError("G1r must be registered before fresh-test access.")
+    if g1r["source_gate"] != "G1" or g1r["may_relabel_failed_source_gate"] is not False:
+        raise ProtocolError("G1r cannot relabel the failed frozen G1.")
+    if g1r["config"] != "configs/controlled_pde_g1r.json":
+        raise ProtocolError("G1r must point to its executable frozen config.")
+    if g1r["fresh_test_seeds"] != 5 or g1r["test_access_during_selection"] is not False:
+        raise ProtocolError("G1r requires five fresh seeds and validation-only selection.")
+    if g1r["density_checkpoint_selection"] != (
+        "validation_nll_on_disjoint_geometries"
+    ):
+        raise ProtocolError("G1r density selection must use disjoint validation geometry.")
+    if g1r["conditional_moment_evaluation"] != (
+        "analytic_exact_poisson_pushforward"
+    ):
+        raise ProtocolError("G1r must retain analytic density-only moment evaluation.")
+    if g1r["end_to_end_mean_evaluation"] != "gauss_hermite_quadrature":
+        raise ProtocolError("G1r must retain deterministic end-to-end quadrature.")
+    if g1r["projective_metric"] != (
+        "signed_excess_over_matched_iid_floor_ci95_upper"
+    ):
+        raise ProtocolError("G1r projective metric must remain IID-floor calibrated.")
+    expected_reentry_thresholds = {
+        "maximum_density_only_standardized_mean_error": 0.05,
+        "maximum_density_only_coverage_error": 0.03,
+        "maximum_end_to_end_quadrature_mean_error": 0.05,
+        "maximum_end_to_end_sampled_coverage_error": 0.03,
+        "maximum_full_bc_operator_error": 0.03,
+        "maximum_projective_excess_ci95_upper": 0.01,
+        "maximum_analytic_nested_moment_residual": 0.000001,
+    }
+    if g1r["success_thresholds"] != expected_reentry_thresholds:
+        raise ProtocolError("G1r thresholds changed after prospective registration.")
+    checks.append("prospective G1 re-entry non-inflation contract")
 
     evaluation = protocol["evaluation"]
     _require_keys(

@@ -101,6 +101,13 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_smoke.pbs`
 - `cluster/ssu_a6gpu_cmha_g1.pbs`
 - `cluster/ssu_a6gpu_benchanxplore_d0.pbs`
+- `cluster/ssu_a6gpu_controlled_g1r.pbs`
+
+G1r template은 기존 G1 실패를 덮어쓰지 않는다. Public source commit과
+`configs/controlled_pde_g1r.json`을 read-only로 bind하고 새 output
+directory만 writable로 둔다. Density/operator checkpoint selection이 끝난
+뒤 fresh test split을 생성하며, scheduler artifact에는 config checksum과
+`failed_g1_relabeled=false`를 남긴다.
 
 template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
 `AURORA_DATA_ROOT`, `AURORA_OUTPUT_ROOT`, `AURORA_SIF`를 제출 시 주입한다.

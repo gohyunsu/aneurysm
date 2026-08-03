@@ -83,16 +83,17 @@ functional sufficiency가 중심이 아니다.
 
 Aneumo는 427 real geometry에서 10,660 synthetic shape를 만들고 각 shape에
 8개 steady mass-flow condition을 계산했다. AneuG-Flow는 generative
-geometry와 14,000 steady/수백 pulsatile CFD case, BC metadata, surface 및
-volume field를 제공한다.
+geometry와 14,000 steady/수백 pulsatile CFD case, surface 및 volume field를
+제공하지만 공개 benchmark의 boundary condition은 case마다 바뀌지 않는다.
 
 - [Aneumo (arXiv, 2025)](https://arxiv.org/abs/2505.14717)
 - [AneuG-Flow (NeurIPS 2025 Datasets &
   Benchmarks)](https://papers.nips.cc/paper_files/paper/2025/hash/e2b8ff0035bc9f572a7deefbcbea85bc-Abstract-Datasets_and_Benchmarks_Track.html)
 
 **기회:** 동일 geometry의 multiple BC가 geometry effect와 BC-induced
-variation을 분리할 수 있게 한다. 다만 synthetic geometry/solver policy는
-clinical truth가 아니다.
+variation을 분리할 수 있게 하는 자산은 현재 Aneumo다. AneuG-Flow는
+known-condition geometry pretraining에만 사용한다. 두 dataset 모두
+synthetic geometry/solver policy이며 clinical truth가 아니다.
 
 ### 1.6 probabilistic operator learning
 
@@ -116,7 +117,7 @@ condition response를 검증해야 한다.
 
 ### 1.7 boundary-indexed operator와 conditional consistency
 
-ICLR 2026 연구는 varying BC에서 하나의 neural operator가 아니라
+ICLR 2026 AI\&PDE workshop 연구는 varying BC에서 하나의 neural operator가 아니라
 boundary-indexed operator family를 학습하며 support 밖에서는 식별되지
 않는다는 문제를 직접 정식화했다. TMLR 2026 연구는 CNP에서 context를
 추가한 뒤 다시 예측한 분포와 기존 joint를 조건화한 분포 사이의 gap을
@@ -125,7 +126,7 @@ Flow Matching Neural Processes는 target set의 marginal/conditional
 consistency를 다룬다.
 
 - [One Operator to Rule Them All? On Boundary-Indexed Operator Families in
-  Neural PDE Solvers (ICLR, 2026)](https://openreview.net/forum?id=lDjWQ9UxRy)
+  Neural PDE Solvers (AI\&PDE at ICLR, 2026)](https://openreview.net/forum?id=lDjWQ9UxRy)
 - [On the Conditioning Consistency Gap in Conditional Neural Processes
   (TMLR, 2026)](https://arxiv.org/abs/2604.19312)
 - [Flow Matching Neural Processes
@@ -136,6 +137,16 @@ contribution이 되지 않는다. AURORA는 하나의 joint BC density를 arbitr
 mask에 조건화해 PDE solution으로 pushforward하는 구체적 구조, nested-mask
 tower-property metric, same-geometry response supervision을 함께 입증해야
 한다.
+
+Joint density를 conditional density로 보내는 연산 자체도 2026년
+conditioning-operator 연구가 continuity와 neural-operator approximation
+관점에서 직접 다뤘다.
+
+- [One Operator for Many Densities: Amortized Approximation of Conditioning
+  by Neural Operators (arXiv, 2026)](https://arxiv.org/abs/2605.06873)
+
+따라서 analytic conditioning과 tower property는 construction과 audit
+도구이지 독립적인 새 정리가 아니다.
 
 ### 1.8 known boundary condition을 다루는 operator
 
@@ -156,7 +167,25 @@ full-condition accuracy를 높이는 것은 독립 novelty가 아니다. AURORA�
 검증 단위는 알려진 BC의 encoding이 아니라 **일부 physical input만
 관측된 mask lattice 전체가 한 joint law와 양립하는가**이다.
 
-### 1.9 uncertainty와 OOD PDE
+### 1.9 partial-input operator와 residual learning
+
+AAAI-26의 LANO는 부분 관측 spatial input을 mask-to-predict로 학습하고
+boundary-first latent autoregressive reconstruction을 수행한다. NeurIPS
+2025의 DeltaPhi는 유사한 physical state 사이의 residual을 학습해
+data-limited operator를 개선한다.
+
+- [Learning Neural Operators from Partial Observations via Latent
+  Autoregressive Modeling (AAAI, 2026)](https://ojs.aaai.org/index.php/AAAI/article/view/37001)
+- [DeltaPhi: Physical States Residual Learning for Neural Operators
+  (NeurIPS, 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/12bf28fb68f295f855a5bf0c5a217d6e-Abstract-Conference.html)
+
+**영향:** partial observation, boundary-first reconstruction, residual/pair
+learning은 각각 독립 novelty가 아니다. AURORA는 physical-variable mask
+filtration의 compatible distributions를 LANO/NOP와 비교하고,
+same-geometry BC contrast가 DeltaPhi-style retrieval/residual, pair-loss 0,
+random cross-geometry pair보다 response fidelity를 개선하는지 보여야 한다.
+
+### 1.10 uncertainty와 OOD PDE
 
 PDE OOD에서 ensemble, uncertainty, conservation update를 비교한 연구와
 neural operator를 function-valued Gaussian process로 선형화한 연구가 있다.
@@ -171,7 +200,7 @@ neural operator를 function-valued Gaussian process로 선형화한 연구가 �
 축과 model ensemble 축을 분리하고 각각 condition error와 geometry OOD
 error를 추적하는지 falsification해야 한다.
 
-### 1.10 직접적인 2026 multimodal 경쟁작
+### 1.11 직접적인 2026 multimodal 경쟁작
 
 2026-07 arXiv preprint는 PointNeXt geometry, unsteady PINN descriptors,
 clinical variables를 late fusion하여 rupture-status prediction을
@@ -197,7 +226,7 @@ clinical variables를 late fusion하여 rupture-status prediction을
 | CMHA | CTA, 3D models, clinical/morphology/hemodynamic data | 99 IA + 44 controls | real-CFD bridge/gate |
 | BenchAnXplore | transient CFD on semi-idealized geometry | 105; ICA sidewall 중심 | transient reproduction |
 | Aneumo | synthetic deformation × 8 steady BC | 85,280 simulations | BC sensitivity pretraining |
-| AneuG-Flow | synthetic geometry, steady/pulsatile CFD, BC | large, MCA bifurcation | operator pretraining |
+| AneuG-Flow | synthetic geometry, steady/pulsatile CFD; fixed BC policy | large, MCA bifurcation | known-condition geometry pretraining |
 
 - [CMHA official dataset record](https://springernature.figshare.com/articles/dataset/CMHA_Intracranial_Aneurysm_CTA_Image_3D_Model_Dataset_with_Clinical_Morphological_Hemodynamic_Data/26965450)
 - [AneuX project](https://aneux.org/)
@@ -214,8 +243,10 @@ clinical variables를 late fusion하여 rupture-status prediction을
 | graph transformer | long-range mesh interaction | calibrated field family | shared-backbone comparison |
 | boundary-indexed NO | varying-BC non-identifiability 정식화 | arbitrary-mask coherent prediction | tower-property test |
 | known-BC operator | diverse BC encoding·boundary transfer | hidden BC의 coherent marginalization | partial-input mask lattice |
+| LANO | partial spatial input·boundary-first reconstruction | physical-variable mask compatibility | filtration-level distribution tests |
 | probabilistic operator | function-space UQ/generative sampling | condition-source attribution | coherent BC pushforward |
 | NOP/NP consistency | partial-response reconstruction·conditioning gap | physical-input mask compatibility | nested masks + paired response |
+| DeltaPhi | similar-state residual learning | geometry-controlled BC response without label retrieval | paired \(\Delta H\) controls |
 | PDE UQ/OOD | model uncertainty와 OOD 분석 | BC-induced vs model-induced 분리 | two-axis falsification |
 | synthetic CFD | 같은 geometry의 multiple BC | response supervision/generalization | paired \(\Delta H\) |
 
@@ -227,14 +258,16 @@ clinical variables를 late fusion하여 rupture-status prediction을
 2. mask-token deterministic operator
 3. independent probabilistic head per observation mask
 4. NOP-style latent mask-aware probabilistic operator
-5. known-BC boundary extension/transfer operator
-6. MC-dropout/deep ensemble
-7. 공개 probabilistic/flow-matching operator
-8. joint BC density + shared operator, pair loss 없음
-9. full AURORA
-10. random cross-geometry pair negative control
-11. In-PI-MGN 또는 공개 graph-transformer checkpoint/재현
-12. Secondary analysis에서만 clinical+morphology와 +real CFD
+5. LANO mask-to-predict/boundary-first baseline
+6. known-BC boundary extension/transfer operator
+7. MC-dropout/deep ensemble
+8. 공개 probabilistic/flow-matching operator
+9. joint BC density + shared operator, pair loss 없음
+10. DeltaPhi-style residual operator
+11. full AURORA
+12. random cross-geometry pair negative control
+13. In-PI-MGN 또는 공개 graph-transformer checkpoint/재현
+14. Secondary analysis에서만 clinical+morphology와 +real CFD
 
 ## 5. 문헌상 아직 단정하지 않는 것
 

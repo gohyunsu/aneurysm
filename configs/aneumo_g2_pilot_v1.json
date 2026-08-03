@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "aneumo_g2_base_family_disjoint_pilot_v1",
+  "status": "preregistered_asset_pilot_before_learning_results",
+  "as_of": "2026-08-03",
+  "dataset": {
+    "name": "Aneumo",
+    "hf_repo": "SAIS-Life-Science/Aneumo",
+    "hf_repo_commit": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "upstream_code_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
+    "license": "CC-BY-NC-ND-4.0",
+    "redistribute_raw_or_compact_fields": false,
+    "array_columns": ["x_m", "y_m", "z_m", "pressure", "u_m_s", "v_m_s", "w_m_s"],
+    "mass_flows_kg_s": [0.001, 0.0015, 0.002, 0.0025, 0.003, 0.0035, 0.00375, 0.004]
+  },
+  "asset_selection": {
+    "source_mapping": "upstream Connection.csv at pinned code commit",
+    "base_families": [1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 37, 40],
+    "cases_by_base_family": {
+      "1": [1, 2],
+      "2": [17, 18],
+      "4": [46, 47],
+      "5": [76, 77],
+      "6": [106, 107],
+      "7": [128, 129],
+      "8": [155, 156],
+      "9": [168, 169],
+      "10": [191, 192],
+      "12": [211, 212],
+      "13": [239, 240],
+      "14": [268, 269],
+      "15": [298, 299],
+      "16": [326, 327],
+      "17": [354, 355],
+      "18": [383, 384],
+      "19": [411, 412],
+      "21": [439, 440],
+      "22": [460, 461],
+      "23": [479, 480],
+      "24": [508, 509],
+      "26": [537, 538],
+      "27": [562, 563],
+      "28": [585, 586],
+      "29": [614, 615],
+      "30": [640, 641],
+      "31": [658, 659],
+      "32": [677, 678],
+      "33": [700, 701],
+      "34": [729, 730],
+      "37": [758, 759],
+      "40": [787, 788]
+    },
+    "cases": 64,
+    "conditions_per_case": 8,
+    "nodes_per_case": 4096,
+    "node_selection": "deterministic_uniform_without_replacement",
+    "seed": 20260803
+  },
+  "split": {
+    "unit": "aneux_base_family",
+    "assignment_seed": 20260803,
+    "train_base_families": [1, 2, 5, 6, 7, 8, 10, 15, 16, 17, 18, 21, 22, 23, 27, 28, 29, 31, 34, 37],
+    "validation_base_families": [13, 26, 30, 32, 33, 40],
+    "test_base_families": [4, 9, 12, 14, 19, 24]
+  },
+  "pilot_scope": {
+    "supports": [
+      "same_geometry_mass_flow_response",
+      "base_family_disjoint_irregular_3d_field_prediction",
+      "pair_loss_and_random_cross_geometry_controls"
+    ],
+    "does_not_support": [
+      "multicomponent_partial_boundary_observation",
+      "transient_efficiency",
+      "clinical_utility",
+      "confirmatory_full_release_claim"
+    ],
+    "test_access_rule": "Do not inspect test learning metrics until the model family, response loss weight, normalization, and stopping rule are frozen from train and validation only."
+  }
+}
