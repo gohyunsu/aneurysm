@@ -165,6 +165,17 @@ law를 검사합니다. Tuned scaling이 response norm의 15%도 남기지 않�
 학습을 중단합니다. 이는 단순 물리 스케일링을 새 방법의 성과로 오인하지
 않기 위한 사전 감사입니다.
 
+Exact commit `e12ff0a`의 train-only 감사 결과, velocity는 tuned
+\(Q^{1.075}\) scaling 뒤에도 response residual median 0.2112,
+base-family bootstrap 95% CI `[0.2001, 0.2243]`로 기준을 통과했습니다.
+Pressure는 tuned \(Q^{1.75}\)에서 0.1369 `[0.1190, 0.1496]`로
+실패했습니다. 따라서 미래 Aneumo G2는 velocity-only 후보이며
+pressure/full-field novelty는 제외합니다. 이 결과는 learned 성능이 아니고
+G1/G1r 실패도 해소하지 않으므로 3D 학습은 여전히 보류합니다. 공개
+aggregate는
+[`results/aneumo_scaling_audit_20260803.json`](results/aneumo_scaling_audit_20260803.json)에
+있습니다.
+
 ## 해석의 경계
 
 현재 공개 데이터의 ruptured/unruptured label은 **cross-sectional rupture

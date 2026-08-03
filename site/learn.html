@@ -585,8 +585,12 @@
               NPY contract를 확인했고, 32 base-family × 2 deformation pilot을
               등록한 뒤 64 case·512 member selective cache staging과
               family-disjoint 40/12/12 case split을 검증했습니다. 다만
-              learned G2 전에 train family만 읽는 same-case-anchor physical
-              scaling audit을 통과해야 합니다. AneuG-Flow는
+              train family만 읽는 same-case-anchor physical scaling
+              audit에서 velocity는 21.12% [20.01%, 22.43%]가 남아
+              통과했지만 pressure는 13.69% [11.90%, 14.96%]로
+              실패했습니다. 따라서 미래 G2는 velocity-only 후보이고,
+              G1r 실패 때문에 learned 3D 학습은 여전히 보류합니다.
+              AneuG-Flow는
               geometry archive만 확인됐고 BC variation이 없어 paired-BC
               evidence로 쓰지 않습니다.
             </p>

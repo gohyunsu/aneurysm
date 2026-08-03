@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Aneumo physical-scaling audit is velocity-only positive
+
+### Experiment
+
+- Exact public commit `e12ff0a`의 pinned CPU environment에서 52개 전체
+  test를 통과한 뒤, 사전등록한 train 20 family/40 case만 분석했다.
+  Validation/test 24 case의 field는 읽지 않았다.
+- Velocity의 train-tuned global power는 1.075였고 relative-response
+  residual median은 0.2112, family-bootstrap CI95는
+  `[0.2001, 0.2243]`로 고정 하한 0.15를 통과했다.
+- Gauge-invariant pressure의 tuned power는 1.75였고 residual median은
+  0.1369, CI95는 `[0.1190, 0.1496]`로 하한을 통과하지 못했다.
+
+### Decision
+
+- Aneumo의 비자명성 근거는 velocity response로만 제한한다. Pressure
+  novelty와 full pressure--velocity learning은 제외한다.
+- 이는 learned-model 성능이 아니라 future G2 eligibility다. Exact
+  G1/G1r 실패가 남아 있으므로 3D confirmatory 학습은 아직 허용하지 않고
+  density attribution을 먼저 완료한다.
+
 ## 2026-08-03 · Aneumo cache integrity and physical-scaling preregistration
 
 ### Data

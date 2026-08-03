@@ -109,3 +109,10 @@ law. A channel is eligible only when the base-family-bootstrap lower confidence
 bound leaves at least 15% of paired-response norm unexplained. Full
 pressure--velocity learning requires both channels; if neither passes, Aneumo
 is retained only as ingestion/runtime evidence rather than a novelty result.
+
+The exact `e12ff0a` audit completed without validation/test field access.
+Velocity retained a tuned-scaling residual of 0.2112 with base-family bootstrap
+95% CI `[0.2001, 0.2243]`, whereas pressure retained 0.1369
+`[0.1190, 0.1496]`. Only velocity is therefore eligible for a future
+preregistered learned-response test. This does not authorize that test while
+the exact G1/G1r gate remains failed.

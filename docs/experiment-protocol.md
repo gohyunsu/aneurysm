@@ -239,6 +239,15 @@ Primary metrics:
 
 세 지표 중 response와 distributional score가 함께 개선되어야 한다.
 
+#### Aneumo pre-learning scaling audit
+
+Exact commit `e12ff0a`의 사전등록 감사는 train 20 base family/40 case만
+읽었다. Same-case anchor와 train-tuned global power를 준 뒤 velocity
+relative-response residual은 0.2112, family-bootstrap CI95
+`[0.2001, 0.2243]`로 0.15 하한을 통과했다. Gauge-invariant pressure는
+0.1369 `[0.1190, 0.1496]`로 실패했다. 따라서 향후 learned G2는
+velocity-only로 제한하며, G1/G1r 실패가 해결되기 전에는 실행하지 않는다.
+
 ### G3 · transient efficiency
 
 D0 통과 때만 실행한다.
@@ -266,7 +275,7 @@ paper로 범위를 축소하고 AAAI general method claim을 하지 않는다.
 |---|---|---|
 | Controlled PDE | exact conditional/marginal oracle | 구현 우선 |
 | Nonlinear PDE | ID mask calibration + supplied-BC shift response | semilinear/Burgers pilot 사전 등록 예정 |
-| Aneumo | same-geometry × 8 steady BC | 32 base-family × 2 deformation selective pilot 등록; staging pending |
+| Aneumo | same-geometry × 8 steady BC | 64-case cache verified; scaling audit에서 velocity만 eligible |
 | AneuG-Flow | irregular 3D pretraining | geometry archive만 local; BC variation 없음 |
 | BenchAnXplore | transient GNN baseline/D0 | 105×80 audited; D0 실행 |
 | CMHA | secondary real-CFD/status diagnostic | exploratory increment negative |
@@ -454,11 +463,11 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 
 ## 12. 계산 우선순위
 
-1. 실행 중 D0 완료·판정
-2. G1 exact controlled PDE, 5 seeds
-3. Nonlinear regular-grid C1/C2 pilot
-4. Full paired-BC shard manifest와 최소 subset 확보
-5. G2 ablation, 성공할 때만 irregular 3D backbone 확장
+1. D0/G1/G1r 판정과 G1b/D0b 진단 **(완료)**
+2. Aneumo selective cache와 train-only scaling audit **(완료; velocity only)**
+3. Exact density representation/optimization/sample-scaling attribution
+4. 새 prospective exact sanity가 양수일 때 nonlinear regular-grid C1/C2
+5. 그 뒤 velocity-only G2 ablation과 irregular-3D backbone
 6. G3 learned transient 비교
 7. G4 cross-domain 통합 table
 

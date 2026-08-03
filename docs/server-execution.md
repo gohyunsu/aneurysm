@@ -137,6 +137,14 @@ Validation/test field access는 금지하고, 결과는 base-family bootstrap
 aggregate만 저장한다. 두 채널 모두 고정된 0.15 lower-bound 기준을
 실패하면 Aneumo G2 학습은 중단한다.
 
+Exact commit `e12ff0a`의 pinned CPU run은 52개 전체 test 뒤 exit 0으로
+완료됐다. Train 20 family/40 case만 분석하고 validation/test 24 case의
+field는 읽지 않았다. Velocity tuned-power residual은 0.2112
+`[0.2001, 0.2243]`로 eligible, pressure는 0.1369
+`[0.1190, 0.1496]`로 ineligible이었다. Public aggregate는
+`results/aneumo_scaling_audit_20260803.json`이다. 이 결과는 learned G2
+실행 권한이 아니며 exact density attribution이 먼저다.
+
 template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
 `AURORA_DATA_ROOT`, `AURORA_OUTPUT_ROOT`, `AURORA_SIF`를 제출 시 주입한다.
 

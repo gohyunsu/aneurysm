@@ -1,0 +1,87 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "aneumo_scaling_audit_20260803",
+  "experiment_id": "aneumo_train_family_physical_scaling_audit_v1",
+  "evidence_status": "preregistered_train_only_eligibility_audit_completed_channel_scoped",
+  "source_commit": "e12ff0ad9688857a7c287d64595341e8a753a8fa",
+  "source_config_sha256": "3a8b94e7ca283771afcdd053202acad48e8e557fb2fbaef90c16297a54d8fdd7",
+  "source_metrics_sha256": "f248c2ce1b687d8603ff86bef9319f20a937a5582747ed2c91da3f0496af780c",
+  "execution": {
+    "allocation": "cpu_low_priority",
+    "exit_status": 0,
+    "started_utc": "2026-08-03T07:43:57Z",
+    "ended_utc": "2026-08-03T07:44:04Z"
+  },
+  "environment": {
+    "container": "torch251-cuda118-pinned.sif",
+    "python": "3.11.10",
+    "numpy": "2.1.2",
+    "h5py": "3.12.1"
+  },
+  "dataset": {
+    "name": "Aneumo selective paired-BC pilot",
+    "cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+    "total_base_families": 32,
+    "total_cases": 64,
+    "conditions_per_case": 8,
+    "nodes_per_case": 4096,
+    "analysis_split": "train_only",
+    "train_base_families": 20,
+    "train_cases": 40,
+    "skipped_validation_or_test_cases": 24,
+    "validation_or_test_fields_read": false
+  },
+  "baseline": {
+    "same_case_anchor_mass_flow_kg_s": 0.0025,
+    "uses_same_case_anchor_field": true,
+    "pressure_gauge_offset_removed": true,
+    "eligibility_threshold_tuned_residual_ci95_lower": 0.15,
+    "bootstrap_unit": "aneux_base_family",
+    "bootstrap_replicates": 5000
+  },
+  "channels": {
+    "velocity": {
+      "analytic_power": 1.0,
+      "analytic_residual_median": 0.22134167266668256,
+      "analytic_residual_ci95": [
+        0.20629597285847914,
+        0.23157969254978594
+      ],
+      "train_tuned_global_power": 1.0750000000000002,
+      "tuned_residual_median": 0.21116332234297996,
+      "tuned_residual_ci95": [
+        0.20013078657046568,
+        0.22433041263796377
+      ],
+      "eligible": true
+    },
+    "pressure": {
+      "analytic_power": 2.0,
+      "analytic_residual_median": 0.20969124021008764,
+      "analytic_residual_ci95": [
+        0.18795354713305196,
+        0.24177815093051225
+      ],
+      "train_tuned_global_power": 1.75,
+      "tuned_residual_median": 0.1369209886812279,
+      "tuned_residual_ci95": [
+        0.118982710309794,
+        0.14955429100597167
+      ],
+      "eligible": false
+    }
+  },
+  "scientific_verdict": "velocity_response_is_nontrivial_under_the_strong_scaling_oracle_but_pressure_is_not",
+  "decision": {
+    "audit_decision": "channel_scoped_learning_only",
+    "eligible_channels": [
+      "velocity"
+    ],
+    "full_pressure_velocity_learning_eligible": false,
+    "pressure_novelty_claim_allowed": false,
+    "confirmatory_3d_training_authorized": false,
+    "blocking_reason": "The exact controlled-PDE G1 and prospective G1r remain failed; this train-only audit establishes response nontriviality, not model performance.",
+    "next_step": "Complete the post-result exact-density attribution before preregistering any velocity-only learned G2 experiment."
+  },
+  "interpretation": "Even with the anchor field from the same case, a single train-tuned global power leaves a material velocity response across train families. Pressure does not clear the preregistered lower confidence bound. This result supports only a future velocity-scoped falsification test and is neither a learned result nor AAAI-ready evidence."
+}

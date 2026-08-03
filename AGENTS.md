@@ -122,7 +122,12 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야
-  하며, hidden-law shift에서는 detection/abstention만 주장한다.
+  하며, hidden-law shift에서는 detection/abstention만 주장한다. Aneumo
+  train-only physical-scaling audit에서 velocity tuned residual은
+  0.2112, CI95 `[0.2001, 0.2243]`로 0.15 기준을 통과했지만 pressure는
+  0.1369 `[0.1190, 0.1496]`로 실패했다. 따라서 향후 G2는 velocity-only
+  후보이며 pressure/full-field novelty는 주장하지 않는다. G1/G1r 실패
+  때문에 learned 3D 실행은 여전히 blocked다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
@@ -266,6 +271,9 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   않는다. Learned G2 전에 train-family field만 읽는 same-case-anchor
   physical-scaling audit을 실행하며 validation/test field read는 금지한다.
   두 채널 모두 비자명성 기준을 실패하면 Aneumo response 학습을 중단한다.
+  Exact public commit `e12ff0a`의 audit은 exit 0으로 완료됐고 velocity만
+  eligible했다. Public aggregate는
+  `results/aneumo_scaling_audit_20260803.json`이다.
 - BenchAnXplore coarse archive는 105 geometry × 80 timestep,
   velocity/wall-mask HDF5와 XDMF 210개로 확인했다. archive checksum과
   외부 `h5py==3.12.1` dependency layer를 run provenance에 고정한다.

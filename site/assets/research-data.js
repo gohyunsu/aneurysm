@@ -97,8 +97,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "64-case cache는 검증됐지만, 먼저 train family만 사용해 same-case anchor physical scaling이 남기지 못한 response가 있는지 판정한다.",
-      state: "Cache verified · scaling audit preregistered · learning blocked",
+      copy: "Train-only strong scaling audit에서 velocity residual은 0.2112 [0.2001, 0.2243]로 통과했지만 pressure는 0.1369 [0.1190, 0.1496]로 실패했다.",
+      state: "Velocity-only eligible · learned G2 still blocked by G1r",
       blocking: true
     },
     {
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Strong physical scaling leaves nontrivial velocity response only",
+      copy: "Exact e12ff0a의 train-only audit에서 same-case anchor와 tuned global power까지 허용했다. Velocity는 Q^1.075 뒤 residual 0.2112, family-bootstrap CI95 [0.2001, 0.2243]로 0.15 기준을 통과했다. Pressure는 Q^1.75에서 0.1369 [0.1190, 0.1496]로 실패했다. 따라서 future G2는 velocity-only이며 learned 3D 실행은 G1r 실패 때문에 계속 보류한다.",
+      files: ["results/aneumo_scaling_audit_20260803.json", "configs/aneumo_scaling_audit_v1.json", "docs/experiment-protocol.md", "docs/research-direction.md"]
+    },
     {
       date: "2026.08.03",
       category: "data",

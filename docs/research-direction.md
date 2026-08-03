@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: exact G1/G1r failed · G1b/D0b complete · Aneumo cache verified · train-only scaling audit next
+상태: exact G1/G1r failed · G1b/D0b complete · Aneumo scaling audit velocity-only positive · density attribution next
 
 ## 1. 현재 판정
 
@@ -231,6 +231,13 @@ Gaussian을 flow로 교체하거나 threshold를 완화하지 않는다.
 
 Field만 좋아지거나 pair response만 좋아지면 핵심 주장을 축소한다.
 
+Aneumo의 사전 비자명성 감사에서는 same-case anchor와 train-tuned global
+power를 준 뒤에도 velocity residual median 0.2112, base-family bootstrap
+CI95 `[0.2001, 0.2243]`가 남아 0.15 하한을 통과했다. Pressure는 0.1369
+`[0.1190, 0.1496]`로 실패했다. 따라서 future irregular-3D G2는
+velocity-only 후보이며 pressure/full-field response novelty는 폐기한다.
+이 train-only 결과는 model 성능이 아니며 G1/G1r을 재개방하지 않는다.
+
 ### G3 · transient efficiency
 
 - D0b의 equal-budget nonperiodic/train-only oracle representation 통과
@@ -321,7 +328,7 @@ submission이라고 표현하지 않고 다음 cycle 또는 다른 venue용으�
    test-free diagnostic으로 실행 **(현재 우선순위)**
 5. 완료·검증된 Aneumo base-family-disjoint selective cache에서 train-only
    physical-scaling audit을 실행하고, learned response의 비자명성을 먼저
-   판정 **(현재 우선순위 · 학습은 보류)**
+   판정 **(완료 · velocity만 eligible, pressure 탈락)**
 6. 새 prospective exact sanity와 G2가 양수일 때만 irregular 3D backbone과
    transient 학습
 7. CMHA status branch는 공식 case map과 positive real-CFD increment가
