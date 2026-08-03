@@ -25,7 +25,9 @@
     "direct_prior_art_threats": [
       "boundary_indexed_operator_non_identifiability",
       "function_space_probabilistic_operators",
+      "neural_operator_processes_under_partial_observation",
       "conditional_marginal_consistency_in_neural_processes",
+      "explicit_known_boundary_transfer_operators",
       "inflow_aware_physics_gnn_for_aneurysm"
     ],
     "cmha_secondary_diagnostic": {
@@ -44,7 +46,8 @@
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,
       "benchanxplore_timesteps": 80,
-      "benchanxplore_d0_status": "attempt_1_walltime_exceeded_retry_pending"
+      "benchanxplore_d0_status": "frozen_k8_gate_failed",
+      "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive"
     },
     "contribution_priority": {
       "primary": [
@@ -162,7 +165,8 @@
       "name": "paired_response_fidelity",
       "blocking": true,
       "requires_ood_geometry": true,
-      "requires_ood_condition": true,
+      "requires_supplied_ood_condition": true,
+      "hidden_condition_law_shift_claim": "detection_and_abstention_only",
       "primary_comparison": "aurora_minus_strong_probabilistic_operator"
     },
     {
@@ -186,7 +190,12 @@
   ],
   "evaluation": {
     "operator_outer_split": "geometry_disjoint",
-    "condition_shift_split": "support_disjoint",
+    "condition_shift_split": "support_disjoint_with_shifted_full_bc_supplied",
+    "condition_shift_protocol": {
+      "id_partial_missing": "calibration_and_coherence",
+      "supplied_full_bc_support_shift": "field_and_paired_response",
+      "hidden_bc_law_shift": "ood_detection_and_abstention_only"
+    },
     "observation_masks": [
       "full",
       "random_partial_25",

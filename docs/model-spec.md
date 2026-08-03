@@ -43,6 +43,12 @@ marginal/conditional consistency 선행연구와 구분해, 임의의 physical
 condition observation mask와 PDE solution pushforward에서 무엇을
 구조적으로 보장하고 평가하는지 명시한다.
 
+이 보장은 **내부 양립성**에 관한 것이지, 학습 support 밖 hidden-BC
+분포의 정확성을 보장하지 않는다. 미관측 component의 생성법칙까지
+바뀌면 추가 관측이나 가정 없이 그 test distribution은 식별되지 않는다.
+따라서 ID partial/missing calibration, supplied full-BC extrapolation,
+hidden-law shift detection을 서로 다른 표로 보고한다.
+
 ## 2. 전체 계산 흐름
 
 ```text
@@ -195,6 +201,8 @@ counterpart끼리 비교한다.
 - 같은 수의 무작위 cross-geometry pair를 쓴 negative control
 - small/large BC distance별 response error
 - BC interpolation과 support-disjoint extrapolation 분리
+- support-disjoint test에서는 바뀐 BC를 모두 제공한 response와, 일부가
+  숨겨진 상황의 OOD detection/abstention을 분리
 
 이는 관측 연구의 causal effect가 아니다. 데이터 생성 simulator 안에서
 BC를 바꾼 **paired simulator response**로만 해석한다.

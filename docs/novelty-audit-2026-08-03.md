@@ -21,6 +21,9 @@ contribution에서 제외한다.
 | [One Operator to Rule Them All? (ICLR 2026)](https://openreview.net/forum?id=lDjWQ9UxRy) | varying BC에서 학습되는 것은 boundary-indexed operator family이며, support 밖 BC는 비식별적임을 정식화 | missing-BC 문제 제기 자체를 novelty로 주장할 수 없음 |
 | [Flow-matching Operators (ICLR 2026)](https://openreview.net/forum?id=fcBMLJtCoc) | function space에서 conditional probabilistic operator와 residual transport | flow matching을 붙이는 것만으로 novelty가 되지 않음 |
 | [Guided Diffusion Sampling on Function Spaces (NeurIPS 2025)](https://openreview.net/forum?id=oAgwvZay2U) | sparse/noisy observation으로부터 PDE solution function을 조건부 sampling | partial observation만으로 차별화할 수 없음 |
+| [Neural Operator Processes (arXiv 2026)](https://arxiv.org/abs/2606.22946) | sparse joint input–response observation에서 probabilistic operator decoding | partial-observation field reconstruction은 직접 선행연구임 |
+| [Conditioning Consistency Gap (TMLR 2026)](https://arxiv.org/abs/2604.19312) | context 추가와 joint conditioning의 차이를 KL로 정량화 | conditioning consistency라는 문제·metric 자체는 novelty가 아님 |
+| [Learned Boundary Extensions (arXiv 2026)](https://arxiv.org/abs/2602.04923) / [Generalized Neural Operator (arXiv 2026)](https://arxiv.org/abs/2607.21932) | 다양한 prescribed BC를 boundary transfer/extension으로 명시적 encoding | known-BC conditioning 또는 transfer architecture는 novelty가 아님 |
 | [UQ for OOD PDE Learning (ICML 2024)](https://openreview.net/forum?id=Y50K6DSrWo) | OOD error와 uncertainty, ensemble/diverse head, conservation update | OOD uncertainty 비교가 필수 baseline임 |
 | [Flow Matching Neural Processes (NeurIPS 2025)](https://papers.neurips.cc/paper_files/paper/2025/file/a92519f525c00085095fa41c5c46cdb5-Paper-Conference.pdf) | conditional distribution의 marginal/conditional consistency 문제 | consistency라는 단어만으로 novelty를 주장할 수 없음 |
 | [Physics-Constrained GNN for IA Hemodynamics (npj Digital Medicine 2026)](https://www.nature.com/articles/s41746-026-02404-z) | BenchAnXplore의 transient autoregressive GNN, inflow/OOD 평가, physics loss | GNN+inflow+physics는 직접 baseline이며 primary method가 아님 |
@@ -85,7 +88,10 @@ BC marginal sample 간 분산과 model ensemble 간 분산을 분리한다.
 - model-induced: 유한 데이터와 parameter uncertainty
 
 두 값을 합친 interval만 보고하지 않고 held-out BC error, geometry OOD,
-observation mask별 coverage로 각각 검증한다.
+observation mask별 coverage로 각각 검증한다. 단, hidden-BC 생성법칙 자체가
+학습 support 밖에서 바뀌는 경우 정답 conditional distribution은 추가
+정보 없이 식별되지 않는다. ID partial/missing calibration, supplied
+full-BC extrapolation, hidden-law OOD detection/abstention을 분리한다.
 
 ## one-shot cycle decoder의 위치
 
@@ -104,8 +110,9 @@ headline target으로 쓰지 않는다.
 
 1. **Controlled PDE:** BC posterior와 solution distribution의 정답을 계산할
    수 있는 Poisson/Laplace 계열에서 mask consistency와 coverage 검증
-2. **Nonlinear PDE:** varying boundary family를 가진 Burgers/Navier–Stokes
-   benchmark에서 BC shift와 geometry/parameter shift 분리
+2. **Nonlinear PDE:** varying boundary family를 가진 semilinear/Burgers
+   benchmark에서 ID mask calibration, supplied-BC response shift,
+   hidden-law detection, geometry/parameter shift를 분리
 3. **Irregular 3D application:** aneurysm paired-BC field에서 intervention
    response와 observation-mask calibration
 4. **Transient efficiency:** BenchAnXplore에서 one-shot cycle과
@@ -125,7 +132,8 @@ headline target으로 쓰지 않는다.
 - critical threat: condition–marginal consistency가 generic probabilistic
   operator보다 calibration과 BC-intervention fidelity를 실제로 개선해야
   한다.
-- required evidence: 5 seeds, geometry/BC/mask OOD, matched-coverage 비교,
+- required evidence: 5 seeds, geometry/BC/mask shift의 식별성별 분리,
+  matched-coverage 비교,
   strong autoregressive/direct/probabilistic baselines, compute-matched ablation.
 
 성능 없이 명칭이나 architecture 복잡성만 늘리면 제출하지 않는다.

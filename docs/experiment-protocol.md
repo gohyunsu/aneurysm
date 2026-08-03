@@ -46,9 +46,12 @@ BenchAnXplore 105 geometry × 80 timestep에 Fourier 4/8/12 mode를 projection
 통과는 표현력만 의미한다. Learned model 성능이나 novelty로 보고하지 않는다.
 
 2026-08-03 attempt 1은 scheduler walltime 30분 32초에 exit `-29`로
-종료됐고 aggregate metric이 생성되지 않았다. 따라서 scientific verdict는
-`unresolved`다. Threshold와 dataset은 그대로 두고 60분 allocation과
-case-count progress log만 추가해 재실행한다.
+종료됐고 metric이 없었다. 동일 protocol의 attempt 2는 정상 완료됐지만
+frozen \(K=8\) gate를 통과하지 못했다. Full relative L2 0.0162, peak
+relative MAE 0.0214, bulge relative L2 0.0616이었다. \(K=12\)도 bulge
+relative L2 0.0293으로 0.02 기준을 넘었다. Fixed Fourier branch는
+중단하고 equal-coefficient nonperiodic/train-only basis만 exploratory
+D0b에서 비교한다.
 
 ### G1 · exact condition–marginal coherence
 
@@ -76,12 +79,24 @@ case-count progress log만 추가해 재실행한다.
 
 이 sanity gate를 못 넘으면 aneurysm model을 구현하지 않는다.
 
+Frozen 5-seed run은 maximum mean error 0.1504, coverage error 0.0377,
+raw projective distance 0.1129로 실패했다. Direct masked Gaussian보다
+모든 mask의 error/energy score는 개선했지만 이는 gate pass가 아니다.
+Finite-sample two-sample floor와 density/operator error를 분해하는 G1b는
+명시적으로 post-result exploratory diagnostic으로 기록한다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
 
 - outer test: geometry-disjoint
-- condition test: train support와 분리된 amplitude/waveform/split
+- ID partial/missing test: field energy score, calibration,
+  matched-coverage interval width
+- full-BC condition test: train support와 분리된 amplitude/waveform/split을
+  **입력으로 제공**하고 field 및 paired \(\Delta H\) relative L2 평가
+- partial/missing hidden-law shift: OOD detection과 abstention만 평가;
+  shifted distribution의 coverage는 식별 가능하다고 가정하지 않음
+- geometry/parameter OOD: ensemble model uncertainty와 error association
 - pair sampler는 geometry 안에서만 pair 생성
 - pair-distance bin을 small/medium/large로 고정
 
@@ -121,7 +136,7 @@ paper로 범위를 축소하고 AAAI general method claim을 하지 않는다.
 | 데이터 | 역할 | 현재 상태 |
 |---|---|---|
 | Controlled PDE | exact conditional/marginal oracle | 구현 우선 |
-| Nonlinear PDE | nonlinear condition shift | benchmark 선정/구현 예정 |
+| Nonlinear PDE | ID mask calibration + supplied-BC shift response | semilinear/Burgers pilot 사전 등록 예정 |
 | Aneumo | same-geometry × 8 steady BC | local은 1×2 sample; full G2 blocked |
 | AneuG-Flow | irregular 3D pretraining | geometry archive만 local에 존재 |
 | BenchAnXplore | transient GNN baseline/D0 | 105×80 audited; D0 실행 |
@@ -169,7 +184,8 @@ Novelty 비교에서는 backbone을 고정하고 boundary mechanism과 pair loss
 - primary split unit: geometry 또는 simulation family
 - 같은 geometry의 BC, timestep, crop, resolution, augmentation은 모두 같은
   outer fold
-- BC-support split은 geometry split과 직교하게 구성
+- BC-support split은 geometry split과 직교하게 구성하되, OOD BC 값을
+  제공한 response extrapolation과 hidden-law shift detection을 분리
 - train-only PCA, normalization, BC density fitting
 - validation으로 architecture와 sample 수를 선택
 - test는 seed나 threshold 선택에 사용하지 않음

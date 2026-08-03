@@ -88,10 +88,13 @@ audit을 `configs/benchanxplore_d0.json`에 결과 확인 전에 등록했습니
 않습니다. Main method는 exact controlled PDE → nonlinear PDE → paired-BC
 irregular 3D 순서로 검증합니다.
 
-D0 첫 실행은 30분 32초에 scheduler walltime으로 종료되어 metric이 없고,
-과학적 verdict는 `unresolved`입니다. Frozen threshold는 변경하지 않았으며
-60분 재실행을 준비했습니다. 실패 provenance는
+D0 첫 실행은 scheduler walltime으로 종료되어 metric이 없었습니다.
+동일 protocol의 attempt 2는 정상 완료됐지만 frozen \(K=8\) gate를
+실패했습니다. \(K=12\)도 bulge relative L2 기준을 통과하지 못해 fixed
+Fourier decoder는 중단합니다. 두 provenance는
 [`results/benchanxplore_d0_attempt1_20260803.json`](results/benchanxplore_d0_attempt1_20260803.json)에
+와
+[`results/benchanxplore_d0_attempt2_20260803.json`](results/benchanxplore_d0_attempt2_20260803.json)에
 남겼습니다.
 
 첫 method sanity experiment는
@@ -101,6 +104,12 @@ family에서 learned joint BC density + shared operator를 direct masked
 Gaussian baseline과 비교합니다. PBS 실행 코드는
 [`cluster/ssu_a6gpu_controlled_g1.pbs`](cluster/ssu_a6gpu_controlled_g1.pbs)이며,
 통과해도 pipeline sanity일 뿐 novelty 성능으로 해석하지 않습니다.
+Frozen 5-seed run은 absolute mean, coverage, raw projective gate를 모두
+통과하지 못했습니다. Direct baseline보다 일관된 상대 개선은 있었지만
+claim은 `unsupported`이며 결과는
+[`results/controlled_pde_g1_attempt2_20260803.json`](results/controlled_pde_g1_attempt2_20260803.json)에
+있습니다. 다음 G1b는 finite-sample metric floor와 density/operator/MC
+error를 분해하는 exploratory diagnostic입니다.
 
 ## 해석의 경계
 

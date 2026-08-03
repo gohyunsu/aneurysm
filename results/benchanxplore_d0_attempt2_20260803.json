@@ -1,0 +1,92 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "benchanxplore_d0_attempt2_20260803",
+  "experiment_id": "benchanxplore_d0_temporal_basis",
+  "attempt": 2,
+  "evidence_status": "confirmatory_for_frozen_k8_gate",
+  "source_commit": "80a590f",
+  "source_metrics_sha256": "f7699640e3ee707c402b67aae4751d0b737c6caacb2cee24259e6bf097f1ecd1",
+  "scheduler": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "walltime": "00:21:42"
+  },
+  "dataset": {
+    "name": "BenchAnXplore",
+    "cases": 105,
+    "timesteps": 80,
+    "node_count_min_median_max": [
+      9517,
+      11575,
+      22921
+    ],
+    "cycle_endpoint_jump_relative_mean": 0.026749633784805025
+  },
+  "primary_mode": 8,
+  "primary_metrics": {
+    "full_relative_l2": {
+      "mean": 0.016169418385695845,
+      "geometry_bootstrap_ci95": [
+        0.015876577017784475,
+        0.016542452539184262
+      ]
+    },
+    "full_energy_retained": {
+      "mean": 0.9997351317178635,
+      "geometry_bootstrap_ci95": [
+        0.9997190884749095,
+        0.9997468125820159
+      ]
+    },
+    "full_cycle_mean_speed_relative_mae": {
+      "mean": 0.00003143981557947145,
+      "geometry_bootstrap_ci95": [
+        0.000026686309621536134,
+        0.000037147433007855005
+      ]
+    },
+    "full_cycle_peak_speed_relative_mae": {
+      "mean": 0.02136930383387066,
+      "geometry_bootstrap_ci95": [
+        0.021080005205280725,
+        0.021682228519625608
+      ]
+    },
+    "bulge_relative_l2": {
+      "mean": 0.0615716341173365,
+      "geometry_bootstrap_ci95": [
+        0.05930083902197934,
+        0.06413712751696862
+      ]
+    }
+  },
+  "frozen_gate": {
+    "passed": false,
+    "checks": {
+      "full_relative_l2_le_0_01": false,
+      "full_energy_retained_ge_0_995": true,
+      "full_cycle_mean_speed_relative_mae_le_0_02": true,
+      "full_cycle_peak_speed_relative_mae_le_0_02": false,
+      "bulge_relative_l2_le_0_02": false
+    }
+  },
+  "secondary_mode_summary": {
+    "fourier_4": {
+      "full_relative_l2": 0.0797489114460491,
+      "full_cycle_peak_speed_relative_mae": 0.10850178315525963,
+      "bulge_relative_l2": 0.1592051841673397
+    },
+    "fourier_12": {
+      "full_relative_l2": 0.00601769345590756,
+      "full_cycle_peak_speed_relative_mae": 0.007398784528708174,
+      "bulge_relative_l2": 0.029337992164350693
+    }
+  },
+  "scientific_verdict": "frozen_k8_gate_failed",
+  "decision": {
+    "fixed_k8_fourier_decoder": "rejected",
+    "fixed_fourier_family_through_k12": "does_not_meet_bulge_gate",
+    "next_step": "Compare equal-budget nonperiodic and train-only temporal bases before retaining any compressed one-shot decoder."
+  },
+  "interpretation": "High retained global energy did not preserve localized bulge dynamics or peak speed sufficiently. This is representation evidence only and is not a learned-operator result."
+}

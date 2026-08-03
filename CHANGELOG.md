@@ -8,6 +8,12 @@
 
 ### Research
 
+- 추가 red-team에서 2026 conditioning-consistency gap, Neural Operator
+  Processes, learned boundary extension, Generalized Neural Operator를 직접
+  경쟁 선행연구로 반영했다.
+- Partial/missing BC의 ID coherence·calibration, 값이 제공된 full-BC
+  support-shift response, hidden-BC law shift의 detection/abstention을
+  분리했다. 식별 불가능한 OOD hidden-law coverage 주장을 제거했다.
 - ICLR 2026 boundary-indexed operator family, function-space flow/diffusion
   operator, neural-process consistency, PDE OOD-UQ를 직접 경쟁 선행연구로
   추가했다.
@@ -31,6 +37,16 @@
 
 ### Experiment
 
+- BenchAnXplore D0 attempt 2가 정상 완료됐지만 frozen \(K=8\) gate는
+  실패했다. Full relative L2 0.0162, peak error 0.0214, bulge relative
+  L2 0.0616이었고, \(K=12\)도 bulge 0.0293으로 기준 0.02를 넘었다.
+- Exact controlled G1도 maximum mean error 0.1685, coverage error 0.0377,
+  raw projective distance 0.1129로 frozen gate를 실패했다. 다만 direct
+  masked Gaussian보다 모든 mask의 mean error와 energy score가 좋고 raw
+  projective distance가 모든 seed에서 낮은 상대 신호는 보존했다.
+- 두 실패를 confirmatory aggregate artifact로 공개했다. Raw two-sample
+  distance의 finite-sample floor와 sampled mean의 density/operator/MC
+  error를 분해하는 G1b는 post-result exploratory로만 실행한다.
 - BenchAnXplore D0 첫 실행은 30분 32초에 scheduler walltime exit `-29`로
   종료됐다. Aggregate metric이 생성되지 않아 과학적 verdict는
   `unresolved`다.

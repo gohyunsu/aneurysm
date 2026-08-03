@@ -118,11 +118,16 @@ condition response를 검증해야 한다.
 
 ICLR 2026 연구는 varying BC에서 하나의 neural operator가 아니라
 boundary-indexed operator family를 학습하며 support 밖에서는 식별되지
-않는다는 문제를 직접 정식화했다. NeurIPS 2025 Flow Matching Neural
-Processes는 target set의 marginal/conditional consistency를 다룬다.
+않는다는 문제를 직접 정식화했다. TMLR 2026 연구는 CNP에서 context를
+추가한 뒤 다시 예측한 분포와 기존 joint를 조건화한 분포 사이의 gap을
+KL로 정의하고 few-shot에서 그 차이가 클 수 있음을 보였다. NeurIPS 2025
+Flow Matching Neural Processes는 target set의 marginal/conditional
+consistency를 다룬다.
 
 - [One Operator to Rule Them All? On Boundary-Indexed Operator Families in
   Neural PDE Solvers (ICLR, 2026)](https://openreview.net/forum?id=lDjWQ9UxRy)
+- [On the Conditioning Consistency Gap in Conditional Neural Processes
+  (TMLR, 2026)](https://arxiv.org/abs/2604.19312)
 - [Flow Matching Neural Processes
   (NeurIPS, 2025)](https://papers.neurips.cc/paper_files/paper/2025/file/a92519f525c00085095fa41c5c46cdb5-Paper-Conference.pdf)
 
@@ -132,7 +137,26 @@ mask에 조건화해 PDE solution으로 pushforward하는 구체적 구조, nest
 tower-property metric, same-geometry response supervision을 함께 입증해야
 한다.
 
-### 1.8 uncertainty와 OOD PDE
+### 1.8 known boundary condition을 다루는 operator
+
+2026년 learned boundary-to-domain extension과 Generalized Neural
+Operator는 복잡하거나 서로 다른 **주어진** BC를 표준 operator에
+전달하는 구조를 제안했다. NeurIPS 2025 workshop의 boundary-augmented
+operator도 boundary/domain interaction으로 geometry OOD를 개선한다.
+
+- [Imposing Boundary Conditions on Neural Operators via Learned Function
+  Extensions (arXiv, 2026)](https://arxiv.org/abs/2602.04923)
+- [Generalized Neural Operator for Parametric and Boundary-Value Problems
+  (arXiv, 2026)](https://arxiv.org/abs/2607.21932)
+- [Boundary-Augmented Neural Operators for Better Generalization to Unseen
+  Geometries (NeurIPS AI4Science, 2025)](https://openreview.net/forum?id=DqZoWaDwfN)
+
+**영향:** BC를 explicit token/extension으로 넣는 것, 여러 BC type에서
+full-condition accuracy를 높이는 것은 독립 novelty가 아니다. AURORA의
+검증 단위는 알려진 BC의 encoding이 아니라 **일부 physical input만
+관측된 mask lattice 전체가 한 joint law와 양립하는가**이다.
+
+### 1.9 uncertainty와 OOD PDE
 
 PDE OOD에서 ensemble, uncertainty, conservation update를 비교한 연구와
 neural operator를 function-valued Gaussian process로 선형화한 연구가 있다.
@@ -147,7 +171,7 @@ neural operator를 function-valued Gaussian process로 선형화한 연구가 �
 축과 model ensemble 축을 분리하고 각각 condition error와 geometry OOD
 error를 추적하는지 falsification해야 한다.
 
-### 1.9 직접적인 2026 multimodal 경쟁작
+### 1.10 직접적인 2026 multimodal 경쟁작
 
 2026-07 arXiv preprint는 PointNeXt geometry, unsteady PINN descriptors,
 clinical variables를 late fusion하여 rupture-status prediction을
@@ -189,8 +213,9 @@ clinical variables를 late fusion하여 rupture-status prediction을
 | autoregressive GNN | fast transient field | partial/missing condition, rollout drift | coherence + efficiency gate |
 | graph transformer | long-range mesh interaction | calibrated field family | shared-backbone comparison |
 | boundary-indexed NO | varying-BC non-identifiability 정식화 | arbitrary-mask coherent prediction | tower-property test |
+| known-BC operator | diverse BC encoding·boundary transfer | hidden BC의 coherent marginalization | partial-input mask lattice |
 | probabilistic operator | function-space UQ/generative sampling | condition-source attribution | coherent BC pushforward |
-| neural process consistency | marginal/conditional consistency | physical-condition operator response | nested masks + paired response |
+| NOP/NP consistency | partial-response reconstruction·conditioning gap | physical-input mask compatibility | nested masks + paired response |
 | PDE UQ/OOD | model uncertainty와 OOD 분석 | BC-induced vs model-induced 분리 | two-axis falsification |
 | synthetic CFD | 같은 geometry의 multiple BC | response supervision/generalization | paired \(\Delta H\) |
 
@@ -201,13 +226,15 @@ clinical variables를 late fusion하여 rupture-status prediction을
 1. zero/mean/conditional-mean BC imputation
 2. mask-token deterministic operator
 3. independent probabilistic head per observation mask
-4. MC-dropout/deep ensemble
-5. 공개 probabilistic/flow-matching operator
-6. joint BC density + shared operator, pair loss 없음
-7. full AURORA
-8. random cross-geometry pair negative control
-9. In-PI-MGN 또는 공개 graph-transformer checkpoint/재현
-10. Secondary analysis에서만 clinical+morphology와 +real CFD
+4. NOP-style latent mask-aware probabilistic operator
+5. known-BC boundary extension/transfer operator
+6. MC-dropout/deep ensemble
+7. 공개 probabilistic/flow-matching operator
+8. joint BC density + shared operator, pair loss 없음
+9. full AURORA
+10. random cross-geometry pair negative control
+11. In-PI-MGN 또는 공개 graph-transformer checkpoint/재현
+12. Secondary analysis에서만 clinical+morphology와 +real CFD
 
 ## 5. 문헌상 아직 단정하지 않는 것
 

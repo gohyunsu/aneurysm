@@ -1,0 +1,165 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "controlled_pde_g1_attempt2_20260803",
+  "experiment_id": "controlled_pde_g1_v1",
+  "attempt": 2,
+  "evidence_status": "confirmatory_for_frozen_gate_with_post_result_diagnostic_required",
+  "source_commit": "c6426c0",
+  "source_metrics_sha256": "700e95260391488105aad539e07cb3c714df5d40673ef9c4c3441939dfff1dc4",
+  "scheduler": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "walltime": "00:00:54"
+  },
+  "configuration": {
+    "seeds": 5,
+    "train_geometries": 384,
+    "test_geometries": 192,
+    "conditions_per_geometry": 6,
+    "epochs": 500,
+    "bc_samples_eval": 128,
+    "geometry_bootstrap_replicates": 2000
+  },
+  "aggregate_gate_metrics": {
+    "maximum_standardized_mean_error": {
+      "mean": 0.1503815357068864,
+      "std": 0.014639925598626063,
+      "max": 0.1685310908166381,
+      "threshold": 0.05,
+      "passed": false
+    },
+    "maximum_coverage_error": {
+      "mean": 0.024709724479665397,
+      "std": 0.008445070432925694,
+      "max": 0.03769529309744635,
+      "threshold": 0.03,
+      "passed": false
+    },
+    "maximum_projective_consistency_error": {
+      "mean": 0.10220955610275269,
+      "std": 0.006952427142712765,
+      "max": 0.11285490542650223,
+      "threshold": 0.05,
+      "passed": false
+    }
+  },
+  "frozen_gate": {
+    "passed": false,
+    "seed_pass_count": 0,
+    "failed_components": [
+      "standardized_conditional_mean",
+      "raw_two_sample_projective_distance",
+      "worst_seed_coverage"
+    ]
+  },
+  "five_seed_mask_summary": {
+    "missing": {
+      "aurora": {
+        "standardized_mean_error_mean_std": [
+          0.1503815357068864,
+          0.014639925598626063
+        ],
+        "coverage_error_mean_std": [
+          0.015323877179374334,
+          0.005038992780246396
+        ],
+        "energy_score_mean_std": [
+          1.0569934204841653,
+          0.02739577972400175
+        ]
+      },
+      "direct_mask_gaussian": {
+        "standardized_mean_error_mean_std": [
+          0.30570006887428464,
+          0.033092484413811823
+        ],
+        "coverage_error_mean_std": [
+          0.031334111777444676,
+          0.01974836657050719
+        ],
+        "energy_score_mean_std": [
+          1.207834985665977,
+          0.042205501014980384
+        ]
+      }
+    },
+    "left_observed": {
+      "aurora": {
+        "standardized_mean_error_mean_std": [
+          0.056936903387152904,
+          0.0033735860231433987
+        ],
+        "coverage_error_mean_std": [
+          0.021826151913652846,
+          0.011800632753209722
+        ],
+        "energy_score_mean_std": [
+          0.5519613103785862,
+          0.017201157887110588
+        ]
+      },
+      "direct_mask_gaussian": {
+        "standardized_mean_error_mean_std": [
+          0.1736875203011247,
+          0.01009049818554338
+        ],
+        "coverage_error_mean_std": [
+          0.06559027385587497,
+          0.02923476973571071
+        ],
+        "energy_score_mean_std": [
+          0.6838256594104072,
+          0.05601719930792233
+        ]
+      }
+    },
+    "right_observed": {
+      "aurora": {
+        "standardized_mean_error_mean_std": [
+          0.07211324634457317,
+          0.007149477191200592
+        ],
+        "coverage_error_mean_std": [
+          0.018098939955234573,
+          0.011268999353998681
+        ],
+        "energy_score_mean_std": [
+          0.654596029035747,
+          0.01740389421504011
+        ]
+      },
+      "direct_mask_gaussian": {
+        "standardized_mean_error_mean_std": [
+          0.1573693466372788,
+          0.0165028589368202
+        ],
+        "coverage_error_mean_std": [
+          0.06431531619280577,
+          0.034773408939274796
+        ],
+        "energy_score_mean_std": [
+          0.7847921297575037,
+          0.04811739209581871
+        ]
+      }
+    }
+  },
+  "raw_projective_distance": {
+    "aurora_mean_std": [
+      0.10220955610275269,
+      0.006952427142712765
+    ],
+    "direct_mask_gaussian_mean_std": [
+      0.26768229305744173,
+      0.05145077177669022
+    ]
+  },
+  "scientific_verdict": "frozen_gate_failed_but_relative_signal_positive",
+  "decision": {
+    "claim_status": "unsupported",
+    "positive_signal": "AURORA improved mean error and energy score for every mask and reduced raw projective distance in every seed.",
+    "measurement_problem": "The raw two-sample sliced distance has a nonzero finite-Monte-Carlo floor, and sampled means mix Monte-Carlo, density, and operator error.",
+    "next_step": "Run an explicitly exploratory G1b attribution diagnostic with oracle sampling floors and density/operator factorial decomposition; do not relabel this failed gate."
+  },
+  "interpretation": "The result is not an exact-coherence success. It is evidence that the structured construction is better than the direct masked Gaussian baseline under this implementation, while the frozen absolute gate remains unmet."
+}

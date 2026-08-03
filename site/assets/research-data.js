@@ -50,6 +50,13 @@ window.AURORA_DATA = Object.freeze({
       url: "https://openreview.net/forum?id=lDjWQ9UxRy"
     },
     {
+      year: "2026.04–07",
+      title: "Conditioning gap, NOP & explicit-BC operators",
+      copy: "CNP conditioning gap, partial-observation Neural Operator Processes, learned boundary extension과 Generalized Neural Operator가 직접 경쟁 범위를 좁혔다.",
+      status: "TMLR + arXiv · direct scope threats",
+      url: "https://arxiv.org/abs/2606.22946"
+    },
+    {
       year: "2024–25",
       title: "PDE uncertainty & conditional consistency",
       copy: "OOD PDE uncertainty와 neural-process의 marginal/conditional consistency가 이미 독립 연구 축을 이룬다.",
@@ -84,13 +91,13 @@ window.AURORA_DATA = Object.freeze({
       id: "G1",
       title: "Is condition–marginal coherence exact?",
       copy: "정답 conditional distribution을 계산할 수 있는 controlled PDE에서 mean, coverage, nested-mask tower property를 먼저 검증한다.",
-      state: "Implementation next",
+      state: "Frozen gate failed · attribution diagnostic next",
       blocking: true
     },
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "Geometry-disjoint × BC-support-disjoint test에서 generic probabilistic operator보다 field distribution과 같은-형상 ΔH를 함께 개선해야 한다.",
+      copy: "ID partial/missing에서는 calibration을, supplied full-BC support shift에서는 field와 같은-형상 ΔH를, hidden-law shift에서는 detection/abstention을 각각 검증한다.",
       state: "Full paired-BC asset blocked",
       blocking: true
     },
@@ -98,7 +105,7 @@ window.AURORA_DATA = Object.freeze({
       id: "G3",
       title: "Is one-shot actually efficient?",
       copy: "D0 oracle gate와 learned compute-matched 비교를 모두 통과할 때만 Fourier cycle decoder를 유지한다.",
-      state: "D0 retry pending · verdict unresolved",
+      state: "K=8 failed · fixed Fourier rejected",
       blocking: false
     },
     {
@@ -137,6 +144,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Frozen D0 and exact-G1 gates both fail",
+      copy: "D0 K=8은 full L2 1.62%, bulge L2 6.16%로 실패했고 K=12도 bulge 기준을 넘었다. Exact G1은 direct mask baseline보다 모든 mask에서 개선됐지만 absolute mean·coverage·raw projective gate를 통과하지 못했다. 두 실패를 그대로 보존하고 G1b estimator-floor 진단과 equal-budget D0b만 exploratory로 진행한다.",
+      files: ["results/benchanxplore_d0_attempt2_20260803.json", "results/controlled_pde_g1_attempt2_20260803.json", "docs/experiment-protocol.md"]
+    },
+    {
+      date: "2026.08.03",
+      category: "research",
+      title: "Direct-prior red team separates coherence from OOD correctness",
+      copy: "2026 conditioning-gap, Neural Operator Processes, learned boundary extension, Generalized Neural Operator를 추가 감사했다. Partial/missing BC의 ID coherence와 calibration, supplied full-BC extrapolation, shifted hidden-law detection을 분리해 식별 불가능한 OOD coverage 주장을 제거했다.",
+      files: ["docs/literature-lineage.md", "docs/research-direction.md", "docs/experiment-protocol.md", "paper/"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

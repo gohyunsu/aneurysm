@@ -18,6 +18,12 @@
 - 핵심 방법: analytic conditioning이 가능한 BC density + conditional
   geometry operator + nested observation-mask marginalization +
   same-geometry paired response supervision.
+- 현재 증거: D0 frozen \(K=8\)과 exact G1 absolute gate가 모두 실패했다.
+  G1은 direct masked Gaussian보다 모든 mask에서 상대적으로 좋았지만 claim은
+  `unsupported`다. G1b estimator attribution은 exploratory로만 취급한다.
+- Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
+  one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
+  또는 train-only basis는 D0b를 새로 통과할 때만 복원한다.
 - 최종 주장은 “미래 파열 위험을 예측한다”가 아니라 “불완전한 물리조건
   아래에서도 일관되고 보정된 PDE solution distribution을 학습한다”이다.
 
@@ -43,12 +49,15 @@
    simulator intervention response로만 부른다.
 3. **Structural/model uncertainty separation**: BC completion sample 간
    변동과 model ensemble 간 변동을 law of total variance에 맞춰 분리하고,
-   BC OOD·geometry OOD·mask별 coverage에서 각각 검증한다.
+   ID mask별 calibration·supplied-BC response shift·geometry OOD에서 각각
+   검증한다. Hidden-BC 생성법칙 자체가 shift된 경우에는 정답 coverage를
+   식별 가능하다고 가정하지 않고 OOD detection/abstention만 평가한다.
 
 GNN, attention, probabilistic operator, flow matching, physics loss,
 one-shot Fourier는 선행 구성요소 또는 engineering choice다. contribution
-문구에 단독 novelty로 올리지 않는다. 특히 Fourier decoder는 D0 표현력
-gate를 통과하고 compute-matched 이득이 있을 때만 남긴다.
+문구에 단독 novelty로 올리지 않는다. Fixed Fourier decoder는 D0에서
+실패했으며, 다른 temporal decoder도 새 representation gate와
+compute-matched 이득이 있을 때만 남긴다.
 
 ## 3. 데이터셋의 역할
 
@@ -70,13 +79,16 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   geometry/condition split이 검증되지 않으면 학습하지 않는다.
 - **G1 · Exact-coherence sanity**: 정답 conditional distribution을 계산할
   수 있는 controlled PDE에서 oracle moment·coverage·nested-mask coherence를
-  회복하지 못하면 복잡한 aneurysm 실험으로 확장하지 않는다.
-- **G2 · Paired response fidelity**: geometry-disjoint × BC-shift에서 strong
-  probabilistic baseline보다 field distribution과 paired response가 모두
-  개선되어야 한다.
+  회복하지 못하면 복잡한 aneurysm 실험으로 확장하지 않는다. 현재 frozen
+  run은 실패했으므로 원인 분해 전까지 gate는 닫혀 있다.
+- **G2 · Paired response fidelity**: ID partial/missing calibration과
+  supplied full-BC support-shift response를 분리한다. Strong probabilistic
+  baseline보다 field distribution과 paired response가 모두 개선되어야
+  하며, hidden-law shift에서는 detection/abstention만 주장한다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
-  fidelity/latency trade-off가 좋아야 한다.
+  fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
+  실패했으므로 현재 닫혀 있다.
 - **G4 · Cross-domain generality**: controlled PDE, nonlinear PDE, irregular
   3D aneurysm 중 적어도 세 domain에서 같은 method가 유효해야 한다.
 

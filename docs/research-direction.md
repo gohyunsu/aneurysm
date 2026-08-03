@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: novelty reset · D0 running · learned operator result 없음
+상태: novelty reset · D0 K=8 failed · exact G1 gate failed · G1b diagnostic next
 
 ## 1. 현재 판정
 
@@ -139,13 +139,26 @@ Primary \(K=8\)이 사전 threshold를 통과할 때만 learned one-shot branch�
 
 이 gate는 pipeline sanity다. 통과 자체는 novelty evidence가 아니다.
 
+2026-08-03 frozen run은 세 absolute gate를 모두 통과하지 못했다.
+구조화 모델은 direct masked Gaussian보다 모든 mask의 mean error와 energy
+score가 좋았지만, claim은 `unsupported`로 유지한다. Raw two-sample sliced
+distance의 finite-\(K\) floor와 sampled-mean 오차를 분해하는 G1b는
+post-result exploratory diagnostic이며 원래 실패를 소급해 바꾸지 않는다.
+
 ### G2 · paired response
 
-- geometry-disjoint × condition-support-disjoint test
-- strong generic probabilistic operator 대비 field energy score 개선
-- paired \(\Delta H\) relative L2 개선
-- mask별 matched-coverage width가 악화되지 않음
-- 5 seeds와 geometry bootstrap 95% CI
+한 숫자에 서로 다른 식별성 문제를 섞지 않는다.
+
+- **ID partial/missing BC:** strong generic probabilistic operator 대비 field
+  energy score, calibration, matched-coverage width를 비교
+- **full-BC support shift:** 바뀐 BC 값을 실제로 제공한 뒤 field와 paired
+  \(\Delta H\) extrapolation을 비교
+- **geometry/parameter shift:** BC-induced uncertainty가 아니라 ensemble
+  model uncertainty와 OOD score가 실패를 감지하는지 평가
+- **partial BC + shifted hidden-BC law:** 추가 정보 없이 정답 분포를
+  식별할 수 없으므로 정확한 coverage를 주장하지 않고 failure
+  detection/abstention만 평가
+- 모든 headline은 5 seeds와 geometry-family bootstrap 95% CI로 보고
 
 Field만 좋아지거나 pair response만 좋아지면 핵심 주장을 축소한다.
 
@@ -169,22 +182,31 @@ method가 strong baseline을 일관되게 개선해야 한다.
    Generic joint probabilistic operator와 비교해 calibration, response,
    sample efficiency 중 실질적 개선을 보여야 한다.
 
-2. **BC density misspecification**
+2. **직접 선행연구가 빠르게 좁히는 gap**
+
+   Neural Operator Processes는 sparse joint input-output observation에서
+   probabilistic field를 복원하고, Generalized Neural Operator와 learned
+   boundary extension은 다양한 known BC를 명시적으로 처리한다. AURORA는
+   partial response reconstruction이나 prescribed-BC accuracy를 novelty로
+   주장하지 않고, physical-input mask lattice의 compatibility와
+   same-geometry response를 직접 비교해야 한다.
+
+3. **BC density misspecification**
 
    Gaussian mixture tail이 실제 waveform distribution을 못 담으면 coverage가
    무너진다. Density-only calibration과 posterior predictive check를
    solution metric과 분리한다.
 
-3. **Paired loss가 단순 data augmentation일 위험**
+4. **Paired loss가 단순 data augmentation일 위험**
 
    Cross-geometry pair negative control, pair-distance strata, matched example
    budget을 통해 같은 데이터량 효과와 구분한다.
 
-4. **의료 특화 trick으로 보일 위험**
+5. **의료 특화 trick으로 보일 위험**
 
    비의료 PDE 두 축에서 같은 method와 metric을 먼저 제시한다.
 
-5. **대규모 paired-BC 자산 부재**
+6. **대규모 paired-BC 자산 부재**
 
    현재 introai9 Aneumo는 1 geometry × 2 BC sample뿐이다. Full release의
    shard·license·manifest를 확인하기 전 100×8 결과를 주장하지 않는다.
@@ -202,8 +224,9 @@ Conditions**
 2. nested condition–marginal construction
 3. paired simulator-response objective
 4. uncertainty decomposition
-5. exact → nonlinear → irregular 3D → transient 실험
-6. failure cases와 의료 해석 경계
+5. coherence와 OOD correctness를 구분하는 식별성 경계
+6. exact → nonlinear → irregular 3D → transient 실험
+7. failure cases와 의료 해석 경계
 
 AAAI-27 main author kit은 2026-08-03 현재 공식 게시가 확인되지 않았다.
 원고는 AAAI-26의 7-page two-column 구조를 임시 기준으로 관리하고,
@@ -211,11 +234,13 @@ AAAI-27 kit이 공개되면 style만 교체한다.
 
 ## 10. 실행 우선순위
 
-1. D0 작업을 끝까지 모니터링하고 frozen threshold로 판정
-2. exact controlled PDE의 G1 구현·5-seed 실행
+1. 실패한 D0·G1 결과를 aggregate artifact로 보존
+2. G1b oracle-floor/error-attribution 진단과 equal-budget temporal D0b를
+   exploratory로 실행
 3. Hugging Face full Aneumo의 shard 크기와 subset 가능성을 metadata-only로
    감사
 4. paired-BC 자산 확보 전에는 nonlinear public PDE에서 C1/C2 pilot
-5. G1/G2가 양수일 때만 irregular 3D full backbone과 transient 학습
+5. corrected sanity와 G2가 양수일 때만 irregular 3D full backbone과
+   transient 학습
 6. CMHA status branch는 공식 case map과 positive real-CFD increment가
    확인될 때만 secondary로 복원

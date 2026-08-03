@@ -566,7 +566,7 @@
 
           <div class="dataset-ladder">
             <article><span>P0 · EXACT ORACLE</span><h3>Controlled PDE</h3><p>정답 conditional mean·covariance를 계산할 수 있어, partial/missing mask의 coherence와 coverage pipeline을 먼저 검증합니다.</p><small>method sanity · 통과 자체는 novelty 아님</small></article>
-            <article><span>P1 · NONLINEAR</span><h3>Nonlinear PDE</h3><p>Condition support shift와 parameter/geometry shift를 분리해 coherence와 paired response가 비선형계에서도 유효한지 봅니다.</p><small>비의료 generality</small></article>
+            <article><span>P1 · NONLINEAR</span><h3>Nonlinear PDE</h3><p>ID partial/missing calibration, supplied full-BC response shift, hidden-law OOD detection, parameter shift를 분리해 평가합니다.</p><small>coherence ≠ OOD correctness</small></article>
             <article><span>P0 · SENSITIVITY</span><h3>Aneumo</h3><p>동일·유사 geometry에 여러 steady BC를 적용한 자료로, BC가 바뀌면 wall field가 얼마나 달라지는지 먼저 학습합니다.</p><small>synthetic CFD · clinical evidence 아님</small></article>
             <article><span>P1 · SCALE</span><h3>AneuG-Flow</h3><p>대규모 synthetic geometry를 geometry encoder pretraining과 분포 stress test에 사용합니다.</p><small>synthetic transfer 확인 필요</small></article>
             <article><span>P2 · TRANSIENT</span><h3>BenchAnXplore</h3><p>105개 semi-idealized transient CFD case로 autoregressive GNN baseline과 one-shot cycle decoder를 같은 조건에서 비교합니다.</p><small>80 frames/case · geometry-disjoint split</small></article>
@@ -581,6 +581,18 @@
               1 geometry×2 BC sample만, AneuG-Flow는 geometry archive만 있어
               full paired-BC 학습은 아직 불가능합니다. 원격 full release의 shard
               manifest를 확인하기 전 “데이터 확보 완료”라고 쓰지 않습니다.
+            </p>
+          </div>
+
+          <div class="data-status">
+            <div><p class="eyebrow">GATE VERDICT · 03 AUG 2026</p><h3>실패를 architecture 결정으로 연결했습니다.</h3></div>
+            <p>
+              Frozen D0의 Fourier K=8은 full L2 1.62%, bulge L2 6.16%로
+              실패했고 K=12도 bulge 2.93%였습니다. Exact G1은 direct
+              masked Gaussian보다 모든 mask에서 나았지만 5개 seed 모두
+              absolute gate를 통과하지 못했습니다. 따라서 fixed Fourier는
+              제거하고, G1은 finite-sample floor와 density/operator error를
+              분해하기 전까지 unsupported입니다.
             </p>
           </div>
 
@@ -635,7 +647,7 @@
             </article>
             <article>
               <span>2025–2026</span>
-              <div><h3>Consistency & boundary-indexed operators</h3><p>Neural process consistency와 varying-BC operator family의 비식별성이 직접 연구되었습니다. “missing BC”나 “consistency”라는 이름 자체는 더 이상 novelty가 아닙니다.</p></div>
+              <div><h3>Consistency & boundary-indexed operators</h3><p>CNP conditioning gap, partial-observation Neural Operator Processes, explicit-BC operator와 varying-BC 비식별성이 직접 연구되었습니다. “부분 관측”, “missing BC”, “consistency”라는 이름 자체는 더 이상 novelty가 아닙니다.</p></div>
               <a href="https://openreview.net/forum?id=lDjWQ9UxRy">ICLR 2026 ↗</a>
             </article>
           </div>
@@ -675,7 +687,7 @@
           <div class="gate-explainer">
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
-            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>처음 보는 geometry와 BC support에서 field distribution과 same-geometry ΔH를 strong probabilistic baseline과 비교합니다.</p></div><b>primary evidence</b></article>
+            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>ID partial/missing calibration과, 값을 제공한 unseen-BC의 same-geometry ΔH를 strong baseline과 비교합니다. 숨은 BC 법칙 자체가 바뀌면 detection만 평가합니다.</p></div><b>primary evidence</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>D0 oracle과 learned compute-matched 비교를 모두 통과할 때만 Fourier cycle branch를 유지합니다.</p></div><b>secondary efficiency</b></article>
             <article><span>G4</span><div><h3>의료 전용 trick은 아닌가?</h3><p>Controlled PDE, nonlinear PDE, irregular 3D에서 같은 coherence·response method를 검증합니다.</p></div><b>AAAI generality</b></article>
           </div>

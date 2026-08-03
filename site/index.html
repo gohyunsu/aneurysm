@@ -336,6 +336,30 @@
         </div>
       </article>
 
+      <article class="g1-result">
+        <div class="g1-result-head">
+          <p class="eyebrow">PRIMARY SANITY GATES · COMPLETE</p>
+          <span>failures retained; claims remain unsupported</span>
+        </div>
+        <div class="g1-result-metrics">
+          <div><span>D0 · Fourier K=8</span><b>1.62%</b><small>full relative L2 · fail</small></div>
+          <div><span>D0 · bulge</span><b>6.16%</b><small>relative L2 · fail</small></div>
+          <div class="delta negative"><span>Exact G1</span><b>0 / 5</b><small>seeds passed frozen gate</small></div>
+        </div>
+        <div class="g1-result-decision">
+          <strong>복잡한 3D 모델로 넘어갈 근거는 아직 없다.</strong>
+          <p>
+            G1은 direct mask baseline보다 모든 mask에서 상대 개선됐지만
+            absolute gate를 통과하지 못했다. Fixed Fourier K=4/8/12도
+            localized bulge gate를 만족하지 못해 폐기한다. 다음 실행은
+            threshold 완화가 아니라 estimator-floor/error attribution과
+            equal-budget temporal basis 비교다.
+          </p>
+          <a href="../results/controlled_pde_g1_attempt2_20260803.json">Exact G1 aggregate ↗</a>
+          <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
+        </div>
+      </article>
+
       <div class="experiment-grid">
         <article class="experiment-card large">
           <div>
@@ -352,7 +376,7 @@
         <article class="experiment-card">
           <p class="eyebrow">LEAKAGE CONTROL</p>
           <h3>Split geometry and condition support.</h3>
-          <p>동일 geometry의 BC·timestep·cut은 한 fold에만 둔다. BC support shift는 geometry split과 별도로 고정한다.</p>
+          <p>동일 geometry의 BC·timestep·cut은 한 fold에만 둔다. ID mask calibration, supplied-BC support shift, hidden-law OOD detection을 별도로 고정한다.</p>
         </article>
         <article class="experiment-card">
           <p class="eyebrow">MANDATORY BASELINE</p>
