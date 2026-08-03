@@ -252,6 +252,22 @@ shrinkage 자체는 고전적 estimator이므로 contribution 후보가 아니�
 condition pushforward와 paired response가 strong probabilistic operator를
 실제로 이길 때만 성립한다.
 
+DA2는 exact commit `18dbfcd`의 24-task A6000 run에서 완료됐다. 고정
+selection rule은 grouped shrinkage 0.50을 골랐지만, 768×8에서 empirical
+NLL 대비 seed-평균 density-only error는 0.05444→0.05431로 0.23%만
+개선됐다. 세 seed 중 둘에서만 좋아졌고 하나에서는 나빠졌으며 analytic
+population excess NLL은 0.00290→0.00316으로 악화됐다. 이는 material하고
+seed-robust한 estimator 개선이 아니다. Grouped unbiased moment는 평균
+0.06770으로 더 나빴다.
+
+반면 data-sufficiency control의 3,072×8 empirical NLL은 평균 0.02575,
+최악 0.02706으로 모든 development seed에서 기존 0.05 기준보다 충분히
+낮았다. 따라서 grouped/shrinkage를 method나 novelty로 승격하지 않는다.
+다음 prospective exact sanity는 원래 empirical NLL estimator를 유지하고
+3,072×8 data budget만 사전에 고정해 data adequacy를 검증한다. 이 pass가
+성립해도 data quantity는 contribution이 아니며, 그 뒤 nonlinear/3D에서
+핵심 mechanism의 독립적 이득을 입증해야 한다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.

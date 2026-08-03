@@ -248,6 +248,15 @@ development rule이지 success threshold가 아니다. 3,072×8은 estimator
 선택에 쓰지 않는 data-sufficiency control이며, 결과와 무관하게 별도 fresh
 exact protocol이 필요하다.
 
+DA2는 exact commit `18dbfcd`에서 24개 학습을 완료했다. 고정 rule의 formal
+selection은 shrinkage 0.50이지만 768×8 empirical NLL 대비 평균 error
+감소는 0.000125(0.23%)이고 seed direction은 2 improve/1 worsen이다.
+Population excess NLL도 악화됐으므로 estimator benefit을 지지하지 않는다.
+3,072×8 control에서는 original empirical NLL이 평균 0.02575, 최악
+0.02706으로 가장 좋았다. 후속 fresh gate는 이 original estimator와
+high-data budget만 고정하고, shrinkage 결과를 baseline win이나 novelty로
+사용하지 않는다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

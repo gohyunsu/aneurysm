@@ -160,6 +160,14 @@ unbiased/shrinkage estimator를 같은 network·optimizer로 비교하며,
 선택된 estimator도 별도 fresh exact gate 전에는 nonlinear/3D 학습을
 허용하지 않습니다.
 
+DA2도 완료됐습니다. 고정 규칙상 shrinkage 0.50이 선택됐지만 원래
+768×8 empirical NLL 대비 평균 개선은 0.23%에 불과하고 한 seed에서는
+악화돼 material한 estimator 이득으로 보지 않습니다. 반면 3,072×8의
+기존 empirical NLL은 평균 0.02575, 최악 0.02706으로 안정화됐습니다.
+공개 aggregate는
+[`results/controlled_pde_density_development_20260803.json`](results/controlled_pde_density_development_20260803.json)이며,
+다음 fresh gate는 새 방법이 아니라 데이터 충분성을 검증합니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에

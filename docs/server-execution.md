@@ -137,6 +137,13 @@ selection은 768×8에서만 수행하고 3,072×8은 data-sufficiency control�
 `new_gate_defined_or_passed=false`와
 `nonlinear_or_3d_training_authorized=false`를 항상 보존한다.
 
+Exact `18dbfcd` DA2는 24 task를 exit 0으로 완료했다. 첫 container
+contract-test attempt는 기존 BenchAnXplore test의 외부 `h5py` layer가
+bind되지 않아 환경 실패했고, 같은 commit의 attempt 2는 pinned
+`h5py==3.12.1` layer와 72 tests를 모두 통과했다. Scientific result는
+첫 test attempt와 무관하게 full run exit 0 및 두 번째 test pass가 함께
+확인된 뒤에만 채택했다.
+
 ## Aneumo selective-cache contract
 
 사전등록한 32 AneuX base family × 2 deformation의 selective range staging은

@@ -4,6 +4,26 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · DA2 finds data adequacy, not a new estimator
+
+### Result
+
+- Exact `18dbfcd`의 24-task A6000 run과 dependency-complete 72-test PBS
+  validation이 exit 0으로 완료됐다.
+- Formal selection은 grouped shrinkage 0.50이지만 768×8 empirical NLL
+  대비 평균 error는 0.05444→0.05431, 0.23%만 개선됐다. 2/3 seed에서
+  개선, 1/3에서 악화됐고 population excess NLL은 더 나빴다.
+- 3,072×8 control에서는 original empirical NLL이 평균 0.02575, 최악
+  0.02706으로 grouped 후보보다 좋았다.
+
+### Decision
+
+- Grouped moment, U-statistic, shrinkage를 method나 novelty로 승격하지
+  않는다. Fixed selection 결과와 material scientific verdict를 구분한다.
+- 다음 prospective exact sanity는 original empirical NLL과 3,072×8
+  data budget만 고정한다. 통과해도 이는 data-adequacy sanity일 뿐
+  contribution이 아니다.
+
 ## 2026-08-03 · DA2 estimator development contract
 
 ### Experiment

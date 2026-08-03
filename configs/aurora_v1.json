@@ -275,12 +275,14 @@
     },
     {
       "id": "DA2",
-      "status": "registered_development_only_unrun",
+      "status": "completed_development_only",
       "source_diagnostic": "DA1",
       "may_reopen_or_relabel_source_gate": false,
       "may_define_or_pass_new_gate": false,
       "may_authorize_nonlinear_or_3d_confirmatory_training": false,
       "config": "configs/controlled_pde_density_development.json",
+      "result": "results/controlled_pde_density_development_20260803.json",
+      "source_commit": "18dbfcd3161fc3e5b552a3e88b3abb921b04b346",
       "development_seeds": 3,
       "success_thresholds": null,
       "estimators": [
@@ -296,7 +298,13 @@
       "checkpoint_objective": "sampled_validation_nll",
       "estimator_selection_cell": "768x8_original_g1r_budget",
       "higher_data_cell_role": "data_sufficiency_control_only",
-      "fresh_exact_gate_required_after_selection": true
+      "fresh_exact_gate_required_after_selection": true,
+      "formal_selected_estimator": "grouped_shrinkage_050",
+      "material_estimator_improvement_found": false,
+      "selected_mean_relative_improvement": 0.002292456689183911,
+      "high_data_empirical_nll_maximum_density_error": 0.027059422805905342,
+      "promote_grouped_estimator_to_method": false,
+      "next_exact_sanity_candidate": "empirical_nll_with_3072x8_data_budget"
     },
     {
       "id": "D0b",

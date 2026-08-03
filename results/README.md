@@ -33,6 +33,8 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 - `controlled_pde_density_attribution_20260803.json`: threshold 없이
   capacity, finite-condition noise와 geometry×condition allocation을 분리한
   post-result DA1
+- `controlled_pde_density_development_20260803.json`: grouped moment와
+  shrinkage를 original budget에서 비교하고 high-data control을 분리한 DA2
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -46,6 +48,11 @@ density-only error 0.00495를 회복했지만 empirical NLL은
 0.04401–0.04855였다. Fixed-axis scaling은 geometry 수와 반복 condition
 수가 모두 오차를 줄임을 보였다. 이 attribution은 새 gate가 아니며,
 development-only estimator 선택 뒤 별도 fresh exact sanity가 필요하다.
+
+DA2의 formal selection은 grouped shrinkage 0.50이었지만 empirical NLL
+대비 평균 개선은 0.23%뿐이고 seed-robust하지 않았으므로 method로 승격하지
+않는다. 3,072×8 empirical NLL의 최악 error 0.02706만 data-adequacy
+후보를 지지한다. 이는 새 gate 통과나 novelty evidence가 아니다.
 
 현재 temporal representation 결과:
 

@@ -629,6 +629,11 @@
               control로만 사용합니다. Pairwise U-statistic covariance는
               unbiased sample covariance와 같은 통계량입니다. 이는
               estimator 선택용이며 성공 판정이나 3D 실행 권한이 아닙니다.
+              실제 결과에서 shrinkage 0.50의 평균 개선은 0.23%뿐이고
+              한 seed에서는 악화돼 새 method로 채택하지 않았습니다.
+              Geometry를 3,072로 늘린 원래 empirical NLL만 최악 2.71%로
+              안정화됐습니다. 다음 fresh 실험은 새 이름의 모델이 아니라
+              충분한 데이터에서 같은 estimator가 재현되는지 검사합니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>

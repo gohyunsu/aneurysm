@@ -91,7 +91,7 @@ window.AURORA_DATA = Object.freeze({
       id: "G1",
       title: "Is condition–marginal coherence exact?",
       copy: "DA1에서 population-NLL은 최악 0.00495를 회복했지만 empirical NLL은 0.04401–0.04855였다. Capacity보다 finite condition information이 병목이다.",
-      state: "G1/G1r failed · DA1 complete · DA2 development registered",
+      state: "G1/G1r failed · DA2 found no material estimator gain · data gate next",
       blocking: true
     },
     {
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "result",
+      title: "DA2 rejects a negligible shrinkage win and retains data adequacy",
+      copy: "고정 rule은 768×8에서 shrinkage 0.50을 골랐지만 empirical NLL 대비 평균 개선은 0.05444→0.05431(0.23%)뿐이고 1/3 seed에서 악화됐으며 population NLL도 더 나빴다. 반면 3,072×8 original empirical NLL은 평균 0.02575, 최악 0.02706이었다. Shrinkage는 method가 아니며 다음 fresh exact test는 data adequacy만 검증한다.",
+      files: ["results/controlled_pde_density_development_20260803.json", "docs/research-direction.md", "docs/model-spec.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

@@ -138,6 +138,12 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   Pairwise-difference U-statistic은 unbiased sample covariance와 같은
   통계량이므로 novelty가 아니다. DA2가 한 estimator를 선택해도 별도
   fresh exact gate 전에는 nonlinear/3D confirmatory 학습을 허용하지 않는다.
+  Exact commit `18dbfcd`의 DA2는 24 task를 exit 0으로 완료했다. 고정
+  규칙은 shrinkage 0.50을 골랐지만 768×8 empirical NLL 대비 평균 개선은
+  0.05444→0.05431(0.23%)뿐이고 1/3 seed에서는 악화됐으며 population
+  excess NLL도 더 나빴다. 이를 method로 승격하지 않는다. 3,072×8의 기존
+  empirical NLL은 평균 0.02575, 최악 0.02706으로 안정화돼 다음 fresh
+  exact sanity는 estimator novelty가 아니라 data adequacy를 검사한다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야

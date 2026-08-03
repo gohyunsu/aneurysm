@@ -1,0 +1,145 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "controlled_pde_density_development_20260803",
+  "experiment_id": "controlled_pde_density_estimator_development_v1",
+  "evidence_status": "development_only_estimator_selection_completed",
+  "source_diagnostic": "DA1",
+  "source_commit": "18dbfcd3161fc3e5b552a3e88b3abb921b04b346",
+  "source_config_sha256": "76cf2c2d40407d3ce4b9e78d679f68f9dd9611e70cd4f3e82844d7b76e939f1d",
+  "source_metrics_sha256": "5292079ebc782172114501401175b24b04f464c1a03f9ac309df6b7a7e64f1de",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-03T08:21:22.909923+00:00",
+    "ended_utc": "2026-08-03T08:23:05.836001+00:00",
+    "records": 24,
+    "walltime": "00:01:45"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "local_contract_tests": {
+      "tests": 72,
+      "status": "passed_with_optional_dependency_skips"
+    },
+    "pbs_container_attempt_1": {
+      "status": "environment_failed",
+      "exit_status": 1,
+      "reason": "The external h5py dependency layer required by a pre-existing BenchAnXplore test was not bound. DA2 was not the failing path."
+    },
+    "pbs_container_attempt_2": {
+      "status": "passed",
+      "exit_status": 0,
+      "tests": 72,
+      "tests_log_sha256": "1bb012a2217a311d6ff26ac111a60ecaf816e1b0cb77d3b773d0f10a49da4250",
+      "dependency_layer": "h5py_3_12_1"
+    }
+  },
+  "contract": {
+    "development_seeds": 3,
+    "estimators": [
+      "empirical_nll",
+      "grouped_unbiased",
+      "grouped_shrinkage_025",
+      "grouped_shrinkage_050"
+    ],
+    "selection_cell": "g768_c8_original_g1r_budget",
+    "data_sufficiency_control": "g3072_c8",
+    "success_thresholds": null,
+    "g1_relabeled": false,
+    "g1r_relabeled": false,
+    "new_gate_defined_or_passed": false,
+    "nonlinear_or_3d_training_authorized": false
+  },
+  "original_budget_g768_c8": {
+    "empirical_nll": {
+      "density_only_error": {
+        "mean": 0.05443883376816908,
+        "std": 0.026286866287172535,
+        "min": 0.027325237169861794,
+        "max": 0.07981252670288086
+      },
+      "population_excess_nll_mean": 0.0028956576716154814
+    },
+    "grouped_unbiased": {
+      "density_only_error": {
+        "mean": 0.06770345817009608,
+        "std": 0.03539819907384757,
+        "min": 0.02684890478849411,
+        "max": 0.0892314612865448
+      },
+      "population_excess_nll_mean": 0.010230876815815767
+    },
+    "grouped_shrinkage_025": {
+      "density_only_error": {
+        "mean": 0.05440311009685198,
+        "std": 0.026754779119649658,
+        "min": 0.025813844054937363,
+        "max": 0.07883720099925995
+      },
+      "population_excess_nll_mean": 0.00477057167639335
+    },
+    "grouped_shrinkage_050": {
+      "density_only_error": {
+        "mean": 0.05431403530140718,
+        "std": 0.026866140875452416,
+        "min": 0.025636183097958565,
+        "max": 0.07889869809150696
+      },
+      "population_excess_nll_mean": 0.0031584270764142275
+    }
+  },
+  "data_sufficiency_control_g3072_c8": {
+    "empirical_nll": {
+      "density_only_error": {
+        "mean": 0.025753067806363106,
+        "std": 0.001272827620989624,
+        "min": 0.024516651406884193,
+        "max": 0.027059422805905342
+      },
+      "population_excess_nll_mean": 0.0007133678688357273
+    },
+    "grouped_unbiased": {
+      "density_only_error_mean": 0.07986902445554733,
+      "density_only_error_max": 0.10802316665649414,
+      "population_excess_nll_mean": 0.010144138398269812
+    },
+    "grouped_shrinkage_025": {
+      "density_only_error_mean": 0.027660112207134564,
+      "density_only_error_max": 0.02882366254925728,
+      "population_excess_nll_mean": 0.003770811871315042
+    },
+    "grouped_shrinkage_050": {
+      "density_only_error_mean": 0.027450692529479664,
+      "density_only_error_max": 0.028863076120615005,
+      "population_excess_nll_mean": 0.002028103219345212
+    }
+  },
+  "formal_development_selection": {
+    "estimator": "grouped_shrinkage_050",
+    "selection_rule": "minimum mean density-only error at g768_c8",
+    "mean_absolute_improvement_over_empirical_nll": 0.00012479846676190076,
+    "mean_relative_improvement_over_empirical_nll": 0.002292456689183911,
+    "seed_direction": "improved_in_2_of_3_seeds_and_worsened_in_1_of_3",
+    "population_excess_nll": "worse_than_empirical_nll"
+  },
+  "scientific_verdict": {
+    "material_estimator_improvement_found": false,
+    "grouped_unbiased_result": "worse_than_empirical_nll",
+    "shrinkage_result": "formal_selection_but_negligible_and_not_seed_robust",
+    "data_sufficiency_result": "four_times_more_geometries_materially_improved_the_original_empirical_nll",
+    "interpretation_limit": "DA2 is a three-seed development comparison. It neither passes an exact gate nor establishes a generally optimal data budget."
+  },
+  "decision": {
+    "promote_grouped_estimator_to_method": false,
+    "promote_shrinkage_to_novelty": false,
+    "g1_status": "failed_unchanged",
+    "g1r_status": "failed_unchanged",
+    "nonlinear_or_3d_confirmatory_training_authorized": false,
+    "next_step": "Freeze the original empirical-NLL estimator at the 3072x8 data budget in a separately versioned fresh-seed exact-sanity protocol. Treat that experiment as data-adequacy sanity, not method novelty."
+  }
+}

@@ -444,6 +444,40 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("The DA2 high-data cell cannot select the estimator.")
     if da2["fresh_exact_gate_required_after_selection"] is not True:
         raise ProtocolError("DA2 selection must be followed by a fresh exact gate.")
+    if da2["status"] == "completed_development_only":
+        _require_keys(
+            da2,
+            [
+                "result",
+                "source_commit",
+                "formal_selected_estimator",
+                "material_estimator_improvement_found",
+                "selected_mean_relative_improvement",
+                "high_data_empirical_nll_maximum_density_error",
+                "promote_grouped_estimator_to_method",
+                "next_exact_sanity_candidate",
+            ],
+            "completed DA2",
+        )
+        if da2["result"] != (
+            "results/controlled_pde_density_development_20260803.json"
+        ):
+            raise ProtocolError("Completed DA2 must retain its public aggregate.")
+        if len(da2["source_commit"]) != 40:
+            raise ProtocolError("Completed DA2 must retain its exact source commit.")
+        if da2["formal_selected_estimator"] != "grouped_shrinkage_050":
+            raise ProtocolError("DA2 must retain the fixed-rule formal selection.")
+        if (
+            da2["material_estimator_improvement_found"] is not False
+            or da2["promote_grouped_estimator_to_method"] is not False
+        ):
+            raise ProtocolError(
+                "DA2 did not support promoting grouped shrinkage as a method."
+            )
+        if da2["next_exact_sanity_candidate"] != (
+            "empirical_nll_with_3072x8_data_budget"
+        ):
+            raise ProtocolError("DA2 supports a data-adequacy sanity next.")
     d0b = next(item for item in diagnostics if item["id"] == "D0b")
     _require_keys(
         d0b,

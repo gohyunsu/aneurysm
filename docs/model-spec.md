@@ -237,6 +237,13 @@ sample covariance와 동일한 통계량이므로 그 자체를 novelty로 부�
 DA2의 최선 estimator도 별도 fresh-seed exact gate 전에는 method로
 확정하거나 nonlinear/3D 학습을 허용하지 않는다.
 
+DA2 결과에서 formal selection은 shrinkage 0.50이었지만 기존 empirical
+NLL 대비 평균 density-only error 개선은 0.23%에 그쳤고 1/3 seed에서
+악화됐으며 population NLL도 더 나빴다. 따라서 grouped moment와 shrinkage를
+현행 architecture에 채택하지 않는다. High-data control의 기존 empirical
+NLL만 최악 0.02706으로 안정화됐다. 다음 exact re-entry는 architecture
+변경 없이 3,072×8 data adequacy만 fresh seed에서 검증한다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.
