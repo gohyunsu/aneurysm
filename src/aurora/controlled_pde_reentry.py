@@ -808,7 +808,7 @@ def evaluate_seed(
 
     gate_metrics = {
         "maximum_density_only_standardized_mean_error": max(
-            masks[name]["density_only_analytic"]["standardized_mean_error"]
+            masks[name]["density_only_analytic"]["standardized_mean_error"]["mean"]
             for name in config["primary_masks"]
         ),
         "maximum_density_only_coverage_error": max(

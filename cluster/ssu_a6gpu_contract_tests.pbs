@@ -18,12 +18,20 @@ cd "$PBS_O_WORKDIR"
 hostname
 nvidia-smi
 
+bind_arguments=()
+experiment_pythonpath="/workspace/src"
+if [ -n "${AURORA_EXPERIMENT_DEPS:-}" ]; then
+  bind_arguments+=(--bind "$AURORA_EXPERIMENT_DEPS:/experiment-deps:ro")
+  experiment_pythonpath="/workspace/src:/experiment-deps"
+fi
+
 set +e
 singularity exec --nv --cleanenv \
   --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
   --bind "$AURORA_OUTPUT_ROOT:/output" \
+  "${bind_arguments[@]}" \
   "$AURORA_SIF" \
-  env PYTHONPATH="/workspace/src" TMPDIR="/output/tmp" \
+  env PYTHONPATH="$experiment_pythonpath" TMPDIR="/output/tmp" \
   python -m unittest discover -s /workspace/tests -v \
   > "$AURORA_OUTPUT_ROOT/tests.log" 2>&1
 test_status=$?
