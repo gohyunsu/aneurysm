@@ -119,6 +119,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   \(7.45\times10^{-9}\), projective-excess CI upper 0.000202는 통과했다.
   다음 단계는 representation·optimization·finite-data error를 분리하는
   post-result density diagnostic이며, 새 fresh gate를 즉시 반복하지 않는다.
+  이 진단은 `configs/controlled_pde_density_attribution.json`에 threshold
+  없이 고정한다. True-parameter, population-NLL, empirical-NLL supervision과
+  192×32/768×8/3,072×2 matched-budget scaling을 비교하며, G1/G1r seed를
+  재사용하거나 어느 실패도 relabel하지 않는다.
 - **G2 · Paired response fidelity**: ID partial/missing calibration과
   supplied full-BC support-shift response를 분리한다. Strong probabilistic
   baseline보다 field distribution과 paired response가 모두 개선되어야

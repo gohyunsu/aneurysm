@@ -4,6 +4,26 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Post-G1r density attribution contract
+
+### Experiment
+
+- 실패한 G1r을 재채점하지 않는 post-result diagnostic을 별도 등록했다.
+  G1/G1r seed와 겹치지 않는 세 seed만 사용하며 success threshold는 없다.
+- Reference 768 geometry × 8 condition에서 true-parameter regression,
+  analytic population NLL, empirical NLL을 같은 density network로 비교한다.
+  Empirical NLL은 sampled validation과 population validation selection을
+  분리해 checkpoint noise도 확인한다.
+- 6,144 boundary sample을 고정한 192×32, 768×8, 3,072×2 비교와,
+  geometry 또는 condition을 고정한 두 scaling axis를 함께 등록했다.
+
+### Scope
+
+- 이 진단은 representation/optimizer ceiling, finite-condition noise,
+  geometry coverage, repeated-condition information만 분리한다.
+- 어떤 결과도 G1/G1r을 relabel하거나 nonlinear/3D 학습을 허용하지 않는다.
+  결과가 estimator 변경을 시사하면 새 protocol과 fresh seed가 필요하다.
+
 ## 2026-08-03 · Aneumo physical-scaling audit is velocity-only positive
 
 ### Experiment

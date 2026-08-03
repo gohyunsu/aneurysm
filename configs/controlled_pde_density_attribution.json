@@ -1,0 +1,133 @@
+{
+  "schema_version": "aurora.controlled_pde_density_attribution.v1",
+  "experiment_id": "controlled_pde_post_g1r_density_attribution_v1",
+  "status": "post_result_exploratory_density_attribution",
+  "source_gate": "G1r",
+  "may_relabel_g1_or_g1r": false,
+  "may_define_a_new_gate": false,
+  "g1r_config": "controlled_pde_g1r.json",
+  "g1r_config_sha256": "7f5779d53143b6b77d0b1f9ac4c5d1a98b0b7fce908fcd68891e33270ec58b8a",
+  "failed_g1r_result": "../results/controlled_pde_g1r_20260803.json",
+  "failed_g1r_result_sha256": "8404464b0b38fda3676a5ffedf06d12acdb91b297d3989f0e5d46cb1687e127e",
+  "seeds": [41080301, 41080302, 41080303],
+  "split_seed_offsets": {
+    "train": 0,
+    "validation": 100000,
+    "analysis": 300000
+  },
+  "grid_points": 64,
+  "hidden_dim": 128,
+  "reference_cell": {
+    "id": "g768_c8",
+    "train_geometries": 768,
+    "conditions_per_geometry": 8
+  },
+  "validation": {
+    "geometries": 192,
+    "conditions_per_geometry": 8
+  },
+  "analysis": {
+    "geometries": 512,
+    "conditions_per_geometry": 16
+  },
+  "training": {
+    "maximum_epochs": 2500,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 25,
+    "early_stopping_patience": 16,
+    "minimum_delta": 0.00001,
+    "lr_plateau_patience": 4,
+    "lr_decay": 0.5,
+    "minimum_learning_rate": 0.00001
+  },
+  "reference_objectives": [
+    {
+      "id": "oracle_parameter_regression",
+      "train_objective": "oracle_parameter",
+      "validation_objective": "oracle_parameter"
+    },
+    {
+      "id": "analytic_population_nll",
+      "train_objective": "analytic_population_nll",
+      "validation_objective": "analytic_population_nll"
+    },
+    {
+      "id": "empirical_nll_population_selected",
+      "train_objective": "empirical_nll",
+      "validation_objective": "analytic_population_nll"
+    },
+    {
+      "id": "empirical_nll_sampled_selected",
+      "train_objective": "empirical_nll",
+      "validation_objective": "empirical_nll"
+    }
+  ],
+  "sample_scaling": {
+    "scenario_id": "empirical_nll_population_selected",
+    "train_objective": "empirical_nll",
+    "validation_objective": "analytic_population_nll",
+    "cells": [
+      {
+        "id": "g192_c32",
+        "train_geometries": 192,
+        "conditions_per_geometry": 32,
+        "axes": ["matched_6144_boundary_budget", "low_geometry_high_repeat"]
+      },
+      {
+        "id": "g768_c8",
+        "train_geometries": 768,
+        "conditions_per_geometry": 8,
+        "axes": ["matched_6144_boundary_budget", "reference"]
+      },
+      {
+        "id": "g3072_c2",
+        "train_geometries": 3072,
+        "conditions_per_geometry": 2,
+        "axes": ["matched_6144_boundary_budget", "high_geometry_low_repeat"]
+      },
+      {
+        "id": "g768_c2",
+        "train_geometries": 768,
+        "conditions_per_geometry": 2,
+        "axes": ["fixed_768_geometries", "low_total_budget"]
+      },
+      {
+        "id": "g768_c32",
+        "train_geometries": 768,
+        "conditions_per_geometry": 32,
+        "axes": ["fixed_768_geometries", "high_total_budget"]
+      },
+      {
+        "id": "g192_c8",
+        "train_geometries": 192,
+        "conditions_per_geometry": 8,
+        "axes": ["fixed_8_conditions", "low_total_budget"]
+      },
+      {
+        "id": "g3072_c8",
+        "train_geometries": 3072,
+        "conditions_per_geometry": 8,
+        "axes": ["fixed_8_conditions", "high_total_budget"]
+      }
+    ]
+  },
+  "observation_masks": {
+    "missing": [0, 0],
+    "left_observed": [1, 0],
+    "right_observed": [0, 1]
+  },
+  "primary_masks": ["missing", "left_observed", "right_observed"],
+  "reporting": {
+    "parameter_metrics": [
+      "mean_normalized_rmse",
+      "covariance_normalized_frobenius",
+      "correlation_mae"
+    ],
+    "distribution_metric": "analytic_population_excess_nll",
+    "solution_metric": "maximum_density_only_standardized_mean_error",
+    "aggregate_across_seeds": ["mean", "std", "min", "max"],
+    "success_thresholds": null
+  },
+  "interpretation": "Post-result attribution only. Oracle-parameter regression probes representation/optimizer ceiling; analytic population NLL removes finite-condition noise; matched-budget and fixed-axis empirical cells separate geometry coverage from repeated-condition information. No outcome can relabel G1/G1r or authorize nonlinear/3D confirmation without a separately preregistered fresh gate."
+}

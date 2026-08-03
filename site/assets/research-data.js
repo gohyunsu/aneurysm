@@ -90,8 +90,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G1",
       title: "Is condition–marginal coherence exact?",
-      copy: "G1r은 coverage·operator·analytic nesting·projective 항을 통과했지만, 최악 seed의 density-only/end-to-end mean 0.07533/0.07518로 실패했다.",
-      state: "Frozen G1 failed · prospective G1r also failed",
+      copy: "G1r은 mean gate로 실패했다. Threshold 없는 post-result 진단이 true-parameter, population-NLL, matched-budget geometry×condition scaling으로 원인을 분리한다.",
+      state: "G1/G1r failed · density attribution registered",
       blocking: true
     },
     {
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Density attribution separates capacity, objective noise, and sample allocation",
+      copy: "G1/G1r과 겹치지 않는 세 diagnostic seed에서 true-parameter regression, analytic population NLL, empirical NLL을 같은 density network로 비교한다. 6,144 boundary sample을 고정한 192×32, 768×8, 3,072×2와 fixed-axis cells를 등록했다. Success threshold가 없으며 G1/G1r을 relabel할 수 없다.",
+      files: ["configs/controlled_pde_density_attribution.json", "src/aurora/controlled_pde_density_attribution.py", "cluster/ssu_a6gpu_controlled_density_attribution.pbs", "docs/experiment-protocol.md"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

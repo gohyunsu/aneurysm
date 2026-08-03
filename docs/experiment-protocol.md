@@ -212,6 +212,15 @@ finite-data 요인을 분리한다. 이 진단에 fresh gate seed를 사용하�
 결과를 본 뒤 선택한 estimator는 다시 독립된 protocol과 seed를 고정해야
 한다.
 
+Machine-readable contract는
+`configs/controlled_pde_density_attribution.json`이다. Reference
+768 geometry × 8 condition에서 parameter supervision, population NLL,
+empirical NLL을 같은 network/optimizer로 비교한다. Empirical objective는
+sampled validation과 population validation checkpoint를 모두 기록한다.
+Sample scaling은 총 6,144 boundary record를 맞춘 192×32, 768×8,
+3,072×2와 fixed-geometry/fixed-condition 축을 사용한다. 세 diagnostic
+seed는 G1/G1r seed와 겹치지 않으며, 이 contract에는 pass threshold가 없다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

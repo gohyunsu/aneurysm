@@ -210,6 +210,12 @@ generator에서만 가능한 세 개의 post-result upper-bound diagnostic으로
    boundary sample budget을 맞춰 geometry coverage와 repeated-condition
    information을 분리한다.
 
+구체적으로 6,144 sample을 맞춘 192×32, 768×8, 3,072×2를 비교하고,
+768 geometry 고정 및 8 condition 고정 scaling axis를 추가한다. Empirical
+NLL은 sampled-validation 선택과 analytic-population 선택을 모두 두어
+finite training data와 checkpoint noise를 분리한다. 세 diagnostic seed는
+G1/G1r과 겹치지 않으며 이 post-result 분석에는 통과 기준이 없다.
+
 이 분해에서 empirical data insufficiency가 확인될 때만 shrinkage 또는
 hierarchical density estimator를 새 fresh gate로 사전등록한다. 단순히
 Gaussian을 flow로 교체하거나 threshold를 완화하지 않는다.

@@ -103,6 +103,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_cmha_g1.pbs`
 - `cluster/ssu_a6gpu_benchanxplore_d0.pbs`
 - `cluster/ssu_a6gpu_controlled_g1r.pbs`
+- `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 
 G1r template은 기존 G1 실패를 덮어쓰지 않는다. Public source commit과
 `configs/controlled_pde_g1r.json`을 read-only로 bind하고 새 output
@@ -116,6 +117,12 @@ Exact commit `951ace1`의 full G1r은 A6000에서 정상 완료됐지만 gate는
 architecture 선택에 재사용하지 않으며, 다음 GPU job은 별도의 post-result
 density attribution만 허용한다. Aneumo 학습과 nonlinear/3D confirmatory
 job은 새 exact sanity 근거 전까지 제출하지 않는다.
+
+Post-G1r density attribution은 별도 세 diagnostic seed에서 density
+network만 학습한다. True-parameter, analytic population NLL, empirical
+NLL과 matched-budget geometry×condition cells를 비교하며 result threshold가
+없다. Exact commit, config checksum, environment, status와 aggregate
+metric을 남기되 G1/G1r status는 항상 failed로 보존한다.
 
 ## Aneumo selective-cache contract
 

@@ -140,6 +140,14 @@ nesting, projective-excess는 통과한 반면, 최악 seed의 density-only mean
 있습니다. Density estimation의 representation·optimization·finite-data
 오차를 분해하기 전까지 nonlinear/3D confirmatory 학습은 보류합니다.
 
+Post-G1r density attribution은
+[`configs/controlled_pde_density_attribution.json`](configs/controlled_pde_density_attribution.json)에
+별도로 고정했습니다. True-parameter regression과 analytic population NLL로
+capacity/optimization 및 finite-condition noise를 분리하고, 동일 6,144
+boundary sample에서 192×32, 768×8, 3,072×2를 비교해 geometry coverage와
+repeated-condition information을 구분합니다. 이는 threshold가 없는
+post-result diagnostic이며 실패한 G1/G1r을 relabel하지 않습니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에
