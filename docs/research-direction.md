@@ -334,6 +334,14 @@ departure 분포를 정량화하고, 그 뒤에만 새로운 seed와 context-str
 case selection, 기존 PDE·threshold를 고정한 N0r를 등록한다. N0r 통과 전에는
 학습 실험을 열지 않는다.
 
+N0a 실행 계약은 `configs/nonlinear_pde_n0_attribution.json`이다. 기존 세
+seed의 288개 context-condition 조합을 전부 사용해 원래 contiguous
+statistic, 12-context stratified statistic, 모든 context의 median 분포를
+비교한다. Nonlinearity coefficient와 solution norm의 association도
+attribution용으로만 계산한다. 성공 기준이 없고 N0r seed·threshold
+selection에도 사용할 수 없으므로, 유리한 subset을 골라 gate를 우회하지
+못한다.
+
 N1의 후보 정체성은 active acquisition 자체가 아니라
 **conditioning inconsistency가 solution-functional Bayes decision과 다음
 BC 측정 선택에 만드는 regret**이다. Bounded loss에서 posterior TV/KL로

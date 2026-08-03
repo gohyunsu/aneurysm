@@ -348,6 +348,22 @@ context 0 하나만 검사했다. Paired 48개도 앞 네 context에 한정됐�
 context-stratified selector를 고정한 N0r다. N0r는 PDE, case count,
 scientific threshold를 유지하며 결과 전에 독립 실행 계약으로 등록한다.
 
+##### N0a · all-context attribution, no gate
+
+`configs/nonlinear_pde_n0_attribution.json`은 failed N0의 세 seed를 그대로
+재사용한다. 각 seed에서 24 context × 12 condition 전체의 33×33
+semilinear/linear solution을 비교한다.
+
+- 원래 contiguous 앞 12 case의 departure quantile
+- 12개 균등 context·회전 condition selector의 departure quantile
+- 전체 288 case와 context별 median의 quantile
+- 이전 0.01 값을 넘는 context median의 비율
+- context nonlinearity와 solution norm에 대한 Pearson association
+
+이전 0.01은 설명용 reference일 뿐 N0a success threshold가 아니다.
+N0a는 N0를 relabel하지 않고 N1/3D를 열지 않으며, N0r의 seed나 threshold
+선택에도 쓰지 않는다.
+
 #### N1 · learned decision-consistency falsification
 
 N1은 N0 결과 전에 세부 hyperparameter나 fresh seed를 열지 않는다. Primary

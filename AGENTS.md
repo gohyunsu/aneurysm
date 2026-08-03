@@ -194,7 +194,9 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   nonlinear departure 한 항목에서 실패했다. Context-major contiguous
   slicing을 발견했지만 threshold를 낮추거나 N0를 relabel하지 않는다.
   N0a는 attribution만, N0r는 fresh seed와 context-stratified selector를
-  결과 전에 고정한 re-entry만 허용한다.
+  결과 전에 고정한 re-entry만 허용한다. N0a는 기존 세 seed의 24×12
+  전체 case를 검사하지만 success threshold, N0 relabel, N1/3D 권한,
+  N0r seed·threshold 선택을 모두 금지한다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

@@ -153,6 +153,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.03",
+      category: "experiment",
+      title: "N0a audits every context without reopening the gate",
+      copy: "Failed N0의 세 seed 각각에서 24 context×12 condition 전체 semilinear–linear departure를 계산한다. 원래 contiguous 12-case와 12-context stratified statistic, 전체 context-median 분포를 비교하지만 success threshold가 없고 N0 relabel·N1/3D 실행·N0r seed/threshold 선택은 모두 금지한다.",
+      files: ["configs/nonlinear_pde_n0_attribution.json", "src/aurora/nonlinear_pde_attribution.py", "cluster/ssu_a6gpu_nonlinear_pde_n0_attribution.pbs", "docs/experiment-protocol.md"]
+    },
+    {
+      date: "2026.08.03",
       category: "result",
       title: "Frozen nonlinear N0 fails one of nine checks",
       copy: "Exact 0ead687의 3-seed A6000 run은 solver·grid error·8-component response·effective rank·functional diversity·analytic conditioning을 통과했지만 seed별 nonlinear departure 0.02319/0.02365/0.00727 중 최악 값이 frozen 0.01 기준을 넘지 못했다. N1/3D는 차단한다. Context-major contiguous slice는 실패를 소급 변경하지 않으며, threshold-free N0a와 fresh-seed context-stratified N0r로만 원인을 분리한다.",

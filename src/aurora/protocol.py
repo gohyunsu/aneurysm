@@ -686,8 +686,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     nonlinear = protocol["nonlinear_protocols"]
     nonlinear_ids = _unique_ids(nonlinear, "id", "nonlinear_protocols")
-    if nonlinear_ids != {"N0", "N1"}:
-        raise ProtocolError("Nonlinear evidence ladder must contain only N0 and N1.")
+    if nonlinear_ids != {"N0", "N0a", "N1"}:
+        raise ProtocolError(
+            "Nonlinear evidence ladder must contain N0, non-gating N0a, and N1."
+        )
     n0 = next(item for item in nonlinear if item["id"] == "N0")
     _require_keys(
         n0,
@@ -753,6 +755,47 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ):
             if forbidden_key in n0:
                 raise ProtocolError("Unrun N0 cannot contain post-result fields.")
+    n0a = next(item for item in nonlinear if item["id"] == "N0a")
+    _require_keys(
+        n0a,
+        [
+            "status",
+            "source_gate",
+            "config",
+            "source_failed_result",
+            "uses_only_failed_n0_seeds",
+            "all_context_condition_cases_per_seed",
+            "has_success_threshold",
+            "may_relabel_n0",
+            "may_authorize_n1",
+            "may_authorize_irregular_3d",
+            "may_select_n0r_thresholds_or_seeds",
+            "next_step",
+        ],
+        "N0a nonlinear attribution",
+    )
+    if (
+        n0a["status"] != "preregistered_post_result_attribution"
+        or n0a["source_gate"] != "N0"
+        or n0a["config"] != "configs/nonlinear_pde_n0_attribution.json"
+        or n0a["source_failed_result"] != "results/nonlinear_pde_n0_20260803.json"
+    ):
+        raise ProtocolError("N0a must remain pinned to the failed N0 result.")
+    if (
+        n0a["uses_only_failed_n0_seeds"] is not True
+        or n0a["all_context_condition_cases_per_seed"] != 288
+    ):
+        raise ProtocolError("N0a must audit the complete failed-seed context grid.")
+    for forbidden_authority in (
+        "has_success_threshold",
+        "may_relabel_n0",
+        "may_authorize_n1",
+        "may_authorize_irregular_3d",
+        "may_select_n0r_thresholds_or_seeds",
+    ):
+        if n0a[forbidden_authority] is not False:
+            raise ProtocolError("N0a is attribution only and cannot open or tune a gate.")
+
     n1 = next(item for item in nonlinear if item["id"] == "N1")
     expected_n1_status = (
         "blocked_after_failed_N0"

@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · N0a isolates the contiguous-context sampling hypothesis
+
+### Experiment
+
+- `configs/nonlinear_pde_n0_attribution.json`에 failed N0 result/config
+  checksum과 기존 세 seed를 고정했다.
+- 각 seed의 24 context × 12 condition 전체에서 semilinear–linear
+  departure를 계산하고, 원래 contiguous 12 case, context-stratified
+  12 case, 전체 case와 context-median 분포를 비교한다.
+- N0a에는 success threshold가 없다. N0를 relabel하거나 N1/3D를
+  authorize하거나 N0r threshold·seed를 선택할 수 없다.
+
 ## 2026-08-03 · Frozen nonlinear N0 fails one of nine checks
 
 ### Result

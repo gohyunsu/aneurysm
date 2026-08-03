@@ -445,6 +445,22 @@
       "next_step": "threshold_free_all_context_attribution_then_fresh_seed_context_stratified_reentry"
     },
     {
+      "id": "N0a",
+      "name": "failed_n0_all_context_sampling_attribution",
+      "status": "preregistered_post_result_attribution",
+      "source_gate": "N0",
+      "config": "configs/nonlinear_pde_n0_attribution.json",
+      "source_failed_result": "results/nonlinear_pde_n0_20260803.json",
+      "uses_only_failed_n0_seeds": true,
+      "all_context_condition_cases_per_seed": 288,
+      "has_success_threshold": false,
+      "may_relabel_n0": false,
+      "may_authorize_n1": false,
+      "may_authorize_irregular_3d": false,
+      "may_select_n0r_thresholds_or_seeds": false,
+      "next_step": "fresh_seed_context_stratified_N0r_preregistration"
+    },
+    {
       "id": "N1",
       "name": "learned_conditioning_decision_consistency",
       "status": "blocked_after_failed_N0",

@@ -105,6 +105,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_controlled_g1r.pbs`
 - `cluster/ssu_a6gpu_controlled_g1s.pbs`
 - `cluster/ssu_a6gpu_nonlinear_pde_n0.pbs`
+- `cluster/ssu_a6gpu_nonlinear_pde_n0_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_development.pbs`
 
@@ -133,6 +134,12 @@ worst-seed nonlinear departure가 frozen threshold를 통과하지 못했다.
 공개 aggregate는 `results/nonlinear_pde_n0_20260803.json`이다. 완료된
 solver 실행을 성공한 method 실험으로 표현하지 않으며 N1과 3D job은
 N0 re-entry 전까지 제출하지 않는다.
+
+N0a는 같은 pinned container와 A6000 allocation에서 실행하되
+`configs/nonlinear_pde_n0_attribution.json`을 read-only로 bind한다.
+원래 N0 seed의 all-context diagnostic만 생성하며 status artifact에는
+`has_gate_decision=false`, `n0_status=failed_unchanged`,
+`n1_authorized=false`를 반드시 남긴다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

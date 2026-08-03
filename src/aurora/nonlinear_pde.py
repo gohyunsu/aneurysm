@@ -542,6 +542,50 @@ def _relative_l2(prediction: Any, reference: Any) -> Any:
     return numerator / denominator
 
 
+def context_stratified_case_indices(
+    contexts: int,
+    conditions_per_context: int,
+    cases: int,
+) -> list[int]:
+    """Select deterministic context-major indices without a contiguous-prefix bias.
+
+    When fewer cases than contexts are requested, the selected contexts are evenly
+    spaced and each uses a rotating condition.  When at least one case per context
+    is available, every context is represented before an additional condition is
+    assigned.  This selector was introduced after the frozen N0 result and therefore
+    cannot alter that result; it is intended for N0 attribution and fresh re-entry.
+    """
+
+    if contexts <= 0 or conditions_per_context <= 0:
+        raise NonlinearPDEError("Context and condition counts must be positive.")
+    total = contexts * conditions_per_context
+    if cases <= 0 or cases > total:
+        raise NonlinearPDEError("Requested cases must be within the case grid.")
+
+    selected: list[int] = []
+    if cases < contexts:
+        for rank in range(cases):
+            context_index = (rank * contexts) // cases
+            condition_index = (7 * rank) % conditions_per_context
+            selected.append(
+                context_index * conditions_per_context + condition_index
+            )
+        return selected
+
+    quotient, remainder = divmod(cases, contexts)
+    for context_index in range(contexts):
+        count = quotient + int(context_index < remainder)
+        stride = max(1, conditions_per_context // count)
+        for slot in range(count):
+            condition_index = (
+                5 * context_index + slot * stride
+            ) % conditions_per_context
+            selected.append(
+                context_index * conditions_per_context + condition_index
+            )
+    return selected
+
+
 def _quantiles(values: Any) -> dict[str, float]:
     _, torch = _imports()
     return {

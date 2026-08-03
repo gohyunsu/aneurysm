@@ -1,0 +1,43 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n0_attribution.v1",
+  "experiment_id": "nonlinear_multicomponent_n0_all_context_attribution_v1",
+  "status": "post_result_exploratory_attribution",
+  "source_gate": "N0",
+  "failed_n0_result": "../results/nonlinear_pde_n0_20260803.json",
+  "failed_n0_result_sha256": "ca442819026757a56ec1e62febd9cbcae9a4df435ed88cf4b9f78b76fc1dfff8",
+  "source_n0_config": "nonlinear_pde_n0.json",
+  "source_n0_config_sha256": "cb5d6b0891083bc9460d5557d5c04b708c25dffa09e90e0b951af0dc3dcfcaaf",
+  "seeds": [62080311, 62080312, 62080313],
+  "sampling": {
+    "contexts_per_seed": 24,
+    "conditions_per_context": 12,
+    "registered_contiguous_cases": 12,
+    "context_stratified_cases": 12,
+    "all_context_condition_cases": 288,
+    "stratified_selector": "even_contexts_rotating_conditions_v1"
+  },
+  "analysis": {
+    "primary_quantity": "relative_l2_semilinear_solution_vs_lambda_zero_solution",
+    "summaries": [
+      "registered_contiguous_case_quantiles",
+      "context_stratified_case_quantiles",
+      "all_case_quantiles",
+      "context_median_quantiles",
+      "fraction_of_context_medians_above_former_n0_reference"
+    ],
+    "associations": [
+      "pearson_context_nonlinearity_vs_context_median_departure",
+      "pearson_context_solution_norm_vs_context_median_departure"
+    ],
+    "former_n0_reference_value_for_description_only": 0.01
+  },
+  "decision_rule": {
+    "has_success_threshold": false,
+    "may_relabel_n0": false,
+    "may_authorize_n1": false,
+    "may_authorize_irregular_3d": false,
+    "may_select_n0r_thresholds_or_seeds": false,
+    "result_may_motivate_fresh_context_stratified_reentry": true
+  },
+  "interpretation": "N0a measures whether the failed N0 nonlinear-departure statistic was sensitive to contiguous context-major slicing. It has no pass state, does not change the failed N0 decision, and cannot authorize learned or 3D experiments."
+}

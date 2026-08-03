@@ -292,6 +292,12 @@ context-major flatten tensor를 앞에서 연속 slice해 reference 12개가
 추가하기 전에는 N1 architecture를 구현하지 않는다. Selector 수정은
 새 seed의 N0r에서만 gate evidence가 된다.
 
+새 selector는 flattened tensor의 암묵적 순서에 의존하지 않는다. 12-case
+reference audit에서는 24 context를 균등 간격으로 선택하고 condition
+index를 회전한다. 48-case paired audit에서는 24 context를 모두 정확히
+두 번 포함한다. N0a는 이 selector를 diagnostic comparison에만 사용하고,
+N0r에서만 fresh prospective evidence로 사용한다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

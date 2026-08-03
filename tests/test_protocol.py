@@ -86,6 +86,19 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "failed checks"):
             validate_protocol(candidate)
 
+    def test_n0a_cannot_authorize_or_tune_reentry(self) -> None:
+        for key in ("may_authorize_n1", "may_select_n0r_thresholds_or_seeds"):
+            with self.subTest(key=key):
+                candidate = copy.deepcopy(self.protocol)
+                n0a = next(
+                    item
+                    for item in candidate["nonlinear_protocols"]
+                    if item["id"] == "N0a"
+                )
+                n0a[key] = True
+                with self.assertRaisesRegex(ProtocolError, "attribution only"):
+                    validate_protocol(candidate)
+
     def test_n1_cannot_drop_active_feature_baseline(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         n1 = next(
