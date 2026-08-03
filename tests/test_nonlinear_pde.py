@@ -55,6 +55,28 @@ class NonlinearPDERuntimeTests(unittest.TestCase):
         )
         self.assertLess(residual, 2e-5)
 
+    def test_registered_parameter_envelopes_and_physical_flux(self) -> None:
+        from aurora.nonlinear_pde import _pde_fields, solution_functionals
+
+        context = torch.tensor(
+            [
+                [0.0, 0.0, -1.0, 0.0, -1.0],
+                [0.0, 0.0, 1.0, 0.0, 1.0],
+            ]
+        )
+        diffusivity, _, nonlinearity = _pde_fields(context, 17)
+        self.assertGreaterEqual(float(diffusivity.min()), 0.7 - 1e-6)
+        self.assertLessEqual(float(diffusivity.max()), 1.3 + 1e-6)
+        self.assertTrue(torch.allclose(nonlinearity, torch.tensor([8.0, 40.0])))
+
+        coordinate = torch.linspace(0.0, 1.0, 17)
+        solution = coordinate[None, None, :].expand(2, 17, -1).clone()
+        functionals = solution_functionals(solution, context)
+        expected = -0.5 * (
+            diffusivity[:, 1:-1, -1] + diffusivity[:, 1:-1, -2]
+        ).mean(dim=1)
+        self.assertTrue(torch.allclose(functionals[:, 3], expected, atol=1e-6))
+
     def test_small_solver_converges_and_preserves_boundary(self) -> None:
         from aurora.nonlinear_pde import solve_semilinear
 

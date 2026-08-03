@@ -102,8 +102,8 @@ def load_config(path: str | Path) -> dict[str, Any]:
         raise NonlinearPDEError("Pinned G1s result does not match N0.")
 
     seeds = [int(value) for value in payload["seeds"]]
-    if len(seeds) != 3 or len(set(seeds)) != 3:
-        raise NonlinearPDEError("N0 requires three unique numerical-audit seeds.")
+    if seeds != [62080311, 62080312, 62080313]:
+        raise NonlinearPDEError("N0 numerical-audit seeds changed after registration.")
 
     pde = payload["pde"]
     _require_keys(
@@ -140,6 +140,30 @@ def load_config(path: str | Path) -> dict[str, Any]:
         raise NonlinearPDEError("N0 nonlinearity range changed after registration.")
     if pde["diffusivity_range"] != [0.7, 1.3]:
         raise NonlinearPDEError("N0 diffusivity range changed after registration.")
+
+    sampling = payload["sampling"]
+    if sampling != {
+        "contexts_per_seed": 24,
+        "conditions_per_context": 12,
+        "reference_cases_per_seed": 12,
+        "paired_base_cases_per_seed": 48,
+        "paired_component_perturbation": 0.15,
+        "all_conditions_of_one_context_remain_grouped": True,
+    }:
+        raise NonlinearPDEError("N0 sampling contract changed after registration.")
+
+    thresholds = payload["success_thresholds"]
+    if thresholds != {
+        "maximum_solver_normalized_residual": 0.0005,
+        "maximum_coarse_reference_relative_l2": 0.04,
+        "minimum_median_nonlinear_departure": 0.01,
+        "minimum_worst_component_response_median": 0.01,
+        "minimum_response_effective_rank": 3.0,
+        "minimum_functional_winner_components": 3,
+        "maximum_dominant_functional_winner_share": 0.75,
+        "maximum_analytic_conditioning_route_residual": 0.00002,
+    }:
+        raise NonlinearPDEError("N0 success thresholds changed after registration.")
 
     boundary_law = payload["boundary_law"]
     if (
@@ -192,7 +216,12 @@ def boundary_law(context: Any) -> tuple[Any, Any, Any]:
     indices = torch.arange(8, device=device, dtype=dtype)
     phase = context[:, 0:1] * (0.45 + 0.08 * indices)
     spatial = context[:, 1:2] * torch.cos((indices + 1.0) * math.pi / 4.0)
-    common = 0.10 * context[:, 2:3] * (-1.0).pow(indices)
+    alternating_sign = torch.where(
+        (indices.to(torch.int64) % 2) == 0,
+        torch.ones_like(indices),
+        -torch.ones_like(indices),
+    )
+    common = 0.10 * context[:, 2:3] * alternating_sign
     mean0 = 0.16 * torch.sin(phase + indices * 0.55) + 0.09 * spatial + common
     mean1 = -0.13 * torch.cos(phase - indices * 0.40) + 0.07 * spatial - common
     means = torch.stack((mean0, mean1), dim=1)
@@ -285,12 +314,12 @@ def _pde_fields(
         + (yy[None] - center_y[:, None, None]).square()
     )
     bump = torch.exp(-radius / (2.0 * width[:, None, None].square()))
-    diffusivity = 1.0 + 0.30 * torch.tanh(context[:, 2])[:, None, None] * bump
+    diffusivity = 1.0 + 0.30 * context[:, 2, None, None] * bump
     forcing = (0.8 + 0.4 * torch.sigmoid(context[:, 3]))[:, None, None] * bump
     if linear:
         nonlinearity = torch.zeros_like(context[:, 4])
     else:
-        nonlinearity = 8.0 + 32.0 * torch.sigmoid(context[:, 4])
+        nonlinearity = 24.0 + 16.0 * context[:, 4]
     return diffusivity, forcing, nonlinearity
 
 
@@ -393,10 +422,12 @@ def normalized_residual(context: Any, solution: Any, linear: bool = False) -> An
     return numerator / denominator
 
 
-def solution_functionals(solution: Any) -> Any:
+def solution_functionals(solution: Any, context: Any) -> Any:
     """Compute four registered scalar solution functionals."""
 
     _, torch = _imports()
+    if solution.shape[0] != context.shape[0]:
+        raise NonlinearPDEError("Solution and context batch sizes differ.")
     grid_points = solution.shape[-1]
     coordinate = torch.linspace(
         0.0, 1.0, grid_points, device=solution.device, dtype=solution.dtype
@@ -413,7 +444,15 @@ def solution_functionals(solution: Any) -> Any:
         solution.flatten(1) / temperature, dim=1
     ) - temperature * math.log(solution.shape[-1] * solution.shape[-2])
     h = 1.0 / (grid_points - 1)
-    right_flux = ((solution[:, 1:-1, -1] - solution[:, 1:-1, -2]) / h).mean(dim=1)
+    diffusivity, _, _ = _pde_fields(context, grid_points)
+    right_face_diffusivity = 0.5 * (
+        diffusivity[:, 1:-1, -1] + diffusivity[:, 1:-1, -2]
+    )
+    right_flux = (
+        -right_face_diffusivity
+        * (solution[:, 1:-1, -1] - solution[:, 1:-1, -2])
+        / h
+    ).mean(dim=1)
     return torch.stack((domain_mean, hotspot, smooth_maximum, right_flux), dim=-1)
 
 
@@ -641,11 +680,14 @@ def run_experiment(config: Mapping[str, Any], require_cuda: bool) -> dict[str, A
             (eigenvalues.sum().square() / eigenvalues.square().sum().clamp_min(1e-12)).item()
         )
 
-        base_functionals = solution_functionals(base_solution)
+        base_functionals = solution_functionals(base_solution, pair_context)
         paired_functionals = solution_functionals(
             perturbed_solution.reshape(
                 -1, int(pde["grid_points"]), int(pde["grid_points"])
-            )
+            ),
+            pair_context[:, None, :]
+            .expand(-1, component_count, -1)
+            .reshape(-1, pair_context.shape[-1]),
         ).reshape(pair_count, component_count, -1)
         functional_response = torch.abs(
             paired_functionals - base_functionals[:, None, :]

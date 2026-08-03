@@ -275,7 +275,7 @@ reference를 고정한다.
 - field \(u\in\mathbb R^{33\times33}\), reference
   \(u_{\mathrm{ref}}\in\mathbb R^{65\times65}\)
 - registered functionals: domain mean, central hotspot, smooth maximum,
-  right-boundary flux
+  right-boundary outward diffusive flux \(-a_G\partial_nu\)
 
 Damped Jacobi–Newton update는 variable diffusivity face flux와
 \(\lambda_Gu^3\)를 함께 푼다. N0에서 convergence, normalized residual,

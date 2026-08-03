@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · N0 implementation audit is corrected before execution
+
+### Pre-execution amendment
+
+- 아직 scheduler/GPU job이 제출되기 전에 tensor runtime test에서 경계 GMM의
+  Python scalar `.pow` 오류를 발견해 tensor-safe alternating sign으로
+  교정했다.
+- 선언된 \(a_G\in[0.7,1.3]\), \(\lambda_G\in[8,40]\) envelope와 실제
+  context mapping을 일치시켰다.
+- `right_boundary_flux`는 단순 gradient가 아니라 outward diffusive flux
+  \(-a_G\partial_nu\)를 계산한다. Seed, sample count, threshold와 decision
+  rule은 바꾸지 않았다.
+
 ## 2026-08-03 · Nonlinear N0 is frozen before learning
 
 ### Research decision
@@ -43,7 +56,7 @@
 - G1/G1r 실패는 그대로 보존한다. G1s는 training geometry 768→3,072의
   data adequacy를 확인했으며 method novelty나 baseline superiority가 아니다.
 - Nonlinear/3D protocol 등록은 허용한다. 우선순위는 multicomponent
-  nonlinear C1/C2와 strong probabilistic/partial-observation baseline이며,
+  nonlinear N0/N1과 strong probabilistic/partial-observation baseline이며,
   그 결과 전에는 aneurysm 3D를 headline evidence로 만들지 않는다.
 
 ## 2026-08-03 · G1s fresh data-adequacy sanity is preregistered

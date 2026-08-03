@@ -325,6 +325,12 @@ N0는 solver·PDE·BC·functional이 비자명한지만 판정한다. 통과하�
 comparison 등록만 허용한다. Method novelty, baseline superiority,
 irregular-3D headline은 허용하지 않는다.
 
+첫 scheduler/GPU 실행 전 구현 감사를 통해 선언된
+\(a_G\in[0.7,1.3]\), \(\lambda_G\in[8,40]\) envelope를 코드와 일치시켰고,
+경계 gradient가 아니라 물리적 right-boundary outward diffusive flux
+\(-a_G\partial_nu\)를 계산하도록 바로잡았다. Seed, 표본 수, threshold,
+decision rule은 바꾸지 않았다.
+
 #### N1 · learned decision-consistency falsification
 
 N1은 N0 결과 전에 세부 hyperparameter나 fresh seed를 열지 않는다. Primary

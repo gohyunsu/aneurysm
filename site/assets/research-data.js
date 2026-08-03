@@ -154,6 +154,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.03",
       category: "experiment",
+      title: "N0 tensor and flux contract corrected before any GPU execution",
+      copy: "첫 scheduler/GPU 제출 전에 tensor runtime이 드러낸 boundary-law 오류를 교정하고, 선언된 a∈[0.7,1.3], λ∈[8,40] envelope를 실제 mapping과 일치시켰다. 네 번째 functional은 이제 단순 gradient가 아니라 물리적 outward diffusive flux −a∂ₙu다. Seed·sample count·threshold·decision rule은 바꾸지 않았다.",
+      files: ["configs/nonlinear_pde_n0.json", "src/aurora/nonlinear_pde.py", "tests/test_nonlinear_pde.py", "docs/experiment-protocol.md"]
+    },
+    {
+      date: "2026.08.03",
+      category: "experiment",
       title: "N0 freezes the nonlinear problem before any learned comparison",
       copy: "33/65 nested grid에서 variable-diffusivity semilinear PDE, 8-component edge BC, context-conditioned 2-GMM을 고정했다. 세 seed의 residual·discretization·nonlinear departure·all-component response·effective rank·functional diversity·analytic conditioning을 모두 통과해야 N1을 등록한다. Active acquisition 자체는 선행연구이며 N0는 method evidence가 아니다.",
       files: ["configs/nonlinear_pde_n0.json", "src/aurora/nonlinear_pde.py", "cluster/ssu_a6gpu_nonlinear_pde_n0.pbs", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
