@@ -1,0 +1,84 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n0r.v1",
+  "experiment_id": "nonlinear_multicomponent_n0r_context_stratified_reentry_v1",
+  "status": "preregistered_before_n0a_result_and_fresh_gpu_run",
+  "source_gate": "N0",
+  "failed_n0_result": "../results/nonlinear_pde_n0_20260803.json",
+  "failed_n0_result_sha256": "ca442819026757a56ec1e62febd9cbcae9a4df435ed88cf4b9f78b76fc1dfff8",
+  "source_n0_config": "nonlinear_pde_n0.json",
+  "source_n0_config_sha256": "cb5d6b0891083bc9460d5557d5c04b708c25dffa09e90e0b951af0dc3dcfcaaf",
+  "preregistered_n0a_config": "nonlinear_pde_n0_attribution.json",
+  "preregistered_n0a_config_sha256": "e9151b35b1a0ea1ecfeb8b8d2bc00eb563caf98026a3f4a7eaf07275b2b690f4",
+  "n0a_result_may_change_this_contract": false,
+  "may_relabel_failed_n0": false,
+  "may_establish_method_novelty": false,
+  "may_authorize_irregular_3d_headline": false,
+  "seeds": [62080321, 62080322, 62080323],
+  "pde_contract": {
+    "source": "source_n0_config",
+    "unchanged_fields": [
+      "equation",
+      "grid_points",
+      "reference_grid_points",
+      "context_dim",
+      "boundary_components",
+      "boundary_modes_per_edge",
+      "boundary_basis",
+      "dtype",
+      "maximum_iterations",
+      "reference_maximum_iterations",
+      "convergence_tolerance",
+      "residual_check_interval",
+      "relaxation",
+      "nonlinearity_range",
+      "diffusivity_range"
+    ]
+  },
+  "boundary_law_contract": {
+    "source": "source_n0_config",
+    "unchanged": true
+  },
+  "sampling": {
+    "contexts_per_seed": 24,
+    "conditions_per_context": 12,
+    "reference_cases_per_seed": 24,
+    "reference_selector": "context_stratified_case_indices_v1",
+    "reference_coverage": "exactly_one_case_from_each_of_24_contexts",
+    "paired_base_cases_per_seed": 48,
+    "paired_selector": "context_stratified_case_indices_v1",
+    "paired_coverage": "exactly_two_cases_from_each_of_24_contexts",
+    "paired_component_perturbation": 0.15,
+    "full_case_solver_coverage": "all_24_contexts_times_12_conditions"
+  },
+  "functionals": [
+    "domain_mean",
+    "central_hotspot",
+    "smooth_maximum",
+    "right_boundary_flux"
+  ],
+  "conditioning_check": {
+    "initial_observed_components": [0, 2],
+    "additional_components": [5, 7],
+    "routes": ["direct_union", "sequential_5_then_7"],
+    "comparison": "mixture_mean_and_covariance_max_absolute_residual"
+  },
+  "success_thresholds": {
+    "maximum_solver_normalized_residual": 0.0005,
+    "maximum_coarse_reference_relative_l2": 0.04,
+    "minimum_median_nonlinear_departure": 0.01,
+    "minimum_worst_component_response_median": 0.01,
+    "minimum_response_effective_rank": 3.0,
+    "minimum_functional_winner_components": 3,
+    "maximum_dominant_functional_winner_share": 0.75,
+    "maximum_analytic_conditioning_route_residual": 0.00002
+  },
+  "decision_rule": {
+    "all_checks_required": true,
+    "worst_seed_decides": true,
+    "pass_authorizes_n1_model_and_strong_baseline_registration": true,
+    "pass_does_not_establish_novelty_or_baseline_superiority": true,
+    "failure_keeps_n1_blocked": true,
+    "irregular_3d_remains_deferred_until_n1_positive": true
+  },
+  "interpretation": "N0r is an independent prospective re-entry, not a relabeling of N0. It keeps the PDE, boundary law, functionals, solver, scientific thresholds, and worst-seed rule unchanged; it replaces the context-major contiguous prefix with explicit context-stratified reference and paired selectors and uses wholly fresh seeds. Its exact contract is frozen before any N0a metric is observed."
+}
