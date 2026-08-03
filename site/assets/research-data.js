@@ -104,8 +104,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G3",
       title: "Is one-shot actually efficient?",
-      copy: "Fixed Fourier는 폐기했다. Equal-budget DCT-II/train-only POD의 D0b와 learned compute-matched 비교를 통과할 때만 temporal branch를 선택한다.",
-      state: "Fixed Fourier rejected · D0b pending",
+      copy: "D0b에서 train-only POD 17/25만 representation-eligible다. 같은 benchmark의 learned 비교는 exploratory이며 fresh transient confirmation이 필요하다.",
+      state: "POD eligible · learned and fresh-data tests pending",
       blocking: false
     },
     {
@@ -130,7 +130,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "BenchAnXplore",
       role: "105 semi-idealized transient reproduction 및 GNN baseline",
-      provenance: "105 × 80 audited · fixed Fourier failed · D0b implemented"
+      provenance: "105 × 80 audited · DCT rejected · train-only POD eligible"
     },
     {
       name: "CMHA",
@@ -144,6 +144,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "D0b retains train-only POD but not learned superiority",
+      copy: "105-case D0b에서 POD-17은 full L2 0.00141, bulge L2 0.00880, peak error 0.000764로 모든 frozen 기준을 충족했고 POD-25도 통과했다. DCT-II 17/25는 탈락했다. 다만 전체 benchmark가 architecture discovery에 쓰였으므로 같은 데이터의 learned 비교는 exploratory이며 G3 확인에는 fresh transient cases가 필요하다.",
+      files: ["results/benchanxplore_d0b_20260803.json", "configs/aurora_v1.json", "docs/experiment-protocol.md", "docs/model-spec.md"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

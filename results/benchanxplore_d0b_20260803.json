@@ -1,0 +1,151 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "benchanxplore_d0b_20260803",
+  "experiment_id": "benchanxplore_d0b_equal_budget_v1",
+  "evidence_status": "post_result_exploratory_representation_diagnostic",
+  "source_commit": "1dfc8567e441f30f338892ef20998a176adeeab9",
+  "source_metrics_sha256": "1d3171238cd364c5a61582c17bbcf09b42e0d6c72ce2082b34fef119780b72b4",
+  "config_sha256": "6eb0a5c3e17197e94c304c81ce66704ea142611f2c9bab49ca72497aebf3bca4",
+  "scheduler": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "walltime": "00:03:49"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8",
+    "numpy": "2.1.2",
+    "h5py": "3.12.1"
+  },
+  "dataset": {
+    "name": "BenchAnXplore",
+    "cases": 105,
+    "timesteps": 80,
+    "archive_sha256": "2116bf9e4feb4cd937b3a47a307821359a1010bcf6cc75d94fea70bcc639e579"
+  },
+  "geometry_split": {
+    "folds": 5,
+    "fold_case_counts": [
+      21,
+      21,
+      21,
+      21,
+      21
+    ],
+    "pod_fit_scope": "training_geometries_only",
+    "pod_centering": "none_rank_budget_includes_mean_component",
+    "bootstrap_replicates": 2000
+  },
+  "frozen_d0_reference": {
+    "fixed_fourier_k8_full_relative_l2": 0.016169418385695845,
+    "fixed_fourier_k8_bulge_relative_l2": 0.0615716341173365,
+    "fixed_fourier_k12_bulge_relative_l2": 0.029337992164350693,
+    "relabeled": false
+  },
+  "candidate_summary": {
+    "dct_ii_17": {
+      "full_relative_l2_mean_ci95": [
+        0.016441410238898935,
+        0.016135423422258877,
+        0.016862853037503858
+      ],
+      "full_energy_retained_mean": 0.9997260088012332,
+      "full_cycle_mean_speed_relative_mae_mean": 0.00003643294763345953,
+      "full_cycle_peak_speed_relative_mae_mean_ci95": [
+        0.02587554667677198,
+        0.02559812105349487,
+        0.02619113185442984
+      ],
+      "bulge_relative_l2_mean_ci95": [
+        0.06486433123548825,
+        0.06248217281486307,
+        0.06732240517845467
+      ],
+      "meets_frozen_d0_thresholds": false,
+      "failed_checks": [
+        "full_relative_l2",
+        "full_cycle_peak_speed",
+        "bulge_relative_l2"
+      ]
+    },
+    "dct_ii_25": {
+      "full_relative_l2_mean_ci95": [
+        0.006438166240141505,
+        0.0062076212499024615,
+        0.006721212804716613
+      ],
+      "full_energy_retained_mean": 0.999956578867776,
+      "full_cycle_mean_speed_relative_mae_mean": 0.000009795535812545928,
+      "full_cycle_peak_speed_relative_mae_mean_ci95": [
+        0.00813484609659229,
+        0.007981798182951198,
+        0.008302614909397172
+      ],
+      "bulge_relative_l2_mean_ci95": [
+        0.030842277895481815,
+        0.0292975038877644,
+        0.0326653375365727
+      ],
+      "meets_frozen_d0_thresholds": false,
+      "failed_checks": [
+        "bulge_relative_l2"
+      ]
+    },
+    "train_only_pod_17": {
+      "full_relative_l2_mean_ci95": [
+        0.0014077806961722672,
+        0.0012270047531568534,
+        0.0016616269605583508
+      ],
+      "full_energy_retained_mean": 0.9999966876847404,
+      "full_cycle_mean_speed_relative_mae_mean": 0.000004175217913186879,
+      "full_cycle_peak_speed_relative_mae_mean_ci95": [
+        0.0007636023932025723,
+        0.0007024027137681731,
+        0.0008318881035527391
+      ],
+      "bulge_relative_l2_mean_ci95": [
+        0.008801685856832634,
+        0.007912985066151512,
+        0.010011742338039248
+      ],
+      "meets_frozen_d0_thresholds": true,
+      "failed_checks": []
+    },
+    "train_only_pod_25": {
+      "full_relative_l2_mean_ci95": [
+        0.0005982575727449287,
+        0.0004969895656991173,
+        0.0007294440941075748
+      ],
+      "full_energy_retained_mean": 0.9999992398988633,
+      "full_cycle_mean_speed_relative_mae_mean": 0.0000016996937704659232,
+      "full_cycle_peak_speed_relative_mae_mean_ci95": [
+        0.0002108030843720328,
+        0.00018534997815593322,
+        0.00023907599563937677
+      ],
+      "bulge_relative_l2_mean_ci95": [
+        0.003706167083943174,
+        0.0032377949566857536,
+        0.004389722711861222
+      ],
+      "meets_frozen_d0_thresholds": true,
+      "failed_checks": []
+    }
+  },
+  "scientific_verdict": "train_only_pod_is_representation_eligible_dct_is_rejected",
+  "decision": {
+    "eligible_for_exploratory_learned_compute_matched_test": [
+      "train_only_pod_17",
+      "train_only_pod_25"
+    ],
+    "selected_temporal_architecture": null,
+    "fixed_fourier_d0_relabeled": false,
+    "same_benchmark_confirmatory_limit": "Because all 105 cases contributed held-out D0b evidence used to retain POD, a learned comparison on the same benchmark is architecture-discovery evidence, not a fresh confirmatory G3 test.",
+    "confirmatory_requirement": "Confirm any learned fidelity-latency advantage on fresh transient cases or an independent pulsatile dataset not used for D0b architecture selection."
+  },
+  "interpretation": "Train-only temporal POD can preserve the released cycles at equal coefficient budgets, including the localized bulge region. This establishes representation eligibility only; it does not establish learned one-shot superiority or novelty."
+}

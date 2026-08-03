@@ -55,6 +55,21 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "fixed Fourier"):
             validate_protocol(candidate)
 
+    def test_dct_cannot_return_after_d0b(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["model"]["temporal_representation"]["candidate_bases"].append(
+            "dct_ii"
+        )
+        with self.assertRaisesRegex(ProtocolError, "train-only POD"):
+            validate_protocol(candidate)
+
+    def test_same_benchmark_cannot_be_confirmatory_g3(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        g3 = next(item for item in candidate["gates"] if item["id"] == "G3")
+        g3["same_benchmark_learned_comparison"] = "confirmatory"
+        with self.assertRaisesRegex(ProtocolError, "exploratory"):
+            validate_protocol(candidate)
+
     def test_post_result_diagnostic_cannot_reopen_g1(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["post_result_diagnostics"][0][

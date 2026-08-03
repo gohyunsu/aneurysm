@@ -197,6 +197,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "status",
             "fixed_fourier",
             "candidate_bases",
+            "rejected_bases",
             "coefficient_budgets",
             "selection_metric",
             "leakage_rule",
@@ -205,8 +206,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if temporal["fixed_fourier"] != "rejected_by_frozen_d0":
         raise ProtocolError("Frozen D0 requires fixed Fourier to remain rejected.")
-    if set(temporal["candidate_bases"]) != {"dct_ii", "train_only_pod"}:
-        raise ProtocolError("D0b candidates must remain DCT-II and train-only POD.")
+    if temporal["candidate_bases"] != ["train_only_pod"]:
+        raise ProtocolError("Only train-only POD remains representation-eligible.")
+    if temporal["rejected_bases"] != ["dct_ii"]:
+        raise ProtocolError("DCT-II must remain rejected after D0b.")
     if temporal["coefficient_budgets"] != [17, 25]:
         raise ProtocolError("D0b must compare the frozen equal budgets 17 and 25.")
     if temporal["leakage_rule"] != "pod_fit_on_training_geometries_only":
@@ -243,6 +246,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("G4 must require evidence in at least three domains.")
     if set(g4.get("required_domains", [])) != required_domains:
         raise ProtocolError("G4 must retain controlled, nonlinear, and irregular-3D tests.")
+    g3 = next(item for item in gates if item["id"] == "G3")
+    if g3.get("same_benchmark_learned_comparison") != (
+        "exploratory_after_architecture_discovery"
+    ):
+        raise ProtocolError("Same-benchmark learned temporal comparison is exploratory.")
+    if g3.get("confirmatory_requires_fresh_transient_cases") is not True:
+        raise ProtocolError("Confirmatory G3 requires fresh transient cases.")
     checks.append("coherence and cross-domain blocking gates")
 
     diagnostics = protocol["post_result_diagnostics"]

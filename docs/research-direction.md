@@ -122,6 +122,18 @@ full·energy·cycle mean/peak·bulge 기준을 모두 통과한 표현만 learne
 compute-matched 단계로 보낸다. 통과 후보가 없으면 one-shot temporal
 branch 자체를 버린다.
 
+D0b 결과, DCT-II rank 25는 full L2 0.00644와 peak error 0.00813을
+회복했지만 bulge L2 0.03084로 탈락했다. Train-only POD rank 17은 full
+L2 0.00141, bulge L2 0.00880, peak error 0.000764였고 rank 25도 모든
+기준을 통과했다. 따라서 POD 17/25만 learned comparison에 eligible하다.
+
+그러나 D0b의 fold-wise held-out metric에 105 case 전체가 이미 사용됐다.
+이 결과로 architecture를 고른 뒤 같은 benchmark에서 얻는 learned
+우월성은 architecture-discovery evidence이지 fresh confirmatory test가
+아니다. BenchAnXplore 비교는 exploratory로 표시하고, G3 confirmatory
+claim은 D0b에 쓰지 않은 transient case 또는 독립 pulsatile dataset에서
+반복한다.
+
 ## 6. AAAI에 필요한 일반성
 
 의료 case 하나에서 성능이 좋아도 general AI method로 충분하지 않다.
@@ -186,6 +198,7 @@ Field만 좋아지거나 pair response만 좋아지면 핵심 주장을 축소�
 - D0b의 equal-budget nonperiodic/train-only oracle representation 통과
 - compute-matched autoregressive baseline 대비 cycle field/peak error와
   latency의 Pareto improvement
+- D0b architecture selection에 쓰이지 않은 fresh transient test에서 재현
 
 아니면 one-shot branch를 버린다.
 

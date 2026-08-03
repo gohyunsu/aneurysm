@@ -267,7 +267,7 @@
             <span><b>Volume</b>u, p · global physics</span>
             <span><b>Wall</b>WSS · local hotspot</span>
           </div>
-          <p>Shared full-BC solver; temporal branch unselected after failed D0</p>
+          <p>Shared full-BC solver; POD eligible, learned temporal branch unselected</p>
           <a class="arch-learn" href="learn.html#temporal">Temporal gate 설명</a>
         </article>
         <div class="arch-connector"><span>derive</span></div>
@@ -354,11 +354,14 @@
             localized bulge gate를 만족하지 못해 폐기한다. G1b에서 raw
             projective distance는 iid sampling floor로 설명됐지만 K=2048
             missing-mask mean error 8.53%, density-only 7.54%가 남았다.
-            따라서 G1은 재개방하지 않고 D0b만 별도 진단한다.
+            따라서 G1은 재개방하지 않는다. D0b의 train-only POD는 표현
+            기준만 통과했으며 learned 비교와 fresh transient confirmation은
+            아직 남아 있다.
           </p>
           <a href="../results/controlled_pde_g1_attempt2_20260803.json">Exact G1 aggregate ↗</a>
           <a href="../results/controlled_pde_g1b_20260803.json">G1b attribution aggregate ↗</a>
           <a href="../results/benchanxplore_d0_attempt2_20260803.json">D0 aggregate ↗</a>
+          <a href="../results/benchanxplore_d0b_20260803.json">D0b POD aggregate ↗</a>
         </div>
       </article>
 

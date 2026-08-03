@@ -30,3 +30,14 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   density/operator/MC attribution만 수행한 post-result diagnostic
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
+
+현재 temporal representation 결과:
+
+- `benchanxplore_d0_attempt2_20260803.json`: fixed Fourier K=8 실패,
+  K=12도 bulge 기준 실패
+- `benchanxplore_d0b_20260803.json`: DCT-II 탈락, train-only POD
+  rank 17/25 representation screen 통과
+
+D0b 통과는 learned one-shot 성능이나 novelty를 뜻하지 않는다. 같은
+105-case benchmark의 후속 learned 비교는 exploratory이며 fresh transient
+confirmation이 필요하다.

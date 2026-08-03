@@ -254,8 +254,14 @@ temporal representation은 contribution에서 완전히 제외한다.
 temporal second moment, fold별 train-only eigendecomposition, DCT/POD
 projection을 포함한다. Mean vector를 rank 밖의 무료 parameter로 추가하지
 않는다. Pinned container에서 orthonormality, held-out covariance exclusion,
-synthetic two-pass runtime을 통과했지만 실제 105-case 결과 전까지
-representation은 선택되지 않은 상태다.
+synthetic two-pass runtime을 통과했다.
+
+실제 105-case D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는
+모든 frozen 기준을 통과했다. 따라서 learned candidate는 POD뿐이다.
+Rank 17/25 선택은 learned experiment의 inner validation에서만 수행하고,
+같은 BenchAnXplore에서의 결과는 exploratory로 제한한다. Confirmatory
+효율 주장은 D0b architecture selection에 사용되지 않은 fresh transient
+test에서 재현해야 한다.
 
 ## 10. 학습 목적
 

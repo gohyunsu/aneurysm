@@ -115,9 +115,12 @@ distance는 iid floor로 설명됐지만, K=2048 missing-mask mean error가
 유지합니다. 공개 aggregate는
 [`results/controlled_pde_g1b_20260803.json`](results/controlled_pde_g1b_20260803.json)입니다.
 
-D0b의 DCT-II·train-only POD 구현은 pinned-container 수학·leakage·two-pass
-runtime smoke를 통과했습니다. 실제 105-case GPU 결과 전까지 temporal
-representation은 선택되지 않은 상태입니다.
+D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
+frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
+bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에
+쓰였으므로 BenchAnXplore learned 비교는 exploratory이며, confirmatory
+효율 주장은 fresh transient test가 필요합니다. 공개 aggregate는
+[`results/benchanxplore_d0b_20260803.json`](results/benchanxplore_d0b_20260803.json)입니다.
 
 ## 해석의 경계
 

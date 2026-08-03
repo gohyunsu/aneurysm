@@ -26,7 +26,9 @@
   density-only 0.0754가 지배적이므로 G1은 닫힌 상태다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
-  또는 train-only basis는 D0b를 새로 통과할 때만 복원한다.
+  D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
+  threshold를 통과했다. POD는 learned compute-matched 후보일 뿐 아직
+  선택된 temporal architecture나 novelty가 아니다.
 - 최종 주장은 “미래 파열 위험을 예측한다”가 아니라 “불완전한 물리조건
   아래에서도 일관되고 보정된 PDE solution distribution을 학습한다”이다.
 
@@ -97,8 +99,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
   실패했으므로 현재 닫혀 있다. D0b는 Fourier 8/12의 실수 계수 수와 같은
   17/25 budget에서 DCT-II와 train-geometry-only POD를 geometry-disjoint로
-  비교한다. 이 새 representation gate를 통과하기 전에는 temporal
-  one-shot decoder를 선택하지 않는다.
+  비교했다. POD 두 rank만 representation-eligible이다. 다만 105 case
+  전체가 architecture discovery에 쓰였으므로 같은 BenchAnXplore의 learned
+  비교는 exploratory다. Confirmatory G3는 D0b에 쓰지 않은 fresh transient
+  case 또는 독립 pulsatile dataset을 요구한다.
 - **G4 · Cross-domain generality**: controlled PDE, nonlinear PDE, irregular
   3D aneurysm 중 적어도 세 domain에서 같은 method가 유효해야 한다.
 
@@ -242,6 +246,8 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   그 artifact 안에만 기록한다. 결과를 근거로 frozen G1 threshold를
   완화하지 않는다.
 - D0b 구현은 DCT-II/POD orthonormality, held-out covariance exclusion,
-  synthetic two-pass runtime을 pinned container에서 통과했다. 실제
-  BenchAnXplore run 전까지 상태는 `implemented`, 결과 후에만
-  `completed`로 바꾼다.
+  synthetic two-pass runtime을 pinned container에서 통과했다. Exact public
+  commit `1dfc856`의 105-case run은 exit 0, walltime 3분 49초였다.
+  POD-17 full L2 0.00141, bulge L2 0.00880, peak error 0.000764였고
+  POD-25도 통과했다. DCT-25는 bulge L2 0.03084로 탈락했다. Public
+  aggregate는 `results/benchanxplore_d0b_20260803.json`이다.

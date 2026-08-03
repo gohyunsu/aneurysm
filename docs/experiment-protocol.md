@@ -67,6 +67,21 @@ Frozen D0와 같은 full L2, retained energy, cycle mean/peak, bulge L2
 기준을 사용한다. D0b는 D0 실패 뒤 설계한 exploratory representation
 diagnostic이며 D0를 대체하지 않는다.
 
+2026-08-03 D0b 결과:
+
+| 후보 | full rel. L2 | peak rel. MAE | bulge rel. L2 | frozen 기준 |
+|---|---:|---:|---:|---|
+| DCT-II 17 | 0.01644 | 0.02588 | 0.06486 | 실패 |
+| DCT-II 25 | 0.00644 | 0.00813 | 0.03084 | bulge 실패 |
+| train-only POD 17 | 0.00141 | 0.000764 | 0.00880 | 모두 충족 |
+| train-only POD 25 | 0.000598 | 0.000211 | 0.00371 | 모두 충족 |
+
+POD 17/25는 learned comparison에 eligible하지만 선택된 architecture는
+아니다. D0b가 105 case 전체의 held-out reconstruction을 architecture
+discovery에 사용했으므로 같은 benchmark의 learned comparison은
+exploratory로 보고한다. Confirmatory G3에는 D0b에 쓰지 않은 fresh
+transient case 또는 독립 pulsatile dataset이 필요하다.
+
 ### G1 · exact condition–marginal coherence
 
 정답 conditional distribution을 계산 가능한 controlled PDE에서 평가한다.
@@ -167,6 +182,8 @@ D0 통과 때만 실행한다.
 - same preprocessing and query count
 - train GPU-hour와 parameter budget 보고
 - autoregressive In-PI-MGN/MeshGraphNet, direct-time operator와 비교
+- BenchAnXplore learned 비교는 architecture discovery 후 exploratory
+- fresh transient case/독립 pulsatile dataset에서 selected candidate 재검증
 - field/spectral/peak error, latency, peak memory의 Pareto frontier 보고
 
 One-shot이 단순히 빠르고 부정확하거나, 정확하지만 compute가 더 크면 핵심

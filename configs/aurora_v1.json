@@ -47,7 +47,7 @@
       "benchanxplore_cases": 105,
       "benchanxplore_timesteps": 80,
       "benchanxplore_d0_status": "frozen_k8_gate_failed",
-      "benchanxplore_d0b_status": "implemented_container_smoke_passed_gpu_pending",
+      "benchanxplore_d0b_status": "completed_train_only_pod_representation_eligible",
       "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
       "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains"
     },
@@ -131,11 +131,13 @@
       "missing"
     ],
     "temporal_representation": {
-      "status": "exploratory_nonperiodic_gate_pending",
+      "status": "pod_representation_eligible_learned_test_pending",
       "fixed_fourier": "rejected_by_frozen_d0",
       "candidate_bases": [
-        "dct_ii",
         "train_only_pod"
+      ],
+      "rejected_bases": [
+        "dct_ii"
       ],
       "coefficient_budgets": [
         17,
@@ -189,7 +191,9 @@
       "name": "transient_efficiency",
       "blocking": false,
       "requires_oracle_representation_gate": true,
-      "requires_compute_matched_baseline": true
+      "requires_compute_matched_baseline": true,
+      "same_benchmark_learned_comparison": "exploratory_after_architecture_discovery",
+      "confirmatory_requires_fresh_transient_cases": true
     },
     {
       "id": "G4",
@@ -221,7 +225,7 @@
     },
     {
       "id": "D0b",
-      "status": "implemented_container_smoke_passed_gpu_pending",
+      "status": "completed_train_only_pod_representation_eligible",
       "source_gate": "G3",
       "may_reopen_or_relabel_source_gate": false,
       "questions": [

@@ -488,18 +488,18 @@
           </div>
 
           <div class="interpretation-list">
-            <article><span>DCT</span><div><h3>유한 구간의 비주기 후보</h3><p>DCT-II는 주기 끝점이 정확히 이어진다고 강제하지 않습니다. 17·25개 coefficient에서 비교합니다.</p></div></article>
-            <article><span>POD</span><div><h3>데이터가 배운 시간 basis</h3><p>Temporal POD는 training geometry의 covariance에서만 basis를 구합니다. Test case는 basis 학습에 절대 쓰지 않습니다.</p></div></article>
-            <article><span>Gate</span><div><h3>같은 budget, 같은 기준</h3><p>Full L2뿐 아니라 retained energy, cycle mean·peak, bulge L2를 모두 통과해야 learned 비교로 갑니다.</p></div></article>
+            <article><span>DCT</span><div><h3>국소 bulge에서 다시 탈락</h3><p>Rank 25는 full L2 0.00644와 peak 0.00813을 회복했지만 bulge L2가 0.03084여서 기준 0.02를 넘었습니다.</p></div></article>
+            <article><span>POD</span><div><h3>Train-only basis는 표현 기준 통과</h3><p>Rank 17은 full L2 0.00141, bulge L2 0.00880, peak error 0.000764였습니다. Rank 25도 통과했습니다.</p></div></article>
+            <article><span>Next</span><div><h3>아직 모델 성능은 아닙니다.</h3><p>POD coefficient를 실제 operator가 예측할 수 있는지 rollout·direct-time과 compute-matched로 비교해야 합니다.</p></div></article>
           </div>
 
           <aside class="honesty-note">
-            <b>D0b도 novelty가 아니라 representation 진단입니다.</b>
+            <b>POD 통과도 novelty나 confirmatory learned result가 아닙니다.</b>
             <p>
-              DCT-II 또는 train-only POD가 oracle threshold를 통과하고,
-              learned compute-matched 비교에서 rollout보다
-              fidelity–latency Pareto frontier가 좋을 때만 one-shot branch를
-              복원합니다. 통과 후보가 없으면 temporal one-shot을 버립니다.
+              D0b가 105 case 전체를 architecture discovery에 사용했습니다.
+              따라서 같은 BenchAnXplore의 learned 비교는 exploratory입니다.
+              G3를 확인하려면 D0b에 사용되지 않은 fresh transient cases 또는
+              독립 pulsatile dataset에서 Pareto 이득을 반복해야 합니다.
             </p>
           </aside>
           <button class="chapter-next" type="button" data-next="functionals">다음 · Wall field가 중요한 이유 <span>→</span></button>
@@ -597,6 +597,7 @@
               제거했습니다. G1b에서 raw projective error는 iid sampling
               floor로 설명됐지만 K=2048 missing-mask error 8.53%와
               density-only error 7.54%가 남아 G1은 여전히 unsupported입니다.
+              D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>
 
@@ -692,7 +693,7 @@
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
             <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>ID partial/missing calibration과, 값을 제공한 unseen-BC의 same-geometry ΔH를 strong baseline과 비교합니다. 숨은 BC 법칙 자체가 바뀌면 detection만 평가합니다.</p></div><b>primary evidence</b></article>
-            <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>Fixed Fourier는 이미 탈락했습니다. Equal-budget DCT/POD의 D0b와 learned compute-matched 비교를 모두 통과할 때만 새 temporal branch를 선택합니다.</p></div><b>현재 닫힘</b></article>
+            <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
             <article><span>G4</span><div><h3>의료 전용 trick은 아닌가?</h3><p>Controlled PDE, nonlinear PDE, irregular 3D에서 같은 coherence·response method를 검증합니다.</p></div><b>AAAI generality</b></article>
           </div>
 
@@ -798,7 +799,7 @@
           </div>
           <div class="compute-status">
             <span class="status-dot complete"></span>
-            <div><p class="eyebrow">D0B · IMPLEMENTED</p><h3>DCT-II + train-only POD · GPU run pending</h3><p>17/25 coefficient, 5-fold geometry split, test covariance exclusion, synthetic two-pass runtime을 검증했습니다. 실제 105-case 결과 전에는 temporal branch가 선택되지 않습니다.</p></div>
+            <div><p class="eyebrow">D0B · COMPLETE</p><h3>Train-only POD eligible · DCT-II rejected</h3><p>POD-17은 full L2 0.00141, bulge L2 0.00880로 모든 표현 기준을 통과했습니다. Learned superiority는 아직 평가되지 않았고 fresh confirmation이 필요합니다.</p><a href="../results/benchanxplore_d0b_20260803.json">공개 aggregate 열기 ↗</a></div>
           </div>
 
           <div class="repro-chain">

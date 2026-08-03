@@ -39,6 +39,16 @@
   구현했다. Pinned container에서 DCT orthonormality, span reconstruction,
   held-out covariance exclusion, 4-case synthetic runtime의 9개 검사를
   통과했다.
+- Exact commit `1dfc856`의 105-case D0b가 A6000에서 exit 0, walltime
+  3분 49초로 완료됐다. DCT-II rank 17/25는 탈락했고 train-only POD
+  rank 17/25는 모든 frozen representation threshold를 충족했다.
+- POD-17은 full L2 0.00141, bulge L2 0.00880, peak error 0.000764였다.
+  POD-25도 통과했지만 아직 selected architecture가 아니며 두 rank를
+  learned inner validation 후보로만 둔다.
+- D0b의 105 case 전체가 architecture discovery에 쓰였으므로 같은
+  BenchAnXplore에서의 learned comparison을 exploratory로 제한했다.
+  Confirmatory G3는 fresh transient case 또는 독립 pulsatile dataset에서
+  재현하도록 protocol validator에 고정했다.
 
 ### Site
 
@@ -46,6 +56,9 @@
   수치, global-energy 함정, DCT/POD 후보, leakage 방지 규칙으로 교체했다.
 - G1b aggregate 결과와 “projective floor 설명 ≠ learned distribution
   성공” 경계를 변경 이력과 실행 상태 창에 추가했다.
+- D0b의 DCT/POD별 실제 수치와 “representation eligibility ≠ learned
+  superiority” 및 same-benchmark selection leakage 경계를 사이트에
+  반영했다.
 
 ## 2026-08-03 · Novelty reset: coherent partial-condition operators
 
