@@ -20,7 +20,7 @@ class ProtocolTests(unittest.TestCase):
 
     def test_prospective_endpoint_is_rejected(self) -> None:
         candidate = copy.deepcopy(self.protocol)
-        candidate["task"]["endpoint"] = "five_year_rupture_risk"
+        candidate["task"]["application_endpoint"] = "five_year_rupture_risk"
         with self.assertRaisesRegex(ProtocolError, "cross-sectional"):
             validate_protocol(candidate)
 
@@ -33,8 +33,14 @@ class ProtocolTests(unittest.TestCase):
 
     def test_patient_bootstrap_is_required(self) -> None:
         candidate = copy.deepcopy(self.protocol)
-        candidate["evaluation"]["bootstrap_unit"] = "aneurysm"
+        candidate["evaluation"]["clinical_bootstrap_unit"] = "aneurysm"
         with self.assertRaisesRegex(ProtocolError, "patient"):
+            validate_protocol(candidate)
+
+    def test_paired_response_cannot_be_disabled(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["loss"]["paired_response"] = 0
+        with self.assertRaisesRegex(ProtocolError, "paired-response"):
             validate_protocol(candidate)
 
     def test_duplicate_dataset_is_rejected(self) -> None:

@@ -100,17 +100,24 @@
 
   const modes = {
     missing: {
-      description: "Population-conditioned BC scenarios를 샘플링합니다.",
-      connector: "sample z<sub>BC</sub>",
-      title: "BC posterior scenarios",
-      copy: "Site·diameter-conditioned empirical prior, 8 samples at evaluation",
+      description: "Joint BC density 전체를 주변화합니다.",
+      connector: "sample B",
+      title: "Coherent BC completions",
+      copy: "Anatomy-conditioned joint density with no observed component",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
+    partial: {
+      description: "관측 component에 analytic conditioning하고 나머지만 샘플링합니다.",
+      connector: "condition on B<sub>M</sub>",
+      title: "Partial-BC conditional mixture",
+      copy: "Observed values update mixture weights, means, and covariance",
+      heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
+    },
     observed: {
-      description: "측정·지정된 waveform과 outlet split에 직접 조건화합니다.",
-      connector: "encode B",
-      title: "Observed BC tokens",
-      copy: "Waveform Fourier/PCA coefficients, flow split, rheology context",
+      description: "전체 waveform과 outlet split에 직접 조건화합니다.",
+      connector: "condition on full B",
+      title: "Fully specified BC",
+      copy: "The same conditional solution operator receives the observed BC",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

@@ -1,0 +1,30 @@
+{
+  "experiment_id": "controlled_pde_g1_v1",
+  "status": "preregistered_before_results",
+  "seed": 20260803,
+  "seeds": [20260803, 20260804, 20260805, 20260806, 20260807],
+  "grid_points": 64,
+  "train_geometries": 384,
+  "validation_geometries": 96,
+  "test_geometries": 192,
+  "conditions_per_geometry": 6,
+  "train_epochs": 500,
+  "learning_rate": 0.001,
+  "hidden_dim": 128,
+  "bc_samples_eval": 128,
+  "coverage": 0.9,
+  "observation_masks": {
+    "missing": [0, 0],
+    "left_observed": [1, 0],
+    "right_observed": [0, 1],
+    "full": [1, 1]
+  },
+  "primary_masks": ["missing", "left_observed", "right_observed"],
+  "bootstrap_replicates": 2000,
+  "success_thresholds": {
+    "maximum_standardized_mean_error": 0.05,
+    "maximum_coverage_error": 0.03,
+    "maximum_projective_consistency_error": 0.05
+  },
+  "interpretation": "Pipeline sanity for exact conditional distributions; passing is necessary but is not learned-operator novelty evidence."
+}

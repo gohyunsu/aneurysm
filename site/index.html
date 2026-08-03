@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — boundary-condition uncertainty를 반영하는 task-aligned 뇌동맥류 hemodynamics neural operator 연구.">
+  <meta name="description" content="AURORA — partial·missing boundary observation에서 일관된 PDE solution distribution을 학습하는 neural operator 연구.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -46,9 +46,9 @@
         </h1>
         <p class="hero-lede">
           관측되지 않은 boundary condition을 하나의 정답처럼 가정하지 않는다.
-          AURORA는 가능한 hemodynamic field의 <strong>분포</strong>를 만들고,
-          real CFD가 rupture-status 분석에 주는 정보를 얼마나 보존하는지
-          검증한다.
+          AURORA는 full·partial·missing BC에서 가능한 hemodynamic field의
+          <strong>분포</strong>를 만들고, 서로 다른 관측 mask의 예측이 하나의
+          확률법칙으로 일관되는지 검증한다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
@@ -98,9 +98,9 @@
       </div>
 
       <div class="hero-meta">
-        <div><span>Primary endpoint</span><b>Rupture status</b></div>
-        <div><span>Core shift</span><b>Point → Distribution</b></div>
-        <div><span>First gate</span><b>Real-CFD utility</b></div>
+        <div><span>Primary problem</span><b>Partial-condition operators</b></div>
+        <div><span>Core shift</span><b>Independent heads → Coherence</b></div>
+        <div><span>First method gate</span><b>Exact PDE oracle</b></div>
         <div><span>Evidence</span><b>Reviewed 2026.08.03</b></div>
       </div>
     </section>
@@ -129,12 +129,12 @@
         </article>
         <article class="pivot-card adopted">
           <div class="card-index">NEW / ADOPTED</div>
-          <h3>Distributional sufficiency</h3>
-          <p>BC uncertainty를 주변화하고 downstream에 충분한 field를 학습한다.</p>
+          <h3>Coherent condition family</h3>
+          <p>하나의 joint BC model을 조건화해 모든 mask의 field 분포를 만든다.</p>
           <ul>
-            <li>observed / partial / missing BC를 같은 모델로 처리</li>
-            <li>one-shot cycle coefficient로 rollout drift 제거</li>
-            <li>field → functional → decision을 모두 검증</li>
+            <li>full / partial / missing BC가 tower property를 공유</li>
+            <li>동일 geometry의 paired BC response를 직접 감독</li>
+            <li>BC-induced와 model-induced uncertainty를 분리</li>
           </ul>
         </article>
       </div>
@@ -142,9 +142,9 @@
       <div class="claims-strip">
         <p>논문이 답할 세 질문</p>
         <ol>
-          <li><span>01</span> Missing BC를 분포로 다루면 OOD calibration이 좋아지는가?</li>
-          <li><span>02</span> One-shot cycle이 wall functional을 더 잘 보존하는가?</li>
-          <li><span>03</span> Surrogate가 real-CFD의 incremental signal을 유지하는가?</li>
+          <li><span>01</span> 임의의 BC observation mask에서 조건부·주변 분포가 일관되는가?</li>
+          <li><span>02</span> Paired response supervision이 BC 변화의 Δfield를 개선하는가?</li>
+          <li><span>03</span> 두 uncertainty 축이 condition shift와 geometry OOD를 구분하는가?</li>
         </ol>
       </div>
     </section>
@@ -164,15 +164,16 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">THE OPEN GAP</p>
-          <h3>Unknown physiology is not model noise.</h3>
+          <h3>Unknown physiology needs one coherent probability law.</h3>
           <p>
             Inflow waveform과 outlet split은 geometry가 결정하지 않는다.
-            missing BC를 평균값으로 채우면 좁고 그럴듯한 오답을 만들 수 있다.
+            missing BC를 평균값으로 채우거나 mask별 head를 따로 만들면 좁은
+            오답뿐 아니라 서로 모순된 conditional distribution도 만들 수 있다.
           </p>
           <div class="gap-equation" aria-label="경계조건을 주변화한 혈류 분포">
-            <span>p(H | G)</span>
+            <span>p(H | G,B<sub>M</sub>)</span>
             <i>=</i>
-            <span>∫ p(H | G, B)<br>p(B | A) dB</span>
+            <span>∫ p(H | G, B)<br>q(B<sub>¬M</sub> | G,B<sub>M</sub>) dB</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -201,10 +202,10 @@
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
         <p class="eyebrow">03 · MODEL ARCHITECTURE</p>
-        <h2>A distribution over fields.<br><em>A test of sufficiency.</em></h2>
+        <h2>One joint condition model.<br><em>Many coherent views.</em></h2>
         <p>
-          surface geometry에서 전역 유동과 벽면 shear를 함께 복원하고,
-          cardiac cycle 전체를 temporal basis로 한 번에 생성한다.
+          관측된 BC component가 달라도 같은 joint density를 conditioning하고,
+          동일 conditional solution operator로 field distribution을 만든다.
         </p>
       </div>
 
@@ -220,8 +221,9 @@
 
       <div class="mode-switch" role="group" aria-label="Boundary condition 모드">
         <button class="active" type="button" data-mode="missing">Missing BC</button>
+        <button type="button" data-mode="partial">Partial BC</button>
         <button type="button" data-mode="observed">Observed BC</button>
-        <span id="mode-description">Population-conditioned BC scenarios를 샘플링합니다.</span>
+        <span id="mode-description">Joint BC density 전체를 주변화합니다.</span>
       </div>
 
       <div class="architecture-flow">
@@ -248,8 +250,8 @@
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
           <p class="arch-label">CONDITION</p>
-          <h3 id="bc-node-title">BC posterior scenarios</h3>
-          <p id="bc-node-copy">Site·diameter-conditioned empirical prior, 8 samples at evaluation</p>
+          <h3 id="bc-node-title">Coherent BC completions</h3>
+          <p id="bc-node-copy">Anatomy-conditioned joint density, analytically conditioned by mask</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
@@ -260,37 +262,37 @@
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
           <p class="arch-label">DECODE ONCE</p>
-          <h3>Dual-domain cycle operator</h3>
+          <h3>Conditional query operator</h3>
           <div class="dual-branch">
             <span><b>Volume</b>u, p · global physics</span>
             <span><b>Wall</b>WSS · local hotspot</span>
           </div>
-          <p>8 temporal Fourier modes; no autoregressive rollout</p>
+          <p>Shared full-BC solver; Fourier only after D0 gate</p>
           <a class="arch-learn" href="learn.html#temporal">One-shot cycle 설명</a>
         </article>
         <div class="arch-connector"><span>derive</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">VERIFY</p>
-          <h3>Functional sufficiency</h3>
-          <p>TAWSS · OSI · LSA · RRT distribution, oracle ranking, calibration</p>
-          <div class="output-meter"><i></i><span>risk-retention</span><b>predefined gate</b></div>
+          <h3>Coherence & response</h3>
+          <p>Nested-mask tower error · paired ΔH · coverage · uncertainty attribution</p>
+          <div class="output-meter"><i></i><span>projective consistency</span><b>predefined gate</b></div>
           <a class="arch-learn" href="learn.html#functionals">지표와 sufficiency 설명</a>
         </article>
       </div>
 
       <div class="architecture-notes">
         <article>
-          <span>ONE-SHOT TEMPORAL BASIS</span>
-          <p>80개의 next-step을 반복하지 않고 17개 coefficient로 cycle을 복원한다.</p>
+          <span>NESTED MASK COHERENCE</span>
+          <p>더 적게 관측한 분포가 더 많이 관측한 분포의 올바른 주변분포여야 한다.</p>
         </article>
         <article>
-          <span>DUAL-DOMAIN CONSISTENCY</span>
-          <p>volume gradient에서 계산한 shear와 wall decoder의 WSS가 일치해야 한다.</p>
+          <span>PAIRED RESPONSE</span>
+          <p>같은 geometry에서 BC만 바꾼 실제 Δfield와 예측 Δfield를 직접 맞춘다.</p>
         </article>
         <article>
-          <span>HONEST UNCERTAINTY</span>
-          <p>uncertainty는 높은 rupture probability가 아니라 BC/OOD 불확실성이다.</p>
+          <span>TWO UNCERTAINTY AXES</span>
+          <p>BC completion 변동과 model ensemble 변동을 분리해 서로 다른 실패를 추적한다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -313,8 +315,8 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">G1 · EXPLORATORY DIAGNOSTIC · COMPLETE</p>
-          <span>not a confirmatory gate verdict</span>
+          <p class="eyebrow">SECONDARY CLINICAL DIAGNOSTIC · COMPLETE</p>
+          <span>removed from the primary contribution</span>
         </div>
         <div class="g1-result-metrics">
           <div><span>Clinical + morphology</span><b>0.759</b><small>AUPRC</small></div>
@@ -325,9 +327,9 @@
         <div class="g1-result-decision">
           <strong>현재 evidence는 incremental utility를 지지하지 않는다.</strong>
           <p>
-            C3 risk-aligned branch를 conditional secondary로 낮추고 C1 missing-BC
-            operator와 C2 one-shot fidelity를 우선한다. 공식 case map과 second
-            model family 전까지 G1은 unresolved다.
+            이 음성 신호 때문에 rupture-status alignment를 primary에서
+            제외했다. Main method는 exact coherence, paired response,
+            uncertainty attribution을 먼저 입증한다.
           </p>
           <a href="learn.html#experiments">결과와 해석을 차근차근 읽기 →</a>
           <a href="../results/cmha_g1_exploratory_20260803.json">Aggregate JSON ↗</a>
@@ -338,24 +340,24 @@
         <article class="experiment-card large">
           <div>
             <p class="eyebrow">PRIMARY COMPARISON</p>
-            <h3>Field → Function → Decision</h3>
-            <p>세 층을 통과하지 못한 성능 개선은 headline contribution이 아니다.</p>
+            <h3>Coherence → Response → Attribution</h3>
+            <p>세 층을 함께 통과하지 못한 복잡한 architecture는 headline contribution이 아니다.</p>
           </div>
           <div class="metric-layers">
-            <span><i>01</i><b>Field</b>velocity · pressure · WSS</span>
-            <span><i>02</i><b>Function</b>TAWSS · OSI · hotspot</span>
-            <span><i>03</i><b>Decision</b>AUPRC · Brier · calibration</span>
+            <span><i>01</i><b>Coherence</b>oracle moments · coverage · tower error</span>
+            <span><i>02</i><b>Response</b>same-geometry paired ΔH</span>
+            <span><i>03</i><b>Attribution</b>BC shift · geometry OOD</span>
           </div>
         </article>
         <article class="experiment-card">
           <p class="eyebrow">LEAKAGE CONTROL</p>
-          <h3>Split the cause, not the rows.</h3>
-          <p>동일 geometry의 BC·timestep·cut은 한 fold에만 둔다. clinical split과 bootstrap은 patient 단위다.</p>
+          <h3>Split geometry and condition support.</h3>
+          <p>동일 geometry의 BC·timestep·cut은 한 fold에만 둔다. BC support shift는 geometry split과 별도로 고정한다.</p>
         </article>
         <article class="experiment-card">
           <p class="eyebrow">MANDATORY BASELINE</p>
-          <h3>Direct geometry → status</h3>
-          <p>이 baseline을 이기지 못하면 surrogate hemodynamics가 독립 정보를 준다는 주장을 철회한다.</p>
+          <h3>Generic probabilistic operator</h3>
+          <p>같은 backbone·data·compute에서 joint coherence와 paired loss가 실제 이득을 내지 못하면 method novelty를 철회한다.</p>
         </article>
       </div>
 
@@ -387,16 +389,16 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>Boundary-Condition Marginalized Neural Operators for Task-Aligned Intracranial Aneurysm Hemodynamics</p>
+        <p>Coherent Neural Operators under Partial and Missing Boundary Conditions</p>
       </div>
       <div class="contribution-grid">
-        <article><span>C1</span><h3>Distribution, not imputation</h3><p>Missing BC를 함수공간 분포로 모델링하고 observed/missing mode를 같은 operator에서 평가한다.</p></article>
-        <article><span>C2</span><h3>Cycle, not rollout</h3><p>One-shot dual-domain temporal coefficients로 전역 flow와 국소 wall shear를 연결한다.</p></article>
-        <article><span>C3 · CONDITIONAL</span><h3>Sufficiency, if justified</h3><p>Confirmatory G1이 양수일 때만 real-CFD의 incremental status signal을 surrogate가 보존하는지 측정한다.</p></article>
+        <article><span>C1</span><h3>Coherence, not separate heads</h3><p>하나의 joint BC density를 임의 mask에 조건화하고 shared operator로 pushforward한다.</p></article>
+        <article><span>C2</span><h3>Response, not correlation</h3><p>동일 geometry의 paired BC에서 Δfield를 직접 감독하고 condition shift에서 검증한다.</p></article>
+        <article><span>C3</span><h3>Attribution, not one interval</h3><p>BC-induced와 model-induced uncertainty를 분리해 서로 다른 오류 원인을 추적한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Allowed</span><b>cross-sectional rupture-status stratification</b>
-        <span>Not allowed</span><b>2-year / 5-year prospective rupture probability</b>
+        <span>Primary</span><b>general partial-condition operator learning</b>
+        <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>
 

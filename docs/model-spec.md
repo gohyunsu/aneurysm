@@ -1,225 +1,284 @@
-# AURORA v1 모델 명세
+# AURORA v2 모델 명세
 
-상태: architecture contract
+상태: method contract · 구현은 단계별 gate 뒤 진행
 
 연결 설정: `configs/aurora_v1.json`
 
-## 0. 아키텍처 분류
+## 0. 한 줄 정의
 
-AURORA v1은 **GNN을 국소 geometry encoder로 사용하는 hybrid neural
-operator**다. 다음 세 연산을 구분한다.
+AURORA는 **GNN을 geometry encoder로 포함하는 hybrid neural operator**이며,
+핵심은 GNN이 아니라 full·partial·missing boundary observation에서 나온
+예측 분포가 하나의 joint model의 조건부·주변 분포로 일관되게 만드는
+것이다.
 
-| 범위 | 연산 | 역할 |
-|---|---|---|
-| local surface | edge message-passing GNN | 인접 표면의 곡률·법선·neck 관계 encode |
-| global anatomy | latent physics-token attention | 멀리 떨어진 inlet–sac–outlet 정보 교환 |
-| continuous output | cross-attention query neural operator | 임의 volume/wall 좌표에서 cycle coefficient 복원 |
+## 1. 왜 단순 missing-value 문제가 아닌가
 
-따라서 “GNN 기반”은 local stem을 설명할 때는 맞지만, 전체 모델을
-autoregressive MeshGraphNet으로 분류하면 틀리다. 출력은 고정 mesh의
-next-step node state가 아니라 BC-conditioned continuous field
-distribution이다.
+geometry \(G\), 전체 BC coefficient \(B\), solution field \(H\), 관측
+component mask \(M\)을 둔다. 배포 시에는 \(B_M\)만 관측될 수 있다.
 
-## 1. 입력과 출력
+Zero/mean imputation은 관측되지 않은 값을 특정 값으로 고정한다. Full,
+partial, missing mode별 독립 head는 같은 사례에 서로 모순된 분포를 낼 수
+있다. AURORA는 다음 하나의 확률법칙에서 모든 mode를 유도한다.
 
-### 입력
+\[
+p(H\mid G,B_M,M)
+=
+\int p_\theta(H\mid G,B)\,
+q_\phi(B_{\bar M}\mid G,B_M,M)\,dB_{\bar M}.
+\]
 
-| tensor | shape 예시 | 내용 |
+더 적게 관측한 mask \(M_1\)과 더 많이 관측한 \(M_2\)가
+\(M_1\subset M_2\)일 때 tower property가 성립해야 한다.
+
+\[
+p(H\mid G,B_{M_1})
+=
+\int p(H\mid G,B_{M_2})
+\,p(B_{M_2\setminus M_1}\mid G,B_{M_1})\,dB.
+\]
+
+이를 여기서는 **nested condition–marginal coherence**라고 부른다.
+“Consistency”라는 단어 자체는 novelty가 아니다. Neural process의
+marginal/conditional consistency 선행연구와 구분해, 임의의 physical
+condition observation mask와 PDE solution pushforward에서 무엇을
+구조적으로 보장하고 평가하는지 명시한다.
+
+## 2. 전체 계산 흐름
+
+```text
+geometry G ── local graph encoder ── latent geometry tokens ZG ──────┐
+                                                                     │
+full BC training records ── geometry-conditioned joint BC density    │
+                                  │                                  │
+observed components + mask ── analytic conditioning                  │
+                                  │                                  │
+                          K coherent BC completions                   │
+                                  └──── conditional field operator ──┤
+                                                                     │
+same-geometry BC pairs ── paired response supervision ───────────────┘
+                                      │
+                   K field/function samples + ensemble axis
+                                      │
+                  structural/model uncertainty decomposition
+```
+
+Fully specified CFD는 결정론적 forward problem으로 취급한다. Field의
+structural distribution은 주로 미관측 BC를 적분하면서 생기고,
+finite-data/model uncertainty는 별도 ensemble 축으로 추정한다.
+
+## 3. 입출력 계약
+
+### Geometry와 query
+
+| tensor | 예시 shape | 의미 |
 |---|---:|---|
-| `surface_pos` | `[Ns, 3]` | centerline-local frame의 surface point |
-| `surface_feat` | `[Ns, 20]` | normal, curvature, radius, geodesic neck distance, node type |
+| `surface_pos` | `[Ns, 3]` | local anatomical frame의 surface point |
+| `surface_feat` | `[Ns, Fs]` | normal, curvature, radius, neck distance, node type |
 | `edge_index` | `[2, Es]` | triangle 또는 kNN adjacency |
-| `volume_query` | `[Nv, 3]` | interior collocation/query point |
-| `anatomy_context` | `[Ca]` | site, parent diameter, branch count, scale |
-| `bc_observed` | `[Cb]` or null | waveform basis, flow split, hematocrit/rheology |
-| `clinical` | `[Cc]` | downstream head에서만 사용; operator geometry encoder와 분리 |
+| `query_pos` | `[Nq, 3]` | surface/volume field를 물을 좌표 |
+| `query_type` | `[Nq]` | wall, interior, inlet, outlet |
+| `anatomy_context` | `[Ca]` | site, diameter, branch topology, scale |
 
-권장 pilot 크기는 `Ns=4096`, `Nv=8192`다. 원본 mesh를 이 크기로
-강제 변환하는 것이 아니라, immutable mesh에서 reproducible sampling하고
-mapping index를 저장한다.
+### Boundary observation
+
+BC waveform과 outlet split을 고정 길이 coefficient로 만든다.
+
+| tensor | 예시 shape | 의미 |
+|---|---:|---|
+| `bc_value` | `[Cb]` | waveform PCA/Fourier, flow split, rheology |
+| `bc_mask` | `[Cb]` | 관측된 component는 1, 미관측은 0 |
+| `bc_location` | `[Cb, Fl]` | inlet/outlet identity와 spatial context |
+
+값 0과 “관측되지 않음”을 혼동하지 않는다. Mask는 모든 baseline에도
+동일하게 제공한다.
 
 ### 출력
 
-- `volume_coeff`: velocity/pressure temporal coefficients at volume queries
-- `wall_coeff`: vector WSS temporal coefficients at surface queries
-- `bc_samples`: sampled latent BC scenarios and weights
-- `functional_samples`: TAWSS, OSI, LSA, RRT, neck/dome hotspot descriptors
-- `status_probability`: case-level cross-sectional probability
-- `status_interval`: calibrated interval or prediction set
-- `abstain_score`: BC/OOD uncertainty에 기반한 research abstention flag
+- `field_samples`: `[E, K, Nq, T, Ch]`
+- `functional_samples`: `[E, K, Cf]`
+- `bc_completion_samples`: `[K, Cb]`
+- `structural_variance`: BC completion 축의 변동
+- `model_variance`: ensemble 축의 변동
+- `coherence_diagnostic`: nested mask pair별 random-projection discrepancy
 
-## 2. geometry normalization
+여기서 \(E\)는 ensemble member, \(K\)는 BC completion sample이다.
 
-global xyz를 그대로 넣지 않는다.
+## 4. Module A — geometry encoder
 
-1. inlet–aneurysm–outlet centerline로 local longitudinal axis를 정한다.
-2. aneurysm neck centroid를 origin으로 둔다.
-3. parent-vessel diameter로 무차원화한다.
-4. second axis는 neck normal 또는 bifurcation plane으로 정한다.
-5. axis ambiguity와 reflection은 augmentation 및 consistency loss로 다룬다.
+이 모듈은 강한 backbone이지만 논문의 독립 novelty가 아니다.
 
-이 방식은 완전한 SE(3)-equivariance를 주장하지 않지만, 작은 데이터에서
-e3nn 전체 stack보다 구현·검증이 단순하고 anatomical interpretation을
-유지한다. 향후 strict equivariant baseline을 별도 비교한다.
+1. Local edge-message GNN이 곡률, 법선, 상대 위치, geodesic 정보를
+   집계한다.
+2. `4096 → 1024 → 256` hierarchical pooling에서 inlet, outlet, neck,
+   dome landmark를 강제로 보존한다.
+3. 128개 latent token과 8개 attention block이 멀리 떨어진
+   inlet–aneurysm–outlet 관계를 연결한다.
+4. Continuous query decoder가 고정 mesh node가 아닌 임의 좌표에서 field를
+   복원한다.
 
-## 3. module A — multi-scale geometry encoder
+따라서 “GNN 기반인가?”라는 질문의 정확한 답은 **local encoder는 GNN,
+전체 모델은 query-based neural operator**다.
 
-### Local stem
+## 5. Module B — coherent boundary density
 
-- kNN `k=16`
-- edge feature: relative position/local-frame, distance, normal angle,
-  curvature difference, geodesic distance difference
-- 4 residual edge-message blocks: `64 → 96 → 128 → 192`
-- boundary type별 learnable embedding
+### 5.1 표현
 
-### Hierarchical tokens
+Waveform은 train fold 안에서만 계산한 PCA 또는 고정 Fourier basis의
+coefficient로 표현한다. Outlet fraction에는 합이 1이라는 제약을 만족하는
+log-ratio 좌표를 사용한다.
 
-- farthest-point/geodesic pooling: `4096 → 1024 → 256`
-- neck, inlet, outlet, dome extreme point는 pooling에서 강제 보존
-- 128 latent physics tokens, width 256
-- 8 physics-attention blocks, 8 heads, MLP ratio 4
+### 5.2 joint density
 
-pooling score 자체를 novelty로 주장하지 않는다. anatomy preservation은
-mesh decimation에 따른 hotspot 소실을 막기 위한 engineering constraint다.
-
-## 4. module B — boundary-condition latent
-
-BC를 geometry가 결정한다고 가정하지 않는다.
-
-### Observed-BC mode
-
-- inlet waveform을 8개 Fourier mode 또는 16개 PCA coefficient로 encode
-- outlet flow split, Reynolds/Womersley proxy, rheology token을 결합
-- 동일 case의 실제 BC를 decoder FiLM에 직접 주입
-
-### Missing-BC mode
-
-- empirical conditional prior `p(z_bc | anatomical site, diameter, branch
-  topology)`에서 `K=8` scenario sample
-- prior는 train fold의 BC만으로 적합
-- geometry encoder가 prior를 지나치게 좁히지 못하도록 minimum variance와
-  held-out BC coverage로 감시
-- posterior `q(z_bc | field, known BC)`는 training-only inference network
-
-초기 구현은 diagonal Gaussian mixture 4개로 시작한다. normalizing flow는
-BC sample 수와 likelihood calibration이 충분할 때만 추가한다. 작은
-clinical cohort에서 diffusion prior를 바로 쓰지 않는다.
-
-## 5. module C — one-shot dual-domain decoder
-
-### Temporal representation
-
-cardiac cycle의 field \(h(x,t)\)를 다음처럼 출력한다.
+초기 모델은 anatomy-conditioned low-rank Gaussian mixture다.
 
 \[
-h(x,t)=a_0(x)+\sum_{k=1}^{8}
-\left[a_k(x)\cos(2\pi kt/T)+b_k(x)\sin(2\pi kt/T)\right]
+q_\phi(B\mid A)
+=\sum_{c=1}^{C}\pi_c(A)
+\mathcal N(B;\mu_c(A),D_c(A)+U_c(A)U_c(A)^\top).
 \]
 
-80 timestep을 autoregressive하게 생성하지 않고 `2K+1=17` coefficient를
-한 번에 생성한다. Fourier mode 수 4/8/12는 ablation한다.
+- pilot: \(C=4\), covariance rank 4
+- full BC training record의 negative log likelihood로 학습
+- diagonal-only, unconditional empirical Gaussian, KDE를 baseline으로 비교
+- 데이터가 density 복잡성을 지지하기 전에는 flow/diffusion prior를 쓰지 않음
 
-### Coarse volume branch
+### 5.3 arbitrary-mask conditioning
 
-- implicit query decoder: volume query ↔ physics token cross-attention
-- outputs: `u_x,u_y,u_z,p` coefficient
-- 512 random collocation point에서 divergence/momentum residual
-- inlet/outlet flux와 no-slip boundary residual
+Gaussian component는 임의의 관측 index에 analytic conditioning할 수 있다.
+Mixture weight도 관측 likelihood로 Bayes update한다. 따라서 full,
+partial, missing mode가 하나의 joint density를 공유한다.
 
-### Fine wall branch
+- full mask: 관측 BC에 사실상 delta conditioning
+- partial mask: 미관측 component의 conditional mixture
+- missing mask: anatomy-conditioned joint prior
 
-- original surface query의 local embedding과 multi-scale token을 결합
-- vector WSS coefficient를 직접 출력
-- neck/dome/high-curvature query를 oversample하되 evaluation은 area-weighted
-- volume velocity gradient에서 얻은 WSS와 direct wall WSS의
-  cross-consistency
+이 구조는 별도 mask head의 경험적 consistency regularizer보다 단순하고
+검증 가능하다. Non-Gaussian tail이 필요하다는 증거가 생기면 coherent
+conditional sampler로 확장하되, coherence test를 먼저 유지한다.
 
-volume branch는 물리적 전역 구조, wall branch는 gradient-sensitive
-functional을 담당한다. 둘 중 하나만으로 충분한지는 ablation으로 확인한다.
+## 6. Module C — conditional solution operator
 
-## 6. module D — differentiable functionals
+주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.
 
-sample별로 복원한 cycle에서 계산한다.
+- BC coefficient는 FiLM만으로 주입하지 않고 boundary location token으로
+  geometry token과 cross-attention한다.
+- Query decoder는 coordinate, query type, local geometry feature를 받아
+  velocity/pressure 또는 benchmark solution coefficient를 출력한다.
+- Full-BC field loss가 기본 학습 신호다.
+- Flux, divergence, no-slip residual은 discretization이 검증된 dataset에서만
+  regularizer로 쓴다. “physics guaranteed”라고 부르지 않는다.
 
-- TAWSS
-- OSI
-- RRT
-- low shear area fraction
-- p95 WSS와 hotspot area/centroid
-- neck inflow concentration proxy
-- dome/neck/parent area-weighted summary
+Partial/missing prediction은 sampled BC completion을 같은 conditional
+operator에 병렬 통과시킨 pushforward distribution이다. 별도의 임의
+imputation field head를 두지 않는다.
 
-metric 정의와 epsilon, area weighting은 real CFD pipeline과 동일해야 한다.
-source solver의 summary 정의를 확인하지 못하면 같은 이름을 사용하지 않고
-`project_*` prefix를 붙인다.
+## 7. Module D — paired simulator-response supervision
 
-## 7. module E — functional sufficiency head
+동일 geometry \(G\)에 서로 다른 \(B_i,B_j\)와 solution \(H_i,H_j\)가 있을
+때 다음을 추가한다.
 
-clinical/morphology MLP와 distributional hemodynamic set encoder를 late
-fusion하되, hemodynamic representation은 field branch와 공동 학습한다.
+\[
+\mathcal L_\Delta =
+\frac{\lVert
+[\hat H(G,B_j)-\hat H(G,B_i)]-[H_j-H_i]
+\rVert_2}
+{\lVert H_j-H_i\rVert_2+\epsilon}.
+\]
 
-```text
-clinical + morphology ── MLP(64, 32) ─────────┐
-K functional samples ── set transformer(128) ─┼─ gated fusion ─ status logit
-geometry global token ─ stop-gradient option ─┘
-```
+절대 field loss만 쓰면 geometry 차이가 큰 신호를 지배해 condition
+sensitivity를 약하게 학습할 수 있다. Pair loss는 geometry를 고정한
+counterpart끼리 비교한다.
 
-`geometry global token`은 direct path leakage를 확인하기 위해 기본
-실험에서는 차단하고 별도 ablation에서만 허용한다. 그렇지 않으면 모델이
-hemodynamics를 무시한 채 geometry로 status를 맞힐 수 있다.
+필수 검증:
 
-real-CFD oracle head는 outer test fold를 보지 않고 inner training fold에서
-학습한다. surrogate head는 다음을 보존한다.
+- pair loss weight 0 ablation
+- 같은 수의 무작위 cross-geometry pair를 쓴 negative control
+- small/large BC distance별 response error
+- BC interpolation과 support-disjoint extrapolation 분리
 
-- oracle logit KL 또는 temperature-scaled distillation
-- case pair ranking
-- calibration/Brier auxiliary
+이는 관측 연구의 causal effect가 아니다. 데이터 생성 simulator 안에서
+BC를 바꾼 **paired simulator response**로만 해석한다.
 
-## 8. loss
+## 8. Module E — uncertainty decomposition
+
+Ensemble member \(e\), BC completion \(k\)의 prediction을
+\(\hat H_{e,k}\)라 한다.
+
+\[
+\underbrace{\mathbb E_e[\operatorname{Var}_k(\hat H_{e,k})]}
+_{\text{BC-induced structural}}
+\quad+\quad
+\underbrace{\operatorname{Var}_e(\mathbb E_k[\hat H_{e,k}])}
+_{\text{model-induced}}
+\]
+
+- structural variance는 미관측 BC가 많아질수록 증가해야 하며 held-out BC
+  response error를 추적해야 한다.
+- model variance는 geometry OOD, 적은 train data, backbone shift에서
+  증가해야 한다.
+- 두 항을 합친 coverage만 맞추고 성공이라 하지 않는다.
+
+Aleatoric/epistemic이라는 넓은 용어보다 원인이 분명한
+`BC-induced`와 `model-induced`를 사용한다.
+
+## 9. 시간 표현의 위치
+
+Transient field는 D0가 통과할 때만
+
+\[
+h(x,t)=a_0(x)+\sum_{k=1}^{K}
+[a_k(x)\cos(2\pi kt/T)+b_k(x)\sin(2\pi kt/T)]
+\]
+
+로 decode한다. \(K=4,8,12\)를 비교한다.
+
+Fourier는 method novelty가 아니며 다음 두 조건이 필요하다.
+
+1. Oracle reconstruction에서 field, region, cycle-functional threshold 통과
+2. Learned compute-matched comparison에서 autoregressive rollout보다
+   fidelity–latency trade-off 개선
+
+주기 끝점이 불연속이거나 peak를 잃으면 spline/wavelet/direct-time query로
+교체한다.
+
+## 10. 학습 목적
 
 \[
 \mathcal L =
-\lambda_f\mathcal L_{\mathrm{field}}+
-\lambda_h\mathcal L_{\mathrm{functional}}+
-\lambda_p\mathcal L_{\mathrm{physics}}+
-\lambda_e\mathcal L_{\mathrm{energy}}+
-\lambda_c\mathcal L_{\mathrm{consistency}}+
-\lambda_t\mathcal L_{\mathrm{task}}
+\lambda_f\mathcal L_{\mathrm{full\ field}}+
+\lambda_\Delta\mathcal L_{\mathrm{paired\ response}}+
+\lambda_B\mathcal L_{\mathrm{BC\ NLL}}+
+\lambda_P\mathcal L_{\mathrm{physics}}+
+\lambda_F\mathcal L_{\mathrm{functional}}.
 \]
 
-초기 상대 weight는 config에 있지만 확정 hyperparameter가 아니다. inner
-validation에서 작은 grid로 선택한다.
+Nested coherence는 analytic conditional density와 shared pushforward로
+구조화한다. 별도 숫자 loss를 추가해 보이는 것만으로 보장했다고 하지 않고,
+random projection에서 empirical tower-property error를 측정한다.
 
-- `field`: area/volume-weighted normalized L1 + relative L2
-- `functional`: log-scaled scalar error + hotspot Dice/centroid
-- `physics`: divergence, flux balance, no-slip, optional momentum
-- `energy`: generated field samples의 functional-space energy score
-- `consistency`: volume-derived vs direct wall WSS
-- `task`: real-CFD oracle distillation + pairwise ranking
+## 11. 필수 baseline
 
-physics residual를 넣었다는 이유로 “physics guaranteed”라고 표현하지 않는다.
-residual은 numerical discretization과 collocation에 종속된 regularizer다.
+| 범주 | 비교 |
+|---|---|
+| Imputation | zero, train mean, conditional mean + deterministic operator |
+| Mask model | mask-token deterministic operator, 독립 mask별 head |
+| Generic UQ | MC dropout, deep ensemble, heteroscedastic Gaussian |
+| Generative operator | 공개 probabilistic/flow-matching operator |
+| Coherent ablation | joint BC density 없이 direct marginal head |
+| Response ablation | pair loss 0, cross-geometry pair |
+| 3D transient | In-PI-MGN/MeshGraphNet, direct transformer/operator |
 
-## 9. inference modes
+Parameter 수, train examples, geometry split, BC information, search budget,
+inference sample 수를 맞춘다.
 
-| mode | BC | 출력 | 용도 |
-|---|---|---|---|
-| A | observed | conditional field distribution | surrogate fidelity |
-| B | missing | BC-marginal field distribution | geometry-only deployment study |
-| C | partial | sparse waveform/flow proxy conditioned | practical bridge |
-| D | CFD oracle | real field only | upper bound |
+## 12. 구현 순서
 
-모든 결과 표는 mode를 명시한다. mode A 결과로 mode B 성능을 주장하지
-않는다.
+1. Exact controlled PDE에서 analytic BC conditioning과 metric 검증
+2. MLP/FNO backbone으로 nonlinear regular-grid paired-condition pilot
+3. Same geometry multi-BC 자산에서 pair sampler와 response loss
+4. GNN+latent-token irregular 3D operator
+5. D0 통과 시 one-shot transient decoder
+6. Secondary real-CFD/status analysis는 operator evidence가 확보된 뒤 재검토
 
-## 10. 구현 순서
-
-1. deterministic steady wall-only operator
-2. same-geometry multi-BC probabilistic wall operator
-3. one-shot transient wall decoder
-4. coarse volume auxiliary와 cross-consistency
-5. CMHA functional fine-tuning
-6. task-aligned head
-
-한 번에 전체 모델을 만들지 않는다. 각 단계가 이전 단계보다 무엇을
-개선했는지 같은 split과 compute budget에서 확인한다.
+전체 architecture를 한 번에 학습하지 않는다. 각 단계는 이전 단계보다
+어떤 claim을 새로 지지하는지와 중단 기준을 함께 기록한다.

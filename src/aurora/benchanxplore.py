@@ -293,7 +293,7 @@ def run_audit(
     endpoint_jump: list[float] = []
 
     with torch.inference_mode():
-        for path in cases:
+        for case_index, path in enumerate(cases, start=1):
             case = load_case(path, expected_timesteps=int(config["dataset"]["timesteps"]))
             coordinates = torch.from_numpy(case.coordinates).to(device)
             velocity = torch.from_numpy(case.velocity).to(device)
@@ -319,6 +319,7 @@ def run_audit(
                     )
                     for metric, value in case_metrics.items():
                         collected[str(mode)][region][metric].append(value)
+            print(f"[D0] completed case {case_index}/{len(cases)}", flush=True)
 
     rng = np.random.default_rng(seed)
     replicates = int(config["bootstrap_replicates"])
@@ -405,6 +406,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     command = " ".join(shlex.quote(value) for value in sys.argv)
     (args.output / "command.txt").write_text(f"{command}\n", encoding="utf-8")
+    (args.output / "status.json").write_text(
+        json.dumps(
+            {
+                "experiment_id": config["experiment_id"],
+                "status": "running",
+                "started_at": datetime.now(timezone.utc).isoformat(),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     try:
         result = run_audit(
             data_root=args.data_root,

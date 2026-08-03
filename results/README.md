@@ -9,6 +9,7 @@
 - patient-grouped aggregate metric과 bootstrap CI
 - GPU/container version
 - 해석 제한과 다음 결정
+- metric이 생성되지 않은 scheduler failure의 비식별 상태·exit·walltime
 
 제외:
 

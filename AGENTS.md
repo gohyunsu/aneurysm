@@ -7,18 +7,19 @@
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
-- 정식 명칭: **Aneurysm Uncertainty-aware Risk-aligned Operator for Rapid
-  Assessment**
-- 연구용 endpoint: 공개 데이터의 **cross-sectional rupture status**
-- 핵심 문제: geometry-only 배포에서 patient-specific BC가 관측되지 않으면
-  hemodynamics는 식별되지 않는다. 따라서 하나의 synthetic CFD label을
-  생성하지 않고 조건부 field distribution을 예측한다.
-- 핵심 방법: multi-scale surface/volume operator + latent BC distribution +
-  one-shot temporal basis decoder + downstream functional sufficiency
-  distillation.
-- 최종 주장은 “미래 파열 위험을 예측한다”가 아니라 “BC uncertainty를
-  반영한 surrogate가 real-CFD 기반 rupture-status signal을 얼마나
-  보존하는가”이다.
+- 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
+  Reliable Assessment**
+- 주 연구 문제: **partial/missing physical-condition operator learning**
+- 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
+  status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
+- 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
+  같은 물리계에 대해 모순된 분포를 낼 수 있다. 하나의 joint BC–solution
+  model에서 유도되는 조건부/주변 분포로 일관되어야 한다.
+- 핵심 방법: analytic conditioning이 가능한 BC density + conditional
+  geometry operator + nested observation-mask marginalization +
+  same-geometry paired response supervision.
+- 최종 주장은 “미래 파열 위험을 예측한다”가 아니라 “불완전한 물리조건
+  아래에서도 일관되고 보정된 PDE solution distribution을 학습한다”이다.
 
 다음 아이디어는 주 방법론이 아니다. 비교·ablation으로만 남긴다.
 
@@ -32,19 +33,22 @@
 
 논문 contribution은 아래 세 축으로 제한한다.
 
-1. **Missing-BC distributional operator**: 관측 BC가 있으면 조건부
-   prediction, 없으면 population-conditioned BC latent를 주변화하여
-   function-space distribution을 출력한다.
-2. **One-shot dual-domain cycle decoding**: autoregressive rollout 대신
-   cardiac-cycle temporal Fourier coefficients를 한 번에 예측하고, coarse
-   volume velocity/pressure와 high-resolution wall WSS를 cross-consistency로
-   연결한다.
-3. **Task-aligned functional sufficiency**: node RMSE뿐 아니라
-   TAWSS/OSI/LSA/RRT와 real-CFD teacher의 ranking/calibration을 보존하도록
-   학습하고 `risk-retention`으로 평가한다.
+1. **Nested condition–marginal coherence**: full/partial/missing BC를 별도
+   head나 임의 imputation으로 처리하지 않는다. 하나의 BC density를 임의
+   observation mask에 analytic conditioning하고 solution operator로
+   pushforward하여 tower property를 구조적으로 만족시킨다.
+2. **Paired simulator-response supervision**: 동일 geometry의 두 BC에서
+   절대 field뿐 아니라 `H(G,Bj)-H(G,Bi)`를 직접 감독하여 geometry
+   confounding 없이 condition response를 학습한다. 인과 효과가 아니라
+   simulator intervention response로만 부른다.
+3. **Structural/model uncertainty separation**: BC completion sample 간
+   변동과 model ensemble 간 변동을 law of total variance에 맞춰 분리하고,
+   BC OOD·geometry OOD·mask별 coverage에서 각각 검증한다.
 
-이 셋을 모두 새롭다고 단정하지 않는다. 문헌 검색일과 직접 경쟁작을
-기록하고, 최종 novelty 문구는 실험 결과와 exhaustive review 뒤 확정한다.
+GNN, attention, probabilistic operator, flow matching, physics loss,
+one-shot Fourier는 선행 구성요소 또는 engineering choice다. contribution
+문구에 단독 novelty로 올리지 않는다. 특히 Fourier decoder는 D0 표현력
+gate를 통과하고 compute-matched 이득이 있을 때만 남긴다.
 
 ## 3. 데이터셋의 역할
 
@@ -63,19 +67,22 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
 ## 4. 연구를 계속할지 결정하는 gate
 
 - **G0 · Asset integrity**: case mapping, unit, boundary marker, license,
-  patient ID/split이 검증되지 않으면 학습하지 않는다.
-- **G1 · Hemodynamic utility**: CMHA에서 clinical+morphology+real CFD가
-  clinical+morphology보다 patient-bootstrap 95% CI 기준으로 일관된
-  incremental utility가 없으면 risk-aligned branch를 주 contribution에서
-  내린다.
-- **G2 · Operator fidelity**: OOD geometry와 held-out BC에서 field,
-  functional, calibration gate를 동시에 통과하지 못하면 AneuX에
-  hemodynamics를 생성하지 않는다.
-- **G3 · Surrogate sufficiency**: surrogate risk-retention과 calibration이
-  사전 정의 기준을 못 넘으면 clinical claim을 하지 않는다.
-- **G4 · Non-redundancy**: direct geometry-to-status baseline과 비교해
-  AURORA의 개선이 없거나 hemodynamic field가 설명력을 더하지 않으면
-  “hemodynamics bridge” 주장을 철회한다.
+  geometry/condition split이 검증되지 않으면 학습하지 않는다.
+- **G1 · Exact-coherence sanity**: 정답 conditional distribution을 계산할
+  수 있는 controlled PDE에서 oracle moment·coverage·nested-mask coherence를
+  회복하지 못하면 복잡한 aneurysm 실험으로 확장하지 않는다.
+- **G2 · Paired response fidelity**: geometry-disjoint × BC-shift에서 strong
+  probabilistic baseline보다 field distribution과 paired response가 모두
+  개선되어야 한다.
+- **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
+  learned compute-matched 비교에서 autoregressive baseline보다 cycle
+  fidelity/latency trade-off가 좋아야 한다.
+- **G4 · Cross-domain generality**: controlled PDE, nonlinear PDE, irregular
+  3D aneurysm 중 적어도 세 domain에서 같은 method가 유효해야 한다.
+
+CMHA real-CFD incremental utility는 독립된 secondary diagnostic이다.
+2026-08-03 exploratory signal이 음수이므로 risk-retention과 clinical
+utility는 현재 gate나 contribution이 아니다.
 
 정확한 threshold는 `configs/aurora_v1.json`에 버전 관리한다. 결과를 본 뒤
 threshold를 바꾸면 반드시 exploratory로 표시한다.
@@ -88,11 +95,13 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   threshold, seed를 선택하지 않는다.
 - AUROC만 보고하지 않는다. AUPRC, balanced accuracy, Brier, ECE, calibration
   slope/intercept와 patient-bootstrap 95% CI를 포함한다.
-- field는 velocity/pressure RMSE 외에 WSS/OSI error, hotspot overlap,
-  mass-flux, divergence, boundary violation, distributional coverage/width를
-  평가한다.
+- field는 velocity/pressure RMSE 외에 paired-response error, mass-flux,
+  divergence, boundary violation, distributional coverage/width와
+  nested-mask coherence error를 평가한다.
 - direct geometry model, clinical+morphology model, deterministic operator,
-  real-CFD oracle, In-PI-MGN/graph-transformer 계열을 공정한 baseline으로 둔다.
+  independent mask heads, mean/zero imputation, generic probabilistic
+  operator, deep ensemble, In-PI-MGN/graph-transformer 계열을 공정한
+  baseline으로 둔다.
 - 여러 aneurysm이 한 환자에 있으면 bootstrap과 split의 sampling unit은
   환자다.
 - 모든 headline result는 최소 5 seeds 또는 반복 nested split으로 확인한다.
@@ -200,7 +209,8 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   G1은 exploratory다.
 - CMHA `PHASE`, `ELAPSS`는 정의가 확인되지 않았고 target과 거의 결정적
   관계를 보여 baseline에서 제외한다.
-- 2026-08-03 exploratory G1은 `C+M` AUPRC 0.759, `C+M+H` 0.717,
-  `Δ=-0.0419 [−0.1083, 0.0066]`이었다. Confirmatory G1은 unresolved이며
-  C3는 conditional secondary다. 공식 case map과 second model family 전에는
-  risk-retention을 계산하거나 C3를 primary claim으로 복원하지 않는다.
+- 2026-08-03 당시 `G1`이라 부른 exploratory clinical diagnostic은 `C+M`
+  AUPRC 0.759, `C+M+H` 0.717, `Δ=-0.0419 [−0.1083, 0.0066]`이었다.
+  v2의 G1은 exact-coherence gate이므로 둘을 혼동하지 않는다. 공식 case
+  map과 second model family 전에는 risk-retention을 계산하거나 status
+  alignment를 primary claim으로 복원하지 않는다.

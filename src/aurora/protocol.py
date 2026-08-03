@@ -17,11 +17,31 @@ class ProtocolError(ValueError):
     """Raised when a research protocol violates a project invariant."""
 
 
+ALLOWED_PRIMARY_PROBLEMS = {"operator_learning_under_partial_boundary_observation"}
 ALLOWED_ENDPOINTS = {"cross_sectional_rupture_status"}
-ALLOWED_PROVENANCE = {"real_cfd", "synthetic_cfd", "surrogate", "none"}
-ALLOWED_SPLIT_UNITS = {"patient", "geometry", "generator_seed_geometry"}
+ALLOWED_PROVENANCE = {
+    "analytical_pde",
+    "real_cfd",
+    "synthetic_cfd",
+    "surrogate",
+    "none",
+}
+ALLOWED_SPLIT_UNITS = {
+    "patient",
+    "geometry",
+    "generator_seed_geometry",
+    "simulation_family",
+}
 REQUIRED_GATES = {"G0", "G1", "G2", "G3", "G4"}
-REQUIRED_DATASETS = {"aneumo", "aneug_flow", "benchanxplore", "cmha", "aneux"}
+REQUIRED_DATASETS = {
+    "controlled_pde",
+    "nonlinear_pde",
+    "aneumo",
+    "aneug_flow",
+    "benchanxplore",
+    "cmha",
+    "aneux",
+}
 
 
 def load_protocol(path: str | Path) -> dict[str, Any]:
@@ -81,8 +101,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     checks.append("research-only project boundary")
 
     task = protocol["task"]
-    _require_keys(task, ["endpoint", "primary_metric", "forbidden_claims"], "task")
-    if task["endpoint"] not in ALLOWED_ENDPOINTS:
+    _require_keys(
+        task,
+        [
+            "primary_problem",
+            "application_endpoint",
+            "primary_metric",
+            "forbidden_claims",
+        ],
+        "task",
+    )
+    if task["primary_problem"] not in ALLOWED_PRIMARY_PROBLEMS:
+        raise ProtocolError(
+            "The primary task must remain partial-boundary-observation operator "
+            "learning for schema v2."
+        )
+    if task["application_endpoint"] not in ALLOWED_ENDPOINTS:
         raise ProtocolError(
             "Only cross-sectional rupture status is supported; prospective risk "
             "requires a longitudinal protocol."
@@ -90,7 +124,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     forbidden = set(task["forbidden_claims"])
     if "prospective_rupture_risk" not in forbidden or "clinical_utility" not in forbidden:
         raise ProtocolError("Task must forbid prospective-risk and clinical-utility claims.")
-    checks.append("endpoint and forbidden-claim guardrails")
+    if "causal_intervention_effect" not in forbidden:
+        raise ProtocolError("Paired simulator responses must not be called causal effects.")
+    checks.append("primary method task and application-claim guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:
@@ -127,10 +163,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     numeric_model_keys = [
         "surface_queries", "volume_queries", "knn", "latent_tokens", "hidden_dim",
         "attention_layers", "attention_heads", "temporal_fourier_modes",
-        "bc_latent_dim", "bc_samples_train", "bc_samples_eval",
+        "bc_basis_dim", "bc_mixture_components", "bc_covariance_rank",
+        "bc_samples_train", "bc_samples_eval", "ensemble_members",
         "physics_collocation_points",
     ]
-    _require_keys(model, numeric_model_keys, "model")
+    _require_keys(model, [*numeric_model_keys, "observation_modes"], "model")
     for key in numeric_model_keys:
         if not isinstance(model[key], int) or model[key] <= 0:
             raise ProtocolError(f"model.{key} must be a positive integer.")
@@ -138,19 +175,24 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("hidden_dim must be divisible by attention_heads.")
     if model["bc_samples_eval"] < model["bc_samples_train"]:
         raise ProtocolError("Evaluation must use at least as many BC samples as training.")
+    if set(model["observation_modes"]) != {"full", "partial", "missing"}:
+        raise ProtocolError("Model must support full, partial, and missing BC modes.")
     checks.append("model dimensional contract")
 
     loss = protocol["loss"]
     loss_keys = [
-        "field", "functional", "physics", "energy", "cross_consistency",
-        "task_alignment",
+        "full_field",
+        "paired_response",
+        "boundary_nll",
+        "physics",
+        "functional",
     ]
     _require_keys(loss, loss_keys, "loss")
     if any(not isinstance(loss[key], (int, float)) or loss[key] < 0 for key in loss_keys):
         raise ProtocolError("All loss weights must be non-negative numbers.")
-    if loss["field"] <= 0 or loss["energy"] <= 0:
-        raise ProtocolError("Field and distributional energy losses cannot be disabled.")
-    checks.append("field and distributional objectives")
+    if loss["full_field"] <= 0 or loss["paired_response"] <= 0:
+        raise ProtocolError("Full-field and paired-response objectives cannot be disabled.")
+    checks.append("full-field and paired-response objectives")
 
     gates = protocol["gates"]
     gate_ids = _unique_ids(gates, "id", "gates")
@@ -158,27 +200,46 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError(
             "Gate set must be exactly G0–G4; change schema version to alter it."
         )
-    g3 = next(item for item in gates if item["id"] == "G3")
-    if g3.get("requires_g1_positive_denominator") is not True:
-        raise ProtocolError("Risk-retention must require a positive G1 denominator.")
-    checks.append("blocking gates and risk-retention denominator")
+    g1 = next(item for item in gates if item["id"] == "G1")
+    if "maximum_projective_consistency_error" not in g1:
+        raise ProtocolError("G1 must preregister a projective-consistency threshold.")
+    g4 = next(item for item in gates if item["id"] == "G4")
+    required_domains = {"controlled_pde", "nonlinear_pde", "irregular_3d"}
+    if int(g4.get("minimum_domains", 0)) < 3:
+        raise ProtocolError("G4 must require evidence in at least three domains.")
+    if set(g4.get("required_domains", [])) != required_domains:
+        raise ProtocolError("G4 must retain controlled, nonlinear, and irregular-3D tests.")
+    checks.append("coherence and cross-domain blocking gates")
 
     evaluation = protocol["evaluation"]
     _require_keys(
         evaluation,
-        ["operator_outer_split", "clinical_outer_folds", "clinical_inner_folds",
-         "bootstrap_unit", "bootstrap_replicates", "headline_seeds"],
+        [
+            "operator_outer_split",
+            "condition_shift_split",
+            "observation_masks",
+            "clinical_outer_folds",
+            "clinical_inner_folds",
+            "bootstrap_unit",
+            "clinical_bootstrap_unit",
+            "bootstrap_replicates",
+            "headline_seeds",
+        ],
         "evaluation",
     )
     if evaluation["operator_outer_split"] != "geometry_disjoint":
         raise ProtocolError("Operator evaluation must remain geometry-disjoint.")
-    if evaluation["bootstrap_unit"] != "patient":
-        raise ProtocolError("Clinical uncertainty must be bootstrapped by patient.")
+    if evaluation["bootstrap_unit"] != "geometry":
+        raise ProtocolError("Operator uncertainty must be bootstrapped by geometry.")
+    if evaluation["clinical_bootstrap_unit"] != "patient":
+        raise ProtocolError("Secondary clinical uncertainty must be bootstrapped by patient.")
+    if {"full", "missing"} - set(evaluation["observation_masks"]):
+        raise ProtocolError("Evaluation must include full and missing observation masks.")
     if evaluation["clinical_outer_folds"] < 3 or evaluation["clinical_inner_folds"] < 3:
         raise ProtocolError("Nested clinical validation requires at least 3 folds per level.")
     if evaluation["bootstrap_replicates"] < 1000:
         raise ProtocolError("At least 1,000 patient bootstrap replicates are required.")
-    checks.append("geometry-disjoint and nested patient-level evaluation")
+    checks.append("geometry-disjoint operator and nested patient-level evaluation")
 
     phases = protocol["phases"]
     _unique_ids(phases, "id", "phases")
@@ -226,7 +287,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             json.dumps(
                 {
                     "project": protocol["project"]["name"],
-                    "endpoint": protocol["task"]["endpoint"],
+                    "primary_problem": protocol["task"]["primary_problem"],
+                    "application_endpoint": protocol["task"]["application_endpoint"],
                     "datasets": [item["name"] for item in protocol["datasets"]],
                     "gates": [item["id"] for item in protocol["gates"]],
                     "protocol_sha256": digest,

@@ -1,25 +1,34 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "project": {
     "name": "AURORA",
-    "expanded_name": "Aneurysm Uncertainty-aware Risk-aligned Operator for Rapid Assessment",
-    "status": "protocol",
+    "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
+    "status": "method_protocol",
     "as_of": "2026-08-03",
     "clinical_use": false
   },
   "task": {
-    "endpoint": "cross_sectional_rupture_status",
-    "primary_metric": "auprc",
+    "primary_problem": "operator_learning_under_partial_boundary_observation",
+    "application_endpoint": "cross_sectional_rupture_status",
+    "primary_metric": "functional_energy_score",
     "forbidden_claims": [
       "prospective_rupture_risk",
       "two_year_rupture_probability",
       "five_year_rupture_probability",
-      "clinical_utility"
+      "clinical_utility",
+      "causal_intervention_effect"
     ]
   },
   "evidence_snapshot": {
     "as_of": "2026-08-03",
-    "g1_exploratory": {
+    "readiness": "not_accept_ready",
+    "direct_prior_art_threats": [
+      "boundary_indexed_operator_non_identifiability",
+      "function_space_probabilistic_operators",
+      "conditional_marginal_consistency_in_neural_processes",
+      "inflow_aware_physics_gnn_for_aneurysm"
+    ],
+    "cmha_secondary_diagnostic": {
       "result_id": "cmha_g1_exploratory_20260803",
       "confirmatory_status": "unresolved",
       "current_signal": "negative",
@@ -35,22 +44,39 @@
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,
       "benchanxplore_timesteps": 80,
-      "benchanxplore_d0_status": "preregistered"
+      "benchanxplore_d0_status": "attempt_1_walltime_exceeded_retry_pending"
     },
     "contribution_priority": {
       "primary": [
-        "C1_missing_bc_distribution",
-        "C2_one_shot_field_functional_fidelity"
+        "C1_nested_condition_marginal_coherence",
+        "C2_paired_simulator_response_supervision",
+        "C3_structural_model_uncertainty_separation"
       ],
-      "conditional_secondary": [
-        "C3_task_aligned_functional_sufficiency"
+      "engineering": [
+        "hybrid_gnn_operator_backbone",
+        "one_shot_temporal_basis"
+      ],
+      "secondary_only": [
+        "rupture_status_functional_sufficiency"
       ]
     }
   },
   "datasets": [
     {
+      "name": "controlled_pde",
+      "role": "exact_conditional_distribution_and_coherence_sanity",
+      "field_provenance": "analytical_pde",
+      "split_unit": "simulation_family"
+    },
+    {
+      "name": "nonlinear_pde",
+      "role": "nonlinear_condition_shift_generalization",
+      "field_provenance": "synthetic_cfd",
+      "split_unit": "simulation_family"
+    },
+    {
       "name": "aneumo",
-      "role": "multi_bc_steady_pretraining",
+      "role": "paired_bc_steady_irregular_3d",
       "field_provenance": "synthetic_cfd",
       "split_unit": "generator_seed_geometry"
     },
@@ -62,19 +88,19 @@
     },
     {
       "name": "benchanxplore",
-      "role": "transient_reproduction_and_baseline",
+      "role": "transient_efficiency_and_gnn_baseline",
       "field_provenance": "synthetic_cfd",
       "split_unit": "geometry"
     },
     {
       "name": "cmha",
-      "role": "real_cfd_bridge_and_status_gate",
+      "role": "secondary_real_cfd_and_status_diagnostic",
       "field_provenance": "real_cfd",
       "split_unit": "patient"
     },
     {
       "name": "aneux",
-      "role": "external_status_stress_test",
+      "role": "secondary_external_status_stress_test",
       "field_provenance": "none",
       "split_unit": "patient"
     }
@@ -88,20 +114,26 @@
     "attention_layers": 8,
     "attention_heads": 8,
     "temporal_fourier_modes": 8,
-    "bc_latent_dim": 16,
+    "bc_basis_dim": 16,
     "bc_mixture_components": 4,
+    "bc_covariance_rank": 4,
     "bc_samples_train": 4,
-    "bc_samples_eval": 8,
-    "physics_collocation_points": 512
+    "bc_samples_eval": 32,
+    "ensemble_members": 5,
+    "physics_collocation_points": 512,
+    "observation_modes": [
+      "full",
+      "partial",
+      "missing"
+    ]
   },
   "loss": {
-    "field": 1.0,
-    "functional": 0.2,
+    "full_field": 1.0,
+    "paired_response": 0.5,
+    "boundary_nll": 0.1,
     "physics": 0.05,
-    "energy": 0.1,
-    "cross_consistency": 0.1,
-    "task_alignment": 0.1,
-    "note": "Pilot weights; select only inside inner folds and report sensitivity."
+    "functional": 0.1,
+    "note": "Pilot weights; selection is restricted to inner validation and paired-response weight has a zero ablation."
   },
   "gates": [
     {
@@ -112,86 +144,126 @@
         "case_mapping",
         "units",
         "boundary_markers",
-        "label_definition",
+        "condition_metadata",
         "license",
         "split_identity"
       ]
     },
     {
       "id": "G1",
-      "name": "real_cfd_incremental_utility",
+      "name": "exact_condition_marginal_coherence",
       "blocking": true,
-      "metric": "delta_auprc",
-      "target": 0.02,
-      "min_positive_outer_fold_fraction": 0.67
+      "maximum_standardized_mean_error": 0.05,
+      "maximum_coverage_error": 0.03,
+      "maximum_projective_consistency_error": 0.05
     },
     {
       "id": "G2",
-      "name": "operator_distributional_fidelity",
+      "name": "paired_response_fidelity",
       "blocking": true,
-      "nominal_coverage": 0.9,
-      "minimum_empirical_coverage": 0.85,
       "requires_ood_geometry": true,
-      "requires_ood_bc": true
+      "requires_ood_condition": true,
+      "primary_comparison": "aurora_minus_strong_probabilistic_operator"
     },
     {
       "id": "G3",
-      "name": "surrogate_functional_sufficiency",
+      "name": "transient_efficiency",
       "blocking": false,
-      "metric": "risk_retention_auprc",
-      "target": 0.75,
-      "minimum": 0.5,
-      "requires_g1_positive_denominator": true
+      "requires_oracle_representation_gate": true,
+      "requires_compute_matched_baseline": true
     },
     {
       "id": "G4",
-      "name": "non_redundancy",
-      "blocking": false,
-      "comparison": "full_aurora_minus_direct_geometry",
-      "target_delta_auprc": 0.01,
-      "requires_calibration_noninferiority": true
+      "name": "cross_domain_generality",
+      "blocking": true,
+      "minimum_domains": 3,
+      "required_domains": [
+        "controlled_pde",
+        "nonlinear_pde",
+        "irregular_3d"
+      ]
     }
   ],
   "evaluation": {
     "operator_outer_split": "geometry_disjoint",
+    "condition_shift_split": "support_disjoint",
+    "observation_masks": [
+      "full",
+      "random_partial_25",
+      "random_partial_50",
+      "random_partial_75",
+      "missing"
+    ],
+    "bootstrap_unit": "geometry",
+    "bootstrap_replicates": 2000,
+    "primary_field_distribution_metric": "functional_energy_score",
+    "primary_response_metric": "paired_delta_relative_l2",
+    "primary_coherence_metric": "random_projection_energy_distance",
+    "headline_seeds": 5,
     "clinical_outer_folds": 5,
     "clinical_outer_repeats": 3,
     "clinical_inner_folds": 4,
-    "bootstrap_unit": "patient",
-    "bootstrap_replicates": 2000,
-    "primary_field_distribution_metric": "functional_energy_score",
-    "headline_seeds": 5,
-    "calibration_metrics": [
-      "brier",
-      "ece",
-      "calibration_slope",
-      "calibration_intercept"
-    ]
+    "clinical_bootstrap_unit": "patient"
   },
   "phases": [
     {
       "id": "P0",
-      "name": "audit_and_feasibility",
-      "requires": ["G0"],
-      "outputs": ["cmha_incremental_utility", "multi_bc_pilot"]
+      "name": "audit_and_representation",
+      "requires": [
+        "G0"
+      ],
+      "outputs": [
+        "asset_manifest",
+        "temporal_oracle_gate"
+      ]
     },
     {
       "id": "P1",
-      "name": "steady_distributional_operator",
-      "requires": ["G0"],
-      "outputs": ["wall_field_distribution", "bc_coverage"]
+      "name": "controlled_coherence",
+      "requires": [
+        "G0"
+      ],
+      "outputs": [
+        "exact_mask_coherence",
+        "oracle_coverage"
+      ]
     },
     {
       "id": "P2",
-      "name": "one_shot_transient_dual_domain",
-      "requires": ["G2"],
-      "outputs": ["cycle_coefficients", "wall_volume_consistency"]
+      "name": "paired_condition_operator",
+      "requires": [
+        "G1"
+      ],
+      "outputs": [
+        "field_distribution",
+        "paired_response",
+        "uncertainty_decomposition"
+      ]
     },
     {
       "id": "P3",
-      "name": "clinical_functional_sufficiency",
-      "requires": ["G1", "G2"],
-      "outputs": ["risk_retention", "external_stress_test"]
+      "name": "cross_domain_validation",
+      "requires": [
+        "G1",
+        "G2"
+      ],
+      "outputs": [
+        "nonlinear_pde_result",
+        "irregular_3d_result",
+        "transient_efficiency"
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "secondary_clinical_analysis",
+      "requires": [
+        "G0",
+        "G2"
+      ],
+      "outputs": [
+        "real_cfd_diagnostic",
+        "status_association_only_if_supported"
+      ]
     }
   ]
 }

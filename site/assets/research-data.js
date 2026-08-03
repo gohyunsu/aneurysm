@@ -38,9 +38,23 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2025–26",
       title: "Probabilistic operators",
-      copy: "Proper scoring rule과 latent conditioning으로 output function-space uncertainty를 모델링했다.",
-      status: "Method preprints · component prior art",
-      url: "https://arxiv.org/abs/2502.12902"
+      copy: "Diffusion·flow matching·proper scoring rule이 function-space conditional distribution을 이미 모델링한다.",
+      status: "ICLR / NeurIPS · direct method prior art",
+      url: "https://openreview.net/forum?id=fcBMLJtCoc"
+    },
+    {
+      year: "2026",
+      title: "Boundary-indexed operator families",
+      copy: "Varying BC의 operator family와 support 밖 비식별성을 정식화해 missing-BC 문제 제기 자체가 novelty가 아님을 보였다.",
+      status: "ICLR · direct problem prior art",
+      url: "https://openreview.net/forum?id=lDjWQ9UxRy"
+    },
+    {
+      year: "2024–25",
+      title: "PDE uncertainty & conditional consistency",
+      copy: "OOD PDE uncertainty와 neural-process의 marginal/conditional consistency가 이미 독립 연구 축을 이룬다.",
+      status: "ICML / NeurIPS · required baselines",
+      url: "https://openreview.net/forum?id=Y50K6DSrWo"
     },
     {
       year: "2026.07",
@@ -51,12 +65,12 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Deployment input", "Current field + inflow", "Current field + inflow token", "Geometry + prescribed BC", "Geometry; observed / partial / missing BC"],
-    ["BC uncertainty", "Point condition", "OOD waveform test", "Prescribed constraint", "Conditional field distribution"],
-    ["Temporal model", "Autoregressive", "Autoregressive transformer", "Unsteady PINN", "One-shot cycle basis"],
-    ["Primary fidelity", "Velocity rollout RMSE", "Field · WSS · OSI error", "Descriptor / status score", "Field + functional + coverage"],
-    ["Downstream task", "Not validated", "Risk metrics descriptive", "Late-fusion status", "Real-CFD functional sufficiency"],
-    ["Primary gap", "Missing-BC deployment", "Missing-BC calibration", "Uncertainty + nested sufficiency", "Must prove all three"]
+    ["Deployment input", "Current field + inflow", "Current field + inflow token", "Geometry + prescribed BC", "Geometry + arbitrary BC observation mask"],
+    ["BC uncertainty", "Point condition", "OOD waveform test", "Prescribed constraint", "One joint BC density, analytically conditioned"],
+    ["Temporal model", "Autoregressive", "Autoregressive transformer", "Unsteady PINN", "Secondary one-shot choice after D0"],
+    ["Primary fidelity", "Velocity rollout RMSE", "Field · WSS · OSI error", "Descriptor / status score", "Coherence + paired response + coverage"],
+    ["Downstream task", "Not validated", "Risk metrics descriptive", "Late-fusion status", "Secondary only; current signal negative"],
+    ["Primary gap", "Partial/missing condition", "Mask coherence", "Condition uncertainty", "Must beat generic probabilistic operators"]
   ],
   gates: [
     {
@@ -68,31 +82,31 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       id: "G1",
-      title: "Does real CFD add information?",
-      copy: "Exploratory CMHA linear pilot의 ΔAUPRC는 −0.0419 [−0.1083, 0.0066]이었다. 공식 case map과 second family로 confirmatory 여부를 결정한다.",
-      state: "Negative signal · unresolved",
+      title: "Is condition–marginal coherence exact?",
+      copy: "정답 conditional distribution을 계산할 수 있는 controlled PDE에서 mean, coverage, nested-mask tower property를 먼저 검증한다.",
+      state: "Implementation next",
       blocking: true
     },
     {
       id: "G2",
-      title: "Is the operator calibrated OOD?",
-      copy: "Held-out geometry와 held-out BC에서 field, functional, 90% coverage를 검증한다. 현재 full Aneumo BC field가 없어 G2는 blocked이고 BenchAnXplore D0를 먼저 실행한다.",
-      state: "D0 preregistered · full G2 blocked",
+      title: "Does paired response improve?",
+      copy: "Geometry-disjoint × BC-support-disjoint test에서 generic probabilistic operator보다 field distribution과 같은-형상 ΔH를 함께 개선해야 한다.",
+      state: "Full paired-BC asset blocked",
       blocking: true
     },
     {
       id: "G3",
-      title: "Does the surrogate retain CFD signal?",
-      copy: "G1의 분모가 양수일 때만 risk-retention을 계산하고 target 0.75, minimum 0.50을 사전 등록한다.",
-      state: "Conditional",
+      title: "Is one-shot actually efficient?",
+      copy: "D0 oracle gate와 learned compute-matched 비교를 모두 통과할 때만 Fourier cycle decoder를 유지한다.",
+      state: "D0 retry pending · verdict unresolved",
       blocking: false
     },
     {
       id: "G4",
-      title: "Is hemodynamics non-redundant?",
-      copy: "Direct geometry-to-status보다 낫지 않으면 hemodynamic bridge라는 주장을 철회한다.",
-      state: "Falsification",
-      blocking: false
+      title: "Does the method generalize?",
+      copy: "Controlled PDE, nonlinear PDE, irregular 3D 세 domain에서 같은 coherence·response mechanism이 유효해야 한다.",
+      state: "Blocking AAAI claim",
+      blocking: true
     }
   ],
   datasets: [
@@ -113,8 +127,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "CMHA",
-      role: "patient-specific real-CFD bridge와 G1 downstream gate",
-      provenance: "tables audited · case map pending"
+      role: "secondary real-CFD와 cross-sectional status diagnostic",
+      provenance: "tables audited · exploratory increment negative · case map pending"
     },
     {
       name: "AneuX",
@@ -123,6 +137,27 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "Exact controlled-PDE G1 preregistered and runtime-smoked",
+      copy: "Correlated random Dirichlet BC를 갖는 exact Poisson family에서 learned joint BC density, analytic arbitrary-mask conditioning, shared operator, paired response loss를 5 seeds로 평가하도록 metric과 threshold를 결과 전에 고정했다. Pinned container의 축소 runtime smoke를 통과했다.",
+      files: ["configs/controlled_pde_g1.json", "src/aurora/controlled_pde.py", "cluster/ssu_a6gpu_controlled_g1.pbs"]
+    },
+    {
+      date: "2026.08.03",
+      category: "experiment",
+      title: "D0 attempt 1 ended at the scheduler walltime",
+      copy: "Frozen BenchAnXplore D0의 첫 실행은 30분 32초에 scheduler exit −29로 종료돼 metric이 생성되지 않았다. 과학적 verdict는 unresolved로 유지하고, 동일 threshold로 60분 재실행과 비식별 case-count progress를 준비했다.",
+      files: ["results/benchanxplore_d0_attempt1_20260803.json", "cluster/ssu_a6gpu_benchanxplore_d0.pbs", "src/aurora/benchanxplore.py"]
+    },
+    {
+      date: "2026.08.03",
+      category: "research",
+      title: "Novelty reset to coherent partial-condition operators",
+      copy: "직접 선행연구 감사 결과 missing-BC 문제, probabilistic operator, GNN+physics, Fourier decoder를 독립 novelty에서 제외했다. 임의 BC observation mask의 nested condition–marginal coherence, same-geometry paired response, structural/model uncertainty separation을 primary method로 재정의했다.",
+      files: ["AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

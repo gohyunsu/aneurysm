@@ -1,12 +1,12 @@
 # AURORA · Aneurysm Research
 
-뇌동맥류 geometry만으로 하나의 “정답 CFD”를 만드는 대신, 관측되지 않은
-boundary condition(BC)이 만들 수 있는 **hemodynamic field의 분포**를
-예측하고 그 분포가 downstream rupture-status stratification에 필요한
-정보를 보존하는지 검증하는 연구입니다.
+불완전하게 관측된 boundary condition(BC) 아래에서 서로 모순되지 않는
+**PDE solution distribution**을 학습하고, 이를 3D 뇌동맥류 혈류에
+검증하는 연구입니다. Full, partial, missing BC를 별도 문제처럼 풀지 않고
+하나의 joint BC–solution model의 조건부·주변 분포로 연결합니다.
 
-> **AURORA** — Aneurysm Uncertainty-aware Risk-aligned Operator for Rapid
-> Assessment
+> **AURORA** — Aneurysm Uncertainty-aware Reconstruction Operator for
+> Reliable Assessment
 
 ## 현재 모델은 GNN인가?
 
@@ -29,12 +29,15 @@ multigrid, physics-informed loss를 폭넓게 다룹니다. attention이나 mask
 
 AURORA는 다음 세 질문을 한 모델과 실험 프로토콜로 연결합니다.
 
-1. BC가 없을 때 field를 점 추정하지 않고 calibrated distribution으로
-   표현할 수 있는가?
-2. autoregressive rollout 없이 한 cardiac cycle의 velocity/WSS를
-   one-shot temporal basis로 복원할 수 있는가?
-3. 낮은 node RMSE가 아니라 real-CFD 기반 downstream signal을 얼마나
-   보존하는가?
+1. 관측된 BC component가 달라도 예측들이 하나의 확률법칙의
+   조건부·주변 분포로 일관되는가?
+2. 동일 geometry에서 BC만 바꾼 simulator response를 직접 감독하면
+   condition shift의 field 변화를 더 정확히 학습하는가?
+3. BC-induced structural uncertainty와 finite-data/model uncertainty를
+   분리했을 때 각각 실제 BC shift와 geometry OOD를 추적하는가?
+
+One-shot Fourier cycle은 핵심 novelty가 아닙니다. D0 oracle 표현력 gate와
+compute-matched learned 비교를 모두 통과할 때만 효율 구성요소로 남깁니다.
 
 ## 문서 읽는 순서
 
@@ -67,22 +70,37 @@ python -m unittest discover -s tests -v
 검증합니다. 연구 방향이 바뀌면 문서만 수정하지 말고 이 계약과 사이트의
 변경 이력도 같은 커밋에서 갱신합니다.
 
-CMHA G1 exploratory pilot은 scheduler allocation과 pinned container에서
+CMHA legacy exploratory diagnostic은 scheduler allocation과 pinned container에서
 실행합니다. 공개 template은 `cluster/`, 실행 코드는
 `experiments/run_cmha_g1.py`에 있으며, source identifier는 run artifact에
 기록하지 않습니다.
 
 2026-08-03 표 기반 exploratory 결과는 real-CFD summary의 incremental
-utility를 지지하지 않았습니다(`ΔAUPRC=-0.0419`, patient-bootstrap 95% CI
-`[-0.1083, 0.0066]`). Confirmatory G1은 공식 case map과 second model
-family가 없어 unresolved입니다. 따라서 현재 우선순위는 C1 missing-BC
-operator와 C2 one-shot fidelity이며, C3 risk alignment는 조건부입니다.
+rupture-status utility를 지지하지 않았습니다(`ΔAUPRC=-0.0419`,
+patient-bootstrap 95% CI `[-0.1083, 0.0066]`). 이 결과 때문에 downstream
+risk alignment는 논문의 primary contribution에서 제외했습니다.
 
 현재 source audit에서 Aneumo는 전체 학습 release가 아니라 geometry 1개 ×
 steady BC 2개 sample만 확인됐습니다. 반면 BenchAnXplore 105-case
 HDF5/XDMF archive는 무결성을 확인해, 학습 전 단계인 D0 temporal-basis
 audit을 `configs/benchanxplore_d0.json`에 결과 확인 전에 등록했습니다.
-이 audit은 Fourier 표현 가능성만 판단하며 모델 성능으로 해석하지 않습니다.
+이 audit은 Fourier 표현 가능성만 판단하며 모델 성능으로 해석하지
+않습니다. Main method는 exact controlled PDE → nonlinear PDE → paired-BC
+irregular 3D 순서로 검증합니다.
+
+D0 첫 실행은 30분 32초에 scheduler walltime으로 종료되어 metric이 없고,
+과학적 verdict는 `unresolved`입니다. Frozen threshold는 변경하지 않았으며
+60분 재실행을 준비했습니다. 실패 provenance는
+[`results/benchanxplore_d0_attempt1_20260803.json`](results/benchanxplore_d0_attempt1_20260803.json)에
+남겼습니다.
+
+첫 method sanity experiment는
+[`configs/controlled_pde_g1.json`](configs/controlled_pde_g1.json)에 5개
+seed, mask, metric, threshold를 결과 전에 고정했습니다. Exact Poisson
+family에서 learned joint BC density + shared operator를 direct masked
+Gaussian baseline과 비교합니다. PBS 실행 코드는
+[`cluster/ssu_a6gpu_controlled_g1.pbs`](cluster/ssu_a6gpu_controlled_g1.pbs)이며,
+통과해도 pipeline sanity일 뿐 novelty 성능으로 해석하지 않습니다.
 
 ## 해석의 경계
 

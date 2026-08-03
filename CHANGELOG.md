@@ -4,6 +4,52 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · Novelty reset: coherent partial-condition operators
+
+### Research
+
+- ICLR 2026 boundary-indexed operator family, function-space flow/diffusion
+  operator, neural-process consistency, PDE OOD-UQ를 직접 경쟁 선행연구로
+  추가했다.
+- Missing-BC 문제 정의, probabilistic operator, GNN+physics, Fourier
+  decoder를 독립 novelty에서 제외했다.
+- Primary contribution을 arbitrary observation mask의 nested
+  condition–marginal coherence, same-geometry paired simulator response,
+  BC-induced/model-induced uncertainty separation으로 재정의했다.
+- AURORA의 정식 명칭을 **Aneurysm Uncertainty-aware Reconstruction Operator
+  for Reliable Assessment**로 바꿔 현재 근거가 없는 `Risk-aligned` 표현을
+  제거했다.
+
+### Protocol
+
+- Exact controlled PDE → nonlinear PDE → irregular 3D의 세-domain 검증을
+  AAAI general-method gate로 고정했다.
+- CMHA rupture-status diagnostic은 음성 exploratory signal을 반영해
+  primary gate에서 secondary analysis로 이동했다.
+- One-shot Fourier decoder는 D0 oracle 및 learned compute-matched 비교를
+  통과할 때만 남기는 engineering choice로 낮췄다.
+
+### Experiment
+
+- BenchAnXplore D0 첫 실행은 30분 32초에 scheduler walltime exit `-29`로
+  종료됐다. Aggregate metric이 생성되지 않아 과학적 verdict는
+  `unresolved`다.
+- 실패 attempt를 공개 aggregate provenance로 남기고, metric·threshold는
+  바꾸지 않은 채 walltime 60분과 case-count progress log만 추가했다.
+- Exact conditional distribution을 계산할 수 있는 Poisson family의 G1을
+  5 seeds로 사전 등록했다. Joint Gaussian BC density, arbitrary-mask
+  analytic conditioning, shared solution operator, paired-response loss와
+  direct masked Gaussian baseline을 구현했다.
+- Pinned experiment container에서 2-epoch CPU runtime smoke를 완료해
+  tensor shape, conditioning, sampling, metric serialization을 검증했다.
+
+### Site
+
+- 메인 페이지와 11장 field guide의 architecture, gate, contribution,
+  glossary를 v2 연구 질문으로 동기화했다.
+- Full·partial·missing 모드가 하나의 joint BC density를 공유하는 과정과
+  paired response·두 uncertainty 축을 배경지식 없이 읽을 수 있게 설명했다.
+
 ## 2026-08-03 · BenchAnXplore D0 preregistration
 
 ### Data

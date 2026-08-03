@@ -104,12 +104,50 @@ proper scoring rule로 학습한다. 이는 AURORA의 uncertainty mechanism에
   (arXiv, 2025)](https://arxiv.org/abs/2502.12902)
 - [Neural Operator Processes under Partial Observations
   (arXiv, 2026)](https://arxiv.org/abs/2606.22946)
+- [Flow-matching Operators for Residual-Augmented Probabilistic Learning of
+  PDEs (ICLR, 2026)](https://openreview.net/forum?id=fcBMLJtCoc)
+- [Guided Diffusion Sampling on Function Spaces with Applications to PDEs
+  (NeurIPS, 2025)](https://openreview.net/forum?id=oAgwvZay2U)
 
-**구분점:** 이 연구들은 aneurysm BC non-identifiability나 real-CFD
-downstream sufficiency를 다루지 않는다. AURORA는 PNO 자체를 novelty로
-주장하지 않는다.
+**영향:** 확률적 operator, flow matching, sparse/noisy observation을
+도입하는 것 자체는 novelty가 아니다. AURORA는 생성 방식이 아니라 임의
+physical-condition observation mask 사이의 nested coherence와 paired
+condition response를 검증해야 한다.
 
-### 1.7 직접적인 2026 multimodal 경쟁작
+### 1.7 boundary-indexed operator와 conditional consistency
+
+ICLR 2026 연구는 varying BC에서 하나의 neural operator가 아니라
+boundary-indexed operator family를 학습하며 support 밖에서는 식별되지
+않는다는 문제를 직접 정식화했다. NeurIPS 2025 Flow Matching Neural
+Processes는 target set의 marginal/conditional consistency를 다룬다.
+
+- [One Operator to Rule Them All? On Boundary-Indexed Operator Families in
+  Neural PDE Solvers (ICLR, 2026)](https://openreview.net/forum?id=lDjWQ9UxRy)
+- [Flow Matching Neural Processes
+  (NeurIPS, 2025)](https://papers.neurips.cc/paper_files/paper/2025/file/a92519f525c00085095fa41c5c46cdb5-Paper-Conference.pdf)
+
+**영향:** missing-BC 비식별성 또는 “consistency”라는 이름만으로는
+contribution이 되지 않는다. AURORA는 하나의 joint BC density를 arbitrary
+mask에 조건화해 PDE solution으로 pushforward하는 구체적 구조, nested-mask
+tower-property metric, same-geometry response supervision을 함께 입증해야
+한다.
+
+### 1.8 uncertainty와 OOD PDE
+
+PDE OOD에서 ensemble, uncertainty, conservation update를 비교한 연구와
+neural operator를 function-valued Gaussian process로 선형화한 연구가 있다.
+
+- [Using Uncertainty Quantification to Characterize and Improve Out-of-
+  Distribution Learning for PDEs
+  (ICML, 2024)](https://openreview.net/forum?id=Y50K6DSrWo)
+- [Linearization Turns Neural Operators into Function-Valued Gaussian
+  Processes (ICML, 2025)](https://openreview.net/forum?id=4Z04wVQ9FY)
+
+**영향:** OOD uncertainty 하나를 보고하는 것은 부족하다. BC completion
+축과 model ensemble 축을 분리하고 각각 condition error와 geometry OOD
+error를 추적하는지 falsification해야 한다.
+
+### 1.9 직접적인 2026 multimodal 경쟁작
 
 2026-07 arXiv preprint는 PointNeXt geometry, unsteady PINN descriptors,
 clinical variables를 late fusion하여 rupture-status prediction을
@@ -147,27 +185,29 @@ clinical variables를 late fusion하여 rupture-status prediction을
 
 | 선행 축 | 해결한 것 | 아직 비어 있는 것 | AURORA 검증 |
 |---|---|---|---|
-| rupture-status ML | multimodal association | CFD 비용·BC uncertainty·future risk 구분 | real-CFD utility gate |
-| autoregressive GNN | fast transient field | missing initial state/BC, rollout drift | missing-BC + one-shot cycle |
-| graph transformer | long-range mesh interaction | calibrated field distribution | functional energy score |
-| PINN multimodal | physics descriptor + fusion | distributional BC, nested sufficiency | BC marginalization + RR |
-| probabilistic operator | function-space UQ | aneurysm-specific causal nuisance | same-geometry multi-BC |
-| synthetic CFD | scale | synthetic→patient shift | multi-fidelity fine-tune/OOD |
+| rupture-status ML | multimodal association | CFD increment·status≠future risk | secondary diagnostic only |
+| autoregressive GNN | fast transient field | partial/missing condition, rollout drift | coherence + efficiency gate |
+| graph transformer | long-range mesh interaction | calibrated field family | shared-backbone comparison |
+| boundary-indexed NO | varying-BC non-identifiability 정식화 | arbitrary-mask coherent prediction | tower-property test |
+| probabilistic operator | function-space UQ/generative sampling | condition-source attribution | coherent BC pushforward |
+| neural process consistency | marginal/conditional consistency | physical-condition operator response | nested masks + paired response |
+| PDE UQ/OOD | model uncertainty와 OOD 분석 | BC-induced vs model-induced 분리 | two-axis falsification |
+| synthetic CFD | 같은 geometry의 multiple BC | response supervision/generalization | paired \(\Delta H\) |
 
 ## 4. novelty를 지키기 위한 필수 baseline
 
 다음 비교가 없으면 contribution을 증명할 수 없다.
 
-1. clinical + morphology
-2. clinical + morphology + real CFD
-3. direct geometry encoder → status
-4. deterministic surface/volume operator
-5. MC-dropout/deep ensemble uncertainty
-6. probabilistic operator without task alignment
-7. task alignment without BC marginalization
-8. full AURORA
+1. zero/mean/conditional-mean BC imputation
+2. mask-token deterministic operator
+3. independent probabilistic head per observation mask
+4. MC-dropout/deep ensemble
+5. 공개 probabilistic/flow-matching operator
+6. joint BC density + shared operator, pair loss 없음
+7. full AURORA
+8. random cross-geometry pair negative control
 9. In-PI-MGN 또는 공개 graph-transformer checkpoint/재현
-10. PointNet/Graph U-Net AneuG-Flow baseline
+10. Secondary analysis에서만 clinical+morphology와 +real CFD
 
 ## 5. 문헌상 아직 단정하지 않는 것
 

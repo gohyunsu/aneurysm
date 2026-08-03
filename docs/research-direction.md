@@ -2,235 +2,220 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: architecture contract + exploratory G1 diagnostic 완료
+상태: novelty reset · D0 running · learned operator result 없음
 
-2026-08-03 CMHA 표 기반 exploratory G1은 real-CFD summary의 incremental
-utility를 지지하지 않았다(`ΔAUPRC=-0.0419`, patient-bootstrap 95% CI
-`[-0.1083, 0.0066]`). 공식 case map과 second model family가 없는 진단
-결과이므로 confirmatory gate는 `unresolved`다. 그동안 C3 risk-aligned
-branch는 conditional secondary hypothesis로 낮추고 C1/C2를 우선한다.
+## 1. 현재 판정
 
-## 1. 한 문장 연구 질문
+기존 v1을 “missing-BC probabilistic neural operator + Fourier cycle decoder”로
+제출하면 AAAI급 독립 novelty가 부족하다.
 
-> 환자별 inflow/outflow boundary condition이 관측되지 않은 3D 뇌동맥류
-> geometry에서, 하나의 그럴듯한 CFD field가 아니라 **가능한 hemodynamic
-> field의 보정된 분포**를 예측하고, 그 분포가 real CFD가 제공하는
-> rupture-status 관련 정보를 얼마나 보존하는지 측정할 수 있는가?
+- varying BC 밖 neural operator의 비식별성은 ICLR 2026 연구가 직접
+  정식화했다.
+- function-space diffusion/flow-matching/probabilistic operator가 이미 있다.
+- marginal/conditional consistency는 neural process 문헌에 선행한다.
+- aneurysm transient inflow-aware physics GNN은 npj Digital Medicine 2026에
+  발표됐다.
+- Fourier one-shot decoding은 architecture choice이지 새 원리가 아니다.
 
-이 질문은 기존 아이디어의 큰 틀을 유지한다.
+따라서 현재는 **아이디어 후보는 유망하지만 accept-ready가 아니다**. GNN,
+attention, uncertainty, physics loss를 조합한 것만으로 제출하지 않는다.
 
-`clinical + morphology + hemodynamics → rupture-status stratification`
+## 2. 새 한 문장 연구 질문
 
-다만 “geometry를 GNN에 넣어 WSS/OSI를 만든다”는 중간 단계를 근본적으로
-바꾼다. geometry와 BC가 주어져야 Navier–Stokes 해가 정해진다. BC가 없는
-geometry-only deployment에서 deterministic field를 만들면, 모델은 관측되지
-않은 생리조건을 암묵적으로 평균 내거나 훈련 데이터의 조건을 복제할 뿐이다.
+> 하나의 PDE surrogate가 full, partial, missing physical condition을 모두
+> 받을 때, 임의의 observation mask에서 나온 solution distribution들이
+> 하나의 joint condition–solution model의 조건부·주변 분포로 일관되면서
+> condition 변화에 대한 paired response까지 보존할 수 있는가?
 
-## 2. 냉정한 진단
+뇌동맥류는 중요하고 어려운 irregular 3D application이지만, 방법의 유효성은
+controlled PDE와 nonlinear PDE에서도 같은 protocol로 검증한다.
 
-### 2.1 기존 방향이 논문 중심축이 될 수 없는 이유
-
-1. **입력-배포 불일치**
-
-   In-PI-MGN은 현재 velocity, acceleration, inlet context를 입력으로 다음
-   timestep을 예측한다. AneuX surface mesh에는 이 정보가 없다.
-
-2. **방법 novelty 포화**
-
-   MeshGraphNet, masked graph pretraining, multigrid, sparse graph
-   transformer, inflow token, physics loss가 이미 선행연구에 등장했다.
-   self-attention이나 V-cycle을 추가하는 것은 유효한 ablation이지 독립된
-   AAAI contribution이 아니다.
-
-3. **목표 불일치**
-
-   낮은 velocity RMSE가 WSS/OSI hotspot, case-level ordering, downstream
-   status discrimination을 보장하지 않는다. 반대로 task에 충분한 surrogate가
-   모든 interior node에서 가장 낮은 RMSE를 가질 필요도 없다.
-
-4. **label 정의 문제**
-
-   공개 데이터의 ruptured/unruptured는 과거 상태다. 파열 뒤 geometry와
-   flow가 변했을 수 있어 reverse causation이 존재한다. 이를 2년/5년 risk로
-   부르면 임상적·인과적 주장이 무너진다.
-
-5. **작은 paired clinical cohort**
-
-   CMHA 약 99 IA만으로 큰 end-to-end multimodal network를 처음부터
-   학습하면 성능보다 variance와 leakage를 학습할 가능성이 높다.
-
-### 2.2 버리는 것과 보존하는 것
+## 3. 보존하는 큰 틀과 버리는 주장
 
 | 결정 | 내용 |
 |---|---|
-| 보존 | geometry–hemodynamics–clinical endpoint를 연결한다는 큰 틀 |
-| 보존 | real CFD와 surrogate hemodynamics를 같은 downstream task에서 비교 |
-| 보존 | 공개 데이터셋의 provenance-aware 통합 |
-| 중단 | In-PI-MGN에 모듈을 누적하는 방식의 primary contribution |
-| 중단 | geometry-only case에 단일 synthetic WSS/OSI를 사실처럼 부착 |
-| 중단 | 50-step RMSE 하나로 모델을 선택 |
-| 중단 | 공개 rupture status를 prospective risk로 서술 |
+| 보존 | geometry와 미관측 physiology가 함께 hemodynamics를 결정한다는 틀 |
+| 보존 | 같은 geometry의 다중 BC를 이용해 BC response를 분리하는 데이터 설계 |
+| 보존 | GNN local encoder + global token + continuous query operator |
+| 보존 | D0 통과 시 one-shot temporal representation |
+| 중단 | missing-BC 문제 정의 자체를 novelty로 주장 |
+| 중단 | Fourier/GNN/attention/physics loss를 contribution으로 나열 |
+| 중단 | 현재 negative evidence에서 rupture-status alignment를 primary로 유지 |
+| 중단 | cross-sectional status를 prospective risk 또는 clinical utility로 표현 |
 
-## 3. 제안: AURORA
+## 4. AURORA v2
 
-**AURORA**는 *Aneurysm Uncertainty-aware Risk-aligned Operator for Rapid
-Assessment*의 약자다.
+**AURORA**는 *Aneurysm Uncertainty-aware Reconstruction Operator for
+Reliable Assessment*의 약자다.
 
-```text
-surface / sparse volume geometry
-        │
-        ├─ anatomy-aware multi-scale geometry encoder
-        │
-observed BC ───────────────┐
-missing BC → p(z_bc | geometry, site proxy)
-                           │
-        ├─ one-shot dual-domain neural operator
-        │    ├─ coarse volume u(x,t), p(x,t)
-        │    └─ high-resolution wall τ_w(x,t)
-        │
-        ├─ differentiable TAWSS / OSI / LSA / RRT functionals
-        │
-clinical + morphology + distributional hemodynamics
-        │
-calibrated rupture-status score + uncertainty / abstention
-```
+### C1. Nested condition–marginal coherence
 
-핵심은 BC를 geometry에서 “맞히는” 것이 아니다. 관측 BC가 있으면 그대로
-조건화하고, 없으면 anatomical site와 parent-vessel scale에 맞는 empirical
-population prior를 적분한다. 출력은 field sample의 집합이며 평균 field만
-보고하지 않는다.
-
-## 4. contribution 가설과 현재 우선순위
-
-### C1. Missing-BC distributional operator
-
-기존 aneurysm surrogate는 BC 또는 초기 flow state를 입력으로 요구하거나
-고정 BC 아래 deterministic output을 낸다. AURORA는 입력 가용성에 따라
-두 mode를 같은 operator에서 지원한다.
-
-- `observed-BC mode`: \(p(H \mid G, B)\)
-- `missing-BC mode`: \(p(H \mid G)=\int p(H\mid G,B)p(B\mid A)\,dB\)
-
-여기서 \(G\)는 geometry, \(B\)는 waveform/flow split, \(A\)는 해부학적
-proxy, \(H\)는 hemodynamic field다. functional energy score와 coverage로
-분포를 학습·평가한다.
-
-### C2. One-shot dual-domain cycle operator
-
-autoregressive rollout은 작은 one-step bias를 누적한다. AURORA는 cardiac
-cycle을 8개 temporal Fourier mode로 압축해 한 번에 계수를 예측한다.
-
-- coarse volume branch: velocity와 pressure의 전역 구조, divergence/flux
-- fine wall branch: WSS의 국소 gradient와 hotspot
-- cross-consistency: volume velocity gradient에서 계산한 wall shear와 wall
-  branch가 일치하도록 제약
-
-full transient tensor를 매 step decode하지 않으므로 메모리와 drift를 줄이고,
-TAWSS/OSI를 differentiable하게 복원한다.
-
-### C3. Task-aligned functional sufficiency · conditional secondary
-
-surrogate 선택 기준을 “CFD imitation”에서 “CFD가 downstream task에
-제공하는 정보 보존”으로 확장한다.
-
-- real-CFD oracle head의 logit/ranking을 held-out patient 안에서 distill
-- TAWSS/OSI/LSA/RRT distribution과 neck/dome hotspot 보존
-- `risk-retention`:
+전체 BC \(B\), 관측 mask \(M\), field \(H\)에 대해
 
 \[
-\mathrm{RR} =
-\frac{M(\mathrm{clinical+morph+surrogate})-M(\mathrm{clinical+morph})}
-     {M(\mathrm{clinical+morph+realCFD})-M(\mathrm{clinical+morph})}
+p(H\mid G,B_M,M)
+=\int p_\theta(H\mid G,B)
+q_\phi(B_{\bar M}\mid G,B_M,M)\,dB_{\bar M}
 \]
 
-\(M\)은 primary metric인 AUPRC다. 분모가 양수라는 G1 gate를 통과할 때만
-해석한다. RR이 높아도 absolute utility가 작으면 성공으로 부르지 않는다.
-현재 exploratory G1의 분모는 음수이므로 C3를 실험하거나 risk-retention을
-보고하지 않는다.
+를 한 모델 안에서 계산한다. 초기 구현은 anatomy-conditioned low-rank
+Gaussian mixture를 full BC record에 적합하고, 임의 관측 component에
+analytic conditioning한다. 모든 mode는 같은 conditional solution
+operator의 pushforward다.
 
-## 5. 무엇이 실제 novelty인가
+핵심 검증은 별도 head의 숫자가 비슷하다는 것이 아니라, nested mask에서
+tower property와 oracle conditional moments/coverage가 맞는지다.
 
-단일 구성요소는 이미 존재한다.
+### C2. Paired simulator-response supervision
 
-- probabilistic neural operator
-- physics-aware transformer
-- aneurysm CFD surrogate
-- clinical+morphology+hemodynamics fusion
+같은 geometry에서 BC만 바꾼 두 simulation을 pair로 사용한다.
 
-따라서 novelty 주장은 조합 자체가 아니라 다음 문제 설정과 검증에 둔다.
+\[
+\mathcal L_\Delta =
+\|[\hat H(G,B_j)-\hat H(G,B_i)]-[H(G,B_j)-H(G,B_i)]\|.
+\]
 
-1. aneurysm geometry-only deployment의 **missing-BC non-identifiability**를
-   명시적 distributional operator로 정의
-2. 동일 geometry/다중 BC 데이터로 aleatoric BC sensitivity를 학습하고
-   geometry OOD와 BC OOD를 분리 평가
-3. real CFD의 downstream incremental information을 surrogate가 얼마나
-   보존하는지 field·functional·decision 세 층에서 동시에 측정
+이는 geometry variation이 큰 absolute field loss 안에서 BC sensitivity가
+묻히는 것을 막는다. 논문은 이를 causal effect가 아닌 simulator
+intervention response라고 한정한다.
 
-2026-07 공개 arXiv 경쟁작이 geometry-conditioned PINN과 multimodal
-rupture-status fusion을 제안했으므로, “physics-informed multimodal
-aneurysm prediction”은 우리 novelty가 아니다.
+### C3. Structural/model uncertainty separation
 
-## 6. 성공·실패의 사전 정의
+BC completion sample과 model ensemble을 두 축으로 유지한다.
 
-### 성공으로 볼 최소 조건
+- BC-induced structural uncertainty: 미관측 물리 입력 때문에 생김
+- model-induced uncertainty: 유한 학습 geometry와 parameter 때문에 생김
 
-- G1: real CFD가 clinical+morphology 대비 positive incremental AUPRC를
-  patient-bootstrap 95% CI에서 보인다.
-- held-out geometry × held-out BC에서 deterministic baseline보다
-  distributional score와 coverage가 개선된다.
-- surrogate functionals가 real CFD의 case ranking과 hotspot을 보존한다.
-- direct geometry-to-status, deterministic operator, late fusion보다
-  AURORA가 calibration을 해치지 않으면서 일관된 incremental utility를 낸다.
-- missing-BC uncertainty가 실제 BC-induced error와 양의 상관을 보인다.
+첫 항은 BC-held-out error, 둘째 항은 geometry OOD error를 각각 추적해야
+한다. 합친 interval coverage 하나만 맞으면 성공으로 보지 않는다.
 
-### 방향을 축소하거나 중단할 조건
+## 5. 아키텍처의 역할
 
-- real CFD가 morphology 이후 정보를 추가하지 못함 → risk-aligned branch를
-  내리고 missing-BC operator 논문으로 축소
-- CMHA raw CFD field가 case와 안전하게 매핑되지 않음 → patient field
-  fine-tuning 주장을 제거하고 summary-only validation으로 변경
-- uncertainty가 miscalibrated이거나 geometry OOD를 감지하지 못함 →
-  deployment claim 제거
-- direct geometry model이 동일 성능이고 surrogate field가 기능적으로
-  무의미함 → hemodynamic interpretability 주장을 철회
-- AneuX와 CMHA의 label/site shift가 통제되지 않음 → external test를
-  descriptive stress test로만 보고
+### Backbone
 
-## 7. 논문 포지셔닝
+- local surface: edge-message GNN
+- global anatomy: latent-token attention
+- continuous output: coordinate query neural operator
 
-### 작업 제목
+따라서 현재 architecture는 GNN을 포함하지만 순수 GNN이 아니다. Backbone은
+강한 구현 선택이며 novelty의 중심이 아니다.
 
-**AURORA: Boundary-Condition Marginalized Neural Operators for
-Task-Aligned Intracranial Aneurysm Hemodynamics**
+### Boundary model
 
-### 논문이 답해야 할 세 질문
+- waveform PCA/Fourier coefficient와 outlet log-ratio를 joint density로 학습
+- full/partial/missing mask에서 동일 density를 analytic conditioning
+- 관측되지 않은 값과 값 0을 mask로 명확히 구분
+- density 복잡성이 데이터로 정당화되기 전에는 diffusion/flow prior를 쓰지
+  않음
 
-1. Does modeling missing BCs as a distribution improve calibrated field
-   prediction under geometry and inflow shift?
-2. Does one-shot dual-domain decoding preserve wall functionals better than
-   autoregressive full-field surrogates at comparable compute?
-3. Do surrogate hemodynamics retain the incremental information of real CFD
-   for cross-sectional rupture-status stratification?
+### Temporal representation
 
-### 예상 본문 구성
+D0에서 80-step field를 Fourier 4/8/12 mode로 oracle reconstruction한다.
+Primary \(K=8\)이 사전 threshold를 통과할 때만 learned one-shot branch를
+유지한다. 통과는 모델 성능이 아니라 representation feasibility다.
 
-1. Introduction: missing-BC contradiction와 field/downstream gap
-2. Related work: aneurysm CFD, operator learning, uncertainty, risk models
-3. Method: conditional field distribution, dual-domain decoder, sufficiency
-4. Experimental design: three axes of shift와 nested clinical evaluation
-5. Results: field → functionals → downstream → calibration → efficiency
-6. Limitations: status≠risk, CFD≠truth, small paired cohort, domain shift
-7. Conclusion: rapid research surrogate, not clinical decision system
+## 6. AAAI에 필요한 일반성
 
-## 8. 현실적인 진행 순서
+의료 case 하나에서 성능이 좋아도 general AI method로 충분하지 않다.
 
-1. CMHA 공식 case map·feature provenance를 해결하고 second model family로
-   confirmatory G1 여부를 결정
-2. 그와 병렬로 동일 geometry/다중 BC가 있는 Aneumo subset의 C1
-   missing-BC pilot을 우선
-3. deterministic operator와 probabilistic wrapper를 geometry/BC OOD에서 비교
-4. temporal basis decoder를 selected AneuG-Flow/BenchAnXplore에 검증
-5. G1이 양수일 때만 CMHA task alignment와 risk-retention을 재개
-6. C1/C2가 독립적으로 통과하면 status branch 없이 operator paper로 진행
+1. **Exact controlled PDE**: conditional field distribution을 계산할 수 있는
+   Poisson/Laplace 계열에서 coherence, moment, coverage 검증
+2. **Nonlinear PDE**: Burgers/Navier–Stokes 계열에서 condition support shift와
+   geometry/parameter shift 분리
+3. **Irregular 3D**: 동일 aneurysm geometry의 paired BC에서 field와
+   intervention-response 평가
+4. **Transient efficiency**: BenchAnXplore에서 autoregressive GNN과
+   one-shot cycle을 compute-matched 비교
 
-가장 비싼 full-scale 학습은 1–3단계가 성공한 뒤 시작한다.
+같은 C1–C3가 처음 세 domain에서 유효해야 G4를 통과한다.
+
+## 7. 성공 기준
+
+### G1 · exact coherence
+
+- exact conditional mean의 standardized error ≤ 0.05
+- 90% interval coverage absolute error ≤ 0.03
+- nested-mask projective consistency error ≤ 0.05
+
+이 gate는 pipeline sanity다. 통과 자체는 novelty evidence가 아니다.
+
+### G2 · paired response
+
+- geometry-disjoint × condition-support-disjoint test
+- strong generic probabilistic operator 대비 field energy score 개선
+- paired \(\Delta H\) relative L2 개선
+- mask별 matched-coverage width가 악화되지 않음
+- 5 seeds와 geometry bootstrap 95% CI
+
+Field만 좋아지거나 pair response만 좋아지면 핵심 주장을 축소한다.
+
+### G3 · transient efficiency
+
+- D0 oracle representation 통과
+- compute-matched autoregressive baseline 대비 cycle field/peak error와
+  latency의 Pareto improvement
+
+아니면 one-shot branch를 버린다.
+
+### G4 · cross-domain generality
+
+Controlled, nonlinear, irregular-3D 세 domain에서 같은 coherence/response
+method가 strong baseline을 일관되게 개선해야 한다.
+
+## 8. 가장 큰 위협
+
+1. **Coherence가 자명한 재매개화에 불과할 위험**
+
+   Generic joint probabilistic operator와 비교해 calibration, response,
+   sample efficiency 중 실질적 개선을 보여야 한다.
+
+2. **BC density misspecification**
+
+   Gaussian mixture tail이 실제 waveform distribution을 못 담으면 coverage가
+   무너진다. Density-only calibration과 posterior predictive check를
+   solution metric과 분리한다.
+
+3. **Paired loss가 단순 data augmentation일 위험**
+
+   Cross-geometry pair negative control, pair-distance strata, matched example
+   budget을 통해 같은 데이터량 효과와 구분한다.
+
+4. **의료 특화 trick으로 보일 위험**
+
+   비의료 PDE 두 축에서 같은 method와 metric을 먼저 제시한다.
+
+5. **대규모 paired-BC 자산 부재**
+
+   현재 introai9 Aneumo는 1 geometry × 2 BC sample뿐이다. Full release의
+   shard·license·manifest를 확인하기 전 100×8 결과를 주장하지 않는다.
+
+## 9. 논문 포지셔닝
+
+작업 제목:
+
+**AURORA: Coherent Neural Operators under Partial and Missing Boundary
+Conditions**
+
+논문의 순서는 application이 아니라 method claim에 맞춘다.
+
+1. partial-condition operator family의 모순 문제
+2. nested condition–marginal construction
+3. paired simulator-response objective
+4. uncertainty decomposition
+5. exact → nonlinear → irregular 3D → transient 실험
+6. failure cases와 의료 해석 경계
+
+AAAI-27 main author kit은 2026-08-03 현재 공식 게시가 확인되지 않았다.
+원고는 AAAI-26의 7-page two-column 구조를 임시 기준으로 관리하고,
+AAAI-27 kit이 공개되면 style만 교체한다.
+
+## 10. 실행 우선순위
+
+1. D0 작업을 끝까지 모니터링하고 frozen threshold로 판정
+2. exact controlled PDE의 G1 구현·5-seed 실행
+3. Hugging Face full Aneumo의 shard 크기와 subset 가능성을 metadata-only로
+   감사
+4. paired-BC 자산 확보 전에는 nonlinear public PDE에서 C1/C2 pilot
+5. G1/G2가 양수일 때만 irregular 3D full backbone과 transient 학습
+6. CMHA status branch는 공식 case map과 positive real-CFD increment가
+   확인될 때만 secondary로 복원

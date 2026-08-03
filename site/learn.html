@@ -346,22 +346,32 @@
             </article>
             <article>
               <span>04 · CONDITION</span>
-              <div><h3>Observed / missing BC latent</h3><p>측정된 파형이 있으면 직접 encode하고, 없으면 해부학적 맥락에 맞는 여러 BC scenario를 샘플링합니다. 이 latent가 decoder의 각 층을 FiLM으로 조절합니다.</p></div>
-              <b>출력 수</b><small>evaluation에서 기본 K=8 scenarios</small>
+              <div><h3>하나의 joint BC density</h3><p>Full BC 기록으로 joint density를 학습합니다. Partial BC에서는 관측된 component에 analytic conditioning하고, missing BC에서는 전체 density를 사용합니다. 값 0과 미관측을 mask로 구분합니다.</p></div>
+              <b>핵심</b><small>mask마다 별도 head를 만들지 않음</small>
             </article>
             <article>
               <span>05 · QUERY</span>
-              <div><h3>Dual-domain operator decoder</h3><p>임의 volume query에는 속도·압력, 원래 wall query에는 WSS의 시간 계수를 예측합니다. graph가 바뀌어도 같은 연산자가 좌표에서 field를 묻는 구조입니다.</p></div>
-              <b>출력</b><small>volume field + wall field + uncertainty</small>
+              <div><h3>Shared conditional operator</h3><p>완성된 BC sample을 같은 solution operator에 넣습니다. 임의 volume query에는 속도·압력, wall query에는 검증 가능한 field를 예측합니다. 모든 관측 mode가 동일한 forward map을 공유합니다.</p></div>
+              <b>출력</b><small>K BC samples × E model members</small>
+            </article>
+            <article>
+              <span>06 · SUPERVISE</span>
+              <div><h3>Same-geometry paired response</h3><p>같은 geometry의 두 BC에서 실제 Δfield와 예측 Δfield를 직접 비교합니다. Geometry 차이가 큰 absolute loss 안에서 BC sensitivity가 묻히지 않게 합니다.</p></div>
+              <b>해석</b><small>simulator response · causal effect 아님</small>
+            </article>
+            <article>
+              <span>07 · DECOMPOSE</span>
+              <div><h3>두 uncertainty 축</h3><p>BC completion sample 간 변동은 미관측 입력의 structural uncertainty, ensemble 간 변동은 finite-data/model uncertainty로 계산합니다.</p></div>
+              <b>검증</b><small>BC shift와 geometry OOD를 각각 추적</small>
             </article>
           </div>
 
           <div class="why-fancy">
             <h3>Fancy함의 기준은 모듈 수가 아닙니다.</h3>
             <div>
-              <p><b>구조적 novelty</b><span>missing BC를 함수공간 분포로 주변화</span></p>
-              <p><b>계산적 novelty</b><span>autoregressive rollout 없이 한 주기 계수를 동시 생성</span></p>
-              <p><b>평가적 novelty</b><span>field RMSE가 아니라 real-CFD signal 보존까지 검증</span></p>
+              <p><b>확률적 구조</b><span>nested mask가 하나의 joint distribution을 공유</span></p>
+              <p><b>감독 신호</b><span>same-geometry BC pair의 Δfield를 직접 학습</span></p>
+              <p><b>검증 가능성</b><span>coherence·response·uncertainty 원인을 각각 반증</span></p>
             </div>
           </div>
 
@@ -369,7 +379,8 @@
             <b>현재 구현 상태</b>
             <p>
               이 페이지는 architecture contract를 설명합니다. 현재 공개 구현은
-              protocol validator와 G1 exploratory pilot까지이며, full
+              protocol validator, secondary clinical diagnostic, D0 temporal
+              audit까지이며, full
               GNN–operator는 gate를 통과한 뒤 단계 1부터 구현합니다. “proposed”와
               “implemented”를 구분합니다.
             </p>
@@ -402,21 +413,35 @@
           </div>
 
           <div class="explain-block">
-            <div><p class="eyebrow">THE CENTRAL EQUATION</p><h3>모르는 BC를 적분해 없앤다.</h3></div>
+            <div><p class="eyebrow">THE CENTRAL EQUATION</p><h3>관측하지 못한 BC component만 적분한다.</h3></div>
             <div class="prose">
-              <div class="large-equation">p(H | G) = ∫ p(H | G, B) p(B | A) dB</div>
+              <div class="large-equation">p(H | G,B<sub>M</sub>) = ∫ p(H | G,B) q(B<sub>¬M</sub> | G,B<sub>M</sub>) dB</div>
               <p>
                 <b>G</b>는 geometry, <b>B</b>는 boundary condition, <b>H</b>는
-                hemodynamic field, <b>A</b>는 위치·부모 혈관 지름 같은 anatomy
-                context입니다. 실제 계산에서는 적분을 정확히 풀지 않고 BC
-                scenario를 여러 번 샘플링해 근사합니다.
+                hemodynamic field, <b>M</b>은 관측 component의 mask입니다.
+                Joint Gaussian mixture는 관측 component에 정확히 conditioning할
+                수 있고, 남은 적분은 BC scenario를 샘플링해 근사합니다.
               </p>
             </div>
           </div>
 
           <div class="mistake-grid">
             <article><span>잘못된 단순화</span><h3>모든 사람에게 평균 파형</h3><p>출력은 안정적으로 보이지만 실제 불확실성보다 지나치게 좁습니다. 틀렸는데 확신하는 모델이 될 수 있습니다.</p></article>
-            <article><span>AURORA의 가설</span><h3>조건부 BC distribution</h3><p>train fold에서만 얻은 empirical prior를 사용하고, held-out BC coverage와 interval width를 함께 평가합니다.</p></article>
+            <article><span>또 다른 실패</span><h3>Mask마다 별도 모델</h3><p>Full·partial·missing head가 개별 metric은 좋아도 서로 다른 확률법칙을 배워, 정보가 늘었는데 분포가 모순되게 바뀔 수 있습니다.</p></article>
+            <article><span>AURORA의 가설</span><h3>Nested coherence</h3><p>더 적게 관측한 예측은 더 많이 관측한 예측을 올바르게 주변화한 결과여야 합니다. Exact PDE에서 tower-property error를 먼저 검증합니다.</p></article>
+          </div>
+
+          <div class="explain-block">
+            <div><p class="eyebrow">PAIRED RESPONSE</p><h3>같은 혈관에서 BC만 바꿔 비교한다.</h3></div>
+            <div class="prose">
+              <div class="large-equation">ΔH = H(G,B₂) − H(G,B₁)</div>
+              <p>
+                서로 다른 geometry를 비교하면 형상 차이와 BC 차이가 섞입니다.
+                같은 geometry의 simulation pair는 BC 변화가 만든 field
+                response를 직접 보여 줍니다. 이는 simulator 안의 controlled
+                response이며 환자에 대한 인과 효과는 아닙니다.
+              </p>
+            </div>
           </div>
 
           <details class="question">
@@ -467,11 +492,11 @@
           </div>
 
           <aside class="honesty-note">
-            <b>Fourier가 항상 정답은 아닙니다.</b>
+            <b>Fourier는 novelty가 아니라 조건부 engineering choice입니다.</b>
             <p>
-              파형이 주기적이라는 가정이 맞는지, 4·8·12 mode 중 어느 수가
-              충분한지 ablation합니다. 비주기적 과도현상이나 심한 부정맥에는
-              다른 basis가 필요할 수 있습니다.
+              먼저 105 case 전체의 oracle D0에서 4·8·12 mode를 평가합니다.
+              K=8이 사전 threshold를 통과하고, learned compute-matched
+              autoregressive 비교에서도 이득이 있을 때만 유지합니다.
             </p>
           </aside>
           <button class="chapter-next" type="button" data-next="functionals">다음 · Wall field가 중요한 이유 <span>→</span></button>
@@ -520,9 +545,9 @@
               <span><b>모델 B</b><small>조금 높은 RMSE · hotspot/OSI 보존</small></span>
             </div>
             <p>
-              AURORA는 field error와 함께 hotspot overlap, functional error,
-              real-CFD 기반 status model의 ranking·calibration 보존을 봅니다.
-              이를 <b>functional sufficiency</b>라고 부릅니다.
+              AURORA v2의 primary 평가는 field error와 paired-response error,
+              distribution coverage입니다. WSS·OSI hotspot은 gradient와 단위가
+              검증된 자산에서만 secondary functional로 추가합니다.
             </p>
           </div>
           <button class="chapter-next" type="button" data-next="datasets">다음 · 데이터셋은 왜 합치지 않는가 <span>→</span></button>
@@ -540,20 +565,22 @@
           </header>
 
           <div class="dataset-ladder">
+            <article><span>P0 · EXACT ORACLE</span><h3>Controlled PDE</h3><p>정답 conditional mean·covariance를 계산할 수 있어, partial/missing mask의 coherence와 coverage pipeline을 먼저 검증합니다.</p><small>method sanity · 통과 자체는 novelty 아님</small></article>
+            <article><span>P1 · NONLINEAR</span><h3>Nonlinear PDE</h3><p>Condition support shift와 parameter/geometry shift를 분리해 coherence와 paired response가 비선형계에서도 유효한지 봅니다.</p><small>비의료 generality</small></article>
             <article><span>P0 · SENSITIVITY</span><h3>Aneumo</h3><p>동일·유사 geometry에 여러 steady BC를 적용한 자료로, BC가 바뀌면 wall field가 얼마나 달라지는지 먼저 학습합니다.</p><small>synthetic CFD · clinical evidence 아님</small></article>
             <article><span>P1 · SCALE</span><h3>AneuG-Flow</h3><p>대규모 synthetic geometry를 geometry encoder pretraining과 분포 stress test에 사용합니다.</p><small>synthetic transfer 확인 필요</small></article>
             <article><span>P2 · TRANSIENT</span><h3>BenchAnXplore</h3><p>105개 semi-idealized transient CFD case로 autoregressive GNN baseline과 one-shot cycle decoder를 같은 조건에서 비교합니다.</p><small>80 frames/case · geometry-disjoint split</small></article>
-            <article><span>P3 · REAL-CFD BRIDGE</span><h3>CMHA</h3><p>clinical·morphology·real-CFD summary를 가진 cohort입니다. real CFD가 status 분석에 실제 추가 정보를 주는지 G1에서 먼저 검증합니다.</p><small>single-center · patient-grouped analysis</small></article>
+            <article><span>SECONDARY · REAL-CFD</span><h3>CMHA</h3><p>clinical·morphology·real-CFD summary를 가진 cohort입니다. 현재 exploratory increment가 음수라 primary method와 분리합니다.</p><small>single-center · patient-grouped analysis</small></article>
             <article><span>P4 · EXTERNAL STRESS</span><h3>AneuX</h3><p>750개 geometry/status에서 direct geometry baseline과 missing-BC surrogate representation을 외부 연관성 stress test로 비교합니다.</p><small>real CFD 없음 · surrogate를 real로 부르지 않음</small></article>
           </div>
 
           <div class="data-status">
-            <div><p class="eyebrow">ASSET AUDIT · 03 AUG 2026</p><h3>필요한 핵심 자산은 `introai9`에서 확인했습니다.</h3></div>
+            <div><p class="eyebrow">ASSET AUDIT · 03 AUG 2026</p><h3>존재와 학습 가능성을 구분했습니다.</h3></div>
             <p>
-              Aneumo, AneuG-Flow, BenchAnXplore, CMHA, AneuX, Aneurisk의 원본
-              또는 추출본이 존재합니다. 존재 확인은 곧 G0 통과를 뜻하지 않습니다.
-              현재 매니페스트는 BenchAnXplore 일부만 있어, 데이터셋별 checksum,
-              license, unit, case map, boundary marker를 추가 감사해야 합니다.
+              BenchAnXplore 105×80 field는 감사·추출했습니다. 그러나 Aneumo는
+              1 geometry×2 BC sample만, AneuG-Flow는 geometry archive만 있어
+              full paired-BC 학습은 아직 불가능합니다. 원격 full release의 shard
+              manifest를 확인하기 전 “데이터 확보 완료”라고 쓰지 않습니다.
             </p>
           </div>
 
@@ -604,25 +631,30 @@
             <article>
               <span>2025–2026</span>
               <div><h3>Probabilistic neural operators</h3><p>latent conditioning과 proper scoring rule로 함수공간의 다중 가능한 출력을 다루는 토대가 생겼습니다. aneurysm의 BC uncertainty와 downstream sufficiency에 맞춘 검증은 남아 있습니다.</p></div>
-              <a href="https://arxiv.org/abs/2502.12902">Preprint ↗</a>
+              <a href="https://openreview.net/forum?id=fcBMLJtCoc">ICLR 2026 ↗</a>
+            </article>
+            <article>
+              <span>2025–2026</span>
+              <div><h3>Consistency & boundary-indexed operators</h3><p>Neural process consistency와 varying-BC operator family의 비식별성이 직접 연구되었습니다. “missing BC”나 “consistency”라는 이름 자체는 더 이상 novelty가 아닙니다.</p></div>
+              <a href="https://openreview.net/forum?id=lDjWQ9UxRy">ICLR 2026 ↗</a>
             </article>
           </div>
 
           <div class="gap-matrix">
             <div class="gap-head"><span>연구 축</span><b>기존 강점</b><b>남은 빈칸</b><b>AURORA의 검증</b></div>
-            <div><span>입력 조건</span><p>Known inflow 기반 simulation</p><p>Geometry-only에서 BC가 없음</p><p>Observed / partial / missing mode</p></div>
-            <div><span>시간</span><p>Next-step autoregressive field</p><p>장기 rollout drift</p><p>One-shot cycle coefficient</p></div>
-            <div><span>공간</span><p>Graph node field prediction</p><p>전역 flow와 wall hotspot trade-off</p><p>Volume/wall dual decoder</p></div>
-            <div><span>평가</span><p>Velocity·WSS·OSI error</p><p>Downstream signal 보존 여부</p><p>Real-CFD oracle risk-retention</p></div>
+            <div><span>관측 조건</span><p>Known inflow 또는 generic sampling</p><p>Mask별 분포가 서로 모순될 수 있음</p><p>Joint density의 nested conditioning</p></div>
+            <div><span>반응 학습</span><p>각 simulation의 absolute field</p><p>Geometry signal이 BC response를 압도</p><p>Same-geometry paired ΔH</p></div>
+            <div><span>불확실성</span><p>하나의 predictive interval</p><p>입력 미관측과 model OOD가 섞임</p><p>BC vs ensemble variance 분리</p></div>
+            <div><span>일반성</span><p>개별 의료/공학 benchmark</p><p>도메인 전용 trick 가능성</p><p>Exact·nonlinear·irregular 3D</p></div>
           </div>
 
           <aside class="honesty-note">
             <b>Novelty 표현 원칙</b>
             <p>
-              세 구성요소 각각에 prior art가 있습니다. 최종 contribution은 이들을
-              aneurysm의 missing-BC identifiability와 functional sufficiency라는
-              하나의 falsifiable 문제로 결합하고, 직접 경쟁작 대비 실험으로
-              입증할 때만 성립합니다.
+              확률적 operator와 consistency에는 직접 prior art가 있습니다.
+              최종 contribution은 arbitrary physical-condition mask의 구조적
+              coherence, paired simulator response, uncertainty attribution이
+              strong generic baseline보다 실질적으로 나을 때만 성립합니다.
             </p>
           </aside>
           <button class="chapter-next" type="button" data-next="experiments">다음 · Gate가 연구를 멈추게 하는 법 <span>→</span></button>
@@ -641,11 +673,11 @@
           </header>
 
           <div class="gate-explainer">
-            <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>case mapping, 단위, boundary marker, license, patient split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
-            <article><span>G1</span><div><h3>Real CFD가 정보를 더하는가?</h3><p>CMHA에서 clinical+morphology와 여기에 real-CFD summary를 더한 모델을 patient-grouped nested CV로 비교합니다.</p></div><b>첫 blocking experiment</b></article>
-            <article><span>G2</span><div><h3>Operator가 OOD에서도 정직한가?</h3><p>처음 보는 geometry와 BC에서 field·functional error와 90% interval coverage를 함께 봅니다.</p></div><b>surrogate 배포 전</b></article>
-            <article><span>G3</span><div><h3>CFD signal을 보존하는가?</h3><p>G1에서 real CFD의 증가분이 양수일 때만 surrogate의 risk-retention을 계산합니다.</p></div><b>conditional gate</b></article>
-            <article><span>G4</span><div><h3>Geometry만 본 모델보다 나은가?</h3><p>직접 geometry→status baseline을 이기지 못하면 hemodynamics bridge 주장을 철회합니다.</p></div><b>non-redundancy</b></article>
+            <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
+            <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
+            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>처음 보는 geometry와 BC support에서 field distribution과 same-geometry ΔH를 strong probabilistic baseline과 비교합니다.</p></div><b>primary evidence</b></article>
+            <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>D0 oracle과 learned compute-matched 비교를 모두 통과할 때만 Fourier cycle branch를 유지합니다.</p></div><b>secondary efficiency</b></article>
+            <article><span>G4</span><div><h3>의료 전용 trick은 아닌가?</h3><p>Controlled PDE, nonlinear PDE, irregular 3D에서 같은 coherence·response method를 검증합니다.</p></div><b>AAAI generality</b></article>
           </div>
 
           <div class="pilot-result">
@@ -660,7 +692,8 @@
               <span class="negative"><small>Δ AUPRC</small><b>−0.0419</b><i>CI −0.1083 · 0.0066</i></span>
             </div>
             <p>
-              결과는 C3를 지지하지 않습니다. 다만 공식 case map과
+              이 결과 때문에 rupture-status alignment를 primary contribution에서
+              제외했습니다. 다만 공식 case map과
               gradient-boosted second family가 없으므로 confirmatory failure로
               확정하지 않고 unresolved로 둡니다. PHASE·ELAPSS는 정의가 불명확하고
               target을 거의 분리해 제외했습니다.
@@ -685,12 +718,12 @@
           </div>
 
           <div class="metric-dictionary">
-            <article><b>AUPRC</b><p>양성 비율이 불균형할 때 precision과 recall의 순위를 요약합니다.</p></article>
-            <article><b>AUROC</b><p>임의의 양성 case가 음성보다 높은 점수를 받을 확률에 대응합니다.</p></article>
-            <article><b>Brier</b><p>예측 확률과 실제 0/1의 제곱 오차로, 낮을수록 좋습니다.</p></article>
-            <article><b>ECE</b><p>예측한 확률과 실제 빈도가 얼마나 맞는지 구간별로 봅니다.</p></article>
+            <article><b>Relative L2</b><p>Field 전체 오차를 정답 field 크기로 나눠 case 간 scale 차이를 줄입니다.</p></article>
+            <article><b>ΔH error</b><p>같은 geometry에서 BC를 바꿨을 때 실제 변화와 예측 변화를 비교합니다.</p></article>
+            <article><b>Energy score</b><p>예측 sample 분포가 실제 field를 포함하면서 불필요하게 퍼지지 않는지 봅니다.</p></article>
             <article><b>Coverage</b><p>예측 interval이 실제 field를 약속한 비율만큼 포함하는지 봅니다.</p></article>
-            <article><b>Risk-retention</b><p>real-CFD의 status 성능 증가분 중 surrogate가 보존한 비율입니다.</p></article>
+            <article><b>Coherence error</b><p>적은 관측에서 직접 예측한 분포와 더 많은 관측을 다시 주변화한 분포의 차이입니다.</p></article>
+            <article><b>Attribution</b><p>BC variance와 ensemble variance가 각각 condition error와 geometry OOD를 추적하는지 봅니다.</p></article>
           </div>
           <button class="chapter-next" type="button" data-next="provenance">다음 · 실제 서버 실행과 재현성 <span>→</span></button>
         </section>
@@ -741,7 +774,7 @@
           </div>
           <div class="compute-status warning">
             <span class="status-dot warning"></span>
-            <div><p class="eyebrow">G1 EXPLORATORY · COMPLETE</p><h3>Negative signal · confirmatory gate unresolved</h3><p>C+M 대비 +real-CFD summary의 ΔAUPRC는 −0.0419 [−0.1083, 0.0066]이었습니다. C3는 조건부 secondary로 유지합니다.</p></div>
+            <div><p class="eyebrow">LEGACY CLINICAL DIAGNOSTIC · COMPLETE</p><h3>Negative signal · removed from primary method</h3><p>C+M 대비 +real-CFD summary의 ΔAUPRC는 −0.0419 [−0.1083, 0.0066]이었습니다. v2의 G1은 별도의 exact-coherence gate입니다.</p></div>
           </div>
 
           <div class="repro-chain">
