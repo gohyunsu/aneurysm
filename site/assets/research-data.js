@@ -160,6 +160,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.05",
+      category: "implementation",
+      title: "N1c batch failures now preserve their traceback",
+      copy: "첫 두 exact-source attempts는 hash verification과 동일 test marker 뒤 exit 1이었지만 read-only source로 반환되는 PBS spool 때문에 traceback이 남지 않았다. Scientific runner/config는 유지하고 wrapper만 stdout/stderr를 writable run.log와 wrapper status에 기록한다. Failed attempts는 결과로 사용하지 않는다.",
+      files: ["cluster/ssu_a6gpu_nonlinear_pde_n1c_outer_test.pbs", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.05",
       category: "protocol",
       title: "N1c freezes the decision estimand before opening the test seed",
       copy: "Checkpoint manifest c66f651을 pin하고 context 0,4,…,188, condition 0, route common random numbers, outer 8×inner 32 acquisition, 2,000 context bootstrap을 고정했다. True oracle은 radius-2.5 truncated GMM conditional을 정확히 sampling한다. N1c source commit과 full contract 전에는 test를 생성하지 않는다.",

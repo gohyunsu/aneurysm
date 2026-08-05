@@ -32,6 +32,12 @@
   model·threshold·test seed를 바꾸지 않는 별도 N1d secondary job이다.
 - N1c source의 public commit과 dependency-complete A6000 contract 전에는
   test split을 생성하지 않는다. N1과 3D는 아직 미결정·차단 상태다.
+- 첫 두 exact-source attempts는 checkpoint hash verification 뒤 동일
+  test marker까지 남기고 exit 1이었지만 read-only source로 반환되는 PBS
+  spool 때문에 traceback을 보존하지 못했다. Scientific config·runner는
+  바꾸지 않고 batch wrapper만 stdout/stderr를 writable output의
+  `run.log`에 명시적으로 기록하도록 보강한다. 두 attempt는 failed
+  provenance로 보존하며 결과가 아니다.
 
 ## 2026-08-05 · N1b five-seed checkpoint manifest is complete
 

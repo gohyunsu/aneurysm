@@ -19,6 +19,7 @@ cd "$PBS_O_WORKDIR"
 hostname
 nvidia-smi
 
+set +e
 singularity exec --nv --cleanenv \
   --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
   --bind "$AURORA_CHECKPOINT_ROOT:/checkpoints:ro" \
@@ -31,4 +32,16 @@ singularity exec --nv --cleanenv \
     --checkpoint-root /checkpoints \
     --output /output \
     --git-commit "$AURORA_GIT_COMMIT" \
-    --require-cuda
+    --require-cuda \
+    > "$AURORA_OUTPUT_ROOT/run.log" 2>&1
+run_status=$?
+set -e
+
+if [ "$run_status" -eq 0 ]; then
+  printf '%s\n' '{"state":"runner_completed","exit_status":0}' \
+    > "$AURORA_OUTPUT_ROOT/wrapper_status.json"
+else
+  printf '{"state":"runner_failed","exit_status":%s}\n' "$run_status" \
+    > "$AURORA_OUTPUT_ROOT/wrapper_status.json"
+fi
+exit "$run_status"
