@@ -104,8 +104,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "Frozen N0는 solver·8-component response 등 8/9 check를 통과했지만 worst-seed nonlinear departure 0.00727이 기준 0.01에 못 미쳤다. N0는 failed로 보존하고 all-context attribution 뒤 fresh-seed stratified N0r만 허용한다.",
-      state: "N0 failed · N0a next · N1 and 3D blocked",
+      copy: "Frozen N0는 8/9 check를 통과했지만 실패했다. N0a에서 failed seed의 contiguous/stratified/all-case median은 0.00774/0.01221/0.01828로 slice 민감도를 확인했다. 다만 context 5–6개는 former reference보다 낮아 uniform nonlinearity는 주장하지 않는다.",
+      state: "N0 failed · N0a complete · N0r next · N1/3D blocked",
       blocking: true
     },
     {
@@ -151,6 +151,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.03",
+      category: "result",
+      title: "N0a supports context-sampling attribution, not a gate pass",
+      copy: "Exact 749f596의 24×12 all-context run에서 failed seed의 contiguous/stratified/all-case median은 0.00774/0.01221/0.01828이었다. 다른 seed도 stratified median 0.01624/0.01811을 보였다. 그러나 former reference 이상인 context는 18–19/24라 uniform nonlinearity는 아니다. N0는 failed로 유지하고 24-context fresh-seed N0r만 연다.",
+      files: ["results/nonlinear_pde_n0_attribution_20260803.json", "docs/research-direction.md", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "experiment",

@@ -40,6 +40,9 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 - `nonlinear_pde_n0_20260803.json`: 8/9 numerical/problem-design check를
   통과했지만 worst-seed nonlinear departure가 frozen 기준에 못 미친
   prospective N0 실패
+- `nonlinear_pde_n0_attribution_20260803.json`: failed N0 seed의 24×12
+  전체 context-condition grid에서 contiguous slicing 민감도를 확인한
+  threshold-free N0a
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -71,6 +74,12 @@ nonlinear-departure minimum 0.00727이 threshold 0.01보다 낮아 실패했다.
 사후에 발견한 context-major contiguous slicing은 attribution 대상이지
 소급 합격 사유가 아니다. N1/3D는 차단하고, threshold-free all-context
 diagnostic과 fresh-seed stratified N0r만 허용한다.
+
+N0a에서 failed seed의 contiguous/stratified/all-case median은
+0.00774/0.01221/0.01828이었다. 이는 contiguous context-0 statistic의
+대표성 문제를 지지한다. 그러나 former reference를 넘는 context는
+18–19/24이므로 uniformly strong nonlinearity를 주장하지 않는다. N0a에는
+gate가 없고 N0 실패와 N1/3D 차단은 그대로다.
 
 현재 temporal representation 결과:
 

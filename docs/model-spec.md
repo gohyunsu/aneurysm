@@ -298,6 +298,12 @@ index를 회전한다. 48-case paired audit에서는 24 context를 모두 정확
 두 번 포함한다. N0a는 이 selector를 diagnostic comparison에만 사용하고,
 N0r에서만 fresh prospective evidence로 사용한다.
 
+N0a에서 failed seed의 median은 contiguous 0.00774에서 stratified
+0.01221, all-case 0.01828로 바뀌었다. 이는 selector 필요성을 정당화하지만
+모든 context가 비선형이라는 뜻은 아니다. N0r tensor contract는
+reference axis에 24 context를 각각 한 번, paired-response axis에 각각
+두 번 포함하도록 한다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

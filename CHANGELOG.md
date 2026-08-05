@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-03 · N0a confirms context sensitivity without changing N0
+
+### Result
+
+- Exact `749f596`의 threshold-free A6000 attribution이 24×12 case/seed에서
+  완료됐다. Failed seed의 contiguous/stratified/all-case median은
+  0.00774/0.01221/0.01828이었다.
+- 다른 두 seed의 stratified median은 0.01624/0.01811이었다. 그러나
+  former 0.01 reference를 넘는 context median은 seed별 18/24, 19/24,
+  18/24로 모든 context가 강한 비선형성을 갖는 것은 아니다.
+- 첫 contract 제출은 기존 h5py layer 누락으로 metric 전에 실패했다.
+  Layer를 고정한 동일 source 재실행은 97/97 test를 통과했다.
+
+### Decision
+
+- Contiguous single-context statistic이 대표성이 없었다는 가설은
+  지지하지만 N0 실패는 그대로다.
+- N0r는 새로운 seed, 동일 PDE·threshold, 24 context 각각의 reference
+  1개와 paired-response 2개를 결과 전에 고정한다. N0r 전에는 N1/3D를
+  실행하지 않는다.
+
 ## 2026-08-03 · N0a isolates the contiguous-context sampling hypothesis
 
 ### Experiment

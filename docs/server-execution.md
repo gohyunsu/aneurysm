@@ -140,6 +140,12 @@ N0a는 같은 pinned container와 A6000 allocation에서 실행하되
 원래 N0 seed의 all-context diagnostic만 생성하며 status artifact에는
 `has_gate_decision=false`, `n0_status=failed_unchanged`,
 `n1_authorized=false`를 반드시 남긴다.
+
+Exact `749f596` N0a는 A6000에서 exit 0으로 완료됐다. 첫 contract 제출은
+외부 h5py layer를 누락해 unrelated BenchAnXplore test 하나가 metric 전에
+실패했고, 동일 source에 pinned `h5py==3.12.1` layer를 추가한 재실행은
+97/97 test를 통과했다. 공개 aggregate는
+`results/nonlinear_pde_n0_attribution_20260803.json`이다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

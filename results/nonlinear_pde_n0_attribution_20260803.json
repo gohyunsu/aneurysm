@@ -1,0 +1,102 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "nonlinear_pde_n0_attribution_20260803",
+  "experiment_id": "nonlinear_multicomponent_n0_all_context_attribution_v1",
+  "evidence_status": "post_result_threshold_free_attribution_completed",
+  "source_gate": "N0",
+  "source_commit": "749f5964c706f186662224aeaefc2ee5f776de19",
+  "source_config_sha256": "e9151b35b1a0ea1ecfeb8b8d2bc00eb563caf98026a3f4a7eaf07275b2b690f4",
+  "source_metrics_sha256": "fb9cef2883fd87f813908bb2335f4e3f43b3fb83793ce94a42d51ee5085faf5d",
+  "source_run_config_sha256": "019b5bd4f000078fea5012303f361672943a0ad8fbe97307bdfd02d21495dc97",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-03T10:52:30.599759+00:00",
+    "ended_utc": "2026-08-03T10:52:35.331927+00:00",
+    "seeds": 3,
+    "walltime": "00:00:07"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "first_contract_attempt": {
+      "status": "failed_before_metric_submission",
+      "cause": "submission omitted the already pinned external h5py dependency layer required by an unrelated BenchAnXplore test",
+      "scientific_code_changed": false,
+      "metric_generated": false
+    },
+    "dependency_complete_contract": {
+      "status": "passed",
+      "exit_status": 0,
+      "tests": 97,
+      "tests_log_sha256": "e8f55a1eb982b33ffebc71d553f78b15389e661cad3c80e67dcd4f36913a5448",
+      "dependency_layer": "h5py_3_12_1"
+    }
+  },
+  "contract": {
+    "contexts_per_seed": 24,
+    "conditions_per_context": 12,
+    "all_cases_per_seed": 288,
+    "registered_contiguous_cases": 12,
+    "context_stratified_cases": 12,
+    "has_success_threshold": false,
+    "may_relabel_n0": false,
+    "may_authorize_n1_or_3d": false,
+    "may_select_n0r_thresholds_or_seeds": false
+  },
+  "seed_summary": [
+    {
+      "seed": 62080311,
+      "registered_contiguous_median": 0.023193905130028725,
+      "context_stratified_median": 0.016240529716014862,
+      "all_case_median": 0.014707878232002258,
+      "context_median_of_medians": 0.014773405157029629,
+      "contexts_at_or_above_former_n0_reference": 18,
+      "contexts_total": 24,
+      "pearson_nonlinearity_vs_context_median_departure": 0.5393182039260864,
+      "pearson_solution_norm_vs_context_median_departure": 0.4272027909755707
+    },
+    {
+      "seed": 62080312,
+      "registered_contiguous_median": 0.02364608272910118,
+      "context_stratified_median": 0.018114905804395676,
+      "all_case_median": 0.016944164410233498,
+      "context_median_of_medians": 0.017802469432353973,
+      "contexts_at_or_above_former_n0_reference": 19,
+      "contexts_total": 24,
+      "pearson_nonlinearity_vs_context_median_departure": 0.7281374335289001,
+      "pearson_solution_norm_vs_context_median_departure": 0.5226293206214905
+    },
+    {
+      "seed": 62080313,
+      "registered_contiguous_median": 0.007740945555269718,
+      "context_stratified_median": 0.012208915315568447,
+      "all_case_median": 0.01828104257583618,
+      "context_median_of_medians": 0.02016843482851982,
+      "contexts_at_or_above_former_n0_reference": 18,
+      "contexts_total": 24,
+      "pearson_nonlinearity_vs_context_median_departure": 0.7514531016349792,
+      "pearson_solution_norm_vs_context_median_departure": 0.6684402823448181
+    }
+  ],
+  "aggregate_interpretation": {
+    "supports_contiguous_context_sampling_hypothesis": true,
+    "uniformly_strong_nonlinearity_across_every_context": false,
+    "finding": "The failed seed's stratified and all-case medians exceed the former descriptive reference while its contiguous context-0 median does not. Across seeds, only 18 to 19 of 24 context medians exceed that reference, so context coverage must be explicit rather than assumed.",
+    "solver_note": "The attribution solves all 288 linear cases as one batch; the registered contiguous median can differ slightly from N0 because the global batch stopping iteration is stricter. Both values remain below the former N0 threshold for the failed seed.",
+    "causal_claim": false
+  },
+  "decision": {
+    "n0_status": "failed_unchanged",
+    "has_gate_decision": false,
+    "n1_authorized": false,
+    "irregular_3d_authorized": false,
+    "method_novelty_established": false,
+    "accept_ready": false,
+    "next_step": "Preregister N0r with entirely fresh seeds, unchanged PDE and scientific thresholds, one high-resolution reference case from every context, and two paired-response cases from every context."
+  }
+}

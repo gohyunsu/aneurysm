@@ -342,6 +342,15 @@ attribution용으로만 계산한다. 성공 기준이 없고 N0r seed·threshol
 selection에도 사용할 수 없으므로, 유리한 subset을 골라 gate를 우회하지
 못한다.
 
+Exact `749f596`의 N0a에서 failed seed의 contiguous 12-case median은
+0.00774였지만 12-context stratified median은 0.01221, 전체 288-case
+median은 0.01828이었다. 다른 두 seed의 stratified median도
+0.01624/0.01811이었다. 반면 former 0.01 reference를 넘는 context median은
+18–19/24뿐이다. 따라서 **single-context slice의 대표성 문제**는
+지지하지만 **모든 context의 강한 비선형성**은 지지하지 않는다. N0는
+failed로 유지한다. N0r는 fresh seed와 24-context coverage를 결과 전에
+고정하고 기존 scientific threshold를 유지한다.
+
 N1의 후보 정체성은 active acquisition 자체가 아니라
 **conditioning inconsistency가 solution-functional Bayes decision과 다음
 BC 측정 선택에 만드는 regret**이다. Bounded loss에서 posterior TV/KL로

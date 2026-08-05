@@ -364,6 +364,16 @@ semilinear/linear solution을 비교한다.
 N0a는 N0를 relabel하지 않고 N1/3D를 열지 않으며, N0r의 seed나 threshold
 선택에도 쓰지 않는다.
 
+Exact `749f596` 결과에서 세 seed의
+contiguous/stratified/all-case median은 각각
+0.02319/0.01624/0.01471,
+0.02365/0.01811/0.01694,
+0.00774/0.01221/0.01828이었다. Context median이 former 0.01 reference
+이상인 비율은 18/24, 19/24, 18/24였다. 즉 마지막 seed의 실패는
+context-0 slice에 민감했지만 domain이 모든 context에서 uniformly
+nonlinear한 것은 아니다. N0r는 24 context를 모두 reference audit에
+포함하고 같은 threshold를 유지해야 한다.
+
 #### N1 · learned decision-consistency falsification
 
 N1은 N0 결과 전에 세부 hyperparameter나 fresh seed를 열지 않는다. Primary

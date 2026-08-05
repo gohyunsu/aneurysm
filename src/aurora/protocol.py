@@ -775,7 +775,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "N0a nonlinear attribution",
     )
     if (
-        n0a["status"] != "preregistered_post_result_attribution"
+        n0a["status"]
+        not in {
+            "preregistered_post_result_attribution",
+            "completed_non_gating_attribution",
+        }
         or n0a["source_gate"] != "N0"
         or n0a["config"] != "configs/nonlinear_pde_n0_attribution.json"
         or n0a["source_failed_result"] != "results/nonlinear_pde_n0_20260803.json"
@@ -795,6 +799,40 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         if n0a[forbidden_authority] is not False:
             raise ProtocolError("N0a is attribution only and cannot open or tune a gate.")
+    if n0a["status"] == "completed_non_gating_attribution":
+        _require_keys(
+            n0a,
+            [
+                "result",
+                "source_commit",
+                "source_metrics_sha256",
+                "supports_contiguous_context_sampling_hypothesis",
+                "uniformly_strong_nonlinearity_across_every_context",
+            ],
+            "completed N0a attribution",
+        )
+        if (
+            n0a["result"]
+            != "results/nonlinear_pde_n0_attribution_20260803.json"
+            or len(n0a["source_commit"]) != 40
+            or len(n0a["source_metrics_sha256"]) != 64
+        ):
+            raise ProtocolError("Completed N0a must retain exact public provenance.")
+        if (
+            n0a["supports_contiguous_context_sampling_hypothesis"] is not True
+            or n0a["uniformly_strong_nonlinearity_across_every_context"] is not False
+        ):
+            raise ProtocolError("Completed N0a interpretation cannot be inflated.")
+    else:
+        for forbidden_key in (
+            "result",
+            "source_commit",
+            "source_metrics_sha256",
+            "supports_contiguous_context_sampling_hypothesis",
+            "uniformly_strong_nonlinearity_across_every_context",
+        ):
+            if forbidden_key in n0a:
+                raise ProtocolError("Unrun N0a cannot contain post-result fields.")
 
     n1 = next(item for item in nonlinear if item["id"] == "N1")
     expected_n1_status = (

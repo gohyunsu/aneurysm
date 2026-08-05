@@ -99,6 +99,15 @@ class ProtocolTests(unittest.TestCase):
                 with self.assertRaisesRegex(ProtocolError, "attribution only"):
                     validate_protocol(candidate)
 
+    def test_n0a_cannot_claim_uniform_nonlinearity(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0a = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0a"
+        )
+        n0a["uniformly_strong_nonlinearity_across_every_context"] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot be inflated"):
+            validate_protocol(candidate)
+
     def test_n1_cannot_drop_active_feature_baseline(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         n1 = next(

@@ -447,10 +447,13 @@
     {
       "id": "N0a",
       "name": "failed_n0_all_context_sampling_attribution",
-      "status": "preregistered_post_result_attribution",
+      "status": "completed_non_gating_attribution",
       "source_gate": "N0",
       "config": "configs/nonlinear_pde_n0_attribution.json",
       "source_failed_result": "results/nonlinear_pde_n0_20260803.json",
+      "result": "results/nonlinear_pde_n0_attribution_20260803.json",
+      "source_commit": "749f5964c706f186662224aeaefc2ee5f776de19",
+      "source_metrics_sha256": "fb9cef2883fd87f813908bb2335f4e3f43b3fb83793ce94a42d51ee5085faf5d",
       "uses_only_failed_n0_seeds": true,
       "all_context_condition_cases_per_seed": 288,
       "has_success_threshold": false,
@@ -458,6 +461,8 @@
       "may_authorize_n1": false,
       "may_authorize_irregular_3d": false,
       "may_select_n0r_thresholds_or_seeds": false,
+      "supports_contiguous_context_sampling_hypothesis": true,
+      "uniformly_strong_nonlinearity_across_every_context": false,
       "next_step": "fresh_seed_context_stratified_N0r_preregistration"
     },
     {

@@ -196,7 +196,13 @@ worst-seed nonlinear departure 0.00727이 frozen 0.01 기준을 넘지 못해
 사후 진단이 있으나 N0를 합격으로 바꾸지 않습니다. Threshold 없는
 [`N0a all-context attribution`](configs/nonlinear_pde_n0_attribution.json)은
 기존 세 seed의 24×12 전체 격자에서 이 가설만 검사하며 성공 기준이나
-실행 권한이 없습니다. 그 뒤 새로운 seed와 context-stratified sampling을
+실행 권한이 없습니다. Exact `749f596` 결과에서 failed seed의
+contiguous/stratified/all-case median은 0.00774/0.01221/0.01828이었습니다.
+이는 slice 편향 가설을 지지하지만 context median이 former 0.01 이상인
+비율은 18–19/24라 uniformly nonlinear하다고 주장하지 않습니다. 공개
+aggregate는
+[`results/nonlinear_pde_n0_attribution_20260803.json`](results/nonlinear_pde_n0_attribution_20260803.json)입니다.
+그 뒤 새로운 seed와 24-context-stratified sampling을
 동결한 N0r가 통과해야 LANO/NOP/generic probabilistic operator와
 active-feature-acquisition baseline을 포함한 N1을 등록합니다. 후보 novelty는
 active acquisition 자체가 아니라 conditioning-route 불일치가 PDE

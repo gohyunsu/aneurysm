@@ -196,7 +196,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   N0a는 attribution만, N0r는 fresh seed와 context-stratified selector를
   결과 전에 고정한 re-entry만 허용한다. N0a는 기존 세 seed의 24×12
   전체 case를 검사하지만 success threshold, N0 relabel, N1/3D 권한,
-  N0r seed·threshold 선택을 모두 금지한다.
+  N0r seed·threshold 선택을 모두 금지한다. N0a 결과는 failed seed의
+  contiguous/stratified/all-case median 0.00774/0.01221/0.01828로 slice
+  민감도를 지지했지만, former reference 이상인 context는 18–19/24라
+  uniformly nonlinear하다고 쓰지 않는다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
