@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1 tensor shape is corrected before any metric
+
+### Pre-execution amendment
+
+- 첫 PBS contract attempt는 metric runner 제출 전에 coordinate correction
+  `[B,1089]`과 unflattened envelope `[33,33]`의 shape mismatch를 검출했다.
+- Envelope를 `[1089]`로 flatten했다. Data, seed, model rank, loss,
+  threshold, test-access rule은 바꾸지 않았고 scientific/development
+  metric은 생성되지 않았다.
+- 첫 attempt는 source SHA 문자열도 잘못 축약돼 provenance-invalid로
+  보존한다. 수정 commit의 full SHA로 dependency-complete contract를 새로
+  제출한다.
+
 ## 2026-08-05 · N1 core has a validation-only execution path
 
 ### Implementation

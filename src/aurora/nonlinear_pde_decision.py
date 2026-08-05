@@ -497,7 +497,10 @@ def _coordinate_features(grid_points: int, device: Any) -> tuple[Any, Any]:
             )
         )
     envelope = xx * (1.0 - xx) * yy * (1.0 - yy)
-    return torch.stack(features, dim=-1).reshape(-1, len(features)), envelope
+    return (
+        torch.stack(features, dim=-1).reshape(-1, len(features)),
+        envelope.reshape(-1),
+    )
 
 
 def build_solution_operator(config: Mapping[str, Any], device: Any) -> Any:

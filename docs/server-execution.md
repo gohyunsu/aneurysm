@@ -168,6 +168,12 @@ development다. `AURORA_DEVELOPMENT_INDEX`는 config의 두 development seed
 Joint-density/operator checkpoint는 server output에만 두며 공개 저장소에
 commit하지 않는다. 이 smoke가 성공해도 모든 preregistered baseline과
 checkpoint freeze 전에는 confirmatory test job을 제출하지 않는다.
+
+첫 N1 contract attempt는 metric 제출 전에 unflattened coordinate envelope
+shape 오류를 검출했다. 동시에 source SHA 변수가 exact commit이 아니어서
+이 attempt는 결과와 무관하게 provenance-invalid로 보존한다. Shape fix는
+frozen scientific contract를 바꾸지 않으며 새 full SHA contract가
+통과하기 전 development metric job을 제출하지 않는다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

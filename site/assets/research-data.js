@@ -161,6 +161,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.05",
       category: "implementation",
+      title: "N1 tensor mismatch is stopped before metric generation",
+      copy: "첫 PBS contract가 [B,1089] correction과 [33,33] envelope의 shape mismatch를 검출했다. Envelope만 [1089]로 flatten했고 seed·data·rank·loss·threshold·test rule은 바꾸지 않았다. Development metric은 생성되지 않았으며 새 exact SHA contract만 채택한다.",
+      files: ["src/aurora/nonlinear_pde_decision.py", "tests/test_nonlinear_pde_decision.py", "docs/server-execution.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.05",
+      category: "implementation",
       title: "N1 core runner is validation-only by construction",
       copy: "Joint full-covariance 2-GMM, truncated BC sampler, chunked semilinear solver와 exact Dirichlet-lifted rank-96 operator를 구현했다. 첫 runner는 train/validation만 생성하고 test access와 N1 decision을 false로 기록한다. Strong-baseline 전체 비교 전에는 result로 해석하지 않는다.",
       files: ["src/aurora/nonlinear_pde_decision.py", "experiments/run_nonlinear_pde_n1_development.py", "cluster/ssu_a6gpu_nonlinear_pde_n1_development.pbs", "tests/test_nonlinear_pde_decision.py"]
