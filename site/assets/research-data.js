@@ -160,6 +160,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.05",
+      category: "implementation",
+      title: "N1c-a entrypoint now exposes the read-only workspace package",
+      copy: "첫 본 job은 metric 생성 전에 experiments helper import에서 종료됐다. Container PYTHONPATH를 /workspace/src:/workspace로 고치고 wrapper regression test를 추가했다. 실패 run은 보존하며 새 exact-source contract 뒤에만 재제출한다.",
+      files: ["cluster/ssu_a6gpu_nonlinear_pde_n1c_attribution.pbs", "tests/test_nonlinear_pde_decision.py", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.05",
       category: "protocol",
       title: "N1c-a separates the failed method's density, operator, and decision floors",
       copy: "Failed N1c의 같은 open test와 frozen checkpoint만 재사용하는 threshold-free attribution을 고정했다. Conditional NLL, true-density/true-simulator functional floor, acquisition 8×32/32×64/64×128 stability, corrected common-stream true-oracle route regret만 계산한다. Pass/fail·model selection·N1c relabel·3D 권한은 없다.",

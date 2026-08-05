@@ -133,6 +133,14 @@ class NonlinearDecisionContractTests(unittest.TestCase):
         ]
         self.assertEqual(seeds, [51234, 51234, 51234])
 
+    def test_n1c_attribution_entrypoint_can_import_experiment_helpers(self) -> None:
+        wrapper = (
+            ROOT
+            / "cluster"
+            / "ssu_a6gpu_nonlinear_pde_n1c_attribution.pbs"
+        ).read_text(encoding="utf-8")
+        self.assertIn('PYTHONPATH="/workspace/src:/workspace"', wrapper)
+
     def test_test_access_cannot_move_before_checkpoint_freeze(self) -> None:
         candidate = copy.deepcopy(self.config)
         candidate["data"]["test_access"] = "during_model_selection"

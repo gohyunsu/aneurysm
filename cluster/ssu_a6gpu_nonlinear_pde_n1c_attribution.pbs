@@ -25,7 +25,8 @@ singularity exec --nv --cleanenv \
   --bind "$AURORA_CHECKPOINT_ROOT:/checkpoints:ro" \
   --bind "$AURORA_OUTPUT_ROOT:/output" \
   "$AURORA_SIF" \
-  env PYTHONPATH="/workspace/src" AURORA_GIT_COMMIT="$AURORA_GIT_COMMIT" \
+  env PYTHONPATH="/workspace/src:/workspace" \
+    AURORA_GIT_COMMIT="$AURORA_GIT_COMMIT" \
   python /workspace/experiments/run_nonlinear_pde_n1c_attribution.py \
     --attribution-config \
       /workspace/configs/nonlinear_pde_n1c_attribution.json \

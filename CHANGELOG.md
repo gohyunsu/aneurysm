@@ -21,6 +21,15 @@
 - N1d와 irregular 3D는 계속 닫혀 있고, method 변경은 새 version과 fresh
   seed/test를 요구한다.
 
+### Pre-metric runtime correction
+
+- 첫 본 job `109733`은 checkpoint/model/test metric을 만들기 전에
+  `experiments` helper import에서 종료됐다. PBS의 container
+  `PYTHONPATH`에 `/workspace`가 빠진 entrypoint wiring 오류였다.
+- `/workspace/src:/workspace`를 명시하고 wrapper regression test를
+  추가한다. 실패 run은 보존하며 수정 commit의 full contract 전에는
+  재제출하지 않는다.
+
 ## 2026-08-05 · N1c completes and fails the strong-baseline outer test
 
 ### Prospective result
