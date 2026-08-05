@@ -61,7 +61,8 @@
     "batch_size": 2048,
     "checkpoint_metric": "mean_validation_mask_latent_nll",
     "representation_error_reported_separately": true,
-    "pod_and_standardization_source": "operator_training_split_only"
+    "pod_and_standardization_source": "operator_training_split_only",
+    "confirmatory_seed_controls_weight_initialization_and_batch_sampling": true
   },
   "completion_training": {
     "models": [

@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1b model RNG is separated from the fixed POD RNG
+
+### Pre-test implementation correction
+
+- Exact `938d6c2`의 dependency-complete contract는 117/117을 통과했고
+  seed 0–2 checkpoint jobs도 exit 0, test access false였다.
+- 감사 결과 direct generic/NOP의 weight initialization이 고정 POD seed 뒤
+  RNG state를 상속하고, confirmatory seed는 minibatch sampling에만
+  반영됨을 발견했다. 표현을 seed 간 공유하는 것은 의도했지만 weight
+  initialization까지 공유하는 것은 five-seed uncertainty를 과소평가한다.
+- 아직 test를 생성하지 않았으므로 seed 3 running/seed 4 queued job을
+  중단했다. Seed 0–2 artifact는 runtime diagnostic으로 보존하지만
+  checkpoint manifest에 넣지 않는다.
+- POD seed 73080601과 iteration 4는 유지하고, direct model build 직전 RNG를
+  각 confirmatory seed로 reset한다. 수정 source의 dependency-complete
+  contract 뒤 5개 checkpoint job을 모두 새로 실행한다.
+
 ## 2026-08-05 · N1a selects optimization; prospective N1b is frozen
 
 ### Validation-only result

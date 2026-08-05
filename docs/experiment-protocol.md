@@ -486,7 +486,8 @@ test split·seed를 생성하거나 읽을 수 없다. Direct generic/NOP contro
 operator-training full field에만 적합한 centered POD-96을 쓰며
 representation seed 73080601과 randomized subspace iteration 4회를 모든
 model seed에서 공유한다. POD reconstruction error를 learned error와
-별도로 기록한다.
+별도로 기록한다. 그 다음 model RNG는 각 confirmatory seed로 reset하여
+generic/NOP weight initialization과 minibatch sampling을 모두 제어한다.
 
 ### G2 · paired response fidelity
 

@@ -374,7 +374,9 @@ validation checkpoint를 고른다. POD reconstruction error는 model error와
 imputation으로 대체하지 않기 위한 compute-matched 설계이며, POD나
 Gaussian latent 자체를 contribution으로 세지 않는다. Randomized POD의
 seed는 73080601, subspace iteration은 4회로 고정해 seed별 baseline
-variation과 representation variation을 섞지 않는다.
+variation과 representation variation을 섞지 않는다. POD 적합 직후 model
+RNG를 confirmatory seed로 다시 설정해 weight initialization과 minibatch
+sampling이 모두 seed별로 달라지게 한다.
 
 Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
 모든 partial mode는 이 하나의 density를 analytic conditioning한다.

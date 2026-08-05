@@ -236,7 +236,9 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   prospective version이며 모든 mandatory model의 validation checkpoint와
   checksum을 public manifest로 commit하기 전 test/N1/3D 권한이 없다.
   Direct generic/NOP control의 centered POD-96은 operator-training field
-  전용이고 seed 73080601, subspace iteration 4회로 고정한다.
+  전용이고 seed 73080601, subspace iteration 4회로 고정한다. 단, 각
+  confirmatory model seed는 direct baseline의 weight initialization과
+  minibatch sampling을 모두 제어해야 한다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

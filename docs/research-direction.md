@@ -414,7 +414,8 @@ ceiling은 비학습 control로 같은 manifest에 명시한다. Train-only
 centered POD-96은 direct probabilistic baseline의 fixed representation일
 뿐 AURORA architecture나 novelty가 아니다. 모든 model seed가 같은
 representation을 쓰도록 POD seed 73080601과 subspace iteration 4회를
-test 전에 고정했다.
+test 전에 고정했다. POD RNG와 model RNG를 분리해 각 confirmatory seed가
+generic/NOP weight initialization과 minibatch sampling을 함께 제어한다.
 
 ### G2 · paired response
 

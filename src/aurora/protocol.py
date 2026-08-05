@@ -1026,6 +1026,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "direct_baseline_pod_rank": 96,
             "direct_baseline_pod_seed": 73080601,
             "direct_baseline_pod_iterations": 4,
+            "confirmatory_seed_controls_weight_initialization_and_batch_sampling": True,
             "confirmatory_checkpoint_seeds": 5,
             "checkpoint_manifest_required_before_test": True,
             "test_generated_or_accessed": False,

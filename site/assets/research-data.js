@@ -161,6 +161,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.05",
       category: "implementation",
+      title: "Fixed POD variation is separated from confirmatory model variation",
+      copy: "938d6c2 seed 0–2는 test 없이 정상 완료됐지만 direct generic/NOP initialization이 fixed POD RNG state를 상속한 것을 감사에서 발견했다. 이 artifact는 runtime diagnostic으로만 보존한다. POD는 공유하되 model build 직전 각 confirmatory seed로 RNG를 reset한 새 exact source에서 5개를 모두 재실행한다.",
+      files: ["src/aurora/nonlinear_pde_decision.py", "configs/nonlinear_pde_n1b.json", "docs/model-spec.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.05",
+      category: "implementation",
       title: "N1b builds a test-locked strong-baseline checkpoint path",
       copy: "각 confirmatory seed job은 joint/independent/ACFlow/LANO completion, three shared-operator controls, DeltaPhi-style residual, generic/NOP POD-Gaussian을 train/validation만으로 고른다. POD-96은 training field만 사용하며 seed 73080601과 iteration 4를 공유한다. 10개 checkpoint hash가 모이기 전 test는 생성되지 않는다.",
       files: ["experiments/run_nonlinear_pde_n1b_checkpoint_freeze.py", "src/aurora/nonlinear_pde_decision.py", "cluster/ssu_a6gpu_nonlinear_pde_n1b_checkpoint_freeze.pbs", "configs/nonlinear_pde_n1b.json"]

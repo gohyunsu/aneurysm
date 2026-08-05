@@ -391,6 +391,10 @@ def load_n1b_config(path: str | Path) -> tuple[dict[str, Any], dict[str, Any]]:
         or direct["pod_and_standardization_source"]
         != "operator_training_split_only"
         or direct["representation_error_reported_separately"] is not True
+        or direct[
+            "confirmatory_seed_controls_weight_initialization_and_batch_sampling"
+        ]
+        is not True
     ):
         raise NonlinearDecisionError("N1b direct baseline contract changed.")
 
@@ -2342,6 +2346,10 @@ def train_direct_probabilistic_controls(
     )
     train_coefficient = encode_pod(train_field, representation)
     validation_coefficient = encode_pod(validation_field, representation)
+    # The POD draw is intentionally shared across seeds. Reset the RNG here so
+    # each registered confirmatory seed, rather than the POD seed, controls
+    # direct-baseline weight initialization as well as minibatch sampling.
+    torch.manual_seed(seed)
     models = {
         "generic_probabilistic_operator": build_pod_probabilistic_operator(
             n1_config,
@@ -2465,6 +2473,7 @@ def train_direct_probabilistic_controls(
     return models, {
         "stage": "validation_only_direct_probabilistic_checkpoint_freeze",
         "seed": seed,
+        "model_initialization_seed": seed,
         "test_generated_or_accessed": False,
         "representation": {
             "rank": int(representation["rank"]),
