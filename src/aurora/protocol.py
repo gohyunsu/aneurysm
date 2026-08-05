@@ -1019,8 +1019,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         prospective = n1["prospective_reentry"]
         if prospective != {
             "id": "N1b",
-            "status": "preregistered_before_confirmatory_checkpoint_or_test",
+            "status": "five_seed_validation_only_checkpoint_freeze_complete_before_test",
             "config": "configs/nonlinear_pde_n1b.json",
+            "checkpoint_manifest": "results/nonlinear_pde_n1b_checkpoint_manifest_20260805.json",
+            "checkpoint_manifest_sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+            "source_commit": "1d0bd9c759f935f818b5705b1b9bc2a00116ea59",
             "selected_loss_conditioning": "train_only_rms_normalized_field_and_pair_mse",
             "selected_maximum_steps": 2800,
             "direct_baseline_pod_rank": 96,
@@ -1028,13 +1031,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "direct_baseline_pod_iterations": 4,
             "confirmatory_seed_controls_weight_initialization_and_batch_sampling": True,
             "confirmatory_checkpoint_seeds": 5,
+            "checkpoint_seed_jobs_exit_zero": 5,
+            "checkpoint_seed_jobs_eligible": 5,
+            "trainable_checkpoints_frozen": 50,
+            "validation_aurora_full_bc_relative_l2_mean": 0.01346952822059393,
+            "validation_aurora_paired_response_relative_l2_mean": 0.01366054341197014,
+            "validation_aurora_objective_better_than_deltaphi_seeds": 0,
             "checkpoint_manifest_required_before_test": True,
+            "outer_test_execution_overlay_required_before_test": True,
             "test_generated_or_accessed": False,
             "n1_gate_decided": False,
             "irregular_3d_registration_authorized": False,
         }:
             raise ProtocolError(
-                "N1b must freeze the N1a selection before checkpoint or test."
+                "N1b manifest must remain exact, test-free, and non-gating."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

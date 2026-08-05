@@ -489,6 +489,28 @@ model seed에서 공유한다. POD reconstruction error를 learned error와
 별도로 기록한다. 그 다음 model RNG는 각 confirmatory seed로 reset하여
 generic/NOP weight initialization과 minibatch sampling을 모두 제어한다.
 
+Exact `1d0bd9c`의 117/117 contract 뒤 PBS A6000 다섯 job은 모두 exit
+0으로 완료됐다. Test context는 0개였고 모든 seed의 10개 checkpoint와
+공통 POD hash를
+`results/nonlinear_pde_n1b_checkpoint_manifest_20260805.json`에 기록했다.
+
+| validation-only summary | value |
+|---|---:|
+| AURORA full-BC relative L2, seed mean | 0.01347 |
+| AURORA paired-response relative L2, seed mean | 0.01366 |
+| pair loss better than pair-zero | 4/5 seeds |
+| pair loss better than random-pair | 3/5 seeds |
+| pair loss better than DeltaPhi paired metric | 2/5 seeds |
+| AURORA objective better than DeltaPhi objective | 0/5 seeds |
+
+따라서 checkpoint freeze는 완료됐지만 N1은 아직 판정하지 않는다.
+Validation에서 강한 DeltaPhi control이 존재한다는 사실을 숨기지 않고,
+partial/missing mask의 calibrated functional distribution 및 route/acquisition
+regret에서 strongest non-oracle을 이겨야만 positive로 판정한다. Outer
+test job 전에 192 context 중 48개 acquisition subset의 deterministic
+selector, Monte Carlo와 bootstrap seed, route별 posterior/action/VoI
+estimand, checkpoint-manifest hash를 별도 prospective overlay로 고정한다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

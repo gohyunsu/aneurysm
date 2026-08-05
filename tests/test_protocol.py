@@ -432,6 +432,24 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "method contribution"):
             validate_protocol(candidate)
 
+    def test_n1b_manifest_state_cannot_open_test(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["prospective_reentry"]["test_generated_or_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "manifest must remain exact"):
+            validate_protocol(candidate)
+
+    def test_n1b_manifest_hash_is_pinned(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["prospective_reentry"]["checkpoint_manifest_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ProtocolError, "manifest must remain exact"):
+            validate_protocol(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

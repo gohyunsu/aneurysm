@@ -4,6 +4,31 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1b five-seed checkpoint manifest is complete
+
+### Validation-only execution
+
+- Exact `1d0bd9c`의 dependency-complete A6000 contract는 117/117을
+  통과했고, 다섯 confirmatory checkpoint job은 모두 exit 0이었다.
+- 모든 run은 checkpoint-eligible이고 test context 0, test split/seed
+  access false다. Seed별 10개 learned checkpoint와 공통 train-only
+  POD-96의 SHA-256을
+  `results/nonlinear_pde_n1b_checkpoint_manifest_20260805.json`에 고정했다.
+- AURORA validation full-BC/paired-response relative L2의 seed mean은
+  0.01347/0.01366이다. Pair loss는 pair-zero보다 4/5, random-pair보다
+  3/5, DeltaPhi-style paired metric보다 2/5 seed에서 좋았다. Combined
+  objective는 DeltaPhi-style보다 0/5 seed에서 좋았다.
+
+### Decision
+
+- Checkpoint freeze 완료는 outer-test 실행 자격일 뿐 N1 pass, baseline
+  superiority, method novelty가 아니다. 강한 DeltaPhi validation 결과를
+  숨기지 않는다.
+- 192 test context 중 48개 acquisition context selector, evaluation RNG,
+  route estimand, bootstrap과 checkpoint-manifest hash를 별도 prospective
+  overlay에 commit하기 전 test split을 생성하지 않는다.
+- N1과 irregular-3D는 계속 차단한다.
+
 ## 2026-08-05 · N1b model RNG is separated from the fixed POD RNG
 
 ### Pre-test implementation correction

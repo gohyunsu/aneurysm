@@ -43,10 +43,17 @@
   scale-normalized loss와 2,800-step horizon을 선택했고 full-BC/paired
   validation L2 0.01162/0.01220을 얻었다. 이는 optimization engineering
   evidence일 뿐 gate pass가 아니다. 선택값은
-  `configs/nonlinear_pde_n1b.json`에 prospective하게 동결됐고, 모든
-  confirmatory-seed strong-baseline checkpoint를 validation-only로
-  고정·hash하기 전 test 생성은 금지한다. Irregular-3D headline은
-  positive N1 전까지 보류한다.
+  `configs/nonlinear_pde_n1b.json`에 prospective하게 동결됐다. Exact
+  `1d0bd9c`의 다섯 confirmatory seed는 dependency-complete A6000 run에서
+  모두 exit 0, checkpoint-eligible, test access false로 완료됐고 50개
+  checkpoint와 공통 train-only POD hash를 public manifest에 고정했다.
+  AURORA validation full-BC/paired mean은 0.01347/0.01366이지만
+  DeltaPhi-style objective보다 좋은 seed는 0/5였고 pair loss도
+  pair-zero/random-pair/DeltaPhi 대비 각각 4/5, 3/5, 2/5 방향만 얻었다.
+  이는 test 실행 자격이지 superiority나 N1 pass가 아니다. Outer-test
+  selector·RNG·estimand·bootstrap을 별도 prospective overlay에 고정하기
+  전 test 생성은 계속 금지한다. Irregular-3D headline은 positive N1
+  전까지 보류한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen

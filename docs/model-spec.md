@@ -378,6 +378,15 @@ variation과 representation variation을 섞지 않는다. POD 적합 직후 mod
 RNG를 confirmatory seed로 다시 설정해 weight initialization과 minibatch
 sampling이 모두 seed별로 달라지게 한다.
 
+이 계약의 exact `1d0bd9c` run은 다섯 seed 모두 checkpoint eligibility를
+통과했다. 공통 POD hash와 seed별 10개 checkpoint hash는 public N1b
+manifest에 고정됐다. 이는 architecture selection이나 baseline superiority
+결과가 아니라 outer test에서 비교할 함수를 불변으로 만든 상태다.
+Validation에서 DeltaPhi-style residual의 full-field selection objective가
+5/5 seed 더 낮았으므로, AURORA의 정체성은 deterministic full-BC
+reconstruction이 아니라 partial/missing-BC functional distribution과
+route-dependent decision consequence에서 검증되어야 한다.
+
 Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
 모든 partial mode는 이 하나의 density를 analytic conditioning한다.
 ACFlow-style baseline은 같은 width의 mask-conditioned GMM을 random mask로

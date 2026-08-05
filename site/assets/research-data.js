@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "N1a는 test를 생성하지 않은 validation-only 비교에서 scale-normalized 2,800-step을 선택했고 full-BC/paired-response L2는 0.01162/0.01220이었다. 이는 gate pass가 아니라 optimization attribution이다. N1b에서 5-seed strong-baseline checkpoint 전체를 먼저 동결·hash한다.",
-      state: "N1b checkpoint freeze registered · test/3D blocked",
+      copy: "N1b는 exact 1d0bd9c의 다섯 seed에서 50개 checkpoint를 test 전에 동결했다. AURORA validation full-BC/paired mean은 0.01347/0.01366이지만 DeltaPhi objective보다 좋은 seed는 0/5였다. 이는 test 자격이지 superiority가 아니다.",
+      state: "N1b checkpoint freeze complete · outer test/3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "experiment",
+      title: "Five-seed N1b checkpoint manifest is frozen without opening test",
+      copy: "Exact 1d0bd9c의 117/117 contract와 다섯 A6000 job이 모두 성공했다. 50개 learned checkpoint와 공통 train-only POD hash를 공개 manifest에 고정했다. Pair loss의 validation 방향은 pair-zero/random-pair/DeltaPhi 대비 4/5, 3/5, 2/5였고 combined objective는 DeltaPhi보다 0/5였다. N1은 미결정이며 별도 outer-test execution overlay 전 test context는 생성하지 않는다.",
+      files: ["results/nonlinear_pde_n1b_checkpoint_manifest_20260805.json", "docs/experiment-protocol.md", "configs/aurora_v1.json", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.05",
       category: "implementation",

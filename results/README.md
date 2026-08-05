@@ -52,6 +52,11 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 - `nonlinear_pde_n1_core_development_unit_peak_20260805.json`: 동일 함수
   클래스의 unit-peak envelope로 크게 개선됐지만 0.05 기준을 넘어서
   insufficient로 유지한 두 번째 validation-only development
+- `nonlinear_pde_n1_optimization_attribution_20260805.json`: test 없이
+  train-only RMS-normalized loss와 2,800-step horizon을 선택한 N1a
+- `nonlinear_pde_n1b_checkpoint_manifest_20260805.json`: exact source에서
+  다섯 validation-only seed의 50개 checkpoint와 공통 POD hash를 동결한
+  pre-test manifest
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -107,6 +112,13 @@ Unit-peak attempt는 full-BC/paired-response L2를 0.05771/0.05729로
 낮췄지만 unchanged 0.05를 통과하지 못했다. N1a는 이 결과 뒤 학습
 horizon과 train-only loss normalization을 분리하는 threshold-free
 validation attribution이며 gate 결과로 수록하지 않는다.
+
+N1b는 exact `1d0bd9c`에서 다섯 checkpoint job이 모두 exit 0,
+eligibility true, test access false로 완료됐다. AURORA validation
+full-BC/paired-response mean은 0.01347/0.01366이지만 DeltaPhi-style
+combined objective보다 좋은 seed는 0/5였다. 이 manifest는 비교 대상을
+고정할 뿐 superiority나 N1 pass가 아니다. 별도 prospective execution
+overlay 전 outer test는 생성하지 않는다.
 
 현재 temporal representation 결과:
 

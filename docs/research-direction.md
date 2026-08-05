@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-05 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1b checkpoint freeze registered · test/3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1b 5-seed checkpoint freeze complete · test/3D blocked
 
 ## 1. 현재 판정
 
@@ -416,6 +416,21 @@ centered POD-96은 direct probabilistic baseline의 fixed representation일
 representation을 쓰도록 POD seed 73080601과 subspace iteration 4회를
 test 전에 고정했다. POD RNG와 model RNG를 분리해 각 confirmatory seed가
 generic/NOP weight initialization과 minibatch sampling을 함께 제어한다.
+
+Exact `1d0bd9c`의 dependency-complete contract는 117/117을 통과했고
+다섯 A6000 checkpoint job은 모두 exit 0, eligibility true, test access
+false로 끝났다. 50개 learned checkpoint와 모든 seed에서 동일한
+train-only POD hash는
+`results/nonlinear_pde_n1b_checkpoint_manifest_20260805.json`에 고정했다.
+AURORA shared operator의 validation full-BC/paired-response L2 mean은
+0.01347/0.01366이었다. 그러나 pair loss는 pair-zero보다 4/5,
+random-pair보다 3/5, DeltaPhi-style paired metric보다 2/5 seed에서만
+좋았고, combined objective는 DeltaPhi-style보다 0/5 seed에서 좋았다.
+Checkpoint freeze의 목적은 실행 가능한 비교군을 test 전에 고정하는
+것이지 validation superiority를 선언하는 것이 아니다. 따라서 N1은
+미결정이며 outer-test context selector, evaluation RNG, route estimand와
+bootstrap을 별도 prospective overlay로 commit하기 전 test split은
+생성하지 않는다.
 
 ### G2 · paired response
 
