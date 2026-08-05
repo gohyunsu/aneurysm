@@ -162,6 +162,15 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "AFA baselines"):
             validate_protocol(candidate)
 
+    def test_n1_cannot_access_test_before_checkpoint_freeze(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["test_access_before_checkpoint_freeze"] = True
+        with self.assertRaisesRegex(ProtocolError, "cannot access test"):
+            validate_protocol(candidate)
+
     def test_patient_bootstrap_is_required(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["evaluation"]["clinical_bootstrap_unit"] = "aneurysm"

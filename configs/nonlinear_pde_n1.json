@@ -1,0 +1,264 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1.v1",
+  "experiment_id": "nonlinear_route_consistent_functional_decision_n1_v1",
+  "status": "preregistered_before_n1_development_or_test_outcome",
+  "source_gate": "N0r",
+  "source_result": "../results/nonlinear_pde_n0r_20260805.json",
+  "source_result_sha256": "aa2b3d73a14df76c4fe3dda43a7012105309c8703cbb2e368b8cfb84973e77e9",
+  "source_result_commit": "3c9e165483791da040f665b551494872a57615bd",
+  "paper_identity": "decision_consequences_of_conditioning_inconsistency_under_partial_physical_conditions",
+  "claims_excluded": [
+    "active_feature_acquisition_is_novel",
+    "functional_optimization_with_neural_operators_is_novel",
+    "generic_regret_bounds_are_novel",
+    "analytic_gaussian_mixture_conditioning_is_novel",
+    "paired_residual_learning_is_novel",
+    "gnn_attention_or_low_rank_decoder_is_novel",
+    "nonlinear_n0r_pass_is_learned_method_evidence",
+    "aneurysm_or_irregular_3d_claim"
+  ],
+  "pde_contract": {
+    "source": "nonlinear_pde_n0r.json",
+    "grid_points": 33,
+    "context_dim": 5,
+    "boundary_components": 8,
+    "functionals": [
+      "domain_mean",
+      "central_hotspot",
+      "smooth_maximum",
+      "right_boundary_flux"
+    ],
+    "solver_and_boundary_law_unchanged": true
+  },
+  "data": {
+    "density_train_contexts": 3072,
+    "density_validation_contexts": 384,
+    "density_conditions_per_context": 8,
+    "operator_train_contexts": 768,
+    "operator_validation_contexts": 192,
+    "operator_test_contexts": 192,
+    "operator_conditions_per_context": 12,
+    "acquisition_test_contexts": 48,
+    "context_support": {
+      "train_validation_id_test": [-0.8, 0.8],
+      "geometry_ood_absolute_interval": [0.9, 1.0]
+    },
+    "boundary_latent_support": {
+      "train_validation_id_test_max_mahalanobis_radius": 2.5,
+      "supplied_full_bc_shift_mahalanobis_shell": [3.0, 4.0]
+    },
+    "hidden_law_shift": {
+      "mixture_logit_offset": 1.0,
+      "covariance_scale": 1.6,
+      "allowed_claim": "detection_and_abstention_only"
+    },
+    "split_seeds": {
+      "density_train": 73080581,
+      "density_validation": 73080582,
+      "operator_train": 73080583,
+      "operator_validation": 73080584,
+      "operator_test": 73080585,
+      "geometry_ood": 73080586,
+      "hidden_law_ood": 73080587
+    },
+    "test_access": "after_all_model_selection_and_checkpoint_freeze"
+  },
+  "model_seeds": {
+    "development_only": [73080501, 73080502],
+    "confirmatory": [73080511, 73080512, 73080513, 73080514, 73080515],
+    "development_may_change_thresholds_or_test_protocol": false,
+    "development_may_access_test": false
+  },
+  "architecture": {
+    "boundary_density": {
+      "family": "context_conditioned_two_component_full_covariance_gmm",
+      "hidden_width": 192,
+      "hidden_layers": 3,
+      "analytic_arbitrary_mask_conditioning": true
+    },
+    "conditional_solution_operator": {
+      "family": "dirichlet_lifted_low_rank_coordinate_operator",
+      "branch_width": 192,
+      "branch_layers": 3,
+      "coordinate_width": 128,
+      "coordinate_layers": 3,
+      "rank": 96,
+      "boundary_lifting": "exact_registered_sine_basis",
+      "backbone_novelty_claimed": false
+    },
+    "mask_conditional_density": {
+      "family": "mask_token_two_component_full_covariance_gmm",
+      "hidden_width": 192,
+      "hidden_layers": 3
+    },
+    "direct_probabilistic_operator": {
+      "family": "mask_set_encoder_low_rank_gaussian_operator",
+      "hidden_width": 192,
+      "latent_rank": 96
+    }
+  },
+  "training": {
+    "density": {
+      "maximum_epochs": 1800,
+      "batch_size": 4096,
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "validation_interval": 20,
+      "early_stopping_patience": 15
+    },
+    "operator": {
+      "maximum_epochs": 1400,
+      "batch_size": 2048,
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "paired_response_weight": 0.5,
+      "validation_interval": 20,
+      "early_stopping_patience": 15
+    },
+    "direct_baselines": {
+      "maximum_epochs": 1400,
+      "batch_size": 2048,
+      "learning_rate": 0.001,
+      "weight_decay": 0.00001,
+      "validation_interval": 20,
+      "early_stopping_patience": 15
+    },
+    "checkpoint_selection": "validation_only",
+    "shared_simulation_examples": true,
+    "parameter_match_tolerance_fraction": 0.1
+  },
+  "observation_protocol": {
+    "registered_masks": {
+      "missing": [],
+      "sparse_2": [0, 2],
+      "partial_4": [0, 2, 5, 7],
+      "full": [0, 1, 2, 3, 4, 5, 6, 7]
+    },
+    "route_test": {
+      "initial": [0, 2],
+      "final": [0, 2, 5, 7],
+      "routes": [
+        "direct_final",
+        "sequential_5_then_7",
+        "sequential_7_then_5"
+      ]
+    },
+    "acquisition_base_masks": [
+      [],
+      [0, 2]
+    ],
+    "measurement_cost": "one_equal_cost_boundary_component",
+    "candidate_set": "every_currently_unobserved_component"
+  },
+  "mandatory_models": [
+    {
+      "id": "aurora_joint",
+      "role": "proposed",
+      "contract": "one_joint_gmm_analytic_conditioning_shared_full_bc_operator_and_same_context_pair_loss"
+    },
+    {
+      "id": "conditional_mean_imputation",
+      "role": "deterministic_control",
+      "contract": "learned_conditional_mean_completion_and_shared_full_bc_operator"
+    },
+    {
+      "id": "independent_mask_heads",
+      "role": "inconsistency_control",
+      "contract": "separately_parameterized_registered_mask_density_heads_and_shared_operator"
+    },
+    {
+      "id": "lano_adapted",
+      "role": "partial_observation_baseline",
+      "contract": "boundary_first_mask_to_predict_latent_autoregressive_completion_with_shared_operator"
+    },
+    {
+      "id": "nop_adapted",
+      "role": "probabilistic_partial_observation_baseline",
+      "contract": "set_encoded_observed_boundary_tokens_to_latent_solution_distribution"
+    },
+    {
+      "id": "generic_probabilistic_operator",
+      "role": "compute_matched_baseline",
+      "contract": "mask_set_encoder_low_rank_gaussian_solution_operator"
+    },
+    {
+      "id": "acflow_adapted",
+      "role": "arbitrary_conditioning_and_afa_baseline",
+      "contract": "mask_conditional_full_covariance_gmm_trained_over_random_masks_with_greedy_expected_risk_reduction"
+    },
+    {
+      "id": "aco_ceiling",
+      "role": "acquisition_oracle",
+      "contract": "true_simulator_and_true_boundary_law_acquisition_conditioned_oracle"
+    },
+    {
+      "id": "nots_adapted",
+      "role": "operator_functional_acquisition_control",
+      "contract": "posterior_sample_functional_disagreement_policy_without_route_coherence",
+      "not_a_reproduction": true
+    }
+  ],
+  "paired_controls": [
+    "aurora_pair_loss_zero",
+    "random_cross_context_pairs",
+    "deltaphi_style_residual_with_shared_example_and_parameter_budget"
+  ],
+  "evaluation": {
+    "posterior_bc_samples": 256,
+    "field_distribution_samples": 128,
+    "acquisition_outer_measurement_samples": 8,
+    "acquisition_inner_posterior_samples": 32,
+    "coverage": 0.9,
+    "bootstrap_replicates": 2000,
+    "bootstrap_unit": "context_family",
+    "functional_standardization": "training_split_only",
+    "bounded_decision_loss": "clip_squared_standardized_error_to_unit_interval",
+    "bayes_action_solver": "129_point_training_range_grid",
+    "primary_masks": ["missing", "sparse_2"],
+    "primary_metrics": [
+      "solution_functional_energy_score",
+      "paired_response_relative_l2",
+      "route_functional_posterior_distance",
+      "route_bayes_action_disagreement",
+      "one_component_acquisition_regret"
+    ],
+    "support_shift_metrics": [
+      "supplied_full_bc_field_relative_l2",
+      "supplied_full_bc_paired_response_relative_l2"
+    ],
+    "hidden_law_shift_metrics": [
+      "ood_auroc",
+      "risk_coverage_after_abstention"
+    ],
+    "calibration_metrics": [
+      "functional_coverage_error",
+      "matched_coverage_interval_width"
+    ],
+    "report_all_models": true
+  },
+  "success_rule": {
+    "all_conditions_required": true,
+    "full_bc_operator_relative_l2_maximum": 0.05,
+    "aurora_functional_coverage_error_maximum": 0.05,
+    "aurora_route_bayes_action_disagreement_maximum": 0.0001,
+    "primary_relative_improvement_over_strongest_validation_selected_non_oracle_minimum": 0.05,
+    "primary_paired_bootstrap_difference_ci95_upper_below_zero": true,
+    "confirmatory_seed_direction_minimum": 4,
+    "confirmatory_seeds_total": 5,
+    "paired_response_must_improve_with_pair_loss": true,
+    "field_distribution_and_acquisition_regret_must_both_improve": true,
+    "aco_is_ceiling_not_competitor_for_superiority": true,
+    "n1_pass_authorizes_irregular_3d_protocol_registration_only": true,
+    "n1_pass_does_not_establish_cross_domain_or_aaai_acceptance": true
+  },
+  "theory_scope": {
+    "standard_ingredients_not_claimed": [
+      "bayes_excess_risk_bounded_by_total_variation",
+      "pinsker_kl_to_total_variation",
+      "two_epsilon_argmax_stability"
+    ],
+    "required_new_connection": "route_posterior_discrepancy_to_pushforward_solution_functional_decision_and_component_value_of_information",
+    "empirical_validation_required": true
+  },
+  "interpretation": "N1 is a prospective falsification of decision consequences, not an architecture showcase. AURORA must improve both solution-functional distribution quality and one-component acquisition regret against the strongest validation-selected non-oracle baseline while retaining paired-response fidelity. Route consistency alone, N0r adequacy, or an oracle ceiling cannot pass N1. Test data are generated only after every model and checkpoint is fixed."
+}

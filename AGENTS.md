@@ -2,7 +2,8 @@
 
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
-공개 1차 문헌을 재검토하여 작성했다.
+공개 1차 문헌을 재검토하여 작성했고 2026-08-05 KST N0r/N1 상태를
+반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -36,9 +37,11 @@
   seed와 training geometry 768→3,072만 바꾸고 7/7 check를 통과했다.
   G1/G1r은 실패로 보존하며 G1s는 data adequacy일 뿐이다. 현재 허용된
   N0는 8/9 check를 통과했지만 worst-seed nonlinear departure가
-  0.00727 < 0.01이어서 failed다. 다음 단계는 threshold-free N0a
-  all-context attribution과 fresh-seed context-stratified N0r이며,
-  irregular-3D headline은 N1 strong-baseline 결과 전까지 보류한다.
+  0.00727 < 0.01이어서 failed다. N0a attribution 뒤 N0a outcome 전에
+  동결한 fresh context-stratified N0r가 9/9를 통과했다. N0 실패는
+  보존하며 `configs/nonlinear_pde_n1.json`의 learned strong-baseline
+  falsification만 등록됐다. Irregular-3D headline은 positive N1 전까지
+  보류한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -80,7 +83,8 @@ one-shot Fourier는 선행 구성요소 또는 engineering choice다. contributi
 compute-matched 이득이 있을 때만 남긴다.
 
 AAAI-26 LANO, NeurIPS-25 PaPQS·DeltaPhi, arbitrary-conditioning generative
-model, 2026 conditioning-consistency 연구를 고려하면 partial observation,
+model, 2026 conditioning-consistency와 NeurIPS-25 neural-operator
+Thompson-sampling 연구를 고려하면 partial observation,
 joint density의 analytic conditioning, tower-property 검사, paired
 residual, active acquisition을 각각 단독 novelty로 주장할 수 없다. 현재
 C1–C3는 **검증할 연구 가설**이지 확정 contribution이 아니다. 독립적
@@ -96,8 +100,10 @@ functional loss의 Bayes action과 다음 BC component의 value-of-information�
 Bayes-regret를 제한하는 보장, joint BC–solution model의 route
 compatibility, N1의 실제 regret 감소가 함께 있어야 한다. Test-time active
 feature acquisition 자체, path independence 자체, 이름만 붙인 acquisition
-head는 novelty가 아니다. ACFlow류 generative AFA와 ICML-24 acquisition
-conditioned oracle를 필수 baseline으로 둔다.
+head는 novelty가 아니다. ACFlow류 generative AFA, ICML-24 acquisition
+conditioned oracle와 NOTS-style posterior-sample functional acquisition을
+필수 baseline으로 둔다. NOTS는 whole input-function query 문제이므로
+N1 adaptation을 원 논문 재현으로 표현하지 않는다.
 
 ## 3. 데이터셋의 역할
 

@@ -340,6 +340,28 @@ Partial/missing prediction은 sampled BC completion을 같은 conditional
 operator에 병렬 통과시킨 pushforward distribution이다. 별도의 임의
 imputation field head를 두지 않는다.
 
+### 6.1 N1 regular-grid realization
+
+N1에서 full-BC operator는 exact sine-basis Dirichlet lifting에 interior
+correction을 더하는 rank-96 coordinate operator다. Context와 완전한
+8-component BC를 3-layer branch가 coefficient로 만들고, coordinate trunk가
+33×33 query basis를 만든다. Boundary value는 lifting으로 정확히 보존한다.
+이는 GNN이 필요 없는 controlled nonlinear domain의 compute-matched
+realization이며 contribution으로 주장하지 않는다.
+
+Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
+모든 partial mode는 이 하나의 density를 analytic conditioning한다.
+ACFlow-style baseline은 같은 width의 mask-conditioned GMM을 random mask로
+학습한다. Initial mask density를 새 component에 조건화한 sequential
+posterior와 expanded-mask network를 다시 호출한 direct posterior를
+비교함으로써 arbitrary conditional model의 route gap을 계산한다.
+
+LANO/NOP는 원 논문의 task를 그대로 재현한다고 표기하지 않는다. 각각
+boundary-first latent autoregressive completion과 observed-token set encoder
+to latent solution distribution으로 **N1 task에 맞춘 adaptation**이다.
+NOTS-style control도 whole input-function optimization이 아니라 posterior
+functional disagreement로 다음 BC component를 고르는 adaptation이다.
+
 ## 7. Module D — paired simulator-response supervision
 
 동일 geometry \(G\)에 서로 다른 \(B_i,B_j\)와 solution \(H_i,H_j\)가 있을

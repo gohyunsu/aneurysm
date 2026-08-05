@@ -369,8 +369,18 @@ BC 측정 선택에 만드는 regret**이다. Bounded loss에서 posterior TV/KL
 Bayes-regret를 제한하는 분석과, coherent joint model이 실제 oracle
 functional risk와 acquisition regret를 함께 줄이는 실험을 결합한다.
 LANO, NOP, compute-matched probabilistic operator, generative AFA,
-acquisition-conditioned oracle가 필수 비교다. 이 중 하나라도 빠지면
+acquisition-conditioned oracle와 NeurIPS-25 NOTS-style posterior-sample
+functional acquisition이 필수 비교다. NOTS는 전체 operator input function
+query를 고르는 문제이므로 그대로 같은 task는 아니며 adapted control로
+명시한다. 이 중 하나라도 빠지면
 “active BC”를 contribution으로 주장하지 않는다.
+
+N1의 exact prospective contract는 `configs/nonlinear_pde_n1.json`이다.
+5개 confirmatory model seed, geometry-disjoint split, full-covariance
+2-GMM, Dirichlet-lifted rank-96 coordinate operator, 모든 baseline,
+mask route, decision loss, bootstrap rule과 5% minimum effect를 결과 전에
+고정한다. Development seed는 validation-only이며 test 생성·threshold
+변경 권한이 없다. N1 pass도 irregular-3D **protocol 등록만** 허용한다.
 
 ### G2 · paired response
 

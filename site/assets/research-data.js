@@ -64,6 +64,13 @@ window.AURORA_DATA = Object.freeze({
       url: "https://proceedings.mlr.press/v235/valancius24a.html"
     },
     {
+      year: "2025",
+      title: "Neural-operator functional Thompson sampling",
+      copy: "NOTS가 unknown operator output의 known functional을 posterior operator sample로 최적화하고 regret bound를 제시했다. Functional operator acquisition 자체도 novelty가 아니다.",
+      status: "NeurIPS · mandatory adapted control",
+      url: "https://proceedings.neurips.cc/paper_files/paper/2025/hash/2f5fb82b8b593c548ed538a8d336d800-Abstract-Conference.html"
+    },
+    {
       year: "2024–25",
       title: "PDE uncertainty & conditional consistency",
       copy: "OOD PDE uncertainty와 neural-process의 marginal/conditional consistency가 이미 독립 연구 축을 이룬다.",
@@ -105,7 +112,7 @@ window.AURORA_DATA = Object.freeze({
       id: "G2",
       title: "Does paired response improve?",
       copy: "N0 실패는 보존한다. N0a 뒤 독립적으로 동결한 fresh N0r는 9/9 numerical check를 통과했다. 최악 seed nonlinear departure는 0.01933, grid error는 0.00375였다. 이는 N1 상세 protocol 등록만 허용하며 learned superiority나 3D 근거가 아니다.",
-      state: "N0 failed preserved · N0r passed · N1 registration only · 3D blocked",
+      state: "N0 failed preserved · N0r passed · N1 preregistered · 3D blocked",
       blocking: true
     },
     {
@@ -151,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "research",
+      title: "N1 freezes a decision-consequence test, not an architecture claim",
+      copy: "NOTS 때문에 neural-operator functional acquisition과 generic regret를 novelty에서 제외했다. N1은 같은 최종 physical-condition mask의 route posterior가 Bayes action과 one-component value-of-information에 만드는 손실을 검증한다. 5-seed rule과 LANO/NOP/ACFlow/ACO/NOTS-style strong controls를 test 전에 고정했다.",
+      files: ["configs/nonlinear_pde_n1.json", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/literature-lineage.md"]
+    },
     {
       date: "2026.08.05",
       category: "result",

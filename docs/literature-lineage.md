@@ -1,6 +1,6 @@
 # 선행연구 계보와 research gap
 
-검토 기준일: 2026-08-03 KST
+검토 기준일: 2026-08-05 KST
 
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
@@ -270,6 +270,7 @@ clinical variables를 late fusion하여 rupture-status prediction을
 | NOP/NP consistency | partial-response reconstruction·conditioning gap | physical-input mask compatibility | nested masks + paired response |
 | DeltaPhi | similar-state residual learning | geometry-controlled BC response without label retrieval | paired \(\Delta H\) controls |
 | active feature acquisition | test-time feature 선택과 general decision cost | route-inconsistent PDE functional posterior의 decision consequence | functional regret + AFA controls |
+| neural-operator functional optimization | posterior operator sample로 비싼 input function query 선택과 regret bound | 한 사례의 partial physical condition에서 component measurement의 route-dependent value | NOTS-style adapted acquisition control |
 | PDE UQ/OOD | model uncertainty와 OOD 분석 | BC-induced vs model-induced 분리 | two-axis falsification |
 | synthetic CFD | 같은 geometry의 multiple BC | response supervision/generalization | paired \(\Delta H\) |
 
@@ -291,6 +292,7 @@ clinical variables를 late fusion하여 rupture-status prediction을
 12. random cross-geometry pair negative control
 13. In-PI-MGN 또는 공개 graph-transformer checkpoint/재현
 14. Secondary analysis에서만 clinical+morphology와 +real CFD
+15. NOTS-style posterior-sample functional acquisition adapted control
 
 ## 5. 문헌상 아직 단정하지 않는 것
 

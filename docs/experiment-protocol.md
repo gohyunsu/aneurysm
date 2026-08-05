@@ -410,10 +410,29 @@ solution-functional Bayes risk와 다음 component acquisition regret를
 악화시키는지, coherent joint law가 이를 줄이는지다. 필수 baseline은
 conditional-mean imputation, independent mask heads, LANO, NOP,
 compute-matched generic probabilistic operator, generative-surrogate AFA,
-ICML-24 acquisition-conditioned oracle다. Pair-loss-zero, random
+ICML-24 acquisition-conditioned oracle와 NeurIPS-25 NOTS-style adapted
+functional acquisition이다. Pair-loss-zero, random
 cross-context pair, DeltaPhi-style residual을 같은 backbone·example budget로
 비교한다. 다섯 seed에서 field distribution과 paired response가 함께
 개선되지 않으면 decision identity를 폐기한다.
+
+`configs/nonlinear_pde_n1.json`은 다음을 test outcome 전에 고정한다.
+
+| 축 | N1 frozen contract |
+|---|---|
+| split | density 3,072/384 context, operator 768/192/192 context |
+| full field | context당 12 BC, 33×33 semilinear solution |
+| model seeds | development 2개와 분리된 confirmatory 5개 |
+| coherent model | joint full-covariance 2-GMM + analytic mask conditioning + shared lifted operator |
+| route | `{0,2} → {0,2,5,7}` direct, 5→7, 7→5 |
+| acquisition | missing 또는 `{0,2}`에서 equal-cost component 1개 |
+| primary | functional energy, paired response, route action disagreement, acquisition regret |
+| decision | strongest validation-selected non-oracle 대비 ≥5%, paired bootstrap CI upper <0, 4/5 seed 같은 방향 |
+
+Operator full-BC relative L2 0.05와 functional coverage error 0.05를 넘으면
+decision metric이 좋아도 pass가 아니다. ACO는 ceiling이며 superiority
+상대가 아니다. Test split은 모든 checkpoint가 validation-only로 동결된
+뒤 한 번 생성한다.
 
 ### G2 · paired response fidelity
 

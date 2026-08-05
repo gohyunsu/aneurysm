@@ -492,8 +492,10 @@
     {
       "id": "N1",
       "name": "learned_conditioning_decision_consistency",
-      "status": "registration_authorized_pending_preregistration",
+      "status": "preregistered_before_n1_development_or_test_outcome",
       "source_gate": "N0r",
+      "config": "configs/nonlinear_pde_n1.json",
+      "source_result": "results/nonlinear_pde_n0r_20260805.json",
       "primary_question": "does_route_consistent_partial_condition_inference_reduce_solution_functional_risk_and_acquisition_regret",
       "mandatory_baselines": [
         "conditional_mean_imputation",
@@ -502,7 +504,8 @@
         "NOP_style_latent_conditioning",
         "compute_matched_generic_probabilistic_operator",
         "ACFlow_style_generative_active_feature_acquisition",
-        "acquisition_conditioned_oracle"
+        "acquisition_conditioned_oracle",
+        "NOTS_style_posterior_sample_functional_acquisition"
       ],
       "paired_controls": [
         "pair_loss_zero",
@@ -515,7 +518,9 @@
         "route_posterior_divergence",
         "solution_functional_acquisition_regret"
       ],
-      "five_seed_confirmation_required": true
+      "five_seed_confirmation_required": true,
+      "test_access_before_checkpoint_freeze": false,
+      "irregular_3d_registration_authorized": false
     }
   ],
   "evaluation": {

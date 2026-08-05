@@ -208,9 +208,10 @@ A6000 run에서 9/9 check를 통과했습니다. 최악 seed nonlinear departure
 0.01933, grid error는 0.00375, 8-component response minimum은
 0.17484였습니다. 공개 aggregate는
 [`results/nonlinear_pde_n0r_20260805.json`](results/nonlinear_pde_n0r_20260805.json)입니다.
-이제 LANO/NOP/generic probabilistic operator와
-active-feature-acquisition baseline을 포함한 N1의 **상세 사전등록만**
-허용합니다. 후보 novelty는
+이제 LANO/NOP/generic probabilistic operator, ACFlow/ACO와 NOTS-style
+functional acquisition을 포함한
+[`N1 상세 계약`](configs/nonlinear_pde_n1.json)을 결과 전에 동결했습니다.
+후보 novelty는
 active acquisition 자체가 아니라 conditioning-route 불일치가 PDE
 solution-functional decision과 acquisition regret에 만드는 결과입니다.
 N0/N0r 통과만으로 이를 contribution이라 하지 않으며 3D headline도 열지
@@ -220,8 +221,9 @@ N0r는 N0a 결과 전에 commit `1a68053`에서 동결됐습니다. Reference는
 24 context를 각각 한 번, paired audit은 각각 두 번 포함하며 fresh seed
 3개를 사용합니다. PDE·BC law·solver·functionals·threshold·worst-seed
 rule은 N0와 동일했습니다. Pass는 N1 등록만 허용하고 N0 실패, novelty,
-3D headline을 소급 변경하지 않습니다. N1 config가 별도 commit으로
-고정되기 전에는 learned test result를 만들지 않습니다.
+3D headline을 소급 변경하지 않습니다. 두 development seed는
+validation-only이고, 다섯 confirmatory seed의 checkpoint가 고정되기
+전에는 test split을 생성하지 않습니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

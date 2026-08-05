@@ -32,6 +32,7 @@ contribution에서 제외한다.
 | [Posterior Matching (NeurIPS 2022)](https://proceedings.neurips.cc/paper_files/paper/2022/file/72dad0866fa5b0ef20cec94b8bd5763a-Paper-Conference.pdf) / [AC-Flow (2019)](https://arxiv.org/abs/1909.06319) | arbitrary observed feature subset에 대한 conditional sampling·likelihood | 임의 mask conditioning 자체는 PDE 밖에서도 오래된 문제임 |
 | [PaPQS (NeurIPS 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/6a1b224b153e55c40a6359f9c9fb9d8c-Abstract-Conference.html) / [UNED (ICLR 2026)](https://openreview.net/forum?id=EfC6Fs1q2l) | PDE setting query synthesis와 uncertainty-aware sensor experimental design | active BC/sensor acquisition을 추가하는 것만으로도 novelty가 되지 않음 |
 | [Generative-surrogate AFA (ICML 2021)](https://proceedings.mlr.press/v139/li21p.html) / [Acquisition Conditioned Oracle (ICML 2024)](https://proceedings.mlr.press/v235/valancius24a.html) | test-time에 미관측 feature를 순차 획득하고 prediction/general decision의 비용을 줄임 | test-time BC component 선택이나 generative acquisition policy 자체도 직접 선행연구임 |
+| [Neural Operator Thompson Sampling (NeurIPS 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/2f5fb82b8b593c548ed538a8d336d800-Abstract-Conference.html) | unknown operator output의 known functional을 posterior neural-operator sample로 최적화하고 function-space regret bound를 제시 | neural operator를 이용한 functional optimization이나 generic regret analysis도 novelty가 아님 |
 | [Physics-Constrained GNN for IA Hemodynamics (npj Digital Medicine 2026)](https://www.nature.com/articles/s41746-026-02404-z) | BenchAnXplore의 transient autoregressive GNN, inflow/OOD 평가, physics loss | GNN+inflow+physics는 직접 baseline이며 primary method가 아님 |
 
 ## 살아남는 연구 질문
@@ -204,3 +205,11 @@ N0는 solver·비선형성·모든 BC 방향·functional diversity만 검사한�
 통과해도 이 후보를 contribution이나 사이트 headline으로 올리지 않는다.
 N1에서 LANO/NOP/generic probabilistic operator/AFA strong baseline을
 5 seeds로 이긴 뒤에만 manuscript claim으로 승격한다.
+
+NeurIPS-25 NOTS와의 구분은 명시적이다. NOTS는 비싼 simulator에 넣을
+**전체 input function**을 선택해 output functional을 최적화한다. N1은
+이미 존재하는 한 사례에서 미관측 physical-condition component 중 무엇을
+측정할지 선택하며, 같은 최종 관측 집합으로 가는 posterior route 불일치의
+의사결정 손실을 다룬다. 이 차이만으로 novelty가 확정되는 것은 아니다.
+`NOTS-style posterior-sample functional acquisition`을 adapted control로
+포함하고, route-aware regret가 실제로 줄어야 한다.

@@ -925,7 +925,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     n1 = next(item for item in nonlinear if item["id"] == "N1")
     expected_n1_status = (
-        "registration_authorized_pending_preregistration"
+        "preregistered_before_n1_development_or_test_outcome"
         if n0r["status"] == "completed_passed"
         else "blocked_pending_N0r"
     )
@@ -941,11 +941,32 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "compute_matched_generic_probabilistic_operator",
         "ACFlow_style_generative_active_feature_acquisition",
         "acquisition_conditioned_oracle",
+        "NOTS_style_posterior_sample_functional_acquisition",
     }
     if set(n1["mandatory_baselines"]) != required_n1_baselines:
         raise ProtocolError("N1 must retain strong partial-observation and AFA baselines.")
     if n1["five_seed_confirmation_required"] is not True:
         raise ProtocolError("N1 requires five-seed confirmation.")
+    if n0r["status"] == "completed_passed":
+        _require_keys(
+            n1,
+            [
+                "config",
+                "source_result",
+                "test_access_before_checkpoint_freeze",
+                "irregular_3d_registration_authorized",
+            ],
+            "preregistered N1",
+        )
+        if (
+            n1["config"] != "configs/nonlinear_pde_n1.json"
+            or n1["source_result"] != "results/nonlinear_pde_n0r_20260805.json"
+            or n1["test_access_before_checkpoint_freeze"] is not False
+            or n1["irregular_3d_registration_authorized"] is not False
+        ):
+            raise ProtocolError(
+                "N1 preregistration cannot access test or authorize irregular 3D."
+            )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 
     evaluation = protocol["evaluation"]

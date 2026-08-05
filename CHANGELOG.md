@@ -4,6 +4,34 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1 decision falsification is frozen before test
+
+### Research decision
+
+- NeurIPS-25 NOTS가 neural-operator posterior sample로 known output
+  functional을 최적화하고 regret bound를 제시하므로 functional operator
+  acquisition과 generic regret bound를 novelty에서 제외했다.
+- 남긴 질문은 한 사례의 partial physical condition에서 같은 최종 mask로
+  가는 posterior route 불일치가 Bayes action과 다음 component의
+  value-of-information를 얼마나 바꾸는지다.
+
+### Experiment
+
+- `configs/nonlinear_pde_n1.json`에 data/split/model seed, joint
+  full-covariance 2-GMM, lifted rank-96 coordinate operator, mask routes,
+  decision loss, 5% minimum effect와 bootstrap decision rule을 동결했다.
+- LANO/NOP adaptation, generic probabilistic operator, independent heads,
+  ACFlow-style AFA, ACO ceiling, NOTS-style adapted functional acquisition과
+  pair-loss/DeltaPhi controls를 모두 보고한다.
+- Development는 validation-only다. 다섯 confirmatory checkpoint를
+  고정하기 전 test를 생성하지 않으며 N1 pass도 3D protocol 등록만
+  허용한다.
+
+### Deployment
+
+- N0r result commit `3c9e165`의 quality와 Pages workflow가 모두 통과했다.
+  공개 사이트는 `https://gohyunsu.github.io/aneurysm/`에서 배포됐다.
+
 ## 2026-08-05 · Fresh context-stratified N0r passes 9/9
 
 ### Result
