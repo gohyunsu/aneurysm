@@ -1,0 +1,75 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "nonlinear_pde_n1_core_development_20260805",
+  "experiment_id": "nonlinear_route_consistent_functional_decision_n1_v1",
+  "evidence_status": "validation_only_core_development_completed_insufficient",
+  "source_gate": "N0r",
+  "source_commit": "60755304f29700eff7b017393560ee24c33682a8",
+  "source_config_commit": "d1ffd26770cdb8ec8c2060c68806e5f24387bfbc",
+  "source_metrics_sha256": "d21a3b0c3fc06d49f89e7bb49c97228b768855d6d0df41ea473f1656c5745a5e",
+  "source_run_config_sha256": "882c802e8122bf763df7718a5b883363ab140b2f580c279043b5516756914f8b",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-05T11:22:31.367775+00:00",
+    "ended_utc": "2026-08-05T11:23:09.045778+00:00",
+    "walltime": "00:01:36",
+    "development_seed": 73080501
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "exact_source_contract": {
+      "status": "passed",
+      "tests": 113,
+      "tests_log_sha256": "041cb546b168b1000e91381309d95d7744683a9fedde78bba58461ac90a853bf"
+    },
+    "test_split_generated": false,
+    "test_seed_accessed": false,
+    "checkpoint_selection": "validation_only"
+  },
+  "data": {
+    "density_train_contexts": 3072,
+    "density_validation_contexts": 384,
+    "operator_train_contexts": 768,
+    "operator_validation_contexts": 192,
+    "conditions_per_operator_context": 12,
+    "train_solver_all_converged": true,
+    "validation_solver_all_converged": true,
+    "maximum_solver_normalized_residual": 0.000003962763457820984
+  },
+  "development_metrics": {
+    "joint_density": {
+      "best_epoch": 1260,
+      "best_validation_nll": -4.289726257324219,
+      "epochs_executed": 1560,
+      "parameters": 92634
+    },
+    "lifted_operator": {
+      "best_epoch": 1400,
+      "epochs_executed": 1400,
+      "validation_full_bc_relative_l2": 0.17386890947818756,
+      "validation_paired_response_relative_l2": 0.18617157638072968,
+      "validation_selection_objective": 0.2669546902179718,
+      "parameters": 143168
+    }
+  },
+  "interpretation": {
+    "core_checkpoint_eligible": false,
+    "reason": "The validation-only full-BC relative L2 is far above the preregistered 0.05 N1 eligibility threshold and the best operator checkpoint occurs at the maximum training step.",
+    "optimization_attribution": "The exact-zero boundary envelope peaks at only 0.0625, attenuating the interior correction and its gradient by a factor of 16. Unit-peak rescaling preserves the represented function class, rank, data, loss weight, threshold, and test contract.",
+    "density_success_does_not_offset_operator_failure": true
+  },
+  "decision": {
+    "n1_gate_decided": false,
+    "baseline_superiority_established": false,
+    "method_novelty_established": false,
+    "irregular_3d_authorized": false,
+    "confirmatory_test_authorized": false,
+    "next_step": "Rescale only the interior envelope to unit peak, run the second validation-only development seed, and keep all test and confirmatory paths closed."
+  }
+}

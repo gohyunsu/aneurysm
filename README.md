@@ -231,6 +231,11 @@ core development입니다. 이 실행은 N1 결과가 아니며
 LANO/NOP/ACFlow/ACO/NOTS-style 전체 비교가 구현되기 전에는 test나 3D로
 진행하지 않습니다.
 
+첫 development seed에서 density validation NLL은 -4.290이었지만 operator
+full-BC/paired-response relative L2는 0.1739/0.1862로 자격이 부족했습니다.
+Test는 만들지 않았습니다. Boundary-zero envelope의 unit-peak 재척도화만
+두 번째 development seed에서 검증하며, 0.05 gate를 낮추지 않습니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에

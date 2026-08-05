@@ -349,6 +349,12 @@ correction을 더하는 rank-96 coordinate operator다. Context와 완전한
 이는 GNN이 필요 없는 controlled nonlinear domain의 compute-matched
 realization이며 contribution으로 주장하지 않는다.
 
+Interior correction에는 boundary에서 정확히 0인
+\(16x(1-x)y(1-y)\) envelope를 곱한다. 첫 development 구현의 unscaled
+envelope는 최대값이 1/16이라 함수 클래스는 같지만 gradient conditioning이
+나빴다. Test access 전 unit-peak로 재척도화했으며 rank·data·loss weight와
+gate threshold는 바꾸지 않았다.
+
 Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
 모든 partial mode는 이 하나의 density를 analytic conditioning한다.
 ACFlow-style baseline은 같은 width의 mask-conditioned GMM을 random mask로

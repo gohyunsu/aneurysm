@@ -482,6 +482,322 @@ def build_joint_density(config: Mapping[str, Any], device: Any) -> Any:
     return JointBoundaryDensity().to(device)
 
 
+def _decode_gmm(raw: Any, mixtures: int = 2, dimension: int = 8) -> tuple[Any, Any, Any]:
+    _, torch = _imports()
+    triangle = dimension * (dimension + 1) // 2
+    logits = raw[:, :mixtures]
+    offset = mixtures
+    means = raw[:, offset : offset + mixtures * dimension].reshape(
+        -1, mixtures, dimension
+    )
+    offset += mixtures * dimension
+    covariance = _covariance_from_raw(
+        raw[:, offset : offset + mixtures * triangle].reshape(
+            -1, mixtures, triangle
+        ),
+        dimension,
+    )
+    return torch.softmax(logits, dim=-1), means, covariance
+
+
+def build_mask_conditional_density(config: Mapping[str, Any], device: Any) -> Any:
+    """Build the ACFlow-style arbitrary-mask conditional-density adaptation."""
+
+    _, torch = _imports()
+    contract = config["architecture"]["mask_conditional_density"]
+    width = int(contract["hidden_width"])
+    layers = int(contract["hidden_layers"])
+    dimension, mixtures = 8, 2
+    triangle = dimension * (dimension + 1) // 2
+    output = mixtures + mixtures * dimension + mixtures * triangle
+
+    class MaskConditionalDensity(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.net = _build_mlp(
+                torch, [21, *([width] * layers), output]
+            )
+
+        def forward(
+            self, context: Any, observed: Any, mask: Any
+        ) -> tuple[Any, Any, Any]:
+            raw = self.net(torch.cat((context, observed * mask, mask), dim=-1))
+            return _decode_gmm(raw)
+
+    return MaskConditionalDensity().to(device)
+
+
+def build_independent_mask_density(config: Mapping[str, Any], device: Any) -> Any:
+    """Build shared features with separately parameterized registered-mask heads."""
+
+    _, torch = _imports()
+    contract = config["architecture"]["mask_conditional_density"]
+    width = int(contract["hidden_width"])
+    layers = int(contract["hidden_layers"])
+    dimension, mixtures = 8, 2
+    triangle = dimension * (dimension + 1) // 2
+    output = mixtures + mixtures * dimension + mixtures * triangle
+    mask_names = tuple(config["observation_protocol"]["registered_masks"])
+
+    class IndependentMaskDensity(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.encoder = _build_mlp(
+                torch, [21, *([width] * layers), width]
+            )
+            self.heads = torch.nn.ModuleDict(
+                {name: torch.nn.Linear(width, output) for name in mask_names}
+            )
+
+        def forward(
+            self, name: str, context: Any, observed: Any, mask: Any
+        ) -> tuple[Any, Any, Any]:
+            if name not in self.heads:
+                raise NonlinearDecisionError(f"Unregistered independent mask: {name}.")
+            feature = self.encoder(
+                torch.cat((context, observed * mask, mask), dim=-1)
+            )
+            return _decode_gmm(self.heads[name](feature))
+
+    return IndependentMaskDensity().to(device)
+
+
+def build_lano_completion(config: Mapping[str, Any], device: Any) -> Any:
+    """Build a boundary-first latent autoregressive completion adaptation."""
+
+    _, torch = _imports()
+    width = int(
+        config["architecture"]["mask_conditional_density"]["hidden_width"]
+    )
+    layers = int(
+        config["architecture"]["mask_conditional_density"]["hidden_layers"]
+    )
+
+    class BoundaryAutoregressiveCompletion(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.net = _build_mlp(
+                torch, [29, *([width] * layers), 2]
+            )
+
+        def step(
+            self,
+            context: Any,
+            current: Any,
+            mask: Any,
+            component: int,
+        ) -> tuple[Any, Any]:
+            one_hot = torch.zeros(
+                context.shape[0], 8, device=context.device, dtype=context.dtype
+            )
+            one_hot[:, component] = 1.0
+            raw = self.net(
+                torch.cat((context, current * mask, mask, one_hot), dim=-1)
+            )
+            return raw[:, 0], torch.nn.functional.softplus(raw[:, 1]) + 1e-3
+
+        def sample(
+            self,
+            context: Any,
+            observed: Any,
+            mask: Any,
+            samples: int,
+            seed: int,
+        ) -> Any:
+            generator = torch.Generator(device=context.device).manual_seed(seed)
+            batch = context.shape[0]
+            current = observed[:, None].expand(-1, samples, -1).clone()
+            current_mask = mask[:, None].expand(-1, samples, -1).clone()
+            expanded_context = context[:, None].expand(-1, samples, -1)
+            for component in range(8):
+                missing = current_mask[:, :, component] < 0.5
+                if not bool(missing.any()):
+                    continue
+                mean, scale = self.step(
+                    expanded_context.reshape(-1, 5),
+                    current.reshape(-1, 8),
+                    current_mask.reshape(-1, 8),
+                    component,
+                )
+                value = mean + scale * torch.randn(
+                    mean.shape,
+                    generator=generator,
+                    device=mean.device,
+                    dtype=mean.dtype,
+                )
+                flat_current = current.reshape(-1, 8)
+                flat_mask = current_mask.reshape(-1, 8)
+                flat_missing = missing.reshape(-1)
+                flat_current[flat_missing, component] = value[flat_missing]
+                flat_mask[flat_missing, component] = 1.0
+            return current
+
+    return BoundaryAutoregressiveCompletion().to(device)
+
+
+def build_direct_probabilistic_operator(
+    config: Mapping[str, Any], device: Any, *, set_encoder: bool
+) -> Any:
+    """Build a generic flat-mask or NOP-style observed-token latent operator."""
+
+    _, torch = _imports()
+    contract = config["architecture"]["direct_probabilistic_operator"]
+    width = int(contract["hidden_width"])
+    rank = int(contract["latent_rank"])
+    grid_points = int(config["pde_contract"]["grid_points"])
+    coordinate, _ = _coordinate_features(grid_points, device)
+
+    class DirectLatentOperator(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            if set_encoder:
+                self.token = _build_mlp(torch, [10, width, width])
+                self.context_net = _build_mlp(
+                    torch, [5 + width, width, width, 2 * rank]
+                )
+                component = torch.eye(8, device=device)
+                self.register_buffer("component", component)
+            else:
+                self.context_net = _build_mlp(
+                    torch, [21, width, width, width, 2 * rank]
+                )
+            self.trunk = _build_mlp(
+                torch, [coordinate.shape[-1], width, width, rank]
+            )
+            self.register_buffer("coordinate", coordinate)
+            self.set_encoder = set_encoder
+
+        def latent(self, context: Any, observed: Any, mask: Any) -> tuple[Any, Any]:
+            if self.set_encoder:
+                component = self.component[None].expand(context.shape[0], -1, -1)
+                token_input = torch.cat(
+                    (
+                        observed[:, :, None] * mask[:, :, None],
+                        mask[:, :, None],
+                        component,
+                    ),
+                    dim=-1,
+                )
+                token = self.token(token_input)
+                pooled = (token * mask[:, :, None]).sum(dim=1) / (
+                    mask.sum(dim=1, keepdim=True) + 1.0
+                )
+                raw = self.context_net(torch.cat((context, pooled), dim=-1))
+            else:
+                raw = self.context_net(
+                    torch.cat((context, observed * mask, mask), dim=-1)
+                )
+            mean, raw_scale = raw.chunk(2, dim=-1)
+            return mean, torch.nn.functional.softplus(raw_scale) + 1e-3
+
+        def moments(
+            self, context: Any, observed: Any, mask: Any
+        ) -> tuple[Any, Any]:
+            mean, scale = self.latent(context, observed, mask)
+            basis = self.trunk(self.coordinate) / math.sqrt(rank)
+            field_mean = mean @ basis.transpose(0, 1)
+            field_variance = scale.square() @ basis.square().transpose(0, 1)
+            return (
+                field_mean.reshape(-1, grid_points, grid_points),
+                torch.sqrt(field_variance.clamp_min(1e-8)).reshape(
+                    -1, grid_points, grid_points
+                ),
+            )
+
+        def sample(
+            self,
+            context: Any,
+            observed: Any,
+            mask: Any,
+            samples: int,
+            seed: int,
+        ) -> Any:
+            mean, scale = self.latent(context, observed, mask)
+            generator = torch.Generator(device=context.device).manual_seed(seed)
+            latent = mean[:, None] + scale[:, None] * torch.randn(
+                context.shape[0],
+                samples,
+                rank,
+                generator=generator,
+                device=context.device,
+                dtype=context.dtype,
+            )
+            basis = self.trunk(self.coordinate) / math.sqrt(rank)
+            field = torch.einsum("bsr,nr->bsn", latent, basis)
+            return field.reshape(
+                context.shape[0], samples, grid_points, grid_points
+            )
+
+    return DirectLatentOperator().to(device)
+
+
+def marginal_gmm(
+    weights: Any,
+    means: Any,
+    covariances: Any,
+    positions: Sequence[int],
+) -> tuple[Any, Any, Any]:
+    """Select a component marginal without renormalizing mixture weights."""
+
+    _, torch = _imports()
+    index = torch.tensor(positions, device=means.device, dtype=torch.long)
+    selected_mean = torch.index_select(means, -1, index)
+    selected_covariance = torch.index_select(
+        torch.index_select(covariances, -2, index), -1, index
+    )
+    return weights, selected_mean, selected_covariance
+
+
+def sample_gmm(
+    weights: Any,
+    means: Any,
+    covariances: Any,
+    *,
+    samples: int,
+    seed: int,
+) -> Any:
+    """Draw deterministic-seed samples from a batched Gaussian mixture."""
+
+    _, torch = _imports()
+    generator = torch.Generator(device=means.device).manual_seed(seed)
+    batch, mixtures, dimension = means.shape
+    uniforms = torch.rand(
+        batch, samples, generator=generator, device=means.device
+    )
+    cumulative = torch.cumsum(weights, dim=-1)
+    component = torch.sum(
+        uniforms[:, :, None] > cumulative[:, None, :], dim=-1
+    ).clamp_max(mixtures - 1)
+    cholesky = torch.linalg.cholesky(
+        covariances
+        + 1e-6
+        * torch.eye(dimension, device=means.device, dtype=means.dtype)
+    )
+    selected_mean = torch.gather(
+        means[:, None].expand(-1, samples, -1, -1),
+        2,
+        component[:, :, None, None].expand(-1, -1, 1, dimension),
+    ).squeeze(2)
+    selected_cholesky = torch.gather(
+        cholesky[:, None].expand(-1, samples, -1, -1, -1),
+        2,
+        component[:, :, None, None, None].expand(
+            -1, -1, 1, dimension, dimension
+        ),
+    ).squeeze(2)
+    standard = torch.randn(
+        batch,
+        samples,
+        dimension,
+        generator=generator,
+        device=means.device,
+        dtype=means.dtype,
+    )
+    return selected_mean + torch.einsum(
+        "bsij,bsj->bsi", selected_cholesky, standard
+    )
+
+
 def _coordinate_features(grid_points: int, device: Any) -> tuple[Any, Any]:
     _, torch = _imports()
     coordinate = torch.linspace(0.0, 1.0, grid_points, device=device)
@@ -496,7 +812,10 @@ def _coordinate_features(grid_points: int, device: Any) -> tuple[Any, Any]:
                 torch.cos(math.pi * frequency * yy),
             )
         )
-    envelope = xx * (1.0 - xx) * yy * (1.0 - yy)
+    # The polynomial is exactly zero on every boundary and peaks at 1/16.
+    # Unit-peak scaling preserves the represented function class while avoiding
+    # a 16x attenuation of the interior correction and its gradient.
+    envelope = 16.0 * xx * (1.0 - xx) * yy * (1.0 - yy)
     return (
         torch.stack(features, dim=-1).reshape(-1, len(features)),
         envelope.reshape(-1),

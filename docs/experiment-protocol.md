@@ -434,6 +434,14 @@ decision metric이 좋아도 pass가 아니다. ACO는 ceiling이며 superiority
 상대가 아니다. Test split은 모든 checkpoint가 validation-only로 동결된
 뒤 한 번 생성한다.
 
+첫 validation-only core attempt는 exact `6075530`에서 exit 0으로
+완료됐다. Test split/seed는 접근하지 않았다. Density NLL은 -4.290이지만
+operator full-BC/paired-response relative L2가 0.1739/0.1862로 full-BC
+0.05 자격 기준에 못 미쳤다. 이는 N1 failure가 아니라 confirmatory
+checkpoint 이전의 insufficient development다. Unit-peak interior envelope로
+optimization conditioning만 교정한 뒤 남은 development seed에서 재검사한다.
+결과 파일은 `results/nonlinear_pde_n1_core_development_20260805.json`이다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

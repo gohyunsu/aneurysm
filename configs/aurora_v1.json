@@ -520,7 +520,16 @@
       ],
       "five_seed_confirmation_required": true,
       "test_access_before_checkpoint_freeze": false,
-      "irregular_3d_registration_authorized": false
+      "irregular_3d_registration_authorized": false,
+      "core_development": {
+        "status": "validation_only_attempt1_completed_insufficient",
+        "result": "results/nonlinear_pde_n1_core_development_20260805.json",
+        "source_commit": "60755304f29700eff7b017393560ee24c33682a8",
+        "test_generated_or_accessed": false,
+        "n1_gate_decided": false,
+        "confirmatory_test_authorized": false,
+        "next_step": "unit_peak_envelope_second_validation_only_development_seed"
+      }
     }
   ],
   "evaluation": {

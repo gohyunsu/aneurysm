@@ -46,6 +46,9 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 - `nonlinear_pde_n0r_20260805.json`: N0a outcome 전에 동결한 fresh seed와
   24-context-stratified selector로 9/9 numerical/problem-design check를
   통과한 prospective re-entry
+- `nonlinear_pde_n1_core_development_20260805.json`: test access 없이
+  joint density와 lifted operator만 점검했고 operator 자격이 부족해
+  confirmatory path를 열지 않은 validation-only development
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -89,6 +92,13 @@ maximum grid error 0.00375, minimum worst-component response 0.17484로
 9/9를 통과했다. N0 failed history는 그대로이며, 이 결과는 N1 상세
 사전등록만 허용한다. Learned superiority, method novelty와 irregular-3D
 headline은 아직 허용되지 않는다.
+
+첫 N1 core development는 exact `6075530`에서 exit 0이었고 joint-density
+validation NLL -4.290을 얻었다. 그러나 lifted operator full-BC와
+paired-response relative L2는 0.1739/0.1862로 insufficient였다. Test
+split과 seed는 접근하지 않았으며 N1 gate는 결정되지 않았다. Unit-peak
+envelope 재척도화는 동일 함수 클래스의 optimization diagnostic이고
+threshold 완화가 아니다.
 
 현재 temporal representation 결과:
 

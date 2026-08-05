@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "N0 실패는 보존한다. N0a 뒤 독립적으로 동결한 fresh N0r는 9/9 numerical check를 통과했다. 최악 seed nonlinear departure는 0.01933, grid error는 0.00375였다. 이는 N1 상세 protocol 등록만 허용하며 learned superiority나 3D 근거가 아니다.",
-      state: "N0 failed preserved · N0r passed · N1 preregistered · 3D blocked",
+      copy: "N0 실패는 보존하고 N0r는 9/9 numerical check를 통과했다. 첫 N1 validation-only core에서 density NLL은 -4.290이었지만 operator full-BC/paired-response L2가 0.1739/0.1862로 insufficient였다. Test를 열지 않고 unit-peak envelope로 optimization만 재검사한다.",
+      state: "N1 core attempt 1 insufficient · test/3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "result",
+      title: "First N1 core development is not checkpoint-eligible",
+      copy: "Exact 6075530 validation-only run에서 joint-density NLL은 -4.290이었지만 lifted operator full-BC/paired-response relative L2는 0.1739/0.1862였다. Test는 생성하지 않았다. Density로 operator failure를 덮지 않으며 unit-peak envelope로 동일 함수 클래스의 optimization conditioning만 두 번째 development seed에서 재검사한다.",
+      files: ["results/nonlinear_pde_n1_core_development_20260805.json", "src/aurora/nonlinear_pde_decision.py", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.05",
       category: "implementation",

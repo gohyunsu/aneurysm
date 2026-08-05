@@ -955,6 +955,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "source_result",
                 "test_access_before_checkpoint_freeze",
                 "irregular_3d_registration_authorized",
+                "core_development",
             ],
             "preregistered N1",
         )
@@ -966,6 +967,33 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ):
             raise ProtocolError(
                 "N1 preregistration cannot access test or authorize irregular 3D."
+            )
+        development = n1["core_development"]
+        _require_keys(
+            development,
+            [
+                "status",
+                "result",
+                "source_commit",
+                "test_generated_or_accessed",
+                "n1_gate_decided",
+                "confirmatory_test_authorized",
+                "next_step",
+            ],
+            "N1 core development",
+        )
+        if (
+            development["status"]
+            != "validation_only_attempt1_completed_insufficient"
+            or development["result"]
+            != "results/nonlinear_pde_n1_core_development_20260805.json"
+            or len(development["source_commit"]) != 40
+            or development["test_generated_or_accessed"] is not False
+            or development["n1_gate_decided"] is not False
+            or development["confirmatory_test_authorized"] is not False
+        ):
+            raise ProtocolError(
+                "Insufficient N1 development cannot decide the gate or open test."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

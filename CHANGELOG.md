@@ -4,6 +4,25 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · First N1 core development is insufficient
+
+### Validation-only result
+
+- Exact `6075530`의 A6000 run은 113/113 contract와 모든 train/validation
+  solver를 통과했다. Test split과 test seed는 생성·접근하지 않았다.
+- Joint-density best validation NLL은 -4.290이었다. Lifted operator의
+  full-BC relative L2 0.1739와 paired-response relative L2 0.1862는
+  preregistered full-BC 0.05 자격과 거리가 있고 best epoch도 maximum
+  1,400이었다.
+
+### Decision
+
+- Density가 학습됐다는 사실로 operator failure를 덮지 않는다. N1 gate,
+  baseline superiority, confirmatory test, 3D는 모두 열지 않는다.
+- Exact-zero interior envelope를 unit peak로 16배 재척도화한다. 함수
+  클래스·rank·data·loss·threshold·test rule은 그대로이며 두 번째
+  development seed에서만 재검사한다.
+
 ## 2026-08-05 · N1 tensor shape is corrected before any metric
 
 ### Pre-execution amendment

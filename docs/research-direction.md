@@ -382,6 +382,14 @@ mask route, decision loss, bootstrap rule과 5% minimum effect를 결과 전에
 고정한다. Development seed는 validation-only이며 test 생성·threshold
 변경 권한이 없다. N1 pass도 irregular-3D **protocol 등록만** 허용한다.
 
+첫 core development seed는 test를 생성하지 않고 정상 완료됐지만 operator
+자격을 얻지 못했다. Joint-density validation NLL은 -4.290이었으나 full-BC
+relative L2 0.1739, paired-response relative L2 0.1862였고 best checkpoint가
+maximum 1,400 step에 있었다. Density 결과로 operator 실패를 덮지 않는다.
+Interior envelope의 최대값 0.0625가 correction과 gradient를 16배 감쇠한
+동일 함수 클래스 parameterization임을 확인해 unit-peak로만 재척도화한다.
+두 번째 development seed 전에도 test와 confirmatory path는 닫혀 있다.
+
 ### G2 · paired response
 
 한 숫자에 서로 다른 식별성 문제를 섞지 않는다.

@@ -214,6 +214,11 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   0.01933, grid error 0.00375, worst-component response 0.17484,
   route residual \(8.94\times10^{-8}\)였다. 이는 N1 상세 protocol 등록만
   허용하며, N0 failed history·method novelty·3D headline을 바꾸지 않는다.
+  N1 core attempt 1은 exact `6075530` validation-only run에서 density NLL
+  -4.290, operator full-BC/paired-response L2 0.1739/0.1862였다. Test는
+  생성·접근하지 않았고 operator가 0.05 자격에 못 미쳐 confirmatory path는
+  닫혀 있다. Unit-peak envelope rescaling은 동일 함수 클래스의 optimization
+  diagnostic이며 threshold·rank·data·loss를 바꾸지 않는다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

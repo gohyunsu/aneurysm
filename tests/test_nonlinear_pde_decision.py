@@ -7,7 +7,11 @@ from pathlib import Path
 
 from aurora.nonlinear_pde_decision import (
     NonlinearDecisionError,
+    build_direct_probabilistic_operator,
+    build_independent_mask_density,
     build_joint_density,
+    build_lano_completion,
+    build_mask_conditional_density,
     build_solution_operator,
     gmm_nll,
     load_config,
@@ -88,6 +92,33 @@ class NonlinearDecisionContractTests(unittest.TestCase):
         self.assertEqual(tuple(field.shape), (3, 33, 33))
         self.assertTrue(torch.allclose(field[:, 0], torch.zeros_like(field[:, 0])))
         self.assertTrue(torch.allclose(field[:, -1], torch.zeros_like(field[:, -1])))
+
+        mask = torch.zeros(3, 8)
+        mask[:, [0, 2]] = 1.0
+        conditional = build_mask_conditional_density(self.config, device)
+        independent = build_independent_mask_density(self.config, device)
+        for result in (
+            conditional(context, boundary, mask),
+            independent("sparse_2", context, boundary, mask),
+        ):
+            self.assertEqual(tuple(result[0].shape), (3, 2))
+            self.assertEqual(tuple(result[1].shape), (3, 2, 8))
+            self.assertEqual(tuple(result[2].shape), (3, 2, 8, 8))
+
+        autoregressive = build_lano_completion(self.config, device)
+        completion = autoregressive.sample(
+            context, boundary, mask, samples=4, seed=7
+        )
+        self.assertEqual(tuple(completion.shape), (3, 4, 8))
+
+        for set_encoder in (False, True):
+            direct = build_direct_probabilistic_operator(
+                self.config, device, set_encoder=set_encoder
+            )
+            mean, scale = direct.moments(context, boundary, mask)
+            self.assertEqual(tuple(mean.shape), (3, 33, 33))
+            self.assertEqual(tuple(scale.shape), (3, 33, 33))
+            self.assertTrue((scale > 0).all())
 
 
 if __name__ == "__main__":

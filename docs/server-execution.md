@@ -174,6 +174,12 @@ shape 오류를 검출했다. 동시에 source SHA 변수가 exact commit이 아
 이 attempt는 결과와 무관하게 provenance-invalid로 보존한다. Shape fix는
 frozen scientific contract를 바꾸지 않으며 새 full SHA contract가
 통과하기 전 development metric job을 제출하지 않는다.
+
+Exact `6075530` contract는 113/113을 통과했고 development seed 0 job도
+exit 0이었다. Train/validation solver는 모두 수렴했지만 operator
+full-BC/paired-response relative L2 0.1739/0.1862로 checkpoint-ineligible다.
+Test는 생성하지 않았다. 다음 server job은 unit-peak envelope의 development
+seed 1뿐이며 confirmatory seed/job은 계속 금지한다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은
