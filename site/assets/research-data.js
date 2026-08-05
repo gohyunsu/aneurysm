@@ -161,8 +161,8 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.05",
       category: "implementation",
-      title: "N1c-a oracle evaluation releases autograd state",
-      copy: "Corrected entrypoint의 첫 재실행도 seed aggregate 전에 energy-floor oracle solve에서 OOM으로 종료됐다. Evaluation solver를 no-grad로 고정하고 batch만 512→128로 낮췄다. Estimand·sample 수·checkpoint·test는 유지하며 no-autograd 회귀 테스트 뒤 다시 실행한다.",
+      title: "N1c-a oracle evaluation is made graph-free end to end",
+      copy: "Corrected entrypoint의 첫 재실행은 seed aggregate 전에 energy-floor oracle solve에서 OOM으로 종료됐다. 첫 수정의 130-test contract는 PDE solve 뒤 functional 계산이 gradient flag를 다시 전파함을 검출해 1-test fail로 종료됐고 본 실험은 제출하지 않았다. Solve·field 결합·functional 계산 전체를 no-grad로 묶고 batch만 512→128로 낮춘다. Estimand·sample 수·checkpoint·test는 유지한다.",
       files: ["experiments/run_nonlinear_pde_n1c_outer_test.py", "experiments/run_nonlinear_pde_n1c_attribution.py", "tests/test_nonlinear_pde_decision.py", "CHANGELOG.md"]
     },
     {

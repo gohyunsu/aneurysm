@@ -116,8 +116,10 @@ def _solve_functionals(
             raise NonlinearDecisionError("N1c oracle solve did not converge.")
         fields.append(field)
         summaries.append(summary)
-    field = torch.cat(fields)
-    return solution_functionals(field, context), {
+    with torch.no_grad():
+        field = torch.cat(fields)
+        functionals = solution_functionals(field, context)
+    return functionals, {
         "batches": len(summaries),
         "all_converged": True,
         "maximum_normalized_residual": max(

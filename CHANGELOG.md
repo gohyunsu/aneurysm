@@ -35,6 +35,12 @@
 - Oracle solver를 `no_grad`로 고정하고 energy-floor batch만 512에서
   128로 낮춘다. Estimand·sample 수·checkpoint·test는 바꾸지 않으며,
   output이 gradient graph를 갖지 않는 회귀 테스트를 추가한다.
+- 첫 메모리 수정 commit의 contract job `109737`은 130개 중 이 새 회귀
+  테스트 하나에서 실패했다. PDE solve만 `no_grad`였고 뒤이은 functional
+  계산이 gradient-enabled 입력 context를 통해 graph를 다시 만들 수
+  있었기 때문이다. 본 실험은 제출하지 않았으며, field 결합과 functional
+  계산까지 같은 `no_grad` 경계로 옮겨 helper 자체가 호출 환경과 무관하게
+  graph-free임을 보장한다.
 
 ## 2026-08-05 · N1c completes and fails the strong-baseline outer test
 
