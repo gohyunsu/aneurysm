@@ -1,0 +1,143 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "nonlinear_pde_n0r_20260805",
+  "experiment_id": "nonlinear_multicomponent_n0r_context_stratified_reentry_v1",
+  "evidence_status": "prospective_numerical_problem_design_reentry_completed_passed",
+  "source_gate": "failed_N0_with_pre_outcome_N0r_preregistration",
+  "source_commit": "37d31a88075629988b0f9064921ee5a4211817e3",
+  "contract_source_commit": "1a680537957e4d87849abb84eab6380c76e656c9",
+  "source_config_sha256": "2d005abfd2e93859f9b57d092dc82a9e93a3cdf04f83b6db5cf83d6c6e768805",
+  "source_metrics_sha256": "409f3cd847b9b91f3ebf757b604ecd082a293ac044d12ff249d5e7e779956030",
+  "source_run_config_sha256": "810c6d143ad0a30ca5971d7a4f7d4d4ca3f4dd270a247dfcd4fdbff00f6ca181",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-05T10:51:17.492024+00:00",
+    "ended_utc": "2026-08-05T10:51:48.220354+00:00",
+    "seeds": 3,
+    "walltime": "00:01:51"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "pbs_container_contract_tests": {
+      "status": "passed",
+      "exit_status": 0,
+      "tests": 105,
+      "tests_log_sha256": "2482d3c3d68c69bbf88c91c56c85f48f13e6cae82b8a2c893e1f73847b4e2ba5"
+    },
+    "metric_job_source_commit_exact": true,
+    "contract_frozen_before_n0a_outcome": true
+  },
+  "contract": {
+    "contexts_per_seed": 24,
+    "conditions_per_context": 12,
+    "reference_cases_per_seed": 24,
+    "reference_contexts_represented_per_seed": 24,
+    "paired_base_cases_per_seed": 48,
+    "paired_contexts_represented_per_seed": 24,
+    "grid_points": 33,
+    "reference_grid_points": 65,
+    "boundary_components": 8,
+    "all_checks_required": true,
+    "worst_seed_decides": true,
+    "pde_boundary_law_solver_functionals_changed_from_n0": false,
+    "thresholds_changed_after_result": false
+  },
+  "gate": {
+    "passed": true,
+    "failed_checks": [],
+    "checks": {
+      "all_solver_batches_converged": {
+        "observed": true,
+        "passed": true
+      },
+      "maximum_solver_normalized_residual": {
+        "observed": 0.0000029608866043417947,
+        "threshold": 0.0005,
+        "passed": true
+      },
+      "maximum_coarse_reference_relative_l2": {
+        "observed": 0.0037474953569471836,
+        "threshold": 0.04,
+        "passed": true
+      },
+      "minimum_median_nonlinear_departure": {
+        "observed": 0.01933414489030838,
+        "threshold": 0.01,
+        "passed": true
+      },
+      "minimum_worst_component_response_median": {
+        "observed": 0.17483772337436676,
+        "threshold": 0.01,
+        "passed": true
+      },
+      "minimum_response_effective_rank": {
+        "observed": 7.0666704177856445,
+        "threshold": 3.0,
+        "passed": true
+      },
+      "minimum_functional_winner_components": {
+        "observed": 7,
+        "threshold": 3,
+        "passed": true
+      },
+      "maximum_dominant_functional_winner_share": {
+        "observed": 0.5625,
+        "threshold": 0.75,
+        "passed": true
+      },
+      "maximum_analytic_conditioning_route_residual": {
+        "observed": 8.940696716308594e-08,
+        "threshold": 0.00002,
+        "passed": true
+      }
+    }
+  },
+  "seed_summary": [
+    {
+      "seed": 62080321,
+      "median_nonlinear_departure": 0.01933414489030838,
+      "maximum_discretization_relative_l2": 0.0037474953569471836,
+      "worst_component_response_median": 0.17878785729408264,
+      "response_effective_rank": 7.06968355178833,
+      "functional_winner_components": 7,
+      "dominant_functional_winner_share": 0.5260416865348816,
+      "analytic_conditioning_route_residual": 5.960464477539063e-08
+    },
+    {
+      "seed": 62080322,
+      "median_nonlinear_departure": 0.025142522528767586,
+      "maximum_discretization_relative_l2": 0.0028487041126936674,
+      "worst_component_response_median": 0.19838908314704895,
+      "response_effective_rank": 7.0666704177856445,
+      "functional_winner_components": 8,
+      "dominant_functional_winner_share": 0.5364583134651184,
+      "analytic_conditioning_route_residual": 8.940696716308594e-08
+    },
+    {
+      "seed": 62080323,
+      "median_nonlinear_departure": 0.024249952286481857,
+      "maximum_discretization_relative_l2": 0.002985549159348011,
+      "worst_component_response_median": 0.17483772337436676,
+      "response_effective_rank": 7.0814409255981445,
+      "functional_winner_components": 8,
+      "dominant_functional_winner_share": 0.5625,
+      "analytic_conditioning_route_residual": 8.195638656616211e-08
+    }
+  ],
+  "decision": {
+    "failed_n0_status": "failed_unchanged",
+    "n0r_status": "completed_passed",
+    "n1_model_and_strong_baseline_registration_authorized": true,
+    "n1_training_authorized_before_detailed_preregistration": false,
+    "irregular_3d_headline_authorized": false,
+    "method_novelty_established": false,
+    "accept_ready": false,
+    "next_step": "Preregister the complete N1 learned comparison, including decision metrics and strong partial-observation and active-acquisition baselines, before generating N1 test outcomes."
+  }
+}

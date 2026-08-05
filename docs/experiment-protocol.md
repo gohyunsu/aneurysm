@@ -393,9 +393,18 @@ N0r pass는 N1 learned model과 mandatory strong baseline의 상세 protocol
 등록만 허용한다. N0 failure는 history로 보존하고 N0r 자체를 method
 evidence나 3D 진행 근거로 쓰지 않는다.
 
+Exact `37d31a8`의 fresh 3-seed A6000 run은 9/9를 통과했다. Worst-seed
+nonlinear departure는 0.01933, maximum grid error는 0.00375,
+minimum worst-component response는 0.17484, minimum response rank는
+7.06667, maximum route residual은 \(8.94\times10^{-8}\)였다. 공개
+aggregate는 `results/nonlinear_pde_n0r_20260805.json`이다. N1은 이제
+상세 사전등록이 허용되지만 그 config가 commit되기 전 학습·test 결과
+생성은 금지한다.
+
 #### N1 · learned decision-consistency falsification
 
-N1은 N0 결과 전에 세부 hyperparameter나 fresh seed를 열지 않는다. Primary
+N1은 N0r 통과 뒤 별도 prospective config에서 세부 hyperparameter와 fresh
+seed를 고정한다. Primary
 question은 같은 최종 BC mask의 route posterior 불일치가
 solution-functional Bayes risk와 다음 component acquisition regret를
 악화시키는지, coherent joint law가 이를 줄이는지다. 필수 baseline은
@@ -469,7 +478,7 @@ paper로 범위를 축소하고 AAAI general method claim을 하지 않는다.
 | 데이터 | 역할 | 현재 상태 |
 |---|---|---|
 | Controlled PDE | exact conditional/marginal oracle | 구현 우선 |
-| Nonlinear PDE | ID mask calibration + supplied-BC shift response | N0 solver gate preregistered; N1 blocked |
+| Nonlinear PDE | ID mask calibration + supplied-BC shift response | N0r numerical gate passed; N1 preregistration authorized |
 | Aneumo | same-geometry × 8 steady BC | 64-case cache verified; scaling audit에서 velocity만 eligible |
 | AneuG-Flow | irregular 3D pretraining | geometry archive만 local; BC variation 없음 |
 | BenchAnXplore | transient GNN baseline/D0 | 105×80 audited; D0 실행 |

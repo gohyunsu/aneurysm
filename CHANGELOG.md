@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · Fresh context-stratified N0r passes 9/9
+
+### Result
+
+- N0a outcome 전에 commit `1a68053`에서 동결한 계약을 exact execution
+  commit `37d31a8`로 A6000에서 실행했다. Dependency-complete contract
+  105/105 tests와 metric job이 모두 exit 0이었다.
+- 세 fresh seed의 worst nonlinear departure 0.01933, maximum grid error
+  0.00375, minimum worst-component response 0.17484, minimum effective rank
+  7.06667, maximum route residual \(8.94\times10^{-8}\)로 9개 check를 모두
+  통과했다.
+- 공개 aggregate와 raw-metric hash는
+  `results/nonlinear_pde_n0r_20260805.json`에 기록했다.
+
+### Decision
+
+- N0는 failed로 보존한다. N0r은 numerical/problem-design adequacy이며
+  learned superiority나 method novelty가 아니다.
+- N1 learned strong-baseline protocol의 상세 사전등록만 허용한다.
+  그 config를 결과 전에 commit하기 전에는 N1 학습을 시작하지 않는다.
+- Irregular-3D headline과 AAAI accept-ready 판정은 계속 보류한다.
+
 ## 2026-08-05 · Pre-outcome N0r contract is executable
 
 ### Experiment

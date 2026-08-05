@@ -135,6 +135,24 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "numerical adequacy"):
             validate_protocol(candidate)
 
+    def test_passed_n0r_requires_exact_public_result(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0r = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0r"
+        )
+        n0r["failed_checks"] = ["nonlinear_departure"]
+        with self.assertRaisesRegex(ProtocolError, "no failures"):
+            validate_protocol(candidate)
+
+    def test_passed_n0r_authorizes_registration_not_unregistered_training(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["status"] = "training"
+        with self.assertRaisesRegex(ProtocolError, "unregistered training"):
+            validate_protocol(candidate)
+
     def test_n1_cannot_drop_active_feature_baseline(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         n1 = next(

@@ -153,6 +153,11 @@ commit에서도 그대로 pin한다. PBS artifact에는 config checksum, exact
 execution commit, reference/paired flat indices, represented-context count와
 모든 check를 남긴다. N0r metric은 dependency-complete contract test가
 같은 execution source에서 통과한 뒤에만 제출한다.
+Exact `37d31a8`의 dependency-complete PBS contract는 105/105 test를
+통과했고, 이어진 fresh 3-seed A6000 metric job은 exit 0으로 9/9 check를
+통과했다. 공개 aggregate는 `results/nonlinear_pde_n0r_20260805.json`이다.
+이는 N1 사전등록만 허용하며 상세 config commit 전 N1 학습을 제출하지
+않는다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

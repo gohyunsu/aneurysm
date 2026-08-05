@@ -43,6 +43,9 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 - `nonlinear_pde_n0_attribution_20260803.json`: failed N0 seed의 24×12
   전체 context-condition grid에서 contiguous slicing 민감도를 확인한
   threshold-free N0a
+- `nonlinear_pde_n0r_20260805.json`: N0a outcome 전에 동결한 fresh seed와
+  24-context-stratified selector로 9/9 numerical/problem-design check를
+  통과한 prospective re-entry
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -80,6 +83,12 @@ N0a에서 failed seed의 contiguous/stratified/all-case median은
 대표성 문제를 지지한다. 그러나 former reference를 넘는 context는
 18–19/24이므로 uniformly strong nonlinearity를 주장하지 않는다. N0a에는
 gate가 없고 N0 실패와 N1/3D 차단은 그대로다.
+
+N0r는 exact `37d31a8`에서 worst-seed nonlinear departure 0.01933,
+maximum grid error 0.00375, minimum worst-component response 0.17484로
+9/9를 통과했다. N0 failed history는 그대로이며, 이 결과는 N1 상세
+사전등록만 허용한다. Learned superiority, method novelty와 irregular-3D
+headline은 아직 허용되지 않는다.
 
 현재 temporal representation 결과:
 

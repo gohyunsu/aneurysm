@@ -318,6 +318,12 @@ N0의 PDE/solver config를 그대로 resolve하고 다음 두 index tensor만
 선택된 flat index와 represented-context count를 기록해 contract가 실제
 실행됐는지 검증한다.
 
+Exact `37d31a8` 실행에서 두 selector 모두 seed마다 24/24 context를
+표현했고 9개 numerical/problem-design check를 통과했다. 이는 아래
+operator를 학습할 수 있다는 허가이지, operator 자체의 유효성이나
+architecture 선택의 증거는 아니다. N1 tensor·backbone·budget은 별도
+사전등록에서 고정한다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

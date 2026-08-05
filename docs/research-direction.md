@@ -1,8 +1,8 @@
 # AURORA 연구 방향
 
-최종 검토일: 2026-08-03 KST
+최종 검토일: 2026-08-05 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed · N0a complete · N0r preregistered · N1/3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1 registration authorized · 3D blocked
 
 ## 1. 현재 판정
 
@@ -324,7 +324,7 @@ Learned performance, AURORA novelty, 3D 진행 권한이 아니다.
 Exact `0ead687`의 A6000 run은 9개 check 중 8개를 통과했지만 실패했다.
 세 seed의 nonlinear-departure 중앙값은 0.02319, 0.02365, 0.00727이고,
 frozen worst-seed 기준은 0.01이었다. 마지막 seed를 제외하거나 threshold를
-낮추지 않는다. 따라서 N1과 irregular-3D는 여전히 차단된다.
+낮추지 않는다. 이 실패는 이후 N0r 결과와 무관하게 보존한다.
 
 사후 code audit에서는 context-major flatten 뒤 앞 12개 reference case를
 자른 결과, 각 seed의 nonlinear statistic이 context 0의 12개 condition만
@@ -356,8 +356,12 @@ Fresh seed는 `[62080321, 62080322, 62080323]`이고, reference 24 case는
 24 context를 각각 한 번, paired 48 case는 각각 두 번 포함한다. PDE,
 BC density, solver, functionals, eight threshold, all-check/worst-seed rule은
 N0와 같다. N0a 결과가 유리하거나 불리해도 이 계약을 수정하지 않는다.
-통과해도 N1 strong-baseline 등록만 열며 N0 relabel·novelty·3D 권한은
-열지 않는다.
+Exact `37d31a8`의 fresh A6000 run은 9개 check를 모두 통과했다. 최악
+seed 기준 nonlinear departure 0.01933, discretization error 0.00375,
+8-component response minimum 0.17484, effective rank 7.06667,
+conditioning-route residual \(8.94\times10^{-8}\)였다. 이 결과는 N1
+strong-baseline protocol의 **등록만** 허용한다. N0 relabel, learned
+superiority, method novelty, irregular-3D 실행 권한은 열지 않는다.
 
 N1의 후보 정체성은 active acquisition 자체가 아니라
 **conditioning inconsistency가 solution-functional Bayes decision과 다음

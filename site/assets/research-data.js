@@ -104,8 +104,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "Frozen N0는 8/9 check를 통과했지만 실패했다. N0a에서 failed seed의 contiguous/stratified/all-case median은 0.00774/0.01221/0.01828로 slice 민감도를 확인했다. 다만 context 5–6개는 former reference보다 낮아 uniform nonlinearity는 주장하지 않는다.",
-      state: "N0 failed · N0a complete · N0r preregistered · N1/3D blocked",
+      copy: "N0 실패는 보존한다. N0a 뒤 독립적으로 동결한 fresh N0r는 9/9 numerical check를 통과했다. 최악 seed nonlinear departure는 0.01933, grid error는 0.00375였다. 이는 N1 상세 protocol 등록만 허용하며 learned superiority나 3D 근거가 아니다.",
+      state: "N0 failed preserved · N0r passed · N1 registration only · 3D blocked",
       blocking: true
     },
     {
@@ -151,6 +151,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "result",
+      title: "Fresh context-stratified N0r passes 9/9 numerical checks",
+      copy: "N0a outcome 전에 동결한 exact contract를 37d31a8에서 실행했다. 세 fresh seed의 worst nonlinear departure 0.01933, grid error 0.00375, worst-component response 0.17484, route residual 8.94e-8로 전 항목을 통과했다. N0 실패는 보존하며 N1 상세 사전등록만 열고 method novelty와 irregular-3D는 계속 차단한다.",
+      files: ["results/nonlinear_pde_n0r_20260805.json", "docs/research-direction.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.05",
       category: "experiment",

@@ -468,7 +468,7 @@
     {
       "id": "N0r",
       "name": "fresh_context_stratified_solver_nontriviality_reentry",
-      "status": "preregistered_before_fresh_gpu_run",
+      "status": "completed_passed",
       "source_gate": "N0",
       "config": "configs/nonlinear_pde_n0r.json",
       "contract_source_commit": "1a680537957e4d87849abb84eab6380c76e656c9",
@@ -482,12 +482,17 @@
       "may_relabel_failed_n0": false,
       "may_establish_method_novelty": false,
       "may_authorize_irregular_3d_headline": false,
-      "pass_authorizes": "N1_learned_model_and_strong_baseline_registration"
+      "pass_authorizes": "N1_learned_model_and_strong_baseline_registration",
+      "result": "results/nonlinear_pde_n0r_20260805.json",
+      "source_commit": "37d31a88075629988b0f9064921ee5a4211817e3",
+      "source_metrics_sha256": "409f3cd847b9b91f3ebf757b604ecd082a293ac044d12ff249d5e7e779956030",
+      "failed_checks": [],
+      "n1_registration_authorized": true
     },
     {
       "id": "N1",
       "name": "learned_conditioning_decision_consistency",
-      "status": "blocked_pending_N0r",
+      "status": "registration_authorized_pending_preregistration",
       "source_gate": "N0r",
       "primary_question": "does_route_consistent_partial_condition_inference_reduce_solution_functional_risk_and_acquisition_regret",
       "mandatory_baselines": [

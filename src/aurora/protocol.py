@@ -857,7 +857,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "N0r nonlinear re-entry",
     )
     if (
-        n0r["status"] != "preregistered_before_fresh_gpu_run"
+        n0r["status"]
+        not in {"preregistered_before_fresh_gpu_run", "completed_passed"}
         or n0r["source_gate"] != "N0"
         or n0r["config"] != "configs/nonlinear_pde_n0r.json"
         or n0r["contract_source_commit"]
@@ -889,10 +890,49 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             raise ProtocolError("N0r is numerical adequacy, not a method or 3D claim.")
     if n0r["pass_authorizes"] != "N1_learned_model_and_strong_baseline_registration":
         raise ProtocolError("N0r may authorize only N1 registration.")
+    if n0r["status"] == "completed_passed":
+        _require_keys(
+            n0r,
+            [
+                "result",
+                "source_commit",
+                "source_metrics_sha256",
+                "failed_checks",
+                "n1_registration_authorized",
+            ],
+            "completed N0r",
+        )
+        if n0r["result"] != "results/nonlinear_pde_n0r_20260805.json":
+            raise ProtocolError("Completed N0r must point to its public aggregate.")
+        if (
+            len(n0r["source_commit"]) != 40
+            or len(n0r["source_metrics_sha256"]) != 64
+            or n0r["failed_checks"]
+        ):
+            raise ProtocolError("Passed N0r must retain exact source and no failures.")
+        if n0r["n1_registration_authorized"] is not True:
+            raise ProtocolError("A passed N0r must authorize N1 registration.")
+    else:
+        for forbidden_key in (
+            "result",
+            "source_commit",
+            "source_metrics_sha256",
+            "failed_checks",
+            "n1_registration_authorized",
+        ):
+            if forbidden_key in n0r:
+                raise ProtocolError("Unrun N0r cannot contain post-result fields.")
 
     n1 = next(item for item in nonlinear if item["id"] == "N1")
-    if n1["status"] != "blocked_pending_N0r" or n1["source_gate"] != "N0r":
-        raise ProtocolError("N1 must remain blocked until N0r passes.")
+    expected_n1_status = (
+        "registration_authorized_pending_preregistration"
+        if n0r["status"] == "completed_passed"
+        else "blocked_pending_N0r"
+    )
+    if n1["status"] != expected_n1_status or n1["source_gate"] != "N0r":
+        raise ProtocolError(
+            "N1 status must follow N0r without authorizing unregistered training."
+        )
     required_n1_baselines = {
         "conditional_mean_imputation",
         "independent_mask_heads",
