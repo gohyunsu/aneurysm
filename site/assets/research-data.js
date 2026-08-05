@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "N0 실패는 보존하고 N0r는 9/9 numerical check를 통과했다. Unit-peak N1 core는 full-BC/paired-response L2를 0.05771/0.05729까지 낮췄지만 0.05를 넘었다. Test를 열지 않고 N1a에서 loss conditioning×horizon만 validation-only로 분리한다.",
-      state: "N1 core still insufficient · N1a preregistered · test/3D blocked",
+      copy: "N1a는 test를 생성하지 않은 validation-only 비교에서 scale-normalized 2,800-step을 선택했고 full-BC/paired-response L2는 0.01162/0.01220이었다. 이는 gate pass가 아니라 optimization attribution이다. N1b에서 5-seed strong-baseline checkpoint 전체를 먼저 동결·hash한다.",
+      state: "N1b checkpoint freeze registered · test/3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "experiment",
+      title: "N1a selects the optimization contract; N1b freezes it before test",
+      copy: "Exact eebcd91 A6000 run은 test context 0개로 종료됐다. Validation objective는 raw 1,400/2,800에서 0.05007/0.02071, scale-normalized 1,400/2,800에서 0.03732/0.01772였고, 고정 규칙은 마지막 variant를 선택했다. N1b는 이 선택만 고정하며 모든 strong-baseline checkpoint manifest가 public commit되기 전 test와 3D를 차단한다.",
+      files: ["results/nonlinear_pde_n1_optimization_attribution_20260805.json", "configs/nonlinear_pde_n1b.json", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.05",
       category: "experiment",

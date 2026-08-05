@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-05 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1 registration authorized · 3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1b checkpoint freeze registered · test/3D blocked
 
 ## 1. 현재 판정
 
@@ -396,7 +396,23 @@ checkpoint도 다시 maximum 1,400 step이었다. “거의 통과”로 해석�
 seed에서 raw/scale-normalized loss × 1,400/2,800 step의 2×2 요인만
 validation-only로 비교한다. Success threshold가 없고 test/N1/3D 권한도
 없다. Lowest validation objective를 선택하되 1% 이내면 짧은 horizon을
-고른다. 선택 후에도 새 prospective N1 version을 먼저 동결해야 한다.
+고른다. Exact `eebcd91`의 A6000 run은 test를 생성하지 않고 exit 0으로
+끝났다. Raw 1,400/2,800의 validation objective는 0.05007/0.02071,
+scale-normalized 1,400/2,800은 0.03732/0.01772였다. 고정 규칙은
+scale-normalized 2,800-step을 선택했고 full-BC/paired-response L2는
+0.01162/0.01220이었다. 이 결과는 N1 pass나 novelty가 아니라 optimization
+attribution이다.
+
+새 prospective `configs/nonlinear_pde_n1b.json`은 이 선택만 parent N1에
+추가한다. 다섯 confirmatory seed에서 joint/independent/ACFlow/LANO
+completion, pair/pair-zero/random-pair/DeltaPhi-style operator,
+generic probabilistic operator와 NOP adaptation을 train/validation만으로
+학습한다. 모든 checkpoint·validation metric·source commit checksum을
+public manifest에 고정하기 전 outer test는 생성하지 않는다.
+Conditional-mean, random/variance acquisition, NOTS-style policy와 ACO
+ceiling은 비학습 control로 같은 manifest에 명시한다. Train-only
+centered POD-96은 direct probabilistic baseline의 fixed representation일
+뿐 AURORA architecture나 novelty가 아니다.
 
 ### G2 · paired response
 

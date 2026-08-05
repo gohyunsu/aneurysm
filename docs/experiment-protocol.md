@@ -460,6 +460,30 @@ N1a에는 threshold가 없다. Validation objective 최저 variant를 선택하�
 1% 이내면 짧은 horizon을 고르지만 N1을 pass시키지 않는다. 선택값은 별도
 prospective N1 version에 고정한 뒤에만 confirmatory test 후보가 된다.
 
+Exact `eebcd91`의 PBS A6000 N1a는 exit 0이었고 test context를 0개
+생성했다.
+
+| variant | full-BC L2 | paired-response L2 | validation objective |
+|---|---:|---:|---:|
+| raw · 1,400 | 0.03332 | 0.03349 | 0.05007 |
+| raw · 2,800 | 0.01396 | 0.01350 | 0.02071 |
+| scale-normalized · 1,400 | 0.02494 | 0.02476 | 0.03732 |
+| scale-normalized · 2,800 | 0.01162 | 0.01220 | 0.01772 |
+
+고정 selection rule은 마지막 variant를 골랐다. 이는 N1 pass가 아니라
+validation-only optimization attribution이다. 공개 aggregate는
+`results/nonlinear_pde_n1_optimization_attribution_20260805.json`이다.
+
+`configs/nonlinear_pde_n1b.json`은 parent N1의 split, five confirmatory
+seed, mask, baseline, metric, threshold를 바꾸지 않고 selected loss와
+2,800-step horizon만 고정한 prospective overlay다. 다음 stage는 outer
+test가 아니라 **checkpoint freeze**다. 각 confirmatory seed에서
+joint/independent/ACFlow/LANO completion, shared operator의
+pair/pair-zero/random-pair/DeltaPhi-style control, generic probabilistic
+operator와 NOP adaptation을 train/validation만으로 고른다. 모든
+checkpoint hash와 validation metric을 public manifest로 commit하기 전에는
+test split·seed를 생성하거나 읽을 수 없다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

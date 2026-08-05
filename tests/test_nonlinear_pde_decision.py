@@ -15,6 +15,7 @@ from aurora.nonlinear_pde_decision import (
     build_solution_operator,
     gmm_nll,
     load_config,
+    load_n1b_config,
     load_optimization_config,
 )
 
@@ -24,6 +25,7 @@ CONFIG = ROOT / "configs" / "nonlinear_pde_n1.json"
 OPTIMIZATION_CONFIG = (
     ROOT / "configs" / "nonlinear_pde_n1_optimization_attribution.json"
 )
+N1B_CONFIG = ROOT / "configs" / "nonlinear_pde_n1b.json"
 
 
 class NonlinearDecisionContractTests(unittest.TestCase):
@@ -50,6 +52,18 @@ class NonlinearDecisionContractTests(unittest.TestCase):
         self.assertFalse(attribution["has_success_threshold"])
         self.assertFalse(attribution["may_access_or_generate_test"])
         self.assertEqual(len(attribution["factorial_variants"]), 4)
+
+    def test_n1b_freezes_selection_and_keeps_test_locked(self) -> None:
+        parent, n1b = load_n1b_config(N1B_CONFIG)
+        self.assertEqual(
+            n1b["selected_shared_operator_training"]["maximum_steps"], 2800
+        )
+        self.assertEqual(
+            n1b["checkpoint_freeze"]["confirmatory_model_seeds"],
+            parent["model_seeds"]["confirmatory"],
+        )
+        self.assertFalse(n1b["checkpoint_freeze"]["test_split_generated"])
+        self.assertFalse(n1b["checkpoint_freeze"]["test_seed_accessed"])
 
     def test_test_access_cannot_move_before_checkpoint_freeze(self) -> None:
         candidate = copy.deepcopy(self.config)

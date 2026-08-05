@@ -39,9 +39,14 @@
   N0는 8/9 check를 통과했지만 worst-seed nonlinear departure가
   0.00727 < 0.01이어서 failed다. N0a attribution 뒤 N0a outcome 전에
   동결한 fresh context-stratified N0r가 9/9를 통과했다. N0 실패는
-  보존하며 `configs/nonlinear_pde_n1.json`의 learned strong-baseline
-  falsification만 등록됐다. Irregular-3D headline은 positive N1 전까지
-  보류한다.
+  보존한다. N1a validation-only 2×2 attribution은
+  scale-normalized loss와 2,800-step horizon을 선택했고 full-BC/paired
+  validation L2 0.01162/0.01220을 얻었다. 이는 optimization engineering
+  evidence일 뿐 gate pass가 아니다. 선택값은
+  `configs/nonlinear_pde_n1b.json`에 prospective하게 동결됐고, 모든
+  confirmatory-seed strong-baseline checkpoint를 validation-only로
+  고정·hash하기 전 test 생성은 금지한다. Irregular-3D headline은
+  positive N1 전까지 보류한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -223,8 +228,13 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   0.05771/0.05729로 개선됐지만 unchanged 0.05를 넘고 best step이
   maximum 1,400이어서 insufficient다. N1a는 새 development seed에서
   raw/scale-normalized loss × 1,400/2,800 step만 비교하는 threshold-free
-  validation attribution이다. Test/N1/3D 권한이 없고 선택값은 새
-  prospective N1 version 전에는 confirmatory evidence가 아니다.
+  validation attribution이다. Exact `eebcd91`의 PBS run은 exit 0이었고
+  test context를 생성하지 않았다. 선택된 scale-normalized 2,800-step
+  variant의 full-BC/paired-response validation L2는
+  0.01162/0.01220이었다. N1 pass가 아니라 기존 miss가 optimization
+  conditioning 때문이었다는 attribution이다. `N1b`는 이 값만 고정한 새
+  prospective version이며 모든 mandatory model의 validation checkpoint와
+  checksum을 public manifest로 commit하기 전 test/N1/3D 권한이 없다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

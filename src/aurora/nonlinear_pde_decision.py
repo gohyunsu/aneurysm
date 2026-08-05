@@ -304,6 +304,145 @@ def load_optimization_config(path: str | Path) -> dict[str, Any]:
     return payload
 
 
+def load_n1b_config(path: str | Path) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Load the post-N1a prospective checkpoint-freeze overlay."""
+
+    config_path = Path(path)
+    payload = json.loads(config_path.read_text(encoding="utf-8"))
+    _require_keys(
+        payload,
+        [
+            "schema_version",
+            "experiment_id",
+            "status",
+            "parent_protocol",
+            "selection_evidence",
+            "selected_shared_operator_training",
+            "direct_probabilistic_training",
+            "completion_training",
+            "checkpoint_freeze",
+            "paired_control_contracts",
+            "decision_evaluation",
+            "success_rule",
+            "claim_boundary",
+            "interpretation",
+        ],
+        "N1b config",
+    )
+    if (
+        payload["schema_version"] != "aurora.nonlinear_pde_n1b.v1"
+        or payload["status"]
+        != "preregistered_after_n1a_before_confirmatory_checkpoint_or_test"
+    ):
+        raise NonlinearDecisionError("Unexpected N1b prospective status.")
+
+    parent_contract = payload["parent_protocol"]
+    parent_path = (config_path.parent / parent_contract["config"]).resolve()
+    if (
+        not parent_path.is_file()
+        or _sha256(parent_path) != parent_contract["sha256"]
+    ):
+        raise NonlinearDecisionError("Pinned parent N1 protocol changed.")
+    parent = load_config(parent_path)
+
+    selection_contract = payload["selection_evidence"]
+    selection_path = (config_path.parent / selection_contract["result"]).resolve()
+    if (
+        not selection_path.is_file()
+        or _sha256(selection_path) != selection_contract["sha256"]
+    ):
+        raise NonlinearDecisionError("Pinned N1a selection result changed.")
+    selection = json.loads(selection_path.read_text(encoding="utf-8"))
+    selected = selection["selection"]
+    if (
+        selection_contract["selection_was_validation_only"] is not True
+        or int(selection_contract["test_contexts_generated"]) != 0
+        or selection_contract["test_seed_accessed"] is not False
+        or selection_contract["has_gate_decision"] is not False
+        or selected["selected_variant"] != "scale_normalized_2800"
+        or selected["selected_loss_conditioning"]
+        != "train_only_rms_normalized_field_and_pair_mse"
+        or int(selected["selected_maximum_steps"]) != 2800
+    ):
+        raise NonlinearDecisionError("N1b does not preserve the N1a selection.")
+
+    operator = payload["selected_shared_operator_training"]
+    if (
+        operator["family"]
+        != "unit_peak_dirichlet_lifted_low_rank_coordinate_operator"
+        or int(operator["rank"]) != 96
+        or operator["loss_conditioning"]
+        != "train_only_rms_normalized_field_and_pair_mse"
+        or int(operator["maximum_steps"]) != 2800
+        or operator["normalization_statistics_source"]
+        != "operator_training_split_only"
+        or operator["validation_and_test_targets_never_define_training_scale"]
+        is not True
+    ):
+        raise NonlinearDecisionError("N1b selected operator contract changed.")
+
+    direct = payload["direct_probabilistic_training"]
+    if (
+        direct["representation"] != "operator_train_only_centered_pod"
+        or int(direct["latent_rank"]) != 96
+        or direct["fit_split"] != "operator_training_full_fields_only"
+        or direct["pod_and_standardization_source"]
+        != "operator_training_split_only"
+        or direct["representation_error_reported_separately"] is not True
+    ):
+        raise NonlinearDecisionError("N1b direct baseline contract changed.")
+
+    freeze = payload["checkpoint_freeze"]
+    confirmatory = [int(seed) for seed in parent["model_seeds"]["confirmatory"]]
+    if [int(seed) for seed in freeze["confirmatory_model_seeds"]] != confirmatory:
+        raise NonlinearDecisionError("N1b confirmatory seeds changed.")
+    required_checkpoints = {
+        "aurora_joint_density",
+        "independent_mask_heads",
+        "lano_adapted_completion",
+        "acflow_adapted_completion",
+        "aurora_shared_operator_pair_loss",
+        "aurora_shared_operator_pair_loss_zero",
+        "aurora_shared_operator_random_cross_context_pair",
+        "deltaphi_style_residual",
+        "generic_probabilistic_operator",
+        "nop_adapted",
+    }
+    if set(freeze["trainable_checkpoints_per_seed"]) != required_checkpoints:
+        raise NonlinearDecisionError("N1b checkpoint set changed.")
+    if (
+        freeze["test_split_generated"] is not False
+        or freeze["test_seed_accessed"] is not False
+        or freeze["checkpoint_manifest_must_be_committed_before_test_job"]
+        is not True
+        or freeze["missing_or_nonfinite_model_blocks_test"] is not True
+    ):
+        raise NonlinearDecisionError("N1b test lock changed.")
+
+    inherited = payload["success_rule"]
+    parent_success = parent["success_rule"]
+    for key in (
+        "full_bc_operator_relative_l2_maximum",
+        "aurora_functional_coverage_error_maximum",
+        "aurora_route_bayes_action_disagreement_maximum",
+        "primary_relative_improvement_over_strongest_validation_selected_non_oracle_minimum",
+        "confirmatory_seed_direction_minimum",
+        "confirmatory_seeds_total",
+        "paired_response_must_improve_with_pair_loss",
+        "field_distribution_and_acquisition_regret_must_both_improve",
+        "aco_is_ceiling_not_competitor_for_superiority",
+        "n1_pass_authorizes_irregular_3d_protocol_registration_only",
+        "n1_pass_does_not_establish_cross_domain_or_aaai_acceptance",
+    ):
+        if inherited[key] != parent_success[key]:
+            raise NonlinearDecisionError("N1b success rule changed after N1a.")
+    if inherited["inherited_from_parent_without_change"] is not True:
+        raise NonlinearDecisionError("N1b must inherit the parent success rule.")
+    if payload["claim_boundary"]["irregular_3d_remains_blocked"] is not True:
+        raise NonlinearDecisionError("N1b cannot authorize irregular 3D.")
+    return parent, payload
+
+
 def _imports() -> tuple[Any, Any]:
     try:
         import numpy as np

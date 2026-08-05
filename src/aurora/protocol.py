@@ -1002,13 +1002,35 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             )
         attribution = n1["optimization_attribution"]
         if attribution != {
-            "status": "preregistered_before_attribution_metric",
+            "status": "completed_validation_only_selected_scale_normalized_2800",
             "config": "configs/nonlinear_pde_n1_optimization_attribution.json",
+            "result": "results/nonlinear_pde_n1_optimization_attribution_20260805.json",
+            "source_commit": "eebcd918f194159e1c12c78269fd2829896d3c59",
+            "source_metrics_sha256": "3af4e7d98928c928bbfb62e4bd70bfa96c3fa93941e13a3403bdea3d9b570337",
+            "selected_variant": "scale_normalized_2800",
+            "validation_full_bc_relative_l2": 0.011623237282037735,
+            "validation_paired_response_relative_l2": 0.012195270508527756,
             "has_success_threshold": False,
             "may_access_test_or_decide_n1": False,
         }:
             raise ProtocolError(
                 "N1 optimization attribution must remain non-gating and test-free."
+            )
+        prospective = n1["prospective_reentry"]
+        if prospective != {
+            "id": "N1b",
+            "status": "preregistered_before_confirmatory_checkpoint_or_test",
+            "config": "configs/nonlinear_pde_n1b.json",
+            "selected_loss_conditioning": "train_only_rms_normalized_field_and_pair_mse",
+            "selected_maximum_steps": 2800,
+            "confirmatory_checkpoint_seeds": 5,
+            "checkpoint_manifest_required_before_test": True,
+            "test_generated_or_accessed": False,
+            "n1_gate_decided": False,
+            "irregular_3d_registration_authorized": False,
+        }:
+            raise ProtocolError(
+                "N1b must freeze the N1a selection before checkpoint or test."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

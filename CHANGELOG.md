@@ -4,6 +4,29 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1a selects optimization; prospective N1b is frozen
+
+### Validation-only result
+
+- Exact `eebcd91`의 PBS A6000 run은 116/116 contract 뒤 exit 0으로
+  완료됐고 test split·seed·context는 생성하거나 읽지 않았다.
+- Raw 1,400/2,800-step validation objective는 0.05007/0.02071,
+  scale-normalized 1,400/2,800은 0.03732/0.01772였다.
+- 고정 selection rule은 scale-normalized 2,800-step을 골랐다. 해당
+  checkpoint의 full-BC/paired-response L2는 0.01162/0.01220이다.
+- 이 결과는 기존 miss의 optimization attribution이며 N1 pass, baseline
+  superiority, method novelty 또는 3D 실행 권한이 아니다.
+
+### Prospective checkpoint-freeze contract
+
+- `configs/nonlinear_pde_n1b.json`은 parent N1의 data, split, seed, mask,
+  mandatory baseline, metric과 threshold를 유지하고 N1a 선택만 고정한다.
+- 다섯 confirmatory seed에서 모든 learned model을 train/validation으로
+  선택하고 checkpoint SHA-256 manifest를 public commit하기 전 outer test
+  generation을 금지한다.
+- Direct generic/NOP baseline의 train-only centered POD-96과 latent
+  Gaussian은 compute-matched control이며 architecture novelty가 아니다.
+
 ## 2026-08-05 · Unit-peak N1 core remains insufficient; N1a is frozen
 
 ### Validation-only result

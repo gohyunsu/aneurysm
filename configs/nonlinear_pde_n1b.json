@@ -1,0 +1,190 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1b.v1",
+  "experiment_id": "nonlinear_route_consistent_functional_decision_n1_v2",
+  "status": "preregistered_after_n1a_before_confirmatory_checkpoint_or_test",
+  "parent_protocol": {
+    "config": "nonlinear_pde_n1.json",
+    "sha256": "757b742587b2d52860648a42e6c58721716c6675366f5b3b6329d6a695eb0891",
+    "unchanged": [
+      "paper_identity",
+      "claims_excluded",
+      "pde_solver_boundary_law_and_functionals",
+      "train_validation_test_sizes_and_split_seeds",
+      "observation_masks_and_routes",
+      "mandatory_models_and_paired_controls",
+      "confirmatory_model_seeds",
+      "test_metrics_bootstrap_and_success_rule",
+      "hidden_law_shift_scope"
+    ]
+  },
+  "selection_evidence": {
+    "result": "../results/nonlinear_pde_n1_optimization_attribution_20260805.json",
+    "sha256": "a12b5bf451c320a392d28275ce7445d7e815d3e9ab5d7a7435baf34bcca6b0d3",
+    "source_commit": "eebcd918f194159e1c12c78269fd2829896d3c59",
+    "selection_was_validation_only": true,
+    "test_contexts_generated": 0,
+    "test_seed_accessed": false,
+    "has_gate_decision": false
+  },
+  "selected_shared_operator_training": {
+    "family": "unit_peak_dirichlet_lifted_low_rank_coordinate_operator",
+    "rank": 96,
+    "loss_conditioning": "train_only_rms_normalized_field_and_pair_mse",
+    "field_denominator": "per_case_rms_squared_clamped_at_training_tenth_percentile",
+    "pair_denominator": "per_pair_rms_squared_clamped_at_training_tenth_percentile",
+    "normalization_statistics_source": "operator_training_split_only",
+    "maximum_steps": 2800,
+    "validation_interval": 20,
+    "early_stopping_patience": 15,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "batch_size": 2048,
+    "paired_response_weight": 0.5,
+    "selection_objective": "validation_full_bc_relative_l2_plus_0.5_times_validation_paired_response_relative_l2",
+    "validation_and_test_targets_never_define_training_scale": true
+  },
+  "direct_probabilistic_training": {
+    "representation": "operator_train_only_centered_pod",
+    "latent_rank": 96,
+    "fit_split": "operator_training_full_fields_only",
+    "target": "full_field_pod_coefficients",
+    "distribution": "diagonal_gaussian_in_fixed_pod_coordinates",
+    "loss": "latent_gaussian_nll",
+    "masks": ["missing", "sparse_2", "partial_4", "full"],
+    "maximum_steps": 2800,
+    "validation_interval": 20,
+    "early_stopping_patience": 15,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "batch_size": 2048,
+    "checkpoint_metric": "mean_validation_mask_latent_nll",
+    "representation_error_reported_separately": true,
+    "pod_and_standardization_source": "operator_training_split_only"
+  },
+  "completion_training": {
+    "models": [
+      "aurora_joint",
+      "independent_mask_heads",
+      "lano_adapted",
+      "acflow_adapted"
+    ],
+    "density_train_contexts": 3072,
+    "density_validation_contexts": 384,
+    "conditions_per_context": 8,
+    "maximum_steps": 1800,
+    "validation_interval": 20,
+    "early_stopping_patience": 15,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "batch_size": 4096,
+    "checkpoint_metric": "mean_validation_conditional_nll_over_missing_sparse2_partial4",
+    "random_mask_source": "training_seed_and_step_only"
+  },
+  "checkpoint_freeze": {
+    "stage": "confirmatory_seed_training_with_validation_only_model_selection",
+    "confirmatory_model_seeds": [
+      73080511,
+      73080512,
+      73080513,
+      73080514,
+      73080515
+    ],
+    "trainable_checkpoints_per_seed": [
+      "aurora_joint_density",
+      "independent_mask_heads",
+      "lano_adapted_completion",
+      "acflow_adapted_completion",
+      "aurora_shared_operator_pair_loss",
+      "aurora_shared_operator_pair_loss_zero",
+      "aurora_shared_operator_random_cross_context_pair",
+      "deltaphi_style_residual",
+      "generic_probabilistic_operator",
+      "nop_adapted"
+    ],
+    "derived_non_trainable_controls": [
+      "conditional_mean_imputation",
+      "random_component_acquisition",
+      "posterior_variance_acquisition",
+      "nots_adapted_functional_disagreement",
+      "aco_true_law_simulator_ceiling"
+    ],
+    "all_checkpoint_sha256_required": true,
+    "all_validation_metrics_required": true,
+    "source_commit_required": true,
+    "test_split_generated": false,
+    "test_seed_accessed": false,
+    "checkpoint_manifest_must_be_committed_before_test_job": true,
+    "missing_or_nonfinite_model_blocks_test": true
+  },
+  "paired_control_contracts": {
+    "aurora_shared_operator_pair_loss_zero": {
+      "same_architecture_examples_steps_and_normalization": true,
+      "paired_response_weight": 0.0
+    },
+    "aurora_shared_operator_random_cross_context_pair": {
+      "same_architecture_examples_steps_and_normalization": true,
+      "paired_response_weight": 0.5,
+      "pairing": "different_training_contexts_with_step_seeded_permutation"
+    },
+    "deltaphi_style_residual": {
+      "adaptation_not_reproduction": true,
+      "retrieval_pool": "operator_training_split_only",
+      "retrieval_key": "context_plus_observed_boundary_distance",
+      "target": "field_residual_from_retrieved_training_state",
+      "query_target_leakage": false,
+      "matched_examples_steps_and_parameter_tolerance": true
+    }
+  },
+  "decision_evaluation": {
+    "solution_functionals": [
+      "domain_mean",
+      "central_hotspot",
+      "smooth_maximum",
+      "right_boundary_flux"
+    ],
+    "functional_standardization": "operator_training_split_only",
+    "bounded_loss": "clip_squared_standardized_error_to_unit_interval",
+    "bayes_action_grid": "129_points_over_training_functional_range",
+    "primary_base_masks": ["missing", "sparse_2"],
+    "one_equal_cost_component": true,
+    "candidate_components": "all_currently_unobserved_boundary_components",
+    "route_consequence": [
+      "same_final_mask_functional_posterior_distance",
+      "same_final_mask_bayes_action_disagreement",
+      "true_risk_of_route_specific_bayes_actions",
+      "route_specific_value_of_information_disagreement"
+    ],
+    "acquisition_outcomes": [
+      "post_acquisition_true_bayes_risk",
+      "regret_to_aco_ceiling",
+      "selected_component_agreement_with_aco"
+    ],
+    "test_access": "only_after_public_checkpoint_manifest_commit"
+  },
+  "success_rule": {
+    "inherited_from_parent_without_change": true,
+    "full_bc_operator_relative_l2_maximum": 0.05,
+    "aurora_functional_coverage_error_maximum": 0.05,
+    "aurora_route_bayes_action_disagreement_maximum": 0.0001,
+    "primary_relative_improvement_over_strongest_validation_selected_non_oracle_minimum": 0.05,
+    "primary_paired_bootstrap_difference_ci95_upper_below_zero": true,
+    "confirmatory_seed_direction_minimum": 4,
+    "confirmatory_seeds_total": 5,
+    "paired_response_must_improve_with_pair_loss": true,
+    "field_distribution_and_acquisition_regret_must_both_improve": true,
+    "aco_is_ceiling_not_competitor_for_superiority": true,
+    "n1_pass_authorizes_irregular_3d_protocol_registration_only": true,
+    "n1_pass_does_not_establish_cross_domain_or_aaai_acceptance": true
+  },
+  "claim_boundary": {
+    "optimization_selection_is_engineering_not_novelty": true,
+    "pod_is_a_train_only_baseline_representation_not_novelty": true,
+    "active_feature_acquisition_is_not_claimed_as_novel": true,
+    "neural_operator_functional_optimization_is_not_claimed_as_novel": true,
+    "generic_regret_bound_is_not_claimed_as_novel": true,
+    "route_compatibility_without_decision_benefit_is_insufficient": true,
+    "validation_checkpoint_eligibility_is_not_test_superiority": true,
+    "irregular_3d_remains_blocked": true
+  },
+  "interpretation": "N1b freezes the only N1a-selected engineering change before any confirmatory checkpoint or test generation. Its candidate contribution remains the measured solution-functional decision consequence of conditioning-route inconsistency and its reduction by a joint BC-solution model. Every strong completion, partial-observation, probabilistic-operator, residual, and acquisition control must be trained or instantiated before the outer test is created."
+}

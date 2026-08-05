@@ -360,6 +360,19 @@ representation을 바꾸기 전에 optimization horizon과 loss scale을 분리�
 N1a는 rank와 parameter count를 고정한 채 raw/scale-normalized loss와
 1,400/2,800 step만 교차한다. 이는 architecture novelty가 아니라
 checkpoint eligibility를 위한 validation-only engineering attribution이다.
+Exact `eebcd91` validation run에서 선택된 scale-normalized 2,800-step
+variant는 full-BC/paired-response L2 0.01162/0.01220을 얻었다. N1b는
+per-case/per-pair RMS²를 training 10th percentile에서 clamp하는 이 loss와
+2,800-step upper bound만 prospective하게 고정한다. Validation 또는 test
+target으로 scale을 다시 추정하지 않는다.
+
+Direct generic/NOP baseline은 operator-training field에만 적합한 centered
+POD-96 좌표에서 diagonal Gaussian을 예측한다. Mask-flat encoder와
+observed-component set encoder의 차이만 두며 latent Gaussian NLL로
+validation checkpoint를 고른다. POD reconstruction error는 model error와
+분리해 보고한다. 이는 partial-condition baseline을 약한 deterministic
+imputation으로 대체하지 않기 위한 compute-matched 설계이며, POD나
+Gaussian latent 자체를 contribution으로 세지 않는다.
 
 Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
 모든 partial mode는 이 하나의 density를 analytic conditioning한다.
