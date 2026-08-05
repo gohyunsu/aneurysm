@@ -102,15 +102,16 @@ def _solve_functionals(
     summaries = []
     for start in range(0, context.shape[0], batch_size):
         end = min(start + batch_size, context.shape[0])
-        field, summary = solve_semilinear(
-            context[start:end],
-            boundary[start:end],
-            grid_points=int(pde["grid_points"]),
-            maximum_iterations=int(pde["maximum_iterations"]),
-            tolerance=float(pde["convergence_tolerance"]),
-            check_interval=int(pde["residual_check_interval"]),
-            relaxation=float(pde["relaxation"]),
-        )
+        with torch.no_grad():
+            field, summary = solve_semilinear(
+                context[start:end],
+                boundary[start:end],
+                grid_points=int(pde["grid_points"]),
+                maximum_iterations=int(pde["maximum_iterations"]),
+                tolerance=float(pde["convergence_tolerance"]),
+                check_interval=int(pde["residual_check_interval"]),
+                relaxation=float(pde["relaxation"]),
+            )
         if not summary["converged"]:
             raise NonlinearDecisionError("N1c oracle solve did not converge.")
         fields.append(field)

@@ -161,6 +161,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.05",
       category: "implementation",
+      title: "N1c-a oracle evaluation releases autograd state",
+      copy: "Corrected entrypoint의 첫 재실행도 seed aggregate 전에 energy-floor oracle solve에서 OOM으로 종료됐다. Evaluation solver를 no-grad로 고정하고 batch만 512→128로 낮췄다. Estimand·sample 수·checkpoint·test는 유지하며 no-autograd 회귀 테스트 뒤 다시 실행한다.",
+      files: ["experiments/run_nonlinear_pde_n1c_outer_test.py", "experiments/run_nonlinear_pde_n1c_attribution.py", "tests/test_nonlinear_pde_decision.py", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.05",
+      category: "implementation",
       title: "N1c-a entrypoint now exposes the read-only workspace package",
       copy: "첫 본 job은 metric 생성 전에 experiments helper import에서 종료됐다. Container PYTHONPATH를 /workspace/src:/workspace로 고치고 wrapper regression test를 추가했다. 실패 run은 보존하며 새 exact-source contract 뒤에만 재제출한다.",
       files: ["cluster/ssu_a6gpu_nonlinear_pde_n1c_attribution.pbs", "tests/test_nonlinear_pde_decision.py", "CHANGELOG.md"]

@@ -358,6 +358,7 @@ def _evaluate_energy_decomposition(
             expanded_context,
             learned_boundary.reshape(-1, 8),
             n0_config=n0,
+            batch_size=128,
         )
         summaries.append(learned_summary)
         learned_true = standardize_functionals(
@@ -371,6 +372,7 @@ def _evaluate_energy_decomposition(
                 expanded_context,
                 true_boundary.reshape(-1, 8),
                 n0_config=n0,
+                batch_size=128,
             )
             summaries.append(true_summary)
             cache[cache_key] = standardize_functionals(
@@ -717,6 +719,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.require_cuda and not torch.cuda.is_available():
         raise NonlinearDecisionError("N1c attribution requires CUDA.")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    torch.set_grad_enabled(False)
     args.output.mkdir(parents=True, exist_ok=True)
     started = datetime.now(timezone.utc).isoformat()
     (args.output / "command.txt").write_text(

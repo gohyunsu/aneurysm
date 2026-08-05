@@ -337,6 +337,30 @@ class NonlinearDecisionContractTests(unittest.TestCase):
             self.assertTrue(torch.isfinite(nll).all())
 
     @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
+    def test_oracle_evaluation_does_not_retain_autograd_graph(self) -> None:
+        import torch
+
+        from experiments.run_nonlinear_pde_n1c_outer_test import (
+            _solve_functionals,
+        )
+
+        n0 = json.loads(
+            (ROOT / "configs" / "nonlinear_pde_n0.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        context = torch.zeros(1, 5, requires_grad=True)
+        boundary = torch.zeros(1, 8, requires_grad=True)
+        values, summary = _solve_functionals(
+            context,
+            boundary,
+            n0_config=n0,
+            batch_size=1,
+        )
+        self.assertFalse(values.requires_grad)
+        self.assertTrue(summary["all_converged"])
+
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
     def test_energy_score_is_zero_for_identical_deterministic_samples(self) -> None:
         import torch
 

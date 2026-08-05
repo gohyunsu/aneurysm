@@ -29,6 +29,12 @@
 - `/workspace/src:/workspace`를 명시하고 wrapper regression test를
   추가한다. 실패 run은 보존하며 수정 commit의 full contract 전에는
   재제출하지 않는다.
+- 수정 source의 첫 재실행 `109735`도 seed aggregate 전에 oracle
+  energy-floor solve에서 CUDA OOM으로 종료됐다. Evaluation helper가
+  autograd graph를 불필요하게 보존한 것이 원인이다.
+- Oracle solver를 `no_grad`로 고정하고 energy-floor batch만 512에서
+  128로 낮춘다. Estimand·sample 수·checkpoint·test는 바꾸지 않으며,
+  output이 gradient graph를 갖지 않는 회귀 테스트를 추가한다.
 
 ## 2026-08-05 · N1c completes and fails the strong-baseline outer test
 
