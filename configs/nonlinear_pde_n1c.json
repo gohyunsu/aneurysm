@@ -1,0 +1,243 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1c.v1",
+  "experiment_id": "nonlinear_route_consistent_functional_decision_n1_v3",
+  "status": "preregistered_after_checkpoint_manifest_before_outer_test_generation",
+  "parents": {
+    "n1": {
+      "config": "nonlinear_pde_n1.json",
+      "sha256": "757b742587b2d52860648a42e6c58721716c6675366f5b3b6329d6a695eb0891"
+    },
+    "n1b": {
+      "config": "nonlinear_pde_n1b.json",
+      "sha256": "d8aaa39e0217a41c8286e801be7b68a42fcbd838595828ad255b06977f9a125a"
+    },
+    "checkpoint_manifest": {
+      "path": "../results/nonlinear_pde_n1b_checkpoint_manifest_20260805.json",
+      "sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+      "public_commit": "c66f651a9cd13c7f58450f21c1d67ba11d78de8e",
+      "checkpoint_source_commit": "1d0bd9c759f935f818b5705b1b9bc2a00116ea59",
+      "eligible_seed_indices": [0, 1, 2, 3, 4],
+      "trainable_checkpoints_per_seed": 10,
+      "checkpoint_hash_verification_required_before_test_generation": true
+    }
+  },
+  "test_lock": {
+    "operator_test_contexts": 192,
+    "conditions_per_context": 12,
+    "context_seed": 73080585,
+    "boundary_seed": 73081585,
+    "context_support": [-0.8, 0.8],
+    "maximum_latent_mahalanobis_radius": 2.5,
+    "test_split_generated": false,
+    "test_seed_accessed": false,
+    "test_generation_must_follow_public_commit_of_this_overlay": true,
+    "model_or_threshold_change_after_test_requires_new_version_and_fresh_test": true
+  },
+  "functional_contract": {
+    "names": [
+      "domain_mean",
+      "central_hotspot",
+      "smooth_maximum",
+      "right_boundary_flux"
+    ],
+    "standardization": "operator_training_split_mean_and_population_std_only",
+    "standardization_floor": 0.000001,
+    "bounded_loss": "minimum_of_one_and_squared_standardized_error",
+    "bayes_action_grid_points": 129,
+    "bayes_action_grid_range": "per_functional_operator_training_minimum_to_maximum",
+    "posterior_energy_score": "multivariate_standardized_energy_score",
+    "energy_second_term_estimator": "common_size_disjoint_half_sample_pairing",
+    "coverage_probability": 0.9,
+    "coverage_interval": "equal_tail_empirical_quantiles"
+  },
+  "id_distribution_evaluation": {
+    "primary_masks": {
+      "missing": [],
+      "sparse_2": [0, 2]
+    },
+    "diagnostic_masks": {
+      "partial_4": [0, 2, 5, 7],
+      "full": [0, 1, 2, 3, 4, 5, 6, 7]
+    },
+    "posterior_bc_samples": 256,
+    "field_distribution_samples": 128,
+    "case_batch_size": 32,
+    "probabilistic_models": [
+      "aurora_joint",
+      "independent_mask_heads",
+      "lano_adapted",
+      "acflow_adapted",
+      "generic_probabilistic_operator",
+      "nop_adapted"
+    ],
+    "deterministic_control": "conditional_mean_imputation",
+    "strongest_non_oracle_rule": "for_each_metric_compare_against_the_best_test_value_among_all_prefrozen_nonoracle_baselines",
+    "test_value_does_not_select_or_retrain_a_model": true,
+    "report": [
+      "functional_energy_score",
+      "functional_coverage_error",
+      "matched_coverage_interval_width",
+      "field_mean_relative_l2",
+      "pod_representation_relative_l2"
+    ]
+  },
+  "paired_response_evaluation": {
+    "within_context_pairs": "adjacent_nonoverlapping_condition_pairs_0_1_through_10_11",
+    "models": [
+      "aurora_shared_operator_pair_loss",
+      "aurora_shared_operator_pair_loss_zero",
+      "aurora_shared_operator_random_cross_context_pair",
+      "deltaphi_style_residual"
+    ],
+    "deltaphi_retrieval_pool": "operator_training_split_only",
+    "deltaphi_retrieval_metric": "euclidean_context_plus_boundary_after_training_scale",
+    "report": [
+      "full_bc_field_relative_l2",
+      "paired_response_relative_l2"
+    ]
+  },
+  "route_evaluation": {
+    "models_with_tractable_density_routes": [
+      "aurora_joint",
+      "independent_mask_heads",
+      "acflow_adapted"
+    ],
+    "initial_mask": [0, 2],
+    "newly_observed_components": [5, 7],
+    "final_mask": [0, 2, 5, 7],
+    "routes": [
+      "direct_final",
+      "sequential_5_then_7",
+      "sequential_7_then_5"
+    ],
+    "context_indices": [
+      0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44,
+      48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92,
+      96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140,
+      144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188
+    ],
+    "anchor_condition_index": 0,
+    "posterior_samples": 256,
+    "common_random_numbers_across_routes": true,
+    "functional_posterior_distance": "mean_per_functional_empirical_one_wasserstein_after_training_standardization",
+    "bayes_action_disagreement": "maximum_absolute_difference_of_standardized_bounded_loss_bayes_actions",
+    "true_route_action_risk": "risk_under_true_radius_truncated_conditional_bc_law_and_registered_simulator",
+    "route_value_of_information": "candidate_expected_bounded_risk_reduction_under_each_route_posterior",
+    "route_not_defined_for": [
+      "lano_adapted",
+      "generic_probabilistic_operator",
+      "nop_adapted"
+    ],
+    "undefined_routes_are_reported_as_not_applicable_not_zero": true
+  },
+  "acquisition_evaluation": {
+    "context_indices": [
+      0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44,
+      48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92,
+      96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140,
+      144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188
+    ],
+    "selection_rule": "every_fourth_context_in_generation_order_fixed_before_test",
+    "anchor_condition_index": 0,
+    "base_masks": {
+      "missing": [],
+      "sparse_2": [0, 2]
+    },
+    "measurement_cost": "one_equal_cost_unobserved_boundary_component",
+    "outer_measurement_samples": 8,
+    "inner_posterior_samples": 32,
+    "policies": [
+      "aurora_expected_functional_risk_reduction",
+      "acflow_expected_functional_risk_reduction",
+      "posterior_boundary_variance",
+      "nots_style_boundary_functional_dependence",
+      "uniform_random_component",
+      "aco_true_law_simulator_ceiling"
+    ],
+    "true_law": "context_conditioned_two_component_gmm_conditioned_on_global_latent_radius_at_most_2_5",
+    "truncated_conditional_sampler": "component_weights_adjusted_by_conditional_chi_square_acceptance_then_residual_radius_rejection",
+    "policy_regret": "true_expected_post_measurement_bounded_bayes_risk_minus_minimum_candidate_true_risk",
+    "aco_role": "oracle_ceiling_not_superiority_target",
+    "report": [
+      "true_post_acquisition_bayes_risk",
+      "regret_to_aco_ceiling",
+      "selected_component_agreement_with_aco"
+    ]
+  },
+  "registered_shift_evaluation": {
+    "execution_stage": "separate_N1d_secondary_job_after_N1c_without_model_threshold_or_test_seed_change",
+    "supplied_full_bc_support_shift": {
+      "contexts": 192,
+      "conditions_per_context": 4,
+      "context_seed": 73080585,
+      "boundary_seed": 73082585,
+      "latent_mahalanobis_shell": [3.0, 4.0],
+      "metrics": [
+        "field_relative_l2",
+        "paired_response_relative_l2"
+      ]
+    },
+    "geometry_ood": {
+      "contexts": 192,
+      "conditions_per_context": 4,
+      "context_seed": 73080586,
+      "boundary_seed": 73081586,
+      "absolute_context_interval": [0.9, 1.0],
+      "allowed_claim": "detection_and_abstention_only"
+    },
+    "hidden_bc_law_shift": {
+      "contexts": 192,
+      "conditions_per_context": 4,
+      "context_seed": 73080585,
+      "boundary_seed": 73080587,
+      "mixture_logit_offset": 1.0,
+      "covariance_scale": 1.6,
+      "allowed_claim": "detection_and_abstention_only"
+    },
+    "shift_metrics_are_secondary_to_n1_primary_decision": true
+  },
+  "randomness": {
+    "seed_formula": "base_seed_plus_100000_times_model_seed_index_plus_context_or_case_offset",
+    "field_distribution_base_seed": 73080701,
+    "route_base_seed": 73080711,
+    "acquisition_model_base_seed": 73080721,
+    "acquisition_oracle_base_seed": 73080731,
+    "random_policy_base_seed": 73080741,
+    "bootstrap_base_seed": 73080751,
+    "sampling_streams_are_disjoint": true
+  },
+  "inference_and_statistics": {
+    "confirmatory_model_seeds": 5,
+    "bootstrap_replicates": 2000,
+    "bootstrap_unit": "test_context_family",
+    "paired_difference": "aurora_minus_prefrozen_nonoracle_on_identical_test_context_resamples",
+    "confidence_interval": "percentile_95",
+    "seed_direction_minimum": 4,
+    "report_mean_and_each_seed": true,
+    "no_test_seed_model_or_policy_selection": true
+  },
+  "success_rule": {
+    "all_conditions_required": true,
+    "full_bc_operator_relative_l2_maximum": 0.05,
+    "aurora_functional_coverage_error_maximum": 0.05,
+    "aurora_route_bayes_action_disagreement_maximum": 0.0001,
+    "primary_relative_improvement_over_strongest_prefrozen_nonoracle_minimum": 0.05,
+    "primary_paired_bootstrap_difference_ci95_upper_below_zero": true,
+    "confirmatory_seed_direction_minimum": 4,
+    "paired_response_pair_loss_must_beat_pair_loss_zero": true,
+    "field_distribution_and_acquisition_regret_must_both_improve": true,
+    "aco_is_ceiling_not_competitor_for_superiority": true,
+    "n1_pass_authorizes_irregular_3d_protocol_registration_only": true,
+    "n1_pass_does_not_establish_cross_domain_or_aaai_acceptance": true
+  },
+  "claim_boundary": {
+    "active_feature_acquisition_is_not_novel": true,
+    "functional_neural_operator_optimization_is_not_novel": true,
+    "analytic_conditioning_is_not_novel": true,
+    "generic_route_consistency_is_not_novel": true,
+    "generic_regret_bound_is_not_novel": true,
+    "candidate_contribution_requires_positive_solution_functional_decision_consequence": true,
+    "checkpoint_freeze_is_not_a_result_of_method_superiority": true,
+    "irregular_3d_remains_blocked_until_positive_n1": true
+  }
+}

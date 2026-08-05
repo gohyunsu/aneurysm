@@ -51,8 +51,15 @@
   DeltaPhi-style objective보다 좋은 seed는 0/5였고 pair loss도
   pair-zero/random-pair/DeltaPhi 대비 각각 4/5, 3/5, 2/5 방향만 얻었다.
   이는 test 실행 자격이지 superiority나 N1 pass가 아니다. Outer-test
-  selector·RNG·estimand·bootstrap을 별도 prospective overlay에 고정하기
-  전 test 생성은 계속 금지한다. Irregular-3D headline은 positive N1
+  selector·RNG·estimand·bootstrap은
+  `configs/nonlinear_pde_n1c.json`에 별도 prospective overlay로 고정했다.
+  Acquisition/route는 결과와 무관한 context index 0,4,…,188과 condition
+  0만 사용한다. True oracle은 global latent radius 2.5 truncation을
+  conditional component acceptance와 residual rejection으로 정확히
+  반영한다. Exact N1c source를 public commit하고 dependency-complete
+  contract를 통과하기 전 test 생성은 계속 금지한다. Registered support,
+  geometry, hidden-law shift는 model·threshold·test seed를 바꾸지 않는
+  별도 N1d secondary job으로 둔다. Irregular-3D headline은 positive N1
   전까지 보류한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic

@@ -387,6 +387,31 @@ Validation에서 DeltaPhi-style residual의 full-field selection objective가
 reconstruction이 아니라 partial/missing-BC functional distribution과
 route-dependent decision consequence에서 검증되어야 한다.
 
+### 6.2 N1c outer-test estimator
+
+N1c는 architecture를 더 바꾸지 않고 frozen checkpoint를 불러온다.
+Missing/sparse-2 BC에서는 128개 field sample의 training-standardized
+4-functional energy score, 90% equal-tail coverage와 interval width를
+계산한다. Energy score의 sample–sample 항은 같은 크기의 disjoint half를
+pairing하여 \(O(K^2)\) 근사 선택을 피한다. Bounded decision loss는
+\(\min(1,(a-y)^2)\)이며 action은 training functional range의 129-point
+grid에서 고른다.
+
+True BC law는 radius-truncated 2-GMM이다. 관측 \(B_M\) 아래 component
+\(k\)의 observed Mahalanobis contribution을 \(d_{M,k}^2\)라 하면 남은
+conditional residual은
+\(\chi^2_{8-|M|}\le 2.5^2-d_{M,k}^2\)를 만족해야 한다. 따라서 component
+posterior를 이 chi-square acceptance probability로 재가중한 뒤 residual
+radius rejection sampling을 수행한다. 이를 생략한 untruncated conditional은
+ACO ceiling과 true action risk의 정답으로 허용하지 않는다.
+
+Route metric은 tractable density를 갖는 joint AURORA,
+independent-mask GMM, ACFlow adaptation에만 정의한다. LANO와 direct
+POD-Gaussian operator에는 임의의 route score 0을 부여하지 않고 N/A로
+보고한다. Direct final posterior와 두 sequential posterior에 common random
+numbers를 쓰며 functional 1-Wasserstein, bounded-loss action, true action
+risk, candidate expected risk와 다음 component 선택 차이를 함께 측정한다.
+
 Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
 모든 partial mode는 이 하나의 density를 analytic conditioning한다.
 ACFlow-style baseline은 같은 width의 mask-conditioned GMM을 random mask로

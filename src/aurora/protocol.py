@@ -957,6 +957,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "irregular_3d_registration_authorized",
                 "core_development",
                 "optimization_attribution",
+                "prospective_reentry",
+                "outer_test_execution",
             ],
             "preregistered N1",
         )
@@ -1045,6 +1047,29 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         }:
             raise ProtocolError(
                 "N1b manifest must remain exact, test-free, and non-gating."
+            )
+        outer_test = n1["outer_test_execution"]
+        if outer_test != {
+            "id": "N1c",
+            "status": "preregistered_after_checkpoint_manifest_before_outer_test_generation",
+            "config": "configs/nonlinear_pde_n1c.json",
+            "config_sha256": "6e14a9ed1682771fe3936e753d16d30317145752fb17f5e091f3db0b8e63ba8e",
+            "checkpoint_manifest_commit": "c66f651a9cd13c7f58450f21c1d67ba11d78de8e",
+            "checkpoint_manifest_sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+            "route_and_acquisition_context_selector": (
+                "indices_0_to_188_step_4_condition_0"
+            ),
+            "true_conditional_respects_latent_radius_truncation": True,
+            "route_common_random_numbers": True,
+            "acquisition_outer_inner_samples": [8, 32],
+            "context_family_bootstrap_replicates": 2000,
+            "registered_shifts_deferred_to_fixed_N1d_secondary_job": True,
+            "test_generated_or_accessed": False,
+            "n1_gate_decided": False,
+            "irregular_3d_registration_authorized": False,
+        }:
+            raise ProtocolError(
+                "N1c must remain exact, test-free, and non-gating before execution."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

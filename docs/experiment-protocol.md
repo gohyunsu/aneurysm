@@ -511,6 +511,31 @@ test job 전에 192 context 중 48개 acquisition subset의 deterministic
 selector, Monte Carlo와 bootstrap seed, route별 posterior/action/VoI
 estimand, checkpoint-manifest hash를 별도 prospective overlay로 고정한다.
 
+`configs/nonlinear_pde_n1c.json`이 그 overlay다. Checkpoint manifest가
+public commit `c66f651`에 존재함을 pin하고, exact source의 모든 50개
+checkpoint와 공통 POD hash를 test 생성 전에 다시 계산한다.
+
+| N1c execution item | frozen value |
+|---|---|
+| ID test | 192 context × 12 condition, parent seed 유지 |
+| distribution samples | BC 256, field 128 |
+| route/acquisition subset | context 0,4,…,188; condition 0 |
+| route | direct final, 5→7, 7→5; common random numbers |
+| acquisition MC | outer 8 × inner 32 |
+| true conditional | radius-2.5 truncated mixture exact sampler |
+| Bayes action | clipped squared loss, train-range 129 grid |
+| uncertainty | 2,000 context-family paired bootstrap |
+| strongest baseline | prefrozen non-oracle 전체 중 metric별 best test value |
+
+Metric별 best test baseline은 test로 architecture나 checkpoint를 고르는
+절차가 아니다. 이미 동결된 모든 baseline을 상대로 제안법이 이겨야 하는
+보수적 composite comparator다. Distribution과 acquisition regret가 모두
+5% 이상 개선되고 paired context bootstrap CI upper가 0 미만이며 4/5
+seed 방향이 같아야 한다. Pair loss도 pair-zero보다 4/5 방향과 paired
+bootstrap CI를 모두 만족해야 한다. Support-shift, geometry OOD,
+hidden-law shift는 N1 primary decision 뒤 같은 checkpoint·threshold·seed로
+실행하는 N1d secondary diagnostic이며 N1c 결과를 보고 재설계하지 않는다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

@@ -18,6 +18,7 @@ from aurora.nonlinear_pde_decision import (
     gmm_nll,
     load_config,
     load_n1b_config,
+    load_n1c_config,
     load_optimization_config,
 )
 
@@ -28,6 +29,7 @@ OPTIMIZATION_CONFIG = (
     ROOT / "configs" / "nonlinear_pde_n1_optimization_attribution.json"
 )
 N1B_CONFIG = ROOT / "configs" / "nonlinear_pde_n1b.json"
+N1C_CONFIG = ROOT / "configs" / "nonlinear_pde_n1c.json"
 
 
 class NonlinearDecisionContractTests(unittest.TestCase):
@@ -66,6 +68,39 @@ class NonlinearDecisionContractTests(unittest.TestCase):
         )
         self.assertFalse(n1b["checkpoint_freeze"]["test_split_generated"])
         self.assertFalse(n1b["checkpoint_freeze"]["test_seed_accessed"])
+
+    def test_n1c_pins_manifest_and_deterministic_test_selector(self) -> None:
+        parent, _, n1c, manifest = load_n1c_config(N1C_CONFIG)
+        self.assertEqual(
+            n1c["acquisition_evaluation"]["context_indices"],
+            list(range(0, parent["data"]["operator_test_contexts"], 4)),
+        )
+        self.assertEqual(len(manifest["seed_runs"]), 5)
+        self.assertFalse(n1c["test_lock"]["test_split_generated"])
+        self.assertFalse(n1c["test_lock"]["test_seed_accessed"])
+
+    def test_n1c_manifest_hash_cannot_change(self) -> None:
+        payload = json.loads(N1C_CONFIG.read_text(encoding="utf-8"))
+        payload["parents"]["checkpoint_manifest"]["sha256"] = "0" * 64
+        with tempfile.TemporaryDirectory() as directory:
+            config_dir = Path(directory) / "configs"
+            result_dir = Path(directory) / "results"
+            config_dir.mkdir()
+            result_dir.mkdir()
+            for source in (CONFIG, N1B_CONFIG):
+                (config_dir / source.name).write_bytes(source.read_bytes())
+            manifest = (
+                ROOT
+                / "results"
+                / "nonlinear_pde_n1b_checkpoint_manifest_20260805.json"
+            )
+            (result_dir / manifest.name).write_bytes(manifest.read_bytes())
+            candidate = config_dir / N1C_CONFIG.name
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(
+                NonlinearDecisionError, "checkpoint manifest"
+            ):
+                load_n1c_config(candidate)
 
     def test_test_access_cannot_move_before_checkpoint_freeze(self) -> None:
         candidate = copy.deepcopy(self.config)
@@ -193,6 +228,50 @@ class NonlinearDecisionContractTests(unittest.TestCase):
                 abs(parameters - reference_parameters) / reference_parameters,
                 0.1,
             )
+
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
+    def test_radius_truncated_conditional_sampler_preserves_mask_and_support(
+        self,
+    ) -> None:
+        import torch
+
+        from aurora.nonlinear_pde_evaluation import (
+            sample_radius_truncated_conditional_gmm,
+        )
+
+        weights = torch.tensor([[0.4, 0.6]])
+        means = torch.zeros(1, 2, 8)
+        covariances = torch.eye(8)[None, None].expand(1, 2, -1, -1).clone()
+        observed = torch.tensor([[0.2, -0.1]])
+        samples = sample_radius_truncated_conditional_gmm(
+            weights,
+            means,
+            covariances,
+            [0, 2],
+            observed,
+            samples=256,
+            seed=17,
+            maximum_radius=2.5,
+        )
+        self.assertTrue(
+            torch.allclose(samples[:, :, [0, 2]], observed[:, None])
+        )
+        self.assertLessEqual(
+            float(torch.linalg.vector_norm(samples, dim=-1).max().item()),
+            2.5 + 1e-5,
+        )
+
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
+    def test_energy_score_is_zero_for_identical_deterministic_samples(self) -> None:
+        import torch
+
+        from aurora.nonlinear_pde_evaluation import functional_energy_score
+
+        target = torch.tensor([[1.0, -2.0, 0.5, 0.0]])
+        samples = target[:, None].expand(-1, 8, -1).clone()
+        self.assertTrue(
+            torch.allclose(functional_energy_score(samples, target), torch.zeros(1))
+        )
 
 
 if __name__ == "__main__":

@@ -450,6 +450,15 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "manifest must remain exact"):
             validate_protocol(candidate)
 
+    def test_n1c_cannot_access_test_before_exact_execution_commit(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["outer_test_execution"]["test_generated_or_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "N1c must remain exact"):
+            validate_protocol(candidate)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -429,8 +429,18 @@ random-pair보다 3/5, DeltaPhi-style paired metric보다 2/5 seed에서만
 Checkpoint freeze의 목적은 실행 가능한 비교군을 test 전에 고정하는
 것이지 validation superiority를 선언하는 것이 아니다. 따라서 N1은
 미결정이며 outer-test context selector, evaluation RNG, route estimand와
-bootstrap을 별도 prospective overlay로 commit하기 전 test split은
-생성하지 않는다.
+bootstrap은 `configs/nonlinear_pde_n1c.json`에 고정했다. 192 test
+context 중 acquisition과 route의 48개는 결과와 무관한
+`0,4,…,188`, anchor condition은 0이다. True acquisition ceiling은
+untruncated GMM으로 대체하지 않고 global latent-radius cutoff에 따른
+component acceptance와 conditional residual rejection을 계산한다.
+Posterior energy, coverage, paired response, direct/sequential functional
+Wasserstein·Bayes action·VoI, one-component regret를 동일 test에서
+평가한다. Strongest comparator는 test로 재학습·재선택하지 않으며
+미리 동결된 모든 non-oracle 중 metric별 최저 test value를 쓰는 보수적
+comparison이다. Exact N1c source의 public commit과 full contract 전에는
+test split을 생성하지 않는다. Shift diagnostics는 같은 checkpoint,
+threshold, test seed를 유지하는 별도 N1d secondary stage다.
 
 ### G2 · paired response
 

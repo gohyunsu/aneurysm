@@ -4,6 +4,35 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1c outer-test execution is frozen before test access
+
+### Prospective estimand and implementation
+
+- `configs/nonlinear_pde_n1c.json`은 public checkpoint manifest commit
+  `c66f651`과 50개 checkpoint hash를 pin한다. Runner는 모든 hash를
+  재검증한 뒤에만 parent의 test seed를 처음 읽는다.
+- Route/acquisition은 192 context에서 결과와 무관한 index
+  `0,4,…,188`, condition 0을 사용한다. Functional scaling·action grid는
+  operator-training split에서만 정한다.
+- True conditional과 ACO ceiling은 latent radius 2.5 truncation을
+  component별 chi-square acceptance와 conditional residual rejection으로
+  반영한다. Untruncated Gaussian conditional을 정답으로 쓰지 않는다.
+- Direct/sequential route의 functional posterior, Bayes action, true action
+  risk와 candidate VoI를 함께 측정한다. Route가 정의되지 않는 LANO/direct
+  operator는 N/A이지 0이 아니다.
+- Active acquisition, functional operator optimization, analytic
+  conditioning, route consistency와 generic regret는 각각 novelty로
+  주장하지 않는다. Positive identity에는 solution-functional decision
+  consequence와 strong-baseline improvement가 모두 필요하다.
+
+### Execution boundary
+
+- N1c는 ID distribution, paired response, route, acquisition regret의
+  single outer test다. Registered support/geometry/hidden-law shift는
+  model·threshold·test seed를 바꾸지 않는 별도 N1d secondary job이다.
+- N1c source의 public commit과 dependency-complete A6000 contract 전에는
+  test split을 생성하지 않는다. N1과 3D는 아직 미결정·차단 상태다.
+
 ## 2026-08-05 · N1b five-seed checkpoint manifest is complete
 
 ### Validation-only execution

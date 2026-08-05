@@ -112,7 +112,7 @@ window.AURORA_DATA = Object.freeze({
       id: "G2",
       title: "Does paired response improve?",
       copy: "N1b는 exact 1d0bd9c의 다섯 seed에서 50개 checkpoint를 test 전에 동결했다. AURORA validation full-BC/paired mean은 0.01347/0.01366이지만 DeltaPhi objective보다 좋은 seed는 0/5였다. 이는 test 자격이지 superiority가 아니다.",
-      state: "N1b checkpoint freeze complete · outer test/3D blocked",
+      state: "N1c outer-test contract frozen · test/3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "protocol",
+      title: "N1c freezes the decision estimand before opening the test seed",
+      copy: "Checkpoint manifest c66f651을 pin하고 context 0,4,…,188, condition 0, route common random numbers, outer 8×inner 32 acquisition, 2,000 context bootstrap을 고정했다. True oracle은 radius-2.5 truncated GMM conditional을 정확히 sampling한다. N1c source commit과 full contract 전에는 test를 생성하지 않는다.",
+      files: ["configs/nonlinear_pde_n1c.json", "experiments/run_nonlinear_pde_n1c_outer_test.py", "src/aurora/nonlinear_pde_evaluation.py", "docs/experiment-protocol.md"]
+    },
     {
       date: "2026.08.05",
       category: "experiment",

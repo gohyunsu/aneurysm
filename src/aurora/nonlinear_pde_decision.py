@@ -449,6 +449,179 @@ def load_n1b_config(path: str | Path) -> tuple[dict[str, Any], dict[str, Any]]:
     return parent, payload
 
 
+def load_n1c_config(
+    path: str | Path,
+) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Load the post-manifest, pre-test N1c execution overlay."""
+
+    config_path = Path(path)
+    payload = json.loads(config_path.read_text(encoding="utf-8"))
+    _require_keys(
+        payload,
+        [
+            "schema_version",
+            "experiment_id",
+            "status",
+            "parents",
+            "test_lock",
+            "functional_contract",
+            "id_distribution_evaluation",
+            "paired_response_evaluation",
+            "route_evaluation",
+            "acquisition_evaluation",
+            "registered_shift_evaluation",
+            "randomness",
+            "inference_and_statistics",
+            "success_rule",
+            "claim_boundary",
+        ],
+        "N1c config",
+    )
+    if (
+        payload["schema_version"] != "aurora.nonlinear_pde_n1c.v1"
+        or payload["status"]
+        != "preregistered_after_checkpoint_manifest_before_outer_test_generation"
+    ):
+        raise NonlinearDecisionError("Unexpected N1c pre-test status.")
+
+    parents = payload["parents"]
+    n1_path = (config_path.parent / parents["n1"]["config"]).resolve()
+    n1b_path = (config_path.parent / parents["n1b"]["config"]).resolve()
+    manifest_path = (
+        config_path.parent / parents["checkpoint_manifest"]["path"]
+    ).resolve()
+    for source_path, contract, label in (
+        (n1_path, parents["n1"], "N1"),
+        (n1b_path, parents["n1b"], "N1b"),
+        (
+            manifest_path,
+            parents["checkpoint_manifest"],
+            "N1b checkpoint manifest",
+        ),
+    ):
+        if not source_path.is_file() or _sha256(source_path) != contract["sha256"]:
+            raise NonlinearDecisionError(f"Pinned {label} source changed.")
+    n1, n1b = load_n1b_config(n1b_path)
+    if _sha256(n1_path) != parents["n1"]["sha256"]:
+        raise NonlinearDecisionError("N1c parent N1 and N1b disagree.")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest_contract = parents["checkpoint_manifest"]
+    if (
+        manifest_contract["public_commit"]
+        != "c66f651a9cd13c7f58450f21c1d67ba11d78de8e"
+        or manifest_contract["checkpoint_source_commit"]
+        != "1d0bd9c759f935f818b5705b1b9bc2a00116ea59"
+        or manifest_contract["eligible_seed_indices"] != [0, 1, 2, 3, 4]
+        or int(manifest_contract["trainable_checkpoints_per_seed"]) != 10
+        or manifest_contract[
+            "checkpoint_hash_verification_required_before_test_generation"
+        ]
+        is not True
+        or manifest["source"]["git_commit"]
+        != manifest_contract["checkpoint_source_commit"]
+        or len(manifest["seed_runs"]) != 5
+        or any(
+            item["checkpoint_seed_eligible"] is not True
+            or len(item["checkpoint_sha256"]) != 10
+            for item in manifest["seed_runs"]
+        )
+        or manifest["data_access"]["test_contexts_generated"] != 0
+        or manifest["data_access"]["test_seed_accessed"] is not False
+        or manifest["decision"]["n1_gate_decided"] is not False
+    ):
+        raise NonlinearDecisionError("N1c checkpoint manifest is not test-eligible.")
+
+    lock = payload["test_lock"]
+    data = n1["data"]
+    if (
+        int(lock["operator_test_contexts"])
+        != int(data["operator_test_contexts"])
+        or int(lock["conditions_per_context"])
+        != int(data["operator_conditions_per_context"])
+        or int(lock["context_seed"])
+        != int(data["split_seeds"]["operator_test"])
+        or int(lock["boundary_seed"])
+        != int(data["split_seeds"]["operator_test"]) + 1000
+        or lock["context_support"]
+        != data["context_support"]["train_validation_id_test"]
+        or float(lock["maximum_latent_mahalanobis_radius"])
+        != float(
+            data["boundary_latent_support"][
+                "train_validation_id_test_max_mahalanobis_radius"
+            ]
+        )
+        or lock["test_split_generated"] is not False
+        or lock["test_seed_accessed"] is not False
+        or lock["test_generation_must_follow_public_commit_of_this_overlay"]
+        is not True
+        or lock[
+            "model_or_threshold_change_after_test_requires_new_version_and_fresh_test"
+        ]
+        is not True
+    ):
+        raise NonlinearDecisionError("N1c outer-test lock changed.")
+
+    acquisition = payload["acquisition_evaluation"]
+    if (
+        acquisition["context_indices"] != list(range(0, 192, 4))
+        or acquisition["selection_rule"]
+        != "every_fourth_context_in_generation_order_fixed_before_test"
+        or int(acquisition["anchor_condition_index"]) != 0
+        or int(acquisition["outer_measurement_samples"]) != 8
+        or int(acquisition["inner_posterior_samples"]) != 32
+        or acquisition["true_law"]
+        != "context_conditioned_two_component_gmm_conditioned_on_global_latent_radius_at_most_2_5"
+        or acquisition["aco_role"] != "oracle_ceiling_not_superiority_target"
+    ):
+        raise NonlinearDecisionError("N1c acquisition selector or oracle changed.")
+
+    route = payload["route_evaluation"]
+    if (
+        route["models_with_tractable_density_routes"]
+        != ["aurora_joint", "independent_mask_heads", "acflow_adapted"]
+        or route["initial_mask"] != [0, 2]
+        or route["newly_observed_components"] != [5, 7]
+        or route["final_mask"] != [0, 2, 5, 7]
+        or route["context_indices"] != list(range(0, 192, 4))
+        or int(route["anchor_condition_index"]) != 0
+        or route["common_random_numbers_across_routes"] is not True
+        or route["undefined_routes_are_reported_as_not_applicable_not_zero"]
+        is not True
+    ):
+        raise NonlinearDecisionError("N1c route estimand changed.")
+
+    statistics = payload["inference_and_statistics"]
+    success = payload["success_rule"]
+    shifts = payload["registered_shift_evaluation"]
+    if (
+        int(statistics["confirmatory_model_seeds"]) != 5
+        or int(statistics["bootstrap_replicates"]) != 2000
+        or statistics["bootstrap_unit"] != "test_context_family"
+        or statistics["no_test_seed_model_or_policy_selection"] is not True
+        or success["all_conditions_required"] is not True
+        or float(
+            success[
+                "primary_relative_improvement_over_strongest_prefrozen_nonoracle_minimum"
+            ]
+        )
+        != 0.05
+        or int(success["confirmatory_seed_direction_minimum"]) != 4
+        or success["field_distribution_and_acquisition_regret_must_both_improve"]
+        is not True
+        or success["n1_pass_authorizes_irregular_3d_protocol_registration_only"]
+        is not True
+        or success["n1_pass_does_not_establish_cross_domain_or_aaai_acceptance"]
+        is not True
+        or payload["claim_boundary"]["irregular_3d_remains_blocked_until_positive_n1"]
+        is not True
+        or shifts["execution_stage"]
+        != "separate_N1d_secondary_job_after_N1c_without_model_threshold_or_test_seed_change"
+        or shifts["shift_metrics_are_secondary_to_n1_primary_decision"] is not True
+    ):
+        raise NonlinearDecisionError("N1c decision or non-inflation rule changed.")
+    return n1, n1b, payload, manifest
+
+
 def _imports() -> tuple[Any, Any]:
     try:
         import numpy as np
