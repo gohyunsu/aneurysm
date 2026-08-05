@@ -372,7 +372,9 @@ observed-component set encoder의 차이만 두며 latent Gaussian NLL로
 validation checkpoint를 고른다. POD reconstruction error는 model error와
 분리해 보고한다. 이는 partial-condition baseline을 약한 deterministic
 imputation으로 대체하지 않기 위한 compute-matched 설계이며, POD나
-Gaussian latent 자체를 contribution으로 세지 않는다.
+Gaussian latent 자체를 contribution으로 세지 않는다. Randomized POD의
+seed는 73080601, subspace iteration은 4회로 고정해 seed별 baseline
+variation과 representation variation을 섞지 않는다.
 
 Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
 모든 partial mode는 이 하나의 density를 analytic conditioning한다.

@@ -160,6 +160,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.05",
+      category: "implementation",
+      title: "N1b builds a test-locked strong-baseline checkpoint path",
+      copy: "각 confirmatory seed job은 joint/independent/ACFlow/LANO completion, three shared-operator controls, DeltaPhi-style residual, generic/NOP POD-Gaussian을 train/validation만으로 고른다. POD-96은 training field만 사용하며 seed 73080601과 iteration 4를 공유한다. 10개 checkpoint hash가 모이기 전 test는 생성되지 않는다.",
+      files: ["experiments/run_nonlinear_pde_n1b_checkpoint_freeze.py", "src/aurora/nonlinear_pde_decision.py", "cluster/ssu_a6gpu_nonlinear_pde_n1b_checkpoint_freeze.pbs", "configs/nonlinear_pde_n1b.json"]
+    },
+    {
+      date: "2026.08.05",
       category: "experiment",
       title: "N1a selects the optimization contract; N1b freezes it before test",
       copy: "Exact eebcd91 A6000 run은 test context 0개로 종료됐다. Validation objective는 raw 1,400/2,800에서 0.05007/0.02071, scale-normalized 1,400/2,800에서 0.03732/0.01772였고, 고정 규칙은 마지막 variant를 선택했다. N1b는 이 선택만 고정하며 모든 strong-baseline checkpoint manifest가 public commit되기 전 test와 3D를 차단한다.",

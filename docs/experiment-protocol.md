@@ -482,7 +482,11 @@ joint/independent/ACFlow/LANO completion, shared operator의
 pair/pair-zero/random-pair/DeltaPhi-style control, generic probabilistic
 operator와 NOP adaptation을 train/validation만으로 고른다. 모든
 checkpoint hash와 validation metric을 public manifest로 commit하기 전에는
-test split·seed를 생성하거나 읽을 수 없다.
+test split·seed를 생성하거나 읽을 수 없다. Direct generic/NOP control은
+operator-training full field에만 적합한 centered POD-96을 쓰며
+representation seed 73080601과 randomized subspace iteration 4회를 모든
+model seed에서 공유한다. POD reconstruction error를 learned error와
+별도로 기록한다.
 
 ### G2 · paired response fidelity
 

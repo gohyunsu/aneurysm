@@ -46,6 +46,8 @@
   "direct_probabilistic_training": {
     "representation": "operator_train_only_centered_pod",
     "latent_rank": 96,
+    "representation_seed": 73080601,
+    "randomized_pca_iterations": 4,
     "fit_split": "operator_training_full_fields_only",
     "target": "full_field_pod_coefficients",
     "distribution": "diagonal_gaussian_in_fixed_pod_coordinates",

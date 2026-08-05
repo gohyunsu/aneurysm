@@ -7,11 +7,13 @@ from pathlib import Path
 
 from aurora.nonlinear_pde_decision import (
     NonlinearDecisionError,
+    build_deltaphi_residual_operator,
     build_direct_probabilistic_operator,
     build_independent_mask_density,
     build_joint_density,
     build_lano_completion,
     build_mask_conditional_density,
+    build_pod_probabilistic_operator,
     build_solution_operator,
     gmm_nll,
     load_config,
@@ -143,6 +145,54 @@ class NonlinearDecisionContractTests(unittest.TestCase):
             self.assertEqual(tuple(mean.shape), (3, 33, 33))
             self.assertEqual(tuple(scale.shape), (3, 33, 33))
             self.assertTrue((scale > 0).all())
+
+        representation = {
+            "mean": torch.zeros(33 * 33),
+            "basis": torch.eye(33 * 33)[:, :96],
+            "coefficient_location": torch.zeros(96),
+            "coefficient_scale": torch.ones(96),
+            "rank": 96,
+            "seed": 73080601,
+            "iterations": 4,
+        }
+        reference_parameters = sum(
+            parameter.numel() for parameter in operator.parameters()
+        )
+        matched = []
+        for set_encoder in (False, True):
+            direct = build_pod_probabilistic_operator(
+                self.config,
+                device,
+                representation=representation,
+                set_encoder=set_encoder,
+            )
+            mean, scale = direct.moments(context, boundary, mask)
+            self.assertEqual(tuple(mean.shape), (3, 33, 33))
+            self.assertTrue((scale > 0).all())
+            matched.append(
+                sum(parameter.numel() for parameter in direct.parameters())
+            )
+        deltaphi = build_deltaphi_residual_operator(
+            self.config,
+            device,
+            representation=representation,
+        )
+        residual = deltaphi(
+            context,
+            boundary,
+            context,
+            boundary,
+            torch.zeros(3, 33, 33),
+        )
+        self.assertEqual(tuple(residual.shape), (3, 33, 33))
+        matched.append(
+            sum(parameter.numel() for parameter in deltaphi.parameters())
+        )
+        for parameters in matched:
+            self.assertLessEqual(
+                abs(parameters - reference_parameters) / reference_parameters,
+                0.1,
+            )
 
 
 if __name__ == "__main__":

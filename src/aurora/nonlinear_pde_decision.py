@@ -385,6 +385,8 @@ def load_n1b_config(path: str | Path) -> tuple[dict[str, Any], dict[str, Any]]:
     if (
         direct["representation"] != "operator_train_only_centered_pod"
         or int(direct["latent_rank"]) != 96
+        or int(direct["representation_seed"]) != 73080601
+        or int(direct["randomized_pca_iterations"]) != 4
         or direct["fit_split"] != "operator_training_full_fields_only"
         or direct["pod_and_standardization_source"]
         != "operator_training_split_only"
@@ -972,6 +974,304 @@ def build_direct_probabilistic_operator(
             )
 
     return DirectLatentOperator().to(device)
+
+
+def fit_train_only_pod(
+    field: Any,
+    *,
+    rank: int,
+    seed: int,
+    iterations: int,
+) -> dict[str, Any]:
+    """Fit one centered POD representation using training fields only."""
+
+    _, torch = _imports()
+    flat = field.reshape(field.shape[0], -1)
+    mean = flat.mean(dim=0)
+    centered = flat - mean
+    torch.manual_seed(seed)
+    _, _, basis = torch.pca_lowrank(
+        centered,
+        q=rank,
+        center=False,
+        niter=iterations,
+    )
+    coefficient = centered @ basis
+    coefficient_location = coefficient.mean(dim=0)
+    coefficient_scale = coefficient.std(dim=0, unbiased=False).clamp_min(1e-4)
+    reconstruction = mean + coefficient @ basis.transpose(0, 1)
+    relative = torch.linalg.vector_norm(reconstruction - flat, dim=1) / (
+        torch.linalg.vector_norm(flat, dim=1).clamp_min(1e-6)
+    )
+    return {
+        "mean": mean,
+        "basis": basis,
+        "coefficient_location": coefficient_location,
+        "coefficient_scale": coefficient_scale,
+        "training_mean_relative_l2": float(relative.mean().item()),
+        "training_maximum_relative_l2": float(relative.max().item()),
+        "rank": rank,
+        "seed": seed,
+        "iterations": iterations,
+    }
+
+
+def encode_pod(field: Any, representation: Mapping[str, Any]) -> Any:
+    """Encode fields in standardized train-only POD coordinates."""
+
+    flat = field.reshape(field.shape[0], -1)
+    coefficient = (
+        flat - representation["mean"]
+    ) @ representation["basis"]
+    return (
+        coefficient - representation["coefficient_location"]
+    ) / representation["coefficient_scale"]
+
+
+def pod_representation_error(
+    field: Any, representation: Mapping[str, Any]
+) -> Any:
+    """Return per-case relative reconstruction error for a frozen POD."""
+
+    _, torch = _imports()
+    standardized = encode_pod(field, representation)
+    coefficient = (
+        standardized * representation["coefficient_scale"]
+        + representation["coefficient_location"]
+    )
+    reconstruction = (
+        representation["mean"]
+        + coefficient @ representation["basis"].transpose(0, 1)
+    )
+    target = field.reshape(field.shape[0], -1)
+    return torch.linalg.vector_norm(reconstruction - target, dim=1) / (
+        torch.linalg.vector_norm(target, dim=1).clamp_min(1e-6)
+    )
+
+
+def build_pod_probabilistic_operator(
+    config: Mapping[str, Any],
+    device: Any,
+    *,
+    representation: Mapping[str, Any],
+    set_encoder: bool,
+) -> Any:
+    """Build a compute-matched Gaussian operator on a frozen train-only POD."""
+
+    _, torch = _imports()
+    contract = config["architecture"]["direct_probabilistic_operator"]
+    width = int(contract["hidden_width"])
+    rank = int(representation["rank"])
+    grid_points = int(config["pde_contract"]["grid_points"])
+
+    class PODGaussianOperator(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            if set_encoder:
+                token_width = 64
+                self.token = _build_mlp(
+                    torch, [10, token_width, token_width]
+                )
+                self.context_net = _build_mlp(
+                    torch,
+                    [5 + token_width, width, width, width, 2 * rank],
+                )
+                self.register_buffer("component", torch.eye(8, device=device))
+            else:
+                self.context_net = _build_mlp(
+                    torch, [21, width, width, width, width, 2 * rank]
+                )
+            self.register_buffer("pod_mean", representation["mean"].clone())
+            self.register_buffer("pod_basis", representation["basis"].clone())
+            self.register_buffer(
+                "coefficient_location",
+                representation["coefficient_location"].clone(),
+            )
+            self.register_buffer(
+                "coefficient_scale",
+                representation["coefficient_scale"].clone(),
+            )
+            self.set_encoder = set_encoder
+
+        def latent(self, context: Any, observed: Any, mask: Any) -> tuple[Any, Any]:
+            if self.set_encoder:
+                component = self.component[None].expand(context.shape[0], -1, -1)
+                token_input = torch.cat(
+                    (
+                        observed[:, :, None] * mask[:, :, None],
+                        mask[:, :, None],
+                        component,
+                    ),
+                    dim=-1,
+                )
+                token = self.token(token_input)
+                pooled = (token * mask[:, :, None]).sum(dim=1) / (
+                    mask.sum(dim=1, keepdim=True) + 1.0
+                )
+                raw = self.context_net(torch.cat((context, pooled), dim=-1))
+            else:
+                raw = self.context_net(
+                    torch.cat((context, observed * mask, mask), dim=-1)
+                )
+            mean, raw_scale = raw.chunk(2, dim=-1)
+            return mean, torch.nn.functional.softplus(raw_scale) + 1e-3
+
+        def nll(
+            self,
+            context: Any,
+            observed: Any,
+            mask: Any,
+            standardized_coefficient: Any,
+        ) -> Any:
+            mean, scale = self.latent(context, observed, mask)
+            return (
+                0.5 * ((standardized_coefficient - mean) / scale).square()
+                + torch.log(scale)
+                + 0.5 * math.log(2.0 * math.pi)
+            ).sum(dim=-1)
+
+        def _decode(self, standardized: Any) -> Any:
+            coefficient = (
+                standardized * self.coefficient_scale
+                + self.coefficient_location
+            )
+            return self.pod_mean + coefficient @ self.pod_basis.transpose(0, 1)
+
+        def moments(
+            self, context: Any, observed: Any, mask: Any
+        ) -> tuple[Any, Any]:
+            mean, scale = self.latent(context, observed, mask)
+            field_mean = self._decode(mean)
+            physical_scale = scale * self.coefficient_scale
+            field_variance = (
+                physical_scale.square()
+                @ self.pod_basis.square().transpose(0, 1)
+            )
+            return (
+                field_mean.reshape(-1, grid_points, grid_points),
+                torch.sqrt(field_variance.clamp_min(1e-8)).reshape(
+                    -1, grid_points, grid_points
+                ),
+            )
+
+        def sample(
+            self,
+            context: Any,
+            observed: Any,
+            mask: Any,
+            samples: int,
+            seed: int,
+        ) -> Any:
+            mean, scale = self.latent(context, observed, mask)
+            generator = torch.Generator(device=context.device).manual_seed(seed)
+            latent = mean[:, None] + scale[:, None] * torch.randn(
+                context.shape[0],
+                samples,
+                rank,
+                generator=generator,
+                device=context.device,
+                dtype=context.dtype,
+            )
+            field = self._decode(latent)
+            return field.reshape(
+                context.shape[0], samples, grid_points, grid_points
+            )
+
+    return PODGaussianOperator().to(device)
+
+
+def build_deltaphi_residual_operator(
+    config: Mapping[str, Any],
+    device: Any,
+    *,
+    representation: Mapping[str, Any],
+) -> Any:
+    """Build a parameter-matched DeltaPhi-style retrieved-residual adaptation."""
+
+    _, torch = _imports()
+    from aurora.nonlinear_pde import _boundary_field
+
+    rank = int(config["architecture"]["conditional_solution_operator"]["rank"])
+    grid_points = int(config["pde_contract"]["grid_points"])
+    coordinate_width = int(
+        config["architecture"]["conditional_solution_operator"]["coordinate_width"]
+    )
+    coordinate_layers = int(
+        config["architecture"]["conditional_solution_operator"]["coordinate_layers"]
+    )
+    anchor_rank = 32
+    branch_width = 176
+    coordinate, envelope = _coordinate_features(grid_points, device)
+
+    class DeltaPhiResidualOperator(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.branch = _build_mlp(
+                torch,
+                [
+                    26 + anchor_rank,
+                    branch_width,
+                    branch_width,
+                    branch_width,
+                    rank,
+                ],
+            )
+            self.trunk = _build_mlp(
+                torch,
+                [
+                    coordinate.shape[-1],
+                    *([coordinate_width] * coordinate_layers),
+                    rank,
+                ],
+            )
+            self.register_buffer("coordinate", coordinate)
+            self.register_buffer("envelope", envelope)
+            self.register_buffer("pod_mean", representation["mean"].clone())
+            self.register_buffer(
+                "anchor_basis", representation["basis"][:, :anchor_rank].clone()
+            )
+            self.register_buffer(
+                "anchor_scale",
+                representation["coefficient_scale"][:anchor_rank].clone(),
+            )
+
+        def forward(
+            self,
+            context: Any,
+            boundary: Any,
+            anchor_context: Any,
+            anchor_boundary: Any,
+            anchor_field: Any,
+        ) -> Any:
+            anchor_flat = anchor_field.flatten(1)
+            anchor_coefficient = (
+                (anchor_flat - self.pod_mean) @ self.anchor_basis
+            ) / self.anchor_scale
+            branch_input = torch.cat(
+                (
+                    context,
+                    boundary,
+                    anchor_context,
+                    anchor_boundary,
+                    anchor_coefficient,
+                ),
+                dim=-1,
+            )
+            coefficient = self.branch(branch_input)
+            basis = self.trunk(self.coordinate)
+            correction = torch.einsum(
+                "br,nr->bn", coefficient, basis
+            ) / math.sqrt(rank)
+            lifting_delta = (
+                _boundary_field(boundary, grid_points)
+                - _boundary_field(anchor_boundary, grid_points)
+            ).flatten(1)
+            prediction = (
+                anchor_flat + lifting_delta + correction * self.envelope
+            )
+            return prediction.reshape(-1, grid_points, grid_points)
+
+    return DeltaPhiResidualOperator().to(device)
 
 
 def marginal_gmm(
@@ -1601,6 +1901,601 @@ def train_operator_optimization_attribution(
         },
     }
     return operators, history
+
+
+def _shared_operator_validation(
+    operator: Any,
+    validation: Mapping[str, Any],
+    *,
+    pair_weight: float,
+) -> dict[str, float]:
+    """Evaluate the frozen full-BC and same-context pair selection metrics."""
+
+    _, torch = _imports()
+    context, boundary, field = _flatten_solution_split(validation)
+    relative = []
+    for start in range(0, context.shape[0], 1024):
+        end = min(start + 1024, context.shape[0])
+        relative.append(
+            _relative_l2(
+                operator(context[start:end], boundary[start:end]),
+                field[start:end],
+            )
+        )
+    full = torch.cat(relative).mean()
+    predicted_delta = operator(
+        validation["context"], validation["boundary"][:, 1]
+    ) - operator(validation["context"], validation["boundary"][:, 0])
+    true_delta = validation["field"][:, 1] - validation["field"][:, 0]
+    paired = _relative_l2(predicted_delta, true_delta).mean()
+    return {
+        "validation_full_bc_relative_l2": float(full.item()),
+        "validation_paired_response_relative_l2": float(paired.item()),
+        "validation_selection_objective": float(
+            (full + pair_weight * paired).item()
+        ),
+    }
+
+
+def train_shared_operator_controls(
+    *,
+    n1_config: Mapping[str, Any],
+    n1b_config: Mapping[str, Any],
+    operator_train: Mapping[str, Any],
+    operator_validation: Mapping[str, Any],
+    seed: int,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Train pair, no-pair, and random-context controls without test access."""
+
+    _, torch = _imports()
+    contract = n1b_config["selected_shared_operator_training"]
+    train_context, train_boundary, train_field = _flatten_solution_split(
+        operator_train
+    )
+    field_rms_squared = train_field.square().mean(dim=(-2, -1))
+    field_floor = torch.quantile(field_rms_squared, 0.10).clamp_min(1e-8)
+    adjacent_delta = (
+        operator_train["field"][:, 1:] - operator_train["field"][:, :-1]
+    )
+    pair_floor = torch.quantile(
+        adjacent_delta.square().mean(dim=(-2, -1)), 0.10
+    ).clamp_min(1e-8)
+    selection_pair_weight = float(contract["paired_response_weight"])
+    variants = {
+        "aurora_shared_operator_pair_loss": {
+            "pair_mode": "same_context",
+            "training_pair_weight": selection_pair_weight,
+        },
+        "aurora_shared_operator_pair_loss_zero": {
+            "pair_mode": "none",
+            "training_pair_weight": 0.0,
+        },
+        "aurora_shared_operator_random_cross_context_pair": {
+            "pair_mode": "random_cross_context",
+            "training_pair_weight": selection_pair_weight,
+        },
+    }
+    models = {}
+    histories = {}
+    maximum_steps = int(contract["maximum_steps"])
+    interval = int(contract["validation_interval"])
+    patience = int(contract["early_stopping_patience"])
+    batch_size = int(contract["batch_size"])
+    conditions = int(operator_train["boundary"].shape[1])
+    context_count = int(operator_train["context"].shape[0])
+    family_batch = min(256, context_count)
+
+    for variant_index, (name, variant) in enumerate(variants.items()):
+        torch.manual_seed(seed)
+        model = build_solution_operator(n1_config, train_context.device)
+        optimizer = torch.optim.AdamW(
+            model.parameters(),
+            lr=float(contract["learning_rate"]),
+            weight_decay=float(contract["weight_decay"]),
+        )
+        generator = torch.Generator(device=train_context.device).manual_seed(
+            seed + 20000 + 101 * variant_index
+        )
+        best = math.inf
+        best_step = 0
+        best_state = _clone_state(model)
+        wait = 0
+        trace = []
+        for step in range(1, maximum_steps + 1):
+            index = torch.randint(
+                0,
+                train_context.shape[0],
+                (batch_size,),
+                generator=generator,
+                device=train_context.device,
+            )
+            prediction = model(train_context[index], train_boundary[index])
+            field_error = (prediction - train_field[index]).square().mean(
+                dim=(-2, -1)
+            )
+            field_loss = (
+                field_error / field_rms_squared[index].clamp_min(field_floor)
+            ).mean()
+
+            pair_mode = variant["pair_mode"]
+            pair_loss = field_loss.new_zeros(())
+            if pair_mode != "none":
+                first_family = torch.randint(
+                    0,
+                    context_count,
+                    (family_batch,),
+                    generator=generator,
+                    device=train_context.device,
+                )
+                first_condition = (step - 1) % conditions
+                second_condition = step % conditions
+                if pair_mode == "same_context":
+                    second_family = first_family
+                else:
+                    offset = torch.randint(
+                        1,
+                        context_count,
+                        (family_batch,),
+                        generator=generator,
+                        device=train_context.device,
+                    )
+                    second_family = (first_family + offset) % context_count
+                first_prediction = model(
+                    operator_train["context"][first_family],
+                    operator_train["boundary"][
+                        first_family, first_condition
+                    ],
+                )
+                second_prediction = model(
+                    operator_train["context"][second_family],
+                    operator_train["boundary"][
+                        second_family, second_condition
+                    ],
+                )
+                true_delta = (
+                    operator_train["field"][second_family, second_condition]
+                    - operator_train["field"][first_family, first_condition]
+                )
+                pair_error = (
+                    second_prediction - first_prediction - true_delta
+                ).square().mean(dim=(-2, -1))
+                pair_loss = (
+                    pair_error
+                    / true_delta.square()
+                    .mean(dim=(-2, -1))
+                    .clamp_min(pair_floor)
+                ).mean()
+            loss = field_loss + float(variant["training_pair_weight"]) * pair_loss
+            optimizer.zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
+            optimizer.step()
+
+            if step % interval != 0:
+                continue
+            model.eval()
+            with torch.no_grad():
+                record = {
+                    "step": step,
+                    "train_field_loss": float(field_loss.detach().item()),
+                    "train_pair_loss": float(pair_loss.detach().item()),
+                    **_shared_operator_validation(
+                        model,
+                        operator_validation,
+                        pair_weight=selection_pair_weight,
+                    ),
+                }
+            model.train()
+            trace.append(record)
+            objective = record["validation_selection_objective"]
+            if objective < best - 1e-5:
+                best = objective
+                best_step = step
+                best_state = _clone_state(model)
+                wait = 0
+            else:
+                wait += 1
+            if wait >= patience:
+                break
+        model.load_state_dict(best_state)
+        model.eval()
+        best_record = min(
+            trace, key=lambda item: item["validation_selection_objective"]
+        )
+        models[name] = model
+        histories[name] = {
+            "pair_mode": variant["pair_mode"],
+            "training_pair_weight": variant["training_pair_weight"],
+            "best_step": best_step,
+            "steps_executed": trace[-1]["step"],
+            "best_record": best_record,
+            "trace": trace,
+            "parameters": sum(
+                parameter.numel() for parameter in model.parameters()
+            ),
+        }
+    return models, {
+        "stage": "validation_only_shared_operator_checkpoint_freeze",
+        "seed": seed,
+        "test_generated_or_accessed": False,
+        "training_scale": {
+            "field_rms_squared_tenth_percentile": float(field_floor.item()),
+            "pair_rms_squared_tenth_percentile": float(pair_floor.item()),
+            "source": "operator_training_split_only",
+        },
+        "models": histories,
+    }
+
+
+def nearest_training_indices(
+    query_key: Any,
+    training_key: Any,
+    *,
+    exclude_self: bool,
+    chunk_size: int = 256,
+) -> Any:
+    """Find deterministic nearest training anchors in standardized key space."""
+
+    _, torch = _imports()
+    outputs = []
+    for start in range(0, query_key.shape[0], chunk_size):
+        end = min(start + chunk_size, query_key.shape[0])
+        distance = torch.cdist(query_key[start:end], training_key)
+        if exclude_self:
+            row = torch.arange(end - start, device=query_key.device)
+            column = torch.arange(start, end, device=query_key.device)
+            distance[row, column] = torch.inf
+        outputs.append(torch.argmin(distance, dim=1))
+    return torch.cat(outputs)
+
+
+def train_deltaphi_control(
+    *,
+    n1_config: Mapping[str, Any],
+    n1b_config: Mapping[str, Any],
+    operator_train: Mapping[str, Any],
+    operator_validation: Mapping[str, Any],
+    representation: Mapping[str, Any],
+    seed: int,
+) -> tuple[Any, dict[str, Any]]:
+    """Train a retrieval-based residual operator using training anchors only."""
+
+    _, torch = _imports()
+    contract = n1b_config["selected_shared_operator_training"]
+    train_context, train_boundary, train_field = _flatten_solution_split(
+        operator_train
+    )
+    validation_context, validation_boundary, validation_field = (
+        _flatten_solution_split(operator_validation)
+    )
+    raw_training_key = torch.cat((train_context, train_boundary), dim=-1)
+    key_location = raw_training_key.mean(dim=0)
+    key_scale = raw_training_key.std(dim=0, unbiased=False).clamp_min(1e-4)
+    training_key = (raw_training_key - key_location) / key_scale
+    validation_key = (
+        torch.cat((validation_context, validation_boundary), dim=-1)
+        - key_location
+    ) / key_scale
+    training_anchor = nearest_training_indices(
+        training_key, training_key, exclude_self=True
+    )
+    validation_anchor = nearest_training_indices(
+        validation_key, training_key, exclude_self=False
+    )
+
+    field_rms_squared = train_field.square().mean(dim=(-2, -1))
+    field_floor = torch.quantile(field_rms_squared, 0.10).clamp_min(1e-8)
+    pair_weight = float(contract["paired_response_weight"])
+    torch.manual_seed(seed)
+    model = build_deltaphi_residual_operator(
+        n1_config,
+        train_context.device,
+        representation=representation,
+    )
+    optimizer = torch.optim.AdamW(
+        model.parameters(),
+        lr=float(contract["learning_rate"]),
+        weight_decay=float(contract["weight_decay"]),
+    )
+    generator = torch.Generator(device=train_context.device).manual_seed(
+        seed + 30000
+    )
+    best = math.inf
+    best_step = 0
+    best_state = _clone_state(model)
+    wait = 0
+    trace = []
+    conditions = int(operator_validation["boundary"].shape[1])
+
+    def predict(
+        context: Any,
+        boundary: Any,
+        anchor_index: Any,
+    ) -> Any:
+        return model(
+            context,
+            boundary,
+            train_context[anchor_index],
+            train_boundary[anchor_index],
+            train_field[anchor_index],
+        )
+
+    for step in range(1, int(contract["maximum_steps"]) + 1):
+        index = torch.randint(
+            0,
+            train_context.shape[0],
+            (int(contract["batch_size"]),),
+            generator=generator,
+            device=train_context.device,
+        )
+        prediction = predict(
+            train_context[index],
+            train_boundary[index],
+            training_anchor[index],
+        )
+        error = (prediction - train_field[index]).square().mean(dim=(-2, -1))
+        loss = (
+            error / field_rms_squared[index].clamp_min(field_floor)
+        ).mean()
+        optimizer.zero_grad(set_to_none=True)
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
+        optimizer.step()
+        if step % int(contract["validation_interval"]) != 0:
+            continue
+        model.eval()
+        with torch.no_grad():
+            relative = []
+            for start in range(0, validation_context.shape[0], 1024):
+                end = min(start + 1024, validation_context.shape[0])
+                relative.append(
+                    _relative_l2(
+                        predict(
+                            validation_context[start:end],
+                            validation_boundary[start:end],
+                            validation_anchor[start:end],
+                        ),
+                        validation_field[start:end],
+                    )
+                )
+            full = torch.cat(relative).mean()
+            first_flat = torch.arange(
+                0,
+                validation_context.shape[0],
+                conditions,
+                device=validation_context.device,
+            )
+            second_flat = first_flat + 1
+            predicted_delta = predict(
+                validation_context[second_flat],
+                validation_boundary[second_flat],
+                validation_anchor[second_flat],
+            ) - predict(
+                validation_context[first_flat],
+                validation_boundary[first_flat],
+                validation_anchor[first_flat],
+            )
+            true_delta = (
+                operator_validation["field"][:, 1]
+                - operator_validation["field"][:, 0]
+            )
+            paired = _relative_l2(predicted_delta, true_delta).mean()
+            objective = float((full + pair_weight * paired).item())
+        model.train()
+        record = {
+            "step": step,
+            "train_normalized_field_mse": float(loss.detach().item()),
+            "validation_full_bc_relative_l2": float(full.item()),
+            "validation_paired_response_relative_l2": float(paired.item()),
+            "validation_selection_objective": objective,
+        }
+        trace.append(record)
+        if objective < best - 1e-5:
+            best = objective
+            best_step = step
+            best_state = _clone_state(model)
+            wait = 0
+        else:
+            wait += 1
+        if wait >= int(contract["early_stopping_patience"]):
+            break
+    model.load_state_dict(best_state)
+    model.eval()
+    return model, {
+        "stage": "validation_only_deltaphi_checkpoint_freeze",
+        "seed": seed,
+        "test_generated_or_accessed": False,
+        "best_step": best_step,
+        "steps_executed": trace[-1]["step"],
+        "best_record": min(
+            trace, key=lambda item: item["validation_selection_objective"]
+        ),
+        "trace": trace,
+        "parameters": sum(parameter.numel() for parameter in model.parameters()),
+        "retrieval": {
+            "pool": "operator_training_split_only",
+            "key_location": key_location.detach().cpu().tolist(),
+            "key_scale": key_scale.detach().cpu().tolist(),
+            "query_target_leakage": False,
+        },
+    }
+
+
+def train_direct_probabilistic_controls(
+    *,
+    n1_config: Mapping[str, Any],
+    n1b_config: Mapping[str, Any],
+    operator_train: Mapping[str, Any],
+    operator_validation: Mapping[str, Any],
+    representation: Mapping[str, Any],
+    seed: int,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Train generic and NOP-style POD Gaussian baselines on validation only."""
+
+    _, torch = _imports()
+    contract = n1b_config["direct_probabilistic_training"]
+    train_context, train_boundary, train_field = _flatten_solution_split(
+        operator_train
+    )
+    validation_context, validation_boundary, validation_field = (
+        _flatten_solution_split(operator_validation)
+    )
+    train_coefficient = encode_pod(train_field, representation)
+    validation_coefficient = encode_pod(validation_field, representation)
+    models = {
+        "generic_probabilistic_operator": build_pod_probabilistic_operator(
+            n1_config,
+            train_context.device,
+            representation=representation,
+            set_encoder=False,
+        ),
+        "nop_adapted": build_pod_probabilistic_operator(
+            n1_config,
+            train_context.device,
+            representation=representation,
+            set_encoder=True,
+        ),
+    }
+    optimizers = {
+        name: torch.optim.AdamW(
+            model.parameters(),
+            lr=float(contract["learning_rate"]),
+            weight_decay=float(contract["weight_decay"]),
+        )
+        for name, model in models.items()
+    }
+    generators = {
+        name: torch.Generator(device=train_context.device).manual_seed(
+            seed + 40000 + 137 * index
+        )
+        for index, name in enumerate(models)
+    }
+    registered = n1_config["observation_protocol"]["registered_masks"]
+    masks = [(name, registered[name]) for name in contract["masks"]]
+    best = {name: math.inf for name in models}
+    best_step = {name: 0 for name in models}
+    best_state = {name: _clone_state(model) for name, model in models.items()}
+    waits = {name: 0 for name in models}
+    traces = {name: [] for name in models}
+    active = set(models)
+
+    for step in range(1, int(contract["maximum_steps"]) + 1):
+        _, positions = masks[(step - 1) % len(masks)]
+        for name in tuple(active):
+            index = torch.randint(
+                0,
+                train_context.shape[0],
+                (int(contract["batch_size"]),),
+                generator=generators[name],
+                device=train_context.device,
+            )
+            mask = _mask_tensor(
+                positions,
+                index.shape[0],
+                train_context.device,
+                train_context.dtype,
+            )
+            loss = models[name].nll(
+                train_context[index],
+                train_boundary[index],
+                mask,
+                train_coefficient[index],
+            ).mean()
+            optimizers[name].zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(models[name].parameters(), 5.0)
+            optimizers[name].step()
+        if step % int(contract["validation_interval"]) != 0:
+            continue
+        for model in models.values():
+            model.eval()
+        with torch.no_grad():
+            for name in tuple(active):
+                values = []
+                mask_values = {}
+                for mask_name, positions in masks:
+                    chunks = []
+                    for start in range(0, validation_context.shape[0], 2048):
+                        end = min(start + 2048, validation_context.shape[0])
+                        mask = _mask_tensor(
+                            positions,
+                            end - start,
+                            validation_context.device,
+                            validation_context.dtype,
+                        )
+                        chunks.append(
+                            models[name].nll(
+                                validation_context[start:end],
+                                validation_boundary[start:end],
+                                mask,
+                                validation_coefficient[start:end],
+                            )
+                        )
+                    value = torch.cat(chunks).mean()
+                    mask_values[mask_name] = float(value.item())
+                    values.append(value)
+                validation_nll = float(torch.stack(values).mean().item())
+                traces[name].append(
+                    {
+                        "step": step,
+                        "validation_mean_mask_latent_nll": validation_nll,
+                        "validation_mask_latent_nll": mask_values,
+                    }
+                )
+                if validation_nll < best[name] - 1e-5:
+                    best[name] = validation_nll
+                    best_step[name] = step
+                    best_state[name] = _clone_state(models[name])
+                    waits[name] = 0
+                else:
+                    waits[name] += 1
+                    if waits[name] >= int(contract["early_stopping_patience"]):
+                        active.remove(name)
+        for model in models.values():
+            model.train()
+        if not active:
+            break
+
+    for name, model in models.items():
+        model.load_state_dict(best_state[name])
+        model.eval()
+    representation_error = pod_representation_error(
+        validation_field, representation
+    )
+    return models, {
+        "stage": "validation_only_direct_probabilistic_checkpoint_freeze",
+        "seed": seed,
+        "test_generated_or_accessed": False,
+        "representation": {
+            "rank": int(representation["rank"]),
+            "seed": int(representation["seed"]),
+            "iterations": int(representation["iterations"]),
+            "train_mean_relative_l2": representation[
+                "training_mean_relative_l2"
+            ],
+            "train_maximum_relative_l2": representation[
+                "training_maximum_relative_l2"
+            ],
+            "validation_mean_relative_l2": float(
+                representation_error.mean().item()
+            ),
+            "validation_maximum_relative_l2": float(
+                representation_error.max().item()
+            ),
+        },
+        "models": {
+            name: {
+                "best_step": best_step[name],
+                "steps_executed": traces[name][-1]["step"],
+                "best_validation_mean_mask_latent_nll": best[name],
+                "trace": traces[name],
+                "parameters": sum(
+                    parameter.numel() for parameter in models[name].parameters()
+                ),
+            }
+            for name in models
+        },
+    }
 
 
 def _coordinate_features(grid_points: int, device: Any) -> tuple[Any, Any]:

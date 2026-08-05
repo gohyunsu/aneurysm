@@ -26,6 +26,9 @@
   generation을 금지한다.
 - Direct generic/NOP baseline의 train-only centered POD-96과 latent
   Gaussian은 compute-matched control이며 architecture novelty가 아니다.
+- 실행 전 세부 amendment로 모든 confirmatory seed가 같은 POD를 쓰도록
+  representation seed 73080601과 randomized subspace iteration 4회를
+  고정했다. Test 또는 confirmatory metric은 아직 생성되지 않았다.
 
 ## 2026-08-05 · Unit-peak N1 core remains insufficient; N1a is frozen
 
