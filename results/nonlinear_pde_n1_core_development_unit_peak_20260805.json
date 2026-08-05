@@ -1,0 +1,80 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "nonlinear_pde_n1_core_development_unit_peak_20260805",
+  "experiment_id": "nonlinear_route_consistent_functional_decision_n1_v1",
+  "evidence_status": "validation_only_unit_peak_core_development_completed_insufficient",
+  "source_gate": "N0r",
+  "source_commit": "54046a3001150044bf7a1d2bf8fc05052893d845",
+  "source_config_commit": "d1ffd26770cdb8ec8c2060c68806e5f24387bfbc",
+  "source_metrics_sha256": "7dad94ba59e021d3b3914a47367023a3d8c61957bed228ab3d9c1377b9bc76b2",
+  "source_run_config_sha256": "882c802e8122bf763df7718a5b883363ab140b2f580c279043b5516756914f8b",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "exit_status": 0,
+    "started_utc": "2026-08-05T11:30:39.728418+00:00",
+    "ended_utc": "2026-08-05T11:31:13.226397+00:00",
+    "walltime": "00:01:33",
+    "development_seed": 73080502
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "exact_source_contract": {
+      "status": "passed",
+      "tests": 114,
+      "tests_log_sha256": "c9561b3e069afd62779dbd9f6143e73165c9a05e8fb323f6e07c15001036dc29"
+    },
+    "test_split_generated": false,
+    "test_seed_accessed": false,
+    "checkpoint_selection": "validation_only"
+  },
+  "data": {
+    "density_train_contexts": 3072,
+    "density_validation_contexts": 384,
+    "operator_train_contexts": 768,
+    "operator_validation_contexts": 192,
+    "conditions_per_operator_context": 12,
+    "train_solver_all_converged": true,
+    "validation_solver_all_converged": true,
+    "maximum_solver_normalized_residual": 0.000003962763457820984
+  },
+  "development_metrics": {
+    "joint_density": {
+      "best_epoch": 900,
+      "best_validation_nll": -4.420251369476318,
+      "epochs_executed": 1200,
+      "parameters": 92634
+    },
+    "unit_peak_lifted_operator": {
+      "best_epoch": 1400,
+      "epochs_executed": 1400,
+      "validation_full_bc_relative_l2": 0.05770794674754143,
+      "validation_paired_response_relative_l2": 0.05728533864021301,
+      "validation_selection_objective": 0.08635061979293823,
+      "parameters": 143168
+    },
+    "relative_change_from_unscaled_attempt": {
+      "full_bc_relative_l2": -0.6680926923525535,
+      "paired_response_relative_l2": -0.6923055949545971
+    }
+  },
+  "interpretation": {
+    "core_checkpoint_eligible": false,
+    "reason": "Unit-peak scaling materially improves optimization, but validation full-BC relative L2 remains above the unchanged preregistered 0.05 criterion and the best checkpoint again occurs at the maximum step.",
+    "threshold_was_not_relaxed": true,
+    "development_seed_pool_exhausted": true,
+    "improvement_is_optimization_not_method_novelty": true
+  },
+  "decision": {
+    "n1_gate_decided": false,
+    "baseline_superiority_established": false,
+    "method_novelty_established": false,
+    "irregular_3d_authorized": false,
+    "confirmatory_test_authorized": false,
+    "next_step": "Preregister a threshold-free validation-only optimization attribution that separates training horizon from loss conditioning before defining any new prospective N1 version."
+  }
+}

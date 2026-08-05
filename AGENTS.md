@@ -219,6 +219,12 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   생성·접근하지 않았고 operator가 0.05 자격에 못 미쳐 confirmatory path는
   닫혀 있다. Unit-peak envelope rescaling은 동일 함수 클래스의 optimization
   diagnostic이며 threshold·rank·data·loss를 바꾸지 않는다.
+  Unit-peak attempt 2는 exact `54046a3`에서 full-BC/paired-response L2
+  0.05771/0.05729로 개선됐지만 unchanged 0.05를 넘고 best step이
+  maximum 1,400이어서 insufficient다. N1a는 새 development seed에서
+  raw/scale-normalized loss × 1,400/2,800 step만 비교하는 threshold-free
+  validation attribution이다. Test/N1/3D 권한이 없고 선택값은 새
+  prospective N1 version 전에는 confirmatory evidence가 아니다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

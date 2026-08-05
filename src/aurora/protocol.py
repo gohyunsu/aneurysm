@@ -956,6 +956,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "test_access_before_checkpoint_freeze",
                 "irregular_3d_registration_authorized",
                 "core_development",
+                "optimization_attribution",
             ],
             "preregistered N1",
         )
@@ -973,8 +974,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             development,
             [
                 "status",
-                "result",
-                "source_commit",
+                "results",
+                "source_commits",
                 "test_generated_or_accessed",
                 "n1_gate_decided",
                 "confirmatory_test_authorized",
@@ -984,16 +985,30 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
         if (
             development["status"]
-            != "validation_only_attempt1_completed_insufficient"
-            or development["result"]
-            != "results/nonlinear_pde_n1_core_development_20260805.json"
-            or len(development["source_commit"]) != 40
+            != "validation_only_two_attempts_completed_insufficient"
+            or development["results"]
+            != [
+                "results/nonlinear_pde_n1_core_development_20260805.json",
+                "results/nonlinear_pde_n1_core_development_unit_peak_20260805.json",
+            ]
+            or len(development["source_commits"]) != 2
+            or any(len(value) != 40 for value in development["source_commits"])
             or development["test_generated_or_accessed"] is not False
             or development["n1_gate_decided"] is not False
             or development["confirmatory_test_authorized"] is not False
         ):
             raise ProtocolError(
                 "Insufficient N1 development cannot decide the gate or open test."
+            )
+        attribution = n1["optimization_attribution"]
+        if attribution != {
+            "status": "preregistered_before_attribution_metric",
+            "config": "configs/nonlinear_pde_n1_optimization_attribution.json",
+            "has_success_threshold": False,
+            "may_access_test_or_decide_n1": False,
+        }:
+            raise ProtocolError(
+                "N1 optimization attribution must remain non-gating and test-free."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

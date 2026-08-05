@@ -355,6 +355,12 @@ envelope는 최대값이 1/16이라 함수 클래스는 같지만 gradient condi
 나빴다. Test access 전 unit-peak로 재척도화했으며 rank·data·loss weight와
 gate threshold는 바꾸지 않았다.
 
+Unit-peak에서도 validation optimum이 maximum 1,400 step에 있어,
+representation을 바꾸기 전에 optimization horizon과 loss scale을 분리한다.
+N1a는 rank와 parameter count를 고정한 채 raw/scale-normalized loss와
+1,400/2,800 step만 교차한다. 이는 architecture novelty가 아니라
+checkpoint eligibility를 위한 validation-only engineering attribution이다.
+
 Joint BC density는 context-conditioned 2-component full-covariance GMM이다.
 모든 partial mode는 이 하나의 density를 analytic conditioning한다.
 ACFlow-style baseline은 같은 width의 mask-conditioned GMM을 random mask로

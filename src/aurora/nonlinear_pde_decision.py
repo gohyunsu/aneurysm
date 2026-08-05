@@ -200,6 +200,110 @@ def load_config(path: str | Path) -> dict[str, Any]:
     return payload
 
 
+def load_optimization_config(path: str | Path) -> dict[str, Any]:
+    """Load the threshold-free validation-only N1 optimization attribution."""
+
+    config_path = Path(path)
+    payload = json.loads(config_path.read_text(encoding="utf-8"))
+    _require_keys(
+        payload,
+        [
+            "schema_version",
+            "experiment_id",
+            "status",
+            "source_n1_config",
+            "source_n1_config_sha256",
+            "source_attempts",
+            "stage",
+            "has_success_threshold",
+            "may_access_or_generate_test",
+            "may_decide_n1",
+            "may_authorize_confirmatory_or_irregular_3d",
+            "may_establish_method_novelty",
+            "development_seed",
+            "data_contract",
+            "model_contract",
+            "factorial_variants",
+            "normalization",
+            "shared_training",
+            "evaluation",
+            "selection_rule",
+            "interpretation",
+        ],
+        "N1 optimization attribution",
+    )
+    if (
+        payload["schema_version"]
+        != "aurora.nonlinear_pde_n1_optimization_attribution.v1"
+        or payload["status"] != "preregistered_before_attribution_metric"
+        or payload["stage"] != "validation_only_optimization_attribution"
+    ):
+        raise NonlinearDecisionError("Unexpected N1 optimization attribution status.")
+    source_config = (config_path.parent / payload["source_n1_config"]).resolve()
+    if (
+        not source_config.is_file()
+        or _sha256(source_config) != payload["source_n1_config_sha256"]
+    ):
+        raise NonlinearDecisionError("Pinned N1 config does not match attribution.")
+    for item in payload["source_attempts"]:
+        result = (config_path.parent / item["result"]).resolve()
+        if not result.is_file() or _sha256(result) != item["sha256"]:
+            raise NonlinearDecisionError("Pinned N1 development result changed.")
+    for forbidden in (
+        "has_success_threshold",
+        "may_access_or_generate_test",
+        "may_decide_n1",
+        "may_authorize_confirmatory_or_irregular_3d",
+        "may_establish_method_novelty",
+    ):
+        if payload[forbidden] is not False:
+            raise NonlinearDecisionError("N1 attribution cannot define a gate or claim.")
+    if int(payload["development_seed"]) != 73080503:
+        raise NonlinearDecisionError("N1 attribution development seed changed.")
+    if payload["data_contract"] != {
+        "reuse_n1_train_validation_split_seeds": True,
+        "operator_train_contexts": 768,
+        "operator_validation_contexts": 192,
+        "conditions_per_context": 12,
+        "grid_points": 33,
+        "test_contexts": 0,
+    }:
+        raise NonlinearDecisionError("N1 attribution data contract changed.")
+    variants = {
+        (item["id"], item["loss_conditioning"], int(item["maximum_steps"]))
+        for item in payload["factorial_variants"]
+    }
+    expected = {
+        ("raw_mse_1400", "raw_field_and_pair_mse", 1400),
+        ("raw_mse_2800", "raw_field_and_pair_mse", 2800),
+        (
+            "scale_normalized_1400",
+            "train_only_rms_normalized_field_and_pair_mse",
+            1400,
+        ),
+        (
+            "scale_normalized_2800",
+            "train_only_rms_normalized_field_and_pair_mse",
+            2800,
+        ),
+    }
+    if variants != expected:
+        raise NonlinearDecisionError("N1 attribution factorial changed.")
+    selection = payload["selection_rule"]
+    if (
+        selection["select_lowest_validation_objective"] is not True
+        or selection["within_one_percent_choose_fewer_steps"] is not True
+        or selection["selection_is_architecture_development_not_gate_evidence"]
+        is not True
+        or selection[
+            "selected_variant_requires_new_prospective_n1_version_before_confirmatory_test"
+        ]
+        is not True
+    ):
+        raise NonlinearDecisionError("N1 attribution selection rule changed.")
+    return payload
+
+
 def _imports() -> tuple[Any, Any]:
     try:
         import numpy as np
@@ -796,6 +900,568 @@ def sample_gmm(
     return selected_mean + torch.einsum(
         "bsij,bsj->bsi", selected_cholesky, standard
     )
+
+
+def _mask_tensor(
+    positions: Sequence[int], batch: int, device: Any, dtype: Any
+) -> Any:
+    _, torch = _imports()
+    mask = torch.zeros(batch, 8, device=device, dtype=dtype)
+    if positions:
+        mask[:, list(positions)] = 1.0
+    return mask
+
+
+def conditional_joint_nll(
+    weights: Any,
+    means: Any,
+    covariances: Any,
+    boundary: Any,
+    observed_positions: Sequence[int],
+) -> Any:
+    """Evaluate missing-component NLL after analytic joint conditioning."""
+
+    from aurora.nonlinear_pde import condition_gaussian_mixture
+
+    observed = list(observed_positions)
+    missing = [index for index in range(8) if index not in observed]
+    if not missing:
+        return boundary.new_zeros(boundary.shape[0])
+    if observed:
+        conditioned = condition_gaussian_mixture(
+            weights,
+            means,
+            covariances,
+            observed,
+            boundary[:, observed],
+        )
+        conditional_weights, conditional_mean, conditional_covariance, remaining = (
+            conditioned
+        )
+        if remaining != missing:
+            raise NonlinearDecisionError("Conditional component order changed.")
+    else:
+        conditional_weights = weights
+        conditional_mean = means
+        conditional_covariance = covariances
+    return gmm_nll(
+        conditional_weights,
+        conditional_mean,
+        conditional_covariance,
+        boundary[:, missing],
+    )
+
+
+def mask_density_nll(
+    model: Any,
+    context: Any,
+    boundary: Any,
+    observed_positions: Sequence[int],
+    *,
+    independent_name: str | None = None,
+) -> Any:
+    """Evaluate a mask-conditional model on exactly the unobserved components."""
+
+    observed = list(observed_positions)
+    missing = [index for index in range(8) if index not in observed]
+    if not missing:
+        return boundary.new_zeros(boundary.shape[0])
+    mask = _mask_tensor(
+        observed, boundary.shape[0], boundary.device, boundary.dtype
+    )
+    if independent_name is None:
+        weights, means, covariances = model(context, boundary, mask)
+    else:
+        weights, means, covariances = model(
+            independent_name, context, boundary, mask
+        )
+    weights, means, covariances = marginal_gmm(
+        weights, means, covariances, missing
+    )
+    return gmm_nll(weights, means, covariances, boundary[:, missing])
+
+
+def autoregressive_completion_nll(
+    model: Any,
+    context: Any,
+    boundary: Any,
+    observed_positions: Sequence[int],
+) -> Any:
+    """Teacher-forced boundary-first completion likelihood."""
+
+    _, torch = _imports()
+    observed = set(int(index) for index in observed_positions)
+    current = boundary.clone()
+    mask = _mask_tensor(
+        sorted(observed), boundary.shape[0], boundary.device, boundary.dtype
+    )
+    losses = []
+    for component in range(8):
+        if component in observed:
+            continue
+        mean, scale = model.step(context, current, mask, component)
+        target = boundary[:, component]
+        losses.append(
+            0.5 * ((target - mean) / scale).square()
+            + torch.log(scale)
+            + 0.5 * math.log(2.0 * math.pi)
+        )
+        next_mask = mask.clone()
+        next_mask[:, component] = 1.0
+        mask = next_mask
+    if not losses:
+        return boundary.new_zeros(boundary.shape[0])
+    return torch.stack(losses, dim=-1).sum(dim=-1)
+
+
+def _random_nonfull_mask(seed: int) -> list[int]:
+    """Return a deterministic arbitrary mask while retaining one missing value."""
+
+    np, _ = _imports()
+    generator = np.random.default_rng(seed)
+    selected = generator.random(8) < 0.5
+    if bool(selected.all()):
+        selected[int(seed % 8)] = False
+    return [int(index) for index in np.flatnonzero(selected)]
+
+
+def train_completion_development(
+    *,
+    config: Mapping[str, Any],
+    density_train: Mapping[str, Any],
+    density_validation: Mapping[str, Any],
+    seed: int,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Train joint and strong completion models using validation data only."""
+
+    _, torch = _imports()
+    torch.manual_seed(seed)
+    device = density_train["context"].device
+    joint = build_joint_density(config, device)
+    acflow = build_mask_conditional_density(config, device)
+    independent = build_independent_mask_density(config, device)
+    lano = build_lano_completion(config, device)
+    models = {
+        "aurora_joint": joint,
+        "acflow_adapted": acflow,
+        "independent_mask_heads": independent,
+        "lano_adapted": lano,
+    }
+    contract = config["training"]["density"]
+    optimizers = {
+        name: torch.optim.AdamW(
+            model.parameters(),
+            lr=float(contract["learning_rate"]),
+            weight_decay=float(contract["weight_decay"]),
+        )
+        for name, model in models.items()
+    }
+    generators = {
+        name: torch.Generator(device=device).manual_seed(
+            seed + 1000 + 97 * index
+        )
+        for index, name in enumerate(models)
+    }
+    train_context = density_train["context"][:, None].expand(
+        -1, density_train["boundary"].shape[1], -1
+    ).reshape(-1, 5)
+    train_boundary = density_train["boundary"].reshape(-1, 8)
+    validation_context = density_validation["context"][:, None].expand(
+        -1, density_validation["boundary"].shape[1], -1
+    ).reshape(-1, 5)
+    validation_boundary = density_validation["boundary"].reshape(-1, 8)
+    registered = config["observation_protocol"]["registered_masks"]
+    validation_masks = [
+        ("missing", registered["missing"]),
+        ("sparse_2", registered["sparse_2"]),
+        ("partial_4", registered["partial_4"]),
+    ]
+    best = {name: math.inf for name in models}
+    best_epoch = {name: 0 for name in models}
+    best_state = {name: _clone_state(model) for name, model in models.items()}
+    waits = {name: 0 for name in models}
+    traces = {name: [] for name in models}
+    active = set(models)
+    batch_size = int(contract["batch_size"])
+    interval = int(contract["validation_interval"])
+    patience = int(contract["early_stopping_patience"])
+    maximum_epochs = int(contract["maximum_epochs"])
+
+    for epoch in range(1, maximum_epochs + 1):
+        arbitrary_mask = _random_nonfull_mask(seed + epoch)
+        registered_name, registered_mask = validation_masks[
+            (epoch - 1) % len(validation_masks)
+        ]
+        training_masks = {
+            "aurora_joint": arbitrary_mask,
+            "acflow_adapted": arbitrary_mask,
+            "independent_mask_heads": registered_mask,
+            "lano_adapted": arbitrary_mask,
+        }
+        for name in tuple(active):
+            index = torch.randint(
+                0,
+                train_context.shape[0],
+                (batch_size,),
+                generator=generators[name],
+                device=device,
+            )
+            context = train_context[index]
+            boundary = train_boundary[index]
+            mask_positions = training_masks[name]
+            if name == "aurora_joint":
+                weights, means, covariances = joint(context)
+                loss = conditional_joint_nll(
+                    weights, means, covariances, boundary, mask_positions
+                ).mean()
+            elif name == "acflow_adapted":
+                loss = mask_density_nll(
+                    acflow, context, boundary, mask_positions
+                ).mean()
+            elif name == "independent_mask_heads":
+                loss = mask_density_nll(
+                    independent,
+                    context,
+                    boundary,
+                    mask_positions,
+                    independent_name=registered_name,
+                ).mean()
+            else:
+                loss = autoregressive_completion_nll(
+                    lano, context, boundary, mask_positions
+                ).mean()
+            optimizers[name].zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(models[name].parameters(), 5.0)
+            optimizers[name].step()
+        if epoch % interval != 0:
+            continue
+        for model in models.values():
+            model.eval()
+        with torch.no_grad():
+            for name in tuple(active):
+                mask_losses = []
+                for mask_name, mask_positions in validation_masks:
+                    chunks = []
+                    for start in range(0, validation_context.shape[0], 4096):
+                        end = min(start + 4096, validation_context.shape[0])
+                        context = validation_context[start:end]
+                        boundary = validation_boundary[start:end]
+                        if name == "aurora_joint":
+                            weights, means, covariances = joint(context)
+                            value = conditional_joint_nll(
+                                weights,
+                                means,
+                                covariances,
+                                boundary,
+                                mask_positions,
+                            )
+                        elif name == "acflow_adapted":
+                            value = mask_density_nll(
+                                acflow, context, boundary, mask_positions
+                            )
+                        elif name == "independent_mask_heads":
+                            value = mask_density_nll(
+                                independent,
+                                context,
+                                boundary,
+                                mask_positions,
+                                independent_name=mask_name,
+                            )
+                        else:
+                            value = autoregressive_completion_nll(
+                                lano, context, boundary, mask_positions
+                            )
+                        chunks.append(value)
+                    mask_losses.append(torch.cat(chunks).mean())
+                validation_loss = float(torch.stack(mask_losses).mean().item())
+                traces[name].append(
+                    {
+                        "epoch": epoch,
+                        "validation_conditional_nll": validation_loss,
+                    }
+                )
+                if validation_loss < best[name] - 1e-5:
+                    best[name] = validation_loss
+                    best_epoch[name] = epoch
+                    best_state[name] = _clone_state(models[name])
+                    waits[name] = 0
+                else:
+                    waits[name] += 1
+                    if waits[name] >= patience:
+                        active.remove(name)
+        for model in models.values():
+            model.train()
+        if not active:
+            break
+
+    for name, model in models.items():
+        model.load_state_dict(best_state[name])
+        model.eval()
+    history = {
+        "stage": "validation_only_completion_development",
+        "test_generated_or_accessed": False,
+        "seed": seed,
+        "models": {
+            name: {
+                "best_epoch": best_epoch[name],
+                "best_validation_conditional_nll": best[name],
+                "epochs_executed": traces[name][-1]["epoch"],
+                "trace": traces[name],
+                "parameters": sum(
+                    parameter.numel() for parameter in models[name].parameters()
+                ),
+            }
+            for name in models
+        },
+        "claim_status": {
+            "n1_gate_decided": False,
+            "baseline_superiority_established": False,
+            "method_novelty_established": False,
+            "irregular_3d_authorized": False,
+        },
+    }
+    return models, history
+
+
+def train_operator_optimization_attribution(
+    *,
+    n1_config: Mapping[str, Any],
+    attribution_config: Mapping[str, Any],
+    operator_train: Mapping[str, Any],
+    operator_validation: Mapping[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Run the registered 2x2 validation-only operator optimization attribution."""
+
+    _, torch = _imports()
+    seed = int(attribution_config["development_seed"])
+    train_context, train_boundary, train_field = _flatten_solution_split(
+        operator_train
+    )
+    validation_context, validation_boundary, validation_field = (
+        _flatten_solution_split(operator_validation)
+    )
+    field_rms_squared = train_field.square().mean(dim=(-2, -1))
+    field_floor = torch.quantile(field_rms_squared, 0.10).clamp_min(1e-8)
+    adjacent_delta = (
+        operator_train["field"][:, 1:] - operator_train["field"][:, :-1]
+    )
+    pair_rms_squared = adjacent_delta.square().mean(dim=(-2, -1))
+    pair_floor = torch.quantile(pair_rms_squared, 0.10).clamp_min(1e-8)
+    shared = attribution_config["shared_training"]
+    batch_size = int(shared["batch_size"])
+    interval = int(shared["validation_interval"])
+    patience = int(shared["early_stopping_patience"])
+    pair_weight = float(
+        attribution_config["model_contract"]["paired_response_weight"]
+    )
+    train_conditions = operator_train["boundary"].shape[1]
+    family_batch = min(256, operator_train["context"].shape[0])
+    operators = {}
+    results = {}
+
+    for variant_index, variant in enumerate(
+        attribution_config["factorial_variants"]
+    ):
+        variant_id = variant["id"]
+        normalized = (
+            variant["loss_conditioning"]
+            == "train_only_rms_normalized_field_and_pair_mse"
+        )
+        torch.manual_seed(seed)
+        operator = build_solution_operator(n1_config, train_context.device)
+        optimizer = torch.optim.AdamW(
+            operator.parameters(),
+            lr=float(shared["learning_rate"]),
+            weight_decay=float(shared["weight_decay"]),
+        )
+        generator = torch.Generator(device=train_context.device).manual_seed(
+            seed + 10000
+        )
+        best_value = math.inf
+        best_epoch = 0
+        best_state = _clone_state(operator)
+        wait = 0
+        trace = []
+        maximum_steps = int(variant["maximum_steps"])
+        for step in range(1, maximum_steps + 1):
+            index = torch.randint(
+                0,
+                train_context.shape[0],
+                (batch_size,),
+                generator=generator,
+                device=train_context.device,
+            )
+            prediction = operator(train_context[index], train_boundary[index])
+            field_error = (prediction - train_field[index]).square().mean(
+                dim=(-2, -1)
+            )
+            if normalized:
+                denominator = field_rms_squared[index].clamp_min(field_floor)
+                field_loss = (field_error / denominator).mean()
+            else:
+                field_loss = field_error.mean()
+
+            family_index = torch.randint(
+                0,
+                operator_train["context"].shape[0],
+                (family_batch,),
+                generator=generator,
+                device=train_context.device,
+            )
+            first = (step - 1) % train_conditions
+            second = step % train_conditions
+            pair_context = operator_train["context"][family_index]
+            first_boundary = operator_train["boundary"][family_index, first]
+            second_boundary = operator_train["boundary"][family_index, second]
+            predicted_delta = operator(pair_context, second_boundary) - operator(
+                pair_context, first_boundary
+            )
+            true_delta = (
+                operator_train["field"][family_index, second]
+                - operator_train["field"][family_index, first]
+            )
+            pair_error = (predicted_delta - true_delta).square().mean(
+                dim=(-2, -1)
+            )
+            if normalized:
+                denominator = true_delta.square().mean(
+                    dim=(-2, -1)
+                ).clamp_min(pair_floor)
+                pair_loss = (pair_error / denominator).mean()
+            else:
+                pair_loss = pair_error.mean()
+            loss = field_loss + pair_weight * pair_loss
+            optimizer.zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(operator.parameters(), 5.0)
+            optimizer.step()
+
+            if step % interval != 0:
+                continue
+            operator.eval()
+            with torch.no_grad():
+                relative = []
+                for start in range(0, validation_context.shape[0], 1024):
+                    end = min(start + 1024, validation_context.shape[0])
+                    relative.append(
+                        _relative_l2(
+                            operator(
+                                validation_context[start:end],
+                                validation_boundary[start:end],
+                            ),
+                            validation_field[start:end],
+                        )
+                    )
+                validation_relative = torch.cat(relative).mean()
+                validation_pair_prediction = operator(
+                    operator_validation["context"],
+                    operator_validation["boundary"][:, 1],
+                ) - operator(
+                    operator_validation["context"],
+                    operator_validation["boundary"][:, 0],
+                )
+                validation_pair_target = (
+                    operator_validation["field"][:, 1]
+                    - operator_validation["field"][:, 0]
+                )
+                validation_pair_relative = _relative_l2(
+                    validation_pair_prediction, validation_pair_target
+                ).mean()
+                validation_objective = float(
+                    (
+                        validation_relative
+                        + pair_weight * validation_pair_relative
+                    ).item()
+                )
+            operator.train()
+            trace.append(
+                {
+                    "step": step,
+                    "train_field_loss": float(field_loss.detach().item()),
+                    "train_pair_loss": float(pair_loss.detach().item()),
+                    "validation_full_bc_relative_l2": float(
+                        validation_relative.item()
+                    ),
+                    "validation_paired_response_relative_l2": float(
+                        validation_pair_relative.item()
+                    ),
+                    "validation_selection_objective": validation_objective,
+                }
+            )
+            if validation_objective < best_value - 1e-5:
+                best_value = validation_objective
+                best_epoch = step
+                best_state = _clone_state(operator)
+                wait = 0
+            else:
+                wait += 1
+            if wait >= patience:
+                break
+        operator.load_state_dict(best_state)
+        operator.eval()
+        operators[variant_id] = operator
+        best_record = min(
+            trace, key=lambda item: item["validation_selection_objective"]
+        )
+        results[variant_id] = {
+            "loss_conditioning": variant["loss_conditioning"],
+            "maximum_steps": maximum_steps,
+            "best_step": best_epoch,
+            "steps_executed": trace[-1]["step"],
+            "best_validation_objective": best_value,
+            "best_record": best_record,
+            "last_record": trace[-1],
+            "trace": trace,
+            "parameters": sum(
+                parameter.numel() for parameter in operator.parameters()
+            ),
+        }
+
+    minimum = min(
+        item["best_validation_objective"] for item in results.values()
+    )
+    within_tolerance = [
+        variant
+        for variant in attribution_config["factorial_variants"]
+        if results[variant["id"]]["best_validation_objective"]
+        <= 1.01 * minimum
+    ]
+    selected_contract = min(
+        within_tolerance,
+        key=lambda item: (
+            int(item["maximum_steps"]),
+            results[item["id"]]["best_validation_objective"],
+        ),
+    )
+    history = {
+        "stage": "validation_only_optimization_attribution",
+        "test_generated_or_accessed": False,
+        "development_seed": seed,
+        "training_scale": {
+            "field_rms_squared_tenth_percentile": float(field_floor.item()),
+            "pair_rms_squared_tenth_percentile": float(pair_floor.item()),
+            "source": "operator_training_split_only",
+        },
+        "variants": results,
+        "selection": {
+            "selected_variant": selected_contract["id"],
+            "selected_maximum_steps": int(selected_contract["maximum_steps"]),
+            "selected_loss_conditioning": selected_contract[
+                "loss_conditioning"
+            ],
+            "has_gate_decision": False,
+            "requires_new_prospective_n1_version": True,
+        },
+        "claim_status": {
+            "n1_gate_decided": False,
+            "baseline_superiority_established": False,
+            "method_novelty_established": False,
+            "confirmatory_test_authorized": False,
+            "irregular_3d_authorized": False,
+        },
+    }
+    return operators, history
 
 
 def _coordinate_features(grid_points: int, device: Any) -> tuple[Any, Any]:

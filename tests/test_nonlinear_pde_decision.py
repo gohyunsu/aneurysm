@@ -15,11 +15,15 @@ from aurora.nonlinear_pde_decision import (
     build_solution_operator,
     gmm_nll,
     load_config,
+    load_optimization_config,
 )
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "nonlinear_pde_n1.json"
+OPTIMIZATION_CONFIG = (
+    ROOT / "configs" / "nonlinear_pde_n1_optimization_attribution.json"
+)
 
 
 class NonlinearDecisionContractTests(unittest.TestCase):
@@ -40,6 +44,12 @@ class NonlinearDecisionContractTests(unittest.TestCase):
     def test_reference_contract_is_valid(self) -> None:
         self.assertEqual(len(self.config["model_seeds"]["confirmatory"]), 5)
         self.assertEqual(len(self.config["mandatory_models"]), 9)
+
+    def test_optimization_attribution_is_non_gating(self) -> None:
+        attribution = load_optimization_config(OPTIMIZATION_CONFIG)
+        self.assertFalse(attribution["has_success_threshold"])
+        self.assertFalse(attribution["may_access_or_generate_test"])
+        self.assertEqual(len(attribution["factorial_variants"]), 4)
 
     def test_test_access_cannot_move_before_checkpoint_freeze(self) -> None:
         candidate = copy.deepcopy(self.config)

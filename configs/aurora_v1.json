@@ -522,13 +522,25 @@
       "test_access_before_checkpoint_freeze": false,
       "irregular_3d_registration_authorized": false,
       "core_development": {
-        "status": "validation_only_attempt1_completed_insufficient",
-        "result": "results/nonlinear_pde_n1_core_development_20260805.json",
-        "source_commit": "60755304f29700eff7b017393560ee24c33682a8",
+        "status": "validation_only_two_attempts_completed_insufficient",
+        "results": [
+          "results/nonlinear_pde_n1_core_development_20260805.json",
+          "results/nonlinear_pde_n1_core_development_unit_peak_20260805.json"
+        ],
+        "source_commits": [
+          "60755304f29700eff7b017393560ee24c33682a8",
+          "54046a3001150044bf7a1d2bf8fc05052893d845"
+        ],
         "test_generated_or_accessed": false,
         "n1_gate_decided": false,
         "confirmatory_test_authorized": false,
-        "next_step": "unit_peak_envelope_second_validation_only_development_seed"
+        "next_step": "threshold_free_validation_only_optimization_attribution"
+      },
+      "optimization_attribution": {
+        "status": "preregistered_before_attribution_metric",
+        "config": "configs/nonlinear_pde_n1_optimization_attribution.json",
+        "has_success_threshold": false,
+        "may_access_test_or_decide_n1": false
       }
     }
   ],

@@ -442,6 +442,24 @@ checkpoint 이전의 insufficient development다. Unit-peak interior envelope로
 optimization conditioning만 교정한 뒤 남은 development seed에서 재검사한다.
 결과 파일은 `results/nonlinear_pde_n1_core_development_20260805.json`이다.
 
+Unit-peak development seed는 full-BC/paired-response L2를
+0.05771/0.05729까지 낮췄지만 0.05를 넘었고 best step은 다시 maximum
+1,400이었다. 공개 aggregate는
+`results/nonlinear_pde_n1_core_development_unit_peak_20260805.json`이다.
+두 seed 모두 insufficient로 유지한다.
+
+N1a optimization attribution은 test-free 2×2 개발 실험이다.
+
+| factor | levels |
+|---|---|
+| train loss conditioning | raw MSE · train-only RMS-normalized MSE |
+| maximum step | 1,400 · 2,800 |
+| fixed | rank 96, unit-peak lifting, data/split, pair weight 0.5 |
+
+N1a에는 threshold가 없다. Validation objective 최저 variant를 선택하고
+1% 이내면 짧은 horizon을 고르지만 N1을 pass시키지 않는다. 선택값은 별도
+prospective N1 version에 고정한 뒤에만 confirmatory test 후보가 된다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.

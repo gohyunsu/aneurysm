@@ -234,7 +234,10 @@ LANO/NOP/ACFlow/ACO/NOTS-style 전체 비교가 구현되기 전에는 test나 3
 첫 development seed에서 density validation NLL은 -4.290이었지만 operator
 full-BC/paired-response relative L2는 0.1739/0.1862로 자격이 부족했습니다.
 Test는 만들지 않았습니다. Boundary-zero envelope의 unit-peak 재척도화만
-두 번째 development seed에서 검증하며, 0.05 gate를 낮추지 않습니다.
+두 번째 development seed에서 full-BC/paired-response L2를
+0.05771/0.05729까지 낮췄지만 0.05 gate를 넘었습니다. 통과로 바꾸지
+않습니다. 다음 N1a는 새 development seed에서 raw/scale-normalized
+loss×1,400/2,800 step만 validation-only로 비교하며 test 권한이 없습니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

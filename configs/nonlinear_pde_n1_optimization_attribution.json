@@ -1,0 +1,88 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1_optimization_attribution.v1",
+  "experiment_id": "nonlinear_n1_validation_only_optimization_attribution_v1",
+  "status": "preregistered_before_attribution_metric",
+  "source_n1_config": "nonlinear_pde_n1.json",
+  "source_n1_config_sha256": "757b742587b2d52860648a42e6c58721716c6675366f5b3b6329d6a695eb0891",
+  "source_attempts": [
+    {
+      "result": "../results/nonlinear_pde_n1_core_development_20260805.json",
+      "sha256": "2370252eff15aea55aa585138883a6036acf87e8febb515c59a21e4539373c3b",
+      "finding": "unscaled_envelope_insufficient"
+    },
+    {
+      "result": "../results/nonlinear_pde_n1_core_development_unit_peak_20260805.json",
+      "sha256": "9720b44448cf87a40cd7494b3685eef312482e3bae36fab6c1bac5741496d984",
+      "finding": "unit_peak_materially_improves_but_remains_insufficient"
+    }
+  ],
+  "stage": "validation_only_optimization_attribution",
+  "has_success_threshold": false,
+  "may_access_or_generate_test": false,
+  "may_decide_n1": false,
+  "may_authorize_confirmatory_or_irregular_3d": false,
+  "may_establish_method_novelty": false,
+  "development_seed": 73080503,
+  "data_contract": {
+    "reuse_n1_train_validation_split_seeds": true,
+    "operator_train_contexts": 768,
+    "operator_validation_contexts": 192,
+    "conditions_per_context": 12,
+    "grid_points": 33,
+    "test_contexts": 0
+  },
+  "model_contract": {
+    "family": "unit_peak_dirichlet_lifted_low_rank_coordinate_operator",
+    "rank": 96,
+    "parameters_unchanged_across_variants": true,
+    "paired_response_weight": 0.5
+  },
+  "factorial_variants": [
+    {
+      "id": "raw_mse_1400",
+      "loss_conditioning": "raw_field_and_pair_mse",
+      "maximum_steps": 1400
+    },
+    {
+      "id": "raw_mse_2800",
+      "loss_conditioning": "raw_field_and_pair_mse",
+      "maximum_steps": 2800
+    },
+    {
+      "id": "scale_normalized_1400",
+      "loss_conditioning": "train_only_rms_normalized_field_and_pair_mse",
+      "maximum_steps": 1400
+    },
+    {
+      "id": "scale_normalized_2800",
+      "loss_conditioning": "train_only_rms_normalized_field_and_pair_mse",
+      "maximum_steps": 2800
+    }
+  ],
+  "normalization": {
+    "statistics_source": "operator_training_split_only",
+    "field_denominator": "per_case_rms_squared_clamped_at_training_tenth_percentile",
+    "pair_denominator": "per_pair_rms_squared_clamped_at_training_tenth_percentile",
+    "validation_and_test_targets_never_define_scale": true
+  },
+  "shared_training": {
+    "batch_size": 2048,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 20,
+    "early_stopping_patience": 15
+  },
+  "evaluation": {
+    "validation_full_bc_relative_l2": true,
+    "validation_paired_response_relative_l2": true,
+    "selection_objective": "full_bc_relative_l2_plus_0.5_times_paired_response_relative_l2",
+    "report_best_and_last_step": true
+  },
+  "selection_rule": {
+    "select_lowest_validation_objective": true,
+    "within_one_percent_choose_fewer_steps": true,
+    "selection_is_architecture_development_not_gate_evidence": true,
+    "selected_variant_requires_new_prospective_n1_version_before_confirmatory_test": true
+  },
+  "interpretation": "N1a is a threshold-free validation-only 2x2 attribution of optimization horizon and train-only loss conditioning after both preregistered development seeds remained checkpoint-ineligible. It cannot pass N1, relax the 0.05 full-BC criterion, access test, establish novelty, or authorize irregular 3D. Any selected variant must be frozen in a new prospective N1 version before confirmatory test generation."
+}

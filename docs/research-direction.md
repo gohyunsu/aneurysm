@@ -387,8 +387,16 @@ mask route, decision loss, bootstrap rule과 5% minimum effect를 결과 전에
 relative L2 0.1739, paired-response relative L2 0.1862였고 best checkpoint가
 maximum 1,400 step에 있었다. Density 결과로 operator 실패를 덮지 않는다.
 Interior envelope의 최대값 0.0625가 correction과 gradient를 16배 감쇠한
-동일 함수 클래스 parameterization임을 확인해 unit-peak로만 재척도화한다.
-두 번째 development seed 전에도 test와 confirmatory path는 닫혀 있다.
+동일 함수 클래스 parameterization임을 확인해 unit-peak로만 재척도화했다.
+두 번째 development seed에서는 full-BC/paired-response L2가
+0.05771/0.05729로 크게 줄었지만 unchanged 0.05 기준을 넘었고 best
+checkpoint도 다시 maximum 1,400 step이었다. “거의 통과”로 해석하지 않는다.
+
+`configs/nonlinear_pde_n1_optimization_attribution.json`은 새 development
+seed에서 raw/scale-normalized loss × 1,400/2,800 step의 2×2 요인만
+validation-only로 비교한다. Success threshold가 없고 test/N1/3D 권한도
+없다. Lowest validation objective를 선택하되 1% 이내면 짧은 horizon을
+고른다. 선택 후에도 새 prospective N1 version을 먼저 동결해야 한다.
 
 ### G2 · paired response
 

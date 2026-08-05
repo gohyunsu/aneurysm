@@ -180,6 +180,15 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cannot decide"):
             validate_protocol(candidate)
 
+    def test_n1_optimization_attribution_cannot_define_gate(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["optimization_attribution"]["has_success_threshold"] = True
+        with self.assertRaisesRegex(ProtocolError, "non-gating"):
+            validate_protocol(candidate)
+
     def test_patient_bootstrap_is_required(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["evaluation"]["clinical_bootstrap_unit"] = "aneurysm"

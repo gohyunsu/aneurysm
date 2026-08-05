@@ -108,6 +108,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_nonlinear_pde_n0_attribution.pbs`
 - `cluster/ssu_a6gpu_nonlinear_pde_n0r.pbs`
 - `cluster/ssu_a6gpu_nonlinear_pde_n1_development.pbs`
+- `cluster/ssu_a6gpu_nonlinear_pde_n1_optimization_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_development.pbs`
 
@@ -180,6 +181,13 @@ exit 0이었다. Train/validation solver는 모두 수렴했지만 operator
 full-BC/paired-response relative L2 0.1739/0.1862로 checkpoint-ineligible다.
 Test는 생성하지 않았다. 다음 server job은 unit-peak envelope의 development
 seed 1뿐이며 confirmatory seed/job은 계속 금지한다.
+
+Exact `54046a3`의 114/114 contract와 development seed 1은 exit 0이었다.
+Unit-peak operator는 full-BC/paired-response L2 0.05771/0.05729로
+개선됐지만 0.05를 넘었다. 다음 PBS job은
+`cluster/ssu_a6gpu_nonlinear_pde_n1_optimization_attribution.pbs`의
+threshold-free N1a뿐이다. 네 variant는 같은 새 development seed와
+train/validation split을 쓰며 test contexts를 0으로 강제한다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

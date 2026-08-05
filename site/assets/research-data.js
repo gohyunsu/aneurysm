@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does paired response improve?",
-      copy: "N0 실패는 보존하고 N0r는 9/9 numerical check를 통과했다. 첫 N1 validation-only core에서 density NLL은 -4.290이었지만 operator full-BC/paired-response L2가 0.1739/0.1862로 insufficient였다. Test를 열지 않고 unit-peak envelope로 optimization만 재검사한다.",
-      state: "N1 core attempt 1 insufficient · test/3D blocked",
+      copy: "N0 실패는 보존하고 N0r는 9/9 numerical check를 통과했다. Unit-peak N1 core는 full-BC/paired-response L2를 0.05771/0.05729까지 낮췄지만 0.05를 넘었다. Test를 열지 않고 N1a에서 loss conditioning×horizon만 validation-only로 분리한다.",
+      state: "N1 core still insufficient · N1a preregistered · test/3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "experiment",
+      title: "Unit-peak core improves sharply but does not pass",
+      copy: "Exact 54046a3 development seed는 full-BC/paired-response L2를 0.05771/0.05729까지 낮췄지만 unchanged 0.05를 넘었다. N1a는 raw/scale-normalized loss×1,400/2,800 step만 새 seed의 validation에서 비교하며 success threshold와 test/N1/3D 권한이 없다.",
+      files: ["results/nonlinear_pde_n1_core_development_unit_peak_20260805.json", "configs/nonlinear_pde_n1_optimization_attribution.json", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.05",
       category: "result",

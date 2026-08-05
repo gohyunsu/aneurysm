@@ -49,6 +49,9 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 - `nonlinear_pde_n1_core_development_20260805.json`: test access 없이
   joint density와 lifted operator만 점검했고 operator 자격이 부족해
   confirmatory path를 열지 않은 validation-only development
+- `nonlinear_pde_n1_core_development_unit_peak_20260805.json`: 동일 함수
+  클래스의 unit-peak envelope로 크게 개선됐지만 0.05 기준을 넘어서
+  insufficient로 유지한 두 번째 validation-only development
 
 G1b는 G1을 대체하거나 재개방하지 않는다.
 G1r도 coverage·operator·analytic nesting·iid-floor 보정 projective 항은
@@ -99,6 +102,11 @@ paired-response relative L2는 0.1739/0.1862로 insufficient였다. Test
 split과 seed는 접근하지 않았으며 N1 gate는 결정되지 않았다. Unit-peak
 envelope 재척도화는 동일 함수 클래스의 optimization diagnostic이고
 threshold 완화가 아니다.
+
+Unit-peak attempt는 full-BC/paired-response L2를 0.05771/0.05729로
+낮췄지만 unchanged 0.05를 통과하지 못했다. N1a는 이 결과 뒤 학습
+horizon과 train-only loss normalization을 분리하는 threshold-free
+validation attribution이며 gate 결과로 수록하지 않는다.
 
 현재 temporal representation 결과:
 

@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · Unit-peak N1 core remains insufficient; N1a is frozen
+
+### Validation-only result
+
+- Exact `54046a3`의 두 번째 development seed는 full-BC L2를
+  0.1739→0.05771, paired-response L2를 0.1862→0.05729로 낮췄다.
+- 개선은 크지만 unchanged 0.05 기준을 넘고 best checkpoint가 다시
+  maximum 1,400 step이므로 core checkpoint는 여전히 ineligible다.
+- Test split/seed, N1 gate, confirmatory path와 3D는 접근하지 않았다.
+
+### Preregistered attribution
+
+- `configs/nonlinear_pde_n1_optimization_attribution.json`에 새 development
+  seed, raw/scale-normalized loss와 1,400/2,800 step의 2×2 비교를 동결했다.
+- N1a는 threshold가 없고 test/N1/3D를 열 수 없다. 선택 variant도 새
+  prospective N1 version에 고정하기 전 confirmatory evidence가 아니다.
+
 ## 2026-08-05 · First N1 core development is insufficient
 
 ### Validation-only result
