@@ -3,8 +3,8 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "method_protocol",
-    "as_of": "2026-08-03",
+    "status": "failed_n1c_under_post_result_attribution",
+    "as_of": "2026-08-05",
     "clinical_use": false
   },
   "task": {
@@ -20,7 +20,7 @@
     ]
   },
   "evidence_snapshot": {
-    "as_of": "2026-08-03",
+    "as_of": "2026-08-05",
     "readiness": "not_accept_ready",
     "direct_prior_art_threats": [
       "boundary_indexed_operator_non_identifiability",
@@ -61,12 +61,21 @@
       "controlled_pde_g1_status": "frozen_gate_failed_relative_signal_positive",
       "controlled_pde_g1b_status": "completed_projective_floor_explained_density_error_remains",
       "controlled_pde_g1r_status": "completed_failed",
-      "controlled_pde_g1s_status": "completed_passed"
+      "controlled_pde_g1s_status": "completed_passed",
+      "nonlinear_pde_n1c_status": "completed_failed",
+      "irregular_3d_status": "blocked_after_failed_n1c"
     },
     "contribution_priority": {
       "primary": [
-        "C1_nested_condition_marginal_coherence",
-        "C2_paired_simulator_response_supervision",
+        "no_contribution_confirmed_after_failed_N1c"
+      ],
+      "unsupported_candidate": [
+        "C1_nested_condition_marginal_coherence_with_solution_functional_decision_benefit"
+      ],
+      "demoted_to_ablation": [
+        "C2_paired_simulator_response_supervision"
+      ],
+      "untested_secondary": [
         "C3_structural_model_uncertainty_separation"
       ],
       "engineering": [
@@ -78,9 +87,10 @@
       ],
       "candidate_not_yet_contribution": {
         "name": "solution_functional_decision_consequence_of_conditioning_inconsistency",
+        "status": "unsupported_after_failed_N1c",
         "required_theory": "bounded_loss_Bayes_regret_bound_from_route_posterior_divergence",
-        "required_algorithm": "coherent_test_time_boundary_component_acquisition",
-        "required_evidence": "N1_strong_baselines_then_irregular_3d",
+        "required_algorithm": "conditionally_accurate_coherent_joint_law_with_true_oracle_worst_route_regret",
+        "required_evidence": "threshold_free_N1c_attribution_then_fresh_prospective_reentry",
         "active_acquisition_alone_is_novel": false
       }
     }
@@ -492,7 +502,7 @@
     {
       "id": "N1",
       "name": "learned_conditioning_decision_consistency",
-      "status": "preregistered_before_n1_development_or_test_outcome",
+      "status": "completed_failed",
       "source_gate": "N0r",
       "config": "configs/nonlinear_pde_n1.json",
       "source_result": "results/nonlinear_pde_n0r_20260805.json",
@@ -576,19 +586,41 @@
       },
       "outer_test_execution": {
         "id": "N1c",
-        "status": "preregistered_after_checkpoint_manifest_before_outer_test_generation",
+        "status": "completed_failed",
         "config": "configs/nonlinear_pde_n1c.json",
         "config_sha256": "6e14a9ed1682771fe3936e753d16d30317145752fb17f5e091f3db0b8e63ba8e",
         "checkpoint_manifest_commit": "c66f651a9cd13c7f58450f21c1d67ba11d78de8e",
         "checkpoint_manifest_sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+        "source_commit": "62605a0a2060613dd739217474a90ddc6869c10c",
+        "result": "results/nonlinear_pde_n1c_20260805.json",
+        "source_metrics_sha256": "a3759dcf7d47aa3f636e8cab695ee96d285d60c7236e4899bb2af0737ebc0368",
         "route_and_acquisition_context_selector": "indices_0_to_188_step_4_condition_0",
         "true_conditional_respects_latent_radius_truncation": true,
-        "route_common_random_numbers": true,
+        "route_common_random_numbers_registered": true,
+        "route_common_random_numbers_valid_for_primary_action_metric": true,
+        "route_candidate_voi_common_random_numbers_implemented": false,
+        "invalid_secondary_metrics": [
+          "route_value_of_information_disagreement",
+          "route_selected_next_component_disagreement"
+        ],
         "acquisition_outer_inner_samples": [8, 32],
         "context_family_bootstrap_replicates": 2000,
         "registered_shifts_deferred_to_fixed_N1d_secondary_job": true,
-        "test_generated_or_accessed": false,
-        "n1_gate_decided": false,
+        "test_generated_or_accessed": true,
+        "n1_gate_decided": true,
+        "n1_passed": false,
+        "passed_checks": [
+          "full_bc_operator",
+          "functional_coverage",
+          "route_bayes_action"
+        ],
+        "failed_checks": [
+          "paired_response",
+          "field_distribution",
+          "acquisition_regret"
+        ],
+        "n1d_shift_executed": false,
+        "post_result_attribution_is_non_gating": true,
         "irregular_3d_registration_authorized": false
       }
     }

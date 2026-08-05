@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-05 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1b 5-seed checkpoint freeze complete · test/3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c outer test failed · 3D blocked
 
 ## 1. 현재 판정
 
@@ -17,8 +17,11 @@
   발표됐다.
 - Fourier one-shot decoding은 architecture choice이지 새 원리가 아니다.
 
-따라서 현재는 **아이디어 후보는 유망하지만 accept-ready가 아니다**. GNN,
-attention, uncertainty, physics loss를 조합한 것만으로 제출하지 않는다.
+따라서 현재는 **accept-ready가 아니다**. N1c가 구조적 route consistency는
+보였지만 strong baseline보다 field distribution·acquisition regret를
+개선하지 못했고 paired objective도 DeltaPhi-style control보다 약했다.
+GNN, attention, uncertainty, physics loss를 조합한 것만으로 제출하지
+않는다.
 
 ## 2. 새 한 문장 연구 질문
 
@@ -66,7 +69,7 @@ operator의 pushforward다.
 핵심 검증은 별도 head의 숫자가 비슷하다는 것이 아니라, nested mask에서
 tower property와 oracle conditional moments/coverage가 맞는지다.
 
-### C2. Paired simulator-response supervision
+### C2. Paired simulator-response supervision · ablation only
 
 같은 geometry에서 BC만 바꾼 두 simulation을 pair로 사용한다.
 
@@ -76,8 +79,11 @@ tower property와 oracle conditional moments/coverage가 맞는지다.
 \]
 
 이는 geometry variation이 큰 absolute field loss 안에서 BC sensitivity가
-묻히는 것을 막는다. 논문은 이를 causal effect가 아닌 simulator
-intervention response라고 한정한다.
+묻히는지를 검사한다. N1c에서 pair-zero보다 pooled context 기준으로는
+좋았지만 seed 방향은 3/5였고 DeltaPhi-style residual의 seed-mean
+paired-response L2 0.01221보다 나쁜 0.01331이었다. 따라서 독립
+contribution이 아니라 ablation이며, 논문은 이를 causal effect가 아닌
+simulator intervention response라고 한정한다.
 
 ### C3. Structural/model uncertainty separation
 
@@ -427,20 +433,37 @@ AURORA shared operator의 validation full-BC/paired-response L2 mean은
 random-pair보다 3/5, DeltaPhi-style paired metric보다 2/5 seed에서만
 좋았고, combined objective는 DeltaPhi-style보다 0/5 seed에서 좋았다.
 Checkpoint freeze의 목적은 실행 가능한 비교군을 test 전에 고정하는
-것이지 validation superiority를 선언하는 것이 아니다. 따라서 N1은
-미결정이며 outer-test context selector, evaluation RNG, route estimand와
-bootstrap은 `configs/nonlinear_pde_n1c.json`에 고정했다. 192 test
-context 중 acquisition과 route의 48개는 결과와 무관한
-`0,4,…,188`, anchor condition은 0이다. True acquisition ceiling은
-untruncated GMM으로 대체하지 않고 global latent-radius cutoff에 따른
-component acceptance와 conditional residual rejection을 계산한다.
-Posterior energy, coverage, paired response, direct/sequential functional
-Wasserstein·Bayes action·VoI, one-component regret를 동일 test에서
-평가한다. Strongest comparator는 test로 재학습·재선택하지 않으며
-미리 동결된 모든 non-oracle 중 metric별 최저 test value를 쓰는 보수적
-comparison이다. Exact N1c source의 public commit과 full contract 전에는
-test split을 생성하지 않는다. Shift diagnostics는 같은 checkpoint,
-threshold, test seed를 유지하는 별도 N1d secondary stage다.
+것이지 validation superiority를 선언하는 것이 아니다. Outer-test
+selector, evaluation RNG, route estimand와 bootstrap은
+`configs/nonlinear_pde_n1c.json`에 고정했고 exact source `62605a0`의
+125/125 A6000 contract 뒤 처음 test를 열었다. PBS outer test는 5 seed를
+모두 정상 완료했지만 N1은 failed다.
+
+| N1c check | observed | decision |
+|---|---:|---|
+| worst full-BC operator L2 | 0.01404 | pass |
+| worst functional coverage error | 0.03281 | pass |
+| maximum AURORA route-action disagreement | 0 | pass |
+| pair loss better than pair-zero | 3/5 seeds | fail |
+| missing energy vs independent heads | −0.65%, 0/5 | fail |
+| sparse-2 energy vs independent heads | −1.09%, 0/5 | fail |
+| missing acquisition regret vs ACFlow | 2/5 seeds | fail |
+| sparse-2 acquisition | both learned policies equal oracle | strict superiority fail |
+
+독립 heads와 ACFlow의 direct/sequential action disagreement seed mean은
+각각 0.1174/0.1762였으나, sequential-minus-direct true-risk 차이는
+0.00065/0.00121로 작고 seed별 부호가 섞였다. 따라서 route inconsistency의
+존재는 보였어도 positive decision harm는 입증하지 못했다.
+
+Route candidate VoI 구현은 route별 seed offset을 사용해 등록된 common
+random numbers 계약을 위반했다. 해당 VoI/next-component 보조 지표만
+invalid로 제외하며, N1 fail을 결정한 distribution, pair, acquisition과
+valid route-action 지표는 영향을 받지 않는다. N1d shift와 irregular 3D는
+실행하지 않는다. 다음은 threshold-free post-result attribution이다.
+Joint/independent conditional NLL, true-law density와 oracle-operator floor,
+acquisition Monte Carlo scaling, 각 route의 true-oracle excess risk와
+worst-route regret를 분해하되 N1c를 relabel하지 않는다. 공개 aggregate는
+`results/nonlinear_pde_n1c_20260805.json`이다.
 
 ### G2 · paired response
 
@@ -532,14 +555,17 @@ method가 strong baseline을 일관되게 개선해야 한다.
 **AURORA: Coherent Neural Operators under Partial and Missing Boundary
 Conditions**
 
-논문의 순서는 application이 아니라 method claim에 맞춘다.
+이 제목과 아래 구성은 **후보**이며 N1c 결과만으로 제출하지 않는다.
+Paired supervision과 uncertainty decomposition은 양수 증거 전까지
+contribution 목록에서 제외한다. 다음 fresh test가 positive일 때의 순서는
+application이 아니라 method claim에 맞춘다.
 
 1. partial-condition operator family의 모순 문제
-2. nested condition–marginal construction
-3. paired simulator-response objective
-4. uncertainty decomposition
-5. coherence와 OOD correctness를 구분하는 식별성 경계
-6. exact → nonlinear → irregular 3D → transient 실험
+2. route-specific posterior가 만드는 true-oracle worst-route Bayes regret
+3. conditionally accurate coherent joint-law construction
+4. posterior discrepancy에서 bounded functional regret를 제한하는 보장
+5. exact → nonlinear strong-baseline falsification
+6. positive nonlinear result 뒤에만 irregular 3D protocol
 7. failure cases와 의료 해석 경계
 
 AAAI-27 공식 author kit의 `aaai2027` style과 reproducibility checklist를

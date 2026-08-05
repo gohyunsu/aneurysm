@@ -168,7 +168,7 @@ class ProtocolTests(unittest.TestCase):
             item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
         )
         n1["test_access_before_checkpoint_freeze"] = True
-        with self.assertRaisesRegex(ProtocolError, "cannot access test"):
+        with self.assertRaisesRegex(ProtocolError, "pre-freeze test access"):
             validate_protocol(candidate)
 
     def test_insufficient_n1_development_cannot_open_confirmatory_test(self) -> None:
@@ -450,13 +450,13 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "manifest must remain exact"):
             validate_protocol(candidate)
 
-    def test_n1c_cannot_access_test_before_exact_execution_commit(self) -> None:
+    def test_failed_n1c_cannot_be_relabelled_or_open_3d(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         n1 = next(
             item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
         )
-        n1["outer_test_execution"]["test_generated_or_accessed"] = True
-        with self.assertRaisesRegex(ProtocolError, "N1c must remain exact"):
+        n1["outer_test_execution"]["n1_passed"] = True
+        with self.assertRaisesRegex(ProtocolError, "Failed N1c must retain"):
             validate_protocol(candidate)
 
 

@@ -53,14 +53,22 @@
   이는 test 실행 자격이지 superiority나 N1 pass가 아니다. Outer-test
   selector·RNG·estimand·bootstrap은
   `configs/nonlinear_pde_n1c.json`에 별도 prospective overlay로 고정했다.
-  Acquisition/route는 결과와 무관한 context index 0,4,…,188과 condition
-  0만 사용한다. True oracle은 global latent radius 2.5 truncation을
-  conditional component acceptance와 residual rejection으로 정확히
-  반영한다. Exact N1c source를 public commit하고 dependency-complete
-  contract를 통과하기 전 test 생성은 계속 금지한다. Registered support,
-  geometry, hidden-law shift는 model·threshold·test seed를 바꾸지 않는
-  별도 N1d secondary job으로 둔다. Irregular-3D headline은 positive N1
-  전까지 보류한다.
+  Exact source `62605a0`의 dependency-complete contract는 125/125를
+  통과했고, PBS A6000 outer test도 exit 0으로 완료됐다. N1c는 failed다.
+  Full-BC operator, functional coverage와 AURORA route action consistency는
+  통과했지만 field distribution, paired response와 acquisition regret가
+  실패했다. Missing/sparse-2 energy score는 independent heads보다 각각
+  0.65%/1.09% 나빴고 0/5 seed에서만 우세했다. Missing acquisition
+  regret는 ACFlow보다 2/5 seed에서만 낮았고, sparse-2에서는 두 learned
+  policy가 모두 oracle과 같아 strict superiority가 성립하지 않았다.
+  Pair loss는 pair-zero보다 3/5 seed에서만 좋았고 seed-mean
+  paired-response L2도 DeltaPhi-style 0.01221보다 큰 0.01331이었다.
+  Route VoI 보조 계산은 route별 Monte Carlo seed offset 때문에 등록된
+  common-random-number 계약을 위반했으므로 해당 VoI/next-component
+  두 지표만 invalid로 제외한다. 이는 N1 fail을 결정한 field, pair,
+  acquisition 지표나 valid route action metric에는 영향을 주지 않는다.
+  Registered N1d shift와 irregular 3D는 실행하지 않는다. 다음 단계는
+  threshold-free post-result attribution이며 N1c를 relabel할 수 없다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -79,21 +87,26 @@
 
 ## 2. 현재 contribution 가설
 
-논문 contribution은 아래 세 축으로 제한한다.
+기존 세 축은 아래처럼 재판정한다.
 
 1. **Nested condition–marginal coherence**: full/partial/missing BC를 별도
    head나 임의 imputation으로 처리하지 않는다. 하나의 BC density를 임의
    observation mask에 analytic conditioning하고 solution operator로
-   pushforward하여 tower property를 구조적으로 만족시킨다.
-2. **Paired simulator-response supervision**: 동일 geometry의 두 BC에서
+   pushforward하여 tower property를 구조적으로 만족시킨다. N1c에서
+   구조적 일관성은 회복했지만 predictive/decision superiority가 없으므로
+   아직 contribution이 아니다.
+2. **Paired simulator-response supervision · demoted**: 동일 geometry의 두 BC에서
    절대 field뿐 아니라 `H(G,Bj)-H(G,Bi)`를 직접 감독하여 geometry
    confounding 없이 condition response를 학습한다. 인과 효과가 아니라
-   simulator intervention response로만 부른다.
-3. **Structural/model uncertainty separation**: BC completion sample 간
+   simulator intervention response로만 부른다. N1c에서 DeltaPhi-style
+   residual보다 열세였으므로 독립 contribution에서 내리고 ablation으로만
+   유지한다.
+3. **Structural/model uncertainty separation · untested secondary**: BC completion sample 간
    변동과 model ensemble 간 변동을 law of total variance에 맞춰 분리하고,
    ID mask별 calibration·supplied-BC response shift·geometry OOD에서 각각
    검증한다. Hidden-BC 생성법칙 자체가 shift된 경우에는 정답 coverage를
    식별 가능하다고 가정하지 않고 OOD detection/abstention만 평가한다.
+   Positive N1 전에는 headline contribution이 아니다.
 
 GNN, attention, probabilistic operator, flow matching, physics loss,
 one-shot Fourier는 선행 구성요소 또는 engineering choice다. contribution
@@ -111,13 +124,19 @@ novelty는 이들을 PDE solution functional에 맞게 결합했을 때 생기�
 문제 정의·보장·알고리즘과 strong baseline 대비 양수 결과가 함께 있을
 때만 확정한다.
 
-현재 가장 유망하지만 아직 확정하지 않은 paper identity는
+현재 남은 paper identity 가설은
 **conditioning inconsistency의 solution-functional decision consequence**다.
 경로가 다른 posterior가 같은 최종 관측 mask에서 달라질 때 bounded
 functional loss의 Bayes action과 다음 BC component의 value-of-information가
 얼마나 흔들리는지를 regret으로 정의한다. Posterior TV/KL에서
 Bayes-regret를 제한하는 보장, joint BC–solution model의 route
-compatibility, N1의 실제 regret 감소가 함께 있어야 한다. Test-time active
+compatibility와 fresh prospective test의 실제 regret 감소가 함께 있어야
+한다. N1c에서는 baseline route action 차이는 보였지만 signed true-risk
+차이가 작고 seed별 부호가 섞였으므로 이 identity도 현재 unsupported다.
+다음 attribution은 true conditional의 oracle Bayes action을 기준으로 각
+route의 nonnegative excess risk와 worst-route regret를 계산한다. Direct
+route를 정답처럼 두거나 signed route 차이를 평균해 상쇄하지 않는다.
+Test-time active
 feature acquisition 자체, path independence 자체, 이름만 붙인 acquisition
 head는 novelty가 아니다. ACFlow류 generative AFA, ICML-24 acquisition
 conditioned oracle와 NOTS-style posterior-sample functional acquisition을
@@ -253,6 +272,16 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   전용이고 seed 73080601, subspace iteration 4회로 고정한다. 단, 각
   confirmatory model seed는 direct baseline의 weight initialization과
   minibatch sampling을 모두 제어해야 한다.
+  N1c exact source `62605a0`은 50개 checkpoint hash를 확인한 뒤에만
+  192×12 outer test를 생성했고 PBS job은 exit 0이었다. 공개 aggregate는
+  `results/nonlinear_pde_n1c_20260805.json`이다. Gate는 full-BC operator,
+  coverage, route action만 통과하고 pair, field distribution,
+  acquisition regret가 실패해 closed다. Invalid route-VoI 보조 지표를
+  고치는 post-result diagnostic은 N1c를 재개방하거나 3D를 허용하지
+  않는다. Joint/independent conditional NLL, true-law density와 oracle
+  operator floor, acquisition sample-size stability, true-oracle
+  worst-route excess risk를 threshold 없이 분해한 뒤에만 새 method와
+  fresh prospective re-entry의 필요성을 판단한다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

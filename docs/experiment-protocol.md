@@ -536,6 +536,59 @@ bootstrap CI를 모두 만족해야 한다. Support-shift, geometry OOD,
 hidden-law shift는 N1 primary decision 뒤 같은 checkpoint·threshold·seed로
 실행하는 N1d secondary diagnostic이며 N1c 결과를 보고 재설계하지 않는다.
 
+#### N1c result · failed
+
+Exact source `62605a0`은 PBS A6000에서 125/125 dependency-complete
+contract를 통과했다. Runner는 50개 learned checkpoint와 공통 POD hash를
+모두 확인한 뒤에만 192 context × 12 condition test를 생성했다. Outer
+test는 5 seed를 모두 완료하고 exit 0이었다. 공개 aggregate는
+`results/nonlinear_pde_n1c_20260805.json`이다.
+
+| frozen check | observed | verdict |
+|---|---:|---|
+| worst full-BC relative L2 ≤ 0.05 | 0.01404 | pass |
+| worst mask coverage error ≤ 0.05 | 0.03281 | pass |
+| maximum AURORA route-action gap ≤ 1e-4 | 0 | pass |
+| pair loss better than pair-zero in ≥4/5 | 3/5 | fail |
+| missing energy ≥5% over strongest baseline | −0.65%, 0/5 | fail |
+| sparse-2 energy ≥5% over strongest baseline | −1.09%, 0/5 | fail |
+| missing acquisition regret ≥5% over strongest baseline | −39.5% seed-relative mean, 2/5 | fail |
+| sparse-2 acquisition strict superiority | both learned policies equal oracle | fail |
+
+Pair-minus-zero context bootstrap CI는
+`[-0.001109, -0.000987]`로 pooled effect는 양수였지만 seed rule을
+통과하지 못했다. 더 중요하게 DeltaPhi-style paired-response seed mean
+0.01221이 pair-loss 0.01331보다 낮다. Pair supervision은 main
+contribution에서 ablation으로 내린다.
+
+Independent heads와 ACFlow의 route-action disagreement seed mean은
+0.1174/0.1762였지만 sequential-minus-direct true-risk mean은
+0.00065/0.00121이고 seed별 부호가 섞였다. Direct route를 oracle로
+간주한 signed 차이는 positive decision consequence를 입증하지 못한다.
+다음 diagnostic은 true conditional oracle action 대비 route별
+nonnegative excess risk와 worst-route regret를 계산한다.
+
+Candidate VoI subroutine은 route별 seed offset을 사용해 등록된 common
+random numbers를 위반했다. VoI와 selected-next-component 두 보조 지표를
+invalid로 제외한다. 이들은 gate에 쓰이지 않았으므로 N1 fail 판정은
+그대로다. N1d shift와 3D를 실행하지 않는다.
+
+#### N1c-a · threshold-free post-result attribution
+
+다음 실행은 새 gate나 re-entry가 아니다. N1c와 같은 checkpoint/test를
+읽을 수 있으므로 결과는 exploratory이며 아래만 분해한다.
+
+- joint, independent, ACFlow의 mask별 conditional NLL과 true-law excess
+- true BC law + learned operator와 learned density + oracle simulator의
+  functional energy floor
+- acquisition outer/inner sample scaling과 common-stream policy stability
+- direct/5→7/7→5 action의 true-oracle excess Bayes risk, mean/worst route
+- corrected common-random-number route candidate risk
+
+Threshold, pass/fail, N1c relabel, N1d/3D 권한과 새 contribution 문구는
+모두 금지한다. Attribution 뒤 method를 바꾸면 새 version, fresh seed,
+fresh test와 결과 전 공개 commit이 필요하다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
@@ -792,11 +845,13 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 2. Aneumo selective cache와 train-only scaling audit **(완료; velocity only)**
 3. Exact density attribution과 estimator development **(완료; method gain 없음)**
 4. G1s fresh 5-seed data-adequacy sanity **(완료 · 통과)**
-5. Nonlinear regular-grid N0 **(사전등록 완료 · 다음 GPU 우선순위)**
-6. N0 통과 시 N1 learned strong-baseline comparison
-7. 그 뒤 velocity-only G2 ablation과 irregular-3D backbone
-8. G3 learned transient 비교
-9. G4 cross-domain 통합 table
+5. Nonlinear N0/N0r numerical adequacy **(N0 failed preserved · N0r pass)**
+6. N1b checkpoint freeze와 N1c outer test **(완료 · N1c failed)**
+7. N1c-a threshold-free density/operator/acquisition/route-regret attribution
+   **(다음 GPU 우선순위)**
+8. Attribution으로 새 method가 정당화될 때 fresh prospective re-entry
+9. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol
+10. G3 learned transient 비교와 G4 cross-domain 통합 table
 
 GPU는 PBS allocation 안에서만 사용한다. 각 run은 commit, command,
 environment, config, dataset checksum, status, aggregate metric을 남긴다.

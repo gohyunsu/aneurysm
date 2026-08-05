@@ -220,7 +220,7 @@ fresh 5-seed run을 모두 exit 0으로 완료했다. 일곱 frozen check가 모
 통과해 다음 nonlinear/3D protocol 등록이 허용됐다. Raw run은 계속
 비공개 provenance로 보존하고 공개 aggregate만
 `results/controlled_pde_g1s_20260803.json`에 둔다. 과거 G1/G1r은
-relabel하지 않으며 다음 GPU 우선순위는 nonlinear N0다.
+relabel하지 않는다.
 
 Nonlinear 단계는 learned model부터 제출하지 않는다.
 `cluster/ssu_a6gpu_nonlinear_pde_n0.pbs`가 exact committed source와
@@ -229,6 +229,16 @@ Nonlinear 단계는 learned model부터 제출하지 않는다.
 linear counterfactual, 8-component paired perturbation을 같은 job에 묶는다.
 Output에는 command, commit, config hash, environment, aggregate metric과
 실패 여부를 남긴다. N0가 통과해도 N1 등록만 허용하며 3D headline job은
+제출하지 않는다.
+
+N0는 failed로 보존됐고 fresh context-stratified N0r만 9/9를 통과했다.
+그 뒤 validation-only N1b checkpoint 50개를 동결하고 exact source
+`62605a0`의 N1c outer test를 실행했다. Dependency-complete contract는
+125/125, PBS A6000 metric job은 exit 0이었지만 field distribution,
+paired response와 acquisition regret가 실패해 N1은 closed다. Route
+candidate VoI의 common-random-number 위반 보조 지표는 제외하되 gate
+판정은 바꾸지 않는다. 다음 GPU 우선순위는 same checkpoint/test를 쓰는
+threshold-free N1c-a attribution이며, N1d shift와 irregular 3D job은
 제출하지 않는다.
 
 ## Aneumo selective-cache contract

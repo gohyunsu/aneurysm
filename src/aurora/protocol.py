@@ -925,7 +925,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     n1 = next(item for item in nonlinear if item["id"] == "N1")
     expected_n1_status = (
-        "preregistered_before_n1_development_or_test_outcome"
+        "completed_failed"
         if n0r["status"] == "completed_passed"
         else "blocked_pending_N0r"
     )
@@ -960,7 +960,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "prospective_reentry",
                 "outer_test_execution",
             ],
-            "preregistered N1",
+            "completed N1",
         )
         if (
             n1["config"] != "configs/nonlinear_pde_n1.json"
@@ -969,7 +969,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             or n1["irregular_3d_registration_authorized"] is not False
         ):
             raise ProtocolError(
-                "N1 preregistration cannot access test or authorize irregular 3D."
+                "Failed N1 must retain pre-freeze test access order and cannot "
+                "authorize irregular 3D."
             )
         development = n1["core_development"]
         _require_keys(
@@ -1051,25 +1052,47 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         outer_test = n1["outer_test_execution"]
         if outer_test != {
             "id": "N1c",
-            "status": "preregistered_after_checkpoint_manifest_before_outer_test_generation",
+            "status": "completed_failed",
             "config": "configs/nonlinear_pde_n1c.json",
             "config_sha256": "6e14a9ed1682771fe3936e753d16d30317145752fb17f5e091f3db0b8e63ba8e",
             "checkpoint_manifest_commit": "c66f651a9cd13c7f58450f21c1d67ba11d78de8e",
             "checkpoint_manifest_sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+            "source_commit": "62605a0a2060613dd739217474a90ddc6869c10c",
+            "result": "results/nonlinear_pde_n1c_20260805.json",
+            "source_metrics_sha256": "a3759dcf7d47aa3f636e8cab695ee96d285d60c7236e4899bb2af0737ebc0368",
             "route_and_acquisition_context_selector": (
                 "indices_0_to_188_step_4_condition_0"
             ),
             "true_conditional_respects_latent_radius_truncation": True,
-            "route_common_random_numbers": True,
+            "route_common_random_numbers_registered": True,
+            "route_common_random_numbers_valid_for_primary_action_metric": True,
+            "route_candidate_voi_common_random_numbers_implemented": False,
+            "invalid_secondary_metrics": [
+                "route_value_of_information_disagreement",
+                "route_selected_next_component_disagreement",
+            ],
             "acquisition_outer_inner_samples": [8, 32],
             "context_family_bootstrap_replicates": 2000,
             "registered_shifts_deferred_to_fixed_N1d_secondary_job": True,
-            "test_generated_or_accessed": False,
-            "n1_gate_decided": False,
+            "test_generated_or_accessed": True,
+            "n1_gate_decided": True,
+            "n1_passed": False,
+            "passed_checks": [
+                "full_bc_operator",
+                "functional_coverage",
+                "route_bayes_action",
+            ],
+            "failed_checks": [
+                "paired_response",
+                "field_distribution",
+                "acquisition_regret",
+            ],
+            "n1d_shift_executed": False,
+            "post_result_attribution_is_non_gating": True,
             "irregular_3d_registration_authorized": False,
         }:
             raise ProtocolError(
-                "N1c must remain exact, test-free, and non-gating before execution."
+                "Failed N1c must retain its exact result and keep N1d/3D closed."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

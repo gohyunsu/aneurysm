@@ -217,27 +217,28 @@ solution-functional decision과 acquisition regret에 만드는 결과입니다.
 N0/N0r 통과만으로 이를 contribution이라 하지 않으며 3D headline도 열지
 않습니다.
 
-N0r는 N0a 결과 전에 commit `1a68053`에서 동결됐습니다. Reference는
-24 context를 각각 한 번, paired audit은 각각 두 번 포함하며 fresh seed
-3개를 사용합니다. PDE·BC law·solver·functionals·threshold·worst-seed
-rule은 N0와 동일했습니다. Pass는 N1 등록만 허용하고 N0 실패, novelty,
-3D headline을 소급 변경하지 않습니다. 두 development seed는
-validation-only이고, 다섯 confirmatory seed의 checkpoint가 고정되기
-전에는 test split을 생성하지 않습니다.
+N0r는 N1 상세 protocol 등록만 허용했습니다. 이후 validation-only
+development와 다섯 seed의 50개 checkpoint freeze를 거쳐, exact source
+`62605a0`에서 처음으로 N1c outer test를 열었습니다. A6000 run은
+125/125 contract와 5 seed를 정상 완료했지만 **N1c는 failed**입니다.
 
-현재 구현된 첫 N1 runner는 joint full-covariance GMM과 exact
-Dirichlet-lifted rank-96 coordinate operator만 train/validation에서 점검하는
-core development입니다. 이 실행은 N1 결과가 아니며
-LANO/NOP/ACFlow/ACO/NOTS-style 전체 비교가 구현되기 전에는 test나 3D로
-진행하지 않습니다.
+- full-BC operator L2 0.01404, coverage error 0.03281, AURORA route-action
+  disagreement 0은 통과했습니다.
+- Missing/sparse-2 functional energy는 independent heads보다 각각
+  0.65%/1.09% 나빴고 AURORA가 좋은 seed는 0/5였습니다.
+- Missing acquisition regret는 ACFlow보다 2/5 seed에서만 낮았습니다.
+- Pair loss는 pair-zero보다 3/5 seed에서만 좋고, 평균 paired-response도
+  DeltaPhi-style residual보다 나빴습니다.
 
-첫 development seed에서 density validation NLL은 -4.290이었지만 operator
-full-BC/paired-response relative L2는 0.1739/0.1862로 자격이 부족했습니다.
-Test는 만들지 않았습니다. Boundary-zero envelope의 unit-peak 재척도화만
-두 번째 development seed에서 full-BC/paired-response L2를
-0.05771/0.05729까지 낮췄지만 0.05 gate를 넘었습니다. 통과로 바꾸지
-않습니다. 다음 N1a는 새 development seed에서 raw/scale-normalized
-loss×1,400/2,800 step만 validation-only로 비교하며 test 권한이 없습니다.
+따라서 현재 방법은 AAAI-ready가 아니며 paired supervision은 독립
+contribution에서 ablation으로 내렸습니다. Route VoI 보조 계산의
+common-random-number 위반도 발견해 그 두 보조 지표는 제외했습니다.
+이는 gate에 사용되지 않았으므로 failed 판정은 바뀌지 않습니다. 공개
+aggregate는
+[`results/nonlinear_pde_n1c_20260805.json`](results/nonlinear_pde_n1c_20260805.json)입니다.
+다음은 3D 실행이 아니라 joint conditional NLL, operator floor,
+acquisition Monte Carlo stability와 true-oracle worst-route regret를
+분해하는 threshold-free attribution입니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

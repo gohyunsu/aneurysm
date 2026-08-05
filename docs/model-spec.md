@@ -425,7 +425,39 @@ to latent solution distribution으로 **N1 task에 맞춘 adaptation**이다.
 NOTS-style control도 whole input-function optimization이 아니라 posterior
 functional disagreement로 다음 BC component를 고르는 adaptation이다.
 
-## 7. Module D — paired simulator-response supervision
+### 6.3 N1c outcome and architecture consequence
+
+Exact `62605a0`의 5-seed outer test는 full-BC operator, functional
+coverage와 AURORA route-action consistency를 통과했지만 field
+distribution, paired response와 acquisition regret에서 실패했다.
+Missing/sparse-2 functional energy는 independent mask heads보다 각각
+0.65%/1.09% 나빴고 모든 seed에서 열세였다. Validation conditional NLL도
+joint density가 independent heads보다 모든 seed에서 나빴으므로, 다음
+architecture를 단순히 더 큰 GNN이나 더 긴 operator 학습으로 바꾸지 않는다.
+
+우선 threshold-free attribution에서 다음 floor를 분리한다.
+
+1. true radius-truncated BC law + learned operator
+2. learned joint density + oracle simulator functional
+3. independent/ACFlow density + 동일 learned operator
+4. outer/inner acquisition sample 수에 따른 policy-selection stability
+5. 각 route action의 true conditional oracle Bayes action 대비 excess risk
+
+Route candidate VoI의 N1c 구현은 `route_offset`을 seed에 더해 등록된
+common-random-number 계약을 어겼다. 따라서 VoI와 next-component
+disagreement만 invalid다. Future implementation은 direct/5→7/7→5에
+동일 base random stream을 사용하고, identical posterior를 세 route로
+전달했을 때 candidate-risk tensor가 수치 오차 안에서 같다는 regression
+test를 요구한다. 이 수정은 이미 failed인 N1c를 다시 판정하지 않는다.
+
+다음 prospective method가 필요하다면 joint full-density NLL만 반복하지
+않고, 같은 joint density의 conditional composite likelihood로 registered
+mask 성능을 직접 최적화하는 engineering control을 먼저 둔다. Composite
+likelihood 자체는 고전적 estimator이므로 novelty로 세지 않는다. Strong
+DeltaPhi-style operator를 joint density의 pushforward backbone으로 쓰는
+것도 허용하며, AURORA 전용 operator를 고집하지 않는다.
+
+## 7. Module D — paired simulator-response supervision · ablation
 
 동일 geometry \(G\)에 서로 다른 \(B_i,B_j\)와 solution \(H_i,H_j\)가 있을
 때 다음을 추가한다.
@@ -442,7 +474,10 @@ functional disagreement로 다음 BC component를 고르는 adaptation이다.
 sensitivity를 약하게 학습할 수 있다. Pair loss는 geometry를 고정한
 counterpart끼리 비교한다.
 
-필수 검증:
+N1c seed mean에서 pair loss 0.01331은 pair-zero 0.01436보다 낮았지만
+4/5 seed rule은 3/5로 실패했고 DeltaPhi-style residual 0.01221보다
+나빴다. 따라서 이 module은 현재 architecture contribution이 아니라
+아래를 확인하는 ablation이다.
 
 - pair loss weight 0 ablation
 - 같은 수의 무작위 cross-geometry pair를 쓴 negative control

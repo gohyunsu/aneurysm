@@ -89,7 +89,7 @@ window.AURORA_DATA = Object.freeze({
     ["Deployment input", "Current field + inflow", "Current field + inflow token", "Geometry + prescribed BC", "Geometry + arbitrary BC observation mask"],
     ["BC uncertainty", "Point condition", "OOD waveform test", "Prescribed constraint", "One joint BC density, analytically conditioned"],
     ["Temporal model", "Autoregressive", "Autoregressive transformer", "Unsteady PINN", "Secondary one-shot choice after D0"],
-    ["Primary fidelity", "Velocity rollout RMSE", "Field · WSS · OSI error", "Descriptor / status score", "Coherence + paired response + coverage"],
+    ["Primary fidelity", "Velocity rollout RMSE", "Field · WSS · OSI error", "Descriptor / status score", "Coherence + solution-functional risk; N1c failed"],
     ["Downstream task", "Not validated", "Risk metrics descriptive", "Late-fusion status", "Secondary only; current signal negative"],
     ["Primary gap", "Partial/missing condition", "Mask coherence", "Condition uncertainty", "Must beat generic probabilistic operators"]
   ],
@@ -105,14 +105,14 @@ window.AURORA_DATA = Object.freeze({
       id: "G1",
       title: "Is condition–marginal coherence exact?",
       copy: "Fresh 5-seed G1s가 7개 frozen check를 모두 통과했다. 최악 density/end-to-end mean은 0.02863/0.02977였다. 과거 G1/G1r은 failed로 유지하고 data scale은 novelty로 세지 않는다.",
-      state: "G1s passed · nonlinear strong-baseline test next",
+      state: "G1s passed · downstream N1c failed",
       blocking: true
     },
     {
       id: "G2",
-      title: "Does paired response improve?",
-      copy: "N1b는 exact 1d0bd9c의 다섯 seed에서 50개 checkpoint를 test 전에 동결했다. AURORA validation full-BC/paired mean은 0.01347/0.01366이지만 DeltaPhi objective보다 좋은 seed는 0/5였다. 이는 test 자격이지 superiority가 아니다.",
-      state: "N1c outer-test contract frozen · test/3D blocked",
+      title: "Does coherence improve decisions?",
+      copy: "Exact 62605a0의 5-seed N1c는 full-BC·coverage·route action은 통과했지만 field energy가 independent heads보다 0/5 seed에서만 좋았고 missing acquisition도 ACFlow보다 2/5에 그쳤다. Pair loss는 DeltaPhi-style보다 약했다. N1은 failed이며 3D는 닫혀 있다.",
+      state: "N1c failed · threshold-free attribution next · 3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "result",
+      title: "N1c fails the strong-baseline decision test",
+      copy: "Exact 62605a0의 125/125 A6000 contract 뒤 5-seed outer test가 exit 0으로 완료됐다. Full-BC, coverage와 route action은 통과했지만 missing/sparse-2 energy는 independent heads보다 0/5 seed에서 좋았고 acquisition·paired-response도 실패했다. Route VoI의 common-random-number 위반 보조 지표는 제외하며 gate 판정은 변하지 않는다. Paired supervision은 ablation으로 내리고 3D 대신 threshold-free attribution을 진행한다.",
+      files: ["results/nonlinear_pde_n1c_20260805.json", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.05",
       category: "implementation",

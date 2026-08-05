@@ -1,0 +1,173 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "nonlinear_pde_n1c_20260805",
+  "experiment_id": "nonlinear_route_consistent_functional_decision_n1_v3",
+  "evidence_status": "prospective_outer_test_completed_failed",
+  "source_gate": "N1",
+  "source_commit": "62605a0a2060613dd739217474a90ddc6869c10c",
+  "source_config_sha256": "6e14a9ed1682771fe3936e753d16d30317145752fb17f5e091f3db0b8e63ba8e",
+  "checkpoint_manifest_sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+  "source_metrics_sha256": "a3759dcf7d47aa3f636e8cab695ee96d285d60c7236e4899bb2af0737ebc0368",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "pbs_job": "PBS109724",
+    "exit_status": 0,
+    "started_utc": "2026-08-05T14:05:38.465447+00:00",
+    "ended_utc": "2026-08-05T14:08:06.912763+00:00",
+    "model_seeds": 5,
+    "walltime": "00:02:34"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "pbs_container_contract_tests": {
+      "status": "passed",
+      "exit_status": 0,
+      "tests": 125,
+      "tests_log_sha256": "2232a79e25e2af79944f2c469dcce5f6dae63d94ad945a34af4b3b5cd85417a2",
+      "walltime": "00:10:48"
+    },
+    "all_five_seed_checkpoint_hashes_verified_before_test_generation": true,
+    "test_generated_at_checkpoint_verification_time": false,
+    "test_generated_after_public_overlay_commit": true,
+    "all_test_and_oracle_solver_batches_converged": true,
+    "maximum_test_solver_normalized_residual": 0.000003572418108888087,
+    "maximum_oracle_solver_normalized_residual": 0.000005267490905680461
+  },
+  "contract": {
+    "test_contexts": 192,
+    "conditions_per_context": 12,
+    "route_and_acquisition_contexts": 48,
+    "primary_masks": [
+      "missing",
+      "sparse_2"
+    ],
+    "distribution_samples": {
+      "boundary": 256,
+      "field": 128
+    },
+    "acquisition_samples": {
+      "outer": 8,
+      "inner": 32
+    },
+    "bootstrap_replicates": 2000,
+    "minimum_relative_improvement": 0.05,
+    "minimum_seed_directions": 4,
+    "all_checks_required": true,
+    "test_thresholds_changed_after_result": false
+  },
+  "gate": {
+    "passed": false,
+    "checks": {
+      "full_bc_operator": {
+        "observed_worst_seed_relative_l2": 0.014042678289115429,
+        "threshold": 0.05,
+        "passed": true
+      },
+      "functional_coverage": {
+        "observed_worst_seed_maximum_error": 0.03281247615814209,
+        "threshold": 0.05,
+        "passed": true
+      },
+      "route_bayes_action": {
+        "observed_maximum_aurora_disagreement": 0.0,
+        "threshold": 0.0001,
+        "passed": true
+      },
+      "paired_response": {
+        "pair_loss_better_than_pair_zero_seeds": 3,
+        "required_seeds": 4,
+        "pair_minus_zero_context_bootstrap_ci95": [
+          -0.0011085739640839165,
+          -0.0009869438822109563
+        ],
+        "passed": false
+      },
+      "field_distribution": {
+        "passed": false,
+        "missing": {
+          "aurora_energy_score_seed_mean": 1.2183454036712646,
+          "strongest_nonoracle": "independent_mask_heads",
+          "strongest_energy_score_seed_mean": 1.210526943206787,
+          "relative_improvement_seed_mean": -0.006466996856033802,
+          "aurora_better_seeds": 0,
+          "aurora_minus_baseline_context_bootstrap_ci95": [
+            0.005682633222701649,
+            0.010017866228396689
+          ]
+        },
+        "sparse_2": {
+          "aurora_energy_score_seed_mean": 0.8765481114387512,
+          "strongest_nonoracle": "independent_mask_heads",
+          "strongest_energy_score_seed_mean": 0.8670953512191772,
+          "relative_improvement_seed_mean": -0.010913430713117123,
+          "aurora_better_seeds": 0,
+          "aurora_minus_baseline_context_bootstrap_ci95": [
+            0.007259454214945436,
+            0.011659564234626787
+          ]
+        }
+      },
+      "acquisition_regret": {
+        "passed": false,
+        "missing": {
+          "aurora_regret_to_aco_seed_mean": 0.01009224820882082,
+          "strongest_nonoracle": "acflow_expected_functional_risk_reduction",
+          "strongest_regret_to_aco_seed_mean": 0.008657257072627544,
+          "relative_improvement_seed_mean": -0.3953443467617035,
+          "aurora_better_seeds": 2,
+          "aurora_minus_baseline_context_bootstrap_ci95": [
+            -0.001820846712216735,
+            0.00474325492357214
+          ]
+        },
+        "sparse_2": {
+          "aurora_regret_to_aco_seed_mean": 0.0,
+          "strongest_nonoracle": "acflow_expected_functional_risk_reduction",
+          "strongest_regret_to_aco_seed_mean": 0.0,
+          "relative_improvement_seed_mean": 0.0,
+          "aurora_better_seeds": 0,
+          "interpretation": "Aurora and ACFlow selected the same component as the oracle in every seed; the registered strict-superiority condition is therefore not met."
+        }
+      }
+    }
+  },
+  "descriptive_operator_comparison": {
+    "paired_response_relative_l2_seed_mean": {
+      "aurora_pair_loss": 0.013314874470233917,
+      "aurora_pair_zero": 0.01436174549162388,
+      "random_cross_context_pair": 0.013520054332911969,
+      "deltaphi_style_residual": 0.012214317917823792
+    },
+    "interpretation": "The pair objective improves its zero-weight ablation on the pooled context bootstrap but is unstable across seeds and is worse than the DeltaPhi-style strong control on the mean."
+  },
+  "route_diagnostic": {
+    "valid_primary_metrics": {
+      "aurora_bayes_action_disagreement_seed_mean": 0.0,
+      "independent_mask_heads_bayes_action_disagreement_seed_mean": 0.11737952530384063,
+      "acflow_bayes_action_disagreement_seed_mean": 0.17620219886302949,
+      "independent_sequential_minus_direct_true_risk_seed_mean": 0.0006451403838582337,
+      "acflow_sequential_minus_direct_true_risk_seed_mean": 0.0012140579870902
+    },
+    "decision_consequence_interpretation": "Baseline route actions differ, but signed true-risk differences are small and change sign across seeds; positive decision harm is not established.",
+    "excluded_secondary_metrics": [
+      "route_value_of_information_disagreement",
+      "route_selected_next_component_disagreement"
+    ],
+    "exclusion_reason": "The runtime applied a route-offset seed to candidate-risk Monte Carlo despite the registered common-random-numbers-across-routes contract. These metrics are non-gating, do not alter the failed N1 decision, and require a clearly labeled post-result diagnostic."
+  },
+  "decision": {
+    "n1_status": "completed_failed",
+    "method_novelty_established": false,
+    "aaai_acceptance_established": false,
+    "paired_response_promoted_to_independent_contribution": false,
+    "irregular_3d_protocol_registration_authorized": false,
+    "irregular_3d_execution_authorized": false,
+    "registered_n1d_shift_job_executed": false,
+    "next_step": "Run a threshold-free post-result attribution of joint conditional density error, operator floor, acquisition Monte Carlo stability, and corrected worst-route oracle Bayes regret. Do not relabel N1c or open 3D."
+  }
+}

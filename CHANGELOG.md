@@ -4,6 +4,43 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1c completes and fails the strong-baseline outer test
+
+### Prospective result
+
+- Exact source `62605a0`은 dependency-complete PBS A6000 contract
+  125/125를 통과했다. 50개 learned checkpoint와 공통 POD hash를 모두
+  확인한 뒤에만 192 context × 12 condition test를 생성했다.
+- PBS `109724`는 5 seed를 exit 0, walltime 2분 34초로 완료했다. Raw
+  aggregate SHA-256은
+  `a3759dcf7d47aa3f636e8cab695ee96d285d60c7236e4899bb2af0737ebc0368`이고
+  공개 결과는 `results/nonlinear_pde_n1c_20260805.json`이다.
+- Full-BC operator, functional coverage와 AURORA route-action consistency는
+  통과했다. Field distribution, paired response와 acquisition regret는
+  실패해 N1은 failed다.
+- Missing/sparse-2 energy score는 independent heads보다 각각
+  0.65%/1.09% 나빴고 AURORA가 좋은 seed는 0/5였다. Missing acquisition
+  regret는 ACFlow보다 2/5 seed에서만 낮았다. Sparse-2에서는 두 learned
+  policy가 모두 oracle과 같아 strict superiority가 성립하지 않았다.
+- Pair loss는 pair-zero보다 pooled context bootstrap에서는 좋았지만
+  seed 방향은 3/5였고 seed-mean paired-response L2 0.01331은
+  DeltaPhi-style 0.01221보다 나빴다. Paired supervision을 독립
+  contribution에서 ablation으로 내린다.
+
+### Integrity and next decision
+
+- Independent/ACFlow의 route action은 route에 따라 달랐지만 signed
+  true-risk difference가 작고 seed별 부호가 섞여 positive decision harm는
+  입증되지 않았다.
+- Candidate VoI subroutine이 route별 seed offset을 사용해 등록된 common
+  random numbers를 위반했음을 post-result audit에서 발견했다. VoI와
+  selected-next-component 보조 지표만 invalid로 제외한다. Gate에 쓰인
+  field, pair, acquisition과 valid route-action 지표에는 영향이 없으므로
+  N1 fail은 바뀌지 않는다.
+- N1d shift와 irregular 3D는 실행하지 않는다. 다음은 joint conditional
+  NLL, true-law/operator floor, acquisition MC stability와 true-oracle
+  worst-route excess risk를 분해하는 threshold-free attribution이다.
+
 ## 2026-08-05 · N1c outer-test execution is frozen before test access
 
 ### Prospective estimand and implementation
