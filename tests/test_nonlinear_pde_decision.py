@@ -1,10 +1,17 @@
 import copy
+import importlib.util
 import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from aurora.nonlinear_pde_decision import NonlinearDecisionError, load_config
+from aurora.nonlinear_pde_decision import (
+    NonlinearDecisionError,
+    build_joint_density,
+    build_solution_operator,
+    gmm_nll,
+    load_config,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,6 +67,27 @@ class NonlinearDecisionContractTests(unittest.TestCase):
             path = self._write_candidate(candidate, directory)
             with self.assertRaisesRegex(NonlinearDecisionError, "decision rule"):
                 load_config(path)
+
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
+    def test_joint_density_and_lifted_operator_shapes(self) -> None:
+        import torch
+
+        device = torch.device("cpu")
+        density = build_joint_density(self.config, device)
+        operator = build_solution_operator(self.config, device)
+        context = torch.zeros(3, 5)
+        boundary = torch.zeros(3, 8)
+        weights, means, covariances = density(context)
+        self.assertEqual(tuple(weights.shape), (3, 2))
+        self.assertEqual(tuple(means.shape), (3, 2, 8))
+        self.assertEqual(tuple(covariances.shape), (3, 2, 8, 8))
+        self.assertTrue(torch.isfinite(gmm_nll(
+            weights, means, covariances, boundary
+        )).all())
+        field = operator(context, boundary)
+        self.assertEqual(tuple(field.shape), (3, 33, 33))
+        self.assertTrue(torch.allclose(field[:, 0], torch.zeros_like(field[:, 0])))
+        self.assertTrue(torch.allclose(field[:, -1], torch.zeros_like(field[:, -1])))
 
 
 if __name__ == "__main__":

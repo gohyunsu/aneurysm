@@ -160,6 +160,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.05",
+      category: "implementation",
+      title: "N1 core runner is validation-only by construction",
+      copy: "Joint full-covariance 2-GMM, truncated BC sampler, chunked semilinear solver와 exact Dirichlet-lifted rank-96 operator를 구현했다. 첫 runner는 train/validation만 생성하고 test access와 N1 decision을 false로 기록한다. Strong-baseline 전체 비교 전에는 result로 해석하지 않는다.",
+      files: ["src/aurora/nonlinear_pde_decision.py", "experiments/run_nonlinear_pde_n1_development.py", "cluster/ssu_a6gpu_nonlinear_pde_n1_development.pbs", "tests/test_nonlinear_pde_decision.py"]
+    },
+    {
+      date: "2026.08.05",
       category: "research",
       title: "N1 freezes a decision-consequence test, not an architecture claim",
       copy: "NOTS 때문에 neural-operator functional acquisition과 generic regret를 novelty에서 제외했다. N1은 같은 최종 physical-condition mask의 route posterior가 Bayes action과 one-component value-of-information에 만드는 손실을 검증한다. 5-seed rule과 LANO/NOP/ACFlow/ACO/NOTS-style strong controls를 test 전에 고정했다.",

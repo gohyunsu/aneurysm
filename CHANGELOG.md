@@ -4,6 +4,20 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1 core has a validation-only execution path
+
+### Implementation
+
+- Context-conditioned full-covariance 2-GMM, truncated latent-BC sampler,
+  chunked semilinear split solver와 exact Dirichlet-lifted rank-96 coordinate
+  operator를 구현했다.
+- 첫 runner는 density/operator train·validation만 생성한다. Test generator를
+  호출하지 않고 output status에 test access와 N1 decision이 모두 false임을
+  남긴다.
+- 이 smoke는 baseline superiority나 N1 gate evidence가 아니다. 모든
+  registered baseline 구현과 validation-only checkpoint freeze가 끝나기
+  전 confirmatory job을 금지한다.
+
 ## 2026-08-05 · N1 decision falsification is frozen before test
 
 ### Research decision

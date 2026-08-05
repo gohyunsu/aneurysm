@@ -225,6 +225,12 @@ rule은 N0와 동일했습니다. Pass는 N1 등록만 허용하고 N0 실패, n
 validation-only이고, 다섯 confirmatory seed의 checkpoint가 고정되기
 전에는 test split을 생성하지 않습니다.
 
+현재 구현된 첫 N1 runner는 joint full-covariance GMM과 exact
+Dirichlet-lifted rank-96 coordinate operator만 train/validation에서 점검하는
+core development입니다. 이 실행은 N1 결과가 아니며
+LANO/NOP/ACFlow/ACO/NOTS-style 전체 비교가 구현되기 전에는 test나 3D로
+진행하지 않습니다.
+
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
 bulge L2는 0.00880입니다. 다만 같은 105 case가 architecture discovery에

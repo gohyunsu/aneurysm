@@ -107,6 +107,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_nonlinear_pde_n0.pbs`
 - `cluster/ssu_a6gpu_nonlinear_pde_n0_attribution.pbs`
 - `cluster/ssu_a6gpu_nonlinear_pde_n0r.pbs`
+- `cluster/ssu_a6gpu_nonlinear_pde_n1_development.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_development.pbs`
 
@@ -158,6 +159,15 @@ Exact `37d31a8`의 dependency-complete PBS contract는 105/105 test를
 통과했다. 공개 aggregate는 `results/nonlinear_pde_n0r_20260805.json`이다.
 이는 N1 사전등록만 허용하며 상세 config commit 전 N1 학습을 제출하지
 않는다.
+
+N1의 첫 GPU 경로는 confirmatory run이 아니라 validation-only core
+development다. `AURORA_DEVELOPMENT_INDEX`는 config의 두 development seed
+중 하나만 선택하며 density train/validation과 operator train/validation만
+생성한다. Runner에는 test split 생성 호출이 없고 status에
+`test_generated_or_accessed=false`, `n1_gate_decided=false`를 기록한다.
+Joint-density/operator checkpoint는 server output에만 두며 공개 저장소에
+commit하지 않는다. 이 smoke가 성공해도 모든 preregistered baseline과
+checkpoint freeze 전에는 confirmatory test job을 제출하지 않는다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

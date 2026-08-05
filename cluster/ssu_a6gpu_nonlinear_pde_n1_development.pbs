@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#PBS -N aurora_n1dev
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=48gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=04:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+: "${AURORA_DEVELOPMENT_INDEX:?set AURORA_DEVELOPMENT_INDEX}"
+
+mkdir -p "$AURORA_OUTPUT_ROOT"
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_OUTPUT_ROOT:/output" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace/src" AURORA_GIT_COMMIT="$AURORA_GIT_COMMIT" \
+  python /workspace/experiments/run_nonlinear_pde_n1_development.py \
+    --config /workspace/configs/nonlinear_pde_n1.json \
+    --n0-config /workspace/configs/nonlinear_pde_n0.json \
+    --output /output \
+    --git-commit "$AURORA_GIT_COMMIT" \
+    --development-index "$AURORA_DEVELOPMENT_INDEX" \
+    --require-cuda
