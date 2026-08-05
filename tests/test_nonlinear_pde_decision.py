@@ -273,6 +273,95 @@ class NonlinearDecisionContractTests(unittest.TestCase):
             torch.allclose(functional_energy_score(samples, target), torch.zeros(1))
         )
 
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
+    def test_n1c_route_and_acquisition_tensor_smoke(self) -> None:
+        import torch
+
+        from aurora.nonlinear_pde import boundary_law
+        from aurora.nonlinear_pde_decision import generate_solution_split
+        from experiments.run_nonlinear_pde_n1c_outer_test import (
+            _evaluate_acquisition,
+            _evaluate_routes,
+        )
+
+        n1, _, n1c, _ = load_n1c_config(N1C_CONFIG)
+        smoke = copy.deepcopy(n1c)
+        smoke["route_evaluation"]["context_indices"] = [0]
+        smoke["route_evaluation"]["posterior_samples"] = 4
+        smoke["acquisition_evaluation"]["context_indices"] = [0]
+        smoke["acquisition_evaluation"]["outer_measurement_samples"] = 2
+        smoke["acquisition_evaluation"]["inner_posterior_samples"] = 2
+        smoke["functional_contract"]["bayes_action_grid_points"] = 9
+        n0 = json.loads(
+            (ROOT / "configs" / "nonlinear_pde_n0.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        device = torch.device("cpu")
+        test = generate_solution_split(
+            contexts=1,
+            conditions=1,
+            context_seed=9917801,
+            boundary_seed=9917802,
+            context_support=[-0.2, 0.2],
+            maximum_radius=2.5,
+            solver_config=n0,
+            device=device,
+        )
+        (
+            test["true_weights"],
+            test["true_means"],
+            test["true_covariances"],
+        ) = boundary_law(test["context"])
+        models = {
+            "aurora_joint": build_joint_density(n1, device).eval(),
+            "independent_mask_heads": build_independent_mask_density(
+                n1, device
+            ).eval(),
+            "acflow_adapted": build_mask_conditional_density(n1, device).eval(),
+            "aurora_shared_operator_pair_loss": build_solution_operator(
+                n1, device
+            ).eval(),
+        }
+        location = torch.zeros(4)
+        scale = torch.ones(4)
+        grid_minimum = -2.0 * torch.ones(4)
+        grid_maximum = 2.0 * torch.ones(4)
+        route, _, true_samples, summary = _evaluate_routes(
+            smoke,
+            n0,
+            models,
+            test,
+            location,
+            scale,
+            grid_minimum,
+            grid_maximum,
+            seed_index=0,
+            true_functional_samples=None,
+        )
+        self.assertEqual(set(route), {
+            "aurora_joint",
+            "independent_mask_heads",
+            "acflow_adapted",
+        })
+        self.assertEqual(tuple(true_samples.shape), (1, 4, 4))
+        self.assertTrue(summary["all_converged"])
+        acquisition, _, true_risks, summaries = _evaluate_acquisition(
+            smoke,
+            n0,
+            models,
+            test,
+            location,
+            scale,
+            grid_minimum,
+            grid_maximum,
+            seed_index=0,
+            true_candidate_risks=None,
+        )
+        self.assertEqual(set(acquisition), {"missing", "sparse_2"})
+        self.assertEqual(set(true_risks), {"missing", "sparse_2"})
+        self.assertTrue(all(item["all_converged"] for item in summaries))
+
 
 if __name__ == "__main__":
     unittest.main()

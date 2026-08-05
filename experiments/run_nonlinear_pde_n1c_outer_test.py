@@ -1631,6 +1631,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         solver_config=n0,
         device=device,
     )
+    (
+        test["true_weights"],
+        test["true_means"],
+        test["true_covariances"],
+    ) = boundary_law(test["context"])
     _write_json(
         args.output / "test_access.json",
         {

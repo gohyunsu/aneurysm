@@ -162,8 +162,8 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.05",
       category: "implementation",
       title: "N1c batch failures now preserve their traceback",
-      copy: "첫 두 exact-source attempts는 hash verification과 동일 test marker 뒤 exit 1이었지만 read-only source로 반환되는 PBS spool 때문에 traceback이 남지 않았다. Scientific runner/config는 유지하고 wrapper만 stdout/stderr를 writable run.log와 wrapper status에 기록한다. Failed attempts는 결과로 사용하지 않는다.",
-      files: ["cluster/ssu_a6gpu_nonlinear_pde_n1c_outer_test.pbs", "CHANGELOG.md"]
+      copy: "첫 두 exact-source attempts는 hash verification과 동일 test marker 뒤 exit 1이었지만 PBS spool 때문에 traceback이 남지 않았다. Logging-fixed attempt 3에서 seed-0 metric 전 missing true_weights schema 오류를 확인했다. Frozen test context에 기존 analytic boundary law를 재적용하며 config·seed·metric은 바꾸지 않는다.",
+      files: ["cluster/ssu_a6gpu_nonlinear_pde_n1c_outer_test.pbs", "experiments/run_nonlinear_pde_n1c_outer_test.py", "CHANGELOG.md"]
     },
     {
       date: "2026.08.05",

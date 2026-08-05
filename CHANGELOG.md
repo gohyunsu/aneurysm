@@ -38,6 +38,12 @@
   바꾸지 않고 batch wrapper만 stdout/stderr를 writable output의
   `run.log`에 명시적으로 기록하도록 보강한다. 두 attempt는 failed
   provenance로 보존하며 결과가 아니다.
+- Logging-fixed attempt 3에서 test marker 뒤, seed-0 metric 생성 전에
+  `generate_solution_split` 반환값에 없는 `true_weights`를 읽어
+  `KeyError`가 발생했다. 이는 결과를 보지 않은 schema wiring 오류다.
+  Frozen test context에 기존 analytic `boundary_law`를 다시 적용해
+  true GMM parameter를 복원한다. Config, context/seed, truncation,
+  checkpoint, metric과 threshold는 바꾸지 않는다.
 
 ## 2026-08-05 · N1b five-seed checkpoint manifest is complete
 
