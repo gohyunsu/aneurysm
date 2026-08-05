@@ -200,6 +200,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   contiguous/stratified/all-case median 0.00774/0.01221/0.01828로 slice
   민감도를 지지했지만, former reference 이상인 context는 18–19/24라
   uniformly nonlinear하다고 쓰지 않는다.
+  N0r exact contract는 N0a outcome 전 commit `1a68053`에서 동결했다.
+  Fresh seeds `[62080321, 62080322, 62080323]`, reference 24(각 context
+  1회), paired 48(각 context 2회)을 사용한다. PDE·BC law·solver·functionals,
+  threshold와 worst-seed rule은 N0와 같고 pass는 N1 등록만 허용한다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

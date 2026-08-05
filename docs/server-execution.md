@@ -106,6 +106,7 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_controlled_g1s.pbs`
 - `cluster/ssu_a6gpu_nonlinear_pde_n0.pbs`
 - `cluster/ssu_a6gpu_nonlinear_pde_n0_attribution.pbs`
+- `cluster/ssu_a6gpu_nonlinear_pde_n0r.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_development.pbs`
 
@@ -146,6 +147,12 @@ Exact `749f596` N0a는 A6000에서 exit 0으로 완료됐다. 첫 contract 제�
 실패했고, 동일 source에 pinned `h5py==3.12.1` layer를 추가한 재실행은
 97/97 test를 통과했다. 공개 aggregate는
 `results/nonlinear_pde_n0_attribution_20260803.json`이다.
+
+N0r는 exact preregistration commit `1a68053`의 config를 이후 source
+commit에서도 그대로 pin한다. PBS artifact에는 config checksum, exact
+execution commit, reference/paired flat indices, represented-context count와
+모든 check를 남긴다. N0r metric은 dependency-complete contract test가
+같은 execution source에서 통과한 뒤에만 제출한다.
 Exact commit `cf675af`의 30-task A6000 run은 exit 0으로 완료됐고 공개
 aggregate는 `results/controlled_pde_density_attribution_20260803.json`이다.
 이 결과로 nonlinear/3D job을 제출하지 않으며 다음 GPU 실행은

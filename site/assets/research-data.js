@@ -105,7 +105,7 @@ window.AURORA_DATA = Object.freeze({
       id: "G2",
       title: "Does paired response improve?",
       copy: "Frozen N0는 8/9 check를 통과했지만 실패했다. N0a에서 failed seed의 contiguous/stratified/all-case median은 0.00774/0.01221/0.01828로 slice 민감도를 확인했다. 다만 context 5–6개는 former reference보다 낮아 uniform nonlinearity는 주장하지 않는다.",
-      state: "N0 failed · N0a complete · N0r next · N1/3D blocked",
+      state: "N0 failed · N0a complete · N0r preregistered · N1/3D blocked",
       blocking: true
     },
     {
@@ -151,6 +151,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.05",
+      category: "experiment",
+      title: "N0r is frozen independently of the N0a outcome",
+      copy: "N0a metric 전 commit 1a68053에서 fresh seed와 context-stratified selector를 고정했다. Reference 24개는 24 context를 각각 한 번, paired 48개는 각각 두 번 포함한다. PDE·BC law·solver·functionals·threshold·worst-seed rule은 N0와 동일하며 pass는 N1 protocol 등록만 허용한다.",
+      files: ["configs/nonlinear_pde_n0r.json", "src/aurora/nonlinear_pde_reentry.py", "cluster/ssu_a6gpu_nonlinear_pde_n0r.pbs", "docs/experiment-protocol.md", "configs/aurora_v1.json"]
+    },
     {
       date: "2026.08.03",
       category: "result",

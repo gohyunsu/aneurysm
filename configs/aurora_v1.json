@@ -466,10 +466,29 @@
       "next_step": "fresh_seed_context_stratified_N0r_preregistration"
     },
     {
+      "id": "N0r",
+      "name": "fresh_context_stratified_solver_nontriviality_reentry",
+      "status": "preregistered_before_fresh_gpu_run",
+      "source_gate": "N0",
+      "config": "configs/nonlinear_pde_n0r.json",
+      "contract_source_commit": "1a680537957e4d87849abb84eab6380c76e656c9",
+      "contract_frozen_before_n0a_outcome": true,
+      "n0a_outcome_may_change_contract": false,
+      "fresh_seeds": 3,
+      "reference_context_coverage": "24_of_24_exactly_once_per_seed",
+      "paired_context_coverage": "24_of_24_exactly_twice_per_seed",
+      "pde_boundary_law_functionals_solver_unchanged": true,
+      "scientific_thresholds_and_worst_seed_rule_unchanged": true,
+      "may_relabel_failed_n0": false,
+      "may_establish_method_novelty": false,
+      "may_authorize_irregular_3d_headline": false,
+      "pass_authorizes": "N1_learned_model_and_strong_baseline_registration"
+    },
+    {
       "id": "N1",
       "name": "learned_conditioning_decision_consistency",
-      "status": "blocked_after_failed_N0",
-      "source_gate": "N0",
+      "status": "blocked_pending_N0r",
+      "source_gate": "N0r",
       "primary_question": "does_route_consistent_partial_condition_inference_reduce_solution_functional_risk_and_acquisition_regret",
       "mandatory_baselines": [
         "conditional_mean_imputation",

@@ -345,8 +345,9 @@ minimum 0.01을 넘지 못했다. 결과 뒤 threshold를 바꾸지 않으며 N1
 context 0 하나만 검사했다. Paired 48개도 앞 네 context에 한정됐다. 이
 관찰은 N0를 다시 판정하지 않는 diagnostic hypothesis다. 다음 순서는
 (1) threshold 없는 all-context N0a, (2) 새로운 seed와 명시적
-context-stratified selector를 고정한 N0r다. N0r는 PDE, case count,
-scientific threshold를 유지하며 결과 전에 독립 실행 계약으로 등록한다.
+context-stratified selector를 고정한 N0r다. N0r는 PDE와 scientific
+threshold를 유지하고 reference count만 모든 24 context를 한 번씩
+포함하는 최소 크기로 바꿔 결과 전에 독립 실행 계약으로 등록한다.
 
 ##### N0a · all-context attribution, no gate
 
@@ -373,6 +374,24 @@ contiguous/stratified/all-case median은 각각
 context-0 slice에 민감했지만 domain이 모든 context에서 uniformly
 nonlinear한 것은 아니다. N0r는 24 context를 모두 reference audit에
 포함하고 같은 threshold를 유지해야 한다.
+
+##### N0r · prospective context-stratified re-entry
+
+N0r config는 N0a metric 생성 전 public commit `1a68053`에서 동결했다.
+
+| contract | frozen value |
+|---|---|
+| fresh seeds | 62080321, 62080322, 62080323 |
+| full solve | 24 context × 12 condition |
+| 65-grid reference | context당 1 case, 총 24 |
+| paired response | context당 2 base case, 총 48 |
+| PDE/BC law/solver/functionals | N0와 동일 |
+| thresholds | N0의 8개 threshold 모두 동일 |
+| decision | all checks, worst seed decides |
+
+N0r pass는 N1 learned model과 mandatory strong baseline의 상세 protocol
+등록만 허용한다. N0 failure는 history로 보존하고 N0r 자체를 method
+evidence나 3D 진행 근거로 쓰지 않는다.
 
 #### N1 · learned decision-consistency falsification
 

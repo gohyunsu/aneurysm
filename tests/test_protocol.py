@@ -108,6 +108,33 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cannot be inflated"):
             validate_protocol(candidate)
 
+    def test_n0r_cannot_change_after_n0a_outcome(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0r = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0r"
+        )
+        n0r["n0a_outcome_may_change_contract"] = True
+        with self.assertRaisesRegex(ProtocolError, "independent"):
+            validate_protocol(candidate)
+
+    def test_n0r_requires_every_context(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0r = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0r"
+        )
+        n0r["reference_context_coverage"] = "12_of_24"
+        with self.assertRaisesRegex(ProtocolError, "every context"):
+            validate_protocol(candidate)
+
+    def test_n0r_cannot_restore_failed_n0_or_3d_claim(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n0r = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N0r"
+        )
+        n0r["may_relabel_failed_n0"] = True
+        with self.assertRaisesRegex(ProtocolError, "numerical adequacy"):
+            validate_protocol(candidate)
+
     def test_n1_cannot_drop_active_feature_baseline(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         n1 = next(

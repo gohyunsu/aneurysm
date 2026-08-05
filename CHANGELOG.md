@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · Pre-outcome N0r contract is executable
+
+### Experiment
+
+- N0a metric을 보기 전 public commit `1a68053`에서 N0r fresh seed,
+  selector, sample count, threshold와 worst-seed rule을 동결했다.
+- N0r는 N0와 같은 PDE, BC law, functionals, solver, 8개 scientific
+  threshold를 사용한다. 바뀌는 것은 fresh seed와 biased contiguous
+  prefix를 명시적 context-stratified selector로 교체하는 것뿐이다.
+- Reference 24 case는 24 context를 각각 한 번, paired 48 case는 각각
+  두 번 포함한다. N0a outcome은 이 계약을 바꿀 수 없다.
+
+### Scope
+
+- N0r pass는 N1 learned strong-baseline protocol 등록만 허용한다.
+  Failed N0 relabel, method novelty, irregular-3D headline은 허용하지 않는다.
+
 ## 2026-08-03 · N0a confirms context sensitivity without changing N0
 
 ### Result

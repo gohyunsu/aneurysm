@@ -304,6 +304,20 @@ N0a에서 failed seed의 median은 contiguous 0.00774에서 stratified
 reference axis에 24 context를 각각 한 번, paired-response axis에 각각
 두 번 포함하도록 한다.
 
+### 5.7 N0r prospective tensor contract
+
+`configs/nonlinear_pde_n0r.json`은 N0a outcome 전에 동결됐다. Runtime은
+N0의 PDE/solver config를 그대로 resolve하고 다음 두 index tensor만
+교체한다.
+
+- reference index: shape `[24]`, 각 context id가 정확히 한 번
+- paired base index: shape `[48]`, 각 context id가 정확히 두 번
+
+두 selector는 context-major flat index를 반환하지만 prefix slice를 쓰지
+않는다. Full semilinear solve는 여전히 24×12 전체 case다. N0r result에는
+선택된 flat index와 represented-context count를 기록해 contract가 실제
+실행됐는지 검증한다.
+
 ## 6. Module C — conditional solution operator
 
 주 operator는 완전한 \(B\)가 주어졌을 때 \(H=F_\theta(G,B)\)를 예측한다.

@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-03 KST
 
-상태: G1/G1r failed preserved · G1s pass · nonlinear N0 failed · N0a attribution next · N1/3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed · N0a complete · N0r preregistered · N1/3D blocked
 
 ## 1. 현재 판정
 
@@ -350,6 +350,14 @@ median은 0.01828이었다. 다른 두 seed의 stratified median도
 지지하지만 **모든 context의 강한 비선형성**은 지지하지 않는다. N0는
 failed로 유지한다. N0r는 fresh seed와 24-context coverage를 결과 전에
 고정하고 기존 scientific threshold를 유지한다.
+
+N0r의 exact contract는 N0a outcome 전 commit `1a68053`에서 고정됐다.
+Fresh seed는 `[62080321, 62080322, 62080323]`이고, reference 24 case는
+24 context를 각각 한 번, paired 48 case는 각각 두 번 포함한다. PDE,
+BC density, solver, functionals, eight threshold, all-check/worst-seed rule은
+N0와 같다. N0a 결과가 유리하거나 불리해도 이 계약을 수정하지 않는다.
+통과해도 N1 strong-baseline 등록만 열며 N0 relabel·novelty·3D 권한은
+열지 않는다.
 
 N1의 후보 정체성은 active acquisition 자체가 아니라
 **conditioning inconsistency가 solution-functional Bayes decision과 다음

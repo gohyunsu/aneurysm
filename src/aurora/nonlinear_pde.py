@@ -652,8 +652,22 @@ def run_experiment(config: Mapping[str, Any], require_cuda: bool) -> dict[str, A
         )
 
         reference_count = int(sampling["reference_cases_per_seed"])
-        ref_context = expanded_context[:reference_count]
-        ref_boundary = flat_boundary[:reference_count]
+        selector = sampling.get("case_selector", "contiguous_prefix_v1")
+        if selector == "contiguous_prefix_v1":
+            reference_indices = list(range(reference_count))
+        elif selector == "context_stratified_case_indices_v1":
+            reference_indices = context_stratified_case_indices(
+                int(sampling["contexts_per_seed"]),
+                int(sampling["conditions_per_context"]),
+                reference_count,
+            )
+        else:
+            raise NonlinearPDEError(f"Unknown N0 case selector: {selector}.")
+        reference_index = torch.tensor(
+            reference_indices, device=device, dtype=torch.long
+        )
+        ref_context = expanded_context.index_select(0, reference_index)
+        ref_boundary = flat_boundary.index_select(0, reference_index)
         reference, reference_solver = solve_semilinear(
             ref_context,
             ref_boundary,
@@ -664,7 +678,8 @@ def run_experiment(config: Mapping[str, Any], require_cuda: bool) -> dict[str, A
             relaxation=float(pde["relaxation"]),
         )
         nested_reference = reference[:, ::2, ::2]
-        discretization = _relative_l2(solution[:reference_count], nested_reference)
+        selected_solution = solution.index_select(0, reference_index)
+        discretization = _relative_l2(selected_solution, nested_reference)
 
         linear_solution, linear_solver = solve_semilinear(
             ref_context,
@@ -676,12 +691,21 @@ def run_experiment(config: Mapping[str, Any], require_cuda: bool) -> dict[str, A
             relaxation=float(pde["relaxation"]),
             linear=True,
         )
-        nonlinear_departure = _relative_l2(solution[:reference_count], linear_solution)
+        nonlinear_departure = _relative_l2(selected_solution, linear_solution)
 
         pair_count = int(sampling["paired_base_cases_per_seed"])
-        pair_context = expanded_context[:pair_count]
-        pair_boundary = flat_boundary[:pair_count]
-        base_solution = solution[:pair_count]
+        if selector == "contiguous_prefix_v1":
+            pair_indices = list(range(pair_count))
+        else:
+            pair_indices = context_stratified_case_indices(
+                int(sampling["contexts_per_seed"]),
+                int(sampling["conditions_per_context"]),
+                pair_count,
+            )
+        pair_index = torch.tensor(pair_indices, device=device, dtype=torch.long)
+        pair_context = expanded_context.index_select(0, pair_index)
+        pair_boundary = flat_boundary.index_select(0, pair_index)
+        base_solution = solution.index_select(0, pair_index)
         component_count = int(pde["boundary_components"])
         delta = float(sampling["paired_component_perturbation"])
         perturbed_boundary = pair_boundary[:, None, :].expand(
@@ -766,6 +790,23 @@ def run_experiment(config: Mapping[str, Any], require_cuda: bool) -> dict[str, A
                 "functional_winner_components": active_winners,
                 "dominant_functional_winner_share": dominant_share,
                 "analytic_conditioning_route_residual": path_residual,
+                "case_selection": {
+                    "selector": selector,
+                    "reference_flat_indices": reference_indices,
+                    "paired_flat_indices": pair_indices,
+                    "reference_contexts_represented": len(
+                        {
+                            index // int(sampling["conditions_per_context"])
+                            for index in reference_indices
+                        }
+                    ),
+                    "paired_contexts_represented": len(
+                        {
+                            index // int(sampling["conditions_per_context"])
+                            for index in pair_indices
+                        }
+                    ),
+                },
             }
         )
 

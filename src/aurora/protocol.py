@@ -686,9 +686,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
 
     nonlinear = protocol["nonlinear_protocols"]
     nonlinear_ids = _unique_ids(nonlinear, "id", "nonlinear_protocols")
-    if nonlinear_ids != {"N0", "N0a", "N1"}:
+    if nonlinear_ids != {"N0", "N0a", "N0r", "N1"}:
         raise ProtocolError(
-            "Nonlinear evidence ladder must contain N0, non-gating N0a, and N1."
+            "Nonlinear ladder must contain N0, non-gating N0a, fresh N0r, and N1."
         )
     n0 = next(item for item in nonlinear if item["id"] == "N0")
     _require_keys(
@@ -834,14 +834,65 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             if forbidden_key in n0a:
                 raise ProtocolError("Unrun N0a cannot contain post-result fields.")
 
-    n1 = next(item for item in nonlinear if item["id"] == "N1")
-    expected_n1_status = (
-        "blocked_after_failed_N0"
-        if n0["status"] == "completed_failed"
-        else "blocked_pending_N0"
+    n0r = next(item for item in nonlinear if item["id"] == "N0r")
+    _require_keys(
+        n0r,
+        [
+            "status",
+            "source_gate",
+            "config",
+            "contract_source_commit",
+            "contract_frozen_before_n0a_outcome",
+            "n0a_outcome_may_change_contract",
+            "fresh_seeds",
+            "reference_context_coverage",
+            "paired_context_coverage",
+            "pde_boundary_law_functionals_solver_unchanged",
+            "scientific_thresholds_and_worst_seed_rule_unchanged",
+            "may_relabel_failed_n0",
+            "may_establish_method_novelty",
+            "may_authorize_irregular_3d_headline",
+            "pass_authorizes",
+        ],
+        "N0r nonlinear re-entry",
     )
-    if n1["status"] != expected_n1_status or n1["source_gate"] != "N0":
-        raise ProtocolError("N1 must remain blocked until N0 passes.")
+    if (
+        n0r["status"] != "preregistered_before_fresh_gpu_run"
+        or n0r["source_gate"] != "N0"
+        or n0r["config"] != "configs/nonlinear_pde_n0r.json"
+        or n0r["contract_source_commit"]
+        != "1a680537957e4d87849abb84eab6380c76e656c9"
+    ):
+        raise ProtocolError("N0r must retain its exact pre-N0a preregistration.")
+    if (
+        n0r["contract_frozen_before_n0a_outcome"] is not True
+        or n0r["n0a_outcome_may_change_contract"] is not False
+        or n0r["fresh_seeds"] != 3
+    ):
+        raise ProtocolError("N0r must be fresh and independent of the N0a outcome.")
+    if (
+        n0r["reference_context_coverage"] != "24_of_24_exactly_once_per_seed"
+        or n0r["paired_context_coverage"] != "24_of_24_exactly_twice_per_seed"
+    ):
+        raise ProtocolError("N0r must cover every context explicitly.")
+    if (
+        n0r["pde_boundary_law_functionals_solver_unchanged"] is not True
+        or n0r["scientific_thresholds_and_worst_seed_rule_unchanged"] is not True
+    ):
+        raise ProtocolError("N0r may change only the biased selector and fresh seeds.")
+    for forbidden_claim in (
+        "may_relabel_failed_n0",
+        "may_establish_method_novelty",
+        "may_authorize_irregular_3d_headline",
+    ):
+        if n0r[forbidden_claim] is not False:
+            raise ProtocolError("N0r is numerical adequacy, not a method or 3D claim.")
+    if n0r["pass_authorizes"] != "N1_learned_model_and_strong_baseline_registration":
+        raise ProtocolError("N0r may authorize only N1 registration.")
+
+    n1 = next(item for item in nonlinear if item["id"] == "N1")
+    if n1["status"] != "blocked_pending_N0r" or n1["source_gate"] != "N0r":
+        raise ProtocolError("N1 must remain blocked until N0r passes.")
     required_n1_baselines = {
         "conditional_mean_imputation",
         "independent_mask_heads",
