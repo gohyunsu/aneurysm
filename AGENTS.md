@@ -68,7 +68,12 @@
   두 지표만 invalid로 제외한다. 이는 N1 fail을 결정한 field, pair,
   acquisition 지표나 valid route action metric에는 영향을 주지 않는다.
   Registered N1d shift와 irregular 3D는 실행하지 않는다. 다음 단계는
-  threshold-free post-result attribution이며 N1c를 relabel할 수 없다.
+  `configs/nonlinear_pde_n1c_attribution.json`에 결과 전에 고정한
+  threshold-free post-result attribution `N1c-a`이며 N1c를 relabel할 수
+  없다. 같은 open test와 50개 checkpoint만 재사용해 conditional NLL,
+  true-density/true-simulator functional floor, acquisition
+  8×32/32×64/64×128 stability, corrected CRN true-oracle route regret를
+  분해한다. Success threshold, method selection, N1d/3D 권한은 없다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen

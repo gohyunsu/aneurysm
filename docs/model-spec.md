@@ -443,6 +443,14 @@ architecture를 단순히 더 큰 GNN이나 더 긴 operator 학습으로 바꾸
 4. outer/inner acquisition sample 수에 따른 policy-selection stability
 5. 각 route action의 true conditional oracle Bayes action 대비 excess risk
 
+이 estimand와 RNG는 `configs/nonlinear_pde_n1c_attribution.json`에
+고정했다. Functional floor는 같은 48 context와 condition 0에서 128
+posterior sample을 쓰고, acquisition은 outer×inner
+8×32/32×64/64×128을 비교한다. 마지막 budget의 true candidate risk를
+한 번만 계산해 모든 seed와 작은 budget의 동일 oracle reference로 쓴다.
+이는 open-test post-result attribution이므로 성공 threshold와 model
+selection이 없다.
+
 Route candidate VoI의 N1c 구현은 `route_offset`을 seed에 더해 등록된
 common-random-number 계약을 어겼다. 따라서 VoI와 next-component
 disagreement만 invalid다. Future implementation은 direct/5→7/7→5에

@@ -160,6 +160,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.05",
+      category: "protocol",
+      title: "N1c-a separates the failed method's density, operator, and decision floors",
+      copy: "Failed N1c의 같은 open test와 frozen checkpoint만 재사용하는 threshold-free attribution을 고정했다. Conditional NLL, true-density/true-simulator functional floor, acquisition 8×32/32×64/64×128 stability, corrected common-stream true-oracle route regret만 계산한다. Pass/fail·model selection·N1c relabel·3D 권한은 없다.",
+      files: ["configs/nonlinear_pde_n1c_attribution.json", "experiments/run_nonlinear_pde_n1c_attribution.py", "cluster/ssu_a6gpu_nonlinear_pde_n1c_attribution.pbs", "tests/test_nonlinear_pde_decision.py", "docs/experiment-protocol.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.05",
       category: "result",
       title: "N1c fails the strong-baseline decision test",
       copy: "Exact 62605a0의 125/125 A6000 contract 뒤 5-seed outer test가 exit 0으로 완료됐다. Full-BC, coverage와 route action은 통과했지만 missing/sparse-2 energy는 independent heads보다 0/5 seed에서 좋았고 acquisition·paired-response도 실패했다. Route VoI의 common-random-number 위반 보조 지표는 제외하며 gate 판정은 변하지 않는다. Paired supervision은 ablation으로 내리고 3D 대신 threshold-free attribution을 진행한다.",

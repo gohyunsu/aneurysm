@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-05 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c outer test failed · 3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c outer test failed · N1c-a registered · 3D blocked
 
 ## 1. 현재 판정
 
@@ -22,6 +22,13 @@
 개선하지 못했고 paired objective도 DeltaPhi-style control보다 약했다.
 GNN, attention, uncertainty, physics loss를 조합한 것만으로 제출하지
 않는다.
+
+실패 원인 분해는
+`configs/nonlinear_pde_n1c_attribution.json`의 N1c-a로 고정했다. 이는
+같은 open test와 frozen checkpoint를 읽는 threshold-free diagnostic이다.
+Conditional density NLL, true density/true simulator 대입, acquisition
+sample scaling, corrected common-stream true-oracle route regret 외의 결과로
+N1c를 재판정하거나 3D를 열 수 없다.
 
 ## 2. 새 한 문장 연구 질문
 

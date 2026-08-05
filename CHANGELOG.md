@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-05 · N1c-a failure attribution is fixed before execution
+
+### Threshold-free diagnostic contract
+
+- `configs/nonlinear_pde_n1c_attribution.json`은 failed N1c 공개 결과와
+  동일 N1c config, open test, 50개 frozen checkpoint를 pin한다. 새 seed,
+  checkpoint selection, threshold와 pass/fail은 없다.
+- Joint/independent/ACFlow의 mask별 conditional NLL, true radius-truncated
+  law와 true simulator를 한 축씩 대입한 functional energy,
+  acquisition 8×32/32×64/64×128 stability, true-oracle route excess risk를
+  분해한다.
+- Route candidate risk는 direct/5→7/7→5에 동일 random stream을 쓰도록
+  수정하고 회귀 테스트를 추가했다. 이 수정은 N1c에서 제외한 두 보조
+  지표를 위한 post-result diagnostic이며 failed gate를 바꾸지 않는다.
+- N1d와 irregular 3D는 계속 닫혀 있고, method 변경은 새 version과 fresh
+  seed/test를 요구한다.
+
 ## 2026-08-05 · N1c completes and fails the strong-baseline outer test
 
 ### Prospective result

@@ -622,6 +622,155 @@ def load_n1c_config(
     return n1, n1b, payload, manifest
 
 
+def load_n1c_attribution_config(
+    path: str | Path,
+) -> tuple[
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+    dict[str, Any],
+]:
+    """Load the threshold-free post-result N1c failure attribution."""
+
+    config_path = Path(path)
+    payload = json.loads(config_path.read_text(encoding="utf-8"))
+    _require_keys(
+        payload,
+        [
+            "schema_version",
+            "experiment_id",
+            "status",
+            "stage",
+            "parents",
+            "has_success_threshold",
+            "may_relabel_n1c",
+            "may_decide_n1",
+            "may_authorize_n1d_or_irregular_3d",
+            "may_establish_method_novelty",
+            "test_semantics",
+            "conditional_density_attribution",
+            "functional_energy_decomposition",
+            "acquisition_mc_attribution",
+            "route_regret_attribution",
+            "randomness",
+            "reporting",
+        ],
+        "N1c attribution config",
+    )
+    if (
+        payload["schema_version"]
+        != "aurora.nonlinear_pde_n1c_attribution.v1"
+        or payload["status"]
+        != "preregistered_post_result_before_attribution_output"
+        or payload["stage"] != "threshold_free_post_result_attribution"
+    ):
+        raise NonlinearDecisionError("Unexpected N1c attribution status.")
+    for forbidden in (
+        "has_success_threshold",
+        "may_relabel_n1c",
+        "may_decide_n1",
+        "may_authorize_n1d_or_irregular_3d",
+        "may_establish_method_novelty",
+    ):
+        if payload[forbidden] is not False:
+            raise NonlinearDecisionError(
+                "N1c attribution cannot define a gate, relabel, or claim."
+            )
+
+    parents = payload["parents"]
+    n1c_path = (config_path.parent / parents["n1c_config"]["path"]).resolve()
+    result_path = (
+        config_path.parent / parents["n1c_public_result"]["path"]
+    ).resolve()
+    if (
+        not n1c_path.is_file()
+        or _sha256(n1c_path) != parents["n1c_config"]["sha256"]
+    ):
+        raise NonlinearDecisionError("Pinned N1c config changed.")
+    if (
+        not result_path.is_file()
+        or _sha256(result_path) != parents["n1c_public_result"]["sha256"]
+    ):
+        raise NonlinearDecisionError("Pinned failed N1c result changed.")
+    if (
+        parents["n1c_public_result"]["public_commit"]
+        != "45cd499b02c699ad5476e52229421dbafa33da0b"
+    ):
+        raise NonlinearDecisionError("N1c attribution must pin the failed result.")
+    n1, _, n1c, manifest = load_n1c_config(n1c_path)
+    result = json.loads(result_path.read_text(encoding="utf-8"))
+    if (
+        result["evidence_status"]
+        != "prospective_outer_test_completed_failed"
+        or result["gate"]["passed"] is not False
+        or result["decision"]["n1_status"] != "completed_failed"
+        or result["decision"]["irregular_3d_execution_authorized"] is not False
+    ):
+        raise NonlinearDecisionError("Attribution parent must remain a failed N1c.")
+
+    semantics = payload["test_semantics"]
+    if (
+        semantics["reuse_open_n1c_test"] is not True
+        or semantics["new_test_seed"] is not False
+        or semantics["checkpoint_or_model_selection"] is not False
+        or semantics["same_five_frozen_seed_checkpoints"] is not True
+        or int(semantics["same_test_context_seed"])
+        != int(n1c["test_lock"]["context_seed"])
+        or int(semantics["same_test_boundary_seed"])
+        != int(n1c["test_lock"]["boundary_seed"])
+    ):
+        raise NonlinearDecisionError("N1c attribution changed the open test.")
+
+    density = payload["conditional_density_attribution"]
+    decomposition = payload["functional_energy_decomposition"]
+    acquisition = payload["acquisition_mc_attribution"]
+    route = payload["route_regret_attribution"]
+    randomness = payload["randomness"]
+    if (
+        density["models"]
+        != ["aurora_joint", "independent_mask_heads", "acflow_adapted"]
+        or density["masks"]
+        != {"missing": [], "sparse_2": [0, 2], "partial_4": [0, 2, 5, 7]}
+        or density["report_true_law_excess"] is not True
+        or decomposition["context_indices"] != list(range(0, 192, 4))
+        or int(decomposition["anchor_condition_index"]) != 0
+        or decomposition["masks"] != {"missing": [], "sparse_2": [0, 2]}
+        or int(decomposition["posterior_samples"]) != 128
+        or acquisition["sample_budgets"]
+        != [
+            {"outer": 8, "inner": 32},
+            {"outer": 32, "inner": 64},
+            {"outer": 64, "inner": 128},
+        ]
+        or acquisition["reference_budget"] != {"outer": 64, "inner": 128}
+        or acquisition["true_candidate_risk_computed_once_at_reference_budget"]
+        is not True
+        or route["models"]
+        != ["aurora_joint", "independent_mask_heads", "acflow_adapted"]
+        or route["routes"]
+        != [
+            "direct_final",
+            "sequential_5_then_7",
+            "sequential_7_then_5",
+        ]
+        or route["common_random_numbers_across_routes"] is not True
+        or route["candidate_risk_seed_policy"]
+        != "identical_seed_for_all_routes_within_model_seed"
+        or randomness
+        != {
+            "energy_true_density_base_seed": 73080801,
+            "energy_learned_density_base_seed": 73080811,
+            "route_true_functional_seed": 73080821,
+            "reuse_parent_acquisition_streams": True,
+            "model_seed_offset": 100000,
+        }
+        or payload["reporting"]["retain_failed_n1c_verdict"] is not True
+        or payload["reporting"]["result_is_exploratory"] is not True
+    ):
+        raise NonlinearDecisionError("N1c attribution estimands changed.")
+    return n1, n1c, payload, manifest
+
+
 def _imports() -> tuple[Any, Any]:
     try:
         import numpy as np

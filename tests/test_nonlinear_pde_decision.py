@@ -19,6 +19,7 @@ from aurora.nonlinear_pde_decision import (
     load_config,
     load_n1b_config,
     load_n1c_config,
+    load_n1c_attribution_config,
     load_optimization_config,
 )
 
@@ -30,6 +31,9 @@ OPTIMIZATION_CONFIG = (
 )
 N1B_CONFIG = ROOT / "configs" / "nonlinear_pde_n1b.json"
 N1C_CONFIG = ROOT / "configs" / "nonlinear_pde_n1c.json"
+N1C_ATTRIBUTION_CONFIG = (
+    ROOT / "configs" / "nonlinear_pde_n1c_attribution.json"
+)
 
 
 class NonlinearDecisionContractTests(unittest.TestCase):
@@ -101,6 +105,33 @@ class NonlinearDecisionContractTests(unittest.TestCase):
                 NonlinearDecisionError, "checkpoint manifest"
             ):
                 load_n1c_config(candidate)
+
+    def test_n1c_attribution_is_threshold_free_and_keeps_failure(self) -> None:
+        _, n1c, attribution, manifest = load_n1c_attribution_config(
+            N1C_ATTRIBUTION_CONFIG
+        )
+        self.assertFalse(attribution["has_success_threshold"])
+        self.assertFalse(attribution["may_relabel_n1c"])
+        self.assertFalse(
+            attribution["may_authorize_n1d_or_irregular_3d"]
+        )
+        self.assertEqual(len(manifest["seed_runs"]), 5)
+        self.assertEqual(
+            attribution["test_semantics"]["same_test_context_seed"],
+            n1c["test_lock"]["context_seed"],
+        )
+
+    def test_route_candidate_seed_honors_common_random_numbers(self) -> None:
+        from experiments.run_nonlinear_pde_n1c_outer_test import (
+            _route_candidate_seed,
+        )
+
+        _, _, n1c, _ = load_n1c_config(N1C_CONFIG)
+        seeds = [
+            _route_candidate_seed(n1c, 1234, route_offset)
+            for route_offset in range(3)
+        ]
+        self.assertEqual(seeds, [51234, 51234, 51234])
 
     def test_test_access_cannot_move_before_checkpoint_freeze(self) -> None:
         candidate = copy.deepcopy(self.config)
@@ -260,6 +291,42 @@ class NonlinearDecisionContractTests(unittest.TestCase):
             float(torch.linalg.vector_norm(samples, dim=-1).max().item()),
             2.5 + 1e-5,
         )
+
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
+    def test_true_truncated_conditional_nll_is_finite(self) -> None:
+        import torch
+
+        from aurora.nonlinear_pde import boundary_law
+        from aurora.nonlinear_pde_evaluation import (
+            sample_radius_truncated_conditional_gmm,
+        )
+        from experiments.run_nonlinear_pde_n1c_attribution import (
+            _true_truncated_conditional_nll,
+        )
+
+        context = torch.zeros(3, 5)
+        weights, means, covariances = boundary_law(context)
+        boundary = sample_radius_truncated_conditional_gmm(
+            weights,
+            means,
+            covariances,
+            [],
+            torch.empty(3, 0),
+            samples=1,
+            seed=919,
+            maximum_radius=2.5,
+        )[:, 0]
+        for mask in ([], [0, 2], [0, 2, 5, 7]):
+            nll = _true_truncated_conditional_nll(
+                weights,
+                means,
+                covariances,
+                boundary,
+                mask,
+                maximum_radius=2.5,
+            )
+            self.assertEqual(tuple(nll.shape), (3,))
+            self.assertTrue(torch.isfinite(nll).all())
 
     @unittest.skipUnless(importlib.util.find_spec("torch"), "torch is not installed")
     def test_energy_score_is_zero_for_identical_deterministic_samples(self) -> None:

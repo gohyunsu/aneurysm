@@ -577,6 +577,8 @@ invalid로 제외한다. 이들은 gate에 쓰이지 않았으므로 N1 fail 판
 
 다음 실행은 새 gate나 re-entry가 아니다. N1c와 같은 checkpoint/test를
 읽을 수 있으므로 결과는 exploratory이며 아래만 분해한다.
+실행 계약은 `configs/nonlinear_pde_n1c_attribution.json`에 결과 전에
+고정한다.
 
 - joint, independent, ACFlow의 mask별 conditional NLL과 true-law excess
 - true BC law + learned operator와 learned density + oracle simulator의

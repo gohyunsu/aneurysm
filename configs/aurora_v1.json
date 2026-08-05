@@ -622,6 +622,35 @@
         "n1d_shift_executed": false,
         "post_result_attribution_is_non_gating": true,
         "irregular_3d_registration_authorized": false
+      },
+      "post_result_attribution": {
+        "id": "N1c-a",
+        "status": "preregistered_before_attribution_output",
+        "config": "configs/nonlinear_pde_n1c_attribution.json",
+        "parent_n1c_status": "completed_failed_unchanged",
+        "same_open_test_and_frozen_checkpoints": true,
+        "has_success_threshold": false,
+        "may_relabel_n1c": false,
+        "may_select_model_or_checkpoint": false,
+        "may_authorize_n1d_or_irregular_3d": false,
+        "conditional_density_models": [
+          "aurora_joint",
+          "independent_mask_heads",
+          "acflow_adapted"
+        ],
+        "functional_floor_cells": [
+          "learned_density_learned_operator",
+          "true_density_learned_operator",
+          "learned_density_true_simulator",
+          "true_density_true_simulator"
+        ],
+        "acquisition_outer_inner_samples": [
+          [8, 32],
+          [32, 64],
+          [64, 128]
+        ],
+        "route_candidate_common_random_numbers_corrected": true,
+        "route_reference": "true_conditional_simulator_bayes_action"
       }
     }
   ],

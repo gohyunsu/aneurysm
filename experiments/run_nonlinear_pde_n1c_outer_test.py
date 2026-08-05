@@ -759,6 +759,25 @@ def _route_candidate_risks(
     return torch.stack(risks, dim=1)
 
 
+def _route_candidate_seed(
+    n1c: Mapping[str, Any],
+    base_seed: int,
+    route_offset: int,
+) -> int:
+    """Return the registered candidate-risk stream for one route.
+
+    The prospective N1c run incorrectly added ``1000 * route_offset`` even
+    though its config required common random numbers. Its two affected
+    secondary metrics are excluded from that result. This helper prevents the
+    same violation in post-result diagnostics and future versions.
+    """
+
+    seed = int(base_seed) + 50000
+    if not n1c["route_evaluation"]["common_random_numbers_across_routes"]:
+        seed += 1000 * int(route_offset)
+    return seed
+
+
 def _evaluate_routes(
     n1c: Mapping[str, Any],
     n0_config: Mapping[str, Any],
@@ -857,7 +876,7 @@ def _evaluate_routes(
                 functional_grid_minimum,
                 functional_grid_maximum,
                 n1c,
-                seed=base_seed + 50000 + 1000 * route_offset,
+                seed=_route_candidate_seed(n1c, base_seed, route_offset),
             )
         direct = route_functionals["direct_final"]
         direct_action = route_actions["direct_final"]

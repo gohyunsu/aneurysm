@@ -1,0 +1,126 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1c_attribution.v1",
+  "experiment_id": "nonlinear_n1c_failure_attribution_v1",
+  "status": "preregistered_post_result_before_attribution_output",
+  "stage": "threshold_free_post_result_attribution",
+  "parents": {
+    "n1c_config": {
+      "path": "nonlinear_pde_n1c.json",
+      "sha256": "6e14a9ed1682771fe3936e753d16d30317145752fb17f5e091f3db0b8e63ba8e"
+    },
+    "n1c_public_result": {
+      "path": "../results/nonlinear_pde_n1c_20260805.json",
+      "sha256": "4279b961563c8e473e2f4609a9c785398d4d1f25738985c2beff176d3063a4f2",
+      "public_commit": "45cd499b02c699ad5476e52229421dbafa33da0b"
+    }
+  },
+  "has_success_threshold": false,
+  "may_relabel_n1c": false,
+  "may_decide_n1": false,
+  "may_authorize_n1d_or_irregular_3d": false,
+  "may_establish_method_novelty": false,
+  "test_semantics": {
+    "reuse_open_n1c_test": true,
+    "new_test_seed": false,
+    "checkpoint_or_model_selection": false,
+    "same_five_frozen_seed_checkpoints": true,
+    "same_test_context_seed": 73080585,
+    "same_test_boundary_seed": 73081585
+  },
+  "conditional_density_attribution": {
+    "models": [
+      "aurora_joint",
+      "independent_mask_heads",
+      "acflow_adapted"
+    ],
+    "masks": {
+      "missing": [],
+      "sparse_2": [0, 2],
+      "partial_4": [0, 2, 5, 7]
+    },
+    "metric": "conditional_negative_log_likelihood_per_unobserved_component",
+    "true_reference": "exact_radius_truncated_context_conditioned_gmm",
+    "report_true_law_excess": true
+  },
+  "functional_energy_decomposition": {
+    "context_indices": [
+      0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44,
+      48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92,
+      96, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140,
+      144, 148, 152, 156, 160, 164, 168, 172, 176, 180, 184, 188
+    ],
+    "anchor_condition_index": 0,
+    "masks": {
+      "missing": [],
+      "sparse_2": [0, 2]
+    },
+    "posterior_samples": 128,
+    "cells": [
+      "learned_density_learned_operator",
+      "true_density_learned_operator",
+      "learned_density_true_simulator",
+      "true_density_true_simulator"
+    ],
+    "metric": "multivariate_standardized_functional_energy_score",
+    "interpretation": "nonadditive_floor_substitution_diagnostic_only"
+  },
+  "acquisition_mc_attribution": {
+    "sample_budgets": [
+      {
+        "outer": 8,
+        "inner": 32
+      },
+      {
+        "outer": 32,
+        "inner": 64
+      },
+      {
+        "outer": 64,
+        "inner": 128
+      }
+    ],
+    "reference_budget": {
+      "outer": 64,
+      "inner": 128
+    },
+    "true_candidate_risk_computed_once_at_reference_budget": true,
+    "same_candidate_stream_within_budget_and_model": true,
+    "report_policy_component_agreement_with_reference_budget": true
+  },
+  "route_regret_attribution": {
+    "models": [
+      "aurora_joint",
+      "independent_mask_heads",
+      "acflow_adapted"
+    ],
+    "routes": [
+      "direct_final",
+      "sequential_5_then_7",
+      "sequential_7_then_5"
+    ],
+    "posterior_samples": 256,
+    "common_random_numbers_across_routes": true,
+    "candidate_risk_seed_policy": "identical_seed_for_all_routes_within_model_seed",
+    "reference": "true_conditional_simulator_bayes_action_on_same_samples",
+    "metric": "nonnegative_excess_bounded_bayes_risk",
+    "aggregation": [
+      "mean_per_route",
+      "worst_route_per_context",
+      "maximum_route_mean"
+    ]
+  },
+  "randomness": {
+    "energy_true_density_base_seed": 73080801,
+    "energy_learned_density_base_seed": 73080811,
+    "route_true_functional_seed": 73080821,
+    "reuse_parent_acquisition_streams": true,
+    "model_seed_offset": 100000
+  },
+  "reporting": {
+    "report_each_seed": true,
+    "report_context_level_aggregate": true,
+    "retain_failed_n1c_verdict": true,
+    "result_is_exploratory": true,
+    "method_change_requires_new_version_fresh_seed_and_fresh_test": true
+  }
+}

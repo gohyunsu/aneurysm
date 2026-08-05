@@ -238,7 +238,10 @@ aggregate는
 [`results/nonlinear_pde_n1c_20260805.json`](results/nonlinear_pde_n1c_20260805.json)입니다.
 다음은 3D 실행이 아니라 joint conditional NLL, operator floor,
 acquisition Monte Carlo stability와 true-oracle worst-route regret를
-분해하는 threshold-free attribution입니다.
+분해하는
+[`N1c-a threshold-free attribution`](configs/nonlinear_pde_n1c_attribution.json)입니다.
+같은 open test를 쓰므로 성공 gate나 method selection이 아니며, 결과가
+좋아도 failed N1c와 닫힌 3D 상태는 바뀌지 않습니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,
