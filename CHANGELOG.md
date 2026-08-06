@@ -58,6 +58,15 @@
   `docs/experiment-protocol.md`, `configs/aurora_v1.json`,
   `site/assets/research-data.js`, main site와 field guide에 동기화한다.
 
+### Deployment
+
+- Result-sync commit
+  `c8a427bd574c27848120139f4e2349c74a010649`의 research-contract
+  quality와 GitHub Pages workflow가 모두 통과했다.
+- Public hub `https://gohyunsu.github.io/aneurysm/site/index.html`, field
+  guide와 두 frozen aggregate URL이 최신 판정·수치를 제공하며 HTTP 200을
+  반환함을 확인했다.
+
 ## 2026-08-06 · Post-N1c development audits are frozen before output
 
 ### Density-objective control
