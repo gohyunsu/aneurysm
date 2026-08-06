@@ -338,6 +338,37 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
+          <p class="eyebrow">M0 · PREREGISTERED / UNRUN</p>
+          <span>missing only · 3 fresh development seeds · no N1 test</span>
+        </div>
+        <div class="g1-result-metrics">
+          <div><span>Candidate-joint MMD²</span><b>≥ 5%</b><small>vs strongest control · 3/3</small></div>
+          <i>+</i>
+          <div><span>Oracle regret</span><b>≥ 5%</b><small>paired CI upper &lt; 0</small></div>
+          <div class="delta negative"><span>Local repair</span><b>0</b><small>failure terminates mechanism</small></div>
+        </div>
+        <div class="g1-result-decision">
+          <strong>Solution marginal이 아니라 “어떤 BC를 재면 무엇을 알게 되는가”의 joint law를 점수화한다.</strong>
+          <p>
+            같은 candidate BC marginal과 같은 solution-functional marginal도
+            서로 다른 dependence를 가지면 post-measurement Bayes risk가
+            달라진다. M0는 하나의 analytically conditionable joint BC
+            density를 유지하고, frozen full-condition operator를 거친
+            각 (candidate measurement, solution functional) pushforward에
+            product-kernel score를 적용한다. Full-joint MLE,
+            boundary-kernel, solution-marginal proper-score와 공정하게
+            비교하며 density·solution marginal·operator 정확도 보호 조건도
+            모두 통과해야 한다. 통과해도 별도 fresh re-entry 설계 자격일
+            뿐 method나 novelty가 아니다.
+          </p>
+          <a href="../configs/nonlinear_pde_n1_missing_operator_pullback_m0.json">Frozen M0 contract ↗</a>
+          <a href="../docs/model-spec.md">Architecture와 수식 읽기 →</a>
+          <a href="../docs/experiment-protocol.md">9-check gate 읽기 →</a>
+        </div>
+      </article>
+
+      <article class="g1-result">
+        <div class="g1-result-head">
           <p class="eyebrow">POST-N1C AUDITS · COMPLETE / NON-GATING</p>
           <span>exact 337c75e · no test access · 3D blocked</span>
         </div>
@@ -520,10 +551,10 @@
       <div class="contribution-grid">
         <article><span>C1</span><h3>Compatibility · unsupported contribution</h3><p>Joint conditioning은 작동했지만 independent heads보다 conditional accuracy가 낮아 독립 contribution이 아니다.</p></article>
         <article><span>C2</span><h3>Paired response · ablation only</h3><p>DeltaPhi-style residual보다 약해 headline에서 내렸다.</p></article>
-        <article><span>C3</span><h3>Decision consequence · unsupported</h3><p>Route consistency가 robust true-oracle regret 감소로 이어지지 않았다.</p></article>
+        <article><span>C3</span><h3>Joint pullback · hypothesis only</h3><p>Candidate BC–solution functional joint dependence를 겨냥한 M0는 preregistered/unrun이다. Positive result 전에는 contribution이 아니다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>audits complete · missing-only method design before fresh re-entry</b>
+        <span>Current stage</span><b>M0 preregistered/unrun · one-shot mechanism gate · no fresh re-entry</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

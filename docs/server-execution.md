@@ -274,6 +274,17 @@ Checkpoint, training history와 per-context metric은 private output에
 development 방향을 좁히지만 새 method·fresh re-entry·N1d/3D 권한을
 열지 않는다.
 
+M0는
+`cluster/ssu_a6gpu_nonlinear_pde_n1_missing_operator_pullback_m0.pbs`의
+0–2 A6000 array로만 실행한다. Public source와 N1b checkpoint root는
+각각 read-only, seed output만 writable로 bind한다. 각 array index는
+fresh density seed와 seed-matched pair-loss-zero frozen operator 하나를
+사용한다. Runner는 checkpoint SHA-256, config/source commit, train/selection/
+audit split, operator audit L2, solver convergence, test-access false와
+private per-context metric을 기록한다. 세 seed가 전부 exit 0일 때만 한 번
+aggregate하며, 일부 결과를 보고 config나 남은 job을 바꾸지 않는다.
+M0 실패 뒤 같은 mechanism의 weight/kernel repair job은 제출하지 않는다.
+
 ## Aneumo selective-cache contract
 
 사전등록한 32 AneuX base family × 2 deformation의 selective range staging은

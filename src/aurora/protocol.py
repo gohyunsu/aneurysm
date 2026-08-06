@@ -970,6 +970,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "outer_test_execution",
                 "post_result_attribution",
                 "next_development_audits",
+                "missing_operator_pullback_m0",
             ],
             "completed N1",
         )
@@ -1284,6 +1285,56 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "Post-N1c audits must remain completed, test-free, "
                 "non-selecting, non-gating, and unable to authorize N1d "
                 "or irregular 3D."
+            )
+        m0 = n1["missing_operator_pullback_m0"]
+        if m0 != {
+            "config": (
+                "configs/nonlinear_pde_n1_missing_operator_pullback_m0.json"
+            ),
+            "status": "preregistered_before_development_output",
+            "stage": "prospective_validation_only_mechanism_gate",
+            "base_mask": "missing",
+            "sparse_2_role": "fixed_acquisition_control_only",
+            "model_seeds": [73081021, 73081022, 73081023],
+            "data": {
+                "train_contexts": 3072,
+                "conditions_per_context": 8,
+                "selection_validation_contexts": 384,
+                "audit_validation_contexts": 192,
+                "acquisition_audit_contexts": 96,
+            },
+            "proposed_mechanism": (
+                "full_joint_likelihood_plus_candidate_measurement_solution_"
+                "joint_pushforward_kernel_score"
+            ),
+            "controls": [
+                "full_joint_mle",
+                "full_joint_plus_boundary_kernel",
+                "full_joint_plus_solution_marginal_kernel",
+            ],
+            "frozen_operator": "N1b_pair_loss_zero_seed_matched_read_only",
+            "primary_metrics": [
+                "true_simulator_candidate_joint_mmd_squared",
+                "true_oracle_acquisition_regret",
+            ],
+            "all_checks_required": True,
+            "relative_improvement_minimum": 0.05,
+            "seed_direction_minimum": 3,
+            "paired_context_ci95_upper_below_zero": True,
+            "missing_density_excess_relative_degradation_maximum": 0.05,
+            "solution_marginal_mmd_relative_degradation_maximum": 0.01,
+            "frozen_operator_audit_l2_maximum_every_seed": 0.05,
+            "may_access_or_generate_n1_test": False,
+            "may_relabel_n1c": False,
+            "may_establish_method_novelty": False,
+            "fresh_reentry_registered": False,
+            "may_authorize_n1d_or_irregular_3d": False,
+            "failure_abandons_mechanism_without_local_weight_or_kernel_repair": True,
+            "pass_only_allows_separate_fresh_reentry_protocol_design": True,
+        }:
+            raise ProtocolError(
+                "M0 must remain missing-only, prospective, all-checks-required, "
+                "test-free, non-authorizing, and terminal after failure."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

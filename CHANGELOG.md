@@ -4,6 +4,52 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-06 · M0 freezes one operator-specific mechanism without a repair loop
+
+### Research gap and method boundary
+
+- 2024–2026 direct prior art를 재감사해 solution-marginal proper scoring,
+  arbitrary conditioning, path compatibility, AFA, acquisition-conditioned
+  oracle와 neural-operator Thompson sampling을 독립 novelty에서 제외했다.
+- 남은 좁은 gap은 candidate measurement \(B_j\)와 solution functional
+  \(\Psi(H)\)의 joint dependence다. 두 marginal이 각각 같아도 dependence가
+  다르면 post-measurement Bayes risk와 VoI가 달라질 수 있다.
+- M0는 하나의 analytically conditionable joint BC density를 유지하고,
+  frozen full-condition operator를 통한 candidate-wise
+  \((B_j,\Psi(H))\) product-kernel pushforward score를 full-joint
+  likelihood에 더한다. Kernel score, probabilistic operator, active
+  acquisition과 generic IPM bound 자체는 novelty로 주장하지 않는다.
+
+### Prospective validation-only contract
+
+- `configs/nonlinear_pde_n1_missing_operator_pullback_m0.json`에 missing-only
+  3-seed development gate를 output 전에 고정했다. 3,072×8 train,
+  384×8 selection, disjoint 192×8 audit와 first-96 acquisition context를
+  사용하고 N1 test는 생성·접근하지 않는다.
+- Full-joint MLE, full-boundary kernel, solution-marginal kernel과 proposed
+  candidate–solution joint pullback을 identical initialization, minibatch,
+  kernel random number, checkpoint-selection metric으로 비교한다.
+- Candidate-joint MMD²와 true-oracle acquisition regret가 각각 strongest
+  control 대비 ≥5%, 3/3 seed, paired-context CI95 upper <0을 만족해야 한다.
+  Density excess degradation ≤5%, solution MMD² degradation ≤1%와 모든
+  frozen-operator audit L2 ≤0.05도 동시에 요구한다.
+- 하나라도 실패하면 weight, kernel scale, mask, seed, sample budget,
+  threshold를 국소 조정하지 않고 mechanism을 폐기한다. 통과해도 별도
+  five-seed fresh re-entry protocol 설계 자격일 뿐 method, novelty,
+  N1c relabel, N1d/3D 권한은 아니다.
+
+### Implementation and synchronized surfaces
+
+- Strict loader, differentiable GMM pullback score, frozen-operator training,
+  true-simulator MMD/acquisition audit, private per-context output와
+  public aggregate gate를 구현했다. PBS는 code/checkpoint read-only,
+  output-only writable인 A6000 array 0–2다.
+- Protocol validator와 tests가 M0의 missing-only scope, test lock,
+  all-checks rule과 failure-terminal/no-local-repair 계약을 강제한다.
+- 연구 방향, model spec, experiment protocol, executable contract,
+  README, AGENTS 운영 규약, 사이트의 architecture/evidence/changelog를
+  같은 판정으로 동기화했다.
+
 ## 2026-08-06 · Post-N1c audits complete without selecting a method
 
 ### Exact-source execution

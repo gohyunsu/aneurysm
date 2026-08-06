@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-06 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · N1c-a completed · two post-N1c audits completed/non-gating · current identity unsupported · 3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · post-N1c audits completed · M0 missing-only mechanism preregistered/unrun · method unselected · 3D blocked
 
 ## 1. 현재 판정
 
@@ -416,8 +416,73 @@ excess를 20.3–27.2% 낮췄으므로 현재의 accuracy tax가 구조적으로
 Method-independent audit은 missing task의 nonzero VoI와 안정성을
 확인했지만 sparse-2가 fixed-winner라 adaptive benchmark가 아님을
 확인했다. 따라서 missing endpoint에서만 남은 gap을 겨냥하는
-operator-specific algorithm과 보장을 별도 결과 전 protocol로 설계해야
-하며, 아직 method나 fresh re-entry는 등록하지 않는다.
+operator-specific mechanism을 별도 결과 전 protocol로 설계해야 한다.
+그 첫 falsification 단계인 M0는 등록했지만, 아직 선택된 method나 fresh
+re-entry는 없다.
+
+### Candidate-measurement–solution joint pullback · M0
+
+선행연구와 구분되는 가장 좁은 남은 질문은 “solution distribution이
+맞는가?”가 아니라 **각 후보 측정 \(B_j\)와 그 뒤 solution functional
+\(Z=\Psi(H)\)의 joint law가 맞는가?**이다. Solution marginal
+\(p(Z\mid G)\)과 candidate marginal \(p(B_j\mid G)\)이 각각 같아도 둘의
+의존성이 다르면 \(B_j\)를 관측한 뒤의 Bayes action과 VoI는 달라진다.
+따라서 solution-marginal proper score만으로 one-component acquisition을
+식별할 수 없다.
+
+M0의 proposed objective는 하나의 joint BC density \(q_\theta(B\mid G)\)와
+frozen full-condition operator \(\hat F\)를 유지한 채
+
+\[
+T_j(G,B)=
+\left(
+\operatorname{std}(B_j),
+\operatorname{std}\{\Psi(\hat F(G,B))\}
+\right)
+\]
+
+의 eight candidate-wise joint pushforward에 characteristic product-kernel
+score를 적용한다. Full-joint log score의 양의 weight를 유지하므로 exact
+operator와 population limit에서 true BC joint law가 unique optimum이라는
+properness를 잃지 않는다. Acquisition head, mask별 density head 또는
+별도 imputer는 추가하지 않으며 측정 뒤 posterior는 같은 joint density의
+analytic conditional이다.
+
+이론 계약은 세 문장으로 제한한다.
+
+1. full-joint log score와 characteristic pushforward kernel score의 합은
+   exact-operator population setting에서 true joint BC law를 보존한다.
+2. 같은 \(B_j\), \(Z\) marginal을 갖더라도 correlated와 independent joint는
+   서로 다른 post-measurement Bayes risk를 만들 수 있다.
+3. 각 policy loss integrand의 RKHS norm이 \(C\) 이하이면 candidate-risk
+   오차는 \(C\,\mathrm{MMD}\), 선택된 component regret는
+   \(2C\max_j\mathrm{MMD}_j\)로 제한된다.
+
+Kernel/energy score, probabilistic neural operator, arbitrary conditioning,
+active feature acquisition, joint MLE와 generic IPM decision bound는 모두
+선행 구성요소다. 독립 novelty 후보는 이들을 나열하는 데 있지 않고,
+**candidate measurement–solution joint를 operator를 통해 직접 점수화해
+coherent posterior의 finite-sample acquisition sufficiency를 겨냥하는
+문제·목적함수·보장**의 결합에 있다. 이 문구도 M0와 별도 fresh strong
+baseline 실험이 양수일 때만 contribution으로 승격한다.
+
+Exact contract는
+`configs/nonlinear_pde_n1_missing_operator_pullback_m0.json`이다. Missing
+mask만 primary로 쓰고 sparse-2는 fixed-winner control로만 남긴다. 세 fresh
+development seed에서 full-joint MLE, boundary-kernel compute control,
+solution-marginal proper-score control과 proposed joint pullback을 같은
+initialization·minibatch·kernel RNG로 비교한다. 3,072×8 training,
+384×8 selection-validation, disjoint 192×8 audit-validation, frozen
+pair-zero full-condition operator와 true-simulator oracle을 사용한다.
+
+Mechanism gate는 candidate-joint MMD²와 true-oracle acquisition regret가
+각각 strongest control보다 5% 이상 개선되고 3/3 seed 방향과 paired
+context bootstrap CI upper < 0을 모두 만족해야 한다. 동시에 full-joint
+density excess degradation ≤ 5%, solution-marginal MMD² degradation ≤ 1%,
+모든 frozen-operator audit L2 ≤ 0.05를 요구한다. 하나라도 실패하면
+weight·kernel·mask·seed·threshold를 고치는 local repair 없이 mechanism을
+폐기한다. 통과해도 separate five-seed fresh re-entry 설계 자격일 뿐 N1c
+relabel, method novelty, N1d 또는 3D 권한은 아니다.
 
 새 방법이 정당화된다면 bounded loss에서 posterior TV/KL로 Bayes-regret를
 제한하는 분석과, compatible joint model이 실제 oracle functional risk와

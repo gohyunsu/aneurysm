@@ -222,6 +222,26 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "non-selecting"):
             validate_protocol(candidate)
 
+    def test_m0_failure_cannot_enter_a_local_repair_loop(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["missing_operator_pullback_m0"][
+            "failure_abandons_mechanism_without_local_weight_or_kernel_repair"
+        ] = False
+        with self.assertRaisesRegex(ProtocolError, "terminal after failure"):
+            validate_protocol(candidate)
+
+    def test_m0_cannot_open_test_or_reentry(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["missing_operator_pullback_m0"]["fresh_reentry_registered"] = True
+        with self.assertRaisesRegex(ProtocolError, "non-authorizing"):
+            validate_protocol(candidate)
+
     def test_patient_bootstrap_is_required(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["evaluation"]["clinical_bootstrap_unit"] = "aneurysm"

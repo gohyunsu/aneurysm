@@ -1,6 +1,6 @@
 # AURORA v2 모델 명세
 
-상태: N1c failed · N1c-a density bottleneck attribution completed · two non-gating development audits completed · missing task retained · sparse-2 adaptive task removed · method unselected
+상태: N1c failed · post-N1c audits completed · missing task retained · M0 candidate-measurement–solution pullback preregistered/unrun · sparse-2 adaptive task removed · method unselected
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -512,7 +512,65 @@ architecture는 missing endpoint만 decision-aware evaluation에 쓰고,
 sparse-2는 fixed acquisition control로만 남긴다. 이 audit은 새 gate나
 contribution이 아니며 N1c failed와 3D blocked를 바꾸지 않는다.
 
-## 7. Module D — paired simulator-response supervision · ablation
+## 7. Module C2 — candidate-measurement–solution joint pullback · M0
+
+M0는 새 acquisition network를 붙이지 않는다. 하나의 context-conditioned
+full-covariance 2-GMM \(q_\theta(B\mid G)\), frozen full-condition operator
+\(\hat F(G,B)\), 네 registered functionals
+\(Z=\Psi(\hat F(G,B))\)만 사용한다. Candidate \(j\)별 score input은
+
+\[
+T_j(G,B)=
+\left[
+\frac{B_j-\mu_{B_j}}{\sigma_{B_j}},
+\frac{\Psi(\hat F(G,B))-\mu_Z}{\sigma_Z}
+\right].
+\]
+
+\(\mu,\sigma\)는 3,072×8 training split에서만 계산한다. Candidate scalar와
+four-dimensional functional에 각각 multiscale RBF를 적용하고 두 kernel의
+곱을 joint kernel로 쓴다. Scale은 0.5/1/2 equal mixture, score weight는
+0.25로 결과 전에 고정했다. 두 GMM component에서 한 draw씩 뽑는
+component-stratified two-draw estimator를 사용하며 latent Mahalanobis
+radius 2.5를 동일하게 적용한다.
+
+네 compute/control variant는 다음과 같다.
+
+| variant | objective | 판정 역할 |
+|---|---|---|
+| full-joint MLE | full-joint NLL / 8 | strongest post-N1c control |
+| + boundary kernel | NLL + full-\(B\) kernel score | generic score/compute control |
+| + solution marginal | NLL + \(Z\) kernel score | probabilistic-operator proper-score control |
+| + candidate–solution joint | NLL + mean\(_j\) kernel score on \((B_j,Z)\) | proposed mechanism |
+
+모든 variant는 한 seed 안에서 identical initial state, minibatch index,
+kernel random number를 공유한다. Checkpoint selection도 variant별 유리한
+metric을 쓰지 않고 full-joint NLL/8 + 0.25 candidate-joint score 하나로
+통일한다. Cross-variant winner selection은 없다.
+
+Frozen operator는 N1b manifest seed 0–2의
+`aurora_shared_operator_pair_loss_zero` checkpoint다. Training pullback과
+model-belief acquisition에만 이 operator를 쓰며 parameter gradient는
+막되 BC sample까지의 gradient는 유지한다. Audit candidate/solution MMD와
+oracle risk는 true semilinear simulator로 다시 계산한다. Audit split에서
+frozen operator full-BC relative L2가 seed마다 0.05 이하가 아니면 gate는
+실패한다.
+
+Solution marginal만 맞아도 acquisition이 맞는 것은 아니다. 예를 들어
+\(B_j,Z\)가 각각 같은 marginal을 갖는 correlated joint와 independent
+joint는 \(p(Z\mid B_j)\)가 다르다. M0는 이 dependence gap을 candidate-wise
+joint MMD²로 직접 측정한다. Policy loss integrand가 joint-kernel RKHS에서
+norm \(C\) 이하라면 candidate-risk 오차는 \(C\mathrm{MMD}\), plug-in
+selected component regret는 \(2C\max_j\mathrm{MMD}_j\) 이하라는
+falsifiable bridge를 쓴다.
+
+M0는 세 fresh development seed와 disjoint selection/audit validation만
+사용한다. 9개 check를 모두 통과해야 별도 five-seed fresh re-entry를
+설계할 수 있다. 실패 뒤 scale/weight/mask/seed/threshold를 바꾸는
+local repair는 금지하며 mechanism을 폐기한다. 통과해도 선택된 method,
+novelty, N1c relabel, N1d 또는 irregular-3D 권한이 아니다.
+
+## 8. Module D — paired simulator-response supervision · ablation
 
 동일 geometry \(G\)에 서로 다른 \(B_i,B_j\)와 solution \(H_i,H_j\)가 있을
 때 다음을 추가한다.
@@ -566,7 +624,7 @@ Aneumo의 학습·평가 대상은 **velocity response만**이다.
   multicomponent nonlinear N0/N1과 strong baseline을 먼저 검증하고,
   해당 결과 없이 3D pilot을 headline evidence로 사용하지 않는다.
 
-## 8. Module E — uncertainty decomposition
+## 9. Module E — uncertainty decomposition
 
 Ensemble member \(e\), BC completion \(k\)의 prediction을
 \(\hat H_{e,k}\)라 한다.
@@ -588,7 +646,7 @@ _{\text{model-induced}}
 Aleatoric/epistemic이라는 넓은 용어보다 원인이 분명한
 `BC-induced`와 `model-induced`를 사용한다.
 
-## 9. 시간 표현의 위치
+## 10. 시간 표현의 위치
 
 Fixed Fourier \(K=4/8/12\)는 frozen D0에서 localized bulge error를
 회복하지 못해 현행 architecture에서 제거했다. Global retained energy가
@@ -622,7 +680,7 @@ Rank 17/25 선택은 learned experiment의 inner validation에서만 수행하�
 효율 주장은 D0b architecture selection에 사용되지 않은 fresh transient
 test에서 재현해야 한다.
 
-## 10. 학습 목적
+## 11. 학습 목적
 
 \[
 \mathcal L =
@@ -646,7 +704,7 @@ Nested coherence는 analytic conditional density와 shared pushforward로
 구조화한다. 별도 숫자 loss를 추가해 보이는 것만으로 보장했다고 하지 않고,
 random projection에서 empirical tower-property error를 측정한다.
 
-## 11. 필수 baseline
+## 12. 필수 baseline
 
 | 범주 | 비교 |
 |---|---|
@@ -661,7 +719,7 @@ random projection에서 empirical tower-property error를 측정한다.
 Parameter 수, train examples, geometry split, BC information, search budget,
 inference sample 수를 맞춘다.
 
-## 12. 구현 순서
+## 13. 구현 순서
 
 1. Exact controlled PDE에서 analytic BC conditioning과 metric 검증 **완료**
 2. Semilinear 8-component N0/N0r solver/nontriviality gate **완료**

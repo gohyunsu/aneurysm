@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_post_n1c_audits_completed_method_unselected",
+    "status": "failed_n1c_m0_mechanism_preregistered_unrun_method_unselected",
     "as_of": "2026-08-06",
     "clinical_use": false
   },
@@ -69,6 +69,7 @@
       "nonlinear_pde_n1c_attribution_status": "completed_non_gating_density_bottleneck",
       "nonlinear_pde_n1_density_objective_audit_status": "completed_threshold_free_full_joint_engineering_signal",
       "nonlinear_pde_n1_decision_task_audit_status": "completed_missing_nontrivial_sparse2_fixed_winner",
+      "nonlinear_pde_n1_missing_operator_pullback_m0_status": "preregistered_validation_only_unrun",
       "irregular_3d_status": "blocked_after_failed_n1c"
     },
     "contribution_priority": {
@@ -92,11 +93,11 @@
         "rupture_status_functional_sufficiency"
       ],
       "candidate_not_yet_contribution": {
-        "name": "solution_functional_decision_consequence_of_conditioning_inconsistency",
-        "status": "unsupported_after_completed_N1c_a",
-        "required_theory": "bounded_loss_Bayes_regret_bound_from_route_posterior_divergence",
-        "required_algorithm": "operator_specific_compatible_joint_posterior_that_closes_conditional_accuracy_and_solution_functional_risk_gaps",
-        "required_evidence": "validation_only_density_objective_control_and_method_independent_decision_task_adequacy_before_any_fresh_prospective_reentry",
+        "name": "candidate_measurement_solution_joint_pullback_for_coherent_operator_acquisition",
+        "status": "prospective_development_hypothesis_not_selected_method",
+        "required_theory": "proper_joint_pushforward_score_plus_measurement_solution_sufficiency_counterexample_plus_RKHS_candidate_risk_and_selected_regret_bound",
+        "required_algorithm": "one_joint_boundary_density_scored_through_candidate_measurement_solution_functional_pushforwards",
+        "required_evidence": "all_checks_M0_then_separate_fresh_five_seed_strong_baseline_reentry",
         "active_acquisition_alone_is_novel": false
       }
     }
@@ -765,6 +766,50 @@
           "n1d_or_irregular_3d_authorized": false,
           "positive_feasibility_evidence_can_only_motivate_a_separate_fresh_protocol": true
         }
+      },
+      "missing_operator_pullback_m0": {
+        "config": "configs/nonlinear_pde_n1_missing_operator_pullback_m0.json",
+        "status": "preregistered_before_development_output",
+        "stage": "prospective_validation_only_mechanism_gate",
+        "base_mask": "missing",
+        "sparse_2_role": "fixed_acquisition_control_only",
+        "model_seeds": [
+          73081021,
+          73081022,
+          73081023
+        ],
+        "data": {
+          "train_contexts": 3072,
+          "conditions_per_context": 8,
+          "selection_validation_contexts": 384,
+          "audit_validation_contexts": 192,
+          "acquisition_audit_contexts": 96
+        },
+        "proposed_mechanism": "full_joint_likelihood_plus_candidate_measurement_solution_joint_pushforward_kernel_score",
+        "controls": [
+          "full_joint_mle",
+          "full_joint_plus_boundary_kernel",
+          "full_joint_plus_solution_marginal_kernel"
+        ],
+        "frozen_operator": "N1b_pair_loss_zero_seed_matched_read_only",
+        "primary_metrics": [
+          "true_simulator_candidate_joint_mmd_squared",
+          "true_oracle_acquisition_regret"
+        ],
+        "all_checks_required": true,
+        "relative_improvement_minimum": 0.05,
+        "seed_direction_minimum": 3,
+        "paired_context_ci95_upper_below_zero": true,
+        "missing_density_excess_relative_degradation_maximum": 0.05,
+        "solution_marginal_mmd_relative_degradation_maximum": 0.01,
+        "frozen_operator_audit_l2_maximum_every_seed": 0.05,
+        "may_access_or_generate_n1_test": false,
+        "may_relabel_n1c": false,
+        "may_establish_method_novelty": false,
+        "fresh_reentry_registered": false,
+        "may_authorize_n1d_or_irregular_3d": false,
+        "failure_abandons_mechanism_without_local_weight_or_kernel_repair": true,
+        "pass_only_allows_separate_fresh_reentry_protocol_design": true
       }
     }
   ],

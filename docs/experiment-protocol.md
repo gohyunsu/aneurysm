@@ -665,6 +665,60 @@ N1c를 relabel하거나 method novelty·fresh re-entry·N1d/3D를 열 수 없다
 Operator-specific method와 fresh prospective seed·estimand·threshold는
 별도 공개 config가 결과 전에 고정될 때만 등록된다.
 
+#### M0 · missing-only operator-pullback mechanism gate
+
+`configs/nonlinear_pde_n1_missing_operator_pullback_m0.json`은 두 audit의
+결과와 N1b frozen operator manifest를 pin한 prospective
+validation-only contract다. 목적은 새 method를 선택하는 것이 아니라,
+candidate measurement와 solution functional의 joint pushforward를
+점수화하는 mechanism이 fresh confirmatory re-entry를 설계할 만큼
+강한지를 한 번만 판정하는 것이다.
+
+- scope: missing mask only; candidate component 0–7. Sparse-2는 이미
+  fixed-winner이므로 primary adaptive endpoint가 아니다.
+- data: 3,072×8 train, 384×8 selection-validation, disjoint 192×8
+  audit-validation. Acquisition은 audit의 first 96 context만 사용한다.
+- seed: prior N1 development/confirmatory와 겹치지 않는 model seed
+  `73081021–73081023`; split seed도 train/selection/audit별로 분리한다.
+- operator: N1b manifest seed 0–2의 pair-loss-zero full-condition
+  checkpoint. Read-only/hash-verified/frozen이며 audit full-BC L2를 별도
+  계산한다.
+- variants: full-joint MLE, +boundary kernel, +solution-marginal kernel,
+  +candidate-measurement–solution joint pullback. 초기 state, minibatch,
+  kernel random number와 checkpoint selection metric을 seed 안에서
+  공유한다.
+- score: train-only standardized coordinate, equal multiscale RBF
+  0.5/1/2, candidate × solution product kernel, radius-2.5
+  component-stratified two-draw score, weight 0.25.
+- optimization: AdamW, 1,200 step, batch 512, lr \(10^{-3}\), weight decay
+  \(10^{-5}\), validation interval 20, patience 15, gradient clip 5.
+- audit: true/model pushforward 64 sample, nonnegative empirical MMD²,
+  outer 32 × inner 64 acquisition, 129-point bounded-action grid, 2,000
+  context bootstrap. Variant와 candidate는 common random numbers를 쓴다.
+- test boundary: N1 test 생성·접근, N1c relabel, method novelty,
+  N1d/irregular-3D 권한은 모두 false다.
+
+Strongest control은 primary metric마다 세 control 중 three-seed mean이 가장
+낮은 variant로 고정한다. Proposed mechanism은 다음 9개 check를 전부
+통과해야 한다.
+
+1. candidate-joint MMD² relative improvement ≥ 5%;
+2. candidate-joint MMD² direction 3/3 seed;
+3. proposed-control paired-context bootstrap CI95 upper < 0;
+4. true-oracle acquisition regret relative improvement ≥ 5%;
+5. acquisition regret direction 3/3 seed;
+6. regret paired-context bootstrap CI95 upper < 0;
+7. full-joint MLE 대비 missing excess-NLL degradation ≤ 5%;
+8. full-joint MLE 대비 solution-marginal MMD² degradation ≤ 1%;
+9. frozen operator audit full-BC relative L2 ≤ 0.05 for every seed.
+
+Gate가 실패하면 이 mechanism은 폐기한다. Kernel scale/weight, mask, seed,
+sample budget 또는 threshold를 바꾸어 같은 branch를 반복하지 않는다.
+통과해도 `development_mechanism_eligible`일 뿐, separate public config와
+새 5 seed를 가진 re-entry를 자동 등록하지 않는다. Raw training history,
+checkpoint와 per-context metric은 private provenance에 보존하고 공개
+결과는 aggregate만 담는다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
@@ -928,10 +982,12 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 8. Validation-only density-objective control과 method-independent
    decision-task adequacy audit **(완료 · full-joint 개선, missing 유의미,
    sparse-2 fixed winner)**
-9. Missing endpoint용 operator-specific method와 보장이 선행연구와
-   구분될 때만 결과 전 fresh prospective re-entry를 별도 등록
-10. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol
-11. G3 learned transient 비교와 G4 cross-domain 통합 table
+9. Missing-only candidate-measurement–solution joint pullback M0
+   **(사전등록 · unrun · 3-seed one-shot mechanism gate)**
+10. M0가 전 항목 통과할 때만 별도 5-seed fresh prospective re-entry 설계;
+    실패하면 local repair 없이 mechanism 폐기
+11. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol
+12. G3 learned transient 비교와 G4 cross-domain 통합 table
 
 GPU는 PBS allocation 안에서만 사용한다. 각 run은 commit, command,
 environment, config, dataset checksum, status, aggregate metric을 남긴다.

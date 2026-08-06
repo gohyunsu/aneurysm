@@ -115,6 +115,12 @@ proper scoring rule로 학습한다. 이는 AURORA의 uncertainty mechanism에
 physical-condition observation mask 사이의 nested coherence와 paired
 condition response를 검증해야 한다.
 
+특히 solution field 또는 functional marginal에 kernel/energy proper
+score를 적용하는 것도 probabilistic neural operator의 직접 범위다.
+따라서 \(p(\Psi(H)\mid G)\)만 맞추는 loss를 새 방법으로 주장할 수 없다.
+남은 식별성 차이는 candidate measurement \(B_j\)와 functional
+\(\Psi(H)\)의 **joint** dependence다.
+
 ### 1.7 boundary-indexed operator와 conditional consistency
 
 ICLR 2026 AI\&PDE workshop 연구는 varying BC에서 하나의 neural operator가 아니라
@@ -211,8 +217,11 @@ ICML 2020의 ACFlow는 arbitrary conditional likelihood, sampling과
 imputation을 하나의 모델로 다뤘다. ICML 2021의 generative-surrogate AFA는 미관측 feature를 test-time에
 순차 획득하는 정책을 generative model로 학습했다. ICML 2024의 Acquisition
 Conditioned Oracle은 greedy 정보이득을 넘어 prediction과 일반 decision을
-위한 non-greedy feature acquisition을 직접 다룬다. PaPQS와 UNED는 각각
-training PDE setting과 sensor design의 정보가치를 최적화한다.
+위한 non-greedy feature acquisition을 직접 다룬다. ICML 2025의
+Stochastic Encodings는 task-relevant compressed state로 AFA를 수행한다.
+PaPQS와 UNED는 각각 training PDE setting과 sensor design의 정보가치를
+최적화하고, NeurIPS 2025 NOTS는 neural-operator posterior sample로
+function-valued query를 선택한다.
 
 - [ACFlow: Flow Models for Arbitrary Conditional Likelihoods
   (ICML, 2020)](https://proceedings.mlr.press/v119/li20a.html)
@@ -220,8 +229,12 @@ training PDE setting과 sensor design의 정보가치를 최적화한다.
   (ICML, 2021)](https://proceedings.mlr.press/v139/li21p.html)
 - [Acquisition Conditioned Oracle for Nongreedy Active Feature Acquisition
   (ICML, 2024)](https://proceedings.mlr.press/v235/valancius24a.html)
+- [Stochastic Encodings for Active Feature Acquisition
+  (ICML, 2025)](https://proceedings.mlr.press/v267/norcliffe25a.html)
 - [A Plug-and-Play Query Synthesis Active Learning Framework for Neural PDE
   Solvers (NeurIPS, 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/6a1b224b153e55c40a6359f9c9fb9d8c-Abstract-Conference.html)
+- [Neural Operator Thompson Sampling
+  (NeurIPS, 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/2f5fb82b8b593c548ed538a8d336d800-Abstract-Conference.html)
 
 **영향:** 다음 BC component를 고르는 것, arbitrary conditioning,
 entropy/variance/expected-risk acquisition, decision-aware objective 또는
@@ -237,6 +250,17 @@ solution-functional risk에 맞춰 줄이는 operator-specific 방법이다.
 Conditional composite likelihood는 engineering control이고,
 compatibility와 decision-focused learning도 선행하므로 이 세 요소를
 단순 결합해 novelty라고 부르지 않는다.
+
+현재 가장 좁은 gap은 one-component acquisition에 필요한
+\(p(B_j,\Psi(H)\mid G)\)를 operator를 통해 직접 맞추는 것이다. 같은
+\(B_j\) marginal과 같은 solution-functional marginal을 가진 두 joint도
+dependence가 다르면 \(p(\Psi(H)\mid B_j,G)\)와 VoI가 다르다. 이 때문에
+solution-only PNO score, arbitrary conditional density, AFA policy를 각각
+추가하는 것으로는 충분하지 않다. AURORA의 M0 후보는 하나의 analytically
+conditionable BC joint law를 유지하면서 candidate–solution product-kernel
+pushforward score를 사용한다. 이 결합도 fresh strong-control 우위와
+decision-risk bound가 함께 확인될 때만 novelty 후보이며, kernel score나
+active acquisition 자체를 새로 주장하지 않는다.
 
 ### 1.12 직접적인 2026 multimodal 경쟁작
 

@@ -3,7 +3,8 @@
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-06 KST post-N1c
-density-objective·decision-task audit 완료 상태를 반영했다.
+density-objective·decision-task audit 완료와 missing-only M0
+mechanism-gate 사전등록 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -118,7 +119,20 @@ density-objective·decision-task audit 완료 상태를 반영했다.
   `results/nonlinear_pde_n1_density_objective_audit_20260806.json`과
   `results/nonlinear_pde_n1_decision_task_audit_20260806.json`이다. 두 결과는
   N1c relabel, method novelty, fresh re-entry 또는 N1d/3D 권한을 열지
-  않는다.
+  않는다. 이 두 audit과 2024–2026 직접 선행연구를 다시 대조한 뒤,
+  missing mask 하나만 다루는 `M0` mechanism gate를
+  `configs/nonlinear_pde_n1_missing_operator_pullback_m0.json`에 결과 전에
+  고정했다. 표준 full-joint likelihood에 각 후보 BC component와
+  solution functional의 joint pushforward
+  \(T_j(G,B)=(B_j,\Psi(F(G,B)))\) kernel score를 더한다. Solution
+  marginal score만으로는 한 component를 관측했을 때의 VoI를 식별할 수
+  없다는 gap을 겨냥하며 acquisition head는 두지 않는다. 세 fresh
+  development seed, missing-only audit, full-joint·boundary-kernel·solution
+  marginal controls, disjoint selection/audit validation과 9개
+  all-required check를 고정했다. 실패하면 weight, kernel, mask, seed,
+  threshold를 국소 조정하지 않고 mechanism을 폐기한다. 통과해도 별도
+  five-seed fresh re-entry protocol을 설계할 자격만 생기며 method,
+  novelty, N1 relabel 또는 3D 권한은 생기지 않는다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -189,18 +203,19 @@ component를 거의 바꾸지 않았다. 따라서 이 identity는 현 nonlinear
 benchmark에서 폐기하며, direct route를 정답처럼 두거나 signed route
 차이를 평균해 상쇄하지 않는다.
 
-다음 개발 가설은 **coherence–conditional-accuracy trade-off를
-solution-functional risk에 맞춰 해소할 수 있는가**다. 완료된 audit은
+현재 prospective 개발 가설은 **coherence–conditional-accuracy trade-off를
+candidate-measurement–solution joint risk에 맞춰 해소할 수 있는가**다. 완료된 audit은
 full-joint likelihood가 random-mask conditional objective의 excess NLL을
 20.3–27.2% 줄여 이 trade-off가 현재 모델에서 불가피하지 않음을 보였다.
 그러나 full-joint MLE와 registered-mask composite likelihood는 engineering
 control일 뿐 novelty가 아니다. Compatibility/path consistency, arbitrary
 conditioning과 decision-focused learning도 선행 연구이므로, 독립 novelty는
-missing-mask decision endpoint에서 joint training의 sample efficiency와
-arbitrary-conditioning accuracy를 함께 개선하는 operator-specific
+missing-mask decision endpoint에서 solution marginal이 아니라 각
+\((B_j,\Psi(H))\) joint pushforward를 직접 맞추는 operator-pullback
 algorithm·보장과 fresh strong-baseline 우위가 있을 때만 인정한다.
 Sparse-2 adaptive acquisition은 고정 winner task이므로 headline에서
-제외한다. 아직 그런 method나 fresh re-entry는 등록하지 않았다.
+제외한다. `M0`는 이 mechanism의 development eligibility만 판정하며 아직
+선택된 method나 fresh re-entry가 아니다.
 
 Test-time active
 feature acquisition 자체, path independence 자체, 이름만 붙인 acquisition
@@ -359,8 +374,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   method novelty가 아니다. Missing task는 stable nonzero VoI를 보였고,
   sparse-2는 component 6이 96/96 context의 고정 winner여서 adaptive
   acquisition 비교에서 제외한다. N1c failed와 N1d/3D blocked는 유지하며
-  별도 operator-specific method와 fresh prospective re-entry는 아직
-  등록하지 않는다.
+  별도 operator-specific fresh prospective re-entry는 아직 등록하지
+  않는다. 대신 missing-only candidate-measurement–solution joint
+  pullback의 3-seed M0 development gate만 결과 전에 등록했다. M0는 N1
+  test를 생성하거나 읽지 않으며 통과해도 re-entry가 아니다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
@@ -416,6 +433,21 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 사이트의 변경 이력은 `site/assets/research-data.js`에서 렌더링한다. 단순
 미관 수정이 아니면 날짜, category, decision, rationale, affected files를
 기록한다. README와 사이트가 서로 다른 연구 질문을 말하면 배포하지 않는다.
+
+### Local repair loop 금지
+
+- 결과가 약하거나 한 check가 실패했다는 이유로 같은 evidence 안에서
+  loss weight, kernel scale, mask, seed, threshold, sample budget을 순차
+  조정하지 않는다.
+- 사전등록 gate는 한 번 집계해 즉시 과학적 판정을 내린다. M0가 실패하면
+  해당 operator-pullback mechanism을 폐기하고 실패 artifact를 보존한다.
+- 새 가설은 실패 원인을 설명하는 독립 이론·task gap이 있을 때만 새
+  version과 fresh seed로 등록한다. 같은 mechanism의 국소 repair는 새
+  이름을 붙여도 허용하지 않는다.
+- 운영 문제는 `server artifact → scientific decision → public
+  protocol/site/changelog → private manuscript pin` 순서로 처리한다.
+  로컬 dependency·tmp·TeX 문제는 한 번만 bounded diagnosis하고,
+  authoritative validation은 frozen PBS와 GitHub CI로 한다.
 
 ## 7. 새 팀 대화와 게시글 반영
 

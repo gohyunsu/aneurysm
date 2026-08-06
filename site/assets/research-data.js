@@ -59,7 +59,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2021–24",
       title: "Active feature acquisition",
-      copy: "Generative-surrogate AFA와 acquisition-conditioned oracle가 test-time feature 선택과 일반 decision cost를 이미 다룬다. Active BC 자체는 novelty가 아니다.",
+      copy: "Generative-surrogate AFA, acquisition-conditioned oracle와 stochastic encodings가 test-time feature 선택과 일반 decision cost를 이미 다룬다. Active BC 자체는 novelty가 아니다.",
       status: "ICML · mandatory decision baselines",
       url: "https://proceedings.mlr.press/v235/valancius24a.html"
     },
@@ -91,7 +91,7 @@ window.AURORA_DATA = Object.freeze({
     ["Temporal model", "Autoregressive", "Autoregressive transformer", "Unsteady PINN", "Secondary one-shot choice after D0"],
     ["Primary fidelity", "Velocity rollout RMSE", "Field · WSS · OSI error", "Descriptor / status score", "Coherence + solution-functional risk; N1c failed"],
     ["Downstream task", "Not validated", "Risk metrics descriptive", "Late-fusion status", "Secondary only; current signal negative"],
-    ["Primary gap", "Partial/missing condition", "Mask coherence", "Condition uncertainty", "Must beat generic probabilistic operators"]
+    ["Primary gap", "Partial/missing condition", "Mask coherence", "Condition uncertainty", "Candidate measurement–solution joint sufficiency; M0 unrun"]
   ],
   gates: [
     {
@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does coherence improve decisions?",
-      copy: "N1c-a의 density 병목 뒤 결과 전에 고정한 두 audit이 완료됐다. Full-joint likelihood는 N1c raw objective 대비 세 mask excess를 20.3–27.2% 줄였고 모두 5/5 seed 방향이 같았다. Missing true-oracle acquisition은 VoI 약 0.156, winner agreement 92.7%로 비자명했지만 sparse-2는 component 6이 96/96 context의 고정 winner였다. 이는 engineering·task-adequacy evidence이며 method novelty나 re-entry가 아니다.",
-      state: "N1c failed · audits complete/non-gating · missing retained · sparse-2 adaptive removed · 3D blocked",
+      copy: "N1c-a 뒤 full-joint likelihood는 raw objective의 excess를 20.3–27.2% 줄였고 missing true-oracle VoI는 약 0.156이었다. 남은 gap은 각 후보 BC와 solution functional의 joint dependence다. M0는 이를 three-seed validation-only gate로 한 번 검사하며 실패 뒤 local repair를 금지한다.",
+      state: "N1c failed · M0 preregistered/unrun · method unselected · 3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.06",
+      category: "protocol",
+      title: "M0 freezes one missing-only operator-pullback falsification",
+      copy: "두 post-N1c audit과 2024–26 직접 선행연구를 대조해 candidate measurement–solution joint dependence만 남은 gap으로 좁혔다. M0는 하나의 joint BC density를 유지한 채 frozen operator를 통한 (B_j, solution functional) product-kernel pushforward score를 full-joint MLE, boundary-kernel, solution-marginal proper-score와 paired 3-seed validation에서 비교한다. Candidate-joint MMD²와 true-oracle regret 5% 개선, 3/3 direction, paired CI와 density·solution·operator 보호 조건을 모두 요구한다. 실패하면 local weight/kernel repair 없이 폐기하며, 통과해도 method·novelty·fresh re-entry·3D 권한은 없다.",
+      files: ["configs/nonlinear_pde_n1_missing_operator_pullback_m0.json", "src/aurora/nonlinear_pde_operator_pullback.py", "experiments/run_nonlinear_pde_n1_missing_operator_pullback_m0.py", "scripts/aggregate_n1_missing_operator_pullback_m0.py", "cluster/ssu_a6gpu_nonlinear_pde_n1_missing_operator_pullback_m0.pbs", "tests/test_nonlinear_pde_operator_pullback.py", "docs/literature-lineage.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "AGENTS.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.06",
       category: "result",

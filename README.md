@@ -54,6 +54,18 @@ sparse-2는 96/96 context에서 같은 component가 winner여서 adaptive-policy
 비교에는 부적합했습니다. 두 결과 모두 method를 선택하거나 N1c·3D 상태를
 바꾸지 않습니다.
 
+그 다음 단일 mechanism falsification은 결과 전에
+[`M0 contract`](configs/nonlinear_pde_n1_missing_operator_pullback_m0.json)로
+고정했습니다. Missing mask에서 각 후보 BC component와 solution
+functional의 joint pushforward를 frozen operator를 통해 점수화합니다.
+Full-joint MLE, generic boundary-kernel, solution-marginal proper-score를
+같은 초기화·minibatch·난수로 비교하고, 세 fresh development seed의
+candidate-joint MMD²와 true-oracle acquisition regret가 모두 5% 이상
+개선되어야 합니다. Density·solution marginal·operator 정확도 보호 조건도
+전부 통과해야 합니다. 하나라도 실패하면 hyperparameter를 국소 조정하지
+않고 mechanism을 폐기합니다. 통과해도 별도 fresh re-entry 설계 자격일
+뿐 method selection, novelty, N1c relabel 또는 3D 권한이 아닙니다.
+
 Fixed Fourier cycle은 frozen D0의 localized bulge gate를 실패해 제거했습니다.
 D0b에서는 DCT-II 17/25가 탈락하고 train-only POD 17/25만 oracle
 representation gate를 통과했습니다. POD는 아직 learned superiority나
@@ -286,6 +298,11 @@ aggregate는
 [`task result`](results/nonlinear_pde_n1_decision_task_audit_20260806.json)입니다.
 둘 다 새 contribution이나 fresh gate가 아니며 N1c failed와 3D blocked를
 유지합니다.
+
+이 evidence 뒤 등록한 M0는 solution marginal score 자체를 novelty로
+주장하지 않습니다. 같은 \(B_j\)와 solution marginal을 갖더라도 dependence가
+다르면 post-measurement Bayes risk가 달라진다는 식별성 gap만 겨냥합니다.
+현재 상태는 `preregistered/unrun`, selected method는 없음입니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

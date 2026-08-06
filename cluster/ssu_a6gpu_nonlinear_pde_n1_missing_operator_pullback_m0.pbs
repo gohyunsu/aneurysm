@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#PBS -N aurora_n1_pullback_m0
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=48gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=12:00:00
+#PBS -J 0-2
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_CHECKPOINT_ROOT:?set AURORA_CHECKPOINT_ROOT}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+: "${PBS_ARRAY_INDEX:?PBS array index is required}"
+
+seed_output="$AURORA_OUTPUT_ROOT/seed_${PBS_ARRAY_INDEX}"
+mkdir -p "$seed_output"
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+set +e
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_CHECKPOINT_ROOT:/checkpoints:ro" \
+  --bind "$seed_output:/output" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace/src:/workspace" \
+    AURORA_GIT_COMMIT="$AURORA_GIT_COMMIT" \
+  python \
+    /workspace/experiments/run_nonlinear_pde_n1_missing_operator_pullback_m0.py \
+    --mechanism-config \
+      /workspace/configs/nonlinear_pde_n1_missing_operator_pullback_m0.json \
+    --checkpoint-root /checkpoints \
+    --output /output \
+    --git-commit "$AURORA_GIT_COMMIT" \
+    --seed-index "$PBS_ARRAY_INDEX" \
+    --require-cuda \
+    > "$seed_output/run.log" 2>&1
+run_status=$?
+set -e
+
+if [ "$run_status" -eq 0 ]; then
+  printf '%s\n' '{"state":"runner_completed","exit_status":0}' \
+    > "$seed_output/wrapper_status.json"
+else
+  printf '{"state":"runner_failed","exit_status":%s}\n' "$run_status" \
+    > "$seed_output/wrapper_status.json"
+fi
+exit "$run_status"

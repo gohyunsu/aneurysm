@@ -1,0 +1,204 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1_missing_operator_pullback_m0.v1",
+  "experiment_id": "nonlinear_n1_missing_measurement_solution_joint_pullback_m0",
+  "status": "preregistered_before_development_output",
+  "stage": "prospective_validation_only_mechanism_gate",
+  "parents": {
+    "n1_config": {
+      "path": "nonlinear_pde_n1.json",
+      "sha256": "757b742587b2d52860648a42e6c58721716c6675366f5b3b6329d6a695eb0891"
+    },
+    "n0_solver_config": {
+      "path": "nonlinear_pde_n0.json",
+      "sha256": "cb5d6b0891083bc9460d5557d5c04b708c25dffa09e90e0b951af0dc3dcfcaaf"
+    },
+    "density_objective_result": {
+      "path": "../results/nonlinear_pde_n1_density_objective_audit_20260806.json",
+      "sha256": "94686547ea927324cd4e376c3500067176843b401511d519e993864ea199b147",
+      "source_commit": "337c75e6fcb933eaab86c900fc132d4a13b740a5"
+    },
+    "decision_task_result": {
+      "path": "../results/nonlinear_pde_n1_decision_task_audit_20260806.json",
+      "sha256": "4492a7759fc08b4c2ac81196e2c345634419215f89030b062356aa801e232ab7",
+      "source_commit": "337c75e6fcb933eaab86c900fc132d4a13b740a5"
+    },
+    "operator_checkpoint_manifest": {
+      "path": "../results/nonlinear_pde_n1b_checkpoint_manifest_20260805.json",
+      "sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+      "source_commit": "1d0bd9c759f935f818b5705b1b9bc2a00116ea59"
+    }
+  },
+  "scope_lock": {
+    "base_mask": "missing",
+    "observed_components": [],
+    "candidate_components": [0, 1, 2, 3, 4, 5, 6, 7],
+    "sparse_2_is_fixed_acquisition_control_only": true,
+    "may_access_or_generate_n1_test": false,
+    "may_relabel_n1c": false,
+    "may_authorize_n1d_or_irregular_3d": false,
+    "may_establish_method_novelty": false,
+    "pass_only_allows_fresh_reentry_protocol_design": true
+  },
+  "method_hypothesis": {
+    "problem": "full_joint_likelihood_is_coherent_but_does_not_target_finite_sample_dependence_between_each_candidate_measurement_and_solution_functionals",
+    "construction": "one_joint_boundary_density_plus_candidate_measurement_solution_joint_kernel_scores_through_a_frozen_full_condition_operator",
+    "no_acquisition_head": true,
+    "all_post_measurement_conditionals_come_from_the_same_joint_density": true,
+    "proposed_variant_id": "full_joint_plus_candidate_solution_joint_pullback"
+  },
+  "theory_contract": {
+    "scored_pushforward": "T_j(G,B)=(standardized_B_j,standardized_Psi(F(G,B)))",
+    "population_objective": "full_joint_log_score_plus_average_characteristic_kernel_score_over_all_candidate_measurement_solution_joint_pushforwards",
+    "properness_claim": "with_an_exact_operator_each_kernel_term_is_proper_for_its_pushforward_and_the_positive_full_joint_log_score_keeps_the_true_boundary_law_the_unique_population_minimizer",
+    "acquisition_sufficiency_claim": "solution_marginals_do_not_identify_value_of_information_but_each_measurement_solution_joint_law_determines_the_corresponding_one_component_post_measurement_bayes_risk",
+    "risk_bound_claim": "if_policy_loss_functions_have_uniform_RKHS_norm_C_then_candidate_risk_error_is_at_most_C_times_joint_MMD_and_selected_component_regret_is_at_most_two_C_times_the_largest_candidate_joint_MMD",
+    "not_claimed_as_novel": [
+      "kernel_or_energy_proper_scoring_rules",
+      "probabilistic_neural_operators",
+      "active_feature_acquisition",
+      "analytic_conditioning",
+      "joint_maximum_likelihood",
+      "generic_IPM_or_two_epsilon_decision_bounds"
+    ],
+    "claim_requires_positive_fresh_strong_baseline_result": true
+  },
+  "data": {
+    "train_contexts": 3072,
+    "selection_validation_contexts": 384,
+    "audit_validation_contexts": 192,
+    "conditions_per_context": 8,
+    "acquisition_audit_contexts": 96,
+    "context_support": [-0.8, 0.8],
+    "maximum_latent_mahalanobis_radius": 2.5,
+    "solver_batch_size": 2048,
+    "split_seeds": {
+      "train_context": 73081081,
+      "train_boundary": 73082081,
+      "selection_context": 73081082,
+      "selection_boundary": 73082082,
+      "audit_context": 73081083,
+      "audit_boundary": 73082083
+    },
+    "n1_test_context_seed_accessed": false,
+    "n1_test_boundary_seed_accessed": false
+  },
+  "model_seeds": [73081021, 73081022, 73081023],
+  "frozen_operator": {
+    "checkpoint_id": "aurora_shared_operator_pair_loss_zero",
+    "manifest_seed_indices": [0, 1, 2],
+    "full_condition_only": true,
+    "parameters_frozen": true,
+    "used_for_training_pullback_and_model_policy_only": true,
+    "true_simulator_used_for_audit_metrics_and_oracle_risk": true,
+    "maximum_audit_validation_full_bc_relative_l2": 0.05
+  },
+  "architecture_lock": {
+    "density_family": "context_conditioned_two_component_full_covariance_gmm",
+    "hidden_width": 192,
+    "hidden_layers": 3,
+    "same_initial_state_within_seed": true
+  },
+  "objective_variants": [
+    {
+      "id": "full_joint_mle",
+      "loss": "full_joint_nll_per_component",
+      "role": "strongest_post_n1c_engineering_control"
+    },
+    {
+      "id": "full_joint_plus_boundary_kernel",
+      "loss": "full_joint_nll_plus_full_boundary_kernel_score",
+      "role": "generic_same_score_compute_control"
+    },
+    {
+      "id": "full_joint_plus_solution_marginal_kernel",
+      "loss": "full_joint_nll_plus_solution_functional_marginal_pullback_kernel_score",
+      "role": "proper_score_probabilistic_operator_scope_control"
+    },
+    {
+      "id": "full_joint_plus_candidate_solution_joint_pullback",
+      "loss": "full_joint_nll_plus_average_candidate_measurement_solution_joint_pullback_kernel_score",
+      "role": "proposed_mechanism"
+    }
+  ],
+  "score_lock": {
+    "kernel": "equal_weight_multiscale_rbf",
+    "kernel_scales": [0.5, 1.0, 2.0],
+    "distance": "mean_squared_standardized_coordinate_distance",
+    "candidate_joint_kernel": "product_of_candidate_component_kernel_and_solution_functional_kernel",
+    "mixture_estimator": "component_stratified_unbiased_two_draw_kernel_score",
+    "draws_per_component_per_set": 1,
+    "maximum_latent_radius_applied_to_standard_draws": 2.5,
+    "kernel_score_weight": 0.25,
+    "boundary_standardization": "training_split_only",
+    "functional_standardization": "true_simulator_training_split_only",
+    "functional_set": [
+      "domain_mean",
+      "central_hotspot",
+      "smooth_maximum",
+      "right_boundary_flux"
+    ]
+  },
+  "optimization_lock": {
+    "maximum_steps": 1200,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 20,
+    "early_stopping_patience": 15,
+    "gradient_clip_norm": 5.0,
+    "same_minibatch_indices_within_seed": true,
+    "same_kernel_random_numbers_within_seed": true
+  },
+  "checkpoint_selection": {
+    "split": "selection_validation_only",
+    "metric": "full_joint_nll_per_component_plus_0_25_candidate_measurement_solution_joint_kernel_score",
+    "same_metric_for_all_variants": true,
+    "cross_variant_selection": false
+  },
+  "audit_evaluation": {
+    "split": "disjoint_audit_validation_only",
+    "true_simulator_pushforward_samples": 64,
+    "model_pushforward_samples": 64,
+    "candidate_joint_metric": "nonnegative_biased_multiscale_kernel_MMD_squared_average_over_eight_components",
+    "solution_metric": "nonnegative_biased_multiscale_kernel_MMD_squared",
+    "density_metric": "missing_conditional_nll_per_component_excess_over_true_radius_truncated_law",
+    "acquisition": {
+      "outer_measurement_samples": 32,
+      "inner_posterior_samples": 64,
+      "action_grid_points": 129,
+      "bounded_loss": "clip_squared_standardized_error_to_unit_interval",
+      "same_true_candidate_risk_across_variants": true,
+      "common_random_numbers_across_variants_and_candidates": true,
+      "oracle": "true_boundary_law_and_true_simulator"
+    },
+    "bootstrap_replicates": 2000,
+    "report_each_seed": true,
+    "report_no_test_access": true
+  },
+  "mechanism_gate": {
+    "all_checks_required": true,
+    "strongest_control_selection": "lowest_three_seed_mean_separately_for_each_primary_metric",
+    "relative_improvement_estimand": "three_seed_mean",
+    "paired_context_bootstrap": "average_three_paired_seed_differences_then_resample_context_family",
+    "density_and_solution_degradation_estimand": "three_seed_mean",
+    "operator_checkpoint_check": "every_seed_audit_validation_full_bc_relative_l2",
+    "candidate_joint_mmd_relative_improvement_over_strongest_control_minimum": 0.05,
+    "candidate_joint_mmd_better_seed_directions_minimum": 3,
+    "candidate_joint_mmd_paired_context_bootstrap_ci95_upper_below_zero": true,
+    "acquisition_regret_relative_improvement_over_strongest_control_minimum": 0.05,
+    "acquisition_regret_better_seed_directions_minimum": 3,
+    "acquisition_regret_paired_context_bootstrap_ci95_upper_below_zero": true,
+    "missing_density_excess_relative_degradation_vs_full_joint_maximum": 0.05,
+    "solution_marginal_mmd_relative_degradation_vs_full_joint_maximum": 0.01,
+    "operator_checkpoint_validation_error_maximum": 0.05,
+    "pass_is_development_mechanism_eligibility_only": true,
+    "failure_abandons_this_mechanism_without_local_weight_or_kernel_repair": true
+  },
+  "reporting": {
+    "raw_history_checkpoints_and_per_context_metrics_private": true,
+    "public_output_aggregate_only_after_completion": true,
+    "retain_n1c_failed": true,
+    "retain_method_unselected_until_gate_result": true,
+    "new_fresh_reentry_requires_separate_public_version_and_new_five_seeds": true
+  }
+}
