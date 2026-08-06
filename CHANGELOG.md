@@ -43,6 +43,17 @@
   objective로 복귀하거나 ablation control이 사라지는 경우를 모두
   거부한다.
 
+### Deployment
+
+- Content commit `559591b`의 research-contract quality와 GitHub Pages
+  workflow가 모두 통과했다.
+- Public hub:
+  `https://gohyunsu.github.io/aneurysm/site/index.html`
+- N1c-a aggregate:
+  `https://gohyunsu.github.io/aneurysm/results/nonlinear_pde_n1c_attribution_20260806.json`
+- Main, 11-chapter guide와 aggregate가 production에서 최신 N1c-a 문구와
+  함께 HTTP 200을 반환함을 확인했다.
+
 ## 2026-08-05 · N1c-a failure attribution is fixed before execution
 
 ### Threshold-free diagnostic contract
