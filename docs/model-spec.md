@@ -1,12 +1,17 @@
 # AURORA v2 모델 명세
 
-상태: N1c failed · post-N1c audits completed · missing task retained · M0 candidate-measurement–solution pullback preregistered/unrun · sparse-2 adaptive task removed · method unselected
+상태: ISBI 2027 target locked · N1c failed · post-N1c audits completed ·
+missing task retained · M0 candidate-measurement–solution pullback
+preregistered/unrun · sparse-2 adaptive task removed · 3D GNN unimplemented ·
+method unselected
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 한 줄 정의
 
-AURORA는 **GNN을 geometry encoder로 포함하는 hybrid neural operator**이며,
+AURORA의 **irregular-3D target architecture**는 GNN을 geometry encoder로
+포함하는 hybrid neural operator다. 그러나 현재 실행된 exact/nonlinear
+operator는 context MLP + boundary token + lifted decoder이며 GNN이 아니다.
 핵심은 GNN이 아니라 full·partial·missing boundary observation에서 나온
 예측 분포가 하나의 joint model의 조건부·주변 분포로 일관되게 만드는
 것이다.
@@ -122,8 +127,9 @@ BC waveform과 outlet split을 고정 길이 coefficient로 만든다.
 4. Continuous query decoder가 고정 mesh node가 아닌 임의 좌표에서 field를
    복원한다.
 
-따라서 “GNN 기반인가?”라는 질문의 정확한 답은 **local encoder는 GNN,
-전체 모델은 query-based neural operator**다.
+따라서 “현재 GNN 기반인가?”라는 질문의 정확한 답은 **아니다**다.
+“3D target specification은 local GNN + conditional query operator”라고
+구분해서 말한다.
 
 ## 5. Module B — coherent boundary density
 

@@ -4,6 +4,40 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-06 · ISBI 2027 target lock makes 3D velocity evidence mandatory
+
+### Venue and claim boundary
+
+- 공식 ISBI 2027 regular-paper 마감은 2026-10-26 23:59 USA EDT이고,
+  single-blind 심사와 technical content 4-page 제한을 고정했다.
+- 현재 N1c 실패와 3D evidence 부재를 근거로 `not submission-ready`를
+  유지한다. Exact/nonlinear PDE만으로 biomedical-imaging contribution을
+  주장하지 않는다.
+- ISBI identity는 missing scalar inflow 아래의 3D aneurysm velocity
+  reconstruction·calibration·same-geometry response로 좁힌다. Pressure,
+  WSS/OSI, transient efficiency, rupture prediction과 clinical utility는
+  제외한다.
+
+### Architecture truth and experiment ladder
+
+- 실행된 exact/nonlinear model은 context MLP + boundary token + lifted
+  decoder다. GNN+anatomy token+continuous query 구조는 irregular-3D
+  target specification이며 아직 구현·검증된 현재 모델이 아니다.
+- 64-case Aneumo cache는 development pilot이다. Expanded 또는 independent
+  base-family-disjoint 3D outer test, five seeds, bootstrap CI와 strong
+  graph/operator baseline이 없으면 headline을 열지 않는다.
+- M0는 one-shot nonlinear mechanism falsification으로만 남긴다. 통과해도
+  scalar-inflow 3D estimand에 맞춘 별도 prospective translation contract가
+  필요하며, 실패 뒤 local repair는 금지한다.
+- `docs/isbi-2027-plan.md`에 V0/V1/V2 evidence ladder, four-page 구성,
+  2026-08-10부터 submission일까지의 kill date를 기록했다.
+
+### Synchronized surfaces
+
+- `AGENTS.md`, README, research/model/protocol 문서, executable config와
+  validator tests, main site/field guide/changelog가 같은 target과
+  readiness를 말하도록 동기화했다.
+
 ## 2026-08-06 · M0 freezes one operator-specific mechanism without a repair loop
 
 ### Research gap and method boundary

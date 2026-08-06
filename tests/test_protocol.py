@@ -24,6 +24,18 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cross-sectional"):
             validate_protocol(candidate)
 
+    def test_isbi_target_cannot_be_marked_ready_without_3d_evidence(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["submission_ready"] = True
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
+
+    def test_m0_cannot_authorize_isbi_submission(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["m0_alone_may_authorize_submission"] = True
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
+
     def test_aneux_cannot_be_real_cfd(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         aneux = next(item for item in candidate["datasets"] if item["name"] == "aneux")

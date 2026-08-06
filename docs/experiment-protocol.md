@@ -7,6 +7,27 @@
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
+## 0. ISBI 2027 venue gate
+
+목표는 2026-10-26 마감의 IEEE ISBI 2027 four-page regular paper다.
+`docs/isbi-2027-plan.md`가 venue-specific source of truth다.
+
+- Exact/nonlinear PDE는 sanity와 mechanism falsification이다.
+- ISBI headline은 expanded 또는 independent irregular-3D aneurysm
+  velocity outer test를 요구한다.
+- 64-case Aneumo cache는 development-only다.
+- Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
+  utility는 현재 headline에서 제외한다.
+- 실행된 nonlinear operator는 MLP다. GNN hybrid는 구현 예정 3D
+  specification이며 결과처럼 서술하지 않는다.
+- Full paper는 frozen method, five seeds, base-family bootstrap CI,
+  strong graph/operator baseline, predeclared qualitative case selection을
+  모두 갖춘 경우에만 제출한다.
+
+M0는 이 venue gate를 통과시키지 않는다. M0가 통과해도 scalar-inflow
+3D task의 data law와 학습 target에 맞춘 별도 prospective translation
+contract가 필요하다. M0가 실패하면 같은 mechanism을 국소 수정하지 않는다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

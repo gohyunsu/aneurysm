@@ -1,4 +1,11 @@
 window.AURORA_DATA = Object.freeze({
+  venue: {
+    target: "IEEE ISBI 2027 · four-page regular paper",
+    deadline: "2026.10.26 · 23:59 USA EDT",
+    status: "Target locked · not submission-ready",
+    requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
+    plan: "../docs/isbi-2027-plan.md"
+  },
   lineage: [
     {
       year: "2011–21",
@@ -125,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "Controlled PDE, nonlinear PDE, irregular 3D 세 domain에서 같은 coherence·response mechanism이 유효해야 한다.",
-      state: "Blocking AAAI claim",
+      copy: "ISBI headline에는 irregular-3D aneurysm velocity outer test가 필수다. Controlled/nonlinear PDE만으로 biomedical-imaging contribution을 주장하지 않는다.",
+      state: "Blocking ISBI submission",
       blocking: true
     }
   ],
@@ -158,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.06",
+      category: "direction",
+      title: "ISBI 2027 target is locked; 3D evidence becomes the submission gate",
+      copy: "공식 ISBI 2027 single-blind four-page 규정과 2026-10-26 마감을 고정했다. 실행된 exact/nonlinear operator는 MLP이며 3D GNN은 아직 target specification임을 바로잡았다. M0는 one-shot mechanism falsification으로만 남고, expanded 또는 independent irregular-3D velocity outer test, five seeds, family bootstrap CI와 strong graph/operator baseline 없이는 submission-ready로 표시하지 않는다.",
+      files: ["docs/isbi-2027-plan.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.06",
       category: "protocol",

@@ -90,6 +90,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         [
             "schema_version",
             "project",
+            "venue",
             "task",
             "datasets",
             "model",
@@ -112,6 +113,47 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if project["clinical_use"] is not False:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     checks.append("research-only project boundary")
+
+    venue = protocol["venue"]
+    _require_keys(
+        venue,
+        [
+            "target",
+            "submission_deadline",
+            "review",
+            "technical_page_limit",
+            "fifth_page_allowed_content",
+            "submission_ready",
+            "required_headline_domain",
+            "development_cache_is_confirmatory",
+            "m0_alone_may_authorize_submission",
+            "plan",
+        ],
+        "venue",
+    )
+    if venue["target"] != "IEEE_ISBI_2027_four_page_regular":
+        raise ProtocolError("The locked target is the ISBI 2027 four-page paper.")
+    if venue["submission_deadline"] != "2026-10-26T23:59:00-04:00":
+        raise ProtocolError("The ISBI 2027 official EDT deadline changed.")
+    if venue["review"] != "single_blind" or venue["technical_page_limit"] != 4:
+        raise ProtocolError("ISBI review mode and four-page technical limit are fixed.")
+    if set(venue["fifth_page_allowed_content"]) != {
+        "references",
+        "compliance_with_ethical_standards",
+        "acknowledgments_and_conflict_of_interest",
+    }:
+        raise ProtocolError("ISBI fifth-page content must remain non-technical.")
+    if (
+        venue["submission_ready"] is not False
+        or venue["required_headline_domain"] != "irregular_3d_aneurysm_velocity"
+        or venue["development_cache_is_confirmatory"] is not False
+        or venue["m0_alone_may_authorize_submission"] is not False
+        or venue["plan"] != "docs/isbi-2027-plan.md"
+    ):
+        raise ProtocolError(
+            "ISBI submission must remain blocked before independent 3D evidence."
+        )
+    checks.append("ISBI 2027 four-page and 3D evidence boundary")
 
     task = protocol["task"]
     _require_keys(

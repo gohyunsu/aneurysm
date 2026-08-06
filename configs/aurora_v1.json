@@ -7,6 +7,22 @@
     "as_of": "2026-08-06",
     "clinical_use": false
   },
+  "venue": {
+    "target": "IEEE_ISBI_2027_four_page_regular",
+    "submission_deadline": "2026-10-26T23:59:00-04:00",
+    "review": "single_blind",
+    "technical_page_limit": 4,
+    "fifth_page_allowed_content": [
+      "references",
+      "compliance_with_ethical_standards",
+      "acknowledgments_and_conflict_of_interest"
+    ],
+    "submission_ready": false,
+    "required_headline_domain": "irregular_3d_aneurysm_velocity",
+    "development_cache_is_confirmatory": false,
+    "m0_alone_may_authorize_submission": false,
+    "plan": "docs/isbi-2027-plan.md"
+  },
   "task": {
     "primary_problem": "operator_learning_under_partial_boundary_observation",
     "application_endpoint": "cross_sectional_rupture_status",

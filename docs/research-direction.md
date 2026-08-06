@@ -2,12 +2,29 @@
 
 최종 검토일: 2026-08-06 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · post-N1c audits completed · M0 missing-only mechanism preregistered/unrun · method unselected · 3D blocked
+상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
+preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
+post-N1c audits completed · M0 missing-only mechanism preregistered/unrun ·
+method unselected · 3D headline blocked
+
+## 0. 제출 목표와 scope
+
+목표 venue는 IEEE ISBI 2027 four-page regular paper이며 공식 마감은
+2026-10-26이다. ISBI는 physical/statistical modelling, reconstruction,
+uncertainty quantification과 medical applications를 포함하지만, 현재
+negative nonlinear evidence와 계획만 있는 3D GNN을 제출 근거로 보지
+않는다.
+
+제출 identity는 `docs/isbi-2027-plan.md`의 velocity-only 3D gate를
+통과할 때만 열린다. Exact/nonlinear PDE는 method sanity이고, headline은
+Aneumo 또는 독립 irregular-3D data의 full/missing inflow velocity
+reconstruction, calibration, same-geometry response여야 한다. Pressure,
+WSS/OSI, transient, rupture risk와 clinical utility는 제외한다.
 
 ## 1. 현재 판정
 
 기존 v1을 “missing-BC probabilistic neural operator + Fourier cycle decoder”로
-제출하면 AAAI급 독립 novelty가 부족하다.
+제출하면 독립 novelty가 부족하다.
 
 - varying BC 밖 neural operator의 비식별성은 ICLR 2026 연구가 직접
   정식화했다.
@@ -131,8 +148,9 @@ BC completion sample과 model ensemble을 두 축으로 유지한다.
 - global anatomy: latent-token attention
 - continuous output: coordinate query neural operator
 
-따라서 현재 architecture는 GNN을 포함하지만 순수 GNN이 아니다. Backbone은
-강한 구현 선택이며 novelty의 중심이 아니다.
+따라서 3D **target specification**은 GNN을 포함하지만 순수 GNN이 아니다.
+현재 실행된 N1은 MLP operator다. Planned backbone은 강한 구현 선택이며
+novelty의 중심이 아니다.
 
 ### Boundary model
 

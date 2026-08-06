@@ -8,13 +8,20 @@
 > **AURORA** — Aneurysm Uncertainty-aware Reconstruction Operator for
 > Reliable Assessment
 
+현재 제출 목표는 **IEEE ISBI 2027 four-page regular paper**입니다
+(공식 마감 2026-10-26). 다만 N1c가 실패했고 3D headline evidence가
+없으므로 아직 submission-ready가 아닙니다. ISBI에 맞춘 좁은 claim,
+velocity-only 3D 실험, five-seed outer-test와 kill date는
+[`docs/isbi-2027-plan.md`](docs/isbi-2027-plan.md)에 고정합니다.
+
 ## 현재 모델은 GNN인가?
 
-**GNN을 사용하지만 순수 GNN은 아닙니다.** 혈관 표면의 가까운 점 관계는
-edge message-passing GNN으로 encode하고, 멀리 떨어진 inlet–aneurysm–outlet
-관계는 physics-token attention으로 연결합니다. 마지막에는 고정 graph
-node의 다음 상태만 예측하지 않고, 임의의 volume/wall query에서 한 cardiac
-cycle의 field를 복원하는 neural-operator decoder를 사용합니다.
+**현재 실행된 exact/nonlinear 모델은 GNN이 아닙니다.** Context MLP와
+boundary token, lifted spatial decoder로 method gate를 검사했습니다.
+Edge-message GNN + anatomy token + continuous query decoder는 Aneumo
+irregular-3D용 **target specification**이며 아직 학습 구현·검증되지
+않았습니다. 따라서 사이트와 논문에서 이를 “현재 모델” 또는 확정
+contribution이라고 부르지 않습니다.
 
 의학·CFD·mesh·GNN 배경이 없는 독자는
 [`site/learn.html`](site/learn.html)에서 11개 장을 순서대로 읽을 수 있습니다.
@@ -82,11 +89,13 @@ representation gate를 통과했습니다. POD는 아직 learned superiority나
    계약
 4. [`docs/experiment-protocol.md`](docs/experiment-protocol.md) — 데이터 역할,
    nested evaluation, ablation, 통계
-5. [`CHANGELOG.md`](CHANGELOG.md) — 결정과 구현 변경 이력
-6. [`site/index.html`](site/index.html) — 연구 판단을 압축한 프로젝트 허브
-7. [`site/learn.html`](site/learn.html) — 동맥류·CFD·GNN·operator·실험을
+5. [`docs/isbi-2027-plan.md`](docs/isbi-2027-plan.md) — ISBI 4-page claim,
+   3D experiment gate, calendar
+6. [`CHANGELOG.md`](CHANGELOG.md) — 결정과 구현 변경 이력
+7. [`site/index.html`](site/index.html) — 연구 판단을 압축한 프로젝트 허브
+8. [`site/learn.html`](site/learn.html) — 동맥류·CFD·GNN·operator·실험을
    처음부터 설명하는 상세 field guide
-8. [`docs/server-execution.md`](docs/server-execution.md) — 비식별 자산 감사와
+9. [`docs/server-execution.md`](docs/server-execution.md) — 비식별 자산 감사와
    scheduler 실행 provenance
 
 기존 데이터 감사 기록은 [`docs/datasets.md`](docs/datasets.md)와

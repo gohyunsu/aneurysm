@@ -4,7 +4,7 @@
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-06 KST post-N1c
 density-objective·decision-task audit 완료와 missing-only M0
-mechanism-gate 사전등록 상태를 반영했다.
+mechanism-gate 사전등록, ISBI 2027 target lock 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -12,6 +12,14 @@ mechanism-gate 사전등록 상태를 반영했다.
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 주 연구 문제: **partial/missing physical-condition operator learning**
+- 제출 목표: **IEEE ISBI 2027 archival four-page regular paper**,
+  2026-10-26 23:59 USA EDT. 현재는 `not submission-ready`다.
+- ISBI headline은 actual irregular-3D aneurysm **velocity-only**
+  reconstruction·response·calibration evidence가 있을 때만 연다. Exact와
+  nonlinear PDE만으로 biomedical-imaging contribution을 주장하지 않는다.
+- 실행된 exact/nonlinear architecture는 MLP lifted operator다. GNN+token+
+  continuous-query 구조는 3D target specification이며 아직 구현·검증된
+  현재 모델이 아니다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
@@ -448,6 +456,27 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   protocol/site/changelog → private manuscript pin` 순서로 처리한다.
   로컬 dependency·tmp·TeX 문제는 한 번만 bounded diagnosis하고,
   authoritative validation은 frozen PBS와 GitHub CI로 한다.
+- ISBI target을 이유로 실패한 N1c나 M0를 완화하지 않는다. Venue pivot은
+  task·evidence 우선순위를 바꾸지만 기존 실패와 test boundary를 바꾸지
+  않는다.
+
+### ISBI 2027 제출 규약
+
+- 자세한 단일 출처는 `docs/isbi-2027-plan.md`다.
+- 모든 기술 내용·표·그림은 official template 첫 4쪽 안에 둔다. 5쪽은
+  reference, ethics, acknowledgments/COI 외 기술 내용을 금지한다.
+- Primary는 synthetic-CFD 기반 3D velocity reconstruction 연구다.
+  Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
+  utility는 새 provenance와 prospective evidence 없이는 headline에서
+  제외한다.
+- 64-case Aneumo cache는 implementation/development pilot이다. Expanded
+  base-family-disjoint cache 또는 독립 3D cohort 없이 confirmatory
+  headline이라 하지 않는다.
+- M0는 한 번의 nonlinear mechanism falsification일 뿐 ISBI method나 3D
+  evidence가 아니다. 통과해도 scalar-inflow 3D estimand에 맞춘 별도
+  prospective translation contract가 필요하다.
+- ISBI full-paper gate가 실패하면 제목·threshold·metric을 사후 변경해
+  제출하지 않는다.
 
 ## 7. 새 팀 대화와 게시글 반영
 
