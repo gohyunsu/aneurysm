@@ -19,10 +19,10 @@ hostname
 nvidia-smi
 
 bind_arguments=()
-experiment_pythonpath="/workspace/src"
+experiment_pythonpath="/workspace/src:/workspace"
 if [ -n "${AURORA_EXPERIMENT_DEPS:-}" ]; then
   bind_arguments+=(--bind "$AURORA_EXPERIMENT_DEPS:/experiment-deps:ro")
-  experiment_pythonpath="/workspace/src:/experiment-deps"
+  experiment_pythonpath="/workspace/src:/workspace:/experiment-deps"
 fi
 
 set +e

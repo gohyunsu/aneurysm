@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#PBS -N aurora_n1_task_audit
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=12:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+
+mkdir -p "$AURORA_OUTPUT_ROOT"
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+set +e
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_OUTPUT_ROOT:/output" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace/src:/workspace" \
+    AURORA_GIT_COMMIT="$AURORA_GIT_COMMIT" \
+  python /workspace/experiments/run_nonlinear_pde_n1_decision_task_audit.py \
+    --audit-config \
+      /workspace/configs/nonlinear_pde_n1_decision_task_audit.json \
+    --output /output \
+    --git-commit "$AURORA_GIT_COMMIT" \
+    --require-cuda \
+    > "$AURORA_OUTPUT_ROOT/run.log" 2>&1
+run_status=$?
+set -e
+
+if [ "$run_status" -eq 0 ]; then
+  printf '%s\n' '{"state":"runner_completed","exit_status":0}' \
+    > "$AURORA_OUTPUT_ROOT/wrapper_status.json"
+else
+  printf '{"state":"runner_failed","exit_status":%s}\n' "$run_status" \
+    > "$AURORA_OUTPUT_ROOT/wrapper_status.json"
+fi
+exit "$run_status"

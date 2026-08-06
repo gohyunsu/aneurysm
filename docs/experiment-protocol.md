@@ -618,17 +618,25 @@ N1c-a는 joint density/objective를 1차 병목으로, operator를 2차 병목�
 지목했지만 새 방법을 선택하지 않는다. 다음 두 작업은 서로 독립된
 development audit으로 분리한다.
 
-1. **Density objective control:** 새 development seed와 validation
-   geometry에서 동일 joint 2-GMM의 full-joint NLL과 registered-mask
-   conditional composite likelihood를 compute-matched 비교한다.
-   Independent heads와 ACFlow를 conditional-accuracy reference로 유지한다.
-   Test를 생성·접근하지 않고 success gate를 두지 않는다. Composite
-   likelihood 자체는 method novelty가 아니다.
-2. **Decision-task adequacy:** learned checkpoint 없이 true BC law와 true
-   simulator만으로 mask별 oracle VoI, first/second winner margin,
-   selected-component entropy, nonzero regret opportunity와 bounded
-   functional Bayes-action diversity를 측정한다. Method 결과로 mask나
-   threshold를 선택하지 않는다.
+1. **Density objective control:** exact contract는
+   `configs/nonlinear_pde_n1_density_objective_audit.json`이다. N1
+   development/confirmatory와 겹치지 않는 seed 5개, 3,072×8 train,
+   384×8 selection-validation, 별도 384×8 audit-validation을 고정했다.
+   같은 joint 2-GMM·초기 weight·minibatch·optimizer에서 한 step당
+   likelihood 한 번을 사용해 (a) N1c random-mask raw conditional NLL,
+   (b) 같은 loss의 per-unobserved-component 정규화, (c) full-joint
+   per-component NLL, (d) missing/sparse-2/partial-4 equal-cycle composite
+   per-component NLL을 비교한다. 공통 selection metric과 exact
+   radius-truncated true-law excess NLL을 모두 seed별로 보고하며 variant
+   winner를 선택하지 않는다.
+2. **Decision-task adequacy:** exact contract는
+   `configs/nonlinear_pde_n1_decision_task_audit.json`이다. Learned model과
+   checkpoint는 읽지 않는다. True-simulator calibration 384×8과 disjoint
+   96-context audit split을 사용하고, missing/sparse-2에서 base posterior
+   2,048 sample 및 독립적인 두 outer 32 × inner 64 replicate를 고정했다.
+   Oracle VoI, first/second winner margin, selected-component entropy,
+   candidate-risk dispersion, Bayes-action diversity/action change와
+   cross-replicate winner·top-2·risk stability를 함께 보고한다.
 
 두 audit 모두 N1c를 relabel하거나 N1d/3D를 열 수 없다. 둘이 feasibility를
 지지한 뒤에만 operator-specific method와 fresh prospective re-entry의
@@ -895,7 +903,7 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 7. N1c-a threshold-free density/operator/acquisition/route-regret attribution
    **(완료 · joint density 병목, current identity unsupported)**
 8. Validation-only density-objective control과 method-independent
-   decision-task adequacy audit **(다음 우선순위)**
+   decision-task adequacy audit **(사전등록 완료 · 실행 전)**
 9. 두 audit이 method 필요성과 nontrivial task를 모두 지지할 때만 fresh
    prospective re-entry
 10. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol

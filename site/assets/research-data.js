@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does coherence improve decisions?",
-      copy: "N1c-a는 joint density가 세 mask 모두 independent heads보다 0/5 seed로 열세이고, stable 64×128 acquisition도 ACFlow보다 1/5에 그침을 확인했다. Route compatibility는 회복됐지만 independent 대비 worst-route risk 우위는 3/5뿐이다. Density objective가 주 병목이고 현재 decision identity는 unsupported다.",
-      state: "N1c failed unchanged · attribution completed · 3D blocked",
+      copy: "N1c-a는 joint density가 세 mask 모두 independent heads보다 0/5 seed로 열세이고, stable 64×128 acquisition도 ACFlow보다 1/5에 그침을 확인했다. Route compatibility는 회복됐지만 independent 대비 worst-route risk 우위는 3/5뿐이다. 네-objective validation audit과 learned-model-free task audit을 결과 전에 분리해 고정했으며 아직 output은 없다.",
+      state: "N1c failed · two audits preregistered/unrun · 3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.06",
+      category: "protocol",
+      title: "Two post-N1c audits are frozen before any development output",
+      copy: "Density audit은 fresh 5 seed와 disjoint train/selection/audit-validation에서 N1c raw conditional, per-component normalization, full-joint와 registered composite objective를 같은 joint 2-GMM schedule로 비교한다. Task audit은 learned model이나 checkpoint 없이 true law/simulator와 독립 두 Monte Carlo replicate로 VoI·winner margin·action diversity·stability를 측정한다. 둘 다 threshold, method selection, N1 test, N1c relabel 또는 N1d/3D 권한이 없다.",
+      files: ["configs/nonlinear_pde_n1_density_objective_audit.json", "configs/nonlinear_pde_n1_decision_task_audit.json", "src/aurora/nonlinear_pde_density_objective.py", "src/aurora/nonlinear_pde_decision_task_audit.py", "experiments/run_nonlinear_pde_n1_density_objective_audit.py", "experiments/run_nonlinear_pde_n1_decision_task_audit.py", "scripts/aggregate_n1_post_n1c_audits.py", "cluster/ssu_a6gpu_contract_tests.pbs", "cluster/ssu_a6gpu_nonlinear_pde_n1_density_objective_audit.pbs", "cluster/ssu_a6gpu_nonlinear_pde_n1_decision_task_audit.pbs", "docs/experiment-protocol.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.06",
       category: "result",

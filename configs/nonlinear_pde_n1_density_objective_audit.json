@@ -1,0 +1,124 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1_density_objective_audit.v1",
+  "experiment_id": "nonlinear_n1_density_objective_audit_v1",
+  "status": "preregistered_development_before_output",
+  "stage": "threshold_free_validation_only_attribution",
+  "parents": {
+    "n1_config": {
+      "path": "nonlinear_pde_n1.json",
+      "sha256": "757b742587b2d52860648a42e6c58721716c6675366f5b3b6329d6a695eb0891"
+    },
+    "n1c_attribution_result": {
+      "path": "../results/nonlinear_pde_n1c_attribution_20260806.json",
+      "sha256": "12dee3a876d201c36220114d7487a77195af423689e865b05bdfc06ae676b68d",
+      "public_commit": "5eb3b869e93c1557c777259281396bf247688dad"
+    }
+  },
+  "has_success_threshold": false,
+  "may_access_or_generate_n1_test": false,
+  "may_relabel_n1c": false,
+  "may_select_a_method": false,
+  "may_authorize_n1d_or_irregular_3d": false,
+  "may_establish_method_novelty": false,
+  "data": {
+    "train_contexts": 3072,
+    "selection_validation_contexts": 384,
+    "audit_validation_contexts": 384,
+    "conditions_per_context": 8,
+    "context_support": [-0.8, 0.8],
+    "maximum_latent_mahalanobis_radius": 2.5,
+    "split_seeds": {
+      "train_context": 73080681,
+      "train_boundary": 73081681,
+      "selection_context": 73080682,
+      "selection_boundary": 73081682,
+      "audit_context": 73080683,
+      "audit_boundary": 73081683
+    },
+    "n1_test_context_seed_accessed": false,
+    "n1_test_boundary_seed_accessed": false
+  },
+  "model_seeds": [
+    73080621,
+    73080622,
+    73080623,
+    73080624,
+    73080625
+  ],
+  "architecture_lock": {
+    "family": "context_conditioned_two_component_full_covariance_gmm",
+    "hidden_width": 192,
+    "hidden_layers": 3,
+    "same_initial_state_within_seed": true
+  },
+  "optimization_lock": {
+    "maximum_steps": 1800,
+    "batch_size": 4096,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "validation_interval": 20,
+    "early_stopping_patience": 15,
+    "gradient_clip_norm": 5.0,
+    "same_minibatch_indices_within_seed": true,
+    "one_likelihood_evaluation_per_step": true
+  },
+  "objective_variants": [
+    {
+      "id": "n1c_random_mask_raw",
+      "mask_distribution": "n1c_bernoulli_half_nonfull",
+      "loss": "conditional_nll_sum_over_unobserved_components",
+      "role": "exact_objective_reproduction_control",
+      "method_novelty_claimed": false
+    },
+    {
+      "id": "random_mask_per_component",
+      "mask_distribution": "n1c_bernoulli_half_nonfull",
+      "loss": "conditional_nll_per_unobserved_component",
+      "role": "loss_scale_attribution",
+      "method_novelty_claimed": false
+    },
+    {
+      "id": "full_joint_per_component",
+      "mask_distribution": "none",
+      "loss": "full_joint_nll_per_component",
+      "role": "joint_mle_control",
+      "method_novelty_claimed": false
+    },
+    {
+      "id": "registered_composite_per_component",
+      "mask_distribution": "deterministic_equal_cycle_over_missing_sparse2_partial4",
+      "loss": "stochastic_unbiased_registered_mask_composite_nll_per_component",
+      "role": "task_mask_objective_control",
+      "method_novelty_claimed": false
+    }
+  ],
+  "checkpoint_selection": {
+    "split": "selection_validation_only",
+    "metric": "equal_mask_mean_conditional_nll_per_unobserved_component",
+    "masks": {
+      "missing": [],
+      "sparse_2": [0, 2],
+      "partial_4": [0, 2, 5, 7]
+    },
+    "cross_variant_selection": false
+  },
+  "audit_evaluation": {
+    "split": "disjoint_audit_validation",
+    "masks": {
+      "missing": [],
+      "sparse_2": [0, 2],
+      "partial_4": [0, 2, 5, 7]
+    },
+    "metric": "conditional_nll_per_unobserved_component_and_excess_over_true_law",
+    "true_reference": "exact_radius_truncated_context_conditioned_gmm",
+    "report_each_seed": true,
+    "report_no_test_access": true
+  },
+  "reporting": {
+    "raw_per_context_metrics_private": true,
+    "public_output_aggregate_only_after_completion": true,
+    "retain_n1c_failed": true,
+    "result_is_development_attribution": true,
+    "new_prospective_gate_requires_new_version_and_fresh_seeds": true
+  }
+}

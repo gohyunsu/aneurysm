@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-06 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · N1c-a completed · current identity unsupported · 3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · N1c-a completed · two development audits preregistered · current identity unsupported · 3D blocked
 
 ## 1. 현재 판정
 
@@ -34,6 +34,13 @@ operator보다 missing에서 13.0배, sparse-2에서 5.81배 컸다. Acquisition
 수치적으로 회복됐지만 independent heads보다 true-oracle worst-route
 regret가 낮은 seed는 3/5뿐이었다. 따라서 N1c 실패, 닫힌 3D와
 `accept-ready가 아니다`라는 판정은 바뀌지 않는다.
+
+그 결과를 본 뒤 유리한 목적함수나 task를 고르는 것을 막기 위해 다음 두
+development audit을 결과 전에 분리해 고정했다. Density audit은
+`configs/nonlinear_pde_n1_density_objective_audit.json`, task audit은
+`configs/nonlinear_pde_n1_decision_task_audit.json`이 실행 계약이다.
+둘 다 아직 결과가 없고, success threshold·method selection·N1 test
+접근·N1c relabel·N1d/3D 권한이 없다.
 
 ## 2. 새 한 문장 연구 질문
 
@@ -394,8 +401,8 @@ contribution으로 올리지 않는다.
 trade-off를 solution-functional risk에 맞춰 해소할 수 있는가*이다. 그러나
 mask-conditional composite likelihood는 고전적 estimation control이고,
 compatibility/path consistency와 decision-focused learning도 선행연구가
-있다. 먼저 validation-only objective control과 method-independent
-decision-task adequacy audit을 수행하고, 그 뒤에도 gap과 nontrivial
+있다. 이를 위해 validation-only objective control과 method-independent
+decision-task adequacy audit을 사전등록했다. 그 뒤에도 gap과 nontrivial
 decision consequence가 남을 때만 operator-specific algorithm과 보장을
 새 방법으로 설계한다.
 
@@ -512,6 +519,36 @@ non-discriminative였다.
 `results/nonlinear_pde_n1c_20260805.json`과
 `results/nonlinear_pde_n1c_attribution_20260806.json`이다. N1c-a에는
 success threshold, model selection, N1c relabel 또는 N1d/3D 권한이 없다.
+
+#### 결과 전 고정한 두 development audit
+
+Density-objective audit은 같은 context-conditioned 2-GMM, 초기 weight,
+minibatch, optimizer와 한 step당 likelihood 평가 1회를 유지한다. Fresh
+development seed 5개에서 3,072×8 train, 384×8 selection-validation,
+별도 384×8 audit-validation을 쓴다. 다음 네 objective를 서로 선택하지
+않은 채 모두 보고한다.
+
+1. N1c와 같은 random-mask raw conditional NLL
+2. 같은 random mask의 unobserved-component 정규화 NLL
+3. full-joint NLL의 component 정규화 control
+4. missing/sparse-2/partial-4를 동일 주기로 도는 registered composite
+   conditional NLL
+
+공통 checkpoint metric은 세 registered mask의 component-normalized
+conditional NLL 평균이다. Disjoint audit-validation에서는 exact
+radius-truncated true BC law 대비 excess NLL을 seed별로 보고한다.
+Independent head나 ACFlow를 이 audit에서 다시 학습해 winner를 고르지
+않으며, 어떤 variant도 여기서 method가 되지 않는다.
+
+Decision-task adequacy audit은 learned model과 checkpoint를 0개 읽는다.
+True simulator calibration 384×8로 네 functional을 표준화하고, disjoint
+96-context의 missing/sparse-2 mask에서 true truncated BC law만 condition해
+bounded-loss Bayes action과 component acquisition risk를 계산한다. Base
+posterior 2,048 sample과 독립적인 두 outer 32 × inner 64 replicate를
+고정했다. Winner entropy뿐 아니라 VoI, first–second margin, risk
+dispersion, action-change rate와 replicate winner/top-2/risk stability를
+함께 보고한다. Threshold가 없으므로 결과는 task가 충분히 비자명한지에
+대한 정량적 근거이지 pass/fail이 아니다.
 
 ### G2 · paired response
 
@@ -636,14 +673,14 @@ submission이라고 표현하지 않고 다음 cycle 또는 다른 venue용으�
    판정 **(완료 · velocity만 eligible, pressure 탈락)**
 6. Multicomponent nonlinear N0/N1 strong-baseline test와 N1c-a failure
    attribution **(완료 · N0r 통과, N1c 실패 유지, joint density 병목)**
-7. 같은 joint GMM의 full-joint NLL과 registered-mask conditional composite
-   likelihood를 fresh development seed의 validation에서 비교한다. 이는
-   method novelty가 아니라 coherence–conditional-accuracy tax의
+7. 같은 joint GMM의 네 density objective를 fresh development seed의
+   validation에서 비교하는 exact contract를 고정 **(사전등록 완료 · 실행 전)**.
+   이는 method novelty가 아니라 coherence–conditional-accuracy tax의
    engineering control이다.
 8. true law와 simulator만으로 acquisition winner diversity, nonzero VoI,
-   Bayes-action diversity를 사전등록해 method-independent task adequacy를
-   감사한다. 현재 sparse-2 같은 trivial mask는 후속 confirmatory task에서
-   제외할 근거를 결과 전에 만든다.
+   Bayes-action diversity와 Monte Carlo stability를 감사하는 exact contract를
+   고정 **(사전등록 완료 · 실행 전)**. 현재 sparse-2 같은 trivial mask를
+   결과 뒤 임의로 제거하지 않고 task adequacy 근거로만 사용한다.
 9. 두 audit이 모두 feasibility를 지지할 때만 operator-specific compatible
    projection/decision-risk method와 fresh N1 re-entry를 별도 등록한다.
 10. Fresh N1이 양수일 때만 velocity-only irregular 3D backbone과 transient

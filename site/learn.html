@@ -656,8 +656,10 @@
               joint density는 세 mask 모두 independent heads보다 0/5
               seed로 열세였고, stable acquisition과 corrected route regret가
               method superiority를 회복하지 못했습니다. 현재 3D는 닫혀
-              있고, 다음은 validation-only density-objective control과
-              true-oracle decision-task adequacy audit입니다.
+              있고, 다음은 결과 전에 별도 config로 고정한 validation-only
+              네-objective density control과 learned-model-free true-oracle
+              decision-task adequacy audit입니다. 둘 다 아직 결과가 없고
+              N1c나 3D 상태를 바꿀 수 없습니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>
@@ -870,7 +872,11 @@
           </div>
           <div class="compute-status warning">
             <span class="status-dot warning"></span>
-            <div><p class="eyebrow">G1R · PREREGISTERED</p><h3>Fresh test is frozen but not opened</h3><p>새 5개 seed, validation-only checkpoint selection, analytic density coverage, quadrature mean, IID-floor excess CI와 threshold를 실행 전에 고정했습니다. 통과해도 frozen G1을 relabel하거나 novelty를 입증하지 않습니다.</p><a href="../configs/controlled_pde_g1r.json">실행 전 고정 config 열기 ↗</a></div>
+            <div><p class="eyebrow">G1R · COMPLETE / FAILED</p><h3>Fresh five-seed re-entry did not pass</h3><p>Coverage, full-BC operator, analytic nesting과 projective excess는 통과했지만 최악 density/end-to-end mean 0.07533/0.07518이 0.05를 넘었습니다. 이후 별도 G1s data-adequacy sanity가 통과했어도 G1r 실패는 보존합니다.</p><a href="../results/controlled_pde_g1r_20260803.json">공개 aggregate 열기 ↗</a></div>
+          </div>
+          <div class="compute-status warning">
+            <span class="status-dot warning"></span>
+            <div><p class="eyebrow">POST-N1C AUDITS · PREREGISTERED / UNRUN</p><h3>Objective bottleneck and task adequacy are separated</h3><p>Fresh 5-seed density audit은 네 objective만 비교하고, 별도 task audit은 learned checkpoint 없이 true law/simulator만 사용합니다. Threshold·method selection·N1 test·3D 권한은 없습니다.</p><a href="../configs/nonlinear_pde_n1_density_objective_audit.json">Density config ↗</a> <a href="../configs/nonlinear_pde_n1_decision_task_audit.json">Task config ↗</a></div>
           </div>
           <div class="compute-status">
             <span class="status-dot complete"></span>

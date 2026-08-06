@@ -189,6 +189,39 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "non-gating"):
             validate_protocol(candidate)
 
+    def test_n1c_attribution_cannot_rescue_the_failed_identity(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["post_result_attribution"]["result_summary"][
+            "current_paper_identity_supported"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "density bottleneck"):
+            validate_protocol(candidate)
+
+    def test_post_n1c_audits_cannot_select_a_method(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["next_development_audits"]["density_objective"][
+            "may_select_a_method"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "non-selecting"):
+            validate_protocol(candidate)
+
+    def test_decision_task_audit_cannot_load_a_checkpoint(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        n1 = next(
+            item for item in candidate["nonlinear_protocols"] if item["id"] == "N1"
+        )
+        n1["next_development_audits"]["decision_task"][
+            "uses_learned_model_or_checkpoint"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "non-selecting"):
+            validate_protocol(candidate)
+
     def test_patient_bootstrap_is_required(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["evaluation"]["clinical_bootstrap_unit"] = "aneurysm"

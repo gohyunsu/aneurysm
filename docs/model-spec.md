@@ -1,6 +1,6 @@
 # AURORA v2 모델 명세
 
-상태: N1c failed · N1c-a density bottleneck attribution completed · method revision pending
+상태: N1c failed · N1c-a density bottleneck attribution completed · two non-gating development audits preregistered · method revision pending
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -476,21 +476,25 @@ disagreement만 invalid다. Future implementation은 direct/5→7/7→5에
 전달했을 때 candidate-risk tensor가 수치 오차 안에서 같다는 regression
 test를 요구한다. 이 수정은 이미 failed인 N1c를 다시 판정하지 않는다.
 
-다음 prospective method가 필요하다면 joint full-density NLL만 반복하지
-않고, 같은 joint density의 conditional composite likelihood로 registered
-mask 성능을 직접 최적화하는 **validation-only engineering control**을
-먼저 둔다. Composite likelihood 자체는 고전적 estimator이므로 novelty로
-세지 않는다. 기존 open test, N1c seed와 checkpoint는 model development에
-재사용하지 않는다. Strong DeltaPhi-style operator를 joint density의
-pushforward backbone으로 쓰는 것도 허용하며, AURORA 전용 operator를
-고집하지 않는다.
+다음 prospective method가 필요한지 보기 전에
+`configs/nonlinear_pde_n1_density_objective_audit.json`에
+**validation-only engineering control**을 고정했다. 같은 joint 2-GMM,
+paired initialization/minibatch, optimizer와 likelihood 평가 횟수에서
+N1c random-mask raw conditional NLL, 동일 loss의 per-missing-component
+정규화, full-joint per-component NLL, registered-mask composite
+per-component NLL을 비교한다. Composite likelihood와 loss normalization은
+고전적 estimation control이므로 novelty로 세지 않는다. 기존 open test,
+N1c seed와 checkpoint는 model development에 재사용하지 않는다. Strong
+DeltaPhi-style operator를 joint density의 pushforward backbone으로 쓰는
+것도 허용하며, AURORA 전용 operator를 고집하지 않는다.
 
-별도의 method-independent adequacy audit은 learned model 없이 true law와
-true simulator만 사용해 mask별 oracle VoI, winner margin, selected-component
-diversity와 bounded-functional Bayes-action diversity를 측정한다. 이 audit이
-nontrivial decision task를 확인하지 못하면 acquisition과 route regret를
-headline에서 제거한다. 두 development audit은 새 gate나 contribution이
-아니다.
+별도의 `configs/nonlinear_pde_n1_decision_task_audit.json`은 learned model
+없이 true law와 true simulator만 사용해 mask별 oracle VoI, winner margin,
+selected-component diversity, bounded-functional Bayes-action diversity와
+두 독립 Monte Carlo replicate의 안정성을 측정한다. 이 audit이 nontrivial
+decision task를 확인하지 못하면 acquisition과 route regret를 headline에서
+제거한다. 두 development audit은 아직 결과가 없고 새 gate나
+contribution이 아니다.
 
 ## 7. Module D — paired simulator-response supervision · ablation
 
@@ -615,9 +619,10 @@ test에서 재현해야 한다.
 Paired response term은 N1c에서 DeltaPhi-style control보다 약했으므로
 \(\lambda_\Delta\mathcal L_{\mathrm{paired\ response}}\)를 headline
 objective에서 제거하고 ablation에서만 더한다. 다음 development control은
-\(\mathcal L_{\mathrm{BC\ NLL}}\)을 full-joint NLL과 registered-mask
-conditional composite likelihood로만 바꿔 density objective의 영향을
-분리한다.
+\(\mathcal L_{\mathrm{BC\ NLL}}\)만 바꾼 네 variant—N1c raw
+random-mask conditional, per-component normalization, full-joint
+per-component, registered-mask composite per-component—로 objective의
+영향을 분리한다.
 
 Nested coherence는 analytic conditional density와 shared pushforward로
 구조화한다. 별도 숫자 loss를 추가해 보이는 것만으로 보장했다고 하지 않고,
@@ -644,9 +649,9 @@ inference sample 수를 맞춘다.
 2. Semilinear 8-component N0/N0r solver/nontriviality gate **완료**
 3. LANO/NOP/generic probabilistic/AFA baseline을 갖춘 N1c
    pair/mask/decision-regret test와 N1c-a attribution **완료 · failed**
-4. Fresh development seed에서 full-joint NLL과 conditional composite
-   likelihood를 validation-only로 비교하고, 별도로 true-law/simulator
-   decision-task adequacy를 감사
+4. Fresh development seed의 네-objective validation-only density audit과
+   true-law/simulator-only decision-task adequacy audit
+   **사전등록 완료 · 실행 전**
 5. 두 audit 뒤에만 operator-specific method와 fresh N1 re-entry를 등록
 6. Fresh N1이 양수일 때 Aneumo velocity-only response protocol을 등록;
    pressure head는 새 사전등록 근거 전까지 제외

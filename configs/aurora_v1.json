@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_attribution_completed_density_bottleneck_current_identity_unsupported",
+    "status": "failed_n1c_attribution_completed_two_development_audits_preregistered",
     "as_of": "2026-08-06",
     "clinical_use": false
   },
@@ -67,6 +67,8 @@
       "controlled_pde_g1s_status": "completed_passed",
       "nonlinear_pde_n1c_status": "completed_failed",
       "nonlinear_pde_n1c_attribution_status": "completed_non_gating_density_bottleneck",
+      "nonlinear_pde_n1_density_objective_audit_status": "preregistered_validation_only_unrun",
+      "nonlinear_pde_n1_decision_task_audit_status": "preregistered_model_free_unrun",
       "irregular_3d_status": "blocked_after_failed_n1c"
     },
     "contribution_priority": {
@@ -681,6 +683,50 @@
           "has_success_threshold": false,
           "fresh_reentry_registered": false,
           "irregular_3d_authorized": false
+        }
+      },
+      "next_development_audits": {
+        "status": "two_threshold_free_audits_preregistered_before_output",
+        "parent_public_commit": "5eb3b869e93c1557c777259281396bf247688dad",
+        "density_objective": {
+          "config": "configs/nonlinear_pde_n1_density_objective_audit.json",
+          "config_sha256": "b4af684939d2659a88f885ed487b4b85657fbe5da319da81a351f908c1200ec5",
+          "status": "preregistered_development_before_output",
+          "model_seeds": 5,
+          "fresh_from_n1_development_and_confirmatory_seeds": true,
+          "variants": [
+            "n1c_random_mask_raw",
+            "random_mask_per_component",
+            "full_joint_per_component",
+            "registered_composite_per_component"
+          ],
+          "selection_split": "selection_validation_only",
+          "audit_split": "disjoint_audit_validation",
+          "has_success_threshold": false,
+          "may_access_or_generate_n1_test": false,
+          "may_select_a_method": false,
+          "may_establish_method_novelty": false
+        },
+        "decision_task": {
+          "config": "configs/nonlinear_pde_n1_decision_task_audit.json",
+          "config_sha256": "00cef2ab32885ed4091e4aa85e59d94cbc4acf1a8630accf241046c1e4a62a60",
+          "status": "preregistered_development_before_output",
+          "uses_learned_model_or_checkpoint": false,
+          "base_masks": [
+            "missing",
+            "sparse_2"
+          ],
+          "independent_monte_carlo_replicates": 2,
+          "has_success_threshold": false,
+          "may_access_or_generate_n1_test": false,
+          "may_select_a_method": false,
+          "may_establish_method_novelty": false
+        },
+        "joint_interpretation": {
+          "n1c_status": "completed_failed_unchanged",
+          "fresh_reentry_registered": false,
+          "n1d_or_irregular_3d_authorized": false,
+          "positive_feasibility_evidence_can_only_motivate_a_separate_fresh_protocol": true
         }
       }
     }

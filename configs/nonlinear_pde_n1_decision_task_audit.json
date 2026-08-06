@@ -1,0 +1,106 @@
+{
+  "schema_version": "aurora.nonlinear_pde_n1_decision_task_audit.v1",
+  "experiment_id": "nonlinear_n1_true_decision_task_adequacy_audit_v1",
+  "status": "preregistered_development_before_output",
+  "stage": "threshold_free_method_independent_task_audit",
+  "parents": {
+    "n1_config": {
+      "path": "nonlinear_pde_n1.json",
+      "sha256": "757b742587b2d52860648a42e6c58721716c6675366f5b3b6329d6a695eb0891"
+    },
+    "n0_solver_config": {
+      "path": "nonlinear_pde_n0.json",
+      "sha256": "cb5d6b0891083bc9460d5557d5c04b708c25dffa09e90e0b951af0dc3dcfcaaf"
+    },
+    "n1c_attribution_result": {
+      "path": "../results/nonlinear_pde_n1c_attribution_20260806.json",
+      "sha256": "12dee3a876d201c36220114d7487a77195af423689e865b05bdfc06ae676b68d",
+      "public_commit": "5eb3b869e93c1557c777259281396bf247688dad"
+    }
+  },
+  "has_success_threshold": false,
+  "uses_learned_model_or_checkpoint": false,
+  "may_access_or_generate_n1_test": false,
+  "may_relabel_n1c": false,
+  "may_select_a_method": false,
+  "may_authorize_n1d_or_irregular_3d": false,
+  "may_establish_method_novelty": false,
+  "data": {
+    "calibration_contexts": 384,
+    "calibration_conditions_per_context": 8,
+    "audit_contexts": 96,
+    "audit_conditions_per_context": 1,
+    "context_support": [-0.8, 0.8],
+    "maximum_latent_mahalanobis_radius": 2.5,
+    "solver_batch_size": 2048,
+    "split_seeds": {
+      "calibration_context": 73080684,
+      "calibration_boundary": 73081684,
+      "audit_context": 73080685,
+      "audit_boundary": 73081685
+    },
+    "n1_test_context_seed_accessed": false,
+    "n1_test_boundary_seed_accessed": false
+  },
+  "functional_contract": {
+    "functionals": [
+      "domain_mean",
+      "central_hotspot",
+      "smooth_maximum",
+      "right_boundary_flux"
+    ],
+    "standardization": "true_simulator_calibration_split_only",
+    "action_grid_range": "calibration_standardized_minimum_to_maximum",
+    "action_grid_points": 129,
+    "bounded_loss": "clip_squared_standardized_error_to_unit_interval",
+    "average_equal_weight_over_four_functionals": true
+  },
+  "base_masks": {
+    "missing": [],
+    "sparse_2": [0, 2]
+  },
+  "monte_carlo": {
+    "base_posterior_samples": 2048,
+    "base_seed": 73080921,
+    "replicates": [
+      {
+        "id": "replicate_a",
+        "outer_measurement_samples": 32,
+        "inner_posterior_samples": 64,
+        "outer_seed": 73080901,
+        "inner_seed": 73080911
+      },
+      {
+        "id": "replicate_b",
+        "outer_measurement_samples": 32,
+        "inner_posterior_samples": 64,
+        "outer_seed": 73080902,
+        "inner_seed": 73080912
+      }
+    ],
+    "same_outer_full_boundary_draws_across_candidates": true,
+    "same_inner_random_stream_across_candidates": true,
+    "replicates_independent": true
+  },
+  "estimands": {
+    "oracle_winner_distribution": true,
+    "normalized_selected_component_entropy": true,
+    "no_acquisition_minus_best_post_acquisition_risk": true,
+    "first_second_candidate_risk_margin": true,
+    "relative_first_second_margin": true,
+    "candidate_risk_dispersion": true,
+    "winner_action_change_rate": true,
+    "base_bayes_action_diversity": true,
+    "cross_replicate_winner_agreement": true,
+    "cross_replicate_top2_set_agreement": true,
+    "cross_replicate_risk_correlation": true
+  },
+  "reporting": {
+    "raw_per_context_metrics_private": true,
+    "public_output_aggregate_only_after_completion": true,
+    "result_is_task_adequacy_attribution": true,
+    "retain_n1c_failed": true,
+    "no_task_threshold_or_pass_fail_label": true,
+    "new_method_or_gate_requires_new_version_and_fresh_evidence": true
+  }
+}

@@ -4,6 +4,51 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-06 · Post-N1c development audits are frozen before output
+
+### Density-objective control
+
+- `configs/nonlinear_pde_n1_density_objective_audit.json`은 N1c-a 공개
+  aggregate와 N1 joint-density architecture를 pin한다. N1의 development와
+  confirmatory seed에 겹치지 않는 fresh seed 5개를 사용한다.
+- 3,072×8 train, 384×8 selection-validation, disjoint 384×8
+  audit-validation에서 같은 initial weight, minibatch, optimizer와 step당
+  likelihood 평가 한 번을 고정한다.
+- N1c random-mask raw conditional NLL, 동일 loss의 per-component
+  normalization, full-joint per-component NLL, registered-mask equal-cycle
+  composite per-component NLL을 모두 실행한다. Cross-variant winner를
+  선택하지 않고 exact radius-truncated true-law excess NLL을 seed별로
+  보고한다.
+
+### Method-independent decision-task audit
+
+- `configs/nonlinear_pde_n1_decision_task_audit.json`은 learned model과
+  checkpoint를 전혀 읽지 않는다. True simulator calibration 384×8과
+  disjoint 96-context audit split만 사용한다.
+- Missing/sparse-2 mask에서 base posterior 2,048 sample과 독립적인 두
+  outer 32 × inner 64 replicate를 고정했다. VoI, winner margin/entropy,
+  candidate-risk dispersion, Bayes-action diversity/change와
+  cross-replicate winner·top-2·risk stability를 함께 보고한다.
+- 두 audit 모두 success threshold, method selection, N1 test access,
+  N1c relabel, fresh re-entry와 N1d/irregular-3D 권한이 없다. Positive
+  feasibility signal도 별도 fresh prospective protocol을 설계할 근거일
+  뿐이다.
+
+### Implementation and synchronized surfaces
+
+- 새 loader·trainer·true-oracle evaluator·runner·PBS wrapper, 결과 전
+  public-aggregate 변환기와 변조 방지 unit test를 추가했다. 변환기는 seed
+  누락, test 접근, model selection 또는 task-audit checkpoint 사용을
+  거부한다. Public code는 read-only, output만 writable bind하며 density는
+  0–4 PBS array, task audit은 checkpoint mount 없는 단일 job이다.
+- 영향 파일:
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `configs/aurora_v1.json`,
+  `site/assets/research-data.js`, `site/index.html`, `site/learn.html`,
+  `README.md`, `AGENTS.md`, `docs/server-execution.md`,
+  `src/aurora/protocol.py`, generic container contract wrapper와 새 audit
+  code/config/PBS/test.
+
 ## 2026-08-06 · N1c-a completes and rejects the current paper identity
 
 ### Exact-source execution

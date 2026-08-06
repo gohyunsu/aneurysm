@@ -86,10 +86,20 @@
   independent heads보다 true-oracle worst-route risk가 낮은 seed는
   3/5뿐이었다. 따라서 joint density/objective가 1차 병목, operator가
   2차 병목이며 현재 paper identity는 unsupported다. N1c failed, paired
-  ablation, N1d/3D blocked 판정은 유지한다. 다음은 fresh development
-  seed의 validation-only density-objective control과 learned method 없이
-  수행하는 decision-task adequacy audit이다. 둘 모두 success threshold,
-  method novelty, N1c relabel 또는 N1d/3D 권한이 없다.
+  ablation, N1d/3D blocked 판정은 유지한다. 다음 두 development audit은
+  결과 전에 별도 config로 고정됐다. Density-objective audit은
+  `configs/nonlinear_pde_n1_density_objective_audit.json`에서 N1 seed와
+  겹치지 않는 fresh 5 seed, 3,072×8 train, 384×8 selection-validation,
+  별도 384×8 audit-validation과 같은 joint 2-GMM·초기 weight·minibatch를
+  고정한다. N1c raw random-mask conditional, per-component normalization,
+  full-joint per-component, registered-mask composite per-component의 네
+  objective를 모두 보고하며 winner를 선택하지 않는다. Decision-task
+  audit은 `configs/nonlinear_pde_n1_decision_task_audit.json`에서 learned
+  model/checkpoint를 전혀 읽지 않고 true-law/simulator calibration 384×8,
+  disjoint 96 context, base 2,048 및 독립 두 outer 32 × inner 64
+  replicate로 task adequacy와 Monte Carlo stability를 분해한다. 둘 다 아직
+  결과가 없고 success threshold, method novelty, N1 test access, N1c
+  relabel 또는 N1d/3D 권한이 없다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -319,8 +329,11 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   모든 mask에서 independent heads보다 0/5 seed로 열세였고, stable-budget
   acquisition과 corrected route regret도 robust superiority를 회복하지
   못했다. 다음 validation-only objective control과 method-independent
-  task-adequacy audit 전에는 새 method나 fresh prospective re-entry를
-  등록하지 않는다.
+  task-adequacy audit은 각각
+  `configs/nonlinear_pde_n1_density_objective_audit.json`과
+  `configs/nonlinear_pde_n1_decision_task_audit.json`에 preregistered/unrun
+  상태로 고정됐다. 두 audit의 결과를 함께 해석하기 전에는 새 method나
+  fresh prospective re-entry를 등록하지 않는다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

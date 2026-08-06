@@ -246,6 +246,22 @@ acquisition과 corrected route regret도 robust superiority를 회복하지
 aggregate만 `results/nonlinear_pde_n1c_attribution_20260806.json`에 둔다.
 N1d shift와 irregular 3D job은 제출하지 않는다.
 
+Post-N1c development는 두 read-only-source PBS job으로 분리한다.
+
+- `cluster/ssu_a6gpu_nonlinear_pde_n1_density_objective_audit.pbs`는
+  0–4 array의 각 A6000 allocation에서 fresh model seed 하나와 네 objective를
+  함께 실행한다. Seed별 checkpoint·history·per-context metric은 private
+  output에만 두고, 다섯 job이 모두 완료된 뒤 aggregate만 공개한다.
+- `cluster/ssu_a6gpu_nonlinear_pde_n1_decision_task_audit.pbs`는 checkpoint
+  mount 자체가 없으며 true law/simulator-only audit 한 개만 실행한다.
+  solver batch size 2,048을 config에 고정했고 calibration/audit split 외 N1 test
+  seed를 생성하거나 읽지 않는다.
+
+두 job 모두 exact public commit과 config hash의 container contract가 먼저
+통과해야 제출한다. 하나의 결과를 먼저 보고 다른 config·seed·mask·sample
+budget을 바꾸지 않으며, 어느 결과도 N1c relabel이나 3D 실행 권한으로 쓰지
+않는다.
+
 ## Aneumo selective-cache contract
 
 사전등록한 32 AneuX base family × 2 deformation의 selective range staging은

@@ -42,6 +42,14 @@ AURORA는 다음 세 질문을 한 모델과 실험 프로토콜로 연결합니
 response supervision은 독립 contribution이 아니라 ablation으로 내렸고
 uncertainty separation은 아직 secondary hypothesis입니다.
 
+다음 두 작업은 결과를 보기 전에 별도 config로 고정했습니다.
+[`density-objective audit`](configs/nonlinear_pde_n1_density_objective_audit.json)은
+동일 joint 2-GMM에서 네 training objective만 validation-only로 비교하고,
+[`decision-task audit`](configs/nonlinear_pde_n1_decision_task_audit.json)은
+learned model 없이 true law와 true simulator만으로 acquisition task의
+비자명성과 Monte Carlo 안정성을 측정합니다. 둘 다 아직 결과가 없고,
+method를 선택하거나 N1c·3D 상태를 바꿀 수 없습니다.
+
 Fixed Fourier cycle은 frozen D0의 localized bulge gate를 실패해 제거했습니다.
 D0b에서는 DCT-II 17/25가 탈락하고 train-only POD 17/25만 oracle
 representation gate를 통과했습니다. POD는 아직 learned superiority나
@@ -257,9 +265,14 @@ seed는 3/5뿐입니다.
 따라서 N1c failed, 3D blocked와 `not accept-ready` 판정은 유지합니다.
 공개 aggregate는
 [`results/nonlinear_pde_n1c_attribution_20260806.json`](results/nonlinear_pde_n1c_attribution_20260806.json)입니다.
-다음은 validation-only density-objective control과 true-law/simulator-only
-decision-task adequacy audit이며, 둘 다 새 contribution이나 fresh gate가
-아닙니다.
+다음은 사전등록된 validation-only
+[`density-objective control`](configs/nonlinear_pde_n1_density_objective_audit.json)과
+true-law/simulator-only
+[`decision-task adequacy audit`](configs/nonlinear_pde_n1_decision_task_audit.json)입니다.
+전자는 fresh 5 seed에서 N1c raw conditional, per-component normalization,
+full-joint와 registered composite objective를 같은 schedule로 비교하고,
+후자는 learned checkpoint를 전혀 읽지 않습니다. 둘 다 새 contribution이나
+fresh gate가 아니며 아직 실행 결과가 없습니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

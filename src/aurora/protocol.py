@@ -968,6 +968,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "optimization_attribution",
                 "prospective_reentry",
                 "outer_test_execution",
+                "post_result_attribution",
+                "next_development_audits",
             ],
             "completed N1",
         )
@@ -1102,6 +1104,127 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         }:
             raise ProtocolError(
                 "Failed N1c must retain its exact result and keep N1d/3D closed."
+            )
+        post_result = n1["post_result_attribution"]
+        _require_keys(
+            post_result,
+            [
+                "id",
+                "status",
+                "config",
+                "source_commit",
+                "result",
+                "parent_n1c_status",
+                "has_success_threshold",
+                "may_relabel_n1c",
+                "may_select_model_or_checkpoint",
+                "may_authorize_n1d_or_irregular_3d",
+                "result_summary",
+                "next_development",
+            ],
+            "N1c-a post-result attribution",
+        )
+        if (
+            post_result["id"] != "N1c-a"
+            or post_result["status"] != "completed_non_gating_attribution"
+            or post_result["config"]
+            != "configs/nonlinear_pde_n1c_attribution.json"
+            or post_result["source_commit"]
+            != "b97899cee774d0ab0bc3da2b3cfa4af2d609c615"
+            or post_result["result"]
+            != "results/nonlinear_pde_n1c_attribution_20260806.json"
+            or post_result["parent_n1c_status"]
+            != "completed_failed_unchanged"
+            or post_result["has_success_threshold"] is not False
+            or post_result["may_relabel_n1c"] is not False
+            or post_result["may_select_model_or_checkpoint"] is not False
+            or post_result["may_authorize_n1d_or_irregular_3d"] is not False
+            or post_result["result_summary"]
+            != {
+                "aurora_joint_better_than_independent_conditional_nll_seeds": {
+                    "missing": 0,
+                    "sparse_2": 0,
+                    "partial_4": 0,
+                },
+                "functional_energy_density_to_simulator_substitution_ratio": {
+                    "missing": 13.001171873559112,
+                    "sparse_2": 5.807517272798561,
+                },
+                "missing_64x128_acquisition_regret_better_than_acflow_seeds": 1,
+                "sparse_2_acquisition_is_non_discriminative": True,
+                "worst_route_risk_better_than_independent_seeds": 3,
+                "primary_bottleneck": "joint_boundary_density_and_training_objective",
+                "current_paper_identity_supported": False,
+            }
+            or post_result["next_development"]
+            != {
+                "density_objective_control": (
+                    "validation_only_full_joint_nll_vs_registered_mask_"
+                    "conditional_composite_likelihood"
+                ),
+                "decision_task_adequacy": "true_law_and_true_simulator_only",
+                "has_success_threshold": False,
+                "fresh_reentry_registered": False,
+                "irregular_3d_authorized": False,
+            }
+        ):
+            raise ProtocolError(
+                "N1c-a must preserve the density bottleneck, failed N1c, "
+                "and non-gating development boundary."
+            )
+        audits = n1["next_development_audits"]
+        if audits != {
+            "status": "two_threshold_free_audits_preregistered_before_output",
+            "parent_public_commit": "5eb3b869e93c1557c777259281396bf247688dad",
+            "density_objective": {
+                "config": (
+                    "configs/nonlinear_pde_n1_density_objective_audit.json"
+                ),
+                "config_sha256": (
+                    "b4af684939d2659a88f885ed487b4b85657fbe5da319da81a351f908c1200ec5"
+                ),
+                "status": "preregistered_development_before_output",
+                "model_seeds": 5,
+                "fresh_from_n1_development_and_confirmatory_seeds": True,
+                "variants": [
+                    "n1c_random_mask_raw",
+                    "random_mask_per_component",
+                    "full_joint_per_component",
+                    "registered_composite_per_component",
+                ],
+                "selection_split": "selection_validation_only",
+                "audit_split": "disjoint_audit_validation",
+                "has_success_threshold": False,
+                "may_access_or_generate_n1_test": False,
+                "may_select_a_method": False,
+                "may_establish_method_novelty": False,
+            },
+            "decision_task": {
+                "config": (
+                    "configs/nonlinear_pde_n1_decision_task_audit.json"
+                ),
+                "config_sha256": (
+                    "00cef2ab32885ed4091e4aa85e59d94cbc4acf1a8630accf241046c1e4a62a60"
+                ),
+                "status": "preregistered_development_before_output",
+                "uses_learned_model_or_checkpoint": False,
+                "base_masks": ["missing", "sparse_2"],
+                "independent_monte_carlo_replicates": 2,
+                "has_success_threshold": False,
+                "may_access_or_generate_n1_test": False,
+                "may_select_a_method": False,
+                "may_establish_method_novelty": False,
+            },
+            "joint_interpretation": {
+                "n1c_status": "completed_failed_unchanged",
+                "fresh_reentry_registered": False,
+                "n1d_or_irregular_3d_authorized": False,
+                "positive_feasibility_evidence_can_only_motivate_a_separate_fresh_protocol": True,
+            },
+        }:
+            raise ProtocolError(
+                "Post-N1c audits must remain preregistered, test-free, "
+                "non-selecting, and unable to authorize N1d or irregular 3D."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

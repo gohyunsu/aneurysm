@@ -168,6 +168,105 @@ def posterior_mean_completion(
     return completed
 
 
+def radius_truncated_conditional_gmm_nll(
+    weights: Any,
+    means: Any,
+    covariances: Any,
+    boundary: Any,
+    observed_positions: Sequence[int],
+    *,
+    maximum_radius: float,
+) -> Any:
+    """Evaluate the exact conditional NLL under a global Mahalanobis cutoff.
+
+    The untruncated Gaussian conditional is corrected by the remaining-radius
+    acceptance probability for every mixture component.  This is an oracle
+    diagnostic for the controlled nonlinear boundary law, not a training loss.
+    """
+
+    torch = _torch()
+    observed = list(int(index) for index in observed_positions)
+    posterior_weights, conditional_mean, conditional_covariance, remaining = (
+        conditional_posterior_from_joint(
+            weights,
+            means,
+            covariances,
+            boundary,
+            observed,
+        )
+    )
+    if not remaining:
+        return boundary.new_zeros(boundary.shape[0])
+
+    if observed:
+        obs_index = torch.tensor(
+            observed, device=means.device, dtype=torch.long
+        )
+        mu_observed = torch.index_select(means, -1, obs_index)
+        covariance_observed = torch.index_select(
+            torch.index_select(covariances, -2, obs_index),
+            -1,
+            obs_index,
+        )
+        obs_eye = torch.eye(
+            len(observed), device=means.device, dtype=means.dtype
+        )
+        obs_cholesky = torch.linalg.cholesky(
+            covariance_observed + 1e-6 * obs_eye
+        )
+        obs_residual = boundary[:, None, observed] - mu_observed
+        obs_solved = torch.cholesky_solve(
+            obs_residual.unsqueeze(-1), obs_cholesky
+        ).squeeze(-1)
+        observed_radius_squared = (obs_residual * obs_solved).sum(dim=-1)
+    else:
+        observed_radius_squared = means.new_zeros(weights.shape)
+
+    target = boundary[:, remaining]
+    dimension = len(remaining)
+    eye = torch.eye(dimension, device=means.device, dtype=means.dtype)
+    cholesky = torch.linalg.cholesky(
+        conditional_covariance + 1e-6 * eye
+    )
+    residual = target[:, None] - conditional_mean
+    solved = torch.cholesky_solve(
+        residual.unsqueeze(-1), cholesky
+    ).squeeze(-1)
+    conditional_radius_squared = (residual * solved).sum(dim=-1)
+    logdet = 2.0 * torch.log(
+        torch.diagonal(cholesky, dim1=-2, dim2=-1)
+    ).sum(dim=-1)
+    log_normal = -0.5 * (
+        conditional_radius_squared
+        + logdet
+        + dimension * math.log(2.0 * math.pi)
+    )
+
+    allowance_squared = (
+        float(maximum_radius) ** 2 - observed_radius_squared
+    ).clamp_min(0.0)
+    acceptance = torch.special.gammainc(
+        means.new_tensor(0.5 * dimension),
+        0.5 * allowance_squared,
+    )
+    normalizer = (
+        posterior_weights * acceptance
+    ).sum(dim=-1).clamp_min(1e-12)
+    valid = (
+        observed_radius_squared + conditional_radius_squared
+        <= float(maximum_radius) ** 2 + 1e-5
+    )
+    log_component = (
+        torch.log(posterior_weights.clamp_min(1e-12)) + log_normal
+    ).masked_fill(~valid, -torch.inf)
+    log_numerator = torch.logsumexp(log_component, dim=-1)
+    if not bool(torch.isfinite(log_numerator).all()):
+        raise NonlinearDecisionError(
+            "Radius-truncated conditional assigned zero density to a case."
+        )
+    return -(log_numerator - torch.log(normalizer))
+
+
 def sample_radius_truncated_conditional_gmm(
     weights: Any,
     means: Any,
@@ -481,4 +580,3 @@ def representation_from_checkpoint(
         key: value.to(device) if hasattr(value, "to") else value
         for key, value in state.items()
     }
-
