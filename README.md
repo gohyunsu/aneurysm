@@ -31,10 +31,16 @@ AURORA는 다음 세 질문을 한 모델과 실험 프로토콜로 연결합니
 
 1. 관측된 BC component가 달라도 예측들이 하나의 확률법칙의
    조건부·주변 분포로 일관되는가?
-2. 동일 geometry에서 BC만 바꾼 simulator response를 직접 감독하면
-   condition shift의 field 변화를 더 정확히 학습하는가?
-3. BC-induced structural uncertainty와 finite-data/model uncertainty를
-   분리했을 때 각각 실제 BC shift와 geometry OOD를 추적하는가?
+2. 그 구조적 일관성이 independent conditionals보다 낮은 conditional
+   accuracy라는 대가 없이 가능한가?
+3. 그 차이가 solution-functional Bayes action과 다음 BC 측정 선택의
+   실제 regret를 줄이는가?
+
+현재 답은 “아직 아니다”입니다. N1c-a는 joint density/objective가
+주 병목이고 operator는 부차적임을 보였으며, route compatibility는
+달성했지만 robust decision superiority는 확인하지 못했습니다. Paired
+response supervision은 독립 contribution이 아니라 ablation으로 내렸고
+uncertainty separation은 아직 secondary hypothesis입니다.
 
 Fixed Fourier cycle은 frozen D0의 localized bulge gate를 실패해 제거했습니다.
 D0b에서는 DCT-II 17/25가 탈락하고 train-only POD 17/25만 oracle
@@ -236,12 +242,24 @@ common-random-number 위반도 발견해 그 두 보조 지표는 제외했습�
 이는 gate에 사용되지 않았으므로 failed 판정은 바뀌지 않습니다. 공개
 aggregate는
 [`results/nonlinear_pde_n1c_20260805.json`](results/nonlinear_pde_n1c_20260805.json)입니다.
-다음은 3D 실행이 아니라 joint conditional NLL, operator floor,
-acquisition Monte Carlo stability와 true-oracle worst-route regret를
-분해하는
-[`N1c-a threshold-free attribution`](configs/nonlinear_pde_n1c_attribution.json)입니다.
-같은 open test를 쓰므로 성공 gate나 method selection이 아니며, 결과가
-좋아도 failed N1c와 닫힌 3D 상태는 바뀌지 않습니다.
+후속
+[`N1c-a threshold-free attribution`](configs/nonlinear_pde_n1c_attribution.json)도
+exact `b97899c`의 A6000에서 완료됐습니다. Joint density conditional
+excess NLL은 missing/sparse-2/partial-4 모두 independent heads보다
+0/5 seed로 열세였습니다. Functional energy의 mean oracle-substitution
+difference는 density가 operator보다 missing에서 13.0배, sparse-2에서
+5.81배 컸습니다. Missing acquisition은 안정화된 64×128 budget에서도
+ACFlow보다 1/5 seed에서만 좋았고 sparse-2는 두 learned policy가 모두
+oracle과 같아 판별력이 없었습니다. AURORA route compatibility는
+수치적으로 성립했지만 independent heads보다 worst-route risk가 낮은
+seed는 3/5뿐입니다.
+
+따라서 N1c failed, 3D blocked와 `not accept-ready` 판정은 유지합니다.
+공개 aggregate는
+[`results/nonlinear_pde_n1c_attribution_20260806.json`](results/nonlinear_pde_n1c_attribution_20260806.json)입니다.
+다음은 validation-only density-objective control과 true-law/simulator-only
+decision-task adequacy audit이며, 둘 다 새 contribution이나 fresh gate가
+아닙니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

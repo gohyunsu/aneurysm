@@ -1,6 +1,6 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.0-draft · 2026-08-03
+버전: 2.1-draft · 2026-08-06
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -575,7 +575,7 @@ invalid로 제외한다. 이들은 gate에 쓰이지 않았으므로 N1 fail 판
 
 #### N1c-a · threshold-free post-result attribution
 
-다음 실행은 새 gate나 re-entry가 아니다. N1c와 같은 checkpoint/test를
+이 실행은 새 gate나 re-entry가 아니다. N1c와 같은 checkpoint/test를
 읽을 수 있으므로 결과는 exploratory이며 아래만 분해한다.
 실행 계약은 `configs/nonlinear_pde_n1c_attribution.json`에 결과 전에
 고정한다.
@@ -590,6 +590,49 @@ invalid로 제외한다. 이들은 gate에 쓰이지 않았으므로 N1 fail 판
 Threshold, pass/fail, N1c relabel, N1d/3D 권한과 새 contribution 문구는
 모두 금지한다. Attribution 뒤 method를 바꾸면 새 version, fresh seed,
 fresh test와 결과 전 공개 commit이 필요하다.
+
+Exact `b97899c`의 A6000 run은 130/130 contract 뒤 5 seed를 모두 exit
+0으로 완료했다. 같은 192×12 open test와 frozen 50 checkpoint를
+재사용했고 새 test seed나 model selection은 없었다.
+
+| diagnostic | observed | interpretation |
+|---|---:|---|
+| missing joint excess NLL vs independent | 0.07074 vs 0.06281, 0/5 | joint density worse |
+| sparse-2 joint excess NLL vs independent | 0.08439 vs 0.06716, 0/5 | joint density worse |
+| partial-4 joint excess NLL vs independent | 0.10362 vs 0.07688, 0/5 | joint density worse |
+| missing density/operator substitution ratio | 13.00 | density is the larger diagnostic effect |
+| sparse-2 density/operator substitution ratio | 5.81 | density is the larger diagnostic effect |
+| missing 64×128 regret vs ACFlow | 0.001029 vs 0.000489, 1/5 | stable budget does not reverse rank |
+| sparse-2 acquisition | both 0 regret, 5/5 ties | non-discriminative task |
+| worst-route risk vs independent | 0.01015 vs 0.01034, 3/5 | no robust route advantage |
+
+Oracle substitution은 비가산적이므로 causal attribution이나 law-of-total-error
+decomposition으로 쓰지 않는다. 8×32와 32×64는 하나의 64×128 true-risk
+reference를 공유하므로 original N1c의 작은-budget regret와 수치를 직접
+교환하지 않는다. 공개 aggregate는
+`results/nonlinear_pde_n1c_attribution_20260806.json`이다.
+
+#### Post-N1c development boundary
+
+N1c-a는 joint density/objective를 1차 병목으로, operator를 2차 병목으로
+지목했지만 새 방법을 선택하지 않는다. 다음 두 작업은 서로 독립된
+development audit으로 분리한다.
+
+1. **Density objective control:** 새 development seed와 validation
+   geometry에서 동일 joint 2-GMM의 full-joint NLL과 registered-mask
+   conditional composite likelihood를 compute-matched 비교한다.
+   Independent heads와 ACFlow를 conditional-accuracy reference로 유지한다.
+   Test를 생성·접근하지 않고 success gate를 두지 않는다. Composite
+   likelihood 자체는 method novelty가 아니다.
+2. **Decision-task adequacy:** learned checkpoint 없이 true BC law와 true
+   simulator만으로 mask별 oracle VoI, first/second winner margin,
+   selected-component entropy, nonzero regret opportunity와 bounded
+   functional Bayes-action diversity를 측정한다. Method 결과로 mask나
+   threshold를 선택하지 않는다.
+
+두 audit 모두 N1c를 relabel하거나 N1d/3D를 열 수 없다. 둘이 feasibility를
+지지한 뒤에만 operator-specific method와 fresh prospective re-entry의
+seed·estimand·threshold를 별도 공개 config로 등록한다.
 
 ### G2 · paired response fidelity
 
@@ -850,10 +893,13 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 5. Nonlinear N0/N0r numerical adequacy **(N0 failed preserved · N0r pass)**
 6. N1b checkpoint freeze와 N1c outer test **(완료 · N1c failed)**
 7. N1c-a threshold-free density/operator/acquisition/route-regret attribution
-   **(다음 GPU 우선순위)**
-8. Attribution으로 새 method가 정당화될 때 fresh prospective re-entry
-9. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol
-10. G3 learned transient 비교와 G4 cross-domain 통합 table
+   **(완료 · joint density 병목, current identity unsupported)**
+8. Validation-only density-objective control과 method-independent
+   decision-task adequacy audit **(다음 우선순위)**
+9. 두 audit이 method 필요성과 nontrivial task를 모두 지지할 때만 fresh
+   prospective re-entry
+10. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol
+11. G3 learned transient 비교와 G4 cross-domain 통합 table
 
 GPU는 PBS allocation 안에서만 사용한다. 각 run은 commit, command,
 environment, config, dataset checksum, status, aggregate metric을 남긴다.

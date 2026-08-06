@@ -3,8 +3,8 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_under_post_result_attribution",
-    "as_of": "2026-08-05",
+    "status": "failed_n1c_attribution_completed_density_bottleneck_current_identity_unsupported",
+    "as_of": "2026-08-06",
     "clinical_use": false
   },
   "task": {
@@ -20,13 +20,16 @@
     ]
   },
   "evidence_snapshot": {
-    "as_of": "2026-08-05",
+    "as_of": "2026-08-06",
     "readiness": "not_accept_ready",
     "direct_prior_art_threats": [
       "boundary_indexed_operator_non_identifiability",
       "function_space_probabilistic_operators",
       "neural_operator_processes_under_partial_observation",
       "conditional_marginal_consistency_in_neural_processes",
+      "conditional_compatibility_and_path_consistency",
+      "arbitrary_conditional_likelihood_models",
+      "decision_focused_density_learning",
       "explicit_known_boundary_transfer_operators",
       "inflow_aware_physics_gnn_for_aneurysm"
     ],
@@ -63,6 +66,7 @@
       "controlled_pde_g1r_status": "completed_failed",
       "controlled_pde_g1s_status": "completed_passed",
       "nonlinear_pde_n1c_status": "completed_failed",
+      "nonlinear_pde_n1c_attribution_status": "completed_non_gating_density_bottleneck",
       "irregular_3d_status": "blocked_after_failed_n1c"
     },
     "contribution_priority": {
@@ -87,10 +91,10 @@
       ],
       "candidate_not_yet_contribution": {
         "name": "solution_functional_decision_consequence_of_conditioning_inconsistency",
-        "status": "unsupported_after_failed_N1c",
+        "status": "unsupported_after_completed_N1c_a",
         "required_theory": "bounded_loss_Bayes_regret_bound_from_route_posterior_divergence",
-        "required_algorithm": "conditionally_accurate_coherent_joint_law_with_true_oracle_worst_route_regret",
-        "required_evidence": "threshold_free_N1c_attribution_then_fresh_prospective_reentry",
+        "required_algorithm": "operator_specific_compatible_joint_posterior_that_closes_conditional_accuracy_and_solution_functional_risk_gaps",
+        "required_evidence": "validation_only_density_objective_control_and_method_independent_decision_task_adequacy_before_any_fresh_prospective_reentry",
         "active_acquisition_alone_is_novel": false
       }
     }
@@ -192,11 +196,12 @@
   },
   "loss": {
     "full_field": 1.0,
-    "paired_response": 0.5,
+    "paired_response": 0.0,
+    "paired_response_ablation_weight": 0.5,
     "boundary_nll": 0.1,
     "physics": 0.05,
     "functional": 0.1,
-    "note": "Pilot weights; selection is restricted to inner validation and paired-response weight has a zero ablation."
+    "note": "Paired response is demoted after failed N1c and disabled in the headline objective. Weight 0.5 is retained only for a named ablation; all selection remains restricted to inner validation."
   },
   "gates": [
     {
@@ -625,8 +630,11 @@
       },
       "post_result_attribution": {
         "id": "N1c-a",
-        "status": "preregistered_before_attribution_output",
+        "status": "completed_non_gating_attribution",
         "config": "configs/nonlinear_pde_n1c_attribution.json",
+        "source_commit": "b97899cee774d0ab0bc3da2b3cfa4af2d609c615",
+        "source_metrics_sha256": "01fa774e17b43c7c14d68da1b9be46cac020aa81239f3bf136f6add7b0720070",
+        "result": "results/nonlinear_pde_n1c_attribution_20260806.json",
         "parent_n1c_status": "completed_failed_unchanged",
         "same_open_test_and_frozen_checkpoints": true,
         "has_success_threshold": false,
@@ -650,7 +658,30 @@
           [64, 128]
         ],
         "route_candidate_common_random_numbers_corrected": true,
-        "route_reference": "true_conditional_simulator_bayes_action"
+        "route_reference": "true_conditional_simulator_bayes_action",
+        "result_summary": {
+          "aurora_joint_better_than_independent_conditional_nll_seeds": {
+            "missing": 0,
+            "sparse_2": 0,
+            "partial_4": 0
+          },
+          "functional_energy_density_to_simulator_substitution_ratio": {
+            "missing": 13.001171873559112,
+            "sparse_2": 5.807517272798561
+          },
+          "missing_64x128_acquisition_regret_better_than_acflow_seeds": 1,
+          "sparse_2_acquisition_is_non_discriminative": true,
+          "worst_route_risk_better_than_independent_seeds": 3,
+          "primary_bottleneck": "joint_boundary_density_and_training_objective",
+          "current_paper_identity_supported": false
+        },
+        "next_development": {
+          "density_objective_control": "validation_only_full_joint_nll_vs_registered_mask_conditional_composite_likelihood",
+          "decision_task_adequacy": "true_law_and_true_simulator_only",
+          "has_success_threshold": false,
+          "fresh_reentry_registered": false,
+          "irregular_3d_authorized": false
+        }
       }
     }
   ],

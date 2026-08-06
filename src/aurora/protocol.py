@@ -275,6 +275,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     loss_keys = [
         "full_field",
         "paired_response",
+        "paired_response_ablation_weight",
         "boundary_nll",
         "physics",
         "functional",
@@ -282,9 +283,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     _require_keys(loss, loss_keys, "loss")
     if any(not isinstance(loss[key], (int, float)) or loss[key] < 0 for key in loss_keys):
         raise ProtocolError("All loss weights must be non-negative numbers.")
-    if loss["full_field"] <= 0 or loss["paired_response"] <= 0:
-        raise ProtocolError("Full-field and paired-response objectives cannot be disabled.")
-    checks.append("full-field and paired-response objectives")
+    if loss["full_field"] <= 0:
+        raise ProtocolError("The full-field objective cannot be disabled.")
+    if loss["paired_response"] != 0:
+        raise ProtocolError(
+            "paired-response must remain disabled in the headline objective after N1c."
+        )
+    if loss["paired_response_ablation_weight"] <= 0:
+        raise ProtocolError(
+            "A positive paired-response weight must remain available for the named ablation."
+        )
+    checks.append("full-field objective and paired-response ablation boundary")
 
     gates = protocol["gates"]
     gate_ids = _unique_ids(gates, "id", "gates")

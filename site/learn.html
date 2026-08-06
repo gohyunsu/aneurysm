@@ -355,9 +355,9 @@
               <b>출력</b><small>K BC samples × E model members</small>
             </article>
             <article>
-              <span>06 · SUPERVISE</span>
-              <div><h3>Same-geometry paired response</h3><p>같은 geometry의 두 BC에서 실제 Δfield와 예측 Δfield를 직접 비교합니다. Geometry 차이가 큰 absolute loss 안에서 BC sensitivity가 묻히지 않게 합니다.</p></div>
-              <b>해석</b><small>simulator response · causal effect 아님</small>
+              <span>06 · ABLATE</span>
+              <div><h3>Same-geometry paired response</h3><p>같은 geometry의 두 BC에서 실제 Δfield와 예측 Δfield를 비교합니다. N1c에서는 DeltaPhi-style residual보다 약했으므로 주 목적이 아니라 ablation입니다.</p></div>
+              <b>판정</b><small>ablation only · causal effect 아님</small>
             </article>
             <article>
               <span>07 · DECOMPOSE</span>
@@ -370,19 +370,20 @@
             <h3>Fancy함의 기준은 모듈 수가 아닙니다.</h3>
             <div>
               <p><b>확률적 구조</b><span>nested mask가 하나의 joint distribution을 공유</span></p>
-              <p><b>감독 신호</b><span>same-geometry BC pair의 Δfield를 직접 학습</span></p>
-              <p><b>검증 가능성</b><span>coherence·response·uncertainty 원인을 각각 반증</span></p>
+              <p><b>정확도 대가</b><span>joint compatibility가 conditional NLL을 악화시키지 않는지 검사</span></p>
+              <p><b>검증 가능성</b><span>coherence·accuracy·decision consequence를 각각 반증</span></p>
             </div>
           </div>
 
           <aside class="honesty-note">
             <b>현재 구현 상태</b>
             <p>
-              이 페이지는 architecture contract를 설명합니다. 현재 공개 구현은
-              protocol validator, secondary clinical diagnostic, D0 temporal
-              audit, G1b attribution diagnostic, completed-negative G1r까지이며, full
-              GNN–operator는 gate를 통과한 뒤 단계 1부터 구현합니다. “proposed”와
-              “implemented”를 구분합니다.
+              이 페이지는 architecture contract를 설명합니다. Exact·nonlinear
+              PDE의 joint density, conditional operator, strong baselines와
+              decision evaluation은 구현·실행됐지만 N1c는 실패했습니다.
+              N1c-a는 density objective가 주 병목임을 확인했고 3D GNN은
+              실행하지 않았습니다. “implemented”, “supported”와 “proposed”를
+              구분합니다.
             </p>
           </aside>
           <button class="chapter-next" type="button" data-next="uncertainty">다음 · Missing BC를 분포로 다루는 이유 <span>→</span></button>
@@ -548,8 +549,9 @@
               <span><b>모델 B</b><small>조금 높은 RMSE · hotspot/OSI 보존</small></span>
             </div>
             <p>
-              AURORA v2의 primary 평가는 field error와 paired-response error,
-              distribution coverage입니다. WSS·OSI hotspot은 gradient와 단위가
+              AURORA의 다음 primary 평가는 conditional NLL, field energy,
+              distribution coverage와 true-oracle functional regret입니다.
+              Paired-response는 ablation입니다. WSS·OSI hotspot은 gradient와 단위가
               검증된 자산에서만 secondary functional로 추가합니다.
             </p>
           </div>
@@ -640,9 +642,7 @@
               0.84%/1.29%였습니다. 과거 G1/G1r은 failed로 보존하고 이
               data-adequacy pass를 novelty로 세지 않습니다. 이후 nonlinear
               N0는 9개 check 중 8개를 통과했지만 worst-seed nonlinear
-              departure가 실패했습니다. All-context attribution과
-              fresh-seed context-stratified N0r를 통과한 뒤에만 N1의 strong
-              partial-observation/probabilistic/AFA 비교를 엽니다. N0a는
+              departure가 실패했습니다. N0a는
               기존 seed의 24×12 전체 격자를 읽는 원인 분석일 뿐
               성공 판정, N0 재채점, N1/3D 실행 권한이 없습니다. Failed
               seed의 contiguous/stratified/all-case median은
@@ -650,7 +650,14 @@
               reference보다 낮아 모든 context가 강하게 비선형이라고
               해석하지 않습니다. N0r는 N0a 결과 전에 fresh seed와
               24-context selector를 고정했고, PDE·threshold·worst-seed
-              rule은 N0와 동일합니다.
+              rule은 N0와 동일하게 유지해 9/9를 통과했습니다. 이후 N1c
+              strong-baseline outer test는 field distribution, paired
+              response와 acquisition regret에서 실패했습니다. N1c-a에서도
+              joint density는 세 mask 모두 independent heads보다 0/5
+              seed로 열세였고, stable acquisition과 corrected route regret가
+              method superiority를 회복하지 못했습니다. 현재 3D는 닫혀
+              있고, 다음은 validation-only density-objective control과
+              true-oracle decision-task adequacy audit입니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>
@@ -718,9 +725,9 @@
 
           <div class="gap-matrix">
             <div class="gap-head"><span>연구 축</span><b>기존 강점</b><b>남은 빈칸</b><b>AURORA의 검증</b></div>
-            <div><span>관측 조건</span><p>Known inflow 또는 generic sampling</p><p>Mask별 분포가 서로 모순될 수 있음</p><p>Joint density의 nested conditioning</p></div>
-            <div><span>반응 학습</span><p>각 simulation의 absolute field</p><p>Geometry signal이 BC response를 압도</p><p>Same-geometry paired ΔH</p></div>
-            <div><span>불확실성</span><p>하나의 predictive interval</p><p>입력 미관측과 model OOD가 섞임</p><p>BC vs ensemble variance 분리</p></div>
+            <div><span>관측 조건</span><p>Arbitrary conditionals와 compatibility theory</p><p>Compatibility–accuracy trade-off</p><p>Joint vs independent conditional NLL</p></div>
+            <div><span>의사결정</span><p>Generic active feature acquisition</p><p>Nontrivial PDE-functional measurement task</p><p>True-oracle adequacy와 regret</p></div>
+            <div><span>반응 학습</span><p>Absolute field와 residual learning</p><p>Paired loss의 독립 이득</p><p>DeltaPhi control · 현재 ablation</p></div>
             <div><span>일반성</span><p>개별 의료/공학 benchmark</p><p>도메인 전용 trick 가능성</p><p>Exact·nonlinear·irregular 3D</p></div>
           </div>
 
@@ -728,10 +735,12 @@
             <b>Novelty 표현 원칙</b>
             <p>
               확률적 operator와 consistency에는 직접 prior art가 있습니다.
-              현재 후보는 conditioning-route 불일치가 PDE
-              solution-functional Bayes action과 acquisition ranking에 만드는
-              regret입니다. 이론적 risk bound와 oracle risk, LANO/NOP/generic
-              operator/AFA 대비 N1 양수 결과가 함께 있을 때만 성립합니다.
+              N1c-a에서 route compatibility는 robust regret advantage로
+              이어지지 않아 기존 논문 정체성을 폐기했습니다. 남은 가능성은
+              compatibility를 지키면서 conditional accuracy와
+              solution-functional risk를 함께 개선하는 operator-specific
+              방법입니다. Composite likelihood, path consistency,
+              decision-focused training 자체는 novelty가 아닙니다.
             </p>
           </aside>
           <button class="chapter-next" type="button" data-next="experiments">다음 · Gate가 연구를 멈추게 하는 법 <span>→</span></button>
@@ -752,8 +761,9 @@
           <div class="gate-explainer">
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
-            <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>33/65 grid solver, nonlinear departure, 8개 BC 방향, functional diversity와 analytic conditioning을 검사했습니다. 8/9 check를 통과했지만 worst-seed nonlinear departure가 실패해 N0a attribution과 fresh-seed N0r를 진행합니다.</p></div><b>failed · N1 차단</b></article>
-            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>ID partial/missing calibration과, 값을 제공한 unseen-BC의 same-geometry ΔH를 strong baseline과 비교합니다. 숨은 BC 법칙 자체가 바뀌면 detection만 평가합니다.</p></div><b>primary evidence</b></article>
+            <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>N0 실패는 보존하고, 결과 전에 fresh seed와 context-stratified selector를 고정한 N0r가 9/9를 통과했습니다.</p></div><b>N0r pass · N1 opened</b></article>
+            <article><span>N1</span><div><h3>Coherence가 정확도와 decision을 개선하는가?</h3><p>N1c는 distribution·pair·acquisition에서 실패했습니다. N1c-a는 joint density 병목과 non-discriminative sparse task를 확인했습니다.</p></div><b>failed · 3D blocked</b></article>
+            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>Aneumo velocity만 비자명성 audit을 통과했지만 fresh positive N1 전에는 3D learned experiment를 열지 않습니다.</p></div><b>velocity eligible only</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
             <article><span>G4</span><div><h3>의료 전용 trick은 아닌가?</h3><p>Controlled PDE, nonlinear PDE, irregular 3D에서 같은 coherence·response method를 검증합니다.</p></div><b>AAAI generality</b></article>
           </div>

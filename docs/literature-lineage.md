@@ -1,6 +1,6 @@
 # 선행연구 계보와 research gap
 
-검토 기준일: 2026-08-05 KST
+검토 기준일: 2026-08-06 KST
 
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
@@ -123,7 +123,10 @@ boundary-indexed operator family를 학습하며 support 밖에서는 식별되�
 추가한 뒤 다시 예측한 분포와 기존 joint를 조건화한 분포 사이의 gap을
 KL로 정의하고 few-shot에서 그 차이가 클 수 있음을 보였다. NeurIPS 2025
 Flow Matching Neural Processes는 target set의 marginal/conditional
-consistency를 다룬다.
+consistency를 다룬다. AISTATS 2025 연구는 여러 conditional distribution이
+하나의 joint distribution과 양립하려면 autoregressive/path 및 swap
+consistency가 필요함을 정식화했다. 따라서 independent conditionals의
+compatibility를 검사하거나 회복하는 문제도 AURORA만의 새 문제는 아니다.
 
 - [One Operator to Rule Them All? On Boundary-Indexed Operator Families in
   Neural PDE Solvers (AI\&PDE at ICLR, 2026)](https://openreview.net/forum?id=lDjWQ9UxRy)
@@ -131,12 +134,14 @@ consistency를 다룬다.
   (TMLR, 2026)](https://arxiv.org/abs/2604.19312)
 - [Flow Matching Neural Processes
   (NeurIPS, 2025)](https://papers.neurips.cc/paper_files/paper/2025/file/a92519f525c00085095fa41c5c46cdb5-Paper-Conference.pdf)
+- [On the Consistent Recovery of Joint Distributions from Conditionals
+  (AISTATS, 2025)](https://proceedings.mlr.press/v258/majid25a.html)
 
-**영향:** missing-BC 비식별성 또는 “consistency”라는 이름만으로는
-contribution이 되지 않는다. AURORA는 하나의 joint BC density를 arbitrary
-mask에 조건화해 PDE solution으로 pushforward하는 구체적 구조, nested-mask
-tower-property metric, same-geometry response supervision을 함께 입증해야
-한다.
+**영향:** missing-BC 비식별성, “consistency”라는 이름, path independence
+또는 compatible joint recovery만으로는 contribution이 되지 않는다.
+AURORA가 살아남으려면 compatibility를 지키면서 strong arbitrary
+conditionals의 accuracy를 보존하고, 그 차이가 PDE solution-functional
+risk를 실제로 줄여야 한다.
 
 Joint density를 conditional density로 보내는 연산 자체도 2026년
 conditioning-operator 연구가 continuity와 neural-operator approximation
@@ -202,12 +207,15 @@ error를 추적하는지 falsification해야 한다.
 
 ### 1.11 active feature acquisition과 decision consistency
 
-ICML 2021의 generative-surrogate AFA는 미관측 feature를 test-time에
+ICML 2020의 ACFlow는 arbitrary conditional likelihood, sampling과
+imputation을 하나의 모델로 다뤘다. ICML 2021의 generative-surrogate AFA는 미관측 feature를 test-time에
 순차 획득하는 정책을 generative model로 학습했다. ICML 2024의 Acquisition
 Conditioned Oracle은 greedy 정보이득을 넘어 prediction과 일반 decision을
 위한 non-greedy feature acquisition을 직접 다룬다. PaPQS와 UNED는 각각
 training PDE setting과 sensor design의 정보가치를 최적화한다.
 
+- [ACFlow: Flow Models for Arbitrary Conditional Likelihoods
+  (ICML, 2020)](https://proceedings.mlr.press/v119/li20a.html)
 - [Active Feature Acquisition with Generative Surrogate Models
   (ICML, 2021)](https://proceedings.mlr.press/v139/li21p.html)
 - [Acquisition Conditioned Oracle for Nongreedy Active Feature Acquisition
@@ -215,12 +223,20 @@ training PDE setting과 sensor design의 정보가치를 최적화한다.
 - [A Plug-and-Play Query Synthesis Active Learning Framework for Neural PDE
   Solvers (NeurIPS, 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/6a1b224b153e55c40a6359f9c9fb9d8c-Abstract-Conference.html)
 
-**영향:** 다음 BC component를 고르는 것, entropy/variance/expected-risk
-acquisition을 쓰는 것, path independence만 재는 것은 novelty가 아니다.
-AURORA의 살아남는 후보는 같은 최종 BC mask로 가는 route posterior의
-불일치가 PDE solution-functional Bayes action과 acquisition ranking에
-만드는 regret를 정량화하고, coherent joint law가 이를 실제 oracle risk와
-함께 줄이는지 보이는 것이다.
+**영향:** 다음 BC component를 고르는 것, arbitrary conditioning,
+entropy/variance/expected-risk acquisition, decision-aware objective 또는
+path independence만 재는 것은 novelty가 아니다. N1c-a에서는 AURORA의
+route candidate risk가 수치적으로 일치했지만 independent heads 대비
+true-oracle worst-route regret 우위가 3/5 seed에 그쳤고 selected component도
+거의 바뀌지 않았다. 따라서 기존 “conditioning inconsistency의 decision
+consequence” identity는 현 benchmark에서 지지되지 않는다.
+
+남은 연구 가능성은 compatible joint model이 strong conditionals보다
+부정확해지는 **coherence–conditional-accuracy tax**를
+solution-functional risk에 맞춰 줄이는 operator-specific 방법이다.
+Conditional composite likelihood는 engineering control이고,
+compatibility와 decision-focused learning도 선행하므로 이 세 요소를
+단순 결합해 novelty라고 부르지 않는다.
 
 ### 1.12 직접적인 2026 multimodal 경쟁작
 
@@ -267,9 +283,10 @@ clinical variables를 late fusion하여 rupture-status prediction을
 | known-BC operator | diverse BC encoding·boundary transfer | hidden BC의 coherent marginalization | partial-input mask lattice |
 | LANO | partial spatial input·boundary-first reconstruction | physical-variable mask compatibility | filtration-level distribution tests |
 | probabilistic operator | function-space UQ/generative sampling | condition-source attribution | coherent BC pushforward |
-| NOP/NP consistency | partial-response reconstruction·conditioning gap | physical-input mask compatibility | nested masks + paired response |
+| compatible conditionals | path/swap consistency와 joint recovery 조건 | PDE-functional accuracy를 보존하는 compatible model | conditional-accuracy tax + fresh risk test |
+| NOP/NP consistency | partial-response reconstruction·conditioning gap | physical-input mask compatibility | nested-mask conditional accuracy |
 | DeltaPhi | similar-state residual learning | geometry-controlled BC response without label retrieval | paired \(\Delta H\) controls |
-| active feature acquisition | test-time feature 선택과 general decision cost | route-inconsistent PDE functional posterior의 decision consequence | functional regret + AFA controls |
+| active feature acquisition | test-time feature 선택과 general decision cost | nontrivial PDE-functional measurement task | true-oracle adequacy audit + AFA controls |
 | neural-operator functional optimization | posterior operator sample로 비싼 input function query 선택과 regret bound | 한 사례의 partial physical condition에서 component measurement의 route-dependent value | NOTS-style adapted acquisition control |
 | PDE UQ/OOD | model uncertainty와 OOD 분석 | BC-induced vs model-induced 분리 | two-axis falsification |
 | synthetic CFD | 같은 geometry의 multiple BC | response supervision/generalization | paired \(\Delta H\) |

@@ -1,0 +1,270 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "nonlinear_pde_n1c_attribution_20260806",
+  "experiment_id": "nonlinear_n1c_failure_attribution_v1",
+  "evidence_status": "post_result_exploratory_attribution_completed",
+  "source_gate": "N1c_failed",
+  "source_commit": "b97899cee774d0ab0bc3da2b3cfa4af2d609c615",
+  "source_config_sha256": "41978cafea2fdc516f32f75e7e1af1a1f70ebf7fa2edce30a41b6f3bc5ed0f0d",
+  "parent_n1c_config_sha256": "6e14a9ed1682771fe3936e753d16d30317145752fb17f5e091f3db0b8e63ba8e",
+  "parent_n1c_result_sha256": "4279b961563c8e473e2f4609a9c785398d4d1f25738985c2beff176d3063a4f2",
+  "checkpoint_manifest_sha256": "4dd22e9f6e8c85662a5352ba123e122fd542a03e4d4131f24ba702629937ad7f",
+  "source_metrics_sha256": "01fa774e17b43c7c14d68da1b9be46cac020aa81239f3bf136f6add7b0720070",
+  "execution": {
+    "allocation": "pbs_a6000",
+    "pbs_job": "PBS109739",
+    "exit_status": 0,
+    "started_utc": "2026-08-05T15:29:24.282796+00:00",
+    "ended_utc": "2026-08-05T16:19:09.162148+00:00",
+    "model_seeds": 5,
+    "walltime": "00:49:48"
+  },
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118",
+    "cuda": "11.8"
+  },
+  "validation": {
+    "pbs_container_contract_tests": {
+      "pbs_job": "PBS109738",
+      "status": "passed",
+      "exit_status": 0,
+      "tests": 130,
+      "tests_log_sha256": "950c0db4a21436ae3bcd35e153b89c7e98a106d43d9b8253684c3dd82b24b694",
+      "walltime": "00:00:13"
+    },
+    "exact_source_verified": true,
+    "same_open_n1c_test": true,
+    "new_test_seed": false,
+    "checkpoint_or_model_selection": false,
+    "all_five_model_seeds_completed": true,
+    "all_test_solver_batches_converged": true,
+    "maximum_test_solver_normalized_residual": 0.000003572418108888087,
+    "all_oracle_solver_calls_converged": true,
+    "oracle_solver_calls": 27,
+    "maximum_oracle_solver_normalized_residual": 0.000006299171673163073
+  },
+  "contract": {
+    "test_contexts": 192,
+    "conditions_per_context": 12,
+    "model_seeds": 5,
+    "has_success_threshold": false,
+    "may_relabel_n1c": false,
+    "may_select_model_or_checkpoint": false,
+    "may_authorize_n1d_or_irregular_3d": false,
+    "fresh_test_required_after_any_method_change": true
+  },
+  "conditional_density_excess_nll_per_unobserved_component": {
+    "missing": {
+      "aurora_joint": {
+        "mean": 0.0707421287894249,
+        "std": 0.0036390976140791027,
+        "min": 0.06641171872615814,
+        "max": 0.07590150833129883
+      },
+      "independent_mask_heads": {
+        "mean": 0.06280691027641297,
+        "std": 0.007313120166535645,
+        "min": 0.04819634556770325,
+        "max": 0.06709413230419159
+      },
+      "acflow_adapted": {
+        "mean": 0.0627506822347641,
+        "std": 0.004174949217431589,
+        "min": 0.057090263813734055,
+        "max": 0.06750506162643433
+      },
+      "aurora_better_than_independent_seeds": 0,
+      "aurora_better_than_acflow_seeds": 0
+    },
+    "sparse_2": {
+      "aurora_joint": {
+        "mean": 0.08439289182424545,
+        "std": 0.0037920440958515897,
+        "min": 0.07999919354915619,
+        "max": 0.09019734710454941
+      },
+      "independent_mask_heads": {
+        "mean": 0.06716344654560089,
+        "std": 0.007197036537876639,
+        "min": 0.05560363456606865,
+        "max": 0.07310177385807037
+      },
+      "acflow_adapted": {
+        "mean": 0.081961128115654,
+        "std": 0.00397028973332493,
+        "min": 0.07674344629049301,
+        "max": 0.08649040758609772
+      },
+      "aurora_better_than_independent_seeds": 0,
+      "aurora_better_than_acflow_seeds": 2
+    },
+    "partial_4": {
+      "aurora_joint": {
+        "mean": 0.10362297892570496,
+        "std": 0.0038089708060542273,
+        "min": 0.09939779341220856,
+        "max": 0.11015411466360092
+      },
+      "independent_mask_heads": {
+        "mean": 0.07687752395868301,
+        "std": 0.003740909461755223,
+        "min": 0.07342803478240967,
+        "max": 0.08382247388362885
+      },
+      "acflow_adapted": {
+        "mean": 0.10384152084589005,
+        "std": 0.002603636919527764,
+        "min": 0.10096567869186401,
+        "max": 0.10751616954803467
+      },
+      "aurora_better_than_independent_seeds": 0,
+      "aurora_better_than_acflow_seeds": 4
+    }
+  },
+  "functional_energy_four_cell_diagnostic": {
+    "missing": {
+      "learned_density_learned_operator": {
+        "mean": 1.2039695978164673,
+        "std": 0.01596793368504489
+      },
+      "true_density_learned_operator": {
+        "mean": 1.1791862726211548,
+        "std": 0.0014829478339682858
+      },
+      "learned_density_true_simulator": {
+        "mean": 1.2020633697509766,
+        "std": 0.016459068002535472
+      },
+      "true_density_true_simulator": {
+        "mean": 1.1775906085968018,
+        "std": 0.0
+      },
+      "density_oracle_substitution_difference": {
+        "mean": 0.02478333250619471,
+        "std": 0.01653079547491082,
+        "positive_seeds": 4
+      },
+      "simulator_oracle_substitution_difference": {
+        "mean": 0.0019062383566051722,
+        "std": 0.0015475980120121485,
+        "positive_seeds": 4
+      },
+      "ratio_of_mean_substitution_differences": 13.001171873559112
+    },
+    "sparse_2": {
+      "learned_density_learned_operator": {
+        "mean": 0.9343060731887818,
+        "std": 0.008415817656540583
+      },
+      "true_density_learned_operator": {
+        "mean": 0.9103862404823303,
+        "std": 0.00123700995818711
+      },
+      "learned_density_true_simulator": {
+        "mean": 0.9301873087882996,
+        "std": 0.009271132428807088
+      },
+      "true_density_true_simulator": {
+        "mean": 0.9047164916992188,
+        "std": 0.0
+      },
+      "density_oracle_substitution_difference": {
+        "mean": 0.023919866792857646,
+        "std": 0.009035725253406863,
+        "positive_seeds": 5
+      },
+      "simulator_oracle_substitution_difference": {
+        "mean": 0.0041187766939401625,
+        "std": 0.0009562787292184033,
+        "positive_seeds": 5
+      },
+      "ratio_of_mean_substitution_differences": 5.807517272798561
+    },
+    "interpretation_limit": "These are non-additive oracle-substitution diagnostics, not a causal or variance decomposition. The mean density substitution effect is nevertheless materially larger than the mean simulator substitution effect."
+  },
+  "acquisition_monte_carlo_stability": {
+    "missing": {
+      "outer_8_inner_32": {
+        "aurora_regret_mean": 0.0073020091280341145,
+        "acflow_regret_mean": 0.005141066701617092,
+        "aurora_better_seeds": 2,
+        "aurora_policy_stability_to_64x128_mean": 0.7666666666666667,
+        "acflow_policy_stability_to_64x128_mean": 0.8541666666666667
+      },
+      "outer_32_inner_64": {
+        "aurora_regret_mean": 0.002198612445499748,
+        "acflow_regret_mean": 0.001209565158933401,
+        "aurora_better_seeds": 1,
+        "aurora_policy_stability_to_64x128_mean": 0.9208333333333334,
+        "acflow_policy_stability_to_64x128_mean": 0.9458333333333334
+      },
+      "outer_64_inner_128": {
+        "aurora_regret_mean": 0.0010292517952620983,
+        "acflow_regret_mean": 0.0004892354307230562,
+        "aurora_better_seeds": 1,
+        "aurora_selected_component_agreement_with_aco_mean": 0.9041666746139526,
+        "acflow_selected_component_agreement_with_aco_mean": 0.9541666746139527
+      }
+    },
+    "sparse_2": {
+      "all_three_budgets_aurora_regret_mean": 0.0,
+      "all_three_budgets_acflow_regret_mean": 0.0,
+      "all_three_budgets_tied_seeds": 5,
+      "all_three_budgets_selected_component_agreement_with_aco": 1.0,
+      "interpretation": "The sparse-2 acquisition task is non-discriminative for AURORA and ACFlow under this benchmark."
+    },
+    "reference_estimand_note": "All budgets are evaluated against one corrected 64x128 true-law simulator reference risk tensor. Therefore the 8x32 regrets are not numerically interchangeable with the original N1c small-budget oracle estimates."
+  },
+  "corrected_route_diagnostic": {
+    "mean_context_worst_route_true_oracle_excess_bayes_risk": {
+      "aurora_joint": {
+        "mean": 0.010150773078203201,
+        "std": 0.0021740763722499115,
+        "min": 0.00775372888892889,
+        "max": 0.013270391151309013
+      },
+      "independent_mask_heads": {
+        "mean": 0.0103405537083745,
+        "std": 0.000750384856903446,
+        "min": 0.009367908351123333,
+        "max": 0.011347020044922829
+      },
+      "acflow_adapted": {
+        "mean": 0.016711453907191753,
+        "std": 0.0014372855011994532,
+        "min": 0.014096821658313274,
+        "max": 0.018300332129001617
+      },
+      "aurora_better_than_independent_seeds": 3,
+      "aurora_better_than_acflow_seeds": 5
+    },
+    "candidate_risk_route_difference": {
+      "aurora_joint_max_abs_difference_seed_mean": 0.00000003082677757504371,
+      "independent_mask_heads_max_abs_difference_seed_mean": 0.027181559801101686,
+      "acflow_max_abs_difference_seed_mean": 0.021119147539138794,
+      "aurora_selected_component_disagreement_seed_mean": 0.0,
+      "independent_selected_component_disagreement_seed_mean": 0.0,
+      "acflow_selected_component_disagreement_seed_mean": 0.00833333358168602
+    },
+    "interpretation": "AURORA is numerically route-compatible, but this rarely changes the selected component. Its true-oracle worst-route regret is lower than the independent-head baseline in only 3 of 5 seeds, so a robust decision-consequence advantage is not established."
+  },
+  "scientific_verdict": {
+    "primary_bottleneck": "learned_joint_boundary_density_and_its_training_objective",
+    "secondary_bottleneck": "conditional_solution_operator",
+    "original_acquisition_failure": "partly_monte_carlo_limited_but_not_reversed_at_the_stabilized_budget",
+    "sparse_2_acquisition_task": "non_discriminative",
+    "route_compatibility": "structurally_recovered_without_robust_decision_superiority",
+    "current_paper_identity": "unsupported_on_this_nonlinear_benchmark",
+    "method_novelty_established": false,
+    "aaai_acceptance_established": false
+  },
+  "decision": {
+    "n1c_status": "completed_failed_unchanged",
+    "paired_response_status": "ablation_only",
+    "n1d_or_irregular_3d_authorized": false,
+    "fresh_reentry_registered": false,
+    "next_step": "First run validation-only development controls for the coherence-versus-conditional-accuracy gap and a method-independent true-oracle decision-task adequacy audit. Only positive feasibility evidence may motivate a new method and separately preregistered fresh N1 re-entry."
+  }
+}

@@ -1,8 +1,8 @@
 # AURORA 연구 방향
 
-최종 검토일: 2026-08-05 KST
+최종 검토일: 2026-08-06 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c outer test failed · N1c-a registered · 3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · N1c-a completed · current identity unsupported · 3D blocked
 
 ## 1. 현재 판정
 
@@ -23,19 +23,24 @@
 GNN, attention, uncertainty, physics loss를 조합한 것만으로 제출하지
 않는다.
 
-실패 원인 분해는
-`configs/nonlinear_pde_n1c_attribution.json`의 N1c-a로 고정했다. 이는
-같은 open test와 frozen checkpoint를 읽는 threshold-free diagnostic이다.
-Conditional density NLL, true density/true simulator 대입, acquisition
-sample scaling, corrected common-stream true-oracle route regret 외의 결과로
-N1c를 재판정하거나 3D를 열 수 없다.
+실패 원인 분해인
+`configs/nonlinear_pde_n1c_attribution.json`의 N1c-a도 완료됐다. 같은
+open test와 frozen checkpoint만 읽은 threshold-free diagnostic에서 joint
+BC density가 모든 mask에서 independent heads를 0/5 seed로 이겼고,
+functional energy의 mean oracle-substitution difference는 density가
+operator보다 missing에서 13.0배, sparse-2에서 5.81배 컸다. Acquisition은
+64×128 sample에서도 ACFlow보다 1/5 seed에서만 좋았고 sparse-2는 두
+방법 모두 oracle과 같아 판별력이 없었다. AURORA의 route compatibility는
+수치적으로 회복됐지만 independent heads보다 true-oracle worst-route
+regret가 낮은 seed는 3/5뿐이었다. 따라서 N1c 실패, 닫힌 3D와
+`accept-ready가 아니다`라는 판정은 바뀌지 않는다.
 
 ## 2. 새 한 문장 연구 질문
 
 > 하나의 PDE surrogate가 full, partial, missing physical condition을 모두
-> 받을 때, 임의의 observation mask에서 나온 solution distribution들이
-> 하나의 joint condition–solution model의 조건부·주변 분포로 일관되면서
-> condition 변화에 대한 paired response까지 보존할 수 있는가?
+> 받을 때, joint-law compatibility를 지키면서도 정확한 mask conditional을
+> 보존하고 그 차이를 solution-functional decision risk의 감소로 연결할
+> 수 있는가?
 
 뇌동맥류는 중요하고 어려운 irregular 3D application이지만, 방법의 유효성은
 controlled PDE와 nonlinear PDE에서도 같은 protocol로 검증한다.
@@ -376,11 +381,27 @@ conditioning-route residual \(8.94\times10^{-8}\)였다. 이 결과는 N1
 strong-baseline protocol의 **등록만** 허용한다. N0 relabel, learned
 superiority, method novelty, irregular-3D 실행 권한은 열지 않는다.
 
-N1의 후보 정체성은 active acquisition 자체가 아니라
+N1에서 검증한 후보 정체성은 active acquisition 자체가 아니라
 **conditioning inconsistency가 solution-functional Bayes decision과 다음
-BC 측정 선택에 만드는 regret**이다. Bounded loss에서 posterior TV/KL로
-Bayes-regret를 제한하는 분석과, coherent joint model이 실제 oracle
-functional risk와 acquisition regret를 함께 줄이는 실험을 결합한다.
+BC 측정 선택에 만드는 regret**이었다. N1c-a에서 AURORA의 route
+compatibility는 확인됐지만 independent heads 대비 true-oracle
+worst-route regret 우위가 3/5 seed에 그쳤고, baseline의 route별 candidate
+risk 변화도 selected component를 거의 바꾸지 않았다. 따라서 이 정체성은
+현재 nonlinear benchmark에서 **unsupported**이며 그대로 논문 제목이나
+contribution으로 올리지 않는다.
+
+향후 되살릴 수 있는 더 좁은 가설은 *coherence–conditional-accuracy
+trade-off를 solution-functional risk에 맞춰 해소할 수 있는가*이다. 그러나
+mask-conditional composite likelihood는 고전적 estimation control이고,
+compatibility/path consistency와 decision-focused learning도 선행연구가
+있다. 먼저 validation-only objective control과 method-independent
+decision-task adequacy audit을 수행하고, 그 뒤에도 gap과 nontrivial
+decision consequence가 남을 때만 operator-specific algorithm과 보장을
+새 방법으로 설계한다.
+
+새 방법이 정당화된다면 bounded loss에서 posterior TV/KL로 Bayes-regret를
+제한하는 분석과, compatible joint model이 실제 oracle functional risk와
+acquisition regret를 함께 줄이는 fresh 실험을 결합해야 한다.
 LANO, NOP, compute-matched probabilistic operator, generative AFA,
 acquisition-conditioned oracle와 NeurIPS-25 NOTS-style posterior-sample
 functional acquisition이 필수 비교다. NOTS는 전체 operator input function
@@ -466,11 +487,31 @@ Route candidate VoI 구현은 route별 seed offset을 사용해 등록된 common
 random numbers 계약을 위반했다. 해당 VoI/next-component 보조 지표만
 invalid로 제외하며, N1 fail을 결정한 distribution, pair, acquisition과
 valid route-action 지표는 영향을 받지 않는다. N1d shift와 irregular 3D는
-실행하지 않는다. 다음은 threshold-free post-result attribution이다.
-Joint/independent conditional NLL, true-law density와 oracle-operator floor,
-acquisition Monte Carlo scaling, 각 route의 true-oracle excess risk와
-worst-route regret를 분해하되 N1c를 relabel하지 않는다. 공개 aggregate는
-`results/nonlinear_pde_n1c_20260805.json`이다.
+실행하지 않는다. N1c-a는 exact `b97899c`의 130/130 contract 뒤 같은 open
+test와 50개 checkpoint만 재사용해 5 seed 모두 완료됐다.
+
+| N1c-a diagnostic | AURORA | strongest control | direction |
+|---|---:|---:|---:|
+| missing conditional excess NLL | 0.07074 | ACFlow 0.06275 | 0/5 |
+| sparse-2 conditional excess NLL | 0.08439 | independent 0.06716 | 0/5 |
+| partial-4 conditional excess NLL | 0.10362 | independent 0.07688 | 0/5 |
+| missing 64×128 acquisition regret | 0.001029 | ACFlow 0.000489 | 1/5 |
+| worst-route true-oracle excess risk | 0.01015 | independent 0.01034 | 3/5 |
+
+Missing/sparse-2 functional energy에서 density oracle substitution의
+seed-mean difference는 0.02478/0.02392이고 true simulator substitution은
+0.00191/0.00412였다. 이는 비가산적 교체 진단이지 인과적 분해는 아니지만,
+현재 병목이 operator보다 joint density와 그 학습 objective에 있음을
+일관되게 지지한다. 8×32에서 64×128로 sample을 늘리면 regret가 크게
+감소해 기존 acquisition 실패가 일부 Monte Carlo-limited였음을 보였으나,
+안정화된 예산에서도 ACFlow 우위는 뒤집히지 않았다. Sparse-2에서는 모든
+budget에서 AURORA와 ACFlow가 oracle과 동일해 task 자체가
+non-discriminative였다.
+
+공개 aggregate는
+`results/nonlinear_pde_n1c_20260805.json`과
+`results/nonlinear_pde_n1c_attribution_20260806.json`이다. N1c-a에는
+success threshold, model selection, N1c relabel 또는 N1d/3D 권한이 없다.
 
 ### G2 · paired response
 
@@ -557,21 +598,21 @@ method가 strong baseline을 일관되게 개선해야 한다.
 
 ## 9. 논문 포지셔닝
 
-작업 제목:
+이전 작업 제목 **“AURORA: Coherent Neural Operators under Partial and
+Missing Boundary Conditions”**은 N1c-a 뒤 제출 제목으로 사용하지 않는다.
+Coherence는 달성했지만 conditional accuracy와 decision superiority를
+함께 얻지 못했기 때문이다. 현재는 **확정된 paper identity나 headline
+contribution이 없다**. Paired supervision과 uncertainty decomposition도
+양수 증거 전까지 contribution 목록에서 제외한다.
 
-**AURORA: Coherent Neural Operators under Partial and Missing Boundary
-Conditions**
+다음 원고 구조는 두 feasibility audit과 fresh prospective result가 모두
+양수일 때만 활성화한다.
 
-이 제목과 아래 구성은 **후보**이며 N1c 결과만으로 제출하지 않는다.
-Paired supervision과 uncertainty decomposition은 양수 증거 전까지
-contribution 목록에서 제외한다. 다음 fresh test가 positive일 때의 순서는
-application이 아니라 method claim에 맞춘다.
-
-1. partial-condition operator family의 모순 문제
-2. route-specific posterior가 만드는 true-oracle worst-route Bayes regret
-3. conditionally accurate coherent joint-law construction
-4. posterior discrepancy에서 bounded functional regret를 제한하는 보장
-5. exact → nonlinear strong-baseline falsification
+1. joint compatibility가 accurate mask conditionals와 충돌하는 문제
+2. solution-functional risk를 보존하는 compatible posterior construction
+3. posterior discrepancy에서 bounded functional regret를 제한하는 보장
+4. exact → nonlinear strong-baseline falsification
+5. model-independent adequacy를 통과한 nontrivial acquisition benchmark
 6. positive nonlinear result 뒤에만 irregular 3D protocol
 7. failure cases와 의료 해석 경계
 
@@ -593,8 +634,19 @@ submission이라고 표현하지 않고 다음 cycle 또는 다른 venue용으�
 5. 완료·검증된 Aneumo base-family-disjoint selective cache에서 train-only
    physical-scaling audit을 실행하고, learned response의 비자명성을 먼저
    판정 **(완료 · velocity만 eligible, pressure 탈락)**
-6. Multicomponent nonlinear N0 solver gate를 먼저 실행하고, 통과 시 N1의
-   strong partial-observation/probabilistic/AFA comparison을 사전등록
-7. N1이 양수일 때만 velocity-only irregular 3D backbone과 transient 학습
-8. CMHA status branch는 공식 case map과 positive real-CFD increment가
+6. Multicomponent nonlinear N0/N1 strong-baseline test와 N1c-a failure
+   attribution **(완료 · N0r 통과, N1c 실패 유지, joint density 병목)**
+7. 같은 joint GMM의 full-joint NLL과 registered-mask conditional composite
+   likelihood를 fresh development seed의 validation에서 비교한다. 이는
+   method novelty가 아니라 coherence–conditional-accuracy tax의
+   engineering control이다.
+8. true law와 simulator만으로 acquisition winner diversity, nonzero VoI,
+   Bayes-action diversity를 사전등록해 method-independent task adequacy를
+   감사한다. 현재 sparse-2 같은 trivial mask는 후속 confirmatory task에서
+   제외할 근거를 결과 전에 만든다.
+9. 두 audit이 모두 feasibility를 지지할 때만 operator-specific compatible
+   projection/decision-risk method와 fresh N1 re-entry를 별도 등록한다.
+10. Fresh N1이 양수일 때만 velocity-only irregular 3D backbone과 transient
+   학습을 등록한다.
+11. CMHA status branch는 공식 case map과 positive real-CFD increment가
    확인될 때만 secondary로 복원

@@ -1,6 +1,6 @@
 # AURORA 서버 실행과 provenance
 
-최종 갱신: 2026-08-03 KST
+최종 갱신: 2026-08-06 KST
 
 이 문서는 재현에 필요한 역할과 절차만 공개한다. SSH endpoint, 내부 절대
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
@@ -237,9 +237,14 @@ N0는 failed로 보존됐고 fresh context-stratified N0r만 9/9를 통과했다
 125/125, PBS A6000 metric job은 exit 0이었지만 field distribution,
 paired response와 acquisition regret가 실패해 N1은 closed다. Route
 candidate VoI의 common-random-number 위반 보조 지표는 제외하되 gate
-판정은 바꾸지 않는다. 다음 GPU 우선순위는 same checkpoint/test를 쓰는
-threshold-free N1c-a attribution이며, N1d shift와 irregular 3D job은
-제출하지 않는다.
+판정은 바꾸지 않는다. Same checkpoint/test를 쓰는 threshold-free N1c-a도
+exact source `b97899c`에서 완료됐다. Contract job `109738`은 130/130,
+metric job `109739`는 5 seed 모두 exit 0이었다. Joint density가 모든
+mask에서 independent heads보다 conditional NLL이 나빴고, high-budget
+acquisition과 corrected route regret도 robust superiority를 회복하지
+못했다. Raw/per-context artifact는 private provenance에 보존하고 공개
+aggregate만 `results/nonlinear_pde_n1c_attribution_20260806.json`에 둔다.
+N1d shift와 irregular 3D job은 제출하지 않는다.
 
 ## Aneumo selective-cache contract
 

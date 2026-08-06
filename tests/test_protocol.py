@@ -195,10 +195,16 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "patient"):
             validate_protocol(candidate)
 
-    def test_paired_response_cannot_be_disabled(self) -> None:
+    def test_paired_response_cannot_return_to_headline_objective(self) -> None:
         candidate = copy.deepcopy(self.protocol)
-        candidate["loss"]["paired_response"] = 0
+        candidate["loss"]["paired_response"] = 0.5
         with self.assertRaisesRegex(ProtocolError, "paired-response"):
+            validate_protocol(candidate)
+
+    def test_paired_response_ablation_remains_explicit(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["loss"]["paired_response_ablation_weight"] = 0
+        with self.assertRaisesRegex(ProtocolError, "named ablation"):
             validate_protocol(candidate)
 
     def test_duplicate_dataset_is_rejected(self) -> None:

@@ -71,11 +71,11 @@ window.AURORA_DATA = Object.freeze({
       url: "https://proceedings.neurips.cc/paper_files/paper/2025/hash/2f5fb82b8b593c548ed538a8d336d800-Abstract-Conference.html"
     },
     {
-      year: "2024–25",
-      title: "PDE uncertainty & conditional consistency",
-      copy: "OOD PDE uncertainty와 neural-process의 marginal/conditional consistency가 이미 독립 연구 축을 이룬다.",
-      status: "ICML / NeurIPS · required baselines",
-      url: "https://openreview.net/forum?id=Y50K6DSrWo"
+      year: "2024–26",
+      title: "Conditional compatibility & consistency",
+      copy: "Neural-process consistency뿐 아니라 joint distribution을 conditionals에서 회복하기 위한 path/swap compatibility가 정식화됐다. Path independence 자체는 novelty가 아니다.",
+      status: "AISTATS / NeurIPS · direct theory prior art",
+      url: "https://proceedings.mlr.press/v258/majid25a.html"
     },
     {
       year: "2026.07",
@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does coherence improve decisions?",
-      copy: "Exact 62605a0의 5-seed N1c는 full-BC·coverage·route action은 통과했지만 field energy가 independent heads보다 0/5 seed에서만 좋았고 missing acquisition도 ACFlow보다 2/5에 그쳤다. Pair loss는 DeltaPhi-style보다 약했다. N1은 failed이며 3D는 닫혀 있다.",
-      state: "N1c failed · threshold-free attribution next · 3D blocked",
+      copy: "N1c-a는 joint density가 세 mask 모두 independent heads보다 0/5 seed로 열세이고, stable 64×128 acquisition도 ACFlow보다 1/5에 그침을 확인했다. Route compatibility는 회복됐지만 independent 대비 worst-route risk 우위는 3/5뿐이다. Density objective가 주 병목이고 현재 decision identity는 unsupported다.",
+      state: "N1c failed unchanged · attribution completed · 3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.06",
+      category: "result",
+      title: "N1c-a identifies a density bottleneck, not a rescued contribution",
+      copy: "Exact b97899c의 130/130 A6000 contract 뒤 같은 open test와 50 checkpoint를 쓴 5-seed attribution이 완료됐다. Joint conditional NLL은 세 mask 모두 independent heads보다 0/5였고 density substitution effect가 operator보다 컸다. High-budget acquisition도 ACFlow를 이기지 못했고 route compatibility는 robust regret superiority로 이어지지 않았다. N1c failed와 3D blocked를 유지하며 density-objective control과 true-oracle task-adequacy audit만 다음 development로 연다.",
+      files: ["results/nonlinear_pde_n1c_attribution_20260806.json", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.05",
       category: "implementation",

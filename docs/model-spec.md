@@ -1,6 +1,6 @@
 # AURORA v2 모델 명세
 
-상태: method contract · 구현은 단계별 gate 뒤 진행
+상태: N1c failed · N1c-a density bottleneck attribution completed · method revision pending
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -431,11 +431,12 @@ Exact `62605a0`의 5-seed outer test는 full-BC operator, functional
 coverage와 AURORA route-action consistency를 통과했지만 field
 distribution, paired response와 acquisition regret에서 실패했다.
 Missing/sparse-2 functional energy는 independent mask heads보다 각각
-0.65%/1.09% 나빴고 모든 seed에서 열세였다. Validation conditional NLL도
-joint density가 independent heads보다 모든 seed에서 나빴으므로, 다음
-architecture를 단순히 더 큰 GNN이나 더 긴 operator 학습으로 바꾸지 않는다.
+0.65%/1.09% 나빴고 모든 seed에서 열세였다. N1c-a test conditional NLL도
+joint density가 missing/sparse-2/partial-4에서 independent heads보다
+0/5 seed로 열세였으므로, 다음 architecture를 단순히 더 큰 GNN이나 더
+긴 operator 학습으로 바꾸지 않는다.
 
-우선 threshold-free attribution에서 다음 floor를 분리한다.
+Threshold-free attribution은 다음 floor를 분리했다.
 
 1. true radius-truncated BC law + learned operator
 2. learned joint density + oracle simulator functional
@@ -444,12 +445,29 @@ architecture를 단순히 더 큰 GNN이나 더 긴 operator 학습으로 바꾸
 5. 각 route action의 true conditional oracle Bayes action 대비 excess risk
 
 이 estimand와 RNG는 `configs/nonlinear_pde_n1c_attribution.json`에
-고정했다. Functional floor는 같은 48 context와 condition 0에서 128
+고정했다. Exact `b97899c`의 130/130 contract 뒤 5-seed attribution이
+exit 0으로 완료됐다. Functional floor는 같은 48 context와 condition 0에서 128
 posterior sample을 쓰고, acquisition은 outer×inner
 8×32/32×64/64×128을 비교한다. 마지막 budget의 true candidate risk를
 한 번만 계산해 모든 seed와 작은 budget의 동일 oracle reference로 쓴다.
 이는 open-test post-result attribution이므로 성공 threshold와 model
 selection이 없다.
+
+결과는 architecture 수정 우선순위를 다음처럼 바꾼다.
+
+1. Joint density excess NLL은 세 mask 모두 independent heads보다 0/5
+   seed에서만 낮았다. 따라서 **BC density/objective가 1차 병목**이다.
+2. Mean energy oracle-substitution difference는 density가 simulator보다
+   missing에서 13.0배, sparse-2에서 5.81배 컸다. 비가산적 대입
+   diagnostic이므로 인과 비율로 해석하지 않지만 operator는 2차 병목이다.
+3. Missing acquisition은 64×128에서도 ACFlow보다 1/5 seed에서만 좋았다.
+   Sparse-2는 양쪽 모두 oracle과 같아 architecture 비교용 task가 아니다.
+4. Route candidate-risk tensor는 AURORA에서 약 \(3.1\times10^{-8}\)로
+   일치했으나 independent heads보다 worst-route regret가 낮은 seed는
+   3/5였다. Route compatibility만으로 decision superiority가 생기지 않는다.
+
+따라서 현재 joint GMM + operator 조합은 제출 architecture가 아니며
+irregular 3D로 옮기지 않는다.
 
 Route candidate VoI의 N1c 구현은 `route_offset`을 seed에 더해 등록된
 common-random-number 계약을 어겼다. 따라서 VoI와 next-component
@@ -460,10 +478,19 @@ test를 요구한다. 이 수정은 이미 failed인 N1c를 다시 판정하지 
 
 다음 prospective method가 필요하다면 joint full-density NLL만 반복하지
 않고, 같은 joint density의 conditional composite likelihood로 registered
-mask 성능을 직접 최적화하는 engineering control을 먼저 둔다. Composite
-likelihood 자체는 고전적 estimator이므로 novelty로 세지 않는다. Strong
-DeltaPhi-style operator를 joint density의 pushforward backbone으로 쓰는
-것도 허용하며, AURORA 전용 operator를 고집하지 않는다.
+mask 성능을 직접 최적화하는 **validation-only engineering control**을
+먼저 둔다. Composite likelihood 자체는 고전적 estimator이므로 novelty로
+세지 않는다. 기존 open test, N1c seed와 checkpoint는 model development에
+재사용하지 않는다. Strong DeltaPhi-style operator를 joint density의
+pushforward backbone으로 쓰는 것도 허용하며, AURORA 전용 operator를
+고집하지 않는다.
+
+별도의 method-independent adequacy audit은 learned model 없이 true law와
+true simulator만 사용해 mask별 oracle VoI, winner margin, selected-component
+diversity와 bounded-functional Bayes-action diversity를 측정한다. 이 audit이
+nontrivial decision task를 확인하지 못하면 acquisition과 route regret를
+headline에서 제거한다. 두 development audit은 새 gate나 contribution이
+아니다.
 
 ## 7. Module D — paired simulator-response supervision · ablation
 
@@ -580,11 +607,17 @@ test에서 재현해야 한다.
 \[
 \mathcal L =
 \lambda_f\mathcal L_{\mathrm{full\ field}}+
-\lambda_\Delta\mathcal L_{\mathrm{paired\ response}}+
 \lambda_B\mathcal L_{\mathrm{BC\ NLL}}+
 \lambda_P\mathcal L_{\mathrm{physics}}+
 \lambda_F\mathcal L_{\mathrm{functional}}.
 \]
+
+Paired response term은 N1c에서 DeltaPhi-style control보다 약했으므로
+\(\lambda_\Delta\mathcal L_{\mathrm{paired\ response}}\)를 headline
+objective에서 제거하고 ablation에서만 더한다. 다음 development control은
+\(\mathcal L_{\mathrm{BC\ NLL}}\)을 full-joint NLL과 registered-mask
+conditional composite likelihood로만 바꿔 density objective의 영향을
+분리한다.
 
 Nested coherence는 analytic conditional density와 shared pushforward로
 구조화한다. 별도 숫자 loss를 추가해 보이는 것만으로 보장했다고 하지 않고,
@@ -607,16 +640,20 @@ inference sample 수를 맞춘다.
 
 ## 12. 구현 순서
 
-1. Exact controlled PDE에서 analytic BC conditioning과 metric 검증
-2. Semilinear 8-component N0 solver/nontriviality gate
-3. N0 pass 뒤 MLP/FNO backbone과 LANO/NOP/generic probabilistic/AFA
-   baseline을 갖춘 N1 pair/mask/decision-regret experiment
-4. N1이 양수일 때 Aneumo velocity-only pair sampler와 response loss;
+1. Exact controlled PDE에서 analytic BC conditioning과 metric 검증 **완료**
+2. Semilinear 8-component N0/N0r solver/nontriviality gate **완료**
+3. LANO/NOP/generic probabilistic/AFA baseline을 갖춘 N1c
+   pair/mask/decision-regret test와 N1c-a attribution **완료 · failed**
+4. Fresh development seed에서 full-joint NLL과 conditional composite
+   likelihood를 validation-only로 비교하고, 별도로 true-law/simulator
+   decision-task adequacy를 감사
+5. 두 audit 뒤에만 operator-specific method와 fresh N1 re-entry를 등록
+6. Fresh N1이 양수일 때 Aneumo velocity-only response protocol을 등록;
    pressure head는 새 사전등록 근거 전까지 제외
-5. GNN+latent-token irregular 3D operator
-6. D0b와 learned compute-matched 비교를 모두 통과할 때만 선택된
+7. GNN+latent-token irregular 3D operator
+8. D0b와 learned compute-matched 비교를 모두 통과할 때만 선택된
    one-shot transient decoder
-7. Secondary real-CFD/status analysis는 operator evidence가 확보된 뒤 재검토
+9. Secondary real-CFD/status analysis는 operator evidence가 확보된 뒤 재검토
 
 전체 architecture를 한 번에 학습하지 않는다. 각 단계는 이전 단계보다
 어떤 claim을 새로 지지하는지와 중단 기준을 함께 기록한다.

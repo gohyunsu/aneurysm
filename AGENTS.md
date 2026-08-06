@@ -2,7 +2,7 @@
 
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
-공개 1차 문헌을 재검토하여 작성했고 2026-08-05 KST N0r/N1 상태를
+공개 1차 문헌을 재검토하여 작성했고 2026-08-06 KST N1c-a 상태를
 반영했다.
 
 ## 1. 연구의 현재 기준선
@@ -16,9 +16,10 @@
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
   같은 물리계에 대해 모순된 분포를 낼 수 있다. 하나의 joint BC–solution
   model에서 유도되는 조건부/주변 분포로 일관되어야 한다.
-- 핵심 방법: analytic conditioning이 가능한 BC density + conditional
-  geometry operator + nested observation-mask marginalization +
-  same-geometry paired response supervision.
+- 현재 검증 중인 방법 틀: analytic conditioning이 가능한 BC density +
+  conditional geometry operator + nested observation-mask marginalization.
+  Same-geometry paired response supervision은 N1c에서 DeltaPhi-style
+  control보다 약해 ablation으로 내렸다.
 - 현재 증거: D0 frozen \(K=8\)과 exact G1 absolute gate가 모두 실패했다.
   G1은 direct masked Gaussian보다 모든 mask에서 상대적으로 좋았지만 claim은
   `unsupported`다. G1b에서 \(K=128\) raw projective distance가 iid sampling
@@ -67,13 +68,28 @@
   common-random-number 계약을 위반했으므로 해당 VoI/next-component
   두 지표만 invalid로 제외한다. 이는 N1 fail을 결정한 field, pair,
   acquisition 지표나 valid route action metric에는 영향을 주지 않는다.
-  Registered N1d shift와 irregular 3D는 실행하지 않는다. 다음 단계는
+  Registered N1d shift와 irregular 3D는 실행하지 않는다. 다음 단계로
   `configs/nonlinear_pde_n1c_attribution.json`에 결과 전에 고정한
-  threshold-free post-result attribution `N1c-a`이며 N1c를 relabel할 수
-  없다. 같은 open test와 50개 checkpoint만 재사용해 conditional NLL,
+  threshold-free post-result attribution `N1c-a`도 완료했다. 같은 open
+  test와 50개 checkpoint만 재사용해 conditional NLL,
   true-density/true-simulator functional floor, acquisition
   8×32/32×64/64×128 stability, corrected CRN true-oracle route regret를
-  분해한다. Success threshold, method selection, N1d/3D 권한은 없다.
+  분해했다. Exact `b97899c`의 A6000 run은 130/130 contract와 5 seed를
+  모두 exit 0으로 완료했다. Joint conditional excess NLL은
+  missing/sparse-2/partial-4 모두 independent heads보다 0/5 seed로
+  열세였다. Functional-energy mean oracle-substitution difference는
+  density가 operator보다 missing에서 13.0배, sparse-2에서 5.81배 컸다.
+  이는 비가산적 교체 diagnostic이지 causal decomposition은 아니다.
+  Missing acquisition은 64×128에서도 ACFlow보다 1/5 seed에서만 좋았고
+  sparse-2는 두 방법 모두 oracle과 같아 non-discriminative였다. AURORA의
+  route candidate risk는 약 \(3.1\times10^{-8}\) 안에서 일치했지만
+  independent heads보다 true-oracle worst-route risk가 낮은 seed는
+  3/5뿐이었다. 따라서 joint density/objective가 1차 병목, operator가
+  2차 병목이며 현재 paper identity는 unsupported다. N1c failed, paired
+  ablation, N1d/3D blocked 판정은 유지한다. 다음은 fresh development
+  seed의 validation-only density-objective control과 learned method 없이
+  수행하는 decision-task adequacy audit이다. 둘 모두 success threshold,
+  method novelty, N1c relabel 또는 N1d/3D 권한이 없다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -129,7 +145,7 @@ novelty는 이들을 PDE solution functional에 맞게 결합했을 때 생기�
 문제 정의·보장·알고리즘과 strong baseline 대비 양수 결과가 함께 있을
 때만 확정한다.
 
-현재 남은 paper identity 가설은
+검증했던 paper identity 가설은
 **conditioning inconsistency의 solution-functional decision consequence**다.
 경로가 다른 posterior가 같은 최종 관측 mask에서 달라질 때 bounded
 functional loss의 Bayes action과 다음 BC component의 value-of-information가
@@ -138,9 +154,21 @@ Bayes-regret를 제한하는 보장, joint BC–solution model의 route
 compatibility와 fresh prospective test의 실제 regret 감소가 함께 있어야
 한다. N1c에서는 baseline route action 차이는 보였지만 signed true-risk
 차이가 작고 seed별 부호가 섞였으므로 이 identity도 현재 unsupported다.
-다음 attribution은 true conditional의 oracle Bayes action을 기준으로 각
-route의 nonnegative excess risk와 worst-route regret를 계산한다. Direct
-route를 정답처럼 두거나 signed route 차이를 평균해 상쇄하지 않는다.
+N1c-a의 corrected true-oracle regret에서도 AURORA가 independent heads보다
+좋은 seed는 3/5에 그쳤고, baseline route candidate-risk 변화는 selected
+component를 거의 바꾸지 않았다. 따라서 이 identity는 현 nonlinear
+benchmark에서 폐기하며, direct route를 정답처럼 두거나 signed route
+차이를 평균해 상쇄하지 않는다.
+
+다음 개발 가설은 **coherence–conditional-accuracy trade-off를
+solution-functional risk에 맞춰 해소할 수 있는가**다. 같은 joint GMM의
+registered-mask conditional composite likelihood는 engineering control일
+뿐 novelty가 아니다. Compatibility/path consistency, arbitrary
+conditioning과 decision-focused learning도 선행 연구이므로, 독립 novelty는
+validation-only objective control과 true-law/simulator task-adequacy audit
+뒤에도 gap이 남을 때 설계하는 operator-specific algorithm·보장과 fresh
+strong-baseline 우위가 함께 있을 때만 인정한다.
+
 Test-time active
 feature acquisition 자체, path independence 자체, 이름만 붙인 acquisition
 head는 novelty가 아니다. ACFlow류 generative AFA, ICML-24 acquisition
@@ -283,10 +311,16 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   coverage, route action만 통과하고 pair, field distribution,
   acquisition regret가 실패해 closed다. Invalid route-VoI 보조 지표를
   고치는 post-result diagnostic은 N1c를 재개방하거나 3D를 허용하지
-  않는다. Joint/independent conditional NLL, true-law density와 oracle
-  operator floor, acquisition sample-size stability, true-oracle
-  worst-route excess risk를 threshold 없이 분해한 뒤에만 새 method와
-  fresh prospective re-entry의 필요성을 판단한다.
+  않는다. Exact `b97899c`의 N1c-a는 joint/independent conditional NLL,
+  true-law density와 oracle operator floor, acquisition sample-size
+  stability, true-oracle worst-route excess risk를 threshold 없이
+  분해했다. 공개 aggregate는
+  `results/nonlinear_pde_n1c_attribution_20260806.json`이다. Joint density는
+  모든 mask에서 independent heads보다 0/5 seed로 열세였고, stable-budget
+  acquisition과 corrected route regret도 robust superiority를 회복하지
+  못했다. 다음 validation-only objective control과 method-independent
+  task-adequacy audit 전에는 새 method나 fresh prospective re-entry를
+  등록하지 않는다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은

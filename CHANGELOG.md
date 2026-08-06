@@ -4,6 +4,45 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-06 · N1c-a completes and rejects the current paper identity
+
+### Exact-source execution
+
+- Exact source `b97899c`의 PBS A6000 contract job `109738`은 130/130을
+  통과했고, 5-seed metric job `109739`는 exit 0, walltime 49분 48초로
+  완료됐다.
+- N1c와 같은 192×12 open test와 frozen 50 checkpoint만 재사용했다.
+  새 test seed, checkpoint/model selection, success threshold는 없다.
+- Raw aggregate SHA-256은
+  `01fa774e17b43c7c14d68da1b9be46cac020aa81239f3bf136f6add7b0720070`이며
+  raw/per-context artifact는 private run provenance에만 보존한다.
+  공개 저장소에는 검증된 aggregate
+  `results/nonlinear_pde_n1c_attribution_20260806.json`만 둔다.
+
+### Scientific decision
+
+- Joint conditional excess NLL은 missing/sparse-2/partial-4 모두
+  independent heads보다 0/5 seed로 열세였다.
+- Functional energy의 mean oracle-substitution difference는 density가
+  simulator보다 missing에서 13.0배, sparse-2에서 5.81배 컸다. 이는
+  non-additive diagnostic이지 causal error decomposition은 아니다.
+- Missing acquisition은 64×128에서도 ACFlow보다 1/5 seed에서만 좋았고,
+  sparse-2는 AURORA와 ACFlow 모두 0 regret라 판별력이 없었다.
+- AURORA는 route candidate risk를 약 \(3.1\times10^{-8}\) 안에서
+  일치시켰지만 independent heads보다 true-oracle worst-route risk가 낮은
+  seed는 3/5였다. Structural compatibility가 robust decision advantage로
+  이어졌다는 주장은 지지되지 않는다.
+- N1c failed, paired-response ablation, N1d/irregular-3D blocked를
+  유지한다. 현 paper identity는 폐기하며, 다음은 validation-only
+  density-objective control과 true-law/simulator-only decision-task
+  adequacy audit이다. Composite likelihood, compatibility와
+  decision-focused training 자체는 novelty로 세지 않는다.
+- 최상위 실행 계약도 이 demotion과 맞춘다. Headline
+  `paired_response` weight는 0으로 고정하고, 0.5는 이름이 명시된
+  ablation weight로만 보존한다. Validator는 paired loss가 조용히 main
+  objective로 복귀하거나 ablation control이 사라지는 경우를 모두
+  거부한다.
+
 ## 2026-08-05 · N1c-a failure attribution is fixed before execution
 
 ### Threshold-free diagnostic contract
