@@ -4,6 +4,60 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-06 · Post-N1c audits complete without selecting a method
+
+### Exact-source execution
+
+- Exact source `337c75e6fcb933eaab86c900fc132d4a13b740a5`의
+  dependency-complete A6000 contract job `110165`는 144/144를 통과했다.
+- Density array `110170[0-4]`는 fresh 다섯 seed 모두 exit 0,
+  `test_generated_or_accessed=false`로 완료됐다. Model-free task job
+  `110171`도 exit 0, walltime 58분 04초였고 2,882 solver batch가 모두
+  수렴했다. Learned model/checkpoint와 N1 test는 읽지 않았다.
+- 공개 aggregate SHA-256은 density
+  `94686547ea927324cd4e376c3500067176843b401511d519e993864ea199b147`,
+  task
+  `4492a7759fc08b4c2ac81196e2c345634419215f89030b062356aa801e232ab7`다.
+  Raw history, checkpoint와 per-context metric은 private provenance에만
+  보존한다.
+
+### Density-objective attribution
+
+- Full-joint per-component NLL의 exact-law excess는
+  missing/sparse-2/partial-4에서 0.04622/0.05923/0.07808이었다. N1c raw
+  conditional objective보다 27.2%/23.8%/20.3% 낮고 모든 mask에서 5/5
+  seed 방향이 같았다.
+- Registered composite는 1.5–2.5%의 작은 5/5 개선이었다. 단순
+  per-component normalization은 missing/sparse-2/partial-4에서
+  1/5, 2/5, 4/5 방향으로 일관되지 않았다.
+- Full-joint likelihood가 현재 strongest engineering control이라는
+  진단은 채택한다. 표준 joint MLE를 method나 novelty로 선택하지 않으며,
+  N1c test를 재사용하지 않는다.
+
+### Decision-task adequacy
+
+- Missing base risk 0.50366은 독립 replicate에서
+  0.34778/0.34807로 줄었다. VoI는 0.15587/0.15558, winner agreement는
+  0.9271, top-2 agreement는 0.7396이었다. Missing은 future
+  decision-aware evaluation 후보로 남긴다.
+- Sparse-2 base risk 0.33221도 0.14704/0.14667로 줄어 acquisition value는
+  분명했지만, component 6이 두 replicate 모두 96/96 context의 winner였다.
+  따라서 sparse-2는 adaptive-policy comparison에서 제외하고 fixed
+  acquisition control로만 보존한다.
+- 이는 threshold-free task evidence이지 pass/fail gate가 아니다. N1c
+  failed, current identity unsupported, method unselected, fresh re-entry와
+  N1d/irregular-3D blocked 판정을 유지한다.
+
+### Synchronized surfaces
+
+- 공개 결과:
+  `results/nonlinear_pde_n1_density_objective_audit_20260806.json`,
+  `results/nonlinear_pde_n1_decision_task_audit_20260806.json`.
+- 판정과 숫자를 `AGENTS.md`, `README.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `configs/aurora_v1.json`,
+  `site/assets/research-data.js`, main site와 field guide에 동기화한다.
+
 ## 2026-08-06 · Post-N1c development audits are frozen before output
 
 ### Density-objective control

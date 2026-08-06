@@ -656,10 +656,12 @@
               joint density는 세 mask 모두 independent heads보다 0/5
               seed로 열세였고, stable acquisition과 corrected route regret가
               method superiority를 회복하지 못했습니다. 현재 3D는 닫혀
-              있고, 다음은 결과 전에 별도 config로 고정한 validation-only
-              네-objective density control과 learned-model-free true-oracle
-              decision-task adequacy audit입니다. 둘 다 아직 결과가 없고
-              N1c나 3D 상태를 바꿀 수 없습니다.
+              있습니다. 결과 전에 별도 config로 고정한 네-objective
+              density audit에서는 full-joint가 raw conditional objective의
+              excess를 세 mask에서 20.3–27.2% 줄였습니다. Learned-model-free
+              task audit에서는 missing acquisition이 비자명하고 안정적이지만
+              sparse-2는 모든 context에서 같은 component가 최적이었습니다.
+              이는 method novelty나 N1c·3D 상태 변경 근거가 아닙니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>
@@ -876,7 +878,7 @@
           </div>
           <div class="compute-status warning">
             <span class="status-dot warning"></span>
-            <div><p class="eyebrow">POST-N1C AUDITS · PREREGISTERED / UNRUN</p><h3>Objective bottleneck and task adequacy are separated</h3><p>Fresh 5-seed density audit은 네 objective만 비교하고, 별도 task audit은 learned checkpoint 없이 true law/simulator만 사용합니다. Threshold·method selection·N1 test·3D 권한은 없습니다.</p><a href="../configs/nonlinear_pde_n1_density_objective_audit.json">Density config ↗</a> <a href="../configs/nonlinear_pde_n1_decision_task_audit.json">Task config ↗</a></div>
+            <div><p class="eyebrow">POST-N1C AUDITS · COMPLETE / NON-GATING</p><h3>Full-joint helps; only missing supports adaptive evaluation</h3><p>Fresh 5-seed density audit에서 full-joint excess는 raw conditional 대비 missing/sparse-2/partial-4에서 27.2%/23.8%/20.3% 낮고 모두 5/5 방향이 같았습니다. True-oracle task에서 missing VoI는 약 0.156, winner agreement는 92.7%였습니다. Sparse-2는 acquisition value가 있어도 component 6이 96/96 context의 고정 winner라 adaptive-policy 비교에서 제외합니다. Method selection·N1c relabel·3D 권한은 없습니다.</p><a href="../results/nonlinear_pde_n1_density_objective_audit_20260806.json">Density result ↗</a> <a href="../results/nonlinear_pde_n1_decision_task_audit_20260806.json">Task result ↗</a></div>
           </div>
           <div class="compute-status">
             <span class="status-dot complete"></span>

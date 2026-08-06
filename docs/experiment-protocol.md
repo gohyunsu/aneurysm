@@ -612,7 +612,7 @@ reference를 공유하므로 original N1c의 작은-budget regret와 수치를 �
 교환하지 않는다. 공개 aggregate는
 `results/nonlinear_pde_n1c_attribution_20260806.json`이다.
 
-#### Post-N1c development boundary
+#### Post-N1c development audits · completed, non-gating
 
 N1c-a는 joint density/objective를 1차 병목으로, operator를 2차 병목으로
 지목했지만 새 방법을 선택하지 않는다. 다음 두 작업은 서로 독립된
@@ -638,9 +638,32 @@ development audit으로 분리한다.
    candidate-risk dispersion, Bayes-action diversity/action change와
    cross-replicate winner·top-2·risk stability를 함께 보고한다.
 
-두 audit 모두 N1c를 relabel하거나 N1d/3D를 열 수 없다. 둘이 feasibility를
-지지한 뒤에만 operator-specific method와 fresh prospective re-entry의
-seed·estimand·threshold를 별도 공개 config로 등록한다.
+Exact source `337c75e`의 dependency-complete A6000 contract는 144/144를
+통과했다. Density 5-seed array와 model-free task job은 모두 exit 0이고,
+test 생성·접근과 method/checkpoint selection은 없었다.
+
+Density audit에서 full-joint per-component NLL의 exact-law excess mean은
+missing/sparse-2/partial-4에서 0.04622/0.05923/0.07808이었다. N1c raw
+conditional objective의 0.06352/0.07772/0.09794보다
+27.2%/23.8%/20.3% 낮고 모든 mask에서 5/5 seed 방향이 같았다. Registered
+composite는 1.5–2.5%의 작은 5/5 개선이고, 단순 component normalization은
+일관되지 않았다. 이는 threshold-free objective attribution이며 full-joint
+variant를 method로 선택하거나 N1 test에 진입시키지 않는다.
+
+Task audit의 missing base risk는 0.50366, post-acquisition risk는 독립 두
+replicate에서 0.34778/0.34807이었다. VoI는 0.15587/0.15558이고 winner
+agreement/top-2 agreement는 0.9271/0.7396이었다. Sparse-2 base risk
+0.33221은 0.14704/0.14667로 줄었지만 두 replicate 모두 component 6이
+96/96 context의 winner였다. Missing은 future decision endpoint 후보로
+유지하고 sparse-2는 adaptive-policy comparison에서 제외하되 fixed
+acquisition control로 보존한다.
+
+공개 aggregate는
+`results/nonlinear_pde_n1_density_objective_audit_20260806.json`과
+`results/nonlinear_pde_n1_decision_task_audit_20260806.json`이다. 두 audit은
+N1c를 relabel하거나 method novelty·fresh re-entry·N1d/3D를 열 수 없다.
+Operator-specific method와 fresh prospective seed·estimand·threshold는
+별도 공개 config가 결과 전에 고정될 때만 등록된다.
 
 ### G2 · paired response fidelity
 
@@ -903,9 +926,10 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 7. N1c-a threshold-free density/operator/acquisition/route-regret attribution
    **(완료 · joint density 병목, current identity unsupported)**
 8. Validation-only density-objective control과 method-independent
-   decision-task adequacy audit **(사전등록 완료 · 실행 전)**
-9. 두 audit이 method 필요성과 nontrivial task를 모두 지지할 때만 fresh
-   prospective re-entry
+   decision-task adequacy audit **(완료 · full-joint 개선, missing 유의미,
+   sparse-2 fixed winner)**
+9. Missing endpoint용 operator-specific method와 보장이 선행연구와
+   구분될 때만 결과 전 fresh prospective re-entry를 별도 등록
 10. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol
 11. G3 learned transient 비교와 G4 cross-domain 통합 table
 

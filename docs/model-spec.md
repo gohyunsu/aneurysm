@@ -1,6 +1,6 @@
 # AURORA v2 모델 명세
 
-상태: N1c failed · N1c-a density bottleneck attribution completed · two non-gating development audits preregistered · method revision pending
+상태: N1c failed · N1c-a density bottleneck attribution completed · two non-gating development audits completed · missing task retained · sparse-2 adaptive task removed · method unselected
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -476,7 +476,7 @@ disagreement만 invalid다. Future implementation은 direct/5→7/7→5에
 전달했을 때 candidate-risk tensor가 수치 오차 안에서 같다는 regression
 test를 요구한다. 이 수정은 이미 failed인 N1c를 다시 판정하지 않는다.
 
-다음 prospective method가 필요한지 보기 전에
+새 prospective method가 필요한지 보기 위해
 `configs/nonlinear_pde_n1_density_objective_audit.json`에
 **validation-only engineering control**을 고정했다. 같은 joint 2-GMM,
 paired initialization/minibatch, optimizer와 likelihood 평가 횟수에서
@@ -493,8 +493,24 @@ DeltaPhi-style operator를 joint density의 pushforward backbone으로 쓰는
 selected-component diversity, bounded-functional Bayes-action diversity와
 두 독립 Monte Carlo replicate의 안정성을 측정한다. 이 audit이 nontrivial
 decision task를 확인하지 못하면 acquisition과 route regret를 headline에서
-제거한다. 두 development audit은 아직 결과가 없고 새 gate나
-contribution이 아니다.
+제거한다.
+
+두 audit은 exact source `337c75e`에서 완료됐다. Full-joint NLL은 N1c raw
+conditional objective보다 exact-law excess NLL을 missing/sparse-2/partial-4
+에서 27.2%/23.8%/20.3% 낮췄고 모두 5/5 seed 방향이 같았다. Registered
+composite는 1.5–2.5%의 작은 이득, 단순 per-component normalization은
+불안정한 방향만 보였다. 따라서 현재 density error는 joint-GMM capacity만의
+문제가 아니라 random-mask conditional objective의 통계효율 문제이기도
+하다. 그러나 full-joint MLE는 architecture novelty가 아니며 어떤 variant도
+method로 선택하지 않는다.
+
+True-law/simulator task에서 missing mask는 base risk 0.50366 대비
+post-acquisition risk 0.34778/0.34807, VoI 0.15587/0.15558, replicate
+winner agreement 0.9271을 보였다. Sparse-2는 VoI가 더 크지만 component
+6이 두 replicate 모두 96/96 context에서 고정 winner였다. 따라서 다음
+architecture는 missing endpoint만 decision-aware evaluation에 쓰고,
+sparse-2는 fixed acquisition control로만 남긴다. 이 audit은 새 gate나
+contribution이 아니며 N1c failed와 3D blocked를 바꾸지 않는다.
 
 ## 7. Module D — paired simulator-response supervision · ablation
 
@@ -622,7 +638,9 @@ objective에서 제거하고 ablation에서만 더한다. 다음 development con
 \(\mathcal L_{\mathrm{BC\ NLL}}\)만 바꾼 네 variant—N1c raw
 random-mask conditional, per-component normalization, full-joint
 per-component, registered-mask composite per-component—로 objective의
-영향을 분리한다.
+영향을 분리했다. Full-joint control이 모든 mask에서 5/5 seed 개선을
+보였지만 표준 likelihood이므로 headline objective 후보나 contribution으로
+자동 승격하지 않는다.
 
 Nested coherence는 analytic conditional density와 shared pushforward로
 구조화한다. 별도 숫자 loss를 추가해 보이는 것만으로 보장했다고 하지 않고,
@@ -651,8 +669,9 @@ inference sample 수를 맞춘다.
    pair/mask/decision-regret test와 N1c-a attribution **완료 · failed**
 4. Fresh development seed의 네-objective validation-only density audit과
    true-law/simulator-only decision-task adequacy audit
-   **사전등록 완료 · 실행 전**
-5. 두 audit 뒤에만 operator-specific method와 fresh N1 re-entry를 등록
+   **완료 · full-joint 개선, missing 유의미, sparse-2 fixed winner**
+5. Missing endpoint에서만 operator-specific method·보장을 설계하고,
+   결과 전 fresh N1 re-entry를 별도 등록; 현재 method와 re-entry는 미등록
 6. Fresh N1이 양수일 때 Aneumo velocity-only response protocol을 등록;
    pressure head는 새 사전등록 근거 전까지 제외
 7. GNN+latent-token irregular 3D operator

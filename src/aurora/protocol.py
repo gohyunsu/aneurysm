@@ -1174,8 +1174,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             )
         audits = n1["next_development_audits"]
         if audits != {
-            "status": "two_threshold_free_audits_preregistered_before_output",
+            "status": "two_threshold_free_audits_completed_non_gating",
             "parent_public_commit": "5eb3b869e93c1557c777259281396bf247688dad",
+            "execution_source_commit": (
+                "337c75e6fcb933eaab86c900fc132d4a13b740a5"
+            ),
             "density_objective": {
                 "config": (
                     "configs/nonlinear_pde_n1_density_objective_audit.json"
@@ -1183,7 +1186,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "config_sha256": (
                     "b4af684939d2659a88f885ed487b4b85657fbe5da319da81a351f908c1200ec5"
                 ),
-                "status": "preregistered_development_before_output",
+                "status": "completed_threshold_free_development_audit",
+                "result": (
+                    "results/nonlinear_pde_n1_density_objective_audit_"
+                    "20260806.json"
+                ),
+                "result_sha256": (
+                    "94686547ea927324cd4e376c3500067176843b401511d519e993864ea199b147"
+                ),
                 "model_seeds": 5,
                 "fresh_from_n1_development_and_confirmatory_seeds": True,
                 "variants": [
@@ -1198,6 +1208,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "may_access_or_generate_n1_test": False,
                 "may_select_a_method": False,
                 "may_establish_method_novelty": False,
+                "full_joint_excess_reduction_percent": {
+                    "missing": 27.236424996624383,
+                    "sparse_2": 23.79853039822494,
+                    "partial_4": 20.27965080407532,
+                },
+                "full_joint_better_than_n1c_raw_seeds": {
+                    "missing": 5,
+                    "sparse_2": 5,
+                    "partial_4": 5,
+                },
+                "interpretation": (
+                    "full_joint_likelihood_is_strongest_engineering_"
+                    "control_not_method_novelty"
+                ),
             },
             "decision_task": {
                 "config": (
@@ -1206,7 +1230,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "config_sha256": (
                     "00cef2ab32885ed4091e4aa85e59d94cbc4acf1a8630accf241046c1e4a62a60"
                 ),
-                "status": "preregistered_development_before_output",
+                "status": "completed_threshold_free_model_free_audit",
+                "result": (
+                    "results/nonlinear_pde_n1_decision_task_audit_"
+                    "20260806.json"
+                ),
+                "result_sha256": (
+                    "4492a7759fc08b4c2ac81196e2c345634419215f89030b062356aa801e232ab7"
+                ),
                 "uses_learned_model_or_checkpoint": False,
                 "base_masks": ["missing", "sparse_2"],
                 "independent_monte_carlo_replicates": 2,
@@ -1214,17 +1245,45 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "may_access_or_generate_n1_test": False,
                 "may_select_a_method": False,
                 "may_establish_method_novelty": False,
+                "missing": {
+                    "value_of_information_replicates": [
+                        0.1558709591627121,
+                        0.15558111667633057,
+                    ],
+                    "winner_agreement": 0.9270833730697632,
+                    "interpretation": (
+                        "nonzero_stable_context_dependent_"
+                        "acquisition_endpoint"
+                    ),
+                },
+                "sparse_2": {
+                    "value_of_information_replicates": [
+                        0.18517088890075684,
+                        0.1855398416519165,
+                    ],
+                    "winner_agreement": 1.0,
+                    "fixed_winner_component": 6,
+                    "fixed_winner_contexts": 96,
+                    "interpretation": (
+                        "valuable_measurement_but_nonadaptive_"
+                        "fixed_winner_task"
+                    ),
+                },
             },
             "joint_interpretation": {
                 "n1c_status": "completed_failed_unchanged",
+                "method_novelty_established": False,
+                "missing_only_future_decision_endpoint_candidate": True,
+                "sparse_2_adaptive_policy_headline_eligible": False,
                 "fresh_reentry_registered": False,
                 "n1d_or_irregular_3d_authorized": False,
                 "positive_feasibility_evidence_can_only_motivate_a_separate_fresh_protocol": True,
             },
         }:
             raise ProtocolError(
-                "Post-N1c audits must remain preregistered, test-free, "
-                "non-selecting, and unable to authorize N1d or irregular 3D."
+                "Post-N1c audits must remain completed, test-free, "
+                "non-selecting, non-gating, and unable to authorize N1d "
+                "or irregular 3D."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

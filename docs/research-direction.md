@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-06 KST
 
-상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · N1c-a completed · two development audits preregistered · current identity unsupported · 3D blocked
+상태: G1/G1r failed preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged · N1c-a completed · two post-N1c audits completed/non-gating · current identity unsupported · 3D blocked
 
 ## 1. 현재 판정
 
@@ -36,11 +36,20 @@ regret가 낮은 seed는 3/5뿐이었다. 따라서 N1c 실패, 닫힌 3D와
 `accept-ready가 아니다`라는 판정은 바뀌지 않는다.
 
 그 결과를 본 뒤 유리한 목적함수나 task를 고르는 것을 막기 위해 다음 두
-development audit을 결과 전에 분리해 고정했다. Density audit은
+development audit을 결과 전에 분리해 고정한 뒤 exact `337c75e`에서
+완료했다. Density audit은
 `configs/nonlinear_pde_n1_density_objective_audit.json`, task audit은
 `configs/nonlinear_pde_n1_decision_task_audit.json`이 실행 계약이다.
-둘 다 아직 결과가 없고, success threshold·method selection·N1 test
-접근·N1c relabel·N1d/3D 권한이 없다.
+Full-joint NLL은 N1c raw objective보다 missing/sparse-2/partial-4 excess
+NLL을 27.2%/23.8%/20.3% 줄였고 모두 5/5 seed 방향이 같았다. 반면
+단순 normalization은 일관된 이득이 없고 registered composite 개선은
+1.5–2.5%였다. True-law/simulator task에서는 missing acquisition의 VoI가
+두 replicate에서 0.15587/0.15558이고 winner agreement가 0.9271이었다.
+Sparse-2는 VoI가 0.18517/0.18554로 양수지만 component 6이 두 replicate의
+96/96 context에서 고정 winner였다. 따라서 missing은 향후 decision
+endpoint 후보로 남기고 sparse-2 adaptive-policy 비교는 제거한다. 이
+결과는 success gate나 method selection이 아니며 N1c relabel·N1d/3D
+권한도 없다.
 
 ## 2. 새 한 문장 연구 질문
 
@@ -401,10 +410,14 @@ contribution으로 올리지 않는다.
 trade-off를 solution-functional risk에 맞춰 해소할 수 있는가*이다. 그러나
 mask-conditional composite likelihood는 고전적 estimation control이고,
 compatibility/path consistency와 decision-focused learning도 선행연구가
-있다. 이를 위해 validation-only objective control과 method-independent
-decision-task adequacy audit을 사전등록했다. 그 뒤에도 gap과 nontrivial
-decision consequence가 남을 때만 operator-specific algorithm과 보장을
-새 방법으로 설계한다.
+있다. 완료된 validation-only audit에서 full-joint MLE는 conditional
+excess를 20.3–27.2% 낮췄으므로 현재의 accuracy tax가 구조적으로 불가피한
+것은 아니다. 그러나 이는 표준 likelihood control이지 새 방법이 아니다.
+Method-independent audit은 missing task의 nonzero VoI와 안정성을
+확인했지만 sparse-2가 fixed-winner라 adaptive benchmark가 아님을
+확인했다. 따라서 missing endpoint에서만 남은 gap을 겨냥하는
+operator-specific algorithm과 보장을 별도 결과 전 protocol로 설계해야
+하며, 아직 method나 fresh re-entry는 등록하지 않는다.
 
 새 방법이 정당화된다면 bounded loss에서 posterior TV/KL로 Bayes-regret를
 제한하는 분석과, compatible joint model이 실제 oracle functional risk와
@@ -520,7 +533,7 @@ non-discriminative였다.
 `results/nonlinear_pde_n1c_attribution_20260806.json`이다. N1c-a에는
 success threshold, model selection, N1c relabel 또는 N1d/3D 권한이 없다.
 
-#### 결과 전 고정한 두 development audit
+#### 결과 전 고정해 완료한 두 development audit
 
 Density-objective audit은 같은 context-conditioned 2-GMM, 초기 weight,
 minibatch, optimizer와 한 step당 likelihood 평가 1회를 유지한다. Fresh
@@ -549,6 +562,38 @@ posterior 2,048 sample과 독립적인 두 outer 32 × inner 64 replicate를
 dispersion, action-change rate와 replicate winner/top-2/risk stability를
 함께 보고한다. Threshold가 없으므로 결과는 task가 충분히 비자명한지에
 대한 정량적 근거이지 pass/fail이 아니다.
+
+Exact source `337c75e`의 dependency-complete contract는 144/144를
+통과했다. Density 5-seed array와 task job은 모두 exit 0이고 N1 test
+access는 false였다.
+
+| Density audit · exact-law excess NLL | N1c raw | full joint | reduction | direction |
+|---|---:|---:|---:|---:|
+| missing | 0.06352 | 0.04622 | 27.2% | 5/5 |
+| sparse-2 | 0.07772 | 0.05923 | 23.8% | 5/5 |
+| partial-4 | 0.09794 | 0.07808 | 20.3% | 5/5 |
+
+Registered composite의 감소는 1.5–2.5%이고 세 mask에서 5/5 방향이었지만,
+per-component normalization은 missing/sparse-2/partial-4에서 각각
+1/5, 2/5, 4/5뿐이었다. Full-joint가 가장 강한 engineering control이라는
+진단은 분명하지만 어떤 variant도 method로 선택하지 않는다.
+
+| Task audit | missing | sparse-2 |
+|---|---:|---:|
+| base no-acquisition risk | 0.50366 | 0.33221 |
+| post-acquisition risk · replicate A/B | 0.34778 / 0.34807 | 0.14704 / 0.14667 |
+| VoI · replicate A/B | 0.15587 / 0.15558 | 0.18517 / 0.18554 |
+| winner agreement | 0.9271 | 1.0000 |
+| top-2 agreement | 0.7396 | 0.9583 |
+| winner diversity | components 2/6 dominate | component 6 · 96/96 |
+
+Missing은 value와 context-dependent winner가 모두 남아 향후 acquisition
+평가 후보가 된다. Sparse-2는 acquisition 자체의 value는 크지만 최적
+component가 고정되어 adaptive policy를 식별하지 못한다. 이 mask를 결과
+뒤 삭제하지 않고 negative adequacy evidence로 보존하되, 향후 adaptive
+headline에서는 제외한다. 공개 aggregate는
+`results/nonlinear_pde_n1_density_objective_audit_20260806.json`과
+`results/nonlinear_pde_n1_decision_task_audit_20260806.json`이다.
 
 ### G2 · paired response
 
@@ -642,8 +687,8 @@ Coherence는 달성했지만 conditional accuracy와 decision superiority를
 contribution이 없다**. Paired supervision과 uncertainty decomposition도
 양수 증거 전까지 contribution 목록에서 제외한다.
 
-다음 원고 구조는 두 feasibility audit과 fresh prospective result가 모두
-양수일 때만 활성화한다.
+다음 원고 구조는 missing endpoint용 operator-specific method와 fresh
+prospective result가 strong baseline보다 양수일 때만 활성화한다.
 
 1. joint compatibility가 accurate mask conditionals와 충돌하는 문제
 2. solution-functional risk를 보존하는 compatible posterior construction
@@ -674,15 +719,12 @@ submission이라고 표현하지 않고 다음 cycle 또는 다른 venue용으�
 6. Multicomponent nonlinear N0/N1 strong-baseline test와 N1c-a failure
    attribution **(완료 · N0r 통과, N1c 실패 유지, joint density 병목)**
 7. 같은 joint GMM의 네 density objective를 fresh development seed의
-   validation에서 비교하는 exact contract를 고정 **(사전등록 완료 · 실행 전)**.
-   이는 method novelty가 아니라 coherence–conditional-accuracy tax의
-   engineering control이다.
-8. true law와 simulator만으로 acquisition winner diversity, nonzero VoI,
-   Bayes-action diversity와 Monte Carlo stability를 감사하는 exact contract를
-   고정 **(사전등록 완료 · 실행 전)**. 현재 sparse-2 같은 trivial mask를
-   결과 뒤 임의로 제거하지 않고 task adequacy 근거로만 사용한다.
-9. 두 audit이 모두 feasibility를 지지할 때만 operator-specific compatible
-   projection/decision-risk method와 fresh N1 re-entry를 별도 등록한다.
+   validation에서 비교 **(완료 · full-joint 5/5 개선, novelty 아님)**.
+8. True law와 simulator만으로 acquisition value·winner diversity·Monte
+   Carlo stability를 감사 **(완료 · missing 유의미, sparse-2 fixed winner)**.
+9. Missing endpoint에서 full-joint training의 이득을 보존하면서 arbitrary
+   conditional accuracy를 개선하는 operator-specific algorithm·보장과
+   fresh N1 re-entry를 별도 결과 전 protocol로 설계한다. 현재는 미등록이다.
 10. Fresh N1이 양수일 때만 velocity-only irregular 3D backbone과 transient
    학습을 등록한다.
 11. CMHA status branch는 공식 case map과 positive real-CFD increment가

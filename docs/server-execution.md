@@ -262,6 +262,18 @@ Post-N1c development는 두 read-only-source PBS job으로 분리한다.
 budget을 바꾸지 않으며, 어느 결과도 N1c relabel이나 3D 실행 권한으로 쓰지
 않는다.
 
+Exact source `337c75e`의 dependency-complete contract job `110165`는
+144/144 test를 통과했다. Density array `110170[0-4]`와 task job `110171`은
+모두 PBS exit 0이었고 test access false였다. Task walltime은 58:04,
+solver 2,882 batch는 모두 수렴했으며 최대 normalized residual은
+\(5.94\times10^{-6}\)이었다. Frozen aggregate만 공개해
+`results/nonlinear_pde_n1_density_objective_audit_20260806.json`과
+`results/nonlinear_pde_n1_decision_task_audit_20260806.json`에 둔다.
+Checkpoint, training history와 per-context metric은 private output에
+보존한다. Full-joint density signal과 missing-only task adequacy는
+development 방향을 좁히지만 새 method·fresh re-entry·N1d/3D 권한을
+열지 않는다.
+
 ## Aneumo selective-cache contract
 
 사전등록한 32 AneuX base family × 2 deformation의 selective range staging은

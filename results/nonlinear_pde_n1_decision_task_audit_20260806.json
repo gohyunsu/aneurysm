@@ -1,0 +1,291 @@
+{
+  "contract": {
+    "has_success_threshold": false,
+    "may_authorize_n1d_or_irregular_3d": false,
+    "may_relabel_n1c": false,
+    "method_or_checkpoint_selected": false,
+    "n1_test_generated_or_accessed": false,
+    "task_pass_fail_label_assigned": false,
+    "uses_learned_model_or_checkpoint": false
+  },
+  "decision": {
+    "fresh_reentry_registered": false,
+    "method_novelty_established": false,
+    "n1c_status": "completed_failed_unchanged",
+    "n1d_or_irregular_3d_authorized": false
+  },
+  "environment": {
+    "cuda_available": true,
+    "cuda_runtime": "11.8",
+    "cuda_visible_devices": null,
+    "gpu_name": "NVIDIA RTX A6000",
+    "platform": "Linux-5.15.0-78-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10",
+    "torch": "2.5.1+cu118"
+  },
+  "evidence_status": "threshold_free_task_adequacy_audit_completed",
+  "experiment_id": "nonlinear_n1_true_decision_task_adequacy_audit_v1",
+  "result_id": "nonlinear_pde_n1_decision_task_audit",
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "solver": {
+    "all_converged": true,
+    "maximum_iterations": 1550,
+    "maximum_normalized_residual": 5.9403660088719334e-06,
+    "oracle_call_groups": 31,
+    "solver_batches": 2882
+  },
+  "source_commit": "337c75e6fcb933eaab86c900fc132d4a13b740a5",
+  "source_config_sha256": "00cef2ab32885ed4091e4aa85e59d94cbc4acf1a8630accf241046c1e4a62a60",
+  "source_metrics_sha256": "936c37b0f4e8a9ab14600ba9c099d354668acda28fcad8d240ceddb55ad46237",
+  "task_adequacy": {
+    "calibration": {
+      "conditions_per_context": 8,
+      "contexts": 384,
+      "functional_location": [
+        0.015755124390125275,
+        0.024555621668696404,
+        0.0945914089679718,
+        -0.10811951756477356
+      ],
+      "functional_raw_maximum": [
+        0.23757410049438477,
+        0.2561235725879669,
+        0.49090349674224854,
+        1.010176181793213
+      ],
+      "functional_raw_minimum": [
+        -0.24490222334861755,
+        -0.2264842689037323,
+        -0.1845514178276062,
+        -1.303068995475769
+      ],
+      "functional_scale": [
+        0.07826996594667435,
+        0.08194119483232498,
+        0.09808976948261261,
+        0.3766424357891083
+      ]
+    },
+    "interpretation_boundary": {
+      "has_success_threshold": false,
+      "irregular_3d_authorized": false,
+      "method_or_gate_selected": false,
+      "n1c_verdict_unchanged": true,
+      "uses_learned_model_or_checkpoint": false
+    },
+    "masks": {
+      "missing": {
+        "base_bayes_action_standard_deviation": [
+          0.39680755138397217,
+          0.41796061396598816,
+          0.2784869074821472,
+          0.33942854404449463
+        ],
+        "base_bayes_action_unique_counts": [
+          31,
+          33,
+          24,
+          28
+        ],
+        "base_no_acquisition_risk_mean": 0.503655195236206,
+        "replicate_stability": {
+          "candidate_risk_correlation": 0.9726518392562866,
+          "candidate_risk_mean_absolute_difference": 0.009809036739170551,
+          "top2_set_agreement": 0.7395833730697632,
+          "winner_agreement": 0.9270833730697632,
+          "winner_margin_mean_absolute_difference": 0.011518976651132107
+        },
+        "replicates": {
+          "replicate_a": {
+            "best_post_acquisition_risk_mean": 0.34778422117233276,
+            "candidate_risk_dispersion_mean": 0.040872722864151,
+            "first_second_margin_mean": 0.037614382803440094,
+            "first_second_margin_quantiles": {
+              "median": 0.036416128277778625,
+              "q10": 0.009925439953804016,
+              "q25": 0.017604149878025055,
+              "q75": 0.05183777958154678,
+              "q90": 0.06836336851119995
+            },
+            "no_acquisition_minus_best_post_acquisition_risk_mean": 0.1558709591627121,
+            "normalized_selected_component_entropy": 0.35451140354400523,
+            "relative_first_second_margin_mean": 0.07342727482318878,
+            "relative_first_second_margin_quantiles": {
+              "median": 0.07368552684783936,
+              "q10": 0.021582700312137604,
+              "q25": 0.03630072996020317,
+              "q75": 0.10357066243886948,
+              "q90": 0.1255030333995819
+            },
+            "value_of_information_positive_fraction": 1.0,
+            "value_of_information_quantiles": {
+              "median": 0.14528895914554596,
+              "q10": 0.10627180337905884,
+              "q25": 0.11654787510633469,
+              "q75": 0.1877015382051468,
+              "q90": 0.21782471239566803
+            },
+            "winner_action_change_rate_mean": 0.96435546875,
+            "winner_component_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 53,
+              "3": 0,
+              "4": 1,
+              "5": 0,
+              "6": 42,
+              "7": 0
+            },
+            "winner_components_observed": 3
+          },
+          "replicate_b": {
+            "best_post_acquisition_risk_mean": 0.3480740487575531,
+            "candidate_risk_dispersion_mean": 0.04086752235889435,
+            "first_second_margin_mean": 0.03503863513469696,
+            "first_second_margin_quantiles": {
+              "median": 0.03329247236251831,
+              "q10": 0.006761506199836731,
+              "q25": 0.017648041248321533,
+              "q75": 0.049314431846141815,
+              "q90": 0.06317058205604553
+            },
+            "no_acquisition_minus_best_post_acquisition_risk_mean": 0.15558111667633057,
+            "normalized_selected_component_entropy": 0.3248298011326841,
+            "relative_first_second_margin_mean": 0.06818316876888275,
+            "relative_first_second_margin_quantiles": {
+              "median": 0.06694723665714264,
+              "q10": 0.01446336880326271,
+              "q25": 0.037726741284132004,
+              "q75": 0.09557211399078369,
+              "q90": 0.12268801033496857
+            },
+            "value_of_information_positive_fraction": 1.0,
+            "value_of_information_quantiles": {
+              "median": 0.141954705119133,
+              "q10": 0.10627470910549164,
+              "q25": 0.11967012286186218,
+              "q75": 0.18345120549201965,
+              "q90": 0.21825169026851654
+            },
+            "winner_action_change_rate_mean": 0.9663900136947632,
+            "winner_component_counts": {
+              "0": 0,
+              "1": 0,
+              "2": 57,
+              "3": 0,
+              "4": 0,
+              "5": 0,
+              "6": 39,
+              "7": 0
+            },
+            "winner_components_observed": 2
+          }
+        }
+      },
+      "sparse_2": {
+        "base_bayes_action_standard_deviation": [
+          0.8392819166183472,
+          0.8097572922706604,
+          0.7435572147369385,
+          0.4796847403049469
+        ],
+        "base_bayes_action_unique_counts": [
+          52,
+          54,
+          45,
+          39
+        ],
+        "base_no_acquisition_risk_mean": 0.33220720291137695,
+        "replicate_stability": {
+          "candidate_risk_correlation": 0.9919236898422241,
+          "candidate_risk_mean_absolute_difference": 0.006915125530213118,
+          "top2_set_agreement": 0.9583333730697632,
+          "winner_agreement": 1.0,
+          "winner_margin_mean_absolute_difference": 0.0072238328866660595
+        },
+        "replicates": {
+          "replicate_a": {
+            "best_post_acquisition_risk_mean": 0.14703631401062012,
+            "candidate_risk_dispersion_mean": 0.05685693770647049,
+            "first_second_margin_mean": 0.1016397699713707,
+            "first_second_margin_quantiles": {
+              "median": 0.09430935233831406,
+              "q10": 0.06446637213230133,
+              "q25": 0.07636740803718567,
+              "q75": 0.12845177948474884,
+              "q90": 0.14216133952140808
+            },
+            "no_acquisition_minus_best_post_acquisition_risk_mean": 0.18517088890075684,
+            "normalized_selected_component_entropy": -0.0,
+            "relative_first_second_margin_mean": 0.3040732443332672,
+            "relative_first_second_margin_quantiles": {
+              "median": 0.303666353225708,
+              "q10": 0.20878282189369202,
+              "q25": 0.2510354518890381,
+              "q75": 0.35705262422561646,
+              "q90": 0.39396458864212036
+            },
+            "value_of_information_positive_fraction": 1.0,
+            "value_of_information_quantiles": {
+              "median": 0.18332338333129883,
+              "q10": 0.1468224972486496,
+              "q25": 0.15721595287322998,
+              "q75": 0.21079915761947632,
+              "q90": 0.22042657434940338
+            },
+            "winner_action_change_rate_mean": 0.95703125,
+            "winner_component_counts": {
+              "1": 0,
+              "3": 0,
+              "4": 0,
+              "5": 0,
+              "6": 96,
+              "7": 0
+            },
+            "winner_components_observed": 1
+          },
+          "replicate_b": {
+            "best_post_acquisition_risk_mean": 0.14666736125946045,
+            "candidate_risk_dispersion_mean": 0.05726548284292221,
+            "first_second_margin_mean": 0.10138066858053207,
+            "first_second_margin_quantiles": {
+              "median": 0.09466449171304703,
+              "q10": 0.06278053671121597,
+              "q25": 0.07643851637840271,
+              "q75": 0.1280105710029602,
+              "q90": 0.14664572477340698
+            },
+            "no_acquisition_minus_best_post_acquisition_risk_mean": 0.1855398416519165,
+            "normalized_selected_component_entropy": -0.0,
+            "relative_first_second_margin_mean": 0.30228668451309204,
+            "relative_first_second_margin_quantiles": {
+              "median": 0.30170294642448425,
+              "q10": 0.21777626872062683,
+              "q25": 0.24832546710968018,
+              "q75": 0.3587123155593872,
+              "q90": 0.4018809199333191
+            },
+            "value_of_information_positive_fraction": 1.0,
+            "value_of_information_quantiles": {
+              "median": 0.188213512301445,
+              "q10": 0.14505434036254883,
+              "q25": 0.15805941820144653,
+              "q75": 0.21010781824588776,
+              "q90": 0.22388675808906555
+            },
+            "winner_action_change_rate_mean": 0.9576823115348816,
+            "winner_component_counts": {
+              "1": 0,
+              "3": 0,
+              "4": 0,
+              "5": 0,
+              "6": 96,
+              "7": 0
+            },
+            "winner_components_observed": 1
+          }
+        }
+      }
+    }
+  }
+}

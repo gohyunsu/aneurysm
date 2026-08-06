@@ -111,8 +111,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does coherence improve decisions?",
-      copy: "N1c-a는 joint density가 세 mask 모두 independent heads보다 0/5 seed로 열세이고, stable 64×128 acquisition도 ACFlow보다 1/5에 그침을 확인했다. Route compatibility는 회복됐지만 independent 대비 worst-route risk 우위는 3/5뿐이다. 네-objective validation audit과 learned-model-free task audit을 결과 전에 분리해 고정했으며 아직 output은 없다.",
-      state: "N1c failed · two audits preregistered/unrun · 3D blocked",
+      copy: "N1c-a의 density 병목 뒤 결과 전에 고정한 두 audit이 완료됐다. Full-joint likelihood는 N1c raw objective 대비 세 mask excess를 20.3–27.2% 줄였고 모두 5/5 seed 방향이 같았다. Missing true-oracle acquisition은 VoI 약 0.156, winner agreement 92.7%로 비자명했지만 sparse-2는 component 6이 96/96 context의 고정 winner였다. 이는 engineering·task-adequacy evidence이며 method novelty나 re-entry가 아니다.",
+      state: "N1c failed · audits complete/non-gating · missing retained · sparse-2 adaptive removed · 3D blocked",
       blocking: true
     },
     {
@@ -158,6 +158,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.06",
+      category: "result",
+      title: "Full-joint training improves density fit; only missing supports adaptive evaluation",
+      copy: "Exact 337c75e의 dependency-complete 144/144 contract 뒤 fresh 5-seed density array와 learned-model-free task job이 모두 exit 0, test access false로 완료됐다. Full-joint exact-law excess는 N1c raw 대비 missing/sparse-2/partial-4에서 27.2%/23.8%/20.3% 낮고 모두 5/5 방향이 같았다. Missing task는 VoI 0.15587/0.15558과 winner agreement 0.9271을 보였다. Sparse-2는 VoI가 양수여도 component 6이 두 replicate 96/96 context의 winner라 adaptive-policy comparison에서 제외한다. N1c failed, method unselected, re-entry/3D blocked를 유지한다.",
+      files: ["results/nonlinear_pde_n1_density_objective_audit_20260806.json", "results/nonlinear_pde_n1_decision_task_audit_20260806.json", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "README.md", "AGENTS.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.06",
       category: "protocol",

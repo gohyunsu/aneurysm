@@ -338,26 +338,29 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">N1c-a FAILURE ATTRIBUTION · COMPLETE</p>
-          <span>same open test · no relabel · 3D blocked</span>
+          <p class="eyebrow">POST-N1C AUDITS · COMPLETE / NON-GATING</p>
+          <span>exact 337c75e · no test access · 3D blocked</span>
         </div>
         <div class="g1-result-metrics">
-          <div><span>Joint NLL vs independent</span><b>0 / 5</b><small>all three masks</small></div>
+          <div><span>Full-joint excess reduction</span><b>27.2%</b><small>missing · 5/5 seeds</small></div>
           <i>→</i>
-          <div><span>Density / operator effect</span><b>13.0×</b><small>missing energy · non-additive diagnostic</small></div>
-          <div class="delta negative"><span>Route regret vs independent</span><b>3 / 5</b><small>not robust</small></div>
+          <div><span>Missing oracle VoI</span><b>0.156</b><small>winner agreement 92.7%</small></div>
+          <div class="delta negative"><span>Sparse-2 winner</span><b>96 / 96</b><small>same component · non-adaptive</small></div>
         </div>
         <div class="g1-result-decision">
-          <strong>Coherence는 달성했지만 현재 방법과 논문 정체성은 살아남지 못했다.</strong>
+          <strong>Objective 병목은 완화됐지만 새 방법과 논문 정체성은 아직 없다.</strong>
           <p>
-            Stable 64×128 acquisition에서도 AURORA는 ACFlow보다 1/5
-            seed에서만 좋았고 sparse-2는 두 방법 모두 oracle이라
-            판별력이 없었다. 다음은 model novelty가 아니라 같은 joint
-            GMM의 validation-only density-objective control과 true-law /
-            simulator-only task-adequacy audit이다. 두 실행 계약은 이미
-            결과 전에 고정됐지만 아직 output은 없다.
+            Full-joint likelihood는 N1c raw objective보다 세 mask의
+            exact-law excess를 20.3–27.2% 줄였지만 standard engineering
+            control이지 novelty가 아니다. True simulator에서 missing
+            acquisition은 nonzero value와 안정적인 winner를 보였고,
+            sparse-2는 모든 context에서 같은 component가 최적이라 adaptive
+            policy를 비교하지 못했다. Missing만 향후 decision endpoint
+            후보로 남기며 N1c failed와 3D blocked는 유지한다.
           </p>
           <a href="../results/nonlinear_pde_n1c_attribution_20260806.json">Public aggregate ↗</a>
+          <a href="../results/nonlinear_pde_n1_density_objective_audit_20260806.json">Density result ↗</a>
+          <a href="../results/nonlinear_pde_n1_decision_task_audit_20260806.json">Task result ↗</a>
           <a href="../configs/nonlinear_pde_n1_density_objective_audit.json">Density audit config ↗</a>
           <a href="../configs/nonlinear_pde_n1_decision_task_audit.json">Task audit config ↗</a>
           <a href="../docs/research-direction.md">냉정한 연구 판정 읽기 →</a>
@@ -520,7 +523,7 @@
         <article><span>C3</span><h3>Decision consequence · unsupported</h3><p>Route consistency가 robust true-oracle regret 감소로 이어지지 않았다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>development audits before any new method claim</b>
+        <span>Current stage</span><b>audits complete · missing-only method design before fresh re-entry</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

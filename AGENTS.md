@@ -2,8 +2,8 @@
 
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
-공개 1차 문헌을 재검토하여 작성했고 2026-08-06 KST N1c-a 상태를
-반영했다.
+공개 1차 문헌을 재검토하여 작성했고 2026-08-06 KST post-N1c
+density-objective·decision-task audit 완료 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -87,19 +87,38 @@
   3/5뿐이었다. 따라서 joint density/objective가 1차 병목, operator가
   2차 병목이며 현재 paper identity는 unsupported다. N1c failed, paired
   ablation, N1d/3D blocked 판정은 유지한다. 다음 두 development audit은
-  결과 전에 별도 config로 고정됐다. Density-objective audit은
+  결과 전에 별도 config로 고정한 뒤 exact source `337c75e`에서 완료했다.
+  Density-objective audit은
   `configs/nonlinear_pde_n1_density_objective_audit.json`에서 N1 seed와
   겹치지 않는 fresh 5 seed, 3,072×8 train, 384×8 selection-validation,
   별도 384×8 audit-validation과 같은 joint 2-GMM·초기 weight·minibatch를
   고정한다. N1c raw random-mask conditional, per-component normalization,
   full-joint per-component, registered-mask composite per-component의 네
-  objective를 모두 보고하며 winner를 선택하지 않는다. Decision-task
+  objective를 모두 보고하며 winner를 선택하지 않는다. 다섯 seed가 모두
+  exit 0, test access false로 끝났다. Full-joint excess NLL은 N1c raw 대비
+  missing 0.06352→0.04622(27.2%), sparse-2 0.07772→0.05923(23.8%),
+  partial-4 0.09794→0.07808(20.3%)로 감소했고 세 mask 모두 5/5 seed
+  방향이 같았다. Registered composite 개선은 1.5–2.5%로 작았고 단순
+  per-component normalization은 일관된 이득이 없었다. 이는 full-joint
+  likelihood의 통계효율을 지지하는 engineering evidence이며 method
+  selection이나 novelty가 아니다. Decision-task
   audit은 `configs/nonlinear_pde_n1_decision_task_audit.json`에서 learned
   model/checkpoint를 전혀 읽지 않고 true-law/simulator calibration 384×8,
   disjoint 96 context, base 2,048 및 독립 두 outer 32 × inner 64
-  replicate로 task adequacy와 Monte Carlo stability를 분해한다. 둘 다 아직
-  결과가 없고 success threshold, method novelty, N1 test access, N1c
-  relabel 또는 N1d/3D 권한이 없다.
+  replicate로 task adequacy와 Monte Carlo stability를 분해했다. PBS는
+  exit 0, walltime 58:04였고 2,882 solver batch가 모두 수렴했다. Missing
+  mask는 base risk 0.50366에서 post-acquisition 0.34778/0.34807,
+  VoI 0.15587/0.15558, replicate winner agreement 0.9271로 acquisition
+  endpoint가 비자명하고 재현 가능했다. Sparse-2도 risk는
+  0.33221→0.14704/0.14667로 감소했지만 두 replicate 모두 96/96
+  context에서 component 6이 고정 winner였다. 따라서 sparse-2는
+  adaptive-policy 비교에서 제외하고 missing만 향후 decision endpoint
+  후보로 남긴다. 이 해석은 task pass/fail이나 method selection이 아니다.
+  공개 aggregate는
+  `results/nonlinear_pde_n1_density_objective_audit_20260806.json`과
+  `results/nonlinear_pde_n1_decision_task_audit_20260806.json`이다. 두 결과는
+  N1c relabel, method novelty, fresh re-entry 또는 N1d/3D 권한을 열지
+  않는다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -171,13 +190,17 @@ benchmark에서 폐기하며, direct route를 정답처럼 두거나 signed rout
 차이를 평균해 상쇄하지 않는다.
 
 다음 개발 가설은 **coherence–conditional-accuracy trade-off를
-solution-functional risk에 맞춰 해소할 수 있는가**다. 같은 joint GMM의
-registered-mask conditional composite likelihood는 engineering control일
-뿐 novelty가 아니다. Compatibility/path consistency, arbitrary
+solution-functional risk에 맞춰 해소할 수 있는가**다. 완료된 audit은
+full-joint likelihood가 random-mask conditional objective의 excess NLL을
+20.3–27.2% 줄여 이 trade-off가 현재 모델에서 불가피하지 않음을 보였다.
+그러나 full-joint MLE와 registered-mask composite likelihood는 engineering
+control일 뿐 novelty가 아니다. Compatibility/path consistency, arbitrary
 conditioning과 decision-focused learning도 선행 연구이므로, 독립 novelty는
-validation-only objective control과 true-law/simulator task-adequacy audit
-뒤에도 gap이 남을 때 설계하는 operator-specific algorithm·보장과 fresh
-strong-baseline 우위가 함께 있을 때만 인정한다.
+missing-mask decision endpoint에서 joint training의 sample efficiency와
+arbitrary-conditioning accuracy를 함께 개선하는 operator-specific
+algorithm·보장과 fresh strong-baseline 우위가 있을 때만 인정한다.
+Sparse-2 adaptive acquisition은 고정 winner task이므로 headline에서
+제외한다. 아직 그런 method나 fresh re-entry는 등록하지 않았다.
 
 Test-time active
 feature acquisition 자체, path independence 자체, 이름만 붙인 acquisition
@@ -328,12 +351,16 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   `results/nonlinear_pde_n1c_attribution_20260806.json`이다. Joint density는
   모든 mask에서 independent heads보다 0/5 seed로 열세였고, stable-budget
   acquisition과 corrected route regret도 robust superiority를 회복하지
-  못했다. 다음 validation-only objective control과 method-independent
-  task-adequacy audit은 각각
+  못했다. 결과 전에 고정한 validation-only objective control과
+  method-independent task-adequacy audit은 각각
   `configs/nonlinear_pde_n1_density_objective_audit.json`과
-  `configs/nonlinear_pde_n1_decision_task_audit.json`에 preregistered/unrun
-  상태로 고정됐다. 두 audit의 결과를 함께 해석하기 전에는 새 method나
-  fresh prospective re-entry를 등록하지 않는다.
+  `configs/nonlinear_pde_n1_decision_task_audit.json`에서 완료됐다.
+  Full-joint objective는 세 mask 모두 N1c raw보다 5/5 seed에서 나았지만
+  method novelty가 아니다. Missing task는 stable nonzero VoI를 보였고,
+  sparse-2는 component 6이 96/96 context의 고정 winner여서 adaptive
+  acquisition 비교에서 제외한다. N1c failed와 N1d/3D blocked는 유지하며
+  별도 operator-specific method와 fresh prospective re-entry는 아직
+  등록하지 않는다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
