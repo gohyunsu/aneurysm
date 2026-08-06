@@ -49,6 +49,15 @@
   `src/aurora/protocol.py`, generic container contract wrapper와 새 audit
   code/config/PBS/test.
 
+### Preregistration deployment
+
+- Exact preregistration commit:
+  `ab6bd38e10e4d60dacef5463c0b53883acaf2d9b`.
+- GitHub research-contract quality와 Pages build가 모두 통과했다.
+- Public hub `https://gohyunsu.github.io/aneurysm/site/index.html`과 두
+  config URL이 `preregistered/unrun`, no-threshold, no-checkpoint 경계를
+  production에서 그대로 제공함을 확인했다.
+
 ## 2026-08-06 · N1c-a completes and rejects the current paper identity
 
 ### Exact-source execution
