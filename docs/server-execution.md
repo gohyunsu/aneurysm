@@ -96,6 +96,11 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
   current-device 형식으로 호출한다. Scientific config와 selector는 그대로며,
   새 exact full contract와 one-task diagnostic을 모두 통과한 뒤에만 fresh
   12-task array를 제출한다. 기존 실패 artifact는 삭제하지 않는다.
+- Exact task source `a0479fb`의 fresh array는 12개 checkpoint/metric과
+  no-test-read 검사를 모두 통과했다. 첫 aggregate job은 result를 만들기 전에
+  exit 1이었고 PBS가 지정 stdout을 반환하지 않았다. Aggregate wrapper에도
+  task-local log/status fail-safe를 적용한 별도 ops source를 사용하되, model과
+  12개 task artifact는 exact `a0479fb` read-only 상태로 replay한다.
 
 ## Run contract
 

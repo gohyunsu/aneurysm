@@ -602,6 +602,12 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   Scientific 설정은 바꾸지 않고 current-device bookkeeping API만 고치며,
   새 exact contract와 one-task diagnostic 전에는 fresh array를 제출하지
   않는다. 모든 실패 artifact를 보존한다.
+- Exact `a0479fb`의 fresh V1 array는 12/12 exit 0, checkpoint·metric
+  12쌍, exact source/config와 no-test-read 전수 검사를 통과했다. 첫 aggregate
+  PBS job은 result 이전 exit 1이었고 stage-out 성공 표기와 달리 stdout이
+  나타나지 않았다. Aggregate wrapper에 task-local log/status fail-safe만
+  추가하고 같은 12개 artifact를 read-only replay한다. Model, config,
+  selector, threshold와 task source를 바꾸지 않으며 실패 aggregate를 보존한다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

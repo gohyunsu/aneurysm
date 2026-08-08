@@ -168,6 +168,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.08",
       category: "implementation",
+      title: "V1 preserves 12 valid tasks and makes aggregate failure observable",
+      copy: "Exact a0479fb fresh array는 4 family×3 seed의 checkpoint·metric 12쌍과 no-test-read 전수 검사를 통과했다. 첫 aggregate는 result 전에 exit 1이었지만 PBS stdout이 반환되지 않았다. 이를 gate 결과로 해석하지 않고 aggregate wrapper에도 task-local log/status fail-safe만 추가한다. Model, config, selector, threshold와 12개 task artifact는 변경하지 않는다.",
+      files: ["cluster/pbs_aneumo_isbi_v1_aggregate.pbs", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.08",
+      category: "implementation",
       title: "V1 isolates a CUDA bookkeeping incompatibility before learning",
       copy: "Exact fd8bb40 one-task diagnostic은 scheduler A100을 정상 할당받았지만 cache load 전에 device 객체를 받은 CUDA peak-memory reset에서 종료됐다. Learned metric과 checkpoint는 생성되지 않았다. Device 0을 명시적으로 선택하고 reset·synchronize·memory query를 current-device API로 바꾸되 model, data, seed, loss, selector와 threshold는 유지한다. 새 exact contract와 one-task diagnostic 전에는 fresh array를 제출하지 않는다.",
       files: ["src/aurora/aneumo_isbi_v1.py", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]

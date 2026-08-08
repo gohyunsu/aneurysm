@@ -15,6 +15,22 @@ set -euo pipefail
 : "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
 
 mkdir -p "$AURORA_AGGREGATE_OUTPUT/tmp"
+aurora_write_aggregate_pbs_status() {
+  local exit_status=$?
+  local state="failed"
+  local aggregate_created="false"
+  if [ "$exit_status" -eq 0 ]; then
+    state="complete"
+  fi
+  if [ -f "$AURORA_AGGREGATE_OUTPUT/aggregate.json" ]; then
+    aggregate_created="true"
+  fi
+  printf '{"aggregate_created":%s,"exit_status":%s,"state":"%s"}\n' \
+    "$aggregate_created" "$exit_status" "$state" \
+    > "$AURORA_AGGREGATE_OUTPUT/pbs_status.json"
+}
+trap aurora_write_aggregate_pbs_status EXIT
+exec > >(tee "$AURORA_AGGREGATE_OUTPUT/pbs.log") 2>&1
 cd "$PBS_O_WORKDIR"
 
 hostname

@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 aggregate failure becomes observable before any gate result
+
+- Exact task source `a0479fb`의 fresh 4×3 PBS array는 12/12 exit 0,
+  checkpoint·metric 12쌍, exact source/config와 no-test-read 전수 검사를
+  통과했다. 별도 aggregate job은 17초 만에 exit 1이었고
+  `aggregate.json`이나 `status.json`을 만들지 않았다.
+- PBS history는 stage-out 성공을 기록했지만 지정 stdout 파일은 실제 output에
+  나타나지 않았다. 따라서 실패를 model/gate 결과로 해석하지 않고 aggregate
+  wrapper도 writable output에 `pbs.log`와 `pbs_status.json`을 직접 남긴다.
+- Task checkpoint, model implementation, config, selector, threshold와 metric은
+  변경하지 않는다. 새 wrapper exact contract 뒤 동일 12개 read-only artifact를
+  replay하며, 실패 aggregate job과 빈 output은 보존한다.
+
 ## 2026-08-08 · V1 fixes scheduler-visible CUDA bookkeeping before cache access
 
 - Task-local fail-safe를 포함한 exact `fd8bb40` one-task diagnostic은 A100을

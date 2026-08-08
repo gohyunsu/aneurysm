@@ -19,6 +19,7 @@ from aurora.aneumo_isbi_v1 import (
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneumo_isbi_v1.json"
 PBS_V1 = ROOT / "cluster" / "pbs_aneumo_isbi_v1.pbs"
+PBS_V1_AGGREGATE = ROOT / "cluster" / "pbs_aneumo_isbi_v1_aggregate.pbs"
 
 
 class AneumoISBIV1ContractTests(unittest.TestCase):
@@ -103,6 +104,15 @@ class AneumoISBIV1ContractTests(unittest.TestCase):
         self.assertIn('trap aurora_write_pbs_status EXIT', script)
         self.assertIn('tee "$task_output/pbs.log"', script)
         self.assertIn('"learned_metrics_created":%s', script)
+
+        aggregate_script = PBS_V1_AGGREGATE.read_text(encoding="utf-8")
+        self.assertIn(
+            'trap aurora_write_aggregate_pbs_status EXIT', aggregate_script
+        )
+        self.assertIn(
+            'tee "$AURORA_AGGREGATE_OUTPUT/pbs.log"', aggregate_script
+        )
+        self.assertIn('"aggregate_created":%s', aggregate_script)
 
 
 class AneumoISBIV1ModelTests(unittest.TestCase):
