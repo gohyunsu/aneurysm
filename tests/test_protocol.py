@@ -54,6 +54,18 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
             validate_protocol(candidate)
 
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
+        audit["s0a_asset_component_pass_authorizes"] = "train_model"
+        with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
+        audit["solver_runtime_preflight_status"] = "passed"
+        with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
+            validate_protocol(candidate)
+
     def test_direct_prior_narrowing_cannot_be_removed_or_authorize_training(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]

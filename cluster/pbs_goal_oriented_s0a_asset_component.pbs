@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+#PBS -N aurora_s0a_asset
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=16gb
+#PBS -l walltime=06:00:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+
+: "${PBS_JOBID:?this audit must run inside a PBS allocation}"
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT to the exact public checkout}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT to the exact public SHA}"
+: "${AURORA_RAW_CMHA_ROOT:?set AURORA_RAW_CMHA_ROOT to the read-only archive directory}"
+: "${AURORA_EXTRACTED_CMHA_ROOT:?set AURORA_EXTRACTED_CMHA_ROOT to the read-only extracted v2 directory}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT to a private writable directory}"
+: "${AURORA_PYTHON:?set AURORA_PYTHON to an approved Python 3.9+ executable}"
+
+if [[ ! "$AURORA_GIT_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "AURORA_GIT_COMMIT must be a full lowercase SHA." >&2
+  exit 2
+fi
+if [ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]; then
+  echo "Project checkout does not match AURORA_GIT_COMMIT." >&2
+  exit 2
+fi
+if [ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]; then
+  echo "Project checkout must be clean before the asset audit." >&2
+  exit 2
+fi
+if [ ! -d "$AURORA_RAW_CMHA_ROOT" ] || [ ! -d "$AURORA_EXTRACTED_CMHA_ROOT" ]; then
+  echo "CMHA archive or extracted root is not readable." >&2
+  exit 2
+fi
+if [ ! -x "$AURORA_PYTHON" ]; then
+  echo "AURORA_PYTHON is not executable." >&2
+  exit 2
+fi
+
+record_root="$AURORA_OUTPUT_ROOT/records"
+run_root="$AURORA_OUTPUT_ROOT/runs/$PBS_JOBID"
+status_path="$record_root/status.$PBS_JOBID.json"
+result_path="$record_root/asset-component.$PBS_JOBID.json"
+mkdir -p "$record_root" "$run_root"
+
+shopt -s nullglob
+for prior_status in "$record_root"/status.*.json; do
+  if grep -Fq '"protocol_id":"goal_oriented_hemodynamic_segmentation_s0a_asset_component_v1"' \
+      "$prior_status" && grep -Fq "\"public_source_commit\":\"$AURORA_GIT_COMMIT\"" \
+      "$prior_status"; then
+    echo "An asset-component record exists for this public source; rerun is forbidden." >&2
+    exit 2
+  fi
+done
+shopt -u nullglob
+
+write_status() {
+  local state="$1"
+  local exit_code="$2"
+  local tmp_path="$status_path.partial"
+  printf '{"protocol_id":"goal_oriented_hemodynamic_segmentation_s0a_asset_component_v1","state":"%s","exit_code":%s,"public_source_commit":"%s","scientific_gate_evaluated":false,"image_voxels_read":false,"cfd_fields_read":false,"rupture_label_values_used":false,"model_access":false,"gpu_access":false,"outer_test_access":false}\n' \
+    "$state" "$exit_code" "$AURORA_GIT_COMMIT" > "$tmp_path"
+  mv "$tmp_path" "$status_path"
+}
+
+write_status running 0
+audit_complete=false
+on_exit() {
+  local exit_code=$?
+  trap - EXIT
+  if [ "$audit_complete" != true ]; then
+    write_status execution_incomplete "$exit_code"
+  fi
+  exit "$exit_code"
+}
+trap on_exit EXIT
+
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONHASHSEED=0
+export PYTHONPATH="$AURORA_PROJECT_ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
+"$AURORA_PYTHON" -m aurora.goal_oriented_s0a_asset \
+  --config "$AURORA_PROJECT_ROOT/configs/goal_oriented_segmentation_s0a_asset_component.json" \
+  --raw-root "$AURORA_RAW_CMHA_ROOT" \
+  --extracted-root "$AURORA_EXTRACTED_CMHA_ROOT" \
+  --public-source-commit "$AURORA_GIT_COMMIT" \
+  --output "$result_path"
+
+"$AURORA_PYTHON" - "$result_path" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1], encoding="utf-8") as stream:
+    result = json.load(stream)
+if result.get("audit_completed") is not True:
+    raise SystemExit("asset audit did not complete")
+if result.get("checks_total") != 9:
+    raise SystemExit("asset audit check count changed")
+PY
+
+if "$AURORA_PYTHON" - "$result_path" <<'PY'
+import json
+import sys
+
+with open(sys.argv[1], encoding="utf-8") as stream:
+    result = json.load(stream)
+raise SystemExit(0 if result.get("all_nine_pass") is True else 1)
+PY
+then
+  write_status completed_pass 0
+else
+  write_status completed_fail 0
+fi
+audit_complete=true

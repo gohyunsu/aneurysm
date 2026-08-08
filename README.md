@@ -50,19 +50,26 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 
 ## 현재 단계 · conditional problem shortlist 1, method/GPU 없음
 
-현재 허용된 다음 작업은 prospective S0a CPU/read-only audit입니다. CMHA의
-99 patient/105 lesion 영상–표면–table linkage와 별도 solver/adjoint runtime을
-11개 all-or-none check로 확인합니다. Pass도 method-free S0b 등록만 열며
-executable model, GPU job과 outer test를 만들지 않습니다.
+현재 허용된 다음 작업은 prospective **S0a asset component** CPU/read-only
+audit 한 번입니다. CMHA의 archive, 99 patient/105 lesion/44 control unit,
+영상–표면–table exact-ID linkage와 NIfTI/STL unit·frame을 9개 all-or-none
+check로 먼저 확인합니다. 하나라도 실패하면 solver를 다시 만들지 않고 후보를
+닫습니다. 9/9도 S0a pass가 아니며, no-runtime-network solver preflight v2를
+별도 등록할 권한만 엽니다. Executable model, GPU job과 outer test는 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.
 따라서 이 binary를 재사용하지 않습니다. 별도
-[`solver preflight`](configs/goal_oriented_segmentation_s0a_solver_preflight.json)는
+[`solver preflight v1`](configs/goal_oriented_segmentation_s0a_solver_preflight.json)는
 exact SU2/TestCases commit과 official GHCR linux/amd64 manifest를 고정하고,
 normal+reverse-AD runtime을 CPU/PBS에서 build한 뒤 incompressible steady
 forward와 실제 discrete-adjoint surface sensitivity를 검사합니다. 이것은 S0a
 판정이 아니며 medical asset, model, GPU와 outer test 접근은 모두 0입니다.
+실제 exact source `64284eb…` 실행은 official build SIF와 exact SU2/11개
+submodule HEAD까지 남긴 뒤, 별도 TestCases/build/probe 전에 exit 1로 끝났습니다.
+Raw scheduler stdout이 materialize되지 않아 exact shell 원인은 단정하지
+않습니다. Runtime과 sensitivity는 생성되지 않았고 같은 v1을 재실행하지
+않습니다.
 
 CMHA monolithic staging v1은 exact source `b6b6175…`의 CPU/PBS job에서
 20분 37초 후 exit 28로 끝났습니다. Verified archive와 retained payload는
@@ -71,9 +78,19 @@ CMHA monolithic staging v1은 exact source `b6b6175…`의 CPU/PBS job에서
 후속 1 KiB/8 MiB bounded range GET이 HTTP 206으로 성공한 사실만 근거로,
 asset·checksum·extraction 계약은 유지하고 전송만 64 MiB chunk로 바꾼
 [`staging v2`](configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json)를
-한 번의 PBS attempt로 고정했습니다. 실행 기록은
+한 번의 PBS attempt로 고정했습니다. V2도 첫 verified chunk 전에 exit 28로
+끝났고 같은 source를 재제출하지 않습니다. 이후 `introai9`의 기존 private
+source asset을 확인해 세 official archive의 byte size와 MD5가 3/3 정확히
+일치함을 확인했습니다. 이 post-failure discovery는 CSV, identifier, NIfTI,
+STL 또는 voxel을 열지 않았고 S0a pass가 아닙니다. 따라서 추가 다운로드나
+15.6 GB raw transfer를 반복하지 않고
+[`asset component`](configs/goal_oriented_segmentation_s0a_asset_component.json)를
+source server에서 한 번 실행합니다. 실행 기록은
 [`v1 execution record`](results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json)에
-있습니다.
+더해 [`v2 execution record`](results/goal_oriented_s0a_cmha_stage_v2_execution_20260809.json),
+[`solver execution record`](results/goal_oriented_s0a_solver_preflight_v1_execution_20260809.json),
+[`source discovery record`](results/goal_oriented_s0a_cmha_source_asset_discovery_20260809.json)에
+분리했습니다.
 
 ### 보존된 직전 4D-flow 실행 기록
 

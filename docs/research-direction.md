@@ -5,7 +5,7 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation conditional shortlist 1 before S0a · method/architecture/GPU/outer test unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation conditional shortlist 1 · staging v2/solver preflight v1 execution-incomplete · archive integrity 3/3 discovery · asset component preregistered · method/architecture/GPU/outer test unselected · submission blocked
 
 ## 0. 현재 연구 상태 · conditional problem shortlist 1
 
@@ -40,14 +40,31 @@ TestCases와 official build-image manifest로 normal+reverse-AD SIF를 CPU/PBS�
 만들고, incompressible Navier–Stokes fresh direct solution에서 실제 adjoint
 surface sensitivity가 finite/nonzero인지 확인한다. Pass도 runtime SHA를 pin한
 뒤 단 한 번의 S0a 실행만 열며 problem score나 novelty를 올리지 않는다.
+Exact `64284eb…`의 실제 preflight v1은 official build SIF와 exact SU2/11개
+submodule HEAD까지 materialize한 뒤 별도 TestCases checkout, solver build와
+forward/adjoint probe 전에 exit 1로 종료됐다. Raw PBS stdout이 stage-out되지
+않아 exact shell failure는 unresolved다. Runtime/sensitivity는 없고 S0a는
+평가되지 않았다. 같은 v1 source를 재실행하지 않는다.
 
 CMHA staging도 gate와 분리한다. Exact `b6b6175`의 monolithic-transfer v1은
 job `115107`에서 exit 28, verified/retained archive 0 byte로 끝났고 raw stdout이
 없어 exact cause는 unresolved다. 이는 asset 부재나 S0a failure가 아니다.
 같은 v1을 다시 제출하지 않고, bounded range diagnostic의 HTTP 206 근거에
 따라 **전송 방식 하나만** 64 MiB chunks+atomic assembly로 바꾼 v2를 별도
-prospective contract로 고정했다. V2 성공도 CMHA를 staged했다는 뜻뿐이며,
-solver preflight와 합쳐져야 단 한 번의 S0a 실행이 가능하다.
+prospective contract로 고정했다. Exact `5cd4aa2…`의 v2도 첫 64 MiB chunk가
+기록되기 전에 exit 28로 종료됐다. Chunk/manifest, retained payload와 mapping은
+0이고 S0a는 미평가다. 같은 v2 source를 재실행하거나 v3 transport를 만들지
+않는다.
+
+대신 규약대로 `introai9` source root를 읽기 전용으로 다시 감사해 이미 존재하는
+세 official CMHA archive의 총 15,557,345,067 byte와 MD5가 3/3 일치함을
+확인했다. 이 post-failure discovery는 login node의 low-priority sequential
+hash뿐이며 CSV, identifier, NIfTI/STL header, voxel/field는 열지 않았다.
+따라서 추가 다운로드/transfer 없이
+`configs/goal_oriented_segmentation_s0a_asset_component.json`을 그 접근 전에
+고정했다. Asset 9/9를 one-shot CPU/PBS로 먼저 실행한다. Scientific fail이면
+후보를 즉시 닫고 solver v2를 생략하며, 9/9도 S0a pass가 아니라 별도
+no-runtime-network solver preflight v2 등록만 허용한다.
 
 ### 직전 RSNA 후보 기각 · 보존
 

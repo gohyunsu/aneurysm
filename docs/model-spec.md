@@ -7,8 +7,9 @@ scientific verdict · prior BC-operator identity inactive · cross-protocol
 4D-flow I0a asset integrity passed 14/14 · I0b execution-incomplete before
 asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
 supervision-semantics candidate rejected · goal-oriented hemodynamic
-segmentation conditional problem shortlist before S0a · method and architecture
-unselected · no GPU/outer test
+segmentation conditional problem shortlist · staging v2/solver preflight v1
+execution-incomplete · archive integrity 3/3 discovery · asset component before
+CSV/identifier/NIfTI/STL access · method and architecture unselected · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -39,13 +40,17 @@ Solver runtime build는 architecture가 아니다. Direct-only official SU2 bina
 reverse AD가 없어 제외했고, exact normal+reverse-AD build와 incompressible
 forward/adjoint probe를 별도 preflight로 고정했다. 이 preflight가 성공해도
 nnU-Net, GNN, SDF decoder, loss 또는 optimizer 선택 권한은 생기지 않으며,
-실패 시 같은 source version을 고쳐 반복하지 않는다.
+실패 시 같은 source version을 고쳐 반복하지 않는다. 실제 v1은 reverse-AD
+runtime이나 sensitivity를 만들기 전에 operationally 종료됐으므로 architecture
+evidence가 아니다. 새 solver preflight도 asset component 9/9 뒤에만 별도
+version으로 등록한다.
 
-CMHA staging v1/v2 역시 architecture evidence가 아니다. V1 transport failure는
-model learnability나 data adequacy를 말하지 않으며, v2는 official archive를
-private storage에 checksum-verified 상태로 옮기는 기계적 dependency일 뿐이다.
-따라서 staging outcome으로 backbone, loss, graph representation을 선택하지
-않는다.
+CMHA staging v1/v2 역시 architecture evidence가 아니다. 둘 다 verified
+payload 이전에 exit 28이었고 S0a를 평가하지 않았다. 이후 source server에서
+official archive 3/3 checksum match를 발견했지만 CSV·identifier·NIfTI/STL은
+열지 않았다. 새 asset-component runner는 standard library로 header/mesh와
+exact-ID linkage만 감사하며 voxel, rupture label, model과 GPU를 읽지 않는다.
+9/9도 backbone, loss, graph representation 또는 architecture를 선택하지 않는다.
 
 직전 RSNA 후보는 제공 segmentation이 aneurysm extent가
 아니라 13-class Circle-of-Willis vessel anatomy라는 공개 근거 때문에

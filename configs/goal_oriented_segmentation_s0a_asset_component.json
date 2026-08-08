@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0",
+  "protocol_id": "goal_oriented_hemodynamic_segmentation_s0a_asset_component_v1",
+  "as_of": "2026-08-09",
+  "status": "preregistered_after_archive_hash_discovery_before_csv_identifier_nifti_or_stl_access",
+  "purpose": "execute_the_asset_subset_of_the_existing_s0a_all_or_none_gate_with_early_stop",
+  "parent_s0a_config": "configs/goal_oriented_segmentation_s0a.json",
+  "parent_s0a_config_sha256": "ea70c169866acce7e78e8e9bbd92879f021019470fc5ac5ed5d145afb6e09db9",
+  "discovery_record": "results/goal_oriented_s0a_cmha_source_asset_discovery_20260809.json",
+  "discovery_record_sha256": "0bdc8e5c901318ab3c46ec3f877a8f9d2c5a999279f717d3cdb5ced13fdf19b5",
+  "discovery_boundary": {
+    "official_archive_size_and_md5_known_matching": true,
+    "existing_extracted_top_level_known_present": true,
+    "statistical_csv_opened": false,
+    "identifier_mapping_attempted": false,
+    "nifti_or_stl_header_opened": false,
+    "image_voxel_or_field_payload_opened": false,
+    "scientific_check_claimed_passed": false
+  },
+  "official_release": {
+    "license": "CC_BY_4_0",
+    "article": "https://doi.org/10.1038/s41597-024-04056-8",
+    "record": "https://doi.org/10.6084/m9.figshare.26965450.v1",
+    "archives": [
+      {
+        "label": "controls",
+        "bytes": 4821489080,
+        "md5": "8d18b970978a303ed89618066919a1b1"
+      },
+      {
+        "label": "statistics",
+        "bytes": 34376,
+        "md5": "12b92693c79587fb6dbab4638bfad8bc"
+      },
+      {
+        "label": "patients",
+        "bytes": 10735821611,
+        "md5": "e783d656ba51c6813aae9fca68565c17"
+      }
+    ],
+    "statistical_members": [
+      "clinical_all.csv",
+      "hemodynamic_aneurysm_artery.csv",
+      "hemodynamic_control.csv",
+      "morphological_aneurysm_artery.csv",
+      "morphological_control.csv"
+    ]
+  },
+  "expected_units": {
+    "patients": 99,
+    "lesions": 105,
+    "controls": 44,
+    "multi_lesion_patients": 6,
+    "patient_identifier_column": "number",
+    "lesion_identifier_column": "number",
+    "lesions_are_independent_samples": false
+  },
+  "linkage_contract": {
+    "clinical_to_morphology": "explicit_identifier_values_only",
+    "morphology_to_hemodynamics": "exact_unique_lesion_identifier_set",
+    "morphology_to_case_directory": "exact_unique_lesion_identifier_set",
+    "row_position_fallback": false,
+    "prefix_or_filename_similarity_fallback": false,
+    "each_lesion_requires": [
+      "one_cta_nifti",
+      "one_parent_plus_aneurysm_stl",
+      "one_aneurysm_only_stl"
+    ]
+  },
+  "geometry_contract": {
+    "source_article_cta_matrix": 512,
+    "source_article_field_of_view_mm": 230,
+    "source_article_slice_thickness_mm": 1.25,
+    "source_article_interlayer_spacing_mm": 0.625,
+    "nifti_spatial_dimension_min": 16,
+    "nifti_spatial_dimension_max": 2048,
+    "nifti_spacing_min_mm": 0.1,
+    "nifti_spacing_max_mm": 2.0,
+    "nifti_physical_extent_min_mm": 5.0,
+    "nifti_physical_extent_max_mm": 600.0,
+    "nifti_qform_or_sform_required": true,
+    "stl_axis_extent_min_mm": 0.01,
+    "stl_axis_extent_max_mm": 600.0,
+    "stl_absolute_coordinate_max_mm": 2000.0,
+    "allowed_frame_transforms": [
+      "identity",
+      "lps_to_ras_xy_sign_flip"
+    ],
+    "allowed_coordinate_scale": 1.0,
+    "containment_tolerance_mm": 5.0,
+    "all_lesions_must_pass": true
+  },
+  "required_checks": [
+    "official_archive_size_and_md5_match",
+    "five_statistical_csv_members_match",
+    "patient_lesion_control_counts_match",
+    "six_multi_lesion_patient_groups_recovered",
+    "all_105_lesions_have_exact_identifier_linked_cta_parent_aneurysm_stl_and_aneurysm_stl",
+    "no_row_order_or_filename_similarity_only_linkage",
+    "nifti_spacing_orientation_and_stl_units_frames_are_finite_and_plausible",
+    "aggregate_contains_no_identifier_private_path_image_voxel_or_field_payload",
+    "training_gpu_outer_test_and_rupture_label_use_are_zero"
+  ],
+  "execution": {
+    "server_role": "introai9_read_only_source_asset_audit",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "resource": "4_cpu_16_gb_no_gpu",
+    "pbs_attempts_for_this_public_source": 1,
+    "login_node_heavy_work": false,
+    "raw_and_extracted_assets_read_only": true,
+    "code_read_only": true,
+    "output_only_writable": true,
+    "private_paths_in_config": false,
+    "public_aggregate_only": true
+  },
+  "decision": {
+    "all_nine_checks_required": true,
+    "scientific_check_failure": "close_the_current_goal_oriented_candidate_without_solver_v2_model_gpu_or_outer_test",
+    "execution_incomplete": "preserve_no_s0a_verdict_and_forbid_same_source_resubmission",
+    "all_nine_pass_authorizes": "register_one_distinct_prospective_no_runtime_network_solver_preflight_v2_only",
+    "all_nine_pass_is_s0a_pass": false,
+    "same_source_rerun": false,
+    "threshold_relaxation_after_result": false,
+    "existing_s0a_relabelled": false
+  },
+  "authorization": {
+    "solver_preflight_v2_registered": false,
+    "model_selected": false,
+    "architecture_selected": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "submission_identity": false,
+    "clinical_claim": false,
+    "rupture_status_for_selection": false
+  }
+}

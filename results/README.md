@@ -26,6 +26,20 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `goal_oriented_s0a_cmha_source_asset_discovery_20260809.json`: staging 실패 뒤
+  `introai9`에서 발견한 기존 CMHA archive 세 개의 exact size/MD5 3/3 match.
+  Login-node low-priority checksum만 수행했고 CSV row, identifier, NIfTI/STL
+  header, voxel/field는 열지 않았다. S0a result가 아니며 one-shot source-server
+  asset component 등록만 허용한다.
+- `goal_oriented_s0a_solver_preflight_v1_execution_20260809.json`: exact source
+  `64284eb…` CPU/PBS solver preflight의 operational failure. Official build SIF와
+  SU2 main/11 submodule HEAD까지만 확인됐고 TestCases/build/runtime/probe는 없다.
+  Exit 1, raw stdout 미생성으로 exact shell cause는 unresolved이며 S0a는
+  `not_evaluated`다. 같은 v1 source를 재실행하지 않는다.
+- `goal_oriented_s0a_cmha_stage_v2_execution_20260809.json`: exact source
+  `5cd4aa2…` chunked staging v2의 execution-incomplete record. 첫 verified chunk
+  전에 exit 28, chunk/archive manifest 0 byte, mapping/payload access 0이며
+  S0a는 `not_evaluated`다. 같은 v2나 v3 transport를 실행하지 않는다.
 - `goal_oriented_s0a_cmha_stage_v1_execution_20260809.json`: exact source
   `b6b6175…`의 CMHA staging v1 execution-incomplete provenance. CPU/PBS job은
   exit 28이었고 verified/retained archive는 0 byte, raw stdout은 없었다.

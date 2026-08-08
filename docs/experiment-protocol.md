@@ -1,6 +1,6 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.0-draft · 2026-08-09
+버전: 3.1-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -11,10 +11,11 @@
 
 현재 conditional problem shortlist는 goal-oriented hemodynamic segmentation
 1개다. Primary problem, method, architecture와 headline metric은 여전히
-미선정이다. 다음 허용 작업은
-`configs/goal_oriented_segmentation_s0a.json`의 CPU/read-only asset/runtime
-audit뿐이다. GPU, segmentation training, rupture-label selection, outer test와
-paper contribution은 없다.
+미선정이다. Staging v2와 solver preflight v1은 모두 S0a 전 operational
+execution-incomplete로 보존한다. 다음 허용 작업은
+`configs/goal_oriented_segmentation_s0a_asset_component.json`의 one-shot
+CPU/read-only asset component뿐이다. GPU, segmentation training,
+rupture-label selection, outer test와 paper contribution은 없다.
 
 직접 선행연구는 inverse Navier--Stokes shape-gradient boundary segmentation과
 task-based quantitative segmentation 평가까지 포함한다. 따라서 S0b는 단순히
@@ -36,7 +37,7 @@ all-or-none check로 감사한다. Row order나 filename similarity만으로 map
 - any fail: 같은 version의 dependency/mapping repair rerun 없이 후보 종료
 - pass도 금지: model/GPU/outer test/submission identity
 
-#### S0a-D · CMHA staging execution · v1 incomplete, v2 preregistered
+#### S0a-D · CMHA staging execution · v1/v2 incomplete, transport closed
 
 Exact source `b6b6175e79a59e441c5a7fc88d4e5e23b1c3ff8c`의 staging v1 PBS
 job `115107.ECE-util1`은 4 CPU/16 GB, GPU 없이 1,237초 실행된 뒤 exit 28이었다.
@@ -54,10 +55,42 @@ official ID/size/MD5, extraction과 모든 authorization을 유지하면서 다�
 > 각 archive의 monolithic GET → exact 64 MiB HTTP range chunks, exact-size
 > 검증, ordered atomic assembly, full MD5, failure status trap
 
-V2는 public source당 PBS attempt 1회다. 성공도 staging-only이며 solver
-preflight와 함께 단일 S0a 실행만 열고, 실패하면 같은 source를 재제출하지
-않는다. V1 execution aggregate는
-`results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json`이다.
+V2는 public source당 PBS attempt 1회였다. Exact `5cd4aa2…` job은 79초 뒤
+exit 28이었고 first verified chunk, archive, extraction과 mapping은 0이다.
+Failure status는 남았지만 raw stdout은 PBS post-job processing에서 materialize되지
+않아 exact network cause는 unresolved다. S0a는 `not_evaluated`이며 같은 source나
+새 v3 Figshare transport를 실행하지 않는다. Execution aggregate는
+`results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json`과
+`results/goal_oriented_s0a_cmha_stage_v2_execution_20260809.json`에 분리한다.
+
+사후에 `introai9`의 기존 source asset을 읽기 전용으로 찾았고 세 archive의
+official byte size와 MD5가 모두 일치했다. 이 checksum discovery에서는 CSV,
+identifier, NIfTI/STL header, voxel과 field를 열지 않았고 정식 S0a execution도
+아니었다. 공개 aggregate는
+`results/goal_oriented_s0a_cmha_source_asset_discovery_20260809.json`이다.
+
+#### S0a-A · source-server asset component · preregistered, early stop
+
+`configs/goal_oriented_segmentation_s0a_asset_component.json`은 위 discovery 뒤,
+CSV와 medical header access 전에 고정했다. Pure-standard-library runner는
+`introai9`의 CPU/PBS allocation에서 다음 9개를 one-shot으로 감사한다.
+
+1. 세 official archive의 exact size/MD5 재확인
+2. five CSV exact member set
+3. 99 patient/105 lesion/44 control과 six multi-lesion groups
+4. clinical–morphology–hemodynamics–case directory의 explicit identifier set
+5. row position, prefix와 filename similarity fallback 금지
+6. 각 105 lesion의 exact case directory 안 CTA NIfTI, parent+aneurysm STL,
+   aneurysm-only STL triplet
+7. article-derived CTA acquisition 범위, NIfTI qform/sform과 STL finite mm-scale
+8. identity 또는 fixed LPS→RAS x/y sign flip, scale 1.0에서 CTA world bounds containment
+9. identifier/private path/voxel/field/rupture-label value/model/GPU/test가 없는 aggregate
+
+하나라도 scientific check가 실패하면 전체 S0a의 all-or-none rule상 현재 후보를
+닫고 solver preflight v2를 만들지 않는다. 9/9도 S0a pass가 아니라 한 번의
+no-runtime-network solver preflight v2 등록만 허용한다. Job이 metric 전에
+execution-incomplete면 verdict를 만들지 않지만 같은 public source도 반복하지
+않는다.
 
 #### S0a-P · solver runtime preflight · preregistered, not S0a
 
@@ -80,7 +113,13 @@ linux/amd64 OCI manifest를 exact하게 고정한다. CPU/PBS에서 normal과 re
 준다. 이것은 S0a 11-check pass, shape-gradient accuracy, S0b, method 또는
 contribution evidence가 아니다. 실패한 동일 source version은 dependency나
 flag를 현장에서 고쳐 반복하지 않고 별도 prospective preflight version을
-요구한다.
+요구한다. 실제 exact source `64284eb…`의 v1 job은 7,519초 뒤 exit 1이었다.
+Official build SIF, SU2 exact HEAD/COPYING/config와 11/11 submodule HEAD는
+남았지만 별도 TestCases checkout, solver install, runtime SIF, forward/adjoint
+probe와 sensitivity는 없다. PBS stdout이 materialize되지 않아 exact shell
+failure는 unresolved다. 이 결과는
+`results/goal_oriented_s0a_solver_preflight_v1_execution_20260809.json`에 보존하며
+같은 v1을 재실행하지 않는다. Asset component 9/9 전에는 v2도 등록하지 않는다.
 
 S0b는 S0a 결과 전에 수치·patient를 소급해 정하지 않는다. 별도 prospective
 contract에서 smooth surface perturbation의 forward solve와 adjoint first-order

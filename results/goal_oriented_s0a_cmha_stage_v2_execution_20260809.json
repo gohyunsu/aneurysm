@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_type": "staging_execution_record_not_scientific_result",
+  "protocol_id": "goal_oriented_segmentation_s0a_cmha_stage_v2",
+  "stage_version": "v2_chunked_figshare_transport",
+  "public_source_commit": "5cd4aa2ebf6458575e3e7ddb7dd492fc1863b17d",
+  "scheduler": {
+    "system": "PBS",
+    "job_id": "115109.ECE-util1",
+    "resource": "4_cpu_16_gb_no_gpu",
+    "walltime_seconds": 79,
+    "cpu_seconds": 0,
+    "peak_memory_kb": 9124,
+    "exit_status": 28
+  },
+  "retained_artifacts": {
+    "chunk_record_bytes": 0,
+    "archive_manifest_bytes": 0,
+    "complete_chunks": 0,
+    "partial_chunks": 0,
+    "archive_files": 0,
+    "extracted_directories": 0,
+    "failure_status_record": true,
+    "raw_scheduler_stdout_available": false,
+    "pbs_stageout_status": 0,
+    "pbs_post_job_file_processing_error": true
+  },
+  "access_boundary": {
+    "verified_archive_bytes": 0,
+    "retained_payload_bytes": 0,
+    "archive_content_inspected": false,
+    "identifier_mapping_attempted": false,
+    "unit_or_frame_audit_attempted": false,
+    "solver_access": false,
+    "model_access": false,
+    "gpu_access": false,
+    "outer_test_access": false
+  },
+  "diagnosis": {
+    "state": "execution_incomplete_before_first_verified_chunk",
+    "bounded_failure_location": "the_first_range_curl_returned_exit_28_before_any_chunk_record",
+    "exact_network_cause": "unresolved_because_raw_scheduler_stdout_was_not_materialized",
+    "chunking_interpreted_as_success": false,
+    "figshare_asset_absence_inferred": false
+  },
+  "verdict": {
+    "s0a_gate": "not_evaluated",
+    "candidate_scientific_status": "unchanged_conditional_shortlist",
+    "same_v2_source_resubmission": false,
+    "additional_figshare_transport_repair_authorized": false,
+    "authorized_next_action": "audit_the_preexisting_source_server_archives_without_opening_linkage_then_register_a_read_only_asset_execution_overlay"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_type": "post_transport_failure_source_asset_discovery_not_s0a_result",
+  "protocol_id": "goal_oriented_hemodynamic_segmentation_s0a",
+  "public_state_commit": "21f59537e9ed2fefee7852694fa906fd5f6cca4c",
+  "execution": {
+    "source_server_role": "introai9_read_only_asset_audit",
+    "scheduler_allocation_used": false,
+    "login_node_low_priority_sequential_md5_only": true,
+    "medical_file_payload_opened": false,
+    "table_row_or_identifier_opened": false,
+    "model_or_gpu_access": false,
+    "outer_test_access": false
+  },
+  "official_archives": [
+    {
+      "label": "controls",
+      "bytes": 4821489080,
+      "expected_md5": "8d18b970978a303ed89618066919a1b1",
+      "observed_md5": "8d18b970978a303ed89618066919a1b1",
+      "match": true
+    },
+    {
+      "label": "statistics",
+      "bytes": 34376,
+      "expected_md5": "12b92693c79587fb6dbab4638bfad8bc",
+      "observed_md5": "12b92693c79587fb6dbab4638bfad8bc",
+      "match": true
+    },
+    {
+      "label": "patients",
+      "bytes": 10735821611,
+      "expected_md5": "e783d656ba51c6813aae9fca68565c17",
+      "observed_md5": "e783d656ba51c6813aae9fca68565c17",
+      "match": true
+    }
+  ],
+  "discovery_boundary": {
+    "all_three_archive_sizes_and_md5_match": true,
+    "existing_extracted_top_level_present": true,
+    "extracted_medical_file_opened": false,
+    "statistical_csv_opened": false,
+    "identifier_mapping_attempted": false,
+    "nifti_or_stl_header_opened": false,
+    "s0a_check_claimed_passed": false,
+    "s0a_gate": "not_evaluated"
+  },
+  "decision": {
+    "repeat_figshare_download_or_cross_server_raw_archive_transfer": false,
+    "authorized_next_action": "register_a_cpu_pbs_read_only_source_server_asset_component_with_unchanged_s0a_checks_and_early_stop_before_any_new_solver_preflight",
+    "method_gpu_outer_test_or_submission_authorized": false
+  }
+}

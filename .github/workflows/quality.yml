@@ -28,6 +28,8 @@ jobs:
         run: PYTHONPATH=src python -m aurora.goal_oriented_s0a_solver configs/goal_oriented_segmentation_s0a_solver_preflight.json
       - name: Validate prospective S0a CMHA staging v2
         run: PYTHONPATH=src python -m aurora.goal_oriented_s0a_staging configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json
+      - name: Validate prospective S0a source-server asset component
+        run: PYTHONPATH=src python -m aurora.goal_oriented_s0a_asset --config configs/goal_oriented_segmentation_s0a_asset_component.json --validate-only
       - name: Run protocol tests
         run: PYTHONPATH=src python -m unittest discover -s tests -v
       - name: Check local site graph

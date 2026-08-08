@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "record_type": "solver_preflight_execution_record_not_s0a_result",
+  "protocol_id": "goal_oriented_segmentation_s0a_solver_preflight_v1",
+  "public_source_commit": "64284eb0d73db7c47066b9a7837144e428bf82f2",
+  "scheduler": {
+    "system": "PBS",
+    "job_id": "115108.ECE-util1",
+    "resource": "8_cpu_32_gb_no_gpu",
+    "walltime_seconds": 7519,
+    "cpu_seconds": 356,
+    "peak_memory_kb": 4675788,
+    "exit_status": 1
+  },
+  "retained_artifacts": {
+    "official_build_sif_bytes": 710496256,
+    "official_build_sif_sha256": "c6afff1d5da53ad8977e066f92245c8813cbd6752dea3c3ab5bf4bd59950e3ec",
+    "su2_head": "12eb826f049ef7f67df974dfcb44cf36ee07c0f8",
+    "su2_copying_sha256": "b3aa400aca6d2ba1f0bd03bd98d03d1fe7489a3bbb26969d72016360af8a5c9d",
+    "probe_config_sha256": "cfb941d95508e6ddd79de1296584b1b3487be3a7d8b8369528c056faffc6731f",
+    "main_tree_submodule_gitlinks_matching_observed_module_heads": 11,
+    "main_tree_submodule_gitlinks_total": 11,
+    "separate_testdata_checkout_retained": false,
+    "solver_install_retained": false,
+    "runtime_sif_retained": false,
+    "forward_or_adjoint_probe_directory_retained": false,
+    "runtime_manifest_retained": false,
+    "failure_status_record": true,
+    "raw_scheduler_stdout_available": false,
+    "pbs_stageout_status": 0,
+    "pbs_post_job_file_processing_error": true
+  },
+  "access_boundary": {
+    "scientific_gate_evaluated": false,
+    "medical_asset_access": false,
+    "model_access": false,
+    "gpu_access": false,
+    "outer_test_access": false
+  },
+  "diagnosis": {
+    "state": "execution_incomplete_after_build_image_and_source_materialization_before_retained_testdata_build_or_probe",
+    "exact_shell_failure": "unresolved_because_raw_scheduler_stdout_was_not_materialized",
+    "source_clone_declared_success": false,
+    "reverse_ad_runtime_built": false,
+    "surface_sensitivity_observed": false
+  },
+  "verdict": {
+    "solver_preflight": "failed_operationally",
+    "s0a_gate": "not_evaluated",
+    "same_v1_source_resubmission": false,
+    "authorized_next_action": "preserve_v1_and_only_register_a_distinct_prospective_no_runtime_network_dependency_snapshot_version_if_the_asset_gate_still_warrants_solver_work"
+  }
+}

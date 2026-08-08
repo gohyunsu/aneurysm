@@ -173,11 +173,34 @@ finite/nonzero surface sensitivity를 먼저 확인한다. 이 preflight는 medi
 asset을 읽지 않고 S0a를 평가하지 않으며, pass도 runtime pin과 단일 S0a
 실행만 허용한다.
 
+실제 exact `64284eb…`의 v1은 official build SIF와 SU2 exact main/11 submodule
+HEAD를 남긴 뒤 별도 TestCases checkout, solver build와 probe 전에 exit 1이었다.
+Raw PBS stdout이 materialize되지 않아 exact shell cause는 unresolved다. Runtime,
+surface sensitivity와 S0a verdict는 없으며 같은 v1 source를 반복하지 않는다.
+
 CMHA staging v1은 exact `b6b6175`의 CPU/PBS에서 exit 28로 종료됐고 verified
 archive와 retained payload는 0 byte였다. Raw stdout이 없어 exact cause는
 unresolved이며 S0a로 세지 않는다. Same-source v1 resubmission 대신 official
 ID/size/MD5와 gate boundary를 그대로 유지하고 monolithic transfer만 64 MiB
 range chunks로 바꾼 v2를 한 attempt로 prospective 등록했다. V2도 staging-only다.
+
+V2 exact `5cd4aa2…`도 79초 뒤 첫 verified chunk 전에 exit 28이었다. Chunk와
+archive manifest는 0 byte이고 identifier/mapping/medical payload access와 S0a
+verdict는 없다. 같은 source 또는 v3 Figshare transport는 실행하지 않는다.
+
+이후 규약에 따라 `introai9` source root를 다시 감사해 기존 세 archive의
+총 15,557,345,067 byte와 official MD5가 3/3 일치함을 확인했다. 이 discovery는
+low-priority sequential checksum뿐이며 CSV row, identifier, NIfTI/STL header,
+voxel/field는 열지 않았다. 추가 다운로드나 raw cross-server transfer를 하지
+않는다.
+
+`configs/goal_oriented_segmentation_s0a_asset_component.json`은 discovery 뒤
+medical header access 전에 고정한 early-stop overlay다. Exact archive/CSV,
+99/105/44/6 unit, explicit non-positional identifier sets, 105 NIfTI/STL triplet,
+qform/sform·mm scale·identity 또는 LPS→RAS frame containment, privacy/no-model
+boundary를 9/9로 감사한다. Scientific fail이면 S0a all-or-none rule에 따라
+후보를 닫고 solver v2를 생략한다. 9/9도 S0a pass가 아니라 no-runtime-network
+solver preflight v2 등록만 허용한다.
 
 ## 7. S0b와 이후 kill rule
 
@@ -201,8 +224,8 @@ audit만 가능하다. S0b가 task non-equivalence 또는 linearization validity
 
 ## 8. 현재 허용·금지
 
-허용: S0a validator/PBS wrapper 구현, exact public commit, CPU read-only run,
-aggregate-only result, 실패 provenance 보존.
+허용: S0a asset-component validator/PBS wrapper, exact public commit,
+`introai9` CPU read-only one-shot run, aggregate-only result, 실패 provenance 보존.
 금지: segmentation training, GPU allocation, rupture-label selection, outer test,
 adjoint 성공을 가정한 method name, contribution/paper headline, CMHA CFD summary를
 ground truth field로 사용, closed branch의 checkpoint/threshold 재사용.

@@ -114,8 +114,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.7":
-        raise ProtocolError("The current research-state schema must be version 2.7.")
+    if protocol["schema_version"] != "2.8":
+        raise ProtocolError("The current research-state schema must be version 2.8.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -155,7 +155,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "one_conditional_problem_shortlist_before_s0a_asset_runtime_gate"
+        != "one_conditional_problem_shortlist_before_s0a_asset_component"
         or problem_selection["shortlisted_candidate"]
         != "goal_oriented_hemodynamic_segmentation"
         or problem_selection["candidate_dataset"]
@@ -163,7 +163,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["candidate_estimand"]
         != "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains"
         or problem_selection["asset_access_status"]
-        != "public_metadata_and_small_statistical_archive_audited_private_full_archive_linkage_unverified"
+        != "official_archive_integrity_verified_post_transport_failure_extracted_linkage_unopened"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -173,7 +173,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "execute_single_cmha_stage_v2_and_complete_solver_preflight_then_execute_the_single_s0a_gate_only"
+        != "execute_one_read_only_introai9_s0a_asset_component_and_early_stop_before_any_solver_v2"
         or problem_selection["audit_document"]
         != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
@@ -294,6 +294,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "s0a_config",
             "solver_runtime_preflight_config",
             "solver_runtime_preflight_status",
+            "solver_runtime_preflight_execution_record",
+            "solver_runtime_preflight_execution_record_sha256",
             "precompiled_su2_omp_release_is_s0a_eligible",
             "solver_runtime_preflight_evaluates_s0a",
             "solver_runtime_preflight_pass_authorizes",
@@ -303,7 +305,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "cmha_stage_v2_config",
             "cmha_stage_v2_config_sha256",
             "cmha_stage_v2_status",
+            "cmha_stage_v2_execution_record",
+            "cmha_stage_v2_execution_record_sha256",
             "cmha_stage_v2_evaluates_s0a",
+            "cmha_source_asset_discovery_status",
+            "cmha_source_asset_discovery_record",
+            "cmha_source_asset_discovery_record_sha256",
+            "s0a_asset_component_config",
+            "s0a_asset_component_config_sha256",
+            "s0a_asset_component_status",
+            "s0a_asset_component_pass_authorizes",
             "score",
             "maximum_score",
             "automatic_selection_threshold",
@@ -361,7 +372,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["solver_runtime_preflight_config"]
         != "configs/goal_oriented_segmentation_s0a_solver_preflight.json"
         or goal_audit["solver_runtime_preflight_status"]
-        != "preregistered_before_reverse_ad_build_and_probe"
+        != "execution_incomplete_exit_1_before_runtime_build_or_probe_no_s0a_verdict"
+        or goal_audit["solver_runtime_preflight_execution_record"]
+        != "results/goal_oriented_s0a_solver_preflight_v1_execution_20260809.json"
+        or goal_audit["solver_runtime_preflight_execution_record_sha256"]
+        != "704fedb9f3667242c1ce00e8622c2cf41708ff00ff1e8483cd1890cd9e82e0fa"
         or goal_audit["precompiled_su2_omp_release_is_s0a_eligible"] is not False
         or goal_audit["solver_runtime_preflight_evaluates_s0a"] is not False
         or goal_audit["solver_runtime_preflight_pass_authorizes"]
@@ -377,8 +392,26 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["cmha_stage_v2_config_sha256"]
         != "da2c224fc55542f9a76c62dc54dd24db83a93c7213b42173af229bc0f097fcc6"
         or goal_audit["cmha_stage_v2_status"]
-        != "preregistered_single_chunked_transport_attempt"
+        != "execution_incomplete_exit_28_before_first_verified_chunk_no_s0a_verdict"
+        or goal_audit["cmha_stage_v2_execution_record"]
+        != "results/goal_oriented_s0a_cmha_stage_v2_execution_20260809.json"
+        or goal_audit["cmha_stage_v2_execution_record_sha256"]
+        != "c284b5cf20b6e8e9ce509c2047337395c294939ad7830f1daf0af2992082223f"
         or goal_audit["cmha_stage_v2_evaluates_s0a"] is not False
+        or goal_audit["cmha_source_asset_discovery_status"]
+        != "three_of_three_official_archive_size_and_md5_match_not_s0a"
+        or goal_audit["cmha_source_asset_discovery_record"]
+        != "results/goal_oriented_s0a_cmha_source_asset_discovery_20260809.json"
+        or goal_audit["cmha_source_asset_discovery_record_sha256"]
+        != "0bdc8e5c901318ab3c46ec3f877a8f9d2c5a999279f717d3cdb5ced13fdf19b5"
+        or goal_audit["s0a_asset_component_config"]
+        != "configs/goal_oriented_segmentation_s0a_asset_component.json"
+        or goal_audit["s0a_asset_component_config_sha256"]
+        != "f951d68b42e2590fe57d0739f2b16a72893347c1feadc9ddab631f40ffa633e7"
+        or goal_audit["s0a_asset_component_status"]
+        != "preregistered_before_csv_identifier_nifti_or_stl_access"
+        or goal_audit["s0a_asset_component_pass_authorizes"]
+        != "register_one_distinct_prospective_no_runtime_network_solver_preflight_v2_only"
         or goal_audit["score"] != 27.0
         or goal_audit["maximum_score"] != 40.0
         or goal_audit["automatic_selection_threshold"] != 32.0
@@ -390,7 +423,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["direct_gap"]
         != "cta_multi_functional_signed_adjoint_pullback_with_remainder_control_and_held_out_functional_superiority"
         or goal_audit["required_next_gate"]
-        != "s0a_asset_linkage_and_solver_runtime_integrity"
+        != "s0a_asset_component_then_solver_runtime_only_if_asset_passes"
         or goal_audit["s0a_pass_authorizes"]
         != "register_method_free_s0b_functional_non_equivalence_and_linearization_audit_only"
         or goal_audit["s0a_failure_action"]
@@ -398,7 +431,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         raise ProtocolError(
             "The goal-oriented candidate must remain below automatic selection and "
-            "authorize only the solver preflight and method-free S0a audit."
+            "authorize only the one-shot asset component before any new solver preflight."
         )
     checks.append("conditional problem shortlist and S0a-only boundary")
 

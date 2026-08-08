@@ -12,7 +12,9 @@ substitution screen, RSNA supervision-semantics red team으로 그 lesion-set
 후보를 기각한 상태, 그리고 2026-08-09 goal-oriented hemodynamic segmentation
 cold audit와 S0a preregistration, official precompiled SU2의 reverse-AD
 negative control 및 별도 solver preflight 등록, CMHA staging v1
-execution-incomplete와 one-change chunked v2 등록, inverse Navier--Stokes
+execution-incomplete와 one-change chunked v2 등록, 이어진 v2/solver-preflight-v1
+execution-incomplete 보존, `introai9` 기존 CMHA archive 3/3 size·MD5 discovery와
+CSV/identifier/NIfTI/STL access 전 asset-component early-stop 등록, inverse Navier--Stokes
 shape-gradient segmentation과 task-based quantitative segmentation 평가를
 추가 direct prior로 올린 novelty red team을 반영했다.
 
@@ -38,8 +40,11 @@ shape-gradient segmentation과 task-based quantitative segmentation 평가를
   은 exact SU2/TestCases commit과 official GHCR linux/amd64 manifest에서
   normal+reverse-AD runtime을 CPU/PBS로 build하고, fresh incompressible
   forward 뒤 discrete adjoint와 finite nonzero surface sensitivity를 확인한다.
-  Preflight도 medical asset, model, GPU, outer test를 읽지 않으며 pass는 exact
-  runtime pin 뒤 단 한 번의 S0a 실행만 허용한다.
+  Preflight도 medical asset, model, GPU, outer test를 읽지 않는다. Exact
+  `64284eb`의 v1 실행은 official build SIF와 SU2/11 submodule HEAD를 남겼지만
+  TestCases/build/probe 전에 exit 1이었다. PBS stdout은 materialize되지 않아
+  exact shell cause는 unresolved이며 runtime/sensitivity와 S0a verdict는 없다.
+  같은 v1 source는 재실행하지 않는다.
 - Exact public `b6b6175`의 CMHA staging v1 job `115107`은 4 CPU/16 GB,
   GPU 없이 20분 37초 뒤 exit 28이었다. Verified archive와 retained payload는
   0 byte, manifest는 0 byte, raw scheduler stdout은 materialize되지 않았다.
@@ -48,7 +53,21 @@ shape-gradient segmentation과 task-based quantitative segmentation 평가를
   range GET은 HTTP 206이었으므로, official ID/size/MD5·extraction·gate boundary는
   그대로 두고 monolithic GET만 64 MiB range chunk로 바꾼
   `configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json`을 한 PBS attempt로
-  등록했다. V2도 staging-only이며 실패 시 같은 source를 재제출하지 않는다.
+  등록했다. Exact `5cd4aa2`의 v2도 첫 verified chunk 전에 exit 28로 끝났고
+  같은 source를 재제출하지 않는다. `results/goal_oriented_s0a_cmha_stage_v2_execution_20260809.json`
+  은 chunk/manifest 0 byte와 S0a 미평가를 보존한다.
+- 이후 `introai9`의 기존 CMHA source asset을 읽기 전용으로 찾아 세 archive의
+  15,557,345,067 byte와 official MD5가 3/3 일치함을 확인했다. 이 login-node
+  low-priority checksum discovery는 CSV row, identifier, NIfTI/STL header,
+  voxel/field를 열지 않았고 S0a check pass로 세지 않는다. 추가 Figshare
+  transport나 raw cross-server transfer는 하지 않는다.
+- `configs/goal_oriented_segmentation_s0a_asset_component.json`은 위 discovery 뒤
+  CSV/identifier/NIfTI/STL access 전에 고정한 CPU/PBS early-stop overlay다.
+  Exact archive, five CSV, 99/105/44/6 unit, non-positional exact-ID linkage,
+  NIfTI header와 STL finite/unit/frame, aggregate privacy를 9/9로 검사한다.
+  하나라도 scientific fail이면 후보를 닫고 solver v2를 만들지 않는다. 9/9도
+  S0a pass나 model 권한이 아니라 no-runtime-network solver-preflight-v2 등록만
+  허용한다. Execution-incomplete면 같은 public source를 반복하지 않는다.
 - Automatic segmentation→CFD, Image2Flow의 joint mesh/field CFD loss, IAVS의
   CFD Applicability Score, clDice/cbDice, segmentation-induced flow variability,
   inverse Navier--Stokes shape-gradient boundary segmentation, task-based
@@ -76,8 +95,9 @@ shape-gradient segmentation과 task-based quantitative segmentation 평가를
   되돌리지 않는다. 이들은 향후 fully supervised control 또는 vascular
   anatomy pretraining에 쓸 수 있지만, 기각된 annotation-selection estimand의
   대체 근거가 아니다.
-- 다음 허용 작업은 **CMHA staging과 solver preflight 완료 후 단 한 번의 S0a
-  asset/runtime CPU PBS 실행**뿐이다.
+- 다음 허용 작업은 **`introai9`에서 one-shot S0a asset component CPU/PBS
+  실행**뿐이다. 통과 전 solver v2, 통과/실패와 무관하게 model/GPU/outer test는
+  열지 않는다.
   S0a/S0b 전에는 architecture, model training, GPU, outer test와 submission
   claim을 만들지 않는다.
 - Vessel graph/GNN, vessel-first nnU-Net, anatomy-masked pooling, location

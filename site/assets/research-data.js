@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · conditional problem shortlist 1 before S0a · no method/architecture/GPU · not submission-ready",
-    requirement: "S0a asset/runtime → S0b functional adequacy → strong baselines → bounded validation development → fresh outer test",
+    status: "Target locked · one-shot S0a asset component next · no method/architecture/GPU · not submission-ready",
+    requirement: "S0a asset early-stop → solver runtime only if 9/9 → S0b functional adequacy → strong baselines → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
@@ -169,7 +169,7 @@ window.AURORA_DATA = Object.freeze({
       id: "S0a",
       title: "Are CMHA linkage and solver gradients auditable?",
       copy: "99 patients/105 lesions must map CTA, parent+aneurysm STL, aneurysm STL and tables by exact identifier. The official direct-only SU2 binary was rejected after it refused discrete adjoint. A separately built and pinned normal+reverse-AD runtime must pass a real incompressible forward/adjoint probe. All eleven S0a checks are still required.",
-      state: "CMHA staging v1 incomplete/no verdict · chunked v2 and reverse-AD preflight registered · S0a not evaluated",
+      state: "Staging v1/v2 and solver preflight v1 incomplete/no verdict · archive integrity 3/3 discovered · asset component preregistered · S0a not evaluated",
       blocking: true
     },
     {
@@ -288,7 +288,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "CMHA",
       role: "conditional primary for S0a image–surface linkage and standardized-functional task audit",
-      provenance: "99 patients/105 MCA lesions + 44 controls · 6 multi-lesion patients · NIfTI + parent/aneurysm STL + aneurysm STL · CC BY 4.0 · exact-ID linkage/solver pending"
+      provenance: "99 patients/105 MCA lesions + 44 controls · 6 multi-lesion patients · three archive size/MD5 3/3 match · CSV/identifier/NIfTI/STL unopened · exact-ID linkage/solver pending"
     },
     {
       name: "OpenNeuro ds005096",
@@ -307,6 +307,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "execution",
+      title: "Transport and solver v1 failures are preserved; source-server asset audit replaces retries",
+      copy: "Chunked CMHA staging v2 exited 28 before its first verified chunk; solver preflight v1 exited 1 after the official build SIF and exact SU2/submodule materialization but before TestCases, build or probe. Neither evaluated S0a, and neither same source will be rerun. A read-only search then found the existing CMHA source archives on introai9: all three official byte sizes and MD5 values match, while CSV rows, identifiers, NIfTI/STL headers, voxels and fields remain unopened. We therefore stop Figshare transport and raw cross-server transfer. A pure-standard-library, one-shot CPU/PBS asset component freezes nine exact archive/CSV/unit/identifier/NIfTI-STL/privacy checks. Any scientific failure closes the candidate before solver v2; 9/9 only authorizes registration of one no-runtime-network solver preflight v2, not S0a, a model, GPU or outer test.",
+      files: ["results/goal_oriented_s0a_cmha_stage_v2_execution_20260809.json", "results/goal_oriented_s0a_solver_preflight_v1_execution_20260809.json", "results/goal_oriented_s0a_cmha_source_asset_discovery_20260809.json", "configs/goal_oriented_segmentation_s0a_asset_component.json", "src/aurora/goal_oriented_s0a_asset.py", "cluster/pbs_goal_oriented_s0a_asset_component.pbs", "tests/test_goal_oriented_s0a_asset.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/goal-oriented-segmentation-audit-2026-08-09.md", "docs/server-execution.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", ".github/workflows/quality.yml", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "research",
@@ -332,7 +339,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.09",
       category: "implementation",
       title: "CMHA staging is separated from the S0a verdict",
-      copy: "Read-only searches found no staged CMHA archive in the approved introai9 source root or junjinyong home. A CPU/PBS wrapper now pins the three official Figshare file IDs, byte sizes and MD5 values, requires an exact clean public checkout, resumes partial downloads, and extracts only after checksum verification. It records gate_evaluated=false and performs no identifier mapping, solver probe, model, GPU or outer-test access.",
+      copy: "An initial search limited to the then-assumed project roots found no staged CMHA archive. The broader source-root discovery recorded above later superseded that location inference. This historical entry explains why staging v1 was registered: its CPU/PBS wrapper pinned official Figshare IDs, sizes and MD5 values and kept identifier mapping, solver, model, GPU and outer test outside the transfer step.",
       files: ["cluster/pbs_goal_oriented_s0a_stage_cmha.pbs", "tests/test_goal_oriented_s0a.py", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
     },
     {

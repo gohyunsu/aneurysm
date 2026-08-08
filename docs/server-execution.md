@@ -38,8 +38,10 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
 
 ### CMHA private staging boundary
 
-- Windows SSH config의 `SN_introai9_39` alias로 승인된 source root를
-  읽기 전용 검색했으나 CMHA archive 또는 matching directory는 없었다.
+- 최초에는 Windows SSH config의 `SN_introai9_39` alias에서 당시 가정한
+  project root만 읽기 전용 검색해 CMHA archive를 찾지 못했다. 이 제한된
+  위치 추론은 이후 더 넓은 source-root discovery에서 세 official archive를
+  찾고 size/MD5 3/3을 확인하면서 폐기됐다.
   `junjinyong` home에도 official archive와 table은 없었다.
 - `junjinyong`에는 `curl`, `7z`, checksum 도구와 약 4.1 TB 여유가 있고,
   host SU2/OpenFOAM은 없다. 기존 held job 두 개는 변경하지 않았다.
@@ -62,6 +64,19 @@ GET은 HTTP 206이었고 8 MiB는 4.999초였다. 이를 근거로만 monolithic
 public source당 PBS attempt를 1회로 제한한다. Dataset contract, extraction,
 identifier/unit/solver/model/GPU/outer-test boundary는 v1과 같다.
 
+**V2 execution:** exact `5cd4aa2…`의 one-shot job은 first verified chunk 전에
+exit 28이었다. Chunk/archive manifest 0 byte, mapping 0, S0a 미평가이며 raw
+stdout은 PBS post-job processing 뒤 materialize되지 않았다. 같은 source와
+새 v3 Figshare transport를 제출하지 않는다.
+
+**Source-server asset overlay:** `introai9`의 기존 세 archive는 low-priority
+read-only MD5 discovery에서 official size/hash 3/3이 일치했다. CSV, identifier,
+NIfTI/STL header와 voxel/field는 열지 않았으므로 S0a pass가 아니다.
+`configs/goal_oriented_segmentation_s0a_asset_component.json`과
+`cluster/pbs_goal_oriented_s0a_asset_component.pbs`는 `coss_agpu` 4 CPU/16 GB,
+GPU 0으로 exact-ID와 header/mesh만 one-shot 감사한다. Raw/extracted/code는
+read-only env path로 받고 output만 writable하다. 9/9 전 solver v2는 없다.
+
 ### SU2 reverse-AD runtime preflight boundary
 
 - Official SU2 8.5.0 OMP release의 SHA-256을 확인하고 local temporary
@@ -79,6 +94,10 @@ identifier/unit/solver/model/GPU/outer-test boundary는 v1과 같다.
 - 이는 S0a gate가 아니다. Medical asset, model, GPU와 outer test access는
   모두 0이며, 성공해도 runtime SHA pin과 단일 S0a 실행만 허용한다. 실패
   source version은 현장에서 dependency/flag를 고쳐 재실행하지 않는다.
+- Exact `64284eb…`의 v1 실행은 official build SIF와 exact source/submodule
+  materialization 뒤 exit 1이었다. TestCases/build/runtime/probe/sensitivity는
+  남지 않았고 raw stdout도 materialize되지 않았다. 같은 v1을 반복하지 않으며
+  asset component 9/9 뒤에만 no-runtime-network v2를 별도 등록할 수 있다.
 
 ## 2026-08-08 · Cross-protocol 4D-flow I0a
 

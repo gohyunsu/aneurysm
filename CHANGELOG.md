@@ -4,6 +4,46 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Preserve two pre-gate failures and freeze source-server asset early stop
+
+- Exact `5cd4aa2…`의 chunked CMHA staging v2는 79초 뒤 exit 28이었다.
+  First verified chunk, archive/extraction, identifier mapping과 retained payload는
+  모두 0이고 S0a는 `not_evaluated`다. Raw stdout이 PBS post-job processing 뒤
+  materialize되지 않아 exact network cause를 단정하지 않는다. 같은 v2와 새
+  v3 Figshare transport를 실행하지 않는다.
+- Exact `64284eb…`의 solver preflight v1은 7,519초 뒤 exit 1이었다. Official
+  build SIF SHA `c6afff1d…`, SU2 exact main/COPYING/config와 11/11 submodule
+  HEAD는 확인했지만 TestCases checkout, solver install, runtime SIF,
+  forward/adjoint probe와 sensitivity는 없다. Raw stdout 부재로 exact shell
+  cause는 unresolved이며 S0a가 아니다. 같은 v1을 재실행하지 않는다.
+- 규약대로 `introai9`의 기존 source asset을 읽기 전용으로 찾아 세 official
+  CMHA archive 총 15,557,345,067 byte와 MD5가 3/3 일치함을 확인했다. 이
+  low-priority login-node discovery는 CSV row, identifier, NIfTI/STL header,
+  voxel과 field를 열지 않았고 S0a check pass로 세지 않는다. 추가 다운로드나
+  raw cross-server transfer를 중단한다.
+- `configs/goal_oriented_segmentation_s0a_asset_component.json`은 위 discovery
+  뒤 medical header access 전에 고정한 one-shot CPU/PBS early-stop overlay다.
+  Pure-standard-library runner가 exact archive/CSV, 99/105/44/6 unit,
+  non-positional exact-ID sets, 105 CTA/STL triplet, qform/sform·mm scale·fixed
+  LPS→RAS containment와 privacy/no-model boundary를 9/9로 검사한다.
+- Scientific fail이면 현재 후보를 닫고 solver v2를 만들지 않는다. 9/9도 S0a
+  pass가 아니라 한 번의 no-runtime-network solver-preflight-v2 등록만
+  허용한다. Method, architecture, GPU, outer test와 paper identity는 계속
+  닫혀 있다. 중앙 schema를 `2.8`로 올렸다.
+- 영향 파일: `results/goal_oriented_s0a_cmha_stage_v2_execution_20260809.json`,
+  `results/goal_oriented_s0a_solver_preflight_v1_execution_20260809.json`,
+  `results/goal_oriented_s0a_cmha_source_asset_discovery_20260809.json`,
+  `configs/goal_oriented_segmentation_s0a_asset_component.json`,
+  `src/aurora/goal_oriented_s0a_asset.py`,
+  `cluster/pbs_goal_oriented_s0a_asset_component.pbs`,
+  `tests/test_goal_oriented_s0a_asset.py`, `AGENTS.md`, `README.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/goal-oriented-segmentation-audit-2026-08-09.md`,
+  `docs/server-execution.md`, `results/README.md`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `.github/workflows/quality.yml`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Direct-prior red team narrows the conditional gap again
 
 - [JFM 2022 inverse Navier--Stokes study](https://doi.org/10.1017/jfm.2022.503)는
