@@ -14,6 +14,13 @@
 velocity-only 3D 실험, five-seed outer-test와 kill date는
 [`docs/isbi-2027-plan.md`](docs/isbi-2027-plan.md)에 고정합니다.
 
+현재 실행 직전 단계는
+[`ISBI V0 contract`](configs/aneumo_isbi_v0.json)입니다. V0는 모델을
+학습하거나 validation/test field를 읽지 않고, 64-case compact cache의
+checksum·family split·scalar inflow design law와 기존 train-only scaling
+evidence만 감사합니다. 통과해도 V1 구현 smoke만 열리며 headline이나
+outer test는 열리지 않습니다.
+
 ## 현재 모델은 GNN인가?
 
 **현재 실행된 exact/nonlinear 모델은 GNN이 아닙니다.** Context MLP와

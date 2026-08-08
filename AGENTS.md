@@ -2,9 +2,8 @@
 
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
-공개 1차 문헌을 재검토하여 작성했고 2026-08-06 KST post-N1c
-density-objective·decision-task audit 완료와 missing-only M0
-mechanism-gate 사전등록, ISBI 2027 target lock 상태를 반영했다.
+공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V0
+asset/task-translation audit 사전등록 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -20,6 +19,10 @@ mechanism-gate 사전등록, ISBI 2027 target lock 상태를 반영했다.
 - 실행된 exact/nonlinear architecture는 MLP lifted operator다. GNN+token+
   continuous-query 구조는 3D target specification이며 아직 구현·검증된
   현재 모델이 아니다.
+- 현재 다음 실행은 `configs/aneumo_isbi_v0.json`의 metadata-only V0다.
+  64-case cache, family split, scalar mass-flow design law와 기존 train-only
+  scaling aggregate를 8개 check로 감사한다. V0는 field array를 새로 읽지
+  않으며 통과해도 64-case V1 implementation smoke만 허용한다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
@@ -543,9 +546,13 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 
 - private 운영 가이드는 Git에서 제외된 `SERVER_GUIDE.md`다. endpoint,
   password, private key, 내부 데이터 절대경로를 공개 문서에 옮기지 않는다.
-- `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사한다.
-- GPU 실험은 `junjinyong`의 PBS scheduler allocation에서 실행한다. login
-  node에서 GPU 학습이나 `nvidia-smi`를 실행하지 않는다.
+- `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사하고,
+  현재 사용자 지시에 따른 GPU 실행 목표이기도 하다. 2026-08-08 현재 local
+  alias의 DNS 해석이 실패했으므로 PBS queue·ACL·GPU smoke를 재확인하기 전
+  job을 제출하지 않는다.
+- 이전 실행 계정에서 완료된 compact-cache 재생성은 byte-range/CRC와
+  등록 SHA가 일치함을 확인하는 asset audit일 뿐 GPU 결과가 아니다. 어느
+  서버에서도 login node에서 GPU 학습이나 `nvidia-smi`를 실행하지 않는다.
 - pinned Singularity image를 사용하고 code/data는 read-only, output만
   writable로 bind한다.
 - run은 commit, command, environment, config, dataset checksum, status,

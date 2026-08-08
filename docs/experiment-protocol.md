@@ -1,6 +1,6 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.1-draft · 2026-08-06
+버전: 2.2-draft · 2026-08-08
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -27,6 +27,20 @@
 M0는 이 venue gate를 통과시키지 않는다. M0가 통과해도 scalar-inflow
 3D task의 data law와 학습 target에 맞춘 별도 prospective translation
 contract가 필요하다. M0가 실패하면 같은 mechanism을 국소 수정하지 않는다.
+
+### V0 · Aneumo task translation before model code
+
+`configs/aneumo_isbi_v0.json`을 결과 전에 고정한다. V0는 모델·checkpoint를
+사용하지 않고 compact-cache field array도 읽지 않는다. Cache SHA,
+staging/scaling dependency SHA, 32-family 20/6/6 split, 8개 mass flow,
+64×8×4,096×4 field **shape metadata**, train-only velocity scaling residual,
+design-law semantics와 unsupported endpoint 제외를 8개 all-check rule로
+검사한다. Validation/test field read는 금지한다.
+
+Pass는 V1 64-case implementation smoke만 허용한다. Model selection,
+outer-test access, headline, patient-specific inflow 해석과 ISBI submission은
+모두 false다. Failure 뒤 threshold를 고치지 않고 이 asset의 missing-inflow
+distribution branch를 중단해 새 dataset/task identity를 별도로 검토한다.
 
 ## 1. 검증할 가설
 

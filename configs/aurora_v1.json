@@ -3,8 +3,8 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_m0_mechanism_preregistered_unrun_method_unselected",
-    "as_of": "2026-08-06",
+    "status": "failed_n1c_isbi_v0_preregistered_unrun_method_unselected",
+    "as_of": "2026-08-08",
     "clinical_use": false
   },
   "venue": {
@@ -21,6 +21,9 @@
     "required_headline_domain": "irregular_3d_aneurysm_velocity",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
+    "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
+    "v0_status": "preregistered_unrun",
+    "v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
     "plan": "docs/isbi-2027-plan.md"
   },
   "task": {
@@ -36,7 +39,7 @@
     ]
   },
   "evidence_snapshot": {
-    "as_of": "2026-08-06",
+    "as_of": "2026-08-08",
     "readiness": "not_accept_ready",
     "direct_prior_art_threats": [
       "boundary_indexed_operator_non_identifiability",
@@ -71,6 +74,11 @@
       "aneumo_pressure_response_eligible": false,
       "aneumo_velocity_only_protocol_registration_authorized": true,
       "aneumo_confirmatory_3d_headline_authorized": false,
+      "aneumo_isbi_v0_config": "configs/aneumo_isbi_v0.json",
+      "aneumo_isbi_v0_status": "preregistered_unrun",
+      "aneumo_isbi_v0_reads_field_arrays": false,
+      "aneumo_missing_inflow_law": "discrete_uniform_known_design_law_not_patient_physiology",
+      "aneumo_v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
       "aneug_flow_bc_variation": false,
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,

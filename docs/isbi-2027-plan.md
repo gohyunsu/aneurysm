@@ -1,7 +1,8 @@
 # ISBI 2027 submission plan
 
 최종 검토일: 2026-08-06 KST  
-상태: **target locked · not submission-ready · M0 metric unrun**
+상태: **target locked · not submission-ready · V0 preregistered/unrun · M0
+metric unrun**
 
 ## 1. Venue contract
 
@@ -96,7 +97,9 @@ M0가 통과하더라도 아래 3D task-translation audit에서 estimand가 일�
 
 ### V0 · Venue/task translation audit
 
-Metric 학습 전에 확인한다.
+실행 계약은 `configs/aneumo_isbi_v0.json`이다. 모델 학습 전에 compact
+cache와 기존 공개 train-only scaling aggregate만 감사하며, 새 field
+array는 어느 split에서도 읽지 않는다.
 
 - 3D data에서 scalar inflow와 velocity functional의 dependence가
   strong physical-scaling baseline 뒤에도 남는가?
@@ -109,6 +112,14 @@ Metric 학습 전에 확인한다.
 하나라도 실패하면 missing-inflow distribution claim을 버리고 full-condition
 velocity reconstruction paper로 자동 축소하지 않는다. 새 identity를
 별도로 검토한다.
+
+고정 estimand는 8개 mass-flow의 **discrete uniform experimental design
+law** 아래 internal-point 3-component velocity distribution이다. 이를
+patient physiology나 측정 분포라 부르지 않는다. Compact cache에 boundary
+marker·surface normal·integration mesh가 없으므로 pressure, WSS/OSI와
+mass-conservation endpoint는 실패 항목이 아니라 범위 밖이다. V0의 8개
+check가 모두 통과해도 64-case V1 implementation smoke만 허용하며 outer
+test, headline result와 submission은 계속 닫힌다.
 
 ### V1 · 3D development eligibility
 

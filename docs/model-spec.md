@@ -1,6 +1,6 @@
 # AURORA v2 모델 명세
 
-상태: ISBI 2027 target locked · N1c failed · post-N1c audits completed ·
+상태: ISBI 2027 target locked · N1c failed · ISBI V0 preregistered/unrun ·
 missing task retained · M0 candidate-measurement–solution pullback
 preregistered/unrun · sparse-2 adaptive task removed · 3D GNN unimplemented ·
 method unselected
@@ -15,6 +15,14 @@ operator는 context MLP + boundary token + lifted decoder이며 GNN이 아니다
 핵심은 GNN이 아니라 full·partial·missing boundary observation에서 나온
 예측 분포가 하나의 joint model의 조건부·주변 분포로 일관되게 만드는
 것이다.
+
+V0는 architecture 실험이 아니다. `configs/aneumo_isbi_v0.json`이 compact
+cache의 metadata와 기존 train-only scaling aggregate만 검사해, 계획된
+3D 모델의 입력을 selected internal xyz와 scalar mass flow, 출력을
+3-component velocity로 제한한다. Missing inflow는 registered eight-flow
+design law에 대한 marginalization이다. Mesh marker·surface normal이 없는
+상태에서 surface physics head를 꾸며 넣지 않으며, V0 통과 전에는 GNN을
+구현하지 않는다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

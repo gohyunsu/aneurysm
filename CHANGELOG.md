@@ -4,6 +4,32 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · ISBI V0 fixes the 3D task before model implementation
+
+### Prospective asset and estimand gate
+
+- `configs/aneumo_isbi_v0.json`에 compact-cache와 dependency SHA,
+  32-family 20/6/6 split, 8개 scalar mass flow, 64×8×4,096×4 tensor
+  metadata와 기존 train-only scaling aggregate를 고정했다.
+- V0는 새 field array를 읽지 않는 8-check metadata/task audit이다. Missing
+  inflow는 8개 조건의 discrete-uniform experimental design law이며 patient
+  physiology나 실제 measurement distribution으로 표현하지 않는다.
+- Compact cache에는 boundary marker, surface normal, verified integration
+  mesh가 없으므로 pressure, WSS/OSI와 mass-conservation endpoint를
+  제외한다. Pressure는 기존 scaling gate도 실패했다.
+- 모든 check가 통과해도 64-case V1 implementation smoke만 허용한다.
+  Model novelty, outer test, headline result와 ISBI submission은 계속 닫는다.
+  실패하면 threshold나 schema를 국소 수정하지 않고 이 asset의
+  missing-inflow distribution branch를 중단한다.
+
+### Implementation and synchronization
+
+- Strict config loader, whole-cache/dependency hash, HDF5 metadata, family
+  split와 공개 scaling aggregate 검증기를 추가했다.
+- AGENTS, README, research/model/protocol 문서, executable protocol validator,
+  사이트 evidence/status와 changelog가 동일한 V0 경계를 말하도록
+  동기화했다.
+
 ## 2026-08-06 · ISBI 2027 target lock makes 3D velocity evidence mandatory
 
 ### Venue and claim boundary

@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · not submission-ready",
+    status: "Target locked · V0 preregistered · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -98,7 +98,7 @@ window.AURORA_DATA = Object.freeze({
     ["Temporal model", "Autoregressive", "Autoregressive transformer", "Unsteady PINN", "Secondary one-shot choice after D0"],
     ["Primary fidelity", "Velocity rollout RMSE", "Field · WSS · OSI error", "Descriptor / status score", "Coherence + solution-functional risk; N1c failed"],
     ["Downstream task", "Not validated", "Risk metrics descriptive", "Late-fusion status", "Secondary only; current signal negative"],
-    ["Primary gap", "Partial/missing condition", "Mask coherence", "Condition uncertainty", "Candidate measurement–solution joint sufficiency; M0 unrun"]
+    ["Primary gap", "Partial/missing condition", "Mask coherence", "Condition uncertainty", "3D task translation V0 first; method unselected"]
   ],
   gates: [
     {
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "ISBI headline에는 irregular-3D aneurysm velocity outer test가 필수다. Controlled/nonlinear PDE만으로 biomedical-imaging contribution을 주장하지 않는다.",
-      state: "Blocking ISBI submission",
+      copy: "ISBI headline에는 irregular-3D aneurysm velocity outer test가 필수다. 먼저 V0가 cache·family split·scalar-inflow design law·velocity-only scope를 field-array read 없이 감사한다. 통과해도 64-case 구현 smoke만 열린다.",
+      state: "V0 preregistered/unrun · blocking ISBI submission",
       blocking: true
     }
   ],
@@ -141,7 +141,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "32 base family × 2 deformation staged · 64 cases/512 members verified"
+      provenance: "64 cases/512 members SHA verified · V0 metadata-only audit preregistered"
     },
     {
       name: "AneuG-Flow",
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "protocol",
+      title: "V0 freezes the 3D asset and missing-inflow estimand before model code",
+      copy: "64-case Aneumo cache의 exact SHA, 32-family 20/6/6 split, 8개 mass-flow design law, velocity tensor metadata와 기존 train-only scaling aggregate를 8개 all-check gate로 고정했다. V0는 새 field array를 읽지 않으며 missing law를 patient physiology로 해석하지 않는다. Boundary marker와 surface normal이 없어 pressure, WSS/OSI와 mass-conservation endpoint를 제외한다. Pass도 V1 implementation smoke만 허용하고 outer test, headline과 submission은 닫힌다.",
+      files: ["configs/aneumo_isbi_v0.json", "src/aurora/aneumo_isbi_v0.py", "experiments/run_aneumo_isbi_v0.py", "tests/test_aneumo_isbi_v0.py", "AGENTS.md", "README.md", "docs/isbi-2027-plan.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.06",
       category: "direction",

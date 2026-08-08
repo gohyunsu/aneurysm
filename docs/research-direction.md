@@ -1,11 +1,12 @@
 # AURORA 연구 방향
 
-최종 검토일: 2026-08-06 KST
+최종 검토일: 2026-08-08 KST
 
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
-post-N1c audits completed · M0 missing-only mechanism preregistered/unrun ·
-method unselected · 3D headline blocked
+post-N1c audits completed · ISBI V0 asset/task audit preregistered/unrun ·
+M0 missing-only mechanism preregistered/unrun · method unselected · 3D
+headline blocked
 
 ## 0. 제출 목표와 scope
 
@@ -20,6 +21,15 @@ negative nonlinear evidence와 계획만 있는 3D GNN을 제출 근거로 보�
 Aneumo 또는 독립 irregular-3D data의 full/missing inflow velocity
 reconstruction, calibration, same-geometry response여야 한다. Pressure,
 WSS/OSI, transient, rupture risk와 clinical utility는 제외한다.
+
+3D로 바로 넘어가지 않는다. `configs/aneumo_isbi_v0.json`은 64-case cache의
+SHA, 32-family 20/6/6 split, 8개 scalar mass-flow mapping, velocity tensor
+metadata와 이미 공개된 train-only physical-scaling aggregate를 8개
+all-check gate로 고정한다. V0 자체는 field array를 읽지 않는다. Missing
+law는 8개 조건의 discrete-uniform **design law**이며 patient physiology가
+아니다. Boundary marker와 surface normal이 없으므로 WSS/OSI·mass flux는
+추가하지 않는다. 통과해도 V1 implementation smoke만 열리고 method,
+outer test와 논문 claim은 열리지 않는다.
 
 ## 1. 현재 판정
 

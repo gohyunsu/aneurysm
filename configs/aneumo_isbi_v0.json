@@ -1,0 +1,102 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v0.v1",
+  "experiment_id": "aneumo_isbi_v0_asset_task_translation_audit",
+  "status": "preregistered_before_v0_result",
+  "as_of": "2026-08-08",
+  "purpose": "Determine whether the frozen Aneumo development cache can identify the ISBI missing-scalar-inflow velocity estimand before any 3D model is trained.",
+  "source": {
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+    "scaling_audit_result": "results/aneumo_scaling_audit_20260803.json",
+    "scaling_audit_result_sha256": "d1b8bfba9b904264d4e495d98b833a6f639b6438869e854a7c07ab88269562ca",
+    "scaling_audit_config_sha256": "3a8b94e7ca283771afcdd053202acad48e8e557fb2fbaef90c16297a54d8fdd7",
+    "field_access": {
+      "allowed": "previous_train_only_scaling_aggregate",
+      "forbid_validation_and_test_field_reads": true,
+      "v0_reads_field_arrays": false
+    }
+  },
+  "expected_asset": {
+    "dataset": "Aneumo",
+    "license": "CC-BY-NC-ND-4.0",
+    "redistributable": false,
+    "base_families": 32,
+    "cases": 64,
+    "conditions": 8,
+    "nodes_per_case": 4096,
+    "archives": 20,
+    "members": 512,
+    "array_columns": [
+      "x_m",
+      "y_m",
+      "z_m",
+      "pressure",
+      "u_m_s",
+      "v_m_s",
+      "w_m_s"
+    ],
+    "mass_flows_kg_s": [
+      0.001,
+      0.0015,
+      0.002,
+      0.0025,
+      0.003,
+      0.0035,
+      0.00375,
+      0.004
+    ],
+    "split_unit": "aneux_base_family",
+    "split_family_counts": {
+      "train": 20,
+      "validation": 6,
+      "test": 6
+    }
+  },
+  "estimand": {
+    "observed_condition": "scalar_steady_mass_flow_kg_s",
+    "missing_condition_law": "discrete_uniform_over_eight_registered_mass_flows",
+    "law_is_known_experimental_design": true,
+    "law_is_patient_population_physiology": false,
+    "primary_output": "three_component_velocity_at_selected_internal_nodes",
+    "primary_uncertainty": "design_law_inflow_induced_velocity_distribution",
+    "pressure_included": false,
+    "wss_osi_or_surface_functionals_included": false,
+    "mass_conservation_endpoint_included": false,
+    "reason_for_exclusions": "The compact release contract has internal xyz, pressure, and velocity samples but no boundary markers, surface normals, or verified inlet/outlet integration mesh. Pressure also failed the frozen train-only physical-scaling gate."
+  },
+  "nontriviality_evidence": {
+    "source": "frozen_train_family_physical_scaling_audit",
+    "required_decision": "channel_scoped_learning_only",
+    "required_eligible_channels": [
+      "velocity"
+    ],
+    "minimum_velocity_tuned_power_residual_ci95_lower": 0.15,
+    "expected_velocity_tuned_power_residual_ci95_lower": 0.20013078657046568,
+    "pressure_must_remain_ineligible": true,
+    "interpretation": "A same-case anchor field with a train-tuned global flow power still leaves nontrivial velocity response. This establishes task variation, not learned superiority or novelty."
+  },
+  "gate": {
+    "rule": "all_registered_checks",
+    "checks": [
+      "cache_and_dependency_integrity",
+      "family_disjoint_split_integrity",
+      "scalar_mass_flow_contract",
+      "velocity_tensor_metadata_contract",
+      "no_validation_or_test_field_access",
+      "velocity_response_nontrivial_beyond_global_power",
+      "missing_condition_law_semantically_identified",
+      "unsupported_surface_and_pressure_endpoints_excluded"
+    ],
+    "pass_authorizes": "v1_64_case_implementation_smoke_only",
+    "pass_does_not_authorize": [
+      "model_novelty",
+      "headline_result",
+      "outer_test_access",
+      "isbi_submission",
+      "patient_specific_inflow_claim"
+    ],
+    "failure_action": "stop_missing_inflow_distribution_claim_on_this_asset_and_reassess_the_dataset_or_full_condition_response_task_without_local_threshold_repair",
+    "local_repair_allowed": false
+  }
+}

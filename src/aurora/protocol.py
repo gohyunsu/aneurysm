@@ -127,6 +127,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "required_headline_domain",
             "development_cache_is_confirmatory",
             "m0_alone_may_authorize_submission",
+            "v0_task_audit_config",
+            "v0_status",
+            "v0_pass_authorizes",
             "plan",
         ],
         "venue",
@@ -148,6 +151,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["required_headline_domain"] != "irregular_3d_aneurysm_velocity"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
+        or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
+        or venue["v0_status"] != "preregistered_unrun"
+        or venue["v0_pass_authorizes"]
+        != "v1_64_case_implementation_smoke_only"
         or venue["plan"] != "docs/isbi-2027-plan.md"
     ):
         raise ProtocolError(
