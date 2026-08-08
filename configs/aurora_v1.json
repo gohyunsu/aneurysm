@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_v1_failed_v1a_underfit_attributed_v1b_v1c_v1d_asset_gates_passed_v1e_known_condition_baseline_registered_method_unselected",
+    "status": "failed_n1c_v1_failed_v1a_underfit_attributed_v1b_v1c_v1d_asset_gates_passed_v1e_failed_current_aneumo_3d_line_stopped_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -61,7 +61,11 @@
     "v1d_pass_authorizes": "register_boundary_aware_known_condition_baseline_protocol_only",
     "v1e_known_condition_config": "configs/aneumo_isbi_v1e_known_condition_baseline.json",
     "v1e_config_sha256": "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19",
-    "v1e_status": "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint",
+    "v1e_status": "completed_failed_development_known_condition_qualification",
+    "v1e_result": "results/aneumo_isbi_v1e_known_condition_baseline_20260808.json",
+    "v1e_result_sha256": "63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e",
+    "v1e_gate": "6_of_9_passed",
+    "v1e_failure_action": "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair",
     "v1e_pass_authorizes": "register_boundary_aware_scalar_missing_inflow_development_protocol_only",
     "v1_test_access": false,
     "plan": "docs/isbi-2027-plan.md"
@@ -166,7 +170,11 @@
       "aneumo_isbi_v1d_pass_authorizes": "register_boundary_aware_known_condition_baseline_protocol_only",
       "aneumo_isbi_v1e_known_condition_config": "configs/aneumo_isbi_v1e_known_condition_baseline.json",
       "aneumo_isbi_v1e_config_sha256": "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19",
-      "aneumo_isbi_v1e_status": "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint",
+      "aneumo_isbi_v1e_status": "completed_failed_development_known_condition_qualification",
+      "aneumo_isbi_v1e_result": "results/aneumo_isbi_v1e_known_condition_baseline_20260808.json",
+      "aneumo_isbi_v1e_result_sha256": "63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e",
+      "aneumo_isbi_v1e_gate": "6_of_9_passed",
+      "aneumo_isbi_v1e_failure_action": "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair",
       "aneumo_isbi_v1e_pass_authorizes": "register_boundary_aware_scalar_missing_inflow_development_protocol_only",
       "aneumo_isbi_v1_model_tasks": 12,
       "aneumo_isbi_v1_test_access": false,
@@ -186,7 +194,7 @@
       "nonlinear_pde_n1_density_objective_audit_status": "completed_threshold_free_full_joint_engineering_signal",
       "nonlinear_pde_n1_decision_task_audit_status": "completed_missing_nontrivial_sparse2_fixed_winner",
       "nonlinear_pde_n1_missing_operator_pullback_m0_status": "preregistered_validation_only_unrun",
-      "irregular_3d_status": "v1_failed_v1a_underfit_attributed_geometry_only_branch_retired_outer_test_and_headline_blocked"
+      "irregular_3d_status": "v1e_failed_after_relative_boundary_utility_current_aneumo_3d_line_stopped_outer_test_and_headline_blocked"
     },
     "contribution_priority": {
       "primary": [
@@ -349,7 +357,11 @@
       "v1d_pass_authorizes": "register_boundary_aware_known_condition_baseline_protocol_only",
       "v1e_known_condition_config": "configs/aneumo_isbi_v1e_known_condition_baseline.json",
       "v1e_config_sha256": "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19",
-      "v1e_status": "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint",
+      "v1e_status": "completed_failed_development_known_condition_qualification",
+      "v1e_result": "results/aneumo_isbi_v1e_known_condition_baseline_20260808.json",
+      "v1e_result_sha256": "63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e",
+      "v1e_gate": "6_of_9_passed",
+      "v1e_failure_action": "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair",
       "v1e_pass_authorizes": "register_boundary_aware_scalar_missing_inflow_development_protocol_only",
       "v1_ensemble_estimand": "matching_q_three_seed_mean_and_seed_by_eight_q_twenty_four_component_missing_mixture",
       "v1_aggregate_integrity": "exact_four_by_three_manifest_plus_validation_checkpoint_replay_absolute_tolerance_1e-5",

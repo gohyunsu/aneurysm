@@ -168,6 +168,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1e_known_condition_config",
             "v1e_config_sha256",
             "v1e_status",
+            "v1e_result",
+            "v1e_result_sha256",
+            "v1e_gate",
+            "v1e_failure_action",
             "v1e_pass_authorizes",
             "v1_test_access",
             "plan",
@@ -263,7 +267,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["v1e_config_sha256"]
         != "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19"
         or venue["v1e_status"]
-        != "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint"
+        != "completed_failed_development_known_condition_qualification"
+        or venue["v1e_result"]
+        != "results/aneumo_isbi_v1e_known_condition_baseline_20260808.json"
+        or venue["v1e_result_sha256"]
+        != "63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e"
+        or venue["v1e_gate"] != "6_of_9_passed"
+        or venue["v1e_failure_action"]
+        != "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair"
         or venue["v1e_pass_authorizes"]
         != "register_boundary_aware_scalar_missing_inflow_development_protocol_only"
         or venue["v1_test_access"] is not False
@@ -438,6 +449,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1e_known_condition_config",
             "v1e_config_sha256",
             "v1e_status",
+            "v1e_result",
+            "v1e_result_sha256",
+            "v1e_gate",
+            "v1e_failure_action",
             "v1e_pass_authorizes",
             "v1_ensemble_estimand",
             "v1_aggregate_integrity",
@@ -531,7 +546,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or irregular_3d["v1e_config_sha256"]
         != "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19"
         or irregular_3d["v1e_status"]
-        != "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint"
+        != "completed_failed_development_known_condition_qualification"
+        or irregular_3d["v1e_result"]
+        != "results/aneumo_isbi_v1e_known_condition_baseline_20260808.json"
+        or irregular_3d["v1e_result_sha256"]
+        != "63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e"
+        or irregular_3d["v1e_gate"] != "6_of_9_passed"
+        or irregular_3d["v1e_failure_action"]
+        != "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair"
         or irregular_3d["v1e_pass_authorizes"]
         != "register_boundary_aware_scalar_missing_inflow_development_protocol_only"
         or irregular_3d["v1_ensemble_estimand"]

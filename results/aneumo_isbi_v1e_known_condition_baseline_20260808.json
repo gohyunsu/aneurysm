@@ -1,0 +1,130 @@
+{
+  "access": {
+    "clinical_endpoint_evaluated": false,
+    "missing_or_partial_condition_evaluated": false,
+    "pressure_channel_read": false,
+    "splits_read": [
+      "train",
+      "validation"
+    ],
+    "test_geometry_or_field_read": false,
+    "test_metric_computed": false
+  },
+  "comparison": {
+    "boundary_better_full_q_seeds": 3,
+    "boundary_better_response_seeds": 3,
+    "boundary_seed_mean_relative_improvement_full_q": 0.10943133266629605,
+    "boundary_seed_mean_relative_improvement_response": 0.06414023057864261
+  },
+  "config_sha256": "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19",
+  "experiment_id": "aneumo_isbi_v1e_known_condition_baseline",
+  "gate": {
+    "all_checks_passed": false,
+    "checks": {
+      "all_six_gpu_tasks_exit_zero_with_eligible_validation_selected_checkpoints": true,
+      "boundary_better_than_geometry_control_on_both_primary_metrics_in_at_least_two_of_three_seeds": true,
+      "boundary_seed_mean_relative_improvement_at_least_0.05_on_both_primary_metrics": true,
+      "boundary_worst_seed_train_full_q_relative_l2_at_most_0.25": false,
+      "boundary_worst_seed_validation_full_q_relative_l2_at_most_0.35": false,
+      "boundary_worst_seed_validation_paired_response_relative_l2_at_most_0.50": false,
+      "exact_parameter_and_source_token_match_between_variants": true,
+      "no_pressure_missing_partial_test_or_clinical_access": true,
+      "pinned_data_and_geometry_cache_integrity": true
+    },
+    "decision": "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair",
+    "pass_authorizes": "register_boundary_aware_scalar_missing_inflow_development_protocol_only",
+    "pass_does_not_authorize": [
+      "relabel_v1",
+      "reuse_or_tune_v1_backbones",
+      "test_geometry_or_field_access",
+      "v2_outer_test",
+      "partial_multicomponent_claim",
+      "method_novelty",
+      "isbi_submission"
+    ],
+    "passed_checks": 6,
+    "total_checks": 9
+  },
+  "git_commit": "c62838b5d47c46786da0461d3f1ed9b533da3b95",
+  "interpretation": "known_condition_learnability_and_boundary_asset_utility_not_partial_missing_method_or_novelty_evidence",
+  "schema_version": "aurora.aneumo_isbi_v1e_known_condition.aggregate.v1",
+  "summary": {
+    "boundary_perceiver_operator": {
+      "parameter_count": 740099,
+      "seeds": [
+        821101,
+        821102,
+        821103
+      ],
+      "selected_steps": [
+        5200,
+        7200,
+        7600
+      ],
+      "train_full_q_relative_l2": [
+        0.7722082248623594,
+        0.7683958794979678,
+        0.7718535150708711
+      ],
+      "validation_full_q_relative_l2": [
+        0.8697783699264451,
+        0.8751215288678414,
+        0.8779619886634628
+      ],
+      "validation_paired_response_relative_l2": [
+        0.917907528168661,
+        0.9066193209566246,
+        0.9491776965286832
+      ],
+      "validation_prediction_target_norm_ratio": [
+        0.4589185560579938,
+        0.49303512869294436,
+        0.43688926179656984
+      ],
+      "validation_vector_cosine": [
+        0.49474119351698803,
+        0.48398777294274925,
+        0.48073391848532165
+      ]
+    },
+    "geometry_only_token_matched_perceiver_operator": {
+      "parameter_count": 740099,
+      "seeds": [
+        821101,
+        821102,
+        821103
+      ],
+      "selected_steps": [
+        2000,
+        5600,
+        8000
+      ],
+      "train_full_q_relative_l2": [
+        0.9928565304789938,
+        0.9966303365803303,
+        0.9719544253433209
+      ],
+      "validation_full_q_relative_l2": [
+        0.9837968345157352,
+        0.9745299012892567,
+        0.9868272805724332
+      ],
+      "validation_paired_response_relative_l2": [
+        0.9909778336959563,
+        0.9793690972639064,
+        0.9934566604360489
+      ],
+      "validation_prediction_target_norm_ratio": [
+        0.09231875256623545,
+        0.14460949634112985,
+        0.16855703546832837
+      ],
+      "validation_vector_cosine": [
+        0.22025070390237103,
+        0.24619191590716827,
+        0.16191371772833305
+      ]
+    }
+  },
+  "tasks": 6
+}

@@ -38,8 +38,10 @@
 > decode 전에 고정한 train 40, validation 12, test 0 case의 520 geometry
 > payload를 감사해 9/9을 통과했다. 156/156 patch가 q-invariant였고 52/52
 > case의 exact boundary-volume correspondence를 확인했다. 이 asset pass로
-> known-condition V1e protocol만 등록했으며 test나 missing-condition method는
-> 열지 않았다.
+> 등록한 V1e는 exact `c62838b`에서 6/9로 실패했다. Boundary는 matched
+> geometry-only control보다 3/3 seed에서 좋았지만 absolute train/validation/
+> response learnability 기준은 모두 실패했다. 따라서 boundary asset utility만
+> 보존하며 test, missing-condition method와 current Aneumo 3D line은 열지 않는다.
 
 ## 핵심 비교
 

@@ -260,6 +260,20 @@ relative L2의 평균이 최소인 step으로 고른다.
 missing-inflow development protocol 등록만 허용한다. V1 relabel, test/V2,
 multicomponent partial claim, method novelty와 ISBI submission은 허용하지 않는다.
 
+Exact source `c62838b`의 six-task PBS 실행은 모두 exit 0, CUDA true,
+validation-only checkpoint eligible, test access false로 완료됐다. Public
+aggregate SHA-256은
+`63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e`다.
+Matched parameter·token, access와 relative utility checks는 통과했다. Boundary가
+full-q/response에서 control보다 좋은 seed는 각각 3/3이고 mean 상대 개선은
+`10.94%/6.41%`였다. 그러나 boundary worst-seed train full-q `0.77221`,
+validation full-q `0.87796`, response `0.94918`로 세 absolute checks가
+실패해 총 6/9다. 따라서 boundary asset utility는 engineering evidence로
+보존하되 fully observed scalar-inflow operator qualification은 실패로 판정한다.
+등록된 failure action을 실행해 current Aneumo 3D learning line을 중단하며 새
+scalar missing-inflow protocol이나 V2를 등록하지 않는다. Public aggregate는
+`results/aneumo_isbi_v1e_known_condition_baseline_20260808.json`이다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

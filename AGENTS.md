@@ -4,7 +4,7 @@
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
 backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass와
-V1e known-condition baseline 등록 상태를 반영했다.
+V1e known-condition qualification 6/9 fail을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -85,15 +85,22 @@ V1e known-condition baseline 등록 상태를 반영했다.
   polygon-valid fraction 1.0을 확인했다. Public aggregate는
   `results/aneumo_isbi_v1d_development_geometry_cache_20260808.json`이다.
   이 pass 범위에서 `configs/aneumo_isbi_v1e_known_condition_baseline.json`을
-  어떤 V1e training/checkpoint보다 먼저 고정했다. V1e는 동일 parameter와
-  320 source-token budget의 boundary Perceiver와 geometry-only control을
-  fresh 3 seed로 비교한다. Full-field MSE만 학습하고 paired-response loss는
-  0이다. Worst-seed train/full-q/response absolute gate와 seed-robust 5%
-  boundary utility를 모두 요구한다. 실패하면 architecture, loss, step, seed,
-  threshold를 국소 수정하지 않고 Aneumo 3D learning line을 중단한다. 통과해도
-  scalar missing-inflow **development protocol 등록**만 허용한다. V1 relabel,
-  기존 backbone 수선, test geometry/field, V2, multicomponent partial claim,
-  novelty와 submission은 계속 금지한다.
+  어떤 V1e training/checkpoint보다 먼저 고정했다. Exact source `c62838b`의
+  V1e는 동일 parameter(740,099)와 320 source-token budget의 boundary
+  Perceiver와 geometry-only control을 fresh 3 seed·6 GPU task로 비교했고
+  모두 exit 0이었다. Boundary는 validation full-q/response에서 3/3 seed로
+  control보다 좋았고 seed-mean 상대 개선도 `10.94%/6.41%`로 relative
+  checks를 통과했다. 그러나 worst-seed train full-q `0.77221`, validation
+  full-q `0.87796`, response `0.94918`이 frozen `0.25/0.35/0.50`을 모두
+  넘어 gate는 6/9로 실패했다. Public aggregate는
+  `results/aneumo_isbi_v1e_known_condition_baseline_20260808.json`이며 SHA-256은
+  `63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e`다.
+  Boundary asset의 incremental utility는 인정하지만 known-condition operator
+  learnability나 partial/missing method evidence는 아니다. 등록된 결정대로
+  architecture, loss, step, seed, threshold를 국소 수정하지 않고 current
+  Aneumo 3D learning line을 중단한다. Scalar missing-inflow protocol, V1
+  relabel, 기존 backbone 수선, test geometry/field, V2, multicomponent partial
+  claim, novelty와 submission은 열지 않는다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
@@ -657,6 +664,15 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   value로 계산한다. 이는 selector/gate에 들어가지 않는 control 구현 수정이며
   config, task metric/checkpoint와 threshold는 유지한다. Aggregate source와
   task source SHA는 artifact에서 분리해 기록하고 두 실패 aggregate를 보존한다.
+- Exact `c62838b`의 V1e six-task A6000 array는 scheduler control-plane
+  timeout과 dispatch 지연 중에도 기존 array를 중복 제출하지 않고 6/6 exit 0으로
+  완료했다. Pinned CPU aggregate는 exact config, two-cache checksum, CUDA task,
+  PBS index, eligible validation checkpoint와 forbidden-access false를 전수
+  검사했다. Gate는 6/9 fail이며 public aggregate SHA-256은
+  `63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e`다.
+  Boundary relative utility가 양수여도 absolute train/validation/response가
+  모두 실패했으므로 current Aneumo 3D line을 중단한다. Raw task metric,
+  checkpoints, histories와 scheduler logs는 private output에만 보존한다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

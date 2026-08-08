@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V1 failed · V1a found underfit · V1b/V1c/V1d asset gates passed · V1e known-condition baseline preregistered · not submission-ready",
+    status: "Target locked · V1 failed · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · current Aneumo 3D line stopped · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. V1b/V1c는 8/8, V1d는 9/9을 통과했지만 asset evidence일 뿐이다. V1d는 156/156 q-invariant patch와 52/52 exact boundary-volume correspondence를 확인했다. V1e는 같은 parameter·320-token budget의 boundary Perceiver와 geometry-only control을 fresh three-seed로 비교하는 known-condition qualification이며 아직 unrun이다.",
-      state: "V1 failed · V1a underfit attributed · V1b/V1c/V1d asset-only pass · V1e preregistered · submission blocked",
+      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 geometry-only branch를 폐기했다. V1b/V1c는 8/8, V1d는 9/9을 통과했지만 asset evidence다. Exact c62838b의 V1e에서 boundary Perceiver는 matched control보다 full-q/response 모두 3/3 seed로 좋고 mean 10.94%/6.41% 개선됐지만 worst train/validation/response L2 0.77221/0.87796/0.94918이 절대 기준을 모두 실패했다. Boundary utility만 보존하고 current Aneumo 3D line을 중단했다.",
+      state: "V1 failed · V1b/V1c/V1d asset-only pass · V1e 6/9 failed · current 3D line stopped · submission blocked",
       blocking: true
     }
   ],
@@ -141,7 +141,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition protocol preregistered"
+      provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition 6/9 failed"
     },
     {
       name: "AneuG-Flow",
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "result",
+      title: "V1e finds boundary utility but fails absolute known-condition learnability",
+      copy: "Exact source c62838b의 matched 6-task A6000 run은 모두 exit 0, validation-selected checkpoint eligible, test access false로 완료됐다. Boundary Perceiver는 full-q/response에서 geometry-only control보다 3/3 seed로 좋고 seed-mean 상대 개선도 10.94%/6.41%였다. 그러나 worst-seed train full-q, validation full-q, response L2 0.77221/0.87796/0.94918이 frozen 0.25/0.35/0.50을 모두 넘어서 gate는 6/9 fail이다. Boundary asset utility는 engineering signal로 보존하지만 known-condition operator, missing method, novelty 또는 submission 증거가 아니다. 등록대로 current Aneumo 3D learning line을 local repair 없이 중단한다.",
+      files: ["results/aneumo_isbi_v1e_known_condition_baseline_20260808.json", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "protocol",

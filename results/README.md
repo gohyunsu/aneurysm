@@ -58,6 +58,14 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   points에 exact하게 대응했다. Field array와 test payload는 읽지 않았다.
   V1e known-condition protocol 등록만 허용한 asset evidence이며 model,
   missing-condition, novelty 또는 submission evidence가 아니다.
+- `aneumo_isbi_v1e_known_condition_baseline_20260808.json`: exact source
+  `c62838b`의 fresh three-seed matched-budget known-condition qualification.
+  Six A6000 task가 모두 exit 0이었고 boundary는 validation full-q/response에서
+  3/3 seed로 geometry-only control보다 좋았으며 mean 상대 개선은
+  `10.94%/6.41%`였다. 그러나 worst-seed train/validation full-q와 response
+  L2 `0.77221/0.87796/0.94918`이 frozen `0.25/0.35/0.50`을 모두 넘어서
+  6/9 fail이다. Current Aneumo 3D learning line을 local repair 없이 중단하며
+  missing-condition, V2, novelty 또는 submission을 열지 않는다.
 
 현재 controlled-PDE 결과:
 

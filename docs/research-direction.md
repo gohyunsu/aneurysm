@@ -122,16 +122,19 @@ physical boundary identity를 포함하는 development data contract가 일관�
 
 이 pass 범위에서 어떤 training/checkpoint보다 먼저 V1e를 고정했다. V1e는
 fully observed scalar inflow의 velocity field를 먼저 학습할 수 있는지 묻는
-known-condition qualification이다. Boundary Perceiver와 geometry-only control은
-같은 parameterization과 320 source token을 사용하며, 차이는 192개의
-inlet/outlet/wall token을 실제 boundary position·type·normal·area로 채우는가뿐이다.
-Fresh three-seed에서 absolute train/validation/response L2와 두 metric 모두의
-seed-robust 5% boundary utility를 요구한다. Paired-response supervision은 쓰지
-않는다. 실패하면 current Aneumo 3D line을 local repair 없이 중단하고, 통과해도
-scalar missing-inflow **development protocol 등록**만 연다. Test, V2,
-multicomponent partial claim, novelty와 submission은 열지 않는다. Known-BC
-encoding, boundary token, Perceiver 또는 surface GNN 자체는 contribution이
-아니다.
+known-condition qualification이다. Exact `c62838b`의 6 GPU task는 모두 exit
+0이었고, Boundary Perceiver와 geometry-only control은 같은 740,099 parameter와
+320 source token을 사용했다. Boundary는 validation full-q와 response에서
+3/3 seed로 control보다 좋았고 seed-mean 상대 개선도 `10.94%/6.41%`였다.
+그러나 worst-seed train full-q `0.77221`, validation full-q `0.87796`,
+response `0.94918`이 frozen `0.25/0.35/0.50`을 모두 넘어서 6/9로
+실패했다. 이는 boundary asset의 incremental utility와 absolute operator
+learnability를 분리한다. 전자는 양수지만 후자는 실패했으므로 current Aneumo
+3D learning line을 local repair 없이 중단한다. Scalar missing-inflow protocol,
+test, V2, multicomponent partial claim, novelty와 submission은 열지 않는다.
+Known-BC encoding, boundary token, Perceiver 또는 surface GNN 자체는
+contribution이 아니다. Public aggregate는
+`results/aneumo_isbi_v1e_known_condition_baseline_20260808.json`이다.
 
 ## 1. 현재 판정
 

@@ -4,6 +4,34 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1e fails absolute learnability despite relative boundary utility
+
+- Exact source `c62838b`, config SHA
+  `e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19`의
+  boundary Perceiver와 parameter/token-matched geometry-only control을 fresh
+  3 seed·6 A6000 task로 실행했다. 모두 exit 0, validation-selected checkpoint
+  eligible, CUDA true, test/pressure/missing/clinical access false로 완료됐다.
+- 두 variant는 각각 740,099 parameter와 320 source token을 정확히 맞췄다.
+  Boundary는 validation full-q와 paired response에서 control보다 3/3 seed로
+  좋았고 seed-mean 상대 개선은 `10.94%/6.41%`로 두 relative checks를
+  통과했다. 이는 physical boundary asset의 incremental utility다.
+- Boundary worst-seed train full-q `0.77221`, validation full-q `0.87796`,
+  response `0.94918`은 frozen `0.25/0.35/0.50`을 모두 넘었다. Absolute
+  learnability 세 check가 실패해 전체 gate는 **6/9 fail**이다. 상대적으로
+  control보다 낫다는 사실로 qualification을 pass라 하지 않는다.
+- Public aggregate는
+  `results/aneumo_isbi_v1e_known_condition_baseline_20260808.json`, SHA-256
+  `63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e`다.
+  Raw logs, checkpoint와 histories는 private output에만 보존한다.
+- 등록된 failure action에 따라 architecture, loss, step, seed, threshold를
+  국소 수정하지 않고 current Aneumo 3D learning line을 중단한다. Scalar
+  missing-inflow protocol, test/V2, method novelty와 ISBI submission은 열지
+  않는다. V1/V1a 실패와 V1b/V1c/V1d asset-only 판정도 유지한다.
+- `AGENTS.md`, README, research/model/protocol/ISBI/data/server 문서,
+  executable protocol validator, result ledger, field guide와 site change window를
+  같은 판정으로 동기화한다. Private manuscript source pin은 이 public commit이
+  확정된 뒤 갱신한다.
+
 ## 2026-08-08 · V1d passes asset adequacy and V1e freezes known-condition learnability
 
 - Exact source `369317a`의 V1d는 dependency-complete 199/199 tests와

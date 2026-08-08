@@ -135,10 +135,14 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
   `369317a`의 CPU run에서 train 40·validation 12·test 0 case의 boundary 468개와
   volume 52개 geometry payload를 감사해 9/9을 통과했다. 156/156 patch의
   q-invariance와 52/52 exact boundary-volume correspondence를 확인했다. 이
-  asset pass 뒤 V1e known-condition baseline을 학습 전에 고정했다. V1e의 6개
-  GPU task는 login node가 아니라 PBS A6000 allocation에서만 실행하며, exact
-  source·두 private cache checksum·container·dependency layer를 각 task에
-  기록한다. Aggregate 전에는 test payload를 staging하지 않는다.
+  asset pass 뒤 V1e known-condition baseline을 학습 전에 고정했다. Exact
+  `c62838b`의 6개 GPU task는 login node가 아닌 PBS A6000 allocation에서 모두
+  exit 0으로 완료됐다. 각 task는 exact source, 두 private cache checksum,
+  pinned container/dependency, CUDA device, validation-only checkpoint와 no-test
+  access를 기록했다. CPU-only pinned-container aggregate가 6 task provenance를
+  전수 검사했고 gate는 6/9로 실패했다. Public aggregate SHA-256은
+  `63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e`다.
+  Raw log, checkpoint와 per-task history는 private output에만 보존한다.
 
 ## Run contract
 

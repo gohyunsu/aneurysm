@@ -189,12 +189,14 @@ V1d는 train 40·validation 12·test 0 case의 boundary 468개와 reference-volu
 52개 payload에서 geometry만 decode해 9/9을 통과했다. 156/156 patch가
 q-invariant였고 52/52 case의 exact boundary-volume point correspondence를
 확인했다. 이 asset pass 뒤 어떤 학습보다 먼저 V1e known-condition baseline을
-고정했다. V1e는 같은 parameter·320-token budget의 boundary Perceiver와
-geometry-only control을 fresh three-seed로 비교해 fully observed scalar-inflow
-velocity가 먼저 학습 가능한지 검사한다. Paired-response loss는 0이다. 실패하면
-current Aneumo 3D line을 local repair 없이 중단한다. 통과해도 scalar
-missing-inflow development protocol만 열고 test geometry/field, V1 relabel,
-V2, multicomponent partial claim과 submission은 계속 금지한다.
+고정했다. Exact source `c62838b`의 boundary Perceiver와 matched geometry-only
+control 6-task는 모두 정상 완료됐고 boundary가 full-q/response에서 3/3 seed로
+우세했으며 mean 상대 개선은 `10.94%/6.41%`였다. 그러나 boundary worst-seed
+train/validation/response L2가 `0.77221/0.87796/0.94918`로 frozen
+`0.25/0.35/0.50`을 모두 넘어서 6/9 fail이다. Boundary asset utility는
+있지만 known-condition learnability는 없다. 등록대로 current Aneumo 3D line을
+local repair 없이 중단하고 scalar missing-inflow protocol, test geometry/field,
+V1 relabel, V2, multicomponent partial claim과 submission은 열지 않는다.
 
 ### V2 · Frozen five-seed 3D outer test
 
@@ -254,7 +256,7 @@ Exact/nonlinear sanity는 한두 문장 또는 작은 ablation row로만 남긴�
 | 2026-08-08 | V1b boundary-asset audit | 완료: 8/8; asset evidence만 인정, model 권한 없음 |
 | 2026-08-08 | V1c boundary-geometry audit | 완료: 8/8; geometry staging adequacy만 인정 |
 | 2026-08-08 | V1d development geometry cache | 완료: 9/9; 156/156 q-invariant, 52/52 exact boundary-volume correspondence |
-| 2026-08-08 | V1e known-condition baseline 등록 | boundary Perceiver vs matched geometry-only control, fresh 3 seeds·6 GPU tasks; 아직 unrun |
+| 2026-08-08 | V1e known-condition baseline | 완료: 6/9 fail; relative boundary utility 3/3·10.94%/6.41%, absolute learnability 3 checks fail; current Aneumo 3D line 중단 |
 | 2026-09-03 | 새 task/data identity 결정 | reference state·boundary marker·expanded data 중 식별 가능성과 비자명성을 회복하는 근거가 없으면 full paper 중단 |
 | 2026-09-10 | candidate method/config freeze | 이후 architecture·loss search 금지 |
 | 2026-09-24 | five-seed outer test complete | gate 실패 시 relabel·threshold repair 금지 |

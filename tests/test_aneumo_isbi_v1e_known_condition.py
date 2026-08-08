@@ -26,6 +26,8 @@ from aurora.aneumo_isbi_v1e_known_condition import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneumo_isbi_v1e_known_condition_baseline.json"
+RESULT = ROOT / "results" / "aneumo_isbi_v1e_known_condition_baseline_20260808.json"
+RESULT_SHA256 = "63fdb3a6fbddb15bb8d6cb82fde7b6880e3b3c7badef46b7a4cc2da4d31f2c0e"
 
 
 class AneumoV1eKnownConditionTests(unittest.TestCase):
@@ -78,6 +80,18 @@ class AneumoV1eKnownConditionTests(unittest.TestCase):
         self.assertFalse(self.config["access"]["test_geometry_or_field_read"])
         self.assertEqual(self.config["training"]["seeds"], SEEDS)
         self.assertEqual(self.config["training"]["variants"], VARIANTS)
+
+    def test_public_result_preserves_failed_frozen_gate(self) -> None:
+        self.assertEqual(hashlib.sha256(RESULT.read_bytes()).hexdigest(), RESULT_SHA256)
+        result = json.loads(RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(result["git_commit"], "c62838b5d47c46786da0461d3f1ed9b533da3b95")
+        self.assertEqual(result["tasks"], 6)
+        self.assertEqual(result["gate"]["passed_checks"], 6)
+        self.assertEqual(result["gate"]["total_checks"], 9)
+        self.assertFalse(result["gate"]["all_checks_passed"])
+        self.assertEqual(result["comparison"]["boundary_better_full_q_seeds"], 3)
+        self.assertEqual(result["comparison"]["boundary_better_response_seeds"], 3)
+        self.assertFalse(result["access"]["test_geometry_or_field_read"])
 
     def test_pass_cannot_authorize_test_or_novelty(self) -> None:
         candidate = copy.deepcopy(self.config)

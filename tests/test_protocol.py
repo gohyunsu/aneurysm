@@ -145,6 +145,14 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "3D evidence"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["v1e_result_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["v1e_failure_action"] = "repair_and_retry"
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
         candidate["model"]["irregular_3d_output_contract"]["v1e_status"] = (
             "completed_passed_submission_ready"
         )

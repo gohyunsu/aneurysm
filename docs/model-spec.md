@@ -126,6 +126,17 @@ boundary utility가 모두 통과해야 한다. 이 baseline은 attention-based
 continuous-query operator이며 GNN이 아니다. 통과하더라도 Perceiver나 boundary
 token 자체를 novelty로 주장하지 않는다.
 
+Exact source `c62838b`의 6-task 실행은 모두 exit 0이었지만 gate는 6/9로
+실패했다. Boundary variant는 control보다 두 primary metric 모두 3/3 seed에서
+좋고 seed-mean 상대 개선도 full `10.94%`, response `6.41%`였지만,
+worst-seed train full-q `0.77221`, validation full-q `0.87796`, response
+`0.94918`이었다. Frozen absolute 기준 `0.25/0.35/0.50`을 모두 넘었으므로
+boundary tokens의 유용성이 이 Perceiver의 learnability를 성립시키지 못했다.
+출력 norm ratio도 validation에서 `0.4369--0.4930`에 머물러 field magnitude와
+방향 정렬이 모두 부족했다. 결과를 본 뒤 decoder, loss, step, seed 또는
+threshold를 수선하지 않으며 current Aneumo 3D line을 중단한다. Public
+aggregate는 `results/aneumo_isbi_v1e_known_condition_baseline_20260808.json`이다.
+
 ## 1. 왜 단순 missing-value 문제가 아닌가
 
 geometry \(G\), 전체 BC coefficient \(B\), solution field \(H\), 관측

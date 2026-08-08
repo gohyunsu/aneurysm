@@ -52,10 +52,11 @@
             decoder로 실행했습니다. V1의 q-PointNet·kNN graph·anchor-token
             후보는 gate 5/7로 실패했고 V1a에서 training underfit도 확인됐습니다.
             V1b/V1c는 8/8, V1d는 9/9을 통과했지만 모두 asset evidence입니다.
-            현재 학습 전에 고정된 V1e는 boundary token을 읽는
+            학습 전에 고정한 V1e는 boundary token을 읽는
             <b>Perceiver continuous-query operator</b>이며 GNN이 아닙니다.
-            Geometry-only matched control과 fresh three-seed로 비교하지만 아직
-            실행 결과는 없습니다. 국소 GNN, anatomy
+            Geometry-only matched control보다 상대적으로 나았지만 absolute
+            learnability gate는 6/9로 실패해 current Aneumo 3D line을
+            중단했습니다. 국소 GNN, anatomy
             attention, continuous-query operator를 모두 결합한 더 큰 구조는
             장기 <b>irregular-3D target specification</b>입니다.
           </p>
@@ -414,7 +415,7 @@
 
           <div class="explain-block">
             <div>
-              <p class="eyebrow">V1e · PREREGISTERED ENGINEERING BASELINE</p>
+              <p class="eyebrow">V1e · COMPLETE / FAILED 6 OF 9</p>
               <h3>Missing inflow를 묻기 전에, 알려진 inflow부터 배울 수 있어야 합니다.</h3>
             </div>
             <div class="prose">
@@ -439,12 +440,18 @@
                 boundary identity의 정보입니다.
               </p>
               <p>
-                세 fresh seed에서 boundary model의 worst validation full-q L2가
-                0.35 이하, paired-response L2가 0.50 이하여야 하며 두 metric 모두
-                최소 2/3 seed와 seed-mean 5%에서 control보다 좋아야 합니다.
-                Paired-response loss는 사용하지 않습니다. 아직 결과가 없고,
-                통과해도 Perceiver나 attention을 novelty로 주장하지 않습니다.
+                Exact source <code>c62838b</code>의 6 GPU task는 모두 정상
+                완료됐습니다. Boundary model은 full-q와 response 모두 3/3
+                seed에서 control보다 좋았고 평균 상대 개선도 10.94%와
+                6.41%였습니다. 즉 physical boundary identity는 실제 정보를
+                더했습니다. 그러나 worst-seed train full-q, validation full-q,
+                response L2는 0.77221, 0.87796, 0.94918로 기준 0.25,
+                0.35, 0.50을 모두 실패했습니다. 상대적으로 덜 나쁜 모델이
+                충분히 학습된 모델은 아닙니다. 등록대로 current Aneumo 3D
+                line을 local repair 없이 중단하며 Perceiver나 boundary token을
+                novelty로 주장하지 않습니다.
               </p>
+              <p><a href="../results/aneumo_isbi_v1e_known_condition_baseline_20260808.json">V1e 공개 aggregate 열기 ↗</a></p>
             </div>
           </div>
 
@@ -482,8 +489,9 @@
               PDE의 joint density, conditional operator, strong baselines와
               decision evaluation은 구현·실행됐지만 N1c는 실패했습니다.
               N1c-a는 density objective가 주 병목임을 확인했고 3D GNN은
-              실행하지 않았습니다. V1e Perceiver baseline은 구현·사전등록됐지만
-              아직 GPU training 전이며 method novelty가 아닙니다. M0
+              실행하지 않았습니다. V1e Perceiver baseline은 exact six-task
+              GPU run에서 6/9로 실패했고 current Aneumo 3D line을 중단했습니다.
+              상대 boundary utility는 method novelty가 아닙니다. M0
               joint-pullback도 구현·사전등록됐지만 아직 unrun이고 selected
               method가 아닙니다. “implemented”,
               “supported”와 “proposed”를 구분합니다.
@@ -710,6 +718,8 @@
               통과했습니다. 156/156 patch가 q-invariant였고 52/52 case에서 모든
               boundary point가 volume point에 exact하게 대응했습니다. 이 asset
               pass 뒤 V1e known-condition baseline만 학습 전에 고정했습니다.
+              V1e는 boundary utility가 3/3 seed에서 양수였지만 absolute
+              learnability 세 기준을 모두 실패해 6/9로 종료됐습니다.
               AneuG-Flow는
               geometry archive만 확인됐고 BC variation이 없어 paired-BC
               evidence로 쓰지 않습니다.
@@ -887,7 +897,7 @@
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
             <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>N0 실패는 보존하고, 결과 전에 fresh seed와 context-stratified selector를 고정한 N0r가 9/9를 통과했습니다.</p></div><b>N0r pass · N1 opened</b></article>
             <article><span>N1</span><div><h3>Coherence가 정확도와 decision을 개선하는가?</h3><p>N1c는 distribution·pair·acquisition에서 실패했습니다. N1c-a는 joint density 병목과 non-discriminative sparse task를 확인했습니다.</p></div><b>failed · 3D blocked</b></article>
-            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>V1은 geometry-only input에서 실패했고 V1a는 training underfit을 확인했습니다. V1b/V1c는 8/8, V1d는 9/9을 통과했지만 asset evidence입니다. V1e는 같은 parameter·token budget의 boundary Perceiver와 geometry-only control로 known-condition learnability를 먼저 검사하며 아직 unrun입니다.</p></div><b>V1 failed · V1b/V1c/V1d asset pass · V1e preregistered</b></article>
+            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>V1은 geometry-only input에서 실패했고 V1a는 training underfit을 확인했습니다. V1b/V1c는 8/8, V1d는 9/9을 통과했지만 asset evidence입니다. V1e boundary Perceiver는 matched control보다 3/3 seed에서 좋았지만 worst train/validation/response L2 0.77221/0.87796/0.94918로 absolute gate를 모두 실패했습니다.</p></div><b>V1e 6/9 failed · current Aneumo 3D line stopped</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
             <article><span>V2</span><div><h3>3D aneurysm에서 실제로 유효한가?</h3><p>ISBI headline은 expanded 또는 independent irregular-3D velocity outer test, five seeds와 family-bootstrap CI를 요구합니다.</p></div><b>ISBI submission gate</b></article>
           </div>
