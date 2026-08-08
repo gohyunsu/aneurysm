@@ -54,7 +54,8 @@
             anchor-token·Perceiver 연구선은 성능 gate를 통과하지 못해
             종료했습니다. 현재 남은 조건부 후보는 RSNA-ICA의 study presence,
             vascular territory, point localizer와 일부 segmentation을 하나의
-            잠재 lesion set의 annotation projection으로 다루는 문제입니다.
+            잠재 lesion set의 annotation projection으로 다루고, annotation
+            수준이 선택된 과정도 별도로 감사하는 문제입니다.
             Controlled-access asset이 stage되지 않아 task unit은 아직 감사되지
             않았고, GNN·U-Net·set predictor·foundation model 어느 것도 선택하지
             않았습니다.
@@ -66,7 +67,8 @@
           <p>
             사용자가 official 약관을 수락하고 private asset을 제공하면 먼저
             patient–study–series–site–modality key, lesion 수, 13 location label,
-            localizer/segmentation provenance와 split viability를 CPU/read-only로
+            localizer/segmentation provenance, annotation assignment·positivity와
+            split viability를 CPU/read-only로
             감사합니다. 이 L0/L1이 통과하기 전에는 GPU, method, outer test와
             paper contribution을 열지 않습니다.
           </p>

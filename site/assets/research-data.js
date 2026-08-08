@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · failed branches preserved · one conditional lesion-set shortlist · controlled access absent · no method/GPU · not submission-ready",
+    status: "Target locked · one annotation-selection-aware lesion-set shortlist · controlled access absent · no CAR assumption · no method/GPU · not submission-ready",
     requirement: "User-authorized access → L0 task-unit audit → L1 adequacy → strong baselines → only then bounded method development",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -13,6 +13,13 @@ window.AURORA_DATA = Object.freeze({
       copy: "Multisite CT/MR angiography에서 1위 vessel-segmentation+ROI classifier와 2위 tri-axial ROI+26-class 3D nnU-Net이 강한 직접 비교군을 만들었다.",
       status: "Official challenge + public implementations · mandatory baselines",
       url: "https://www.rsna.org/artificial-intelligence/ai-image-challenge/intracranial-aneurysm-detection-ai-challenge"
+    },
+    {
+      year: "2010–24",
+      title: "Structured & mixed supervision",
+      copy: "Latent structured-output weak detection, image/full-label mixed detection, medical classification+segmentation과 partial-label learning이 annotation marginalization 자체를 이미 점유한다.",
+      status: "NeurIPS / CVPR / ICML · direct formulation threats",
+      url: "https://proceedings.neurips.cc/paper/2010/hash/6da37dd3139aa4d9aa55b8d237ec5d4a-Abstract.html"
     },
     {
       year: "2025–26",
@@ -130,6 +137,7 @@ window.AURORA_DATA = Object.freeze({
   competition: [
     ["Prediction unit", "Study + independent location labels", "ROI/voxel + 26-class multitask", "Anatomy graph-guided candidates", "One unordered latent lesion set"],
     ["Annotation use", "Presence/location supervision", "Localization + segmentation multitask", "Vessel tree/topology prior", "Presence·territory·point·mask as projections"],
+    ["Selection process", "Usually implicit", "Task-specific sampling", "Usually implicit", "Must audit who receives point/mask labels; no CAR assumption"],
     ["Consistency", "Not structurally enforced", "Shared backbone only", "Anatomical compatibility", "Cross-granularity probability coherence required"],
     ["Decision endpoint", "AUROC/AUPRC", "Detection/localization score", "False-positive reduction", "Lesion FROC plus candidates per study"],
     ["Already occupied", "Challenge formulation", "Strong public pipeline", "Graph/anatomy/topology modules", "Only the annotation-operator task is shortlisted"],
@@ -139,7 +147,7 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "L0",
       title: "Is the lesion-set task auditable at patient/study level?",
-      copy: "Controlled-access RSNA-ICA에서 version/terms/checksum, patient–study–series–site–modality key, lesion cardinality, 13 territory label, localizer/segmentation provenance와 patient/site split viability를 CPU/read-only로 먼저 감사한다.",
+      copy: "Controlled-access RSNA-ICA에서 version/terms/checksum, patient–study–series–site–modality key, lesion cardinality, 13 territory label, localizer/segmentation provenance, annotation assignment·positivity와 patient/site split viability를 CPU/read-only로 먼저 감사한다. Coarsening-at-random은 가정하지 않는다.",
       state: "Conditional shortlist · asset not staged · access prerequisite unmet · method/GPU blocked",
       blocking: true
     },
@@ -196,8 +204,8 @@ window.AURORA_DATA = Object.freeze({
   datasets: [
     {
       name: "RSNA-ICA 2025 · controlled access",
-      role: "conditional L0 candidate for mixed-granularity anatomy-structured lesion-set inference",
-      provenance: "Official description: >4,000 CT/MR scans · 18 institutions · 13 locations · not staged/task unit unaudited · no redistribution"
+      role: "conditional L0 candidate for annotation-selection-aware anatomy-structured lesion-set inference",
+      provenance: "Official description: >4,000 CT/MR scans · 18 institutions · 13 locations · not staged/task unit and selection mechanism unaudited · no redistribution"
     },
     {
       name: "4D-flow multiresolution phantom · 2021",
@@ -241,6 +249,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "Direct mixed-supervision prior art narrows the residual gap",
+      copy: "NeurIPS 2010 structured weak detection, NeurIPS 2021 mixed-supervised detection, CVPR 2019 medical classification+segmentation과 ICML 2024 partial-label learning 때문에 annotation projection/marginalization 자체를 novelty에서 제외했다. 남을 수 있는 gap은 dense/sparse annotation 선택이 site·modality·unobserved lesion에 의존할 때의 식별 또는 sensitivity다. 실제 RSNA selection process는 L0 전에는 unknown이고 coarsening-at-random을 가정하지 않는다. 식별 불가능하면 point claim을 버리거나 후보를 폐기한다.",
+      files: ["docs/problem-candidate-audit-2026-08-09.md", "docs/literature-lineage.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "research",

@@ -33,7 +33,10 @@ unselected**
 
 현재 유일한 조건부 shortlist는 multisite CT/MR angiography에서
 mixed-granularity annotation을 하나의 anatomy-structured lesion set으로
-연결하는 문제다. 그러나 RSNA-ICA asset access가 없고 task unit도 감사되지
+연결하되 annotation selection을 별도 mechanism으로 두는 문제다. Structured
+weak detection과 mixed supervision은 이미 선행 연구이므로 marginalization
+자체는 novelty가 아니다. RSNA-ICA asset access가 없고 task unit·selection
+mechanism도 감사되지
 않았으므로 paper identity가 아니다. Access→L0 asset/task-unit audit→L1
 method-free adequacy→strong baseline→bounded development→prospective outer
 test 순서를 통과해야 한다. 상세 기준은

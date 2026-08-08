@@ -48,7 +48,8 @@
           Study presence, vascular territory, point localizer와 segmentation을
           서로 독립적인 정답으로 세지 않는다. 하나의 잠재
           <strong>aneurysm lesion set</strong>이 이 모든 annotation을 모순 없이
-          설명할 수 있는지 먼저 감사한다. 아직 데이터 access도, 모델도 없다.
+          설명하는지와, 어떤 study에 어떤 annotation이 선택됐는지를 분리한다.
+          Coarsening-at-random은 가정하지 않는다. 아직 데이터 access도, 모델도 없다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
@@ -100,7 +101,7 @@
       </div>
 
       <div class="hero-meta">
-        <div><span>Conditional shortlist</span><b>Anatomy-structured lesion-set inference</b></div>
+        <div><span>Conditional shortlist</span><b>Selection-aware lesion-set inference</b></div>
         <div><span>Current evidence</span><b>Literature audit only · asset not staged</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>User access → CPU/read-only L0</b></div>
@@ -171,7 +172,8 @@
           <p>
             Study label, vascular territory, point와 mask를 별도 head의 무관한
             target으로 두면 하나의 scan에 존재하는 lesion 수와 위치가 서로
-            모순될 수 있다. 한 latent set law에서 이들을 projection해야 한다.
+            모순될 수 있다. 동시에 point/mask가 선택된 과정도 lesion·site에
+            의존할 수 있어 관측되지 않은 annotation을 무작위로 가정할 수 없다.
           </p>
           <div class="gap-equation" aria-label="잠재 병변 집합에서 annotation을 주변화한 분포">
             <span>p(A<sub>k</sub> | X)</span>
@@ -257,7 +259,7 @@
           <span class="arch-number">03</span>
           <p class="arch-label">LATENT TARGET</p>
           <h3 id="bc-node-title">Unordered lesion set</h3>
-          <p id="bc-node-copy">Unknown lesion count, 3D extent and vascular-territory mark</p>
+          <p id="bc-node-copy">Unknown lesion count, 3D extent, territory and annotation-selection mechanism</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>

@@ -5,10 +5,12 @@
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
 현재 cold audit에서 남은 유일한 조건부 후보는 **multisite CT/MR angiography의
-mixed-granularity anatomy-structured lesion-set inference**입니다. Study presence,
+annotation-selection-aware mixed-granularity lesion-set inference**입니다. Study presence,
 13개 vascular-territory label, point localizer와 일부 segmentation을 서로 다른
 정답으로 취급하지 않고 하나의 잠재 병변 집합에서 유도되는 annotation
-projection으로 다루는 문제입니다. 그러나 controlled-access RSNA-ICA asset은
+projection으로 다루되, 어떤 study에 어떤 annotation 수준이 선택됐는지도
+별도 mechanism으로 감사하는 문제입니다. Structured weak detection과 mixed
+supervision 자체는 이미 선행 연구입니다. Controlled-access RSNA-ICA asset은
 현재 알려진 `introai9` 경로에 stage되지 않았고 task unit도 감사되지 않았습니다.
 따라서 이것은 paper identity나 선택된 architecture가 아니며 GPU 실험도 돌고
 있지 않습니다. 상세한 기각 후보, prior-art boundary와 access 뒤 실험 순서는

@@ -11,8 +11,8 @@ archive에서 검증한 수치를 구분하며, 데이터 이용 약관에 대�
 
 ## 1. 현재 남은 한 후보
 
-조건부 shortlist는 **mixed-granularity anatomy-structured lesion-set
-inference**다. 적용 데이터 후보는 controlled-access
+조건부 shortlist는 **annotation-selection-aware mixed-granularity
+anatomy-structured lesion-set inference**다. 적용 데이터 후보는 controlled-access
 [RSNA Intracranial Aneurysm Detection 2025](https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/)다.
 공식 설명상 18개 기관의 4,000건 이상 CT/MR angiography와 13개 해부학적
 위치 annotation, 일부 AI-generated segmentation 연구가 포함된다. 이 숫자는
@@ -29,17 +29,24 @@ archive audit 결과가 아니며 정확한 patient/study/lesion 수는 접근 �
 로 둔다. 여기서 \(r_i\)는 3D 위치 또는 extent, \(e_i\)는 vascular territory,
 \(m_i\)는 이용 가능한 경우에만 존재하는 lesion mark다. Study-level presence,
 territory multi-label, point localizer와 mask는 서로 다른 정답이 아니라 같은
-\(S\)를 부분적으로 관측하는 annotation operator \(O_k(S)\)다. 학습 대상의
-후보 형태는
+\(S\)를 부분적으로 관측하는 annotation operator \(O_k(S)\)다. 그러나 어떤
+study에 어떤 granularity \(K\)가 부여됐는지도 무작위라고 가정할 수 없다.
+Site, modality, visible lesion, challenge workflow 또는 AI-generated label
+eligibility가 annotation selection \(R\)을 바꿀 수 있다. 따라서 완전한 후보
+형태는
 
 \[
-  p_\theta(A_k\mid X)=
-  \int \mathbf 1\{O_k(S)=A_k\}\,p_\theta(S\mid X)\,dS
+  p_{\theta,\phi}(A,K,R\mid X)=
+  \int p(A\mid O_K(S),R)\,
+  \pi_\phi(K,R\mid S,X)\,p_\theta(S\mid X)\,dS
 \]
 
-처럼 annotation granularity를 주변화한 하나의 normalized lesion-set
-distribution이다. 이 식은 문제 경계를 정할 뿐, tractable likelihood나
-architecture가 이미 설계됐다는 뜻이 아니다.
+처럼 lesion set과 annotation-selection mechanism을 구분해야 한다. L0에서
+selection이 관측 변수에 조건부로 무시 가능한지 확인하기 전에는
+coarsening-at-random을 가정하지 않는다. Selection이 unobserved lesion에
+의존하고 audit으로 식별되지 않으면 point-identification claim을 포기하고
+sensitivity bound 또는 후보 폐기를 택한다. 이 식은 문제 경계를 정할 뿐,
+tractable likelihood나 architecture가 이미 설계됐다는 뜻이 아니다.
 
 임상적 예측을 주장하지 않는다. 허용되는 endpoint는 cross-sectional
 lesion detection/localization과 reading-candidate burden이다. Rupture risk,
@@ -53,7 +60,14 @@ future growth, clinical utility와 autonomous diagnosis는 범위 밖이다.
 | longitudinal growth | 공개 Royal Brisbane cohort는 63명/85 aneurysm이지만 clinician annotation은 patient당 선택된 한 session에만 제공된다. AGED와 2026 Bayesian growth detection도 직접 경쟁한다. | data/novelty 모두 부족해 기각 |
 | geometry×BC shape-response operator | GINO, Reference Neural Operator, geometric operator learning과 2026 Shape-DINO가 variable-domain/shape derivative를 직접 다룬다. | 직접 점유되어 기각 |
 | cross-protocol 4D-flow posterior prediction | I0b가 payload 접근 전에 execution-incomplete로 끝났고 등록된 no-rerun contract에 따라 branch를 닫았다. 실제 독립 flow unit도 매우 적다. | 보존된 closed branch |
-| annotation-operator-consistent lesion set | mixed annotation, set prediction, vessel anatomy와 conformal control 각각은 선행 연구다. 그러나 multisite angiography에서 annotation projection을 하나의 latent lesion-set law로 연결하고 candidate burden까지 검증하는 정확한 task가 성립하는지는 아직 열려 있다. | **access와 L0 audit에 조건부 shortlist** |
+| annotation-selection-aware lesion set | Structured latent-output weak detection, mixed-supervision detection/medical segmentation, partial-label learning, set prediction, vessel anatomy와 conformal control 각각은 선행 연구다. 남을 수 있는 gap은 annotation selection이 비무작위일 때의 식별·sensitivity와 lesion burden을 함께 다루는 정확한 task뿐이다. | **access와 L0 audit에 조건부 shortlist** |
+
+Heterogeneous label을 latent structured output으로 두는 발상은 NeurIPS
+2010에 이미 있었고, NeurIPS 2021 mixed-supervised detection은 image-level과
+box/mask supervision을 결합했다. Medical imaging에서도 image-level
+classification과 lesion segmentation의 mixed supervision이 직접 존재하며,
+ICML 2024는 partial/unlabeled supervision을 통합적으로 다룬다. 따라서
+annotation projection과 marginalization 자체도 novelty가 아니다.
 
 이 후보의 장점은 새 module을 붙이기 전에 문제 단위를 고칠 수 있다는 데
 있다. 한 환자에서 여러 aneurysm이 있을 때 scan, location label, lesion과
@@ -69,14 +83,15 @@ label의 예측이 서로 모순되는지 직접 검사할 수 있다. 동시에
 - vessel graph, GNN, graph transformer 또는 anatomy prompt
 - DETR류 set prediction, point process 또는 segmentation backbone
 - weak/mixed supervision과 missing-label marginalization 일반론
+- latent structured-output marginalization과 coarsening-at-random 가정
 - temperature scaling, deep ensemble, conformal prediction 또는 FDR control
 - CT/MR multimodal training과 foundation-model feature
 
 독립 contribution 후보는 다음 세 항이 **모두** 성립할 때만 작성한다.
 
-1. 실제 archive의 label 생성 과정을 반영한 annotation operator 아래에서
-   coarse label과 lesion-level prediction을 하나의 tractable normalized
-   set distribution으로 연결하는 새로운 algorithm 또는 보장
+1. 실제 archive의 label 생성·선택 과정을 반영하고 non-random annotation
+   selection 아래의 식별 조건 또는 sensitivity bound를 갖는 새로운 tractable
+   lesion-set algorithm 또는 보장
 2. 독립-head/ROI/multitask/set-prediction baseline보다 lesion localization과
    cross-granularity coherence를 함께 개선하는 patient/study-level evidence
 3. 동일 sensitivity에서 candidate per study를 줄이거나, 고정된 candidate
@@ -105,8 +120,10 @@ payload 학습 없이 CPU/read-only로 다음을 감사한다.
 3. study presence, 13 territory label, localizer와 segmentation의 정확한 mapping
 4. multi-lesion study, negative study, rare territory와 partial annotation 수
 5. AI-generated segmentation의 provenance와 ground-truth 사용 가능 범위
-6. patient/site group split과 CT/MR별 validation/outer-test viability
-7. 공개 가능한 aggregate와 공개하면 안 되는 image/annotation 경계
+6. annotation granularity를 배정한 rule과 site/modality/lesion-dependent
+   selection; coarsening-at-random의 검증 가능 조건
+7. patient/site group split과 CT/MR별 validation/outer-test viability
+8. 공개 가능한 aggregate와 공개하면 안 되는 image/annotation 경계
 
 L0에는 사후 수선 대상이 될 수치 threshold를 아직 두지 않는다. 먼저 exact
 counts와 task unit을 공개 aggregate로 고정한 뒤, label coverage와 split
@@ -121,6 +138,9 @@ patient-level linkage 또는 lesion mapping을 복구하지 못하면 이 후보
 - lesion 수와 location-label cardinality의 일치·불일치 유형을 blind audit한다.
 - official localizer/segmentation subset만으로 lesion-to-territory mapping의
   ambiguity를 측정한다.
+- observed covariate별 annotation-selection propensity와 positivity를 검사하고,
+  unobserved-lesion-dependent selection을 배제할 수 없으면 sensitivity range를
+  먼저 산출한다.
 - site·modality·rare territory를 보존하는 patient-level outer split이 가능한지
   확인한다.
 - trivial study prior, anatomy prior와 published pipeline prediction만으로
@@ -177,6 +197,10 @@ paper identity를 정한다. 그 전의 논문 문구는 hypothesis와 decision 
 - [AMAP anatomy-aware domain prompting](https://www.nature.com/articles/s41746-025-02188-8)
 - [ARAN vasculature-tree-informed detection](https://openaccess.thecvf.com/content/CVPR2026W/PHAROS-AIF-MIH/papers/Shafique_ARAN_Leveraging_Foundation_Models_for_Vasculature-Tree-Informed_ARtery-Aware_Intracranial_ANeurysm_Detection_CVPRW_2026_paper.pdf)
 - [Morphological conformal prediction sets](https://papers.miccai.org/miccai-2025/0169-Paper3902.html)
+- [Structured-output detection with heterogeneous weak labels (NeurIPS 2010)](https://proceedings.neurips.cc/paper/2010/hash/6da37dd3139aa4d9aa55b8d237ec5d4a-Abstract.html)
+- [Mixed-supervised object detection (NeurIPS 2021)](https://proceedings.neurips.cc/paper/2021/hash/20885c72ca35d75619d6a378edea9f76-Abstract.html)
+- [Collaborative medical classification and segmentation (CVPR 2019)](https://openaccess.thecvf.com/content_CVPR_2019/html/Zhou_Collaborative_Learning_of_Semi-Supervised_Segmentation_and_Classification_for_Medical_Images_CVPR_2019_paper.html)
+- [Uniform partial-label and unlabeled learning (ICML 2024)](https://proceedings.mlr.press/v235/liu24ar.html)
 - [OpenNeuro ds005096 longitudinal cohort record](https://openneuro.org/datasets/ds005096)
 - [Bayesian longitudinal aneurysm growth detection](https://arxiv.org/abs/2604.06649)
 - [Shape-DINO](https://arxiv.org/abs/2603.03211)

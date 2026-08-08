@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · direct mixed-supervision prior art narrows the shortlist
+
+- 추가 direct search에서 heterogeneous weak annotations의 latent structured
+  output은 NeurIPS 2010, mixed-supervised detection은 NeurIPS 2021,
+  classification+lesion-segmentation mixed supervision은 CVPR 2019,
+  partial/unlabeled uniform learning은 ICML 2024에 이미 존재함을 확인했다.
+- 따라서 annotation projection/marginalization 자체를 novelty에서 제외했다.
+  Shortlist는 어떤 study에 dense/sparse annotation이 선택됐는지의 mechanism이
+  비무작위일 때 식별 조건 또는 sensitivity bound가 필요한지 묻는
+  `annotation-selection-aware lesion-set` 문제로 더 좁혔다.
+- 실제 selection process는 asset access 전에는 알 수 없다.
+  `coarsening-at-random`은 가정하지 않고, L0에서 assignment rule, propensity,
+  positivity와 unobserved-lesion dependence를 감사한다. 식별되지 않으면
+  point claim을 버리고 sensitivity range 또는 후보 폐기를 택한다.
+- 영향 파일: `AGENTS.md`, `README.md`, `docs/research-direction.md`,
+  `docs/model-spec.md`, `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`,
+  `docs/problem-candidate-audit-2026-08-09.md`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/index.html`, `site/learn.html`, `site/assets/research-data.js`,
+  `CHANGELOG.md`.
+
 ## 2026-08-09 · one access-blocked lesion-set problem enters the shortlist
 
 - 4D-flow branch 종료 뒤 방법 이름 없이 새 problem-level cold audit을

@@ -7,7 +7,7 @@ preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
 aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · one conditional problem shortlist · data access prerequisite unmet · method unselected · submission blocked
 
-## 0. 현재 problem shortlist · annotation-operator-consistent lesion set
+## 0. 현재 problem shortlist · annotation-selection-aware lesion set
 
 새 방법을 정하기 전의 cold audit에서 하나의 조건부 후보만 남겼다.
 
@@ -18,7 +18,8 @@ aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed w
 
 적용 asset 후보는 controlled-access RSNA-ICA 2025다. 현재 알려진
 `introai9` 경로에는 archive가 없고 Kaggle credential도 확인되지 않았으므로
-실제 task unit, label mapping과 split viability는 감사되지 않았다. 사용자가
+실제 task unit, label mapping, annotation-selection mechanism과 split
+viability는 감사되지 않았다. 사용자가
 공식 약관을 수락해 private asset을 제공하기 전에는 config, architecture,
 training 또는 GPU job을 만들지 않는다.
 
@@ -26,9 +27,13 @@ training 또는 GPU job을 만들지 않는다.
 segmentation model이 아니다. 하나의 순서 없는 latent lesion set을 두고
 presence, territory, point와 mask를 annotation operator로 주변화하여
 cross-granularity contradiction과 candidates-per-study burden을 함께 평가하는
-문제다. 그러나 set prediction, weak supervision, vessel graph, anatomy prompt,
-conformal/FDR는 모두 선행 구성요소다. 실제 label-generation contract를
-반영한 새로운 tractable set likelihood 또는 보장, strong challenge baseline
+문제다. 그러나 latent structured-output weak detection은 NeurIPS 2010부터,
+mixed-supervision detection·medical segmentation과 partial-label learning도
+직접 존재한다. Set prediction, vessel graph, anatomy prompt와 conformal/FDR도
+선행 구성요소다. 따라서 실제 label-generation뿐 아니라 어떤 study에 어떤
+annotation granularity가 선택됐는지의 mechanism을 분리하고 non-random
+selection에서 식별 조건 또는 sensitivity bound를 주는 새로운 tractable
+set likelihood/보장, strong challenge baseline
 대비 lesion localization과 coherence의 동시 개선, calibration-supported
 reading-burden 개선이 모두 있어야만 contribution으로 승격한다.
 

@@ -15,10 +15,12 @@ problem-level cold audit의 한 조건부 lesion-set shortlist를 반영했다.
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. 유일한 조건부
-  shortlist는 RSNA-ICA 2025의 mixed-granularity anatomy-structured lesion-set
+  shortlist는 RSNA-ICA 2025의 annotation-selection-aware mixed-granularity lesion-set
   inference다. Study presence, vascular-territory label, point localizer와 일부
   segmentation을 같은 latent lesion set의 annotation projection으로 다루는
-  문제지만, 아직 contribution이나 paper identity가 아니다.
+  문제지만, 아직 contribution이나 paper identity가 아니다. Heterogeneous
+  weak label의 latent structured-output marginalization과 mixed-supervision
+  detection/medical segmentation은 직접 prior art다.
 - 2026-08-09 bounded audit에서 알려진 `introai9` 경로에 RSNA-ICA archive를
   찾지 못했고 Kaggle credential/CLI도 없었다. 이는 서버 전체 부재 증명이
   아니라 `not staged` 판정이다. 사용자를 대신해 controlled-access 약관을
@@ -27,7 +29,8 @@ problem-level cold audit의 한 조건부 lesion-set shortlist를 반영했다.
 - Access 뒤 첫 허용 작업은 CPU/read-only L0 asset/task-unit audit이다. Version,
   terms/checksum, patient–study–series–site–modality key, lesion cardinality,
   13 territory label, localizer/segmentation mapping, AI-generated annotation
-  provenance와 patient/site split viability를 검사한다. L0 뒤에만 L1 threshold를
+  provenance, annotation assignment rule·positivity와 patient/site split
+  viability를 검사한다. Coarsening-at-random은 가정하지 않는다. L0 뒤에만 L1 threshold를
   prospective하게 고정한다. 상세 계약은
   `docs/problem-candidate-audit-2026-08-09.md`다.
 - Vessel graph/GNN, generic set prediction, mixed supervision, anatomy prompt,

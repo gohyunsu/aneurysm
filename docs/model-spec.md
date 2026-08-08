@@ -14,10 +14,14 @@ access-blocked lesion-set problem shortlist · method and architecture unselecte
 
 현재 구현하거나 선택한 headline architecture는 없다. 조건부 problem
 shortlist는 RSNA-ICA의 mixed-granularity annotation을 하나의 latent lesion
-set에서 유도하는 것이지만, 이는 model specification이 아니라 estimand
+set에서 유도하되 annotation type selection을 별도 mechanism으로 두는 것이지만,
+이는 model specification이 아니라 estimand
 specification이다. Controlled-access asset이 아직 stage되지 않았으므로 patient,
 study, lesion, territory, localizer와 segmentation의 실제 mapping을 모른 채
 GNN, U-Net, DETR, point process 또는 foundation model을 고르지 않는다.
+L0 전에는 coarsening-at-random도 가정하지 않는다. Selection이 unobserved
+lesion에 의존해 point identification이 불가능하면 sensitivity analysis 또는
+후보 폐기가 architecture보다 앞선다.
 
 Access 뒤 method-free L0/L1이 task를 지지할 때만 independent-head,
 published vessel+ROI, 26-class multitask 3D nnU-Net과 generic set-prediction

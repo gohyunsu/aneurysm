@@ -7,7 +7,9 @@
 > 알려진 `introai9` 경로에는 stage되지 않았고 Kaggle credential도 확인되지
 > 않아 patient/study/lesion mapping, exact modality/site counts와 split viability는
 > `unaudited`다. 사용자가 약관을 수락하고 private asset을 제공하기 전에는
-> 다운로드, config, training과 GPU job을 만들지 않는다. Access 뒤에도 첫
+> 다운로드, config, training과 GPU job을 만들지 않는다. Dense/sparse label이
+> lesion, site 또는 modality에 따라 선택됐는지 알 수 없으므로
+> coarsening-at-random도 가정하지 않는다. Access 뒤에도 첫
 > 작업은 CPU/read-only L0 asset/task-unit audit이며 raw image/annotation은
 > 공개 저장소에 재배포하지 않는다. 상세 범위는
 > [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)를
@@ -73,7 +75,7 @@
 
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |
 |---|---|---:|---|---|
-| RSNA-ICA 2025 | Multisite CT/MR angiography, study/location labels, localizer와 일부 segmentation research | official description: >4,000 scans, 18 institutions, 13 locations; exact local counts unknown | conditional mixed-granularity lesion-set L0 candidate | controlled non-commercial access; not staged, task unit unaudited, no redistribution |
+| RSNA-ICA 2025 | Multisite CT/MR angiography, study/location labels, localizer와 일부 segmentation research | official description: >4,000 scans, 18 institutions, 13 locations; exact local counts unknown | conditional annotation-selection-aware lesion-set L0 candidate | controlled access; not staged, task unit/annotation-selection unaudited, no redistribution |
 | AneuriskWeb | surface/centerline/morphology, 일부 배포본의 영상·annotation 여부 확인 필요 | 약 100 | geometry·형태 baseline | 배포본/미러별 asset 차이를 checksum으로 확인 |
 | AneuX | aneurysm/vessel mesh, morphology·clinical table, rupture label | 750 models | geometry 규모 확장, morphology/rupture 연구 | CTA 원본·CFD가 없는 geometry dataset |
 | CMHA / Gong et al. 2024 | CTA, 3D model, clinical/morphology/hemodynamic data | 99 IA + 44 controls | multimodal clinical/CFD 연결 | 다운로드 14.49 GB, 파일 매핑·license 기록 필요 |

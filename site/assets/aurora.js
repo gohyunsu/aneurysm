@@ -103,21 +103,21 @@
       description: "병변 집합을 study presence로 projection합니다.",
       connector: "infer S",
       title: "Unordered lesion set",
-      copy: "Unknown lesion count, 3D extent and vascular-territory mark",
+      copy: "Unknown lesion count, 3D extent, territory and annotation-selection mechanism",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
       description: "Point localizer와 territory를 같은 병변 instance에 연결합니다.",
       connector: "match point",
       title: "Partially localized lesion set",
-      copy: "Observed points constrain lesion identity, count and territory",
+      copy: "Observed points constrain lesions only after their selection rule is audited",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
       description: "Dense mask도 별도 task가 아니라 같은 lesion set의 extent 관측입니다.",
       connector: "match extent",
       title: "Densely observed lesion set",
-      copy: "Mask geometry refines the same lesion identity and territory",
+      copy: "Mask geometry refines lesions; missing masks are not assumed random",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

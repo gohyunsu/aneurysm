@@ -11,7 +11,8 @@
 
 현재 유일한 조건부 shortlist는 RSNA-ICA 2025에서 study presence, vascular
 territory, point localizer와 segmentation을 같은 latent lesion set의 annotation
-operator로 다루는 문제다. 그러나 controlled-access asset은 `introai9`의
+operator로 다루고 annotation granularity selection을 별도 감사하는 문제다.
+그러나 controlled-access asset은 `introai9`의
 알려진 경로에 없고 Kaggle credential도 확인되지 않았다. 에이전트는 사용자를
 대신해 약관에 동의하지 않는다.
 
@@ -20,7 +21,8 @@ operator로 다루는 문제다. 그러나 controlled-access asset은 `introai9`
 실행은 CPU/read-only asset/task-unit audit이어야 한다. Version/license와
 checksum, patient–study–series–site–modality key, lesion cardinality, 13 territory
 label, localizer/segmentation mapping, AI-generated annotation provenance,
-multi-lesion/negative/rare-label 수와 patient/site outer-split viability를 먼저
+annotation assignment rule·positivity, multi-lesion/negative/rare-label 수와
+patient/site outer-split viability를 먼저
 고정한다. 이 mapping이 복구되지 않으면 후보를 종료한다.
 
 L0 aggregate 뒤에만 numeric L1 adequacy threshold를 prospective하게 등록한다.

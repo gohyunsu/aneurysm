@@ -24,6 +24,10 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "access-blocked"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["coarsening_at_random_assumed"] = True
+        with self.assertRaisesRegex(ProtocolError, "access-blocked"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
         with self.assertRaisesRegex(ProtocolError, "access-blocked"):
             validate_protocol(candidate)

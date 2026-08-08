@@ -135,6 +135,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "asset_access_status",
             "user_accepted_data_terms_verified",
             "task_unit_audited",
+            "annotation_selection_mechanism_audited",
+            "coarsening_at_random_assumed",
             "method_selected",
             "gpu_training_authorized",
             "outer_test_authorized",
@@ -151,15 +153,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         problem_selection["status"]
         != "one_conditional_shortlist_no_selected_primary_problem"
         or problem_selection["shortlisted_candidate"]
-        != "mixed_granularity_anatomy_structured_lesion_set_inference"
+        != "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
         or problem_selection["candidate_dataset"]
         != "rsna_ica_2025_controlled_access"
         or problem_selection["candidate_estimand"]
-        != "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_annotation_projections"
+        != "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_observed_annotation_and_selection_operators"
         or problem_selection["asset_access_status"]
         != "not_found_in_bounded_introai9_name_audit_and_no_kaggle_credential"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
+        or problem_selection["annotation_selection_mechanism_audited"] is not False
+        or problem_selection["coarsening_at_random_assumed"] is not False
         or problem_selection["method_selected"] is not False
         or problem_selection["gpu_training_authorized"] is not False
         or problem_selection["outer_test_authorized"] is not False

@@ -26,6 +26,17 @@ segmentation uncertainty 또는 conformal set을 붙이는 방향은 독립 nove
 contribution으로 인정한다. Controlled-access asset의 patient/study/lesion
 mapping은 아직 감사되지 않았다.
 
+더 직접적인 cold search에서 heterogeneous weak annotation을 latent structured
+output으로 두는 formulation은 NeurIPS 2010까지 거슬러 올라가고, NeurIPS
+2021은 image-level과 full box/mask supervision을 섞은 detection을 직접
+다뤘다. CVPR 2019는 medical image classification과 lesion segmentation을
+mixed supervision으로 공동 학습했고, ICML 2024는 partial-label과 unlabeled
+data를 통합적으로 다뤘다. 따라서 annotation projection likelihood 자체도
+novelty가 아니다. 남을 수 있는 이론적 gap은 annotation granularity가
+site/modality/unobserved lesion에 따라 비무작위로 선택될 때의 식별 조건 또는
+sensitivity bound다. 실제 RSNA provenance가 이 문제를 만들지 L0에서 먼저
+반증한다.
+
 - [RSNA-ICA official challenge](https://www.rsna.org/artificial-intelligence/ai-image-challenge/intracranial-aneurysm-detection-ai-challenge)
 - [RSNA-ICA official AWS registry](https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/)
 - [First-place vessel segmentation + ROI implementation](https://github.com/uchiyama33/rsna2025_1st_place)
@@ -33,6 +44,10 @@ mapping은 아직 감사되지 않았다.
 - [AMAP anatomy-aware domain prompting](https://www.nature.com/articles/s41746-025-02188-8)
 - [ARAN vasculature-tree-informed detection](https://openaccess.thecvf.com/content/CVPR2026W/PHAROS-AIF-MIH/papers/Shafique_ARAN_Leveraging_Foundation_Models_for_Vasculature-Tree-Informed_ARtery-Aware_Intracranial_ANeurysm_Detection_CVPRW_2026_paper.pdf)
 - [Morphological conformal prediction sets](https://papers.miccai.org/miccai-2025/0169-Paper3902.html)
+- [Structured-output detection with heterogeneous weak labels (NeurIPS 2010)](https://proceedings.neurips.cc/paper/2010/hash/6da37dd3139aa4d9aa55b8d237ec5d4a-Abstract.html)
+- [Mixed-supervised object detection (NeurIPS 2021)](https://proceedings.neurips.cc/paper/2021/hash/20885c72ca35d75619d6a378edea9f76-Abstract.html)
+- [Collaborative medical classification and segmentation (CVPR 2019)](https://openaccess.thecvf.com/content_CVPR_2019/html/Zhou_Collaborative_Learning_of_Semi-Supervised_Segmentation_and_Classification_for_Medical_Images_CVPR_2019_paper.html)
+- [Uniform partial-label and unlabeled learning (ICML 2024)](https://proceedings.mlr.press/v235/liu24ar.html)
 
 Longitudinal growth는 Royal Brisbane/OpenNeuro cohort의 clinician annotation이
 patient당 선택된 한 session에만 있고 AGED 및 2026 Bayesian growth detection이
