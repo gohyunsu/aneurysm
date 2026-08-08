@@ -324,6 +324,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "i0b_allowed_field_access",
             "i0b_pass_authorizes",
             "i0b_local_repair_rerun_or_threshold_change_allowed",
+            "i0b_execution_source_commit",
+            "i0b_execution_record",
+            "i0b_execution_record_sha256",
+            "i0b_execution_gate",
+            "i0b_execution_asset_and_field_access",
+            "i0b_execution_reentry_allowed",
+            "i0c_authorized",
             "generic_super_resolution_or_denoising_is_novel",
             "cfd_field_is_clinical_mri_ground_truth",
             "forbidden_claims",
@@ -356,7 +363,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
         or task["active_candidate_status"]
-        != "i0a_completed_14_of_14_asset_integrity_pass_i0b_preregistered_before_any_field_read_no_method_selected"
+        != "i0b_execution_incomplete_missing_h5py_before_asset_access_no_scientific_verdict_no_rerun_method_unselected"
         or task["candidate_primary_estimand"]
         != "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space"
         or task["candidate_secondary_estimand"]
@@ -382,7 +389,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["i0b_config_sha256"]
         != "e19a1194f1b9ec41861c5084b26c9add5be47924a19aee4d23ffc826399dce06"
         or task["i0b_status"]
-        != "preregistered_after_i0a_and_expanded_asset_discovery_before_any_velocity_or_REC_field_read"
+        != "execution_incomplete_missing_h5py_before_archive_or_field_access_no_scientific_verdict_closed_without_rerun"
         or task["i0b_discovery_scope"]
         != "2021_README_and_MATLAB_reader_plus_Zenodo_17183575_record_three_central_directories_and_33_primary_PAR_headers_not_prospective_evidence"
         or task["i0b_allowed_field_access"]
@@ -390,12 +397,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["i0b_pass_authorizes"]
         != "register_method_free_I0c_PAR_REC_decoder_noise_and_cross_VENC_measurement_audit_only"
         or task["i0b_local_repair_rerun_or_threshold_change_allowed"] is not False
+        or task["i0b_execution_source_commit"]
+        != "0ebdb344a6cd4009a928746cda5389b95f12bf8d"
+        or task["i0b_execution_record"]
+        != "results/flow_mri_protocol_i0b_execution_20260809.json"
+        or task["i0b_execution_record_sha256"]
+        != "1b75bb953352966b9c7e2edbb838973d5222c883fe821e4b77ee2302c2ba2130"
+        or task["i0b_execution_gate"] != "not_evaluated"
+        or task["i0b_execution_asset_and_field_access"] != "zero"
+        or task["i0b_execution_reentry_allowed"] is not False
+        or task["i0c_authorized"] is not False
         or task["generic_super_resolution_or_denoising_is_novel"] is not False
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
             "The 4D-flow candidate must retain the exact I0a result and I0b "
-            "registration, remain measurement-space, and stay method-unselected."
+            "execution record, remain measurement-space, and stay method-unselected."
         )
     checks.append("historical task boundary and 4D-flow candidate guardrails")
 
@@ -453,11 +470,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     if (
         flow_2021.get("status")
-        != "i0b_preregistered_27_processed_RAW_only_no_field_read_yet"
+        != "i0b_execution_incomplete_before_asset_access_no_field_read"
         or flow_2025.get("status")
-        != "i0b_overlap_with_expanded_release_unresolved_no_REC_read"
+        != "i0b_execution_incomplete_overlap_unresolved_no_REC_read"
         or flow_intervention.get("status")
-        != "i0b_preregistered_metadata_and_33_primary_headers_only_no_REC_read"
+        != "i0b_execution_incomplete_metadata_discovery_only_no_REC_read"
         or flow_intervention.get("split_unit") != "physical_base_geometry"
         or flow_intervention.get("source_patient_anatomies") != 2
         or flow_intervention.get("base_geometry_models") != 5
@@ -468,7 +485,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or flow_intervention.get("unique_device_conditions") != 15
     ):
         raise ProtocolError(
-            "I0b registration must preserve field/REC access and physical-unit boundaries."
+            "I0b execution record must preserve zero field/REC access and physical-unit boundaries."
         )
     checks.append("dataset provenance and split units")
 

@@ -6,7 +6,7 @@
 backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass,
 V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
 그리고 cross-protocol 4D-flow candidate I0a 14/14 asset pass와 2026-08-09
-I0b one-shot task-adequacy registration을 반영했다.
+I0b one-shot execution-incomplete/no-verdict/no-rerun 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -15,10 +15,11 @@ I0b one-shot task-adequacy registration을 반영했다.
   Reliable Assessment**
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
-- 현재 candidate 문제: **protocol-indexed posterior prediction under
+- 최근 candidate 문제: **protocol-indexed posterior prediction under
   intracranial 4D-flow acquisition shift**. 한 실제 acquisition posterior가
   같은 controlled phantom flow의 다른 resolution·acceleration·VENC
-  acquisition을 measurement space에서 예측하는지를 묻는다.
+  acquisition을 measurement space에서 예측하는지를 물었으나 현재 branch는
+  닫혀 있다.
 - 현재 단계: exact public source
   `f7b4e024d69d43cf042f4163342b4d993386f441`의 I0a가 14/14를 통과했다.
   Registration 전에 본 official record, two central directories, nine
@@ -32,7 +33,12 @@ I0b one-shot task-adequacy registration을 반영했다.
   `17183575`는 metadata·central directory·33 primary PAR header만 감사한다.
   33 scans의 실제 구조는 5 base geometry, 22 physical model/device state,
   8 multi-VENC state, 2 pump-off scan, 15 device condition과 2 source patient
-  anatomy다. Method·architecture는 선택하지 않았다.
+  anatomy다. Exact source `0ebdb344a6cd4009a928746cda5389b95f12bf8d`의
+  PBS job `115093`은 wrapper가 과거에 사용한 read-only `h5py==3.12.1`
+  dependency layer를 bind하지 않아 import 단계에서 exit 1이었다.
+  Archive/RAW/field/PAR/REC read, cache와 result 생성은 0이고 gate는
+  미평가다. Scientific verdict가 아니며 등록된 no-rerun rule을 유지해 I0c와
+  dependency repair를 열지 않는다. Method·architecture는 선택하지 않았다.
 - 제출 목표: **IEEE ISBI 2027 archival four-page regular paper**,
   2026-10-26 23:59 USA EDT. 현재는 `not submission-ready`다.
 - ISBI headline은 actual irregular-3D aneurysm **velocity-only**
@@ -386,17 +392,20 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   submission evidence가 아니다. 별도 I0b contract 전 field payload를 읽지
   않으며 local repair는 없다.
 
-- **I0b · Method-free field/task-unit adequacy · preregistered**: 2021 official
+- **I0b · Method-free field/task-unit adequacy · execution-incomplete/closed**: 2021 official
   README/Matlab reader와 Zenodo `17183575` record·세 central directory·33
-  primary PAR header를 registration 전 discovery로 공개했다. 아직 velocity
-  field와 REC는 읽지 않았다. Formal run은 2021 processed RAW 27개만
+  primary PAR header를 registration 전 discovery로 공개했다. Formal run은
+  2021 processed RAW 27개만
   little-endian float32/X-fastest 순서로 decode해 common grid에서 support
   alignment, temporal/vector similarity, resolution/acceleration discrepancy와
   protocol variance를 one-shot all-check rule로 검사한다. Expanded release는
   33 scans가 아니라 5 base geometry/2 source anatomy를 headline unit으로
   유지하며 두 2025 release의 overlap은 unresolved이다. Pass도 method-free
-  I0c PAR/REC decoder·noise audit 등록만 허용한다. Failure 뒤 mask,
-  registration, threshold, rerun과 task relabel은 금지한다.
+  I0c PAR/REC decoder·noise audit 등록만 허용하도록 설계했다. 실제 exact
+  `0ebdb344…` run은 `h5py` import에서 asset access 전에 끝나 cache/result가
+  없고 gate도 미평가다. Public execution record SHA는 `1b75bb95…`다.
+  Dependency 보충, mask/registration/threshold repair, I0b rerun, I0c와 task
+  relabel은 금지한다. 다음은 새 problem-level candidate audit이다.
 
 - **G0 · Asset integrity**: case mapping, unit, boundary marker, license,
   geometry/condition split이 검증되지 않으면 학습하지 않는다.
@@ -757,10 +766,12 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   byte-range만 사용했고 14/14를 통과했으며 processed RAW/REC field read는
   0이었다. 별도 I0b contract 전에는 field payload를 읽지 않고 method code나
   GPU training을 실행하지 않는다.
-- I0b는 `introai9` scheduler CPU allocation의 pinned container에서 2021
-  processed RAW만 selective staging한다. Source는 read-only, private HDF5
-  output만 writable이다. 2025 REC, checkpoint와 GPU read는 0이어야 한다.
-  Pass 뒤에도 `junjinyong` GPU training은 열리지 않는다.
+- I0b exact `0ebdb344…`는 `introai9` scheduler CPU allocation에서 실행됐으나
+  wrapper가 기존 read-only `h5py==3.12.1` layer를 누락해 asset access 전에
+  exit 1이었다. Source는
+  read-only였고 private cache/result는 생성되지 않았다. 2021 RAW/field, 2025
+  PAR/REC, checkpoint와 GPU read는 0이다. Gate는 미평가이고 no-rerun rule에
+  따라 dependency 보충, I0c와 `junjinyong` GPU training은 열리지 않는다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

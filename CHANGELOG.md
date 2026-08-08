@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · I0b stops before asset access and is not rerun
+
+- Exact public source `0ebdb344a6cd4009a928746cda5389b95f12bf8d`, frozen
+  config SHA `e19a1194…`의 one-shot PBS job `115093`은 GPU 없이 8 CPU/48 GB로
+  5분 7초 실행된 뒤 exit 1이었다. Registered wrapper가 과거 실행에서 쓰던
+  read-only `h5py==3.12.1` dependency layer를 bind하지 않았다.
+- Failure는 archive index 요청 전 `_scientific_imports()`에서 발생했다.
+  2021 archive/RAW/velocity field, 2025 PAR/REC, checkpoint와 GPU access는 0이고
+  cache·metric·scientific result도 생성되지 않았다. Gate는 `not_evaluated`이며
+  task adequacy를 지지하거나 반박하지 않는다.
+- Public execution record는
+  `results/flow_mri_protocol_i0b_execution_20260809.json`, SHA-256
+  `1b75bb953352966b9c7e2edbb838973d5222c883fe821e4b77ee2302c2ba2130`다.
+  Raw log, hostname, cache와 server path는 private output에만 보존한다.
+- 등록한 no-rerun rule을 적용해 `h5py`를 보충한 I0b 재실행, I0c, method/GPU
+  training과 outer test를 열지 않는다. 4D-flow candidate는 scientific verdict
+  없이 닫고 다음은 새 problem-level candidate audit이다.
+- Central config/validator/tests including the immutable execution-record guard,
+  AGENTS, research/model/experiment/dataset/
+  server/ISBI 문서, README, results index와 site를 같은 상태로 동기화했다.
+
 ## 2026-08-09 · I0b freezes task adequacy before any field read
 
 - I0a 14/14가 허용한 범위에서

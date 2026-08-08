@@ -4,12 +4,13 @@
 V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training underfit ·
 V1e known-condition qualification failed 6/9 · M0 execution-incomplete/no
 scientific verdict · prior BC-operator identity inactive · cross-protocol
-4D-flow I0a asset integrity passed 14/14 · I0b preregistered before field read · method and
+4D-flow I0a asset integrity passed 14/14 · I0b execution-incomplete before
+asset access/no scientific verdict/no rerun · 4D-flow branch closed · method and
 architecture unselected
 
 연결 설정: `configs/aurora_v1.json`
 
-## 0-A. 현재 candidate의 model boundary
+## 0-A. 닫힌 4D-flow candidate의 model boundary
 
 현재 선택된 neural architecture는 없다. Exact source `f7b4e024…`의 I0a는
 metadata/header/byte-contract 14/14를 field read 없이 통과했다. I0b는 2021
@@ -17,12 +18,14 @@ processed velocity의 method-free task-adequacy와 33-scan expanded asset의
 task-unit structure만 감사하므로 GNN, U-Net,
 diffusion, neural operator 어느 것도 “현재 모델”이라 부르지 않는다.
 
-I0b가 통과해도 I0c PAR/REC decoder·pump-off noise·multi-VENC measurement audit만
-연다. 33 scan은 5 base geometry와 2 source anatomy에서 나온 것이므로 scan,
-device, voxel, phase를 독립 표본으로 취급한 architecture selection은 금지한다.
+실제 I0b job은 `h5py` import 전에 exit 1이어서 archive/field access와 gate
+평가가 모두 0이었다. No-rerun contract에 따라 dependency를 추가한 반복과
+I0c/model 설계를 열지 않는다. 33 scan은 5 base geometry와 2 source anatomy에서
+나온다는 discovery boundary만 보존하며 scan, device, voxel, phase를 독립
+표본으로 취급한 architecture selection은 계속 금지한다.
 
-I0b가 양수일 때만 이후 model contract가 아래 causal data flow를 구현해야
-한다.
+아래는 I0b가 양수일 경우에만 검토하려던 보존된 data flow이며 현재 구현
+권한이 없다.
 
 \[
 y_\alpha,\alpha
@@ -37,7 +40,7 @@ p(y_\beta\mid y_\alpha,\alpha,\beta).
 - \(\alpha,\beta\): spatial/temporal resolution, acceleration, VENC, encoding
   scheme와 reconstruction provenance
 - \(u(x,t)\): protocol에 종속되지 않는다고 가정할 latent continuous
-  velocity field; 실제로 공유 가능한지는 I0b에서 먼저 검사
+  velocity field; 실제 공유 가능성은 I0b에서 미평가로 남음
 - (A_\beta): target acquisition의 measurement/reconstruction operator;
   알려지지 않은 vendor 처리를 정확한 forward model처럼 꾸미지 않음
 - primary score: held-out same-flow acquisition의 proper predictive score
@@ -49,7 +52,7 @@ measurement pushforward와 calibrated residual/noise layer의 결합이다. 그�
 implicit neural representation, physics loss, posterior sampling, cross-view
 cycle consistency는 모두 선행 구성요소다. 독립 novelty는 I0b 뒤에도 남는
 구체적 failure mode를 해결하는 algorithm·보장과 strong baseline 우위가
-함께 있을 때만 확정한다.
+함께 있을 때만 확정한다. 현재 branch에서는 이를 구현하지 않는다.
 
 ## 0-B. 보존된 이전 architecture
 

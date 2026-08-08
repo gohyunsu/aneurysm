@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · prior identity inactive · I0a passed 14/14 · I0b preregistered before field read · method unselected · not submission-ready",
-    requirement: "I0b one-shot task adequacy → if pass, method-free I0c raw measurement audit → only then method design",
+    status: "Target locked · prior identity inactive · I0a passed 14/14 · I0b execution-incomplete before asset access · no verdict/no rerun · method unselected · not submission-ready",
+    requirement: "Closed 4D-flow branch → new problem-level candidate audit → only positive evidence may authorize method design",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
@@ -105,7 +105,7 @@ window.AURORA_DATA = Object.freeze({
     ["Uncertainty", "Usually point estimate", "Reconstruction uncertainty optional", "Voxelwise error or distributional output", "Full posterior predictive score; feasibility unproven"],
     ["Reference", "CFD or acquired HR", "Acquired/self-supervised k-space", "Synthetic/repeat/dual-VENC validation", "Same controlled flow's second real acquisition"],
     ["What is already occupied", "SR and denoising", "Physics/self-supervised reconstruction", "Velocity UQ and distributional SR", "Only the evaluation gap is a candidate; no method selected"],
-    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a passed 14/14; I0b preregistered before field read"]
+    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a passed 14/14; I0b execution-incomplete/no verdict; branch closed"]
   ],
   gates: [
     {
@@ -119,7 +119,7 @@ window.AURORA_DATA = Object.freeze({
       id: "I0b",
       title: "Is the measured task nontrivial and honestly sampled?",
       copy: "2021 processed RAW 27개만 common grid로 selective staging해 support alignment, temporal/vector similarity와 resolution/acceleration discrepancy를 본다. Expanded 33-scan release는 5 base geometry·22 physical state·8 multi-VENC state·2 pump-off scan·2 source anatomy로 감사한다.",
-      state: "Preregistered before velocity/REC read · one-shot · no local repair · no method",
+      state: "Exact 0ebdb344 omitted the known h5py layer and stopped before asset access · gate not evaluated · no verdict/no rerun · branch closed",
       blocking: true
     },
     {
@@ -162,17 +162,17 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "4D-flow multiresolution phantom · 2021",
       role: "same-flow 3 resolution × 3 acceleration development/task audit candidate",
-      provenance: "Zenodo CC BY 4.0 · I0b preregistered for 27 processed RAW · field not read yet"
+      provenance: "Zenodo CC BY 4.0 · I0b execution-incomplete before archive/field access · no verdict/no rerun"
     },
     {
       name: "4D-flow dual-VENC phantoms · 2025",
       role: "four-phantom external protocol-pair task audit candidate",
-      provenance: "Zenodo CC BY 4.0 · overlap with expanded release unresolved · REC not read"
+      provenance: "Zenodo CC BY 4.0 · preserved metadata only · overlap unresolved · REC not read"
     },
     {
       name: "4D-flow intervention phantoms · 2025",
       role: "33 untreated/device-treated scans with multi-VENC and pump-off controls",
-      provenance: "Zenodo CC BY 4.0 · 5 base geometry · 22 states · 2 source anatomies · 33 primary headers only · REC not read"
+      provenance: "Zenodo CC BY 4.0 · preserved discovery: 5 base geometry · 22 states · 2 source anatomies · REC not read"
     },
     {
       name: "Aneumo",
@@ -201,6 +201,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "execution",
+      title: "I0b ends before asset access and the 4D-flow branch closes without a verdict",
+      copy: "Exact public source 0ebdb344…의 one-shot PBS job 115093은 GPU 없이 8 CPU/48 GB로 5분 7초 실행된 뒤 registered wrapper가 기존 read-only h5py 3.12.1 layer를 누락해 import 단계에서 exit 1이었다. Archive request, RAW/field/PAR/REC, checkpoint와 GPU access, cache·metric·result 생성은 모두 0이다. Gate는 미평가이고 task adequacy를 지지하거나 반박하지 않는다. Public execution record에는 raw log 대신 checksum과 access boundary만 둔다. 등록한 no-rerun rule에 따라 dependency를 보충한 I0b 반복, I0c, method/GPU와 outer test를 열지 않고 새 problem-level candidate audit으로 돌아간다.",
+      files: ["results/flow_mri_protocol_i0b_execution_20260809.json", "results/README.md", "tests/test_flow_mri_i0b_execution_record.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "protocol",

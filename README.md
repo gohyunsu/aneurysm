@@ -4,17 +4,18 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-새 active candidate는 **intracranial 4D-flow MRI의 protocol-indexed posterior
-prediction**입니다. 한 acquisition에서 추론한 latent flow posterior가 같은
+최근 검증한 candidate는 **intracranial 4D-flow MRI의 protocol-indexed posterior
+prediction**이었습니다. 한 acquisition에서 추론한 latent flow posterior가 같은
 controlled phantom flow의 다른 resolution·acceleration·VENC acquisition을
 measurement space에서 예측할 수 있는지를 묻습니다. Generic
 super-resolution, denoising, PINN reconstruction 또는 voxelwise uncertainty를
 새 contribution이라고 부르지 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 유지하지만, 새 candidate의 정식 방법명과
-> architecture는 I0b/I0c 근거 전에는 정하지 않습니다.
+> architecture는 선택되지 않았습니다. I0b가 asset access 전 execution-incomplete로
+> 끝났고 no-rerun 계약을 유지하므로 이 branch도 닫혀 있습니다.
 
-## 현재 단계 · I0a 14/14 통과, I0b one-shot audit 등록
+## 현재 단계 · I0a asset pass, I0b execution-incomplete, method 없음
 
 [`I0a contract`](configs/flow_mri_protocol_i0a_asset_audit.json)는 두 공개
 paired-protocol phantom release의 공식 record, archive size/checksum, ZIP
@@ -37,11 +38,21 @@ RAW/REC payload read는 0입니다. 공개 aggregate는
 22 model/device state, 8 multi-VENC state, 2 pump-off scan과 15 device condition을
 감사합니다. 이 discovery는 등록 전에 수행했음을 명시하며 REC는 읽지 않습니다.
 
-33 scans는 33 patients가 아닙니다. Base geometry는 5개이고 source patient
-anatomy는 2개뿐이며 exact-protocol repeat도 없습니다. I0b가 모두 통과해도
-method-free PAR/REC decoder·noise audit인 I0c 등록만 열립니다. Method, posterior
-calibration claim, neural/GPU training, outer test와 ISBI submission은 아직
-열리지 않습니다.
+**Outcome · 2026-08-09.** Exact source `0ebdb344a6cd4009a928746cda5389b95f12bf8d`의
+CPU/PBS job은 wrapper가 과거에 사용한 read-only `h5py==3.12.1` layer를
+bind하지 않아 import 단계에서 exit 1로 끝났습니다. Archive request,
+RAW/field/REC read, cache와 metric/result 생성은
+모두 0입니다. 공개
+[`execution record`](results/flow_mri_protocol_i0b_execution_20260809.json)는
+raw log 대신 checksum과 접근 경계만 보존합니다. Gate는 평가되지 않았고
+task adequacy에 대한 양수·음수 scientific verdict가 아닙니다.
+
+등록된 one-shot/no-rerun 규칙에 따라 dependency를 보충해 I0b를 반복하지
+않으며 I0c도 열지 않습니다. 33 scans가 33 patients가 아니라는 단위 경계는
+그대로지만, 그 metadata discovery를 model evidence로 승격하지 않습니다.
+다음에는 local environment repair가 아니라 새 problem-level candidate를
+별도로 감사해야 하며 method, posterior calibration claim, neural/GPU training,
+outer test와 ISBI submission은 닫혀 있습니다.
 
 ## 보존된 이전 연구선과 제출 상태
 

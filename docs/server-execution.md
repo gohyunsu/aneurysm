@@ -59,6 +59,13 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
 - Pass도 `junjinyong` GPU job을 열지 않는다. 별도 method-free I0c decoder/noise
   protocol을 public exact commit으로 먼저 고정해야 한다. Failure 뒤 local
   registration·mask·threshold 수선이나 I0b rerun은 금지한다.
+- **Outcome:** exact source `0ebdb344…`의 PBS job `115093`은 8 CPU/48 GB,
+  GPU 없이 5분 7초 뒤 exit 1이었다. Registered wrapper가 과거에 쓰던
+  read-only `h5py==3.12.1` layer를 bind하지 않아 `_scientific_imports()`에서
+  중단됐다. Container SHA는 `2da7b186…`이고 raw
+  log/status checksum은 public execution record에 고정했다. Archive request,
+  RAW/field/PAR/REC read, cache/result 생성은 0이다. Gate는 미평가이며
+  dependency를 보충한 rerun이나 I0c/GPU job을 제출하지 않는다.
 
 ## 2026-08-03 자산 감사
 

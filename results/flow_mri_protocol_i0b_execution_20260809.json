@@ -1,0 +1,50 @@
+{
+  "schema_version": "aurora.flow_mri_protocol_i0b.execution_record.v1",
+  "experiment_id": "flow_mri_protocol_i0b_task_adequacy",
+  "date_kst": "2026-08-09",
+  "source_commit": "0ebdb344a6cd4009a928746cda5389b95f12bf8d",
+  "config_sha256": "e19a1194f1b9ec41861c5084b26c9add5be47924a19aee4d23ffc826399dce06",
+  "scheduler": {
+    "job_id": "115093",
+    "resource_request": "1x8_CPU_48GB_no_GPU",
+    "walltime": "00:05:07",
+    "exit_status": 1
+  },
+  "environment": {
+    "pinned_container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "missing_dependency": "h5py",
+    "known_external_h5py_3_12_1_layer_bound": false,
+    "root_cause": "the_registered_I0b_wrapper_bound_only_the_base_container_and_omitted_the_previously_used_read_only_h5py_layer"
+  },
+  "raw_private_artifacts": {
+    "run_log_sha256": "11ca76f406b43f82ae1611cb762ea9de848304ef94abacd94dbed4684f698f71",
+    "wrapper_status_sha256": "2e6b07cc23810211d2ce01ce7bee43e883c3f8ac4497de5132984426760b8797",
+    "velocity_cache_created": false,
+    "scientific_result_created": false
+  },
+  "access_audit": {
+    "failure_stage": "scientific_dependency_import_before_archive_index_or_field_access",
+    "2021_archive_requests_in_execution": 0,
+    "2021_RAW_members_read": 0,
+    "2021_velocity_field_values_read": 0,
+    "2025_PAR_headers_read_in_execution": 0,
+    "2025_REC_payloads_read": 0,
+    "checkpoint_reads": 0,
+    "GPU_used": false
+  },
+  "verdict": {
+    "execution_status": "incomplete_before_asset_access",
+    "gate_status": "not_evaluated",
+    "scientific_verdict": "none",
+    "task_adequacy_supported": false,
+    "task_adequacy_refuted": false,
+    "method_selected": false,
+    "local_dependency_repair_or_I0b_rerun_allowed": false,
+    "I0c_authorized": false,
+    "neural_or_GPU_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_authorized": false,
+    "next_action": "close_I0b_without_reentry_and_require_a_new_problem_level_candidate_before_any_method_design"
+  },
+  "interpretation": "The one-shot I0b execution stopped because the registered wrapper bound only the base container and omitted the previously used read-only h5py 3.12.1 layer. The failure occurred before any archive request, field read, cache creation, or metric computation. It is execution provenance and a preflight/packaging failure, not evidence for or against cross-protocol task adequacy. The registered no-rerun rule is retained."
+}

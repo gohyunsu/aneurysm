@@ -1,15 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
-> **2026-08-08 active candidate:** 공개 in-vitro 4D-flow MRI release들을
+> **2026-08-08 candidate snapshot, closed 2026-08-09:** 공개 in-vitro 4D-flow MRI release들을
 > 새 end-to-end cohort로 합치지 않는다. 2021 release는 한 aneurysm phantom의
 > 3 resolution × 3 acceleration development view, Zenodo `14981710`은 네
 > aneurysm/flow-diverter phantom의 dual-VENC view, 새 `17183575`는 33 scan의
 > intervention/multi-VENC/noise-control asset이다. 그러나 마지막 자료도 실제로는
 > 5 base geometry·22 model/device state·2 source patient anatomy다. 현재
-> I0a metadata/header audit은 exact source `f7b4e024…`에서 14/14를 통과했고
-> field payload는 아직 staging하지 않았다. I0b는 2021의 27 processed RAW만
-> 읽도록 별도 등록됐다. 두 2025 release의 독립성은 unresolved이며 REC는 읽지
-> 않는다.
+> I0a metadata/header audit은 exact source `f7b4e024…`에서 14/14를 통과했다.
+> I0b는 2021의 27 processed RAW만 읽도록 등록됐지만 exact `0ebdb344…`의
+> one-shot run이 `h5py` import에서 종료돼 archive request, field staging과
+> REC read는 모두 0이었다. Gate는 미평가이고 no-rerun rule로 branch를
+> 닫았다. 두 2025 release의 독립성은 unresolved이다.
 > CFD를 MRI ground truth로 부르거나 phantom을 clinical cohort로 해석하지 않는다.
 
 > **2026-08-03 AURORA 역할 갱신:** 데이터셋은 하나의 end-to-end cohort로
@@ -65,9 +66,9 @@
 | BenchAnXplore / npj DM 2026 | 105 semi-idealized geometry의 coarse CFD trajectories | 80 frames/case, 0.01 s | GNN surrogate benchmark | ICA sidewall 중심; patient CTA 입력자료가 아님 |
 | Aneumo | 10,660 geometry × 8 steady mass flow, pressure/velocity | 85,280 steady CFD | paired BC response | CC BY-NC-ND; base-family split·비재배포 |
 | AneuG-Flow / 관련 synthetic set | 현재 서버에는 geometry archive; 논문 release에는 fixed-policy CFD field | 대규모 synthetic | known-condition geometry pretraining | paired-BC C2에는 사용 불가 |
-| 4D-flow MRI multiresolution phantom 2021 | 같은 ICA aneurysm phantom의 3 voxel-size × 3 acceleration processed velocity | 1 physical phantom, 9 selected protocols | I0a 후 cross-protocol development/task audit 후보 | CC BY 4.0; 반복 측정·독립 geometry 부족 |
-| 4D-flow MRI dual-VENC phantoms 2025 | 네 aneurysm/flow-diverter phantom의 raw four-encoding dual-VENC acquisition | 4 physical phantoms, 8 acquisitions | I0a 후 external protocol-pair task audit 후보 | CC BY 4.0; REC payload 미감사, M4 filename/header 불일치 명시 |
-| 4D-flow MRI intervention phantoms 2025 | untreated/device-treated, multi-VENC, pump-off four-encoding raw acquisitions | 33 scans, 22 physical states, 5 base geometry, 2 source anatomies | I0b task-unit audit; 이후 noise/cross-VENC external measurement 후보 | CC BY 4.0; scan/device를 patient로 세지 않음, REC 미감사, `14981710` overlap unresolved |
+| 4D-flow MRI multiresolution phantom 2021 | 같은 ICA aneurysm phantom의 3 voxel-size × 3 acceleration processed velocity | 1 physical phantom, 9 selected protocols | closed I0b candidate; field 미접근 | CC BY 4.0; execution-incomplete/no verdict/no rerun, 반복 측정·독립 geometry 부족 |
+| 4D-flow MRI dual-VENC phantoms 2025 | 네 aneurysm/flow-diverter phantom의 raw four-encoding dual-VENC acquisition | 4 physical phantoms, 8 acquisitions | 보존된 metadata/header candidate | CC BY 4.0; REC 미접근, M4 filename/header 불일치 명시 |
+| 4D-flow MRI intervention phantoms 2025 | untreated/device-treated, multi-VENC, pump-off four-encoding raw acquisitions | 33 scans, 22 physical states, 5 base geometry, 2 source anatomies | 보존된 task-unit discovery | CC BY 4.0; scan/device를 patient로 세지 않음, REC 미접근, `14981710` overlap unresolved |
 
 숫자와 확장자는 원 배포본을 받은 뒤 자동 inventory로 확정한다. 정리글의 “Aneurisk CFD 포함”은 현재 프로젝트의 샘플 관찰만으로 확인되지 않았으므로 `unknown`으로 시작한다.
 

@@ -5,11 +5,11 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b one-shot method-free audit preregistered before field read · method unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · method unselected · submission blocked
 
-## 0-A. 현재 active candidate · protocol-indexed posterior prediction
+## 0-A. 최근 candidate · protocol-indexed posterior prediction · closed
 
-현재의 질문은 다음 하나다.
+검증하려던 질문은 다음이었다.
 
 > 한 intracranial 4D-flow MRI acquisition에서 얻은 posterior가 같은
 > controlled phantom flow의 다른 resolution, acceleration 또는 VENC
@@ -52,8 +52,18 @@ geometry, 22 physical model/device state, 8 multi-VENC state, 2 pump-off acquisi
 15 unique device condition이고 source patient anatomy는 2개다. 기존 Zenodo
 `14981710`과의 case-level overlap도 unresolved이므로 독립 cohort로 합치지
 않는다. I0b가 모두 통과해도 method-free I0c PAR/REC decoder·noise audit만
-등록할 수 있다. 실패하면 threshold나 registration을 고쳐 반복하지 않고
-2021 processed cross-protocol branch를 중단한다.
+등록할 수 있도록 했고, 실패하면 threshold나 registration을 고쳐 반복하지
+않도록 고정했다.
+
+**Outcome · 2026-08-09.** Exact source `0ebdb344…`, config SHA `e19a1194…`의
+one-shot CPU/PBS run은 wrapper가 기존 read-only `h5py==3.12.1` dependency
+layer를 누락해 import 단계에서 exit 1이었다. 2021 archive request/RAW/field
+read, 2025 PAR/REC read, cache와
+metric/result 생성은 모두 0이다. 따라서 gate는 미평가이고 task adequacy를
+지지하거나 반박하는 scientific verdict가 아니다. 등록된 no-rerun rule을
+그대로 적용해 dependency를 보충한 I0b 재실행과 I0c를 열지 않는다. 이
+4D-flow branch는 method를 정하지 않은 채 닫고, 다음 단계는 새 problem-level
+candidate의 독립 audit이다.
 
 ## 0-B. 제출 목표와 보존된 이전 scope
 
@@ -65,8 +75,9 @@ negative nonlinear evidence와 계획만 있는 3D GNN을 제출 근거로 보�
 
 아래 Aneumo velocity-only 3D 경로는 실패 provenance와 재현 계약으로
 보존한다. N1c, V1e와 M0 outcome 뒤에는 더 이상 active submission identity가
-아니며 local repair나 이름 변경으로 되살리지 않는다. 새 candidate도 I0a/I0b
-뒤 독립적인 positive evidence가 생기기 전에는 제출 identity가 아니다.
+아니며 local repair나 이름 변경으로 되살리지 않는다. 4D-flow candidate도
+I0b execution-incomplete 뒤 환경 repair로 되살리지 않는다. 새 candidate는
+독립적인 positive evidence가 생기기 전에는 제출 identity가 아니다.
 
 3D로 바로 넘어가지 않는다. `configs/aneumo_isbi_v0.json`은 64-case cache의
 SHA, 32-family 20/6/6 split, 8개 scalar mass-flow mapping, velocity tensor

@@ -59,10 +59,10 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "field/REC access"):
             validate_protocol(candidate)
 
-    def test_i0b_registration_cannot_select_method_or_read_REC(self) -> None:
+    def test_i0b_execution_record_cannot_select_method_or_read_REC(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["i0b_pass_authorizes"] = "select_method"
-        with self.assertRaisesRegex(ProtocolError, "I0b registration"):
+        with self.assertRaisesRegex(ProtocolError, "execution record"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         expanded = next(
@@ -72,6 +72,20 @@ class ProtocolTests(unittest.TestCase):
         )
         expanded["status"] = "REC_read"
         with self.assertRaisesRegex(ProtocolError, "field/REC access"):
+            validate_protocol(candidate)
+
+    def test_i0b_execution_incomplete_cannot_be_repaired_or_open_i0c(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["i0b_execution_reentry_allowed"] = True
+        with self.assertRaisesRegex(ProtocolError, "execution record"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["i0c_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "execution record"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["i0b_execution_gate"] = "failed"
+        with self.assertRaisesRegex(ProtocolError, "execution record"):
             validate_protocol(candidate)
 
     def test_expanded_scans_cannot_become_independent_patient_units(self) -> None:

@@ -88,6 +88,21 @@ I0b 결과와 무관하게 posterior calibration은 식별됐다고 쓰지 않�
 - 금지: local repair/rerun/threshold change, method/GPU training, posterior
   calibration claim, outer test와 submission
 
+**Execution outcome · 2026-08-09.** Exact source
+`0ebdb344a6cd4009a928746cda5389b95f12bf8d`의 PBS job `115093`은 8 CPU/48 GB,
+GPU 없이 5분 7초 실행된 뒤 exit 1이었다. Pinned container SHA는
+`2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2`이며
+registered wrapper가 기존 read-only `h5py==3.12.1` layer를 bind하지 않아
+`h5py` import가 불가능했다. 실패는 archive index를 요청하기 전이므로
+2021 RAW/field와 2025 PAR/REC read, cache·metric·result 생성은 모두 0이다.
+Gate는 `not_evaluated`이고 scientific verdict가 아니다. Public execution
+record SHA는 `1b75bb953352966b9c7e2edbb838973d5222c883fe821e4b77ee2302c2ba2130`다.
+
+등록된 one-shot/no-rerun rule을 유지한다. Dependency를 추가해 I0b를 반복하지
+않고 I0c, method/GPU training, outer test와 submission을 열지 않는다. 이
+branch의 다음 조치는 local execution repair가 아니라 새 problem-level
+candidate의 별도 audit이다.
+
 ## 0-B. ISBI 2027 venue gate
 
 목표는 2026-10-26 마감의 IEEE ISBI 2027 four-page regular paper다.

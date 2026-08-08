@@ -44,9 +44,12 @@ posterior의 **cross-acquisition predictive calibration**을 measurement
 space에서 반증하는 것이다. 이 gap도 multi-view latent model이나 cycle
 consistency 자체로는 새롭지 않다. 반복 측정이 적은 공개 phantom에서
 estimand가 식별 가능하고, direct UQ/SR baseline보다 유의미하며, 이후
-operator-specific algorithmic gap이 남는지를 I0a/I0b로 먼저 확인한다.
+operator-specific algorithmic gap이 남는지를 I0a/I0b로 먼저 확인하려 했다.
+I0a는 asset integrity만 통과했고 I0b는 `h5py` 부재로 asset access 전
+execution-incomplete가 되어 gap을 평가하지 못했다. No-rerun rule에 따라 이
+candidate는 미해결 gap을 contribution으로 승격하지 않은 채 닫았다.
 
-직접 candidate asset은 resolution/acceleration을 바꾼 한 aneurysm phantom,
+보존된 candidate asset은 resolution/acceleration을 바꾼 한 aneurysm phantom,
 dual-VENC를 가진 네 aneurysm/flow-diverter phantom, 그리고 5 base geometry의
 33 untreated/device-treated acquisition이다. 마지막 자료도 2 source patient
 anatomy에서 파생됐으므로 33 independent case로 세지 않는다.

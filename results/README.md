@@ -26,6 +26,13 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `flow_mri_protocol_i0b_execution_20260809.json`: exact source
+  `0ebdb344…`의 one-shot CPU/PBS 실행 기록. Registered wrapper가 기존
+  read-only `h5py==3.12.1` layer를 누락해 archive/field access 전 exit 1로
+  끝났고 cache/result는 생성되지 않았다.
+  Gate는 미평가이며 scientific verdict가 아니다. Raw log·hostname·server
+  path는 비공개로 두고 checksum만 기록한다. 등록된 no-rerun rule에 따라
+  dependency를 보충한 I0b 재실행이나 I0c/method/GPU 권한은 없다.
 - `flow_mri_protocol_i0a_asset_audit_20260808.json`: exact source
   `f7b4e024`의 post-discovery, field-free paired-protocol asset audit. 두
   official archive의 174/76 entry, descriptor/header 9/8개와 frozen protocol
