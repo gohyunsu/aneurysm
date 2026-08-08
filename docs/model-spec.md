@@ -53,6 +53,9 @@ parameter range 15.283%로 15% 계약을 근소하게 실패했다. Field를 읽
 q-PointNet만 17 block으로 올리고 나머지 architecture, tolerance와 selector는
 유지한다. 이는 결과 기반 capacity tuning이 아니라 실행 전 compute-match
 correction이다.
+Exact correction `a8b0042`에서 네 parameter budget, rotation equivariance와
+전체 repository contract 168/168이 통과했다. 이 pass는 architecture
+correctness일 뿐 어느 backbone의 validation 우위도 의미하지 않는다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

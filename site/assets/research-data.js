@@ -168,6 +168,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.08",
       category: "implementation",
+      title: "Corrected V1 source passes the full pre-learning contract",
+      copy: "Exact a8b0042는 q-PointNet residual block 16→17 외 조건을 유지한 채 targeted model contract 9/9와 dependency-complete repository contract 168/168을 통과했다. Rotation equivariance와 frozen 15% parameter matching이 모두 확인됐다. Cache field와 learned metric은 아직 읽지 않았으며, 이 pass는 code-level learning 자격일 뿐 model superiority가 아니다.",
+      files: ["configs/aneumo_isbi_v1.json", "configs/aurora_v1.json", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.08",
+      category: "implementation",
       title: "V1 compute matching is corrected before any field metric",
       copy: "Exact b8ce721 model contract는 rotation equivariance 등 8/9를 통과했지만 parameter counts 357603/374979/384582/422114의 relative range 15.283%가 frozen 15%를 넘었다. Metric·cache field read 전에 가장 작은 q-PointNet residual block만 16→17로 올린다. Tolerance, 다른 model, data, seed, step과 selector는 유지하며 새 exact full contract 전에는 학습하지 않는다.",
       files: ["configs/aneumo_isbi_v1.json", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "site/assets/research-data.js", "CHANGELOG.md"]

@@ -80,6 +80,11 @@ guardrail 8개는 통과했다. Parameter counts
 Learned metric·cache field read 전 q-PointNet residual block을 16→17로
 바꾸며, 새 exact-source full contract 전에는 학습하지 않는다.
 
+**Corrected contract outcome.** Exact `a8b0042`는 targeted model contract
+9/9와 external `h5py==3.12.1`을 포함한 full repository contract 168/168을
+exit 0으로 통과했다. 이는 V1 learning submission의 code 자격만 확인하며,
+cache field와 learned metric은 아직 읽지 않았다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

@@ -328,6 +328,19 @@ template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
 - Authorization: V1 64-case implementation smoke only. Outer test, headline
   and submission remain false.
 
+## 2026-08-08 · ISBI V1 pre-learning contract
+
+- First exact source `b8ce721`: model contract 8/9. Parameter range 15.283%
+  failed the frozen 15% check; no cache field or learned metric was read.
+- Corrected exact source `a8b0042f52d008f5085b7f6c16091682cd649917`:
+  q-PointNet residual blocks 16→17 only; tolerance and other contracts unchanged
+- Targeted model contract: 9/9, including rigid-rotation equivariance and
+  parameter matching
+- Dependency-complete full contract: 168/168, exit 0, pinned container and
+  read-only `h5py==3.12.1` layer
+- Scientific status: learning unrun; test field, outer test, headline and
+  submission remain false
+
 ## 2026-08-03 G1 exploratory result
 
 최종 sensitivity는 public code commit `900fedc`, 5 outer folds × 5 repeats,

@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · Corrected V1 source passes 168/168 before learning
+
+- Exact correction `a8b0042f52d008f5085b7f6c16091682cd649917`은
+  q-PointNet residual block 16→17 외 data, model, seed, step, tolerance와
+  selector를 유지했다.
+- Targeted V1 model contract 9/9와 external `h5py==3.12.1`을 포함한 full
+  repository contract 168/168이 pinned container에서 exit 0으로 완료됐다.
+  Rotation equivariance와 parameter matching이 모두 통과했다.
+- Cache field와 learned metric은 아직 읽지 않았다. 이는 V1 GPU learning
+  submission의 code 자격일 뿐 model 성능, method novelty, V2, headline
+  또는 submission 증거가 아니다.
+
 ## 2026-08-08 · V1 pre-result contract corrects parameter matching
 
 - Exact source `b8ce721`의 pinned-container model contract는 output shape,

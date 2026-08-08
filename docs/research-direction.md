@@ -52,6 +52,10 @@ scalar coefficient로 velocity vector를 복원해 회전 equivariance를 갖지
 0.283%p 넘었다. Learned metric과 cache field read 전이므로 threshold를
 완화하지 않고 최소 model인 q-PointNet residual block만 16→17로 수정한다.
 새 exact-source contract 전체가 통과하기 전 학습을 제출하지 않는다.
+Correction source `a8b0042`는 model contract 9/9와 전체 168/168을
+dependency-complete container에서 통과했다. 따라서 code-level 실행 자격은
+회복됐지만 learned field metric은 여전히 unrun이며, 서버 접근 확인 전에는
+GPU array를 제출하지 않는다.
 
 ## 1. 현재 판정
 

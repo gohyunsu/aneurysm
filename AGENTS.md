@@ -35,6 +35,10 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
   8/9를 통과했지만 parameter range 15.283%가 frozen 15%를 넘었다. Metric과
   field read 전에 가장 작은 q-PointNet residual block만 16→17로 바꾸고 새
   exact contract를 요구한다. Tolerance와 다른 model은 바꾸지 않는다.
+  Correction source `a8b0042`는 V1 model contract 9/9와 dependency-complete
+  repository contract 168/168을 통과했다. Cache field와 learned metric은
+  아직 읽지 않았다. V1 GPU array는 현재 지정된 `introai9` SSH/PBS 접근을
+  재확인한 뒤에만 제출한다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
