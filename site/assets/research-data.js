@@ -278,6 +278,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "Unselected-task reset is live and verified",
+      copy: "Production source 773a0d6a…의 quality run 31268591665와 Pages run 31268591180이 모두 success다. Live site에서 현재 모델이 없고, RSNA access/L0 전에는 method·GPU를 열지 않으며, CADA·ADAM·IntrA·TopCoW가 selection-aware task를 대체하지 않는다는 현재 계약을 확인했다.",
+      files: ["CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.09",
       category: "research",
       title: "Public alternatives do not replace the selection-aware task",
       copy: "Official CADA, ADAM, IntrA와 TopCoW sources를 payload 없이 비교했다. CADA/ADAM은 fully supervised external controls이고 IntrA/TopCoW는 surface/anatomy controls라 RSNA의 study-level non-random annotation-selection estimand를 대체하지 않는다. Central schema는 active primary·metric·headline을 unselected로 바로잡고 닫힌 4D-flow/3D fields를 history로 내렸다. 이 screen은 data access, executable method, GPU 또는 outer test를 열지 않는다.",

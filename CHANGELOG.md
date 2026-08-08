@@ -29,6 +29,12 @@
   `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
   `site/index.html`, `site/learn.html`, `site/assets/research-data.js`,
   `CHANGELOG.md`.
+- Production source `773a0d6a2139ea02c94f972e8553809761948e20`의 GitHub
+  quality run `31268591665`와 Pages run `31268591180`은 모두 success다.
+  2026-08-09 KST에 <https://gohyunsu.github.io/aneurysm/site/>가
+  `현재 모델은 없다`, RSNA access/L0 차단, public alternatives가
+  selection-aware task를 대체하지 않는다는 판정을 실제 제공함을
+  확인했다.
 
 ## 2026-08-09 · direct mixed-supervision prior art narrows the shortlist
 
