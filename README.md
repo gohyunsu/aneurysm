@@ -12,6 +12,11 @@ solver/adjoint runtime을 검사하는 S0a만 열려 있습니다. 근거와 kil
 [`goal-oriented segmentation cold audit`](docs/goal-oriented-segmentation-audit-2026-08-09.md)에
 있습니다.
 
+2026-08-09 추가 red team은 inverse Navier--Stokes의 shape-gradient joint
+segmentation과 task-based quantitative segmentation 평가를 직접 선행으로
+올렸다. 따라서 PDE를 segmentation에 연결하거나 downstream metric을 보고하는
+것 자체는 novelty가 아니며, 후보 점수는 27.0/40으로 더 낮아졌다.
+
 직전 조건부 후보였던
 multisite CT/MR angiography의 annotation-selection-aware mixed-granularity
 lesion-set inference는 2026-08-09 supervision-semantics red team에서

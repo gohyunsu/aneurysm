@@ -114,8 +114,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.6":
-        raise ProtocolError("The current research-state schema must be version 2.6.")
+    if protocol["schema_version"] != "2.7":
+        raise ProtocolError("The current research-state schema must be version 2.7.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -200,6 +200,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "automatic_segmentation_to_cfd_pipeline",
         "joint_image_mesh_and_cfd_field_prediction",
         "cfd_applicability_score",
+        "inverse_navier_stokes_shape_gradient_boundary_segmentation",
+        "task_based_quantitative_segmentation_evaluation",
         "adjoint_or_shape_derivative_general_method",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
@@ -288,6 +290,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         [
             "status",
             "audit_document",
+            "direct_prior_narrowing",
             "s0a_config",
             "solver_runtime_preflight_config",
             "solver_runtime_preflight_status",
@@ -316,6 +319,38 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ],
         "problem_selection.goal_oriented_segmentation_cold_audit",
     )
+    direct_prior_narrowing = goal_audit["direct_prior_narrowing"]
+    _require_keys(
+        direct_prior_narrowing,
+        [
+            "status",
+            "inverse_navier_stokes_joint_segmentation",
+            "task_based_quantitative_segmentation",
+            "broad_claims_rejected",
+            "remaining_gap",
+            "method_or_gpu_authorized",
+        ],
+        "problem_selection.goal_oriented_segmentation_cold_audit.direct_prior_narrowing",
+    )
+    if (
+        direct_prior_narrowing["status"] != "completed_primary_source_red_team"
+        or direct_prior_narrowing["inverse_navier_stokes_joint_segmentation"]
+        != "doi:10.1017/jfm.2022.503"
+        or direct_prior_narrowing["task_based_quantitative_segmentation"]
+        != "pmid:38360049"
+        or set(direct_prior_narrowing["broad_claims_rejected"])
+        != {
+            "pde_shape_gradient_connected_to_segmentation",
+            "downstream_quantity_evaluation_instead_of_overlap_only",
+        }
+        or direct_prior_narrowing["remaining_gap"]
+        != "cta_multi_functional_signed_adjoint_pullback_with_remainder_control_and_held_out_functional_superiority"
+        or direct_prior_narrowing["method_or_gpu_authorized"] is not False
+    ):
+        raise ProtocolError(
+            "The direct-prior red team must reject broad PDE-segmentation and "
+            "task-based-evaluation novelty without opening a method or GPU path."
+        )
     if (
         goal_audit["status"]
         != "completed_primary_source_and_runtime_discovery_conditional_problem_shortlist"
@@ -344,7 +379,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["cmha_stage_v2_status"]
         != "preregistered_single_chunked_transport_attempt"
         or goal_audit["cmha_stage_v2_evaluates_s0a"] is not False
-        or goal_audit["score"] != 27.5
+        or goal_audit["score"] != 27.0
         or goal_audit["maximum_score"] != 40.0
         or goal_audit["automatic_selection_threshold"] != 32.0
         or goal_audit["method_selected"] is not False
@@ -353,7 +388,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["outer_test_authorized"] is not False
         or goal_audit["submission_identity_active"] is not False
         or goal_audit["direct_gap"]
-        != "signed_adjoint_projection_of_boundary_displacement_for_standardized_pde_functional_error_supervision"
+        != "cta_multi_functional_signed_adjoint_pullback_with_remainder_control_and_held_out_functional_superiority"
         or goal_audit["required_next_gate"]
         != "s0a_asset_linkage_and_solver_runtime_integrity"
         or goal_audit["s0a_pass_authorizes"]

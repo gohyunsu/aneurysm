@@ -16,6 +16,12 @@
 audit뿐이다. GPU, segmentation training, rupture-label selection, outer test와
 paper contribution은 없다.
 
+직접 선행연구는 inverse Navier--Stokes shape-gradient boundary segmentation과
+task-based quantitative segmentation 평가까지 포함한다. 따라서 S0b는 단순히
+Dice와 CFD functional의 순위가 다름을 보이는 검사가 아니라, 미리 정한 여러
+functional의 signed first-order pullback, remeshed forward difference와
+remainder/trust-region validity가 동시에 식별되는지를 검사해야 한다.
+
 ### S0a · CMHA linkage and solver runtime integrity · preregistered
 
 S0a는 99 patient/105 lesion/44 control/6 multi-lesion-patient unit, official

@@ -10,8 +10,8 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "Signed adjoint projection remains a conditional gap",
-      copy: "Image2Flow, IAVS, clDice/cbDice, CFD variability studies and differentiable PDE optimization remove generic segmentation→CFD novelty. The only residual hypothesis is to project signed boundary displacement onto PDE-functional shape gradients and validate both the first-order remainder and held-out functional error.",
-      status: "Cold-audit score 27.5/40 · below automatic selection · S0a only",
+      copy: "Image2Flow, IAVS, inverse Navier–Stokes joint flow/boundary segmentation, task-based PET evaluation, CFD variability studies and differentiable PDE optimization remove generic PDE→segmentation and downstream-metric novelty. The only residual hypothesis is a CTA-specific multi-functional signed adjoint pullback with remainder-controlled trust region and held-out functional superiority.",
+      status: "Cold-audit score 27.0/40 · below automatic selection · S0a only",
       url: "../docs/goal-oriented-segmentation-audit-2026-08-09.md"
     },
     {
@@ -307,6 +307,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "Direct-prior red team narrows the conditional gap again",
+      copy: "A 2022 JFM paper already couples shape-gradient boundary inference with inverse Navier–Stokes flow reconstruction, and a 2024 quantitative-PET study already compares segmentation metrics with downstream quantities. We therefore reject both PDE/adjoint→segmentation coupling and task-based evaluation as standalone novelty. The residual hypothesis is limited to CTA-specific multi-functional signed pullback, remainder-controlled trust region, and held-out functional superiority. The cold score drops from 27.5 to 27.0/40; S0a, method, architecture, GPU, outer test, and paper identity remain unchanged and closed.",
+      files: ["docs/literature-lineage.md", "docs/goal-oriented-segmentation-audit-2026-08-09.md", "docs/isbi-2027-plan.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "execution",

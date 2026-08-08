@@ -4,6 +4,30 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Direct-prior red team narrows the conditional gap again
+
+- [JFM 2022 inverse Navier--Stokes study](https://doi.org/10.1017/jfm.2022.503)는
+  noisy velocity image의 flow reconstruction과 boundary segmentation을 shape
+  gradient로 공동 추정한다. 따라서 PDE/adjoint shape gradient를 segmentation에
+  연결하는 일반 발상은 novelty가 아니다.
+- [2024 quantitative-PET task-based evaluation](https://pubmed.ncbi.nlm.nih.gov/38360049/)
+  은 Dice/Jaccard/Hausdorff와 downstream metabolic quantity를 함께 비교한다.
+  따라서 standard geometry metric과 downstream endpoint가 다를 수 있다는
+  관찰이나 task-based 평가만으로도 contribution을 주장하지 않는다.
+- 잔여 가설은 CTA predictor의 **multi-functional signed adjoint pullback +
+  remainder-controlled trust region + held-out functional superiority**가 함께
+  성립하는 경우로 좁혔다. Direct-prior residual 점수를 3.0→2.5, 전체 cold
+  score를 27.5→27.0/40으로 낮췄다. 자동 선택 기준 32/40은 유지한다.
+- 이 red team은 S0a의 asset/runtime contract, 실행 source, threshold 또는
+  권한을 바꾸지 않는다. Method, architecture, GPU, outer test와 paper identity는
+  계속 닫혀 있다. 중앙 schema를 `2.7`로 갱신했다.
+- 영향 파일: `docs/literature-lineage.md`,
+  `docs/goal-oriented-segmentation-audit-2026-08-09.md`, `AGENTS.md`,
+  `docs/isbi-2027-plan.md`, `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Preserve CMHA staging v1 transport failure and freeze one-change v2
 
 - Exact public source `b6b6175…`의 CPU-only PBS job `115107`은 20분 37초 뒤

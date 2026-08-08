@@ -34,9 +34,10 @@ S0a · method/architecture/GPU/outer test unselected**
 현재 원고는 ISBI-ready가 아니다.
 
 현재 paper identity는 0개이고 problem shortlist만 조건부 1개다. 새
-goal-oriented hemodynamic segmentation 후보는 signed adjoint projection이
-standardized simulation functional error를 줄이는지를 묻지만, score 27.5/40로
-자동 채택 기준 32에 못 미친다. S0a linkage/runtime와 method-free S0b
+goal-oriented hemodynamic segmentation 후보는 CTA용 multi-functional signed
+adjoint pullback이 standardized simulation functional error를 줄이는지를
+묻지만, inverse-flow segmentation과 task-based evaluation을 직접 선행으로
+올린 뒤 score는 27.0/40로 자동 채택 기준 32에 못 미친다. S0a linkage/runtime와 method-free S0b
 linearization/non-equivalence가 모두 양수이기 전에는 method·architecture·
 headline metric을 정하지 않는다. 직접 선행과 정확한 gate는
 [`goal-oriented-segmentation-audit-2026-08-09.md`](goal-oriented-segmentation-audit-2026-08-09.md)에

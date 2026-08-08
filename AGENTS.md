@@ -12,7 +12,9 @@ substitution screen, RSNA supervision-semantics red team으로 그 lesion-set
 후보를 기각한 상태, 그리고 2026-08-09 goal-oriented hemodynamic segmentation
 cold audit와 S0a preregistration, official precompiled SU2의 reverse-AD
 negative control 및 별도 solver preflight 등록, CMHA staging v1
-execution-incomplete와 one-change chunked v2 등록을 반영했다.
+execution-incomplete와 one-change chunked v2 등록, inverse Navier--Stokes
+shape-gradient segmentation과 task-based quantitative segmentation 평가를
+추가 direct prior로 올린 novelty red team을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -24,7 +26,7 @@ execution-incomplete와 one-change chunked v2 등록을 반영했다.
   displacement를 PDE adjoint shape sensitivity에 signed projection해
   standardized CFD functional error를 줄일 수 있는지 묻는다. Method,
   architecture, GPU, outer test와 paper identity는 모두 미선정이다.
-- 새 후보의 score는 27.5/40로 자동 선택 기준 32에 못 미친다.
+- 새 후보의 score는 27.0/40로 자동 선택 기준 32에 못 미친다.
   `configs/goal_oriented_segmentation_s0a.json`의 CPU/read-only S0a가 CMHA
   99 patient/105 lesion exact image–surface–table linkage와 별도 pinned
   solver/adjoint runtime의 11개 check를 모두 통과해야 method-free S0b만
@@ -49,10 +51,12 @@ execution-incomplete와 one-change chunked v2 등록을 반영했다.
   등록했다. V2도 staging-only이며 실패 시 같은 source를 재제출하지 않는다.
 - Automatic segmentation→CFD, Image2Flow의 joint mesh/field CFD loss, IAVS의
   CFD Applicability Score, clDice/cbDice, segmentation-induced flow variability,
-  adjoint/shape derivative와 PDE optimization 일반론은 novelty가 아니다.
-  Signed projection supervision의 first-order validity, standard geometry
-  metric과의 비동등성, held-out patient functional-error 우위가 모두 있어야만
-  contribution 후보가 된다.
+  inverse Navier--Stokes shape-gradient boundary segmentation, task-based
+  quantitative segmentation 평가, adjoint/shape derivative와 PDE optimization
+  일반론은 novelty가 아니다. Multi-functional signed pullback의 first-order
+  validity와 remainder control, standard geometry metric과의 비동등성,
+  held-out patient functional-error 우위가 모두 있어야만 contribution 후보가
+  된다.
 - 직전 RSNA-ICA 2025의 annotation-selection-aware mixed-granularity
   lesion-set 후보는 2026-08-09 supervision-semantics red team에서 기각했다.
 - 공식 공개 근거에서 제공 `segmentations/{uid}_cowseg.nii`는 aneurysm

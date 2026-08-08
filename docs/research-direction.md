@@ -16,11 +16,13 @@ loss보다 standardized CFD functional error를 줄일 수 있는가이다. 자�
 segmentation→CFD, Image2Flow의 joint mesh/field prediction, IAVS의 CFD
 Applicability Score, clDice/cbDice, segmentation-induced flow variability와
 adjoint/PDE optimization 일반론은 모두 direct prior이므로 contribution이
-아니다. 남을 수 있는 gap은 signed adjoint projection을 의료영상
-segmentation supervision으로 바꾸고 first-order remainder와 실제 held-out
-functional error를 함께 검증하는 algorithm뿐이다.
+아니다. Inverse Navier--Stokes의 joint flow/boundary segmentation은 shape
+gradient 연결까지, quantitative PET 연구는 task-based segmentation 평가까지
+이미 점유한다. 남을 수 있는 gap은 CTA 학습의 multi-functional signed
+adjoint pullback, remainder-controlled trust region과 실제 held-out functional
+error 우위를 함께 검증하는 algorithm뿐이다.
 
-현재 score는 27.5/40으로 자동 선택 기준 32에 못 미친다. CMHA 99 patient/
+현재 score는 27.0/40으로 자동 선택 기준 32에 못 미친다. CMHA 99 patient/
 105 lesion의 CTA–parent/aneurysm STL–aneurysm STL–table exact-ID linkage와
 별도 pinned solver/adjoint runtime을 `configs/goal_oriented_segmentation_s0a.json`
 에서 CPU/read-only로 먼저 감사한다. S0a pass도 method-free S0b 등록만

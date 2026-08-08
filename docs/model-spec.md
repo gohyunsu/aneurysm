@@ -21,7 +21,12 @@ functional의 adjoint shape gradient에 투영하는 supervision이 표준
 segmentation loss보다 held-out standardized functional error를 줄이는지 묻는다.
 Image2Flow처럼 mesh와 CFD field를 공동 예측하거나, IAVS처럼 solver success를
 높이거나, sensitivity magnitude만 boundary weight로 쓰는 구조는 후보
-contribution이 아니다.
+contribution이 아니다. Inverse Navier--Stokes에서 shape gradient로 flow image
+경계를 공동 추정한 선행연구가 있으므로 PDE/adjoint와 segmentation을 연결하는
+것도 architecture novelty가 아니다. S0b 이후에도 남을 수 있는 method는
+여러 고정 functional의 signed pullback과 remainder-controlled trust region을
+CTA predictor에 결합하고 strong baseline보다 functional error를 낮추는 경우로
+더 좁힌다.
 
 S0a는 CMHA exact linkage와 별도 solver/adjoint runtime만 감사한다. Pass도
 method-free perturbation/linearization S0b만 열며 nnU-Net, implicit SDF,

@@ -53,16 +53,19 @@ scenario**를 적용했을 때의 standardized functional error 차이다. CFD�
 | CFD-ready segmentation | [IAVS](https://arxiv.org/abs/2512.01319)는 count-guided localization, topology-aware segmentation과 CFD Applicability Score를 제안한다. | topology-aware nnU-Net, solver success/applicability를 endpoint로 두는 것 |
 | vascular loss | [clDice](https://doi.org/10.1109/CVPR46437.2021.00225), [cbDice](https://doi.org/10.1007/978-3-031-72111-3_5) | centerline, radius, boundary 또는 topology loss 자체 |
 | segmentation-induced flow variation | [MATCH phase Ib](https://doi.org/10.1007/s13239-019-00407-y), [2015 IA CFD challenge](https://doi.org/10.1007/s13239-018-00385-7), [lumen/BC sensitivity](https://doi.org/10.1007/s13239-023-00675-1) | segmentation이 WSS·flow를 바꾼다는 재확인 |
+| inverse flow-image segmentation | [Joint reconstruction and segmentation as an inverse Navier--Stokes problem](https://doi.org/10.1017/jfm.2022.503)은 noisy velocity image의 flow domain과 velocity를 shape gradient로 공동 추정한다. | PDE/adjoint shape gradient를 segmentation에 연결하는 일반 발상 |
+| task-based segmentation evaluation | [Quantitative PET task-based evaluation](https://pubmed.ncbi.nlm.nih.gov/38360049/)은 overlap·boundary metric과 metabolic quantity endpoint를 함께 비교한다. | 표준 segmentation metric과 downstream quantity가 다를 수 있다는 관찰 |
 | differentiable PDE/shape optimization | [Deep Differentiable Simplex Layer](https://arxiv.org/abs/1901.11082), [neural-operator derivatives for PDE-constrained optimization](https://proceedings.mlr.press/v267/cheng25f.html), [NeuralFluid](https://arxiv.org/abs/2405.14903) | differentiable geometry, adjoint/shape derivative 또는 PDE optimization 일반론 |
 | generic task/UQ control | task-driven conformal prediction, topology UQ, lesion-risk/FROC control | downstream risk, conformal calibration, uncertainty map을 붙이는 것 |
 
 따라서 “physics-informed segmentation”, “CFD-aware U-Net”, GNN, attention,
 implicit surface, adjoint 또는 uncertainty를 단독 contribution으로 쓰지 않는다.
-독립 gap은 **PDE functional의 signed shape derivative를 의료영상
-segmentation의 boundary-error supervision으로 바꾸고, 그 first-order
-validity와 실제 functional error 감소를 함께 검증하는 algorithm**에만 남을
+PDE와 segmentation의 결합이나 downstream endpoint 평가도 이미 점유됐다.
+독립 gap은 **CTA 학습에서 여러 사전 정의 PDE functional의 signed shape
+derivative를 boundary-error pullback으로 구성하고, remainder-controlled trust
+region과 held-out functional error 우위를 함께 입증하는 algorithm**에만 남을
 가능성이 있다. Image2Flow처럼 field를 동시에 예측하거나 IAVS처럼 solver
-성공률을 높이는 문제와도 구분돼야 한다.
+성공률을 높이는 문제뿐 아니라 inverse-flow segmentation과도 구분돼야 한다.
 
 ## 3. 데이터 현실성
 
@@ -110,14 +113,14 @@ STL, aneurysm STL, clinical/morphological/hemodynamic table을 CC BY 4.0으로
 |---|---:|---|
 | biomedical-imaging relevance | 5.0 | CTA segmentation error가 downstream simulation functional에 미치는 영향은 ISBI scope에 직접 맞는다. |
 | identifiable estimand | 4.0 | 같은 solver/BC를 양쪽 domain에 적용한 functional error는 명확하다. 임상 truth는 아니다. |
-| direct-prior residual gap | 3.0 | signed adjoint-projection supervision은 남을 가능성이 있지만 구성요소는 모두 알려져 있다. |
+| direct-prior residual gap | 2.5 | inverse Navier--Stokes shape-gradient segmentation과 task-based evaluation까지 존재해, CTA용 multi-functional pullback·remainder control만 잔여 가설이다. |
 | data available now | 2.5 | 공개 CTA/STL은 있으나 exact lesion linkage와 parent-domain completeness가 미검증이다. |
 | independent sample size | 2.5 | 99 patient는 development/outer split에 작고 single-center다. |
 | strong-baseline feasibility | 4.0 | nnU-Net, Dice+CE, boundary, clDice/cbDice와 matched task-loss baseline을 구성할 수 있다. |
 | interpretable figure | 5.0 | CTA slice, surface error, adjoint influence와 WSS/pressure functional change를 한 case에서 연결할 수 있다. |
 | compute/runtime feasibility | 1.5 | 현재 pinned image에 mesh/PDE stack이 없고 3D adjoint workflow도 없다. |
 
-합계는 **27.5/40**이다. 자동 채택 기준 32/40에 못 미친다. 다만 estimand,
+합계는 **27.0/40**이다. 자동 채택 기준 32/40에 못 미친다. 다만 estimand,
 ISBI relevance와 시각적 검증 가능성이 분명해 **S0a/S0b에만 조건부인
 shortlist 1개**로 남긴다. Method와 paper identity는 아직 선택하지 않는다.
 
@@ -125,9 +128,9 @@ shortlist 1개**로 남긴다. Method와 paper identity는 아직 선택하지 �
 
 아래 네 항을 모두 만족할 때만 contribution 문장을 쓴다.
 
-1. signed adjoint projection loss와 geometry trust region이 first-order
-   functional error를 어떻게 제어하는지 명시적 proposition과 검증 가능한
-   remainder 조건을 제시한다.
+1. multi-functional signed adjoint pullback과 geometry trust region이
+   first-order functional error를 어떻게 제어하는지 명시적 proposition과
+   검증 가능한 remainder 조건을 제시한다.
 2. same-image/same-architecture 조건에서 Dice+CE, boundary loss,
    clDice/cbDice, IAVS-style topology/applicability control과 direct frozen-
    surrogate functional loss보다 patient-level functional error가 개선된다.

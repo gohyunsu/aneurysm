@@ -16,6 +16,13 @@ variation이 WSS/flow에 미치는 영향을 이미 정량화했다. Neural-oper
 derivative와 differentiable fluid/geometry 연구는 PDE-constrained optimization과
 shape design 일반론을 점유한다.
 
+더 직접적으로 Kontogiannis et al.은 noisy velocity image의 경계와 flow를
+inverse Navier--Stokes 문제에서 shape gradient로 공동 추정했다. PET의
+task-based segmentation 평가는 Dice/Jaccard/Hausdorff 순위와 downstream
+quantitative endpoint의 순위가 같다고 가정할 수 없음을 이미 검사했다. 따라서
+PDE shape gradient를 segmentation에 연결하는 것과 overlap metric 대신
+downstream quantity를 평가하는 것 자체도 novelty가 아니다.
+
 따라서 잔여 gap은 manual vessel domain 경계의 signed displacement를
 predefined PDE-functional adjoint gradient에 투영해 의료영상 segmentation
 supervision으로 사용하고, first-order remainder와 patient-disjoint functional
@@ -29,6 +36,8 @@ novelty가 아니다. S0a/S0b 전에는 이 gap도 가설이다.
 - [MATCH phase Ib](https://doi.org/10.1007/s13239-019-00407-y)
 - [Neural-operator derivatives for PDE-constrained optimization](https://proceedings.mlr.press/v267/cheng25f.html)
 - [NeuralFluid differentiable fluid design](https://arxiv.org/abs/2405.14903)
+- [Inverse Navier--Stokes joint flow reconstruction and boundary segmentation](https://doi.org/10.1017/jfm.2022.503)
+- [Task-based evaluation of quantitative PET segmentation](https://pubmed.ncbi.nlm.nih.gov/38360049/)
 
 ## 0. 최신 red team · RSNA lesion-set 후보 기각
 
