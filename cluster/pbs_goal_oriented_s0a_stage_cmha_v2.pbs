@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+#PBS -N aurora_s0a_stage2
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=16gb
+#PBS -l walltime=08:00:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+
+: "${PBS_JOBID:?this staging version must run inside a PBS allocation}"
+: "${AURORA_STAGE_ROOT:?set AURORA_STAGE_ROOT to a new private writable directory}"
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT to the exact public checkout}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT to the exact public SHA}"
+
+if [[ ! "$AURORA_GIT_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "AURORA_GIT_COMMIT must be a full lowercase SHA." >&2
+  exit 2
+fi
+if [ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]; then
+  echo "Project checkout does not match AURORA_GIT_COMMIT." >&2
+  exit 2
+fi
+if [ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]; then
+  echo "Project checkout must be clean before CMHA staging v2." >&2
+  exit 2
+fi
+
+readonly CHUNK_BYTES=67108864
+archive_root="$AURORA_STAGE_ROOT/archives"
+chunk_root="$AURORA_STAGE_ROOT/chunks"
+extract_root="$AURORA_STAGE_ROOT/extracted"
+record_root="$AURORA_STAGE_ROOT/staging-records"
+status_path="$record_root/status.$PBS_JOBID.json"
+chunk_record="$record_root/chunks.$PBS_JOBID.tsv"
+manifest="$record_root/archive-manifest.$PBS_JOBID.tsv"
+mkdir -p "$archive_root" "$chunk_root" "$extract_root" "$record_root"
+
+shopt -s nullglob
+for prior_status in "$record_root"/status.*.json; do
+  if grep -Fq '"protocol_id":"goal_oriented_segmentation_s0a_cmha_stage_v2"' \
+      "$prior_status" && grep -Fq "\"public_source_commit\":\"$AURORA_GIT_COMMIT\"" \
+      "$prior_status"; then
+    echo "A staging v2 record already exists for this source; resubmission is forbidden." >&2
+    exit 2
+  fi
+done
+shopt -u nullglob
+
+write_status() {
+  local state="$1"
+  local exit_code="$2"
+  local tmp_path="$status_path.partial"
+  printf '{"protocol_id":"goal_oriented_segmentation_s0a_cmha_stage_v2","state":"%s","exit_code":%s,"public_source_commit":"%s","scientific_gate_evaluated":false,"identifier_mapping_attempted":false,"solver_access":false,"model_access":false,"gpu_access":false,"outer_test_access":false}\n' \
+    "$state" "$exit_code" "$AURORA_GIT_COMMIT" > "$tmp_path"
+  mv "$tmp_path" "$status_path"
+}
+
+write_status running 0
+stage_complete=false
+on_exit() {
+  local exit_code=$?
+  trap - EXIT
+  if [ "$stage_complete" != true ]; then
+    write_status failed "$exit_code"
+  fi
+  exit "$exit_code"
+}
+trap on_exit EXIT
+
+download_archive() {
+  local file_id="$1"
+  local label="$2"
+  local filename="$3"
+  local expected_bytes="$4"
+  local expected_md5="$5"
+  local file_chunk_root="$chunk_root/$label"
+  local assembled_partial="$archive_root/.${label}.assembled.partial"
+  local final_path="$archive_root/$filename"
+  mkdir -p "$file_chunk_root"
+
+  if [ -f "$final_path" ]; then
+    echo "A final archive exists before the single v2 attempt." >&2
+    return 2
+  fi
+
+  local start=0
+  while [ "$start" -lt "$expected_bytes" ]; do
+    local end=$((start + CHUNK_BYTES - 1))
+    if [ "$end" -ge "$expected_bytes" ]; then
+      end=$((expected_bytes - 1))
+    fi
+    local expected_chunk_bytes=$((end - start + 1))
+    local chunk_name
+    chunk_name="$(printf '%012d-%012d.part' "$start" "$end")"
+    local chunk_path="$file_chunk_root/$chunk_name"
+    local chunk_partial="$chunk_path.partial"
+
+    if [ -f "$chunk_path" ]; then
+      if [ "$(stat -c %s "$chunk_path")" != "$expected_chunk_bytes" ]; then
+        echo "Existing complete chunk has the wrong size: $label $start-$end" >&2
+        return 2
+      fi
+    else
+      local http_code
+      http_code="$(curl --silent --show-error --fail --location \
+        --retry 2 --retry-delay 5 --connect-timeout 20 --max-time 600 \
+        --range "$start-$end" --output "$chunk_partial" \
+        --write-out '%{http_code}' \
+        "https://ndownloader.figshare.com/files/$file_id")"
+      if [ "$http_code" != "206" ]; then
+        echo "Expected HTTP 206 for $label $start-$end, observed $http_code" >&2
+        return 2
+      fi
+      if [ "$(stat -c %s "$chunk_partial")" != "$expected_chunk_bytes" ]; then
+        echo "Downloaded chunk has the wrong size: $label $start-$end" >&2
+        return 2
+      fi
+      mv "$chunk_partial" "$chunk_path"
+    fi
+    printf '%s\t%s\t%s\t%s\n' "$label" "$start" "$end" "$expected_chunk_bytes" \
+      >> "$chunk_record"
+    start=$((end + 1))
+  done
+
+  if [ -e "$assembled_partial" ]; then
+    echo "A partial assembly already exists; v2 does not overwrite it." >&2
+    return 2
+  fi
+  : > "$assembled_partial"
+  local chunk_path
+  for chunk_path in "$file_chunk_root"/*.part; do
+    cat "$chunk_path" >> "$assembled_partial"
+  done
+  local observed_bytes
+  local observed_md5
+  observed_bytes="$(stat -c %s "$assembled_partial")"
+  observed_md5="$(md5sum "$assembled_partial" | awk '{print $1}')"
+  if [ "$observed_bytes" != "$expected_bytes" ] || [ "$observed_md5" != "$expected_md5" ]; then
+    echo "Assembled archive checksum mismatch: $label" >&2
+    return 2
+  fi
+  mv "$assembled_partial" "$final_path"
+  printf '%s\t%s\t%s\n' "$filename" "$observed_bytes" "$observed_md5" \
+    >> "$manifest"
+}
+
+extract_archive() {
+  local filename="$1"
+  local label="$2"
+  local final_dir="$extract_root/$label"
+  local partial_dir="$extract_root/.${label}.${PBS_JOBID}.partial"
+  if [ -e "$final_dir" ] || [ -e "$partial_dir" ]; then
+    echo "Extraction target exists before the single v2 attempt: $label" >&2
+    return 2
+  fi
+  mkdir -p "$partial_dir"
+  7z x -y -o"$partial_dir" "$archive_root/$filename"
+  mv "$partial_dir" "$final_dir"
+}
+
+: > "$chunk_record"
+: > "$manifest"
+download_archive 49199083 controls "controls.rar" 4821489080 \
+  8d18b970978a303ed89618066919a1b1
+download_archive 49199500 statistics "statistical results.rar" 34376 \
+  12b92693c79587fb6dbab4638bfad8bc
+download_archive 49201807 patients "patients.rar" 10735821611 \
+  e783d656ba51c6813aae9fca68565c17
+
+extract_archive "controls.rar" controls
+extract_archive "statistical results.rar" statistics
+extract_archive "patients.rar" patients
+
+write_status completed 0
+stage_complete=true

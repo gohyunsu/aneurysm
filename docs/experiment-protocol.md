@@ -30,6 +30,29 @@ all-or-none check로 감사한다. Row order나 filename similarity만으로 map
 - any fail: 같은 version의 dependency/mapping repair rerun 없이 후보 종료
 - pass도 금지: model/GPU/outer test/submission identity
 
+#### S0a-D · CMHA staging execution · v1 incomplete, v2 preregistered
+
+Exact source `b6b6175e79a59e441c5a7fc88d4e5e23b1c3ff8c`의 staging v1 PBS
+job `115107.ECE-util1`은 4 CPU/16 GB, GPU 없이 1,237초 실행된 뒤 exit 28이었다.
+Archive manifest는 0 byte이고 final/partial archive, extraction과 success status는
+없다. Raw scheduler stdout도 생성되지 않아 exit 28의 exact transport cause는
+`unresolved`다. Verified archive byte, identifier mapping, unit/frame, solver,
+model, GPU와 outer-test access는 모두 0이고 S0a는 `not_evaluated`다.
+
+같은 v1을 재제출하지 않는다. 사후 attribution은 body-free HEAD의 403을 signed
+GET failure로 해석하지 않았고, 별도 1 KiB와 8 MiB GET이 HTTP 206으로 성공한
+사실만 기록했다. `configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json`은
+official ID/size/MD5, extraction과 모든 authorization을 유지하면서 다음 한
+가지만 바꾼다.
+
+> 각 archive의 monolithic GET → exact 64 MiB HTTP range chunks, exact-size
+> 검증, ordered atomic assembly, full MD5, failure status trap
+
+V2는 public source당 PBS attempt 1회다. 성공도 staging-only이며 solver
+preflight와 함께 단일 S0a 실행만 열고, 실패하면 같은 source를 재제출하지
+않는다. V1 execution aggregate는
+`results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json`이다.
+
 #### S0a-P · solver runtime preflight · preregistered, not S0a
 
 Official SU2 8.5.0 OMP release는 steady direct를 완료했지만 reverse AD가

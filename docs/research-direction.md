@@ -39,6 +39,14 @@ TestCases와 official build-image manifest로 normal+reverse-AD SIF를 CPU/PBS�
 surface sensitivity가 finite/nonzero인지 확인한다. Pass도 runtime SHA를 pin한
 뒤 단 한 번의 S0a 실행만 열며 problem score나 novelty를 올리지 않는다.
 
+CMHA staging도 gate와 분리한다. Exact `b6b6175`의 monolithic-transfer v1은
+job `115107`에서 exit 28, verified/retained archive 0 byte로 끝났고 raw stdout이
+없어 exact cause는 unresolved다. 이는 asset 부재나 S0a failure가 아니다.
+같은 v1을 다시 제출하지 않고, bounded range diagnostic의 HTTP 206 근거에
+따라 **전송 방식 하나만** 64 MiB chunks+atomic assembly로 바꾼 v2를 별도
+prospective contract로 고정했다. V2 성공도 CMHA를 staged했다는 뜻뿐이며,
+solver preflight와 합쳐져야 단 한 번의 S0a 실행이 가능하다.
+
 ### 직전 RSNA 후보 기각 · 보존
 
 직전 cold audit에서 조건부로 남긴 RSNA annotation-selection-aware

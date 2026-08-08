@@ -36,6 +36,12 @@ forward/adjoint probe를 별도 preflight로 고정했다. 이 preflight가 성�
 nnU-Net, GNN, SDF decoder, loss 또는 optimizer 선택 권한은 생기지 않으며,
 실패 시 같은 source version을 고쳐 반복하지 않는다.
 
+CMHA staging v1/v2 역시 architecture evidence가 아니다. V1 transport failure는
+model learnability나 data adequacy를 말하지 않으며, v2는 official archive를
+private storage에 checksum-verified 상태로 옮기는 기계적 dependency일 뿐이다.
+따라서 staging outcome으로 backbone, loss, graph representation을 선택하지
+않는다.
+
 직전 RSNA 후보는 제공 segmentation이 aneurysm extent가
 아니라 13-class Circle-of-Willis vessel anatomy라는 공개 근거 때문에
 기각됐다. Vessel mask와 aneurysm point/presence/territory는 같은 lesion

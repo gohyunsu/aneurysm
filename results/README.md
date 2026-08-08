@@ -26,6 +26,11 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `goal_oriented_s0a_cmha_stage_v1_execution_20260809.json`: exact source
+  `b6b6175…`의 CMHA staging v1 execution-incomplete provenance. CPU/PBS job은
+  exit 28이었고 verified/retained archive는 0 byte, raw stdout은 없었다.
+  S0a는 `not_evaluated`이며 데이터 결과나 gate 판정이 아니다. 같은 v1
+  source는 재제출하지 않고 one-change chunked v2를 별도 등록했다.
 - `flow_mri_protocol_i0b_execution_20260809.json`: exact source
   `0ebdb344…`의 one-shot CPU/PBS 실행 기록. Registered wrapper가 기존
   read-only `h5py==3.12.1` layer를 누락해 archive/field access 전 exit 1로

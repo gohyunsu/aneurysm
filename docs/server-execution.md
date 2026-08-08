@@ -50,6 +50,18 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
   않으며 status에도 `gate_evaluated=false`를 기록한다.
   Pass도 S0b 등록만 열고 segmentation training, GPU와 outer test를 금지한다.
 
+**V1 execution:** exact source `b6b6175…`의 job `115107`은 1,237초 후 exit
+28이었다. Manifest 0 byte, final/partial archive 0, extraction 0이며 raw
+scheduler stdout도 생성되지 않아 exact cause는 unresolved다. S0a는
+`not_evaluated`이고 같은 v1 source는 재제출하지 않는다.
+
+**V2 prospective transport:** login-node bounded diagnostic의 1 KiB/8 MiB range
+GET은 HTTP 206이었고 8 MiB는 4.999초였다. 이를 근거로만 monolithic GET을
+64 MiB ranged chunks로 바꾼다. `cluster/pbs_goal_oriented_s0a_stage_cmha_v2.pbs`
+는 chunk별 206/size, ordered assembly, 전체 MD5와 failure status를 강제하며
+public source당 PBS attempt를 1회로 제한한다. Dataset contract, extraction,
+identifier/unit/solver/model/GPU/outer-test boundary는 v1과 같다.
+
 ### SU2 reverse-AD runtime preflight boundary
 
 - Official SU2 8.5.0 OMP release의 SHA-256을 확인하고 local temporary

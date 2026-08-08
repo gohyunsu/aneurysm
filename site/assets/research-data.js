@@ -169,7 +169,7 @@ window.AURORA_DATA = Object.freeze({
       id: "S0a",
       title: "Are CMHA linkage and solver gradients auditable?",
       copy: "99 patients/105 lesions must map CTA, parent+aneurysm STL, aneurysm STL and tables by exact identifier. The official direct-only SU2 binary was rejected after it refused discrete adjoint. A separately built and pinned normal+reverse-AD runtime must pass a real incompressible forward/adjoint probe. All eleven S0a checks are still required.",
-      state: "CMHA staging running · reverse-AD preflight registered · S0a not evaluated",
+      state: "CMHA staging v1 incomplete/no verdict · chunked v2 and reverse-AD preflight registered · S0a not evaluated",
       blocking: true
     },
     {
@@ -307,6 +307,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "execution",
+      title: "CMHA staging v1 is preserved incomplete; one transport-only v2 is frozen",
+      copy: "Exact b6b6175… CPU/PBS staging exited 28 after 1,237 seconds with a zero-byte manifest, no final or partial archive, no extraction, and no materialized raw stdout. The exact transport cause is unresolved, verified/retained bytes are zero, and S0a was not evaluated. We did not resubmit v1. Bounded diagnostics showed HTTP 206 for 1 KiB and 8 MiB range GETs, so v2 changes only monolithic transfer to exact 64 MiB chunks, ordered atomic assembly, full MD5, and a failure-status trap. It gets one PBS attempt and still performs no mapping, solver check, model, GPU, outer test, or gate decision.",
+      files: ["results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json", "configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json", "src/aurora/goal_oriented_s0a_staging.py", "cluster/pbs_goal_oriented_s0a_stage_cmha_v2.pbs", "tests/test_goal_oriented_s0a.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/goal-oriented-segmentation-audit-2026-08-09.md", "docs/server-execution.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", ".github/workflows/quality.yml", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "implementation",

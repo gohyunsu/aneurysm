@@ -114,8 +114,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.5":
-        raise ProtocolError("The current research-state schema must be version 2.5.")
+    if protocol["schema_version"] != "2.6":
+        raise ProtocolError("The current research-state schema must be version 2.6.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -173,7 +173,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "complete_preregistered_cmha_staging_and_solver_preflight_then_execute_the_single_s0a_gate_only"
+        != "execute_single_cmha_stage_v2_and_complete_solver_preflight_then_execute_the_single_s0a_gate_only"
         or problem_selection["audit_document"]
         != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
@@ -294,6 +294,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "precompiled_su2_omp_release_is_s0a_eligible",
             "solver_runtime_preflight_evaluates_s0a",
             "solver_runtime_preflight_pass_authorizes",
+            "cmha_stage_v1_status",
+            "cmha_stage_v1_execution_record",
+            "cmha_stage_v1_execution_record_sha256",
+            "cmha_stage_v2_config",
+            "cmha_stage_v2_config_sha256",
+            "cmha_stage_v2_status",
+            "cmha_stage_v2_evaluates_s0a",
             "score",
             "maximum_score",
             "automatic_selection_threshold",
@@ -324,6 +331,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["solver_runtime_preflight_evaluates_s0a"] is not False
         or goal_audit["solver_runtime_preflight_pass_authorizes"]
         != "pin_runtime_overlay_and_execute_the_single_preregistered_s0a_gate_only"
+        or goal_audit["cmha_stage_v1_status"]
+        != "execution_incomplete_exit_28_before_any_verified_archive_no_s0a_verdict"
+        or goal_audit["cmha_stage_v1_execution_record"]
+        != "results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json"
+        or goal_audit["cmha_stage_v1_execution_record_sha256"]
+        != "98a80fda1e832c4898f30c6e3ceaedcce2e28c07971338af50c0802a6e89d6fa"
+        or goal_audit["cmha_stage_v2_config"]
+        != "configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json"
+        or goal_audit["cmha_stage_v2_config_sha256"]
+        != "da2c224fc55542f9a76c62dc54dd24db83a93c7213b42173af229bc0f097fcc6"
+        or goal_audit["cmha_stage_v2_status"]
+        != "preregistered_single_chunked_transport_attempt"
+        or goal_audit["cmha_stage_v2_evaluates_s0a"] is not False
         or goal_audit["score"] != 27.5
         or goal_audit["maximum_score"] != 40.0
         or goal_audit["automatic_selection_threshold"] != 32.0

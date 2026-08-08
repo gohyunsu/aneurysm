@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "record_type": "staging_execution_record_not_scientific_result",
+  "protocol_id": "goal_oriented_hemodynamic_segmentation_s0a",
+  "stage_version": "v1_monolithic_transport",
+  "public_source_commit": "b6b6175e79a59e441c5a7fc88d4e5e23b1c3ff8c",
+  "scheduler": {
+    "system": "PBS",
+    "job_id": "115107.ECE-util1",
+    "resource": "4_cpu_16_gb_no_gpu",
+    "walltime_seconds": 1237,
+    "cpu_seconds": 1,
+    "peak_memory_kb": 9052,
+    "exit_status": 28
+  },
+  "retained_artifacts": {
+    "archive_manifest_bytes": 0,
+    "archive_files": 0,
+    "partial_archive_files": 0,
+    "extracted_directories": 0,
+    "success_status_record": false,
+    "raw_scheduler_stdout_available": false
+  },
+  "access_boundary": {
+    "verified_archive_bytes": 0,
+    "retained_payload_bytes": 0,
+    "archive_content_inspected": false,
+    "identifier_mapping_attempted": false,
+    "unit_or_frame_audit_attempted": false,
+    "solver_access": false,
+    "model_access": false,
+    "gpu_access": false,
+    "outer_test_access": false
+  },
+  "diagnosis": {
+    "state": "execution_incomplete_before_any_verified_archive",
+    "exact_transport_cause": "unresolved_because_raw_scheduler_stdout_was_not_materialized",
+    "exit_28_interpreted_as_proof_of_figshare_unavailability": false,
+    "bounded_login_node_diagnostics_after_failure": {
+      "head_requests": "three_redirected_endpoints_returned_403_not_interpreted_because_signed_GET_may_forbid_HEAD",
+      "small_range_get": {
+        "bytes": 1024,
+        "http_status": 206,
+        "elapsed_seconds": 1.864518
+      },
+      "large_archive_range_get": {
+        "bytes": 8388608,
+        "http_status": 206,
+        "elapsed_seconds": 4.999339,
+        "bytes_per_second": 1678057
+      }
+    }
+  },
+  "verdict": {
+    "s0a_gate": "not_evaluated",
+    "candidate_scientific_status": "unchanged_conditional_shortlist",
+    "same_v1_source_resubmission": false,
+    "authorized_next_action": "register_one_new_chunked_transport_version_without_changing_asset_or_gate_contract"
+  }
+}

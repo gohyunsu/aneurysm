@@ -4,6 +4,32 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Preserve CMHA staging v1 transport failure and freeze one-change v2
+
+- Exact public source `b6b6175…`의 CPU-only PBS job `115107`은 20분 37초 뒤
+  exit 28이었다. Archive manifest는 0 byte이고 final/partial archive,
+  extraction, success status와 raw scheduler stdout은 없다. Verified archive와
+  retained payload는 0 byte이며 S0a는 `not_evaluated`다.
+- Exit 28을 Figshare unavailable로 단정하지 않았다. Bounded diagnostic에서
+  HEAD는 redirect 뒤 403이었지만 1 KiB와 8 MiB GET은 HTTP 206이었고,
+  8 MiB는 4.999초·1,678,057 B/s였다. Exact v1 cause는 unresolved로 보존한다.
+- 같은 v1 source를 재제출하지 않는다. Official file ID/size/MD5, extraction과
+  gate boundary는 유지하고 monolithic GET만 64 MiB range chunks+atomic
+  assembly로 바꾼 v2를 public source당 한 PBS attempt로 등록했다. V2도
+  staging-only이며 model/GPU/outer test와 S0a verdict를 열지 않는다.
+- 중앙 schema를 `2.6`으로 갱신했다.
+- 영향 파일: `results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json`,
+  `configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json`,
+  `src/aurora/goal_oriented_s0a_staging.py`,
+  `cluster/pbs_goal_oriented_s0a_stage_cmha_v2.pbs`,
+  `tests/test_goal_oriented_s0a.py`, `.github/workflows/quality.yml`, `AGENTS.md`,
+  `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`,
+  `docs/goal-oriented-segmentation-audit-2026-08-09.md`,
+  `docs/server-execution.md`, `results/README.md`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Reject direct-only SU2 runtime and register reverse-AD preflight
 
 - Official SU2 8.5.0 OMP release의 30,226,528-byte asset과 SHA-256을 확인했다.

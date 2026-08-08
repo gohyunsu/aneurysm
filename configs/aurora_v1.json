@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.5",
+  "schema_version": "2.6",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
@@ -21,7 +21,7 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "complete_preregistered_cmha_staging_and_solver_preflight_then_execute_the_single_s0a_gate_only",
+    "next_allowed_action": "execute_single_cmha_stage_v2_and_complete_solver_preflight_then_execute_the_single_s0a_gate_only",
     "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
@@ -61,6 +61,13 @@
       "precompiled_su2_omp_release_is_s0a_eligible": false,
       "solver_runtime_preflight_evaluates_s0a": false,
       "solver_runtime_preflight_pass_authorizes": "pin_runtime_overlay_and_execute_the_single_preregistered_s0a_gate_only",
+      "cmha_stage_v1_status": "execution_incomplete_exit_28_before_any_verified_archive_no_s0a_verdict",
+      "cmha_stage_v1_execution_record": "results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json",
+      "cmha_stage_v1_execution_record_sha256": "98a80fda1e832c4898f30c6e3ceaedcce2e28c07971338af50c0802a6e89d6fa",
+      "cmha_stage_v2_config": "configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json",
+      "cmha_stage_v2_config_sha256": "da2c224fc55542f9a76c62dc54dd24db83a93c7213b42173af229bc0f097fcc6",
+      "cmha_stage_v2_status": "preregistered_single_chunked_transport_attempt",
+      "cmha_stage_v2_evaluates_s0a": false,
       "score": 27.5,
       "maximum_score": 40.0,
       "automatic_selection_threshold": 32.0,

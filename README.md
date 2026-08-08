@@ -59,6 +59,17 @@ normal+reverse-AD runtime을 CPU/PBS에서 build한 뒤 incompressible steady
 forward와 실제 discrete-adjoint surface sensitivity를 검사합니다. 이것은 S0a
 판정이 아니며 medical asset, model, GPU와 outer test 접근은 모두 0입니다.
 
+CMHA monolithic staging v1은 exact source `b6b6175…`의 CPU/PBS job에서
+20분 37초 후 exit 28로 끝났습니다. Verified archive와 retained payload는
+0 byte이고 raw scheduler stdout이 생성되지 않아 exact transport cause는
+미확정입니다. 따라서 S0a는 평가되지 않았고 같은 v1을 재제출하지 않습니다.
+후속 1 KiB/8 MiB bounded range GET이 HTTP 206으로 성공한 사실만 근거로,
+asset·checksum·extraction 계약은 유지하고 전송만 64 MiB chunk로 바꾼
+[`staging v2`](configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json)를
+한 번의 PBS attempt로 고정했습니다. 실행 기록은
+[`v1 execution record`](results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json)에
+있습니다.
+
 ### 보존된 직전 4D-flow 실행 기록
 
 [`I0a contract`](configs/flow_mri_protocol_i0a_asset_audit.json)는 두 공개

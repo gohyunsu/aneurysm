@@ -11,7 +11,8 @@ problem-level cold audit, CADA·ADAM·IntrA·TopCoW source-only dataset
 substitution screen, RSNA supervision-semantics red team으로 그 lesion-set
 후보를 기각한 상태, 그리고 2026-08-09 goal-oriented hemodynamic segmentation
 cold audit와 S0a preregistration, official precompiled SU2의 reverse-AD
-negative control 및 별도 solver preflight 등록을 반영했다.
+negative control 및 별도 solver preflight 등록, CMHA staging v1
+execution-incomplete와 one-change chunked v2 등록을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -37,6 +38,15 @@ negative control 및 별도 solver preflight 등록을 반영했다.
   forward 뒤 discrete adjoint와 finite nonzero surface sensitivity를 확인한다.
   Preflight도 medical asset, model, GPU, outer test를 읽지 않으며 pass는 exact
   runtime pin 뒤 단 한 번의 S0a 실행만 허용한다.
+- Exact public `b6b6175`의 CMHA staging v1 job `115107`은 4 CPU/16 GB,
+  GPU 없이 20분 37초 뒤 exit 28이었다. Verified archive와 retained payload는
+  0 byte, manifest는 0 byte, raw scheduler stdout은 materialize되지 않았다.
+  따라서 원인은 unresolved이고 S0a는 `not_evaluated`다. 같은 v1 source는
+  재제출하지 않는다. 사후 bounded transport diagnostic에서 1 KiB와 8 MiB
+  range GET은 HTTP 206이었으므로, official ID/size/MD5·extraction·gate boundary는
+  그대로 두고 monolithic GET만 64 MiB range chunk로 바꾼
+  `configs/goal_oriented_segmentation_s0a_cmha_stage_v2.json`을 한 PBS attempt로
+  등록했다. V2도 staging-only이며 실패 시 같은 source를 재제출하지 않는다.
 - Automatic segmentation→CFD, Image2Flow의 joint mesh/field CFD loss, IAVS의
   CFD Applicability Score, clDice/cbDice, segmentation-induced flow variability,
   adjoint/shape derivative와 PDE optimization 일반론은 novelty가 아니다.

@@ -170,6 +170,12 @@ finite/nonzero surface sensitivity를 먼저 확인한다. 이 preflight는 medi
 asset을 읽지 않고 S0a를 평가하지 않으며, pass도 runtime pin과 단일 S0a
 실행만 허용한다.
 
+CMHA staging v1은 exact `b6b6175`의 CPU/PBS에서 exit 28로 종료됐고 verified
+archive와 retained payload는 0 byte였다. Raw stdout이 없어 exact cause는
+unresolved이며 S0a로 세지 않는다. Same-source v1 resubmission 대신 official
+ID/size/MD5와 gate boundary를 그대로 유지하고 monolithic transfer만 64 MiB
+range chunks로 바꾼 v2를 한 attempt로 prospective 등록했다. V2도 staging-only다.
+
 ## 7. S0b와 이후 kill rule
 
 S0a가 통과한 경우에만, 결과 전에 별도 S0b를 등록한다. S0b는 development

@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "protocol_id": "goal_oriented_segmentation_s0a_cmha_stage_v2",
+  "as_of": "2026-08-09",
+  "status": "preregistered_after_v1_transport_incomplete_before_v2_execution",
+  "purpose": "mechanical_private_staging_only_not_s0a",
+  "parent_gate": "configs/goal_oriented_segmentation_s0a.json",
+  "v1_execution_record": "results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json",
+  "v1_attribution": {
+    "public_source_commit": "b6b6175e79a59e441c5a7fc88d4e5e23b1c3ff8c",
+    "job_id": "115107.ECE-util1",
+    "exit_status": 28,
+    "verified_archive_bytes": 0,
+    "retained_payload_bytes": 0,
+    "raw_scheduler_stdout_available": false,
+    "exact_transport_cause": "unresolved",
+    "scientific_gate_evaluated": false
+  },
+  "single_change_from_v1": "replace_each_monolithic_GET_with_exact_64_MiB_HTTP_range_chunks_and_atomic_assembly_while_adding_failure_status",
+  "transport": {
+    "chunk_bytes": 67108864,
+    "expected_http_status": 206,
+    "connect_timeout_seconds": 20,
+    "per_chunk_max_time_seconds": 600,
+    "per_chunk_curl_retries": 2,
+    "pbs_attempts_for_this_public_source": 1,
+    "reuse_only_exact_size_complete_chunks_within_the_same_job": true,
+    "atomic_archive_assembly": true,
+    "archive_md5_after_assembly": true,
+    "failure_status_trap": true
+  },
+  "official_release": {
+    "version": 1,
+    "license": "CC_BY_4_0",
+    "total_bytes": 15557345067,
+    "files": [
+      {
+        "id": 49199083,
+        "label": "controls",
+        "name": "controls.rar",
+        "bytes": 4821489080,
+        "md5": "8d18b970978a303ed89618066919a1b1"
+      },
+      {
+        "id": 49199500,
+        "label": "statistics",
+        "name": "statistical results.rar",
+        "bytes": 34376,
+        "md5": "12b92693c79587fb6dbab4638bfad8bc"
+      },
+      {
+        "id": 49201807,
+        "label": "patients",
+        "name": "patients.rar",
+        "bytes": 10735821611,
+        "md5": "e783d656ba51c6813aae9fca68565c17"
+      }
+    ]
+  },
+  "unchanged_boundaries": {
+    "official_file_ids_sizes_md5": true,
+    "extraction_only_after_full_archive_md5": true,
+    "identifier_mapping": false,
+    "unit_or_frame_audit": false,
+    "solver_probe": false,
+    "scientific_gate_evaluated": false,
+    "medical_payload_publication": false,
+    "model_access": false,
+    "gpu_access": false,
+    "outer_test_access": false,
+    "submission_identity": false
+  },
+  "decision": {
+    "successful_staging_authorizes": "combine_with_a_separately_passed_solver_preflight_then_execute_the_single_preregistered_s0a_gate",
+    "failure_action": "preserve_v2_failure_and_do_not_resubmit_the_same_public_source",
+    "v1_relabelled": false,
+    "s0a_relabelled": false
+  }
+}

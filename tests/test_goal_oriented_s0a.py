@@ -1,4 +1,5 @@
 import copy
+import json
 import unittest
 from pathlib import Path
 
@@ -12,6 +13,11 @@ from aurora.goal_oriented_s0a_solver import (
     load_solver_preflight_config,
     validate_solver_preflight_config,
 )
+from aurora.goal_oriented_s0a_staging import (
+    StagingProtocolError,
+    load_staging_config,
+    validate_staging_config,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,6 +25,9 @@ CONFIG = ROOT / "configs" / "goal_oriented_segmentation_s0a.json"
 STAGING_PBS = ROOT / "cluster" / "pbs_goal_oriented_s0a_stage_cmha.pbs"
 SOLVER_CONFIG = ROOT / "configs" / "goal_oriented_segmentation_s0a_solver_preflight.json"
 SOLVER_PBS = ROOT / "cluster" / "pbs_goal_oriented_s0a_solver_preflight.pbs"
+STAGING_V2_CONFIG = ROOT / "configs" / "goal_oriented_segmentation_s0a_cmha_stage_v2.json"
+STAGING_V2_PBS = ROOT / "cluster" / "pbs_goal_oriented_s0a_stage_cmha_v2.pbs"
+STAGING_V1_RECORD = ROOT / "results" / "goal_oriented_s0a_cmha_stage_v1_execution_20260809.json"
 
 
 class GoalOrientedS0ATests(unittest.TestCase):
@@ -135,6 +144,37 @@ class GoalOrientedS0ATests(unittest.TestCase):
         self.assertIn("surface sensitivity is identically zero", script)
         self.assertIn("same-source preflight rerun is forbidden", script)
         self.assertIn("A preflight record already exists for this public source", script)
+
+    def test_stage_v1_execution_record_is_not_a_gate_result(self) -> None:
+        record = json.loads(STAGING_V1_RECORD.read_text(encoding="utf-8"))
+        self.assertEqual(record["scheduler"]["exit_status"], 28)
+        self.assertEqual(record["access_boundary"]["verified_archive_bytes"], 0)
+        self.assertEqual(record["verdict"]["s0a_gate"], "not_evaluated")
+        self.assertFalse(record["diagnosis"]["exit_28_interpreted_as_proof_of_figshare_unavailability"])
+
+    def test_stage_v2_reference_config_is_valid(self) -> None:
+        config = load_staging_config(STAGING_V2_CONFIG)
+        self.assertEqual(len(validate_staging_config(config)), 5)
+
+    def test_stage_v2_cannot_relabel_v1_or_s0a(self) -> None:
+        config = load_staging_config(STAGING_V2_CONFIG)
+        config["decision"]["s0a_relabelled"] = True
+        with self.assertRaisesRegex(StagingProtocolError, "cannot relabel"):
+            validate_staging_config(config)
+
+    def test_stage_v2_is_one_attempt_chunked_cpu_transport_only(self) -> None:
+        script = STAGING_V2_PBS.read_text(encoding="utf-8")
+        self.assertIn("select=1:ncpus=4:mem=16gb", script)
+        self.assertNotIn("ngpus=", script)
+        self.assertNotIn("nvidia-smi", script)
+        self.assertNotIn("singularity exec --nv", script)
+        self.assertIn("readonly CHUNK_BYTES=67108864", script)
+        self.assertIn('--range "$start-$end"', script)
+        self.assertIn('if [ "$http_code" != "206" ]', script)
+        self.assertIn('"scientific_gate_evaluated":false', script)
+        self.assertIn('"identifier_mapping_attempted":false', script)
+        self.assertIn("resubmission is forbidden", script)
+        self.assertIn("md5sum", script)
 
 
 if __name__ == "__main__":
