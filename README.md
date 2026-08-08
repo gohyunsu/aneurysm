@@ -1,14 +1,36 @@
 # AURORA · Aneurysm Research
 
-불완전하게 관측된 boundary condition(BC) 아래에서 서로 모순되지 않는
-**PDE solution distribution**을 학습하고, 이를 3D 뇌동맥류 혈류에
-검증하는 연구입니다. Full, partial, missing BC를 별도 문제처럼 풀지 않고
-하나의 joint BC–solution model의 조건부·주변 분포로 연결합니다.
+실패한 가설을 보존하면서 뇌동맥류 영상·혈류 연구의 문제 정의부터 다시
+검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
+N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-> **AURORA** — Aneurysm Uncertainty-aware Reconstruction Operator for
-> Reliable Assessment
+새 active candidate는 **intracranial 4D-flow MRI의 protocol-indexed posterior
+prediction**입니다. 한 acquisition에서 추론한 latent flow posterior가 같은
+controlled phantom flow의 다른 resolution·acceleration·VENC acquisition을
+measurement space에서 예측할 수 있는지를 묻습니다. Generic
+super-resolution, denoising, PINN reconstruction 또는 voxelwise uncertainty를
+새 contribution이라고 부르지 않습니다.
 
-현재 제출 목표는 **IEEE ISBI 2027 four-page regular paper**입니다
+> **AURORA** — 기존 프로젝트명은 유지하지만, 새 candidate의 정식 방법명과
+> architecture는 I0a/I0b 근거 전에는 정하지 않습니다.
+
+## 현재 단계 · I0a asset audit
+
+[`I0a contract`](configs/flow_mri_protocol_i0a_asset_audit.json)는 두 공개
+paired-protocol phantom release의 공식 record, archive size/checksum, ZIP
+central directory, descriptor/PAR/XML header와 payload byte contract를 14개
+check로 감사합니다. 등록 전에 record·central directory·header를 발견한
+사실을 명시했으며 field value, processed RAW, REC는 읽지 않습니다.
+
+I0a pass가 허용하는 것은 selective private staging과 **learned method가 없는
+I0b task-adequacy audit 등록뿐**입니다. Posterior calibration은 반복 측정이
+적은 공개 자산에서 식별이 어려울 수 있으므로, task가 충분히 비자명하고
+평가 가능한지 먼저 반증합니다. Method, neural training, outer test와 ISBI
+submission은 아직 열리지 않습니다.
+
+## 보존된 이전 연구선과 제출 상태
+
+제출 목표는 **IEEE ISBI 2027 four-page regular paper**입니다
 (공식 마감 2026-10-26). 다만 N1c와 V1 3D backbone gate에 이어 V1e
 known-condition qualification도 6/9로 실패했습니다. V1b/V1c/V1d의 boundary
 asset·geometry 통과와 V1e의 상대 boundary utility는 model learnability나

@@ -19,6 +19,20 @@
 BatchMode 접속과 PBS client까지 확인했다. 실제 GPU allocation·container·cache
 SHA smoke 전에는 learned job을 제출하지 않는다.
 
+## 2026-08-08 · Cross-protocol 4D-flow I0a
+
+- `configs/flow_mri_protocol_i0a_asset_audit.json`은 공식 Zenodo API와 HTTP
+  byte range만 쓰는 CPU metadata audit이다. GPU job이 아니며 login node에서
+  GPU API를 호출하지 않는다.
+- 등록 전에 두 record, central directory, nine descriptor와 eight primary
+  header를 본 범위를 result와 함께 보존한다. 이는 prospective performance
+  evidence가 아니다.
+- Processed RAW와 REC field payload는 읽지 않고, archive 전체도 내려받지
+  않는다. Exact public commit과 config SHA, command, environment, 14-check
+  result와 status만 private output에 남긴다.
+- Pass 뒤에도 selective staging protocol을 별도 commit하기 전 field를 읽지
+  않으며, learned method나 PBS GPU training을 제출하지 않는다.
+
 ## 2026-08-03 자산 감사
 
 `introai9`에서 다음 자산의 존재를 직접 확인했다.

@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · current Aneumo 3D line stopped · not submission-ready",
-    requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
+    status: "Target locked · prior identity inactive · cross-protocol 4D-flow I0a registered · method unselected · not submission-ready",
+    requirement: "I0a asset integrity → method-free I0b task adequacy → only then method design",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2020–26",
+      title: "4D-flow reconstruction, SR & UQ",
+      copy: "4DFlowNet·SRflow·FlowMRI-Net·VAST가 SR, accelerated reconstruction, denoising과 physics를 다뤘고 velocity UQ·distributional SR가 measurement error와 domain shift까지 확장했다.",
+      status: "Direct prior art · generic reconstruction/UQ is not novelty",
+      url: "https://doi.org/10.1002/mrm.30287"
+    },
     {
       year: "2011–21",
       title: "Morphology + CFD association",
@@ -93,14 +100,21 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Deployment input", "Current field + inflow", "Current field + inflow token", "Geometry + prescribed BC", "Geometry + arbitrary BC observation mask"],
-    ["BC uncertainty", "Point condition", "OOD waveform test", "Prescribed constraint", "One joint BC density, analytically conditioned"],
-    ["Temporal model", "Autoregressive", "Autoregressive transformer", "Unsteady PINN", "Secondary one-shot choice after D0"],
-    ["Primary fidelity", "Velocity rollout RMSE", "Field · WSS · OSI error", "Descriptor / status score", "Coherence + solution-functional risk; N1c failed"],
-    ["Downstream task", "Not validated", "Risk metrics descriptive", "Late-fusion status", "Secondary only; current signal negative"],
-    ["Primary gap", "Partial/missing condition", "Mask coherence", "Condition uncertainty", "3D task translation V0 first; method unselected"]
+    ["Input / target", "Synthetic LR → CFD/HR", "Undersampled complex data → reconstruction", "Measured velocity → local error/distribution", "Acquisition α → held-out acquisition β"],
+    ["Protocol shift", "Synthetic degradation or SR factor", "Acceleration-aware forward model", "Resolution/VENC sensitivity or domain shift", "Resolution·acceleration·VENC as explicit view index"],
+    ["Uncertainty", "Usually point estimate", "Reconstruction uncertainty optional", "Voxelwise error or distributional output", "Full posterior predictive score; feasibility unproven"],
+    ["Reference", "CFD or acquired HR", "Acquired/self-supervised k-space", "Synthetic/repeat/dual-VENC validation", "Same controlled flow's second real acquisition"],
+    ["What is already occupied", "SR and denoising", "Physics/self-supervised reconstruction", "Velocity UQ and distributional SR", "Only the evaluation gap is a candidate; no method selected"],
+    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a registered after disclosed discovery; no field read"]
   ],
   gates: [
+    {
+      id: "I0a",
+      title: "Are paired-protocol MRI assets auditable?",
+      copy: "두 official Zenodo release의 license·archive pin, 3×3 descriptor/27 RAW byte contract, four-phantom dual-VENC primary/AP/FH/RL header를 field payload 없이 14개 check로 감사한다.",
+      state: "Registered after disclosed discovery · not yet executed from exact public commit",
+      blocking: true
+    },
     {
       id: "G0",
       title: "Asset integrity",
@@ -139,6 +153,16 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "4D-flow multiresolution phantom · 2021",
+      role: "same-flow 3 resolution × 3 acceleration development/task audit candidate",
+      provenance: "Zenodo CC BY 4.0 · I0a metadata/header only · field payload not staged"
+    },
+    {
+      name: "4D-flow dual-VENC phantoms · 2025",
+      role: "four-phantom external protocol-pair task audit candidate",
+      provenance: "Zenodo CC BY 4.0 · I0a metadata/header only · REC not read"
+    },
+    {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
       provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition 6/9 failed"
@@ -165,6 +189,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "research",
+      title: "Identity resets to cross-protocol 4D-flow posterior prediction",
+      copy: "N1c, V1e와 M0 evidence를 보존한 채 previous BC-operator identity를 inactive로 내렸다. 4D-flow SR·denoising·physics reconstruction·voxel UQ·domain shift는 직접 prior art다. 새 candidate는 한 real acquisition posterior가 같은 controlled flow의 다른 protocol acquisition을 measurement space에서 예측하는지 묻지만, 아직 method나 contribution이 아니다. I0a는 registration 전 record/central-directory/header discovery를 공개하고 field payload 없이 14개 asset check만 수행한다. Pass도 method-free I0b 등록만 연다.",
+      files: ["configs/flow_mri_protocol_i0a_asset_audit.json", "src/aurora/flow_mri_asset_audit.py", "experiments/run_flow_mri_protocol_i0a.py", "tests/test_flow_mri_asset_audit.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "execution",

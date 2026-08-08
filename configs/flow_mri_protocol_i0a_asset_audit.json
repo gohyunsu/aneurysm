@@ -1,0 +1,123 @@
+{
+  "schema_version": "aurora.flow_mri_protocol_i0a_asset_audit.v1",
+  "experiment_id": "flow_mri_protocol_i0a_asset_audit",
+  "status": "registered_after_central_directory_and_header_discovery_before_selective_staging",
+  "as_of": "2026-08-08",
+  "research_role": "asset_only_candidate_task_audit_not_method_or_performance_evidence",
+  "discovery_boundary": {
+    "inspected_before_registration": true,
+    "scope": "official_record_metadata_two_zip_central_directories_nine_processed_velocity_descriptors_and_eight_primary_PAR_or_XML_headers",
+    "not_prospective_evidence": true,
+    "field_values_inspected": false,
+    "raw_REC_payloads_inspected": false
+  },
+  "candidate_question": "Can a posterior inferred from one intracranial 4D-flow acquisition predict a second acquisition of the same controlled flow state under a different resolution, acceleration, or VENC protocol?",
+  "sources": {
+    "multiresolution_2021": {
+      "doi": "10.5281/zenodo.4882572",
+      "record_api": "https://zenodo.org/api/records/4882572",
+      "archive_url": "https://zenodo.org/records/4882572/files/2021_05_31_4Dflow_validation.zip?download=1",
+      "archive_name": "2021_05_31_4Dflow_validation.zip",
+      "archive_bytes": 2216223733,
+      "upstream_checksum": "md5:f3159a34a6f222b491432650540f63b6",
+      "license": "cc-by-4.0",
+      "access_right": "open",
+      "archive_entries": 174,
+      "flow_state": {
+        "object": "in_vitro_patient_derived_ICA_aneurysm_phantom",
+        "pump_flow_ml_s": 3.8,
+        "venc_cm_s": 80.0,
+        "cardiac_phases": 24,
+        "time_step_descriptor_value": 0.034
+      },
+      "processed_velocity_root_token": "2_Velocity_in_an_aneurysm_model/Velocity (extracted from GTflow)",
+      "protocols": {
+        "0.5_cs2.5": {"dims_tzyx": [24, 100, 336, 336], "spacing_xyz_mm": [0.298, 0.298, 0.3]},
+        "0.5_cs4.5": {"dims_tzyx": [24, 100, 336, 336], "spacing_xyz_mm": [0.298, 0.298, 0.3]},
+        "0.5_cs6.5": {"dims_tzyx": [24, 100, 336, 336], "spacing_xyz_mm": [0.298, 0.298, 0.3]},
+        "1.0_cs2.5": {"dims_tzyx": [24, 60, 224, 224], "spacing_xyz_mm": [0.446, 0.446, 0.5]},
+        "1.0_cs4.5": {"dims_tzyx": [24, 60, 224, 224], "spacing_xyz_mm": [0.446, 0.446, 0.5]},
+        "1.0_cs6.5": {"dims_tzyx": [24, 60, 224, 224], "spacing_xyz_mm": [0.446, 0.446, 0.5]},
+        "1.5_cs2.5": {"dims_tzyx": [24, 40, 144, 144], "spacing_xyz_mm": [0.694, 0.694, 0.75]},
+        "1.5_cs4.5": {"dims_tzyx": [24, 40, 144, 144], "spacing_xyz_mm": [0.694, 0.694, 0.75]},
+        "1.5_cs6.5": {"dims_tzyx": [24, 40, 144, 144], "spacing_xyz_mm": [0.694, 0.694, 0.75]}
+      },
+      "velocity_components": ["X", "Y", "Z"],
+      "velocity_dtype": "float32_from_official_description_endianness_unverified_before_staging",
+      "velocity_unit": "cm_per_s"
+    },
+    "dual_venc_2025": {
+      "doi": "10.5281/zenodo.14981710",
+      "record_api": "https://zenodo.org/api/records/14981710",
+      "archive_url": "https://zenodo.org/records/14981710/files/4D_flow_MRI.zip?download=1",
+      "archive_name": "4D_flow_MRI.zip",
+      "archive_bytes": 6218491225,
+      "upstream_checksum": "md5:6e2437d0107677ad38708e01772db85d",
+      "license": "cc-by-4.0",
+      "access_right": "open",
+      "archive_entries": 76,
+      "flow_state": {
+        "object": "four_in_vitro_patient_derived_ICA_aneurysm_or_flow_diverter_phantoms",
+        "pump_flow_ml_s": 4.2,
+        "cardiac_phases": 20,
+        "scan_resolution_xy": [148, 147],
+        "acquired_voxel_mm": [0.75, 0.75, 0.75],
+        "acceleration_factor": 4.5
+      },
+      "models": {
+        "M1_empty": {"protocols": {"4DFlow_55venc_aneurysm": 55.0, "4DFlow_80venc_vessel": 80.0}},
+        "M2_commercial": {"protocols": {"4DFlow_20venc_aneurysm": 20.0, "4DFlow_100venc": 100.0}},
+        "M4_printed_16": {"protocols": {"4Dflow_5venc_aneurysm": 5.0, "4DFlow_50venc_inlet": 50.0}},
+        "M5_printed_6": {"protocols": {"4DFlow_25venc_aneurysm": 25.0, "4DFlow_50venc_inlet": 50.0}}
+      },
+      "encodings_per_protocol": 4,
+      "required_direction_tokens": ["4Dflow", "AP", "FH", "RL"],
+      "metadata_extensions": ["PAR", "xml"],
+      "payload_extension": "REC",
+      "known_filename_header_disagreements": [
+        "M4_printed_16/4DFlow_50venc_inlet_primary_filename_contains_80venc_but_XML_header_and_directory_encode_50venc"
+      ]
+    }
+  },
+  "access": {
+    "official_record_API": true,
+    "HTTP_HEAD_and_byte_ranges": true,
+    "central_directories": true,
+    "descriptor_and_primary_header_payloads": true,
+    "processed_velocity_RAW_payloads": false,
+    "REC_payloads": false,
+    "field_values": false,
+    "model_or_checkpoint": false,
+    "training": false
+  },
+  "gate": {
+    "checks": [
+      "official_records_are_open_cc_by_4_and_pin_archive_size_checksum",
+      "both_archives_are_exact_size_and_range_readable",
+      "central_directory_entry_counts_match",
+      "multiresolution_protocol_grid_is_exactly_three_by_three",
+      "all_nine_descriptors_are_crc_verified_and_match_dimensions_spacing_and_time_step",
+      "all_twenty_seven_velocity_components_have_exact_float32_byte_contract",
+      "dual_venc_has_exactly_four_models_and_eight_protocols",
+      "each_dual_venc_protocol_has_four_metadata_REC_pairs",
+      "each_dual_venc_protocol_covers_primary_AP_FH_and_RL_encodings",
+      "all_eight_primary_headers_are_crc_verified",
+      "dual_venc_headers_match_twenty_phases_and_scan_resolution",
+      "dual_venc_header_values_match_registered_protocol_values",
+      "known_M4_filename_header_disagreement_is_disclosed",
+      "no_velocity_RAW_or_REC_payload_was_read"
+    ],
+    "pass_authorizes": "register_selective_private_staging_and_method_free_I0b_task_adequacy_only",
+    "pass_does_not_authorize": [
+      "method_selection",
+      "neural_training",
+      "claim_generic_super_resolution_novelty",
+      "claim_CFD_as_MRI_ground_truth",
+      "confirmatory_outer_test",
+      "isbi_submission"
+    ],
+    "failure_action": "stop_this_candidate_task_until_a_new_asset_contract_is_registered",
+    "local_repair_allowed": false
+  },
+  "interpretation": "I0a only determines whether two public paired-protocol phantom releases can support a later measurement-space task audit. The pre-registration discovery is disclosed and is not scientific evidence. Even a pass does not establish task nontriviality, a method, novelty, or submission readiness."
+}

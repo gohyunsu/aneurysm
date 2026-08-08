@@ -5,10 +5,39 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · method unselected ·
-3D headline blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a registered after disclosed discovery · method unselected · submission blocked
 
-## 0. 제출 목표와 scope
+## 0-A. 현재 active candidate · protocol-indexed posterior prediction
+
+현재의 질문은 다음 하나다.
+
+> 한 intracranial 4D-flow MRI acquisition에서 얻은 posterior가 같은
+> controlled phantom flow의 다른 resolution, acceleration 또는 VENC
+> acquisition을 measurement space에서 예측할 수 있는가?
+
+핵심은 고해상도 CFD를 MRI의 정답으로 놓는 super-resolution이 아니다.
+Latent continuous velocity field (u)와 acquisition protocol
+\(\alpha\)의 measurement operator \(A_\alpha\)를 분리하고,
+\(p(u\mid y_\alpha,\alpha)\)를 다른 protocol \(\beta\)로 pushforward한
+\(p(y_\beta\mid y_\alpha,\alpha,\beta)\)를 실제 held-out acquisition으로
+검사하는 **cross-acquisition posterior predictive check**가 후보 estimand다.
+
+이 방향도 아직 contribution이 아니다. 4DFlowNet·SRflow·FlowMRI-Net·VAST,
+4D-flow velocity UQ와 2026 distributional SR가 reconstruction, denoising,
+physics, domain shift와 uncertainty를 이미 다룬다. 공개 candidate asset은
+소수 in-vitro phantom이고 반복 acquisition이 제한적이므로 posterior
+calibration이 통계적으로 식별 가능한지도 미정이다. 따라서 method·이름·GNN
+여부를 먼저 정하지 않는다.
+
+`configs/flow_mri_protocol_i0a_asset_audit.json`의 I0a는 이미 확인한 record,
+central directory, nine descriptors와 eight primary headers를 discovery로
+공개하고, field payload를 전혀 읽지 않는 14-check asset audit이다. Pass는
+selective staging과 learned-method-free I0b 등록만 허용한다. I0b가 protocol
+차이의 비자명성, registration 가능성, simple interpolation/identity floor,
+functional stability와 평가 sample adequacy를 지지하지 못하면 candidate를
+중단한다.
+
+## 0-B. 제출 목표와 보존된 이전 scope
 
 목표 venue는 IEEE ISBI 2027 four-page regular paper이며 공식 마감은
 2026-10-26이다. ISBI는 physical/statistical modelling, reconstruction,
@@ -16,11 +45,10 @@ uncertainty quantification과 medical applications를 포함하지만, 현재
 negative nonlinear evidence와 계획만 있는 3D GNN을 제출 근거로 보지
 않는다.
 
-제출 identity는 `docs/isbi-2027-plan.md`의 velocity-only 3D gate를
-통과할 때만 열린다. Exact/nonlinear PDE는 method sanity이고, headline은
-Aneumo 또는 독립 irregular-3D data의 full/missing inflow velocity
-reconstruction, calibration, same-geometry response여야 한다. Pressure,
-WSS/OSI, transient, rupture risk와 clinical utility는 제외한다.
+아래 Aneumo velocity-only 3D 경로는 실패 provenance와 재현 계약으로
+보존한다. N1c, V1e와 M0 outcome 뒤에는 더 이상 active submission identity가
+아니며 local repair나 이름 변경으로 되살리지 않는다. 새 candidate도 I0a/I0b
+뒤 독립적인 positive evidence가 생기기 전에는 제출 identity가 아니다.
 
 3D로 바로 넘어가지 않는다. `configs/aneumo_isbi_v0.json`은 64-case cache의
 SHA, 32-family 20/6/6 split, 8개 scalar mass-flow mapping, velocity tensor

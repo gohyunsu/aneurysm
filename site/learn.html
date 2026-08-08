@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류, CFD, GNN, neural operator부터 AURORA 아키텍처와 실험까지 단계별로 읽는 입문 가이드.">
+  <meta name="description" content="뇌동맥류, 4D-flow MRI, CFD, GNN과 posterior prediction을 단계별로 읽는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -42,23 +42,31 @@
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
-          AURORA가 무엇을 학습하고 무엇은 알 수 없는지 순서대로 설명합니다.
+          4D-flow MRI protocol이 같은 혈류를 왜 다르게 보이게 하는지, 과거
+          AURORA가 왜 실패했고 새 candidate가 무엇부터 검증하는지 설명합니다.
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>현재 실행된 모델은 GNN이 아닙니다.</strong>
+          <strong>현재 선택된 모델은 없습니다.</strong>
           <p>
-            Exact/nonlinear gate는 context MLP와 boundary token, lifted
-            decoder로 실행했습니다. V1의 q-PointNet·kNN graph·anchor-token
-            후보는 gate 5/7로 실패했고 V1a에서 training underfit도 확인됐습니다.
-            V1b/V1c는 8/8, V1d는 9/9을 통과했지만 모두 asset evidence입니다.
-            학습 전에 고정한 V1e는 boundary token을 읽는
-            <b>Perceiver continuous-query operator</b>이며 GNN이 아닙니다.
-            Geometry-only matched control보다 상대적으로 나았지만 absolute
-            learnability gate는 6/9로 실패해 current Aneumo 3D line을
-            중단했습니다. 국소 GNN, anatomy
-            attention, continuous-query operator를 모두 결합한 더 큰 구조는
-            장기 <b>irregular-3D target specification</b>입니다.
+            과거 exact/nonlinear gate는 MLP였고, q-PointNet·kNN graph·
+            anchor-token·Perceiver 연구선은 성능 gate를 통과하지 못해
+            종료했습니다. 새 candidate는 한 4D-flow acquisition posterior가
+            같은 flow의 다른 resolution·acceleration·VENC acquisition을
+            예측하는 문제지만, 현재는 I0a metadata/header audit뿐입니다.
+            I0b가 task adequacy를 지지하기 전에는 GNN, U-Net, diffusion,
+            neural field 어느 것도 architecture로 선택하지 않습니다.
+          </p>
+        </div>
+        <div class="answer-card">
+          <span>현재 해야 하는 일</span>
+          <strong>I0a는 성능 실험이 아닙니다.</strong>
+          <p>
+            두 공개 phantom release의 license, archive checksum, protocol grid,
+            descriptor와 PAR/XML header가 정확한지만 14개 check로 확인합니다.
+            Processed RAW·REC field는 읽지 않습니다. 통과해도 다음은 simple
+            baseline과 registration 가능성을 보는 method-free I0b이며,
+            posterior model 학습이나 ISBI claim은 아닙니다.
           </p>
         </div>
       </div>

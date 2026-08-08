@@ -4,15 +4,24 @@
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
 backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass,
-V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태를
-반영했다.
+V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
+그리고 cross-protocol 4D-flow candidate I0a 등록을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
-- 주 연구 문제: **partial/missing physical-condition operator learning**
+- 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
+  N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
+- 현재 candidate 문제: **protocol-indexed posterior prediction under
+  intracranial 4D-flow acquisition shift**. 한 실제 acquisition posterior가
+  같은 controlled phantom flow의 다른 resolution·acceleration·VENC
+  acquisition을 measurement space에서 예측하는지를 묻는다.
+- 현재 단계: `configs/flow_mri_protocol_i0a_asset_audit.json`의 I0a를
+  등록했다. Registration 전에 본 official record, two central directories,
+  nine descriptor와 eight primary header를 discovery로 공개한다. Field
+  payload는 보지 않았고 method·architecture는 선택하지 않았다.
 - 제출 목표: **IEEE ISBI 2027 archival four-page regular paper**,
   2026-10-26 23:59 USA EDT. 현재는 `not submission-ready`다.
 - ISBI headline은 actual irregular-3D aneurysm **velocity-only**
@@ -240,8 +249,10 @@ V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태를
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
   threshold를 통과했다. POD는 learned compute-matched 후보일 뿐 아직
   선택된 temporal architecture나 novelty가 아니다.
-- 최종 주장은 “미래 파열 위험을 예측한다”가 아니라 “불완전한 물리조건
-  아래에서도 일관되고 보정된 PDE solution distribution을 학습한다”이다.
+- 최종 주장은 아직 없다. 이전 “불완전한 물리조건 아래의 coherent PDE
+  solution distribution” identity는 unsupported history로 보존한다. 새
+  candidate도 I0a/I0b와 이후 fresh strong-baseline evidence 전에는
+  contribution 문구로 쓰지 않는다.
 
 다음 아이디어는 주 방법론이 아니다. 비교·ablation으로만 남긴다.
 
@@ -252,6 +263,13 @@ V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태를
 - 서로 다른 공개 데이터셋을 파일명 유사성만으로 patient-level 병합
 
 ## 2. 현재 contribution 가설
+
+현재 확정 contribution은 없다. Generic 4D-flow super-resolution, denoising,
+physics-informed reconstruction, implicit neural field, dual-VENC fusion,
+voxelwise uncertainty와 domain adaptation은 직접 선행연구다. 남겨 둔 후보는
+**held-out same-flow acquisition posterior predictive calibration**이지만,
+소수 phantom과 반복 측정 부족에서 estimand가 식별 가능한지부터 I0b에서
+learned method 없이 확인해야 한다.
 
 기존 세 축은 아래처럼 재판정한다.
 
@@ -336,11 +354,20 @@ N1 adaptation을 원 논문 재현으로 표현하지 않는다.
 | CMHA | patient CTA/mesh, clinical, morphology, real-CFD bridge와 task gate | multi-center external validation로 과장 |
 | AneuX | 750 geometry/status의 external association stress test | real hemodynamics validation |
 | Aneurisk | provenance가 확인된 geometry/morphology 보조 평가 | asset audit 전 CFD 보유 가정 |
+| 4D-flow multiresolution phantom 2021 | same-flow 3×3 protocol development/task audit 후보 | high-resolution acquisition 또는 CFD를 clinical truth로 해석 |
+| 4D-flow dual-VENC phantoms 2025 | four-phantom external protocol-pair audit 후보 | phantom을 independent clinical cohort 또는 repeat calibration set으로 과장 |
 
 모든 case/field에는 `source_field ∈ {real_cfd, surrogate, synthetic_cfd}`와
 dataset version, checksum, unit, coordinate frame을 기록한다.
 
 ## 4. 연구를 계속할지 결정하는 gate
+
+- **I0a · Paired-protocol asset integrity**: 두 official Zenodo record의
+  license·size·checksum, ZIP entry, 2021 3×3 descriptor/27 RAW byte contract,
+  2025 four-model/eight-protocol primary/AP/FH/RL·phase/resolution/VENC header를
+  14개 all-check rule로 감사한다. Processed RAW/REC payload는 읽지 않는다.
+  Pass는 selective private staging과 method-free I0b 등록만 허용한다. Fail은
+  새 asset contract 전 candidate 중단이며 local repair는 없다.
 
 - **G0 · Asset integrity**: case mapping, unit, boundary marker, license,
   geometry/condition split이 검증되지 않으면 학습하지 않는다.
@@ -697,6 +724,11 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   1이었다. 세 seed 완결을 요구하는 aggregate는 생성하지 않았고 성공 seed
   metric도 gate 용도로 읽지 않았다. 따라서 M0에는 과학적 pass/fail이 없으며
   sampler repair, rerun, re-entry와 N1d/3D 제출 권한도 없다.
+- Cross-protocol I0a는 CPU metadata audit이다. Exact public source를 먼저
+  push한 뒤 official API와 byte-range로만 실행하고 processed RAW/REC field를
+  읽지 않는다. I0a pass 전에는 selective staging, method code와 GPU training을
+  실행하지 않는다. Pass 뒤에도 별도 I0b contract 전에는 field payload를
+  읽지 않는다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

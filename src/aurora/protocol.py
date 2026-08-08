@@ -17,10 +17,13 @@ class ProtocolError(ValueError):
     """Raised when a research protocol violates a project invariant."""
 
 
-ALLOWED_PRIMARY_PROBLEMS = {"operator_learning_under_partial_boundary_observation"}
-ALLOWED_ENDPOINTS = {"cross_sectional_rupture_status"}
+ALLOWED_PRIMARY_PROBLEMS = {
+    "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
+}
+ALLOWED_ENDPOINTS = {"held_out_same_flow_acquisition_prediction"}
 ALLOWED_PROVENANCE = {
     "analytical_pde",
+    "in_vitro_measurement",
     "real_cfd",
     "synthetic_cfd",
     "surrogate",
@@ -32,6 +35,7 @@ ALLOWED_SPLIT_UNITS = {
     "generator_seed_geometry",
     "simulation_family",
     "aneux_base_family",
+    "physical_phantom",
 }
 REQUIRED_GATES = {"G0", "G1", "G2", "G3", "G4"}
 REQUIRED_DATASETS = {
@@ -292,26 +296,67 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "primary_problem",
             "application_endpoint",
             "primary_metric",
+            "historical_primary_problem",
+            "historical_application_endpoint",
+            "historical_primary_metric",
+            "historical_primary_status",
+            "active_candidate_problem",
+            "active_candidate_status",
+            "candidate_primary_estimand",
+            "candidate_secondary_estimand",
+            "i0a_config",
+            "i0a_config_sha256",
+            "i0a_pass_authorizes",
+            "generic_super_resolution_or_denoising_is_novel",
+            "cfd_field_is_clinical_mri_ground_truth",
             "forbidden_claims",
         ],
         "task",
     )
     if task["primary_problem"] not in ALLOWED_PRIMARY_PROBLEMS:
         raise ProtocolError(
-            "The primary task must remain partial-boundary-observation operator "
-            "learning for schema v2."
+            "The active primary task must remain protocol-indexed 4D-flow "
+            "posterior prediction for schema v2."
         )
     if task["application_endpoint"] not in ALLOWED_ENDPOINTS:
         raise ProtocolError(
-            "Only cross-sectional rupture status is supported; prospective risk "
-            "requires a longitudinal protocol."
+            "Only held-out same-flow acquisition prediction is active; prospective "
+            "risk or rupture-status relabeling requires a separate protocol."
         )
     forbidden = set(task["forbidden_claims"])
     if "prospective_rupture_risk" not in forbidden or "clinical_utility" not in forbidden:
         raise ProtocolError("Task must forbid prospective-risk and clinical-utility claims.")
     if "causal_intervention_effect" not in forbidden:
         raise ProtocolError("Paired simulator responses must not be called causal effects.")
-    checks.append("primary method task and application-claim guardrails")
+    if (
+        task["primary_metric"] != "held_out_measurement_energy_score"
+        or task["historical_primary_problem"]
+        != "operator_learning_under_partial_boundary_observation"
+        or task["historical_application_endpoint"] != "cross_sectional_rupture_status"
+        or task["historical_primary_metric"] != "functional_energy_score"
+        or task["historical_primary_status"]
+        != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
+        or task["active_candidate_problem"]
+        != "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
+        or task["active_candidate_status"]
+        != "i0a_post_discovery_asset_audit_registered_no_method_selected"
+        or task["candidate_primary_estimand"]
+        != "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space"
+        or task["candidate_secondary_estimand"]
+        != "aneurysm_localized_velocity_functional_calibration"
+        or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
+        or task["i0a_config_sha256"]
+        != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
+        or task["i0a_pass_authorizes"]
+        != "register_selective_private_staging_and_method_free_I0b_task_adequacy_only"
+        or task["generic_super_resolution_or_denoising_is_novel"] is not False
+        or task["cfd_field_is_clinical_mri_ground_truth"] is not False
+    ):
+        raise ProtocolError(
+            "The 4D-flow candidate must remain asset-only, measurement-space, "
+            "and method-unselected before I0b."
+        )
+    checks.append("historical task boundary and 4D-flow candidate guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:

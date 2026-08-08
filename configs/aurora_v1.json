@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_m0_execution_incomplete_no_verdict_v1_failed_v1a_underfit_attributed_v1b_v1c_v1d_asset_gates_passed_v1e_failed_current_aneumo_3d_line_stopped_method_unselected",
+    "status": "failed_n1c_m0_execution_incomplete_no_verdict_v1e_failed_current_aneumo_3d_line_stopped_cross_protocol_4d_flow_candidate_i0a_registered_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -75,9 +75,22 @@
     "plan": "docs/isbi-2027-plan.md"
   },
   "task": {
-    "primary_problem": "operator_learning_under_partial_boundary_observation",
-    "application_endpoint": "cross_sectional_rupture_status",
-    "primary_metric": "functional_energy_score",
+    "primary_problem": "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift",
+    "application_endpoint": "held_out_same_flow_acquisition_prediction",
+    "primary_metric": "held_out_measurement_energy_score",
+    "historical_primary_problem": "operator_learning_under_partial_boundary_observation",
+    "historical_application_endpoint": "cross_sectional_rupture_status",
+    "historical_primary_metric": "functional_energy_score",
+    "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
+    "active_candidate_problem": "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift",
+    "active_candidate_status": "i0a_post_discovery_asset_audit_registered_no_method_selected",
+    "candidate_primary_estimand": "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space",
+    "candidate_secondary_estimand": "aneurysm_localized_velocity_functional_calibration",
+    "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
+    "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
+    "i0a_pass_authorizes": "register_selective_private_staging_and_method_free_I0b_task_adequacy_only",
+    "generic_super_resolution_or_denoising_is_novel": false,
+    "cfd_field_is_clinical_mri_ground_truth": false,
     "forbidden_claims": [
       "prospective_rupture_risk",
       "two_year_rupture_probability",
@@ -99,7 +112,11 @@
       "decision_focused_density_learning",
       "explicit_known_boundary_transfer_operators",
       "inflow_aware_physics_gnn_for_aneurysm",
-      "geometry_aware_pointcloud_surrogate_for_aneurysm_hemodynamics"
+      "geometry_aware_pointcloud_surrogate_for_aneurysm_hemodynamics",
+      "4d_flow_mri_super_resolution_and_denoising",
+      "measurement_model_implicit_neural_reconstruction",
+      "voxelwise_4d_flow_velocity_uncertainty",
+      "distributional_4d_flow_super_resolution_under_domain_shift"
     ],
     "cmha_secondary_diagnostic": {
       "result_id": "cmha_g1_exploratory_20260803",
@@ -263,6 +280,22 @@
       "role": "transient_efficiency_and_gnn_baseline",
       "field_provenance": "synthetic_cfd",
       "split_unit": "geometry"
+    },
+    {
+      "name": "flow_mri_multiresolution_phantom_2021",
+      "role": "candidate_development_same_flow_cross_resolution_and_acceleration_measurement_prediction",
+      "field_provenance": "in_vitro_measurement",
+      "split_unit": "physical_phantom",
+      "doi": "10.5281/zenodo.4882572",
+      "status": "i0a_registered_no_field_payload_staged"
+    },
+    {
+      "name": "flow_mri_dual_venc_phantoms_2025",
+      "role": "candidate_external_same_model_dual_venc_measurement_prediction",
+      "field_provenance": "in_vitro_measurement",
+      "split_unit": "physical_phantom",
+      "doi": "10.5281/zenodo.14981710",
+      "status": "i0a_registered_no_REC_payload_staged"
     },
     {
       "name": "cmha",

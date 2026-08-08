@@ -21,7 +21,25 @@ class ProtocolTests(unittest.TestCase):
     def test_prospective_endpoint_is_rejected(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["application_endpoint"] = "five_year_rupture_risk"
-        with self.assertRaisesRegex(ProtocolError, "cross-sectional"):
+        with self.assertRaisesRegex(ProtocolError, "same-flow"):
+            validate_protocol(candidate)
+
+    def test_historical_partial_bc_task_cannot_remain_primary(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["primary_problem"] = candidate["task"][
+            "historical_primary_problem"
+        ]
+        with self.assertRaisesRegex(ProtocolError, "protocol-indexed"):
+            validate_protocol(candidate)
+
+    def test_i0a_cannot_select_a_method_or_call_cfd_mri_truth(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["active_candidate_status"] = "method_selected"
+        with self.assertRaisesRegex(ProtocolError, "asset-only"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["cfd_field_is_clinical_mri_ground_truth"] = True
+        with self.assertRaisesRegex(ProtocolError, "asset-only"):
             validate_protocol(candidate)
 
     def test_isbi_target_cannot_be_marked_ready_without_3d_evidence(self) -> None:

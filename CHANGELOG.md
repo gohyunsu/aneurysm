@@ -4,6 +4,26 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · Research identity resets to a cross-protocol 4D-flow candidate
+
+- N1c failure, M0 execution-incomplete state와 V1e 6/9 failure를 보존하고
+  current Aneumo 3D line을 local repair 없이 종료한 뒤, selected method가
+  없는 상태에서 새 task/data identity를 감사한다.
+- 4DFlowNet, SRflow, FlowMRI-Net, VAST, 4D-flow velocity UQ와 2026
+  distributional SR를 직접 prior art로 추가했다. Generic SR, denoising,
+  physics reconstruction, implicit field, dual-VENC와 voxel uncertainty는
+  novelty가 아니다.
+- 새 candidate는 한 real acquisition posterior가 같은 controlled phantom
+  flow의 다른 resolution·acceleration·VENC acquisition을 measurement space에서
+  예측하는지 검사한다. CFD를 MRI truth로 두지 않는다.
+- `configs/flow_mri_protocol_i0a_asset_audit.json`에 registration 전 discovery를
+  명시하고, 두 official record/archive와 descriptor/header를 field payload
+  없이 감사하는 14-check I0a를 고정했다. Pass도 selective private staging과
+  learned-method-free I0b 등록만 허용한다.
+- Protocol validator, standard-library range audit, parser/guardrail test와
+  README, research/model/experiment/literature/dataset/server/ISBI 문서를 같은
+  `method unselected · not submission-ready` 상태로 동기화했다.
+
 ## 2026-08-08 · M0 execution closes without a scientific verdict
 
 - Exact source `89bdc8560a7e5db1d4b5402cd76dbbb01d991aad`, frozen config SHA

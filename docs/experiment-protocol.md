@@ -1,13 +1,48 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.3-draft · 2026-08-08
+버전: 2.4-draft · 2026-08-08
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
-## 0. ISBI 2027 venue gate
+## 0-A. I0a · paired-protocol 4D-flow asset audit
+
+Executable contract는
+`configs/flow_mri_protocol_i0a_asset_audit.json`이다. 이 protocol은 공식
+Zenodo record 두 건과 archive 두 개를 대상으로 하며, 등록 전에 record
+metadata, 두 central directory, nine processed-velocity descriptor와 eight
+primary PAR/XML header를 본 사실을 discovery boundary로 공개한다. 따라서
+I0a 결과는 prospective scientific evidence가 아니라 재현 가능한 자산
+무결성 판정이다.
+
+I0a는 다음만 읽는다.
+
+1. 공식 record API의 access, CC BY 4.0 license, file size와 MD5
+2. HTTP HEAD와 byte-range로 읽은 ZIP/ZIP64 central directory
+3. 2021 release의 3 resolution × 3 acceleration descriptor 아홉 개
+4. 2025 release의 four phantom × two VENC primary PAR/XML header 여덟 개
+
+Processed velocity RAW와 REC field payload, field value, checkpoint와 model은
+읽지 않는다. 14개 frozen check는 protocol grid, dimensions/spacing/time-step,
+27 component byte contract, four-model/eight-protocol 구성, protocol별
+primary/AP/FH/RL 네 encoding, phase/resolution/VENC header와 알려진 M4
+filename/header 불일치의 명시를 포함한다.
+
+- all pass: selective private staging과 learned-method-free I0b
+  task-adequacy protocol 등록만 허용
+- any fail: 새 asset contract 전까지 candidate 중단
+- 금지: local repair, method selection, training, CFD-as-MRI ground truth,
+  outer test, generic SR novelty와 submission
+
+I0b는 아직 등록하지 않는다. I0a pass 뒤에도 같은 flow의 protocol 간
+registration, discrepancy magnitude, identity/interpolation floor, repeat 없는
+sample에서의 평가 단위와 aneurysm-localized functional stability가 먼저
+정의 가능해야 한다. 이 audit이 불충분하면 posterior라는 이름을 붙여
+학습으로 넘어가지 않는다.
+
+## 0-B. ISBI 2027 venue gate
 
 목표는 2026-10-26 마감의 IEEE ISBI 2027 four-page regular paper다.
 `docs/isbi-2027-plan.md`가 venue-specific source of truth다.

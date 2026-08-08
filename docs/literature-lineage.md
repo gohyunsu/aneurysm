@@ -7,6 +7,46 @@
 
 ## 1. 계보
 
+### 1.0 4D-flow MRI reconstruction과 uncertainty의 직접 계보
+
+Generic 4D-flow super-resolution은 이미 4DFlowNet과 SRflow가 CFD 또는
+synthetic low/high-resolution pair, k-space degradation과 residual network로
+다뤘다. 이후 FlowMRI-Net은 self-supervised physics-driven unrolled
+reconstruction을, VAST는 intracranial segmentation·phase unwrapping·outlier
+correction·POD denoising을 결합했다. 2025 velocity-UQ 연구는 noise, spatial
+resolution, partial volume과 phase wrapping이 만든 voxelwise measurement
+uncertainty를 정식화했고 dual-VENC/in-vitro에서 검증했다. 2026 distributional
+SR은 CFD-to-MRI domain shift와 distributional prediction까지 직접 다룬다.
+
+- [4DFlowNet (Frontiers in Physics, 2020)](https://doi.org/10.3389/fphy.2020.00138)
+- [SRflow (Frontiers in AI, 2022)](https://doi.org/10.3389/frai.2022.928181)
+- [FlowMRI-Net (Journal of Cardiovascular Magnetic Resonance,
+  2025)](https://doi.org/10.1016/j.jocmr.2025.101913)
+- [4D flow MRI velocity uncertainty quantification (Magnetic Resonance in
+  Medicine, 2025)](https://doi.org/10.1002/mrm.30287)
+- [VAST intracranial reconstruction (arXiv,
+  2026)](https://arxiv.org/abs/2601.13393)
+- [Distributional deep learning for 4D-flow SR under domain shift (arXiv,
+  2026)](https://arxiv.org/abs/2602.15167)
+
+따라서 SR, denoising, PINN/continuity loss, implicit field, dual-VENC fusion,
+voxel uncertainty와 domain adaptation은 각각 novelty가 아니다. 현재 남겨 둔
+후보 gap은 한 protocol을 “low quality input”, CFD를 “truth”로 놓는 대신,
+동일 controlled flow의 실제 두 acquisition을 서로 관측·held-out view로 두고
+posterior의 **cross-acquisition predictive calibration**을 measurement
+space에서 반증하는 것이다. 이 gap도 multi-view latent model이나 cycle
+consistency 자체로는 새롭지 않다. 반복 측정이 적은 공개 phantom에서
+estimand가 식별 가능하고, direct UQ/SR baseline보다 유의미하며, 이후
+operator-specific algorithmic gap이 남는지를 I0a/I0b로 먼저 확인한다.
+
+직접 candidate asset은 resolution/acceleration을 바꾼 한 aneurysm phantom과
+dual-VENC를 가진 네 aneurysm/flow-diverter phantom이다.
+
+- [Varied voxel size and acceleration phantom release
+  (Zenodo, 2021)](https://doi.org/10.5281/zenodo.4882572)
+- [Dual-VENC aneurysm/flow-diverter phantom release
+  (Zenodo, 2025)](https://doi.org/10.5281/zenodo.14981710)
+
 ### 1.1 형태·혈류와 파열 상태의 연관성
 
 초기 CFD 연구는 morphology-only, hemodynamics-only, combined model을

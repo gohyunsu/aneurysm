@@ -1,9 +1,9 @@
 # ISBI 2027 submission plan
 
 최종 검토일: 2026-08-08 KST
-상태: **target locked · not submission-ready · V0 passed development-only ·
-V1 backbone completed/failed 5/7 · V1a completed/training underfit · V1e failed
-6/9 · M0 execution-incomplete/no scientific verdict**
+상태: **target locked · not submission-ready · prior BC-operator identity
+inactive · cross-protocol 4D-flow I0a registered after disclosed discovery ·
+method unselected**
 
 ## 1. Venue contract
 
@@ -40,10 +40,31 @@ V1 backbone completed/failed 5/7 · V1a completed/training underfit · V1e faile
    train-only nontriviality audit에서 탈락했고 velocity만 eligible하다.
 4. M0의 multicomponent nonlinear mechanism 결과만으로 3D aneurysm
    reconstruction이나 biomedical relevance를 주장할 수 없다.
+5. 4D-flow SR, denoising, physics reconstruction와 voxelwise UQ는 직접
+   선행연구가 있으므로 새 candidate도 단순 재구성 성능으로는 제출할 수 없다.
 
-## 3. 제출 가능한 한 문장 정체성
+## 3. 현재 candidate identity · 아직 contribution 아님
 
-다음 문장은 **획득해야 할 identity**이지 현재 contribution이 아니다.
+> 한 intracranial 4D-flow acquisition에서 추론한 posterior가 같은
+> controlled phantom flow의 다른 resolution·acceleration·VENC acquisition을
+> measurement space에서 calibrated하게 예측할 수 있는가?
+
+이 문장은 제출 제목이 아니라 I0a/I0b가 반증할 문제 정의다. I0a는 두 공개
+paired-protocol release의 metadata/header/byte contract만 감사한다. I0b는
+field staging 뒤 learned method 없이 registration, protocol discrepancy,
+simple floor, functional stability와 sample adequacy를 검사한다. 두 audit이
+양수여도 방법 novelty는 생기지 않는다.
+
+가능한 논문 정체성은 이후에만 열린다: protocol-aware latent field posterior를
+held-out acquisition operator로 pushforward하고, CFD가 아닌 실제 paired
+measurement predictive score와 aneurysm-localized functional calibration을
+동시에 개선하는 algorithm과 보장이 direct SR/UQ baseline보다 우월해야 한다.
+공개 phantom 수와 repeat 부족이 이를 지지하지 못하면 full-paper 방향을
+중단하며 deterministic harmonization으로 자동 축소하지 않는다.
+
+## 3-A. 보존된 이전 한 문장 정체성 · inactive
+
+다음 문장은 이전에 검증했으나 N1c/V1e/M0 뒤 active identity가 아니다.
 
 > 3D aneurysm geometry와 불완전한 inflow 정보에서 velocity-field
 > distribution을 복원할 때, measurement–solution dependence를 보존하는

@@ -2,13 +2,49 @@
 
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
 V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training underfit ·
-V1e known-condition qualification failed 6/9 · missing task retained · M0
-execution-incomplete/no scientific verdict · sparse-2 adaptive task removed · current V1 point/graph branch stopped ·
-method unselected
+V1e known-condition qualification failed 6/9 · M0 execution-incomplete/no
+scientific verdict · prior BC-operator identity inactive · cross-protocol
+4D-flow I0a registered · method and architecture unselected
 
 연결 설정: `configs/aurora_v1.json`
 
-## 0. 한 줄 정의
+## 0-A. 현재 candidate의 model boundary
+
+현재 선택된 neural architecture는 없다. I0a는 metadata/header/byte-contract
+감사이고 I0b는 learned method가 없는 task-adequacy audit이므로 GNN, U-Net,
+diffusion, neural operator 어느 것도 “현재 모델”이라 부르지 않는다.
+
+I0b가 양수일 때만 이후 model contract가 아래 causal data flow를 구현해야
+한다.
+
+\[
+y_\alpha,\alpha
+\xrightarrow{\text{protocol-aware inference}}
+p(u\mid y_\alpha,\alpha)
+\xrightarrow{A_\beta}
+p(y_\beta\mid y_\alpha,\alpha,\beta).
+\]
+
+- (y_\alpha): 한 실제 4D-flow acquisition의 magnitude/phase 또는 검증된
+  velocity representation
+- \(\alpha,\beta\): spatial/temporal resolution, acceleration, VENC, encoding
+  scheme와 reconstruction provenance
+- \(u(x,t)\): protocol에 종속되지 않는다고 가정할 latent continuous
+  velocity field; 실제로 공유 가능한지는 I0b에서 먼저 검사
+- (A_\beta): target acquisition의 measurement/reconstruction operator;
+  알려지지 않은 vendor 처리를 정확한 forward model처럼 꾸미지 않음
+- primary score: held-out same-flow acquisition의 proper predictive score
+- secondary score: aneurysm-localized peak velocity, flow-rate와 jet/recirculation
+  functional의 calibration; WSS는 geometry/near-wall resolution gate 전 제외
+
+가능한 이후 구현 후보는 protocol-conditioned latent neural field, explicit
+measurement pushforward와 calibrated residual/noise layer의 결합이다. 그러나
+implicit neural representation, physics loss, posterior sampling, cross-view
+cycle consistency는 모두 선행 구성요소다. 독립 novelty는 I0b 뒤에도 남는
+구체적 failure mode를 해결하는 algorithm·보장과 strong baseline 우위가
+함께 있을 때만 확정한다.
+
+## 0-B. 보존된 이전 architecture
 
 AURORA의 **irregular-3D target architecture**는 GNN을 geometry encoder로
 포함하는 hybrid neural operator다. 그러나 현재 실행된 exact/nonlinear
