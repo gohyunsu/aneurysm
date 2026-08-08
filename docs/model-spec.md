@@ -1,7 +1,7 @@
 # AURORA v2 모델 명세
 
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
-V1 backbone smoke completed/failed 5/7 · V1a attribution preregistered/unrun ·
+V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training underfit ·
 missing task retained · M0 candidate-measurement–solution pullback
 preregistered/unrun · sparse-2 adaptive task removed · current V1 point/graph branch stopped ·
 method unselected
@@ -21,8 +21,9 @@ V0는 architecture 실험이 아니다. `configs/aneumo_isbi_v0.json`이 compact
 cache의 metadata와 기존 train-only scaling aggregate만 검사해, 계획된
 3D 모델의 입력을 selected internal xyz와 scalar mass flow, 출력을
 3-component velocity로 제한한다. Missing inflow는 registered eight-flow
-design law에 대한 marginalization이다. Mesh marker·surface normal이 없는
-상태에서 surface physics head를 꾸며 넣지 않으며, V0 통과 전에는 GNN을
+design law에 대한 marginalization이다. 기존 compact cache에 mesh
+marker·surface normal이 없는 상태에서 surface physics head를 꾸며 넣지
+않으며, V0 통과 전에는 GNN을
 구현하지 않는다.
 
 V0는 exact public source `0589070`에서 8/8을 통과했다. 따라서 다음
@@ -71,9 +72,21 @@ checkpoint replay를 완료했지만 5/7 fail이다. 선택 q-PointNet의 worst-
 full-q/response L2는 `1.03459/1.00354`였고 다른 세 family도 약 1이었다.
 따라서 이 네 backbone 중 하나를 현재 method로 동결하지 않는다. Response-only
 oracle `0.22794`는 true validation anchor를 요구하므로 deployable model이
-아니며 구조 선택 근거도 아니다. V1a는 같은 checkpoint의 train/validation
-fit, norm, cosine과 q-span을 진단할 뿐 새 architecture나 loss를 추가하지
-않는다.
+아니며 구조 선택 근거도 아니다. V1a의 read-only replay에서 네 family의
+train full-q L2도 `0.76939--0.95647`이고 norm/cosine collapse가 확인됐다.
+따라서 현재 네 architecture나 loss를 수정하지 않고 geometry-only branch를
+폐기한다. 새 architecture 명세 전에는 reference state, boundary marker 또는
+확대 data가 실제로 식별 가능성을 바꾸는지를 learned method 없이 감사한다.
+
+V1b는 새 architecture가 아니라 **input-asset contract audit**이다. Official
+archive의 `.msh`, `.stl`, volume `.vtu`, inlet/outlet/wall `.vtp`가 64개
+선정 case에 모두 존재하는지 확인하고, train family representative 20 case의
+세 patch connectivity/array header만 CRC 검증한다. Archive 1/case 1은 config
+등록 전에 이미 보았으므로 discovery로 명시하고 prospective evidence에서
+제외한다. Audit pass 뒤에도 boundary token, surface encoder 또는 mesh GNN은
+구현하지 않는다. 별도 staging contract가 coordinate frame, patch component,
+connectivity와 query correspondence를 통과해야만 새 baseline 명세를 쓸 수
+있다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

@@ -34,9 +34,24 @@ response-only oracle라 선택에 사용하지 않았습니다. Test field와 ou
 q-PointNet의 worst-seed full-q/response L2가 `1.03459/1.00354`로 기준
 `0.35/0.50`을 크게 넘었습니다. Public aggregate는
 [`results/aneumo_isbi_v1_20260808.json`](results/aneumo_isbi_v1_20260808.json)입니다.
-현재 backbone branch는 local tuning 없이 중단했고, 다음 V1a는 기존
-checkpoint의 train–validation gap과 prediction collapse만 threshold 없이
-진단합니다.
+현재 backbone branch는 local tuning 없이 중단했습니다. 이어진
+[`V1a fixed-checkpoint attribution`](results/aneumo_isbi_v1_attribution_20260808.json)은
+네 family의 train full-q L2도 `0.769--0.956`으로 높고 출력 norm과 방향
+정렬이 함께 약함을 확인했습니다. 따라서 실패는 새로운 geometry에만 생긴
+일반화 문제가 아니라 training fit부터 나타난 task/representation
+부적합입니다. Condition variation 자체는 validation field energy의 약
+15.7%로 비자명하지만, 이 결과는 새 model이나 V2를 열지 않습니다. 다음은
+geometry-only reconstruction을 수선하는 대신 새 task/data identity가
+식별 가능하고 충분히 비자명한지를 별도 감사하는 단계입니다.
+
+중요한 asset 정정도 있습니다. Boundary marker와 surface mesh가 없는 것은
+기존 compact cache이지 공식 Aneumo release 전체가 아닙니다. Pinned ZIP64의
+archive 1/case 1에서 `.msh`, `.stl`, volume `.vtu`, `inlet/outlet/wall.vtp`,
+connectivity와 `U/p` array를 확인했습니다. 이 사전 발견을 결과처럼 과장하지
+않고 [`V1b boundary-asset audit`](configs/aneumo_isbi_v1b_boundary_asset_audit.json)에
+명시했습니다. V1b는 나머지 20 archives·64 cases를 metadata/CRC 수준에서
+감사하며, 통과해도 boundary-aware cache staging audit만 등록할 수 있습니다.
+기존 V1을 재학습하거나 V2/test를 여는 근거는 아닙니다.
 
 ## 현재 모델은 GNN인가?
 

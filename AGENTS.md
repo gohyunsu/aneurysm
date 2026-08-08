@@ -3,7 +3,7 @@
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
-backbone gate 5/7 fail과 V1a attribution 등록 상태를 반영했다.
+backbone gate 5/7 fail과 V1a attribution 완료 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -37,11 +37,32 @@ backbone gate 5/7 fail과 V1a attribution 등록 상태를 반영했다.
   `results/aneumo_isbi_v1_20260808.json`이다. Current 3D backbone branch를
   중단하고 hidden size, k, step, seed, loss와 threshold를 국소 수정하지
   않는다. 기존 scheduler/CUDA/aggregate 실패 artifact도 모두 보존한다.
-- 다음 실행은 `configs/aneumo_isbi_v1_attribution.json`의 V1a다. 기존 12개
-  checkpoint를 train/validation에서만 read-only replay해 generalization gap,
-  norm/cosine, q-span과 truth-only condition energy를 분해한다. Success
+- Exact source `3a0d27f`의 V1a는 기존 12개 checkpoint를 train/validation에서
+  read-only replay해 PBS exit 0으로 완료했다. 네 family의 seed-mean train
+  full-q L2가 `0.76939--0.95647`로 이미 높고 validation은
+  `1.01369--1.02469`다. Train prediction/target norm ratio도
+  `0.35004--0.66921`, cosine은 `0.29710--0.61342`여서 실패를 단순
+  family-disjoint generalization으로 돌릴 수 없다. Validation truth의
+  within-case condition energy fraction은 `0.15748`, same-case condition-mean
+  oracle full-q L2는 `0.56843`, true-anchor power response oracle는
+  `0.22794`다. 즉 condition signal은 비자명하지만 current geometry-only
+  full-field mapping과 네 backbone은 training fit부터 성립하지 않았다.
+  Public aggregate는 `results/aneumo_isbi_v1_attribution_20260808.json`이다.
+  V1 실패와 current branch 종료를 유지하며, 다음은 새 method가 아니라 새
+  task/data identity의 식별 가능성·비자명성 audit이다. V1a에는 success
   threshold, retraining, model selection, V1 relabel, test/V2 권한과 method
-  novelty가 없는 post-result diagnostic이다.
+  novelty가 없다.
+- 기존 “boundary marker가 없다”는 판정은 **64-case compact cache**에만
+  해당한다. 2026-08-08 공식 pinned ZIP64 archive 1의 중앙 디렉터리와 case 1
+  reference-flow header를 확인해 `.msh`, `.stl`, volume `.vtu`,
+  `inlet/outlet/wall.vtp`와 poly connectivity, `U`, `p` array가 실제 존재함을
+  발견했다. 이 one-archive discovery는 prospective evidence가 아니다. 이후
+  `configs/aneumo_isbi_v1b_boundary_asset_audit.json`에 20 archive·64 case의
+  member completeness와 train family당 한 case의 60 VTP CRC/header를
+  체계적으로 감사하도록 고정했다. Validation/test는 중앙 디렉터리만 읽고
+  payload는 train만 읽으며 field value를 decode하지 않는다. V1b pass도 새
+  boundary-aware cache staging audit 등록만 허용하고 V1 relabel, 기존 backbone
+  수선, 학습, V2/test, novelty와 submission은 허용하지 않는다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면

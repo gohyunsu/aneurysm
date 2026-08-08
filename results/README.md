@@ -33,6 +33,11 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   aggregate source `78dca92`의 exact replay 결과. Gate는 5/7 fail이며 선택
   q-PointNet worst-seed full-q/response L2가 `1.03459/1.00354`였다. Test field,
   V2, headline과 submission은 닫혀 있고 current backbone branch를 중단한다.
+- `aneumo_isbi_v1_attribution_20260808.json`: exact source `3a0d27f`가 같은
+  12개 checkpoint를 train/validation에서만 replay한 threshold-free V1a
+  aggregate. 네 family의 train full-q L2도 `0.76939--0.95647`이고 norm/cosine
+  collapse가 나타나므로 실패는 geometry generalization만의 문제가 아니다.
+  V1 relabel, retraining, model/V2 선택과 method novelty 권한은 없다.
 
 현재 controlled-PDE 결과:
 

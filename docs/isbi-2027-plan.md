@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-08 KST
 상태: **target locked · not submission-ready · V0 passed development-only ·
-V1 backbone completed/failed 5/7 · V1a attribution preregistered/unrun · M0 metric unrun**
+V1 backbone completed/failed 5/7 · V1a completed/training underfit · M0 metric unrun**
 
 ## 1. Venue contract
 
@@ -117,7 +117,7 @@ velocity reconstruction paper로 자동 축소하지 않는다. 새 identity를
 고정 estimand는 8개 mass-flow의 **discrete uniform experimental design
 law** 아래 internal-point 3-component velocity distribution이다. 이를
 patient physiology나 측정 분포라 부르지 않는다. Compact cache에 boundary
-marker·surface normal·integration mesh가 없으므로 pressure, WSS/OSI와
+기존 compact cache에 marker·surface normal·integration mesh가 없으므로 pressure, WSS/OSI와
 mass-conservation endpoint는 실패 항목이 아니라 범위 밖이다. V0의 8개
 check가 모두 통과해도 64-case V1 implementation smoke만 허용하며 outer
 test, headline result와 submission은 계속 닫힌다.
@@ -164,9 +164,22 @@ validation anchor를 쓰는 response-only oracle `0.22794`는 task signal은
 보이지만 deployable reconstruction evidence가 아니다. Current backbone
 branch, V2, headline과 submission을 닫는다.
 
-다음 V1a는 기존 checkpoint의 train/validation fit과 truth-only field-energy
-decomposition만 계산하는 threshold-free attribution이다. 어떤 결과도 V1을
-pass로 바꾸거나 같은 backbone의 local repair를 허용하지 않는다.
+V1a는 exact source `3a0d27f`에서 기존 checkpoint의 train/validation fit과
+truth-only field-energy decomposition만 계산해 exit 0으로 완료됐다. 네
+family의 train full-q L2가 이미 `0.76939--0.95647`이고 validation은 모두
+약 1이다. 이는 새로운 family 일반화만의 실패가 아니라 training fit과
+vector prediction collapse다. Validation truth의 condition-energy fraction
+`0.15748`과 true-anchor response oracle `0.22794`는 condition response가
+비자명하지만 geometry-only reconstruction은 성립하지 않았음을 보여준다.
+V1은 failed로 보존하고 current branch는 폐기한다. 새 task/data identity를
+learned method 없이 감사하기 전에는 candidate method와 V2를 등록하지 않는다.
+
+V1b는 official archive에 발견된 boundary asset을 새 input으로 채택하는 실험이
+아니라 asset identifiability audit이다. Archive 1/case 1의 mesh/VTP header는
+등록 전에 이미 보았음을 공개한다. 이후 20 archives·64 cases의 member
+completeness와 train representative 60 VTP의 CRC, patch identity,
+connectivity/array contract만 검사한다. 통과해도 boundary-aware cache staging
+audit만 열고 모델 학습, V1 relabel, V2/test와 submission은 계속 금지한다.
 
 ### V2 · Frozen five-seed 3D outer test
 
@@ -222,8 +235,9 @@ Exact/nonlinear sanity는 한두 문장 또는 작은 ablation row로만 남긴�
 |---|---|---|
 | 2026-08-10 | V0 asset/task contract | marker·split·estimand 불명확 시 distribution branch 중단 |
 | 2026-08-08 | 64-case V1 implementation smoke | 5/7 fail; current backbone branch 중단, local repair 금지 |
-| 2026-08-10 | V1a fixed-checkpoint attribution | task adequacy만 분해; method/V2 권한 없음 |
-| 2026-09-03 | 새 task/data identity 결정 | expanded independent data와 geometry→field learnability 근거가 없으면 full paper 중단 |
+| 2026-08-08 | V1a fixed-checkpoint attribution | 완료: training underfit/collapse; method/V2 권한 없음 |
+| 2026-08-08 | V1b boundary-asset audit 등록 | archive-1 discovery 공개; pass도 staging audit만 허용 |
+| 2026-09-03 | 새 task/data identity 결정 | reference state·boundary marker·expanded data 중 식별 가능성과 비자명성을 회복하는 근거가 없으면 full paper 중단 |
 | 2026-09-10 | candidate method/config freeze | 이후 architecture·loss search 금지 |
 | 2026-09-24 | five-seed outer test complete | gate 실패 시 relabel·threshold repair 금지 |
 | 2026-10-08 | four-page draft + figures | unsupported claim 삭제 |

@@ -112,6 +112,20 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
   `1.03459/1.00354`다. Public aggregate SHA-256은
   `f67970c4d8028bf869ae793a776ed86d32b9cc477a9ba414e54bf9c8fab6a9b1`이다.
   현재 branch를 재학습하지 않고 fixed-checkpoint V1a attribution만 등록한다.
+- Exact source `3a0d27f`의 dependency-complete contract는 서버 고정
+  container에서 183/183, V1a 전용 torch metric 5/5, protocol/site check를
+  통과했다. PBS job `115051`은 실제 A100 80GB allocation에서 27초, exit 0으로
+  완료됐고 12 checkpoint, train/validation field만 읽었다. Raw attribution
+  SHA-256은 `4e11be6f3c73b338383c24a3c78902ad782f05f5e2ce0fa93e61b4351269d91a`다.
+  Public aggregate는 raw의 family mean, truth-only diagnostic, access와
+  authorization을 값 변경 없이 옮겼다. Test read, retraining과 checkpoint
+  write는 없었다.
+- 후속 asset discovery는 official ZIP64 archive 1의 central directory와 case
+  1 q=0.0025 VTP header에 한정했다. Existing compact cache와 달리 official
+  archive에는 mesh/STL, volume VTU, inlet/outlet/wall VTP와 connectivity,
+  `U/p`가 있다. 이미 본 범위를 V1b config에 공개했으며, exact source로 20
+  archives·64 cases의 metadata/CRC audit를 실행하기 전에는 boundary-aware
+  cache나 모델을 만들지 않는다.
 
 ## Run contract
 

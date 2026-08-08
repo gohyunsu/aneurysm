@@ -5,7 +5,7 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution preregistered/unrun · M0 missing-only mechanism preregistered/unrun · method unselected ·
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · M0 missing-only mechanism preregistered/unrun · method unselected ·
 3D headline blocked
 
 ## 0. 제출 목표와 scope
@@ -27,7 +27,7 @@ SHA, 32-family 20/6/6 split, 8개 scalar mass-flow mapping, velocity tensor
 metadata와 이미 공개된 train-only physical-scaling aggregate를 8개
 all-check gate로 고정한다. V0 자체는 field array를 읽지 않는다. Missing
 law는 8개 조건의 discrete-uniform **design law**이며 patient physiology가
-아니다. Boundary marker와 surface normal이 없으므로 WSS/OSI·mass flux는
+아니다. 기존 compact cache에는 boundary marker와 surface normal이 없으므로 WSS/OSI·mass flux는
 추가하지 않는다. 통과해도 V1 implementation smoke만 열리고 method,
 outer test와 논문 claim은 열리지 않는다.
 
@@ -78,11 +78,30 @@ response-only oracle은 `0.22794`였지만 selector/gate에 사용하지 않는�
 threshold를 국소 수정하지 않는다. Public aggregate는
 `results/aneumo_isbi_v1_20260808.json`이다.
 
-다음은 `configs/aneumo_isbi_v1_attribution.json`의 **V1a**다. 기존 12개
-checkpoint만 read-only replay해 train–validation gap, prediction norm/cosine,
-q-span response와 true field의 within-case condition-energy fraction을
-분해한다. 성공 threshold, retraining, model selection, V1 relabel, V2/test
-권한과 method novelty가 없는 task-adequacy diagnostic이다.
+**V1a outcome · 2026-08-08.** Exact source `3a0d27f`의 기존 12개
+checkpoint replay는 exit 0, test-read false로 완료됐다. 네 family의
+seed-mean train full-q L2가 `0.76939--0.95647`, validation이
+`1.01369--1.02469`이고, train norm ratio/cosine도 각각
+`0.35004--0.66921`/`0.29710--0.61342`다. 따라서 current failure는
+family-disjoint generalization만이 아니라 training fit과 vector
+representation collapse에서 이미 발생한다. Validation condition-energy
+fraction `0.15748`, same-case mean oracle `0.56843`, true-anchor response
+oracle `0.22794`는 condition response가 비자명하지만 geometry-only field
+mapping이 입증되지 않았음을 보여준다. 이는 threshold-free diagnostic이지
+causal decomposition, method selection 또는 gate가 아니다. Public aggregate는
+`results/aneumo_isbi_v1_attribution_20260808.json`이다. Current geometry-only
+branch를 폐기하고 learned method 전에 새 task/data identity를 감사한다.
+
+**Boundary-asset discovery and V1b registration · 2026-08-08.** Official
+pinned ZIP64 archive 1/case 1에는 compact cache에서 제외됐던 `.msh`, `.stl`,
+volume `.vtu`, `inlet/outlet/wall.vtp`, poly connectivity와 `U/p` array가
+존재한다. 이미 본 이 한 archive/header는 prospective evidence가 아니다.
+V1b는 full 20-archive/64-case member contract와 train representative 60 VTP
+payload를 range/CRC로 감사한다. Pass도 boundary-aware staging audit만 열며
+known-BC encoding이나 boundary token을 contribution으로 만들지 않는다. 이는
+V1의 같은 input/backbone을 수선하는 것이 아니라, V1에서 누락된 physical
+boundary identity를 포함할 새 data contract가 실제 존재하는지 검증하는
+단계다.
 
 ## 1. 현재 판정
 

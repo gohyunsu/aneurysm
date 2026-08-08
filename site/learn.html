@@ -50,7 +50,9 @@
           <p>
             Exact/nonlinear gate는 context MLP와 boundary token, lifted
             decoder로 실행했습니다. V1의 q-PointNet·kNN graph·anchor-token
-            후보는 실제 학습됐지만 gate 5/7로 실패했습니다. 국소 GNN, anatomy
+            후보는 gate 5/7로 실패했고 V1a에서 training underfit도 확인됐습니다.
+            V1b는 official boundary mesh asset을 감사할 뿐 새 모델을 학습하지 않습니다.
+            국소 GNN, anatomy
             attention, continuous-query operator를 모두 결합한 더 큰 구조는
             장기 <b>irregular-3D target specification</b>입니다.
           </p>
@@ -654,6 +656,11 @@
               G1s가 fresh exact sanity를 통과했지만, 8-component semilinear
               N0와 N1 strong baseline을 먼저 검증합니다.
               이후 learned 3D는 velocity-only로 제한합니다.
+              기존 compact cache에는 boundary patch가 없지만 official ZIP에는
+              mesh/STL, volume VTU와 inlet/outlet/wall VTP가 있음을 archive 1에서
+              확인했습니다. 이 사전 발견은 결과가 아니며, V1b가 나머지
+              20 archives·64 cases를 metadata/CRC로 감사합니다. 통과해도 새
+              boundary-aware cache staging audit만 열고 모델은 학습하지 않습니다.
               AneuG-Flow는
               geometry archive만 확인됐고 BC variation이 없어 paired-BC
               evidence로 쓰지 않습니다.
@@ -831,7 +838,7 @@
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
             <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>N0 실패는 보존하고, 결과 전에 fresh seed와 context-stratified selector를 고정한 N0r가 9/9를 통과했습니다.</p></div><b>N0r pass · N1 opened</b></article>
             <article><span>N1</span><div><h3>Coherence가 정확도와 decision을 개선하는가?</h3><p>N1c는 distribution·pair·acquisition에서 실패했습니다. N1c-a는 joint density 병목과 non-discriminative sparse task를 확인했습니다.</p></div><b>failed · 3D blocked</b></article>
-            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>Aneumo velocity만 비자명성 audit을 통과했지만 fresh positive N1 전에는 3D learned experiment를 열지 않습니다.</p></div><b>velocity eligible only</b></article>
+            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>V1은 geometry-only input에서 실패했고 V1a는 training underfit을 확인했습니다. V1b는 official boundary asset이 새 data contract를 지지하는지만 감사하며 아직 3D model을 열지 않습니다.</p></div><b>V1 failed · V1b asset audit</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
             <article><span>V2</span><div><h3>3D aneurysm에서 실제로 유효한가?</h3><p>ISBI headline은 expanded 또는 independent irregular-3D velocity outer test, five seeds와 family-bootstrap CI를 요구합니다.</p></div><b>ISBI submission gate</b></article>
           </div>

@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V0 passed · V1 completed/failed 5/7 · current 3D backbone stopped · not submission-ready",
+    status: "Target locked · V1 failed · V1a found underfit · V1b boundary-asset audit registered after disclosed discovery · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V0는 8/8을 통과했지만 V1은 5/7로 실패했다. 선택 q-PointNet worst-seed full-q/response L2 1.03459/1.00354가 기준 0.35/0.50을 크게 넘었고 다른 graph/equivariant 후보도 약 1이었다. Current backbone branch를 local repair 없이 중단한다. V1a는 같은 checkpoint의 task adequacy만 threshold 없이 분해하며 test, V2와 ISBI headline을 열지 않는다.",
-      state: "V0 passed · V1 failed 5/7 · V1a preregistered · submission blocked",
+      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. 다만 official Aneumo ZIP에는 compact cache에서 빠진 mesh, volume VTU, inlet/outlet/wall VTP와 connectivity가 있음을 archive 1에서 발견했다. 이 사전 발견을 공개한 V1b가 나머지 20 archives·64 cases를 metadata/CRC로 감사한다. Pass도 새 cache staging audit만 열며 모델이나 V2는 열지 않는다.",
+      state: "V1 failed · V1a underfit attributed · V1b asset audit registered · submission blocked",
       blocking: true
     }
   ],
@@ -141,7 +141,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "64 cases/512 members SHA verified · V0 metadata-only audit 8/8 passed"
+      provenance: "64-case internal-field cache verified · official boundary mesh/VTP discovered in archive 1 · V1b full asset audit registered"
     },
     {
       name: "AneuG-Flow",
@@ -165,6 +165,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "data",
+      title: "V1b separates the boundary-free cache from the boundary-rich official release",
+      copy: "등록 전 archive 1/case 1에서 mesh/STL, volume VTU, inlet/outlet/wall VTP, connectivity와 U/p array를 확인했다. 이 discovery는 prospective evidence가 아니다. V1b는 이후 20 archives·64 cases의 member completeness와 train representative 60 VTP의 CRC/header만 감사한다. Pass도 boundary-aware cache staging audit만 허용하고 V1 relabel, backbone repair, training, V2/test와 novelty는 금지한다.",
+      files: ["configs/aneumo_isbi_v1b_boundary_asset_audit.json", "src/aurora/aneumo_isbi_v1b_boundary_audit.py", "experiments/run_aneumo_isbi_v1b_boundary_audit.py", "tests/test_aneumo_isbi_v1b_boundary_audit.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "configs/aurora_v1.json", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.08",
+      category: "result",
+      title: "V1a finds training underfit and retires the geometry-only branch",
+      copy: "Exact source 3a0d27f의 fixed-checkpoint replay는 exit 0, no-test-read로 완료됐다. 네 family의 train full-q L2가 0.76939–0.95647이고 validation은 1.01369–1.02469이며 train norm/cosine도 낮다. 실패는 family-disjoint generalization만이 아니다. Validation condition-energy fraction 0.15748과 true-anchor response oracle 0.22794는 condition signal은 남지만 geometry-only field mapping은 성립하지 않았음을 보인다. V1은 failed로 보존하고 새 task/data identity audit 전에는 새 method나 V2를 열지 않는다.",
+      files: ["results/aneumo_isbi_v1_attribution_20260808.json", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "configs/aurora_v1.json", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "result",
@@ -239,7 +253,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.08",
       category: "protocol",
       title: "V0 freezes the 3D asset and missing-inflow estimand before model code",
-      copy: "64-case Aneumo cache의 exact SHA, 32-family 20/6/6 split, 8개 mass-flow design law, velocity tensor metadata와 기존 train-only scaling aggregate를 8개 all-check gate로 고정했다. V0는 새 field array를 읽지 않으며 missing law를 patient physiology로 해석하지 않는다. Boundary marker와 surface normal이 없어 pressure, WSS/OSI와 mass-conservation endpoint를 제외한다. Pass도 V1 implementation smoke만 허용하고 outer test, headline과 submission은 닫힌다.",
+      copy: "64-case Aneumo compact cache의 exact SHA, 32-family 20/6/6 split, 8개 mass-flow design law, velocity tensor metadata와 기존 train-only scaling aggregate를 8개 all-check gate로 고정했다. V0는 새 field array를 읽지 않으며 missing law를 patient physiology로 해석하지 않는다. 이 compact cache에는 boundary marker와 surface normal이 없어 pressure, WSS/OSI와 mass-conservation endpoint를 제외했다. Official release 전체의 boundary asset은 후속 V1b가 별도로 감사한다.",
       files: ["configs/aneumo_isbi_v0.json", "src/aurora/aneumo_isbi_v0.py", "experiments/run_aneumo_isbi_v0.py", "tests/test_aneumo_isbi_v0.py", "AGENTS.md", "README.md", "docs/isbi-2027-plan.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/assets/research-data.js", "CHANGELOG.md"]
     },
     {

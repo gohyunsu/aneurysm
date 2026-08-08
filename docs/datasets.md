@@ -24,6 +24,14 @@
 > 확인됐다. “공개 규모”, “감사된 구조”, “학습 가능한 local cache”를
 > 구분한다.
 
+> **2026-08-08 boundary-asset 정정:** 위 selective compact cache는 internal
+> NPY만 staging했지만 official Aneumo ZIP 전체에는 case별 `.msh`, `.stl`,
+> `internal.vtu`, `inlet/outlet/wall.vtp`가 있다. Archive 1/case 1 header에서
+> PolyData connectivity와 `Points/U/p` array를 확인했다. 이 one-case
+> discovery는 전체 자산 감사가 아니며, V1b가 20 archives·64 cases의 member
+> completeness와 train representative CRC를 별도로 검사한다. V1b pass도
+> boundary-aware cache staging audit만 허용한다.
+
 ## 핵심 비교
 
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |

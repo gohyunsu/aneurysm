@@ -128,6 +128,44 @@ training fit 자체인지 family-disjoint geometry generalization인지, 또는
 prediction collapse인지 구분하는 것이다. 결과 뒤에도 같은 네 backbone의
 hidden size, k, step, seed와 loss를 고쳐 반복하지 않는다.
 
+**V1a outcome · 2026-08-08.** Exact source `3a0d27f`, raw artifact SHA
+`4e11be6f...d91a`의 PBS run은 12개 checkpoint를 재현하고 exit 0,
+test-read false로 완료됐다. Family seed-mean train full-q L2는 anchor-token
+`0.76939`, q-PointNet `0.89568`, DeltaPhi graph `0.94371`, kNN-MGN
+`0.95647`이다. Validation은 모두 `1.01369--1.02469`이며 train에서도 norm
+ratio와 cosine이 낮다. 따라서 geometry-disjoint gap만의 문제가 아니라
+current geometry-only task/backbone이 training field도 충분히 표현하지 못한
+것이다. Validation truth의 within-case condition energy fraction `0.15748`,
+same-case mean oracle `0.56843`, true-anchor response oracle `0.22794`는
+condition response가 비자명하지만 geometry-only full field 예측이 입증되지
+않았음을 함께 보인다. Public aggregate는
+`results/aneumo_isbi_v1_attribution_20260808.json`이다. V1은 failed로
+유지하고 current branch를 폐기한다. 다음 단계는 learned method 없이 새
+task/data identity의 식별 가능성과 residual endpoint 비자명성을 먼저
+감사하며 V2/test를 열지 않는다.
+
+### V1b · Boundary-asset identifiability audit after disclosed discovery
+
+기존 compact cache에는 internal xyz와 field만 들어 있지만, official release
+전체에 boundary asset이 없는 것은 아니다. 등록 전에 pinned archive 1의
+central directory와 case 1 q=0.0025 VTP header를 보고 `.msh`, `.stl`,
+`internal.vtu`, `inlet/outlet/wall.vtp`, connectivity, `U`, `p`의 존재를
+확인했다. 이 discovery 범위는 config에 공개하며 prospective evidence로 세지
+않는다.
+
+`configs/aneumo_isbi_v1b_boundary_asset_audit.json`은 이후 20 ZIP64 archive의
+central directory를 byte-range로 읽어 64 case 모두에 mesh/STL/reference-flow
+volume와 세 boundary patch가 있는지 검사한다. Payload는 train base family당
+가장 작은 case 하나의 inlet/outlet/wall VTP, 총 60개만 CRC 검증한다.
+Validation/test는 중앙 디렉터리 metadata만 읽고 payload는 읽지 않으며,
+train VTP 안의 `U/p` base64 bytes도 array value로 decode하지 않는다.
+
+8개 check를 모두 통과해도 새 boundary-aware cache **staging audit 등록**만
+허용한다. V1 failure, local-repair 금지와 no-test boundary는 유지한다. V1b는
+boundary token/known-BC operator의 novelty나 성능 증거가 아니며, 실제 staging
+전에는 patch component, coordinate frame, connectivity, unit과 license를 다시
+고정해야 한다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

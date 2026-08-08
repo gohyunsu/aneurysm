@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_v0_passed_v1_completed_failed_method_unselected",
+    "status": "failed_n1c_v1_failed_v1a_underfit_attributed_v1b_boundary_asset_audit_registered_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -32,7 +32,16 @@
     "v1_gate": "5_of_7_passed",
     "v1_failure_action": "stop_the_current_3d_backbone_branch_without_local_hyperparameter_repair",
     "v1a_attribution_config": "configs/aneumo_isbi_v1_attribution.json",
-    "v1a_status": "preregistered_post_result_threshold_free_unrun",
+    "v1a_status": "completed_threshold_free_diagnostic_no_reentry",
+    "v1a_result": "results/aneumo_isbi_v1_attribution_20260808.json",
+    "v1a_result_sha256": "1a7b3e768e97b560da54d52cfe343c019d392e5af2fb3bbf518705f3728076a2",
+    "v1a_primary_observation": "high_training_error_and_prediction_collapse_across_all_four_families_not_only_geometry_disjoint_generalization",
+    "v1a_next_action": "audit_a_new_task_or_data_identity_before_any_new_method_without_reopening_v1_or_v2",
+    "v1b_boundary_asset_config": "configs/aneumo_isbi_v1b_boundary_asset_audit.json",
+    "v1b_config_sha256": "78918c629c9a738ae7aced3b4e36a99cc10aba7279c9d70044e46182c52e6b26",
+    "v1b_status": "registered_after_archive1_case1_discovery_before_full_audit",
+    "v1b_discovery_scope": "archive_1_central_directory_and_case_1_reference_flow_vtp_headers_not_prospective_evidence",
+    "v1b_pass_authorizes": "register_a_new_boundary_aware_cache_staging_audit_only",
     "v1_test_access": false,
     "plan": "docs/isbi-2027-plan.md"
   },
@@ -103,7 +112,20 @@
       "aneumo_isbi_v1_response_only_oracle_relative_l2": 0.2279433820928846,
       "aneumo_isbi_v1_failure_action": "stop_the_current_3d_backbone_branch_without_local_hyperparameter_repair",
       "aneumo_isbi_v1a_config": "configs/aneumo_isbi_v1_attribution.json",
-      "aneumo_isbi_v1a_status": "preregistered_post_result_threshold_free_unrun",
+      "aneumo_isbi_v1a_status": "completed_threshold_free_diagnostic_no_reentry",
+      "aneumo_isbi_v1a_result": "results/aneumo_isbi_v1_attribution_20260808.json",
+      "aneumo_isbi_v1a_result_sha256": "1a7b3e768e97b560da54d52cfe343c019d392e5af2fb3bbf518705f3728076a2",
+      "aneumo_isbi_v1a_raw_result_sha256": "4e11be6f3c73b338383c24a3c78902ad782f05f5e2ce0fa93e61b4351269d91a",
+      "aneumo_isbi_v1a_worst_family_train_full_q_relative_l2": 0.9564736114814879,
+      "aneumo_isbi_v1a_best_family_train_full_q_relative_l2": 0.7693870432674884,
+      "aneumo_isbi_v1a_validation_condition_energy_fraction": 0.15747636556625366,
+      "aneumo_isbi_v1a_decision": "retire_current_geometry_only_backbone_branch_and_audit_a_new_task_or_data_identity_before_any_new_method",
+      "aneumo_official_archive_boundary_discovery": "archive_1_case_1_has_msh_stl_internal_vtu_and_inlet_outlet_wall_vtp_with_connectivity_U_p",
+      "aneumo_compact_cache_boundary_status": "boundary_members_not_staged_in_existing_cache",
+      "aneumo_isbi_v1b_boundary_asset_config": "configs/aneumo_isbi_v1b_boundary_asset_audit.json",
+      "aneumo_isbi_v1b_config_sha256": "78918c629c9a738ae7aced3b4e36a99cc10aba7279c9d70044e46182c52e6b26",
+      "aneumo_isbi_v1b_status": "registered_after_archive1_case1_discovery_before_full_audit",
+      "aneumo_isbi_v1b_pass_authorizes": "register_a_new_boundary_aware_cache_staging_audit_only",
       "aneumo_isbi_v1_model_tasks": 12,
       "aneumo_isbi_v1_test_access": false,
       "aneumo_isbi_v1_contract_status": "a0479fb_tasks_12_of_12_exit_zero_78dca92_aggregate_replay_valid",
@@ -122,7 +144,7 @@
       "nonlinear_pde_n1_density_objective_audit_status": "completed_threshold_free_full_joint_engineering_signal",
       "nonlinear_pde_n1_decision_task_audit_status": "completed_missing_nontrivial_sparse2_fixed_winner",
       "nonlinear_pde_n1_missing_operator_pullback_m0_status": "preregistered_validation_only_unrun",
-      "irregular_3d_status": "v1_failed_current_backbone_branch_stopped_outer_test_and_headline_blocked"
+      "irregular_3d_status": "v1_failed_v1a_underfit_attributed_geometry_only_branch_retired_outer_test_and_headline_blocked"
     },
     "contribution_priority": {
       "primary": [
@@ -173,7 +195,7 @@
       "field_provenance": "synthetic_cfd",
       "split_unit": "aneux_base_family",
       "pressure_head_status": "excluded_after_train_only_scaling_audit",
-      "learned_g2_status": "v1_completed_failed_current_backbone_branch_stopped"
+      "learned_g2_status": "v1_failed_v1a_underfit_attributed_current_geometry_only_branch_retired"
     },
     {
       "name": "aneug_flow",
@@ -258,7 +280,14 @@
       "v1_gate": "5_of_7_passed",
       "v1_failure_action": "stop_the_current_3d_backbone_branch_without_local_hyperparameter_repair",
       "v1a_attribution_config": "configs/aneumo_isbi_v1_attribution.json",
-      "v1a_status": "preregistered_post_result_threshold_free_unrun",
+      "v1a_status": "completed_threshold_free_diagnostic_no_reentry",
+      "v1a_result": "results/aneumo_isbi_v1_attribution_20260808.json",
+      "v1a_result_sha256": "1a7b3e768e97b560da54d52cfe343c019d392e5af2fb3bbf518705f3728076a2",
+      "v1a_primary_observation": "high_training_error_and_low_prediction_magnitude_or_alignment_across_all_four_families",
+      "post_v1a_action": "audit_a_new_task_or_data_identity_before_any_new_method_without_v1_repair_or_v2_access",
+      "v1b_boundary_asset_config": "configs/aneumo_isbi_v1b_boundary_asset_audit.json",
+      "v1b_status": "registered_after_archive1_case1_discovery_before_full_audit",
+      "v1b_pass_authorizes": "register_a_new_boundary_aware_cache_staging_audit_only",
       "v1_ensemble_estimand": "matching_q_three_seed_mean_and_seed_by_eight_q_twenty_four_component_missing_mixture",
       "v1_aggregate_integrity": "exact_four_by_three_manifest_plus_validation_checkpoint_replay_absolute_tolerance_1e-5",
       "v1_response_oracle_role": "true_validation_anchor_response_only_report_never_selector_or_gate",

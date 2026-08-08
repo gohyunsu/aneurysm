@@ -100,6 +100,14 @@ class ProtocolTests(unittest.TestCase):
         ] = "completed_passed_open_v2"
         with self.assertRaisesRegex(ProtocolError, "independent V2 evidence"):
             validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["v1a_result_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["v1b_pass_authorizes"] = "train_boundary_gnn"
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
 
     def test_n0_cannot_establish_novelty(self) -> None:
         candidate = copy.deepcopy(self.protocol)

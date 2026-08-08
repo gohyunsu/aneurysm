@@ -1,0 +1,99 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v1b_boundary_asset_audit.v1",
+  "experiment_id": "aneumo_isbi_v1b_boundary_asset_identifiability_audit",
+  "status": "registered_after_archive1_case1_discovery_before_full_audit",
+  "as_of": "2026-08-08",
+  "purpose": "Determine whether the pinned official Aneumo release can support a new boundary-aware data contract after the boundary-free geometry-only V1 branch failed.",
+  "source": {
+    "dataset": "Aneumo",
+    "hf_repo": "SAIS-Life-Science/Aneumo",
+    "hf_repo_commit": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "license": "CC-BY-NC-ND-4.0",
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "v1_result": "results/aneumo_isbi_v1_20260808.json",
+    "v1_result_sha256": "f67970c4d8028bf869ae793a776ed86d32b9cc477a9ba414e54bf9c8fab6a9b1",
+    "v1a_result": "results/aneumo_isbi_v1_attribution_20260808.json",
+    "v1a_result_sha256": "1a7b3e768e97b560da54d52cfe343c019d392e5af2fb3bbf518705f3728076a2"
+  },
+  "discovery_boundary": {
+    "inspected_before_registration": true,
+    "scope": "archive_1_central_directory_and_case_1_reference_flow_vtp_headers",
+    "known_before_full_audit": [
+      "case_1_has_msh_stl_internal_vtu_and_inlet_outlet_wall_vtp",
+      "case_1_vtp_has_poly_connectivity_points_U_and_p"
+    ],
+    "not_prospective_evidence": true
+  },
+  "access": {
+    "central_directory_splits": ["train", "validation", "test"],
+    "payload_member_splits": ["train"],
+    "payload_contains_field_bytes": true,
+    "field_arrays_decoded": false,
+    "validation_payload_read": false,
+    "test_payload_read": false,
+    "model_or_checkpoint_use": false,
+    "training": false
+  },
+  "expected_asset": {
+    "archives": 20,
+    "cases": 64,
+    "base_families": 32,
+    "train_base_families": 20,
+    "validation_base_families": 6,
+    "test_base_families": 6,
+    "reference_mass_flow_kg_s": 0.0025,
+    "required_case_members": [
+      "Mesh/{case}.msh",
+      "Stl/{case}.stl",
+      "VTK/m=0.0025/internal.vtu",
+      "VTK/m=0.0025/inlet.vtp",
+      "VTK/m=0.0025/outlet.vtp",
+      "VTK/m=0.0025/wall.vtp"
+    ],
+    "required_vtp_arrays": [
+      "Points",
+      "TimeValue",
+      "U",
+      "p",
+      "connectivity",
+      "offsets"
+    ],
+    "required_patches": ["inlet", "outlet", "wall"]
+  },
+  "representative_payload_audit": {
+    "selection": "lowest_case_id_in_each_train_base_family",
+    "cases": 20,
+    "members_per_case": 3,
+    "members": 60,
+    "flow_kg_s": 0.0025,
+    "crc32_verified": true,
+    "require_positive_points_and_polys": true,
+    "do_not_decode_U_or_p_values": true
+  },
+  "gate": {
+    "rule": "all_registered_checks",
+    "checks": [
+      "pinned_source_and_license",
+      "all_twenty_zip64_central_directories_range_readable",
+      "all_sixty_four_cases_have_mesh_stl_volume_and_three_boundary_members",
+      "one_train_case_per_family_has_three_crc_verified_vtp_payloads",
+      "all_representative_vtp_patch_labels_match",
+      "all_representative_vtp_have_poly_connectivity_and_required_arrays",
+      "no_validation_or_test_payload_read",
+      "v1_failure_and_v1a_no_reentry_decision_preserved"
+    ],
+    "pass_authorizes": "register_a_new_boundary_aware_cache_staging_audit_only",
+    "pass_does_not_authorize": [
+      "relabel_v1",
+      "reuse_or_tune_v1_backbones",
+      "model_training",
+      "v2_or_test_field_access",
+      "method_novelty",
+      "isbi_submission"
+    ],
+    "failure_action": "drop_the_boundary_aware_aneumo_direction_and_audit_a_reference_state_or_independent_dataset_identity",
+    "local_repair_allowed": false
+  },
+  "interpretation": "post_discovery_asset_identifiability_audit_not_model_or_method_evidence"
+}

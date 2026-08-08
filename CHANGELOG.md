@@ -4,6 +4,37 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1b discloses boundary-asset discovery and freezes a full audit
+
+- 기존 compact cache와 official Aneumo release를 구분한다. 등록 전 pinned
+  archive 1/case 1의 central directory/header에서 `.msh`, `.stl`,
+  `internal.vtu`, `inlet/outlet/wall.vtp`, connectivity, `U`, `p`를 확인했다.
+  이 discovery는 prospective evidence가 아님을 config에 명시한다.
+- `configs/aneumo_isbi_v1b_boundary_asset_audit.json`은 이후 20 ZIP64
+  archives·64 cases의 required member와 train family representative 20
+  cases×3 patches의 CRC/VTP contract를 감사한다. Validation/test payload와
+  field-array decoding, model/checkpoint는 금지한다.
+- 8/8 pass도 새 boundary-aware cache staging audit 등록만 허용한다. V1
+  failure, current branch 폐기와 local-repair 금지는 유지하며 boundary token,
+  known-BC encoding 또는 mesh GNN을 novelty나 성능 결과로 승격하지 않는다.
+
+## 2026-08-08 · V1a attributes failure to training underfit, not only generalization
+
+- Exact source `3a0d27f`의 fixed-checkpoint V1a는 PBS job `115051`에서 exit
+  0, test-read false로 완료됐다. 서버 raw artifact SHA는
+  `4e11be6f...d91a`, public aggregate는
+  `results/aneumo_isbi_v1_attribution_20260808.json`이다.
+- 네 family의 seed-mean train full-q L2가 `0.76939--0.95647`, validation이
+  `1.01369--1.02469`다. Train prediction/target norm ratio와 cosine도 각각
+  `0.35004--0.66921`, `0.29710--0.61342`여서 V1 실패는 family-disjoint
+  generalization 하나가 아니라 training underfit과 vector collapse를 포함한다.
+- Validation within-case condition energy fraction `0.15748`, same-case mean
+  oracle full-q L2 `0.56843`, true-anchor response oracle `0.22794`는 condition
+  signal이 비자명함을 보이지만 geometry-only reconstruction을 입증하지 않는다.
+  V1 실패와 local-repair 금지를 유지하고 current geometry-only branch를
+  폐기한다. Learned method 전에 새 task/data identity를 별도 감사하며 V2,
+  test, novelty와 submission 상태는 열지 않는다.
+
 ## 2026-08-08 · V1 fails 5/7; V1a freezes attribution without local repair
 
 - Exact task source `a0479fb`의 4 family×3 seed는 12/12 exit 0이었고,

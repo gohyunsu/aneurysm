@@ -214,7 +214,10 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>아니다. 실행된 N1은 MLP operator다.</strong>
         <p>
-          V1의 point/graph 후보는 학습됐지만 5/7 gate로 실패했다.
+          V1의 point/graph 후보는 5/7 gate로 실패했고, V1a는 training
+          field에서도 underfit과 vector collapse가 있음을 확인했다.
+          V1b는 official release의 boundary mesh가 새 data contract를
+          지지하는지만 감사하며 아직 새 GNN을 학습하지 않는다.
           아래의 더 큰 graph message passing, anatomy token, query decoder는
           장기 irregular-3D target specification이다. 어느 쪽도 검증된 현재
           architecture나 contribution이 아니다.

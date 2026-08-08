@@ -1,0 +1,157 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v1_attribution.public.v1",
+  "experiment_id": "aneumo_isbi_v1a_fixed_checkpoint_task_adequacy",
+  "attribution_git_commit": "3a0d27f8693528b57f972055b0e2c8c694fc8d5a",
+  "task_git_commit": "a0479fb6cd67521e605f81e549e936d066e9277e",
+  "source_aggregate_git_commit": "78dca928bd2a6cc363c0aa975971bad5b54424f4",
+  "config_sha256": "e629ce6609d32d11cfa84f5d50a5a06939ff613c3f422b63cb750f34bb42cb12",
+  "v1_config_sha256": "d3deb378f9a8bca1e988218212a84347660dcf6e58164cbbd1a5a3467682e4db",
+  "v1_result_sha256": "f67970c4d8028bf869ae793a776ed86d32b9cc477a9ba414e54bf9c8fab6a9b1",
+  "cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+  "raw_attribution_sha256": "4e11be6f3c73b338383c24a3c78902ad782f05f5e2ce0fa93e61b4351269d91a",
+  "pbs": {
+    "job_id": "115051",
+    "exit_status": 0,
+    "walltime_seconds": 27,
+    "gpu": "NVIDIA A100-SXM4-80GB"
+  },
+  "environment": {
+    "device": "cuda:0",
+    "torch": "2.5.1+cu118",
+    "cuda_runtime": "11.8",
+    "peak_gpu_memory_mb": 41.64404296875
+  },
+  "task_count": 12,
+  "family_seed_mean": {
+    "anchor_token_equivariant": {
+      "train": {
+        "full_q_relative_l2": 0.7693870432674884,
+        "response_relative_l2": 0.7904315953453381,
+        "prediction_to_target_norm_ratio": 0.669212821793432,
+        "prediction_target_cosine": 0.6134245392905239,
+        "q_span_relative_l2": 0.7760423215727011,
+        "q_span_norm_ratio": 0.6013689023753007
+      },
+      "validation": {
+        "full_q_relative_l2": 1.0246923594839044,
+        "response_relative_l2": 1.0486919520393252,
+        "prediction_to_target_norm_ratio": 0.5396841026118232,
+        "prediction_target_cosine": 0.25133710425204,
+        "q_span_relative_l2": 1.0207282818026011,
+        "q_span_norm_ratio": 0.5043103297551473
+      },
+      "generalization_gap": {
+        "full_q_relative_l2": 0.25530531621641595,
+        "response_relative_l2": 0.25826035669398706,
+        "q_span_relative_l2": 0.24468596022989997
+      }
+    },
+    "deltaphi_graph": {
+      "train": {
+        "full_q_relative_l2": 0.9437100850666562,
+        "response_relative_l2": 0.9427383529288428,
+        "prediction_to_target_norm_ratio": 0.37490677838213743,
+        "prediction_target_cosine": 0.32665398950897123,
+        "q_span_relative_l2": 0.9425616517663001,
+        "q_span_norm_ratio": 0.3603460472077131
+      },
+      "validation": {
+        "full_q_relative_l2": 1.0145539076377947,
+        "response_relative_l2": 1.0045082959390823,
+        "prediction_to_target_norm_ratio": 0.3888104163213737,
+        "prediction_target_cosine": 0.21896101382703312,
+        "q_span_relative_l2": 1.0050052950779595,
+        "q_span_norm_ratio": 0.36216017831530833
+      },
+      "generalization_gap": {
+        "full_q_relative_l2": 0.07084382257113853,
+        "response_relative_l2": 0.061769943010239525,
+        "q_span_relative_l2": 0.062443643311659414
+      }
+    },
+    "knn_mgn": {
+      "train": {
+        "full_q_relative_l2": 0.9564736114814879,
+        "response_relative_l2": 0.9519860374785605,
+        "prediction_to_target_norm_ratio": 0.3500396478921175,
+        "prediction_target_cosine": 0.29710416141375995,
+        "q_span_relative_l2": 0.9503963068127632,
+        "q_span_norm_ratio": 0.260744937385122
+      },
+      "validation": {
+        "full_q_relative_l2": 1.0136910821828578,
+        "response_relative_l2": 1.0006930293544891,
+        "prediction_to_target_norm_ratio": 0.36043933176228576,
+        "prediction_target_cosine": 0.20610155228900517,
+        "q_span_relative_l2": 0.9908490114741855,
+        "q_span_norm_ratio": 0.28547055046591496
+      },
+      "generalization_gap": {
+        "full_q_relative_l2": 0.057217470701369844,
+        "response_relative_l2": 0.04870699187592864,
+        "q_span_relative_l2": 0.040452704661422256
+      }
+    },
+    "q_pointnet": {
+      "train": {
+        "full_q_relative_l2": 0.8956825004890562,
+        "response_relative_l2": 0.8987518611408416,
+        "prediction_to_target_norm_ratio": 0.4822158654298012,
+        "prediction_target_cosine": 0.42213721098063006,
+        "q_span_relative_l2": 0.8950985327363014,
+        "q_span_norm_ratio": 0.33639879959325
+      },
+      "validation": {
+        "full_q_relative_l2": 1.017606892105606,
+        "response_relative_l2": 0.9942546094220782,
+        "prediction_to_target_norm_ratio": 0.40080586677261937,
+        "prediction_target_cosine": 0.15779180356382008,
+        "q_span_relative_l2": 0.9886339803536733,
+        "q_span_norm_ratio": 0.2783224607507388
+      },
+      "generalization_gap": {
+        "full_q_relative_l2": 0.12192439161654989,
+        "response_relative_l2": 0.09550274828123662,
+        "q_span_relative_l2": 0.09353544761737198
+      }
+    }
+  },
+  "truth_only_train": {
+    "zero_field_full_q_relative_l2": 1.0,
+    "same_case_condition_mean_oracle_full_q_relative_l2": 0.5411451298743486,
+    "within_case_condition_energy_fraction": 0.14949281439185141,
+    "q_span_to_mean_field_norm_ratio": 1.2217692226171493,
+    "registered_anchor_power_response_relative_l2": 0.20950921723353008,
+    "truth_oracles_are_deployable_baselines": false
+  },
+  "truth_only_validation": {
+    "zero_field_full_q_relative_l2": 1.0,
+    "same_case_condition_mean_oracle_full_q_relative_l2": 0.568434724273781,
+    "within_case_condition_energy_fraction": 0.15747636556625366,
+    "q_span_to_mean_field_norm_ratio": 1.2530575692653656,
+    "registered_anchor_power_response_relative_l2": 0.2279433820928846,
+    "truth_oracles_are_deployable_baselines": false
+  },
+  "field_access": {
+    "train_fields_read": true,
+    "validation_fields_read": true,
+    "test_fields_read": false,
+    "test_metrics_or_selection": false
+  },
+  "success_thresholds": null,
+  "authorization": {
+    "may_select_or_modify_model": false,
+    "may_retrain": false,
+    "may_relabel_v1": false,
+    "may_open_v2_or_test": false,
+    "may_define_method_novelty": false,
+    "may_change_isbi_submission_readiness": false
+  },
+  "interpretation": {
+    "diagnostic_only": true,
+    "causal_decomposition": false,
+    "primary_observation": "all_four_families_have_high_training_error_and_low_prediction_magnitude_or_alignment_so_failure_is_not_only_family_disjoint_generalization",
+    "task_signal_observation": "condition_variation_is_nontrivial_but_geometry_only_full_field_learnability_is_not_established",
+    "decision": "keep_v1_failed_retire_current_geometry_only_backbone_branch_and_audit_a_new_task_or_data_identity_before_any_new_method"
+  }
+}

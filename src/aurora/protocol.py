@@ -139,6 +139,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1_failure_action",
             "v1a_attribution_config",
             "v1a_status",
+            "v1a_result",
+            "v1a_result_sha256",
+            "v1a_primary_observation",
+            "v1a_next_action",
+            "v1b_boundary_asset_config",
+            "v1b_config_sha256",
+            "v1b_status",
+            "v1b_discovery_scope",
+            "v1b_pass_authorizes",
             "v1_test_access",
             "plan",
         ],
@@ -178,7 +187,25 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["v1a_attribution_config"]
         != "configs/aneumo_isbi_v1_attribution.json"
         or venue["v1a_status"]
-        != "preregistered_post_result_threshold_free_unrun"
+        != "completed_threshold_free_diagnostic_no_reentry"
+        or venue["v1a_result"]
+        != "results/aneumo_isbi_v1_attribution_20260808.json"
+        or venue["v1a_result_sha256"]
+        != "1a7b3e768e97b560da54d52cfe343c019d392e5af2fb3bbf518705f3728076a2"
+        or venue["v1a_primary_observation"]
+        != "high_training_error_and_prediction_collapse_across_all_four_families_not_only_geometry_disjoint_generalization"
+        or venue["v1a_next_action"]
+        != "audit_a_new_task_or_data_identity_before_any_new_method_without_reopening_v1_or_v2"
+        or venue["v1b_boundary_asset_config"]
+        != "configs/aneumo_isbi_v1b_boundary_asset_audit.json"
+        or venue["v1b_config_sha256"]
+        != "78918c629c9a738ae7aced3b4e36a99cc10aba7279c9d70044e46182c52e6b26"
+        or venue["v1b_status"]
+        != "registered_after_archive1_case1_discovery_before_full_audit"
+        or venue["v1b_discovery_scope"]
+        != "archive_1_central_directory_and_case_1_reference_flow_vtp_headers_not_prospective_evidence"
+        or venue["v1b_pass_authorizes"]
+        != "register_a_new_boundary_aware_cache_staging_audit_only"
         or venue["v1_test_access"] is not False
         or venue["plan"] != "docs/isbi-2027-plan.md"
     ):
@@ -324,6 +351,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1_failure_action",
             "v1a_attribution_config",
             "v1a_status",
+            "v1a_result",
+            "v1a_result_sha256",
+            "v1a_primary_observation",
+            "post_v1a_action",
+            "v1b_boundary_asset_config",
+            "v1b_status",
+            "v1b_pass_authorizes",
             "v1_ensemble_estimand",
             "v1_aggregate_integrity",
             "v1_response_oracle_role",
@@ -365,7 +399,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or irregular_3d["v1a_attribution_config"]
         != "configs/aneumo_isbi_v1_attribution.json"
         or irregular_3d["v1a_status"]
-        != "preregistered_post_result_threshold_free_unrun"
+        != "completed_threshold_free_diagnostic_no_reentry"
+        or irregular_3d["v1a_result"]
+        != "results/aneumo_isbi_v1_attribution_20260808.json"
+        or irregular_3d["v1a_result_sha256"]
+        != "1a7b3e768e97b560da54d52cfe343c019d392e5af2fb3bbf518705f3728076a2"
+        or irregular_3d["v1a_primary_observation"]
+        != "high_training_error_and_low_prediction_magnitude_or_alignment_across_all_four_families"
+        or irregular_3d["post_v1a_action"]
+        != "audit_a_new_task_or_data_identity_before_any_new_method_without_v1_repair_or_v2_access"
+        or irregular_3d["v1b_boundary_asset_config"]
+        != "configs/aneumo_isbi_v1b_boundary_asset_audit.json"
+        or irregular_3d["v1b_status"]
+        != "registered_after_archive1_case1_discovery_before_full_audit"
+        or irregular_3d["v1b_pass_authorizes"]
+        != "register_a_new_boundary_aware_cache_staging_audit_only"
         or irregular_3d["v1_ensemble_estimand"]
         != "matching_q_three_seed_mean_and_seed_by_eight_q_twenty_four_component_missing_mixture"
         or irregular_3d["v1_aggregate_integrity"]
