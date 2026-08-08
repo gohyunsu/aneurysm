@@ -41,29 +41,29 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          One lesion set.<br>
-          <em>Many annotation views.</em>
+          No active shortlist.<br>
+          <em>Evidence before architecture.</em>
         </h1>
         <p class="hero-lede">
-          Study presence, vascular territory, point localizer와 segmentation을
-          서로 독립적인 정답으로 세지 않는다. 하나의 잠재
-          <strong>aneurysm lesion set</strong>이 이 모든 annotation을 모순 없이
-          설명하는지와, 어떤 study에 어떤 annotation이 선택됐는지를 분리한다.
-          Coarsening-at-random은 가정하지 않는다. 아직 데이터 access도, 모델도 없다.
+          직전 RSNA 후보는 제공 segmentation을 aneurysm mask로 잘못 해석한
+          전제 때문에 기각했다. 공개 근거상 그것은 13-class
+          <strong>vessel anatomy</strong>이고 aneurysm supervision은 point,
+          presence와 territory다. 현재 문제·모델·GPU 실험은 없으며, 다음은
+          fresh problem-level audit다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/problem-candidate-audit-2026-08-09.md">Candidate audit ↗</a>
+          <a class="button ghost" href="../docs/rsna-supervision-semantics-audit-2026-08-09.md">Rejection audit ↗</a>
           <a class="button ghost" href="../docs/isbi-2027-plan.md">ISBI plan ↗</a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="하나의 동맥류 병변을 서로 다른 annotation 수준으로 관측하는 개념도">
-        <div class="visual-caption">ANNOTATION-OPERATOR CONSISTENCY</div>
+      <div class="hero-visual" aria-label="혈관 해부구조 mask와 동맥류 annotation의 의미가 다름을 보여 주는 red-team 개념도">
+        <div class="visual-caption">SUPERVISION-SEMANTICS RED TEAM</div>
         <div class="vessel-shell">
-          <svg viewBox="0 0 520 420" role="img" aria-label="뇌동맥류 혈관 형상과 불확실한 유동 샘플">
+          <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
               <linearGradient id="vesselFill" x1="0" x2="1">
                 <stop offset="0" stop-color="#254057"/>
@@ -84,27 +84,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>S</b><span>study presence</span>
+            <b>V</b><span>vessel anatomy mask</span>
           </div>
           <div class="posterior-card card-b">
-            <b>T</b><span>vascular territory</span>
+            <b>P</b><span>aneurysm point</span>
           </div>
           <div class="posterior-card card-c">
-            <b>M</b><span>point / mask</span>
+            <b>∅</b><span>official lesion mask</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> one latent lesion set</span>
-          <span><i class="dot coral"></i> partial annotations</span>
-          <span>not a selected model</span>
+          <span><i class="dot lime"></i> anatomy ≠ lesion extent</span>
+          <span><i class="dot coral"></i> candidate rejected</span>
+          <span>payload read 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Conditional shortlist</span><b>Selection-aware lesion-set inference</b></div>
-        <div><span>Current evidence</span><b>Literature audit only · asset not staged</b></div>
+        <div><span>Active shortlist</span><b>None after RSNA semantics rejection</b></div>
+        <div><span>Current evidence</span><b>Public supervision-semantics red team</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>User access → CPU/read-only L0</b></div>
+        <div><span>Next authorization</span><b>Fresh problem audit · no GPU</b></div>
       </div>
     </section>
 
@@ -114,9 +114,9 @@
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
           Vessel graph, segmentation, foundation model, set prediction과
-          conformal UQ는 이미 직접 선행연구가 있다. 새 후보도 module을 먼저
-          고르지 않고 label-generation process와 patient-level task unit이
-          실제로 복구 가능한지부터 감사한다.
+          conformal UQ는 이미 직접 선행연구가 있다. 직전 후보는 supervision
+          semantics가 가정과 다르다는 증거로 폐기했다. 새 후보도 module을
+          먼저 고르지 않고 데이터 의미와 patient-level task unit부터 감사한다.
         </p>
       </div>
 
@@ -131,24 +131,24 @@
             <li>Topology·conformal uncertainty도 이미 점유됨</li>
           </ul>
         </article>
-        <article class="pivot-card adopted">
-          <div class="card-index">SHORTLISTED / ACCESS-BLOCKED</div>
-          <h3>One latent lesion set</h3>
-          <p>서로 다른 annotation을 같은 병변 집합의 projection으로 주변화한다.</p>
+        <article class="pivot-card rejected">
+          <div class="card-index">REJECTED BY SEMANTICS</div>
+          <h3>Selection-aware lesion set</h3>
+          <p>Vessel anatomy mask를 lesion extent의 부분 annotation으로 볼 수 없다.</p>
           <ul>
-            <li>Patient–study–lesion sampling unit을 분리</li>
-            <li>Localization과 cross-granularity contradiction을 함께 평가</li>
-            <li>Access/L0 전 method·GPU·outer test 없음</li>
+            <li>178건의 segmentation은 13-class vessel anatomy</li>
+            <li>Aneurysm label은 point·presence·territory</li>
+            <li>공식 voxel lesion mask가 없어 estimand 기각</li>
           </ul>
         </article>
       </div>
 
       <div class="claims-strip">
-        <p>논문이 답할 세 질문</p>
+        <p>다음 후보 감사가 답할 세 질문</p>
         <ol>
-          <li><span>01</span> Patient–study–lesion과 annotation provenance를 누수 없이 복구할 수 있는가?</li>
-          <li><span>02</span> 하나의 latent set이 coarse label과 localizer/mask를 더 일관되게 설명하는가?</li>
-          <li><span>03</span> 같은 lesion sensitivity에서 radiologist에게 제시할 후보 수를 줄이는가?</li>
+          <li><span>01</span> 실제 asset의 target과 sampling unit이 주장할 estimand를 식별하는가?</li>
+          <li><span>02</span> Direct prior가 점유하지 않은 algorithmic gap이 남는가?</li>
+          <li><span>03</span> ISBI 규모에서 strong baseline과 fresh outer test가 가능한가?</li>
         </ol>
       </div>
     </section>
@@ -196,7 +196,7 @@
               <th>Challenge classifier</th>
               <th>Multitask 3D detector</th>
               <th>Anatomy / topology model</th>
-              <th>Current candidate</th>
+              <th>Rejected hypothesis</th>
             </tr>
           </thead>
           <tbody id="competition-body"></tbody>
@@ -206,13 +206,12 @@
 
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
-        <p class="eyebrow">03 · ARCHITECTURE BOUNDARY</p>
-        <h2>Evidence first.<br><em>No selected model yet.</em></h2>
+        <p class="eyebrow">03 · DECISION BOUNDARY</p>
+        <h2>A failed premise stops<br><em>before model code.</em></h2>
         <p>
-          아래 흐름은 선택된 network가 아니라 현재 후보가 만족해야 할
-          probabilistic interface다. Image에서 잠재 lesion set을 추론하고, 실제
-          annotation operator를 통해 coarse·sparse·dense label likelihood와
-          reading-burden endpoint를 일관되게 유도해야 한다.
+          아래 흐름은 network architecture가 아니라 후보를 폐기한 evidence
+          chain이다. Public supervision semantics가 latent-target 가정을
+          반박했으므로 access, implementation과 GPU training으로 진행하지 않았다.
         </p>
       </div>
 
@@ -221,86 +220,86 @@
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
           실행된 과거 N1은 MLP였고 V1 point/graph/Perceiver 연구선은 실패로
-          닫혔다. 새 후보는 controlled-access asset과 L0/L1 evidence가 없으므로
+          닫혔다. RSNA lesion-set 후보도 supervision semantics로 기각됐으므로
           3D encoder, vessel graph, query decoder 어느 것도 선택하지 않았다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="Annotation granularity">
-        <button class="active" type="button" data-mode="presence">Study</button>
-        <button type="button" data-mode="point">Point</button>
-        <button type="button" data-mode="mask">Mask</button>
-        <span id="mode-description">병변 집합을 study presence로 projection합니다.</span>
+      <div class="mode-switch" role="group" aria-label="Red-team evidence stage">
+        <button class="active" type="button" data-mode="presence">Evidence</button>
+        <button type="button" data-mode="point">Semantics</button>
+        <button type="button" data-mode="mask">Decision</button>
+        <span id="mode-description">공개 1·2위 자료에서 supervision contract를 확인합니다.</span>
       </div>
 
       <div class="architecture-flow">
         <article class="arch-node input-node">
           <span class="arch-number">01</span>
-          <p class="arch-label">OBSERVE</p>
-          <h3>Angiographic study</h3>
-          <p>CTA or MRA series with site·modality·spacing provenance</p>
+          <p class="arch-label">SOURCE</p>
+          <h3>Public primary evidence</h3>
+          <p>Official registry/wiki · first-place exact code · second-place report</p>
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <a class="arch-learn" href="learn.html#datasets">데이터 단위 설명</a>
+          <a class="arch-learn" href="../docs/rsna-supervision-semantics-audit-2026-08-09.md">근거 record</a>
         </article>
-        <div class="arch-connector"><span>L0 audited</span></div>
+        <div class="arch-connector"><span>payload 0</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">INFER · UNSELECTED</p>
-          <h3>Image & vessel evidence</h3>
-          <p>Possible 3D image features and vascular anatomy; no fixed backbone</p>
+          <p class="arch-label">READ CONTRACT</p>
+          <h3>Separate target semantics</h3>
+          <p>13-class vessel mask · aneurysm center point · presence/territory</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">후보와 모델 구분</a>
         </article>
-        <div class="arch-connector accent"><span id="bc-connector-label">infer S</span></div>
+        <div class="arch-connector accent"><span id="bc-connector-label">compare semantics</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">LATENT TARGET</p>
-          <h3 id="bc-node-title">Unordered lesion set</h3>
-          <p id="bc-node-copy">Unknown lesion count, 3D extent, territory and annotation-selection mechanism</p>
+          <p class="arch-label">RED-TEAM FINDING</p>
+          <h3 id="bc-node-title">Anatomy is not lesion extent</h3>
+          <p id="bc-node-copy">The official segmentation cannot be marginalized as an aneurysm-mask observation</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
-          <a class="arch-learn" href="../docs/problem-candidate-audit-2026-08-09.md">Estimand 수식</a>
+          <a class="arch-learn" href="../docs/rsna-supervision-semantics-audit-2026-08-09.md">기각 논리</a>
         </article>
-        <div class="arch-connector"><span>O<sub>k</sub>(S)</span></div>
+        <div class="arch-connector"><span>premise fails</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">PROJECT</p>
-          <h3>Annotation likelihood</h3>
+          <p class="arch-label">INVALIDATE</p>
+          <h3>Reject the estimand</h3>
           <div class="dual-branch">
-            <span><b>Coarse</b>presence · territory</span>
-            <span><b>Fine</b>point · extent · mask</span>
+            <span><b>Valid</b>vessel anatomy supervision</span>
+            <span><b>Invalid</b>official mixed lesion masks</span>
           </div>
-          <p>Marginalize annotations not supplied for each study</p>
-          <a class="arch-learn" href="learn.html#experiments">평가 계약 설명</a>
+          <p>Do not repair a target-definition failure with architecture</p>
+          <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
-        <div class="arch-connector"><span>decode</span></div>
+        <div class="arch-connector"><span>reset</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
-          <p class="arch-label">VERIFY</p>
-          <h3>Lesion accuracy & burden</h3>
-          <p>FROC · candidates/study · calibration · contradiction rate</p>
-          <div class="output-meter"><i></i><span>patient-level outer test</span><b>not authorized</b></div>
+          <p class="arch-label">NEXT</p>
+          <h3>Fresh problem audit</h3>
+          <p>Data semantics · estimand · direct prior · split · feasible evidence</p>
+          <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>not authorized</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
       </div>
 
       <div class="architecture-notes">
         <article>
-          <span>ANNOTATION COHERENCE</span>
-          <p>Study presence, territory 수와 병변 위치·개수가 하나의 set law에서 모순 없이 유도돼야 한다.</p>
+          <span>SEMANTIC VALIDITY</span>
+          <p>Input, supervision과 estimand의 의미가 맞지 않으면 model code 전에 후보를 폐기한다.</p>
         </article>
         <article>
-          <span>LESION ACCURACY</span>
-          <p>구조적 일관성이 강한 ROI·multitask detector보다 낮은 sensitivity라는 대가를 치르지 않아야 한다.</p>
+          <span>DIRECT PRIOR</span>
+          <p>Vessel-first nnU-Net, anatomy pooling과 multitask detector는 새 이름이 아니라 mandatory baseline이다.</p>
         </article>
         <article>
-          <span>READING BURDEN</span>
-          <p>같은 lesion sensitivity에서 radiologist에게 보여 줄 candidates per study를 줄여야 한다.</p>
+          <span>PROSPECTIVE EVIDENCE</span>
+          <p>새 후보가 생겨도 method-free gate와 bounded development 뒤 fresh outer test를 요구한다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -496,8 +495,8 @@
             고정 기준을 넘지 못했다. 이는 response의 비자명성만 확인한
             train-family 결과다. 이후 N1c와 V1e가 실패했으므로 이를 근거로
             velocity-only learned 3D headline을 열지 않는다. 수치와 실패
-            history는 보존하지만 현재 RSNA lesion-set shortlist의 method
-            evidence로 사용하지 않는다.
+            history는 보존하지만 향후 fresh problem audit의 method evidence로
+            사용하지 않는다.
           </p>
           <a href="../results/aneumo_scaling_audit_20260803.json">Scaling audit aggregate ↗</a>
           <a href="../configs/aneumo_scaling_audit_v1.json">Frozen audit contract ↗</a>
@@ -558,15 +557,15 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>No active paper identity · one access-blocked problem shortlist</p>
+        <p>No active paper identity · active shortlist 0</p>
       </div>
       <div class="contribution-grid">
-        <article><span>H1</span><h3>Annotation-operator likelihood</h3><p>하나의 latent lesion set이 coarse·sparse·dense annotation을 정규화된 likelihood로 연결할 수 있는지 검증할 가설이다.</p></article>
-        <article><span>H2</span><h3>Accuracy without contradiction</h3><p>Independent heads와 published detector보다 localization과 cross-granularity coherence를 함께 개선해야 한다.</p></article>
-        <article><span>H3</span><h3>Calibration-supported burden</h3><p>고정 sensitivity에서 candidate 수를 줄여야 하며 conformal 적용 자체는 novelty로 세지 않는다.</p></article>
+        <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
+        <article><span>P2</span><h3>Unoccupied gap</h3><p>Direct prior와 winning pipelines 뒤에도 algorithmic gap이 남아야 한다.</p></article>
+        <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>RSNA-ICA access prerequisite unmet · L0 unaudited · method/GPU/outer test blocked</b>
+        <span>Current stage</span><b>RSNA candidate rejected · fresh problem audit required · method/GPU/outer test blocked</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

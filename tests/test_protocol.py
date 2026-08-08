@@ -18,18 +18,18 @@ class ProtocolTests(unittest.TestCase):
         self.assertGreaterEqual(len(checks), 8)
         self.assertEqual(len(canonical_hash(self.protocol)), 64)
 
-    def test_problem_shortlist_cannot_select_method_or_gpu_before_access(self) -> None:
+    def test_no_active_problem_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "access-blocked"):
+        with self.assertRaisesRegex(ProtocolError, "no-active-problem"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "access-blocked"):
+        with self.assertRaisesRegex(ProtocolError, "no-active-problem"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "access-blocked"):
+        with self.assertRaisesRegex(ProtocolError, "no-active-problem"):
             validate_protocol(candidate)
 
     def test_source_only_substitution_screen_cannot_open_data_or_training(self) -> None:
@@ -46,6 +46,19 @@ class ProtocolTests(unittest.TestCase):
         ]
         screen["candidate_ids"].remove("topcow_2024")
         with self.assertRaisesRegex(ProtocolError, "source-only dataset"):
+            validate_protocol(candidate)
+
+    def test_rsna_semantics_audit_cannot_be_relabelled_as_lesion_masks(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["rsna_supervision_semantics_red_team"]
+        audit["provided_segmentation_semantics"] = "aneurysm_masks"
+        with self.assertRaisesRegex(ProtocolError, "supervision-semantics"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["rsna_supervision_semantics_red_team"]
+        audit["mixed_granularity_lesion_annotation_selection_cohort_supported"] = True
+        with self.assertRaisesRegex(ProtocolError, "supervision-semantics"):
             validate_protocol(candidate)
 
     def test_rsna_candidate_cannot_claim_staging_or_redistribution(self) -> None:

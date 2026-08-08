@@ -5,40 +5,44 @@ V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training und
 V1e known-condition qualification failed 6/9 · M0 execution-incomplete/no
 scientific verdict · prior BC-operator identity inactive · cross-protocol
 4D-flow I0a asset integrity passed 14/14 · I0b execution-incomplete before
-asset access/no scientific verdict/no rerun · 4D-flow branch closed · one
-access-blocked lesion-set problem shortlist · method and architecture unselected
+asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
+supervision-semantics candidate rejected · active shortlist 0 · method and
+architecture unselected
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
-현재 구현하거나 선택한 headline architecture는 없다. 조건부 problem
-shortlist는 RSNA-ICA의 mixed-granularity annotation을 하나의 latent lesion
-set에서 유도하되 annotation type selection을 별도 mechanism으로 두는 것이지만,
-이는 model specification이 아니라 estimand
-specification이다. Controlled-access asset이 아직 stage되지 않았으므로 patient,
-study, lesion, territory, localizer와 segmentation의 실제 mapping을 모른 채
-GNN, U-Net, DETR, point process 또는 foundation model을 고르지 않는다.
-L0 전에는 coarsening-at-random도 가정하지 않는다. Selection이 unobserved
-lesion에 의존해 point identification이 불가능하면 sensitivity analysis 또는
-후보 폐기가 architecture보다 앞선다.
+현재 구현하거나 선택한 headline architecture는 없다. Active problem
+shortlist도 0개다. 직전 RSNA 후보는 제공 segmentation이 aneurysm extent가
+아니라 13-class Circle-of-Willis vessel anatomy라는 공개 근거 때문에
+기각됐다. Vessel mask와 aneurysm point/presence/territory는 같은 lesion
+annotation을 다른 granularity로 관측한 것이 아니므로, annotation-selection
+mechanism을 가진 latent lesion set이라는 estimand를 model로 구현하지 않는다.
 
-Access 뒤 method-free L0/L1이 task를 지지할 때만 independent-head,
-published vessel+ROI, 26-class multitask 3D nnU-Net과 generic set-prediction
-control을 먼저 고정한다. 이후에도 architecture는 관측된 병목에 맞춰
-development validation에서 선택한다. 가능한 3D encoder, vessel graph와 query
-decoder는 engineering components이며 단독 novelty가 아니다. 현재 상태에서
-`AURORA is GNN-based`라는 설명은 부정확하다. 상세 boundary는
-[`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)를
+1위 공개 pipeline의 vessel-first nnU-Net, anatomy-masked pooling, location
+transformer와 point-to-radius-5-sphere target, 2위 pipeline의 tri-axial ROI와
+26-class multitask nnU-Net은 향후 관련 task를 다시 선택할 때 strong baseline
+또는 direct prior다. 이를 GNN, DETR, query decoder나 foundation feature와
+조합하는 것만으로 새 architecture contribution이 되지 않는다. 현재 상태에서
+`AURORA is GNN-based`, `AURORA is a lesion-set model`이라고 설명하는 것은
+모두 부정확하다. 상세 기각 근거는
+[`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)를
 따른다.
+
+다음 fresh problem-level audit가 데이터 의미, 식별 가능한 estimand,
+direct-prior gap과 realistic evaluation을 통과한 뒤에만 strong baseline
+interface와 bounded validation search space를 prospective하게 고정한다.
+그 전에는 executable model config, training code, GPU job과 outer test를
+추가하지 않는다.
 
 공식 source-only dataset substitution screen도 architecture를 열지 않았다.
 CADA·ADAM은 point/mask가 함께 있는 fully supervised challenge이고, IntrA는
 whole-study image가 없는 surface segment, TopCoW는 lesion이 아닌 vascular
 anatomy supervision이다. 이들은 향후 external control 또는 pretraining 후보일
-뿐 RSNA의 annotation-selection mechanism을 대체하지 않는다. 따라서 공개
-asset이 즉시 내려받을 수 있다는 이유로 segmentation U-Net이나 point-cloud
-network를 현재 method로 선택하지 않는다.
+뿐 기각된 RSNA annotation-selection mechanism을 대체하거나 구제하지 않는다.
+따라서 공개 asset이 즉시 내려받을 수 있다는 이유로 segmentation U-Net이나
+point-cloud network를 현재 method로 선택하지 않는다.
 
 ## 0-A. 닫힌 4D-flow candidate의 model boundary
 

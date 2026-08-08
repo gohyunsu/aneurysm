@@ -4,6 +4,37 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · RSNA supervision semantics reject the only shortlist
+
+- Official registry/wiki, 1위 공개 구현 exact commit
+  `e1dcdf0058e1e0d0044d8053e92243b4b4794555`, 2위 report
+  `arXiv:2606.26706v1`을 red-team했다. Image·annotation payload와
+  controlled-access 약관 수락은 0이다.
+- 제공 `segmentations/{uid}_cowseg.nii`는 aneurysm extent가 아니라
+  background+13-class Circle-of-Willis vessel anatomy다. 2위 report는 4,348
+  training series 중 178건에 이 vessel mask가 있고, aneurysm center point는
+  annotated series 전체에 있으며 official voxel aneurysm mask는 없다고
+  설명한다. 저자들의 voxel aneurysm target은 point box, pseudo-label과
+  manual correction으로 파생한 것이다.
+- 따라서 presence·territory·point·“일부 official lesion mask”를 한 latent
+  lesion set의 annotation projection으로 놓고 mask-selection mechanism을
+  학습한다는 전제가 거짓이다. 후보를 access-blocked로 유지하지 않고
+  **rejected**로 보존한다. CADA·ADAM·IntrA·TopCoW screen도 이를 구제하지
+  않는다.
+- Central schema를 `2.3`으로 올리고 active shortlist, estimand, method,
+  GPU, outer test와 submission identity를 모두 미선정/비허용으로 고정했다.
+  다음 허용 작업은 fresh problem-level candidate audit다.
+- 영향 파일: `AGENTS.md`, `README.md`,
+  `docs/rsna-supervision-semantics-audit-2026-08-09.md`,
+  `docs/problem-candidate-audit-2026-08-09.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/datasets.md`, `docs/literature-lineage.md`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`,
+  `tests/test_protocol.py`, `site/index.html`, `site/learn.html`,
+  `site/assets/aurora.js`, `site/assets/research-data.js`,
+  `CHANGELOG.md`.
+
 ## 2026-08-09 · public alternatives do not replace the selection-aware task
 
 - CADA, ADAM, IntrA와 TopCoW의 공식 challenge/dataset record만 사용해

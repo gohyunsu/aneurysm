@@ -4,44 +4,45 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 cold audit에서 남은 유일한 조건부 후보는 **multisite CT/MR angiography의
-annotation-selection-aware mixed-granularity lesion-set inference**입니다. Study presence,
-13개 vascular-territory label, point localizer와 일부 segmentation을 서로 다른
-정답으로 취급하지 않고 하나의 잠재 병변 집합에서 유도되는 annotation
-projection으로 다루되, 어떤 study에 어떤 annotation 수준이 선택됐는지도
-별도 mechanism으로 감사하는 문제입니다. Structured weak detection과 mixed
-supervision 자체는 이미 선행 연구입니다. Controlled-access RSNA-ICA asset은
-현재 알려진 `introai9` 경로에 stage되지 않았고 task unit도 감사되지 않았습니다.
-따라서 이것은 paper identity나 선택된 architecture가 아니며 GPU 실험도 돌고
-있지 않습니다. 상세한 기각 후보, prior-art boundary와 access 뒤 실험 순서는
-[`problem candidate audit`](docs/problem-candidate-audit-2026-08-09.md)에 있습니다.
+현재 active problem shortlist는 **0개**입니다. 직전 조건부 후보였던
+multisite CT/MR angiography의 annotation-selection-aware mixed-granularity
+lesion-set inference는 2026-08-09 supervision-semantics red team에서
+기각했습니다. 공개된 `segmentations/{uid}_cowseg.nii`는 aneurysm extent가
+아니라 13-class Circle-of-Willis 혈관 해부구조이고, aneurysm supervision은
+center point와 presence/territory label입니다. 공식 voxel aneurysm mask가
+선택적으로 존재한다는 전제가 틀렸으므로 access를 받아도 원래 estimand는
+성립하지 않습니다. 근거와 정확한 기각 논리는
+[`RSNA supervision-semantics audit`](docs/rsna-supervision-semantics-audit-2026-08-09.md)에
+있습니다.
 
-공식 1차 자료만 사용해 CADA, ADAM, IntrA와 TopCoW도 다시 비교했습니다.
-CADA·ADAM은 등록이 필요한 fully supervised challenge, IntrA는 raw angiography가
-없는 local surface segment, TopCoW는 aneurysm이 아닌 vascular anatomy
-dataset입니다. 어느 payload도 읽지 않았으며 이 screen은 method나 GPU 실행을
-허용하지 않습니다. 즉시 받을 수 있는 더 작은 데이터에 맞춰 문제를 일반
-segmentation으로 축소하지 않고, RSNA access가 불가능하면 이 shortlist 자체를
-폐기합니다.
+공식 1차 자료만 사용한 CADA, ADAM, IntrA와 TopCoW 비교도 이 후보를
+구제하지 않습니다. 이들은 향후 fully supervised external control 또는
+vascular-anatomy pretraining에는 쓸 수 있지만, 기각된 annotation-selection
+estimand의 대체 데이터가 아닙니다. 어느 image/annotation payload도 읽지
+않았고 method, GPU와 outer test는 열리지 않았습니다.
 
-가장 최근에 닫은 candidate는 **intracranial 4D-flow MRI의 protocol-indexed posterior
-prediction**이었습니다. 한 acquisition에서 추론한 latent flow posterior가 같은
-controlled phantom flow의 다른 resolution·acceleration·VENC acquisition을
-measurement space에서 예측할 수 있는지를 묻습니다. Generic
-super-resolution, denoising, PINN reconstruction 또는 voxelwise uncertainty를
-새 contribution이라고 부르지 않습니다.
+가장 최근에 닫은 candidate는 위 **RSNA selection-aware lesion-set
+inference**입니다. 그 직전에 닫은 intracranial 4D-flow MRI의
+protocol-indexed posterior prediction은 한 acquisition에서 추론한 latent
+flow posterior가 같은 controlled phantom flow의 다른
+resolution·acceleration·VENC acquisition을 measurement space에서 예측할 수
+있는지를 물었습니다. Generic super-resolution, denoising, PINN
+reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르지
+않습니다.
 
-> **AURORA** — 기존 프로젝트명은 유지하지만, 새 candidate의 정식 방법명과
-> architecture는 선택되지 않았습니다. RSNA-ICA access와 L0/L1 audit 전에는
-> GNN, set predictor, training config와 submission claim을 만들지 않습니다.
+> **AURORA** — 기존 프로젝트명은 유지하지만, 새 problem, 방법명과
+> architecture는 선택되지 않았습니다. Fresh problem-level audit가 데이터
+> 의미, estimand, direct-prior gap과 평가 현실성을 통과하기 전에는 GNN,
+> set predictor, training config와 submission claim을 만들지 않습니다.
 
-## 현재 단계 · L0 access prerequisite 미충족, method/GPU 없음
+## 현재 단계 · active shortlist 0, method/GPU 없음
 
-현재 허용된 다음 작업은 사용자가 RSNA의 공식 non-commercial 약관을 수락하고
-private asset 위치를 제공한 뒤 수행하는 CPU/read-only L0 asset/task-unit
-audit입니다. Patient–study–series–site–modality key, lesion cardinality,
-territory/localizer/segmentation mapping과 annotation assignment·positivity가
-복구되기 전에는 executable config, split, model 또는 GPU job을 만들지 않습니다.
+현재 허용된 다음 작업은 fresh problem-level candidate audit입니다. 후보마다
+실제 데이터 의미와 이용 가능성, 식별 가능한 biomedical-imaging estimand,
+직접 선행연구 대비 남는 gap, patient-level split과 confirmatory 규모를 먼저
+평가합니다. 하나가 명시적으로 선택되고 method-free task gate가 prospective
+commit에 고정되기 전에는 executable config, model, GPU job과 outer test를
+만들지 않습니다.
 
 ### 보존된 직전 4D-flow 실행 기록
 

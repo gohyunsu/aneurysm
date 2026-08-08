@@ -1,18 +1,18 @@
 {
-  "schema_version": "2.2",
+  "schema_version": "2.3",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_one_conditional_lesion_set_problem_shortlist_access_prerequisite_unmet_method_unselected",
+    "status": "failed_branches_preserved_no_active_problem_after_rsna_supervision_semantics_rejection",
     "as_of": "2026-08-09",
     "clinical_use": false
   },
   "problem_selection": {
-    "status": "one_conditional_shortlist_no_selected_primary_problem",
-    "shortlisted_candidate": "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
-    "candidate_dataset": "rsna_ica_2025_controlled_access",
-    "candidate_estimand": "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_observed_annotation_and_selection_operators",
-    "asset_access_status": "not_found_in_bounded_introai9_name_audit_and_no_kaggle_credential",
+    "status": "no_active_shortlist_after_rsna_supervision_semantics_rejection",
+    "shortlisted_candidate": "none",
+    "candidate_dataset": "none",
+    "candidate_estimand": "unselected",
+    "asset_access_status": "not_applicable_without_an_active_candidate",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -21,13 +21,13 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "user_authorized_access_then_cpu_read_only_asset_and_task_unit_audit",
-    "audit_document": "docs/problem-candidate-audit-2026-08-09.md",
+    "next_allowed_action": "fresh_problem_level_candidate_audit_without_method_gpu_or_outer_test",
+    "audit_document": "docs/rsna-supervision-semantics-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
       "method_or_gpu_authorized": false,
-      "decision": "no_screened_alternative_replaces_rsna_for_the_annotation_selection_aware_study_level_lesion_set_task",
+      "decision": "screened_alternatives_did_not_replace_rsna_and_do_not_rescue_the_rejected_rsna_candidate",
       "candidate_ids": [
         "cada_2020",
         "adam_2020",
@@ -35,12 +35,30 @@
         "topcow_2024"
       ]
     },
-    "most_recent_closed_candidate": "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift",
+    "rsna_supervision_semantics_red_team": {
+      "status": "completed_public_primary_sources_no_payload",
+      "audit_document": "docs/rsna-supervision-semantics-audit-2026-08-09.md",
+      "payload_accessed": false,
+      "anonymous_s3_listing_http_status": 403,
+      "official_wiki_status": "coming_soon",
+      "first_place_repository_commit": "e1dcdf0058e1e0d0044d8053e92243b4b4794555",
+      "second_place_preprint": "arxiv_2606.26706v1",
+      "training_series_reported_by_second_place": 4348,
+      "provided_vessel_mask_cases_reported_by_second_place": 178,
+      "provided_segmentation_semantics": "thirteen_class_circle_of_willis_vessel_anatomy_not_aneurysm_extent",
+      "aneurysm_supervision_semantics": "center_points_for_all_annotated_series_with_presence_and_territory_labels_no_official_voxel_aneurysm_masks",
+      "second_place_aneurysm_masks": "author_derived_from_points_pseudo_labels_and_manual_correction_not_official_mixed_granularity_annotations",
+      "mixed_granularity_lesion_annotation_selection_cohort_supported": false,
+      "method_or_gpu_authorized": false,
+      "decision": "reject_annotation_selection_aware_mixed_granularity_lesion_set_candidate"
+    },
+    "most_recent_closed_candidate": "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
       "geometry_boundary_condition_shape_response_operator",
-      "cross_protocol_4d_flow_posterior_prediction"
+      "cross_protocol_4d_flow_posterior_prediction",
+      "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -125,10 +143,10 @@
     "historical_application_endpoint": "cross_sectional_rupture_status",
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
-    "active_candidate_problem": "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
-    "active_candidate_status": "conditional_shortlist_access_unmet_task_unit_and_annotation_selection_unaudited_method_unselected",
-    "candidate_primary_estimand": "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_observed_annotation_and_selection_operators",
-    "candidate_secondary_estimand": "lesion_localization_and_candidate_burden_under_cross_granularity_coherence",
+    "active_candidate_problem": "unselected",
+    "active_candidate_status": "none_after_rsna_supervision_semantics_rejection",
+    "candidate_primary_estimand": "unselected",
+    "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
     "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
     "i0a_source_commit": "f7b4e024d69d43cf042f4163342b4d993386f441",
@@ -377,10 +395,10 @@
     },
     {
       "name": "rsna_ica_2025_controlled_access",
-      "role": "conditional_problem_shortlist_for_mixed_granularity_anatomy_structured_lesion_set_audit",
+      "role": "rejected_for_annotation_selection_shortlist_possible_future_challenge_benchmark_only_after_a_new_task_audit",
       "field_provenance": "none",
       "split_unit": "patient",
-      "status": "not_staged_task_unit_unaudited_no_method_or_gpu_authorization",
+      "status": "controlled_access_not_staged_supervision_semantics_audited_from_public_sources_no_active_method_or_gpu",
       "official_registry": "https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/",
       "license_boundary": "controlled_noncommercial_access_terms_require_user_acceptance_no_redistribution"
     },

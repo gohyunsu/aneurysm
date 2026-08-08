@@ -1,27 +1,23 @@
 # 데이터셋 인벤토리와 통합 방안
 
-> **2026-08-09 conditional shortlist:** RSNA Intracranial Aneurysm Detection
-> 2025는 공식 설명상 18개 기관의 4,000건 이상 CT/MR angiography, 13개
-> anatomical location label과 일부 AI-generated segmentation 연구를 제공하는
-> controlled-access candidate다. 이는 local archive count가 아니다. 현재
-> 알려진 `introai9` 경로에는 stage되지 않았고 Kaggle credential도 확인되지
-> 않아 patient/study/lesion mapping, exact modality/site counts와 split viability는
-> `unaudited`다. 사용자가 약관을 수락하고 private asset을 제공하기 전에는
-> 다운로드, config, training과 GPU job을 만들지 않는다. Dense/sparse label이
-> lesion, site 또는 modality에 따라 선택됐는지 알 수 없으므로
-> coarsening-at-random도 가정하지 않는다. Access 뒤에도 첫
-> 작업은 CPU/read-only L0 asset/task-unit audit이며 raw image/annotation은
-> 공개 저장소에 재배포하지 않는다. 상세 범위는
-> [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)를
+> **2026-08-09 supervision-semantics decision:** RSNA Intracranial Aneurysm
+> Detection 2025의 selection-aware mixed-granularity lesion-set 후보는
+> 기각됐다. 공개 1위 구현과 2위 report에서 약 178건에 제공된 segmentation은
+> aneurysm extent가 아니라 13-class Circle-of-Willis vessel anatomy이며,
+> official aneurysm supervision은 center point와 presence/territory label이다.
+> 따라서 일부 공식 aneurysm mask가 비무작위로 선택된 cohort라는 전제가
+> 성립하지 않는다. Controlled payload는 읽지 않았고 method/GPU/outer test도
+> 열지 않았다. RSNA는 다른 task가 fresh audit를 통과할 경우에만 future
+> challenge benchmark가 될 수 있다. 상세 근거는
+> [`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)를
 > 따른다.
 
 > **2026-08-09 source-only substitution screen:** CADA, ADAM, IntrA와 TopCoW의
 > 공식 metadata·access·annotation 범위를 비교했지만 image/annotation payload는
 > 읽지 않았다. CADA/ADAM은 fully supervised challenge이고 IntrA/TopCoW는 각각
-> local surface segment/vascular anatomy라 RSNA의 study-level non-random
-> annotation-selection 문제를 대체하지 않는다. 어느 대안도 method/GPU를
-> 허용하지 않는다. RSNA access가 없으면 일반 segmentation 문제로 축소하지
-> 않고 shortlist를 폐기한다.
+> local surface segment/vascular anatomy라 기각된 study-level non-random
+> annotation-selection 문제를 대체하거나 구제하지 않는다. 어느 대안도
+> active problem, method/GPU 또는 outer test를 열지 않는다.
 
 > **2026-08-08 candidate snapshot, closed 2026-08-09:** 공개 in-vitro 4D-flow MRI release들을
 > 새 end-to-end cohort로 합치지 않는다. 2021 release는 한 aneurysm phantom의
@@ -83,7 +79,7 @@
 
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |
 |---|---|---:|---|---|
-| RSNA-ICA 2025 | Multisite CT/MR angiography, study/location labels, localizer와 일부 segmentation research | official description: >4,000 scans, 18 institutions, 13 locations; exact local counts unknown | conditional annotation-selection-aware lesion-set L0 candidate | controlled access; not staged, task unit/annotation-selection unaudited, no redistribution |
+| RSNA-ICA 2025 | Multisite CT/MR angiography, study/location labels, aneurysm center points와 일부 13-class vessel-anatomy segmentation | official description: >4,000 scans, 18 institutions, 13 locations; second-place report: 4,348 series/178 vessel-mask cases | rejected for mixed-granularity lesion-selection task; possible future benchmark only after a new task audit | controlled access; not staged; no official voxel aneurysm mask; no redistribution |
 | CADA 2020 | 3DRA와 task별 center/mask supervision | detection 109 volume/127 lesion; segmentation 110 volume/128 lesion | user access 뒤 fully supervised external detection/segmentation stress test | registration required; CC BY-NC-ND 4.0; selection-aware cohort 아님 |
 | ADAM 2020 | TOF-MRA+structural MR, center/radius와 consensus binary mask | 113 scans; 93 positive, 20 negative; 일부 baseline/follow-up | user access 뒤 MRA fully supervised baseline | registration/confidentiality agreement; subject-group split 필수; selection-aware cohort 아님 |
 | IntrA | Reconstructed vessel surface와 local aneurysm/healthy segments | 103 full vessel models; 1,694 healthy/215 aneurysm segment; 116 manual part annotations | license audit 뒤 surface anatomy pretraining/sanity | raw MRA와 whole-study negative/cardinality 없음; selection rule·payload license 재감사 필요 |

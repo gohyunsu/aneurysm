@@ -4,8 +4,8 @@
 상태: **target locked · not submission-ready · prior BC-operator identity
 inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b
 execution-incomplete before asset access/no scientific verdict/no rerun ·
-4D-flow branch closed · one access-blocked lesion-set problem shortlist · method
-unselected**
+4D-flow branch closed · RSNA supervision-semantics candidate rejected · active
+shortlist 0 · method unselected**
 
 ## 1. Venue contract
 
@@ -31,24 +31,29 @@ unselected**
 
 현재 원고는 ISBI-ready가 아니다.
 
-현재 유일한 조건부 shortlist는 multisite CT/MR angiography에서
-mixed-granularity annotation을 하나의 anatomy-structured lesion set으로
-연결하되 annotation selection을 별도 mechanism으로 두는 문제다. Structured
-weak detection과 mixed supervision은 이미 선행 연구이므로 marginalization
-자체는 novelty가 아니다. RSNA-ICA asset access가 없고 task unit·selection
-mechanism도 감사되지
-않았으므로 paper identity가 아니다. Access→L0 asset/task-unit audit→L1
-method-free adequacy→strong baseline→bounded development→prospective outer
-test 순서를 통과해야 한다. 상세 기준은
-[`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
+현재 active shortlist와 paper identity는 0개다. 직전 RSNA
+mixed-granularity lesion-set 후보는 access가 없어서 보류한 것이 아니라,
+공개 1·2위 자료에서 제공 segmentation이 aneurysm extent가 아닌 13-class
+vessel anatomy임을 확인해 기각했다. 공식 aneurysm supervision은 center
+point와 presence/territory label이고, 저자들의 voxel aneurysm mask는
+pseudo-label/manual-correction 파생물이다. 따라서 annotation-selection
+estimand를 ISBI claim으로 쓰지 않는다. 상세 판정은
+[`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)에
 있다.
 
-공식 source-only substitution screen도 access 병목을 없애지 못했다. CADA와
+공식 source-only substitution screen도 새 active problem을 만들지 못했다. CADA와
 ADAM은 등록이 필요한 fully supervised challenge이고, IntrA는 raw image 없는
 surface segment, TopCoW는 aneurysm이 아닌 CoW anatomy dataset이다. 이 네
 후보는 external control/pretraining 역할만 가능하며 어떤 payload도 읽지
-않았다. RSNA access가 없다고 이들 중 하나의 일반 segmentation task로
-submission identity를 자동 축소하지 않는다.
+않았다. 이들 중 하나의 일반 segmentation task로 submission identity를
+자동 축소하거나 기각된 RSNA 문제를 복원하지 않는다.
+
+다음 단계는 fresh problem-level audit다. 데이터 semantics와 실제 이용
+가능성, 식별 가능한 estimand, direct prior gap, patient-level split,
+ISBI scope와 confirmatory 규모를 모두 통과한 후보만 prospective task gate로
+올린다. 이후 순서는 method-free adequacy → strong baseline → 총 compute와
+repair round를 고정한 validation-only development → fresh prospective outer
+test다.
 
 1. 현재 primary model은 없다. 실행된 exact/nonlinear MLP와 V1 point/graph
    네 후보는 모두 보존된 이전 연구선이며, V1은 relative L2 약 1로 실패했다.

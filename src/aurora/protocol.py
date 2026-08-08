@@ -114,8 +114,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.2":
-        raise ProtocolError("The current research-state schema must be version 2.2.")
+    if protocol["schema_version"] != "2.3":
+        raise ProtocolError("The current research-state schema must be version 2.3.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -145,6 +145,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "source_only_dataset_substitution_screen",
+            "rsna_supervision_semantics_red_team",
             "most_recent_closed_candidate",
             "rejected_candidates",
             "non_novel_components",
@@ -153,15 +154,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "one_conditional_shortlist_no_selected_primary_problem"
+        != "no_active_shortlist_after_rsna_supervision_semantics_rejection"
         or problem_selection["shortlisted_candidate"]
-        != "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
-        or problem_selection["candidate_dataset"]
-        != "rsna_ica_2025_controlled_access"
-        or problem_selection["candidate_estimand"]
-        != "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_observed_annotation_and_selection_operators"
+        != "none"
+        or problem_selection["candidate_dataset"] != "none"
+        or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "not_found_in_bounded_introai9_name_audit_and_no_kaggle_credential"
+        != "not_applicable_without_an_active_candidate"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -171,21 +170,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "user_authorized_access_then_cpu_read_only_asset_and_task_unit_audit"
+        != "fresh_problem_level_candidate_audit_without_method_gpu_or_outer_test"
         or problem_selection["audit_document"]
-        != "docs/problem-candidate-audit-2026-08-09.md"
+        != "docs/rsna-supervision-semantics-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
-        != "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
+        != "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
     ):
         raise ProtocolError(
-            "The lesion-set candidate must remain access-blocked, method-unselected, "
-            "GPU-disabled, and non-submission until a separately registered asset audit."
+            "The no-active-problem boundary must remain method-unselected, GPU-disabled, "
+            "and non-submission after the RSNA supervision-semantics rejection."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
         "geometry_boundary_condition_shape_response_operator",
         "cross_protocol_4d_flow_posterior_prediction",
+        "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -214,7 +214,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or substitution_screen["payload_accessed"] is not False
         or substitution_screen["method_or_gpu_authorized"] is not False
         or substitution_screen["decision"]
-        != "no_screened_alternative_replaces_rsna_for_the_annotation_selection_aware_study_level_lesion_set_task"
+        != "screened_alternatives_did_not_replace_rsna_and_do_not_rescue_the_rejected_rsna_candidate"
         or set(substitution_screen["candidate_ids"])
         != {"cada_2020", "adam_2020", "intra_2020", "topcow_2024"}
     ):
@@ -222,7 +222,60 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The source-only dataset substitution screen must preserve its no-payload, "
             "no-method decision and all four audited alternatives."
         )
-    checks.append("access-blocked problem-selection boundary")
+    semantics_audit = problem_selection["rsna_supervision_semantics_red_team"]
+    _require_keys(
+        semantics_audit,
+        [
+            "status",
+            "audit_document",
+            "payload_accessed",
+            "anonymous_s3_listing_http_status",
+            "official_wiki_status",
+            "first_place_repository_commit",
+            "second_place_preprint",
+            "training_series_reported_by_second_place",
+            "provided_vessel_mask_cases_reported_by_second_place",
+            "provided_segmentation_semantics",
+            "aneurysm_supervision_semantics",
+            "second_place_aneurysm_masks",
+            "mixed_granularity_lesion_annotation_selection_cohort_supported",
+            "method_or_gpu_authorized",
+            "decision",
+        ],
+        "problem_selection.rsna_supervision_semantics_red_team",
+    )
+    if (
+        semantics_audit["status"] != "completed_public_primary_sources_no_payload"
+        or semantics_audit["audit_document"]
+        != "docs/rsna-supervision-semantics-audit-2026-08-09.md"
+        or semantics_audit["payload_accessed"] is not False
+        or semantics_audit["anonymous_s3_listing_http_status"] != 403
+        or semantics_audit["official_wiki_status"] != "coming_soon"
+        or semantics_audit["first_place_repository_commit"]
+        != "e1dcdf0058e1e0d0044d8053e92243b4b4794555"
+        or semantics_audit["second_place_preprint"] != "arxiv_2606.26706v1"
+        or semantics_audit["training_series_reported_by_second_place"] != 4348
+        or semantics_audit["provided_vessel_mask_cases_reported_by_second_place"]
+        != 178
+        or semantics_audit["provided_segmentation_semantics"]
+        != "thirteen_class_circle_of_willis_vessel_anatomy_not_aneurysm_extent"
+        or semantics_audit["aneurysm_supervision_semantics"]
+        != "center_points_for_all_annotated_series_with_presence_and_territory_labels_no_official_voxel_aneurysm_masks"
+        or semantics_audit["second_place_aneurysm_masks"]
+        != "author_derived_from_points_pseudo_labels_and_manual_correction_not_official_mixed_granularity_annotations"
+        or semantics_audit[
+            "mixed_granularity_lesion_annotation_selection_cohort_supported"
+        ]
+        is not False
+        or semantics_audit["method_or_gpu_authorized"] is not False
+        or semantics_audit["decision"]
+        != "reject_annotation_selection_aware_mixed_granularity_lesion_set_candidate"
+    ):
+        raise ProtocolError(
+            "The RSNA supervision-semantics audit must preserve the vessel-mask/"
+            "aneurysm-point distinction, no-payload boundary, and candidate rejection."
+        )
+    checks.append("no-active-problem and supervision-semantics boundary")
 
     venue = protocol["venue"]
     _require_keys(
@@ -465,13 +518,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"]
-        != "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
+        != "unselected"
         or task["active_candidate_status"]
-        != "conditional_shortlist_access_unmet_task_unit_and_annotation_selection_unaudited_method_unselected"
-        or task["candidate_primary_estimand"]
-        != "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_observed_annotation_and_selection_operators"
-        or task["candidate_secondary_estimand"]
-        != "lesion_localization_and_candidate_burden_under_cross_granularity_coherence"
+        != "none_after_rsna_supervision_semantics_rejection"
+        or task["candidate_primary_estimand"] != "unselected"
+        or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -599,13 +650,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         rsna_ica.get("field_provenance") != "none"
         or rsna_ica.get("split_unit") != "patient"
         or rsna_ica.get("status")
-        != "not_staged_task_unit_unaudited_no_method_or_gpu_authorization"
+        != "controlled_access_not_staged_supervision_semantics_audited_from_public_sources_no_active_method_or_gpu"
         or rsna_ica.get("license_boundary")
         != "controlled_noncommercial_access_terms_require_user_acceptance_no_redistribution"
     ):
         raise ProtocolError(
-            "RSNA-ICA must remain controlled-access, patient-split, unstaged, and "
-            "method/GPU-disabled until user-authorized access and a separate audit."
+            "RSNA-ICA must remain controlled-access, patient-split, unstaged, "
+            "method/GPU-disabled, and rejected for the mixed-granularity shortlist."
         )
     checks.append("dataset provenance and split units")
 

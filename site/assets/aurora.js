@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "병변 집합을 study presence로 projection합니다.",
-      connector: "infer S",
-      title: "Unordered lesion set",
-      copy: "Unknown lesion count, 3D extent, territory and annotation-selection mechanism",
+      description: "공개 1·2위 자료에서 supervision contract를 확인합니다.",
+      connector: "compare semantics",
+      title: "Anatomy is not lesion extent",
+      copy: "The official segmentation cannot be marginalized as an aneurysm-mask observation",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Point localizer와 territory를 같은 병변 instance에 연결합니다.",
-      connector: "match point",
-      title: "Partially localized lesion set",
-      copy: "Observed points constrain lesions only after their selection rule is audited",
+      description: "Vessel anatomy mask와 aneurysm point는 서로 다른 target semantics입니다.",
+      connector: "separate targets",
+      title: "Vessel mask ≠ aneurysm mask",
+      copy: "Center points localize aneurysms; CoW masks supervise vascular anatomy",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Dense mask도 별도 task가 아니라 같은 lesion set의 extent 관측입니다.",
-      connector: "match extent",
-      title: "Densely observed lesion set",
-      copy: "Mask geometry refines lesions; missing masks are not assumed random",
+      description: "핵심 전제가 실패했으므로 access·model·GPU 이전에 후보를 기각합니다.",
+      connector: "reject premise",
+      title: "Candidate rejected",
+      copy: "No official mixed-granularity lesion-mask cohort, no active estimand",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

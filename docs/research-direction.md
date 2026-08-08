@@ -5,44 +5,42 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · one conditional problem shortlist · data access prerequisite unmet · method unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · active shortlist 0 · method unselected · submission blocked
 
-## 0. 현재 problem shortlist · annotation-selection-aware lesion set
+## 0. 현재 연구 상태 · active shortlist 0
 
-새 방법을 정하기 전의 cold audit에서 하나의 조건부 후보만 남겼다.
+직전 cold audit에서 조건부로 남긴 RSNA annotation-selection-aware
+mixed-granularity lesion-set 후보는 후속 supervision-semantics red team에서
+기각했다. 기각 사유는 data access 부재가 아니라 **공식 supervision의 의미가
+후보의 latent-target 전제와 다르기 때문**이다.
 
-> Multisite CT/MR angiography의 study label, 13개 vascular-territory label,
-> point localizer와 일부 segmentation을 서로 독립적인 target이 아니라 같은
-> 잠재 aneurysm lesion set의 서로 다른 annotation projection으로 학습할 수
-> 있는가?
+공개된 1위 구현 exact commit
+`e1dcdf0058e1e0d0044d8053e92243b4b4794555`에서
+`segmentations/{uid}_cowseg.nii`는 background와 13개 Circle-of-Willis
+혈관 해부구조 class다. 2위 report `arXiv:2606.26706v1`은 4,348 training
+series 중 178건에 이 vessel mask가 있고, aneurysm center point는 annotated
+series 전체에 있으며 공식 voxel-level aneurysm mask는 없다고 설명한다.
+저자들의 aneurysm mask는 point box, pseudo-label과 manual correction으로
+파생한 training target이다.
 
-적용 asset 후보는 controlled-access RSNA-ICA 2025다. 현재 알려진
-`introai9` 경로에는 archive가 없고 Kaggle credential도 확인되지 않았으므로
-실제 task unit, label mapping, annotation-selection mechanism과 split
-viability는 감사되지 않았다. 사용자가
-공식 약관을 수락해 private asset을 제공하기 전에는 config, architecture,
-training 또는 GPU job을 만들지 않는다.
+따라서 presence, territory, point와 “일부 official aneurysm mask”를 하나의
+lesion set에서 유도하고 mask-assignment mechanism을 추정한다는 estimand는
+성립하지 않는다. Vessel anatomy mask와 lesion point는 서로 다른 target
+semantics이지, 같은 lesion annotation의 관측 granularity가 아니다. Access,
+추가 architecture 또는 GPU 결과로 이 논리적 결함을 복구하지 않는다.
 
-이 후보의 잠재적 정체성은 14개 독립 binary classifier나 또 하나의 3D
-segmentation model이 아니다. 하나의 순서 없는 latent lesion set을 두고
-presence, territory, point와 mask를 annotation operator로 주변화하여
-cross-granularity contradiction과 candidates-per-study burden을 함께 평가하는
-문제다. 그러나 latent structured-output weak detection은 NeurIPS 2010부터,
-mixed-supervision detection·medical segmentation과 partial-label learning도
-직접 존재한다. Set prediction, vessel graph, anatomy prompt와 conformal/FDR도
-선행 구성요소다. 따라서 실제 label-generation뿐 아니라 어떤 study에 어떤
-annotation granularity가 선택됐는지의 mechanism을 분리하고 non-random
-selection에서 식별 조건 또는 sensitivity bound를 주는 새로운 tractable
-set likelihood/보장, strong challenge baseline
-대비 lesion localization과 coherence의 동시 개선, calibration-supported
-reading-burden 개선이 모두 있어야만 contribution으로 승격한다.
+이 red team은 image/annotation payload를 읽지 않았다. Official registry는
+controlled access, anonymous S3 listing은 HTTP 403, official wiki는
+`Coming soon`이었다. 이는 data absence 증명이 아니라 no-payload boundary다.
+상세 근거는
+[`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)에
+고정한다.
 
-Longitudinal growth는 공개 cohort의 dense longitudinal annotation 부족과 직접
-2026 경쟁 연구 때문에, geometry×BC shape response는 Shape-DINO와 geometric
-operator 계보 때문에 기각했다. 상세 계보, L0 access boundary와 단계별
-실험안은 [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
-고정한다. 현재 모델은 GNN도 lesion-set network도 아니며 GPU 실험은 돌고
-있지 않다.
+현재 허용된 다음 단계는 fresh problem-level candidate audit다. 각 후보는
+데이터 의미·실제 접근성, 식별 가능한 estimand, direct prior와의 분명한 gap,
+patient-level split, ISBI biomedical-imaging relevance, strong baseline과
+confirmatory 규모를 architecture보다 먼저 통과해야 한다. 현재 모델은
+GNN도 lesion-set network도 아니며 GPU 실험은 돌고 있지 않다.
 
 ### 공개 대안 screen의 판정
 
@@ -53,9 +51,8 @@ raw angiography가 없는 local surface-segment dataset이고 TopCoW는 aneurysm
 아닌 Circle-of-Willis anatomy label이다. 네 후보의 payload는 읽지 않았으며
 어느 것도 method/GPU 권한을 열지 않는다. CADA·ADAM은 향후 fully supervised
 external stress test, IntrA·TopCoW는 license와 task-unit 확인 뒤 anatomy
-pretraining/control 역할만 가능하다. 그러므로 RSNA shortlist는 유지하지만,
-access가 확보되지 않을 때 이를 더 작은 공개 segmentation 문제로 자동 축소하지
-않고 후보를 폐기해 새 problem-level audit으로 돌아간다.
+pretraining/control 역할만 가능하다. 이 판정은 기각된 RSNA 후보를
+유지하거나 대체하지 않는다.
 
 ## 0-A. 최근 candidate · protocol-indexed posterior prediction · closed
 

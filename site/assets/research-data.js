@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · one annotation-selection-aware lesion-set shortlist · controlled access absent · no CAR assumption · no method/GPU · not submission-ready",
-    requirement: "User-authorized access → L0 task-unit audit → L1 adequacy → strong baselines → only then bounded method development",
+    status: "Target locked · active shortlist 0 after RSNA supervision-semantics rejection · no method/GPU · not submission-ready",
+    requirement: "Fresh problem audit → prospective task adequacy → strong baselines → bounded validation development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "RSNA supervision semantics invalidate the shortlist",
+      copy: "공개 1위 exact implementation과 2위 report에서 제공 segmentation은 aneurysm extent가 아니라 13-class vessel anatomy이고, aneurysm supervision은 point/presence/territory임을 확인했다. 공식 mixed-granularity lesion-mask selection cohort라는 전제가 성립하지 않는다.",
+      status: "Candidate rejected · payload 0 · method/GPU/outer test 0",
+      url: "../docs/rsna-supervision-semantics-audit-2026-08-09.md"
+    },
     {
       year: "2025–26",
       title: "RSNA-ICA challenge baselines",
@@ -17,7 +24,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2020–25",
       title: "Dataset substitution screen",
-      copy: "CADA·ADAM은 fully supervised registered challenge, IntrA는 raw angiography 없는 surface segment, TopCoW는 aneurysm이 아닌 vascular anatomy dataset이다. 강한 external/pretraining control은 되지만 RSNA의 annotation-selection estimand를 대체하지 않는다.",
+      copy: "CADA·ADAM은 fully supervised registered challenge, IntrA는 raw angiography 없는 surface segment, TopCoW는 aneurysm이 아닌 vascular anatomy dataset이다. 강한 external/pretraining control은 되지만 기각된 RSNA annotation-selection estimand를 대체하거나 구제하지 않는다.",
       status: "Primary-source metadata only · payload 0 · no method/GPU authorization",
       url: "https://cada.grand-challenge.org/Dataset/"
     },
@@ -142,20 +149,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Prediction unit", "Study + independent location labels", "ROI/voxel + 26-class multitask", "Anatomy graph-guided candidates", "One unordered latent lesion set"],
-    ["Annotation use", "Presence/location supervision", "Localization + segmentation multitask", "Vessel tree/topology prior", "Presence·territory·point·mask as projections"],
-    ["Selection process", "Usually implicit", "Task-specific sampling", "Usually implicit", "Must audit who receives point/mask labels; no CAR assumption"],
-    ["Consistency", "Not structurally enforced", "Shared backbone only", "Anatomical compatibility", "Cross-granularity probability coherence required"],
-    ["Decision endpoint", "AUROC/AUPRC", "Detection/localization score", "False-positive reduction", "Lesion FROC plus candidates per study"],
-    ["Already occupied", "Challenge formulation", "Strong public pipeline", "Graph/anatomy/topology modules", "Only the annotation-operator task is shortlisted"],
-    ["Current evidence", "Published/public", "Published/public", "Published/preprint", "Access absent · task unit unaudited · no method/GPU"]
+    ["Prediction unit", "Study + independent location labels", "ROI/voxel + 26-class multitask", "Anatomy graph-guided candidates", "Historical latent lesion-set hypothesis"],
+    ["Annotation use", "Presence/location supervision", "Point-derived localization + vessel segmentation", "Vessel tree/topology prior", "Incorrectly treated vessel mask as lesion extent"],
+    ["Selection process", "Usually implicit", "Author-derived pseudo targets", "Usually implicit", "Not applicable: official lesion-mask subset does not exist"],
+    ["Consistency", "Not structurally enforced", "Shared backbone only", "Anatomical compatibility", "Proposed coherence target invalidated"],
+    ["Decision endpoint", "AUROC/AUPRC", "Detection/localization score", "False-positive reduction", "No active endpoint"],
+    ["Already occupied", "Challenge formulation", "Strong public pipeline", "Graph/anatomy/topology modules", "Rejected, not shortlisted"],
+    ["Current evidence", "Published/public", "Published/public", "Published/preprint", "Public-source semantics audit · payload 0 · no method/GPU"]
   ],
   gates: [
     {
-      id: "L0",
-      title: "Is the lesion-set task auditable at patient/study level?",
-      copy: "Controlled-access RSNA-ICA에서 version/terms/checksum, patient–study–series–site–modality key, lesion cardinality, 13 territory label, localizer/segmentation provenance, annotation assignment·positivity와 patient/site split viability를 CPU/read-only로 먼저 감사한다. Coarsening-at-random은 가정하지 않는다.",
-      state: "Conditional shortlist · asset not staged · access prerequisite unmet · method/GPU blocked",
+      id: "P0",
+      title: "Is there a defensible biomedical-imaging problem?",
+      copy: "후보별 데이터 semantics와 access, 식별 가능한 estimand, direct-prior gap, patient-level split, ISBI relevance와 confirmatory 규모를 method보다 먼저 감사한다. 하나가 선택되기 전에는 executable config를 만들지 않는다.",
+      state: "Active shortlist 0 · fresh problem audit required · method/GPU/outer test blocked",
       blocking: true
     },
     {
@@ -211,8 +218,8 @@ window.AURORA_DATA = Object.freeze({
   datasets: [
     {
       name: "RSNA-ICA 2025 · controlled access",
-      role: "conditional L0 candidate for annotation-selection-aware anatomy-structured lesion-set inference",
-      provenance: "Official description: >4,000 CT/MR scans · 18 institutions · 13 locations · not staged/task unit and selection mechanism unaudited · no redistribution"
+      role: "rejected for the mixed-granularity selection task; possible future challenge benchmark only after a new task audit",
+      provenance: "Official >4,000 CT/MR scans · second-place report 4,348 series/178 13-class vessel masks · aneurysm points, no official voxel lesion mask · controlled/not staged/no redistribution"
     },
     {
       name: "CADA 2020 · registration required",
@@ -276,6 +283,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "RSNA supervision semantics reject the only shortlist",
+      copy: "Official registry/wiki, first-place exact commit e1dcdf00… and second-place arXiv:2606.26706v1 show that the provided segmentation is 13-class Circle-of-Willis anatomy, not aneurysm extent. Aneurysm supervision is point/presence/territory and author-derived voxel targets are not official mixed-granularity labels. The selection-aware latent lesion-set estimand is therefore rejected before payload access. Active shortlist is 0; method, GPU, outer test and submission identity remain closed.",
+      files: ["docs/rsna-supervision-semantics-audit-2026-08-09.md", "docs/problem-candidate-audit-2026-08-09.md", "docs/literature-lineage.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

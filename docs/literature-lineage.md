@@ -5,11 +5,27 @@
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
 
-## 0. 현재 lesion-set shortlist의 직접 계보
+## 0. 최신 red team · RSNA lesion-set 후보 기각
 
 RSNA-ICA 2025는 18개 기관의 multisite/multimodal angiography와 13개
 aneurysm location task를 제공했고, 상위권 해법은 이미 vessel segmentation,
 tri-axial ROI classification과 26-class multitask 3D nnU-Net을 결합했다.
+그러나 더 중요한 것은 **supervision semantics**다. 1위 공개 구현 exact
+commit `e1dcdf0058e1e0d0044d8053e92243b4b4794555`의
+`segmentations/{uid}_cowseg.nii`는 background와 13개 Circle-of-Willis
+vessel class다. 2위 preprint `arXiv:2606.26706v1`은 4,348 training series
+중 178건에 이 vessel mask가 있고, aneurysm center point는 annotated series
+전체에 있으며 official voxel aneurysm mask는 없다고 명시한다. 2위 팀의
+aneurysm mask는 point-derived box, pseudo-label과 manual correction으로 만든
+author-derived target이다.
+
+따라서 이전에 가정한 study presence, territory, point, “일부 official
+aneurysm segmentation”은 하나의 lesion set에 대한 mixed-granularity
+annotation cohort가 아니다. Vessel anatomy mask는 lesion extent의 관측
+projection이 아니며, mask assignment mechanism을 추정하는 selection-aware
+estimand도 성립하지 않는다. 이 후보는 data access를 기다리는 상태가 아니라
+**문제 정의가 반증되어 기각된 상태**다.
+
 AMAP은 anatomy-guided masked autoencoding/domain prompt를, ARAN은 vascular
 centerline graph와 foundation feature의 geometry-gated cross-attention을 직접
 사용했다. Topology-guided uncertainty와 morphological conformal prediction도
@@ -17,25 +33,16 @@ centerline graph와 foundation feature의 geometry-gated cross-attention을 직�
 segmentation uncertainty 또는 conformal set을 붙이는 방향은 독립 novelty가
 아니다.
 
-현재 조건부 gap은 study presence, vascular-territory multi-label, localizer와
-부분 segmentation을 같은 latent lesion set의 annotation operator로 연결했을
-때 **cross-granularity coherence와 candidates-per-study burden을 동시에**
-개선할 수 있는가다. Mixed supervision, point process와 set prediction 일반론도
-선행하므로, 실제 label-generation contract에 맞는 새로운 tractable likelihood
-또는 보장과 strong challenge baseline 대비 양수 결과가 함께 있어야만 gap을
-contribution으로 인정한다. Controlled-access asset의 patient/study/lesion
-mapping은 아직 감사되지 않았다.
-
 더 직접적인 cold search에서 heterogeneous weak annotation을 latent structured
 output으로 두는 formulation은 NeurIPS 2010까지 거슬러 올라가고, NeurIPS
 2021은 image-level과 full box/mask supervision을 섞은 detection을 직접
 다뤘다. CVPR 2019는 medical image classification과 lesion segmentation을
 mixed supervision으로 공동 학습했고, ICML 2024는 partial-label과 unlabeled
 data를 통합적으로 다뤘다. 따라서 annotation projection likelihood 자체도
-novelty가 아니다. 남을 수 있는 이론적 gap은 annotation granularity가
-site/modality/unobserved lesion에 따라 비무작위로 선택될 때의 식별 조건 또는
-sensitivity bound다. 실제 RSNA provenance가 이 문제를 만들지 L0에서 먼저
-반증한다.
+novelty가 아니다. 설령 다른 dataset에서 non-random annotation granularity가
+발견되더라도 selection-aware likelihood, identifiability와 sensitivity
+analysis의 이 계보를 direct prior로 비교해야 한다. 현재 RSNA에는 그 전제
+자체가 없으므로 algorithmic gap도 주장하지 않는다.
 
 - [RSNA-ICA official challenge](https://www.rsna.org/artificial-intelligence/ai-image-challenge/intracranial-aneurysm-detection-ai-challenge)
 - [RSNA-ICA official AWS registry](https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/)
@@ -56,7 +63,8 @@ surface segment를, TopCoW는 aneurysm이 아닌 Circle-of-Willis mask/graph를
 제공한다. 따라서 CADA·ADAM은 fully supervised external controls,
 IntrA·TopCoW는 anatomy pretraining/control 계보다. 어느 것도 non-random
 annotation selection을 가진 multisite study-level lesion-set cohort를 대체하지
-않는다. 이 판정은 official metadata만 사용했고 payload는 읽지 않았다.
+않는다. 더구나 그 RSNA cohort 가정도 후속 semantics audit에서 기각됐다.
+이 판정은 official metadata만 사용했고 payload는 읽지 않았다.
 
 - [CADA official dataset/access](https://cada.grand-challenge.org/Dataset/)
 - [ADAM official data/access](https://adam.isi.uu.nl/data/)

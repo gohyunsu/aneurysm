@@ -1,7 +1,15 @@
-# 2026-08-09 problem-level candidate audit
+# 2026-08-09 problem-level candidate audit · historical, superseded
 
-상태: **one conditional shortlist · access prerequisite unmet · no selected
-method · no GPU authorization · not submission-ready**
+상태: **RSNA candidate rejected by later supervision-semantics audit · active
+shortlist 0 · no selected method · no GPU authorization · not submission-ready**
+
+> **2026-08-09 판정 갱신.** 이 문서가 조건부로 남겼던 RSNA
+> annotation-selection-aware mixed-granularity lesion-set 후보는 같은 날의
+> [supervision-semantics red team](rsna-supervision-semantics-audit-2026-08-09.md)에서
+> 기각됐다. 제공 segmentation은 aneurysm extent가 아니라 13-class
+> Circle-of-Willis 혈관 해부구조이며, 공식 aneurysm supervision은 center
+> point와 presence/territory label이다. 아래 L0–L3는 당시의 prospective
+> reasoning을 보존하는 history일 뿐 실행 가능한 현재 protocol이 아니다.
 
 이 문서는 실패한 BC-operator, Aneumo 3D와 4D-flow 연구선을 다른 이름으로
 되살리기 위한 문서가 아니다. ISBI 2027에 제출할 수 있는 새 문제를
@@ -9,7 +17,7 @@ method · no GPU authorization · not submission-ready**
 archive에서 검증한 수치를 구분하며, 데이터 이용 약관에 대한 동의는
 사용자만 할 수 있다.
 
-## 1. 현재 남은 한 후보
+## 1. 당시 남겼던 후보 · 현재 기각
 
 조건부 shortlist는 **annotation-selection-aware mixed-granularity
 anatomy-structured lesion-set inference**다. 적용 데이터 후보는 controlled-access
@@ -90,12 +98,11 @@ label의 예측이 서로 모순되는지 직접 검사할 수 있다. 동시에
 | [IntrA](https://github.com/intra3d2019/IntrA) | 원 저자 저장소가 103 reconstructed vessel model, 1,694 healthy/215 aneurysm segment와 116 manually annotated aneurysm segment를 공개한다. Raw 2D MRA는 제공하지 않는다. | Local surface segment 단위이고 whole-study negative·lesion cardinality·localizer가 없다. 116개 dense subset의 선택 규칙과 dataset license도 payload 사용 전에 별도 감사가 필요하다. | License 확인 뒤 surface anatomy/part-segmentation pretraining 또는 sanity check |
 | [TopCoW](https://zenodo.org/records/15692630) | CTA/MRA의 Circle-of-Willis mask, ROI와 graph를 공개한다. Main release는 source attribution과 commercial-use permission 조건이 있다. | Aneurysm lesion annotation이 아니다. 공개 external LargeIA/Lausanne 각 20 case도 공식 record상 CoW ROI에 aneurysm이 없는 subset이다. | Anatomy encoder·vessel topology control; lesion-set headline evidence로 사용 금지 |
 
-결론은 “공개 데이터가 없어서 RSNA를 고집한다”가 아니다. CADA·ADAM은 강한
-fully supervised external controls지만 selection-aware estimand를 제공하지 않고,
-IntrA·TopCoW는 input/annotation 단위가 다르다. 따라서 현 residual gap을 유지한
-채 RSNA access를 기다리는 것이 타당하다. Access가 끝내 확보되지 않으면 이
-후보를 작은 공개 segmentation task로 축소하지 않고 **폐기 후 새 problem-level
-audit**으로 돌아간다.
+이 source-only screen의 당시 결론은 RSNA를 더 작은 공개 segmentation
+task로 바꾸지 않는다는 것이었다. 이후 supervision semantics가 핵심 전제를
+반박했으므로 RSNA access를 기다리지 않고 후보를 폐기했다. CADA·ADAM·IntrA·
+TopCoW도 기각된 estimand를 구제하지 않으며, 다음은 fresh problem-level
+audit이다.
 
 ## 3. novelty를 인정하기 위한 최소 조건
 
@@ -124,7 +131,7 @@ Morphological conformal prediction과 medical instance-level FDR control이
 modality shift에서 exchangeability가 깨지면 coverage를 보장했다고 쓰지 않고
 OOD detection/abstention만 평가한다.
 
-## 4. L0 · 접근 전 차단 조건과 asset/task-unit audit
+## 4. Historical L0 · 실행하지 않는 조건부 계획
 
 2026-08-09 현재 `introai9`의 bounded name audit에서 RSNA-ICA archive를 찾지
 못했고 Kaggle credential/CLI도 없다. 이는 데이터가 서버 전체에 없다는
@@ -152,7 +159,7 @@ viability에 대한 prospective L1 기준을 별도 commit으로 등록한다. L
 patient-level linkage 또는 lesion mapping을 복구하지 못하면 이 후보도
 폐기한다.
 
-## 5. access 뒤의 단계적 실험 계획
+## 5. Historical L1–L3 · 실행하지 않는 단계적 계획
 
 ### L1 · method-free task adequacy
 
@@ -200,14 +207,13 @@ Outer-test protocol은 baseline 재현과 development selection이 끝난 exact
 commit에서 고정한다. 실패 뒤 같은 test에 architecture, matching rule,
 threshold 또는 calibration strata를 맞추는 local repair는 금지한다.
 
-## 6. 현재 결론
+## 6. 최종 판정
 
-이 후보는 “fancy한 모델”이 아니라 **감사할 가치가 있는 문제** 하나를 남긴
-상태다. 데이터가 stage되지 않았으므로 현재 모델은 GNN도 set predictor도
-아니며 실험은 돌고 있지 않다. Access와 L0/L1이 통과하고 direct prior art와
-구분되는 algorithmic gap이 남을 때만 이름, architecture, contribution과
-paper identity를 정한다. 그 전의 논문 문구는 hypothesis와 decision record로만
-유지한다.
+이 후보는 **기각됐다**. 이유는 access 부재가 아니라 공식 supervision
+semantics가 latent mixed-granularity lesion-annotation 전제와 맞지 않기
+때문이다. 현재 모델은 GNN도 set predictor도 아니며 active experiment도
+없다. 다음 fresh problem-level audit에서 별도 후보를 고르기 전까지 이
+문서의 방법·metric·L0–L3 계획을 재사용하거나 이름만 바꿔 복원하지 않는다.
 
 ## 7. 직접 확인한 1차 자료
 

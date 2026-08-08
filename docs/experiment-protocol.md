@@ -1,38 +1,38 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.7-draft · 2026-08-09
+버전: 2.8-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
-## L0 · 새 lesion-set candidate의 access prerequisite
+## L0 · active problem 없음
 
-현재 유일한 조건부 shortlist는 RSNA-ICA 2025에서 study presence, vascular
-territory, point localizer와 segmentation을 같은 latent lesion set의 annotation
-operator로 다루고 annotation granularity selection을 별도 감사하는 문제다.
-그러나 controlled-access asset은 `introai9`의
-알려진 경로에 없고 Kaggle credential도 확인되지 않았다. 에이전트는 사용자를
-대신해 약관에 동의하지 않는다.
+현재 active shortlist, primary estimand, method와 headline metric은 모두
+미선정이다. 따라서 executable L0 config, split, threshold, model code, GPU
+job과 outer test는 없다. 다음 허용 작업은 후보별 데이터 의미·접근성,
+식별 가능한 estimand, direct-prior gap, patient-level split, biomedical-
+imaging relevance와 confirmatory 규모를 비교하는 fresh problem-level
+audit이다.
 
-따라서 아직 executable L0 config, split, threshold, model code나 GPU job은
-없다. 사용자 승인 아래 official asset이 private storage에 stage된 뒤 첫
-실행은 CPU/read-only asset/task-unit audit이어야 한다. Version/license와
-checksum, patient–study–series–site–modality key, lesion cardinality, 13 territory
-label, localizer/segmentation mapping, AI-generated annotation provenance,
-annotation assignment rule·positivity, multi-lesion/negative/rare-label 수와
-patient/site outer-split viability를 먼저
-고정한다. 이 mapping이 복구되지 않으면 후보를 종료한다.
+후보 하나가 명시적으로 선택되면 먼저 method-free task adequacy gate를
+별도 version과 commit에 prospective하게 고정한다. Gate 결과 전에는
+architecture search를 열지 않는다. Development는 test를 봉인한 상태에서
+사전에 정한 총 compute, 최대 repair round, 한 round당 단일 attribution
+hypothesis와 selector만 허용한다. 개선된 variant는 기존 실패를 relabel하지
+않고 fresh seed 또는 disjoint split의 prospective re-entry를 거친다.
 
-L0 aggregate 뒤에만 numeric L1 adequacy threshold를 prospective하게 등록한다.
-L1이 양수이면 published challenge baseline 재현과 validation-only method
-development를 순서대로 열 수 있다. Outer test는 baseline과 selector를 exact
-commit에 고정한 뒤에만 생성한다. Headline은 lesion FROC/sensitivity at fixed
-candidates per study와 patient-bootstrap CI이며 AUROC만으로 성공을 판정하지
-않는다. 상세 계약은
-[`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
-있다.
+### L0-R · RSNA supervision-semantics red team · completed/rejected
+
+이전 RSNA lesion-set L0 계획은 실행하지 않는다. 공개 1위 구현 exact commit
+`e1dcdf0058e1e0d0044d8053e92243b4b4794555`과 2위 report
+`arXiv:2606.26706v1`에서 제공 segmentation은 13-class vessel anatomy,
+aneurysm label은 point/presence/territory임을 확인했다. 공식 voxel aneurysm
+mask가 선택적으로 존재한다는 전제가 거짓이므로 annotation-selection-aware
+mixed-granularity lesion-set estimand를 기각했다. Payload, method, GPU와
+outer-test access는 모두 0이다. 상세 record는
+[`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)다.
 
 ### L0-P · source-only dataset substitution screen · completed
 
@@ -40,10 +40,10 @@ candidates per study와 patient-bootstrap CI이며 AUROC만으로 성공을 판�
 비교했다. Payload·image·annotation read는 0이며 데이터 registration이나 약관
 동의도 수행하지 않았다. CADA/ADAM은 fully supervised external control,
 IntrA/TopCoW는 surface/anatomy pretraining control로만 잠재 역할을 제한한다.
-어느 후보도 study-level annotation-selection estimand를 제공하지 않으므로
-RSNA L0를 대체하거나 executable config, method, GPU와 outer test를 열지
-않는다. RSNA access가 끝내 확보되지 않으면 공개 대안으로 task를 축소하지
-않고 shortlist를 폐기한 뒤 별도 problem-level audit을 등록한다.
+어느 후보도 study-level annotation-selection estimand를 제공하지 않는다.
+후속 RSNA semantics audit가 원 후보 자체를 기각했으므로 이 screen은 이를
+대체하거나 구제하지 않으며 executable config, method, GPU와 outer test를
+열지 않는다.
 
 ## 0-A. I0a · paired-protocol 4D-flow asset audit
 
@@ -147,9 +147,10 @@ candidate의 별도 audit이다.
 `docs/isbi-2027-plan.md`가 venue-specific source of truth다.
 
 - 현재 primary problem, headline domain, method와 metric은 미선정이다.
-- RSNA shortlist가 L0/L1을 통과할 경우 lesion-level FROC, fixed-candidate
-  sensitivity, cross-granularity contradiction과 patient-bootstrap CI가 venue
-  evidence ladder의 후보가 된다. 이 역시 L1 뒤 prospective하게 고정한다.
+- Fresh problem audit에서 active 후보를 고른 뒤에만 task-specific primary
+  metric, patient-level resampling unit과 adequacy threshold를 prospective하게
+  고정한다. 기각한 RSNA FROC/cross-granularity plan은 active venue contract가
+  아니다.
 - Exact/nonlinear PDE와 64-case Aneumo는 보존된 sanity/development history이며
   현 submission path가 아니다. 과거 irregular-3D velocity outer-test 요구도
   active headline contract가 아니다.
