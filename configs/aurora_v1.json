@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_isbi_v0_preregistered_unrun_method_unselected",
+    "status": "failed_n1c_isbi_v0_passed_v1_smoke_authorized_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -22,7 +22,8 @@
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
-    "v0_status": "preregistered_unrun",
+    "v0_status": "completed_passed_development_only",
+    "v0_result": "results/aneumo_isbi_v0_20260808.json",
     "v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
     "plan": "docs/isbi-2027-plan.md"
   },
@@ -75,7 +76,10 @@
       "aneumo_velocity_only_protocol_registration_authorized": true,
       "aneumo_confirmatory_3d_headline_authorized": false,
       "aneumo_isbi_v0_config": "configs/aneumo_isbi_v0.json",
-      "aneumo_isbi_v0_status": "preregistered_unrun",
+      "aneumo_isbi_v0_status": "completed_passed_development_only",
+      "aneumo_isbi_v0_source_commit": "0589070063cfaac765e6d6785653880be860e861",
+      "aneumo_isbi_v0_result": "results/aneumo_isbi_v0_20260808.json",
+      "aneumo_isbi_v0_checks": "8_of_8_passed",
       "aneumo_isbi_v0_reads_field_arrays": false,
       "aneumo_missing_inflow_law": "discrete_uniform_known_design_law_not_patient_physiology",
       "aneumo_v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
@@ -94,7 +98,7 @@
       "nonlinear_pde_n1_density_objective_audit_status": "completed_threshold_free_full_joint_engineering_signal",
       "nonlinear_pde_n1_decision_task_audit_status": "completed_missing_nontrivial_sparse2_fixed_winner",
       "nonlinear_pde_n1_missing_operator_pullback_m0_status": "preregistered_validation_only_unrun",
-      "irregular_3d_status": "blocked_after_failed_n1c"
+      "irregular_3d_status": "v1_implementation_smoke_authorized_outer_test_and_headline_blocked"
     },
     "contribution_priority": {
       "primary": [

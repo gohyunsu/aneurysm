@@ -1,8 +1,8 @@
 # ISBI 2027 submission plan
 
 최종 검토일: 2026-08-06 KST  
-상태: **target locked · not submission-ready · V0 preregistered/unrun · M0
-metric unrun**
+상태: **target locked · not submission-ready · V0 passed development-only ·
+V1 contract pending · M0 metric unrun**
 
 ## 1. Venue contract
 
@@ -120,6 +120,12 @@ marker·surface normal·integration mesh가 없으므로 pressure, WSS/OSI와
 mass-conservation endpoint는 실패 항목이 아니라 범위 밖이다. V0의 8개
 check가 모두 통과해도 64-case V1 implementation smoke만 허용하며 outer
 test, headline result와 submission은 계속 닫힌다.
+
+Exact public source `0589070`의 CPU metadata audit은 2026-08-08 8/8 check를
+통과했다. Cache field array와 validation/test field는 읽지 않았다. 공개
+aggregate는 `results/aneumo_isbi_v0_20260808.json`이다. 이 결과로 V1
+contract 등록만 가능하며 expanded/independent outer test 조건은 바뀌지
+않는다.
 
 ### V1 · 3D development eligibility
 

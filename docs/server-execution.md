@@ -316,6 +316,18 @@ field는 읽지 않았다. Velocity tuned-power residual은 0.2112
 template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
 `AURORA_DATA_ROOT`, `AURORA_OUTPUT_ROOT`, `AURORA_SIF`를 제출 시 주입한다.
 
+## 2026-08-08 · ISBI V0 metadata-only audit
+
+- Exact public source: `0589070063cfaac765e6d6785653880be860e861`
+- Config SHA-256: `0c9745e42e84149d5f788a4e4425ab02028267cc9d1e0b4685ec92d7baf43559`
+- Raw result SHA-256: `ec6b50269e929b3b3fad109b239f7c220e22a628222c95b077249656b84ffb50`
+- Runtime: pinned container, Python 3.11.10, NumPy 2.1.2, external
+  `h5py==3.12.1`; CPU metadata-only, no GPU allocation
+- Result: exit 0, 8/8 check pass; cache field arrays and validation/test field
+  were not read
+- Authorization: V1 64-case implementation smoke only. Outer test, headline
+  and submission remain false.
+
 ## 2026-08-03 G1 exploratory result
 
 최종 sensitivity는 public code commit `900fedc`, 5 outer folds × 5 repeats,

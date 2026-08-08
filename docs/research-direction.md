@@ -4,9 +4,9 @@
 
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
-post-N1c audits completed · ISBI V0 asset/task audit preregistered/unrun ·
-M0 missing-only mechanism preregistered/unrun · method unselected · 3D
-headline blocked
+post-N1c audits completed · ISBI V0 passed development-only · V1 contract
+pending · M0 missing-only mechanism preregistered/unrun · method unselected ·
+3D headline blocked
 
 ## 0. 제출 목표와 scope
 
@@ -30,6 +30,13 @@ law는 8개 조건의 discrete-uniform **design law**이며 patient physiology�
 아니다. Boundary marker와 surface normal이 없으므로 WSS/OSI·mass flux는
 추가하지 않는다. 통과해도 V1 implementation smoke만 열리고 method,
 outer test와 논문 claim은 열리지 않는다.
+
+Exact public source `0589070`의 V0는 8/8 check를 통과했다. Registered cache
+SHA와 64 case/32 family/8 condition/4,096 node metadata가 일치했고, 기존
+train-only velocity scaling CI lower 0.20013이 0.15 기준을 유지했다. 새
+field array 및 validation/test field read는 없었다. 따라서 V1의 bounded
+64-case implementation smoke 등록만 허용한다. 이 수치를 모델 성능이나
+contribution으로 세지 않는다.
 
 ## 1. 현재 판정
 

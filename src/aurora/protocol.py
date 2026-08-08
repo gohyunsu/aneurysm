@@ -129,6 +129,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "m0_alone_may_authorize_submission",
             "v0_task_audit_config",
             "v0_status",
+            "v0_result",
             "v0_pass_authorizes",
             "plan",
         ],
@@ -152,7 +153,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
-        or venue["v0_status"] != "preregistered_unrun"
+        or venue["v0_status"] != "completed_passed_development_only"
+        or venue["v0_result"] != "results/aneumo_isbi_v0_20260808.json"
         or venue["v0_pass_authorizes"]
         != "v1_64_case_implementation_smoke_only"
         or venue["plan"] != "docs/isbi-2027-plan.md"

@@ -1,0 +1,80 @@
+{
+  "schema_version": "aurora.public_aggregate_result.v1",
+  "result_id": "aneumo_isbi_v0_20260808",
+  "experiment_id": "aneumo_isbi_v0_asset_task_translation_audit",
+  "evidence_status": "prospective_metadata_only_task_audit_completed_passed_development_only",
+  "source_commit": "0589070063cfaac765e6d6785653880be860e861",
+  "source_config_sha256": "0c9745e42e84149d5f788a4e4425ab02028267cc9d1e0b4685ec92d7baf43559",
+  "source_metrics_sha256": "ec6b50269e929b3b3fad109b239f7c220e22a628222c95b077249656b84ffb50",
+  "execution": {
+    "allocation": "cpu_metadata_only_no_gpu",
+    "exit_status": 0,
+    "completed_kst": "2026-08-08T13:13:58+09:00",
+    "source_commit_ci": "success",
+    "source_commit_pages_deployment": "success"
+  },
+  "environment": {
+    "container": "torch251-cuda118-pinned.sif",
+    "python": "3.11.10",
+    "numpy": "2.1.2",
+    "h5py": "3.12.1"
+  },
+  "dataset": {
+    "name": "Aneumo selective paired-condition development cache",
+    "cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+    "archives": 20,
+    "base_families": 32,
+    "cases": 64,
+    "conditions_per_case": 8,
+    "nodes_per_case": 4096,
+    "members_crc_verified_at_staging": 512,
+    "split_family_counts": {
+      "train": 20,
+      "validation": 6,
+      "test": 6
+    },
+    "cache_field_arrays_read_by_v0": false,
+    "validation_or_test_fields_read": false,
+    "marker_or_surface_arrays_present": false
+  },
+  "estimand": {
+    "observed_condition": "scalar_steady_mass_flow_kg_s",
+    "missing_condition_law": "discrete_uniform_over_eight_registered_mass_flows",
+    "law_is_known_experimental_design": true,
+    "law_is_patient_population_physiology": false,
+    "primary_output": "three_component_velocity_at_selected_internal_nodes",
+    "pressure_included": false,
+    "wss_osi_or_surface_functionals_included": false,
+    "mass_conservation_endpoint_included": false
+  },
+  "checks": {
+    "cache_and_dependency_integrity": true,
+    "family_disjoint_split_integrity": true,
+    "scalar_mass_flow_contract": true,
+    "velocity_tensor_metadata_contract": true,
+    "no_validation_or_test_field_access": true,
+    "velocity_response_nontrivial_beyond_global_power": true,
+    "missing_condition_law_semantically_identified": true,
+    "unsupported_surface_and_pressure_endpoints_excluded": true
+  },
+  "passed_checks": 8,
+  "total_checks": 8,
+  "nontriviality": {
+    "velocity_tuned_power_residual_ci95_lower": 0.20013078657046568,
+    "registered_minimum": 0.15,
+    "velocity_eligible": true,
+    "pressure_eligible": false
+  },
+  "scientific_verdict": "the_frozen_development_asset_identifies_a_velocity_only_design_law_missing_inflow_task",
+  "decision": {
+    "audit_decision": "v1_64_case_implementation_smoke_only",
+    "v1_64_case_implementation_smoke_authorized": true,
+    "outer_test_authorized": false,
+    "headline_result_authorized": false,
+    "method_novelty_established": false,
+    "isbi_submission_authorized": false,
+    "patient_specific_inflow_claim_allowed": false,
+    "next_step": "Prospectively register one bounded V1 velocity-only implementation smoke with train/validation selection and no test-field access."
+  },
+  "interpretation": "V0 establishes asset integrity and task semantics, not learned performance. Passing all checks permits only a bounded development smoke; an expanded or independent family-disjoint 3D outer test remains mandatory for ISBI."
+}

@@ -3,7 +3,7 @@
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V0
-asset/task-translation audit 사전등록 상태를 반영했다.
+asset/task-translation audit 8/8 pass 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -19,10 +19,12 @@ asset/task-translation audit 사전등록 상태를 반영했다.
 - 실행된 exact/nonlinear architecture는 MLP lifted operator다. GNN+token+
   continuous-query 구조는 3D target specification이며 아직 구현·검증된
   현재 모델이 아니다.
-- 현재 다음 실행은 `configs/aneumo_isbi_v0.json`의 metadata-only V0다.
+- Exact public source `0589070`의 metadata-only V0는 8/8 check를 통과했다.
   64-case cache, family split, scalar mass-flow design law와 기존 train-only
-  scaling aggregate를 8개 check로 감사한다. V0는 field array를 새로 읽지
-  않으며 통과해도 64-case V1 implementation smoke만 허용한다.
+  scaling aggregate를 감사했고 새 field array와 validation/test field를
+  읽지 않았다. 이는 64-case V1 implementation smoke만 허용하며 learned
+  performance, outer test, headline, novelty 또는 submission 증거가 아니다.
+  공개 aggregate는 `results/aneumo_isbi_v0_20260808.json`이다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면

@@ -23,6 +23,13 @@
 mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 확인한 run만 confirmatory로 승격한다.
 
+현재 ISBI task-translation 결과:
+
+- `aneumo_isbi_v0_20260808.json`: exact source `0589070`의 metadata-only
+  8/8 pass. 새 field array와 validation/test field를 읽지 않았으며 V1
+  64-case implementation smoke만 허용한다. Learned performance, outer
+  test, headline과 submission evidence가 아니다.
+
 현재 controlled-PDE 결과:
 
 - `controlled_pde_g1_attempt2_20260803.json`: frozen G1 실패

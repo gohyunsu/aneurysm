@@ -1,6 +1,6 @@
 # AURORA v2 모델 명세
 
-상태: ISBI 2027 target locked · N1c failed · ISBI V0 preregistered/unrun ·
+상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
 missing task retained · M0 candidate-measurement–solution pullback
 preregistered/unrun · sparse-2 adaptive task removed · 3D GNN unimplemented ·
 method unselected
@@ -23,6 +23,11 @@ cache의 metadata와 기존 train-only scaling aggregate만 검사해, 계획된
 design law에 대한 marginalization이다. Mesh marker·surface normal이 없는
 상태에서 surface physics head를 꾸며 넣지 않으며, V0 통과 전에는 GNN을
 구현하지 않는다.
+
+V0는 exact public source `0589070`에서 8/8을 통과했다. 따라서 다음
+prospective V1에서만 이 입력·출력 계약을 실제 graph/point operator로
+구현할 수 있다. V1 전에는 architecture, normalization, stopping rule과
+필수 baseline을 결과에 맞춰 고르지 않는다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

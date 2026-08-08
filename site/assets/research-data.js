@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V0 preregistered · not submission-ready",
+    status: "Target locked · V0 passed development-only · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "ISBI headline에는 irregular-3D aneurysm velocity outer test가 필수다. 먼저 V0가 cache·family split·scalar-inflow design law·velocity-only scope를 field-array read 없이 감사한다. 통과해도 64-case 구현 smoke만 열린다.",
-      state: "V0 preregistered/unrun · blocking ISBI submission",
+      copy: "V0는 exact source 0589070에서 cache·family split·scalar-inflow design law·velocity-only scope 8/8을 field-array read 없이 통과했다. 이는 64-case V1 구현 smoke만 열며 irregular-3D outer test와 ISBI headline은 계속 필수다.",
+      state: "V0 8/8 passed · V1 contract pending · submission blocked",
       blocking: true
     }
   ],
@@ -141,7 +141,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "64 cases/512 members SHA verified · V0 metadata-only audit preregistered"
+      provenance: "64 cases/512 members SHA verified · V0 metadata-only audit 8/8 passed"
     },
     {
       name: "AneuG-Flow",
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "result",
+      title: "V0 passes 8/8 but authorizes only the development smoke",
+      copy: "Exact source 0589070의 pinned-container CPU audit이 cache와 dependency SHA, 32-family split, 8개 mass flow, tensor metadata, train-only scaling evidence, design-law semantics와 endpoint exclusions를 모두 통과했다. 새 field array와 validation/test field는 읽지 않았다. Velocity scaling CI lower는 0.20013으로 frozen 0.15 기준을 유지했고 pressure는 제외 상태다. 결과는 V1 64-case implementation smoke만 열며 method, outer test, headline과 submission은 열지 않는다.",
+      files: ["results/aneumo_isbi_v0_20260808.json", "AGENTS.md", "README.md", "docs/isbi-2027-plan.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "protocol",

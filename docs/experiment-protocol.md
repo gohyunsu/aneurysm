@@ -42,6 +42,13 @@ outer-test access, headline, patient-specific inflow 해석과 ISBI submission�
 모두 false다. Failure 뒤 threshold를 고치지 않고 이 asset의 missing-inflow
 distribution branch를 중단해 새 dataset/task identity를 별도로 검토한다.
 
+**Outcome · 2026-08-08.** Exact source `0589070`, config SHA
+`0c9745e42e84149d5f788a4e4425ab02028267cc9d1e0b4685ec92d7baf43559`의
+CPU metadata audit은 exit 0, 8/8 pass였다. Raw result SHA는
+`ec6b50269e929b3fad109b239f7c220e22a628222c95b077249656b84ffb50`다.
+새 cache field array와 validation/test field는 읽지 않았다. V1 smoke
+등록만 허용하며 나머지 authorization은 false로 유지한다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

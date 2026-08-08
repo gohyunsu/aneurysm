@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V0 passes all checks without opening the headline
+
+- Exact public source `0589070`, config SHA
+  `0c9745e42e84149d5f788a4e4425ab02028267cc9d1e0b4685ec92d7baf43559`의
+  pinned-container CPU audit이 exit 0으로 완료됐다. Raw result SHA는
+  `ec6b50269e929b3b3fad109b239f7c220e22a628222c95b077249656b84ffb50`다.
+- Cache/dependency integrity, family split, scalar mass-flow contract, tensor
+  metadata, field-access lock, velocity nontriviality, design-law semantics와
+  unsupported endpoint exclusion이 8/8을 통과했다.
+- V0는 새 field array와 validation/test field를 읽지 않았다. Velocity
+  tuned-scaling residual CI lower는 0.20013으로 frozen 0.15 기준을 넘었고
+  pressure는 계속 제외한다.
+- 판정은 `v1_64_case_implementation_smoke_only`다. Learned performance,
+  method novelty, outer test, headline과 ISBI submission authorization은
+  모두 false다. 공개 aggregate는
+  `results/aneumo_isbi_v0_20260808.json`이다.
+
 ## 2026-08-08 · ISBI V0 fixes the 3D task before model implementation
 
 ### Prospective asset and estimand gate

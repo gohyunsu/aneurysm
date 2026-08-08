@@ -42,6 +42,12 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "3D evidence"):
             validate_protocol(candidate)
 
+    def test_v0_pass_must_retain_public_result(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["v0_result"] = "results/missing.json"
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
+
     def test_aneux_cannot_be_real_cfd(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         aneux = next(item for item in candidate["datasets"] if item["name"] == "aneux")
