@@ -4,8 +4,8 @@
 
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
-post-N1c audits completed · ISBI V0 passed development-only · V1 backbone
-smoke preregistered/unrun · M0 missing-only mechanism preregistered/unrun · method unselected ·
+post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
+aggregation contract implemented/preregistered but learning unrun · M0 missing-only mechanism preregistered/unrun · method unselected ·
 3D headline blocked
 
 ## 0. 제출 목표와 scope
@@ -47,6 +47,15 @@ scalar coefficient로 velocity vector를 복원해 회전 equivariance를 갖지
 이는 engineering candidate이지 novelty가 아니다. Selector가 다른 baseline을
 고르면 그대로 따른다. V1은 V2나 submission을 허용하지 않는다.
 
+결과 전에 집계 의미도 고정한다. Matching-q point prediction은 같은 family의
+세 seed 평균이고, missing-design-law predictive distribution은 세 seed와
+8개 등록 q의 Cartesian product인 24개 component다. Ensemble metric은
+selector에 쓰지 않고 uncertainty separation claim도 지지하지 않는다. 모든
+checkpoint를 validation에서 replay해 저장 metric과 (10^{-5}) 안에서
+일치시킨다. Same-case power 1.075 control은 true validation q=0.0025 field를
+anchor로 쓰므로 response-only oracle이며 reconstruction baseline, selector,
+gate가 아니다. Metric 집계는 case가 아니라 base-family를 먼저 평균한다.
+
 첫 exact source `b8ce721` model contract는 8/9였고 parameter count
 `[357603,374979,384582,422114]`의 relative range 15.283%가 frozen 15%를
 0.283%p 넘었다. Learned metric과 cache field read 전이므로 threshold를
@@ -54,7 +63,8 @@ scalar coefficient로 velocity vector를 복원해 회전 equivariance를 갖지
 새 exact-source contract 전체가 통과하기 전 학습을 제출하지 않는다.
 Correction source `a8b0042`는 model contract 9/9와 전체 168/168을
 dependency-complete container에서 통과했다. 따라서 code-level 실행 자격은
-회복됐지만 learned field metric은 여전히 unrun이며, 서버 접근 확인 전에는
+회복됐지만 learned field metric은 여전히 unrun이다. `introai9`의 public-key
+SSH와 PBS client는 확인했지만 scheduler GPU smoke와 동일 cache SHA 검증 전에는
 GPU array를 제출하지 않는다.
 
 ## 1. 현재 판정

@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V0 passed · V1 preregistered/unrun · not submission-ready",
+    status: "Target locked · V0 passed · V1 code/aggregation frozen, learning unrun · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V0는 8/8을 통과했다. V1은 q-PointNet, kNN-MGN, DeltaPhi graph와 frame-free anchor-token equivariant operator를 동일 validation-only budget으로 비교하도록 고정됐다. Test field, outer test와 ISBI headline은 계속 닫혀 있다.",
-      state: "V0 passed · V1 preregistered/unrun · submission blocked",
+      copy: "V0는 8/8을 통과했다. V1은 q-PointNet, kNN-MGN, DeltaPhi graph와 frame-free anchor-token equivariant operator를 동일 validation-only budget으로 비교하도록 코드와 집계 규칙까지 고정됐다. 세 seed×8 q의 24-component mixture는 report-only이고 selector는 per-seed metric만 쓴다. Test field, outer test와 ISBI headline은 계속 닫혀 있다.",
+      state: "V0 passed · V1 executable but learning unrun · submission blocked",
       blocking: true
     }
   ],
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "protocol",
+      title: "V1 freezes ensemble, oracle, replay, selector and gate before learning",
+      copy: "학습 output을 보기 전에 matching-q three-seed mean과 seed×8 q의 24-component missing mixture를 분리했다. True validation q=0.0025 field를 쓰는 power control은 response-only oracle라 selection/gate에서 제외한다. 12개 checkpoint를 validation에서 1e-5 tolerance로 replay한 뒤 per-seed response L2, full-q L2, energy, parameter 수의 사전등록 순서로만 backbone을 고른다. 모든 metric은 base family를 먼저 평균하고 test field는 읽지 않는다.",
+      files: ["configs/aneumo_isbi_v1.json", "src/aurora/aneumo_isbi_v1.py", "experiments/aggregate_aneumo_isbi_v1.py", "cluster/pbs_gpu_smoke.pbs", "cluster/pbs_aneumo_isbi_v1_aggregate.pbs", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/server-execution.md", "docs/isbi-2027-plan.md", "configs/aurora_v1.json", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "implementation",

@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_v0_passed_v1_preregistered_unrun_method_unselected",
+    "status": "failed_n1c_v0_passed_v1_implemented_learning_unrun_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -26,7 +26,7 @@
     "v0_result": "results/aneumo_isbi_v0_20260808.json",
     "v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
     "v1_backbone_config": "configs/aneumo_isbi_v1.json",
-    "v1_status": "preregistered_validation_only_unrun",
+    "v1_status": "implemented_preregistered_validation_only_learning_unrun",
     "v1_test_access": false,
     "plan": "docs/isbi-2027-plan.md"
   },
@@ -87,7 +87,7 @@
       "aneumo_missing_inflow_law": "discrete_uniform_known_design_law_not_patient_physiology",
       "aneumo_v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
       "aneumo_isbi_v1_config": "configs/aneumo_isbi_v1.json",
-      "aneumo_isbi_v1_status": "preregistered_validation_only_unrun",
+      "aneumo_isbi_v1_status": "implemented_preregistered_validation_only_learning_unrun",
       "aneumo_isbi_v1_model_tasks": 12,
       "aneumo_isbi_v1_test_access": false,
       "aneumo_isbi_v1_contract_status": "a8b0042_dependency_complete_168_of_168_passed_learning_unrun",
@@ -237,7 +237,10 @@
       "protocol_registration_condition": "g1s_completed_and_isbi_v0_passed",
       "headline_activation_condition": "positive_m0_then_expanded_or_independent_v2_outer_test_passed",
       "v1_config": "configs/aneumo_isbi_v1.json",
-      "v1_status": "preregistered_validation_only_unrun",
+      "v1_status": "implemented_preregistered_validation_only_learning_unrun",
+      "v1_ensemble_estimand": "matching_q_three_seed_mean_and_seed_by_eight_q_twenty_four_component_missing_mixture",
+      "v1_aggregate_integrity": "exact_four_by_three_manifest_plus_validation_checkpoint_replay_absolute_tolerance_1e-5",
+      "v1_response_oracle_role": "true_validation_anchor_response_only_report_never_selector_or_gate",
       "v1_test_access": false,
       "headline_authorized": false
     }

@@ -4,6 +4,25 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 freezes complete aggregation semantics before learning
+
+- Matching-q point prediction은 같은 family의 세 seed 평균으로, missing
+  predictive distribution은 seed×8 registered q의 24-component mixture로
+  고정했다. Ensemble metric은 selector에 사용하지 않으며 uncertainty
+  separation claim도 지지하지 않는다.
+- Same-case power 1.075 control은 true validation q=0.0025 field를 사용하는
+  response-only oracle다. Learned reconstruction row, selector와 feasibility
+  gate에서 제외한다.
+- Exact 4 family×3 seed artifact manifest, checkpoint SHA, validation replay
+  absolute tolerance `1e-5`, base-family-first aggregation, per-seed
+  lexicographic selector와 기존 7개 gate를 executable aggregate runner에
+  구현했다. Condition-zero control은 모든 후보에 계산하고 선택 family의 세
+  seed에만 gate를 적용한다.
+- 이 correction은 learned output과 새 cache field를 읽기 전 이뤄졌다. Model,
+  seed, step, loss, scientific threshold와 selector 순서는 바뀌지 않았다.
+- `introai9` public-key SSH와 PBS client는 확인했지만 scheduler GPU smoke,
+  pinned container와 cache SHA가 아직 확인되지 않아 V1 learning은 unrun이다.
+
 ## 2026-08-08 · Corrected V1 source passes 168/168 before learning
 
 - Exact correction `a8b0042f52d008f5085b7f6c16091682cd649917`은

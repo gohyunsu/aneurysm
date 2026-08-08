@@ -27,16 +27,21 @@ train/validation family와 1,024-node development subset에서 q-PointNet,
 kNN-MGN, DeltaPhi graph residual, frame-free anchor-token equivariant
 operator를 세 seed로 비교합니다. Candidate라는 이름에 우선권을 주지 않고
 response L2 → full-q L2 → exact missing energy 순으로 backbone만 고릅니다.
-Test field와 outer-test 권한은 계속 닫혀 있습니다.
+세 seed의 matching-q 평균과 seed×8 q의 24-component missing mixture는
+분리해 집계하고, same-case scaling은 true validation anchor를 쓰는
+response-only oracle라 선택에 사용하지 않습니다. Test field와 outer-test
+권한은 계속 닫혀 있습니다.
 
 ## 현재 모델은 GNN인가?
 
 **현재 실행된 exact/nonlinear 모델은 GNN이 아닙니다.** Context MLP와
 boundary token, lifted spatial decoder로 method gate를 검사했습니다.
-Edge-message GNN + anatomy token + continuous query decoder는 Aneumo
-irregular-3D용 **target specification**이며 아직 학습 구현·검증되지
-않았습니다. 따라서 사이트와 논문에서 이를 “현재 모델” 또는 확정
-contribution이라고 부르지 않습니다.
+V1에는 q-PointNet, kNN-MGN, DeltaPhi graph와 frame-free anchor-token
+candidate가 코드로 구현됐지만 아직 학습 결과는 없습니다. 그보다 큰
+edge-message GNN + anatomy token + continuous-query decoder는 Aneumo
+irregular-3D용 장기 **target specification**입니다. 따라서 어느 쪽도
+사이트와 논문에서 검증된 “현재 모델” 또는 확정 contribution이라고 부르지
+않습니다.
 
 의학·CFD·mesh·GNN 배경이 없는 독자는
 [`site/learn.html`](site/learn.html)에서 11개 장을 순서대로 읽을 수 있습니다.

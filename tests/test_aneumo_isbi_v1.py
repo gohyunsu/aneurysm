@@ -6,9 +6,12 @@ from pathlib import Path
 from aurora.aneumo_isbi_v1 import (
     AneumoISBIV1Error,
     build_model,
+    evaluate_family_ensemble,
+    evaluate_same_case_response_oracle,
     farthest_point_indices,
     knn_indices,
     load_config,
+    select_registered_family,
     validate_config,
 )
 
@@ -40,11 +43,66 @@ class AneumoISBIV1ContractTests(unittest.TestCase):
         with self.assertRaisesRegex(AneumoISBIV1Error, "blocked before M0"):
             validate_config(payload)
 
+    def test_ensemble_estimand_cannot_be_changed(self) -> None:
+        payload = json.loads(CONFIG.read_text(encoding="utf-8"))
+        payload["models"]["deep_ensemble"]["missing_predictive_components"] = 8
+        with self.assertRaisesRegex(AneumoISBIV1Error, "3x8 ensemble"):
+            validate_config(payload)
+
+    def test_response_oracle_cannot_enter_selection(self) -> None:
+        payload = json.loads(CONFIG.read_text(encoding="utf-8"))
+        payload["controls"]["response_only_oracle"][
+            "eligible_for_model_selection_or_gate"
+        ] = True
+        with self.assertRaisesRegex(AneumoISBIV1Error, "response-only"):
+            validate_config(payload)
+
+    def test_selector_is_lexicographic_and_uses_per_seed_metrics(self) -> None:
+        config = load_config(CONFIG)
+        results = []
+        response_by_family = {
+            "q_pointnet": 0.30,
+            "knn_mgn": 0.20,
+            "deltaphi_graph": 0.20,
+            "anchor_token_equivariant": 0.25,
+        }
+        full_by_family = {
+            "q_pointnet": 0.10,
+            "knn_mgn": 0.12,
+            "deltaphi_graph": 0.11,
+            "anchor_token_equivariant": 0.08,
+        }
+        for family_index, family in enumerate(config["models"]["families"]):
+            for seed in config["training"]["seeds"]:
+                results.append(
+                    {
+                        "family": family,
+                        "seed": seed,
+                        "parameter_count": 400_000 + family_index,
+                        "metrics": {
+                            "response_relative_l2": response_by_family[family],
+                            "full_q_relative_l2": full_by_family[family],
+                            "missing_field_energy_score_m_s": 0.01,
+                        },
+                        "condition_zeroing_worsens_full_q_error": True,
+                    }
+                )
+        selection = select_registered_family(config, results)
+        self.assertEqual(selection["selected_family"], "deltaphi_graph")
+        self.assertFalse(selection["uses_ensemble_metrics"])
+        self.assertFalse(selection["uses_response_oracle"])
+
+    def test_selector_rejects_incomplete_factorial(self) -> None:
+        config = load_config(CONFIG)
+        with self.assertRaisesRegex(AneumoISBIV1Error, "exact 4x3"):
+            select_registered_family(config, [])
+
 
 class AneumoISBIV1ModelTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         try:
+            import h5py  # noqa: F401
             import numpy  # noqa: F401
             import torch
         except ImportError as exc:
@@ -127,6 +185,44 @@ class AneumoISBIV1ModelTests(unittest.TestCase):
             float(self.config["models"]["parameter_match_relative_tolerance"]),
             msg=f"parameter counts are not matched: {counts}",
         )
+
+    def test_three_seed_ensemble_has_twenty_four_missing_components(self) -> None:
+        torch = self.torch
+        target = torch.randn(8, 20, 3)
+        prepared = {
+            11: {
+                "base_family": 7,
+                "velocity": target.numpy(),
+            }
+        }
+        predictions = {
+            seed: {11: target + 0.001 * index}
+            for index, seed in enumerate(self.config["training"]["seeds"])
+        }
+        metrics = evaluate_family_ensemble(self.config, prepared, predictions)
+        self.assertEqual(metrics["ensemble_members"], 3)
+        self.assertEqual(metrics["missing_predictive_components"], 24)
+        self.assertFalse(metrics["eligible_for_selector"])
+        self.assertFalse(metrics["supports_uncertainty_separation_claim"])
+
+    def test_same_case_oracle_is_response_only(self) -> None:
+        import numpy as np
+
+        torch = self.torch
+        flows = np.asarray(self.config["task"]["condition_values"])
+        anchor = self.config["controls"]["response_only_oracle"][
+            "anchor_mass_flow_kg_s"
+        ]
+        power = self.config["controls"]["response_only_oracle"]["power"]
+        base = torch.randn(20, 3)
+        target = torch.stack(
+            [base * float((flow / anchor) ** power) for flow in flows], dim=0
+        )
+        prepared = {11: {"base_family": 7, "velocity": target.numpy()}}
+        metrics = evaluate_same_case_response_oracle(self.config, prepared, flows)
+        self.assertLess(metrics["validation_response_relative_l2"], 1e-6)
+        self.assertFalse(metrics["eligible_for_model_selection_or_gate"])
+        self.assertNotIn("full_q_relative_l2", metrics)
 
 
 if __name__ == "__main__":

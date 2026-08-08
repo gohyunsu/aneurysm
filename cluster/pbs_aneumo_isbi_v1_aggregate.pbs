@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#PBS -N aurora_isbi_v1_aggregate
+#PBS -l select=1:ncpus=4:mem=48gb:ngpus=1
+#PBS -l walltime=02:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_CACHE:?set AURORA_CACHE}"
+: "${AURORA_TASK_OUTPUT_ROOT:?set AURORA_TASK_OUTPUT_ROOT}"
+: "${AURORA_AGGREGATE_OUTPUT:?set AURORA_AGGREGATE_OUTPUT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_EXPERIMENT_DEPS:?set AURORA_EXPERIMENT_DEPS}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+
+mkdir -p "$AURORA_AGGREGATE_OUTPUT/tmp"
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_CACHE:/data/aneumo_pilot.h5:ro" \
+  --bind "$AURORA_TASK_OUTPUT_ROOT:/tasks:ro" \
+  --bind "$AURORA_AGGREGATE_OUTPUT:/output" \
+  --bind "$AURORA_EXPERIMENT_DEPS:/experiment-deps:ro" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace/src:/experiment-deps" \
+      PYTHONDONTWRITEBYTECODE=1 TMPDIR="/output/tmp" \
+  python /workspace/experiments/aggregate_aneumo_isbi_v1.py \
+    --config /workspace/configs/aneumo_isbi_v1.json \
+    --root /workspace \
+    --cache /data/aneumo_pilot.h5 \
+    --task-output-root /tasks \
+    --output /output \
+    --git-commit "$AURORA_GIT_COMMIT" \
+    --require-cuda

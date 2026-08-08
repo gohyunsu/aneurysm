@@ -161,7 +161,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["v0_pass_authorizes"]
         != "v1_64_case_implementation_smoke_only"
         or venue["v1_backbone_config"] != "configs/aneumo_isbi_v1.json"
-        or venue["v1_status"] != "preregistered_validation_only_unrun"
+        or venue["v1_status"]
+        != "implemented_preregistered_validation_only_learning_unrun"
         or venue["v1_test_access"] is not False
         or venue["plan"] != "docs/isbi-2027-plan.md"
     ):
@@ -302,6 +303,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "headline_activation_condition",
             "v1_config",
             "v1_status",
+            "v1_ensemble_estimand",
+            "v1_aggregate_integrity",
+            "v1_response_oracle_role",
             "v1_test_access",
             "headline_authorized",
         ],
@@ -331,7 +335,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         irregular_3d["headline_activation_condition"]
         != "positive_m0_then_expanded_or_independent_v2_outer_test_passed"
         or irregular_3d["v1_config"] != "configs/aneumo_isbi_v1.json"
-        or irregular_3d["v1_status"] != "preregistered_validation_only_unrun"
+        or irregular_3d["v1_status"]
+        != "implemented_preregistered_validation_only_learning_unrun"
+        or irregular_3d["v1_ensemble_estimand"]
+        != "matching_q_three_seed_mean_and_seed_by_eight_q_twenty_four_component_missing_mixture"
+        or irregular_3d["v1_aggregate_integrity"]
+        != "exact_four_by_three_manifest_plus_validation_checkpoint_replay_absolute_tolerance_1e-5"
+        or irregular_3d["v1_response_oracle_role"]
+        != "true_validation_anchor_response_only_report_never_selector_or_gate"
         or irregular_3d["v1_test_access"] is not False
         or irregular_3d["headline_authorized"] is not False
     ):

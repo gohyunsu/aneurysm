@@ -1,6 +1,6 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.2-draft · 2026-08-08
+버전: 2.3-draft · 2026-08-08
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -18,8 +18,9 @@
 - 64-case Aneumo cache는 development-only다.
 - Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
   utility는 현재 headline에서 제외한다.
-- 실행된 nonlinear operator는 MLP다. GNN hybrid는 구현 예정 3D
-  specification이며 결과처럼 서술하지 않는다.
+- 실행된 nonlinear operator는 MLP다. V1 point/graph 후보는 구현됐지만
+  학습 결과가 없고, 더 큰 GNN hybrid는 장기 3D specification이다. 어느
+  쪽도 결과처럼 서술하지 않는다.
 - Full paper는 frozen method, five seeds, base-family bootstrap CI,
   strong graph/operator baseline, predeclared qualitative case selection을
   모두 갖춘 경우에만 제출한다.
@@ -66,6 +67,15 @@ full-q L2, exact eight-component missing-field energy, parameter count의
 사전등록 순서다. Same-case q=0.0025 anchor power 1.075 scaling은
 response-only oracle이고 learned reconstruction row처럼 비교하지 않는다.
 
+세 seed ensemble의 point prediction은 matching q별 seed 평균이다. Missing
+predictive distribution은 seed×8 q의 24 component를 같은 질량으로 둔다.
+Ensemble metric과 response-only oracle은 selector에 들어가지 않는다. 12개
+checkpoint는 저장 metric 공개 전 validation에서 replay하며 full-q, response,
+energy, 세 functional coverage/width가 절대 (10^{-5}) 안에서 일치해야 한다.
+모든 scalar/vector metric은 먼저 AneuX base family 안에서 평균한 뒤 여섯
+validation family를 평균한다. Condition-zero negative control은 네 family
+모두 계산하되 feasibility gate에는 최종 선택 family의 세 seed만 사용한다.
+
 Feasibility는 12/12 exit, test-read false, finite metric, validation-only
 checkpoint, selected worst-seed full-q ≤0.35, response ≤0.50, q-zero negative
 control 3/3 악화를 모두 요구한다. 실패 뒤 hidden size, k, step, seed 또는
@@ -84,6 +94,13 @@ Learned metric·cache field read 전 q-PointNet residual block을 16→17로
 9/9와 external `h5py==3.12.1`을 포함한 full repository contract 168/168을
 exit 0으로 통과했다. 이는 V1 learning submission의 code 자격만 확인하며,
 cache field와 learned metric은 아직 읽지 않았다.
+
+**Aggregation completeness correction.** Learned output을 읽기 전에 ensemble,
+same-case oracle, exact 4×3 task manifest, checkpoint replay, selector와 7개
+gate를 executable aggregate runner에 고정했다. 이는 training model, seed,
+step, loss, threshold 또는 selector 순서를 바꾸지 않는 pre-result protocol
+completion이다. 새 exact-source dependency-complete contract가 통과해야 V1
+array를 제출한다.
 
 ## 1. 검증할 가설
 

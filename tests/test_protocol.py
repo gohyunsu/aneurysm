@@ -284,6 +284,14 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "paired-response"):
             validate_protocol(candidate)
 
+    def test_v1_response_oracle_cannot_enter_selection_or_gate(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["model"]["irregular_3d_output_contract"][
+            "v1_response_oracle_role"
+        ] = "learned_reconstruction_selector"
+        with self.assertRaisesRegex(ProtocolError, "independent V2 evidence"):
+            validate_protocol(candidate)
+
     def test_paired_response_ablation_remains_explicit(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["loss"]["paired_response_ablation_weight"] = 0

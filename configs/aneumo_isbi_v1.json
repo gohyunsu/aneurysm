@@ -94,7 +94,14 @@
     },
     "deltaphi_anchor_mass_flow_kg_s": 0.0025,
     "parameter_match_relative_tolerance": 0.15,
-    "deep_ensemble": "three_registered_seeds_of_each_family"
+    "deep_ensemble": {
+      "members_per_family": 3,
+      "full_q_point_prediction": "mean_across_seed_models_at_matching_condition",
+      "missing_predictive_distribution": "cartesian_product_of_three_seed_models_and_eight_registered_condition_values",
+      "missing_predictive_components": 24,
+      "selector_uses_ensemble_metrics": false,
+      "supports_uncertainty_separation_claim": false
+    }
   },
   "training": {
     "seeds": [
@@ -116,8 +123,15 @@
     "require_cuda": true
   },
   "controls": {
-    "response_only_oracle": "same_case_anchor_field_train_tuned_global_power_1.075",
-    "negative_control": "q_pointnet_with_condition_zeroed_at_validation",
+    "response_only_oracle": {
+      "name": "same_case_anchor_field_train_tuned_global_power",
+      "anchor_mass_flow_kg_s": 0.0025,
+      "power": 1.075,
+      "uses_true_validation_anchor_field": true,
+      "eligible_endpoint": "validation_same_geometry_response_relative_l2_only",
+      "eligible_for_model_selection_or_gate": false
+    },
+    "negative_control": "condition_zeroed_at_validation_for_every_registered_family_with_gate_applied_to_selected_family",
     "matched_examples": true,
     "matched_steps": true,
     "same_node_subsets": true,
@@ -162,6 +176,16 @@
       "parameter_count"
     ],
     "candidate_name_does_not_override_metrics": true
+  },
+  "aggregation": {
+    "required_task_directory_template": "{family}_seed_{seed}",
+    "requires_exact_four_family_by_three_seed_factorial": true,
+    "replay_each_checkpoint_on_validation": true,
+    "checkpoint_replay_absolute_tolerance": 0.00001,
+    "family_metrics_first_average_within_base_family": true,
+    "selector_uses_only_registered_per_seed_metrics": true,
+    "response_oracle_is_report_only": true,
+    "test_fields_read": false
   },
   "feasibility_gate": {
     "rule": "all_checks",

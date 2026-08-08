@@ -3,7 +3,7 @@
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
 V1 backbone smoke preregistered/unrun ·
 missing task retained · M0 candidate-measurement–solution pullback
-preregistered/unrun · sparse-2 adaptive task removed · 3D GNN unimplemented ·
+preregistered/unrun · sparse-2 adaptive task removed · V1 point/graph code implemented but untrained ·
 method unselected
 
 연결 설정: `configs/aurora_v1.json`
@@ -45,8 +45,12 @@ V1은 네 engineering backbone을 같은 budget으로 비교한다.
 
 Parameter budget은 family별 residual block으로 15% 안에 맞추고 동일
 node subset·minibatch seed·step을 쓴다. V1 loss는 train-scalar-RMS normalized
-velocity MSE 하나뿐이며 paired-response weight는 0이다. Missing distribution은
-8개 registered q를 모두 열거한 discrete mixture다.
+velocity MSE 하나뿐이며 paired-response weight는 0이다. 각 seed의 missing
+distribution은 8개 registered q를 모두 열거한 discrete mixture다. Family
+ensemble은 같은 q에서 세 seed 예측을 평균해 point prediction을 만들고,
+missing distribution은 세 seed×8 q의 24-component mixture로 평가한다. 이
+ensemble은 selector에 들어가지 않으며 structural/model uncertainty separation
+근거도 아니다.
 
 Pre-result contract `b8ce721`에서 최초 residual block 수 16/7/7/0은
 parameter range 15.283%로 15% 계약을 근소하게 실패했다. Field를 읽기 전에
@@ -56,6 +60,11 @@ correction이다.
 Exact correction `a8b0042`에서 네 parameter budget, rotation equivariance와
 전체 repository contract 168/168이 통과했다. 이 pass는 architecture
 correctness일 뿐 어느 backbone의 validation 우위도 의미하지 않는다.
+결과 전 aggregate runner는 12 checkpoint를 validation에서 다시 실행하고
+저장 metric과 절대 (10^{-5}) 안에서 일치하는지 검사한다. Selector는 등록된
+per-seed metric만 사용한다. True q=0.0025 validation field에 power 1.075를
+적용하는 same-case control은 response-only oracle라 reconstruction row,
+selector와 feasibility gate에서 제외한다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

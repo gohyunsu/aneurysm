@@ -1,6 +1,6 @@
 # AURORA 서버 실행과 provenance
 
-최종 갱신: 2026-08-06 KST
+최종 갱신: 2026-08-08 KST
 
 이 문서는 재현에 필요한 역할과 절차만 공개한다. SSH endpoint, 내부 절대
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
@@ -10,12 +10,14 @@
 
 | 서버 계정 | 역할 | 허용 작업 |
 |---|---|---|
-| `introai9` | source asset registry와 데이터 감사 | 원본·추출본·매니페스트 read-only 확인 |
-| `junjinyong` | scheduler 기반 실험 | PBS GPU allocation, pinned container, aggregate output |
+| `introai9` | source asset registry·데이터 감사·현재 GPU 실행 목표 | 원본·추출본·매니페스트 read-only 확인, PBS allocation 안의 pinned-container 실험 |
+| `junjinyong` | 과거 scheduler 실행 provenance | 이미 완료된 PBS artifact 보존·감사 |
 
-원자료를 로컬 저장소에 내려받거나 서버 사이에 전체 복제하지 않는다.
-`junjinyong`에서는 필요한 source root를 read-only로 bind하고 run output만
-writable로 둔다.
+원자료를 로컬 저장소에 내려받거나 서버 사이에 전체 복제하지 않는다. 실행
+서버에서는 필요한 source root를 read-only로 bind하고 run output만 writable로
+둔다. 2026-08-08 `introai9`는 host SSH config를 명시적으로 읽는 public-key
+BatchMode 접속과 PBS client까지 확인했다. 실제 GPU allocation·container·cache
+SHA smoke 전에는 learned job을 제출하지 않는다.
 
 ## 2026-08-03 자산 감사
 
@@ -68,7 +70,7 @@ operator 또는 In-PI-MGN 대비 성능으로 해석하지 않는다.
 
 ## GPU smoke
 
-`junjinyong`의 PBS `ssu_a6gpu` allocation 안에서 다음을 확인했다.
+과거 `junjinyong`의 PBS `ssu_a6gpu` allocation 안에서 다음을 확인했다.
 
 - GPU: NVIDIA RTX A6000 1장
 - PyTorch: 2.5.1+cu118
@@ -111,6 +113,17 @@ CMHA split smoke를 통과한 뒤 다시 제출했다.
 - `cluster/ssu_a6gpu_nonlinear_pde_n1_optimization_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_attribution.pbs`
 - `cluster/ssu_a6gpu_controlled_density_development.pbs`
+- `cluster/pbs_gpu_smoke.pbs`
+- `cluster/pbs_aneumo_isbi_v1.pbs`
+- `cluster/pbs_aneumo_isbi_v1_aggregate.pbs`
+
+V1 template에는 queue 이름을 고정하지 않는다. 제출 시 private 운영 가이드에
+따라 `introai9`의 허용 queue를 명시하며, login node에서는 GPU runtime을
+조회하지 않는다. 12개 model×seed task가 모두 완료된 뒤 별도 aggregate job이
+checkpoint를 validation-only로 replay한다. Aggregate는 같은-q seed 평균,
+seed×8 q의 24-component missing mixture, response-only physical oracle,
+lexicographic selector와 7개 feasibility check를 계산한다. Raw checkpoint와
+per-task log는 private output에 보존한다.
 
 G1r template은 기존 G1 실패를 덮어쓰지 않는다. Public source commit과
 `configs/controlled_pde_g1r.json`을 read-only로 bind하고 새 output

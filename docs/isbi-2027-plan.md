@@ -1,8 +1,8 @@
 # ISBI 2027 submission plan
 
-최종 검토일: 2026-08-06 KST  
+최종 검토일: 2026-08-08 KST
 상태: **target locked · not submission-ready · V0 passed development-only ·
-V1 preregistered/unrun · M0 metric unrun**
+V1 backbone/aggregation implemented but learning unrun · M0 metric unrun**
 
 ## 1. Venue contract
 
@@ -28,9 +28,10 @@ V1 preregistered/unrun · M0 metric unrun**
 
 현재 원고는 ISBI-ready가 아니다.
 
-1. 실행된 exact/nonlinear 모델은 MLP 기반 lifted operator다. 공개
-   architecture 문서의 GNN+token+continuous-query 구조는 irregular-3D
-   target specification이며 아직 학습 구현이 아니다.
+1. 실행된 exact/nonlinear 모델은 MLP 기반 lifted operator다. V1 point/graph
+   후보와 aggregate runner는 구현됐지만 학습 결과가 없다. 공개 architecture
+   문서의 더 큰 GNN+token+continuous-query 구조는 장기 irregular-3D target
+   specification이다.
 2. N1c는 field distribution, paired response, acquisition에서 실패했다.
    실패 분석 자체를 4-page biomedical-imaging paper의 headline으로
    제출하지 않는다.
@@ -142,6 +143,10 @@ Headline outer test 전에는 더 넓은 base-family-disjoint cache 또는 독�
   residual, frame-free anchor-token equivariant operator
 - mandatory controls: same-case global scaling for response only and the
   three registered seed ensemble for missing uncertainty
+- ensemble estimand: matching-q seed mean for point prediction; 3 seeds × 8 q
+  values for a 24-component missing-design-law mixture
+- aggregate integrity: exact 4×3 task manifest and validation checkpoint replay
+  within absolute 1e-5 before selection
 - matched budget: 3 seeds, 3,000 steps, hidden 96, parameter range within 15%
 - selector: seed-mean response L2, full-q L2, missing energy, parameters
 - no test read until architecture, objective, samples, stopping rule frozen

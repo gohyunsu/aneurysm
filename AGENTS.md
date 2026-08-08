@@ -16,9 +16,11 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
 - ISBI headline은 actual irregular-3D aneurysm **velocity-only**
   reconstruction·response·calibration evidence가 있을 때만 연다. Exact와
   nonlinear PDE만으로 biomedical-imaging contribution을 주장하지 않는다.
-- 실행된 exact/nonlinear architecture는 MLP lifted operator다. GNN+token+
-  continuous-query 구조는 3D target specification이며 아직 구현·검증된
-  현재 모델이 아니다.
+- 실행된 exact/nonlinear architecture는 MLP lifted operator다. V1에는
+  q-PointNet, 두 kNN graph model과 frame-free anchor-token equivariant
+  candidate가 코드로 구현됐지만 아직 학습 결과가 없다. 더 큰
+  GNN+anatomy-token+continuous-query 구조는 장기 3D target specification이며
+  구현·검증된 현재 모델이 아니다.
 - Exact public source `0589070`의 metadata-only V0는 8/8 check를 통과했다.
   64-case cache, family split, scalar mass-flow design law와 기존 train-only
   scaling aggregate를 감사했고 새 field array와 validation/test field를
@@ -37,8 +39,13 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
   exact contract를 요구한다. Tolerance와 다른 model은 바꾸지 않는다.
   Correction source `a8b0042`는 V1 model contract 9/9와 dependency-complete
   repository contract 168/168을 통과했다. Cache field와 learned metric은
-  아직 읽지 않았다. V1 GPU array는 현재 지정된 `introai9` SSH/PBS 접근을
-  재확인한 뒤에만 제출한다.
+  아직 읽지 않았다. 이후 결과 전 aggregation contract는 세 seed의 같은
+  q 예측 평균과 seed×8 q의 24-component missing mixture를 구분하고, 모든
+  checkpoint를 validation에서 replay한다. Selector는 per-seed response L2,
+  full-q L2, energy, parameter 수만 사용한다. Same-case power control은 true
+  validation anchor field를 쓰는 response-only oracle라 selector/gate에
+  들어가지 않는다. `introai9` public-key SSH와 PBS client는 확인됐으며 실제
+  GPU allocation smoke와 cache SHA 확인 뒤에만 12-task array를 제출한다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
@@ -567,9 +574,10 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - private 운영 가이드는 Git에서 제외된 `SERVER_GUIDE.md`다. endpoint,
   password, private key, 내부 데이터 절대경로를 공개 문서에 옮기지 않는다.
 - `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사하고,
-  현재 사용자 지시에 따른 GPU 실행 목표이기도 하다. 2026-08-08 현재 local
-  alias의 DNS 해석이 실패했으므로 PBS queue·ACL·GPU smoke를 재확인하기 전
-  job을 제출하지 않는다.
+  현재 사용자 지시에 따른 GPU 실행 목표이기도 하다. 2026-08-08 Windows-host
+  SSH config를 명시적으로 읽는 public-key BatchMode 접속과 PBS client 존재는
+  확인했다. 이는 GPU queue allocation 성공 증거가 아니므로 scheduler GPU
+  smoke와 cache SHA를 확인하기 전 learned job을 제출하지 않는다.
 - 이전 실행 계정에서 완료된 compact-cache 재생성은 byte-range/CRC와
   등록 SHA가 일치함을 확인하는 asset audit일 뿐 GPU 결과가 아니다. 어느
   서버에서도 login node에서 GPU 학습이나 `nvidia-smi`를 실행하지 않는다.

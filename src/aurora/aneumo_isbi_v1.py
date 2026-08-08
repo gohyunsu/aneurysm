@@ -60,23 +60,25 @@ def validate_config(payload: Mapping[str, Any]) -> dict[str, Any]:
     ):
         raise AneumoISBIV1Error("V1 must not read or select on test fields.")
     models = payload["models"]
-    expected_models = {
+    expected_models = [
         "q_pointnet",
         "knn_mgn",
         "deltaphi_graph",
         "anchor_token_equivariant",
-    }
-    if set(models["families"]) != expected_models:
+    ]
+    if models["families"] != expected_models:
         raise AneumoISBIV1Error("V1 model families cannot change after registration.")
     if models.get("candidate_is_method_novelty") is not False:
         raise AneumoISBIV1Error("The engineering backbone is not method novelty.")
     training = payload["training"]
     if (
-        len(training["seeds"]) != 3
+        training["seeds"] != [820801, 820802, 820803]
+        or int(training.get("steps", -1)) != 3000
+        or int(training.get("validation_every_steps", -1)) != 250
         or training.get("paired_response_loss_weight") != 0.0
         or training.get("require_cuda") is not True
     ):
-        raise AneumoISBIV1Error("V1 keeps three seeds and zero paired-loss weight.")
+        raise AneumoISBIV1Error("V1 training schedule cannot change after registration.")
     if payload["feasibility_gate"].get("local_repair_allowed") is not False:
         raise AneumoISBIV1Error("V1 failure cannot enter a local repair loop.")
     authorization = payload["authorization"]
@@ -91,6 +93,68 @@ def validate_config(payload: Mapping[str, Any]) -> dict[str, Any]:
         "exact_discrete_uniform_over_registered_values"
     ):
         raise AneumoISBIV1Error("V1 must retain the exact registered design law.")
+    ensemble = models.get("deep_ensemble", {})
+    if (
+        ensemble.get("members_per_family") != 3
+        or ensemble.get("full_q_point_prediction")
+        != "mean_across_seed_models_at_matching_condition"
+        or ensemble.get("missing_predictive_distribution")
+        != "cartesian_product_of_three_seed_models_and_eight_registered_condition_values"
+        or ensemble.get("missing_predictive_components") != 24
+        or ensemble.get("selector_uses_ensemble_metrics") is not False
+        or ensemble.get("supports_uncertainty_separation_claim") is not False
+    ):
+        raise AneumoISBIV1Error("V1 must retain the registered 3x8 ensemble estimand.")
+    oracle = payload["controls"].get("response_only_oracle", {})
+    if (
+        float(oracle.get("anchor_mass_flow_kg_s", float("nan"))) != 0.0025
+        or float(oracle.get("power", float("nan"))) != 1.075
+        or oracle.get("uses_true_validation_anchor_field") is not True
+        or oracle.get("eligible_for_model_selection_or_gate") is not False
+        or oracle.get("eligible_endpoint")
+        != "validation_same_geometry_response_relative_l2_only"
+    ):
+        raise AneumoISBIV1Error("The same-case oracle must remain response-only.")
+    if payload["controls"].get("negative_control") != (
+        "condition_zeroed_at_validation_for_every_registered_family_with_gate_"
+        "applied_to_selected_family"
+    ):
+        raise AneumoISBIV1Error("V1 condition-zero negative control cannot change.")
+    aggregation = payload.get("aggregation", {})
+    if (
+        aggregation.get("requires_exact_four_family_by_three_seed_factorial")
+        is not True
+        or aggregation.get("replay_each_checkpoint_on_validation") is not True
+        or aggregation.get("selector_uses_only_registered_per_seed_metrics")
+        is not True
+        or aggregation.get("response_oracle_is_report_only") is not True
+        or aggregation.get("test_fields_read") is not False
+        or float(aggregation.get("checkpoint_replay_absolute_tolerance", -1.0))
+        != 0.00001
+    ):
+        raise AneumoISBIV1Error("V1 aggregation contract cannot change after registration.")
+    expected_rank = [
+        "seed_mean_validation_response_relative_l2",
+        "seed_mean_validation_full_q_relative_l2",
+        "seed_mean_missing_field_energy_score",
+        "parameter_count",
+    ]
+    if (
+        payload["selector"].get("rank_by") != expected_rank
+        or payload["selector"].get("requires_all_three_seeds") is not True
+    ):
+        raise AneumoISBIV1Error("V1 selector cannot change after registration.")
+    expected_checks = [
+        "all_twelve_tasks_exit_zero",
+        "no_test_field_read",
+        "all_metrics_finite",
+        "all_checkpoints_selected_on_validation_only",
+        "selected_model_worst_seed_full_q_relative_l2_at_most_0.35",
+        "selected_model_worst_seed_response_relative_l2_at_most_0.50",
+        "condition_zeroing_worsens_full_q_error_in_all_selected_model_seeds",
+    ]
+    if payload["feasibility_gate"].get("checks") != expected_checks:
+        raise AneumoISBIV1Error("V1 feasibility gate cannot change after registration.")
     return dict(payload)
 
 
@@ -503,7 +567,20 @@ def _functionals(field: Any) -> Any:
     )
 
 
-def evaluate(
+def _family_average(entries: Sequence[tuple[int, Any]]) -> Any:
+    """Average within base family before averaging across families."""
+
+    np, _, _ = _imports()
+    grouped: dict[int, list[Any]] = {}
+    for family, value in entries:
+        grouped.setdefault(int(family), []).append(np.asarray(value, dtype=np.float64))
+    if not grouped:
+        raise AneumoISBIV1Error("Cannot aggregate an empty V1 validation metric.")
+    family_means = [np.mean(grouped[family], axis=0) for family in sorted(grouped)]
+    return np.mean(family_means, axis=0)
+
+
+def _predict_validation(
     model: Any,
     prepared_validation: Mapping[int, Mapping[str, Any]],
     normalized_flows: Any,
@@ -511,14 +588,12 @@ def evaluate(
     *,
     device: Any,
     condition_zeroed: bool = False,
-) -> dict[str, Any]:
-    np, _, torch = _imports()
+) -> tuple[dict[int, Any], float]:
+    """Replay one checkpoint and return CPU predictions for registered q values."""
+
+    _, _, torch = _imports()
     model.eval()
-    full_errors = []
-    response_errors = []
-    energy_scores = []
-    functional_coverages = []
-    functional_widths = []
+    predictions: dict[int, Any] = {}
     latency_seconds = 0.0
     calls = 0
     with torch.no_grad():
@@ -528,9 +603,8 @@ def evaluate(
             neighbors = torch.as_tensor(
                 case["neighbors"], dtype=torch.long, device=device
             )[None]
-            target = torch.as_tensor(case["velocity"], device=device)
-            predictions = []
-            for condition_index, normalized_flow in enumerate(normalized_flows):
+            case_predictions = []
+            for normalized_flow in normalized_flows:
                 value = 0.0 if condition_zeroed else float(normalized_flow)
                 condition = torch.tensor([[value]], dtype=torch.float32, device=device)
                 if device.type == "cuda":
@@ -541,49 +615,124 @@ def evaluate(
                     torch.cuda.synchronize(device)
                 latency_seconds += time.perf_counter() - started
                 calls += 1
-                predictions.append(prediction)
-                full_errors.append(_relative_l2(prediction, target[condition_index]))
-            prediction_stack = torch.stack(predictions, dim=0)
-            anchor_index = 3
-            for index in range(target.shape[0]):
-                if index == anchor_index:
-                    continue
+                case_predictions.append(prediction.detach().cpu())
+            predictions[int(case_id)] = torch.stack(case_predictions, dim=0)
+    return predictions, 1000.0 * latency_seconds / max(calls, 1)
+
+
+def _summarize_predictions(
+    prepared_validation: Mapping[int, Mapping[str, Any]],
+    same_q_predictions: Mapping[int, Any],
+    *,
+    missing_predictions: Mapping[int, Any] | None = None,
+    latency_ms_per_case_condition: float = 0.0,
+    condition_zeroed: bool = False,
+) -> dict[str, Any]:
+    """Evaluate full-q and exact-design-law distributional metrics."""
+
+    np, _, torch = _imports()
+    missing_predictions = missing_predictions or same_q_predictions
+    full_errors: list[tuple[int, float]] = []
+    response_errors: list[tuple[int, float]] = []
+    energy_scores: list[tuple[int, float]] = []
+    functional_coverages: list[tuple[int, Any]] = []
+    functional_widths: list[tuple[int, Any]] = []
+    anchor_index = 3
+    expected_cases = set(prepared_validation)
+    if set(same_q_predictions) != expected_cases or set(missing_predictions) != expected_cases:
+        raise AneumoISBIV1Error("V1 predictions do not cover every validation case.")
+    for case_id in sorted(prepared_validation):
+        case = prepared_validation[case_id]
+        family = int(case["base_family"])
+        target = torch.as_tensor(case["velocity"], dtype=torch.float32)
+        prediction_stack = torch.as_tensor(
+            same_q_predictions[case_id], dtype=torch.float32
+        )
+        predictive_distribution = torch.as_tensor(
+            missing_predictions[case_id], dtype=torch.float32
+        )
+        if prediction_stack.shape != target.shape:
+            raise AneumoISBIV1Error("V1 matching-q prediction shape changed.")
+        if (
+            predictive_distribution.ndim != 3
+            or predictive_distribution.shape[1:] != target.shape[1:]
+        ):
+            raise AneumoISBIV1Error("V1 missing-distribution prediction shape changed.")
+        for condition_index in range(target.shape[0]):
+            full_errors.append(
+                (family, _relative_l2(prediction_stack[condition_index], target[condition_index]))
+            )
+            if condition_index != anchor_index:
                 response_errors.append(
-                    _relative_l2(
-                        prediction_stack[index] - prediction_stack[anchor_index],
-                        target[index] - target[anchor_index],
+                    (
+                        family,
+                        _relative_l2(
+                            prediction_stack[condition_index]
+                            - prediction_stack[anchor_index],
+                            target[condition_index] - target[anchor_index],
+                        ),
                     )
                 )
-            first = []
-            for true_index in range(target.shape[0]):
-                repeated = target[true_index][None].expand_as(prediction_stack)
-                first.append(_field_distance(prediction_stack, repeated).mean())
-            pair_distance = _field_distance(
-                prediction_stack[:, None, :, :], prediction_stack[None, :, :, :]
-            ).mean()
-            energy_scores.append(float((torch.stack(first).mean() - 0.5 * pair_distance).item()))
+        first = []
+        for true_index in range(target.shape[0]):
+            repeated = target[true_index][None].expand_as(predictive_distribution)
+            first.append(_field_distance(predictive_distribution, repeated).mean())
+        pair_distance = _field_distance(
+            predictive_distribution[:, None, :, :],
+            predictive_distribution[None, :, :, :],
+        ).mean()
+        energy_scores.append(
+            (family, float((torch.stack(first).mean() - 0.5 * pair_distance).item()))
+        )
 
-            predicted_functionals = _functionals(prediction_stack)
-            true_functionals = _functionals(target)
-            lower = torch.quantile(predicted_functionals, 0.05, dim=0)
-            upper = torch.quantile(predicted_functionals, 0.95, dim=0)
-            coverage = ((true_functionals >= lower) & (true_functionals <= upper)).float()
-            functional_coverages.append(coverage.mean(dim=0).cpu().numpy())
-            functional_widths.append((upper - lower).cpu().numpy())
+        predicted_functionals = _functionals(predictive_distribution)
+        true_functionals = _functionals(target)
+        lower = torch.quantile(predicted_functionals, 0.05, dim=0)
+        upper = torch.quantile(predicted_functionals, 0.95, dim=0)
+        coverage = ((true_functionals >= lower) & (true_functionals <= upper)).float()
+        functional_coverages.append((family, coverage.mean(dim=0).numpy()))
+        functional_widths.append((family, (upper - lower).numpy()))
     return {
-        "full_q_relative_l2": float(np.mean(full_errors)),
-        "response_relative_l2": float(np.mean(response_errors)),
-        "missing_field_energy_score_m_s": float(np.mean(energy_scores)),
-        "functional_coverage_90": np.mean(functional_coverages, axis=0).tolist(),
-        "functional_interval_width_90_m_s": np.mean(
-            functional_widths, axis=0
-        ).tolist(),
-        "latency_ms_per_case_condition": 1000.0 * latency_seconds / max(calls, 1),
+        "full_q_relative_l2": float(_family_average(full_errors)),
+        "response_relative_l2": float(_family_average(response_errors)),
+        "missing_field_energy_score_m_s": float(_family_average(energy_scores)),
+        "functional_coverage_90": _family_average(functional_coverages).tolist(),
+        "functional_interval_width_90_m_s": _family_average(functional_widths).tolist(),
+        "latency_ms_per_case_condition": float(latency_ms_per_case_condition),
         "condition_zeroed": bool(condition_zeroed),
         "validation_cases": len(prepared_validation),
-        "validation_or_test_fields_read": False,
+        "validation_base_families": len(
+            {int(case["base_family"]) for case in prepared_validation.values()}
+        ),
+        "aggregation_unit": "aneux_base_family",
+        "validation_fields_read": True,
         "test_fields_read": False,
     }
+
+
+def evaluate(
+    model: Any,
+    prepared_validation: Mapping[int, Mapping[str, Any]],
+    normalized_flows: Any,
+    velocity_scale: float,
+    *,
+    device: Any,
+    condition_zeroed: bool = False,
+) -> dict[str, Any]:
+    predictions, latency = _predict_validation(
+        model,
+        prepared_validation,
+        normalized_flows,
+        velocity_scale,
+        device=device,
+        condition_zeroed=condition_zeroed,
+    )
+    return _summarize_predictions(
+        prepared_validation,
+        predictions,
+        latency_ms_per_case_condition=latency,
+        condition_zeroed=condition_zeroed,
+    )
 
 
 def run_training(
@@ -800,6 +949,543 @@ def run_training(
         encoding="utf-8",
     )
     return result
+
+
+def _all_numeric_values_finite(value: Any) -> bool:
+    if isinstance(value, bool) or value is None or isinstance(value, str):
+        return True
+    if isinstance(value, (int, float)):
+        return math.isfinite(float(value))
+    if isinstance(value, Mapping):
+        return all(_all_numeric_values_finite(item) for item in value.values())
+    if isinstance(value, Sequence):
+        return all(_all_numeric_values_finite(item) for item in value)
+    return True
+
+
+def _mean(values: Sequence[float]) -> float:
+    if not values:
+        raise AneumoISBIV1Error("Cannot average an empty registered metric.")
+    return float(sum(float(item) for item in values) / len(values))
+
+
+def select_registered_family(
+    config: Mapping[str, Any], task_results: Sequence[Mapping[str, Any]]
+) -> dict[str, Any]:
+    """Apply the frozen lexicographic selector to per-seed task metrics only."""
+
+    expected_seeds = sorted(int(item) for item in config["training"]["seeds"])
+    expected_families = list(config["models"]["families"])
+    indexed: dict[tuple[str, int], Mapping[str, Any]] = {}
+    for result in task_results:
+        key = (str(result["family"]), int(result["seed"]))
+        if key in indexed:
+            raise AneumoISBIV1Error(f"Duplicate V1 task result: {key}")
+        indexed[key] = result
+    expected = {
+        (family, seed) for family in expected_families for seed in expected_seeds
+    }
+    if set(indexed) != expected:
+        raise AneumoISBIV1Error("V1 selector requires the exact 4x3 factorial.")
+
+    ranking = []
+    for family in expected_families:
+        family_results = [indexed[(family, seed)] for seed in expected_seeds]
+        counts = {int(result["parameter_count"]) for result in family_results}
+        if len(counts) != 1:
+            raise AneumoISBIV1Error("V1 parameter count changed across seeds.")
+        full = [float(result["metrics"]["full_q_relative_l2"]) for result in family_results]
+        response = [
+            float(result["metrics"]["response_relative_l2"])
+            for result in family_results
+        ]
+        energy = [
+            float(result["metrics"]["missing_field_energy_score_m_s"])
+            for result in family_results
+        ]
+        row = {
+            "family": family,
+            "seeds": expected_seeds,
+            "seed_mean_validation_response_relative_l2": _mean(response),
+            "seed_worst_validation_response_relative_l2": max(response),
+            "seed_mean_validation_full_q_relative_l2": _mean(full),
+            "seed_worst_validation_full_q_relative_l2": max(full),
+            "seed_mean_missing_field_energy_score_m_s": _mean(energy),
+            "parameter_count": next(iter(counts)),
+            "condition_zeroing_worsens_full_q_error_by_seed": [
+                bool(result["condition_zeroing_worsens_full_q_error"])
+                for result in family_results
+            ],
+        }
+        row["registered_rank_tuple"] = [
+            row["seed_mean_validation_response_relative_l2"],
+            row["seed_mean_validation_full_q_relative_l2"],
+            row["seed_mean_missing_field_energy_score_m_s"],
+            row["parameter_count"],
+        ]
+        ranking.append(row)
+    ranking.sort(key=lambda row: tuple(row["registered_rank_tuple"]))
+    for index, row in enumerate(ranking, start=1):
+        row["rank"] = index
+    return {
+        "selected_family": ranking[0]["family"],
+        "rank_by": list(config["selector"]["rank_by"]),
+        "uses_ensemble_metrics": False,
+        "uses_response_oracle": False,
+        "ranking": ranking,
+    }
+
+
+def evaluate_same_case_response_oracle(
+    config: Mapping[str, Any],
+    prepared_validation: Mapping[int, Mapping[str, Any]],
+    flows: Any,
+) -> dict[str, Any]:
+    """Evaluate the registered validation-anchor scaling response control."""
+
+    np, _, torch = _imports()
+    oracle = config["controls"]["response_only_oracle"]
+    flow_values = np.asarray(flows, dtype=np.float64)
+    anchor_flow = float(oracle["anchor_mass_flow_kg_s"])
+    matches = np.flatnonzero(np.isclose(flow_values, anchor_flow, rtol=0.0, atol=1e-12))
+    if len(matches) != 1:
+        raise AneumoISBIV1Error("The V1 response oracle anchor is not identifiable.")
+    anchor_index = int(matches[0])
+    power = float(oracle["power"])
+    ratios = torch.as_tensor((flow_values / anchor_flow) ** power, dtype=torch.float32)
+    errors: list[tuple[int, float]] = []
+    for case_id in sorted(prepared_validation):
+        case = prepared_validation[case_id]
+        target = torch.as_tensor(case["velocity"], dtype=torch.float32)
+        prediction = ratios[:, None, None] * target[anchor_index][None]
+        for condition_index in range(target.shape[0]):
+            if condition_index == anchor_index:
+                continue
+            errors.append(
+                (
+                    int(case["base_family"]),
+                    _relative_l2(
+                        prediction[condition_index] - prediction[anchor_index],
+                        target[condition_index] - target[anchor_index],
+                    ),
+                )
+            )
+    return {
+        "name": oracle["name"],
+        "validation_response_relative_l2": float(_family_average(errors)),
+        "anchor_mass_flow_kg_s": anchor_flow,
+        "power": power,
+        "uses_true_validation_anchor_field": True,
+        "eligible_for_model_selection_or_gate": False,
+        "eligible_endpoint": oracle["eligible_endpoint"],
+        "validation_cases": len(prepared_validation),
+        "validation_base_families": len(
+            {int(case["base_family"]) for case in prepared_validation.values()}
+        ),
+        "test_fields_read": False,
+    }
+
+
+def evaluate_family_ensemble(
+    config: Mapping[str, Any],
+    prepared_validation: Mapping[int, Mapping[str, Any]],
+    predictions_by_seed: Mapping[int, Mapping[int, Any]],
+) -> dict[str, Any]:
+    """Evaluate the frozen 3-seed x 8-condition predictive mixture."""
+
+    _, _, torch = _imports()
+    expected_seeds = sorted(int(item) for item in config["training"]["seeds"])
+    if sorted(int(seed) for seed in predictions_by_seed) != expected_seeds:
+        raise AneumoISBIV1Error("V1 ensemble requires exactly the three registered seeds.")
+    same_q: dict[int, Any] = {}
+    missing: dict[int, Any] = {}
+    for case_id in sorted(prepared_validation):
+        members = [predictions_by_seed[seed][case_id] for seed in expected_seeds]
+        stack = torch.stack(members, dim=0)
+        same_q[case_id] = stack.mean(dim=0)
+        missing[case_id] = stack.reshape(-1, *stack.shape[2:])
+    result = _summarize_predictions(
+        prepared_validation,
+        same_q,
+        missing_predictions=missing,
+    )
+    result.update(
+        {
+            "ensemble_members": len(expected_seeds),
+            "registered_conditions": len(config["task"]["condition_values"]),
+            "missing_predictive_components": len(expected_seeds)
+            * len(config["task"]["condition_values"]),
+            "full_q_point_prediction": config["models"]["deep_ensemble"][
+                "full_q_point_prediction"
+            ],
+            "missing_predictive_distribution": config["models"]["deep_ensemble"][
+                "missing_predictive_distribution"
+            ],
+            "eligible_for_selector": False,
+            "supports_uncertainty_separation_claim": False,
+        }
+    )
+    return result
+
+
+def _metric_close(left: Any, right: Any, tolerance: float) -> bool:
+    if isinstance(left, Sequence) and not isinstance(left, (str, bytes)):
+        return (
+            isinstance(right, Sequence)
+            and not isinstance(right, (str, bytes))
+            and len(left) == len(right)
+            and all(_metric_close(a, b, tolerance) for a, b in zip(left, right))
+        )
+    try:
+        return abs(float(left) - float(right)) <= tolerance
+    except (TypeError, ValueError):
+        return left == right
+
+
+def _checkpoint_is_validation_selected(result: Mapping[str, Any], tolerance: float) -> bool:
+    trace = result.get("trace", [])
+    if not trace:
+        return False
+    best = min(trace, key=lambda item: float(item["selection_score"]))
+    final_score = float(result["metrics"]["full_q_relative_l2"]) + float(
+        result["metrics"]["response_relative_l2"]
+    )
+    return (
+        int(best["step"]) == int(result["best_step"])
+        and abs(float(best["selection_score"]) - float(result["selection_score"]))
+        <= tolerance
+        and abs(final_score - float(result["selection_score"])) <= tolerance
+        and result["field_access"].get("test_fields_read") is False
+    )
+
+
+def _load_registered_task_results(
+    config: Mapping[str, Any],
+    task_output_root: Path,
+    git_commit: str,
+) -> tuple[list[dict[str, Any]], dict[tuple[str, int], dict[str, Any]]]:
+    results = []
+    artifacts: dict[tuple[str, int], dict[str, Any]] = {}
+    template = config["aggregation"]["required_task_directory_template"]
+    expected_config_sha = config["_config_sha256"]
+    for family in config["models"]["families"]:
+        for seed_value in config["training"]["seeds"]:
+            seed = int(seed_value)
+            directory = task_output_root / template.format(family=family, seed=seed)
+            status_path = directory / "status.json"
+            metrics_path = directory / "metrics.json"
+            checkpoint_path = directory / "checkpoint.pt"
+            if (
+                not status_path.is_file()
+                or not metrics_path.is_file()
+                or not checkpoint_path.is_file()
+            ):
+                raise AneumoISBIV1Error(f"Incomplete registered V1 task: {family}/{seed}")
+            status = json.loads(status_path.read_text(encoding="utf-8"))
+            result = json.loads(metrics_path.read_text(encoding="utf-8"))
+            if status != {"exit_status": 0, "state": "complete", "test_fields_read": False}:
+                raise AneumoISBIV1Error(
+                    f"Registered V1 task did not exit cleanly: {family}/{seed}"
+                )
+            if (
+                result.get("family") != family
+                or int(result.get("seed", -1)) != seed
+                or result.get("git_commit") != git_commit
+                or result.get("config_sha256") != expected_config_sha
+                or result.get("cache_sha256") != config["source"]["cache_sha256"]
+            ):
+                raise AneumoISBIV1Error(f"V1 task provenance mismatch: {family}/{seed}")
+            results.append(result)
+            artifacts[(family, seed)] = {
+                "directory": directory,
+                "checkpoint_path": checkpoint_path,
+                "metrics_sha256": _sha256(metrics_path),
+                "checkpoint_sha256": _sha256(checkpoint_path),
+                "status_sha256": _sha256(status_path),
+            }
+    return results, artifacts
+
+
+def aggregate_training_outputs(
+    config: Mapping[str, Any],
+    *,
+    root: Path,
+    cache: Path,
+    task_output_root: Path,
+    output: Path,
+    git_commit: str,
+    require_cuda: bool,
+) -> dict[str, Any]:
+    """Replay all V1 checkpoints, aggregate the selector, and evaluate the gate."""
+
+    _, _, torch = _imports()
+    if _sha256(root / config["source"]["staging_config"]) != config["source"][
+        "staging_config_sha256"
+    ]:
+        raise AneumoISBIV1Error("V1 aggregation staging dependency mismatch.")
+    if _sha256(root / config["source"]["v0_result"]) != config["source"][
+        "v0_result_sha256"
+    ]:
+        raise AneumoISBIV1Error("V1 aggregation V0 dependency mismatch.")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    if require_cuda and device.type != "cuda":
+        raise AneumoISBIV1Error("V1 aggregation requires a scheduler CUDA device.")
+    if device.type == "cuda":
+        torch.cuda.reset_peak_memory_stats(device)
+
+    task_results, artifacts = _load_registered_task_results(
+        config, task_output_root, git_commit
+    )
+    train_cases, validation_cases, flows = load_development_cases(config, cache)
+    prepared_train = _prepare_cases(config, train_cases)
+    prepared_validation = _prepare_cases(config, validation_cases)
+    velocity_scale = _velocity_scale(prepared_train)
+    normalized_flows = _normalize_condition(flows)
+    tolerance = float(config["aggregation"]["checkpoint_replay_absolute_tolerance"])
+    replay_keys = (
+        "full_q_relative_l2",
+        "response_relative_l2",
+        "missing_field_energy_score_m_s",
+        "functional_coverage_90",
+        "functional_interval_width_90_m_s",
+    )
+    predictions: dict[str, dict[int, dict[int, Any]]] = {
+        family: {} for family in config["models"]["families"]
+    }
+    checkpoint_metadata_valid = True
+    checkpoint_replay_valid = True
+    for result in task_results:
+        family = str(result["family"])
+        seed = int(result["seed"])
+        checkpoint = torch.load(
+            artifacts[(family, seed)]["checkpoint_path"],
+            map_location="cpu",
+            weights_only=False,
+        )
+        checkpoint_metadata_valid = checkpoint_metadata_valid and (
+            checkpoint.get("family") == family
+            and int(checkpoint.get("seed", -1)) == seed
+            and checkpoint.get("git_commit") == git_commit
+            and checkpoint.get("config_sha256") == config["_config_sha256"]
+            and checkpoint.get("cache_sha256") == config["source"]["cache_sha256"]
+            and checkpoint.get("test_fields_read") is False
+            and abs(float(checkpoint.get("velocity_scale", float("nan"))) - velocity_scale)
+            <= 1e-12
+        )
+        model = build_model(config, family).to(device)
+        actual_parameter_count = sum(
+            parameter.numel() for parameter in model.parameters()
+        )
+        checkpoint_metadata_valid = checkpoint_metadata_valid and (
+            actual_parameter_count == int(result["parameter_count"])
+        )
+        model.load_state_dict(checkpoint["model_state"], strict=True)
+        predicted, _ = _predict_validation(
+            model,
+            prepared_validation,
+            normalized_flows,
+            velocity_scale,
+            device=device,
+        )
+        replay = _summarize_predictions(prepared_validation, predicted)
+        checkpoint_replay_valid = checkpoint_replay_valid and all(
+            _metric_close(replay[key], result["metrics"][key], tolerance)
+            for key in replay_keys
+        )
+        predictions[family][seed] = predicted
+        del model
+        if device.type == "cuda":
+            torch.cuda.empty_cache()
+
+    selection = select_registered_family(config, task_results)
+    ensembles = {
+        family: evaluate_family_ensemble(
+            config, prepared_validation, predictions[family]
+        )
+        for family in config["models"]["families"]
+    }
+    response_oracle = evaluate_same_case_response_oracle(
+        config, prepared_validation, flows
+    )
+    selected = next(
+        row
+        for row in selection["ranking"]
+        if row["family"] == selection["selected_family"]
+    )
+    validation_selected = all(
+        _checkpoint_is_validation_selected(result, tolerance) for result in task_results
+    )
+    no_test_read = all(
+        result["field_access"].get("test_fields_read") is False
+        and result["metrics"].get("test_fields_read") is False
+        and result["condition_zeroed_metrics"].get("test_fields_read") is False
+        for result in task_results
+    ) and response_oracle["test_fields_read"] is False
+    finite = all(
+        _all_numeric_values_finite(result["metrics"])
+        and _all_numeric_values_finite(result["condition_zeroed_metrics"])
+        for result in task_results
+    ) and _all_numeric_values_finite(ensembles) and _all_numeric_values_finite(response_oracle)
+    selected_results = [
+        result
+        for result in task_results
+        if result["family"] == selection["selected_family"]
+    ]
+    gate_checks = {
+        "all_twelve_tasks_exit_zero": len(task_results) == 12,
+        "no_test_field_read": no_test_read,
+        "all_metrics_finite": finite,
+        "all_checkpoints_selected_on_validation_only": (
+            validation_selected and checkpoint_metadata_valid and checkpoint_replay_valid
+        ),
+        "selected_model_worst_seed_full_q_relative_l2_at_most_0.35": (
+            float(selected["seed_worst_validation_full_q_relative_l2"]) <= 0.35
+        ),
+        "selected_model_worst_seed_response_relative_l2_at_most_0.50": (
+            float(selected["seed_worst_validation_response_relative_l2"]) <= 0.50
+        ),
+        "condition_zeroing_worsens_full_q_error_in_all_selected_model_seeds": all(
+            bool(result["condition_zeroing_worsens_full_q_error"])
+            for result in selected_results
+        ),
+    }
+    if list(gate_checks) != list(config["feasibility_gate"]["checks"]):
+        raise AneumoISBIV1Error("V1 implementation and gate check order disagree.")
+    parameter_counts = [int(row["parameter_count"]) for row in selection["ranking"]]
+    relative_parameter_range = (max(parameter_counts) - min(parameter_counts)) / max(
+        parameter_counts
+    )
+    if relative_parameter_range > float(
+        config["models"]["parameter_match_relative_tolerance"]
+    ):
+        raise AneumoISBIV1Error("V1 execution violated the frozen parameter match.")
+    passed = all(gate_checks.values())
+    task_manifest = []
+    for result in sorted(task_results, key=lambda item: (item["family"], item["seed"])):
+        key = (str(result["family"]), int(result["seed"]))
+        task_manifest.append(
+            {
+                "family": key[0],
+                "seed": key[1],
+                "metrics_sha256": artifacts[key]["metrics_sha256"],
+                "checkpoint_sha256": artifacts[key]["checkpoint_sha256"],
+                "status_sha256": artifacts[key]["status_sha256"],
+                "best_step": int(result["best_step"]),
+                "parameter_count": int(result["parameter_count"]),
+                "test_fields_read": False,
+            }
+        )
+    aggregate = {
+        "schema_version": "aurora.aneumo_isbi_v1.aggregate.v1",
+        "experiment_id": config["experiment_id"],
+        "git_commit": git_commit,
+        "config_sha256": config["_config_sha256"],
+        "cache_sha256": config["source"]["cache_sha256"],
+        "task_count": len(task_results),
+        "selection": selection,
+        "deep_ensemble_validation_metrics": ensembles,
+        "response_only_oracle": response_oracle,
+        "integrity": {
+            "exact_four_family_by_three_seed_factorial": len(task_results) == 12,
+            "checkpoint_metadata_valid": checkpoint_metadata_valid,
+            "checkpoint_validation_replay_within_tolerance": checkpoint_replay_valid,
+            "checkpoint_replay_absolute_tolerance": tolerance,
+            "parameter_counts": parameter_counts,
+            "relative_parameter_range": relative_parameter_range,
+            "parameter_match_tolerance": float(
+                config["models"]["parameter_match_relative_tolerance"]
+            ),
+        },
+        "gate": {
+            "checks": gate_checks,
+            "passed_checks": sum(bool(value) for value in gate_checks.values()),
+            "total_checks": len(gate_checks),
+            "all_checks_passed": passed,
+            "decision": (
+                config["authorization"]["pass_allows"]
+                if passed
+                else config["feasibility_gate"]["failure_action"]
+            ),
+        },
+        "field_access": {
+            "train_fields_read": True,
+            "validation_fields_read": True,
+            "test_fields_read": False,
+            "test_metrics_or_selection": False,
+        },
+        "environment": {
+            "aggregation_device": str(device),
+            "torch": torch.__version__,
+            "cuda_runtime": torch.version.cuda,
+            "task_devices": sorted({str(result["device"]) for result in task_results}),
+            "task_torch_versions": sorted({str(result["torch"]) for result in task_results}),
+            "task_cuda_runtimes": sorted(
+                {str(result["cuda_runtime"]) for result in task_results}
+            ),
+            "peak_gpu_memory_mb": (
+                float(torch.cuda.max_memory_allocated(device) / (1024**2))
+                if device.type == "cuda"
+                else 0.0
+            ),
+        },
+        "task_manifest": task_manifest,
+        "authorization": config["authorization"],
+        "interpretation": {
+            "development_only": True,
+            "selected_backbone_is_method_novelty": False,
+            "response_oracle_is_reconstruction_baseline": False,
+            "ensemble_supports_uncertainty_separation": False,
+            "outer_test_authorized": False,
+            "isbi_submission_evidence": False,
+        },
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    (output / "aggregate.json").write_text(
+        json.dumps(aggregate, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    (output / "status.json").write_text(
+        json.dumps(
+            {
+                "state": "complete",
+                "exit_status": 0,
+                "gate_passed": passed,
+                "test_fields_read": False,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return aggregate
+
+
+def aggregate_main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Aggregate the preregistered Aneumo ISBI V1 tasks."
+    )
+    parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument("--root", type=Path, required=True)
+    parser.add_argument("--cache", type=Path, required=True)
+    parser.add_argument("--task-output-root", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--git-commit", required=True)
+    parser.add_argument("--require-cuda", action="store_true")
+    args = parser.parse_args(argv)
+    config_bytes = args.config.read_bytes()
+    config = load_config(args.config)
+    config["_config_sha256"] = hashlib.sha256(config_bytes).hexdigest()
+    result = aggregate_training_outputs(
+        config,
+        root=args.root,
+        cache=args.cache,
+        task_output_root=args.task_output_root,
+        output=args.output,
+        git_commit=args.git_commit,
+        require_cuda=args.require_cuda,
+    )
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
 
 
 def main(argv: Sequence[str] | None = None) -> int:

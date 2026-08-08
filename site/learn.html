@@ -49,9 +49,10 @@
           <strong>현재 실행된 모델은 GNN이 아닙니다.</strong>
           <p>
             Exact/nonlinear gate는 context MLP와 boundary token, lifted
-            decoder로 실행했습니다. 국소 GNN, anatomy attention, query
-            operator를 결합한 구조는 <b>irregular-3D target specification</b>이며
-            아직 구현·학습 결과가 없습니다.
+            decoder로 실행했습니다. V1의 q-PointNet·kNN graph·anchor-token
+            후보는 구현됐지만 아직 학습 결과가 없습니다. 국소 GNN, anatomy
+            attention, continuous-query operator를 모두 결합한 더 큰 구조는
+            장기 <b>irregular-3D target specification</b>입니다.
           </p>
         </div>
       </div>
@@ -288,15 +289,40 @@
 
           <div class="compare-table-wrap">
             <table class="guide-table">
-              <thead><tr><th>질문</th><th>일반 GNN</th><th>AURORA에서의 처리</th></tr></thead>
+              <thead><tr><th>V1 후보</th><th>형상을 읽는 방식</th><th>유량 q를 넣는 방식</th><th>왜 비교하는가</th></tr></thead>
               <tbody>
-                <tr><td>가까운 표면 관계</td><td>message passing에 강함</td><td>4개 residual edge-message block</td></tr>
-                <tr><td>동맥류 꼭대기 ↔ 먼 outlet</td><td>많은 layer가 필요해 정보가 흐려질 수 있음</td><td>physics-token attention으로 장거리 연결</td></tr>
-                <tr><td>mesh에 없던 좌표의 값</td><td>기존 node 출력에 자연스러움</td><td>query decoder가 임의 좌표에서 field를 평가</td></tr>
-                <tr><td>하나의 입력에서 여러 가능한 flow</td><td>보통 point prediction</td><td>BC latent를 샘플링해 field distribution 출력</td></tr>
+                <tr><td>q-PointNet</td><td>각 점을 독립적으로 encode한 뒤 전체 점의 mean/max를 모음</td><td>정규화한 q를 각 점과 decoder에 직접 연결</td><td>edge가 없어도 global pooling만으로 충분한지 확인</td></tr>
+                <tr><td>kNN-MGN</td><td>거리로 정한 16개 이웃의 message를 4회 교환</td><td>q를 node feature에 붙여 처음부터 함께 전달</td><td>국소 혈관 형상 관계가 실제 이득인지 확인</td></tr>
+                <tr><td>DeltaPhi graph</td><td>같은 16-NN message stack으로 q-independent base를 생성</td><td>q=0에 대응하는 0.0025 kg/s anchor에서 Δq-scaled response를 더함</td><td>절대 field보다 유량 변화량을 구조화하는 residual prior 검사</td></tr>
+                <tr><td>Anchor-token equivariant</td><td>중심에서 시작한 farthest-point anchor 16개와 local message·token attention 사용</td><td>anchor 거리와 q를 invariant scalar feature로 결합</td><td>회전해도 velocity가 함께 회전하는 frame-free 후보 검사</td></tr>
               </tbody>
             </table>
           </div>
+
+          <details class="question">
+            <summary>V1은 8개 유량에서 어떻게 “분포”를 만드나요?</summary>
+            <p>
+              환자 생리 분포를 새로 추정하는 것이 아닙니다. 데이터에 등록된
+              8개 유량을 같은 확률로 갖는 실험 design law로 두고 모두
+              열거합니다. 한 seed는 8개 field를 만들고, 세 seed ensemble은
+              같은 q의 평균을 point prediction으로 사용합니다. Missing-q
+              평가는 seed 3개와 q 8개의 조합인 24개 field를 사용합니다.
+              이 ensemble 결과는 backbone selector에 넣지 않으며 구조적
+              불확실성과 model 불확실성을 분리했다는 주장도 하지 않습니다.
+            </p>
+          </details>
+
+          <details class="question">
+            <summary>Same-case scaling은 왜 공정한 reconstruction baseline이 아닌가요?</summary>
+            <p>
+              이 control은 validation case의 q=0.0025 실제 velocity field를
+              이미 본 뒤 다른 q를 power 1.075로 확대합니다. 따라서 같은
+              geometry에서 반응 곡선이 단순 전역 scaling보다 복잡한지는
+              물을 수 있지만, geometry와 q만 받아 field를 복원하는 learned
+              model과 같은 입력 조건이 아닙니다. 그래서 response-only oracle로
+              보고하며 선택과 gate에는 사용하지 않습니다.
+            </p>
+          </details>
 
           <div class="verdict-panel">
             <p class="eyebrow">VERDICT</p>
@@ -304,13 +330,14 @@
             <p>
               <b>계획된 부분:</b> node와 edge, message passing이 geometry
               encoder의 국소 연산입니다. <b>현재 증거:</b> exact/nonlinear
-              gate는 MLP operator로 실행됐고 3D graph model은 아직
+              gate는 MLP operator로 실행됐습니다. V1 graph 후보는 구현됐지만
+              학습되지 않았고, 이 절의 전체 graph/token/query stack은 아직
               구현·학습되지 않았습니다.
             </p>
             <div class="model-labels">
-              <span class="yes">Planned GNN local encoder</span>
-              <span class="yes">Planned global mixer</span>
-              <span class="yes">Planned query decoder</span>
+              <span class="yes">Implemented V1 kNN candidates</span>
+              <span class="yes">Implemented V1 anchor-token candidate</span>
+              <span class="yes">Planned full query stack</span>
               <span class="no">No trained 3D result yet</span>
             </div>
           </div>
@@ -332,7 +359,7 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>이 절의 graph/token/query stack은 3D target specification입니다. 실행된 N1 MLP operator와 혼동하지 마세요.</p>
+              <p>V1의 축소된 point/graph 후보는 구현됐지만 아직 학습되지 않았습니다. 이 절의 전체 graph/token/query stack은 장기 3D target specification이며 실행된 N1 MLP operator와도 구분해야 합니다.</p>
             </aside>
             <article>
               <span>01 · NORMALIZE</span>
