@@ -49,6 +49,20 @@ sensitivity bound다. 실제 RSNA provenance가 이 문제를 만들지 L0에서
 - [Collaborative medical classification and segmentation (CVPR 2019)](https://openaccess.thecvf.com/content_CVPR_2019/html/Zhou_Collaborative_Learning_of_Semi-Supervised_Segmentation_and_Classification_for_Medical_Images_CVPR_2019_paper.html)
 - [Uniform partial-label and unlabeled learning (ICML 2024)](https://proceedings.mlr.press/v235/liu24ar.html)
 
+Dataset substitution도 method prior art와 분리해 감사했다. CADA는 task별
+center/mask가 있는 registered 3DRA challenge, ADAM은 center/radius와 consensus
+mask가 있는 registered TOF-MRA challenge다. IntrA는 raw MRA 없이 local vessel
+surface segment를, TopCoW는 aneurysm이 아닌 Circle-of-Willis mask/graph를
+제공한다. 따라서 CADA·ADAM은 fully supervised external controls,
+IntrA·TopCoW는 anatomy pretraining/control 계보다. 어느 것도 non-random
+annotation selection을 가진 multisite study-level lesion-set cohort를 대체하지
+않는다. 이 판정은 official metadata만 사용했고 payload는 읽지 않았다.
+
+- [CADA official dataset/access](https://cada.grand-challenge.org/Dataset/)
+- [ADAM official data/access](https://adam.isi.uu.nl/data/)
+- [IntrA official author repository](https://github.com/intra3d2019/IntrA)
+- [TopCoW permanent data release](https://zenodo.org/records/15692630)
+
 Longitudinal growth는 Royal Brisbane/OpenNeuro cohort의 clinician annotation이
 patient당 선택된 한 session에만 있고 AGED 및 2026 Bayesian growth detection이
 직접 경쟁한다. Variable-domain shape response도 GINO, Reference Neural Operator,
@@ -90,7 +104,7 @@ multi-modality 연구와 4D-flow velocity bias-error model이 이미 존재한�
   2022)](https://doi.org/10.1109/TMI.2022.3149421)
 
 따라서 SR, denoising, PINN/continuity loss, implicit field, dual-VENC fusion,
-voxel uncertainty와 domain adaptation은 각각 novelty가 아니다. 현재 남겨 둔
+voxel uncertainty와 domain adaptation은 각각 novelty가 아니다. 당시 남겨 둔
 후보 gap은 한 protocol을 “low quality input”, CFD를 “truth”로 놓는 대신,
 동일 controlled flow의 실제 두 acquisition을 서로 관측·held-out view로 두고
 posterior의 **cross-acquisition predictive calibration**을 measurement

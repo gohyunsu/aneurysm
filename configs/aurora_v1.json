@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.1",
+  "schema_version": "2.2",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
@@ -23,6 +23,18 @@
     "submission_identity_active": false,
     "next_allowed_action": "user_authorized_access_then_cpu_read_only_asset_and_task_unit_audit",
     "audit_document": "docs/problem-candidate-audit-2026-08-09.md",
+    "source_only_dataset_substitution_screen": {
+      "status": "completed_primary_source_metadata_only",
+      "payload_accessed": false,
+      "method_or_gpu_authorized": false,
+      "decision": "no_screened_alternative_replaces_rsna_for_the_annotation_selection_aware_study_level_lesion_set_task",
+      "candidate_ids": [
+        "cada_2020",
+        "adam_2020",
+        "intra_2020",
+        "topcow_2024"
+      ]
+    },
     "most_recent_closed_candidate": "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -49,7 +61,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "irregular_3d_aneurysm_velocity",
+    "required_headline_domain": "unselected_pending_problem_selection_and_prospective_evidence",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -106,17 +118,17 @@
     "plan": "docs/isbi-2027-plan.md"
   },
   "task": {
-    "primary_problem": "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift",
-    "application_endpoint": "held_out_same_flow_acquisition_prediction",
-    "primary_metric": "held_out_measurement_energy_score",
+    "primary_problem": "unselected",
+    "application_endpoint": "unselected",
+    "primary_metric": "unselected",
     "historical_primary_problem": "operator_learning_under_partial_boundary_observation",
     "historical_application_endpoint": "cross_sectional_rupture_status",
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
-    "active_candidate_problem": "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift",
-    "active_candidate_status": "i0b_execution_incomplete_missing_h5py_before_asset_access_no_scientific_verdict_no_rerun_method_unselected",
-    "candidate_primary_estimand": "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space",
-    "candidate_secondary_estimand": "aneurysm_localized_velocity_functional_calibration",
+    "active_candidate_problem": "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
+    "active_candidate_status": "conditional_shortlist_access_unmet_task_unit_and_annotation_selection_unaudited_method_unselected",
+    "candidate_primary_estimand": "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_observed_annotation_and_selection_operators",
+    "candidate_secondary_estimand": "lesion_localization_and_candidate_burden_under_cross_granularity_coherence",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
     "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
     "i0a_source_commit": "f7b4e024d69d43cf042f4163342b4d993386f441",

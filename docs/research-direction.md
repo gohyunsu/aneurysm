@@ -44,6 +44,19 @@ operator 계보 때문에 기각했다. 상세 계보, L0 access boundary와 단
 고정한다. 현재 모델은 GNN도 lesion-set network도 아니며 GPU 실험은 돌고
 있지 않다.
 
+### 공개 대안 screen의 판정
+
+공식 1차 자료만 사용한 source-only screen에서 CADA, ADAM, IntrA와 TopCoW를
+비교했다. CADA와 ADAM은 등록이 필요한 fully supervised detection/segmentation
+cohort라 non-random annotation-selection estimand를 제공하지 않는다. IntrA는
+raw angiography가 없는 local surface-segment dataset이고 TopCoW는 aneurysm이
+아닌 Circle-of-Willis anatomy label이다. 네 후보의 payload는 읽지 않았으며
+어느 것도 method/GPU 권한을 열지 않는다. CADA·ADAM은 향후 fully supervised
+external stress test, IntrA·TopCoW는 license와 task-unit 확인 뒤 anatomy
+pretraining/control 역할만 가능하다. 그러므로 RSNA shortlist는 유지하지만,
+access가 확보되지 않을 때 이를 더 작은 공개 segmentation 문제로 자동 축소하지
+않고 후보를 폐기해 새 problem-level audit으로 돌아간다.
+
 ## 0-A. 최근 candidate · protocol-indexed posterior prediction · closed
 
 검증하려던 질문은 다음이었다.

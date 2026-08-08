@@ -76,6 +76,27 @@ label의 예측이 서로 모순되는지 직접 검사할 수 있다. 동시에
 강한 baseline과 실제 multisite/modal variation이 있어 음수 결과도 명확하게
 판정할 수 있다.
 
+## 2-A. 공개 대안 데이터셋 substitution screen
+
+2026-08-09에 공식 challenge·dataset record와 원 저자 저장소만 사용해 네
+대안을 다시 검사했다. 이는 archive나 image payload를 읽은 asset audit이
+아니라 **source-only metadata screen**이다. 데이터 약관에 동의하거나 접근
+권한을 획득하지 않았고, 어느 후보도 method 또는 GPU 실행을 허용하지 않는다.
+
+| 후보 | 공식적으로 확인된 supervision·access | 현재 문제를 대체하지 못하는 이유 | 허용 가능한 후속 역할 |
+|---|---|---|---|
+| [CADA 2020](https://cada.grand-challenge.org/Dataset/) | 3D rotational angiography. Detection은 109 volume/127 aneurysm, segmentation은 110 volume/128 aneurysm이며 training image에 mask·center 정보를 함께 제공한다. 등록 승인 뒤 접근하며 [CC BY-NC-ND 4.0](https://cada.grand-challenge.org/Copyright/)이다. | Training annotation이 task별로 사실상 완전해 dense/sparse annotation **선택**을 식별하는 cohort가 아니다. RSNA의 multisite CT/MR study-level lesion-set 구조도 대체하지 않는다. | 사용자 접근 뒤 fully supervised 3DRA detection/segmentation external stress test |
+| [ADAM 2020](https://adam.isi.uu.nl/data/) | 113 TOF-MRA+structural MR scan, 93 positive/20 negative이며 center·radius와 consensus binary mask를 제공한다. 일부 subject의 baseline/follow-up이 함께 있고 registration·confidentiality agreement가 필요하다. | Point와 mask가 같은 training case에 제공되는 fully supervised task다. Repeat scan을 독립 patient로 세면 leakage가 생기며 annotation-selection gap을 제공하지 않는다. | 사용자 접근 뒤 MRA fully supervised baseline·modality stress test |
+| [IntrA](https://github.com/intra3d2019/IntrA) | 원 저자 저장소가 103 reconstructed vessel model, 1,694 healthy/215 aneurysm segment와 116 manually annotated aneurysm segment를 공개한다. Raw 2D MRA는 제공하지 않는다. | Local surface segment 단위이고 whole-study negative·lesion cardinality·localizer가 없다. 116개 dense subset의 선택 규칙과 dataset license도 payload 사용 전에 별도 감사가 필요하다. | License 확인 뒤 surface anatomy/part-segmentation pretraining 또는 sanity check |
+| [TopCoW](https://zenodo.org/records/15692630) | CTA/MRA의 Circle-of-Willis mask, ROI와 graph를 공개한다. Main release는 source attribution과 commercial-use permission 조건이 있다. | Aneurysm lesion annotation이 아니다. 공개 external LargeIA/Lausanne 각 20 case도 공식 record상 CoW ROI에 aneurysm이 없는 subset이다. | Anatomy encoder·vessel topology control; lesion-set headline evidence로 사용 금지 |
+
+결론은 “공개 데이터가 없어서 RSNA를 고집한다”가 아니다. CADA·ADAM은 강한
+fully supervised external controls지만 selection-aware estimand를 제공하지 않고,
+IntrA·TopCoW는 input/annotation 단위가 다르다. 따라서 현 residual gap을 유지한
+채 RSNA access를 기다리는 것이 타당하다. Access가 끝내 확보되지 않으면 이
+후보를 작은 공개 segmentation task로 축소하지 않고 **폐기 후 새 problem-level
+audit**으로 돌아간다.
+
 ## 3. novelty를 인정하기 위한 최소 조건
 
 아래 요소는 단독 contribution이 아니다.
@@ -202,5 +223,10 @@ paper identity를 정한다. 그 전의 논문 문구는 hypothesis와 decision 
 - [Collaborative medical classification and segmentation (CVPR 2019)](https://openaccess.thecvf.com/content_CVPR_2019/html/Zhou_Collaborative_Learning_of_Semi-Supervised_Segmentation_and_Classification_for_Medical_Images_CVPR_2019_paper.html)
 - [Uniform partial-label and unlabeled learning (ICML 2024)](https://proceedings.mlr.press/v235/liu24ar.html)
 - [OpenNeuro ds005096 longitudinal cohort record](https://openneuro.org/datasets/ds005096)
+- [CADA official detection dataset and access](https://cada.grand-challenge.org/Dataset/)
+- [CADA official license boundary](https://cada.grand-challenge.org/Copyright/)
+- [ADAM official data and access](https://adam.isi.uu.nl/data/)
+- [IntrA official author repository](https://github.com/intra3d2019/IntrA)
+- [TopCoW permanent official data release](https://zenodo.org/records/15692630)
 - [Bayesian longitudinal aneurysm growth detection](https://arxiv.org/abs/2604.06649)
 - [Shape-DINO](https://arxiv.org/abs/2603.03211)

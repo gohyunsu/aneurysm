@@ -479,8 +479,8 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">ANEUMO RESPONSE ELIGIBILITY · TRAIN ONLY</p>
-          <span>channel-scoped evidence; not learned G2</span>
+          <p class="eyebrow">PRESERVED ANEUMO RESPONSE AUDIT · TRAIN ONLY</p>
+          <span>historical channel-scoped evidence; current branch stopped</span>
         </div>
         <div class="g1-result-metrics">
           <div><span>Velocity residual</span><b>21.12%</b><small>CI95 20.01–22.43% · eligible</small></div>
@@ -489,14 +489,15 @@
           <div class="delta positive"><span>Exact re-entry</span><b>Passed</b><small>G1s · nonlinear test next</small></div>
         </div>
         <div class="g1-result-decision">
-          <strong>미래 irregular-3D 검증은 velocity response로만 좁힌다.</strong>
+          <strong>Velocity signal은 남았지만 Aneumo 3D submission path는 닫혔다.</strong>
           <p>
             같은 case의 anchor field와 train-tuned global power까지 허용한
             강한 scaling oracle 뒤에도 velocity 변화는 남았지만 pressure는
             고정 기준을 넘지 못했다. 이는 response의 비자명성만 확인한
-            train-family 결과다. G1s exact sanity는 통과했지만
-            nonlinear N0와 N1 strong-baseline gate를 먼저 검증한 뒤에만
-            velocity-only learned 3D headline을 연다.
+            train-family 결과다. 이후 N1c와 V1e가 실패했으므로 이를 근거로
+            velocity-only learned 3D headline을 열지 않는다. 수치와 실패
+            history는 보존하지만 현재 RSNA lesion-set shortlist의 method
+            evidence로 사용하지 않는다.
           </p>
           <a href="../results/aneumo_scaling_audit_20260803.json">Scaling audit aggregate ↗</a>
           <a href="../configs/aneumo_scaling_audit_v1.json">Frozen audit contract ↗</a>
@@ -507,9 +508,9 @@
       <div class="experiment-grid">
         <article class="experiment-card large">
           <div>
-            <p class="eyebrow">PRIMARY COMPARISON</p>
+            <p class="eyebrow">PRESERVED FAILED COMPARISON</p>
             <h3>Compatibility → Accuracy → Consequence</h3>
-            <p>세 층을 함께 통과하지 못한 복잡한 architecture는 headline contribution이 아니다. 현재 AURORA는 첫 층만 통과했다.</p>
+            <p>과거 BC-operator 연구선은 세 층을 함께 통과하지 못해 폐기됐다. 이 표는 현재 primary가 아니라 실패 원인을 보존한다.</p>
           </div>
           <div class="metric-layers">
             <span><i>01</i><b>Coherence</b>oracle moments · coverage · tower error</span>

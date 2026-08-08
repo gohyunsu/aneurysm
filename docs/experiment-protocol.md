@@ -1,6 +1,6 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.6-draft · 2026-08-09
+버전: 2.7-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -33,6 +33,17 @@ candidates per study와 patient-bootstrap CI이며 AUROC만으로 성공을 판�
 않는다. 상세 계약은
 [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
 있다.
+
+### L0-P · source-only dataset substitution screen · completed
+
+공식 metadata·challenge documentation만으로 CADA, ADAM, IntrA와 TopCoW를
+비교했다. Payload·image·annotation read는 0이며 데이터 registration이나 약관
+동의도 수행하지 않았다. CADA/ADAM은 fully supervised external control,
+IntrA/TopCoW는 surface/anatomy pretraining control로만 잠재 역할을 제한한다.
+어느 후보도 study-level annotation-selection estimand를 제공하지 않으므로
+RSNA L0를 대체하거나 executable config, method, GPU와 outer test를 열지
+않는다. RSNA access가 끝내 확보되지 않으면 공개 대안으로 task를 축소하지
+않고 shortlist를 폐기한 뒤 별도 problem-level audit을 등록한다.
 
 ## 0-A. I0a · paired-protocol 4D-flow asset audit
 
@@ -135,18 +146,20 @@ candidate의 별도 audit이다.
 목표는 2026-10-26 마감의 IEEE ISBI 2027 four-page regular paper다.
 `docs/isbi-2027-plan.md`가 venue-specific source of truth다.
 
-- Exact/nonlinear PDE는 sanity와 mechanism falsification이다.
-- ISBI headline은 expanded 또는 independent irregular-3D aneurysm
-  velocity outer test를 요구한다.
-- 64-case Aneumo cache는 development-only다.
+- 현재 primary problem, headline domain, method와 metric은 미선정이다.
+- RSNA shortlist가 L0/L1을 통과할 경우 lesion-level FROC, fixed-candidate
+  sensitivity, cross-granularity contradiction과 patient-bootstrap CI가 venue
+  evidence ladder의 후보가 된다. 이 역시 L1 뒤 prospective하게 고정한다.
+- Exact/nonlinear PDE와 64-case Aneumo는 보존된 sanity/development history이며
+  현 submission path가 아니다. 과거 irregular-3D velocity outer-test 요구도
+  active headline contract가 아니다.
 - Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
-  utility는 현재 headline에서 제외한다.
-- 실행된 nonlinear operator는 MLP다. V1 point/graph 후보는 12-task
-  validation smoke에서 모두 약한 결과를 보여 gate가 실패했다. 더 큰 GNN
-  hybrid는 장기 3D specification일 뿐 현재 결과나 contribution이 아니다.
-- Full paper는 frozen method, five seeds, base-family bootstrap CI,
-  strong graph/operator baseline, predeclared qualitative case selection을
-  모두 갖춘 경우에만 제출한다.
+  utility는 새 provenance와 prospective protocol 없이 되살리지 않는다.
+- 실행된 nonlinear operator는 MLP이고 V1 point/graph 후보는 실패했다. 더 큰
+  GNN hybrid는 보존된 specification일 뿐 현재 결과나 contribution이 아니다.
+- Full paper는 선택된 문제와 method, disjoint prospective outer test, strong
+  direct baselines, 적절한 patient/study uncertainty와 predeclared qualitative
+  case selection을 모두 갖춘 경우에만 제출한다.
 
 M0는 이 venue gate를 통과시키지 않는다. M0가 통과해도 scalar-inflow
 3D task의 data law와 학습 target에 맞춘 별도 prospective translation

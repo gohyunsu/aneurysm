@@ -679,8 +679,8 @@
               <span><b>모델 B</b><small>조금 높은 RMSE · hotspot/OSI 보존</small></span>
             </div>
             <p>
-              AURORA의 다음 primary 평가는 conditional NLL, field energy,
-              distribution coverage와 true-oracle functional regret입니다.
+              보존된 BC-operator 연구선의 평가는 conditional NLL, field energy,
+              distribution coverage와 true-oracle functional regret였습니다.
               Paired-response는 ablation입니다. WSS·OSI hotspot은 gradient와 단위가
               검증된 자산에서만 secondary functional로 추가합니다.
             </p>
@@ -700,6 +700,8 @@
           </header>
 
           <div class="dataset-ladder">
+            <article><span>CURRENT L0 · CONTROLLED ACCESS</span><h3>RSNA-ICA 2025</h3><p>Presence·13 territory·point·일부 mask를 한 lesion set의 projection으로 볼 수 있는지, annotation 선택이 비무작위인지 먼저 감사합니다.</p><small>not staged · no CAR assumption · no method/GPU</small></article>
+            <article><span>SOURCE-ONLY ALTERNATIVES</span><h3>CADA · ADAM · IntrA · TopCoW</h3><p>Fully supervised external control 또는 surface/anatomy pretraining 역할은 가능하지만 RSNA의 study-level selection-aware task를 대체하지 못합니다.</p><small>payload read 0 · no authorization</small></article>
             <article><span>P0 · EXACT ORACLE</span><h3>Controlled PDE</h3><p>정답 conditional mean·covariance를 계산할 수 있어, partial/missing mask의 coherence와 coverage pipeline을 먼저 검증합니다.</p><small>method sanity · 통과 자체는 novelty 아님</small></article>
             <article><span>P1 · NONLINEAR</span><h3>Nonlinear PDE</h3><p>ID partial/missing calibration, supplied full-BC response shift, hidden-law OOD detection, parameter shift를 분리해 평가합니다.</p><small>coherence ≠ OOD correctness</small></article>
             <article><span>P0 · SENSITIVITY</span><h3>Aneumo</h3><p>동일·유사 geometry에 여러 steady BC를 적용한 자료로, BC가 바뀌면 wall field가 얼마나 달라지는지 먼저 학습합니다.</p><small>synthetic CFD · clinical evidence 아님</small></article>
@@ -720,10 +722,9 @@
               train family만 읽는 same-case-anchor physical scaling
               audit에서 velocity는 21.12% [20.01%, 22.43%]가 남아
               통과했지만 pressure는 13.69% [11.90%, 14.96%]로
-              실패했습니다. 따라서 미래 G2는 velocity-only 후보이고,
-              G1s가 fresh exact sanity를 통과했지만, 8-component semilinear
-              N0와 N1 strong baseline을 먼저 검증합니다.
-              이후 learned 3D는 velocity-only로 제한합니다.
+              실패했습니다. Velocity-only eligibility는 당시의 좁은 후보였지만,
+              이후 N1c와 V1e가 실패해 current Aneumo 3D line은 종료됐습니다.
+              이를 현재 headline이나 새 method 근거로 되살리지 않습니다.
               기존 compact cache에는 boundary patch가 없지만 official ZIP에는
               mesh/STL, volume VTU와 inlet/outlet/wall VTP가 있음을 archive 1에서
               확인했습니다. 이 사전 발견은 결과가 아닙니다. 이후 V1b가
@@ -912,13 +913,14 @@
           </header>
 
           <div class="gate-explainer">
+            <article><span>L0</span><div><h3>현재 lesion-set task를 실제로 정의할 수 있는가?</h3><p>RSNA access 뒤 patient/study/lesion key, annotation mapping, assignment·positivity와 split viability를 CPU/read-only로 감사합니다.</p></div><b>current blocker · no method/GPU</b></article>
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
             <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>N0 실패는 보존하고, 결과 전에 fresh seed와 context-stratified selector를 고정한 N0r가 9/9를 통과했습니다.</p></div><b>N0r pass · N1 opened</b></article>
             <article><span>N1</span><div><h3>Coherence가 정확도와 decision을 개선하는가?</h3><p>N1c는 distribution·pair·acquisition에서 실패했습니다. N1c-a는 joint density 병목과 non-discriminative sparse task를 확인했습니다.</p></div><b>failed · 3D blocked</b></article>
             <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>V1은 geometry-only input에서 실패했고 V1a는 training underfit을 확인했습니다. V1b/V1c는 8/8, V1d는 9/9을 통과했지만 asset evidence입니다. V1e boundary Perceiver는 matched control보다 3/3 seed에서 좋았지만 worst train/validation/response L2 0.77221/0.87796/0.94918로 absolute gate를 모두 실패했습니다.</p></div><b>V1e 6/9 failed · current Aneumo 3D line stopped</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
-            <article><span>V2</span><div><h3>3D aneurysm에서 실제로 유효한가?</h3><p>ISBI headline은 expanded 또는 independent irregular-3D velocity outer test, five seeds와 family-bootstrap CI를 요구합니다.</p></div><b>ISBI submission gate</b></article>
+            <article><span>V2 · HISTORY</span><div><h3>과거 3D translation path</h3><p>V1e 실패 뒤 current Aneumo 3D line과 V2는 닫혔습니다. 이전 irregular-3D requirement는 active ISBI headline이 아닙니다.</p></div><b>closed · no re-entry</b></article>
           </div>
 
           <div class="pilot-result">

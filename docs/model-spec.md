@@ -32,6 +32,14 @@ decoder는 engineering components이며 단독 novelty가 아니다. 현재 상�
 [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)를
 따른다.
 
+공식 source-only dataset substitution screen도 architecture를 열지 않았다.
+CADA·ADAM은 point/mask가 함께 있는 fully supervised challenge이고, IntrA는
+whole-study image가 없는 surface segment, TopCoW는 lesion이 아닌 vascular
+anatomy supervision이다. 이들은 향후 external control 또는 pretraining 후보일
+뿐 RSNA의 annotation-selection mechanism을 대체하지 않는다. 따라서 공개
+asset이 즉시 내려받을 수 있다는 이유로 segmentation U-Net이나 point-cloud
+network를 현재 method로 선택하지 않는다.
+
 ## 0-A. 닫힌 4D-flow candidate의 model boundary
 
 현재 선택된 neural architecture는 없다. Exact source `f7b4e024…`의 I0a는

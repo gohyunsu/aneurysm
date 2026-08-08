@@ -32,6 +32,22 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "access-blocked"):
             validate_protocol(candidate)
 
+    def test_source_only_substitution_screen_cannot_open_data_or_training(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        screen = candidate["problem_selection"][
+            "source_only_dataset_substitution_screen"
+        ]
+        screen["payload_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "source-only dataset"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        screen = candidate["problem_selection"][
+            "source_only_dataset_substitution_screen"
+        ]
+        screen["candidate_ids"].remove("topcow_2024")
+        with self.assertRaisesRegex(ProtocolError, "source-only dataset"):
+            validate_protocol(candidate)
+
     def test_rsna_candidate_cannot_claim_staging_or_redistribution(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         rsna = next(
@@ -46,7 +62,7 @@ class ProtocolTests(unittest.TestCase):
     def test_prospective_endpoint_is_rejected(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["application_endpoint"] = "five_year_rupture_risk"
-        with self.assertRaisesRegex(ProtocolError, "same-flow"):
+        with self.assertRaisesRegex(ProtocolError, "unselected"):
             validate_protocol(candidate)
 
     def test_historical_partial_bc_task_cannot_remain_primary(self) -> None:
@@ -54,7 +70,7 @@ class ProtocolTests(unittest.TestCase):
         candidate["task"]["primary_problem"] = candidate["task"][
             "historical_primary_problem"
         ]
-        with self.assertRaisesRegex(ProtocolError, "protocol-indexed"):
+        with self.assertRaisesRegex(ProtocolError, "unselected"):
             validate_protocol(candidate)
 
     def test_i0a_pass_cannot_select_a_method_or_call_cfd_mri_truth(self) -> None:
@@ -128,7 +144,7 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "exact I0a result"):
             validate_protocol(candidate)
 
-    def test_isbi_target_cannot_be_marked_ready_without_3d_evidence(self) -> None:
+    def test_isbi_target_cannot_be_marked_ready_while_primary_is_unselected(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["venue"]["submission_ready"] = True
         with self.assertRaisesRegex(ProtocolError, "3D evidence"):

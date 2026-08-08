@@ -15,6 +15,13 @@ window.AURORA_DATA = Object.freeze({
       url: "https://www.rsna.org/artificial-intelligence/ai-image-challenge/intracranial-aneurysm-detection-ai-challenge"
     },
     {
+      year: "2020–25",
+      title: "Dataset substitution screen",
+      copy: "CADA·ADAM은 fully supervised registered challenge, IntrA는 raw angiography 없는 surface segment, TopCoW는 aneurysm이 아닌 vascular anatomy dataset이다. 강한 external/pretraining control은 되지만 RSNA의 annotation-selection estimand를 대체하지 않는다.",
+      status: "Primary-source metadata only · payload 0 · no method/GPU authorization",
+      url: "https://cada.grand-challenge.org/Dataset/"
+    },
+    {
       year: "2010–24",
       title: "Structured & mixed supervision",
       copy: "Latent structured-output weak detection, image/full-label mixed detection, medical classification+segmentation과 partial-label learning이 annotation marginalization 자체를 이미 점유한다.",
@@ -208,6 +215,26 @@ window.AURORA_DATA = Object.freeze({
       provenance: "Official description: >4,000 CT/MR scans · 18 institutions · 13 locations · not staged/task unit and selection mechanism unaudited · no redistribution"
     },
     {
+      name: "CADA 2020 · registration required",
+      role: "future fully supervised 3DRA detection/segmentation external stress test only",
+      provenance: "Official task records: detection 109 volumes/127 lesions; segmentation 110/128 · center+mask supervision · CC BY-NC-ND 4.0 · not selection-aware"
+    },
+    {
+      name: "ADAM 2020 · registration required",
+      role: "future fully supervised TOF-MRA baseline/modality stress test only",
+      provenance: "113 scans · 93 positive/20 negative · center/radius+consensus masks · repeated subjects require group split · confidentiality agreement"
+    },
+    {
+      name: "IntrA · author-hosted surface data",
+      role: "license audit 뒤 surface anatomy/part-segmentation pretraining control",
+      provenance: "103 vessel models · 1,694 healthy/215 aneurysm segments · 116 manual part annotations · no raw MRA or study-level lesion set"
+    },
+    {
+      name: "TopCoW 2024 · open anatomy data",
+      role: "Circle-of-Willis anatomy encoder/topology control only",
+      provenance: "CTA/MRA CoW masks+ROI+graphs · not aneurysm labels · listed LargeIA/Lausanne external subsets are aneurysm-free"
+    },
+    {
       name: "4D-flow multiresolution phantom · 2021",
       role: "same-flow 3 resolution × 3 acceleration development/task audit candidate",
       provenance: "Zenodo CC BY 4.0 · I0b execution-incomplete before archive/field access · no verdict/no rerun"
@@ -249,6 +276,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "Public alternatives do not replace the selection-aware task",
+      copy: "Official CADA, ADAM, IntrA와 TopCoW sources를 payload 없이 비교했다. CADA/ADAM은 fully supervised external controls이고 IntrA/TopCoW는 surface/anatomy controls라 RSNA의 study-level non-random annotation-selection estimand를 대체하지 않는다. Central schema는 active primary·metric·headline을 unselected로 바로잡고 닫힌 4D-flow/3D fields를 history로 내렸다. 이 screen은 data access, executable method, GPU 또는 outer test를 열지 않는다.",
+      files: ["docs/problem-candidate-audit-2026-08-09.md", "docs/literature-lineage.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "research",

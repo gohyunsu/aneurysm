@@ -15,6 +15,14 @@
 > [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)를
 > 따른다.
 
+> **2026-08-09 source-only substitution screen:** CADA, ADAM, IntrA와 TopCoW의
+> 공식 metadata·access·annotation 범위를 비교했지만 image/annotation payload는
+> 읽지 않았다. CADA/ADAM은 fully supervised challenge이고 IntrA/TopCoW는 각각
+> local surface segment/vascular anatomy라 RSNA의 study-level non-random
+> annotation-selection 문제를 대체하지 않는다. 어느 대안도 method/GPU를
+> 허용하지 않는다. RSNA access가 없으면 일반 segmentation 문제로 축소하지
+> 않고 shortlist를 폐기한다.
+
 > **2026-08-08 candidate snapshot, closed 2026-08-09:** 공개 in-vitro 4D-flow MRI release들을
 > 새 end-to-end cohort로 합치지 않는다. 2021 release는 한 aneurysm phantom의
 > 3 resolution × 3 acceleration development view, Zenodo `14981710`은 네
@@ -76,6 +84,10 @@
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |
 |---|---|---:|---|---|
 | RSNA-ICA 2025 | Multisite CT/MR angiography, study/location labels, localizer와 일부 segmentation research | official description: >4,000 scans, 18 institutions, 13 locations; exact local counts unknown | conditional annotation-selection-aware lesion-set L0 candidate | controlled access; not staged, task unit/annotation-selection unaudited, no redistribution |
+| CADA 2020 | 3DRA와 task별 center/mask supervision | detection 109 volume/127 lesion; segmentation 110 volume/128 lesion | user access 뒤 fully supervised external detection/segmentation stress test | registration required; CC BY-NC-ND 4.0; selection-aware cohort 아님 |
+| ADAM 2020 | TOF-MRA+structural MR, center/radius와 consensus binary mask | 113 scans; 93 positive, 20 negative; 일부 baseline/follow-up | user access 뒤 MRA fully supervised baseline | registration/confidentiality agreement; subject-group split 필수; selection-aware cohort 아님 |
+| IntrA | Reconstructed vessel surface와 local aneurysm/healthy segments | 103 full vessel models; 1,694 healthy/215 aneurysm segment; 116 manual part annotations | license audit 뒤 surface anatomy pretraining/sanity | raw MRA와 whole-study negative/cardinality 없음; selection rule·payload license 재감사 필요 |
+| TopCoW 2024 | CTA/MRA CoW masks, ROI와 vascular graph | permanent 14.4 GB release plus external subsets | anatomy encoder/topology control | aneurysm label이 아니며 listed LargeIA/Lausanne external subsets는 aneurysm-free |
 | AneuriskWeb | surface/centerline/morphology, 일부 배포본의 영상·annotation 여부 확인 필요 | 약 100 | geometry·형태 baseline | 배포본/미러별 asset 차이를 checksum으로 확인 |
 | AneuX | aneurysm/vessel mesh, morphology·clinical table, rupture label | 750 models | geometry 규모 확장, morphology/rupture 연구 | CTA 원본·CFD가 없는 geometry dataset |
 | CMHA / Gong et al. 2024 | CTA, 3D model, clinical/morphology/hemodynamic data | 99 IA + 44 controls | multimodal clinical/CFD 연결 | 다운로드 14.49 GB, 파일 매핑·license 기록 필요 |

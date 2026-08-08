@@ -43,10 +43,17 @@ test 순서를 통과해야 한다. 상세 기준은
 [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
 있다.
 
-1. 실행된 exact/nonlinear 모델은 MLP 기반 lifted operator다. V1 point/graph
-   네 후보는 학습됐지만 모두 relative L2 약 1로 실패했다. 공개 architecture
-   문서의 더 큰 GNN+token+continuous-query 구조는 장기 irregular-3D target
-   specification이다.
+공식 source-only substitution screen도 access 병목을 없애지 못했다. CADA와
+ADAM은 등록이 필요한 fully supervised challenge이고, IntrA는 raw image 없는
+surface segment, TopCoW는 aneurysm이 아닌 CoW anatomy dataset이다. 이 네
+후보는 external control/pretraining 역할만 가능하며 어떤 payload도 읽지
+않았다. RSNA access가 없다고 이들 중 하나의 일반 segmentation task로
+submission identity를 자동 축소하지 않는다.
+
+1. 현재 primary model은 없다. 실행된 exact/nonlinear MLP와 V1 point/graph
+   네 후보는 모두 보존된 이전 연구선이며, V1은 relative L2 약 1로 실패했다.
+   공개 architecture 문서의 더 큰 GNN+token+continuous-query 구조도 inactive
+   historical specification이다.
 2. N1c는 field distribution, paired response, acquisition에서 실패했다.
    실패 분석 자체를 4-page biomedical-imaging paper의 headline으로
    제출하지 않는다.
@@ -117,7 +124,7 @@ Doppler/4D-flow measurement distribution이 없으므로 “measurement value”
 - 목적: method falsification과 oracle-attribution
 - GNN 아님
 
-### Planned irregular-3D backbone
+### Preserved historical irregular-3D specification · inactive
 
 - input: normalized 3D coordinates, kNN graph, scalar inflow value/mask
 - local encoder: residual edge-message blocks

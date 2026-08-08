@@ -17,10 +17,8 @@ class ProtocolError(ValueError):
     """Raised when a research protocol violates a project invariant."""
 
 
-ALLOWED_PRIMARY_PROBLEMS = {
-    "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
-}
-ALLOWED_ENDPOINTS = {"held_out_same_flow_acquisition_prediction"}
+ALLOWED_PRIMARY_PROBLEMS = {"unselected"}
+ALLOWED_ENDPOINTS = {"unselected"}
 ALLOWED_PROVENANCE = {
     "analytical_pde",
     "in_vitro_measurement",
@@ -116,6 +114,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
+    if protocol["schema_version"] != "2.2":
+        raise ProtocolError("The current research-state schema must be version 2.2.")
+
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
     if project["name"] != "AURORA":
@@ -143,6 +144,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_identity_active",
             "next_allowed_action",
             "audit_document",
+            "source_only_dataset_substitution_screen",
             "most_recent_closed_candidate",
             "rejected_candidates",
             "non_novel_components",
@@ -194,6 +196,32 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "conformal_prediction_or_fdr_control",
     }:
         raise ProtocolError("Direct lesion-set prior-art boundaries must remain explicit.")
+    substitution_screen = problem_selection["source_only_dataset_substitution_screen"]
+    _require_keys(
+        substitution_screen,
+        [
+            "status",
+            "payload_accessed",
+            "method_or_gpu_authorized",
+            "decision",
+            "candidate_ids",
+        ],
+        "problem_selection.source_only_dataset_substitution_screen",
+    )
+    if (
+        substitution_screen["status"]
+        != "completed_primary_source_metadata_only"
+        or substitution_screen["payload_accessed"] is not False
+        or substitution_screen["method_or_gpu_authorized"] is not False
+        or substitution_screen["decision"]
+        != "no_screened_alternative_replaces_rsna_for_the_annotation_selection_aware_study_level_lesion_set_task"
+        or set(substitution_screen["candidate_ids"])
+        != {"cada_2020", "adam_2020", "intra_2020", "topcow_2024"}
+    ):
+        raise ProtocolError(
+            "The source-only dataset substitution screen must preserve its no-payload, "
+            "no-method decision and all four audited alternatives."
+        )
     checks.append("access-blocked problem-selection boundary")
 
     venue = protocol["venue"]
@@ -274,7 +302,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("ISBI fifth-page content must remain non-technical.")
     if (
         venue["submission_ready"] is not False
-        or venue["required_headline_domain"] != "irregular_3d_aneurysm_velocity"
+        or venue["required_headline_domain"]
+        != "unselected_pending_problem_selection_and_prospective_evidence"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -363,9 +392,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["plan"] != "docs/isbi-2027-plan.md"
     ):
         raise ProtocolError(
-            "ISBI submission must remain blocked before independent 3D evidence."
+            "ISBI submission must remain blocked while the primary problem is "
+            "unselected; historical 3D evidence remains insufficient."
         )
-    checks.append("ISBI 2027 four-page and 3D evidence boundary")
+    checks.append("ISBI 2027 four-page and unselected-primary boundary")
 
     task = protocol["task"]
     _require_keys(
@@ -413,13 +443,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if task["primary_problem"] not in ALLOWED_PRIMARY_PROBLEMS:
         raise ProtocolError(
-            "The active primary task must remain protocol-indexed 4D-flow "
-            "posterior prediction for schema v2."
+            "The active primary task must remain unselected until the RSNA access, "
+            "L0, and L1 gates are completed."
         )
     if task["application_endpoint"] not in ALLOWED_ENDPOINTS:
         raise ProtocolError(
-            "Only held-out same-flow acquisition prediction is active; prospective "
-            "risk or rupture-status relabeling requires a separate protocol."
+            "The application endpoint must remain unselected; prospective risk or "
+            "rupture-status relabeling requires a separate protocol."
         )
     forbidden = set(task["forbidden_claims"])
     if "prospective_rupture_risk" not in forbidden or "clinical_utility" not in forbidden:
@@ -427,7 +457,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if "causal_intervention_effect" not in forbidden:
         raise ProtocolError("Paired simulator responses must not be called causal effects.")
     if (
-        task["primary_metric"] != "held_out_measurement_energy_score"
+        task["primary_metric"] != "unselected"
         or task["historical_primary_problem"]
         != "operator_learning_under_partial_boundary_observation"
         or task["historical_application_endpoint"] != "cross_sectional_rupture_status"
@@ -435,13 +465,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"]
-        != "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
+        != "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
         or task["active_candidate_status"]
-        != "i0b_execution_incomplete_missing_h5py_before_asset_access_no_scientific_verdict_no_rerun_method_unselected"
+        != "conditional_shortlist_access_unmet_task_unit_and_annotation_selection_unaudited_method_unselected"
         or task["candidate_primary_estimand"]
-        != "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space"
+        != "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_observed_annotation_and_selection_operators"
         or task["candidate_secondary_estimand"]
-        != "aneurysm_localized_velocity_functional_calibration"
+        != "lesion_localization_and_candidate_burden_under_cross_granularity_coherence"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -485,10 +515,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The 4D-flow candidate must retain the exact I0a result and I0b "
-            "execution record, remain measurement-space, and stay method-unselected."
+            "The active task must remain the access-blocked lesion-set shortlist, "
+            "while historical 4D-flow evidence retains the exact I0a result and "
+            "I0b execution record."
         )
-    checks.append("historical task boundary and 4D-flow candidate guardrails")
+    checks.append("unselected task boundary and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:

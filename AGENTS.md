@@ -7,7 +7,8 @@ backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass,
 V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
 그리고 cross-protocol 4D-flow candidate I0a 14/14 asset pass와 2026-08-09
 I0b one-shot execution-incomplete/no-verdict/no-rerun 상태, 같은 날 수행한
-problem-level cold audit의 한 조건부 lesion-set shortlist를 반영했다.
+problem-level cold audit의 한 조건부 lesion-set shortlist와 CADA·ADAM·IntrA·
+TopCoW source-only dataset substitution screen을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -26,6 +27,12 @@ problem-level cold audit의 한 조건부 lesion-set shortlist를 반영했다.
   아니라 `not staged` 판정이다. 사용자를 대신해 controlled-access 약관을
   수락하지 않는다. Official access와 private asset location이 제공되기 전에는
   executable config, split, model code, GPU job과 outer test를 만들지 않는다.
+- 공식 source-only substitution screen에서 CADA·ADAM은 fully supervised
+  registered challenge, IntrA는 local surface segment, TopCoW는 vascular
+  anatomy dataset임을 확인했다. Payload read는 0이고 어느 대안도 RSNA의
+  study-level annotation-selection estimand를 대체하거나 method/GPU를 열지
+  않는다. RSNA access가 불가능하면 일반 segmentation으로 축소하지 않고
+  shortlist를 폐기해 새 problem-level audit으로 돌아간다.
 - Access 뒤 첫 허용 작업은 CPU/read-only L0 asset/task-unit audit이다. Version,
   terms/checksum, patient–study–series–site–modality key, lesion cardinality,
   13 territory label, localizer/segmentation mapping, AI-generated annotation
@@ -66,9 +73,10 @@ problem-level cold audit의 한 조건부 lesion-set shortlist를 반영했다.
   dependency repair를 열지 않는다. Method·architecture는 선택하지 않았다.
 - 제출 목표: **IEEE ISBI 2027 archival four-page regular paper**,
   2026-10-26 23:59 USA EDT. 현재는 `not submission-ready`다.
-- ISBI headline은 actual irregular-3D aneurysm **velocity-only**
-  reconstruction·response·calibration evidence가 있을 때만 연다. Exact와
-  nonlinear PDE만으로 biomedical-imaging contribution을 주장하지 않는다.
+- ISBI headline domain과 metric은 아직 선택되지 않았다. RSNA L0/L1 뒤에도
+  problem·method·strong-baseline gap이 남고 disjoint prospective evidence가
+  있을 때만 연다. Exact/nonlinear PDE나 과거 irregular-3D specification만으로
+  biomedical-imaging contribution을 주장하지 않는다.
 - 실행된 exact/nonlinear architecture는 MLP lifted operator다. V1에는
   q-PointNet, 두 kNN graph model과 frame-free anchor-token equivariant
   candidate가 구현·학습됐지만 네 family 모두 validation relative L2 약 1로
@@ -306,12 +314,13 @@ problem-level cold audit의 한 조건부 lesion-set shortlist를 반영했다.
 
 ## 2. 현재 contribution 가설
 
-현재 확정 contribution은 없다. Generic 4D-flow super-resolution, denoising,
-physics-informed reconstruction, implicit neural field, dual-VENC fusion,
-voxelwise uncertainty와 domain adaptation은 직접 선행연구다. 남겨 둔 후보는
-**held-out same-flow acquisition posterior predictive calibration**이지만,
-소수 phantom과 반복 측정 부족에서 estimand가 식별 가능한지부터 I0b에서
-learned method 없이 확인해야 한다.
+현재 확정 contribution과 prospective method hypothesis는 없다. 유일한 조건부
+problem shortlist는 annotation-selection-aware lesion-set inference이며,
+structured weak detection, mixed supervision, set prediction, anatomy graph와
+conformal/FDR 자체는 직접 선행연구다. 실제 RSNA annotation selection이
+비무작위이고 관측 정보만으로 무시할 수 없을 때 필요한 식별 조건 또는
+sensitivity bound가 L0/L1 뒤에도 남아야만 algorithmic contribution 후보를
+설계한다. 닫힌 4D-flow와 BC-operator 가설은 아래 history로만 보존한다.
 
 기존 세 축은 아래처럼 재판정한다.
 
@@ -365,7 +374,7 @@ component를 거의 바꾸지 않았다. 따라서 이 identity는 현 nonlinear
 benchmark에서 폐기하며, direct route를 정답처럼 두거나 signed route
 차이를 평균해 상쇄하지 않는다.
 
-현재 prospective 개발 가설은 **coherence–conditional-accuracy trade-off를
+보존된 이전 prospective 개발 가설은 **coherence–conditional-accuracy trade-off를
 candidate-measurement–solution joint risk에 맞춰 해소할 수 있는가**다. 완료된 audit은
 full-joint likelihood가 random-mask conditional objective의 excess NLL을
 20.3–27.2% 줄여 이 trade-off가 현재 모델에서 불가피하지 않음을 보였다.
@@ -376,8 +385,8 @@ missing-mask decision endpoint에서 solution marginal이 아니라 각
 \((B_j,\Psi(H))\) joint pushforward를 직접 맞추는 operator-pullback
 algorithm·보장과 fresh strong-baseline 우위가 있을 때만 인정한다.
 Sparse-2 adaptive acquisition은 고정 winner task이므로 headline에서
-제외한다. `M0`는 이 mechanism의 development eligibility만 판정하며 아직
-선택된 method나 fresh re-entry가 아니다.
+제외한다. `M0`는 2/3 seed execution-incomplete로 닫혔고 이 mechanism의
+method, repair 또는 fresh re-entry를 열지 않는다.
 
 Test-time active
 feature acquisition 자체, path independence 자체, 이름만 붙인 acquisition
@@ -390,6 +399,9 @@ N1 adaptation을 원 논문 재현으로 표현하지 않는다.
 
 | 데이터 | 허용된 주 역할 | 금지된 해석 |
 |---|---|---|
+| RSNA-ICA 2025 | access 뒤 annotation-selection-aware lesion-set L0/L1 후보 | access 전 method·split·GPU 또는 clinical utility |
+| CADA/ADAM | 사용자 접근 뒤 fully supervised 3DRA/MRA external control | annotation-selection cohort로 해석 |
+| IntrA/TopCoW | license/task-unit 확인 뒤 surface/anatomy pretraining control | study-level lesion-set evidence 또는 primary 대체 |
 | Aneumo | 동일/유사 geometry의 다중 steady BC로 BC sensitivity pretraining | patient-specific clinical evidence |
 | AneuG-Flow | 대규모 synthetic steady 및 selected pulsatile pretraining | real cohort generalization |
 | BenchAnXplore | 105 semi-idealized transient field의 재현·baseline | geometry-only clinical deployment |
@@ -654,10 +666,12 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - 자세한 단일 출처는 `docs/isbi-2027-plan.md`다.
 - 모든 기술 내용·표·그림은 official template 첫 4쪽 안에 둔다. 5쪽은
   reference, ethics, acknowledgments/COI 외 기술 내용을 금지한다.
-- Primary는 synthetic-CFD 기반 3D velocity reconstruction 연구다.
+- 현재 primary와 headline domain은 미선정이다. RSNA shortlist가 access,
+  L0/L1, strong-baseline eligibility와 prospective outer-test contract를
+  통과하기 전에는 lesion-set candidate도 primary로 부르지 않는다. 과거
+  synthetic-CFD 3D velocity 규약은 실패한 Aneumo branch의 history다.
   Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
-  utility는 새 provenance와 prospective evidence 없이는 headline에서
-  제외한다.
+  utility는 새 provenance와 prospective evidence 없이는 headline에서 제외한다.
 - 64-case Aneumo cache는 implementation/development pilot이다. Expanded
   base-family-disjoint cache 또는 독립 3D cohort 없이 confirmatory
   headline이라 하지 않는다.

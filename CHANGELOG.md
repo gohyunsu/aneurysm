@@ -4,6 +4,32 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · public alternatives do not replace the selection-aware task
+
+- CADA, ADAM, IntrA와 TopCoW의 공식 challenge/dataset record만 사용해
+  source-only dataset substitution screen을 수행했다. Image·annotation payload,
+  registered download와 약관 동의는 모두 0이다.
+- CADA와 ADAM은 point/mask가 함께 있는 fully supervised 3DRA/MRA challenge라
+  non-random annotation-selection cohort가 아니다. IntrA는 whole-study raw
+  angiography가 없는 local surface segment이고 TopCoW는 aneurysm이 아닌
+  Circle-of-Willis anatomy label이다.
+- 네 자료는 향후 external fully supervised control 또는 anatomy pretraining
+  역할만 가능하다. 어느 것도 RSNA-ICA의 study-level selection-aware lesion-set
+  task, executable config, method/GPU 또는 outer test를 열지 않는다. RSNA
+  access가 불가능하면 일반 segmentation으로 축소하지 않고 shortlist를
+  폐기한다.
+- Central schema를 `2.2`로 올려 `primary_problem`, application endpoint,
+  primary metric과 ISBI headline domain을 `unselected`로 고정했다. 닫힌
+  4D-flow I0a/I0b와 실패한 irregular-3D evidence는 exact history로 유지하되
+  validator가 active task처럼 강제하던 모순을 제거했다.
+- 영향 파일: `AGENTS.md`, `README.md`, `docs/research-direction.md`,
+  `docs/model-spec.md`, `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/datasets.md`, `docs/literature-lineage.md`,
+  `docs/problem-candidate-audit-2026-08-09.md`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/index.html`, `site/learn.html`, `site/assets/research-data.js`,
+  `CHANGELOG.md`.
+
 ## 2026-08-09 · direct mixed-supervision prior art narrows the shortlist
 
 - 추가 direct search에서 heterogeneous weak annotations의 latent structured
