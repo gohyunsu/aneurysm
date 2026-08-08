@@ -5,6 +5,31 @@
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
 
+## 0-A. Current conditional gap · signed adjoint projection supervision
+
+새 후보는 generic segmentation→CFD가 아니다. Image2Flow는 이미 3D MRI에서
+patient-specific volume mesh와 pointwise pressure/velocity를 공동 예측하고
+CFD loss를 사용한다. IAVS는 aneurysm localization, topology-aware
+segmentation과 binary CFD Applicability Score를 직접 제안한다. clDice/cbDice는
+vascular topology·radius·boundary loss를, MATCH와 CFD challenge는 segmentation
+variation이 WSS/flow에 미치는 영향을 이미 정량화했다. Neural-operator
+derivative와 differentiable fluid/geometry 연구는 PDE-constrained optimization과
+shape design 일반론을 점유한다.
+
+따라서 잔여 gap은 manual vessel domain 경계의 signed displacement를
+predefined PDE-functional adjoint gradient에 투영해 의료영상 segmentation
+supervision으로 사용하고, first-order remainder와 patient-disjoint functional
+error 감소를 함께 보이는 정확한 algorithm에만 남을 수 있다. CFD pipeline,
+joint field head, solver success, sensitivity magnitude weighting 또는 새 이름은
+novelty가 아니다. S0a/S0b 전에는 이 gap도 가설이다.
+
+- [Image2Flow](https://doi.org/10.1371/journal.pcbi.1012231)
+- [IAVS](https://arxiv.org/abs/2512.01319)
+- [Centerline Boundary Dice](https://doi.org/10.1007/978-3-031-72111-3_5)
+- [MATCH phase Ib](https://doi.org/10.1007/s13239-019-00407-y)
+- [Neural-operator derivatives for PDE-constrained optimization](https://proceedings.mlr.press/v267/cheng25f.html)
+- [NeuralFluid differentiable fluid design](https://arxiv.org/abs/2405.14903)
+
 ## 0. 최신 red team · RSNA lesion-set 후보 기각
 
 RSNA-ICA 2025는 18개 기관의 multisite/multimodal angiography와 13개

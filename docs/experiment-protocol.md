@@ -1,27 +1,41 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.8-draft · 2026-08-09
+버전: 2.9-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
-## L0 · active problem 없음
+## S0 · goal-oriented segmentation conditional problem gate
 
-현재 active shortlist, primary estimand, method와 headline metric은 모두
-미선정이다. 따라서 executable L0 config, split, threshold, model code, GPU
-job과 outer test는 없다. 다음 허용 작업은 후보별 데이터 의미·접근성,
-식별 가능한 estimand, direct-prior gap, patient-level split, biomedical-
-imaging relevance와 confirmatory 규모를 비교하는 fresh problem-level
-audit이다.
+현재 conditional problem shortlist는 goal-oriented hemodynamic segmentation
+1개다. Primary problem, method, architecture와 headline metric은 여전히
+미선정이다. 다음 허용 작업은
+`configs/goal_oriented_segmentation_s0a.json`의 CPU/read-only asset/runtime
+audit뿐이다. GPU, segmentation training, rupture-label selection, outer test와
+paper contribution은 없다.
 
-후보 하나가 명시적으로 선택되면 먼저 method-free task adequacy gate를
-별도 version과 commit에 prospective하게 고정한다. Gate 결과 전에는
-architecture search를 열지 않는다. Development는 test를 봉인한 상태에서
-사전에 정한 총 compute, 최대 repair round, 한 round당 단일 attribution
-hypothesis와 selector만 허용한다. 개선된 variant는 기존 실패를 relabel하지
-않고 fresh seed 또는 disjoint split의 prospective re-entry를 거친다.
+### S0a · CMHA linkage and solver runtime integrity · preregistered
+
+S0a는 99 patient/105 lesion/44 control/6 multi-lesion-patient unit, official
+archive size/MD5/license, 105 lesion의 CTA–parent/aneurysm STL–aneurysm STL–
+table exact-ID mapping, NIfTI/STL unit·frame, 별도 pinned solver image의
+steady forward와 discrete-adjoint/verified shape-gradient capability를 11개
+all-or-none check로 감사한다. Row order나 filename similarity만으로 mapping하지
+않고 public aggregate에 identifier, private path, voxel 또는 field를 쓰지
+않는다. 현재 PyTorch image에 mesh/PDE stack이 없다는 것은 등록 전 discovery다.
+
+- all 11 pass: method-free S0b 등록만 허용
+- any fail: 같은 version의 dependency/mapping repair rerun 없이 후보 종료
+- pass도 금지: model/GPU/outer test/submission identity
+
+S0b는 S0a 결과 전에 수치·patient를 소급해 정하지 않는다. 별도 prospective
+contract에서 smooth surface perturbation의 forward solve와 adjoint first-order
+prediction, mesh/BC stability, matched-Dice functional non-equivalence를 먼저
+검사한다. S0b가 실패하면 architecture를 만들지 않는다. 이후 development가
+열려도 test 봉인, 총 compute, 최대 repair round, 단일 attribution hypothesis와
+fresh re-entry 원칙을 그대로 적용한다.
 
 ### L0-R · RSNA supervision-semantics red team · completed/rejected
 

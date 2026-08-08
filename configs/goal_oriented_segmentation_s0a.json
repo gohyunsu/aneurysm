@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "protocol_id": "goal_oriented_hemodynamic_segmentation_s0a",
+  "as_of": "2026-08-09",
+  "status": "preregistered_before_private_cmha_archive_and_solver_image_audit",
+  "purpose": "method_free_asset_linkage_and_runtime_integrity_only",
+  "candidate_status": "conditional_problem_shortlist_not_selected_method_or_submission_identity",
+  "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
+  "public_sources_inspected_before_registration": {
+    "cmha_article": "https://doi.org/10.1038/s41597-024-04056-8",
+    "cmha_figshare_record": "https://doi.org/10.6084/m9.figshare.26965450.v1",
+    "figshare_article_id": 26965450,
+    "statistical_archive_entries": [
+      "clinical_all.csv",
+      "hemodynamic_aneurysm_artery.csv",
+      "hemodynamic_control.csv",
+      "morphological_aneurysm_artery.csv",
+      "morphological_control.csv"
+    ],
+    "junjinyong_discovery": "pbs_and_pytorch_sif_readable_but_no_host_or_container_mesh_pde_stack_detected",
+    "direct_prior_scope": [
+      "automatic_segmentation_to_cfd",
+      "joint_image_mesh_and_cfd_field_prediction",
+      "cfd_applicability_and_topology_aware_segmentation",
+      "segmentation_induced_hemodynamic_variability",
+      "differentiable_geometry_and_pde_constrained_optimization"
+    ]
+  },
+  "official_release": {
+    "version": 1,
+    "license": "CC_BY_4_0",
+    "total_bytes": 15557345067,
+    "patients_archive": {
+      "name": "patients.rar",
+      "bytes": 10735821611,
+      "md5": "e783d656ba51c6813aae9fca68565c17"
+    },
+    "controls_archive": {
+      "name": "controls.rar",
+      "bytes": 4821489080,
+      "md5": "8d18b970978a303ed89618066919a1b1"
+    },
+    "statistical_archive": {
+      "name": "statistical results.rar",
+      "bytes": 34376,
+      "md5": "12b92693c79587fb6dbab4638bfad8bc"
+    }
+  },
+  "expected_units": {
+    "patients": 99,
+    "aneurysms": 105,
+    "controls": 44,
+    "multi_lesion_patients": 6,
+    "split_unit": "patient",
+    "lesions_are_independent_samples": false
+  },
+  "required_checks": [
+    "official_archive_size_and_md5_match",
+    "five_statistical_csv_members_match",
+    "patient_lesion_control_counts_match",
+    "six_multi_lesion_patient_groups_recovered",
+    "all_105_lesions_have_exact_identifier_linked_cta_parent_aneurysm_stl_and_aneurysm_stl",
+    "no_row_order_or_filename_similarity_only_linkage",
+    "nifti_spacing_orientation_and_stl_units_frames_are_finite_and_plausible",
+    "solver_container_is_pinned_by_sha256_and_license",
+    "solver_container_has_mesh_steady_forward_and_discrete_adjoint_or_verified_shape_gradient_capability",
+    "aggregate_contains_no_identifier_private_path_image_voxel_or_field_payload",
+    "training_gpu_outer_test_and_rupture_label_access_are_zero"
+  ],
+  "gate_rule": {
+    "pass": "all_11_checks_true",
+    "worst_case_rule": true,
+    "threshold_relaxation_after_result": false,
+    "same_version_dependency_or_mapping_repair_rerun": false,
+    "pass_authorizes": "register_method_free_s0b_functional_non_equivalence_and_linearization_audit_only",
+    "failure_action": "close_this_candidate_version_without_model_gpu_or_outer_test"
+  },
+  "execution": {
+    "server": "junjinyong",
+    "scheduler": "PBS",
+    "queue": "ssu_a6gpu",
+    "resource": "cpu_only_no_ngpus",
+    "login_node_heavy_work": false,
+    "medical_assets_read_only": true,
+    "code_read_only": true,
+    "output_only_writable": true,
+    "private_paths_in_config": false,
+    "public_aggregate_only": true
+  },
+  "authorization": {
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "submission_identity": false,
+    "clinical_claim": false,
+    "rupture_status_for_selection": false
+  }
+}

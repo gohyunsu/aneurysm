@@ -1,18 +1,18 @@
 {
-  "schema_version": "2.3",
+  "schema_version": "2.4",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_problem_after_rsna_supervision_semantics_rejection",
+    "status": "failed_branches_preserved_goal_oriented_segmentation_conditional_problem_shortlist",
     "as_of": "2026-08-09",
     "clinical_use": false
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_rsna_supervision_semantics_rejection",
-    "shortlisted_candidate": "none",
-    "candidate_dataset": "none",
-    "candidate_estimand": "unselected",
-    "asset_access_status": "not_applicable_without_an_active_candidate",
+    "status": "one_conditional_problem_shortlist_before_s0a_asset_runtime_gate",
+    "shortlisted_candidate": "goal_oriented_hemodynamic_segmentation",
+    "candidate_dataset": "cmha_primary_openneuro_ds005096_external_only",
+    "candidate_estimand": "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains",
+    "asset_access_status": "public_metadata_and_small_statistical_archive_audited_private_full_archive_linkage_unverified",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -21,8 +21,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "fresh_problem_level_candidate_audit_without_method_gpu_or_outer_test",
-    "audit_document": "docs/rsna-supervision-semantics-audit-2026-08-09.md",
+    "next_allowed_action": "execute_preregistered_cpu_read_only_s0a_asset_linkage_and_solver_runtime_audit_only",
+    "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -52,6 +52,23 @@
       "method_or_gpu_authorized": false,
       "decision": "reject_annotation_selection_aware_mixed_granularity_lesion_set_candidate"
     },
+    "goal_oriented_segmentation_cold_audit": {
+      "status": "completed_primary_source_and_runtime_discovery_conditional_problem_shortlist",
+      "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
+      "s0a_config": "configs/goal_oriented_segmentation_s0a.json",
+      "score": 27.5,
+      "maximum_score": 40.0,
+      "automatic_selection_threshold": 32.0,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "direct_gap": "signed_adjoint_projection_of_boundary_displacement_for_standardized_pde_functional_error_supervision",
+      "required_next_gate": "s0a_asset_linkage_and_solver_runtime_integrity",
+      "s0a_pass_authorizes": "register_method_free_s0b_functional_non_equivalence_and_linearization_audit_only",
+      "s0a_failure_action": "close_candidate_version_without_model_gpu_or_outer_test"
+    },
     "most_recent_closed_candidate": "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -65,7 +82,11 @@
       "generic_set_prediction_or_point_process",
       "mixed_or_weak_supervision",
       "anatomy_prompt_or_foundation_model",
-      "conformal_prediction_or_fdr_control"
+      "conformal_prediction_or_fdr_control",
+      "automatic_segmentation_to_cfd_pipeline",
+      "joint_image_mesh_and_cfd_field_prediction",
+      "cfd_applicability_score",
+      "adjoint_or_shape_derivative_general_method"
     ]
   },
   "venue": {
@@ -79,7 +100,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_pending_problem_selection_and_prospective_evidence",
+    "required_headline_domain": "unselected_pending_s0a_s0b_and_prospective_model_evidence",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -143,10 +164,10 @@
     "historical_application_endpoint": "cross_sectional_rupture_status",
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
-    "active_candidate_problem": "unselected",
-    "active_candidate_status": "none_after_rsna_supervision_semantics_rejection",
-    "candidate_primary_estimand": "unselected",
-    "candidate_secondary_estimand": "unselected",
+    "active_candidate_problem": "goal_oriented_hemodynamic_segmentation",
+    "active_candidate_status": "conditional_problem_shortlist_before_s0a_no_method_or_paper_identity",
+    "candidate_primary_estimand": "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains",
+    "candidate_secondary_estimand": "functional_error_not_explained_by_standard_geometry_metrics_under_matched_solver_boundary_conditions",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
     "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
     "i0a_source_commit": "f7b4e024d69d43cf042f4163342b4d993386f441",
@@ -197,7 +218,11 @@
       "4d_flow_mri_super_resolution_and_denoising",
       "measurement_model_implicit_neural_reconstruction",
       "voxelwise_4d_flow_velocity_uncertainty",
-      "distributional_4d_flow_super_resolution_under_domain_shift"
+      "distributional_4d_flow_super_resolution_under_domain_shift",
+      "image2flow_joint_mesh_and_cfd_field_prediction",
+      "iavs_cfd_applicability_and_topology_aware_segmentation",
+      "cldice_and_cbdice_vascular_topology_boundary_losses",
+      "neural_operator_derivatives_for_pde_constrained_optimization"
     ],
     "cmha_secondary_diagnostic": {
       "result_id": "cmha_g1_exploratory_20260803",
@@ -303,6 +328,9 @@
       "primary": [
         "no_contribution_confirmed_after_failed_N1c"
       ],
+      "conditional_problem_not_contribution": [
+        "signed_adjoint_projection_supervision_for_standardized_functional_error_pending_S0a_and_S0b"
+      ],
       "unsupported_candidate": [
         "C1_nested_condition_marginal_coherence_with_solution_functional_decision_benefit"
       ],
@@ -404,9 +432,33 @@
     },
     {
       "name": "cmha",
-      "role": "secondary_real_cfd_and_status_diagnostic",
+      "role": "conditional_goal_oriented_s0a_image_surface_linkage_and_standardized_functional_task_audit",
       "field_provenance": "real_cfd",
-      "split_unit": "patient"
+      "split_unit": "patient",
+      "status": "public_metadata_and_small_statistical_archive_audited_full_exact_id_linkage_pending_s0a",
+      "patients": 99,
+      "aneurysms": 105,
+      "controls": 44,
+      "multi_lesion_patients": 6,
+      "public_cfd_scope": "steady_summary_only_not_full_field_or_patient_specific_physiology"
+    },
+    {
+      "name": "openneuro_ds005096",
+      "role": "future_tof_mra_external_modality_and_geometry_stress_only",
+      "field_provenance": "none",
+      "split_unit": "patient",
+      "status": "public_selected_session_expert_masks_and_stl_not_longitudinal_dense_supervision",
+      "patients": 63,
+      "aneurysms": 85
+    },
+    {
+      "name": "open_multicenter_cta_2026_zenodo_15697196",
+      "role": "future_external_detection_or_morphometry_audit_after_parent_vessel_supervision_check",
+      "field_provenance": "none",
+      "split_unit": "patient",
+      "status": "public_metadata_only_payload_and_parent_vessel_supervision_not_audited",
+      "series": 172,
+      "aneurysm_stl": 122
     },
     {
       "name": "aneux",
@@ -416,6 +468,8 @@
     }
   ],
   "model": {
+    "current_headline_architecture": "unselected_pending_S0a_and_S0b",
+    "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,
     "knn": 16,

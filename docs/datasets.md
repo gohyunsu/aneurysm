@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-09 conditional candidate:** Goal-oriented hemodynamic segmentation의
+> primary data 후보는 CMHA뿐이다. 공식 record는 99 patients/105 MCA
+> aneurysms, 44 controls의 NIfTI CTA, aneurysm–artery STL, aneurysm STL과
+> 5개 table을 CC BY 4.0으로 제공한다. 다만 105 lesion의 exact-ID linkage,
+> NIfTI/STL unit·frame과 별도 solver/adjoint runtime이 S0a에서 통과하기
+> 전에는 training cohort가 아니다. OpenNeuro ds005096은 TOF-MRA external
+> stress 후보이고 CMHA와 patient를 합치지 않는다. 2026 multi-center CTA
+> Zenodo `15697196`은 172 series/122 aneurysm STL의 parent-vessel supervision을
+> payload audit하기 전에는 primary domain으로 쓰지 않는다.
+
 > **2026-08-09 supervision-semantics decision:** RSNA Intracranial Aneurysm
 > Detection 2025의 selection-aware mixed-granularity lesion-set 후보는
 > 기각됐다. 공개 1위 구현과 2위 report에서 약 178건에 제공된 segmentation은
@@ -86,7 +96,9 @@
 | TopCoW 2024 | CTA/MRA CoW masks, ROI와 vascular graph | permanent 14.4 GB release plus external subsets | anatomy encoder/topology control | aneurysm label이 아니며 listed LargeIA/Lausanne external subsets는 aneurysm-free |
 | AneuriskWeb | surface/centerline/morphology, 일부 배포본의 영상·annotation 여부 확인 필요 | 약 100 | geometry·형태 baseline | 배포본/미러별 asset 차이를 checksum으로 확인 |
 | AneuX | aneurysm/vessel mesh, morphology·clinical table, rupture label | 750 models | geometry 규모 확장, morphology/rupture 연구 | CTA 원본·CFD가 없는 geometry dataset |
-| CMHA / Gong et al. 2024 | CTA, 3D model, clinical/morphology/hemodynamic data | 99 IA + 44 controls | multimodal clinical/CFD 연결 | 다운로드 14.49 GB, 파일 매핑·license 기록 필요 |
+| CMHA / Gong et al. 2024 | NIfTI CTA, aneurysm–artery STL, aneurysm STL, clinical/morphology/hemodynamic summaries | 99 patients/105 MCA IA + 44 controls | conditional S0a primary: image-domain linkage와 standardized-functional task audit | CC BY 4.0; 15.56 GB; 6 multi-lesion patient; exact-ID mapping/solver gate pending; public CFD is summary only |
+| OpenNeuro ds005096 | TOF-MRA, selected-session voxel masks/STL/Slicer scene | 63 patients/85 IA; 24 longitudinal patients | external modality/geometry stress only | one annotated session per subject; longitudinal supervised-growth cohort 아님 |
+| Open multi-center CTA 2026 / Zenodo 15697196 | raw CTA DICOM, case metadata, 122 aneurysm STL | 172 series: 90 controls/82 IA cases, 3 centers | future detection/morphometry/external audit | parent-vessel/voxel supervision unverified; 25.58 GB CC BY 4.0 payload not staged |
 | BenchAnXplore / npj DM 2026 | 105 semi-idealized geometry의 coarse CFD trajectories | 80 frames/case, 0.01 s | GNN surrogate benchmark | ICA sidewall 중심; patient CTA 입력자료가 아님 |
 | Aneumo | 10,660 geometry × 8 steady mass flow, pressure/velocity | 85,280 steady CFD | paired BC response | CC BY-NC-ND; base-family split·비재배포 |
 | AneuG-Flow / 관련 synthetic set | 현재 서버에는 geometry archive; 논문 release에는 fixed-policy CFD field | 대규모 synthetic | known-condition geometry pretraining | paired-BC C2에는 사용 불가 |

@@ -4,7 +4,15 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active problem shortlist는 **0개**입니다. 직전 조건부 후보였던
+현재 problem shortlist는 **조건부 1개**입니다. 새 후보인 goal-oriented
+hemodynamic segmentation은 CTA 경계 오차를 PDE adjoint shape sensitivity에
+signed projection하여 standardized CFD functional error를 줄일 수 있는지
+묻습니다. 이는 아직 method나 paper identity가 아니며, CMHA exact linkage와
+solver/adjoint runtime을 검사하는 S0a만 열려 있습니다. 근거와 kill rule은
+[`goal-oriented segmentation cold audit`](docs/goal-oriented-segmentation-audit-2026-08-09.md)에
+있습니다.
+
+직전 조건부 후보였던
 multisite CT/MR angiography의 annotation-selection-aware mixed-granularity
 lesion-set inference는 2026-08-09 supervision-semantics red team에서
 기각했습니다. 공개된 `segmentations/{uid}_cowseg.nii`는 aneurysm extent가
@@ -31,18 +39,16 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 유지하지만, 새 problem, 방법명과
-> architecture는 선택되지 않았습니다. Fresh problem-level audit가 데이터
-> 의미, estimand, direct-prior gap과 평가 현실성을 통과하기 전에는 GNN,
-> set predictor, training config와 submission claim을 만들지 않습니다.
+> architecture는 선택되지 않았습니다. S0a/S0b가 데이터 linkage, solver,
+> functional non-equivalence와 first-order validity를 통과하기 전에는 GNN,
+> U-Net, training config와 submission claim을 만들지 않습니다.
 
-## 현재 단계 · active shortlist 0, method/GPU 없음
+## 현재 단계 · conditional problem shortlist 1, method/GPU 없음
 
-현재 허용된 다음 작업은 fresh problem-level candidate audit입니다. 후보마다
-실제 데이터 의미와 이용 가능성, 식별 가능한 biomedical-imaging estimand,
-직접 선행연구 대비 남는 gap, patient-level split과 confirmatory 규모를 먼저
-평가합니다. 하나가 명시적으로 선택되고 method-free task gate가 prospective
-commit에 고정되기 전에는 executable config, model, GPU job과 outer test를
-만들지 않습니다.
+현재 허용된 다음 작업은 prospective S0a CPU/read-only audit입니다. CMHA의
+99 patient/105 lesion 영상–표면–table linkage와 별도 solver/adjoint runtime을
+11개 all-or-none check로 확인합니다. Pass도 method-free S0b 등록만 열며
+executable model, GPU job과 outer test를 만들지 않습니다.
 
 ### 보존된 직전 4D-flow 실행 기록
 
@@ -265,7 +271,8 @@ representation gate를 통과했습니다. POD는 아직 learned superiority나
 
 ```bash
 PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
-python -m unittest discover -s tests -v
+PYTHONPATH=src python -m aurora.goal_oriented_s0a configs/goal_oriented_segmentation_s0a.json
+PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
 설정 파일은 task 정의, split 단위, gate, loss, provenance를 함께

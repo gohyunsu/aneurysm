@@ -5,9 +5,31 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · active shortlist 0 · method unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation conditional shortlist 1 before S0a · method/architecture/GPU/outer test unselected · submission blocked
 
-## 0. 현재 연구 상태 · active shortlist 0
+## 0. 현재 연구 상태 · conditional problem shortlist 1
+
+새 cold audit에서 **goal-oriented hemodynamic segmentation**을 S0a/S0b에만
+조건부인 문제 후보로 남겼다. 질문은 CTA segmentation의 signed boundary
+displacement를 PDE adjoint shape sensitivity에 투영해, Dice·boundary·topology
+loss보다 standardized CFD functional error를 줄일 수 있는가이다. 자동
+segmentation→CFD, Image2Flow의 joint mesh/field prediction, IAVS의 CFD
+Applicability Score, clDice/cbDice, segmentation-induced flow variability와
+adjoint/PDE optimization 일반론은 모두 direct prior이므로 contribution이
+아니다. 남을 수 있는 gap은 signed adjoint projection을 의료영상
+segmentation supervision으로 바꾸고 first-order remainder와 실제 held-out
+functional error를 함께 검증하는 algorithm뿐이다.
+
+현재 score는 27.5/40으로 자동 선택 기준 32에 못 미친다. CMHA 99 patient/
+105 lesion의 CTA–parent/aneurysm STL–aneurysm STL–table exact-ID linkage와
+별도 pinned solver/adjoint runtime을 `configs/goal_oriented_segmentation_s0a.json`
+에서 CPU/read-only로 먼저 감사한다. S0a pass도 method-free S0b 등록만
+허용하며 method, architecture, GPU, outer test와 paper identity는 모두
+닫혀 있다. 상세 판정은
+[`goal-oriented-segmentation-audit-2026-08-09.md`](goal-oriented-segmentation-audit-2026-08-09.md)에
+있다.
+
+### 직전 RSNA 후보 기각 · 보존
 
 직전 cold audit에서 조건부로 남긴 RSNA annotation-selection-aware
 mixed-granularity lesion-set 후보는 후속 supervision-semantics red team에서
@@ -36,11 +58,9 @@ controlled access, anonymous S3 listing은 HTTP 403, official wiki는
 [`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)에
 고정한다.
 
-현재 허용된 다음 단계는 fresh problem-level candidate audit다. 각 후보는
-데이터 의미·실제 접근성, 식별 가능한 estimand, direct prior와의 분명한 gap,
-patient-level split, ISBI biomedical-imaging relevance, strong baseline과
-confirmatory 규모를 architecture보다 먼저 통과해야 한다. 현재 모델은
-GNN도 lesion-set network도 아니며 GPU 실험은 돌고 있지 않다.
+이 기각 뒤 수행한 fresh audit가 위 조건부 후보를 만들었지만 RSNA 문제를
+복원하지 않는다. 현재 모델은 GNN, lesion-set network 또는 U-Net 어느 것도
+아니며 GPU 실험은 돌고 있지 않다.
 
 ### 공개 대안 screen의 판정
 

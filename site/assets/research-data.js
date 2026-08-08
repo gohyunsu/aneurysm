@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · active shortlist 0 after RSNA supervision-semantics rejection · no method/GPU · not submission-ready",
-    requirement: "Fresh problem audit → prospective task adequacy → strong baselines → bounded validation development → fresh outer test",
+    status: "Target locked · conditional problem shortlist 1 before S0a · no method/architecture/GPU · not submission-ready",
+    requirement: "S0a asset/runtime → S0b functional adequacy → strong baselines → bounded validation development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Signed adjoint projection remains a conditional gap",
+      copy: "Image2Flow, IAVS, clDice/cbDice, CFD variability studies and differentiable PDE optimization remove generic segmentation→CFD novelty. The only residual hypothesis is to project signed boundary displacement onto PDE-functional shape gradients and validate both the first-order remainder and held-out functional error.",
+      status: "Cold-audit score 27.5/40 · below automatic selection · S0a only",
+      url: "../docs/goal-oriented-segmentation-audit-2026-08-09.md"
+    },
     {
       year: "2026.08",
       title: "RSNA supervision semantics invalidate the shortlist",
@@ -159,11 +166,18 @@ window.AURORA_DATA = Object.freeze({
   ],
   gates: [
     {
+      id: "S0a",
+      title: "Are CMHA linkage and solver gradients auditable?",
+      copy: "99 patients/105 lesions must map CTA, parent+aneurysm STL, aneurysm STL and tables by exact identifier. A separately pinned solver must expose steady forward and discrete-adjoint or verified shape-gradient capability. All eleven checks are required.",
+      state: "Preregistered · CPU/read-only · pass opens S0b only",
+      blocking: true
+    },
+    {
       id: "P0",
       title: "Is there a defensible biomedical-imaging problem?",
       copy: "후보별 데이터 semantics와 access, 식별 가능한 estimand, direct-prior gap, patient-level split, ISBI relevance와 confirmatory 규모를 method보다 먼저 감사한다. 하나가 선택되기 전에는 executable config를 만들지 않는다.",
-      state: "Active shortlist 0 · fresh problem audit required · method/GPU/outer test blocked",
-      blocking: true
+      state: "Cold audit completed · one S0a-conditional problem · method/GPU/outer test still blocked",
+      blocking: false
     },
     {
       id: "I0a",
@@ -273,8 +287,18 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "CMHA",
-      role: "secondary real-CFD와 cross-sectional status diagnostic",
-      provenance: "tables audited · exploratory increment negative · case map pending"
+      role: "conditional primary for S0a image–surface linkage and standardized-functional task audit",
+      provenance: "99 patients/105 MCA lesions + 44 controls · 6 multi-lesion patients · NIfTI + parent/aneurysm STL + aneurysm STL · CC BY 4.0 · exact-ID linkage/solver pending"
+    },
+    {
+      name: "OpenNeuro ds005096",
+      role: "TOF-MRA external modality/geometry stress only",
+      provenance: "63 patients/85 aneurysms · selected-session expert masks/STL · 24 longitudinal subjects but not longitudinal dense supervision"
+    },
+    {
+      name: "Open multi-center CTA 2026",
+      role: "future external detection/morphometry audit after payload semantics",
+      provenance: "172 CTA series · 90 controls/82 IA cases · 122 aneurysm STL · parent-vessel supervision unverified · CC BY 4.0"
     },
     {
       name: "AneuX",
@@ -283,6 +307,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "One problem survives only as an S0a-conditional shortlist",
+      copy: "A primary-source cold audit rejects generic segmentation→CFD, joint mesh/field prediction, CFD-applicability, topology loss and adjoint/PDE optimization as standalone novelty. Goal-oriented hemodynamic segmentation scores 27.5/40, below the 32/40 automatic-selection threshold. Its only residual gap is signed adjoint projection of boundary displacement for predefined standardized functionals. S0a freezes eleven all-or-none CMHA linkage and solver-runtime checks; method, architecture, GPU, outer test and paper identity remain closed.",
+      files: ["docs/goal-oriented-segmentation-audit-2026-08-09.md", "configs/goal_oriented_segmentation_s0a.json", "src/aurora/goal_oriented_s0a.py", "tests/test_goal_oriented_s0a.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/server-execution.md", "docs/problem-candidate-audit-2026-08-09.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", ".github/workflows/quality.yml", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "research",

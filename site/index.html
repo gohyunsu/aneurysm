@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — multisite CT/MR angiography의 서로 다른 annotation을 하나의 anatomy-structured aneurysm lesion set으로 연결할 수 있는지 먼저 감사하는 ISBI 2027 연구 후보.">
+  <meta name="description" content="AURORA — CTA segmentation의 signed boundary error를 PDE-functional adjoint sensitivity에 투영할 수 있는지 S0a부터 검증하는 ISBI 2027 조건부 연구 후보.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -41,27 +41,28 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          No active shortlist.<br>
+          One conditional problem.<br>
           <em>Evidence before architecture.</em>
         </h1>
         <p class="hero-lede">
-          직전 RSNA 후보는 제공 segmentation을 aneurysm mask로 잘못 해석한
-          전제 때문에 기각했다. 공개 근거상 그것은 13-class
-          <strong>vessel anatomy</strong>이고 aneurysm supervision은 point,
-          presence와 territory다. 현재 문제·모델·GPU 실험은 없으며, 다음은
-          fresh problem-level audit다.
+          자동 segmentation→CFD, joint mesh/field prediction, CFD-applicability와
+          topology loss는 이미 점유돼 있다. 남은 문제 가설은 CTA의
+          <strong>signed boundary error</strong>를 PDE-functional adjoint
+          sensitivity에 투영하는 supervision이다. 아직 method가 아니며,
+          다음은 CMHA linkage와 solver gradient를 검사하는 S0a다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/rsna-supervision-semantics-audit-2026-08-09.md">Rejection audit ↗</a>
+          <a class="button ghost" href="../docs/goal-oriented-segmentation-audit-2026-08-09.md">Cold audit ↗</a>
+          <a class="button ghost" href="../configs/goal_oriented_segmentation_s0a.json">S0a contract ↗</a>
           <a class="button ghost" href="../docs/isbi-2027-plan.md">ISBI plan ↗</a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="혈관 해부구조 mask와 동맥류 annotation의 의미가 다름을 보여 주는 red-team 개념도">
-        <div class="visual-caption">SUPERVISION-SEMANTICS RED TEAM</div>
+      <div class="hero-visual" aria-label="경계 변위와 adjoint sensitivity의 signed projection 개념도">
+        <div class="visual-caption">SIGNED FUNCTIONAL SENSITIVITY · HYPOTHESIS</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -84,27 +85,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>V</b><span>vessel anatomy mask</span>
+            <b>δ</b><span>signed boundary error</span>
           </div>
           <div class="posterior-card card-b">
-            <b>P</b><span>aneurysm point</span>
+            <b>g</b><span>adjoint influence</span>
           </div>
           <div class="posterior-card card-c">
-            <b>∅</b><span>official lesion mask</span>
+            <b>∫</b><span>functional projection</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> anatomy ≠ lesion extent</span>
-          <span><i class="dot coral"></i> candidate rejected</span>
-          <span>payload read 0</span>
+          <span><i class="dot lime"></i> signed, not magnitude-only</span>
+          <span><i class="dot coral"></i> S0a/S0b may reject</span>
+          <span>model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Active shortlist</span><b>None after RSNA semantics rejection</b></div>
-        <div><span>Current evidence</span><b>Public supervision-semantics red team</b></div>
+        <div><span>Problem shortlist</span><b>1 conditional · score 27.5/40</b></div>
+        <div><span>Current evidence</span><b>Primary-source cold audit · no model result</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>Fresh problem audit · no GPU</b></div>
+        <div><span>Next authorization</span><b>S0a CPU/read-only · no GPU</b></div>
       </div>
     </section>
 
@@ -113,10 +114,10 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          Vessel graph, segmentation, foundation model, set prediction과
-          conformal UQ는 이미 직접 선행연구가 있다. 직전 후보는 supervision
-          semantics가 가정과 다르다는 증거로 폐기했다. 새 후보도 module을
-          먼저 고르지 않고 데이터 의미와 patient-level task unit부터 감사한다.
+          Image2Flow, IAVS, clDice/cbDice와 differentiable PDE optimization은
+          직접 선행연구다. 새 후보는 module을 먼저 고르지 않고, CMHA의
+          patient-level linkage와 functional sensitivity가 실제로 식별되는지부터
+          감사한다.
         </p>
       </div>
 
@@ -557,7 +558,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>No active paper identity · active shortlist 0</p>
+        <p>No active paper identity · one S0a-conditional problem</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -565,7 +566,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>RSNA candidate rejected · fresh problem audit required · method/GPU/outer test blocked</b>
+        <span>Current stage</span><b>Goal-oriented segmentation S0a preregistered · method/GPU/outer test blocked</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

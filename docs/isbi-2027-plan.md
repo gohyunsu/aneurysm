@@ -4,8 +4,9 @@
 상태: **target locked · not submission-ready · prior BC-operator identity
 inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b
 execution-incomplete before asset access/no scientific verdict/no rerun ·
-4D-flow branch closed · RSNA supervision-semantics candidate rejected · active
-shortlist 0 · method unselected**
+4D-flow branch closed · RSNA supervision-semantics candidate rejected ·
+goal-oriented hemodynamic segmentation conditional problem shortlist 1 before
+S0a · method/architecture/GPU/outer test unselected**
 
 ## 1. Venue contract
 
@@ -17,7 +18,8 @@ shortlist 0 · method unselected**
 - 5쪽: references, ethical-compliance statement, acknowledgments/COI만 허용
 - 공식 scope와의 접점: physical/statistical modelling, reconstruction,
   uncertainty quantification, trustworthy AI, medical applications
-- 현재 선택된 primary study는 없다. Human-derived controlled-access asset을
+- 현재 선택된 primary study는 없다. CMHA를 쓰더라도 exact linkage와
+  solver/adjoint S0a를 먼저 통과해야 한다. Human-derived controlled-access asset을
   쓰게 되면 license, challenge terms와 ethics/waiver 문구를 별도로 확인하고
   raw image/annotation을 재배포하지 않는다.
 
@@ -31,7 +33,16 @@ shortlist 0 · method unselected**
 
 현재 원고는 ISBI-ready가 아니다.
 
-현재 active shortlist와 paper identity는 0개다. 직전 RSNA
+현재 paper identity는 0개이고 problem shortlist만 조건부 1개다. 새
+goal-oriented hemodynamic segmentation 후보는 signed adjoint projection이
+standardized simulation functional error를 줄이는지를 묻지만, score 27.5/40로
+자동 채택 기준 32에 못 미친다. S0a linkage/runtime와 method-free S0b
+linearization/non-equivalence가 모두 양수이기 전에는 method·architecture·
+headline metric을 정하지 않는다. 직접 선행과 정확한 gate는
+[`goal-oriented-segmentation-audit-2026-08-09.md`](goal-oriented-segmentation-audit-2026-08-09.md)에
+있다.
+
+직전 RSNA
 mixed-granularity lesion-set 후보는 access가 없어서 보류한 것이 아니라,
 공개 1·2위 자료에서 제공 segmentation이 aneurysm extent가 아닌 13-class
 vessel anatomy임을 확인해 기각했다. 공식 aneurysm supervision은 center
@@ -48,10 +59,8 @@ surface segment, TopCoW는 aneurysm이 아닌 CoW anatomy dataset이다. 이 네
 않았다. 이들 중 하나의 일반 segmentation task로 submission identity를
 자동 축소하거나 기각된 RSNA 문제를 복원하지 않는다.
 
-다음 단계는 fresh problem-level audit다. 데이터 semantics와 실제 이용
-가능성, 식별 가능한 estimand, direct prior gap, patient-level split,
-ISBI scope와 confirmatory 규모를 모두 통과한 후보만 prospective task gate로
-올린다. 이후 순서는 method-free adequacy → strong baseline → 총 compute와
+다음 단계는 S0a CPU/read-only asset/runtime audit다. 이후 순서는 S0b
+method-free adequacy → strong baseline → 총 compute와
 repair round를 고정한 validation-only development → fresh prospective outer
 test다.
 

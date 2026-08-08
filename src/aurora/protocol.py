@@ -114,8 +114,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.3":
-        raise ProtocolError("The current research-state schema must be version 2.3.")
+    if protocol["schema_version"] != "2.4":
+        raise ProtocolError("The current research-state schema must be version 2.4.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -146,6 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "audit_document",
             "source_only_dataset_substitution_screen",
             "rsna_supervision_semantics_red_team",
+            "goal_oriented_segmentation_cold_audit",
             "most_recent_closed_candidate",
             "rejected_candidates",
             "non_novel_components",
@@ -154,13 +155,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_rsna_supervision_semantics_rejection"
+        != "one_conditional_problem_shortlist_before_s0a_asset_runtime_gate"
         or problem_selection["shortlisted_candidate"]
-        != "none"
-        or problem_selection["candidate_dataset"] != "none"
-        or problem_selection["candidate_estimand"] != "unselected"
+        != "goal_oriented_hemodynamic_segmentation"
+        or problem_selection["candidate_dataset"]
+        != "cmha_primary_openneuro_ds005096_external_only"
+        or problem_selection["candidate_estimand"]
+        != "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains"
         or problem_selection["asset_access_status"]
-        != "not_applicable_without_an_active_candidate"
+        != "public_metadata_and_small_statistical_archive_audited_private_full_archive_linkage_unverified"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -170,15 +173,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_candidate_audit_without_method_gpu_or_outer_test"
+        != "execute_preregistered_cpu_read_only_s0a_asset_linkage_and_solver_runtime_audit_only"
         or problem_selection["audit_document"]
-        != "docs/rsna-supervision-semantics-audit-2026-08-09.md"
+        != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
     ):
         raise ProtocolError(
-            "The no-active-problem boundary must remain method-unselected, GPU-disabled, "
-            "and non-submission after the RSNA supervision-semantics rejection."
+            "The conditional-problem boundary must remain method-unselected, GPU-disabled, "
+            "and limited to the prospective S0a audit."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -194,8 +197,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "mixed_or_weak_supervision",
         "anatomy_prompt_or_foundation_model",
         "conformal_prediction_or_fdr_control",
+        "automatic_segmentation_to_cfd_pipeline",
+        "joint_image_mesh_and_cfd_field_prediction",
+        "cfd_applicability_score",
+        "adjoint_or_shape_derivative_general_method",
     }:
-        raise ProtocolError("Direct lesion-set prior-art boundaries must remain explicit.")
+        raise ProtocolError("Direct prior-art boundaries must remain explicit.")
     substitution_screen = problem_selection["source_only_dataset_substitution_screen"]
     _require_keys(
         substitution_screen,
@@ -275,7 +282,57 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The RSNA supervision-semantics audit must preserve the vessel-mask/"
             "aneurysm-point distinction, no-payload boundary, and candidate rejection."
         )
-    checks.append("no-active-problem and supervision-semantics boundary")
+    goal_audit = problem_selection["goal_oriented_segmentation_cold_audit"]
+    _require_keys(
+        goal_audit,
+        [
+            "status",
+            "audit_document",
+            "s0a_config",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "direct_gap",
+            "required_next_gate",
+            "s0a_pass_authorizes",
+            "s0a_failure_action",
+        ],
+        "problem_selection.goal_oriented_segmentation_cold_audit",
+    )
+    if (
+        goal_audit["status"]
+        != "completed_primary_source_and_runtime_discovery_conditional_problem_shortlist"
+        or goal_audit["audit_document"]
+        != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
+        or goal_audit["s0a_config"]
+        != "configs/goal_oriented_segmentation_s0a.json"
+        or goal_audit["score"] != 27.5
+        or goal_audit["maximum_score"] != 40.0
+        or goal_audit["automatic_selection_threshold"] != 32.0
+        or goal_audit["method_selected"] is not False
+        or goal_audit["architecture_selected"] is not False
+        or goal_audit["gpu_training_authorized"] is not False
+        or goal_audit["outer_test_authorized"] is not False
+        or goal_audit["submission_identity_active"] is not False
+        or goal_audit["direct_gap"]
+        != "signed_adjoint_projection_of_boundary_displacement_for_standardized_pde_functional_error_supervision"
+        or goal_audit["required_next_gate"]
+        != "s0a_asset_linkage_and_solver_runtime_integrity"
+        or goal_audit["s0a_pass_authorizes"]
+        != "register_method_free_s0b_functional_non_equivalence_and_linearization_audit_only"
+        or goal_audit["s0a_failure_action"]
+        != "close_candidate_version_without_model_gpu_or_outer_test"
+    ):
+        raise ProtocolError(
+            "The goal-oriented candidate must remain below automatic selection and "
+            "authorize only the method-free S0a audit."
+        )
+    checks.append("conditional problem shortlist and S0a-only boundary")
 
     venue = protocol["venue"]
     _require_keys(
@@ -356,7 +413,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_pending_problem_selection_and_prospective_evidence"
+        != "unselected_pending_s0a_s0b_and_prospective_model_evidence"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -448,7 +505,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "ISBI submission must remain blocked while the primary problem is "
             "unselected; historical 3D evidence remains insufficient."
         )
-    checks.append("ISBI 2027 four-page and unselected-primary boundary")
+    checks.append("ISBI 2027 four-page and conditional-primary boundary")
 
     task = protocol["task"]
     _require_keys(
@@ -518,11 +575,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"]
-        != "unselected"
+        != "goal_oriented_hemodynamic_segmentation"
         or task["active_candidate_status"]
-        != "none_after_rsna_supervision_semantics_rejection"
-        or task["candidate_primary_estimand"] != "unselected"
-        or task["candidate_secondary_estimand"] != "unselected"
+        != "conditional_problem_shortlist_before_s0a_no_method_or_paper_identity"
+        or task["candidate_primary_estimand"]
+        != "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains"
+        or task["candidate_secondary_estimand"]
+        != "functional_error_not_explained_by_standard_geometry_metrics_under_matched_solver_boundary_conditions"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -566,11 +625,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The active task must remain the access-blocked lesion-set shortlist, "
-            "while historical 4D-flow evidence retains the exact I0a result and "
-            "I0b execution record."
+            "The active task must remain a conditional goal-oriented problem without "
+            "a selected method, while historical 4D-flow evidence retains the exact "
+            "I0a result and I0b execution record."
         )
-    checks.append("unselected task boundary and historical 4D-flow guardrails")
+    checks.append("conditional task boundary and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:

@@ -19,6 +19,24 @@
 서버 사이에 임의 복제하지 않으며, `junjinyong`에서 필요한 read-only staging과
 container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않는다.
 
+## 2026-08-09 · Goal-oriented S0a runtime discovery
+
+- `junjinyong` login node에서 `/etc/profile` 뒤 PBS `qsub/qstat`, target queue와
+  Singularity CE 3.11.3을 read-only로 확인했다. GPU API와 `nvidia-smi`는
+  호출하지 않았다.
+- 기존 pinned PyTorch 2.5.1/CUDA 11.8 image는 공유 영역에서 읽을 수 있지만
+  SciPy, trimesh, PyVista, meshio, VTK, FEniCS와 JAX를 포함하지 않는다.
+  Host에서도 OpenFOAM, SU2, VMTK, FEniCS와 Gmsh executable을 확인하지 못했다.
+- 이는 S0a outcome이 아니라 registration-before-execution discovery다.
+  `configs/goal_oriented_segmentation_s0a.json`은 별도 solver image의 exact
+  SHA-256, license, mesh/steady-forward와 discrete-adjoint 또는 검증 가능한
+  shape-gradient capability를 필수 check로 둔다.
+- CMHA full archive에 대한 bounded shared-storage query는 SSH handshake reset으로
+  끝났고 재시도 loop를 돌리지 않았다. 기존 공개 row audit만 보존하며 105
+  lesion exact-ID linkage를 아직 통과로 표시하지 않는다.
+- S0a는 CPU-only PBS, source/code read-only, output writable, aggregate-only다.
+  Pass도 S0b 등록만 열고 segmentation training, GPU와 outer test를 금지한다.
+
 ## 2026-08-08 · Cross-protocol 4D-flow I0a
 
 - `configs/flow_mri_protocol_i0a_asset_audit.json`은 공식 Zenodo API와 HTTP

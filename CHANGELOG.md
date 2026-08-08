@@ -4,6 +4,45 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Goal-oriented segmentation survives only as an S0a-conditional problem
+
+- CMHA, OpenNeuro `ds005096`, 공개 multi-center CTA 2026의 실제 supervision과
+  독립 단위를 공식 논문·dataset record로 다시 감사했다. CMHA는 99 patients/
+  105 MCA aneurysms와 44 controls의 NIfTI CTA, aneurysm–artery STL,
+  aneurysm STL을 제공하지만 6 multi-lesion patient와 exact image–surface–
+  table linkage를 먼저 처리해야 한다.
+- Image2Flow의 joint image→mesh+CFD field loss, IAVS의 topology-aware
+  segmentation/CFD Applicability Score, clDice/cbDice, MATCH/CFD challenge의
+  segmentation variability와 differentiable PDE/shape optimization을 direct
+  prior로 올렸다. Automatic segmentation→CFD, solver success, GNN/U-Net,
+  adjoint와 sensitivity weighting 자체는 novelty가 아니다.
+- 유일하게 남을 수 있는 gap을 predefined PDE functional의 adjoint shape
+  gradient에 signed boundary displacement를 투영하는 segmentation supervision으로
+  제한했다. Cold-audit score는 27.5/40로 자동 선택 기준 32에 못 미치므로
+  method나 paper identity가 아니라 **conditional problem shortlist**다.
+- `configs/goal_oriented_segmentation_s0a.json`은 official archive size/MD5/
+  license, 99/105/44/6 unit, 105 exact-ID linkage, NIfTI/STL unit·frame와 별도
+  pinned steady-solver/adjoint runtime을 11개 all-or-none check로 고정한다.
+  S0a pass도 method-free S0b만 열고 같은 version의 dependency/mapping repair
+  rerun, GPU, outer test와 submission claim을 금지한다.
+- `junjinyong`에서 PBS와 기존 pinned PyTorch image 접근은 확인했지만 host와
+  container 모두 mesh/PDE stack을 제공하지 않았다. Login-node GPU는 사용하지
+  않았고 기존 held job을 변경하지 않았다. 별도 solver image의 exact digest와
+  license를 S0a에서 검증해야 한다.
+- 중앙 schema를 `2.4`로 갱신하고 research direction, model boundary,
+  protocol, ISBI plan, dataset/lineage, site와 운영 규약을 동기화했다.
+- 영향 파일: `docs/goal-oriented-segmentation-audit-2026-08-09.md`,
+  `configs/goal_oriented_segmentation_s0a.json`,
+  `src/aurora/goal_oriented_s0a.py`, `tests/test_goal_oriented_s0a.py`,
+  `AGENTS.md`, `README.md`, `docs/research-direction.md`,
+  `docs/model-spec.md`, `docs/experiment-protocol.md`,
+  `docs/isbi-2027-plan.md`, `docs/literature-lineage.md`, `docs/datasets.md`,
+  `docs/server-execution.md`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`, `site/index.html`,
+  `site/learn.html`, `site/assets/research-data.js`,
+  `docs/problem-candidate-audit-2026-08-09.md`,
+  `.github/workflows/quality.yml`, `CHANGELOG.md`.
+
 ## 2026-08-09 · RSNA supervision semantics reject the only shortlist
 
 - Official registry/wiki, 1위 공개 구현 exact commit

@@ -8,16 +8,32 @@ V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
 그리고 cross-protocol 4D-flow candidate I0a 14/14 asset pass와 2026-08-09
 I0b one-shot execution-incomplete/no-verdict/no-rerun 상태, 같은 날 수행한
 problem-level cold audit, CADA·ADAM·IntrA·TopCoW source-only dataset
-substitution screen, 그리고 RSNA supervision-semantics red team으로 그
-lesion-set 후보를 기각한 상태를 반영했다.
+substitution screen, RSNA supervision-semantics red team으로 그 lesion-set
+후보를 기각한 상태, 그리고 2026-08-09 goal-oriented hemodynamic segmentation
+cold audit와 S0a preregistration을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
-- 현재 primary problem과 method는 **선택되지 않았다**. Active shortlist는
-  **0개**다. RSNA-ICA 2025의 annotation-selection-aware mixed-granularity
+- 현재 primary problem과 method는 **선택되지 않았다**. Problem shortlist는
+  **조건부 1개**다. Goal-oriented hemodynamic segmentation은 CTA boundary
+  displacement를 PDE adjoint shape sensitivity에 signed projection해
+  standardized CFD functional error를 줄일 수 있는지 묻는다. Method,
+  architecture, GPU, outer test와 paper identity는 모두 미선정이다.
+- 새 후보의 score는 27.5/40로 자동 선택 기준 32에 못 미친다.
+  `configs/goal_oriented_segmentation_s0a.json`의 CPU/read-only S0a가 CMHA
+  99 patient/105 lesion exact image–surface–table linkage와 별도 pinned
+  solver/adjoint runtime의 11개 check를 모두 통과해야 method-free S0b만
+  등록할 수 있다. 같은 version의 dependency/mapping repair rerun은 없다.
+- Automatic segmentation→CFD, Image2Flow의 joint mesh/field CFD loss, IAVS의
+  CFD Applicability Score, clDice/cbDice, segmentation-induced flow variability,
+  adjoint/shape derivative와 PDE optimization 일반론은 novelty가 아니다.
+  Signed projection supervision의 first-order validity, standard geometry
+  metric과의 비동등성, held-out patient functional-error 우위가 모두 있어야만
+  contribution 후보가 된다.
+- 직전 RSNA-ICA 2025의 annotation-selection-aware mixed-granularity
   lesion-set 후보는 2026-08-09 supervision-semantics red team에서 기각했다.
 - 공식 공개 근거에서 제공 `segmentations/{uid}_cowseg.nii`는 aneurysm
   extent가 아니라 13-class Circle-of-Willis 혈관 해부구조다. Aneurysm
@@ -36,11 +52,9 @@ lesion-set 후보를 기각한 상태를 반영했다.
   되돌리지 않는다. 이들은 향후 fully supervised control 또는 vascular
   anatomy pretraining에 쓸 수 있지만, 기각된 annotation-selection estimand의
   대체 근거가 아니다.
-- 다음 허용 작업은 **fresh problem-level candidate audit**이다. 데이터 의미,
-  식별 가능한 estimand, direct prior gap, patient-level split, ISBI biomedical
-  imaging relevance와 현실적 confirmatory 규모를 method보다 먼저 감사한다.
-  Active 후보가 고정되기 전에는 architecture, executable experiment config,
-  GPU training, outer test와 submission claim을 만들지 않는다.
+- 다음 허용 작업은 **S0a asset/runtime audit 구현·CPU PBS 실행**뿐이다.
+  S0a/S0b 전에는 architecture, model training, GPU, outer test와 submission
+  claim을 만들지 않는다.
 - Vessel graph/GNN, vessel-first nnU-Net, anatomy-masked pooling, location
   transformer, point-to-sphere auxiliary target, generic set prediction, mixed
   supervision, anatomy prompt, foundation model와 conformal/FDR는 단독 novelty가

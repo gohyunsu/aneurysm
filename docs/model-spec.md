@@ -6,15 +6,31 @@ V1e known-condition qualification failed 6/9 · M0 execution-incomplete/no
 scientific verdict · prior BC-operator identity inactive · cross-protocol
 4D-flow I0a asset integrity passed 14/14 · I0b execution-incomplete before
 asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
-supervision-semantics candidate rejected · active shortlist 0 · method and
-architecture unselected
+supervision-semantics candidate rejected · goal-oriented hemodynamic
+segmentation conditional problem shortlist before S0a · method and architecture
+unselected · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
-현재 구현하거나 선택한 headline architecture는 없다. Active problem
-shortlist도 0개다. 직전 RSNA 후보는 제공 segmentation이 aneurysm extent가
+현재 구현하거나 선택한 headline architecture는 없다. Conditional problem
+shortlist는 1개지만 S0a/S0b 전에는 method shortlist가 아니다. 후보는 manual
+domain의 boundary에서 얻은 signed normal displacement를 미리 정한 PDE
+functional의 adjoint shape gradient에 투영하는 supervision이 표준
+segmentation loss보다 held-out standardized functional error를 줄이는지 묻는다.
+Image2Flow처럼 mesh와 CFD field를 공동 예측하거나, IAVS처럼 solver success를
+높이거나, sensitivity magnitude만 boundary weight로 쓰는 구조는 후보
+contribution이 아니다.
+
+S0a는 CMHA exact linkage와 별도 solver/adjoint runtime만 감사한다. Pass도
+method-free perturbation/linearization S0b만 열며 nnU-Net, implicit SDF,
+GNN, neural operator, optimizer와 loss weight를 선택하지 않는다. S0b 뒤에도
+signed projection의 first-order validity와 geometry metric non-equivalence가
+양수여야만 architecture interface와 bounded development search를 별도
+prospective version으로 고정한다.
+
+직전 RSNA 후보는 제공 segmentation이 aneurysm extent가
 아니라 13-class Circle-of-Willis vessel anatomy라는 공개 근거 때문에
 기각됐다. Vessel mask와 aneurysm point/presence/territory는 같은 lesion
 annotation을 다른 granularity로 관측한 것이 아니므로, annotation-selection
@@ -30,11 +46,10 @@ transformer와 point-to-radius-5-sphere target, 2위 pipeline의 tri-axial ROI�
 [`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)를
 따른다.
 
-다음 fresh problem-level audit가 데이터 의미, 식별 가능한 estimand,
-direct-prior gap과 realistic evaluation을 통과한 뒤에만 strong baseline
-interface와 bounded validation search space를 prospective하게 고정한다.
-그 전에는 executable model config, training code, GPU job과 outer test를
-추가하지 않는다.
+`configs/goal_oriented_segmentation_s0a.json`과 cold audit가 데이터 의미,
+direct-prior boundary와 realistic evaluation을 먼저 고정한다. S0a/S0b가
+통과하기 전에는 executable model config, training code, GPU job과 outer
+test를 추가하지 않는다.
 
 공식 source-only dataset substitution screen도 architecture를 열지 않았다.
 CADA·ADAM은 point/mask가 함께 있는 fully supervised challenge이고, IntrA는
