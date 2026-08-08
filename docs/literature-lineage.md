@@ -1,6 +1,6 @@
 # 선행연구 계보와 research gap
 
-검토 기준일: 2026-08-08 KST
+검토 기준일: 2026-08-09 KST
 
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
@@ -17,6 +17,9 @@ correction·POD denoising을 결합했다. 2025 velocity-UQ 연구는 noise, spa
 resolution, partial volume과 phase wrapping이 만든 voxelwise measurement
 uncertainty를 정식화했고 dual-VENC/in-vitro에서 검증했다. 2026 distributional
 SR은 CFD-to-MRI domain shift와 distributional prediction까지 직접 다룬다.
+또한 patient-specific aneurysm에서 4D-flow MRI, PIV와 CFD를 비교·융합한
+multi-modality 연구와 4D-flow velocity bias-error model이 이미 존재한다.
+따라서 “MRI+physics/data fusion” 자체도 novelty가 아니다.
 
 - [4DFlowNet (Frontiers in Physics, 2020)](https://doi.org/10.3389/fphy.2020.00138)
 - [SRflow (Frontiers in AI, 2022)](https://doi.org/10.3389/frai.2022.928181)
@@ -28,6 +31,10 @@ SR은 CFD-to-MRI domain shift와 distributional prediction까지 직접 다룬�
   2026)](https://arxiv.org/abs/2601.13393)
 - [Distributional deep learning for 4D-flow SR under domain shift (arXiv,
   2026)](https://arxiv.org/abs/2602.15167)
+- [Multi-modality aneurysm hemodynamics: 4D-flow MRI, PIV and CFD (Journal of
+  the Royal Society Interface, 2019)](https://doi.org/10.1098/rsif.2019.0465)
+- [Modeling bias error in 4D-flow MRI velocity measurements (IEEE TMI,
+  2022)](https://doi.org/10.1109/TMI.2022.3149421)
 
 따라서 SR, denoising, PINN/continuity loss, implicit field, dual-VENC fusion,
 voxel uncertainty와 domain adaptation은 각각 novelty가 아니다. 현재 남겨 둔
@@ -39,13 +46,17 @@ consistency 자체로는 새롭지 않다. 반복 측정이 적은 공개 phanto
 estimand가 식별 가능하고, direct UQ/SR baseline보다 유의미하며, 이후
 operator-specific algorithmic gap이 남는지를 I0a/I0b로 먼저 확인한다.
 
-직접 candidate asset은 resolution/acceleration을 바꾼 한 aneurysm phantom과
-dual-VENC를 가진 네 aneurysm/flow-diverter phantom이다.
+직접 candidate asset은 resolution/acceleration을 바꾼 한 aneurysm phantom,
+dual-VENC를 가진 네 aneurysm/flow-diverter phantom, 그리고 5 base geometry의
+33 untreated/device-treated acquisition이다. 마지막 자료도 2 source patient
+anatomy에서 파생됐으므로 33 independent case로 세지 않는다.
 
 - [Varied voxel size and acceleration phantom release
   (Zenodo, 2021)](https://doi.org/10.5281/zenodo.4882572)
 - [Dual-VENC aneurysm/flow-diverter phantom release
   (Zenodo, 2025)](https://doi.org/10.5281/zenodo.14981710)
+- [Untreated/device-treated 4D-flow MRI release, 33 scans
+  (Zenodo, 2025)](https://doi.org/10.5281/zenodo.17183575)
 
 ### 1.1 형태·혈류와 파열 상태의 연관성
 

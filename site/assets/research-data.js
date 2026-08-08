@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · method unselected · not submission-ready",
-    requirement: "I0a asset integrity passed → method-free I0b task adequacy → only then method design",
+    status: "Target locked · prior identity inactive · I0a passed 14/14 · I0b preregistered before field read · method unselected · not submission-ready",
+    requirement: "I0b one-shot task adequacy → if pass, method-free I0c raw measurement audit → only then method design",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
@@ -105,7 +105,7 @@ window.AURORA_DATA = Object.freeze({
     ["Uncertainty", "Usually point estimate", "Reconstruction uncertainty optional", "Voxelwise error or distributional output", "Full posterior predictive score; feasibility unproven"],
     ["Reference", "CFD or acquired HR", "Acquired/self-supervised k-space", "Synthetic/repeat/dual-VENC validation", "Same controlled flow's second real acquisition"],
     ["What is already occupied", "SR and denoising", "Physics/self-supervised reconstruction", "Velocity UQ and distributional SR", "Only the evaluation gap is a candidate; no method selected"],
-    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a passed 14/14 asset-only; no field read"]
+    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a passed 14/14; I0b preregistered before field read"]
   ],
   gates: [
     {
@@ -113,6 +113,13 @@ window.AURORA_DATA = Object.freeze({
       title: "Are paired-protocol MRI assets auditable?",
       copy: "두 official Zenodo release의 license·archive pin, 3×3 descriptor/27 RAW byte contract, four-phantom dual-VENC primary/AP/FH/RL header를 field payload 없이 14개 check로 감사한다.",
       state: "Passed 14/14 from exact f7b4e024 · asset integrity only · I0b registration authorized",
+      blocking: true
+    },
+    {
+      id: "I0b",
+      title: "Is the measured task nontrivial and honestly sampled?",
+      copy: "2021 processed RAW 27개만 common grid로 selective staging해 support alignment, temporal/vector similarity와 resolution/acceleration discrepancy를 본다. Expanded 33-scan release는 5 base geometry·22 physical state·8 multi-VENC state·2 pump-off scan·2 source anatomy로 감사한다.",
+      state: "Preregistered before velocity/REC read · one-shot · no local repair · no method",
       blocking: true
     },
     {
@@ -155,12 +162,17 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "4D-flow multiresolution phantom · 2021",
       role: "same-flow 3 resolution × 3 acceleration development/task audit candidate",
-      provenance: "Zenodo CC BY 4.0 · I0a 14/14 asset pass · field payload not staged"
+      provenance: "Zenodo CC BY 4.0 · I0b preregistered for 27 processed RAW · field not read yet"
     },
     {
       name: "4D-flow dual-VENC phantoms · 2025",
       role: "four-phantom external protocol-pair task audit candidate",
-      provenance: "Zenodo CC BY 4.0 · I0a 14/14 asset pass · REC not read"
+      provenance: "Zenodo CC BY 4.0 · overlap with expanded release unresolved · REC not read"
+    },
+    {
+      name: "4D-flow intervention phantoms · 2025",
+      role: "33 untreated/device-treated scans with multi-VENC and pump-off controls",
+      provenance: "Zenodo CC BY 4.0 · 5 base geometry · 22 states · 2 source anatomies · 33 primary headers only · REC not read"
     },
     {
       name: "Aneumo",
@@ -189,6 +201,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "protocol",
+      title: "I0b freezes a one-shot field and task-unit audit before any payload read",
+      copy: "I0a 14/14 범위에서 2021 processed RAW 27개만 읽는 method-free I0b를 고정했다. 등록 전 official README/Matlab reader와 새 Zenodo 17183575 record, 세 ZIP64 central directory, 33 primary PAR header를 본 사실을 discovery로 공개한다. Expanded release의 실제 단위는 5 base geometry, 22 physical model/device state, 8 multi-VENC state, 2 pump-off acquisition, 15 device condition과 2 source anatomy다. 33 scans를 33 patients로 세지 않고 두 2025 release의 independence도 가정하지 않는다. Pass도 method-free I0c decoder/noise audit만 열며 failure 뒤 registration·mask·threshold repair나 rerun은 없다.",
+      files: ["configs/flow_mri_protocol_i0b_task_adequacy.json", "src/aurora/flow_mri_i0b_task_audit.py", "experiments/run_flow_mri_protocol_i0b.py", "cluster/pbs_flow_mri_protocol_i0b_cpu.pbs", "tests/test_flow_mri_i0b_task_audit.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "result",

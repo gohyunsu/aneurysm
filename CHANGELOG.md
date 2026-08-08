@@ -4,6 +4,37 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · I0b freezes task adequacy before any field read
+
+- I0a 14/14가 허용한 범위에서
+  `configs/flow_mri_protocol_i0b_task_adequacy.json`, SHA-256
+  `e19a1194f1b9ec41861c5084b26c9add5be47924a19aee4d23ffc826399dce06`을
+  one-shot learned-method-free audit으로 등록했다.
+- Registration 전 2021 official README/Matlab reader를 읽어 little-endian
+  float32와 X-fastest→Y→Z→T decode를 확인한 사실을 discovery로 공개했다.
+  I0b는 68,706,606 compressed bytes의 27 processed RAW만 selective staging해
+  common-grid alignment, temporal/vector similarity, resolution/acceleration
+  discrepancy와 protocol variance를 frozen all-check rule로 평가한다.
+- 검색에서 Zenodo `17183575`의 CC BY 4.0 33-scan intervention release를
+  추가로 찾았다. Official record, 세 ZIP64 central directory와 33 primary
+  PAR header를 registration 전에 확인했고 velocity/REC field는 읽지 않았다.
+  실제 구조는 5 base geometry, 22 physical model/device state, 8 multi-VENC
+  state, 2 pump-off acquisition, 15 device condition과 2 source patient
+  anatomy다.
+- 33 scans, device conditions, phases와 voxels를 independent patients로 세지
+  않는다. 기존 Zenodo `14981710`과 case-level overlap도 unresolved이므로
+  독립 external cohort로 합치지 않는다.
+- I0b pass도 method-free I0c PAR/REC decoder·noise·cross-VENC measurement
+  audit 등록만 허용한다. Method/GPU training, posterior calibration claim,
+  outer test와 submission은 닫혀 있다. Failure 뒤 registration·mask·threshold
+  local repair, rerun 또는 expanded device data로의 자동 relabel은 금지한다.
+- Central config/validator/tests, AGENTS, research/model/experiment/literature/
+  dataset/server/ISBI 문서, README와 site를 같은 상태로 동기화했다.
+- `cluster/pbs_flow_mri_protocol_i0b_cpu.pbs`는 GPU를 요청하지 않는 8 CPU,
+  48 GB formal wrapper다. Exact source commit, read-only source, writable fresh
+  output과 기존 scientific output 거부를 강제하고 queue·container·private
+  server path는 공개 코드에 넣지 않는다.
+
 ## 2026-08-08 · I0a passes 14/14 asset checks without field access
 
 - Exact public source `f7b4e024d69d43cf042f4163342b4d993386f441`, frozen

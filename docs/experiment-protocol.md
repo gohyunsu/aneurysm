@@ -1,6 +1,6 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.4-draft · 2026-08-08
+버전: 2.5-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -47,11 +47,46 @@ payload read와 field-value inspection은 모두 0이었다. M4 filename/header
 이는 asset integrity pass일 뿐 task adequacy, posterior identifiability,
 method, novelty, performance 또는 submission evidence가 아니다.
 
-I0b는 아직 등록하지 않는다. I0a pass 뒤에도 같은 flow의 protocol 간
-registration, discrepancy magnitude, identity/interpolation floor, repeat 없는
-sample에서의 평가 단위와 aneurysm-localized functional stability가 먼저
-정의 가능해야 한다. 이 audit이 불충분하면 posterior라는 이름을 붙여
-학습으로 넘어가지 않는다.
+### I0b · one-shot field/task-unit adequacy
+
+Executable contract는
+`configs/flow_mri_protocol_i0b_task_adequacy.json`, config SHA-256
+`e19a1194f1b9ec41861c5084b26c9add5be47924a19aee4d23ffc826399dce06`다.
+I0a 뒤, 어떤 velocity/REC field도 읽기 전에 등록했다.
+
+등록 전 discovery를 prospective evidence로 꾸미지 않는다. I0a 범위에 더해
+2021 official README와 MATLAB reader를 읽어 little-endian float32,
+X-fastest→Y→Z→T decode를 확인했다. 또한 새 Zenodo `17183575`의 official
+record, 세 ZIP64 central directory와 33 primary PAR header를 확인했다. Field,
+REC와 checkpoint는 보지 않았다.
+
+I0b가 새로 읽는 field는 2021 processed velocity 27 RAW뿐이다. Registered
+compressed/uncompressed budget은 68,706,606/13,071,974,400 bytes다. 모든 protocol을
+endpoint-aligned trilinear로 24×40×144×144 common grid에 옮기되 target field로
+registration하지 않는다. Reference support는 `0.5_cs2.5` temporal-RMS speed
+2 cm/s threshold와 one-step six-neighbor erosion으로 결과 전에 고정했다.
+
+All-check gate는 다음을 동시에 요구한다.
+
+1. 27 CRC, finite fraction 1.0, absolute velocity ≤100 cm/s
+2. support voxel/fraction, worst Dice ≥0.50, centroid spread ≤4 mm
+3. worst temporal-curve correlation ≥0.80, median vector cosine ≥0.75
+4. same-resolution acceleration median relative L2 ≥0.03
+5. cross-resolution median relative L2 ≥0.05, protocol variance fraction ≥0.0025
+6. expanded release의 33 primary header, 22 physical state, 8 multi-VENC state,
+   2 pump-off scan, 5 base geometry/2 source anatomy와 15 device condition
+7. 2025 REC, target-derived mask/registration, checkpoint, method와 GPU read 0
+
+`17183575`의 33 scans를 33 patients 또는 33 independent geometry로 세지 않는다.
+실제 headline split unit은 base geometry이고 source anatomy는 2개뿐이다. 기존
+Zenodo `14981710`과 overlap도 unresolved이다. Exact-protocol repeat가 없으므로
+I0b 결과와 무관하게 posterior calibration은 식별됐다고 쓰지 않는다.
+
+- all pass: method-free I0c PAR/REC decoder·pump-off noise·cross-VENC measurement
+  audit의 별도 등록만 허용
+- any fail: 2021 processed cross-protocol branch 중단
+- 금지: local repair/rerun/threshold change, method/GPU training, posterior
+  calibration claim, outer test와 submission
 
 ## 0-B. ISBI 2027 venue gate
 

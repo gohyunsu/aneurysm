@@ -1,0 +1,189 @@
+{
+  "schema_version": "aurora.flow_mri_protocol_i0b_task_adequacy.v1",
+  "experiment_id": "flow_mri_protocol_i0b_task_adequacy",
+  "status": "preregistered_after_i0a_and_expanded_asset_discovery_before_any_velocity_or_REC_field_read",
+  "as_of": "2026-08-09",
+  "research_role": "one_shot_method_free_task_adequacy_not_method_or_performance_evidence",
+  "prerequisite": {
+    "i0a_source_commit": "f7b4e024d69d43cf042f4163342b4d993386f441",
+    "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
+    "i0a_public_result": "results/flow_mri_protocol_i0a_asset_audit_20260808.json",
+    "i0a_public_result_sha256": "2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6",
+    "i0a_gate": "14_of_14_passed_asset_integrity_only"
+  },
+  "discovery_boundary": {
+    "inspected_before_registration": true,
+    "scope": "all_I0a_discovery_plus_2021_official_README_and_MATLAB_reader_and_Zenodo_17183575_record_three_ZIP64_central_directories_and_all_33_primary_PAR_headers",
+    "not_prospective_evidence": true,
+    "velocity_field_values_inspected": false,
+    "REC_payloads_inspected": false,
+    "learned_checkpoint_inspected": false
+  },
+  "candidate_question": "Are measured cross-protocol differences in intracranial 4D-flow phantoms aligned, nontrivial, and supported by enough protocol and physical-state structure to justify a later posterior-predictive method audit?",
+  "sources": {
+    "multiresolution_processed_2021": {
+      "doi": "10.5281/zenodo.4882572",
+      "archive_url": "https://zenodo.org/records/4882572/files/2021_05_31_4Dflow_validation.zip?download=1",
+      "archive_bytes": 2216223733,
+      "upstream_checksum": "md5:f3159a34a6f222b491432650540f63b6",
+      "license": "cc-by-4.0",
+      "physical_phantoms": 1,
+      "source_patient_anatomies": 1,
+      "repeat_acquisitions_per_exact_protocol": 1,
+      "protocols": [
+        "0.5_cs2.5",
+        "0.5_cs4.5",
+        "0.5_cs6.5",
+        "1.0_cs2.5",
+        "1.0_cs4.5",
+        "1.0_cs6.5",
+        "1.5_cs2.5",
+        "1.5_cs4.5",
+        "1.5_cs6.5"
+      ],
+      "dimensions_tzyx": {
+        "0.5": [24, 100, 336, 336],
+        "1.0": [24, 60, 224, 224],
+        "1.5": [24, 40, 144, 144]
+      },
+      "spacing_xyz_mm": {
+        "0.5": [0.298, 0.298, 0.3],
+        "1.0": [0.446, 0.446, 0.5],
+        "1.5": [0.694, 0.694, 0.75]
+      },
+      "velocity_components": ["X", "Y", "Z"],
+      "velocity_unit": "cm_per_s",
+      "venc_cm_s": 80.0,
+      "registered_raw_members": 27,
+      "registered_compressed_raw_bytes": 68706606,
+      "registered_uncompressed_raw_bytes": 13071974400,
+      "processed_velocity_root_token": "2_Velocity_in_an_aneurysm_model/Velocity (extracted from GTflow)"
+    },
+    "expanded_intervention_2025": {
+      "doi": "10.5281/zenodo.17183575",
+      "record_api": "https://zenodo.org/api/records/17183575",
+      "license": "cc-by-4.0",
+      "access_right": "open",
+      "source_patient_anatomies": 2,
+      "base_geometry_models": 5,
+      "primary_acquisitions": 33,
+      "physical_model_device_states": 22,
+      "multi_venc_physical_states": 8,
+      "pump_off_noise_acquisitions": 2,
+      "unique_device_conditions": 15,
+      "archives": [
+        {
+          "name": "Experiment 1 - ICA model.zip",
+          "url": "https://zenodo.org/api/records/17183575/files/Experiment%201%20-%20ICA%20model.zip/content",
+          "bytes": 4896957474,
+          "checksum": "md5:c6ccbb8ced47f09f708e2774214f62f7",
+          "entries": 67,
+          "primary_acquisitions": 6,
+          "scan_resolution_xy": [148, 147]
+        },
+        {
+          "name": "Experiment 2 - ICA model.zip",
+          "url": "https://zenodo.org/api/records/17183575/files/Experiment%202%20-%20ICA%20model.zip/content",
+          "bytes": 9496352576,
+          "checksum": "md5:57db0e92f0d854b3ef20933d88a3cb11",
+          "entries": 128,
+          "primary_acquisitions": 13,
+          "scan_resolution_xy": [148, 146]
+        },
+        {
+          "name": "Experiment 3 - BA model.zip",
+          "url": "https://zenodo.org/api/records/17183575/files/Experiment%203%20-%20BA%20model.zip/content",
+          "bytes": 8825376205,
+          "checksum": "md5:a0e88a3f6a99c0fe5b54a2ba0eb92d24",
+          "entries": 145,
+          "primary_acquisitions": 14,
+          "scan_resolution_xy": [148, 147]
+        }
+      ],
+      "expected_cardiac_phases": 20,
+      "required_encodings_per_acquisition": 4,
+      "REC_payload_access_in_I0b": false
+    },
+    "dual_venc_2025": {
+      "doi": "10.5281/zenodo.14981710",
+      "relationship_to_expanded_intervention_release": "unresolved_do_not_count_as_independent_until_case_level_provenance_is_audited",
+      "REC_payload_access_in_I0b": false
+    }
+  },
+  "field_staging": {
+    "allowed_source": "multiresolution_processed_2021_only",
+    "decode_contract": {
+      "dtype": "little_endian_float32",
+      "official_reader_file_order": "X_fastest_then_Y_then_Z_then_T",
+      "numpy_shape": "T_Z_Y_X",
+      "output_shape": "T_Z_Y_X_C"
+    },
+    "resampling": {
+      "method": "endpoint_aligned_trilinear",
+      "align_corners": true,
+      "common_grid_protocol": "1.5_cs2.5",
+      "common_shape_tzyx": [24, 40, 144, 144],
+      "common_spacing_xyz_mm": [0.694, 0.694, 0.75],
+      "scanner_affine_available": false,
+      "target_field_registration_allowed": false
+    },
+    "support": {
+      "reference_protocol": "0.5_cs2.5",
+      "temporal_rms_speed_threshold_cm_s": 2.0,
+      "six_neighbor_erosion_iterations": 1,
+      "target_derived_mask_allowed": false
+    },
+    "private_cache_format": "HDF5_float32_gzip",
+    "redistribute_field_cache": false,
+    "GPU_required": false
+  },
+  "metrics": {
+    "pairwise_field_distance": "symmetric_relative_L2_on_reference_support",
+    "pairwise_vector_similarity": "cosine_on_reference_support",
+    "temporal_alignment": "Pearson_correlation_of_support_mean_speed_curve",
+    "support_alignment": "Dice_and_centroid_spread_on_common_grid",
+    "protocol_variance": "mean_across_protocol_variance_over_mean_squared_signal",
+    "same_resolution_acceleration_pairs": 9,
+    "same_acceleration_resolution_pairs": 9,
+    "independent_unit": "physical_base_geometry_not_voxel_phase_or_device_scan"
+  },
+  "gate": {
+    "thresholds": {
+      "required_2021_RAW_CRC_passes": 27,
+      "required_finite_fraction": 1.0,
+      "maximum_absolute_velocity_cm_s": 100.0,
+      "minimum_reference_support_voxels": 1000,
+      "maximum_reference_support_fraction": 0.2,
+      "minimum_worst_protocol_support_Dice": 0.5,
+      "maximum_protocol_support_centroid_spread_mm": 4.0,
+      "minimum_worst_pair_temporal_curve_correlation": 0.8,
+      "minimum_median_pair_vector_cosine": 0.75,
+      "minimum_same_resolution_acceleration_median_relative_L2": 0.03,
+      "minimum_cross_resolution_median_relative_L2": 0.05,
+      "minimum_protocol_variance_fraction": 0.0025,
+      "required_expanded_primary_headers": 33,
+      "required_expanded_physical_model_device_states": 22,
+      "required_expanded_multi_venc_states": 8,
+      "required_expanded_pump_off_acquisitions": 2,
+      "required_expanded_base_geometry_models": 5,
+      "required_expanded_source_patient_anatomies": 2,
+      "required_expanded_unique_device_conditions": 15
+    },
+    "all_checks_must_pass": true,
+    "pass_authorizes": "register_method_free_I0c_PAR_REC_decoder_noise_and_cross_VENC_measurement_audit_only",
+    "pass_does_not_authorize": [
+      "method_selection",
+      "neural_training",
+      "GPU_training",
+      "posterior_calibration_claim",
+      "treat_33_scans_as_33_independent_patients",
+      "treat_device_states_as_independent_anatomies",
+      "merge_Zenodo_14981710_and_17183575_as_independent",
+      "confirmatory_outer_test",
+      "isbi_submission"
+    ],
+    "failure_action": "stop_the_2021_processed_cross_protocol_branch_and_do_not_auto_relabel_the_expanded_device_release_as_an_independent_cohort",
+    "local_repair_rerun_or_threshold_change_allowed": false
+  },
+  "interpretation": "I0b asks whether cross-protocol field differences are measurable and whether the expanded public release contains auditable task units. It cannot identify posterior calibration because exact-protocol repeats are absent, cannot select a method, and cannot turn scans, device states, voxels, or phases into independent patients."
+}

@@ -1,11 +1,11 @@
 # AURORA 연구 방향
 
-최종 검토일: 2026-08-08 KST
+최종 검토일: 2026-08-09 KST
 
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b registration authorized · method unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b one-shot method-free audit preregistered before field read · method unselected · submission blocked
 
 ## 0-A. 현재 active candidate · protocol-indexed posterior prediction
 
@@ -36,10 +36,24 @@ source `f7b4e024d69d43cf042f4163342b4d993386f441`에서 14/14를 통과했다.
 ZIP32/ZIP64 entry 174/76개, descriptor 9개, primary header 8개를 검증했고
 processed RAW/REC read는 0이었다. 이 결과는
 `results/flow_mri_protocol_i0a_asset_audit_20260808.json`에 고정한다. Pass는
-selective staging과 learned-method-free I0b의 별도 등록만 허용한다. I0b가 protocol
-차이의 비자명성, registration 가능성, simple interpolation/identity floor,
-functional stability와 평가 sample adequacy를 지지하지 못하면 candidate를
-중단한다.
+selective staging과 learned-method-free I0b의 별도 등록만 허용한다.
+
+I0b는 `configs/flow_mri_protocol_i0b_task_adequacy.json`에 field read 전에
+고정했다. 2021 release는 little-endian float32와 official MATLAB의
+X-fastest→Y→Z→T 순서로 27 RAW만 decode하고, target field를 이용한 registration
+없이 common 1.5-grid에서 support Dice·centroid, temporal correlation, vector
+cosine, resolution/acceleration discrepancy와 protocol variance를 검사한다.
+Registration 전에 공식 README/reader를 읽은 사실을 discovery로 공개한다.
+
+별도로 Zenodo `17183575`의 23.2 GB/33-scan intervention release를 찾았다.
+등록 전에 official record, 세 ZIP64 central directory와 33 primary PAR header를
+확인했으며 field/REC는 보지 않았다. 실제 단위는 33 patients가 아니라 5 base
+geometry, 22 physical model/device state, 8 multi-VENC state, 2 pump-off acquisition,
+15 unique device condition이고 source patient anatomy는 2개다. 기존 Zenodo
+`14981710`과의 case-level overlap도 unresolved이므로 독립 cohort로 합치지
+않는다. I0b가 모두 통과해도 method-free I0c PAR/REC decoder·noise audit만
+등록할 수 있다. 실패하면 threshold나 registration을 고쳐 반복하지 않고
+2021 processed cross-protocol branch를 중단한다.
 
 ## 0-B. 제출 목표와 보존된 이전 scope
 

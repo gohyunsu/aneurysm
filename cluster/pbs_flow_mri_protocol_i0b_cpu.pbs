@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#PBS -N aurora_flow_i0b
+#PBS -l select=1:ncpus=8:mem=48gb
+#PBS -l walltime=04:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+
+if [ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]; then
+  echo "Project checkout does not match AURORA_GIT_COMMIT." >&2
+  exit 2
+fi
+if [ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]; then
+  echo "Project checkout must be clean for exact I0b execution." >&2
+  exit 2
+fi
+if [ -e "$AURORA_OUTPUT_ROOT/raw_result.json" ] || \
+   [ -e "$AURORA_OUTPUT_ROOT/private_i0b_velocity_cache.h5" ]; then
+  echo "I0b is one-shot and refuses an existing scientific output." >&2
+  exit 2
+fi
+
+mkdir -p "$AURORA_OUTPUT_ROOT"
+cd "$PBS_O_WORKDIR"
+
+hostname > "$AURORA_OUTPUT_ROOT/hostname.txt"
+sha256sum "$AURORA_SIF" > "$AURORA_OUTPUT_ROOT/container.sha256"
+
+set +e
+singularity exec --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_OUTPUT_ROOT:/output" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace/src:/workspace" \
+    OMP_NUM_THREADS=8 \
+    MKL_NUM_THREADS=8 \
+  python /workspace/experiments/run_flow_mri_protocol_i0b.py \
+    --config /workspace/configs/flow_mri_protocol_i0b_task_adequacy.json \
+    --repository-root /workspace \
+    --cache /output/private_i0b_velocity_cache.h5 \
+    --output /output/raw_result.json \
+    --source-commit "$AURORA_GIT_COMMIT" \
+    > "$AURORA_OUTPUT_ROOT/run.log" 2>&1
+run_status=$?
+set -e
+
+if [ "$run_status" -eq 0 ]; then
+  printf '%s\n' '{"state":"runner_completed","exit_status":0}' \
+    > "$AURORA_OUTPUT_ROOT/wrapper_status.json"
+else
+  printf '{"state":"runner_failed","exit_status":%s}\n' "$run_status" \
+    > "$AURORA_OUTPUT_ROOT/wrapper_status.json"
+fi
+exit "$run_status"

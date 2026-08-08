@@ -5,7 +5,8 @@
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
 backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass,
 V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
-그리고 cross-protocol 4D-flow candidate I0a 14/14 asset pass를 반영했다.
+그리고 cross-protocol 4D-flow candidate I0a 14/14 asset pass와 2026-08-09
+I0b one-shot task-adequacy registration을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -25,7 +26,13 @@ V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
   RAW/REC field read는 0이었다. Public aggregate는
   `results/flow_mri_protocol_i0a_asset_audit_20260808.json`이다. 이 pass는
   selective private staging과 learned-method-free I0b의 별도 등록만
-  허용하며 method·architecture는 선택하지 않았다.
+  허용했다. I0b는 config SHA
+  `e19a1194f1b9ec41861c5084b26c9add5be47924a19aee4d23ffc826399dce06`으로
+  field read 전에 고정했다. 2021의 27 processed RAW만 읽고, 새 Zenodo
+  `17183575`는 metadata·central directory·33 primary PAR header만 감사한다.
+  33 scans의 실제 구조는 5 base geometry, 22 physical model/device state,
+  8 multi-VENC state, 2 pump-off scan, 15 device condition과 2 source patient
+  anatomy다. Method·architecture는 선택하지 않았다.
 - 제출 목표: **IEEE ISBI 2027 archival four-page regular paper**,
   2026-10-26 23:59 USA EDT. 현재는 `not submission-ready`다.
 - ISBI headline은 actual irregular-3D aneurysm **velocity-only**
@@ -360,6 +367,7 @@ N1 adaptation을 원 논문 재현으로 표현하지 않는다.
 | Aneurisk | provenance가 확인된 geometry/morphology 보조 평가 | asset audit 전 CFD 보유 가정 |
 | 4D-flow multiresolution phantom 2021 | same-flow 3×3 protocol development/task audit 후보 | high-resolution acquisition 또는 CFD를 clinical truth로 해석 |
 | 4D-flow dual-VENC phantoms 2025 | four-phantom external protocol-pair audit 후보 | phantom을 independent clinical cohort 또는 repeat calibration set으로 과장 |
+| 4D-flow intervention phantoms 2025 | multi-VENC, pump-off noise와 untreated/device response task-unit audit | 33 scans/device/phase/voxel을 independent patient로 계산 |
 
 모든 case/field에는 `source_field ∈ {real_cfd, surrogate, synthetic_cfd}`와
 dataset version, checksum, unit, coordinate frame을 기록한다.
@@ -377,6 +385,18 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   Task adequacy, posterior identifiability, method, novelty, performance와
   submission evidence가 아니다. 별도 I0b contract 전 field payload를 읽지
   않으며 local repair는 없다.
+
+- **I0b · Method-free field/task-unit adequacy · preregistered**: 2021 official
+  README/Matlab reader와 Zenodo `17183575` record·세 central directory·33
+  primary PAR header를 registration 전 discovery로 공개했다. 아직 velocity
+  field와 REC는 읽지 않았다. Formal run은 2021 processed RAW 27개만
+  little-endian float32/X-fastest 순서로 decode해 common grid에서 support
+  alignment, temporal/vector similarity, resolution/acceleration discrepancy와
+  protocol variance를 one-shot all-check rule로 검사한다. Expanded release는
+  33 scans가 아니라 5 base geometry/2 source anatomy를 headline unit으로
+  유지하며 두 2025 release의 overlap은 unresolved이다. Pass도 method-free
+  I0c PAR/REC decoder·noise audit 등록만 허용한다. Failure 뒤 mask,
+  registration, threshold, rerun과 task relabel은 금지한다.
 
 - **G0 · Asset integrity**: case mapping, unit, boundary marker, license,
   geometry/condition split이 검증되지 않으면 학습하지 않는다.
@@ -737,6 +757,10 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   byte-range만 사용했고 14/14를 통과했으며 processed RAW/REC field read는
   0이었다. 별도 I0b contract 전에는 field payload를 읽지 않고 method code나
   GPU training을 실행하지 않는다.
+- I0b는 `introai9` scheduler CPU allocation의 pinned container에서 2021
+  processed RAW만 selective staging한다. Source는 read-only, private HDF5
+  output만 writable이다. 2025 REC, checkpoint와 GPU read는 0이어야 한다.
+  Pass 뒤에도 `junjinyong` GPU training은 열리지 않는다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

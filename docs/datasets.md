@@ -1,11 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
-> **2026-08-08 active candidate:** 두 공개 in-vitro 4D-flow MRI release를
+> **2026-08-08 active candidate:** 공개 in-vitro 4D-flow MRI release들을
 > 새 end-to-end cohort로 합치지 않는다. 2021 release는 한 aneurysm phantom의
-> 3 resolution × 3 acceleration development view, 2025 release는 네
-> aneurysm/flow-diverter phantom의 dual-VENC external view 후보이다. 현재는
+> 3 resolution × 3 acceleration development view, Zenodo `14981710`은 네
+> aneurysm/flow-diverter phantom의 dual-VENC view, 새 `17183575`는 33 scan의
+> intervention/multi-VENC/noise-control asset이다. 그러나 마지막 자료도 실제로는
+> 5 base geometry·22 model/device state·2 source patient anatomy다. 현재
 > I0a metadata/header audit은 exact source `f7b4e024…`에서 14/14를 통과했고
-> field payload는 staging하지 않았다. I0b의 별도 등록만 허용된다.
+> field payload는 아직 staging하지 않았다. I0b는 2021의 27 processed RAW만
+> 읽도록 별도 등록됐다. 두 2025 release의 독립성은 unresolved이며 REC는 읽지
+> 않는다.
 > CFD를 MRI ground truth로 부르거나 phantom을 clinical cohort로 해석하지 않는다.
 
 > **2026-08-03 AURORA 역할 갱신:** 데이터셋은 하나의 end-to-end cohort로
@@ -63,6 +67,7 @@
 | AneuG-Flow / 관련 synthetic set | 현재 서버에는 geometry archive; 논문 release에는 fixed-policy CFD field | 대규모 synthetic | known-condition geometry pretraining | paired-BC C2에는 사용 불가 |
 | 4D-flow MRI multiresolution phantom 2021 | 같은 ICA aneurysm phantom의 3 voxel-size × 3 acceleration processed velocity | 1 physical phantom, 9 selected protocols | I0a 후 cross-protocol development/task audit 후보 | CC BY 4.0; 반복 측정·독립 geometry 부족 |
 | 4D-flow MRI dual-VENC phantoms 2025 | 네 aneurysm/flow-diverter phantom의 raw four-encoding dual-VENC acquisition | 4 physical phantoms, 8 acquisitions | I0a 후 external protocol-pair task audit 후보 | CC BY 4.0; REC payload 미감사, M4 filename/header 불일치 명시 |
+| 4D-flow MRI intervention phantoms 2025 | untreated/device-treated, multi-VENC, pump-off four-encoding raw acquisitions | 33 scans, 22 physical states, 5 base geometry, 2 source anatomies | I0b task-unit audit; 이후 noise/cross-VENC external measurement 후보 | CC BY 4.0; scan/device를 patient로 세지 않음, REC 미감사, `14981710` overlap unresolved |
 
 숫자와 확장자는 원 배포본을 받은 뒤 자동 inventory로 확정한다. 정리글의 “Aneurisk CFD 포함”은 현재 프로젝트의 샘플 관찰만으로 확인되지 않았으므로 `unknown`으로 시작한다.
 

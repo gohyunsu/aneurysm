@@ -56,7 +56,33 @@ class ProtocolTests(unittest.TestCase):
             if item["name"] == "flow_mri_multiresolution_phantom_2021"
         )
         flow_2021["status"] = "field_staged"
-        with self.assertRaisesRegex(ProtocolError, "field staging"):
+        with self.assertRaisesRegex(ProtocolError, "field/REC access"):
+            validate_protocol(candidate)
+
+    def test_i0b_registration_cannot_select_method_or_read_REC(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["i0b_pass_authorizes"] = "select_method"
+        with self.assertRaisesRegex(ProtocolError, "I0b registration"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        expanded = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "flow_mri_intervention_phantoms_2025"
+        )
+        expanded["status"] = "REC_read"
+        with self.assertRaisesRegex(ProtocolError, "field/REC access"):
+            validate_protocol(candidate)
+
+    def test_expanded_scans_cannot_become_independent_patient_units(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        expanded = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "flow_mri_intervention_phantoms_2025"
+        )
+        expanded["split_unit"] = "patient"
+        with self.assertRaisesRegex(ProtocolError, "physical-unit"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["i0a_pass_authorizes"] = "method_selection"

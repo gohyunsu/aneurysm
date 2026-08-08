@@ -1,6 +1,6 @@
 # AURORA 서버 실행과 provenance
 
-최종 갱신: 2026-08-08 KST
+최종 갱신: 2026-08-09 KST
 
 이 문서는 재현에 필요한 역할과 절차만 공개한다. SSH endpoint, 내부 절대
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
@@ -38,6 +38,27 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
   `results/flow_mri_protocol_i0a_asset_audit_20260808.json`, SHA-256
   `2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6`다.
   Task adequacy나 method evidence가 아니며 별도 I0b 등록만 연다.
+
+## 2026-08-09 · Cross-protocol 4D-flow I0b registered
+
+- Exact executable contract는
+  `configs/flow_mri_protocol_i0b_task_adequacy.json`, SHA-256
+  `e19a1194f1b9ec41861c5084b26c9add5be47924a19aee4d23ffc826399dce06`다.
+- Registration 전 2021 official README/reader와 Zenodo `17183575` official
+  record, 세 central directory, 33 primary PAR header를 확인한 범위를 공개했다.
+  Velocity field와 REC는 읽지 않았다.
+- Formal I0b는 `introai9`의 scheduler CPU allocation과 pinned container에서
+  실행한다. 2021 processed RAW 27개만 HTTP byte-range/CRC로 읽고 private
+  HDF5 common-grid cache를 만든다. Source는 read-only, output만 writable이다.
+- 공개 wrapper `cluster/pbs_flow_mri_protocol_i0b_cpu.pbs`는 8 CPU/48 GB,
+  exact source commit, source read-only, output writable와 기존 scientific
+  output 거부를 강제한다. Queue·container·private absolute path는 제출 시
+  환경으로만 주입하며 GPU resource와 `nvidia-smi`는 요청하지 않는다.
+- 2025 intervention release의 132 REC member는 존재/byte contract만 확인하고
+  payload는 읽지 않는다. Checkpoint, method와 GPU는 사용하지 않는다.
+- Pass도 `junjinyong` GPU job을 열지 않는다. 별도 method-free I0c decoder/noise
+  protocol을 public exact commit으로 먼저 고정해야 한다. Failure 뒤 local
+  registration·mask·threshold 수선이나 I0b rerun은 금지한다.
 
 ## 2026-08-03 자산 감사
 

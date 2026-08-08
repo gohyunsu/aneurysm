@@ -12,9 +12,9 @@ super-resolution, denoising, PINN reconstruction 또는 voxelwise uncertainty를
 새 contribution이라고 부르지 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 유지하지만, 새 candidate의 정식 방법명과
-> architecture는 I0b 근거 전에는 정하지 않습니다.
+> architecture는 I0b/I0c 근거 전에는 정하지 않습니다.
 
-## 현재 단계 · I0a 14/14 통과, I0b 등록만 허용
+## 현재 단계 · I0a 14/14 통과, I0b one-shot audit 등록
 
 [`I0a contract`](configs/flow_mri_protocol_i0a_asset_audit.json)는 두 공개
 paired-protocol phantom release의 공식 record, archive size/checksum, ZIP
@@ -28,11 +28,20 @@ entry, descriptor 9개, primary header 8개를 CRC와 함께 검증했고 proces
 RAW/REC payload read는 0입니다. 공개 aggregate는
 [`I0a result`](results/flow_mri_protocol_i0a_asset_audit_20260808.json)입니다.
 
-이 통과가 허용하는 것은 selective private staging과 **learned method가 없는
-I0b task-adequacy audit의 별도 등록뿐**입니다. Posterior calibration은 반복 측정이
-적은 공개 자산에서 식별이 어려울 수 있으므로, task가 충분히 비자명하고
-평가 가능한지 먼저 반증합니다. Method, neural training, outer test와 ISBI
-submission은 아직 열리지 않습니다.
+이 범위에서
+[`I0b contract`](configs/flow_mri_protocol_i0b_task_adequacy.json)를 field read
+전에 고정했습니다. I0b는 2021 processed RAW 27개만 selective staging해
+3×3 protocol의 alignment·field discrepancy·temporal correlation을 측정합니다.
+동시에 새 [33-scan intervention release](https://doi.org/10.5281/zenodo.17183575)의
+세 ZIP64 central directory와 33개 primary PAR header에서 5 base geometry,
+22 model/device state, 8 multi-VENC state, 2 pump-off scan과 15 device condition을
+감사합니다. 이 discovery는 등록 전에 수행했음을 명시하며 REC는 읽지 않습니다.
+
+33 scans는 33 patients가 아닙니다. Base geometry는 5개이고 source patient
+anatomy는 2개뿐이며 exact-protocol repeat도 없습니다. I0b가 모두 통과해도
+method-free PAR/REC decoder·noise audit인 I0c 등록만 열립니다. Method, posterior
+calibration claim, neural/GPU training, outer test와 ISBI submission은 아직
+열리지 않습니다.
 
 ## 보존된 이전 연구선과 제출 상태
 

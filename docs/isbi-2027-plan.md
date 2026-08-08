@@ -1,9 +1,9 @@
 # ISBI 2027 submission plan
 
-최종 검토일: 2026-08-08 KST
+최종 검토일: 2026-08-09 KST
 상태: **target locked · not submission-ready · prior BC-operator identity
 inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b
-registration authorized · method unselected**
+one-shot audit preregistered before field read · method unselected**
 
 ## 1. Venue contract
 
@@ -52,10 +52,12 @@ registration authorized · method unselected**
 이 문장은 제출 제목이 아니라 I0a/I0b가 반증할 문제 정의다. Exact source
 `f7b4e024…`의 I0a는 두 공개 paired-protocol release의
 metadata/header/byte contract를 field read 없이 감사해 14/14를 통과했다.
-이는 task 또는 method evidence가 아니며, I0b는
-field staging 뒤 learned method 없이 registration, protocol discrepancy,
-simple floor, functional stability와 sample adequacy를 검사한다. 두 audit이
-양수여도 방법 novelty는 생기지 않는다.
+이는 task 또는 method evidence가 아니다. I0b는 2021 processed velocity에서
+target-dependent registration 없이 protocol discrepancy와 alignment를 검사하고,
+새 33-scan intervention release의 5 base geometry·22 physical state·8 multi-VENC
+state·2 pump-off scan을 header truth로 감사한다. 33 scans는 2 source patient
+anatomy에서 왔으므로 독립 patient cohort가 아니다. 두 audit이 양수여도 방법
+novelty는 생기지 않고 method-free I0c raw measurement audit만 열린다.
 
 가능한 논문 정체성은 이후에만 열린다: protocol-aware latent field posterior를
 held-out acquisition operator로 pushforward하고, CFD가 아닌 실제 paired

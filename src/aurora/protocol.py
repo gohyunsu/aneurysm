@@ -36,6 +36,7 @@ ALLOWED_SPLIT_UNITS = {
     "simulation_family",
     "aneux_base_family",
     "physical_phantom",
+    "physical_base_geometry",
 }
 REQUIRED_GATES = {"G0", "G1", "G2", "G3", "G4"}
 REQUIRED_DATASETS = {
@@ -46,6 +47,9 @@ REQUIRED_DATASETS = {
     "benchanxplore",
     "cmha",
     "aneux",
+    "flow_mri_multiresolution_phantom_2021",
+    "flow_mri_dual_venc_phantoms_2025",
+    "flow_mri_intervention_phantoms_2025",
 }
 
 
@@ -313,6 +317,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "i0a_raw_status_sha256",
             "i0a_gate",
             "i0a_pass_authorizes",
+            "i0b_config",
+            "i0b_config_sha256",
+            "i0b_status",
+            "i0b_discovery_scope",
+            "i0b_allowed_field_access",
+            "i0b_pass_authorizes",
+            "i0b_local_repair_rerun_or_threshold_change_allowed",
             "generic_super_resolution_or_denoising_is_novel",
             "cfd_field_is_clinical_mri_ground_truth",
             "forbidden_claims",
@@ -345,7 +356,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
         or task["active_candidate_status"]
-        != "i0a_completed_14_of_14_asset_integrity_pass_i0b_registration_only_no_method_selected"
+        != "i0a_completed_14_of_14_asset_integrity_pass_i0b_preregistered_before_any_field_read_no_method_selected"
         or task["candidate_primary_estimand"]
         != "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space"
         or task["candidate_secondary_estimand"]
@@ -366,12 +377,25 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["i0a_gate"] != "14_of_14_passed_asset_integrity_only"
         or task["i0a_pass_authorizes"]
         != "register_selective_private_staging_and_method_free_I0b_task_adequacy_only"
+        or task["i0b_config"]
+        != "configs/flow_mri_protocol_i0b_task_adequacy.json"
+        or task["i0b_config_sha256"]
+        != "e19a1194f1b9ec41861c5084b26c9add5be47924a19aee4d23ffc826399dce06"
+        or task["i0b_status"]
+        != "preregistered_after_i0a_and_expanded_asset_discovery_before_any_velocity_or_REC_field_read"
+        or task["i0b_discovery_scope"]
+        != "2021_README_and_MATLAB_reader_plus_Zenodo_17183575_record_three_central_directories_and_33_primary_PAR_headers_not_prospective_evidence"
+        or task["i0b_allowed_field_access"]
+        != "2021_processed_velocity_27_RAW_members_only"
+        or task["i0b_pass_authorizes"]
+        != "register_method_free_I0c_PAR_REC_decoder_noise_and_cross_VENC_measurement_audit_only"
+        or task["i0b_local_repair_rerun_or_threshold_change_allowed"] is not False
         or task["generic_super_resolution_or_denoising_is_novel"] is not False
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The 4D-flow candidate must retain the exact I0a result, remain "
-            "measurement-space, and stay method-unselected before I0b."
+            "The 4D-flow candidate must retain the exact I0a result and I0b "
+            "registration, remain measurement-space, and stay method-unselected."
         )
     checks.append("historical task boundary and 4D-flow candidate guardrails")
 
@@ -407,6 +431,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     flow_2025 = next(
         item for item in datasets if item["name"] == "flow_mri_dual_venc_phantoms_2025"
     )
+    flow_intervention = next(
+        item
+        for item in datasets
+        if item["name"] == "flow_mri_intervention_phantoms_2025"
+    )
     if cmha["field_provenance"] != "real_cfd":
         raise ProtocolError("CMHA is the declared real-CFD bridge in protocol v1.")
     if aneux["field_provenance"] != "none":
@@ -423,11 +452,23 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "Aneumo pressure must remain excluded after the scaling audit."
         )
     if (
-        flow_2021.get("status") != "i0a_passed_no_field_payload_staged"
-        or flow_2025.get("status") != "i0a_passed_no_REC_payload_staged"
+        flow_2021.get("status")
+        != "i0b_preregistered_27_processed_RAW_only_no_field_read_yet"
+        or flow_2025.get("status")
+        != "i0b_overlap_with_expanded_release_unresolved_no_REC_read"
+        or flow_intervention.get("status")
+        != "i0b_preregistered_metadata_and_33_primary_headers_only_no_REC_read"
+        or flow_intervention.get("split_unit") != "physical_base_geometry"
+        or flow_intervention.get("source_patient_anatomies") != 2
+        or flow_intervention.get("base_geometry_models") != 5
+        or flow_intervention.get("primary_acquisitions") != 33
+        or flow_intervention.get("physical_model_device_states") != 22
+        or flow_intervention.get("multi_venc_physical_states") != 8
+        or flow_intervention.get("pump_off_noise_acquisitions") != 2
+        or flow_intervention.get("unique_device_conditions") != 15
     ):
         raise ProtocolError(
-            "I0a pass must not be relabeled as field staging or REC access."
+            "I0b registration must preserve field/REC access and physical-unit boundaries."
         )
     checks.append("dataset provenance and split units")
 
