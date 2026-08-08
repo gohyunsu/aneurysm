@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Source-server S0a asset gate is deployed and verified
+
+- Exact prospective source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의
+  GitHub Quality run `31282466660`과 Pages run `31282466314`가 모두
+  `success`다.
+- 공개 사이트는 <https://gohyunsu.github.io/aneurysm/>에서 현재
+  staging/solver-v1 실패, archive 3/3 discovery, one-shot asset early-stop과
+  method/GPU/outer-test 금지를 렌더링한다.
+- 이 기록은 prospective source의 code/config를 바꾸지 않는다. 실제 asset
+  audit은 위 exact source를 clean checkout으로 사용한다.
+- 영향 파일: `CHANGELOG.md`, `site/assets/research-data.js`.
+
 ## 2026-08-09 · Preserve two pre-gate failures and freeze source-server asset early stop
 
 - Exact `5cd4aa2…`의 chunked CMHA staging v2는 79초 뒤 exit 28이었다.

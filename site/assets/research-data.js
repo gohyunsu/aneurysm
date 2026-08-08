@@ -309,6 +309,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "The source-server S0a asset gate is live and verified",
+      copy: "Prospective source ef547a4ccb71fa45b4a43e67c0939e2701ebfc11 passed Quality run 31282466660 and Pages run 31282466314. The live guide exposes the staging/solver-v1 failures, three-of-three archive-integrity discovery, one-shot asset early stop and continued prohibition on a method, GPU or outer test. The execution checkout remains the exact prospective source; this deployment record changes no audit code or threshold.",
+      files: ["CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.09",
       category: "execution",
       title: "Transport and solver v1 failures are preserved; source-server asset audit replaces retries",
       copy: "Chunked CMHA staging v2 exited 28 before its first verified chunk; solver preflight v1 exited 1 after the official build SIF and exact SU2/submodule materialization but before TestCases, build or probe. Neither evaluated S0a, and neither same source will be rerun. A read-only search then found the existing CMHA source archives on introai9: all three official byte sizes and MD5 values match, while CSV rows, identifiers, NIfTI/STL headers, voxels and fields remain unopened. We therefore stop Figshare transport and raw cross-server transfer. A pure-standard-library, one-shot CPU/PBS asset component freezes nine exact archive/CSV/unit/identifier/NIfTI-STL/privacy checks. Any scientific failure closes the candidate before solver v2; 9/9 only authorizes registration of one no-runtime-network solver preflight v2, not S0a, a model, GPU or outer test.",
