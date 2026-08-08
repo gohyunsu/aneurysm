@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · The 5/9 closure state is deployed and verified
+
+- Exact result-bearing source `07fb98eabfa36ee226bde337cae7f23fef2cbc72`의
+  GitHub Quality run `31284456367`과 Pages run `31284456053`은 모두
+  `success`다.
+- <https://gohyunsu.github.io/aneurysm/site/>에서 `active problem shortlist 0`,
+  goal-oriented candidate의 5/9 asset failure와 no solver-v2/S0b/model/GPU
+  boundary를 확인했다. Public result URL에서도 `failed_5_of_9` verdict를
+  확인했다.
+- 이 deployment record는 실행 전 source `ef547a4…`, public result, threshold,
+  candidate closure 또는 next authorization을 바꾸지 않는다.
+- 영향 파일: `CHANGELOG.md`, `site/assets/research-data.js`.
+
 ## 2026-08-09 · Goal-oriented candidate closes after S0a asset component fails 5/9
 
 - Exact prospective source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의

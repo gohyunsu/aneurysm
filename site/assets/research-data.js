@@ -309,6 +309,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "The 5/9 closure state is live and verified",
+      copy: "Exact result-bearing source 07fb98eabfa36ee226bde337cae7f23fef2cbc72 passed Quality run 31284456367 and Pages run 31284456053. The live site renders active problem shortlist zero, the goal-oriented candidate's 5/9 asset failure, and the continued prohibition on solver v2, S0b, a model, GPU and outer test. The public result URL exposes only the privacy-safe failed_5_of_9 aggregate. This deployment record changes no source run, result, threshold or authorization.",
+      files: ["CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.09",
       category: "decision",
       title: "The goal-oriented candidate closes after a 5/9 asset failure",
       copy: "Exact prospective source ef547a4ccb71fa45b4a43e67c0939e2701ebfc11 completed CPU/PBS job 115119 with exit 0, but the frozen asset component passed only five of nine checks. Archive integrity, CSV members, six multi-lesion groups, privacy and the no-model/GPU boundary passed; the unit contract, exact 105-lesion linkage, non-positional mapping and the linkage-dependent geometry audit did not. Required image/surface triplets were 0/105 and no NIfTI/STL header was opened. S0a remains not evaluated, the candidate is closed, and solver v2, S0b, model, GPU and outer test are prohibited. Active problem shortlist is now zero.",
