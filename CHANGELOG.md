@@ -24,6 +24,13 @@
 - Central config/validator/tests including the immutable execution-record guard,
   AGENTS, research/model/experiment/dataset/
   server/ISBI 문서, README, results index와 site를 같은 상태로 동기화했다.
+- Production source `1bdf22de76f7a89f09528f1551b4c5717cc40447`의 GitHub
+  quality run `31265099170`은 success다. 2026-08-09 KST에
+  <https://gohyunsu.github.io/aneurysm/site/>가 새
+  `I0b execution-incomplete` 상태를 제공하고 이전 `I0b preregistered`
+  문구를 제공하지 않음을 직접 확인했다. 같은 push의 Pages run
+  `31265098894`는 success지만 public Actions API의 `head_sha`는 이전
+  `0ebdb344…`를 보고하므로 live-content 검증과 분리해 기록한다.
 
 ## 2026-08-09 · I0b freezes task adequacy before any field read
 
