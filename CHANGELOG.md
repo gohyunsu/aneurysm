@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1c passes geometry staging and V1d seals development caching
+
+- Exact source `84fc244`는 pinned container에서 dependency-complete 193/193
+  tests와 protocol/site 검증을 통과했다. 이어진 V1c CPU run은 exit 0으로
+  완료돼 8/8을 통과했다. 20 train representatives, 60 patches, 180 payloads를
+  확인했고 60/60 patch가 세 flow에서 exact invariant였다. Minimum
+  polygon-valid fraction은 1.0이고 private geometry cache는 3.93 MB다.
+- `U/p/TimeValue`, validation/test payload, model/checkpoint는 읽지 않았다.
+  Public aggregate
+  `results/aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json`의
+  SHA-256은 `a023e9fb...bbd1`이며 private cache는 재배포하지 않는다. 이 pass는
+  full boundary-aware geometry-cache staging protocol 등록만 허용한다.
+- `configs/aneumo_isbi_v1d_development_geometry_cache.json`은 V1c outcome 뒤,
+  validation geometry payload decode 전에 고정했다. Train 40·validation
+  12·test 0 case의 boundary VTP 468개와 volume VTU 52개에서 geometry만
+  decode한다. Q-invariance·topology·frame·bounds와 함께 모든 boundary point가
+  reference-volume point에 exact하게 대응해야 한다.
+- V1d pass도 known-condition strong-baseline **protocol 등록**만 허용한다.
+  Model training, test geometry/field, V2, partial/missing method, novelty와
+  submission은 계속 금지한다. V1 실패와 current branch 폐기는 유지한다.
+
 ## 2026-08-08 · V1b passes asset identifiability and V1c freezes geometry staging
 
 - Exact source `fb1c21a`의 V1b CPU audit은 20 ZIP64 archives, 64 cases,

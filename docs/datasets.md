@@ -32,8 +32,12 @@
 > archives·64 cases의 384 required member와 60 train representative VTP를
 > 검사해 8/8을 통과했다. Validation/test payload와 field array는 읽지 않았다.
 > 후속 V1c는 20 train representative×3 patch×3 flow의 geometry-only
-> q-invariance·topology·area/frame·coordinate-frame audit이며, pass도 full
-> boundary geometry-cache staging protocol만 허용한다.
+> q-invariance·topology·area/frame·coordinate-frame audit에서 8/8을
+> 통과했다. 60/60 patch가 exact q-invariant였고 minimum polygon-valid
+> fraction은 1.0이었다. V1d는 validation geometry decode 전에 train 40,
+> validation 12, test 0 case의 520 geometry payload를 고정해 모든 boundary
+> point의 reference-volume correspondence까지 검사한다. Pass도
+> known-condition baseline protocol 등록만 허용한다.
 
 ## 핵심 비교
 

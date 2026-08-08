@@ -1,0 +1,72 @@
+{
+  "config_sha256": "cccef81c9b948d24ea67c1164f3dec394e9d7695fb336219e6e7eb57bb7925be",
+  "counts": {
+    "patches": 60,
+    "payload_members": 180,
+    "train_representative_cases": 20
+  },
+  "experiment_id": "aneumo_isbi_v1c_boundary_geometry_staging_audit",
+  "field_access": {
+    "compact_cache_datasets_read": [
+      "coordinates_m"
+    ],
+    "test_payload_read": false,
+    "validation_payload_read": false,
+    "vtp_arrays_decoded": [
+      "Points",
+      "connectivity",
+      "offsets"
+    ],
+    "vtp_field_arrays_decoded": []
+  },
+  "gate": {
+    "all_checks_passed": true,
+    "checks": {
+      "all_compact_internal_coordinates_within_margin_expanded_boundary_bounds": true,
+      "all_patch_areas_and_inlet_outlet_frames_finite_and_nonzero": true,
+      "all_polygon_topologies_valid_with_fraction_at_least_0.999": true,
+      "all_vtp_geometry_arrays_crc_verified_and_decoded": true,
+      "exact_twenty_train_representatives_and_one_hundred_eighty_payloads": true,
+      "no_field_value_validation_test_model_or_checkpoint_access": true,
+      "points_and_connectivity_exactly_invariant_across_three_flows": true,
+      "v1b_pass_and_pinned_source_integrity": true
+    },
+    "decision": "register_full_boundary_aware_geometry_cache_staging_protocol_only",
+    "pass_authorizes": "register_full_boundary_aware_geometry_cache_staging_protocol_only",
+    "pass_does_not_authorize": [
+      "relabel_v1",
+      "reuse_or_tune_v1_backbones",
+      "model_training",
+      "v2_or_test_field_access",
+      "method_novelty",
+      "isbi_submission"
+    ],
+    "passed_checks": 8,
+    "total_checks": 8
+  },
+  "geometry": {
+    "area_m2_max": 0.00024588652972255137,
+    "area_m2_min": 2.5442974549496525e-06,
+    "private_cache_bytes": 3926769,
+    "private_cache_contains_U_or_p": false,
+    "private_cache_redistributable": false,
+    "private_cache_sha256": "80a3c596eb246ae8fe494a2daa97ddfb7d8798c506ff61adcc0a2c8388326ff0",
+    "private_cache_staged": true,
+    "q_invariant_patch_count": 60,
+    "valid_polygon_fraction_min": 1.0
+  },
+  "git_commit": "84fc24493146fd03ee860ea090a6d402b6a1b306",
+  "interpretation": "geometry_staging_adequacy_not_model_method_or_clinical_evidence",
+  "schema_version": "aurora.aneumo_isbi_v1c_boundary_geometry_staging_audit.result.v1",
+  "source": {
+    "compact_cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+    "dataset": "Aneumo",
+    "hf_repo": "SAIS-Life-Science/Aneumo",
+    "hf_repo_commit": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "license": "CC-BY-NC-ND-4.0",
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "v1b_result": "results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json",
+    "v1b_result_sha256": "8cc4871f8d8b234c7c3f3cb3763e5cc959b5653e26349497eb55d2e17b54d901"
+  }
+}

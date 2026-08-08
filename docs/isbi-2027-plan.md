@@ -182,9 +182,14 @@ connectivity/array contract만 검사했다. Exact source `fb1c21a`에서 8/8을
 통과했지만 model evidence는 아니다. 이 pass 뒤 geometry value를 보기 전에
 V1c를 고정했다. V1c는 20 train representative×3 patch×3 flow의 180
 payload에서 geometry만 decode해 q-invariance, topology, area/frame와 기존
-compact cache 좌표계 일치를 감사한다. 통과해도 full boundary-aware geometry
-cache staging protocol만 열고 모델 학습, V1 relabel, V2/test와 submission은
-계속 금지한다.
+compact cache 좌표계 일치를 감사해 8/8을 통과했다. 60/60 patch가 exact
+q-invariant였고 minimum polygon-valid fraction은 1.0이었다. 이 pass 뒤
+validation geometry를 보기 전에 V1d를 고정했다. V1d는 train 40·validation
+12·test 0 case의 boundary 468개와 reference-volume 52개 payload에서 geometry만
+decode하고, 모든 boundary point의 exact volume correspondence까지 요구한다.
+통과해도 known-condition strong-baseline protocol만 열고 모델 학습, test
+geometry/field, V1 relabel, V2, partial/missing method와 submission은 계속
+금지한다.
 
 ### V2 · Frozen five-seed 3D outer test
 
@@ -242,7 +247,8 @@ Exact/nonlinear sanity는 한두 문장 또는 작은 ablation row로만 남긴�
 | 2026-08-08 | 64-case V1 implementation smoke | 5/7 fail; current backbone branch 중단, local repair 금지 |
 | 2026-08-08 | V1a fixed-checkpoint attribution | 완료: training underfit/collapse; method/V2 권한 없음 |
 | 2026-08-08 | V1b boundary-asset audit | 완료: 8/8; asset evidence만 인정, model 권한 없음 |
-| 2026-08-08 | V1c boundary-geometry audit 등록 | 180 train payload geometry-only; pass도 full staging protocol만 허용 |
+| 2026-08-08 | V1c boundary-geometry audit | 완료: 8/8; geometry staging adequacy만 인정 |
+| 2026-08-08 | V1d development geometry cache 등록 | 40/12/0 split, 520 geometry payload; pass도 baseline protocol만 허용 |
 | 2026-09-03 | 새 task/data identity 결정 | reference state·boundary marker·expanded data 중 식별 가능성과 비자명성을 회복하는 근거가 없으면 full paper 중단 |
 | 2026-09-10 | candidate method/config freeze | 이후 architecture·loss search 금지 |
 | 2026-09-24 | five-seed outer test complete | gate 실패 시 relabel·threshold repair 금지 |

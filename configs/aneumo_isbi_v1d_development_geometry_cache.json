@@ -1,0 +1,87 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v1d_development_geometry_cache.v1",
+  "experiment_id": "aneumo_isbi_v1d_development_geometry_cache",
+  "status": "preregistered_after_v1c_pass_before_validation_geometry_payload_decode",
+  "as_of": "2026-08-08",
+  "purpose": "Stage a field-free boundary-geometry cache for every train and validation case, verify exact boundary-to-volume coordinate correspondence, and keep the test split sealed before any boundary-aware baseline is specified.",
+  "source": {
+    "dataset": "Aneumo",
+    "hf_repo": "SAIS-Life-Science/Aneumo",
+    "hf_repo_commit": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "license": "CC-BY-NC-ND-4.0",
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "v1c_result": "results/aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json",
+    "v1c_result_sha256": "a023e9fbcbcbc1fc719c8a902a582dee031cf3e08d360d28a741f5530aa2bbd1",
+    "compact_cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
+  },
+  "discovery_boundary": {
+    "already_decoded_by_v1c": "twenty_train_representatives_three_patches_three_flows_geometry_only",
+    "validation_geometry_payload_decoded_before_registration": false,
+    "remaining_train_geometry_payload_decoded_before_registration": false,
+    "v1c_result_is_asset_evidence_only": true
+  },
+  "access": {
+    "splits": ["train", "validation"],
+    "expected_cases_by_split": {"train": 40, "validation": 12, "test": 0},
+    "compact_cache_datasets_read": ["coordinates_m"],
+    "compact_cache_field_values_read": false,
+    "boundary_vtp_arrays_decoded": ["Points", "connectivity", "offsets"],
+    "volume_vtu_arrays_decoded": ["Points"],
+    "field_arrays_not_decoded": ["U", "p", "TimeValue"],
+    "validation_geometry_payload_read": true,
+    "validation_field_array_decoded": false,
+    "test_payload_read": false,
+    "model_or_checkpoint_use": false,
+    "training": false
+  },
+  "audit": {
+    "development_cases": 52,
+    "patches": ["inlet", "outlet", "wall"],
+    "flow_values_kg_s": [0.001, 0.0025, 0.004],
+    "reference_flow_kg_s": 0.0025,
+    "boundary_payload_members": 468,
+    "volume_payload_members": 52,
+    "total_payload_members": 520,
+    "require_exact_q_invariant_boundary_geometry": true,
+    "require_every_boundary_point_in_reference_volume_points": true,
+    "minimum_valid_polygon_fraction": 0.999,
+    "internal_coordinate_bounds_margin_fraction_of_diagonal": 0.05,
+    "derive_outward_inlet_outlet_normals_from_geometry_only": true
+  },
+  "private_cache": {
+    "contents": "reference_flow_boundary_points_connectivity_offsets_geometry_summaries_and_volume_correspondence_for_fifty_two_development_cases",
+    "contains_U_or_p": false,
+    "contains_test": false,
+    "redistributable": false,
+    "public_result_records_sha256_only": true
+  },
+  "gate": {
+    "rule": "all_registered_checks",
+    "checks": [
+      "v1c_pass_and_pinned_source_integrity",
+      "exact_forty_train_twelve_validation_zero_test_cases",
+      "exact_four_hundred_sixty_eight_boundary_and_fifty_two_volume_payloads",
+      "all_boundary_geometry_exactly_invariant_across_three_flows",
+      "all_polygon_topologies_areas_and_inlet_outlet_frames_valid",
+      "every_boundary_point_exactly_present_in_reference_volume_points",
+      "all_compact_internal_coordinates_within_margin_expanded_boundary_bounds",
+      "private_cache_schema_is_field_free_development_only_and_nonredistributable",
+      "no_field_value_test_model_or_checkpoint_access"
+    ],
+    "pass_authorizes": "register_boundary_aware_known_condition_baseline_protocol_only",
+    "pass_does_not_authorize": [
+      "relabel_v1",
+      "reuse_or_tune_v1_backbones",
+      "model_training",
+      "test_geometry_or_field_access",
+      "v2_outer_test",
+      "partial_or_missing_condition_method",
+      "method_novelty",
+      "isbi_submission"
+    ],
+    "failure_action": "do_not_register_a_boundary_aware_baseline_and_reassess_the_geometry_contract_without_local_threshold_or_tolerance_repair",
+    "local_repair_allowed": false
+  },
+  "interpretation": "development_geometry_cache_adequacy_not_model_method_or_clinical_evidence"
+}

@@ -185,11 +185,40 @@ coordinates가 boundary bounding box의 diagonal 5% margin 안에 있는지 모�
 학습은 접근하지 않는다. 성공한 경우에만 20-case geometry-only private cache를
 원자적으로 확정하며 public result에는 그 SHA-256만 기록한다.
 
-8개 check를 모두 통과해도 **full boundary-aware geometry-cache staging
-protocol 등록**만 허용한다. V1 relabel, 이전 backbone 재사용·수정, 학습,
-V2/test, method novelty와 submission은 열지 않는다. 실패하면 threshold,
-flow, representative 또는 coordinate margin을 국소 수정하지 않고 asset
-representation을 재판정한다.
+**Outcome · 2026-08-08.** Exact source `84fc244`의 pinned-container run은
+exit 0으로 완료돼 8/8을 통과했다. 20 train representative, 60 patch,
+180 payload가 모두 확인됐고 60/60 patch가 세 flow에서 exact invariant였다.
+Minimum polygon-valid fraction은 1.0, patch area 범위는
+(2.54	imes10^{-6})--(2.46	imes10^{-4},mathrm{m}^2)였다. Private
+geometry-only cache는 3.93 MB이며 public aggregate에는 SHA-256만 기록한다.
+`U/p/TimeValue`, validation/test payload와 model/checkpoint는 읽지 않았다.
+Public aggregate는
+`results/aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json`이다.
+이 pass는 **full boundary-aware geometry-cache staging protocol 등록**만
+허용한다.
+
+### V1d · Development-only full geometry cache
+
+`configs/aneumo_isbi_v1d_development_geometry_cache.json`은 V1c outcome 뒤,
+validation geometry payload를 decode하기 전에 고정한다. Train 40과
+validation 12 case를 포함하고 test 12 case의 payload는 봉인한다. 각 case에서
+세 patch×세 flow의 boundary VTP 468개와 reference-flow volume VTU 52개를
+CRC 검증하지만 geometry array만 decode한다. Compact cache에서도
+`coordinates_m`만 읽는다.
+
+V1d는 156 patch의 exact q-invariance, polygon validity·area·inlet/outlet
+frame, compact query의 boundary bounds containment를 검사한다. V1c의 AABB
+검사를 강화해 모든 boundary point가 같은 case의 reference-volume point에
+bitwise exact하게 존재해야 한다. 이 correspondence가 실패하면 tolerance를
+추가하거나 nearest-neighbor 기준으로 국소 완화하지 않는다. `U`, `p`,
+`TimeValue`, validation field, test payload, model/checkpoint와 학습은 접근하지
+않는다. 성공한 경우에만 52-case development geometry cache를 원자적으로
+확정하며 public result에는 aggregate와 cache SHA-256만 남긴다.
+
+9개 check를 모두 통과해도 **boundary-aware known-condition strong-baseline
+protocol 등록**만 허용한다. Model training, test geometry/field, V2,
+partial/missing-condition method, novelty와 submission은 열지 않는다. V1
+failure, current branch 폐기와 local-repair 금지는 유지한다.
 
 ## 1. 검증할 가설
 

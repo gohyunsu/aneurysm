@@ -3,8 +3,8 @@
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
-backbone gate 5/7 fail, V1a attribution, V1b asset audit 8/8 pass와
-V1c boundary-geometry staging audit 등록 상태를 반영했다.
+backbone gate 5/7 fail, V1a attribution, V1b/V1c asset audit 8/8 pass와
+V1d development geometry-cache audit 등록 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -66,12 +66,22 @@ V1c boundary-geometry staging audit 등록 상태를 반영했다.
   aggregate는 `results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json`이다.
   이 pass가 허용한 범위 안에서
   `configs/aneumo_isbi_v1c_boundary_geometry_staging_audit.json`을 geometry
-  array decode 전에 고정했다. V1c는 train family representative 20 case의
+  array decode 전에 고정했다. Exact source `84fc244`의 V1c는 train family
+  representative 20 case의
   세 patch×세 flow, 총 180 VTP에서 `Points/connectivity/offsets`만 읽어
-  q-invariance, polygon validity, area/frame와 compact-cache 좌표계를 검사한다.
-  `U/p/TimeValue`, validation/test payload, model/checkpoint와 학습은 읽지
-  않는다. 통과해도 full boundary-aware geometry-cache staging protocol
-  등록만 허용한다. V1 relabel, 기존 backbone 수선, 학습, V2/test, novelty와
+  q-invariance, polygon validity, area/frame와 compact-cache 좌표계를 검사해
+  8/8을 통과했다. 60/60 patch가 세 flow에서 exact invariant였고 minimum
+  polygon-valid fraction은 1.0이었다. `U/p/TimeValue`, validation/test payload,
+  model/checkpoint와 학습은 읽지 않았다. Public aggregate는
+  `results/aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json`이다.
+  이 pass 범위 안에서
+  `configs/aneumo_isbi_v1d_development_geometry_cache.json`을 validation geometry
+  payload decode 전에 고정했다. V1d는 train 40·validation 12·test 0 case의
+  boundary 468개와 reference-volume 52개 payload에서 geometry array만 읽어
+  q-invariance, polygon/frame, compact coordinate bounds와 모든 boundary point의
+  exact volume-point correspondence를 검사한다. Pass도 known-condition strong
+  baseline **protocol 등록**만 허용한다. V1 relabel, 기존 backbone 수선,
+  model training, test geometry/field, V2, partial/missing method, novelty와
   submission은 계속 금지한다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.

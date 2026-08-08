@@ -44,6 +44,13 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   통과했다. Validation/test payload와 field value는 읽지 않았으며 V1c
   boundary-geometry staging audit 등록만 허용한다. Model, V2/test, novelty와
   submission evidence가 아니다.
+- `aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json`: exact source
+  `84fc244`의 train-only geometry-staging audit. 20 representative case,
+  60 patch, 180 payload를 확인해 8/8을 통과했다. 60/60 patch가 세 flow에서
+  exact invariant였고 minimum polygon-valid fraction은 1.0이었다. Field array,
+  validation/test payload와 model/checkpoint는 읽지 않았다. V1d development
+  geometry-cache protocol 등록만 허용하며 model, V2/test, novelty와 submission
+  evidence가 아니다.
 
 현재 controlled-PDE 결과:
 

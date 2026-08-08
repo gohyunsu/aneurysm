@@ -128,8 +128,13 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
   train representative VTP를 검사해 8/8을 통과했다. Validation/test payload와
   field arrays는 읽지 않았다. V1c는 geometry array decode 전에 고정됐고
   20 train representative×3 patch×3 flow에서 geometry-only q-invariance,
-  topology, area/frame와 compact-cache coordinate frame만 감사한다. V1c를
-  통과하기 전에는 full boundary cache나 모델을 만들지 않는다.
+  topology, area/frame와 compact-cache coordinate frame만 감사해 exact source
+  `84fc244`에서 8/8을 통과했다. 180 payload, 60/60 q-invariant patch,
+  minimum polygon-valid fraction 1.0과 field/test-read false를 확인했다.
+  V1d는 validation geometry payload decode 전에 고정됐으며 train 40·validation
+  12·test 0 case의 boundary 468개와 volume 52개 geometry payload에서 exact
+  boundary-volume correspondence를 추가로 검사한다. V1d를 통과하기 전에는
+  boundary-aware baseline protocol을 등록하지 않으며 model/test를 열지 않는다.
 
 ## Run contract
 

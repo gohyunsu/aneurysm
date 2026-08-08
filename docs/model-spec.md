@@ -90,11 +90,18 @@ V1c 역시 architecture가 아니라 **train-only boundary-geometry staging
 contract**다. 20 representative case×3 patch×3 flow의 180 VTP에서
 `Points/connectivity/offsets`만 decode해 exact q-invariance, topology, area,
 inlet/outlet frame과 compact-cache coordinate-frame containment를 검사한다.
-`U/p/TimeValue`, validation/test payload와 checkpoint는 읽지 않는다. Pass 뒤에도
-boundary token, surface encoder 또는 mesh GNN은 구현하지 않는다. 별도 full
-staging contract가 모든 selected case의 patch component, coordinate frame,
-connectivity와 query correspondence를 통과해야만 strong known-condition
-baseline 명세를 쓸 수 있다. Boundary-aware encoding 자체는 선행요소이므로
+`U/p/TimeValue`, validation/test payload와 checkpoint는 읽지 않는다. Exact
+source `84fc244`에서 60/60 patch q-invariance와 minimum polygon-valid fraction
+1.0을 포함해 8/8을 통과했다.
+
+V1d는 이 pass 뒤 고정한 **development-only full geometry-cache contract**다.
+Train 40·validation 12 case에서 boundary VTP 468개와 reference-volume VTU
+52개의 geometry만 decode하고 test는 봉인한다. Patch geometry가 세 flow에서
+exact invariant인지, surface topology와 frame이 유효한지, compact query가
+같은 bounds에 있는지뿐 아니라 모든 boundary point가 reference volume point에
+exact하게 존재하는지를 요구한다. Pass 뒤에도 boundary token, surface encoder
+또는 mesh GNN을 바로 구현하지 않는다. 별도 known-condition strong-baseline
+protocol을 먼저 고정해야 한다. Boundary-aware encoding 자체는 선행요소이므로
 novelty가 아니다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가

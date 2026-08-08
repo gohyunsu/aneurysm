@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V1 failed · V1a found underfit · V1b asset audit passed 8/8 · V1c geometry audit preregistered · not submission-ready",
+    status: "Target locked · V1 failed · V1a found underfit · V1b/V1c asset gates passed 8/8 · V1d development cache preregistered · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. Official Aneumo ZIP의 boundary-rich asset을 별도로 감사한 V1b는 20 archives·64 cases와 60 train VTP에서 8/8을 통과했다. 이는 asset evidence일 뿐이다. V1c는 geometry decode 전에 180 train payload의 q-invariance·topology·area/frame·coordinate frame을 고정했으며, pass도 full cache staging protocol만 연다.",
-      state: "V1 failed · V1a underfit attributed · V1b 8/8 asset-only · V1c preregistered · submission blocked",
+      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. V1b와 V1c는 각각 8/8을 통과했지만 asset evidence일 뿐이다. V1c의 180 train payload는 60/60 patch q-invariance와 polygon validity 1.0을 보였다. V1d는 validation geometry decode 전에 40/12/0 case와 520 geometry payload를 고정해 exact boundary-volume correspondence를 검사하며, pass도 known-condition baseline protocol만 연다.",
+      state: "V1 failed · V1a underfit attributed · V1b/V1c asset-only pass · V1d preregistered · submission blocked",
       blocking: true
     }
   ],
@@ -141,7 +141,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "64-case internal-field cache verified · V1b full asset audit 8/8 · V1c train-only boundary geometry audit preregistered"
+      provenance: "64-case internal-field cache verified · V1b/V1c asset gates 8/8 · V1d 40/12/0 development geometry cache preregistered"
     },
     {
       name: "AneuG-Flow",
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "result",
+      title: "V1c passes geometry staging; V1d seals test-free development caching",
+      copy: "Exact source 84fc244의 V1c는 20 train representatives, 60 patches, 180 payloads를 감사해 8/8을 통과했다. 60/60 patch가 세 flow에서 exact invariant였고 minimum polygon-valid fraction은 1.0이었다. Field arrays와 validation/test payload는 읽지 않았다. V1d는 validation geometry decode 전에 train 40·validation 12·test 0 case의 520 geometry payload를 고정해 q-invariance, topology/frame, bounds와 exact boundary-volume correspondence를 검사한다. Pass도 known-condition strong-baseline protocol만 허용한다.",
+      files: ["results/aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json", "configs/aneumo_isbi_v1d_development_geometry_cache.json", "src/aurora/aneumo_isbi_v1d_development_geometry.py", "experiments/run_aneumo_isbi_v1d_development_geometry.py", "tests/test_aneumo_isbi_v1d_development_geometry.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "result",
