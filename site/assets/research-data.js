@@ -253,7 +253,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.09",
       category: "research",
       title: "Direct mixed-supervision prior art narrows the residual gap",
-      copy: "NeurIPS 2010 structured weak detection, NeurIPS 2021 mixed-supervised detection, CVPR 2019 medical classification+segmentation과 ICML 2024 partial-label learning 때문에 annotation projection/marginalization 자체를 novelty에서 제외했다. 남을 수 있는 gap은 dense/sparse annotation 선택이 site·modality·unobserved lesion에 의존할 때의 식별 또는 sensitivity다. 실제 RSNA selection process는 L0 전에는 unknown이고 coarsening-at-random을 가정하지 않는다. 식별 불가능하면 point claim을 버리거나 후보를 폐기한다.",
+      copy: "NeurIPS 2010 structured weak detection, NeurIPS 2021 mixed-supervised detection, CVPR 2019 medical classification+segmentation과 ICML 2024 partial-label learning 때문에 annotation projection/marginalization 자체를 novelty에서 제외했다. 남을 수 있는 gap은 dense/sparse annotation 선택이 site·modality·unobserved lesion에 의존할 때의 식별 또는 sensitivity다. 실제 RSNA selection process는 L0 전에는 unknown이고 coarsening-at-random을 가정하지 않는다. 식별 불가능하면 point claim을 버리거나 후보를 폐기한다. Production source ba79491c…의 quality run 31267438441과 Pages run 31267438083은 success이고 live content를 확인했다.",
       files: ["docs/problem-candidate-audit-2026-08-09.md", "docs/literature-lineage.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
     },
     {

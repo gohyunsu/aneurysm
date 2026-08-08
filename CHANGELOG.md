@@ -25,6 +25,10 @@
   `src/aurora/protocol.py`, `tests/test_protocol.py`,
   `site/index.html`, `site/learn.html`, `site/assets/research-data.js`,
   `CHANGELOG.md`.
+- Production source `ba79491c3401ee462918368abd7742f405b875f4`의
+  GitHub quality run `31267438441`과 Pages run `31267438083`은 모두
+  success다. 2026-08-09 KST에 live site가 selection-aware shortlist,
+  `no CAR assumption`과 L0 차단 상태를 실제 제공함을 확인했다.
 
 ## 2026-08-09 · one access-blocked lesion-set problem enters the shortlist
 
