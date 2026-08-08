@@ -167,6 +167,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.08",
+      category: "implementation",
+      title: "V1 preserves a pre-metric PBS failure and adds task-local logs",
+      copy: "Exact 2ddd5e6의 첫 introai9 array는 세 subjob이 CPU 4초·exit 1로 metric/checkpoint 전에 끝나 나머지를 취소했다. PBS stdout도 exit finalization에서 반환되지 않았다. 이를 성능 결과로 해석하지 않고 실패 provenance를 보존한다. Scientific model/config는 바꾸지 않은 채 task-local pbs.log와 pbs_status.json만 추가하고, 새 exact contract와 one-task diagnostic 전에는 full array를 재제출하지 않는다.",
+      files: ["cluster/pbs_aneumo_isbi_v1.pbs", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.08",
       category: "protocol",
       title: "V1 freezes ensemble, oracle, replay, selector and gate before learning",
       copy: "학습 output을 보기 전에 matching-q three-seed mean과 seed×8 q의 24-component missing mixture를 분리했다. True validation q=0.0025 field를 쓰는 power control은 response-only oracle라 selection/gate에서 제외한다. 12개 checkpoint를 validation에서 1e-5 tolerance로 replay한 뒤 per-seed response L2, full-q L2, energy, parameter 수의 사전등록 순서로만 backbone을 고른다. 모든 metric은 base family를 먼저 평균하고 test field는 읽지 않는다.",

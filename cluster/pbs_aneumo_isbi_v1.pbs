@@ -27,6 +27,22 @@ seed="${seeds[$seed_index]}"
 task_output="$AURORA_OUTPUT_ROOT/${family}_seed_${seed}"
 
 mkdir -p "$task_output/tmp"
+aurora_write_pbs_status() {
+  local exit_status=$?
+  local state="failed"
+  local metrics_created="false"
+  if [ "$exit_status" -eq 0 ]; then
+    state="complete"
+  fi
+  if [ -f "$task_output/metrics.json" ]; then
+    metrics_created="true"
+  fi
+  printf '{"array_index":%s,"exit_status":%s,"family":"%s","learned_metrics_created":%s,"seed":%s,"state":"%s"}\n' \
+    "$PBS_ARRAY_INDEX" "$exit_status" "$family" "$metrics_created" "$seed" "$state" \
+    > "$task_output/pbs_status.json"
+}
+trap aurora_write_pbs_status EXIT
+exec > >(tee "$task_output/pbs.log") 2>&1
 cd "$PBS_O_WORKDIR"
 
 hostname

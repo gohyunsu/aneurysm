@@ -18,6 +18,7 @@ from aurora.aneumo_isbi_v1 import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneumo_isbi_v1.json"
+PBS_V1 = ROOT / "cluster" / "pbs_aneumo_isbi_v1.pbs"
 
 
 class AneumoISBIV1ContractTests(unittest.TestCase):
@@ -96,6 +97,12 @@ class AneumoISBIV1ContractTests(unittest.TestCase):
         config = load_config(CONFIG)
         with self.assertRaisesRegex(AneumoISBIV1Error, "exact 4x3"):
             select_registered_family(config, [])
+
+    def test_pbs_wrapper_preserves_pre_metric_failures(self) -> None:
+        script = PBS_V1.read_text(encoding="utf-8")
+        self.assertIn('trap aurora_write_pbs_status EXIT', script)
+        self.assertIn('tee "$task_output/pbs.log"', script)
+        self.assertIn('"learned_metrics_created":%s', script)
 
 
 class AneumoISBIV1ModelTests(unittest.TestCase):

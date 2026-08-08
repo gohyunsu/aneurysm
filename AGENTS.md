@@ -46,6 +46,12 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
   validation anchor field를 쓰는 response-only oracle라 selector/gate에
   들어가지 않는다. `introai9` public-key SSH와 PBS client는 확인됐으며 실제
   GPU allocation smoke와 cache SHA 확인 뒤에만 12-task array를 제출한다.
+  Exact `2ddd5e6`의 첫 array는 세 subjob이 CPU 4초·exit 1로 metric/checkpoint
+  전에 실패해 나머지를 취소했다. PBS stdout도 exit finalization에서 반환되지
+  않았다. 이 run은 scientific gate 결과가 아니며 보존한다. Scientific
+  contract는 바꾸지 않고 task-local `pbs.log`/`pbs_status.json` fail-safe를
+  추가한 새 exact source와 one-task diagnostic이 통과하기 전 full array를
+  다시 제출하지 않는다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면

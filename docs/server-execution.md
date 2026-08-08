@@ -125,6 +125,13 @@ seed×8 q의 24-component missing mixture, response-only physical oracle,
 lexicographic selector와 7개 feasibility check를 계산한다. Raw checkpoint와
 per-task log는 private output에 보존한다.
 
+첫 exact `2ddd5e6` V1 array는 세 subjob이 metric/checkpoint 생성 전 동일한
+exit 1로 끝나 pending subjob을 취소했다. PBS stdout 반환도 exit finalization에
+머물러, model/config를 바꾸지 않고 task output 내부에 `pbs.log`와
+`pbs_status.json`을 직접 기록하도록 execution wrapper만 보강한다. 실패
+artifact는 보존하며 새 exact contract와 one-task diagnostic 전에는 full
+array를 재제출하지 않는다.
+
 G1r template은 기존 G1 실패를 덮어쓰지 않는다. Public source commit과
 `configs/controlled_pde_g1r.json`을 read-only로 bind하고 새 output
 directory만 writable로 둔다. Density/operator checkpoint selection이 끝난

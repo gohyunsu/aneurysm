@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 PBS failure becomes directly observable before metrics
+
+- Exact `2ddd5e6`의 첫 `introai9` 12-task array는 앞선 세 subjob이 각각
+  CPU 4초, exit 1로 끝나고 checkpoint·metric을 하나도 만들지 않아 나머지
+  subjob을 취소했다. Scientific result나 gate failure로 해석하지 않는다.
+- PBS가 exit finalization에서 stdout을 반환하지 않아 동일-source one-task
+  diagnostic도 원인 message를 제공하지 못했다. 실패 array와 diagnostic
+  provenance는 삭제하지 않는다.
+- Model, config, data, seed, step, loss, selector와 threshold를 바꾸지 않고
+  각 task의 writable output에 `pbs.log`와 `pbs_status.json`을 직접 남기는
+  fail-safe만 추가한다. 새 exact source contract와 one-task diagnostic이
+  통과하기 전 12-task array를 다시 제출하지 않는다.
+
 ## 2026-08-08 · V1 freezes complete aggregation semantics before learning
 
 - Matching-q point prediction은 같은 family의 세 seed 평균으로, missing
