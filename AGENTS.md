@@ -3,8 +3,9 @@
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
-backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass와
-V1e known-condition qualification 6/9 fail을 반영했다.
+backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass,
+V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태를
+반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -222,6 +223,18 @@ V1e known-condition qualification 6/9 fail을 반영했다.
   threshold를 국소 조정하지 않고 mechanism을 폐기한다. 통과해도 별도
   five-seed fresh re-entry protocol을 설계할 자격만 생기며 method,
   novelty, N1 relabel 또는 3D 권한은 생기지 않는다.
+  Exact source `89bdc85`, frozen config SHA
+  `78aa6752ed647ffbcb1b90f262873a05156ddda49c6aa21557cc6f7908345f91`의
+  PBS array `115078`은 seed 0/2만 exit 0이었고 seed 1은
+  `candidate_risk_matrix`의 radius-constrained conditional rejection이
+  stall해 exit 1이었다. 등록된 3-seed aggregate를 만들 수 없으므로 M0는
+  pass도 fail도 아닌 **execution-incomplete / no scientific verdict**다.
+  성공한 두 seed의 metric은 gate를 위해 열거나 선택 집계하지 않았다.
+  공개 execution record는
+  `results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json`이다.
+  One-shot 계약에 따라 sampler repair, rerun, M0r, fresh re-entry 또는
+  method selection을 등록하지 않으며 이 mechanism branch는 inactive다.
+  N1c failed, N1d/3D blocked와 current Aneumo 3D line stopped는 유지한다.
 - Fixed Fourier \(K=4/8/12\)는 bulge gate를 통과하지 못했으므로 현재
   one-shot temporal architecture에서 제거한다. Equal-budget nonperiodic
   D0b에서 DCT-II 17/25는 탈락했고 train-only POD 17/25는 모든 frozen
@@ -465,8 +478,10 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
   acquisition 비교에서 제외한다. N1c failed와 N1d/3D blocked는 유지하며
   별도 operator-specific fresh prospective re-entry는 아직 등록하지
   않는다. 대신 missing-only candidate-measurement–solution joint
-  pullback의 3-seed M0 development gate만 결과 전에 등록했다. M0는 N1
-  test를 생성하거나 읽지 않으며 통과해도 re-entry가 아니다.
+  pullback의 3-seed M0 development gate만 결과 전에 등록했다. Exact
+  `89bdc85` 실행은 2/3 seed만 완료되어 aggregate와 과학적 판정이 없고,
+  성공 seed metric은 검사하지 않았다. M0는 N1 test를 생성하거나 읽지
+  않았으며 local sampler repair·rerun·fresh re-entry 없이 닫혔다.
 - **G3 · Transient efficiency**: one-shot 표현이 oracle D0를 통과하고,
   learned compute-matched 비교에서 autoregressive baseline보다 cycle
   fidelity/latency trade-off가 좋아야 한다. Fixed Fourier \(K=8\)은
@@ -528,8 +543,11 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - 결과가 약하거나 한 check가 실패했다는 이유로 같은 evidence 안에서
   loss weight, kernel scale, mask, seed, threshold, sample budget을 순차
   조정하지 않는다.
-- 사전등록 gate는 한 번 집계해 즉시 과학적 판정을 내린다. M0가 실패하면
-  해당 operator-pullback mechanism을 폐기하고 실패 artifact를 보존한다.
+- 사전등록 gate는 모든 필수 task가 완료됐을 때만 한 번 집계한다. M0처럼
+  일부 task가 운영상 중단되면 성공 task를 선택 집계하지 않고
+  `execution-incomplete / no scientific verdict`로 닫아 artifact를 보존한다.
+- M0가 과학적으로 실패하거나 one-shot 실행이 미완료되면 해당
+  operator-pullback mechanism을 국소 수선·재실행하지 않는다.
 - 새 가설은 실패 원인을 설명하는 독립 이론·task gap이 있을 때만 새
   version과 fresh seed로 등록한다. 같은 mechanism의 국소 repair는 새
   이름을 붙여도 허용하지 않는다.
@@ -537,7 +555,7 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   protocol/site/changelog → private manuscript pin` 순서로 처리한다.
   로컬 dependency·tmp·TeX 문제는 한 번만 bounded diagnosis하고,
   authoritative validation은 frozen PBS와 GitHub CI로 한다.
-- ISBI target을 이유로 실패한 N1c나 M0를 완화하지 않는다. Venue pivot은
+- ISBI target을 이유로 실패한 N1c나 무판정 M0를 완화하지 않는다. Venue pivot은
   task·evidence 우선순위를 바꾸지만 기존 실패와 test boundary를 바꾸지
   않는다.
 
@@ -673,6 +691,12 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   Boundary relative utility가 양수여도 absolute train/validation/response가
   모두 실패했으므로 current Aneumo 3D line을 중단한다. Raw task metric,
   checkpoints, histories와 scheduler logs는 private output에만 보존한다.
+- Exact `89bdc85`의 M0 A6000 array `115078`은 dependency-complete
+  150/150 contract와 frozen N1b checkpoint hash를 확인한 뒤 실행했다.
+  Seed 0/2는 exit 0, seed 1은 truncated conditional rejection stall로 exit
+  1이었다. 세 seed 완결을 요구하는 aggregate는 생성하지 않았고 성공 seed
+  metric도 gate 용도로 읽지 않았다. 따라서 M0에는 과학적 pass/fail이 없으며
+  sampler repair, rerun, re-entry와 N1d/3D 제출 권한도 없다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

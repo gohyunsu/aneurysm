@@ -27,7 +27,8 @@
 
 M0는 이 venue gate를 통과시키지 않는다. M0가 통과해도 scalar-inflow
 3D task의 data law와 학습 target에 맞춘 별도 prospective translation
-contract가 필요하다. M0가 실패하면 같은 mechanism을 국소 수정하지 않는다.
+contract가 필요하다. 실제 M0는 2/3 seed만 완료되어 aggregate와 과학적
+판정이 없다. 성공 seed를 선택 집계하거나 sampler를 수선해 반복하지 않는다.
 
 ### V0 · Aneumo task translation before model code
 
@@ -986,6 +987,16 @@ sample budget 또는 threshold를 바꾸어 같은 branch를 반복하지 않는
 checkpoint와 per-context metric은 private provenance에 보존하고 공개
 결과는 aggregate만 담는다.
 
+**실행 결과.** Exact source `89bdc85`, config SHA `78aa6752…345f91`의
+PBS array `115078`에서 seed 0/2는 exit 0, seed 1은
+`candidate_risk_matrix`의 `Truncated conditional rejection stalled.`로 exit
+1이었다. Required complete seed는 3인데 2개만 완료됐으므로 aggregate를
+생성하지 않았고 gate를 결정하지 않았다. 성공 seed metric은 gate 용도로
+검사하지 않았다. 공개 provenance는
+`results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json`에
+고정한다. 상태는 `execution-incomplete / no scientific verdict`이며 sampler
+repair·rerun·fresh re-entry·method selection·test/N1d/3D 권한은 모두 없다.
+
 ### G2 · paired response fidelity
 
 동일 geometry에서 다중 BC field가 있는 dataset을 사용한다.
@@ -1250,9 +1261,9 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
    decision-task adequacy audit **(완료 · full-joint 개선, missing 유의미,
    sparse-2 fixed winner)**
 9. Missing-only candidate-measurement–solution joint pullback M0
-   **(사전등록 · unrun · 3-seed one-shot mechanism gate)**
-10. M0가 전 항목 통과할 때만 별도 5-seed fresh prospective re-entry 설계;
-    실패하면 local repair 없이 mechanism 폐기
+   **(실행 미완료 · 2/3 seed exit 0 · aggregate/scientific verdict 없음 ·
+   local repair 없이 branch inactive)**
+10. M0 fresh re-entry 미등록; 성공 seed 선택 집계·sampler repair·rerun 금지
 11. Positive nonlinear re-entry 뒤에만 velocity-only G2/irregular-3D protocol
 12. G3 learned transient 비교와 G4 cross-domain 통합 table
 

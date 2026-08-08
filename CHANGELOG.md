@@ -4,6 +4,33 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · M0 execution closes without a scientific verdict
+
+- Exact source `89bdc8560a7e5db1d4b5402cd76dbbb01d991aad`, frozen config SHA
+  `78aa6752ed647ffbcb1b90f262873a05156ddda49c6aa21557cc6f7908345f91`의
+  PBS array `115078`을 dependency-complete 150/150 contract와 frozen N1b
+  checkpoint hash 확인 뒤 실행했다.
+- Seed 0/2는 exit 0이었고 seed 1은 `candidate_risk_matrix`에서
+  `Truncated conditional rejection stalled.`로 exit 1이었다. Required
+  complete seed 3개 중 2개만 완료되어 등록된 aggregate를 만들 수 없다.
+- M0를 과학적 pass 또는 fail로 표시하지 않는다. 성공한 두 seed metric은
+  gate를 위해 검사·선택 집계하지 않았고 공개 파일에는 metric 값이 없다.
+  Execution provenance는
+  `results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json`,
+  SHA-256
+  `5376cd4629cc30f1fa16ab1e1762a576866a4d35620cc5e34a9986d5a2bfc593`에
+  고정했다.
+- One-shot/local-repair 금지 계약에 따라 sampler repair, rerun, M0r,
+  fresh re-entry, method selection과 N1d/irregular-3D 권한을 등록하지 않는다.
+  N1c failed, current Aneumo 3D line stopped와 not submission-ready를 유지한다.
+- 2026 CMPB geometry-aware PointNet을 직접 aneurysm surrogate lineage에
+  추가했다. Point cloud, distance-to-wall와 known-law peak-systolic velocity/WSS
+  surrogate 자체도 novelty가 아니며 geometry OOD reliability와 missing-BC
+  evidence를 별도로 요구한다.
+- Protocol validator와 새 execution-record test가 no-verdict, no-aggregate,
+  no-cherry-pick, no-repair/re-entry 경계를 강제한다. Research docs, config,
+  site 첫 화면·gate·상세 가이드·변경 이력을 같은 상태로 동기화했다.
+
 ## 2026-08-08 · V1e fails absolute learnability despite relative boundary utility
 
 - Exact source `c62838b`, config SHA

@@ -5,7 +5,7 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · M0 missing-only mechanism preregistered/unrun · method unselected ·
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · method unselected ·
 3D headline blocked
 
 ## 0. 제출 목표와 scope
@@ -549,9 +549,9 @@ excess를 20.3–27.2% 낮췄으므로 현재의 accuracy tax가 구조적으로
 Method-independent audit은 missing task의 nonzero VoI와 안정성을
 확인했지만 sparse-2가 fixed-winner라 adaptive benchmark가 아님을
 확인했다. 따라서 missing endpoint에서만 남은 gap을 겨냥하는
-operator-specific mechanism을 별도 결과 전 protocol로 설계해야 한다.
-그 첫 falsification 단계인 M0는 등록했지만, 아직 선택된 method나 fresh
-re-entry는 없다.
+operator-specific mechanism을 별도 결과 전 protocol로 설계해야 한다고
+보았으나, 그 첫 one-shot falsification인 M0는 2/3 seed만 완료돼 과학적
+판정 없이 닫혔다. 선택된 method나 fresh re-entry는 없다.
 
 ### Candidate-measurement–solution joint pullback · M0
 
@@ -616,6 +616,18 @@ density excess degradation ≤ 5%, solution-marginal MMD² degradation ≤ 1%,
 weight·kernel·mask·seed·threshold를 고치는 local repair 없이 mechanism을
 폐기한다. 통과해도 separate five-seed fresh re-entry 설계 자격일 뿐 N1c
 relabel, method novelty, N1d 또는 3D 권한은 아니다.
+
+Exact source `89bdc85`의 PBS array `115078`은 3개 seed 중 0과 2만 exit
+0이었고 seed 1은 `candidate_risk_matrix`에서 radius-constrained truncated
+conditional rejection이 stall해 exit 1이었다. 필수 3-seed aggregate를 만들
+수 없으므로 M0는 과학적 pass/fail이 아니라 **execution-incomplete / no
+scientific verdict**다. 성공한 두 seed의 metric을 gate 용도로 열거나
+선택 집계하지 않았다. 공개 record는
+`results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json`이다.
+One-shot 계약에 따라 sampler repair·rerun·M0r·fresh re-entry를 등록하지
+않으며 이 mechanism branch는 inactive다. 따라서 위 novelty 문구는
+unsupported hypothesis로만 보존하고 N1c failed, method unselected,
+N1d/3D blocked를 유지한다.
 
 새 방법이 정당화된다면 bounded loss에서 posterior TV/KL로 Bayes-regret를
 제한하는 분석과, compatible joint model이 실제 oracle functional risk와

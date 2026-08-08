@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V1 failed · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · current Aneumo 3D line stopped · not submission-ready",
+    status: "Target locked · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · current Aneumo 3D line stopped · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -37,9 +37,9 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       year: "2025–26",
-      title: "Aneurysm graph surrogates",
-      copy: "Inflow-aware physics GNN과 graph transformer가 transient field, WSS, OSI를 빠르게 근사했다.",
-      status: "npj Digital Medicine + arXiv",
+      title: "Aneurysm graph & point-cloud surrogates",
+      copy: "Inflow-aware physics GNN, graph transformer와 geometry-aware PointNet이 transient 또는 peak-systolic field·WSS를 이미 빠르게 근사했다.",
+      status: "npj Digital Medicine + CMPB + arXiv",
       url: "https://www.nature.com/articles/s41746-026-02404-z"
     },
     {
@@ -118,8 +118,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G2",
       title: "Does coherence improve decisions?",
-      copy: "N1c-a 뒤 full-joint likelihood는 raw objective의 excess를 20.3–27.2% 줄였고 missing true-oracle VoI는 약 0.156이었다. 남은 gap은 각 후보 BC와 solution functional의 joint dependence다. M0는 이를 three-seed validation-only gate로 한 번 검사하며 실패 뒤 local repair를 금지한다.",
-      state: "N1c failed · M0 preregistered/unrun · method unselected · 3D blocked",
+      copy: "N1c-a 뒤 full-joint likelihood는 raw objective의 excess를 20.3–27.2% 줄였고 missing true-oracle VoI는 약 0.156이었다. M0는 candidate BC–solution joint dependence를 3 seed로 검사하려 했지만 2개만 완료되고 1개가 truncated conditional rejection에서 중단됐다. Aggregate나 과학적 pass/fail은 없고, 성공 seed metric을 선택 집계하지 않으며 local repair·rerun도 열지 않는다.",
+      state: "N1c failed · M0 execution-incomplete/no verdict · method unselected · 3D blocked",
       blocking: true
     },
     {
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "execution",
+      title: "M0 closes without a scientific verdict after one seed stalls",
+      copy: "Exact source 89bdc85, frozen config SHA 78aa6752…345f91의 PBS array 115078은 seed 0/2만 exit 0이었고 seed 1은 candidate-risk 계산의 truncated conditional rejection에서 exit 1이었다. 필수 3-seed aggregate를 만들 수 없어 M0는 pass도 fail도 아닌 execution-incomplete/no scientific verdict다. 성공 seed metric은 gate 용도로 검사하거나 선택 집계하지 않았다. One-shot 계약에 따라 sampler repair, rerun, M0r, fresh re-entry, method selection과 N1d/3D 권한을 열지 않는다.",
+      files: ["results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "docs/literature-lineage.md", "docs/novelty-audit-2026-08-03.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "tests/test_m0_execution_record.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "result",

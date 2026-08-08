@@ -10,6 +10,7 @@
 - GPU/container version
 - 해석 제한과 다음 결정
 - metric이 생성되지 않은 scheduler failure의 비식별 상태·exit·walltime
+- 필수 seed가 모두 완료되지 않아 gate를 판정할 수 없는 execution record
 
 제외:
 
@@ -68,6 +69,13 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   missing-condition, V2, novelty 또는 submission을 열지 않는다.
 
 현재 controlled-PDE 결과:
+
+- `nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json`:
+  exact source `89bdc85`의 M0 3-seed array 실행 record. Seed 0/2만 exit 0,
+  seed 1은 truncated conditional rejection stall로 exit 1이었다. Aggregate와
+  과학적 pass/fail은 없고 성공 seed metric은 gate 용도로 검사하지 않았다.
+  Sampler repair·rerun·fresh re-entry·method/N1d/3D 권한은 없다. 이 파일은
+  metric aggregate가 아니라 공개 가능한 실행 provenance다.
 
 - `controlled_pde_g1_attempt2_20260803.json`: frozen G1 실패
 - `controlled_pde_g1b_20260803.json`: raw estimator floor와

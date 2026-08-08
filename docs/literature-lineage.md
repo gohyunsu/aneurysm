@@ -1,6 +1,6 @@
 # 선행연구 계보와 research gap
 
-검토 기준일: 2026-08-06 KST
+검토 기준일: 2026-08-08 KST
 
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
@@ -68,6 +68,17 @@ acceleration, node type, distance-to-inflow, inflow statistics를 입력으로
 - [Physics constrained GNN for real-time IA hemodynamics
   (npj Digital Medicine, 2026)](https://www.nature.com/articles/s41746-026-02404-z)
 
+2026년 Computer Methods and Programs in Biomedicine의 geometry-aware
+PointNet은 984개 idealized MCA bifurcation aneurysm에서 interior point와
+distance-to-wall만으로 peak-systolic 3D velocity와 WSS를 예측했다. 이는
+point cloud, wall-distance feature와 single-snapshot fast surrogate도 직접
+선행구성임을 뜻한다. Non-idealized OOD에서 zero-shot error가 크게 증가한
+결과는 geometry-only 성능을 patient-specific reliability로 확장하면 안
+된다는 경계도 보여준다.
+
+- [Geometry-aware PointNet for rapid prediction of cerebral aneurysm
+  hemodynamics (CMPB, 2026)](https://doi.org/10.1016/j.cmpb.2026.109308)
+
 같은 연구 계열의 2025-12 arXiv preprint는 graph transformer, sparse/global
 attention, masking, multi-stage pretraining을 사용하고 AneuXplore,
 few-shot patient geometry, MATCH OOD에서 평가한다.
@@ -75,9 +86,11 @@ few-shot patient geometry, MATCH OOD에서 평가한다.
 - [Graph Deep Learning for Intracranial Aneurysm Blood Flow Simulation and
   Risk Assessment (arXiv, 2025)](https://arxiv.org/abs/2512.09013)
 
-**구분점:** 두 방법 모두 known inflow/current flow state 아래의 forward
-surrogate에 가깝다. geometry-only missing-BC distribution과 downstream
-functional sufficiency가 중심이 아니다.
+**구분점:** 이 방법들은 known inflow/current flow state 또는 고정 CFD
+생성법칙 아래의 forward surrogate에 가깝다. GNN, PointNet,
+distance-to-wall, boundary token이나 fast 3D field prediction 자체는 AURORA의
+novelty가 아니다. Missing-BC distribution과 downstream functional
+sufficiency는 별도 strong-baseline 증거가 필요하다.
 
 ### 1.5 대규모 synthetic geometry–CFD
 

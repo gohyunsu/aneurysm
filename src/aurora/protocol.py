@@ -1590,8 +1590,30 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "config": (
                 "configs/nonlinear_pde_n1_missing_operator_pullback_m0.json"
             ),
-            "status": "preregistered_before_development_output",
-            "stage": "prospective_validation_only_mechanism_gate",
+            "status": "execution_incomplete_no_scientific_verdict",
+            "stage": (
+                "closed_validation_only_mechanism_execution_without_gate_verdict"
+            ),
+            "source_commit": "89bdc8560a7e5db1d4b5402cd76dbbb01d991aad",
+            "source_config_sha256": (
+                "78aa6752ed647ffbcb1b90f262873a05156ddda49c6aa21557cc6f7908345f91"
+            ),
+            "execution_record": (
+                "results/nonlinear_pde_n1_missing_operator_pullback_"
+                "m0_execution_20260808.json"
+            ),
+            "execution_record_sha256": (
+                "5376cd4629cc30f1fa16ab1e1762a576866a4d35620cc5e34a9986d5a2bfc593"
+            ),
+            "pbs_array_job": "115078",
+            "required_complete_seeds": 3,
+            "completed_seeds": 2,
+            "failed_seeds": 1,
+            "aggregate_created": False,
+            "gate_decided": False,
+            "scientific_verdict": "not_available",
+            "successful_seed_metrics_inspected_for_gate": False,
+            "sampler_repair_or_rerun_registered": False,
             "base_mask": "missing",
             "sparse_2_role": "fixed_acquisition_control_only",
             "model_seeds": [73081021, 73081022, 73081023],
@@ -1629,11 +1651,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "fresh_reentry_registered": False,
             "may_authorize_n1d_or_irregular_3d": False,
             "failure_abandons_mechanism_without_local_weight_or_kernel_repair": True,
+            "incomplete_execution_closes_mechanism_without_local_sampler_repair_or_rerun": True,
             "pass_only_allows_separate_fresh_reentry_protocol_design": True,
         }:
             raise ProtocolError(
-                "M0 must remain missing-only, prospective, all-checks-required, "
-                "test-free, non-authorizing, and terminal after failure."
+                "M0 must preserve its incomplete no-verdict execution record, "
+                "remain missing-only, test-free, non-authorizing, and closed "
+                "without local repair or rerun."
             )
     checks.append("nonlinear N0-to-N1 non-inflation and strong-baseline contract")
 

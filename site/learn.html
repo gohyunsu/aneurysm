@@ -457,7 +457,7 @@
 
           <div class="explain-block">
             <div>
-              <p class="eyebrow">M0 · PROSPECTIVE MECHANISM</p>
+              <p class="eyebrow">M0 · EXECUTION-INCOMPLETE / NO VERDICT</p>
               <h3>좋은 solution sample만으로는 “무엇을 측정할지” 정할 수 없습니다.</h3>
             </div>
             <div class="prose">
@@ -492,8 +492,9 @@
               실행하지 않았습니다. V1e Perceiver baseline은 exact six-task
               GPU run에서 6/9로 실패했고 current Aneumo 3D line을 중단했습니다.
               상대 boundary utility는 method novelty가 아닙니다. M0
-              joint-pullback도 구현·사전등록됐지만 아직 unrun이고 selected
-              method가 아닙니다. “implemented”,
+              joint-pullback은 세 seed 중 두 개만 완료되어 aggregate와
+              scientific verdict가 없고, local repair 없이 닫혔습니다.
+              Selected method가 아닙니다. “implemented”,
               “supported”와 “proposed”를 구분합니다.
             </p>
           </aside>
@@ -789,9 +790,9 @@
               sparse-2는 모든 context에서 같은 component가 최적이었습니다.
               이는 method novelty나 N1c·3D 상태 변경 근거가 아닙니다.
               후속 M0는 missing에서 candidate BC–solution functional joint
-              pushforward만 한 번 검증하도록 사전등록했습니다. 실패하면
-              kernel scale이나 weight를 고쳐 반복하지 않고 mechanism을
-              폐기합니다.
+              pushforward만 한 번 검증하도록 사전등록했지만 2/3 seed만
+              완료되어 aggregate와 과학적 판정이 없습니다. 성공 seed를
+              선택 집계하거나 sampler를 고쳐 반복하지 않습니다.
               D0b에서는 train-only POD 17/25만 표현 기준을 통과했습니다.
             </p>
           </div>
@@ -1009,7 +1010,7 @@
           <div class="compute-status warning">
             <span class="status-dot warning"></span>
             <div><p class="eyebrow">POST-N1C AUDITS · COMPLETE / NON-GATING</p><h3>Full-joint helps; only missing supports adaptive evaluation</h3><p>Fresh 5-seed density audit에서 full-joint excess는 raw conditional 대비 missing/sparse-2/partial-4에서 27.2%/23.8%/20.3% 낮고 모두 5/5 방향이 같았습니다. True-oracle task에서 missing VoI는 약 0.156, winner agreement는 92.7%였습니다. Sparse-2는 acquisition value가 있어도 component 6이 96/96 context의 고정 winner라 adaptive-policy 비교에서 제외합니다. Method selection·N1c relabel·3D 권한은 없습니다.</p><a href="../results/nonlinear_pde_n1_density_objective_audit_20260806.json">Density result ↗</a> <a href="../results/nonlinear_pde_n1_decision_task_audit_20260806.json">Task result ↗</a></div>
-            <div><p class="eyebrow">M0 · PREREGISTERED / UNRUN</p><h3>Candidate measurement–solution joint pullback</h3><p>Missing mask의 여덟 candidate마다 (B<sub>j</sub>, solution functional) joint MMD²와 true-oracle acquisition regret를 strongest control보다 5% 이상 개선해야 합니다. 3/3 seed, paired CI와 density·solution·operator 보호 조건을 모두 요구합니다. 실패 뒤 local repair는 없고, 통과도 별도 fresh re-entry 설계 자격일 뿐입니다.</p><a href="../configs/nonlinear_pde_n1_missing_operator_pullback_m0.json">Frozen M0 contract ↗</a></div>
+            <div><p class="eyebrow">M0 · EXECUTION-INCOMPLETE / NO VERDICT</p><h3>Candidate measurement–solution joint pullback</h3><p>등록된 세 seed 중 두 개만 완료되고 하나가 conditional rejection sampler에서 중단됐습니다. 따라서 aggregate와 과학적 pass/fail은 없습니다. 성공 seed metric을 선택 집계하지 않고 sampler repair·rerun도 열지 않으므로, 이 mechanism은 선택된 method나 novelty가 아닙니다.</p><a href="../results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json">Public execution record ↗</a></div>
           </div>
           <div class="compute-status">
             <span class="status-dot complete"></span>

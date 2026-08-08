@@ -149,6 +149,13 @@ candidate-joint MMD²와 true-oracle acquisition regret가 모두 5% 이상
 않고 mechanism을 폐기합니다. 통과해도 별도 fresh re-entry 설계 자격일
 뿐 method selection, novelty, N1c relabel 또는 3D 권한이 아닙니다.
 
+Exact `89bdc85`의 M0 실행은 seed 0/2만 완료되고 seed 1이 truncated
+conditional rejection에서 중단되었습니다. 등록된 3-seed aggregate를 만들
+수 없어 pass/fail이 아닌 `execution-incomplete / no scientific verdict`로
+기록했습니다. 성공 seed metric은 선택적으로 집계하지 않았고 sampler
+repair·rerun·fresh re-entry도 열지 않았습니다. 공개 execution record는
+[`results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json`](results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json)입니다.
+
 Fixed Fourier cycle은 frozen D0의 localized bulge gate를 실패해 제거했습니다.
 D0b에서는 DCT-II 17/25가 탈락하고 train-only POD 17/25만 oracle
 representation gate를 통과했습니다. POD는 아직 learned superiority나
@@ -386,8 +393,9 @@ aggregate는
 
 이 evidence 뒤 등록한 M0는 solution marginal score 자체를 novelty로
 주장하지 않습니다. 같은 \(B_j\)와 solution marginal을 갖더라도 dependence가
-다르면 post-measurement Bayes risk가 달라진다는 식별성 gap만 겨냥합니다.
-현재 상태는 `preregistered/unrun`, selected method는 없음입니다.
+다르면 post-measurement Bayes risk가 달라진다는 식별성 gap만 겨냥했습니다.
+실행은 2/3 seed만 완료돼 scientific verdict가 없고 branch는 inactive이며,
+selected method는 없습니다.
 
 D0b에서 DCT-II rank 17/25는 탈락했고 train-only POD rank 17/25가 모든
 frozen representation 기준을 통과했습니다. POD-17의 full L2는 0.00141,

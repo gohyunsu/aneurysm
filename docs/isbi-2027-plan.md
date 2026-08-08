@@ -2,7 +2,8 @@
 
 최종 검토일: 2026-08-08 KST
 상태: **target locked · not submission-ready · V0 passed development-only ·
-V1 backbone completed/failed 5/7 · V1a completed/training underfit · M0 metric unrun**
+V1 backbone completed/failed 5/7 · V1a completed/training underfit · V1e failed
+6/9 · M0 execution-incomplete/no scientific verdict**
 
 ## 1. Venue contract
 
@@ -85,14 +86,11 @@ conditioned point/operator baseline을 동일 split·budget에서 비교한다.
 ### Candidate method
 
 M0는 candidate measurement와 solution functional의 joint dependence가
-solution marginal만 맞추는 것보다 유용한지를 한 번 falsify한다. M0가
-통과해도 그대로 ISBI method가 되지 않는다. 3D에서는 알려진 scalar inflow
-design law와 학습되는 velocity operator에 맞춘 별도 prospective objective
-contract가 필요하다.
-
-M0가 실패하면 weight, kernel, seed, threshold를 고쳐 반복하지 않는다.
-M0가 통과하더라도 아래 3D task-translation audit에서 estimand가 일치하지
-않으면 mechanism을 제출 method로 사용하지 않는다.
+solution marginal만 맞추는 것보다 유용한지를 한 번 falsify하도록
+등록했지만, 2/3 seed만 완료돼 aggregate와 scientific verdict가 없다.
+성공 seed metric을 선택 집계하지 않으며 sampler를 고쳐 반복하지 않는다.
+따라서 mechanism은 inactive이고 ISBI method·3D translation·fresh re-entry를
+열지 않는다.
 
 ## 5. Prospective evidence ladder
 
@@ -257,6 +255,7 @@ Exact/nonlinear sanity는 한두 문장 또는 작은 ablation row로만 남긴�
 | 2026-08-08 | V1c boundary-geometry audit | 완료: 8/8; geometry staging adequacy만 인정 |
 | 2026-08-08 | V1d development geometry cache | 완료: 9/9; 156/156 q-invariant, 52/52 exact boundary-volume correspondence |
 | 2026-08-08 | V1e known-condition baseline | 완료: 6/9 fail; relative boundary utility 3/3·10.94%/6.41%, absolute learnability 3 checks fail; current Aneumo 3D line 중단 |
+| 2026-08-08 | M0 one-shot mechanism execution | 미완료: 2/3 seed exit 0, 1/3 conditional rejection stall; aggregate·과학적 판정 없음, 성공 seed metric 미검사, local repair/re-entry 금지 |
 | 2026-09-03 | 새 task/data identity 결정 | reference state·boundary marker·expanded data 중 식별 가능성과 비자명성을 회복하는 근거가 없으면 full paper 중단 |
 | 2026-09-10 | candidate method/config freeze | 이후 architecture·loss search 금지 |
 | 2026-09-24 | five-seed outer test complete | gate 실패 시 relabel·threshold repair 금지 |

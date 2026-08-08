@@ -2,8 +2,8 @@
 
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
 V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training underfit ·
-missing task retained · M0 candidate-measurement–solution pullback
-preregistered/unrun · sparse-2 adaptive task removed · current V1 point/graph branch stopped ·
+V1e known-condition qualification failed 6/9 · missing task retained · M0
+execution-incomplete/no scientific verdict · sparse-2 adaptive task removed · current V1 point/graph branch stopped ·
 method unselected
 
 연결 설정: `configs/aurora_v1.json`
@@ -696,6 +696,14 @@ M0는 세 fresh development seed와 disjoint selection/audit validation만
 설계할 수 있다. 실패 뒤 scale/weight/mask/seed/threshold를 바꾸는
 local repair는 금지하며 mechanism을 폐기한다. 통과해도 선택된 method,
 novelty, N1c relabel, N1d 또는 irregular-3D 권한이 아니다.
+
+실제 exact `89bdc85` 실행에서는 seed 0/2만 완료되고 seed 1의 truncated
+conditional rejection sampler가 registered radius boundary 부근에서
+stall했다. 따라서 3-seed aggregate와 gate verdict는 없으며 성공 seed
+metric도 선택적으로 검사하지 않았다. 이는 architecture나 hypothesis의
+과학적 실패 판정이 아니라 실행 미완료지만, one-shot 계약상 sampler를
+국소 수정해 같은 M0를 반복하지 않는다. 이 module은 inactive이고 선택된
+method·novelty·fresh re-entry·N1d/3D 권한은 여전히 없다.
 
 ## 8. Module D — paired simulator-response supervision · ablation
 

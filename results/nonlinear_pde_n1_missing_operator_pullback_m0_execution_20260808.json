@@ -1,0 +1,94 @@
+{
+  "schema_version": "aurora.public_execution_record.v1",
+  "result_id": "nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808",
+  "evidence_status": "execution_incomplete_no_scientific_verdict",
+  "as_of": "2026-08-08",
+  "source": {
+    "commit": "89bdc8560a7e5db1d4b5402cd76dbbb01d991aad",
+    "config": "configs/nonlinear_pde_n1_missing_operator_pullback_m0.json",
+    "config_sha256": "78aa6752ed647ffbcb1b90f262873a05156ddda49c6aa21557cc6f7908345f91"
+  },
+  "execution_contract": {
+    "scheduler": "PBS",
+    "array_job": "115078",
+    "requested_tasks": 3,
+    "pinned_container": true,
+    "dependency_complete_login_cpu_revalidation": {
+      "passed": true,
+      "tests_passed": 150,
+      "tests_failed": 0
+    },
+    "frozen_operator_checkpoint_hashes_verified": true,
+    "n1_test_access": false
+  },
+  "tasks": [
+    {
+      "array_index": 0,
+      "model_seed": 73081021,
+      "state": "completed",
+      "exit_status": 0,
+      "walltime": "00:17:58",
+      "artifacts": {
+        "metrics_sha256": "ea7d8f46456e747eb9d10f4dc0030d8c027b43498e73ae5569661490898f3c74",
+        "per_context_sha256": "e2422f3fdd15b8af4726ed168467448208b706eca31b6eef89de4c2a562f6029",
+        "status_sha256": "45df90e56598432567e2d20fbb7b652e909c36e4c5c9ad352ad814422383f01a"
+      },
+      "metrics_inspected_for_gate": false,
+      "n1_test_access": false
+    },
+    {
+      "array_index": 1,
+      "model_seed": 73081022,
+      "state": "failed",
+      "exit_status": 1,
+      "walltime": "00:07:37",
+      "error": {
+        "type": "NonlinearDecisionError",
+        "message": "Truncated conditional rejection stalled.",
+        "stage": "candidate_risk_matrix"
+      },
+      "artifacts": {
+        "run_log_sha256": "975a1d6f1045d4b0ed73cce800dfb61cee80a21fb40a0915c040e53a41837e43",
+        "status_sha256": "b48d7003cb1a1486d76051483c1f9dad6c84b673efb0f7c1978eb8d163490640"
+      },
+      "metric_artifacts_created": false,
+      "n1_test_access": false
+    },
+    {
+      "array_index": 2,
+      "model_seed": 73081023,
+      "state": "completed",
+      "exit_status": 0,
+      "walltime": "00:18:03",
+      "artifacts": {
+        "metrics_sha256": "2b0a30de3c9107147bcf0fecf11806546a9d111d8ce3db45dee68bfbbbad0d03",
+        "per_context_sha256": "4a5fdb17160798914eb4463d8f64303d570ce9cdce147956a5d96275d449be4f",
+        "status_sha256": "d87c57b919b53daec35cac62b19d80de9ac2b2d434ade4497cccd7e182e9f88c"
+      },
+      "metrics_inspected_for_gate": false,
+      "n1_test_access": false
+    }
+  ],
+  "gate": {
+    "required_complete_seeds": 3,
+    "completed_seeds": 2,
+    "failed_seeds": 1,
+    "aggregate_created": false,
+    "gate_decided": false,
+    "passed": null,
+    "scientific_verdict": "not_available"
+  },
+  "decision": {
+    "n1c_status": "completed_failed_unchanged",
+    "m0_scientific_hypothesis_falsified": false,
+    "m0_mechanism_branch_active": false,
+    "successful_seed_metrics_may_not_be_cherry_picked": true,
+    "sampler_repair_or_rerun_registered": false,
+    "fresh_reentry_registered": false,
+    "method_selected": false,
+    "method_novelty_established": false,
+    "n1d_or_irregular_3d_authorized": false,
+    "current_aneumo_3d_line_stopped": true,
+    "interpretation": "The registered three-seed aggregate cannot be formed. This record is execution provenance, not a metric aggregate or a scientific gate verdict."
+  }
+}

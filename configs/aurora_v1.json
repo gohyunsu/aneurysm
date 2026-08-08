@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_v1_failed_v1a_underfit_attributed_v1b_v1c_v1d_asset_gates_passed_v1e_failed_current_aneumo_3d_line_stopped_method_unselected",
+    "status": "failed_n1c_m0_execution_incomplete_no_verdict_v1_failed_v1a_underfit_attributed_v1b_v1c_v1d_asset_gates_passed_v1e_failed_current_aneumo_3d_line_stopped_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -67,6 +67,10 @@
     "v1e_gate": "6_of_9_passed",
     "v1e_failure_action": "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair",
     "v1e_pass_authorizes": "register_boundary_aware_scalar_missing_inflow_development_protocol_only",
+    "m0_status": "execution_incomplete_no_scientific_verdict",
+    "m0_execution_record": "results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json",
+    "m0_execution_record_sha256": "5376cd4629cc30f1fa16ab1e1762a576866a4d35620cc5e34a9986d5a2bfc593",
+    "m0_incomplete_execution_action": "do_not_repair_rerun_aggregate_or_open_fresh_reentry_from_this_one_shot_execution",
     "v1_test_access": false,
     "plan": "docs/isbi-2027-plan.md"
   },
@@ -94,7 +98,8 @@
       "arbitrary_conditional_likelihood_models",
       "decision_focused_density_learning",
       "explicit_known_boundary_transfer_operators",
-      "inflow_aware_physics_gnn_for_aneurysm"
+      "inflow_aware_physics_gnn_for_aneurysm",
+      "geometry_aware_pointcloud_surrogate_for_aneurysm_hemodynamics"
     ],
     "cmha_secondary_diagnostic": {
       "result_id": "cmha_g1_exploratory_20260803",
@@ -193,7 +198,7 @@
       "nonlinear_pde_n1c_attribution_status": "completed_non_gating_density_bottleneck",
       "nonlinear_pde_n1_density_objective_audit_status": "completed_threshold_free_full_joint_engineering_signal",
       "nonlinear_pde_n1_decision_task_audit_status": "completed_missing_nontrivial_sparse2_fixed_winner",
-      "nonlinear_pde_n1_missing_operator_pullback_m0_status": "preregistered_validation_only_unrun",
+      "nonlinear_pde_n1_missing_operator_pullback_m0_status": "execution_incomplete_no_scientific_verdict",
       "irregular_3d_status": "v1e_failed_after_relative_boundary_utility_current_aneumo_3d_line_stopped_outer_test_and_headline_blocked"
     },
     "contribution_priority": {
@@ -218,7 +223,7 @@
       ],
       "candidate_not_yet_contribution": {
         "name": "candidate_measurement_solution_joint_pullback_for_coherent_operator_acquisition",
-        "status": "prospective_development_hypothesis_not_selected_method",
+        "status": "inactive_after_incomplete_one_shot_execution_not_selected_method",
         "required_theory": "proper_joint_pushforward_score_plus_measurement_solution_sufficiency_counterexample_plus_RKHS_candidate_risk_and_selected_regret_bound",
         "required_algorithm": "one_joint_boundary_density_scored_through_candidate_measurement_solution_functional_pushforwards",
         "required_evidence": "all_checks_M0_then_separate_fresh_five_seed_strong_baseline_reentry",
@@ -942,8 +947,21 @@
       },
       "missing_operator_pullback_m0": {
         "config": "configs/nonlinear_pde_n1_missing_operator_pullback_m0.json",
-        "status": "preregistered_before_development_output",
-        "stage": "prospective_validation_only_mechanism_gate",
+        "status": "execution_incomplete_no_scientific_verdict",
+        "stage": "closed_validation_only_mechanism_execution_without_gate_verdict",
+        "source_commit": "89bdc8560a7e5db1d4b5402cd76dbbb01d991aad",
+        "source_config_sha256": "78aa6752ed647ffbcb1b90f262873a05156ddda49c6aa21557cc6f7908345f91",
+        "execution_record": "results/nonlinear_pde_n1_missing_operator_pullback_m0_execution_20260808.json",
+        "execution_record_sha256": "5376cd4629cc30f1fa16ab1e1762a576866a4d35620cc5e34a9986d5a2bfc593",
+        "pbs_array_job": "115078",
+        "required_complete_seeds": 3,
+        "completed_seeds": 2,
+        "failed_seeds": 1,
+        "aggregate_created": false,
+        "gate_decided": false,
+        "scientific_verdict": "not_available",
+        "successful_seed_metrics_inspected_for_gate": false,
+        "sampler_repair_or_rerun_registered": false,
         "base_mask": "missing",
         "sparse_2_role": "fixed_acquisition_control_only",
         "model_seeds": [
@@ -982,6 +1000,7 @@
         "fresh_reentry_registered": false,
         "may_authorize_n1d_or_irregular_3d": false,
         "failure_abandons_mechanism_without_local_weight_or_kernel_repair": true,
+        "incomplete_execution_closes_mechanism_without_local_sampler_repair_or_rerun": true,
         "pass_only_allows_separate_fresh_reentry_protocol_design": true
       }
     }

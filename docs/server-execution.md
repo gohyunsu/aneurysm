@@ -367,7 +367,15 @@ fresh density seed와 seed-matched pair-loss-zero frozen operator 하나를
 audit split, operator audit L2, solver convergence, test-access false와
 private per-context metric을 기록한다. 세 seed가 전부 exit 0일 때만 한 번
 aggregate하며, 일부 결과를 보고 config나 남은 job을 바꾸지 않는다.
-M0 실패 뒤 같은 mechanism의 weight/kernel repair job은 제출하지 않는다.
+M0 실패 또는 execution-incomplete 뒤 같은 mechanism의 weight/kernel/sampler
+repair job은 제출하지 않는다.
+
+Exact source `89bdc85`의 실제 array `115078`은 seed 0/2가 exit 0, seed 1이
+`candidate_risk_matrix`의 truncated conditional rejection stall로 exit 1이었다.
+세 seed 완결 조건을 충족하지 못해 aggregate를 실행하지 않았고 성공 seed
+metric도 gate 용도로 읽지 않았다. 공개 execution record만 남기며 상태는
+`execution-incomplete / no scientific verdict`다. One-shot 규약에 따라
+sampler repair·rerun·fresh re-entry job은 제출하지 않는다.
 
 ## Aneumo selective-cache contract
 

@@ -34,6 +34,7 @@ contribution에서 제외한다.
 | [Generative-surrogate AFA (ICML 2021)](https://proceedings.mlr.press/v139/li21p.html) / [Acquisition Conditioned Oracle (ICML 2024)](https://proceedings.mlr.press/v235/valancius24a.html) | test-time에 미관측 feature를 순차 획득하고 prediction/general decision의 비용을 줄임 | test-time BC component 선택이나 generative acquisition policy 자체도 직접 선행연구임 |
 | [Neural Operator Thompson Sampling (NeurIPS 2025)](https://proceedings.neurips.cc/paper_files/paper/2025/hash/2f5fb82b8b593c548ed538a8d336d800-Abstract-Conference.html) | unknown operator output의 known functional을 posterior neural-operator sample로 최적화하고 function-space regret bound를 제시 | neural operator를 이용한 functional optimization이나 generic regret analysis도 novelty가 아님 |
 | [Physics-Constrained GNN for IA Hemodynamics (npj Digital Medicine 2026)](https://www.nature.com/articles/s41746-026-02404-z) | BenchAnXplore의 transient autoregressive GNN, inflow/OOD 평가, physics loss | GNN+inflow+physics는 직접 baseline이며 primary method가 아님 |
+| [Geometry-aware PointNet for cerebral aneurysm hemodynamics (CMPB 2026)](https://doi.org/10.1016/j.cmpb.2026.109308) | Idealized MCA aneurysm에서 interior point+distance-to-wall로 peak-systolic velocity/WSS를 빠르게 예측 | PointNet, wall-distance geometry encoding과 geometry-only fast surrogate도 novelty가 아니며 OOD reliability를 별도 입증해야 함 |
 
 ## 살아남는 연구 질문
 
