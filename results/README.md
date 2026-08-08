@@ -26,11 +26,20 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `goal_oriented_s0a_asset_component_20260809.json`: exact public source
+  `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의 one-shot CPU/PBS result.
+  Job은 exit 0이지만 asset gate는 5/9 fail이다. Archive/CSV, six multi-lesion
+  groups, privacy와 no-model/GPU boundary만 통과했고 explicit 105-lesion
+  image–surface–table linkage는 성립하지 않았다. Required triplet 0/105이며
+  NIfTI/STL header와 voxel/field는 열지 않았다. S0a는 `not_evaluated`, 후보는
+  closed이고 solver v2/S0b/model/GPU/outer test는 열리지 않는다. Public result
+  SHA-256은
+  `c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e`다.
 - `goal_oriented_s0a_cmha_source_asset_discovery_20260809.json`: staging 실패 뒤
   `introai9`에서 발견한 기존 CMHA archive 세 개의 exact size/MD5 3/3 match.
   Login-node low-priority checksum만 수행했고 CSV row, identifier, NIfTI/STL
-  header, voxel/field는 열지 않았다. S0a result가 아니며 one-shot source-server
-  asset component 등록만 허용한다.
+  header, voxel/field는 열지 않았다. S0a result가 아니며 이후 실행된 asset
+  component의 preregistration만 허용했던 historical discovery다.
 - `goal_oriented_s0a_solver_preflight_v1_execution_20260809.json`: exact source
   `64284eb…` CPU/PBS solver preflight의 operational failure. Official build SIF와
   SU2 main/11 submodule HEAD까지만 확인됐고 TestCases/build/runtime/probe는 없다.

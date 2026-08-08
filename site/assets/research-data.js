@@ -2,16 +2,16 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · one-shot S0a asset component next · no method/architecture/GPU · not submission-ready",
-    requirement: "S0a asset early-stop → solver runtime only if 9/9 → S0b functional adequacy → strong baselines → fresh outer test",
+    status: "Target locked · active problem shortlist 0 · no method/architecture/GPU · not submission-ready",
+    requirement: "fresh problem/asset audit → method-free adequacy → strong baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
-      title: "Signed adjoint projection remains a conditional gap",
-      copy: "Image2Flow, IAVS, inverse Navier–Stokes joint flow/boundary segmentation, task-based PET evaluation, CFD variability studies and differentiable PDE optimization remove generic PDE→segmentation and downstream-metric novelty. The only residual hypothesis is a CTA-specific multi-functional signed adjoint pullback with remainder-controlled trust region and held-out functional superiority.",
-      status: "Cold-audit score 27.0/40 · below automatic selection · S0a only",
+      title: "Signed adjoint candidate closes at asset linkage",
+      copy: "Image2Flow, IAVS, inverse Navier–Stokes joint flow/boundary segmentation and task-based evaluation had already narrowed the residual hypothesis. Exact ef547a4… then completed the frozen CMHA asset component at 5/9: 99 patient-level case directories could not be linked to 105 lesion rows and required CTA+two-STL triplets were 0/105. Headers were not opened, so geometry itself was not judged implausible.",
+      status: "Candidate closed · S0a not evaluated · no solver v2/S0b/model/GPU",
       url: "../docs/goal-oriented-segmentation-audit-2026-08-09.md"
     },
     {
@@ -168,16 +168,16 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "S0a",
       title: "Are CMHA linkage and solver gradients auditable?",
-      copy: "99 patients/105 lesions must map CTA, parent+aneurysm STL, aneurysm STL and tables by exact identifier. The official direct-only SU2 binary was rejected after it refused discrete adjoint. A separately built and pinned normal+reverse-AD runtime must pass a real incompressible forward/adjoint probe. All eleven S0a checks are still required.",
-      state: "Staging v1/v2 and solver preflight v1 incomplete/no verdict · archive integrity 3/3 discovered · asset component preregistered · S0a not evaluated",
+      copy: "The frozen asset component required exact non-positional linkage among 105 lesion rows, CTA, parent+aneurysm STL and aneurysm STL before any geometry audit. It passed archive/CSV/group/privacy boundaries but found no reproducible lesion-level triplet. NIfTI/STL headers, model, GPU and outer test were never opened.",
+      state: "Asset component failed 5/9 · required triplets 0/105 · S0a not evaluated · candidate closed",
       blocking: true
     },
     {
       id: "P0",
       title: "Is there a defensible biomedical-imaging problem?",
       copy: "후보별 데이터 semantics와 access, 식별 가능한 estimand, direct-prior gap, patient-level split, ISBI relevance와 confirmatory 규모를 method보다 먼저 감사한다. 하나가 선택되기 전에는 executable config를 만들지 않는다.",
-      state: "Cold audit completed · one S0a-conditional problem · method/GPU/outer test still blocked",
-      blocking: false
+      state: "Active shortlist 0 · fresh problem-level primary-source and asset audit required",
+      blocking: true
     },
     {
       id: "I0a",
@@ -287,8 +287,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "CMHA",
-      role: "conditional primary for S0a image–surface linkage and standardized-functional task audit",
-      provenance: "99 patients/105 MCA lesions + 44 controls · 6 multi-lesion patients · three archive size/MD5 3/3 match · CSV/identifier/NIfTI/STL unopened · exact-ID linkage/solver pending"
+      role: "closed goal-oriented S0a asset history; no active primary role",
+      provenance: "99 unique patients/105 MCA lesion rows + 44 controls · six multi-lesion groups · asset component 5/9 failed · exact lesion-level linkage unsupported · headers unopened"
     },
     {
       name: "OpenNeuro ds005096",
@@ -307,6 +307,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "decision",
+      title: "The goal-oriented candidate closes after a 5/9 asset failure",
+      copy: "Exact prospective source ef547a4ccb71fa45b4a43e67c0939e2701ebfc11 completed CPU/PBS job 115119 with exit 0, but the frozen asset component passed only five of nine checks. Archive integrity, CSV members, six multi-lesion groups, privacy and the no-model/GPU boundary passed; the unit contract, exact 105-lesion linkage, non-positional mapping and the linkage-dependent geometry audit did not. Required image/surface triplets were 0/105 and no NIfTI/STL header was opened. S0a remains not evaluated, the candidate is closed, and solver v2, S0b, model, GPU and outer test are prohibited. Active problem shortlist is now zero.",
+      files: ["results/goal_oriented_s0a_asset_component_20260809.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "tests/test_goal_oriented_s0a_asset.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/goal-oriented-segmentation-audit-2026-08-09.md", "docs/server-execution.md", "docs/datasets.md", "docs/literature-lineage.md", "results/README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

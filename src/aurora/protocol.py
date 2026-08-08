@@ -114,8 +114,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.8":
-        raise ProtocolError("The current research-state schema must be version 2.8.")
+    if protocol["schema_version"] != "2.9":
+        raise ProtocolError("The current research-state schema must be version 2.9.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -155,15 +155,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "one_conditional_problem_shortlist_before_s0a_asset_component"
+        != "no_active_problem_after_goal_oriented_asset_component_failure"
         or problem_selection["shortlisted_candidate"]
-        != "goal_oriented_hemodynamic_segmentation"
+        != "none"
         or problem_selection["candidate_dataset"]
-        != "cmha_primary_openneuro_ds005096_external_only"
+        != "none"
         or problem_selection["candidate_estimand"]
-        != "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains"
+        != "none"
         or problem_selection["asset_access_status"]
-        != "official_archive_integrity_verified_post_transport_failure_extracted_linkage_unopened"
+        != "cmha_asset_component_failed_5_of_9_exact_lesion_linkage_unsupported"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -173,15 +173,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "execute_one_read_only_introai9_s0a_asset_component_and_early_stop_before_any_solver_v2"
+        != "conduct_a_new_problem_level_primary_source_and_asset_audit_without_repairing_closed_candidates"
         or problem_selection["audit_document"]
         != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
-        != "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
+        != "goal_oriented_hemodynamic_segmentation"
     ):
         raise ProtocolError(
-            "The conditional-problem boundary must remain method-unselected, GPU-disabled, "
-            "and limited to the prospective S0a audit."
+            "The conditional-problem boundary must retain no active shortlist, method, GPU, "
+            "or outer test after the goal-oriented asset failure."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -189,6 +189,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "geometry_boundary_condition_shape_response_operator",
         "cross_protocol_4d_flow_posterior_prediction",
         "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
+        "goal_oriented_hemodynamic_segmentation",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -314,6 +315,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "s0a_asset_component_config",
             "s0a_asset_component_config_sha256",
             "s0a_asset_component_status",
+            "s0a_asset_component_source_commit",
+            "s0a_asset_component_result",
+            "s0a_asset_component_result_sha256",
+            "s0a_asset_component_gate",
             "s0a_asset_component_pass_authorizes",
             "score",
             "maximum_score",
@@ -364,7 +369,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     if (
         goal_audit["status"]
-        != "completed_primary_source_and_runtime_discovery_conditional_problem_shortlist"
+        != "closed_after_completed_asset_component_failed_5_of_9"
         or goal_audit["audit_document"]
         != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
         or goal_audit["s0a_config"]
@@ -409,7 +414,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["s0a_asset_component_config_sha256"]
         != "f951d68b42e2590fe57d0739f2b16a72893347c1feadc9ddab631f40ffa633e7"
         or goal_audit["s0a_asset_component_status"]
-        != "preregistered_before_csv_identifier_nifti_or_stl_access"
+        != "completed_failed_5_of_9_exact_lesion_linkage_precondition_failed"
+        or goal_audit["s0a_asset_component_source_commit"]
+        != "ef547a4ccb71fa45b4a43e67c0939e2701ebfc11"
+        or goal_audit["s0a_asset_component_result"]
+        != "results/goal_oriented_s0a_asset_component_20260809.json"
+        or goal_audit["s0a_asset_component_result_sha256"]
+        != "c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e"
+        or goal_audit["s0a_asset_component_gate"]
+        != "5_of_9_failed_asset_component_s0a_not_evaluated"
         or goal_audit["s0a_asset_component_pass_authorizes"]
         != "register_one_distinct_prospective_no_runtime_network_solver_preflight_v2_only"
         or goal_audit["score"] != 27.0
@@ -423,17 +436,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or goal_audit["direct_gap"]
         != "cta_multi_functional_signed_adjoint_pullback_with_remainder_control_and_held_out_functional_superiority"
         or goal_audit["required_next_gate"]
-        != "s0a_asset_component_then_solver_runtime_only_if_asset_passes"
+        != "none_candidate_closed_at_asset_component"
         or goal_audit["s0a_pass_authorizes"]
         != "register_method_free_s0b_functional_non_equivalence_and_linearization_audit_only"
         or goal_audit["s0a_failure_action"]
-        != "close_candidate_version_without_model_gpu_or_outer_test"
+        != "executed_close_candidate_without_solver_v2_model_gpu_or_outer_test"
     ):
         raise ProtocolError(
-            "The goal-oriented candidate must remain below automatic selection and "
-            "authorize only the one-shot asset component before any new solver preflight."
+            "The goal-oriented candidate must remain closed after its 5/9 asset failure, "
+            "without solver v2, method, GPU, or outer-test authority."
         )
-    checks.append("conditional problem shortlist and S0a-only boundary")
+    checks.append("closed goal-oriented candidate and no-active-problem boundary")
 
     venue = protocol["venue"]
     _require_keys(
@@ -514,7 +527,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_pending_s0a_s0b_and_prospective_model_evidence"
+        != "unselected_no_active_problem_after_goal_oriented_asset_failure"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -654,8 +667,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if task["primary_problem"] not in ALLOWED_PRIMARY_PROBLEMS:
         raise ProtocolError(
-            "The active primary task must remain unselected until the RSNA access, "
-            "L0, and L1 gates are completed."
+            "The primary task must remain unselected while the active problem "
+            "shortlist is empty."
         )
     if task["application_endpoint"] not in ALLOWED_ENDPOINTS:
         raise ProtocolError(
@@ -676,13 +689,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"]
-        != "goal_oriented_hemodynamic_segmentation"
+        != "none"
         or task["active_candidate_status"]
-        != "conditional_problem_shortlist_before_s0a_no_method_or_paper_identity"
+        != "closed_after_goal_oriented_s0a_asset_component_failed_5_of_9"
         or task["candidate_primary_estimand"]
-        != "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains"
+        != "none"
         or task["candidate_secondary_estimand"]
-        != "functional_error_not_explained_by_standard_geometry_metrics_under_matched_solver_boundary_conditions"
+        != "none"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -726,11 +739,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The active task must remain a conditional goal-oriented problem without "
-            "a selected method, while historical 4D-flow evidence retains the exact "
-            "I0a result and I0b execution record."
+            "The task must retain no active problem or estimand after the goal-oriented "
+            "asset failure, while historical 4D-flow evidence retains the exact I0a "
+            "result and I0b execution record."
         )
-    checks.append("conditional task boundary and historical 4D-flow guardrails")
+    checks.append("no-active-task boundary and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:
@@ -772,8 +785,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     rsna_ica = next(
         item for item in datasets if item["name"] == "rsna_ica_2025_controlled_access"
     )
-    if cmha["field_provenance"] != "real_cfd":
-        raise ProtocolError("CMHA is the declared real-CFD bridge in protocol v1.")
+    if (
+        cmha["field_provenance"] != "real_cfd"
+        or cmha.get("role") != "closed_goal_oriented_s0a_asset_history_not_an_active_primary"
+        or cmha.get("status")
+        != "asset_component_failed_5_of_9_exact_lesion_level_image_surface_table_linkage_unsupported"
+    ):
+        raise ProtocolError(
+            "CMHA must remain a real-CFD provenance asset but a closed 5/9 "
+            "goal-oriented history, not an active primary dataset."
+        )
     if aneux["field_provenance"] != "none":
         raise ProtocolError("AneuX must not be declared as real-CFD data.")
     if aneumo["split_unit"] != "aneux_base_family":

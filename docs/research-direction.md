@@ -5,12 +5,12 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation conditional shortlist 1 · staging v2/solver preflight v1 execution-incomplete · archive integrity 3/3 discovery · asset component preregistered · method/architecture/GPU/outer test unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · active problem shortlist 0 · method/architecture/GPU/outer test unselected · submission blocked
 
-## 0. 현재 연구 상태 · conditional problem shortlist 1
+## 0. 현재 연구 상태 · active problem shortlist 0
 
-새 cold audit에서 **goal-oriented hemodynamic segmentation**을 S0a/S0b에만
-조건부인 문제 후보로 남겼다. 질문은 CTA segmentation의 signed boundary
+새 cold audit에서 검토한 **goal-oriented hemodynamic segmentation**은 이제
+닫힌 문제 후보다. 질문은 CTA segmentation의 signed boundary
 displacement를 PDE adjoint shape sensitivity에 투영해, Dice·boundary·topology
 loss보다 standardized CFD functional error를 줄일 수 있는가이다. 자동
 segmentation→CFD, Image2Flow의 joint mesh/field prediction, IAVS의 CFD
@@ -22,12 +22,11 @@ gradient 연결까지, quantitative PET 연구는 task-based segmentation 평가
 adjoint pullback, remainder-controlled trust region과 실제 held-out functional
 error 우위를 함께 검증하는 algorithm뿐이다.
 
-현재 score는 27.0/40으로 자동 선택 기준 32에 못 미친다. CMHA 99 patient/
-105 lesion의 CTA–parent/aneurysm STL–aneurysm STL–table exact-ID linkage와
-별도 pinned solver/adjoint runtime을 `configs/goal_oriented_segmentation_s0a.json`
-에서 CPU/read-only로 먼저 감사한다. S0a pass도 method-free S0b 등록만
-허용하며 method, architecture, GPU, outer test와 paper identity는 모두
-닫혀 있다. 상세 판정은
+Score는 27.0/40으로 자동 선택 기준 32에 못 미쳤다. CMHA 99 patient/
+105 lesion의 CTA–parent/aneurysm STL–aneurysm STL–table exact-ID linkage를
+CPU/read-only asset component로 감사했지만 5/9에 그쳤다. 따라서 S0a 전체는
+`not_evaluated`로 보존하고 후보를 닫았다. Method, architecture, GPU, outer
+test와 paper identity는 모두 닫혀 있다. 상세 판정은
 [`goal-oriented-segmentation-audit-2026-08-09.md`](goal-oriented-segmentation-audit-2026-08-09.md)에
 있다.
 
@@ -62,9 +61,14 @@ prospective contract로 고정했다. Exact `5cd4aa2…`의 v2도 첫 64 MiB chu
 hash뿐이며 CSV, identifier, NIfTI/STL header, voxel/field는 열지 않았다.
 따라서 추가 다운로드/transfer 없이
 `configs/goal_oriented_segmentation_s0a_asset_component.json`을 그 접근 전에
-고정했다. Asset 9/9를 one-shot CPU/PBS로 먼저 실행한다. Scientific fail이면
-후보를 즉시 닫고 solver v2를 생략하며, 9/9도 S0a pass가 아니라 별도
-no-runtime-network solver preflight v2 등록만 허용한다.
+고정했다. Exact public source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의
+one-shot CPU/PBS job은 exit 0으로 끝났지만 **5/9 failed**다. Archive/CSV,
+multi-lesion grouping, privacy와 no-model boundary는 통과했으나 99 case
+directory와 105 lesion row의 exact non-positional linkage가 성립하지 않았다.
+Required image/surface triplet은 0/105였고 geometry header audit는 전제조건
+실패로 시작하지 않았다. 이 결과로 후보를 닫고 solver v2/S0b를 생략한다.
+다음 허용 작업은 이 후보의 mapping을 수리하는 것이 아니라 새로운 문제에
+대한 primary-source, task-unit, asset audit다.
 
 ### 직전 RSNA 후보 기각 · 보존
 

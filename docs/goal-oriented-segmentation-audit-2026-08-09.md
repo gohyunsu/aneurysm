@@ -1,14 +1,15 @@
 # Goal-oriented hemodynamic segmentation · cold audit
 
 감사일: 2026-08-09 KST
-상태: **conditional shortlist 1 · problem only · method/architecture unselected ·
-S0a asset/runtime audit only · no GPU training · no outer test · not
+상태: **closed after S0a asset component failed 5/9 · S0a not evaluated ·
+solver v2/S0b not registered · no method/architecture/GPU/outer test · not
 submission-ready**
 
 이 문서는 실패한 AURORA BC-operator, Aneumo V1/V1e, 4D-flow 또는 RSNA
 후보를 다른 이름으로 복원하지 않는다. 새 후보가 직접 선행연구와 데이터·실행
-현실성을 통과하는지 문제 수준에서 검사한 기록이다. 아직 방법론적 contribution을
-확정하지 않으며, S0a/S0b가 실패하면 후보를 폐기한다.
+현실성을 통과하는지 문제 수준에서 검사한 기록이다. 방법론적 contribution은
+확정되지 않았고, prospective kill rule에 따라 S0a asset component 실패 뒤
+후보를 폐기했다.
 
 ## 1. 남은 연구 질문
 
@@ -120,9 +121,9 @@ STL, aneurysm STL, clinical/morphological/hemodynamic table을 CC BY 4.0으로
 | interpretable figure | 5.0 | CTA slice, surface error, adjoint influence와 WSS/pressure functional change를 한 case에서 연결할 수 있다. |
 | compute/runtime feasibility | 1.5 | 현재 pinned image에 mesh/PDE stack이 없고 3D adjoint workflow도 없다. |
 
-합계는 **27.0/40**이다. 자동 채택 기준 32/40에 못 미친다. 다만 estimand,
-ISBI relevance와 시각적 검증 가능성이 분명해 **S0a/S0b에만 조건부인
-shortlist 1개**로 남긴다. Method와 paper identity는 아직 선택하지 않는다.
+합계는 **27.0/40**이다. 자동 채택 기준 32/40에 못 미쳤고, 후속 S0a asset
+component도 5/9 실패했다. 따라서 조건부 shortlist에서 제거한다. Method와
+paper identity는 선택하지 않는다.
 
 ## 5. novelty를 인정할 최소 조건
 
@@ -202,9 +203,34 @@ boundary를 9/9로 감사한다. Scientific fail이면 S0a all-or-none rule에 �
 후보를 닫고 solver v2를 생략한다. 9/9도 S0a pass가 아니라 no-runtime-network
 solver preflight v2 등록만 허용한다.
 
-## 7. S0b와 이후 kill rule
+### 실행 결과와 판정
 
-S0a가 통과한 경우에만, 결과 전에 별도 S0b를 등록한다. S0b는 development
+Exact public source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의 CPU/PBS
+job `115119.ECE-util1`은 exit 0으로 완료됐고 asset component는 **5/9
+failed**다. 공개 aggregate는
+[`goal_oriented_s0a_asset_component_20260809.json`](../results/goal_oriented_s0a_asset_component_20260809.json),
+SHA-256은
+`c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e`다.
+
+- 통과: archive size/MD5 3/3, five CSV member set, six multi-lesion patient
+  groups, aggregate privacy, no model/GPU/outer-test/rupture-label access
+- 실패: frozen patient/lesion/control count, 105-lesion exact CTA/STL/table
+  linkage, non-positional linkage, linkage 뒤 unit/frame plausibility
+- 관찰: 105 patient records, 99 unique patients, 105 morphology lesion IDs,
+  98 unique hemodynamic IDs, 99 patient-level case directories, required triplet
+  0/105
+- 미접근: NIfTI/STL header, voxel, field, model, GPU, outer test
+
+Unit/frame check는 geometry를 열어 실패한 것이 아니다. Exact lesion mapping이
+성립하지 않아 등록된 선행조건에서 멈췄으므로 **미도달로 인한 failed check**다.
+이 구분을 유지한다. S0a 전체는 `not_evaluated`이며, frozen early-stop에 따라
+후보를 닫고 solver v2를 만들지 않는다.
+
+## 7. S0b · not registered
+
+S0a가 통과한 경우에만 결과 전에 별도 S0b를 등록하려 했다. Asset component가
+5/9로 실패했으므로 S0b는 등록하지 않는다. 아래는 실행하지 않은 설계 기록이다.
+S0b는 development
 patient의 manual surface에 smooth local normal perturbation을 주고 동일
 steady solver/BC로 재해석한다. 최소 요구사항은 다음이다.
 
@@ -216,16 +242,18 @@ steady solver/BC로 재해석한다. 최소 요구사항은 다음이다.
 - solver/mesh failure가 특정 perturbation 또는 anatomy에 선택적으로 몰리지
   않음
 
-Threshold, development patients, perturbation basis와 compute budget은 S0a
-결과를 보기 전에 정하지 않는다. S0a가 asset/runtime에서 실패하면 dependency나
-case mapping을 사후 수정해 같은 gate를 반복하지 않는다. 별도 version과 fresh
-audit만 가능하다. S0b가 task non-equivalence 또는 linearization validity를
-지지하지 않으면 후보를 폐기하고 architecture를 만들지 않는다.
+Threshold, development patients, perturbation basis와 compute budget은 정하지
+않았다. Dependency나 case mapping을 사후 수정해 같은 gate를 반복하지 않는다.
+Goal-oriented candidate를 fresh version이라는 이름으로 재개하는 것도 현재
+허용하지 않는다.
 
 ## 8. 현재 허용·금지
 
-허용: S0a asset-component validator/PBS wrapper, exact public commit,
-`introai9` CPU read-only one-shot run, aggregate-only result, 실패 provenance 보존.
-금지: segmentation training, GPU allocation, rupture-label selection, outer test,
-adjoint 성공을 가정한 method name, contribution/paper headline, CMHA CFD summary를
-ground truth field로 사용, closed branch의 checkpoint/threshold 재사용.
+허용: exact 5/9 aggregate와 실패 provenance 보존, public protocol/site/private
+manuscript 동기화, 닫힌 후보를 수리하지 않는 새 problem-level primary-source
+and asset audit.
+
+금지: S0a rerun, case mapping repair, solver v2, S0b, segmentation training, GPU
+allocation, rupture-label selection, outer test, adjoint 성공을 가정한 method
+name, contribution/paper headline, CMHA CFD summary를 ground-truth field로 사용,
+closed branch의 checkpoint/threshold 재사용.

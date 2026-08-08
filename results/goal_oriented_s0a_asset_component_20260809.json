@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "record_type": "scientific_asset_component_result_not_s0a_gate",
+  "protocol_id": "goal_oriented_hemodynamic_segmentation_s0a_asset_component_v1",
+  "public_source_commit": "ef547a4ccb71fa45b4a43e67c0939e2701ebfc11",
+  "scheduler": {
+    "system": "PBS",
+    "job_id": "115119.ECE-util1",
+    "queue": "coss_agpu",
+    "resource": "4_cpu_16_gb_no_gpu",
+    "walltime_seconds": 1271,
+    "cpu_seconds": 64,
+    "peak_memory_kb": 15265936,
+    "exit_status": 0,
+    "final_state": "F",
+    "pbs_post_job_file_processing_error": true,
+    "scheduler_stdout_retained": false
+  },
+  "retained_private_artifact": {
+    "aggregate_bytes": 2130,
+    "aggregate_sha256": "7490fa3165ec47f9ac27c26425146af043db7861a1ff1224fda2a6d7a379b9ae",
+    "status_bytes": 369,
+    "status_sha256": "e41e131da1edbe48258e84074fad76b6acc14b6e01643e0dedda1872016483bb"
+  },
+  "checks": {
+    "official_archive_size_and_md5_match": true,
+    "five_statistical_csv_members_match": true,
+    "patient_lesion_control_counts_match": false,
+    "six_multi_lesion_patient_groups_recovered": true,
+    "all_105_lesions_have_exact_identifier_linked_cta_parent_aneurysm_stl_and_aneurysm_stl": false,
+    "no_row_order_or_filename_similarity_only_linkage": false,
+    "nifti_spacing_orientation_and_stl_units_frames_are_finite_and_plausible": false,
+    "aggregate_contains_no_identifier_private_path_image_voxel_or_field_payload": true,
+    "training_gpu_outer_test_and_rupture_label_use_are_zero": true
+  },
+  "checks_passed": 5,
+  "checks_total": 9,
+  "aggregate": {
+    "archive_contracts_matching": 3,
+    "archive_contracts_total": 3,
+    "statistical_csv_members": 5,
+    "patient_records": 105,
+    "unique_patients": 99,
+    "multi_lesion_patient_groups": 6,
+    "control_records": 44,
+    "morphology_lesion_ids": 105,
+    "unique_morphology_lesion_ids": 105,
+    "unique_hemodynamic_lesion_ids": 98,
+    "case_directories": 99,
+    "required_triplets": 0,
+    "geometry_cases_passed": 0,
+    "geometry_cases_failed_by_unmet_linkage_precondition": 105,
+    "nifti_or_stl_header_opened": false,
+    "accepted_frame_transform_counts": {}
+  },
+  "interpretation": {
+    "archive_and_table_member_integrity": "supported",
+    "patient_grouping_counts": "supported",
+    "lesion_level_exact_linkage": "unsupported",
+    "linkage_failure": "the_extracted_case_directory_unit_is_99_patients_while_morphology_has_105_unique_lesion_ids_and_hemodynamics_has_98_unique_identifiers",
+    "geometry_plausibility": "not_reached_because_exact_lesion_linkage_precondition_failed",
+    "model_learnability_or_functional_utility_inferred": false
+  },
+  "privacy_and_access_boundary": {
+    "source_identifiers_written": false,
+    "private_paths_written": false,
+    "image_voxels_read": false,
+    "cfd_fields_read": false,
+    "rupture_label_values_used": false,
+    "model_access": false,
+    "gpu_access": false,
+    "outer_test_access": false
+  },
+  "verdict": {
+    "asset_component": "failed_5_of_9",
+    "s0a_gate": "not_evaluated",
+    "candidate_status": "closed_at_asset_integrity_before_solver_v2",
+    "same_source_rerun": false,
+    "solver_preflight_v2_authorized": false,
+    "method_architecture_gpu_outer_test_or_submission_authorized": false,
+    "authorized_next_action": "begin_a_new_problem_level_audit_without_repairing_or_relabelling_this_candidate"
+  }
+}

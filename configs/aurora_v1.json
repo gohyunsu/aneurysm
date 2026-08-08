@@ -1,18 +1,18 @@
 {
-  "schema_version": "2.8",
+  "schema_version": "2.9",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_goal_oriented_segmentation_asset_component_preregistered",
+    "status": "failed_branches_preserved_no_active_problem_after_goal_oriented_asset_failure",
     "as_of": "2026-08-09",
     "clinical_use": false
   },
   "problem_selection": {
-    "status": "one_conditional_problem_shortlist_before_s0a_asset_component",
-    "shortlisted_candidate": "goal_oriented_hemodynamic_segmentation",
-    "candidate_dataset": "cmha_primary_openneuro_ds005096_external_only",
-    "candidate_estimand": "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains",
-    "asset_access_status": "official_archive_integrity_verified_post_transport_failure_extracted_linkage_unopened",
+    "status": "no_active_problem_after_goal_oriented_asset_component_failure",
+    "shortlisted_candidate": "none",
+    "candidate_dataset": "none",
+    "candidate_estimand": "none",
+    "asset_access_status": "cmha_asset_component_failed_5_of_9_exact_lesion_linkage_unsupported",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -21,7 +21,7 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "execute_one_read_only_introai9_s0a_asset_component_and_early_stop_before_any_solver_v2",
+    "next_allowed_action": "conduct_a_new_problem_level_primary_source_and_asset_audit_without_repairing_closed_candidates",
     "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
@@ -53,7 +53,7 @@
       "decision": "reject_annotation_selection_aware_mixed_granularity_lesion_set_candidate"
     },
     "goal_oriented_segmentation_cold_audit": {
-      "status": "completed_primary_source_and_runtime_discovery_conditional_problem_shortlist",
+      "status": "closed_after_completed_asset_component_failed_5_of_9",
       "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
       "direct_prior_narrowing": {
         "status": "completed_primary_source_red_team",
@@ -88,7 +88,11 @@
       "cmha_source_asset_discovery_record_sha256": "0bdc8e5c901318ab3c46ec3f877a8f9d2c5a999279f717d3cdb5ced13fdf19b5",
       "s0a_asset_component_config": "configs/goal_oriented_segmentation_s0a_asset_component.json",
       "s0a_asset_component_config_sha256": "f951d68b42e2590fe57d0739f2b16a72893347c1feadc9ddab631f40ffa633e7",
-      "s0a_asset_component_status": "preregistered_before_csv_identifier_nifti_or_stl_access",
+      "s0a_asset_component_status": "completed_failed_5_of_9_exact_lesion_linkage_precondition_failed",
+      "s0a_asset_component_source_commit": "ef547a4ccb71fa45b4a43e67c0939e2701ebfc11",
+      "s0a_asset_component_result": "results/goal_oriented_s0a_asset_component_20260809.json",
+      "s0a_asset_component_result_sha256": "c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e",
+      "s0a_asset_component_gate": "5_of_9_failed_asset_component_s0a_not_evaluated",
       "s0a_asset_component_pass_authorizes": "register_one_distinct_prospective_no_runtime_network_solver_preflight_v2_only",
       "score": 27.0,
       "maximum_score": 40.0,
@@ -99,17 +103,18 @@
       "outer_test_authorized": false,
       "submission_identity_active": false,
       "direct_gap": "cta_multi_functional_signed_adjoint_pullback_with_remainder_control_and_held_out_functional_superiority",
-      "required_next_gate": "s0a_asset_component_then_solver_runtime_only_if_asset_passes",
+      "required_next_gate": "none_candidate_closed_at_asset_component",
       "s0a_pass_authorizes": "register_method_free_s0b_functional_non_equivalence_and_linearization_audit_only",
-      "s0a_failure_action": "close_candidate_version_without_model_gpu_or_outer_test"
+      "s0a_failure_action": "executed_close_candidate_without_solver_v2_model_gpu_or_outer_test"
     },
-    "most_recent_closed_candidate": "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
+    "most_recent_closed_candidate": "goal_oriented_hemodynamic_segmentation",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
       "geometry_boundary_condition_shape_response_operator",
       "cross_protocol_4d_flow_posterior_prediction",
-      "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference"
+      "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
+      "goal_oriented_hemodynamic_segmentation"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -136,7 +141,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_pending_s0a_s0b_and_prospective_model_evidence",
+    "required_headline_domain": "unselected_no_active_problem_after_goal_oriented_asset_failure",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -200,10 +205,10 @@
     "historical_application_endpoint": "cross_sectional_rupture_status",
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
-    "active_candidate_problem": "goal_oriented_hemodynamic_segmentation",
-    "active_candidate_status": "conditional_problem_shortlist_before_s0a_no_method_or_paper_identity",
-    "candidate_primary_estimand": "patient_disjoint_standardized_cfd_functional_error_difference_between_predicted_and_manual_domains",
-    "candidate_secondary_estimand": "functional_error_not_explained_by_standard_geometry_metrics_under_matched_solver_boundary_conditions",
+    "active_candidate_problem": "none",
+    "active_candidate_status": "closed_after_goal_oriented_s0a_asset_component_failed_5_of_9",
+    "candidate_primary_estimand": "none",
+    "candidate_secondary_estimand": "none",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
     "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
     "i0a_source_commit": "f7b4e024d69d43cf042f4163342b4d993386f441",
@@ -364,8 +369,8 @@
       "primary": [
         "no_contribution_confirmed_after_failed_N1c"
       ],
-      "conditional_problem_not_contribution": [
-        "signed_adjoint_projection_supervision_for_standardized_functional_error_pending_S0a_and_S0b"
+      "closed_problem_not_contribution": [
+        "signed_adjoint_projection_supervision_for_standardized_functional_error_closed_after_S0a_asset_component_failed_5_of_9"
       ],
       "unsupported_candidate": [
         "C1_nested_condition_marginal_coherence_with_solution_functional_decision_benefit"
@@ -468,10 +473,10 @@
     },
     {
       "name": "cmha",
-      "role": "conditional_goal_oriented_s0a_image_surface_linkage_and_standardized_functional_task_audit",
+      "role": "closed_goal_oriented_s0a_asset_history_not_an_active_primary",
       "field_provenance": "real_cfd",
       "split_unit": "patient",
-      "status": "official_archive_integrity_verified_extracted_linkage_unopened_asset_component_preregistered",
+      "status": "asset_component_failed_5_of_9_exact_lesion_level_image_surface_table_linkage_unsupported",
       "patients": 99,
       "aneurysms": 105,
       "controls": 44,
@@ -504,7 +509,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_pending_S0a_and_S0b",
+    "current_headline_architecture": "unselected_no_active_problem_after_goal_oriented_asset_failure",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

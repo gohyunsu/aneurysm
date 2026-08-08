@@ -1,4 +1,7 @@
 import copy
+import hashlib
+import json
+import re
 import struct
 import tempfile
 import unittest
@@ -17,6 +20,8 @@ from aurora.goal_oriented_s0a_asset import (
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "goal_oriented_segmentation_s0a_asset_component.json"
 PBS = ROOT / "cluster" / "pbs_goal_oriented_s0a_asset_component.pbs"
+RESULT = ROOT / "results" / "goal_oriented_s0a_asset_component_20260809.json"
+RESULT_SHA256 = "c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e"
 
 
 class GoalOrientedS0AAssetTests(unittest.TestCase):
@@ -25,6 +30,29 @@ class GoalOrientedS0AAssetTests(unittest.TestCase):
 
     def test_reference_config_is_valid(self) -> None:
         self.assertEqual(len(validate_asset_config(self.config)), 5)
+
+    def test_public_result_preserves_the_failed_asset_gate(self) -> None:
+        payload = json.loads(RESULT.read_text(encoding="utf-8"))
+        self.assertEqual(payload["checks_passed"], 5)
+        self.assertEqual(payload["checks_total"], 9)
+        self.assertEqual(payload["verdict"]["asset_component"], "failed_5_of_9")
+        self.assertEqual(payload["verdict"]["s0a_gate"], "not_evaluated")
+        self.assertFalse(payload["verdict"]["solver_preflight_v2_authorized"])
+        self.assertFalse(
+            payload["verdict"]["method_architecture_gpu_outer_test_or_submission_authorized"]
+        )
+        self.assertFalse(payload["aggregate"]["nifti_or_stl_header_opened"])
+
+    def test_public_result_hash_and_privacy_boundary_are_exact(self) -> None:
+        raw = RESULT.read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), RESULT_SHA256)
+        text = raw.decode("utf-8")
+        self.assertNotIn("/home/", text)
+        self.assertNotRegex(text, r"147[.]46")
+        self.assertIsNone(re.search(r"[\w.+-]+@[\w.-]+", text))
+        payload = json.loads(text)
+        self.assertFalse(payload["privacy_and_access_boundary"]["source_identifiers_written"])
+        self.assertFalse(payload["privacy_and_access_boundary"]["private_paths_written"])
 
     def test_positional_or_similarity_linkage_cannot_be_enabled(self) -> None:
         candidate = copy.deepcopy(self.config)

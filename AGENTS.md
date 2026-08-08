@@ -14,20 +14,22 @@ cold audit와 S0a preregistration, official precompiled SU2의 reverse-AD
 negative control 및 별도 solver preflight 등록, CMHA staging v1
 execution-incomplete와 one-change chunked v2 등록, 이어진 v2/solver-preflight-v1
 execution-incomplete 보존, `introai9` 기존 CMHA archive 3/3 size·MD5 discovery와
-CSV/identifier/NIfTI/STL access 전 asset-component early-stop 등록, inverse Navier--Stokes
-shape-gradient segmentation과 task-based quantitative segmentation 평가를
-추가 direct prior로 올린 novelty red team을 반영했다.
+CSV/identifier/NIfTI/STL access 전 asset-component early-stop 등록, inverse
+Navier--Stokes shape-gradient segmentation과 task-based quantitative segmentation
+평가를 추가 direct prior로 올린 novelty red team, 그리고 exact `ef547a4…`
+asset component의 5/9 실패와 goal-oriented 후보 종료를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
-- 현재 primary problem과 method는 **선택되지 않았다**. Problem shortlist는
-  **조건부 1개**다. Goal-oriented hemodynamic segmentation은 CTA boundary
-  displacement를 PDE adjoint shape sensitivity에 signed projection해
-  standardized CFD functional error를 줄일 수 있는지 묻는다. Method,
-  architecture, GPU, outer test와 paper identity는 모두 미선정이다.
+- 현재 primary problem과 method는 **선택되지 않았다**. Active problem
+  shortlist는 **0개**다. Goal-oriented hemodynamic segmentation은 CTA
+  boundary displacement를 PDE adjoint shape sensitivity에 signed projection해
+  standardized CFD functional error를 줄일 수 있는지 물었지만 S0a asset
+  component에서 5/9 실패해 닫혔다. Method, architecture, GPU, outer test와
+  paper identity는 모두 미선정이다.
 - 새 후보의 score는 27.0/40로 자동 선택 기준 32에 못 미친다.
   `configs/goal_oriented_segmentation_s0a.json`의 CPU/read-only S0a가 CMHA
   99 patient/105 lesion exact image–surface–table linkage와 별도 pinned
@@ -68,6 +70,17 @@ shape-gradient segmentation과 task-based quantitative segmentation 평가를
   하나라도 scientific fail이면 후보를 닫고 solver v2를 만들지 않는다. 9/9도
   S0a pass나 model 권한이 아니라 no-runtime-network solver-preflight-v2 등록만
   허용한다. Execution-incomplete면 같은 public source를 반복하지 않는다.
+- Exact public source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의 CPU/PBS
+  asset job `115119.ECE-util1`은 exit 0으로 완료됐지만 **5/9 failed**다.
+  Archive integrity, five CSV member set, six multi-lesion group, aggregate privacy와
+  no-model/GPU/test boundary만 통과했다. 99 patient-level case directory와 105
+  lesion table row 사이의 explicit non-positional key가 없어 required triplet은
+  0/105였고 unit count, exact lesion linkage와 그 linkage에 의존하는 geometry
+  check는 실패했다. NIfTI/STL header는 열지 않았으므로 geometry 자체 실패라고
+  쓰지 않는다. S0a는 `not_evaluated`, 후보는 closed이며 solver v2, S0b,
+  method, GPU와 outer test는 모두 금지한다. 공개 aggregate는
+  `results/goal_oriented_s0a_asset_component_20260809.json`, SHA-256은
+  `c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e`다.
 - Automatic segmentation→CFD, Image2Flow의 joint mesh/field CFD loss, IAVS의
   CFD Applicability Score, clDice/cbDice, segmentation-induced flow variability,
   inverse Navier--Stokes shape-gradient boundary segmentation, task-based
@@ -95,19 +108,22 @@ shape-gradient segmentation과 task-based quantitative segmentation 평가를
   되돌리지 않는다. 이들은 향후 fully supervised control 또는 vascular
   anatomy pretraining에 쓸 수 있지만, 기각된 annotation-selection estimand의
   대체 근거가 아니다.
-- 다음 허용 작업은 **`introai9`에서 one-shot S0a asset component CPU/PBS
-  실행**뿐이다. 통과 전 solver v2, 통과/실패와 무관하게 model/GPU/outer test는
-  열지 않는다.
-  S0a/S0b 전에는 architecture, model training, GPU, outer test와 submission
-  claim을 만들지 않는다.
+- 다음 허용 작업은 닫힌 candidate를 수리하지 않는 **fresh problem-level
+  primary-source and asset audit**뿐이다. Goal-oriented S0a를 재실행하거나
+  solver v2/S0b를 등록하지 않는다. 새 problem이 별도 task-unit·asset·direct-gap
+  gate를 통과하기 전에는 architecture, model training, GPU, outer test와
+  submission claim을 만들지 않는다.
 - Vessel graph/GNN, vessel-first nnU-Net, anatomy-masked pooling, location
   transformer, point-to-sphere auxiliary target, generic set prediction, mixed
   supervision, anatomy prompt, foundation model와 conformal/FDR는 단독 novelty가
   아니다. 새 후보에서도 direct prior 또는 strong baseline으로 취급한다.
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
-- 가장 최근에 닫힌 candidate 문제는 **annotation-selection-aware
-  mixed-granularity anatomy-structured lesion-set inference**다. 제공
+- 가장 최근에 닫힌 candidate 문제는 **goal-oriented hemodynamic
+  segmentation**이다. S0a asset component의 explicit lesion-level linkage
+  precondition이 성립하지 않아 5/9로 종료했다. 그 직전은
+  **annotation-selection-aware mixed-granularity anatomy-structured lesion-set
+  inference**다. 제공
   segmentation이 lesion mask가 아니라 혈관 해부구조 mask여서 latent
   annotation-projection 전제가 성립하지 않는다. 그 직전의
   protocol-indexed intracranial 4D-flow posterior prediction도 scientific

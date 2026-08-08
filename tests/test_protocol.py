@@ -18,7 +18,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertGreaterEqual(len(checks), 8)
         self.assertEqual(len(canonical_hash(self.protocol)), 64)
 
-    def test_conditional_problem_cannot_select_method_or_gpu(self) -> None:
+    def test_closed_problem_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
         with self.assertRaisesRegex(ProtocolError, "conditional-problem"):
@@ -32,7 +32,7 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "conditional-problem"):
             validate_protocol(candidate)
 
-    def test_goal_oriented_shortlist_cannot_skip_s0a_or_select_architecture(self) -> None:
+    def test_closed_goal_oriented_candidate_cannot_be_reopened(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
         audit["architecture_selected"] = True
@@ -64,6 +64,31 @@ class ProtocolTests(unittest.TestCase):
         audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
         audit["solver_runtime_preflight_status"] = "passed"
         with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
+        audit["s0a_asset_component_gate"] = "9_of_9_passed"
+        with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
+        audit["s0a_failure_action"] = "register_solver_v2"
+        with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
+            validate_protocol(candidate)
+
+    def test_cmha_cannot_be_restored_as_the_active_primary(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        cmha = next(item for item in candidate["datasets"] if item["name"] == "cmha")
+        cmha["role"] = "active_primary"
+        with self.assertRaisesRegex(ProtocolError, "closed 5/9"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        cmha = next(item for item in candidate["datasets"] if item["name"] == "cmha")
+        cmha["status"] = "asset_gate_passed"
+        with self.assertRaisesRegex(ProtocolError, "closed 5/9"):
             validate_protocol(candidate)
 
     def test_direct_prior_narrowing_cannot_be_removed_or_authorize_training(self) -> None:
@@ -135,7 +160,7 @@ class ProtocolTests(unittest.TestCase):
     def test_i0a_pass_cannot_select_a_method_or_call_cfd_mri_truth(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["active_candidate_status"] = "method_selected"
-        with self.assertRaisesRegex(ProtocolError, "conditional goal-oriented problem"):
+        with self.assertRaisesRegex(ProtocolError, "no active problem or estimand"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["cfd_field_is_clinical_mri_ground_truth"] = True

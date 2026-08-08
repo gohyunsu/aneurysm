@@ -75,7 +75,23 @@ NIfTI/STL header와 voxel/field는 열지 않았으므로 S0a pass가 아니다.
 `configs/goal_oriented_segmentation_s0a_asset_component.json`과
 `cluster/pbs_goal_oriented_s0a_asset_component.pbs`는 `coss_agpu` 4 CPU/16 GB,
 GPU 0으로 exact-ID와 header/mesh만 one-shot 감사한다. Raw/extracted/code는
-read-only env path로 받고 output만 writable하다. 9/9 전 solver v2는 없다.
+read-only env path로 받고 output만 writable하다.
+
+**Asset execution:** exact public source
+`ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의 job `115119.ECE-util1`은 exit
+0, walltime 1,271초, CPU 64초, peak memory 15,265,936 KB로 완료됐다. PBS는
+`Post job file processing error`를 남겨 scheduler stdout은 보존되지 않았지만,
+private aggregate와 status artifact는 정상 보존됐다. Raw aggregate SHA-256은
+`7490fa3165ec47f9ac27c26425146af043db7861a1ff1224fda2a6d7a379b9ae`, status
+SHA-256은 `e41e131da1edbe48258e84074fad76b6acc14b6e01643e0dedda1872016483bb`다.
+
+Scientific result는 5/9 fail이다. 105 patient records/99 unique patients와 105
+morphology IDs/98 unique hemodynamic IDs/99 case directories가 관찰됐지만,
+explicit lesion-level linkage가 없어 required CTA+2 STL triplet은 0/105였다.
+NIfTI/STL header와 voxel/field는 열지 않았다. S0a는 `not_evaluated`이고 후보를
+닫았다. Solver v2, S0b, model, GPU와 outer test는 제출하지 않는다. 공개
+privacy-safe aggregate는
+`results/goal_oriented_s0a_asset_component_20260809.json`이다.
 
 ### SU2 reverse-AD runtime preflight boundary
 
@@ -97,7 +113,7 @@ read-only env path로 받고 output만 writable하다. 9/9 전 solver v2는 없�
 - Exact `64284eb…`의 v1 실행은 official build SIF와 exact source/submodule
   materialization 뒤 exit 1이었다. TestCases/build/runtime/probe/sensitivity는
   남지 않았고 raw stdout도 materialize되지 않았다. 같은 v1을 반복하지 않으며
-  asset component 9/9 뒤에만 no-runtime-network v2를 별도 등록할 수 있다.
+  asset component가 5/9로 실패했으므로 no-runtime-network v2는 등록하지 않는다.
 
 ## 2026-08-08 · Cross-protocol 4D-flow I0a
 

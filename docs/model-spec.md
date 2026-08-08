@@ -7,19 +7,18 @@ scientific verdict · prior BC-operator identity inactive · cross-protocol
 4D-flow I0a asset integrity passed 14/14 · I0b execution-incomplete before
 asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
 supervision-semantics candidate rejected · goal-oriented hemodynamic
-segmentation conditional problem shortlist · staging v2/solver preflight v1
-execution-incomplete · archive integrity 3/3 discovery · asset component before
-CSV/identifier/NIfTI/STL access · method and architecture unselected · no GPU/outer test
+segmentation asset component failed 5/9 and candidate closed · active problem
+shortlist 0 · method and architecture unselected · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
-현재 구현하거나 선택한 headline architecture는 없다. Conditional problem
-shortlist는 1개지만 S0a/S0b 전에는 method shortlist가 아니다. 후보는 manual
-domain의 boundary에서 얻은 signed normal displacement를 미리 정한 PDE
-functional의 adjoint shape gradient에 투영하는 supervision이 표준
-segmentation loss보다 held-out standardized functional error를 줄이는지 묻는다.
+현재 구현하거나 선택한 headline architecture는 없고 active problem shortlist도
+0개다. 닫힌 goal-oriented 후보는 manual domain의 boundary에서 얻은 signed
+normal displacement를 미리 정한 PDE functional의 adjoint shape gradient에
+투영하는 supervision이 표준 segmentation loss보다 held-out standardized
+functional error를 줄이는지 물었다.
 Image2Flow처럼 mesh와 CFD field를 공동 예측하거나, IAVS처럼 solver success를
 높이거나, sensitivity magnitude만 boundary weight로 쓰는 구조는 후보
 contribution이 아니다. Inverse Navier--Stokes에서 shape gradient로 flow image
@@ -29,12 +28,12 @@ contribution이 아니다. Inverse Navier--Stokes에서 shape gradient로 flow i
 CTA predictor에 결합하고 strong baseline보다 functional error를 낮추는 경우로
 더 좁힌다.
 
-S0a는 CMHA exact linkage와 별도 solver/adjoint runtime만 감사한다. Pass도
-method-free perturbation/linearization S0b만 열며 nnU-Net, implicit SDF,
-GNN, neural operator, optimizer와 loss weight를 선택하지 않는다. S0b 뒤에도
-signed projection의 first-order validity와 geometry metric non-equivalence가
-양수여야만 architecture interface와 bounded development search를 별도
-prospective version으로 고정한다.
+S0a asset component는 CMHA exact linkage에서 5/9 실패했다. 99 patient-level
+case directory와 105 lesion row를 explicit non-positional key로 연결하지 못해
+105개의 required image/surface triplet은 0이었다. Linkage에 의존하는 NIfTI/STL
+header audit는 시작하지 않았으므로 geometry 자체 실패로 해석하지 않는다.
+후보는 이 지점에서 닫혔고 solver v2, S0b, nnU-Net, implicit SDF, GNN, neural
+operator, optimizer와 loss weight를 선택하지 않는다.
 
 Solver runtime build는 architecture가 아니다. Direct-only official SU2 binary는
 reverse AD가 없어 제외했고, exact normal+reverse-AD build와 incompressible
@@ -42,15 +41,16 @@ forward/adjoint probe를 별도 preflight로 고정했다. 이 preflight가 성�
 nnU-Net, GNN, SDF decoder, loss 또는 optimizer 선택 권한은 생기지 않으며,
 실패 시 같은 source version을 고쳐 반복하지 않는다. 실제 v1은 reverse-AD
 runtime이나 sensitivity를 만들기 전에 operationally 종료됐으므로 architecture
-evidence가 아니다. 새 solver preflight도 asset component 9/9 뒤에만 별도
-version으로 등록한다.
+evidence가 아니다. Asset component가 5/9로 실패했으므로 새 solver preflight는
+등록하지 않는다.
 
 CMHA staging v1/v2 역시 architecture evidence가 아니다. 둘 다 verified
 payload 이전에 exit 28이었고 S0a를 평가하지 않았다. 이후 source server에서
 official archive 3/3 checksum match를 발견했지만 CSV·identifier·NIfTI/STL은
-열지 않았다. 새 asset-component runner는 standard library로 header/mesh와
-exact-ID linkage만 감사하며 voxel, rupture label, model과 GPU를 읽지 않는다.
-9/9도 backbone, loss, graph representation 또는 architecture를 선택하지 않는다.
+열지 않았다. Asset-component runner는 standard library로 exact-ID linkage를
+먼저 감사했고 voxel, rupture label, model과 GPU를 읽지 않았다. Exact
+`ef547a4…` 실행은 5/9에 그쳐 candidate를 닫았으며 backbone, loss, graph
+representation 또는 architecture를 선택하지 않았다.
 
 직전 RSNA 후보는 제공 segmentation이 aneurysm extent가
 아니라 13-class Circle-of-Willis vessel anatomy라는 공개 근거 때문에
@@ -68,10 +68,11 @@ transformer와 point-to-radius-5-sphere target, 2위 pipeline의 tri-axial ROI�
 [`rsna-supervision-semantics-audit-2026-08-09.md`](rsna-supervision-semantics-audit-2026-08-09.md)를
 따른다.
 
-`configs/goal_oriented_segmentation_s0a.json`과 cold audit가 데이터 의미,
-direct-prior boundary와 realistic evaluation을 먼저 고정한다. S0a/S0b가
-통과하기 전에는 executable model config, training code, GPU job과 outer
-test를 추가하지 않는다.
+`configs/goal_oriented_segmentation_s0a.json`과 cold audit는 닫힌 후보의 데이터
+의미와 direct-prior boundary를 보존한다. 이를 수리해 executable model config,
+training code, GPU job 또는 outer test를 추가하지 않는다. 다음 architecture
+논의는 독립된 새 problem-level audit가 task unit, asset과 gap을 통과한 뒤에만
+시작한다.
 
 공식 source-only dataset substitution screen도 architecture를 열지 않았다.
 CADA·ADAM은 point/mask가 함께 있는 fully supervised challenge이고, IntrA는

@@ -1,21 +1,20 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.1-draft · 2026-08-09
+버전: 3.2-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
-## S0 · goal-oriented segmentation conditional problem gate
+## S0 · goal-oriented segmentation gate · closed at asset component
 
-현재 conditional problem shortlist는 goal-oriented hemodynamic segmentation
-1개다. Primary problem, method, architecture와 headline metric은 여전히
-미선정이다. Staging v2와 solver preflight v1은 모두 S0a 전 operational
-execution-incomplete로 보존한다. 다음 허용 작업은
-`configs/goal_oriented_segmentation_s0a_asset_component.json`의 one-shot
-CPU/read-only asset component뿐이다. GPU, segmentation training,
-rupture-label selection, outer test와 paper contribution은 없다.
+현재 active problem shortlist는 0개다. Goal-oriented hemodynamic segmentation의
+staging v2와 solver preflight v1은 S0a 전 operational execution-incomplete로,
+asset component는 exact source `ef547a4…`의 5/9 scientific fail로 보존한다.
+이 후보에는 solver v2, S0b, GPU, segmentation training, rupture-label selection,
+outer test와 paper contribution 권한이 없다. 다음 허용 작업은 별도 후보에 대한
+fresh problem-level primary-source and asset audit다.
 
 직접 선행연구는 inverse Navier--Stokes shape-gradient boundary segmentation과
 task-based quantitative segmentation 평가까지 포함한다. 따라서 S0b는 단순히
@@ -23,7 +22,7 @@ Dice와 CFD functional의 순위가 다름을 보이는 검사가 아니라, 미
 functional의 signed first-order pullback, remeshed forward difference와
 remainder/trust-region validity가 동시에 식별되는지를 검사해야 한다.
 
-### S0a · CMHA linkage and solver runtime integrity · preregistered
+### S0a · CMHA linkage and solver runtime integrity · not evaluated, candidate closed
 
 S0a는 99 patient/105 lesion/44 control/6 multi-lesion-patient unit, official
 archive size/MD5/license, 105 lesion의 CTA–parent/aneurysm STL–aneurysm STL–
@@ -33,9 +32,10 @@ all-or-none check로 감사한다. Row order나 filename similarity만으로 map
 않고 public aggregate에 identifier, private path, voxel 또는 field를 쓰지
 않는다. 현재 PyTorch image에 mesh/PDE stack이 없다는 것은 등록 전 discovery다.
 
-- all 11 pass: method-free S0b 등록만 허용
+- all 11 pass: method-free S0b 등록만 허용하도록 등록했으나 도달하지 못함
 - any fail: 같은 version의 dependency/mapping repair rerun 없이 후보 종료
-- pass도 금지: model/GPU/outer test/submission identity
+- observed: asset component 5/9, S0a `not_evaluated`, 후보 종료
+- 계속 금지: solver v2/S0b/model/GPU/outer test/submission identity
 
 #### S0a-D · CMHA staging execution · v1/v2 incomplete, transport closed
 
@@ -69,7 +69,7 @@ identifier, NIfTI/STL header, voxel과 field를 열지 않았고 정식 S0a exec
 아니었다. 공개 aggregate는
 `results/goal_oriented_s0a_cmha_source_asset_discovery_20260809.json`이다.
 
-#### S0a-A · source-server asset component · preregistered, early stop
+#### S0a-A · source-server asset component · completed/failed 5 of 9
 
 `configs/goal_oriented_segmentation_s0a_asset_component.json`은 위 discovery 뒤,
 CSV와 medical header access 전에 고정했다. Pure-standard-library runner는
@@ -86,11 +86,25 @@ CSV와 medical header access 전에 고정했다. Pure-standard-library runner�
 8. identity 또는 fixed LPS→RAS x/y sign flip, scale 1.0에서 CTA world bounds containment
 9. identifier/private path/voxel/field/rupture-label value/model/GPU/test가 없는 aggregate
 
-하나라도 scientific check가 실패하면 전체 S0a의 all-or-none rule상 현재 후보를
-닫고 solver preflight v2를 만들지 않는다. 9/9도 S0a pass가 아니라 한 번의
-no-runtime-network solver preflight v2 등록만 허용한다. Job이 metric 전에
-execution-incomplete면 verdict를 만들지 않지만 같은 public source도 반복하지
-않는다.
+Exact public source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의 CPU/PBS
+job `115119.ECE-util1`은 exit 0으로 완료됐다. Public result는
+`results/goal_oriented_s0a_asset_component_20260809.json`, SHA-256은
+`c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e`다.
+
+통과한 check는 archive size/MD5 3/3, five statistical CSV member set, six
+multi-lesion patient group, aggregate privacy, no model/GPU/outer-test/rupture-label
+access다. 실패한 check는 frozen patient/lesion/control count contract, 105
+lesion exact identifier-linked CTA/STL triplet, non-positional linkage, 그리고
+그 linkage 뒤에만 수행하도록 등록한 NIfTI/STL unit/frame plausibility다.
+관찰된 구조는 105 patient record, 99 unique patient, 105 morphology lesion ID,
+98 unique hemodynamic ID와 99 patient-level case directory였다. Required triplet은
+0/105였다.
+
+NIfTI/STL header는 열지 않았다. 따라서 마지막 항은 geometry 자체가
+implausible하다는 결과가 아니라 **exact lesion linkage precondition failure로
+미도달한 check**다. 전체 asset component는 5/9 failed이고 S0a는
+`not_evaluated`다. Frozen action대로 후보를 닫고 solver preflight v2와 S0b를
+등록하지 않는다. 같은 source의 mapping repair·rerun도 금지한다.
 
 #### S0a-P · solver runtime preflight · preregistered, not S0a
 
@@ -109,7 +123,8 @@ linux/amd64 OCI manifest를 exact하게 고정한다. CPU/PBS에서 normal과 re
 4. finite, nonzero surface-sensitivity와 runtime/binary SHA 기록
 5. medical asset, model, GPU, outer-test access가 모두 0인지 기록
 
-10/10은 exact runtime overlay를 pin하고 **등록된 S0a를 한 번 실행할 권한**만
+10/10은 원래 exact runtime overlay를 pin하고 **등록된 S0a를 한 번 실행할
+권한**만
 준다. 이것은 S0a 11-check pass, shape-gradient accuracy, S0b, method 또는
 contribution evidence가 아니다. 실패한 동일 source version은 dependency나
 flag를 현장에서 고쳐 반복하지 않고 별도 prospective preflight version을
@@ -119,14 +134,14 @@ Official build SIF, SU2 exact HEAD/COPYING/config와 11/11 submodule HEAD는
 probe와 sensitivity는 없다. PBS stdout이 materialize되지 않아 exact shell
 failure는 unresolved다. 이 결과는
 `results/goal_oriented_s0a_solver_preflight_v1_execution_20260809.json`에 보존하며
-같은 v1을 재실행하지 않는다. Asset component 9/9 전에는 v2도 등록하지 않는다.
+같은 v1을 재실행하지 않는다. Asset component가 5/9로 실패했으므로 v2는
+등록하지 않는다.
 
-S0b는 S0a 결과 전에 수치·patient를 소급해 정하지 않는다. 별도 prospective
-contract에서 smooth surface perturbation의 forward solve와 adjoint first-order
-prediction, mesh/BC stability, matched-Dice functional non-equivalence를 먼저
-검사한다. S0b가 실패하면 architecture를 만들지 않는다. 이후 development가
-열려도 test 봉인, 총 compute, 최대 repair round, 단일 attribution hypothesis와
-fresh re-entry 원칙을 그대로 적용한다.
+S0b는 등록하지 않는다. 아래의 smooth surface perturbation, forward/adjoint
+first-order prediction, mesh/BC stability와 matched-Dice non-equivalence 계획은
+실행되지 않은 historical design으로만 남긴다. 이를 같은 후보의 development로
+재개하지 않는다. 새 문제도 test 봉인, 총 compute, 최대 repair round, 단일
+attribution hypothesis와 fresh re-entry 원칙을 그대로 적용한다.
 
 ### L0-R · RSNA supervision-semantics red team · completed/rejected
 

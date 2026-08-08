@@ -4,6 +4,40 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Goal-oriented candidate closes after S0a asset component fails 5/9
+
+- Exact prospective source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의
+  CPU/PBS job `115119.ECE-util1`은 exit 0으로 완료됐지만 frozen asset
+  component는 **5/9 failed**다.
+- 통과한 항목은 official archive size/MD5 3/3, five CSV member set, six
+  multi-lesion patient group, aggregate privacy와 no-model/GPU/outer-test boundary다.
+  Frozen patient/lesion/control count, 105-lesion exact CTA/STL/table linkage,
+  non-positional linkage와 linkage-dependent unit/frame check는 실패했다.
+- 관찰 단위는 105 patient records, 99 unique patients, 105 morphology lesion
+  IDs, 98 unique hemodynamic IDs와 99 patient-level case directories였다.
+  Required CTA+parent/aneurysm STL+aneurysm STL triplet은 0/105다.
+- NIfTI/STL header, voxel과 field는 열지 않았다. 따라서 unit/frame 항목은
+  geometry 자체가 implausible하다는 결과가 아니라 exact-linkage 전제조건
+  실패로 미도달한 check다.
+- S0a 전체는 `not_evaluated`로 보존한다. Frozen early-stop대로 goal-oriented
+  candidate를 닫고 solver preflight v2, S0b, model, GPU와 outer test를 열지
+  않는다. 같은 source의 case-mapping repair나 rerun도 금지한다.
+- Public privacy-safe result는
+  `results/goal_oriented_s0a_asset_component_20260809.json`, SHA-256은
+  `c220cb8d92909a5a401b29ad5b75d54f4881d9db4a32ea6f33dd6007e424ad6e`다.
+  중앙 schema는 `2.9`, active problem shortlist는 0이다. 다음 허용 작업은
+  닫힌 후보를 수리하지 않는 fresh problem-level primary-source and asset
+  audit다.
+- 영향 파일: `results/goal_oriented_s0a_asset_component_20260809.json`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`,
+  `tests/test_protocol.py`, `tests/test_goal_oriented_s0a_asset.py`, `AGENTS.md`,
+  `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/goal-oriented-segmentation-audit-2026-08-09.md`,
+  `docs/server-execution.md`, `docs/datasets.md`, `docs/literature-lineage.md`,
+  `results/README.md`, `site/index.html`, `site/learn.html`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Source-server S0a asset gate is deployed and verified
 
 - Exact prospective source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의

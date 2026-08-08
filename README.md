@@ -4,11 +4,12 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 problem shortlist는 **조건부 1개**입니다. 새 후보인 goal-oriented
-hemodynamic segmentation은 CTA 경계 오차를 PDE adjoint shape sensitivity에
-signed projection하여 standardized CFD functional error를 줄일 수 있는지
-묻습니다. 이는 아직 method나 paper identity가 아니며, CMHA exact linkage와
-solver/adjoint runtime을 검사하는 S0a만 열려 있습니다. 근거와 kill rule은
+현재 active problem shortlist는 **0개**입니다. Goal-oriented hemodynamic
+segmentation 후보는 CTA 경계 오차를 PDE adjoint shape sensitivity에 signed
+projection하는 문제를 검토했지만, exact public source `ef547a4…`의 CMHA
+asset component가 9개 check 중 5개만 통과해 닫혔습니다. 이는 method나 paper
+identity로 채택되지 않았고 solver v2, S0b, model, GPU와 outer test도 열지
+않았습니다. 근거와 kill rule은
 [`goal-oriented segmentation cold audit`](docs/goal-oriented-segmentation-audit-2026-08-09.md)에
 있습니다.
 
@@ -34,8 +35,12 @@ vascular-anatomy pretraining에는 쓸 수 있지만, 기각된 annotation-selec
 estimand의 대체 데이터가 아닙니다. 어느 image/annotation payload도 읽지
 않았고 method, GPU와 outer test는 열리지 않았습니다.
 
-가장 최근에 닫은 candidate는 위 **RSNA selection-aware lesion-set
-inference**입니다. 그 직전에 닫은 intracranial 4D-flow MRI의
+가장 최근에 닫은 candidate는 **goal-oriented hemodynamic segmentation**입니다.
+CMHA에 99 patient-level case directory와 105 lesion table row가 있었지만,
+105 lesion을 CTA와 두 STL에 연결하는 explicit identifier contract가 없었고
+required triplet은 0/105였습니다. NIfTI/STL geometry는 linkage 전제조건이
+깨져 header를 열지 않았으므로 별도 실패로 과장하지 않습니다. 그 이전의
+RSNA selection-aware lesion-set inference와 intracranial 4D-flow MRI의
 protocol-indexed posterior prediction은 한 acquisition에서 추론한 latent
 flow posterior가 같은 controlled phantom flow의 다른
 resolution·acceleration·VENC acquisition을 measurement space에서 예측할 수
@@ -43,19 +48,18 @@ resolution·acceleration·VENC acquisition을 measurement space에서 예측할 
 reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르지
 않습니다.
 
-> **AURORA** — 기존 프로젝트명은 유지하지만, 새 problem, 방법명과
-> architecture는 선택되지 않았습니다. S0a/S0b가 데이터 linkage, solver,
-> functional non-equivalence와 first-order validity를 통과하기 전에는 GNN,
-> U-Net, training config와 submission claim을 만들지 않습니다.
+> **AURORA** — 기존 프로젝트명은 실패 이력의 연속성을 위해 유지하지만,
+> active problem, 방법명과 architecture는 없습니다. 닫힌 S0a를 수리하거나
+> GNN·U-Net·training config를 먼저 고르지 않고, 새 problem-level audit가
+> 데이터·estimand·direct-prior gap을 독립적으로 통과해야 합니다.
 
-## 현재 단계 · conditional problem shortlist 1, method/GPU 없음
+## 현재 단계 · active problem shortlist 0, method/GPU 없음
 
-현재 허용된 다음 작업은 prospective **S0a asset component** CPU/read-only
-audit 한 번입니다. CMHA의 archive, 99 patient/105 lesion/44 control unit,
-영상–표면–table exact-ID linkage와 NIfTI/STL unit·frame을 9개 all-or-none
-check로 먼저 확인합니다. 하나라도 실패하면 solver를 다시 만들지 않고 후보를
-닫습니다. 9/9도 S0a pass가 아니며, no-runtime-network solver preflight v2를
-별도 등록할 권한만 엽니다. Executable model, GPU job과 outer test는 없습니다.
+현재 허용된 다음 작업은 닫힌 후보를 수리하지 않는 **fresh problem-level
+primary-source and asset audit**입니다. 새 후보는 method를 붙이기 전에 임상·영상
+task unit, 실제 확보 가능한 supervision, 직접 선행의 잔여 gap과 method-free
+task adequacy를 순서대로 증명해야 합니다. Executable headline model, GPU job,
+outer test와 submission identity는 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.
@@ -85,7 +89,15 @@ source asset을 확인해 세 official archive의 byte size와 MD5가 3/3 정확
 STL 또는 voxel을 열지 않았고 S0a pass가 아닙니다. 따라서 추가 다운로드나
 15.6 GB raw transfer를 반복하지 않고
 [`asset component`](configs/goal_oriented_segmentation_s0a_asset_component.json)를
-source server에서 한 번 실행합니다. 실행 기록은
+exact source `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`에서 CPU/PBS로 한 번
+실행했습니다. Job은 exit 0이었지만 **5/9 fail**이었습니다. Archive 3/3,
+CSV member set, 6 multi-lesion group, aggregate privacy와 no-model/GPU boundary는
+통과했습니다. 반면 unit count contract, 105-lesion exact linkage,
+non-positional linkage, linkage 뒤 geometry audit는 통과하지 못했습니다.
+따라서 S0a는 `not_evaluated`, 후보는 closed이며 solver preflight v2는 만들지
+않습니다. 공개 aggregate는
+[`asset result`](results/goal_oriented_s0a_asset_component_20260809.json)입니다.
+이전 실행 기록은
 [`v1 execution record`](results/goal_oriented_s0a_cmha_stage_v1_execution_20260809.json)에
 더해 [`v2 execution record`](results/goal_oriented_s0a_cmha_stage_v2_execution_20260809.json),
 [`solver execution record`](results/goal_oriented_s0a_solver_preflight_v1_execution_20260809.json),

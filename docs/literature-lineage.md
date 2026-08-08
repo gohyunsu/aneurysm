@@ -5,7 +5,7 @@
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
 
-## 0-A. Current conditional gap · signed adjoint projection supervision
+## 0-A. Closed gap hypothesis · signed adjoint projection supervision
 
 새 후보는 generic segmentation→CFD가 아니다. Image2Flow는 이미 3D MRI에서
 patient-specific volume mesh와 pointwise pressure/velocity를 공동 예측하고
@@ -28,7 +28,10 @@ predefined PDE-functional adjoint gradient에 투영해 의료영상 segmentatio
 supervision으로 사용하고, first-order remainder와 patient-disjoint functional
 error 감소를 함께 보이는 정확한 algorithm에만 남을 수 있다. CFD pipeline,
 joint field head, solver success, sensitivity magnitude weighting 또는 새 이름은
-novelty가 아니다. S0a/S0b 전에는 이 gap도 가설이다.
+novelty가 아니다. 이 gap은 애초 가설이었고 S0a asset component가 5/9로
+실패하면서 현재 후보에서 폐기됐다. Exact lesion-level image–surface linkage가
+없는 상태에서 mapping을 수리해 같은 algorithmic gap을 다시 주장하지 않는다.
+다음 active gap은 fresh problem-level audit에서 새로 정한다.
 
 - [Image2Flow](https://doi.org/10.1371/journal.pcbi.1012231)
 - [IAVS](https://arxiv.org/abs/2512.01319)
