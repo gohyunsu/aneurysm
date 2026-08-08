@@ -160,11 +160,36 @@ volume와 세 boundary patch가 있는지 검사한다. Payload는 train base fa
 Validation/test는 중앙 디렉터리 metadata만 읽고 payload는 읽지 않으며,
 train VTP 안의 `U/p` base64 bytes도 array value로 decode하지 않는다.
 
-8개 check를 모두 통과해도 새 boundary-aware cache **staging audit 등록**만
-허용한다. V1 failure, local-repair 금지와 no-test boundary는 유지한다. V1b는
-boundary token/known-BC operator의 novelty나 성능 증거가 아니며, 실제 staging
-전에는 patch component, coordinate frame, connectivity, unit과 license를 다시
-고정해야 한다.
+**Outcome · 2026-08-08.** Exact source `fb1c21a`의 CPU audit은 20 archive,
+64 case, 384 required member와 train representative 60 VTP를 확인해 8/8을
+통과했다. Representative point/polygon count는 각각 548--11,343과
+470--5,675였고 manifest SHA-256은 public aggregate에 고정했다. Validation/test
+payload, `U/p` field value, model과 checkpoint는 읽지 않았다. Public aggregate는
+`results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json`이다. 이 결과는 새
+boundary-aware cache **staging audit 등록**만 허용한다. V1 failure,
+local-repair 금지와 no-test boundary는 유지한다.
+
+### V1c · Train-only boundary-geometry staging audit
+
+`configs/aneumo_isbi_v1c_boundary_geometry_staging_audit.json`은 V1b pass 뒤,
+geometry array value를 decode하기 전에 고정한다. Train base family마다 가장
+작은 case 하나만 선택하고 inlet/outlet/wall patch를 0.001, 0.0025,
+0.004 kg/s에서 읽어 총 180 VTP payload를 CRC 검증한다. Compact cache에서는
+각 representative의 `coordinates_m`만 읽는다.
+
+VTP에서는 `Points`, polygon `connectivity`, `offsets`만 decode한다. 세 flow의
+geometry가 bitwise 동일한지, polygon validity가 0.999 이상인지, patch area와
+geometry-only inlet/outlet normal이 finite/nonzero인지, compact internal
+coordinates가 boundary bounding box의 diagonal 5% margin 안에 있는지 모두
+검사한다. `U`, `p`, `TimeValue`, validation/test payload, model/checkpoint와
+학습은 접근하지 않는다. 성공한 경우에만 20-case geometry-only private cache를
+원자적으로 확정하며 public result에는 그 SHA-256만 기록한다.
+
+8개 check를 모두 통과해도 **full boundary-aware geometry-cache staging
+protocol 등록**만 허용한다. V1 relabel, 이전 backbone 재사용·수정, 학습,
+V2/test, method novelty와 submission은 열지 않는다. 실패하면 threshold,
+flow, representative 또는 coordinate margin을 국소 수정하지 않고 asset
+representation을 재판정한다.
 
 ## 1. 검증할 가설
 

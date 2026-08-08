@@ -1,0 +1,78 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v1c_boundary_geometry_staging_audit.v1",
+  "experiment_id": "aneumo_isbi_v1c_boundary_geometry_staging_audit",
+  "status": "preregistered_after_v1b_pass_before_geometry_array_decode",
+  "as_of": "2026-08-08",
+  "purpose": "Verify that boundary geometry can be decoded once, remains invariant across registered flow conditions, and shares the compact-cache coordinate frame before any boundary-aware model or full cache is specified.",
+  "source": {
+    "dataset": "Aneumo",
+    "hf_repo": "SAIS-Life-Science/Aneumo",
+    "hf_repo_commit": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "license": "CC-BY-NC-ND-4.0",
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "v1b_result": "results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json",
+    "v1b_result_sha256": "8cc4871f8d8b234c7c3f3cb3763e5cc959b5653e26349497eb55d2e17b54d901",
+    "compact_cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
+  },
+  "discovery_boundary": {
+    "already_inspected": "archive_1_case_1_vtp_headers_and_array_names_only",
+    "geometry_array_values_decoded_before_registration": false,
+    "v1b_is_post_discovery_asset_evidence": true
+  },
+  "access": {
+    "splits": ["train"],
+    "representative_case_selection": "lowest_case_id_in_each_train_base_family",
+    "compact_cache_datasets_read": ["coordinates_m"],
+    "compact_cache_field_values_read": false,
+    "vtp_arrays_decoded": ["Points", "connectivity", "offsets"],
+    "vtp_field_arrays_not_decoded": ["U", "p", "TimeValue"],
+    "validation_payload_read": false,
+    "test_payload_read": false,
+    "model_or_checkpoint_use": false,
+    "training": false
+  },
+  "audit": {
+    "train_representative_cases": 20,
+    "patches": ["inlet", "outlet", "wall"],
+    "flow_values_kg_s": [0.001, 0.0025, 0.004],
+    "reference_flow_kg_s": 0.0025,
+    "payload_members": 180,
+    "require_exact_q_invariant_points_and_connectivity": true,
+    "minimum_valid_polygon_fraction": 0.999,
+    "internal_coordinate_bounds_margin_fraction_of_diagonal": 0.05,
+    "derive_outward_inlet_outlet_normals_from_geometry_only": true
+  },
+  "private_cache": {
+    "contents": "reference_flow_boundary_points_connectivity_offsets_and_geometry_summaries_for_twenty_train_representatives",
+    "contains_U_or_p": false,
+    "contains_validation_or_test": false,
+    "redistributable": false,
+    "public_result_records_sha256_only": true
+  },
+  "gate": {
+    "rule": "all_registered_checks",
+    "checks": [
+      "v1b_pass_and_pinned_source_integrity",
+      "exact_twenty_train_representatives_and_one_hundred_eighty_payloads",
+      "all_vtp_geometry_arrays_crc_verified_and_decoded",
+      "points_and_connectivity_exactly_invariant_across_three_flows",
+      "all_polygon_topologies_valid_with_fraction_at_least_0.999",
+      "all_patch_areas_and_inlet_outlet_frames_finite_and_nonzero",
+      "all_compact_internal_coordinates_within_margin_expanded_boundary_bounds",
+      "no_field_value_validation_test_model_or_checkpoint_access"
+    ],
+    "pass_authorizes": "register_full_boundary_aware_geometry_cache_staging_protocol_only",
+    "pass_does_not_authorize": [
+      "relabel_v1",
+      "reuse_or_tune_v1_backbones",
+      "model_training",
+      "v2_or_test_field_access",
+      "method_novelty",
+      "isbi_submission"
+    ],
+    "failure_action": "do_not_stage_shared_boundary_geometry_and_reassess_the_asset_representation_without_local_threshold_repair",
+    "local_repair_allowed": false
+  },
+  "interpretation": "geometry_staging_adequacy_not_model_method_or_clinical_evidence"
+}

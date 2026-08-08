@@ -3,7 +3,8 @@
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
-backbone gate 5/7 fail과 V1a attribution 완료 상태를 반영했다.
+backbone gate 5/7 fail, V1a attribution, V1b asset audit 8/8 pass와
+V1c boundary-geometry staging audit 등록 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -59,10 +60,19 @@ backbone gate 5/7 fail과 V1a attribution 완료 상태를 반영했다.
   발견했다. 이 one-archive discovery는 prospective evidence가 아니다. 이후
   `configs/aneumo_isbi_v1b_boundary_asset_audit.json`에 20 archive·64 case의
   member completeness와 train family당 한 case의 60 VTP CRC/header를
-  체계적으로 감사하도록 고정했다. Validation/test는 중앙 디렉터리만 읽고
-  payload는 train만 읽으며 field value를 decode하지 않는다. V1b pass도 새
-  boundary-aware cache staging audit 등록만 허용하고 V1 relabel, 기존 backbone
-  수선, 학습, V2/test, novelty와 submission은 허용하지 않는다.
+  체계적으로 감사하도록 고정했다. Exact source `fb1c21a`의 CPU audit은
+  8/8을 통과했다. 384 required member와 60 train representative payload를
+  검증했고 validation/test payload와 field array는 읽지 않았다. Public
+  aggregate는 `results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json`이다.
+  이 pass가 허용한 범위 안에서
+  `configs/aneumo_isbi_v1c_boundary_geometry_staging_audit.json`을 geometry
+  array decode 전에 고정했다. V1c는 train family representative 20 case의
+  세 patch×세 flow, 총 180 VTP에서 `Points/connectivity/offsets`만 읽어
+  q-invariance, polygon validity, area/frame와 compact-cache 좌표계를 검사한다.
+  `U/p/TimeValue`, validation/test payload, model/checkpoint와 학습은 읽지
+  않는다. 통과해도 full boundary-aware geometry-cache staging protocol
+  등록만 허용한다. V1 relabel, 기존 backbone 수선, 학습, V2/test, novelty와
+  submission은 계속 금지한다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면

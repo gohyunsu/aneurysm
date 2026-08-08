@@ -83,10 +83,19 @@ archive의 `.msh`, `.stl`, volume `.vtu`, inlet/outlet/wall `.vtp`가 64개
 선정 case에 모두 존재하는지 확인하고, train family representative 20 case의
 세 patch connectivity/array header만 CRC 검증한다. Archive 1/case 1은 config
 등록 전에 이미 보았으므로 discovery로 명시하고 prospective evidence에서
-제외한다. Audit pass 뒤에도 boundary token, surface encoder 또는 mesh GNN은
-구현하지 않는다. 별도 staging contract가 coordinate frame, patch component,
-connectivity와 query correspondence를 통과해야만 새 baseline 명세를 쓸 수
-있다.
+제외한다. Exact source `fb1c21a`의 audit은 384 required member와 60 train
+payload를 확인해 8/8을 통과했지만 model evidence는 아니다.
+
+V1c 역시 architecture가 아니라 **train-only boundary-geometry staging
+contract**다. 20 representative case×3 patch×3 flow의 180 VTP에서
+`Points/connectivity/offsets`만 decode해 exact q-invariance, topology, area,
+inlet/outlet frame과 compact-cache coordinate-frame containment를 검사한다.
+`U/p/TimeValue`, validation/test payload와 checkpoint는 읽지 않는다. Pass 뒤에도
+boundary token, surface encoder 또는 mesh GNN은 구현하지 않는다. 별도 full
+staging contract가 모든 selected case의 patch component, coordinate frame,
+connectivity와 query correspondence를 통과해야만 strong known-condition
+baseline 명세를 쓸 수 있다. Boundary-aware encoding 자체는 선행요소이므로
+novelty가 아니다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

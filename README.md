@@ -9,8 +9,9 @@
 > Reliable Assessment
 
 현재 제출 목표는 **IEEE ISBI 2027 four-page regular paper**입니다
-(공식 마감 2026-10-26). 다만 N1c와 V1 3D backbone gate가 실패했고 headline evidence가
-없으므로 아직 submission-ready가 아닙니다. ISBI에 맞춘 좁은 claim,
+(공식 마감 2026-10-26). 다만 N1c와 V1 3D backbone gate가 실패했고 V1b의
+boundary asset 확인도 model evidence가 아니므로 아직 submission-ready가
+아닙니다. ISBI에 맞춘 좁은 claim,
 velocity-only 3D 실험, five-seed outer-test와 kill date는
 [`docs/isbi-2027-plan.md`](docs/isbi-2027-plan.md)에 고정합니다.
 
@@ -49,9 +50,20 @@ geometry-only reconstruction을 수선하는 대신 새 task/data identity가
 archive 1/case 1에서 `.msh`, `.stl`, volume `.vtu`, `inlet/outlet/wall.vtp`,
 connectivity와 `U/p` array를 확인했습니다. 이 사전 발견을 결과처럼 과장하지
 않고 [`V1b boundary-asset audit`](configs/aneumo_isbi_v1b_boundary_asset_audit.json)에
-명시했습니다. V1b는 나머지 20 archives·64 cases를 metadata/CRC 수준에서
-감사하며, 통과해도 boundary-aware cache staging audit만 등록할 수 있습니다.
-기존 V1을 재학습하거나 V2/test를 여는 근거는 아닙니다.
+명시했습니다. Exact source `fb1c21a`의 V1b는 20 archives·64 cases, 384
+required member와 train representative 60 VTP를 감사해 8/8을 통과했습니다.
+공개 결과는
+[`V1b aggregate`](results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json)입니다.
+Validation/test payload와 field array는 읽지 않았습니다.
+
+이 통과가 허용한 다음 단계는 모델이 아니라
+[`V1c train-only boundary-geometry audit`](configs/aneumo_isbi_v1c_boundary_geometry_staging_audit.json)입니다.
+20 train-family representative의 inlet/outlet/wall을 세 flow에서 읽어 총
+180 payload의 geometry q-invariance, polygon validity, patch area·frame와
+compact-cache 좌표계 일치를 검사합니다. `U/p/TimeValue`, validation/test,
+checkpoint와 학습은 금지했습니다. 통과해도 full geometry-cache staging
+protocol만 등록할 수 있으며 기존 V1 재학습, V2/test, novelty 또는 submission을
+열지 않습니다.
 
 ## 현재 모델은 GNN인가?
 

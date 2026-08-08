@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V1 failed · V1a found underfit · V1b boundary-asset audit registered after disclosed discovery · not submission-ready",
+    status: "Target locked · V1 failed · V1a found underfit · V1b asset audit passed 8/8 · V1c geometry audit preregistered · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. 다만 official Aneumo ZIP에는 compact cache에서 빠진 mesh, volume VTU, inlet/outlet/wall VTP와 connectivity가 있음을 archive 1에서 발견했다. 이 사전 발견을 공개한 V1b가 나머지 20 archives·64 cases를 metadata/CRC로 감사한다. Pass도 새 cache staging audit만 열며 모델이나 V2는 열지 않는다.",
-      state: "V1 failed · V1a underfit attributed · V1b asset audit registered · submission blocked",
+      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. Official Aneumo ZIP의 boundary-rich asset을 별도로 감사한 V1b는 20 archives·64 cases와 60 train VTP에서 8/8을 통과했다. 이는 asset evidence일 뿐이다. V1c는 geometry decode 전에 180 train payload의 q-invariance·topology·area/frame·coordinate frame을 고정했으며, pass도 full cache staging protocol만 연다.",
+      state: "V1 failed · V1a underfit attributed · V1b 8/8 asset-only · V1c preregistered · submission blocked",
       blocking: true
     }
   ],
@@ -141,7 +141,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "64-case internal-field cache verified · official boundary mesh/VTP discovered in archive 1 · V1b full asset audit registered"
+      provenance: "64-case internal-field cache verified · V1b full asset audit 8/8 · V1c train-only boundary geometry audit preregistered"
     },
     {
       name: "AneuG-Flow",
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "result",
+      title: "V1b passes asset identifiability; V1c freezes geometry-only staging evidence",
+      copy: "Exact source fb1c21a의 V1b는 20 ZIP64 archives, 64 cases, 384 required members와 train representative 60 VTP를 검사해 8/8을 통과했다. Validation/test payload와 field arrays는 읽지 않았다. V1c는 geometry array decode 전에 20 train representatives×3 patches×3 flows의 180 payload를 고정해 q-invariance, topology, area/frame와 compact-cache coordinate frame만 감사한다. Pass도 full boundary geometry-cache staging protocol만 허용하고 V1 repair, model, V2/test, novelty와 submission은 금지한다.",
+      files: ["results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json", "configs/aneumo_isbi_v1c_boundary_geometry_staging_audit.json", "src/aurora/aneumo_isbi_v1c_boundary_geometry.py", "experiments/run_aneumo_isbi_v1c_boundary_geometry.py", "tests/test_aneumo_isbi_v1c_boundary_geometry.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "data",

@@ -123,9 +123,13 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
 - 후속 asset discovery는 official ZIP64 archive 1의 central directory와 case
   1 q=0.0025 VTP header에 한정했다. Existing compact cache와 달리 official
   archive에는 mesh/STL, volume VTU, inlet/outlet/wall VTP와 connectivity,
-  `U/p`가 있다. 이미 본 범위를 V1b config에 공개했으며, exact source로 20
-  archives·64 cases의 metadata/CRC audit를 실행하기 전에는 boundary-aware
-  cache나 모델을 만들지 않는다.
+  `U/p`가 있다. 이미 본 범위를 V1b config에 공개했다. Exact source
+  `fb1c21a`의 CPU audit은 20 archives·64 cases, 384 required member와 60
+  train representative VTP를 검사해 8/8을 통과했다. Validation/test payload와
+  field arrays는 읽지 않았다. V1c는 geometry array decode 전에 고정됐고
+  20 train representative×3 patch×3 flow에서 geometry-only q-invariance,
+  topology, area/frame와 compact-cache coordinate frame만 감사한다. V1c를
+  통과하기 전에는 full boundary cache나 모델을 만들지 않는다.
 
 ## Run contract
 

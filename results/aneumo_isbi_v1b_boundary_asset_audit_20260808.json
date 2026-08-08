@@ -1,0 +1,88 @@
+{
+  "config_sha256": "78918c629c9a738ae7aced3b4e36a99cc10aba7279c9d70044e46182c52e6b26",
+  "counts": {
+    "archives": 20,
+    "cases": 64,
+    "representative_train_payload_members": 60,
+    "required_members": 384
+  },
+  "discovery_boundary": {
+    "inspected_before_registration": true,
+    "known_before_full_audit": [
+      "case_1_has_msh_stl_internal_vtu_and_inlet_outlet_wall_vtp",
+      "case_1_vtp_has_poly_connectivity_points_U_and_p"
+    ],
+    "not_prospective_evidence": true,
+    "scope": "archive_1_central_directory_and_case_1_reference_flow_vtp_headers"
+  },
+  "experiment_id": "aneumo_isbi_v1b_boundary_asset_identifiability_audit",
+  "field_access": {
+    "central_directory_splits": [
+      "train",
+      "validation",
+      "test"
+    ],
+    "field_arrays_decoded": false,
+    "payload_member_splits": [
+      "train"
+    ],
+    "test_payload_read": false,
+    "validation_payload_read": false
+  },
+  "gate": {
+    "all_checks_passed": true,
+    "checks": {
+      "all_representative_vtp_have_poly_connectivity_and_required_arrays": true,
+      "all_representative_vtp_patch_labels_match": true,
+      "all_sixty_four_cases_have_mesh_stl_volume_and_three_boundary_members": true,
+      "all_twenty_zip64_central_directories_range_readable": true,
+      "no_validation_or_test_payload_read": true,
+      "one_train_case_per_family_has_three_crc_verified_vtp_payloads": true,
+      "pinned_source_and_license": true,
+      "v1_failure_and_v1a_no_reentry_decision_preserved": true
+    },
+    "decision": "register_boundary_aware_cache_staging_audit_only",
+    "pass_authorizes": "register_a_new_boundary_aware_cache_staging_audit_only",
+    "pass_does_not_authorize": [
+      "relabel_v1",
+      "reuse_or_tune_v1_backbones",
+      "model_training",
+      "v2_or_test_field_access",
+      "method_novelty",
+      "isbi_submission"
+    ],
+    "passed_checks": 8,
+    "total_checks": 8
+  },
+  "git_commit": "fb1c21a23076484db66f2d1a4b5623dcd196b025",
+  "interpretation": "post_discovery_asset_identifiability_audit_not_model_or_method_evidence",
+  "representative_vtp": {
+    "field_arrays_decoded": false,
+    "manifest_sha256": "0d826f004befa1775a085daa4ae5a2ff3aed04315b68e2f84ba45ccbf7ceeacd",
+    "point_count_max": 11343,
+    "point_count_min": 548,
+    "polygon_count_max": 5675,
+    "polygon_count_min": 470,
+    "required_arrays": [
+      "Points",
+      "TimeValue",
+      "U",
+      "p",
+      "connectivity",
+      "offsets"
+    ]
+  },
+  "schema_version": "aurora.aneumo_isbi_v1b_boundary_asset_audit.result.v1",
+  "source": {
+    "dataset": "Aneumo",
+    "hf_repo": "SAIS-Life-Science/Aneumo",
+    "hf_repo_commit": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "license": "CC-BY-NC-ND-4.0",
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "v1_result": "results/aneumo_isbi_v1_20260808.json",
+    "v1_result_sha256": "f67970c4d8028bf869ae793a776ed86d32b9cc477a9ba414e54bf9c8fab6a9b1",
+    "v1a_result": "results/aneumo_isbi_v1_attribution_20260808.json",
+    "v1a_result_sha256": "1a7b3e768e97b560da54d52cfe343c019d392e5af2fb3bbf518705f3728076a2"
+  }
+}

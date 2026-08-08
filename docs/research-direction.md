@@ -92,16 +92,27 @@ causal decomposition, method selection 또는 gate가 아니다. Public aggregat
 `results/aneumo_isbi_v1_attribution_20260808.json`이다. Current geometry-only
 branch를 폐기하고 learned method 전에 새 task/data identity를 감사한다.
 
-**Boundary-asset discovery and V1b registration · 2026-08-08.** Official
+**Boundary-asset discovery, V1b pass and V1c registration · 2026-08-08.** Official
 pinned ZIP64 archive 1/case 1에는 compact cache에서 제외됐던 `.msh`, `.stl`,
 volume `.vtu`, `inlet/outlet/wall.vtp`, poly connectivity와 `U/p` array가
 존재한다. 이미 본 이 한 archive/header는 prospective evidence가 아니다.
-V1b는 full 20-archive/64-case member contract와 train representative 60 VTP
-payload를 range/CRC로 감사한다. Pass도 boundary-aware staging audit만 열며
-known-BC encoding이나 boundary token을 contribution으로 만들지 않는다. 이는
-V1의 같은 input/backbone을 수선하는 것이 아니라, V1에서 누락된 physical
-boundary identity를 포함할 새 data contract가 실제 존재하는지 검증하는
-단계다.
+Exact source `fb1c21a`의 V1b는 full 20-archive/64-case member contract와
+train representative 60 VTP payload를 range/CRC로 감사해 8/8을 통과했다.
+384 required member가 있었고 validation/test payload와 field array는 읽지
+않았다. Public aggregate는
+`results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json`이다.
+
+V1b가 허용한 범위에서 V1c를 geometry array decode 전에 prospective하게
+고정했다. V1c는 train family별 한 representative의 세 patch×세 flow, 총
+180 VTP에서 `Points/connectivity/offsets`만 decode한다. Boundary geometry의
+exact q-invariance, polygon validity, positive area, inlet/outlet frame과 기존
+compact-cache internal coordinate의 동일 좌표계를 검사하고 private
+nonredistributable geometry-only cache hash만 공개한다. `U/p/TimeValue`,
+validation/test payload, model/checkpoint와 학습은 접근하지 않는다. 통과해도
+full boundary-aware geometry-cache staging protocol만 열며 known-BC encoding,
+boundary token 또는 surface GNN을 contribution으로 만들지 않는다. 이는 V1의
+같은 input/backbone을 수선하는 것이 아니라, V1에서 누락된 physical boundary
+identity를 포함할 새 data contract가 실제 존재하는지 검증하는 단계다.
 
 ## 1. 현재 판정
 

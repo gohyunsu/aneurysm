@@ -28,9 +28,12 @@
 > NPY만 staging했지만 official Aneumo ZIP 전체에는 case별 `.msh`, `.stl`,
 > `internal.vtu`, `inlet/outlet/wall.vtp`가 있다. Archive 1/case 1 header에서
 > PolyData connectivity와 `Points/U/p` array를 확인했다. 이 one-case
-> discovery는 전체 자산 감사가 아니며, V1b가 20 archives·64 cases의 member
-> completeness와 train representative CRC를 별도로 검사한다. V1b pass도
-> boundary-aware cache staging audit만 허용한다.
+> discovery는 전체 자산 감사가 아니다. Exact source `fb1c21a`의 V1b가 20
+> archives·64 cases의 384 required member와 60 train representative VTP를
+> 검사해 8/8을 통과했다. Validation/test payload와 field array는 읽지 않았다.
+> 후속 V1c는 20 train representative×3 patch×3 flow의 geometry-only
+> q-invariance·topology·area/frame·coordinate-frame audit이며, pass도 full
+> boundary geometry-cache staging protocol만 허용한다.
 
 ## 핵심 비교
 

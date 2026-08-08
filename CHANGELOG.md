@@ -4,6 +4,24 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1b passes asset identifiability and V1c freezes geometry staging
+
+- Exact source `fb1c21a`의 V1b CPU audit은 20 ZIP64 archives, 64 cases,
+  384 required members와 train-family representative 60 VTP payload를 확인해
+  8/8을 통과했다. Point/polygon count 범위와 manifest hash를 public aggregate
+  `results/aneumo_isbi_v1b_boundary_asset_audit_20260808.json`에 고정했다.
+  Validation/test payload, field arrays, model과 checkpoint는 읽지 않았다.
+- V1b가 허용한 범위에서
+  `configs/aneumo_isbi_v1c_boundary_geometry_staging_audit.json`을 geometry array
+  decode 전에 고정했다. 20 train representatives×3 patches×3 flows의 180
+  payload에서 `Points/connectivity/offsets`만 decode해 exact q-invariance,
+  polygon validity, patch area/frame와 compact-cache coordinate frame을
+  검사한다. 성공한 private geometry cache의 hash만 공개한다.
+- V1c pass도 full boundary-aware geometry-cache staging protocol 등록만
+  허용한다. 기존 V1은 5/7 failed, current backbone branch는 retired 상태로
+  보존한다. Local repair, model training, V2/test, method novelty와 submission은
+  계속 금지한다.
+
 ## 2026-08-08 · V1b discloses boundary-asset discovery and freezes a full audit
 
 - 기존 compact cache와 official Aneumo release를 구분한다. 등록 전 pinned

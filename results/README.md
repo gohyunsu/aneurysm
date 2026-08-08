@@ -38,6 +38,12 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   aggregate. 네 family의 train full-q L2도 `0.76939--0.95647`이고 norm/cosine
   collapse가 나타나므로 실패는 geometry generalization만의 문제가 아니다.
   V1 relabel, retraining, model/V2 선택과 method novelty 권한은 없다.
+- `aneumo_isbi_v1b_boundary_asset_audit_20260808.json`: exact source
+  `fb1c21a`의 post-discovery asset-identifiability audit. 20 ZIP64 archive,
+  64 case, 384 required member와 train representative 60 VTP를 확인해 8/8을
+  통과했다. Validation/test payload와 field value는 읽지 않았으며 V1c
+  boundary-geometry staging audit 등록만 허용한다. Model, V2/test, novelty와
+  submission evidence가 아니다.
 
 현재 controlled-PDE 결과:
 
