@@ -73,6 +73,13 @@ threshold를 국소 조정하지 않는다. Pass도 한 backbone을 별도 mecha
 protocol에 고정할 자격뿐이며 M0 전 candidate objective, V2, headline과
 submission은 모두 false다.
 
+**Pre-result contract correction.** Exact `b8ce721`의 9 model-contract
+test 중 rotation equivariance, shape, kNN self-edge, anchor uniqueness와
+guardrail 8개는 통과했다. Parameter counts
+`357603/374979/384582/422114`의 range가 15.283%여서 15% check만 실패했다.
+Learned metric·cache field read 전 q-PointNet residual block을 16→17로
+바꾸며, 새 exact-source full contract 전에는 학습하지 않는다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

@@ -48,6 +48,12 @@ node subset·minibatch seed·step을 쓴다. V1 loss는 train-scalar-RMS normali
 velocity MSE 하나뿐이며 paired-response weight는 0이다. Missing distribution은
 8개 registered q를 모두 열거한 discrete mixture다.
 
+Pre-result contract `b8ce721`에서 최초 residual block 수 16/7/7/0은
+parameter range 15.283%로 15% 계약을 근소하게 실패했다. Field를 읽기 전에
+q-PointNet만 17 block으로 올리고 나머지 architecture, tolerance와 selector는
+유지한다. 이는 결과 기반 capacity tuning이 아니라 실행 전 compute-match
+correction이다.
+
 ## 1. 왜 단순 missing-value 문제가 아닌가
 
 geometry \(G\), 전체 BC coefficient \(B\), solution field \(H\), 관측

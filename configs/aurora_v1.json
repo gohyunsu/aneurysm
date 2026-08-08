@@ -90,6 +90,7 @@
       "aneumo_isbi_v1_status": "preregistered_validation_only_unrun",
       "aneumo_isbi_v1_model_tasks": 12,
       "aneumo_isbi_v1_test_access": false,
+      "aneumo_isbi_v1_contract_status": "b8ce721_failed_parameter_match_pre_result_correction_pending",
       "aneug_flow_bc_variation": false,
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,

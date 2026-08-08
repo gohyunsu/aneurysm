@@ -87,7 +87,7 @@
     "dropout": 0.0,
     "activation": "silu",
     "parameter_match_residual_blocks": {
-      "q_pointnet": 16,
+      "q_pointnet": 17,
       "knn_mgn": 7,
       "deltaphi_graph": 7,
       "anchor_token_equivariant": 0

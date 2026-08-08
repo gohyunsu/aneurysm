@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 pre-result contract corrects parameter matching
+
+- Exact source `b8ce721`의 pinned-container model contract는 output shape,
+  kNN self-edge exclusion, unique anchors와 anchor-token rigid-rotation
+  equivariance를 포함해 8/9를 통과했다. Learned metric과 cache field는
+  읽지 않았다.
+- Registered model parameter counts는
+  `357603/374979/384582/422114`였고 relative range 15.283%가 frozen 15%
+  tolerance를 0.283%p 넘었다. Threshold를 완화하지 않는다.
+- 가장 작은 q-PointNet residual block만 16→17로 올린다. 다른 architecture,
+  data, node subset, seed, step, tolerance와 selector는 유지하며 새 exact
+  full contract가 통과하기 전 학습을 제출하지 않는다.
+
 ## 2026-08-08 · V1 freezes one matched validation-only backbone smoke
 
 ### Scope and fair comparison

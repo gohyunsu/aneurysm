@@ -167,6 +167,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.08",
+      category: "implementation",
+      title: "V1 compute matching is corrected before any field metric",
+      copy: "Exact b8ce721 model contract는 rotation equivariance 등 8/9를 통과했지만 parameter counts 357603/374979/384582/422114의 relative range 15.283%가 frozen 15%를 넘었다. Metric·cache field read 전에 가장 작은 q-PointNet residual block만 16→17로 올린다. Tolerance, 다른 model, data, seed, step과 selector는 유지하며 새 exact full contract 전에는 학습하지 않는다.",
+      files: ["configs/aneumo_isbi_v1.json", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.08",
       category: "protocol",
       title: "V1 freezes a matched 3D backbone smoke without promoting a candidate",
       copy: "40 train/12 validation case의 fixed 1,024-node subsets에서 q-PointNet, kNN-MGN, DeltaPhi graph residual, frame-free anchor-token equivariant operator를 세 seed·3,000 step으로 비교한다. Same-case power scaling은 response-only oracle이며 three-seed ensemble은 exact eight-flow missing distribution을 평가한다. Selector는 response L2, full-q L2, missing energy, parameter count 순이고 candidate 이름은 우선권이 없다. Test field, candidate objective, outer test, headline과 submission은 모두 금지한다.",

@@ -31,6 +31,10 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
   seed로 비교한다. Same-case scaling은 response-only oracle control이고 세
   seed ensemble은 missing-design-law uncertainty를 평가한다. Test family
   field는 읽지 않으며 V1 outcome은 method novelty나 headline이 아니다.
+  Exact `b8ce721`의 pre-result model contract는 rotation equivariance 등
+  8/9를 통과했지만 parameter range 15.283%가 frozen 15%를 넘었다. Metric과
+  field read 전에 가장 작은 q-PointNet residual block만 16→17로 바꾸고 새
+  exact contract를 요구한다. Tolerance와 다른 model은 바꾸지 않는다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
