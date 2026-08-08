@@ -4,8 +4,8 @@
 
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
-post-N1c audits completed · ISBI V0 passed development-only · V1 contract
-pending · M0 missing-only mechanism preregistered/unrun · method unselected ·
+post-N1c audits completed · ISBI V0 passed development-only · V1 backbone
+smoke preregistered/unrun · M0 missing-only mechanism preregistered/unrun · method unselected ·
 3D headline blocked
 
 ## 0. 제출 목표와 scope
@@ -37,6 +37,15 @@ train-only velocity scaling CI lower 0.20013이 0.15 기준을 유지했다. 새
 field array 및 validation/test field read는 없었다. 따라서 V1의 bounded
 64-case implementation smoke 등록만 허용한다. 이 수치를 모델 성능이나
 contribution으로 세지 않는다.
+
+V1은 `configs/aneumo_isbi_v1.json`에 결과 전에 고정했다. 40 train/12
+validation case만 읽고 12 test case의 field는 건드리지 않는다. q-PointNet,
+kNN-MGN, DeltaPhi graph와 frame-free anchor-token equivariant operator를
+동일 1,024-node subset, 세 seed, 3,000 step과 train-only scalar velocity
+normalization으로 비교한다. Anchor-token 모델은 local/anchor displacement의
+scalar coefficient로 velocity vector를 복원해 회전 equivariance를 갖지만,
+이는 engineering candidate이지 novelty가 아니다. Selector가 다른 baseline을
+고르면 그대로 따른다. V1은 V2나 submission을 허용하지 않는다.
 
 ## 1. 현재 판정
 

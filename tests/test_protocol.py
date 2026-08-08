@@ -69,18 +69,24 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "velocity-only"):
             validate_protocol(candidate)
 
-    def test_aneumo_learning_remains_linked_to_g1s_pass(self) -> None:
+    def test_aneumo_learning_remains_linked_to_g1s_and_v0(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         output = candidate["model"]["irregular_3d_output_contract"]
         output["protocol_registration_condition"] = "run_immediately"
-        with self.assertRaisesRegex(ProtocolError, "G1s pass"):
+        with self.assertRaisesRegex(ProtocolError, "G1s and the ISBI V0 pass"):
             validate_protocol(candidate)
 
-    def test_irregular_3d_headline_requires_positive_n1(self) -> None:
+    def test_irregular_3d_headline_requires_positive_m0_and_v2(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         output = candidate["model"]["irregular_3d_output_contract"]
         output["headline_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "positive N1"):
+        with self.assertRaisesRegex(ProtocolError, "positive M0"):
+            validate_protocol(candidate)
+
+    def test_v1_cannot_read_test_fields(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["v1_test_access"] = True
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
             validate_protocol(candidate)
 
     def test_n0_cannot_establish_novelty(self) -> None:

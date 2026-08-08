@@ -1,0 +1,189 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v1.v1",
+  "experiment_id": "aneumo_isbi_v1_validation_only_backbone_smoke",
+  "status": "preregistered_before_v1_learning_result",
+  "as_of": "2026-08-08",
+  "purpose": "Select a viable 3D velocity backbone under one matched validation-only protocol before introducing any candidate measurement-solution objective.",
+  "source": {
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "v0_result": "results/aneumo_isbi_v0_20260808.json",
+    "v0_result_sha256": "c98b90c4ae1d90558b3dc5870ffb29450439fb663288848db5ac80dc609a6815",
+    "v0_source_commit": "0589070063cfaac765e6d6785653880be860e861",
+    "cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
+  },
+  "access": {
+    "read_field_splits": [
+      "train",
+      "validation"
+    ],
+    "forbid_test_field_reads": true,
+    "test_metrics_or_selection": false,
+    "allowed_use": "implementation_and_backbone_selection_only"
+  },
+  "task": {
+    "condition": "scalar_steady_mass_flow_kg_s",
+    "condition_values": [
+      0.001,
+      0.0015,
+      0.002,
+      0.0025,
+      0.003,
+      0.0035,
+      0.00375,
+      0.004
+    ],
+    "missing_condition_law": "exact_discrete_uniform_over_registered_values",
+    "output": "three_component_velocity_at_selected_internal_nodes",
+    "channels": [
+      "u_m_s",
+      "v_m_s",
+      "w_m_s"
+    ],
+    "excluded": [
+      "pressure",
+      "wss",
+      "osi",
+      "mass_conservation",
+      "rupture_status",
+      "clinical_utility"
+    ]
+  },
+  "split": {
+    "unit": "aneux_base_family",
+    "train_families": 20,
+    "validation_families": 6,
+    "test_families": 6,
+    "train_cases": 40,
+    "validation_cases": 12,
+    "test_cases": 12
+  },
+  "representation": {
+    "nodes_per_case_available": 4096,
+    "development_nodes_per_case": 1024,
+    "node_subset_seed": 20260808,
+    "coordinates": "per_case_center_then_isotropic_rms_radius",
+    "velocity": "one_train_only_global_scalar_rms",
+    "condition_normalization": "fixed_design_minmax_to_minus_one_plus_one",
+    "knn": 16,
+    "knn_distance": "normalized_euclidean",
+    "self_edges": false,
+    "anchor_count": 16,
+    "anchor_selection": "deterministic_farthest_point_from_centroid_start"
+  },
+  "models": {
+    "families": [
+      "q_pointnet",
+      "knn_mgn",
+      "deltaphi_graph",
+      "anchor_token_equivariant"
+    ],
+    "engineering_candidate": "anchor_token_equivariant",
+    "candidate_is_method_novelty": false,
+    "hidden_dim": 96,
+    "message_passing_layers": 4,
+    "token_blocks": 2,
+    "attention_heads": 4,
+    "dropout": 0.0,
+    "activation": "silu",
+    "parameter_match_residual_blocks": {
+      "q_pointnet": 16,
+      "knn_mgn": 7,
+      "deltaphi_graph": 7,
+      "anchor_token_equivariant": 0
+    },
+    "deltaphi_anchor_mass_flow_kg_s": 0.0025,
+    "parameter_match_relative_tolerance": 0.15,
+    "deep_ensemble": "three_registered_seeds_of_each_family"
+  },
+  "training": {
+    "seeds": [
+      820801,
+      820802,
+      820803
+    ],
+    "steps": 3000,
+    "batch_cases": 2,
+    "optimizer": "adamw",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 1.0,
+    "validation_every_steps": 250,
+    "checkpoint_selection": "minimum_validation_full_q_relative_l2_plus_response_relative_l2",
+    "loss": "train_scalar_rms_normalized_velocity_mse",
+    "paired_response_loss_weight": 0.0,
+    "mixed_precision": true,
+    "require_cuda": true
+  },
+  "controls": {
+    "response_only_oracle": "same_case_anchor_field_train_tuned_global_power_1.075",
+    "negative_control": "q_pointnet_with_condition_zeroed_at_validation",
+    "matched_examples": true,
+    "matched_steps": true,
+    "same_node_subsets": true,
+    "same_initialization_seed_by_model_seed": true
+  },
+  "metrics": {
+    "primary": [
+      "validation_full_q_node_velocity_relative_l2",
+      "validation_same_geometry_response_relative_l2"
+    ],
+    "missing_distribution": "exact_eight_component_field_energy_score",
+    "functionals": [
+      "sampled_node_mean_speed",
+      "sampled_node_rms_speed",
+      "sampled_node_p95_speed"
+    ],
+    "calibration": [
+      "design_law_90_percent_functional_coverage",
+      "design_law_90_percent_functional_interval_width"
+    ],
+    "report": [
+      "parameter_count",
+      "peak_gpu_memory_mb",
+      "validation_latency_ms_per_case_condition",
+      "best_step"
+    ],
+    "aggregation_unit": "aneux_base_family",
+    "no_patient_or_clinical_interpretation": true
+  },
+  "selector": {
+    "eligible_models": [
+      "q_pointnet",
+      "knn_mgn",
+      "deltaphi_graph",
+      "anchor_token_equivariant"
+    ],
+    "requires_all_three_seeds": true,
+    "rank_by": [
+      "seed_mean_validation_response_relative_l2",
+      "seed_mean_validation_full_q_relative_l2",
+      "seed_mean_missing_field_energy_score",
+      "parameter_count"
+    ],
+    "candidate_name_does_not_override_metrics": true
+  },
+  "feasibility_gate": {
+    "rule": "all_checks",
+    "checks": [
+      "all_twelve_tasks_exit_zero",
+      "no_test_field_read",
+      "all_metrics_finite",
+      "all_checkpoints_selected_on_validation_only",
+      "selected_model_worst_seed_full_q_relative_l2_at_most_0.35",
+      "selected_model_worst_seed_response_relative_l2_at_most_0.50",
+      "condition_zeroing_worsens_full_q_error_in_all_selected_model_seeds"
+    ],
+    "failure_action": "stop_the_current_3d_backbone_branch_without_local_hyperparameter_repair",
+    "local_repair_allowed": false
+  },
+  "authorization": {
+    "pass_allows": "freeze_one_backbone_for_a_separate_mechanism_protocol_only",
+    "method_novelty": false,
+    "outer_test": false,
+    "headline_result": false,
+    "isbi_submission": false,
+    "v2_registration_requires_expanded_or_independent_data": true,
+    "measurement_solution_objective_requires_positive_m0": true
+  }
+}

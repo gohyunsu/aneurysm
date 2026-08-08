@@ -1,6 +1,7 @@
 # AURORA v2 모델 명세
 
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
+V1 backbone smoke preregistered/unrun ·
 missing task retained · M0 candidate-measurement–solution pullback
 preregistered/unrun · sparse-2 adaptive task removed · 3D GNN unimplemented ·
 method unselected
@@ -28,6 +29,24 @@ V0는 exact public source `0589070`에서 8/8을 통과했다. 따라서 다음
 prospective V1에서만 이 입력·출력 계약을 실제 graph/point operator로
 구현할 수 있다. V1 전에는 architecture, normalization, stopping rule과
 필수 baseline을 결과에 맞춰 고르지 않는다.
+
+V1은 네 engineering backbone을 같은 budget으로 비교한다.
+
+1. **q-PointNet:** normalized xyz와 scalar q를 node encoder에 넣고 pooled
+   geometry context로 연속 point velocity를 decode한다.
+2. **kNN-MGN:** 16-neighbor graph에서 distance-aware scalar message를 네 번
+   전달하고 3-vector head를 둔다.
+3. **DeltaPhi graph:** q-independent base field에 normalized
+   Δq-scaled response head를 더한다. Retrieval label은 쓰지 않는다.
+4. **Anchor-token equivariant candidate:** centroid에서 시작한 deterministic
+   farthest-point anchor 16개까지의 invariant distance, local kNN message와
+   두 token-attention block을 사용한다. Output은 local/anchor displacement
+   vector의 learned scalar combination이므로 rigid rotation에 equivariant다.
+
+Parameter budget은 family별 residual block으로 15% 안에 맞추고 동일
+node subset·minibatch seed·step을 쓴다. V1 loss는 train-scalar-RMS normalized
+velocity MSE 하나뿐이며 paired-response weight는 0이다. Missing distribution은
+8개 registered q를 모두 열거한 discrete mixture다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

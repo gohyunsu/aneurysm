@@ -49,6 +49,30 @@ CPU metadata audit은 exit 0, 8/8 pass였다. Raw result SHA는
 새 cache field array와 validation/test field는 읽지 않았다. V1 smoke
 등록만 허용하며 나머지 authorization은 false로 유지한다.
 
+### V1 · Validation-only backbone smoke
+
+Executable contract는 `configs/aneumo_isbi_v1.json`이다. 20 train family의
+40 case와 6 validation family의 12 case만 field를 읽는다. Test 6 family/12
+case는 group metadata 이후 field dataset을 index하지 않는다. 각 case의
+등록 4,096 internal point 중 seed 20260808로 1,024개를 고정하고 per-case
+centering/isotropic RMS radius, train-only global scalar velocity RMS, fixed
+q min-max를 사용한다.
+
+q-PointNet, kNN-MGN, DeltaPhi graph residual, anchor-token equivariant
+operator × seed `[820801,820802,820803]`의 12 task를 동일 3,000 step으로
+학습한다. Checkpoint는 validation `(full-q relative L2 + response relative
+L2)` 최소로 고른다. 최종 backbone selector는 seed-mean response L2,
+full-q L2, exact eight-component missing-field energy, parameter count의
+사전등록 순서다. Same-case q=0.0025 anchor power 1.075 scaling은
+response-only oracle이고 learned reconstruction row처럼 비교하지 않는다.
+
+Feasibility는 12/12 exit, test-read false, finite metric, validation-only
+checkpoint, selected worst-seed full-q ≤0.35, response ≤0.50, q-zero negative
+control 3/3 악화를 모두 요구한다. 실패 뒤 hidden size, k, step, seed 또는
+threshold를 국소 조정하지 않는다. Pass도 한 backbone을 별도 mechanism
+protocol에 고정할 자격뿐이며 M0 전 candidate objective, V2, headline과
+submission은 모두 false다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

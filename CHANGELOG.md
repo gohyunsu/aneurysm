@@ -4,6 +4,36 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 freezes one matched validation-only backbone smoke
+
+### Scope and fair comparison
+
+- `configs/aneumo_isbi_v1.json`에 20 train family/40 case와 6 validation
+  family/12 case만 읽는 12-task protocol을 고정했다. Test 6 family/12 case
+  field read와 모든 outer-test access는 false다.
+- q-PointNet, kNN-MGN, DeltaPhi graph residual, frame-free anchor-token
+  equivariant operator를 동일 deterministic 1,024-node subset, 세 seed,
+  hidden 96, 3,000 step과 train-only scalar velocity normalization으로
+  비교한다. Family별 residual block으로 parameter range를 15% 안에 맞춘다.
+- Selector는 seed-mean response L2, full-q L2, exact eight-component missing
+  field energy, parameter count 순이다. `candidate` 이름은 우선권이 없고
+  paired-response loss weight는 0이다.
+- Same-case anchor power 1.075 scaling은 response-only oracle control이다.
+  Deep ensemble은 동일 세 seed를 재사용해 design-law uncertainty만
+  기술한다.
+
+### Guardrails and implementation
+
+- Anchor-token output은 local/anchor displacement vector의 scalar combination으로
+  구성해 rigid-rotation equivariance를 코드 수준에서 검사한다. 이는
+  engineering backbone이지 contribution이 아니다.
+- 12/12 exit, no-test-read, finite metrics, validation checkpoint, generous
+  worst-seed feasibility와 q-zero negative control을 모두 요구한다. 실패 뒤
+  hidden size, k, step, seed, threshold를 국소 수정하지 않는다.
+- V1 pass도 한 backbone을 별도 mechanism protocol에 고정할 자격뿐이다.
+  Positive M0 전 measurement–solution objective를 추가하지 않으며 V2,
+  headline, novelty와 submission은 계속 닫는다.
+
 ## 2026-08-08 · V0 passes all checks without opening the headline
 
 - Exact public source `0589070`, config SHA

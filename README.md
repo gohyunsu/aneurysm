@@ -21,6 +21,14 @@ velocity-only 3D 실험, five-seed outer-test와 kill date는
 [`public aggregate`](results/aneumo_isbi_v0_20260808.json)에 있으며 V1 구현
 smoke만 엽니다. Headline, outer test와 submission은 열리지 않습니다.
 
+다음 단계는 결과 전에 고정한
+[`V1 backbone smoke`](configs/aneumo_isbi_v1.json)입니다. 동일한
+train/validation family와 1,024-node development subset에서 q-PointNet,
+kNN-MGN, DeltaPhi graph residual, frame-free anchor-token equivariant
+operator를 세 seed로 비교합니다. Candidate라는 이름에 우선권을 주지 않고
+response L2 → full-q L2 → exact missing energy 순으로 backbone만 고릅니다.
+Test field와 outer-test 권한은 계속 닫혀 있습니다.
+
 ## 현재 모델은 GNN인가?
 
 **현재 실행된 exact/nonlinear 모델은 GNN이 아닙니다.** Context MLP와

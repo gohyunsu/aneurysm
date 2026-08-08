@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+#PBS -N aurora_isbi_v1
+#PBS -l select=1:ncpus=4:mem=48gb:ngpus=1
+#PBS -l walltime=06:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_CACHE:?set AURORA_CACHE}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_EXPERIMENT_DEPS:?set AURORA_EXPERIMENT_DEPS}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+: "${PBS_ARRAY_INDEX:?submit array indices 0-11}"
+
+families=(q_pointnet knn_mgn deltaphi_graph anchor_token_equivariant)
+seeds=(820801 820802 820803)
+model_index=$((PBS_ARRAY_INDEX / 3))
+seed_index=$((PBS_ARRAY_INDEX % 3))
+if [ "$model_index" -ge "${#families[@]}" ]; then
+  echo "invalid V1 array index: $PBS_ARRAY_INDEX" >&2
+  exit 2
+fi
+family="${families[$model_index]}"
+seed="${seeds[$seed_index]}"
+task_output="$AURORA_OUTPUT_ROOT/${family}_seed_${seed}"
+
+mkdir -p "$task_output/tmp"
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_CACHE:/data/aneumo_pilot.h5:ro" \
+  --bind "$task_output:/output" \
+  --bind "$AURORA_EXPERIMENT_DEPS:/experiment-deps:ro" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace/src:/experiment-deps" \
+      PYTHONDONTWRITEBYTECODE=1 TMPDIR="/output/tmp" \
+  python /workspace/experiments/run_aneumo_isbi_v1.py \
+    --config /workspace/configs/aneumo_isbi_v1.json \
+    --root /workspace \
+    --cache /data/aneumo_pilot.h5 \
+    --output /output \
+    --family "$family" \
+    --seed "$seed" \
+    --git-commit "$AURORA_GIT_COMMIT" \
+    --require-cuda

@@ -131,6 +131,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v0_status",
             "v0_result",
             "v0_pass_authorizes",
+            "v1_backbone_config",
+            "v1_status",
+            "v1_test_access",
             "plan",
         ],
         "venue",
@@ -157,6 +160,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["v0_result"] != "results/aneumo_isbi_v0_20260808.json"
         or venue["v0_pass_authorizes"]
         != "v1_64_case_implementation_smoke_only"
+        or venue["v1_backbone_config"] != "configs/aneumo_isbi_v1.json"
+        or venue["v1_status"] != "preregistered_validation_only_unrun"
+        or venue["v1_test_access"] is not False
         or venue["plan"] != "docs/isbi-2027-plan.md"
     ):
         raise ProtocolError(
@@ -291,9 +297,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         [
             "aneumo_current_candidate_channels",
             "excluded_headline_channels",
-            "mandatory_baseline",
+            "mandatory_baselines",
             "protocol_registration_condition",
             "headline_activation_condition",
+            "v1_config",
+            "v1_status",
+            "v1_test_access",
             "headline_authorized",
         ],
         "model.irregular_3d_output_contract",
@@ -304,21 +313,30 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     if "pressure" not in irregular_3d["excluded_headline_channels"]:
         raise ProtocolError("Aneumo pressure must not return as a headline output.")
-    if irregular_3d["mandatory_baseline"] != (
-        "same_case_anchor_train_tuned_global_power"
+    if set(irregular_3d["mandatory_baselines"]) != {
+        "same_case_anchor_train_tuned_global_power_response_control",
+        "q_pointnet",
+        "knn_mgn",
+        "deltaphi_graph",
+        "three_seed_deep_ensemble",
+    }:
+        raise ProtocolError("The registered V1 physical and learned baselines are mandatory.")
+    if irregular_3d["protocol_registration_condition"] != (
+        "g1s_completed_and_isbi_v0_passed"
     ):
-        raise ProtocolError("The strong Aneumo physical-scaling baseline is mandatory.")
-    if irregular_3d["protocol_registration_condition"] != "g1s_completed_passed":
         raise ProtocolError(
-            "Aneumo protocol registration must remain linked to the G1s pass."
+            "Aneumo V1 registration must remain linked to G1s and the ISBI V0 pass."
         )
     if (
         irregular_3d["headline_activation_condition"]
-        != "n1_nonlinear_strong_baseline_gate_passed"
+        != "positive_m0_then_expanded_or_independent_v2_outer_test_passed"
+        or irregular_3d["v1_config"] != "configs/aneumo_isbi_v1.json"
+        or irregular_3d["v1_status"] != "preregistered_validation_only_unrun"
+        or irregular_3d["v1_test_access"] is not False
         or irregular_3d["headline_authorized"] is not False
     ):
         raise ProtocolError(
-            "Irregular-3D headline must remain deferred until a positive N1 gate."
+            "Irregular-3D headline requires positive M0 and independent V2 evidence."
         )
     checks.append("model dimensional contract")
 

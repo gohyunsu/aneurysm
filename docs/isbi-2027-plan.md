@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-06 KST  
 상태: **target locked · not submission-ready · V0 passed development-only ·
-V1 contract pending · M0 metric unrun**
+V1 preregistered/unrun · M0 metric unrun**
 
 ## 1. Venue contract
 
@@ -135,9 +135,21 @@ Headline outer test 전에는 더 넓은 base-family-disjoint cache 또는 독�
 
 - channels: velocity only
 - selection: train/validation only
-- mandatory controls: global flow scaling, q-conditioned point/operator,
-  kNN MGN, DeltaPhi-style response residual, deep ensemble
+- exact contract: `configs/aneumo_isbi_v1.json`
+- fixed inputs: per-case centered/isotropic coordinates, scalar mass flow,
+  deterministic 1,024/4,096 development nodes
+- compared backbones: q-conditioned PointNet, kNN-MGN, DeltaPhi-style graph
+  residual, frame-free anchor-token equivariant operator
+- mandatory controls: same-case global scaling for response only and the
+  three registered seed ensemble for missing uncertainty
+- matched budget: 3 seeds, 3,000 steps, hidden 96, parameter range within 15%
+- selector: seed-mean response L2, full-q L2, missing energy, parameters
 - no test read until architecture, objective, samples, stopping rule frozen
+
+V1은 candidate method 비교가 아니라 backbone selection이다. Candidate
+이름은 selector에 우선권이 없고 paired-response loss weight는 0이다.
+Measurement–solution objective는 positive M0와 별도 protocol 전에는
+추가하지 않는다. V1 pass도 V2나 submission을 열지 않는다.
 
 ### V2 · Frozen five-seed 3D outer test
 
@@ -150,7 +162,8 @@ Headline outer test 전에는 더 넓은 base-family-disjoint cache 또는 독�
 5. paired base-family bootstrap effect and 95% CI against the strongest control
 6. inference latency and parameter/compute match
 
-보조 endpoint는 global kinetic-energy/peak-speed response로 제한한다.
+보조 endpoint는 sampled-node mean/RMS/95th-percentile speed로 제한한다.
+Node volume weight가 없으므로 이를 kinetic energy라 부르지 않는다.
 Inlet/outlet marker와 surface-gradient provenance가 없으면 mass conservation,
 WSS, OSI를 넣지 않는다.
 

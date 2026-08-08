@@ -25,6 +25,12 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
   읽지 않았다. 이는 64-case V1 implementation smoke만 허용하며 learned
   performance, outer test, headline, novelty 또는 submission 증거가 아니다.
   공개 aggregate는 `results/aneumo_isbi_v0_20260808.json`이다.
+- 다음 실행은 `configs/aneumo_isbi_v1.json`의 validation-only backbone
+  smoke다. q-PointNet, kNN-MGN, DeltaPhi graph residual과 frame-free
+  anchor-token equivariant operator를 동일 1,024-node subset·3,000 step·세
+  seed로 비교한다. Same-case scaling은 response-only oracle control이고 세
+  seed ensemble은 missing-design-law uncertainty를 평가한다. Test family
+  field는 읽지 않으며 V1 outcome은 method novelty나 headline이 아니다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면
@@ -482,6 +488,10 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   prospective translation contract가 필요하다.
 - ISBI full-paper gate가 실패하면 제목·threshold·metric을 사후 변경해
   제출하지 않는다.
+- V1은 12개 model×seed validation task만 허용한다. Selector는 seed-mean
+  response L2, full-q L2, exact eight-component missing energy, parameter
+  count 순이고 후보 이름은 선택 우선권이 없다. V1 실패 뒤 hidden size,
+  k, seed, step과 threshold를 국소 수정하지 않는다.
 
 ## 7. 새 팀 대화와 게시글 반영
 

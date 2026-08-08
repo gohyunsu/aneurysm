@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V0 passed development-only · not submission-ready",
+    status: "Target locked · V0 passed · V1 preregistered/unrun · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V0는 exact source 0589070에서 cache·family split·scalar-inflow design law·velocity-only scope 8/8을 field-array read 없이 통과했다. 이는 64-case V1 구현 smoke만 열며 irregular-3D outer test와 ISBI headline은 계속 필수다.",
-      state: "V0 8/8 passed · V1 contract pending · submission blocked",
+      copy: "V0는 8/8을 통과했다. V1은 q-PointNet, kNN-MGN, DeltaPhi graph와 frame-free anchor-token equivariant operator를 동일 validation-only budget으로 비교하도록 고정됐다. Test field, outer test와 ISBI headline은 계속 닫혀 있다.",
+      state: "V0 passed · V1 preregistered/unrun · submission blocked",
       blocking: true
     }
   ],
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "protocol",
+      title: "V1 freezes a matched 3D backbone smoke without promoting a candidate",
+      copy: "40 train/12 validation case의 fixed 1,024-node subsets에서 q-PointNet, kNN-MGN, DeltaPhi graph residual, frame-free anchor-token equivariant operator를 세 seed·3,000 step으로 비교한다. Same-case power scaling은 response-only oracle이며 three-seed ensemble은 exact eight-flow missing distribution을 평가한다. Selector는 response L2, full-q L2, missing energy, parameter count 순이고 candidate 이름은 우선권이 없다. Test field, candidate objective, outer test, headline과 submission은 모두 금지한다.",
+      files: ["configs/aneumo_isbi_v1.json", "src/aurora/aneumo_isbi_v1.py", "experiments/run_aneumo_isbi_v1.py", "cluster/pbs_aneumo_isbi_v1.pbs", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "README.md", "docs/isbi-2027-plan.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "result",

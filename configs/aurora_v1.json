@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_isbi_v0_passed_v1_smoke_authorized_method_unselected",
+    "status": "failed_n1c_v0_passed_v1_preregistered_unrun_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -25,6 +25,9 @@
     "v0_status": "completed_passed_development_only",
     "v0_result": "results/aneumo_isbi_v0_20260808.json",
     "v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
+    "v1_backbone_config": "configs/aneumo_isbi_v1.json",
+    "v1_status": "preregistered_validation_only_unrun",
+    "v1_test_access": false,
     "plan": "docs/isbi-2027-plan.md"
   },
   "task": {
@@ -83,6 +86,10 @@
       "aneumo_isbi_v0_reads_field_arrays": false,
       "aneumo_missing_inflow_law": "discrete_uniform_known_design_law_not_patient_physiology",
       "aneumo_v0_pass_authorizes": "v1_64_case_implementation_smoke_only",
+      "aneumo_isbi_v1_config": "configs/aneumo_isbi_v1.json",
+      "aneumo_isbi_v1_status": "preregistered_validation_only_unrun",
+      "aneumo_isbi_v1_model_tasks": 12,
+      "aneumo_isbi_v1_test_access": false,
       "aneug_flow_bc_variation": false,
       "aneug_flow_local_scope": "geometry_archive_only",
       "benchanxplore_cases": 105,
@@ -219,9 +226,18 @@
       "excluded_headline_channels": [
         "pressure"
       ],
-      "mandatory_baseline": "same_case_anchor_train_tuned_global_power",
-      "protocol_registration_condition": "g1s_completed_passed",
-      "headline_activation_condition": "n1_nonlinear_strong_baseline_gate_passed",
+      "mandatory_baselines": [
+        "same_case_anchor_train_tuned_global_power_response_control",
+        "q_pointnet",
+        "knn_mgn",
+        "deltaphi_graph",
+        "three_seed_deep_ensemble"
+      ],
+      "protocol_registration_condition": "g1s_completed_and_isbi_v0_passed",
+      "headline_activation_condition": "positive_m0_then_expanded_or_independent_v2_outer_test_passed",
+      "v1_config": "configs/aneumo_isbi_v1.json",
+      "v1_status": "preregistered_validation_only_unrun",
+      "v1_test_access": false,
       "headline_authorized": false
     }
   },
