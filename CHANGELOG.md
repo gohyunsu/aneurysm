@@ -34,6 +34,13 @@
   `tests/test_protocol.py`, `site/index.html`, `site/learn.html`,
   `site/assets/aurora.js`, `site/assets/research-data.js`,
   `CHANGELOG.md`.
+- Production source
+  `bf3deeb44c9c492e51733e1f4f30a407166e8e1e`의 GitHub quality run
+  `31270301588`과 Pages run `31270301232`은 모두 success다. 2026-08-09
+  KST에 <https://gohyunsu.github.io/aneurysm/site/>와
+  <https://gohyunsu.github.io/aneurysm/site/learn.html>이 active shortlist 0,
+  vessel-anatomy/lesion-extent 구분, candidate rejected와 fresh problem audit
+  경계를 실제 제공함을 확인했다.
 
 ## 2026-08-09 · public alternatives do not replace the selection-aware task
 
