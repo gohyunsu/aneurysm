@@ -21,6 +21,10 @@
 - 이 red team은 S0a의 asset/runtime contract, 실행 source, threshold 또는
   권한을 바꾸지 않는다. Method, architecture, GPU, outer test와 paper identity는
   계속 닫혀 있다. 중앙 schema를 `2.7`로 갱신했다.
+- Exact public source `d8fbabd72b50039d899229484265968df25b3508`의
+  GitHub quality run `31279925201`과 Pages run `31279924772`는 모두
+  success다. <https://gohyunsu.github.io/aneurysm/site/>의 live asset에서
+  27.0/40 score와 inverse Navier--Stokes direct-prior 경계를 확인했다.
 - 영향 파일: `docs/literature-lineage.md`,
   `docs/goal-oriented-segmentation-audit-2026-08-09.md`, `AGENTS.md`,
   `docs/isbi-2027-plan.md`, `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
