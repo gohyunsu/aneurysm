@@ -95,14 +95,36 @@ source `84fc244`에서 60/60 patch q-invariance와 minimum polygon-valid fractio
 1.0을 포함해 8/8을 통과했다.
 
 V1d는 이 pass 뒤 고정한 **development-only full geometry-cache contract**다.
-Train 40·validation 12 case에서 boundary VTP 468개와 reference-volume VTU
-52개의 geometry만 decode하고 test는 봉인한다. Patch geometry가 세 flow에서
-exact invariant인지, surface topology와 frame이 유효한지, compact query가
-같은 bounds에 있는지뿐 아니라 모든 boundary point가 reference volume point에
-exact하게 존재하는지를 요구한다. Pass 뒤에도 boundary token, surface encoder
-또는 mesh GNN을 바로 구현하지 않는다. 별도 known-condition strong-baseline
-protocol을 먼저 고정해야 한다. Boundary-aware encoding 자체는 선행요소이므로
-novelty가 아니다.
+Exact source `369317a`에서 train 40·validation 12 case의 boundary VTP 468개와
+reference-volume VTU 52개의 geometry만 decode해 9/9을 통과했다. 156/156
+patch가 세 flow에서 exact invariant였고 52/52 case의 모든 boundary point가
+reference volume point에 exact하게 존재했다. Test와 field array는 봉인했다.
+이는 boundary-aware model을 정당화하는 자산 계약이지 모델 성능이 아니다.
+
+### V1e · Matched-budget known-condition Perceiver
+
+V1e는 새 contribution 후보가 아니라 **learnability qualification**이다. 두
+variant는 같은 Perceiver IO 구조와 정확히 같은 parameter 수를 사용한다.
+
+- Boundary variant: compact volume에서 뽑은 128 interior token과
+  inlet/outlet/wall 각각 64 token, 총 320개를 사용한다. 각 boundary token은
+  normalized position, patch type, outward normal, observed scalar flow와
+  normalized log-area를 가진다.
+- Geometry-only control: 같은 320-token budget을 전부 compact interior point로
+  채운다. Query는 normalized coordinate와 observed flow만 받는다.
+- Encoder: 320 source token을 64 latent token으로 cross-attention하고 4개
+  latent self-attention block으로 전역 inlet–sac–outlet 관계를 혼합한다.
+- Decoder: 4,096 volume query를 1,024개씩 latent에 cross-attention해 3D velocity
+  vector를 예측한다. Train-only proper rotation은 좌표·normal·velocity에 함께
+  적용한다.
+
+Train 40·validation 12 case와 eight-flow design law만 사용한다. Full-field
+normalized MSE가 유일한 training loss이고 paired-response loss weight는 0이다.
+Validation checkpoint는 full-q와 reference-paired-response relative L2의 평균으로
+선택한다. Fresh three-seed에서 absolute learnability gate와 두 primary metric의
+boundary utility가 모두 통과해야 한다. 이 baseline은 attention-based
+continuous-query operator이며 GNN이 아니다. 통과하더라도 Perceiver나 boundary
+token 자체를 novelty로 주장하지 않는다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

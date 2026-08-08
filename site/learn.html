@@ -51,10 +51,11 @@
             Exact/nonlinear gate는 context MLP와 boundary token, lifted
             decoder로 실행했습니다. V1의 q-PointNet·kNN graph·anchor-token
             후보는 gate 5/7로 실패했고 V1a에서 training underfit도 확인됐습니다.
-            V1b와 V1c는 boundary asset과 train-only geometry staging을 각각
-            8/8로 통과했지만 model evidence는 아닙니다. V1d도 test를 봉인한
-            development geometry-cache audit일 뿐 새 모델을 학습하지 않습니다.
-            국소 GNN, anatomy
+            V1b/V1c는 8/8, V1d는 9/9을 통과했지만 모두 asset evidence입니다.
+            현재 학습 전에 고정된 V1e는 boundary token을 읽는
+            <b>Perceiver continuous-query operator</b>이며 GNN이 아닙니다.
+            Geometry-only matched control과 fresh three-seed로 비교하지만 아직
+            실행 결과는 없습니다. 국소 GNN, anatomy
             attention, continuous-query operator를 모두 결합한 더 큰 구조는
             장기 <b>irregular-3D target specification</b>입니다.
           </p>
@@ -413,6 +414,42 @@
 
           <div class="explain-block">
             <div>
+              <p class="eyebrow">V1e · PREREGISTERED ENGINEERING BASELINE</p>
+              <h3>Missing inflow를 묻기 전에, 알려진 inflow부터 배울 수 있어야 합니다.</h3>
+            </div>
+            <div class="prose">
+              <p>
+                V1의 네 후보는 혈관 내부 4,096개 점과 유량만 보았고 training
+                field조차 충분히 맞히지 못했습니다. V1e는 이를 같은 backbone을
+                수선하는 문제로 다루지 않습니다. 공식 release에서 확인한 inlet,
+                outlet, wall의 위치·종류·바깥 방향 normal·면적을 source token으로
+                제공했을 때 fully observed scalar inflow의 velocity field가 먼저
+                식별 가능한지를 묻습니다.
+              </p>
+              <div class="large-equation">
+                128 interior + 64 inlet + 64 outlet + 64 wall = 320 source tokens
+              </div>
+              <p>
+                Boundary variant는 이 320 token을 64 latent token으로
+                cross-attention한 뒤 4개 self-attention block에서 inlet–sac–outlet의
+                전역 관계를 섞습니다. Decoder는 각 volume coordinate와 알려진
+                유량을 query로 받아 3D velocity vector를 출력합니다. Control은
+                parameter 수와 320-token budget을 그대로 두고 모두 interior
+                point로 채웁니다. 따라서 차이는 “더 큰 모델”이 아니라 physical
+                boundary identity의 정보입니다.
+              </p>
+              <p>
+                세 fresh seed에서 boundary model의 worst validation full-q L2가
+                0.35 이하, paired-response L2가 0.50 이하여야 하며 두 metric 모두
+                최소 2/3 seed와 seed-mean 5%에서 control보다 좋아야 합니다.
+                Paired-response loss는 사용하지 않습니다. 아직 결과가 없고,
+                통과해도 Perceiver나 attention을 novelty로 주장하지 않습니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="explain-block">
+            <div>
               <p class="eyebrow">M0 · PROSPECTIVE MECHANISM</p>
               <h3>좋은 solution sample만으로는 “무엇을 측정할지” 정할 수 없습니다.</h3>
             </div>
@@ -445,8 +482,10 @@
               PDE의 joint density, conditional operator, strong baselines와
               decision evaluation은 구현·실행됐지만 N1c는 실패했습니다.
               N1c-a는 density objective가 주 병목임을 확인했고 3D GNN은
-              실행하지 않았습니다. M0 joint-pullback은 구현·사전등록됐지만
-              아직 unrun이며 selected method가 아닙니다. “implemented”,
+              실행하지 않았습니다. V1e Perceiver baseline은 구현·사전등록됐지만
+              아직 GPU training 전이며 method novelty가 아닙니다. M0
+              joint-pullback도 구현·사전등록됐지만 아직 unrun이고 selected
+              method가 아닙니다. “implemented”,
               “supported”와 “proposed”를 구분합니다.
             </p>
           </aside>
@@ -666,10 +705,11 @@
               세 patch×세 flow, 180 payload에서 q-invariance, topology,
               area/frame와 기존 cache 좌표계 일치를 검사해 8/8을 통과했습니다.
               60/60 patch가 exact q-invariant였고 polygon-valid fraction은
-              1.0이었습니다. V1d는 validation geometry를 보기 전에 train 40,
-              validation 12, test 0 case의 520 geometry payload를 고정해 모든
-              boundary point의 volume correspondence까지 검사합니다. 통과해도
-              known-condition baseline protocol만 열고 모델은 학습하지 않습니다.
+              1.0이었습니다. Exact source 369317a의 V1d는 train 40,
+              validation 12, test 0 case의 520 geometry payload를 감사해 9/9을
+              통과했습니다. 156/156 patch가 q-invariant였고 52/52 case에서 모든
+              boundary point가 volume point에 exact하게 대응했습니다. 이 asset
+              pass 뒤 V1e known-condition baseline만 학습 전에 고정했습니다.
               AneuG-Flow는
               geometry archive만 확인됐고 BC variation이 없어 paired-BC
               evidence로 쓰지 않습니다.
@@ -847,7 +887,7 @@
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
             <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>N0 실패는 보존하고, 결과 전에 fresh seed와 context-stratified selector를 고정한 N0r가 9/9를 통과했습니다.</p></div><b>N0r pass · N1 opened</b></article>
             <article><span>N1</span><div><h3>Coherence가 정확도와 decision을 개선하는가?</h3><p>N1c는 distribution·pair·acquisition에서 실패했습니다. N1c-a는 joint density 병목과 non-discriminative sparse task를 확인했습니다.</p></div><b>failed · 3D blocked</b></article>
-            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>V1은 geometry-only input에서 실패했고 V1a는 training underfit을 확인했습니다. V1b/V1c는 asset·geometry staging 8/8을 통과했지만 model evidence가 아닙니다. V1d가 test를 봉인한 40/12/0 development geometry와 exact boundary-volume correspondence를 감사하며 아직 3D model을 열지 않습니다.</p></div><b>V1 failed · V1b/V1c asset-only pass · V1d preregistered</b></article>
+            <article><span>G2</span><div><h3>BC response를 실제로 배우는가?</h3><p>V1은 geometry-only input에서 실패했고 V1a는 training underfit을 확인했습니다. V1b/V1c는 8/8, V1d는 9/9을 통과했지만 asset evidence입니다. V1e는 같은 parameter·token budget의 boundary Perceiver와 geometry-only control로 known-condition learnability를 먼저 검사하며 아직 unrun입니다.</p></div><b>V1 failed · V1b/V1c/V1d asset pass · V1e preregistered</b></article>
             <article><span>G3</span><div><h3>One-shot이 정말 유리한가?</h3><p>POD 17/25는 표현 기준만 통과했습니다. Same-benchmark learned 비교와 fresh transient confirmation에서 모두 Pareto 이득이 있어야 합니다.</p></div><b>부분 진행</b></article>
             <article><span>V2</span><div><h3>3D aneurysm에서 실제로 유효한가?</h3><p>ISBI headline은 expanded 또는 independent irregular-3D velocity outer test, five seeds와 family-bootstrap CI를 요구합니다.</p></div><b>ISBI submission gate</b></article>
           </div>

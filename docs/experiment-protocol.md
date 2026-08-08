@@ -220,6 +220,46 @@ protocol 등록**만 허용한다. Model training, test geometry/field, V2,
 partial/missing-condition method, novelty와 submission은 열지 않는다. V1
 failure, current branch 폐기와 local-repair 금지는 유지한다.
 
+**Outcome · 2026-08-08.** Exact source `369317a`의 pinned-container run은 exit
+0으로 완료돼 9/9을 통과했다. Train 40·validation 12·test 0 case에서 boundary
+468개와 reference-volume 52개 payload를 감사했다. 156/156 patch가 exact
+q-invariant였고 minimum polygon-valid fraction은 1.0, volume point count는
+86,182--213,191이었다. 52/52 case에서 모든 boundary point가 reference-volume
+point에 bitwise exact하게 존재했다. Field array와 test payload는 읽지 않았다.
+Public aggregate는
+`results/aneumo_isbi_v1d_development_geometry_cache_20260808.json`이다.
+
+### V1e · Known-condition boundary qualification
+
+`configs/aneumo_isbi_v1e_known_condition_baseline.json`은 V1d outcome 뒤 어떤
+V1e training 또는 checkpoint보다 먼저 고정한다. 목적은 missing-condition
+방법을 설계하기 전에 fully observed scalar inflow에서 3D velocity operator의
+절대 학습 가능성과 boundary asset의 incremental utility를 분리해 확인하는
+것이다.
+
+Primary는 128 interior + inlet/outlet/wall 각 64개로 구성한 320-token boundary
+Perceiver이고, control은 같은 parameterization과 320 interior token을 쓰는
+geometry-only Perceiver다. Source token 외의 optimizer, initialization seed,
+minibatch 수, query 수와 evaluation은 동일하다. Train 40·validation 12·test 0,
+velocity-only, fresh seeds `[821101,821102,821103]`, 두 variant의 6 GPU task,
+8,000 steps를 사용한다. Full-field normalized MSE만 최적화하고 paired-response
+loss weight는 0이다. Checkpoint는 validation full-q와 reference-paired-response
+relative L2의 평균이 최소인 step으로 고른다.
+
+아홉 check는 dependency·6-task·matched budget·no forbidden access 외에 다음을
+모두 요구한다.
+
+1. Boundary variant의 worst-seed train full-q L2 ≤ 0.25.
+2. Worst-seed validation full-q L2 ≤ 0.35.
+3. Worst-seed validation paired-response L2 ≤ 0.50.
+4. 두 primary metric 각각에서 boundary가 control보다 좋은 seed가 최소 2/3.
+5. 두 metric의 seed-mean 상대 개선이 각각 최소 5%.
+
+실패하면 architecture, loss, step, seed 또는 threshold를 결과에 맞춰 바꾸지
+않고 current Aneumo 3D learning line을 중단한다. 통과해도 scalar
+missing-inflow development protocol 등록만 허용한다. V1 relabel, test/V2,
+multicomponent partial claim, method novelty와 ISBI submission은 허용하지 않는다.
+
 ## 1. 검증할 가설
 
 - **H1 · Coherence:** 하나의 joint BC density를 conditioning해 만든

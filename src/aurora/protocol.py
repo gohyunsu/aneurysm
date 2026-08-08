@@ -161,7 +161,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1d_development_geometry_config",
             "v1d_config_sha256",
             "v1d_status",
+            "v1d_result",
+            "v1d_result_sha256",
+            "v1d_gate",
             "v1d_pass_authorizes",
+            "v1e_known_condition_config",
+            "v1e_config_sha256",
+            "v1e_status",
+            "v1e_pass_authorizes",
             "v1_test_access",
             "plan",
         ],
@@ -243,9 +250,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or venue["v1d_config_sha256"]
         != "5b843de7dd7ed1250bdfa93b41e7817645e330b31d3020c994e208ff8295fd9b"
         or venue["v1d_status"]
-        != "preregistered_after_v1c_pass_before_validation_geometry_payload_decode"
+        != "completed_passed_development_geometry_adequacy_only"
+        or venue["v1d_result"]
+        != "results/aneumo_isbi_v1d_development_geometry_cache_20260808.json"
+        or venue["v1d_result_sha256"]
+        != "051a722cb96ca1adb4f7eb4997d9f4dc96f5c84c04fb295e4aa489be7ff1b0db"
+        or venue["v1d_gate"] != "9_of_9_passed"
         or venue["v1d_pass_authorizes"]
         != "register_boundary_aware_known_condition_baseline_protocol_only"
+        or venue["v1e_known_condition_config"]
+        != "configs/aneumo_isbi_v1e_known_condition_baseline.json"
+        or venue["v1e_config_sha256"]
+        != "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19"
+        or venue["v1e_status"]
+        != "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint"
+        or venue["v1e_pass_authorizes"]
+        != "register_boundary_aware_scalar_missing_inflow_development_protocol_only"
         or venue["v1_test_access"] is not False
         or venue["plan"] != "docs/isbi-2027-plan.md"
     ):
@@ -411,7 +431,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1d_development_geometry_config",
             "v1d_config_sha256",
             "v1d_status",
+            "v1d_result",
+            "v1d_result_sha256",
+            "v1d_gate",
             "v1d_pass_authorizes",
+            "v1e_known_condition_config",
+            "v1e_config_sha256",
+            "v1e_status",
+            "v1e_pass_authorizes",
             "v1_ensemble_estimand",
             "v1_aggregate_integrity",
             "v1_response_oracle_role",
@@ -491,9 +518,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or irregular_3d["v1d_config_sha256"]
         != "5b843de7dd7ed1250bdfa93b41e7817645e330b31d3020c994e208ff8295fd9b"
         or irregular_3d["v1d_status"]
-        != "preregistered_after_v1c_pass_before_validation_geometry_payload_decode"
+        != "completed_passed_development_geometry_adequacy_only"
+        or irregular_3d["v1d_result"]
+        != "results/aneumo_isbi_v1d_development_geometry_cache_20260808.json"
+        or irregular_3d["v1d_result_sha256"]
+        != "051a722cb96ca1adb4f7eb4997d9f4dc96f5c84c04fb295e4aa489be7ff1b0db"
+        or irregular_3d["v1d_gate"] != "9_of_9_passed"
         or irregular_3d["v1d_pass_authorizes"]
         != "register_boundary_aware_known_condition_baseline_protocol_only"
+        or irregular_3d["v1e_known_condition_config"]
+        != "configs/aneumo_isbi_v1e_known_condition_baseline.json"
+        or irregular_3d["v1e_config_sha256"]
+        != "e21414f467b3f6dc0ac6d8a0086ed04cf2873f66f890239c033c77d464e4ae19"
+        or irregular_3d["v1e_status"]
+        != "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint"
+        or irregular_3d["v1e_pass_authorizes"]
+        != "register_boundary_aware_scalar_missing_inflow_development_protocol_only"
         or irregular_3d["v1_ensemble_estimand"]
         != "matching_q_three_seed_mean_and_seed_by_eight_q_twenty_four_component_missing_mixture"
         or irregular_3d["v1_aggregate_integrity"]

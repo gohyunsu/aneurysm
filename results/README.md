@@ -51,6 +51,13 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   validation/test payload와 model/checkpoint는 읽지 않았다. V1d development
   geometry-cache protocol 등록만 허용하며 model, V2/test, novelty와 submission
   evidence가 아니다.
+- `aneumo_isbi_v1d_development_geometry_cache_20260808.json`: exact source
+  `369317a`의 development-only geometry audit. Train 40·validation 12·test 0,
+  boundary 468개와 reference-volume 52개 payload를 확인해 9/9을 통과했다.
+  156/156 patch가 q-invariant였고 52/52 case에서 boundary points가 volume
+  points에 exact하게 대응했다. Field array와 test payload는 읽지 않았다.
+  V1e known-condition protocol 등록만 허용한 asset evidence이며 model,
+  missing-condition, novelty 또는 submission evidence가 아니다.
 
 현재 controlled-PDE 결과:
 

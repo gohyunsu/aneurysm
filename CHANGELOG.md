@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1d passes asset adequacy and V1e freezes known-condition learnability
+
+- Exact source `369317a`의 V1d는 dependency-complete 199/199 tests와
+  protocol/site 검증을 통과한 뒤 CPU audit을 exit 0으로 완료했다.
+- Train 40·validation 12·test 0 case, boundary 468개와 reference-volume 52개
+  payload를 감사해 9/9을 통과했다. 156/156 patch가 exact q-invariant였고
+  52/52 case의 exact boundary-volume point correspondence와 minimum
+  polygon-valid fraction 1.0을 확인했다. Field array와 test payload는 읽지
+  않았다.
+- Public aggregate는
+  `results/aneumo_isbi_v1d_development_geometry_cache_20260808.json`이다. V1d는
+  asset adequacy이지 model evidence가 아니며 V1 failure를 바꾸지 않는다.
+- V1d가 허용한 범위에서
+  `configs/aneumo_isbi_v1e_known_condition_baseline.json`을 어떤 V1e training
+  또는 checkpoint보다 먼저 고정했다. 같은 parameter·320-token budget의
+  boundary Perceiver와 geometry-only control을 fresh three-seed, six GPU task로
+  비교한다. Full-field MSE만 학습하고 paired-response loss는 0이다.
+- V1e는 absolute learnability와 seed-robust 5% boundary utility를 모두
+  요구한다. 실패하면 current Aneumo 3D line을 local repair 없이 중단한다.
+  통과해도 scalar missing-inflow development protocol만 등록할 수 있으며
+  test/V2, multicomponent partial claim, novelty와 submission은 열리지 않는다.
+
 ## 2026-08-08 · V1c passes geometry staging and V1d seals development caching
 
 - Exact source `84fc244`는 pinned container에서 dependency-complete 193/193

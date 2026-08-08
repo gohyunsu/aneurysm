@@ -1,0 +1,142 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v1e_known_condition_baseline.v1",
+  "experiment_id": "aneumo_isbi_v1e_known_condition_baseline",
+  "status": "preregistered_after_v1d_pass_before_any_v1e_training_or_checkpoint",
+  "as_of": "2026-08-08",
+  "purpose": "Test whether a standard boundary-conditioned operator can first learn the fully observed scalar-inflow velocity field on the sealed development split before any missing-condition method is designed.",
+  "source": {
+    "dataset": "Aneumo",
+    "license": "CC-BY-NC-ND-4.0",
+    "pilot_config": "configs/aneumo_g2_pilot_v1.json",
+    "pilot_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "compact_cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+    "v1d_result": "results/aneumo_isbi_v1d_development_geometry_cache_20260808.json",
+    "v1d_result_sha256": "051a722cb96ca1adb4f7eb4997d9f4dc96f5c84c04fb295e4aa489be7ff1b0db",
+    "v1d_private_geometry_cache_sha256": "ea524be495061c876124c8541c35e513ce6029a9732899f16a052373d9db340f"
+  },
+  "access": {
+    "splits": ["train", "validation"],
+    "expected_cases_by_split": {"train": 40, "validation": 12, "test": 0},
+    "compact_cache_datasets_read": ["coordinates_m", "mass_flows_kg_s", "pressure_velocity_velocity_channels_only"],
+    "private_geometry_cache_datasets_read": ["inlet", "outlet", "wall"],
+    "pressure_channel_read": false,
+    "validation_used_for_checkpoint_selection": true,
+    "test_geometry_or_field_read": false,
+    "test_metric_computed": false
+  },
+  "task": {
+    "condition": "fully_observed_scalar_mass_flow",
+    "output": "steady_volume_velocity_vector",
+    "query_nodes_per_case": 4096,
+    "conditions_per_case": 8,
+    "training_examples": 320,
+    "validation_examples": 96,
+    "missing_or_partial_condition_evaluated": false,
+    "clinical_endpoint_evaluated": false
+  },
+  "representation": {
+    "coordinate_normalization": "per_case_compact_query_centroid_and_rms_radius",
+    "condition_normalization": "exact_eight_flow_design_law_mean_and_standard_deviation",
+    "velocity_normalization": "train_split_scalar_rms",
+    "interior_geometry_tokens_boundary_variant": 128,
+    "boundary_tokens_per_patch": 64,
+    "total_source_tokens_per_case": 320,
+    "interior_geometry_tokens_control_variant": 320,
+    "token_selection": "deterministic_farthest_point_sampling_in_normalized_coordinates",
+    "boundary_token_features": [
+      "normalized_xyz",
+      "token_type_one_hot_interior_inlet_outlet_wall",
+      "patch_outward_normal",
+      "normalized_mass_flow",
+      "log_patch_area_over_case_radius_squared"
+    ],
+    "query_features": ["normalized_xyz", "normalized_mass_flow"],
+    "rotation_augmentation": "seeded_uniform_proper_rotation_applied_to_coordinates_normals_and_velocity_train_only"
+  },
+  "models": {
+    "primary": "boundary_perceiver_operator",
+    "control": "geometry_only_token_matched_perceiver_operator",
+    "architecture_role": "known_condition_engineering_baseline_not_method_novelty",
+    "shared_parameterization": {
+      "hidden_dim": 128,
+      "latent_tokens": 64,
+      "attention_heads": 8,
+      "latent_self_attention_layers": 4,
+      "mlp_ratio": 2,
+      "dropout": 0.0,
+      "query_chunk_size": 1024
+    },
+    "parameter_count_must_match_exactly": true,
+    "source_token_count_must_match_exactly": true,
+    "historical_v1_models_are_retrained_or_tuned": false,
+    "paired_response_loss_weight": 0.0
+  },
+  "training": {
+    "seeds": [821101, 821102, 821103],
+    "variants": ["boundary_perceiver_operator", "geometry_only_token_matched_perceiver_operator"],
+    "tasks": 6,
+    "steps": 8000,
+    "batch_cases": 2,
+    "train_query_nodes_per_example": 2048,
+    "optimizer": "adamw",
+    "learning_rate": 0.0002,
+    "weight_decay": 0.0001,
+    "warmup_steps": 400,
+    "schedule": "cosine_to_zero",
+    "gradient_clip_norm": 1.0,
+    "validation_every_steps": 400,
+    "checkpoint_selection": "minimum_validation_mean_of_full_q_and_reference_paired_response_relative_l2",
+    "loss": "train_scalar_rms_normalized_velocity_mse",
+    "mixed_precision": true,
+    "require_cuda": true
+  },
+  "evaluation": {
+    "reference_flow_kg_s": 0.0025,
+    "metrics": [
+      "train_full_q_relative_l2_at_selected_checkpoint",
+      "validation_full_q_relative_l2",
+      "validation_reference_paired_response_relative_l2",
+      "validation_prediction_target_norm_ratio",
+      "validation_vector_cosine",
+      "parameter_count",
+      "source_token_count"
+    ],
+    "selection_split": "validation_only",
+    "seed_aggregation": "mean_and_worst_seed",
+    "no_test_access": true
+  },
+  "gate": {
+    "rule": "all_registered_checks",
+    "checks": [
+      "pinned_data_and_geometry_cache_integrity",
+      "all_six_gpu_tasks_exit_zero_with_eligible_validation_selected_checkpoints",
+      "exact_parameter_and_source_token_match_between_variants",
+      "no_pressure_missing_partial_test_or_clinical_access",
+      "boundary_worst_seed_train_full_q_relative_l2_at_most_0.25",
+      "boundary_worst_seed_validation_full_q_relative_l2_at_most_0.35",
+      "boundary_worst_seed_validation_paired_response_relative_l2_at_most_0.50",
+      "boundary_better_than_geometry_control_on_both_primary_metrics_in_at_least_two_of_three_seeds",
+      "boundary_seed_mean_relative_improvement_at_least_0.05_on_both_primary_metrics"
+    ],
+    "thresholds": {
+      "maximum_worst_seed_train_full_q_relative_l2": 0.25,
+      "maximum_worst_seed_validation_full_q_relative_l2": 0.35,
+      "maximum_worst_seed_validation_paired_response_relative_l2": 0.50,
+      "minimum_better_seeds_each_primary_metric": 2,
+      "minimum_seed_mean_relative_improvement_each_primary_metric": 0.05
+    },
+    "pass_authorizes": "register_boundary_aware_scalar_missing_inflow_development_protocol_only",
+    "pass_does_not_authorize": [
+      "relabel_v1",
+      "reuse_or_tune_v1_backbones",
+      "test_geometry_or_field_access",
+      "v2_outer_test",
+      "partial_multicomponent_claim",
+      "method_novelty",
+      "isbi_submission"
+    ],
+    "failure_action": "stop_the_current_aneumo_3d_learning_line_without_local_architecture_loss_step_seed_or_threshold_repair",
+    "local_repair_allowed": false
+  },
+  "interpretation": "known_condition_learnability_and_boundary_asset_utility_not_partial_missing_method_or_novelty_evidence"
+}

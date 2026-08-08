@@ -111,16 +111,27 @@ payload, model/checkpoint와 학습은 접근하지 않았다. Public aggregate�
 `results/aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json`이다.
 
 V1c pass가 허용한 범위에서 V1d를 validation geometry payload decode 전에
-고정했다. Train 40·validation 12·test 0 case의 boundary 468개와
-reference-volume 52개 payload에서 geometry arrays만 decode한다. 전체
-development case의 q-invariance, polygon/frame, compact query bounds와 모든
-boundary point가 reference volume point에 exact하게 대응하는지를 검사한다.
-통과해도 known-condition strong-baseline **protocol 등록**만 열며 training,
-test geometry/field, V2, partial/missing-condition method와 novelty는 열지
-않는다. Known-BC encoding, boundary token 또는 surface GNN 자체는 여전히
-contribution이 아니다. 이는 V1의 같은 input/backbone을 수선하는 것이 아니라,
-V1에서 누락된 physical boundary identity를 포함할 새 data contract가 실제로
-일관되는지 검증하는 단계다.
+고정했다. Exact source `369317a`의 V1d는 train 40·validation 12·test 0 case의
+boundary 468개와 reference-volume 52개 payload에서 geometry arrays만 decode해
+9/9을 통과했다. 156/156 patch의 q-invariance, minimum polygon-valid fraction
+1.0, 52/52 case의 exact boundary-volume point correspondence를 확인했다.
+Public aggregate는
+`results/aneumo_isbi_v1d_development_geometry_cache_20260808.json`이다. 이는
+physical boundary identity를 포함하는 development data contract가 일관됨을
+보인 asset evidence이지 model evidence가 아니다.
+
+이 pass 범위에서 어떤 training/checkpoint보다 먼저 V1e를 고정했다. V1e는
+fully observed scalar inflow의 velocity field를 먼저 학습할 수 있는지 묻는
+known-condition qualification이다. Boundary Perceiver와 geometry-only control은
+같은 parameterization과 320 source token을 사용하며, 차이는 192개의
+inlet/outlet/wall token을 실제 boundary position·type·normal·area로 채우는가뿐이다.
+Fresh three-seed에서 absolute train/validation/response L2와 두 metric 모두의
+seed-robust 5% boundary utility를 요구한다. Paired-response supervision은 쓰지
+않는다. 실패하면 current Aneumo 3D line을 local repair 없이 중단하고, 통과해도
+scalar missing-inflow **development protocol 등록**만 연다. Test, V2,
+multicomponent partial claim, novelty와 submission은 열지 않는다. Known-BC
+encoding, boundary token, Perceiver 또는 surface GNN 자체는 contribution이
+아니다.
 
 ## 1. 현재 판정
 

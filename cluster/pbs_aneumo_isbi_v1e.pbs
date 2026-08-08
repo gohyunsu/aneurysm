@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+#PBS -N aurora_isbi_v1e
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=48gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=12:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT}"
+: "${AURORA_COMPACT_CACHE:?set AURORA_COMPACT_CACHE}"
+: "${AURORA_GEOMETRY_CACHE:?set AURORA_GEOMETRY_CACHE}"
+: "${AURORA_OUTPUT_ROOT:?set AURORA_OUTPUT_ROOT}"
+: "${AURORA_SIF:?set AURORA_SIF}"
+: "${AURORA_EXPERIMENT_DEPS:?set AURORA_EXPERIMENT_DEPS}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT}"
+: "${PBS_ARRAY_INDEX:?submit V1e array indices 0-5}"
+
+variants=(boundary_perceiver_operator geometry_only_token_matched_perceiver_operator)
+seeds=(821101 821102 821103)
+variant_index=$((PBS_ARRAY_INDEX / 3))
+seed_index=$((PBS_ARRAY_INDEX % 3))
+if [ "$variant_index" -ge "${#variants[@]}" ]; then
+  echo "invalid V1e array index: $PBS_ARRAY_INDEX" >&2
+  exit 2
+fi
+variant="${variants[$variant_index]}"
+seed="${seeds[$seed_index]}"
+task_output="$AURORA_OUTPUT_ROOT/${variant}_seed_${seed}"
+
+mkdir -p "$task_output/tmp"
+aurora_write_pbs_status() {
+  local exit_status=$?
+  local state="failed"
+  local metrics_created="false"
+  if [ "$exit_status" -eq 0 ]; then
+    state="complete"
+  fi
+  if [ -f "$task_output/metrics.json" ]; then
+    metrics_created="true"
+  fi
+  printf '{"array_index":%s,"exit_status":%s,"metrics_created":%s,"seed":%s,"state":"%s","variant":"%s"}\n' \
+    "$PBS_ARRAY_INDEX" "$exit_status" "$metrics_created" "$seed" "$state" "$variant" \
+    > "$task_output/pbs_status.json"
+}
+trap aurora_write_pbs_status EXIT
+exec > >(tee "$task_output/pbs.log") 2>&1
+cd "$PBS_O_WORKDIR"
+
+hostname
+nvidia-smi
+
+singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_COMPACT_CACHE:/data/aneumo_pilot.h5:ro" \
+  --bind "$AURORA_GEOMETRY_CACHE:/data/aneumo_v1d_geometry.h5:ro" \
+  --bind "$task_output:/output" \
+  --bind "$AURORA_EXPERIMENT_DEPS:/experiment-deps:ro" \
+  "$AURORA_SIF" \
+  env PYTHONPATH="/workspace:/workspace/src:/experiment-deps" \
+      PYTHONDONTWRITEBYTECODE=1 TMPDIR="/output/tmp" \
+  python /workspace/experiments/run_aneumo_isbi_v1e_known_condition.py \
+    --config /workspace/configs/aneumo_isbi_v1e_known_condition_baseline.json \
+    --root /workspace \
+    --compact-cache /data/aneumo_pilot.h5 \
+    --geometry-cache /data/aneumo_v1d_geometry.h5 \
+    --output /output \
+    --variant "$variant" \
+    --seed "$seed" \
+    --git-commit "$AURORA_GIT_COMMIT" \
+    --require-cuda

@@ -34,10 +34,12 @@
 > 후속 V1c는 20 train representative×3 patch×3 flow의 geometry-only
 > q-invariance·topology·area/frame·coordinate-frame audit에서 8/8을
 > 통과했다. 60/60 patch가 exact q-invariant였고 minimum polygon-valid
-> fraction은 1.0이었다. V1d는 validation geometry decode 전에 train 40,
-> validation 12, test 0 case의 520 geometry payload를 고정해 모든 boundary
-> point의 reference-volume correspondence까지 검사한다. Pass도
-> known-condition baseline protocol 등록만 허용한다.
+> fraction은 1.0이었다. Exact source `369317a`의 V1d는 validation geometry
+> decode 전에 고정한 train 40, validation 12, test 0 case의 520 geometry
+> payload를 감사해 9/9을 통과했다. 156/156 patch가 q-invariant였고 52/52
+> case의 exact boundary-volume correspondence를 확인했다. 이 asset pass로
+> known-condition V1e protocol만 등록했으며 test나 missing-condition method는
+> 열지 않았다.
 
 ## 핵심 비교
 

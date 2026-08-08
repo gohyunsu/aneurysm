@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V1 failed · V1a found underfit · V1b/V1c asset gates passed 8/8 · V1d development cache preregistered · not submission-ready",
+    status: "Target locked · V1 failed · V1a found underfit · V1b/V1c/V1d asset gates passed · V1e known-condition baseline preregistered · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. V1b와 V1c는 각각 8/8을 통과했지만 asset evidence일 뿐이다. V1c의 180 train payload는 60/60 patch q-invariance와 polygon validity 1.0을 보였다. V1d는 validation geometry decode 전에 40/12/0 case와 520 geometry payload를 고정해 exact boundary-volume correspondence를 검사하며, pass도 known-condition baseline protocol만 연다.",
-      state: "V1 failed · V1a underfit attributed · V1b/V1c asset-only pass · V1d preregistered · submission blocked",
+      copy: "V1a에서 네 family의 train full-q L2도 0.769–0.956이고 출력 norm/cosine이 약해 current geometry-only branch를 폐기했다. V1b/V1c는 8/8, V1d는 9/9을 통과했지만 asset evidence일 뿐이다. V1d는 156/156 q-invariant patch와 52/52 exact boundary-volume correspondence를 확인했다. V1e는 같은 parameter·320-token budget의 boundary Perceiver와 geometry-only control을 fresh three-seed로 비교하는 known-condition qualification이며 아직 unrun이다.",
+      state: "V1 failed · V1a underfit attributed · V1b/V1c/V1d asset-only pass · V1e preregistered · submission blocked",
       blocking: true
     }
   ],
@@ -141,7 +141,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "64-case internal-field cache verified · V1b/V1c asset gates 8/8 · V1d 40/12/0 development geometry cache preregistered"
+      provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition protocol preregistered"
     },
     {
       name: "AneuG-Flow",
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "protocol",
+      title: "V1d passes 9/9; V1e freezes matched boundary utility before training",
+      copy: "Exact source 369317a의 V1d는 train 40·validation 12·test 0 case에서 boundary 468개와 reference-volume 52개 payload를 감사해 9/9을 통과했다. 156/156 patch가 q-invariant였고 52/52 case의 exact boundary-volume correspondence를 확인했다. 이 asset pass 범위에서 어떤 학습보다 먼저 V1e를 고정했다. V1e는 같은 parameter·320-token budget의 boundary Perceiver와 geometry-only control을 fresh 3 seeds·6 GPU tasks로 비교한다. 실패하면 local repair 없이 현재 3D line을 중단하며, 통과해도 scalar missing-inflow development protocol만 연다.",
+      files: ["results/aneumo_isbi_v1d_development_geometry_cache_20260808.json", "configs/aneumo_isbi_v1e_known_condition_baseline.json", "src/aurora/aneumo_isbi_v1e_known_condition.py", "experiments/run_aneumo_isbi_v1e_known_condition.py", "cluster/pbs_aneumo_isbi_v1e.pbs", "tests/test_aneumo_isbi_v1e_known_condition.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "result",

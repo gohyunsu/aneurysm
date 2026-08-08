@@ -3,8 +3,8 @@
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
-backbone gate 5/7 fail, V1a attribution, V1b/V1c asset audit 8/8 pass와
-V1d development geometry-cache audit 등록 상태를 반영했다.
+backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass와
+V1e known-condition baseline 등록 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -76,13 +76,24 @@ V1d development geometry-cache audit 등록 상태를 반영했다.
   `results/aneumo_isbi_v1c_boundary_geometry_staging_audit_20260808.json`이다.
   이 pass 범위 안에서
   `configs/aneumo_isbi_v1d_development_geometry_cache.json`을 validation geometry
-  payload decode 전에 고정했다. V1d는 train 40·validation 12·test 0 case의
+  payload decode 전에 고정했다. Exact source `369317a`의 V1d는 train
+  40·validation 12·test 0 case의
   boundary 468개와 reference-volume 52개 payload에서 geometry array만 읽어
   q-invariance, polygon/frame, compact coordinate bounds와 모든 boundary point의
-  exact volume-point correspondence를 검사한다. Pass도 known-condition strong
-  baseline **protocol 등록**만 허용한다. V1 relabel, 기존 backbone 수선,
-  model training, test geometry/field, V2, partial/missing method, novelty와
-  submission은 계속 금지한다.
+  exact volume-point correspondence를 검사해 9/9을 통과했다. 156/156 patch가
+  q-invariant였고 52/52 case의 surface-volume correspondence와 minimum
+  polygon-valid fraction 1.0을 확인했다. Public aggregate는
+  `results/aneumo_isbi_v1d_development_geometry_cache_20260808.json`이다.
+  이 pass 범위에서 `configs/aneumo_isbi_v1e_known_condition_baseline.json`을
+  어떤 V1e training/checkpoint보다 먼저 고정했다. V1e는 동일 parameter와
+  320 source-token budget의 boundary Perceiver와 geometry-only control을
+  fresh 3 seed로 비교한다. Full-field MSE만 학습하고 paired-response loss는
+  0이다. Worst-seed train/full-q/response absolute gate와 seed-robust 5%
+  boundary utility를 모두 요구한다. 실패하면 architecture, loss, step, seed,
+  threshold를 국소 수정하지 않고 Aneumo 3D learning line을 중단한다. 통과해도
+  scalar missing-inflow **development protocol 등록**만 허용한다. V1 relabel,
+  기존 backbone 수선, test geometry/field, V2, multicomponent partial claim,
+  novelty와 submission은 계속 금지한다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면

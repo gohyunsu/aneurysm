@@ -9,9 +9,10 @@
 > Reliable Assessment
 
 현재 제출 목표는 **IEEE ISBI 2027 four-page regular paper**입니다
-(공식 마감 2026-10-26). 다만 N1c와 V1 3D backbone gate가 실패했고 V1b/V1c의
-boundary asset·geometry 확인도 model evidence가 아니므로 아직 submission-ready가
-아닙니다. ISBI에 맞춘 좁은 claim,
+(공식 마감 2026-10-26). 다만 N1c와 V1 3D backbone gate가 실패했고
+V1b/V1c/V1d의 boundary asset·geometry 통과도 model evidence가 아닙니다.
+V1e known-condition baseline은 사전등록됐지만 아직 실행 전이므로
+submission-ready가 아닙니다. ISBI에 맞춘 좁은 claim,
 velocity-only 3D 실험, five-seed outer-test와 kill date는
 [`docs/isbi-2027-plan.md`](docs/isbi-2027-plan.md)에 고정합니다.
 
@@ -64,14 +65,23 @@ Exact source `84fc244`에서 20 train-family representative의 세 patch×세 fl
 `U/p/TimeValue`, validation/test, checkpoint와 학습은 읽지 않았습니다.
 
 이 결과가 연 것은 다시 모델이 아니라
-[`V1d development geometry-cache audit`](configs/aneumo_isbi_v1d_development_geometry_cache.json)입니다.
-Validation geometry를 보기 전에 train 40·validation 12·test 0 case,
-boundary 468개와 reference-volume 52개 payload를 고정했습니다. Geometry만
-decode해 q-invariance, surface topology·frame, compact query bounds와 모든
-boundary point의 exact volume-point correspondence를 검사합니다. 통과해도
-known-condition strong-baseline **protocol**만 등록할 수 있고 model training,
-test geometry/field, V2, partial/missing method, novelty와 submission은 열리지
-않습니다.
+[`V1d development geometry-cache audit`](results/aneumo_isbi_v1d_development_geometry_cache_20260808.json)이었습니다.
+Exact source `369317a`에서 train 40·validation 12·test 0 case의 boundary
+468개와 reference-volume 52개 payload를 geometry-only로 감사해 9/9을
+통과했습니다. 156/156 patch가 q-invariant였고, 52/52 case에서 모든 boundary
+point가 reference-volume point에 exact하게 대응했으며 minimum polygon-valid
+fraction은 1.0이었습니다. 이는 model evidence가 아닙니다.
+
+V1d가 허용한 범위에서 어떤 학습보다 먼저
+[`V1e known-condition baseline`](configs/aneumo_isbi_v1e_known_condition_baseline.json)을
+고정했습니다. 동일 parameter·320 source-token budget에서 boundary Perceiver와
+geometry-only control을 fresh three-seed로 비교합니다. Train/validation의
+fully observed scalar inflow와 velocity만 사용하고 paired-response loss는
+0입니다. Absolute learnability와 seed-robust boundary utility를 모두 통과해야
+다음 scalar missing-inflow development protocol을 등록할 수 있습니다. 실패하면
+architecture·loss·step·seed·threshold를 국소 수정하지 않고 현재 Aneumo 3D
+learning line을 중단합니다. Test geometry/field, V2, partial/missing claim,
+novelty와 submission은 여전히 열리지 않습니다.
 
 ## 현재 모델은 GNN인가?
 

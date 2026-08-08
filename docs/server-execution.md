@@ -131,10 +131,14 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
   topology, area/frame와 compact-cache coordinate frame만 감사해 exact source
   `84fc244`에서 8/8을 통과했다. 180 payload, 60/60 q-invariant patch,
   minimum polygon-valid fraction 1.0과 field/test-read false를 확인했다.
-  V1d는 validation geometry payload decode 전에 고정됐으며 train 40·validation
-  12·test 0 case의 boundary 468개와 volume 52개 geometry payload에서 exact
-  boundary-volume correspondence를 추가로 검사한다. V1d를 통과하기 전에는
-  boundary-aware baseline protocol을 등록하지 않으며 model/test를 열지 않는다.
+  V1d는 validation geometry payload decode 전에 고정됐으며 exact source
+  `369317a`의 CPU run에서 train 40·validation 12·test 0 case의 boundary 468개와
+  volume 52개 geometry payload를 감사해 9/9을 통과했다. 156/156 patch의
+  q-invariance와 52/52 exact boundary-volume correspondence를 확인했다. 이
+  asset pass 뒤 V1e known-condition baseline을 학습 전에 고정했다. V1e의 6개
+  GPU task는 login node가 아니라 PBS A6000 allocation에서만 실행하며, exact
+  source·두 private cache checksum·container·dependency layer를 각 task에
+  기록한다. Aggregate 전에는 test payload를 staging하지 않는다.
 
 ## Run contract
 
