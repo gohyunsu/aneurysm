@@ -35,6 +35,19 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
   끝났고 재시도 loop를 돌리지 않았다. 기존 공개 row audit만 보존하며 105
   lesion exact-ID linkage를 아직 통과로 표시하지 않는다.
 - S0a는 CPU-only PBS, source/code read-only, output writable, aggregate-only다.
+
+### CMHA private staging boundary
+
+- Windows SSH config의 `SN_introai9_39` alias로 승인된 source root를
+  읽기 전용 검색했으나 CMHA archive 또는 matching directory는 없었다.
+  `junjinyong` home에도 official archive와 table은 없었다.
+- `junjinyong`에는 `curl`, `7z`, checksum 도구와 약 4.1 TB 여유가 있고,
+  host SU2/OpenFOAM은 없다. 기존 held job 두 개는 변경하지 않았다.
+- `cluster/pbs_goal_oriented_s0a_stage_cmha.pbs`는 official Figshare file ID,
+  byte size와 MD5를 고정한 **staging-only** CPU job이다. Private output에만
+  archive와 extracted payload를 쓰고, 중단된 download는 resume한다.
+  Identifier linkage, unit/frame, solver capability와 S0a pass/fail은 평가하지
+  않으며 status에도 `gate_evaluated=false`를 기록한다.
   Pass도 S0b 등록만 열고 segmentation training, GPU와 outer test를 금지한다.
 
 ## 2026-08-08 · Cross-protocol 4D-flow I0a

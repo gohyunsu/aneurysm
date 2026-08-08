@@ -309,6 +309,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "implementation",
+      title: "CMHA staging is separated from the S0a verdict",
+      copy: "Read-only searches found no staged CMHA archive in the approved introai9 source root or junjinyong home. A CPU/PBS wrapper now pins the three official Figshare file IDs, byte sizes and MD5 values, resumes partial downloads, and extracts only after checksum verification. It records gate_evaluated=false and performs no identifier mapping, solver probe, model, GPU or outer-test access.",
+      files: ["cluster/pbs_goal_oriented_s0a_stage_cmha.pbs", "tests/test_goal_oriented_s0a.py", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.09",
       category: "research",
       title: "One problem survives only as an S0a-conditional shortlist",
       copy: "A primary-source cold audit rejects generic segmentation→CFD, joint mesh/field prediction, CFD-applicability, topology loss and adjoint/PDE optimization as standalone novelty. Goal-oriented hemodynamic segmentation scores 27.5/40, below the 32/40 automatic-selection threshold. Its only residual gap is signed adjoint projection of boundary displacement for predefined standardized functionals. S0a freezes eleven all-or-none CMHA linkage and solver-runtime checks; method, architecture, GPU, outer test and paper identity remain closed. Prospective source 24e0444dc1a7d5fcff924c70f3b8319d134b5bd3 passed the public quality workflow and Pages deployment.",

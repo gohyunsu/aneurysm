@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Register CMHA staging without evaluating S0a
+
+- `introai9` 승인 root와 `junjinyong` home을 읽기 전용으로 확인했지만 CMHA
+  archive/table은 staged되어 있지 않았다. 이를 자산 부재나 S0a failure로
+  해석하지 않는다.
+- Official Figshare file ID, size와 MD5를 고정한 CPU/PBS staging wrapper를
+  추가했다. Download는 partial file을 보존해 resume하고 checksum 통과 후에만
+  extraction한다. GPU, model, identifier mapping, solver probe와 gate outcome은
+  모두 접근하지 않는다.
+- 영향 파일: `cluster/pbs_goal_oriented_s0a_stage_cmha.pbs`,
+  `tests/test_goal_oriented_s0a.py`, `docs/server-execution.md`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Goal-oriented segmentation survives only as an S0a-conditional problem
 
 - CMHA, OpenNeuro `ds005096`, 공개 multi-center CTA 2026의 실제 supervision과

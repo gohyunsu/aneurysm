@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+#PBS -N aurora_s0a_stage
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=16gb
+#PBS -l walltime=08:00:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+
+: "${AURORA_STAGE_ROOT:?set AURORA_STAGE_ROOT to a private writable directory}"
+
+archive_root="$AURORA_STAGE_ROOT/archives"
+extract_root="$AURORA_STAGE_ROOT/extracted"
+record_root="$AURORA_STAGE_ROOT/staging-records"
+mkdir -p "$archive_root" "$extract_root" "$record_root"
+
+download_archive() {
+  local file_id="$1"
+  local filename="$2"
+  local expected_bytes="$3"
+  local expected_md5="$4"
+  local final_path="$archive_root/$filename"
+  local partial_path="$archive_root/$filename.partial"
+  local verify_path="$final_path"
+
+  if [ ! -f "$final_path" ]; then
+    curl --fail --location --retry 3 --retry-delay 10 \
+      --continue-at - \
+      --output "$partial_path" \
+      "https://ndownloader.figshare.com/files/$file_id"
+    verify_path="$partial_path"
+  fi
+
+  local observed_bytes
+  local observed_md5
+  observed_bytes="$(stat -c %s "$verify_path")"
+  observed_md5="$(md5sum "$verify_path" | awk '{print $1}')"
+  if [ "$observed_bytes" != "$expected_bytes" ]; then
+    echo "Size mismatch for $filename" >&2
+    return 2
+  fi
+  if [ "$observed_md5" != "$expected_md5" ]; then
+    echo "MD5 mismatch for $filename" >&2
+    return 2
+  fi
+  if [ "$verify_path" = "$partial_path" ]; then
+    mv "$partial_path" "$final_path"
+  fi
+  printf '%s\t%s\t%s\n' "$filename" "$observed_bytes" "$observed_md5"
+}
+
+extract_archive() {
+  local filename="$1"
+  local label="$2"
+  local final_dir="$extract_root/$label"
+  local job_token="${PBS_JOBID:-manual}"
+  local partial_dir="$extract_root/.${label}.${job_token}.partial"
+
+  if [ -e "$final_dir" ]; then
+    return 0
+  fi
+  if [ -e "$partial_dir" ]; then
+    echo "Preserved partial extraction already exists: $partial_dir" >&2
+    return 2
+  fi
+  mkdir -p "$partial_dir"
+  7z x -y -o"$partial_dir" "$archive_root/$filename"
+  mv "$partial_dir" "$final_dir"
+}
+
+manifest="$record_root/archive-manifest.${PBS_JOBID:-manual}.tsv"
+{
+  download_archive 49199083 "controls.rar" 4821489080 \
+    8d18b970978a303ed89618066919a1b1
+  download_archive 49199500 "statistical results.rar" 34376 \
+    12b92693c79587fb6dbab4638bfad8bc
+  download_archive 49201807 "patients.rar" 10735821611 \
+    e783d656ba51c6813aae9fca68565c17
+} > "$manifest"
+
+extract_archive "controls.rar" controls
+extract_archive "statistical results.rar" statistics
+extract_archive "patients.rar" patients
+
+printf '%s\n' '{"state":"staging_complete","gate_evaluated":false,"model_access":false,"gpu_access":false}' \
+  > "$record_root/status.${PBS_JOBID:-manual}.json"
