@@ -245,7 +245,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.09",
       category: "research",
       title: "One access-blocked lesion-set problem enters the shortlist",
-      copy: "Generic segmentation/UQ, longitudinal growth와 geometry×BC shape response를 direct prior art 또는 data-unit 부족으로 기각했다. 유일한 조건부 후보는 RSNA-ICA의 presence/location/localizer/segmentation을 하나의 latent lesion set의 annotation projection으로 다루는 문제다. 그러나 controlled-access asset이 stage되지 않아 task unit은 unaudited이고, user-authorized access 뒤 CPU/read-only L0 전에는 method·GPU·outer test·paper identity가 모두 닫혀 있다. Vessel graph, GNN, set prediction, mixed supervision, anatomy prompt와 conformal/FDR는 단독 novelty가 아니다.",
+      copy: "Generic segmentation/UQ, longitudinal growth와 geometry×BC shape response를 direct prior art 또는 data-unit 부족으로 기각했다. 유일한 조건부 후보는 RSNA-ICA의 presence/location/localizer/segmentation을 하나의 latent lesion set의 annotation projection으로 다루는 문제다. 그러나 controlled-access asset이 stage되지 않아 task unit은 unaudited이고, user-authorized access 뒤 CPU/read-only L0 전에는 method·GPU·outer test·paper identity가 모두 닫혀 있다. Vessel graph, GNN, set prediction, mixed supervision, anatomy prompt와 conformal/FDR는 단독 novelty가 아니다. Production source 8fb7bb51…의 quality run 31266919156과 Pages run 31266918668은 success이고 live site content를 확인했다.",
       files: ["docs/problem-candidate-audit-2026-08-09.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
     },
     {

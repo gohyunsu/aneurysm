@@ -26,6 +26,11 @@
   `docs/problem-candidate-audit-2026-08-09.md`, `configs/aurora_v1.json`,
   `src/aurora/protocol.py`, `tests/test_protocol.py`,
   `site/assets/research-data.js`, `CHANGELOG.md`.
+- Production source `8fb7bb51f7b8097d843a541289c7ac57e6481dce`의
+  GitHub quality run `31266919156`과 Pages run `31266918668`은 모두
+  success다. 2026-08-09 KST에
+  <https://gohyunsu.github.io/aneurysm/site/>가 `One lesion set`, `L0`와
+  controlled-access 상태를 실제 제공함을 확인했다.
 
 ## 2026-08-09 · I0b stops before asset access and is not rerun
 
