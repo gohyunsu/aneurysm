@@ -12,18 +12,24 @@ super-resolution, denoising, PINN reconstruction 또는 voxelwise uncertainty를
 새 contribution이라고 부르지 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 유지하지만, 새 candidate의 정식 방법명과
-> architecture는 I0a/I0b 근거 전에는 정하지 않습니다.
+> architecture는 I0b 근거 전에는 정하지 않습니다.
 
-## 현재 단계 · I0a asset audit
+## 현재 단계 · I0a 14/14 통과, I0b 등록만 허용
 
 [`I0a contract`](configs/flow_mri_protocol_i0a_asset_audit.json)는 두 공개
 paired-protocol phantom release의 공식 record, archive size/checksum, ZIP
 central directory, descriptor/PAR/XML header와 payload byte contract를 14개
 check로 감사합니다. 등록 전에 record·central directory·header를 발견한
-사실을 명시했으며 field value, processed RAW, REC는 읽지 않습니다.
+사실을 명시했으며 field value, processed RAW, REC는 읽지 않았습니다.
 
-I0a pass가 허용하는 것은 selective private staging과 **learned method가 없는
-I0b task-adequacy audit 등록뿐**입니다. Posterior calibration은 반복 측정이
+Exact public source `f7b4e024d69d43cf042f4163342b4d993386f441`의 CPU
+audit은 exit 0, **14/14 pass**였습니다. 두 archive의 250개 central-directory
+entry, descriptor 9개, primary header 8개를 CRC와 함께 검증했고 processed
+RAW/REC payload read는 0입니다. 공개 aggregate는
+[`I0a result`](results/flow_mri_protocol_i0a_asset_audit_20260808.json)입니다.
+
+이 통과가 허용하는 것은 selective private staging과 **learned method가 없는
+I0b task-adequacy audit의 별도 등록뿐**입니다. Posterior calibration은 반복 측정이
 적은 공개 자산에서 식별이 어려울 수 있으므로, task가 충분히 비자명하고
 평가 가능한지 먼저 반증합니다. Method, neural training, outer test와 ISBI
 submission은 아직 열리지 않습니다.

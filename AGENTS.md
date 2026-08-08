@@ -5,7 +5,7 @@
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
 backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass,
 V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
-그리고 cross-protocol 4D-flow candidate I0a 등록을 반영했다.
+그리고 cross-protocol 4D-flow candidate I0a 14/14 asset pass를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -18,10 +18,14 @@ V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
   intracranial 4D-flow acquisition shift**. 한 실제 acquisition posterior가
   같은 controlled phantom flow의 다른 resolution·acceleration·VENC
   acquisition을 measurement space에서 예측하는지를 묻는다.
-- 현재 단계: `configs/flow_mri_protocol_i0a_asset_audit.json`의 I0a를
-  등록했다. Registration 전에 본 official record, two central directories,
-  nine descriptor와 eight primary header를 discovery로 공개한다. Field
-  payload는 보지 않았고 method·architecture는 선택하지 않았다.
+- 현재 단계: exact public source
+  `f7b4e024d69d43cf042f4163342b4d993386f441`의 I0a가 14/14를 통과했다.
+  Registration 전에 본 official record, two central directories, nine
+  descriptor와 eight primary header를 discovery로 공개했고 processed
+  RAW/REC field read는 0이었다. Public aggregate는
+  `results/flow_mri_protocol_i0a_asset_audit_20260808.json`이다. 이 pass는
+  selective private staging과 learned-method-free I0b의 별도 등록만
+  허용하며 method·architecture는 선택하지 않았다.
 - 제출 목표: **IEEE ISBI 2027 archival four-page regular paper**,
   2026-10-26 23:59 USA EDT. 현재는 `not submission-ready`다.
 - ISBI headline은 actual irregular-3D aneurysm **velocity-only**
@@ -362,12 +366,17 @@ dataset version, checksum, unit, coordinate frame을 기록한다.
 
 ## 4. 연구를 계속할지 결정하는 gate
 
-- **I0a · Paired-protocol asset integrity**: 두 official Zenodo record의
+- **I0a · Paired-protocol asset integrity · passed 14/14 asset-only**: 두 official Zenodo record의
   license·size·checksum, ZIP entry, 2021 3×3 descriptor/27 RAW byte contract,
   2025 four-model/eight-protocol primary/AP/FH/RL·phase/resolution/VENC header를
   14개 all-check rule로 감사한다. Processed RAW/REC payload는 읽지 않는다.
-  Pass는 selective private staging과 method-free I0b 등록만 허용한다. Fail은
-  새 asset contract 전 candidate 중단이며 local repair는 없다.
+  Exact source `f7b4e024d69d43cf042f4163342b4d993386f441`에서 14/14를
+  통과했고 public aggregate SHA-256은
+  `2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6`다.
+  Pass는 selective private staging과 method-free I0b의 별도 등록만 허용한다.
+  Task adequacy, posterior identifiability, method, novelty, performance와
+  submission evidence가 아니다. 별도 I0b contract 전 field payload를 읽지
+  않으며 local repair는 없다.
 
 - **G0 · Asset integrity**: case mapping, unit, boundary marker, license,
   geometry/condition split이 검증되지 않으면 학습하지 않는다.
@@ -673,11 +682,10 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 
 - private 운영 가이드는 Git에서 제외된 `SERVER_GUIDE.md`다. endpoint,
   password, private key, 내부 데이터 절대경로를 공개 문서에 옮기지 않는다.
-- `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사하고,
-  현재 사용자 지시에 따른 GPU 실행 목표이기도 하다. 2026-08-08 Windows-host
-  SSH config를 명시적으로 읽는 public-key BatchMode 접속과 PBS client 존재는
-  확인했다. 이는 GPU queue allocation 성공 증거가 아니므로 scheduler GPU
-  smoke와 cache SHA를 확인하기 전 learned job을 제출하지 않는다.
+- `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사한다.
+  새 GPU 실험은 `junjinyong`의 PBS allocation에서만 실행한다. 어느 서버에서도
+  login node GPU를 사용하지 않으며, source asset을 서버 사이에 임의 복제하지
+  않는다.
 - 이전 실행 계정에서 완료된 compact-cache 재생성은 byte-range/CRC와
   등록 SHA가 일치함을 확인하는 asset audit일 뿐 GPU 결과가 아니다. 어느
   서버에서도 login node에서 GPU 학습이나 `nvidia-smi`를 실행하지 않는다.
@@ -724,11 +732,11 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   1이었다. 세 seed 완결을 요구하는 aggregate는 생성하지 않았고 성공 seed
   metric도 gate 용도로 읽지 않았다. 따라서 M0에는 과학적 pass/fail이 없으며
   sampler repair, rerun, re-entry와 N1d/3D 제출 권한도 없다.
-- Cross-protocol I0a는 CPU metadata audit이다. Exact public source를 먼저
-  push한 뒤 official API와 byte-range로만 실행하고 processed RAW/REC field를
-  읽지 않는다. I0a pass 전에는 selective staging, method code와 GPU training을
-  실행하지 않는다. Pass 뒤에도 별도 I0b contract 전에는 field payload를
-  읽지 않는다.
+- Cross-protocol I0a는 exact source `f7b4e024…`를 먼저 push한 뒤 `introai9`의
+  pinned container에서 수행한 CPU metadata audit이다. Official API와
+  byte-range만 사용했고 14/14를 통과했으며 processed RAW/REC field read는
+  0이었다. 별도 I0b contract 전에는 field payload를 읽지 않고 method code나
+  GPU training을 실행하지 않는다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

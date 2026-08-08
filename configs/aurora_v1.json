@@ -3,7 +3,7 @@
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_n1c_m0_execution_incomplete_no_verdict_v1e_failed_current_aneumo_3d_line_stopped_cross_protocol_4d_flow_candidate_i0a_registered_method_unselected",
+    "status": "failed_n1c_m0_execution_incomplete_no_verdict_v1e_failed_current_aneumo_3d_line_stopped_cross_protocol_4d_flow_candidate_i0a_passed_i0b_registration_authorized_method_unselected",
     "as_of": "2026-08-08",
     "clinical_use": false
   },
@@ -83,11 +83,17 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift",
-    "active_candidate_status": "i0a_post_discovery_asset_audit_registered_no_method_selected",
+    "active_candidate_status": "i0a_completed_14_of_14_asset_integrity_pass_i0b_registration_only_no_method_selected",
     "candidate_primary_estimand": "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space",
     "candidate_secondary_estimand": "aneurysm_localized_velocity_functional_calibration",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
     "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
+    "i0a_source_commit": "f7b4e024d69d43cf042f4163342b4d993386f441",
+    "i0a_result": "results/flow_mri_protocol_i0a_asset_audit_20260808.json",
+    "i0a_result_sha256": "2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6",
+    "i0a_raw_result_sha256": "c666644bf72fa10bb550747fbeace923ca0caabbf8142f4f6c7ff5417af00faa",
+    "i0a_raw_status_sha256": "254c5966474e3304449b94976e0f03392f1b154b716812c40736d722213b74ec",
+    "i0a_gate": "14_of_14_passed_asset_integrity_only",
     "i0a_pass_authorizes": "register_selective_private_staging_and_method_free_I0b_task_adequacy_only",
     "generic_super_resolution_or_denoising_is_novel": false,
     "cfd_field_is_clinical_mri_ground_truth": false,
@@ -287,7 +293,7 @@
       "field_provenance": "in_vitro_measurement",
       "split_unit": "physical_phantom",
       "doi": "10.5281/zenodo.4882572",
-      "status": "i0a_registered_no_field_payload_staged"
+      "status": "i0a_passed_no_field_payload_staged"
     },
     {
       "name": "flow_mri_dual_venc_phantoms_2025",
@@ -295,7 +301,7 @@
       "field_provenance": "in_vitro_measurement",
       "split_unit": "physical_phantom",
       "doi": "10.5281/zenodo.14981710",
-      "status": "i0a_registered_no_REC_payload_staged"
+      "status": "i0a_passed_no_REC_payload_staged"
     },
     {
       "name": "cmha",

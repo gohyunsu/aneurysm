@@ -306,6 +306,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "candidate_secondary_estimand",
             "i0a_config",
             "i0a_config_sha256",
+            "i0a_source_commit",
+            "i0a_result",
+            "i0a_result_sha256",
+            "i0a_raw_result_sha256",
+            "i0a_raw_status_sha256",
+            "i0a_gate",
             "i0a_pass_authorizes",
             "generic_super_resolution_or_denoising_is_novel",
             "cfd_field_is_clinical_mri_ground_truth",
@@ -339,7 +345,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
         or task["active_candidate_status"]
-        != "i0a_post_discovery_asset_audit_registered_no_method_selected"
+        != "i0a_completed_14_of_14_asset_integrity_pass_i0b_registration_only_no_method_selected"
         or task["candidate_primary_estimand"]
         != "held_out_same_flow_acquisition_predictive_distribution_in_measurement_space"
         or task["candidate_secondary_estimand"]
@@ -347,14 +353,25 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
+        or task["i0a_source_commit"]
+        != "f7b4e024d69d43cf042f4163342b4d993386f441"
+        or task["i0a_result"]
+        != "results/flow_mri_protocol_i0a_asset_audit_20260808.json"
+        or task["i0a_result_sha256"]
+        != "2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6"
+        or task["i0a_raw_result_sha256"]
+        != "c666644bf72fa10bb550747fbeace923ca0caabbf8142f4f6c7ff5417af00faa"
+        or task["i0a_raw_status_sha256"]
+        != "254c5966474e3304449b94976e0f03392f1b154b716812c40736d722213b74ec"
+        or task["i0a_gate"] != "14_of_14_passed_asset_integrity_only"
         or task["i0a_pass_authorizes"]
         != "register_selective_private_staging_and_method_free_I0b_task_adequacy_only"
         or task["generic_super_resolution_or_denoising_is_novel"] is not False
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The 4D-flow candidate must remain asset-only, measurement-space, "
-            "and method-unselected before I0b."
+            "The 4D-flow candidate must retain the exact I0a result, remain "
+            "measurement-space, and stay method-unselected before I0b."
         )
     checks.append("historical task boundary and 4D-flow candidate guardrails")
 
@@ -384,6 +401,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     cmha = next(item for item in datasets if item["name"] == "cmha")
     aneux = next(item for item in datasets if item["name"] == "aneux")
     aneumo = next(item for item in datasets if item["name"] == "aneumo")
+    flow_2021 = next(
+        item for item in datasets if item["name"] == "flow_mri_multiresolution_phantom_2021"
+    )
+    flow_2025 = next(
+        item for item in datasets if item["name"] == "flow_mri_dual_venc_phantoms_2025"
+    )
     if cmha["field_provenance"] != "real_cfd":
         raise ProtocolError("CMHA is the declared real-CFD bridge in protocol v1.")
     if aneux["field_provenance"] != "none":
@@ -398,6 +421,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         raise ProtocolError(
             "Aneumo pressure must remain excluded after the scaling audit."
+        )
+    if (
+        flow_2021.get("status") != "i0a_passed_no_field_payload_staged"
+        or flow_2025.get("status") != "i0a_passed_no_REC_payload_staged"
+    ):
+        raise ProtocolError(
+            "I0a pass must not be relabeled as field staging or REC access."
         )
     checks.append("dataset provenance and split units")
 

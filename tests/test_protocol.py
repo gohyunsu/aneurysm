@@ -32,14 +32,35 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "protocol-indexed"):
             validate_protocol(candidate)
 
-    def test_i0a_cannot_select_a_method_or_call_cfd_mri_truth(self) -> None:
+    def test_i0a_pass_cannot_select_a_method_or_call_cfd_mri_truth(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["active_candidate_status"] = "method_selected"
-        with self.assertRaisesRegex(ProtocolError, "asset-only"):
+        with self.assertRaisesRegex(ProtocolError, "exact I0a result"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["cfd_field_is_clinical_mri_ground_truth"] = True
-        with self.assertRaisesRegex(ProtocolError, "asset-only"):
+        with self.assertRaisesRegex(ProtocolError, "exact I0a result"):
+            validate_protocol(candidate)
+
+    def test_i0a_pass_must_retain_exact_result_and_limited_authorization(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["i0a_result_sha256"] = "0" * 64
+        with self.assertRaisesRegex(ProtocolError, "exact I0a result"):
+            validate_protocol(candidate)
+
+    def test_i0a_pass_cannot_imply_field_staging(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        flow_2021 = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "flow_mri_multiresolution_phantom_2021"
+        )
+        flow_2021["status"] = "field_staged"
+        with self.assertRaisesRegex(ProtocolError, "field staging"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["task"]["i0a_pass_authorizes"] = "method_selection"
+        with self.assertRaisesRegex(ProtocolError, "exact I0a result"):
             validate_protocol(candidate)
 
     def test_isbi_target_cannot_be_marked_ready_without_3d_evidence(self) -> None:

@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · prior identity inactive · cross-protocol 4D-flow I0a registered · method unselected · not submission-ready",
-    requirement: "I0a asset integrity → method-free I0b task adequacy → only then method design",
+    status: "Target locked · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · method unselected · not submission-ready",
+    requirement: "I0a asset integrity passed → method-free I0b task adequacy → only then method design",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
@@ -105,14 +105,14 @@ window.AURORA_DATA = Object.freeze({
     ["Uncertainty", "Usually point estimate", "Reconstruction uncertainty optional", "Voxelwise error or distributional output", "Full posterior predictive score; feasibility unproven"],
     ["Reference", "CFD or acquired HR", "Acquired/self-supervised k-space", "Synthetic/repeat/dual-VENC validation", "Same controlled flow's second real acquisition"],
     ["What is already occupied", "SR and denoising", "Physics/self-supervised reconstruction", "Velocity UQ and distributional SR", "Only the evaluation gap is a candidate; no method selected"],
-    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a registered after disclosed discovery; no field read"]
+    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a passed 14/14 asset-only; no field read"]
   ],
   gates: [
     {
       id: "I0a",
       title: "Are paired-protocol MRI assets auditable?",
       copy: "두 official Zenodo release의 license·archive pin, 3×3 descriptor/27 RAW byte contract, four-phantom dual-VENC primary/AP/FH/RL header를 field payload 없이 14개 check로 감사한다.",
-      state: "Registered after disclosed discovery · not yet executed from exact public commit",
+      state: "Passed 14/14 from exact f7b4e024 · asset integrity only · I0b registration authorized",
       blocking: true
     },
     {
@@ -155,12 +155,12 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "4D-flow multiresolution phantom · 2021",
       role: "same-flow 3 resolution × 3 acceleration development/task audit candidate",
-      provenance: "Zenodo CC BY 4.0 · I0a metadata/header only · field payload not staged"
+      provenance: "Zenodo CC BY 4.0 · I0a 14/14 asset pass · field payload not staged"
     },
     {
       name: "4D-flow dual-VENC phantoms · 2025",
       role: "four-phantom external protocol-pair task audit candidate",
-      provenance: "Zenodo CC BY 4.0 · I0a metadata/header only · REC not read"
+      provenance: "Zenodo CC BY 4.0 · I0a 14/14 asset pass · REC not read"
     },
     {
       name: "Aneumo",
@@ -189,6 +189,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "result",
+      title: "I0a passes 14/14 without reading a field payload",
+      copy: "Exact public source f7b4e024…의 pinned-container CPU audit은 두 official archive의 174/76 entry, 9 descriptor, 8 primary header와 등록된 protocol/byte contract를 모두 검증했다. Processed RAW와 REC read는 0이며 M4 filename/header 불일치를 그대로 공개했다. 이 14/14 pass는 asset integrity만 뜻하고 selective private staging과 learned-method-free I0b의 별도 등록만 허용한다. Task adequacy, posterior identifiability, method, novelty, performance, outer test와 submission은 열리지 않는다.",
+      files: ["results/flow_mri_protocol_i0a_asset_audit_20260808.json", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/server-execution.md", "results/README.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "research",

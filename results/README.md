@@ -26,6 +26,13 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `flow_mri_protocol_i0a_asset_audit_20260808.json`: exact source
+  `f7b4e024`의 post-discovery, field-free paired-protocol asset audit. 두
+  official archive의 174/76 entry, descriptor/header 9/8개와 frozen protocol
+  contract를 확인해 14/14를 통과했다. Processed RAW/REC read는 0이다. 이
+  pass는 selective private staging과 learned-method-free I0b 등록만 허용하며
+  task adequacy, posterior identifiability, method, novelty, outer test와
+  submission evidence가 아니다.
 - `aneumo_isbi_v0_20260808.json`: exact source `0589070`의 metadata-only
   8/8 pass. 새 field array와 validation/test field를 읽지 않았으며 V1
   64-case implementation smoke만 허용한다. Learned performance, outer

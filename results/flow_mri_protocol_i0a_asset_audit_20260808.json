@@ -1,0 +1,120 @@
+{
+  "schema_version": "aurora.flow_mri_protocol_i0a_asset_audit.public.v1",
+  "experiment_id": "flow_mri_protocol_i0a_asset_audit",
+  "as_of": "2026-08-08",
+  "source_commit": "f7b4e024d69d43cf042f4163342b4d993386f441",
+  "config": "configs/flow_mri_protocol_i0a_asset_audit.json",
+  "config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
+  "raw_result_sha256": "c666644bf72fa10bb550747fbeace923ca0caabbf8142f4f6c7ff5417af00faa",
+  "raw_status_sha256": "254c5966474e3304449b94976e0f03392f1b154b716812c40736d722213b74ec",
+  "execution": {
+    "account_role": "introai9",
+    "container": "torch251-cuda118-pinned.sif",
+    "python": "3.11.10",
+    "singularity_ce": "3.11.3-bionic",
+    "gpu_requested": false,
+    "process_exit_code": 0,
+    "status": "complete"
+  },
+  "discovery_boundary": {
+    "inspected_before_registration": true,
+    "scope": "official_record_metadata_two_zip_central_directories_nine_processed_velocity_descriptors_and_eight_primary_PAR_or_XML_headers",
+    "not_prospective_evidence": true,
+    "field_values_inspected": false,
+    "raw_REC_payloads_inspected": false
+  },
+  "sources": {
+    "multiresolution_2021": {
+      "doi": "10.5281/zenodo.4882572",
+      "license": "cc-by-4.0",
+      "archive_bytes": 2216223733,
+      "upstream_checksum": "md5:f3159a34a6f222b491432650540f63b6",
+      "archive_format": "zip32",
+      "archive_entries": 174,
+      "descriptors_crc_verified": 9,
+      "raw_payloads_read": 0,
+      "protocol_grid": {
+        "resolutions": ["0.5", "1.0", "1.5"],
+        "accelerations": ["2.5", "4.5", "6.5"],
+        "cardiac_phases": 24,
+        "velocity_components": 3,
+        "time_step_descriptor_value": 0.034,
+        "contracts": {
+          "0.5": {
+            "dims_tzyx": [24, 100, 336, 336],
+            "spacing_xyz_mm": [0.298, 0.298, 0.3]
+          },
+          "1.0": {
+            "dims_tzyx": [24, 60, 224, 224],
+            "spacing_xyz_mm": [0.446, 0.446, 0.5]
+          },
+          "1.5": {
+            "dims_tzyx": [24, 40, 144, 144],
+            "spacing_xyz_mm": [0.694, 0.694, 0.75]
+          }
+        }
+      }
+    },
+    "dual_venc_2025": {
+      "doi": "10.5281/zenodo.14981710",
+      "license": "cc-by-4.0",
+      "archive_bytes": 6218491225,
+      "upstream_checksum": "md5:6e2437d0107677ad38708e01772db85d",
+      "archive_format": "zip64",
+      "archive_entries": 76,
+      "models": 4,
+      "protocols": 8,
+      "primary_headers_crc_verified": 8,
+      "encodings_per_protocol": 4,
+      "encoding_tokens": ["4dflow", "ap", "fh", "rl"],
+      "cardiac_phases": 20,
+      "scan_resolution_xy": [148, 147],
+      "venc_cm_s": {
+        "M1_empty": [55.0, 80.0],
+        "M2_commercial": [20.0, 100.0],
+        "M4_printed_16": [5.0, 50.0],
+        "M5_printed_6": [25.0, 50.0]
+      },
+      "known_filename_header_disagreements": [
+        "M4_printed_16/4DFlow_50venc_inlet"
+      ],
+      "rec_payloads_read": 0
+    }
+  },
+  "field_access": {
+    "processed_velocity_RAW_payloads_read": 0,
+    "REC_payloads_read": 0,
+    "field_values_inspected": false
+  },
+  "gate": {
+    "checks": {
+      "official_records_are_open_cc_by_4_and_pin_archive_size_checksum": true,
+      "both_archives_are_exact_size_and_range_readable": true,
+      "central_directory_entry_counts_match": true,
+      "multiresolution_protocol_grid_is_exactly_three_by_three": true,
+      "all_nine_descriptors_are_crc_verified_and_match_dimensions_spacing_and_time_step": true,
+      "all_twenty_seven_velocity_components_have_exact_float32_byte_contract": true,
+      "dual_venc_has_exactly_four_models_and_eight_protocols": true,
+      "each_dual_venc_protocol_has_four_metadata_REC_pairs": true,
+      "each_dual_venc_protocol_covers_primary_AP_FH_and_RL_encodings": true,
+      "all_eight_primary_headers_are_crc_verified": true,
+      "dual_venc_headers_match_twenty_phases_and_scan_resolution": true,
+      "dual_venc_header_values_match_registered_protocol_values": true,
+      "known_M4_filename_header_disagreement_is_disclosed": true,
+      "no_velocity_RAW_or_REC_payload_was_read": true
+    },
+    "passed_checks": 14,
+    "total_checks": 14,
+    "all_checks_passed": true,
+    "decision": "register_selective_private_staging_and_method_free_I0b_task_adequacy_only",
+    "does_not_authorize": [
+      "method_selection",
+      "neural_training",
+      "claim_generic_super_resolution_novelty",
+      "claim_CFD_as_MRI_ground_truth",
+      "confirmatory_outer_test",
+      "isbi_submission"
+    ]
+  },
+  "interpretation": "I0a passes asset integrity only. It does not establish task nontriviality, posterior identifiability, a method, novelty, performance, or submission readiness. The next allowed action is a separately registered selective private staging and learned-method-free I0b task-adequacy audit."
+}

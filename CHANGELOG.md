@@ -4,6 +4,30 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · I0a passes 14/14 asset checks without field access
+
+- Exact public source `f7b4e024d69d43cf042f4163342b4d993386f441`, frozen
+  config SHA
+  `ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff`의
+  pinned-container CPU audit은 exit 0, 14/14 pass였다.
+- 2021 ZIP32와 2025 ZIP64의 central-directory entry 174/76개, CRC-verified
+  descriptor/header 9/8개, protocol dimension·spacing·phase·VENC와 27개
+  float32 byte contract를 확인했다. Processed RAW/REC read와 field-value
+  inspection은 0이며 등록된 M4 filename/header 불일치를 그대로 공개했다.
+- 공개 aggregate는
+  `results/flow_mri_protocol_i0a_asset_audit_20260808.json`, SHA-256
+  `2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6`다.
+  Private raw result/status SHA-256은 각각
+  `c666644bf72fa10bb550747fbeace923ca0caabbf8142f4f6c7ff5417af00faa`,
+  `254c5966474e3304449b94976e0f03392f1b154b716812c40736d722213b74ec`로
+  pin했다.
+- 이 pass는 selective private staging과 learned-method-free I0b의 별도
+  등록만 허용한다. Task adequacy, posterior identifiability, method,
+  novelty, performance, outer test와 ISBI submission은 열리지 않는다.
+- Research direction, model boundary, experiment protocol, central config,
+  validator/tests, dataset/server/ISBI 문서, README와 site를 같은 상태로
+  동기화했다. 향후 GPU 실험은 `junjinyong` PBS allocation에서만 실행한다.
+
 ## 2026-08-08 · Research identity resets to a cross-protocol 4D-flow candidate
 
 - N1c failure, M0 execution-incomplete state와 V1e 6/9 failure를 보존하고

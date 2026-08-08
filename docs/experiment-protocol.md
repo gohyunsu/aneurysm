@@ -36,6 +36,17 @@ filename/header 불일치의 명시를 포함한다.
 - 금지: local repair, method selection, training, CFD-as-MRI ground truth,
   outer test, generic SR novelty와 submission
 
+**Outcome · 2026-08-08.** Exact source
+`f7b4e024d69d43cf042f4163342b4d993386f441`, config SHA
+`ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff`의
+CPU audit은 exit 0, 14/14 pass였다. ZIP32/ZIP64 central-directory entry는
+174/76개, CRC-verified descriptor/header는 9/8개였고 processed RAW/REC
+payload read와 field-value inspection은 모두 0이었다. M4 filename/header
+불일치는 등록대로 공개했다. Public aggregate SHA-256은
+`2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6`이다.
+이는 asset integrity pass일 뿐 task adequacy, posterior identifiability,
+method, novelty, performance 또는 submission evidence가 아니다.
+
 I0b는 아직 등록하지 않는다. I0a pass 뒤에도 같은 flow의 protocol 간
 registration, discrepancy magnitude, identity/interpolation floor, repeat 없는
 sample에서의 평가 단위와 aneurysm-localized functional stability가 먼저

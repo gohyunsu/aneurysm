@@ -2,8 +2,8 @@
 
 최종 검토일: 2026-08-08 KST
 상태: **target locked · not submission-ready · prior BC-operator identity
-inactive · cross-protocol 4D-flow I0a registered after disclosed discovery ·
-method unselected**
+inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b
+registration authorized · method unselected**
 
 ## 1. Venue contract
 
@@ -49,8 +49,10 @@ method unselected**
 > controlled phantom flow의 다른 resolution·acceleration·VENC acquisition을
 > measurement space에서 calibrated하게 예측할 수 있는가?
 
-이 문장은 제출 제목이 아니라 I0a/I0b가 반증할 문제 정의다. I0a는 두 공개
-paired-protocol release의 metadata/header/byte contract만 감사한다. I0b는
+이 문장은 제출 제목이 아니라 I0a/I0b가 반증할 문제 정의다. Exact source
+`f7b4e024…`의 I0a는 두 공개 paired-protocol release의
+metadata/header/byte contract를 field read 없이 감사해 14/14를 통과했다.
+이는 task 또는 method evidence가 아니며, I0b는
 field staging 뒤 learned method 없이 registration, protocol discrepancy,
 simple floor, functional stability와 sample adequacy를 검사한다. 두 audit이
 양수여도 방법 novelty는 생기지 않는다.

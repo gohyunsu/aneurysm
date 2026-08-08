@@ -10,14 +10,14 @@
 
 | 서버 계정 | 역할 | 허용 작업 |
 |---|---|---|
-| `introai9` | source asset registry·데이터 감사·현재 GPU 실행 목표 | 원본·추출본·매니페스트 read-only 확인, PBS allocation 안의 pinned-container 실험 |
-| `junjinyong` | 과거 scheduler 실행 provenance | 이미 완료된 PBS artifact 보존·감사 |
+| `introai9` | source asset registry·데이터 감사 | 원본·추출본·매니페스트 read-only 확인, CPU metadata/asset audit |
+| `junjinyong` | GPU 실행 목표·scheduler provenance | PBS allocation 안의 pinned-container smoke·학습·평가 |
 
 원자료를 로컬 저장소에 내려받거나 서버 사이에 전체 복제하지 않는다. 실행
 서버에서는 필요한 source root를 read-only로 bind하고 run output만 writable로
-둔다. 2026-08-08 `introai9`는 host SSH config를 명시적으로 읽는 public-key
-BatchMode 접속과 PBS client까지 확인했다. 실제 GPU allocation·container·cache
-SHA smoke 전에는 learned job을 제출하지 않는다.
+둔다. 어느 서버에서도 login node GPU를 사용하지 않는다. `introai9`의 asset을
+서버 사이에 임의 복제하지 않으며, `junjinyong`에서 필요한 read-only staging과
+container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않는다.
 
 ## 2026-08-08 · Cross-protocol 4D-flow I0a
 
@@ -32,6 +32,12 @@ SHA smoke 전에는 learned job을 제출하지 않는다.
   result와 status만 private output에 남긴다.
 - Pass 뒤에도 selective staging protocol을 별도 commit하기 전 field를 읽지
   않으며, learned method나 PBS GPU training을 제출하지 않는다.
+- Exact public source `f7b4e024d69d43cf042f4163342b4d993386f441`의 pinned
+  container run은 exit 0, 14/14 pass였다. ZIP entry 174/76개, descriptor/header
+  9/8개를 CRC 검증했고 processed RAW/REC read는 0이었다. Public aggregate는
+  `results/flow_mri_protocol_i0a_asset_audit_20260808.json`, SHA-256
+  `2243172a720b25ebebd6052b9c0989880d95cba5b8d984f8980f70cf5f26d9c6`다.
+  Task adequacy나 method evidence가 아니며 별도 I0b 등록만 연다.
 
 ## 2026-08-03 자산 감사
 

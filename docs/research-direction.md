@@ -5,7 +5,7 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a registered after disclosed discovery · method unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b registration authorized · method unselected · submission blocked
 
 ## 0-A. 현재 active candidate · protocol-indexed posterior prediction
 
@@ -31,8 +31,12 @@ calibration이 통계적으로 식별 가능한지도 미정이다. 따라서 me
 
 `configs/flow_mri_protocol_i0a_asset_audit.json`의 I0a는 이미 확인한 record,
 central directory, nine descriptors와 eight primary headers를 discovery로
-공개하고, field payload를 전혀 읽지 않는 14-check asset audit이다. Pass는
-selective staging과 learned-method-free I0b 등록만 허용한다. I0b가 protocol
+공개하고, field payload를 전혀 읽지 않는 14-check asset audit이다. Exact
+source `f7b4e024d69d43cf042f4163342b4d993386f441`에서 14/14를 통과했다.
+ZIP32/ZIP64 entry 174/76개, descriptor 9개, primary header 8개를 검증했고
+processed RAW/REC read는 0이었다. 이 결과는
+`results/flow_mri_protocol_i0a_asset_audit_20260808.json`에 고정한다. Pass는
+selective staging과 learned-method-free I0b의 별도 등록만 허용한다. I0b가 protocol
 차이의 비자명성, registration 가능성, simple interpolation/identity floor,
 functional stability와 평가 sample adequacy를 지지하지 못하면 candidate를
 중단한다.

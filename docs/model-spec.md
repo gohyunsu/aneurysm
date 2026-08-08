@@ -4,14 +4,16 @@
 V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training underfit ·
 V1e known-condition qualification failed 6/9 · M0 execution-incomplete/no
 scientific verdict · prior BC-operator identity inactive · cross-protocol
-4D-flow I0a registered · method and architecture unselected
+4D-flow I0a asset integrity passed 14/14 · I0b registration only · method and
+architecture unselected
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0-A. 현재 candidate의 model boundary
 
-현재 선택된 neural architecture는 없다. I0a는 metadata/header/byte-contract
-감사이고 I0b는 learned method가 없는 task-adequacy audit이므로 GNN, U-Net,
+현재 선택된 neural architecture는 없다. Exact source `f7b4e024…`의 I0a는
+metadata/header/byte-contract 14/14를 field read 없이 통과했다. I0b는 learned
+method가 없는 task-adequacy audit이므로 GNN, U-Net,
 diffusion, neural operator 어느 것도 “현재 모델”이라 부르지 않는다.
 
 I0b가 양수일 때만 이후 model contract가 아래 causal data flow를 구현해야

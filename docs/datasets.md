@@ -4,7 +4,8 @@
 > 새 end-to-end cohort로 합치지 않는다. 2021 release는 한 aneurysm phantom의
 > 3 resolution × 3 acceleration development view, 2025 release는 네
 > aneurysm/flow-diverter phantom의 dual-VENC external view 후보이다. 현재는
-> I0a metadata/header audit만 등록됐고 field payload는 staging하지 않았다.
+> I0a metadata/header audit은 exact source `f7b4e024…`에서 14/14를 통과했고
+> field payload는 staging하지 않았다. I0b의 별도 등록만 허용된다.
 > CFD를 MRI ground truth로 부르거나 phantom을 clinical cohort로 해석하지 않는다.
 
 > **2026-08-03 AURORA 역할 갱신:** 데이터셋은 하나의 end-to-end cohort로
