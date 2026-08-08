@@ -608,6 +608,13 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   나타나지 않았다. Aggregate wrapper에 task-local log/status fail-safe만
   추가하고 같은 12개 artifact를 read-only replay한다. Model, config,
   selector, threshold와 task source를 바꾸지 않으며 실패 aggregate를 보존한다.
+- Observable aggregate replay는 cache의 registered flow가 `float32`라
+  `0.0025`가 `0.002499999944...`로 저장된 반면 response-only oracle만
+  `1e-12`로 cache 값을 직접 비교해 result 전에 실패했음을 확인했다. Cache
+  ordering을 기존 loader tolerance로 검증하고 anchor/ratio는 config의 design
+  value로 계산한다. 이는 selector/gate에 들어가지 않는 control 구현 수정이며
+  config, task metric/checkpoint와 threshold는 유지한다. Aggregate source와
+  task source SHA는 artifact에서 분리해 기록하고 두 실패 aggregate를 보존한다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

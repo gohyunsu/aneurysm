@@ -1046,14 +1046,33 @@ def evaluate_same_case_response_oracle(
 
     np, _, torch = _imports()
     oracle = config["controls"]["response_only_oracle"]
-    flow_values = np.asarray(flows, dtype=np.float64)
+    cache_flow_values = np.asarray(flows, dtype=np.float64)
+    registered_flow_values = np.asarray(
+        config["task"]["condition_values"], dtype=np.float64
+    )
+    if (
+        cache_flow_values.shape != registered_flow_values.shape
+        or not np.allclose(
+            cache_flow_values,
+            registered_flow_values,
+            rtol=0.0,
+            atol=1e-9,
+        )
+    ):
+        raise AneumoISBIV1Error(
+            "The V1 response oracle flows do not match the registered design law."
+        )
     anchor_flow = float(oracle["anchor_mass_flow_kg_s"])
-    matches = np.flatnonzero(np.isclose(flow_values, anchor_flow, rtol=0.0, atol=1e-12))
+    matches = np.flatnonzero(
+        np.isclose(registered_flow_values, anchor_flow, rtol=0.0, atol=1e-12)
+    )
     if len(matches) != 1:
         raise AneumoISBIV1Error("The V1 response oracle anchor is not identifiable.")
     anchor_index = int(matches[0])
     power = float(oracle["power"])
-    ratios = torch.as_tensor((flow_values / anchor_flow) ** power, dtype=torch.float32)
+    ratios = torch.as_tensor(
+        (registered_flow_values / anchor_flow) ** power, dtype=torch.float32
+    )
     errors: list[tuple[int, float]] = []
     for case_id in sorted(prepared_validation):
         case = prepared_validation[case_id]
@@ -1214,7 +1233,8 @@ def aggregate_training_outputs(
     cache: Path,
     task_output_root: Path,
     output: Path,
-    git_commit: str,
+    task_git_commit: str,
+    aggregate_git_commit: str,
     require_cuda: bool,
 ) -> dict[str, Any]:
     """Replay all V1 checkpoints, aggregate the selector, and evaluate the gate."""
@@ -1236,7 +1256,7 @@ def aggregate_training_outputs(
         torch.cuda.reset_peak_memory_stats()
 
     task_results, artifacts = _load_registered_task_results(
-        config, task_output_root, git_commit
+        config, task_output_root, task_git_commit
     )
     train_cases, validation_cases, flows = load_development_cases(config, cache)
     prepared_train = _prepare_cases(config, train_cases)
@@ -1267,7 +1287,7 @@ def aggregate_training_outputs(
         checkpoint_metadata_valid = checkpoint_metadata_valid and (
             checkpoint.get("family") == family
             and int(checkpoint.get("seed", -1)) == seed
-            and checkpoint.get("git_commit") == git_commit
+            and checkpoint.get("git_commit") == task_git_commit
             and checkpoint.get("config_sha256") == config["_config_sha256"]
             and checkpoint.get("cache_sha256") == config["source"]["cache_sha256"]
             and checkpoint.get("test_fields_read") is False
@@ -1380,7 +1400,9 @@ def aggregate_training_outputs(
     aggregate = {
         "schema_version": "aurora.aneumo_isbi_v1.aggregate.v1",
         "experiment_id": config["experiment_id"],
-        "git_commit": git_commit,
+        "git_commit": aggregate_git_commit,
+        "aggregate_git_commit": aggregate_git_commit,
+        "task_git_commit": task_git_commit,
         "config_sha256": config["_config_sha256"],
         "cache_sha256": config["source"]["cache_sha256"],
         "task_count": len(task_results),
@@ -1471,7 +1493,8 @@ def aggregate_main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--task-output-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--git-commit", required=True)
+    parser.add_argument("--task-git-commit", required=True)
+    parser.add_argument("--aggregate-git-commit", required=True)
     parser.add_argument("--require-cuda", action="store_true")
     args = parser.parse_args(argv)
     config_bytes = args.config.read_bytes()
@@ -1483,7 +1506,8 @@ def aggregate_main(argv: Sequence[str] | None = None) -> int:
         cache=args.cache,
         task_output_root=args.task_output_root,
         output=args.output,
-        git_commit=args.git_commit,
+        task_git_commit=args.task_git_commit,
+        aggregate_git_commit=args.aggregate_git_commit,
         require_cuda=args.require_cuda,
     )
     print(json.dumps(result, indent=2, sort_keys=True))

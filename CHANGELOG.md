@@ -4,6 +4,20 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 aggregate uses registered design values and split provenance
+
+- Task-local log를 가진 aggregate replay는 selector/gate result 전에
+  response-only oracle anchor를 식별하지 못해 exit 1이었다. Cache의 flow가
+  `float32`라 등록값 `0.0025`가 `0.002499999944...`로 저장됐지만 oracle만
+  absolute tolerance `1e-12`로 cache 값을 직접 비교한 구현 불일치였다.
+- Cache loader가 이미 검증하는 `1e-9` 범위로 cache 순서와 등록된 8개 design
+  값을 먼저 대조하고, anchor index와 analytic ratio는 config의 고정된 design
+  값에서 계산한다. Oracle은 계속 response-only이며 selector와 gate에 들어가지
+  않는다. Config, tolerance, task metric과 checkpoint는 바꾸지 않는다.
+- Aggregate runner source와 기존 12개 task source를 하나의 SHA로 위장하지
+  않고 `aggregate_git_commit`과 `task_git_commit`으로 분리해 artifact에
+  기록한다. 실패 aggregate 두 건은 그대로 보존한다.
+
 ## 2026-08-08 · V1 aggregate failure becomes observable before any gate result
 
 - Exact task source `a0479fb`의 fresh 4×3 PBS array는 12/12 exit 0,

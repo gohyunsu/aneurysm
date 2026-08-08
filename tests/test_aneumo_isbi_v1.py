@@ -113,6 +113,8 @@ class AneumoISBIV1ContractTests(unittest.TestCase):
             'tee "$AURORA_AGGREGATE_OUTPUT/pbs.log"', aggregate_script
         )
         self.assertIn('"aggregate_created":%s', aggregate_script)
+        self.assertIn("AURORA_TASK_GIT_COMMIT", aggregate_script)
+        self.assertIn("AURORA_AGGREGATE_GIT_COMMIT", aggregate_script)
 
 
 class AneumoISBIV1ModelTests(unittest.TestCase):
@@ -226,17 +228,23 @@ class AneumoISBIV1ModelTests(unittest.TestCase):
         import numpy as np
 
         torch = self.torch
-        flows = np.asarray(self.config["task"]["condition_values"])
+        registered_flows = np.asarray(
+            self.config["task"]["condition_values"], dtype=np.float64
+        )
+        cache_flows = registered_flows.astype(np.float32)
         anchor = self.config["controls"]["response_only_oracle"][
             "anchor_mass_flow_kg_s"
         ]
         power = self.config["controls"]["response_only_oracle"]["power"]
         base = torch.randn(20, 3)
         target = torch.stack(
-            [base * float((flow / anchor) ** power) for flow in flows], dim=0
+            [base * float((flow / anchor) ** power) for flow in registered_flows],
+            dim=0,
         )
         prepared = {11: {"base_family": 7, "velocity": target.numpy()}}
-        metrics = evaluate_same_case_response_oracle(self.config, prepared, flows)
+        metrics = evaluate_same_case_response_oracle(
+            self.config, prepared, cache_flows
+        )
         self.assertLess(metrics["validation_response_relative_l2"], 1e-6)
         self.assertFalse(metrics["eligible_for_model_selection_or_gate"])
         self.assertNotIn("full_q_relative_l2", metrics)

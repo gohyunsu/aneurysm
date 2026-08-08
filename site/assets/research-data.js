@@ -168,6 +168,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.08",
       category: "implementation",
+      title: "V1 oracle follows registered design values without changing the gate",
+      copy: "Observable aggregate replay는 cache float32의 0.002499999944...를 response-only oracle만 1e-12로 0.0025와 직접 비교해 result 전에 중단됐다. Cache 순서를 기존 tolerance로 registered eight-flow design과 확인한 뒤 anchor와 analytic ratio는 config 값에서 계산한다. Oracle은 selector/gate에서 계속 제외하고 task metric·checkpoint·threshold는 유지한다. Aggregate code와 task code SHA도 별도로 기록한다.",
+      files: ["src/aurora/aneumo_isbi_v1.py", "cluster/pbs_aneumo_isbi_v1_aggregate.pbs", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.08",
+      category: "implementation",
       title: "V1 preserves 12 valid tasks and makes aggregate failure observable",
       copy: "Exact a0479fb fresh array는 4 family×3 seed의 checkpoint·metric 12쌍과 no-test-read 전수 검사를 통과했다. 첫 aggregate는 result 전에 exit 1이었지만 PBS stdout이 반환되지 않았다. 이를 gate 결과로 해석하지 않고 aggregate wrapper에도 task-local log/status fail-safe만 추가한다. Model, config, selector, threshold와 12개 task artifact는 변경하지 않는다.",
       files: ["cluster/pbs_aneumo_isbi_v1_aggregate.pbs", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]

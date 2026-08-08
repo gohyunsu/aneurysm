@@ -101,6 +101,11 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
   exit 1이었고 PBS가 지정 stdout을 반환하지 않았다. Aggregate wrapper에도
   task-local log/status fail-safe를 적용한 별도 ops source를 사용하되, model과
   12개 task artifact는 exact `a0479fb` read-only 상태로 replay한다.
+- Observable replay는 cache `float32`의 `0.002499999944...`와 registered
+  `0.0025`를 response-only oracle이 `1e-12`로 직접 비교해 result 전에
+  중단됐음을 확인했다. Cache ordering은 기존 loader tolerance로 검증하고
+  anchor와 ratio는 registered design value에서 계산한다. Aggregate code SHA와
+  task/checkpoint SHA는 별도 provenance field로 남긴다.
 
 ## Run contract
 
