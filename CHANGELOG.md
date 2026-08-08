@@ -31,6 +31,9 @@
   license를 S0a에서 검증해야 한다.
 - 중앙 schema를 `2.4`로 갱신하고 research direction, model boundary,
   protocol, ISBI plan, dataset/lineage, site와 운영 규약을 동기화했다.
+- Prospective source `24e0444dc1a7d5fcff924c70f3b8319d134b5bd3`에서
+  GitHub quality workflow와 Pages deployment가 모두 성공했다. 공개본은
+  <https://gohyunsu.github.io/aneurysm/site/>에서 확인했다.
 - 영향 파일: `docs/goal-oriented-segmentation-audit-2026-08-09.md`,
   `configs/goal_oriented_segmentation_s0a.json`,
   `src/aurora/goal_oriented_s0a.py`, `tests/test_goal_oriented_s0a.py`,
