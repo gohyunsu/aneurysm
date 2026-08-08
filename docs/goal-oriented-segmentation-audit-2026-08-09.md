@@ -48,7 +48,7 @@ scenario**를 적용했을 때의 standardized functional error 차이다. CFD�
 
 | 계보 | 직접 선행 | 이 후보에서 novelty가 아닌 것 |
 |---|---|---|
-| segmentation→CFD 자동화 | [AI segmentation for aneurysm CFD](https://doi.org/10.1142/S0219519423400559), [automated anterior-circulation CFD pipeline](https://doi.org/10.1007/s00701-024-06324-z) | 자동 mesh/solver pipeline, CFD로 segmentation을 사후 평가하는 것 |
+| segmentation→CFD 자동화 | [AI segmentation for aneurysm CFD](https://doi.org/10.1142/S0219519423400559), [automated anterior-circulation CFD pipeline](https://doi.org/10.1038/s41598-024-80891-4) | 자동 mesh/solver pipeline, CFD로 segmentation을 사후 평가하는 것 |
 | 영상→mesh+field 공동예측 | [Image2Flow](https://doi.org/10.1371/journal.pcbi.1012231)은 MRI에서 volume mesh와 pressure/velocity를 함께 예측하고 pointwise CFD loss를 사용한다. | image-to-CFD, graph decoder, joint segmentation/field loss, 빠른 surrogate |
 | CFD-ready segmentation | [IAVS](https://arxiv.org/abs/2512.01319)는 count-guided localization, topology-aware segmentation과 CFD Applicability Score를 제안한다. | topology-aware nnU-Net, solver success/applicability를 endpoint로 두는 것 |
 | vascular loss | [clDice](https://doi.org/10.1109/CVPR46437.2021.00225), [cbDice](https://doi.org/10.1007/978-3-031-72111-3_5) | centerline, radius, boundary 또는 topology loss 자체 |

@@ -15,7 +15,9 @@
   segmentation/CFD Applicability Score, clDice/cbDice, MATCH/CFD challenge의
   segmentation variability와 differentiable PDE/shape optimization을 direct
   prior로 올렸다. Automatic segmentation→CFD, solver success, GNN/U-Net,
-  adjoint와 sensitivity weighting 자체는 novelty가 아니다.
+  adjoint와 sensitivity weighting 자체는 novelty가 아니다. Nearly automated
+  anterior-vasculature pipeline은 공식 Scientific Reports DOI
+  `10.1038/s41598-024-80891-4`로 교정했다.
 - 유일하게 남을 수 있는 gap을 predefined PDE functional의 adjoint shape
   gradient에 signed boundary displacement를 투영하는 segmentation supervision으로
   제한했다. Cold-audit score는 27.5/40로 자동 선택 기준 32에 못 미치므로
