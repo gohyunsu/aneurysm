@@ -10,7 +10,8 @@ I0b one-shot execution-incomplete/no-verdict/no-rerun 상태, 같은 날 수행�
 problem-level cold audit, CADA·ADAM·IntrA·TopCoW source-only dataset
 substitution screen, RSNA supervision-semantics red team으로 그 lesion-set
 후보를 기각한 상태, 그리고 2026-08-09 goal-oriented hemodynamic segmentation
-cold audit와 S0a preregistration을 반영했다.
+cold audit와 S0a preregistration, official precompiled SU2의 reverse-AD
+negative control 및 별도 solver preflight 등록을 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -27,6 +28,15 @@ cold audit와 S0a preregistration을 반영했다.
   99 patient/105 lesion exact image–surface–table linkage와 별도 pinned
   solver/adjoint runtime의 11개 check를 모두 통과해야 method-free S0b만
   등록할 수 있다. 같은 version의 dependency/mapping repair rerun은 없다.
+- Official SU2 8.5.0 OMP binary는 steady direct QuickStart를 완료했지만
+  `DISCRETE_ADJOINT`에서 AD support가 compile되지 않았음을 명시하고
+  종료했으므로 S0a에 사용할 수 없다. 이는 S0a 결과가 아니라 등록 전
+  negative control이다. `configs/goal_oriented_segmentation_s0a_solver_preflight.json`
+  은 exact SU2/TestCases commit과 official GHCR linux/amd64 manifest에서
+  normal+reverse-AD runtime을 CPU/PBS로 build하고, fresh incompressible
+  forward 뒤 discrete adjoint와 finite nonzero surface sensitivity를 확인한다.
+  Preflight도 medical asset, model, GPU, outer test를 읽지 않으며 pass는 exact
+  runtime pin 뒤 단 한 번의 S0a 실행만 허용한다.
 - Automatic segmentation→CFD, Image2Flow의 joint mesh/field CFD loss, IAVS의
   CFD Applicability Score, clDice/cbDice, segmentation-induced flow variability,
   adjoint/shape derivative와 PDE optimization 일반론은 novelty가 아니다.
@@ -52,7 +62,8 @@ cold audit와 S0a preregistration을 반영했다.
   되돌리지 않는다. 이들은 향후 fully supervised control 또는 vascular
   anatomy pretraining에 쓸 수 있지만, 기각된 annotation-selection estimand의
   대체 근거가 아니다.
-- 다음 허용 작업은 **S0a asset/runtime audit 구현·CPU PBS 실행**뿐이다.
+- 다음 허용 작업은 **CMHA staging과 solver preflight 완료 후 단 한 번의 S0a
+  asset/runtime CPU PBS 실행**뿐이다.
   S0a/S0b 전에는 architecture, model training, GPU, outer test와 submission
   claim을 만들지 않는다.
 - Vessel graph/GNN, vessel-first nnU-Net, anatomy-masked pooling, location

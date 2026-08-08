@@ -168,8 +168,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "S0a",
       title: "Are CMHA linkage and solver gradients auditable?",
-      copy: "99 patients/105 lesions must map CTA, parent+aneurysm STL, aneurysm STL and tables by exact identifier. A separately pinned solver must expose steady forward and discrete-adjoint or verified shape-gradient capability. All eleven checks are required.",
-      state: "Preregistered · CPU/read-only · pass opens S0b only",
+      copy: "99 patients/105 lesions must map CTA, parent+aneurysm STL, aneurysm STL and tables by exact identifier. The official direct-only SU2 binary was rejected after it refused discrete adjoint. A separately built and pinned normal+reverse-AD runtime must pass a real incompressible forward/adjoint probe. All eleven S0a checks are still required.",
+      state: "CMHA staging running · reverse-AD preflight registered · S0a not evaluated",
       blocking: true
     },
     {
@@ -307,6 +307,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "implementation",
+      title: "Direct-only SU2 is rejected; a real reverse-AD preflight is frozen",
+      copy: "The official SU2 8.5.0 OMP binary completed a steady QuickStart solve but explicitly refused DISCRETE_ADJOINT because AD support was not compiled, so binary presence or direct success cannot satisfy S0a. A new CPU/PBS preflight pins exact SU2 and TestCases commits, the LGPL COPYING hash, and the official GHCR linux/amd64 manifest; it builds an immutable normal+reverse-AD SIF and runs a fresh incompressible direct solve followed by a discrete adjoint with finite, nonzero surface sensitivity. This preflight reads no medical asset and does not evaluate S0a, select a model, use a GPU, or open an outer test.",
+      files: ["configs/goal_oriented_segmentation_s0a_solver_preflight.json", "src/aurora/goal_oriented_s0a_solver.py", "cluster/pbs_goal_oriented_s0a_solver_preflight.pbs", "tests/test_goal_oriented_s0a.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/goal-oriented-segmentation-audit-2026-08-09.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", ".github/workflows/quality.yml", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "implementation",

@@ -160,6 +160,16 @@ OpenFOAM/SU2/VMTK도 확인되지 않았다. 이 사실은 S0a 실패 결과가 
 상태 자체를 S0a에서 다시 검사한다. S0a pass도 model, GPU, outer test 또는
 paper identity를 열지 않고 method-free S0b 등록만 허용한다.
 
+추가 negative control에서 official SU2 8.5.0 OMP release는 steady direct
+QuickStart를 exit 0으로 완료했지만 `DISCRETE_ADJOINT`는 AD support가 compile되지
+않아 거부했다. 따라서 direct-only binary를 solver capability로 인정하지 않는다.
+`configs/goal_oriented_segmentation_s0a_solver_preflight.json`은 exact source와
+official reverse-AD build image에서 immutable SIF를 만들고, official
+incompressible test mesh의 fresh direct solution을 이용한 discrete adjoint 및
+finite/nonzero surface sensitivity를 먼저 확인한다. 이 preflight는 medical
+asset을 읽지 않고 S0a를 평가하지 않으며, pass도 runtime pin과 단일 S0a
+실행만 허용한다.
+
 ## 7. S0b와 이후 kill rule
 
 S0a가 통과한 경우에만, 결과 전에 별도 S0b를 등록한다. S0b는 development

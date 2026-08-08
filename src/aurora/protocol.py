@@ -114,8 +114,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.4":
-        raise ProtocolError("The current research-state schema must be version 2.4.")
+    if protocol["schema_version"] != "2.5":
+        raise ProtocolError("The current research-state schema must be version 2.5.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -173,7 +173,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "execute_preregistered_cpu_read_only_s0a_asset_linkage_and_solver_runtime_audit_only"
+        != "complete_preregistered_cmha_staging_and_solver_preflight_then_execute_the_single_s0a_gate_only"
         or problem_selection["audit_document"]
         != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
@@ -289,6 +289,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "status",
             "audit_document",
             "s0a_config",
+            "solver_runtime_preflight_config",
+            "solver_runtime_preflight_status",
+            "precompiled_su2_omp_release_is_s0a_eligible",
+            "solver_runtime_preflight_evaluates_s0a",
+            "solver_runtime_preflight_pass_authorizes",
             "score",
             "maximum_score",
             "automatic_selection_threshold",
@@ -311,6 +316,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
         or goal_audit["s0a_config"]
         != "configs/goal_oriented_segmentation_s0a.json"
+        or goal_audit["solver_runtime_preflight_config"]
+        != "configs/goal_oriented_segmentation_s0a_solver_preflight.json"
+        or goal_audit["solver_runtime_preflight_status"]
+        != "preregistered_before_reverse_ad_build_and_probe"
+        or goal_audit["precompiled_su2_omp_release_is_s0a_eligible"] is not False
+        or goal_audit["solver_runtime_preflight_evaluates_s0a"] is not False
+        or goal_audit["solver_runtime_preflight_pass_authorizes"]
+        != "pin_runtime_overlay_and_execute_the_single_preregistered_s0a_gate_only"
         or goal_audit["score"] != 27.5
         or goal_audit["maximum_score"] != 40.0
         or goal_audit["automatic_selection_threshold"] != 32.0
@@ -330,7 +343,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         raise ProtocolError(
             "The goal-oriented candidate must remain below automatic selection and "
-            "authorize only the method-free S0a audit."
+            "authorize only the solver preflight and method-free S0a audit."
         )
     checks.append("conditional problem shortlist and S0a-only boundary")
 

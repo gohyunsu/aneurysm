@@ -1,6 +1,6 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.9-draft · 2026-08-09
+버전: 3.0-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
@@ -29,6 +29,29 @@ all-or-none check로 감사한다. Row order나 filename similarity만으로 map
 - all 11 pass: method-free S0b 등록만 허용
 - any fail: 같은 version의 dependency/mapping repair rerun 없이 후보 종료
 - pass도 금지: model/GPU/outer test/submission identity
+
+#### S0a-P · solver runtime preflight · preregistered, not S0a
+
+Official SU2 8.5.0 OMP release는 steady direct를 완료했지만 reverse AD가
+compile되지 않아 `DISCRETE_ADJOINT`를 거부했다. 이 등록 전 negative control을
+실패한 S0a로 세거나 direct 성공으로 solver check를 통과시키지 않는다.
+
+`configs/goal_oriented_segmentation_s0a_solver_preflight.json`은 SU2
+`v8.5.0@12eb826…`, TestCases `v8.5.0@790c80e…`, official build container의
+linux/amd64 OCI manifest를 exact하게 고정한다. CPU/PBS에서 normal과 reverse-AD를
+함께 build한 immutable SIF로 다음 순서를 실행한다.
+
+1. 공식 incompressible Navier–Stokes heated-cylinder mesh/config hash 검증
+2. supplied solution을 쓰지 않는 `SU2_CFD` steady direct solve
+3. 그 fresh solution만 쓰는 20-step `SU2_CFD_AD` discrete adjoint
+4. finite, nonzero surface-sensitivity와 runtime/binary SHA 기록
+5. medical asset, model, GPU, outer-test access가 모두 0인지 기록
+
+10/10은 exact runtime overlay를 pin하고 **등록된 S0a를 한 번 실행할 권한**만
+준다. 이것은 S0a 11-check pass, shape-gradient accuracy, S0b, method 또는
+contribution evidence가 아니다. 실패한 동일 source version은 dependency나
+flag를 현장에서 고쳐 반복하지 않고 별도 prospective preflight version을
+요구한다.
 
 S0b는 S0a 결과 전에 수치·patient를 소급해 정하지 않는다. 별도 prospective
 contract에서 smooth surface perturbation의 forward solve와 adjoint first-order

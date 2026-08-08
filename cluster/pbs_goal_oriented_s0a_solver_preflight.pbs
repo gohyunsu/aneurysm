@@ -1,0 +1,236 @@
+#!/usr/bin/env bash
+#PBS -N aurora_s0a_su2
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=8:mem=32gb
+#PBS -l walltime=08:00:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+
+: "${PBS_JOBID:?this preflight must run inside a PBS allocation}"
+: "${AURORA_RUNTIME_ROOT:?set AURORA_RUNTIME_ROOT to a private writable directory}"
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT to the exact public checkout}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT to the exact public SHA}"
+
+if [[ ! "$AURORA_GIT_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "AURORA_GIT_COMMIT must be a full lowercase SHA." >&2
+  exit 2
+fi
+if [ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]; then
+  echo "Project checkout does not match AURORA_GIT_COMMIT." >&2
+  exit 2
+fi
+if [ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]; then
+  echo "Project checkout must be clean before solver preflight." >&2
+  exit 2
+fi
+
+readonly SU2_COMMIT="12eb826f049ef7f67df974dfcb44cf36ee07c0f8"
+readonly TESTDATA_COMMIT="790c80ec5b543487b5f8ecf8bb0f0e4d2cc67f3f"
+readonly BUILD_MANIFEST="sha256:8dc6f035de165a1e7c2e62c33e274ede60947d8a204b9dd2ae806fa12ccb9a72"
+readonly BUILD_URI="docker://ghcr.io/su2code/su2/build-su2@${BUILD_MANIFEST}"
+readonly COPYING_SHA="b3aa400aca6d2ba1f0bd03bd98d03d1fe7489a3bbb26969d72016360af8a5c9d"
+readonly CONFIG_SHA="cfb941d95508e6ddd79de1296584b1b3487be3a7d8b8369528c056faffc6731f"
+readonly MESH_SHA="e2139a98006bc296fb3e0992f4a05b35c85cc66fed346d813df4ec9032bad1f3"
+
+record_root="$AURORA_RUNTIME_ROOT/records"
+run_root="$AURORA_RUNTIME_ROOT/runs/$PBS_JOBID"
+image_root="$AURORA_RUNTIME_ROOT/images"
+status_path="$record_root/status.$PBS_JOBID.json"
+manifest_path="$record_root/runtime-manifest.$PBS_JOBID.json"
+mkdir -p "$record_root" "$run_root" "$image_root"
+
+shopt -s nullglob
+for prior_status in "$record_root"/status.*.json; do
+  if grep -Fq '"protocol_id":"goal_oriented_segmentation_s0a_solver_preflight_v1"' \
+      "$prior_status" && grep -Fq "\"public_source_commit\":\"$AURORA_GIT_COMMIT\"" \
+      "$prior_status"; then
+    echo "A preflight record already exists for this public source; rerun is forbidden." >&2
+    exit 2
+  fi
+done
+shopt -u nullglob
+
+write_status() {
+  local state="$1"
+  local exit_code="$2"
+  local tmp_path="$status_path.partial"
+  printf '{"protocol_id":"goal_oriented_segmentation_s0a_solver_preflight_v1","state":"%s","exit_code":%s,"public_source_commit":"%s","scientific_gate_evaluated":false,"medical_asset_access":false,"model_access":false,"gpu_access":false,"outer_test_access":false}\n' \
+    "$state" "$exit_code" "$AURORA_GIT_COMMIT" > "$tmp_path"
+  mv "$tmp_path" "$status_path"
+}
+
+write_status running 0
+preflight_complete=false
+on_exit() {
+  local exit_code=$?
+  trap - EXIT
+  if [ "$preflight_complete" != true ]; then
+    write_status failed "$exit_code"
+  fi
+  exit "$exit_code"
+}
+trap on_exit EXIT
+
+assert_sha256() {
+  local path="$1"
+  local expected="$2"
+  local observed
+  observed="$(sha256sum "$path" | awk '{print $1}')"
+  if [ "$observed" != "$expected" ]; then
+    echo "SHA-256 mismatch for $(basename "$path")" >&2
+    return 2
+  fi
+}
+
+export SINGULARITY_CACHEDIR="$run_root/singularity-cache"
+export SINGULARITY_TMPDIR="$run_root/singularity-tmp"
+mkdir -p "$SINGULARITY_CACHEDIR" "$SINGULARITY_TMPDIR"
+
+build_sif="$run_root/official-su2-build-amd64.sif"
+singularity pull --disable-cache "$build_sif" "$BUILD_URI"
+build_sif_sha="$(sha256sum "$build_sif" | awk '{print $1}')"
+
+source_root="$run_root/src/SU2"
+mkdir -p "$run_root/src"
+git clone --depth 1 --branch v8.5.0 --recurse-submodules --shallow-submodules \
+  https://github.com/su2code/SU2.git "$source_root"
+if [ "$(git -C "$source_root" rev-parse HEAD)" != "$SU2_COMMIT" ]; then
+  echo "SU2 v8.5.0 resolved to an unexpected commit." >&2
+  exit 2
+fi
+assert_sha256 "$source_root/COPYING" "$COPYING_SHA"
+assert_sha256 \
+  "$source_root/TestCases/disc_adj_incomp_navierstokes/cylinder/heated_cylinder.cfg" \
+  "$CONFIG_SHA"
+
+testdata_root="$run_root/testdata"
+git clone --depth 1 --branch v8.5.0 --filter=blob:none --sparse \
+  https://github.com/su2code/TestCases.git "$testdata_root"
+git -C "$testdata_root" sparse-checkout set disc_adj_incomp_navierstokes/cylinder
+if [ "$(git -C "$testdata_root" rev-parse HEAD)" != "$TESTDATA_COMMIT" ]; then
+  echo "TestCases v8.5.0 resolved to an unexpected commit." >&2
+  exit 2
+fi
+mesh_path="$testdata_root/disc_adj_incomp_navierstokes/cylinder/mesh_cylinder_lam_ffd.su2"
+assert_sha256 "$mesh_path" "$MESH_SHA"
+
+build_flags="-Denable-autodiff=true -Denable-normal=true -Dwith-omp=true -Denable-mixedprec=true -Denable-pywrapper=false -Denable-tecio=false --warnlevel=3"
+(
+  cd "$run_root"
+  singularity run --cleanenv --bind "$run_root:$run_root" --pwd "$run_root" \
+    "$build_sif" -f "$build_flags"
+)
+
+install_root="$run_root/install"
+for binary in SU2_CFD SU2_CFD_AD SU2_DEF SU2_DOT; do
+  if [ ! -x "$install_root/bin/$binary" ]; then
+    echo "Required solver binary is missing: $binary" >&2
+    exit 2
+  fi
+done
+
+definition="$run_root/su2-runtime.def"
+{
+  printf 'Bootstrap: localimage\n'
+  printf 'From: %s\n\n' "$build_sif"
+  printf '%%files\n'
+  printf '    %s /opt/su2\n' "$install_root"
+  printf '    %s /opt/su2/COPYING\n\n' "$source_root/COPYING"
+  printf '%%environment\n'
+  printf '    export SU2_RUN=/opt/su2/bin\n'
+  printf '    export PATH=/opt/su2/bin:$PATH\n'
+  printf '    export PYTHONPATH=/opt/su2/bin:${PYTHONPATH:-}\n\n'
+  printf '%%labels\n'
+  printf '    org.opencontainers.image.title AURORA-SU2-reverse-AD-runtime\n'
+  printf '    org.opencontainers.image.version 8.5.0\n'
+  printf '    org.opencontainers.image.revision %s\n' "$SU2_COMMIT"
+  printf '    aurora.testdata.revision %s\n\n' "$TESTDATA_COMMIT"
+  printf '%%runscript\n'
+  printf '    exec /opt/su2/bin/SU2_CFD "$@"\n\n'
+  printf '%%test\n'
+  printf '    test -x /opt/su2/bin/SU2_CFD\n'
+  printf '    test -x /opt/su2/bin/SU2_CFD_AD\n'
+  printf '    test -x /opt/su2/bin/SU2_DEF\n'
+  printf '    test -x /opt/su2/bin/SU2_DOT\n'
+  printf '    test -f /opt/su2/COPYING\n'
+} > "$definition"
+
+runtime_partial="$run_root/.su2-v8.5.0-normal-reverse-omp.partial.sif"
+runtime_sif="$image_root/su2-v8.5.0-normal-reverse-omp.$AURORA_GIT_COMMIT.sif"
+if [ -e "$runtime_sif" ]; then
+  echo "Runtime image already exists; same-source preflight rerun is forbidden." >&2
+  exit 2
+fi
+singularity build --fakeroot --disable-cache "$runtime_partial" "$definition"
+mv "$runtime_partial" "$runtime_sif"
+chmod 0444 "$runtime_sif"
+runtime_sif_sha="$(sha256sum "$runtime_sif" | awk '{print $1}')"
+
+probe_root="$run_root/probe"
+mkdir -p "$probe_root"
+cp "$source_root/TestCases/disc_adj_incomp_navierstokes/cylinder/heated_cylinder.cfg" \
+  "$probe_root/official.cfg"
+cp "$mesh_path" "$probe_root/mesh_cylinder_lam_ffd.su2"
+sed 's/^RESTART_FILENAME= restart_flow/RESTART_FILENAME= solution_flow/' \
+  "$probe_root/official.cfg" > "$probe_root/direct.cfg"
+sed \
+  -e 's/^%MATH_PROBLEM= DISCRETE_ADJOINT/MATH_PROBLEM= DISCRETE_ADJOINT/' \
+  -e 's/^RESTART_SOL= NO/RESTART_SOL= YES/' \
+  -e 's/^ITER= 1000/ITER= 20/' \
+  "$probe_root/direct.cfg" > "$probe_root/adjoint.cfg"
+
+(
+  cd "$probe_root"
+  singularity exec --cleanenv --bind "$probe_root:$probe_root" --pwd "$probe_root" \
+    "$runtime_sif" /opt/su2/bin/SU2_CFD -t 1 direct.cfg > direct.log 2>&1
+)
+grep -q "Exit Success (SU2_CFD)" "$probe_root/direct.log"
+test -s "$probe_root/solution_flow.dat"
+test -s "$probe_root/history.csv"
+cp "$probe_root/history.csv" "$probe_root/history_direct.csv"
+
+(
+  cd "$probe_root"
+  singularity exec --cleanenv --bind "$probe_root:$probe_root" --pwd "$probe_root" \
+    "$runtime_sif" /opt/su2/bin/SU2_CFD_AD -t 1 adjoint.cfg > adjoint.log 2>&1
+)
+grep -q "Exit Success (SU2_CFD)" "$probe_root/adjoint.log"
+test -s "$probe_root/surface_adjoint.csv"
+test -s "$probe_root/restart_adj.dat"
+
+singularity exec --cleanenv --bind "$probe_root:$probe_root" "$runtime_sif" \
+  python3 - "$probe_root/surface_adjoint.csv" <<'PY'
+import csv
+import math
+import sys
+
+with open(sys.argv[1], newline="", encoding="utf-8") as stream:
+    reader = csv.DictReader(stream)
+    fields = [name for name in (reader.fieldnames or []) if "sens" in name.lower()]
+    if not fields:
+        raise SystemExit("surface sensitivity columns are absent")
+    values = []
+    for row in reader:
+        for field in fields:
+            value = float(row[field])
+            if not math.isfinite(value):
+                raise SystemExit("surface sensitivity is not finite")
+            values.append(value)
+if not values or max(abs(value) for value in values) <= 1e-15:
+    raise SystemExit("surface sensitivity is identically zero")
+PY
+
+su2_cfd_sha="$(sha256sum "$install_root/bin/SU2_CFD" | awk '{print $1}')"
+su2_cfd_ad_sha="$(sha256sum "$install_root/bin/SU2_CFD_AD" | awk '{print $1}')"
+sensitivity_sha="$(sha256sum "$probe_root/surface_adjoint.csv" | awk '{print $1}')"
+manifest_tmp="$manifest_path.partial"
+printf '{"protocol_id":"goal_oriented_segmentation_s0a_solver_preflight_v1","public_source_commit":"%s","su2_commit":"%s","testdata_commit":"%s","build_oci_manifest":"%s","build_sif_sha256":"%s","runtime_sif_sha256":"%s","su2_cfd_sha256":"%s","su2_cfd_ad_sha256":"%s","surface_sensitivity_sha256":"%s","checks_passed":10,"checks_total":10,"scientific_gate_evaluated":false,"medical_asset_access":false,"model_access":false,"gpu_access":false,"outer_test_access":false}\n' \
+  "$AURORA_GIT_COMMIT" "$SU2_COMMIT" "$TESTDATA_COMMIT" "$BUILD_MANIFEST" \
+  "$build_sif_sha" "$runtime_sif_sha" "$su2_cfd_sha" "$su2_cfd_ad_sha" \
+  "$sensitivity_sha" > "$manifest_tmp"
+mv "$manifest_tmp" "$manifest_path"
+
+write_status completed 0
+preflight_complete=true

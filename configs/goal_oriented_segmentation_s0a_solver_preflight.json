@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.0",
+  "protocol_id": "goal_oriented_segmentation_s0a_solver_preflight_v1",
+  "as_of": "2026-08-09",
+  "status": "preregistered_before_reverse_ad_build_and_probe",
+  "purpose": "build_and_verify_an_immutable_cpu_solver_runtime_before_the_s0a_gate",
+  "parent_gate": "configs/goal_oriented_segmentation_s0a.json",
+  "scientific_gate_evaluated": false,
+  "discovery_before_registration": {
+    "host_or_existing_pytorch_image_has_required_solver": false,
+    "official_precompiled_omp_release": {
+      "asset": "SU2-v8.5.0-linux64-omp.zip",
+      "bytes": 30226528,
+      "sha256": "aadc800cd9df34deff99d4725f5897f620c9f2979f62ab235313311bf501f09b",
+      "steady_direct_probe": "completed_exit_0",
+      "discrete_adjoint_probe": "refused_because_AD_support_is_not_compiled",
+      "eligible_for_s0a": false
+    }
+  },
+  "upstream": {
+    "su2": {
+      "repository": "https://github.com/su2code/SU2.git",
+      "tag": "v8.5.0",
+      "commit": "12eb826f049ef7f67df974dfcb44cf36ee07c0f8",
+      "license": "GNU_LGPL_2_1_or_later",
+      "copying_sha256": "b3aa400aca6d2ba1f0bd03bd98d03d1fe7489a3bbb26969d72016360af8a5c9d"
+    },
+    "testdata": {
+      "repository": "https://github.com/su2code/TestCases.git",
+      "tag": "v8.5.0",
+      "commit": "790c80ec5b543487b5f8ecf8bb0f0e4d2cc67f3f"
+    },
+    "official_build_image": {
+      "registry": "ghcr.io/su2code/su2/build-su2",
+      "tag": "260405-0054",
+      "oci_index_digest": "sha256:a03f4f7d476427f639ca6de6553b716c49f711718a5bbe7bf97b5f75424d1f07",
+      "linux_amd64_manifest_digest": "sha256:8dc6f035de165a1e7c2e62c33e274ede60947d8a204b9dd2ae806fa12ccb9a72"
+    }
+  },
+  "build": {
+    "flags": [
+      "-Denable-autodiff=true",
+      "-Denable-normal=true",
+      "-Dwith-omp=true",
+      "-Denable-mixedprec=true",
+      "-Denable-pywrapper=false",
+      "-Denable-tecio=false",
+      "--warnlevel=3"
+    ],
+    "required_binaries": [
+      "SU2_CFD",
+      "SU2_CFD_AD",
+      "SU2_DEF",
+      "SU2_DOT"
+    ],
+    "runtime_format": "immutable_sif",
+    "runtime_sha256_must_be_recorded_before_s0a": true
+  },
+  "probe": {
+    "config_path": "TestCases/disc_adj_incomp_navierstokes/cylinder/heated_cylinder.cfg",
+    "config_sha256": "cfb941d95508e6ddd79de1296584b1b3487be3a7d8b8369528c056faffc6731f",
+    "mesh_path": "disc_adj_incomp_navierstokes/cylinder/mesh_cylinder_lam_ffd.su2",
+    "mesh_sha256": "e2139a98006bc296fb3e0992f4a05b35c85cc66fed346d813df4ec9032bad1f3",
+    "equations": "INC_NAVIER_STOKES",
+    "objective": "TOTAL_HEATFLUX",
+    "direct": {
+      "binary": "SU2_CFD",
+      "uses_supplied_solution": false,
+      "only_output_basename_is_changed": true
+    },
+    "discrete_adjoint": {
+      "binary": "SU2_CFD_AD",
+      "iterations": 20,
+      "uses_fresh_direct_solution": true
+    },
+    "required_checks": [
+      "exact_source_and_testdata_commits",
+      "exact_oci_linux_amd64_manifest",
+      "license_hash",
+      "normal_and_reverse_ad_binaries",
+      "immutable_runtime_sif_and_sha256",
+      "incompressible_steady_direct_exit_0",
+      "fresh_direct_solution_written",
+      "discrete_adjoint_exit_0",
+      "surface_sensitivity_is_finite_and_nonzero",
+      "no_medical_asset_model_gpu_or_outer_test_access"
+    ]
+  },
+  "execution": {
+    "server": "junjinyong",
+    "scheduler": "PBS",
+    "queue": "ssu_a6gpu",
+    "resource": "cpu_only_no_ngpus",
+    "login_node_heavy_work": false,
+    "exact_clean_public_checkout_required": true,
+    "private_paths_in_config": false,
+    "public_output": "aggregate_without_private_paths_or_payload_only"
+  },
+  "decision": {
+    "all_checks_required": true,
+    "same_source_version_rerun_after_failure": false,
+    "pass_authorizes": "pin_the_runtime_overlay_then_execute_the_single_preregistered_s0a_asset_runtime_gate",
+    "failure_action": "preserve_the_preflight_failure_and_require_a_new_prospective_preflight_version_without_relabelling_s0a",
+    "s0a_relabelled_by_preflight": false
+  },
+  "authorization": {
+    "medical_asset_access": false,
+    "model_selected": false,
+    "architecture_selected": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "submission_identity": false,
+    "clinical_claim": false
+  }
+}

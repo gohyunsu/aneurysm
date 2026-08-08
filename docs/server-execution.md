@@ -50,6 +50,24 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
   않으며 status에도 `gate_evaluated=false`를 기록한다.
   Pass도 S0b 등록만 열고 segmentation training, GPU와 outer test를 금지한다.
 
+### SU2 reverse-AD runtime preflight boundary
+
+- Official SU2 8.5.0 OMP release의 SHA-256을 확인하고 local temporary
+  QuickStart direct solve를 완료했지만, 같은 binary는 `DISCRETE_ADJOINT`에서
+  AD support가 compile되지 않았다고 종료했다. 이 binary는 S0a 부적격이며
+  결과는 registration-before-execution negative control이다.
+- `configs/goal_oriented_segmentation_s0a_solver_preflight.json`과
+  `cluster/pbs_goal_oriented_s0a_solver_preflight.pbs`는 exact SU2/TestCases tag
+  commit, GNU LGPL COPYING hash, official GHCR linux/amd64 OCI manifest와
+  normal+reverse-AD build flag를 고정한다.
+- Preflight는 8 CPU/32 GB PBS allocation에서 immutable SIF를 만들고 official
+  incompressible heated-cylinder의 fresh direct solve 뒤 20-step discrete
+  adjoint와 finite/nonzero surface sensitivity를 확인한다. Private path와 raw
+  field는 public aggregate에 쓰지 않는다.
+- 이는 S0a gate가 아니다. Medical asset, model, GPU와 outer test access는
+  모두 0이며, 성공해도 runtime SHA pin과 단일 S0a 실행만 허용한다. 실패
+  source version은 현장에서 dependency/flag를 고쳐 재실행하지 않는다.
+
 ## 2026-08-08 · Cross-protocol 4D-flow I0a
 
 - `configs/flow_mri_protocol_i0a_asset_audit.json`은 공식 Zenodo API와 HTTP

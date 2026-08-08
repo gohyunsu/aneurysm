@@ -30,6 +30,12 @@ signed projection의 first-order validity와 geometry metric non-equivalence가
 양수여야만 architecture interface와 bounded development search를 별도
 prospective version으로 고정한다.
 
+Solver runtime build는 architecture가 아니다. Direct-only official SU2 binary는
+reverse AD가 없어 제외했고, exact normal+reverse-AD build와 incompressible
+forward/adjoint probe를 별도 preflight로 고정했다. 이 preflight가 성공해도
+nnU-Net, GNN, SDF decoder, loss 또는 optimizer 선택 권한은 생기지 않으며,
+실패 시 같은 source version을 고쳐 반복하지 않는다.
+
 직전 RSNA 후보는 제공 segmentation이 aneurysm extent가
 아니라 13-class Circle-of-Willis vessel anatomy라는 공개 근거 때문에
 기각됐다. Vessel mask와 aneurysm point/presence/territory는 같은 lesion

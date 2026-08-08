@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.4",
+  "schema_version": "2.5",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
@@ -21,7 +21,7 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "execute_preregistered_cpu_read_only_s0a_asset_linkage_and_solver_runtime_audit_only",
+    "next_allowed_action": "complete_preregistered_cmha_staging_and_solver_preflight_then_execute_the_single_s0a_gate_only",
     "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
@@ -56,6 +56,11 @@
       "status": "completed_primary_source_and_runtime_discovery_conditional_problem_shortlist",
       "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
       "s0a_config": "configs/goal_oriented_segmentation_s0a.json",
+      "solver_runtime_preflight_config": "configs/goal_oriented_segmentation_s0a_solver_preflight.json",
+      "solver_runtime_preflight_status": "preregistered_before_reverse_ad_build_and_probe",
+      "precompiled_su2_omp_release_is_s0a_eligible": false,
+      "solver_runtime_preflight_evaluates_s0a": false,
+      "solver_runtime_preflight_pass_authorizes": "pin_runtime_overlay_and_execute_the_single_preregistered_s0a_gate_only",
       "score": 27.5,
       "maximum_score": 40.0,
       "automatic_selection_threshold": 32.0,

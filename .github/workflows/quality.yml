@@ -24,6 +24,8 @@ jobs:
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
       - name: Validate prospective S0a contract
         run: PYTHONPATH=src python -m aurora.goal_oriented_s0a configs/goal_oriented_segmentation_s0a.json
+      - name: Validate prospective S0a solver preflight
+        run: PYTHONPATH=src python -m aurora.goal_oriented_s0a_solver configs/goal_oriented_segmentation_s0a_solver_preflight.json
       - name: Run protocol tests
         run: PYTHONPATH=src python -m unittest discover -s tests -v
       - name: Check local site graph

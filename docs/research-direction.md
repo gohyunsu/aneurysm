@@ -29,6 +29,16 @@ functional error를 함께 검증하는 algorithm뿐이다.
 [`goal-oriented-segmentation-audit-2026-08-09.md`](goal-oriented-segmentation-audit-2026-08-09.md)에
 있다.
 
+Runtime은 존재 여부로 통과시키지 않는다. Official SU2 8.5.0 OMP release는
+steady QuickStart direct solve를 완료했지만 `DISCRETE_ADJOINT`에서 AD support가
+compile되지 않았다는 명시적 오류로 종료했다. 이 negative control은 S0a가
+아니며 해당 binary는 부적격이다. 별도 prospective
+`configs/goal_oriented_segmentation_s0a_solver_preflight.json`은 exact source,
+TestCases와 official build-image manifest로 normal+reverse-AD SIF를 CPU/PBS에서
+만들고, incompressible Navier–Stokes fresh direct solution에서 실제 adjoint
+surface sensitivity가 finite/nonzero인지 확인한다. Pass도 runtime SHA를 pin한
+뒤 단 한 번의 S0a 실행만 열며 problem score나 novelty를 올리지 않는다.
+
 ### 직전 RSNA 후보 기각 · 보존
 
 직전 cold audit에서 조건부로 남긴 RSNA annotation-selection-aware

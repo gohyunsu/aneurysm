@@ -40,6 +40,11 @@ class ProtocolTests(unittest.TestCase):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
+        audit["precompiled_su2_omp_release_is_s0a_eligible"] = True
+        with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["goal_oriented_segmentation_cold_audit"]
         audit["s0a_pass_authorizes"] = "train_model"
         with self.assertRaisesRegex(ProtocolError, "goal-oriented candidate"):
             validate_protocol(candidate)

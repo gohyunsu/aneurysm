@@ -7,11 +7,18 @@ from aurora.goal_oriented_s0a import (
     load_s0a_config,
     validate_s0a_config,
 )
+from aurora.goal_oriented_s0a_solver import (
+    SolverPreflightProtocolError,
+    load_solver_preflight_config,
+    validate_solver_preflight_config,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "goal_oriented_segmentation_s0a.json"
 STAGING_PBS = ROOT / "cluster" / "pbs_goal_oriented_s0a_stage_cmha.pbs"
+SOLVER_CONFIG = ROOT / "configs" / "goal_oriented_segmentation_s0a_solver_preflight.json"
+SOLVER_PBS = ROOT / "cluster" / "pbs_goal_oriented_s0a_solver_preflight.pbs"
 
 
 class GoalOrientedS0ATests(unittest.TestCase):
@@ -79,6 +86,55 @@ class GoalOrientedS0ATests(unittest.TestCase):
             self.assertIn(token, script)
         self.assertIn("--continue-at -", script)
         self.assertIn("7z x", script)
+
+    def test_solver_preflight_reference_config_is_valid(self) -> None:
+        config = load_solver_preflight_config(SOLVER_CONFIG)
+        self.assertEqual(len(validate_solver_preflight_config(config)), 8)
+
+    def test_solver_preflight_preserves_precompiled_ad_failure(self) -> None:
+        config = load_solver_preflight_config(SOLVER_CONFIG)
+        config["discovery_before_registration"]["official_precompiled_omp_release"][
+            "eligible_for_s0a"
+        ] = True
+        with self.assertRaisesRegex(SolverPreflightProtocolError, "failure must be preserved"):
+            validate_solver_preflight_config(config)
+
+    def test_solver_preflight_requires_normal_and_reverse_ad(self) -> None:
+        config = load_solver_preflight_config(SOLVER_CONFIG)
+        config["build"]["flags"].remove("-Denable-autodiff=true")
+        with self.assertRaisesRegex(SolverPreflightProtocolError, "normal and reverse-AD"):
+            validate_solver_preflight_config(config)
+
+    def test_solver_preflight_is_cpu_only_and_not_s0a(self) -> None:
+        script = SOLVER_PBS.read_text(encoding="utf-8")
+        self.assertIn("select=1:ncpus=8:mem=32gb", script)
+        self.assertNotIn("ngpus=", script)
+        self.assertNotIn("nvidia-smi", script)
+        self.assertNotIn("singularity exec --nv", script)
+        self.assertNotIn("AURORA_STAGE_ROOT", script)
+        self.assertIn('"scientific_gate_evaluated":false', script)
+        self.assertIn('"medical_asset_access":false', script)
+        self.assertIn('"gpu_access":false', script)
+        self.assertIn("status --porcelain", script)
+
+    def test_solver_preflight_pins_source_image_and_real_probe(self) -> None:
+        script = SOLVER_PBS.read_text(encoding="utf-8")
+        for token in (
+            "12eb826f049ef7f67df974dfcb44cf36ee07c0f8",
+            "790c80ec5b543487b5f8ecf8bb0f0e4d2cc67f3f",
+            "8dc6f035de165a1e7c2e62c33e274ede60947d8a204b9dd2ae806fa12ccb9a72",
+            "b3aa400aca6d2ba1f0bd03bd98d03d1fe7489a3bbb26969d72016360af8a5c9d",
+            "cfb941d95508e6ddd79de1296584b1b3487be3a7d8b8369528c056faffc6731f",
+            "e2139a98006bc296fb3e0992f4a05b35c85cc66fed346d813df4ec9032bad1f3",
+        ):
+            self.assertIn(token, script)
+        self.assertIn("-Denable-autodiff=true", script)
+        self.assertIn("-Denable-normal=true", script)
+        self.assertIn("/opt/su2/bin/SU2_CFD -t 1 direct.cfg", script)
+        self.assertIn("/opt/su2/bin/SU2_CFD_AD -t 1 adjoint.cfg", script)
+        self.assertIn("surface sensitivity is identically zero", script)
+        self.assertIn("same-source preflight rerun is forbidden", script)
+        self.assertIn("A preflight record already exists for this public source", script)
 
 
 if __name__ == "__main__":

@@ -4,6 +4,33 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Reject direct-only SU2 runtime and register reverse-AD preflight
+
+- Official SU2 8.5.0 OMP release의 30,226,528-byte asset과 SHA-256을 확인했다.
+  NACA0012 QuickStart steady direct는 exit 0으로 수렴했지만 같은 binary의
+  `DISCRETE_ADJOINT`는 AD support가 compile되지 않았음을 명시하고 종료했다.
+  이 negative control은 S0a 결과가 아니며 direct-only binary는 부적격이다.
+- Exact SU2/TestCases v8.5.0 commit, LGPL COPYING hash와 official GHCR
+  linux/amd64 build-image manifest를 고정한 CPU/PBS preflight를 등록했다.
+  Normal+reverse-AD immutable SIF를 build하고, official incompressible
+  heated-cylinder에서 fresh direct solution → discrete adjoint → finite/nonzero
+  surface sensitivity를 실제 실행한다.
+- Preflight 10/10도 runtime pin과 단 한 번의 S0a 실행만 열며, S0a pass,
+  method, architecture, GPU, outer test와 paper identity를 열지 않는다. 실패한
+  동일 source version은 고쳐 재실행하지 않는다.
+- 중앙 schema를 `2.5`로 올려 direct-only 부적격, preflight 상태와 제한된
+  authorization을 검증한다.
+- 영향 파일: `configs/goal_oriented_segmentation_s0a_solver_preflight.json`,
+  `src/aurora/goal_oriented_s0a_solver.py`,
+  `cluster/pbs_goal_oriented_s0a_solver_preflight.pbs`,
+  `tests/test_goal_oriented_s0a.py`, `.github/workflows/quality.yml`, `AGENTS.md`,
+  `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`,
+  `docs/goal-oriented-segmentation-audit-2026-08-09.md`,
+  `docs/server-execution.md`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Register CMHA staging without evaluating S0a
 
 - `introai9` 승인 root와 `junjinyong` home을 읽기 전용으로 확인했지만 CMHA

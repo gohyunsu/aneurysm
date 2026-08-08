@@ -50,6 +50,15 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 11개 all-or-none check로 확인합니다. Pass도 method-free S0b 등록만 열며
 executable model, GPU job과 outer test를 만들지 않습니다.
 
+Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
+완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.
+따라서 이 binary를 재사용하지 않습니다. 별도
+[`solver preflight`](configs/goal_oriented_segmentation_s0a_solver_preflight.json)는
+exact SU2/TestCases commit과 official GHCR linux/amd64 manifest를 고정하고,
+normal+reverse-AD runtime을 CPU/PBS에서 build한 뒤 incompressible steady
+forward와 실제 discrete-adjoint surface sensitivity를 검사합니다. 이것은 S0a
+판정이 아니며 medical asset, model, GPU와 outer test 접근은 모두 0입니다.
+
 ### 보존된 직전 4D-flow 실행 기록
 
 [`I0a contract`](configs/flow_mri_protocol_i0a_asset_audit.json)는 두 공개
