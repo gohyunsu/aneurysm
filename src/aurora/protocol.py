@@ -50,6 +50,7 @@ REQUIRED_DATASETS = {
     "flow_mri_multiresolution_phantom_2021",
     "flow_mri_dual_venc_phantoms_2025",
     "flow_mri_intervention_phantoms_2025",
+    "rsna_ica_2025_controlled_access",
 }
 
 
@@ -98,6 +99,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         [
             "schema_version",
             "project",
+            "problem_selection",
             "venue",
             "task",
             "datasets",
@@ -121,6 +123,74 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if project["clinical_use"] is not False:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     checks.append("research-only project boundary")
+
+    problem_selection = protocol["problem_selection"]
+    _require_keys(
+        problem_selection,
+        [
+            "status",
+            "shortlisted_candidate",
+            "candidate_dataset",
+            "candidate_estimand",
+            "asset_access_status",
+            "user_accepted_data_terms_verified",
+            "task_unit_audited",
+            "method_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "next_allowed_action",
+            "audit_document",
+            "most_recent_closed_candidate",
+            "rejected_candidates",
+            "non_novel_components",
+        ],
+        "problem_selection",
+    )
+    if (
+        problem_selection["status"]
+        != "one_conditional_shortlist_no_selected_primary_problem"
+        or problem_selection["shortlisted_candidate"]
+        != "mixed_granularity_anatomy_structured_lesion_set_inference"
+        or problem_selection["candidate_dataset"]
+        != "rsna_ica_2025_controlled_access"
+        or problem_selection["candidate_estimand"]
+        != "patient_study_level_distribution_over_unordered_aneurysm_lesion_sets_under_annotation_projections"
+        or problem_selection["asset_access_status"]
+        != "not_found_in_bounded_introai9_name_audit_and_no_kaggle_credential"
+        or problem_selection["user_accepted_data_terms_verified"] is not False
+        or problem_selection["task_unit_audited"] is not False
+        or problem_selection["method_selected"] is not False
+        or problem_selection["gpu_training_authorized"] is not False
+        or problem_selection["outer_test_authorized"] is not False
+        or problem_selection["submission_identity_active"] is not False
+        or problem_selection["next_allowed_action"]
+        != "user_authorized_access_then_cpu_read_only_asset_and_task_unit_audit"
+        or problem_selection["audit_document"]
+        != "docs/problem-candidate-audit-2026-08-09.md"
+        or problem_selection["most_recent_closed_candidate"]
+        != "protocol_indexed_posterior_prediction_under_intracranial_4d_flow_acquisition_shift"
+    ):
+        raise ProtocolError(
+            "The lesion-set candidate must remain access-blocked, method-unselected, "
+            "GPU-disabled, and non-submission until a separately registered asset audit."
+        )
+    if set(problem_selection["rejected_candidates"]) != {
+        "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
+        "public_cohort_longitudinal_growth_detection",
+        "geometry_boundary_condition_shape_response_operator",
+        "cross_protocol_4d_flow_posterior_prediction",
+    }:
+        raise ProtocolError("Rejected problem candidates must remain explicit.")
+    if set(problem_selection["non_novel_components"]) != {
+        "vessel_graph_or_gnn",
+        "generic_set_prediction_or_point_process",
+        "mixed_or_weak_supervision",
+        "anatomy_prompt_or_foundation_model",
+        "conformal_prediction_or_fdr_control",
+    }:
+        raise ProtocolError("Direct lesion-set prior-art boundaries must remain explicit.")
+    checks.append("access-blocked problem-selection boundary")
 
     venue = protocol["venue"]
     _require_keys(
@@ -453,6 +523,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         for item in datasets
         if item["name"] == "flow_mri_intervention_phantoms_2025"
     )
+    rsna_ica = next(
+        item for item in datasets if item["name"] == "rsna_ica_2025_controlled_access"
+    )
     if cmha["field_provenance"] != "real_cfd":
         raise ProtocolError("CMHA is the declared real-CFD bridge in protocol v1.")
     if aneux["field_provenance"] != "none":
@@ -486,6 +559,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         raise ProtocolError(
             "I0b execution record must preserve zero field/REC access and physical-unit boundaries."
+        )
+    if (
+        rsna_ica.get("field_provenance") != "none"
+        or rsna_ica.get("split_unit") != "patient"
+        or rsna_ica.get("status")
+        != "not_staged_task_unit_unaudited_no_method_or_gpu_authorization"
+        or rsna_ica.get("license_boundary")
+        != "controlled_noncommercial_access_terms_require_user_acceptance_no_redistribution"
+    ):
+        raise ProtocolError(
+            "RSNA-ICA must remain controlled-access, patient-split, unstaged, and "
+            "method/GPU-disabled until user-authorized access and a separate audit."
         )
     checks.append("dataset provenance and split units")
 

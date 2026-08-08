@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류, 4D-flow MRI, CFD, GNN과 posterior prediction을 단계별로 읽는 AURORA 입문 가이드.">
+  <meta name="description" content="뇌동맥류 영상, patient–study–lesion 단위, mixed annotation, GNN과 과거 operator 가설을 단계별로 구분하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -42,8 +42,9 @@
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
-          4D-flow MRI protocol이 같은 혈류를 왜 다르게 보이게 하는지, 과거
-          AURORA가 왜 실패했고 새 candidate가 무엇부터 검증하는지 설명합니다.
+          서로 다른 수준의 aneurysm annotation이 왜 모순될 수 있는지, GNN은
+          무엇이며 왜 그 자체가 novelty가 아닌지, 과거 AURORA가 왜 실패했고
+          새 candidate가 무엇부터 검증하는지 설명합니다.
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
@@ -51,37 +52,35 @@
           <p>
             과거 exact/nonlinear gate는 MLP였고, q-PointNet·kNN graph·
             anchor-token·Perceiver 연구선은 성능 gate를 통과하지 못해
-            종료했습니다. 최근 candidate는 한 4D-flow acquisition posterior가
-            같은 flow의 다른 resolution·acceleration·VENC acquisition을
-            예측하는 문제입니다. Exact source <code>f7b4e024…</code>의 I0a는
-            metadata/header audit 14/14를 field read 없이 통과했지만, 이는
-            asset integrity 증거뿐입니다. I0b는 wrapper가 기존 read-only
-            <code>h5py==3.12.1</code> layer를 누락해 asset access 전에 끝났고
-            gate는 미평가입니다.
-            No-rerun rule을 유지하므로 GNN, U-Net, diffusion, neural field 어느
-            것도 architecture로 선택하지 않습니다.
+            종료했습니다. 현재 남은 조건부 후보는 RSNA-ICA의 study presence,
+            vascular territory, point localizer와 일부 segmentation을 하나의
+            잠재 lesion set의 annotation projection으로 다루는 문제입니다.
+            Controlled-access asset이 stage되지 않아 task unit은 아직 감사되지
+            않았고, GNN·U-Net·set predictor·foundation model 어느 것도 선택하지
+            않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>I0b는 scientific verdict 없이 닫혔습니다.</strong>
+          <strong>Access 뒤에도 첫 단계는 모델 학습이 아닙니다.</strong>
           <p>
-            Exact <code>0ebdb344…</code>의 CPU/PBS run은 dependency import에서
-            exit 1이었습니다. Archive/RAW/field/REC read와 cache/result 생성은
-            모두 0이므로 task가 좋다거나 나쁘다는 결과가 아닙니다. Dependency를
-            보충해 반복하거나 I0c로 넘어가지 않으며, 다음은 새 problem-level
-            candidate audit입니다. 33 scans ≠ 33 patients 경계는 그대로입니다.
+            사용자가 official 약관을 수락하고 private asset을 제공하면 먼저
+            patient–study–series–site–modality key, lesion 수, 13 location label,
+            localizer/segmentation provenance와 split viability를 CPU/read-only로
+            감사합니다. 이 L0/L1이 통과하기 전에는 GPU, method, outer test와
+            paper contribution을 열지 않습니다.
           </p>
+          <a href="../docs/problem-candidate-audit-2026-08-09.md">전체 candidate audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
         <p class="eyebrow">READING MAP · ABOUT 35 MIN</p>
         <ol>
-          <li><span>01</span><b>문제</b><small>동맥류와 혈류</small></li>
-          <li><span>02</span><b>표현</b><small>mesh를 graph로</small></li>
-          <li><span>03</span><b>모델</b><small>GNN + operator</small></li>
-          <li><span>04</span><b>불확실성</b><small>missing BC</small></li>
-          <li><span>05</span><b>검증</b><small>field → decision</small></li>
+          <li><span>01</span><b>단위</b><small>patient → study → lesion</small></li>
+          <li><span>02</span><b>관측</b><small>label · point · mask</small></li>
+          <li><span>03</span><b>모델</b><small>선택 전 prior-art</small></li>
+          <li><span>04</span><b>과거</b><small>GNN · operator 실패선</small></li>
+          <li><span>05</span><b>검증</b><small>FROC → burden</small></li>
         </ol>
         <a class="button primary" href="#foundation" data-chapter-link>첫 장 시작하기</a>
       </div>
@@ -377,8 +376,13 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>V1의 축소된 point/graph 후보는 학습됐지만 네 family 모두 약한 결과로 gate가 실패했습니다. 이 절의 전체 graph/token/query stack은 장기 3D target specification이며 실행된 N1 MLP operator와도 구분해야 합니다.</p>
+              <p>현재 lesion-set 후보에는 선택된 architecture가 없습니다. 아래 graph/token/query stack은 실패한 BC-operator 연구선의 장기 target specification을 보존한 역사 기록입니다. V1의 축소된 point/graph 후보도 네 family 모두 약한 결과로 gate가 실패했습니다.</p>
             </aside>
+            <article>
+              <span>CURRENT · PROBLEM INTERFACE</span>
+              <div><h3>Image → latent lesion set → annotation projection</h3><p>현재 후보는 patient/study 단위 image에서 순서 없는 lesion set을 추론하고, study presence·territory·point·mask likelihood를 같은 set에서 유도해야 합니다. 이 interface는 architecture가 아니며 access/L0/L1 전에는 구현하지 않습니다.</p></div>
+              <b>상태</b><small>access-blocked · no model · no GPU</small>
+            </article>
             <article>
               <span>01 · NORMALIZE</span>
               <div><h3>해부학적 local frame</h3><p>neck 중심을 원점으로 두고 부모 혈관 지름으로 크기를 정규화합니다. 스캐너 좌표의 임의 회전·이동을 모델이 외우지 않게 합니다.</p></div>

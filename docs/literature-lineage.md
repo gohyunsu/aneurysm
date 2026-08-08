@@ -5,6 +5,44 @@
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
 
+## 0. 현재 lesion-set shortlist의 직접 계보
+
+RSNA-ICA 2025는 18개 기관의 multisite/multimodal angiography와 13개
+aneurysm location task를 제공했고, 상위권 해법은 이미 vessel segmentation,
+tri-axial ROI classification과 26-class multitask 3D nnU-Net을 결합했다.
+AMAP은 anatomy-guided masked autoencoding/domain prompt를, ARAN은 vascular
+centerline graph와 foundation feature의 geometry-gated cross-attention을 직접
+사용했다. Topology-guided uncertainty와 morphological conformal prediction도
+이미 발표됐다. 따라서 vessel graph, GNN, anatomy token, foundation model,
+segmentation uncertainty 또는 conformal set을 붙이는 방향은 독립 novelty가
+아니다.
+
+현재 조건부 gap은 study presence, vascular-territory multi-label, localizer와
+부분 segmentation을 같은 latent lesion set의 annotation operator로 연결했을
+때 **cross-granularity coherence와 candidates-per-study burden을 동시에**
+개선할 수 있는가다. Mixed supervision, point process와 set prediction 일반론도
+선행하므로, 실제 label-generation contract에 맞는 새로운 tractable likelihood
+또는 보장과 strong challenge baseline 대비 양수 결과가 함께 있어야만 gap을
+contribution으로 인정한다. Controlled-access asset의 patient/study/lesion
+mapping은 아직 감사되지 않았다.
+
+- [RSNA-ICA official challenge](https://www.rsna.org/artificial-intelligence/ai-image-challenge/intracranial-aneurysm-detection-ai-challenge)
+- [RSNA-ICA official AWS registry](https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/)
+- [First-place vessel segmentation + ROI implementation](https://github.com/uchiyama33/rsna2025_1st_place)
+- [Second-place tri-axial ROI + multitask 3D nnU-Net](https://arxiv.org/abs/2606.26706)
+- [AMAP anatomy-aware domain prompting](https://www.nature.com/articles/s41746-025-02188-8)
+- [ARAN vasculature-tree-informed detection](https://openaccess.thecvf.com/content/CVPR2026W/PHAROS-AIF-MIH/papers/Shafique_ARAN_Leveraging_Foundation_Models_for_Vasculature-Tree-Informed_ARtery-Aware_Intracranial_ANeurysm_Detection_CVPRW_2026_paper.pdf)
+- [Morphological conformal prediction sets](https://papers.miccai.org/miccai-2025/0169-Paper3902.html)
+
+Longitudinal growth는 Royal Brisbane/OpenNeuro cohort의 clinician annotation이
+patient당 선택된 한 session에만 있고 AGED 및 2026 Bayesian growth detection이
+직접 경쟁한다. Variable-domain shape response도 GINO, Reference Neural Operator,
+geometric operator learning과 Shape-DINO가 직접 다루므로 두 후보를 기각했다.
+
+- [OpenNeuro ds005096](https://openneuro.org/datasets/ds005096)
+- [Bayesian longitudinal growth detection](https://arxiv.org/abs/2604.06649)
+- [Shape-DINO](https://arxiv.org/abs/2603.03211)
+
 ## 1. 계보
 
 ### 1.0 4D-flow MRI reconstruction과 uncertainty의 직접 계보

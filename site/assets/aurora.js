@@ -99,25 +99,25 @@
   });
 
   const modes = {
-    missing: {
-      description: "Joint BC density 전체를 주변화합니다.",
-      connector: "sample B",
-      title: "Coherent BC completions",
-      copy: "Anatomy-conditioned joint density with no observed component",
+    presence: {
+      description: "병변 집합을 study presence로 projection합니다.",
+      connector: "infer S",
+      title: "Unordered lesion set",
+      copy: "Unknown lesion count, 3D extent and vascular-territory mark",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
-    partial: {
-      description: "관측 component에 analytic conditioning하고 나머지만 샘플링합니다.",
-      connector: "condition on B<sub>M</sub>",
-      title: "Partial-BC conditional mixture",
-      copy: "Observed values update mixture weights, means, and covariance",
+    point: {
+      description: "Point localizer와 territory를 같은 병변 instance에 연결합니다.",
+      connector: "match point",
+      title: "Partially localized lesion set",
+      copy: "Observed points constrain lesion identity, count and territory",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
-    observed: {
-      description: "전체 waveform과 outlet split에 직접 조건화합니다.",
-      connector: "condition on full B",
-      title: "Fully specified BC",
-      copy: "The same conditional solution operator receives the observed BC",
+    mask: {
+      description: "Dense mask도 별도 task가 아니라 같은 lesion set의 extent 관측입니다.",
+      connector: "match extent",
+      title: "Densely observed lesion set",
+      copy: "Mask geometry refines the same lesion identity and territory",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

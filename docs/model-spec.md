@@ -5,10 +5,28 @@ V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training und
 V1e known-condition qualification failed 6/9 · M0 execution-incomplete/no
 scientific verdict · prior BC-operator identity inactive · cross-protocol
 4D-flow I0a asset integrity passed 14/14 · I0b execution-incomplete before
-asset access/no scientific verdict/no rerun · 4D-flow branch closed · method and
-architecture unselected
+asset access/no scientific verdict/no rerun · 4D-flow branch closed · one
+access-blocked lesion-set problem shortlist · method and architecture unselected
 
 연결 설정: `configs/aurora_v1.json`
+
+## 0. 현재 architecture boundary
+
+현재 구현하거나 선택한 headline architecture는 없다. 조건부 problem
+shortlist는 RSNA-ICA의 mixed-granularity annotation을 하나의 latent lesion
+set에서 유도하는 것이지만, 이는 model specification이 아니라 estimand
+specification이다. Controlled-access asset이 아직 stage되지 않았으므로 patient,
+study, lesion, territory, localizer와 segmentation의 실제 mapping을 모른 채
+GNN, U-Net, DETR, point process 또는 foundation model을 고르지 않는다.
+
+Access 뒤 method-free L0/L1이 task를 지지할 때만 independent-head,
+published vessel+ROI, 26-class multitask 3D nnU-Net과 generic set-prediction
+control을 먼저 고정한다. 이후에도 architecture는 관측된 병목에 맞춰
+development validation에서 선택한다. 가능한 3D encoder, vessel graph와 query
+decoder는 engineering components이며 단독 novelty가 아니다. 현재 상태에서
+`AURORA is GNN-based`라는 설명은 부정확하다. 상세 boundary는
+[`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)를
+따른다.
 
 ## 0-A. 닫힌 4D-flow candidate의 model boundary
 

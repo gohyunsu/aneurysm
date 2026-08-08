@@ -4,7 +4,17 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-최근 검증한 candidate는 **intracranial 4D-flow MRI의 protocol-indexed posterior
+현재 cold audit에서 남은 유일한 조건부 후보는 **multisite CT/MR angiography의
+mixed-granularity anatomy-structured lesion-set inference**입니다. Study presence,
+13개 vascular-territory label, point localizer와 일부 segmentation을 서로 다른
+정답으로 취급하지 않고 하나의 잠재 병변 집합에서 유도되는 annotation
+projection으로 다루는 문제입니다. 그러나 controlled-access RSNA-ICA asset은
+현재 알려진 `introai9` 경로에 stage되지 않았고 task unit도 감사되지 않았습니다.
+따라서 이것은 paper identity나 선택된 architecture가 아니며 GPU 실험도 돌고
+있지 않습니다. 상세한 기각 후보, prior-art boundary와 access 뒤 실험 순서는
+[`problem candidate audit`](docs/problem-candidate-audit-2026-08-09.md)에 있습니다.
+
+가장 최근에 닫은 candidate는 **intracranial 4D-flow MRI의 protocol-indexed posterior
 prediction**이었습니다. 한 acquisition에서 추론한 latent flow posterior가 같은
 controlled phantom flow의 다른 resolution·acceleration·VENC acquisition을
 measurement space에서 예측할 수 있는지를 묻습니다. Generic
@@ -12,8 +22,8 @@ super-resolution, denoising, PINN reconstruction 또는 voxelwise uncertainty를
 새 contribution이라고 부르지 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 유지하지만, 새 candidate의 정식 방법명과
-> architecture는 선택되지 않았습니다. I0b가 asset access 전 execution-incomplete로
-> 끝났고 no-rerun 계약을 유지하므로 이 branch도 닫혀 있습니다.
+> architecture는 선택되지 않았습니다. RSNA-ICA access와 L0/L1 audit 전에는
+> GNN, set predictor, training config와 submission claim을 만들지 않습니다.
 
 ## 현재 단계 · I0a asset pass, I0b execution-incomplete, method 없음
 

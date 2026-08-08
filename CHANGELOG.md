@@ -4,6 +4,29 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · one access-blocked lesion-set problem enters the shortlist
+
+- 4D-flow branch 종료 뒤 방법 이름 없이 새 problem-level cold audit을
+  수행했다. Generic segmentation/UQ, longitudinal growth와 geometry×BC shape
+  response는 각각 직접 prior art 또는 annotation/data-unit 부족으로 기각했다.
+- 유일한 조건부 후보는 RSNA-ICA 2025의 study/location/localizer/segmentation을
+  하나의 anatomy-structured latent lesion set의 annotation projection으로
+  다루는 문제다. Vessel graph, GNN, set prediction, mixed supervision,
+  anatomy/foundation prompt와 conformal/FDR는 단독 novelty에서 제외했다.
+- 현재 알려진 `introai9` 경로에 archive가 없고 Kaggle credential도 없어
+  access prerequisite가 충족되지 않았다. 사용자 약관 수락 전에는 download,
+  executable protocol, method/GPU training과 outer test를 열지 않는다.
+- Access 뒤 허용되는 첫 단계는 patient/study/lesion mapping, annotation
+  provenance와 split viability의 CPU/read-only L0 audit이다. 자세한 cold audit과
+  baseline/metric/kill sequence는
+  `docs/problem-candidate-audit-2026-08-09.md`에 기록했다.
+- 영향 파일: `AGENTS.md`, `README.md`, `docs/research-direction.md`,
+  `docs/model-spec.md`, `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`,
+  `docs/problem-candidate-audit-2026-08-09.md`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · I0b stops before asset access and is not rerun
 
 - Exact public source `0ebdb344a6cd4009a928746cda5389b95f12bf8d`, frozen

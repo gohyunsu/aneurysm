@@ -18,6 +18,27 @@ class ProtocolTests(unittest.TestCase):
         self.assertGreaterEqual(len(checks), 8)
         self.assertEqual(len(canonical_hash(self.protocol)), 64)
 
+    def test_problem_shortlist_cannot_select_method_or_gpu_before_access(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["method_selected"] = True
+        with self.assertRaisesRegex(ProtocolError, "access-blocked"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "access-blocked"):
+            validate_protocol(candidate)
+
+    def test_rsna_candidate_cannot_claim_staging_or_redistribution(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        rsna = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "rsna_ica_2025_controlled_access"
+        )
+        rsna["status"] = "staged"
+        with self.assertRaisesRegex(ProtocolError, "controlled-access"):
+            validate_protocol(candidate)
+
     def test_prospective_endpoint_is_rejected(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["application_endpoint"] = "five_year_rupture_risk"

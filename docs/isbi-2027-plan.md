@@ -4,7 +4,8 @@
 상태: **target locked · not submission-ready · prior BC-operator identity
 inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b
 execution-incomplete before asset access/no scientific verdict/no rerun ·
-4D-flow branch closed · method unselected**
+4D-flow branch closed · one access-blocked lesion-set problem shortlist · method
+unselected**
 
 ## 1. Venue contract
 
@@ -16,9 +17,9 @@ execution-incomplete before asset access/no scientific verdict/no rerun ·
 - 5쪽: references, ethical-compliance statement, acknowledgments/COI만 허용
 - 공식 scope와의 접점: physical/statistical modelling, reconstruction,
   uncertainty quantification, trustworthy AI, medical applications
-- 사람 또는 동물 자료를 쓰지 않는 현재 primary study는 numerical
-  simulation study로 명시한다. 공개 human-derived asset을 추가할 때는
-  license와 ethics/waiver 문구를 별도로 확인한다.
+- 현재 선택된 primary study는 없다. Human-derived controlled-access asset을
+  쓰게 되면 license, challenge terms와 ethics/waiver 문구를 별도로 확인하고
+  raw image/annotation을 재배포하지 않는다.
 
 공식 출처:
 
@@ -29,6 +30,15 @@ execution-incomplete before asset access/no scientific verdict/no rerun ·
 ## 2. 냉정한 현재 판정
 
 현재 원고는 ISBI-ready가 아니다.
+
+현재 유일한 조건부 shortlist는 multisite CT/MR angiography에서
+mixed-granularity annotation을 하나의 anatomy-structured lesion set으로
+연결하는 문제다. 그러나 RSNA-ICA asset access가 없고 task unit도 감사되지
+않았으므로 paper identity가 아니다. Access→L0 asset/task-unit audit→L1
+method-free adequacy→strong baseline→bounded development→prospective outer
+test 순서를 통과해야 한다. 상세 기준은
+[`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
+있다.
 
 1. 실행된 exact/nonlinear 모델은 MLP 기반 lifted operator다. V1 point/graph
    네 후보는 학습됐지만 모두 relative L2 약 1로 실패했다. 공개 architecture

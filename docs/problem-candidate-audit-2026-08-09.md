@@ -1,0 +1,182 @@
+# 2026-08-09 problem-level candidate audit
+
+상태: **one conditional shortlist · access prerequisite unmet · no selected
+method · no GPU authorization · not submission-ready**
+
+이 문서는 실패한 BC-operator, Aneumo 3D와 4D-flow 연구선을 다른 이름으로
+되살리기 위한 문서가 아니다. ISBI 2027에 제출할 수 있는 새 문제를
+방법론보다 먼저 선별한 cold audit이다. 문헌 검색만으로 얻은 수치와 실제
+archive에서 검증한 수치를 구분하며, 데이터 이용 약관에 대한 동의는
+사용자만 할 수 있다.
+
+## 1. 현재 남은 한 후보
+
+조건부 shortlist는 **mixed-granularity anatomy-structured lesion-set
+inference**다. 적용 데이터 후보는 controlled-access
+[RSNA Intracranial Aneurysm Detection 2025](https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/)다.
+공식 설명상 18개 기관의 4,000건 이상 CT/MR angiography와 13개 해부학적
+위치 annotation, 일부 AI-generated segmentation 연구가 포함된다. 이 숫자는
+archive audit 결과가 아니며 정확한 patient/study/lesion 수는 접근 뒤 다시
+검증해야 한다.
+
+한 scan의 목표를 14개의 서로 독립적인 binary label로 놓지 않는다. 잠재
+정답을 순서가 없는 유한 병변 집합
+
+\[
+  S=\{(r_i,e_i,m_i)\}_{i=1}^{N}
+\]
+
+로 둔다. 여기서 \(r_i\)는 3D 위치 또는 extent, \(e_i\)는 vascular territory,
+\(m_i\)는 이용 가능한 경우에만 존재하는 lesion mark다. Study-level presence,
+territory multi-label, point localizer와 mask는 서로 다른 정답이 아니라 같은
+\(S\)를 부분적으로 관측하는 annotation operator \(O_k(S)\)다. 학습 대상의
+후보 형태는
+
+\[
+  p_\theta(A_k\mid X)=
+  \int \mathbf 1\{O_k(S)=A_k\}\,p_\theta(S\mid X)\,dS
+\]
+
+처럼 annotation granularity를 주변화한 하나의 normalized lesion-set
+distribution이다. 이 식은 문제 경계를 정할 뿐, tractable likelihood나
+architecture가 이미 설계됐다는 뜻이 아니다.
+
+임상적 예측을 주장하지 않는다. 허용되는 endpoint는 cross-sectional
+lesion detection/localization과 reading-candidate burden이다. Rupture risk,
+future growth, clinical utility와 autonomous diagnosis는 범위 밖이다.
+
+## 2. 왜 이 후보만 남겼는가
+
+| 검토 후보 | 직접 선행 연구 또는 데이터 한계 | 판정 |
+|---|---|---|
+| 일반 3D segmentation/detection + uncertainty | RSNA 상위권 vessel/ROI pipeline, multitask 3D nnU-Net, anatomy-aware foundation model, topology-guided uncertainty가 이미 직접 다룬다. | 독립 정체성으로 기각 |
+| longitudinal growth | 공개 Royal Brisbane cohort는 63명/85 aneurysm이지만 clinician annotation은 patient당 선택된 한 session에만 제공된다. AGED와 2026 Bayesian growth detection도 직접 경쟁한다. | data/novelty 모두 부족해 기각 |
+| geometry×BC shape-response operator | GINO, Reference Neural Operator, geometric operator learning과 2026 Shape-DINO가 variable-domain/shape derivative를 직접 다룬다. | 직접 점유되어 기각 |
+| cross-protocol 4D-flow posterior prediction | I0b가 payload 접근 전에 execution-incomplete로 끝났고 등록된 no-rerun contract에 따라 branch를 닫았다. 실제 독립 flow unit도 매우 적다. | 보존된 closed branch |
+| annotation-operator-consistent lesion set | mixed annotation, set prediction, vessel anatomy와 conformal control 각각은 선행 연구다. 그러나 multisite angiography에서 annotation projection을 하나의 latent lesion-set law로 연결하고 candidate burden까지 검증하는 정확한 task가 성립하는지는 아직 열려 있다. | **access와 L0 audit에 조건부 shortlist** |
+
+이 후보의 장점은 새 module을 붙이기 전에 문제 단위를 고칠 수 있다는 데
+있다. 한 환자에서 여러 aneurysm이 있을 때 scan, location label, lesion과
+segmentation을 독립 sample처럼 세는 오류를 피하고, coarse label과 dense
+label의 예측이 서로 모순되는지 직접 검사할 수 있다. 동시에 공개 challenge의
+강한 baseline과 실제 multisite/modal variation이 있어 음수 결과도 명확하게
+판정할 수 있다.
+
+## 3. novelty를 인정하기 위한 최소 조건
+
+아래 요소는 단독 contribution이 아니다.
+
+- vessel graph, GNN, graph transformer 또는 anatomy prompt
+- DETR류 set prediction, point process 또는 segmentation backbone
+- weak/mixed supervision과 missing-label marginalization 일반론
+- temperature scaling, deep ensemble, conformal prediction 또는 FDR control
+- CT/MR multimodal training과 foundation-model feature
+
+독립 contribution 후보는 다음 세 항이 **모두** 성립할 때만 작성한다.
+
+1. 실제 archive의 label 생성 과정을 반영한 annotation operator 아래에서
+   coarse label과 lesion-level prediction을 하나의 tractable normalized
+   set distribution으로 연결하는 새로운 algorithm 또는 보장
+2. 독립-head/ROI/multitask/set-prediction baseline보다 lesion localization과
+   cross-granularity coherence를 함께 개선하는 patient/study-level evidence
+3. 동일 sensitivity에서 candidate per study를 줄이거나, 고정된 candidate
+   burden에서 missed-lesion risk를 줄이는 calibration-supported evidence
+
+세 번째 항의 risk control은 평가 가치가 있지만 그 자체가 novelty는 아니다.
+Morphological conformal prediction과 medical instance-level FDR control이
+이미 존재하므로, 적용만 한 결과는 contribution으로 세지 않는다. Site 또는
+modality shift에서 exchangeability가 깨지면 coverage를 보장했다고 쓰지 않고
+OOD detection/abstention만 평가한다.
+
+## 4. L0 · 접근 전 차단 조건과 asset/task-unit audit
+
+2026-08-09 현재 `introai9`의 bounded name audit에서 RSNA-ICA archive를 찾지
+못했고 Kaggle credential/CLI도 없다. 이는 데이터가 서버 전체에 없다는
+증명이 아니라 **현재 알려진 경로에 stage되지 않았다는 운영 판정**이다.
+Controlled-access 약관을 에이전트가 사용자 대신 수락하거나 credential을
+생성하지 않는다. 따라서 config, split, model code와 GPU job을 아직 만들지
+않는다.
+
+사용자가 공식 access를 완료하고 private asset 위치를 제공한 뒤, L0는
+payload 학습 없이 CPU/read-only로 다음을 감사한다.
+
+1. official version, license/terms, file count, byte size와 checksum
+2. patient–study–series–site–modality key와 중복/파생 study 관계
+3. study presence, 13 territory label, localizer와 segmentation의 정확한 mapping
+4. multi-lesion study, negative study, rare territory와 partial annotation 수
+5. AI-generated segmentation의 provenance와 ground-truth 사용 가능 범위
+6. patient/site group split과 CT/MR별 validation/outer-test viability
+7. 공개 가능한 aggregate와 공개하면 안 되는 image/annotation 경계
+
+L0에는 사후 수선 대상이 될 수치 threshold를 아직 두지 않는다. 먼저 exact
+counts와 task unit을 공개 aggregate로 고정한 뒤, label coverage와 split
+viability에 대한 prospective L1 기준을 별도 commit으로 등록한다. L0가
+patient-level linkage 또는 lesion mapping을 복구하지 못하면 이 후보도
+폐기한다.
+
+## 5. access 뒤의 단계적 실험 계획
+
+### L1 · method-free task adequacy
+
+- lesion 수와 location-label cardinality의 일치·불일치 유형을 blind audit한다.
+- official localizer/segmentation subset만으로 lesion-to-territory mapping의
+  ambiguity를 측정한다.
+- site·modality·rare territory를 보존하는 patient-level outer split이 가능한지
+  확인한다.
+- trivial study prior, anatomy prior와 published pipeline prediction만으로
+  task가 포화되는지 확인한다.
+
+L1까지 GPU가 필요하지 않다. 양수여도 method를 확정하지 않고 L2
+development protocol만 연다.
+
+### L2 · bounded method development
+
+먼저 재현할 강한 비교군은 challenge 1위 vessel-segmentation+ROI classifier,
+2위 tri-axial ROI+26-class 3D nnU-Net, nnDetection, anatomy heuristic,
+topological shape representation, ARAN 계열 anatomy-aware model이다. 동일
+patient split, image resolution policy, pretraining access와 compute budget을
+기록한다.
+
+그 뒤에만 다음 두 control을 분리해 비교한다.
+
+- independent study/location heads 또는 shared multitask head
+- latent lesion-set model + exact/controlled annotation marginalization
+
+Architecture는 L1의 병목 뒤에 고른다. 3D encoder, vessel graph와 query decoder는
+가능한 구현 구성요소일 뿐 현재 AURORA architecture가 아니다. 개발 단계는
+validation-only이며 outer test를 읽지 않는다.
+
+### L3 · prospective outer test
+
+Headline metric은 lesion-level FROC/sensitivity at fixed candidates per study와
+patient-bootstrap 95% CI다. Study-level AUPRC, per-territory macro AUPRC,
+localization distance/overlap, calibration slope/intercept, Brier/ECE,
+cross-granularity contradiction rate를 함께 보고한다. Site·modality subgroup은
+sample size와 uncertainty를 항상 제시한다. 최소 five seeds에서 방향이
+일치하지 않으면 평균 하나로 superiority를 주장하지 않는다.
+
+Outer-test protocol은 baseline 재현과 development selection이 끝난 exact
+commit에서 고정한다. 실패 뒤 같은 test에 architecture, matching rule,
+threshold 또는 calibration strata를 맞추는 local repair는 금지한다.
+
+## 6. 현재 결론
+
+이 후보는 “fancy한 모델”이 아니라 **감사할 가치가 있는 문제** 하나를 남긴
+상태다. 데이터가 stage되지 않았으므로 현재 모델은 GNN도 set predictor도
+아니며 실험은 돌고 있지 않다. Access와 L0/L1이 통과하고 direct prior art와
+구분되는 algorithmic gap이 남을 때만 이름, architecture, contribution과
+paper identity를 정한다. 그 전의 논문 문구는 hypothesis와 decision record로만
+유지한다.
+
+## 7. 직접 확인한 1차 자료
+
+- [RSNA-ICA official challenge page](https://www.rsna.org/artificial-intelligence/ai-image-challenge/intracranial-aneurysm-detection-ai-challenge)
+- [RSNA-ICA official AWS registry](https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/)
+- [RSNA 2025 first-place public implementation](https://github.com/uchiyama33/rsna2025_1st_place)
+- [RSNA 2025 second-place method report](https://arxiv.org/abs/2606.26706)
+- [AMAP anatomy-aware domain prompting](https://www.nature.com/articles/s41746-025-02188-8)
+- [ARAN vasculature-tree-informed detection](https://openaccess.thecvf.com/content/CVPR2026W/PHAROS-AIF-MIH/papers/Shafique_ARAN_Leveraging_Foundation_Models_for_Vasculature-Tree-Informed_ARtery-Aware_Intracranial_ANeurysm_Detection_CVPRW_2026_paper.pdf)
+- [Morphological conformal prediction sets](https://papers.miccai.org/miccai-2025/0169-Paper3902.html)
+- [OpenNeuro ds005096 longitudinal cohort record](https://openneuro.org/datasets/ds005096)
+- [Bayesian longitudinal aneurysm growth detection](https://arxiv.org/abs/2604.06649)
+- [Shape-DINO](https://arxiv.org/abs/2603.03211)

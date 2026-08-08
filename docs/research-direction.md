@@ -5,7 +5,39 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · method unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · one conditional problem shortlist · data access prerequisite unmet · method unselected · submission blocked
+
+## 0. 현재 problem shortlist · annotation-operator-consistent lesion set
+
+새 방법을 정하기 전의 cold audit에서 하나의 조건부 후보만 남겼다.
+
+> Multisite CT/MR angiography의 study label, 13개 vascular-territory label,
+> point localizer와 일부 segmentation을 서로 독립적인 target이 아니라 같은
+> 잠재 aneurysm lesion set의 서로 다른 annotation projection으로 학습할 수
+> 있는가?
+
+적용 asset 후보는 controlled-access RSNA-ICA 2025다. 현재 알려진
+`introai9` 경로에는 archive가 없고 Kaggle credential도 확인되지 않았으므로
+실제 task unit, label mapping과 split viability는 감사되지 않았다. 사용자가
+공식 약관을 수락해 private asset을 제공하기 전에는 config, architecture,
+training 또는 GPU job을 만들지 않는다.
+
+이 후보의 잠재적 정체성은 14개 독립 binary classifier나 또 하나의 3D
+segmentation model이 아니다. 하나의 순서 없는 latent lesion set을 두고
+presence, territory, point와 mask를 annotation operator로 주변화하여
+cross-granularity contradiction과 candidates-per-study burden을 함께 평가하는
+문제다. 그러나 set prediction, weak supervision, vessel graph, anatomy prompt,
+conformal/FDR는 모두 선행 구성요소다. 실제 label-generation contract를
+반영한 새로운 tractable set likelihood 또는 보장, strong challenge baseline
+대비 lesion localization과 coherence의 동시 개선, calibration-supported
+reading-burden 개선이 모두 있어야만 contribution으로 승격한다.
+
+Longitudinal growth는 공개 cohort의 dense longitudinal annotation 부족과 직접
+2026 경쟁 연구 때문에, geometry×BC shape response는 Shape-DINO와 geometric
+operator 계보 때문에 기각했다. 상세 계보, L0 access boundary와 단계별
+실험안은 [`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
+고정한다. 현재 모델은 GNN도 lesion-set network도 아니며 GPU 실험은 돌고
+있지 않다.
 
 ## 0-A. 최근 candidate · protocol-indexed posterior prediction · closed
 

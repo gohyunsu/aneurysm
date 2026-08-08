@@ -1,11 +1,36 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 2.5-draft · 2026-08-09
+버전: 2.6-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## L0 · 새 lesion-set candidate의 access prerequisite
+
+현재 유일한 조건부 shortlist는 RSNA-ICA 2025에서 study presence, vascular
+territory, point localizer와 segmentation을 같은 latent lesion set의 annotation
+operator로 다루는 문제다. 그러나 controlled-access asset은 `introai9`의
+알려진 경로에 없고 Kaggle credential도 확인되지 않았다. 에이전트는 사용자를
+대신해 약관에 동의하지 않는다.
+
+따라서 아직 executable L0 config, split, threshold, model code나 GPU job은
+없다. 사용자 승인 아래 official asset이 private storage에 stage된 뒤 첫
+실행은 CPU/read-only asset/task-unit audit이어야 한다. Version/license와
+checksum, patient–study–series–site–modality key, lesion cardinality, 13 territory
+label, localizer/segmentation mapping, AI-generated annotation provenance,
+multi-lesion/negative/rare-label 수와 patient/site outer-split viability를 먼저
+고정한다. 이 mapping이 복구되지 않으면 후보를 종료한다.
+
+L0 aggregate 뒤에만 numeric L1 adequacy threshold를 prospective하게 등록한다.
+L1이 양수이면 published challenge baseline 재현과 validation-only method
+development를 순서대로 열 수 있다. Outer test는 baseline과 selector를 exact
+commit에 고정한 뒤에만 생성한다. Headline은 lesion FROC/sensitivity at fixed
+candidates per study와 patient-bootstrap CI이며 AUROC만으로 성공을 판정하지
+않는다. 상세 계약은
+[`problem-candidate-audit-2026-08-09.md`](problem-candidate-audit-2026-08-09.md)에
+있다.
 
 ## 0-A. I0a · paired-protocol 4D-flow asset audit
 

@@ -2,11 +2,39 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · prior identity inactive · I0a passed 14/14 · I0b execution-incomplete before asset access · no verdict/no rerun · method unselected · not submission-ready",
-    requirement: "Closed 4D-flow branch → new problem-level candidate audit → only positive evidence may authorize method design",
+    status: "Target locked · failed branches preserved · one conditional lesion-set shortlist · controlled access absent · no method/GPU · not submission-ready",
+    requirement: "User-authorized access → L0 task-unit audit → L1 adequacy → strong baselines → only then bounded method development",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2025–26",
+      title: "RSNA-ICA challenge baselines",
+      copy: "Multisite CT/MR angiography에서 1위 vessel-segmentation+ROI classifier와 2위 tri-axial ROI+26-class 3D nnU-Net이 강한 직접 비교군을 만들었다.",
+      status: "Official challenge + public implementations · mandatory baselines",
+      url: "https://www.rsna.org/artificial-intelligence/ai-image-challenge/intracranial-aneurysm-detection-ai-challenge"
+    },
+    {
+      year: "2025–26",
+      title: "Anatomy-aware detection",
+      copy: "AMAP과 ARAN이 anatomy-guided prompting, centerline graph와 geometry-gated cross-attention을 이미 사용한다. Vessel graph나 anatomy token 자체는 novelty가 아니다.",
+      status: "npj Digital Medicine + CVPRW · direct scope threats",
+      url: "https://www.nature.com/articles/s41746-025-02188-8"
+    },
+    {
+      year: "2025–26",
+      title: "Topology & risk control",
+      copy: "Topology-guided uncertainty, morphological conformal prediction과 medical instance-level FDR control이 이미 존재한다. Conformal wrapper만 추가할 수 없다.",
+      status: "MICCAI / MIDL + preprint · mandatory controls",
+      url: "https://papers.miccai.org/miccai-2025/0169-Paper3902.html"
+    },
+    {
+      year: "2026",
+      title: "Rejected adjacent candidates",
+      copy: "Bayesian longitudinal growth detection과 Shape-DINO가 growth·shape-response 방향을 직접 점유하고, 공개 longitudinal annotation도 제한적이다.",
+      status: "Cold audit · growth and shape-response rejected",
+      url: "https://arxiv.org/abs/2604.06649"
+    },
     {
       year: "2020–26",
       title: "4D-flow reconstruction, SR & UQ",
@@ -100,14 +128,21 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Input / target", "Synthetic LR → CFD/HR", "Undersampled complex data → reconstruction", "Measured velocity → local error/distribution", "Acquisition α → held-out acquisition β"],
-    ["Protocol shift", "Synthetic degradation or SR factor", "Acceleration-aware forward model", "Resolution/VENC sensitivity or domain shift", "Resolution·acceleration·VENC as explicit view index"],
-    ["Uncertainty", "Usually point estimate", "Reconstruction uncertainty optional", "Voxelwise error or distributional output", "Full posterior predictive score; feasibility unproven"],
-    ["Reference", "CFD or acquired HR", "Acquired/self-supervised k-space", "Synthetic/repeat/dual-VENC validation", "Same controlled flow's second real acquisition"],
-    ["What is already occupied", "SR and denoising", "Physics/self-supervised reconstruction", "Velocity UQ and distributional SR", "Only the evaluation gap is a candidate; no method selected"],
-    ["Current evidence", "Published", "Published/preprint", "Published/preprint", "I0a passed 14/14; I0b execution-incomplete/no verdict; branch closed"]
+    ["Prediction unit", "Study + independent location labels", "ROI/voxel + 26-class multitask", "Anatomy graph-guided candidates", "One unordered latent lesion set"],
+    ["Annotation use", "Presence/location supervision", "Localization + segmentation multitask", "Vessel tree/topology prior", "Presence·territory·point·mask as projections"],
+    ["Consistency", "Not structurally enforced", "Shared backbone only", "Anatomical compatibility", "Cross-granularity probability coherence required"],
+    ["Decision endpoint", "AUROC/AUPRC", "Detection/localization score", "False-positive reduction", "Lesion FROC plus candidates per study"],
+    ["Already occupied", "Challenge formulation", "Strong public pipeline", "Graph/anatomy/topology modules", "Only the annotation-operator task is shortlisted"],
+    ["Current evidence", "Published/public", "Published/public", "Published/preprint", "Access absent · task unit unaudited · no method/GPU"]
   ],
   gates: [
+    {
+      id: "L0",
+      title: "Is the lesion-set task auditable at patient/study level?",
+      copy: "Controlled-access RSNA-ICA에서 version/terms/checksum, patient–study–series–site–modality key, lesion cardinality, 13 territory label, localizer/segmentation provenance와 patient/site split viability를 CPU/read-only로 먼저 감사한다.",
+      state: "Conditional shortlist · asset not staged · access prerequisite unmet · method/GPU blocked",
+      blocking: true
+    },
     {
       id: "I0a",
       title: "Are paired-protocol MRI assets auditable?",
@@ -160,6 +195,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "RSNA-ICA 2025 · controlled access",
+      role: "conditional L0 candidate for mixed-granularity anatomy-structured lesion-set inference",
+      provenance: "Official description: >4,000 CT/MR scans · 18 institutions · 13 locations · not staged/task unit unaudited · no redistribution"
+    },
+    {
       name: "4D-flow multiresolution phantom · 2021",
       role: "same-flow 3 resolution × 3 acceleration development/task audit candidate",
       provenance: "Zenodo CC BY 4.0 · I0b execution-incomplete before archive/field access · no verdict/no rerun"
@@ -201,6 +241,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "One access-blocked lesion-set problem enters the shortlist",
+      copy: "Generic segmentation/UQ, longitudinal growth와 geometry×BC shape response를 direct prior art 또는 data-unit 부족으로 기각했다. 유일한 조건부 후보는 RSNA-ICA의 presence/location/localizer/segmentation을 하나의 latent lesion set의 annotation projection으로 다루는 문제다. 그러나 controlled-access asset이 stage되지 않아 task unit은 unaudited이고, user-authorized access 뒤 CPU/read-only L0 전에는 method·GPU·outer test·paper identity가 모두 닫혀 있다. Vessel graph, GNN, set prediction, mixed supervision, anatomy prompt와 conformal/FDR는 단독 novelty가 아니다.",
+      files: ["docs/problem-candidate-audit-2026-08-09.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "execution",

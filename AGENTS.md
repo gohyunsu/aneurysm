@@ -6,16 +6,38 @@
 backbone gate 5/7 fail, V1a attribution, V1b/V1c/V1d asset audit pass,
 V1e known-condition qualification 6/9 fail과 M0 execution-incomplete 상태,
 그리고 cross-protocol 4D-flow candidate I0a 14/14 asset pass와 2026-08-09
-I0b one-shot execution-incomplete/no-verdict/no-rerun 상태를 반영했다.
+I0b one-shot execution-incomplete/no-verdict/no-rerun 상태, 같은 날 수행한
+problem-level cold audit의 한 조건부 lesion-set shortlist를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
+- 현재 primary problem과 method는 **선택되지 않았다**. 유일한 조건부
+  shortlist는 RSNA-ICA 2025의 mixed-granularity anatomy-structured lesion-set
+  inference다. Study presence, vascular-territory label, point localizer와 일부
+  segmentation을 같은 latent lesion set의 annotation projection으로 다루는
+  문제지만, 아직 contribution이나 paper identity가 아니다.
+- 2026-08-09 bounded audit에서 알려진 `introai9` 경로에 RSNA-ICA archive를
+  찾지 못했고 Kaggle credential/CLI도 없었다. 이는 서버 전체 부재 증명이
+  아니라 `not staged` 판정이다. 사용자를 대신해 controlled-access 약관을
+  수락하지 않는다. Official access와 private asset location이 제공되기 전에는
+  executable config, split, model code, GPU job과 outer test를 만들지 않는다.
+- Access 뒤 첫 허용 작업은 CPU/read-only L0 asset/task-unit audit이다. Version,
+  terms/checksum, patient–study–series–site–modality key, lesion cardinality,
+  13 territory label, localizer/segmentation mapping, AI-generated annotation
+  provenance와 patient/site split viability를 검사한다. L0 뒤에만 L1 threshold를
+  prospective하게 고정한다. 상세 계약은
+  `docs/problem-candidate-audit-2026-08-09.md`다.
+- Vessel graph/GNN, generic set prediction, mixed supervision, anatomy prompt,
+  foundation model와 conformal/FDR는 단독 novelty가 아니다. Published challenge
+  1·2위, nnDetection, anatomy/topology/ARAN control보다 localization,
+  cross-granularity coherence와 reading burden을 함께 개선하지 못하면 이
+  후보도 폐기한다.
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
-- 최근 candidate 문제: **protocol-indexed posterior prediction under
+- 가장 최근에 닫힌 candidate 문제: **protocol-indexed posterior prediction under
   intracranial 4D-flow acquisition shift**. 한 실제 acquisition posterior가
   같은 controlled phantom flow의 다른 resolution·acceleration·VENC
   acquisition을 measurement space에서 예측하는지를 물었으나 현재 branch는
