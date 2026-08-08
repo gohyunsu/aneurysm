@@ -12,7 +12,7 @@
 - Official Figshare file ID, size와 MD5를 고정한 CPU/PBS staging wrapper를
   추가했다. Download는 partial file을 보존해 resume하고 checksum 통과 후에만
   extraction한다. GPU, model, identifier mapping, solver probe와 gate outcome은
-  모두 접근하지 않는다.
+  모두 접근하지 않는다. 실행 전 exact clean public checkout도 강제한다.
 - 영향 파일: `cluster/pbs_goal_oriented_s0a_stage_cmha.pbs`,
   `tests/test_goal_oriented_s0a.py`, `docs/server-execution.md`,
   `site/assets/research-data.js`, `CHANGELOG.md`.

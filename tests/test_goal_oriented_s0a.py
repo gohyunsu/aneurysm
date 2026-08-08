@@ -60,6 +60,8 @@ class GoalOrientedS0ATests(unittest.TestCase):
         self.assertNotIn("singularity exec --nv", script)
         self.assertIn('"gate_evaluated":false', script)
         self.assertIn('"gpu_access":false', script)
+        self.assertIn("AURORA_GIT_COMMIT", script)
+        self.assertIn("status --porcelain", script)
 
     def test_staging_job_pins_all_official_archives(self) -> None:
         script = STAGING_PBS.read_text(encoding="utf-8")

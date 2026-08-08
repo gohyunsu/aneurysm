@@ -9,6 +9,17 @@ set -euo pipefail
 umask 077
 
 : "${AURORA_STAGE_ROOT:?set AURORA_STAGE_ROOT to a private writable directory}"
+: "${AURORA_PROJECT_ROOT:?set AURORA_PROJECT_ROOT to the exact public checkout}"
+: "${AURORA_GIT_COMMIT:?set AURORA_GIT_COMMIT to the exact public SHA}"
+
+if [ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]; then
+  echo "Project checkout does not match AURORA_GIT_COMMIT." >&2
+  exit 2
+fi
+if [ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]; then
+  echo "Project checkout must be clean before CMHA staging." >&2
+  exit 2
+fi
 
 archive_root="$AURORA_STAGE_ROOT/archives"
 extract_root="$AURORA_STAGE_ROOT/extracted"
@@ -83,5 +94,5 @@ extract_archive "controls.rar" controls
 extract_archive "statistical results.rar" statistics
 extract_archive "patients.rar" patients
 
-printf '%s\n' '{"state":"staging_complete","gate_evaluated":false,"model_access":false,"gpu_access":false}' \
-  > "$record_root/status.${PBS_JOBID:-manual}.json"
+printf '{"state":"staging_complete","source_commit":"%s","gate_evaluated":false,"model_access":false,"gpu_access":false}\n' \
+  "$AURORA_GIT_COMMIT" > "$record_root/status.${PBS_JOBID:-manual}.json"

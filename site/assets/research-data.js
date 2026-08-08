@@ -311,7 +311,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.09",
       category: "implementation",
       title: "CMHA staging is separated from the S0a verdict",
-      copy: "Read-only searches found no staged CMHA archive in the approved introai9 source root or junjinyong home. A CPU/PBS wrapper now pins the three official Figshare file IDs, byte sizes and MD5 values, resumes partial downloads, and extracts only after checksum verification. It records gate_evaluated=false and performs no identifier mapping, solver probe, model, GPU or outer-test access.",
+      copy: "Read-only searches found no staged CMHA archive in the approved introai9 source root or junjinyong home. A CPU/PBS wrapper now pins the three official Figshare file IDs, byte sizes and MD5 values, requires an exact clean public checkout, resumes partial downloads, and extracts only after checksum verification. It records gate_evaluated=false and performs no identifier mapping, solver probe, model, GPU or outer-test access.",
       files: ["cluster/pbs_goal_oriented_s0a_stage_cmha.pbs", "tests/test_goal_oriented_s0a.py", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
     },
     {
