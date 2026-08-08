@@ -231,6 +231,18 @@ class AneumoISBIV1ModelTests(unittest.TestCase):
         self.assertFalse(metrics["eligible_for_model_selection_or_gate"])
         self.assertNotIn("full_q_relative_l2", metrics)
 
+    def test_cuda_bookkeeping_uses_current_device_api(self) -> None:
+        source = (ROOT / "src" / "aurora" / "aneumo_isbi_v1.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("torch.cuda.set_device(0)", source)
+        self.assertIn("torch.cuda.reset_peak_memory_stats()", source)
+        self.assertIn("torch.cuda.max_memory_allocated()", source)
+        self.assertIn("torch.cuda.synchronize()", source)
+        self.assertNotIn("torch.cuda.reset_peak_memory_stats(device)", source)
+        self.assertNotIn("torch.cuda.max_memory_allocated(device)", source)
+        self.assertNotIn("torch.cuda.synchronize(device)", source)
+
 
 if __name__ == "__main__":
     unittest.main()

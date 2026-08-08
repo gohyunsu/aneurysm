@@ -4,6 +4,20 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 fixes scheduler-visible CUDA bookkeeping before cache access
+
+- Task-local fail-safe를 포함한 exact `fd8bb40` one-task diagnostic은 A100을
+  정상 할당받았지만 `torch.cuda.reset_peak_memory_stats(torch.device("cuda:0"))`
+  호출에서 exit 1로 끝났다. `pbs_status.json`은 learned metric과 checkpoint가
+  생성되지 않았음을 확인했고 traceback은 cache load와 training보다 앞섰다.
+- 일부 pinned PyTorch/CUDA 조합에서 device 객체 인자를 거부하는 bookkeeping
+  API만 current-device 호출로 바꾼다. CUDA device 0을 명시적으로 선택한 뒤
+  reset, synchronize와 peak-memory query는 인자 없이 호출한다.
+- Model, config, cache, seed, step, loss, selector, threshold와 scientific
+  estimand은 바꾸지 않는다. 실패 array와 두 diagnostic은 보존하며, 새 exact
+  contract와 one-task scheduler diagnostic 전에는 fresh 12-task array를
+  제출하지 않는다.
+
 ## 2026-08-08 · V1 PBS failure becomes directly observable before metrics
 
 - Exact `2ddd5e6`의 첫 `introai9` 12-task array는 앞선 세 subjob이 각각

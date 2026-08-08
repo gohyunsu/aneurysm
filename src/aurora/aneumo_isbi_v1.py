@@ -608,11 +608,11 @@ def _predict_validation(
                 value = 0.0 if condition_zeroed else float(normalized_flow)
                 condition = torch.tensor([[value]], dtype=torch.float32, device=device)
                 if device.type == "cuda":
-                    torch.cuda.synchronize(device)
+                    torch.cuda.synchronize()
                 started = time.perf_counter()
                 prediction = model(coordinates, condition, neighbors)[0] * velocity_scale
                 if device.type == "cuda":
-                    torch.cuda.synchronize(device)
+                    torch.cuda.synchronize()
                 latency_seconds += time.perf_counter() - started
                 calls += 1
                 case_predictions.append(prediction.detach().cpu())
@@ -765,8 +765,9 @@ def run_training(
         raise AneumoISBIV1Error("V1 requires a scheduler-allocated CUDA device.")
     torch.manual_seed(int(seed))
     if device.type == "cuda":
+        torch.cuda.set_device(0)
         torch.cuda.manual_seed_all(int(seed))
-        torch.cuda.reset_peak_memory_stats(device)
+        torch.cuda.reset_peak_memory_stats()
 
     train_cases, validation_cases, flows = load_development_cases(config, cache)
     prepared_train = _prepare_cases(config, train_cases)
@@ -924,7 +925,7 @@ def run_training(
             > final_metrics["full_q_relative_l2"]
         ),
         "peak_gpu_memory_mb": (
-            float(torch.cuda.max_memory_allocated(device) / (1024**2))
+            float(torch.cuda.max_memory_allocated() / (1024**2))
             if device.type == "cuda"
             else 0.0
         ),
@@ -1231,7 +1232,8 @@ def aggregate_training_outputs(
     if require_cuda and device.type != "cuda":
         raise AneumoISBIV1Error("V1 aggregation requires a scheduler CUDA device.")
     if device.type == "cuda":
-        torch.cuda.reset_peak_memory_stats(device)
+        torch.cuda.set_device(0)
+        torch.cuda.reset_peak_memory_stats()
 
     task_results, artifacts = _load_registered_task_results(
         config, task_output_root, git_commit
@@ -1423,7 +1425,7 @@ def aggregate_training_outputs(
                 {str(result["cuda_runtime"]) for result in task_results}
             ),
             "peak_gpu_memory_mb": (
-                float(torch.cuda.max_memory_allocated(device) / (1024**2))
+                float(torch.cuda.max_memory_allocated() / (1024**2))
                 if device.type == "cuda"
                 else 0.0
             ),

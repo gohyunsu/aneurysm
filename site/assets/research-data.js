@@ -168,6 +168,13 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.08",
       category: "implementation",
+      title: "V1 isolates a CUDA bookkeeping incompatibility before learning",
+      copy: "Exact fd8bb40 one-task diagnostic은 scheduler A100을 정상 할당받았지만 cache load 전에 device 객체를 받은 CUDA peak-memory reset에서 종료됐다. Learned metric과 checkpoint는 생성되지 않았다. Device 0을 명시적으로 선택하고 reset·synchronize·memory query를 current-device API로 바꾸되 model, data, seed, loss, selector와 threshold는 유지한다. 새 exact contract와 one-task diagnostic 전에는 fresh array를 제출하지 않는다.",
+      files: ["src/aurora/aneumo_isbi_v1.py", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.08",
+      category: "implementation",
       title: "V1 preserves a pre-metric PBS failure and adds task-local logs",
       copy: "Exact 2ddd5e6의 첫 introai9 array는 세 subjob이 CPU 4초·exit 1로 metric/checkpoint 전에 끝나 나머지를 취소했다. PBS stdout도 exit finalization에서 반환되지 않았다. 이를 성능 결과로 해석하지 않고 실패 provenance를 보존한다. Scientific model/config는 바꾸지 않은 채 task-local pbs.log와 pbs_status.json만 추가하고, 새 exact contract와 one-task diagnostic 전에는 full array를 재제출하지 않는다.",
       files: ["cluster/pbs_aneumo_isbi_v1.pbs", "tests/test_aneumo_isbi_v1.py", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]

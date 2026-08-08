@@ -593,6 +593,15 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   aggregate metrics를 남긴다. 실패 run도 provenance로 보존한다.
 - 2026-08-03 smoke 기준은 RTX A6000, PyTorch 2.5.1+cu118, CUDA 11.8이다.
   사양은 매 job에서 다시 기록한다.
+- 2026-08-08 `introai9` PBS GPU smoke는 A100-SXM4-80GB,
+  PyTorch 2.5.1+cu118, CUDA 11.8에서 exit 0이었다. 서버에서 공식 release로
+  독립 재생성한 64-case compact cache도 등록 SHA와 일치했다. Exact
+  `2ddd5e6`의 첫 12-task array와 diagnostic은 metric 전에 실패했고,
+  exact `fd8bb40`의 task-local log가 device 객체를 인자로 받은 CUDA
+  peak-memory reset의 runtime incompatibility를 cache load 전에 확인했다.
+  Scientific 설정은 바꾸지 않고 current-device bookkeeping API만 고치며,
+  새 exact contract와 one-task diagnostic 전에는 fresh array를 제출하지
+  않는다. 모든 실패 artifact를 보존한다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

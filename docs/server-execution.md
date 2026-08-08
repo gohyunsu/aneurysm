@@ -80,6 +80,23 @@ operator 또는 In-PI-MGN 대비 성능으로 해석하지 않는다.
 
 login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
 
+## 2026-08-08 introai9 V1 scheduler audit
+
+- PBS GPU smoke는 NVIDIA A100-SXM4-80GB, PyTorch 2.5.1+cu118, CUDA 11.8에서
+  finite 2,048 × 2,048 matrix multiplication과 exit 0을 확인했다.
+- 공식 release에서 서버 내 독립 재생성한 Aneumo compact cache는 64 case,
+  512 member의 CRC 검사를 통과했고 등록 SHA-256
+  `9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9`와
+  일치했다. Field와 cache는 공개 저장소에 복사하지 않는다.
+- Exact `2ddd5e6`의 최초 V1 array와 same-source diagnostic은 metric 이전에
+  실패했지만 PBS stdout이 반환되지 않았다. Exact `fd8bb40`은 task-local
+  log를 남겨 pinned runtime이 device 객체를 받은 CUDA peak-memory reset을
+  거부한 것을 cache load 전 traceback으로 분리했다.
+- 이 source correction은 device 0을 선택하고 CUDA bookkeeping API를
+  current-device 형식으로 호출한다. Scientific config와 selector는 그대로며,
+  새 exact full contract와 one-task diagnostic을 모두 통과한 뒤에만 fresh
+  12-task array를 제출한다. 기존 실패 artifact는 삭제하지 않는다.
+
 ## Run contract
 
 각 run은 최소한 다음을 남긴다.
