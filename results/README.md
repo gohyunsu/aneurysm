@@ -29,6 +29,10 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
   8/8 pass. 새 field array와 validation/test field를 읽지 않았으며 V1
   64-case implementation smoke만 허용한다. Learned performance, outer
   test, headline과 submission evidence가 아니다.
+- `aneumo_isbi_v1_20260808.json`: task source `a0479fb`의 12/12 checkpoint와
+  aggregate source `78dca92`의 exact replay 결과. Gate는 5/7 fail이며 선택
+  q-PointNet worst-seed full-q/response L2가 `1.03459/1.00354`였다. Test field,
+  V2, headline과 submission은 닫혀 있고 current backbone branch를 중단한다.
 
 현재 controlled-PDE 결과:
 

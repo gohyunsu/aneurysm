@@ -2,7 +2,7 @@
 
 최종 검토일: 2026-08-08 KST
 상태: **target locked · not submission-ready · V0 passed development-only ·
-V1 backbone/aggregation implemented but learning unrun · M0 metric unrun**
+V1 backbone completed/failed 5/7 · V1a attribution preregistered/unrun · M0 metric unrun**
 
 ## 1. Venue contract
 
@@ -29,7 +29,7 @@ V1 backbone/aggregation implemented but learning unrun · M0 metric unrun**
 현재 원고는 ISBI-ready가 아니다.
 
 1. 실행된 exact/nonlinear 모델은 MLP 기반 lifted operator다. V1 point/graph
-   후보와 aggregate runner는 구현됐지만 학습 결과가 없다. 공개 architecture
+   네 후보는 학습됐지만 모두 relative L2 약 1로 실패했다. 공개 architecture
    문서의 더 큰 GNN+token+continuous-query 구조는 장기 irregular-3D target
    specification이다.
 2. N1c는 field distribution, paired response, acquisition에서 실패했다.
@@ -156,6 +156,18 @@ V1은 candidate method 비교가 아니라 backbone selection이다. Candidate
 Measurement–solution objective는 positive M0와 별도 protocol 전에는
 추가하지 않는다. V1 pass도 V2나 submission을 열지 않는다.
 
+**Outcome · 2026-08-08.** Exact task source `a0479fb`의 12개 task는 모두
+exit 0이었고 aggregate source `78dca92`가 checkpoint를 validation에서
+재현했다. 그러나 선택 q-PointNet의 worst-seed full-q/response L2
+`1.03459/1.00354`가 frozen `0.35/0.50`을 실패해 gate는 5/7이다. True
+validation anchor를 쓰는 response-only oracle `0.22794`는 task signal은
+보이지만 deployable reconstruction evidence가 아니다. Current backbone
+branch, V2, headline과 submission을 닫는다.
+
+다음 V1a는 기존 checkpoint의 train/validation fit과 truth-only field-energy
+decomposition만 계산하는 threshold-free attribution이다. 어떤 결과도 V1을
+pass로 바꾸거나 같은 backbone의 local repair를 허용하지 않는다.
+
 ### V2 · Frozen five-seed 3D outer test
 
 필수 headline endpoint:
@@ -209,8 +221,9 @@ Exact/nonlinear sanity는 한두 문장 또는 작은 ablation row로만 남긴�
 | Date (KST) | Deliverable | Kill rule |
 |---|---|---|
 | 2026-08-10 | V0 asset/task contract | marker·split·estimand 불명확 시 distribution branch 중단 |
-| 2026-08-20 | 64-case 3D implementation smoke | graph baseline이 scaling control도 재현 못 하면 backbone 수정 1회 후 중단 |
-| 2026-09-03 | expanded-cache validation study | data 확대가 불가능하거나 validation signal 부재 시 full paper 중단 |
+| 2026-08-08 | 64-case V1 implementation smoke | 5/7 fail; current backbone branch 중단, local repair 금지 |
+| 2026-08-10 | V1a fixed-checkpoint attribution | task adequacy만 분해; method/V2 권한 없음 |
+| 2026-09-03 | 새 task/data identity 결정 | expanded independent data와 geometry→field learnability 근거가 없으면 full paper 중단 |
 | 2026-09-10 | candidate method/config freeze | 이후 architecture·loss search 금지 |
 | 2026-09-24 | five-seed outer test complete | gate 실패 시 relabel·threshold repair 금지 |
 | 2026-10-08 | four-page draft + figures | unsupported claim 삭제 |

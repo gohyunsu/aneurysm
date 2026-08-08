@@ -18,9 +18,9 @@
 - 64-case Aneumo cache는 development-only다.
 - Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
   utility는 현재 headline에서 제외한다.
-- 실행된 nonlinear operator는 MLP다. V1 point/graph 후보는 구현됐지만
-  학습 결과가 없고, 더 큰 GNN hybrid는 장기 3D specification이다. 어느
-  쪽도 결과처럼 서술하지 않는다.
+- 실행된 nonlinear operator는 MLP다. V1 point/graph 후보는 12-task
+  validation smoke에서 모두 약한 결과를 보여 gate가 실패했다. 더 큰 GNN
+  hybrid는 장기 3D specification일 뿐 현재 결과나 contribution이 아니다.
 - Full paper는 frozen method, five seeds, base-family bootstrap CI,
   strong graph/operator baseline, predeclared qualitative case selection을
   모두 갖춘 경우에만 제출한다.
@@ -101,6 +101,32 @@ gate를 executable aggregate runner에 고정했다. 이는 training model, seed
 step, loss, threshold 또는 selector 순서를 바꾸지 않는 pre-result protocol
 completion이다. 새 exact-source dependency-complete contract가 통과해야 V1
 array를 제출한다.
+
+**V1 outcome · 2026-08-08.** Exact task source `a0479fb`는 12/12 exit 0,
+no-test-read와 checkpoint SHA를 통과했고 aggregate source `78dca92`가 저장
+metric을 `1e-5` 안에서 replay했다. Gate는 5/7 fail이다. 선택 q-PointNet의
+worst-seed full-q `1.03459 > 0.35`, response `1.00354 > 0.50`가 실패했다.
+Condition-zero control, execution, finite metric, validation selection과
+no-test-read는 통과했다. Public aggregate는
+`results/aneumo_isbi_v1_20260808.json`이다. 등록된 failure action에 따라 현재
+3D backbone branch를 중단하고 local hyperparameter repair나 test/V2를
+금지한다.
+
+### V1a · Fixed-checkpoint task-adequacy attribution
+
+`configs/aneumo_isbi_v1_attribution.json`을 결과 전에 고정한다. V1의 12개
+checkpoint와 train/validation field만 read-only replay하며 training과
+checkpoint write는 금지한다. Family×seed별 train/validation full-q,
+response, prediction/target norm ratio, vector cosine와 q-span error를 계산한다.
+Truth-only diagnostic은 zero field, same-case condition mean, within-case
+condition energy, q-span/mean-field norm과 registered anchor-power response를
+보고한다. 모두 base-family-first로 집계한다.
+
+V1a에는 success threshold, model selection, causal attribution, V1 relabel,
+V2/test authorization과 method novelty가 없다. 목적은 current failure가
+training fit 자체인지 family-disjoint geometry generalization인지, 또는
+prediction collapse인지 구분하는 것이다. 결과 뒤에도 같은 네 backbone의
+hidden size, k, step, seed와 loss를 고쳐 반복하지 않는다.
 
 ## 1. 검증할 가설
 

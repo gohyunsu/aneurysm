@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · V0 passed · V1 code/aggregation frozen, learning unrun · not submission-ready",
+    status: "Target locked · V0 passed · V1 completed/failed 5/7 · current 3D backbone stopped · not submission-ready",
     requirement: "Expanded or independent irregular-3D aneurysm velocity evidence",
     plan: "../docs/isbi-2027-plan.md"
   },
@@ -132,8 +132,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "G4",
       title: "Does the method generalize?",
-      copy: "V0는 8/8을 통과했다. V1은 q-PointNet, kNN-MGN, DeltaPhi graph와 frame-free anchor-token equivariant operator를 동일 validation-only budget으로 비교하도록 코드와 집계 규칙까지 고정됐다. 세 seed×8 q의 24-component mixture는 report-only이고 selector는 per-seed metric만 쓴다. Test field, outer test와 ISBI headline은 계속 닫혀 있다.",
-      state: "V0 passed · V1 executable but learning unrun · submission blocked",
+      copy: "V0는 8/8을 통과했지만 V1은 5/7로 실패했다. 선택 q-PointNet worst-seed full-q/response L2 1.03459/1.00354가 기준 0.35/0.50을 크게 넘었고 다른 graph/equivariant 후보도 약 1이었다. Current backbone branch를 local repair 없이 중단한다. V1a는 같은 checkpoint의 task adequacy만 threshold 없이 분해하며 test, V2와 ISBI headline을 열지 않는다.",
+      state: "V0 passed · V1 failed 5/7 · V1a preregistered · submission blocked",
       blocking: true
     }
   ],
@@ -165,6 +165,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.08",
+      category: "result",
+      title: "V1 fails 5/7 and stops the current 3D backbone branch",
+      copy: "Exact task source a0479fb의 12개 task는 모두 exit 0이고 aggregate source 78dca92가 checkpoint replay와 no-test-read를 확인했다. 그러나 선택 q-PointNet worst-seed full-q/response L2 1.03459/1.00354가 frozen 0.35/0.50을 실패했다. 다른 세 후보도 약 1이라 architecture superiority가 없다. Response-only oracle 0.22794는 true validation anchor를 써 deployable baseline이 아니다. Current branch를 local tuning 없이 중단하고 V1a fixed-checkpoint attribution만 등록한다.",
+      files: ["results/aneumo_isbi_v1_20260808.json", "configs/aneumo_isbi_v1_attribution.json", "src/aurora/aneumo_isbi_v1_attribution.py", "cluster/pbs_aneumo_isbi_v1_attribution.pbs", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "configs/aurora_v1.json", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.08",
       category: "implementation",

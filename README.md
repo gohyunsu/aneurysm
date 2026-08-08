@@ -9,7 +9,7 @@
 > Reliable Assessment
 
 현재 제출 목표는 **IEEE ISBI 2027 four-page regular paper**입니다
-(공식 마감 2026-10-26). 다만 N1c가 실패했고 3D headline evidence가
+(공식 마감 2026-10-26). 다만 N1c와 V1 3D backbone gate가 실패했고 headline evidence가
 없으므로 아직 submission-ready가 아닙니다. ISBI에 맞춘 좁은 claim,
 velocity-only 3D 실험, five-seed outer-test와 kill date는
 [`docs/isbi-2027-plan.md`](docs/isbi-2027-plan.md)에 고정합니다.
@@ -21,23 +21,29 @@ velocity-only 3D 실험, five-seed outer-test와 kill date는
 [`public aggregate`](results/aneumo_isbi_v0_20260808.json)에 있으며 V1 구현
 smoke만 엽니다. Headline, outer test와 submission은 열리지 않습니다.
 
-다음 단계는 결과 전에 고정한
-[`V1 backbone smoke`](configs/aneumo_isbi_v1.json)입니다. 동일한
+결과 전에 고정한
+[`V1 backbone smoke`](configs/aneumo_isbi_v1.json)는 동일한
 train/validation family와 1,024-node development subset에서 q-PointNet,
 kNN-MGN, DeltaPhi graph residual, frame-free anchor-token equivariant
 operator를 세 seed로 비교합니다. Candidate라는 이름에 우선권을 주지 않고
 response L2 → full-q L2 → exact missing energy 순으로 backbone만 고릅니다.
 세 seed의 matching-q 평균과 seed×8 q의 24-component missing mixture는
 분리해 집계하고, same-case scaling은 true validation anchor를 쓰는
-response-only oracle라 선택에 사용하지 않습니다. Test field와 outer-test
-권한은 계속 닫혀 있습니다.
+response-only oracle라 선택에 사용하지 않았습니다. Test field와 outer-test
+권한을 닫은 채 12/12 task를 완료했지만 gate는 5/7로 실패했습니다. 선택
+q-PointNet의 worst-seed full-q/response L2가 `1.03459/1.00354`로 기준
+`0.35/0.50`을 크게 넘었습니다. Public aggregate는
+[`results/aneumo_isbi_v1_20260808.json`](results/aneumo_isbi_v1_20260808.json)입니다.
+현재 backbone branch는 local tuning 없이 중단했고, 다음 V1a는 기존
+checkpoint의 train–validation gap과 prediction collapse만 threshold 없이
+진단합니다.
 
 ## 현재 모델은 GNN인가?
 
 **현재 실행된 exact/nonlinear 모델은 GNN이 아닙니다.** Context MLP와
 boundary token, lifted spatial decoder로 method gate를 검사했습니다.
 V1에는 q-PointNet, kNN-MGN, DeltaPhi graph와 frame-free anchor-token
-candidate가 코드로 구현됐지만 아직 학습 결과는 없습니다. 그보다 큰
+candidate가 실제 학습됐지만 네 family 모두 relative L2 약 1로 실패했습니다. 그보다 큰
 edge-message GNN + anatomy token + continuous-query decoder는 Aneumo
 irregular-3D용 장기 **target specification**입니다. 따라서 어느 쪽도
 사이트와 논문에서 검증된 “현재 모델” 또는 확정 contribution이라고 부르지

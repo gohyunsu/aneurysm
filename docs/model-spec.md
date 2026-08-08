@@ -1,9 +1,9 @@
 # AURORA v2 모델 명세
 
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
-V1 backbone smoke preregistered/unrun ·
+V1 backbone smoke completed/failed 5/7 · V1a attribution preregistered/unrun ·
 missing task retained · M0 candidate-measurement–solution pullback
-preregistered/unrun · sparse-2 adaptive task removed · V1 point/graph code implemented but untrained ·
+preregistered/unrun · sparse-2 adaptive task removed · current V1 point/graph branch stopped ·
 method unselected
 
 연결 설정: `configs/aurora_v1.json`
@@ -65,6 +65,15 @@ correctness일 뿐 어느 backbone의 validation 우위도 의미하지 않는�
 per-seed metric만 사용한다. True q=0.0025 validation field에 power 1.075를
 적용하는 same-case control은 response-only oracle라 reconstruction row,
 selector와 feasibility gate에서 제외한다.
+
+V1은 exact task source `a0479fb`의 12/12 task와 aggregate source `78dca92`의
+checkpoint replay를 완료했지만 5/7 fail이다. 선택 q-PointNet의 worst-seed
+full-q/response L2는 `1.03459/1.00354`였고 다른 세 family도 약 1이었다.
+따라서 이 네 backbone 중 하나를 현재 method로 동결하지 않는다. Response-only
+oracle `0.22794`는 true validation anchor를 요구하므로 deployable model이
+아니며 구조 선택 근거도 아니다. V1a는 같은 checkpoint의 train/validation
+fit, norm, cosine과 q-span을 진단할 뿐 새 architecture나 loss를 추가하지
+않는다.
 
 ## 1. 왜 단순 missing-value 문제가 아닌가
 

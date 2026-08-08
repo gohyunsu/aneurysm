@@ -133,6 +133,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v0_pass_authorizes",
             "v1_backbone_config",
             "v1_status",
+            "v1_result",
+            "v1_result_sha256",
+            "v1_gate",
+            "v1_failure_action",
+            "v1a_attribution_config",
+            "v1a_status",
             "v1_test_access",
             "plan",
         ],
@@ -162,7 +168,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "v1_64_case_implementation_smoke_only"
         or venue["v1_backbone_config"] != "configs/aneumo_isbi_v1.json"
         or venue["v1_status"]
-        != "implemented_preregistered_validation_only_learning_unrun"
+        != "completed_failed_development_only"
+        or venue["v1_result"] != "results/aneumo_isbi_v1_20260808.json"
+        or venue["v1_result_sha256"]
+        != "f67970c4d8028bf869ae793a776ed86d32b9cc477a9ba414e54bf9c8fab6a9b1"
+        or venue["v1_gate"] != "5_of_7_passed"
+        or venue["v1_failure_action"]
+        != "stop_the_current_3d_backbone_branch_without_local_hyperparameter_repair"
+        or venue["v1a_attribution_config"]
+        != "configs/aneumo_isbi_v1_attribution.json"
+        or venue["v1a_status"]
+        != "preregistered_post_result_threshold_free_unrun"
         or venue["v1_test_access"] is not False
         or venue["plan"] != "docs/isbi-2027-plan.md"
     ):
@@ -303,6 +319,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "headline_activation_condition",
             "v1_config",
             "v1_status",
+            "v1_result",
+            "v1_gate",
+            "v1_failure_action",
+            "v1a_attribution_config",
+            "v1a_status",
             "v1_ensemble_estimand",
             "v1_aggregate_integrity",
             "v1_response_oracle_role",
@@ -336,7 +357,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "positive_m0_then_expanded_or_independent_v2_outer_test_passed"
         or irregular_3d["v1_config"] != "configs/aneumo_isbi_v1.json"
         or irregular_3d["v1_status"]
-        != "implemented_preregistered_validation_only_learning_unrun"
+        != "completed_failed_development_only"
+        or irregular_3d["v1_result"] != "results/aneumo_isbi_v1_20260808.json"
+        or irregular_3d["v1_gate"] != "5_of_7_passed"
+        or irregular_3d["v1_failure_action"]
+        != "stop_the_current_3d_backbone_branch_without_local_hyperparameter_repair"
+        or irregular_3d["v1a_attribution_config"]
+        != "configs/aneumo_isbi_v1_attribution.json"
+        or irregular_3d["v1a_status"]
+        != "preregistered_post_result_threshold_free_unrun"
         or irregular_3d["v1_ensemble_estimand"]
         != "matching_q_three_seed_mean_and_seed_by_eight_q_twenty_four_component_missing_mixture"
         or irregular_3d["v1_aggregate_integrity"]

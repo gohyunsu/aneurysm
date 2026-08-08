@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-08 · V1 fails 5/7; V1a freezes attribution without local repair
+
+- Exact task source `a0479fb`의 4 family×3 seed는 12/12 exit 0이었고,
+  aggregate source `78dca92`가 checkpoint SHA, validation replay `1e-5`,
+  exact config/cache와 no-test-read를 모두 확인했다. Public aggregate는
+  `results/aneumo_isbi_v1_20260808.json`이다.
+- Selector는 q-PointNet을 골랐지만 worst-seed full-q/response relative L2
+  `1.03459/1.00354`가 frozen `0.35/0.50`을 실패했다. Gate는 5/7이며 다른
+  kNN-MGN, DeltaPhi graph, anchor-token도 약 1이라 superiority가 없다.
+  True validation anchor response-only oracle `0.22794`는 selection/gate와
+  learned reconstruction row에서 제외한다.
+- Registered decision대로 current 3D backbone branch를 중단하고 hidden size,
+  k, step, seed, loss와 threshold를 국소 수정하지 않는다. 다음 V1a는 기존
+  checkpoint의 train–validation gap, norm/cosine, q-span과 truth-only condition
+  energy만 threshold 없이 분석한다. Retraining, model selection, V1 relabel,
+  V2/test, method novelty와 submission 권한은 없다.
+
 ## 2026-08-08 · V1 aggregate uses registered design values and split provenance
 
 - Task-local log를 가진 aggregate replay는 selector/gate result 전에

@@ -2,8 +2,8 @@
 
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
-공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V0
-asset/task-translation audit 8/8 pass 상태를 반영했다.
+공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1
+backbone gate 5/7 fail과 V1a attribution 등록 상태를 반영했다.
 
 ## 1. 연구의 현재 기준선
 
@@ -18,7 +18,8 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
   nonlinear PDE만으로 biomedical-imaging contribution을 주장하지 않는다.
 - 실행된 exact/nonlinear architecture는 MLP lifted operator다. V1에는
   q-PointNet, 두 kNN graph model과 frame-free anchor-token equivariant
-  candidate가 코드로 구현됐지만 아직 학습 결과가 없다. 더 큰
+  candidate가 구현·학습됐지만 네 family 모두 validation relative L2 약 1로
+  실패했다. 더 큰
   GNN+anatomy-token+continuous-query 구조는 장기 3D target specification이며
   구현·검증된 현재 모델이 아니다.
 - Exact public source `0589070`의 metadata-only V0는 8/8 check를 통과했다.
@@ -27,31 +28,20 @@ asset/task-translation audit 8/8 pass 상태를 반영했다.
   읽지 않았다. 이는 64-case V1 implementation smoke만 허용하며 learned
   performance, outer test, headline, novelty 또는 submission 증거가 아니다.
   공개 aggregate는 `results/aneumo_isbi_v0_20260808.json`이다.
-- 다음 실행은 `configs/aneumo_isbi_v1.json`의 validation-only backbone
-  smoke다. q-PointNet, kNN-MGN, DeltaPhi graph residual과 frame-free
-  anchor-token equivariant operator를 동일 1,024-node subset·3,000 step·세
-  seed로 비교한다. Same-case scaling은 response-only oracle control이고 세
-  seed ensemble은 missing-design-law uncertainty를 평가한다. Test family
-  field는 읽지 않으며 V1 outcome은 method novelty나 headline이 아니다.
-  Exact `b8ce721`의 pre-result model contract는 rotation equivariance 등
-  8/9를 통과했지만 parameter range 15.283%가 frozen 15%를 넘었다. Metric과
-  field read 전에 가장 작은 q-PointNet residual block만 16→17로 바꾸고 새
-  exact contract를 요구한다. Tolerance와 다른 model은 바꾸지 않는다.
-  Correction source `a8b0042`는 V1 model contract 9/9와 dependency-complete
-  repository contract 168/168을 통과했다. Cache field와 learned metric은
-  아직 읽지 않았다. 이후 결과 전 aggregation contract는 세 seed의 같은
-  q 예측 평균과 seed×8 q의 24-component missing mixture를 구분하고, 모든
-  checkpoint를 validation에서 replay한다. Selector는 per-seed response L2,
-  full-q L2, energy, parameter 수만 사용한다. Same-case power control은 true
-  validation anchor field를 쓰는 response-only oracle라 selector/gate에
-  들어가지 않는다. `introai9` public-key SSH와 PBS client는 확인됐으며 실제
-  GPU allocation smoke와 cache SHA 확인 뒤에만 12-task array를 제출한다.
-  Exact `2ddd5e6`의 첫 array는 세 subjob이 CPU 4초·exit 1로 metric/checkpoint
-  전에 실패해 나머지를 취소했다. PBS stdout도 exit finalization에서 반환되지
-  않았다. 이 run은 scientific gate 결과가 아니며 보존한다. Scientific
-  contract는 바꾸지 않고 task-local `pbs.log`/`pbs_status.json` fail-safe를
-  추가한 새 exact source와 one-task diagnostic이 통과하기 전 full array를
-  다시 제출하지 않는다.
+- Exact task source `a0479fb`의 V1은 12/12 exit 0, no-test-read와 checkpoint
+  replay를 통과했지만 aggregate source `78dca92`에서 gate 5/7로 실패했다.
+  선택 q-PointNet worst-seed full-q/response L2는 `1.03459/1.00354`로
+  frozen `0.35/0.50`을 넘었고 다른 세 family도 약 1이었다. Response-only
+  oracle `0.22794`는 true validation anchor를 쓰므로 reconstruction baseline,
+  selector 또는 gate가 아니다. Public aggregate는
+  `results/aneumo_isbi_v1_20260808.json`이다. Current 3D backbone branch를
+  중단하고 hidden size, k, step, seed, loss와 threshold를 국소 수정하지
+  않는다. 기존 scheduler/CUDA/aggregate 실패 artifact도 모두 보존한다.
+- 다음 실행은 `configs/aneumo_isbi_v1_attribution.json`의 V1a다. 기존 12개
+  checkpoint를 train/validation에서만 read-only replay해 generalization gap,
+  norm/cosine, q-span과 truth-only condition energy를 분해한다. Success
+  threshold, retraining, model selection, V1 relabel, test/V2 권한과 method
+  novelty가 없는 post-result diagnostic이다.
 - 의료용 secondary endpoint: 공개 데이터의 **cross-sectional rupture
   status**. 현재 negative G1 signal 때문에 primary contribution이 아니다.
 - 핵심 문제: full, partial, missing BC에서 각각 만든 예측이 서로 무관하면

@@ -5,7 +5,7 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation contract implemented/preregistered but learning unrun · M0 missing-only mechanism preregistered/unrun · method unselected ·
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution preregistered/unrun · M0 missing-only mechanism preregistered/unrun · method unselected ·
 3D headline blocked
 
 ## 0. 제출 목표와 scope
@@ -62,10 +62,27 @@ gate가 아니다. Metric 집계는 case가 아니라 base-family를 먼저 평�
 완화하지 않고 최소 model인 q-PointNet residual block만 16→17로 수정한다.
 새 exact-source contract 전체가 통과하기 전 학습을 제출하지 않는다.
 Correction source `a8b0042`는 model contract 9/9와 전체 168/168을
-dependency-complete container에서 통과했다. 따라서 code-level 실행 자격은
-회복됐지만 learned field metric은 여전히 unrun이다. `introai9`의 public-key
-SSH와 PBS client는 확인했지만 scheduler GPU smoke와 동일 cache SHA 검증 전에는
-GPU array를 제출하지 않는다.
+dependency-complete container에서 통과했다. 이후 CUDA bookkeeping과
+aggregate observability만 결과 전에 별도 ops commit으로 고쳤고 scientific
+config SHA는 유지했다.
+
+**V1 outcome · 2026-08-08.** Exact task source `a0479fb`의 12 task는 모두
+exit 0이었고 exact source/config, no-test-read, checkpoint SHA와 validation
+replay를 통과했다. Aggregate source `78dca92`의 판정은 5/7 fail이다.
+Lexicographic selector는 q-PointNet을 골랐지만 worst-seed full-q/response
+relative L2가 `1.03459/1.00354`로 frozen `0.35/0.50`을 크게 넘었다. kNN-MGN,
+DeltaPhi graph와 anchor-token도 seed-mean full/response L2가 모두 약 1이라
+architecture superiority가 없다. True validation anchor를 쓰는 비배포용
+response-only oracle은 `0.22794`였지만 selector/gate에 사용하지 않는다.
+현재 3D backbone branch를 중단하며 hidden size, k, step, seed, loss와
+threshold를 국소 수정하지 않는다. Public aggregate는
+`results/aneumo_isbi_v1_20260808.json`이다.
+
+다음은 `configs/aneumo_isbi_v1_attribution.json`의 **V1a**다. 기존 12개
+checkpoint만 read-only replay해 train–validation gap, prediction norm/cosine,
+q-span response와 true field의 within-case condition-energy fraction을
+분해한다. 성공 threshold, retraining, model selection, V1 relabel, V2/test
+권한과 method novelty가 없는 task-adequacy diagnostic이다.
 
 ## 1. 현재 판정
 

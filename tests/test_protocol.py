@@ -89,6 +89,18 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "3D evidence"):
             validate_protocol(candidate)
 
+    def test_failed_v1_cannot_enter_a_local_repair_or_open_v1a(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["v1_failure_action"] = "tune_hidden_dim_and_retry"
+        with self.assertRaisesRegex(ProtocolError, "3D evidence"):
+            validate_protocol(candidate)
+        candidate = copy.deepcopy(self.protocol)
+        candidate["model"]["irregular_3d_output_contract"][
+            "v1a_status"
+        ] = "completed_passed_open_v2"
+        with self.assertRaisesRegex(ProtocolError, "independent V2 evidence"):
+            validate_protocol(candidate)
+
     def test_n0_cannot_establish_novelty(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         n0 = next(

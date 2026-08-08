@@ -106,6 +106,12 @@ login node에서는 `nvidia-smi`나 학습을 실행하지 않았다.
   중단됐음을 확인했다. Cache ordering은 기존 loader tolerance로 검증하고
   anchor와 ratio는 registered design value에서 계산한다. Aggregate code SHA와
   task/checkpoint SHA는 별도 provenance field로 남긴다.
+- Aggregate source `78dca92`의 corrected replay는 exit 0으로 12개 checkpoint,
+  validation replay, separate task/source provenance와 no-test-read를 확인했다.
+  V1 gate는 5/7 fail이며 q-PointNet worst-seed full-q/response L2는
+  `1.03459/1.00354`다. Public aggregate SHA-256은
+  `f67970c4d8028bf869ae793a776ed86d32b9cc477a9ba414e54bf9c8fab6a9b1`이다.
+  현재 branch를 재학습하지 않고 fixed-checkpoint V1a attribution만 등록한다.
 
 ## Run contract
 
@@ -387,6 +393,11 @@ template에는 서버 절대경로를 넣지 않고 `AURORA_PROJECT_ROOT`,
   read-only `h5py==3.12.1` layer
 - Scientific status: learning unrun; test field, outer test, headline and
   submission remain false
+
+후속 exact task source `a0479fb`는 12/12 exit 0이었고 aggregate source
+`78dca92`의 replay 결과 gate는 5/7 fail이었다. 위 항목은 실행 전 contract
+이력으로만 보존한다. Current status는 이 문서의 앞쪽 V1 scheduler audit과
+`results/aneumo_isbi_v1_20260808.json`을 따른다.
 
 ## 2026-08-03 G1 exploratory result
 

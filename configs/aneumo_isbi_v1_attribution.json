@@ -1,0 +1,60 @@
+{
+  "schema_version": "aurora.aneumo_isbi_v1_attribution.v1",
+  "experiment_id": "aneumo_isbi_v1a_fixed_checkpoint_task_adequacy",
+  "status": "preregistered_post_result_threshold_free_unrun",
+  "source": {
+    "v1_config": "configs/aneumo_isbi_v1.json",
+    "v1_config_sha256": "d3deb378f9a8bca1e988218212a84347660dcf6e58164cbbd1a5a3467682e4db",
+    "v1_result": "results/aneumo_isbi_v1_20260808.json",
+    "v1_result_sha256": "f67970c4d8028bf869ae793a776ed86d32b9cc477a9ba414e54bf9c8fab6a9b1",
+    "task_git_commit": "a0479fb6cd67521e605f81e549e936d066e9277e",
+    "aggregate_git_commit": "78dca928bd2a6cc363c0aa975971bad5b54424f4",
+    "cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
+  },
+  "access": {
+    "read_field_splits": ["train", "validation"],
+    "test_field_read": false,
+    "test_metric_or_selection": false,
+    "checkpoint_read": true,
+    "checkpoint_write": false,
+    "training": false
+  },
+  "questions": [
+    "did_the_frozen_models_fit_training_fields_but_fail_family_disjoint_validation",
+    "did_predictions_collapse_in_magnitude_or_vector_alignment",
+    "how_much_true_field_energy_is_condition_variation_around_each_case_mean",
+    "how_far_can_non_deployable_same_case_truth_oracles_reduce_response_error"
+  ],
+  "model_metrics": [
+    "train_full_q_relative_l2",
+    "train_response_relative_l2",
+    "validation_full_q_relative_l2",
+    "validation_response_relative_l2",
+    "train_prediction_to_target_norm_ratio",
+    "validation_prediction_to_target_norm_ratio",
+    "train_prediction_target_cosine",
+    "validation_prediction_target_cosine",
+    "train_q_span_relative_l2",
+    "validation_q_span_relative_l2",
+    "train_q_span_norm_ratio",
+    "validation_q_span_norm_ratio"
+  ],
+  "truth_only_diagnostics": [
+    "zero_field_full_q_relative_l2",
+    "same_case_condition_mean_oracle_full_q_relative_l2",
+    "within_case_condition_energy_fraction",
+    "q_span_to_mean_field_norm_ratio",
+    "registered_anchor_power_response_relative_l2"
+  ],
+  "aggregation_unit": "aneux_base_family_first_then_split_or_seed_mean",
+  "success_thresholds": null,
+  "authorization": {
+    "may_select_or_modify_model": false,
+    "may_retrain": false,
+    "may_relabel_v1": false,
+    "may_open_v2_or_test": false,
+    "may_define_method_novelty": false,
+    "may_change_isbi_submission_readiness": false
+  },
+  "interpretation": "diagnostic_attribution_not_causal_decomposition_or_gate"
+}
