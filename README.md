@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 FSI–wall boundary:** 새 source-only batch는 rigid-wall CFD와
+> compliant-wall FSI의 차이를 학습하는 operator, 동적 형상으로 wall property를
+> 역추정하는 문제, flow-diverter response, wall-thickness hotspot과 selective
+> FSI referral을 검토했습니다. 최고점은 multi-granularity conformal surrogate의
+> **31.0/40**이며 여섯 후보 모두 frozen admission line 32 미만입니다.
+> AnXplore 논문은 101 semi-idealized case의 rigid/FSI 계산을 보고하지만 공개
+> repository의 확인된 full-dataset 자산은 101 `Fluid_*.vtk` mesh이고, 동일
+> case의 paired rigid/FSI time-resolved field release가 아닙니다. 동물 inverse
+> mechanics와 5-aneurysm micro-CT wall-thickness 자료도 독립 단위가 부족합니다.
+> [`상세 audit`](docs/fsi-wall-source-audit-2026-08-10.md)에 따라 mesh/field/
+> image payload, P0, model, PBS/GPU와 outer test는 모두 0입니다. 향후 실행은
+> `introai9` PBS만 허용하며 `junjinyong`은 완전히 제외합니다.
+
 > **2026-08-10 acquisition–flow boundary:** CMRx4DFlow2026은 400+ case와 138개
 > fully sampled train case를 보고하지만 independent research embargo가 2026년
 > 12월까지라 ISBI 마감 뒤다. 10--50× acceleration, efficiency, cross-site와
@@ -26,14 +39,17 @@ N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 �
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
 가장 최근
-[`acquisition–flow source audit`](docs/acquisition-flow-source-audit-2026-08-10.md)은
-CMRx challenge와 aneurysm dual-VENC 자료가 partial-observation operator의 새
-실험 기반이 될 수 있는지 검토했습니다. 공식 challenge가 reconstruction과
-generalization 과제를 직접 점유하고, 데이터의 독립 연구 embargo가 ISBI 마감보다
-늦으며, paired multi-VENC/independent WSS reference도 없습니다. 따라서 최고점은
-27.5/40이고 payload/P0/model/PBS/GPU는 모두 0입니다.
+[`FSI–wall source audit`](docs/fsi-wall-source-audit-2026-08-10.md)은 rigid-wall
+CFD의 저비용성과 compliant-wall FSI의 생체역학적 현실성 사이에 실제로
+검증 가능한 학습 문제가 남는지 검토했습니다. 공개 mesh, paired field,
+wall-property 정답과 독립 anatomy의 수를 엄격히 구분한 결과 최고점은 31.0/40이고
+payload/P0/model/PBS/GPU는 모두 0입니다.
 
 직전
+[`acquisition–flow source audit`](docs/acquisition-flow-source-audit-2026-08-10.md)의
+최고점 27.5/40은 historical rejection으로 보존합니다.
+
+그 전
 [`treatment–surveillance source audit`](docs/treatment-surveillance-source-audit-2026-08-10.md)의
 최고점 30.0/40은 historical rejection으로 보존합니다.
 

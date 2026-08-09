@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · FSI–wall batch is rejected before payload and compute
+
+- Rigid-to-compliant discrepancy, inverse wall property, device response,
+  wall-thickness hotspot, selective FSI referral and multi-granularity conformal
+  surrogation score **30.5/29.5/26.5/24.5/29.0/31.0**. All are below 32/40.
+- AnXplore reports 101 rigid/FSI simulations, but its verified public
+  full-dataset tree exposes 101 fluid meshes rather than paired time-resolved
+  rigid/FSI solution fields. An animal inverse-mechanics record and five-
+  aneurysm micro-CT wall-thickness study cannot supply target-scale labels.
+- Generic FSI neural operators, multi-fidelity residual learning and conformal
+  selective referral are direct priors or controls, not standalone novelty.
+- Schema 4.8 freezes no mesh/field/image payload, P0/model/PBS/GPU/outer test,
+  `introai9`-only execution and complete exclusion of `junjinyong`.
+- 영향 파일: `docs/fsi-wall-source-audit-2026-08-10.md`, machine contract,
+  validator/tests, public research/data/server guides, educational site and this
+  changelog.
+
 ## 2026-08-10 · Acquisition–flow batch is rejected before access and compute
 
 - CMRx4DFlow2026 reports 400+ cases, 138 fully sampled training cases and

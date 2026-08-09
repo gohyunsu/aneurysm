@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 FSI–wall lineage boundary:** Aneurysm FSI는 rigid-wall 가정이
+> OSI 등 wall functional을 바꿀 수 있음을 이미 보였고, generic FSI neural
+> operator와 rigid→FSI multi-fidelity residual learning은 인접 분야에서 직접
+> 다뤄진다. Multi-granularity conformal field calibration과 selective expensive-
+> simulation referral도 새 이름만 붙일 수 없는 direct control이다. 남는 gap은
+> 충분한 독립 anatomy에서 paired rigid/FSI fields, wall properties 또는 device
+> response가 공개되어 strong baseline보다 나은 operator-specific algorithm과
+> 보장을 함께 검증할 때뿐이다. 현재 source는 이 joint evidence를 제공하지 않아
+> 최고 31.0/40으로 기각한다. [`source audit`](fsi-wall-source-audit-2026-08-10.md)
+
 > **2026-08-10 acquisition–flow lineage boundary:** CMRx directly defines
 > 10--50× reconstruction, single-A6000 efficiency, new-site/disease and
 > cross-anatomy tasks. FlowMRI-Net already uses self-supervised complex unrolling
@@ -10,6 +20,25 @@
 > semantics plus an independent functional reference, neither of which is
 > identified in an ISBI-compatible public cohort. See the
 > [`source audit`](acquisition-flow-source-audit-2026-08-10.md).
+
+## 0-F. Current decision · FSI importance does not identify an executable method
+
+The [AnXplore study](https://pmc.ncbi.nlm.nih.gov/articles/PMC11243300/) is an
+important biomechanics reference: it compares rigid-wall and FSI simulations
+over 101 semi-idealized aneurysms and reports material differences, especially
+for oscillatory shear. Its
+[official repository](https://github.com/aurelegoetz/AnXplore), however, exposes
+101 fluid meshes in the verified full-dataset tree, not a 101-case paired release
+of rigid and compliant time-resolved solution fields. A paper-level experiment
+count is therefore not a train/test label count.
+
+Inverse wall mechanics from animal imaging and 3D micro-CT thickness from five
+aneurysms establish clinical importance but do not supply target-scale
+supervision. Generic FSI operators, multi-fidelity discrepancy learning and
+conformal selective simulation are already direct priors. The six frozen scores
+are 30.5/29.5/26.5/24.5/29.0/31.0. No active gap, architecture or experiment is
+selected; detailed evidence is frozen in the
+[`FSI–wall source audit`](fsi-wall-source-audit-2026-08-10.md).
 
 > **2026-08-10 treatment–surveillance lineage boundary:** Flow-diverter
 > morphology/virtual-stenting/CFD outcome ML, time-to-occlusion modeling,

@@ -1,6 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.7 · 2026-08-10
+버전: 4.8 · 2026-08-10
+
+> **Current gate:** FSI–wall batch 최고점은 31.0/40으로 admission line 32
+> 미만이다. AnXplore의 공개 fluid mesh를 paired rigid/FSI time-resolved solution
+> field로 간주하지 않고, animal/five-aneurysm wall evidence를 target-scale label로
+> 확대 해석하지 않는다. 따라서 mesh/field/image payload, executable P0, method,
+> architecture, PBS/GPU와 outer test는 모두 unauthorized다. 다음 허용 작업은
+> genuinely new/revised source audit뿐이며, 통과 뒤 CPU-only method-free P0도
+> `introai9` PBS에서만 수행한다. `junjinyong`은 계속 완전히 제외한다.
 
 > **Current gate:** acquisition–flow batch 최고점은 27.5/40이다. CMRx
 > challenge/Synapse에 가입하거나 terms를 수락하지 않았고 k-space/MAT와 6.2 GB
@@ -35,6 +43,17 @@
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## S-FSI · compliant-wall and wall-mechanics batch · all rejected, no execution
+
+여섯 후보를 같은 frozen 8축 rubric으로 source-only 평가했다. 점수는 30.5,
+29.5, 26.5, 24.5, 29.0, 31.0이며 32를 넘는 후보가 없다. 논문에서 계산한
+101 rigid/FSI case와 repository에서 공개된 101 fluid mesh를 구분하고, paired
+field·wall property·device-response target가 없는 상태에서는 model contract를
+만들지 않는다. Generic FSI operator, multi-fidelity residual과 conformal
+selective simulation은 mandatory baseline/control이다. 상세 계약은
+[`FSI–wall audit`](fsi-wall-source-audit-2026-08-10.md)에 고정했다. Payload와
+compute는 0이며 향후 허가된 실행도 `introai9` PBS만 사용한다.
 
 ## S-TOPO · topology–procedure source batch · all rejected, no execution
 

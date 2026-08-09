@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 latest architecture boundary:** FSI–wall batch 최고점은
+> 31.0/40이다. Fluid mesh encoder, solid mesh encoder, interface coupling,
+> rigid-to-FSI residual operator, wall-property inverse head, multi-fidelity
+> token과 conformal/referral head는 모두 plausible architecture component지만
+> paired public target와 residual algorithmic gap이 먼저 입증되지 않으면
+> selected method가 아니다. 따라서 현재 GNN, neural operator, Transformer,
+> FSI surrogate와 GPU authorization은 모두 **미선정/0**이다.
+> [`source audit`](fsi-wall-source-audit-2026-08-10.md)
+
 > **2026-08-10 latest architecture boundary:** acquisition–flow batch 최고점은
 > 27.5/40이다. Complex-valued unrolling, joint velocity-encoding fusion,
 > divergence-free curl parameterization, arbitrary-mask uncertainty, domain
@@ -76,7 +85,8 @@ completed tabular archive/no verdict/no rerun and candidate closed · DSA
 prefix-risk candidate source-rejected 31/40 · hemodynamic-endpoint batch best
 31/40 and all source-rejected · topology–procedure batch best 28.5/40 and
 all source-rejected · context–treatment batch best 31.5/40 and all
-source-rejected · active shortlist/selected primary
+source-rejected · acquisition–flow best 27.5/40 and all source-rejected ·
+FSI–wall best 31.0/40 and all source-rejected · active shortlist/selected primary
 problem/method/architecture 0 · inverse healthy-vessel counterfactual candidate
 rejected 27/40 · no GPU/outer test
 

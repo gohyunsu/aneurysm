@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · acquisition–flow best 27.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · FSI–wall best 31.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "FSI importance still does not identify an executable learning problem",
+      copy: "AnXplore compares rigid-wall and compliant-wall simulations over 101 semi-idealized aneurysms, but its verified public full-dataset tree exposes 101 fluid meshes rather than a 101-case paired release of rigid/FSI time-resolved fields. Animal inverse mechanics, five-aneurysm micro-CT thickness and a single flow-diverter showcase do not supply target-scale labels. Generic FSI neural operators, multi-fidelity residual learning and conformal selective simulation are direct priors or controls.",
+      status: "Best 31.0/40 · all rejected · mesh/field/image/P0/model/GPU 0",
+      url: "../docs/fsi-wall-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "A large challenge still does not create an ISBI-ready problem",
@@ -362,6 +369,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "AnXplore · FSI/wall source-only",
+      role: "source-rejected rigid-versus-compliant mechanics reference; no current training or evaluation role",
+      provenance: "Paper: 101 semi-idealized rigid/FSI simulations · verified public full_dataset: 101 Fluid_*.vtk meshes, not paired time-resolved rigid/FSI fields · payload 0 · best batch 31/40 · no P0/model/GPU"
+    },
+    {
       name: "CMRx4DFlow2026",
       role: "post-embargo watch source only; no current AURORA training or evaluation role",
       provenance: "400+ cases · 138 fully sampled train · cerebrovascular 10/20 validation/test · Synapse/challenge gated · independent research embargo through Dec 2026 · payload 0 · no P0/model/GPU"
@@ -498,6 +510,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "FSI–wall candidates stop before payload and compute",
+      copy: "Rigid-to-compliant discrepancy, inverse wall property, compliance-conditioned device response, wall-thickness hotspot, selective FSI referral and multi-granularity conformal surrogation score 30.5/29.5/26.5/24.5/29.0/31.0. AnXplore reports 101 rigid/FSI simulations, but the verified public full-dataset tree exposes fluid meshes rather than paired time-resolved rigid/FSI fields. Generic FSI operators, multi-fidelity residuals and conformal referral are direct priors. Schema 4.8 freezes no mesh/field/image/P0/model/GPU, introai9-only execution and complete exclusion of junjinyong.",
+      files: ["docs/fsi-wall-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "docs/model-spec.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

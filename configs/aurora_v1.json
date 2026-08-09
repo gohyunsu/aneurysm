@@ -1,9 +1,9 @@
 {
-  "schema_version": "4.7",
+  "schema_version": "4.8",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_acquisition_flow_source_audit",
+    "status": "failed_branches_preserved_no_active_shortlist_after_fsi_wall_source_audit",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_acquisition_flow_source_audit_no_primary_or_method",
+    "status": "no_active_shortlist_after_fsi_wall_source_audit_no_primary_or_method",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "source_metadata_public_manuscripts_and_repository_records_only_no_synapse_application_challenge_form_kspace_mat_aneurysm_zip_or_patient_payload_for_acquisition_flow_audit",
+    "asset_access_status": "source_metadata_public_manuscripts_and_repository_tree_only_no_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_member_payload_for_fsi_wall_audit",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -27,7 +27,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32",
-    "audit_document": "docs/acquisition-flow-source-audit-2026-08-10.md",
+    "audit_document": "docs/fsi-wall-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -1129,8 +1129,104 @@
       "decision": "reject_all_without_score_repair_synapse_application_challenge_form_kspace_mat_aneurysm_zip_payload_p0_method_architecture_or_gpu",
       "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_with_isbi_compatible_public_assets_and_independent_functional_reference_and_register_only_a_fresh_candidate_scoring_at_least_32"
     },
+    "fsi_wall_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/fsi-wall-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_id": "multi_granularity_conformal_hemodynamic_surrogate",
+      "best_score": 31.0,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "any_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_member_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "observed_introai9_pbs_job_count": 0,
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "anxplore_public_repository": "https://github.com/aurelegoetz/AnXplore",
+      "anxplore_geometries": 101,
+      "anxplore_public_full_dataset_fluid_meshes": 101,
+      "anxplore_paired_rigid_fsi_simulations_reported_by_paper": 101,
+      "anxplore_paired_rigid_fsi_solution_fields_publicly_released": false,
+      "anxplore_public_repository_role": "tetrahedral_fluid_and_selected_solid_meshes_not_paired_rigid_fsi_solution_fields",
+      "anxplore_shared_parent_geometry": "idealized_toroidal_parent_artery",
+      "anxplore_shared_inflow_and_material_assumptions": true,
+      "anxplore_flow_diverter_paired_effective_cases": 1,
+      "inverse_mechanics_species": "animal_model",
+      "inverse_mechanics_effective_units": 1,
+      "microct_wall_thickness_human_aneurysms": 5,
+      "benchanxplore_cases": 105,
+      "benchanxplore_used_for_prior_architecture_discovery": true,
+      "direct_prior_threats": [
+        "anxplore_paired_rigid_wall_and_fsi_effect_analysis",
+        "in_pi_mgn_region_wss_tawss_and_mass_flow_evaluation",
+        "multi_granularity_conformal_case_and_spatial_wss_surrogate_calibration",
+        "conformal_prediction_for_neural_operator_fields",
+        "conformal_operator_learning_for_navier_stokes",
+        "generic_fno_based_fluid_structure_interaction",
+        "generic_multifidelity_operator_correction_or_selective_simulation_referral"
+      ],
+      "candidates": [
+        {
+          "id": "rigid_to_compliant_hemodynamic_discrepancy_operator",
+          "score": 30.5,
+          "axis_scores": [5.0, 4.5, 2.0, 1.5, 4.0, 5.0, 5.0, 3.5],
+          "independent_units": "101_semi_idealized_bulges_share_one_parent_inflow_and_material_contract_and_public_repository_releases_meshes_not_paired_solution_fields",
+          "payload_accessed": false,
+          "decision": "reject_current_version_paired_rigid_fsi_target_fields_are_not_in_the_public_mesh_release"
+        },
+        {
+          "id": "dynamic_geometry_inverse_wall_property_inference",
+          "score": 29.5,
+          "axis_scores": [5.0, 4.0, 2.5, 3.5, 0.5, 5.0, 5.0, 4.0],
+          "independent_units": "one_animal_intracranial_aneurysm_inverse_mechanics_record_not_a_human_patient_cohort",
+          "payload_accessed": false,
+          "decision": "reject_current_version_one_animal_unit_cannot_support_human_generalization"
+        },
+        {
+          "id": "compliance_conditioned_flow_diverter_response",
+          "score": 26.5,
+          "axis_scores": [5.0, 4.0, 1.5, 1.5, 0.5, 5.0, 5.0, 4.0],
+          "independent_units": "one_showcased_flow_diverter_case_under_rigid_and_compliant_wall_assumptions",
+          "payload_accessed": false,
+          "decision": "reject_current_version_one_device_case_is_not_a_treatment_response_cohort"
+        },
+        {
+          "id": "lumen_to_wall_thickness_hotspot_prediction",
+          "score": 24.5,
+          "axis_scores": [5.0, 2.0, 2.0, 1.0, 0.5, 5.0, 5.0, 4.0],
+          "independent_units": "five_resected_aneurysms_with_large_within_case_wall_thickness_variation_and_no_identifying_lumen_only_target_contract",
+          "payload_accessed": false,
+          "decision": "reject_current_version_lumen_geometry_does_not_identify_living_wall_thickness_and_n_is_five"
+        },
+        {
+          "id": "selective_rigid_cfd_to_fsi_referral",
+          "score": 29.0,
+          "axis_scores": [4.5, 4.5, 1.0, 1.5, 4.0, 5.0, 5.0, 3.5],
+          "independent_units": "101_meshes_but_no_public_per_case_paired_error_target_and_shared_simulation_contract",
+          "payload_accessed": false,
+          "decision": "reject_current_version_referral_labels_are_unreleased_and_selective_simulation_is_direct_prior"
+        },
+        {
+          "id": "multi_granularity_conformal_hemodynamic_surrogate",
+          "score": 31.0,
+          "axis_scores": [4.5, 3.5, 0.5, 5.0, 2.5, 5.0, 5.0, 5.0],
+          "independent_units": "105_semi_idealized_benchanxplore_cases_share_parent_and_inflow_and_have_already_supported_architecture_discovery",
+          "payload_accessed": false,
+          "decision": "reject_current_version_case_and_spatial_wss_conformal_surrogates_are_direct_prior_and_same_benchmark_cannot_supply_fresh_confirmatory_evidence"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_payload_p0_method_architecture_or_gpu",
+      "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_with_public_paired_rigid_fsi_or_measured_wall_motion_targets_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "same_lesion_preprocessing_orbit_quotient_morphometry",
-    "most_recent_source_rejected_candidate": "nested_acceleration_coherent_4d_flow_reconstruction",
+    "most_recent_source_rejected_candidate": "multi_granularity_conformal_hemodynamic_surrogate",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -1182,7 +1278,13 @@
       "cross_site_cross_anatomy_4d_flow_reconstruction",
       "explicit_multi_venc_divergence_free_uncertainty",
       "functional_risk_controlled_wss_vorticity_reconstruction",
-      "treated_aneurysm_dual_venc_device_response_transfer"
+      "treated_aneurysm_dual_venc_device_response_transfer",
+      "rigid_to_compliant_hemodynamic_discrepancy_operator",
+      "dynamic_geometry_inverse_wall_property_inference",
+      "compliance_conditioned_flow_diverter_response",
+      "lumen_to_wall_thickness_hotspot_prediction",
+      "selective_rigid_cfd_to_fsi_referral",
+      "multi_granularity_conformal_hemodynamic_surrogate"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -1258,7 +1360,10 @@
       "generic_interval_censored_survival_or_competing_risk_model",
       "generic_multitask_benefit_harm_or_decision_curve_analysis",
       "generic_patient_history_transformer",
-      "compressed_sensing_mri_reconstruction_or_paired_consistency"
+      "compressed_sensing_mri_reconstruction_or_paired_consistency",
+      "generic_fluid_structure_neural_operator",
+      "generic_multifidelity_rigid_to_fsi_residual_learning",
+      "multi_granularity_conformal_field_calibration_or_selective_simulation_referral"
     ]
   },
   "venue": {
@@ -1272,7 +1377,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_acquisition_flow_source_audit",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_fsi_wall_source_audit",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -1337,7 +1442,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "unselected",
-    "active_candidate_status": "no_active_shortlist_after_acquisition_flow_source_audit_no_primary_method_architecture_or_gpu",
+    "active_candidate_status": "no_active_shortlist_after_fsi_wall_source_audit_no_primary_method_architecture_or_gpu",
     "candidate_primary_estimand": "unselected",
     "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -1752,7 +1857,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_acquisition_flow_source_audit",
+    "current_headline_architecture": "unselected_no_active_problem_after_fsi_wall_source_audit",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

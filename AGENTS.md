@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 FSI–wall source-audit overlay:** Fresh source-only batch는
+> rigid-to-compliant discrepancy operator, dynamic-geometry inverse wall
+> property, compliance-conditioned flow-diverter response, lumen-to-wall-
+> thickness hotspot, selective FSI referral과 multi-granularity conformal
+> surrogate를 30.5/29.5/26.5/24.5/29.0/31.0으로 판정했다. 모두 frozen
+> admission line 32 미만이다. AnXplore 논문은 101 semi-idealized rigid/FSI
+> simulation을 기술하지만 official repository의 확인된 full-dataset 자산은
+> 101 `Fluid_*.vtk` mesh이며 paired time-resolved rigid/FSI solution field
+> release가 아니다. Animal inverse mechanics와 five-aneurysm micro-CT wall-
+> thickness evidence도 target-scale supervision을 만들지 못한다. Generic FSI
+> neural operator, rigid-to-FSI residual learning, conformal field calibration과
+> selective referral은 direct prior/control이다. Mesh/field/image payload, P0,
+> method, architecture, PBS/GPU와 outer test는 0이다. Schema 4.8 source of
+> truth는 `problem_selection.fsi_wall_source_audit`와
+> `docs/fsi-wall-source-audit-2026-08-10.md`다. AURORA는 `introai9` PBS만
+> 사용하며 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 acquisition–flow source-audit overlay:** Fresh source-only batch는
 > nested-acceleration coherence, cross-site/anatomy reconstruction, explicit
 > multi-VENC divergence-free uncertainty, functional-risk WSS/vorticity와

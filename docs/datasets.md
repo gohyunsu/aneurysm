@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 FSI–wall audit:** AnXplore의 논문 단위와 공개 파일 단위를
+> 분리한다. 논문은 101 semi-idealized aneurysm에서 rigid와 FSI simulation을
+> 비교하지만 official repository의 확인된 `full_dataset` tree는 101
+> `Fluid_*.vtk` mesh를 노출한다. 이는 101 paired rigid/FSI time-resolved
+> solution field가 아니다. `caseA`의 Fluid/Solid 예시는 schema 이해용 예시이지
+> full paired target cohort의 증거가 아니다. Animal inverse-mechanics Dryad와
+> five-aneurysm micro-CT thickness study도 source-only direct evidence이며 AURORA
+> training role을 부여하지 않는다. Mesh, field와 image payload는 접근하지
+> 않았고 최고 31.0/40, P0/model/GPU 0이다.
+
 > **2026-08-10 acquisition–flow audit:** CMRx4DFlow2026 reports over 400 cases,
 > 138 fully sampled training cases and cerebrovascular 10/20 validation/test
 > cases, but access is challenge/Synapse-gated and independent research use is

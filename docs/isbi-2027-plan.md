@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 latest boundary:** FSI–wall candidates score
+> 30.5/29.5/26.5/24.5/29.0/31.0, all below 32. AnXplore reports 101
+> rigid/FSI simulations, but the verified public full-dataset tree is a fluid-
+> mesh release rather than 101 paired time-resolved rigid/FSI field targets.
+> Animal inverse mechanics, five-aneurysm micro-CT thickness and a single-device
+> showcase do not provide the independent units needed for a confirmatory ISBI
+> method. No primary, architecture, result row or GPU is selected; the paper
+> remains **not submission-ready**.
+
 > **2026-08-10 latest boundary:** acquisition–flow candidates score
 > 27.5/26.5/24.0/26.0/27.0, all below 32. CMRx independent research use begins
 > after the December 2026 embargo, later than the 2026-10-26 ISBI deadline, and
@@ -61,7 +70,7 @@
 
 최종 검토일: 2026-08-10 KST
 
-상태: **target locked · context–treatment batch best 31.5/40 and all rejected · topology–procedure batch best 28.5/40 and all rejected · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
+상태: **target locked · FSI–wall batch best 31.0/40 and all rejected · acquisition–flow batch best 27.5/40 and all rejected · context–treatment batch best 31.5/40 and all rejected · topology–procedure batch best 28.5/40 and all rejected · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
 shortlist/selected primary problem/method/architecture/GPU 0 · not
 submission-ready**

@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.7":
-        raise ProtocolError("The current research-state schema must be version 4.7.")
+    if protocol["schema_version"] != "4.8":
+        raise ProtocolError("The current research-state schema must be version 4.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_acquisition_flow_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_fsi_wall_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -197,6 +197,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "provenance_evaluation_source_audit",
             "treatment_surveillance_source_audit",
             "acquisition_flow_source_audit",
+            "fsi_wall_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -206,12 +207,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_acquisition_flow_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_fsi_wall_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_public_manuscripts_and_repository_records_only_no_synapse_application_challenge_form_kspace_mat_aneurysm_zip_or_patient_payload_for_acquisition_flow_audit"
+        != "source_metadata_public_manuscripts_and_repository_tree_only_no_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_member_payload_for_fsi_wall_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -223,14 +224,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/acquisition-flow-source-audit-2026-08-10.md"
+        != "docs/fsi-wall-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "nested_acceleration_coherent_4d_flow_reconstruction"
+        != "multi_granularity_conformal_hemodynamic_surrogate"
     ):
         raise ProtocolError(
-            "The current acquisition-flow boundary must retain no selected primary, "
+            "The current FSI-wall boundary must retain no selected primary, "
             "method, GPU, outer test, P1, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -285,6 +286,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "explicit_multi_venc_divergence_free_uncertainty",
         "functional_risk_controlled_wss_vorticity_reconstruction",
         "treated_aneurysm_dual_venc_device_response_transfer",
+        "rigid_to_compliant_hemodynamic_discrepancy_operator",
+        "dynamic_geometry_inverse_wall_property_inference",
+        "compliance_conditioned_flow_diverter_response",
+        "lumen_to_wall_thickness_hotspot_prediction",
+        "selective_rigid_cfd_to_fsi_referral",
+        "multi_granularity_conformal_hemodynamic_surrogate",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -362,6 +369,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_multitask_benefit_harm_or_decision_curve_analysis",
         "generic_patient_history_transformer",
         "compressed_sensing_mri_reconstruction_or_paired_consistency",
+        "generic_fluid_structure_neural_operator",
+        "generic_multifidelity_rigid_to_fsi_residual_learning",
+        "multi_granularity_conformal_field_calibration_or_selective_simulation_referral",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -2353,6 +2363,132 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("acquisition-flow rejection and introai9-only boundary")
 
+    fsi_wall_audit = problem_selection["fsi_wall_source_audit"]
+    _require_keys(
+        fsi_wall_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "any_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_member_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "observed_introai9_pbs_job_count",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "anxplore_public_repository",
+            "anxplore_geometries",
+            "anxplore_public_full_dataset_fluid_meshes",
+            "anxplore_paired_rigid_fsi_simulations_reported_by_paper",
+            "anxplore_paired_rigid_fsi_solution_fields_publicly_released",
+            "anxplore_public_repository_role",
+            "anxplore_shared_parent_geometry",
+            "anxplore_shared_inflow_and_material_assumptions",
+            "anxplore_flow_diverter_paired_effective_cases",
+            "inverse_mechanics_species",
+            "inverse_mechanics_effective_units",
+            "microct_wall_thickness_human_aneurysms",
+            "benchanxplore_cases",
+            "benchanxplore_used_for_prior_architecture_discovery",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.fsi_wall_source_audit",
+    )
+    expected_fsi_wall_scores = {
+        "rigid_to_compliant_hemodynamic_discrepancy_operator": 30.5,
+        "dynamic_geometry_inverse_wall_property_inference": 29.5,
+        "compliance_conditioned_flow_diverter_response": 26.5,
+        "lumen_to_wall_thickness_hotspot_prediction": 24.5,
+        "selective_rigid_cfd_to_fsi_referral": 29.0,
+        "multi_granularity_conformal_hemodynamic_surrogate": 31.0,
+    }
+    observed_fsi_wall_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in fsi_wall_audit["candidates"]
+    }
+    fsi_wall_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in fsi_wall_audit["candidates"]
+    )
+    if (
+        fsi_wall_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or fsi_wall_audit["audit_document"]
+        != "docs/fsi-wall-source-audit-2026-08-10.md"
+        or fsi_wall_audit["automatic_selection_threshold"] != 32.0
+        or fsi_wall_audit["best_candidate_id"]
+        != "multi_granularity_conformal_hemodynamic_surrogate"
+        or fsi_wall_audit["best_score"] != 31.0
+        or fsi_wall_audit["best_score"]
+        >= fsi_wall_audit["automatic_selection_threshold"]
+        or fsi_wall_audit["active_shortlist_count"] != 0
+        or fsi_wall_audit["primary_problem_selected"] is not False
+        or fsi_wall_audit[
+            "any_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_member_payload_accessed"
+        ]
+        is not False
+        or fsi_wall_audit["executable_p0_registered"] is not False
+        or fsi_wall_audit["method_selected"] is not False
+        or fsi_wall_audit["architecture_selected"] is not False
+        or fsi_wall_audit["gpu_training_authorized"] is not False
+        or fsi_wall_audit["outer_test_authorized"] is not False
+        or fsi_wall_audit["submission_identity_active"] is not False
+        or fsi_wall_audit["execution_server"] != "introai9"
+        or fsi_wall_audit["observed_introai9_pbs_job_count"] != 0
+        or fsi_wall_audit["pbs_job_created"] is not False
+        or fsi_wall_audit["login_node_gpu_command_executed"] is not False
+        or fsi_wall_audit["junjinyong_accessed_for_this_audit"] is not False
+        or fsi_wall_audit["anxplore_public_repository"]
+        != "https://github.com/aurelegoetz/AnXplore"
+        or fsi_wall_audit["anxplore_geometries"] != 101
+        or fsi_wall_audit["anxplore_public_full_dataset_fluid_meshes"] != 101
+        or fsi_wall_audit["anxplore_paired_rigid_fsi_simulations_reported_by_paper"]
+        != 101
+        or fsi_wall_audit["anxplore_paired_rigid_fsi_solution_fields_publicly_released"]
+        is not False
+        or fsi_wall_audit["anxplore_public_repository_role"]
+        != "tetrahedral_fluid_and_selected_solid_meshes_not_paired_rigid_fsi_solution_fields"
+        or fsi_wall_audit["anxplore_shared_parent_geometry"]
+        != "idealized_toroidal_parent_artery"
+        or fsi_wall_audit["anxplore_shared_inflow_and_material_assumptions"]
+        is not True
+        or fsi_wall_audit["anxplore_flow_diverter_paired_effective_cases"] != 1
+        or fsi_wall_audit["inverse_mechanics_species"] != "animal_model"
+        or fsi_wall_audit["inverse_mechanics_effective_units"] != 1
+        or fsi_wall_audit["microct_wall_thickness_human_aneurysms"] != 5
+        or fsi_wall_audit["benchanxplore_cases"] != 105
+        or fsi_wall_audit["benchanxplore_used_for_prior_architecture_discovery"]
+        is not True
+        or observed_fsi_wall_scores != expected_fsi_wall_scores
+        or not fsi_wall_axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in fsi_wall_audit["candidates"])
+        or fsi_wall_audit["decision"]
+        != "reject_all_without_score_repair_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_payload_p0_method_architecture_or_gpu"
+        or fsi_wall_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_with_public_paired_rigid_fsi_or_measured_wall_motion_targets_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The FSI-wall audit must preserve all six frozen source-only "
+            "rejections, the 31.0/40 maximum, no mesh/field/wall payload/P0/"
+            "model/GPU, and introai9-only execution."
+        )
+    checks.append("FSI-wall rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -2432,7 +2568,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_acquisition_flow_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_fsi_wall_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -2595,7 +2731,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_acquisition_flow_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_fsi_wall_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

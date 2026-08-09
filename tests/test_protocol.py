@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "acquisition-flow boundary"):
+        with self.assertRaisesRegex(ProtocolError, "FSI-wall boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "acquisition-flow boundary"):
+        with self.assertRaisesRegex(ProtocolError, "FSI-wall boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "acquisition-flow boundary"):
+        with self.assertRaisesRegex(ProtocolError, "FSI-wall boundary"):
             validate_protocol(candidate)
 
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
@@ -345,6 +345,46 @@ class ProtocolTests(unittest.TestCase):
             "dual_venc_aneurysm_effective_anatomies"
         ] = 4
         with self.assertRaisesRegex(ProtocolError, "acquisition-flow audit"):
+            validate_protocol(candidate)
+
+    def test_fsi_wall_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"]["fsi_wall_source_audit"]
+        self.assertEqual(audit["best_score"], 31.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["anxplore_geometries"], 101)
+        self.assertEqual(audit["anxplore_public_full_dataset_fluid_meshes"], 101)
+        self.assertEqual(
+            audit["anxplore_paired_rigid_fsi_simulations_reported_by_paper"],
+            101,
+        )
+        self.assertFalse(
+            audit["anxplore_paired_rigid_fsi_solution_fields_publicly_released"]
+        )
+        self.assertEqual(audit["anxplore_flow_diverter_paired_effective_cases"], 1)
+        self.assertEqual(audit["inverse_mechanics_effective_units"], 1)
+        self.assertEqual(audit["microct_wall_thickness_human_aneurysms"], 5)
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["observed_introai9_pbs_job_count"], 0)
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["fsi_wall_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "FSI-wall audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["fsi_wall_source_audit"][
+            "anxplore_paired_rigid_fsi_solution_fields_publicly_released"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "FSI-wall audit"):
             validate_protocol(candidate)
 
     def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:

@@ -42,31 +42,32 @@
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
-          DSA sequence와 prefix risk, WSS 시계열에서 TAWSS·OSI·RRT가 어떻게
-          계산되는지, mesh와 GNN은 무엇이며 왜 그 자체가 novelty가 아닌지,
+          DSA sequence와 prefix risk, rigid-wall CFD와 compliant-wall FSI,
+          WSS 시계열에서 TAWSS·OSI·RRT가 어떻게 계산되는지, mesh와 GNN은
+          무엇이며 왜 그 자체가 novelty가 아닌지,
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 audit은 CMRx4DFlow2026과 공개 dual-VENC aneurysm source를
-            검토했지만 최고점이 27.5/40임을 확인했습니다. Independent research
-            embargo가 ISBI 마감 뒤이고, reconstruction/generalization은 공식
-            challenge task이며 같은 환자의 반복 multi-VENC도 확인되지 않습니다.
-            현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
+            최신 audit은 FSI와 wall mechanics를 검토했지만 최고점이 31.0/40임을
+            확인했습니다. 논문의 101 rigid/FSI simulation과 공개 repository의
+            101 fluid mesh는 동일한 paired field dataset이 아닙니다. 현재 GNN,
+            neural operator, U-Net과 Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
           <strong>다음 단계는 genuinely new/revised source를 기다리는 일입니다.</strong>
           <p>
-            27.5점을 재가중하거나 unrolling/divergence-free/uncertainty 이름을 붙여
-            32점으로 만들지 않습니다. ISBI 일정에 맞는 public asset, independent
-            functional reference와 residual method gap이 실제로 추가된 별도 후보만
-            다시 감사합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
+            31.0점을 재가중하거나 FSI operator, multi-fidelity, conformal 같은
+            이름을 붙여 32점으로 만들지 않습니다. Paired rigid/FSI target,
+            independent wall-property reference와 residual method gap이 실제로
+            추가된 별도 후보만 다시 감사합니다. Gate 통과 전 model이나 GPU를
+            허가하지 않습니다.
           </p>
-          <a href="../docs/acquisition-flow-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/fsi-wall-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -387,7 +388,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              최신 후보도 30.0/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              최신 후보도 31.0/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
               stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
@@ -395,10 +396,15 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. Public flow-diverter table은 observed follow-up을 제공하지만 exact occlusion time이나 randomized treatment를 제공하지 않습니다. Paired MRA는 restricted 22-patient source이고 direct agreement prior가 있습니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. FSI는 중요한 물리 현상이지만, 확인된 public fluid mesh를 paired rigid/FSI solution label로 해석할 수 없습니다. Wall property와 device response의 독립 target도 부족합니다.</p>
             </aside>
             <article>
-              <span>CURRENT · TREATMENT–SURVEILLANCE REJECTION</span>
+              <span>CURRENT · FSI–WALL REJECTION</span>
+              <div><h3>벽을 움직이게 만들면 바로 새 모델 문제가 되는가?</h3><p>아닙니다. 논문이 수행한 101 rigid/FSI 계산과 공개 저장소의 101 fluid mesh는 서로 다른 증거입니다. Paired time-resolved field와 wall-property label 없이 rigid→compliant operator를 검증할 수 없고, generic FSI operator와 conformal referral도 직접 선행입니다.</p></div>
+              <b>상태</b><small>best 31.0/40 · no mesh/field/image/P0/model/GPU</small>
+            </article>
+            <article>
+              <span>HISTORY · TREATMENT–SURVEILLANCE REJECTION</span>
               <div><h3>임상 follow-up table이면 causal model을 고를 수 있는가?</h3><p>아닙니다. 최대 두 번의 불규칙 DSA 관측은 exact biological occlusion time이 아니며, Pipeline/Surpass 선택도 무작위가 아닙니다. Outcome ML, propensity comparison과 time-to-occlusion model이 직접 선행이므로 survival·causal head는 독립 gap을 만들지 않습니다.</p></div>
               <b>상태</b><small>best 30.0/40 · no spreadsheet/DSA/MRA/P0/model/GPU</small>
             </article>
@@ -690,6 +696,42 @@
             </p>
           </header>
 
+          <div class="explain-block">
+            <div>
+              <p class="eyebrow">RIGID CFD ↔ COMPLIANT FSI</p>
+              <h3>혈관벽을 고정한다는 것은 무엇을 버리는 가정인가?</h3>
+            </div>
+            <div class="prose">
+              <p>
+                일반적인 CFD는 영상에서 얻은 lumen 경계를 움직이지 않는 벽으로
+                두고 혈액만 풉니다. FSI(fluid–structure interaction)는 혈압이 벽을
+                변형시키고, 변형된 벽이 다시 유동을 바꾸는 두 방향 coupling을
+                풉니다. 그래서 같은 시작 형상이라도 속도·압력·WSS와 OSI가 달라질
+                수 있습니다.
+              </p>
+              <div class="large-equation">
+                fluid traction → wall deformation → changed fluid domain → new wall shear
+              </div>
+              <p>
+                그러나 FSI가 더 현실적이라는 사실만으로 학습 논문이 되지는
+                않습니다. 학습하려면 같은 case의 rigid와 compliant field,
+                material property, 시간·좌표·단위 대응이 필요합니다. AnXplore
+                논문은 101 case 비교를 보고하지만 확인된 public full-dataset tree는
+                101 fluid mesh입니다. 논문의 experiment count를 공개 paired-label
+                count로 바꾸어 세면 안 됩니다.
+              </p>
+              <p>
+                현재 가능한 fancy block—fluid/solid graph encoder, interface
+                attention, rigid-to-FSI residual, uncertainty 또는 conformal referral—은
+                모두 자산과 잔여 gap이 확인된 뒤에만 의미가 있습니다. 지금은
+                generic FSI operator와 selective expensive-simulation prior가 강하고
+                최고 source score가 31.0/40이므로 architecture와 GPU를 열지
+                않습니다.
+              </p>
+              <p><a href="../docs/fsi-wall-source-audit-2026-08-10.md">FSI–wall 상세 source audit 읽기 ↗</a></p>
+            </div>
+          </div>
+
           <div class="domain-split">
             <article class="volume-domain">
               <span>VOLUME BRANCH</span>
@@ -742,6 +784,7 @@
           </header>
 
           <div class="dataset-ladder">
+            <article><span>SOURCE-REJECTED · FSI/WALL</span><h3>AnXplore</h3><p>논문은 101 rigid/FSI simulation을 비교하지만 확인된 public full-dataset은 101 fluid mesh입니다. Paired time-resolved rigid/FSI field cohort로 세지 않습니다.</p><small>best batch 31/40 · payload/P0/model/GPU 0</small></article>
             <article><span>REJECTED · SEMANTICS AUDIT</span><h3>RSNA-ICA 2025</h3><p>제공 segmentation은 aneurysm mask가 아니라 13-class vessel anatomy입니다. Point/presence/territory와 함께 mixed-granularity lesion-mask cohort로 해석하지 않습니다.</p><small>payload 0 · candidate rejected · no method/GPU</small></article>
             <article><span>SOURCE-ONLY ALTERNATIVES</span><h3>CADA · ADAM · IntrA · TopCoW</h3><p>Fully supervised external control 또는 surface/anatomy pretraining 역할은 가능하지만 기각된 selection-aware task를 대체하거나 구제하지 못합니다.</p><small>payload read 0 · no authorization</small></article>
             <article><span>P0 · EXACT ORACLE</span><h3>Controlled PDE</h3><p>정답 conditional mean·covariance를 계산할 수 있어, partial/missing mask의 coherence와 coverage pipeline을 먼저 검증합니다.</p><small>method sanity · 통과 자체는 novelty 아님</small></article>
