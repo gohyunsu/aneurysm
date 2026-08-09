@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 PINN direct-prior deployment overlay:** Exact content
+> `ed426a58d556e987c4b5d745d9eb7c88c793a9fe`의 Quality `31325129769`와 Pages
+> `31325129336`이 성공했다. Live overview는 23.5/40 rejection, active
+> shortlist/primary/method/architecture/P0/GPU 0과 latest audit link를 렌더링하고
+> detailed audit URL은 HTTP 200이다. 이는 score, payload, scientific verdict,
+> method 또는 compute authorization을 바꾸지 않는다. 실행은 `introai9` PBS만
+> 사용하고 `junjinyong`은 제외한다.
+
 > **2026-08-10 PINN rupture-status direct-prior overlay:** July 2026
 > `arXiv:2607.10530`이 PointNeXt vascular geometry, geometry-conditioned PINN
 > pressure/velocity/WSS/TAWSS/OSI/RRT와 clinical variables를 735 AneuX

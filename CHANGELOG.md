@@ -4,6 +4,20 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · PINN direct-prior audit is deployed and verified
+
+- Exact content `ed426a58d556e987c4b5d745d9eb7c88c793a9fe`의 Quality
+  `31325129769`와 Pages `31325129336`이 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 original
+  geometry + PINN + clinical identity의 direct-prior 점유, residual 23.5/40
+  rejection, active shortlist/primary/model/GPU 0과 latest audit link를 확인했다.
+  Detailed audit URL도 HTTP 200이다.
+- 배포 검증은 candidate score, payload access, P0, method, architecture, GPU,
+  outer test 또는 submission identity를 바꾸지 않는다. `introai9`-only 및
+  `junjinyong` excluded 경계를 유지한다.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `site/index.html`,
+  `site/assets/research-data.js`.
+
 ## 2026-08-10 · Geometry + PINN + clinical fusion is rejected as direct prior
 
 - A July 2026 preprint already combines PointNeXt vascular geometry,

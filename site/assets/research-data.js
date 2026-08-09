@@ -413,6 +413,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "PINN direct-prior rejection is live",
+      copy: "Exact content ed426a58d556e987c4b5d745d9eb7c88c793a9fe passed Quality run 31325129769 and Pages run 31325129336. The live overview renders the occupied geometry + PINN + clinical identity, residual 23.5/40 rejection, active shortlist/primary/method/architecture/P0/GPU zero and the detailed audit link. Deployment verification changes no score, payload, scientific verdict, model, GPU, outer test or submission identity; introai9 remains the only execution server and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/index.html", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "The original geometry + PINN + clinical identity is rejected as direct prior",
       copy: "Official arXiv and AneuX sources show that a July 2026 study already runs PointNeXt geometry, PINN-derived pressure/velocity/WSS/TAWSS/OSI/RRT and clinical fusion on 735 cross-sectional rupture-status lesions. The source database contains 750 lesions from 605 patients, while patient grouping is not explicit for the paper's primary stratified folds. Its PINN uses prescribed shared conditions and is not validated against CFD or in-vivo flow. The residual physically validated incremental-information question scores 23.5/40 because no audited joint asset contains status, patient-specific conditions and verified flow. Schema 4.1 freezes no payload/P0/method/architecture/PBS/GPU and introai9-only execution; junjinyong remains excluded.",
