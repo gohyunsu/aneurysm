@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · FSI–wall best 31.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · longitudinal-perfusion best 31.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Repeated perfusion maps do not identify an intervention or scanning policy",
+      copy: "The open aSAH CTP release contains 62 patients, 291 original examinations and 873 normalized TMax/CBF/MTT maps, but only nine DCI events. Maps are not independent patient or event units. Clinical/TCD suspicion triggered CT evaluation, CTP informed treatment, and the original study already modeled dynamic pre-DCI change. ImageFlowNet, irregular longitudinal diffusion and TESAR-CDE directly occupy forecasting and informative-time modeling. Unperformed scans, untreated trajectories and policy utility are not identified by interpolation or random masking.",
+      status: "Best 31.0/40 · all rejected · standalone payload/P0/PBS/model/GPU 0",
+      url: "../docs/longitudinal-perfusion-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "FSI importance still does not identify an executable learning problem",
@@ -369,6 +376,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "Open aSAH longitudinal CTP · Dryad v7",
+      role: "source-rejected longitudinal-perfusion candidate; no current training or evaluation role",
+      provenance: "62 patients · 291 original examinations · 873 TMax/CBF/MTT maps · 9 DCI events · CC0 metadata/README verified · standalone file payload 0 · best batch 31/40 · no P0/PBS/model/GPU"
+    },
+    {
       name: "AnXplore · FSI/wall source-only",
       role: "source-rejected rigid-versus-compliant mechanics reference; no current training or evaluation role",
       provenance: "Paper: 101 semi-idealized rigid/FSI simulations · verified public full_dataset: 101 Fluid_*.vtk meshes, not paired time-resolved rigid/FSI fields · payload 0 · best batch 31/40 · no P0/model/GPU"
@@ -510,6 +522,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Longitudinal-perfusion candidates stop before payload and compute",
+      copy: "Informative-scan-aware forecasting, pre-DCI early warning, personalized reacquisition, treatment-conditioned counterfactual, cross-modality 3DRA/CTA invariance and global-local VWE discordance score 31.0/29.0/28.0/27.0/29.5/29.0. The open CTP source has 62 patients and only nine DCI events; 291 examinations and 873 maps are repeated observations, not independent outcome units. Observation and treatment are clinically informative, while the strongest model components and endpoint analyses have direct priors. Schema 4.9 freezes no standalone payload/P0/PBS/model/GPU, introai9-only future execution and complete exclusion of junjinyong.",
+      files: ["docs/longitudinal-perfusion-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "docs/model-spec.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

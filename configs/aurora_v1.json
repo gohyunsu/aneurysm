@@ -1,9 +1,9 @@
 {
-  "schema_version": "4.8",
+  "schema_version": "4.9",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_fsi_wall_source_audit",
+    "status": "failed_branches_preserved_no_active_shortlist_after_longitudinal_perfusion_source_audit",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_fsi_wall_source_audit_no_primary_or_method",
+    "status": "no_active_shortlist_after_longitudinal_perfusion_source_audit_no_primary_or_method",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "source_metadata_public_manuscripts_and_repository_tree_only_no_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_member_payload_for_fsi_wall_audit",
+    "asset_access_status": "official_source_metadata_embedded_readme_public_manuscripts_and_file_manifests_only_no_standalone_ctp_json_spreadsheet_nifti_zip_sah_ct_archive_3dra_cta_csv_vwe_csv_image_mesh_or_field_payload",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -27,7 +27,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32",
-    "audit_document": "docs/fsi-wall-source-audit-2026-08-10.md",
+    "audit_document": "docs/longitudinal-perfusion-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -1225,8 +1225,125 @@
       "decision": "reject_all_without_score_repair_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_payload_p0_method_architecture_or_gpu",
       "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_with_public_paired_rigid_fsi_or_measured_wall_motion_targets_and_register_only_a_fresh_candidate_scoring_at_least_32"
     },
+    "longitudinal_perfusion_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/longitudinal-perfusion-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_id": "informative_scan_aware_continuous_time_ctp_field_forecasting",
+      "best_score": 31.0,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "official_record_embedded_readme_and_file_manifests_accessed": true,
+      "any_standalone_ctp_json_spreadsheet_nifti_zip_sah_ct_archive_3dra_cta_csv_vwe_csv_image_mesh_or_field_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "observed_introai9_pbs_job_count": 0,
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "ctp_dryad_doi": "10.5061/dryad.0zpc86784",
+      "ctp_license": "CC0-1.0",
+      "ctp_version": 7,
+      "ctp_patients": 62,
+      "ctp_original_exams": 291,
+      "ctp_parametric_maps": 873,
+      "ctp_parameters": ["TMax", "CBF", "MTT"],
+      "ctp_dci_events": 9,
+      "ctp_vasospasm_patients": 42,
+      "ctp_mean_original_exams_per_patient": 4.69,
+      "ctp_mean_inter_exam_days": 2.8,
+      "ctp_inter_exam_day_range": [0.6, 13.1],
+      "ctp_paper_interpolated_exams": 302,
+      "ctp_single_center_single_scanner": true,
+      "ctp_source_slice_thickness_mm": 5.0,
+      "ctp_mni_grid_shape": [181, 217, 181],
+      "ctp_mni_voxel_mm": [1.0, 1.0, 1.0],
+      "ctp_observation_process_clinically_informative": true,
+      "ctp_guided_rescue_treatment_reported": true,
+      "unobserved_untreated_trajectory_identified": false,
+      "scan_policy_utility_released": false,
+      "figshare_3dra_cta_doi": "10.6084/m9.figshare.1354056.v3",
+      "figshare_3dra_cta_effective_aneurysms": 10,
+      "figshare_3dra_cta_released_files": 1,
+      "figshare_3dra_cta_released_csv_bytes": 2516,
+      "figshare_3dra_cta_source_images_meshes_or_fields_released": false,
+      "vwe_dryad_doi": "10.5061/dryad.p2ngf1vrg",
+      "vwe_unruptured_aneurysms": 41,
+      "vwe_released_files": 1,
+      "vwe_released_csv_bytes": 3572,
+      "vwe_mri_volumes_surfaces_or_spatial_maps_released": false,
+      "sah_segmentation_zenodo_doi": "10.5281/zenodo.8228847",
+      "sah_segmentation_record_license_present": false,
+      "direct_prior_threats": [
+        "primary_ctp_spatiotemporal_dynamics_and_dci_logistic_model",
+        "imageflownet_irregular_longitudinal_medical_image_forecasting",
+        "conditional_latent_diffusion_for_irregular_longitudinal_radiology",
+        "tesar_cde_informative_sampling_for_treatment_outcome_forecasting",
+        "presentation_ctp_clinical_machine_learning_for_dci_and_outcome",
+        "large_ncct_ctp_cta_dci_prediction_comparison",
+        "original_3dra_cta_cfd_reproducibility_analysis",
+        "original_global_and_local_vwe_hemodynamic_association_analysis"
+      ],
+      "candidates": [
+        {
+          "id": "informative_scan_aware_continuous_time_ctp_field_forecasting",
+          "score": 31.0,
+          "axis_scores": [4.5, 3.0, 2.0, 5.0, 2.0, 5.0, 5.0, 4.5],
+          "independent_units": "62_patients_with_291_original_exams_but_only_9_dci_events_and_a_clinically_informative_scan_and_treatment_process",
+          "payload_accessed": false,
+          "decision": "reject_current_version_image_trajectory_and_informative_sampling_methods_are_direct_prior_and_62_patient_units_cannot_support_the_residual_claim"
+        },
+        {
+          "id": "pre_dci_event_time_perfusion_early_warning",
+          "score": 29.0,
+          "axis_scores": [5.0, 2.5, 1.0, 5.0, 1.5, 5.0, 5.0, 4.0],
+          "independent_units": "nine_dci_events_and_the_primary_article_already_uses_early_cbf_and_later_pre_dci_tmax_change",
+          "payload_accessed": false,
+          "decision": "reject_current_version_endpoint_is_directly_occupied_and_the_event_count_cannot_support_a_new_high_capacity_predictor"
+        },
+        {
+          "id": "personalized_ctp_reacquisition_policy",
+          "score": 28.0,
+          "axis_scores": [5.0, 1.5, 1.5, 4.0, 2.0, 5.0, 5.0, 4.0],
+          "independent_units": "62_observational_care_trajectories_with_no_randomized_scan_action_or_released_radiation_delay_rescue_utility",
+          "payload_accessed": false,
+          "decision": "reject_current_version_unperformed_scan_value_and_policy_utility_are_not_identified"
+        },
+        {
+          "id": "treatment_conditioned_perfusion_counterfactual",
+          "score": 27.0,
+          "axis_scores": [5.0, 1.0, 1.5, 4.0, 1.5, 5.0, 5.0, 4.0],
+          "independent_units": "rescue_treatment_is_ctp_and_clinical_state_guided_without_randomized_assignment_or_untreated_paired_trajectory",
+          "payload_accessed": false,
+          "decision": "reject_current_version_counterfactual_perfusion_response_is_not_identified_from_observational_rescue_care"
+        },
+        {
+          "id": "cross_modality_3dra_cta_hemodynamic_invariance",
+          "score": 29.5,
+          "axis_scores": [4.5, 4.5, 0.5, 5.0, 0.5, 5.0, 4.5, 5.0],
+          "independent_units": "ten_paired_aneurysms_released_as_one_2516_byte_aggregate_csv_without_source_images_meshes_or_fields",
+          "payload_accessed": false,
+          "decision": "reject_current_version_the_primary_study_directly_occupies_modality_reproducibility_and_n_is_ten"
+        },
+        {
+          "id": "global_local_vwe_hemodynamic_discordance",
+          "score": 29.0,
+          "axis_scores": [4.5, 4.0, 0.5, 5.0, 2.0, 5.0, 3.0, 5.0],
+          "independent_units": "41_unruptured_aneurysms_released_as_one_3572_byte_tabular_summary_without_mri_surface_or_spatial_map_payload",
+          "payload_accessed": false,
+          "decision": "reject_current_version_the_primary_paper_already_reports_global_and_local_discordance_and_spatial_learning_targets_are_not_released"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_or_standalone_ctp_spreadsheet_nifti_zip_sah_ct_3dra_cta_vwe_payload_p0_method_architecture_pbs_or_gpu",
+      "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_with_independent_patient_units_prospective_prediction_time_and_policy_independent_labels_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "same_lesion_preprocessing_orbit_quotient_morphometry",
-    "most_recent_source_rejected_candidate": "multi_granularity_conformal_hemodynamic_surrogate",
+    "most_recent_source_rejected_candidate": "informative_scan_aware_continuous_time_ctp_field_forecasting",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -1284,7 +1401,13 @@
       "compliance_conditioned_flow_diverter_response",
       "lumen_to_wall_thickness_hotspot_prediction",
       "selective_rigid_cfd_to_fsi_referral",
-      "multi_granularity_conformal_hemodynamic_surrogate"
+      "multi_granularity_conformal_hemodynamic_surrogate",
+      "informative_scan_aware_continuous_time_ctp_field_forecasting",
+      "pre_dci_event_time_perfusion_early_warning",
+      "personalized_ctp_reacquisition_policy",
+      "treatment_conditioned_perfusion_counterfactual",
+      "cross_modality_3dra_cta_hemodynamic_invariance",
+      "global_local_vwe_hemodynamic_discordance"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -1363,7 +1486,13 @@
       "compressed_sensing_mri_reconstruction_or_paired_consistency",
       "generic_fluid_structure_neural_operator",
       "generic_multifidelity_rigid_to_fsi_residual_learning",
-      "multi_granularity_conformal_field_calibration_or_selective_simulation_referral"
+      "multi_granularity_conformal_field_calibration_or_selective_simulation_referral",
+      "generic_irregular_longitudinal_medical_image_forecasting",
+      "informative_observation_intensity_modeling_or_inverse_intensity_weighting",
+      "generic_temporal_transformer_or_latent_diffusion",
+      "observational_ctp_dci_classification",
+      "generic_cross_modality_consistency",
+      "tabular_vwe_hemodynamic_association_model"
     ]
   },
   "venue": {
@@ -1377,7 +1506,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_fsi_wall_source_audit",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_longitudinal_perfusion_source_audit",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -1442,7 +1571,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "unselected",
-    "active_candidate_status": "no_active_shortlist_after_fsi_wall_source_audit_no_primary_method_architecture_or_gpu",
+    "active_candidate_status": "no_active_shortlist_after_longitudinal_perfusion_source_audit_no_primary_method_architecture_or_gpu",
     "candidate_primary_estimand": "unselected",
     "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -1857,7 +1986,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_fsi_wall_source_audit",
+    "current_headline_architecture": "unselected_no_active_problem_after_longitudinal_perfusion_source_audit",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

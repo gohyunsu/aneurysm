@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 latest boundary:** longitudinal-perfusion candidates score
+> 31.0/29.0/28.0/27.0/29.5/29.0, all below 32. The CC0 source is open but has
+> 62 patients and nine DCI events; clinically informative scanning and CTP-guided
+> rescue treatment prevent identification of unperformed scans, untreated
+> trajectories and scan-policy value. Direct priors occupy irregular image
+> forecasting, diffusion, informative sampling and DCI prediction. No primary,
+> architecture, result row or GPU is selected; the paper remains
+> **not submission-ready**.
+
 > **2026-08-10 latest boundary:** FSI–wall candidates score
 > 30.5/29.5/26.5/24.5/29.0/31.0, all below 32. AnXplore reports 101
 > rigid/FSI simulations, but the verified public full-dataset tree is a fluid-

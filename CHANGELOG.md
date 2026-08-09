@@ -4,6 +4,24 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Longitudinal-perfusion batch stops before payload and compute
+
+- Informative-scan-aware CTP field forecasting, pre-DCI warning, personalized
+  reacquisition, treatment counterfactual, 3DRA–CTA invariance and global–local
+  VWE discordance score **31.0/29.0/28.0/27.0/29.5/29.0**. All are below 32.
+- The open CC0 release has 62 patients, 291 original exams, 873 maps and nine
+  DCI events. Scan timing is clinically informative and CTP guides rescue
+  treatment; repeated maps and interpolants are not independent natural-history
+  outcomes.
+- ImageFlowNet, longitudinal latent diffusion, TESAR-CDE and existing CTP/NCCT
+  DCI models are direct priors. The paired 3DRA–CTA and VWE records expose only
+  small tabular summaries and their papers directly occupy the associations.
+- Schema 4.9 freezes no standalone payload, P0/model/PBS/GPU/outer test,
+  `introai9`-only execution and complete exclusion of `junjinyong`.
+- 영향 파일: `docs/longitudinal-perfusion-source-audit-2026-08-10.md`, machine
+  contract/validator/tests, public research/data/server guides, educational
+  site, private manuscript history and this changelog.
+
 ## 2026-08-10 · FSI–wall rejection is live and verified
 
 - Exact source content `f92bae804469d806e3d48079246a2a889a97c08a` passed

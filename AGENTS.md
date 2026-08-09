@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 longitudinal-perfusion source-audit overlay:** Fresh source-only
+> batch는 informative-scan-aware continuous-time CTP field forecasting,
+> pre-DCI early warning, personalized reacquisition, treatment counterfactual,
+> 3DRA–CTA hemodynamic invariance와 global–local VWE discordance를
+> 31.0/29.0/28.0/27.0/29.5/29.0으로 판정했다. 모두 frozen admission line 32
+> 미만이다. Open CC0 CTP는 62 patient/291 original exam/873 map이지만 DCI는
+> 9건이며 scan timing이 clinically informative하고 CTP가 rescue treatment를
+> 유도한다. ImageFlowNet, longitudinal latent diffusion, TESAR-CDE와 기존
+> CTP/NCCT DCI prediction은 direct prior다. 3DRA–CTA와 VWE records는 각각
+> 10/41 aneurysm의 tabular summary만 공개하고 primary paper가 association을
+> 직접 점유한다. Standalone JSON/spreadsheet/NIfTI/ZIP/CSV/image/mesh/field
+> payload, P0, method, architecture, PBS/GPU와 outer test는 0이다. Schema 4.9
+> source of truth는 `problem_selection.longitudinal_perfusion_source_audit`와
+> `docs/longitudinal-perfusion-source-audit-2026-08-10.md`다. AURORA는
+> `introai9` PBS만 사용하며 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 FSI–wall deployment overlay:** Exact source content
 > `f92bae804469d806e3d48079246a2a889a97c08a`의 Quality run `31334866427`과
 > Pages run `31334866034`이 성공했다. Pages build API의 commit field는 직전

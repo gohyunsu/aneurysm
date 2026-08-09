@@ -1,5 +1,23 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 longitudinal-perfusion lineage boundary:** The primary CTP
+> study already models spatial/temporal dynamics and DCI with early CBF and
+> later pre-event TMax change. ImageFlowNet and MICCAI longitudinal latent
+> diffusion occupy irregular image forecasting; TESAR-CDE occupies informative
+> observation under treatment; CTP/clinical and large NCCT/CTP comparisons
+> occupy DCI prediction. The 3DRA–CTA and VWE papers directly occupy their
+> released tabular associations. Residual novelty would require prospective
+> prediction time, independent patient units and policy-independent labels,
+> absent here. [`source audit`](longitudinal-perfusion-source-audit-2026-08-10.md)
+
+## 0-LP. Current decision · repeated maps do not identify natural history
+
+Dryad exposes 291 original exams and 873 maps from 62 patients, but only nine
+DCI events. Clinically triggered scans and CTP-guided rescue treatment make the
+observation process informative. Masked reconstruction predicts an observed
+care trajectory; it does not reveal an unperformed scan or untreated outcome.
+The frozen maximum is 31.0/40, so no residual method or experiment is active.
+
 > **2026-08-10 FSI–wall lineage boundary:** Aneurysm FSI는 rigid-wall 가정이
 > OSI 등 wall functional을 바꿀 수 있음을 이미 보였고, generic FSI neural
 > operator와 rigid→FSI multi-fidelity residual learning은 인접 분야에서 직접

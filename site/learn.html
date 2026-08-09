@@ -42,7 +42,8 @@
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
-          DSA sequence와 prefix risk, rigid-wall CFD와 compliant-wall FSI,
+          DSA sequence와 prefix risk, 반복 CTP와 informative observation,
+          rigid-wall CFD와 compliant-wall FSI,
           WSS 시계열에서 TAWSS·OSI·RRT가 어떻게 계산되는지, mesh와 GNN은
           무엇이며 왜 그 자체가 novelty가 아닌지,
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
@@ -51,9 +52,9 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 audit은 FSI와 wall mechanics를 검토했지만 최고점이 31.0/40임을
-            확인했습니다. 논문의 101 rigid/FSI simulation과 공개 repository의
-            101 fluid mesh는 동일한 paired field dataset이 아닙니다. 현재 GNN,
+            최신 audit은 공개 aSAH CTP의 62명, 291회 검사, 873개 perfusion
+            map을 검토했지만 최고점이 31.0/40임을 확인했습니다. DCI 사건은
+            9건뿐이고 검사·치료 시점이 환자 상태에 좌우됩니다. 현재 GNN,
             neural operator, U-Net과 Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
@@ -61,13 +62,13 @@
           <span>현재 해야 하는 일</span>
           <strong>다음 단계는 genuinely new/revised source를 기다리는 일입니다.</strong>
           <p>
-            31.0점을 재가중하거나 FSI operator, multi-fidelity, conformal 같은
-            이름을 붙여 32점으로 만들지 않습니다. Paired rigid/FSI target,
-            independent wall-property reference와 residual method gap이 실제로
-            추가된 별도 후보만 다시 감사합니다. Gate 통과 전 model이나 GPU를
-            허가하지 않습니다.
+            31.0점을 재가중하거나 continuous-time model, diffusion forecaster,
+            treatment head 같은 이름을 붙여 32점으로 만들지 않습니다. 독립
+            환자·사건 수, 검사 결정 과정, 치료와 endpoint의 시간 관계를 실제로
+            식별할 수 있는 별도 source만 다시 감사합니다. Gate 통과 전 model이나
+            GPU를 허가하지 않습니다.
           </p>
-          <a href="../docs/fsi-wall-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -388,7 +389,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              최신 후보도 31.0/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              최신 반복 CTP 후보도 31.0/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
               stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
@@ -396,10 +397,15 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. FSI는 중요한 물리 현상이지만, 확인된 public fluid mesh를 paired rigid/FSI solution label로 해석할 수 없습니다. Wall property와 device response의 독립 target도 부족합니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 873개 CTP map은 873명의 독립 표본이 아닙니다. 62명의 291회 검사에서 TMax·CBF·MTT 세 지도를 만든 것이고, DCI 사건은 9건입니다. 검사와 치료가 환자 상태에 좌우되는 관측 과정까지 고려해야 합니다.</p>
             </aside>
             <article>
-              <span>CURRENT · FSI–WALL REJECTION</span>
+              <span>CURRENT · LONGITUDINAL PERFUSION REJECTION</span>
+              <div><h3>반복 촬영이면 미래와 치료 효과를 배울 수 있는가?</h3><p>아닙니다. 촬영하지 않은 날의 perfusion은 관측되지 않았고, 악화가 의심될 때 CT를 더 찍으며 CTP 결과가 치료에도 쓰였습니다. 단순 interpolation·masking은 이러한 선택 과정을 제거하지 못합니다. Irregular-time forecasting, informative-sampling model과 기존 DCI prediction도 직접 선행입니다.</p></div>
+              <b>상태</b><small>best 31.0/40 · no standalone payload/P0/PBS/model/GPU</small>
+            </article>
+            <article>
+              <span>HISTORY · FSI–WALL REJECTION</span>
               <div><h3>벽을 움직이게 만들면 바로 새 모델 문제가 되는가?</h3><p>아닙니다. 논문이 수행한 101 rigid/FSI 계산과 공개 저장소의 101 fluid mesh는 서로 다른 증거입니다. Paired time-resolved field와 wall-property label 없이 rigid→compliant operator를 검증할 수 없고, generic FSI operator와 conformal referral도 직접 선행입니다.</p></div>
               <b>상태</b><small>best 31.0/40 · no mesh/field/image/P0/model/GPU</small>
             </article>
@@ -468,6 +474,55 @@
               <div><h3>두 uncertainty 축</h3><p>BC completion sample 간 변동은 미관측 입력의 structural uncertainty, ensemble 간 변동은 finite-data/model uncertainty로 계산합니다.</p></div>
               <b>검증</b><small>BC shift와 geometry OOD를 각각 추적</small>
             </article>
+          </div>
+
+          <div class="explain-block">
+            <div>
+              <p class="eyebrow">REPEATED CTP · BEGINNER WINDOW</p>
+              <h3>873개 map을 873명처럼 세면 왜 안 되는가?</h3>
+            </div>
+            <div class="prose">
+              <p>
+                CTP(CT perfusion)는 조영제가 뇌를 통과하는 영상을 시간에 따라
+                촬영해 혈류 지도를 만듭니다. <b>CBF</b>는 단위 시간당 조직을
+                지나는 혈류량, <b>MTT</b>는 평균 통과 시간, <b>TMax</b>는 조영제
+                반응이 가장 늦게 나타나는 시점을 요약합니다. 한 번의 검사에서
+                이 세 지도가 나오므로 map 수는 검사 수의 세 배입니다.
+              </p>
+              <div class="large-equation">
+                62 patients → 291 examinations → 873 maps ≠ 873 independent patients
+              </div>
+              <p>
+                통계적 독립 단위는 먼저 환자입니다. 같은 사람의 여러 검사는
+                서로 강하게 연관되고, DCI(delayed cerebral ischemia)는 9명에서만
+                발생했습니다. 따라서 voxel이나 map을 임의로 나누면 같은 환자의
+                정보가 train과 test에 섞이고, 표본 수와 확신을 크게 부풀립니다.
+              </p>
+              <p>
+                더 어려운 문제는 <b>informative observation</b>입니다. 이 cohort는
+                임상 또는 TCD 악화가 의심될 때 CT 평가를 시행했고 CTP 결과는
+                milrinone 등 치료 판단에도 사용됐습니다. 즉 “언제 촬영했는가”와
+                “그 다음 상태가 어땠는가”가 질병 중증도와 치료에 함께 연결됩니다.
+                촬영하지 않은 시점은 무작위 결측이 아니며, 선형 보간으로 만든
+                지도도 실제로 관찰된 새 환자·새 사건이 아닙니다.
+              </p>
+              <p>
+                그래서 이 자료만으로는 “오늘 검사를 생략했으면 어땠을까”,
+                “치료하지 않았으면 perfusion이 어떻게 변했을까”, “모델이 정한
+                재검사 시점이 임상 정책보다 나은가”를 식별할 수 없습니다.
+                ImageFlowNet·irregular longitudinal diffusion·TESAR-CDE와 기존
+                DCI 예측 연구가 forecasting, 불규칙 시간, informative sampling을
+                이미 점유하므로 block을 결합하는 것만으로 독립 novelty도 생기지
+                않습니다.
+              </p>
+              <p>
+                Frozen 8축 gate의 최고 후보는 31.0/40입니다. 32점 미만이므로
+                standalone payload를 열지 않았고, P0·PBS·GPU·architecture도
+                만들지 않았습니다. 이는 서버 장애가 아니라 연구 질문이 아직
+                compute를 정당화하지 못했다는 정상적인 early stop입니다.
+              </p>
+              <p><a href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">Longitudinal-perfusion 상세 audit 읽기 ↗</a></p>
+            </div>
           </div>
 
           <div class="why-fancy">

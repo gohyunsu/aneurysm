@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.8":
-        raise ProtocolError("The current research-state schema must be version 4.8.")
+    if protocol["schema_version"] != "4.9":
+        raise ProtocolError("The current research-state schema must be version 4.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_fsi_wall_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_longitudinal_perfusion_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -198,6 +198,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "treatment_surveillance_source_audit",
             "acquisition_flow_source_audit",
             "fsi_wall_source_audit",
+            "longitudinal_perfusion_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -207,12 +208,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_fsi_wall_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_longitudinal_perfusion_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_public_manuscripts_and_repository_tree_only_no_anxplore_vtk_rigid_fsi_field_wall_motion_microct_fem_or_new_benchanxplore_member_payload_for_fsi_wall_audit"
+        != "official_source_metadata_embedded_readme_public_manuscripts_and_file_manifests_only_no_standalone_ctp_json_spreadsheet_nifti_zip_sah_ct_archive_3dra_cta_csv_vwe_csv_image_mesh_or_field_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -224,14 +225,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/fsi-wall-source-audit-2026-08-10.md"
+        != "docs/longitudinal-perfusion-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "multi_granularity_conformal_hemodynamic_surrogate"
+        != "informative_scan_aware_continuous_time_ctp_field_forecasting"
     ):
         raise ProtocolError(
-            "The current FSI-wall boundary must retain no selected primary, "
+            "The current longitudinal-perfusion boundary must retain no selected primary, "
             "method, GPU, outer test, P1, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -292,6 +293,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "lumen_to_wall_thickness_hotspot_prediction",
         "selective_rigid_cfd_to_fsi_referral",
         "multi_granularity_conformal_hemodynamic_surrogate",
+        "informative_scan_aware_continuous_time_ctp_field_forecasting",
+        "pre_dci_event_time_perfusion_early_warning",
+        "personalized_ctp_reacquisition_policy",
+        "treatment_conditioned_perfusion_counterfactual",
+        "cross_modality_3dra_cta_hemodynamic_invariance",
+        "global_local_vwe_hemodynamic_discordance",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -372,6 +379,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_fluid_structure_neural_operator",
         "generic_multifidelity_rigid_to_fsi_residual_learning",
         "multi_granularity_conformal_field_calibration_or_selective_simulation_referral",
+        "generic_irregular_longitudinal_medical_image_forecasting",
+        "informative_observation_intensity_modeling_or_inverse_intensity_weighting",
+        "generic_temporal_transformer_or_latent_diffusion",
+        "observational_ctp_dci_classification",
+        "generic_cross_modality_consistency",
+        "tabular_vwe_hemodynamic_association_model",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -2489,6 +2502,183 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("FSI-wall rejection and introai9-only boundary")
 
+    longitudinal_audit = problem_selection["longitudinal_perfusion_source_audit"]
+    _require_keys(
+        longitudinal_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "official_record_embedded_readme_and_file_manifests_accessed",
+            "any_standalone_ctp_json_spreadsheet_nifti_zip_sah_ct_archive_3dra_cta_csv_vwe_csv_image_mesh_or_field_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "observed_introai9_pbs_job_count",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "ctp_dryad_doi",
+            "ctp_license",
+            "ctp_version",
+            "ctp_patients",
+            "ctp_original_exams",
+            "ctp_parametric_maps",
+            "ctp_parameters",
+            "ctp_dci_events",
+            "ctp_vasospasm_patients",
+            "ctp_mean_original_exams_per_patient",
+            "ctp_mean_inter_exam_days",
+            "ctp_inter_exam_day_range",
+            "ctp_paper_interpolated_exams",
+            "ctp_single_center_single_scanner",
+            "ctp_source_slice_thickness_mm",
+            "ctp_mni_grid_shape",
+            "ctp_mni_voxel_mm",
+            "ctp_observation_process_clinically_informative",
+            "ctp_guided_rescue_treatment_reported",
+            "unobserved_untreated_trajectory_identified",
+            "scan_policy_utility_released",
+            "figshare_3dra_cta_doi",
+            "figshare_3dra_cta_effective_aneurysms",
+            "figshare_3dra_cta_released_files",
+            "figshare_3dra_cta_released_csv_bytes",
+            "figshare_3dra_cta_source_images_meshes_or_fields_released",
+            "vwe_dryad_doi",
+            "vwe_unruptured_aneurysms",
+            "vwe_released_files",
+            "vwe_released_csv_bytes",
+            "vwe_mri_volumes_surfaces_or_spatial_maps_released",
+            "sah_segmentation_zenodo_doi",
+            "sah_segmentation_record_license_present",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.longitudinal_perfusion_source_audit",
+    )
+    expected_longitudinal_scores = {
+        "informative_scan_aware_continuous_time_ctp_field_forecasting": 31.0,
+        "pre_dci_event_time_perfusion_early_warning": 29.0,
+        "personalized_ctp_reacquisition_policy": 28.0,
+        "treatment_conditioned_perfusion_counterfactual": 27.0,
+        "cross_modality_3dra_cta_hemodynamic_invariance": 29.5,
+        "global_local_vwe_hemodynamic_discordance": 29.0,
+    }
+    observed_longitudinal_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in longitudinal_audit["candidates"]
+    }
+    longitudinal_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in longitudinal_audit["candidates"]
+    )
+    if (
+        longitudinal_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or longitudinal_audit["audit_document"]
+        != "docs/longitudinal-perfusion-source-audit-2026-08-10.md"
+        or longitudinal_audit["automatic_selection_threshold"] != 32.0
+        or longitudinal_audit["best_candidate_id"]
+        != "informative_scan_aware_continuous_time_ctp_field_forecasting"
+        or longitudinal_audit["best_score"] != 31.0
+        or longitudinal_audit["best_score"]
+        >= longitudinal_audit["automatic_selection_threshold"]
+        or longitudinal_audit["active_shortlist_count"] != 0
+        or longitudinal_audit["primary_problem_selected"] is not False
+        or longitudinal_audit[
+            "official_record_embedded_readme_and_file_manifests_accessed"
+        ]
+        is not True
+        or longitudinal_audit[
+            "any_standalone_ctp_json_spreadsheet_nifti_zip_sah_ct_archive_3dra_cta_csv_vwe_csv_image_mesh_or_field_payload_accessed"
+        ]
+        is not False
+        or longitudinal_audit["executable_p0_registered"] is not False
+        or longitudinal_audit["method_selected"] is not False
+        or longitudinal_audit["architecture_selected"] is not False
+        or longitudinal_audit["gpu_training_authorized"] is not False
+        or longitudinal_audit["outer_test_authorized"] is not False
+        or longitudinal_audit["submission_identity_active"] is not False
+        or longitudinal_audit["execution_server"] != "introai9"
+        or longitudinal_audit["observed_introai9_pbs_job_count"] != 0
+        or longitudinal_audit["pbs_job_created"] is not False
+        or longitudinal_audit["login_node_gpu_command_executed"] is not False
+        or longitudinal_audit["junjinyong_accessed_for_this_audit"] is not False
+        or longitudinal_audit["ctp_dryad_doi"]
+        != "10.5061/dryad.0zpc86784"
+        or longitudinal_audit["ctp_license"] != "CC0-1.0"
+        or longitudinal_audit["ctp_version"] != 7
+        or longitudinal_audit["ctp_patients"] != 62
+        or longitudinal_audit["ctp_original_exams"] != 291
+        or longitudinal_audit["ctp_parametric_maps"] != 873
+        or longitudinal_audit["ctp_parameters"] != ["TMax", "CBF", "MTT"]
+        or longitudinal_audit["ctp_dci_events"] != 9
+        or longitudinal_audit["ctp_vasospasm_patients"] != 42
+        or longitudinal_audit["ctp_mean_original_exams_per_patient"] != 4.69
+        or longitudinal_audit["ctp_mean_inter_exam_days"] != 2.8
+        or longitudinal_audit["ctp_inter_exam_day_range"] != [0.6, 13.1]
+        or longitudinal_audit["ctp_paper_interpolated_exams"] != 302
+        or longitudinal_audit["ctp_single_center_single_scanner"] is not True
+        or longitudinal_audit["ctp_source_slice_thickness_mm"] != 5.0
+        or longitudinal_audit["ctp_mni_grid_shape"] != [181, 217, 181]
+        or longitudinal_audit["ctp_mni_voxel_mm"] != [1.0, 1.0, 1.0]
+        or longitudinal_audit["ctp_observation_process_clinically_informative"]
+        is not True
+        or longitudinal_audit["ctp_guided_rescue_treatment_reported"] is not True
+        or longitudinal_audit["unobserved_untreated_trajectory_identified"]
+        is not False
+        or longitudinal_audit["scan_policy_utility_released"] is not False
+        or longitudinal_audit["figshare_3dra_cta_doi"]
+        != "10.6084/m9.figshare.1354056.v3"
+        or longitudinal_audit["figshare_3dra_cta_effective_aneurysms"] != 10
+        or longitudinal_audit["figshare_3dra_cta_released_files"] != 1
+        or longitudinal_audit["figshare_3dra_cta_released_csv_bytes"] != 2516
+        or longitudinal_audit[
+            "figshare_3dra_cta_source_images_meshes_or_fields_released"
+        ]
+        is not False
+        or longitudinal_audit["vwe_dryad_doi"]
+        != "10.5061/dryad.p2ngf1vrg"
+        or longitudinal_audit["vwe_unruptured_aneurysms"] != 41
+        or longitudinal_audit["vwe_released_files"] != 1
+        or longitudinal_audit["vwe_released_csv_bytes"] != 3572
+        or longitudinal_audit["vwe_mri_volumes_surfaces_or_spatial_maps_released"]
+        is not False
+        or longitudinal_audit["sah_segmentation_zenodo_doi"]
+        != "10.5281/zenodo.8228847"
+        or longitudinal_audit["sah_segmentation_record_license_present"]
+        is not False
+        or observed_longitudinal_scores != expected_longitudinal_scores
+        or not longitudinal_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in longitudinal_audit["candidates"]
+        )
+        or longitudinal_audit["decision"]
+        != "reject_all_without_score_repair_or_standalone_ctp_spreadsheet_nifti_zip_sah_ct_3dra_cta_vwe_payload_p0_method_architecture_pbs_or_gpu"
+        or longitudinal_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_with_independent_patient_units_prospective_prediction_time_and_policy_independent_labels_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The longitudinal-perfusion audit must preserve all six frozen "
+            "source-only rejections, the 31.0/40 maximum, 62 patients and nine "
+            "DCI events, no standalone payload/P0/model/PBS/GPU, and "
+            "introai9-only execution."
+        )
+    checks.append("longitudinal-perfusion rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -2568,7 +2758,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_fsi_wall_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_longitudinal_perfusion_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -2731,7 +2921,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_fsi_wall_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_longitudinal_perfusion_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

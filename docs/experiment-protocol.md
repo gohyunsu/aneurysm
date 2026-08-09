@@ -1,6 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.8 · 2026-08-10
+버전: 4.9 · 2026-08-10
+
+> **Current gate:** longitudinal-perfusion batch 최고점은 31.0/40이다. 62
+> patient/291 original exam/873 map은 공개되어 있지만 DCI 9건, informative
+> scan timing과 CTP-guided treatment 때문에 future natural-history field,
+> treatment counterfactual과 scan-policy value가 식별되지 않는다. Standalone
+> JSON/spreadsheet/NIfTI/ZIP/CSV payload, P0, method, architecture, PBS/GPU와
+> outer test는 unauthorized다. Fresh candidate가 32/40 이상일 때만
+> `introai9` CPU/PBS method-free P0를 별도 등록하며 `junjinyong`은 제외한다.
 
 > **Current gate:** FSI–wall batch 최고점은 31.0/40으로 admission line 32
 > 미만이다. AnXplore의 공개 fluid mesh를 paired rigid/FSI time-resolved solution
@@ -43,6 +51,19 @@
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## S-LP · longitudinal perfusion and biomarker batch · all rejected, no execution
+
+Informative-scan-aware CTP field forecasting, pre-DCI warning, personalized
+reacquisition, treatment counterfactual, 3DRA–CTA invariance와 VWE–hemodynamic
+discordance를 같은 frozen 8축 rubric으로 평가했다. 점수는 31.0, 29.0, 28.0,
+27.0, 29.5, 29.0이며 32를 넘는 후보가 없다. 291 exam을 62 patient보다 많은
+independent outcome unit로 세지 않고, nine DCI와 clinical scan/treatment process를
+고정한다. ImageFlowNet, longitudinal diffusion, TESAR-CDE와 기존 CTP/NCCT DCI
+모델은 mandatory direct baseline이다. 상세 계약은
+[`longitudinal-perfusion audit`](longitudinal-perfusion-source-audit-2026-08-10.md)에
+고정했다. Payload와 compute는 0이며 향후 허가된 실행도 `introai9` PBS만
+사용한다.
 
 ## S-FSI · compliant-wall and wall-mechanics batch · all rejected, no execution
 

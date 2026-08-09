@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 longitudinal-perfusion audit:** Dryad
+> `10.5061/dryad.0zpc86784`는 CC0 version 7, 62 patient, 291 original exam과
+> 873 MNI-normalized TMax/CBF/MTT map을 보고한다. 독립 clinical endpoint는
+> DCI 9건이며 paper의 302 interpolated exam을 추가 patient로 세지 않는다.
+> Figshare `10.6084/m9.figshare.1354056.v3`는 10 aneurysm의 2,516-byte summary
+> CSV 하나, VWE Dryad `10.5061/dryad.p2ngf1vrg`는 41 unruptured aneurysm의
+> 3,572-byte CSV 하나다. Official record/embedded README/file manifest만
+> 감사했고 standalone JSON/XLSX/NIfTI/ZIP/CSV/image/mesh/field payload는 열지
+> 않았다. 모두 rejected source history이며 training role/P0/model/GPU는 0이다.
+
 > **2026-08-10 FSI–wall audit:** AnXplore의 논문 단위와 공개 파일 단위를
 > 분리한다. 논문은 101 semi-idealized aneurysm에서 rigid와 FSI simulation을
 > 비교하지만 official repository의 확인된 `full_dataset` tree는 101

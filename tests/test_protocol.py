@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "FSI-wall boundary"):
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "FSI-wall boundary"):
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "FSI-wall boundary"):
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion boundary"):
             validate_protocol(candidate)
 
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
@@ -385,6 +385,52 @@ class ProtocolTests(unittest.TestCase):
             "anxplore_paired_rigid_fsi_solution_fields_publicly_released"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "FSI-wall audit"):
+            validate_protocol(candidate)
+
+    def test_longitudinal_perfusion_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "longitudinal_perfusion_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 31.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["ctp_patients"], 62)
+        self.assertEqual(audit["ctp_original_exams"], 291)
+        self.assertEqual(audit["ctp_parametric_maps"], 873)
+        self.assertEqual(audit["ctp_dci_events"], 9)
+        self.assertEqual(audit["ctp_vasospasm_patients"], 42)
+        self.assertTrue(audit["ctp_observation_process_clinically_informative"])
+        self.assertTrue(audit["ctp_guided_rescue_treatment_reported"])
+        self.assertFalse(audit["unobserved_untreated_trajectory_identified"])
+        self.assertEqual(audit["figshare_3dra_cta_effective_aneurysms"], 10)
+        self.assertFalse(
+            audit["figshare_3dra_cta_source_images_meshes_or_fields_released"]
+        )
+        self.assertEqual(audit["vwe_unruptured_aneurysms"], 41)
+        self.assertFalse(
+            audit["vwe_mri_volumes_surfaces_or_spatial_maps_released"]
+        )
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["observed_introai9_pbs_job_count"], 0)
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["longitudinal_perfusion_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["longitudinal_perfusion_source_audit"][
+            "ctp_dci_events"
+        ] = 90
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion audit"):
             validate_protocol(candidate)
 
     def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:

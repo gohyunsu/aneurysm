@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **2026-08-10 longitudinal-perfusion boundary:** Dryad CTP는 62 patient,
+> 291 original exam, 873 TMax/CBF/MTT map을 공개하지만 DCI는 9건이다.
+> 촬영은 임상 상태에 의해 informative하고 CTP가 rescue treatment를 유도하므로
+> unperformed scan과 untreated trajectory는 식별되지 않는다. ImageFlowNet,
+> longitudinal diffusion, TESAR-CDE와 CTP/NCCT DCI prediction은 direct prior다.
+> 여섯 후보는 31.0/29.0/28.0/27.0/29.5/29.0으로 모두 기각한다. 자세한
+> 논리는 [`frozen audit`](longitudinal-perfusion-source-audit-2026-08-10.md)에
+> 있다. Standalone payload/P0/model/PBS/GPU는 0이고 실행은 `introai9`만
+> 허용하며 `junjinyong`은 제외한다.
+
 > **2026-08-10 FSI–wall boundary:** Rigid-wall CFD와 compliant-wall FSI의
 > 차이는 중요한 현상이지만, 중요하다는 사실이 곧 새 학습 문제를 식별하지는
 > 않는다. AnXplore의 101-case 논문 결과와 official repository에서 확인되는
@@ -53,9 +63,15 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · hemodynamic-endpoint batch best 31/40 and all source-rejected · topology-procedure batch best 28.5/40 and all source-rejected · context-treatment batch best 31.5/40 and all source-rejected · acquisition-flow batch best 27.5/40 and all source-rejected · FSI-wall batch best 31.0/40 and all source-rejected · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · hemodynamic-endpoint batch best 31/40 and all source-rejected · topology-procedure batch best 28.5/40 and all source-rejected · context-treatment batch best 31.5/40 and all source-rejected · acquisition-flow batch best 27.5/40 and all source-rejected · FSI-wall batch best 31.0/40 and all source-rejected · longitudinal-perfusion batch best 31.0/40 and all source-rejected · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
 가장 최근 기준선은
+[`longitudinal-perfusion-source-audit-2026-08-10.md`](longitudinal-perfusion-source-audit-2026-08-10.md)다.
+Open CTP의 map count와 patient/event count를 구분하고 informative scanning,
+CTP-guided treatment 및 image/time-series direct priors를 함께 반영했다. 최고
+31.0/40으로 standalone payload, P0, method, architecture와 GPU는 0이다.
+
+직전 기준선은
 [`fsi-wall-source-audit-2026-08-10.md`](fsi-wall-source-audit-2026-08-10.md)다.
 AnXplore의 paper-level 101 rigid/FSI simulation과 repository-level 101 fluid
 mesh를 구분한다. Paired time-resolved solution fields, wall-property labels와

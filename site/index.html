@@ -45,18 +45,19 @@
           <em>First prove the task earns a model.</em>
         </h1>
         <p class="hero-lede">
-          Compliant-wall FSI는 rigid-wall CFD보다 생체역학적으로 풍부하지만,
-          공개 자산의 101 fluid mesh는 101 paired rigid/FSI time-series label이
-          아닙니다. Wall property와 device response의 독립 target도 부족하고,
-          generic FSI operator·multi-fidelity residual·conformal referral은 이미
-          direct prior입니다. 최신 최고점은 31.0/40이며 active shortlist,
+          최신 longitudinal-perfusion audit은 공개 aSAH CTP의 62명·291회 검사·
+          873개 perfusion map을 검토했습니다. 그러나 map 수는 독립 환자나
+          DCI 사건 수가 아닙니다. DCI는 9건뿐이고 검사 시점과 치료가 임상
+          상태에 따라 달라져, 관측되지 않은 trajectory나 재검사 정책의 효과를
+          식별할 수 없습니다. 최신 최고점은 31.0/40이며 active shortlist,
           selected primary, model, GPU와 outer test는 모두 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/fsi-wall-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/fsi-wall-source-audit-2026-08-10.md">FSI history ↗</a>
           <a class="button ghost" href="../docs/acquisition-flow-source-audit-2026-08-10.md">Acquisition history ↗</a>
           <a class="button ghost" href="../docs/treatment-surveillance-source-audit-2026-08-10.md">Treatment history ↗</a>
           <a class="button ghost" href="../docs/provenance-evaluation-source-audit-2026-08-10.md">Provenance history ↗</a>
@@ -116,7 +117,7 @@
 
       <div class="hero-meta">
         <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>FSI–wall best 31.0/40 · all rejected</b></div>
+        <div><span>Current evidence</span><b>Longitudinal perfusion best 31.0/40 · all rejected</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
       </div>
@@ -184,10 +185,12 @@
           <p class="eyebrow">CURRENT GAP STATUS</p>
           <h3>No active gap survives both direct priors and unit adequacy.</h3>
           <p>
-            AnXplore의 101-case 논문 결과와 공개된 101 fluid mesh는 같은 label
-            count가 아닙니다. Paired rigid/FSI field, wall property와 독립 device-
-            response target가 없고 generic FSI/conformal operator는 direct
-            prior입니다. 31.0을 사후 재가중해 32로 만들지 않습니다.
+            공개 aSAH CTP의 873개 map은 62명의 291회 검사에서 나온 세 종류
+            지도입니다. 독립 사건은 DCI 9건뿐이고, 증상이 심할수록 검사·치료가
+            달라지는 informative observation process가 있습니다. Longitudinal
+            forecasting·early warning·reacquisition·counterfactual은 이미 직접
+            선행이 있거나 필요한 반사실을 식별할 수 없습니다. 31.0을 사후
+            재가중해 32로 만들지 않습니다.
           </p>
           <div class="gap-equation" aria-label="최고 source 점수도 admission gate보다 낮아 실행 권한이 생기지 않는 관계">
             <span>latest source score = 31.0</span>
@@ -224,7 +227,7 @@
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
           현재 architecture는 없습니다. 아래 흐름은 historical AneuX P0 asset
-          chain과 early stop을 설명하는 기록입니다. 최신 FSI–wall batch는
+          chain과 early stop을 설명하는 기록입니다. 최신 longitudinal-perfusion batch는
           P0 이전에 모두 기각됐습니다.
         </p>
       </div>
@@ -235,7 +238,8 @@
         <p>
           DiffusionNet, PointNet++, E(3)-equivariant mesh network, topology module과
           surface foundation features는 향후 strong controls일 수 있지만 현재
-          method가 아닙니다. 최고 source score도 31.0이라 P0와 P1은 열리지 않았습니다.
+          method가 아닙니다. 반복 CTP도 최고 source score가 31.0이라 P0와 P1은
+          열리지 않았습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>

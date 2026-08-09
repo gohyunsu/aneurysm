@@ -6,6 +6,17 @@
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
 운영 명령과 private path는 Git에서 제외된 `SERVER_GUIDE.md`를 따른다.
 
+## 2026-08-10 · longitudinal-perfusion source audit, no job authorized
+
+- Frozen scores are 31.0/29.0/28.0/27.0/29.5/29.0, all below 32.
+- Only official records, embedded README text, file manifests and public
+  manuscripts were inspected. No standalone JSON, spreadsheet, NIfTI/ZIP, SAH
+  CT archive, 3DRA/CTA CSV, VWE CSV, image, mesh or field payload was opened.
+- There is no executable P0, PBS submission, GPU job or monitoring loop. This
+  is a source-gate stop, not a server failure.
+- AURORA remains `introai9` PBS only. `junjinyong` is excluded from connection,
+  query, submission and monitoring.
+
 ## 2026-08-10 · FSI–wall source audit, no job authorized
 
 - Frozen scores are 30.5/29.5/26.5/24.5/29.0/31.0, all below 32.
