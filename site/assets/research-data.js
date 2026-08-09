@@ -447,6 +447,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Topology–procedure source rejection is live",
+      copy: "Exact content 3f8e0a5d2c570cfb1c75f22f34d3989fdd5ff71d passed Quality run 31327799890 and Pages run 31327799626. The live overview renders batch best 28.5/40, all rejected, active shortlist/primary/method/architecture/P0/GPU zero and the detailed audit link; the audit document is also deployed. Deployment verification changes no score, archive/model-weight/patient-image access, model, compute, outer test or submission identity. introai9 remains the only execution server and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "A fresh topology–procedure batch is rejected before payload and compute",
       copy: "A new preprint and Figshare record already define tornadic WSS topology and in-vivo observation, while exposing only three CFD WSS cases and two unpaired MRI figure cases. Robust topology, set-valued C-arm views, open-set TOF detection and rheology/slip uncertainty score 24.0/28.5/24.0/28.5/28.5. MAXIMUS is weights-only, the view paper has 18 patients and the solver release has one aneurysm geometry. Schema 4.3 freezes no large archive, patient image, P0, model or GPU; introai9 remains the only execution server and junjinyong remains excluded.",
