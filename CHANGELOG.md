@@ -4,6 +4,45 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · AneuX same-lesion preprocessing orbit enters a P0-only shortlist
+
+- Fresh six-candidate red team에서 AneuX resolution × cut variant를 독립 표본이
+  아니라 같은 병변의 preprocessing orbit으로 다루는 후보만 **34/40**으로
+  admission line을 넘겼다. Active source shortlist는 1이지만 selected primary,
+  method, architecture, GPU, outer test와 submission identity는 0이다.
+- AneuX 원 morphometry/cut robustness, MATCH reconstruction variability,
+  DiffusionNet, AneuX PointNet++, 2026 multi-resolution latent shape, generic
+  consistency와 E(3) equivariance를 direct prior/control로 올렸다. 따라서 남을
+  수 있는 novelty는 orbit quotient가 casewise functional/prediction stability와
+  source-held-out biological separation을 동시에 보존하는 경우로 좁혔다.
+- CSV/model payload 전에 `configs/aneux_preprocessing_orbit_p0.json`을 고정했다.
+  Official 12,992,074-byte tabular ZIP은 exact MD5와 aggregate patient/cut/
+  morphometry mapping을, 6,277,720,483-byte model ZIP은 HEAD/tail/central-directory
+  exact range만 검사한다. Full model download와 member payload access는 금지된다.
+- Official repository README의 CC BY 4.0 표기와 Zenodo v1.0 distribution
+  record의 CC BY-NC 4.0+추가 attribution 조건이 충돌하므로, 배포 record의 더
+  엄격한 조건을 적용하고 geometry/table을 공개 저장소에 재배포하지 않는다.
+- 실행은 `introai9` PBS의 CPU 4/16 GB/GPU 0 한 번뿐이다. 동일 exact job 안의
+  각 HTTP operation의 transient transport에만 0/10/30초 최대 세 attempt를 허용하고, semantic/parser
+  failure retry와 same-source resubmission은 금지한다. P0 pass도 별도 method-free
+  P1 등록만 허용한다.
+- 직전 cycle-functional/open-CTA/goal-oriented/4D-flow failure와 no-repair
+  판정은 그대로 보존한다. `junjinyong`은 접속·실행·조회·모니터링에서 계속
+  제외한다.
+- 영향 파일: `docs/aneux-preprocessing-orbit-audit-2026-08-09.md`,
+  `configs/aneux_preprocessing_orbit_p0.json`,
+  `src/aurora/aneux_preprocessing_orbit_p0.py`,
+  `scripts/audit_aneux_preprocessing_orbit_p0.py`,
+  `cluster/pbs_aneux_preprocessing_orbit_p0.pbs`,
+  `tests/test_aneux_preprocessing_orbit_p0.py`, `.github/workflows/quality.yml`, `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`, `AGENTS.md`, `README.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`, `docs/data-acquisition.md`,
+  `docs/server-execution.md`, `site/index.html`,
+  `site/learn.html`, `site/assets/aurora.js`, `site/assets/research-data.js`,
+  `CHANGELOG.md`.
+
 ## 2026-08-09 · Cycle-functional P0 is execution-incomplete and the candidate closes
 
 - Exact public source `754ed746fb60aef707f639189ad59e84a0fca556`의

@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "두 exact file identity는 고정했지만 processed payload는 materialize되지 않았습니다.",
+      description: "두 official archive의 byte/MD5는 고정했고 CSV/model payload는 아직 읽지 않았습니다.",
       connector: "identity pinned",
-      title: "Source identity only",
-      copy: "9.63 GB steady and 23.74 GB transient payload were not accessed",
+      title: "Official source identity",
+      copy: "AneuX v1.0 tabular and model archive sizes and MD5 are frozen",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Physical WSS, 80-frame geometry와 topology checks는 실행 전에 중단돼 미평가입니다.",
-      connector: "not evaluated",
-      title: "Scientific gate unopened",
-      copy: "No physical WSS, case linkage, labels, nodes or faces were audited",
+      description: "750 lesion의 patient, cut, morphometry mapping과 model listing 구조를 P0에서만 검사합니다.",
+      connector: "audit pending",
+      title: "Same-lesion orbit contract",
+      copy: "Patient groups, three resolutions, four cuts and 170 features must agree",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Execution-incomplete 규칙을 적용해 repair/rerun 없이 candidate version을 닫았습니다.",
-      connector: "closed",
-      title: "No scientific verdict",
-      copy: "No P1, method, architecture, GPU, outer test or same-contract repair",
+      description: "All checks pass면 별도 method-free P1만, fail/incomplete면 이 candidate version을 닫습니다.",
+      connector: "all or close",
+      title: "No model authorization",
+      copy: "No architecture, GPU, outer test or rupture-status performance claim",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

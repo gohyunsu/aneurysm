@@ -25,6 +25,23 @@
 `ssu_a6gpu_*` 파일명은 이미 끝난 run의 재현 이력이며, 새 제출 대상으로
 해석하거나 복사하지 않는다.
 
+## 2026-08-09 · AneuX preprocessing-orbit P0, pending
+
+- Exact public commit을 먼저 고정한 뒤 `introai9`의 `coss_agpu` PBS에서
+  4 CPU/16 GB/GPU 0으로 한 번만 실행한다. Login node에서 payload audit이나
+  GPU 명령을 실행하지 않는다.
+- Official 13 MB tabular ZIP은 private run cache에 받고 exact size/MD5 뒤 필요한
+  CSV만 읽는다. 6.28 GB model ZIP은 HEAD, tail과 central-directory exact HTTP
+  range만 읽고 full archive와 member payload는 읽지 않는다.
+- 각 HTTP operation의 transient timeout/reset/408/429/5xx에만 0/10/30초 최대
+  세 attempt를 허용한다. Semantic/parser/contract failure는 retry하지 않고,
+  같은 public source commit의 PBS resubmission도 wrapper가 거부한다.
+- Private output은 job status와 deidentified aggregate만 남긴다. Public 결과는
+  case identifier, member listing, row-level clinical/morphometric value와 internal
+  path를 포함하지 않는다.
+- P0 pass도 별도 method-free P1 등록만 허용한다. GPU allocation, model training,
+  outer test와 status performance는 계속 금지된다.
+
 ## 2026-08-09 · Open-CTA physical-coordinate P0 execution-incomplete
 
 - Exact public source `b437875f884346d7f0fada68f089981664ae2a3c`의

@@ -1,5 +1,13 @@
 # Dataset acquisition plan
 
+> **Current override · 2026-08-09:** AneuX preprocessing-orbit P0가 유일한
+> source shortlist다. Exact public commit 뒤 `introai9` CPU/PBS에서 official
+> `data-v1.0.zip` 13 MB만 private cache에 받고, `models-v1.0.zip` 6.28 GB는
+> HEAD/tail/central-directory exact byte range만 읽는다. Full model archive와
+> mesh member payload는 P0에서 받지 않는다. P0 pass도 별도 method-free P1
+> selective-staging contract만 허용한다. 아래의 complete-corpus 계획과 “first
+> executable milestone”은 historical storage planning이며 현재 실행 권한이 아니다.
+
 ## Storage decision
 
 Do not place the complete raw corpus in this repository or in the current local workspace. At the time this plan was written, the local volume had only 32 GB free. The full corpus needs substantially more after extraction.
@@ -15,8 +23,8 @@ Recommended locations:
 | Priority | Dataset | Download | Published compressed size | Why |
 |---|---|---|---:|---|
 | P0 | BenchAnXplore | `coarse_03_dataset.zip` | 1.12 GB (1,123,362,206 bytes) | Required to reproduce In-PI-MGN. |
-| P0 | AneuX | `data-v1.0.zip` | 13 MB | Clinical/morphology metadata and case mapping. |
-| P1 | AneuX | `models-v1.0.zip` | 6.3 GB | Geometry scale for morphology and geometry-only experiments. |
+| Current P0 | AneuX | `data-v1.0.zip` only | 13 MB | Exact patient/cut/morphometry asset audit in private cache. |
+| Current P0 metadata-only | AneuX | `models-v1.0.zip` HEAD/tail/central-directory ranges; no full download | 6.3 GB remote object | Verify orbit member structure without mesh payload. |
 | P1 | CMHA / Gong 2024 | `patients.rar` + `statistical results.rar` | 9.99 GB + 34 KB | Patient CTA, STL, and real hemodynamic summaries. |
 | P2 | CMHA / Gong 2024 | `controls.rar` | 4.49 GB | Only needed for case-control imaging studies. |
 | P2 | AneuriskData | Git repository mirror | ~1.36 GiB repository size | Useful for source-native geometry/centerline/image assets; partly overlaps AneuX. |
@@ -86,10 +94,11 @@ The Git repository keeps only `docs/`, `scripts/`, `manifests/` (without protect
 
 ## First executable milestone
 
-1. Download BenchAnXplore and AneuX metadata only.
-2. Generate `datasets.csv` with SHA-256 and license data.
-3. Inspect one HDF5 case and one AneuX mesh in a notebook/script.
-4. Only then acquire AneuX models and CMHA patients on external storage.
+1. Execute the exact public AneuX P0 once on `introai9` CPU/PBS.
+2. If P0 passes, register a separate method-free P1 with deterministic patient/source
+   grouping and selective geometry sampling before reading any mesh member.
+3. If P0 fails or is execution-incomplete, preserve the outcome and do not download the
+   full model archive or open a model/GPU experiment for this candidate version.
 
 ## Aneumo selective paired-BC pilot
 

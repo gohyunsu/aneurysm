@@ -2,11 +2,25 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · cycle-functional P0 execution-incomplete and candidate closed · active shortlist/primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
-    requirement: "fresh problem audit → asset/task adequacy → direct baselines → bounded development → fresh outer test",
+    status: "Target locked · AneuX preprocessing-orbit source shortlist 1/P0-only · selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    requirement: "exact AneuX P0 → method-free P1 task adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "AneuX same-lesion preprocessing orbit enters P0",
+      copy: "AneuX exposes the same lesion under three mesh resolutions and up to four isolation cuts. The 34/40 candidate treats these variants as one preprocessing orbit and asks whether casewise surface functionals and future outputs can quotient nuisance variation without erasing between-lesion or source-held-out signal. Exact CSV/model payload remains unread; one introai9 CPU/PBS P0 is preregistered before access.",
+      status: "Source shortlist 1 · P0 pending · selected primary/model/GPU 0",
+      url: "../docs/aneux-preprocessing-orbit-audit-2026-08-09.md"
+    },
+    {
+      year: "2019–26",
+      title: "Surface variability and discretization priors narrow the gap",
+      copy: "AneuX already reports mesh/cut robustness, MATCH quantifies reconstruction variability, DiffusionNet targets discretization-agnostic learning, PointNet++ classifies AneuX status, and a 2026 latent-shape model studies 700/3k/12k correspondence meshes. Remeshing robustness, a GNN, consistency loss or shape UQ alone is therefore not novel.",
+      status: "Direct prior art · mandatory P1 controls",
+      url: "https://doi.org/10.3389/fneur.2022.809391"
+    },
     {
       year: "2026.08",
       title: "Cycle-functional P0 closes execution-incomplete",
@@ -184,13 +198,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "RHSIA transient surrogate", "Direct functional head / loss", "DOPE functional debiasing", "Conditional residual gap"],
-    ["Already occupied", "Graph Transformer + GHD + steady augmentation", "Optimize derived targets directly", "Debias scalar trajectory functionals", "None of these alone"],
-    ["Required control", "Matched RHSIA-style field model", "Field + independent functional heads", "Plug-in / debiased functional estimate", "One field + exact shared cycle moments"],
-    ["Missing evidence", "Published field accuracy", "Compatibility not guaranteed", "Spatial full-field compatibility is not its target", "P0 recoverability and P1 task adequacy unevaluated"],
-    ["Current boundary", "Direct prior", "Generic engineering control", "Direct theory threat", "33/40 history · P0 incomplete/closed · no method/GPU"]
+    ["Axis", "AneuX morphometry", "PointNet++", "DiffusionNet / E(3)", "Conditional residual gap"],
+    ["Already occupied", "Mesh/cut robustness + 170 indices", "Surface status classification", "Discretization / motion robustness", "None of these alone"],
+    ["Required control", "Analytic + precomputed features", "Matched point-cloud model", "Matched continuous/equivariant model", "Orbit quotient with signal preservation"],
+    ["Missing evidence", "Casewise task impact", "Orbit consistency", "Source-held-out functional trade-off", "P0 asset/unit and P1 nontriviality pending"],
+    ["Current boundary", "Direct dataset baseline", "Direct task baseline", "Direct method prior", "34/40 source shortlist · P0-only · no method/GPU"]
   ],
   gates: [
+    {
+      id: "P0-O",
+      title: "Does AneuX expose a patient-groupable same-lesion preprocessing orbit?",
+      copy: "One introai9 CPU/PBS job checks the exact 13 MB tabular archive, aggregate patient/cut/morphometry mapping, and only exact tail/central-directory ranges of the 6.28 GB model ZIP. Full model download and every mesh member payload are forbidden.",
+      state: "Preregistered before payload · all checks or close · pass opens method-free P1 only",
+      blocking: true
+    },
     {
       id: "P0-W",
       title: "Can the exact AneuG-Flow pair recover physical transient WSS?",
@@ -339,12 +360,19 @@ window.AURORA_DATA = Object.freeze({
       provenance: "172 CTA series · P0 execution-incomplete after partial header prefixes · no PixelData/STL · scientific gate unevaluated · no repair/rerun/model/GPU · CC BY 4.0"
     },
     {
-      name: "AneuX",
-      role: "750 geometry/status external association stress test",
-      provenance: "metadata/mesh found · no real CFD"
+      name: "AneuX v1.0",
+      role: "P0-only same-lesion preprocessing-orbit asset candidate",
+      provenance: "750 lesions · 605 source-reported patients · 3 resolutions · up to 4 cuts · 170 features · CSV/model payload unread · CC BY-NC 4.0 · no real CFD"
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "AneuX preprocessing-orbit candidate is frozen at P0-only",
+      copy: "A fresh six-candidate red team retains one 34/40 source shortlist: treat resolution and cut variants of the same AneuX lesion as one preprocessing orbit, then test casewise functional stability without erasing between-lesion/source-held-out signal. Direct priors remove remeshing robustness, generic consistency, PointNet/GNN, E(3) equivariance, precomputed morphometry and latent shape alone from novelty. Before CSV/model payload access, one introai9 CPU/PBS P0 freezes exact files, patient/cut/morphometry mapping, bounded ZIP ranges, privacy, at most three transient attempts per HTTP operation and no job resubmission. P0 pass opens only a separate method-free P1; selected primary, method, architecture, GPU, outer test and contribution remain zero.",
+      files: ["docs/aneux-preprocessing-orbit-audit-2026-08-09.md", "configs/aneux_preprocessing_orbit_p0.json", "src/aurora/aneux_preprocessing_orbit_p0.py", "scripts/audit_aneux_preprocessing_orbit_p0.py", "cluster/pbs_aneux_preprocessing_orbit_p0.pbs", "tests/test_aneux_preprocessing_orbit_p0.py", ".github/workflows/quality.yml", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/aurora.js", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

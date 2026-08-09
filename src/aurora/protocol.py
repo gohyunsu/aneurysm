@@ -117,8 +117,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.5":
-        raise ProtocolError("The current research-state schema must be version 3.5.")
+    if protocol["schema_version"] != "3.6":
+        raise ProtocolError("The current research-state schema must be version 3.6.")
 
     project = protocol["project"]
     _require_keys(
@@ -140,7 +140,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if project["clinical_use"] is not False:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
-        project["execution_server"] != "introai9"
+        project["status"]
+        != "failed_branches_preserved_aneux_preprocessing_orbit_source_shortlisted_p0_preregistered"
+        or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
@@ -178,6 +180,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "inverse_healthy_vessel_counterfactual_source_audit",
             "rsna_supervision_semantics_red_team",
             "goal_oriented_segmentation_cold_audit",
+            "aneux_preprocessing_orbit_candidate",
             "aneug_cycle_functional_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
@@ -188,12 +191,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_primary_cycle_functional_wss_p0_execution_incomplete_candidate_closed"
-        or problem_selection["shortlisted_candidate"] != "none"
-        or problem_selection["candidate_dataset"] != "none"
-        or problem_selection["candidate_estimand"] != "none"
+        != "aneux_preprocessing_orbit_source_shortlisted_p0_preregistered_no_primary_or_method"
+        or problem_selection["shortlisted_candidate"]
+        != "same_lesion_preprocessing_orbit_quotient_morphometry"
+        or problem_selection["candidate_dataset"] != "aneux_v1_0"
+        or problem_selection["candidate_estimand"]
+        != "casewise_disagreement_of_surface_functionals_and_future_model_outputs_over_the_same_lesion_preprocessing_orbit"
         or problem_selection["asset_access_status"]
-        != "aneug_flow_source_metadata_and_file_identities_audited_but_processed_payload_not_accessed_before_p0_execution_incomplete"
+        != "official_source_metadata_and_content_description_audited_tabular_csv_model_central_directory_and_mesh_payload_not_accessed_before_p0"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -203,18 +208,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_only"
+        != "execute_exact_introai9_cpu_pbs_aneux_preprocessing_orbit_p0_once"
         or problem_selection["audit_document"]
-        != "docs/cycle-functional-wss-audit-2026-08-09.md"
+        != "docs/aneux-preprocessing-orbit-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "cycle_functional_compatible_transient_wss_surrogation"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "inverse_healthy_vessel_counterfactual_editing"
     ):
         raise ProtocolError(
-            "The no-active-problem boundary must preserve the closed cycle-functional "
-            "P0 execution and retain no selected primary, "
-            "method, GPU, outer test, or repair of closed branches."
+            "The AneuX source-shortlist boundary must retain no selected primary, "
+            "method, GPU, outer test, payload access, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -794,6 +798,109 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The goal-oriented candidate must remain closed after its 5/9 asset failure, "
             "without solver v2, method, GPU, or outer-test authority."
         )
+    orbit_audit = problem_selection["aneux_preprocessing_orbit_candidate"]
+    _require_keys(
+        orbit_audit,
+        [
+            "status",
+            "audit_document",
+            "config",
+            "config_sha256",
+            "candidate_hypothesis",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "tabular_archive_bytes",
+            "tabular_archive_md5",
+            "model_archive_bytes",
+            "model_archive_md5",
+            "source_lesions",
+            "source_patients",
+            "patient_id_observed_rows",
+            "mesh_resolutions",
+            "cut_configurations",
+            "morphometric_features",
+            "tabular_payload_accessed",
+            "model_central_directory_accessed",
+            "model_member_payload_accessed",
+            "task_unit_audited",
+            "direct_prior_threats",
+            "transport_attempts_inside_one_exact_job",
+            "transport_attempt_scope",
+            "same_source_job_resubmission_allowed",
+            "full_model_archive_download_allowed",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "p0_pass_authorizes",
+            "p0_failure_action",
+        ],
+        "problem_selection.aneux_preprocessing_orbit_candidate",
+    )
+    expected_orbit_priors = {
+        "diffusionnet_discretization_agnostic_surface_learning",
+        "match_segmentation_and_reconstruction_geometry_uncertainty",
+        "aneux_original_morphometry_and_cut_robustness",
+        "aneux_pointnet_status_classification",
+        "aneurysm_latent_shape_space_across_three_resolutions",
+        "generic_consistency_regularization",
+        "generic_rotation_or_e3_equivariant_mesh_learning",
+    }
+    if (
+        orbit_audit["status"]
+        != "source_shortlisted_p0_preregistered_before_payload_access"
+        or orbit_audit["audit_document"]
+        != "docs/aneux-preprocessing-orbit-audit-2026-08-09.md"
+        or orbit_audit["config"] != "configs/aneux_preprocessing_orbit_p0.json"
+        or orbit_audit["config_sha256"]
+        != "26393855aec6dbd8af53477e54e8079587af2458fbaf91b5d0fc959c77adc978"
+        or orbit_audit["score"] != 34.0
+        or orbit_audit["maximum_score"] != 40.0
+        or orbit_audit["automatic_selection_threshold"] != 32.0
+        or orbit_audit["active_shortlist_count"] != 1
+        or orbit_audit["primary_problem_selected"] is not False
+        or orbit_audit["tabular_archive_bytes"] != 12992074
+        or orbit_audit["tabular_archive_md5"]
+        != "a00dde7b974de724c6480dbda4585a8c"
+        or orbit_audit["model_archive_bytes"] != 6277720483
+        or orbit_audit["model_archive_md5"]
+        != "6248323006f67858b1eb1ec77ce8c0a6"
+        or orbit_audit["source_lesions"] != 750
+        or orbit_audit["source_patients"] != 605
+        or orbit_audit["patient_id_observed_rows"] != 637
+        or orbit_audit["mesh_resolutions"] != 3
+        or orbit_audit["cut_configurations"] != 4
+        or orbit_audit["morphometric_features"] != 170
+        or orbit_audit["tabular_payload_accessed"] is not False
+        or orbit_audit["model_central_directory_accessed"] is not False
+        or orbit_audit["model_member_payload_accessed"] is not False
+        or orbit_audit["task_unit_audited"] is not False
+        or set(orbit_audit["direct_prior_threats"]) != expected_orbit_priors
+        or orbit_audit["transport_attempts_inside_one_exact_job"] != 3
+        or orbit_audit["transport_attempt_scope"]
+        != "maximum_three_per_http_operation_within_single_exact_job"
+        or orbit_audit["same_source_job_resubmission_allowed"] is not False
+        or orbit_audit["full_model_archive_download_allowed"] is not False
+        or orbit_audit["method_selected"] is not False
+        or orbit_audit["architecture_selected"] is not False
+        or orbit_audit["gpu_training_authorized"] is not False
+        or orbit_audit["outer_test_authorized"] is not False
+        or orbit_audit["submission_identity_active"] is not False
+        or orbit_audit["p0_pass_authorizes"]
+        != "register_one_method_free_p1_casewise_preprocessing_orbit_task_adequacy_audit_only"
+        or orbit_audit["p0_failure_action"]
+        != "close_this_candidate_version_without_model_architecture_gpu_outer_test_or_scientific_claim"
+    ):
+        raise ProtocolError(
+            "The AneuX preprocessing-orbit candidate must remain P0-only, "
+            "payload-blind, and unable to select a primary, method, GPU, or outer test."
+        )
+    checks.append("AneuX preprocessing-orbit P0-only boundary")
+
     cycle_audit = problem_selection["aneug_cycle_functional_source_audit"]
     _require_keys(
         cycle_audit,
@@ -908,7 +1015,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The cycle-functional candidate must remain closed after its exact P0 "
             "execution-incomplete outcome, with no payload, P1, model, or GPU authority."
         )
-    checks.append("closed prior candidates and no active shortlist")
+    checks.append("closed prior candidates preserved beside one P0-only shortlist")
 
     venue = protocol["venue"]
     _require_keys(
@@ -989,7 +1096,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_no_active_primary_after_cycle_functional_p0_execution_incomplete"
+        != "unselected_primary_with_aneux_preprocessing_orbit_source_shortlist_at_p0_only"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1081,7 +1188,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "ISBI submission must remain blocked while the primary problem is "
             "unselected; historical 3D evidence remains insufficient."
         )
-    checks.append("ISBI 2027 four-page and no-active-primary boundary")
+    checks.append("ISBI 2027 four-page and source-shortlist-only boundary")
 
     task = protocol["task"]
     _require_keys(
@@ -1129,8 +1236,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if task["primary_problem"] not in ALLOWED_PRIMARY_PROBLEMS:
         raise ProtocolError(
-            "The primary task must remain unselected while the active problem "
-            "shortlist is empty."
+            "The primary task must remain unselected while the AneuX candidate "
+            "is only a source shortlist."
         )
     if task["application_endpoint"] not in ALLOWED_ENDPOINTS:
         raise ProtocolError(
@@ -1151,13 +1258,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"]
-        != "none"
+        != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or task["active_candidate_status"]
-        != "no_primary_or_model_after_cycle_functional_p0_execution_incomplete_and_candidate_closure"
+        != "source_shortlisted_p0_preregistered_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"]
-        != "none"
+        != "casewise_preprocessing_orbit_functional_disagreement"
         or task["candidate_secondary_estimand"]
-        != "none"
+        != "cross_sectional_rupture_status_association_only_after_patient_source_grouping_and_task_adequacy"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -1201,11 +1308,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The task must retain no active problem or estimand after the goal-oriented "
-            "asset failure, while historical 4D-flow evidence retains the exact I0a "
-            "result and I0b execution record."
+            "The task must keep the AneuX lead at source-shortlist/P0 only while "
+            "historical 4D-flow evidence retains the exact I0a result and I0b "
+            "execution record."
         )
-    checks.append("closed open-CTA task boundary and historical 4D-flow guardrails")
+    checks.append("AneuX P0-only task boundary and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:
@@ -1266,8 +1373,28 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "CMHA must remain a real-CFD provenance asset but a closed 5/9 "
             "goal-oriented history, not an active primary dataset."
         )
-    if aneux["field_provenance"] != "none":
-        raise ProtocolError("AneuX must not be declared as real-CFD data.")
+    if (
+        aneux.get("field_provenance") != "none"
+        or aneux.get("split_unit") != "patient"
+        or aneux.get("role")
+        != "conditional_p0_asset_for_same_lesion_preprocessing_orbit_audit"
+        or aneux.get("status")
+        != "source_metadata_audited_p0_preregistered_payload_not_accessed"
+        or aneux.get("license")
+        != "cc_by_nc_4_0_with_attribution_requirement"
+        or aneux.get("source_lesions") != 750
+        or aneux.get("source_patients") != 605
+        or aneux.get("patient_id_observed_rows") != 637
+        or aneux.get("mesh_resolutions") != 3
+        or aneux.get("cut_configurations") != 4
+        or aneux.get("tabular_payload_accessed") is not False
+        or aneux.get("model_central_directory_accessed") is not False
+        or aneux.get("model_member_payload_accessed") is not False
+    ):
+        raise ProtocolError(
+            "AneuX must remain a patient-grouped, non-CFD, payload-blind P0 "
+            "candidate with the exact official source contract."
+        )
     if aneumo["split_unit"] != "aneux_base_family":
         raise ProtocolError(
             "Aneumo split must keep both deformations of an AneuX base family "

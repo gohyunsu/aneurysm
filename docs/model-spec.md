@@ -9,28 +9,37 @@ asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
 supervision-semantics candidate rejected · goal-oriented hemodynamic
 segmentation asset component failed 5/9 and candidate closed · cycle-functional
 transient WSS P0 execution-incomplete before payload/no verdict/no rerun and
-candidate closed · active shortlist, primary problem, method and architecture unselected · inverse healthy-vessel
-counterfactual candidate rejected 27/40 · no GPU/outer test
+candidate closed · AneuX preprocessing-orbit source shortlist 1/P0-only · selected
+primary problem, method and architecture 0 · inverse healthy-vessel counterfactual
+candidate rejected 27/40 · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
-현재 구현하거나 선택한 headline architecture는 없고 active shortlist도 0이다.
-Cycle-functional transient WSS는 33/40의 historical P0 candidate였지만
-execution-incomplete로 닫혔으며 model candidate가 아니다.
-WSS \(\tau(x,t)\)가 공유하는 \(m(x)=E_t[\tau]\)와
-\(a(x)=E_t[\|\tau\|]\)를 먼저 두고 TAWSS/OSI/RRT를 정확히 유도한다는 것은
-현재 estimand contract이지 architecture가 아니다. RHSIA의 Graph Transformer,
-GHD token과 steady-flow augmentation, generic cycle-functional head/loss,
-POD/Fourier/DCT/sequence decoder, DOPE류 functional debiasing과 E(3) GNN은 모두
-non-novel direct control이다.
+현재 구현하거나 선택한 headline architecture는 없다. Active source shortlist는
+AneuX preprocessing-orbit 1개지만 P0는 data structure와 unit을 감사하는
+CPU-only contract이지 model candidate가 아니다. 입력 후보는 동일 lesion의
+resolution × cut surface orbit이고, 출력 후보는 casewise surface functional과
+향후 prediction disagreement다. CSV/model payload와 orbit completeness를 실제로
+확인하기 전에는 encoder, loss, latent dimension과 acronym을 정하지 않는다.
 
-Exact `754ed746…` P0는 steady/transient archive payload 전에 exit 28이었고
-scientific gate를 평가하지 못했다. 따라서 method-free P1도 열리지 않았다.
-Moment prediction과 zero-mean temporal residual projection은 구현된 구조가 아니라
-폐기된 version의 conditional idea history다. Graph/GNN/transformer decoder나
-functional loss를 이 branch에서 구현하지 않는다.
+DiffusionNet은 discretization-agnostic surface baseline, PointNet++은 AneuX
+status baseline, E(3)-equivariant mesh network는 rigid-motion control이다. Analytic
+area-weighted functional과 공개 precomputed morphometry가 zero-learning 기준선이다.
+Generic consistency penalty나 같은-lesion contrastive loss도 독립 novelty가
+아니다. 별도 P1에서 이 강한 기준선들조차 casewise functional/rank instability를
+보이고 source-held-out biological separation을 충분히 보존할 때만
+quotient-specific architecture 설계를 시작한다.
+
+따라서 “현재 GNN 기반인가?”의 답은 여전히 **아니다**다. Graph/GNN은 향후
+필수 비교군 중 하나일 수 있으나 selected method가 아니다. Exact P0 pass도
+method-free P1만 열고 GPU를 허가하지 않는다.
+
+Cycle-functional transient WSS는 33/40의 historical P0 candidate였지만 exact
+`754ed746…` 실행이 archive payload 전에 끝나 closed/no-verdict다. Moment
+prediction, temporal residual projection과 Graph Transformer는 구현된 현재
+구조가 아니라 폐기된 branch history/control로만 남긴다.
 
 현재 구현하거나 선택한 headline architecture와 active primary는 없다.
 가장 최근의 source audit에서 검토한 inverse editor도 architecture로 선택하지

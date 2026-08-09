@@ -1,5 +1,33 @@
 # 선행연구 계보와 research gap
 
+## 0-O. Current conditional gap · same-lesion preprocessing-orbit quotient
+
+[AneuX](https://doi.org/10.5281/zenodo.6678442)는 동일 병변의 3개 mesh resolution과
+여러 dome isolation cut, 170 morphometric index를 공개한다. 원
+[AneuX 연구](https://doi.org/10.3389/fneur.2022.809391)는 mesh quality와 cut
+robustness를 이미 분석했고, [MATCH](https://doi.org/10.1007/s13239-019-00407-y)는
+segmentation/reconstruction variation이 geometry parameter를 바꾸는 문제를
+직접 정량화했다. [DiffusionNet](https://arxiv.org/abs/2012.00888)은 surface
+discretization에 강한 학습을, [AneuX PointNet++](https://pubmed.ncbi.nlm.nih.gov/38426204/)은
+같은 자료의 rupture-status 분류와 source external validation을 다룬다. 2026
+[latent-shape 연구](https://doi.org/10.1016/j.cmpb.2026.109445)는 958 surface의
+700/3k/12k correspondence mesh에서 resolution robustness까지 보고했다.
+
+따라서 remeshing robustness, mesh GNN, PointNet, E(3) equivariance, consistency
+loss, latent shape space, precomputed morphometry 또는 UQ 자체는 gap이 아니다.
+현재 남을 수 있는 좁은 가설은 resolution × cut을 같은 lesion의 명시적
+preprocessing equivalence class로 두고, **orbit 내 casewise functional/prediction
+disagreement를 줄이면서 lesion 간 biological separation과 source-held-out
+discrimination을 보존하는 quotient construction**이다. 이 역시 P0 asset/unit
+audit와 별도 method-free P1에서 strong continuous baseline의 비자명한 실패가
+확인될 때만 algorithmic gap으로 인정한다.
+
+P0 이전에는 official record/content description만 읽었고 CSV/model payload는
+0이다. Source score 34/40은 shortlist 진입일 뿐 selected primary나 novelty가
+아니다. Exact contract와 kill rule은
+[`aneux-preprocessing-orbit-audit-2026-08-09.md`](aneux-preprocessing-orbit-audit-2026-08-09.md)에
+고정한다.
+
 ## 0-W. Closed conditional gap · full transient WSS와 cycle-functional compatibility
 
 [AneuG-Flow](https://papers.nips.cc/paper_files/paper/2025/file/e2b8ff0035bc9f572a7deefbcbea85bc-Paper-Datasets_and_Benchmarks_Track.pdf)는

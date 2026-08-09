@@ -30,18 +30,45 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "no active GPU job"):
             validate_protocol(candidate)
 
-    def test_no_active_problem_cannot_select_method_or_gpu(self) -> None:
+    def test_source_shortlist_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
+        with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
+        with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
+        with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
+            validate_protocol(candidate)
+
+    def test_aneux_orbit_p0_cannot_read_payload_or_train(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["aneux_preprocessing_orbit_candidate"]
+        audit["model_member_payload_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "preprocessing-orbit candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["aneux_preprocessing_orbit_candidate"]
+        audit["full_model_archive_download_allowed"] = True
+        with self.assertRaisesRegex(ProtocolError, "preprocessing-orbit candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["aneux_preprocessing_orbit_candidate"]
+        audit["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "preprocessing-orbit candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["aneux_preprocessing_orbit_candidate"]
+        audit["direct_prior_threats"].remove(
+            "diffusionnet_discretization_agnostic_surface_learning"
+        )
+        with self.assertRaisesRegex(ProtocolError, "preprocessing-orbit candidate"):
             validate_protocol(candidate)
 
     def test_cycle_functional_p0_incomplete_is_closed(self) -> None:
@@ -332,7 +359,7 @@ class ProtocolTests(unittest.TestCase):
     def test_i0a_pass_cannot_select_a_method_or_call_cfd_mri_truth(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["active_candidate_status"] = "method_selected"
-        with self.assertRaisesRegex(ProtocolError, "no active problem or estimand"):
+        with self.assertRaisesRegex(ProtocolError, "source-shortlist/P0 only"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["cfd_field_is_clinical_mri_ground_truth"] = True

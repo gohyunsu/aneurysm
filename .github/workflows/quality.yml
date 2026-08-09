@@ -22,6 +22,8 @@ jobs:
           node-version: "22"
       - name: Validate research protocol
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
+      - name: Validate prospective AneuX preprocessing-orbit P0
+        run: PYTHONPATH=src python -m aurora.aneux_preprocessing_orbit_p0 --config configs/aneux_preprocessing_orbit_p0.json --validate-only
       - name: Validate frozen open-CTA physical-coordinate P0 registration
         run: PYTHONPATH=src python -m aurora.open_cta_physical_p0 --config configs/open_cta_physical_p0.json --validate-only
       - name: Validate prospective S0a contract

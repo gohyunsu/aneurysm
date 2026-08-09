@@ -41,32 +41,31 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          No active shortlist.<br>
-          <em>The model still waits.</em>
+          One lesion, many surfaces.<br>
+          <em>First ask what must stay invariant.</em>
         </h1>
         <p class="hero-lede">
-          같은 transient WSS field가 만든 TAWSS, OSI와 RRT가 서로 모순되지
-          않아야 한다는 33/40 후보를 exact P0까지 보냈습니다. 그러나
-          <code>introai9</code> CPU/PBS 실행은 processed payload 전에 exit 28로 끝났고
-          scientific gate를 평가하지 못했습니다. 같은 계약을 수리·재실행하지
-          않고 후보를 닫았으므로 현재 shortlist, primary problem, model, GPU와
-          outer test는 모두 없습니다.
+          AneuX의 같은 병변은 서로 다른 mesh resolution과 isolation cut으로
+          표현됩니다. 이들을 별도 환자나 augmentation이 아니라 하나의
+          preprocessing orbit으로 보고, surface functional과 향후 예측이 orbit
+          안에서 얼마나 흔들리는지 먼저 측정합니다. 현재는 34/40 source
+          shortlist 하나와 payload-before P0 계약만 있습니다. Selected primary,
+          model, GPU와 outer test는 아직 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/cycle-functional-wss-audit-2026-08-09.md">Latest audit ↗</a>
-          <a class="button ghost" href="../configs/aneug_cycle_functional_p0.json">Frozen P0 ↗</a>
-          <a class="button ghost" href="../results/aneug_cycle_functional_p0_execution_20260809.json">P0 outcome ↗</a>
+          <a class="button ghost" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">Latest audit ↗</a>
+          <a class="button ghost" href="../configs/aneux_preprocessing_orbit_p0.json">Frozen P0 ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
           <a class="button ghost" href="../results/open_cta_physical_p0_execution_20260809.json">Execution record ↗</a>
           <a class="button ghost" href="../docs/isbi-2027-plan.md">ISBI plan ↗</a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="transient WSS field에서 공유 cycle moment와 TAWSS, OSI, RRT를 유도하는 개념도">
-        <div class="visual-caption">HISTORICAL 33/40 · P0 INCOMPLETE · CANDIDATE CLOSED</div>
+      <div class="hero-visual" aria-label="같은 동맥류를 여러 mesh resolution과 cut으로 관측하는 preprocessing orbit 개념도">
+        <div class="visual-caption">SOURCE SHORTLIST 34/40 · P0 PREREGISTERED · PAYLOAD 0</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -89,27 +88,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>τ</b><span>transient WSS field</span>
+            <b>O</b><span>original surface</span>
           </div>
           <div class="posterior-card card-b">
-            <b>m,a</b><span>shared cycle moments</span>
+            <b>R</b><span>area-001 · area-005</span>
           </div>
           <div class="posterior-card card-c">
-            <b>F</b><span>TAWSS · OSI · RRT</span>
+            <b>C</b><span>dome · ninja · cut1/2</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> field → shared moments → functionals</span>
-          <span><i class="dot coral"></i> scientific gate not evaluated</span>
+          <span><i class="dot lime"></i> same lesion → preprocessing orbit</span>
+          <span><i class="dot coral"></i> CSV · mesh payload not yet accessed</span>
           <span>primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Problem shortlist</span><b>0 · primary 0</b></div>
-        <div><span>Current evidence</span><b>P0 incomplete · no scientific verdict</b></div>
+        <div><span>Source shortlist</span><b>1 · selected primary 0</b></div>
+        <div><span>Current evidence</span><b>P0 preregistered · payload 0</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>Fresh problem-level source audit only</b></div>
+        <div><span>Next authorization</span><b>introai9 CPU/PBS P0 once</b></div>
       </div>
     </section>
 
@@ -118,12 +117,12 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          RHSIA가 이미 transient WSS Graph Transformer와 steady augmentation을
-          제안했고, DOPE는 operator functional debiasing을 다룹니다. 남을 수 있는
-          질문은 한 field와 여러 spatial cycle functional이 공유 moment를 정확히
-          만족하면서 실제 hotspot/ranking error를 줄이는가입니다. 그 질문조차
-          먼저 exact asset recovery와 method-free perturbation으로 검증해야 합니다.
-          이번 candidate version은 asset recovery 전에 execution-incomplete로 닫혔습니다.
+          AneuX 원 논문은 mesh quality와 cut robustness를, MATCH는 reconstruction
+          variability를, DiffusionNet은 discretization-agnostic learning을 이미
+          다룹니다. 따라서 “remeshing에 강한 GNN”은 새롭지 않습니다. 남을 수
+          있는 질문은 전처리 변형을 명시적 equivalence class로 quotient하면서
+          casewise functional 보존과 source-held-out 병변 구분을 동시에 유지할 수
+          있는가입니다. 그 전에 exact asset와 독립 단위부터 검증합니다.
         </p>
       </div>
 
@@ -151,7 +150,7 @@
       </div>
 
       <div class="claims-strip">
-        <p>다음 후보 감사가 답할 세 질문</p>
+        <p>AneuX P0/P1이 답할 세 질문</p>
         <ol>
           <li><span>01</span> 실제 asset의 target과 sampling unit이 주장할 estimand를 식별하는가?</li>
           <li><span>02</span> Direct prior가 점유하지 않은 algorithmic gap이 남는가?</li>
@@ -175,19 +174,18 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">THE CONDITIONAL GAP</p>
-          <h3>One WSS field should imply one compatible set of cycle functionals.</h3>
+          <h3>One lesion should remain one object across preprocessing choices.</h3>
           <p>
-            WSS 시계열과 TAWSS·OSI·RRT를 서로 다른 head가 예측하면 같은 물리
-            field에 대해 모순된 값을 낼 수 있다. 후보는 먼저 평균 vector
-            <em>m</em>과 평균 magnitude <em>a</em>를 공유하고 모든 functional을
-            그 두 moment에서 유도한다. 단, raw OSI relative error가 작은 분모의
-            착시가 아닌지 method-free P1에서 확인하려 했지만 P0가 incomplete라
-            이 candidate version에서는 P1이 열리지 않았다.
+            같은 해부학을 resolution과 cut마다 별도 표본으로 학습하면 표본 수를
+            부풀리고, 전처리 선택을 생물학적 차이로 오인할 수 있습니다. 후보는
+            모든 variant를 orbit <em>Oᵢ</em>로 묶고 orbit 내 disagreement와
+            병변 간 separation을 함께 평가합니다. P0는 이 orbit이 실제 파일과
+            patient grouping에서 식별되는지만 확인합니다.
           </p>
-          <div class="gap-equation" aria-label="WSS cycle moment에서 TAWSS, OSI, RRT를 유도하는 관계">
-            <span>τ(x,t) → {m(x), a(x)}</span>
+          <div class="gap-equation" aria-label="동일 병변의 여러 전처리 표현을 하나의 quotient representation으로 묶는 관계">
+            <span>{Xᵢ,r,c} ∈ Oᵢ</span>
             <i>⇒</i>
-            <span>{TAWSS, OSI, RRT}</span>
+            <span>quotient representation q(Oᵢ)</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -216,11 +214,11 @@
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
-        <h2>Recover the physical field<br><em>before choosing a network.</em></h2>
+        <h2>Verify the orbit<br><em>before choosing a network.</em></h2>
         <p>
-          아래 흐름은 network architecture가 아니라 닫힌 exact P0 asset chain이다.
-          Steady normalization과 transient WSS 연결을 검사하려 했지만 payload 전에
-          실행이 끝나 gate는 미평가다.
+          아래 흐름은 network architecture가 아니라 preregistered exact P0 asset
+          chain입니다. Tabular mapping과 model ZIP central directory가 same-lesion
+          orbit을 실제로 지지하는지 먼저 확인합니다.
         </p>
       </div>
 
@@ -228,70 +226,70 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
-          RHSIA가 이미 Graph Transformer, GHD와 steady augmentation으로 transient
-          WSS를 예측한다. 닫힌 P0는 tensor/hash/topology audit이었으므로 GNN, attention,
-          temporal decoder와 functional loss 어느 것도 선택하지 않았다.
+          DiffusionNet, PointNet++과 E(3)-equivariant mesh network는 향후 strong
+          controls일 수 있지만 현재 method가 아닙니다. P0는 file, patient, cut,
+          resolution과 privacy boundary만 검사합니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="닫힌 P0 evidence stage">
+      <div class="mode-switch" role="group" aria-label="AneuX P0 evidence stage">
         <button class="active" type="button" data-mode="presence">Source</button>
         <button type="button" data-mode="point">Units</button>
         <button type="button" data-mode="mask">Decision</button>
-        <span id="mode-description">두 exact file identity는 고정했지만 payload는 materialize되지 않았습니다.</span>
+        <span id="mode-description">두 official archive identity는 고정했고 payload는 아직 읽지 않았습니다.</span>
       </div>
 
       <div class="architecture-flow">
         <article class="arch-node input-node">
           <span class="arch-number">01</span>
-          <p class="arch-label">REGISTERED SOURCE PAIR</p>
-          <h3>AneuG-Flow processed files</h3>
-          <p>Exact dataset/code commit · two SHA-256 · CC BY-SA 4.0</p>
+          <p class="arch-label">REGISTERED OFFICIAL SOURCE</p>
+          <h3>AneuX v1.0 archives</h3>
+          <p>Exact byte/MD5 · official record · CC BY-NC 4.0</p>
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <a class="arch-learn" href="../docs/cycle-functional-wss-audit-2026-08-09.md">근거 record</a>
+          <a class="arch-learn" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">근거 record</a>
         </article>
         <div class="arch-connector"><span>exact pair</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">SAFE LOAD</p>
-          <h3>Steady norm + transient mesh field</h3>
-          <p>weights-only · mmap · no arbitrary pickle globals · no identifier output</p>
+          <p class="arch-label">BOUNDED ACCESS</p>
+          <h3>CSV + ZIP central directory</h3>
+          <p>13 MB tabular only · exact ranges · no model member payload</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">후보와 모델 구분</a>
         </article>
         <div class="arch-connector accent"><span id="bc-connector-label">verify hashes</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">PHYSICAL CONTRACT</p>
+          <p class="arch-label">ORBIT CONTRACT</p>
           <h3 id="bc-node-title">Exact source identity</h3>
-          <p id="bc-node-copy">9.63 GB steady norm and 23.74 GB transient WSS must both match</p>
+          <p id="bc-node-copy">750 lesions, patient groups, 3 resolutions and 4 cuts must match</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
-          <a class="arch-learn" href="../configs/aneug_cycle_functional_p0.json">frozen checks</a>
+          <a class="arch-learn" href="../configs/aneux_preprocessing_orbit_p0.json">frozen checks</a>
         </article>
         <div class="arch-connector"><span>all checks</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">ONE-SHOT P0 · CLOSED</p>
-          <h3>Execution-incomplete</h3>
+          <p class="arch-label">ONE EXACT CPU/PBS P0</p>
+          <h3>All checks or close</h3>
           <div class="dual-branch">
             <span><b>Pass</b>register method-free P1 only</span>
             <span><b>Fail/incomplete</b>close this candidate version</span>
           </div>
-          <p>Exit 28 · no result · no dependency, reader or transport repair</p>
+          <p>Three bounded transport attempts inside one job · no resubmission</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
         <div class="arch-connector"><span>not authorized</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">NEXT</p>
-          <h3>P1 not opened</h3>
-          <p>Fresh problem-level source and asset audit is the only next action</p>
+          <h3>P1 remains closed</h3>
+          <p>Only P0 pass may register a separate method-free adequacy audit</p>
           <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>still not authorized</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -300,15 +298,15 @@
       <div class="architecture-notes">
         <article>
           <span>UNIT INTEGRITY</span>
-          <p>Synthetic geometry case를 patient로 세지 않는 unit check를 등록했지만 payload 전에 중단돼 미평가다.</p>
+          <p>Resolution과 cut variant를 별도 환자로 세지 않고 observed patient group을 보존합니다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
-          <p>RHSIA, direct functional heads/losses, DOPE, temporal bases와 E(3) GNN은 mandatory controls다.</p>
+          <p>AneuX morphometry, MATCH, PointNet++, DiffusionNet, latent shape와 E(3) model이 mandatory controls입니다.</p>
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>원래 P0는 recoverability, P1은 task adequacy를 판단할 계획이었지만 P0 incomplete로 둘 다 현재 권한이 없다.</p>
+          <p>P0는 asset/unit만 판단합니다. P1도 method 없이 within-orbit와 between-lesion signal을 비교합니다.</p>
         </article>
       </div>
       <div class="architecture-links">

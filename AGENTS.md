@@ -51,6 +51,21 @@ record는 `results/aneug_cycle_functional_p0_execution_20260809.json`, SHA-256�
 test와 submission identity는 모두 0이며 다음은 fresh problem-level source/asset
 audit뿐이다.
 
+2026-08-09의 다음 fresh six-candidate red team은 AneuX v1.0의 same-lesion
+resolution × cut preprocessing orbit만 34/40으로 admission line 위에 남겼다.
+Active source shortlist는 1이지만 selected primary는 0이다. Official record와
+content-description상 750 lesion, 605 patient, patientID observed 637 row,
+3 resolution, 4 cut, area-005 morphometric feature 170개가 보고된다. CSV/model
+payload 전 exact `configs/aneux_preprocessing_orbit_p0.json`을 고정했다. P0는
+`introai9` PBS CPU 4/16 GB/GPU 0 한 job에서 13 MB tabular ZIP의 exact MD5와
+aggregate patient/cut/morphometry mapping, 6.28 GB model ZIP의 HEAD/tail/central
+directory exact ranges만 검사한다. Full model download와 member payload access는
+금지한다. 한 exact job의 각 HTTP operation에 대한 transient transport attempt 3회 외 same-source
+resubmission은 없고, pass도 별도 method-free P1만 허용한다. DiffusionNet,
+PointNet++, E(3), generic consistency, precomputed morphometry, MATCH와
+multi-resolution latent shape는 novelty가 아니라 direct prior/control이다.
+Method, architecture, GPU, outer test와 submission identity는 계속 0이다.
+
 Exact content commit `15bbccbfb367516ee0daaf8d2f5beca20b7c587b`의 Quality
 run `31291453002`와 Pages run `31291452634`는 모두 성공했고, live site에서
 이 판정과 `introai9`-only/현재 GPU job 0 경계를 확인했다. 배포 확인은
@@ -67,10 +82,11 @@ no-repair/no-rerun/P1/model/GPU 경계를 확인했다. 이 배포 검증도 can
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
-- 현재 primary problem과 method는 **선택되지 않았다**. Active primary와
-  조건부 source shortlist는 모두 **0개**다. Cycle-functional transient WSS
-  후보는 33.0/40으로 P0에 진입했지만 execution-incomplete로 닫혔고
-  payload/task adequacy는 미확인이다.
+- 현재 primary problem과 method는 **선택되지 않았다**. Active primary는 0,
+  조건부 source shortlist는 AneuX preprocessing-orbit **1개**다. 이 후보는
+  34.0/40의 P0-only 상태이며 CSV/model payload와 task adequacy는 미확인이다.
+  Cycle-functional transient WSS 후보는 33.0/40으로 P0에 진입했지만
+  execution-incomplete로 닫혔고 no-repair/no-rerun 상태다.
   Open-CTA physical-grid 후보의 source-only score
   32.0/40과 registered P0 history는 보존하지만, P0가 execution-incomplete로
   끝나 primary selection이나 contribution이 아니다.
@@ -469,8 +485,12 @@ no-repair/no-rerun/P1/model/GPU 경계를 확인했다. 이 배포 검증도 can
 
 ## 2. 현재 contribution 가설
 
-현재 확정 contribution, prospective method hypothesis와 active shortlist는
-없다. 닫힌 P0 가설은 하나의 physical-coordinate lesion-instance representation에서 grid별
+현재 확정 contribution과 prospective method hypothesis는 없지만 active source
+shortlist는 AneuX orbit 1개다. 후보 가설은 same-lesion preprocessing orbit을
+명시적 equivalence class로 quotient하면서 casewise functional/prediction
+stability와 source-held-out between-lesion signal을 함께 보존할 수 있는가이다.
+이는 P0 asset/unit과 method-free P1 task-adequacy 전에는 contribution이 아니다.
+닫힌 Open-CTA P0 가설은 하나의 physical-coordinate lesion-instance representation에서 grid별
 cardinality·surface·morphometry가 함께 commute하는 문제다. Consispace류
 resampling, implicit continuous segmentation, resolution-invariant latent,
 random finite-set detection, LesionDETR류 set prediction과 aneurysm shape/topology
@@ -562,7 +582,7 @@ N1 adaptation을 원 논문 재현으로 표현하지 않는다.
 | AneuG-Flow | 대규모 synthetic steady 및 selected pulsatile pretraining | real cohort generalization |
 | BenchAnXplore | 105 semi-idealized transient field의 재현·baseline | geometry-only clinical deployment |
 | CMHA | patient CTA/mesh, clinical, morphology, real-CFD bridge와 task gate | multi-center external validation로 과장 |
-| AneuX | 750 geometry/status의 external association stress test | real hemodynamics validation |
+| AneuX v1.0 | P0-only same-lesion preprocessing-orbit asset 후보; status는 P1 뒤 secondary association만 | real hemodynamics validation, prospective rupture risk, variant를 독립 환자로 계산 |
 | Aneurisk | provenance가 확인된 geometry/morphology 보조 평가 | asset audit 전 CFD 보유 가정 |
 | 4D-flow multiresolution phantom 2021 | same-flow 3×3 protocol development/task audit 후보 | high-resolution acquisition 또는 CFD를 clinical truth로 해석 |
 | 4D-flow dual-VENC phantoms 2025 | four-phantom external protocol-pair audit 후보 | phantom을 independent clinical cohort 또는 repeat calibration set으로 과장 |
@@ -822,10 +842,11 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - 자세한 단일 출처는 `docs/isbi-2027-plan.md`다.
 - 모든 기술 내용·표·그림은 official template 첫 4쪽 안에 둔다. 5쪽은
   reference, ethics, acknowledgments/COI 외 기술 내용을 금지한다.
-- 현재 primary, active shortlist와 headline domain은 미선정이다. Open-CTA
-  P0/P1은 닫혔으며 fresh problem audit에서 데이터 의미, 식별 가능한 estimand,
-  direct-prior gap과 feasible case/patient-level evaluation을 모두 통과하기
-  전에는 어떤 candidate도 primary로 부르지 않는다. 과거 synthetic-CFD 3D velocity 규약은 실패한
+- 현재 primary와 headline domain은 미선정이며 source shortlist만 AneuX
+  preprocessing-orbit 1개다. 그 P0/P1에서 데이터 의미, 식별 가능한 estimand,
+  direct-prior gap과 feasible patient/source-level evaluation을 모두 통과하기
+  전에는 이 candidate를 primary로 부르지 않는다. Open-CTA P0/P1은 닫혔다.
+  과거 synthetic-CFD 3D velocity 규약은 실패한
   Aneumo branch의 history다.
   Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
   utility는 새 provenance와 prospective evidence 없이는 headline에서 제외한다.

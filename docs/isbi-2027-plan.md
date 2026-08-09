@@ -1,15 +1,14 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-09 current boundary:** active primary, shortlist와 method는 0이다.
-> Fresh batch의 유일한 33/40 cycle-functional transient WSS 후보는 exact
-> AneuG-Flow CPU/PBS P0가 processed payload 전에 exit 28로 끝나
-> execution-incomplete로 닫혔다. Scientific verdict, P1, architecture, GPU,
-> outer test와 four-page narrative는 없다.
+> **2026-08-09 current boundary:** AneuX same-lesion preprocessing-orbit는
+> 34/40의 source shortlist 1이지만 selected primary와 method는 0이다. CSV/model
+> payload 전에 exact CPU-only P0를 고정했다. P0 pass도 method-free P1만 열며
+> architecture, GPU, outer test와 four-page contribution은 아직 없다.
 
 최종 검토일: 2026-08-09 KST
 
-상태: **target locked · cycle-functional WSS P0 execution-incomplete/no verdict ·
-candidate closed · shortlist/primary problem/method/architecture/GPU 0 · not
+상태: **target locked · AneuX preprocessing-orbit P0 preregistered · source
+shortlist 1 · selected primary problem/method/architecture/GPU 0 · not
 submission-ready**
 
 2026-08-09 open-CTA physical-coordinate 후보는 32.0/40으로 P0에 진입했지만,
@@ -27,8 +26,12 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
 
-현재 제출 가능한 paper identity는 없다. Cycle-functional WSS는 P0
-execution-incomplete로 닫혔고 P1은 열리지 않았다. Open-CTA grid-commutation 문제는
+현재 제출 가능한 paper identity는 없다. AneuX orbit 후보는 official source와
+direct-prior gap만 통과했으며 row-level asset/unit과 task adequacy를 아직
+검사하지 않았다. P0는 `introai9` CPU/PBS에서 patient grouping, cut/morphometry
+mapping과 model central-directory structure만 감사한다. Pass도 P1을 별도
+등록할 권한일 뿐 method나 figure/result를 확정하지 않는다. Cycle-functional
+WSS는 P0 execution-incomplete로 닫혔고 P1은 열리지 않았다. Open-CTA grid-commutation 문제는
 asset gate를 평가하지 못했고 P1도 열리지 않았다. Partial/missing-BC AURORA, Aneumo
 irregular-3D, cross-protocol 4D-flow, RSNA mixed-granularity lesion-set과
 goal-oriented hemodynamic segmentation을 모두 실패 또는 부적격 이력으로
@@ -57,10 +60,10 @@ estimand에 필요한 105-lesion image–surface–table linkage를 공개 자�
 않는다는 뜻이다. Mapping을 추측하거나 수작업으로 복구해 같은 후보를 살리지
 않는다.
 
-## 2. 다음 problem을 고르는 순서
+## 2. 현재 후보를 판단하는 순서
 
-새 후보는 이름이나 architecture가 아니라 다음 다섯 증거를 순서대로 갖춰야
-한다.
+현재 AneuX 후보와 이후의 모든 새 후보는 이름이나 architecture가 아니라 다음
+다섯 증거를 순서대로 갖춰야 한다.
 
 1. **Biomedical-imaging question**: 입력 영상, 관측 단위, target과 실제 실패
    비용을 한 문장으로 정의한다.

@@ -4,23 +4,31 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active primary problem과 shortlist는 모두 **0개**입니다. Fresh batch의
-유일한 admission 후보였던 `cycle-functional-compatible transient WSS
-surrogation`은 AneuG-Flow의 transient WSS와 TAWSS/OSI/RRT를 같은 cycle
-moment에서 일관되게 유도하는 질문으로 33.0/40을 받았습니다. 그러나 exact
-public source `754ed746…`의 `introai9` CPU/PBS P0 job `115168`은 5분 16초 뒤
-exit 28로 끝났고, 두 processed payload·partial file·aggregate result가 모두
-생성되지 않았습니다. PBS stdout도 materialize되지 않아 exact shell cause는
-확정하지 않으며, scientific 16-check gate는 미평가입니다.
+현재 active **source shortlist는 1개**, selected primary problem은 **0개**입니다.
+새 후보는 AneuX의 같은 병변에 제공되는 3개 mesh resolution과 최대 4개 isolation
+cut을 독립 표본이나 augmentation이 아니라 하나의 **preprocessing orbit**으로
+정의합니다. 질문은 surface functional과 향후 예측이 그 orbit 안에서 얼마나
+흔들리는지, 그리고 nuisance variation을 quotient하면서 병변 간 형태 신호를
+보존할 수 있는지입니다. Source score는 34/40이지만, 아직 CSV/model payload를
+읽지 않은 P0-only 후보이며 method·architecture·GPU·outer test와 paper identity는
+모두 0입니다.
 
-등록 계약에 따라 dependency/reader/transport repair, same-contract rerun과 P1을
-열지 않고 이 candidate version을 `execution-incomplete/no scientific verdict`로
-닫았습니다. 이는 AneuG-Flow recoverability나 cycle-functional 가설의 실패를
-뜻하지 않습니다. Method·architecture·GPU·outer test와 paper identity는 계속
-0입니다. 질문·수식·직접 선행은 [`cycle-functional WSS audit`](docs/cycle-functional-wss-audit-2026-08-09.md),
-동결 계약은 [`P0 config`](configs/aneug_cycle_functional_p0.json), 실행 경계는
+[`AneuX orbit audit`](docs/aneux-preprocessing-orbit-audit-2026-08-09.md)과
+[`frozen P0`](configs/aneux_preprocessing_orbit_p0.json)은 official 13 MB tabular
+archive와 6.28 GB model archive의 file identity, patient grouping, cut–morphometry
+mapping과 ZIP central-directory 구조를 먼저 검사하도록 고정합니다. Model
+archive는 HEAD/tail/central-directory byte range만 읽고 mesh member payload는
+열지 않습니다. Exact public commit 뒤 `introai9` CPU/PBS에서 한 번만 실행하며,
+pass도 method-free P1만 허용합니다. `junjinyong`은 접속·제출·조회 대상이
+아닙니다.
+
+직전 `cycle-functional-compatible transient WSS surrogation` 33/40 후보는 exact
+public source `754ed746…`의 `introai9` P0가 payload 전에 exit 28로 끝나
+`execution-incomplete/no scientific verdict`로 닫혔습니다. Dependency/reader/
+transport repair, same-contract rerun과 P1은 열지 않습니다. 상세 이력은
+[`cycle-functional WSS audit`](docs/cycle-functional-wss-audit-2026-08-09.md)과
 [`P0 execution record`](results/aneug_cycle_functional_p0_execution_20260809.json)에
-보존합니다.
+그대로 보존합니다.
 
 가장 최근의 fresh source audit은 aneurysm-bearing surface에서 healthy
 parent-vessel counterfactual과 localized lesion edit를 함께 추론하는 inverse
@@ -101,18 +109,18 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 실패 이력의 연속성을 위해 유지하지만,
-> 현재 active primary problem, shortlist, 방법명과 architecture는 없습니다.
-> 33/40의 cycle-functional 후보도 P0 execution-incomplete 뒤 닫혔습니다.
-> 닫힌 P0/S0a를 수리하거나 GNN·U-Net·training config를 먼저 고르지 않고,
-> fresh problem audit가 데이터·estimand·direct-prior gap을 독립적으로
-> 통과해야 합니다.
+> 현재 source shortlist는 AneuX preprocessing-orbit 후보 1개이고, selected
+> primary problem·방법명·architecture는 없습니다. P0가 asset/unit 계약을
+> 통과해도 method-free P1만 열립니다. 닫힌 P0/S0a를 수리하거나 GNN·U-Net·
+> training config를 먼저 고르지 않습니다.
 
-## 현재 단계 · shortlist/primary problem/method/GPU 모두 없음
+## 현재 단계 · source shortlist 1 · primary problem/method/GPU 0
 
 현재 허용된 다음 작업은 open-CTA parser 수리, AneuG-Flow P0 repair/rerun 또는
-닫힌 branch 재실행이 아니라 **새 problem-level primary-source/asset audit**뿐입니다.
-새 후보가 독립적으로 admission과 method-free task gate를 통과하기 전에는
-executable headline model, GPU job, outer test와 submission identity가 없습니다.
+닫힌 branch 재실행이 아니라, 공개 커밋에 고정된 AneuX **CPU-only P0 asset
+audit을 `introai9`에서 한 번 실행**하는 것입니다. P0 pass 전에는 P1이 없고,
+P1의 method-free task adequacy pass 전에는 executable headline model, GPU job,
+outer test와 submission identity가 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.

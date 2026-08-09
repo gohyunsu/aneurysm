@@ -7,6 +7,38 @@
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
+## P0-O · AneuX same-lesion preprocessing orbit · preregistered, pending
+
+현재 유일한 source shortlist는 AneuX의 동일 lesion에 제공되는 resolution × cut
+변형을 하나의 preprocessing orbit으로 묶는 문제다. Source score 34/40은 asset
+audit 실행 자격일 뿐 selected primary, method 또는 contribution이 아니다.
+
+- exact config: `configs/aneux_preprocessing_orbit_p0.json`, SHA-256
+  `26393855aec6dbd8af53477e54e8079587af2458fbaf91b5d0fc959c77adc978`
+- execution: `introai9` PBS, `coss_agpu`, 4 CPU, 16 GB, GPU 0, one exact job.
+- tabular asset: official `data-v1.0.zip`, 12,992,074 byte, MD5
+  `a00dde7b974de724c6480dbda4585a8c`; private cache에서 필요한 CSV만 읽는다.
+- model asset: official `models-v1.0.zip`, 6,277,720,483 byte, MD5
+  `6248323006f67858b1eb1ec77ce8c0a6`; HEAD/tail/central-directory exact range만
+  읽고 full download와 어느 member payload도 금지한다.
+- all checks: 750 unique lesion, source 350/135/164/101, status 735,
+  patientID 637 row, 최소 450 observed patient group, clinical-per-cut/morphometry
+  key equality, four cut와 all-lesion dome+ninja, 170 morphometric feature,
+  three resolution/four cut central-directory token, 최소 4,500 aneurysm VTP,
+  path safety/privacy/no-method/no-GPU boundary.
+- transport: 같은 exact job의 각 HTTP operation에서 transient URL/timeout/
+  408/429/5xx에만 0/10/30초 backoff로 최대 3 attempt. Semantic/parser/contract
+  failure는 retry하지 않고 같은 source PBS resubmission도 금지한다.
+- pass: 별도 method-free P1 casewise task-adequacy 등록만 허용한다.
+- fail/incomplete: 이 candidate version을 닫거나 no-verdict로 보존하며 method,
+  architecture, GPU, outer test와 rupture-status claim을 열지 않는다.
+
+P0 이전에는 official record/content-description만 사용했고 CSV payload, model
+central directory와 mesh payload는 읽지 않았다. P1은 같은-lesion variation과
+between-lesion variation, analytic/precomputed morphometry, PointNet++, DiffusionNet,
+E(3) control과 source-held-out discrimination을 결과 전에 고정해야 한다.
+`junjinyong`은 실행·조회·모니터링 대상이 아니다.
+
 ## P0-W · AneuG-Flow cycle-functional source pair · execution-incomplete, closed
 
 Conditional candidate는 transient WSS와 그 cycle functional이 같은
@@ -1453,7 +1485,7 @@ paper로 범위를 축소하고 AAAI general method claim을 하지 않는다.
 | AneuG-Flow | irregular 3D pretraining | geometry archive만 local; BC variation 없음 |
 | BenchAnXplore | transient GNN baseline/D0 | 105×80 audited; D0 실행 |
 | CMHA | secondary real-CFD/status diagnostic | exploratory increment negative |
-| AneuX | secondary external association stress | real CFD 없음 |
+| AneuX v1.0 | P0-only same-lesion preprocessing-orbit asset 후보; status는 P1 뒤 secondary association만 | real CFD 없음; patient/source grouping 전 성능 실험 금지 |
 
 Full multi-terabyte archive를 먼저 받지 않는다. Remote manifest에서 shard
 크기, case/BC grouping, checksum을 확인한 뒤 최소 pilot subset만 승인된
