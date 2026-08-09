@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 acquisition–flow lineage boundary:** CMRx directly defines
+> 10--50× reconstruction, single-A6000 efficiency, new-site/disease and
+> cross-anatomy tasks. FlowMRI-Net already uses self-supervised complex unrolling
+> and joint encoding information; DAF-FlowNet uses divergence-free enhancement
+> and unwrapping; VAST combines intracranial segmentation, unwrapping and physics
+> consistency. Distributional reconstruction and functional uncertainty are
+> additional direct controls. Residual novelty would require paired observation
+> semantics plus an independent functional reference, neither of which is
+> identified in an ISBI-compatible public cohort. See the
+> [`source audit`](acquisition-flow-source-audit-2026-08-10.md).
+
 > **2026-08-10 treatment–surveillance lineage boundary:** Flow-diverter
 > morphology/virtual-stenting/CFD outcome ML, time-to-occlusion modeling,
 > propensity-matched device comparison and 2025 morphology+CFD+SHAP prediction

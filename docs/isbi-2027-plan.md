@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 latest boundary:** acquisition–flow candidates score
+> 27.5/26.5/24.0/26.0/27.0, all below 32. CMRx independent research use begins
+> after the December 2026 embargo, later than the 2026-10-26 ISBI deadline, and
+> its reconstruction/generalization questions are direct challenge tasks. The
+> open dual-VENC aneurysm source has one effective anatomy. No primary, method,
+> architecture, result row or GPU is selected; the paper remains
+> **not submission-ready**.
+
 > **2026-08-10 latest boundary:** treatment–surveillance candidates score
 > 30.0/26.0/29.0/26.0/23.0, all below 32. The public 126-subject flow-diverter
 > table cannot identify causal device choice or exact occlusion time, and the

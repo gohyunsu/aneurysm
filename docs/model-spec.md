@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 latest architecture boundary:** acquisition–flow batch 최고점은
+> 27.5/40이다. Complex-valued unrolling, joint velocity-encoding fusion,
+> divergence-free curl parameterization, arbitrary-mask uncertainty, domain
+> generalization과 functional/WSS loss는 모두 direct prior 또는 control이다.
+> Identifiable paired-VENC/functional reference와 ISBI-compatible asset이 없으므로
+> 현재 GNN을 포함한 headline architecture는 **미선정**이고 GPU authorization은
+> 0이다. [`source audit`](acquisition-flow-source-audit-2026-08-10.md)
+
 > **2026-08-10 latest architecture boundary:** treatment–surveillance batch의
 > 최고점은 30.0/40이다. Interval-censored survival, propensity adjustment,
 > benefit–harm multi-task learning, patient-history Transformer와 paired-MRA

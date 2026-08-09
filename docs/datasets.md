@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 acquisition–flow audit:** CMRx4DFlow2026 reports over 400 cases,
+> 138 fully sampled training cases and cerebrovascular 10/20 validation/test
+> cases, but access is challenge/Synapse-gated and independent research use is
+> embargoed until December 2026. It is therefore watch-only for the current ISBI
+> clock. Zenodo `10.5281/zenodo.14981710` reports 8 dual-VENC scans from 4
+> printed states of one paraophthalmic aneurysm anatomy; scan count is not an
+> independent-anatomy count. No CMRx or 6.2 GB aneurysm payload was accessed.
+
 > **2026-08-10 treatment–surveillance audit:** Mendeley
 > `10.17632/nzzx92ky6r.2` reports 126 subjects/141 flow-diverter procedures,
 > complications and first/second DSA follow-up; it is a source-rejected treatment

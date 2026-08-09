@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 acquisition–flow source-audit overlay:** Fresh source-only batch는
+> nested-acceleration coherence, cross-site/anatomy reconstruction, explicit
+> multi-VENC divergence-free uncertainty, functional-risk WSS/vorticity와
+> treated-aneurysm device-response transfer를
+> 27.5/26.5/24.0/26.0/27.0으로 판정했다. 모두 frozen admission line 32
+> 미만이다. CMRx는 138 fully sampled train case와 10/20 cerebrovascular
+> validation/test case를 보고하지만 independent research embargo가 2026년
+> 12월까지라 ISBI 2027 마감 뒤다. 공식 task와 FlowMRI-Net, DAF-FlowNet,
+> VAST가 직접 선행이다. Same-case repeat multi-VENC는 보고되지 않았고 공개
+> dual-VENC aneurysm record의 8 scan/4 printed state는 effective anatomy 1이다.
+> Synapse application, challenge form, terms acceptance, k-space/MAT, 6.2 GB
+> aneurysm ZIP, P0, method, architecture, PBS/GPU와 outer test는 0이다. Schema
+> 4.7 source of truth는 `problem_selection.acquisition_flow_source_audit`와
+> `docs/acquisition-flow-source-audit-2026-08-10.md`다. AURORA는 `introai9`
+> PBS만 사용하며 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 treatment–surveillance deployment overlay:** Exact source content
 > `9080f4fea64bbad968e5a2508fa79d1a2f4da4d4`의 Quality `31332304523`과 Pages
 > `31332303841`이 성공했다. Live overview와 field guide는 batch best 30.0/40,

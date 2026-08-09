@@ -1,6 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.6 · 2026-08-10
+버전: 4.7 · 2026-08-10
+
+> **Current gate:** acquisition–flow batch 최고점은 27.5/40이다. CMRx
+> challenge/Synapse에 가입하거나 terms를 수락하지 않았고 k-space/MAT와 6.2 GB
+> aneurysm ZIP을 읽지 않았다. December 2026 embargo는 ISBI 마감보다 늦고,
+> same-case 반복 multi-VENC와 independent WSS reference도 확인되지 않았다.
+> 따라서 P0, model, PBS/GPU와 outer test는 모두 unauthorized다. Fresh candidate가
+> 32/40 이상일 때만 `introai9` CPU/PBS method-free P0를 별도 등록하며
+> `junjinyong`은 계속 제외한다.
 
 > **Current gate:** treatment–surveillance batch의 최고점은 30.0/40이다.
 > Public flow-diverter spreadsheet와 restricted paired MRA를 읽지 않았고 P0,

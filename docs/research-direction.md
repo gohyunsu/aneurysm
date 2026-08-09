@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **2026-08-10 acquisition–flow boundary:** CMRx4DFlow2026은 138개 fully
+> sampled train case와 site/anatomy shift를 포함하지만, 독립 연구 이용 embargo가
+> 2026년 12월까지라 ISBI 마감 뒤다. 10--50× reconstruction, efficiency,
+> cross-site와 cross-anatomy는 이미 공식 challenge task이며 FlowMRI-Net,
+> DAF-FlowNet과 VAST가 핵심 구성요소를 직접 점유한다. Same-case 반복 multi-VENC도
+> 보고되지 않았고 공개 aneurysm dual-VENC 자료의 effective anatomy는 1이다.
+> 다섯 후보는 27.5/26.5/24.0/26.0/27.0으로 모두 기각한다. 자세한 논리는
+> [`frozen audit`](acquisition-flow-source-audit-2026-08-10.md)에 있다.
+
 > **2026-08-10 treatment–surveillance boundary:** Public flow-diverter follow-up
 > data are real clinical outcomes but do not create a new method identity.
 > Observed interval-censored occlusion forecasting is the best row at 30.0/40;

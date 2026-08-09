@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.6":
-        raise ProtocolError("The current research-state schema must be version 4.6.")
+    if protocol["schema_version"] != "4.7":
+        raise ProtocolError("The current research-state schema must be version 4.7.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_treatment_surveillance_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_acquisition_flow_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -196,6 +196,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "context_treatment_source_audit",
             "provenance_evaluation_source_audit",
             "treatment_surveillance_source_audit",
+            "acquisition_flow_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -205,12 +206,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_treatment_surveillance_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_acquisition_flow_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_public_manuscripts_and_repository_records_only_no_mendeley_spreadsheet_r_document_presentation_dsa_image_restricted_zenodo_mra_or_patient_payload_for_treatment_surveillance_audit"
+        != "source_metadata_public_manuscripts_and_repository_records_only_no_synapse_application_challenge_form_kspace_mat_aneurysm_zip_or_patient_payload_for_acquisition_flow_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -222,14 +223,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/treatment-surveillance-source-audit-2026-08-10.md"
+        != "docs/acquisition-flow-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "observed_interval_censored_post_fd_occlusion_forecasting"
+        != "nested_acceleration_coherent_4d_flow_reconstruction"
     ):
         raise ProtocolError(
-            "The PINN direct-prior boundary must retain no selected primary, "
+            "The current acquisition-flow boundary must retain no selected primary, "
             "method, GPU, outer test, P1, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -279,6 +280,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "early_complication_delayed_occlusion_utility_prediction",
         "recurrent_procedure_patient_history_sequence_modeling",
         "fast_standard_tof_mra_remnant_decision_equivalence",
+        "nested_acceleration_coherent_4d_flow_reconstruction",
+        "cross_site_cross_anatomy_4d_flow_reconstruction",
+        "explicit_multi_venc_divergence_free_uncertainty",
+        "functional_risk_controlled_wss_vorticity_reconstruction",
+        "treated_aneurysm_dual_venc_device_response_transfer",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -2215,6 +2221,138 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("treatment-surveillance rejection and introai9-only boundary")
 
+    acquisition_audit = problem_selection["acquisition_flow_source_audit"]
+    _require_keys(
+        acquisition_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "any_synapse_application_challenge_form_kspace_mat_aneurysm_zip_or_patient_payload_accessed",
+            "cmrx_terms_accepted_verified",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "observed_introai9_pbs_job_count",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "cmrx_total_cases_minimum",
+            "cmrx_train_fully_sampled_cases",
+            "cmrx_regular_validation_cases",
+            "cmrx_regular_test_cases",
+            "cmrx_cerebrovascular_validation_cases",
+            "cmrx_cerebrovascular_test_cases",
+            "cmrx_acceleration_factors",
+            "cmrx_independent_research_embargo_ends",
+            "cmrx_embargo_after_isbi_submission_deadline",
+            "cmrx_same_case_repeat_multi_venc_acquisitions_reported",
+            "dual_venc_aneurysm_doi",
+            "dual_venc_aneurysm_scans",
+            "dual_venc_aneurysm_printed_models",
+            "dual_venc_aneurysm_effective_anatomies",
+            "dual_venc_aneurysm_archive_accessed",
+            "cmrx_fully_sampled_reference_is_independent_wss_ground_truth",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.acquisition_flow_source_audit",
+    )
+    expected_acquisition_scores = {
+        "nested_acceleration_coherent_4d_flow_reconstruction": 27.5,
+        "cross_site_cross_anatomy_4d_flow_reconstruction": 26.5,
+        "explicit_multi_venc_divergence_free_uncertainty": 24.0,
+        "functional_risk_controlled_wss_vorticity_reconstruction": 26.0,
+        "treated_aneurysm_dual_venc_device_response_transfer": 27.0,
+    }
+    observed_acquisition_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in acquisition_audit["candidates"]
+    }
+    acquisition_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in acquisition_audit["candidates"]
+    )
+    if (
+        acquisition_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or acquisition_audit["audit_document"]
+        != "docs/acquisition-flow-source-audit-2026-08-10.md"
+        or acquisition_audit["automatic_selection_threshold"] != 32.0
+        or acquisition_audit["best_candidate_id"]
+        != "nested_acceleration_coherent_4d_flow_reconstruction"
+        or acquisition_audit["best_score"] != 27.5
+        or acquisition_audit["best_score"]
+        >= acquisition_audit["automatic_selection_threshold"]
+        or acquisition_audit["active_shortlist_count"] != 0
+        or acquisition_audit["primary_problem_selected"] is not False
+        or acquisition_audit[
+            "any_synapse_application_challenge_form_kspace_mat_aneurysm_zip_or_patient_payload_accessed"
+        ]
+        is not False
+        or acquisition_audit["cmrx_terms_accepted_verified"] is not False
+        or acquisition_audit["executable_p0_registered"] is not False
+        or acquisition_audit["method_selected"] is not False
+        or acquisition_audit["architecture_selected"] is not False
+        or acquisition_audit["gpu_training_authorized"] is not False
+        or acquisition_audit["outer_test_authorized"] is not False
+        or acquisition_audit["submission_identity_active"] is not False
+        or acquisition_audit["execution_server"] != "introai9"
+        or acquisition_audit["observed_introai9_pbs_job_count"] != 0
+        or acquisition_audit["pbs_job_created"] is not False
+        or acquisition_audit["login_node_gpu_command_executed"] is not False
+        or acquisition_audit["junjinyong_accessed_for_this_audit"] is not False
+        or acquisition_audit["cmrx_total_cases_minimum"] != 400
+        or acquisition_audit["cmrx_train_fully_sampled_cases"] != 138
+        or acquisition_audit["cmrx_regular_validation_cases"] != 32
+        or acquisition_audit["cmrx_regular_test_cases"] != 43
+        or acquisition_audit["cmrx_cerebrovascular_validation_cases"] != 10
+        or acquisition_audit["cmrx_cerebrovascular_test_cases"] != 20
+        or acquisition_audit["cmrx_acceleration_factors"]
+        != [10, 20, 30, 40, 50]
+        or acquisition_audit["cmrx_independent_research_embargo_ends"]
+        != "2026-12"
+        or acquisition_audit["cmrx_embargo_after_isbi_submission_deadline"]
+        is not True
+        or acquisition_audit["cmrx_same_case_repeat_multi_venc_acquisitions_reported"]
+        is not False
+        or acquisition_audit["dual_venc_aneurysm_doi"]
+        != "10.5281/zenodo.14981710"
+        or acquisition_audit["dual_venc_aneurysm_scans"] != 8
+        or acquisition_audit["dual_venc_aneurysm_printed_models"] != 4
+        or acquisition_audit["dual_venc_aneurysm_effective_anatomies"] != 1
+        or acquisition_audit["dual_venc_aneurysm_archive_accessed"] is not False
+        or acquisition_audit[
+            "cmrx_fully_sampled_reference_is_independent_wss_ground_truth"
+        ]
+        is not False
+        or observed_acquisition_scores != expected_acquisition_scores
+        or not acquisition_axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in acquisition_audit["candidates"])
+        or acquisition_audit["decision"]
+        != "reject_all_without_score_repair_synapse_application_challenge_form_kspace_mat_aneurysm_zip_payload_p0_method_architecture_or_gpu"
+        or acquisition_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_with_isbi_compatible_public_assets_and_independent_functional_reference_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The acquisition-flow audit must preserve all five frozen "
+            "source-only rejections, the 27.5/40 maximum, no Synapse/k-space/"
+            "aneurysm archive/P0/model/GPU, and introai9-only execution."
+        )
+    checks.append("acquisition-flow rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -2294,7 +2432,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_treatment_surveillance_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_acquisition_flow_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -2457,7 +2595,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_treatment_surveillance_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_acquisition_flow_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

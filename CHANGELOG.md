@@ -4,6 +4,24 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Acquisition–flow batch is rejected before access and compute
+
+- CMRx4DFlow2026 reports 400+ cases, 138 fully sampled training cases and
+  dedicated new-site/disease and cross-anatomy tasks, but independent research
+  use is embargoed until December 2026—after the ISBI submission deadline.
+- Nested acceleration, cross-domain reconstruction, explicit multi-VENC
+  uncertainty, functional WSS risk and treated-aneurysm transfer score
+  **27.5/26.5/24.0/26.0/27.0**. All are below 32/40.
+- FlowMRI-Net, DAF-FlowNet and VAST are direct priors. CMRx does not report
+  same-case repeat multi-VENC acquisitions; the open aneurysm record has eight
+  scans but one effective anatomy.
+- Schema 4.7 freezes no Synapse application/form/terms, k-space/MAT, aneurysm
+  ZIP, P0/model/GPU/outer test, `introai9`-only execution and complete exclusion
+  of `junjinyong`.
+- 영향 파일: `docs/acquisition-flow-source-audit-2026-08-10.md`, machine
+  contract/validator/tests, public research and dataset guides, site status and
+  this changelog.
+
 ## 2026-08-10 · Treatment–surveillance rejection is deployed and verified
 
 - Exact content `9080f4fea64bbad968e5a2508fa79d1a2f4da4d4` passed Quality

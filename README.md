@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 acquisition–flow boundary:** CMRx4DFlow2026은 400+ case와 138개
+> fully sampled train case를 보고하지만 independent research embargo가 2026년
+> 12월까지라 ISBI 마감 뒤다. 10--50× acceleration, efficiency, cross-site와
+> cross-anatomy는 이미 공식 challenge task다. Same-case 반복 multi-VENC는
+> 보고되지 않았고, 공개 dual-VENC aneurysm 자료의 effective anatomy는 1이다.
+> 다섯 frozen score는 **27.5/26.5/24.0/26.0/27.0**으로 모두 32 미만이다.
+> [`상세 audit`](docs/acquisition-flow-source-audit-2026-08-10.md)에 따라
+> Synapse/terms/k-space/aneurysm ZIP/P0/model/GPU는 열지 않았으며 실행 경계는
+> `introai9` PBS only, `junjinyong` 완전 제외다.
+
 > **2026-08-10 treatment–surveillance boundary:** 새 공개 flow-diverter source는
 > 126명/141건의 시술, first/second DSA follow-up과 합병증을 보고하지만 정확한
 > 폐색 시점과 randomized device assignment는 제공하지 않는다. Paired
@@ -16,6 +26,18 @@ N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 �
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
 가장 최근
+[`acquisition–flow source audit`](docs/acquisition-flow-source-audit-2026-08-10.md)은
+CMRx challenge와 aneurysm dual-VENC 자료가 partial-observation operator의 새
+실험 기반이 될 수 있는지 검토했습니다. 공식 challenge가 reconstruction과
+generalization 과제를 직접 점유하고, 데이터의 독립 연구 embargo가 ISBI 마감보다
+늦으며, paired multi-VENC/independent WSS reference도 없습니다. 따라서 최고점은
+27.5/40이고 payload/P0/model/PBS/GPU는 모두 0입니다.
+
+직전
+[`treatment–surveillance source audit`](docs/treatment-surveillance-source-audit-2026-08-10.md)의
+최고점 30.0/40은 historical rejection으로 보존합니다.
+
+그 전
 [`provenance–evaluation source audit`](docs/provenance-evaluation-source-audit-2026-08-10.md)은
 AneuX, Aneurisk와 새 76-case CFD release 사이의 동일 해부구조 계보가
 hemodynamic pretraining과 rupture 평가를 오염시킬 수 있는지 점검했습니다.

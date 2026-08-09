@@ -6,6 +6,17 @@
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
 운영 명령과 private path는 Git에서 제외된 `SERVER_GUIDE.md`를 따른다.
 
+## 2026-08-10 · acquisition–flow source audit, no job authorized
+
+- Frozen scores are 27.5/26.5/24.0/26.0/27.0, all below 32.
+- Only official public pages, manuscripts and repository records were inspected.
+  No Synapse application, challenge form, terms acceptance, k-space/MAT,
+  aneurysm ZIP or patient payload occurred.
+- There is no executable P0, PBS submission, GPU job or monitoring loop from
+  this audit. This is a registered source-gate stop, not a server failure.
+- AURORA remains `introai9` PBS only. `junjinyong` is excluded from connection,
+  query, submission and monitoring.
+
 ## 2026-08-10 · treatment–surveillance source audit, no job authorized
 
 - Frozen scores are 30.0/26.0/29.0/26.0/23.0, all below 32.

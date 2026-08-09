@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · treatment–surveillance best 30.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · acquisition–flow best 27.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A large challenge still does not create an ISBI-ready problem",
+      copy: "CMRx4DFlow2026 reports 400+ multi-center cases, 138 fully sampled training cases and dedicated new-site/disease and cross-anatomy tests. But independent research use is embargoed until December 2026, after the ISBI deadline, and its acceleration, efficiency and domain-shift questions are already official tasks. FlowMRI-Net, DAF-FlowNet and VAST directly occupy self-supervised unrolling, encoding fusion, divergence-free unwrapping and intracranial flow consistency. The open dual-VENC aneurysm record has eight scans but one effective anatomy.",
+      status: "Best 27.5/40 · all rejected · Synapse/terms/k-space/aneurysm ZIP/P0/model/GPU 0",
+      url: "../docs/acquisition-flow-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Clinical follow-up data still do not identify a new method",
@@ -355,6 +362,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "CMRx4DFlow2026",
+      role: "post-embargo watch source only; no current AURORA training or evaluation role",
+      provenance: "400+ cases · 138 fully sampled train · cerebrovascular 10/20 validation/test · Synapse/challenge gated · independent research embargo through Dec 2026 · payload 0 · no P0/model/GPU"
+    },
+    {
       name: "Flow-diverter follow-up table · Mendeley v2",
       role: "source-rejected observed treatment-outcome control; not causal device-selection training",
       provenance: "126 subjects · 141 procedures · first/second irregular DSA follow-up · nonrandom device assignment · spreadsheet/R/presentation/DSA payload 0 · best 30/40"
@@ -486,6 +498,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Acquisition–flow candidates stop before access and compute",
+      copy: "Nested-acceleration coherence, cross-site/anatomy reconstruction, explicit multi-VENC uncertainty, functional WSS/vorticity risk and treated-aneurysm transfer score 27.5/26.5/24.0/26.0/27.0. CMRx independent research use is embargoed until December 2026, after the ISBI deadline; the official challenge directly occupies acceleration, efficiency and domain-shift tasks. No same-case repeat multi-VENC is reported, and the open dual-VENC aneurysm record has one effective anatomy. Schema 4.7 freezes no Synapse application/form/terms, k-space/MAT, aneurysm ZIP, P0/model/GPU, introai9-only execution and complete exclusion of junjinyong.",
+      files: ["docs/acquisition-flow-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "docs/model-spec.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",
