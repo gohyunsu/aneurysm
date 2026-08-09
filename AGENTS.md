@@ -10,6 +10,8 @@
 > `20755816853044b33dbe54113937e5fec35076a4975494a3a741ab43e4a0ca24`,
 > public execution record는 `results/aneumo_lineage_p0_execution_20260810.json`
 > (SHA-256 `c10c65766f0f0564cbddb911f10c32a03eb41f4aa7e8adbff99094cb5ad7b30d`)다.
+> Exact outcome content `5b98fa296bc7e25f2a3cff97a4a0e3df81c64f8a`의 Quality
+> run `31341512723`과 Pages run `31341512255`는 모두 성공했다.
 > Schema 5.2는 이 candidate version을 `execution-incomplete/no scientific
 > verdict`로 닫고 active shortlist, P1, primary, method, architecture, GPU,
 > outer test와 submission identity를 0으로 되돌린다. Transport repair와

@@ -16,6 +16,8 @@
   Active shortlist, P1, primary, model, GPU and outer test return to zero.
 - No transport repair or same-contract rerun is allowed. `junjinyong` was not
   accessed and remains excluded.
+- Exact outcome content `5b98fa296bc7e25f2a3cff97a4a0e3df81c64f8a`
+  passed Quality run `31341512723` and Pages run `31341512255`.
 
 ## 2026-08-10 · Aneumo generation-lineage candidate opens one CPU metadata P0
 

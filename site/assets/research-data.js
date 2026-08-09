@@ -540,7 +540,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.10",
       category: "experiment",
       title: "Aneumo lineage P0 closes before the scientific gate",
-      copy: "Exact public source d3eb3d3… ran once on introai9 as CPU/PBS job 115386.ECE-util1. PBS finalized state F, exit -29, walltime 20:36, CPU time 0 and GPU 0. No first small source completed; cache, result JSON and raw scheduler log are absent, so every registered scientific check is unevaluated. Schema 5.2 closes the candidate without transport repair, same-contract rerun, P1, method, architecture, GPU or outer test. Active shortlist returns to zero and junjinyong remains excluded.",
+      copy: "Exact public source d3eb3d3… ran once on introai9 as CPU/PBS job 115386.ECE-util1. PBS finalized state F, exit -29, walltime 20:36, CPU time 0 and GPU 0. No first small source completed; cache, result JSON and raw scheduler log are absent, so every registered scientific check is unevaluated. Schema 5.2 closes the candidate without transport repair, same-contract rerun, P1, method, architecture, GPU or outer test. Outcome content 5b98fa2… passed Quality 31341512723 and Pages 31341512255. Active shortlist returns to zero and junjinyong remains excluded.",
       files: ["results/aneumo_lineage_p0_execution_20260810.json", "docs/aneumo-lineage-split-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_aneumo_lineage_p0.py", "tests/test_protocol.py", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
     },
     {
