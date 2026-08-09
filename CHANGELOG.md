@@ -32,6 +32,19 @@
   `site/index.html`, `site/learn.html`, `site/assets/aurora.js`,
   `site/assets/research-data.js`, `CHANGELOG.md`.
 
+## 2026-08-09 · Closed P0 state is deployed
+
+- Exact content commit `7c6bf9e8c4354f4f3557551a1d7f795265ce069d`의 Quality
+  run `31294677050`과 Pages run `31294676782`가 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 active shortlist
+  0, cycle-functional P0 execution-incomplete/no scientific verdict, P1/model/GPU
+  금지와 fresh problem audit-only 경계를 확인했다.
+- 공개 [execution record](https://gohyunsu.github.io/aneurysm/results/aneug_cycle_functional_p0_execution_20260809.json)도
+  HTTP 200으로 확인했다. 이 배포 확인은 scientific gate를 평가하거나 후보를
+  재개방하지 않는다.
+- 영향 파일: `AGENTS.md`, `site/index.html`, `site/assets/research-data.js`,
+  `CHANGELOG.md`.
+
 ## 2026-08-09 · Cycle-functional WSS enters a P0-only conditional shortlist
 
 - 같은 transient WSS field와 TAWSS/OSI/RRT가 공유하는 cycle moments를 하나의

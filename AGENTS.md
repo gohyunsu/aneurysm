@@ -56,6 +56,12 @@ run `31291453002`와 Pages run `31291452634`는 모두 성공했고, live site�
 이 판정과 `introai9`-only/현재 GPU job 0 경계를 확인했다. 배포 확인은
 scientific state나 authorization을 바꾸지 않는다.
 
+Exact cycle-functional P0 outcome content `7c6bf9e8c4354f4f3557551a1d7f795265ce069d`의
+Quality run `31294677050`과 Pages run `31294676782`도 모두 성공했다. Live
+site와 공개 execution record에서 shortlist 0, scientific gate 미평가와
+no-repair/no-rerun/P1/model/GPU 경계를 확인했다. 이 배포 검증도 candidate를
+재개방하지 않는다.
+
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**

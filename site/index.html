@@ -47,7 +47,7 @@
         <p class="hero-lede">
           같은 transient WSS field가 만든 TAWSS, OSI와 RRT가 서로 모순되지
           않아야 한다는 33/40 후보를 exact P0까지 보냈습니다. 그러나
-          `introai9` CPU/PBS 실행은 processed payload 전에 exit 28로 끝났고
+          <code>introai9</code> CPU/PBS 실행은 processed payload 전에 exit 28로 끝났고
           scientific gate를 평가하지 못했습니다. 같은 계약을 수리·재실행하지
           않고 후보를 닫았으므로 현재 shortlist, primary problem, model, GPU와
           outer test는 모두 없습니다.
@@ -181,7 +181,8 @@
             field에 대해 모순된 값을 낼 수 있다. 후보는 먼저 평균 vector
             <em>m</em>과 평균 magnitude <em>a</em>를 공유하고 모든 functional을
             그 두 moment에서 유도한다. 단, raw OSI relative error가 작은 분모의
-            착시가 아닌지는 method-free P1에서 먼저 확인해야 한다.
+            착시가 아닌지 method-free P1에서 확인하려 했지만 P0가 incomplete라
+            이 candidate version에서는 P1이 열리지 않았다.
           </p>
           <div class="gap-equation" aria-label="WSS cycle moment에서 TAWSS, OSI, RRT를 유도하는 관계">
             <span>τ(x,t) → {m(x), a(x)}</span>
@@ -228,7 +229,7 @@
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
           RHSIA가 이미 Graph Transformer, GHD와 steady augmentation으로 transient
-          WSS를 예측한다. 현재 P0는 tensor/hash/topology audit이므로 GNN, attention,
+          WSS를 예측한다. 닫힌 P0는 tensor/hash/topology audit이었으므로 GNN, attention,
           temporal decoder와 functional loss 어느 것도 선택하지 않았다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
@@ -299,7 +300,7 @@
       <div class="architecture-notes">
         <article>
           <span>UNIT INTEGRITY</span>
-          <p>Synthetic geometry case를 patient로 세지 않고 payload의 exact unique unit을 P0에서 확인한다.</p>
+          <p>Synthetic geometry case를 patient로 세지 않는 unit check를 등록했지만 payload 전에 중단돼 미평가다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
@@ -307,7 +308,7 @@
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>P0는 source recoverability만, P1은 task adequacy만 판단하며 모델은 그 뒤 별도 등록한다.</p>
+          <p>원래 P0는 recoverability, P1은 task adequacy를 판단할 계획이었지만 P0 incomplete로 둘 다 현재 권한이 없다.</p>
         </article>
       </div>
       <div class="architecture-links">

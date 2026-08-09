@@ -347,6 +347,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "Closed cycle-functional P0 state is live",
+      copy: "Exact content commit 7c6bf9e8c4354f4f3557551a1d7f795265ce069d passed Quality run 31294677050 and Pages run 31294676782. The live overview renders active shortlist zero, P0 execution-incomplete/no scientific verdict, no P1/model/GPU authorization and fresh problem-audit-only next action. The public aggregate execution-record URL also returned successfully. Deployment verification does not evaluate the scientific gate or reopen the candidate.",
+      files: ["AGENTS.md", "site/index.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.09",
       category: "experiment",
       title: "Cycle-functional P0 closes execution-incomplete without repair",
       copy: "Exact public source 754ed746fb60aef707f639189ad59e84a0fca556 ran once as introai9 CPU/PBS job 115168 with 8 CPU, 128 GB and GPU 0. PBS recorded exit 28 after 00:05:16; neither pinned processed payload, partial file nor aggregate result materialized, and raw stdout was absent. Therefore no one of the 16 scientific checks is evaluated and no source or hypothesis failure is claimed. The preregistered rule closes this candidate version with no dependency/reader/transport repair, same-contract rerun, P1, method, architecture, GPU or outer test. Active shortlist returns to zero.",
