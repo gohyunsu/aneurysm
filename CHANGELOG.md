@@ -4,6 +4,41 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · DSA prefix-risk candidate is rejected at source audit
+
+- Fresh six-candidate red team의 최고 후보는 DIAS DSA prefix로 final merged
+  vessel support와 thin-vessel miss risk를 추론하는 문제였으나 **31.0/40**으로
+  automatic admission 기준 32에 못 미쳤다. Active shortlist, selected primary,
+  method와 architecture는 모두 0이다.
+- Official DIAS paper/Zenodo/repository에서 60 patient, 120 sequence, 60 fully
+  annotated sequence, expert-preselected 4--14 arterial frame, CC BY 4.0과
+  292,444,663-byte archive MD5를 source-only로 확인했다. Paper summary의 753
+  frame과 collection section의 762 image 불일치는 payload audit 전 unresolved다.
+  Dataset payload, frame, label과 patient identifier는 읽지 않았다.
+- 원 논문의 full sequence/minimum projection DSC는 0.7822/0.7802로 차이가
+  0.0020이다. VSS-Net, DSCA, TemSAM, incomplete-angiogram temporal recovery,
+  SAFE-KD류 early exit와 conditional conformal segmentation을 direct prior로
+  올렸다. Temporal encoder, MIP prompt, arrival map, stopping head와 conformal
+  wrapper를 단독 novelty로 세지 않는다.
+- Release는 raw full-phase acquisition, frame exposure/dose, prospective stop
+  action과 frame-level arrival ground truth를 제공하지 않는다. 따라서
+  `acquisition stopping`, dose reduction과 clinical utility를 endpoint로 쓰지
+  않고 score를 thin-vessel metric으로 사후 수리하지 않는다.
+- Known `introai9` dataset root의 bounded read-only inventory에서 DIAS staging은
+  확인되지 않았다. Source gate가 닫혔으므로 download, executable P0, PBS job,
+  model, checkpoint와 GPU를 만들지 않았다. `junjinyong`은 접속·조회·제출·
+  모니터링에서 계속 제외한다.
+- Central schema는 `3.8`이며 protocol validator 15 invariant group, focused
+  protocol test 92개와 전체 unit suite 292개가 통과했다(63개 environment-dependent
+  test는 기존 skip contract 유지).
+- 영향 파일: `docs/dsa-prefix-risk-audit-2026-08-09.md`, `AGENTS.md`, `README.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`, `docs/server-execution.md`,
+  `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`, `site/index.html`,
+  `site/learn.html`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Closed AneuX P0 state is deployed
 
 - Exact outcome content commit `f4cbf727364325a32f6da148189b976be9d22c6f`의

@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-09 DIAS source audit, rejected 31/40:** Official Zenodo v3는
+> `DIAS.zip` 292,444,663 byte, MD5 `780f32df6fb2a5de5d476f385cf2e83b`,
+> CC BY 4.0을 명시한다. 원 논문은 60 patient/120 DSA sequence, 60 fully
+> annotated sequence와 4--14 arterial-phase frame을 보고한다. Summary의 753
+> frame과 collection section의 762 image는 payload audit 전 unresolved다.
+> Full-sequence/minimum-projection DSC는 0.7822/0.7802다. Dataset payload와
+> identifier는 읽지 않았고 known `introai9` root에 staged DIAS asset도 찾지
+> 못했다. Source score가 gate 미달이므로 P0, model과 GPU를 열지 않으며 향후
+> 사용하더라도 patient-grouped external DSA segmentation baseline 역할뿐이다.
+
 > **2026-08-09 AneuX preprocessing-orbit P0, execution-incomplete/closed:** Official AneuX v1.0은
 > 750 aneurysm dome, 668 vessel tree, 605 source-reported patient, 3 mesh
 > resolution, dome/ninja/cut1/cut2와 area-005 기준 170 morphometric feature를

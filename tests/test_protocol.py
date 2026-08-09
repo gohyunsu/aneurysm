@@ -30,6 +30,32 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "no active GPU job"):
             validate_protocol(candidate)
 
+    def test_dsa_prefix_candidate_is_rejected_before_payload_or_training(self) -> None:
+        audit = self.protocol["problem_selection"]["dsa_prefix_risk_source_audit"]
+        self.assertEqual(audit["score"], 31.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertFalse(audit["dataset_payload_accessed"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertAlmostEqual(audit["full_minus_minimum_projection_dsc"], 0.002)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["dsa_prefix_risk_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "DSA prefix-risk candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        dias = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "dias_dsa_sequence_2024"
+        )
+        dias["payload_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "DIAS must remain"):
+            validate_protocol(candidate)
+
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True

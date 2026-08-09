@@ -94,13 +94,29 @@ Quality run `31299794163`과 Pages run `31299793742`도 모두 성공했다. Liv
 scientific verdict, scheduler exit 2, no P1/model/GPU와 fresh problem-audit-only
 경계를 확인했다. 이 배포 검증도 candidate를 재개방하지 않는다.
 
+그 다음 fresh six-candidate primary-source red team에서는 DIAS DSA prefix로
+final merged vessel support와 thin-vessel miss risk를 추론하는 문제가 최고
+31.0/40이었으나 32점 admission line을 넘지 못했다. DIAS는 60 patient/120
+sequence, 60 fully annotated sequence와 전문가가 선별한 4--14 arterial-phase
+frame을 보고한다. 원 논문의 full-sequence/minimum-projection DSC는
+0.7822/0.7802로 차이가 0.0020이다. VSS-Net, DSCA, TemSAM, incomplete-angiogram
+temporal recovery, risk-controlled early exit와 conditional conformal risk가
+direct prior다. Raw full-phase acquisition, dose/stop action과 frame-level arrival
+ground truth가 없어 acquisition stopping을 clinical endpoint로 식별하지 못한다.
+Source score repair 없이 기각했고 payload, executable P0, method, architecture와
+GPU job은 0이다. Source of truth는
+`docs/dsa-prefix-risk-audit-2026-08-09.md`, machine contract는 schema 3.8의
+`problem_selection.dsa_prefix_risk_source_audit`이다.
+
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. Active primary와
-  source shortlist는 모두 0이다. AneuX preprocessing-orbit 후보는 34.0/40으로
+  source shortlist는 모두 0이다. 가장 최근 DIAS prefix-risk 후보는 31.0/40으로
+  source에서 기각됐고 payload/P0/model/GPU는 0이다. 그 이전 AneuX
+  preprocessing-orbit 후보는 34.0/40으로
   P0에 진입했지만 initial tabular transport attempt exhaustion으로 scientific
   gate 전에 닫혔다. Complete/partial archive, CSV parse와 model range/member
   access는 0이고 task adequacy는 미확인이다. Same-source repair/rerun과 P1은

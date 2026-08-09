@@ -10,13 +10,23 @@ supervision-semantics candidate rejected · goal-oriented hemodynamic
 segmentation asset component failed 5/9 and candidate closed · cycle-functional
 transient WSS P0 execution-incomplete before payload/no verdict/no rerun and
 candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before
-completed tabular archive/no verdict/no rerun and candidate closed · active
-shortlist/selected primary problem/method/architecture 0 · inverse healthy-vessel
-counterfactual candidate rejected 27/40 · no GPU/outer test
+completed tabular archive/no verdict/no rerun and candidate closed · DSA
+prefix-risk candidate source-rejected 31/40 · active shortlist/selected primary
+problem/method/architecture 0 · inverse healthy-vessel counterfactual candidate
+rejected 27/40 · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
+
+가장 최근 DIAS 후보도 architecture로 선택하지 않았다. 공개 task는 전문가가
+미리 선별한 arterial-phase 4--14 frame에서 하나의 merged 2D vessel mask를
+예측한다. Full sequence와 minimum projection의 공개 DSC 차이가 0.0020이고,
+temporal sequence network, MIP prompt, complementary-frame selection, early exit와
+conformal risk control이 모두 직접 선행이다. 따라서 latent arrival-time model,
+streaming transformer, U-Net, GNN 또는 stopping head를 먼저 구현하면 문제 gap을
+검증하는 것이 아니라 포화된 segmentation task에 module을 더하는 셈이다.
+Source score 31/40으로 P0·model·GPU를 열지 않는다.
 
 현재 구현하거나 선택한 headline architecture는 없다. 가장 최근 source
 shortlist였던 AneuX preprocessing-orbit는 data structure와 unit을 감사하는

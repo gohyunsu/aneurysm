@@ -5,7 +5,18 @@
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
-가장 최근 34/40 후보는 AneuX의 같은 병변에 제공되는 3개 mesh resolution과 최대
+가장 최근 여섯 후보 red team에서 가장 높은 문제는 DIAS DSA sequence의
+prefix로 final vessel support와 thin-vessel miss risk를 추론하는 문제였지만
+**31.0/40으로 32점 admission gate를 넘지 못했습니다**. 공개 release는 60
+patient/120 sequence 중 60 sequence에 merged 2D artery mask를 제공하고,
+전문의가 arterial phase만 4--14 frame으로 미리 잘라 둡니다. 원 논문의 full
+sequence DSC 0.7822는 minimum projection 0.7802보다 0.0020 높을 뿐이며,
+VSS-Net·DSCA·TemSAM·incomplete-angiogram recovery·risk-controlled early exit와
+conformal segmentation도 직접 선행입니다. 따라서
+[`DSA prefix-risk audit`](docs/dsa-prefix-risk-audit-2026-08-09.md)만 기록하고
+payload, P0, architecture와 GPU job은 만들지 않았습니다.
+
+그 이전 34/40 후보는 AneuX의 같은 병변에 제공되는 3개 mesh resolution과 최대
 4개 isolation cut을 하나의 **preprocessing orbit**으로 다루는 문제였습니다.
 그러나 exact public source `42cc3c7…`의 `introai9` CPU/PBS P0는 첫 tabular
 archive를 완성하기 전에 등록된 transport attempt를 모두 소진했습니다. CSV를
@@ -32,7 +43,7 @@ transport repair, same-contract rerun과 P1은 열지 않습니다. 상세 이�
 [`P0 execution record`](results/aneug_cycle_functional_p0_execution_20260809.json)에
 그대로 보존합니다.
 
-가장 최근의 fresh source audit은 aneurysm-bearing surface에서 healthy
+직전 fresh source audit은 aneurysm-bearing surface에서 healthy
 parent-vessel counterfactual과 localized lesion edit를 함께 추론하는 inverse
 editing 문제를 검토했습니다. 그러나 현재 pinned Aneumo release는 같은 base
 family의 deformation만 연결할 뿐 released healthy counterpart·ostium/edit

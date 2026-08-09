@@ -1,5 +1,29 @@
 # 선행연구 계보와 research gap
 
+## 0-D. Rejected gap · DSA prefix-to-final support risk control
+
+[DIAS](https://doi.org/10.1016/j.media.2024.103247)은 2D+time DSA sequence에서
+하나의 merged artery mask를 예측하는 VSS-Net과 full/weak/semi-supervised
+benchmark를 이미 제공한다. [DSCA](https://doi.org/10.1109/TMI.2025.3540886)는
+spatiotemporal cerebral-artery segmentation을, [TemSAM](https://papers.miccai.org/miccai-2025/paper/2267_paper.pdf)은
+MIP global prompt, complementary-frame selection과 cross-temporal attention을
+직접 다룬다. Incomplete angiogram의 time-density curve recovery, generic
+[risk-controlled early exit](https://arxiv.org/abs/2602.03043)와
+[conditional conformal risk adaptation](https://arxiv.org/abs/2504.07611)도
+각 구성요소를 점유한다.
+
+남을 수 있는 범위는 prefix-censored contrast-arrival posterior의 filtration
+compatibility, thin-vessel/topology miss-risk control과 frame--risk frontier를
+하나의 operator-specific algorithm과 보장으로 결합하는 경우뿐이다. 그러나
+DIAS는 전문의가 arterial phase만 4--14 frame으로 미리 잘라 둔 release이며
+raw full-phase acquisition, prospective stop/dose action과 frame-level arrival
+ground truth가 없다. 원 논문에서 full sequence와 minimum projection DSC도
+0.7822/0.7802로 0.0020 차이다. Source score 31/40으로 task nontriviality와
+residual gap이 admission line을 넘지 못했으므로 active gap이나 contribution으로
+인정하지 않는다. 상세 판정은
+[`dsa-prefix-risk-audit-2026-08-09.md`](dsa-prefix-risk-audit-2026-08-09.md)에
+있다.
+
 ## 0-O. Closed conditional gap · same-lesion preprocessing-orbit quotient
 
 [AneuX](https://doi.org/10.5281/zenodo.6678442)는 동일 병변의 3개 mesh resolution과

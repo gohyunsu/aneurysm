@@ -1,15 +1,18 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-09 current boundary:** AneuX same-lesion preprocessing-orbit는
+> **2026-08-09 current boundary:** 가장 최근 DIAS prefix-risk 후보는
+> 31/40으로 source에서 기각했다. Payload/P0/model/GPU는 0이다. 그 이전 AneuX
+> same-lesion preprocessing-orbit는
 > 34/40으로 P0에 진입했지만, exact CPU-only job이 첫 tabular archive completion
 > 전에 transport attempt를 소진해 scientific gate 미평가로 닫혔다. P1, selected
 > primary, method, architecture, GPU, outer test와 four-page contribution은 없다.
 
 최종 검토일: 2026-08-09 KST
 
-상태: **target locked · AneuX preprocessing-orbit P0 execution-incomplete/no
-verdict/no rerun · active shortlist/selected primary problem/method/architecture/
-GPU 0 · not submission-ready**
+상태: **target locked · DIAS prefix-risk source-rejected 31/40 · AneuX
+preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
+shortlist/selected primary problem/method/architecture/GPU 0 · not
+submission-ready**
 
 2026-08-09 open-CTA physical-coordinate 후보는 32.0/40으로 P0에 진입했지만,
 exact `b437875…` one-shot 실행이 DICOM undefined-length Procedure Code Sequence를
@@ -26,7 +29,10 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
 
-현재 제출 가능한 paper identity는 없다. AneuX orbit 후보는 official source와
+현재 제출 가능한 paper identity는 없다. DIAS prefix 후보는 공개 release가
+arterial phase를 미리 선별했고 full-sequence DSC가 minimum projection보다
+0.0020 높을 뿐이며 temporal/MIP/frame-selection/early-exit/risk-control 선행이
+강해 31/40으로 기각했다. AneuX orbit 후보는 official source와
 direct-prior gap만 통과한 뒤, exact `42cc3c7…` `introai9` CPU/PBS P0가
 `transport_attempts_exhausted`로 끝났다. Completed tabular archive와 CSV parse,
 model range/central-directory/member access는 0이고 13개 check는 미평가다.

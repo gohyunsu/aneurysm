@@ -25,6 +25,19 @@
 `ssu_a6gpu_*` 파일명은 이미 끝난 run의 재현 이력이며, 새 제출 대상으로
 해석하거나 복사하지 않는다.
 
+## 2026-08-09 · DIAS prefix-risk source rejection, no job submitted
+
+- Official paper, repository와 Zenodo API metadata만 감사했다. DIAS archive,
+  image frame, label과 patient identifier는 읽지 않았다.
+- `introai9`에 read-only로 연결해 AURORA PBS job이 0개임을 확인하고 알려진
+  dataset root를 bounded inventory했다. DIAS staging은 확인되지 않았지만 이를
+  서버 전체의 asset 부재로 과장하지 않는다.
+- Source score가 31/40으로 admission 기준 32에 못 미쳐 CPU/PBS P0와 GPU job을
+  제출하지 않았다. Gate 미달 상태에서 resource를 점유하지 않은 것이 현재
+  registered action이다.
+- `junjinyong`에는 이 audit을 위해 접속, status query, submit 또는 monitor하지
+  않았다.
+
 ## 2026-08-09 · AneuX preprocessing-orbit P0 execution-incomplete
 
 - Exact public commit `42cc3c7127f382b440f2ac22f662c45692f37863`을 먼저

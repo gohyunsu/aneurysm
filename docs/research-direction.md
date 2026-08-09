@@ -5,7 +5,21 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
+
+가장 최근 fresh six-candidate audit의 최고점은 **DIAS DSA prefix-to-final
+vessel-support risk control** 31.0/40이었다. 60 patient/120 sequence 중 60
+sequence만 fully annotated이며, release는 전문가가 arterial phase만 4--14
+frame으로 선별한 뒤 phase annotation을 OR한 하나의 2D vessel mask를 제공한다.
+Full-sequence DSC 0.7822와 minimum projection 0.7802의 차이는 0.0020이다.
+VSS-Net, DSCA, TemSAM, incomplete-angiogram temporal recovery, generic
+risk-controlled early exit와 conformal segmentation이 직접 선행이므로 temporal
+model, arrival-time latent와 stopping head 어느 것도 단독 novelty가 아니다.
+Raw full-phase acquisition, dose/stop action과 frame-level arrival ground truth가
+없어 clinical acquisition stopping도 식별할 수 없다. 따라서 score repair 없이
+source에서 기각했고 상세 근거는
+[`dsa-prefix-risk-audit-2026-08-09.md`](dsa-prefix-risk-audit-2026-08-09.md)에
+고정한다.
 
 2026-08-09의 새 source audit에서 admission line을 넘었던 후보는
 **same-lesion preprocessing-orbit quotient morphometry**였다. AneuX의 동일 병변에
@@ -62,7 +76,11 @@ result JSON은 없다. PixelData는 decode·inspect하지 않았고 STL 단계�
 
 ## 0. 현재 연구 상태 · active shortlist 0, selected primary 0
 
-현재 source of truth는
+현재 문제-selection source of truth는
+[`dsa-prefix-risk-audit-2026-08-09.md`](dsa-prefix-risk-audit-2026-08-09.md)다.
+DIAS payload는 읽지 않았고 known `introai9` dataset root의 bounded inventory에도
+staged asset이 없었다. Source score가 32 미만이므로 executable P0, model과 GPU
+job을 등록하지 않는다. 직전 AneuX 실행 이력의 source of truth는
 [`aneux-preprocessing-orbit-audit-2026-08-09.md`](aneux-preprocessing-orbit-audit-2026-08-09.md)와
 [`configs/aneux_preprocessing_orbit_p0.json`](../configs/aneux_preprocessing_orbit_p0.json)이다.
 공개 source metadata상 750 lesion, 605 patient, 3 resolution, 4 cut과 170

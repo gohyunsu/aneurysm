@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · AneuX preprocessing-orbit P0 execution-incomplete/closed · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · DSA prefix-risk source-rejected 31/40 · AneuX P0 closed · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "fresh problem/source audit → method-free task adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "DSA prefix-risk candidate is rejected before execution",
+      copy: "DIAS provides 60 patients, 120 expert-selected arterial-phase sequences and 60 fully annotated sequences, but the released task predicts one merged 2D artery mask from 4–14 preselected frames. Its original full-sequence DSC 0.7822 is only 0.0020 above minimum projection. VSS-Net, DSCA, TemSAM, incomplete-angiogram recovery, risk-controlled early exit and conformal segmentation already occupy the components. Without raw full-phase acquisition, dose/stop action or frame-level arrival truth, the best fresh candidate scores 31/40 and is rejected without payload, P0, model or GPU.",
+      status: "31/40 · source rejected · active shortlist/model/GPU 0",
+      url: "../docs/dsa-prefix-risk-audit-2026-08-09.md"
+    },
     {
       year: "2026.08",
       title: "AneuX preprocessing-orbit P0 closes before the scientific gate",
@@ -363,9 +370,21 @@ window.AURORA_DATA = Object.freeze({
       name: "AneuX v1.0",
       role: "closed preprocessing-orbit P0 history; no active primary role",
       provenance: "750 lesions · 605 source-reported patients · historical 3 resolutions/up to 4 cuts/170 features · initial tabular transport exhausted · no CSV/model range · 13 checks unevaluated · no rerun/P1 · CC BY-NC 4.0"
+    },
+    {
+      name: "DIAS",
+      role: "source-rejected prefix-risk candidate; future patient-grouped DSA segmentation baseline only",
+      provenance: "60 patients · 120 sequences · 60 fully annotated · expert-preselected 4–14 arterial frames · CC BY 4.0 · payload 0 · no P0/model/GPU"
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "decision",
+      title: "DSA prefix-risk candidate is rejected at 31/40",
+      copy: "A fresh six-candidate source audit leaves no admission-qualified problem. The highest candidate asks whether an observed DSA prefix can predict final merged vessel support with calibrated thin-vessel miss risk. DIAS is open and its paper reports patient-ID-based annotation selection, but the exact released patient key was not audited. Its arterial phase is already expert-selected, full sequence improves DSC over minimum projection by only 0.0020, and temporal/MIP/frame-selection/early-exit/conformal components have direct priors. Raw full-phase acquisition, dose/stop action and frame-level arrival truth are absent. We do not repair the score or create payload, P0, method, architecture or GPU work; active shortlist remains zero and future execution remains introai9-only.",
+      files: ["docs/dsa-prefix-risk-audit-2026-08-09.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

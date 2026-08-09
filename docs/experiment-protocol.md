@@ -1,11 +1,33 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.7 · 2026-08-09
+버전: 3.8 · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## P0-D · DSA prefix-risk candidate · source rejected, no execution
+
+DIAS의 observed prefix로 final merged vessel support와 thin-vessel miss risk를
+추론하는 문제를 여섯 후보와 같은 8축 기준으로 감사했다. 31.0/40으로 자동
+실행 기준 32에 못 미친다.
+
+- source-only evidence: 60 patient, 120 sequence, fully annotated 60 sequence,
+  released arterial-phase length 4--14 frame, CC BY 4.0.
+- task-adequacy warning: original VSS-Net의 full-sequence/minimum-projection DSC는
+  0.7822/0.7802로 차이가 0.0020이다.
+- missing endpoint: raw full-phase acquisition, frame exposure/dose, prospective
+  stop action, frame-level contrast-arrival ground truth가 없다.
+- direct baseline: VSS-Net, DSCA, TemSAM, incomplete-angiogram temporal recovery,
+  SAFE-KD류 early exit, conditional conformal risk control.
+- execution: payload 0, `introai9` staged asset 0 in bounded known-root inventory,
+  executable P0/PBS/model/checkpoint/GPU/outer test 0.
+
+Thin-vessel metric으로 사후 점수를 올리거나 `acquisition stopping`을 clinical
+endpoint로 과장하지 않는다. 상세 근거는
+`docs/dsa-prefix-risk-audit-2026-08-09.md`에 있다. 다음 허용 작업은 다른 fresh
+problem-level source/task-unit audit뿐이다.
 
 ## P0-O · AneuX same-lesion preprocessing orbit · execution-incomplete, closed
 

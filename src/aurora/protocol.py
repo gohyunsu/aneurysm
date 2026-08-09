@@ -52,6 +52,7 @@ REQUIRED_DATASETS = {
     "rsna_ica_2025_controlled_access",
     "open_multicenter_cta_2026_zenodo_15697196",
     "topaneu_2026_terms_gated",
+    "dias_dsa_sequence_2024",
 }
 
 
@@ -117,8 +118,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.7":
-        raise ProtocolError("The current research-state schema must be version 3.7.")
+    if protocol["schema_version"] != "3.8":
+        raise ProtocolError("The current research-state schema must be version 3.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -141,7 +142,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_aneux_preprocessing_orbit_p0_execution_incomplete_closed"
+        != "failed_branches_preserved_no_active_shortlist_after_dsa_prefix_source_rejection"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -182,6 +183,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "goal_oriented_segmentation_cold_audit",
             "aneux_preprocessing_orbit_candidate",
             "aneug_cycle_functional_source_audit",
+            "dsa_prefix_risk_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -191,12 +193,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_aneux_preprocessing_orbit_p0_execution_incomplete_no_primary_or_method"
+        != "no_active_shortlist_after_dsa_prefix_risk_source_rejection_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "aneux_initial_tabular_transport_exhausted_no_completed_archive_no_csv_parse_no_model_range_or_member_access"
+        != "dias_source_metadata_only_no_payload_and_no_introai9_staged_asset"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -208,11 +210,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_primary_source_and_asset_audit_only"
         or problem_selection["audit_document"]
-        != "docs/aneux-preprocessing-orbit-audit-2026-08-09.md"
+        != "docs/dsa-prefix-risk-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "inverse_healthy_vessel_counterfactual_editing"
+        != "dsa_prefix_to_final_vessel_support_risk_control"
     ):
         raise ProtocolError(
             "The closed AneuX source-shortlist boundary must retain no selected primary, "
@@ -226,6 +228,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
         "goal_oriented_hemodynamic_segmentation",
         "inverse_healthy_vessel_counterfactual_editing",
+        "dsa_prefix_to_final_vessel_support_risk_control",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -1067,6 +1070,105 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("closed candidate histories preserved with no active shortlist")
 
+    dsa_audit = problem_selection["dsa_prefix_risk_source_audit"]
+    _require_keys(
+        dsa_audit,
+        [
+            "status",
+            "audit_document",
+            "candidate_hypothesis",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "official_dataset_record",
+            "dataset_license",
+            "archive_bytes",
+            "archive_md5",
+            "source_patients",
+            "source_sequences",
+            "fully_annotated_sequences",
+            "released_sequence_length_frames_min",
+            "released_sequence_length_frames_max",
+            "paper_frame_count_discrepancy",
+            "full_sequence_dsc",
+            "minimum_projection_dsc",
+            "full_minus_minimum_projection_dsc",
+            "full_sequence_cldice",
+            "minimum_projection_cldice",
+            "raw_full_phase_sequence_released",
+            "frame_level_arrival_ground_truth_released",
+            "prospective_stop_action_or_dose_endpoint_released",
+            "dataset_payload_accessed",
+            "introai9_staged_asset_found_in_bounded_inventory",
+            "direct_prior_threats",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.dsa_prefix_risk_source_audit",
+    )
+    expected_dsa_priors = {
+        "dias_vssnet_full_sequence_segmentation",
+        "dsca_spatiotemporal_cerebral_artery_segmentation",
+        "temsam_mip_global_prompt_and_complementary_frame_selection",
+        "incomplete_angiogram_time_density_curve_recovery",
+        "generic_risk_controlled_early_exit",
+        "conditional_conformal_segmentation_risk_control",
+        "dynamic_dsa_vessel_probability_reconstruction",
+    }
+    if (
+        dsa_audit["status"]
+        != "completed_source_rejected_below_admission_threshold"
+        or dsa_audit["audit_document"]
+        != "docs/dsa-prefix-risk-audit-2026-08-09.md"
+        or dsa_audit["score"] != 31.0
+        or dsa_audit["maximum_score"] != 40.0
+        or dsa_audit["automatic_selection_threshold"] != 32.0
+        or dsa_audit["active_shortlist_count"] != 0
+        or dsa_audit["primary_problem_selected"] is not False
+        or dsa_audit["official_dataset_record"] != "zenodo_11637181_version_3"
+        or dsa_audit["dataset_license"] != "cc_by_4_0"
+        or dsa_audit["archive_bytes"] != 292444663
+        or dsa_audit["archive_md5"] != "780f32df6fb2a5de5d476f385cf2e83b"
+        or dsa_audit["source_patients"] != 60
+        or dsa_audit["source_sequences"] != 120
+        or dsa_audit["fully_annotated_sequences"] != 60
+        or dsa_audit["released_sequence_length_frames_min"] != 4
+        or dsa_audit["released_sequence_length_frames_max"] != 14
+        or dsa_audit["full_sequence_dsc"] != 0.7822
+        or dsa_audit["minimum_projection_dsc"] != 0.7802
+        or dsa_audit["full_minus_minimum_projection_dsc"] != 0.002
+        or dsa_audit["full_sequence_cldice"] != 0.7119
+        or dsa_audit["minimum_projection_cldice"] != 0.704
+        or dsa_audit["raw_full_phase_sequence_released"] is not False
+        or dsa_audit["frame_level_arrival_ground_truth_released"] is not False
+        or dsa_audit["prospective_stop_action_or_dose_endpoint_released"] is not False
+        or dsa_audit["dataset_payload_accessed"] is not False
+        or dsa_audit["introai9_staged_asset_found_in_bounded_inventory"] is not False
+        or set(dsa_audit["direct_prior_threats"]) != expected_dsa_priors
+        or dsa_audit["executable_p0_registered"] is not False
+        or dsa_audit["method_selected"] is not False
+        or dsa_audit["architecture_selected"] is not False
+        or dsa_audit["gpu_training_authorized"] is not False
+        or dsa_audit["outer_test_authorized"] is not False
+        or dsa_audit["submission_identity_active"] is not False
+        or dsa_audit["decision"] != "reject_without_score_repair_p0_model_or_gpu"
+        or dsa_audit["next_allowed_action"]
+        != "fresh_problem_level_primary_source_and_task_unit_audit_only"
+    ):
+        raise ProtocolError(
+            "The DSA prefix-risk candidate must remain source-rejected at 31/40, "
+            "without payload, P0, method, architecture, GPU, or outer-test authority."
+        )
+    checks.append("DSA prefix-risk source rejection and no-training boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -1146,7 +1248,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_aneux_p0_execution_incomplete"
+        != "unselected_primary_with_no_active_shortlist_after_dsa_prefix_source_rejection"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1309,7 +1411,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_aneux_p0_execution_incomplete_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_dsa_prefix_source_rejection_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
@@ -1410,6 +1512,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     topaneu = next(
         item for item in datasets if item["name"] == "topaneu_2026_terms_gated"
     )
+    dias = next(item for item in datasets if item["name"] == "dias_dsa_sequence_2024")
     if (
         cmha["field_provenance"] != "real_cfd"
         or cmha.get("role") != "closed_goal_oriented_s0a_asset_history_not_an_active_primary"
@@ -1442,6 +1545,28 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError(
             "AneuX must remain a patient-grouped, non-CFD, closed P0 history "
             "after its execution-incomplete one-shot source contract."
+        )
+    if (
+        dias.get("field_provenance") != "none"
+        or dias.get("split_unit") != "patient"
+        or dias.get("role")
+        != "source_rejected_prefix_risk_candidate_possible_future_external_segmentation_baseline_only"
+        or dias.get("status")
+        != "source_metadata_audited_payload_not_accessed_candidate_rejected_31_of_40"
+        or dias.get("doi") != "10.5281/zenodo.11637181"
+        or dias.get("license") != "cc_by_4_0"
+        or dias.get("source_patients") != 60
+        or dias.get("source_sequences") != 120
+        or dias.get("fully_annotated_sequences") != 60
+        or dias.get("released_min_frames") != 4
+        or dias.get("released_max_frames") != 14
+        or dias.get("payload_accessed") is not False
+        or dias.get("introai9_staged_asset_found_in_bounded_inventory") is not False
+        or dias.get("method_or_gpu_authorized") is not False
+    ):
+        raise ProtocolError(
+            "DIAS must remain a patient-grouped source-only asset whose prefix-risk "
+            "candidate was rejected before payload, method, or GPU access."
         )
     if aneumo["split_unit"] != "aneux_base_family":
         raise ProtocolError(
