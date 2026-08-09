@@ -1,6 +1,15 @@
 # AURORA v2 모델 명세
 
-> **2026-08-10 current boundary:** geometry + PointNeXt/GNN + PINN-derived
+> **2026-08-10 current boundary:** fresh hemodynamic–endpoint batch의 최고
+> curvature-only local-field surrogate도 31.0/40이다. New 76-case Aneurisk CFD
+> release는 population age-group inflow를 diameter scaling한 simulated fields이며,
+> companion paper가 curvature를 hemodynamic proxy로 이미 직접 제안한다.
+> Culprit-ranking, post-treatment remnant와 wall-enhancement localization도 direct
+> priors와 public endpoint/unit 부족으로 모두 32 미만이다. 따라서 archive,
+> payload, P0와 headline architecture는 없다. 상세 판정은
+> [`hemodynamic–endpoint source audit`](hemodynamic-endpoint-source-audit-2026-08-10.md)을 따른다.
+>
+> 직전 geometry + PointNeXt/GNN + PINN-derived
 > hemodynamics + clinical fusion은 2026년 7월 direct prior가 이미 점유한다.
 > Patient-grouped split, patient-specific BC와 CFD/in-vivo validation 뒤의
 > incremental-flow question은 현재 joint asset이 없어 23.5/40으로 기각됐다.
@@ -25,7 +34,8 @@ segmentation asset component failed 5/9 and candidate closed · cycle-functional
 transient WSS P0 execution-incomplete before payload/no verdict/no rerun and
 candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before
 completed tabular archive/no verdict/no rerun and candidate closed · DSA
-prefix-risk candidate source-rejected 31/40 · active shortlist/selected primary
+prefix-risk candidate source-rejected 31/40 · fresh hemodynamic-endpoint batch
+best 31/40 and all source-rejected · active shortlist/selected primary
 problem/method/architecture 0 · inverse healthy-vessel counterfactual candidate
 rejected 27/40 · no GPU/outer test
 

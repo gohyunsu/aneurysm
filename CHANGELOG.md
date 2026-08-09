@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Fresh hemodynamic–endpoint source batch is rejected before compute
+
+- New Zenodo `10.5281/zenodo.19455127` reports 76 Aneurisk geometries with
+  OpenFOAM-derived VTP surface fields under CC BY 4.0. Its inflow is based on two
+  population age-group waveforms scaled by inlet diameter, not measured
+  patient-specific physiology. The record's outlet summary also differs from the
+  companion paper's resistance-pressure description.
+- Five frozen candidates score 31.0/30.0/23.0/25.0/26.0. Curvature-only local
+  hemodynamic surrogation is best at 31.0/40 but the companion paper already
+  frames curvature as a CFD proxy, while geometry-to-flow models are direct
+  controls. Multiple-aneurysm culprit ranking, treated-remnant change and spatial
+  wall-enhancement/WSS tasks are directly occupied and lack public endpoint maps
+  or independent patient units.
+- No 1.4 GB archive, VTP, clinical image or private cohort was accessed. No P0,
+  method, architecture, PBS/GPU job, outer test or submission identity was
+  created. Machine contract is schema 4.2; execution remains `introai9` PBS only
+  and `junjinyong` remains excluded.
+- 영향 파일: `docs/hemodynamic-endpoint-source-audit-2026-08-10.md`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  overview documents, site data and `AGENTS.md`.
+
 ## 2026-08-10 · PINN direct-prior audit is deployed and verified
 
 - Exact content `ed426a58d556e987c4b5d745d9eb7c88c793a9fe`의 Quality

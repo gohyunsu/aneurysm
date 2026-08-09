@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 hemodynamic–endpoint source-audit overlay:** New Zenodo
+> `10.5281/zenodo.19455127` reports a 1.4 GB CC BY 4.0 archive of OpenFOAM VTP
+> surface fields for 76 selected Aneurisk geometries. Inflow uses two
+> population-average age-group waveforms scaled by inlet diameter, not measured
+> patient-specific conditions; the record's zero-pressure outlet summary and the
+> companion paper's resistance-pressure description are not treated as
+> equivalent. A frozen five-candidate batch scores curvature-only field surrogate,
+> cross-source residual added value, multiple-aneurysm culprit ranking,
+> pre/post-treatment remnant change and wall-enhancement/WSS localization at
+> 31.0/30.0/23.0/25.0/26.0. All remain below the 32-point line. The companion
+> paper directly frames curvature as a hemodynamic proxy, multicenter culprit and
+> remnant/wall-enhancement studies directly occupy the other tasks, and public
+> endpoint maps or independent patient units are absent. Source of truth is schema
+> 4.2 `problem_selection.hemodynamic_endpoint_source_audit` and
+> `docs/hemodynamic-endpoint-source-audit-2026-08-10.md`. The archive/payload,
+> P0, method, architecture, PBS/GPU, outer test and submission identity remain 0.
+> AURORA execution is `introai9` PBS only; `junjinyong` is excluded from
+> connection, query, submission and monitoring.
+
 > **2026-08-10 PINN direct-prior deployment overlay:** Exact content
 > `ed426a58d556e987c4b5d745d9eb7c88c793a9fe`의 Quality `31325129769`와 Pages
 > `31325129336`이 성공했다. Live overview는 23.5/40 rejection, active
@@ -217,7 +236,10 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. Active primary와
-  source shortlist는 모두 0이다. 가장 최근 direct-prior audit은 원래
+  source shortlist는 모두 0이다. 가장 최근 hemodynamic-endpoint batch의 최고
+  curvature-only surrogate도 31.0/40이며 새 76-case archive는 내려받지 않았다.
+  원 논문이 curvature proxy claim을 직접 점유하고 나머지 endpoint도 direct
+  priors/public-unit 부족으로 모두 기각됐다. 직전 direct-prior audit은 원래
   geometry + PINN hemodynamics + clinical rupture-status fusion pipeline이 July
   2026 prior에 의해 점유됐음을 확인했다. Physically validated incremental-flow
   residual도 joint asset 부재로 23.5/40이며 새 payload/P0/model/GPU는 0이다.
@@ -358,8 +380,10 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
   아니다. 새 후보에서도 direct prior 또는 strong baseline으로 취급한다.
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
-- 가장 최근 source-rejected candidate는 **physically validated incremental
-  hemodynamic information beyond geometry and clinical variables**다. 원래
+- 가장 최근 source-rejected candidate는 **curvature-only surrogate of local
+  hemodynamic fields**다. 31.0/40이며 direct proxy prior 때문에 기각됐다. 그
+  직전 candidate는 **physically validated incremental hemodynamic information
+  beyond geometry and clinical variables**다. 원래
   PointNeXt/GNN + PINN + clinical fusion은 direct prior이며, joint asset 부재로
   residual도 23.5/40이다. 가장 최근 execution-closed
   candidate는 AneuX preprocessing orbit이다. Goal-oriented hemodynamic

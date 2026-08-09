@@ -1,15 +1,30 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.0 · 2026-08-10
+버전: 4.2 · 2026-08-10
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
+## S-HEMO · hemodynamic–endpoint source batch · all rejected, no execution
+
+새 Zenodo 76-case Aneurisk CFD surface-field release와 multiple-aneurysm culprit,
+post-treatment remnant, wall-enhancement endpoint를 frozen 8축 rubric으로
+source-only 평가했다. 점수는 31.0, 30.0, 23.0, 25.0, 26.0이며 admission line
+32를 넘는 후보가 없다. 최고 curvature-only surrogate도 companion paper가 이미
+local curvature를 TAWSS/OSI proxy로 결론 내리고 geometry-to-flow prior가 강하다.
+
+Release inflow는 두 population age-group waveform의 diameter scaling이며 실측
+patient-specific BC가 아니다. Official record와 paper의 outlet-condition 요약도
+일치하지 않는다. Candidate가 gate를 넘지 않았으므로 1.4 GB archive/VTP를 받지
+않고 P0, method, architecture, PBS/GPU와 outer test를 만들지 않는다. 상세 계약은
+[`hemodynamic–endpoint audit`](hemodynamic-endpoint-source-audit-2026-08-10.md)에
+고정했다. 향후 실행은 `introai9` PBS만 사용하고 `junjinyong`은 제외한다.
+
 ## S-VASC · vascular-semantics batch · all rejected, no execution
 
-가장 최근 audit은 geometry-conditioned PINN hemodynamics와 clinical fusion이
+직전 PINN direct-prior audit은 geometry-conditioned PINN hemodynamics와 clinical fusion이
 direct prior에 의해 점유됐는지 평가했다. 잔여 physically validated incremental
 flow 후보는 23.5/40으로 source에서 기각됐다. AneuX는 605 patients / 750 lesions지만
 direct-prior primary model은 stratified five-fold로만 기술되며 patient grouping이

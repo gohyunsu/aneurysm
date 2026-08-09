@@ -38,6 +38,16 @@
 `ssu_a6gpu_*` 파일명은 이미 끝난 run의 재현 이력이며, 새 제출 대상으로
 해석하거나 복사하지 않는다.
 
+## 2026-08-10 · hemodynamic–endpoint source audit, no job authorized
+
+- New 76-case Aneurisk CFD record and four endpoint families were source-only
+  audited. Frozen scores are 31.0/30.0/23.0/25.0/26.0, all below 32.
+- The 1.4 GB archive and VTP payload were not accessed. No P0 config, PBS job,
+  method, architecture, checkpoint, GPU allocation or outer test was created.
+- This is a scientific early stop, not a connection failure. Only a genuinely
+  new candidate at or above 32 may register an `introai9` CPU/PBS P0.
+- `junjinyong` was not connected, queried, submitted to or monitored.
+
 ## 2026-08-10 · vascular-semantics source audit, no job authorized
 
 - 최신 six-candidate frozen score는 29.5/28.5/27.5/26.5/26.0/25.0으로 모두

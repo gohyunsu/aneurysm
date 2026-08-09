@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 hemodynamic–endpoint source audit:** Zenodo
+> `10.5281/zenodo.19455127`은 76 Aneurisk geometry의 1.4 GB OpenFOAM-derived
+> VTP surface fields, MD5 `8c66e7bb359d04bd1a5d6db6da3f3926`, CC BY 4.0을
+> 보고한다. Inflow는 두 population age-group waveform을 inlet diameter로
+> scaling한 것이며 실측 patient-specific BC가 아니다. Record의 zero-pressure
+> outlet 요약과 paper의 resistance-pressure 조건도 일치하지 않는다. Curvature
+> surrogate 31.0/40을 포함한 다섯 후보가 모두 32 미만이므로 archive/VTP를 받지
+> 않았고 P0/model/GPU는 0이다. 상세 근거는
+> [`hemodynamic–endpoint audit`](hemodynamic-endpoint-source-audit-2026-08-10.md)에 있다.
+
 > **2026-08-10 PINN rupture-status direct-prior audit:** AneuX는 750 aneurysm
 > domes, 668 vessel trees와 605 patients를 보고한다. 2026년 direct prior는 735
 > labeled lesions에 geometry-conditioned PINN hemodynamics와 clinical fusion을
@@ -203,6 +213,7 @@
 | IntrA | Reconstructed vessel surface와 local aneurysm/healthy segments | 103 full vessel models; 1,694 healthy/215 aneurysm segment; 116 manual part annotations | license audit 뒤 surface anatomy pretraining/sanity | raw MRA와 whole-study negative/cardinality 없음; selection rule·payload license 재감사 필요 |
 | TopCoW 2024 | CTA/MRA CoW masks, ROI와 vascular graph | permanent 14.4 GB release plus external subsets | anatomy encoder/topology control | aneurysm label이 아니며 listed LargeIA/Lausanne external subsets는 aneurysm-free |
 | AneuriskWeb | surface/centerline/morphology, 일부 배포본의 영상·annotation 여부 확인 필요 | 약 100 | geometry·형태 baseline | 배포본/미러별 asset 차이를 checksum으로 확인 |
+| Aneurisk CFD curvature 2026 / Zenodo 19455127 | OpenFOAM-derived VTP surface geometry, morphology and hemodynamic fields | 76 selected anterior-circulation geometries, 1.4 GB | source-rejected curvature/hemodynamic control only | CC BY 4.0; archive 미접근; two population age-group inflows scaled by diameter, not measured patient BC; record/paper outlet summary mismatch; best source candidate 31/40 |
 | AneuX v1.0 | 동일 lesion의 3 mesh resolution × 최대 4 cut, 170 morphometrics, cross-sectional status | 750 lesion, 605 source-reported patient | closed preprocessing-orbit P0 history | initial tabular transport exhaustion; 13-check gate 미평가; no rerun/P1/model/GPU; CC BY-NC 4.0; real CFD 아님 |
 | CMHA / Gong et al. 2024 | NIfTI CTA, aneurysm–artery STL, aneurysm STL, clinical/morphology/hemodynamic summaries | 99 unique patients/105 MCA IA + 44 controls | closed goal-oriented S0a asset history; 새 task에는 fresh audit 필요 | CC BY 4.0; 15.56 GB; 6 multi-lesion patient; asset 5/9 fail, exact lesion-level linkage unsupported; public CFD is summary only |
 | OpenNeuro ds005096 | TOF-MRA, selected-session voxel masks/STL/Slicer scene | 63 patients/85 IA; 24 longitudinal patients | external modality/geometry stress only | one annotated session per subject; longitudinal supervised-growth cohort 아님 |

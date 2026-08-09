@@ -1,6 +1,12 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-10 current boundary:** 가장 최근 direct-prior audit은 PointNeXt/GNN
+> **2026-08-10 current boundary:** 가장 최근 fresh source batch는 76-case
+> Aneurisk CFD, multiple-aneurysm culprit, post-treatment remnant와
+> wall-enhancement endpoint를 평가했다. 최고 curvature-only local-hemodynamic
+> surrogate도 31.0/40이며 companion paper가 핵심 proxy claim을 직접 점유한다.
+> Release inflow는 두 population age-group waveform의 diameter scaling이지
+> patient-specific measurement가 아니다. Archive/payload/P0/model/GPU는 0이다.
+> 직전 direct-prior audit은 PointNeXt/GNN
 > geometry + PINN hemodynamics + clinical fusion이 이미 직접 점유됐음을 확인했다.
 > Patient-grouped, physically validated incremental-flow residual candidate도 joint
 > asset이 없어 23.5/40으로 기각했다. Payload/P0/model/GPU는 0이다. 직전
@@ -19,7 +25,7 @@
 
 최종 검토일: 2026-08-10 KST
 
-상태: **target locked · PINN rupture-status residual 23.5/40 rejected · AneuX
+상태: **target locked · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
 shortlist/selected primary problem/method/architecture/GPU 0 · not
 submission-ready**
@@ -39,7 +45,9 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
 
-현재 제출 가능한 paper identity는 없다. 최신 vascular-semantics batch 여섯
+현재 제출 가능한 paper identity는 없다. 최신 hemodynamic–endpoint batch의
+다섯 후보는 모두 32점 미만이고, 최고 curvature-only surrogate는 직접 prior의
+proxy 결론을 학습 모델로 반복할 뿐이다. 그 이전 vascular-semantics batch 여섯
 후보는 모두 32점 admission line에 못 미쳤고, 그중 최고 TopBrain도 aneurysm
 endpoint가 없는 강한 anatomy challenge라 독립 method identity가 아니다. 직전
 OpenNeuro growth 역시 직접 Bayesian prior와 작은 종단 단위 때문에 기각됐다. DIAS

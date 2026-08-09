@@ -53,6 +53,7 @@ REQUIRED_DATASETS = {
     "open_multicenter_cta_2026_zenodo_15697196",
     "topaneu_2026_terms_gated",
     "dias_dsa_sequence_2024",
+    "aneurisk_cfd_curvature_2026",
 }
 
 
@@ -118,8 +119,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.1":
-        raise ProtocolError("The current research-state schema must be version 4.1.")
+    if protocol["schema_version"] != "4.2":
+        raise ProtocolError("The current research-state schema must be version 4.2.")
 
     project = protocol["project"]
     _require_keys(
@@ -142,7 +143,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_pinn_rupture_direct_prior_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_hemodynamic_endpoint_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +188,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "source_delta_audit",
             "vascular_semantics_source_audit",
             "pinn_rupture_direct_prior_audit",
+            "hemodynamic_endpoint_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -196,12 +198,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_pinn_rupture_direct_prior_audit_no_primary_or_method"
+        != "no_active_shortlist_after_hemodynamic_endpoint_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_only_no_new_candidate_payload_for_pinn_direct_prior_audit"
+        != "source_metadata_and_public_manuscripts_only_no_new_candidate_payload_for_hemodynamic_endpoint_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -213,11 +215,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/pinn-rupture-direct-prior-audit-2026-08-10.md"
+        != "docs/hemodynamic-endpoint-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables"
+        != "curvature_only_surrogate_of_local_hemodynamic_fields"
     ):
         raise ProtocolError(
             "The PINN direct-prior boundary must retain no selected primary, "
@@ -245,6 +247,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "paired_cta_dose_reconstruction_phantom_orbit_effective_anatomy_one",
         "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released",
         "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables",
+        "curvature_only_surrogate_of_local_hemodynamic_fields",
+        "cross_source_curvature_residualized_hemodynamic_added_value",
+        "within_patient_multiple_aneurysm_culprit_ranking",
+        "paired_pre_post_treatment_remnant_change_prediction",
+        "wall_enhancement_hemodynamic_discordance_localization",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -296,6 +303,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "pointnext_geometry_pinn_hemodynamics_clinical_fusion",
         "pinn_residual_convergence_as_physiological_validation",
         "early_or_late_multimodal_rupture_status_fusion",
+        "curvature_to_hemodynamic_field_proxy",
+        "cross_source_cfd_rupture_status_fusion",
+        "multiple_aneurysm_culprit_set_ranking_from_morphology_or_wall_enhancement",
+        "generic_pre_post_treatment_remnant_segmentation",
+        "wall_enhancement_wss_spatial_correlation",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -1478,6 +1490,114 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("PINN rupture-status direct-prior rejection boundary")
 
+    hemodynamic_audit = problem_selection["hemodynamic_endpoint_source_audit"]
+    _require_keys(
+        hemodynamic_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "new_candidate_payload_accessed",
+            "aneurisk_cfd_archive_downloaded",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "aneurisk_cfd_record",
+            "aneurisk_cfd_archive_bytes_reported",
+            "aneurisk_cfd_archive_md5",
+            "aneurisk_cfd_source_cases",
+            "aneurisk_cfd_source_license",
+            "aneurisk_cfd_patient_specific_measured_inflow",
+            "aneurisk_cfd_population_age_group_waveforms",
+            "aneurisk_cfd_record_paper_outlet_condition_consistent",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.hemodynamic_endpoint_source_audit",
+    )
+    expected_hemodynamic_scores = {
+        "curvature_only_surrogate_of_local_hemodynamic_fields": 31.0,
+        "cross_source_curvature_residualized_hemodynamic_added_value": 30.0,
+        "within_patient_multiple_aneurysm_culprit_ranking": 23.0,
+        "paired_pre_post_treatment_remnant_change_prediction": 25.0,
+        "wall_enhancement_hemodynamic_discordance_localization": 26.0,
+    }
+    observed_hemodynamic_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in hemodynamic_audit["candidates"]
+    }
+    hemodynamic_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in hemodynamic_audit["candidates"]
+    )
+    if (
+        hemodynamic_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or hemodynamic_audit["audit_document"]
+        != "docs/hemodynamic-endpoint-source-audit-2026-08-10.md"
+        or hemodynamic_audit["automatic_selection_threshold"] != 32.0
+        or hemodynamic_audit["best_candidate_id"]
+        != "curvature_only_surrogate_of_local_hemodynamic_fields"
+        or hemodynamic_audit["best_score"] != 31.0
+        or hemodynamic_audit["best_score"]
+        >= hemodynamic_audit["automatic_selection_threshold"]
+        or hemodynamic_audit["active_shortlist_count"] != 0
+        or hemodynamic_audit["primary_problem_selected"] is not False
+        or hemodynamic_audit["new_candidate_payload_accessed"] is not False
+        or hemodynamic_audit["aneurisk_cfd_archive_downloaded"] is not False
+        or hemodynamic_audit["executable_p0_registered"] is not False
+        or hemodynamic_audit["method_selected"] is not False
+        or hemodynamic_audit["architecture_selected"] is not False
+        or hemodynamic_audit["gpu_training_authorized"] is not False
+        or hemodynamic_audit["outer_test_authorized"] is not False
+        or hemodynamic_audit["submission_identity_active"] is not False
+        or hemodynamic_audit["execution_server"] != "introai9"
+        or hemodynamic_audit["pbs_job_created"] is not False
+        or hemodynamic_audit["login_node_gpu_command_executed"] is not False
+        or hemodynamic_audit["junjinyong_accessed_for_this_audit"] is not False
+        or hemodynamic_audit["aneurisk_cfd_record"] != "zenodo_19455127"
+        or hemodynamic_audit["aneurisk_cfd_archive_bytes_reported"] != 1400000000
+        or hemodynamic_audit["aneurisk_cfd_archive_md5"]
+        != "8c66e7bb359d04bd1a5d6db6da3f3926"
+        or hemodynamic_audit["aneurisk_cfd_source_cases"] != 76
+        or hemodynamic_audit["aneurisk_cfd_source_license"] != "cc_by_4_0"
+        or hemodynamic_audit["aneurisk_cfd_patient_specific_measured_inflow"]
+        is not False
+        or hemodynamic_audit["aneurisk_cfd_population_age_group_waveforms"] != 2
+        or hemodynamic_audit["aneurisk_cfd_record_paper_outlet_condition_consistent"]
+        is not False
+        or observed_hemodynamic_scores != expected_hemodynamic_scores
+        or not hemodynamic_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in hemodynamic_audit["candidates"]
+        )
+        or hemodynamic_audit["decision"]
+        != "reject_all_without_score_repair_payload_p0_method_architecture_or_gpu"
+        or hemodynamic_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The hemodynamic-endpoint audit must preserve all five frozen "
+            "source-only rejections, the 31/40 maximum, no archive/P0/model/GPU, "
+            "and introai9-only execution."
+        )
+    checks.append("hemodynamic-endpoint rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -1557,7 +1677,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_pinn_rupture_direct_prior_audit"
+        != "unselected_primary_with_no_active_shortlist_after_hemodynamic_endpoint_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1720,7 +1840,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_pinn_rupture_direct_prior_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_hemodynamic_endpoint_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

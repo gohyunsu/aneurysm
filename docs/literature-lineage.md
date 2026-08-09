@@ -1,5 +1,25 @@
 # 선행연구 계보와 research gap
 
+## 0-H. Current decision · new public CFD does not reopen a method gap
+
+The [2026 Aneurisk CFD release](https://zenodo.org/records/19455127) publishes
+surface fields for 76 geometries under CC BY 4.0, but its
+[companion paper](https://arxiv.org/html/2602.21409) already establishes local
+Gaussian-curvature patches as a primary determinant and practical proxy of
+TAWSS/OSI and vortical activity. Inflow is not measured per patient: two
+population age-group waveforms are scaled by inlet diameter. Geometry-to-flow
+GNNs, neural operators and PINNs are therefore controls rather than a residual
+contribution.
+
+The frozen batch additionally checked cross-source added value, within-patient
+multiple-aneurysm culprit ranking, pre/post-treatment remnant change and spatial
+wall-enhancement/hemodynamic discordance. Direct 2025--2026 multicenter culprit,
+treated-remnant and low-WSS/enhancement studies occupy the tasks, while available
+public assets lack matched endpoint maps or effective patient units. Scores are
+31.0/30.0/23.0/25.0/26.0, all below 32. Detailed evidence is frozen in the
+[`hemodynamic–endpoint source audit`](hemodynamic-endpoint-source-audit-2026-08-10.md).
+No active research gap, method or architecture is selected.
+
 ## 0-P. Current decision · geometry + PINN + clinical fusion is directly occupied
 
 2026년 7월

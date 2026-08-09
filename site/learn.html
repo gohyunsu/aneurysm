@@ -50,10 +50,10 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 audit은 geometry + PINN hemodynamics + clinical fusion이 direct
-            prior에 의해 이미 점유됐음을 확인했습니다. 더 강한 patient-grouped,
-            physically validated residual question도 joint asset이 없어 23.5/40으로
-            기각됐습니다.
+            최신 audit은 새 76-case Aneurisk CFD release까지 포함해도 curvature
+            surrogate가 직접 prior에 점유되고 31.0/40에 그침을 확인했습니다.
+            Culprit ranking, treated remnant와 wall-enhancement 후보도 모두 32
+            미만입니다.
             현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
@@ -65,7 +65,7 @@
             supervision semantics 또는 독립 단위가 실제로 달라진 별도 후보만 다시
             감사합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
           </p>
-          <a href="../docs/pinn-rupture-direct-prior-audit-2026-08-10.md">최신 direct-prior audit 읽기 ↗</a>
+          <a href="../docs/hemodynamic-endpoint-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -187,6 +187,29 @@
                 속도 벡터와 압력장입니다. 정확한 CFD는 유용하지만 mesh 생성,
                 경계조건 설정, solver 실행에 많은 시간이 듭니다. neural
                 surrogate는 이 계산을 학습해 빠르게 근사하려는 모델입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="explain-block">
+            <div>
+              <p class="eyebrow">NEW SOURCE · WHAT IT DOES AND DOES NOT MEAN</p>
+              <h3>“환자 형상”과 “환자 혈류”는 같은 말이 아닙니다.</h3>
+            </div>
+            <div class="prose">
+              <p>
+                새 Aneurisk CFD release의 76개 혈관 모양은 환자 영상에서 왔지만,
+                입구 파형은 각 환자에게서 측정하지 않았습니다. 젊은 군과 고령군의
+                두 평균 파형 중 하나를 고른 뒤 혈관 직경으로 크기를 조절합니다.
+                따라서 결과는 patient-geometry-specific simulation이지 완전한
+                patient-physiology measurement가 아닙니다.
+              </p>
+              <p>
+                <b>Gaussian curvature</b>는 표면이 두 주방향으로 어떻게 굽는지를
+                나타냅니다. 양수인 spherical-like dome과 음수인 saddle-like neck은
+                서로 다른 TAWSS·OSI 패턴과 연결됩니다. 하지만 원 논문이 바로 이
+                관계를 핵심 결론과 빠른 CFD proxy로 제시했으므로, 이를 GNN으로
+                재학습하는 것만으로는 새 contribution이 되지 않습니다.
               </p>
             </div>
           </div>
@@ -363,7 +386,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              최신 residual 후보도 23.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              최신 후보도 31.0/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
               stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
@@ -371,10 +394,15 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. PointNeXt/GNN + PINN-derived hemodynamics + clinical fusion은 2026 direct prior가 점유하며, 물리 검증 뒤 incremental signal을 묻는 residual도 23.5/40으로 기각됐습니다. Cross-modal segmentation, NeckSpline, Bayesian growth, DiffusionNet과 E(3) mesh model도 direct priors 또는 future controls입니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. New Aneurisk CFD release의 curvature proxy도 direct prior가 점유해 31.0/40이고 archive는 열지 않았습니다. PointNeXt/GNN + PINN-derived hemodynamics + clinical fusion 역시 2026 direct prior입니다. Cross-modal segmentation, NeckSpline, Bayesian growth, DiffusionNet과 E(3) mesh model도 controls입니다.</p>
             </aside>
             <article>
-              <span>CURRENT · PINN DIRECT-PRIOR REJECTION</span>
+              <span>CURRENT · HEMODYNAMIC–ENDPOINT REJECTION</span>
+              <div><h3>새 CFD surface fields가 독립 method gap을 만드는가?</h3><p>아닙니다. 76 geometry의 inflow는 두 population waveform을 diameter로 scaling하며, companion paper가 Gaussian curvature를 TAWSS/OSI proxy로 이미 직접 제안합니다. Culprit/remnant/wall-enhancement endpoint도 공개 patient unit과 spatial map이 부족합니다.</p></div>
+              <b>상태</b><small>best 31.0/40 · no archive/P0/model/GPU</small>
+            </article>
+            <article>
+              <span>HISTORY · PINN DIRECT-PRIOR REJECTION</span>
               <div><h3>Derived flow가 geometry 밖의 정보를 담는가?</h3><p>Patient-specific BC나 CFD/in-vivo target 없이 PINN field는 geometry와 공통 가정에서 파생됩니다. 분류 성능 증가는 내부 predictive association일 수 있지만 독립적인 physiological modality의 가치를 식별하지 않습니다. AneuX 605-patient grouping과 physical validation을 함께 만족하는 asset도 없습니다.</p></div>
               <b>상태</b><small>23.5/40 · no payload/P0/model/GPU</small>
             </article>

@@ -5,10 +5,20 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · fresh hemodynamic-endpoint batch best 31/40 and all source-rejected · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
 가장 최근 기준선은
-[`pinn-rupture-direct-prior-audit-2026-08-10.md`](pinn-rupture-direct-prior-audit-2026-08-10.md)다.
+[`hemodynamic-endpoint-source-audit-2026-08-10.md`](hemodynamic-endpoint-source-audit-2026-08-10.md)다.
+새 76-case Aneurisk CFD release는 CC BY 4.0 surface fields를 제공하지만 inflow는
+두 population age-group waveform을 diameter scaling한 것이며 실측 patient-specific
+BC가 아니다. Curvature-only local-field surrogate는 31.0/40, cross-source
+curvature-residualized added value는 30.0/40이고, culprit ranking·post-treatment
+remnant·wall-enhancement 후보도 32 미만이다. 원 논문과 2025--2026 direct priors가
+핵심 task를 점유하며 public endpoint/unit도 부족하다. Archive payload, P0,
+method, architecture와 GPU는 0이다.
+
+직전 기준선인
+[`pinn-rupture-direct-prior-audit-2026-08-10.md`](pinn-rupture-direct-prior-audit-2026-08-10.md)는
 2026년 7월 direct prior가 PointNeXt geometry, PINN-derived pressure/velocity/WSS/
 TAWSS/OSI/RRT와 clinical variables를 AneuX rupture status에 이미 결합했다. 이
 구성은 원래 팀 방향을 직접 점유한다. 다만 735 lesion의 주 split은 stratified
@@ -107,10 +117,12 @@ result JSON은 없다. PixelData는 decode·inspect하지 않았고 STL 단계�
 도달하지 않았다. 등록된 parser-repair/same-contract-rerun 금지에 따라 후보를
 닫았으며 active shortlist는 다시 0이다.
 
-## 0. 현재 연구 상태 · latest best 29.5/40, active shortlist 0
+## 0. Historical vascular-semantics boundary · 29.5/40, active shortlist 0
 
-현재 problem-selection source of truth는
+이 절이 동결됐을 당시 problem-selection source of truth는
 [`vascular-semantics-source-audit-2026-08-10.md`](vascular-semantics-source-audit-2026-08-10.md)다.
+현재 기준선은 문서 최상단의 hemodynamic–endpoint audit이며, 이 절은 score를
+소급 수정하지 않는 historical record다.
 직전 source-delta audit은 historical record로 보존한다.
 DIAS audit은 직전 history로 보존한다. DIAS payload는 읽지 않았고 known
 `introai9` dataset root의 bounded inventory에도

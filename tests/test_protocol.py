@@ -124,6 +124,41 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "PINN rupture-status"):
             validate_protocol(candidate)
 
+    def test_hemodynamic_endpoint_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "hemodynamic_endpoint_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 31.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 5)
+        self.assertEqual(audit["aneurisk_cfd_source_cases"], 76)
+        self.assertFalse(audit["aneurisk_cfd_archive_downloaded"])
+        self.assertFalse(audit["aneurisk_cfd_patient_specific_measured_inflow"])
+        self.assertFalse(
+            audit["aneurisk_cfd_record_paper_outlet_condition_consistent"]
+        )
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["hemodynamic_endpoint_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "hemodynamic-endpoint audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["hemodynamic_endpoint_source_audit"][
+            "candidates"
+        ][0]["payload_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "hemodynamic-endpoint audit"):
+            validate_protocol(candidate)
+
     def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:
         audit = self.protocol["problem_selection"]["vascular_semantics_source_audit"]
         self.assertEqual(audit["best_score"], 29.5)

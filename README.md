@@ -5,7 +5,16 @@
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
-가장 최근 direct-prior audit은 2026년 7월의
+가장 최근
+[`hemodynamic–endpoint source audit`](docs/hemodynamic-endpoint-source-audit-2026-08-10.md)은
+새 Zenodo 76-case Aneurisk CFD release, multiple-aneurysm culprit ranking,
+post-treatment remnant와 wall-enhancement endpoint를 다시 점검했습니다. 최고
+곡률 기반 local-hemodynamic surrogate도 **31.0/40**입니다. 원 논문이 곡률을
+TAWSS/OSI의 직접 proxy로 이미 제시했고, release의 inflow는 실측 환자별 조건이
+아니라 두 연령군 평균 파형의 직경 scaling입니다. 1.4 GB archive는 받지 않았고
+payload, P0, method, architecture와 PBS/GPU job은 모두 0입니다.
+
+직전 direct-prior audit은 2026년 7월의
 [`geometry + PINN hemodynamics + clinical fusion`](docs/pinn-rupture-direct-prior-audit-2026-08-10.md)이
 팀의 원래 rupture-status pipeline을 사실상 직접 점유했음을 확인했습니다. 이
 선행은 AneuX 735 lesion에 PointNeXt, PINN-derived WSS/OSI/RRT와 clinical
@@ -15,7 +24,8 @@ patient grouping이 명시되지 않았습니다. PINN도 patient-specific BC, p
 in-vivo validation 없이 geometry와 공통 가정에서 파생됩니다. 따라서 남을 수
 있는 “physically validated incremental hemodynamic information” 후보는 공동
 asset과 식별 가능성이 없어 **23.5/40**으로 기각했습니다. 새 payload, P0,
-method, architecture, PBS/GPU job은 0입니다.
+method, architecture, PBS/GPU job은 0입니다. 이 23.5/40 판정은 historical
+direct-prior rejection으로 보존합니다.
 
 직전 [`vascular-semantics source audit`](docs/vascular-semantics-source-audit-2026-08-10.md)의
 TopBrain 29.5/40도 historical rejection으로 보존합니다.

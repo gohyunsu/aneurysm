@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · PINN rupture-status residual 23.5/40 rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · hemodynamic–endpoint best 31.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "New public CFD still does not earn a model",
+      copy: "Zenodo 19455127 reports CC BY 4.0 VTP surface fields for 76 selected Aneurisk geometries. The inflow is two population age-group waveforms scaled by inlet diameter, not measured patient-specific physiology, and record/paper outlet summaries differ. Curvature-only field surrogation scores 31.0/40 because the companion paper already frames curvature as a TAWSS/OSI proxy and geometry-to-flow methods are direct controls. Cross-source added value, culprit ranking, treated-remnant change and wall-enhancement localization score 30.0/23.0/25.0/26.0.",
+      status: "Best 31.0/40 · all rejected · archive/P0/model/GPU 0",
+      url: "../docs/hemodynamic-endpoint-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Geometry + PINN + clinical fusion is now direct prior art",
@@ -385,6 +392,11 @@ window.AURORA_DATA = Object.freeze({
       provenance: "99 unique patients/105 MCA lesion rows + 44 controls · six multi-lesion groups · asset component 5/9 failed · exact lesion-level linkage unsupported · headers unopened"
     },
     {
+      name: "Aneurisk CFD curvature · 2026",
+      role: "source-rejected curvature/hemodynamic control; not training",
+      provenance: "76 selected geometries · 1.4 GB VTP archive · CC BY 4.0 · two population age-group inflows scaled by diameter · record/paper outlet mismatch · archive/payload 0 · best candidate 31/40"
+    },
+    {
       name: "OpenNeuro ds005096",
       role: "TOF-MRA external modality/geometry stress only",
       provenance: "63 patients/85 aneurysms · selected-session expert masks/STL · 24 longitudinal subjects but not longitudinal dense supervision"
@@ -411,6 +423,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "A fresh hemodynamic–endpoint batch is rejected before payload and compute",
+      copy: "The frozen screen scores curvature-only local-field surrogation, cross-source residual hemodynamic added value, within-patient culprit ranking, paired treated-remnant change and wall-enhancement/WSS localization at 31.0/30.0/23.0/25.0/26.0. The new 76-case Aneurisk CFD release uses population age-group inflow waveforms rather than measured patient conditions; its companion paper already claims curvature as a hemodynamic proxy. No archive, VTP, private image, P0, method, architecture, PBS/GPU, outer test or submission identity is opened. Schema 4.2 preserves introai9-only execution and excludes junjinyong.",
+      files: ["docs/hemodynamic-endpoint-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",
