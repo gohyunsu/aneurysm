@@ -89,15 +89,39 @@ class ProtocolTests(unittest.TestCase):
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "vascular-semantics boundary"):
+        with self.assertRaisesRegex(ProtocolError, "PINN direct-prior boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "vascular-semantics boundary"):
+        with self.assertRaisesRegex(ProtocolError, "PINN direct-prior boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "vascular-semantics boundary"):
+        with self.assertRaisesRegex(ProtocolError, "PINN direct-prior boundary"):
+            validate_protocol(candidate)
+
+    def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "pinn_rupture_direct_prior_audit"
+        ]
+        self.assertEqual(audit["score"], 23.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(len(audit["axis_scores"]), 8)
+        self.assertAlmostEqual(sum(audit["axis_scores"]), audit["score"])
+        self.assertEqual(audit["aneux_source_patients"], 605)
+        self.assertEqual(audit["direct_prior_rupture_status_cases"], 735)
+        self.assertFalse(audit["patient_specific_boundary_conditions_available"])
+        self.assertFalse(audit["paired_cfd_or_in_vivo_flow_validation_available"])
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["pinn_rupture_direct_prior_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "PINN rupture-status"):
             validate_protocol(candidate)
 
     def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:

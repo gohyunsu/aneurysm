@@ -9,7 +9,15 @@
 
 ## S-VASC · vascular-semantics batch · all rejected, no execution
 
-TopBrain paired-modality anatomy, healthy IXI atlas, VesselVerse annotations,
+가장 최근 audit은 geometry-conditioned PINN hemodynamics와 clinical fusion이
+direct prior에 의해 점유됐는지 평가했다. 잔여 physically validated incremental
+flow 후보는 23.5/40으로 source에서 기각됐다. AneuX는 605 patients / 750 lesions지만
+direct-prior primary model은 stratified five-fold로만 기술되며 patient grouping이
+명시되지 않는다. Patient-specific BC와 paired CFD/in-vivo validation도 없다.
+Payload/P0/model/GPU는 0이다. 상세 계약은
+[`PINN direct-prior audit`](pinn-rupture-direct-prior-audit-2026-08-10.md)에 있다.
+
+직전 TopBrain paired-modality anatomy, healthy IXI atlas, VesselVerse annotations,
 NeckSpline extension, paired CTA phantom QA와 ADAM longitudinal semantics를 frozen
 8축 40점 rubric으로 source-only 평가했다. 점수는 29.5, 28.5, 27.5, 26.5,
 26.0, 25.0이며 admission line 32를 넘는 후보가 없다. Candidate payload,

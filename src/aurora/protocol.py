@@ -118,8 +118,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.0":
-        raise ProtocolError("The current research-state schema must be version 4.0.")
+    if protocol["schema_version"] != "4.1":
+        raise ProtocolError("The current research-state schema must be version 4.1.")
 
     project = protocol["project"]
     _require_keys(
@@ -142,7 +142,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_vascular_semantics_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_pinn_rupture_direct_prior_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -186,6 +186,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "dsa_prefix_risk_source_audit",
             "source_delta_audit",
             "vascular_semantics_source_audit",
+            "pinn_rupture_direct_prior_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -195,12 +196,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_vascular_semantics_audit_no_primary_or_method"
+        != "no_active_shortlist_after_pinn_rupture_direct_prior_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_and_introai9_bounded_inventory_only_no_new_candidate_payload"
+        != "source_metadata_only_no_new_candidate_payload_for_pinn_direct_prior_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -212,14 +213,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/vascular-semantics-source-audit-2026-08-10.md"
+        != "docs/pinn-rupture-direct-prior-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint"
+        != "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables"
     ):
         raise ProtocolError(
-            "The vascular-semantics boundary must retain no selected primary, "
+            "The PINN direct-prior boundary must retain no selected primary, "
             "method, GPU, outer test, P1, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -243,6 +244,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "neckspline_multiloop_or_artifact_extension_direct_prior_occupied",
         "paired_cta_dose_reconstruction_phantom_orbit_effective_anatomy_one",
         "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released",
+        "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -291,6 +293,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "staple_or_generic_annotator_aggregation",
         "centerline_guided_periodic_neck_spline",
         "generic_phantom_ai_quality_monitoring",
+        "pointnext_geometry_pinn_hemodynamics_clinical_fusion",
+        "pinn_residual_convergence_as_physiological_validation",
+        "early_or_late_multimodal_rupture_status_fusion",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -1367,6 +1372,112 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("vascular-semantics source rejection and introai9-only boundary")
 
+    pinn_audit = problem_selection["pinn_rupture_direct_prior_audit"]
+    _require_keys(
+        pinn_audit,
+        [
+            "status",
+            "audit_document",
+            "candidate_id",
+            "score",
+            "maximum_score",
+            "axis_scores",
+            "automatic_selection_threshold",
+            "direct_prior",
+            "direct_prior_release_date",
+            "direct_prior_rupture_status_cases",
+            "direct_prior_ruptured_cases",
+            "direct_prior_unruptured_cases",
+            "direct_prior_best_late_fusion_auroc",
+            "direct_prior_best_late_fusion_auprc",
+            "direct_prior_geometry_clinical_auroc",
+            "direct_prior_primary_split_description",
+            "direct_prior_separate_feature_analysis_patient_aware",
+            "direct_prior_fusion_weight_selected_on_same_oof_cohort",
+            "aneux_source_lesions",
+            "aneux_source_vessel_trees",
+            "aneux_source_patients",
+            "patient_specific_boundary_conditions_available",
+            "paired_cfd_or_in_vivo_flow_validation_available",
+            "prospective_rupture_endpoint_available",
+            "code_or_split_manifest_linked_in_manuscript",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "new_candidate_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.pinn_rupture_direct_prior_audit",
+    )
+    pinn_axis_scores = pinn_audit["axis_scores"]
+    if (
+        pinn_audit["status"]
+        != "completed_source_only_rejected_below_admission_threshold"
+        or pinn_audit["audit_document"]
+        != "docs/pinn-rupture-direct-prior-audit-2026-08-10.md"
+        or pinn_audit["candidate_id"]
+        != "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables"
+        or pinn_audit["score"] != 23.5
+        or pinn_audit["maximum_score"] != 40.0
+        or pinn_audit["automatic_selection_threshold"] != 32.0
+        or pinn_audit["score"] >= pinn_audit["automatic_selection_threshold"]
+        or len(pinn_axis_scores) != 8
+        or any(score < 0.0 or score > 5.0 for score in pinn_axis_scores)
+        or abs(sum(pinn_axis_scores) - pinn_audit["score"]) >= 1e-12
+        or pinn_audit["direct_prior"] != "arxiv_2607_10530"
+        or pinn_audit["direct_prior_release_date"] != "2026-07-12"
+        or pinn_audit["direct_prior_rupture_status_cases"] != 735
+        or pinn_audit["direct_prior_ruptured_cases"] != 261
+        or pinn_audit["direct_prior_unruptured_cases"] != 474
+        or pinn_audit["direct_prior_best_late_fusion_auroc"] != 0.827
+        or pinn_audit["direct_prior_best_late_fusion_auprc"] != 0.732
+        or pinn_audit["direct_prior_geometry_clinical_auroc"] != 0.809
+        or pinn_audit["direct_prior_primary_split_description"]
+        != "stratified_five_fold_fixed_seed_primary_models_patient_grouping_not_explicit_in_manuscript"
+        or pinn_audit["direct_prior_separate_feature_analysis_patient_aware"] is not True
+        or pinn_audit["direct_prior_fusion_weight_selected_on_same_oof_cohort"] is not True
+        or pinn_audit["aneux_source_lesions"] != 750
+        or pinn_audit["aneux_source_vessel_trees"] != 668
+        or pinn_audit["aneux_source_patients"] != 605
+        or pinn_audit["patient_specific_boundary_conditions_available"] is not False
+        or pinn_audit["paired_cfd_or_in_vivo_flow_validation_available"] is not False
+        or pinn_audit["prospective_rupture_endpoint_available"] is not False
+        or pinn_audit["code_or_split_manifest_linked_in_manuscript"] is not False
+        or pinn_audit["active_shortlist_count"] != 0
+        or pinn_audit["primary_problem_selected"] is not False
+        or pinn_audit["new_candidate_payload_accessed"] is not False
+        or pinn_audit["executable_p0_registered"] is not False
+        or pinn_audit["method_selected"] is not False
+        or pinn_audit["architecture_selected"] is not False
+        or pinn_audit["gpu_training_authorized"] is not False
+        or pinn_audit["outer_test_authorized"] is not False
+        or pinn_audit["submission_identity_active"] is not False
+        or pinn_audit["execution_server"] != "introai9"
+        or pinn_audit["pbs_job_created"] is not False
+        or pinn_audit["login_node_gpu_command_executed"] is not False
+        or pinn_audit["junjinyong_accessed_for_this_audit"] is not False
+        or pinn_audit["decision"]
+        != "reject_original_pipeline_as_directly_occupied_and_residual_candidate_as_unidentifiable_without_joint_asset"
+        or pinn_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The PINN rupture-status direct-prior audit must preserve the frozen "
+            "23.5/40 rejection, unresolved patient grouping, no physical validation, "
+            "and introai9-only no-compute boundary."
+        )
+    checks.append("PINN rupture-status direct-prior rejection boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -1446,7 +1557,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_vascular_semantics_audit"
+        != "unselected_primary_with_no_active_shortlist_after_pinn_rupture_direct_prior_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1609,7 +1720,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_vascular_semantics_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_pinn_rupture_direct_prior_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

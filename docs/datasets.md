@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 PINN rupture-status direct-prior audit:** AneuX는 750 aneurysm
+> domes, 668 vessel trees와 605 patients를 보고한다. 2026년 direct prior는 735
+> labeled lesions에 geometry-conditioned PINN hemodynamics와 clinical fusion을
+> 이미 적용했지만 primary split의 patient grouping, patient-specific BC와
+> CFD/in-vivo validation은 확인되지 않는다. AneuX status와 synthetic CFD를
+> 병합해 이 joint estimand를 만들 수 없다. Residual candidate는 23.5/40으로
+> 기각됐고 payload/P0/model/GPU는 0이다. 상세 근거는
+> [`direct-prior audit`](pinn-rupture-direct-prior-audit-2026-08-10.md)에 있다.
+
 > **2026-08-10 vascular-semantics audit:** TopBrain 25 paired CTA/MRA patient,
 > healthy IXI 100 MRA, VesselVerse source-reported 950 images, one-anatomy CTA
 > phantom, NeckSpline-derived neck loops와 ADAM longitudinal metadata를 source-only로

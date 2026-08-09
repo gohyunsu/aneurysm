@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · vascular-semantics best 29.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · PINN rupture-status residual 23.5/40 rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Geometry + PINN + clinical fusion is now direct prior art",
+      copy: "A July 2026 preprint already combines PointNeXt geometry, one geometry-conditioned PINN per aneurysm, WSS/TAWSS/OSI/RRT descriptors and clinical variables on 735 AneuX rupture-status lesions. Its reported late-fusion AUROC/AUPRC is 0.827/0.732. Yet AneuX contains 750 lesions from 605 patients, the primary models are described only as stratified five-fold, and the fields have no patient-specific BC, paired CFD or in-vivo validation. The only honest residual question—physically validated incremental flow information beyond morphology and clinical variables—has no joint asset and scores 23.5/40.",
+      status: "23.5/40 · direct-prior rejection · payload/P0/model/GPU 0",
+      url: "../docs/pinn-rupture-direct-prior-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Vascular-semantics batch leaves no model-worthy target",
@@ -404,6 +411,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "The original geometry + PINN + clinical identity is rejected as direct prior",
+      copy: "Official arXiv and AneuX sources show that a July 2026 study already runs PointNeXt geometry, PINN-derived pressure/velocity/WSS/TAWSS/OSI/RRT and clinical fusion on 735 cross-sectional rupture-status lesions. The source database contains 750 lesions from 605 patients, while patient grouping is not explicit for the paper's primary stratified folds. Its PINN uses prescribed shared conditions and is not validated against CFD or in-vivo flow. The residual physically validated incremental-information question scores 23.5/40 because no audited joint asset contains status, patient-specific conditions and verified flow. Schema 4.1 freezes no payload/P0/method/architecture/PBS/GPU and introai9-only execution; junjinyong remains excluded.",
+      files: ["docs/pinn-rupture-direct-prior-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 PINN rupture-status direct-prior overlay:** July 2026
+> `arXiv:2607.10530`이 PointNeXt vascular geometry, geometry-conditioned PINN
+> pressure/velocity/WSS/TAWSS/OSI/RRT와 clinical variables를 735 AneuX
+> cross-sectional rupture-status lesion에 이미 결합했다. Official AneuX는 750
+> lesion/668 vessel tree/605 patient다. Direct-prior primary models는 stratified
+> five-fold로만 기술되고 separate tabular importance만 patient-aware라 primary
+> patient/vessel grouping은 manuscript에서 미확인이다. PINN은 prescribed shared
+> BC를 쓰며 patient-specific BC, paired CFD와 in-vivo validation이 없다. 따라서
+> 원래 pipeline은 direct prior이고, physically validated incremental-flow residual
+> candidate도 joint asset 부재로 23.5/40이다. Frozen admission line 32 미만이므로
+> active shortlist, primary, payload, P0, method, architecture, PBS/GPU, outer test와
+> submission identity는 모두 0이다. Public machine source는 schema 4.1의
+> `problem_selection.pinn_rupture_direct_prior_audit`와
+> `docs/pinn-rupture-direct-prior-audit-2026-08-10.md`다. AURORA 실행은
+> `introai9` PBS만 사용하고 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 vascular-semantics deployment overlay:** Exact audit content
 > `f735ab5a2e0eec411142b7834e743d6cf4cd0944`의 Quality `31324138662`와 Pages
 > `31324138250`이 성공했다. Live overview와 change data는 best 29.5/40, all
@@ -193,9 +209,12 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. Active primary와
-  source shortlist는 모두 0이다. 가장 최근 vascular-semantics batch의 최고
-  TopBrain paired-modality anatomy도 29.5/40으로 기각됐고 새 payload/P0/model/GPU는
-  0이다. 공개 단위는 25 paired patient이며 aneurysm endpoint가 없다. 직전
+  source shortlist는 모두 0이다. 가장 최근 direct-prior audit은 원래
+  geometry + PINN hemodynamics + clinical rupture-status fusion pipeline이 July
+  2026 prior에 의해 점유됐음을 확인했다. Physically validated incremental-flow
+  residual도 joint asset 부재로 23.5/40이며 새 payload/P0/model/GPU는 0이다.
+  직전 vascular-semantics TopBrain 29.5/40도 기각했고 공개 단위는 25 paired
+  patient이며 aneurysm endpoint가 없다. 그 전
   source-delta 최고 OpenNeuro 31.5/40과 DIAS prefix-risk 31.0/40도 기각했다.
   그 이전 AneuX
   preprocessing-orbit 후보는 34.0/40으로
@@ -331,8 +350,10 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
   아니다. 새 후보에서도 direct prior 또는 strong baseline으로 취급한다.
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
-- 가장 최근 source-rejected candidate는 **TopBrain paired-modality vascular
-  anatomy without an aneurysm endpoint**다. 가장 최근 execution-closed
+- 가장 최근 source-rejected candidate는 **physically validated incremental
+  hemodynamic information beyond geometry and clinical variables**다. 원래
+  PointNeXt/GNN + PINN + clinical fusion은 direct prior이며, joint asset 부재로
+  residual도 23.5/40이다. 가장 최근 execution-closed
   candidate는 AneuX preprocessing orbit이다. Goal-oriented hemodynamic
   segmentation은 S0a asset component의 explicit lesion-level linkage
   precondition이 성립하지 않아 5/9로 종료한 더 이른 history다. 그 직전은

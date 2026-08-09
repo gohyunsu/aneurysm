@@ -8,12 +8,17 @@ post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
 aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
 가장 최근 기준선은
-[`vascular-semantics-source-audit-2026-08-10.md`](vascular-semantics-source-audit-2026-08-10.md)다.
-TopBrain paired-modality vascular anatomy가 29.5/40으로 가장 높았지만 공개
-단위는 25 paired patient이고 48-class anatomy target에는 aneurysm endpoint가
-없다. Healthy IXI 28.5, VesselVerse 27.5, NeckSpline extension 26.5, paired CTA
-phantom 26.0과 ADAM longitudinal/post-treatment 25.0도 모두 기각됐다. Payload,
-P0, method, architecture와 GPU는 0이며 `introai9`만 향후 실행 서버다.
+[`pinn-rupture-direct-prior-audit-2026-08-10.md`](pinn-rupture-direct-prior-audit-2026-08-10.md)다.
+2026년 7월 direct prior가 PointNeXt geometry, PINN-derived pressure/velocity/WSS/
+TAWSS/OSI/RRT와 clinical variables를 AneuX rupture status에 이미 결합했다. 이
+구성은 원래 팀 방향을 직접 점유한다. 다만 735 lesion의 주 split은 stratified
+five-fold로만 기술되고 원 데이터는 605 patient이며, patient-specific BC와 paired
+CFD/in-vivo validation도 없다. 남을 수 있는 physically validated incremental-flow
+question은 joint asset이 없어 23.5/40으로 기각했다. Payload, P0, method,
+architecture와 GPU는 0이며 `introai9`만 향후 실행 서버다.
+
+직전 vascular-semantics batch의 TopBrain 29.5/40과 나머지 다섯 source rejection도
+[`historical audit`](vascular-semantics-source-audit-2026-08-10.md)으로 보존한다.
 
 직전 OpenNeuro paired-surface growth는 31.5/40으로 가장 높았지만 같은 공개 cohort의
 Bayesian surface-displacement growth detection이 직접 선행이고, 공개 종단 단위는

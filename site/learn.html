@@ -50,9 +50,10 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 vascular-semantics audit의 최고 TopBrain 후보도 29.5/40으로
-            기각됐습니다. 25 paired patient의 CTA/MRA anatomy benchmark지만
-            aneurysm endpoint가 없고 challenge prior가 이미 강합니다.
+            최신 audit은 geometry + PINN hemodynamics + clinical fusion이 direct
+            prior에 의해 이미 점유됐음을 확인했습니다. 더 강한 patient-grouped,
+            physically validated residual question도 joint asset이 없어 23.5/40으로
+            기각됐습니다.
             현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
@@ -64,7 +65,7 @@
             supervision semantics 또는 독립 단위가 실제로 달라진 별도 후보만 다시
             감사합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
           </p>
-          <a href="../docs/vascular-semantics-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/pinn-rupture-direct-prior-audit-2026-08-10.md">최신 direct-prior audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -362,7 +363,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              최고 후보도 29.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              최신 residual 후보도 23.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
               stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
@@ -370,12 +371,12 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 최신 vascular-semantics 최고점도 29.5/40으로 기각됐습니다. Cross-modal vessel segmentation, healthy-atlas anomaly detection, STAPLE aggregation, NeckSpline, Bayesian growth, PointNet++, DiffusionNet과 E(3) mesh model은 direct priors 또는 future controls입니다. Closed branch를 수리해 어떤 GNN도 current method로 구현하지 않습니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. PointNeXt/GNN + PINN-derived hemodynamics + clinical fusion은 2026 direct prior가 점유하며, 물리 검증 뒤 incremental signal을 묻는 residual도 23.5/40으로 기각됐습니다. Cross-modal segmentation, NeckSpline, Bayesian growth, DiffusionNet과 E(3) mesh model도 direct priors 또는 future controls입니다.</p>
             </aside>
             <article>
-              <span>CURRENT · VASCULAR-SEMANTICS REJECTION</span>
-              <div><h3>무엇이 남았고, 정말 독립적인가?</h3><p>TopBrain은 25 paired patient의 anatomy benchmark지만 aneurysm endpoint가 없습니다. VesselVerse는 human rater distribution이 아니고, phantom은 one-anatomy 반복입니다. NeckSpline은 geometric neck space를 이미 직접 점유합니다. 따라서 architecture를 만들기 전에 모두 source에서 닫았습니다.</p></div>
-              <b>상태</b><small>best 29.5/40 · no payload/P0/model/GPU</small>
+              <span>CURRENT · PINN DIRECT-PRIOR REJECTION</span>
+              <div><h3>Derived flow가 geometry 밖의 정보를 담는가?</h3><p>Patient-specific BC나 CFD/in-vivo target 없이 PINN field는 geometry와 공통 가정에서 파생됩니다. 분류 성능 증가는 내부 predictive association일 수 있지만 독립적인 physiological modality의 가치를 식별하지 않습니다. AneuX 605-patient grouping과 physical validation을 함께 만족하는 asset도 없습니다.</p></div>
+              <b>상태</b><small>23.5/40 · no payload/P0/model/GPU</small>
             </article>
             <article>
               <span>HISTORY · ANEUX ORBIT P0</span>

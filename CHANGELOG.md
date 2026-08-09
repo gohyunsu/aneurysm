@@ -4,6 +4,31 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Geometry + PINN + clinical fusion is rejected as direct prior
+
+- A July 2026 preprint already combines PointNeXt vascular geometry,
+  geometry-conditioned PINN pressure/velocity/WSS/TAWSS/OSI/RRT and clinical
+  variables on 735 AneuX cross-sectional rupture-status lesions. Reported
+  late-fusion AUROC/AUPRC 0.827/0.732 is prior-work evidence, not an AURORA result.
+- The official AneuX source reports 750 lesions, 668 vessel trees and 605 patients.
+  The direct-prior primary models are described as stratified five-fold, while
+  only a separate tabular feature analysis explicitly says patient-aware. Primary
+  patient/vessel-family grouping therefore remains unverified rather than assumed.
+- PINN fields use prescribed shared conditions without patient-specific BC, paired
+  CFD or in-vivo validation. Residual-loss convergence is not physiological
+  validation, and cross-sectional status is not future rupture probability.
+- The residual physically validated incremental-information candidate scores
+  23.5/40, below the frozen 32/40 line. No payload, P0, method, architecture,
+  PBS/GPU job, outer test or submission identity is created.
+- Machine contract is schema 4.1. AURORA execution remains `introai9` PBS only;
+  `junjinyong` is excluded from connection, query, submission and monitoring.
+- 영향 파일: `docs/pinn-rupture-direct-prior-audit-2026-08-10.md`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `README.md`, `docs/research-direction.md`, `docs/literature-lineage.md`,
+  `docs/model-spec.md`, `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/datasets.md`, `site/index.html`, `site/learn.html`,
+  `site/assets/research-data.js`, `AGENTS.md`, `CHANGELOG.md`.
+
 ## 2026-08-10 · Vascular-semantics audit is deployed and verified
 
 - Exact content `f735ab5a2e0eec411142b7834e743d6cf4cd0944`의 Quality

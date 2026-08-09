@@ -1,9 +1,9 @@
 {
-  "schema_version": "4.0",
+  "schema_version": "4.1",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_vascular_semantics_audit",
+    "status": "failed_branches_preserved_no_active_shortlist_after_pinn_rupture_direct_prior_audit",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_vascular_semantics_audit_no_primary_or_method",
+    "status": "no_active_shortlist_after_pinn_rupture_direct_prior_audit_no_primary_or_method",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "source_metadata_and_introai9_bounded_inventory_only_no_new_candidate_payload",
+    "asset_access_status": "source_metadata_only_no_new_candidate_payload_for_pinn_direct_prior_audit",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -27,7 +27,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32",
-    "audit_document": "docs/vascular-semantics-source-audit-2026-08-10.md",
+    "audit_document": "docs/pinn-rupture-direct-prior-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -544,8 +544,50 @@
       "decision": "reject_all_without_score_repair_payload_p0_method_architecture_or_gpu",
       "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
     },
+    "pinn_rupture_direct_prior_audit": {
+      "status": "completed_source_only_rejected_below_admission_threshold",
+      "audit_document": "docs/pinn-rupture-direct-prior-audit-2026-08-10.md",
+      "candidate_id": "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables",
+      "score": 23.5,
+      "maximum_score": 40.0,
+      "axis_scores": [4.5, 1.5, 2.0, 1.0, 3.0, 5.0, 4.5, 2.0],
+      "automatic_selection_threshold": 32.0,
+      "direct_prior": "arxiv_2607_10530",
+      "direct_prior_release_date": "2026-07-12",
+      "direct_prior_rupture_status_cases": 735,
+      "direct_prior_ruptured_cases": 261,
+      "direct_prior_unruptured_cases": 474,
+      "direct_prior_best_late_fusion_auroc": 0.827,
+      "direct_prior_best_late_fusion_auprc": 0.732,
+      "direct_prior_geometry_clinical_auroc": 0.809,
+      "direct_prior_primary_split_description": "stratified_five_fold_fixed_seed_primary_models_patient_grouping_not_explicit_in_manuscript",
+      "direct_prior_separate_feature_analysis_patient_aware": true,
+      "direct_prior_fusion_weight_selected_on_same_oof_cohort": true,
+      "aneux_source_lesions": 750,
+      "aneux_source_vessel_trees": 668,
+      "aneux_source_patients": 605,
+      "patient_specific_boundary_conditions_available": false,
+      "paired_cfd_or_in_vivo_flow_validation_available": false,
+      "prospective_rupture_endpoint_available": false,
+      "code_or_split_manifest_linked_in_manuscript": false,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "new_candidate_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "decision": "reject_original_pipeline_as_directly_occupied_and_residual_candidate_as_unidentifiable_without_joint_asset",
+      "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "same_lesion_preprocessing_orbit_quotient_morphometry",
-    "most_recent_source_rejected_candidate": "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint",
+    "most_recent_source_rejected_candidate": "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -566,7 +608,8 @@
       "vesselverse_protocol_conditioned_vessel_distribution_not_human_aneurysm_raters",
       "neckspline_multiloop_or_artifact_extension_direct_prior_occupied",
       "paired_cta_dose_reconstruction_phantom_orbit_effective_anatomy_one",
-      "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released"
+      "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released",
+      "physically_validated_incremental_hemodynamic_information_beyond_geometry_and_clinical_variables"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -613,7 +656,10 @@
       "healthy_atlas_cross_dataset_anomaly_detection",
       "staple_or_generic_annotator_aggregation",
       "centerline_guided_periodic_neck_spline",
-      "generic_phantom_ai_quality_monitoring"
+      "generic_phantom_ai_quality_monitoring",
+      "pointnext_geometry_pinn_hemodynamics_clinical_fusion",
+      "pinn_residual_convergence_as_physiological_validation",
+      "early_or_late_multimodal_rupture_status_fusion"
     ]
   },
   "venue": {
@@ -627,7 +673,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_vascular_semantics_audit",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_pinn_rupture_direct_prior_audit",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -692,7 +738,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "unselected",
-    "active_candidate_status": "no_active_shortlist_after_vascular_semantics_audit_no_primary_method_architecture_or_gpu",
+    "active_candidate_status": "no_active_shortlist_after_pinn_rupture_direct_prior_audit_no_primary_method_architecture_or_gpu",
     "candidate_primary_estimand": "unselected",
     "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",

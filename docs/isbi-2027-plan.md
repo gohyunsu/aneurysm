@@ -1,7 +1,11 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-10 current boundary:** 가장 최근 vascular-semantics batch의 최고
-> 후보는 TopBrain paired CTA/MRA anatomy 29.5/40이며 source에서 기각했다. 공개
+> **2026-08-10 current boundary:** 가장 최근 direct-prior audit은 PointNeXt/GNN
+> geometry + PINN hemodynamics + clinical fusion이 이미 직접 점유됐음을 확인했다.
+> Patient-grouped, physically validated incremental-flow residual candidate도 joint
+> asset이 없어 23.5/40으로 기각했다. Payload/P0/model/GPU는 0이다. 직전
+> vascular-semantics batch의 최고 후보는 TopBrain paired CTA/MRA anatomy
+> 29.5/40이며 source에서 기각했다. 공개
 > 단위는 25 paired patient이고 target은 aneurysm이 아닌 48-class vascular
 > anatomy다. Healthy IXI, VesselVerse, NeckSpline extension, phantom QA와 ADAM
 > longitudinal 후보도 모두 32 미만이다. Payload/P0/model/GPU는 0이다. 그 이전 AneuX
@@ -15,7 +19,7 @@
 
 최종 검토일: 2026-08-10 KST
 
-상태: **target locked · vascular-semantics best 29.5/40 and all rejected · AneuX
+상태: **target locked · PINN rupture-status residual 23.5/40 rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
 shortlist/selected primary problem/method/architecture/GPU 0 · not
 submission-ready**

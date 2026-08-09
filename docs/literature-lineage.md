@@ -1,6 +1,24 @@
 # 선행연구 계보와 research gap
 
-## 0-V. Current decision · vascular-semantics batch has no active gap
+## 0-P. Current decision · geometry + PINN + clinical fusion is directly occupied
+
+2026년 7월
+[direct prior](https://arxiv.org/abs/2607.10530)는 PointNeXt surface encoding,
+geometry-conditioned PINN pressure/velocity/WSS/TAWSS/OSI/RRT, clinical variables와
+early/late fusion을 하나의 AneuX rupture-status pipeline으로 이미 구현했다. Best
+late fusion은 735 labeled lesions에서 pooled AUROC/AUPRC 0.827/0.732를
+보고한다. 따라서 GNN/PointNeXt + physics loss/PINN + clinical fusion은 더 이상
+독립 gap이 아니다.
+
+더 강한 residual question은 patient/vessel-family grouping과 physical
+falsification 뒤에도 hemodynamics가 morphology/clinical variables를 넘어 정보를
+추가하는지다. 하지만 AneuX는 patient-specific BC나 verified flow를 제공하지 않고,
+synthetic CFD release는 matched clinical status cohort가 아니다. Primary model의
+patient grouping도 manuscript에서 명시되지 않았다. 이 후보는
+[`frozen audit`](pinn-rupture-direct-prior-audit-2026-08-10.md)에서 23.5/40으로
+기각됐다. Active gap, method와 architecture는 없다.
+
+## 0-V. Historical decision · vascular-semantics batch also had no active gap
 
 2026-08-10 frozen batch는 TopBrain paired CTA/MRA anatomy, healthy IXI vessel
 atlas, VesselVerse protocol-conditioned annotation, NeckSpline extension, paired

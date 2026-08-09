@@ -5,16 +5,20 @@
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
-가장 최근 frozen batch는 TopBrain paired CTA/MRA anatomy, healthy IXI vessel
-atlas, VesselVerse annotation semantics, NeckSpline extension, CTA phantom QA와
-ADAM longitudinal semantics를 동일한 8축 40점 rubric으로 평가했습니다. 최고
-TopBrain도 **29.5/40**으로 32점 admission gate에 못 미칩니다. 공개 단위는
-25 paired patient이고 target은 48-class whole-brain vascular anatomy이지
-aneurysm endpoint가 아닙니다. VesselVerse의 다중 “expert”에는 여러 algorithm
-output이 포함되고, phantom의 126 scan은 한 anatomy·세 병변의 반복입니다.
-따라서 점수를 사후 수리하지 않고
-[`vascular-semantics source audit`](docs/vascular-semantics-source-audit-2026-08-10.md)을
-고정했습니다. 새 payload, P0, method, architecture와 GPU job은 0입니다.
+가장 최근 direct-prior audit은 2026년 7월의
+[`geometry + PINN hemodynamics + clinical fusion`](docs/pinn-rupture-direct-prior-audit-2026-08-10.md)이
+팀의 원래 rupture-status pipeline을 사실상 직접 점유했음을 확인했습니다. 이
+선행은 AneuX 735 lesion에 PointNeXt, PINN-derived WSS/OSI/RRT와 clinical
+variables를 결합해 late-fusion AUROC 0.827을 보고합니다. 그러나 AneuX 원본은
+750 lesions / 605 patients이고, 주 모델은 stratified five-fold로만 기술되어
+patient grouping이 명시되지 않았습니다. PINN도 patient-specific BC, paired CFD와
+in-vivo validation 없이 geometry와 공통 가정에서 파생됩니다. 따라서 남을 수
+있는 “physically validated incremental hemodynamic information” 후보는 공동
+asset과 식별 가능성이 없어 **23.5/40**으로 기각했습니다. 새 payload, P0,
+method, architecture, PBS/GPU job은 0입니다.
+
+직전 [`vascular-semantics source audit`](docs/vascular-semantics-source-audit-2026-08-10.md)의
+TopBrain 29.5/40도 historical rejection으로 보존합니다.
 
 직전 [`source-delta audit`](docs/source-delta-audit-2026-08-09.md)의 최고
 OpenNeuro paired-surface growth 31.5/40도 historical rejection으로 보존합니다.
