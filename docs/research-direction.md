@@ -13,7 +13,11 @@ OpenNeuro paired-surface growth가 31.5/40으로 가장 높았지만 같은 공�
 Bayesian surface-displacement growth detection이 직접 선행이고, 공개 종단 단위는
 24 patient뿐이다. RSNA point-set, VICTORIA reader distribution, IntrA topology,
 IAIA와 flow-diverter 후보도 각각 controlled terms, 5 geometry, payload 부재,
-proposal-only 또는 imaging–endpoint linkage 부족으로 32점에 못 미쳤다. 이 batch는
+occupied segmentation task 또는 imaging–endpoint linkage 부족으로 32점에
+못 미쳤다. 2026-08-10 source clarification은 IAIA/INSTED가 160 train/40 closed
+test의 published signup-gated challenge임을 확인했지만, 5-year survival 문구는
+template example이고 실제 endpoint는 IA/stenosis box+segmentation이다. Historical
+26점은 재채점하지 않는다. 이 batch는
 source-only이며 method, architecture와 GPU를 만들지 않는다.
 
 IAVS는 새 candidate가 아니라 **external-state watch**다. 논문은 641개 3D

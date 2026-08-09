@@ -7,6 +7,14 @@
 > [`source-watch`](source-watch.md)는 release 변화를 감지해도 fresh source audit만
 > 요청하며 download, terms acceptance, P0, model과 GPU를 자동 허용하지 않는다.
 
+> **2026-08-10 INSTED clarification:** Official Codabench는 published 2024
+> challenge, CC BY-NC, 160 train(healthy/IA/stenosis 32/64/64)과 40 closed test를
+> 확인한다. Train asset은 signup 뒤 Files에서 제공되며 이번 audit에서 signup,
+> terms acceptance와 payload download는 하지 않았다. Challenge-design PDF의
+> 5-year survival 문장은 template example이고 실제 label은 IA/stenosis box와
+> segmentation이다. Historical IAIA score 26/40은 그대로다. 자세한 근거는
+> [`INSTED source clarification`](insted-source-clarification-2026-08-10.md)에 있다.
+
 > **2026-08-09 source-delta audit:** OpenNeuro longitudinal, RSNA controlled,
 > VICTORIA, IntrA, IAIA와 flow-diverter sources를 source-only로 비교했다. 최고
 > OpenNeuro growth도 31.5/40이며 public longitudinal unit 24와 동일 cohort direct

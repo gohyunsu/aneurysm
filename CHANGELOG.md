@@ -4,6 +4,25 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · INSTED source semantics are corrected without score repair
+
+- Official Codabench API는 INSTED를 published CC BY-NC challenge로 확인한다.
+  Training 160건은 healthy/IA/stenosis 32/64/64이고 closed test는 40건이다.
+  Training asset은 signup 뒤 Files에서 제공된다.
+- BIAS design PDF page 11의 5-year survival 문장은 case-definition template의
+  example이다. Challenge-specific answer와 metrics는 3D TOF-MRA의 IA/stenosis
+  box+segmentation만 정의하며 survival, rupture와 follow-up endpoint는 없다.
+- Official code repository exact `e48a9ba16398cca309d932813cda7dd3dc3e4cb9`를
+  확인했다. Signup, terms acceptance, image/mask/bbox payload access는 0이다.
+- Historical IAIA 26.0/40 rejection을 재채점하지 않고, proposal-only 표현만
+  published signup-gated segmentation challenge로 정정한다. Fresh score, P0,
+  method, architecture, GPU와 outer test는 열지 않는다.
+- 영향 파일: `docs/insted-source-clarification-2026-08-10.md`,
+  `docs/source-delta-audit-2026-08-09.md`, `docs/research-direction.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`,
+  `docs/experiment-protocol.md`, `site/assets/research-data.js`, `AGENTS.md`,
+  `CHANGELOG.md`.
+
 ## 2026-08-10 · IAVS watch-only state is deployed and verified
 
 - Exact content commit `ac6a7075d6607ae29d39e77a87d1ecfbcb87147d`의

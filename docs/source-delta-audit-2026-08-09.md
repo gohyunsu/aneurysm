@@ -68,8 +68,14 @@ topology loss나 false-positive head를 붙이는 것은 새 contribution이 아
 
 ### 5. IAIA와 flow-diverter outcome · 26.0/25.5
 
-[IAIA 2024 record](https://zenodo.org/doi/10.5281/zenodo.10990481)는 현재 challenge
-proposal만 제공해 image/label payload와 독립 단위를 감사할 수 없다.
+[IAIA 2024 Zenodo record](https://zenodo.org/doi/10.5281/zenodo.10990481)는
+challenge-design PDF만 제공한다. 2026-08-10 clarification에서 별도 official
+Codabench가 published INSTED challenge, 160 train/40 closed test와 signup-gated
+CC BY-NC training asset을 제공했음을 확인했다. 다만 endpoint는 IA/stenosis
+box+segmentation이며 design PDF의 “5-year survival”은 template example이지 실제
+label이 아니다. Historical 26.0 score는 수리하지 않고 자세한 정정은
+[`insted-source-clarification-2026-08-10.md`](insted-source-clarification-2026-08-10.md)에
+보존한다.
 [flow-diverter clinical dataset](https://pmc.ncbi.nlm.nih.gov/articles/PMC9163419/)은
 126 subject, 141 procedure의 tabular/제한적 angiographic 자료를 제공하지만,
 학습 가능한 imaging sequence와 follow-up endpoint의 연결이 headline 영상 방법을

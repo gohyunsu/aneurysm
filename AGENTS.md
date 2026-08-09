@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 INSTED source clarification:** Official Codabench는 INSTED를
+> published CC BY-NC challenge로 확인하며 160 train(healthy/IA/stenosis
+> 32/64/64), 40 closed test와 signup-gated training Files를 기술한다. BIAS PDF의
+> “5-year survival” 문장은 template example이고 실제 target은 3D TOF-MRA의
+> IA/stenosis box+segmentation이다. Official code exact `e48a9ba…`만 감사했고
+> signup/terms acceptance/payload access는 0이다. Historical IAIA 26.0/40
+> rejection은 보존하며 새 score/P0/method/architecture/GPU/outer test를 열지
+> 않는다. 이는 source semantics correction이지 closed candidate repair가 아니다.
+
 > **2026-08-10 IAVS watch-only overlay:** Official IAVS paper는 641개 3D MRA,
 > 587개 aneurysm–parent-vessel annotation과 CFD outcome을 보고하지만 official
 > repository `main` exact `2e40088d9eaa671c592929a154b7b2cf99f9320a`에는

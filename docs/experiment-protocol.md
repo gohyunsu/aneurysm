@@ -29,6 +29,17 @@ python scripts/audit_source_watch.py \
 `--fetch`도 GitHub metadata만 읽고 결과를 stdout으로 출력한다. 이 절은
 실험·development repair round나 scientific evidence가 아니다.
 
+## S-CLARIFY · INSTED source semantics · no score repair
+
+2026-08-10 official Codabench API와 BIAS PDF를 교차 확인했다. INSTED는 160
+train/40 closed test의 published signup-gated CC BY-NC challenge다. 실제 task는
+3D TOF-MRA의 IA/stenosis detection·box-local segmentation이며, PDF의 5-year
+survival 문장은 case-definition template example이다. 이 correction은 historical
+IAIA score 26.0/40을 바꾸거나 새 source version을 admission시키지 않는다.
+Signup, terms acceptance, payload/P0/model/GPU/outer test는 모두 0이다. Source of
+truth는
+[`insted-source-clarification-2026-08-10.md`](insted-source-clarification-2026-08-10.md)다.
+
 ## SΔ · 2026 source-delta batch · all source rejected, no execution
 
 OpenNeuro longitudinal growth, RSNA point-set detection, VICTORIA neck curves,

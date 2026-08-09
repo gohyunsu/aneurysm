@@ -17,7 +17,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "Source-delta batch leaves no admission-qualified problem",
-      copy: "Six fresh source-level candidates were scored without payload or architecture. OpenNeuro paired-surface growth is best at 31.5/40, but a Bayesian surface-displacement model already uses the same public cohort and only 24 public patients are longitudinal. RSNA remains controlled-access with point/territory rather than official aneurysm-extent masks; VICTORIA has five independent geometries; IntrA meshes are not staged and topology/bifurcation controls are directly occupied. IAIA is proposal-only and the flow-diverter release lacks sufficient imaging–endpoint linkage. Scores are not repaired to cross 32.",
+      copy: "Six fresh source-level candidates were scored without payload or architecture. OpenNeuro paired-surface growth is best at 31.5/40, but a Bayesian surface-displacement model already uses the same public cohort and only 24 public patients are longitudinal. RSNA remains controlled-access with point/territory rather than official aneurysm-extent masks; VICTORIA has five independent geometries; IntrA meshes are not staged and topology/bifurcation controls are directly occupied. A later source clarification confirms INSTED as a published signup-gated IA/stenosis segmentation challenge, but its apparent five-year-survival sentence is only a template example and not an outcome label. The historical IAIA score remains 26/40. The flow-diverter release lacks sufficient imaging–endpoint linkage. Scores are not repaired to cross 32.",
       status: "Best 31.5/40 · all source rejected · no P0/model/GPU",
       url: "../docs/source-delta-audit-2026-08-09.md"
     },
@@ -397,6 +397,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "source",
+      title: "INSTED is active, but five-year survival is only a template example",
+      copy: "Official Codabench confirms a published CC BY-NC challenge with 160 training cases (32 healthy, 64 aneurysm, 64 stenosis) and 40 closed-test cases; training files require signup. The BIAS PDF's five-year-survival sentence is an example bullet, while the challenge-specific answer defines 3D TOF-MRA boxes and segmentations. No longitudinal outcome exists. Official code is pinned at e48a9ba…; no signup, terms acceptance or payload access occurred. The historical IAIA 26/40 rejection is preserved without rescoring, P0, method, architecture or GPU.",
+      files: ["docs/insted-source-clarification-2026-08-10.md", "docs/source-delta-audit-2026-08-09.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

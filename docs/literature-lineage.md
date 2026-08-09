@@ -12,7 +12,11 @@ head 또는 internal-control loss는 독립 novelty가 아니다.
 RSNA의 anatomy-indexed point set은 controlled-access와 official point/territory
 supervision 경계가 있고, VICTORIA는 55 reader가 있어도 independent geometry가
 5개뿐이다. IntrA의 surface segmentation, topology-aware bifurcation filtering과
-foundation 3D feature transfer도 직접 계보다. IAIA는 proposal-only이고 제한적
+foundation 3D feature transfer도 직접 계보다. IAIA/INSTED는 published
+signup-gated 160-train/40-test joint IA/stenosis detection-segmentation challenge다.
+Design PDF의 5-year survival 문장은 template example이고 실제 outcome이 아니다.
+Joint lesion segmentation 자체는 challenge가 점유하며 historical 26점은 source
+clarification 뒤에도 유지한다. 제한적
 flow-diverter 자료는 imaging sequence와 outcome의 식별 가능한 연결이 부족하다.
 여섯 후보의 최고점이 31.5/40이므로 현재 active research gap은 없다. 상세
 score와 source 경계는
