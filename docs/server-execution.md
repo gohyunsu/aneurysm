@@ -2,15 +2,17 @@
 
 최종 갱신: 2026-08-10 KST
 
-## 2026-08-10 · Aneumo lineage metadata P0 authorization
+## 2026-08-10 · Aneumo lineage metadata P0 outcome
 
 - AURORA execution remains `introai9` PBS only. `junjinyong` is forbidden for
   connection, query, submission and monitoring.
-- The single authorized job is `cluster/pbs_aneumo_lineage_p0.pbs`: 2 CPU,
-  4 GB, GPU 0, 20 minutes. It reads pinned small text/CSV and Git LFS pointer
-  text only.
-- No login-node GPU command, archive/LFS object resolution, model training or
-  GPU monitoring is permitted. Same-source repair/resubmission is forbidden.
+- The single exact job `115386.ECE-util1` requested 2 CPU, 4 GB and GPU 0. PBS
+  finalized it at exit `-29`, walltime 20:36 and CPU time 0 before its first
+  small source completed.
+- Completed/partial cache, result JSON and raw scheduler log are absent. No
+  login-node GPU command, archive/LFS object, model or outer test was accessed.
+  Scientific checks are unevaluated and same-source repair/resubmission is
+  forbidden. Current AURORA PBS/GPU job count is 0.
 
 이 문서는 재현에 필요한 역할과 절차만 공개한다. SSH endpoint, 내부 절대
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제

@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Aneumo lineage P0 closes without a scientific verdict
+
+- Exact public source `d3eb3d3…` ran once on `introai9` as CPU/PBS job
+  `115386.ECE-util1`: final state `F`, exit `-29`, walltime 20:36, CPU time 0,
+  GPU 0.
+- No first small source completed. Completed/partial cache, result JSON and raw
+  scheduler log are absent; all 11 registered high-level checks are unevaluated.
+- Schema 5.2 preserves the 20/20 source-level family-overlap finding but closes
+  this candidate version as execution-incomplete with no scientific verdict.
+  Active shortlist, P1, primary, model, GPU and outer test return to zero.
+- No transport repair or same-contract rerun is allowed. `junjinyong` was not
+  accessed and remains excluded.
+
 ## 2026-08-10 · Aneumo generation-lineage candidate opens one CPU metadata P0
 
 - Corrected official mapping commit `701d53d…` exposes 10,660 generated cases

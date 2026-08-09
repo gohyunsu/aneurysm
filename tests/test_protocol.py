@@ -89,30 +89,34 @@ class ProtocolTests(unittest.TestCase):
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "Aneumo-lineage P0 boundary"):
+        with self.assertRaisesRegex(ProtocolError, "closed Aneumo-lineage P0 boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "Aneumo-lineage P0 boundary"):
+        with self.assertRaisesRegex(ProtocolError, "closed Aneumo-lineage P0 boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "Aneumo-lineage P0 boundary"):
+        with self.assertRaisesRegex(ProtocolError, "closed Aneumo-lineage P0 boundary"):
             validate_protocol(candidate)
 
-    def test_aneumo_lineage_candidate_opens_only_one_cpu_metadata_p0(self) -> None:
+    def test_aneumo_lineage_candidate_closes_after_one_cpu_metadata_p0(self) -> None:
         audit = self.protocol["problem_selection"][
             "aneumo_lineage_split_source_audit"
         ]
         self.assertEqual(audit["best_score"], 35.0)
-        self.assertEqual(audit["active_source_shortlist_count"], 1)
+        self.assertEqual(audit["active_source_shortlist_count"], 0)
         self.assertEqual(audit["official_exact_case_overlap"], 0)
         self.assertEqual(audit["official_base_family_overlap"], 20)
         self.assertEqual(audit["official_validation_family_overlap_fraction"], 1.0)
         self.assertFalse(audit["license_sources_agree"])
         self.assertFalse(audit["method_selected"])
         self.assertFalse(audit["gpu_training_authorized"])
-        self.assertFalse(audit["pbs_job_created"])
+        self.assertTrue(audit["pbs_job_created"])
+        self.assertEqual(audit["p0_job_id"], "115386.ECE-util1")
+        self.assertEqual(audit["p0_exit_status"], -29)
+        self.assertFalse(audit["p0_scientific_gate_evaluated"])
+        self.assertFalse(audit["p0_same_contract_repair_or_resubmission_allowed"])
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
 
         candidate = copy.deepcopy(self.protocol)

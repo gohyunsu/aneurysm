@@ -1,10 +1,20 @@
 # Aneumo generation-lineage split source audit
 
+**Execution outcome · 2026-08-10 KST:** exact public source `d3eb3d3…` ran once
+as `introai9` CPU/PBS job `115386.ECE-util1` with GPU 0. PBS finalized it in
+state `F`, exit `-29`, walltime 20:36 and CPU time 0 before the first registered
+small source completed. Completed/partial cache, result JSON and raw scheduler
+log are absent. Mapping, morphometry, split, license and LFS-pointer checks are
+therefore all unevaluated; this is no scientific verdict on the source or
+hypothesis. The exact candidate version closes without transport repair,
+same-contract rerun, P1, method, architecture, GPU or outer test. Public record:
+[`results/aneumo_lineage_p0_execution_20260810.json`](../results/aneumo_lineage_p0_execution_20260810.json).
+
 **Frozen source decision · 2026-08-10 KST:** generation-family-disjoint
-hemodynamic-operator model selection scores **35.0/40** and is the only member
+hemodynamic-operator model selection scored **35.0/40** and was the only member
 of this six-candidate batch above the unchanged **32/40** source-admission
-line. This admits exactly one method-free, CPU-only metadata P0 on `introai9`.
-It does not select a primary problem, method, architecture, GPU experiment,
+line. This admitted exactly one method-free, CPU-only metadata P0 on `introai9`.
+It did not select a primary problem, method, architecture, GPU experiment,
 outer test or paper contribution.
 
 The material source revision is Aneumo commit
@@ -114,11 +124,11 @@ license at a pinned source. P0 does not authorize a model, GPU or outer test.
 
 ## 5. Current research boundary
 
-- Active source shortlist: one conditional metadata-P0 candidate.
+- Active source shortlist after exact execution: zero.
 - Selected primary problem, method and architecture: none.
 - CFD archive/member payload, model weights and patient data accessed: none.
-- Authorized execution: one CPU/PBS P0 on `introai9`, GPU 0.
+- Completed execution: one CPU/PBS P0 on `introai9`, GPU 0,
+  execution-incomplete before the first small source.
 - `junjinyong`: excluded from connection, query, submission and monitoring.
 - Paper status: not submission-ready; no contribution is promoted from this
   source finding.
-

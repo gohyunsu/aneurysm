@@ -1,6 +1,8 @@
 import copy
 import csv
+import hashlib
 import io
+import json
 import unittest
 from pathlib import Path
 
@@ -16,6 +18,7 @@ from aurora.aneumo_lineage_p0 import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneumo_lineage_p0.json"
+EXECUTION_RECORD = ROOT / "results" / "aneumo_lineage_p0_execution_20260810.json"
 
 
 def csv_bytes(fields, rows):
@@ -27,6 +30,23 @@ def csv_bytes(fields, rows):
 
 
 class AneumoLineageP0Tests(unittest.TestCase):
+    def test_execution_record_closes_without_scientific_verdict_or_rerun(self):
+        result = json.loads(EXECUTION_RECORD.read_text())
+        self.assertEqual(
+            hashlib.sha256(EXECUTION_RECORD.read_bytes()).hexdigest(),
+            "c10c65766f0f0564cbddb911f10c32a03eb41f4aa7e8adbff99094cb5ad7b30d",
+        )
+        self.assertEqual(result["execution"]["server"], "introai9")
+        self.assertEqual(result["execution"]["job_id"], "115386.ECE-util1")
+        self.assertEqual(result["execution"]["exit_status"], -29)
+        self.assertEqual(result["execution"]["gpu_requested"], 0)
+        self.assertFalse(result["scientific_gate_evaluated"])
+        self.assertIsNone(result["scientific_verdict"])
+        self.assertEqual(result["materialization"]["completed_small_source_files"], 0)
+        self.assertFalse(result["materialization"]["archive_member_payload_accessed"])
+        self.assertFalse(result["boundary"]["same_contract_repair_or_resubmission_allowed"])
+        self.assertEqual(result["boundary"]["active_source_shortlist_count_after_closure"], 0)
+
     def test_reference_config_preserves_cpu_only_boundary(self):
         config = load_config(CONFIG)
         self.assertEqual(config["execution"]["server"], "introai9")

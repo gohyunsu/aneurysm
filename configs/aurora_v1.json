@@ -1,9 +1,9 @@
 {
-  "schema_version": "5.1",
+  "schema_version": "5.2",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "conditional_source_shortlist_aneumo_lineage_p0_preregistered_no_primary_method_or_gpu",
+    "status": "failed_branches_preserved_no_active_shortlist_after_aneumo_lineage_p0_execution_incomplete",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "one_conditional_source_shortlist_aneumo_generation_lineage_metadata_p0_only_no_primary_or_method",
-    "shortlisted_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
-    "candidate_dataset": "aneumo_pinned_metadata_only",
-    "candidate_estimand": "difference_between_within_family_and_held_out_base_family_model_selection_and_field_functional_generalization",
-    "asset_access_status": "pinned_public_small_text_csv_git_tree_and_lfs_pointer_metadata_only_no_aneumo_archive_central_directory_member_mesh_mask_point_cloud_field_or_model_weight_payload",
+    "status": "no_active_shortlist_after_aneumo_generation_lineage_p0_execution_incomplete_no_primary_or_method",
+    "shortlisted_candidate": "none",
+    "candidate_dataset": "none",
+    "candidate_estimand": "unselected",
+    "asset_access_status": "source_level_pinned_public_small_text_csv_git_tree_and_lfs_pointer_metadata_only_registered_p0_completed_no_small_source_file_no_archive_central_directory_member_mesh_mask_point_cloud_field_or_model_weight_payload",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": true,
     "annotation_selection_mechanism_audited": false,
@@ -26,7 +26,7 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "execute_the_single_exact_method_free_aneumo_generation_lineage_metadata_p0_on_introai9_cpu_pbs",
+    "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0",
     "audit_document": "docs/aneumo-lineage-split-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
@@ -1468,13 +1468,13 @@
       "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_with_a_materially_larger_independent_same_session_control_cohort_or_an_external_longitudinal_image_cohort_and_register_only_a_fresh_candidate_scoring_at_least_32"
     },
     "aneumo_lineage_split_source_audit": {
-      "status": "source_admitted_exact_method_free_metadata_p0_preregistered_not_yet_executed",
+      "status": "closed_after_exact_p0_execution_incomplete_no_scientific_verdict",
       "audit_document": "docs/aneumo-lineage-split-source-audit-2026-08-10.md",
       "p0_config": "configs/aneumo_lineage_p0.json",
       "automatic_selection_threshold": 32.0,
       "best_candidate_id": "generation_family_disjoint_hemodynamic_operator_model_selection",
       "best_score": 35.0,
-      "active_source_shortlist_count": 1,
+      "active_source_shortlist_count": 0,
       "primary_problem_selected": false,
       "method_selected": false,
       "architecture_selected": false,
@@ -1482,7 +1482,7 @@
       "outer_test_authorized": false,
       "submission_identity_active": false,
       "execution_server": "introai9",
-      "pbs_job_created": false,
+      "pbs_job_created": true,
       "gpu_job_created": false,
       "login_node_gpu_command_executed": false,
       "junjinyong_accessed_for_this_audit": false,
@@ -1502,6 +1502,24 @@
       "license_sources_agree": false,
       "any_archive_central_directory_or_member_payload_accessed": false,
       "lfs_object_resolved": false,
+      "p0_source_commit": "d3eb3d344d284aaae42db1490f2946d54c94029e",
+      "p0_config_sha256": "7f14e29a7208f9d2f62552fc485ab6e5e5dbee6f28c4b5ceba2398d7b32f3f77",
+      "p0_job_id": "115386.ECE-util1",
+      "p0_final_job_state": "F",
+      "p0_exit_status": -29,
+      "p0_walltime": "00:20:36",
+      "p0_cpu_time": "00:00:00",
+      "p0_completed_small_source_files": 0,
+      "p0_partial_small_source_files": 0,
+      "p0_result_json_created": false,
+      "p0_raw_scheduler_log_materialized": false,
+      "p0_scientific_gate_evaluated": false,
+      "p0_registered_high_level_checks_evaluated": 0,
+      "p0_failure_stage": "before_first_preregistered_small_source_completed",
+      "p0_low_level_cause": "unresolved_without_raw_log_or_result_json",
+      "p0_same_contract_repair_or_resubmission_allowed": false,
+      "p0_execution_record": "results/aneumo_lineage_p0_execution_20260810.json",
+      "p0_execution_record_sha256": "c10c65766f0f0564cbddb911f10c32a03eb41f4aa7e8adbff99094cb5ad7b30d",
       "candidates": [
         {"id": "generation_family_disjoint_hemodynamic_operator_model_selection", "score": 35.0, "axis_scores": [5.0, 5.0, 3.0, 3.0, 5.0, 5.0, 5.0, 4.0], "decision": "admit_exact_method_free_metadata_p0_only"},
         {"id": "geometry_flow_compositional_ood_generalization", "score": 31.5, "axis_scores": [4.5, 4.0, 1.5, 3.0, 5.0, 5.0, 5.0, 3.5], "decision": "reject_direct_ood_neural_operator_prior"},
@@ -1519,9 +1537,9 @@
         "group_dro_contrastive_invariance_and_hierarchical_uncertainty"
       ],
       "p0_pass_authorizes": "seek_publisher_license_clarification_then_register_one_method_free_p1_only_if_a_single_pinned_license_is_unambiguous",
-      "decision": "retain_one_conditional_source_candidate_and_execute_exact_cpu_metadata_p0_without_method_architecture_gpu_or_outer_test"
+      "decision": "close_this_exact_candidate_version_after_execution_incomplete_without_transport_repair_rerun_p1_method_architecture_gpu_outer_test_or_scientific_claim"
     },
-    "most_recent_closed_candidate": "same_lesion_preprocessing_orbit_quotient_morphometry",
+    "most_recent_closed_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
     "most_recent_source_rejected_candidate": "family_disjoint_transient_wss_forecasting",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -1696,7 +1714,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_one_conditional_aneumo_lineage_metadata_p0_source_shortlist",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_aneumo_lineage_p0_execution_incomplete",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -1761,7 +1779,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "unselected",
-    "active_candidate_status": "one_conditional_aneumo_lineage_metadata_p0_source_shortlist_no_primary_method_architecture_or_gpu",
+    "active_candidate_status": "no_active_shortlist_after_aneumo_lineage_p0_execution_incomplete_no_primary_method_architecture_or_gpu",
     "candidate_primary_estimand": "unselected",
     "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -2176,7 +2194,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_conditional_metadata_p0_only_no_model",
+    "current_headline_architecture": "unselected_no_active_problem_after_aneumo_lineage_p0_execution_incomplete",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

@@ -1,12 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 Aneumo generation-lineage P0 outcome overlay:** Exact public
+> source `d3eb3d344d284aaae42db1490f2946d54c94029e`의 method-free CPU/PBS
+> job `115386.ECE-util1`은 `introai9`에서 final state `F`, exit `-29`, walltime
+> `00:20:36`, CPU time `00:00:00`, GPU 0으로 끝났다. 첫 preregistered small
+> source가 완성되기 전 종료되어 completed/partial cache와 result JSON은 0이고,
+> raw scheduler log도 materialize되지 않았다. 따라서 exact low-level cause와
+> 11개 high-level scientific check는 미평가다. Privacy-safe status SHA-256은
+> `20755816853044b33dbe54113937e5fec35076a4975494a3a741ab43e4a0ca24`,
+> public execution record는 `results/aneumo_lineage_p0_execution_20260810.json`
+> (SHA-256 `c10c65766f0f0564cbddb911f10c32a03eb41f4aa7e8adbff99094cb5ad7b30d`)다.
+> Schema 5.2는 이 candidate version을 `execution-incomplete/no scientific
+> verdict`로 닫고 active shortlist, P1, primary, method, architecture, GPU,
+> outer test와 submission identity를 0으로 되돌린다. Transport repair와
+> same-contract rerun은 금지한다. `junjinyong`은 접속·조회·제출·모니터링하지
+> 않았고 앞으로도 AURORA에서 사용하지 않는다.
+
 > **2026-08-10 Aneumo generation-lineage P0 overlay:** Current official Aneumo
 > commit `701d53dde3489d84dbe9bc8324254629162eb45a` corrects the explicit
 > 10,660-case/427-family mapping. Official steady train has 160 cases from 20
 > base families; validation has 40 disjoint case IDs but the same 20 base
 > families. Fresh scores are 35.0/31.5/31.0/29.0/27.0/29.5. Only
 > `generation_family_disjoint_hemodynamic_operator_model_selection` crosses the
-> fixed 32 line. Schema 5.1 therefore registers exactly one method-free
+> fixed 32 line. Historical schema 5.1 registered exactly one method-free
 > `configs/aneumo_lineage_p0.json`: small pinned text/CSV and two Git LFS pointer
 > reads on `introai9` PBS CPU, with archive central-directory/member/LFS-object
 > access, method, architecture, GPU and outer test all forbidden. GitHub's

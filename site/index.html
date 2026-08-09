@@ -48,8 +48,9 @@
           Aneumo의 공식 validation case 40개는 train case와 다르지만, 20개 base
           family가 모두 train에 있습니다. 10,660 deformation을 독립 anatomy로
           세지 않고 427개 generation family로 묶는 후보가 35/40으로 source
-          gate를 통과했습니다. 지금 열린 것은 작은 metadata를 재검증하는 CPU
-          P0 하나뿐입니다. selected primary, model, GPU와 outer test는 없습니다.
+          gate를 통과했지만, exact CPU P0는 첫 small source 전에 walltime으로
+          끝났습니다. Scientific gate는 미평가이고 active shortlist, selected
+          primary, model, GPU와 outer test는 다시 모두 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
@@ -57,6 +58,7 @@
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
           <a class="button ghost" href="../docs/aneumo-lineage-split-source-audit-2026-08-10.md">Latest audit ↗</a>
           <a class="button ghost" href="../configs/aneumo_lineage_p0.json">Frozen P0 ↗</a>
+          <a class="button ghost" href="../results/aneumo_lineage_p0_execution_20260810.json">P0 outcome ↗</a>
           <a class="button ghost" href="../docs/longitudinal-mra-growth-source-audit-2026-08-10.md">MRA history ↗</a>
           <a class="button ghost" href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">Perfusion history ↗</a>
           <a class="button ghost" href="../docs/fsi-wall-source-audit-2026-08-10.md">FSI history ↗</a>
@@ -77,8 +79,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="같은 동맥류를 여러 mesh resolution과 cut으로 관측하는 preprocessing orbit 개념도">
-        <div class="visual-caption">HISTORICAL 34/40 · P0 INCOMPLETE · SCIENTIFIC GATE UNEVALUATED</div>
+      <div class="hero-visual" aria-label="Aneumo의 case-disjoint split과 generation-family overlap을 구분하는 개념도">
+        <div class="visual-caption">ANEUMO LINEAGE · 35/40 SOURCE · P0 INCOMPLETE</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -101,25 +103,25 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>O</b><span>original surface</span>
+            <b>427</b><span>source families</span>
           </div>
           <div class="posterior-card card-b">
-            <b>R</b><span>area-001 · area-005</span>
+            <b>10,660</b><span>generated cases</span>
           </div>
           <div class="posterior-card card-c">
-            <b>C</b><span>dome · ninja · cut1/2</span>
+            <b>20/20</b><span>validation families overlap</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> same lesion → preprocessing orbit</span>
-          <span><i class="dot coral"></i> no completed archive · CSV/model access 0</span>
-          <span>primary/model/GPU 0</span>
+          <span><i class="dot lime"></i> case-disjoint ≠ family-disjoint</span>
+          <span><i class="dot coral"></i> first small source 0 · checks unevaluated</span>
+          <span>active primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Active shortlist</span><b>1 conditional P0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>Longitudinal perfusion best 31.0/40 · all rejected</b></div>
+        <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
+        <div><span>Current evidence</span><b>Aneumo lineage P0 incomplete · scientific verdict 0</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
       </div>
@@ -577,7 +579,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>One conditional metadata-P0 shortlist · no active paper identity</p>
+        <p>No active shortlist · no active paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>

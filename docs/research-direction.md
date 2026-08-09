@@ -3,12 +3,14 @@
 > **2026-08-10 Aneumo lineage boundary:** corrected mapping `701d53d…`의
 > 10,660 case는 427 base family에서 생성됐다. 공식 validation 40 case는 train과
 > case ID가 겹치지 않지만 20 base family가 모두 train에 있다. 새 batch의
-> 최고점은 35/40이며 조건부 source shortlist 하나와 exact `introai9` CPU
-> metadata P0만 연다. Split correction은 novelty가 아니고 selected primary,
-> method, architecture, GPU와 outer test는 0이다. GitHub/Hugging Face license
-> 충돌이 해소되기 전 P1도 열지 않는다. 상세 계약은
+> 최고점은 35/40으로 exact `introai9` CPU metadata P0 하나를 열었지만 job
+> `115386.ECE-util1`이 첫 small source 전에 exit `-29`/walltime 20:36으로
+> 끝났다. Scientific gate는 미평가이고 active shortlist는 다시 0이다. Split
+> correction은 novelty가 아니며 selected primary, method, architecture, GPU와
+> outer test는 0이다. Transport repair나 같은 contract rerun을 하지 않는다.
+> 상세 계약과 결과는
 > `docs/aneumo-lineage-split-source-audit-2026-08-10.md`와
-> `configs/aneumo_lineage_p0.json`이다.
+> `results/aneumo_lineage_p0_execution_20260810.json`이다.
 
 > **2026-08-10 longitudinal-MRA growth boundary:** OpenNeuro `ds005096`의
 > 63 patient/85 aneurysm 중 longitudinal patient는 24명이고 raw angiogram

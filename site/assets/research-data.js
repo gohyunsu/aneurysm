@@ -2,16 +2,16 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · Aneumo generation-lineage best 35/40 · one conditional metadata-P0 shortlist · selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
-    requirement: "exact introai9 CPU metadata P0 → publisher license clarification → method-free P1 only if unambiguous → no model before task gap",
+    status: "Target locked · Aneumo generation-lineage P0 execution-incomplete/no scientific verdict · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    requirement: "fresh genuinely revised source ≥32 → new method-free P0; do not repair or rerun closed Aneumo lineage P0",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
       title: "Disjoint case IDs still share every validation base family",
-      copy: "Aneumo commit 701d53d… maps 10,660 generated geometries to 427 source families. Official steady training uses 160 cases from 20 families; validation uses 40 different cases but the same 20 families, so family overlap is 20/20. A fresh six-candidate screen admits only generation-family-disjoint model selection at 35/40. Split correction is evaluation hygiene, not novelty; one metadata-only CPU P0 is preregistered before any method or archive payload.",
-      status: "35/40 · conditional source shortlist 1 · exact CPU P0 · primary/model/GPU 0 · license hold",
+      copy: "Aneumo commit 701d53d… maps 10,660 generated geometries to 427 source families. Official steady training uses 160 cases from 20 families; validation uses 40 different cases but the same 20 families, so family overlap is 20/20. The 35/40 source candidate opened one exact introai9 CPU P0, but job 115386 ended at exit -29/walltime 20:36 before the first small source completed. All scientific checks are unevaluated and this version closes without rerun or P1.",
+      status: "35/40 source history · P0 execution-incomplete · active shortlist/primary/model/GPU 0",
       url: "../docs/aneumo-lineage-split-source-audit-2026-08-10.md"
     },
     {
@@ -536,6 +536,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "experiment",
+      title: "Aneumo lineage P0 closes before the scientific gate",
+      copy: "Exact public source d3eb3d3… ran once on introai9 as CPU/PBS job 115386.ECE-util1. PBS finalized state F, exit -29, walltime 20:36, CPU time 0 and GPU 0. No first small source completed; cache, result JSON and raw scheduler log are absent, so every registered scientific check is unevaluated. Schema 5.2 closes the candidate without transport repair, same-contract rerun, P1, method, architecture, GPU or outer test. Active shortlist returns to zero and junjinyong remains excluded.",
+      files: ["results/aneumo_lineage_p0_execution_20260810.json", "docs/aneumo-lineage-split-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_aneumo_lineage_p0.py", "tests/test_protocol.py", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",
