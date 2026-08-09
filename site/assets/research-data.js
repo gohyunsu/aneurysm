@@ -399,6 +399,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "INSTED source clarification is live",
+      copy: "Exact content commit 35e925321b083485b6380b2c37493f499997e3c5 passed Quality run 31322682231 and Pages run 31322681793. The deployed change data distinguishes the published 160-train/40-test challenge from its design-only Zenodo artifact, identifies five-year survival as a template example, and preserves the historical 26/40 rejection. The detailed document returns no longitudinal outcome and no new score/P0/model/GPU. Deployment changes no signup, terms, payload, candidate, method, architecture or compute authorization.",
+      files: ["CHANGELOG.md", "site/assets/research-data.js", "AGENTS.md"]
+    },
+    {
+      date: "2026.08.10",
       category: "source",
       title: "INSTED is active, but five-year survival is only a template example",
       copy: "Official Codabench confirms a published CC BY-NC challenge with 160 training cases (32 healthy, 64 aneurysm, 64 stenosis) and 40 closed-test cases; training files require signup. The BIAS PDF's five-year-survival sentence is an example bullet, while the challenge-specific answer defines 3D TOF-MRA boxes and segmentations. No longitudinal outcome exists. Official code is pinned at e48a9ba…; no signup, terms acceptance or payload access occurred. The historical IAIA 26/40 rejection is preserved without rescoring, P0, method, architecture or GPU.",

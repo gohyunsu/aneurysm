@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · INSTED clarification is deployed and verified
+
+- Exact content commit `35e925321b083485b6380b2c37493f499997e3c5`의
+  Quality run `31322682231`과 Pages run `31322681793`이 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/) change data에서
+  published 160-train/40-test challenge, five-year-survival template example와
+  historical 26/40 preservation을 확인했다. 상세 문서도 no longitudinal
+  outcome/no-score/P0/model/GPU 경계를 반환한다.
+- 이 배포는 signup, terms acceptance, payload access, candidate score, method,
+  architecture 또는 compute authorization을 바꾸지 않는다.
+- 영향 파일: `CHANGELOG.md`, `site/assets/research-data.js`, `AGENTS.md`.
+
 ## 2026-08-10 · INSTED source semantics are corrected without score repair
 
 - Official Codabench API는 INSTED를 published CC BY-NC challenge로 확인한다.

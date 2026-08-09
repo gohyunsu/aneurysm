@@ -8,6 +8,9 @@
 > signup/terms acceptance/payload access는 0이다. Historical IAIA 26.0/40
 > rejection은 보존하며 새 score/P0/method/architecture/GPU/outer test를 열지
 > 않는다. 이는 source semantics correction이지 closed candidate repair가 아니다.
+> Exact content `35e925321b083485b6380b2c37493f499997e3c5`의 Quality
+> `31322682231`과 Pages `31322681793`이 성공했고 live change data와 상세
+> 문서에서 같은 endpoint/no-score/no-compute 경계를 확인했다.
 
 > **2026-08-10 IAVS watch-only overlay:** Official IAVS paper는 641개 3D MRA,
 > 587개 aneurysm–parent-vessel annotation과 CFD outcome을 보고하지만 official
