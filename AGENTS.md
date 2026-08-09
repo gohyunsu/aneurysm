@@ -11,6 +11,10 @@
 > localization/segmentation과 CFD Applicability Score는 direct prior다.
 > `introai9` 접속과 PBS AURORA job 0을 재확인했고 login-node GPU command는
 > 실행하지 않았다. `junjinyong`에는 접속·조회·제출·모니터링하지 않았다.
+> Exact content `ac6a7075d6607ae29d39e77a87d1ecfbcb87147d`의 Quality
+> `31322131949`와 Pages `31322131485`가 성공했고 live overview, deployed
+> change data와 source-watch document에서 동일한 경계를 확인했다. 이 배포는
+> source score나 scientific authorization을 바꾸지 않는다.
 
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,

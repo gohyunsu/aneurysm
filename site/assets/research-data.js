@@ -399,6 +399,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "IAVS watch-only state is live",
+      copy: "Exact content commit ac6a7075d6607ae29d39e77a87d1ecfbcb87147d passed Quality run 31322131949 and Pages run 31322131485. The live overview contains the README-only watch boundary and detailed source-watch link; deployed change data pins upstream 2e40088d9eaa671c592929a154b7b2cf99f9320a, and the detailed document renders no source score/P0/model/GPU. Deployment verification changes no candidate, payload, method, architecture, compute or outer-test authorization; introai9 remains the only scientific execution target and junjinyong remains excluded.",
+      files: ["CHANGELOG.md", "site/assets/research-data.js", "AGENTS.md"]
+    },
+    {
+      date: "2026.08.10",
       category: "operations",
       title: "IAVS public state is frozen as watch-only",
       copy: "Official GitHub metadata exactly matches the frozen snapshot at main 2e40088d9eaa671c592929a154b7b2cf99f9320a: one 90-byte README, zero releases, no explicit repository license and no code/data entries. The standard-library monitor validates that any future signal opens only a fresh source audit; automatic download, terms acceptance, score repair, P0, method, architecture, GPU and outer test remain false. Introai9 connectivity and zero AURORA PBS jobs were reconfirmed without a login-node GPU command; junjinyong was not accessed.",

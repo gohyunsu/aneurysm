@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · IAVS watch-only state is deployed and verified
+
+- Exact content commit `ac6a7075d6607ae29d39e77a87d1ecfbcb87147d`의
+  Quality run `31322131949`와 Pages run `31322131485`가 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 IAVS
+  README-only watch 문구와 상세 문서 링크를 확인했다. 배포된 change data는
+  exact upstream `2e40088d9eaa671c592929a154b7b2cf99f9320a`를, 상세 문서는
+  `no source score/P0/model/GPU` 경계를 렌더링한다.
+- 이 배포 확인은 source score, candidate admission, payload access, method,
+  architecture, GPU 또는 outer-test 권한을 바꾸지 않는다. Scientific execution은
+  계속 `introai9`만 사용하고 `junjinyong`은 제외한다.
+- 영향 파일: `CHANGELOG.md`, `site/assets/research-data.js`, `AGENTS.md`.
+
 ## 2026-08-10 · IAVS is frozen as a watch-only external source
 
 - IAVS paper는 641개 3D MRA, 587개 aneurysm–parent-vessel annotation과 CFD
