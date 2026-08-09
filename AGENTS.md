@@ -88,6 +88,12 @@ site와 공개 execution record에서 shortlist 0, scientific gate 미평가와
 no-repair/no-rerun/P1/model/GPU 경계를 확인했다. 이 배포 검증도 candidate를
 재개방하지 않는다.
 
+Exact AneuX P0 outcome content `f4cbf727364325a32f6da148189b976be9d22c6f`의
+Quality run `31299794163`과 Pages run `31299793742`도 모두 성공했다. Live site와
+공개 execution record에서 active shortlist 0, P0 execution-incomplete/no
+scientific verdict, scheduler exit 2, no P1/model/GPU와 fresh problem-audit-only
+경계를 확인했다. 이 배포 검증도 candidate를 재개방하지 않는다.
+
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**

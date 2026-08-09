@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Closed AneuX P0 state is deployed
+
+- Exact outcome content commit `f4cbf727364325a32f6da148189b976be9d22c6f`의
+  Quality run `31299794163`과 Pages run `31299793742`가 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 active shortlist
+  0, AneuX P0 execution-incomplete/no scientific verdict, no P1/model/GPU와 fresh
+  problem/source-audit-only 경계를 확인했다.
+- 공개 [execution record](https://gohyunsu.github.io/aneurysm/results/aneux_preprocessing_orbit_p0_execution_20260809.json)도
+  candidate closed, scheduler exit 2와 scientific gate unevaluated를 렌더링한다.
+  이 배포 확인은 P0를 평가·수리하거나 candidate를 재개방하지 않는다.
+- 영향 파일: `AGENTS.md`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · AneuX preprocessing-orbit P0 closes execution-incomplete
 
 - Exact public source `42cc3c7127f382b440f2ac22f662c45692f37863`의

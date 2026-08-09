@@ -368,6 +368,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "Closed AneuX P0 state is live",
+      copy: "Exact outcome content commit f4cbf727364325a32f6da148189b976be9d22c6f passed Quality run 31299794163 and Pages run 31299793742. The live overview renders active shortlist zero, AneuX P0 execution-incomplete/no scientific verdict, no P1/model/GPU authorization and fresh problem/source-audit-only next action. The public execution record renders candidate closure, scheduler exit 2 and scientific gate unevaluated. Deployment verification does not evaluate the scientific gate or reopen the candidate.",
+      files: ["AGENTS.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.09",
       category: "experiment",
       title: "AneuX preprocessing-orbit P0 closes execution-incomplete",
       copy: "Exact public source 42cc3c7127f382b440f2ac22f662c45692f37863 ran once as introai9 CPU/PBS job 115177 with 4 CPU, 16 GB and GPU 0. PBS recorded exit 2 after 00:37:00; the privacy-safe aggregate reports transport_attempts_exhausted before a completed tabular archive. Completed/partial cache, CSV parse, model HEAD/range/central directory/member access and all 13 scientific checks are zero or unevaluated. This is no evidence against AneuX or the orbit hypothesis. The frozen rule closes this version without repair, rerun, P1, method, architecture, GPU, outer test or submission identity, returning the active shortlist to zero.",
