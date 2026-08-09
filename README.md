@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 Aneumo generation-lineage P0 boundary:** Corrected official
+> mapping commit `701d53d…` exposes 10,660 deformations from 427 base families.
+> The official train/validation case IDs are disjoint, but all 20 validation
+> base families occur in training. A fresh six-candidate batch admits only
+> generation-family-disjoint operator model selection at **35.0/40**. The
+> [`source audit`](docs/aneumo-lineage-split-source-audit-2026-08-10.md) and
+> [`exact P0`](configs/aneumo_lineage_p0.json) authorize one metadata-only
+> `introai9` CPU/PBS job. No archive/member payload, method, architecture, GPU
+> or outer test is authorized. GitHub says CC BY 4.0 while the pinned Hugging
+> Face card says CC BY-NC-ND 4.0, so even a P0 pass leaves P1 on license hold.
+> `junjinyong` remains excluded from every AURORA operation.
+
 > **2026-08-10 longitudinal-MRA growth boundary:** OpenNeuro `ds005096` is a
 > real CC0 longitudinal asset with 63 patients, 85 aneurysms, 24 surveillance
 > patients and 126 raw angiogram paths. However, only four patients have two
@@ -62,12 +74,16 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
-가장 최근
-[`longitudinal-MRA growth source audit`](docs/longitudinal-mra-growth-source-audit-2026-08-10.md)은
-24 longitudinal patient를 126 independent scan으로 세지 않고, same-session
-control 4명과 최신 direct-prior subset의 16 patient/19 aneurysm/6 growth를 함께
-평가했습니다. 최고점은 31.5/40이고 payload/P0/model/PBS/GPU는 모두 0입니다.
+현재 active source shortlist는 **조건부 1개**, selected primary problem은
+**0개**입니다. 조건부 후보는 Aneumo의 독립 단위를 deformation이 아닌 427개
+base family로 정의합니다. 공식 validation 20개 family가 train과 100% 겹치는
+문제가 model selection을 왜곡하는지 먼저 묻습니다. Split을 고치는 것 자체는
+novelty가 아니며, 현재 허용된 실행은 작은 CSV/text/LFS pointer만 검증하는
+CPU P0 하나입니다. GNN, neural operator, Transformer를 포함한 모델과 GPU는
+아직 선택하지 않았습니다.
+
+직전 [`longitudinal-MRA growth source audit`](docs/longitudinal-mra-growth-source-audit-2026-08-10.md)의
+31.5/40 rejection은 historical evidence로 보존합니다.
 
 직전
 [`FSI–wall source audit`](docs/fsi-wall-source-audit-2026-08-10.md)은 rigid-wall

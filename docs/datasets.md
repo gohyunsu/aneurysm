@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 Aneumo lineage audit:** 10,660 generated geometries map to 427
+> base families. Official steady validation is case-disjoint but shares all 20
+> base families with training. Aneumo's current role is therefore a pinned
+> metadata-only conditional P0 source, not training data. GitHub says CC BY 4.0
+> while the pinned Hugging Face card says CC BY-NC-ND 4.0. No archive/member or
+> LFS object may be read before an unambiguous publisher license and a separate
+> P1 registration.
+
 > **2026-08-10 longitudinal-MRA growth audit:** OpenNeuro `ds005096`은 CC0,
 > 63 patient/85 aneurysm/24 longitudinal patient와 126 raw angiogram path를
 > 제공한다. 동일 session에 acquisition 두 개가 있는 independent subject는

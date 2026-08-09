@@ -50,25 +50,24 @@
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
+          <strong>조건부 source shortlist는 1개지만, primary와 모델은 아직 없습니다.</strong>
           <p>
-            최신 audit은 OpenNeuro의 63명, 85개 동맥류, 126개 angiogram을
-            검토했지만 longitudinal patient는 24명, same-session control은
-            4명뿐임을 확인했습니다. 최신 direct-prior subset의 growth positive도
-            6건입니다. 현재 GNN, neural operator, U-Net과 Transformer 어느 것도
-            선택하지 않았습니다.
+            Aneumo 공식 validation은 train과 case ID가 다르지만 20개 base
+            geometry family가 전부 겹칩니다. 같은 원본 해부구조의 다른
+            deformation을 새 anatomy로 해석할 수 없습니다. 현재 GNN, neural
+            operator, U-Net과 Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>다음 단계는 genuinely new/revised source를 기다리는 일입니다.</strong>
+          <strong>먼저 exact metadata P0로 lineage 계약을 재현합니다.</strong>
           <p>
-            31.5점을 반올림하거나 acquisition-orbit network, surface GNN,
-            Bayesian head 같은 이름을 붙여 32점으로 만들지 않습니다. 최소한 더
-            많은 독립 same-session control이나 별도 longitudinal image cohort가
-            필요합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
+            P0는 10,660-to-427 mapping, train/validation family overlap, 두
+            license 문구와 Git LFS pointer만 검사합니다. Archive나 field를 열지
+            않고 GPU도 쓰지 않습니다. Split 정정 자체는 novelty가 아니며, P0
+            뒤에도 publisher license가 명확해지기 전에는 P1을 열지 않습니다.
           </p>
-          <a href="../docs/longitudinal-mra-growth-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/aneumo-lineage-split-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -1215,7 +1214,7 @@
 
           <div class="compute-status">
             <span class="status-dot warning"></span>
-            <div><p class="eyebrow">CURRENT COMPUTE · NO ACTIVE JOB</p><h3>introai9-only · no active AURORA GPU job</h3><p>AneuX P0는 exact public commit에서 CPU/GPU 0으로 한 번 실행돼 execution-incomplete로 닫혔습니다. Active shortlist와 GPU-authorized candidate가 없으므로 training과 GPU monitoring은 시작하지 않습니다.</p></div>
+            <div><p class="eyebrow">CURRENT COMPUTE · CPU P0 ONLY</p><h3>introai9-only · no active AURORA GPU job</h3><p>새 Aneumo lineage 후보는 작은 metadata만 읽는 PBS CPU P0 하나를 허가했습니다. Archive와 field, model training과 GPU monitoring은 계속 금지됩니다. 과거 AneuX P0의 execution-incomplete 이력은 별도로 보존합니다.</p></div>
           </div>
           <div class="compute-status">
             <span class="status-dot complete"></span>

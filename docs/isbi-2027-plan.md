@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 Aneumo-lineage boundary:** generation-family-disjoint model
+> selection is a conditional 35/40 source candidate, not an accepted paper
+> identity. One exact metadata-only `introai9` CPU P0 is preregistered. No
+> primary problem, method, architecture, GPU experiment or outer test is
+> selected. Split hygiene alone is not a contribution, and P1 remains blocked
+> by the conflicting pinned dataset-license texts.
+
 > **2026-08-10 latest boundary:** longitudinal-MRA growth candidates score
 > 31.5/29.0/30.0/26.5/26.5/26.0, all below 32. Same-session acquisition
 > controls occur in only four public patients; expert derivatives cover one

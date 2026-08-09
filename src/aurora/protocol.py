@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.0":
-        raise ProtocolError("The current research-state schema must be version 5.0.")
+    if protocol["schema_version"] != "5.1":
+        raise ProtocolError("The current research-state schema must be version 5.1.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_longitudinal_mra_growth_source_audit"
+        != "conditional_source_shortlist_aneumo_lineage_p0_preregistered_no_primary_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -200,6 +200,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "fsi_wall_source_audit",
             "longitudinal_perfusion_source_audit",
             "longitudinal_mra_growth_source_audit",
+            "aneumo_lineage_split_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -209,14 +210,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_longitudinal_mra_growth_source_audit_no_primary_or_method"
-        or problem_selection["shortlisted_candidate"] != "none"
-        or problem_selection["candidate_dataset"] != "none"
-        or problem_selection["candidate_estimand"] != "unselected"
+        != "one_conditional_source_shortlist_aneumo_generation_lineage_metadata_p0_only_no_primary_or_method"
+        or problem_selection["shortlisted_candidate"]
+        != "generation_family_disjoint_hemodynamic_operator_model_selection"
+        or problem_selection["candidate_dataset"] != "aneumo_pinned_metadata_only"
+        or problem_selection["candidate_estimand"]
+        != "difference_between_within_family_and_held_out_base_family_model_selection_and_field_functional_generalization"
         or problem_selection["asset_access_status"]
-        != "official_source_metadata_public_git_tree_dataset_description_primary_articles_and_file_manifests_only_no_openneuro_annotation_spreadsheet_participant_table_sidecar_nifti_segmentation_slicer_scene_or_stl_payload"
+        != "pinned_public_small_text_csv_git_tree_and_lfs_pointer_metadata_only_no_aneumo_archive_central_directory_member_mesh_mask_point_cloud_field_or_model_weight_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
-        or problem_selection["task_unit_audited"] is not False
+        or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not False
         or problem_selection["coarsening_at_random_assumed"] is not False
         or problem_selection["method_selected"] is not False
@@ -224,17 +227,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+        != "execute_the_single_exact_method_free_aneumo_generation_lineage_metadata_p0_on_introai9_cpu_pbs"
         or problem_selection["audit_document"]
-        != "docs/longitudinal-mra-growth-source-audit-2026-08-10.md"
+        != "docs/aneumo-lineage-split-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "acquisition_orbit_calibrated_longitudinal_mra_growth_detection"
+        != "family_disjoint_transient_wss_forecasting"
     ):
         raise ProtocolError(
-            "The current longitudinal-MRA-growth boundary must retain no selected primary, "
-            "method, GPU, outer test, P1, or repair of closed branches."
+            "The Aneumo-lineage P0 boundary must retain one conditional source "
+            "shortlist but no selected primary, method, GPU, outer test, P1, "
+            "or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -306,6 +310,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "mixed_modality_clinical_growth_measurement_harmonization",
         "awe_conditioned_long_term_instability_prediction",
         "same_day_post_flow_diverter_multimodal_disagreement_modeling",
+        "geometry_flow_compositional_ood_generalization",
+        "hierarchical_deformation_vs_family_uncertainty_calibration",
+        "shape_derivative_informed_deformation_response",
+        "synthetic_to_real_selection_on_ten_original_cases",
+        "family_disjoint_transient_wss_forecasting",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -2850,6 +2859,125 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("longitudinal-MRA-growth rejection and introai9-only boundary")
 
+    lineage_audit = problem_selection["aneumo_lineage_split_source_audit"]
+    _require_keys(
+        lineage_audit,
+        [
+            "status",
+            "audit_document",
+            "p0_config",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_source_shortlist_count",
+            "primary_problem_selected",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "pbs_job_created",
+            "gpu_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "github_source_commit",
+            "huggingface_source_commit",
+            "mapping_rows",
+            "base_families",
+            "official_train_cases",
+            "official_train_families",
+            "official_validation_cases",
+            "official_validation_families",
+            "official_exact_case_overlap",
+            "official_base_family_overlap",
+            "official_validation_family_overlap_fraction",
+            "github_license_text",
+            "huggingface_license_text",
+            "license_sources_agree",
+            "any_archive_central_directory_or_member_payload_accessed",
+            "lfs_object_resolved",
+            "candidates",
+            "direct_prior_threats",
+            "p0_pass_authorizes",
+            "decision",
+        ],
+        "problem_selection.aneumo_lineage_split_source_audit",
+    )
+    expected_lineage_scores = {
+        "generation_family_disjoint_hemodynamic_operator_model_selection": 35.0,
+        "geometry_flow_compositional_ood_generalization": 31.5,
+        "hierarchical_deformation_vs_family_uncertainty_calibration": 31.0,
+        "shape_derivative_informed_deformation_response": 29.0,
+        "synthetic_to_real_selection_on_ten_original_cases": 27.0,
+        "family_disjoint_transient_wss_forecasting": 29.5,
+    }
+    observed_lineage_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in lineage_audit["candidates"]
+    }
+    lineage_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in lineage_audit["candidates"]
+    )
+    if (
+        lineage_audit["status"]
+        != "source_admitted_exact_method_free_metadata_p0_preregistered_not_yet_executed"
+        or lineage_audit["audit_document"]
+        != "docs/aneumo-lineage-split-source-audit-2026-08-10.md"
+        or lineage_audit["p0_config"] != "configs/aneumo_lineage_p0.json"
+        or lineage_audit["automatic_selection_threshold"] != 32.0
+        or lineage_audit["best_candidate_id"]
+        != "generation_family_disjoint_hemodynamic_operator_model_selection"
+        or lineage_audit["best_score"] != 35.0
+        or lineage_audit["best_score"] < lineage_audit["automatic_selection_threshold"]
+        or lineage_audit["active_source_shortlist_count"] != 1
+        or lineage_audit["primary_problem_selected"] is not False
+        or lineage_audit["method_selected"] is not False
+        or lineage_audit["architecture_selected"] is not False
+        or lineage_audit["gpu_training_authorized"] is not False
+        or lineage_audit["outer_test_authorized"] is not False
+        or lineage_audit["submission_identity_active"] is not False
+        or lineage_audit["execution_server"] != "introai9"
+        or lineage_audit["pbs_job_created"] is not False
+        or lineage_audit["gpu_job_created"] is not False
+        or lineage_audit["login_node_gpu_command_executed"] is not False
+        or lineage_audit["junjinyong_accessed_for_this_audit"] is not False
+        or lineage_audit["github_source_commit"]
+        != "701d53dde3489d84dbe9bc8324254629162eb45a"
+        or lineage_audit["huggingface_source_commit"]
+        != "f801adee816c18d3e18b23e6fcb147fe4c264209"
+        or lineage_audit["mapping_rows"] != 10660
+        or lineage_audit["base_families"] != 427
+        or lineage_audit["official_train_cases"] != 160
+        or lineage_audit["official_train_families"] != 20
+        or lineage_audit["official_validation_cases"] != 40
+        or lineage_audit["official_validation_families"] != 20
+        or lineage_audit["official_exact_case_overlap"] != 0
+        or lineage_audit["official_base_family_overlap"] != 20
+        or lineage_audit["official_validation_family_overlap_fraction"] != 1.0
+        or lineage_audit["github_license_text"] != "CC_BY_4_0"
+        or lineage_audit["huggingface_license_text"] != "CC_BY_NC_ND_4_0"
+        or lineage_audit["license_sources_agree"] is not False
+        or lineage_audit["any_archive_central_directory_or_member_payload_accessed"]
+        is not False
+        or lineage_audit["lfs_object_resolved"] is not False
+        or observed_lineage_scores != expected_lineage_scores
+        or not lineage_axis_sums_match
+        or lineage_audit["p0_pass_authorizes"]
+        != "seek_publisher_license_clarification_then_register_one_method_free_p1_only_if_a_single_pinned_license_is_unambiguous"
+        or lineage_audit["decision"]
+        != "retain_one_conditional_source_candidate_and_execute_exact_cpu_metadata_p0_without_method_architecture_gpu_or_outer_test"
+    ):
+        raise ProtocolError(
+            "The Aneumo generation-lineage audit must preserve the frozen 35/40 "
+            "source admission, exact train/validation family overlap, license "
+            "conflict, introai9-only CPU P0, and no model/GPU/outer-test boundary."
+        )
+    checks.append("Aneumo generation-lineage metadata-P0 boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -2929,7 +3057,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_longitudinal_mra_growth_source_audit"
+        != "unselected_primary_with_one_conditional_aneumo_lineage_metadata_p0_source_shortlist"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -3092,7 +3220,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_longitudinal_mra_growth_source_audit_no_primary_method_architecture_or_gpu"
+        != "one_conditional_aneumo_lineage_metadata_p0_source_shortlist_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

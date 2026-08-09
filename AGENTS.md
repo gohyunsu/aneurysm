@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 Aneumo generation-lineage P0 overlay:** Current official Aneumo
+> commit `701d53dde3489d84dbe9bc8324254629162eb45a` corrects the explicit
+> 10,660-case/427-family mapping. Official steady train has 160 cases from 20
+> base families; validation has 40 disjoint case IDs but the same 20 base
+> families. Fresh scores are 35.0/31.5/31.0/29.0/27.0/29.5. Only
+> `generation_family_disjoint_hemodynamic_operator_model_selection` crosses the
+> fixed 32 line. Schema 5.1 therefore registers exactly one method-free
+> `configs/aneumo_lineage_p0.json`: small pinned text/CSV and two Git LFS pointer
+> reads on `introai9` PBS CPU, with archive central-directory/member/LFS-object
+> access, method, architecture, GPU and outer test all forbidden. GitHub's
+> CC BY 4.0 text conflicts with the pinned Hugging Face card's CC BY-NC-ND 4.0;
+> P0 must record—not resolve—the conflict, and P1 remains on license hold.
+> Same-contract repair/resubmission is forbidden. `junjinyong` must not be
+> connected to, queried, submitted to or monitored for AURORA.
+
 > **2026-08-10 longitudinal-MRA growth deployment overlay:** Exact public
 > content `24c95c17042187ad43b0f16b76962f083bc8a053`의 Quality run
 > `31338069136`과 Pages run `31338068734`가 성공했다. Live overview는

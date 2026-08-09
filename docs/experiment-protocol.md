@@ -1,6 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 5.0 · 2026-08-10
+> **Current exact gate · 2026-08-10:** Aneumo generation-lineage source score
+> 35/40이 단 하나의 `introai9` PBS CPU P0를 연다. P0는 pinned text/CSV와 Git
+> LFS pointer만 읽어 10,660-to-427 mapping, 0 case overlap/20 family overlap,
+> morphometry keys와 license conflict를 검증한다. Archive central directory,
+> member payload, method, architecture, GPU, outer test와 same-contract rerun은
+> 금지한다. Pass도 publisher license clarification 전 P1을 열지 않는다.
+
+버전: 5.1 · 2026-08-10
 
 > **Current gate:** longitudinal-MRA growth batch 최고점은 31.5/40이다.
 > OpenNeuro의 126 raw angiogram은 63 patient에서 왔고 longitudinal patient는

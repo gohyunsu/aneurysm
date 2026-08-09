@@ -4,6 +4,21 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Aneumo generation-lineage candidate opens one CPU metadata P0
+
+- Corrected official mapping commit `701d53d…` exposes 10,660 generated cases
+  from 427 base families. The official validation has zero exact case overlap
+  with training but shares all 20 base families.
+- Six frozen scores are **35.0/31.5/31.0/29.0/27.0/29.5**. Only
+  generation-family-disjoint operator model selection crosses 32, opening one
+  exact method-free metadata P0—not a method or paper contribution.
+- Schema 5.1 pins GitHub/Hugging Face commits, hashes, mapping/split counts and
+  the CC BY 4.0 versus CC BY-NC-ND 4.0 conflict. P0 may read small text/CSV and
+  Git LFS pointer text only; archive objects/members, model, GPU and outer test
+  remain forbidden.
+- Execution is `introai9` PBS CPU only. `junjinyong` remains excluded from
+  connection, query, submission and monitoring.
+
 ## 2026-08-10 · Longitudinal-MRA rejection is live and verified
 
 - Exact content `24c95c17042187ad43b0f16b76962f083bc8a053` passed Quality run

@@ -1,0 +1,94 @@
+{
+  "schema_version": "aurora.aneumo_lineage_p0.v1",
+  "protocol_id": "aneumo_generation_lineage_p0_v1",
+  "status": "preregistered_before_any_aneumo_archive_or_member_payload_access",
+  "as_of": "2026-08-10",
+  "candidate": {
+    "id": "generation_family_disjoint_hemodynamic_operator_model_selection",
+    "score": 35.0,
+    "maximum_score": 40.0,
+    "automatic_selection_threshold": 32.0,
+    "axis_scores": [5.0, 5.0, 3.0, 3.0, 5.0, 5.0, 5.0, 4.0],
+    "active_source_shortlist_count": 1,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false
+  },
+  "sources": {
+    "github_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
+    "huggingface_commit": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "small_files": [
+      {"id": "connection", "url": "https://raw.githubusercontent.com/Xigui-Li/Aneumo/701d53dde3489d84dbe9bc8324254629162eb45a/Connection.csv", "sha256": "09a5344ac3b3b30a3a677ca619710142782983144362d069b5a2f57caaeabd0b", "bytes": 206795},
+      {"id": "morphometry", "url": "https://raw.githubusercontent.com/Xigui-Li/Aneumo/701d53dde3489d84dbe9bc8324254629162eb45a/MPs.csv", "sha256": "92134b3527e9cce94c83f6ec28a187a5b6771de66e3f7307388c5cecd6d003b8", "bytes": 2993817},
+      {"id": "train", "url": "https://raw.githubusercontent.com/Xigui-Li/Aneumo/701d53dde3489d84dbe9bc8324254629162eb45a/cfd_opt_deeponet/data/train.csv", "sha256": "024ba47cc65e24563432f598409237cc2de7b34d1158e6889c51b4ae4095c49f", "bytes": 2472},
+      {"id": "validation", "url": "https://raw.githubusercontent.com/Xigui-Li/Aneumo/701d53dde3489d84dbe9bc8324254629162eb45a/cfd_opt_deeponet/data/val.csv", "sha256": "f3b440558296638b36327a9c64db0f3744bf2058b802ce35022fff83d906831a", "bytes": 651},
+      {"id": "github_readme", "url": "https://raw.githubusercontent.com/Xigui-Li/Aneumo/701d53dde3489d84dbe9bc8324254629162eb45a/README.md", "sha256": "5948f86134bec2e42a9cc14248dd80fcbec48667f7d14eeee2b233d83af2f0a4", "bytes": 17598},
+      {"id": "datasheet", "url": "https://raw.githubusercontent.com/Xigui-Li/Aneumo/701d53dde3489d84dbe9bc8324254629162eb45a/datasheet_aneumo.md", "sha256": "dfe14da8223904440e8e3afaf320ac3a5c1f1233bc55e49c5fb79bc94e4823b7", "bytes": 17058},
+      {"id": "hf_readme", "url": "https://huggingface.co/datasets/SAIS-Life-Science/Aneumo/raw/f801adee816c18d3e18b23e6fcb147fe4c264209/README.md", "sha256": "4fdb6fc046a13330d8679ebd510267353415c9db68856e6539f594b060735de6", "bytes": 376},
+      {"id": "steady_pointer", "url": "https://huggingface.co/datasets/SAIS-Life-Science/Aneumo/raw/f801adee816c18d3e18b23e6fcb147fe4c264209/1.zip", "sha256": "84cd0d9055d1ca50e13848864b7d2be3d8f393025db2be916c9cbc6e9d3d1946", "bytes": 135},
+      {"id": "transient_pointer", "url": "https://huggingface.co/datasets/SAIS-Life-Science/Aneumo/raw/f801adee816c18d3e18b23e6fcb147fe4c264209/batch_1-10.zip", "sha256": "32e5fe3b81a0e0e7e52388cca85cbd05baec8f5692e5e0fb601ff6facfc9756b", "bytes": 136}
+    ]
+  },
+  "expected_contract": {
+    "mapping_rows": 10660,
+    "base_families": 427,
+    "minimum_deformations_per_family": 6,
+    "maximum_deformations_per_family": 30,
+    "morphometry_rows": 10660,
+    "train_cases": 160,
+    "train_families": 20,
+    "validation_cases": 40,
+    "validation_families": 20,
+    "exact_case_overlap": 0,
+    "base_family_overlap": 20,
+    "validation_family_overlap_fraction": 1.0,
+    "steady_lfs_oid": "15688323235a5bc064973d07d0ed13d69cc0b3f99937e6be702171ebac4bbb82",
+    "steady_lfs_bytes": 6878451054,
+    "transient_lfs_oid": "2495c0c060d2aa2e669e3abe038d7494b9b5a1724b91c1f847b534b91f080543",
+    "transient_lfs_bytes": 14530202660,
+    "github_license_text": "CC BY 4.0",
+    "huggingface_license_token": "cc-by-nc-nd-4.0",
+    "license_sources_agree": false
+  },
+  "gate": {
+    "all_checks_required": true,
+    "checks": [
+      "all_small_source_hashes_and_sizes_match",
+      "mapping_has_exact_case_and_family_cardinality",
+      "deformation_indices_are_unique_and_contiguous_within_each_family",
+      "morphometry_keys_exactly_match_mapping_keys",
+      "official_train_and_validation_case_ids_are_disjoint",
+      "all_validation_base_families_overlap_training",
+      "datasheet_no_geometric_overlap_claim_is_present",
+      "github_and_huggingface_license_conflict_is_detected",
+      "lfs_pointer_oids_and_sizes_match_without_object_resolution",
+      "no_archive_central_directory_member_or_field_payload_is_accessed",
+      "no_method_architecture_gpu_or_outer_test_is_opened"
+    ],
+    "pass_status": "passed_metadata_lineage_gate_with_license_hold",
+    "pass_authorizes": "seek_publisher_license_clarification_then_register_one_method_free_p1_only_if_a_single_pinned_license_is_unambiguous",
+    "failure_action": "close_this_candidate_version_without_method_architecture_gpu_or_outer_test",
+    "execution_incomplete_action": "close_this_exact_execution_without_repair_or_resubmission_and_preserve_no_scientific_verdict",
+    "does_not_authorize": ["primary_problem_selection", "method_selection", "architecture_selection", "gpu_training", "outer_test", "paper_contribution"]
+  },
+  "transport": {
+    "attempts_per_small_source_within_one_exact_job": 3,
+    "backoff_seconds": [0, 10, 30],
+    "same_source_job_resubmission_allowed": false,
+    "archive_or_lfs_object_resolution_allowed": false
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "resources": "select=1:ncpus=2:mem=4gb:ngpus=0",
+    "walltime": "00:20:00",
+    "source_commit_rule": "exact_clean_public_git_head_at_execution",
+    "gpu_requested": false,
+    "login_node_training_or_gpu_command": false,
+    "excluded_server": "junjinyong"
+  }
+}

@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · longitudinal-MRA growth best 31.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
-    requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
+    status: "Target locked · Aneumo generation-lineage best 35/40 · one conditional metadata-P0 shortlist · selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    requirement: "exact introai9 CPU metadata P0 → publisher license clarification → method-free P1 only if unambiguous → no model before task gap",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Disjoint case IDs still share every validation base family",
+      copy: "Aneumo commit 701d53d… maps 10,660 generated geometries to 427 source families. Official steady training uses 160 cases from 20 families; validation uses 40 different cases but the same 20 families, so family overlap is 20/20. A fresh six-candidate screen admits only generation-family-disjoint model selection at 35/40. Split correction is evaluation hygiene, not novelty; one metadata-only CPU P0 is preregistered before any method or archive payload.",
+      status: "35/40 · conditional source shortlist 1 · exact CPU P0 · primary/model/GPU 0 · license hold",
+      url: "../docs/aneumo-lineage-split-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "A same-session negative control is useful, but four patients do not earn a model",
@@ -529,6 +536,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Aneumo generation lineage opens one metadata-only P0",
+      copy: "Official train/validation case IDs are disjoint, but all 20 validation base families occur in training. Six frozen scores are 35.0/31.5/31.0/29.0/27.0/29.5. Schema 5.1 admits only an exact introai9 CPU/PBS audit of pinned small text/CSV and Git LFS pointer text. GitHub CC BY 4.0 conflicts with the Hugging Face card's CC BY-NC-ND 4.0, so P1 remains on license hold. No archive/member, method, architecture, GPU or outer test is authorized; junjinyong remains excluded.",
+      files: ["docs/aneumo-lineage-split-source-audit-2026-08-10.md", "configs/aneumo_lineage_p0.json", "src/aurora/aneumo_lineage_p0.py", "cluster/pbs_aneumo_lineage_p0.pbs", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_aneumo_lineage_p0.py", "tests/test_protocol.py", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

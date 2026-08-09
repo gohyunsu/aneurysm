@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 current architecture boundary:** Aneumo generation-lineage
+> candidate 35/40은 metadata P0만 통과할 자격이다. 현재 아키텍처는 GNN도,
+> Transformer도, neural operator도 아니다—아직 모델이 없다. Official
+> validation의 20/20 base-family overlap이 task/model selection gap을 실제로
+> 만드는지와 license를 먼저 검증한다. Split correction, group DRO,
+> contrastive invariance, geometry-informed/shape-derivative operator는 단독
+> novelty로 올리지 않는다. GPU authorization은 0이다.
+
 > **2026-08-10 latest architecture boundary:** longitudinal-MRA growth batch의
 > 최고점은 31.5/40이다. Siamese U-Net, longitudinal Transformer, deformable
 > registration, surface GNN, Bayesian head, preprocessing-orbit marginalization과

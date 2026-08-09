@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **2026-08-10 Aneumo lineage boundary:** corrected mapping `701d53d…`의
+> 10,660 case는 427 base family에서 생성됐다. 공식 validation 40 case는 train과
+> case ID가 겹치지 않지만 20 base family가 모두 train에 있다. 새 batch의
+> 최고점은 35/40이며 조건부 source shortlist 하나와 exact `introai9` CPU
+> metadata P0만 연다. Split correction은 novelty가 아니고 selected primary,
+> method, architecture, GPU와 outer test는 0이다. GitHub/Hugging Face license
+> 충돌이 해소되기 전 P1도 열지 않는다. 상세 계약은
+> `docs/aneumo-lineage-split-source-audit-2026-08-10.md`와
+> `configs/aneumo_lineage_p0.json`이다.
+
 > **2026-08-10 longitudinal-MRA growth boundary:** OpenNeuro `ds005096`의
 > 63 patient/85 aneurysm 중 longitudinal patient는 24명이고 raw angiogram
 > path는 126개다. 그러나 same-session multi-acquisition control은 4명뿐이며

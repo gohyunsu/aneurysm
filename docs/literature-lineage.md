@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 Aneumo-lineage update:** corrected 10,660-to-427 mapping은
+> 공식 validation 20개 base family가 train과 전부 겹침을 드러낸다. 그러나
+> family-disjoint split, augmentation leakage audit, GINO, boundary-augmented
+> operators, shape-derivative operators, group robustness와 hierarchical UQ는
+> direct prior/control이다. 잔여 gap은 within-family validation이 실제 operator
+> selection과 held-out-family field/functional risk를 바꾸는지 prospectively
+> 보이는 데 있으며, metadata P0 전에는 method novelty가 없다.
+
 > **2026-08-10 longitudinal-MRA growth lineage boundary:** Bayesian
 > surface-displacement growth, healthy-vessel internal control, measurement
 > error, volumetric repeatability, rigid/non-rigid morphing, 2D/3D measurement
