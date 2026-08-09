@@ -1,7 +1,7 @@
 # Cycle-functional transient WSS candidate audit
 
-상태: **33/40 conditional source shortlist · P0 registered · processed payload
-0 · primary problem/method/architecture/GPU/outer test 0**  
+상태: **33/40 historical source shortlist · exact P0 execution-incomplete/no
+scientific verdict · candidate closed · processed payload/P1/method/GPU 0**
 기준일: 2026-08-09 KST
 
 ## 냉정한 결론
@@ -19,10 +19,13 @@ error와 높은 raw OSI relative error의 차이도 OSI가 0에 가까운 노드
 분모에서 생긴 수치 현상일 수 있다. 따라서 그 숫자만 보고 functional-aware
 loss나 새 head를 붙이는 것은 novelty가 아니라 사후적인 metric chasing이다.
 
-이번에 등록하는 `P0`는 두 exact processed archive를 처음 읽어 물리 WSS
-복원, case/topology linkage와 schema를 확인하는 CPU-only asset gate다. P0가
-통과해도 허용되는 것은 별도 **method-free P1 task-adequacy perturbation
-audit** 등록뿐이다. 모델과 GPU는 여전히 금지된다.
+등록한 `P0`는 두 exact processed archive를 처음 읽어 물리 WSS 복원,
+case/topology linkage와 schema를 확인하려는 CPU-only asset gate였다. Exact
+source `754ed746…`의 `introai9` PBS job `115168`은 00:05:16 뒤 exit 28로
+끝났고 processed/partial payload, aggregate와 raw stdout이 생성되지 않았다.
+따라서 16-check scientific gate는 미평가이며 exact shell cause는 단정하지
+않는다. 등록 계약에 따라 dependency/reader/transport repair, same-contract
+rerun과 P1 없이 candidate version을 닫는다. 모델과 GPU는 계속 금지된다.
 
 ## 이번 fresh batch의 동일 척도 비교
 

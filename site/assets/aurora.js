@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "두 exact processed file의 byte와 SHA-256을 먼저 확인합니다.",
-      connector: "verify hashes",
-      title: "Exact source identity",
-      copy: "9.63 GB steady norm and 23.74 GB transient WSS must both match",
+      description: "두 exact file identity는 고정했지만 processed payload는 materialize되지 않았습니다.",
+      connector: "identity pinned",
+      title: "Source identity only",
+      copy: "9.63 GB steady and 23.74 GB transient payload were not accessed",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Steady tensor_norm으로 transient WSS를 복원하고 80-frame static geometry와 topology를 검사합니다.",
-      connector: "recover units",
-      title: "Physical WSS round-trip",
-      copy: "Finite nonzero time-varying WSS, common labels, nodes and triangular faces",
+      description: "Physical WSS, 80-frame geometry와 topology checks는 실행 전에 중단돼 미평가입니다.",
+      connector: "not evaluated",
+      title: "Scientific gate unopened",
+      copy: "No physical WSS, case linkage, labels, nodes or faces were audited",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "All pass는 method-free P1만 열고, fail/incomplete는 reader나 dependency를 고치지 않고 version을 닫습니다.",
-      connector: "all or close",
-      title: "P1 only or close",
-      copy: "No method, architecture, GPU, outer test or same-contract repair",
+      description: "Execution-incomplete 규칙을 적용해 repair/rerun 없이 candidate version을 닫았습니다.",
+      connector: "closed",
+      title: "No scientific verdict",
+      copy: "No P1, method, architecture, GPU, outer test or same-contract repair",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

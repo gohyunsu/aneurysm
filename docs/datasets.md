@@ -1,13 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
-> **2026-08-09 AneuG-Flow conditional P0:** Current dataset commit
+> **2026-08-09 AneuG-Flow closed P0:** Current dataset commit
 > `9dd4180…`의 processed steady/transient 두 파일 identity와 CC BY-SA 4.0
 > license를 source-only로 확인했다. Transient assembled object는 steady
 > `tensor_norm`에 의존하므로 두 archive를 하나의 physical-WSS recovery pair로
 > 다룬다. Dataset page/NeurIPS paper의 730 pulsatile case와 RHSIA의 808은 같은
-> release라고 가정하지 않는다. Payload는 아직 0이며, exact CPU-only P0가
-> schema, count, unique geometry, 80 frame, topology와 normalization round-trip을
-> 통과해도 method-free P1만 열린다. Synthetic geometry case를 patient로 세거나
+> release라고 가정하지 않는다. Exact CPU-only P0는 exit 28로 종료됐고
+> processed/partial payload와 aggregate가 0이어서 schema, count, geometry,
+> topology와 normalization gate는 미평가다. Repair/rerun이나 P1은 없으며
+> candidate를 닫았다. Synthetic geometry case를 patient로 세거나
 > source waveform을 patient-specific physiology로 부르지 않는다.
 
 > **2026-08-09 inverse-counterfactual source audit:** Current Aneumo의
@@ -144,7 +145,7 @@
 | Open multi-center CTA 2026 / Zenodo 15697196 | raw CTA DICOM, case metadata, 122 aneurysm STL | 172 series: 90 controls/82 IA cases, 24 multi-lesion case, 3 centers | closed physical-grid P0 history; no active primary role | P0 execution-incomplete after partial header prefixes; no PixelData/STL; scientific gate unevaluated; no parser repair/rerun/model/GPU |
 | BenchAnXplore / npj DM 2026 | 105 semi-idealized geometry의 coarse CFD trajectories | 80 frames/case, 0.01 s | GNN surrogate benchmark | ICA sidewall 중심; patient CTA 입력자료가 아님 |
 | Aneumo | 10,660 geometry × 8 steady mass flow, pressure/velocity | 85,280 steady CFD | paired BC response | CC BY-NC-ND; base-family split·비재배포 |
-| AneuG-Flow / 관련 synthetic set | exact processed steady norm + transient WSS/mesh pair; source page 730 pulsatile case | 33.38 GB selected processed pair; full repo 2.63 TB | conditional cycle-functional P0, pass 뒤 method-free P1만 | CC BY-SA 4.0; payload 0; RHSIA 808-count scope 불일치 미해결; patient/clinical evidence 아님 |
+| AneuG-Flow / 관련 synthetic set | exact processed steady norm + transient WSS/mesh pair; source page 730 pulsatile case | 33.38 GB selected processed pair; full repo 2.63 TB | closed cycle-functional P0 history; active training role 없음 | CC BY-SA 4.0; P0 exit 28 before payload/result; scientific gate unevaluated; no repair/rerun/P1; patient/clinical evidence 아님 |
 | 4D-flow MRI multiresolution phantom 2021 | 같은 ICA aneurysm phantom의 3 voxel-size × 3 acceleration processed velocity | 1 physical phantom, 9 selected protocols | closed I0b candidate; field 미접근 | CC BY 4.0; execution-incomplete/no verdict/no rerun, 반복 측정·독립 geometry 부족 |
 | 4D-flow MRI dual-VENC phantoms 2025 | 네 aneurysm/flow-diverter phantom의 raw four-encoding dual-VENC acquisition | 4 physical phantoms, 8 acquisitions | 보존된 metadata/header candidate | CC BY 4.0; REC 미접근, M4 filename/header 불일치 명시 |
 | 4D-flow MRI intervention phantoms 2025 | untreated/device-treated, multi-VENC, pump-off four-encoding raw acquisitions | 33 scans, 22 physical states, 5 base geometry, 2 source anatomies | 보존된 task-unit discovery | CC BY 4.0; scan/device를 patient로 세지 않음, REC 미접근, `14981710` overlap unresolved |

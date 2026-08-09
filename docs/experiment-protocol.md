@@ -1,13 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.6-draft · 2026-08-09
+버전: 3.7-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
-## P0-W · AneuG-Flow cycle-functional source pair · registered, not executed
+## P0-W · AneuG-Flow cycle-functional source pair · execution-incomplete, closed
 
 Conditional candidate는 transient WSS와 그 cycle functional이 같은
 \(m=E_t[\tau]\), \(a=E_t[\|\tau\|]\)에서 유도되어야 한다는 문제다. Source
@@ -24,15 +24,21 @@ score 33/40은 P0 실행 자격일 뿐 primary selection이나 method evidence�
   최소 700 unique geometry, 모든 80 timestep/common labels/node count, finite
   tensor, static xyz/normals, nonzero physical/temporal WSS, normalization
   round-trip, valid triangular connectivity, public identifier 0.
-- pass: 별도 method-free P1 perturbation audit만 등록한다.
-- fail/execution-incomplete: threshold/dependency/reader repair와 same-contract
-  rerun 없이 이 candidate version을 닫는다.
+- observed: exact source `754ed746…`, PBS job `115168`, exit 28, walltime
+  00:05:16, GPU 0. Processed/partial payload와 aggregate는 0이고 raw stdout도
+  materialize되지 않았다.
+- verdict: scientific 16-check gate 미평가. Exact failing shell command는
+  unresolved이며 source recoverability나 가설의 fail로 해석하지 않는다.
+- action: threshold/dependency/reader/transport repair, same-contract rerun과
+  P1 없이 이 candidate version을 닫는다.
 
 Dataset page/NeurIPS paper의 730과 RHSIA의 808은 같은 release로 가정하지
-않는다. P0는 current exact payload count만 aggregate로 기록한다. P0/P1 전에는
-model, split, seed, checkpoint, GPU, outer test와 contribution이 없다. Frozen
+않는다. P0는 current exact payload count만 aggregate로 기록할 예정이었으나
+payload 전에 중단돼 count도 없다. 이 closed branch에는 model, split, seed,
+checkpoint, GPU, outer test와 contribution이 없다. Frozen
 machine-readable contract는 `configs/aneug_cycle_functional_p0.json`, rationale은
-`docs/cycle-functional-wss-audit-2026-08-09.md`다.
+`docs/cycle-functional-wss-audit-2026-08-09.md`, 공개 실행 경계는
+`results/aneug_cycle_functional_p0_execution_20260809.json`이다.
 
 ## P0-I · inverse healthy-vessel counterfactual · source audit rejected, no execution
 

@@ -4,6 +4,34 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Cycle-functional P0 is execution-incomplete and the candidate closes
+
+- Exact public source `754ed746fb60aef707f639189ad59e84a0fca556`의
+  `introai9` CPU/PBS job `115168.ECE-util1`을 8 CPU/128 GB/GPU 0으로 정확히
+  한 번 실행했다. PBS는 walltime `00:05:16`, CPU time `00:00:01`, peak memory
+  `33132kb`, exit 28을 기록했다.
+- 두 pinned processed payload, partial file과 aggregate result는 모두 생성되지
+  않았다. Raw scheduler stdout도 materialize되지 않아 exit 28이 transport
+  timeout과 양립한다는 범위를 넘어 exact failing shell command를 단정하지
+  않는다.
+- Physical-WSS recovery, archive schema/linkage, 80-frame geometry/topology와
+  unique-unit 16-check scientific gate는 전부 미평가다. 이는 AneuG-Flow 자산이나
+  cycle-functional 가설의 scientific failure가 아니다.
+- 등록 계약에 따라 dependency/reader/transport repair, same-contract rerun,
+  P1, method, architecture, GPU와 outer test를 열지 않고 candidate version을
+  닫았다. Active shortlist는 0으로 돌아갔고 다음 허용 작업은 fresh
+  problem-level primary-source/asset audit뿐이다.
+- 공개 execution record는
+  `results/aneug_cycle_functional_p0_execution_20260809.json`, SHA-256은
+  `cf2eab0a118688698183004928d7fc1786f694c1435fe7f4316502817e6290ae`다.
+- 영향 파일: `results/aneug_cycle_functional_p0_execution_20260809.json`,
+  `AGENTS.md`, `README.md`, `docs/cycle-functional-wss-audit-2026-08-09.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`, `docs/experiment-protocol.md`,
+  `docs/isbi-2027-plan.md`, `docs/literature-lineage.md`, `docs/datasets.md`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/index.html`, `site/learn.html`, `site/assets/aurora.js`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Cycle-functional WSS enters a P0-only conditional shortlist
 
 - 같은 transient WSS field와 TAWSS/OSI/RRT가 공유하는 cycle moments를 하나의

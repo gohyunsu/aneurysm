@@ -1,0 +1,68 @@
+{
+  "schema_version": "aurora.aneug_cycle_functional_p0.execution_record.v1",
+  "experiment_id": "aneug_cycle_functional_wss_p0",
+  "as_of": "2026-08-09",
+  "status": "execution_incomplete_no_scientific_verdict_candidate_closed",
+  "source_commit": "754ed746fb60aef707f639189ad59e84a0fca556",
+  "config": {
+    "path": "configs/aneug_cycle_functional_p0.json",
+    "sha256": "37e73d6b6e7f2ff73065aeb7e9a33834e729bb1a312955238c9b355eefbb8996",
+    "status_at_execution": "preregistered_before_processed_payload_access"
+  },
+  "wrapper": {
+    "path": "scripts/run_aneug_cycle_functional_p0_pbs.sh",
+    "sha256": "e239e98d120a9654d7f8563951fb10d5c1984eb9f64efb321a44af9d53bb011d"
+  },
+  "environment": {
+    "execution_server_role": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "resources": "select=1:ncpus=8:mem=128gb:ngpus=0",
+    "walltime_limit": "06:00:00",
+    "gpu_requested": false,
+    "model_or_checkpoint_accessed": false
+  },
+  "execution": {
+    "scheduler_job_id": "115168.ECE-util1",
+    "scheduler_exit_status": 28,
+    "scheduler_walltime": "00:05:16",
+    "scheduler_cput": "00:00:01",
+    "scheduler_peak_memory": "33132kb",
+    "run_count": 1,
+    "result_file_created": false,
+    "raw_scheduler_log_materialized": false,
+    "last_verified_stage": "exact_clean_source_checkout_before_first_processed_payload_completion",
+    "scientific_gate_evaluated": false,
+    "passed_checks": null,
+    "total_checks": 16
+  },
+  "failure": {
+    "stage": "pre_audit_source_transport_or_wrapper",
+    "reason": "pbs_exit_28_before_first_processed_payload_or_aggregate_materialized",
+    "exact_failing_command_resolved": false,
+    "interpretation": "Exit 28 is compatible with a transport timeout, but no scheduler stdout was materialized, so the exact shell cause is not claimed."
+  },
+  "access_boundary": {
+    "steady_processed_payload_accessed_or_retained": false,
+    "transient_processed_payload_accessed_or_retained": false,
+    "partial_file_materialized": false,
+    "case_identifier_accessed_or_published": false,
+    "physical_wss_recovery_audited": false,
+    "archive_schema_or_topology_audited": false,
+    "task_unit_audited": false,
+    "model_or_gpu_used": false
+  },
+  "decision": {
+    "candidate_status": "closed_after_registered_execution_incomplete",
+    "scientific_interpretation": "No scientific P0 pass or fail is available; this execution does not support or refute source recoverability or cycle-functional task adequacy.",
+    "same_contract_rerun": false,
+    "dependency_or_reader_repair": false,
+    "p1_authorized": false,
+    "method_authorized": false,
+    "architecture_authorized": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false,
+    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_only"
+  }
+}

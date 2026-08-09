@@ -1,9 +1,9 @@
 {
-  "schema_version": "3.4",
+  "schema_version": "3.5",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_one_conditional_cycle_functional_shortlist_p0_only",
+    "status": "failed_branches_preserved_no_active_primary_after_cycle_functional_p0_execution_incomplete",
     "as_of": "2026-08-09",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "conditional_cycle_functional_wss_source_shortlist_awaiting_p0",
-    "shortlisted_candidate": "cycle_functional_compatible_transient_wss_surrogation",
-    "candidate_dataset": "aneug_flow",
-    "candidate_estimand": "surface_resolved_cycle_moments_and_exactly_derived_tawss_osi_rrt_under_the_source_pulsatile_protocol",
-    "asset_access_status": "aneug_flow_source_metadata_code_and_two_processed_file_identities_audited_payload_not_accessed",
+    "status": "no_active_primary_cycle_functional_wss_p0_execution_incomplete_candidate_closed",
+    "shortlisted_candidate": "none",
+    "candidate_dataset": "none",
+    "candidate_estimand": "none",
+    "asset_access_status": "aneug_flow_source_metadata_and_file_identities_audited_but_processed_payload_not_accessed_before_p0_execution_incomplete",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -26,7 +26,7 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "execute_single_prospectively_registered_cpu_read_only_aneug_cycle_functional_p0_on_introai9",
+    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_only",
     "audit_document": "docs/cycle-functional-wss-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
@@ -235,14 +235,14 @@
       "s0a_failure_action": "executed_close_candidate_without_solver_v2_model_gpu_or_outer_test"
     },
     "aneug_cycle_functional_source_audit": {
-      "status": "conditional_source_shortlist_p0_registered_payload_not_accessed",
+      "status": "closed_after_registered_p0_execution_incomplete_no_scientific_verdict",
       "audit_document": "docs/cycle-functional-wss-audit-2026-08-09.md",
       "config": "configs/aneug_cycle_functional_p0.json",
       "candidate_hypothesis": "one_transient_wss_field_and_its_cycle_functionals_should_share_exact_cycle_moments_instead_of_contradictory_independent_predictions",
       "score": 33.0,
       "maximum_score": 40.0,
       "automatic_selection_threshold": 32.0,
-      "active_shortlist_count": 1,
+      "active_shortlist_count": 0,
       "primary_problem_selected": false,
       "dataset_repository_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
       "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
@@ -256,6 +256,18 @@
       "processed_payload_accessed": false,
       "physical_wss_recovery_audited": false,
       "task_unit_audited": false,
+      "p0_source_commit": "754ed746fb60aef707f639189ad59e84a0fca556",
+      "p0_config_sha256": "37e73d6b6e7f2ff73065aeb7e9a33834e729bb1a312955238c9b355eefbb8996",
+      "p0_execution_record": "results/aneug_cycle_functional_p0_execution_20260809.json",
+      "p0_execution_record_sha256": "cf2eab0a118688698183004928d7fc1786f694c1435fe7f4316502817e6290ae",
+      "p0_scheduler_job_id": "115168.ECE-util1",
+      "p0_scheduler_exit_status": 28,
+      "p0_scheduler_walltime": "00:05:16",
+      "p0_result_created": false,
+      "p0_raw_log_materialized": false,
+      "p0_scientific_gate_evaluated": false,
+      "same_contract_rerun_allowed": false,
+      "dependency_or_reader_repair_allowed": false,
       "direct_prior_threats": [
         "rhsia_transient_wss_graph_transformer_with_ghd_and_steady_augmentation",
         "generic_cycle_functional_loss_or_direct_functional_head",
@@ -270,9 +282,9 @@
       "outer_test_authorized": false,
       "submission_identity_active": false,
       "p0_pass_authorizes": "register_method_free_p1_cycle_functional_task_adequacy_perturbation_audit_only",
-      "p0_failure_action": "close_cycle_functional_candidate_without_reader_repair_same_contract_rerun_method_gpu_or_outer_test"
+      "p0_failure_action": "executed_close_cycle_functional_candidate_without_dependency_or_reader_repair_same_contract_rerun_p1_method_gpu_or_outer_test"
     },
-    "most_recent_closed_candidate": "open_cta_physical_grid_commutation",
+    "most_recent_closed_candidate": "cycle_functional_compatible_transient_wss_surrogation",
     "most_recent_source_rejected_candidate": "inverse_healthy_vessel_counterfactual_editing",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -332,7 +344,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_conditional_cycle_functional_shortlist_p0_only",
+    "required_headline_domain": "unselected_no_active_primary_after_cycle_functional_p0_execution_incomplete",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -397,7 +409,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "none",
-    "active_candidate_status": "no_primary_or_model_one_conditional_cycle_functional_source_shortlist_p0_only",
+    "active_candidate_status": "no_primary_or_model_after_cycle_functional_p0_execution_incomplete_and_candidate_closure",
     "candidate_primary_estimand": "none",
     "candidate_secondary_estimand": "none",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -612,12 +624,13 @@
     },
     {
       "name": "aneug_flow",
-      "role": "conditional_cycle_functional_p0_source_pair_not_training",
+      "role": "closed_cycle_functional_p0_history_not_training",
       "field_provenance": "synthetic_cfd",
       "split_unit": "generator_seed_geometry",
-      "status": "source_metadata_and_exact_file_identities_audited_payload_not_accessed_p0_registered",
+      "status": "p0_execution_incomplete_before_processed_payload_access_no_scientific_verdict_no_rerun",
       "dataset_repository_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
       "p0_config": "configs/aneug_cycle_functional_p0.json",
+      "p0_execution_record": "results/aneug_cycle_functional_p0_execution_20260809.json",
       "method_or_gpu_authorized": false
     },
     {

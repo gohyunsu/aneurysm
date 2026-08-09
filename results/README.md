@@ -26,6 +26,15 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `aneug_cycle_functional_p0_execution_20260809.json`: exact public source
+  `754ed746fb60aef707f639189ad59e84a0fca556`의 one-shot CPU/PBS P0
+  execution-incomplete record. Job `115168`은 5분 16초 뒤 exit 28이었고 exact
+  steady/transient processed payload, partial file, aggregate와 raw stdout은 모두
+  생성되지 않았다. Exact shell cause와 scientific 16-check gate는 미평가다.
+  Dependency/reader/transport repair, same-contract rerun과 P1 없이 후보를 닫으며
+  source recoverability나 hypothesis fail로 해석하지 않는다. Artifact SHA-256은
+  `cf2eab0a118688698183004928d7fc1786f694c1435fe7f4316502817e6290ae`다.
+
 - `open_cta_physical_p0_execution_20260809.json`: exact public source
   `b437875f884346d7f0fada68f089981664ae2a3c`의 one-shot P0
   execution-incomplete record. DICOM `(0008,1032) Procedure Code Sequence`의

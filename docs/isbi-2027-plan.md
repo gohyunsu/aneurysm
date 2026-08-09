@@ -1,15 +1,15 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-09 current boundary:** active primary와 method는 0이다. Fresh batch의
-> 유일한 조건부 shortlist는 cycle-functional transient WSS 33/40이며, exact
-> AneuG-Flow source pair에 대한 CPU-only P0만 등록됐다. P0 pass → 별도
-> method-free P1 task-adequacy audit → direct-prior red team을 모두 통과하기
-> 전에는 architecture, GPU, outer test와 four-page narrative를 고정하지 않는다.
+> **2026-08-09 current boundary:** active primary, shortlist와 method는 0이다.
+> Fresh batch의 유일한 33/40 cycle-functional transient WSS 후보는 exact
+> AneuG-Flow CPU/PBS P0가 processed payload 전에 exit 28로 끝나
+> execution-incomplete로 닫혔다. Scientific verdict, P1, architecture, GPU,
+> outer test와 four-page narrative는 없다.
 
 최종 검토일: 2026-08-09 KST
 
-상태: **target locked · cycle-functional WSS conditional shortlist 1 at 33/40 ·
-P0 registered/payload 0 · primary problem/method/architecture/GPU 0 · not
+상태: **target locked · cycle-functional WSS P0 execution-incomplete/no verdict ·
+candidate closed · shortlist/primary problem/method/architecture/GPU 0 · not
 submission-ready**
 
 2026-08-09 open-CTA physical-coordinate 후보는 32.0/40으로 P0에 진입했지만,
@@ -27,8 +27,8 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
 
-현재 제출 가능한 paper identity는 없다. Cycle-functional WSS는 아직 P0/P1
-이전 조건부 후보다. Open-CTA grid-commutation 문제는
+현재 제출 가능한 paper identity는 없다. Cycle-functional WSS는 P0
+execution-incomplete로 닫혔고 P1은 열리지 않았다. Open-CTA grid-commutation 문제는
 asset gate를 평가하지 못했고 P1도 열리지 않았다. Partial/missing-BC AURORA, Aneumo
 irregular-3D, cross-protocol 4D-flow, RSNA mixed-granularity lesion-set과
 goal-oriented hemodynamic segmentation을 모두 실패 또는 부적격 이력으로

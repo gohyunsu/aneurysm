@@ -2,16 +2,16 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · one conditional cycle-functional shortlist at 33/40 · active primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
-    requirement: "exact CPU P0 → method-free P1 adequacy → direct baselines → bounded development → fresh outer test",
+    status: "Target locked · cycle-functional P0 execution-incomplete and candidate closed · active shortlist/primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    requirement: "fresh problem audit → asset/task adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
-      title: "Cycle-functional WSS enters a P0-only shortlist",
-      copy: "A single transient WSS field determines m=E_t[tau] and a=E_t[|tau|], hence TAWSS, OSI and RRT. The candidate asks whether one representation can keep the field and these spatial functionals compatible. RHSIA already occupies Graph Transformer, GHD and steady augmentation, while DOPE occupies generic operator-functional debiasing. The source score is 33/40, but no processed payload, task-adequacy result, method, architecture or GPU exists yet.",
-      status: "Conditional shortlist 1 · P0 registered · payload/model/GPU 0",
+      title: "Cycle-functional P0 closes execution-incomplete",
+      copy: "A single transient WSS field determines m=E_t[tau] and a=E_t[|tau|], hence TAWSS, OSI and RRT. The 33/40 source candidate entered one exact CPU/PBS P0, but job 115168 exited 28 before either processed payload, partial file or aggregate materialized. Raw stdout was absent, so the exact shell cause and all 16 scientific checks remain unresolved. The frozen rule closes this version without repair, rerun or P1.",
+      status: "Candidate closed · no scientific verdict · shortlist/model/GPU 0",
       url: "../docs/cycle-functional-wss-audit-2026-08-09.md"
     },
     {
@@ -187,15 +187,15 @@ window.AURORA_DATA = Object.freeze({
     ["Axis", "RHSIA transient surrogate", "Direct functional head / loss", "DOPE functional debiasing", "Conditional residual gap"],
     ["Already occupied", "Graph Transformer + GHD + steady augmentation", "Optimize derived targets directly", "Debias scalar trajectory functionals", "None of these alone"],
     ["Required control", "Matched RHSIA-style field model", "Field + independent functional heads", "Plug-in / debiased functional estimate", "One field + exact shared cycle moments"],
-    ["Missing evidence", "Published field accuracy", "Compatibility not guaranteed", "Spatial full-field compatibility is not its target", "P0 recoverability and P1 task adequacy unopened"],
-    ["Current boundary", "Direct prior", "Generic engineering control", "Direct theory threat", "33/40 conditional · no method/GPU"]
+    ["Missing evidence", "Published field accuracy", "Compatibility not guaranteed", "Spatial full-field compatibility is not its target", "P0 recoverability and P1 task adequacy unevaluated"],
+    ["Current boundary", "Direct prior", "Generic engineering control", "Direct theory threat", "33/40 history · P0 incomplete/closed · no method/GPU"]
   ],
   gates: [
     {
       id: "P0-W",
       title: "Can the exact AneuG-Flow pair recover physical transient WSS?",
-      copy: "Before any model, the one-shot CPU audit verifies two exact hashes, weights-only loading, steady tensor_norm, transient case/mesh linkage, at least 700 unique geometries, 80 static-geometry frames, finite nonzero time-varying WSS, normalization round-trip and valid common faces.",
-      state: "Registered before payload · introai9 PBS CPU only · pass opens method-free P1 only",
+      copy: "Exact 754ed746… job 115168 exited 28 after 00:05:16, before either processed payload, partial file or aggregate materialized. Raw stdout was absent, so the exact shell cause and the registered physical-WSS/schema/topology checks are not claimed.",
+      state: "Execution-incomplete · gate unevaluated · no repair/rerun/P1 · candidate closed",
       blocking: true
     },
     {
@@ -315,8 +315,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "AneuG-Flow",
-      role: "conditional cycle-functional P0 source pair; not training",
-      provenance: "CC BY-SA 4.0 · exact 9.63 GB steady norm + 23.74 GB transient WSS/mesh pair pinned · payload 0 · source 730 vs RHSIA 808 scope unresolved"
+      role: "closed cycle-functional P0 history; not training",
+      provenance: "CC BY-SA 4.0 · exact pair pinned · P0 exit 28 before payload/result · scientific gate unevaluated · no repair/rerun/P1/model/GPU"
     },
     {
       name: "BenchAnXplore",
@@ -345,6 +345,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "experiment",
+      title: "Cycle-functional P0 closes execution-incomplete without repair",
+      copy: "Exact public source 754ed746fb60aef707f639189ad59e84a0fca556 ran once as introai9 CPU/PBS job 115168 with 8 CPU, 128 GB and GPU 0. PBS recorded exit 28 after 00:05:16; neither pinned processed payload, partial file nor aggregate result materialized, and raw stdout was absent. Therefore no one of the 16 scientific checks is evaluated and no source or hypothesis failure is claimed. The preregistered rule closes this candidate version with no dependency/reader/transport repair, same-contract rerun, P1, method, architecture, GPU or outer test. Active shortlist returns to zero.",
+      files: ["results/aneug_cycle_functional_p0_execution_20260809.json", "AGENTS.md", "README.md", "docs/cycle-functional-wss-audit-2026-08-09.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/aurora.js", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "research",

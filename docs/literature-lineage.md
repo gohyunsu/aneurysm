@@ -1,6 +1,6 @@
 # 선행연구 계보와 research gap
 
-## 0-W. Conditional gap · full transient WSS와 cycle-functional compatibility
+## 0-W. Closed conditional gap · full transient WSS와 cycle-functional compatibility
 
 [AneuG-Flow](https://papers.nips.cc/paper_files/paper/2025/file/e2b8ff0035bc9f572a7deefbcbea85bc-Paper-Datasets_and_Benchmarks_Track.pdf)는
 730 pulsatile synthetic CFD case와 WSS baseline을 제공한다.
@@ -16,8 +16,9 @@ accuracy를 목적에 넣는 것 자체도 novelty가 아니다.
 baseline보다 hotspot/ranking functional error를 줄이면서 field accuracy를
 보존하는 algorithm과 증거다. Raw OSI relative error는 near-zero denominator
 artifact일 수 있으므로 문제의 비자명성부터 method-free perturbation으로
-확인해야 한다. 현재 33/40 source shortlist와 P0 등록만 있으며 contribution은
-0이다. 상세 audit은
+확인해야 한다. 33/40 source shortlist는 exact P0가 processed payload 전에
+exit 28로 execution-incomplete가 되어 닫혔다. Scientific gate와 contribution은
+0이고 같은 contract의 repair/rerun이나 P1은 없다. 상세 audit은
 [`cycle-functional-wss-audit-2026-08-09.md`](cycle-functional-wss-audit-2026-08-09.md)를
 따른다.
 

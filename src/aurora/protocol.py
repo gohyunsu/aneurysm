@@ -117,8 +117,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.4":
-        raise ProtocolError("The current research-state schema must be version 3.4.")
+    if protocol["schema_version"] != "3.5":
+        raise ProtocolError("The current research-state schema must be version 3.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -188,15 +188,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "conditional_cycle_functional_wss_source_shortlist_awaiting_p0"
-        or problem_selection["shortlisted_candidate"]
-        != "cycle_functional_compatible_transient_wss_surrogation"
-        or problem_selection["candidate_dataset"]
-        != "aneug_flow"
-        or problem_selection["candidate_estimand"]
-        != "surface_resolved_cycle_moments_and_exactly_derived_tawss_osi_rrt_under_the_source_pulsatile_protocol"
+        != "no_active_primary_cycle_functional_wss_p0_execution_incomplete_candidate_closed"
+        or problem_selection["shortlisted_candidate"] != "none"
+        or problem_selection["candidate_dataset"] != "none"
+        or problem_selection["candidate_estimand"] != "none"
         or problem_selection["asset_access_status"]
-        != "aneug_flow_source_metadata_code_and_two_processed_file_identities_audited_payload_not_accessed"
+        != "aneug_flow_source_metadata_and_file_identities_audited_but_processed_payload_not_accessed_before_p0_execution_incomplete"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -206,17 +203,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "execute_single_prospectively_registered_cpu_read_only_aneug_cycle_functional_p0_on_introai9"
+        != "fresh_problem_level_primary_source_and_asset_audit_only"
         or problem_selection["audit_document"]
         != "docs/cycle-functional-wss-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
-        != "open_cta_physical_grid_commutation"
+        != "cycle_functional_compatible_transient_wss_surrogation"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "inverse_healthy_vessel_counterfactual_editing"
     ):
         raise ProtocolError(
-            "The no-active-problem boundary may contain only the conditional "
-            "cycle-functional P0 shortlist; it must retain no selected primary, "
+            "The no-active-problem boundary must preserve the closed cycle-functional "
+            "P0 execution and retain no selected primary, "
             "method, GPU, outer test, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -830,19 +827,31 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_identity_active",
             "p0_pass_authorizes",
             "p0_failure_action",
+            "p0_source_commit",
+            "p0_config_sha256",
+            "p0_execution_record",
+            "p0_execution_record_sha256",
+            "p0_scheduler_job_id",
+            "p0_scheduler_exit_status",
+            "p0_scheduler_walltime",
+            "p0_result_created",
+            "p0_raw_log_materialized",
+            "p0_scientific_gate_evaluated",
+            "same_contract_rerun_allowed",
+            "dependency_or_reader_repair_allowed",
         ],
         "problem_selection.aneug_cycle_functional_source_audit",
     )
     if (
         cycle_audit["status"]
-        != "conditional_source_shortlist_p0_registered_payload_not_accessed"
+        != "closed_after_registered_p0_execution_incomplete_no_scientific_verdict"
         or cycle_audit["audit_document"]
         != "docs/cycle-functional-wss-audit-2026-08-09.md"
         or cycle_audit["config"] != "configs/aneug_cycle_functional_p0.json"
         or cycle_audit["score"] != 33.0
         or cycle_audit["maximum_score"] != 40.0
         or cycle_audit["automatic_selection_threshold"] != 32.0
-        or cycle_audit["active_shortlist_count"] != 1
+        or cycle_audit["active_shortlist_count"] != 0
         or cycle_audit["primary_problem_selected"] is not False
         or cycle_audit["dataset_repository_commit"]
         != "9dd418083899deddd93a67f9a6fca7a14304fa36"
@@ -860,6 +869,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or cycle_audit["processed_payload_accessed"] is not False
         or cycle_audit["physical_wss_recovery_audited"] is not False
         or cycle_audit["task_unit_audited"] is not False
+        or cycle_audit["p0_source_commit"]
+        != "754ed746fb60aef707f639189ad59e84a0fca556"
+        or cycle_audit["p0_config_sha256"]
+        != "37e73d6b6e7f2ff73065aeb7e9a33834e729bb1a312955238c9b355eefbb8996"
+        or cycle_audit["p0_execution_record"]
+        != "results/aneug_cycle_functional_p0_execution_20260809.json"
+        or cycle_audit["p0_execution_record_sha256"]
+        != "cf2eab0a118688698183004928d7fc1786f694c1435fe7f4316502817e6290ae"
+        or cycle_audit["p0_scheduler_job_id"] != "115168.ECE-util1"
+        or cycle_audit["p0_scheduler_exit_status"] != 28
+        or cycle_audit["p0_scheduler_walltime"] != "00:05:16"
+        or cycle_audit["p0_result_created"] is not False
+        or cycle_audit["p0_raw_log_materialized"] is not False
+        or cycle_audit["p0_scientific_gate_evaluated"] is not False
+        or cycle_audit["same_contract_rerun_allowed"] is not False
+        or cycle_audit["dependency_or_reader_repair_allowed"] is not False
         or set(cycle_audit["direct_prior_threats"])
         != {
             "rhsia_transient_wss_graph_transformer_with_ghd_and_steady_augmentation",
@@ -877,13 +902,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or cycle_audit["p0_pass_authorizes"]
         != "register_method_free_p1_cycle_functional_task_adequacy_perturbation_audit_only"
         or cycle_audit["p0_failure_action"]
-        != "close_cycle_functional_candidate_without_reader_repair_same_contract_rerun_method_gpu_or_outer_test"
+        != "executed_close_cycle_functional_candidate_without_dependency_or_reader_repair_same_contract_rerun_p1_method_gpu_or_outer_test"
     ):
         raise ProtocolError(
-            "The cycle-functional candidate must remain a 33/40 source shortlist "
-            "with two exact files, unresolved payload semantics, and P0-only authority."
+            "The cycle-functional candidate must remain closed after its exact P0 "
+            "execution-incomplete outcome, with no payload, P1, model, or GPU authority."
         )
-    checks.append("closed prior candidates and one conditional P0-only shortlist")
+    checks.append("closed prior candidates and no active shortlist")
 
     venue = protocol["venue"]
     _require_keys(
@@ -964,7 +989,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_conditional_cycle_functional_shortlist_p0_only"
+        != "unselected_no_active_primary_after_cycle_functional_p0_execution_incomplete"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1128,7 +1153,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "none"
         or task["active_candidate_status"]
-        != "no_primary_or_model_one_conditional_cycle_functional_source_shortlist_p0_only"
+        != "no_primary_or_model_after_cycle_functional_p0_execution_incomplete_and_candidate_closure"
         or task["candidate_primary_estimand"]
         != "none"
         or task["candidate_secondary_estimand"]
@@ -1256,19 +1281,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     if (
         aneug_flow.get("role")
-        != "conditional_cycle_functional_p0_source_pair_not_training"
+        != "closed_cycle_functional_p0_history_not_training"
         or aneug_flow.get("field_provenance") != "synthetic_cfd"
         or aneug_flow.get("split_unit") != "generator_seed_geometry"
         or aneug_flow.get("status")
-        != "source_metadata_and_exact_file_identities_audited_payload_not_accessed_p0_registered"
+        != "p0_execution_incomplete_before_processed_payload_access_no_scientific_verdict_no_rerun"
         or aneug_flow.get("dataset_repository_commit")
         != "9dd418083899deddd93a67f9a6fca7a14304fa36"
         or aneug_flow.get("p0_config")
         != "configs/aneug_cycle_functional_p0.json"
+        or aneug_flow.get("p0_execution_record")
+        != "results/aneug_cycle_functional_p0_execution_20260809.json"
         or aneug_flow.get("method_or_gpu_authorized") is not False
     ):
         raise ProtocolError(
-            "AneuG-Flow must remain a synthetic, payload-unread, P0-only source pair "
+            "AneuG-Flow must remain a synthetic, payload-unread, closed P0 history "
             "without method or GPU authorization."
         )
     if (

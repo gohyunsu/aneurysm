@@ -44,13 +44,16 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
             validate_protocol(candidate)
 
-    def test_cycle_functional_shortlist_is_p0_only(self) -> None:
+    def test_cycle_functional_p0_incomplete_is_closed(self) -> None:
         audit = self.protocol["problem_selection"][
             "aneug_cycle_functional_source_audit"
         ]
         self.assertEqual(audit["score"], 33.0)
-        self.assertEqual(audit["active_shortlist_count"], 1)
+        self.assertEqual(audit["active_shortlist_count"], 0)
         self.assertFalse(audit["processed_payload_accessed"])
+        self.assertFalse(audit["p0_scientific_gate_evaluated"])
+        self.assertFalse(audit["same_contract_rerun_allowed"])
+        self.assertEqual(audit["p0_scheduler_exit_status"], 28)
         self.assertFalse(audit["method_selected"])
         self.assertFalse(audit["gpu_training_authorized"])
 

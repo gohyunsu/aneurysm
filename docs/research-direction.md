@@ -5,7 +5,7 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS conditional source shortlist 33/40 with P0 registered and payload 0 · primary problem/method/architecture/GPU/outer test unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · shortlist/primary problem/method/architecture/GPU/outer test unselected · submission blocked
 
 2026-08-09 fresh batch에서 유일하게 admission line을 넘은 후보는
 **cycle-functional-compatible transient WSS surrogation**이다. 같은 WSS
@@ -14,7 +14,11 @@ OSI와 RRT를 정확히 유도해 full field와 functional prediction의 모순�
 수 있는지를 묻는다. RHSIA가 graph transformer+GHD+steady augmentation으로
 transient WSS를 이미 직접 다루므로 그 구성요소는 novelty가 아니다. 보고된
 raw OSI relative error도 near-zero denominator artifact일 수 있어, P0와 별도
-method-free P1 전에는 문제 자체도 확정하지 않는다. 상세 score, 수식과 선행
+method-free P1 전에는 문제 자체도 확정하지 않는다. Exact `754ed746…`의
+`introai9` CPU/PBS P0는 exit 28로 종료됐고 payload·partial file·aggregate와
+raw stdout이 모두 생성되지 않아 scientific gate를 평가하지 못했다. 등록된
+no-repair/no-rerun 계약에 따라 이 version을 닫았으며 P1은 열리지 않았다.
+상세 score, 수식과 선행
 boundary는
 [`cycle-functional-wss-audit-2026-08-09.md`](cycle-functional-wss-audit-2026-08-09.md)에
 있다.
@@ -40,17 +44,18 @@ result JSON은 없다. PixelData는 decode·inspect하지 않았고 STL 단계�
 도달하지 않았다. 등록된 parser-repair/same-contract-rerun 금지에 따라 후보를
 닫았으며 active shortlist는 다시 0이다.
 
-## 0. 현재 연구 상태 · conditional shortlist 1, active primary 0
+## 0. 현재 연구 상태 · shortlist 0, active primary 0
 
 현재 source of truth는
 [`cycle-functional-wss-audit-2026-08-09.md`](cycle-functional-wss-audit-2026-08-09.md)와
-[`configs/aneug_cycle_functional_p0.json`](../configs/aneug_cycle_functional_p0.json)이다.
+[`configs/aneug_cycle_functional_p0.json`](../configs/aneug_cycle_functional_p0.json),
+[`P0 execution record`](../results/aneug_cycle_functional_p0_execution_20260809.json)다.
 Dataset/code commit과 두 processed file의 byte/SHA는 고정했지만 tensor payload는
-아직 읽지 않았다. P0는 `introai9` PBS CPU-only로 physical WSS normalization,
-730/808 count discrepancy의 current-release scope, 80-frame schema, common
-topology와 unique geometry를 검사한다. All pass도 method-free P1만 열며
-architecture/GPU/outer test를 열지 않는다. Reader/dependency failure도 같은
-contract를 수리·재실행하지 않고 이 candidate version을 닫는다.
+읽지 못했다. PBS job `115168`은 00:05:16 뒤 exit 28이었고 scientific 16-check
+gate는 미평가다. Exit 28은 transport timeout과 양립하지만 raw stdout이 없어
+exact shell cause를 단정하지 않는다. Reader/dependency/transport repair와
+same-contract rerun, P1, architecture/GPU/outer test를 모두 금지하고 이
+candidate version을 닫는다. 다음은 fresh problem-level source/asset audit뿐이다.
 
 ### 0-H. 닫힌 Open-CTA physical-grid history
 
