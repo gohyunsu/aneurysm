@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 longitudinal-perfusion deployment overlay:** Exact source
+> content `7b03ace12b1e05329e47cd46b6968c0359143daa`의 Quality run
+> `31336277131`과 Pages run `31336276517`이 성공했다. Live overview는
+> 62 patient/291 exam/873 map과 DCI 9건, best 31.0/40, all rejected,
+> active shortlist/primary/method/architecture/P0/PBS/GPU 0을 렌더링한다.
+> Field guide의 repeated-CTP beginner window와 상세 audit URL도 HTTP 200으로
+> 확인했다. 이 배포 확인은 score, payload, method, compute, outer test 또는
+> submission identity를 바꾸지 않는다. `introai9`만 허용하고 `junjinyong`은
+> 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 longitudinal-perfusion source-audit overlay:** Fresh source-only
 > batch는 informative-scan-aware continuous-time CTP field forecasting,
 > pre-DCI early warning, personalized reacquisition, treatment counterfactual,

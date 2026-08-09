@@ -4,6 +4,17 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Longitudinal-perfusion rejection is live and verified
+
+- Exact source content `7b03ace12b1e05329e47cd46b6968c0359143daa` passed
+  Quality run `31336277131`; Pages run `31336276517` also succeeded.
+- The live overview renders 62 patients/291 exams/873 maps, nine DCI events,
+  best 31.0/40, all rejected and shortlist/primary/method/architecture/P0/PBS/
+  GPU zero. The beginner window and detailed audit URL both resolve.
+- Deployment verification changes no score, payload, method, compute, outer
+  test or submission identity. `introai9` remains exclusive and `junjinyong`
+  remains excluded.
+
 ## 2026-08-10 · Longitudinal-perfusion batch stops before payload and compute
 
 - Informative-scan-aware CTP field forecasting, pre-DCI warning, personalized

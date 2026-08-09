@@ -524,6 +524,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Longitudinal-perfusion rejection is live",
+      copy: "Exact source content 7b03ace12b1e05329e47cd46b6968c0359143daa passed Quality run 31336277131 and Pages run 31336276517. The live overview renders 62 patients, 291 exams, 873 maps, nine DCI events, best 31.0/40, all rejected and active shortlist/primary/method/architecture/P0/PBS/GPU zero. The repeated-CTP beginner window and detailed audit URL also resolve. Deployment verification changes no scientific boundary; introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "Longitudinal-perfusion candidates stop before payload and compute",
       copy: "Informative-scan-aware forecasting, pre-DCI early warning, personalized reacquisition, treatment-conditioned counterfactual, cross-modality 3DRA/CTA invariance and global-local VWE discordance score 31.0/29.0/28.0/27.0/29.5/29.0. The open CTP source has 62 patients and only nine DCI events; 291 examinations and 873 maps are repeated observations, not independent outcome units. Observation and treatment are clinically informative, while the strongest model components and endpoint analyses have direct priors. Schema 4.9 freezes no standalone payload/P0/PBS/model/GPU, introai9-only future execution and complete exclusion of junjinyong.",
