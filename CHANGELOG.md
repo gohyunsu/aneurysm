@@ -4,6 +4,17 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Longitudinal-MRA rejection is live and verified
+
+- Exact content `24c95c17042187ad43b0f16b76962f083bc8a053` passed Quality run
+  `31338069136` and Pages run `31338068734`.
+- The live overview renders best 31.5/40, all rejected and no active shortlist,
+  selected primary, model or GPU. The detailed audit is publicly reachable and
+  preserves no annotation/image/mesh payload, P0, PBS or outer test.
+- Deployment verification changes no scientific verdict or compute authority.
+  Future AURORA execution remains `introai9` PBS only, and `junjinyong` remains
+  excluded from connection, query, submission and monitoring.
+
 ## 2026-08-10 · Longitudinal-MRA growth batch stops before payload and compute
 
 - Acquisition-orbit-calibrated growth, single-anchor localization,

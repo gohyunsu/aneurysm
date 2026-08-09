@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 longitudinal-MRA growth deployment overlay:** Exact public
+> content `24c95c17042187ad43b0f16b76962f083bc8a053`의 Quality run
+> `31338069136`과 Pages run `31338068734`가 성공했다. Live overview는
+> best 31.5/40, all rejected, active shortlist/selected primary/model/GPU 0을
+> 표시하고 상세 audit도 HTTP 200으로 같은 no-payload/P0/PBS/model/GPU 경계를
+> 제공한다. 이 배포 확인은 scientific verdict나 compute authorization을 바꾸지
+> 않는다. 향후 실행은 `introai9` PBS만 허용하고 `junjinyong`은 접속·조회·제출·
+> 모니터링하지 않는다.
+
 > **2026-08-10 longitudinal-MRA growth source-audit overlay:** Fresh six-
 > candidate batch는 acquisition-orbit-calibrated growth, single-anchor local
 > growth, interval-censored trajectory, mixed-modality measurement, AWE
