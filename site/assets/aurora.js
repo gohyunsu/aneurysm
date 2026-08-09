@@ -100,23 +100,23 @@
 
   const modes = {
     presence: {
-      description: "172 CTA case의 study/patient key와 series geometry를 확인합니다.",
-      connector: "audit units",
-      title: "Are task units one-to-one?",
-      copy: "Patient/study keys and three sampled headers must support one auditable case unit",
+      description: "Frozen parser가 undefined-length sequence에서 중단돼 unit gate에 도달하지 못했습니다.",
+      connector: "parser exits",
+      title: "Frozen parser stops",
+      copy: "Undefined-length Procedure Code Sequence is outside the registered minimal parser",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "STL vertex와 DICOM patient coordinate frame의 정합을 검사합니다.",
-      connector: "audit frames",
-      title: "Do surfaces inhabit the CTA frame?",
-      copy: "CRC-verified STL geometry must align with DICOM orientation, position and physical scale",
+      description: "STL 단계에는 도달하지 않아 physical frame check는 미평가입니다.",
+      connector: "frame unopened",
+      title: "STL frame not evaluated",
+      copy: "PixelData and STL were not accessed; no alignment result exists",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "모든 frozen check가 통과해야 method-free P1만 등록합니다.",
-      connector: "apply frozen rule",
-      title: "All pass to P1; any fail closes",
+      description: "Scientific pass/fail 없이 registered version을 닫고 fresh audit으로 돌아갑니다.",
+      connector: "close without repair",
+      title: "No verdict; no rerun",
       copy: "No threshold, tolerance, parser or selection repair after the observed outcome",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }

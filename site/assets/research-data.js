@@ -2,16 +2,16 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · conditional shortlist 1 at open-CTA P0 · primary/method/architecture/GPU 0 · not submission-ready",
-    requirement: "exact preregistered P0 → method-free P1 adequacy → direct baselines → bounded development → fresh outer test",
+    status: "Target locked · active shortlist 0 after open-CTA P0 execution-incomplete · no method/architecture/GPU · not submission-ready",
+    requirement: "fresh problem audit → method-free adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
-      title: "Physical-coordinate lesion-instance commutation enters P0",
-      copy: "The conditional question is whether lesion cardinality, physical surfaces and morphometry remain renderings of one instance representation when the same CTA is placed on different voxel grids. Spacing-aware resampling, continuous implicit segmentation, resolution-invariant latents, random finite-set detection, LesionDETR and aneurysm shape/topology losses are all direct priors. The residual gap is their joint physical-instance commutation with real small/multiple-lesion benefit, not any component alone.",
-      status: "32/40 conditional shortlist · P0 registered before DICOM header/STL · primary/model/GPU 0",
+      title: "Physical-coordinate P0 closes execution-incomplete",
+      copy: "The 32/40 question asked whether cardinality, physical surfaces and morphometry remain renderings of one lesion-instance representation across grids. Exact b437875… stopped at an undefined-length DICOM Procedure Code Sequence outside the frozen minimal parser. The scientific gate was not evaluated; PixelData and STL were not accessed. The registered no-repair/no-rerun rule closes this version without claiming a data or hypothesis failure.",
+      status: "Execution-incomplete · no scientific verdict · active shortlist/model/GPU 0",
       url: "../docs/open-cta-physical-grid-audit-2026-08-09.md"
     },
     {
@@ -173,8 +173,8 @@ window.AURORA_DATA = Object.freeze({
     ["Axis", "Spacing-aware resampling", "Implicit / resolution-invariant output", "Probabilistic lesion set", "Conditional residual gap"],
     ["Already occupied", "Semantic grid normalization", "Continuous coordinate or common latent", "Variable cardinality + set matching", "None of these components alone"],
     ["Required baseline", "Consispace-style", "Implicit decoder / resolution-invariant AE", "RFS detector / LesionDETR", "Joint cardinality–surface–morphometry commutation"],
-    ["Missing evidence", "Task gain beyond resize", "Native-grid physical fidelity", "Tiny/multiple-lesion calibration", "P0 physical frame + P1 nontriviality + prospective gain"],
-    ["Current boundary", "Direct prior", "Direct prior", "Direct prior", "32/40 · P0 only · no model/GPU"]
+    ["Missing evidence", "Task gain beyond resize", "Native-grid physical fidelity", "Tiny/multiple-lesion calibration", "P0 gate never evaluated; P1 unopened"],
+    ["Current boundary", "Direct prior", "Direct prior", "Direct prior", "Closed execution-incomplete · no repair/model/GPU"]
   ],
   gates: [
     {
@@ -187,8 +187,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "P0",
       title: "Are the open-CTA physical units and frames auditable?",
-      copy: "등록된 P0는 172 case의 first/upper-median/last DICOM header 516개를 PixelData 전에만 읽고 122 STL의 CRC, geometry, metadata-volume scale와 DICOM frame alignment를 aggregate-only로 검사한다. 통과 전 split unit은 cta_case다.",
-      state: "Prospectively registered before DICOM header/STL · all pass opens method-free P1 only · any fail closes candidate",
+      copy: "Exact b437875…는 일부 DICOM prefix 접근 뒤 (0008,1032) undefined-length sequence에서 frozen parser가 exit 1을 냈다. PixelData/STL은 접근하지 않았고 threaded early exit로 완료 header 수도 미집계다.",
+      state: "Execution-incomplete · scientific gate not evaluated · no parser repair/rerun/P1 · candidate closed",
       blocking: true
     },
     {
@@ -314,8 +314,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "Open multi-center CTA 2026",
-      role: "conditional physical-coordinate grid-commutation P0 only",
-      provenance: "ZIP64+metadata range-audited · 172 CTA series · 90 controls/82 positive · 122 lesions/24 multi-lesion cases · P0 registered before DICOM header/STL · no model/GPU · CC BY 4.0"
+      role: "closed physical-grid P0 history; no active primary role",
+      provenance: "172 CTA series · P0 execution-incomplete after partial header prefixes · no PixelData/STL · scientific gate unevaluated · no repair/rerun/model/GPU · CC BY 4.0"
     },
     {
       name: "AneuX",
@@ -324,6 +324,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "execution",
+      title: "Open-CTA P0 is execution-incomplete and closes without repair",
+      copy: "Exact b437875f884346d7f0fada68f089981664ae2a3c passed Quality and Pages before the one-shot run. The frozen parser then exited at undefined-length DICOM tag (0008,1032) after 22.53 seconds. The scientific gate and result JSON do not exist; PixelData and STL were not accessed. We do not repair or rerun the parser, do not open P1, and do not call this a scientific data or hypothesis failure. Active shortlist, method, architecture, GPU and outer test return to zero.",
+      files: ["results/open_cta_physical_p0_execution_20260809.json", "results/README.md", ".github/workflows/quality.yml", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "AGENTS.md", "README.md", "docs/open-cta-physical-grid-audit-2026-08-09.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "decision",

@@ -1,13 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.3-draft · 2026-08-09
+버전: 3.4-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
-## P0-C · Open-CTA physical-coordinate asset gate · prospectively registered
+## P0-C · Open-CTA physical-coordinate asset gate · execution-incomplete, closed
 
 후보 질문은 동일 CTA를 deterministic하게 다른 voxel grid로 표현하더라도 병변
 cardinality, 물리 좌표 surface와 morphometry가 하나의 lesion-instance 표현에서
@@ -44,6 +44,20 @@ metadata/header thickness match, observed thickness ratio ≥2, STL geometry,
 - 어느 outcome도 architecture, GPU, outer test, paper contribution 또는
   submission identity를 열지 않는다.
 
+### Observed one-shot execution
+
+Exact source `b437875f884346d7f0fada68f089981664ae2a3c`, config SHA-256
+`278b95c…`의 실행은 22.53초 뒤 DICOM `(0008,1032) Procedure Code Sequence`가
+undefined-length로 나타난 지점에서 frozen minimal parser의 `OpenCTAP0Error`와
+exit 1로 종료됐다. Threaded early exit라 완료 header 수를 집계하지 않는다.
+PixelData는 decode·inspect하지 않았고 STL payload, model과 GPU에는 접근하지
+않았다. Scientific 12-check gate는 미평가이고 P0 result file은 없다.
+
+등록된 parser-repair/same-contract-rerun 금지에 따라 P0r을 만들지 않고 후보를
+닫는다. 이를 scientific P0 fail이나 asset inadequacy로 relabel하지 않는다.
+P1, method, GPU와 outer test는 모두 unauthorized다. Public provenance는
+`results/open_cta_physical_p0_execution_20260809.json`이다.
+
 ## P0-T · TopAneu attachment source audit · conditional lead, not registered for execution
 
 공식 challenge/live data/registered design과 직접 선행연구를 대조한 결과,
@@ -70,7 +84,7 @@ CPU/read-only로 검사한다. P0-T pass는 method-free P1만 열고 model/GPU�
 
 ## S0 · goal-oriented segmentation gate · closed at asset component
 
-현재 conditional shortlist는 P0-C 한 개지만 primary problem은 미선정이다.
+현재 active shortlist는 0개이고 primary problem은 미선정이다.
 Goal-oriented hemodynamic segmentation의
 staging v2와 solver preflight v1은 S0a 전 operational execution-incomplete로,
 asset component는 exact source `ef547a4…`의 5/9 scientific fail로 보존한다.

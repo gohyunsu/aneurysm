@@ -44,30 +44,31 @@
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
           voxel grid가 물리적 표면과 어떻게 다른지, GNN은 무엇이며 왜
           그 자체가 novelty가 아닌지, 과거 AURORA 후보들이 왜 실패했는지,
-          현재 physical-coordinate 후보는 모델 전에 무엇부터 검증하는지
+          최근 physical-coordinate 후보가 모델 전에 어떤 검증에서 멈췄는지
           설명합니다.
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>조건부 문제 후보는 하나지만 선택된 모델은 없습니다.</strong>
+          <strong>현재 활성 문제 후보와 선택된 모델은 모두 없습니다.</strong>
           <p>
             같은 CTA를 다른 voxel grid에 놓아도 병변 수, 물리 좌표 surface와
-            morphometry가 하나의 lesion-instance 표현에서 함께 일관되어야
-            한다는 질문이 32/40 conditional shortlist에 있습니다. 아직
-            primary problem은 아니며 GNN·U-Net·implicit field·DETR 어느 것도
-            선택하지 않았습니다.
+            morphometry가 함께 일관되어야 한다는 질문은 source-only 평가에서
+            32/40을 받았습니다. 그러나 등록된 P0가 과학 지표를 계산하기 전에
+            실행 불완전으로 끝났고 후보를 닫았으므로, 이를 현재 문제나
+            architecture로 선택하지 않습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>다음 단계는 등록된 P0 asset audit 한 번입니다.</strong>
+          <strong>다음 단계는 별개의 fresh problem audit입니다.</strong>
           <p>
-            172 case의 DICOM header 516개를 PixelData 전에만 읽고 122 STL의
-            CRC, physical frame과 metadata volume scale을 검사합니다. 모두
-            통과해도 learned method 없는 P1 rasterization audit만 열립니다.
-            하나라도 실패하면 수리 없이 후보를 닫습니다.
+            P0는 frozen minimal parser가 PixelData 앞의 undefined-length
+            Procedure Code Sequence <code>(0008,1032)</code>를 만나 종료됐습니다.
+            PixelData와 STL은 열지 않았고 scientific gate에는 판정이 없습니다.
+            Parser를 고치거나 같은 계약을 재실행하거나 P1·GPU로 넘어가지
+            않습니다.
           </p>
-          <a href="../docs/open-cta-physical-grid-audit-2026-08-09.md">현재 candidate와 P0 읽기 ↗</a>
+          <a href="../docs/open-cta-physical-grid-audit-2026-08-09.md">닫힌 candidate와 P0 기록 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -364,9 +365,9 @@
             <p class="eyebrow">04 · CURRENT BOUNDARY</p>
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
-              현재 P0는 network가 아닙니다. Case unit, DICOM physical geometry와
-              STL reference가 grid-commutation 질문을 실제로 평가할 수 있는지
-              먼저 확인합니다. 아래의 graph/operator stack은 현재 후보가 아니라
+              P0는 network가 아니라 asset audit이었고, frozen parser가
+              undefined-length sequence에서 멈춰 scientific gate를 평가하지
+              못했습니다. 아래의 graph/operator stack은 현재 후보가 아니라
               실패한 과거 연구선의 구조 설명입니다.
             </p>
           </header>
@@ -374,17 +375,17 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Conditional P0 후보는 하나지만 primary problem과 선택된 architecture는 없습니다. P0/P1 전에 implicit decoder, DETR, GNN 또는 topology loss를 고르지 않습니다. 아래 graph/token/query stack은 실패한 BC-operator 연구선의 역사 기록입니다.</p>
+              <p>현재 active shortlist, primary problem과 선택된 architecture는 모두 0입니다. 닫힌 P0를 수리하거나 P1로 확장해 implicit decoder, DETR, GNN 또는 topology loss를 고르지 않습니다. 아래 graph/token/query stack은 실패한 BC-operator 연구선의 역사 기록입니다.</p>
             </aside>
             <article>
-              <span>CURRENT · P0 REGISTERED</span>
-              <div><h3>Metadata/index → bounded header/STL read → all-pass decision</h3><p>172 case의 study/patient key, 516 header의 series geometry, 122 STL의 CRC·volume scale·DICOM frame을 aggregate-only로 검사합니다. PixelData와 model은 읽지 않습니다.</p></div>
-              <b>상태</b><small>conditional shortlist 1 · primary/model/GPU 0</small>
+              <span>CLOSED · P0 EXECUTION-INCOMPLETE</span>
+              <div><h3>Metadata/index → partial header prefixes → parser stop</h3><p>일부 선택 DICOM prefix를 읽던 중 <code>(0008,1032)</code> undefined-length sequence가 frozen parser 범위를 벗어났습니다. 정확한 완료 header 수는 알 수 없고 PixelData·STL·model에는 접근하지 않았습니다.</p></div>
+              <b>상태</b><small>scientific verdict 0 · active shortlist 0</small>
             </article>
             <article>
-              <span>CURRENT · WHY NO MODEL YET</span>
-              <div><h3>P0 pass → method-free P1 only</h3><p>STL을 미리 고정한 physical grids에 rasterize해 component cardinality, physical volume/extent와 surface distance가 standard preprocessing에서도 실제로 흔들리는지 먼저 측정합니다. 안정적이면 후보를 닫습니다.</p></div>
-              <b>kill rule</b><small>no nontrivial grid effect · no method</small>
+              <span>CURRENT · WHY NO MODEL</span>
+              <div><h3>No repair, rerun, P1 or GPU</h3><p>실행 장애를 data inadequacy나 가설 실패로 바꾸지 않습니다. 동시에 결과를 본 뒤 parser를 고쳐 동일 계약을 반복하지도 않습니다. 다음 후보는 별개의 문제 수준 근거와 새 prospective gate가 필요합니다.</p></div>
+              <b>다음</b><small>fresh problem audit · architecture unselected</small>
             </article>
             <article>
               <span>HISTORY 01 · NORMALIZE</span>
@@ -914,7 +915,7 @@
           </header>
 
           <div class="gate-explainer">
-            <article><span>P0-C · REGISTERED</span><div><h3>Open CTA의 case unit과 physical frame이 질문을 지지하는가?</h3><p>516 DICOM header를 PixelData 전에만 읽고 122 STL의 CRC, finite surface, metadata volume scale와 DICOM frame alignment를 검사합니다. Split unit은 patient key 확인 전 `cta_case`입니다.</p></div><b>all pass → method-free P1 only · any fail → close</b></article>
+            <article><span>P0-C · EXECUTION-INCOMPLETE</span><div><h3>Open CTA의 case unit과 physical frame이 질문을 지지하는가?</h3><p>Frozen parser가 일부 DICOM header prefix를 읽다가 PixelData 앞 undefined-length <code>(0008,1032)</code>에서 멈췄습니다. PixelData와 STL은 열지 않았고 12-check scientific gate는 평가되지 않았습니다.</p></div><b>no verdict · no repair/rerun/P1/GPU · candidate closed</b></article>
             <article><span>S0a · CLOSED</span><div><h3>영상–표면 linkage가 정확히 연결되는가?</h3><p>CMHA asset component는 5/9에 그쳤습니다. 105 lesion exact triplet은 0개였고 NIfTI/STL header는 열지 않았습니다.</p></div><b>S0a not evaluated · candidate closed</b></article>
             <article><span>S0b · NOT REGISTERED</span><div><h3>Dice와 functional error가 정말 다른가?</h3><p>Smooth surface perturbation과 adjoint validity를 검사하려던 설계지만 asset early-stop 뒤 실행하지 않습니다.</p></div><b>solver v2/model/GPU blocked</b></article>
             <article><span>P0-T · HISTORICAL LEAD</span><div><h3>Vascular attachment가 실제 TopAneu supervision으로 식별되는가?</h3><p>Source audit은 29/40입니다. 사용자가 terms를 직접 수락한 뒤에만 417 scan/409 patient, 52-class mapping, silver vessel provenance와 bifurcation ambiguity를 CPU/read-only로 감사할 수 있습니다. Open CTA는 이 supervision의 대체물이 아닙니다.</p></div><b>below admission · terms/payload/model/GPU 0</b></article>

@@ -26,6 +26,16 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `open_cta_physical_p0_execution_20260809.json`: exact public source
+  `b437875f884346d7f0fada68f089981664ae2a3c`의 one-shot P0
+  execution-incomplete record. DICOM `(0008,1032) Procedure Code Sequence`의
+  undefined-length element가 frozen minimal parser 범위 밖이어서 22.53초 뒤
+  exit 1이었다. Scientific gate와 P0 result는 없고 완료 header 수도 미집계다.
+  PixelData는 decode·inspect하지 않았고 STL, model과 GPU에는 접근하지 않았다.
+  Parser repair/rerun/P1 없이 후보를 닫으며 scientific P0 fail이나 data
+  inadequacy로 해석하지 않는다. Artifact SHA-256은
+  `538725c9901039169cc6e747a112630f327411c5594d021edf9b76fd913f950b`다.
+
 - `open_multicenter_cta_metadata_discovery_20260809.json`: Zenodo `15697196`
   공개 archive의 exploratory byte-range discovery. 25,578,845,008-byte ZIP64의
   central directory와 16,458-byte metadata CSV만 읽어 149,329 DICOM/122 STL,

@@ -19,18 +19,22 @@
 서버 사이에 임의 복제하지 않으며, `junjinyong`에서 필요한 read-only staging과
 container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않는다.
 
-## 2026-08-09 · Open-CTA physical-coordinate P0 registration
+## 2026-08-09 · Open-CTA physical-coordinate P0 execution-incomplete
 
-- 현재 conditional shortlist는 open-CTA P0 한 개지만 primary problem,
-  architecture와 learned experiment는 아직 없다.
+- Exact public source `b437875f884346d7f0fada68f089981664ae2a3c`의
+  registered P0는 local CPU/network에서 한 번 실행했다. GPU/PBS experiment가
+  아니다.
 - P0는 로컬 CPU의 official Zenodo HTTP byte-range audit이다. 516 DICOM member의
   compressed prefix를 PixelData tag 전까지만 읽고 122 STL을 in-memory로
   CRC/physical-frame 감사한다. Full archive staging, PixelData decode, raw
   retention, identifier publication과 GPU는 금지한다.
-- 실행은 public preregistration commit과 clean worktree를 요구한다. 결과를 본
-  뒤 parser, tolerance, threshold나 selection을 고쳐 같은 P0를 반복하지 않는다.
-- P0가 통과해도 method-free P1 등록만 가능하다. `junjinyong` PBS GPU job은
-  P1과 별도 method/baseline contract 전까지 제출하지 않는다.
+- 실제 실행은 22.53초 뒤 DICOM `(0008,1032) Procedure Code Sequence`의
+  undefined-length element가 frozen minimal parser 범위 밖이어서 exit 1이었다.
+  Threaded early exit로 완료 header 수는 미집계다. PixelData를 decode·inspect하지
+  않았고 STL 단계에는 도달하지 않았다. Scientific gate와 P0 result는 없다.
+- 결과를 본 뒤 parser, tolerance, threshold나 selection을 고쳐 같은 P0를
+  반복하지 않는다. 후보는 execution-incomplete/no scientific verdict로 닫고
+  P1과 `junjinyong` PBS GPU job을 제출하지 않는다.
 - `introai9`는 계속 source asset read-only 역할이고 이 공개 Zenodo P0를 대신
   실행하거나 GPU 서버로 사용하지 않는다.
 

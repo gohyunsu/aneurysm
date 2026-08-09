@@ -4,12 +4,13 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 conditional problem shortlist는 **1개**지만 primary problem은 아직
-선정하지 않았습니다. 새 후보는 같은 CTA의 voxel grid를 바꿔도 병변 개수,
-물리 좌표 표면과 morphometry가 하나의 lesion-instance 표현에서 일관되게
-유도되어야 한다는 **physical-coordinate grid commutation**입니다. Source-only
-점수는 32.0/40으로 P0 실행 기준과 정확히 같으며, method·architecture·GPU·outer
-test와 paper identity는 모두 0입니다. 질문, 직접 선행과 kill rule은
+현재 active problem shortlist는 다시 **0개**입니다. 같은 CTA의 voxel grid를
+바꿔도 병변 개수, 물리 좌표 표면과 morphometry가 하나의 lesion-instance
+표현에서 일관되어야 한다는 physical-coordinate 후보는 source-only 32.0/40으로
+P0에 진입했지만, exact `b437875…` one-shot 실행이 DICOM undefined-length
+Procedure Code Sequence에서 frozen parser incompatibility로 exit 1이었습니다.
+Scientific gate는 미평가이며 method·architecture·GPU·outer test와 paper
+identity는 모두 0입니다. 질문, 직접 선행과 정확한 판정은
 [`open-CTA physical-grid audit`](docs/open-cta-physical-grid-audit-2026-08-09.md)에
 있습니다.
 
@@ -19,9 +20,13 @@ test와 paper identity는 모두 0입니다. 질문, 직접 선행과 kill rule�
 등록 시점에는 DICOM header·PixelData와 STL payload를 읽지 않았습니다.
 [`P0 contract`](configs/open_cta_physical_p0.json)는 516개 DICOM header를
 PixelData tag 전까지만 읽고 122개 STL의 CRC·물리 frame·volume scale을
-검사하도록 prospectively 고정했습니다. P0 pass는 learned method 없는 P1
-rasterization/task-adequacy audit만 열며, 하나라도 실패하면 threshold repair
-없이 후보를 닫습니다. 기존 aggregate는
+검사하도록 prospectively 고정했습니다. 실제 실행은 일부 DICOM compressed
+prefix/header semantics까지 읽은 뒤 `(0008,1032)` undefined-length sequence에서
+중단됐습니다. PixelData는 decode·inspect하지 않았고 STL에는 도달하지
+않았습니다. Parser 사후 수리와 same-contract rerun을 하지 않으며 후보를
+`execution-incomplete/no scientific verdict`로 닫았습니다. 실행 기록은
+[`P0 execution record`](results/open_cta_physical_p0_execution_20260809.json),
+기존 discovery는
 [`metadata discovery`](results/open_multicenter_cta_metadata_discovery_20260809.json)에
 있습니다.
 
@@ -54,7 +59,7 @@ vascular-anatomy pretraining에는 쓸 수 있지만, 기각된 annotation-selec
 estimand의 대체 데이터가 아닙니다. 어느 image/annotation payload도 읽지
 않았고 method, GPU와 outer test는 열리지 않았습니다.
 
-가장 최근에 닫은 candidate는 **goal-oriented hemodynamic segmentation**입니다.
+Open-CTA 전에 닫은 candidate는 **goal-oriented hemodynamic segmentation**입니다.
 CMHA에 99 patient-level case directory와 105 lesion table row가 있었지만,
 105 lesion을 CTA와 두 STL에 연결하는 explicit identifier contract가 없었고
 required triplet은 0/105였습니다. NIfTI/STL geometry는 linkage 전제조건이
@@ -68,17 +73,18 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 실패 이력의 연속성을 위해 유지하지만,
-> 현재는 conditional P0 후보만 있고 primary problem, 방법명과 architecture는
-> 없습니다. 닫힌 S0a를 수리하거나 GNN·U-Net·training config를 먼저 고르지
-> 않고, P0/P1이 데이터·estimand·direct-prior gap을 독립적으로 통과해야 합니다.
+> 현재 active problem, primary problem, 방법명과 architecture는 없습니다.
+> 닫힌 P0/S0a를 수리하거나 GNN·U-Net·training config를 먼저 고르지 않고,
+> fresh problem audit가 데이터·estimand·direct-prior gap을 독립적으로
+> 통과해야 합니다.
 
-## 현재 단계 · conditional shortlist 1, primary problem/method/GPU 없음
+## 현재 단계 · active shortlist 0, primary problem/method/GPU 없음
 
-현재 허용된 다음 작업은 clean public commit에서 등록된 open-CTA P0를 정확히
-한 번 실행하고 frozen pass/close rule을 따르는 것입니다. Pass하더라도 별도
-method-free P1만 등록할 수 있습니다. P1이 lesion cardinality, physical surface와
-morphometry의 비자명한 grid sensitivity를 입증하기 전에는 executable headline
-model, GPU job, outer test와 submission identity가 없습니다.
+현재 허용된 다음 작업은 open-CTA parser를 수리하거나 P0를 재실행하는 것이
+아니라 독립된 fresh problem-level primary-source/asset audit입니다. 새 후보가
+task unit, supervision, direct-prior residual gap과 method-free adequacy를
+통과하기 전에는 executable headline model, GPU job, outer test와 submission
+identity가 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.

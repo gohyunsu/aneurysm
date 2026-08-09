@@ -4,6 +4,38 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Open-CTA P0 is execution-incomplete and the candidate closes
+
+- Prospective source `b437875f884346d7f0fada68f089981664ae2a3c`는 Quality
+  run `31288906410`과 Pages run `31288906069`이 모두 성공했고 live site 배포를
+  확인한 뒤 clean worktree에서 정확히 한 번 실행했다. Frozen config SHA-256은
+  `278b95c1e77c0918eb894fd5431cb8d1d8859d693184026827987ef659c3a551`다.
+- 실행은 22.53초 뒤 selected DICOM header의 `(0008,1032) Procedure Code
+  Sequence`가 undefined-length로 나타난 지점에서 minimal parser의
+  `OpenCTAP0Error`, exit 1로 종료됐다. Threaded early exit 때문에 완료 header
+  수를 추측하지 않는다.
+- ZIP64 index, metadata와 일부 DICOM compressed prefix/header semantics에는
+  접근했지만 PixelData value는 decode·inspect하지 않았고 STL 단계에는
+  도달하지 않았다. Raw payload, identifier, model, checkpoint와 GPU는 보존하거나
+  공개하지 않았다.
+- Scientific 12-check gate는 미평가이고 P0 result JSON은 생성되지 않았다.
+  이를 scientific P0 fail, asset inadequacy 또는 grid-commutation 가설 반증으로
+  표현하지 않는다.
+- 등록 계약대로 parser repair, same-contract rerun, P0r과 P1을 만들지 않는다.
+  후보는 `execution-incomplete/no scientific verdict`로 닫고 active shortlist는
+  0으로 돌아간다. 다음은 독립된 fresh problem-level audit뿐이다.
+- Public execution record SHA-256은
+  `538725c9901039169cc6e747a112630f327411c5594d021edf9b76fd913f950b`다.
+- 영향 파일: `results/open_cta_physical_p0_execution_20260809.json`,
+  `results/README.md`, `.github/workflows/quality.yml`, `configs/aurora_v1.json`, `src/aurora/protocol.py`,
+  `tests/test_protocol.py`, `AGENTS.md`, `README.md`,
+  `docs/open-cta-physical-grid-audit-2026-08-09.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`, `docs/data-acquisition.md`,
+  `docs/server-execution.md`, `site/index.html`, `site/learn.html`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Open-CTA physical-coordinate candidate enters a P0-only shortlist
 
 - Fresh direct-prior red team은 spacing-aware resampling, implicit continuous

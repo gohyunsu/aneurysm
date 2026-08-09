@@ -5,7 +5,7 @@
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
 
-## 0. Current conditional gap · physical-coordinate lesion-instance commutation
+## 0. Closed conditional gap · physical-coordinate lesion-instance commutation
 
 새 후보는 voxel spacing normalization, implicit segmentation 또는 lesion-set
 prediction 중 하나를 다시 제안하지 않는다. 같은 native CTA를 서로 다른 grid로
@@ -35,6 +35,12 @@ mask를 유도하면서 cardinality·surface·morphometry의 commutation을 공�
 acquisition이 아니며 threshold-derived STL은 discretization-free anatomy truth가
 아니다. 등록된 P0/P1이 비자명한 failure와 평가 가능성을 보이기 전에는 이 gap도
 확정 contribution이 아니다.
+
+Exact `b437875…` P0는 DICOM undefined-length Procedure Code Sequence에서 frozen
+minimal parser incompatibility로 execution-incomplete 종료됐다. 이는 위 문헌
+gap의 반증이나 data inadequacy가 아니지만, 등록 계약상 parser repair/rerun과
+P1을 열 수 없어 이 version의 gap hypothesis는 active shortlist에서 제거한다.
+다음 current gap은 fresh problem-level audit에서 다시 정한다.
 
 ## 0-T. Previous conditional gap · patient-specific vascular attachment
 

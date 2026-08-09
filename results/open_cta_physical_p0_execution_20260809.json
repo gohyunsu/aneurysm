@@ -1,0 +1,60 @@
+{
+  "schema_version": "aurora.open_cta_physical_p0.execution_record.v1",
+  "experiment_id": "open_cta_physical_grid_p0",
+  "as_of": "2026-08-09",
+  "status": "execution_incomplete_no_scientific_verdict_candidate_closed",
+  "source_commit": "b437875f884346d7f0fada68f089981664ae2a3c",
+  "config": {
+    "path": "configs/open_cta_physical_p0.json",
+    "sha256": "278b95c1e77c0918eb894fd5431cb8d1d8859d693184026827987ef659c3a551",
+    "status_at_execution": "preregistered_before_any_dicom_header_or_stl_payload"
+  },
+  "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m aurora.open_cta_physical_p0 --config configs/open_cta_physical_p0.json --output results/open_cta_physical_p0_20260809.json --repo-root .",
+  "environment": {
+    "python": "3.13.12",
+    "platform": "linux",
+    "gpu_requested": false,
+    "model_or_checkpoint_accessed": false
+  },
+  "execution": {
+    "process_exit_code": 1,
+    "elapsed_seconds": 22.527639015,
+    "result_file_created": false,
+    "last_completed_stage": "zip64_index_and_metadata_then_partial_threaded_dicom_header_prefix_access",
+    "scientific_gate_evaluated": false,
+    "passed_checks": null,
+    "total_checks": 12
+  },
+  "failure": {
+    "stage": "selected_dicom_header_parse",
+    "exception": "OpenCTAP0Error",
+    "dicom_tag": "(0008,1032)",
+    "dicom_tag_semantics": "Procedure Code Sequence",
+    "reason": "undefined_length_sequence_occurred_before_pixel_data_and_was_outside_the_frozen_minimal_parser_contract",
+    "selected_header_prefix_count_completed": null,
+    "count_note": "The threaded run exited on the first surfaced exception; no reliable aggregate count was emitted."
+  },
+  "access_boundary": {
+    "zip64_central_directory_accessed": true,
+    "metadata_csv_accessed": true,
+    "some_dicom_compressed_prefixes_accessed": true,
+    "dicom_header_semantics_partially_accessed": true,
+    "dicom_pixel_values_decoded_or_inspected": false,
+    "stl_payload_accessed": false,
+    "full_archive_downloaded": false,
+    "raw_medical_payload_retained": false,
+    "individual_identifier_published": false
+  },
+  "decision": {
+    "candidate_status": "closed_after_registered_execution_incomplete",
+    "scientific_interpretation": "No scientific P0 pass or fail is available; the failure is operational parser incompatibility, not evidence against the dataset or grid-commutation hypothesis.",
+    "same_contract_rerun": false,
+    "parser_repair": false,
+    "p1_authorized": false,
+    "method_authorized": false,
+    "architecture_authorized": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_only"
+  }
+}

@@ -1,7 +1,15 @@
 # 2026-08-09 open-CTA physical-coordinate lesion-instance audit
 
-상태: **conditional shortlist 1 · provisional score 32.0/40 · P0 prospectively
-registered before DICOM header/STL payload · primary problem/method/architecture/GPU 0**
+상태: **P0 execution-incomplete · scientific gate not evaluated · candidate closed ·
+same-contract rerun/parser repair 0 · active shortlist/primary/method/GPU 0**
+
+> **실행 후 판정:** exact public source
+> `b437875f884346d7f0fada68f089981664ae2a3c`의 one-shot P0는 DICOM
+> `(0008,1032) Procedure Code Sequence`가 undefined-length로 나타난 지점에서
+> frozen minimal parser가 exit 1을 내어 종료됐다. 이는 dataset이나
+> grid-commutation 가설의 scientific fail이 아니다. Gate는 미평가이고 result
+> JSON은 생성되지 않았다. 등록 계약에 parser 사후 수리와 재실행을 금지했으므로
+> 후보는 operationally 닫고 execution record만 보존한다.
 
 이 문서는 TopAneu attachment 후보나 닫힌 RSNA lesion-set 후보를 다른 이름으로
 복원하지 않는다. 완전 공개된 CTA–STL 자료가 별도의 **physical-coordinate
@@ -92,7 +100,7 @@ aneurysm 이득**이 모두 있어야 한다. 이 결합도 P0/P1과 strong-base
 선정이 아니라 P0를 한 번 실행할 가치가 있다는 의미다. Direct-prior gap은
 3.0에 불과하므로 P0/P1에서 구조적 failure가 작으면 후보를 닫는다.
 
-## 5. Prospective P0 계약
+## 5. 실행 전에 고정했던 prospective P0 계약
 
 Executable source of truth는
 [`configs/open_cta_physical_p0.json`](../configs/open_cta_physical_p0.json)이다.
@@ -119,9 +127,10 @@ scale와 STL–DICOM frame alignment를 모두 요구한다.
 - 어느 outcome도 method, architecture, GPU, outer test, contribution 또는
   submission identity를 열지 않는다.
 
-## 6. P0 뒤에만 가능한 P1
+## 6. P0 pass 때만 가능했던 P1 · 미실행
 
-P1은 learned model이 아니다. P0가 통과한 경우에만, STL을 native grid와 미리
+아래는 등록 당시의 조건부 다음 단계이며 실제로는 열리지 않았다. P1은 learned
+model이 아니다. P0가 통과한 경우에만, STL을 native grid와 미리
 정한 alternate physical grids에 rasterize해 다음을 측정하도록 별도 contract를
 결과 전에 고정한다.
 
@@ -134,8 +143,29 @@ Grid change가 비자명한 target 변화를 만들지 않거나 standard baseli
 포화하면 후보를 닫는다. P1 결과를 본 뒤 continuous decoder나 topology loss를
 선택하지 않는다. Method 설계는 별도 P2에만 가능하다.
 
-## 7. 현재 판정
+## 7. 실제 P0 실행과 판정
 
-현재는 **conditional shortlist 1, P0 registered, primary problem 0**이다. 이
-후보는 GNN 기반도, implicit decoder 기반도, DETR 기반도 아니다. 등록된 P0의
-실제 asset evidence가 다음 판정을 결정한다.
+P0는 clean public commit `b437875…`의 Quality와 Pages 성공을 확인한 뒤 exact
+config SHA-256
+`278b95c1e77c0918eb894fd5431cb8d1d8859d693184026827987ef659c3a551`로
+한 번 실행했다. 22.53초 뒤 selected DICOM header parse 단계에서
+`OpenCTAP0Error`와 exit 1이 발생했다. 공식 DICOM 표준상 `(0008,1032)`는
+[Procedure Code Sequence](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_c.4.14.html)다.
+
+Threaded early exit 때문에 성공적으로 완료된 header 수를 신뢰성 있게 집계하지
+않는다. 확인 가능한 access boundary는 다음과 같다.
+
+- ZIP64 central directory와 metadata CSV: 접근함
+- 일부 selected DICOM compressed prefix/header semantics: 접근함; 정확한 수 미집계
+- DICOM PixelData value: decode·inspect하지 않음
+- STL payload: 접근하지 않음
+- raw payload/identifier publication, model, checkpoint, GPU: 0
+- scientific 12-check gate와 P1 authorization: 미평가/0
+
+따라서 이 결과를 `failed P0`나 asset inadequacy로 쓰지 않는다. 동시에 등록된
+same-contract parser repair/rerun 금지와 failure action을 지켜 후보는
+**closed after execution-incomplete, no scientific verdict**로 보존한다. Public
+execution record는
+[`open_cta_physical_p0_execution_20260809.json`](../results/open_cta_physical_p0_execution_20260809.json)이다.
+다음 허용 작업은 이 parser를 고치는 것이 아니라 별도 fresh problem-level
+primary-source/asset audit이다.

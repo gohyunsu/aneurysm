@@ -2,15 +2,14 @@
 
 최종 검토일: 2026-08-09 KST
 
-상태: **target locked · conditional shortlist 1 at preregistered open-CTA P0 ·
+상태: **target locked · active shortlist 0 after open-CTA P0 execution-incomplete ·
 primary problem/method/architecture/GPU 0 · not submission-ready**
 
-2026-08-09 fresh direct-prior audit은 open-CTA physical-coordinate lesion-instance
-grid commutation을 32.0/40의 조건부 후보로 남겼다. 공개 172-case CTA는 등록
-시점에 metadata와 ZIP index만 읽었고 DICOM header·PixelData/STL payload는
-0이다. Prospectively registered P0는 asset/physical-frame 전제만 검사하며,
-통과해도 method-free P1만 연다. TopAneu attachment lead는 29.0/40,
-terms/payload 0으로 별도 보존한다.
+2026-08-09 open-CTA physical-coordinate 후보는 32.0/40으로 P0에 진입했지만,
+exact `b437875…` one-shot 실행이 DICOM undefined-length Procedure Code Sequence를
+frozen parser가 처리하지 못해 exit 1로 종료됐다. Scientific gate는 미평가이고
+PixelData/STL/model/GPU access는 0이다. Parser repair/rerun 없이 후보를 닫았다.
+TopAneu attachment lead는 29.0/40, terms/payload 0으로 별도 보존한다.
 
 ## 1. 제출 목표와 현재 결론
 
@@ -21,10 +20,8 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
 
-현재 제출 가능한 paper identity는 없다. Conditional open-CTA 후보는 같은
-CTA의 grid가 바뀔 때 cardinality, physical surface와 morphometry를 하나의
-instance representation에서 함께 보존하는 문제가 실제로 비자명한지조차
-P0/P1에서 확인하지 않았다. Partial/missing-BC AURORA, Aneumo
+현재 제출 가능한 paper identity는 없다. Open-CTA grid-commutation 문제는
+asset gate를 평가하지 못했고 P1도 열리지 않았다. Partial/missing-BC AURORA, Aneumo
 irregular-3D, cross-protocol 4D-flow, RSNA mixed-granularity lesion-set과
 goal-oriented hemodynamic segmentation을 모두 실패 또는 부적격 이력으로
 보존한다. 마지막 후보는 exact public source
@@ -165,7 +162,8 @@ Figure는 최소 두 개를 계획한다.
 | 날짜 | 결정점 | 통과하지 못하면 |
 |---|---|---|
 | 2026-08-09 | Goal-oriented S0a-A exact run | 5/9 fail로 후보 종료; solver v2 없음 |
-| 2026-08-16 | Open-CTA P0-C one-shot asset audit | any fail이면 후보 종료; pass도 method-free P1만 등록 |
+| 2026-08-09 | Open-CTA P0-C one-shot asset audit | execution-incomplete/no verdict로 후보 종료; parser repair/P1 없음 |
+| 2026-08-16 | Fresh P0 problem/asset audit | 독립 후보가 없으면 method/GPU 계속 금지 |
 | 2026-08-30 | P1 method-free adequacy | 후보 종료 또는 baseline/estimand freeze |
 | 2026-09-13 | P2와 bounded P3 등록 | outer test 봉인 불가 시 중단 |
 | 2026-09-27 | Development freeze | strong baseline과 positive validation 부재 시 P4 금지 |
@@ -181,7 +179,7 @@ Figure는 최소 두 개를 계획한다.
 허용:
 
 - 새 problem의 primary-source/asset/task-unit audit
-- clean public commit의 registered open-CTA P0-C one-shot 실행과 frozen 판정
+- open-CTA P0 execution-incomplete provenance와 실패 경계 보존
 - 사용자의 명시적 TopAneu terms 수락 뒤 prospectively registered CPU/read-only P0-T
 - 기존 실패의 public aggregate, protocol, site와 private manuscript 동기화
 - P0 전에 실행하지 않는 비교표·claim matrix 정리
@@ -192,6 +190,7 @@ Figure는 최소 두 개를 계획한다.
 - 에이전트의 TopAneu 가입·terms 수락·무등록 payload download
 - Solver preflight v2, S0b, segmentation model과 GPU job
 - P0-C/P1 전에 open-CTA model, architecture, GPU 또는 outer-test config 작성
+- Open-CTA frozen parser repair, same-contract rerun, P0r 또는 P1 등록
 - Closed checkpoint/threshold/outer-test 재사용
 - Cross-sectional rupture status를 future rupture risk로 표현
 - 실제 positive evidence 없이 method name, architecture figure 또는 contribution

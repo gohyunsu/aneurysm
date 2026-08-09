@@ -31,13 +31,11 @@ Expected raw archive total for P0 + P1 is about 17.4 GB. Extraction and derivati
   source audit retained a 29/40 conditional lead. Keep payload separate from the
   general corpus and never publish data or labels to this repository.
 - **Open multi-center CTA 2026:** the ZIP64 central directory and 16 KB metadata
-  member are already audited without full download. The conditional
-  physical-coordinate problem now has one prospectively registered P0. Execute
-  only its exact byte-range selection: 516 compressed DICOM prefixes up to the
-  PixelData tag and all 122 STL members in memory. Do not decode PixelData,
-  retain raw payload, stage the 25.58 GB archive, train a model or write
-  case-level identifiers. P0 pass authorizes only a separately registered
-  method-free P1.
+  member are already audited without full download. The registered P0 stopped
+  after partial DICOM-prefix access at an unsupported undefined-length sequence;
+  PixelData and STL were not accessed and the scientific gate was not evaluated.
+  Do not repair/rerun the parser, stage the 25.58 GB archive, register P1, train
+  a model or write case-level identifiers for this closed candidate version.
 - **ADAM / CADA:** download only when starting the CTA/MRA detection and segmentation task. They do not provide the CFD fields needed for In-PI-MGN reproduction.
 - **AneuG-Flow full archive:** useful for known-condition geometry pretraining,
   but its released BC policy does not vary across cases and it cannot support

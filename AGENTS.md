@@ -26,17 +26,20 @@ CTA는 ZIP64 central directory와 metadata CSV만 range-read했으며 DICOM/STL
 payload는 열지 않았다. 같은 날 후속 direct-prior red team은 그 공개 CTA의
 physical-coordinate lesion-instance grid-commutation 문제를 32.0/40의
 conditional shortlist로 남기고, DICOM header/STL payload 전에 exact P0를
-등록했다. P0는 asset/physical-frame adequacy만 검사하며 primary problem,
-method, architecture, GPU와 outer test는 아직 0이다.
+등록했다. Exact `b437875…` one-shot P0는 DICOM undefined-length Procedure Code
+Sequence에서 frozen parser incompatibility로 exit 1이었다. Scientific gate는
+미평가이고 PixelData/STL access는 0이다. Parser repair/rerun 없이 후보를 닫아
+active shortlist는 다시 0이다.
 
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
-- 현재 primary problem과 method는 **선택되지 않았다**. Conditional problem
-  shortlist는 open-CTA physical-grid P0 **1개**다. Source-only score 32.0/40은
-  P0 실행 기준과 정확히 같으며 primary selection이나 contribution이 아니다.
+- 현재 primary problem과 method는 **선택되지 않았다**. Active problem
+  shortlist는 **0개**다. Open-CTA physical-grid 후보의 source-only score
+  32.0/40과 registered P0 history는 보존하지만, P0가 execution-incomplete로
+  끝나 primary selection이나 contribution이 아니다.
   직전 TopAneu attachment source audit은 29.0/40으로 기준을 통과하지 못했다.
   Goal-oriented
   hemodynamic segmentation은 CTA
@@ -139,15 +142,17 @@ method, architecture, GPU와 outer test는 아직 0이다.
   range-read했다. 149,329 DICOM/122 STL, 172 case/122 lesion/24 multi-lesion
   case와 source-reported 0.5--2 mm thickness를 확인했다. 등록 시점에 DICOM
   header/PixelData와 STL payload는 0이다.
-- `configs/open_cta_physical_p0.json`은 clean public commit에서 정확히 한 번
-  실행한다. 172 case마다 first/upper-median/last header 총 516개를 PixelData tag
-  전에만 읽고, 122 STL의 CRC·geometry·metadata volume scale·DICOM physical
-  frame을 aggregate-only로 감사한다. Split unit은 patient key 확인 전
-  `cta_case`다. Full archive, raw payload, identifier와 voxel은 보존하지 않는다.
-- P0 all pass는 별도 method-free P1 rasterization/instance-stability audit만
-  등록할 수 있다. Any fail이면 parser·threshold·tolerance·selection repair 없이
-  후보를 닫는다. 어느 outcome도 method, architecture, GPU, outer test와
-  submission을 열지 않는다. Goal-oriented S0a, solver v2/S0b를 재개하지 않는다.
+- `configs/open_cta_physical_p0.json`은 clean public commit `b437875…`에서 정확히
+  한 번 실행됐다. 일부 DICOM compressed prefix/header semantics 접근 뒤
+  `(0008,1032)` undefined-length sequence가 minimal parser 범위 밖이어서 exit
+  1이었다. Threaded early exit로 완료 header 수는 미집계다. PixelData를
+  decode·inspect하지 않았고 STL payload, raw retention과 identifier publication은
+  0이다.
+- Scientific 12-check gate는 미평가이고 P1은 unauthorized다. Parser repair,
+  same-contract rerun, P0r과 이 후보의 model/GPU/outer test는 금지한다. 이를
+  scientific P0 fail이나 data inadequacy로 relabel하지 않는다. Public record는
+  `results/open_cta_physical_p0_execution_20260809.json`이다. Goal-oriented S0a,
+  solver v2/S0b도 재개하지 않는다.
 - Vessel graph/GNN, vessel-first nnU-Net, anatomy-masked pooling, location
   transformer, point-to-sphere auxiliary target, generic set prediction, mixed
   supervision, anatomy prompt, foundation model, soft vessel-distance/vesselness,
@@ -428,13 +433,13 @@ method, architecture, GPU와 outer test는 아직 0이다.
 
 ## 2. 현재 contribution 가설
 
-현재 확정 contribution과 prospective method hypothesis는 없다. Conditional
-P0 가설은 하나의 physical-coordinate lesion-instance representation에서 grid별
+현재 확정 contribution, prospective method hypothesis와 active shortlist는
+없다. 닫힌 P0 가설은 하나의 physical-coordinate lesion-instance representation에서 grid별
 cardinality·surface·morphometry가 함께 commute하는 문제다. Consispace류
 resampling, implicit continuous segmentation, resolution-invariant latent,
 random finite-set detection, LesionDETR류 set prediction과 aneurysm shape/topology
-loss는 모두 direct prior다. P0/P1에서 실제 비자명성과 direct-baseline gap이
-남기 전에는 contribution이 아니다. 닫힌 RSNA, 4D-flow와 BC-operator 가설은
+loss는 모두 direct prior다. P0가 execution-incomplete로 닫혀 P1에 도달하지
+못했으므로 contribution이 아니다. 닫힌 RSNA, 4D-flow와 BC-operator 가설은
 아래 history로만 보존한다.
 
 기존 세 축은 아래처럼 재판정한다.
@@ -781,10 +786,10 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - 자세한 단일 출처는 `docs/isbi-2027-plan.md`다.
 - 모든 기술 내용·표·그림은 official template 첫 4쪽 안에 둔다. 5쪽은
   reference, ethics, acknowledgments/COI 외 기술 내용을 금지한다.
-- 현재 primary와 headline domain은 미선정이고 conditional P0 shortlist만
-  하나다. Open-CTA P0/P1에서 데이터 의미, 식별 가능한 estimand, direct-prior
-  gap과 feasible case/patient-level evaluation을 모두 통과하기 전에는 이
-  candidate를 primary로 부르지 않는다. 과거 synthetic-CFD 3D velocity 규약은 실패한
+- 현재 primary, active shortlist와 headline domain은 미선정이다. Open-CTA
+  P0/P1은 닫혔으며 fresh problem audit에서 데이터 의미, 식별 가능한 estimand,
+  direct-prior gap과 feasible case/patient-level evaluation을 모두 통과하기
+  전에는 어떤 candidate도 primary로 부르지 않는다. 과거 synthetic-CFD 3D velocity 규약은 실패한
   Aneumo branch의 history다.
   Pressure, WSS/OSI, transient efficiency, rupture prediction과 clinical
   utility는 새 provenance와 prospective evidence 없이는 headline에서 제외한다.

@@ -41,28 +41,30 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          One conditional question.<br>
-          <em>Still no method.</em>
+          No active problem.<br>
+          <em>The failed run stays failed.</em>
         </h1>
         <p class="hero-lede">
           같은 CTA의 voxel grid를 바꿔도 병변 개수, 물리 좌표 표면과
           morphometry는 하나의 lesion-instance 표현에서 함께 일관되어야 한다.
-          이 가설은 <strong>32/40 conditional shortlist</strong>일 뿐이며,
-          DICOM header·STL 전에 등록한 P0가 asset 전제를 먼저 판정한다.
-          Primary problem, model, GPU와 outer test는 아직 없다.
+          32/40 physical-coordinate 후보의 exact P0는 DICOM undefined-length
+          sequence에서 <strong>execution-incomplete</strong>로 종료됐다. Scientific
+          gate는 미평가이고 PixelData·STL에는 접근하지 않았다. Parser를
+          수리하거나 재실행하지 않고 후보를 닫았다. Primary problem, model,
+          GPU와 outer test는 없다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
-          <a class="button ghost" href="../configs/open_cta_physical_p0.json">P0 contract ↗</a>
+          <a class="button ghost" href="../results/open_cta_physical_p0_execution_20260809.json">Execution record ↗</a>
           <a class="button ghost" href="../docs/isbi-2027-plan.md">ISBI plan ↗</a>
         </div>
       </div>
 
       <div class="hero-visual" aria-label="하나의 물리 좌표 병변 표면을 서로 다른 voxel grid에 표현하는 개념도">
-        <div class="visual-caption">CONDITIONAL CANDIDATE · P0 REGISTERED BEFORE PAYLOAD</div>
+        <div class="visual-caption">P0 EXECUTION-INCOMPLETE · NO SCIENTIFIC VERDICT</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -96,16 +98,16 @@
         </div>
         <div class="visual-legend">
           <span><i class="dot lime"></i> cardinality · surface · morphometry</span>
-          <span><i class="dot coral"></i> P0 asset evidence pending</span>
+          <span><i class="dot coral"></i> parser repair / rerun / P1 0</span>
           <span>primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Problem shortlist</span><b>1 conditional · primary 0</b></div>
-        <div><span>Current evidence</span><b>Open CTA 32/40 · P0 registered before header/STL</b></div>
+        <div><span>Problem shortlist</span><b>0 active · primary 0</b></div>
+        <div><span>Current evidence</span><b>Open CTA P0 execution-incomplete · no verdict</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>Exact P0 once · pass opens method-free P1 only</b></div>
+        <div><span>Next authorization</span><b>Fresh problem audit · no open-CTA repair/P1/GPU</b></div>
       </div>
     </section>
 
@@ -116,9 +118,10 @@
         <p>
           Spacing-aware resampling, implicit segmentation, resolution-invariant
           latent, probabilistic lesion set과 topology loss는 이미 직접 선행이다.
-          남을 수 있는 것은 이들을 나열하는 architecture가 아니라 하나의
-          물리 좌표 instance에서 cardinality·surface·morphometry가 함께
-          commute하는가이다. P0/P1이 문제의 실재성을 먼저 검증한다.
+          남을 수 있었던 것은 하나의 물리 좌표 instance에서 cardinality·surface·
+          morphometry가 함께 commute하는가였지만, frozen P0가 operationally
+          중단돼 평가하지 못했다. 이를 성능 결과로 포장하지 않고 새 문제를 다시
+          찾는다.
         </p>
       </div>
 
@@ -210,11 +213,11 @@
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
-        <h2>The asset must support<br><em>the physical question first.</em></h2>
+        <h2>A frozen run can stop<br><em>without a scientific verdict.</em></h2>
         <p>
-          아래 흐름은 network architecture가 아니라 prospectively frozen P0
-          evidence chain이다. Header·surface·physical frame이 성립해야만 learned
-          method 없는 P1을 설계할 수 있다.
+          아래 흐름은 network architecture가 아니라 exact P0 execution chain이다.
+          Frozen parser가 header 단계에서 중단됐으므로 asset checks를 pass/fail로
+          만들지 않고 branch를 닫았다.
         </p>
       </div>
 
@@ -233,7 +236,7 @@
         <button class="active" type="button" data-mode="presence">Unit</button>
         <button type="button" data-mode="point">Frame</button>
         <button type="button" data-mode="mask">Decision</button>
-        <span id="mode-description">172 CTA case의 study/patient key와 series geometry를 확인합니다.</span>
+        <span id="mode-description">Frozen parser가 undefined-length sequence에서 중단돼 unit gate에 도달하지 못했습니다.</span>
       </div>
 
       <div class="architecture-flow">
@@ -260,32 +263,32 @@
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
           <p class="arch-label">PHYSICAL CONTRACT</p>
-          <h3 id="bc-node-title">Are task units one-to-one?</h3>
-          <p id="bc-node-copy">Patient/study keys, slice geometry and STL frames must support one auditable case unit</p>
+          <h3 id="bc-node-title">Frozen parser stops</h3>
+          <p id="bc-node-copy">Undefined-length Procedure Code Sequence is outside the registered minimal parser</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
           <a class="arch-learn" href="../configs/open_cta_physical_p0.json">frozen checks</a>
         </article>
-        <div class="arch-connector"><span>all checks</span></div>
+        <div class="arch-connector"><span>exit 1</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
           <p class="arch-label">ONE-SHOT DECISION</p>
-          <h3>Pass to P1 or close</h3>
+          <h3>No scientific verdict</h3>
           <div class="dual-branch">
-            <span><b>All pass</b>register method-free P1</span>
-            <span><b>Any fail</b>close without repair</span>
+            <span><b>Not pass</b>12-check gate unevaluated</span>
+            <span><b>Not fail</b>no data inadequacy claim</span>
           </div>
           <p>No threshold, tolerance, parser or member-selection repair after outcome</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
-        <div class="arch-connector"><span>if pass only</span></div>
+        <div class="arch-connector"><span>close version</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">NEXT</p>
-          <h3>Method-free grid adequacy</h3>
-          <p>Rasterize STL on fixed grids · cardinality · surface · morphometry</p>
+          <h3>Fresh problem audit</h3>
+          <p>No parser repair · no same-contract rerun · no P1</p>
           <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>still not authorized</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -294,7 +297,7 @@
       <div class="architecture-notes">
         <article>
           <span>UNIT INTEGRITY</span>
-          <p>Patient/study key와 case mapping이 성립하지 않으면 patient split이나 model로 진행하지 않는다.</p>
+          <p>Unit gate를 평가하지 못했으므로 patient split이나 model로 진행하지 않는다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
@@ -302,7 +305,7 @@
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>P0 pass도 method-free P1만 열며, method는 별도 prospective baseline contract 뒤에만 가능하다.</p>
+          <p>Execution-incomplete를 과학적 결과로 바꾸지 않고 fresh problem audit으로 돌아간다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -560,7 +563,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>No active paper identity · conditional P0 shortlist 1 · primary problem 0</p>
+        <p>No active paper identity · active problem shortlist 0</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -568,7 +571,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Open CTA 32/40 · P0 registered before header/STL · primary/model/GPU 0</b>
+        <span>Current stage</span><b>Open CTA P0 execution-incomplete · no verdict/repair/P1 · primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

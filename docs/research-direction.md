@@ -5,26 +5,26 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid conditional shortlist 1 at preregistered P0 only · primary problem/method/architecture/GPU/outer test unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · active problem shortlist 0 · primary problem/method/architecture/GPU/outer test unselected · submission blocked
 
-2026-08-09 fresh direct-prior and open-source audit은 **physical-coordinate
-lesion-instance grid commutation**을 32.0/40의 conditional shortlist로 남겼다.
-같은 CTA를 deterministic하게 resample할 때 병변 cardinality, 물리 좌표 surface와
-morphometry가 하나의 instance 표현에서 함께 commute해야 한다는 질문이다.
-등록 시점에 공개 172-case CTA의 ZIP64 index와 metadata만 읽었고 DICOM
-header·PixelData와 STL payload는 열지 않았다. 따라서 primary problem,
-method/architecture/GPU/outer test는 여전히 0이다.
+2026-08-09 fresh direct-prior and open-source audit은 physical-coordinate
+lesion-instance grid commutation을 32.0/40의 conditional shortlist로 남겼다.
+그러나 exact `b437875…` P0가 DICOM `(0008,1032)` undefined-length sequence를
+frozen parser가 처리하지 못해 exit 1로 종료됐다. Scientific gate는 미평가이고
+result JSON은 없다. PixelData는 decode·inspect하지 않았고 STL 단계에는
+도달하지 않았다. 등록된 parser-repair/same-contract-rerun 금지에 따라 후보를
+닫았으며 active shortlist는 다시 0이다.
 
-## 0. 현재 연구 상태 · conditional shortlist 1, P0 registered
+## 0. 현재 연구 상태 · active shortlist 0 after P0 execution-incomplete
 
 현재 source of truth는
 [`open-cta-physical-grid-audit-2026-08-09.md`](open-cta-physical-grid-audit-2026-08-09.md)와
-[`configs/open_cta_physical_p0.json`](../configs/open_cta_physical_p0.json)이다.
-P0는 172 case의 first/upper-median/last DICOM header 516개를 PixelData tag 전까지만
-range-read하고, expert STL 122개의 CRC, finite/nondegenerate surface, metadata
-volume scale와 DICOM physical frame alignment를 aggregate-only로 검사한다.
-PatientID/StudyUID의 case 단위 일대일성도 확인하기 전까지 split unit은
-`cta_case`이며 patient라고 가정하지 않는다.
+[`configs/open_cta_physical_p0.json`](../configs/open_cta_physical_p0.json), 그리고
+[`results/open_cta_physical_p0_execution_20260809.json`](../results/open_cta_physical_p0_execution_20260809.json)이다.
+P0는 172 case의 first/upper-median/last DICOM header 516개와 expert STL 122개를
+감사하려 했으나 header 단계에서 operationally 중단됐다. Threaded early exit로
+완료 header 수를 집계하지 않고, patient/study 일대일성·series geometry·STL
+frame과 12-check gate 어느 것도 통과로 표시하지 않는다.
 
 Consispace류 spacing-aware resampling, implicit continuous segmentation,
 resolution-invariant latent, random-finite-set detection, LesionDETR류
@@ -32,11 +32,12 @@ variable-cardinality set prediction과 aneurysm shape/topology loss는 모두 di
 prior다. 남을 수 있는 gap은 이 요소 하나가 아니라 **하나의 물리 좌표
 lesion-instance representation에서 cardinality·surface·morphometry가 함께
 commute하고 small/multiple aneurysm에서 실제 이득을 보이는 구조**다. P0는 이
-gap의 asset 전제만 검사하며 contribution이나 성능 증거가 아니다.
+gap은 여전히 문헌상 조건부 가설일 수 있지만 이 version은 asset 전제를
+평가하지 못했으므로 contribution이나 active problem이 아니다.
 
-- P0 all pass: method-free P1 rasterization/instance-stability audit만 새로 등록한다.
-- P0 any fail: tolerance·threshold·selection repair 없이 후보를 닫는다.
-- 어느 outcome도 method, architecture, GPU, outer test 또는 submission을 열지 않는다.
+- observed: exit 1, scientific gate not evaluated, no P1 authorization.
+- same-contract parser repair/rerun: 금지; P0 실패로 소급 표기하지 않는다.
+- 다음: 별도 fresh problem-level primary-source/asset audit만 허용한다.
 
 ### 0-T. 직전 TopAneu 조건부 lead · 보존
 

@@ -8,32 +8,31 @@ scientific verdict · prior BC-operator identity inactive · cross-protocol
 asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
 supervision-semantics candidate rejected · goal-oriented hemodynamic
 segmentation asset component failed 5/9 and candidate closed · active problem
-shortlist 1 at open-CTA physical-grid P0 only · primary problem, method and
-architecture unselected · no GPU/outer test
+shortlist 0 after open-CTA physical-grid P0 execution-incomplete/no scientific
+verdict/no parser repair or rerun · primary problem, method and architecture
+unselected · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
-현재 구현하거나 선택한 headline architecture는 없다. Conditional shortlist는
-open-CTA physical-coordinate grid-commutation P0 한 개지만, P0는 model이 아닌
-asset/task-unit 감사다. 등록된 runner는 516개 DICOM header와 122개 STL의
-physical-frame 전제만 검사하며 CTA PixelData를 decode하거나 학습하지 않는다.
+현재 구현하거나 선택한 headline architecture와 active shortlist는 없다.
+Open-CTA physical-coordinate P0는 model이 아닌 asset/task-unit 감사였고,
+exact `b437875…` 실행이 DICOM undefined-length Procedure Code Sequence에서
+frozen parser incompatibility로 종료됐다. Gate는 미평가이고 PixelData/STL,
+model과 GPU는 접근하지 않았다.
 
 따라서 현재 AURORA는 GNN, U-Net, implicit neural field, DETR 또는 random finite
 set model 중 어느 것도 아니다. Consispace류 resampler, continuous implicit
 segmentation, resolution-invariant autoencoder, probabilistic set detector,
-LesionDETR류 query matching과 aneurysm topology/shape loss는 모두 direct prior
-또는 장래 baseline이다. P0가 통과해도 다음 단계는 learned model 없는 P1
-rasterization/instance-stability audit뿐이다.
+LesionDETR류 query matching과 aneurysm topology/shape loss는 모두 direct prior다.
+P0가 통과하지도 scientific fail을 내지도 못했으므로 P1이나 architecture를
+열지 않는다.
 
-Architecture를 검토할 수 있는 가장 이른 시점은 P1이 standard discrete
-preprocessing에서 lesion cardinality, physical surface와 morphometry가 실제로
-불안정하며 small/multiple-lesion subgroup에서 비자명하다는 것을 보인 뒤다.
-그때도 하나의 physical-coordinate instance representation이 grid별 mask를
-render하고 세 endpoint를 공동으로 commute시키는 mechanism이 direct baseline을
-넘을 때만 후보가 된다. P0/P1 결과를 본 뒤 backbone이나 loss를 즉석 선택하지
-않고 별도 P2 계약에서 baseline·estimand·bounded development budget을 고정한다.
+Parser를 보강한 P0r이나 같은 데이터의 local repair는 등록 계약상 만들지 않는다.
+Architecture를 검토할 수 있는 가장 이른 시점은 별도 fresh problem audit가
+task unit·asset·direct-prior gap과 method-free adequacy를 통과한 뒤다. Open-CTA
+가설과 direct-prior 계보는 history로 남지만 backbone이나 loss 선택 근거가 아니다.
 
 직전 TopAneu attachment lead는 29/40이며 terms/payload 0으로 보존한다. Open
 CTA는 52-class location supervision을 제공하지 않으므로 이를 TopAneu의 대체

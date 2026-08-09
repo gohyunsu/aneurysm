@@ -1,12 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
-> **2026-08-09 open-CTA P0 registration:** Zenodo `15697196`의 ZIP64 central
+> **2026-08-09 open-CTA P0 outcome:** Zenodo `15697196`의 ZIP64 central
 > directory와 `Metadata.csv`만 먼저 range-read해 172 case, 122 lesion과 24
 > multi-lesion case를 확인했다. DICOM header·PixelData와 STL payload를 읽기
 > 전에 physical-coordinate lesion-instance grid-commutation 후보와 P0를
-> 고정했다. P0는 516 header와 122 STL의 case/study unit, physical frame,
-> thickness·volume-scale 전제만 검사하며 training이 아니다. 통과해도
-> method-free P1만 열고, 현재 primary problem/method/GPU는 0이다. 상세 근거는
+> 고정했다. Exact `b437875…` 실행은 일부 header prefix 접근 뒤 DICOM
+> undefined-length Procedure Code Sequence에서 exit 1이었다. PixelData는
+> decode·inspect하지 않았고 STL에는 도달하지 않았다. Scientific gate는
+> 미평가이며 parser repair/rerun 없이 후보를 닫았다. 현재 active problem,
+> primary problem/method/GPU는 0이다. 상세 근거는
 > [`open-cta-physical-grid-audit-2026-08-09.md`](open-cta-physical-grid-audit-2026-08-09.md)를
 > 따른다.
 
@@ -118,7 +120,7 @@
 | AneuX | aneurysm/vessel mesh, morphology·clinical table, rupture label | 750 models | geometry 규모 확장, morphology/rupture 연구 | CTA 원본·CFD가 없는 geometry dataset |
 | CMHA / Gong et al. 2024 | NIfTI CTA, aneurysm–artery STL, aneurysm STL, clinical/morphology/hemodynamic summaries | 99 unique patients/105 MCA IA + 44 controls | closed goal-oriented S0a asset history; 새 task에는 fresh audit 필요 | CC BY 4.0; 15.56 GB; 6 multi-lesion patient; asset 5/9 fail, exact lesion-level linkage unsupported; public CFD is summary only |
 | OpenNeuro ds005096 | TOF-MRA, selected-session voxel masks/STL/Slicer scene | 63 patients/85 IA; 24 longitudinal patients | external modality/geometry stress only | one annotated session per subject; longitudinal supervised-growth cohort 아님 |
-| Open multi-center CTA 2026 / Zenodo 15697196 | raw CTA DICOM, case metadata, 122 aneurysm STL | 172 series: 90 controls/82 IA cases, 24 multi-lesion case, 3 centers | conditional physical-coordinate grid-commutation P0 only | ZIP64+metadata audited; P0 registered before DICOM header/STL; primary/model/GPU 0; split unit remains `cta_case` until key audit |
+| Open multi-center CTA 2026 / Zenodo 15697196 | raw CTA DICOM, case metadata, 122 aneurysm STL | 172 series: 90 controls/82 IA cases, 24 multi-lesion case, 3 centers | closed physical-grid P0 history; no active primary role | P0 execution-incomplete after partial header prefixes; no PixelData/STL; scientific gate unevaluated; no parser repair/rerun/model/GPU |
 | BenchAnXplore / npj DM 2026 | 105 semi-idealized geometry의 coarse CFD trajectories | 80 frames/case, 0.01 s | GNN surrogate benchmark | ICA sidewall 중심; patient CTA 입력자료가 아님 |
 | Aneumo | 10,660 geometry × 8 steady mass flow, pressure/velocity | 85,280 steady CFD | paired BC response | CC BY-NC-ND; base-family split·비재배포 |
 | AneuG-Flow / 관련 synthetic set | 현재 서버에는 geometry archive; 논문 release에는 fixed-policy CFD field | 대규모 synthetic | known-condition geometry pretraining | paired-BC C2에는 사용 불가 |
