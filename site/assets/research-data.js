@@ -392,6 +392,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "Source-delta decision is live",
+      copy: "Exact content commit 8d7f7d7d4e41c72eafb1dd08ae27d843ee00fc54 passed Quality run 31303877413 and Pages run 31303877371. The live overview renders source-delta best 31.5/40, all candidates rejected, active shortlist/selected primary/model/GPU zero and no current GNN, U-Net or Transformer. The latest-audit link resolves to the detailed source-delta record. Deployment verification changes no score, terms acceptance, payload/P0, method, architecture, GPU or submission authorization; introai9 remains the only execution target and junjinyong remains excluded.",
+      files: ["AGENTS.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.09",
       category: "decision",
       title: "Fresh source-delta batch is rejected before P0",
       copy: "OpenNeuro growth, RSNA point-set detection, VICTORIA neck distributions, IntrA topology control, IAIA aneurysm–stenosis and flow-diverter outcome score 31.5, 30.5, 30.5, 28.5, 26.0 and 25.5 against a frozen 32-point admission line. The best candidate has a same-public-cohort Bayesian direct prior and only 24 longitudinal public patients. A bounded read-only introai9 audit verifies connectivity, zero AURORA PBS jobs and only an IntrA repository skeleton; no login-node GPU command was used and junjinyong was not accessed. No score repair, payload, P0, method, architecture or GPU is authorized.",

@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Source-delta decision is deployed and verified
+
+- Exact content commit `8d7f7d7d4e41c72eafb1dd08ae27d843ee00fc54`의
+  Quality run `31303877413`과 Pages run `31303877371`이 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 source-delta
+  best 31.5/40, all rejected, active shortlist/selected primary/model/GPU 0과
+  “현재 GNN·U-Net·Transformer가 없다”는 경계를 확인했다. Latest-audit link는
+  공개 source-delta 문서를 가리킨다.
+- 이 배포 확인은 score, terms acceptance, payload/P0, method, architecture, GPU
+  또는 submission authorization을 바꾸지 않는다. 실행 대상은 계속
+  `introai9`뿐이며 `junjinyong`은 제외한다.
+- 영향 파일: `AGENTS.md`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Fresh source-delta batch is rejected before P0
 
 - OpenNeuro longitudinal surface growth, RSNA anatomy-indexed point-set detection,

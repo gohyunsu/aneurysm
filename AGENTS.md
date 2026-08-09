@@ -128,7 +128,14 @@ Login-node GPU command는 실행하지 않았고 `junjinyong`에는 접속·조�
 모니터링하지 않았다. Schema 3.9의 source of truth는
 `docs/source-delta-audit-2026-08-09.md`와
 `problem_selection.source_delta_audit`이다. Active shortlist, primary, method,
-architecture, P0와 GPU는 0이며 31.5를 사후 수리하지 않는다.
+ architecture, P0와 GPU는 0이며 31.5를 사후 수리하지 않는다.
+
+Exact source-delta content commit `8d7f7d7d4e41c72eafb1dd08ae27d843ee00fc54`의
+Quality run `31303877413`과 Pages run `31303877371`은 모두 성공했다. Live
+site에서 best 31.5/40, all rejected, active shortlist/primary/model/GPU 0과 no
+current GNN/U-Net/Transformer를 확인했다. 이 deployment verification은 score,
+data terms, payload/P0, scientific state 또는 execution authorization을 바꾸지
+않는다.
 
 ## 1. 연구의 현재 기준선
 
