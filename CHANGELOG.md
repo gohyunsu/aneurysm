@@ -26,6 +26,10 @@
   0으로 돌아간다. 다음은 독립된 fresh problem-level audit뿐이다.
 - Public execution record SHA-256은
   `538725c9901039169cc6e747a112630f327411c5594d021edf9b76fd913f950b`다.
+- Outcome content commit `9181862bdf62a81d16b1b20976e8632fb50e2b53`의
+  Quality run `31289833490`과 Pages run `31289833028`이 모두 성공했다.
+  [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 active shortlist
+  0, execution-incomplete/no-verdict와 fresh-problem-audit 경계를 확인했다.
 - 영향 파일: `results/open_cta_physical_p0_execution_20260809.json`,
   `results/README.md`, `.github/workflows/quality.yml`, `configs/aurora_v1.json`, `src/aurora/protocol.py`,
   `tests/test_protocol.py`, `AGENTS.md`, `README.md`,
