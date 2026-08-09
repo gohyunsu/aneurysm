@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Provenance–evaluation rejection is deployed and verified
+
+- Exact content `4569c32fbdd19ddf34dac74ef840a8bfc6da080a`의 Quality
+  `31331100581`과 Pages `31331100307`이 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 batch best
+  30.0/40, all rejected, active shortlist/primary/method/architecture/P0/GPU 0과
+  detailed audit link를 확인했다. 상세 audit 문서도 HTTP 200이다.
+- 배포 검증은 score, archive/mesh/image/spreadsheet access, P0, model, compute,
+  outer test 또는 submission identity를 바꾸지 않는다. `introai9`만 허용하고
+  `junjinyong`은 계속 제외한다.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `site/assets/research-data.js`.
+
 ## 2026-08-10 · Provenance–evaluation batch is rejected before compute
 
 - AneuX/Aneurisk/76-case CFD cross-release lineage, source-selective prediction,

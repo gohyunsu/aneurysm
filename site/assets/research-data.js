@@ -471,6 +471,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Provenance–evaluation rejection is live",
+      copy: "Exact content 4569c32fbdd19ddf34dac74ef840a8bfc6da080a passed Quality run 31331100581 and Pages run 31331100307. The live overview renders batch best 30.0/40, all rejected, active shortlist/primary/method/architecture/P0/GPU zero and the detailed audit link; the audit document returns HTTP 200. Deployment verification changes no score, payload, P0, model, compute, outer test or submission identity. introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "Provenance–evaluation candidates stop before payload and compute",
       copy: "Cross-release lineage-blocked CFD-to-rupture transfer, source-selective prediction, test-blind PointNet++ re-evaluation, curator-lineage morphometry and patient-set consistency score 30.0/29.5/28.5/23.5/25.5. The exact 76-to-101 lineage map is absent and generic contamination auditing is direct prior. Schema 4.5 freezes no archive/mesh/image/spreadsheet/P0/model/GPU, introai9-only execution and complete exclusion of junjinyong.",
