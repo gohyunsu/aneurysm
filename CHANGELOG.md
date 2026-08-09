@@ -4,6 +4,30 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Fresh source-delta batch is rejected before P0
+
+- OpenNeuro longitudinal surface growth, RSNA anatomy-indexed point-set detection,
+  VICTORIA neck-curve distribution, IntrA topology control, IAIA aneurysm–stenosis와
+  flow-diverter DSA outcome을 같은 frozen 40점 rubric으로 감사했다. 점수는
+  31.5/30.5/30.5/28.5/26.0/25.5이며 모두 admission line 32 미만이다.
+- 최고 OpenNeuro 후보도 동일 공개 cohort의 Bayesian surface-displacement growth
+  direct prior와 24 longitudinal patient의 effective-unit 한계가 있다. RSNA는
+  controlled-access terms를 사용자가 수락하지 않았고 공식 supervision은
+  aneurysm extent mask가 아니다. VICTORIA의 reader 55명은 독립 geometry 5개를
+  대체하지 않는다.
+- `introai9` 실제 login boundary의 공개키 접속과 PBS AURORA job 0을 확인했다.
+  Known source root를 bounded read-only로 감사했으며 IntrA는 repository skeleton만
+  확인됐다. Login-node GPU command는 실행하지 않았고 `junjinyong`에는 접속·조회·
+  제출·모니터링하지 않았다.
+- Schema를 3.9로 올리고 all-six rejection, score/no-repair, no-payload/P0/method/
+  architecture/GPU와 `introai9`-only idle boundary를 validator/test로 고정했다.
+- 영향 파일: `docs/source-delta-audit-2026-08-09.md`, `AGENTS.md`, `README.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`, `docs/experiment-protocol.md`,
+  `docs/isbi-2027-plan.md`, `docs/literature-lineage.md`, `docs/datasets.md`,
+  `docs/server-execution.md`, `configs/aurora_v1.json`, `src/aurora/protocol.py`,
+  `tests/test_protocol.py`, `site/index.html`, `site/learn.html`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · DSA source rejection is deployed and verified
 
 - Exact content commit `4600d9c45b257c99db1c294ca4481724ede0b360`의

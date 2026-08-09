@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · DSA prefix-risk source-rejected 31/40 · AneuX P0 closed · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
-    requirement: "fresh problem/source audit → method-free task adequacy → direct baselines → bounded development → fresh outer test",
+    status: "Target locked · source-delta best 31.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Source-delta batch leaves no admission-qualified problem",
+      copy: "Six fresh source-level candidates were scored without payload or architecture. OpenNeuro paired-surface growth is best at 31.5/40, but a Bayesian surface-displacement model already uses the same public cohort and only 24 public patients are longitudinal. RSNA remains controlled-access with point/territory rather than official aneurysm-extent masks; VICTORIA has five independent geometries; IntrA meshes are not staged and topology/bifurcation controls are directly occupied. IAIA is proposal-only and the flow-diverter release lacks sufficient imaging–endpoint linkage. Scores are not repaired to cross 32.",
+      status: "Best 31.5/40 · all source rejected · no P0/model/GPU",
+      url: "../docs/source-delta-audit-2026-08-09.md"
+    },
     {
       year: "2026.08",
       title: "DSA prefix-risk candidate is rejected before execution",
@@ -375,9 +382,21 @@ window.AURORA_DATA = Object.freeze({
       name: "DIAS",
       role: "source-rejected prefix-risk candidate; future patient-grouped DSA segmentation baseline only",
       provenance: "60 patients · 120 sequences · 60 fully annotated · expert-preselected 4–14 arterial frames · CC BY 4.0 · payload 0 · no P0/model/GPU"
+    },
+    {
+      name: "OpenNeuro ds005096",
+      role: "source-rejected longitudinal surface-growth candidate; possible future external audit only",
+      provenance: "63 patients · 85 aneurysms · 24 longitudinal patients · same-cohort Bayesian growth direct prior · payload not newly accessed · no P0/model/GPU"
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "decision",
+      title: "Fresh source-delta batch is rejected before P0",
+      copy: "OpenNeuro growth, RSNA point-set detection, VICTORIA neck distributions, IntrA topology control, IAIA aneurysm–stenosis and flow-diverter outcome score 31.5, 30.5, 30.5, 28.5, 26.0 and 25.5 against a frozen 32-point admission line. The best candidate has a same-public-cohort Bayesian direct prior and only 24 longitudinal public patients. A bounded read-only introai9 audit verifies connectivity, zero AURORA PBS jobs and only an IntrA repository skeleton; no login-node GPU command was used and junjinyong was not accessed. No score repair, payload, P0, method, architecture or GPU is authorized.",
+      files: ["docs/source-delta-audit-2026-08-09.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

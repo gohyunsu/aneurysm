@@ -105,8 +105,8 @@ direct prior다. Raw full-phase acquisition, dose/stop action과 frame-level arr
 ground truth가 없어 acquisition stopping을 clinical endpoint로 식별하지 못한다.
 Source score repair 없이 기각했고 payload, executable P0, method, architecture와
 GPU job은 0이다. Source of truth는
-`docs/dsa-prefix-risk-audit-2026-08-09.md`, machine contract는 schema 3.8의
-`problem_selection.dsa_prefix_risk_source_audit`이다.
+`docs/dsa-prefix-risk-audit-2026-08-09.md`, 당시 판정은 schema 3.9에서도
+historical `problem_selection.dsa_prefix_risk_source_audit`로 보존한다.
 
 Exact DSA audit content `4600d9c45b257c99db1c294ca4481724ede0b360`의
 Quality run `31301858683`과 Pages run `31301858151`도 모두 성공했다. Live
@@ -115,14 +115,30 @@ shortlist 0, no payload/P0/model/architecture/GPU와 `introai9`-only 경계를
 확인했다. 이 배포 검증은 candidate를 재개방하거나 scientific state와 실행
 권한을 바꾸지 않는다.
 
+2026-08-09 후속 source-delta audit은 OpenNeuro longitudinal surface growth,
+RSNA anatomy-indexed point set, VICTORIA neck-curve reader distribution, IntrA
+topology control, IAIA aneurysm–stenosis와 flow-diverter DSA outcome을 같은
+40점 rubric으로 다시 평가했다. 점수는 31.5/30.5/30.5/28.5/26.0/25.5이며
+모두 admission line 32 미만이다. OpenNeuro 최고 후보는 같은 공개 cohort의
+Bayesian surface-displacement growth direct prior와 public longitudinal 24 patient
+한계가 있다. RSNA controlled terms는 사용자가 수락하지 않았고 새 payload는
+0이다. `introai9` 실제 login boundary의 public-key 접속과 PBS AURORA job 0을
+확인했으며 bounded read-only inventory에서 IntrA는 repository skeleton만 있었다.
+Login-node GPU command는 실행하지 않았고 `junjinyong`에는 접속·조회·제출·
+모니터링하지 않았다. Schema 3.9의 source of truth는
+`docs/source-delta-audit-2026-08-09.md`와
+`problem_selection.source_delta_audit`이다. Active shortlist, primary, method,
+architecture, P0와 GPU는 0이며 31.5를 사후 수리하지 않는다.
+
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. Active primary와
-  source shortlist는 모두 0이다. 가장 최근 DIAS prefix-risk 후보는 31.0/40으로
-  source에서 기각됐고 payload/P0/model/GPU는 0이다. 그 이전 AneuX
+  source shortlist는 모두 0이다. 가장 최근 source-delta batch의 최고 후보인
+  OpenNeuro paired-surface growth도 31.5/40으로 기각됐고 새 payload/P0/model/GPU는
+  0이다. 직전 DIAS prefix-risk 후보도 31.0/40으로 기각했다. 그 이전 AneuX
   preprocessing-orbit 후보는 34.0/40으로
   P0에 진입했지만 initial tabular transport attempt exhaustion으로 scientific
   gate 전에 닫혔다. Complete/partial archive, CSV parse와 model range/member

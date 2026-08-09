@@ -7,7 +7,16 @@ preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
 aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
-가장 최근 fresh six-candidate audit의 최고점은 **DIAS DSA prefix-to-final
+가장 최근 기준선은
+[`source-delta-audit-2026-08-09.md`](source-delta-audit-2026-08-09.md)다.
+OpenNeuro paired-surface growth가 31.5/40으로 가장 높았지만 같은 공개 cohort의
+Bayesian surface-displacement growth detection이 직접 선행이고, 공개 종단 단위는
+24 patient뿐이다. RSNA point-set, VICTORIA reader distribution, IntrA topology,
+IAIA와 flow-diverter 후보도 각각 controlled terms, 5 geometry, payload 부재,
+proposal-only 또는 imaging–endpoint linkage 부족으로 32점에 못 미쳤다. 이 batch는
+source-only이며 method, architecture와 GPU를 만들지 않는다.
+
+직전 fresh six-candidate audit의 최고점은 **DIAS DSA prefix-to-final
 vessel-support risk control** 31.0/40이었다. 60 patient/120 sequence 중 60
 sequence만 fully annotated이며, release는 전문가가 arterial phase만 4--14
 frame으로 선별한 뒤 phase annotation을 OR한 하나의 2D vessel mask를 제공한다.
@@ -76,9 +85,10 @@ result JSON은 없다. PixelData는 decode·inspect하지 않았고 STL 단계�
 
 ## 0. 현재 연구 상태 · active shortlist 0, selected primary 0
 
-현재 문제-selection source of truth는
-[`dsa-prefix-risk-audit-2026-08-09.md`](dsa-prefix-risk-audit-2026-08-09.md)다.
-DIAS payload는 읽지 않았고 known `introai9` dataset root의 bounded inventory에도
+현재 problem-selection source of truth는
+[`source-delta-audit-2026-08-09.md`](source-delta-audit-2026-08-09.md)다.
+DIAS audit은 직전 history로 보존한다. DIAS payload는 읽지 않았고 known
+`introai9` dataset root의 bounded inventory에도
 staged asset이 없었다. Source score가 32 미만이므로 executable P0, model과 GPU
 job을 등록하지 않는다. 직전 AneuX 실행 이력의 source of truth는
 [`aneux-preprocessing-orbit-audit-2026-08-09.md`](aneux-preprocessing-orbit-audit-2026-08-09.md)와

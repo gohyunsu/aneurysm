@@ -1,9 +1,9 @@
 {
-  "schema_version": "3.8",
+  "schema_version": "3.9",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_dsa_prefix_source_rejection",
+    "status": "failed_branches_preserved_no_active_shortlist_after_source_delta_audit",
     "as_of": "2026-08-09",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_dsa_prefix_risk_source_rejection_no_primary_or_method",
+    "status": "no_active_shortlist_after_source_delta_audit_no_primary_or_method",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "dias_source_metadata_only_no_payload_and_no_introai9_staged_asset",
+    "asset_access_status": "source_metadata_and_introai9_bounded_inventory_only_no_new_candidate_payload",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -26,8 +26,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_only",
-    "audit_document": "docs/dsa-prefix-risk-audit-2026-08-09.md",
+    "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32",
+    "audit_document": "docs/source-delta-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -400,8 +400,77 @@
       "decision": "reject_without_score_repair_p0_model_or_gpu",
       "next_allowed_action": "fresh_problem_level_primary_source_and_task_unit_audit_only"
     },
+    "source_delta_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/source-delta-audit-2026-08-09.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_id": "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited",
+      "best_score": 31.5,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "new_candidate_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "introai9_connection_verified": true,
+      "introai9_pbs_jobs_observed": 0,
+      "introai9_login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "intra_staged_payload_found": false,
+      "intra_staged_material_scope": "repository_skeleton_readme_splits_and_preview_images_only",
+      "rsna_access_state": "official_registry_controlled_access_terms_not_user_accepted_no_payload",
+      "candidates": [
+        {
+          "id": "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited",
+          "score": 31.5,
+          "independent_units": "24_longitudinal_patients_in_public_cohort",
+          "payload_accessed": false,
+          "decision": "reject_current_version_same_public_cohort_direct_bayesian_growth_prior_and_small_effective_unit"
+        },
+        {
+          "id": "rsna_anatomy_indexed_point_set_detection_terms_gated_and_direct_prior_dense",
+          "score": 30.5,
+          "independent_units": "more_than_4000_controlled_access_ct_mr_scans_source_reported",
+          "payload_accessed": false,
+          "decision": "reject_current_version_controlled_terms_unaccepted_and_official_supervision_not_aneurysm_extent_masks"
+        },
+        {
+          "id": "victoria_neck_curve_distribution_effective_geometry_n5",
+          "score": 30.5,
+          "independent_units": "5_aneurysm_geometries_with_55_readers",
+          "payload_accessed": false,
+          "decision": "reject_current_version_reader_count_does_not_replace_geometry_level_generalization"
+        },
+        {
+          "id": "intra_topology_false_positive_detection_payload_absent_and_direct_prior",
+          "score": 28.5,
+          "independent_units": "103_whole_vessel_models_source_reported",
+          "payload_accessed": false,
+          "decision": "reject_current_version_mesh_payload_absent_and_topology_bifurcation_gap_directly_occupied"
+        },
+        {
+          "id": "iaia_joint_aneurysm_stenosis_proposal_only",
+          "score": 26.0,
+          "independent_units": "unverified_proposal_only",
+          "payload_accessed": false,
+          "decision": "reject_current_version_no_released_dataset_payload_or_auditable_task_unit"
+        },
+        {
+          "id": "flow_diverter_dsa_outcome_imaging_endpoint_not_linked",
+          "score": 25.5,
+          "independent_units": "126_subjects_141_procedures_source_reported",
+          "payload_accessed": false,
+          "decision": "reject_current_version_limited_image_sequence_endpoint_linkage_and_dense_direct_outcome_priors"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_p0_method_architecture_or_gpu",
+      "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "same_lesion_preprocessing_orbit_quotient_morphometry",
-    "most_recent_source_rejected_candidate": "dsa_prefix_to_final_vessel_support_risk_control",
+    "most_recent_source_rejected_candidate": "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -410,7 +479,13 @@
       "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
       "goal_oriented_hemodynamic_segmentation",
       "inverse_healthy_vessel_counterfactual_editing",
-      "dsa_prefix_to_final_vessel_support_risk_control"
+      "dsa_prefix_to_final_vessel_support_risk_control",
+      "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited",
+      "rsna_anatomy_indexed_point_set_detection_terms_gated_and_direct_prior_dense",
+      "victoria_neck_curve_distribution_effective_geometry_n5",
+      "intra_topology_false_positive_detection_payload_absent_and_direct_prior",
+      "iaia_joint_aneurysm_stenosis_proposal_only",
+      "flow_diverter_dsa_outcome_imaging_endpoint_not_linked"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -447,7 +522,12 @@
       "pod_fourier_dct_or_sequence_temporal_decoder",
       "generic_cycle_functional_loss_or_direct_functional_head",
       "scalar_or_population_neural_operator_functional_debiasing",
-      "generic_e3_equivariant_graph_network"
+      "generic_e3_equivariant_graph_network",
+      "bayesian_parent_vessel_internal_control_growth_detection",
+      "persistent_topology_or_bifurcation_false_positive_filter",
+      "foundation_3d_surface_feature_transfer",
+      "annotator_distribution_calibration",
+      "treatment_outcome_ml_from_morphology_api_or_cfd"
     ]
   },
   "venue": {
@@ -461,7 +541,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_dsa_prefix_source_rejection",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_source_delta_audit",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -526,7 +606,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "unselected",
-    "active_candidate_status": "no_active_shortlist_after_dsa_prefix_source_rejection_no_primary_method_architecture_or_gpu",
+    "active_candidate_status": "no_active_shortlist_after_source_delta_audit_no_primary_method_architecture_or_gpu",
     "candidate_primary_estimand": "unselected",
     "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -885,7 +965,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_dsa_prefix_source_rejection",
+    "current_headline_architecture": "unselected_no_active_problem_after_source_delta_audit",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

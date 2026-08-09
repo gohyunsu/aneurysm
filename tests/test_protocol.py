@@ -56,18 +56,48 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "DIAS must remain"):
             validate_protocol(candidate)
 
+    def test_source_delta_audit_rejects_all_candidates_before_p0(self) -> None:
+        audit = self.protocol["problem_selection"]["source_delta_audit"]
+        self.assertEqual(audit["best_score"], 31.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertTrue(audit["introai9_connection_verified"])
+        self.assertEqual(audit["introai9_pbs_jobs_observed"], 0)
+        self.assertFalse(audit["introai9_login_node_gpu_command_executed"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["source_delta_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "source-delta audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["source_delta_audit"]["candidates"][0][
+            "payload_accessed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "source-delta audit"):
+            validate_protocol(candidate)
+
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
+        with self.assertRaisesRegex(ProtocolError, "source-delta boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
+        with self.assertRaisesRegex(ProtocolError, "source-delta boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
+        with self.assertRaisesRegex(ProtocolError, "source-delta boundary"):
             validate_protocol(candidate)
 
     def test_aneux_orbit_p0_is_closed_without_payload_p1_or_training(self) -> None:

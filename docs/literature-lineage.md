@@ -1,5 +1,23 @@
 # 선행연구 계보와 research gap
 
+## 0-S. Current decision · source-delta batch has no active gap
+
+[OpenNeuro longitudinal cohort](https://pmc.ncbi.nlm.nih.gov/articles/PMC11139857/)의
+paired surface는 매력적이지만 같은 공개 자료에 surface registration, normal
+displacement, parent-vessel internal control과 calibrated posterior를 적용한
+[Bayesian growth detection](https://arxiv.org/abs/2604.06649)이 이미 존재한다.
+Public longitudinal unit도 24 patient다. 따라서 surface GNN/Transformer, Bayesian
+head 또는 internal-control loss는 독립 novelty가 아니다.
+
+RSNA의 anatomy-indexed point set은 controlled-access와 official point/territory
+supervision 경계가 있고, VICTORIA는 55 reader가 있어도 independent geometry가
+5개뿐이다. IntrA의 surface segmentation, topology-aware bifurcation filtering과
+foundation 3D feature transfer도 직접 계보다. IAIA는 proposal-only이고 제한적
+flow-diverter 자료는 imaging sequence와 outcome의 식별 가능한 연결이 부족하다.
+여섯 후보의 최고점이 31.5/40이므로 현재 active research gap은 없다. 상세
+score와 source 경계는
+[`source-delta audit`](source-delta-audit-2026-08-09.md)에 고정한다.
+
 ## 0-D. Rejected gap · DSA prefix-to-final support risk control
 
 [DIAS](https://doi.org/10.1016/j.media.2024.103247)은 2D+time DSA sequence에서

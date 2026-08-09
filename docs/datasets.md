@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-09 source-delta audit:** OpenNeuro longitudinal, RSNA controlled,
+> VICTORIA, IntrA, IAIA와 flow-diverter sources를 source-only로 비교했다. 최고
+> OpenNeuro growth도 31.5/40이며 public longitudinal unit 24와 동일 cohort direct
+> prior 때문에 기각했다. RSNA terms는 수락되지 않았고, IntrA staging은 repository
+> skeleton뿐이다. 어느 새 payload도 읽지 않았으며 active dataset role, P0,
+> method와 GPU는 0이다. 상세 표는
+> [`source-delta audit`](source-delta-audit-2026-08-09.md)을 따른다.
+
 > **2026-08-09 DIAS source audit, rejected 31/40:** Official Zenodo v3는
 > `DIAS.zip` 292,444,663 byte, MD5 `780f32df6fb2a5de5d476f385cf2e83b`,
 > CC BY 4.0을 명시한다. 원 논문은 60 patient/120 DSA sequence, 60 fully

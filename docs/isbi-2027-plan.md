@@ -1,7 +1,9 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-09 current boundary:** 가장 최근 DIAS prefix-risk 후보는
-> 31/40으로 source에서 기각했다. Payload/P0/model/GPU는 0이다. 그 이전 AneuX
+> **2026-08-09 current boundary:** 가장 최근 source-delta batch의 최고 후보는
+> OpenNeuro paired-surface growth 31.5/40이며 source에서 기각했다. 같은 공개
+> cohort를 사용하는 Bayesian growth direct prior와 24 longitudinal patient의
+> effective unit 한계가 있다. Payload/P0/model/GPU는 0이다. 그 이전 AneuX
 > same-lesion preprocessing-orbit는
 > 34/40으로 P0에 진입했지만, exact CPU-only job이 첫 tabular archive completion
 > 전에 transport attempt를 소진해 scientific gate 미평가로 닫혔다. P1, selected
@@ -9,7 +11,7 @@
 
 최종 검토일: 2026-08-09 KST
 
-상태: **target locked · DIAS prefix-risk source-rejected 31/40 · AneuX
+상태: **target locked · source-delta best 31.5/40 and all rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
 shortlist/selected primary problem/method/architecture/GPU 0 · not
 submission-ready**
@@ -29,7 +31,10 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
 
-현재 제출 가능한 paper identity는 없다. DIAS prefix 후보는 공개 release가
+현재 제출 가능한 paper identity는 없다. 최신 source-delta batch 여섯 후보는
+모두 32점 admission line에 못 미쳤고, 그중 최고 OpenNeuro growth는 직접
+Bayesian prior와 작은 종단 단위 때문에 독립 method identity가 아니다. DIAS
+prefix 후보도 공개 release가
 arterial phase를 미리 선별했고 full-sequence DSC가 minimum projection보다
 0.0020 높을 뿐이며 temporal/MIP/frame-selection/early-exit/risk-control 선행이
 강해 31/40으로 기각했다. AneuX orbit 후보는 official source와

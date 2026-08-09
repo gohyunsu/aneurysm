@@ -5,16 +5,22 @@
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
-가장 최근 여섯 후보 red team에서 가장 높은 문제는 DIAS DSA sequence의
-prefix로 final vessel support와 thin-vessel miss risk를 추론하는 문제였지만
-**31.0/40으로 32점 admission gate를 넘지 못했습니다**. 공개 release는 60
-patient/120 sequence 중 60 sequence에 merged 2D artery mask를 제공하고,
-전문의가 arterial phase만 4--14 frame으로 미리 잘라 둡니다. 원 논문의 full
-sequence DSC 0.7822는 minimum projection 0.7802보다 0.0020 높을 뿐이며,
-VSS-Net·DSCA·TemSAM·incomplete-angiogram recovery·risk-controlled early exit와
-conformal segmentation도 직접 선행입니다. 따라서
-[`DSA prefix-risk audit`](docs/dsa-prefix-risk-audit-2026-08-09.md)만 기록하고
-payload, P0, architecture와 GPU job은 만들지 않았습니다.
+가장 최근 source-delta audit은 OpenNeuro longitudinal surface growth, RSNA
+point-set detection, VICTORIA neck-curve distribution, IntrA topology control,
+IAIA aneurysm–stenosis와 flow-diverter DSA outcome을 같은 40점 rubric으로 다시
+평가했습니다. 최고점인 OpenNeuro paired-surface growth도 **31.5/40**으로 32점
+admission gate에 못 미칩니다. 같은 공개 cohort를 사용하는 Bayesian surface-
+displacement growth 모델이 이미 있고 공개 종단 단위는 24 patient뿐입니다.
+RSNA는 공식 record가 4,000건 이상의 scan을 기술하지만 controlled-access terms를
+사용자가 수락하지 않았고, 공식 supervision도 aneurysm extent mask가 아닙니다.
+따라서 점수를 사후 수리하지 않고
+[`source-delta audit`](docs/source-delta-audit-2026-08-09.md)만 고정했습니다.
+새 payload, P0, method, architecture와 GPU job은 0입니다.
+
+직전 DIAS DSA prefix-risk 후보도 31.0/40으로 source에서 기각된 history입니다.
+전문의가 arterial phase만 4--14 frame으로 미리 잘랐고 full sequence DSC는
+minimum projection보다 0.0020 높을 뿐입니다. 상세 근거는
+[`DSA prefix-risk audit`](docs/dsa-prefix-risk-audit-2026-08-09.md)에 보존합니다.
 
 그 이전 34/40 후보는 AneuX의 같은 병변에 제공되는 3개 mesh resolution과 최대
 4개 isolation cut을 하나의 **preprocessing orbit**으로 다루는 문제였습니다.
@@ -129,10 +135,10 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 
 ## 현재 단계 · active shortlist/primary problem/method/GPU 0
 
-현재 허용된 다음 작업은 open-CTA parser 수리, AneuG-Flow P0 repair/rerun 또는
-닫힌 AneuX branch 재실행이 아니라 **fresh problem-level primary-source/asset
-audit**입니다. 새 후보가 별도의 method-free task adequacy를 통과하기 전에는
-executable headline model, GPU job, outer test와 submission identity가 없습니다.
+현재 허용된 다음 작업은 닫힌 branch의 repair/rerun이 아니라 genuinely new 또는
+revised primary source를 감시하는 일입니다. 별도 fresh 후보가 32점 이상이고
+method-free task adequacy를 통과하기 전에는 executable headline model, GPU job,
+outer test와 submission identity가 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.

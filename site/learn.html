@@ -38,7 +38,7 @@
     <section class="learn-hero dark" id="start">
       <div class="learn-hero-copy">
         <p class="eyebrow"><span>START HERE</span> ZERO-ASSUMPTION GUIDE</p>
-        <h1><span>한 병변의 여러 표면에서 quotient까지</span><br><em>한 단계씩.</em></h1>
+        <h1><span>데이터의 독립 단위에서 모델까지</span><br><em>한 단계씩.</em></h1>
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
@@ -50,23 +50,21 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            가장 최근 DSA prefix-risk 후보는 31/40으로 source gate에서
-            기각됐습니다. DIAS의 arterial phase는 이미 선별됐고 full sequence와
-            minimum projection DSC 차이는 0.0020입니다. Temporal model, MIP prompt,
-            frame selection, early exit와 conformal calibration 자체는 direct
-            prior이며 현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
+            최신 source-delta audit의 최고 OpenNeuro surface-growth 후보도
+            31.5/40으로 기각됐습니다. 동일 공개 cohort를 쓴 Bayesian growth
+            direct prior와 24 longitudinal patient의 표본 한계가 있습니다.
+            현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>다음 단계는 별도의 fresh problem/source audit입니다.</strong>
+          <strong>다음 단계는 genuinely new/revised source를 기다리는 일입니다.</strong>
           <p>
-            DIAS 후보 점수를 thin-vessel metric으로 사후 수리하지 않습니다.
-            Raw full-phase acquisition, 실제 stop/dose endpoint와 frame-level arrival
-            truth가 있는 독립 source를 포함해 새로운 문제를 다시 감사합니다.
-            새 후보가 gate를 통과하기 전 model이나 GPU를 허가하지 않습니다.
+            31.5점을 재가중하거나 이름을 바꿔 32점으로 만들지 않습니다. 새 release,
+            supervision semantics 또는 독립 단위가 실제로 달라진 별도 후보만 다시
+            감사합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
           </p>
-          <a href="../docs/dsa-prefix-risk-audit-2026-08-09.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/source-delta-audit-2026-08-09.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -363,22 +361,21 @@
             <p class="eyebrow">04 · CURRENT BOUNDARY</p>
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
-              최근 P0는 network가 아니라 AneuX asset/unit audit이었습니다. 동일
-              lesion의 resolution × cut orbit을 확인하기 전 transport가 소진돼
-              P1 없이 닫혔습니다. 아래 과거 graph/operator stack은 현재 선택된
-              architecture가 아닙니다.
+              최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
+              최고 후보도 31.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
 
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 가장 최근 DIAS 후보도 31/40으로 source에서 기각됐습니다. Analytic/precomputed morphometry, PointNet++, DiffusionNet과 E(3) mesh model은 future controls입니다. Closed P0를 수리해 어떤 GNN도 current method로 구현하지 않습니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 최신 source-delta 최고점도 31.5/40으로 기각됐습니다. Bayesian growth, topology filtering, PointNet++, DiffusionNet과 E(3) mesh model은 direct priors 또는 future controls입니다. Closed branch를 수리해 어떤 GNN도 current method로 구현하지 않습니다.</p>
             </aside>
             <article>
-              <span>CURRENT · DIAS SOURCE REJECTION</span>
-              <div><h3>Prefix risk가 정말 새롭고 측정 가능한가?</h3><p>공개 arterial phase는 이미 4–14 frame으로 선별됐고 final label은 phase mask를 합친 하나의 2D support입니다. Full sequence는 minimum projection보다 DSC 0.0020만 높습니다. Raw full-phase, stop/dose action과 frame-level arrival truth가 없어 temporal Transformer나 stopping head를 만들지 않습니다.</p></div>
-              <b>상태</b><small>31/40 · no payload/P0/model/GPU</small>
+              <span>CURRENT · SOURCE-DELTA REJECTION</span>
+              <div><h3>무엇이 남았고, 정말 독립적인가?</h3><p>OpenNeuro growth는 같은 cohort direct prior와 24 longitudinal patient, VICTORIA는 5 geometry, IntrA는 payload와 topology-prior 경계가 있습니다. RSNA는 controlled terms를 수락하지 않았습니다. 따라서 architecture를 만들기 전에 모두 source에서 닫았습니다.</p></div>
+              <b>상태</b><small>best 31.5/40 · no payload/P0/model/GPU</small>
             </article>
             <article>
               <span>HISTORY · ANEUX ORBIT P0</span>
@@ -386,9 +383,9 @@
               <b>상태</b><small>execution-incomplete · no verdict · no rerun/P1</small>
             </article>
             <article>
-              <span>CURRENT · WHY NO MODEL</span>
+              <span>HISTORY · WHY NO MODEL</span>
               <div><h3>Orbit variation이 정말 task를 흔드는가?</h3><p>답은 미평가입니다. P1은 등록하지 않았고 same-lesion functional/rank reversal과 direct baseline 비교도 수행하지 않았습니다.</p></div>
-              <b>다음</b><small>fresh problem audit only</small>
+              <b>다음</b><small>genuinely revised source · fresh ≥32 gate only</small>
             </article>
             <article>
               <span>HISTORY 01 · NORMALIZE</span>

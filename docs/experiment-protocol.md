@@ -1,11 +1,29 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.8 · 2026-08-09
+버전: 3.9 · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## SΔ · 2026 source-delta batch · all source rejected, no execution
+
+OpenNeuro longitudinal growth, RSNA point-set detection, VICTORIA neck curves,
+IntrA topology control, IAIA aneurysm–stenosis와 flow-diverter outcome을 같은
+8축 40점 rubric으로 source-only 평가했다. 점수는 각각 31.5, 30.5, 30.5,
+28.5, 26.0, 25.5다. 통과선은 32.0이며 active shortlist는 0이다.
+
+- `introai9`: 실제 login boundary 공개키 접속 성공, PBS AURORA job 0,
+  bounded known-root inventory만 수행.
+- IntrA: repository skeleton만 확인; mesh payload 없음.
+- RSNA: controlled-access terms 수락 확인 없음; payload 0.
+- execution: P0 0, method/architecture 0, checkpoint 0, GPU 0, outer test 0.
+- kill rule: score repair나 같은 batch 즉시 재명명 금지. Fresh release·semantics·
+  독립 단위가 생긴 별도 version만 재감사한다.
+
+상세 근거는 `docs/source-delta-audit-2026-08-09.md`에 있다. Fresh 후보가
+32점 이상일 때만 `introai9` CPU/PBS의 prospective method-free P0를 등록한다.
 
 ## P0-D · DSA prefix-risk candidate · source rejected, no execution
 

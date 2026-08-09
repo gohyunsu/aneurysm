@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **2026-08-09 current boundary:** source-delta audit의 최고 후보도 31.5/40으로
+> admission line 32에 미달했다. 따라서 현재 headline architecture는 없다.
+> GNN, U-Net, Transformer, topology module, surface foundation feature와 Bayesian
+> head는 모두 후보 구성요소나 baseline일 뿐 selected AURORA model이 아니다.
+> 상세 판정은 [`source-delta audit`](source-delta-audit-2026-08-09.md)을 따른다.
+
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
 V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training underfit ·
 V1e known-condition qualification failed 6/9 · M0 execution-incomplete/no
@@ -19,7 +25,7 @@ rejected 27/40 · no GPU/outer test
 
 ## 0. 현재 architecture boundary
 
-가장 최근 DIAS 후보도 architecture로 선택하지 않았다. 공개 task는 전문가가
+직전 DIAS 후보도 architecture로 선택하지 않았다. 공개 task는 전문가가
 미리 선별한 arterial-phase 4--14 frame에서 하나의 merged 2D vessel mask를
 예측한다. Full sequence와 minimum projection의 공개 DSC 차이가 0.0020이고,
 temporal sequence network, MIP prompt, complementary-frame selection, early exit와
@@ -28,7 +34,7 @@ streaming transformer, U-Net, GNN 또는 stopping head를 먼저 구현하면 �
 검증하는 것이 아니라 포화된 segmentation task에 module을 더하는 셈이다.
 Source score 31/40으로 P0·model·GPU를 열지 않는다.
 
-현재 구현하거나 선택한 headline architecture는 없다. 가장 최근 source
+현재 구현하거나 선택한 headline architecture는 없다. 이전 source
 shortlist였던 AneuX preprocessing-orbit는 data structure와 unit을 감사하는
 CPU-only P0에서 initial tabular transport를 소진해 scientific gate 전에 닫혔다.
 Complete archive/CSV parse와 model central-directory/member access는 0이고 P1은
@@ -55,7 +61,7 @@ prediction, temporal residual projection과 Graph Transformer는 구현된 현�
 구조가 아니라 폐기된 branch history/control로만 남긴다.
 
 현재 구현하거나 선택한 headline architecture와 active primary는 없다.
-가장 최근의 source audit에서 검토한 inverse editor도 architecture로 선택하지
+이전 source audit에서 검토한 inverse editor도 architecture로 선택하지
 않았다. Aneumo release에는 observed aneurysm surface와 같은 anatomy의 healthy
 counterpart·ostium/edit parameter가 없고 IntrA도 real counterfactual target을
 제공하지 않는다. 따라서 \(p(H,Z\mid Y)\)를 graph diffusion, flow matching,

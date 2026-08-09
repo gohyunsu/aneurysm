@@ -25,6 +25,17 @@
 `ssu_a6gpu_*` 파일명은 이미 끝난 run의 재현 이력이며, 새 제출 대상으로
 해석하거나 복사하지 않는다.
 
+## 2026-08-09 · source-delta audit, introai9 verified and idle
+
+- Private 운영 가이드가 지정한 실제 login boundary에서 `introai9` 공개키 접속을
+  확인했다. 로컬 WSL에 편의 alias가 없었던 것은 서버 또는 과학적 실패가 아니다.
+- PBS 조회에서 AURORA job은 0개였다. Login node GPU 명령은 실행하지 않았다.
+- 알려진 source root를 bounded read-only로 감사했다. IntrA는 README, split과
+  preview만 있는 repository skeleton이며 mesh payload는 확인되지 않았다.
+- 새 여섯 후보의 최고 score가 31.5/40으로 gate 32 미만이어서 PBS P0와 GPU job을
+  제출하지 않았다. 이 early stop이 현재 실행 결과다.
+- 이 감사에서 `junjinyong`에는 접속·조회·제출·모니터링하지 않았다.
+
 ## 2026-08-09 · DIAS prefix-risk source rejection, no job submitted
 
 - Official paper, repository와 Zenodo API metadata만 감사했다. DIAS archive,

@@ -118,8 +118,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.8":
-        raise ProtocolError("The current research-state schema must be version 3.8.")
+    if protocol["schema_version"] != "3.9":
+        raise ProtocolError("The current research-state schema must be version 3.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -142,7 +142,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_dsa_prefix_source_rejection"
+        != "failed_branches_preserved_no_active_shortlist_after_source_delta_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -184,6 +184,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneux_preprocessing_orbit_candidate",
             "aneug_cycle_functional_source_audit",
             "dsa_prefix_risk_source_audit",
+            "source_delta_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -193,12 +194,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_dsa_prefix_risk_source_rejection_no_primary_or_method"
+        != "no_active_shortlist_after_source_delta_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "dias_source_metadata_only_no_payload_and_no_introai9_staged_asset"
+        != "source_metadata_and_introai9_bounded_inventory_only_no_new_candidate_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -208,16 +209,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_only"
+        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/dsa-prefix-risk-audit-2026-08-09.md"
+        != "docs/source-delta-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "dsa_prefix_to_final_vessel_support_risk_control"
+        != "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited"
     ):
         raise ProtocolError(
-            "The closed AneuX source-shortlist boundary must retain no selected primary, "
+            "The source-delta boundary must retain no selected primary, "
             "method, GPU, outer test, P1, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -229,6 +230,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "goal_oriented_hemodynamic_segmentation",
         "inverse_healthy_vessel_counterfactual_editing",
         "dsa_prefix_to_final_vessel_support_risk_control",
+        "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited",
+        "rsna_anatomy_indexed_point_set_detection_terms_gated_and_direct_prior_dense",
+        "victoria_neck_curve_distribution_effective_geometry_n5",
+        "intra_topology_false_positive_detection_payload_absent_and_direct_prior",
+        "iaia_joint_aneurysm_stenosis_proposal_only",
+        "flow_diverter_dsa_outcome_imaging_endpoint_not_linked",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -267,6 +274,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_cycle_functional_loss_or_direct_functional_head",
         "scalar_or_population_neural_operator_functional_debiasing",
         "generic_e3_equivariant_graph_network",
+        "bayesian_parent_vessel_internal_control_growth_detection",
+        "persistent_topology_or_bifurcation_false_positive_filter",
+        "foundation_3d_surface_feature_transfer",
+        "annotator_distribution_calibration",
+        "treatment_outcome_ml_from_morphology_api_or_cfd",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -1169,6 +1181,90 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("DSA prefix-risk source rejection and no-training boundary")
 
+    source_delta = problem_selection["source_delta_audit"]
+    _require_keys(
+        source_delta,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "new_candidate_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "introai9_connection_verified",
+            "introai9_pbs_jobs_observed",
+            "introai9_login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "intra_staged_payload_found",
+            "intra_staged_material_scope",
+            "rsna_access_state",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.source_delta_audit",
+    )
+    expected_source_delta_scores = {
+        "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited": 31.5,
+        "rsna_anatomy_indexed_point_set_detection_terms_gated_and_direct_prior_dense": 30.5,
+        "victoria_neck_curve_distribution_effective_geometry_n5": 30.5,
+        "intra_topology_false_positive_detection_payload_absent_and_direct_prior": 28.5,
+        "iaia_joint_aneurysm_stenosis_proposal_only": 26.0,
+        "flow_diverter_dsa_outcome_imaging_endpoint_not_linked": 25.5,
+    }
+    observed_source_delta_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in source_delta["candidates"]
+    }
+    if (
+        source_delta["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or source_delta["audit_document"]
+        != "docs/source-delta-audit-2026-08-09.md"
+        or source_delta["automatic_selection_threshold"] != 32.0
+        or source_delta["best_candidate_id"]
+        != "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited"
+        or source_delta["best_score"] != 31.5
+        or source_delta["best_score"] >= source_delta["automatic_selection_threshold"]
+        or source_delta["active_shortlist_count"] != 0
+        or source_delta["primary_problem_selected"] is not False
+        or source_delta["new_candidate_payload_accessed"] is not False
+        or source_delta["executable_p0_registered"] is not False
+        or source_delta["method_selected"] is not False
+        or source_delta["architecture_selected"] is not False
+        or source_delta["gpu_training_authorized"] is not False
+        or source_delta["outer_test_authorized"] is not False
+        or source_delta["submission_identity_active"] is not False
+        or source_delta["introai9_connection_verified"] is not True
+        or source_delta["introai9_pbs_jobs_observed"] != 0
+        or source_delta["introai9_login_node_gpu_command_executed"] is not False
+        or source_delta["junjinyong_accessed_for_this_audit"] is not False
+        or source_delta["intra_staged_payload_found"] is not False
+        or source_delta["intra_staged_material_scope"]
+        != "repository_skeleton_readme_splits_and_preview_images_only"
+        or source_delta["rsna_access_state"]
+        != "official_registry_controlled_access_terms_not_user_accepted_no_payload"
+        or observed_source_delta_scores != expected_source_delta_scores
+        or any(candidate["payload_accessed"] for candidate in source_delta["candidates"])
+        or source_delta["decision"]
+        != "reject_all_without_score_repair_p0_method_architecture_or_gpu"
+        or source_delta["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The source-delta audit must preserve all six source-only rejections, "
+            "introai9-only idle execution, and no P0, method, architecture, or GPU authority."
+        )
+    checks.append("source-delta rejection and introai9 idle boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -1248,7 +1344,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_dsa_prefix_source_rejection"
+        != "unselected_primary_with_no_active_shortlist_after_source_delta_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1411,7 +1507,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_dsa_prefix_source_rejection_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_source_delta_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
