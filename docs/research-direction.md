@@ -5,9 +5,19 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · fresh hemodynamic-endpoint batch best 31/40 and all source-rejected · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · hemodynamic-endpoint batch best 31/40 and all source-rejected · fresh topology-procedure batch best 28.5/40 and all source-rejected · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
 가장 최근 기준선은
+[`topology-procedure-source-audit-2026-08-10.md`](topology-procedure-source-audit-2026-08-10.md)다.
+New tornadic-flow source는 3 CFD WSS case와 figure용 2 MRI case 및 MATLAB
+detector를 공개하지만 same-case CFD/MRI pair는 아니며, 논문 자체가 topology
+taxonomy와 in-vivo observation을 직접 점유한다. Robust WSS skeleton, set-valued
+C-arm view, open-set TOF와 rheology/slip 후보는 24.0/28.5/24.0/28.5/28.5로
+모두 기각됐다. MAXIMUS는 weights-only, C-arm cohort는 18 patient,
+rheology/slip independent aneurysm geometry는 1개다. Large archive/model
+weight/patient image, P0, method, architecture와 GPU는 0이다.
+
+직전 기준선은
 [`hemodynamic-endpoint-source-audit-2026-08-10.md`](hemodynamic-endpoint-source-audit-2026-08-10.md)다.
 새 76-case Aneurisk CFD release는 CC BY 4.0 surface fields를 제공하지만 inflow는
 두 population age-group waveform을 diameter scaling한 것이며 실측 patient-specific

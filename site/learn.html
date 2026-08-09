@@ -50,10 +50,10 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 audit은 새 76-case Aneurisk CFD release까지 포함해도 curvature
-            surrogate가 직접 prior에 점유되고 31.0/40에 그침을 확인했습니다.
-            Culprit ranking, treated remnant와 wall-enhancement 후보도 모두 32
-            미만입니다.
+            최신 audit은 tornadic WSS topology, C-arm view, MAXIMUS TOF weights와
+            rheology/slip source를 검토했지만 최고점이 28.5/40임을 확인했습니다.
+            3 CFD + 2 MRI figure case는 paired cohort가 아니며 public weights는
+            public image dataset이 아닙니다.
             현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
@@ -65,7 +65,7 @@
             supervision semantics 또는 독립 단위가 실제로 달라진 별도 후보만 다시
             감사합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
           </p>
-          <a href="../docs/hemodynamic-endpoint-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/topology-procedure-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -386,7 +386,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              최신 후보도 31.0/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              최신 후보도 28.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
               stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
@@ -394,10 +394,15 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. New Aneurisk CFD release의 curvature proxy도 direct prior가 점유해 31.0/40이고 archive는 열지 않았습니다. PointNeXt/GNN + PINN-derived hemodynamics + clinical fusion 역시 2026 direct prior입니다. Cross-modal segmentation, NeckSpline, Bayesian growth, DiffusionNet과 E(3) mesh model도 controls입니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. Tornadic topology는 2026 direct prior이고 3 CFD + 2 MRI figure case는 paired cohort가 아닙니다. MAXIMUS는 weights-only, C-arm cohort는 18 patient, rheology/slip geometry는 1개입니다. PointNeXt/GNN + PINN-derived hemodynamics + clinical fusion도 direct prior입니다.</p>
             </aside>
             <article>
-              <span>CURRENT · HEMODYNAMIC–ENDPOINT REJECTION</span>
+              <span>CURRENT · TOPOLOGY–PROCEDURE REJECTION</span>
+              <div><h3>Tornadic topology나 public model weights가 method gap을 만드는가?</h3><p>아닙니다. 원 논문이 WSS topology taxonomy와 in-vivo observation을 점유하며 public CFD/MRI는 same-case pair가 아닙니다. Public MAXIMUS weights도 source image·mimic-label cohort를 제공하지 않습니다.</p></div>
+              <b>상태</b><small>best 28.5/40 · no archive/P0/model/GPU</small>
+            </article>
+            <article>
+              <span>HISTORY · HEMODYNAMIC–ENDPOINT REJECTION</span>
               <div><h3>새 CFD surface fields가 독립 method gap을 만드는가?</h3><p>아닙니다. 76 geometry의 inflow는 두 population waveform을 diameter로 scaling하며, companion paper가 Gaussian curvature를 TAWSS/OSI proxy로 이미 직접 제안합니다. Culprit/remnant/wall-enhancement endpoint도 공개 patient unit과 spatial map이 부족합니다.</p></div>
               <b>상태</b><small>best 31.0/40 · no archive/P0/model/GPU</small>
             </article>

@@ -54,6 +54,9 @@ REQUIRED_DATASETS = {
     "topaneu_2026_terms_gated",
     "dias_dsa_sequence_2024",
     "aneurisk_cfd_curvature_2026",
+    "tornadic_wss_topology_2026_figshare",
+    "maximus_tof_model_2025",
+    "rheology_slip_aneurysm_case01_2026",
 }
 
 
@@ -119,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.2":
-        raise ProtocolError("The current research-state schema must be version 4.2.")
+    if protocol["schema_version"] != "4.3":
+        raise ProtocolError("The current research-state schema must be version 4.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -143,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_hemodynamic_endpoint_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_topology_procedure_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -189,6 +192,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "vascular_semantics_source_audit",
             "pinn_rupture_direct_prior_audit",
             "hemodynamic_endpoint_source_audit",
+            "topology_procedure_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -198,12 +202,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_hemodynamic_endpoint_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_topology_procedure_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_and_public_manuscripts_only_no_new_candidate_payload_for_hemodynamic_endpoint_audit"
+        != "source_metadata_public_manuscripts_readmes_and_repository_tree_only_no_large_archive_model_weight_or_patient_payload_for_topology_procedure_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -215,11 +219,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/hemodynamic-endpoint-source-audit-2026-08-10.md"
+        != "docs/topology-procedure-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "curvature_only_surrogate_of_local_hemodynamic_fields"
+        != "noise_resolution_stable_wss_topological_skeleton"
     ):
         raise ProtocolError(
             "The PINN direct-prior boundary must retain no selected primary, "
@@ -252,6 +256,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "within_patient_multiple_aneurysm_culprit_ranking",
         "paired_pre_post_treatment_remnant_change_prediction",
         "wall_enhancement_hemodynamic_discordance_localization",
+        "cross_modality_tornadic_topology_preservation",
+        "noise_resolution_stable_wss_topological_skeleton",
+        "set_valued_c_arm_working_view_distribution",
+        "differential_diagnosis_aware_open_set_tof_detection",
+        "rheology_slip_model_form_hemodynamic_uncertainty",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -308,6 +317,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "multiple_aneurysm_culprit_set_ranking_from_morphology_or_wall_enhancement",
         "generic_pre_post_treatment_remnant_segmentation",
         "wall_enhancement_wss_spatial_correlation",
+        "tornadic_wss_topology_taxonomy_or_detector",
+        "generic_noise_or_resolution_robust_wss_topological_skeleton",
+        "differentiable_projection_adversarial_or_diffusion_working_view_prediction",
+        "differential_diagnosis_aware_nnunet_or_open_set_calibration",
+        "rheology_or_wall_slip_condition_tokens_and_parameter_sweeps",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -1598,6 +1612,161 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("hemodynamic-endpoint rejection and introai9-only boundary")
 
+    topology_audit = problem_selection["topology_procedure_source_audit"]
+    _require_keys(
+        topology_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_ids",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "large_archive_or_model_weight_payload_accessed",
+            "patient_image_or_controlled_challenge_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "tornadic_figshare_record",
+            "tornadic_figshare_license",
+            "tornadic_cfd_wss_cases",
+            "tornadic_mri_figure_cases",
+            "tornadic_same_case_cfd_mri_pairs_reported",
+            "tornadic_readme_bytes",
+            "tornadic_readme_accessed",
+            "tornadic_wss_archives_bytes",
+            "tornadic_wss_archives_downloaded",
+            "tornadic_velocity_archive_bytes",
+            "tornadic_velocity_archive_downloaded",
+            "tornadic_matlab_archive_bytes",
+            "tornadic_matlab_archive_downloaded",
+            "maximus_record",
+            "maximus_model_archive_bytes",
+            "maximus_model_archive_md5",
+            "maximus_model_archive_downloaded",
+            "maximus_source_images_public_in_record",
+            "maximus_paper_images",
+            "maximus_paper_patients",
+            "maximus_paper_adam_subjects",
+            "optimal_view_paper_patients",
+            "optimal_view_public_volume_and_view_label_asset_found",
+            "rheology_slip_tag_commit",
+            "rheology_slip_aneurysm_geometries",
+            "rheology_slip_repository_tree_and_readme_accessed",
+            "rheology_slip_generated_fields_or_zenodo_zip_accessed",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.topology_procedure_source_audit",
+    )
+    expected_topology_scores = {
+        "cross_modality_tornadic_topology_preservation": 24.0,
+        "noise_resolution_stable_wss_topological_skeleton": 28.5,
+        "set_valued_c_arm_working_view_distribution": 24.0,
+        "differential_diagnosis_aware_open_set_tof_detection": 28.5,
+        "rheology_slip_model_form_hemodynamic_uncertainty": 28.5,
+    }
+    observed_topology_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in topology_audit["candidates"]
+    }
+    topology_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in topology_audit["candidates"]
+    )
+    if (
+        topology_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or topology_audit["audit_document"]
+        != "docs/topology-procedure-source-audit-2026-08-10.md"
+        or topology_audit["automatic_selection_threshold"] != 32.0
+        or topology_audit["best_candidate_ids"]
+        != [
+            "noise_resolution_stable_wss_topological_skeleton",
+            "differential_diagnosis_aware_open_set_tof_detection",
+            "rheology_slip_model_form_hemodynamic_uncertainty",
+        ]
+        or topology_audit["best_score"] != 28.5
+        or topology_audit["best_score"]
+        >= topology_audit["automatic_selection_threshold"]
+        or topology_audit["active_shortlist_count"] != 0
+        or topology_audit["primary_problem_selected"] is not False
+        or topology_audit["large_archive_or_model_weight_payload_accessed"]
+        is not False
+        or topology_audit["patient_image_or_controlled_challenge_payload_accessed"]
+        is not False
+        or topology_audit["executable_p0_registered"] is not False
+        or topology_audit["method_selected"] is not False
+        or topology_audit["architecture_selected"] is not False
+        or topology_audit["gpu_training_authorized"] is not False
+        or topology_audit["outer_test_authorized"] is not False
+        or topology_audit["submission_identity_active"] is not False
+        or topology_audit["execution_server"] != "introai9"
+        or topology_audit["pbs_job_created"] is not False
+        or topology_audit["login_node_gpu_command_executed"] is not False
+        or topology_audit["junjinyong_accessed_for_this_audit"] is not False
+        or topology_audit["tornadic_figshare_record"]
+        != "10.6084/m9.figshare.32270130.v2"
+        or topology_audit["tornadic_figshare_license"] != "cc_by_4_0"
+        or topology_audit["tornadic_cfd_wss_cases"] != 3
+        or topology_audit["tornadic_mri_figure_cases"] != 2
+        or topology_audit["tornadic_same_case_cfd_mri_pairs_reported"] != 0
+        or topology_audit["tornadic_readme_bytes"] != 2063
+        or topology_audit["tornadic_readme_accessed"] is not True
+        or topology_audit["tornadic_wss_archives_bytes"] != 3189493388
+        or topology_audit["tornadic_wss_archives_downloaded"] is not False
+        or topology_audit["tornadic_velocity_archive_bytes"] != 309081947
+        or topology_audit["tornadic_velocity_archive_downloaded"] is not False
+        or topology_audit["tornadic_matlab_archive_bytes"] != 10059
+        or topology_audit["tornadic_matlab_archive_downloaded"] is not False
+        or topology_audit["maximus_record"] != "zenodo_17894703"
+        or topology_audit["maximus_model_archive_bytes"] != 1167744043
+        or topology_audit["maximus_model_archive_md5"]
+        != "3b38956f084d1570c00c47b232d6269d"
+        or topology_audit["maximus_model_archive_downloaded"] is not False
+        or topology_audit["maximus_source_images_public_in_record"] is not False
+        or topology_audit["maximus_paper_images"] != 385
+        or topology_audit["maximus_paper_patients"] != 345
+        or topology_audit["maximus_paper_adam_subjects"] != 113
+        or topology_audit["optimal_view_paper_patients"] != 18
+        or topology_audit["optimal_view_public_volume_and_view_label_asset_found"]
+        is not False
+        or topology_audit["rheology_slip_tag_commit"]
+        != "acda3721a511a527ebe374728874f8e69cfa7fbb"
+        or topology_audit["rheology_slip_aneurysm_geometries"] != 1
+        or topology_audit["rheology_slip_repository_tree_and_readme_accessed"]
+        is not True
+        or topology_audit["rheology_slip_generated_fields_or_zenodo_zip_accessed"]
+        is not False
+        or observed_topology_scores != expected_topology_scores
+        or not topology_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in topology_audit["candidates"]
+        )
+        or topology_audit["decision"]
+        != "reject_all_without_score_repair_large_payload_p0_method_architecture_or_gpu"
+        or topology_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The topology-procedure audit must preserve all five frozen "
+            "source-only rejections, the 28.5/40 maximum, no large payload/P0/"
+            "model/GPU, and introai9-only execution."
+        )
+    checks.append("topology-procedure rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -1677,7 +1846,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_hemodynamic_endpoint_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_topology_procedure_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1840,7 +2009,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_hemodynamic_endpoint_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_topology_procedure_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

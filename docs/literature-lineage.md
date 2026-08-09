@@ -1,5 +1,24 @@
 # 선행연구 계보와 research gap
 
+## 0-T. Current decision · topology names and public weights do not create a task
+
+The 2026-08-07
+[*tornadic phenomena* preprint](https://doi.org/10.64898/2026.08.07.743435)
+already defines a WSS-topology taxonomy and reports in-vivo 4D-flow observation.
+Its [Figshare record](https://doi.org/10.6084/m9.figshare.32270130.v2) is valuable
+but contains three CFD WSS cases and figure files for two MRI cases without a
+reported same-case CFD/MRI pair. A topology detector, meteorological label or
+robustness wrapper is therefore either direct prior or a three-anatomy
+reproducibility study.
+
+The same batch examined set-valued C-arm views, differential-diagnosis-aware TOF
+detection and rheology/slip model-form uncertainty. The first direct paper has
+18 patients and no public view-set asset; MAXIMUS releases nnU-Net weights rather
+than source images or mimic labels; the rheology/slip release has one aneurysm
+geometry. Scores are 24.0/28.5/24.0/28.5/28.5, all below 32. Detailed evidence is
+frozen in the [`topology–procedure source audit`](topology-procedure-source-audit-2026-08-10.md).
+No active gap, method or architecture is selected.
+
 ## 0-H. Current decision · new public CFD does not reopen a method gap
 
 The [2026 Aneurisk CFD release](https://zenodo.org/records/19455127) publishes

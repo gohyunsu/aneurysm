@@ -6,6 +6,16 @@ N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 �
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
 가장 최근
+[`topology–procedure source audit`](docs/topology-procedure-source-audit-2026-08-10.md)은
+2026-08-07 tornadic-flow preprint/Figshare, 18-patient C-arm working-view
+prediction, MAXIMUS TOF nnU-Net weights와 one-geometry rheology/slip release를
+점검했습니다. 다섯 후보는 **24.0/28.5/24.0/28.5/28.5**로 모두 32 미만입니다.
+Figshare는 3 CFD WSS case와 figure용 2 MRI case를 제공하지만 same-case
+CFD–MRI pair가 아니며, 원 논문이 topology taxonomy와 in-vivo 관찰을 직접
+점유합니다. WSS/velocity/code archive, MAXIMUS weights, 3DRA/patient image,
+P0, method, architecture와 PBS/GPU job은 모두 0입니다.
+
+직전
 [`hemodynamic–endpoint source audit`](docs/hemodynamic-endpoint-source-audit-2026-08-10.md)은
 새 Zenodo 76-case Aneurisk CFD release, multiple-aneurysm culprit ranking,
 post-treatment remnant와 wall-enhancement endpoint를 다시 점검했습니다. 최고
@@ -14,7 +24,7 @@ TAWSS/OSI의 직접 proxy로 이미 제시했고, release의 inflow는 실측 �
 아니라 두 연령군 평균 파형의 직경 scaling입니다. 1.4 GB archive는 받지 않았고
 payload, P0, method, architecture와 PBS/GPU job은 모두 0입니다.
 
-직전 direct-prior audit은 2026년 7월의
+그 전 direct-prior audit은 2026년 7월의
 [`geometry + PINN hemodynamics + clinical fusion`](docs/pinn-rupture-direct-prior-audit-2026-08-10.md)이
 팀의 원래 rupture-status pipeline을 사실상 직접 점유했음을 확인했습니다. 이
 선행은 AneuX 735 lesion에 PointNeXt, PINN-derived WSS/OSI/RRT와 clinical

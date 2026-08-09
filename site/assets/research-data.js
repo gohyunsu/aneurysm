@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · hemodynamic–endpoint best 31.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · topology–procedure best 28.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Topology names and public weights still do not earn a model",
+      copy: "The tornadic-flow paper already defines WSS topology and reports in-vivo 4D-flow observation. Its Figshare README names three CFD WSS cases and two MRI figure cases, but no same-case pair. A robust skeleton, set-valued C-arm views, open-set TOF detection and rheology/slip uncertainty score 24.0/28.5/24.0/28.5/28.5. MAXIMUS is weights-only, the view cohort has 18 patients and the solver release has one aneurysm geometry.",
+      status: "Best 28.5/40 · all rejected · large payload/P0/model/GPU 0",
+      url: "../docs/topology-procedure-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "New public CFD still does not earn a model",
@@ -397,6 +404,21 @@ window.AURORA_DATA = Object.freeze({
       provenance: "76 selected geometries · 1.4 GB VTP archive · CC BY 4.0 · two population age-group inflows scaled by diameter · record/paper outlet mismatch · archive/payload 0 · best candidate 31/40"
     },
     {
+      name: "Tornadic WSS topology · Figshare 2026",
+      role: "source-rejected topology/robustness control; not training",
+      provenance: "3 CFD WSS cases + 2 MRI figure cases · same-case pairs 0 · CC BY 4.0 · README only · WSS/velocity/code archives 0 · best batch 28.5/40"
+    },
+    {
+      name: "MAXIMUS TOF model · 2025",
+      role: "future strong pretrained baseline only; not an open-set dataset",
+      provenance: "1.17 GB nnU-Net weights · CC BY-NC 4.0 · source images/mimic labels absent from record · archive 0 · no P0/model execution/GPU"
+    },
+    {
+      name: "Rheology/slip case01 · 2026",
+      role: "source-rejected one-geometry model-form control; not training",
+      provenance: "MIT v1.0.0 · one patient-specific aneurysm mesh · Newtonian/Carreau × no/partial slip · repository tree/README only · generated fields 0"
+    },
+    {
       name: "OpenNeuro ds005096",
       role: "TOF-MRA external modality/geometry stress only",
       provenance: "63 patients/85 aneurysms · selected-session expert masks/STL · 24 longitudinal subjects but not longitudinal dense supervision"
@@ -423,6 +445,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "A fresh topology–procedure batch is rejected before payload and compute",
+      copy: "A new preprint and Figshare record already define tornadic WSS topology and in-vivo observation, while exposing only three CFD WSS cases and two unpaired MRI figure cases. Robust topology, set-valued C-arm views, open-set TOF detection and rheology/slip uncertainty score 24.0/28.5/24.0/28.5/28.5. MAXIMUS is weights-only, the view paper has 18 patients and the solver release has one aneurysm geometry. Schema 4.3 freezes no large archive, patient image, P0, model or GPU; introai9 remains the only execution server and junjinyong remains excluded.",
+      files: ["docs/topology-procedure-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

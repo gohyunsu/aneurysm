@@ -1,6 +1,15 @@
 # AURORA v2 모델 명세
 
-> **2026-08-10 current boundary:** fresh hemodynamic–endpoint batch의 최고
+> **2026-08-10 current boundary:** fresh topology–procedure batch는 tornadic
+> topology, robust WSS skeleton, set-valued C-arm view, open-set TOF detection과
+> rheology/slip uncertainty를 24.0/28.5/24.0/28.5/28.5로 기각했다. New topology
+> paper 자체가 WSS taxonomy와 in-vivo 4D-flow observation을 점유하고, 공개
+> 단위는 3 CFD case와 figure용 2 MRI case이며 paired case가 아니다. MAXIMUS는
+> weights-only, optimal-view cohort는 18 patient, rheology/slip geometry는 1개다.
+> 따라서 현재 headline architecture는 없다. 상세 판정은
+> [`topology–procedure source audit`](topology-procedure-source-audit-2026-08-10.md)을 따른다.
+>
+> 직전 hemodynamic–endpoint batch의 최고
 > curvature-only local-field surrogate도 31.0/40이다. New 76-case Aneurisk CFD
 > release는 population age-group inflow를 diameter scaling한 simulated fields이며,
 > companion paper가 curvature를 hemodynamic proxy로 이미 직접 제안한다.
@@ -9,7 +18,7 @@
 > payload, P0와 headline architecture는 없다. 상세 판정은
 > [`hemodynamic–endpoint source audit`](hemodynamic-endpoint-source-audit-2026-08-10.md)을 따른다.
 >
-> 직전 geometry + PointNeXt/GNN + PINN-derived
+> 그 전 geometry + PointNeXt/GNN + PINN-derived
 > hemodynamics + clinical fusion은 2026년 7월 direct prior가 이미 점유한다.
 > Patient-grouped split, patient-specific BC와 CFD/in-vivo validation 뒤의
 > incremental-flow question은 현재 joint asset이 없어 23.5/40으로 기각됐다.
@@ -34,8 +43,9 @@ segmentation asset component failed 5/9 and candidate closed · cycle-functional
 transient WSS P0 execution-incomplete before payload/no verdict/no rerun and
 candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before
 completed tabular archive/no verdict/no rerun and candidate closed · DSA
-prefix-risk candidate source-rejected 31/40 · fresh hemodynamic-endpoint batch
-best 31/40 and all source-rejected · active shortlist/selected primary
+prefix-risk candidate source-rejected 31/40 · hemodynamic-endpoint batch best
+31/40 and all source-rejected · fresh topology–procedure batch best 28.5/40 and
+all source-rejected · active shortlist/selected primary
 problem/method/architecture 0 · inverse healthy-vessel counterfactual candidate
 rejected 27/40 · no GPU/outer test
 

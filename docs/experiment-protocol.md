@@ -1,11 +1,26 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.2 · 2026-08-10
+버전: 4.3 · 2026-08-10
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## S-TOPO · topology–procedure source batch · all rejected, no execution
+
+Tornadic CFD/4D-flow topology, robust WSS skeleton, set-valued C-arm working
+view, differential-diagnosis-aware TOF detection과 rheology/slip uncertainty를
+같은 frozen 8축 rubric으로 평가했다. 점수는 24.0, 28.5, 24.0, 28.5, 28.5이며
+32를 넘는 후보가 없다.
+
+Figshare README는 3 CFD WSS case와 figure용 2 MRI case를 기술하지만 paired
+case는 없고, 원 논문이 topology taxonomy와 in-vivo observation을 직접 점유한다.
+MAXIMUS record는 weights-only, C-arm paper는 18 patient, rheology/slip release는
+one aneurysm geometry다. Large archive/model weight/patient image를 받지 않고
+P0, method, architecture, PBS/GPU와 outer test를 만들지 않는다. 상세 계약은
+[`topology–procedure audit`](topology-procedure-source-audit-2026-08-10.md)에
+고정했다. 향후 실행은 `introai9` PBS만 사용하고 `junjinyong`은 제외한다.
 
 ## S-HEMO · hemodynamic–endpoint source batch · all rejected, no execution
 

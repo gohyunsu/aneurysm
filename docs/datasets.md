@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 topology–procedure source audit:** Figshare
+> `10.6084/m9.figshare.32270130.v2`의 README는 3 CFD WSS cardiac-cycle case와
+> figure용 2 MRI case를 보고하지만 same-case pair는 없다. Three WSS archives
+> 3,189,493,388 bytes, velocity archive 309,081,947 bytes와 MATLAB archive
+> 10,059 bytes는 내려받지 않았다. Zenodo `17894703`은 1,167,744,043-byte
+> MAXIMUS weights이지 source image/mimic-label dataset이 아니며 역시 받지 않았다.
+> Rheology/slip v1.0.0은 one aneurysm `case01`이다. 다섯 후보가 모두 32 미만이라
+> P0/model/GPU는 0이다. 상세 근거는
+> [`topology–procedure audit`](topology-procedure-source-audit-2026-08-10.md)에 있다.
+
 > **2026-08-10 hemodynamic–endpoint source audit:** Zenodo
 > `10.5281/zenodo.19455127`은 76 Aneurisk geometry의 1.4 GB OpenFOAM-derived
 > VTP surface fields, MD5 `8c66e7bb359d04bd1a5d6db6da3f3926`, CC BY 4.0을

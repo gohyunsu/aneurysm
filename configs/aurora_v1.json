@@ -1,9 +1,9 @@
 {
-  "schema_version": "4.2",
+  "schema_version": "4.3",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_hemodynamic_endpoint_source_audit",
+    "status": "failed_branches_preserved_no_active_shortlist_after_topology_procedure_source_audit",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_hemodynamic_endpoint_source_audit_no_primary_or_method",
+    "status": "no_active_shortlist_after_topology_procedure_source_audit_no_primary_or_method",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "source_metadata_and_public_manuscripts_only_no_new_candidate_payload_for_hemodynamic_endpoint_audit",
+    "asset_access_status": "source_metadata_public_manuscripts_readmes_and_repository_tree_only_no_large_archive_model_weight_or_patient_payload_for_topology_procedure_audit",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -27,7 +27,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32",
-    "audit_document": "docs/hemodynamic-endpoint-source-audit-2026-08-10.md",
+    "audit_document": "docs/topology-procedure-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -659,8 +659,104 @@
       "decision": "reject_all_without_score_repair_payload_p0_method_architecture_or_gpu",
       "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
     },
+    "topology_procedure_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/topology-procedure-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_ids": [
+        "noise_resolution_stable_wss_topological_skeleton",
+        "differential_diagnosis_aware_open_set_tof_detection",
+        "rheology_slip_model_form_hemodynamic_uncertainty"
+      ],
+      "best_score": 28.5,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "large_archive_or_model_weight_payload_accessed": false,
+      "patient_image_or_controlled_challenge_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "tornadic_figshare_record": "10.6084/m9.figshare.32270130.v2",
+      "tornadic_figshare_license": "cc_by_4_0",
+      "tornadic_cfd_wss_cases": 3,
+      "tornadic_mri_figure_cases": 2,
+      "tornadic_same_case_cfd_mri_pairs_reported": 0,
+      "tornadic_readme_bytes": 2063,
+      "tornadic_readme_accessed": true,
+      "tornadic_wss_archives_bytes": 3189493388,
+      "tornadic_wss_archives_downloaded": false,
+      "tornadic_velocity_archive_bytes": 309081947,
+      "tornadic_velocity_archive_downloaded": false,
+      "tornadic_matlab_archive_bytes": 10059,
+      "tornadic_matlab_archive_downloaded": false,
+      "maximus_record": "zenodo_17894703",
+      "maximus_model_archive_bytes": 1167744043,
+      "maximus_model_archive_md5": "3b38956f084d1570c00c47b232d6269d",
+      "maximus_model_archive_downloaded": false,
+      "maximus_source_images_public_in_record": false,
+      "maximus_paper_images": 385,
+      "maximus_paper_patients": 345,
+      "maximus_paper_adam_subjects": 113,
+      "optimal_view_paper_patients": 18,
+      "optimal_view_public_volume_and_view_label_asset_found": false,
+      "rheology_slip_tag_commit": "acda3721a511a527ebe374728874f8e69cfa7fbb",
+      "rheology_slip_aneurysm_geometries": 1,
+      "rheology_slip_repository_tree_and_readme_accessed": true,
+      "rheology_slip_generated_fields_or_zenodo_zip_accessed": false,
+      "candidates": [
+        {
+          "id": "cross_modality_tornadic_topology_preservation",
+          "score": 24.0,
+          "axis_scores": [4.5, 2.0, 1.0, 3.5, 0.5, 4.5, 5.0, 3.0],
+          "independent_units": "three_cfd_wss_cases_and_two_mri_figure_cases_without_same_case_pairing",
+          "payload_accessed": false,
+          "decision": "reject_current_version_topology_taxonomy_and_in_vivo_observation_directly_occupied_without_paired_cfd_mri_units"
+        },
+        {
+          "id": "noise_resolution_stable_wss_topological_skeleton",
+          "score": 28.5,
+          "axis_scores": [4.0, 4.0, 1.5, 4.5, 0.5, 5.0, 5.0, 4.0],
+          "independent_units": "three_cfd_anatomies_with_synthetic_corruptions_not_new_measurements",
+          "payload_accessed": false,
+          "decision": "reject_current_version_original_detector_defines_its_own_target_and_independent_anatomy_is_three"
+        },
+        {
+          "id": "set_valued_c_arm_working_view_distribution",
+          "score": 24.0,
+          "axis_scores": [4.5, 3.0, 2.5, 0.5, 0.5, 5.0, 5.0, 3.0],
+          "independent_units": "private_preliminary_18_patient_cohort_without_public_volume_or_reader_view_sets",
+          "payload_accessed": false,
+          "decision": "reject_current_version_valuable_set_ambiguity_but_public_target_and_independent_units_absent"
+        },
+        {
+          "id": "differential_diagnosis_aware_open_set_tof_detection",
+          "score": 28.5,
+          "axis_scores": [4.5, 3.0, 1.0, 2.5, 4.0, 5.0, 5.0, 3.5],
+          "independent_units": "paper_reports_345_patients_plus_113_adam_subjects_but_zenodo_record_releases_weights_not_images_or_mimic_labels",
+          "payload_accessed": false,
+          "decision": "reject_current_version_differential_diagnosis_training_directly_occupied_and_public_open_set_endpoint_asset_absent"
+        },
+        {
+          "id": "rheology_slip_model_form_hemodynamic_uncertainty",
+          "score": 28.5,
+          "axis_scores": [4.0, 5.0, 1.0, 4.5, 0.5, 5.0, 5.0, 3.5],
+          "independent_units": "one_patient_specific_aneurysm_geometry_with_solver_parameter_orbit",
+          "payload_accessed": false,
+          "decision": "reject_current_version_exact_interventions_but_one_geometry_and_release_directly_studies_rheology_slip_effects"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_large_payload_p0_method_architecture_or_gpu",
+      "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "same_lesion_preprocessing_orbit_quotient_morphometry",
-    "most_recent_source_rejected_candidate": "curvature_only_surrogate_of_local_hemodynamic_fields",
+    "most_recent_source_rejected_candidate": "noise_resolution_stable_wss_topological_skeleton",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -687,7 +783,12 @@
       "cross_source_curvature_residualized_hemodynamic_added_value",
       "within_patient_multiple_aneurysm_culprit_ranking",
       "paired_pre_post_treatment_remnant_change_prediction",
-      "wall_enhancement_hemodynamic_discordance_localization"
+      "wall_enhancement_hemodynamic_discordance_localization",
+      "cross_modality_tornadic_topology_preservation",
+      "noise_resolution_stable_wss_topological_skeleton",
+      "set_valued_c_arm_working_view_distribution",
+      "differential_diagnosis_aware_open_set_tof_detection",
+      "rheology_slip_model_form_hemodynamic_uncertainty"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -742,7 +843,12 @@
       "cross_source_cfd_rupture_status_fusion",
       "multiple_aneurysm_culprit_set_ranking_from_morphology_or_wall_enhancement",
       "generic_pre_post_treatment_remnant_segmentation",
-      "wall_enhancement_wss_spatial_correlation"
+      "wall_enhancement_wss_spatial_correlation",
+      "tornadic_wss_topology_taxonomy_or_detector",
+      "generic_noise_or_resolution_robust_wss_topological_skeleton",
+      "differentiable_projection_adversarial_or_diffusion_working_view_prediction",
+      "differential_diagnosis_aware_nnunet_or_open_set_calibration",
+      "rheology_or_wall_slip_condition_tokens_and_parameter_sweeps"
     ]
   },
   "venue": {
@@ -756,7 +862,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_hemodynamic_endpoint_source_audit",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_topology_procedure_source_audit",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -821,7 +927,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "unselected",
-    "active_candidate_status": "no_active_shortlist_after_hemodynamic_endpoint_source_audit_no_primary_method_architecture_or_gpu",
+    "active_candidate_status": "no_active_shortlist_after_topology_procedure_source_audit_no_primary_method_architecture_or_gpu",
     "candidate_primary_estimand": "unselected",
     "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -1178,6 +1284,46 @@
       "method_or_gpu_authorized": false
     },
     {
+      "name": "tornadic_wss_topology_2026_figshare",
+      "role": "source_rejected_topology_and_robustness_control_not_training",
+      "field_provenance": "real_cfd",
+      "split_unit": "geometry",
+      "status": "source_record_and_readme_audited_archives_not_downloaded_all_candidates_below_32",
+      "doi": "10.6084/m9.figshare.32270130.v2",
+      "license": "cc_by_4_0",
+      "cfd_wss_cases": 3,
+      "mri_figure_cases": 2,
+      "same_case_cfd_mri_pairs_reported": 0,
+      "wss_velocity_or_code_archive_accessed": false,
+      "method_or_gpu_authorized": false
+    },
+    {
+      "name": "maximus_tof_model_2025",
+      "role": "source_rejected_open_set_candidate_and_future_strong_baseline_weights_only",
+      "field_provenance": "none",
+      "split_unit": "patient",
+      "status": "source_metadata_and_paper_audited_model_archive_not_downloaded_source_images_not_in_record",
+      "doi": "10.5281/zenodo.17894703",
+      "license": "cc_by_nc_4_0",
+      "model_archive_bytes": 1167744043,
+      "source_images_public_in_record": false,
+      "model_archive_accessed": false,
+      "method_or_gpu_authorized": false
+    },
+    {
+      "name": "rheology_slip_aneurysm_case01_2026",
+      "role": "source_rejected_single_geometry_model_form_control_not_training",
+      "field_provenance": "none",
+      "split_unit": "geometry",
+      "status": "source_repository_tree_and_readme_audited_generated_fields_and_zenodo_zip_not_accessed",
+      "doi": "10.5281/zenodo.20146475",
+      "license": "mit",
+      "tag_commit": "acda3721a511a527ebe374728874f8e69cfa7fbb",
+      "aneurysm_geometries": 1,
+      "generated_field_payload_accessed": false,
+      "method_or_gpu_authorized": false
+    },
+    {
       "name": "aneux",
       "role": "closed_preprocessing_orbit_p0_history_no_active_primary_role",
       "field_provenance": "none",
@@ -1196,7 +1342,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_vascular_semantics_audit",
+    "current_headline_architecture": "unselected_no_active_problem_after_topology_procedure_source_audit",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

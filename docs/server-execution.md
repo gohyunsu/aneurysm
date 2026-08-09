@@ -19,6 +19,16 @@
 - IAVS 상태 확인은 공식 GitHub metadata를 읽는 source watch이며 scientific
   experiment가 아니다. P0/P1 gate 전에는 `introai9` GPU job을 만들지 않는다.
 
+## 2026-08-10 · topology–procedure source audit, no job authorized
+
+- Fresh source-only scores are 24.0/28.5/24.0/28.5/28.5, all below 32.
+- Only public record pages, manuscripts, a 2,063-byte Figshare README and the
+  rheology/slip repository README/tree were read. WSS/velocity/code archives,
+  MAXIMUS weights, 3DRA and patient-image payloads were not accessed.
+- No P0, PBS or GPU job was created on `introai9`; this is a normal source-gate
+  early stop, not an SSH, scheduler or GPU failure.
+- `junjinyong` was not connected to, queried, submitted to or monitored.
+
 ## 서버 역할
 
 | 서버 계정 | 역할 | 허용 작업 |

@@ -159,6 +159,44 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "hemodynamic-endpoint audit"):
             validate_protocol(candidate)
 
+    def test_topology_procedure_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "topology_procedure_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 28.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 5)
+        self.assertEqual(audit["tornadic_cfd_wss_cases"], 3)
+        self.assertEqual(audit["tornadic_mri_figure_cases"], 2)
+        self.assertEqual(audit["tornadic_same_case_cfd_mri_pairs_reported"], 0)
+        self.assertFalse(audit["tornadic_wss_archives_downloaded"])
+        self.assertFalse(audit["tornadic_velocity_archive_downloaded"])
+        self.assertFalse(audit["maximus_model_archive_downloaded"])
+        self.assertFalse(audit["maximus_source_images_public_in_record"])
+        self.assertEqual(audit["optimal_view_paper_patients"], 18)
+        self.assertEqual(audit["rheology_slip_aneurysm_geometries"], 1)
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topology_procedure_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "topology-procedure audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topology_procedure_source_audit"][
+            "maximus_model_archive_downloaded"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "topology-procedure audit"):
+            validate_protocol(candidate)
+
     def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:
         audit = self.protocol["problem_selection"]["vascular_semantics_source_audit"]
         self.assertEqual(audit["best_score"], 29.5)

@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 topology–procedure source-audit overlay:** Fresh source-only
+> batch는 cross-modality tornadic topology, noise/resolution-stable WSS
+> skeleton, set-valued C-arm view, differential-diagnosis-aware TOF detection과
+> rheology/slip uncertainty를 24.0/28.5/24.0/28.5/28.5로 판정했다. Figshare
+> `10.6084/m9.figshare.32270130.v2`는 3 CFD WSS case와 figure용 2 MRI case를
+> 보고하지만 same-case pair는 0이고 원 논문이 taxonomy와 in-vivo observation을
+> 직접 점유한다. MAXIMUS record는 weights-only, C-arm cohort는 18 patient,
+> rheology/slip aneurysm geometry는 1개다. Schema 4.3 source of truth는
+> `problem_selection.topology_procedure_source_audit`와
+> `docs/topology-procedure-source-audit-2026-08-10.md`다. Large archive/model
+> weight/patient image, P0, method, architecture, PBS/GPU, outer test와 submission
+> identity는 0이다. `introai9` PBS만 허용하고 `junjinyong`은 접속·조회·제출·
+> 모니터링하지 않는다.
+
 > **2026-08-10 hemodynamic–endpoint deployment overlay:** Exact content
 > `318a22a06a1a0d1ad8339183f290e1648c656fed`의 Quality `31326443420`과 Pages
 > `31326443150`이 성공했다. Live overview는 batch best 31.0/40, all rejected,
@@ -245,10 +259,14 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. Active primary와
-  source shortlist는 모두 0이다. 가장 최근 hemodynamic-endpoint batch의 최고
-  curvature-only surrogate도 31.0/40이며 새 76-case archive는 내려받지 않았다.
-  원 논문이 curvature proxy claim을 직접 점유하고 나머지 endpoint도 direct
-  priors/public-unit 부족으로 모두 기각됐다. 직전 direct-prior audit은 원래
+  source shortlist는 모두 0이다. 가장 최근 topology-procedure batch의 최고점은
+  28.5/40이다. Tornadic taxonomy는 direct prior이고 public unit은 3 CFD + 2
+  unpaired MRI figure case, MAXIMUS는 weights-only, C-arm cohort는 18 patient,
+  rheology/slip geometry는 1개다. Large archive/P0/model/GPU는 0이다. 직전
+  hemodynamic-endpoint batch의 최고 curvature-only surrogate도 31.0/40이며 새
+  76-case archive는 내려받지 않았다. 원 논문이 curvature proxy claim을 직접
+  점유하고 나머지 endpoint도 direct priors/public-unit 부족으로 기각됐다. 그 전
+  direct-prior audit은 원래
   geometry + PINN hemodynamics + clinical rupture-status fusion pipeline이 July
   2026 prior에 의해 점유됐음을 확인했다. Physically validated incremental-flow
   residual도 joint asset 부재로 23.5/40이며 새 payload/P0/model/GPU는 0이다.
@@ -389,9 +407,11 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
   아니다. 새 후보에서도 direct prior 또는 strong baseline으로 취급한다.
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
-- 가장 최근 source-rejected candidate는 **curvature-only surrogate of local
-  hemodynamic fields**다. 31.0/40이며 direct proxy prior 때문에 기각됐다. 그
-  직전 candidate는 **physically validated incremental hemodynamic information
+- 가장 최근 source-rejected candidate는 **noise/resolution-stable WSS
+  topological skeleton**이다. Batch tie best 28.5/40이며 independent CFD anatomy
+  3개와 self-defined detector target 때문에 기각됐다. 직전 candidate는
+  **curvature-only surrogate of local hemodynamic fields**다. 31.0/40이며 direct
+  proxy prior 때문에 기각됐다. 그 전 candidate는 **physically validated incremental hemodynamic information
   beyond geometry and clinical variables**다. 원래
   PointNeXt/GNN + PINN + clinical fusion은 direct prior이며, joint asset 부재로
   residual도 23.5/40이다. 가장 최근 execution-closed

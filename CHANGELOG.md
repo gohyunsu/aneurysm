@@ -4,6 +4,23 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Fresh topology–procedure source batch is rejected before compute
+
+- A new preprint and CC BY 4.0 Figshare record already define tornadic WSS
+  topology and its in-vivo 4D-flow observation. Public data names three CFD WSS
+  cases and two MRI figure cases, with no reported same-case pair.
+- Robust WSS topology, set-valued C-arm view prediction, differential-diagnosis
+  TOF detection and rheology/slip uncertainty do not rescue the gap. MAXIMUS is
+  weights-only, the view cohort is 18 patients and the solver release contains
+  one aneurysm geometry.
+- Five frozen scores are 24.0/28.5/24.0/28.5/28.5. No large archive, model
+  weight, patient image, P0, method, architecture, PBS/GPU, outer test or
+  submission identity is opened. Machine contract is schema 4.3 and execution
+  remains `introai9`-only with `junjinyong` excluded.
+- 영향 파일: `docs/topology-procedure-source-audit-2026-08-10.md`,
+  `configs/aurora_v1.json`, validator/tests, overview documents, site data and
+  `AGENTS.md`.
+
 ## 2026-08-10 · Hemodynamic–endpoint source rejection is deployed and verified
 
 - Exact content `318a22a06a1a0d1ad8339183f290e1648c656fed`의 Quality

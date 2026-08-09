@@ -1,6 +1,12 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-10 current boundary:** 가장 최근 fresh source batch는 76-case
+> **2026-08-10 current boundary:** 가장 최근 fresh topology–procedure batch는
+> tornadic topology, robust WSS skeleton, set-valued C-arm view, open-set TOF와
+> rheology/slip uncertainty를 24.0/28.5/24.0/28.5/28.5로 기각했다. Figshare
+> source는 3 CFD WSS case와 figure용 2 MRI case지만 same-case pair가 아니며,
+> MAXIMUS는 weights-only, optimal-view cohort는 18 patient, rheology/slip
+> aneurysm geometry는 1개다. Large archive/patient image/P0/model/GPU는 0이다.
+> 직전 source batch는 76-case
 > Aneurisk CFD, multiple-aneurysm culprit, post-treatment remnant와
 > wall-enhancement endpoint를 평가했다. 최고 curvature-only local-hemodynamic
 > surrogate도 31.0/40이며 companion paper가 핵심 proxy claim을 직접 점유한다.
@@ -25,7 +31,7 @@
 
 최종 검토일: 2026-08-10 KST
 
-상태: **target locked · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
+상태: **target locked · topology–procedure batch best 28.5/40 and all rejected · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
 shortlist/selected primary problem/method/architecture/GPU 0 · not
 submission-ready**
