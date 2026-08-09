@@ -303,13 +303,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "AneuX morphometry", "PointNet++", "DiffusionNet / E(3)", "Conditional residual gap"],
-    ["Already occupied", "Mesh/cut robustness + 170 indices", "Surface status classification", "Discretization / motion robustness", "None of these alone"],
-    ["Required control", "Analytic + precomputed features", "Matched point-cloud model", "Matched continuous/equivariant model", "Orbit quotient with signal preservation"],
-    ["Missing evidence", "Casewise task impact", "Orbit consistency", "Source-held-out functional trade-off", "P0 asset/unit and P1 were never evaluated"],
-    ["Current boundary", "Direct dataset baseline", "Direct task baseline", "Direct method prior", "historical 34/40 · P0 incomplete/closed · no method/GPU"]
+    ["Axis", "Official case split", "Base-family split", "Robust operator controls", "Residual research gap"],
+    ["What it tests", "New generated case IDs", "Unseen source anatomy", "OOD/group/shape robustness", "Model-selection consequence"],
+    ["Required control", "Released benchmark", "Group-disjoint development", "GINO/group DRO/shape derivative/UQ", "Matched field + functional selection"],
+    ["Known boundary", "Case overlap 0", "Validation overlap 20/20", "Direct prior, not novelty", "P0 scientific checks unevaluated"],
+    ["Current decision", "Insufficient alone", "Necessary evaluation hygiene", "Mandatory baselines", "35/40 source history · P0 incomplete · no method/GPU"]
   ],
   gates: [
+    {
+      id: "P0-L",
+      title: "Does Aneumo support generation-family-disjoint model selection?",
+      copy: "Corrected official metadata maps 10,660 cases to 427 base families and shows 20/20 validation families overlapping train. Exact introai9 CPU job 115386 ended before the first small source completed; cache, result JSON, raw scheduler log and all 11 scientific checks are absent or unevaluated.",
+      state: "Source 35/40 · execution-incomplete/no verdict · no repair/rerun/P1/method/GPU",
+      blocking: true
+    },
     {
       id: "P0-O",
       title: "Does AneuX expose a patient-groupable same-lesion preprocessing orbit?",
@@ -536,6 +543,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "site",
+      title: "Every current-state panel now follows the Aneumo lineage outcome",
+      copy: "The live hero was current but lower current-gap, architecture, beginner-guide and paper-status panels still described older perfusion or AneuX branches. They now explain 10,660 generated cases versus 427 source families, zero case overlap versus 20/20 validation-family overlap, the 35/40 source admission, and the P0 incomplete/no-verdict closure. Historical content remains labelled as history; research authorization is unchanged.",
+      files: ["site/index.html", "site/learn.html", "site/assets/aurora.js", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.10",
       category: "experiment",

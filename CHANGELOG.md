@@ -4,6 +4,16 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Current-site panels align with the Aneumo lineage outcome
+
+- Replaced stale longitudinal-perfusion and historical AneuX text in the live
+  current-gap, decision-boundary, beginner architecture and paper-status panels.
+- The site now distinguishes 0 case overlap from 20/20 base-family overlap,
+  explains why split repair is evaluation hygiene rather than novelty, and
+  shows the exact P0 incomplete/no-verdict/no-model boundary throughout.
+- Historical branches remain available as history; no research authorization,
+  method, architecture, GPU, outer test or claim changed.
+
 ## 2026-08-10 · Aneumo lineage P0 closes without a scientific verdict
 
 - Exact public source `d3eb3d3…` ran once on `introai9` as CPU/PBS job

@@ -189,17 +189,17 @@
           <p class="eyebrow">CURRENT GAP STATUS</p>
           <h3>No active gap survives both direct priors and unit adequacy.</h3>
           <p>
-            공개 aSAH CTP의 873개 map은 62명의 291회 검사에서 나온 세 종류
-            지도입니다. 독립 사건은 DCI 9건뿐이고, 증상이 심할수록 검사·치료가
-            달라지는 informative observation process가 있습니다. Longitudinal
-            forecasting·early warning·reacquisition·counterfactual은 이미 직접
-            선행이 있거나 필요한 반사실을 식별할 수 없습니다. 31.0을 사후
-            재가중해 32로 만들지 않습니다.
+            Aneumo의 10,660 case는 427개 base geometry에서 생성됐습니다.
+            Official validation은 case ID가 train과 다르지만 20개 base family가
+            모두 train에 있습니다. 이 35/40 finding은 평가 단위를 바로잡지만,
+            split correction 자체는 novelty가 아닙니다. Exact CPU P0도 첫 source
+            전에 종료돼 새로운 task gap이나 방법 필요성을 과학적으로 평가하지
+            못했습니다.
           </p>
-          <div class="gap-equation" aria-label="최고 source 점수도 admission gate보다 낮아 실행 권한이 생기지 않는 관계">
-            <span>latest source score = 31.0</span>
+          <div class="gap-equation" aria-label="source admission 뒤 P0가 미완료되어 모델 권한으로 이어지지 않는 관계">
+            <span>source 35/40 → P0 incomplete</span>
             <i>⇒</i>
-            <span>no P0 · no model · no GPU</span>
+            <span>shortlist 0 · no model · no GPU</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -230,9 +230,9 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 아래 흐름은 historical AneuX P0 asset
-          chain과 early stop을 설명하는 기록입니다. 최신 longitudinal-MRA batch는
-          P0 이전에 모두 기각됐습니다.
+          현재 architecture는 없습니다. 아래 흐름은 최신 Aneumo generation-
+          lineage 후보가 source admission을 통과했지만 scientific task gate와
+          model selection에는 도달하지 못한 이유를 단계별로 설명합니다.
         </p>
       </div>
 
@@ -240,63 +240,63 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
-          DiffusionNet, PointNet++, E(3)-equivariant mesh network, topology module과
-          surface foundation features는 향후 strong controls일 수 있지만 현재
-          method가 아닙니다. Longitudinal MRA도 최고 source score가 31.5라 P0와
-          P1은 열리지 않았습니다.
+          Geometry-informed operator, GINO, shape-derivative operator, group DRO,
+          contrastive invariance와 hierarchical UQ는 향후 strong controls이지만
+          현재 method가 아닙니다. Family-disjoint split을 만드는 것만으로는
+          algorithmic contribution이 되지 않습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="AneuX P0 evidence stage">
+      <div class="mode-switch" role="group" aria-label="Aneumo generation-lineage P0 evidence stage">
         <button class="active" type="button" data-mode="presence">Source</button>
         <button type="button" data-mode="point">Units</button>
         <button type="button" data-mode="mask">Decision</button>
-        <span id="mode-description">두 official archive identity는 고정했지만 첫 tabular transport가 completion 전에 소진됐습니다.</span>
+        <span id="mode-description">Corrected official mapping은 10,660 case와 427 source family를 명시합니다.</span>
       </div>
 
       <div class="architecture-flow">
         <article class="arch-node input-node">
           <span class="arch-number">01</span>
-          <p class="arch-label">REGISTERED OFFICIAL SOURCE</p>
-          <h3>AneuX v1.0 archives</h3>
-          <p>Exact byte/MD5 · official record · CC BY-NC 4.0</p>
+          <p class="arch-label">PINNED OFFICIAL LINEAGE</p>
+          <h3>10,660 cases → 427 families</h3>
+          <p>Corrected mapping commit · explicit base/deformation IDs</p>
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <a class="arch-learn" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">근거 record</a>
+          <a class="arch-learn" href="../docs/aneumo-lineage-split-source-audit-2026-08-10.md">근거 record</a>
         </article>
-        <div class="arch-connector"><span>exact pair</span></div>
+        <div class="arch-connector"><span>audit unit</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">BOUNDED ACCESS · STOPPED HERE</p>
-          <h3>CSV + ZIP central directory</h3>
-          <p>No completed/partial tabular file · CSV/model range access 0</p>
+          <p class="arch-label">SOURCE-LEVEL UNIT FINDING</p>
+          <h3>Case split ≠ family split</h3>
+          <p>Case overlap 0 · validation-family overlap 20/20</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">후보와 모델 구분</a>
         </article>
-        <div class="arch-connector accent"><span id="bc-connector-label">verify hashes</span></div>
+        <div class="arch-connector accent"><span id="bc-connector-label">source audited</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">ORBIT CONTRACT · NOT EVALUATED</p>
-          <h3 id="bc-node-title">Exact source identity</h3>
-          <p id="bc-node-copy">All 13 asset/unit checks remain unevaluated</p>
+          <p class="arch-label">METADATA P0 · STOPPED HERE</p>
+          <h3 id="bc-node-title">Generation-lineage contract</h3>
+          <p id="bc-node-copy">First small source 0 · all 11 checks unevaluated</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
-          <a class="arch-learn" href="../configs/aneux_preprocessing_orbit_p0.json">frozen checks</a>
+          <a class="arch-learn" href="../configs/aneumo_lineage_p0.json">frozen checks</a>
         </article>
         <div class="arch-connector"><span>all checks</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">ONE EXACT CPU/PBS P0 · COMPLETE</p>
+          <p class="arch-label">ONE EXACT CPU/PBS P0 · CLOSED</p>
           <h3>Execution-incomplete → closed</h3>
           <div class="dual-branch">
-            <span><b>Pass</b>register method-free P1 only</span>
+            <span><b>Pass</b>license clarification before any P1</span>
             <span><b>Fail/incomplete</b>close this candidate version</span>
           </div>
-          <p>Exit 2 · 00:37:00 · transport exhausted · no resubmission</p>
+          <p>Exit −29 · 00:20:36 · exact cause unresolved · no resubmission</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
         <div class="arch-connector"><span>not authorized</span></div>
@@ -313,15 +313,15 @@
       <div class="architecture-notes">
         <article>
           <span>UNIT INTEGRITY</span>
-          <p>Resolution과 cut variant를 별도 환자로 세지 않고 observed patient group을 보존합니다.</p>
+          <p>Generated deformation을 독립 anatomy로 세지 않고 427개 source family를 split 단위로 봅니다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
-          <p>AneuX morphometry, MATCH, PointNet++, DiffusionNet, latent shape와 E(3) model이 mandatory controls입니다.</p>
+          <p>Geometry-operator OOD, group robustness, shape derivatives와 hierarchical UQ가 mandatory controls입니다.</p>
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>P0는 asset/unit에 도달하지 못했습니다. P1과 within-orbit task audit은 미등록입니다.</p>
+          <p>P0는 첫 small source에 도달하지 못했습니다. P1, method와 performance audit은 미등록입니다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -587,7 +587,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Treatment–surveillance best 30.0/40 · all rejected · shortlist/primary/model/GPU 0</b>
+        <span>Current stage</span><b>Aneumo lineage P0 incomplete · scientific verdict 0 · shortlist/primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

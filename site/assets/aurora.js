@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "두 official archive의 byte/MD5는 고정했지만 initial tabular transport가 completion 전에 소진됐습니다.",
-      connector: "identity pinned",
-      title: "Official source identity",
-      copy: "AneuX v1.0 identities are frozen; the scientific asset gate is unevaluated",
+      description: "Corrected official mapping은 10,660 generated case와 427 source family를 명시합니다.",
+      connector: "source audited",
+      title: "Generation lineage",
+      copy: "Exact case overlap is 0, yet validation-family overlap is 20/20",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "CSV parse와 model listing access가 0이므로 patient/cut/morphometry contract는 미평가입니다.",
-      connector: "not evaluated",
-      title: "Same-lesion orbit contract closed",
-      copy: "All 13 patient, cut, resolution and privacy checks remain unevaluated",
+      description: "Generated deformation이 아니라 base family가 unseen-anatomy generalization의 독립 단위입니다.",
+      connector: "unit corrected",
+      title: "Case-disjoint is not family-disjoint",
+      copy: "Split hygiene is required, but it is not an algorithmic contribution",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Execution-incomplete action에 따라 same-source repair/rerun과 P1 없이 candidate version을 닫았습니다.",
+      description: "첫 small source 전에 종료되어 11개 P0 check는 모두 미평가이며 exact cause는 unresolved입니다.",
       connector: "closed",
       title: "No model authorization",
-      copy: "No architecture, GPU, outer test or rupture-status performance claim",
+      copy: "No repair, rerun, P1, architecture, GPU, outer test or performance claim",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };
