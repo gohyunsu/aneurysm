@@ -4,6 +4,17 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Vascular-semantics audit is deployed and verified
+
+- Exact content `f735ab5a2e0eec411142b7834e743d6cf4cd0944`의 Quality
+  `31324138662`와 Pages `31324138250`이 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 best 29.5/40,
+  all rejected, active shortlist/primary/method/architecture/GPU 0과
+  `introai9`-only 경계를 확인했다. 상세 audit 문서도 HTTP 200이다.
+- 이 배포 확인은 candidate score, payload, P0, model, GPU, outer test 또는
+  submission identity를 바꾸지 않는다.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `site/assets/research-data.js`.
+
 ## 2026-08-10 · Fresh vascular-semantics batch is rejected before compute
 
 - Frozen 8축 40점 screen에서 TopBrain paired CTA/MRA anatomy, healthy IXI atlas,

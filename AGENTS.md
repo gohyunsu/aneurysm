@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 vascular-semantics deployment overlay:** Exact audit content
+> `f735ab5a2e0eec411142b7834e743d6cf4cd0944`의 Quality `31324138662`와 Pages
+> `31324138250`이 성공했다. Live overview와 change data는 best 29.5/40, all
+> rejected, active shortlist/primary/method/architecture/P0/GPU 0과
+> `introai9`-only/`junjinyong` excluded 경계를 렌더링하며 상세 audit URL은 HTTP
+> 200이다. 이 deployment verification은 candidate score, payload access,
+> scientific verdict 또는 compute authorization을 바꾸지 않는다.
+
 > **2026-08-10 vascular-semantics source-audit overlay:** Fresh frozen batch는
 > TopBrain paired CTA/MRA anatomy, healthy IXI atlas, VesselVerse annotations,
 > NeckSpline extension, paired CTA phantom QA와 ADAM longitudinal semantics를

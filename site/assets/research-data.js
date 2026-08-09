@@ -406,6 +406,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Vascular-semantics audit is live",
+      copy: "Exact content f735ab5a2e0eec411142b7834e743d6cf4cd0944 passed Quality run 31324138662 and Pages run 31324138250. The live overview renders best 29.5/40, all candidates rejected, active shortlist/primary/method/architecture/P0/GPU zero and introai9-only execution. The detailed audit URL returns successfully. Deployment verification changes no score, payload access, scientific verdict, P0, model, GPU, outer test or submission identity; junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "A fresh vascular-semantics batch is rejected before payload and compute",
       copy: "The frozen eight-axis screen scores TopBrain, healthy IXI, VesselVerse, NeckSpline extension, paired CTA phantom QA and ADAM longitudinal semantics at 29.5/28.5/27.5/26.5/26.0/25.0. The source audit counts 25 paired TopBrain patients rather than 50 volumes, one phantom anatomy rather than 126 patients, and algorithm outputs rather than independent human VesselVerse raters. No score is repaired to cross 32; active shortlist, payload, P0, method, architecture, GPU and outer test remain zero. Future execution is introai9 PBS only; junjinyong is excluded from connection, query, submission and monitoring.",
