@@ -320,6 +320,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "The TopAneu source-audit boundary is live and verified",
+      copy: "Exact source 58fd5f97ed9b68c19dfabc7bb95db53f59343b94 passed Quality run 31286527562 and Pages run 31286527078. The live site renders the 29/40 conditional lead, active shortlist zero and terms/payload/model/GPU zero. The public open-CTA result exposes only metadata discovery and confirms DICOM header/pixel access was false. This deployment record changes no score, access state, scientific decision or authorization.",
+      files: ["CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.09",
       category: "decision",
       title: "TopAneu attachment is retained below admission, not selected",
       copy: "A fresh official-source audit scores patient-specific vascular-attachment-consistent lesion inference 29.0/40, below the 32/40 admission threshold. TopAneu itself defines 52-class location plus segmentation; vessel-distance attention, ARAN's centerline GAT, joint lesion/vessel learning and universal taxonomies are direct prior art. The user has not accepted the challenge terms and no TopAneu payload was read. A separate open CTA ZIP64 discovery reads only the central directory and 16 KB metadata member, confirming 172 cases, 122 lesions and 24 multi-lesion cases without DICOM/STL access. Active shortlist, method, architecture, GPU and outer test remain zero.",

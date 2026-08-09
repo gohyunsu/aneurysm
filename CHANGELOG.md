@@ -4,6 +4,21 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · TopAneu source audit deployment is verified
+
+- Exact source `58fd5f97ed9b68c19dfabc7bb95db53f59343b94`의 GitHub
+  Quality run `31286527562`와 Pages run `31286527078`은 모두 `success`다.
+- <https://gohyunsu.github.io/aneurysm/site/>에서 TopAneu attachment lead
+  29/40, active problem shortlist 0과 terms/payload/model/GPU 0 경계를 확인했다.
+  Site change history에도 below-admission decision이 렌더링된다.
+- 공개 result URL에서
+  `open_multicenter_cta_metadata_discovery_20260809`와
+  `dicom_header_or_pixel_read=false`를 확인했다. Individual row, DICOM/STL
+  payload와 private path는 노출되지 않는다.
+- 이 deployment record는 source audit 점수, 약관 상태, active shortlist,
+  method/GPU authorization 또는 artifact를 바꾸지 않는다.
+- 영향 파일: `CHANGELOG.md`, `site/assets/research-data.js`.
+
 ## 2026-08-09 · TopAneu attachment remains a below-threshold conditional lead
 
 - TopAneu official challenge, live data page와 registered design을 대조해 live
