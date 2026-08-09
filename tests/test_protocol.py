@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "PINN direct-prior boundary"):
+        with self.assertRaisesRegex(ProtocolError, "acquisition-flow boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "PINN direct-prior boundary"):
+        with self.assertRaisesRegex(ProtocolError, "acquisition-flow boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "PINN direct-prior boundary"):
+        with self.assertRaisesRegex(ProtocolError, "acquisition-flow boundary"):
             validate_protocol(candidate)
 
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
