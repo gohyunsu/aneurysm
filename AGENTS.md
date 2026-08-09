@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 treatment–surveillance deployment overlay:** Exact source content
+> `9080f4fea64bbad968e5a2508fa79d1a2f4da4d4`의 Quality `31332304523`과 Pages
+> `31332303841`이 성공했다. Live overview와 field guide는 batch best 30.0/40,
+> all rejected, active shortlist/primary/method/architecture/P0/GPU 0을 렌더링하고
+> detailed audit URL도 HTTP 200이다. 이 배포 확인은 score, payload, P0, model,
+> compute, outer test 또는 submission identity를 바꾸지 않는다. AURORA는
+> `introai9` PBS만 사용하고 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 treatment–surveillance source-audit overlay:** Fresh source-only
 > batch는 observed interval-censored post-flow-diverter occlusion, causal
 > Pipeline-versus-Surpass selection, early-complication/delayed-occlusion

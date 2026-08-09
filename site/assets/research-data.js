@@ -488,6 +488,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Treatment–surveillance rejection is live",
+      copy: "Exact content 9080f4fea64bbad968e5a2508fa79d1a2f4da4d4 passed Quality run 31332304523 and Pages run 31332303841. The live overview and field guide render batch best 30.0/40, all rejected, active shortlist/primary/method/architecture/P0/GPU zero and the detailed audit link; the audit document returns HTTP 200. Deployment verification changes no score, payload, P0, model, compute, outer test or submission identity. introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "Treatment–surveillance candidates stop before payload and compute",
       copy: "Observed interval-censored post-FD occlusion, causal Pipeline-versus-Surpass selection, early-complication/delayed-occlusion utility, recurrent-procedure sequence modeling and fast/standard TOF-MRA equivalence score 30.0/26.0/29.0/26.0/23.0. The 126-subject table does not observe exact occlusion time or randomize device assignment; the 22-patient MRA record is restricted and directly occupied. Schema 4.6 freezes no spreadsheet/DSA/MRA/P0/model/GPU, introai9-only execution and complete exclusion of junjinyong.",

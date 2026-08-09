@@ -4,6 +4,17 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Treatment–surveillance rejection is deployed and verified
+
+- Exact content `9080f4fea64bbad968e5a2508fa79d1a2f4da4d4` passed Quality
+  run `31332304523` and Pages run `31332303841`.
+- The live overview and field guide render best 30.0/40, all rejected,
+  shortlist/primary/method/architecture/P0/GPU zero and the detailed audit link;
+  the detailed Markdown URL returns HTTP 200.
+- Deployment verification changes no score, payload access, P0, model, compute,
+  outer test or submission identity. `introai9` remains exclusive and
+  `junjinyong` remains excluded.
+
 ## 2026-08-10 · Treatment–surveillance source audit rejects all five candidates
 
 - Public flow-diverter follow-up data report 126 subjects/141 procedures,
