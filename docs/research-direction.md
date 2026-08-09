@@ -5,34 +5,45 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · active problem shortlist 0 · method/architecture/GPU/outer test unselected · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid conditional shortlist 1 at preregistered P0 only · primary problem/method/architecture/GPU/outer test unselected · submission blocked
 
-2026-08-09 fresh source audit에서 TopAneu의 patient-specific vascular attachment
-가설을 검토했지만 29.0/40으로 32점 자동 채택 기준에 못 미쳤다. TopAneu
-terms는 사용자가 수락했다고 확인되지 않았고 image/mask/JSON payload는 0이다.
-공개 172-case CTA는 ZIP64 중앙 디렉터리와 metadata CSV만 range-read했으며
-DICOM/STL payload는 열지 않았다. 따라서 현재 상태는 여전히 active shortlist
-0, method/architecture/GPU/outer test 0이다.
+2026-08-09 fresh direct-prior and open-source audit은 **physical-coordinate
+lesion-instance grid commutation**을 32.0/40의 conditional shortlist로 남겼다.
+같은 CTA를 deterministic하게 resample할 때 병변 cardinality, 물리 좌표 surface와
+morphometry가 하나의 instance 표현에서 함께 commute해야 한다는 질문이다.
+등록 시점에 공개 172-case CTA의 ZIP64 index와 metadata만 읽었고 DICOM
+header·PixelData와 STL payload는 열지 않았다. 따라서 primary problem,
+method/architecture/GPU/outer test는 여전히 0이다.
 
-## 0. 현재 연구 상태 · active problem shortlist 0
+## 0. 현재 연구 상태 · conditional shortlist 1, P0 registered
 
-가장 최근 감사 문서는
-[`topaneu-attachment-audit-2026-08-09.md`](topaneu-attachment-audit-2026-08-09.md)다.
-TopAneu는 417 scan/409 patient, 52-class vessel location과 lesion/type mask를
-제공한다고 기술하지만 organizer-predicted vessel mask는 silver annotation이다.
-ARAN은 이미 patient-specific centerline graph, geometric GAT와 artery-aware
-cross-attention을 사용하고, MICCAI 2024/ICCVW 2025 연구는 soft vessel distance와
-vesselness prior를 사용한다. Universal taxonomy, hierarchical loss와 joint
-lesion/vessel multitask도 선행 범위다. 따라서 남은 가설은 independent head
-대신 하나의 continuous/probabilistic vascular attachment에서 lesion support와
-dataset ontology label을 동시에 유도하는 구조에 한정된다.
+현재 source of truth는
+[`open-cta-physical-grid-audit-2026-08-09.md`](open-cta-physical-grid-audit-2026-08-09.md)와
+[`configs/open_cta_physical_p0.json`](../configs/open_cta_physical_p0.json)이다.
+P0는 172 case의 first/upper-median/last DICOM header 516개를 PixelData tag 전까지만
+range-read하고, expert STL 122개의 CRC, finite/nondegenerate surface, metadata
+volume scale와 DICOM physical frame alignment를 aggregate-only로 검사한다.
+PatientID/StudyUID의 case 단위 일대일성도 확인하기 전까지 split unit은
+`cta_case`이며 patient라고 가정하지 않는다.
 
-그러나 bifurcation ambiguity의 inter-rater/reference distribution이 확인되지
-않았고 payload semantics도 감사하지 않았다. 29.0/40의 조건부 lead일 뿐
-primary problem이나 contribution이 아니다. 사용자가 공식 terms를 직접
-수락하기 전에는 payload를 받지 않는다. 수락 뒤에도 prospectively registered
-CPU/read-only P0 asset/semantics audit만 가능하며, pass는 method-free P1 등록만
-허용한다. 다른 fresh problem audit은 계속할 수 있다.
+Consispace류 spacing-aware resampling, implicit continuous segmentation,
+resolution-invariant latent, random-finite-set detection, LesionDETR류
+variable-cardinality set prediction과 aneurysm shape/topology loss는 모두 direct
+prior다. 남을 수 있는 gap은 이 요소 하나가 아니라 **하나의 물리 좌표
+lesion-instance representation에서 cardinality·surface·morphometry가 함께
+commute하고 small/multiple aneurysm에서 실제 이득을 보이는 구조**다. P0는 이
+gap의 asset 전제만 검사하며 contribution이나 성능 증거가 아니다.
+
+- P0 all pass: method-free P1 rasterization/instance-stability audit만 새로 등록한다.
+- P0 any fail: tolerance·threshold·selection repair 없이 후보를 닫는다.
+- 어느 outcome도 method, architecture, GPU, outer test 또는 submission을 열지 않는다.
+
+### 0-T. 직전 TopAneu 조건부 lead · 보존
+
+TopAneu의 patient-specific vascular attachment 가설은 29.0/40으로 자동 채택
+기준에 못 미쳤다. Terms는 사용자가 수락했다고 확인되지 않았고 payload는
+0이다. P0-T는 등록·실행되지 않았으며 open-CTA 후보는 TopAneu 52-class
+supervision의 대체물이 아니다.
 
 ### 0-A. 직전 닫힌 goal-oriented 후보
 

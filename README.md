@@ -4,34 +4,33 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active problem shortlist는 **0개**입니다. Goal-oriented hemodynamic
-segmentation 후보는 CTA 경계 오차를 PDE adjoint shape sensitivity에 signed
-projection하는 문제를 검토했지만, exact public source `ef547a4…`의 CMHA
-asset component가 9개 check 중 5개만 통과해 닫혔습니다. 이는 method나 paper
-identity로 채택되지 않았고 solver v2, S0b, model, GPU와 outer test도 열지
-않았습니다. 근거와 kill rule은
-[`goal-oriented segmentation cold audit`](docs/goal-oriented-segmentation-audit-2026-08-09.md)에
+현재 conditional problem shortlist는 **1개**지만 primary problem은 아직
+선정하지 않았습니다. 새 후보는 같은 CTA의 voxel grid를 바꿔도 병변 개수,
+물리 좌표 표면과 morphometry가 하나의 lesion-instance 표현에서 일관되게
+유도되어야 한다는 **physical-coordinate grid commutation**입니다. Source-only
+점수는 32.0/40으로 P0 실행 기준과 정확히 같으며, method·architecture·GPU·outer
+test와 paper identity는 모두 0입니다. 질문, 직접 선행과 kill rule은
+[`open-CTA physical-grid audit`](docs/open-cta-physical-grid-audit-2026-08-09.md)에
 있습니다.
 
-가장 최근 fresh audit은
-[`TopAneu vascular-attachment problem`](docs/topaneu-attachment-audit-2026-08-09.md)을
-검토했습니다. TopAneu live release는 417 scan/409 patient와 52개 location
-class를 기술하지만, vessel mask는 organizer model의 silver prediction이고
-verified account와 data terms가 필요합니다. ARAN의 patient-specific centerline
-GNN, MICCAI 2024 vessel-distance attention, multitask lesion/vessel prediction과
-universal taxonomy가 직접 선행이므로, `vessel graph + hierarchy loss`는 새
-방법이 아닙니다. Patient-specific attachment에서 lesion mask와 location을 함께
-유도하는 가설만 조건부 lead로 남았으나 **29.0/40**으로 32점 채택 기준에
-못 미쳤습니다. Terms는 수락하지 않았고 TopAneu payload, method, architecture,
-GPU와 outer test는 모두 0입니다.
-
-별도 공개 multi-center CTA archive는 전체 25.58 GB를 받지 않고 ZIP64 중앙
-디렉터리와 16 KB metadata member만 range-read했습니다. 172 case/122 lesion/
-24 multi-lesion case를 확인했지만 DICOM header·pixel과 STL은 읽지 않았습니다.
-이는 향후 external stress 후보일 뿐 TopAneu supervision이나 headline training
-근거가 아닙니다. Privacy-safe aggregate는
+공개 multi-center CTA archive는 전체 25.58 GB를 내려받지 않고 ZIP64 중앙
+디렉터리와 16 KB metadata member만 range-read했습니다. 172 case, 122 lesion,
+24 multi-lesion case와 source-reported 0.5--2 mm slice thickness를 확인했지만,
+등록 시점에는 DICOM header·PixelData와 STL payload를 읽지 않았습니다.
+[`P0 contract`](configs/open_cta_physical_p0.json)는 516개 DICOM header를
+PixelData tag 전까지만 읽고 122개 STL의 CRC·물리 frame·volume scale을
+검사하도록 prospectively 고정했습니다. P0 pass는 learned method 없는 P1
+rasterization/task-adequacy audit만 열며, 하나라도 실패하면 threshold repair
+없이 후보를 닫습니다. 기존 aggregate는
 [`metadata discovery`](results/open_multicenter_cta_metadata_discovery_20260809.json)에
 있습니다.
+
+직전 fresh audit인
+[`TopAneu vascular-attachment problem`](docs/topaneu-attachment-audit-2026-08-09.md)은
+29.0/40으로 32점 기준에 못 미쳤습니다. Terms는 수락하지 않았고 TopAneu
+payload는 0입니다. 그보다 앞선 goal-oriented hemodynamic segmentation도 exact
+CMHA asset component가 9개 check 중 5개만 통과해 닫혔습니다. 어느 실패도 새
+후보의 성능이나 novelty 근거로 재사용하지 않습니다.
 
 2026-08-09 추가 red team은 inverse Navier--Stokes의 shape-gradient joint
 segmentation과 task-based quantitative segmentation 평가를 직접 선행으로
@@ -69,18 +68,17 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 실패 이력의 연속성을 위해 유지하지만,
-> active problem, 방법명과 architecture는 없습니다. 닫힌 S0a를 수리하거나
-> GNN·U-Net·training config를 먼저 고르지 않고, 새 problem-level audit가
-> 데이터·estimand·direct-prior gap을 독립적으로 통과해야 합니다.
+> 현재는 conditional P0 후보만 있고 primary problem, 방법명과 architecture는
+> 없습니다. 닫힌 S0a를 수리하거나 GNN·U-Net·training config를 먼저 고르지
+> 않고, P0/P1이 데이터·estimand·direct-prior gap을 독립적으로 통과해야 합니다.
 
-## 현재 단계 · active problem shortlist 0, method/GPU 없음
+## 현재 단계 · conditional shortlist 1, primary problem/method/GPU 없음
 
-현재 허용된 다음 작업은 닫힌 후보를 수리하지 않는 다른 **fresh problem-level
-primary-source and asset audit**, 또는 사용자가 TopAneu terms를 직접 수락했다고
-명시한 뒤 별도 등록하는 CPU/read-only P0 asset/semantics audit입니다. 새 후보는 method를 붙이기 전에 임상·영상
-task unit, 실제 확보 가능한 supervision, 직접 선행의 잔여 gap과 method-free
-task adequacy를 순서대로 증명해야 합니다. Executable headline model, GPU job,
-outer test와 submission identity는 없습니다.
+현재 허용된 다음 작업은 clean public commit에서 등록된 open-CTA P0를 정확히
+한 번 실행하고 frozen pass/close rule을 따르는 것입니다. Pass하더라도 별도
+method-free P1만 등록할 수 있습니다. P1이 lesion cardinality, physical surface와
+morphometry의 비자명한 grid sensitivity를 입증하기 전에는 executable headline
+model, GPU job, outer test와 submission identity가 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.

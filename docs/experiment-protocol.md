@@ -1,11 +1,48 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.2-draft · 2026-08-09
+버전: 3.3-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## P0-C · Open-CTA physical-coordinate asset gate · prospectively registered
+
+후보 질문은 동일 CTA를 deterministic하게 다른 voxel grid로 표현하더라도 병변
+cardinality, 물리 좌표 surface와 morphometry가 하나의 lesion-instance 표현에서
+함께 commute하는가이다. Source-only score는 32.0/40으로 P0 실행 기준과 정확히
+같지만 primary problem 선정이나 contribution은 아니다.
+
+Executable 계약은 `configs/open_cta_physical_p0.json`이다. 등록 전에 공식
+Zenodo record, 25,578,845,008-byte ZIP64 central directory와 16,458-byte
+metadata만 읽었다. DICOM header·PixelData와 STL payload는 읽지 않았다.
+
+### Fixed selection and access
+
+- independent unit: `cta_case`; PatientID/StudyUID 일대일성을 확인하기 전에는
+  patient unit이라고 쓰지 않는다.
+- 172 case 각각 numeric first/upper-median/last DICOM, 총 516 member를 고정한다.
+- compressed prefix를 32 KiB chunk, member당 최대 256 KiB까지 PixelData tag
+  전에만 읽는다. PixelData value는 decode·inspect하지 않는다.
+- 122 STL 전부를 읽어 CRC, finite/nondegenerate triangle, metadata volume ratio와
+  DICOM physical-frame containment를 검사한다.
+- case ID, UID, vertex coordinate와 raw payload를 결과나 Git에 남기지 않는다.
+
+### All-check decision
+
+Archive/member/metadata exactness, case–lesion mapping, 516 header parse, 172-case
+patient/study key, three-header series geometry, declared image count, 최소 120개
+metadata/header thickness match, observed thickness ratio ≥2, STL geometry,
+95% 이상 volume-scale plausibility와 3 mm tolerance frame alignment를 모두
+요구한다.
+
+- all pass: 별도 method-free P1 native-grid rasterization/instance-stability
+  contract만 등록한다.
+- any fail: threshold, tolerance, member selection이나 parser를 결과에 맞춰
+  고치지 않고 이 후보를 닫는다.
+- 어느 outcome도 architecture, GPU, outer test, paper contribution 또는
+  submission identity를 열지 않는다.
 
 ## P0-T · TopAneu attachment source audit · conditional lead, not registered for execution
 
@@ -33,7 +70,8 @@ CPU/read-only로 검사한다. P0-T pass는 method-free P1만 열고 model/GPU�
 
 ## S0 · goal-oriented segmentation gate · closed at asset component
 
-현재 active problem shortlist는 0개다. Goal-oriented hemodynamic segmentation의
+현재 conditional shortlist는 P0-C 한 개지만 primary problem은 미선정이다.
+Goal-oriented hemodynamic segmentation의
 staging v2와 solver preflight v1은 S0a 전 operational execution-incomplete로,
 asset component는 exact source `ef547a4…`의 5/9 scientific fail로 보존한다.
 이 후보에는 solver v2, S0b, GPU, segmentation training, rupture-label selection,

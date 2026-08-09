@@ -2,14 +2,15 @@
 
 최종 검토일: 2026-08-09 KST
 
-상태: **target locked · active problem shortlist 0 · no method/architecture/GPU ·
-not submission-ready**
+상태: **target locked · conditional shortlist 1 at preregistered open-CTA P0 ·
+primary problem/method/architecture/GPU 0 · not submission-ready**
 
-2026-08-09 fresh TopAneu source audit은 patient-specific vascular attachment
-가설을 29.0/40의 조건부 lead로만 남겼다. 32점 자동 채택 기준을 통과하지
-못했고 official terms를 수락하지 않았으며 payload는 0이다. 공개 172-case CTA는
-metadata member까지만 감사해 external stress 가능성만 확인했다. 이 감사는
-active problem, method 또는 paper identity를 열지 않는다.
+2026-08-09 fresh direct-prior audit은 open-CTA physical-coordinate lesion-instance
+grid commutation을 32.0/40의 조건부 후보로 남겼다. 공개 172-case CTA는 등록
+시점에 metadata와 ZIP index만 읽었고 DICOM header·PixelData/STL payload는
+0이다. Prospectively registered P0는 asset/physical-frame 전제만 검사하며,
+통과해도 method-free P1만 연다. TopAneu attachment lead는 29.0/40,
+terms/payload 0으로 별도 보존한다.
 
 ## 1. 제출 목표와 현재 결론
 
@@ -20,7 +21,10 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
 
-현재 제출 가능한 paper identity는 없다. Partial/missing-BC AURORA, Aneumo
+현재 제출 가능한 paper identity는 없다. Conditional open-CTA 후보는 같은
+CTA의 grid가 바뀔 때 cardinality, physical surface와 morphometry를 하나의
+instance representation에서 함께 보존하는 문제가 실제로 비자명한지조차
+P0/P1에서 확인하지 않았다. Partial/missing-BC AURORA, Aneumo
 irregular-3D, cross-protocol 4D-flow, RSNA mixed-granularity lesion-set과
 goal-oriented hemodynamic segmentation을 모두 실패 또는 부적격 이력으로
 보존한다. 마지막 후보는 exact public source
@@ -33,6 +37,14 @@ challenge 자체가 joint location/segmentation task를 점유하고 ARAN·vesse
 attention·hierarchical taxonomy가 직접 경쟁한다. 남은 attachment-consistency
 가설은 payload semantics와 ambiguity reference를 확인한 method-free audit 뒤에도
 independent-head failure가 남아야만 후보가 된다.
+
+Open-CTA 후보의 direct prior에는 spacing-aware resampling, continuous implicit
+segmentation, resolution-invariant latent, probabilistic finite-set detection,
+variable-cardinality LesionDETR와 aneurysm shape/topology learning이 포함된다.
+따라서 resampler, coordinate decoder, query set 또는 topology loss를 붙이는
+것은 contribution이 아니다. P1 뒤에도 남는 joint cardinality–surface–morphometry
+commutation gap과 strong direct-baseline 우위가 함께 있어야 ISBI method identity를
+검토한다.
 
 이 결과는 “좋은 아이디어인데 데이터만 불편하다”는 뜻이 아니다. Frozen
 estimand에 필요한 105-lesion image–surface–table linkage를 공개 자산에서
@@ -153,7 +165,7 @@ Figure는 최소 두 개를 계획한다.
 | 날짜 | 결정점 | 통과하지 못하면 |
 |---|---|---|
 | 2026-08-09 | Goal-oriented S0a-A exact run | 5/9 fail로 후보 종료; solver v2 없음 |
-| 2026-08-16 | Fresh P0 problem/asset audit | TopAneu lead 29/40; terms 미수락이면 다른 문제 감사, method/GPU 없음 |
+| 2026-08-16 | Open-CTA P0-C one-shot asset audit | any fail이면 후보 종료; pass도 method-free P1만 등록 |
 | 2026-08-30 | P1 method-free adequacy | 후보 종료 또는 baseline/estimand freeze |
 | 2026-09-13 | P2와 bounded P3 등록 | outer test 봉인 불가 시 중단 |
 | 2026-09-27 | Development freeze | strong baseline과 positive validation 부재 시 P4 금지 |
@@ -169,6 +181,7 @@ Figure는 최소 두 개를 계획한다.
 허용:
 
 - 새 problem의 primary-source/asset/task-unit audit
+- clean public commit의 registered open-CTA P0-C one-shot 실행과 frozen 판정
 - 사용자의 명시적 TopAneu terms 수락 뒤 prospectively registered CPU/read-only P0-T
 - 기존 실패의 public aggregate, protocol, site와 private manuscript 동기화
 - P0 전에 실행하지 않는 비교표·claim matrix 정리
@@ -178,6 +191,7 @@ Figure는 최소 두 개를 계획한다.
 - Goal-oriented S0a mapping repair 또는 rerun
 - 에이전트의 TopAneu 가입·terms 수락·무등록 payload download
 - Solver preflight v2, S0b, segmentation model과 GPU job
+- P0-C/P1 전에 open-CTA model, architecture, GPU 또는 outer-test config 작성
 - Closed checkpoint/threshold/outer-test 재사용
 - Cross-sectional rupture status를 future rupture risk로 표현
 - 실제 positive evidence 없이 method name, architecture figure 또는 contribution

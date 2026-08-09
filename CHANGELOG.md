@@ -4,6 +4,37 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Open-CTA physical-coordinate candidate enters a P0-only shortlist
+
+- Fresh direct-prior red team은 spacing-aware resampling, implicit continuous
+  segmentation, resolution-invariant latent, random-finite-set detection,
+  variable-cardinality LesionDETR와 aneurysm shape/topology learning을 모두
+  선행 범위로 올렸다. 잔여 가설은 하나의 physical-coordinate lesion-instance
+  representation에서 cardinality·surface·morphometry가 grid 변화에 함께
+  commute하고 small/multiple lesion에서 실제 이득을 보이는 경우로 한정했다.
+- Source-only score는 **32.0/40**으로 automatic shortlist 기준과 정확히 같다.
+  이는 conditional shortlist 1일 뿐 primary problem, method, architecture,
+  contribution 또는 submission identity의 선택이 아니다.
+- DICOM header와 STL payload를 읽기 전에
+  `configs/open_cta_physical_p0.json`을 고정했다. 172 case의 first/upper-median/last
+  DICOM header 516개는 PixelData tag 전에만 읽고, 122 STL은 CRC·geometry·
+  metadata-volume scale·DICOM frame alignment를 aggregate-only로 검사한다.
+  PixelData decode, raw retention, case identifier publication, model, GPU와
+  outer test는 금지한다.
+- 모든 check가 통과하면 별도 method-free P1 rasterization/instance-stability
+  audit만 등록한다. 하나라도 실패하면 threshold·tolerance·selection·parser를
+  결과에 맞춰 수리하지 않고 후보를 닫는다. P0 실행은 clean public registration
+  commit 이후 정확히 한 번만 허용한다.
+- 영향 파일: `configs/open_cta_physical_p0.json`, `src/aurora/open_cta_physical_p0.py`,
+  `scripts/audit_open_cta_physical_p0.py`, `tests/test_open_cta_physical_p0.py`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `.github/workflows/quality.yml`, `docs/open-cta-physical-grid-audit-2026-08-09.md`,
+  `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`, `docs/data-acquisition.md`,
+  `docs/server-execution.md`, `AGENTS.md`, `site/index.html`, `site/learn.html`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · TopAneu source audit deployment is verified
 
 - Exact source `58fd5f97ed9b68c19dfabc7bb95db53f59343b94`의 GitHub

@@ -35,6 +35,7 @@ ALLOWED_SPLIT_UNITS = {
     "aneux_base_family",
     "physical_phantom",
     "physical_base_geometry",
+    "cta_case",
 }
 REQUIRED_GATES = {"G0", "G1", "G2", "G3", "G4"}
 REQUIRED_DATASETS = {
@@ -116,8 +117,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.0":
-        raise ProtocolError("The current research-state schema must be version 3.0.")
+    if protocol["schema_version"] != "3.1":
+        raise ProtocolError("The current research-state schema must be version 3.1.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -148,6 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "audit_document",
             "source_only_dataset_substitution_screen",
             "topaneu_attachment_source_audit",
+            "open_cta_physical_grid_candidate",
             "rsna_supervision_semantics_red_team",
             "goal_oriented_segmentation_cold_audit",
             "most_recent_closed_candidate",
@@ -158,15 +160,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_after_topaneu_attachment_candidate_not_admitted"
+        != "conditional_shortlist_one_open_cta_physical_grid_p0_preregistered_no_primary_problem"
         or problem_selection["shortlisted_candidate"]
-        != "none"
+        != "physical_coordinate_lesion_instance_grid_commutation_p0_only"
         or problem_selection["candidate_dataset"]
-        != "none"
+        != "open_multicenter_cta_2026_zenodo_15697196"
         or problem_selection["candidate_estimand"]
-        != "none"
+        != "physical_space_grid_commutation_of_lesion_instance_support_cardinality_and_morphometry_under_deterministic_resampling"
         or problem_selection["asset_access_status"]
-        != "topaneu_terms_not_user_accepted_payload_not_accessed_open_cta_metadata_range_audited_only"
+        != "open_cta_metadata_and_zip_index_only_p0_registered_no_dicom_header_or_stl_payload_yet_topaneu_unaccepted"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -176,15 +178,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "continue_fresh_problem_audits_or_after_explicit_topaneu_terms_acceptance_register_read_only_p0_asset_semantics_audit"
+        != "execute_exact_open_cta_physical_grid_p0_once_then_follow_its_frozen_pass_or_close_rule"
         or problem_selection["audit_document"]
-        != "docs/topaneu-attachment-audit-2026-08-09.md"
+        != "docs/open-cta-physical-grid-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "goal_oriented_hemodynamic_segmentation"
     ):
         raise ProtocolError(
-            "The conditional-problem boundary must retain no active shortlist, method, GPU, "
-            "or outer test after the TopAneu source audit."
+            "The conditional open-CTA P0 boundary must retain one candidate but no selected "
+            "primary problem, method, GPU, or outer test."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -212,6 +214,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "parent_artery_classification",
         "generic_hierarchical_or_universal_taxonomy_loss",
         "generic_joint_aneurysm_vessel_multitask_segmentation",
+        "generic_implicit_continuous_segmentation",
+        "semantic_resampling_or_voxel_spacing_consistency",
+        "resolution_invariant_autoencoder",
+        "random_finite_set_probabilistic_detection",
+        "lesion_detr_variable_cardinality_set_prediction",
+        "topology_or_shape_guided_aneurysm_segmentation",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
     substitution_screen = problem_selection["source_only_dataset_substitution_screen"]
@@ -329,6 +337,92 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError(
             "The TopAneu attachment audit must remain a below-threshold source-only "
             "conditional lead with no accepted terms, payload, method, GPU, or outer test."
+        )
+    physical_candidate = problem_selection["open_cta_physical_grid_candidate"]
+    _require_keys(
+        physical_candidate,
+        [
+            "status",
+            "audit_document",
+            "config",
+            "candidate_hypothesis",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "independent_unit_before_p0",
+            "source_cases",
+            "source_controls",
+            "source_positive_cases",
+            "source_lesions",
+            "source_multi_lesion_cases",
+            "source_miliary_lesions",
+            "source_slice_thickness_range_mm",
+            "dicom_headers_accessed",
+            "dicom_pixel_values_decoded",
+            "stl_payload_accessed",
+            "direct_prior_threats",
+            "residual_gap",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "p0_pass_authorizes",
+            "p0_failure_action",
+        ],
+        "problem_selection.open_cta_physical_grid_candidate",
+    )
+    if (
+        physical_candidate["status"]
+        != "preregistered_p0_before_any_dicom_header_or_stl_payload"
+        or physical_candidate["audit_document"]
+        != "docs/open-cta-physical-grid-audit-2026-08-09.md"
+        or physical_candidate["config"] != "configs/open_cta_physical_p0.json"
+        or physical_candidate["candidate_hypothesis"]
+        != "physical_coordinate_lesion_instance_predictions_should_commute_with_deterministic_resampling_in_cardinality_surface_and_morphometry"
+        or physical_candidate["score"] != 32.0
+        or physical_candidate["maximum_score"] != 40.0
+        or physical_candidate["automatic_selection_threshold"] != 32.0
+        or physical_candidate["active_shortlist_count"] != 1
+        or physical_candidate["primary_problem_selected"] is not False
+        or physical_candidate["independent_unit_before_p0"]
+        != "cta_case_patient_key_not_yet_audited"
+        or physical_candidate["source_cases"] != 172
+        or physical_candidate["source_controls"] != 90
+        or physical_candidate["source_positive_cases"] != 82
+        or physical_candidate["source_lesions"] != 122
+        or physical_candidate["source_multi_lesion_cases"] != 24
+        or physical_candidate["source_miliary_lesions"] != 30
+        or physical_candidate["source_slice_thickness_range_mm"] != [0.5, 2.0]
+        or physical_candidate["dicom_headers_accessed"] is not False
+        or physical_candidate["dicom_pixel_values_decoded"] is not False
+        or physical_candidate["stl_payload_accessed"] is not False
+        or set(physical_candidate["direct_prior_threats"])
+        != {
+            "consispace_voxel_spacing_resampling",
+            "implicit_continuous_medical_segmentation",
+            "resolution_invariant_autoencoding",
+            "random_finite_set_probabilistic_detection",
+            "lesion_detr_variable_cardinality_set_prediction",
+            "topology_or_shape_guided_aneurysm_segmentation",
+        }
+        or physical_candidate["residual_gap"]
+        != "one_physical_coordinate_lesion_instance_representation_whose_cardinality_surface_and_morphometry_commute_with_grid_changes"
+        or physical_candidate["method_selected"] is not False
+        or physical_candidate["architecture_selected"] is not False
+        or physical_candidate["gpu_training_authorized"] is not False
+        or physical_candidate["outer_test_authorized"] is not False
+        or physical_candidate["submission_identity_active"] is not False
+        or physical_candidate["p0_pass_authorizes"]
+        != "register_method_free_p1_native_grid_rasterization_and_instance_stability_audit_only"
+        or physical_candidate["p0_failure_action"]
+        != "close_physical_grid_candidate_without_threshold_repair_method_gpu_or_outer_test"
+    ):
+        raise ProtocolError(
+            "The open-CTA physical-grid candidate must remain a payload-unread, "
+            "method-free P0 registration with frozen direct-prior and kill boundaries."
         )
     semantics_audit = problem_selection["rsna_supervision_semantics_red_team"]
     _require_keys(
@@ -544,7 +638,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The goal-oriented candidate must remain closed after its 5/9 asset failure, "
             "without solver v2, method, GPU, or outer-test authority."
         )
-    checks.append("closed goal-oriented candidate and no-active-problem boundary")
+    checks.append("closed prior candidates and conditional open-CTA P0 boundary")
 
     venue = protocol["venue"]
     _require_keys(
@@ -625,7 +719,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_no_active_problem_after_topaneu_source_audit"
+        != "unselected_open_cta_physical_grid_candidate_p0_only"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -787,13 +881,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"]
-        != "none"
+        != "physical_coordinate_lesion_instance_grid_commutation"
         or task["active_candidate_status"]
-        != "none_after_topaneu_conditional_lead_not_admitted_goal_oriented_closed_5_of_9"
+        != "conditional_shortlist_p0_preregistered_no_method_or_gpu"
         or task["candidate_primary_estimand"]
-        != "none"
+        != "physical_space_grid_commutation_of_lesion_instance_support_cardinality_and_morphometry_under_deterministic_resampling"
         or task["candidate_secondary_estimand"]
-        != "none"
+        != "none_before_method_free_p1"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -841,7 +935,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "asset failure, while historical 4D-flow evidence retains the exact I0a "
             "result and I0b execution record."
         )
-    checks.append("no-active-task boundary and historical 4D-flow guardrails")
+    checks.append("conditional open-CTA task boundary and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:
@@ -947,11 +1041,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     if (
         open_cta.get("field_provenance") != "none"
-        or open_cta.get("split_unit") != "patient"
+        or open_cta.get("split_unit") != "cta_case"
         or open_cta.get("role")
-        != "future_external_small_lesion_multi_lesion_and_center_shift_stress_only_after_independent_problem_gate"
+        != "conditional_primary_asset_under_registered_physical_grid_p0_only"
         or open_cta.get("status")
-        != "zip64_central_directory_and_metadata_csv_range_audited_no_dicom_header_pixel_or_stl_payload"
+        != "metadata_and_zip_index_audited_p0_registered_no_dicom_header_or_stl_payload_yet"
         or open_cta.get("series") != 172
         or open_cta.get("controls") != 90
         or open_cta.get("positive_cases") != 82
@@ -959,11 +1053,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or open_cta.get("multi_lesion_cases") != 24
         or open_cta.get("metadata_discovery_result")
         != "results/open_multicenter_cta_metadata_discovery_20260809.json"
+        or open_cta.get("p0_config") != "configs/open_cta_physical_p0.json"
+        or open_cta.get("p0_status")
+        != "preregistered_before_dicom_header_or_stl_payload"
         or open_cta.get("headline_or_training_authorized") is not False
     ):
         raise ProtocolError(
-            "Open CTA must remain a metadata-range-audited external stress asset, "
-            "not headline training or TopAneu supervision evidence."
+            "Open CTA must remain a case-unit, metadata-range-audited P0 candidate, "
+            "not training or TopAneu supervision evidence."
         )
     if (
         topaneu.get("field_provenance") != "none"

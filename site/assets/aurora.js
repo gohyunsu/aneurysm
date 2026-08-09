@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "공개 1·2위 자료에서 supervision contract를 확인합니다.",
-      connector: "compare semantics",
-      title: "Anatomy is not lesion extent",
-      copy: "The official segmentation cannot be marginalized as an aneurysm-mask observation",
+      description: "172 CTA case의 study/patient key와 series geometry를 확인합니다.",
+      connector: "audit units",
+      title: "Are task units one-to-one?",
+      copy: "Patient/study keys and three sampled headers must support one auditable case unit",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Vessel anatomy mask와 aneurysm point는 서로 다른 target semantics입니다.",
-      connector: "separate targets",
-      title: "Vessel mask ≠ aneurysm mask",
-      copy: "Center points localize aneurysms; CoW masks supervise vascular anatomy",
+      description: "STL vertex와 DICOM patient coordinate frame의 정합을 검사합니다.",
+      connector: "audit frames",
+      title: "Do surfaces inhabit the CTA frame?",
+      copy: "CRC-verified STL geometry must align with DICOM orientation, position and physical scale",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "핵심 전제가 실패했으므로 access·model·GPU 이전에 후보를 기각합니다.",
-      connector: "reject premise",
-      title: "Candidate rejected",
-      copy: "No official mixed-granularity lesion-mask cohort, no active estimand",
+      description: "모든 frozen check가 통과해야 method-free P1만 등록합니다.",
+      connector: "apply frozen rule",
+      title: "All pass to P1; any fail closes",
+      copy: "No threshold, tolerance, parser or selection repair after the observed outcome",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

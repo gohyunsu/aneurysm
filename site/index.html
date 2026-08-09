@@ -41,27 +41,28 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          No active problem yet.<br>
-          <em>Evidence before architecture.</em>
+          One conditional question.<br>
+          <em>Still no method.</em>
         </h1>
         <p class="hero-lede">
-          마지막 goal-oriented 후보는 CMHA의 lesion-level image–surface linkage를
-          재현하지 못해 frozen asset gate에서 <strong>5/9 실패</strong>했다.
-          S0a, solver v2, model과 GPU를 열지 않고 후보를 닫았다. 다음은 새
-          문제의 task unit, asset과 direct-prior gap을 method 이전에 감사하는 일이다.
+          같은 CTA의 voxel grid를 바꿔도 병변 개수, 물리 좌표 표면과
+          morphometry는 하나의 lesion-instance 표현에서 함께 일관되어야 한다.
+          이 가설은 <strong>32/40 conditional shortlist</strong>일 뿐이며,
+          DICOM header·STL 전에 등록한 P0가 asset 전제를 먼저 판정한다.
+          Primary problem, model, GPU와 outer test는 아직 없다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/goal-oriented-segmentation-audit-2026-08-09.md">Cold audit ↗</a>
-          <a class="button ghost" href="../results/goal_oriented_s0a_asset_component_20260809.json">Latest result ↗</a>
+          <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
+          <a class="button ghost" href="../configs/open_cta_physical_p0.json">P0 contract ↗</a>
           <a class="button ghost" href="../docs/isbi-2027-plan.md">ISBI plan ↗</a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="경계 변위와 adjoint sensitivity의 signed projection 개념도">
-        <div class="visual-caption">CLOSED HYPOTHESIS · ASSET LINKAGE FAILED 5/9</div>
+      <div class="hero-visual" aria-label="하나의 물리 좌표 병변 표면을 서로 다른 voxel grid에 표현하는 개념도">
+        <div class="visual-caption">CONDITIONAL CANDIDATE · P0 REGISTERED BEFORE PAYLOAD</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -84,27 +85,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>δ</b><span>signed boundary error</span>
+            <b>α</b><span>native voxel grid</span>
           </div>
           <div class="posterior-card card-b">
-            <b>g</b><span>adjoint influence</span>
+            <b>Ω</b><span>physical lesion instance</span>
           </div>
           <div class="posterior-card card-c">
-            <b>∫</b><span>functional projection</span>
+            <b>β</b><span>alternate rendering grid</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> signed, not magnitude-only</span>
-          <span><i class="dot coral"></i> candidate closed before S0a</span>
-          <span>model/GPU 0</span>
+          <span><i class="dot lime"></i> cardinality · surface · morphometry</span>
+          <span><i class="dot coral"></i> P0 asset evidence pending</span>
+          <span>primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Problem shortlist</span><b>0 active</b></div>
-        <div><span>Current evidence</span><b>TopAneu attachment lead 29/40 · terms/payload 0</b></div>
+        <div><span>Problem shortlist</span><b>1 conditional · primary 0</b></div>
+        <div><span>Current evidence</span><b>Open CTA 32/40 · P0 registered before header/STL</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>Other fresh audit or user-authorized P0-T · no GPU</b></div>
+        <div><span>Next authorization</span><b>Exact P0 once · pass opens method-free P1 only</b></div>
       </div>
     </section>
 
@@ -113,11 +114,11 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          TopAneu는 52-class location과 lesion segmentation을 이미 직접
-          정의하고, ARAN과 vessel-aware attention은 centerline graph와 soft
-          anatomy prior를 이미 사용한다. Attachment-consistency는 29/40의
-          조건부 lead일 뿐이다. Goal-oriented 후보의 5/9 실패도 그대로
-          보존하며, 새 module보다 task unit과 실제 식별 가능성을 먼저 감사한다.
+          Spacing-aware resampling, implicit segmentation, resolution-invariant
+          latent, probabilistic lesion set과 topology loss는 이미 직접 선행이다.
+          남을 수 있는 것은 이들을 나열하는 architecture가 아니라 하나의
+          물리 좌표 instance에서 cardinality·surface·morphometry가 함께
+          commute하는가이다. P0/P1이 문제의 실재성을 먼저 검증한다.
         </p>
       </div>
 
@@ -169,17 +170,18 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">THE OPEN GAP</p>
-          <h3>Mixed annotations should describe one lesion set.</h3>
+          <h3>Different grids should render one physical lesion set.</h3>
           <p>
-            Study label, vascular territory, point와 mask를 별도 head의 무관한
-            target으로 두면 하나의 scan에 존재하는 lesion 수와 위치가 서로
-            모순될 수 있다. 동시에 point/mask가 선택된 과정도 lesion·site에
-            의존할 수 있어 관측되지 않은 annotation을 무작위로 가정할 수 없다.
+            Grid마다 별도 voxel mask를 예측하면 같은 병변의 component 수,
+            표면과 물리적 부피가 서로 모순될 수 있다. 후보는 grid별 mask를
+            하나의 physical-coordinate instance representation에서 유도한다.
+            단, synthetic resampling은 실제 repeated acquisition이 아니며 STL도
+            threshold-derived reference라는 한계를 유지한다.
           </p>
-          <div class="gap-equation" aria-label="잠재 병변 집합에서 annotation을 주변화한 분포">
-            <span>p(A<sub>k</sub> | X)</span>
-            <i>=</i>
-            <span>∫ 1[O<sub>k</sub>(S)=A<sub>k</sub>]<br>p(S | X) dS</span>
+          <div class="gap-equation" aria-label="물리 좌표 표현을 서로 다른 grid에 렌더링하는 commutation 관계">
+            <span>R<sub>β</sub>F(S<sub>α</sub>I, α)</span>
+            <i>≈</i>
+            <span>F(S<sub>β</sub>Ĩ, β)</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -194,10 +196,10 @@
           <thead>
             <tr>
               <th>Axis</th>
-              <th>Challenge classifier</th>
-              <th>Multitask 3D detector</th>
-              <th>Anatomy / topology model</th>
-              <th>Rejected hypothesis</th>
+              <th>Spacing resampling</th>
+              <th>Implicit / invariant output</th>
+              <th>Probabilistic lesion set</th>
+              <th>Residual candidate</th>
             </tr>
           </thead>
           <tbody id="competition-body"></tbody>
@@ -208,11 +210,11 @@
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
-        <h2>A failed premise stops<br><em>before model code.</em></h2>
+        <h2>The asset must support<br><em>the physical question first.</em></h2>
         <p>
-          아래 흐름은 network architecture가 아니라 후보를 폐기한 evidence
-          chain이다. Public supervision semantics가 latent-target 가정을
-          반박했으므로 access, implementation과 GPU training으로 진행하지 않았다.
+          아래 흐름은 network architecture가 아니라 prospectively frozen P0
+          evidence chain이다. Header·surface·physical frame이 성립해야만 learned
+          method 없는 P1을 설계할 수 있다.
         </p>
       </div>
 
@@ -221,86 +223,86 @@
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
           실행된 과거 N1은 MLP였고 V1 point/graph/Perceiver 연구선은 실패로
-          닫혔다. RSNA lesion-set 후보도 supervision semantics로 기각됐으므로
-          3D encoder, vessel graph, query decoder 어느 것도 선택하지 않았다.
+          닫혔다. 현재 open-CTA P0는 standard-library asset audit이므로 3D encoder,
+          vessel graph, implicit decoder와 query set 어느 것도 선택하지 않았다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="Red-team evidence stage">
-        <button class="active" type="button" data-mode="presence">Evidence</button>
-        <button type="button" data-mode="point">Semantics</button>
+      <div class="mode-switch" role="group" aria-label="P0 evidence stage">
+        <button class="active" type="button" data-mode="presence">Unit</button>
+        <button type="button" data-mode="point">Frame</button>
         <button type="button" data-mode="mask">Decision</button>
-        <span id="mode-description">공개 1·2위 자료에서 supervision contract를 확인합니다.</span>
+        <span id="mode-description">172 CTA case의 study/patient key와 series geometry를 확인합니다.</span>
       </div>
 
       <div class="architecture-flow">
         <article class="arch-node input-node">
           <span class="arch-number">01</span>
-          <p class="arch-label">SOURCE</p>
-          <h3>Public primary evidence</h3>
-          <p>Official registry/wiki · first-place exact code · second-place report</p>
+          <p class="arch-label">REGISTERED SOURCE</p>
+          <h3>Official open CTA archive</h3>
+          <p>Exact Zenodo record · ZIP64 index · metadata checksum · CC BY 4.0</p>
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <a class="arch-learn" href="../docs/rsna-supervision-semantics-audit-2026-08-09.md">근거 record</a>
+          <a class="arch-learn" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">근거 record</a>
         </article>
-        <div class="arch-connector"><span>payload 0</span></div>
+        <div class="arch-connector"><span>frozen selection</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">READ CONTRACT</p>
-          <h3>Separate target semantics</h3>
-          <p>13-class vessel mask · aneurysm center point · presence/territory</p>
+          <p class="arch-label">BOUNDED READ</p>
+          <h3>516 headers + 122 STL</h3>
+          <p>PixelData tag before stop · all STL CRC · no raw retention</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">후보와 모델 구분</a>
         </article>
-        <div class="arch-connector accent"><span id="bc-connector-label">compare semantics</span></div>
+        <div class="arch-connector accent"><span id="bc-connector-label">audit units</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">RED-TEAM FINDING</p>
-          <h3 id="bc-node-title">Anatomy is not lesion extent</h3>
-          <p id="bc-node-copy">The official segmentation cannot be marginalized as an aneurysm-mask observation</p>
+          <p class="arch-label">PHYSICAL CONTRACT</p>
+          <h3 id="bc-node-title">Are task units one-to-one?</h3>
+          <p id="bc-node-copy">Patient/study keys, slice geometry and STL frames must support one auditable case unit</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
-          <a class="arch-learn" href="../docs/rsna-supervision-semantics-audit-2026-08-09.md">기각 논리</a>
+          <a class="arch-learn" href="../configs/open_cta_physical_p0.json">frozen checks</a>
         </article>
-        <div class="arch-connector"><span>premise fails</span></div>
+        <div class="arch-connector"><span>all checks</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">INVALIDATE</p>
-          <h3>Reject the estimand</h3>
+          <p class="arch-label">ONE-SHOT DECISION</p>
+          <h3>Pass to P1 or close</h3>
           <div class="dual-branch">
-            <span><b>Valid</b>vessel anatomy supervision</span>
-            <span><b>Invalid</b>official mixed lesion masks</span>
+            <span><b>All pass</b>register method-free P1</span>
+            <span><b>Any fail</b>close without repair</span>
           </div>
-          <p>Do not repair a target-definition failure with architecture</p>
+          <p>No threshold, tolerance, parser or member-selection repair after outcome</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
-        <div class="arch-connector"><span>reset</span></div>
+        <div class="arch-connector"><span>if pass only</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">NEXT</p>
-          <h3>Fresh problem audit</h3>
-          <p>Data semantics · estimand · direct prior · split · feasible evidence</p>
-          <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>not authorized</b></div>
+          <h3>Method-free grid adequacy</h3>
+          <p>Rasterize STL on fixed grids · cardinality · surface · morphometry</p>
+          <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>still not authorized</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
       </div>
 
       <div class="architecture-notes">
         <article>
-          <span>SEMANTIC VALIDITY</span>
-          <p>Input, supervision과 estimand의 의미가 맞지 않으면 model code 전에 후보를 폐기한다.</p>
+          <span>UNIT INTEGRITY</span>
+          <p>Patient/study key와 case mapping이 성립하지 않으면 patient split이나 model로 진행하지 않는다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
-          <p>Vessel-first nnU-Net, anatomy pooling과 multitask detector는 새 이름이 아니라 mandatory baseline이다.</p>
+          <p>Resampling, implicit decoder, invariant latent와 probabilistic set prediction은 mandatory baseline이다.</p>
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>새 후보가 생겨도 method-free gate와 bounded development 뒤 fresh outer test를 요구한다.</p>
+          <p>P0 pass도 method-free P1만 열며, method는 별도 prospective baseline contract 뒤에만 가능하다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -558,7 +560,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>No active paper identity · active problem shortlist 0</p>
+        <p>No active paper identity · conditional P0 shortlist 1 · primary problem 0</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -566,7 +568,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>TopAneu lead 29/40 · active shortlist 0 · terms/payload/model/GPU 0</b>
+        <span>Current stage</span><b>Open CTA 32/40 · P0 registered before header/STL · primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

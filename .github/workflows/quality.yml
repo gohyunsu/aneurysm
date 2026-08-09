@@ -22,6 +22,8 @@ jobs:
           node-version: "22"
       - name: Validate research protocol
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
+      - name: Validate prospective open-CTA physical-coordinate P0
+        run: PYTHONPATH=src python -m aurora.open_cta_physical_p0 --config configs/open_cta_physical_p0.json --validate-only
       - name: Validate prospective S0a contract
         run: PYTHONPATH=src python -m aurora.goal_oriented_s0a configs/goal_oriented_segmentation_s0a.json
       - name: Validate prospective S0a solver preflight

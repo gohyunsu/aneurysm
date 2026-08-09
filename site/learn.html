@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류 영상, patient–study–lesion 단위, mixed annotation, GNN과 과거 operator 가설을 단계별로 구분하는 AURORA 입문 가이드.">
+  <meta name="description" content="뇌동맥류 영상, physical-coordinate lesion instance, voxel grid, GNN과 과거 operator 가설을 단계별로 구분하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -38,38 +38,36 @@
     <section class="learn-hero dark" id="start">
       <div class="learn-hero-copy">
         <p class="eyebrow"><span>START HERE</span> ZERO-ASSUMPTION GUIDE</p>
-        <h1><span>혈관에서 그래프까지</span><br><em>한 단계씩.</em></h1>
+        <h1><span>Voxel에서 물리 좌표까지</span><br><em>한 단계씩.</em></h1>
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
-          supervision의 의미를 왜 먼저 확인해야 하는지, GNN은 무엇이며 왜
-          그 자체가 novelty가 아닌지, 과거 AURORA와 최근 RSNA 후보가 왜
-          실패했고 마지막 goal-oriented candidate가 왜 asset gate에서 닫혔는지,
-          새 후보는 무엇부터 검증해야 하는지 설명합니다.
+          voxel grid가 물리적 표면과 어떻게 다른지, GNN은 무엇이며 왜
+          그 자체가 novelty가 아닌지, 과거 AURORA 후보들이 왜 실패했는지,
+          현재 physical-coordinate 후보는 모델 전에 무엇부터 검증하는지
+          설명합니다.
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>현재 활성 문제와 선택된 모델은 없습니다.</strong>
+          <strong>조건부 문제 후보는 하나지만 선택된 모델은 없습니다.</strong>
           <p>
-            과거 exact/nonlinear gate는 MLP였고, q-PointNet·kNN graph·
-            anchor-token·Perceiver 연구선은 성능 gate를 통과하지 못해
-            종료했습니다. 직전 RSNA lesion-set 후보도 공개된 segmentation이
-            aneurysm extent가 아니라 13-class vessel anatomy임을 확인해
-            기각했습니다. 이후 signed adjoint projection 문제도 CMHA asset
-            component에서 5/9 실패해 닫혔습니다. GNN·U-Net·implicit surface·
-            neural operator 어느 것도 선택하지 않았습니다.
+            같은 CTA를 다른 voxel grid에 놓아도 병변 수, 물리 좌표 surface와
+            morphometry가 하나의 lesion-instance 표현에서 함께 일관되어야
+            한다는 질문이 32/40 conditional shortlist에 있습니다. 아직
+            primary problem은 아니며 GNN·U-Net·implicit field·DETR 어느 것도
+            선택하지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>다음 단계는 독립된 새 problem/asset audit입니다.</strong>
+          <strong>다음 단계는 등록된 P0 asset audit 한 번입니다.</strong>
           <p>
-            마지막 실행은 99 patient-level directory와 105 lesion row 사이의
-            exact non-positional mapping을 재현하지 못했습니다. Required triplet은
-            0/105였고 header를 열기 전에 멈췄습니다. S0a/S0b, GPU, method,
-            outer test와 paper contribution을 열지 않습니다.
+            172 case의 DICOM header 516개를 PixelData 전에만 읽고 122 STL의
+            CRC, physical frame과 metadata volume scale을 검사합니다. 모두
+            통과해도 learned method 없는 P1 rasterization audit만 열립니다.
+            하나라도 실패하면 수리 없이 후보를 닫습니다.
           </p>
-          <a href="../docs/goal-oriented-segmentation-audit-2026-08-09.md">새 candidate cold audit 읽기 ↗</a>
+          <a href="../docs/open-cta-physical-grid-audit-2026-08-09.md">현재 candidate와 P0 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -77,7 +75,7 @@
         <ol>
           <li><span>01</span><b>단위</b><small>patient → study → lesion</small></li>
           <li><span>02</span><b>관측</b><small>label · point · mask</small></li>
-          <li><span>03</span><b>모델</b><small>선택 전 prior-art</small></li>
+          <li><span>03</span><b>좌표</b><small>voxel grid → physical surface</small></li>
           <li><span>04</span><b>과거</b><small>GNN · operator 실패선</small></li>
           <li><span>05</span><b>검증</b><small>problem gate → fresh test</small></li>
         </ol>
@@ -106,7 +104,7 @@
           </button>
           <button id="tab-architecture" type="button" role="tab"
                   aria-selected="false" aria-controls="architecture" data-chapter="architecture">
-            <span>04</span><b>AURORA 전체</b><small>hybrid architecture</small>
+            <span>04</span><b>현재 경계</b><small>P0와 과거 architecture</small>
           </button>
           <button id="tab-uncertainty" type="button" role="tab"
                   aria-selected="false" aria-controls="uncertainty" data-chapter="uncertainty">
@@ -363,27 +361,33 @@
         <section class="chapter-panel" id="architecture" role="tabpanel"
                  aria-labelledby="tab-architecture" data-chapter-panel tabindex="-1" hidden>
           <header class="chapter-header">
-            <p class="eyebrow">04 · THE HYBRID</p>
-            <h2>Local graph.<br><em>Global operator.</em></h2>
+            <p class="eyebrow">04 · CURRENT BOUNDARY</p>
+            <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
-              전체 구조는 다섯 단계입니다. 각 단계는 하나의 “fancy module”을
-              더하기 위한 장식이 아니라, 입력에서 최종 검증까지 생기는 구체적인
-              실패를 막기 위해 존재합니다.
+              현재 P0는 network가 아닙니다. Case unit, DICOM physical geometry와
+              STL reference가 grid-commutation 질문을 실제로 평가할 수 있는지
+              먼저 확인합니다. 아래의 graph/operator stack은 현재 후보가 아니라
+              실패한 과거 연구선의 구조 설명입니다.
             </p>
           </header>
 
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>현재 active problem과 선택된 architecture는 없습니다. Signed adjoint projection 후보는 asset component 5/9 실패로 닫혔습니다. 아래 graph/token/query stack은 실패한 BC-operator 연구선의 역사 기록입니다.</p>
+              <p>Conditional P0 후보는 하나지만 primary problem과 선택된 architecture는 없습니다. P0/P1 전에 implicit decoder, DETR, GNN 또는 topology loss를 고르지 않습니다. 아래 graph/token/query stack은 실패한 BC-operator 연구선의 역사 기록입니다.</p>
             </aside>
             <article>
-              <span>CURRENT · DECISION BOUNDARY</span>
-              <div><h3>Fresh problem → task unit → method-free adequacy</h3><p>새 후보는 image–target linkage, sampling unit과 direct-prior gap을 먼저 통과해야 합니다. 그 뒤에도 method-free task signal이 있어야 architecture를 고릅니다.</p></div>
-              <b>상태</b><small>active shortlist 0 · no model · no GPU</small>
+              <span>CURRENT · P0 REGISTERED</span>
+              <div><h3>Metadata/index → bounded header/STL read → all-pass decision</h3><p>172 case의 study/patient key, 516 header의 series geometry, 122 STL의 CRC·volume scale·DICOM frame을 aggregate-only로 검사합니다. PixelData와 model은 읽지 않습니다.</p></div>
+              <b>상태</b><small>conditional shortlist 1 · primary/model/GPU 0</small>
             </article>
             <article>
-              <span>01 · NORMALIZE</span>
+              <span>CURRENT · WHY NO MODEL YET</span>
+              <div><h3>P0 pass → method-free P1 only</h3><p>STL을 미리 고정한 physical grids에 rasterize해 component cardinality, physical volume/extent와 surface distance가 standard preprocessing에서도 실제로 흔들리는지 먼저 측정합니다. 안정적이면 후보를 닫습니다.</p></div>
+              <b>kill rule</b><small>no nontrivial grid effect · no method</small>
+            </article>
+            <article>
+              <span>HISTORY 01 · NORMALIZE</span>
               <div><h3>해부학적 local frame</h3><p>neck 중심을 원점으로 두고 부모 혈관 지름으로 크기를 정규화합니다. 스캐너 좌표의 임의 회전·이동을 모델이 외우지 않게 합니다.</p></div>
               <b>입력</b><small>surface position · normal · curvature · landmarks</small>
             </article>
@@ -910,9 +914,10 @@
           </header>
 
           <div class="gate-explainer">
+            <article><span>P0-C · REGISTERED</span><div><h3>Open CTA의 case unit과 physical frame이 질문을 지지하는가?</h3><p>516 DICOM header를 PixelData 전에만 읽고 122 STL의 CRC, finite surface, metadata volume scale와 DICOM frame alignment를 검사합니다. Split unit은 patient key 확인 전 `cta_case`입니다.</p></div><b>all pass → method-free P1 only · any fail → close</b></article>
             <article><span>S0a · CLOSED</span><div><h3>영상–표면 linkage가 정확히 연결되는가?</h3><p>CMHA asset component는 5/9에 그쳤습니다. 105 lesion exact triplet은 0개였고 NIfTI/STL header는 열지 않았습니다.</p></div><b>S0a not evaluated · candidate closed</b></article>
             <article><span>S0b · NOT REGISTERED</span><div><h3>Dice와 functional error가 정말 다른가?</h3><p>Smooth surface perturbation과 adjoint validity를 검사하려던 설계지만 asset early-stop 뒤 실행하지 않습니다.</p></div><b>solver v2/model/GPU blocked</b></article>
-            <article><span>P0-T · CONDITIONAL</span><div><h3>Vascular attachment가 실제 TopAneu supervision으로 식별되는가?</h3><p>Source audit은 29/40입니다. 사용자가 terms를 직접 수락한 뒤에만 417 scan/409 patient, 52-class mapping, silver vessel provenance와 bifurcation ambiguity를 CPU/read-only로 감사합니다. 다른 fresh problem audit은 계속할 수 있습니다.</p></div><b>active shortlist 0 · terms/payload/model/GPU 0</b></article>
+            <article><span>P0-T · HISTORICAL LEAD</span><div><h3>Vascular attachment가 실제 TopAneu supervision으로 식별되는가?</h3><p>Source audit은 29/40입니다. 사용자가 terms를 직접 수락한 뒤에만 417 scan/409 patient, 52-class mapping, silver vessel provenance와 bifurcation ambiguity를 CPU/read-only로 감사할 수 있습니다. Open CTA는 이 supervision의 대체물이 아닙니다.</p></div><b>below admission · terms/payload/model/GPU 0</b></article>
             <article><span>G0</span><div><h3>자산이 믿을 만한가?</h3><p>Case mapping, 단위, BC marker, license, geometry/condition split을 검증합니다.</p></div><b>통과 전 학습 금지</b></article>
             <article><span>G1</span><div><h3>정확한 분포도 못 맞히는가?</h3><p>Exact controlled PDE에서 conditional mean, coverage, nested-mask tower property를 oracle과 비교합니다.</p></div><b>첫 method sanity</b></article>
             <article><span>N0</span><div><h3>비선형 문제가 실제로 비자명한가?</h3><p>N0 실패는 보존하고, 결과 전에 fresh seed와 context-stratified selector를 고정한 N0r가 9/9를 통과했습니다.</p></div><b>N0r pass · N1 opened</b></article>

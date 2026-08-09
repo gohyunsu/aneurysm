@@ -19,18 +19,18 @@ class ProtocolTests(unittest.TestCase):
         self.assertGreaterEqual(len(checks), 8)
         self.assertEqual(len(canonical_hash(self.protocol)), 64)
 
-    def test_closed_problem_cannot_select_method_or_gpu(self) -> None:
+    def test_conditional_problem_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "conditional-problem"):
+        with self.assertRaisesRegex(ProtocolError, "conditional open-CTA P0"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "conditional-problem"):
+        with self.assertRaisesRegex(ProtocolError, "conditional open-CTA P0"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "conditional-problem"):
+        with self.assertRaisesRegex(ProtocolError, "conditional open-CTA P0"):
             validate_protocol(candidate)
 
     def test_closed_goal_oriented_candidate_cannot_be_reopened(self) -> None:
@@ -168,6 +168,43 @@ class ProtocolTests(unittest.TestCase):
             hashlib.sha256(result.read_bytes()).hexdigest(),
             audit["open_cta_discovery_result_sha256"],
         )
+
+    def test_open_cta_physical_p0_cannot_be_relabelled_as_payload_evidence(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["open_cta_physical_grid_candidate"]
+        audit["dicom_headers_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "physical-grid candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["open_cta_physical_grid_candidate"]
+        audit["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "physical-grid candidate"):
+            validate_protocol(candidate)
+
+    def test_open_cta_physical_p0_cannot_inflate_score_or_assume_patient_unit(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["open_cta_physical_grid_candidate"]
+        audit["score"] = 40.0
+        with self.assertRaisesRegex(ProtocolError, "physical-grid candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        open_cta = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "open_multicenter_cta_2026_zenodo_15697196"
+        )
+        open_cta["split_unit"] = "patient"
+        with self.assertRaisesRegex(ProtocolError, "Open CTA must remain"):
+            validate_protocol(candidate)
+
+    def test_open_cta_physical_p0_direct_priors_are_frozen(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["open_cta_physical_grid_candidate"]
+        audit["direct_prior_threats"].remove("consispace_voxel_spacing_resampling")
+        with self.assertRaisesRegex(ProtocolError, "physical-grid candidate"):
+            validate_protocol(candidate)
 
     def test_attachment_direct_prior_threats_cannot_be_removed(self) -> None:
         candidate = copy.deepcopy(self.protocol)

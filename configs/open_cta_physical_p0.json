@@ -1,0 +1,124 @@
+{
+  "schema_version": "aurora.open_cta_physical_p0.v1",
+  "experiment_id": "open_cta_physical_grid_p0",
+  "status": "preregistered_before_any_dicom_header_or_stl_payload",
+  "as_of": "2026-08-09",
+  "candidate": {
+    "question": "Do native CTA acquisition grids and expert STL surfaces support a physical-coordinate lesion-instance problem in which cardinality, surface, and morphology must commute with deterministic resampling?",
+    "candidate_estimand": "physical_space_grid_commutation_of_lesion_instance_support_cardinality_and_morphometry_under_deterministic_resampling",
+    "independent_unit": "cta_case",
+    "allowed_endpoints": [
+      "cross_sectional_aneurysm_detection",
+      "lesion_instance_segmentation",
+      "physical_space_surface_and_morphometry_consistency"
+    ],
+    "prohibited_interpretations": [
+      "repeat_acquisition_consistency",
+      "future_rupture_risk_prediction",
+      "clinical_utility",
+      "continuous_ground_truth_free_of_annotation_discretization",
+      "native_scanner_domain_generalization",
+      "topaneu_supervision_substitute"
+    ],
+    "direct_prior_threats": [
+      "consispace_voxel_spacing_resampling",
+      "implicit_continuous_medical_segmentation",
+      "resolution_invariant_autoencoding",
+      "random_finite_set_probabilistic_detection",
+      "lesion_detr_variable_cardinality_set_prediction",
+      "topology_or_shape_guided_aneurysm_segmentation"
+    ],
+    "method_selected": false,
+    "architecture_selected": false
+  },
+  "source": {
+    "record_id": 15697196,
+    "doi": "10.5281/zenodo.15697196",
+    "data_paper_doi": "10.3390/data11040074",
+    "license": "cc-by-4.0",
+    "record_revision": 4,
+    "record_modified": "2026-04-11T14:59:27.159114+00:00",
+    "archive_name": "Dataset.zip",
+    "archive_url": "https://zenodo.org/api/records/15697196/files/Dataset.zip/content",
+    "archive_bytes": 25578845008,
+    "archive_md5": "264ff9ee868c022d108b7c7aa7396d32",
+    "archive_entries": 149452,
+    "central_directory_bytes": 11207225,
+    "dicom_members": 149329,
+    "stl_members": 122,
+    "metadata_member": "Metadata.csv",
+    "metadata_bytes": 16458,
+    "metadata_sha256": "407cd3c35307b491d714c5a7c05a0a9e26ef92faa54d43259a704516bf2bc7f4"
+  },
+  "discovery_boundary": {
+    "observed_before_registration": [
+      "official_record_and_data_paper",
+      "zip64_central_directory_and_member_names_sizes_compression",
+      "metadata_csv_rows_and_aggregate_case_lesion_counts",
+      "source_reported_slice_thickness_range_0_5_to_2_mm",
+      "source_reported_threshold_segmentation_after_manual_isolation",
+      "direct_prior_titles_abstracts_and_official_method_pages"
+    ],
+    "not_read_before_registration": [
+      "dicom_header",
+      "dicom_pixel_value",
+      "stl_payload",
+      "case_level_geometry_outcome"
+    ],
+    "not_prospective_evidence": true
+  },
+  "selection": {
+    "expected_cases": 172,
+    "expected_positive_cases": 82,
+    "expected_control_cases": 90,
+    "expected_lesions": 122,
+    "expected_multi_lesion_cases": 24,
+    "expected_miliary_lesions": 30,
+    "dicom_header_members_per_case": 3,
+    "dicom_member_rule": "numeric_first_upper_median_last_unique",
+    "expected_selected_dicom_members": 516,
+    "selected_dicom_compressed_bytes_if_fully_fetched": 83774465,
+    "dicom_compressed_chunk_bytes": 32768,
+    "dicom_max_compressed_prefix_bytes_per_member": 262144,
+    "stl_member_rule": "all_annotations",
+    "expected_selected_stl_members": 122,
+    "selected_stl_compressed_bytes": 8278366,
+    "selected_stl_uncompressed_bytes": 148388391,
+    "workers": 4
+  },
+  "gate": {
+    "all_checks_required": true,
+    "checks": {
+      "archive_and_metadata_contract_exact": true,
+      "case_lesion_and_member_mapping_exact": true,
+      "selected_dicom_headers_parse_without_pixel_value_decode": true,
+      "dicom_study_and_patient_keys_are_one_to_one_across_172_cases": true,
+      "three_sample_headers_are_series_geometry_consistent_per_case": true,
+      "declared_image_count_matches_archive_for_all_nonmissing_metadata_cases": true,
+      "metadata_and_header_slice_thickness_agree_for_at_least_120_cases": true,
+      "observed_header_slice_thickness_ratio_at_least": 2.0,
+      "all_stl_are_crc_verified_finite_and_at_least_99_percent_nondegenerate": true,
+      "at_least_95_percent_stl_have_plausible_metadata_volume_ratio_0_5_to_2": true,
+      "at_least_95_percent_stl_have_99_percent_vertices_inside_dicom_frame_with_tolerance_mm": 3.0,
+      "no_model_gpu_outer_test_or_pixel_value_decode": true
+    },
+    "pass_authorizes": "register_method_free_p1_native_grid_rasterization_and_instance_stability_audit_only",
+    "failure_action": "close_physical_grid_candidate_without_threshold_repair_method_gpu_or_outer_test",
+    "does_not_authorize": [
+      "model_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution",
+      "submission_identity"
+    ]
+  },
+  "execution": {
+    "source_commit_rule": "exact_clean_public_git_head_at_execution",
+    "network_access": "http_byte_range_only",
+    "write_scope": "aggregate_result_only",
+    "raw_medical_payload_retained": false,
+    "individual_identifier_published": false,
+    "gpu_requested": false
+  }
+}

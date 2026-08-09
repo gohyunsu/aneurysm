@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · active problem shortlist 0 · no method/architecture/GPU · not submission-ready",
-    requirement: "fresh problem audit or user-authorized terms-gated P0 → method-free adequacy → strong baselines → bounded development → fresh outer test",
+    status: "Target locked · conditional shortlist 1 at open-CTA P0 · primary/method/architecture/GPU 0 · not submission-ready",
+    requirement: "exact preregistered P0 → method-free P1 adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Physical-coordinate lesion-instance commutation enters P0",
+      copy: "The conditional question is whether lesion cardinality, physical surfaces and morphometry remain renderings of one instance representation when the same CTA is placed on different voxel grids. Spacing-aware resampling, continuous implicit segmentation, resolution-invariant latents, random finite-set detection, LesionDETR and aneurysm shape/topology losses are all direct priors. The residual gap is their joint physical-instance commutation with real small/multiple-lesion benefit, not any component alone.",
+      status: "32/40 conditional shortlist · P0 registered before DICOM header/STL · primary/model/GPU 0",
+      url: "../docs/open-cta-physical-grid-audit-2026-08-09.md"
+    },
     {
       year: "2026.08",
       title: "TopAneu attachment remains a conditional lead",
@@ -163,12 +170,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Prediction unit", "TopAneu official task", "Vessel-aware deformable attention", "ARAN artery-aware graph", "Conditional attachment lead"],
-    ["Supervision", "Lesion/type masks + 52-class location", "Aneurysm box + vessel distance", "Coarse artery class + vessel centerline", "Mask/location derived from one attachment"],
-    ["Anatomy mechanism", "Predicted silver vessel mask", "Soft signed-distance positional encoding", "Patient-specific GAT + geometry-gated fusion", "Continuous/probabilistic graph attachment"],
-    ["Already occupied", "Joint location/segmentation task", "Soft vessel prior", "Centerline graph and parent-artery classification", "Structure only; not yet a contribution"],
-    ["Missing evidence", "Hidden test and hard-label ambiguity", "Fine 52-class projection", "Joint voxel lesion segmentation", "Reference ambiguity + independent-head failure + strong-baseline gain"],
-    ["Current boundary", "Official source", "MICCAI 2024", "CVPRW 2026", "29/40 · terms/payload/model/GPU 0"]
+    ["Axis", "Spacing-aware resampling", "Implicit / resolution-invariant output", "Probabilistic lesion set", "Conditional residual gap"],
+    ["Already occupied", "Semantic grid normalization", "Continuous coordinate or common latent", "Variable cardinality + set matching", "None of these components alone"],
+    ["Required baseline", "Consispace-style", "Implicit decoder / resolution-invariant AE", "RFS detector / LesionDETR", "Joint cardinality–surface–morphometry commutation"],
+    ["Missing evidence", "Task gain beyond resize", "Native-grid physical fidelity", "Tiny/multiple-lesion calibration", "P0 physical frame + P1 nontriviality + prospective gain"],
+    ["Current boundary", "Direct prior", "Direct prior", "Direct prior", "32/40 · P0 only · no model/GPU"]
   ],
   gates: [
     {
@@ -180,9 +186,9 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       id: "P0",
-      title: "Is there a defensible biomedical-imaging problem?",
-      copy: "후보별 데이터 semantics와 access, 식별 가능한 estimand, direct-prior gap, patient-level split, ISBI relevance와 confirmatory 규모를 method보다 먼저 감사한다. 하나가 선택되기 전에는 executable config를 만들지 않는다.",
-      state: "TopAneu attachment 29/40 conditional lead · terms/payload 0 · active shortlist 0 · other fresh audits remain allowed",
+      title: "Are the open-CTA physical units and frames auditable?",
+      copy: "등록된 P0는 172 case의 first/upper-median/last DICOM header 516개를 PixelData 전에만 읽고 122 STL의 CRC, geometry, metadata-volume scale와 DICOM frame alignment를 aggregate-only로 검사한다. 통과 전 split unit은 cta_case다.",
+      state: "Prospectively registered before DICOM header/STL · all pass opens method-free P1 only · any fail closes candidate",
       blocking: true
     },
     {
@@ -308,8 +314,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "Open multi-center CTA 2026",
-      role: "future small-lesion, multi-lesion and center-shift external stress only",
-      provenance: "ZIP64+metadata range-audited · 172 CTA series · 90 controls/82 positive · 122 lesions/24 multi-lesion cases · DICOM/STL payload 0 · CC BY 4.0"
+      role: "conditional physical-coordinate grid-commutation P0 only",
+      provenance: "ZIP64+metadata range-audited · 172 CTA series · 90 controls/82 positive · 122 lesions/24 multi-lesion cases · P0 registered before DICOM header/STL · no model/GPU · CC BY 4.0"
     },
     {
       name: "AneuX",
@@ -318,6 +324,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "decision",
+      title: "Open-CTA physical-coordinate candidate enters a P0-only shortlist",
+      copy: "A direct-prior red team leaves one residual question: can one physical-coordinate lesion-instance representation make cardinality, surface and morphometry commute across deterministic grid changes? The source-only score is exactly 32/40. Before any DICOM header or STL payload, P0 freezes 516 header prefixes, all 122 STL files, privacy-safe aggregates and an all-pass-or-close rule. A pass opens only a method-free P1; method, architecture, GPU, outer test and paper contribution remain zero.",
+      files: ["configs/open_cta_physical_p0.json", "src/aurora/open_cta_physical_p0.py", "docs/open-cta-physical-grid-audit-2026-08-09.md", "configs/aurora_v1.json", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

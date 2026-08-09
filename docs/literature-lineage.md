@@ -5,7 +5,38 @@
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
 
-## 0. Current conditional gap · patient-specific vascular attachment
+## 0. Current conditional gap · physical-coordinate lesion-instance commutation
+
+새 후보는 voxel spacing normalization, implicit segmentation 또는 lesion-set
+prediction 중 하나를 다시 제안하지 않는다. 같은 native CTA를 서로 다른 grid로
+render했을 때 병변 instance cardinality, 물리 좌표 surface와 morphometry가 하나의
+representation에서 함께 commute해야 한다는 문제를 검토한다.
+
+- [Consispace: voxel-spacing consistent resampling](https://arxiv.org/abs/2606.31839)
+- [I-MedSAM: implicit medical segmentation](https://arxiv.org/abs/2311.17081)
+- [Implicit/noisy-label segmentation, MICCAI 2025](https://papers.miccai.org/miccai-2025/0443-Paper0665.html)
+- [Resolution Invariant Autoencoder](https://arxiv.org/abs/2503.09828)
+- [Object Detection as Probabilistic Set Prediction, ECCV 2022](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136700545.pdf)
+- [LesionDETR: variable-cardinality lesion set prediction](https://arxiv.org/abs/2606.04365)
+- [Aneurysm shape-guided SSL, ISBI 2026](https://doi.org/10.1109/ISBI61048.2026.11515789)
+- [Topology-Aware Representation, MIDL 2026](https://proceedings.mlr.press/v315/xiao26a.html)
+
+Consispace는 source voxel spacing을 반영한 semantic resampling을, implicit
+segmentation은 좌표 기반 continuous output을, resolution-invariant latent는
+grid 변화에 공통인 representation을 이미 직접 다룬다. ECCV 2022 RFS와
+LesionDETR는 cardinality가 가변인 object/lesion set을 확률적으로 예측한다.
+Shape/topology prior도 aneurysm segmentation에서 이미 사용된다.
+
+따라서 각 요소, 혹은 이들을 단순 조합한 architecture는 novelty가 아니다.
+남을 수 있는 gap은 **하나의 physical-coordinate lesion-instance model이 grid별
+mask를 유도하면서 cardinality·surface·morphometry의 commutation을 공동으로
+강제하고, small/multiple aneurysm에서 direct baselines보다 유의미한 이득을
+보이는 것**뿐이다. 그러나 synthetic deterministic resampling은 repeated native
+acquisition이 아니며 threshold-derived STL은 discretization-free anatomy truth가
+아니다. 등록된 P0/P1이 비자명한 failure와 평가 가능성을 보이기 전에는 이 gap도
+확정 contribution이 아니다.
+
+## 0-T. Previous conditional gap · patient-specific vascular attachment
 
 TopAneu 2026은 CTA/MRA aneurysm segmentation과 52-class vessel location을
 이미 하나의 공식 task로 정의한다. 따라서 lesion segmentation과 parent-artery
