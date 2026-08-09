@@ -4,6 +4,19 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · DSA source rejection is deployed and verified
+
+- Exact content commit `4600d9c45b257c99db1c294ca4481724ede0b360`의
+  Quality run `31301858683`과 Pages run `31301858151`이 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 six-candidate
+  audit, DIAS source rejection 31/40, active shortlist 0을 확인했고, 상세
+  설명 페이지에서 `no payload/P0/model/GPU`와 현재 architecture가 없다는
+  경계를 확인했다. 공개 source-audit 문서도 동일한 31.0/40 판정을 렌더링한다.
+- 이 배포 확인은 candidate 점수, dataset access, P0/model/GPU 권한 또는
+  scientific verdict를 바꾸지 않는다. 향후 실행 대상은 계속 `introai9`만이며
+  `junjinyong`은 접근·조회·제출·모니터링에서 제외한다.
+- 영향 파일: `AGENTS.md`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · DSA prefix-risk candidate is rejected at source audit
 
 - Fresh six-candidate red team의 최고 후보는 DIAS DSA prefix로 final merged

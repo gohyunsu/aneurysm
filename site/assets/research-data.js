@@ -380,6 +380,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "DSA source rejection is live",
+      copy: "Exact content commit 4600d9c45b257c99db1c294ca4481724ede0b360 passed Quality run 31301858683 and Pages run 31301858151. The live overview renders the fresh six-candidate audit, DIAS source rejection at 31/40 and active shortlist zero; the detailed guide renders no payload/P0/model/GPU and no selected architecture. The public audit document renders the same 31.0/40 decision. Deployment verification changes no score, dataset access, scientific verdict or execution authorization; introai9 remains the only future execution target and junjinyong remains excluded.",
+      files: ["AGENTS.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.09",
       category: "decision",
       title: "DSA prefix-risk candidate is rejected at 31/40",
       copy: "A fresh six-candidate source audit leaves no admission-qualified problem. The highest candidate asks whether an observed DSA prefix can predict final merged vessel support with calibrated thin-vessel miss risk. DIAS is open and its paper reports patient-ID-based annotation selection, but the exact released patient key was not audited. Its arterial phase is already expert-selected, full sequence improves DSC over minimum projection by only 0.0020, and temporal/MIP/frame-selection/early-exit/conformal components have direct priors. Raw full-phase acquisition, dose/stop action and frame-level arrival truth are absent. We do not repair the score or create payload, P0, method, architecture or GPU work; active shortlist remains zero and future execution remains introai9-only.",

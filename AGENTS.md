@@ -108,6 +108,13 @@ GPU job은 0이다. Source of truth는
 `docs/dsa-prefix-risk-audit-2026-08-09.md`, machine contract는 schema 3.8의
 `problem_selection.dsa_prefix_risk_source_audit`이다.
 
+Exact DSA audit content `4600d9c45b257c99db1c294ca4481724ede0b360`의
+Quality run `31301858683`과 Pages run `31301858151`도 모두 성공했다. Live
+overview와 상세 설명, 공개 audit 문서에서 31/40 source rejection, active
+shortlist 0, no payload/P0/model/architecture/GPU와 `introai9`-only 경계를
+확인했다. 이 배포 검증은 candidate를 재개방하거나 scientific state와 실행
+권한을 바꾸지 않는다.
+
 ## 1. 연구의 현재 기준선
 
 - 프로젝트명: **AURORA**
