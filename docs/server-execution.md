@@ -19,6 +19,15 @@
 - IAVS 상태 확인은 공식 GitHub metadata를 읽는 source watch이며 scientific
   experiment가 아니다. P0/P1 gate 전에는 `introai9` GPU job을 만들지 않는다.
 
+## 2026-08-10 · context–treatment source audit, no job authorized
+
+- Frozen scores are 31.5/27.5/26.0/27.0/30.0, all below 32.
+- AneuSI repository metadata와 small case-name file만 읽었다. Spreadsheet/VTK,
+  treatment MRI archive와 latent source meshes는 읽거나 내려받지 않았다.
+- `introai9` PBS job은 0개이며 P0/PBS/GPU job을 만들지 않았다. 이는 정상
+  source-gate early stop이지 SSH·scheduler·GPU failure가 아니다.
+- `junjinyong`은 접속·조회·제출·모니터링하지 않았다.
+
 ## 2026-08-10 · topology–procedure source audit, no job authorized
 
 - Fresh source-only scores are 24.0/28.5/24.0/28.5/28.5, all below 32.

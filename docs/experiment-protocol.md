@@ -1,6 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.3 · 2026-08-10
+버전: 4.4 · 2026-08-10
+
+> **Current gate:** context–treatment batch의 최고점은 31.5/40으로 32
+> 미만이다. 따라서 AneuSI spreadsheet/VTK나 treatment MRI archive를 읽는 P0,
+> PBS 제출, model 또는 GPU experiment는 없다. 이 상태가 registered early
+> stop이다. 새 independent unit/endpoint가 있는 fresh candidate만 다시 score하며,
+> 31.5를 reweight하거나 closed AneuX orbit을 repair하지 않는다. 향후 허가된
+> 실행도 `introai9` PBS만 사용하고 `junjinyong`은 금지한다.
 
 연결 설정: `configs/aurora_v1.json`
 

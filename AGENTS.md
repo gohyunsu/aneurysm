@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 context–treatment source-audit overlay:** Fresh source-only
+> batch는 AneuSI ordered parent-vessel context, paired black-blood/4D-flow
+> treatment response, device-conditioned counterfactual selection,
+> morphology-decision-preserving TOF segmentation과 external latent-shape
+> calibration을 31.5/27.5/26.0/27.0/30.0으로 판정했다. 모두 frozen admission
+> line 32 미만이다. AneuSI는 paper 99 patient/102 case와 repository 103 named
+> case가 아직 reconciled되지 않았고, parent-vessel morphology·point-cloud/
+> vessel-graph rupture prediction과 latent shape가 direct prior다. Treatment
+> MRI는 33/38 scan이 아니라 2 source patient anatomy가 독립 단위다.
+> Spreadsheet, VTK, MRI archive, P0, method, architecture, PBS/GPU와 outer test는
+> 0이다. Schema 4.4 source of truth는
+> `problem_selection.context_treatment_source_audit`와
+> `docs/context-treatment-source-audit-2026-08-10.md`다. `introai9` PBS job은
+> 0이고 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 topology–procedure deployment overlay:** Exact content
 > `3f8e0a5d2c570cfb1c75f22f34d3989fdd5ff71d`의 Quality `31327799890`과 Pages
 > `31327799626`이 성공했다. Live overview는 batch best 28.5/40, all rejected,

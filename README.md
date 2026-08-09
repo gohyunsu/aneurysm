@@ -6,14 +6,20 @@ N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 �
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
 가장 최근
-[`topology–procedure source audit`](docs/topology-procedure-source-audit-2026-08-10.md)은
-2026-08-07 tornadic-flow preprint/Figshare, 18-patient C-arm working-view
-prediction, MAXIMUS TOF nnU-Net weights와 one-geometry rheology/slip release를
-점검했습니다. 다섯 후보는 **24.0/28.5/24.0/28.5/28.5**로 모두 32 미만입니다.
-Figshare는 3 CFD WSS case와 figure용 2 MRI case를 제공하지만 same-case
-CFD–MRI pair가 아니며, 원 논문이 topology taxonomy와 in-vivo 관찰을 직접
-점유합니다. WSS/velocity/code archive, MAXIMUS weights, 3DRA/patient image,
-P0, method, architecture와 PBS/GPU job은 모두 0입니다.
+[`context–treatment source audit`](docs/context-treatment-source-audit-2026-08-10.md)은
+AneuSI의 same-case parent-vessel context, paired black-blood/4D-flow treatment
+MRI, DIVA-seg와 public latent-shape control을 점검했습니다. 다섯 후보는
+**31.5/27.5/26.0/27.0/30.0**으로 모두 32 미만입니다. AneuSI는 99 patient,
+paper 102 case와 7 clip factor를 보고하고 repository는 103 named case를
+노출합니다. 이 102/103 mapping을 spreadsheet나 VTK를 열어 사후 수리하지
+않았고, parent-vessel rupture context와 latent shape는 direct prior가 강합니다.
+Paired treatment MRI도 33/38 scan이 아니라 2 patient-derived anatomy가 독립
+단위입니다. Spreadsheet/VTK/MRI archive, P0, method, architecture와 PBS/GPU
+job은 모두 0입니다. 이는 서버 실패가 아니라 source gate의 정상 종료입니다.
+
+직전
+[`topology–procedure source audit`](docs/topology-procedure-source-audit-2026-08-10.md)의
+최고점 28.5/40도 historical rejection으로 보존합니다.
 
 직전
 [`hemodynamic–endpoint source audit`](docs/hemodynamic-endpoint-source-audit-2026-08-10.md)은

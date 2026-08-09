@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 latest lineage boundary:** AneuSI가 aneurysm/neck 자동 isolation과
+> 7단계 clip orbit을 공개했지만 parent-vessel morphology, size ratio, point-cloud
+> rupture classification과 semantic vessel graph가 context hypothesis의 직접
+> 계보다. 2026 latent-shape work는 958 surface의 reconstruction/synthesis/status
+> representation을 이미 점유한다. Paired black-blood/4D-flow study도 두
+> patient-derived anatomy와 15 device에서 treatment response를 직접 분석한다.
+> 따라서 nested context, graph/equivariant encoder, latent shape 또는 paired
+> modality regression을 단독 novelty로 쓰지 않는다. Frozen residual scores와
+> 출처는 [`context–treatment audit`](context-treatment-source-audit-2026-08-10.md)에
+> 보존한다.
+
 ## 0-T. Current decision · topology names and public weights do not create a task
 
 The 2026-08-07

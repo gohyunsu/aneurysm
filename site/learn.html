@@ -50,10 +50,10 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 audit은 tornadic WSS topology, C-arm view, MAXIMUS TOF weights와
-            rheology/slip source를 검토했지만 최고점이 28.5/40임을 확인했습니다.
-            3 CFD + 2 MRI figure case는 paired cohort가 아니며 public weights는
-            public image dataset이 아닙니다.
+            최신 audit은 AneuSI parent-vessel context, paired treatment MRI,
+            DIVA-seg와 latent shape를 검토했지만 최고점이 31.5/40임을
+            확인했습니다. AneuSI의 paper/repository case count는 102/103으로
+            미해결이고 treatment MRI의 독립 anatomy는 2입니다.
             현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
@@ -65,7 +65,7 @@
             supervision semantics 또는 독립 단위가 실제로 달라진 별도 후보만 다시
             감사합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
           </p>
-          <a href="../docs/topology-procedure-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/context-treatment-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -386,7 +386,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              최신 후보도 28.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              최신 후보도 31.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
               stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
@@ -394,10 +394,15 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. Tornadic topology는 2026 direct prior이고 3 CFD + 2 MRI figure case는 paired cohort가 아닙니다. MAXIMUS는 weights-only, C-arm cohort는 18 patient, rheology/slip geometry는 1개입니다. PointNeXt/GNN + PINN-derived hemodynamics + clinical fusion도 direct prior입니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. AneuSI의 ordered parent-vessel context는 유용한 ablation이지만 rupture morphology, point-cloud와 semantic vessel graph가 direct prior입니다. Paper/repository case count 102/103은 미해결이고 paired treatment MRI의 독립 anatomy는 2입니다.</p>
             </aside>
             <article>
-              <span>CURRENT · TOPOLOGY–PROCEDURE REJECTION</span>
+              <span>CURRENT · CONTEXT–TREATMENT REJECTION</span>
+              <div><h3>Ordered context나 paired scans가 method gap을 만드는가?</h3><p>아닙니다. Parent-vessel context와 latent shape는 직접 계보가 강하고, 102/103 case mapping은 미해결입니다. Treatment scans도 two-anatomy repeated interventions라 clinical counterfactual selection을 식별하지 않습니다.</p></div>
+              <b>상태</b><small>best 31.5/40 · no spreadsheet/VTK/MRI/P0/model/GPU</small>
+            </article>
+            <article>
+              <span>HISTORY · TOPOLOGY–PROCEDURE REJECTION</span>
               <div><h3>Tornadic topology나 public model weights가 method gap을 만드는가?</h3><p>아닙니다. 원 논문이 WSS topology taxonomy와 in-vivo observation을 점유하며 public CFD/MRI는 same-case pair가 아닙니다. Public MAXIMUS weights도 source image·mimic-label cohort를 제공하지 않습니다.</p></div>
               <b>상태</b><small>best 28.5/40 · no archive/P0/model/GPU</small>
             </article>

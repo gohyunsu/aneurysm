@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.3":
-        raise ProtocolError("The current research-state schema must be version 4.3.")
+    if protocol["schema_version"] != "4.4":
+        raise ProtocolError("The current research-state schema must be version 4.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_topology_procedure_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_context_treatment_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -193,6 +193,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "pinn_rupture_direct_prior_audit",
             "hemodynamic_endpoint_source_audit",
             "topology_procedure_source_audit",
+            "context_treatment_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -202,12 +203,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_topology_procedure_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_context_treatment_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_public_manuscripts_readmes_and_repository_tree_only_no_large_archive_model_weight_or_patient_payload_for_topology_procedure_audit"
+        != "source_metadata_public_manuscripts_readmes_repository_tree_and_small_case_name_file_only_no_spreadsheet_vtk_mri_archive_model_weight_or_patient_payload_for_context_treatment_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -219,11 +220,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/topology-procedure-source-audit-2026-08-10.md"
+        != "docs/context-treatment-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "noise_resolution_stable_wss_topological_skeleton"
+        != "ordered_parent_vessel_context_sufficiency_for_rupture_status"
     ):
         raise ProtocolError(
             "The PINN direct-prior boundary must retain no selected primary, "
@@ -261,6 +262,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "set_valued_c_arm_working_view_distribution",
         "differential_diagnosis_aware_open_set_tof_detection",
         "rheology_slip_model_form_hemodynamic_uncertainty",
+        "ordered_parent_vessel_context_sufficiency_for_rupture_status",
+        "paired_black_blood_to_4d_flow_treatment_response",
+        "device_conditioned_counterfactual_treatment_selection",
+        "morphology_decision_preserving_tof_segmentation",
+        "external_latent_shape_calibration",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -322,6 +328,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "differentiable_projection_adversarial_or_diffusion_working_view_prediction",
         "differential_diagnosis_aware_nnunet_or_open_set_calibration",
         "rheology_or_wall_slip_condition_tokens_and_parameter_sweeps",
+        "parent_vessel_context_or_nested_crop_consistency",
+        "aneurysm_size_ratio_or_parent_vessel_morphology",
+        "semantic_vessel_graph_or_point_cloud_rupture_classification",
+        "generic_latent_shape_reconstruction_synthesis_or_calibration",
+        "paired_black_blood_to_4d_flow_regression",
+        "morphology_aware_segmentation_metric_or_bias_analysis",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -1767,6 +1779,164 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("topology-procedure rejection and introai9-only boundary")
 
+    context_audit = problem_selection["context_treatment_source_audit"]
+    _require_keys(
+        context_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "spreadsheet_vtk_mri_or_model_weight_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "observed_introai9_pbs_job_count",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "aneusi_doi",
+            "aneusi_repository_commit",
+            "aneusi_repository_tree",
+            "aneusi_code_license",
+            "aneusi_data_license",
+            "aneusi_paper_patients",
+            "aneusi_paper_cases",
+            "aneusi_clip_factors",
+            "aneusi_isolated_models",
+            "aneusi_reported_cuts",
+            "aneusi_repository_named_cases",
+            "aneusi_model_vtk_entries",
+            "aneusi_centerline_vtk_entries",
+            "aneusi_automated_neck_vtk_entries",
+            "aneusi_paper_repository_case_count_reconciled",
+            "aneusi_spreadsheet_accessed",
+            "aneusi_vtk_payload_accessed",
+            "flow_mri_4d_record",
+            "flow_mri_4d_datasets",
+            "flow_mri_black_blood_record",
+            "flow_mri_black_blood_datasets",
+            "flow_mri_unique_models",
+            "flow_mri_source_patient_anatomies",
+            "flow_mri_device_conditions",
+            "flow_mri_archives_downloaded",
+            "diva_seg_labeled_train",
+            "diva_seg_test",
+            "diva_seg_unlabeled",
+            "diva_seg_external_labeled",
+            "diva_seg_public_image_mask_payload_found",
+            "latent_shape_surfaces_reported",
+            "latent_shape_public_code_and_weights",
+            "latent_shape_source_mesh_payload_accessed",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.context_treatment_source_audit",
+    )
+    expected_context_scores = {
+        "ordered_parent_vessel_context_sufficiency_for_rupture_status": 31.5,
+        "paired_black_blood_to_4d_flow_treatment_response": 27.5,
+        "device_conditioned_counterfactual_treatment_selection": 26.0,
+        "morphology_decision_preserving_tof_segmentation": 27.0,
+        "external_latent_shape_calibration": 30.0,
+    }
+    observed_context_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in context_audit["candidates"]
+    }
+    context_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in context_audit["candidates"]
+    )
+    if (
+        context_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or context_audit["audit_document"]
+        != "docs/context-treatment-source-audit-2026-08-10.md"
+        or context_audit["automatic_selection_threshold"] != 32.0
+        or context_audit["best_candidate_id"]
+        != "ordered_parent_vessel_context_sufficiency_for_rupture_status"
+        or context_audit["best_score"] != 31.5
+        or context_audit["best_score"]
+        >= context_audit["automatic_selection_threshold"]
+        or context_audit["active_shortlist_count"] != 0
+        or context_audit["primary_problem_selected"] is not False
+        or context_audit["spreadsheet_vtk_mri_or_model_weight_payload_accessed"]
+        is not False
+        or context_audit["executable_p0_registered"] is not False
+        or context_audit["method_selected"] is not False
+        or context_audit["architecture_selected"] is not False
+        or context_audit["gpu_training_authorized"] is not False
+        or context_audit["outer_test_authorized"] is not False
+        or context_audit["submission_identity_active"] is not False
+        or context_audit["execution_server"] != "introai9"
+        or context_audit["observed_introai9_pbs_job_count"] != 0
+        or context_audit["pbs_job_created"] is not False
+        or context_audit["login_node_gpu_command_executed"] is not False
+        or context_audit["junjinyong_accessed_for_this_audit"] is not False
+        or context_audit["aneusi_doi"] != "10.1016/j.cmpb.2026.109525"
+        or context_audit["aneusi_repository_commit"]
+        != "5b4c454ede46c4cd56d3831cb24748c7e1521eca"
+        or context_audit["aneusi_repository_tree"]
+        != "21ee76c85c1ddb00961879d737b5c994dbc3b711"
+        or context_audit["aneusi_code_license"] != "mit"
+        or context_audit["aneusi_data_license"] != "cc_by_nc_3_0"
+        or context_audit["aneusi_paper_patients"] != 99
+        or context_audit["aneusi_paper_cases"] != 102
+        or context_audit["aneusi_clip_factors"] != 7
+        or context_audit["aneusi_isolated_models"] != 714
+        or context_audit["aneusi_reported_cuts"] != 2592
+        or context_audit["aneusi_repository_named_cases"] != 103
+        or context_audit["aneusi_model_vtk_entries"] != 103
+        or context_audit["aneusi_centerline_vtk_entries"] != 103
+        or context_audit["aneusi_automated_neck_vtk_entries"] != 103
+        or context_audit["aneusi_paper_repository_case_count_reconciled"]
+        is not False
+        or context_audit["aneusi_spreadsheet_accessed"] is not False
+        or context_audit["aneusi_vtk_payload_accessed"] is not False
+        or context_audit["flow_mri_4d_record"]
+        != "10.5281/zenodo.17183575"
+        or context_audit["flow_mri_4d_datasets"] != 33
+        or context_audit["flow_mri_black_blood_record"]
+        != "10.5281/zenodo.17191239"
+        or context_audit["flow_mri_black_blood_datasets"] != 38
+        or context_audit["flow_mri_unique_models"] != 5
+        or context_audit["flow_mri_source_patient_anatomies"] != 2
+        or context_audit["flow_mri_device_conditions"] != 15
+        or context_audit["flow_mri_archives_downloaded"] is not False
+        or context_audit["diva_seg_labeled_train"] != 57
+        or context_audit["diva_seg_test"] != 14
+        or context_audit["diva_seg_unlabeled"] != 518
+        or context_audit["diva_seg_external_labeled"] != 82
+        or context_audit["diva_seg_public_image_mask_payload_found"] is not False
+        or context_audit["latent_shape_surfaces_reported"] != 958
+        or context_audit["latent_shape_public_code_and_weights"] is not True
+        or context_audit["latent_shape_source_mesh_payload_accessed"] is not False
+        or observed_context_scores != expected_context_scores
+        or not context_axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in context_audit["candidates"])
+        or context_audit["decision"]
+        != "reject_all_without_score_repair_spreadsheet_vtk_mri_payload_p0_method_architecture_or_gpu"
+        or context_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The context-treatment audit must preserve all five frozen "
+            "source-only rejections, the 31.5/40 maximum, no spreadsheet/VTK/"
+            "MRI/P0/model/GPU, and introai9-only execution."
+        )
+    checks.append("context-treatment rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -1846,7 +2016,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_topology_procedure_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_context_treatment_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -2009,7 +2179,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_topology_procedure_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_context_treatment_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

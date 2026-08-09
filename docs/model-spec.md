@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 latest architecture boundary:** AneuSI ordered context 후보는
+> 31.5/40, latent-shape calibration은 30.0/40이고 나머지 treatment/DIVA 후보도
+> 모두 32 미만이다. Parent-vessel graph, nested-crop consistency, E(3) surface
+> encoder, VAE, paired-modality regression과 morphometry-aware loss는 direct
+> prior/engineering choice다. 따라서 현재 headline GNN, Transformer, U-Net,
+> latent model이나 treatment policy architecture는 선택하지 않는다. 상세
+> 판정은 [`context–treatment audit`](context-treatment-source-audit-2026-08-10.md)을
+> 따른다.
+
 > **2026-08-10 current boundary:** fresh topology–procedure batch는 tornadic
 > topology, robust WSS skeleton, set-valued C-arm view, open-set TOF detection과
 > rheology/slip uncertainty를 24.0/28.5/24.0/28.5/28.5로 기각했다. New topology
@@ -44,8 +53,9 @@ transient WSS P0 execution-incomplete before payload/no verdict/no rerun and
 candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before
 completed tabular archive/no verdict/no rerun and candidate closed · DSA
 prefix-risk candidate source-rejected 31/40 · hemodynamic-endpoint batch best
-31/40 and all source-rejected · fresh topology–procedure batch best 28.5/40 and
-all source-rejected · active shortlist/selected primary
+31/40 and all source-rejected · topology–procedure batch best 28.5/40 and
+all source-rejected · context–treatment batch best 31.5/40 and all
+source-rejected · active shortlist/selected primary
 problem/method/architecture 0 · inverse healthy-vessel counterfactual candidate
 rejected 27/40 · no GPU/outer test
 

@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · topology–procedure best 28.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · context–treatment best 31.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Open context or paired scans still do not earn a model",
+      copy: "AneuSI supplies a seven-level same-case parent-vessel context orbit, but parent-vessel morphology, point-cloud rupture prediction and semantic vessel graphs are direct priors. The paper reports 102 cases while the repository names 103, so that mapping remains unresolved without opening spreadsheet or VTK payload. Paired black-blood/4D-flow treatment records expose 33/38 datasets but only two source patient anatomies; DIVA-seg and a 958-surface latent space directly occupy the other hypotheses.",
+      status: "Best 31.5/40 · all rejected · spreadsheet/VTK/MRI/P0/model/GPU 0",
+      url: "../docs/context-treatment-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Topology names and public weights still do not earn a model",
@@ -334,6 +341,16 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "AneuSI / Aneurisk context orbit",
+      role: "source-rejected ordered parent-vessel context control; not training",
+      provenance: "99 paper patients · 102 paper cases / 103 repository names unresolved · 7 clip factors · spreadsheet/VTK payload 0 · no P0/model/GPU"
+    },
+    {
+      name: "Paired black-blood + 4D-flow treatment MRI",
+      role: "source-rejected in-vitro paired physical control; not a clinical treatment cohort",
+      provenance: "33 4D-flow + 38 black-blood datasets · 5 models · 2 source patient anatomies · 15 devices · archives not downloaded"
+    },
+    {
       name: "TopAneu 2026 · terms gated",
       role: "conditional P0 asset/semantics audit only after explicit user terms acceptance",
       provenance: "Live 417 scans/409 patients · 52 location classes · organizer-predicted silver vessel masks · source audit 29/40 · payload/model/GPU 0"
@@ -445,6 +462,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Context–treatment candidates stop before payload and compute",
+      copy: "AneuSI context, paired black-blood/4D-flow response, counterfactual device selection, morphology-preserving TOF segmentation and latent-shape calibration score 31.5/27.5/26.0/27.0/30.0. Direct priors and effective-unit limits leave every candidate below 32. Schema 4.4 freezes the unresolved AneuSI 102/103 mapping, two-anatomy treatment unit and no spreadsheet/VTK/MRI/P0/model/GPU boundary. introai9 remains idle and exclusive; junjinyong remains excluded.",
+      files: ["docs/context-treatment-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "docs/model-spec.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

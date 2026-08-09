@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 source-only additions:** AneuSI는 99 paper patients/102 reported
+> cases, repository 103 named cases와 seven-clip same-case context orbit을 가진
+> control asset이다. 102/103 mapping이 미해결이고 spreadsheet/VTK payload는
+> 열지 않아 training cohort가 아니다. Paired treatment MRI는 33 4D-flow와 38
+> black-blood datasets를 보고하지만 five models/two source patient anatomies다.
+> Archive는 받지 않았고 repeated scan을 patient로 세지 않는다. 둘 다
+> [`context–treatment source audit`](context-treatment-source-audit-2026-08-10.md)의
+> rejected source history다.
+
 > **2026-08-10 topology–procedure source audit:** Figshare
 > `10.6084/m9.figshare.32270130.v2`의 README는 3 CFD WSS cardiac-cycle case와
 > figure용 2 MRI case를 보고하지만 same-case pair는 없다. Three WSS archives

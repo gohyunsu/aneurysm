@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 latest boundary:** context–treatment batch는
+> 31.5/27.5/26.0/27.0/30.0으로 모두 admission line 32 미만이다. AneuSI의
+> ordered parent-vessel context는 좋은 ablation이지만 독립 method identity가
+> 아니며 102 paper case/103 repository case mapping도 미해결이다. Treatment MRI는
+> two-anatomy in-vitro physical control이고 DIVA-seg/latent shape는 direct prior다.
+> Payload/P0/model/GPU/outer test와 four-page contribution은 0이다. ISBI target은
+> 유지하지만 현재는 not submission-ready다.
+
 > **2026-08-10 current boundary:** 가장 최근 fresh topology–procedure batch는
 > tornadic topology, robust WSS skeleton, set-valued C-arm view, open-set TOF와
 > rheology/slip uncertainty를 24.0/28.5/24.0/28.5/28.5로 기각했다. Figshare
@@ -31,7 +39,7 @@
 
 최종 검토일: 2026-08-10 KST
 
-상태: **target locked · topology–procedure batch best 28.5/40 and all rejected · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
+상태: **target locked · context–treatment batch best 31.5/40 and all rejected · topology–procedure batch best 28.5/40 and all rejected · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
 shortlist/selected primary problem/method/architecture/GPU 0 · not
 submission-ready**

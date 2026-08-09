@@ -4,6 +4,21 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Context–treatment batch is rejected before compute
+
+- AneuSI, paired black-blood/4D-flow treatment MRI, DIVA-seg와 public
+  latent-shape implementation을 같은 frozen rubric으로 검토했다. 다섯 점수는
+  31.5/27.5/26.0/27.0/30.0이며 모두 admission line 32 미만이다.
+- AneuSI의 parent-vessel context는 명확한 same-case ablation이지만 rupture
+  morphology/point-cloud/vessel-graph direct prior가 강하다. Paper 102 case와
+  repository 103 named case의 mapping도 미해결이며 spreadsheet/VTK는 열지
+  않았다. Treatment MRI의 effective anatomy는 2다.
+- Schema 4.4는 active shortlist/primary/P0/method/architecture/GPU를 0으로
+  고정한다. `introai9` PBS job은 0이고 새 작업을 제출하지 않았다.
+  `junjinyong`은 접속·조회·제출·모니터링하지 않았다.
+- 영향 파일: `docs/context-treatment-source-audit-2026-08-10.md`, machine
+  contract/validator/tests, overview documents, site, `AGENTS.md`.
+
 ## 2026-08-10 · Topology–procedure source rejection is deployed and verified
 
 - Exact content `3f8e0a5d2c570cfb1c75f22f34d3989fdd5ff71d`의 Quality
