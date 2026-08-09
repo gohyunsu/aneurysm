@@ -4,6 +4,25 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Treatment–surveillance source audit rejects all five candidates
+
+- Public flow-diverter follow-up data report 126 subjects/141 procedures,
+  complications and at most two irregular DSA follow-up observations. Device
+  assignment is not randomized and exact biological occlusion time is not
+  observed.
+- Observed interval-censored occlusion, causal device selection,
+  complication–occlusion utility, recurrent-procedure sequence modeling and
+  paired fast/standard TOF-MRA equivalence score
+  **30.0/26.0/29.0/26.0/23.0**. All are below the frozen 32/40 line.
+- The 22-patient paired MRA source is restricted; its paper already reports
+  inter-modality kappa 0.98 using standard TOF-MRA rather than DSA as reference.
+- Schema 4.6 freezes no spreadsheet/R document/presentation/DSA/MRA payload,
+  no P0/model/GPU/outer test, `introai9`-only execution and complete exclusion
+  of `junjinyong`.
+- 영향 파일: `docs/treatment-surveillance-source-audit-2026-08-10.md`, machine
+  contract/validator/tests, public research and dataset guides, site status and
+  this changelog.
+
 ## 2026-08-10 · Provenance–evaluation rejection is deployed and verified
 
 - Exact content `4569c32fbdd19ddf34dac74ef840a8bfc6da080a`의 Quality

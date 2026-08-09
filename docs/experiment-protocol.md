@@ -1,6 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.5 · 2026-08-10
+버전: 4.6 · 2026-08-10
+
+> **Current gate:** treatment–surveillance batch의 최고점은 30.0/40이다.
+> Public flow-diverter spreadsheet와 restricted paired MRA를 읽지 않았고 P0,
+> method, architecture, PBS/GPU와 outer test는 모두 unauthorized다. Fresh
+> candidate가 32/40 이상일 때만 `introai9` CPU/PBS method-free P0를 별도로
+> 등록한다. `junjinyong`은 모든 AURORA 작업에서 제외한다.
 
 > **Current gate:** provenance–evaluation batch의 최고점은 30.0/40으로 32
 > admission line 미만이다. Exact cross-release lineage manifest, executable

@@ -6,6 +6,19 @@
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
 운영 명령과 private path는 Git에서 제외된 `SERVER_GUIDE.md`를 따른다.
 
+## 2026-08-10 · treatment–surveillance source audit, no job authorized
+
+- Frozen scores are 30.0/26.0/29.0/26.0/23.0, all below 32.
+- Only public record pages and manuscripts were inspected. Mendeley spreadsheet,
+  R document, presentation/DSA images and restricted Zenodo MRA files were not
+  accessed.
+- There is no executable P0, PBS submission, GPU job or monitoring loop from
+  this audit. A transient `introai9` SSH handshake reset is an access-state
+  observation, not a scheduler or scientific result; it does not authorize a
+  different server.
+- AURORA remains `introai9` PBS only. `junjinyong` is excluded from connection,
+  query, submission and monitoring.
+
 ## 2026-08-10 execution boundary check
 
 - Credential-managed local SSH config의 `introai9` alias로 public-key 접속을

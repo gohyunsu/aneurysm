@@ -1,5 +1,11 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 latest boundary:** treatment–surveillance candidates score
+> 30.0/26.0/29.0/26.0/23.0, all below 32. The public 126-subject flow-diverter
+> table cannot identify causal device choice or exact occlusion time, and the
+> paired 22-patient MRA record is restricted/direct-prior occupied. No primary,
+> method, model or GPU is selected; the paper remains not submission-ready.
+
 > **2026-08-10 latest boundary:** provenance–evaluation batch는
 > 30.0/29.5/28.5/23.5/25.5로 모두 admission line 32 미만이다. Cross-release
 > anatomy lineage blocking은 향후 CFD-pretraining claim의 필수 평가 계약이지만,

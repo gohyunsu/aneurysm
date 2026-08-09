@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 treatment–surveillance lineage boundary:** Flow-diverter
+> morphology/virtual-stenting/CFD outcome ML, time-to-occlusion modeling,
+> propensity-matched device comparison and 2025 morphology+CFD+SHAP prediction
+> directly occupy the public follow-up table. Compressed-sensing TOF-MRA
+> agreement is also directly evaluated in the 22-patient source paper.
+> Interval-censored survival, causal heads, utility losses and paired consistency
+> therefore remain controls rather than novelty. See the
+> [`source audit`](treatment-surveillance-source-audit-2026-08-10.md).
+
 > **2026-08-10 provenance lineage boundary:** CTSCAN은 deterministic patient-
 > disjoint medical-imaging benchmark를, 2026 pathology audit은 case/institution
 > contamination matrix와 performance inflation을, prior 3D work는 pretrained

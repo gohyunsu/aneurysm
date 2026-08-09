@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **2026-08-10 treatment–surveillance boundary:** Public flow-diverter follow-up
+> data are real clinical outcomes but do not create a new method identity.
+> Observed interval-censored occlusion forecasting is the best row at 30.0/40;
+> causal device selection is not identified, benefit–harm utility is not
+> elicited, recurrent histories have too few effective units, and 22-patient
+> paired TOF-MRA agreement is restricted and directly occupied. No payload,
+> P0, architecture or GPU is opened. See the
+> [`frozen audit`](treatment-surveillance-source-audit-2026-08-10.md).
+
 > **2026-08-10 provenance–evaluation boundary:** AneuX/Aneurisk/76-case CFD
 > cross-release lineage 후보의 최고점은 30.0/40이다. Shared source ancestry는
 > 확인되지만 exact lesion manifest가 없고, generic contamination audit과

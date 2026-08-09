@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 treatment–surveillance boundary:** 새 공개 flow-diverter source는
+> 126명/141건의 시술, first/second DSA follow-up과 합병증을 보고하지만 정확한
+> 폐색 시점과 randomized device assignment는 제공하지 않는다. Paired
+> compressed-sensing/parallel-imaging TOF-MRA source는 22명이고 restricted이며
+> 원 논문이 이미 kappa 0.98의 직접 agreement 결과를 냈다. 다섯 후보의 frozen
+> score는 **30.0/26.0/29.0/26.0/23.0**으로 모두 32 미만이다.
+> [`상세 audit`](docs/treatment-surveillance-source-audit-2026-08-10.md)에 따라
+> payload/P0/model/GPU는 열지 않았고, 실행 경계는 `introai9` PBS only 및
+> `junjinyong` 완전 제외다.
+
 실패한 가설을 보존하면서 뇌동맥류 영상·혈류 연구의 문제 정의부터 다시
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.

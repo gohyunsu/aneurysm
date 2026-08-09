@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 treatment–surveillance audit:** Mendeley
+> `10.17632/nzzx92ky6r.2` reports 126 subjects/141 flow-diverter procedures,
+> complications and first/second DSA follow-up; it is a source-rejected treatment
+> control because device assignment is observational and exact occlusion time is
+> interval-censored. Zenodo `10.5281/zenodo.6654502` is a restricted 22-patient
+> paired TOF-MRA source whose paper directly reports kappa 0.98. No spreadsheet,
+> presentation, DSA/MRA or patient payload was accessed. Best score 30.0/40;
+> P0/model/GPU 0.
+
 > **2026-08-10 lineage rule:** AneuX의 Aneurisk 101 lesion, AneuriskData mirror의
 > 24 named model folder와 새 CFD의 76 selected geometry는 source ancestry만으로
 > 동일 case라 병합하지 않는다. Exact patient/lesion/acquisition/geometry/cut/

@@ -271,6 +271,42 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "provenance-evaluation audit"):
             validate_protocol(candidate)
 
+    def test_treatment_surveillance_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "treatment_surveillance_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 30.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 5)
+        self.assertEqual(audit["flow_diverter_subjects"], 126)
+        self.assertEqual(audit["flow_diverter_procedures"], 141)
+        self.assertFalse(audit["exact_biological_occlusion_time_observed"])
+        self.assertFalse(audit["device_assignment_randomized"])
+        self.assertEqual(audit["paired_mra_patients"], 22)
+        self.assertEqual(audit["paired_mra_record_access_right"], "restricted")
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["observed_introai9_pbs_job_count"], 0)
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["treatment_surveillance_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "treatment-surveillance audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["treatment_surveillance_source_audit"][
+            "device_assignment_randomized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "treatment-surveillance audit"):
+            validate_protocol(candidate)
+
     def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:
         audit = self.protocol["problem_selection"]["vascular_semantics_source_audit"]
         self.assertEqual(audit["best_score"], 29.5)

@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.5":
-        raise ProtocolError("The current research-state schema must be version 4.5.")
+    if protocol["schema_version"] != "4.6":
+        raise ProtocolError("The current research-state schema must be version 4.6.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_provenance_evaluation_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_treatment_surveillance_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -195,6 +195,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "topology_procedure_source_audit",
             "context_treatment_source_audit",
             "provenance_evaluation_source_audit",
+            "treatment_surveillance_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -204,12 +205,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_provenance_evaluation_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_treatment_surveillance_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_public_manuscripts_readmes_and_repository_tree_only_no_aneux_or_cfd_archive_dicom_stl_vtp_spreadsheet_model_weight_or_patient_payload_for_provenance_evaluation_audit"
+        != "source_metadata_public_manuscripts_and_repository_records_only_no_mendeley_spreadsheet_r_document_presentation_dsa_image_restricted_zenodo_mra_or_patient_payload_for_treatment_surveillance_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -221,11 +222,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/provenance-evaluation-source-audit-2026-08-10.md"
+        != "docs/treatment-surveillance-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "cross_release_lineage_blocked_cfd_to_rupture_transfer_validity"
+        != "observed_interval_censored_post_fd_occlusion_forecasting"
     ):
         raise ProtocolError(
             "The PINN direct-prior boundary must retain no selected primary, "
@@ -273,6 +274,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "test_blind_pointnet_external_reevaluation",
         "hug_curator_lineage_invariant_morphometry",
         "patient_set_multiple_aneurysm_rupture_consistency",
+        "observed_interval_censored_post_fd_occlusion_forecasting",
+        "causal_pipeline_versus_surpass_device_selection",
+        "early_complication_delayed_occlusion_utility_prediction",
+        "recurrent_procedure_patient_history_sequence_modeling",
+        "fast_standard_tof_mra_remnant_decision_equivalence",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -343,6 +349,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_patient_source_or_lineage_disjoint_split",
         "generic_near_duplicate_shape_hash_or_embedding",
         "generic_source_aware_calibration_abstention_or_domain_adaptation",
+        "flow_diverter_outcome_ml_from_morphology_virtual_stenting_or_cfd",
+        "time_to_occlusion_statistical_modeling",
+        "propensity_score_device_comparison",
+        "generic_interval_censored_survival_or_competing_risk_model",
+        "generic_multitask_benefit_harm_or_decision_curve_analysis",
+        "generic_patient_history_transformer",
+        "compressed_sensing_mri_reconstruction_or_paired_consistency",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -2080,6 +2093,128 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("provenance-evaluation rejection and introai9-only boundary")
 
+    treatment_audit = problem_selection["treatment_surveillance_source_audit"]
+    _require_keys(
+        treatment_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "any_spreadsheet_r_document_presentation_dsa_mra_or_patient_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "observed_introai9_pbs_job_count",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "flow_diverter_dataset_doi",
+            "flow_diverter_subjects",
+            "flow_diverter_procedures",
+            "pipeline_procedures",
+            "surpass_procedures",
+            "followup_observation_count_maximum_per_procedure",
+            "exact_biological_occlusion_time_observed",
+            "device_assignment_randomized",
+            "paired_mra_zenodo_doi",
+            "paired_mra_patients",
+            "paired_mra_record_access_right",
+            "paired_mra_public_file_list_exposed",
+            "paired_mra_reference_standard",
+            "paired_mra_reported_intermodality_kappa",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.treatment_surveillance_source_audit",
+    )
+    expected_treatment_scores = {
+        "observed_interval_censored_post_fd_occlusion_forecasting": 30.0,
+        "causal_pipeline_versus_surpass_device_selection": 26.0,
+        "early_complication_delayed_occlusion_utility_prediction": 29.0,
+        "recurrent_procedure_patient_history_sequence_modeling": 26.0,
+        "fast_standard_tof_mra_remnant_decision_equivalence": 23.0,
+    }
+    observed_treatment_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in treatment_audit["candidates"]
+    }
+    treatment_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in treatment_audit["candidates"]
+    )
+    if (
+        treatment_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or treatment_audit["audit_document"]
+        != "docs/treatment-surveillance-source-audit-2026-08-10.md"
+        or treatment_audit["automatic_selection_threshold"] != 32.0
+        or treatment_audit["best_candidate_id"]
+        != "observed_interval_censored_post_fd_occlusion_forecasting"
+        or treatment_audit["best_score"] != 30.0
+        or treatment_audit["best_score"]
+        >= treatment_audit["automatic_selection_threshold"]
+        or treatment_audit["active_shortlist_count"] != 0
+        or treatment_audit["primary_problem_selected"] is not False
+        or treatment_audit[
+            "any_spreadsheet_r_document_presentation_dsa_mra_or_patient_payload_accessed"
+        ]
+        is not False
+        or treatment_audit["executable_p0_registered"] is not False
+        or treatment_audit["method_selected"] is not False
+        or treatment_audit["architecture_selected"] is not False
+        or treatment_audit["gpu_training_authorized"] is not False
+        or treatment_audit["outer_test_authorized"] is not False
+        or treatment_audit["submission_identity_active"] is not False
+        or treatment_audit["execution_server"] != "introai9"
+        or treatment_audit["observed_introai9_pbs_job_count"] != 0
+        or treatment_audit["pbs_job_created"] is not False
+        or treatment_audit["login_node_gpu_command_executed"] is not False
+        or treatment_audit["junjinyong_accessed_for_this_audit"] is not False
+        or treatment_audit["flow_diverter_dataset_doi"]
+        != "10.17632/nzzx92ky6r.2"
+        or treatment_audit["flow_diverter_subjects"] != 126
+        or treatment_audit["flow_diverter_procedures"] != 141
+        or treatment_audit["pipeline_procedures"] != 96
+        or treatment_audit["surpass_procedures"] != 45
+        or treatment_audit["followup_observation_count_maximum_per_procedure"]
+        != 2
+        or treatment_audit["exact_biological_occlusion_time_observed"] is not False
+        or treatment_audit["device_assignment_randomized"] is not False
+        or treatment_audit["paired_mra_zenodo_doi"]
+        != "10.5281/zenodo.6654502"
+        or treatment_audit["paired_mra_patients"] != 22
+        or treatment_audit["paired_mra_record_access_right"] != "restricted"
+        or treatment_audit["paired_mra_public_file_list_exposed"] is not False
+        or treatment_audit["paired_mra_reference_standard"]
+        != "parallel_imaging_tof_mra_not_dsa"
+        or treatment_audit["paired_mra_reported_intermodality_kappa"] != 0.98
+        or observed_treatment_scores != expected_treatment_scores
+        or not treatment_axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in treatment_audit["candidates"])
+        or treatment_audit["decision"]
+        != "reject_all_without_score_repair_spreadsheet_r_document_presentation_dsa_mra_payload_p0_method_architecture_or_gpu"
+        or treatment_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_with_public_independent_endpoint_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The treatment-surveillance audit must preserve all five frozen "
+            "source-only rejections, the 30.0/40 maximum, no spreadsheet/DSA/"
+            "MRA/P0/model/GPU, and introai9-only execution."
+        )
+    checks.append("treatment-surveillance rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -2159,7 +2294,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_provenance_evaluation_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_treatment_surveillance_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -2322,7 +2457,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_provenance_evaluation_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_treatment_surveillance_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

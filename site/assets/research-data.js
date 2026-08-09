@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · provenance–evaluation best 30.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · treatment–surveillance best 30.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Clinical follow-up data still do not identify a new method",
+      copy: "The public flow-diverter record reports 126 subjects, 141 procedures, complications and at most two irregular DSA follow-up observations. Exact biological occlusion time is interval-censored and device assignment is not randomized. The 22-patient paired fast/standard TOF-MRA record is restricted, while its paper already reports inter-modality kappa 0.98. Outcome ML, time-to-occlusion modeling, propensity comparison and accelerated-MRA agreement are direct priors.",
+      status: "Best 30.0/40 · all rejected · spreadsheet/DSA/MRA/P0/model/GPU 0",
+      url: "../docs/treatment-surveillance-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Shared ancestry is a split constraint, not a method",
@@ -348,6 +355,16 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "Flow-diverter follow-up table · Mendeley v2",
+      role: "source-rejected observed treatment-outcome control; not causal device-selection training",
+      provenance: "126 subjects · 141 procedures · first/second irregular DSA follow-up · nonrandom device assignment · spreadsheet/R/presentation/DSA payload 0 · best 30/40"
+    },
+    {
+      name: "Paired CS/PI TOF-MRA · restricted Zenodo",
+      role: "source-rejected follow-up sequence-equivalence control; not reconstruction training",
+      provenance: "22 paired patients · four readers · paper kappa 0.98 · PI TOF-MRA reference, not DSA · restricted files/patient MRA payload 0 · candidate 23/40"
+    },
+    {
       name: "AneuSI / Aneurisk context orbit",
       role: "source-rejected ordered parent-vessel context control; not training",
       provenance: "99 paper patients · 102 paper cases / 103 repository names unresolved · 7 clip factors · spreadsheet/VTK payload 0 · no P0/model/GPU"
@@ -469,6 +486,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Treatment–surveillance candidates stop before payload and compute",
+      copy: "Observed interval-censored post-FD occlusion, causal Pipeline-versus-Surpass selection, early-complication/delayed-occlusion utility, recurrent-procedure sequence modeling and fast/standard TOF-MRA equivalence score 30.0/26.0/29.0/26.0/23.0. The 126-subject table does not observe exact occlusion time or randomize device assignment; the 22-patient MRA record is restricted and directly occupied. Schema 4.6 freezes no spreadsheet/DSA/MRA/P0/model/GPU, introai9-only execution and complete exclusion of junjinyong.",
+      files: ["docs/treatment-surveillance-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "docs/model-spec.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

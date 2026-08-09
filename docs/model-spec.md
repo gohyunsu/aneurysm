@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 latest architecture boundary:** treatment–surveillance batch의
+> 최고점은 30.0/40이다. Interval-censored survival, propensity adjustment,
+> benefit–harm multi-task learning, patient-history Transformer와 paired-MRA
+> consistency는 필요한 baseline/engineering option이지 선택된 architecture나
+> novelty가 아니다. Active architecture와 GPU authorization은 0이다.
+
 > **2026-08-10 latest architecture boundary:** provenance–evaluation batch의
 > 최고점은 30.0/40이라 active architecture는 여전히 0이다. Shape hashing,
 > PointNet/GNN embedding, source token, contrastive lineage loss, domain-

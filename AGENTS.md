@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 treatment–surveillance source-audit overlay:** Fresh source-only
+> batch는 observed interval-censored post-flow-diverter occlusion, causal
+> Pipeline-versus-Surpass selection, early-complication/delayed-occlusion
+> utility, recurrent-procedure sequence와 fast-versus-standard TOF-MRA remnant
+> equivalence를 30.0/26.0/29.0/26.0/23.0으로 판정했다. 모두 frozen admission
+> line 32 미만이다. Public Mendeley source는 126 subject/141 procedure와 최대
+> 두 DSA follow-up을 보고하지만 exact biological occlusion time과 randomized
+> device assignment를 제공하지 않는다. Paired MRA는 22 patient이며 Zenodo
+> record가 restricted이고 원 논문이 kappa 0.98을 직접 보고한다. Spreadsheet,
+> R document, presentation, DSA/MRA/patient payload, P0, method, architecture,
+> PBS/GPU와 outer test는 0이다. Schema 4.6 source of truth는
+> `problem_selection.treatment_surveillance_source_audit`와
+> `docs/treatment-surveillance-source-audit-2026-08-10.md`다. AURORA는
+> `introai9` PBS만 사용하며 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 provenance–evaluation deployment overlay:** Exact source content
 > `4569c32fbdd19ddf34dac74ef840a8bfc6da080a`의 Quality `31331100581`과 Pages
 > `31331100307`이 성공했다. Live overview는 batch best 30.0/40, all rejected,
