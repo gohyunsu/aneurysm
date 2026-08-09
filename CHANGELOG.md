@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Hemodynamic–endpoint source rejection is deployed and verified
+
+- Exact content `318a22a06a1a0d1ad8339183f290e1648c656fed`의 Quality
+  `31326443420`과 Pages `31326443150`이 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 batch best
+  31.0/40, all rejected, active shortlist/primary/method/architecture/P0/GPU 0과
+  latest detailed audit link를 확인했다. 상세 audit 문서도 배포됐다.
+- 배포 검증은 score, archive/payload access, scientific verdict, P0, model,
+  compute, outer test 또는 submission identity를 바꾸지 않는다. `introai9`만
+  허용하고 `junjinyong`은 계속 제외한다.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `site/assets/research-data.js`.
+
 ## 2026-08-10 · Fresh hemodynamic–endpoint source batch is rejected before compute
 
 - New Zenodo `10.5281/zenodo.19455127` reports 76 Aneurisk geometries with

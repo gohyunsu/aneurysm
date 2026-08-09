@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 hemodynamic–endpoint deployment overlay:** Exact content
+> `318a22a06a1a0d1ad8339183f290e1648c656fed`의 Quality `31326443420`과 Pages
+> `31326443150`이 성공했다. Live overview는 batch best 31.0/40, all rejected,
+> active shortlist/primary/method/architecture/P0/GPU 0과 detailed audit link를
+> 렌더링하고 상세 문서도 배포됐다. 이 검증은 score, payload access,
+> scientific verdict, model, compute 또는 submission identity를 바꾸지 않는다.
+> AURORA는 `introai9` PBS만 사용하고 `junjinyong`은 접속·조회·제출·모니터링하지
+> 않는다.
+
 > **2026-08-10 hemodynamic–endpoint source-audit overlay:** New Zenodo
 > `10.5281/zenodo.19455127` reports a 1.4 GB CC BY 4.0 archive of OpenFOAM VTP
 > surface fields for 76 selected Aneurisk geometries. Inflow uses two

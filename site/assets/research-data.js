@@ -425,6 +425,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Hemodynamic–endpoint source rejection is live",
+      copy: "Exact content 318a22a06a1a0d1ad8339183f290e1648c656fed passed Quality run 31326443420 and Pages run 31326443150. The live overview renders batch best 31.0/40, all rejected, active shortlist/primary/method/architecture/P0/GPU zero and the detailed audit link; the audit document is also deployed. Deployment verification changes no score, archive or payload access, scientific verdict, model, compute, outer test or submission identity. introai9 remains the only execution server and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "A fresh hemodynamic–endpoint batch is rejected before payload and compute",
       copy: "The frozen screen scores curvature-only local-field surrogation, cross-source residual hemodynamic added value, within-patient culprit ranking, paired treated-remnant change and wall-enhancement/WSS localization at 31.0/30.0/23.0/25.0/26.0. The new 76-case Aneurisk CFD release uses population age-group inflow waveforms rather than measured patient conditions; its companion paper already claims curvature as a hemodynamic proxy. No archive, VTP, private image, P0, method, architecture, PBS/GPU, outer test or submission identity is opened. Schema 4.2 preserves introai9-only execution and excludes junjinyong.",
