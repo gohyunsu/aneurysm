@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 latest boundary:** longitudinal-MRA growth candidates score
+> 31.5/29.0/30.0/26.5/26.5/26.0, all below 32. Same-session acquisition
+> controls occur in only four public patients; expert derivatives cover one
+> selected session per subject; the newest direct prior retains 16 public
+> patients/19 aneurysms with six growth positives. Registration, internal-vessel
+> reference, Bayesian measurement error and conformal uncertainty are direct
+> controls. No primary, architecture, result row or GPU is selected; the paper
+> remains **not submission-ready**.
+
 > **2026-08-10 latest boundary:** longitudinal-perfusion candidates score
 > 31.0/29.0/28.0/27.0/29.5/29.0, all below 32. The CC0 source is open but has
 > 62 patients and nine DCI events; clinically informative scanning and CTP-guided
@@ -79,7 +88,7 @@
 
 최종 검토일: 2026-08-10 KST
 
-상태: **target locked · FSI–wall batch best 31.0/40 and all rejected · acquisition–flow batch best 27.5/40 and all rejected · context–treatment batch best 31.5/40 and all rejected · topology–procedure batch best 28.5/40 and all rejected · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
+상태: **target locked · longitudinal-MRA-growth batch best 31.5/40 and all rejected · FSI–wall batch best 31.0/40 and all rejected · acquisition–flow batch best 27.5/40 and all rejected · context–treatment batch best 31.5/40 and all rejected · topology–procedure batch best 28.5/40 and all rejected · hemodynamic–endpoint batch best 31.0/40 and all rejected · PINN rupture-status residual 23.5/40 rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active
 shortlist/selected primary problem/method/architecture/GPU 0 · not
 submission-ready**

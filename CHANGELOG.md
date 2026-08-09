@@ -4,6 +4,25 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Longitudinal-MRA growth batch stops before payload and compute
+
+- Acquisition-orbit-calibrated growth, single-anchor localization,
+  interval-censored forecasting, mixed-modality harmonization, AWE instability
+  and post-flow-diverter multimodal disagreement score
+  **31.5/29.0/30.0/26.5/26.5/26.0**. All are below 32.
+- OpenNeuro `ds005096` has 63 patients, 85 aneurysms, 24 longitudinal patients
+  and 126 raw angiogram paths, but only four patients have same-session
+  acquisition pairs. Expert derivatives cover one selected session per subject.
+- The newest Bayesian direct prior uses 16 public patients/19 aneurysms with six
+  growth positives and already includes surface registration, a healthy-vessel
+  internal control, measurement error and calibrated probabilities.
+- Schema 5.0 freezes no annotation spreadsheet/participant table/sidecar/NIfTI/
+  segmentation/Slicer/STL payload, P0/model/PBS/GPU/outer test, `introai9`-only
+  future execution and complete exclusion of `junjinyong`.
+- 영향 파일: `docs/longitudinal-mra-growth-source-audit-2026-08-10.md`, machine
+  contract/validator/tests, public research/data/server guides, educational
+  site, private manuscript history and this changelog.
+
 ## 2026-08-10 · Longitudinal-perfusion rejection is live and verified
 
 - Exact source content `7b03ace12b1e05329e47cd46b6968c0359143daa` passed

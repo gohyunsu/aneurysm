@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion boundary"):
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-MRA-growth boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion boundary"):
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-MRA-growth boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion boundary"):
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-MRA-growth boundary"):
             validate_protocol(candidate)
 
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
@@ -424,6 +424,52 @@ class ProtocolTests(unittest.TestCase):
             "gpu_training_authorized"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "longitudinal-perfusion audit"):
+            validate_protocol(candidate)
+
+    def test_longitudinal_mra_growth_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "longitudinal_mra_growth_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 31.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["openneuro_dataset_id"], "ds005096")
+        self.assertEqual(audit["patients"], 63)
+        self.assertEqual(audit["aneurysms"], 85)
+        self.assertEqual(audit["longitudinal_patients"], 24)
+        self.assertEqual(audit["raw_angio_paths"], 126)
+        self.assertEqual(audit["same_session_multi_acquisition_patients"], 4)
+        self.assertEqual(
+            audit["bayesian_direct_prior_public_growth_positives"], 6
+        )
+        self.assertFalse(
+            audit[
+                "any_openneuro_annotation_spreadsheet_participant_table_acquisition_sidecar_nifti_segmentation_slicer_scene_or_stl_payload_accessed"
+            ]
+        )
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertFalse(
+            audit["introai9_connection_or_job_query_performed_for_this_audit"]
+        )
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["longitudinal_mra_growth_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-MRA-growth audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["longitudinal_mra_growth_source_audit"][
+            "same_session_multi_acquisition_patients"
+        ] = 40
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-MRA-growth audit"):
             validate_protocol(candidate)
 
         candidate = copy.deepcopy(self.protocol)

@@ -45,18 +45,19 @@
           <em>First prove the task earns a model.</em>
         </h1>
         <p class="hero-lede">
-          최신 longitudinal-perfusion audit은 공개 aSAH CTP의 62명·291회 검사·
-          873개 perfusion map을 검토했습니다. 그러나 map 수는 독립 환자나
-          DCI 사건 수가 아닙니다. DCI는 9건뿐이고 검사 시점과 치료가 임상
-          상태에 따라 달라져, 관측되지 않은 trajectory나 재검사 정책의 효과를
-          식별할 수 없습니다. 최신 최고점은 31.0/40이며 active shortlist,
-          selected primary, model, GPU와 outer test는 모두 없습니다.
+          최신 longitudinal-MRA audit은 공개 OpenNeuro의 63명·85개 동맥류·
+          126개 angiogram을 검토했습니다. 그러나 longitudinal patient는 24명,
+          같은 세션의 acquisition pair를 가진 독립 환자는 4명뿐입니다. 최신
+          Bayesian direct prior가 실제 사용한 public subset도 16명·19개 동맥류·
+          성장 6건입니다. 최신 최고점은 31.5/40이며 active shortlist, selected
+          primary, model, GPU와 outer test는 모두 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/longitudinal-mra-growth-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">Perfusion history ↗</a>
           <a class="button ghost" href="../docs/fsi-wall-source-audit-2026-08-10.md">FSI history ↗</a>
           <a class="button ghost" href="../docs/acquisition-flow-source-audit-2026-08-10.md">Acquisition history ↗</a>
           <a class="button ghost" href="../docs/treatment-surveillance-source-audit-2026-08-10.md">Treatment history ↗</a>
@@ -227,7 +228,7 @@
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
           현재 architecture는 없습니다. 아래 흐름은 historical AneuX P0 asset
-          chain과 early stop을 설명하는 기록입니다. 최신 longitudinal-perfusion batch는
+          chain과 early stop을 설명하는 기록입니다. 최신 longitudinal-MRA batch는
           P0 이전에 모두 기각됐습니다.
         </p>
       </div>
@@ -238,8 +239,8 @@
         <p>
           DiffusionNet, PointNet++, E(3)-equivariant mesh network, topology module과
           surface foundation features는 향후 strong controls일 수 있지만 현재
-          method가 아닙니다. 반복 CTP도 최고 source score가 31.0이라 P0와 P1은
-          열리지 않았습니다.
+          method가 아닙니다. Longitudinal MRA도 최고 source score가 31.5라 P0와
+          P1은 열리지 않았습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>

@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 longitudinal-MRA growth boundary:** OpenNeuro `ds005096` is a
+> real CC0 longitudinal asset with 63 patients, 85 aneurysms, 24 surveillance
+> patients and 126 raw angiogram paths. However, only four patients have two
+> acquisitions in the same session, and expert derivatives cover one selected
+> session per subject. A 2026 Bayesian surface-displacement direct prior retains
+> only 16 public patients/19 aneurysms with six growth positives. The strongest
+> acquisition-orbit-calibrated growth candidate therefore scores **31.5/40**,
+> below 32. The [`detailed audit`](docs/longitudinal-mra-growth-source-audit-2026-08-10.md)
+> freezes no annotation spreadsheet, participant table, sidecar, NIfTI,
+> segmentation, Slicer/STL payload, P0, method, architecture, PBS/GPU or outer
+> test. Execution remains `introai9`-only; `junjinyong` is excluded from
+> connection, query, submission and monitoring.
+
 > **2026-08-10 longitudinal-perfusion boundary:** The open CC0 CTP release
 > contains 62 patients, 291 original exams and 873 MNI-normalized TMax/CBF/MTT
 > maps, but only nine DCI events. Exams are clinically triggered and CTP guides
@@ -51,10 +64,10 @@ N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 �
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
 가장 최근
-[`longitudinal-perfusion source audit`](docs/longitudinal-perfusion-source-audit-2026-08-10.md)은
-62 patient/291 exam을 291 independent patient로 세지 않고, nine-event DCI,
-informative scan timing, CTP-guided treatment와 직접 선행을 함께 평가했습니다.
-최고점은 31.0/40이고 payload/P0/model/PBS/GPU는 모두 0입니다.
+[`longitudinal-MRA growth source audit`](docs/longitudinal-mra-growth-source-audit-2026-08-10.md)은
+24 longitudinal patient를 126 independent scan으로 세지 않고, same-session
+control 4명과 최신 direct-prior subset의 16 patient/19 aneurysm/6 growth를 함께
+평가했습니다. 최고점은 31.5/40이고 payload/P0/model/PBS/GPU는 모두 0입니다.
 
 직전
 [`FSI–wall source audit`](docs/fsi-wall-source-audit-2026-08-10.md)은 rigid-wall

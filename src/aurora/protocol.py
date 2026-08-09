@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.9":
-        raise ProtocolError("The current research-state schema must be version 4.9.")
+    if protocol["schema_version"] != "5.0":
+        raise ProtocolError("The current research-state schema must be version 5.0.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_longitudinal_perfusion_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_longitudinal_mra_growth_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -199,6 +199,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "acquisition_flow_source_audit",
             "fsi_wall_source_audit",
             "longitudinal_perfusion_source_audit",
+            "longitudinal_mra_growth_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -208,12 +209,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_longitudinal_perfusion_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_longitudinal_mra_growth_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "official_source_metadata_embedded_readme_public_manuscripts_and_file_manifests_only_no_standalone_ctp_json_spreadsheet_nifti_zip_sah_ct_archive_3dra_cta_csv_vwe_csv_image_mesh_or_field_payload"
+        != "official_source_metadata_public_git_tree_dataset_description_primary_articles_and_file_manifests_only_no_openneuro_annotation_spreadsheet_participant_table_sidecar_nifti_segmentation_slicer_scene_or_stl_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -225,14 +226,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/longitudinal-perfusion-source-audit-2026-08-10.md"
+        != "docs/longitudinal-mra-growth-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "informative_scan_aware_continuous_time_ctp_field_forecasting"
+        != "acquisition_orbit_calibrated_longitudinal_mra_growth_detection"
     ):
         raise ProtocolError(
-            "The current longitudinal-perfusion boundary must retain no selected primary, "
+            "The current longitudinal-MRA-growth boundary must retain no selected primary, "
             "method, GPU, outer test, P1, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -299,6 +300,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "treatment_conditioned_perfusion_counterfactual",
         "cross_modality_3dra_cta_hemodynamic_invariance",
         "global_local_vwe_hemodynamic_discordance",
+        "acquisition_orbit_calibrated_longitudinal_mra_growth_detection",
+        "single_anchor_weakly_supervised_local_growth_localization",
+        "interval_censored_mra_growth_trajectory_forecasting",
+        "mixed_modality_clinical_growth_measurement_harmonization",
+        "awe_conditioned_long_term_instability_prediction",
+        "same_day_post_flow_diverter_multimodal_disagreement_modeling",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -2679,6 +2686,170 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("longitudinal-perfusion rejection and introai9-only boundary")
 
+    mra_growth_audit = problem_selection["longitudinal_mra_growth_source_audit"]
+    _require_keys(
+        mra_growth_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "official_article_openneuro_git_tree_tags_commits_and_dataset_description_accessed",
+            "any_openneuro_annotation_spreadsheet_participant_table_acquisition_sidecar_nifti_segmentation_slicer_scene_or_stl_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_or_job_query_performed_for_this_audit",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "openneuro_dataset_id",
+            "paper_linked_version",
+            "paper_linked_commit",
+            "current_audited_version",
+            "current_audited_commit",
+            "license",
+            "patients",
+            "aneurysms",
+            "longitudinal_patients",
+            "raw_angio_paths",
+            "same_session_multi_acquisition_patients",
+            "same_session_multi_acquisition_subject_sessions",
+            "expert_derivative_sessions_per_subject_maximum",
+            "bayesian_direct_prior_public_patients_retained",
+            "bayesian_direct_prior_public_aneurysms_retained",
+            "bayesian_direct_prior_public_growth_positives",
+            "bayesian_direct_prior_public_auc",
+            "bayesian_direct_prior_public_loocv_auc",
+            "bayesian_direct_prior_public_loocv_kappa",
+            "large_clinical_growth_patients",
+            "large_clinical_growth_aneurysms",
+            "large_clinical_growth_imaging_observations",
+            "large_clinical_growth_standardized_threshold",
+            "large_clinical_growth_public_learning_asset",
+            "awe_long_term_patients",
+            "awe_long_term_aneurysms",
+            "awe_long_term_instability_events",
+            "awe_public_patient_imaging_asset",
+            "miniflow_patients",
+            "miniflow_aneurysms",
+            "miniflow_public_patient_imaging_asset",
+            "pcom_virtual_angiography_aneurysms",
+            "pcom_longitudinal_stable",
+            "pcom_longitudinal_unstable",
+            "pcom_public_casewise_mesh_field_or_virtual_angiography_asset",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.longitudinal_mra_growth_source_audit",
+    )
+    expected_mra_growth_scores = {
+        "acquisition_orbit_calibrated_longitudinal_mra_growth_detection": 31.5,
+        "single_anchor_weakly_supervised_local_growth_localization": 29.0,
+        "interval_censored_mra_growth_trajectory_forecasting": 30.0,
+        "mixed_modality_clinical_growth_measurement_harmonization": 26.5,
+        "awe_conditioned_long_term_instability_prediction": 26.5,
+        "same_day_post_flow_diverter_multimodal_disagreement_modeling": 26.0,
+    }
+    observed_mra_growth_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in mra_growth_audit["candidates"]
+    }
+    mra_growth_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in mra_growth_audit["candidates"]
+    )
+    if (
+        mra_growth_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or mra_growth_audit["audit_document"]
+        != "docs/longitudinal-mra-growth-source-audit-2026-08-10.md"
+        or mra_growth_audit["automatic_selection_threshold"] != 32.0
+        or mra_growth_audit["best_candidate_id"]
+        != "acquisition_orbit_calibrated_longitudinal_mra_growth_detection"
+        or mra_growth_audit["best_score"] != 31.5
+        or mra_growth_audit["best_score"]
+        >= mra_growth_audit["automatic_selection_threshold"]
+        or mra_growth_audit["active_shortlist_count"] != 0
+        or mra_growth_audit["primary_problem_selected"] is not False
+        or mra_growth_audit[
+            "official_article_openneuro_git_tree_tags_commits_and_dataset_description_accessed"
+        ]
+        is not True
+        or mra_growth_audit[
+            "any_openneuro_annotation_spreadsheet_participant_table_acquisition_sidecar_nifti_segmentation_slicer_scene_or_stl_payload_accessed"
+        ]
+        is not False
+        or mra_growth_audit["executable_p0_registered"] is not False
+        or mra_growth_audit["method_selected"] is not False
+        or mra_growth_audit["architecture_selected"] is not False
+        or mra_growth_audit["gpu_training_authorized"] is not False
+        or mra_growth_audit["outer_test_authorized"] is not False
+        or mra_growth_audit["submission_identity_active"] is not False
+        or mra_growth_audit["execution_server"] != "introai9"
+        or mra_growth_audit["introai9_connection_or_job_query_performed_for_this_audit"]
+        is not False
+        or mra_growth_audit["pbs_job_created"] is not False
+        or mra_growth_audit["login_node_gpu_command_executed"] is not False
+        or mra_growth_audit["junjinyong_accessed_for_this_audit"] is not False
+        or mra_growth_audit["openneuro_dataset_id"] != "ds005096"
+        or mra_growth_audit["paper_linked_version"] != "1.0.0"
+        or mra_growth_audit["paper_linked_commit"]
+        != "645f8579ca0dbbf62edf0275bf35f104f66a2f41"
+        or mra_growth_audit["current_audited_version"] != "1.0.3"
+        or mra_growth_audit["current_audited_commit"]
+        != "0760bf865612600c4eee85f6f437aefaeb534204"
+        or mra_growth_audit["license"] != "CC0"
+        or mra_growth_audit["patients"] != 63
+        or mra_growth_audit["aneurysms"] != 85
+        or mra_growth_audit["longitudinal_patients"] != 24
+        or mra_growth_audit["raw_angio_paths"] != 126
+        or mra_growth_audit["same_session_multi_acquisition_patients"] != 4
+        or mra_growth_audit["same_session_multi_acquisition_subject_sessions"]
+        != [
+            "sub-006/ses-20141026",
+            "sub-013/ses-20171118",
+            "sub-015/ses-20121216",
+            "sub-028/ses-20080621",
+        ]
+        or mra_growth_audit["expert_derivative_sessions_per_subject_maximum"] != 1
+        or mra_growth_audit["bayesian_direct_prior_public_patients_retained"] != 16
+        or mra_growth_audit["bayesian_direct_prior_public_aneurysms_retained"] != 19
+        or mra_growth_audit["bayesian_direct_prior_public_growth_positives"] != 6
+        or mra_growth_audit["large_clinical_growth_public_learning_asset"]
+        is not False
+        or mra_growth_audit["awe_public_patient_imaging_asset"] is not False
+        or mra_growth_audit["miniflow_public_patient_imaging_asset"] is not False
+        or mra_growth_audit[
+            "pcom_public_casewise_mesh_field_or_virtual_angiography_asset"
+        ]
+        is not False
+        or observed_mra_growth_scores != expected_mra_growth_scores
+        or not mra_growth_axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in mra_growth_audit["candidates"])
+        or mra_growth_audit["decision"]
+        != "reject_all_without_score_repair_or_openneuro_annotation_spreadsheet_participant_table_sidecar_nifti_segmentation_slicer_scene_stl_p0_method_architecture_pbs_or_gpu"
+        or mra_growth_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_with_a_materially_larger_independent_same_session_control_cohort_or_an_external_longitudinal_image_cohort_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The longitudinal-MRA-growth audit must preserve all six frozen "
+            "source-only rejections, the 31.5/40 maximum, four same-session "
+            "controls, no payload/P0/model/PBS/GPU, and introai9-only execution."
+        )
+    checks.append("longitudinal-MRA-growth rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -2758,7 +2929,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_longitudinal_perfusion_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_longitudinal_mra_growth_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -2921,7 +3092,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_longitudinal_perfusion_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_longitudinal_mra_growth_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

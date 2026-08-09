@@ -6,6 +6,19 @@
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
 운영 명령과 private path는 Git에서 제외된 `SERVER_GUIDE.md`를 따른다.
 
+## 2026-08-10 · longitudinal-MRA growth source audit, no job authorized
+
+- Frozen scores are 31.5/29.0/30.0/26.5/26.5/26.0, all below 32.
+- Only official articles, OpenNeuro Git tree/tag/commit metadata and the public
+  dataset description were inspected. Annotation spreadsheet, participant
+  table, acquisition sidecar, NIfTI, segmentation, Slicer scene and STL payload
+  were not accessed.
+- There is no executable P0, PBS submission, GPU job or monitoring loop. No
+  `introai9` connection or scheduler query was necessary for this source-gate
+  stop; it is not a server failure.
+- AURORA remains `introai9` PBS only. `junjinyong` is excluded from connection,
+  query, submission and monitoring.
+
 ## 2026-08-10 · longitudinal-perfusion source audit, no job authorized
 
 - Frozen scores are 31.0/29.0/28.0/27.0/29.5/29.0, all below 32.

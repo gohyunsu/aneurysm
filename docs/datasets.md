@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 longitudinal-MRA growth audit:** OpenNeuro `ds005096`은 CC0,
+> 63 patient/85 aneurysm/24 longitudinal patient와 126 raw angiogram path를
+> 제공한다. 동일 session에 acquisition 두 개가 있는 independent subject는
+> `sub-006`, `sub-013`, `sub-015`, `sub-028` 네 명이다. Expert derivative는
+> subject당 한 selected session에만 있다. 2026 direct prior는 16 public
+> patient/19 aneurysm/6 growth를 retained subset으로 사용했다. Git tree와
+> `dataset_description.json`만 감사했고 annotation spreadsheet, participant
+> table, sidecar, NIfTI, segmentation, Slicer/STL payload는 열지 않았다. 최고
+> 31.5/40이며 training role/P0/model/GPU는 0이다.
+
 > **2026-08-10 longitudinal-perfusion audit:** Dryad
 > `10.5061/dryad.0zpc86784`는 CC0 version 7, 62 patient, 291 original exam과
 > 873 MNI-normalized TMax/CBF/MTT map을 보고한다. 독립 clinical endpoint는

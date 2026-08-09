@@ -52,23 +52,23 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 audit은 공개 aSAH CTP의 62명, 291회 검사, 873개 perfusion
-            map을 검토했지만 최고점이 31.0/40임을 확인했습니다. DCI 사건은
-            9건뿐이고 검사·치료 시점이 환자 상태에 좌우됩니다. 현재 GNN,
-            neural operator, U-Net과 Transformer 어느 것도 선택하지 않았습니다.
+            최신 audit은 OpenNeuro의 63명, 85개 동맥류, 126개 angiogram을
+            검토했지만 longitudinal patient는 24명, same-session control은
+            4명뿐임을 확인했습니다. 최신 direct-prior subset의 growth positive도
+            6건입니다. 현재 GNN, neural operator, U-Net과 Transformer 어느 것도
+            선택하지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
           <strong>다음 단계는 genuinely new/revised source를 기다리는 일입니다.</strong>
           <p>
-            31.0점을 재가중하거나 continuous-time model, diffusion forecaster,
-            treatment head 같은 이름을 붙여 32점으로 만들지 않습니다. 독립
-            환자·사건 수, 검사 결정 과정, 치료와 endpoint의 시간 관계를 실제로
-            식별할 수 있는 별도 source만 다시 감사합니다. Gate 통과 전 model이나
-            GPU를 허가하지 않습니다.
+            31.5점을 반올림하거나 acquisition-orbit network, surface GNN,
+            Bayesian head 같은 이름을 붙여 32점으로 만들지 않습니다. 최소한 더
+            많은 독립 same-session control이나 별도 longitudinal image cohort가
+            필요합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
           </p>
-          <a href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/longitudinal-mra-growth-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -171,6 +171,58 @@
                 즉, anatomy는 중요한 원인이지만 혈류를 혼자 결정하지는 않습니다.
               </p>
             </article>
+          </div>
+
+          <div class="explain-block">
+            <div>
+              <p class="eyebrow">LONGITUDINAL TOF-MRA · BEGINNER WINDOW</p>
+              <h3>126개 영상 경로가 있어도 왜 성장 모델을 바로 학습하지 않는가?</h3>
+            </div>
+            <div class="prose">
+              <p>
+                <b>TOF-MRA</b>는 조영제를 주입하지 않고 흐르는 혈액의 신호를
+                이용해 뇌혈관을 밝게 보이게 하는 MRI 기법입니다. 한 환자를 몇
+                년 뒤 다시 촬영하면 longitudinal surveillance가 됩니다. 여기서
+                <b>subject</b>는 환자, <b>session</b>은 한 방문의 촬영 시점,
+                <b>acquisition</b>은 같은 방문 안에서 해상도나 slab 설정을 달리한
+                영상입니다.
+              </p>
+              <div class="large-equation">
+                63 patients → 24 longitudinal patients → 126 image paths ≠ 126 independent growth cases
+              </div>
+              <p>
+                같은 날 얻은 두 acquisition 사이에는 실제 생물학적 성장이 거의
+                없다고 볼 수 있습니다. 따라서 두 영상의 차이는 해상도, signal,
+                segmentation과 registration이 만드는 <b>measurement floor</b>를
+                추정하는 좋은 negative control입니다. 문제는 이 공개 자료에서
+                그런 same-session pair가 있는 독립 환자가 네 명뿐이라는 점입니다.
+                파일 두 개를 두 환자로 세어서는 안 됩니다.
+              </p>
+              <p>
+                또한 neuroradiologist가 만든 mask, STL surface와 Slicer scene은
+                환자마다 한 selected session에만 제공됩니다. 여러 해의 모든
+                session에 expert surface가 있는 것이 아닙니다. 그러므로 “어느
+                벽 부위가 실제로 성장했는지”를 voxel 또는 surface 수준에서
+                독립적으로 채점할 정답도 부족합니다.
+              </p>
+              <p>
+                2026 Bayesian 선행연구는 이미 baseline/follow-up surface를
+                registration하고, aneurysm 주변 healthy vessel의 displacement를
+                내부 기준으로 빼며, measurement error를 포함한 성장 확률을
+                계산했습니다. Public 24명 중 실제 분석에는 16명·19개 동맥류가
+                남았고 성장 양성은 6개였습니다. 따라서 surface GNN, Bayesian
+                head, uncertainty라는 단어 자체는 novelty가 아닙니다.
+              </p>
+              <p>
+                남는 아이디어는 same-session acquisition에서 false-growth
+                distribution을 학습해 진짜 surveillance change와 분리하는 것입니다.
+                논리는 좋지만 control patient 4명으로 scanner·protocol·anatomy의
+                상호작용을 검증하거나 fresh outer test를 구성할 수 없습니다.
+                Frozen score는 31.5/40입니다. 32 미만이므로 patient payload,
+                P0, PBS, GPU와 architecture를 열지 않았습니다.
+              </p>
+              <p><a href="../docs/longitudinal-mra-growth-source-audit-2026-08-10.md">Longitudinal-MRA 상세 audit 읽기 ↗</a></p>
+            </div>
           </div>
 
           <div class="explain-block">

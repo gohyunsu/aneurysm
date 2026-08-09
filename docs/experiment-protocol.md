@@ -1,6 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.9 · 2026-08-10
+버전: 5.0 · 2026-08-10
+
+> **Current gate:** longitudinal-MRA growth batch 최고점은 31.5/40이다.
+> OpenNeuro의 126 raw angiogram은 63 patient에서 왔고 longitudinal patient는
+> 24명, same-session multi-acquisition control은 4명이다. 최신 Bayesian direct
+> prior는 16 patient/19 aneurysm/6 growth를 retained subset으로 사용했다. 32
+> 미만이므로 annotation spreadsheet/NIfTI/segmentation payload, executable P0,
+> PBS/GPU, architecture와 outer test는 0이다.
 
 > **Current gate:** longitudinal-perfusion batch 최고점은 31.0/40이다. 62
 > patient/291 original exam/873 map은 공개되어 있지만 DCI 9건, informative
@@ -51,6 +58,16 @@
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## S-LM · longitudinal MRA growth batch · all rejected, no execution
+
+- Frozen scores: 31.5/29.0/30.0/26.5/26.5/26.0; admission line 32.
+- Source boundary: official article, Git tree/tag/commit and public dataset
+  description only; patient/annotation/image/mesh payload 0.
+- Effective controls: four same-session multi-acquisition patients; latest
+  direct-prior public subset 16 patients/19 aneurysms/six growth positives.
+- Decision: no score repair, P0/PBS/GPU/model/outer test. Future execution is
+  `introai9`-only; `junjinyong` is excluded.
 
 ## S-LP · longitudinal perfusion and biomarker batch · all rejected, no execution
 

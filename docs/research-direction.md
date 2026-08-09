@@ -1,5 +1,17 @@
 # AURORA 연구 방향
 
+> **2026-08-10 longitudinal-MRA growth boundary:** OpenNeuro `ds005096`의
+> 63 patient/85 aneurysm 중 longitudinal patient는 24명이고 raw angiogram
+> path는 126개다. 그러나 same-session multi-acquisition control은 4명뿐이며
+> expert derivative는 subject당 한 selected session에만 있다. 2026 Bayesian
+> surface-displacement direct prior가 동일 public source에서 16 patient/19
+> aneurysm/6 growth를 사용했으므로 registration, healthy-vessel reference,
+> measurement error와 posterior uncertainty는 novelty가 아니다. 여섯 frozen
+> score의 최고점은 31.5/40이다. 자세한 논리는
+> [`frozen audit`](longitudinal-mra-growth-source-audit-2026-08-10.md)에 있다.
+> Payload/P0/model/PBS/GPU는 0이고 실행은 `introai9`만 허용하며
+> `junjinyong`은 제외한다.
+
 > **2026-08-10 longitudinal-perfusion boundary:** Dryad CTP는 62 patient,
 > 291 original exam, 873 TMax/CBF/MTT map을 공개하지만 DCI는 9건이다.
 > 촬영은 임상 상태에 의해 informative하고 CTP가 rescue treatment를 유도하므로
@@ -63,13 +75,13 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · hemodynamic-endpoint batch best 31/40 and all source-rejected · topology-procedure batch best 28.5/40 and all source-rejected · context-treatment batch best 31.5/40 and all source-rejected · acquisition-flow batch best 27.5/40 and all source-rejected · FSI-wall batch best 31.0/40 and all source-rejected · longitudinal-perfusion batch best 31.0/40 and all source-rejected · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · hemodynamic-endpoint batch best 31/40 and all source-rejected · topology-procedure batch best 28.5/40 and all source-rejected · context-treatment batch best 31.5/40 and all source-rejected · acquisition-flow batch best 27.5/40 and all source-rejected · FSI-wall batch best 31.0/40 and all source-rejected · longitudinal-perfusion batch best 31.0/40 and all source-rejected · longitudinal-MRA-growth batch best 31.5/40 and all source-rejected · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
 가장 최근 기준선은
-[`longitudinal-perfusion-source-audit-2026-08-10.md`](longitudinal-perfusion-source-audit-2026-08-10.md)다.
-Open CTP의 map count와 patient/event count를 구분하고 informative scanning,
-CTP-guided treatment 및 image/time-series direct priors를 함께 반영했다. 최고
-31.0/40으로 standalone payload, P0, method, architecture와 GPU는 0이다.
+[`longitudinal-mra-growth-source-audit-2026-08-10.md`](longitudinal-mra-growth-source-audit-2026-08-10.md)다.
+OpenNeuro의 scan 수와 independent patient/control/event 수를 분리하고 Bayesian
+surface-growth direct prior를 반영했다. 최고 31.5/40으로 payload, P0, method,
+architecture와 GPU는 0이다.
 
 직전 기준선은
 [`fsi-wall-source-audit-2026-08-10.md`](fsi-wall-source-audit-2026-08-10.md)다.

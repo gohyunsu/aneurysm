@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 latest architecture boundary:** longitudinal-MRA growth batch의
+> 최고점은 31.5/40이다. Siamese U-Net, longitudinal Transformer, deformable
+> registration, surface GNN, Bayesian head, preprocessing-orbit marginalization과
+> conformal uncertainty는 모두 plausible component지만 선택된 method가 아니다.
+> Same-session control은 4 patient, direct-prior public subset은 16 patient/19
+> aneurysm/6 growth이므로 새 high-capacity architecture와 fresh outer test를
+> 지지하지 못한다. 현재 headline GNN/U-Net/Transformer는 **미선정**, GPU
+> authorization은 0이다. [`source audit`](longitudinal-mra-growth-source-audit-2026-08-10.md)
+
 > **2026-08-10 latest architecture boundary:** longitudinal-perfusion batch
 > 최고점은 31.0/40이다. Continuous-time neural field, latent ODE/SDE,
 > temporal Transformer, diffusion decoder, observation-intensity head,

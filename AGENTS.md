@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 longitudinal-MRA growth source-audit overlay:** Fresh six-
+> candidate batch는 acquisition-orbit-calibrated growth, single-anchor local
+> growth, interval-censored trajectory, mixed-modality measurement, AWE
+> instability와 post-flow-diverter multimodal disagreement를
+> 31.5/29.0/30.0/26.5/26.5/26.0으로 판정했다. 모두 frozen admission line 32
+> 미만이다. OpenNeuro `ds005096`은 CC0, 63 patient/85 aneurysm/24 longitudinal
+> patient/126 raw angiogram path지만 same-session multi-acquisition control은
+> 4 patient뿐이고 expert derivative는 subject당 한 selected session에만 있다.
+> 2026 Bayesian surface-displacement direct prior는 16 public patient/19
+> aneurysm/6 growth를 사용한다. Official article, public Git tree/tag/commit과
+> `dataset_description.json`만 읽었고 annotation spreadsheet, participant
+> table, sidecar, NIfTI, segmentation, Slicer/STL payload, P0, method,
+> architecture, PBS/GPU와 outer test는 0이다. Schema 5.0 source of truth는
+> `problem_selection.longitudinal_mra_growth_source_audit`와
+> `docs/longitudinal-mra-growth-source-audit-2026-08-10.md`다. 이번 source-only
+> stop에 server access는 필요하지 않았다. 향후 실행은 `introai9` PBS만
+> 허용하며 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 longitudinal-perfusion deployment overlay:** Exact source
 > content `7b03ace12b1e05329e47cd46b6968c0359143daa`의 Quality run
 > `31336277131`과 Pages run `31336276517`이 성공했다. Live overview는

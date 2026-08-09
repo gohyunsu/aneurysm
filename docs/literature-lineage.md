@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 longitudinal-MRA growth lineage boundary:** Bayesian
+> surface-displacement growth, healthy-vessel internal control, measurement
+> error, volumetric repeatability, rigid/non-rigid morphing, 2D/3D measurement
+> reliability와 conformal registration uncertainty가 direct prior다. OpenNeuro
+> same-session acquisition orbit은 새로운 negative-control 관점이지만 독립
+> patient가 4명뿐이다. 최신 direct-prior subset도 16 patient/19 aneurysm/6
+> growth라 새 confirmatory method identity를 지지하지 못한다. Frozen maximum은
+> 31.5/40이며 [`source audit`](longitudinal-mra-growth-source-audit-2026-08-10.md)에
+> 따라 model과 experiment는 열지 않는다.
+
 > **2026-08-10 longitudinal-perfusion lineage boundary:** The primary CTP
 > study already models spatial/temporal dynamics and DCI with early CBF and
 > later pre-event TMax change. ImageFlowNet and MICCAI longitudinal latent

@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · longitudinal-perfusion best 31.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · longitudinal-MRA growth best 31.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A same-session negative control is useful, but four patients do not earn a model",
+      copy: "OpenNeuro ds005096 exposes 63 patients, 85 aneurysms, 24 longitudinal patients and 126 raw angiogram paths. Only four patients have two acquisitions in the same session, and expert derivatives cover one selected session per subject. A 2026 Bayesian direct prior on the same public source retains 16 patients, 19 aneurysms and six growth positives while already using surface registration, a healthy-vessel internal control and measurement error. The residual acquisition-orbit idea is identifiable but too small for a fresh confirmatory method.",
+      status: "Best 31.5/40 · all rejected · patient payload/P0/PBS/model/GPU 0",
+      url: "../docs/longitudinal-mra-growth-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Repeated perfusion maps do not identify an intervention or scanning policy",
@@ -518,10 +525,17 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "OpenNeuro ds005096",
       role: "source-rejected longitudinal surface-growth candidate; possible future external audit only",
-      provenance: "63 patients · 85 aneurysms · 24 longitudinal patients · same-cohort Bayesian growth direct prior · payload not newly accessed · no P0/model/GPU"
+      provenance: "CC0 · 63 patients · 85 aneurysms · 24 longitudinal patients · 126 raw paths · 4 same-session multi-acquisition controls · latest direct-prior subset 16 patients/19 aneurysms/6 growth · payload/P0/model/GPU 0"
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Longitudinal-MRA growth candidates stop before payload and compute",
+      copy: "Acquisition-orbit-calibrated growth, single-anchor localization, interval-censored forecasting, mixed-modality harmonization, AWE instability and post-flow-diverter multimodal disagreement score 31.5/29.0/30.0/26.5/26.5/26.0. OpenNeuro has only four same-session control patients; the latest direct prior retains 16 patients/19 aneurysms with six growth positives and already models registration and measurement error. Schema 5.0 freezes no patient/annotation/image/mesh payload, P0/PBS/model/GPU, introai9-only future execution and complete exclusion of junjinyong.",
+      files: ["docs/longitudinal-mra-growth-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "docs/model-spec.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",
