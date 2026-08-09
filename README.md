@@ -5,17 +5,19 @@
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
-가장 최근 source-delta audit은 OpenNeuro longitudinal surface growth, RSNA
-point-set detection, VICTORIA neck-curve distribution, IntrA topology control,
-IAIA aneurysm–stenosis와 flow-diverter DSA outcome을 같은 40점 rubric으로 다시
-평가했습니다. 최고점인 OpenNeuro paired-surface growth도 **31.5/40**으로 32점
-admission gate에 못 미칩니다. 같은 공개 cohort를 사용하는 Bayesian surface-
-displacement growth 모델이 이미 있고 공개 종단 단위는 24 patient뿐입니다.
-RSNA는 공식 record가 4,000건 이상의 scan을 기술하지만 controlled-access terms를
-사용자가 수락하지 않았고, 공식 supervision도 aneurysm extent mask가 아닙니다.
+가장 최근 frozen batch는 TopBrain paired CTA/MRA anatomy, healthy IXI vessel
+atlas, VesselVerse annotation semantics, NeckSpline extension, CTA phantom QA와
+ADAM longitudinal semantics를 동일한 8축 40점 rubric으로 평가했습니다. 최고
+TopBrain도 **29.5/40**으로 32점 admission gate에 못 미칩니다. 공개 단위는
+25 paired patient이고 target은 48-class whole-brain vascular anatomy이지
+aneurysm endpoint가 아닙니다. VesselVerse의 다중 “expert”에는 여러 algorithm
+output이 포함되고, phantom의 126 scan은 한 anatomy·세 병변의 반복입니다.
 따라서 점수를 사후 수리하지 않고
-[`source-delta audit`](docs/source-delta-audit-2026-08-09.md)만 고정했습니다.
-새 payload, P0, method, architecture와 GPU job은 0입니다.
+[`vascular-semantics source audit`](docs/vascular-semantics-source-audit-2026-08-10.md)을
+고정했습니다. 새 payload, P0, method, architecture와 GPU job은 0입니다.
+
+직전 [`source-delta audit`](docs/source-delta-audit-2026-08-09.md)의 최고
+OpenNeuro paired-surface growth 31.5/40도 historical rejection으로 보존합니다.
 
 IAVS는 향후 자산 변화만 감시합니다. 논문은 641개 3D MRA와 587개
 aneurysm–parent-vessel annotation 및 CFD outcome을 보고하지만, 2026-08-10

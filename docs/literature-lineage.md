@@ -1,6 +1,19 @@
 # 선행연구 계보와 research gap
 
-## 0-S. Current decision · source-delta batch has no active gap
+## 0-V. Current decision · vascular-semantics batch has no active gap
+
+2026-08-10 frozen batch는 TopBrain paired CTA/MRA anatomy, healthy IXI vessel
+atlas, VesselVerse protocol-conditioned annotation, NeckSpline extension, paired
+CTA phantom QA와 ADAM longitudinal/post-treatment semantics를 비교했다. 점수는
+29.5/28.5/27.5/26.5/26.0/25.0이며 모두 32점 미만이다. TopBrain은 25 paired
+patient의 48-class vascular anatomy benchmark이고 aneurysm endpoint가 없으며,
+VesselVerse의 “expert” 다수는 algorithm output이다. NeckSpline은 continuous
+neck primitive·topology·measurement·uncertainty·artifact stress를 이미 직접
+점유한다. 상세 계보와 점수는
+[`vascular-semantics source audit`](vascular-semantics-source-audit-2026-08-10.md)에
+고정한다. Active gap, method와 architecture는 없다.
+
+## 0-S. Historical decision · source-delta batch also had no active gap
 
 [OpenNeuro longitudinal cohort](https://pmc.ncbi.nlm.nih.gov/articles/PMC11139857/)의
 paired surface는 매력적이지만 같은 공개 자료에 surface registration, normal

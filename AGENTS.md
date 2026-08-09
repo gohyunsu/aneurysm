@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 vascular-semantics source-audit overlay:** Fresh frozen batch는
+> TopBrain paired CTA/MRA anatomy, healthy IXI atlas, VesselVerse annotations,
+> NeckSpline extension, paired CTA phantom QA와 ADAM longitudinal semantics를
+> 29.5/28.5/27.5/26.5/26.0/25.0으로 판정했다. Admission line 32 미만이므로
+> active shortlist, selected primary, payload, P0, method, architecture, GPU와
+> outer test는 모두 0이다. TopBrain의 공개 독립 단위는 25 paired patient이고
+> target은 48-class anatomy이지 aneurysm endpoint가 아니다. VesselVerse의
+> “expert”에는 algorithm output이 포함되고 request-gated이며, CTA phantom의
+> 126 scan은 one anatomy/three lesion 반복이고 published data URL은 HTTP 404다.
+> Source of truth는 `docs/vascular-semantics-source-audit-2026-08-10.md`와 schema
+> 4.0의 `problem_selection.vascular_semantics_source_audit`이다. Score repair와
+> compute는 없다. AURORA 실행은 `introai9` PBS만 사용하고 `junjinyong`은 접속·
+> 조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 INSTED source clarification:** Official Codabench는 INSTED를
 > published CC BY-NC challenge로 확인하며 160 train(healthy/IA/stenosis
 > 32/64/64), 40 closed test와 signup-gated training Files를 기술한다. BIAS PDF의
@@ -171,9 +185,11 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. Active primary와
-  source shortlist는 모두 0이다. 가장 최근 source-delta batch의 최고 후보인
-  OpenNeuro paired-surface growth도 31.5/40으로 기각됐고 새 payload/P0/model/GPU는
-  0이다. 직전 DIAS prefix-risk 후보도 31.0/40으로 기각했다. 그 이전 AneuX
+  source shortlist는 모두 0이다. 가장 최근 vascular-semantics batch의 최고
+  TopBrain paired-modality anatomy도 29.5/40으로 기각됐고 새 payload/P0/model/GPU는
+  0이다. 공개 단위는 25 paired patient이며 aneurysm endpoint가 없다. 직전
+  source-delta 최고 OpenNeuro 31.5/40과 DIAS prefix-risk 31.0/40도 기각했다.
+  그 이전 AneuX
   preprocessing-orbit 후보는 34.0/40으로
   P0에 진입했지만 initial tabular transport attempt exhaustion으로 scientific
   gate 전에 닫혔다. Complete/partial archive, CSV parse와 model range/member
@@ -307,9 +323,11 @@ data terms, payload/P0, scientific state 또는 execution authorization을 바�
   아니다. 새 후보에서도 direct prior 또는 strong baseline으로 취급한다.
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.
-- 가장 최근에 닫힌 candidate 문제는 **goal-oriented hemodynamic
-  segmentation**이다. S0a asset component의 explicit lesion-level linkage
-  precondition이 성립하지 않아 5/9로 종료했다. 그 직전은
+- 가장 최근 source-rejected candidate는 **TopBrain paired-modality vascular
+  anatomy without an aneurysm endpoint**다. 가장 최근 execution-closed
+  candidate는 AneuX preprocessing orbit이다. Goal-oriented hemodynamic
+  segmentation은 S0a asset component의 explicit lesion-level linkage
+  precondition이 성립하지 않아 5/9로 종료한 더 이른 history다. 그 직전은
   **annotation-selection-aware mixed-granularity anatomy-structured lesion-set
   inference**다. 제공
   segmentation이 lesion mask가 아니라 혈관 해부구조 mask여서 latent

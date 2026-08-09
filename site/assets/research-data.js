@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · source-delta best 31.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · vascular-semantics best 29.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Vascular-semantics batch leaves no model-worthy target",
+      copy: "TopBrain paired CTA/MRA anatomy, healthy IXI vessel masks, VesselVerse annotation semantics, NeckSpline extensions, a paired CTA phantom and ADAM longitudinal semantics score 29.5, 28.5, 27.5, 26.5, 26.0 and 25.0 against the frozen 32-point line. TopBrain has 25 paired public patients but no aneurysm endpoint. VesselVerse mixes one assisted-manual source with algorithm outputs. The phantom has 126 repeated scans but only one anatomy and three lesions, and its published data URL now returns 404. None identifies a residual aneurysm task that earns a model.",
+      status: "Best 29.5/40 · all rejected · payload/P0/model/GPU 0",
+      url: "../docs/vascular-semantics-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "IAVS remains an unreleased watch-only source",
@@ -397,6 +404,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "A fresh vascular-semantics batch is rejected before payload and compute",
+      copy: "The frozen eight-axis screen scores TopBrain, healthy IXI, VesselVerse, NeckSpline extension, paired CTA phantom QA and ADAM longitudinal semantics at 29.5/28.5/27.5/26.5/26.0/25.0. The source audit counts 25 paired TopBrain patients rather than 50 volumes, one phantom anatomy rather than 126 patients, and algorithm outputs rather than independent human VesselVerse raters. No score is repaired to cross 32; active shortlist, payload, P0, method, architecture, GPU and outer test remain zero. Future execution is introai9 PBS only; junjinyong is excluded from connection, query, submission and monitoring.",
+      files: ["docs/vascular-semantics-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

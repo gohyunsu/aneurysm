@@ -1,10 +1,12 @@
 # AURORA v2 모델 명세
 
-> **2026-08-09 current boundary:** source-delta audit의 최고 후보도 31.5/40으로
-> admission line 32에 미달했다. 따라서 현재 headline architecture는 없다.
+> **2026-08-10 current boundary:** vascular-semantics audit의 최고 후보도
+> 29.5/40으로 admission line 32에 미달했다. TopBrain의 25 paired-patient
+> target은 whole-brain anatomy이지 aneurysm endpoint가 아니다. 따라서 현재
+> headline architecture는 없다.
 > GNN, U-Net, Transformer, topology module, surface foundation feature와 Bayesian
 > head는 모두 후보 구성요소나 baseline일 뿐 selected AURORA model이 아니다.
-> 상세 판정은 [`source-delta audit`](source-delta-audit-2026-08-09.md)을 따른다.
+> 상세 판정은 [`vascular-semantics audit`](vascular-semantics-source-audit-2026-08-10.md)을 따른다.
 > IAVS는 [`watch-only`](source-watch.md)다. Official repository가 README-only이고
 > release/license/payload가 0이므로 architecture 근거가 아니다. 향후 release가
 > 생겨도 generic two-stage vessel segmentation, CFD applicability score, U-Net,

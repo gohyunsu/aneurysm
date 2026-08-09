@@ -1,10 +1,10 @@
 {
-  "schema_version": "3.9",
+  "schema_version": "4.0",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_source_delta_audit",
-    "as_of": "2026-08-09",
+    "status": "failed_branches_preserved_no_active_shortlist_after_vascular_semantics_audit",
+    "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
     "allowed_pbs_queues": ["coss_agpu", "coss_a6gpu"],
@@ -13,7 +13,7 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_source_delta_audit_no_primary_or_method",
+    "status": "no_active_shortlist_after_vascular_semantics_audit_no_primary_or_method",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
@@ -27,7 +27,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32",
-    "audit_document": "docs/source-delta-audit-2026-08-09.md",
+    "audit_document": "docs/vascular-semantics-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -469,8 +469,83 @@
       "decision": "reject_all_without_score_repair_p0_method_architecture_or_gpu",
       "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
     },
+    "vascular_semantics_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/vascular-semantics-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_id": "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint",
+      "best_score": 29.5,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "new_candidate_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "vesselverse_repository_commit": "ef94d3fd3ce9102cf396a83b1554c98f9f1b5e99",
+      "vesselverse_request_or_payload_accessed": false,
+      "phantom_data_url_http_status": 404,
+      "candidates": [
+        {
+          "id": "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint",
+          "score": 29.5,
+          "axis_scores": [4.0, 3.5, 1.5, 4.0, 3.0, 5.0, 5.0, 3.5],
+          "independent_units": "25_patients_with_paired_cta_and_mra",
+          "payload_accessed": false,
+          "decision": "reject_current_version_anatomy_benchmark_without_aneurysm_endpoint_and_direct_challenge_priors"
+        },
+        {
+          "id": "ixi_healthy_vessel_atlas_as_aneurysm_anomaly_support",
+          "score": 28.5,
+          "axis_scores": [4.0, 2.0, 1.5, 4.5, 4.5, 4.5, 4.0, 3.5],
+          "independent_units": "100_healthy_mra_subjects_without_same_protocol_aneurysm_counterfactuals",
+          "payload_accessed": false,
+          "decision": "reject_current_version_pathology_confounded_with_dataset_and_protocol"
+        },
+        {
+          "id": "vesselverse_protocol_conditioned_vessel_distribution_not_human_aneurysm_raters",
+          "score": 27.5,
+          "axis_scores": [4.0, 2.0, 1.5, 2.0, 4.5, 4.5, 5.0, 4.0],
+          "independent_units": "950_source_reported_images_but_annotations_mix_one_manual_source_and_algorithms",
+          "payload_accessed": false,
+          "decision": "reject_current_version_no_human_aneurysm_rater_distribution_and_request_gated_assets"
+        },
+        {
+          "id": "neckspline_multiloop_or_artifact_extension_direct_prior_occupied",
+          "score": 26.5,
+          "axis_scores": [4.5, 4.5, 0.5, 2.0, 4.0, 5.0, 5.0, 1.0],
+          "independent_units": "public_source_cases_but_derived_expert_neck_loops_not_released_as_target_asset",
+          "payload_accessed": false,
+          "decision": "reject_current_version_continuous_neck_topology_metrics_uncertainty_and_artifact_space_directly_occupied"
+        },
+        {
+          "id": "paired_cta_dose_reconstruction_phantom_orbit_effective_anatomy_one",
+          "score": 26.0,
+          "axis_scores": [5.0, 5.0, 1.5, 0.5, 0.5, 4.5, 5.0, 4.0],
+          "independent_units": "one_phantom_anatomy_three_aneurysms_126_repeated_scans",
+          "payload_accessed": false,
+          "decision": "reject_current_version_core_consistency_question_already_studied_asset_link_404_and_no_anatomy_generalization"
+        },
+        {
+          "id": "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released",
+          "score": 25.0,
+          "axis_scores": [4.5, 1.5, 1.5, 1.5, 2.5, 5.0, 5.0, 3.5],
+          "independent_units": "35_training_baseline_followup_pairs_under_registration_not_post_treatment_endpoint",
+          "payload_accessed": false,
+          "decision": "reject_current_version_no_public_treatment_response_or_growth_target_and_terms_not_user_accepted"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_payload_p0_method_architecture_or_gpu",
+      "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "same_lesion_preprocessing_orbit_quotient_morphometry",
-    "most_recent_source_rejected_candidate": "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited",
+    "most_recent_source_rejected_candidate": "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -485,7 +560,13 @@
       "victoria_neck_curve_distribution_effective_geometry_n5",
       "intra_topology_false_positive_detection_payload_absent_and_direct_prior",
       "iaia_joint_aneurysm_stenosis_proposal_only",
-      "flow_diverter_dsa_outcome_imaging_endpoint_not_linked"
+      "flow_diverter_dsa_outcome_imaging_endpoint_not_linked",
+      "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint",
+      "ixi_healthy_vessel_atlas_as_aneurysm_anomaly_support",
+      "vesselverse_protocol_conditioned_vessel_distribution_not_human_aneurysm_raters",
+      "neckspline_multiloop_or_artifact_extension_direct_prior_occupied",
+      "paired_cta_dose_reconstruction_phantom_orbit_effective_anatomy_one",
+      "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -527,7 +608,12 @@
       "persistent_topology_or_bifurcation_false_positive_filter",
       "foundation_3d_surface_feature_transfer",
       "annotator_distribution_calibration",
-      "treatment_outcome_ml_from_morphology_api_or_cfd"
+      "treatment_outcome_ml_from_morphology_api_or_cfd",
+      "generic_cross_modal_vessel_anatomy_segmentation",
+      "healthy_atlas_cross_dataset_anomaly_detection",
+      "staple_or_generic_annotator_aggregation",
+      "centerline_guided_periodic_neck_spline",
+      "generic_phantom_ai_quality_monitoring"
     ]
   },
   "venue": {
@@ -541,7 +627,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_source_delta_audit",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_vascular_semantics_audit",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -606,7 +692,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "unselected",
-    "active_candidate_status": "no_active_shortlist_after_source_delta_audit_no_primary_method_architecture_or_gpu",
+    "active_candidate_status": "no_active_shortlist_after_vascular_semantics_audit_no_primary_method_architecture_or_gpu",
     "candidate_primary_estimand": "unselected",
     "candidate_secondary_estimand": "unselected",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -965,7 +1051,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_source_delta_audit",
+    "current_headline_architecture": "unselected_no_active_problem_after_vascular_semantics_audit",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

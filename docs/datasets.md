@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 vascular-semantics audit:** TopBrain 25 paired CTA/MRA patient,
+> healthy IXI 100 MRA, VesselVerse source-reported 950 images, one-anatomy CTA
+> phantom, NeckSpline-derived neck loops와 ADAM longitudinal metadata를 source-only로
+> 비교했다. 최고 TopBrain도 29.5/40이며 target이 48-class anatomy이지 aneurysm
+> endpoint가 아니다. VesselVerse는 email-request gated이고 “expert”에 algorithm
+> output을 포함한다. Phantom data URL은 HTTP 404였다. Payload/P0/model/GPU는
+> 0이며 상세 근거는
+> [`vascular-semantics source audit`](vascular-semantics-source-audit-2026-08-10.md)에 있다.
+
 > **2026-08-10 IAVS watch-only:** Paper metadata는 641개 3D MRA, 587개
 > aneurysm–parent-vessel annotation과 CFD outcome을 보고한다. 그러나 official
 > repository exact `2e40088…`은 README 한 파일, release 0, explicit license 0,

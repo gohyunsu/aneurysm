@@ -45,20 +45,19 @@
           <em>First prove the task earns a model.</em>
         </h1>
         <p class="hero-lede">
-          가장 최근 source-delta audit의 최고 후보는 OpenNeuro longitudinal
-          surface growth였지만 31.5/40으로 admission gate 32를 넘지 못했습니다.
-          같은 공개 cohort의 Bayesian surface-displacement growth detection이
-          직접 선행이고, 공개 종단 단위는 24 patient입니다. RSNA, VICTORIA,
-          IntrA, IAIA와 flow-diverter 후보도 독립 단위·접근·direct-prior gate에서
-          탈락했습니다. Active shortlist, selected primary, model, GPU와 outer
-          test는 모두 없습니다. IAVS는 641 MRA/587 annotation을 보고하지만
-          official repository가 README-only라 source score 없이 watch-only입니다.
+          가장 최근 frozen batch의 최고 후보는 TopBrain paired CTA/MRA vascular
+          anatomy였지만 29.5/40으로 admission gate 32를 넘지 못했습니다. 공개
+          독립 단위는 25 paired patient이고 48-class anatomy target에는 aneurysm
+          endpoint가 없습니다. Healthy IXI, VesselVerse, NeckSpline extension,
+          paired CTA phantom과 ADAM longitudinal 후보도 identifiability·direct
+          prior·asset gate에서 탈락했습니다. Active shortlist, selected primary,
+          model, GPU와 outer test는 모두 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/source-delta-audit-2026-08-09.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/vascular-semantics-source-audit-2026-08-10.md">Latest audit ↗</a>
           <a class="button ghost" href="../docs/source-watch.md">IAVS watch ↗</a>
           <a class="button ghost" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">AneuX history ↗</a>
           <a class="button ghost" href="../results/aneux_preprocessing_orbit_p0_execution_20260809.json">Historical P0 ↗</a>
@@ -110,7 +109,7 @@
 
       <div class="hero-meta">
         <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>Source-delta best 31.5/40 · rejected</b></div>
+        <div><span>Current evidence</span><b>Vascular-semantics best 29.5/40 · rejected</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
       </div>
@@ -220,7 +219,7 @@
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
           현재 architecture는 없습니다. 아래 흐름은 historical AneuX P0 asset
-          chain과 early stop을 설명하는 기록입니다. 최신 source-delta batch는
+          chain과 early stop을 설명하는 기록입니다. 최신 vascular-semantics batch는
           P0 이전에 모두 기각됐습니다.
         </p>
       </div>
@@ -575,7 +574,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Source-delta best 31.5/40 · all rejected · shortlist/primary/model/GPU 0</b>
+        <span>Current stage</span><b>Vascular-semantics best 29.5/40 · all rejected · shortlist/primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

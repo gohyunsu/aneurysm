@@ -118,8 +118,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.9":
-        raise ProtocolError("The current research-state schema must be version 3.9.")
+    if protocol["schema_version"] != "4.0":
+        raise ProtocolError("The current research-state schema must be version 4.0.")
 
     project = protocol["project"]
     _require_keys(
@@ -142,7 +142,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_source_delta_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_vascular_semantics_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -185,6 +185,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneug_cycle_functional_source_audit",
             "dsa_prefix_risk_source_audit",
             "source_delta_audit",
+            "vascular_semantics_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -194,7 +195,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_source_delta_audit_no_primary_or_method"
+        != "no_active_shortlist_after_vascular_semantics_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
@@ -211,14 +212,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/source-delta-audit-2026-08-09.md"
+        != "docs/vascular-semantics-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited"
+        != "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint"
     ):
         raise ProtocolError(
-            "The source-delta boundary must retain no selected primary, "
+            "The vascular-semantics boundary must retain no selected primary, "
             "method, GPU, outer test, P1, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
@@ -236,6 +237,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "intra_topology_false_positive_detection_payload_absent_and_direct_prior",
         "iaia_joint_aneurysm_stenosis_proposal_only",
         "flow_diverter_dsa_outcome_imaging_endpoint_not_linked",
+        "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint",
+        "ixi_healthy_vessel_atlas_as_aneurysm_anomaly_support",
+        "vesselverse_protocol_conditioned_vessel_distribution_not_human_aneurysm_raters",
+        "neckspline_multiloop_or_artifact_extension_direct_prior_occupied",
+        "paired_cta_dose_reconstruction_phantom_orbit_effective_anatomy_one",
+        "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -279,6 +286,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "foundation_3d_surface_feature_transfer",
         "annotator_distribution_calibration",
         "treatment_outcome_ml_from_morphology_api_or_cfd",
+        "generic_cross_modal_vessel_anatomy_segmentation",
+        "healthy_atlas_cross_dataset_anomaly_detection",
+        "staple_or_generic_annotator_aggregation",
+        "centerline_guided_periodic_neck_spline",
+        "generic_phantom_ai_quality_monitoring",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -1265,6 +1277,96 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("source-delta rejection and introai9 idle boundary")
 
+    vascular_audit = problem_selection["vascular_semantics_source_audit"]
+    _require_keys(
+        vascular_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "new_candidate_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "vesselverse_repository_commit",
+            "vesselverse_request_or_payload_accessed",
+            "phantom_data_url_http_status",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.vascular_semantics_source_audit",
+    )
+    expected_vascular_scores = {
+        "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint": 29.5,
+        "ixi_healthy_vessel_atlas_as_aneurysm_anomaly_support": 28.5,
+        "vesselverse_protocol_conditioned_vessel_distribution_not_human_aneurysm_raters": 27.5,
+        "neckspline_multiloop_or_artifact_extension_direct_prior_occupied": 26.5,
+        "paired_cta_dose_reconstruction_phantom_orbit_effective_anatomy_one": 26.0,
+        "adam_longitudinal_or_post_treatment_remnant_endpoint_not_released": 25.0,
+    }
+    observed_vascular_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in vascular_audit["candidates"]
+    }
+    axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in vascular_audit["candidates"]
+    )
+    if (
+        vascular_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or vascular_audit["audit_document"]
+        != "docs/vascular-semantics-source-audit-2026-08-10.md"
+        or vascular_audit["automatic_selection_threshold"] != 32.0
+        or vascular_audit["best_candidate_id"]
+        != "topbrain_paired_modality_vascular_anatomy_without_aneurysm_endpoint"
+        or vascular_audit["best_score"] != 29.5
+        or vascular_audit["best_score"] >= vascular_audit["automatic_selection_threshold"]
+        or vascular_audit["active_shortlist_count"] != 0
+        or vascular_audit["primary_problem_selected"] is not False
+        or vascular_audit["new_candidate_payload_accessed"] is not False
+        or vascular_audit["executable_p0_registered"] is not False
+        or vascular_audit["method_selected"] is not False
+        or vascular_audit["architecture_selected"] is not False
+        or vascular_audit["gpu_training_authorized"] is not False
+        or vascular_audit["outer_test_authorized"] is not False
+        or vascular_audit["submission_identity_active"] is not False
+        or vascular_audit["execution_server"] != "introai9"
+        or vascular_audit["pbs_job_created"] is not False
+        or vascular_audit["login_node_gpu_command_executed"] is not False
+        or vascular_audit["junjinyong_accessed_for_this_audit"] is not False
+        or vascular_audit["vesselverse_repository_commit"]
+        != "ef94d3fd3ce9102cf396a83b1554c98f9f1b5e99"
+        or vascular_audit["vesselverse_request_or_payload_accessed"] is not False
+        or vascular_audit["phantom_data_url_http_status"] != 404
+        or observed_vascular_scores != expected_vascular_scores
+        or not axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in vascular_audit["candidates"])
+        or vascular_audit["decision"]
+        != "reject_all_without_score_repair_payload_p0_method_architecture_or_gpu"
+        or vascular_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The vascular-semantics audit must preserve all six frozen source-only "
+            "rejections, introai9-only execution, and no payload, P0, model, or GPU."
+        )
+    checks.append("vascular-semantics source rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -1344,7 +1446,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_source_delta_audit"
+        != "unselected_primary_with_no_active_shortlist_after_vascular_semantics_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1507,7 +1609,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_source_delta_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_vascular_semantics_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

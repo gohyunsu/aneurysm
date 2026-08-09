@@ -4,6 +4,26 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Fresh vascular-semantics batch is rejected before compute
+
+- Frozen 8축 40점 screen에서 TopBrain paired CTA/MRA anatomy, healthy IXI atlas,
+  VesselVerse annotation semantics, NeckSpline extension, paired CTA phantom QA와
+  ADAM longitudinal semantics를 29.5/28.5/27.5/26.5/26.0/25.0으로 판정했다.
+- TopBrain은 25 paired patient의 48-class anatomy benchmark로 aneurysm endpoint가
+  없다. VesselVerse의 “expert”에는 algorithm output이 포함되고 data access는
+  email request를 요구한다. Phantom의 126 scan은 한 anatomy·세 병변의 반복이며
+  논문이 제시한 URL은 HTTP 404다.
+- Admission line 32 미만이므로 score repair, payload, P0, method, architecture,
+  GPU와 outer test는 모두 0이다. 향후 실행은 `introai9` PBS만 사용하고
+  `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+- Machine contract를 schema 4.0으로 올리고 각 후보의 8개 axis 합계와 no-compute
+  경계를 validator/test에 고정했다.
+- 영향 파일: `docs/vascular-semantics-source-audit-2026-08-10.md`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `README.md`, `docs/research-direction.md`, `docs/literature-lineage.md`,
+  `docs/datasets.md`, `docs/experiment-protocol.md`, `site/index.html`,
+  `site/learn.html`, `site/assets/research-data.js`, `CHANGELOG.md`, `AGENTS.md`.
+
 ## 2026-08-10 · INSTED clarification is deployed and verified
 
 - Exact content commit `35e925321b083485b6380b2c37493f499997e3c5`의

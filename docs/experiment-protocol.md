@@ -1,11 +1,26 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.9 · 2026-08-09
+버전: 4.0 · 2026-08-10
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## S-VASC · vascular-semantics batch · all rejected, no execution
+
+TopBrain paired-modality anatomy, healthy IXI atlas, VesselVerse annotations,
+NeckSpline extension, paired CTA phantom QA와 ADAM longitudinal semantics를 frozen
+8축 40점 rubric으로 source-only 평가했다. 점수는 29.5, 28.5, 27.5, 26.5,
+26.0, 25.0이며 admission line 32를 넘는 후보가 없다. Candidate payload,
+executable P0, architecture, GPU와 outer test는 모두 0이다.
+
+TopBrain의 공개 독립 단위는 50 volume이 아니라 25 paired patient이고 target은
+aneurysm이 아닌 whole-brain anatomy다. VesselVerse의 annotation source는 한
+assisted-manual label과 여러 algorithm output을 섞는다. CTA phantom의 126 scan은
+한 anatomy·세 병변 반복이고 공개 URL은 404다. 같은 점수표의 사후 repair는
+없다. 향후 compute는 `introai9` PBS만 사용하고 `junjinyong`은 접속·조회·제출·
+모니터링하지 않는다.
 
 ## S-WATCH · IAVS public-release monitor · no experiment authorization
 

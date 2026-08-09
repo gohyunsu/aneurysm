@@ -8,8 +8,14 @@ post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
 aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · DSA prefix-risk candidate source-rejected 31/40 before payload/P0/model/GPU · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
 가장 최근 기준선은
-[`source-delta-audit-2026-08-09.md`](source-delta-audit-2026-08-09.md)다.
-OpenNeuro paired-surface growth가 31.5/40으로 가장 높았지만 같은 공개 cohort의
+[`vascular-semantics-source-audit-2026-08-10.md`](vascular-semantics-source-audit-2026-08-10.md)다.
+TopBrain paired-modality vascular anatomy가 29.5/40으로 가장 높았지만 공개
+단위는 25 paired patient이고 48-class anatomy target에는 aneurysm endpoint가
+없다. Healthy IXI 28.5, VesselVerse 27.5, NeckSpline extension 26.5, paired CTA
+phantom 26.0과 ADAM longitudinal/post-treatment 25.0도 모두 기각됐다. Payload,
+P0, method, architecture와 GPU는 0이며 `introai9`만 향후 실행 서버다.
+
+직전 OpenNeuro paired-surface growth는 31.5/40으로 가장 높았지만 같은 공개 cohort의
 Bayesian surface-displacement growth detection이 직접 선행이고, 공개 종단 단위는
 24 patient뿐이다. RSNA point-set, VICTORIA reader distribution, IntrA topology,
 IAIA와 flow-diverter 후보도 각각 controlled terms, 5 geometry, payload 부재,
@@ -96,10 +102,11 @@ result JSON은 없다. PixelData는 decode·inspect하지 않았고 STL 단계�
 도달하지 않았다. 등록된 parser-repair/same-contract-rerun 금지에 따라 후보를
 닫았으며 active shortlist는 다시 0이다.
 
-## 0. 현재 연구 상태 · active shortlist 0, selected primary 0
+## 0. 현재 연구 상태 · latest best 29.5/40, active shortlist 0
 
 현재 problem-selection source of truth는
-[`source-delta-audit-2026-08-09.md`](source-delta-audit-2026-08-09.md)다.
+[`vascular-semantics-source-audit-2026-08-10.md`](vascular-semantics-source-audit-2026-08-10.md)다.
+직전 source-delta audit은 historical record로 보존한다.
 DIAS audit은 직전 history로 보존한다. DIAS payload는 읽지 않았고 known
 `introai9` dataset root의 bounded inventory에도
 staged asset이 없었다. Source score가 32 미만이므로 executable P0, model과 GPU

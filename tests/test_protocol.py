@@ -89,15 +89,35 @@ class ProtocolTests(unittest.TestCase):
     def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "source-delta boundary"):
+        with self.assertRaisesRegex(ProtocolError, "vascular-semantics boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "source-delta boundary"):
+        with self.assertRaisesRegex(ProtocolError, "vascular-semantics boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "source-delta boundary"):
+        with self.assertRaisesRegex(ProtocolError, "vascular-semantics boundary"):
+            validate_protocol(candidate)
+
+    def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"]["vascular_semantics_source_audit"]
+        self.assertEqual(audit["best_score"], 29.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["vascular_semantics_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "vascular-semantics audit"):
             validate_protocol(candidate)
 
     def test_aneux_orbit_p0_is_closed_without_payload_p1_or_training(self) -> None:
