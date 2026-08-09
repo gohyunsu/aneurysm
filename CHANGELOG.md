@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Inverse audit and introai9 policy are deployed
+
+- Exact content commit `15bbccbfb367516ee0daaf8d2f5beca20b7c587b`의 Quality
+  run `31291453002`와 Pages run `31291452634`가 모두 성공했다.
+- [공개 사이트](https://gohyunsu.github.io/aneurysm/site/)에서 inverse
+  counterfactual 후보 27/40 source rejection, active shortlist/primary/model/GPU
+  0과 `introai9`-only future compute를 확인했다. 상세 가이드에서도
+  `junjinyong` 제외, 현재 GPU job 0과 gate 뒤 scheduler smoke 경계가 보인다.
+- 이 배포 확인은 후보 점수, dataset access, method/GPU authorization 또는
+  scientific verdict를 바꾸지 않는다.
+- 영향 파일: `AGENTS.md`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · AURORA compute moves exclusively to introai9
 
 - `junjinyong`은 다른 연구가 사용 중이므로 AURORA에서 접속, job 제출,

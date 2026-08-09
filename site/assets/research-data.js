@@ -333,6 +333,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.09",
+      category: "site",
+      title: "Inverse audit and introai9-only policy are live",
+      copy: "Exact content commit 15bbccbfb367516ee0daaf8d2f5beca20b7c587b passed Quality run 31291453002 and Pages run 31291452634. The live overview shows the 27/40 inverse-counterfactual source rejection and active shortlist/model/GPU zero; the detailed guide shows introai9-only future compute, junjinyong exclusion and current GPU job zero. This deployment changes no score, access state, scientific verdict or authorization.",
+      files: ["AGENTS.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.09",
       category: "operations",
       title: "AURORA compute moves exclusively to introai9",
       copy: "junjinyong is occupied by another research topic and is excluded from AURORA access, submission, status polling and monitoring. introai9 is now the sole source-audit and scheduled-compute target. Access and coss_agpu/coss_a6gpu ACL compatibility were checked read-only; no AURORA GPU job is active. A future candidate must first pass its prospective gate, then record a scheduler-allocated GPU/runtime smoke before learned work.",

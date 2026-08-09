@@ -35,6 +35,10 @@ Aneumo의 released healthy/pathological pair·ostium/edit manifest 부재,
 IntrA의 same-patient healthy counterfactual·명시적 repository license 부재와
 SynVA/AneuG/counterfactual anomaly·point-cloud reconstruction direct prior 때문에
 27.0/40으로 기각했다. Executable P0, method, architecture와 GPU는 0이다.
+Exact content commit `15bbccbfb367516ee0daaf8d2f5beca20b7c587b`의 Quality
+run `31291453002`와 Pages run `31291452634`는 모두 성공했고, live site에서
+이 판정과 `introai9`-only/현재 GPU job 0 경계를 확인했다. 배포 확인은
+scientific state나 authorization을 바꾸지 않는다.
 
 ## 1. 연구의 현재 기준선
 
