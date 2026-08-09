@@ -4,6 +4,52 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · AURORA compute moves exclusively to introai9
+
+- `junjinyong`은 다른 연구가 사용 중이므로 AURORA에서 접속, job 제출,
+  상태 조회와 모니터링을 모두 금지한다. 과거 run과 frozen PBS/config는
+  provenance로만 보존하며 재제출하지 않는다.
+- `introai9`를 source audit, CPU/PBS와 향후 gate-authorized GPU 실험의 유일한
+  대상으로 정했다. SSH/PBS 접근과 `coss_agpu`·`coss_a6gpu` ACL compatibility는
+  읽기 전용으로 확인했다.
+- 현재 AURORA GPU job은 0개다. Active candidate가 없으므로 GPU allocation,
+  training과 monitoring을 시작하지 않았다. 새 후보가 prospective gate를
+  통과하면 첫 scheduler allocation에서 GPU model, runtime과 CUDA smoke를 다시
+  기록한다.
+- Public config schema 3.3은 이 server boundary를 validator invariant로 고정한다.
+  내부 endpoint, credential과 절대 경로는 공개 저장소에 기록하지 않는다.
+- 영향 파일: `AGENTS.md`, `README.md`, `docs/server-execution.md`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `site/index.html`, `site/learn.html`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
+## 2026-08-09 · Inverse healthy-vessel counterfactual candidate is rejected at source audit
+
+- 검토한 문제는 aneurysm-bearing surface \(Y\)에서 healthy parent vessel
+  \(H\)와 localized lesion edit \(Z\)의 posterior를 추론하고 fixed editor로
+  \(E(H,Z)\approx Y\) cycle을 검사하는 구조였다.
+- Current Aneumo repository와 pinned cache는 base-family deformation mapping과
+  nonzero aneurysm morphometry를 제공하지만 released healthy counterpart,
+  ostium/lesion label 또는 edit-parameter pair manifest를 제공하지 않는다.
+  초기 10,000-model preprint의 466 aneurysm-free count를 현재 10,660-geometry
+  release의 paired supervision으로 소급하지 않는다.
+- IntrA는 103 whole-vessel model, 1,909 local segment와 116 expert-annotated
+  aneurysm segment를 제공하지만 동일 환자의 real healthy counterfactual,
+  complete whole/local mapping과 명시적 repository license가 없다. Payload는
+  받거나 읽지 않았다.
+- SynVA/AneuG forward editing, supervised aneurysm surface isolation, medical
+  healthy-counterfactual anomaly localization과 point-cloud reconstruction을
+  direct prior로 올렸다. 남는 inverse-editor posterior는 현재 자산에서 real
+  counterfactual correctness로 검증할 수 없다.
+- Cold-audit score는 **27.0/40**으로 자동 shortlist 기준 32에 못 미친다.
+  Executable P0, method name, architecture, config, seed, threshold, checkpoint와
+  GPU job을 만들지 않고 active shortlist를 0으로 유지한다.
+- 영향 파일: `docs/inverse-aneurysm-editing-audit-2026-08-09.md`, `AGENTS.md`,
+  `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/datasets.md`, `docs/literature-lineage.md`,
+  `configs/aurora_v1.json`,
+  `src/aurora/protocol.py`, `tests/test_protocol.py`, `site/index.html`,
+  `site/learn.html`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Open-CTA P0 is execution-incomplete and the candidate closes
 
 - Prospective source `b437875f884346d7f0fada68f089981664ae2a3c`는 Quality

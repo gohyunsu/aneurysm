@@ -51,24 +51,23 @@
           <span>짧은 답</span>
           <strong>현재 활성 문제 후보와 선택된 모델은 모두 없습니다.</strong>
           <p>
-            같은 CTA를 다른 voxel grid에 놓아도 병변 수, 물리 좌표 surface와
-            morphometry가 함께 일관되어야 한다는 질문은 source-only 평가에서
-            32/40을 받았습니다. 그러나 등록된 P0가 과학 지표를 계산하기 전에
-            실행 불완전으로 끝났고 후보를 닫았으므로, 이를 현재 문제나
-            architecture로 선택하지 않습니다.
+            가장 최근 inverse healthy-vessel counterfactual/editing 후보는
+            paired ground truth 부재와 강한 direct prior 때문에 27/40으로
+            기각했습니다. 그 전 physical-grid 질문은 32/40을 받았지만 등록된
+            P0가 과학 지표 전에 실행 불완전으로 끝났습니다. 어느 후보도 현재
+            문제나 architecture로 선택하지 않습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
           <strong>다음 단계는 별개의 fresh problem audit입니다.</strong>
           <p>
-            P0는 frozen minimal parser가 PixelData 앞의 undefined-length
-            Procedure Code Sequence <code>(0008,1032)</code>를 만나 종료됐습니다.
-            PixelData와 STL은 열지 않았고 scientific gate에는 판정이 없습니다.
-            Parser를 고치거나 같은 계약을 재실행하거나 P1·GPU로 넘어가지
-            않습니다.
+            닫힌 P0의 parser를 고치거나 같은 계약을 재실행하지 않고, inverse
+            후보에 pseudo-healthy target을 붙여 구제하지도 않습니다. 독립된
+            problem audit가 32점 admission과 method-free adequacy를 통과해야만
+            다음 단계가 열립니다.
           </p>
-          <a href="../docs/open-cta-physical-grid-audit-2026-08-09.md">닫힌 candidate와 P0 기록 읽기 ↗</a>
+          <a href="../docs/inverse-aneurysm-editing-audit-2026-08-09.md">가장 최근 source rejection 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -915,6 +914,7 @@
           </header>
 
           <div class="gate-explainer">
+            <article><span>P0-I · SOURCE REJECTED</span><div><h3>병변 표면에서 real healthy counterfactual을 식별할 수 있는가?</h3><p>Aneumo는 released healthy/pathological pair·ostium/edit manifest가 없고 IntrA는 같은 환자의 healthy counterpart를 제공하지 않습니다. Forward editing과 counterfactual reconstruction도 직접 선행입니다.</p></div><b>27/40 · no pseudo-target repair/P0/method/GPU</b></article>
             <article><span>P0-C · EXECUTION-INCOMPLETE</span><div><h3>Open CTA의 case unit과 physical frame이 질문을 지지하는가?</h3><p>Frozen parser가 일부 DICOM header prefix를 읽다가 PixelData 앞 undefined-length <code>(0008,1032)</code>에서 멈췄습니다. PixelData와 STL은 열지 않았고 12-check scientific gate는 평가되지 않았습니다.</p></div><b>no verdict · no repair/rerun/P1/GPU · candidate closed</b></article>
             <article><span>S0a · CLOSED</span><div><h3>영상–표면 linkage가 정확히 연결되는가?</h3><p>CMHA asset component는 5/9에 그쳤습니다. 105 lesion exact triplet은 0개였고 NIfTI/STL header는 열지 않았습니다.</p></div><b>S0a not evaluated · candidate closed</b></article>
             <article><span>S0b · NOT REGISTERED</span><div><h3>Dice와 functional error가 정말 다른가?</h3><p>Smooth surface perturbation과 adjoint validity를 검사하려던 설계지만 asset early-stop 뒤 실행하지 않습니다.</p></div><b>solver v2/model/GPU blocked</b></article>
@@ -990,19 +990,24 @@
 
           <div class="server-roles">
             <article>
-              <span>SOURCE AUDIT</span>
+              <span>SOURCE + CPU AUDIT</span>
               <h3>introai9</h3>
-              <p>뇌동맥류 원본·추출본·기존 매니페스트의 존재와 구조를 읽기 전용으로 확인합니다.</p>
+              <p>뇌동맥류 원본·매니페스트를 읽기 전용으로 감사하고 CPU/PBS 작업도 같은 계정에서 실행합니다.</p>
               <ul><li>원본 수정 금지</li><li>dataset별 file/size audit</li><li>필요 자산만 read-only 공유</li></ul>
             </article>
-            <div class="server-arrow"><b>manifest + read-only asset</b><span>→</span></div>
+            <div class="server-arrow"><b>same account · isolated allocation</b><span>→</span></div>
             <article>
               <span>SCHEDULED COMPUTE</span>
-              <h3>junjinyong</h3>
-              <p>PBS scheduler가 할당한 A6000 compute node에서 smoke와 실험을 실행합니다.</p>
-              <ul><li>login node GPU 사용 금지</li><li>pinned Singularity image</li><li>output만 writable</li></ul>
+              <h3>introai9 · PBS only</h3>
+              <p>새 후보가 prospective gate를 통과한 경우에만 scheduler allocation에서 smoke와 실험을 실행합니다.</p>
+              <ul><li>현재 GPU job 0</li><li>login node GPU 사용 금지</li><li>code/data read-only · output writable</li></ul>
             </article>
           </div>
+
+          <aside class="honesty-note">
+            <b>Compute boundary · 2026-08-09</b>
+            <p><code>junjinyong</code>은 다른 연구가 사용 중이므로 AURORA의 접속·제출·조회·모니터링 대상에서 제외했습니다. 과거 run은 provenance로만 남고 새 실험은 재제출하지 않습니다. <code>introai9</code> queue ACL은 확인했지만, 실제 GPU 사양은 다음 gate-authorized scheduler smoke에서 다시 기록합니다.</p>
+          </aside>
 
           <div class="run-record">
             <p class="eyebrow">EVERY RUN MUST LEAVE</p>
@@ -1017,8 +1022,12 @@
           </div>
 
           <div class="compute-status">
+            <span class="status-dot warning"></span>
+            <div><p class="eyebrow">CURRENT COMPUTE · IDLE</p><h3>introai9-only · no active AURORA GPU job</h3><p>Access와 PBS queue ACL만 읽기 전용으로 확인했습니다. Active candidate가 없으므로 allocation, training과 GPU monitoring은 시작하지 않았습니다.</p></div>
+          </div>
+          <div class="compute-status">
             <span class="status-dot complete"></span>
-            <div><p class="eyebrow">GPU SMOKE · COMPLETE</p><h3>RTX A6000 · PyTorch 2.5.1 · CUDA 11.8</h3><p>scheduler allocation 안에서 2048×2048 CUDA matrix multiplication과 finite-value 검사를 통과했습니다.</p></div>
+            <div><p class="eyebrow">HISTORICAL GPU SMOKE · COMPLETE</p><h3>Past runtime evidence, not a current allocation</h3><p>기존 scheduler run의 GPU·PyTorch·CUDA 기록은 재현 provenance로 보존합니다. 현재 introai9 allocation 증거로 소급하지 않습니다.</p></div>
           </div>
           <div class="compute-status warning">
             <span class="status-dot warning"></span>

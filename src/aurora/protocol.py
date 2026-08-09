@@ -117,15 +117,40 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.2":
-        raise ProtocolError("The current research-state schema must be version 3.2.")
+    if protocol["schema_version"] != "3.3":
+        raise ProtocolError("The current research-state schema must be version 3.3.")
 
     project = protocol["project"]
-    _require_keys(project, ["name", "status", "clinical_use"], "project")
+    _require_keys(
+        project,
+        [
+            "name",
+            "status",
+            "clinical_use",
+            "execution_server",
+            "allowed_pbs_queues",
+            "excluded_execution_servers",
+            "current_gpu_job_count",
+            "first_future_gpu_action",
+        ],
+        "project",
+    )
     if project["name"] != "AURORA":
         raise ProtocolError("Project name must remain AURORA for schema v1.")
     if project["clinical_use"] is not False:
         raise ProtocolError("AURORA v1 must be marked research-only.")
+    if (
+        project["execution_server"] != "introai9"
+        or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
+        or project["excluded_execution_servers"] != ["junjinyong"]
+        or project["current_gpu_job_count"] != 0
+        or project["first_future_gpu_action"]
+        != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
+    ):
+        raise ProtocolError(
+            "AURORA compute must remain introai9-only with junjinyong excluded, "
+            "no active GPU job, and a scheduler smoke as the first authorized action."
+        )
     checks.append("research-only project boundary")
 
     problem_selection = protocol["problem_selection"]
@@ -150,9 +175,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "source_only_dataset_substitution_screen",
             "topaneu_attachment_source_audit",
             "open_cta_physical_grid_candidate",
+            "inverse_healthy_vessel_counterfactual_source_audit",
             "rsna_supervision_semantics_red_team",
             "goal_oriented_segmentation_cold_audit",
             "most_recent_closed_candidate",
+            "most_recent_source_rejected_candidate",
             "rejected_candidates",
             "non_novel_components",
         ],
@@ -160,7 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_after_open_cta_physical_grid_p0_execution_incomplete"
+        != "no_active_problem_after_inverse_counterfactual_source_audit_rejection"
         or problem_selection["shortlisted_candidate"]
         != "none"
         or problem_selection["candidate_dataset"]
@@ -180,13 +207,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_primary_source_and_asset_audit_without_open_cta_parser_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/open-cta-physical-grid-audit-2026-08-09.md"
+        != "docs/inverse-aneurysm-editing-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "open_cta_physical_grid_commutation"
+        or problem_selection["most_recent_source_rejected_candidate"]
+        != "inverse_healthy_vessel_counterfactual_editing"
     ):
         raise ProtocolError(
-            "The open-CTA P0 execution-incomplete boundary must retain no active "
-            "problem, repair, method, GPU, or outer test."
+            "The no-active-problem boundary after the inverse source rejection and "
+            "open-CTA P0 execution-incomplete history must retain no repair, method, "
+            "GPU, or outer test."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -195,6 +225,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "cross_protocol_4d_flow_posterior_prediction",
         "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
         "goal_oriented_hemodynamic_segmentation",
+        "inverse_healthy_vessel_counterfactual_editing",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -220,8 +251,101 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "random_finite_set_probabilistic_detection",
         "lesion_detr_variable_cardinality_set_prediction",
         "topology_or_shape_guided_aneurysm_segmentation",
+        "supervised_aneurysm_surface_segmentation",
+        "forward_healthy_vessel_generation_and_localized_aneurysm_editing",
+        "morphology_conditioned_aneurysm_mesh_generation",
+        "generic_healthy_counterfactual_anomaly_localization",
+        "generic_point_cloud_reconstruction_anomaly_detection",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
+
+    inverse_audit = problem_selection[
+        "inverse_healthy_vessel_counterfactual_source_audit"
+    ]
+    _require_keys(
+        inverse_audit,
+        [
+            "status",
+            "audit_document",
+            "candidate_hypothesis",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "aneumo_current_release_geometries",
+            "aneumo_current_base_families",
+            "aneumo_current_mapping_unit",
+            "aneumo_released_healthy_counterpart_manifest_available",
+            "aneumo_released_ostium_or_edit_parameter_manifest_available",
+            "aneumo_existing_64_case_cache_is_healthy_pathological_paired",
+            "intra_whole_vessel_models_source_reported",
+            "intra_local_segments_source_reported",
+            "intra_expert_annotated_local_aneurysm_segments_source_reported",
+            "intra_payload_accessed",
+            "intra_explicit_repository_license_verified",
+            "real_healthy_counterfactual_ground_truth_available",
+            "direct_prior_threats",
+            "method_selected",
+            "architecture_selected",
+            "executable_p0_registered",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "decision",
+        ],
+        "problem_selection.inverse_healthy_vessel_counterfactual_source_audit",
+    )
+    if (
+        inverse_audit["status"]
+        != "completed_source_only_rejected_below_admission_threshold"
+        or inverse_audit["audit_document"]
+        != "docs/inverse-aneurysm-editing-audit-2026-08-09.md"
+        or inverse_audit["score"] != 27.0
+        or inverse_audit["maximum_score"] != 40.0
+        or inverse_audit["automatic_selection_threshold"] != 32.0
+        or inverse_audit["active_shortlist_count"] != 0
+        or inverse_audit["aneumo_current_release_geometries"] != 10660
+        or inverse_audit["aneumo_current_base_families"] != 427
+        or inverse_audit["aneumo_current_mapping_unit"]
+        != "base_family_deformation_not_observed_healthy_pathological_pair"
+        or inverse_audit["aneumo_released_healthy_counterpart_manifest_available"]
+        is not False
+        or inverse_audit["aneumo_released_ostium_or_edit_parameter_manifest_available"]
+        is not False
+        or inverse_audit["aneumo_existing_64_case_cache_is_healthy_pathological_paired"]
+        is not False
+        or inverse_audit["intra_whole_vessel_models_source_reported"] != 103
+        or inverse_audit["intra_local_segments_source_reported"] != 1909
+        or inverse_audit[
+            "intra_expert_annotated_local_aneurysm_segments_source_reported"
+        ]
+        != 116
+        or inverse_audit["intra_payload_accessed"] is not False
+        or inverse_audit["intra_explicit_repository_license_verified"] is not False
+        or inverse_audit["real_healthy_counterfactual_ground_truth_available"]
+        is not False
+        or set(inverse_audit["direct_prior_threats"])
+        != {
+            "supervised_aneurysm_surface_segmentation",
+            "healthy_vessel_generation_and_localized_aneurysm_editing",
+            "morphology_conditioned_aneurysm_mesh_generation",
+            "synthetic_vasculature_augmentation_for_aneurysm_detection",
+            "medical_healthy_counterfactual_anomaly_localization",
+            "point_cloud_normal_reconstruction_and_anomaly_localization",
+        }
+        or inverse_audit["method_selected"] is not False
+        or inverse_audit["architecture_selected"] is not False
+        or inverse_audit["executable_p0_registered"] is not False
+        or inverse_audit["gpu_training_authorized"] is not False
+        or inverse_audit["outer_test_authorized"] is not False
+        or inverse_audit["submission_identity_active"] is not False
+        or inverse_audit["decision"]
+        != "reject_without_pseudo_healthy_repair_method_or_gpu"
+    ):
+        raise ProtocolError(
+            "The inverse-counterfactual source audit must remain rejected without "
+            "paired-target assumptions, executable P0, method, or GPU authorization."
+        )
     substitution_screen = problem_selection["source_only_dataset_substitution_screen"]
     _require_keys(
         substitution_screen,
@@ -745,7 +869,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_no_active_problem_after_open_cta_p0_execution_incomplete"
+        != "unselected_no_active_problem_after_inverse_counterfactual_source_rejection"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -909,7 +1033,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "none"
         or task["active_candidate_status"]
-        != "none_after_open_cta_p0_execution_incomplete_without_scientific_verdict_or_rerun"
+        != "none_after_inverse_counterfactual_source_audit_rejection_with_open_cta_no_repair_boundary_preserved"
         or task["candidate_primary_estimand"]
         != "none"
         or task["candidate_secondary_estimand"]

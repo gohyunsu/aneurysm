@@ -1,14 +1,19 @@
 {
-  "schema_version": "3.2",
+  "schema_version": "3.3",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_problem_after_open_cta_p0_execution_incomplete",
+    "status": "failed_branches_preserved_no_active_problem_after_inverse_counterfactual_source_rejection",
     "as_of": "2026-08-09",
-    "clinical_use": false
+    "clinical_use": false,
+    "execution_server": "introai9",
+    "allowed_pbs_queues": ["coss_agpu", "coss_a6gpu"],
+    "excluded_execution_servers": ["junjinyong"],
+    "current_gpu_job_count": 0,
+    "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_problem_after_open_cta_physical_grid_p0_execution_incomplete",
+    "status": "no_active_problem_after_inverse_counterfactual_source_audit_rejection",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "none",
@@ -22,7 +27,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_without_open_cta_parser_repair_or_rerun",
-    "audit_document": "docs/open-cta-physical-grid-audit-2026-08-09.md",
+    "audit_document": "docs/inverse-aneurysm-editing-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -121,6 +126,42 @@
       "p0_pass_authorizes": "register_method_free_p1_native_grid_rasterization_and_instance_stability_audit_only",
       "p0_failure_action": "close_physical_grid_candidate_without_threshold_repair_method_gpu_or_outer_test"
     },
+    "inverse_healthy_vessel_counterfactual_source_audit": {
+      "status": "completed_source_only_rejected_below_admission_threshold",
+      "audit_document": "docs/inverse-aneurysm-editing-audit-2026-08-09.md",
+      "candidate_hypothesis": "infer_joint_posterior_over_healthy_parent_vessel_counterfactual_and_localized_aneurysm_edit_from_pathological_surface_with_forward_cycle",
+      "score": 27.0,
+      "maximum_score": 40.0,
+      "automatic_selection_threshold": 32.0,
+      "active_shortlist_count": 0,
+      "aneumo_current_release_geometries": 10660,
+      "aneumo_current_base_families": 427,
+      "aneumo_current_mapping_unit": "base_family_deformation_not_observed_healthy_pathological_pair",
+      "aneumo_released_healthy_counterpart_manifest_available": false,
+      "aneumo_released_ostium_or_edit_parameter_manifest_available": false,
+      "aneumo_existing_64_case_cache_is_healthy_pathological_paired": false,
+      "intra_whole_vessel_models_source_reported": 103,
+      "intra_local_segments_source_reported": 1909,
+      "intra_expert_annotated_local_aneurysm_segments_source_reported": 116,
+      "intra_payload_accessed": false,
+      "intra_explicit_repository_license_verified": false,
+      "real_healthy_counterfactual_ground_truth_available": false,
+      "direct_prior_threats": [
+        "supervised_aneurysm_surface_segmentation",
+        "healthy_vessel_generation_and_localized_aneurysm_editing",
+        "morphology_conditioned_aneurysm_mesh_generation",
+        "synthetic_vasculature_augmentation_for_aneurysm_detection",
+        "medical_healthy_counterfactual_anomaly_localization",
+        "point_cloud_normal_reconstruction_and_anomaly_localization"
+      ],
+      "method_selected": false,
+      "architecture_selected": false,
+      "executable_p0_registered": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "decision": "reject_without_pseudo_healthy_repair_method_or_gpu"
+    },
     "rsna_supervision_semantics_red_team": {
       "status": "completed_public_primary_sources_no_payload",
       "audit_document": "docs/rsna-supervision-semantics-audit-2026-08-09.md",
@@ -194,13 +235,15 @@
       "s0a_failure_action": "executed_close_candidate_without_solver_v2_model_gpu_or_outer_test"
     },
     "most_recent_closed_candidate": "open_cta_physical_grid_commutation",
+    "most_recent_source_rejected_candidate": "inverse_healthy_vessel_counterfactual_editing",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
       "geometry_boundary_condition_shape_response_operator",
       "cross_protocol_4d_flow_posterior_prediction",
       "annotation_selection_aware_mixed_granularity_anatomy_structured_lesion_set_inference",
-      "goal_oriented_hemodynamic_segmentation"
+      "goal_oriented_hemodynamic_segmentation",
+      "inverse_healthy_vessel_counterfactual_editing"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -224,7 +267,12 @@
       "resolution_invariant_autoencoder",
       "random_finite_set_probabilistic_detection",
       "lesion_detr_variable_cardinality_set_prediction",
-      "topology_or_shape_guided_aneurysm_segmentation"
+      "topology_or_shape_guided_aneurysm_segmentation",
+      "supervised_aneurysm_surface_segmentation",
+      "forward_healthy_vessel_generation_and_localized_aneurysm_editing",
+      "morphology_conditioned_aneurysm_mesh_generation",
+      "generic_healthy_counterfactual_anomaly_localization",
+      "generic_point_cloud_reconstruction_anomaly_detection"
     ]
   },
   "venue": {
@@ -238,7 +286,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_no_active_problem_after_open_cta_p0_execution_incomplete",
+    "required_headline_domain": "unselected_no_active_problem_after_inverse_counterfactual_source_rejection",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -303,7 +351,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "none",
-    "active_candidate_status": "none_after_open_cta_p0_execution_incomplete_without_scientific_verdict_or_rerun",
+    "active_candidate_status": "none_after_inverse_counterfactual_source_audit_rejection_with_open_cta_no_repair_boundary_preserved",
     "candidate_primary_estimand": "none",
     "candidate_secondary_estimand": "none",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -629,7 +677,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_open_cta_p0_execution_incomplete",
+    "current_headline_architecture": "unselected_no_active_problem_after_inverse_counterfactual_source_rejection",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

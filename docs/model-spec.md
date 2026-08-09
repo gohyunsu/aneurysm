@@ -10,13 +10,21 @@ supervision-semantics candidate rejected · goal-oriented hemodynamic
 segmentation asset component failed 5/9 and candidate closed · active problem
 shortlist 0 after open-CTA physical-grid P0 execution-incomplete/no scientific
 verdict/no parser repair or rerun · primary problem, method and architecture
-unselected · no GPU/outer test
+unselected · inverse healthy-vessel counterfactual candidate rejected 27/40 ·
+no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
 현재 구현하거나 선택한 headline architecture와 active shortlist는 없다.
+가장 최근의 source audit에서 검토한 inverse editor도 architecture로 선택하지
+않았다. Aneumo release에는 observed aneurysm surface와 같은 anatomy의 healthy
+counterpart·ostium/edit parameter가 없고 IntrA도 real counterfactual target을
+제공하지 않는다. 따라서 \(p(H,Z\mid Y)\)를 graph diffusion, flow matching,
+VAE 또는 transformer로 parameterize하는 설계는 지금 단계에서 fancy한
+architecture가 아니라 식별되지 않는 target 위의 구현 선택일 뿐이다.
+
 Open-CTA physical-coordinate P0는 model이 아닌 asset/task-unit 감사였고,
 exact `b437875…` 실행이 DICOM undefined-length Procedure Code Sequence에서
 frozen parser incompatibility로 종료됐다. Gate는 미평가이고 PixelData/STL,
@@ -33,6 +41,12 @@ Parser를 보강한 P0r이나 같은 데이터의 local repair는 등록 계약�
 Architecture를 검토할 수 있는 가장 이른 시점은 별도 fresh problem audit가
 task unit·asset·direct-prior gap과 method-free adequacy를 통과한 뒤다. Open-CTA
 가설과 direct-prior 계보는 history로 남지만 backbone이나 loss 선택 근거가 아니다.
+
+향후 별도 fresh candidate가 paired healthy/pathological asset과 real evaluation을
+독립적으로 확보하더라도 SynVA/AneuG forward editing, supervised surface
+segmentation, healthy counterfactual anomaly localization과 point-cloud normal
+reconstruction을 mandatory baseline으로 둔다. 이때도 editor cycle, GNN,
+diffusion/flow matching 또는 reconstruction residual 자체를 novelty로 세지 않는다.
 
 직전 TopAneu attachment lead는 29/40이며 terms/payload 0으로 보존한다. Open
 CTA는 52-class location supervision을 제공하지 않으므로 이를 TopAneu의 대체

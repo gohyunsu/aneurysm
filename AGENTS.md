@@ -29,7 +29,12 @@ conditional shortlist로 남기고, DICOM header/STL payload 전에 exact P0를
 등록했다. Exact `b437875…` one-shot P0는 DICOM undefined-length Procedure Code
 Sequence에서 frozen parser incompatibility로 exit 1이었다. Scientific gate는
 미평가이고 PixelData/STL access는 0이다. Parser repair/rerun 없이 후보를 닫아
-active shortlist는 다시 0이다.
+active shortlist는 다시 0이다. 이어서 inverse healthy-vessel counterfactual과
+localized aneurysm editing을 하나의 posterior로 역추론하는 후보를 감사했지만,
+Aneumo의 released healthy/pathological pair·ostium/edit manifest 부재,
+IntrA의 same-patient healthy counterfactual·명시적 repository license 부재와
+SynVA/AneuG/counterfactual anomaly·point-cloud reconstruction direct prior 때문에
+27.0/40으로 기각했다. Executable P0, method, architecture와 GPU는 0이다.
 
 ## 1. 연구의 현재 기준선
 
@@ -40,7 +45,9 @@ active shortlist는 다시 0이다.
   shortlist는 **0개**다. Open-CTA physical-grid 후보의 source-only score
   32.0/40과 registered P0 history는 보존하지만, P0가 execution-incomplete로
   끝나 primary selection이나 contribution이 아니다.
-  직전 TopAneu attachment source audit은 29.0/40으로 기준을 통과하지 못했다.
+  가장 최근 inverse healthy-vessel counterfactual/editing source audit은
+  27.0/40으로 기각했고, 직전 TopAneu attachment source audit도 29.0/40으로
+  기준을 통과하지 못했다.
   Goal-oriented
   hemodynamic segmentation은 CTA
   boundary displacement를 PDE adjoint shape sensitivity에 signed projection해
@@ -871,10 +878,15 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 
 - private 운영 가이드는 Git에서 제외된 `SERVER_GUIDE.md`다. endpoint,
   password, private key, 내부 데이터 절대경로를 공개 문서에 옮기지 않는다.
-- `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사한다.
-  새 GPU 실험은 `junjinyong`의 PBS allocation에서만 실행한다. 어느 서버에서도
-  login node GPU를 사용하지 않으며, source asset을 서버 사이에 임의 복제하지
-  않는다.
+- `introai9`는 뇌동맥류 source asset과 manifest를 읽기 전용으로 감사하고,
+  CPU/PBS 및 향후 gate-authorized GPU 실험도 이 계정의 scheduler allocation에서만
+  실행한다. 허용 queue ACL은 `coss_agpu`와 `coss_a6gpu`에서 확인했지만 현재
+  AURORA GPU job은 0개다. 새 후보가 gate를 통과한 뒤 첫 allocation에서
+  GPU/runtime smoke와 실제 사양을 다시 기록한다.
+- `junjinyong`은 다른 연구가 사용 중이므로 AURORA에서는 접속, job 제출,
+  상태 조회와 모니터링을 모두 금지한다. 과거 실행 기록과 frozen config/PBS는
+  provenance로만 보존하고 재제출하지 않는다. 어느 서버에서도 login node GPU를
+  사용하지 않으며, source asset을 서버 사이에 임의 복제하지 않는다.
 - 이전 실행 계정에서 완료된 compact-cache 재생성은 byte-range/CRC와
   등록 SHA가 일치함을 확인하는 asset audit일 뿐 GPU 결과가 아니다. 어느
   서버에서도 login node에서 GPU 학습이나 `nvidia-smi`를 실행하지 않는다.
@@ -931,7 +943,7 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
   exit 1이었다. Source는
   read-only였고 private cache/result는 생성되지 않았다. 2021 RAW/field, 2025
   PAR/REC, checkpoint와 GPU read는 0이다. Gate는 미평가이고 no-rerun rule에
-  따라 dependency 보충, I0c와 `junjinyong` GPU training은 열리지 않는다.
+  따라 dependency 보충, I0c와 어떤 GPU training도 열리지 않는다.
 - 2026-08-03 Aneumo 공식 ZIP64 release를 HTTP byte-range로 감사해 첫
   shard의 geometry 1--40마다 8개 steady mass-flow condition이 있음을
   확인했다. Geometry 1의 두 internal NPY는 CRC와

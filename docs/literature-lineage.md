@@ -183,6 +183,37 @@ geometric operator learning과 Shape-DINO가 직접 다루므로 두 후보를 �
 - [Bayesian longitudinal growth detection](https://arxiv.org/abs/2604.06649)
 - [Shape-DINO](https://arxiv.org/abs/2603.03211)
 
+### 0.4 Inverse healthy-vessel counterfactual과 aneurysm editing
+
+병변이 있는 surface (Y)에서 healthy parent vessel (H)와 localized edit
+(Z)를 역추론하는 문제는 시각적으로 해석하기 좋지만, 구성요소의 상당 부분이
+이미 직접 다뤄졌다. IntrA는 whole-vessel와 local aneurysm/healthy surface
+segmentation benchmark를 제공하고, SynVA는 healthy vasculature generation 뒤
+ostium-conditioned aneurysm editing을 수행한다. AneuG는 morphology-conditioned
+aneurysm mesh generation을, 의료 counterfactual anomaly 연구와 ORBIT은
+structured healthy reconstruction을, WACV/PCDiff 계열은 point-cloud normal
+reconstruction과 anomaly localization을 다룬다. 따라서 surface network,
+healthy generator, forward editor, VAE/diffusion 또는 reconstruction residual을
+결합하는 것 자체는 novelty가 아니다.
+
+남을 수 있는 질문은 하나의 pathological surface로부터 **joint posterior**
+(p(H,Z\mid Y))를 식별하고 real counterfactual correctness를 검증하는가이다.
+그러나 current Aneumo release는 base-family deformation mapping만 제공하며
+released healthy/pathological counterpart·ostium/edit-parameter manifest가 없다.
+IntrA도 같은 환자의 병변 전 healthy vessel을 제공하지 않는다. Synthetic
+editor의 자기복원 cycle은 forward model consistency일 뿐 real healthy anatomy의
+정답 검증이 아니다. 이 때문에 후보는 27/40으로 source rejection했고 pseudo-
+healthy target, executable P0와 architecture를 만들지 않았다.
+
+- [IntrA official repository](https://github.com/intra3d2019/IntrA)
+- [SynVA healthy vasculature and aneurysm editing](https://arxiv.org/abs/2605.17620)
+- [AneuG (MICCAI 2025)](https://papers.miccai.org/miccai-2025/paper/1474_paper.pdf)
+- [Counterfactual anomaly detection (IEEE TMI 2024)](https://pubmed.ncbi.nlm.nih.gov/39269801/)
+- [ORBIT structured healthy counterfactual](https://openreview.net/forum?id=n5penvYg4j)
+- [Point-cloud anomaly reconstruction (WACV 2023)](https://openaccess.thecvf.com/content/WACV2023/papers/Bergmann_Anomaly_Detection_in_3D_Point_Clouds_Using_Deep_Geometric_Descriptors_WACV_2023_paper.pdf)
+- [PCDiff](https://arxiv.org/abs/2606.25740)
+- [Detailed AURORA source audit](inverse-aneurysm-editing-audit-2026-08-09.md)
+
 ## 1. 계보
 
 ### 1.0 4D-flow MRI reconstruction과 uncertainty의 직접 계보

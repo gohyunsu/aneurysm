@@ -1,5 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-09 inverse-counterfactual source audit:** Current Aneumo의
+> `Connection.csv`/`MPs.csv`와 pinned 64-case cache는 base-family deformation과
+> aneurysm morphometry를 제공하지만 released healthy counterpart·ostium/edit
+> pair를 식별하지 않는다. 초기 10,000-model preprint의 aneurysm-free count를
+> 현재 10,660-geometry release에 소급하지 않는다. IntrA의 103 whole-vessel
+> model/116 annotated local segment도 real healthy counterfactual 정답이 아니며
+> repository license가 명시되지 않았다. 따라서 inverse healthy-vessel editing은
+> 27.0/40으로 기각했고 payload/model/GPU는 열지 않았다. 상세 근거는
+> [`inverse-aneurysm-editing-audit-2026-08-09.md`](inverse-aneurysm-editing-audit-2026-08-09.md)를
+> 따른다.
+
 > **2026-08-09 open-CTA P0 outcome:** Zenodo `15697196`의 ZIP64 central
 > directory와 `Metadata.csv`만 먼저 range-read해 172 case, 122 lesion과 24
 > multi-lesion case를 확인했다. DICOM header·PixelData와 STL payload를 읽기

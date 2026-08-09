@@ -10,14 +10,20 @@
 
 | 서버 계정 | 역할 | 허용 작업 |
 |---|---|---|
-| `introai9` | source asset registry·데이터 감사 | 원본·추출본·매니페스트 read-only 확인, CPU metadata/asset audit |
-| `junjinyong` | GPU 실행 목표·scheduler provenance | PBS allocation 안의 pinned-container smoke·학습·평가 |
+| `introai9` | AURORA의 유일한 source·compute 대상 | 원본·매니페스트 read-only 감사, CPU/PBS, gate가 허용한 GPU smoke·학습·평가 |
+| `junjinyong` | AURORA 실행 제외 | 다른 연구가 사용 중이므로 접속·제출·상태 조회·모니터링 금지; 과거 provenance만 보존 |
 
 원자료를 로컬 저장소에 내려받거나 서버 사이에 전체 복제하지 않는다. 실행
 서버에서는 필요한 source root를 read-only로 bind하고 run output만 writable로
 둔다. 어느 서버에서도 login node GPU를 사용하지 않는다. `introai9`의 asset을
-서버 사이에 임의 복제하지 않으며, `junjinyong`에서 필요한 read-only staging과
-container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않는다.
+서버 사이에 임의 복제하지 않는다. `coss_agpu`와 `coss_a6gpu` queue ACL은
+확인했지만 현재 AURORA GPU job은 0개다. 새 후보가 prospective gate로 GPU를
+허용한 뒤 첫 `introai9` allocation에서 container·cache SHA와 GPU/runtime smoke를
+확인하기 전 learned job을 제출하지 않는다.
+
+이 정책은 2026-08-09 이후 새 실행에 적용한다. 아래의 `junjinyong` 언급과
+`ssu_a6gpu_*` 파일명은 이미 끝난 run의 재현 이력이며, 새 제출 대상으로
+해석하거나 복사하지 않는다.
 
 ## 2026-08-09 · Open-CTA physical-coordinate P0 execution-incomplete
 
@@ -34,9 +40,9 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
   않았고 STL 단계에는 도달하지 않았다. Scientific gate와 P0 result는 없다.
 - 결과를 본 뒤 parser, tolerance, threshold나 selection을 고쳐 같은 P0를
   반복하지 않는다. 후보는 execution-incomplete/no scientific verdict로 닫고
-  P1과 `junjinyong` PBS GPU job을 제출하지 않는다.
-- `introai9`는 계속 source asset read-only 역할이고 이 공개 Zenodo P0를 대신
-  실행하거나 GPU 서버로 사용하지 않는다.
+  P1과 어떤 PBS GPU job도 제출하지 않는다.
+- `introai9`로 계산 대상을 통합했지만, 닫힌 공개 Zenodo P0를 그 서버에서
+  대신 실행하거나 같은 계약으로 반복하지 않는다.
 
 ## 2026-08-09 · Fresh TopAneu/open-CTA source audit
 
@@ -73,8 +79,8 @@ container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않�
 
 ### CMHA private staging boundary
 
-- 최초에는 Windows SSH config의 `SN_introai9_39` alias에서 당시 가정한
-  project root만 읽기 전용 검색해 CMHA archive를 찾지 못했다. 이 제한된
+- 최초에는 로컬에 등록된 source-server 연결에서 당시 가정한 project root만
+  읽기 전용 검색해 CMHA archive를 찾지 못했다. 이 제한된
   위치 추론은 이후 더 넓은 source-root discovery에서 세 official archive를
   찾고 size/MD5 3/3을 확인하면서 폐기됐다.
   `junjinyong` home에도 official archive와 table은 없었다.
@@ -187,7 +193,7 @@ privacy-safe aggregate는
   환경으로만 주입하며 GPU resource와 `nvidia-smi`는 요청하지 않는다.
 - 2025 intervention release의 132 REC member는 존재/byte contract만 확인하고
   payload는 읽지 않는다. Checkpoint, method와 GPU는 사용하지 않는다.
-- Pass도 `junjinyong` GPU job을 열지 않는다. 별도 method-free I0c decoder/noise
+- Pass도 GPU job을 열지 않는다. 별도 method-free I0c decoder/noise
   protocol을 public exact commit으로 먼저 고정해야 한다. Failure 뒤 local
   registration·mask·threshold 수선이나 I0b rerun은 금지한다.
 - **Outcome:** exact source `0ebdb344…`의 PBS job `115093`은 8 CPU/48 GB,

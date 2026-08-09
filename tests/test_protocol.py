@@ -19,18 +19,54 @@ class ProtocolTests(unittest.TestCase):
         self.assertGreaterEqual(len(checks), 8)
         self.assertEqual(len(canonical_hash(self.protocol)), 64)
 
+    def test_compute_is_introai9_only_and_currently_idle(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["project"]["execution_server"] = "junjinyong"
+        with self.assertRaisesRegex(ProtocolError, "introai9-only"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["project"]["current_gpu_job_count"] = 1
+        with self.assertRaisesRegex(ProtocolError, "no active GPU job"):
+            validate_protocol(candidate)
+
     def test_no_active_problem_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "execution-incomplete boundary"):
+        with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "execution-incomplete boundary"):
+        with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "execution-incomplete boundary"):
+        with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
+            validate_protocol(candidate)
+
+    def test_inverse_counterfactual_source_rejection_cannot_register_or_train(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"][
+            "inverse_healthy_vessel_counterfactual_source_audit"
+        ]
+        audit["aneumo_existing_64_case_cache_is_healthy_pathological_paired"] = True
+        with self.assertRaisesRegex(ProtocolError, "inverse-counterfactual"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"][
+            "inverse_healthy_vessel_counterfactual_source_audit"
+        ]
+        audit["executable_p0_registered"] = True
+        with self.assertRaisesRegex(ProtocolError, "inverse-counterfactual"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"][
+            "inverse_healthy_vessel_counterfactual_source_audit"
+        ]
+        audit["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "inverse-counterfactual"):
             validate_protocol(candidate)
 
     def test_closed_goal_oriented_candidate_cannot_be_reopened(self) -> None:

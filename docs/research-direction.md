@@ -7,6 +7,19 @@ preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
 aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · active problem shortlist 0 · primary problem/method/architecture/GPU/outer test unselected · submission blocked
 
+2026-08-09의 후속 fresh audit은 inverse healthy-vessel counterfactual editing을
+검토했지만 **27.0/40으로 기각**했다. Current Aneumo의 10,660 released geometry는
+base-family deformation mapping과 nonzero aneurysm morphometry를 갖지만 published
+healthy counterpart·ostium/edit pair manifest가 없다. IntrA의 103 whole-vessel
+model과 116 annotated local segment도 동일 환자의 healthy counterfactual을
+관측하지 않고 repository license가 명시되지 않았다. SynVA/AneuG forward
+editing, surface segmentation, medical counterfactual reconstruction과 3D
+point-cloud anomaly detection 뒤 남는 inverse-editor posterior만으로는 현재
+자산에서 독립 contribution을 식별할 수 없다. Executable P0와 GPU는 만들지
+않았으며 상세 판정은
+[`inverse-aneurysm-editing-audit-2026-08-09.md`](inverse-aneurysm-editing-audit-2026-08-09.md)에
+있다.
+
 2026-08-09 fresh direct-prior and open-source audit은 physical-coordinate
 lesion-instance grid commutation을 32.0/40의 conditional shortlist로 남겼다.
 그러나 exact `b437875…` P0가 DICOM `(0008,1032)` undefined-length sequence를

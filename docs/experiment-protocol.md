@@ -1,11 +1,33 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.4-draft · 2026-08-09
+버전: 3.5-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## P0-I · inverse healthy-vessel counterfactual · source audit rejected, no execution
+
+관측 aneurysm surface \(Y\)에서 healthy vessel \(H\)와 localized edit \(Z\)의
+posterior를 추론하고 \(E(H,Z)\approx Y\) cycle로 검사하는 문제를 source-only로
+감사했다. 점수는 27.0/40으로 자동 실행 기준 32보다 낮다.
+
+- Current Aneumo mapping은 base-family별 deformation을 연결하지만 released
+  healthy counterpart, ostium/lesion label과 edit parameter를 식별하지 않는다.
+- IntrA는 103 whole-vessel model, 1,909 local segment와 116 expert-annotated
+  aneurysm segment를 기술하지만 real healthy counterfactual과 complete
+  whole/local lesion-instance mapping을 제공하지 않는다. Repository license도
+  명시적으로 확인되지 않았다.
+- SynVA/AneuG forward mesh generation, direct surface segmentation, medical
+  healthy-counterfactual anomaly localization과 3D point-cloud reconstruction은
+  모두 mandatory direct prior다.
+
+이 source audit에는 payload download, split, threshold, seed, executable P0,
+model, checkpoint 또는 PBS/GPU job이 없다. Synthetic pseudo-healthy geometry를
+새 정답으로 만들어 같은 후보를 repair하지 않는다. 상세 근거는
+`docs/inverse-aneurysm-editing-audit-2026-08-09.md`에 보존하며 다음 허용 작업은
+다른 fresh problem-level audit다.
 
 ## P0-C · Open-CTA physical-coordinate asset gate · execution-incomplete, closed
 

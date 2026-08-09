@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · active shortlist 0 after open-CTA P0 execution-incomplete · no method/architecture/GPU · not submission-ready",
+    status: "Target locked · active shortlist 0 after inverse-counterfactual source rejection · introai9-only compute · no method/architecture/GPU · not submission-ready",
     requirement: "fresh problem audit → method-free adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Inverse healthy-vessel counterfactual is rejected",
+      copy: "The candidate would infer a posterior over a healthy parent vessel and localized aneurysm edit from one pathological surface. Current Aneumo assets connect base-family deformations, not released healthy/pathological pairs with ostium or edit parameters; IntrA does not provide the same patient's healthy counterfactual. Forward editing, counterfactual anomaly localization and point-cloud normal reconstruction are direct priors. The residual inverse claim is not verifiable with the available assets.",
+      status: "27/40 · source rejected · no P0/method/architecture/GPU",
+      url: "../docs/inverse-aneurysm-editing-audit-2026-08-09.md"
+    },
     {
       year: "2026.08",
       title: "Physical-coordinate P0 closes execution-incomplete",
@@ -324,6 +331,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "operations",
+      title: "AURORA compute moves exclusively to introai9",
+      copy: "junjinyong is occupied by another research topic and is excluded from AURORA access, submission, status polling and monitoring. introai9 is now the sole source-audit and scheduled-compute target. Access and coss_agpu/coss_a6gpu ACL compatibility were checked read-only; no AURORA GPU job is active. A future candidate must first pass its prospective gate, then record a scheduler-allocated GPU/runtime smoke before learned work.",
+      files: ["AGENTS.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.09",
+      category: "decision",
+      title: "Inverse healthy-vessel counterfactual is rejected at source audit",
+      copy: "The inverse healthy-vessel/edit posterior candidate scores 27/40. Current Aneumo does not release the healthy/pathological counterpart and ostium/edit manifest needed for paired validation; IntrA lacks same-patient healthy counterfactual ground truth and an explicit repository license. SynVA/AneuG, supervised surface isolation, medical counterfactual anomaly localization and point-cloud reconstruction are direct priors. We register no P0, method, architecture or GPU job and keep the active shortlist at zero.",
+      files: ["docs/inverse-aneurysm-editing-audit-2026-08-09.md", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/literature-lineage.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "execution",

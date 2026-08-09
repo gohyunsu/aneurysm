@@ -14,6 +14,26 @@ identity는 모두 0입니다. 질문, 직접 선행과 정확한 판정은
 [`open-CTA physical-grid audit`](docs/open-cta-physical-grid-audit-2026-08-09.md)에
 있습니다.
 
+가장 최근의 fresh source audit은 aneurysm-bearing surface에서 healthy
+parent-vessel counterfactual과 localized lesion edit를 함께 추론하는 inverse
+editing 문제를 검토했습니다. 그러나 현재 pinned Aneumo release는 같은 base
+family의 deformation만 연결할 뿐 released healthy counterpart·ostium/edit
+manifest를 제공하지 않고, IntrA는 103 whole-vessel model과 116 annotated
+local segment를 제공하지만 동일 환자의 healthy counterfactual 정답과 명시적
+repository license가 없습니다. SynVA/AneuG, surface segmentation, 의료
+counterfactual anomaly localization과 point-cloud reconstruction도 직접 선행으로
+존재합니다. 따라서 이 후보는 **27.0/40으로 기각**했으며 executable P0, method,
+architecture와 GPU를 만들지 않았습니다. 근거는
+[`inverse healthy-vessel counterfactual audit`](docs/inverse-aneurysm-editing-audit-2026-08-09.md)에
+보존합니다.
+
+계산 대상도 2026-08-09에 명시적으로 정리했습니다. AURORA의 source audit,
+CPU/PBS와 향후 gate-authorized GPU 실험은 `introai9`에서만 수행합니다.
+`junjinyong`은 다른 연구가 사용 중이므로 접속·제출·상태 조회·모니터링 대상에서
+제외했고, 현재 AURORA GPU job은 0개입니다. 새 후보가 prospective gate를
+통과할 때만 `introai9` scheduler allocation에서 GPU/runtime smoke부터 다시
+기록합니다. 내부 endpoint와 경로는 공개하지 않습니다.
+
 공개 multi-center CTA archive는 전체 25.58 GB를 내려받지 않고 ZIP64 중앙
 디렉터리와 16 KB metadata member만 range-read했습니다. 172 case, 122 lesion,
 24 multi-lesion case와 source-reported 0.5--2 mm slice thickness를 확인했지만,
