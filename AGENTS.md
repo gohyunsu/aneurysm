@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 FSI–wall deployment overlay:** Exact source content
+> `f92bae804469d806e3d48079246a2a889a97c08a`의 Quality run `31334866427`과
+> Pages run `31334866034`이 성공했다. Pages build API의 commit field는 직전
+> `d847f28…`을 표시하는 race/stale metadata를 보였지만, live overview와 field
+> guide는 FSI–wall best 31.0/40, all rejected, active shortlist/primary/method/
+> architecture/P0/GPU 0과 detailed audit link를 렌더링하고 상세 audit URL도
+> HTTP 200이다. Live content를 deployment evidence로 기록하되 API commit
+> mismatch를 exact-content pin으로 과장하지 않는다. 이 배포 확인은 score,
+> payload, P0, model, compute, outer test 또는 submission identity를 바꾸지
+> 않는다. `introai9`만 허용하고 `junjinyong`은 계속 완전히 제외한다.
+
 > **2026-08-10 FSI–wall source-audit overlay:** Fresh source-only batch는
 > rigid-to-compliant discrepancy operator, dynamic-geometry inverse wall
 > property, compliance-conditioned flow-diverter response, lumen-to-wall-

@@ -4,6 +4,18 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · FSI–wall rejection is live and verified
+
+- Exact source content `f92bae804469d806e3d48079246a2a889a97c08a` passed
+  Quality run `31334866427`; Pages run `31334866034` also succeeded.
+- The Pages build API exposed stale/racing prior-SHA metadata, so it is not
+  represented as an exact-content pin. Direct live checks render FSI–wall best
+  31.0/40, all rejected, shortlist/primary/method/architecture/P0/GPU zero and
+  the detailed audit URL returns HTTP 200.
+- Deployment verification changes no score, payload access, P0, model, compute,
+  outer test or submission identity. `introai9` remains exclusive and
+  `junjinyong` remains excluded.
+
 ## 2026-08-10 · FSI–wall batch is rejected before payload and compute
 
 - Rigid-to-compliant discrepancy, inverse wall property, device response,

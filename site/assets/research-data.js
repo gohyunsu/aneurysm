@@ -512,6 +512,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "FSI–wall rejection is live",
+      copy: "Exact source content f92bae804469d806e3d48079246a2a889a97c08a passed Quality run 31334866427 and Pages run 31334866034 succeeded. The Pages build API exposed stale prior-SHA metadata, so it is not treated as an exact-content pin; direct live checks render FSI–wall best 31.0/40, all rejected, active shortlist/primary/method/architecture/P0/GPU zero, and the detailed audit URL returns HTTP 200. Deployment verification changes no scientific boundary. introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "FSI–wall candidates stop before payload and compute",
       copy: "Rigid-to-compliant discrepancy, inverse wall property, compliance-conditioned device response, wall-thickness hotspot, selective FSI referral and multi-granularity conformal surrogation score 30.5/29.5/26.5/24.5/29.0/31.0. AnXplore reports 101 rigid/FSI simulations, but the verified public full-dataset tree exposes fluid meshes rather than paired time-resolved rigid/FSI fields. Generic FSI operators, multi-fidelity residuals and conformal referral are direct priors. Schema 4.8 freezes no mesh/field/image/P0/model/GPU, introai9-only execution and complete exclusion of junjinyong.",
