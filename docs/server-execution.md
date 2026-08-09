@@ -19,6 +19,22 @@
 서버 사이에 임의 복제하지 않으며, `junjinyong`에서 필요한 read-only staging과
 container·cache SHA smoke를 확인하기 전 learned job을 제출하지 않는다.
 
+## 2026-08-09 · Fresh TopAneu/open-CTA source audit
+
+- `junjinyong`은 `/etc/profile` 뒤 PBS와 Singularity를 확인했고 public-key
+  연결도 정상이다. Active problem이 없으므로 GPU allocation, training과
+  `nvidia-smi`는 실행하지 않았다.
+- `introai9`는 Windows SSH config의 공식 alias로 read-only 연결했다. 알려진
+  top-level source root와 `AAAI/datasets`, `AAAI/data`의 bounded depth에서
+  TopAneu/open-CTA 이름의 staged asset을 찾지 못했다. 이는 서버 전체 부재
+  증거가 아니며 recursive unbounded search는 약 1분 뒤 중단했다.
+- TopAneu는 verified account와 terms가 필요해 사용자를 대신해 download하거나
+  staging하지 않았다. Image/mask/JSON payload access는 0이다.
+- Open CTA는 Zenodo endpoint에서 전체 archive 없이 ZIP64 central directory와
+  metadata CSV 한 member만 range-read했다. DICOM header/pixel, STL과 full
+  archive는 읽지 않았다. 이 local network discovery는 PBS/GPU experiment가
+  아니며 external-stress feasibility만 기록한다.
+
 ## 2026-08-09 · Goal-oriented S0a runtime discovery
 
 - `junjinyong` login node에서 `/etc/profile` 뒤 PBS `qsub/qstat`, target queue와

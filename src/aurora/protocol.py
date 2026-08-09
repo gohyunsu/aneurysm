@@ -49,6 +49,8 @@ REQUIRED_DATASETS = {
     "flow_mri_dual_venc_phantoms_2025",
     "flow_mri_intervention_phantoms_2025",
     "rsna_ica_2025_controlled_access",
+    "open_multicenter_cta_2026_zenodo_15697196",
+    "topaneu_2026_terms_gated",
 }
 
 
@@ -114,8 +116,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "2.9":
-        raise ProtocolError("The current research-state schema must be version 2.9.")
+    if protocol["schema_version"] != "3.0":
+        raise ProtocolError("The current research-state schema must be version 3.0.")
 
     project = protocol["project"]
     _require_keys(project, ["name", "status", "clinical_use"], "project")
@@ -145,6 +147,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "source_only_dataset_substitution_screen",
+            "topaneu_attachment_source_audit",
             "rsna_supervision_semantics_red_team",
             "goal_oriented_segmentation_cold_audit",
             "most_recent_closed_candidate",
@@ -155,7 +158,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_after_goal_oriented_asset_component_failure"
+        != "no_active_problem_after_topaneu_attachment_candidate_not_admitted"
         or problem_selection["shortlisted_candidate"]
         != "none"
         or problem_selection["candidate_dataset"]
@@ -163,7 +166,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["candidate_estimand"]
         != "none"
         or problem_selection["asset_access_status"]
-        != "cmha_asset_component_failed_5_of_9_exact_lesion_linkage_unsupported"
+        != "topaneu_terms_not_user_accepted_payload_not_accessed_open_cta_metadata_range_audited_only"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -173,15 +176,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "conduct_a_new_problem_level_primary_source_and_asset_audit_without_repairing_closed_candidates"
+        != "continue_fresh_problem_audits_or_after_explicit_topaneu_terms_acceptance_register_read_only_p0_asset_semantics_audit"
         or problem_selection["audit_document"]
-        != "docs/goal-oriented-segmentation-audit-2026-08-09.md"
+        != "docs/topaneu-attachment-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "goal_oriented_hemodynamic_segmentation"
     ):
         raise ProtocolError(
             "The conditional-problem boundary must retain no active shortlist, method, GPU, "
-            "or outer test after the goal-oriented asset failure."
+            "or outer test after the TopAneu source audit."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -204,6 +207,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "inverse_navier_stokes_shape_gradient_boundary_segmentation",
         "task_based_quantitative_segmentation_evaluation",
         "adjoint_or_shape_derivative_general_method",
+        "soft_vessel_distance_or_vesselness_prior",
+        "patient_specific_centerline_graph_or_gnn",
+        "parent_artery_classification",
+        "generic_hierarchical_or_universal_taxonomy_loss",
+        "generic_joint_aneurysm_vessel_multitask_segmentation",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
     substitution_screen = problem_selection["source_only_dataset_substitution_screen"]
@@ -231,6 +239,96 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError(
             "The source-only dataset substitution screen must preserve its no-payload, "
             "no-method decision and all four audited alternatives."
+        )
+    topaneu_audit = problem_selection["topaneu_attachment_source_audit"]
+    _require_keys(
+        topaneu_audit,
+        [
+            "status",
+            "audit_document",
+            "candidate_hypothesis",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "topaneu_official_challenge",
+            "topaneu_live_training_scans",
+            "topaneu_live_unique_patients",
+            "topaneu_live_location_classes",
+            "topaneu_vessel_mask_provenance",
+            "topaneu_user_terms_accepted_verified",
+            "topaneu_payload_accessed",
+            "ambiguity_reference_distribution_verified",
+            "open_cta_discovery_result",
+            "open_cta_discovery_result_sha256",
+            "open_cta_discovery_scope",
+            "open_cta_archive_entries",
+            "open_cta_cases",
+            "open_cta_lesions",
+            "open_cta_multi_lesion_cases",
+            "direct_prior_threats",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "decision",
+            "next_gate",
+        ],
+        "problem_selection.topaneu_attachment_source_audit",
+    )
+    if (
+        topaneu_audit["status"]
+        != "completed_source_only_conditional_lead_not_admitted"
+        or topaneu_audit["audit_document"]
+        != "docs/topaneu-attachment-audit-2026-08-09.md"
+        or topaneu_audit["candidate_hypothesis"]
+        != "patient_specific_vascular_attachment_consistent_lesion_segmentation_and_location_projection"
+        or topaneu_audit["score"] != 29.0
+        or topaneu_audit["maximum_score"] != 40.0
+        or topaneu_audit["automatic_selection_threshold"] != 32.0
+        or topaneu_audit["score"] >= topaneu_audit["automatic_selection_threshold"]
+        or topaneu_audit["active_shortlist_count"] != 0
+        or topaneu_audit["topaneu_official_challenge"] != "miccai_2026"
+        or topaneu_audit["topaneu_live_training_scans"] != 417
+        or topaneu_audit["topaneu_live_unique_patients"] != 409
+        or topaneu_audit["topaneu_live_location_classes"] != 52
+        or topaneu_audit["topaneu_vessel_mask_provenance"]
+        != "organizer_model_prediction_silver_not_ground_truth"
+        or topaneu_audit["topaneu_user_terms_accepted_verified"] is not False
+        or topaneu_audit["topaneu_payload_accessed"] is not False
+        or topaneu_audit["ambiguity_reference_distribution_verified"] is not False
+        or topaneu_audit["open_cta_discovery_result"]
+        != "results/open_multicenter_cta_metadata_discovery_20260809.json"
+        or topaneu_audit["open_cta_discovery_result_sha256"]
+        != "8ed7fa00f10bc81e3db5cfed1b26fa8f5c910ab7edc78b1384f3c8e6bcabb3ed"
+        or topaneu_audit["open_cta_discovery_scope"]
+        != "zip64_central_directory_and_metadata_csv_member_only_no_dicom_header_pixel_or_stl_payload"
+        or topaneu_audit["open_cta_archive_entries"] != 149452
+        or topaneu_audit["open_cta_cases"] != 172
+        or topaneu_audit["open_cta_lesions"] != 122
+        or topaneu_audit["open_cta_multi_lesion_cases"] != 24
+        or set(topaneu_audit["direct_prior_threats"])
+        != {
+            "soft_vessel_distance_or_vesselness_prior",
+            "patient_specific_centerline_graph_or_gnn",
+            "parent_artery_classification",
+            "generic_hierarchical_or_universal_taxonomy_loss",
+            "generic_joint_aneurysm_vessel_multitask_segmentation",
+        }
+        or topaneu_audit["method_selected"] is not False
+        or topaneu_audit["architecture_selected"] is not False
+        or topaneu_audit["gpu_training_authorized"] is not False
+        or topaneu_audit["outer_test_authorized"] is not False
+        or topaneu_audit["submission_identity_active"] is not False
+        or topaneu_audit["decision"]
+        != "retain_as_conditional_lead_below_admission_threshold_with_no_active_problem"
+        or topaneu_audit["next_gate"]
+        != "explicit_user_terms_acceptance_then_prospectively_register_cpu_read_only_p0_asset_and_supervision_semantics_audit_or_continue_other_fresh_problem_audits"
+    ):
+        raise ProtocolError(
+            "The TopAneu attachment audit must remain a below-threshold source-only "
+            "conditional lead with no accepted terms, payload, method, GPU, or outer test."
         )
     semantics_audit = problem_selection["rsna_supervision_semantics_red_team"]
     _require_keys(
@@ -527,7 +625,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_no_active_problem_after_goal_oriented_asset_failure"
+        != "unselected_no_active_problem_after_topaneu_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -691,7 +789,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "none"
         or task["active_candidate_status"]
-        != "closed_after_goal_oriented_s0a_asset_component_failed_5_of_9"
+        != "none_after_topaneu_conditional_lead_not_admitted_goal_oriented_closed_5_of_9"
         or task["candidate_primary_estimand"]
         != "none"
         or task["candidate_secondary_estimand"]
@@ -785,6 +883,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     rsna_ica = next(
         item for item in datasets if item["name"] == "rsna_ica_2025_controlled_access"
     )
+    open_cta = next(
+        item
+        for item in datasets
+        if item["name"] == "open_multicenter_cta_2026_zenodo_15697196"
+    )
+    topaneu = next(
+        item for item in datasets if item["name"] == "topaneu_2026_terms_gated"
+    )
     if (
         cmha["field_provenance"] != "real_cfd"
         or cmha.get("role") != "closed_goal_oriented_s0a_asset_history_not_an_active_primary"
@@ -838,6 +944,46 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError(
             "RSNA-ICA must remain controlled-access, patient-split, unstaged, "
             "method/GPU-disabled, and rejected for the mixed-granularity shortlist."
+        )
+    if (
+        open_cta.get("field_provenance") != "none"
+        or open_cta.get("split_unit") != "patient"
+        or open_cta.get("role")
+        != "future_external_small_lesion_multi_lesion_and_center_shift_stress_only_after_independent_problem_gate"
+        or open_cta.get("status")
+        != "zip64_central_directory_and_metadata_csv_range_audited_no_dicom_header_pixel_or_stl_payload"
+        or open_cta.get("series") != 172
+        or open_cta.get("controls") != 90
+        or open_cta.get("positive_cases") != 82
+        or open_cta.get("aneurysm_stl") != 122
+        or open_cta.get("multi_lesion_cases") != 24
+        or open_cta.get("metadata_discovery_result")
+        != "results/open_multicenter_cta_metadata_discovery_20260809.json"
+        or open_cta.get("headline_or_training_authorized") is not False
+    ):
+        raise ProtocolError(
+            "Open CTA must remain a metadata-range-audited external stress asset, "
+            "not headline training or TopAneu supervision evidence."
+        )
+    if (
+        topaneu.get("field_provenance") != "none"
+        or topaneu.get("split_unit") != "patient"
+        or topaneu.get("role")
+        != "conditional_p0_candidate_only_after_explicit_user_terms_acceptance_not_training"
+        or topaneu.get("status")
+        != "official_source_audited_terms_not_user_accepted_payload_not_accessed_conditional_lead_29_of_40"
+        or topaneu.get("live_training_scans") != 417
+        or topaneu.get("live_unique_patients") != 409
+        or topaneu.get("location_classes") != 52
+        or topaneu.get("vessel_mask_provenance")
+        != "organizer_model_prediction_silver"
+        or topaneu.get("user_terms_accepted_verified") is not False
+        or topaneu.get("payload_accessed") is not False
+        or topaneu.get("method_or_gpu_authorized") is not False
+    ):
+        raise ProtocolError(
+            "TopAneu must remain terms-gated, unstaged, silver-vessel-aware, and "
+            "method/GPU-disabled while the lead is below admission."
         )
     checks.append("dataset provenance and split units")
 

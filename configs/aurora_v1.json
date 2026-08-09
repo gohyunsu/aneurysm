@@ -1,18 +1,18 @@
 {
-  "schema_version": "2.9",
+  "schema_version": "3.0",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_problem_after_goal_oriented_asset_failure",
+    "status": "failed_branches_preserved_no_active_problem_after_topaneu_source_audit",
     "as_of": "2026-08-09",
     "clinical_use": false
   },
   "problem_selection": {
-    "status": "no_active_problem_after_goal_oriented_asset_component_failure",
+    "status": "no_active_problem_after_topaneu_attachment_candidate_not_admitted",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "none",
-    "asset_access_status": "cmha_asset_component_failed_5_of_9_exact_lesion_linkage_unsupported",
+    "asset_access_status": "topaneu_terms_not_user_accepted_payload_not_accessed_open_cta_metadata_range_audited_only",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -21,8 +21,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "conduct_a_new_problem_level_primary_source_and_asset_audit_without_repairing_closed_candidates",
-    "audit_document": "docs/goal-oriented-segmentation-audit-2026-08-09.md",
+    "next_allowed_action": "continue_fresh_problem_audits_or_after_explicit_topaneu_terms_acceptance_register_read_only_p0_asset_semantics_audit",
+    "audit_document": "docs/topaneu-attachment-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -34,6 +34,44 @@
         "intra_2020",
         "topcow_2024"
       ]
+    },
+    "topaneu_attachment_source_audit": {
+      "status": "completed_source_only_conditional_lead_not_admitted",
+      "audit_document": "docs/topaneu-attachment-audit-2026-08-09.md",
+      "candidate_hypothesis": "patient_specific_vascular_attachment_consistent_lesion_segmentation_and_location_projection",
+      "score": 29.0,
+      "maximum_score": 40.0,
+      "automatic_selection_threshold": 32.0,
+      "active_shortlist_count": 0,
+      "topaneu_official_challenge": "miccai_2026",
+      "topaneu_live_training_scans": 417,
+      "topaneu_live_unique_patients": 409,
+      "topaneu_live_location_classes": 52,
+      "topaneu_vessel_mask_provenance": "organizer_model_prediction_silver_not_ground_truth",
+      "topaneu_user_terms_accepted_verified": false,
+      "topaneu_payload_accessed": false,
+      "ambiguity_reference_distribution_verified": false,
+      "open_cta_discovery_result": "results/open_multicenter_cta_metadata_discovery_20260809.json",
+      "open_cta_discovery_result_sha256": "8ed7fa00f10bc81e3db5cfed1b26fa8f5c910ab7edc78b1384f3c8e6bcabb3ed",
+      "open_cta_discovery_scope": "zip64_central_directory_and_metadata_csv_member_only_no_dicom_header_pixel_or_stl_payload",
+      "open_cta_archive_entries": 149452,
+      "open_cta_cases": 172,
+      "open_cta_lesions": 122,
+      "open_cta_multi_lesion_cases": 24,
+      "direct_prior_threats": [
+        "soft_vessel_distance_or_vesselness_prior",
+        "patient_specific_centerline_graph_or_gnn",
+        "parent_artery_classification",
+        "generic_hierarchical_or_universal_taxonomy_loss",
+        "generic_joint_aneurysm_vessel_multitask_segmentation"
+      ],
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "decision": "retain_as_conditional_lead_below_admission_threshold_with_no_active_problem",
+      "next_gate": "explicit_user_terms_acceptance_then_prospectively_register_cpu_read_only_p0_asset_and_supervision_semantics_audit_or_continue_other_fresh_problem_audits"
     },
     "rsna_supervision_semantics_red_team": {
       "status": "completed_public_primary_sources_no_payload",
@@ -127,7 +165,12 @@
       "cfd_applicability_score",
       "inverse_navier_stokes_shape_gradient_boundary_segmentation",
       "task_based_quantitative_segmentation_evaluation",
-      "adjoint_or_shape_derivative_general_method"
+      "adjoint_or_shape_derivative_general_method",
+      "soft_vessel_distance_or_vesselness_prior",
+      "patient_specific_centerline_graph_or_gnn",
+      "parent_artery_classification",
+      "generic_hierarchical_or_universal_taxonomy_loss",
+      "generic_joint_aneurysm_vessel_multitask_segmentation"
     ]
   },
   "venue": {
@@ -141,7 +184,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_no_active_problem_after_goal_oriented_asset_failure",
+    "required_headline_domain": "unselected_no_active_problem_after_topaneu_source_audit",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -206,7 +249,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "none",
-    "active_candidate_status": "closed_after_goal_oriented_s0a_asset_component_failed_5_of_9",
+    "active_candidate_status": "none_after_topaneu_conditional_lead_not_admitted_goal_oriented_closed_5_of_9",
     "candidate_primary_estimand": "none",
     "candidate_secondary_estimand": "none",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -494,12 +537,31 @@
     },
     {
       "name": "open_multicenter_cta_2026_zenodo_15697196",
-      "role": "future_external_detection_or_morphometry_audit_after_parent_vessel_supervision_check",
+      "role": "future_external_small_lesion_multi_lesion_and_center_shift_stress_only_after_independent_problem_gate",
       "field_provenance": "none",
       "split_unit": "patient",
-      "status": "public_metadata_only_payload_and_parent_vessel_supervision_not_audited",
+      "status": "zip64_central_directory_and_metadata_csv_range_audited_no_dicom_header_pixel_or_stl_payload",
       "series": 172,
-      "aneurysm_stl": 122
+      "controls": 90,
+      "positive_cases": 82,
+      "aneurysm_stl": 122,
+      "multi_lesion_cases": 24,
+      "metadata_discovery_result": "results/open_multicenter_cta_metadata_discovery_20260809.json",
+      "headline_or_training_authorized": false
+    },
+    {
+      "name": "topaneu_2026_terms_gated",
+      "role": "conditional_p0_candidate_only_after_explicit_user_terms_acceptance_not_training",
+      "field_provenance": "none",
+      "split_unit": "patient",
+      "status": "official_source_audited_terms_not_user_accepted_payload_not_accessed_conditional_lead_29_of_40",
+      "live_training_scans": 417,
+      "live_unique_patients": 409,
+      "location_classes": 52,
+      "vessel_mask_provenance": "organizer_model_prediction_silver",
+      "user_terms_accepted_verified": false,
+      "payload_accessed": false,
+      "method_or_gpu_authorized": false
     },
     {
       "name": "aneux",
@@ -509,7 +571,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_goal_oriented_asset_failure",
+    "current_headline_architecture": "unselected_no_active_problem_after_topaneu_source_audit",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

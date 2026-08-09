@@ -5,6 +5,11 @@
 solver v2/S0b not registered · no method/architecture/GPU/outer test · not
 submission-ready**
 
+후속 fresh 문제 감사는
+[`TopAneu vascular-attachment audit`](topaneu-attachment-audit-2026-08-09.md)에
+분리한다. 그 29/40 조건부 lead는 이 닫힌 후보를 재개방하지 않으며 active
+shortlist는 계속 0이다.
+
 이 문서는 실패한 AURORA BC-operator, Aneumo V1/V1e, 4D-flow 또는 RSNA
 후보를 다른 이름으로 복원하지 않는다. 새 후보가 직접 선행연구와 데이터·실행
 현실성을 통과하는지 문제 수준에서 검사한 기록이다. 방법론적 contribution은

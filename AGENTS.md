@@ -18,6 +18,12 @@ CSV/identifier/NIfTI/STL access 전 asset-component early-stop 등록, inverse
 Navier--Stokes shape-gradient segmentation과 task-based quantitative segmentation
 평가를 추가 direct prior로 올린 novelty red team, 그리고 exact `ef547a4…`
 asset component의 5/9 실패와 goal-oriented 후보 종료를 반영했다.
+2026-08-09의 후속 fresh audit은 TopAneu 2026 live release와 registered design,
+직접 vessel-aware/artery-aware/taxonomy 선행연구를 대조하고 patient-specific
+vascular attachment 가설을 29.0/40의 조건부 lead로만 남겼다. TopAneu terms는
+사용자가 수락했다고 확인되지 않았고 payload는 0이다. 별도 open multi-center
+CTA는 ZIP64 central directory와 metadata CSV만 range-read했으며 DICOM/STL
+payload는 열지 않았다.
 
 ## 1. 연구의 현재 기준선
 
@@ -25,12 +31,14 @@ asset component의 5/9 실패와 goal-oriented 후보 종료를 반영했다.
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
 - 현재 primary problem과 method는 **선택되지 않았다**. Active problem
-  shortlist는 **0개**다. Goal-oriented hemodynamic segmentation은 CTA
+  shortlist는 **0개**다. 가장 최근 TopAneu attachment source audit도
+  29.0/40으로 32점 자동 채택 기준을 통과하지 못했다. Goal-oriented
+  hemodynamic segmentation은 CTA
   boundary displacement를 PDE adjoint shape sensitivity에 signed projection해
   standardized CFD functional error를 줄일 수 있는지 물었지만 S0a asset
   component에서 5/9 실패해 닫혔다. Method, architecture, GPU, outer test와
   paper identity는 모두 미선정이다.
-- 새 후보의 score는 27.0/40로 자동 선택 기준 32에 못 미친다.
+- 닫힌 goal-oriented 후보의 score는 27.0/40로 자동 선택 기준 32에 못 미친다.
   `configs/goal_oriented_segmentation_s0a.json`의 CPU/read-only S0a가 CMHA
   99 patient/105 lesion exact image–surface–table linkage와 별도 pinned
   solver/adjoint runtime의 11개 check를 모두 통과해야 method-free S0b만
@@ -108,14 +116,36 @@ asset component의 5/9 실패와 goal-oriented 후보 종료를 반영했다.
   되돌리지 않는다. 이들은 향후 fully supervised control 또는 vascular
   anatomy pretraining에 쓸 수 있지만, 기각된 annotation-selection estimand의
   대체 근거가 아니다.
+- TopAneu live page는 417 scan/409 unique patient, 52-class location,
+  lesion/type mask와 organizer-predicted vessel mask를 기술한다. Vessel mask는
+  silver prediction이지 ground truth가 아니다. Verified account와 data terms를
+  사용자가 직접 수락했다고 확인되지 않아 image, mask와 JSON payload는 읽지
+  않았다. 에이전트가 가입·동의·download하지 않는다.
+- ARAN은 patient-specific centerline graph, geometry feature GAT와 artery-aware
+  cross-attention을, MICCAI 2024/ICCVW 2025 연구는 soft vessel-distance/vesselness
+  prior를 이미 사용한다. Parent-artery classification, joint lesion/vessel
+  multitask, universal taxonomy와 hierarchical loss도 단독 novelty가 아니다.
+  Attachment에서 mask와 ontology label을 함께 유도하는 가설은 29.0/40의
+  conditional lead일 뿐 active candidate, architecture 또는 contribution이
+  아니다.
+- Open multi-center CTA Zenodo `15697196`은 전체 25,578,845,008-byte archive를
+  받지 않고 ZIP64 central directory와 16,458-byte metadata CSV 한 member만
+  range-read했다. 149,329 DICOM/122 STL, 172 case/122 lesion/24 multi-lesion
+  case를 확인했지만 DICOM header/pixel과 STL payload는 0이다. 이 discovery는
+  external stress feasibility일 뿐 TopAneu supervision, training 또는 rupture-risk
+  evidence가 아니다.
 - 다음 허용 작업은 닫힌 candidate를 수리하지 않는 **fresh problem-level
-  primary-source and asset audit**뿐이다. Goal-oriented S0a를 재실행하거나
+  primary-source and asset audit**, 또는 사용자가 TopAneu terms 수락을 명시한
+  뒤 별도 prospective CPU/read-only P0 asset/semantics audit를 등록하는 것이다.
+  P0 pass도 method-free P1만 열며 method/GPU는 열지 않는다. Goal-oriented S0a를 재실행하거나
   solver v2/S0b를 등록하지 않는다. 새 problem이 별도 task-unit·asset·direct-gap
   gate를 통과하기 전에는 architecture, model training, GPU, outer test와
   submission claim을 만들지 않는다.
 - Vessel graph/GNN, vessel-first nnU-Net, anatomy-masked pooling, location
   transformer, point-to-sphere auxiliary target, generic set prediction, mixed
-  supervision, anatomy prompt, foundation model와 conformal/FDR는 단독 novelty가
+  supervision, anatomy prompt, foundation model, soft vessel-distance/vesselness,
+  patient-specific centerline GAT, parent-artery classifier, universal taxonomy,
+  hierarchy loss, joint lesion/vessel multitask와 conformal/FDR는 단독 novelty가
   아니다. 새 후보에서도 direct prior 또는 strong baseline으로 취급한다.
 - 이전 주 연구 문제: **partial/missing physical-condition operator learning**.
   N1c/V1e/M0 evidence 뒤 active paper identity가 아니다.

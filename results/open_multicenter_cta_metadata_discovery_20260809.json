@@ -1,0 +1,93 @@
+{
+  "artifact_id": "open_multicenter_cta_metadata_discovery_20260809",
+  "as_of": "2026-08-09",
+  "status": "completed_exploratory_metadata_only_not_a_prospective_gate",
+  "source": {
+    "record_id": 15697196,
+    "doi": "10.5281/zenodo.15697196",
+    "data_paper_doi": "10.3390/data11040074",
+    "license": "cc-by-4.0",
+    "archive_name": "Dataset.zip",
+    "archive_bytes": 25578845008,
+    "archive_md5": "264ff9ee868c022d108b7c7aa7396d32",
+    "record_revision_observed": 4,
+    "record_modified_observed": "2026-04-11T14:59:27.159114+00:00"
+  },
+  "access_boundary": {
+    "full_archive_downloaded": false,
+    "dicom_header_or_pixel_read": false,
+    "stl_payload_read": false,
+    "individual_identifier_published": false,
+    "central_directory_range_read": true,
+    "metadata_csv_member_range_read": true,
+    "method_selected": false,
+    "gpu_or_outer_test_authorized": false
+  },
+  "archive_inventory": {
+    "format": "zip64",
+    "entries": 149452,
+    "central_directory_bytes": 11207225,
+    "dicom_members": 149329,
+    "stl_members": 122,
+    "csv_members": 1
+  },
+  "metadata_member": {
+    "name": "Metadata.csv",
+    "bytes": 16458,
+    "sha256": "407cd3c35307b491d714c5a7c05a0a9e26ef92faa54d43259a704516bf2bc7f4",
+    "encoding": "cp1251",
+    "delimiter": ";",
+    "rows": 212,
+    "unique_cases": 172,
+    "control_rows": 90,
+    "positive_cases": 82,
+    "lesion_rows": 122,
+    "multi_lesion_cases": 24,
+    "maximum_lesions_per_case": 5,
+    "parent_artery_counts": {
+      "LICA": 33,
+      "RICA": 27,
+      "LMCA": 16,
+      "RMCA": 16,
+      "BA": 12,
+      "AComA": 6,
+      "LACA": 4,
+      "RACA": 4,
+      "RPCA": 2,
+      "LPCA": 1,
+      "MACC": 1
+    },
+    "size_counts": {
+      "miliary": 30,
+      "middle": 56,
+      "large": 20,
+      "giant": 16
+    },
+    "position_counts": {
+      "lateral": 69,
+      "bifurcation": 32,
+      "NA": 21
+    },
+    "nonsaccular_type_counts": {
+      "blister-like": 39,
+      "fusiform": 8,
+      "eccentric-fusiform": 9,
+      "fusiform-saccular": 9,
+      "NA": 57
+    },
+    "rupture_status_counts": {
+      "unruptured": 113,
+      "ruptured": 9
+    }
+  },
+  "interpretation": {
+    "allowed_role": "future_external_small_lesion_multi_lesion_and_center_shift_stress_only_after_an_independent_problem_gate",
+    "forbidden_roles": [
+      "topaneu_52_class_supervision_substitute",
+      "prospective_rupture_risk_cohort",
+      "headline_method_training_authorization",
+      "patient_specific_cfd_evidence"
+    ],
+    "verdict": "metadata_and_archive_structure_verified_but_no_active_problem_method_or_gpu_authorization"
+  }
+}

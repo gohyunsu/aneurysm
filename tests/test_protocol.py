@@ -1,4 +1,5 @@
 import copy
+import hashlib
 import unittest
 from pathlib import Path
 
@@ -117,6 +118,63 @@ class ProtocolTests(unittest.TestCase):
         ]
         screen["candidate_ids"].remove("topcow_2024")
         with self.assertRaisesRegex(ProtocolError, "source-only dataset"):
+            validate_protocol(candidate)
+
+    def test_topaneu_source_audit_cannot_select_a_problem_or_accept_terms(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["topaneu_attachment_source_audit"]
+        audit["topaneu_user_terms_accepted_verified"] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu attachment audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["topaneu_attachment_source_audit"]
+        audit["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu attachment audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        audit = candidate["problem_selection"]["topaneu_attachment_source_audit"]
+        audit["score"] = audit["automatic_selection_threshold"]
+        with self.assertRaisesRegex(ProtocolError, "TopAneu attachment audit"):
+            validate_protocol(candidate)
+
+    def test_topaneu_dataset_cannot_be_relabelled_as_staged_training_data(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        topaneu = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "topaneu_2026_terms_gated"
+        )
+        topaneu["payload_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu must remain"):
+            validate_protocol(candidate)
+
+    def test_open_cta_metadata_discovery_cannot_authorize_headline_training(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        open_cta = next(
+            item
+            for item in candidate["datasets"]
+            if item["name"] == "open_multicenter_cta_2026_zenodo_15697196"
+        )
+        open_cta["headline_or_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "Open CTA must remain"):
+            validate_protocol(candidate)
+
+    def test_open_cta_metadata_discovery_hash_is_pinned(self) -> None:
+        audit = self.protocol["problem_selection"]["topaneu_attachment_source_audit"]
+        result = ROOT / audit["open_cta_discovery_result"]
+        self.assertEqual(
+            hashlib.sha256(result.read_bytes()).hexdigest(),
+            audit["open_cta_discovery_result_sha256"],
+        )
+
+    def test_attachment_direct_prior_threats_cannot_be_removed(self) -> None:
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["non_novel_components"].remove(
+            "patient_specific_centerline_graph_or_gnn"
+        )
+        with self.assertRaisesRegex(ProtocolError, "Direct prior-art boundaries"):
             validate_protocol(candidate)
 
     def test_rsna_semantics_audit_cannot_be_relabelled_as_lesion_masks(self) -> None:

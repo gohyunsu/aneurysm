@@ -7,7 +7,34 @@ preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
 aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · active problem shortlist 0 · method/architecture/GPU/outer test unselected · submission blocked
 
+2026-08-09 fresh source audit에서 TopAneu의 patient-specific vascular attachment
+가설을 검토했지만 29.0/40으로 32점 자동 채택 기준에 못 미쳤다. TopAneu
+terms는 사용자가 수락했다고 확인되지 않았고 image/mask/JSON payload는 0이다.
+공개 172-case CTA는 ZIP64 중앙 디렉터리와 metadata CSV만 range-read했으며
+DICOM/STL payload는 열지 않았다. 따라서 현재 상태는 여전히 active shortlist
+0, method/architecture/GPU/outer test 0이다.
+
 ## 0. 현재 연구 상태 · active problem shortlist 0
+
+가장 최근 감사 문서는
+[`topaneu-attachment-audit-2026-08-09.md`](topaneu-attachment-audit-2026-08-09.md)다.
+TopAneu는 417 scan/409 patient, 52-class vessel location과 lesion/type mask를
+제공한다고 기술하지만 organizer-predicted vessel mask는 silver annotation이다.
+ARAN은 이미 patient-specific centerline graph, geometric GAT와 artery-aware
+cross-attention을 사용하고, MICCAI 2024/ICCVW 2025 연구는 soft vessel distance와
+vesselness prior를 사용한다. Universal taxonomy, hierarchical loss와 joint
+lesion/vessel multitask도 선행 범위다. 따라서 남은 가설은 independent head
+대신 하나의 continuous/probabilistic vascular attachment에서 lesion support와
+dataset ontology label을 동시에 유도하는 구조에 한정된다.
+
+그러나 bifurcation ambiguity의 inter-rater/reference distribution이 확인되지
+않았고 payload semantics도 감사하지 않았다. 29.0/40의 조건부 lead일 뿐
+primary problem이나 contribution이 아니다. 사용자가 공식 terms를 직접
+수락하기 전에는 payload를 받지 않는다. 수락 뒤에도 prospectively registered
+CPU/read-only P0 asset/semantics audit만 가능하며, pass는 method-free P1 등록만
+허용한다. 다른 fresh problem audit은 계속할 수 있다.
+
+### 0-A. 직전 닫힌 goal-oriented 후보
 
 새 cold audit에서 검토한 **goal-oriented hemodynamic segmentation**은 이제
 닫힌 문제 후보다. 질문은 CTA segmentation의 signed boundary

@@ -25,7 +25,15 @@ Expected raw archive total for P0 + P1 is about 17.4 GB. Extraction and derivati
 
 ## Do not download yet
 
-- **TopAneu 2026:** acquire only under the official challenge terms, keep separate from the general research corpus, and never publish data or labels to this repository.
+- **TopAneu 2026:** acquire only after the user explicitly confirms verified-account
+  enrollment and acceptance of the official challenge terms. First register a
+  CPU/read-only P0 asset/semantics audit; do not download merely because the
+  source audit retained a 29/40 conditional lead. Keep payload separate from the
+  general corpus and never publish data or labels to this repository.
+- **Open multi-center CTA 2026:** the ZIP64 central directory and 16 KB metadata
+  member are already audited without full download. Do not stage the 25.58 GB
+  DICOM/STL payload until an independently selected problem assigns it an
+  external-stress role.
 - **ADAM / CADA:** download only when starting the CTA/MRA detection and segmentation task. They do not provide the CFD fields needed for In-PI-MGN reproduction.
 - **AneuG-Flow full archive:** useful for known-condition geometry pretraining,
   but its released BC policy does not vary across cases and it cannot support

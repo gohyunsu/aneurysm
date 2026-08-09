@@ -7,6 +7,30 @@
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
+## P0-T · TopAneu attachment source audit · conditional lead, not registered for execution
+
+공식 challenge/live data/registered design과 직접 선행연구를 대조한 결과,
+patient-specific vascular attachment에서 lesion support와 52-class location을
+함께 유도하는 가설은 29.0/40으로 자동 채택 기준 32에 못 미쳤다. TopAneu
+verified account와 data terms를 사용자가 수락했다고 확인되지 않았고 image,
+location/type/vessel mask와 JSON payload는 읽지 않았다. Executable config,
+model, GPU, split과 outer test는 없다.
+
+별도 open multi-center CTA는 기존 ZIP64 reader로 25,578,845,008-byte archive의
+11,207,225-byte central directory와 16,458-byte `Metadata.csv` 한 member만
+range-read했다. 149,329 DICOM/122 STL/1 CSV, 172 case/122 lesion/24 multi-lesion
+case를 확인했지만 DICOM header/pixel과 STL payload는 읽지 않았다. 결과는
+`results/open_multicenter_cta_metadata_discovery_20260809.json`이며 exploratory
+asset discovery다. TopAneu 52-class label의 대체 supervision이나 training
+authorization이 아니다.
+
+사용자가 공식 terms를 직접 수락한 뒤에만 별도 prospective P0-T를 등록할 수
+있다. 그 계약은 checksum/version, patient–scan–center grouping, 52-class support,
+negative/multi-lesion unit, mask–JSON mapping, silver vessel provenance,
+longitudinal grouping, bifurcation ambiguity auditability와 split viability를
+CPU/read-only로 검사한다. P0-T pass는 method-free P1만 열고 model/GPU를 열지
+않는다. 다른 fresh problem audit은 이 access와 독립적으로 계속한다.
+
 ## S0 · goal-oriented segmentation gate · closed at asset component
 
 현재 active problem shortlist는 0개다. Goal-oriented hemodynamic segmentation의

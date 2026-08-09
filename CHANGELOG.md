@@ -4,6 +4,44 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · TopAneu attachment remains a below-threshold conditional lead
+
+- TopAneu official challenge, live data page와 registered design을 대조해 live
+  train 417 scan/409 unique patient, 52-class location, lesion/type mask와
+  organizer-predicted silver vessel mask를 확인했다. Registered design의 계획
+  규모를 live sample size로 사용하지 않는다.
+- Vessel-aware deformable attention은 soft vessel distance를, ICCVW multitask
+  U-Net은 vesselness prior를, ARAN은 patient-specific centerline GAT와
+  artery-aware cross-attention을 이미 사용한다. Joint lesion/vessel prediction,
+  parent-artery classification, universal taxonomy와 hierarchy loss도 direct
+  prior이므로 단독 novelty에서 제외했다.
+- Mask와 location을 하나의 patient-specific vascular attachment에서 유도하는
+  가설은 **29.0/40**, 자동 채택 기준 32 아래의 conditional lead다. Bifurcation
+  ambiguity reference와 payload semantics가 확인되지 않아 active problem,
+  method, architecture, GPU, outer test와 paper identity는 모두 0이다.
+- TopAneu verified account와 terms를 사용자가 수락했다고 확인되지 않았다.
+  에이전트는 가입·동의·download하지 않았고 TopAneu image/mask/JSON payload는
+  읽지 않았다. 명시적 사용자 수락 뒤에도 먼저 prospective CPU/read-only P0-T
+  asset/semantics audit만 등록할 수 있다.
+- Zenodo `15697196`의 공개 25,578,845,008-byte CTA archive는 전체 download
+  없이 ZIP64 central directory와 16,458-byte `Metadata.csv`만 range-read했다.
+  149,329 DICOM/122 STL, 172 case/122 lesion/24 multi-lesion case를 확인했지만
+  DICOM header/pixel과 STL payload는 읽지 않았다. 공개 aggregate는
+  `results/open_multicenter_cta_metadata_discovery_20260809.json`, SHA-256은
+  `8ed7fa00f10bc81e3db5cfed1b26fa8f5c910ab7edc78b1384f3c8e6bcabb3ed`다.
+- 중앙 schema는 `3.0`으로 올리고 conditional lead를 shortlist나 training으로
+  승격하거나 open CTA metadata를 TopAneu supervision으로 부르는 변경을
+  validator와 unit test가 거부하도록 했다. 다른 fresh problem audit은 계속
+  허용한다.
+- 영향 파일: `docs/topaneu-attachment-audit-2026-08-09.md`,
+  `results/open_multicenter_cta_metadata_discovery_20260809.json`,
+  `configs/aurora_v1.json`, `src/aurora/protocol.py`, `tests/test_protocol.py`,
+  `AGENTS.md`, `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`, `docs/data-acquisition.md`,
+  `docs/server-execution.md`, `results/README.md`, `site/index.html`,
+  `site/learn.html`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · The 5/9 closure state is deployed and verified
 
 - Exact result-bearing source `07fb98eabfa36ee226bde337cae7f23fef2cbc72`의

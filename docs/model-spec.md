@@ -8,14 +8,30 @@ scientific verdict · prior BC-operator identity inactive · cross-protocol
 asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
 supervision-semantics candidate rejected · goal-oriented hemodynamic
 segmentation asset component failed 5/9 and candidate closed · active problem
-shortlist 0 · method and architecture unselected · no GPU/outer test
+shortlist 0 · TopAneu attachment source audit 29/40 conditional lead only ·
+method and architecture unselected · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
 현재 구현하거나 선택한 headline architecture는 없고 active problem shortlist도
-0개다. 닫힌 goal-oriented 후보는 manual domain의 boundary에서 얻은 signed
+0개다. 최신 조건부 lead도 GNN architecture가 아니다. TopAneu에서 검토한
+잠재 estimand는 병변 support와 parent-vessel location을 독립 head로 출력하는
+대신 patient-specific vascular tree의 attachment variable에서 함께 유도하는
+것이다. 하지만 ARAN의 centerline GAT·geometry-gated cross-attention, soft
+vessel-distance/vesselness prior, universal taxonomy, hierarchical loss와 joint
+lesion/vessel multitask가 이미 직접 선행이다. Exact payload semantics와
+bifurcation ambiguity reference가 없고 점수도 29/40이므로 graph extractor,
+query decoder, ontology projection, loss와 backbone을 선택하지 않는다.
+
+TopAneu terms를 사용자가 직접 수락했다고 확인하기 전에는 NIfTI/mask/JSON을
+읽거나 staging config를 만들지 않는다. 수락 뒤의 첫 단계도 CPU/read-only
+P0 asset/semantics audit이며 model training이 아니다. 공개 172-case CTA의
+metadata range audit은 external stress feasibility일 뿐 architecture evidence가
+아니다.
+
+직전 닫힌 goal-oriented 후보는 manual domain의 boundary에서 얻은 signed
 normal displacement를 미리 정한 PDE functional의 adjoint shape gradient에
 투영하는 supervision이 표준 segmentation loss보다 held-out standardized
 functional error를 줄이는지 물었다.

@@ -13,6 +13,26 @@ identity로 채택되지 않았고 solver v2, S0b, model, GPU와 outer test도 �
 [`goal-oriented segmentation cold audit`](docs/goal-oriented-segmentation-audit-2026-08-09.md)에
 있습니다.
 
+가장 최근 fresh audit은
+[`TopAneu vascular-attachment problem`](docs/topaneu-attachment-audit-2026-08-09.md)을
+검토했습니다. TopAneu live release는 417 scan/409 patient와 52개 location
+class를 기술하지만, vessel mask는 organizer model의 silver prediction이고
+verified account와 data terms가 필요합니다. ARAN의 patient-specific centerline
+GNN, MICCAI 2024 vessel-distance attention, multitask lesion/vessel prediction과
+universal taxonomy가 직접 선행이므로, `vessel graph + hierarchy loss`는 새
+방법이 아닙니다. Patient-specific attachment에서 lesion mask와 location을 함께
+유도하는 가설만 조건부 lead로 남았으나 **29.0/40**으로 32점 채택 기준에
+못 미쳤습니다. Terms는 수락하지 않았고 TopAneu payload, method, architecture,
+GPU와 outer test는 모두 0입니다.
+
+별도 공개 multi-center CTA archive는 전체 25.58 GB를 받지 않고 ZIP64 중앙
+디렉터리와 16 KB metadata member만 range-read했습니다. 172 case/122 lesion/
+24 multi-lesion case를 확인했지만 DICOM header·pixel과 STL은 읽지 않았습니다.
+이는 향후 external stress 후보일 뿐 TopAneu supervision이나 headline training
+근거가 아닙니다. Privacy-safe aggregate는
+[`metadata discovery`](results/open_multicenter_cta_metadata_discovery_20260809.json)에
+있습니다.
+
 2026-08-09 추가 red team은 inverse Navier--Stokes의 shape-gradient joint
 segmentation과 task-based quantitative segmentation 평가를 직접 선행으로
 올렸다. 따라서 PDE를 segmentation에 연결하거나 downstream metric을 보고하는
@@ -55,8 +75,9 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 
 ## 현재 단계 · active problem shortlist 0, method/GPU 없음
 
-현재 허용된 다음 작업은 닫힌 후보를 수리하지 않는 **fresh problem-level
-primary-source and asset audit**입니다. 새 후보는 method를 붙이기 전에 임상·영상
+현재 허용된 다음 작업은 닫힌 후보를 수리하지 않는 다른 **fresh problem-level
+primary-source and asset audit**, 또는 사용자가 TopAneu terms를 직접 수락했다고
+명시한 뒤 별도 등록하는 CPU/read-only P0 asset/semantics audit입니다. 새 후보는 method를 붙이기 전에 임상·영상
 task unit, 실제 확보 가능한 supervision, 직접 선행의 잔여 gap과 method-free
 task adequacy를 순서대로 증명해야 합니다. Executable headline model, GPU job,
 outer test와 submission identity는 없습니다.

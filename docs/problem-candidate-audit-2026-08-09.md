@@ -10,9 +10,12 @@ shortlist 0 · no selected method · no GPU authorization · not submission-read
 > Circle-of-Willis 혈관 해부구조이며, 공식 aneurysm supervision은 center
 > point와 presence/territory label이다. 아래 L0–L3는 당시의 prospective
 > reasoning을 보존하는 history일 뿐 실행 가능한 현재 protocol이 아니다.
-> 이후 수행한 독립적인 문제 감사와 현재 조건부 후보는
-> [goal-oriented hemodynamic segmentation cold audit](goal-oriented-segmentation-audit-2026-08-09.md)에
-> 기록한다. 이 후속 문서는 아래 RSNA 후보를 복원하지 않는다.
+> 이후 수행한 독립적인 goal-oriented 후보도 asset component에서 닫혔다.
+> 현재의 가장 최근 조건부 lead와 active-shortlist-zero 경계는
+> [TopAneu vascular-attachment audit](topaneu-attachment-audit-2026-08-09.md)에
+> 기록한다. Goal-oriented 이력은
+> [별도 cold audit](goal-oriented-segmentation-audit-2026-08-09.md)에 보존한다.
+> 어느 후속 문서도 아래 RSNA 후보를 복원하지 않는다.
 
 이 문서는 실패한 BC-operator, Aneumo 3D와 4D-flow 연구선을 다른 이름으로
 되살리기 위한 문서가 아니다. ISBI 2027에 제출할 수 있는 새 문제를

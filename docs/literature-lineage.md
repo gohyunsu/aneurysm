@@ -5,6 +5,35 @@
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
 
+## 0. Current conditional gap · patient-specific vascular attachment
+
+TopAneu 2026은 CTA/MRA aneurysm segmentation과 52-class vessel location을
+이미 하나의 공식 task로 정의한다. 따라서 lesion segmentation과 parent-artery
+classification을 함께 학습한다는 문제 자체는 새롭지 않다.
+
+- [TopAneu 2026 official challenge](https://topaneu-26.grand-challenge.org/)
+- [TopAneu live data description](https://topaneu-26.grand-challenge.org/data/)
+- [Registered challenge design](https://doi.org/10.5281/zenodo.19848807)
+- [Vessel-aware deformable 3D attention, MICCAI 2024](https://papers.miccai.org/miccai-2024/831-Paper2366.html)
+- [Vesselness-prior multitask U-Net, ICCVW 2025](https://openaccess.thecvf.com/content/ICCV2025W/CVAMD/papers/Rainville_Weakly_Supervised_Intracranial_Aneurysm_Detection_and_Segmentation_in_MR_angiography_ICCVW_2025_paper.pdf)
+- [ARAN, CVPRW 2026](https://openaccess.thecvf.com/content/CVPR2026W/PHAROS-AIF-MIH/papers/Shafique_ARAN_Leveraging_Foundation_Models_for_Vasculature-Tree-Informed_ARtery-Aware_Intracranial_ANeurysm_Detection_CVPRW_2026_paper.pdf)
+- [Overlapping-label universal taxonomy, WACV 2022](https://openaccess.thecvf.com/content/WACV2022/html/Bevandi_Multi-Domain_Semantic_Segmentation_With_Overlapping_Labels_WACV_2022_paper.html)
+
+MICCAI 2024 방법은 soft vessel distance map과 deformable attention을, ICCVW
+2025 방법은 soft vesselness prior와 joint detection/segmentation을 사용한다.
+ARAN은 foundation vessel segmentation에서 patient-specific centerline graph를
+만들고 radius/eccentricity/curvature/torsion GAT와 geometry-gated cross-attention으로
+artery class를 예측한다. Universal taxonomy, partial-label projection과 tree loss도
+일반 선행 범위다.
+
+따라서 남을 수 있는 gap은 independent heads 대신 하나의 continuous 또는
+probabilistic attachment to patient-specific vascular tree에서 lesion support와
+dataset ontology label을 함께 유도하는 구조, 그리고 그 제약이 ambiguous
+bifurcation/small lesion에서 strong direct baseline보다 실제 오류를 줄인다는
+prospective evidence뿐이다. 그러나 TopAneu는 hard single-verifier label을
+사용하고 ambiguity reference distribution이 확인되지 않았다. Source audit
+점수도 29.0/40이므로 이는 current contribution이 아니라 조건부 lead다.
+
 ## 0-A. Closed gap hypothesis · signed adjoint projection supervision
 
 새 후보는 generic segmentation→CFD가 아니다. Image2Flow는 이미 3D MRI에서

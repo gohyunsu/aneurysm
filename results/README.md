@@ -26,6 +26,15 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `open_multicenter_cta_metadata_discovery_20260809.json`: Zenodo `15697196`
+  공개 archive의 exploratory byte-range discovery. 25,578,845,008-byte ZIP64의
+  central directory와 16,458-byte metadata CSV만 읽어 149,329 DICOM/122 STL,
+  172 case/122 lesion/24 multi-lesion case를 확인했다. DICOM header/pixel과 STL
+  payload는 읽지 않았고 individual row를 공개하지 않는다. Active problem,
+  TopAneu supervision, method, GPU 또는 outer-test evidence가 아니다.
+  Artifact SHA-256은
+  `8ed7fa00f10bc81e3db5cfed1b26fa8f5c910ab7edc78b1384f3c8e6bcabb3ed`다.
+
 - `goal_oriented_s0a_asset_component_20260809.json`: exact public source
   `ef547a4ccb71fa45b4a43e67c0939e2701ebfc11`의 one-shot CPU/PBS result.
   Job은 exit 0이지만 asset gate는 5/9 fail이다. Archive/CSV, six multi-lesion

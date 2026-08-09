@@ -3,10 +3,17 @@ window.AURORA_DATA = Object.freeze({
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
     status: "Target locked · active problem shortlist 0 · no method/architecture/GPU · not submission-ready",
-    requirement: "fresh problem/asset audit → method-free adequacy → strong baselines → bounded development → fresh outer test",
+    requirement: "fresh problem audit or user-authorized terms-gated P0 → method-free adequacy → strong baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "TopAneu attachment remains a conditional lead",
+      copy: "TopAneu's live release describes 417 scans, 409 patients and 52 vessel-location classes, but its vessel masks are organizer-model silver predictions and access requires verified-account terms. ARAN already uses a patient-specific centerline GAT, while vessel-distance attention, joint lesion/vessel learning and universal taxonomies are direct priors. A shared vascular-attachment estimand is retained only at 29.0/40; terms and payload remain untouched.",
+      status: "Conditional lead below 32/40 · active shortlist 0 · payload/model/GPU 0",
+      url: "../docs/topaneu-attachment-audit-2026-08-09.md"
+    },
     {
       year: "2026.08",
       title: "Signed adjoint candidate closes at asset linkage",
@@ -156,13 +163,12 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Prediction unit", "Study + independent location labels", "ROI/voxel + 26-class multitask", "Anatomy graph-guided candidates", "Historical latent lesion-set hypothesis"],
-    ["Annotation use", "Presence/location supervision", "Point-derived localization + vessel segmentation", "Vessel tree/topology prior", "Incorrectly treated vessel mask as lesion extent"],
-    ["Selection process", "Usually implicit", "Author-derived pseudo targets", "Usually implicit", "Not applicable: official lesion-mask subset does not exist"],
-    ["Consistency", "Not structurally enforced", "Shared backbone only", "Anatomical compatibility", "Proposed coherence target invalidated"],
-    ["Decision endpoint", "AUROC/AUPRC", "Detection/localization score", "False-positive reduction", "No active endpoint"],
-    ["Already occupied", "Challenge formulation", "Strong public pipeline", "Graph/anatomy/topology modules", "Rejected, not shortlisted"],
-    ["Current evidence", "Published/public", "Published/public", "Published/preprint", "Public-source semantics audit · payload 0 · no method/GPU"]
+    ["Prediction unit", "TopAneu official task", "Vessel-aware deformable attention", "ARAN artery-aware graph", "Conditional attachment lead"],
+    ["Supervision", "Lesion/type masks + 52-class location", "Aneurysm box + vessel distance", "Coarse artery class + vessel centerline", "Mask/location derived from one attachment"],
+    ["Anatomy mechanism", "Predicted silver vessel mask", "Soft signed-distance positional encoding", "Patient-specific GAT + geometry-gated fusion", "Continuous/probabilistic graph attachment"],
+    ["Already occupied", "Joint location/segmentation task", "Soft vessel prior", "Centerline graph and parent-artery classification", "Structure only; not yet a contribution"],
+    ["Missing evidence", "Hidden test and hard-label ambiguity", "Fine 52-class projection", "Joint voxel lesion segmentation", "Reference ambiguity + independent-head failure + strong-baseline gain"],
+    ["Current boundary", "Official source", "MICCAI 2024", "CVPRW 2026", "29/40 · terms/payload/model/GPU 0"]
   ],
   gates: [
     {
@@ -176,7 +182,7 @@ window.AURORA_DATA = Object.freeze({
       id: "P0",
       title: "Is there a defensible biomedical-imaging problem?",
       copy: "후보별 데이터 semantics와 access, 식별 가능한 estimand, direct-prior gap, patient-level split, ISBI relevance와 confirmatory 규모를 method보다 먼저 감사한다. 하나가 선택되기 전에는 executable config를 만들지 않는다.",
-      state: "Active shortlist 0 · fresh problem-level primary-source and asset audit required",
+      state: "TopAneu attachment 29/40 conditional lead · terms/payload 0 · active shortlist 0 · other fresh audits remain allowed",
       blocking: true
     },
     {
@@ -230,6 +236,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "TopAneu 2026 · terms gated",
+      role: "conditional P0 asset/semantics audit only after explicit user terms acceptance",
+      provenance: "Live 417 scans/409 patients · 52 location classes · organizer-predicted silver vessel masks · source audit 29/40 · payload/model/GPU 0"
+    },
     {
       name: "RSNA-ICA 2025 · controlled access",
       role: "rejected for the mixed-granularity selection task; possible future challenge benchmark only after a new task audit",
@@ -297,8 +308,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "Open multi-center CTA 2026",
-      role: "future external detection/morphometry audit after payload semantics",
-      provenance: "172 CTA series · 90 controls/82 IA cases · 122 aneurysm STL · parent-vessel supervision unverified · CC BY 4.0"
+      role: "future small-lesion, multi-lesion and center-shift external stress only",
+      provenance: "ZIP64+metadata range-audited · 172 CTA series · 90 controls/82 positive · 122 lesions/24 multi-lesion cases · DICOM/STL payload 0 · CC BY 4.0"
     },
     {
       name: "AneuX",
@@ -307,6 +318,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "decision",
+      title: "TopAneu attachment is retained below admission, not selected",
+      copy: "A fresh official-source audit scores patient-specific vascular-attachment-consistent lesion inference 29.0/40, below the 32/40 admission threshold. TopAneu itself defines 52-class location plus segmentation; vessel-distance attention, ARAN's centerline GAT, joint lesion/vessel learning and universal taxonomies are direct prior art. The user has not accepted the challenge terms and no TopAneu payload was read. A separate open CTA ZIP64 discovery reads only the central directory and 16 KB metadata member, confirming 172 cases, 122 lesions and 24 multi-lesion cases without DICOM/STL access. Active shortlist, method, architecture, GPU and outer test remain zero.",
+      files: ["docs/topaneu-attachment-audit-2026-08-09.md", "results/open_multicenter_cta_metadata_discovery_20260809.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "results/README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",
