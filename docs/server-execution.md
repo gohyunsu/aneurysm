@@ -25,22 +25,28 @@
 `ssu_a6gpu_*` 파일명은 이미 끝난 run의 재현 이력이며, 새 제출 대상으로
 해석하거나 복사하지 않는다.
 
-## 2026-08-09 · AneuX preprocessing-orbit P0, pending
+## 2026-08-09 · AneuX preprocessing-orbit P0 execution-incomplete
 
-- Exact public commit을 먼저 고정한 뒤 `introai9`의 `coss_agpu` PBS에서
-  4 CPU/16 GB/GPU 0으로 한 번만 실행한다. Login node에서 payload audit이나
-  GPU 명령을 실행하지 않는다.
-- Official 13 MB tabular ZIP은 private run cache에 받고 exact size/MD5 뒤 필요한
-  CSV만 읽는다. 6.28 GB model ZIP은 HEAD, tail과 central-directory exact HTTP
-  range만 읽고 full archive와 member payload는 읽지 않는다.
+- Exact public commit `42cc3c7127f382b440f2ac22f662c45692f37863`을 먼저
+  고정한 뒤 `introai9`의 `coss_agpu` PBS job `115177.ECE-util1`에서 4 CPU/
+  16 GB/GPU 0으로 한 번 실행했다. Login node GPU 명령은 실행하지 않았다.
+- 계약은 official 13 MB tabular ZIP을 private run cache에 받고 exact size/MD5 뒤
+  필요한 CSV만 읽도록 했다. 6.28 GB model ZIP은 HEAD, tail과 central-directory
+  exact HTTP range만 허용하고 full archive와 member payload는 금지했다.
 - 각 HTTP operation의 transient timeout/reset/408/429/5xx에만 0/10/30초 최대
-  세 attempt를 허용한다. Semantic/parser/contract failure는 retry하지 않고,
+  세 attempt를 허용했다. Semantic/parser/contract failure는 retry하지 않고,
   같은 public source commit의 PBS resubmission도 wrapper가 거부한다.
-- Private output은 job status와 deidentified aggregate만 남긴다. Public 결과는
+- Private output은 job status와 deidentified aggregate만 남겼다. Public 결과는
   case identifier, member listing, row-level clinical/morphometric value와 internal
   path를 포함하지 않는다.
-- P0 pass도 별도 method-free P1 등록만 허용한다. GPU allocation, model training,
-  outer test와 status performance는 계속 금지된다.
+- Scheduler는 exit 2, walltime `00:37:00`, CPU time `00:00:00`, peak memory
+  `26596kb`를 기록했다. Result error는 `transport_attempts_exhausted`이며 첫
+  tabular archive가 완성되기 전 종료됐다. Complete/partial cache, CSV parse,
+  model HEAD/range/central-directory/member access는 0이고 13개 gate는 미평가다.
+- Raw scheduler log는 materialize되지 않아 low-level exception은 단정하지 않는다.
+  같은 contract의 transport/reader repair와 resubmission, P1, GPU allocation,
+  model training, outer test와 status performance는 금지된다. 공개 execution
+  record는 `results/aneux_preprocessing_orbit_p0_execution_20260809.json`이다.
 
 ## 2026-08-09 · Open-CTA physical-coordinate P0 execution-incomplete
 

@@ -30,7 +30,7 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "no active GPU job"):
             validate_protocol(candidate)
 
-    def test_source_shortlist_cannot_select_method_or_gpu(self) -> None:
+    def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
         with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
@@ -44,7 +44,19 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "source-shortlist boundary"):
             validate_protocol(candidate)
 
-    def test_aneux_orbit_p0_cannot_read_payload_or_train(self) -> None:
+    def test_aneux_orbit_p0_is_closed_without_payload_p1_or_training(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "aneux_preprocessing_orbit_candidate"
+        ]
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(audit["p0_scheduler_exit_status"], 2)
+        self.assertEqual(audit["p0_error_code"], "transport_attempts_exhausted")
+        self.assertFalse(audit["p0_scientific_gate_evaluated"])
+        self.assertFalse(audit["completed_tabular_archive_retained"])
+        self.assertFalse(audit["model_central_directory_accessed"])
+        self.assertFalse(audit["p1_authorized"])
+        self.assertFalse(audit["transport_or_reader_repair_allowed"])
+
         candidate = copy.deepcopy(self.protocol)
         audit = candidate["problem_selection"]["aneux_preprocessing_orbit_candidate"]
         audit["model_member_payload_accessed"] = True

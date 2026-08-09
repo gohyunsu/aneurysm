@@ -1,15 +1,15 @@
 # ISBI 2027 제출 계획
 
 > **2026-08-09 current boundary:** AneuX same-lesion preprocessing-orbit는
-> 34/40의 source shortlist 1이지만 selected primary와 method는 0이다. CSV/model
-> payload 전에 exact CPU-only P0를 고정했다. P0 pass도 method-free P1만 열며
-> architecture, GPU, outer test와 four-page contribution은 아직 없다.
+> 34/40으로 P0에 진입했지만, exact CPU-only job이 첫 tabular archive completion
+> 전에 transport attempt를 소진해 scientific gate 미평가로 닫혔다. P1, selected
+> primary, method, architecture, GPU, outer test와 four-page contribution은 없다.
 
 최종 검토일: 2026-08-09 KST
 
-상태: **target locked · AneuX preprocessing-orbit P0 preregistered · source
-shortlist 1 · selected primary problem/method/architecture/GPU 0 · not
-submission-ready**
+상태: **target locked · AneuX preprocessing-orbit P0 execution-incomplete/no
+verdict/no rerun · active shortlist/selected primary problem/method/architecture/
+GPU 0 · not submission-ready**
 
 2026-08-09 open-CTA physical-coordinate 후보는 32.0/40으로 P0에 진입했지만,
 exact `b437875…` one-shot 실행이 DICOM undefined-length Procedure Code Sequence를
@@ -27,11 +27,11 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 최종 제출 직전에 다시 확인한다.
 
 현재 제출 가능한 paper identity는 없다. AneuX orbit 후보는 official source와
-direct-prior gap만 통과했으며 row-level asset/unit과 task adequacy를 아직
-검사하지 않았다. P0는 `introai9` CPU/PBS에서 patient grouping, cut/morphometry
-mapping과 model central-directory structure만 감사한다. Pass도 P1을 별도
-등록할 권한일 뿐 method나 figure/result를 확정하지 않는다. Cycle-functional
-WSS는 P0 execution-incomplete로 닫혔고 P1은 열리지 않았다. Open-CTA grid-commutation 문제는
+direct-prior gap만 통과한 뒤, exact `42cc3c7…` `introai9` CPU/PBS P0가
+`transport_attempts_exhausted`로 끝났다. Completed tabular archive와 CSV parse,
+model range/central-directory/member access는 0이고 13개 check는 미평가다.
+등록된 no-rerun rule로 후보를 닫았으며 P1, method와 figure/result를 열지 않는다.
+Cycle-functional WSS도 P0 execution-incomplete로 닫혔고 P1은 열리지 않았다. Open-CTA grid-commutation 문제는
 asset gate를 평가하지 못했고 P1도 열리지 않았다. Partial/missing-BC AURORA, Aneumo
 irregular-3D, cross-protocol 4D-flow, RSNA mixed-granularity lesion-set과
 goal-oriented hemodynamic segmentation을 모두 실패 또는 부적격 이력으로
@@ -62,8 +62,8 @@ estimand에 필요한 105-lesion image–surface–table linkage를 공개 자�
 
 ## 2. 현재 후보를 판단하는 순서
 
-현재 AneuX 후보와 이후의 모든 새 후보는 이름이나 architecture가 아니라 다음
-다섯 증거를 순서대로 갖춰야 한다.
+이후의 모든 새 후보는 이름이나 architecture가 아니라 다음 다섯 증거를
+순서대로 갖춰야 한다. 닫힌 AneuX P0를 이 ladder의 진행 중 후보로 세지 않는다.
 
 1. **Biomedical-imaging question**: 입력 영상, 관측 단위, target과 실제 실패
    비용을 한 문장으로 정의한다.

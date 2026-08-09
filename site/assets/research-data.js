@@ -2,16 +2,16 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · AneuX preprocessing-orbit source shortlist 1/P0-only · selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
-    requirement: "exact AneuX P0 → method-free P1 task adequacy → direct baselines → bounded development → fresh outer test",
+    status: "Target locked · AneuX preprocessing-orbit P0 execution-incomplete/closed · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    requirement: "fresh problem/source audit → method-free task adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
-      title: "AneuX same-lesion preprocessing orbit enters P0",
-      copy: "AneuX exposes the same lesion under three mesh resolutions and up to four isolation cuts. The 34/40 candidate treats these variants as one preprocessing orbit and asks whether casewise surface functionals and future outputs can quotient nuisance variation without erasing between-lesion or source-held-out signal. Exact CSV/model payload remains unread; one introai9 CPU/PBS P0 is preregistered before access.",
-      status: "Source shortlist 1 · P0 pending · selected primary/model/GPU 0",
+      title: "AneuX preprocessing-orbit P0 closes before the scientific gate",
+      copy: "AneuX exposes the same lesion under three mesh resolutions and up to four isolation cuts. The historical 34/40 candidate entered one exact introai9 CPU/PBS P0, but the initial tabular transport exhausted its frozen attempts before a completed archive materialized. No CSV was parsed and no model HEAD/range, central directory or member was accessed, so all 13 scientific asset checks remain unevaluated. The no-resubmission rule closes this version without P1 or a data/hypothesis-failure claim.",
+      status: "Execution-incomplete · no scientific verdict · active shortlist/model/GPU 0",
       url: "../docs/aneux-preprocessing-orbit-audit-2026-08-09.md"
     },
     {
@@ -201,15 +201,15 @@ window.AURORA_DATA = Object.freeze({
     ["Axis", "AneuX morphometry", "PointNet++", "DiffusionNet / E(3)", "Conditional residual gap"],
     ["Already occupied", "Mesh/cut robustness + 170 indices", "Surface status classification", "Discretization / motion robustness", "None of these alone"],
     ["Required control", "Analytic + precomputed features", "Matched point-cloud model", "Matched continuous/equivariant model", "Orbit quotient with signal preservation"],
-    ["Missing evidence", "Casewise task impact", "Orbit consistency", "Source-held-out functional trade-off", "P0 asset/unit and P1 nontriviality pending"],
-    ["Current boundary", "Direct dataset baseline", "Direct task baseline", "Direct method prior", "34/40 source shortlist · P0-only · no method/GPU"]
+    ["Missing evidence", "Casewise task impact", "Orbit consistency", "Source-held-out functional trade-off", "P0 asset/unit and P1 were never evaluated"],
+    ["Current boundary", "Direct dataset baseline", "Direct task baseline", "Direct method prior", "historical 34/40 · P0 incomplete/closed · no method/GPU"]
   ],
   gates: [
     {
       id: "P0-O",
       title: "Does AneuX expose a patient-groupable same-lesion preprocessing orbit?",
-      copy: "One introai9 CPU/PBS job checks the exact 13 MB tabular archive, aggregate patient/cut/morphometry mapping, and only exact tail/central-directory ranges of the 6.28 GB model ZIP. Full model download and every mesh member payload are forbidden.",
-      state: "Preregistered before payload · all checks or close · pass opens method-free P1 only",
+      copy: "Exact job 115177 exhausted the frozen attempts for the initial 13 MB tabular transport before a complete archive materialized. CSV parse and every model HEAD/range/member access are zero; all 13 asset/unit checks are unevaluated.",
+      state: "Execution-incomplete · no verdict · no repair/rerun/P1 · candidate closed",
       blocking: true
     },
     {
@@ -361,11 +361,18 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "AneuX v1.0",
-      role: "P0-only same-lesion preprocessing-orbit asset candidate",
-      provenance: "750 lesions · 605 source-reported patients · 3 resolutions · up to 4 cuts · 170 features · CSV/model payload unread · CC BY-NC 4.0 · no real CFD"
+      role: "closed preprocessing-orbit P0 history; no active primary role",
+      provenance: "750 lesions · 605 source-reported patients · historical 3 resolutions/up to 4 cuts/170 features · initial tabular transport exhausted · no CSV/model range · 13 checks unevaluated · no rerun/P1 · CC BY-NC 4.0"
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "experiment",
+      title: "AneuX preprocessing-orbit P0 closes execution-incomplete",
+      copy: "Exact public source 42cc3c7127f382b440f2ac22f662c45692f37863 ran once as introai9 CPU/PBS job 115177 with 4 CPU, 16 GB and GPU 0. PBS recorded exit 2 after 00:37:00; the privacy-safe aggregate reports transport_attempts_exhausted before a completed tabular archive. Completed/partial cache, CSV parse, model HEAD/range/central directory/member access and all 13 scientific checks are zero or unevaluated. This is no evidence against AneuX or the orbit hypothesis. The frozen rule closes this version without repair, rerun, P1, method, architecture, GPU, outer test or submission identity, returning the active shortlist to zero.",
+      files: ["results/aneux_preprocessing_orbit_p0_execution_20260809.json", "AGENTS.md", "README.md", "docs/aneux-preprocessing-orbit-audit-2026-08-09.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/aurora.js", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "research",

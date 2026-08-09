@@ -1,7 +1,8 @@
 # AneuX preprocessing-orbit candidate audit
 
-상태: **34/40 source shortlist · exact CPU-only P0 preregistered before CSV/model
-archive access · primary problem/method/architecture/GPU/outer test 0**
+상태: **historical 34/40 source shortlist · exact CPU-only P0
+execution-incomplete/no scientific verdict · candidate closed · primary
+problem/method/architecture/GPU/outer test 0**
 기준일: 2026-08-09 KST
 
 ## 냉정한 결론
@@ -91,13 +92,38 @@ P0는 `introai9` PBS의 4 CPU/16 GB/GPU 0에서 다음을 all-or-none으로 검�
 failure는 반복하지 않고, 같은 source commit의 PBS 재제출도 금지한다. 이는
 development repair round가 아니라 하나의 frozen transport procedure다.
 
-P0 pass는 **method-free P1 등록만** 허용한다. Primary problem, architecture,
-GPU와 outer test를 열지 않는다. P0 fail이면 candidate version을 닫고, 실행
-불완료면 scientific verdict 없이 보존한다.
+P0 pass는 **method-free P1 등록만** 허용하도록 고정했다. Primary problem,
+architecture, GPU와 outer test를 열지 않는다. P0 fail이면 candidate version을
+닫고, 실행 불완료면 scientific verdict 없이 보존한다.
 
-## P1이 통과해야만 남는 연구 가설
+## 실제 P0 실행과 판정
 
-P1은 결과 전에 다음을 별도 commit에서 수치화해야 한다.
+Exact public source `42cc3c7127f382b440f2ac22f662c45692f37863`을 clean
+checkout으로 확인한 뒤 `introai9`의 PBS job `115177.ECE-util1`에서 CPU 4개,
+16 GB, GPU 0으로 정확히 한 번 실행했다. Scheduler는 exit 2, walltime
+`00:37:00`, CPU time `00:00:00`, peak memory `26596kb`, run count 1을 기록했다.
+생성된 aggregate의 error code는 `transport_attempts_exhausted`다.
+
+실행은 첫 `data-v1.0.zip` transport operation의 동결된 세 attempt를 소진하기
+전에 완성된 tabular archive를 만들지 못했다. 종료 시 completed/partial cache
+file은 0이고 CSV member는 parse되지 않았다. 따라서 patient grouping,
+cut–morphometry mapping, source/status count와 feature count를 포함한 tabular
+check에 도달하지 않았다. Model ZIP의 HEAD/range, central directory와 member
+payload도 전부 미접근이다. Transient transport byte를 일부 수신했는지는
+aggregate로 식별하지 않으며, retained payload가 없었다는 사실만 기록한다.
+
+13개 scientific asset check는 모두 **미평가**다. 이는 AneuX asset이나
+preprocessing-orbit 가설의 fail이 아니다. 동시에 frozen no-resubmission
+계약에 따라 transport/reader repair, same-contract rerun, P1, method,
+architecture, GPU와 outer test를 열지 않고 이 candidate version을 닫는다. 공개
+provenance는
+[`results/aneux_preprocessing_orbit_p0_execution_20260809.json`](../results/aneux_preprocessing_orbit_p0_execution_20260809.json)에
+있다.
+
+## P0가 통과했다면 필요했을 P1 · 미등록/미실행
+
+P1은 등록하지 않았다. P0가 통과했다면 결과 전에 별도 commit에서 다음을
+수치화해야 했다.
 
 - patient/source group을 보존한 deterministic geometry subset과 sampling rule
 - rigid alignment 뒤 same-lesion cross-resolution/cross-cut surface discrepancy
@@ -134,11 +160,13 @@ orbit variation이 biological between-case margin에 비해 작으면 후보를 
 - [AneuSI](https://doi.org/10.1016/j.cmpb.2026.109525): aneurysm/neck isolation의
   빠른 자동화와 manual comparison.
 
-## 현재 판정
+## 최종 판정
 
-- Active **source shortlist는 1개**, selected primary problem은 0개다.
-- P0 contract와 executable만 등록했다. CSV/model payload는 아직 0이다.
+- Active source shortlist와 selected primary problem은 모두 0개다.
+- P0는 한 번 실행됐지만 initial tabular transport exhaustion으로 scientific
+  gate 전에 종료됐다. Complete/partial archive, CSV parse와 model range/member
+  access는 0이다.
 - 현재 모델은 GNN도 DiffusionNet도 아니며 architecture가 없다.
 - GPU job은 0개이고, `junjinyong`은 어떤 접속·제출·조회에도 사용하지 않는다.
-- 다음 작업은 exact public source commit을 만든 뒤 `introai9` CPU/PBS P0를
-  한 번 실행하고, 결과에 따라 P1 등록 또는 candidate closure를 동기화하는 것이다.
+- 같은 source의 repair/rerun과 P1은 금지한다. 다음 작업은 별도의 fresh
+  problem-level primary-source/asset audit이다.

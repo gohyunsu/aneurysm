@@ -1,6 +1,6 @@
 # 선행연구 계보와 research gap
 
-## 0-O. Current conditional gap · same-lesion preprocessing-orbit quotient
+## 0-O. Closed conditional gap · same-lesion preprocessing-orbit quotient
 
 [AneuX](https://doi.org/10.5281/zenodo.6678442)는 동일 병변의 3개 mesh resolution과
 여러 dome isolation cut, 170 morphometric index를 공개한다. 원
@@ -15,16 +15,18 @@ discretization에 강한 학습을, [AneuX PointNet++](https://pubmed.ncbi.nlm.n
 
 따라서 remeshing robustness, mesh GNN, PointNet, E(3) equivariance, consistency
 loss, latent shape space, precomputed morphometry 또는 UQ 자체는 gap이 아니다.
-현재 남을 수 있는 좁은 가설은 resolution × cut을 같은 lesion의 명시적
+문헌상 남을 수 있었던 좁은 가설은 resolution × cut을 같은 lesion의 명시적
 preprocessing equivalence class로 두고, **orbit 내 casewise functional/prediction
 disagreement를 줄이면서 lesion 간 biological separation과 source-held-out
-discrimination을 보존하는 quotient construction**이다. 이 역시 P0 asset/unit
-audit와 별도 method-free P1에서 strong continuous baseline의 비자명한 실패가
-확인될 때만 algorithmic gap으로 인정한다.
+discrimination을 보존하는 quotient construction**이다. 그러나 exact P0가 첫
+tabular archive completion 전 transport exhaustion으로 끝나 asset/unit gate가
+미평가됐고 P1은 열리지 않았다. 따라서 현재 algorithmic gap이나 active
+contribution으로 인정하지 않는다.
 
-P0 이전에는 official record/content description만 읽었고 CSV/model payload는
-0이다. Source score 34/40은 shortlist 진입일 뿐 selected primary나 novelty가
-아니다. Exact contract와 kill rule은
+P0 이전에는 official record/content description만 읽었다. 실제 P0도 complete
+tabular archive/CSV parse와 model range에 도달하지 못했다. Source score 34/40은
+historical admission일 뿐 selected primary나 novelty가 아니다. Exact contract,
+execution-incomplete outcome과 kill rule은
 [`aneux-preprocessing-orbit-audit-2026-08-09.md`](aneux-preprocessing-orbit-audit-2026-08-09.md)에
 고정한다.
 

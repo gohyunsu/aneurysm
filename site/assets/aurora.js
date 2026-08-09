@@ -100,22 +100,22 @@
 
   const modes = {
     presence: {
-      description: "두 official archive의 byte/MD5는 고정했고 CSV/model payload는 아직 읽지 않았습니다.",
+      description: "두 official archive의 byte/MD5는 고정했지만 initial tabular transport가 completion 전에 소진됐습니다.",
       connector: "identity pinned",
       title: "Official source identity",
-      copy: "AneuX v1.0 tabular and model archive sizes and MD5 are frozen",
+      copy: "AneuX v1.0 identities are frozen; the scientific asset gate is unevaluated",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "750 lesion의 patient, cut, morphometry mapping과 model listing 구조를 P0에서만 검사합니다.",
-      connector: "audit pending",
-      title: "Same-lesion orbit contract",
-      copy: "Patient groups, three resolutions, four cuts and 170 features must agree",
+      description: "CSV parse와 model listing access가 0이므로 patient/cut/morphometry contract는 미평가입니다.",
+      connector: "not evaluated",
+      title: "Same-lesion orbit contract closed",
+      copy: "All 13 patient, cut, resolution and privacy checks remain unevaluated",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "All checks pass면 별도 method-free P1만, fail/incomplete면 이 candidate version을 닫습니다.",
-      connector: "all or close",
+      description: "Execution-incomplete action에 따라 same-source repair/rerun과 P1 없이 candidate version을 닫았습니다.",
+      connector: "closed",
       title: "No model authorization",
       copy: "No architecture, GPU, outer test or rupture-status performance claim",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]

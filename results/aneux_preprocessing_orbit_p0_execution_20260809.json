@@ -1,0 +1,80 @@
+{
+  "schema_version": "aurora.aneux_preprocessing_orbit_p0.execution_record.v1",
+  "experiment_id": "aneux_preprocessing_orbit_p0",
+  "as_of": "2026-08-09",
+  "status": "execution_incomplete_no_scientific_verdict_candidate_closed",
+  "source_commit": "42cc3c7127f382b440f2ac22f662c45692f37863",
+  "config": {
+    "path": "configs/aneux_preprocessing_orbit_p0.json",
+    "sha256": "26393855aec6dbd8af53477e54e8079587af2458fbaf91b5d0fc959c77adc978",
+    "status_at_execution": "preregistered_before_tabular_or_model_archive_payload_access"
+  },
+  "wrapper": {
+    "path": "cluster/pbs_aneux_preprocessing_orbit_p0.pbs",
+    "sha256": "1639530296b8051147fe53bf0f846ae5a64b63285169a7ac0c2ee3a00704b391"
+  },
+  "implementation": {
+    "path": "src/aurora/aneux_preprocessing_orbit_p0.py",
+    "sha256": "3fea9e10d9dae594872ba5a4372974a76ded579581c0373ab1a42a4424fc3bf2"
+  },
+  "environment": {
+    "execution_server_role": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "resources": "select=1:ncpus=4:mem=16gb:ngpus=0",
+    "walltime_limit": "01:00:00",
+    "python": "3.9.12",
+    "gpu_requested": false,
+    "model_or_checkpoint_accessed": false
+  },
+  "execution": {
+    "scheduler_job_id": "115177.ECE-util1",
+    "scheduler_exit_status": 2,
+    "scheduler_walltime": "00:37:00",
+    "scheduler_cput": "00:00:00",
+    "scheduler_peak_memory": "26596kb",
+    "run_count": 1,
+    "result_file_created": true,
+    "result_file_sha256": "f57ef0747806679d4de233d26330420de3bb3d29516a433d1125931ffaa333a0",
+    "status_file_sha256": "b278d9f759f06976d4f1616a2e6fcd406c5b109ba3e7e4d4c4955c6f82a5d184",
+    "raw_scheduler_log_materialized": false,
+    "last_verified_stage": "bounded_transport_exhausted_before_first_tabular_archive_completed",
+    "scientific_gate_evaluated": false,
+    "passed_checks": null,
+    "total_checks": 13
+  },
+  "failure": {
+    "stage": "initial_tabular_archive_transport",
+    "error_code": "transport_attempts_exhausted",
+    "reason": "the_three_frozen_attempts_for_the_initial_tabular_archive_operation_exhausted_before_a_complete_archive_materialized",
+    "exact_low_level_transport_exception_resolved": false,
+    "interpretation": "The registered aggregate identifies bounded transport exhaustion. It does not identify a dataset, parser, semantic, or scientific-gate failure."
+  },
+  "access_boundary": {
+    "completed_tabular_archive_retained": false,
+    "partial_tabular_file_retained": false,
+    "transient_transport_bytes_received": null,
+    "tabular_csv_member_parsed": false,
+    "case_identifier_accessed_or_published": false,
+    "case_level_clinical_or_morphometric_value_accessed_or_published": false,
+    "model_archive_head_or_range_accessed": false,
+    "model_central_directory_accessed": false,
+    "model_member_payload_accessed": false,
+    "task_unit_audited": false,
+    "model_or_gpu_used": false,
+    "outer_test_accessed": false
+  },
+  "decision": {
+    "candidate_status": "closed_after_registered_execution_incomplete",
+    "scientific_interpretation": "No scientific P0 pass or fail is available; this execution does not support or refute AneuX orbit completeness or preprocessing-orbit task adequacy.",
+    "same_contract_rerun": false,
+    "transport_or_reader_repair": false,
+    "p1_authorized": false,
+    "method_authorized": false,
+    "architecture_authorized": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false,
+    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_only"
+  }
+}

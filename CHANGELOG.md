@@ -4,6 +4,37 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · AneuX preprocessing-orbit P0 closes execution-incomplete
+
+- Exact public source `42cc3c7127f382b440f2ac22f662c45692f37863`의
+  `introai9` CPU/PBS job `115177.ECE-util1`을 4 CPU/16 GB/GPU 0으로 정확히
+  한 번 실행했다. PBS는 exit 2, walltime `00:37:00`, CPU time `00:00:00`,
+  peak memory `26596kb`, run count 1을 기록했다.
+- Privacy-safe result는 `transport_attempts_exhausted`를 기록했다. 첫 official
+  tabular archive가 완성되기 전 bounded attempt가 소진돼 completed/partial
+  cache file은 0이고 CSV member는 parse되지 않았다. Model archive HEAD/range,
+  central directory와 member payload도 접근하지 않았다. Transient transfer
+  byte 수와 low-level exception은 aggregate로 식별하지 않는다.
+- 13개 asset/unit check는 모두 미평가다. 이는 AneuX나 preprocessing-orbit
+  가설의 scientific failure가 아니다. Frozen no-resubmission rule에 따라
+  transport/reader repair, same-contract rerun, P1, method, architecture, GPU,
+  outer test와 submission identity를 열지 않고 candidate version을 닫았다.
+  Active shortlist는 0으로 돌아갔다.
+- 공개 execution record는
+  `results/aneux_preprocessing_orbit_p0_execution_20260809.json`, SHA-256은
+  `ba547b9855229d59fd2ca79293e870828d878ad0b818ca4bb904eb29defde05a`다.
+  Private raw result/status SHA-256은 각각 `f57ef074…333a0`,
+  `b278d9f7…5d184`로 고정했다. Raw scheduler stdout/stderr는 materialize되지
+  않았다.
+- 영향 파일: `results/aneux_preprocessing_orbit_p0_execution_20260809.json`,
+  `AGENTS.md`, `README.md`, `docs/aneux-preprocessing-orbit-audit-2026-08-09.md`,
+  `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`,
+  `docs/literature-lineage.md`, `docs/datasets.md`, `docs/data-acquisition.md`,
+  `docs/server-execution.md`, `configs/aurora_v1.json`, `src/aurora/protocol.py`,
+  `tests/test_protocol.py`, `site/index.html`, `site/learn.html`,
+  `site/assets/aurora.js`, `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · AneuX same-lesion preprocessing orbit enters a P0-only shortlist
 
 - Fresh six-candidate red team에서 AneuX resolution × cut variant를 독립 표본이

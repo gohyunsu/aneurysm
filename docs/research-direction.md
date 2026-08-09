@@ -5,19 +5,20 @@
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
 post-N1c audits completed · ISBI V0 passed development-only · V1 backbone and
-aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit source shortlist 1 at preregistered P0 only · selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
+aggregation completed/failed 5/7 · V1a fixed-checkpoint attribution completed with training underfit · V1b/V1c/V1d asset gates passed · V1e failed 6/9 · M0 execution-incomplete/no scientific verdict · prior identity inactive · cross-protocol 4D-flow I0a passed 14/14 asset-only · I0b execution-incomplete before asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA supervision-semantics candidate rejected · goal-oriented hemodynamic segmentation asset component failed 5/9 and candidate closed · open-CTA physical-grid P0 execution-incomplete/no scientific verdict/no parser repair or rerun and candidate closed · cycle-functional transient WSS P0 execution-incomplete before processed payload/no scientific verdict/no rerun and candidate closed · AneuX preprocessing-orbit P0 execution-incomplete before completed tabular archive/no scientific verdict/no rerun and candidate closed · active shortlist/selected primary problem/method/architecture/GPU/outer test 0 · submission blocked
 
-2026-08-09의 새 source audit에서 admission line을 넘은 후보는
-**same-lesion preprocessing-orbit quotient morphometry**다. AneuX의 동일 병변에
+2026-08-09의 새 source audit에서 admission line을 넘었던 후보는
+**same-lesion preprocessing-orbit quotient morphometry**였다. AneuX의 동일 병변에
 대한 resolution × cut 변형을 하나의 전처리 orbit \(\mathcal O_i\)로 묶고,
 casewise surface-functional disagreement와 향후 model-output disagreement를
-primary estimand 후보로 둔다. Score는 34/40이지만 selected primary는 아니다.
+primary estimand 후보로 두었다. Score는 34/40이었지만 selected primary는 아니었다.
 DiffusionNet, PointNet++, E(3) equivariance, consistency regularization,
 remeshing robustness와 rupture-status classification은 direct prior/control이며
 단독 novelty가 아니다. 남을 수 있는 가설은 **의료 전처리 orbit을 명시적
 equivalence class로 quotient하면서 casewise functional 보존과 source-held-out
 discrimination을 함께 유지하는 구조**뿐이고, P0와 별도 method-free P1 전에는
-그마저 contribution으로 쓰지 않는다.
+그마저 contribution으로 쓰지 않는다. Exact P0가 task gate 전에
+execution-incomplete로 닫혔으므로 이 가설은 현재 inactive다.
 
 P0는 CSV/model payload를 읽기 전에
 [`configs/aneux_preprocessing_orbit_p0.json`](../configs/aneux_preprocessing_orbit_p0.json)에
@@ -25,7 +26,12 @@ P0는 CSV/model payload를 읽기 전에
 MD5·patient/cut/morphometry mapping과 model ZIP의 tail/central-directory exact
 range만 검사한다. Full model archive와 mesh member payload는 읽지 않는다.
 한 exact job의 각 HTTP operation에 대한 transient transport attempt 세 번 외에는
-같은 source 재제출이 없으며, pass도 method-free P1 등록만 허용한다. 근거와 kill rule은
+같은 source 재제출이 없으며, pass도 method-free P1 등록만 허용하도록 했다.
+실제 exact `42cc3c7…` job `115177`은 exit 2, walltime 37분 뒤 initial tabular
+transport attempt exhaustion으로 종료됐다. Complete/partial tabular archive와
+CSV parse는 0이고 model HEAD/range/central-directory/member에도 도달하지 않아
+13개 check는 전부 미평가다. Repair/rerun/P1 없이 candidate를 닫았다. 근거와
+kill rule은
 [`aneux-preprocessing-orbit-audit-2026-08-09.md`](aneux-preprocessing-orbit-audit-2026-08-09.md)에
 있다.
 
@@ -54,16 +60,17 @@ result JSON은 없다. PixelData는 decode·inspect하지 않았고 STL 단계�
 도달하지 않았다. 등록된 parser-repair/same-contract-rerun 금지에 따라 후보를
 닫았으며 active shortlist는 다시 0이다.
 
-## 0. 현재 연구 상태 · source shortlist 1, selected primary 0
+## 0. 현재 연구 상태 · active shortlist 0, selected primary 0
 
 현재 source of truth는
 [`aneux-preprocessing-orbit-audit-2026-08-09.md`](aneux-preprocessing-orbit-audit-2026-08-09.md)와
 [`configs/aneux_preprocessing_orbit_p0.json`](../configs/aneux_preprocessing_orbit_p0.json)이다.
-현재 공개 source metadata상 750 lesion, 605 patient, 3 resolution, 4 cut과
-170 morphometric feature가 보고되지만, row-level CSV와 model central directory,
-mesh payload는 아직 읽지 않았다. 따라서 active source shortlist만 1이며 task
-unit, selected primary, architecture와 성능 증거는 0이다. 다음 허용 작업은 exact
-public commit의 `introai9` CPU/PBS P0 한 번뿐이다.
+공개 source metadata상 750 lesion, 605 patient, 3 resolution, 4 cut과 170
+morphometric feature가 보고된다. 그러나 exact P0는 첫 tabular archive completion
+전에 transport attempt를 소진해 row-level CSV를 parse하지 않았고 model central
+directory와 mesh payload에도 도달하지 않았다. Scientific gate, task unit,
+selected primary, architecture와 성능 증거는 0이다. Same-source repair/rerun과
+P1은 금지하며 다음 허용 작업은 fresh problem-level source/asset audit뿐이다.
 
 Cycle-functional branch의 source/config/result는 historical evidence로 보존한다.
 PBS job `115168`은 exit 28, result 0, scientific gate unevaluated였고 같은

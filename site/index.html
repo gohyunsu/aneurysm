@@ -47,10 +47,10 @@
         <p class="hero-lede">
           AneuX의 같은 병변은 서로 다른 mesh resolution과 isolation cut으로
           표현됩니다. 이들을 별도 환자나 augmentation이 아니라 하나의
-          preprocessing orbit으로 보고, surface functional과 향후 예측이 orbit
-          안에서 얼마나 흔들리는지 먼저 측정합니다. 현재는 34/40 source
-          shortlist 하나와 payload-before P0 계약만 있습니다. Selected primary,
-          model, GPU와 outer test는 아직 없습니다.
+          preprocessing orbit으로 보는 34/40 후보를 감사했습니다. 그러나 exact
+          P0는 첫 tabular archive completion 전에 bounded transport를 소진해
+          scientific gate 미평가로 닫혔습니다. Active shortlist, selected primary,
+          model, GPU와 outer test는 모두 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
@@ -58,6 +58,7 @@
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
           <a class="button ghost" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">Latest audit ↗</a>
           <a class="button ghost" href="../configs/aneux_preprocessing_orbit_p0.json">Frozen P0 ↗</a>
+          <a class="button ghost" href="../results/aneux_preprocessing_orbit_p0_execution_20260809.json">P0 outcome ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
           <a class="button ghost" href="../results/open_cta_physical_p0_execution_20260809.json">Execution record ↗</a>
           <a class="button ghost" href="../docs/isbi-2027-plan.md">ISBI plan ↗</a>
@@ -65,7 +66,7 @@
       </div>
 
       <div class="hero-visual" aria-label="같은 동맥류를 여러 mesh resolution과 cut으로 관측하는 preprocessing orbit 개념도">
-        <div class="visual-caption">SOURCE SHORTLIST 34/40 · P0 PREREGISTERED · PAYLOAD 0</div>
+        <div class="visual-caption">HISTORICAL 34/40 · P0 INCOMPLETE · SCIENTIFIC GATE UNEVALUATED</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -99,16 +100,16 @@
         </div>
         <div class="visual-legend">
           <span><i class="dot lime"></i> same lesion → preprocessing orbit</span>
-          <span><i class="dot coral"></i> CSV · mesh payload not yet accessed</span>
+          <span><i class="dot coral"></i> no completed archive · CSV/model access 0</span>
           <span>primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Source shortlist</span><b>1 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>P0 preregistered · payload 0</b></div>
+        <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
+        <div><span>Current evidence</span><b>P0 incomplete · no scientific verdict</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>introai9 CPU/PBS P0 once</b></div>
+        <div><span>Next authorization</span><b>fresh problem/source audit only</b></div>
       </div>
     </section>
 
@@ -216,9 +217,9 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the orbit<br><em>before choosing a network.</em></h2>
         <p>
-          아래 흐름은 network architecture가 아니라 preregistered exact P0 asset
-          chain입니다. Tabular mapping과 model ZIP central directory가 same-lesion
-          orbit을 실제로 지지하는지 먼저 확인합니다.
+          아래 흐름은 network architecture가 아니라 frozen exact P0 asset
+          chain과 실제 early stop입니다. Tabular mapping과 model ZIP central
+          directory를 확인하기 전에 transport가 소진됐습니다.
         </p>
       </div>
 
@@ -227,8 +228,8 @@
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
           DiffusionNet, PointNet++과 E(3)-equivariant mesh network는 향후 strong
-          controls일 수 있지만 현재 method가 아닙니다. P0는 file, patient, cut,
-          resolution과 privacy boundary만 검사합니다.
+          controls일 수 있지만 현재 method가 아닙니다. P0는 scientific check에
+          도달하지 못했고 같은 source의 P1도 열리지 않았습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -237,7 +238,7 @@
         <button class="active" type="button" data-mode="presence">Source</button>
         <button type="button" data-mode="point">Units</button>
         <button type="button" data-mode="mask">Decision</button>
-        <span id="mode-description">두 official archive identity는 고정했고 payload는 아직 읽지 않았습니다.</span>
+        <span id="mode-description">두 official archive identity는 고정했지만 첫 tabular transport가 completion 전에 소진됐습니다.</span>
       </div>
 
       <div class="architecture-flow">
@@ -254,18 +255,18 @@
         <div class="arch-connector"><span>exact pair</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">BOUNDED ACCESS</p>
+          <p class="arch-label">BOUNDED ACCESS · STOPPED HERE</p>
           <h3>CSV + ZIP central directory</h3>
-          <p>13 MB tabular only · exact ranges · no model member payload</p>
+          <p>No completed/partial tabular file · CSV/model range access 0</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">후보와 모델 구분</a>
         </article>
         <div class="arch-connector accent"><span id="bc-connector-label">verify hashes</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">ORBIT CONTRACT</p>
+          <p class="arch-label">ORBIT CONTRACT · NOT EVALUATED</p>
           <h3 id="bc-node-title">Exact source identity</h3>
-          <p id="bc-node-copy">750 lesions, patient groups, 3 resolutions and 4 cuts must match</p>
+          <p id="bc-node-copy">All 13 asset/unit checks remain unevaluated</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
@@ -275,21 +276,21 @@
         <div class="arch-connector"><span>all checks</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">ONE EXACT CPU/PBS P0</p>
-          <h3>All checks or close</h3>
+          <p class="arch-label">ONE EXACT CPU/PBS P0 · COMPLETE</p>
+          <h3>Execution-incomplete → closed</h3>
           <div class="dual-branch">
             <span><b>Pass</b>register method-free P1 only</span>
             <span><b>Fail/incomplete</b>close this candidate version</span>
           </div>
-          <p>Three bounded transport attempts inside one job · no resubmission</p>
+          <p>Exit 2 · 00:37:00 · transport exhausted · no resubmission</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
         <div class="arch-connector"><span>not authorized</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
-          <p class="arch-label">NEXT</p>
+          <p class="arch-label">NEXT · FRESH PROBLEM ONLY</p>
           <h3>P1 remains closed</h3>
-          <p>Only P0 pass may register a separate method-free adequacy audit</p>
+          <p>No repair/rerun; a separate problem-level audit must start anew</p>
           <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>still not authorized</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -306,7 +307,7 @@
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>P0는 asset/unit만 판단합니다. P1도 method 없이 within-orbit와 between-lesion signal을 비교합니다.</p>
+          <p>P0는 asset/unit에 도달하지 못했습니다. P1과 within-orbit task audit은 미등록입니다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -572,7 +573,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Cycle-functional P0 incomplete · candidate closed · primary/model/GPU 0</b>
+        <span>Current stage</span><b>AneuX P0 incomplete · candidate closed · shortlist/primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

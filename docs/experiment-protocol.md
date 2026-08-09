@@ -1,17 +1,17 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.7-draft · 2026-08-09
+버전: 3.7 · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
-## P0-O · AneuX same-lesion preprocessing orbit · preregistered, pending
+## P0-O · AneuX same-lesion preprocessing orbit · execution-incomplete, closed
 
-현재 유일한 source shortlist는 AneuX의 동일 lesion에 제공되는 resolution × cut
-변형을 하나의 preprocessing orbit으로 묶는 문제다. Source score 34/40은 asset
-audit 실행 자격일 뿐 selected primary, method 또는 contribution이 아니다.
+직전 유일한 source shortlist는 AneuX의 동일 lesion에 제공되는 resolution × cut
+변형을 하나의 preprocessing orbit으로 묶는 문제였다. Source score 34/40은 asset
+audit 실행 자격일 뿐 selected primary, method 또는 contribution이 아니었다.
 
 - exact config: `configs/aneux_preprocessing_orbit_p0.json`, SHA-256
   `26393855aec6dbd8af53477e54e8079587af2458fbaf91b5d0fc959c77adc978`
@@ -33,10 +33,23 @@ audit 실행 자격일 뿐 selected primary, method 또는 contribution이 아�
 - fail/incomplete: 이 candidate version을 닫거나 no-verdict로 보존하며 method,
   architecture, GPU, outer test와 rupture-status claim을 열지 않는다.
 
-P0 이전에는 official record/content-description만 사용했고 CSV payload, model
-central directory와 mesh payload는 읽지 않았다. P1은 같은-lesion variation과
-between-lesion variation, analytic/precomputed morphometry, PointNet++, DiffusionNet,
-E(3) control과 source-held-out discrimination을 결과 전에 고정해야 한다.
+실제 exact source `42cc3c7127f382b440f2ac22f662c45692f37863`은
+`introai9` PBS job `115177.ECE-util1`에서 한 번 실행됐다. Scheduler는 exit 2,
+walltime `00:37:00`, CPU time `00:00:00`, peak memory `26596kb`, run count 1을
+기록했고 aggregate error는 `transport_attempts_exhausted`였다. 첫 tabular
+archive가 완성되기 전 종료돼 completed/partial file은 0이고 CSV member parse,
+model HEAD/range/central directory/member access는 모두 0이다. Raw scheduler
+log도 materialize되지 않아 low-level transport exception은 단정하지 않는다.
+
+13개 check는 전부 미평가이며 scientific pass/fail은 없다. Frozen action대로
+same-source transport/reader repair, resubmission, P1, method, architecture, GPU와
+outer test를 열지 않고 이 candidate version을 닫는다. Public provenance는
+`results/aneux_preprocessing_orbit_p0_execution_20260809.json`이다.
+
+P0 이전에는 official record/content-description만 사용했다. 실제 P0도 complete
+tabular archive/CSV parse와 model range에 도달하지 못했다. P1은 등록하지 않으며,
+같은-lesion variation, analytic/precomputed morphometry, PointNet++, DiffusionNet,
+E(3) control과 source-held-out discrimination은 미평가로 남는다.
 `junjinyong`은 실행·조회·모니터링 대상이 아니다.
 
 ## P0-W · AneuG-Flow cycle-functional source pair · execution-incomplete, closed
@@ -1485,7 +1498,7 @@ paper로 범위를 축소하고 AAAI general method claim을 하지 않는다.
 | AneuG-Flow | irregular 3D pretraining | geometry archive만 local; BC variation 없음 |
 | BenchAnXplore | transient GNN baseline/D0 | 105×80 audited; D0 실행 |
 | CMHA | secondary real-CFD/status diagnostic | exploratory increment negative |
-| AneuX v1.0 | P0-only same-lesion preprocessing-orbit asset 후보; status는 P1 뒤 secondary association만 | real CFD 없음; patient/source grouping 전 성능 실험 금지 |
+| AneuX v1.0 | closed same-lesion preprocessing-orbit P0 history; P1 미등록 | real CFD 없음; scientific gate 미평가; same-source rerun/성능 실험 금지 |
 
 Full multi-terabyte archive를 먼저 받지 않는다. Remote manifest에서 shard
 크기, case/BC grouping, checksum을 확인한 뒤 최소 pilot subset만 승인된

@@ -4,22 +4,24 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active **source shortlist는 1개**, selected primary problem은 **0개**입니다.
-새 후보는 AneuX의 같은 병변에 제공되는 3개 mesh resolution과 최대 4개 isolation
-cut을 독립 표본이나 augmentation이 아니라 하나의 **preprocessing orbit**으로
-정의합니다. 질문은 surface functional과 향후 예측이 그 orbit 안에서 얼마나
-흔들리는지, 그리고 nuisance variation을 quotient하면서 병변 간 형태 신호를
-보존할 수 있는지입니다. Source score는 34/40이지만, 아직 CSV/model payload를
-읽지 않은 P0-only 후보이며 method·architecture·GPU·outer test와 paper identity는
-모두 0입니다.
+현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
+가장 최근 34/40 후보는 AneuX의 같은 병변에 제공되는 3개 mesh resolution과 최대
+4개 isolation cut을 하나의 **preprocessing orbit**으로 다루는 문제였습니다.
+그러나 exact public source `42cc3c7…`의 `introai9` CPU/PBS P0는 첫 tabular
+archive를 완성하기 전에 등록된 transport attempt를 모두 소진했습니다. CSV를
+parse하지 않았고 model HEAD/range·central directory·member payload에도 도달하지
+않아 13개 scientific asset check는 전부 미평가입니다. 이 version은
+`execution-incomplete/no scientific verdict`로 닫았고 method·architecture·GPU·
+outer test와 paper identity는 계속 0입니다.
 
-[`AneuX orbit audit`](docs/aneux-preprocessing-orbit-audit-2026-08-09.md)과
-[`frozen P0`](configs/aneux_preprocessing_orbit_p0.json)은 official 13 MB tabular
-archive와 6.28 GB model archive의 file identity, patient grouping, cut–morphometry
-mapping과 ZIP central-directory 구조를 먼저 검사하도록 고정합니다. Model
-archive는 HEAD/tail/central-directory byte range만 읽고 mesh member payload는
-열지 않습니다. Exact public commit 뒤 `introai9` CPU/PBS에서 한 번만 실행하며,
-pass도 method-free P1만 허용합니다. `junjinyong`은 접속·제출·조회 대상이
+[`AneuX orbit audit`](docs/aneux-preprocessing-orbit-audit-2026-08-09.md),
+[`frozen P0`](configs/aneux_preprocessing_orbit_p0.json)과
+[`execution record`](results/aneux_preprocessing_orbit_p0_execution_20260809.json)은
+등록 계약과 실제 종료 경계를 함께 보존합니다. PBS job `115177`은 GPU 0으로
+한 번만 실행됐고 exit 2, walltime 37분, `transport_attempts_exhausted`를
+기록했습니다. Completed/partial tabular file은 남지 않았고 raw scheduler log도
+materialize되지 않았습니다. 등록 규칙대로 transport/reader repair,
+same-contract rerun과 P1을 열지 않습니다. `junjinyong`은 접속·제출·조회 대상이
 아닙니다.
 
 직전 `cycle-functional-compatible transient WSS surrogation` 33/40 후보는 exact
@@ -109,18 +111,17 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 실패 이력의 연속성을 위해 유지하지만,
-> 현재 source shortlist는 AneuX preprocessing-orbit 후보 1개이고, selected
-> primary problem·방법명·architecture는 없습니다. P0가 asset/unit 계약을
-> 통과해도 method-free P1만 열립니다. 닫힌 P0/S0a를 수리하거나 GNN·U-Net·
-> training config를 먼저 고르지 않습니다.
+> 현재 source shortlist, primary problem·방법명·architecture는 모두 없습니다.
+> AneuX P0는 scientific gate 전에 execution-incomplete로 닫혔습니다. 이를
+> AneuX나 preprocessing-orbit 가설의 실패로 쓰지 않으며, 닫힌 P0/S0a를
+> 수리하거나 GNN·U-Net·training config를 먼저 고르지 않습니다.
 
-## 현재 단계 · source shortlist 1 · primary problem/method/GPU 0
+## 현재 단계 · active shortlist/primary problem/method/GPU 0
 
 현재 허용된 다음 작업은 open-CTA parser 수리, AneuG-Flow P0 repair/rerun 또는
-닫힌 branch 재실행이 아니라, 공개 커밋에 고정된 AneuX **CPU-only P0 asset
-audit을 `introai9`에서 한 번 실행**하는 것입니다. P0 pass 전에는 P1이 없고,
-P1의 method-free task adequacy pass 전에는 executable headline model, GPU job,
-outer test와 submission identity가 없습니다.
+닫힌 AneuX branch 재실행이 아니라 **fresh problem-level primary-source/asset
+audit**입니다. 새 후보가 별도의 method-free task adequacy를 통과하기 전에는
+executable headline model, GPU job, outer test와 submission identity가 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.
