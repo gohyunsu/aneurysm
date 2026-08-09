@@ -1,0 +1,78 @@
+{
+  "schema_version": "aurora.source_watch.v1",
+  "watch_id": "iavs_public_release_v1",
+  "status": "watch_only",
+  "observed_on": "2026-08-10",
+  "source": {
+    "repository": "AbsoluteResonance/IAVS",
+    "repository_url": "https://github.com/AbsoluteResonance/IAVS",
+    "paper_url": "https://arxiv.org/abs/2512.01319",
+    "default_branch": "main"
+  },
+  "paper_claims_for_source_audit_only": {
+    "images": 641,
+    "aneurysm_and_parent_vessel_annotations": 587,
+    "modalities": [
+      "3D MRA"
+    ],
+    "reported_assets": [
+      "image-mask pairs",
+      "hemodynamic analysis outcomes",
+      "CFD applicability evaluation"
+    ],
+    "direct_prior_boundary": "The paper already defines two-stage localization/segmentation and CFD-applicability evaluation; generic segmentation-to-CFD scoring is not residual novelty."
+  },
+  "frozen_snapshot": {
+    "main_head_sha": "2e40088d9eaa671c592929a154b7b2cf99f9320a",
+    "root_entries": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 90
+      }
+    ],
+    "release_count": 0,
+    "license_spdx_id": null,
+    "repository_size_kib": 2,
+    "payload_or_code_entries": [],
+    "availability": "unreleased_readme_only"
+  },
+  "change_detection": {
+    "fresh_source_reaudit_if_any": [
+      "main_head_changed_with_non_readme_payload_or_code",
+      "release_count_increased",
+      "explicit_repository_license_appeared",
+      "official_versioned_dataset_record_appeared_manual_review"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "score_repair_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "fresh_source_reaudit_only"
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

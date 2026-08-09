@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 IAVS watch-only:** Paper metadata는 641개 3D MRA, 587개
+> aneurysm–parent-vessel annotation과 CFD outcome을 보고한다. 그러나 official
+> repository exact `2e40088…`은 README 한 파일, release 0, explicit license 0,
+> payload/code 0이다. Dataset role이나 source score를 부여하지 않는다.
+> [`source-watch`](source-watch.md)는 release 변화를 감지해도 fresh source audit만
+> 요청하며 download, terms acceptance, P0, model과 GPU를 자동 허용하지 않는다.
+
 > **2026-08-09 source-delta audit:** OpenNeuro longitudinal, RSNA controlled,
 > VICTORIA, IntrA, IAIA와 flow-diverter sources를 source-only로 비교했다. 최고
 > OpenNeuro growth도 31.5/40이며 public longitudinal unit 24와 동일 cohort direct

@@ -1,6 +1,6 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-09 current boundary:** 가장 최근 source-delta batch의 최고 후보는
+> **2026-08-10 current boundary:** 가장 최근 source-delta batch의 최고 후보는
 > OpenNeuro paired-surface growth 31.5/40이며 source에서 기각했다. 같은 공개
 > cohort를 사용하는 Bayesian growth direct prior와 24 longitudinal patient의
 > effective unit 한계가 있다. Payload/P0/model/GPU는 0이다. 그 이전 AneuX
@@ -8,8 +8,11 @@
 > 34/40으로 P0에 진입했지만, exact CPU-only job이 첫 tabular archive completion
 > 전에 transport attempt를 소진해 scientific gate 미평가로 닫혔다. P1, selected
 > primary, method, architecture, GPU, outer test와 four-page contribution은 없다.
+> IAVS는 reported 641 MRA/587 annotation의 potential source지만 official
+> repository가 README-only이고 release/license/payload가 0이라 watch-only다.
+> 변화가 생겨도 fresh source audit 전에는 후보나 figure/result가 아니다.
 
-최종 검토일: 2026-08-09 KST
+최종 검토일: 2026-08-10 KST
 
 상태: **target locked · source-delta best 31.5/40 and all rejected · AneuX
 preprocessing-orbit P0 execution-incomplete/no verdict/no rerun · active

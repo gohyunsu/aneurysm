@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · IAVS is frozen as a watch-only external source
+
+- IAVS paper는 641개 3D MRA, 587개 aneurysm–parent-vessel annotation과 CFD
+  outcome을 보고하지만, official repository `main` exact
+  `2e40088d9eaa671c592929a154b7b2cf99f9320a`에는 90-byte README 한 파일만
+  있다. Release 0, explicit repository license 0, payload/code 0이다.
+- 논문 자체의 two-stage localization/segmentation과 CFD Applicability Score를
+  direct prior로 올렸다. Generic segmentation→CFD evaluation, topology metric,
+  U-Net/GNN/Transformer 또는 uncertainty head는 독립 novelty가 아니다.
+- `configs/source_watch_v1.json`과 standard-library validator는 official metadata
+  변화만 감지한다. 변화가 생겨도 fresh source audit만 요청하며 automatic
+  download/terms acceptance/P0/method/architecture/GPU/outer test는 모두 false다.
+- `introai9` public-key 접속과 PBS AURORA job 0을 재확인했다. Login-node GPU
+  명령은 실행하지 않았고 `junjinyong`에는 접속·조회·제출·모니터링하지 않았다.
+- 영향 파일: `configs/source_watch_v1.json`, `src/aurora/source_watch.py`,
+  `scripts/audit_source_watch.py`, `tests/test_source_watch.py`,
+  `docs/source-watch.md`, `README.md`, `docs/research-direction.md`,
+  `docs/model-spec.md`, `docs/experiment-protocol.md`, `docs/datasets.md`,
+  `docs/literature-lineage.md`, `docs/isbi-2027-plan.md`,
+  `docs/server-execution.md`, `site/index.html`, `site/assets/research-data.js`,
+  `AGENTS.md`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Source-delta decision is deployed and verified
 
 - Exact content commit `8d7f7d7d4e41c72eafb1dd08ae27d843ee00fc54`의

@@ -9,6 +9,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "IAVS remains an unreleased watch-only source",
+      copy: "The IAVS paper reports 641 3D MRA images, 587 aneurysm/parent-vessel annotations and CFD outcomes, but official main 2e40088… contains only a 90-byte README. Releases, explicit repository license and code/data payload are all zero. The paper already occupies two-stage localization/segmentation and CFD-applicability evaluation, so generic segmentation-to-CFD scoring is not residual novelty. A machine-readable monitor can request only a fresh source audit after a material release; it cannot download data, register P0, select a model or authorize GPU compute.",
+      status: "Watch-only · README 1 · release/license/payload 0 · no score/P0/model/GPU",
+      url: "../docs/source-watch.md"
+    },
+    {
+      year: "2026.08",
       title: "Source-delta batch leaves no admission-qualified problem",
       copy: "Six fresh source-level candidates were scored without payload or architecture. OpenNeuro paired-surface growth is best at 31.5/40, but a Bayesian surface-displacement model already uses the same public cohort and only 24 public patients are longitudinal. RSNA remains controlled-access with point/territory rather than official aneurysm-extent masks; VICTORIA has five independent geometries; IntrA meshes are not staged and topology/bifurcation controls are directly occupied. IAIA is proposal-only and the flow-diverter release lacks sufficient imaging–endpoint linkage. Scores are not repaired to cross 32.",
       status: "Best 31.5/40 · all source rejected · no P0/model/GPU",
@@ -390,6 +397,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "operations",
+      title: "IAVS public state is frozen as watch-only",
+      copy: "Official GitHub metadata exactly matches the frozen snapshot at main 2e40088d9eaa671c592929a154b7b2cf99f9320a: one 90-byte README, zero releases, no explicit repository license and no code/data entries. The standard-library monitor validates that any future signal opens only a fresh source audit; automatic download, terms acceptance, score repair, P0, method, architecture, GPU and outer test remain false. Introai9 connectivity and zero AURORA PBS jobs were reconfirmed without a login-node GPU command; junjinyong was not accessed.",
+      files: ["configs/source_watch_v1.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", "docs/source-watch.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

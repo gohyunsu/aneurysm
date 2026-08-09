@@ -1,10 +1,23 @@
 # AURORA 서버 실행과 provenance
 
-최종 갱신: 2026-08-09 KST
+최종 갱신: 2026-08-10 KST
 
 이 문서는 재현에 필요한 역할과 절차만 공개한다. SSH endpoint, 내부 절대
 경로, credential, patient-level row와 prediction은 기록하지 않는다. 실제
 운영 명령과 private path는 Git에서 제외된 `SERVER_GUIDE.md`를 따른다.
+
+## 2026-08-10 execution boundary check
+
+- Credential-managed local SSH config의 `introai9` alias로 public-key 접속을
+  다시 확인했다. Endpoint와 key 경로는 공개하지 않는다.
+- 원격 사용자는 `introai9`였고 PBS AURORA job은 0개였다.
+- Known source root의 후보 이름 검색이 login node에서 길어져 60초 뒤
+  중단했다. 이 bounded metadata search를 반복하거나 deep recursive scan으로
+  확대하지 않는다.
+- Login-node `nvidia-smi`, GPU training과 PBS GPU 제출은 실행하지 않았다.
+- `junjinyong`은 접속·조회·제출·모니터링하지 않았다.
+- IAVS 상태 확인은 공식 GitHub metadata를 읽는 source watch이며 scientific
+  experiment가 아니다. P0/P1 gate 전에는 `introai9` GPU job을 만들지 않는다.
 
 ## 서버 역할
 

@@ -94,10 +94,24 @@ exit 28로 execution-incomplete가 되어 닫혔다. Scientific gate와 contribu
 [`cycle-functional-wss-audit-2026-08-09.md`](cycle-functional-wss-audit-2026-08-09.md)를
 따른다.
 
-검토 기준일: 2026-08-09 KST
+검토 기준일: 2026-08-10 KST
 
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을
 우선한다. arXiv preprint는 peer-reviewed evidence와 분리한다.
+
+## 0-S. Watch-only direct prior · IAVS
+
+[IAVS](https://arxiv.org/abs/2512.01319)은 641개 3D MRA와 587개 aneurysm 및
+parent-vessel annotation을 보고하고, global localization→fine segmentation의
+two-stage framework와 standardized mask-to-CFD applicability evaluation을 함께
+제안한다. 따라서 vessel-aware segmentation, topology metric, CFD solver success
+또는 task-based score 자체는 새 gap이 아니다.
+
+2026-08-10 [official repository](https://github.com/AbsoluteResonance/IAVS)는
+exact `2e40088…`, README 한 파일, release 0, explicit license 0, payload/code
+0이다. 논문의 reported cohort를 실행 가능한 공개 자산으로 간주하지 않는다.
+[`source-watch`](source-watch.md)는 release 변화를 source 재감사 신호로만 쓰며
+method나 compute를 열지 않는다.
 
 ## 0. Closed conditional gap · physical-coordinate lesion-instance commutation
 

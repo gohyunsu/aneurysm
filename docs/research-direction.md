@@ -1,6 +1,6 @@
 # AURORA 연구 방향
 
-최종 검토일: 2026-08-09 KST
+최종 검토일: 2026-08-10 KST
 
 상태: ISBI 2027 target locked · not submission-ready · G1/G1r failed
 preserved · G1s pass · N0 failed preserved · N0r pass · N1c failed unchanged ·
@@ -15,6 +15,15 @@ Bayesian surface-displacement growth detection이 직접 선행이고, 공개 �
 IAIA와 flow-diverter 후보도 각각 controlled terms, 5 geometry, payload 부재,
 proposal-only 또는 imaging–endpoint linkage 부족으로 32점에 못 미쳤다. 이 batch는
 source-only이며 method, architecture와 GPU를 만들지 않는다.
+
+IAVS는 새 candidate가 아니라 **external-state watch**다. 논문은 641개 3D
+MRA, 587개 aneurysm–parent-vessel annotation과 CFD outcome을 보고하지만,
+2026-08-10 official `main` exact `2e40088…`은 README 한 파일, release 0,
+explicit repository license 0, code/data payload 0이다. 논문 자체가 two-stage
+localization/segmentation과 CFD Applicability Score를 이미 제안하므로 단순
+segmentation→CFD 평가는 residual novelty가 아니다. 상세 계약은
+[`source-watch.md`](source-watch.md)에 있으며, 변화 감지도 fresh source audit만
+열고 download, P0, method, architecture와 GPU는 열지 않는다.
 
 직전 fresh six-candidate audit의 최고점은 **DIAS DSA prefix-to-final
 vessel-support risk control** 31.0/40이었다. 60 patient/120 sequence 중 60

@@ -17,6 +17,14 @@ RSNA는 공식 record가 4,000건 이상의 scan을 기술하지만 controlled-a
 [`source-delta audit`](docs/source-delta-audit-2026-08-09.md)만 고정했습니다.
 새 payload, P0, method, architecture와 GPU job은 0입니다.
 
+IAVS는 향후 자산 변화만 감시합니다. 논문은 641개 3D MRA와 587개
+aneurysm–parent-vessel annotation 및 CFD outcome을 보고하지만, 2026-08-10
+공식 저장소 exact `2e40088…`에는 90-byte README 한 파일만 있고 release,
+명시적 license와 code/data payload는 모두 0입니다. 따라서 source score도
+부여하지 않습니다. [`watch-only 계약`](docs/source-watch.md)은 새 release를
+발견해도 fresh source 재평가만 요청하며 download/P0/model/GPU를 자동으로
+열지 않습니다.
+
 직전 DIAS DSA prefix-risk 후보도 31.0/40으로 source에서 기각된 history입니다.
 전문의가 arterial phase만 4--14 frame으로 미리 잘랐고 full sequence DSC는
 minimum projection보다 0.0020 높을 뿐입니다. 상세 근거는

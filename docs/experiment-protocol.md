@@ -7,6 +7,28 @@
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
 
+## S-WATCH · IAVS public-release monitor · no experiment authorization
+
+2026-08-10 official `AbsoluteResonance/IAVS` `main` exact `2e40088…`은 90-byte
+README 한 파일뿐이고 release, explicit repository license와 payload/code가 0이다.
+[`configs/source_watch_v1.json`](../configs/source_watch_v1.json)은 이 snapshot과
+no-download/no-P0/no-model/no-GPU 경계를 고정한다. Read-only monitor는 main
+commit+non-README entry, versioned release와 license 변화를 자동 감지한다.
+Official dataset record는 별도 1차 출처의 manual review로만 붙인다. 변화가
+있어도 허용되는 다음 단계는 별도 **fresh source
+audit**뿐이며 source score 32, 명시적 license/사용자-confirmed terms,
+machine-auditable manifest와 independent-unit semantics를 통과하기 전에는
+payload P0를 등록하지 않는다. P0/P1 전에는 architecture와 GPU가 없다.
+
+```bash
+python scripts/audit_source_watch.py \
+  --config configs/source_watch_v1.json \
+  --validate-only
+```
+
+`--fetch`도 GitHub metadata만 읽고 결과를 stdout으로 출력한다. 이 절은
+실험·development repair round나 scientific evidence가 아니다.
+
 ## SΔ · 2026 source-delta batch · all source rejected, no execution
 
 OpenNeuro longitudinal growth, RSNA point-set detection, VICTORIA neck curves,

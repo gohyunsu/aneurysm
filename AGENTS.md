@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 IAVS watch-only overlay:** Official IAVS paper는 641개 3D MRA,
+> 587개 aneurysm–parent-vessel annotation과 CFD outcome을 보고하지만 official
+> repository `main` exact `2e40088d9eaa671c592929a154b7b2cf99f9320a`에는
+> 90-byte README 한 파일만 있다. Release, explicit repository license와
+> code/data payload는 모두 0이다. `configs/source_watch_v1.json`은 이 상태를
+> watch-only로 고정하며 source score를 부여하지 않는다. External state가
+> 바뀌어도 fresh source audit만 열고 automatic download/terms acceptance,
+> P0, method, architecture, GPU와 outer test를 열지 않는다. IAVS의 two-stage
+> localization/segmentation과 CFD Applicability Score는 direct prior다.
+> `introai9` 접속과 PBS AURORA job 0을 재확인했고 login-node GPU command는
+> 실행하지 않았다. `junjinyong`에는 접속·조회·제출·모니터링하지 않았다.
+
 이 파일은 사람과 자동화 에이전트가 동일한 연구 가정과 품질 기준으로
 작업하기 위한 단일 운영 메모다. 2026-08-03 KST에 팀 대화, 기존 저장소,
 공개 1차 문헌을 재검토하여 작성했고 2026-08-08 KST ISBI V1

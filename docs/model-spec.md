@@ -5,6 +5,11 @@
 > GNN, U-Net, Transformer, topology module, surface foundation feature와 Bayesian
 > head는 모두 후보 구성요소나 baseline일 뿐 selected AURORA model이 아니다.
 > 상세 판정은 [`source-delta audit`](source-delta-audit-2026-08-09.md)을 따른다.
+> IAVS는 [`watch-only`](source-watch.md)다. Official repository가 README-only이고
+> release/license/payload가 0이므로 architecture 근거가 아니다. 향후 release가
+> 생겨도 generic two-stage vessel segmentation, CFD applicability score, U-Net,
+> GNN 또는 Transformer는 이미 direct prior/engineering choice이며 자동 method
+> selection이나 GPU 권한을 만들지 않는다.
 
 상태: ISBI 2027 target locked · N1c failed · ISBI V0 passed development-only ·
 V1 backbone smoke completed/failed 5/7 · V1a attribution completed/training underfit ·
