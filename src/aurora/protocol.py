@@ -117,8 +117,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "3.3":
-        raise ProtocolError("The current research-state schema must be version 3.3.")
+    if protocol["schema_version"] != "3.4":
+        raise ProtocolError("The current research-state schema must be version 3.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -178,6 +178,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "inverse_healthy_vessel_counterfactual_source_audit",
             "rsna_supervision_semantics_red_team",
             "goal_oriented_segmentation_cold_audit",
+            "aneug_cycle_functional_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -187,15 +188,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_after_inverse_counterfactual_source_audit_rejection"
+        != "conditional_cycle_functional_wss_source_shortlist_awaiting_p0"
         or problem_selection["shortlisted_candidate"]
-        != "none"
+        != "cycle_functional_compatible_transient_wss_surrogation"
         or problem_selection["candidate_dataset"]
-        != "none"
+        != "aneug_flow"
         or problem_selection["candidate_estimand"]
-        != "none"
+        != "surface_resolved_cycle_moments_and_exactly_derived_tawss_osi_rrt_under_the_source_pulsatile_protocol"
         or problem_selection["asset_access_status"]
-        != "open_cta_p0_partial_dicom_header_prefix_access_no_pixel_or_stl_execution_incomplete_topaneu_unaccepted"
+        != "aneug_flow_source_metadata_code_and_two_processed_file_identities_audited_payload_not_accessed"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -205,18 +206,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_without_open_cta_parser_repair_or_rerun"
+        != "execute_single_prospectively_registered_cpu_read_only_aneug_cycle_functional_p0_on_introai9"
         or problem_selection["audit_document"]
-        != "docs/inverse-aneurysm-editing-audit-2026-08-09.md"
+        != "docs/cycle-functional-wss-audit-2026-08-09.md"
         or problem_selection["most_recent_closed_candidate"]
         != "open_cta_physical_grid_commutation"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "inverse_healthy_vessel_counterfactual_editing"
     ):
         raise ProtocolError(
-            "The no-active-problem boundary after the inverse source rejection and "
-            "open-CTA P0 execution-incomplete history must retain no repair, method, "
-            "GPU, or outer test."
+            "The no-active-problem boundary may contain only the conditional "
+            "cycle-functional P0 shortlist; it must retain no selected primary, "
+            "method, GPU, outer test, or repair of closed branches."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -256,6 +257,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "morphology_conditioned_aneurysm_mesh_generation",
         "generic_healthy_counterfactual_anomaly_localization",
         "generic_point_cloud_reconstruction_anomaly_detection",
+        "generic_transient_wss_surrogate",
+        "graph_transformer_or_graphgps_backbone",
+        "ghd_geometry_tokens",
+        "steady_flow_pretraining_or_augmentation",
+        "pod_fourier_dct_or_sequence_temporal_decoder",
+        "generic_cycle_functional_loss_or_direct_functional_head",
+        "scalar_or_population_neural_operator_functional_debiasing",
+        "generic_e3_equivariant_graph_network",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -788,7 +797,93 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The goal-oriented candidate must remain closed after its 5/9 asset failure, "
             "without solver v2, method, GPU, or outer-test authority."
         )
-    checks.append("closed prior candidates and closed open-CTA P0 boundary")
+    cycle_audit = problem_selection["aneug_cycle_functional_source_audit"]
+    _require_keys(
+        cycle_audit,
+        [
+            "status",
+            "audit_document",
+            "config",
+            "candidate_hypothesis",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "dataset_repository_commit",
+            "official_code_commit",
+            "steady_processed_bytes",
+            "steady_processed_sha256",
+            "transient_processed_bytes",
+            "transient_processed_sha256",
+            "dataset_page_transient_cases",
+            "rhsia_paper_transient_cases",
+            "case_count_discrepancy_resolved",
+            "processed_payload_accessed",
+            "physical_wss_recovery_audited",
+            "task_unit_audited",
+            "direct_prior_threats",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "p0_pass_authorizes",
+            "p0_failure_action",
+        ],
+        "problem_selection.aneug_cycle_functional_source_audit",
+    )
+    if (
+        cycle_audit["status"]
+        != "conditional_source_shortlist_p0_registered_payload_not_accessed"
+        or cycle_audit["audit_document"]
+        != "docs/cycle-functional-wss-audit-2026-08-09.md"
+        or cycle_audit["config"] != "configs/aneug_cycle_functional_p0.json"
+        or cycle_audit["score"] != 33.0
+        or cycle_audit["maximum_score"] != 40.0
+        or cycle_audit["automatic_selection_threshold"] != 32.0
+        or cycle_audit["active_shortlist_count"] != 1
+        or cycle_audit["primary_problem_selected"] is not False
+        or cycle_audit["dataset_repository_commit"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or cycle_audit["official_code_commit"]
+        != "4a090a0f12538deef6fcea88b81afe78ce38152e"
+        or cycle_audit["steady_processed_bytes"] != 9632510050
+        or cycle_audit["steady_processed_sha256"]
+        != "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+        or cycle_audit["transient_processed_bytes"] != 23744862051
+        or cycle_audit["transient_processed_sha256"]
+        != "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+        or cycle_audit["dataset_page_transient_cases"] != 730
+        or cycle_audit["rhsia_paper_transient_cases"] != 808
+        or cycle_audit["case_count_discrepancy_resolved"] is not False
+        or cycle_audit["processed_payload_accessed"] is not False
+        or cycle_audit["physical_wss_recovery_audited"] is not False
+        or cycle_audit["task_unit_audited"] is not False
+        or set(cycle_audit["direct_prior_threats"])
+        != {
+            "rhsia_transient_wss_graph_transformer_with_ghd_and_steady_augmentation",
+            "generic_cycle_functional_loss_or_direct_functional_head",
+            "pod_fourier_dct_or_sequence_temporal_decoder",
+            "goal_oriented_neural_operator_correction",
+            "scalar_or_population_neural_operator_functional_debiasing",
+            "generic_e3_equivariant_graph_network",
+        }
+        or cycle_audit["method_selected"] is not False
+        or cycle_audit["architecture_selected"] is not False
+        or cycle_audit["gpu_training_authorized"] is not False
+        or cycle_audit["outer_test_authorized"] is not False
+        or cycle_audit["submission_identity_active"] is not False
+        or cycle_audit["p0_pass_authorizes"]
+        != "register_method_free_p1_cycle_functional_task_adequacy_perturbation_audit_only"
+        or cycle_audit["p0_failure_action"]
+        != "close_cycle_functional_candidate_without_reader_repair_same_contract_rerun_method_gpu_or_outer_test"
+    ):
+        raise ProtocolError(
+            "The cycle-functional candidate must remain a 33/40 source shortlist "
+            "with two exact files, unresolved payload semantics, and P0-only authority."
+        )
+    checks.append("closed prior candidates and one conditional P0-only shortlist")
 
     venue = protocol["venue"]
     _require_keys(
@@ -869,7 +964,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_no_active_problem_after_inverse_counterfactual_source_rejection"
+        != "unselected_conditional_cycle_functional_shortlist_p0_only"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -1033,7 +1128,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "none"
         or task["active_candidate_status"]
-        != "none_after_inverse_counterfactual_source_audit_rejection_with_open_cta_no_repair_boundary_preserved"
+        != "no_primary_or_model_one_conditional_cycle_functional_source_shortlist_p0_only"
         or task["candidate_primary_estimand"]
         != "none"
         or task["candidate_secondary_estimand"]
@@ -1113,6 +1208,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     cmha = next(item for item in datasets if item["name"] == "cmha")
     aneux = next(item for item in datasets if item["name"] == "aneux")
     aneumo = next(item for item in datasets if item["name"] == "aneumo")
+    aneug_flow = next(item for item in datasets if item["name"] == "aneug_flow")
     flow_2021 = next(
         item for item in datasets if item["name"] == "flow_mri_multiresolution_phantom_2021"
     )
@@ -1157,6 +1253,23 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         raise ProtocolError(
             "Aneumo pressure must remain excluded after the scaling audit."
+        )
+    if (
+        aneug_flow.get("role")
+        != "conditional_cycle_functional_p0_source_pair_not_training"
+        or aneug_flow.get("field_provenance") != "synthetic_cfd"
+        or aneug_flow.get("split_unit") != "generator_seed_geometry"
+        or aneug_flow.get("status")
+        != "source_metadata_and_exact_file_identities_audited_payload_not_accessed_p0_registered"
+        or aneug_flow.get("dataset_repository_commit")
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or aneug_flow.get("p0_config")
+        != "configs/aneug_cycle_functional_p0.json"
+        or aneug_flow.get("method_or_gpu_authorized") is not False
+    ):
+        raise ProtocolError(
+            "AneuG-Flow must remain a synthetic, payload-unread, P0-only source pair "
+            "without method or GPU authorization."
         )
     if (
         flow_2021.get("status")

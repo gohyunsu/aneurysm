@@ -35,6 +35,18 @@ Aneumo의 released healthy/pathological pair·ostium/edit manifest 부재,
 IntrA의 same-patient healthy counterfactual·명시적 repository license 부재와
 SynVA/AneuG/counterfactual anomaly·point-cloud reconstruction direct prior 때문에
 27.0/40으로 기각했다. Executable P0, method, architecture와 GPU는 0이다.
+그 뒤 fresh batch는 AneuG-Flow transient WSS와 cycle functional의 compatibility
+문제를 33.0/40의 유일한 조건부 shortlist로 남겼다. Dataset/code/file identity는
+감사했지만 processed payload는 아직 읽지 않았다. Dataset page/NeurIPS paper의
+730 case와 RHSIA의 808 case는 같은 release라고 가정하지 않는다. Exact steady
+9,632,510,050-byte SHA-256 `0c03c1d9…0177f`와 transient 23,744,862,051-byte
+SHA-256 `141541ed…51c9` pair를 `configs/aneug_cycle_functional_p0.json`에서
+고정했다. Transient archive가 steady `tensor_norm`에 의존하므로 physical WSS
+recoverability를 두 파일 함께 확인한다. P0는 `introai9` PBS CPU-only이며 pass도
+method-free P1만 허용한다. Primary problem, method, architecture, GPU, outer test와
+submission identity는 0이다. P0/P1 전 functional head, loss 또는 network를
+구현하지 않는다.
+
 Exact content commit `15bbccbfb367516ee0daaf8d2f5beca20b7c587b`의 Quality
 run `31291453002`와 Pages run `31291452634`는 모두 성공했고, live site에서
 이 판정과 `introai9`-only/현재 GPU job 0 경계를 확인했다. 배포 확인은
@@ -45,8 +57,10 @@ scientific state나 authorization을 바꾸지 않는다.
 - 프로젝트명: **AURORA**
 - 정식 명칭: **Aneurysm Uncertainty-aware Reconstruction Operator for
   Reliable Assessment**
-- 현재 primary problem과 method는 **선택되지 않았다**. Active problem
-  shortlist는 **0개**다. Open-CTA physical-grid 후보의 source-only score
+- 현재 primary problem과 method는 **선택되지 않았다**. Active primary는
+  **0개**, 조건부 source shortlist는 **1개**다. Cycle-functional transient WSS
+  후보는 33.0/40으로 P0만 등록했으며 payload/task adequacy가 미확인이다.
+  Open-CTA physical-grid 후보의 source-only score
   32.0/40과 registered P0 history는 보존하지만, P0가 execution-incomplete로
   끝나 primary selection이나 contribution이 아니다.
   가장 최근 inverse healthy-vessel counterfactual/editing source audit은

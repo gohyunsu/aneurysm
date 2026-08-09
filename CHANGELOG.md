@@ -4,6 +4,38 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-09 · Cycle-functional WSS enters a P0-only conditional shortlist
+
+- 같은 transient WSS field와 TAWSS/OSI/RRT가 공유하는 cycle moments를 하나의
+  representation에서 만족시키는 문제를 fresh batch의 유일한 33.0/40 후보로
+  남겼다. Active primary, method, architecture, GPU, outer test와 contribution은
+  여전히 0이다.
+- AneuG-Flow dataset commit `9dd4180…`, official code `4a090a0…`, steady
+  9,632,510,050-byte SHA-256 `0c03c1d9…0177f`, transient 23,744,862,051-byte
+  SHA-256 `141541ed…51c9`를 payload access 전에 pin했다. Dataset/NeurIPS의
+  730 case와 RHSIA의 808 case를 같은 version으로 가정하지 않는다.
+- Official preprocessing은 transient tensor를 steady `tensor_norm`으로
+  정규화하지만 transient assembled object에는 norm을 저장하지 않는다. 따라서
+  두 파일을 한 physical-WSS recovery pair로 검사한다.
+- `configs/aneug_cycle_functional_p0.json`은 `introai9` PBS CPU-only one-shot,
+  weights-only/mmap reader, exact hash/schema/linkage/static-topology/normalization
+  checks를 고정한다. Pass도 method-free P1 perturbation audit만 열고,
+  fail/execution-incomplete는 dependency·reader repair나 same-contract rerun 없이
+  candidate version을 닫는다.
+- RHSIA의 Graph Transformer/GHD/steady augmentation, generic functional loss/head,
+  temporal basis와 DOPE류 functional debiasing을 direct/non-novel boundary로
+  명시했다. Raw OSI relative error만으로 task gap을 확정하지 않는다.
+- 영향 파일: `docs/cycle-functional-wss-audit-2026-08-09.md`,
+  `configs/aneug_cycle_functional_p0.json`, `src/aurora/aneug_cycle_functional_p0.py`,
+  `scripts/audit_aneug_cycle_functional_p0.py`,
+  `scripts/run_aneug_cycle_functional_p0_pbs.sh`,
+  `tests/test_aneug_cycle_functional_p0.py`,
+  `AGENTS.md`, `README.md`, `docs/research-direction.md`, `docs/model-spec.md`,
+  `docs/experiment-protocol.md`, `docs/isbi-2027-plan.md`, `docs/literature-lineage.md`,
+  `docs/datasets.md`, `configs/aurora_v1.json`, `src/aurora/protocol.py`,
+  `tests/test_protocol.py`, `site/index.html`, `site/learn.html`,
+  `site/assets/research-data.js`, `CHANGELOG.md`.
+
 ## 2026-08-09 · Inverse audit and introai9 policy are deployed
 
 - Exact content commit `15bbccbfb367516ee0daaf8d2f5beca20b7c587b`의 Quality

@@ -1,5 +1,26 @@
 # 선행연구 계보와 research gap
 
+## 0-W. Conditional gap · full transient WSS와 cycle-functional compatibility
+
+[AneuG-Flow](https://papers.nips.cc/paper_files/paper/2025/file/e2b8ff0035bc9f572a7deefbcbea85bc-Paper-Datasets_and_Benchmarks_Track.pdf)는
+730 pulsatile synthetic CFD case와 WSS baseline을 제공한다.
+[RHSIA](https://arxiv.org/abs/2601.19876)는 Graph Transformer, temporal input,
+GHD와 steady-flow augmentation으로 aneurysm surface의 cardiac-cycle WSS를 이미
+직접 예측한다. 따라서 transient surrogate나 graph transformer 자체는 gap이
+아니다. [DOPE](https://arxiv.org/abs/2604.19296)는 neural-operator trajectory의
+scalar functional plug-in bias와 orthogonal debiasing을 다루므로, functional
+accuracy를 목적에 넣는 것 자체도 novelty가 아니다.
+
+남을 수 있는 범위는 한 transient vector field와 spatial TAWSS/OSI/RRT가
+공유하는 두 cycle moment를 구조적으로 만족시키고, strong RHSIA-style field
+baseline보다 hotspot/ranking functional error를 줄이면서 field accuracy를
+보존하는 algorithm과 증거다. Raw OSI relative error는 near-zero denominator
+artifact일 수 있으므로 문제의 비자명성부터 method-free perturbation으로
+확인해야 한다. 현재 33/40 source shortlist와 P0 등록만 있으며 contribution은
+0이다. 상세 audit은
+[`cycle-functional-wss-audit-2026-08-09.md`](cycle-functional-wss-audit-2026-08-09.md)를
+따른다.
+
 검토 기준일: 2026-08-09 KST
 
 원칙: DOI, 공식 proceedings, 저널, 공식 dataset record, arXiv 원문을

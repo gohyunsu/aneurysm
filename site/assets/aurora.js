@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "Frozen parser가 undefined-length sequence에서 중단돼 unit gate에 도달하지 못했습니다.",
-      connector: "parser exits",
-      title: "Frozen parser stops",
-      copy: "Undefined-length Procedure Code Sequence is outside the registered minimal parser",
+      description: "두 exact processed file의 byte와 SHA-256을 먼저 확인합니다.",
+      connector: "verify hashes",
+      title: "Exact source identity",
+      copy: "9.63 GB steady norm and 23.74 GB transient WSS must both match",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "STL 단계에는 도달하지 않아 physical frame check는 미평가입니다.",
-      connector: "frame unopened",
-      title: "STL frame not evaluated",
-      copy: "PixelData and STL were not accessed; no alignment result exists",
+      description: "Steady tensor_norm으로 transient WSS를 복원하고 80-frame static geometry와 topology를 검사합니다.",
+      connector: "recover units",
+      title: "Physical WSS round-trip",
+      copy: "Finite nonzero time-varying WSS, common labels, nodes and triangular faces",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Scientific pass/fail 없이 registered version을 닫고 fresh audit으로 돌아갑니다.",
-      connector: "close without repair",
-      title: "No verdict; no rerun",
-      copy: "No threshold, tolerance, parser or selection repair after the observed outcome",
+      description: "All pass는 method-free P1만 열고, fail/incomplete는 reader나 dependency를 고치지 않고 version을 닫습니다.",
+      connector: "all or close",
+      title: "P1 only or close",
+      copy: "No method, architecture, GPU, outer test or same-contract repair",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

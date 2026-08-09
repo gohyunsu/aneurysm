@@ -1,11 +1,38 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 3.5-draft · 2026-08-09
+버전: 3.6-draft · 2026-08-09
 
 연결 설정: `configs/aurora_v1.json`
 
 결과를 본 뒤 primary metric, split, threshold를 바꾸면 새 버전과
 `exploratory` 표기를 남긴다.
+
+## P0-W · AneuG-Flow cycle-functional source pair · registered, not executed
+
+Conditional candidate는 transient WSS와 그 cycle functional이 같은
+\(m=E_t[\tau]\), \(a=E_t[\|\tau\|]\)에서 유도되어야 한다는 문제다. Source
+score 33/40은 P0 실행 자격일 뿐 primary selection이나 method evidence가 아니다.
+
+- dataset commit: `9dd418083899deddd93a67f9a6fca7a14304fa36`
+- official code commit: `4a090a0f12538deef6fcea88b81afe78ce38152e`
+- exact input: steady 9,632,510,050 byte + transient 23,744,862,051 byte processed
+  archive 두 개만 사용한다.
+- execution: `introai9` PBS, 8 CPU/128 GB, GPU 0, one shot.
+- reader: PyTorch 2.5.1, mmap, `weights_only=True`; allowlist는 method를 호출하지
+  않는 serialized `Meshes` state container 하나뿐이다.
+- all checks: exact byte/SHA, steady `tensor_norm`, transient case/mesh linkage,
+  최소 700 unique geometry, 모든 80 timestep/common labels/node count, finite
+  tensor, static xyz/normals, nonzero physical/temporal WSS, normalization
+  round-trip, valid triangular connectivity, public identifier 0.
+- pass: 별도 method-free P1 perturbation audit만 등록한다.
+- fail/execution-incomplete: threshold/dependency/reader repair와 same-contract
+  rerun 없이 이 candidate version을 닫는다.
+
+Dataset page/NeurIPS paper의 730과 RHSIA의 808은 같은 release로 가정하지
+않는다. P0는 current exact payload count만 aggregate로 기록한다. P0/P1 전에는
+model, split, seed, checkpoint, GPU, outer test와 contribution이 없다. Frozen
+machine-readable contract는 `configs/aneug_cycle_functional_p0.json`, rationale은
+`docs/cycle-functional-wss-audit-2026-08-09.md`다.
 
 ## P0-I · inverse healthy-vessel counterfactual · source audit rejected, no execution
 
@@ -106,7 +133,7 @@ CPU/read-only로 검사한다. P0-T pass는 method-free P1만 열고 model/GPU�
 
 ## S0 · goal-oriented segmentation gate · closed at asset component
 
-현재 active shortlist는 0개이고 primary problem은 미선정이다.
+이 닫힌 branch에는 active shortlist가 없고 primary problem도 미선정이다.
 Goal-oriented hemodynamic segmentation의
 staging v2와 solver preflight v1은 S0a 전 operational execution-incomplete로,
 asset component는 exact source `ef547a4…`의 5/9 scientific fail로 보존한다.

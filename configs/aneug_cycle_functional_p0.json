@@ -1,0 +1,135 @@
+{
+  "schema_version": "aurora.aneug_cycle_functional_p0.v1",
+  "experiment_id": "aneug_cycle_functional_wss_p0",
+  "status": "preregistered_before_processed_payload_access",
+  "as_of": "2026-08-09",
+  "candidate": {
+    "question": "Does the exact public AneuG-Flow release contain recoverable physical transient WSS and common surface topology sufficient to audit whether low field error can conceal consequential cycle-functional error?",
+    "candidate_estimand": "surface_resolved_cycle_moments_m_vector_a_scalar_and_their_exactly_derived_tawss_osi_rrt_under_the_source_pulsatile_protocol",
+    "independent_unit_before_p0": "synthetic_transient_geometry_case_not_patient",
+    "source_shortlist_score": 33,
+    "source_shortlist_maximum": 40,
+    "automatic_selection_threshold": 32,
+    "score_axes": {
+      "research_importance": 4,
+      "estimand_identifiability": 5,
+      "residual_direct_prior_gap": 4,
+      "data_available_now": 5,
+      "independent_unit_strength": 3,
+      "strong_baseline_feasibility": 4,
+      "interpretable_licensed_3d_figure": 4,
+      "isbi_timeline_and_compute_feasibility": 4
+    },
+    "method_selected": false,
+    "architecture_selected": false,
+    "submission_identity_active": false,
+    "prohibited_interpretations": [
+      "patient_specific_hemodynamics",
+      "clinical_utility",
+      "future_rupture_risk_prediction",
+      "arbitrary_patient_specific_inlet_waveform_generalization",
+      "raw_osi_relative_error_alone_establishes_task_adequacy",
+      "cycle_functional_loss_or_direct_head_is_novel",
+      "p0_selects_a_model_or_method"
+    ]
+  },
+  "source": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_repository_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "license": "cc-by-sa-4.0",
+    "official_code_repository": "WenHaoDing/AneuG-Flow",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "processed_files": {
+      "steady": {
+        "name": "assembled_registered_steady_data_1k_v4.pth",
+        "relative_path": "processed_data/assembled_registered_steady_data_1k_v4.pth",
+        "url": "https://huggingface.co/datasets/whding123/AneuG-Flow/resolve/9dd418083899deddd93a67f9a6fca7a14304fa36/processed_data/assembled_registered_steady_data_1k_v4.pth",
+        "bytes": 9632510050,
+        "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+        "required_role": "provides_tensor_norm_for_physical_wss_recovery"
+      },
+      "transient": {
+        "name": "assembled_registered_data_1k_v4.pth",
+        "relative_path": "processed_data/assembled_registered_data_1k_v4.pth",
+        "url": "https://huggingface.co/datasets/whding123/AneuG-Flow/resolve/9dd418083899deddd93a67f9a6fca7a14304fa36/processed_data/assembled_registered_data_1k_v4.pth",
+        "bytes": 23744862051,
+        "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+        "required_role": "provides_registered_transient_wss_and_common_mesh_data"
+      }
+    },
+    "dataset_page_transient_cases": 730,
+    "rhsia_paper_transient_cases": 808,
+    "count_discrepancy_policy": "report_exact_payload_count_and_scope_current_commit_without_claiming_rhsia_uses_the_same_release"
+  },
+  "discovery_boundary": {
+    "observed_before_registration": [
+      "official_dataset_page_file_names_sizes_hashes_license_and_reported_case_count",
+      "official_code_and_readme_normalization_serialization_and_cycle_metric_formulas",
+      "aneug_flow_dataset_paper_aggregate_description",
+      "rhsia_paper_aggregate_metrics_and_reported_case_count",
+      "direct_prior_titles_abstracts_methods_and_official_code"
+    ],
+    "not_read_before_registration": [
+      "processed_steady_tensor_payload",
+      "processed_transient_tensor_payload",
+      "case_identifiers",
+      "case_level_wss_or_cycle_functionals",
+      "task_adequacy_perturbation_results"
+    ],
+    "not_prospective_method_evidence": true
+  },
+  "reader_contract": {
+    "torch_version": "2.5.1+cu118",
+    "weights_only": true,
+    "mmap": true,
+    "allowlisted_external_global": "pytorch3d.structures.meshes.Meshes_state_container_only",
+    "external_mesh_methods_called": false,
+    "arbitrary_pickle_globals_allowed": false
+  },
+  "gate": {
+    "all_checks_required": true,
+    "checks": {
+      "both_file_sizes_and_sha256_match_exactly": true,
+      "weights_only_reader_loads_both_archives": true,
+      "steady_contains_label_tensor_norm_mean_and_std": true,
+      "steady_norm_recovers_finite_nonconstant_wss_components": true,
+      "transient_contains_registered_data_list_and_mesh_data": true,
+      "transient_case_count_at_least": 700,
+      "case_names_are_unique_and_match_mesh_data_cases": true,
+      "every_case_has_80_timesteps_common_node_count_and_common_labels": true,
+      "required_xyz_normal_and_wss_labels_exist": true,
+      "all_registered_tensors_are_finite": true,
+      "geometry_and_normals_are_static_across_the_cycle_with_max_abs_tolerance": 1e-06,
+      "every_case_has_nonzero_physical_wss_and_temporal_wss_variation": true,
+      "all_normalization_roundtrip_max_abs_error_at_most": 1e-05,
+      "common_triangular_face_connectivity_is_valid_for_registered_nodes": true,
+      "all_geometry_fingerprints_are_unique": true,
+      "no_model_gpu_outer_test_or_case_identifier_publication": true
+    },
+    "pass_authorizes": "register_method_free_p1_cycle_functional_task_adequacy_perturbation_audit_only",
+    "failure_action": "close_cycle_functional_candidate_without_reader_repair_same_contract_rerun_method_gpu_or_outer_test",
+    "execution_incomplete_action": "close_this_candidate_version_without_dependency_or_reader_repair_and_require_a_new_source_level_candidate",
+    "does_not_authorize": [
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution",
+      "submission_identity"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "resources": "select=1:ncpus=8:mem=128gb:ngpus=0",
+    "walltime": "06:00:00",
+    "source_commit_rule": "exact_clean_public_git_head_at_execution",
+    "download_scope": "exactly_two_pinned_processed_files",
+    "write_scope": "private_source_cache_and_deidentified_aggregate_result_only",
+    "raw_or_processed_payload_committed": false,
+    "case_identifiers_published": false,
+    "gpu_requested": false,
+    "same_contract_rerun_allowed": false
+  }
+}

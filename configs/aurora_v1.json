@@ -1,9 +1,9 @@
 {
-  "schema_version": "3.3",
+  "schema_version": "3.4",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_problem_after_inverse_counterfactual_source_rejection",
+    "status": "failed_branches_preserved_one_conditional_cycle_functional_shortlist_p0_only",
     "as_of": "2026-08-09",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_problem_after_inverse_counterfactual_source_audit_rejection",
-    "shortlisted_candidate": "none",
-    "candidate_dataset": "none",
-    "candidate_estimand": "none",
-    "asset_access_status": "open_cta_p0_partial_dicom_header_prefix_access_no_pixel_or_stl_execution_incomplete_topaneu_unaccepted",
+    "status": "conditional_cycle_functional_wss_source_shortlist_awaiting_p0",
+    "shortlisted_candidate": "cycle_functional_compatible_transient_wss_surrogation",
+    "candidate_dataset": "aneug_flow",
+    "candidate_estimand": "surface_resolved_cycle_moments_and_exactly_derived_tawss_osi_rrt_under_the_source_pulsatile_protocol",
+    "asset_access_status": "aneug_flow_source_metadata_code_and_two_processed_file_identities_audited_payload_not_accessed",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -26,8 +26,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_without_open_cta_parser_repair_or_rerun",
-    "audit_document": "docs/inverse-aneurysm-editing-audit-2026-08-09.md",
+    "next_allowed_action": "execute_single_prospectively_registered_cpu_read_only_aneug_cycle_functional_p0_on_introai9",
+    "audit_document": "docs/cycle-functional-wss-audit-2026-08-09.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -234,6 +234,44 @@
       "s0a_pass_authorizes": "register_method_free_s0b_functional_non_equivalence_and_linearization_audit_only",
       "s0a_failure_action": "executed_close_candidate_without_solver_v2_model_gpu_or_outer_test"
     },
+    "aneug_cycle_functional_source_audit": {
+      "status": "conditional_source_shortlist_p0_registered_payload_not_accessed",
+      "audit_document": "docs/cycle-functional-wss-audit-2026-08-09.md",
+      "config": "configs/aneug_cycle_functional_p0.json",
+      "candidate_hypothesis": "one_transient_wss_field_and_its_cycle_functionals_should_share_exact_cycle_moments_instead_of_contradictory_independent_predictions",
+      "score": 33.0,
+      "maximum_score": 40.0,
+      "automatic_selection_threshold": 32.0,
+      "active_shortlist_count": 1,
+      "primary_problem_selected": false,
+      "dataset_repository_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+      "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+      "steady_processed_bytes": 9632510050,
+      "steady_processed_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+      "transient_processed_bytes": 23744862051,
+      "transient_processed_sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+      "dataset_page_transient_cases": 730,
+      "rhsia_paper_transient_cases": 808,
+      "case_count_discrepancy_resolved": false,
+      "processed_payload_accessed": false,
+      "physical_wss_recovery_audited": false,
+      "task_unit_audited": false,
+      "direct_prior_threats": [
+        "rhsia_transient_wss_graph_transformer_with_ghd_and_steady_augmentation",
+        "generic_cycle_functional_loss_or_direct_functional_head",
+        "pod_fourier_dct_or_sequence_temporal_decoder",
+        "goal_oriented_neural_operator_correction",
+        "scalar_or_population_neural_operator_functional_debiasing",
+        "generic_e3_equivariant_graph_network"
+      ],
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "p0_pass_authorizes": "register_method_free_p1_cycle_functional_task_adequacy_perturbation_audit_only",
+      "p0_failure_action": "close_cycle_functional_candidate_without_reader_repair_same_contract_rerun_method_gpu_or_outer_test"
+    },
     "most_recent_closed_candidate": "open_cta_physical_grid_commutation",
     "most_recent_source_rejected_candidate": "inverse_healthy_vessel_counterfactual_editing",
     "rejected_candidates": [
@@ -272,7 +310,15 @@
       "forward_healthy_vessel_generation_and_localized_aneurysm_editing",
       "morphology_conditioned_aneurysm_mesh_generation",
       "generic_healthy_counterfactual_anomaly_localization",
-      "generic_point_cloud_reconstruction_anomaly_detection"
+      "generic_point_cloud_reconstruction_anomaly_detection",
+      "generic_transient_wss_surrogate",
+      "graph_transformer_or_graphgps_backbone",
+      "ghd_geometry_tokens",
+      "steady_flow_pretraining_or_augmentation",
+      "pod_fourier_dct_or_sequence_temporal_decoder",
+      "generic_cycle_functional_loss_or_direct_functional_head",
+      "scalar_or_population_neural_operator_functional_debiasing",
+      "generic_e3_equivariant_graph_network"
     ]
   },
   "venue": {
@@ -286,7 +332,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_no_active_problem_after_inverse_counterfactual_source_rejection",
+    "required_headline_domain": "unselected_conditional_cycle_functional_shortlist_p0_only",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -351,7 +397,7 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "none",
-    "active_candidate_status": "none_after_inverse_counterfactual_source_audit_rejection_with_open_cta_no_repair_boundary_preserved",
+    "active_candidate_status": "no_primary_or_model_one_conditional_cycle_functional_source_shortlist_p0_only",
     "candidate_primary_estimand": "none",
     "candidate_secondary_estimand": "none",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
@@ -566,9 +612,13 @@
     },
     {
       "name": "aneug_flow",
-      "role": "steady_and_selected_pulsatile_pretraining",
+      "role": "conditional_cycle_functional_p0_source_pair_not_training",
       "field_provenance": "synthetic_cfd",
-      "split_unit": "generator_seed_geometry"
+      "split_unit": "generator_seed_geometry",
+      "status": "source_metadata_and_exact_file_identities_audited_payload_not_accessed_p0_registered",
+      "dataset_repository_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+      "p0_config": "configs/aneug_cycle_functional_p0.json",
+      "method_or_gpu_authorized": false
     },
     {
       "name": "benchanxplore",
@@ -677,7 +727,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_inverse_counterfactual_source_rejection",
+    "current_headline_architecture": "unselected_conditional_cycle_functional_shortlist_p0_only",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

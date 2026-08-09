@@ -7,17 +7,33 @@ scientific verdict · prior BC-operator identity inactive · cross-protocol
 4D-flow I0a asset integrity passed 14/14 · I0b execution-incomplete before
 asset access/no scientific verdict/no rerun · 4D-flow branch closed · RSNA
 supervision-semantics candidate rejected · goal-oriented hemodynamic
-segmentation asset component failed 5/9 and candidate closed · active problem
-shortlist 0 after open-CTA physical-grid P0 execution-incomplete/no scientific
-verdict/no parser repair or rerun · primary problem, method and architecture
-unselected · inverse healthy-vessel counterfactual candidate rejected 27/40 ·
-no GPU/outer test
+segmentation asset component failed 5/9 and candidate closed · cycle-functional
+transient WSS source shortlist 33/40 with P0 registered and payload 0 · active
+primary problem, method and architecture unselected · inverse healthy-vessel
+counterfactual candidate rejected 27/40 · no GPU/outer test
 
 연결 설정: `configs/aurora_v1.json`
 
 ## 0. 현재 architecture boundary
 
-현재 구현하거나 선택한 headline architecture와 active shortlist는 없다.
+현재 구현하거나 선택한 headline architecture는 없다. 조건부 source shortlist는
+cycle-functional transient WSS 한 개지만 P0 전에는 model candidate가 아니다.
+WSS \(\tau(x,t)\)가 공유하는 \(m(x)=E_t[\tau]\)와
+\(a(x)=E_t[\|\tau\|]\)를 먼저 두고 TAWSS/OSI/RRT를 정확히 유도한다는 것은
+현재 estimand contract이지 architecture가 아니다. RHSIA의 Graph Transformer,
+GHD token과 steady-flow augmentation, generic cycle-functional head/loss,
+POD/Fourier/DCT/sequence decoder, DOPE류 functional debiasing과 E(3) GNN은 모두
+non-novel direct control이다.
+
+P0는 exact steady/transient archive pair에서 physical WSS와 common topology를
+복원할 수 있는지만 확인한다. P0 pass도 method-free perturbation P1만 허용한다.
+P1이 field-error-matched perturbation에서 spatial hotspot/ranking error가
+near-zero denominator artifact를 넘어선다고 보인 뒤에만, moment prediction과
+zero-mean temporal residual projection을 결합하는 구조를 새 prospective method
+hypothesis로 검토할 수 있다. 그 전에는 graph/GNN/transformer decoder나 loss를
+구현하지 않는다.
+
+현재 구현하거나 선택한 headline architecture와 active primary는 없다.
 가장 최근의 source audit에서 검토한 inverse editor도 architecture로 선택하지
 않았다. Aneumo release에는 observed aneurysm surface와 같은 anatomy의 healthy
 counterpart·ostium/edit parameter가 없고 IntrA도 real counterfactual target을

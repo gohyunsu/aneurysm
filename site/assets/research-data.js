@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · active shortlist 0 after inverse-counterfactual source rejection · introai9-only compute · no method/architecture/GPU · not submission-ready",
-    requirement: "fresh problem audit → method-free adequacy → direct baselines → bounded development → fresh outer test",
+    status: "Target locked · one conditional cycle-functional shortlist at 33/40 · active primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    requirement: "exact CPU P0 → method-free P1 adequacy → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Cycle-functional WSS enters a P0-only shortlist",
+      copy: "A single transient WSS field determines m=E_t[tau] and a=E_t[|tau|], hence TAWSS, OSI and RRT. The candidate asks whether one representation can keep the field and these spatial functionals compatible. RHSIA already occupies Graph Transformer, GHD and steady augmentation, while DOPE occupies generic operator-functional debiasing. The source score is 33/40, but no processed payload, task-adequacy result, method, architecture or GPU exists yet.",
+      status: "Conditional shortlist 1 · P0 registered · payload/model/GPU 0",
+      url: "../docs/cycle-functional-wss-audit-2026-08-09.md"
+    },
     {
       year: "2026.08",
       title: "Inverse healthy-vessel counterfactual is rejected",
@@ -177,13 +184,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Spacing-aware resampling", "Implicit / resolution-invariant output", "Probabilistic lesion set", "Conditional residual gap"],
-    ["Already occupied", "Semantic grid normalization", "Continuous coordinate or common latent", "Variable cardinality + set matching", "None of these components alone"],
-    ["Required baseline", "Consispace-style", "Implicit decoder / resolution-invariant AE", "RFS detector / LesionDETR", "Joint cardinality–surface–morphometry commutation"],
-    ["Missing evidence", "Task gain beyond resize", "Native-grid physical fidelity", "Tiny/multiple-lesion calibration", "P0 gate never evaluated; P1 unopened"],
-    ["Current boundary", "Direct prior", "Direct prior", "Direct prior", "Closed execution-incomplete · no repair/model/GPU"]
+    ["Axis", "RHSIA transient surrogate", "Direct functional head / loss", "DOPE functional debiasing", "Conditional residual gap"],
+    ["Already occupied", "Graph Transformer + GHD + steady augmentation", "Optimize derived targets directly", "Debias scalar trajectory functionals", "None of these alone"],
+    ["Required control", "Matched RHSIA-style field model", "Field + independent functional heads", "Plug-in / debiased functional estimate", "One field + exact shared cycle moments"],
+    ["Missing evidence", "Published field accuracy", "Compatibility not guaranteed", "Spatial full-field compatibility is not its target", "P0 recoverability and P1 task adequacy unopened"],
+    ["Current boundary", "Direct prior", "Generic engineering control", "Direct theory threat", "33/40 conditional · no method/GPU"]
   ],
   gates: [
+    {
+      id: "P0-W",
+      title: "Can the exact AneuG-Flow pair recover physical transient WSS?",
+      copy: "Before any model, the one-shot CPU audit verifies two exact hashes, weights-only loading, steady tensor_norm, transient case/mesh linkage, at least 700 unique geometries, 80 static-geometry frames, finite nonzero time-varying WSS, normalization round-trip and valid common faces.",
+      state: "Registered before payload · introai9 PBS CPU only · pass opens method-free P1 only",
+      blocking: true
+    },
     {
       id: "S0a",
       title: "Are CMHA linkage and solver gradients auditable?",
@@ -301,8 +315,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "AneuG-Flow",
-      role: "selected steady/pulsatile operator pretraining",
-      provenance: "geometry archive only · field absent"
+      role: "conditional cycle-functional P0 source pair; not training",
+      provenance: "CC BY-SA 4.0 · exact 9.63 GB steady norm + 23.74 GB transient WSS/mesh pair pinned · payload 0 · source 730 vs RHSIA 808 scope unresolved"
     },
     {
       name: "BenchAnXplore",
@@ -331,6 +345,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.09",
+      category: "research",
+      title: "Cycle-functional transient WSS enters a P0-only shortlist",
+      copy: "A fresh five-candidate batch leaves one 33/40 lead: one transient WSS field and TAWSS/OSI/RRT should share exact cycle moments. Exact AneuG-Flow dataset/code commits and two processed file hashes are pinned before payload access. P0 is one CPU/PBS run on introai9 and checks physical-WSS recovery, schema, linkage, 80-frame static geometry and topology. A pass opens only method-free P1; fail or reader/dependency execution-incomplete closes this version without repair. Primary problem, method, architecture, GPU, outer test and contribution remain zero.",
+      files: ["docs/cycle-functional-wss-audit-2026-08-09.md", "configs/aneug_cycle_functional_p0.json", "src/aurora/aneug_cycle_functional_p0.py", "scripts/audit_aneug_cycle_functional_p0.py", "scripts/run_aneug_cycle_functional_p0_pbs.sh", "tests/test_aneug_cycle_functional_p0.py", "AGENTS.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.09",
       category: "site",

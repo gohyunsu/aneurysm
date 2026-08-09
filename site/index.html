@@ -41,31 +41,31 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          No active problem.<br>
-          <em>The failed run stays failed.</em>
+          One conditional lead.<br>
+          <em>The model still waits.</em>
         </h1>
         <p class="hero-lede">
-          가장 최근에는 병변 표면에서 healthy parent vessel과 localized edit를
-          함께 역추론하는 후보를 검토했다. 그러나 released paired ground truth가
-          없고 forward editing·counterfactual reconstruction이 직접 선행이어서
-          <strong>27/40으로 source rejection</strong>했다. 직전 32/40
-          physical-coordinate 후보도 exact P0가 과학 지표 전
-          execution-incomplete로 끝나 닫혔다. Primary problem, model, GPU와
-          outer test는 없다.
+          같은 transient WSS field가 만든 TAWSS, OSI와 RRT가 서로 모순되지
+          않아야 한다는 문제를 fresh batch에서 <strong>33/40 조건부
+          shortlist</strong>로 남겼습니다. 하지만 RHSIA가 transient graph
+          transformer를 이미 직접 다루고 raw OSI error는 작은 분모의 착시일 수
+          있습니다. Exact AneuG-Flow 두 파일의 물리 WSS 복원 P0 전에는 primary
+          problem, model, GPU와 outer test가 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/inverse-aneurysm-editing-audit-2026-08-09.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/cycle-functional-wss-audit-2026-08-09.md">Latest audit ↗</a>
+          <a class="button ghost" href="../configs/aneug_cycle_functional_p0.json">Frozen P0 ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
           <a class="button ghost" href="../results/open_cta_physical_p0_execution_20260809.json">Execution record ↗</a>
           <a class="button ghost" href="../docs/isbi-2027-plan.md">ISBI plan ↗</a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="하나의 물리 좌표 병변 표면을 서로 다른 voxel grid에 표현하는 개념도">
-        <div class="visual-caption">P0 EXECUTION-INCOMPLETE · NO SCIENTIFIC VERDICT</div>
+      <div class="hero-visual" aria-label="transient WSS field에서 공유 cycle moment와 TAWSS, OSI, RRT를 유도하는 개념도">
+        <div class="visual-caption">CONDITIONAL 33/40 · P0 REGISTERED · PAYLOAD 0</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -88,27 +88,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>α</b><span>native voxel grid</span>
+            <b>τ</b><span>transient WSS field</span>
           </div>
           <div class="posterior-card card-b">
-            <b>Ω</b><span>physical lesion instance</span>
+            <b>m,a</b><span>shared cycle moments</span>
           </div>
           <div class="posterior-card card-c">
-            <b>β</b><span>alternate rendering grid</span>
+            <b>F</b><span>TAWSS · OSI · RRT</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> cardinality · surface · morphometry</span>
-          <span><i class="dot coral"></i> parser repair / rerun / P1 0</span>
+          <span><i class="dot lime"></i> field → shared moments → functionals</span>
+          <span><i class="dot coral"></i> P0/P1 before any model</span>
           <span>primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Problem shortlist</span><b>0 active · primary 0</b></div>
-        <div><span>Current evidence</span><b>Inverse counterfactual rejected · 27/40</b></div>
+        <div><span>Problem shortlist</span><b>1 conditional · primary 0</b></div>
+        <div><span>Current evidence</span><b>Source audit 33/40 · payload 0</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>Fresh problem audit · introai9 only after a gate</b></div>
+        <div><span>Next authorization</span><b>Exact CPU P0 · introai9 PBS only</b></div>
       </div>
     </section>
 
@@ -117,12 +117,11 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          Healthy-vessel editing, medical counterfactual anomaly localization,
-          point-cloud reconstruction, spacing-aware segmentation과 probabilistic
-          lesion set은 이미 직접 선행이다. Available assets가 inverse
-          counterfactual의 정답을 식별하지 못하고 직전 physical-grid P0도
-          operationally 중단됐다. 둘을 성능 결과로 포장하지 않고 새 문제를 다시
-          찾는다.
+          RHSIA가 이미 transient WSS Graph Transformer와 steady augmentation을
+          제안했고, DOPE는 operator functional debiasing을 다룹니다. 남을 수 있는
+          질문은 한 field와 여러 spatial cycle functional이 공유 moment를 정확히
+          만족하면서 실제 hotspot/ranking error를 줄이는가입니다. 그 질문조차
+          먼저 exact asset recovery와 method-free perturbation으로 검증합니다.
         </p>
       </div>
 
@@ -173,19 +172,19 @@
       <div class="lineage-layout">
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
-          <p class="eyebrow">THE OPEN GAP</p>
-          <h3>Different grids should render one physical lesion set.</h3>
+          <p class="eyebrow">THE CONDITIONAL GAP</p>
+          <h3>One WSS field should imply one compatible set of cycle functionals.</h3>
           <p>
-            Grid마다 별도 voxel mask를 예측하면 같은 병변의 component 수,
-            표면과 물리적 부피가 서로 모순될 수 있다. 후보는 grid별 mask를
-            하나의 physical-coordinate instance representation에서 유도한다.
-            단, synthetic resampling은 실제 repeated acquisition이 아니며 STL도
-            threshold-derived reference라는 한계를 유지한다.
+            WSS 시계열과 TAWSS·OSI·RRT를 서로 다른 head가 예측하면 같은 물리
+            field에 대해 모순된 값을 낼 수 있다. 후보는 먼저 평균 vector
+            <em>m</em>과 평균 magnitude <em>a</em>를 공유하고 모든 functional을
+            그 두 moment에서 유도한다. 단, raw OSI relative error가 작은 분모의
+            착시가 아닌지는 method-free P1에서 먼저 확인해야 한다.
           </p>
-          <div class="gap-equation" aria-label="물리 좌표 표현을 서로 다른 grid에 렌더링하는 commutation 관계">
-            <span>R<sub>β</sub>F(S<sub>α</sub>I, α)</span>
-            <i>≈</i>
-            <span>F(S<sub>β</sub>Ĩ, β)</span>
+          <div class="gap-equation" aria-label="WSS cycle moment에서 TAWSS, OSI, RRT를 유도하는 관계">
+            <span>τ(x,t) → {m(x), a(x)}</span>
+            <i>⇒</i>
+            <span>{TAWSS, OSI, RRT}</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -200,9 +199,9 @@
           <thead>
             <tr>
               <th>Axis</th>
-              <th>Spacing resampling</th>
-              <th>Implicit / invariant output</th>
-              <th>Probabilistic lesion set</th>
+              <th>RHSIA field surrogate</th>
+              <th>Functional head / loss</th>
+              <th>DOPE debiasing</th>
               <th>Residual candidate</th>
             </tr>
           </thead>
@@ -214,11 +213,11 @@
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
-        <h2>A frozen run can stop<br><em>without a scientific verdict.</em></h2>
+        <h2>Recover the physical field<br><em>before choosing a network.</em></h2>
         <p>
-          아래 흐름은 network architecture가 아니라 exact P0 execution chain이다.
-          Frozen parser가 header 단계에서 중단됐으므로 asset checks를 pass/fail로
-          만들지 않고 branch를 닫았다.
+          아래 흐름은 network architecture가 아니라 exact P0 asset chain이다.
+          Steady normalization과 transient WSS가 실제로 연결되는지부터 확인하고,
+          pass해도 method-free P1만 연다.
         </p>
       </div>
 
@@ -226,70 +225,70 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
-          실행된 과거 N1은 MLP였고 V1 point/graph/Perceiver 연구선은 실패로
-          닫혔다. 현재 open-CTA P0는 standard-library asset audit이므로 3D encoder,
-          vessel graph, implicit decoder와 query set 어느 것도 선택하지 않았다.
+          RHSIA가 이미 Graph Transformer, GHD와 steady augmentation으로 transient
+          WSS를 예측한다. 현재 P0는 tensor/hash/topology audit이므로 GNN, attention,
+          temporal decoder와 functional loss 어느 것도 선택하지 않았다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
       <div class="mode-switch" role="group" aria-label="P0 evidence stage">
-        <button class="active" type="button" data-mode="presence">Unit</button>
-        <button type="button" data-mode="point">Frame</button>
+        <button class="active" type="button" data-mode="presence">Source</button>
+        <button type="button" data-mode="point">Units</button>
         <button type="button" data-mode="mask">Decision</button>
-        <span id="mode-description">Frozen parser가 undefined-length sequence에서 중단돼 unit gate에 도달하지 못했습니다.</span>
+        <span id="mode-description">두 exact processed file의 byte와 SHA-256을 먼저 확인합니다.</span>
       </div>
 
       <div class="architecture-flow">
         <article class="arch-node input-node">
           <span class="arch-number">01</span>
-          <p class="arch-label">REGISTERED SOURCE</p>
-          <h3>Official open CTA archive</h3>
-          <p>Exact Zenodo record · ZIP64 index · metadata checksum · CC BY 4.0</p>
+          <p class="arch-label">REGISTERED SOURCE PAIR</p>
+          <h3>AneuG-Flow processed files</h3>
+          <p>Exact dataset/code commit · two SHA-256 · CC BY-SA 4.0</p>
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <a class="arch-learn" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">근거 record</a>
+          <a class="arch-learn" href="../docs/cycle-functional-wss-audit-2026-08-09.md">근거 record</a>
         </article>
-        <div class="arch-connector"><span>frozen selection</span></div>
+        <div class="arch-connector"><span>exact pair</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">BOUNDED READ</p>
-          <h3>516 headers + 122 STL</h3>
-          <p>PixelData tag before stop · all STL CRC · no raw retention</p>
+          <p class="arch-label">SAFE LOAD</p>
+          <h3>Steady norm + transient mesh field</h3>
+          <p>weights-only · mmap · no arbitrary pickle globals · no identifier output</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">후보와 모델 구분</a>
         </article>
-        <div class="arch-connector accent"><span id="bc-connector-label">audit units</span></div>
+        <div class="arch-connector accent"><span id="bc-connector-label">verify hashes</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
           <p class="arch-label">PHYSICAL CONTRACT</p>
-          <h3 id="bc-node-title">Frozen parser stops</h3>
-          <p id="bc-node-copy">Undefined-length Procedure Code Sequence is outside the registered minimal parser</p>
+          <h3 id="bc-node-title">Exact source identity</h3>
+          <p id="bc-node-copy">9.63 GB steady norm and 23.74 GB transient WSS must both match</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
-          <a class="arch-learn" href="../configs/open_cta_physical_p0.json">frozen checks</a>
+          <a class="arch-learn" href="../configs/aneug_cycle_functional_p0.json">frozen checks</a>
         </article>
-        <div class="arch-connector"><span>exit 1</span></div>
+        <div class="arch-connector"><span>all checks</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">ONE-SHOT DECISION</p>
-          <h3>No scientific verdict</h3>
+          <p class="arch-label">ONE-SHOT P0</p>
+          <h3>Recoverability decision</h3>
           <div class="dual-branch">
-            <span><b>Not pass</b>12-check gate unevaluated</span>
-            <span><b>Not fail</b>no data inadequacy claim</span>
+            <span><b>Pass</b>register method-free P1 only</span>
+            <span><b>Fail/incomplete</b>close this candidate version</span>
           </div>
-          <p>No threshold, tolerance, parser or member-selection repair after outcome</p>
+          <p>No threshold, dependency, reader or source-selection repair after outcome</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
-        <div class="arch-connector"><span>close version</span></div>
+        <div class="arch-connector"><span>if pass only</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">NEXT</p>
-          <h3>Fresh problem audit</h3>
-          <p>No parser repair · no same-contract rerun · no P1</p>
+          <h3>Method-free P1</h3>
+          <p>Matched field-error perturbations · denominator strata · hotspot/ranking</p>
           <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>still not authorized</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -298,15 +297,15 @@
       <div class="architecture-notes">
         <article>
           <span>UNIT INTEGRITY</span>
-          <p>Unit gate를 평가하지 못했으므로 patient split이나 model로 진행하지 않는다.</p>
+          <p>Synthetic geometry case를 patient로 세지 않고 payload의 exact unique unit을 P0에서 확인한다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
-          <p>Resampling, implicit decoder, invariant latent와 probabilistic set prediction은 mandatory baseline이다.</p>
+          <p>RHSIA, direct functional heads/losses, DOPE, temporal bases와 E(3) GNN은 mandatory controls다.</p>
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>Execution-incomplete를 과학적 결과로 바꾸지 않고 fresh problem audit으로 돌아간다.</p>
+          <p>P0는 source recoverability만, P1은 task adequacy만 판단하며 모델은 그 뒤 별도 등록한다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -564,7 +563,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>No active paper identity · active problem shortlist 0</p>
+        <p>No active paper identity · one conditional P0-only shortlist</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -572,7 +571,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Inverse counterfactual rejected 27/40 · active shortlist/primary/model/GPU 0 · introai9-only future compute</b>
+        <span>Current stage</span><b>Cycle-functional WSS 33/40 · P0 registered · primary/model/GPU 0 · introai9 PBS</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

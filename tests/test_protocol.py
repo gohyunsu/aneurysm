@@ -44,6 +44,30 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "no-active-problem boundary"):
             validate_protocol(candidate)
 
+    def test_cycle_functional_shortlist_is_p0_only(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "aneug_cycle_functional_source_audit"
+        ]
+        self.assertEqual(audit["score"], 33.0)
+        self.assertEqual(audit["active_shortlist_count"], 1)
+        self.assertFalse(audit["processed_payload_accessed"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneug_cycle_functional_source_audit"][
+            "processed_payload_accessed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "cycle-functional candidate"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneug_cycle_functional_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "cycle-functional candidate"):
+            validate_protocol(candidate)
+
     def test_inverse_counterfactual_source_rejection_cannot_register_or_train(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         audit = candidate["problem_selection"][

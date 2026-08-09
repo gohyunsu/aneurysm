@@ -4,15 +4,22 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active problem shortlist는 다시 **0개**입니다. 같은 CTA의 voxel grid를
-바꿔도 병변 개수, 물리 좌표 표면과 morphometry가 하나의 lesion-instance
-표현에서 일관되어야 한다는 physical-coordinate 후보는 source-only 32.0/40으로
-P0에 진입했지만, exact `b437875…` one-shot 실행이 DICOM undefined-length
-Procedure Code Sequence에서 frozen parser incompatibility로 exit 1이었습니다.
-Scientific gate는 미평가이며 method·architecture·GPU·outer test와 paper
-identity는 모두 0입니다. 질문, 직접 선행과 정확한 판정은
-[`open-CTA physical-grid audit`](docs/open-cta-physical-grid-audit-2026-08-09.md)에
-있습니다.
+현재 active primary problem은 없지만, fresh batch에서 **조건부 source shortlist
+1개**가 생겼습니다. 후보는 AneuG-Flow의 transient WSS와 TAWSS/OSI/RRT를 서로
+독립적으로 예측하지 않고 같은 cycle moment에서 일관되게 유도하는
+`cycle-functional-compatible transient WSS surrogation`입니다. 고정 8축에서
+33.0/40으로 32점 admission line을 넘었지만, 아직 processed payload를 읽지
+않았고 task adequacy도 확인하지 않았습니다. 따라서 method·architecture·GPU·
+outer test와 paper identity는 모두 0입니다. 질문, 수식, 직접 선행과 정확한
+boundary는 [`cycle-functional WSS audit`](docs/cycle-functional-wss-audit-2026-08-09.md),
+첫 실행 계약은 [`P0 config`](configs/aneug_cycle_functional_p0.json)에 있습니다.
+
+P0는 `introai9` PBS의 CPU job에서 exact steady 9.63 GB와 transient 23.74 GB
+processed file만 읽습니다. Transient archive는 물리 WSS 정규화 통계를 포함하지
+않으므로 steady companion의 `tensor_norm`이 반드시 함께 맞아야 합니다. 두
+archive의 byte/SHA-256, weights-only load, 80-timestep schema, unique geometry,
+static topology와 normalization round-trip을 all-or-none으로 확인합니다. Pass도
+method-free P1 perturbation audit만 허용하며 GPU 학습을 열지 않습니다.
 
 가장 최근의 fresh source audit은 aneurysm-bearing surface에서 healthy
 parent-vessel counterfactual과 localized lesion edit를 함께 추론하는 inverse
@@ -93,18 +100,20 @@ reconstruction 또는 voxelwise uncertainty를 새 contribution이라고 부르�
 않습니다.
 
 > **AURORA** — 기존 프로젝트명은 실패 이력의 연속성을 위해 유지하지만,
-> 현재 active problem, primary problem, 방법명과 architecture는 없습니다.
+> 현재 active primary problem, 방법명과 architecture는 없습니다. 33/40의
+> cycle-functional 후보 한 개만 P0 이전 조건부 shortlist입니다.
 > 닫힌 P0/S0a를 수리하거나 GNN·U-Net·training config를 먼저 고르지 않고,
 > fresh problem audit가 데이터·estimand·direct-prior gap을 독립적으로
 > 통과해야 합니다.
 
-## 현재 단계 · active shortlist 0, primary problem/method/GPU 없음
+## 현재 단계 · conditional shortlist 1, primary problem/method/GPU 없음
 
-현재 허용된 다음 작업은 open-CTA parser를 수리하거나 P0를 재실행하는 것이
-아니라 독립된 fresh problem-level primary-source/asset audit입니다. 새 후보가
-task unit, supervision, direct-prior residual gap과 method-free adequacy를
-통과하기 전에는 executable headline model, GPU job, outer test와 submission
-identity가 없습니다.
+현재 허용된 다음 작업은 open-CTA parser 수리나 닫힌 branch 재실행이 아니라
+exact [`AneuG-Flow P0`](configs/aneug_cycle_functional_p0.json) 한 번뿐입니다.
+P0 pass 뒤에도 method-free P1을 별도로 prospectively 등록해야 합니다. P1이
+field-error-matched perturbation에서 denominator artifact를 넘어선 spatial/
+ranking functional failure를 보이기 전에는 executable headline model, GPU job,
+outer test와 submission identity가 없습니다.
 
 Runtime discovery에서 official SU2 8.5.0 OMP binary는 steady direct case는
 완료했지만 reverse-mode AD가 compile되지 않아 `DISCRETE_ADJOINT`를 거부했습니다.
