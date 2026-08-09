@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · context–treatment best 31.5/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
+    status: "Target locked · provenance–evaluation best 30.0/40 and all rejected · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
     requirement: "genuinely new/revised source scoring ≥32 → method-free P0/P1 → direct baselines → bounded development → fresh outer test",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Shared ancestry is a split constraint, not a method",
+      copy: "AneuX includes 101 Aneurisk lesions and the new CFD release selects 76 of 100 Aneurisk cases, but audited public metadata contains no exact 76-to-101 lesion manifest. The public mirror exposes 24 named model/DICOM folders and 15 label files. Generic patient/source-disjoint evaluation, near-duplicate embeddings and contamination matrices are direct priors; test-blind re-evaluation is scientific hygiene. The residual unseen-anatomy hemodynamic-transfer claim is therefore not executable.",
+      status: "Best 30.0/40 · all rejected · archive/mesh/image/P0/model/GPU 0",
+      url: "../docs/provenance-evaluation-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Open context or paired scans still do not earn a model",
@@ -462,6 +469,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Provenance–evaluation candidates stop before payload and compute",
+      copy: "Cross-release lineage-blocked CFD-to-rupture transfer, source-selective prediction, test-blind PointNet++ re-evaluation, curator-lineage morphometry and patient-set consistency score 30.0/29.5/28.5/23.5/25.5. The exact 76-to-101 lineage map is absent and generic contamination auditing is direct prior. Schema 4.5 freezes no archive/mesh/image/spreadsheet/P0/model/GPU, introai9-only execution and complete exclusion of junjinyong.",
+      files: ["docs/provenance-evaluation-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/experiment-protocol.md", "docs/model-spec.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

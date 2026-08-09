@@ -50,10 +50,10 @@
           <span>짧은 답</span>
           <strong>Active shortlist, 선택된 primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 audit은 AneuSI parent-vessel context, paired treatment MRI,
-            DIVA-seg와 latent shape를 검토했지만 최고점이 31.5/40임을
-            확인했습니다. AneuSI의 paper/repository case count는 102/103으로
-            미해결이고 treatment MRI의 독립 anatomy는 2입니다.
+            최신 audit은 AneuX, Aneurisk와 76-case CFD release의 shared anatomy
+            lineage를 검토했지만 최고점이 30.0/40임을 확인했습니다. Source ancestry는
+            분명해도 exact 76-to-101 lesion manifest가 없고 public mirror는 24 named
+            model folder만 노출합니다.
             현재 GNN·U-Net·Transformer 어느 것도 선택하지 않았습니다.
           </p>
         </div>
@@ -61,11 +61,12 @@
           <span>현재 해야 하는 일</span>
           <strong>다음 단계는 genuinely new/revised source를 기다리는 일입니다.</strong>
           <p>
-            31.5점을 재가중하거나 이름을 바꿔 32점으로 만들지 않습니다. 새 release,
-            supervision semantics 또는 독립 단위가 실제로 달라진 별도 후보만 다시
-            감사합니다. Gate 통과 전 model이나 GPU를 허가하지 않습니다.
+            30.0점을 재가중하거나 generic leakage audit에 fancy한 이름을 붙여 32점으로
+            만들지 않습니다. Exact public lineage manifest나 독립 patient endpoint가
+            실제로 추가된 별도 후보만 다시 감사합니다. Gate 통과 전 model이나 GPU를
+            허가하지 않습니다.
           </p>
-          <a href="../docs/context-treatment-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/provenance-evaluation-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -386,7 +387,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              최신 후보도 31.5/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
+              최신 후보도 30.0/40이라 P0 이전에 닫혔습니다. 아래 과거 graph/operator
               stack은 현재 선택된 architecture가 아닙니다.
             </p>
           </header>
@@ -394,12 +395,12 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. AneuSI의 ordered parent-vessel context는 유용한 ablation이지만 rupture morphology, point-cloud와 semantic vessel graph가 direct prior입니다. Paper/repository case count 102/103은 미해결이고 paired treatment MRI의 독립 anatomy는 2입니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. AneuX의 Aneurisk 101 lesion과 76-case CFD는 shared source ancestry가 있지만 exact cross-release lesion map은 없습니다. Generic patient/source split, near-duplicate embedding과 contamination matrix는 direct prior입니다.</p>
             </aside>
             <article>
-              <span>CURRENT · CONTEXT–TREATMENT REJECTION</span>
-              <div><h3>Ordered context나 paired scans가 method gap을 만드는가?</h3><p>아닙니다. Parent-vessel context와 latent shape는 직접 계보가 강하고, 102/103 case mapping은 미해결입니다. Treatment scans도 two-anatomy repeated interventions라 clinical counterfactual selection을 식별하지 않습니다.</p></div>
-              <b>상태</b><small>best 31.5/40 · no spreadsheet/VTK/MRI/P0/model/GPU</small>
+              <span>CURRENT · PROVENANCE–EVALUATION REJECTION</span>
+              <div><h3>Shared ancestry를 차단하는 것이 새 method인가?</h3><p>아닙니다. 동일 anatomy가 CFD pretraining과 rupture test에 걸치면 반드시 lineage-blocked split을 써야 하지만, 그것은 평가 계약입니다. 현재 exact 76-to-101 map이 없고 generic contamination audit도 직접 선행이므로 독립 architecture gap은 확인되지 않았습니다.</p></div>
+              <b>상태</b><small>best 30.0/40 · no archive/mesh/image/P0/model/GPU</small>
             </article>
             <article>
               <span>HISTORY · TOPOLOGY–PROCEDURE REJECTION</span>

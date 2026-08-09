@@ -1,6 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
-버전: 4.4 · 2026-08-10
+버전: 4.5 · 2026-08-10
+
+> **Current gate:** provenance–evaluation batch의 최고점은 30.0/40으로 32
+> admission line 미만이다. Exact cross-release lineage manifest, executable
+> independent unit와 residual algorithmic novelty가 함께 없으므로 AneuX/CFD
+> archive, P0, model, PBS/GPU와 outer test를 열지 않는다. Generic deduplication,
+> patient/source-disjoint split, calibration과 external-test blindness는 protocol
+> hygiene이지 contribution이 아니다. 다음 허용 작업은 genuinely new/revised
+> source audit뿐이며, 모든 향후 실행은 `introai9` PBS에서만 수행한다.
 
 > **Current gate:** context–treatment batch의 최고점은 31.5/40으로 32
 > 미만이다. 따라서 AneuSI spreadsheet/VTK나 treatment MRI archive를 읽는 P0,

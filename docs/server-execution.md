@@ -19,6 +19,15 @@
 - IAVS 상태 확인은 공식 GitHub metadata를 읽는 source watch이며 scientific
   experiment가 아니다. P0/P1 gate 전에는 `introai9` GPU job을 만들지 않는다.
 
+## 2026-08-10 · provenance–evaluation source audit, no job authorized
+
+- Frozen scores are 30.0/29.5/28.5/23.5/25.5, all below 32.
+- Public manuscripts, README, Zenodo record and Git tree paths만 읽었다. AneuX/
+  CFD archive, DICOM, STL, VTP, spreadsheet와 model weight는 읽지 않았다.
+- `introai9` PBS job은 0개이며 P0/PBS/GPU job을 만들지 않았다. 이는 정상
+  source-gate early stop이지 SSH·scheduler·GPU failure가 아니다.
+- `junjinyong`은 접속·조회·제출·모니터링하지 않았다.
+
 ## 2026-08-10 · context–treatment source audit, no job authorized
 
 - Frozen scores are 31.5/27.5/26.0/27.0/30.0, all below 32.

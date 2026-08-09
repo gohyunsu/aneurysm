@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 latest boundary:** provenance–evaluation batch는
+> 30.0/29.5/28.5/23.5/25.5로 모두 admission line 32 미만이다. Cross-release
+> anatomy lineage blocking은 향후 CFD-pretraining claim의 필수 평가 계약이지만,
+> 현재 exact manifest와 residual method novelty가 없어 headline contribution이
+> 아니다. Active primary/method/architecture/result row는 0이며, manuscript는
+> not submission-ready 상태를 유지한다. Compute는 `introai9` PBS만 허용하고
+> `junjinyong`은 제외한다.
+
 > **2026-08-10 latest boundary:** context–treatment batch는
 > 31.5/27.5/26.0/27.0/30.0으로 모두 admission line 32 미만이다. AneuSI의
 > ordered parent-vessel context는 좋은 ablation이지만 독립 method identity가

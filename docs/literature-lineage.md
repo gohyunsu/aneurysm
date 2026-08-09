@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 provenance lineage boundary:** CTSCAN은 deterministic patient-
+> disjoint medical-imaging benchmark를, 2026 pathology audit은 case/institution
+> contamination matrix와 performance inflation을, prior 3D work는 pretrained
+> embedding duplicate detection을 이미 제시한다. AneuX morphology와 PointNet++
+> studies도 HUG-to-external-source evaluation을 수행했다. 남는 질문은 exact
+> anatomy lineage를 봉인했을 때 hemodynamic pretraining의 added value가
+> 유지되는지지만, audited public sources에는 76-case CFD와 101-lesion AneuX
+> Aneurisk portion을 잇는 manifest가 없다. 이 상태에서 shape hash, source token,
+> calibration 또는 domain adaptation은 novelty가 아니다.
+
 > **2026-08-10 latest lineage boundary:** AneuSI가 aneurysm/neck 자동 isolation과
 > 7단계 clip orbit을 공개했지만 parent-vessel morphology, size ratio, point-cloud
 > rupture classification과 semantic vessel graph가 context hypothesis의 직접

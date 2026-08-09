@@ -6,16 +6,23 @@ N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 �
 
 현재 active **source shortlist는 0개**, selected primary problem도 **0개**입니다.
 가장 최근
-[`context–treatment source audit`](docs/context-treatment-source-audit-2026-08-10.md)은
-AneuSI의 same-case parent-vessel context, paired black-blood/4D-flow treatment
-MRI, DIVA-seg와 public latent-shape control을 점검했습니다. 다섯 후보는
-**31.5/27.5/26.0/27.0/30.0**으로 모두 32 미만입니다. AneuSI는 99 patient,
-paper 102 case와 7 clip factor를 보고하고 repository는 103 named case를
-노출합니다. 이 102/103 mapping을 spreadsheet나 VTK를 열어 사후 수리하지
-않았고, parent-vessel rupture context와 latent shape는 direct prior가 강합니다.
-Paired treatment MRI도 33/38 scan이 아니라 2 patient-derived anatomy가 독립
-단위입니다. Spreadsheet/VTK/MRI archive, P0, method, architecture와 PBS/GPU
-job은 모두 0입니다. 이는 서버 실패가 아니라 source gate의 정상 종료입니다.
+[`provenance–evaluation source audit`](docs/provenance-evaluation-source-audit-2026-08-10.md)은
+AneuX, Aneurisk와 새 76-case CFD release 사이의 동일 해부구조 계보가
+hemodynamic pretraining과 rupture 평가를 오염시킬 수 있는지 점검했습니다.
+다섯 후보는 **30.0/29.5/28.5/23.5/25.5**로 모두 32 미만입니다. AneuX는
+Aneurisk 101 lesion을 포함하고 CFD release는 Aneurisk 100례 중 76례를
+선별했지만, audited public metadata에는 exact 76-to-101 lesion manifest가
+없습니다. 공개 Aneurisk mirror도 24 named model folder만 노출합니다. Generic
+patient/source-disjoint split, near-duplicate detection과 cross-corpus leakage
+audit은 이미 direct prior이며, external set을 model selection에 사용한 기존
+PointNet++ 결과의 test-blind 재평가는 중요한 품질관리이지 새 method가
+아닙니다. Archive/mesh/image/spreadsheet payload, P0, method, architecture와
+PBS/GPU job은 모두 0입니다. 이는 서버 실패가 아니라 source gate의 정상
+종료입니다.
+
+직전
+[`context–treatment source audit`](docs/context-treatment-source-audit-2026-08-10.md)의
+최고점 31.5/40도 historical rejection으로 보존합니다.
 
 직전
 [`topology–procedure source audit`](docs/topology-procedure-source-audit-2026-08-10.md)의

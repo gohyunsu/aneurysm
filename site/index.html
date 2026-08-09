@@ -45,18 +45,19 @@
           <em>First prove the task earns a model.</em>
         </h1>
         <p class="hero-lede">
-          최신 AneuSI source는 same-case parent-vessel context를 정교하게 만들지만
-          rupture morphology와 vessel-graph/point-cloud direct prior가 강합니다.
-          Paper의 102 case와 repository 103 named case도 아직 일치하지 않습니다.
-          Paired treatment MRI는 33/38 scan이 아니라 2 patient-derived anatomy가
-          독립 단위입니다. 최신 최고점은 31.5/40이며 active shortlist, selected
-          primary, model, GPU와 outer test는 모두 없습니다.
+          AneuX와 새 76-case Aneurisk CFD release는 source ancestry를 공유하지만
+          exact 76-to-101 lesion lineage manifest는 공개되어 있지 않습니다.
+          Public mirror도 24 named model folder만 노출합니다. Generic patient/source
+          split, duplicate detection과 contamination audit은 이미 direct prior입니다.
+          최신 최고점은 30.0/40이며 active shortlist, selected primary, model,
+          GPU와 outer test는 모두 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/context-treatment-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/provenance-evaluation-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/context-treatment-source-audit-2026-08-10.md">Context history ↗</a>
           <a class="button ghost" href="../docs/topology-procedure-source-audit-2026-08-10.md">Topology history ↗</a>
           <a class="button ghost" href="../docs/hemodynamic-endpoint-source-audit-2026-08-10.md">Hemodynamic audit ↗</a>
           <a class="button ghost" href="../docs/pinn-rupture-direct-prior-audit-2026-08-10.md">PINN prior audit ↗</a>
@@ -112,7 +113,7 @@
 
       <div class="hero-meta">
         <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>Context–treatment best 31.5/40 · all rejected</b></div>
+        <div><span>Current evidence</span><b>Provenance–evaluation best 30.0/40 · all rejected</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
       </div>
@@ -231,7 +232,7 @@
         <p>
           DiffusionNet, PointNet++, E(3)-equivariant mesh network, topology module과
           surface foundation features는 향후 strong controls일 수 있지만 현재
-          method가 아닙니다. 최고 source score도 31.5라 P0와 P1은 열리지 않았습니다.
+          method가 아닙니다. 최고 source score도 30.0이라 P0와 P1은 열리지 않았습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -575,7 +576,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Context–treatment best 31.5/40 · all rejected · shortlist/primary/model/GPU 0</b>
+        <span>Current stage</span><b>Provenance–evaluation best 30.0/40 · all rejected · shortlist/primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

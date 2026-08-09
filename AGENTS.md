@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 provenance–evaluation source-audit overlay:** Fresh source-only
+> batch는 cross-release lineage-blocked CFD-to-rupture transfer, source-selective
+> prediction, test-blind PointNet++ re-evaluation, HUG curator-lineage
+> morphometry와 multiple-aneurysm patient-set consistency를
+> 30.0/29.5/28.5/23.5/25.5로 판정했다. 모두 frozen admission line 32 미만이다.
+> AneuX는 Aneurisk 101 lesion/97 patient를 포함하고 새 CFD release는 Aneurisk
+> 100 case 중 76개를 선별하지만 exact 76-to-101 lineage manifest는 공개 small-
+> file boundary에 없다. Public mirror는 24 named model/DICOM folder와 15 label
+> file만 노출한다. Generic patient/source-disjoint split, near-duplicate detection,
+> contamination matrix, calibration과 domain adaptation은 direct prior/control이다.
+> AneuX/CFD archive, DICOM, STL, VTP, spreadsheet, P0, method, architecture,
+> PBS/GPU와 outer test는 0이다. Schema 4.5 source of truth는
+> `problem_selection.provenance_evaluation_source_audit`와
+> `docs/provenance-evaluation-source-audit-2026-08-10.md`다. `introai9` PBS job은
+> 0이고 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 context–treatment source-audit overlay:** Fresh source-only
 > batch는 AneuSI ordered parent-vessel context, paired black-blood/4D-flow
 > treatment response, device-conditioned counterfactual selection,

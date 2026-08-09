@@ -234,6 +234,43 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "context-treatment audit"):
             validate_protocol(candidate)
 
+    def test_provenance_evaluation_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "provenance_evaluation_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 30.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 5)
+        self.assertEqual(audit["aneux_aneurisk_lesions"], 101)
+        self.assertFalse(audit["aneux_case_level_cross_release_lineage_manifest_found"])
+        self.assertEqual(audit["aneurisk_cfd_selected_geometries"], 76)
+        self.assertFalse(audit["aneurisk_cfd_archive_accessed"])
+        self.assertEqual(audit["public_aneurisk_mirror_named_model_folders"], 24)
+        self.assertEqual(audit["public_aneurisk_mirror_label_files"], 15)
+        self.assertTrue(audit["pointnet_external_set_used_in_reported_curve_selection"])
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["observed_introai9_pbs_job_count"], 0)
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["provenance_evaluation_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "provenance-evaluation audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["provenance_evaluation_source_audit"][
+            "aneurisk_cfd_archive_accessed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "provenance-evaluation audit"):
+            validate_protocol(candidate)
+
     def test_vascular_semantics_batch_rejects_all_before_compute(self) -> None:
         audit = self.protocol["problem_selection"]["vascular_semantics_source_audit"]
         self.assertEqual(audit["best_score"], 29.5)

@@ -4,6 +4,21 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Provenance–evaluation batch is rejected before compute
+
+- AneuX/Aneurisk/76-case CFD cross-release lineage, source-selective prediction,
+  test-blind external re-evaluation, curator lineage와 multiple-aneurysm set
+  consistency를 같은 frozen rubric으로 검토했다. 다섯 점수는
+  30.0/29.5/28.5/23.5/25.5이며 모두 admission line 32 미만이다.
+- Exact 76-to-101 lesion manifest가 없고 public Aneurisk mirror는 24 named
+  model/DICOM folder와 15 label file만 노출한다. Generic patient/source split,
+  near-duplicate detection과 cross-corpus contamination audit은 direct prior다.
+- Schema 4.5는 active shortlist/primary/P0/method/architecture/GPU를 0으로
+  고정한다. `introai9` PBS job은 0이고 새 작업을 제출하지 않았다.
+  `junjinyong`은 접속·조회·제출·모니터링하지 않았다.
+- 영향 파일: `docs/provenance-evaluation-source-audit-2026-08-10.md`, machine
+  contract/validator/tests, overview documents, site, `AGENTS.md`.
+
 ## 2026-08-10 · Context–treatment batch is rejected before compute
 
 - AneuSI, paired black-blood/4D-flow treatment MRI, DIVA-seg와 public

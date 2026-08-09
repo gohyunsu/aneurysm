@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 latest architecture boundary:** provenance–evaluation batch의
+> 최고점은 30.0/40이라 active architecture는 여전히 0이다. Shape hashing,
+> PointNet/GNN embedding, source token, contrastive lineage loss, domain-
+> adversarial encoder, calibration과 abstention은 exact lineage-blocked transfer
+> gap이 먼저 확인되기 전에는 method가 아니다. 새 model은 32/40 source gate와
+> method-free P0/P1이 잔여 문제를 입증한 뒤에만 설계한다.
+
 > **2026-08-10 latest architecture boundary:** AneuSI ordered context 후보는
 > 31.5/40, latent-shape calibration은 30.0/40이고 나머지 treatment/DIVA 후보도
 > 모두 32 미만이다. Parent-vessel graph, nested-crop consistency, E(3) surface

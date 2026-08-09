@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "4.4":
-        raise ProtocolError("The current research-state schema must be version 4.4.")
+    if protocol["schema_version"] != "4.5":
+        raise ProtocolError("The current research-state schema must be version 4.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_context_treatment_source_audit"
+        != "failed_branches_preserved_no_active_shortlist_after_provenance_evaluation_source_audit"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -194,6 +194,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "hemodynamic_endpoint_source_audit",
             "topology_procedure_source_audit",
             "context_treatment_source_audit",
+            "provenance_evaluation_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -203,12 +204,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_context_treatment_source_audit_no_primary_or_method"
+        != "no_active_shortlist_after_provenance_evaluation_source_audit_no_primary_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_metadata_public_manuscripts_readmes_repository_tree_and_small_case_name_file_only_no_spreadsheet_vtk_mri_archive_model_weight_or_patient_payload_for_context_treatment_audit"
+        != "source_metadata_public_manuscripts_readmes_and_repository_tree_only_no_aneux_or_cfd_archive_dicom_stl_vtp_spreadsheet_model_weight_or_patient_payload_for_provenance_evaluation_audit"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -220,11 +221,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32"
         or problem_selection["audit_document"]
-        != "docs/context-treatment-source-audit-2026-08-10.md"
+        != "docs/provenance-evaluation-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "same_lesion_preprocessing_orbit_quotient_morphometry"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "ordered_parent_vessel_context_sufficiency_for_rupture_status"
+        != "cross_release_lineage_blocked_cfd_to_rupture_transfer_validity"
     ):
         raise ProtocolError(
             "The PINN direct-prior boundary must retain no selected primary, "
@@ -267,6 +268,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "device_conditioned_counterfactual_treatment_selection",
         "morphology_decision_preserving_tof_segmentation",
         "external_latent_shape_calibration",
+        "cross_release_lineage_blocked_cfd_to_rupture_transfer_validity",
+        "source_conditional_selective_rupture_prediction",
+        "test_blind_pointnet_external_reevaluation",
+        "hug_curator_lineage_invariant_morphometry",
+        "patient_set_multiple_aneurysm_rupture_consistency",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -334,6 +340,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_latent_shape_reconstruction_synthesis_or_calibration",
         "paired_black_blood_to_4d_flow_regression",
         "morphology_aware_segmentation_metric_or_bias_analysis",
+        "generic_patient_source_or_lineage_disjoint_split",
+        "generic_near_duplicate_shape_hash_or_embedding",
+        "generic_source_aware_calibration_abstention_or_domain_adaptation",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -1937,6 +1946,140 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("context-treatment rejection and introai9-only boundary")
 
+    provenance_audit = problem_selection["provenance_evaluation_source_audit"]
+    _require_keys(
+        provenance_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "any_archive_mesh_image_spreadsheet_or_model_weight_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "observed_introai9_pbs_job_count",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "aneux_total_lesions",
+            "aneux_total_patients",
+            "aneux_aneurisk_lesions",
+            "aneux_aneurisk_patients",
+            "aneux_case_level_cross_release_lineage_manifest_found",
+            "aneux_archive_accessed",
+            "aneurisk_cfd_record",
+            "aneurisk_cfd_selected_geometries",
+            "aneurisk_cfd_source_cases_reported",
+            "aneurisk_cfd_archive_bytes",
+            "aneurisk_cfd_archive_accessed",
+            "public_aneurisk_mirror_named_model_folders",
+            "public_aneurisk_mirror_named_dicom_folders",
+            "public_aneurisk_mirror_label_files",
+            "public_aneurisk_mirror_contains_c0074a_and_c0074b",
+            "public_aneurisk_mirror_member_payload_accessed",
+            "pointnet_internal_auc",
+            "pointnet_external_auc",
+            "pointnet_external_set_used_in_reported_curve_selection",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.provenance_evaluation_source_audit",
+    )
+    expected_provenance_scores = {
+        "cross_release_lineage_blocked_cfd_to_rupture_transfer_validity": 30.0,
+        "source_conditional_selective_rupture_prediction": 29.5,
+        "test_blind_pointnet_external_reevaluation": 28.5,
+        "hug_curator_lineage_invariant_morphometry": 23.5,
+        "patient_set_multiple_aneurysm_rupture_consistency": 25.5,
+    }
+    observed_provenance_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in provenance_audit["candidates"]
+    }
+    provenance_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in provenance_audit["candidates"]
+    )
+    if (
+        provenance_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or provenance_audit["audit_document"]
+        != "docs/provenance-evaluation-source-audit-2026-08-10.md"
+        or provenance_audit["automatic_selection_threshold"] != 32.0
+        or provenance_audit["best_candidate_id"]
+        != "cross_release_lineage_blocked_cfd_to_rupture_transfer_validity"
+        or provenance_audit["best_score"] != 30.0
+        or provenance_audit["best_score"]
+        >= provenance_audit["automatic_selection_threshold"]
+        or provenance_audit["active_shortlist_count"] != 0
+        or provenance_audit["primary_problem_selected"] is not False
+        or provenance_audit[
+            "any_archive_mesh_image_spreadsheet_or_model_weight_payload_accessed"
+        ]
+        is not False
+        or provenance_audit["executable_p0_registered"] is not False
+        or provenance_audit["method_selected"] is not False
+        or provenance_audit["architecture_selected"] is not False
+        or provenance_audit["gpu_training_authorized"] is not False
+        or provenance_audit["outer_test_authorized"] is not False
+        or provenance_audit["submission_identity_active"] is not False
+        or provenance_audit["execution_server"] != "introai9"
+        or provenance_audit["observed_introai9_pbs_job_count"] != 0
+        or provenance_audit["pbs_job_created"] is not False
+        or provenance_audit["login_node_gpu_command_executed"] is not False
+        or provenance_audit["junjinyong_accessed_for_this_audit"] is not False
+        or provenance_audit["aneux_total_lesions"] != 750
+        or provenance_audit["aneux_total_patients"] != 605
+        or provenance_audit["aneux_aneurisk_lesions"] != 101
+        or provenance_audit["aneux_aneurisk_patients"] != 97
+        or provenance_audit["aneux_case_level_cross_release_lineage_manifest_found"]
+        is not False
+        or provenance_audit["aneux_archive_accessed"] is not False
+        or provenance_audit["aneurisk_cfd_record"] != "10.5281/zenodo.19455127"
+        or provenance_audit["aneurisk_cfd_selected_geometries"] != 76
+        or provenance_audit["aneurisk_cfd_source_cases_reported"] != 100
+        or provenance_audit["aneurisk_cfd_archive_bytes"] != 1430889142
+        or provenance_audit["aneurisk_cfd_archive_accessed"] is not False
+        or provenance_audit["public_aneurisk_mirror_named_model_folders"] != 24
+        or provenance_audit["public_aneurisk_mirror_named_dicom_folders"] != 24
+        or provenance_audit["public_aneurisk_mirror_label_files"] != 15
+        or provenance_audit[
+            "public_aneurisk_mirror_contains_c0074a_and_c0074b"
+        ]
+        is not True
+        or provenance_audit["public_aneurisk_mirror_member_payload_accessed"]
+        is not False
+        or provenance_audit["pointnet_internal_auc"] != 0.85
+        or provenance_audit["pointnet_external_auc"] != 0.71
+        or provenance_audit["pointnet_external_set_used_in_reported_curve_selection"]
+        is not True
+        or observed_provenance_scores != expected_provenance_scores
+        or not provenance_axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in provenance_audit["candidates"])
+        or provenance_audit["decision"]
+        != "reject_all_without_score_repair_archive_mesh_image_spreadsheet_payload_p0_method_architecture_or_gpu"
+        or provenance_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_with_exact_public_lineage_or_independent_patient_endpoint_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The provenance-evaluation audit must preserve all five frozen "
+            "source-only rejections, the 30.0/40 maximum, no archive/mesh/"
+            "image/P0/model/GPU, and introai9-only execution."
+        )
+    checks.append("provenance-evaluation rejection and introai9-only boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -2016,7 +2159,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_context_treatment_source_audit"
+        != "unselected_primary_with_no_active_shortlist_after_provenance_evaluation_source_audit"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -2179,7 +2322,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_context_treatment_source_audit_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_provenance_evaluation_source_audit_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

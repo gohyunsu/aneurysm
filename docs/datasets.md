@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 lineage rule:** AneuX의 Aneurisk 101 lesion, AneuriskData mirror의
+> 24 named model folder와 새 CFD의 76 selected geometry는 source ancestry만으로
+> 동일 case라 병합하지 않는다. Exact patient/lesion/acquisition/geometry/cut/
+> resolution/derived-field manifest가 없으면 서로 다른 release의 near-isometric
+> surface도 같은 lineage로 확정하지 않는다. 반대로 CFD pretraining과 rupture
+> evaluation에 동일 lineage가 확인되면 naive split 결과는 unseen-geometry
+> evidence로 사용하지 않는다. 이번 audit은 archive나 member payload를 열지
+> 않았으며 active dataset role을 만들지 않았다.
+
 > **2026-08-10 source-only additions:** AneuSI는 99 paper patients/102 reported
 > cases, repository 103 named cases와 seven-clip same-case context orbit을 가진
 > control asset이다. 102/103 mapping이 미해결이고 spreadsheet/VTK payload는

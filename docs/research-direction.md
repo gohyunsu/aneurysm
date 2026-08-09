@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **2026-08-10 provenance–evaluation boundary:** AneuX/Aneurisk/76-case CFD
+> cross-release lineage 후보의 최고점은 30.0/40이다. Shared source ancestry는
+> 확인되지만 exact lesion manifest가 없고, generic contamination audit과
+> patient/source-disjoint evaluation은 direct prior다. 따라서 lineage는 향후
+> 모든 split의 필수 provenance field로 남기되 현재 paper identity나 method로
+> 승격하지 않는다. Archive/mesh/image payload, P0, architecture와 GPU는 0이다.
+> 상세 근거는
+> [`provenance–evaluation source audit`](provenance-evaluation-source-audit-2026-08-10.md)에
+> 고정한다. 실행은 `introai9` PBS만 허용하며 `junjinyong`은 제외한다.
+
 > **2026-08-10 context–treatment boundary:** AneuSI context, paired treatment
 > MRI, DIVA-seg와 latent shape 후보는 31.5/27.5/26.0/27.0/30.0으로 모두
 > 32 미만이다. 최고 AneuSI 후보는 same-case ordered context라는 장점이 있지만
