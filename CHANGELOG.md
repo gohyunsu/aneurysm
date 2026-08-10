@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.8 deployment verified
+
+- Exact scientific content `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee`
+  passed Quality run `31416106615` and Pages run `31416105439`.
+- Live Overview, Learn, detailed audit and research-data object render best
+  31.0/40, all rejected, Hodge-as-baseline, evaluation-first critical
+  structures and archive/VTP/P0/model/GPU 0.
+- This provenance-only record changes no score, closed P0, method,
+  architecture, server state, outer test or paper claim.
+
 ## 2026-08-11 · Schema 7.8 rejects structure-faithful WSS before compute
 
 - Reframed the submitted surface-vector analysis as an inactive, falsifiable

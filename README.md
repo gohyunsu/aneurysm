@@ -1,5 +1,12 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 7.8 deployment verification:** Exact scientific content
+> `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee` passed Quality
+> `31416106615` and Pages `31416105439`. Live Overview, Learn, detailed audit
+> and machine-rendered research data expose the same best 31.0/40 rejection,
+> evaluation-first/Hodge-baseline correction and zero P0/model/GPU boundary.
+> This deployment creates no scientific or compute authorization.
+
 > **2026-08-11 structure-faithful WSS reappraisal · schema 7.8:** The proposed
 > direction is retained only as an inactive application hypothesis. A fresh
 > Aneurisk/CFD-Challenge/RHSIA six-way screen scores

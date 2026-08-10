@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.8 deployment verification · 2026-08-11:** Exact scientific
+> content `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee` passed Quality
+> `31416106615` and Pages `31416105439`. Live pages expose the same 31.0/40
+> source rejection and no-compute boundary. These GitHub-hosted checks queried
+> neither `introai9` nor `junjinyong` and authorize no PBS/GPU work.
+
 > **Schema 7.8 no-execution boundary · 2026-08-11:** The structure-faithful
 > WSS reappraisal peaks at 31.0/40 and registers no P0/PBS/GPU work. No
 > scientific server was connected to or queried during the source-only audit.

@@ -813,6 +813,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 7.8 structure-faithful WSS boundary is live and verified",
+      copy: "Exact scientific content 720e4c5… passed Quality 31416106615 and Pages 31416105439. Live Overview, Learn, detailed audit and this research-data object expose best 31.0/40, all rejected, Hodge as a strong baseline, critical structures as evaluation-first, and archive/VTP/P0/method/architecture/GPU 0. This publication record creates no scientific or compute authority.",
+      files: ["README.md", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Schema 7.8 critically reappraises structure-faithful surface WSS",
       copy: "The submitted direction is retained as an inactive application hypothesis, not an architecture. Six frozen formulations score 31.0/30.0/29.0/28.5/27.5/27.0. The official AneuG heads are unchanged and historical P0 115645 remains closed at 0/10 checks. Only the public Aneurisk README was read; archive and VTP access remain zero. Hodge is frozen as a strong baseline, critical points/worldlines as evaluation-first, and edge 1-forms as non-guaranteeing representations. No P0/P1, model, architecture, server query, GPU, outer test or claim is opened.",

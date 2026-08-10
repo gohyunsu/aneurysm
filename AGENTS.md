@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 7.8 deployment verification overlay:** Exact scientific
+> content `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee` passed Quality
+> `31416106615` and Pages `31416105439`. Live Overview, Learn, detailed audit
+> and research-data object expose best 31.0/40, all rejected, Hodge-as-baseline,
+> evaluation-first critical structures and archive/VTP/P0/method/architecture/
+> GPU 0. This publication record neither changes the score nor opens a server
+> action. No scientific server was queried. Future gate-authorized work is
+> `introai9` PBS only; never access or monitor `junjinyong`.
+
 > **2026-08-11 structure-faithful WSS reappraisal override · schema 7.8:**
 > Surface-vector WSS는 폐기하지 않지만 active paper identity도 아니다. Fresh
 > Aneurisk/CFD-Challenge/RHSIA six-way screen은
