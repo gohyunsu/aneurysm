@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 broad-registry asset boundary:** LargeIA는 공식 record상
+> 1,338 internal CTA/1,489 aneurysm/6 institution과 138 external CTA/
+> 101 aneurysm/2 institution의 voxel mask·age·sex·rupture status를 보고하지만
+> restricted request가 필요하다. 사용자를 대신한 request/terms acceptance와
+> payload access는 0이다. 2015 CFD Challenge는 five DICOM anatomy와 28 solver
+> submissions/26 teams를 제공하지만 solver submission을 patient로 세지 않는다.
+> Longitudinal SIG, aSAH hydrocephalus와 VWI public objects는 supplement/table이고
+> synthetic DSA는 2026-10-31까지 embargo다. 어느 source에도 train, outer-test
+> 또는 current-model role을 부여하지 않는다.
+
 > **2026-08-10 registry-gap asset boundary:** Zenodo exact-title query 49건 중
 > 새로 식별한 rupture-status record `7536330`/`7757069`는 각각 578,924,037/
 > 2,321,552,713-byte test blob이지만 public development cohort, exact case

@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.6":
-        raise ProtocolError("The current research-state schema must be version 5.6.")
+    if protocol["schema_version"] != "5.7":
+        raise ProtocolError("The current research-state schema must be version 5.7.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_registry_gap_source_rejection_aneumo_lineage_p0_closed"
+        != "failed_branches_preserved_no_active_shortlist_after_broad_registry_source_rejection_aneumo_lineage_p0_closed"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -205,6 +205,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "reconstruction_annotation_reliability_source_audit",
             "method_asset_viability_source_audit",
             "registry_gap_source_audit",
+            "broad_registry_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -214,12 +215,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_registry_gap_source_rejection_aneumo_lineage_p0_remains_closed"
+        != "no_active_shortlist_after_broad_registry_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_registry_gap_audit_official_metadata_only_no_csv_pkl_zip_image_wall_map_cfd_case_rna_or_patient_payload_aneumo_lineage_p0_history_unchanged"
+        != "latest_broad_registry_audit_official_metadata_and_primary_sources_only_no_patient_image_mesh_spreadsheet_document_or_model_payload_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not True
@@ -231,11 +232,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_closed_p0_or_confirmatory_failures"
         or problem_selection["audit_document"]
-        != "docs/registry-gap-source-audit-2026-08-10.md"
+        != "docs/broad-registry-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved"
+        != "multicenter_study_level_lesion_set_risk_control"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -339,6 +340,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "open_cfd_pipeline_numerical_certificate_without_independent_reference",
         "cross_cohort_rupture_transcriptomic_core_without_imaging_bridge",
         "autopsy_circle_of_willis_variant_geometry_prior_without_casewise_asset",
+        "multicenter_study_level_lesion_set_risk_control",
+        "solver_population_calibrated_hemodynamic_functionals",
+        "rupture_destined_longitudinal_sig_forecasting",
+        "asah_day21_hydrocephalus_dynamic_imaging",
+        "vwi_habitat_instability_reanalysis",
+        "synthetic_dsa_reader_realism",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -3741,6 +3748,289 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "payload/P0/model/PBS/GPU, and introai9-only execution."
         )
     checks.append("registry-gap rejection and public-test sealing boundary")
+
+    broad_registry_audit = problem_selection["broad_registry_source_audit"]
+    _require_keys(
+        broad_registry_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "search_boundaries",
+            "best_candidate_ids",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "official_metadata_file_manifests_and_primary_sources_read",
+            "any_patient_image_mesh_spreadsheet_document_or_model_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_remote_user",
+            "introai9_observed_host",
+            "introai9_pbs_jobs_observed",
+            "introai9_name_level_source_scan_result_artifact_created",
+            "introai9_candidate_asset_presence_conclusion",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "largeia_record",
+            "largeia_access_state",
+            "largeia_internal_cta_studies",
+            "largeia_internal_aneurysms",
+            "largeia_internal_institutions",
+            "largeia_external_cta_studies",
+            "largeia_external_aneurysms",
+            "largeia_external_institutions",
+            "largeia_voxelwise_masks_age_sex_rupture_status_reported",
+            "largeia_user_access_request_or_terms_completed",
+            "largeia_payload_accessed",
+            "largeia_public_reader_adjudication_and_sealed_outer_test_manifest",
+            "cfd_challenge_figshare_record",
+            "cfd_challenge_independent_aneurysm_anatomies",
+            "cfd_challenge_submitted_datasets",
+            "cfd_challenge_teams",
+            "cfd_challenge_dicom_wss_segmentation_or_velocity_payload_accessed",
+            "cfd_challenge_primary_paper_already_quantifies_whole_pipeline_variability",
+            "cfd_challenge_sac_average_wss_iqr_maximum_percent",
+            "cfd_challenge_normalized_sac_average_wss_iqr_below_percent",
+            "rupture_destined_figshare_records",
+            "rupture_destined_supplement_duplicate_md5",
+            "rupture_destined_patients",
+            "rupture_destined_aneurysms",
+            "longitudinal_unruptured_patients",
+            "longitudinal_unruptured_aneurysms",
+            "rupture_destined_delta_sig_ratio_auc",
+            "rupture_destined_size_ratio_auc",
+            "rupture_destined_casewise_image_mesh_or_measurement_table_public",
+            "asah_hydrocephalus_figshare_record",
+            "asah_hydrocephalus_development_patients",
+            "asah_hydrocephalus_external_patients",
+            "asah_hydrocephalus_development_auc",
+            "asah_hydrocephalus_external_auc",
+            "asah_hydrocephalus_patient_level_image_or_time_series_public",
+            "vwi_habitat_figshare_record",
+            "vwi_habitat_patients",
+            "vwi_habitat_aneurysms",
+            "vwi_habitat_stable_aneurysms",
+            "vwi_habitat_unstable_aneurysms",
+            "vwi_habitat_validation_auc",
+            "vwi_habitat_raw_vwi_segmentation_or_case_manifest_public",
+            "synthetic_dsa_record",
+            "synthetic_dsa_embargo_end",
+            "synthetic_dsa_images_reported",
+            "synthetic_dsa_generation_runs",
+            "synthetic_dsa_views_per_run",
+            "synthetic_dsa_original_patient_dsa_released",
+            "synthetic_dsa_payload_accessed",
+            "low_quality_cta_restoration_direct_prior_record",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.broad_registry_source_audit",
+    )
+    expected_broad_registry_scores = {
+        "multicenter_study_level_lesion_set_risk_control": 30.5,
+        "solver_population_calibrated_hemodynamic_functionals": 29.5,
+        "rupture_destined_longitudinal_sig_forecasting": 26.0,
+        "asah_day21_hydrocephalus_dynamic_imaging": 26.0,
+        "vwi_habitat_instability_reanalysis": 24.5,
+        "synthetic_dsa_reader_realism": 18.0,
+    }
+    observed_broad_registry_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in broad_registry_audit["candidates"]
+    }
+    broad_registry_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in broad_registry_audit["candidates"]
+    )
+    expected_broad_registry_priors = {
+        "glia_net_global_localization_and_fine_3d_segmentation",
+        "anatomy_aware_centerline_graph_and_global_local_aneurysm_detection",
+        "conformal_risk_control_and_sequential_conformal_object_detection",
+        "conformal_prediction_sets_for_instance_segmentation",
+        "cfd_challenge_whole_pipeline_wss_variability_analysis",
+        "match_segmentation_to_hemodynamic_variability",
+        "generic_probabilistic_multifidelity_neural_operator_uncertainty",
+        "primary_sig_geometry_hemodynamic_rupture_destined_analysis",
+        "primary_vwi_habitat_transformer_instability_prediction",
+        "primary_dynamic_asah_hydrocephalus_prediction",
+        "physics_grounded_synthetic_supervision_for_ct_restoration",
+    }
+    expected_search_boundaries = {
+        "zenodo_broad_query_total_records": 1226,
+        "zenodo_recent_records_screened": 100,
+        "datacite_intracranial_aneurysm_dataset_total_records": 196,
+        "figshare_records_screened": 100,
+        "dryad_records_screened_approximately": 20,
+        "prior_exact_title_zenodo_records": 49,
+    }
+    if (
+        broad_registry_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or broad_registry_audit["audit_document"]
+        != "docs/broad-registry-source-audit-2026-08-10.md"
+        or broad_registry_audit["automatic_selection_threshold"] != 32.0
+        or broad_registry_audit["search_boundaries"] != expected_search_boundaries
+        or broad_registry_audit["best_candidate_ids"]
+        != ["multicenter_study_level_lesion_set_risk_control"]
+        or broad_registry_audit["best_score"] != 30.5
+        or broad_registry_audit["best_score"]
+        >= broad_registry_audit["automatic_selection_threshold"]
+        or broad_registry_audit["active_shortlist_count"] != 0
+        or broad_registry_audit["primary_problem_selected"] is not False
+        or broad_registry_audit[
+            "official_metadata_file_manifests_and_primary_sources_read"
+        ]
+        is not True
+        or broad_registry_audit[
+            "any_patient_image_mesh_spreadsheet_document_or_model_payload_accessed"
+        ]
+        is not False
+        or broad_registry_audit["executable_p0_registered"] is not False
+        or broad_registry_audit["method_selected"] is not False
+        or broad_registry_audit["architecture_selected"] is not False
+        or broad_registry_audit["gpu_training_authorized"] is not False
+        or broad_registry_audit["outer_test_authorized"] is not False
+        or broad_registry_audit["submission_identity_active"] is not False
+        or broad_registry_audit["execution_server"] != "introai9"
+        or broad_registry_audit["introai9_connection_verified"] is not True
+        or broad_registry_audit["introai9_remote_user"] != "introai9"
+        or broad_registry_audit["introai9_observed_host"] != "ECE-util2"
+        or broad_registry_audit["introai9_pbs_jobs_observed"] != 0
+        or broad_registry_audit[
+            "introai9_name_level_source_scan_result_artifact_created"
+        ]
+        is not False
+        or broad_registry_audit["introai9_candidate_asset_presence_conclusion"]
+        != "not_established_not_absent"
+        or broad_registry_audit["pbs_job_created"] is not False
+        or broad_registry_audit["login_node_gpu_command_executed"] is not False
+        or broad_registry_audit["junjinyong_accessed_for_this_audit"] is not False
+        or broad_registry_audit["largeia_record"] != "10.5281/zenodo.6801398"
+        or broad_registry_audit["largeia_access_state"]
+        != "restricted_request_required"
+        or broad_registry_audit["largeia_internal_cta_studies"] != 1338
+        or broad_registry_audit["largeia_internal_aneurysms"] != 1489
+        or broad_registry_audit["largeia_internal_institutions"] != 6
+        or broad_registry_audit["largeia_external_cta_studies"] != 138
+        or broad_registry_audit["largeia_external_aneurysms"] != 101
+        or broad_registry_audit["largeia_external_institutions"] != 2
+        or broad_registry_audit[
+            "largeia_voxelwise_masks_age_sex_rupture_status_reported"
+        ]
+        is not True
+        or broad_registry_audit[
+            "largeia_user_access_request_or_terms_completed"
+        ]
+        is not False
+        or broad_registry_audit["largeia_payload_accessed"] is not False
+        or broad_registry_audit[
+            "largeia_public_reader_adjudication_and_sealed_outer_test_manifest"
+        ]
+        is not False
+        or broad_registry_audit["cfd_challenge_figshare_record"] != "6383516"
+        or broad_registry_audit[
+            "cfd_challenge_independent_aneurysm_anatomies"
+        ]
+        != 5
+        or broad_registry_audit["cfd_challenge_submitted_datasets"] != 28
+        or broad_registry_audit["cfd_challenge_teams"] != 26
+        or broad_registry_audit[
+            "cfd_challenge_dicom_wss_segmentation_or_velocity_payload_accessed"
+        ]
+        is not False
+        or broad_registry_audit[
+            "cfd_challenge_primary_paper_already_quantifies_whole_pipeline_variability"
+        ]
+        is not True
+        or broad_registry_audit[
+            "cfd_challenge_sac_average_wss_iqr_maximum_percent"
+        ]
+        != 56
+        or broad_registry_audit[
+            "cfd_challenge_normalized_sac_average_wss_iqr_below_percent"
+        ]
+        != 30
+        or broad_registry_audit["rupture_destined_figshare_records"]
+        != ["23905128", "23905134", "23905143"]
+        or broad_registry_audit["rupture_destined_supplement_duplicate_md5"]
+        != "6d1bdb0ab06b75f38ab02ae5faa34912"
+        or broad_registry_audit["rupture_destined_patients"] != 20
+        or broad_registry_audit["rupture_destined_aneurysms"] != 20
+        or broad_registry_audit["longitudinal_unruptured_patients"] != 41
+        or broad_registry_audit["longitudinal_unruptured_aneurysms"] != 45
+        or broad_registry_audit["rupture_destined_delta_sig_ratio_auc"] != 0.72
+        or broad_registry_audit["rupture_destined_size_ratio_auc"] != 0.56
+        or broad_registry_audit[
+            "rupture_destined_casewise_image_mesh_or_measurement_table_public"
+        ]
+        is not False
+        or broad_registry_audit["asah_hydrocephalus_figshare_record"] != "33077267"
+        or broad_registry_audit["asah_hydrocephalus_development_patients"] != 228
+        or broad_registry_audit["asah_hydrocephalus_external_patients"] != 102
+        or broad_registry_audit["asah_hydrocephalus_development_auc"] != 0.894
+        or broad_registry_audit["asah_hydrocephalus_external_auc"] != 0.867
+        or broad_registry_audit[
+            "asah_hydrocephalus_patient_level_image_or_time_series_public"
+        ]
+        is not False
+        or broad_registry_audit["vwi_habitat_figshare_record"] != "32695140"
+        or broad_registry_audit["vwi_habitat_patients"] != 293
+        or broad_registry_audit["vwi_habitat_aneurysms"] != 312
+        or broad_registry_audit["vwi_habitat_stable_aneurysms"] != 197
+        or broad_registry_audit["vwi_habitat_unstable_aneurysms"] != 115
+        or broad_registry_audit["vwi_habitat_validation_auc"] != 0.844
+        or broad_registry_audit[
+            "vwi_habitat_raw_vwi_segmentation_or_case_manifest_public"
+        ]
+        is not False
+        or broad_registry_audit["synthetic_dsa_record"]
+        != "10.5281/zenodo.21104782"
+        or broad_registry_audit["synthetic_dsa_embargo_end"] != "2026-10-31"
+        or broad_registry_audit["synthetic_dsa_images_reported"] != 400
+        or broad_registry_audit["synthetic_dsa_generation_runs"] != 10
+        or broad_registry_audit["synthetic_dsa_views_per_run"] != 4
+        or broad_registry_audit[
+            "synthetic_dsa_original_patient_dsa_released"
+        ]
+        is not False
+        or broad_registry_audit["synthetic_dsa_payload_accessed"] is not False
+        or broad_registry_audit["low_quality_cta_restoration_direct_prior_record"]
+        != "10.5281/zenodo.20754346"
+        or set(broad_registry_audit["direct_prior_threats"])
+        != expected_broad_registry_priors
+        or observed_broad_registry_scores != expected_broad_registry_scores
+        or not broad_registry_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in broad_registry_audit["candidates"]
+        )
+        or not set(expected_broad_registry_scores).issubset(
+            set(problem_selection["rejected_candidates"])
+        )
+        or broad_registry_audit["decision"]
+        != "reject_all_without_score_repair_access_request_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or broad_registry_audit["next_allowed_action"]
+        != "monitor_material_source_changes_or_a_genuinely_new_observable_imaging_endpoint_with_auditable_development_units_and_sealed_outer_test_then_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The broad-registry source audit must retain all six frozen "
+            "rejections, the restricted LargeIA boundary, five independent "
+            "CFD anatomies, no payload/P0/model/PBS/GPU, introai9-only "
+            "execution, and complete junjinyong exclusion."
+        )
+    checks.append("broad-registry rejection and restricted-access boundary")
 
     venue = protocol["venue"]
     _require_keys(

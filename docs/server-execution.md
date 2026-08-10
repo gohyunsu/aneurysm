@@ -2,6 +2,20 @@
 
 최종 갱신: 2026-08-10 KST
 
+## 2026-08-10 · Broad-registry source-only stop; introai9 remains exclusive
+
+- Six frozen scores are 30.5/29.5/26.0/26.0/24.5/18.0, all below 32. No access
+  request, payload, executable P0, PBS submission, GPU job or monitoring loop was
+  created. This is a scientific source-gate stop, not a server failure.
+- A minimal public-key login reached `introai9`/`ECE-util2`; the last completed
+  PBS check showed zero AURORA jobs. Two bounded name-level scans produced no
+  artifact, so candidate-asset presence is not established and absence is not
+  claimed. No login-node GPU command ran and no repeated local repair was opened.
+- Any future job requires a new >=32 candidate and a separately frozen
+  method-free P0, and must use PBS on `introai9`. `junjinyong` is completely
+  excluded from connection, scheduler query, AURORA transfer, submission and
+  monitoring.
+
 ## 2026-08-10 · Registry-gap deployment verification
 
 - Public content `b4c3d48a107b969ce26cbc86abd9b36814116a3a` passed Quality

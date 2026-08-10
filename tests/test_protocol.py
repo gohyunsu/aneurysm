@@ -293,6 +293,57 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "registry-gap source audit"):
             validate_protocol(candidate)
 
+    def test_broad_registry_audit_rejects_restricted_and_pseudoreplicated_leads(self) -> None:
+        audit = self.protocol["problem_selection"]["broad_registry_source_audit"]
+        self.assertEqual(audit["best_score"], 30.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["largeia_internal_cta_studies"], 1338)
+        self.assertEqual(audit["largeia_internal_institutions"], 6)
+        self.assertEqual(audit["largeia_external_cta_studies"], 138)
+        self.assertEqual(audit["largeia_external_institutions"], 2)
+        self.assertEqual(audit["largeia_access_state"], "restricted_request_required")
+        self.assertFalse(audit["largeia_user_access_request_or_terms_completed"])
+        self.assertFalse(audit["largeia_payload_accessed"])
+        self.assertEqual(audit["cfd_challenge_independent_aneurysm_anatomies"], 5)
+        self.assertEqual(audit["cfd_challenge_submitted_datasets"], 28)
+        self.assertEqual(audit["cfd_challenge_teams"], 26)
+        self.assertEqual(audit["rupture_destined_patients"], 20)
+        self.assertFalse(
+            audit["rupture_destined_casewise_image_mesh_or_measurement_table_public"]
+        )
+        self.assertEqual(audit["synthetic_dsa_embargo_end"], "2026-10-31")
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["introai9_pbs_jobs_observed"], 0)
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["login_node_gpu_command_executed"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not candidate["payload_accessed"] for candidate in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["broad_registry_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "broad-registry source audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["broad_registry_source_audit"][
+            "largeia_user_access_request_or_terms_completed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "broad-registry source audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["broad_registry_source_audit"][
+            "cfd_challenge_independent_aneurysm_anatomies"
+        ] = 28
+        with self.assertRaisesRegex(ProtocolError, "broad-registry source audit"):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

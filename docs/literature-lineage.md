@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 broad-registry lineage:** LargeIA→GLIA-Net은 multicenter CTA의
+> global localization과 fine 3D segmentation을 직접 점유하고, conformal risk
+> control·sequential conformal object detection·instance-segmentation sets가
+> generic certification을 점유한다. 2015 CFD Challenge→MATCH는 whole-pipeline와
+> segmentation-induced hemodynamic variability를 직접 분석한다. Longitudinal
+> SIG, VWI habitat Transformer, dynamic aSAH hydrocephalus와 physics-grounded CTA
+> restoration도 각각 primary/direct prior가 존재한다. 남는 독립 novelty는
+> access 가능한 환자 단위 asset, 식별 가능한 새 endpoint와 sealed outer test가
+> 동시에 있을 때의 operator-specific algorithm/guarantee뿐이며 현재 최고점은
+> 30.5/40이라 active contribution은 없다.
+
 > **2026-08-10 registry-gap lineage:** TransIAR은 423 patient/449 lesion에서
 > geometry와 CTA neighborhood를 결합했고, GN-Net은 같은 423-patient count와
 > 겹치는 authorship 아래 geometric branch와 3D-CNN/Transformer neighborhood

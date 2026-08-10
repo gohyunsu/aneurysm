@@ -1,5 +1,15 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 broad-registry architecture boundary:** 현재 모델은 없다.
+> LargeIA에 global-local detector, centerline GNN 또는 conformal head를 붙이는
+> 것은 GLIA-Net/anatomy-aware detection/conformal object-set direct prior의
+> 조합이다. CFD Challenge의 28 submission을 solver token으로 쓰는 hierarchical
+> operator도 독립 anatomy가 5개이고 원 연구가 workflow variability를 이미
+> 정의한다. Temporal SIG, VWI Transformer와 synthetic DSA diffusion도 직접
+> 선행이거나 payload/schedule가 막혀 있다. 따라서 GNN, U-Net, Transformer,
+> neural operator, diffusion과 conformal wrapper는 모두 **미선정**, GPU
+> authorization은 0이다.
+
 > **2026-08-10 method boundary:** 현재 모델은 없다. COMPASS-style feature
 > perturbation, scalar/multi-metric conformal calibration, NeckSpline-style neck
 > primitive, Neural Operator Process, boundary extension, arbitrary-conditioning

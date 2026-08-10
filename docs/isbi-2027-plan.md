@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 broad-registry boundary:** Six source-only candidates score
+> 30.5/29.5/26.0/26.0/24.5/18.0. Restricted LargeIA, five-anatomy CFD solver
+> population, supplement-only longitudinal SIG/aSAH/VWI and post-deadline
+> synthetic DSA do not identify a new executable ISBI method. No title, numbered
+> contribution, architecture, result row, method figure or GPU experiment is
+> added. The audit is unnumbered rejected history; the four-page ISBI 2027 target
+> remains **not submission-ready**.
+
 > **2026-08-10 registry-gap boundary:** Five new metadata-only candidates score
 > 26.5/26.0/26.0/25.5/23.5. A public test-only rupture-status blob, scalar VWE
 > association, solver software, post-presentation transcriptomics and aggregate

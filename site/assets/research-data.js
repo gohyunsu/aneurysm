@@ -2,17 +2,17 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · registry-gap best 26.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    status: "Target locked · broad-registry best 30.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
     requirement: "material source release or genuinely identifiable fresh problem ≥32 → method-free CPU/read-only P0; do not repair closed branches",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
-      title: "A public test blob is not a development cohort or a future-risk endpoint",
-      copy: "An exact-title Zenodo screen returned 49 records. The best new candidate is a test-only rupture-status blob from a source-reported 423-patient lineage, but its public development cohort, patient/center/raw-CTA manifest and prospective endpoint are absent. TransIAR and GN-Net directly occupy geometry-plus-neighborhood modeling. The VWE table contains scalar associations for 41 unruptured aneurysms; CFD software has no cohort; processed post-presentation transcriptomics and aggregate autopsy anatomy have no casewise imaging bridge.",
-      status: "Best 26.5/40 · all rejected · payload/P0/PBS/model/GPU 0",
-      url: "../docs/registry-gap-source-audit-2026-08-10.md"
+      title: "Multicenter scale and many solver outputs still need independent, auditable units",
+      copy: "A broad Zenodo/DataCite/Figshare/Dryad screen finds LargeIA and the 2015 CFD Challenge. LargeIA reports 1,338 internal CTA studies/1,489 aneurysms from six institutions and 138 external CTA studies/101 aneurysms from two, but access is restricted and public reader/sealed-test semantics are insufficient. GLIA-Net and conformal detection are direct priors. The CFD record has 28 submissions from 26 teams but only five independent anatomies; its primary paper already owns whole-pipeline WSS uncertainty. Supplement-only longitudinal SIG, aSAH and VWI records plus post-deadline synthetic DSA also fail admission.",
+      status: "Best 30.5/40 · all rejected · payload/P0/PBS/model/GPU 0",
+      url: "../docs/broad-registry-source-audit-2026-08-10.md"
     },
     {
       year: "2026.08",
@@ -324,18 +324,18 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Public rupture test", "Scalar VWE", "Transcriptomics", "Residual research gap"],
-    ["Direct prior", "TransIAR · GN-Net", "Primary association · 3D VWE mapping", "GEO immune/gene signatures", "None admitted"],
-    ["Observable target", "Presentation rupture status", "Released scalar association", "Post-presentation tissue label", "Prospective or decision-relevant imaging endpoint"],
-    ["Known boundary", "Test-only; no public development lineage", "41 unruptured lesions; no wall map/field", "No casewise CTA/MRA bridge", "Independent units plus sealed outer test required"],
-    ["Current decision", "26.5/40 reject", "26.0/40 reject", "25.5/40 reject", "No payload · no P0 · no method · no GPU"]
+    ["Axis", "Restricted LargeIA", "CFD solver population", "Longitudinal SIG", "Residual research gap"],
+    ["Direct prior", "GLIA-Net · anatomy-aware detection · conformal object sets", "2015 workflow UQ · MATCH · operator UQ", "Primary SIG/geometric/hemodynamic analysis", "None admitted"],
+    ["Observable target", "Study-level detection under declared risk", "Solver-conditioned WSS functionals", "Observed future rupture under serial TOF-MRA", "New endpoint with auditable train and sealed test"],
+    ["Known boundary", "Restricted; reader/outer-test semantics absent", "28 submissions but five anatomies", "Duplicate supplement PDF; no casewise images/table", "Independent units plus unoccupied method gap required"],
+    ["Current decision", "30.5/40 reject", "29.5/40 reject", "26.0/40 reject", "No access request · payload · P0 · method · GPU"]
   ],
   gates: [
     {
-      id: "S-RG",
-      title: "Do registry-only records expose a development cohort, identifiable endpoint and residual method gap?",
-      copy: "No. The leading rupture-status asset is test-only and lacks an exact public development lineage or prospective endpoint. Scalar VWE, solver infrastructure, post-presentation omics and aggregate autopsy anatomy do not supply a new casewise imaging target. Direct geometry/neighborhood and association methods already occupy the obvious approaches.",
-      state: "Best 26.5/40 · all five below 32 · no payload/P0/PBS/model/GPU",
+      id: "S-BR",
+      title: "Does the broad registry expose an accessible independent cohort and an unoccupied method gap?",
+      copy: "No. LargeIA is restricted and direct-prior dense. The CFD Challenge has many solver submissions but only five independent anatomies and already defines workflow uncertainty. Longitudinal SIG, aSAH and VWI are supplement-only/directly occupied, while synthetic DSA becomes available after the ISBI deadline.",
+      state: "Best 30.5/40 · all six below 32 · no access request/payload/P0/PBS/model/GPU",
       blocking: true
     },
     {
@@ -438,6 +438,16 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "LargeIA",
+      role: "source-rejected restricted multicenter detection candidate; not training or outer test",
+      provenance: "officially reported 1,338 internal CTA/1,489 aneurysms/6 institutions + 138 external CTA/101 aneurysms/2 institutions · restricted request required · user request/terms/payload 0 · GLIA-Net direct prior · best 30.5/40"
+    },
+    {
+      name: "2015 International Aneurysm CFD Challenge",
+      role: "source-rejected workflow-variability benchmark; not operator training",
+      provenance: "5 independent MCA aneurysm anatomies · 28 submissions/26 teams · primary paper already quantifies whole-pipeline WSS variability · DICOM/WSS/segmentation/velocity payload 0 · score 29.5/40"
+    },
     {
       name: "Open aSAH longitudinal CTP · Dryad v7",
       role: "source-rejected longitudinal-perfusion candidate; no current training or evaluation role",
@@ -585,6 +595,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Broad-registry audit rejects restricted scale and solver pseudoreplication",
+      copy: "A bounded Zenodo/DataCite/Figshare/Dryad screen freezes six scores at 30.5/29.5/26.0/26.0/24.5/18.0. LargeIA is restricted and direct-prior dense; the CFD Challenge has only five independent anatomies despite 28 submissions; longitudinal SIG, aSAH and VWI are supplement-only/directly occupied; synthetic DSA is embargoed past the deadline. Schema 5.7 creates no access request, payload, P0, PBS job, method, architecture or GPU. introai9 remains the only future execution target and junjinyong remains completely excluded.",
+      files: ["docs/broad-registry-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

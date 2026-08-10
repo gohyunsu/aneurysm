@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 broad-registry boundary:** Zenodo, DataCite, Figshare and Dryad를
+> 넓게 다시 검색하고 1차 논문·직접 선행과 대조했습니다. Frozen six-candidate
+> score는 **30.5/29.5/26.0/26.0/24.5/18.0**이며 모두 32/40 미만입니다.
+> 가장 강한 LargeIA는 6개 기관 1,338 internal CTA/1,489 aneurysm과 2개 기관
+> 138 external CTA/101 aneurysm을 보고하지만 restricted request가 필요하고,
+> public reader/outer-test semantics가 부족하며 GLIA-Net과 conformal detection이
+> 직접 선행입니다. 2015 CFD Challenge는 28 solution/26 team이지만 독립 anatomy는
+> 5개이고 원 논문이 whole-pipeline WSS variability를 이미 분석했습니다.
+> Longitudinal SIG, aSAH hydrocephalus와 VWI records는 supplement-only/direct-prior
+> occupied이며 synthetic DSA는 ISBI 마감 뒤 embargo입니다. 따라서
+> [`상세 audit`](docs/broad-registry-source-audit-2026-08-10.md)은 access request,
+> payload, P0, method, architecture, PBS/GPU, outer test와 claim을 모두 0으로
+> 고정합니다. 향후 실행은 `introai9` PBS만 허용하며 `junjinyong`은 완전히
+> 제외합니다.
+
 > **2026-08-10 registry-gap boundary:** An exact-title Zenodo metadata screen
 > found 49 records and froze five previously unregistered problem candidates at
 > **26.5/26.0/26.0/25.5/23.5**, all below 32/40. The best public rupture-status

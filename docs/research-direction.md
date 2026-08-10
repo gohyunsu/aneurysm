@@ -1,5 +1,16 @@
 # AURORA 연구 방향
 
+> **2026-08-10 broad-registry direction:** 넓은 official-registry screen 뒤에도
+> admission-qualified 문제는 없다. LargeIA의 multicenter scale은 매력적이지만
+> restricted access, public reader/outer-test semantics 부재와 GLIA-Net/conformal
+> direct prior 때문에 30.5/40이다. 2015 CFD Challenge는 solver population이
+> 풍부해 보여도 독립 anatomy 5개이며 primary paper가 workflow UQ를 직접
+> 점유해 29.5/40이다. Longitudinal SIG, aSAH hydrocephalus, VWI와 synthetic DSA도
+> public payload/novelty/schedule 경계를 넘지 못한다. 따라서 현재 방향은 새
+> GNN·Transformer·operator를 고르는 것이 아니라 이 여섯 exact candidate를
+> 기각하고, observable endpoint·auditable development unit·sealed outer test·
+> residual algorithmic gap을 함께 갖춘 새 source만 기다리는 것이다.
+
 > **2026-08-10 registry-gap direction:** 공식 Zenodo exact-title metadata 49건을
 > 재검토했지만 새 후보 최고점은 public test-only rupture-status reuse의
 > 26.5/40이다. 423-patient source lineage의 public blob에는 개발 cohort와 exact

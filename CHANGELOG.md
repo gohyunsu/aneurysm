@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Broad-registry audit rejects restricted and pseudoreplicated leads
+
+- A bounded official-metadata screen covered 100 recent Zenodo records from a
+  1,226-record broad query, 196 DataCite dataset hits, 100 Figshare hits,
+  approximately 20 Dryad hits and the prior 49-record exact-title history.
+- Six frozen candidates score **30.5/29.5/26.0/26.0/24.5/18.0**, all below 32.
+  LargeIA is restricted and direct-prior dense; the 2015 CFD Challenge has only
+  five independent anatomies despite 28 submissions; longitudinal SIG, aSAH
+  hydrocephalus and VWI expose supplement-only/directly occupied endpoints;
+  synthetic DSA is embargoed past the ISBI deadline.
+- No access request, patient/image/mesh/spreadsheet/document/model payload,
+  executable P0, PBS/GPU job, method, architecture, outer test or claim was
+  created. The two bounded `introai9` name scans produced no artifact, so asset
+  presence is not established rather than declared absent. `junjinyong` was not
+  accessed and remains excluded.
+- Schema 5.7, validator mutation guards, the detailed source audit, research/
+  data/method/experiment/ISBI/server documents and the beginner-facing site now
+  expose the same 30.5/40 normal early-stop boundary.
+- 영향 파일: `docs/broad-registry-source-audit-2026-08-10.md`, machine protocol,
+  validator/tests, public site, synchronized research documents, `AGENTS.md`
+  and this changelog.
+
 ## 2026-08-10 · Registry-gap deployment and private-paper sync verified
 
 - Exact public content `b4c3d48a107b969ce26cbc86abd9b36814116a3a`

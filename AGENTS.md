@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 broad-registry source overlay:** A bounded official-metadata
+> screen across Zenodo, DataCite, Figshare and Dryad freezes six candidate scores
+> at 30.5/29.5/26.0/26.0/24.5/18.0, all below the unchanged 32/40 admission line.
+> LargeIA reports 1,338 internal CTA/1,489 aneurysms from six institutions and
+> 138 external CTA/101 aneurysms from two, but files are restricted, no user
+> request or terms acceptance occurred, public reader/sealed-test semantics are
+> insufficient, and GLIA-Net plus conformal detection are direct priors. The
+> 2015 CFD Challenge has 28 submitted datasets from 26 teams but only five
+> independent anatomies; the primary paper already owns whole-pipeline WSS
+> uncertainty. Longitudinal SIG, aSAH hydrocephalus and VWI are supplement-only
+> or directly occupied; synthetic DSA is embargoed past the ISBI deadline.
+> Schema 5.7 source of truth is
+> `docs/broad-registry-source-audit-2026-08-10.md` and
+> `problem_selection.broad_registry_source_audit`. Patient/image/mesh/
+> spreadsheet/document/model payload, access request, active shortlist,
+> selected primary, P0, method, architecture, PBS/GPU, outer test and submission
+> identity are all 0. Only `introai9` PBS may be used after a separately frozen
+> >=32 candidate gate; `junjinyong` must not be connected to, queried, used for
+> transfer/submission or monitored.
+
 > **2026-08-10 registry-gap source overlay:** The official exact-title Zenodo
 > query returned 49 records. Five previously unregistered candidates score
 > 26.5/26.0/26.0/25.5/23.5, all below the frozen 32/40 admission line. The best
