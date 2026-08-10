@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 OpenNeuro P0 outcome · schema 6.9:** Exact public source
+> `bb227edc86bf3b68e92b97f120a7918b0753c831` ran once on `introai9` as
+> CPU-only PBS job `115622.ECE-util1` (2 CPU, 4 GB, GPU 0). It finished `F`,
+> exit 1, walltime 00:02:24, CPU time 00:00:00 and memory 15,328 kB. Only a
+> 310-byte private `execution_incomplete` status was created; no aggregate
+> result or raw PBS output exists, so all 10 metadata/semantics checks are
+> unevaluated. This is **no scientific verdict**: it neither validates nor
+> refutes containment-based morphometry. The exact 32.5/40 candidate is closed
+> without repair, rerun or P1. Active source lead, primary problem, method,
+> architecture, GPU, outer test and paper identity are again 0. The next
+> allowed work is a fresh problem-level source/asset audit. AURORA remains
+> `introai9`-only; `junjinyong` was not accessed and is prohibited.
+> [Execution record](results/openneuro_containment_morphometry_p0_execution_20260810.json)
+
 > **2026-08-10 OpenNeuro containment-morphometry lead · schema 6.8:** A fresh
 > source/direct-prior screen admits `containment_identified_morphometry_envelopes`
 > at **32.5/40** as one conditional source lead. A weak sphere is used only as

@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.8":
-        raise ProtocolError("The current research-state schema must be version 6.8.")
+    if protocol["schema_version"] != "6.9":
+        raise ProtocolError("The current research-state schema must be version 6.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,19 +148,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "openneuro_containment_morphometry_metadata_p0_registered_no_method_or_gpu"
+        != "openneuro_containment_morphometry_p0_execution_incomplete_closed_no_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "introai9_scheduler_last_verified_empty_before_openneuro_metadata_p0_registration"
+        != "introai9_openneuro_p0_final_F_exit_1_no_running_or_queued_aurora_job"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
         raise ProtocolError(
             "AURORA compute must remain introai9-only with junjinyong excluded, "
-            "no tracked AURORA GPU job, an explicit unknown current scheduler state, "
+            "no tracked AURORA GPU job, the final CPU-only P0 observation, "
             "and a scheduler smoke as the first authorized GPU action."
         )
     checks.append("research-only project boundary")
@@ -230,13 +230,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "conditional_openneuro_containment_morphometry_lead_metadata_p0_registered"
-        or problem_selection["shortlisted_candidate"]
-        != "containment_identified_morphometry_envelopes"
-        or problem_selection["conditional_source_lead_count"] != 1
-        or problem_selection["candidate_dataset"] != "openneuro_ds003949_metadata_only"
-        or problem_selection["candidate_estimand"]
-        != "set_valued_lesion_mask_and_monotone_morphometry_envelope_under_observed_containment"
+        != "openneuro_containment_morphometry_p0_execution_incomplete_closed_no_active_source_lead"
+        or problem_selection["shortlisted_candidate"] is not None
+        or problem_selection["conditional_source_lead_count"] != 0
+        or problem_selection["candidate_dataset"] is not None
+        or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
         != "public_git_tree_and_small_supervision_metadata_only_no_patient_image_or_mask_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
@@ -248,19 +246,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "submit_exact_method_free_cpu_read_only_openneuro_metadata_p0_once_on_introai9_pbs"
+        != "fresh_problem_level_primary_source_and_asset_audit_without_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
         != "docs/openneuro-containment-morphometry-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
-        != "similarity_quotiented_anchor_conditioned_bc_transport_execution_incomplete"
+        != "containment_identified_morphometry_envelopes_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "acquisition_quality_indexed_external_lesion_set_risk"
         or problem_selection["most_recent_conditional_source_lead"]
         != "containment_identified_morphometry_envelopes"
     ):
         raise ProtocolError(
-            "The OpenNeuro containment lead may open only its preregistered metadata CPU P0 "
-            "without patient payload, method, GPU, outer test, or submission claim."
+            "The incomplete OpenNeuro containment P0 must leave no active source lead, "
+            "patient payload, method, GPU, outer test, or submission claim."
         )
     bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
     _require_keys(
@@ -436,6 +434,25 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p0_registered",
             "p0_submission_limit",
             "p0_job_submitted",
+            "p0_job_id",
+            "p0_public_source_commit",
+            "p0_execution_record",
+            "p0_execution_record_sha256",
+            "p0_execution_status",
+            "p0_final_job_state",
+            "p0_exit_status",
+            "p0_resources_used_walltime",
+            "p0_resources_used_cput",
+            "p0_resources_used_memory_kb",
+            "p0_private_status_bytes",
+            "p0_private_status_sha256",
+            "p0_aggregate_result_materialized",
+            "p0_raw_pbs_output_materialized",
+            "p0_registered_small_source_objects_retained",
+            "p0_registered_high_level_checks_evaluated",
+            "p0_registered_high_level_checks_total",
+            "p0_failure_stage",
+            "p0_low_level_cause",
             "p0_scientific_gate_evaluated",
             "p1_registration_authorized",
             "method_selected",
@@ -446,6 +463,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "execution_server",
             "introai9_connection_verified",
             "introai9_last_verified_pbs_jobs_observed",
+            "introai9_running_or_queued_aurora_jobs_after_final",
             "pbs_ncpus",
             "pbs_memory_gb",
             "pbs_ngpus",
@@ -470,7 +488,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     }
     if (
         containment["status"]
-        != "conditional_source_lead_metadata_p0_registered_before_execution"
+        != "p0_execution_incomplete_no_scientific_verdict_closed_without_repair_or_rerun"
         or containment["audit_document"]
         != "docs/openneuro-containment-morphometry-source-audit-2026-08-10.md"
         or containment["config"]
@@ -480,7 +498,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or containment["score"] != 32.5
         or sum(containment["axis_scores"]) != 32.5
         or containment["automatic_selection_threshold"] != 32.0
-        or containment["conditional_source_lead_count"] != 1
+        or containment["conditional_source_lead_count"] != 0
         or containment["primary_problem_selected"] is not False
         or containment["historical_one_sided_outer_annotation_candidate_score"]
         != 31.5
@@ -522,7 +540,6 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "patient_nifti_image_or_mask_payload_accessed",
                 "participants_or_clinical_table_accessed",
                 "pretrained_model_or_checkpoint_accessed",
-                "p0_job_submitted",
                 "p0_scientific_gate_evaluated",
                 "p1_registration_authorized",
                 "method_selected",
@@ -538,9 +555,37 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "openneuro_containment_morphometry_metadata_p0_v1"
         or containment["p0_registered"] is not True
         or containment["p0_submission_limit"] != 1
+        or containment["p0_job_submitted"] is not True
+        or containment["p0_job_id"] != "115622.ECE-util1"
+        or containment["p0_public_source_commit"]
+        != "bb227edc86bf3b68e92b97f120a7918b0753c831"
+        or containment["p0_execution_record"]
+        != "results/openneuro_containment_morphometry_p0_execution_20260810.json"
+        or containment["p0_execution_record_sha256"]
+        != "4e59f8225ef423d5adf3d9e625b26dc5e15e255b3d2501b7989e005b8432ff9e"
+        or containment["p0_execution_status"]
+        != "execution_incomplete_no_scientific_verdict"
+        or containment["p0_final_job_state"] != "F"
+        or containment["p0_exit_status"] != 1
+        or containment["p0_resources_used_walltime"] != "00:02:24"
+        or containment["p0_resources_used_cput"] != "00:00:00"
+        or containment["p0_resources_used_memory_kb"] != 15328
+        or containment["p0_private_status_bytes"] != 310
+        or containment["p0_private_status_sha256"]
+        != "d5022b2c3ac689e1d36083175c04be87ba71a09f3d4ec2275b8729e089c66444"
+        or containment["p0_aggregate_result_materialized"] is not False
+        or containment["p0_raw_pbs_output_materialized"] is not False
+        or containment["p0_registered_small_source_objects_retained"] != 0
+        or containment["p0_registered_high_level_checks_evaluated"] != 0
+        or containment["p0_registered_high_level_checks_total"] != 10
+        or containment["p0_failure_stage"]
+        != "before_all_registered_small_source_objects_were_available"
+        or containment["p0_low_level_cause"]
+        != "unresolved_without_raw_log_or_result_json"
         or containment["execution_server"] != "introai9"
         or containment["introai9_connection_verified"] is not True
         or containment["introai9_last_verified_pbs_jobs_observed"] != 0
+        or containment["introai9_running_or_queued_aurora_jobs_after_final"] != 0
         or containment["pbs_ncpus"] != 2
         or containment["pbs_memory_gb"] != 4
         or containment["pbs_ngpus"] != 0
@@ -551,8 +596,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "close_exact_candidate_version_without_same_contract_repair_or_rerun"
     ):
         raise ProtocolError(
-            "OpenNeuro containment P0 must preserve the exact 32.5/40 source lead, "
-            "subject-level metadata mapping, no patient payload, and CPU-only one-shot introai9 boundary."
+            "OpenNeuro containment P0 must preserve the 32.5/40 source history and its "
+            "CPU-only execution-incomplete closure without payload, repair, or re-entry."
         )
     checks.append("OpenNeuro containment metadata/P0 boundary")
     if set(problem_selection["rejected_candidates"]) != {
@@ -5474,7 +5519,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "conditional_openneuro_containment_morphometry_source_lead_metadata_p0_only_no_primary_method_or_gpu"
+        != "unselected_after_openneuro_containment_p0_execution_incomplete_no_primary_method_or_gpu"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -5635,14 +5680,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_metric"] != "functional_energy_score"
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
-        or task["active_candidate_problem"]
-        != "containment_identified_morphometry_envelopes"
+        or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "conditional_source_lead_metadata_p0_registered_no_primary_method_architecture_or_gpu"
-        or task["candidate_primary_estimand"]
-        != "set_valued_lesion_mask_under_observed_outer_containment"
-        or task["candidate_secondary_estimand"]
-        != "interval_for_monotone_aneurysm_morphometry_induced_by_mask_envelope"
+        != "no_active_candidate_after_openneuro_containment_p0_execution_incomplete"
+        or task["candidate_primary_estimand"] is not None
+        or task["candidate_secondary_estimand"] is not None
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -5747,9 +5789,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     dias = next(item for item in datasets if item["name"] == "dias_dsa_sequence_2024")
     if (
         openneuro_lausanne.get("role")
-        != "conditional_source_lead_metadata_p0_only_not_training_or_outer_test"
+        != "closed_source_lead_history_after_metadata_p0_execution_incomplete_not_training_or_outer_test"
         or openneuro_lausanne.get("status")
-        != "exact_public_subject_mapping_pending_one_method_free_metadata_p0_no_patient_payload"
+        != "metadata_p0_execution_incomplete_no_scientific_verdict_closed_without_rerun_no_patient_payload"
         or openneuro_lausanne.get("dataset_commit")
         != "896b8846d899acee68c0246cc987ca96e77267d4"
         or openneuro_lausanne.get("license") != "CC0"

@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 6.9 OpenNeuro outcome · 2026-08-10:** The metadata P0 produced no
+> aggregate and retained none of its five registered small objects. The public
+> 284 = 246 weak + 38 precise mapping remains source-audit history, not a
+> prospectively verified training asset. No NIfTI image/mask body,
+> participant/clinical table, model or outer test was accessed. OpenNeuro
+> `ds003949` is closed for this candidate version and authorizes no acquisition,
+> P1, training or GPU use.
+
 > **Schema 6.8 OpenNeuro role · 2026-08-10:** OpenNeuro `ds003949` is currently
 > a metadata-P0 source only. The registered evidence is its exact public Git
 > tree and dataset description plus official code supervision lists: 284 public

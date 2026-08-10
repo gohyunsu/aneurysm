@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 6.9 planning boundary · 2026-08-10:** The OpenNeuro candidate adds
+> no result row, contribution, architecture, figure or paper identity because
+> its P0 ended execution-incomplete with 0/10 checks evaluated. Active source
+> lead, primary, method, GPU and outer test are 0. The manuscript remains
+> **not submission-ready**. Paper development resumes only after a different
+> problem prospectively passes source and method-free task-adequacy gates; an
+> old 32.5/40 score cannot be promoted by prose.
+
 > **Schema 6.8 planning boundary · 2026-08-10:** One OpenNeuro containment-
 > morphometry source candidate is admitted at 32.5/40, but it is not the paper's
 > selected primary or contribution. The current action is a metadata-only P0;

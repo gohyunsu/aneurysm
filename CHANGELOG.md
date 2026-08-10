@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-10 · Schema 6.9 closes OpenNeuro P0 without a scientific verdict
+
+- Ran exact source `bb227edc86bf3b68e92b97f120a7918b0753c831` once on
+  `introai9` PBS as CPU-only job `115622.ECE-util1`; final `F`/exit 1,
+  walltime 00:02:24, CPU 00:00:00, memory 15,328 kB, GPU 0.
+- Preserved the only materialized artifact as a 310-byte private
+  `execution_incomplete` status. No aggregate result, raw scheduler log,
+  patient payload, model, checkpoint or outer test materialized, leaving all
+  10 registered scientific/semantics checks unevaluated.
+- Added the deidentified immutable execution record
+  `results/openneuro_containment_morphometry_p0_execution_20260810.json`.
+- Closed the exact 32.5/40 source candidate without repair, rerun, P1, method,
+  architecture or GPU authorization; reset active shortlist, primary problem,
+  result row and paper identity to zero.
+- Advanced the central contract to schema 6.9 and synchronized the overview,
+  beginner explanation, protocol, model, dataset, acquisition, server,
+  literature and ISBI planning views. `introai9` remains the only AURORA
+  server and `junjinyong` remains prohibited.
+
 ## 2026-08-10 · Schema 6.8 registers an OpenNeuro containment metadata P0
 
 - Preserved the rejected 31.5/40 coarsening-mechanism candidate without

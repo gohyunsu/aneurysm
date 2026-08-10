@@ -106,7 +106,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["score"], 33.5)
         self.assertAlmostEqual(sum(audit["axis_scores"]), 33.5)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
-        self.assertEqual(problem["conditional_source_lead_count"], 1)
+        self.assertEqual(problem["conditional_source_lead_count"], 0)
         self.assertTrue(audit["p0_registered"])
         self.assertEqual(audit["p0_train_base_families"], [1])
         self.assertEqual(audit["p0_cases"], [1, 2])
@@ -604,7 +604,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["outer_test_authorized"])
         self.assertEqual(audit["conditional_source_lead_count"], 1)
         self.assertEqual(
-            self.protocol["problem_selection"]["conditional_source_lead_count"], 1
+            self.protocol["problem_selection"]["conditional_source_lead_count"], 0
         )
         self.assertTrue(
             all(not item["payload_accessed"] for item in audit["candidates"])
@@ -617,17 +617,26 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "TopAneu material release"):
             validate_protocol(candidate)
 
-    def test_openneuro_containment_lead_opens_metadata_p0_only(self) -> None:
+    def test_openneuro_containment_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["openneuro_containment_morphometry_source_audit"]
-        self.assertEqual(problem["conditional_source_lead_count"], 1)
+        self.assertEqual(problem["conditional_source_lead_count"], 0)
+        self.assertIsNone(problem["shortlisted_candidate"])
         self.assertEqual(audit["score"], 32.5)
         self.assertAlmostEqual(sum(audit["axis_scores"]), 32.5)
         self.assertEqual(audit["public_weak_subjects"], 246)
         self.assertEqual(audit["public_precise_subjects"], 38)
         self.assertEqual(audit["code_weak_entries"], 262)
         self.assertEqual(audit["code_only_weak_subjects"], ["sub-115", "sub-143", "sub-181", "sub-272"])
-        self.assertFalse(audit["p0_job_submitted"])
+        self.assertTrue(audit["p0_job_submitted"])
+        self.assertEqual(audit["p0_job_id"], "115622.ECE-util1")
+        self.assertEqual(audit["p0_final_job_state"], "F")
+        self.assertEqual(audit["p0_exit_status"], 1)
+        self.assertEqual(audit["p0_registered_high_level_checks_evaluated"], 0)
+        self.assertFalse(audit["p0_aggregate_result_materialized"])
+        self.assertFalse(audit["p0_raw_pbs_output_materialized"])
+        self.assertFalse(audit["p0_scientific_gate_evaluated"])
+        self.assertFalse(audit["p1_registration_authorized"])
         self.assertFalse(audit["patient_nifti_image_or_mask_payload_accessed"])
         self.assertFalse(audit["method_selected"])
         self.assertFalse(audit["gpu_training_authorized"])

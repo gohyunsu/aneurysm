@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 약한 외곽 라벨의 containment만으로 병변 집합과 형태계측 구간을 정의할 수 있는지 검증하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — OpenNeuro containment metadata P0의 execution-incomplete/no-verdict 종료와 active source lead 0을 투명하게 보존하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -42,24 +42,26 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          A weak outer label is not truth.<br>
-          <em>Containment may still be usable evidence.</em>
+          A source lead is not a result.<br>
+          <em>This P0 reached no scientific verdict.</em>
         </h1>
         <p class="hero-lede">
           새 후보는 거친 구형 라벨을 정답 마스크로 바꾸려 하지 않습니다. 실제
           병변 <i>Y</i>가 관측된 외곽 집합 <i>W</i> 안에 있다는
           <i>Y ⊆ W</i>만 사용해, 가능한 병변 마스크의 집합과 부피처럼 단조인
-          형태 지표의 구간을 정의할 수 있는지 묻습니다. Fresh score는
-          32.5/40이지만 아직 조건부 source lead일 뿐입니다. 현재는 284명의
-          공개 피험자가 246 weak + 38 precise로 정확히 나뉘는지 확인하는
-          metadata P0만 등록됐습니다. 환자 영상·마스크 본문, 모델, GPU와 outer
-          test는 열지 않았고, primary·method·architecture·contribution도 없습니다.
+          형태 지표의 구간을 정의할 수 있는지 물었습니다. Source score는
+          32.5/40이었지만, 정확히 한 번 실행한 metadata P0가 exit 1로 끝나
+          10개 검사가 모두 미평가입니다. 따라서 containment가 타당한지조차
+          아직 모릅니다. 이 exact version은 재실행 없이 닫혔고, 환자 영상·
+          마스크 본문, 모델, GPU와 outer test는 열지 않았습니다. 현재 active
+          source lead·primary·method·architecture·contribution은 모두 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
           <a class="button ghost" href="../docs/openneuro-containment-morphometry-source-audit-2026-08-10.md">Current OpenNeuro audit ↗</a>
+          <a class="button ghost" href="../results/openneuro_containment_morphometry_p0_execution_20260810.json">P0 outcome ↗</a>
           <a class="button ghost" href="../configs/openneuro_containment_morphometry_p0.json">Frozen metadata P0 ↗</a>
           <a class="button ghost" href="../docs/aneumo-bc-transport-source-audit-2026-08-10.md">Historical BC-transport audit ↗</a>
           <a class="button ghost" href="../results/aneumo_bc_transport_p0_execution_20260810.json">Historical P0 outcome ↗</a>
@@ -100,7 +102,7 @@
       </div>
 
       <div class="hero-visual" aria-label="외곽 weak label 안의 가능한 병변 집합을 다루는 현재 연구 질문">
-        <div class="visual-caption">OPENNEURO · CONDITIONAL SOURCE LEAD · METADATA P0</div>
+        <div class="visual-caption">OPENNEURO · CLOSED SOURCE HISTORY · P0 INCOMPLETE</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -123,27 +125,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>32.5</b><span>fresh source score · conditional lead</span>
+            <b>32.5</b><span>historical source score · not a result</span>
           </div>
           <div class="posterior-card card-b">
-            <b>284</b><span>public subjects · metadata mapping</span>
+            <b>0/10</b><span>registered checks evaluated</span>
           </div>
           <div class="posterior-card card-c">
-            <b>0</b><span>patient payload · models · GPU jobs</span>
+            <b>0</b><span>active lead · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> 246 weak + 38 precise subjects are the registered partition</span>
+          <span><i class="dot lime"></i> 246 weak + 38 precise is preserved source-audit history</span>
           <span><i class="dot coral"></i> weak sphere means containment, never a precise mask</span>
-          <span>one introai9 CPU P0 registered · primary/method/model/GPU 0</span>
+          <span>introai9 P0 final F/exit 1 · no verdict · no rerun</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Conditional source lead</span><b>1 · fresh score 32.5/40</b></div>
-        <div><span>Exact P0</span><b>registered · metadata only · CPU/GPU 2/0</b></div>
+        <div><span>Active source lead</span><b>0 · 32.5/40 preserved as history</b></div>
+        <div><span>Exact P0</span><b>F / exit 1 · 0/10 checks · no verdict</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>one-shot introai9 metadata audit</b></div>
+        <div><span>Next action</span><b>fresh problem-level source/asset audit</b></div>
       </div>
     </section>
 
@@ -155,7 +157,8 @@
           기존 weak-to-strong 후보는 같은 피험자의 실제 weak·독립 precise pair가
           없어 31.5/40으로 기각된 채 보존됩니다. 새 질문은 숨은 annotation 과정을
           추정하지 않고 관측 가능한 containment만 사용합니다. 따라서 별도 evidence
-          version이지만, metadata P0와 task-adequacy P1을 통과하기 전에는 방법론으로
+          version이었지만 metadata P0가 scientific verdict 전에 종료됐습니다.
+          같은 계약은 재실행하지 않으며, 이 후보를 방법론이나 negative result로
           부르지 않습니다.
         </p>
       </div>
@@ -208,18 +211,18 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">CURRENT GAP STATUS</p>
-          <h3>One narrow gap is source-admitted, not method-admitted.</h3>
+          <h3>No gap is currently active.</h3>
           <p>
             Weak aneurysm segmentation, morphological conformal prediction,
             lesion-FNR control, COMPASS와 partial identification이 직접 선행입니다.
-            남은 질문은 hidden coarsening을 학습하지 않고도 containment가 더 좁고
-            유효한 morphometry envelope를 만드는가입니다. 현재 32.5/40은 source
-            admission일 뿐이며 P0는 label lineage만 검사합니다.
+            남았던 질문은 hidden coarsening을 학습하지 않고도 containment가 더
+            좁고 유효한 morphometry envelope를 만드는가였습니다. 그러나 P0가
+            결과를 만들지 못해 이 gap은 검증되지 않았고 exact version은 닫혔습니다.
           </p>
           <div class="gap-equation" aria-label="현재 source lead가 방법론 검증으로 이어지는 조건">
-            <span>32.5/40 conditional lead + metadata P0</span>
+            <span>32.5/40 historical source lead</span>
             <i>⇒</i>
-            <span>pass ⇒ method-free P1 only · no method/model/GPU yet</span>
+            <span>P0 incomplete ⇒ 0/10 verdict · no repair/P1/model/GPU</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -252,7 +255,8 @@
         <p>
           현재 architecture는 없습니다. 아래는 환자 영상을 읽기 전에 공개
           metadata만으로 무엇을 확인하는지 보여줍니다. P0는 라벨 계보와 독립 단위를
-          검증할 뿐이며 segmentation 성능이나 morphometry 품질을 측정하지 않습니다.
+          검증하려 했지만 result가 없어 segmentation 성능이나 morphometry 품질은
+          물론 metadata gate 자체도 평가되지 않았습니다.
         </p>
       </div>
 
@@ -262,8 +266,8 @@
         <p>
           맞습니다. 현재 모델은 없습니다. 과거 mesh GNN과 boundary-aware
           Perceiver는 prospective gate를 통과하지 못했고, 이번 후보는 아직
-          metadata P0입니다. P0가 통과해도 먼저 method-free P1에서 containment
-          task의 비자명성과 baseline margin을 확인해야 합니다.
+          닫힌 metadata P0 history입니다. 0/10 checks로 verdict가 없으므로 P1과
+          architecture를 열 수 없습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -305,12 +309,12 @@
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
-          <a class="arch-learn" href="../configs/openneuro_containment_morphometry_p0.json">prospective checks</a>
+          <a class="arch-learn" href="../configs/openneuro_containment_morphometry_p0.json">frozen contract</a>
         </article>
         <div class="arch-connector"><span>subject-only join</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">REGISTERED PARTITION</p>
+          <p class="arch-label">SOURCE-AUDIT PARTITION</p>
           <h3>246 weak + 38 precise</h3>
           <div class="dual-branch">
             <span><b>Code-only weak</b>4 excluded</span>
@@ -323,8 +327,8 @@
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">CURRENT DECISION</p>
-          <h3>One CPU metadata P0</h3>
-          <p>Pass opens method-free P1 only; fail/incomplete closes this exact version</p>
+          <h3>Closed · no verdict</h3>
+          <p>Final F/exit 1 · 0/10 checks · no result, repair, rerun or P1</p>
           <div class="output-meter"><i></i><span>primary / method / model / GPU</span><b>still 0</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -341,7 +345,7 @@
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>한 번의 introai9 CPU job과 all-required rule을 결과 전에 고정했습니다.</p>
+          <p>고정한 한 번의 introai9 CPU job은 결과 없이 끝났고, 같은 계약을 반복하지 않습니다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -599,7 +603,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>One conditional source lead · metadata P0 registered · no paper identity</p>
+        <p>No active source lead · P0 execution-incomplete · no paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -607,7 +611,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>OpenNeuro metadata P0 registered · primary/method/model/GPU 0</b>
+        <span>Current stage</span><b>OpenNeuro P0 closed · 0/10 verdict · primary/method/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 6.9 · no architecture:** The containment candidate did not reach a
+> scientific or task-adequacy verdict. Its exact P0 is closed, so no GNN,
+> U-Net, Transformer, conformal head or morphometry regressor is selected or
+> justified. The architectures below remain historical experiments or future
+> control families. No model or GPU job may be created until a different
+> prospectively admitted problem passes method-free gates on `introai9`.
+
 > **Schema 6.8 · no architecture yet:** The OpenNeuro containment candidate is
 > at a metadata P0, not a learning stage. No GNN, U-Net, Transformer, conformal
 > head or morphometry regressor is selected. P0 checks subject-level supervision

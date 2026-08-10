@@ -1,0 +1,66 @@
+{
+  "schema_version": "aurora.openneuro_containment_morphometry_p0.execution.v1",
+  "protocol_id": "openneuro_containment_morphometry_metadata_p0_v1",
+  "candidate_id": "containment_identified_morphometry_envelopes",
+  "status": "closed_after_execution_incomplete_no_scientific_verdict",
+  "scientific_verdict": null,
+  "scientific_gate_evaluated": false,
+  "public_source_commit": "bb227edc86bf3b68e92b97f120a7918b0753c831",
+  "p0_config": {
+    "path": "configs/openneuro_containment_morphometry_p0.json",
+    "sha256": "eaec195a85beb7f3ad6cc5115a08ba0b4aea11acf92299822eaed32f53b328eb"
+  },
+  "pbs_wrapper": {
+    "path": "cluster/pbs_openneuro_containment_morphometry_p0.pbs",
+    "sha256": "9b87dab1264474db73c899f5a46ea814f90b5ea3fee4246fe1c91808c6cca06a"
+  },
+  "implementation": {
+    "path": "src/aurora/openneuro_containment_morphometry_p0.py",
+    "sha256": "122a6ee2205b96105194554887c0a8a5e94db1c62a7a8091a5a2ccb4cece4e51"
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "job_id": "115622.ECE-util1",
+    "final_job_state": "F",
+    "exit_status": 1,
+    "walltime": "00:02:24",
+    "cpu_time": "00:00:00",
+    "memory_kb": 15328,
+    "requested_resources": "select=1:ncpus=2:mem=4gb:ngpus=0",
+    "gpu_requested": 0,
+    "gpu_accessed": false,
+    "login_node_gpu_command_executed": false,
+    "junjinyong_accessed": false
+  },
+  "materialization": {
+    "registered_small_source_objects_retained": 0,
+    "public_result_json_created": false,
+    "private_status_record_created": true,
+    "private_status_record_bytes": 310,
+    "private_status_record_sha256": "d5022b2c3ac689e1d36083175c04be87ba71a09f3d4ec2275b8729e089c66444",
+    "raw_scheduler_stdout_or_stderr_materialized": false,
+    "patient_nifti_image_or_mask_body_accessed": false,
+    "participants_or_clinical_table_accessed": false,
+    "pickle_unpickled_or_executed": false,
+    "model_or_checkpoint_accessed": false,
+    "outer_test_accessed": false
+  },
+  "boundary": {
+    "failure_stage": "before_all_registered_small_source_objects_were_available",
+    "low_level_transport_or_scheduler_cause": "unresolved_without_raw_log_or_result_json",
+    "registered_high_level_checks_evaluated": 0,
+    "registered_high_level_checks_total": 10,
+    "same_contract_repair_or_resubmission_allowed": false,
+    "p1_authorized": false,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false,
+    "active_source_shortlist_count_after_closure": 0
+  },
+  "decision": "preserve_the_32_5_source_finding_but_close_this_exact_candidate_version_without_transport_or_reader_repair_rerun_p1_patient_payload_method_architecture_gpu_outer_test_or_scientific_claim"
+}

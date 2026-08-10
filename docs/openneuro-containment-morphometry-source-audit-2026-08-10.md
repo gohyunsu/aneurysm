@@ -1,5 +1,14 @@
 # OpenNeuro containment-identified morphometry source audit · 2026-08-10
 
+> **Outcome · schema 6.9:** Exact public source `bb227edc…` ran once on
+> `introai9` as CPU/PBS job `115622.ECE-util1` and finished `F`/exit 1 after
+> 00:02:24. Only a 310-byte `execution_incomplete` status materialized; no
+> aggregate result or raw PBS output exists. Therefore 0/10 registered checks
+> were evaluated and the scientific verdict is null. This exact candidate is
+> closed without repair, rerun, P1, payload, method, architecture, GPU or outer
+> test. See
+> `results/openneuro_containment_morphometry_p0_execution_20260810.json`.
+
 ## Decision
 
 This is a new evidence version, not a repair or relabelling of the rejected
@@ -90,7 +99,10 @@ Brisbane also contains aneurysm-positive patients rather than a representative
 negative screening cohort, so it may test matched-lesion morphometry coverage
 but not population screening workload.
 
-## Prospective method-free P0
+## Frozen prospective method-free P0 · closed history
+
+The following contract is preserved exactly as registered. It is no longer
+pending or executable after the schema-6.9 outcome above.
 
 `configs/openneuro_containment_morphometry_p0.json` registers one CPU/read-only
 metadata audit. It may read only the exact GitHub tree JSON, dataset description,

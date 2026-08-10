@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 6.9 final execution · 2026-08-10:** Exact source `bb227edc…` ran
+> once on `introai9` CPU/PBS as `115622.ECE-util1`; final state `F`, exit 1,
+> walltime 00:02:24, CPU 00:00:00, memory 15,328 kB and GPU 0. Only the
+> deidentified private status materialized; aggregate result and raw PBS output
+> did not. No job is running or queued for AURORA, no login-node GPU command was
+> executed, and no second submission is permitted. The exact candidate closes
+> with no P1/model/GPU/outer test. `junjinyong` was not accessed and remains
+> prohibited for every AURORA operation.
+
 > **Schema 6.8 registered execution boundary · 2026-08-10:** The only next
 > AURORA job is one exact OpenNeuro metadata P0 on `introai9` PBS: queue
 > `coss_agpu`, CPU 2, memory 4 GB, GPU 0, walltime 20 minutes. It reads only five

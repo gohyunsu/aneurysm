@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 OpenNeuro P0 outcome override · schema 6.9:** Exact clean
+> public source `bb227edc86bf3b68e92b97f120a7918b0753c831` was deployed and
+> submitted exactly once to `introai9` PBS as `115622.ECE-util1`, CPU 2,
+> memory 4 GB, GPU 0. Final state was `F`/exit 1, walltime 00:02:24, CPU time
+> 00:00:00 and memory 15,328 kB. Only a 310-byte private status record
+> materialized (SHA-256
+> `d5022b2c3ac689e1d36083175c04be87ba71a09f3d4ec2275b8729e089c66444`);
+> aggregate result and raw PBS stdout/stderr did not. No registered source
+> object was retained and all 10 high-level checks remain unevaluated. The
+> low-level transport/scheduler cause is unresolved. Preserve this exact
+> version as `execution-incomplete/no scientific verdict`; do not call it a
+> data, containment-hypothesis or method failure, and do not repair or
+> resubmit it. P1, patient payload, method, architecture, GPU, outer test,
+> contribution and submission identity remain unauthorized. Active source
+> shortlist is 0; next work is a fresh problem-level primary-source/asset
+> audit. Source of truth is
+> `results/openneuro_containment_morphometry_p0_execution_20260810.json` and
+> schema 6.9 `configs/aurora_v1.json`. AURORA uses `introai9` only. Never
+> connect/query/transfer/submit/monitor `junjinyong`, and never execute a GPU
+> command on an `introai9` login node.
+
 > **2026-08-10 OpenNeuro containment-morphometry override · schema 6.8:**
 > `containment_identified_morphometry_envelopes` is one conditional source lead
 > at 32.5/40. It does not learn the real annotation-coarsening mechanism and

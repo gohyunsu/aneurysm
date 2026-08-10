@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **Schema 6.9 outcome · 2026-08-10:** The containment residual was not tested:
+> its metadata P0 produced no aggregate and no scientific verdict. Direct
+> priors still occupy aneurysm weak supervision, morphological/FNR conformal
+> sets, downstream metric intervals and partial-identification evaluation, but
+> no AURORA comparison was run. Preserve the 32.5/40 formulation as closed
+> source history, not novelty or a negative result. The next lineage analysis
+> starts from a fresh problem rather than renaming or repairing this one.
+
 > **Schema 6.8 current lineage · 2026-08-10:** The source-admitted residual is
 > not generic weak segmentation or conformal uncertainty. Di Noto, VP-UNet,
 > FocalSegNet and WeakMed occupy aneurysm weak supervision; morphological

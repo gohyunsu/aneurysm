@@ -130,10 +130,10 @@
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "The 32.5/40 source score permits one metadata P0, not a method or training run.",
-      connector: "all required",
-      title: "Method-free P0 first",
-      copy: "Pass opens a separate task-adequacy P1 only; fail or incomplete closes the exact version without rerun",
+      description: "The one-shot P0 finished without an aggregate, so none of its ten registered checks has a verdict.",
+      connector: "closed · 0/10",
+      title: "No scientific verdict",
+      copy: "Final F/exit 1; the exact source version closes without repair, rerun, P1, model or GPU",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

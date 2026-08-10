@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 6.9 outcome · 2026-08-10:** The one-shot OpenNeuro metadata P0
+> ended execution-incomplete before any of its 10 high-level checks could be
+> evaluated. There is therefore no evidence that containment morphometry is
+> valid, invalid, useful or nontrivial. The 32.5/40 source finding remains
+> historical, but its exact candidate version is closed without repair, rerun
+> or P1. Current primary problem, method, architecture, contribution and GPU
+> are unselected. Resume only with a fresh problem-level source/asset audit on
+> `introai9`; never use `junjinyong`.
+
 > **Schema 6.8 conditional direction · 2026-08-10:** The current candidate is
 > not a GNN and not weak-to-strong pseudo-segmentation. It treats each observed
 > weak sphere only as an outer containment set and asks whether a valid,

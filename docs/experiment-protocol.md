@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 6.9 P0 outcome · 2026-08-10:** Exact `introai9` job
+> `115622.ECE-util1` finished `F`/exit 1 after 00:02:24. The private status says
+> `scientific_gate_evaluated=false`; aggregate result and raw PBS output are
+> absent, so 0/10 registered checks have a verdict. The one allowed submission
+> is exhausted. Do not repair or rerun the reader/transport, open P1, download
+> patient payload, select a model, use GPU, or access an outer test. The frozen
+> prospective contract below remains immutable closed history.
+
 > **Schema 6.8 prospective P0 · 2026-08-10:** One exact metadata-only audit is
 > registered for the OpenNeuro containment-morphometry lead. It may fetch only
 > the pinned 5,737-path Git tree, dataset description, two small supervision

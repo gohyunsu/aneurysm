@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **Schema 6.9 acquisition outcome · 2026-08-10:** The single authorized
+> metadata read ended execution-incomplete and retained no registered source
+> object. Do not repeat the HTTP read, download NIfTI/image/mask or clinical
+> payload, inspect checkpoints, or open P1. Any new acquisition contract must
+> belong to a different prospectively admitted problem and execute through
+> `introai9` PBS only. `junjinyong` remains prohibited.
+
 > **Schema 6.8 acquisition boundary · 2026-08-10:** The only authorized read is
 > five small/public OpenNeuro/code metadata objects in one `introai9` CPU/PBS
 > P0: recursive Git tree JSON, dataset description, two supervision-list blobs
