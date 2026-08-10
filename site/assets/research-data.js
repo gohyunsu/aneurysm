@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · reconstruction/annotation best 31.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
-    requirement: "fresh same-subject annotation/reconstruction orbit with independent reference ≥32 → method-free P0; do not repair closed branches",
+    status: "Target locked · method–asset viability best 30.0/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    requirement: "material source release or genuinely identifiable fresh problem ≥32 → method-free CPU/read-only P0; do not repair closed branches",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A usable dataset plus a fashionable method is still not a research gap",
+      copy: "Royal OpenNeuro is a strong 63-patient reference asset, but COMPASS already calibrates downstream segmentation metrics and NeckSpline already quantifies aneurysm-neck uncertainty. Neural Operator Processes, learned boundary extensions and amortized conditioning directly occupy generic partial-observation operators. IAVS remains README-only, RSNA exposes no public per-reader manifest, and the cited CQ500-IA Git remote is unavailable. Five frozen candidates score 30.0/30.0/29.0/26.0/23.0.",
+      status: "Best 30.0/40 · all rejected · payload/P0/PBS/model/GPU 0",
+      url: "../docs/method-asset-viability-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "A coarse outer label does not identify a precise anatomy",
@@ -310,13 +317,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Weak aneurysm segmentation", "Sparse vascular reconstruction", "Reconstruction variability", "Residual research gap"],
-    ["Direct prior", "VP-UNet · FocalSegNet · WeakMed", "Ultra-sparse DSA · AutoCAR", "600-model orbit · biplane · phantom", "One-sided set-valued morphometry"],
-    ["Observable target", "Coarse sphere / refined test mask", "Dense-view reference", "Software/threshold/user differences", "Real weak choice + independent truth"],
-    ["Known boundary", "Real coarsening process not paired", "Raw cerebral patient data not public", "No absolute anatomical truth", "Same-subject manifest absent"],
-    ["Current decision", "31.5/40 reject", "29.5/40 reject", "25.5–29.0/40 reject", "No P0 · no method · no GPU"]
+    ["Axis", "Reference morphometry", "Partial-observation operator", "Topology-to-CFD", "Residual research gap"],
+    ["Direct prior", "COMPASS · NeckSpline · robust CP", "Neural Operator Processes · learned BC extensions", "IAVS topology-aware pipeline", "None admitted"],
+    ["Observable target", "Released-annotation-derived scalar", "Paired condition–field–decision law", "Segmentation plus CFD applicability", "Independent, obtainable endpoint"],
+    ["Known boundary", "Not biological truth; method occupied", "No aneurysm joint asset; old N1c failed", "Official repository has no payload/license", "Material release or new identifiable task required"],
+    ["Current decision", "30.0/40 reject", "30.0/40 reject", "29.0/40 reject", "No P0 · no method · no GPU"]
   ],
   gates: [
+    {
+      id: "S-MA",
+      title: "Does an obtainable asset leave a residual algorithmic gap after 2025–2026 direct priors?",
+      copy: "The two best fresh candidates score 30.0/40. COMPASS and NeckSpline occupy metric/morphometry uncertainty; Neural Operator Processes and conditioning operators occupy generic partial-observation learning. IAVS has no public payload, RSNA has no public per-reader manifest, and CQ500-IA is not a versioned auditable source.",
+      state: "All five below 32 · no patient payload/P0/PBS/model/GPU",
+      blocking: true
+    },
     {
       id: "S-RA",
       title: "Does a source identify the real coarsening/reconstruction mechanism and an independent reference?",
@@ -557,6 +571,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Method–asset viability audit leaves no compute-worthy candidate",
+      copy: "Five frozen scores are 30.0/30.0/29.0/26.0/23.0. COMPASS, NeckSpline, conformal morphometry and partial-observation neural operators close the tempting method gaps; IAVS remains README-only, RSNA lacks a public per-reader manifest and CQ500-IA is not publicly auditable. Schema 5.5 creates no payload, P0, PBS, model or GPU. introai9 is reachable and idle; it remains the only future execution target, while junjinyong remains completely excluded.",
+      files: ["docs/method-asset-viability-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

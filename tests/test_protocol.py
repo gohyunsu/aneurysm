@@ -215,6 +215,45 @@ class ProtocolTests(unittest.TestCase):
         ):
             validate_protocol(candidate)
 
+    def test_method_asset_viability_rejects_direct_priors_and_unreleased_assets(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "method_asset_viability_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 30.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 5)
+        self.assertTrue(audit["introai9_connection_verified"])
+        self.assertEqual(audit["introai9_remote_user"], "introai9")
+        self.assertEqual(audit["introai9_observed_host"], "ECE-util2")
+        self.assertEqual(audit["introai9_pbs_jobs_observed"], 0)
+        self.assertFalse(audit["aneug_flow_material_new_version_found"])
+        self.assertFalse(audit["iavs_payload_or_code_present"])
+        self.assertFalse(audit["rsna_per_reader_label_manifest_public"])
+        self.assertFalse(audit["cq500_ia_cited_repository_publicly_resolvable"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not candidate["payload_accessed"] for candidate in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["method_asset_viability_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "method--asset viability audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["method_asset_viability_source_audit"][
+            "iavs_main_head"
+        ] = "changed"
+        with self.assertRaisesRegex(ProtocolError, "method--asset viability audit"):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

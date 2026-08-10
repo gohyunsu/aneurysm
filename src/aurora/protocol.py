@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.4":
-        raise ProtocolError("The current research-state schema must be version 5.4.")
+    if protocol["schema_version"] != "5.5":
+        raise ProtocolError("The current research-state schema must be version 5.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -203,6 +203,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneumo_lineage_split_source_audit",
             "failure_mechanism_biology_source_audit",
             "reconstruction_annotation_reliability_source_audit",
+            "method_asset_viability_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -212,12 +213,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_reconstruction_annotation_reliability_source_rejection_aneumo_lineage_p0_remains_closed"
+        != "no_active_shortlist_after_method_asset_viability_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_batch_source_only_no_patient_dicom_nifti_mask_mesh_projection_cfd_or_phantom_payload_aneumo_lineage_p0_history_unchanged"
+        != "latest_method_asset_viability_audit_source_metadata_and_exact_refs_only_no_patient_image_mask_mesh_cfd_or_controlled_payload_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not True
@@ -227,13 +228,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_for_same_subject_paired_annotation_or_reconstruction_orbits_with_independent_reference_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0"
+        != "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_closed_p0_or_confirmatory_failures"
         or problem_selection["audit_document"]
-        != "docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md"
+        != "docs/method-asset-viability-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "one_sided_outer_annotation_morphometry_sets"
+        != "royal_reference_morphometry_certificate_direct_prior_occupied"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -327,6 +328,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "dose_reconstruction_phantom_aneurysm_consistency",
         "biplane_shape_posterior_for_neck_and_lobulation",
         "reconstruction_induced_hemodynamic_risk_propagation",
+        "royal_reference_morphometry_certificate_direct_prior_occupied",
+        "partial_observation_solution_functional_operator_direct_prior_occupied",
+        "iavs_topology_to_cfd_reliability_unreleased_and_direct_prior_occupied",
+        "rsna_reader_source_reliability_without_per_reader_manifest",
+        "cq500_provenance_aware_multimodal_adaptation_without_versioned_annotation_source",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -3382,6 +3388,161 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "payload/P0/model/PBS/GPU, and the introai9-only boundary."
         )
     checks.append("reconstruction/annotation rejection and introai9-only boundary")
+
+    method_asset_audit = problem_selection["method_asset_viability_source_audit"]
+    _require_keys(
+        method_asset_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_ids",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "any_patient_image_mask_mesh_cfd_or_controlled_challenge_payload_accessed",
+            "public_article_and_repository_metadata_read",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_remote_user",
+            "introai9_observed_host",
+            "introai9_pbs_jobs_observed",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "royal_openneuro_main_head",
+            "royal_patients",
+            "royal_aneurysms",
+            "royal_longitudinal_patients",
+            "royal_mask_and_stl_are_independent_references",
+            "aneug_flow_dataset_main_head",
+            "aneug_flow_code_master_head",
+            "aneug_flow_material_new_version_found",
+            "iavs_main_head",
+            "iavs_release_count",
+            "iavs_repository_license_present",
+            "iavs_payload_or_code_present",
+            "rsna_controlled_terms_user_accepted_verified",
+            "rsna_per_reader_label_manifest_public",
+            "cq500_ia_cited_repository_publicly_resolvable",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.method_asset_viability_source_audit",
+    )
+    expected_method_asset_scores = {
+        "royal_reference_morphometry_certificate_direct_prior_occupied": 30.0,
+        "partial_observation_solution_functional_operator_direct_prior_occupied": 30.0,
+        "iavs_topology_to_cfd_reliability_unreleased_and_direct_prior_occupied": 29.0,
+        "rsna_reader_source_reliability_without_per_reader_manifest": 26.0,
+        "cq500_provenance_aware_multimodal_adaptation_without_versioned_annotation_source": 23.0,
+    }
+    observed_method_asset_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in method_asset_audit["candidates"]
+    }
+    method_asset_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in method_asset_audit["candidates"]
+    )
+    expected_method_asset_priors = {
+        "compass_downstream_segmentation_metric_conformal_intervals_and_shift_weighting",
+        "robust_conformal_3d_volume_estimation_under_covariate_shift",
+        "neckspline_topology_preserving_neck_morphometry_and_perturbation_uncertainty",
+        "spatial_anatomical_and_morphological_conformal_segmentation_sets",
+        "neural_operator_processes_for_probabilistic_partial_observation_operator_learning",
+        "learned_boundary_function_extensions_for_neural_operators",
+        "amortized_conditioning_by_neural_operators",
+        "iavs_two_stage_topology_aware_segmentation_and_cfd_applicability",
+        "amap_anatomy_guided_pretraining_and_domain_adaptive_prompting",
+    }
+    if (
+        method_asset_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or method_asset_audit["audit_document"]
+        != "docs/method-asset-viability-source-audit-2026-08-10.md"
+        or method_asset_audit["automatic_selection_threshold"] != 32.0
+        or method_asset_audit["best_candidate_ids"]
+        != [
+            "royal_reference_morphometry_certificate_direct_prior_occupied",
+            "partial_observation_solution_functional_operator_direct_prior_occupied",
+        ]
+        or method_asset_audit["best_score"] != 30.0
+        or method_asset_audit["best_score"]
+        >= method_asset_audit["automatic_selection_threshold"]
+        or method_asset_audit["active_shortlist_count"] != 0
+        or method_asset_audit["primary_problem_selected"] is not False
+        or method_asset_audit[
+            "any_patient_image_mask_mesh_cfd_or_controlled_challenge_payload_accessed"
+        ]
+        is not False
+        or method_asset_audit["public_article_and_repository_metadata_read"]
+        is not True
+        or method_asset_audit["executable_p0_registered"] is not False
+        or method_asset_audit["method_selected"] is not False
+        or method_asset_audit["architecture_selected"] is not False
+        or method_asset_audit["gpu_training_authorized"] is not False
+        or method_asset_audit["outer_test_authorized"] is not False
+        or method_asset_audit["submission_identity_active"] is not False
+        or method_asset_audit["execution_server"] != "introai9"
+        or method_asset_audit["introai9_connection_verified"] is not True
+        or method_asset_audit["introai9_remote_user"] != "introai9"
+        or method_asset_audit["introai9_observed_host"] != "ECE-util2"
+        or method_asset_audit["introai9_pbs_jobs_observed"] != 0
+        or method_asset_audit["pbs_job_created"] is not False
+        or method_asset_audit["login_node_gpu_command_executed"] is not False
+        or method_asset_audit["junjinyong_accessed_for_this_audit"] is not False
+        or method_asset_audit["royal_openneuro_main_head"]
+        != "0760bf865612600c4eee85f6f437aefaeb534204"
+        or method_asset_audit["royal_patients"] != 63
+        or method_asset_audit["royal_aneurysms"] != 85
+        or method_asset_audit["royal_longitudinal_patients"] != 24
+        or method_asset_audit["royal_mask_and_stl_are_independent_references"]
+        is not False
+        or method_asset_audit["aneug_flow_dataset_main_head"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or method_asset_audit["aneug_flow_code_master_head"]
+        != "4a090a0f12538deef6fcea88b81afe78ce38152e"
+        or method_asset_audit["aneug_flow_material_new_version_found"] is not False
+        or method_asset_audit["iavs_main_head"]
+        != "2e40088d9eaa671c592929a154b7b2cf99f9320a"
+        or method_asset_audit["iavs_release_count"] != 0
+        or method_asset_audit["iavs_repository_license_present"] is not False
+        or method_asset_audit["iavs_payload_or_code_present"] is not False
+        or method_asset_audit["rsna_controlled_terms_user_accepted_verified"]
+        is not False
+        or method_asset_audit["rsna_per_reader_label_manifest_public"] is not False
+        or method_asset_audit["cq500_ia_cited_repository_publicly_resolvable"]
+        is not False
+        or set(method_asset_audit["direct_prior_threats"])
+        != expected_method_asset_priors
+        or observed_method_asset_scores != expected_method_asset_scores
+        or not method_asset_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in method_asset_audit["candidates"]
+        )
+        or method_asset_audit["decision"]
+        != "reject_all_without_score_repair_patient_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or method_asset_audit["next_allowed_action"]
+        != "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_then_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The method--asset viability audit must retain all five frozen "
+            "source-only rejections, the 30/40 maximum, exact public source "
+            "heads, no payload/P0/model/PBS/GPU, and introai9-only execution."
+        )
+    checks.append("method--asset viability rejection and source-version boundary")
 
     venue = protocol["venue"]
     _require_keys(

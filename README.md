@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 method--asset viability boundary:** Five source-only candidates
+> score **30.0/30.0/29.0/26.0/23.0**, all below 32/40. Royal Brisbane provides
+> 63 patients, 85 aneurysms and mask/STL representations, but COMPASS already
+> gives downstream segmentation-metric conformal intervals, NeckSpline directly
+> models neck morphometry and uncertainty, and the two representations share one
+> annotation source. Neural Operator Processes, learned boundary extensions and
+> amortized conditioning directly narrow the historical partial-observation
+> operator idea, whose N1c decision result remains failed. IAVS and AneuG-Flow
+> public heads are unchanged; IAVS remains README-only, RSNA remains controlled
+> without a public per-reader manifest, and the cited CQ500-IA repository is not
+> publicly resolvable. The [`detailed audit`](docs/method-asset-viability-source-audit-2026-08-10.md)
+> freezes no payload, P0, method, architecture, PBS/GPU, outer test or claim.
+> `introai9` is connected and idle; `junjinyong` remains excluded.
+
 > **2026-08-10 reconstruction/annotation reliability boundary:** Fresh scores
 > are **31.5/29.5/29.0/26.5/25.5/25.5**, all below 32/40. Open TOF-MRA has
 > 284 subjects and four-times-faster weak spheres, but VP-UNet, FocalSegNet and

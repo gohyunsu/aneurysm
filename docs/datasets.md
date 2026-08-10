@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 method--asset viability boundary:** Royal OpenNeuro exact
+> `0760bf8…`은 63 patient/85 aneurysm의 image, mask와 STL을 제공하지만 mask와
+> STL은 independent reference가 아니라 같은 annotation pipeline의 표현이다.
+> AneuG-Flow dataset/code는 `9dd4180…`/`4a090a0…`, IAVS는 `2e40088…`으로
+> unchanged이고 IAVS는 README-only다. RSNA는 controlled terms 미수락 및
+> per-reader manifest 0, cited CQ500-IA public Git remote는 unresolved다. 새
+> training role이나 payload access를 열지 않는다.
+
 > **2026-08-10 current reconstruction/annotation boundary:** OpenNeuro
 > `ds003949` lineage는 284 subject/198 aneurysm과 permissive data/code/weight를
 > 보고하고 VP-UNet은 246 coarse-label subject와 38 precise-label test를 쓴다.

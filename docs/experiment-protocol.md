@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Current exact gate · 2026-08-10 schema 5.5:** Method--asset viability scores
+> are 30/30/29/26/23, all below 32. No patient payload, P0, method, architecture,
+> PBS/GPU or outer test is authorized. Exact upstream heads show no material
+> AneuG-Flow/IAVS/Royal release. `introai9` public-key access succeeded and
+> `qstat -u introai9` was empty; no login-node GPU command ran. `junjinyong` is
+> excluded. The next experiment can only be a separately frozen method-free P0
+> after a genuinely new identifiable candidate reaches 32.
+
 > **Current exact gate · 2026-08-10:** Reconstruction/annotation reliability
 > 최고점은 31.5/40으로 32 미만이다. Patient payload, executable P0, PBS job,
 > method, architecture, GPU와 outer test는 없다. 다음 실험은 same-subject

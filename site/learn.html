@@ -52,24 +52,25 @@
           <span>짧은 답</span>
           <strong>Active shortlist, primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 source batch의 최고점은 one-sided outer-annotation
-            morphometry 31.5/40으로 admission line 32보다 낮습니다. 실제 weak
-            annotation과 independent precise reference의 same-subject pairing이
-            없어 현재 GNN, neural operator, U-Net, diffusion과 Transformer 어느
-            것도 선택하지 않았습니다.
+            최신 method–asset viability batch의 공동 최고점은 reference
+            morphometry와 partial-observation operator의 30.0/40으로 admission
+            line 32보다 낮습니다. 전자는 COMPASS·NeckSpline이 직접 점유하고,
+            후자는 최신 neural-operator 계보와 과거 N1c 실패를 넘지 못했습니다.
+            따라서 GNN, neural operator, U-Net, diffusion과 Transformer 어느
+            것도 현재 모델로 선택하지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
           <strong>이번 batch는 payload와 P0 전에 정상 종료됐습니다.</strong>
           <p>
-            VP-UNet/FocalSegNet/WeakMed는 weak segmentation을, ultra-sparse DSA와
-            AutoCAR는 sparse vascular reconstruction을 직접 다룹니다. 600-model
-            variability study도 software/threshold/user effect를 이미 정량화합니다.
-            따라서 patient image/mask/mesh/projection, P0와 PBS/GPU를 열지
-            않았습니다.
+            Royal OpenNeuro는 63명 reference asset이지만 mask와 STL은 같은
+            annotation pipeline의 표현입니다. IAVS는 README-only이고, RSNA는
+            public per-reader manifest가 없으며, CQ500-IA citation target은
+            versioned public asset으로 확인되지 않습니다. 따라서 patient
+            image/mask/mesh/field, P0와 PBS/GPU를 열지 않았습니다.
           </p>
-          <a href="../docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/method-asset-viability-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -442,7 +443,7 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/reference
-              audit입니다. Reconstruction/annotation batch의 최고점은 31.5/40으로
+              audit입니다. Method–asset viability batch의 최고점은 30.0/40으로
               P0도 열지 않았습니다. 아래 Aneumo와 과거 graph/operator stack은
               현재 선택된 architecture가 아닌 역사 기록입니다.
             </p>
@@ -451,12 +452,12 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 최신 batch에는 real weak annotation과 independent precise reference의 same-subject prospective manifest가 없습니다. Coarse sphere를 정밀 mask로, 반복 reconstruction을 독립 patient로 바꾸어 세지 않습니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 공개 asset이 존재하는 것과 독립 novelty가 남는 것은 다른 조건입니다. 같은 annotation pipeline의 mask와 STL을 독립 truth로 세지 않고, generic conformalization이나 arbitrary conditioning을 새 contribution으로 이름만 바꾸지 않습니다.</p>
             </aside>
             <article>
-              <span>CURRENT · RECONSTRUCTION/ANNOTATION REJECTED</span>
-              <div><h3>큰 sphere를 정밀 aneurysm mask로 배울 수 있는가?</h3><p>Sphere가 보장하는 것은 위치와 outer containment뿐입니다. Image evidence로 내부 shape를 추론할 수는 있지만 실제 annotator의 center/radius 선택과 independent precise mask가 same subject에서 paired되어야 calibration을 검증할 수 있습니다. VP-UNet, FocalSegNet과 WeakMed가 direct baselines입니다.</p></div>
-              <b>상태</b><small>best 31.5/40 · payload/P0/PBS/model/GPU 0</small>
+              <span>CURRENT · METHOD–ASSET VIABILITY REJECTED</span>
+              <div><h3>공개 mask에 conformal interval을 붙이면 새 연구인가?</h3><p>아닙니다. 출력은 unknown biological truth가 아니라 released annotation에서 계산한 morphometry입니다. COMPASS는 segmentation-derived metric interval을, NeckSpline은 aneurysm neck width·angle과 perturbation uncertainty를 이미 다룹니다. Partial-observation operator도 Neural Operator Processes와 conditioning-operator 계보를 넘어야 합니다.</p></div>
+              <b>상태</b><small>best 30.0/40 · payload/P0/PBS/model/GPU 0</small>
             </article>
             <article>
               <span>HISTORY · ANEUMO LINEAGE P0 CLOSED</span>

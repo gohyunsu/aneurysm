@@ -1,5 +1,5 @@
 {
-  "schema_version": "5.4",
+  "schema_version": "5.5",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_reconstruction_annotation_reliability_source_rejection_aneumo_lineage_p0_remains_closed",
+    "status": "no_active_shortlist_after_method_asset_viability_source_rejection_aneumo_lineage_p0_remains_closed",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "latest_batch_source_only_no_patient_dicom_nifti_mask_mesh_projection_cfd_or_phantom_payload_aneumo_lineage_p0_history_unchanged",
+    "asset_access_status": "latest_method_asset_viability_audit_source_metadata_and_exact_refs_only_no_patient_image_mask_mesh_cfd_or_controlled_payload_aneumo_lineage_p0_history_unchanged",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": true,
     "annotation_selection_mechanism_audited": true,
@@ -26,8 +26,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "monitor_for_same_subject_paired_annotation_or_reconstruction_orbits_with_independent_reference_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0",
-    "audit_document": "docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md",
+    "next_allowed_action": "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_closed_p0_or_confirmatory_failures",
+    "audit_document": "docs/method-asset-viability-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -1722,8 +1722,101 @@
       "decision": "reject_all_without_score_repair_patient_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
       "next_allowed_action": "monitor_for_same_subject_paired_annotation_or_reconstruction_orbits_with_independent_reference_then_register_only_a_fresh_candidate_scoring_at_least_32"
     },
+    "method_asset_viability_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/method-asset-viability-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_ids": [
+        "royal_reference_morphometry_certificate_direct_prior_occupied",
+        "partial_observation_solution_functional_operator_direct_prior_occupied"
+      ],
+      "best_score": 30.0,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "any_patient_image_mask_mesh_cfd_or_controlled_challenge_payload_accessed": false,
+      "public_article_and_repository_metadata_read": true,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "introai9_connection_verified": true,
+      "introai9_remote_user": "introai9",
+      "introai9_observed_host": "ECE-util2",
+      "introai9_pbs_jobs_observed": 0,
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "royal_openneuro_main_head": "0760bf865612600c4eee85f6f437aefaeb534204",
+      "royal_patients": 63,
+      "royal_aneurysms": 85,
+      "royal_longitudinal_patients": 24,
+      "royal_mask_and_stl_are_independent_references": false,
+      "aneug_flow_dataset_main_head": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+      "aneug_flow_code_master_head": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+      "aneug_flow_material_new_version_found": false,
+      "iavs_main_head": "2e40088d9eaa671c592929a154b7b2cf99f9320a",
+      "iavs_release_count": 0,
+      "iavs_repository_license_present": false,
+      "iavs_payload_or_code_present": false,
+      "rsna_controlled_terms_user_accepted_verified": false,
+      "rsna_per_reader_label_manifest_public": false,
+      "cq500_ia_cited_repository_publicly_resolvable": false,
+      "direct_prior_threats": [
+        "compass_downstream_segmentation_metric_conformal_intervals_and_shift_weighting",
+        "robust_conformal_3d_volume_estimation_under_covariate_shift",
+        "neckspline_topology_preserving_neck_morphometry_and_perturbation_uncertainty",
+        "spatial_anatomical_and_morphological_conformal_segmentation_sets",
+        "neural_operator_processes_for_probabilistic_partial_observation_operator_learning",
+        "learned_boundary_function_extensions_for_neural_operators",
+        "amortized_conditioning_by_neural_operators",
+        "iavs_two_stage_topology_aware_segmentation_and_cfd_applicability",
+        "amap_anatomy_guided_pretraining_and_domain_adaptive_prompting"
+      ],
+      "candidates": [
+        {
+          "id": "royal_reference_morphometry_certificate_direct_prior_occupied",
+          "score": 30.0,
+          "axis_scores": [4.5, 4.0, 0.5, 4.5, 3.5, 5.0, 5.0, 3.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_compass_neckspline_and_conformal_volumetry_occupy_the_method_and_mask_stl_share_one_annotation_source"
+        },
+        {
+          "id": "partial_observation_solution_functional_operator_direct_prior_occupied",
+          "score": 30.0,
+          "axis_scores": [4.5, 5.0, 0.5, 2.5, 5.0, 5.0, 4.5, 3.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_partial_operator_and_conditioning_priors_are_direct_and_historical_n1c_decision_superiority_failed"
+        },
+        {
+          "id": "iavs_topology_to_cfd_reliability_unreleased_and_direct_prior_occupied",
+          "score": 29.0,
+          "axis_scores": [5.0, 5.0, 0.5, 0.5, 5.0, 5.0, 5.0, 3.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_official_repository_is_readme_only_and_the_paper_occupies_topology_cfd_applicability"
+        },
+        {
+          "id": "rsna_reader_source_reliability_without_per_reader_manifest",
+          "score": 26.0,
+          "axis_scores": [5.0, 1.0, 2.0, 1.0, 5.0, 5.0, 4.0, 3.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_controlled_terms_unaccepted_and_public_per_reader_adjudication_or_lesion_extent_manifest_absent"
+        },
+        {
+          "id": "cq500_provenance_aware_multimodal_adaptation_without_versioned_annotation_source",
+          "score": 23.0,
+          "axis_scores": [4.5, 1.0, 1.0, 0.0, 5.0, 5.0, 4.0, 2.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_cited_annotation_repository_not_publicly_resolvable_and_scan_to_mask_semantics_unverifiable"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_patient_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
+      "next_allowed_action": "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_then_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
-    "most_recent_source_rejected_candidate": "one_sided_outer_annotation_morphometry_sets",
+    "most_recent_source_rejected_candidate": "royal_reference_morphometry_certificate_direct_prior_occupied",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -1810,7 +1903,12 @@
       "segmentation_software_threshold_orbit_calibrated_morphometry",
       "dose_reconstruction_phantom_aneurysm_consistency",
       "biplane_shape_posterior_for_neck_and_lobulation",
-      "reconstruction_induced_hemodynamic_risk_propagation"
+      "reconstruction_induced_hemodynamic_risk_propagation",
+      "royal_reference_morphometry_certificate_direct_prior_occupied",
+      "partial_observation_solution_functional_operator_direct_prior_occupied",
+      "iavs_topology_to_cfd_reliability_unreleased_and_direct_prior_occupied",
+      "rsna_reader_source_reliability_without_per_reader_manifest",
+      "cq500_provenance_aware_multimodal_adaptation_without_versioned_annotation_source"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",

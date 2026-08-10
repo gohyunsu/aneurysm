@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **2026-08-10 method--asset viability boundary:** Royal reference-morphometry
+> certificate와 partial-observation solution-functional operator가 각각 30/40,
+> IAVS/RSNA/CQ500 후보가 29/26/23으로 모두 32 미만이다. COMPASS와
+> NeckSpline이 downstream metric/neck uncertainty를, Neural Operator Processes와
+> learned boundary extension/amortized conditioning이 partial operator를 직접
+> 점유한다. Historical N1c fail은 유지한다. IAVS/AneuG-Flow/Royal upstream은
+> material update가 없고, RSNA terms/per-reader manifest 및 CQ500-IA versioned
+> annotation source도 없다. 따라서 현재 primary/method/architecture/GPU는 0이다.
+
 > **2026-08-10 current boundary:** Reconstruction/annotation reliability
 > batch의 최고점은 one-sided outer-annotation morphometry 31.5/40이며 여섯
 > 후보가 모두 32 미만이다. 공개 TOF-MRA의 weak sphere는 값싼 outer set이지만

@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 method--asset viability lineage:** ICLR 2026 COMPASS는 medical
+> segmentation에서 파생되는 downstream metric의 conformal interval과
+> covariate-shift weighting을 직접 다루고, NeckSpline은 aneurysm neck을
+> topology-preserving spline으로 모델링하며 width/angle과 perturbation UQ를
+> 평가한다. Neural Operator Processes는 sparse joint observations에서
+> probabilistic operator learning을, learned function extensions와 amortized
+> conditioning은 variable BC와 arbitrary conditioning을 직접 다룬다. 이
+> 계보 때문에 aneurysm morphometry conformalization 또는 partial-mask operator를
+> 단순 결합하는 것은 residual novelty가 아니다.
+
 > **2026-08-10 reconstruction/annotation lineage:** Di Noto의 weak spheres 뒤
 > VP-UNet/FocalSegNet이 aneurysm-specific weak segmentation을 수행하고 CVPR
 > 2026 WeakMed가 Mask-to-Box와 scale consistency로 generic box bias를 직접

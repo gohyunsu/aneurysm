@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 method boundary:** 현재 모델은 없다. COMPASS-style feature
+> perturbation, scalar/multi-metric conformal calibration, NeckSpline-style neck
+> primitive, Neural Operator Process, boundary extension, arbitrary-conditioning
+> density, GNN/Transformer/U-Net은 모두 direct prior 또는 engineering control이다.
+> Latest best source score가 30/40이므로 architecture와 GPU를 만들지 않는다.
+
 > **2026-08-10 current architecture boundary:** 현재 모델은 GNN도 U-Net도
 > Transformer도 diffusion posterior도 아니다—선택된 architecture가 없다.
 > Outer-set loss, vesselness prior, Mask-to-Box, scale consistency, sparse

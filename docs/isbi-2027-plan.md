@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 method--asset viability boundary:** Latest scores are
+> 30/30/29/26/23, all below 32. COMPASS/NeckSpline and modern partial-observation
+> neural-operator work remove the apparent independent novelty; IAVS remains
+> unreleased and RSNA/CQ500 semantics are not auditable enough. There is no active
+> title, contribution, architecture, result row or GPU experiment. The official
+> target remains the single-blind ISBI 2027 regular paper with all technical
+> content in four pages and deadline 2026-10-26, but status is not submission-ready.
+
 > **2026-08-10 current boundary:** Reconstruction/annotation reliability scores
 > are 31.5/29.5/29.0/26.5/25.5/25.5, all below 32. Weak segmentation, sparse
 > reconstruction and reconstruction-variability analysis have strong direct

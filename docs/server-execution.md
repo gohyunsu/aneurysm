@@ -2,6 +2,16 @@
 
 최종 갱신: 2026-08-10 KST
 
+## 2026-08-10 · Method--asset source-only stop and introai9 status
+
+- Five scores are 30/30/29/26/23, all below 32. No payload, P0, PBS/GPU job or
+  outer test was created.
+- Public-key access reached remote user `introai9` on `ECE-util2` and
+  `qstat -u introai9` returned no jobs. No login-node GPU command ran.
+- Exact public refs are unchanged for Royal, AneuG-Flow and IAVS; this is no
+  source-version re-entry. `junjinyong` was not connected to, queried, submitted
+  to or monitored.
+
 ## 2026-08-10 · Reconstruction/annotation source-only stop
 
 - Frozen scores are 31.5/29.5/29.0/26.5/25.5/25.5, all below 32. No P0, PBS,

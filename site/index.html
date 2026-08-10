@@ -41,22 +41,24 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          A coarse label is not a precise anatomy.<br>
-          <em>First identify what the annotation guarantees.</em>
+          A usable asset is not yet a novel problem.<br>
+          <em>First prove that a residual gap remains.</em>
         </h1>
         <p class="hero-lede">
-          Weak sphere는 aneurysm 위치를 둘러싼 outer set이지 정밀 mask가
-          아닙니다. 이를 정직하게 학습하는 질문은 중요하지만 VP-UNet,
-          FocalSegNet과 CVPR 2026 WeakMed가 직접 방법 계보를 이룹니다. Real
-          weak annotation과 independent precise reference의 same-subject
-          prospective pairing도 없습니다. Fresh 최고점은 31.5/40으로 32에
-          못 미치며 shortlist, primary, model, P0, PBS/GPU와 outer test는 0입니다.
+          공개 aneurysm mask로 morphometry uncertainty를 계산하거나 partial
+          physical observation을 neural operator로 처리하는 문제는 매력적입니다.
+          그러나 COMPASS·NeckSpline과 최신 partial-observation operator가 핵심
+          방법을 이미 직접 다룹니다. IAVS·RSNA·CQ500 후보도 필요한 공개
+          target manifest를 제공하지 않습니다. Fresh 최고점은 30.0/40으로
+          admission line 32에 못 미치며 shortlist, primary, model, P0,
+          PBS/GPU와 outer test는 모두 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/method-asset-viability-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md">Annotation history ↗</a>
           <a class="button ghost" href="../docs/failure-mechanism-biology-source-audit-2026-08-10.md">Error/biology history ↗</a>
           <a class="button ghost" href="../docs/aneumo-lineage-split-source-audit-2026-08-10.md">Aneumo P0 history ↗</a>
           <a class="button ghost" href="../configs/aneumo_lineage_p0.json">Historical frozen P0 ↗</a>
@@ -81,8 +83,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="weak outer annotation과 precise anatomy의 차이를 보여주는 현재 연구 경계">
-        <div class="visual-caption">RECONSTRUCTION × ANNOTATION · BEST 31.5/40 · ALL REJECTED</div>
+      <div class="hero-visual" aria-label="method와 asset이 모두 있어도 독립 연구 gap이 남아야 한다는 현재 연구 경계">
+        <div class="visual-caption">METHOD × ASSET VIABILITY · BEST 30.0/40 · ALL REJECTED</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -105,25 +107,25 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>31.5</b><span>best source score / 40</span>
+            <b>30.0</b><span>best source score / 40</span>
           </div>
           <div class="posterior-card card-b">
-            <b>246</b><span>coarse-label subjects in VP-UNet</span>
+            <b>63</b><span>Royal reference patients</span>
           </div>
           <div class="posterior-card card-c">
-            <b>38</b><span>precise-label test subjects</span>
+            <b>0</b><span>admitted residual gaps</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> weak segmentation and sparse reconstruction are direct prior</span>
-          <span><i class="dot coral"></i> real same-subject coarsening reference is absent</span>
+          <span><i class="dot lime"></i> metric conformalization and partial operators are direct prior</span>
+          <span><i class="dot coral"></i> unavailable or non-independent targets cannot support a claim</span>
           <span>active primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
         <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>Fresh source best 31.5/40 · all rejected</b></div>
+        <div><span>Current evidence</span><b>Fresh source best 30.0/40 · all rejected</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
       </div>
@@ -134,11 +136,11 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          Weak-label U-Net, Mask-to-Box, vesselness prior, sparse backprojection,
-          vascular graph optimization과 reconstruction variability는 이미 직접
-          계보를 이룹니다. 새 block을 고르기 전에 coarsening mechanism,
-          patient unit와 independent reference를 검증했습니다. Joint asset이
-          없어 model을 만들지 않았습니다.
+          Conformal metric interval, aneurysm-neck uncertainty, sparse-observation
+          neural operator와 topology-aware segmentation-to-CFD는 이미 직접 계보를
+          이룹니다. 새 block을 고르기 전에 target identifiability, public asset,
+          independent unit와 residual algorithmic gap을 함께 검증했습니다. 두
+          조건을 동시에 만족한 후보가 없어 model을 만들지 않았습니다.
         </p>
       </div>
 
@@ -192,15 +194,16 @@
           <p class="eyebrow">CURRENT GAP STATUS</p>
           <h3>No active gap survives direct priors and reference adequacy.</h3>
           <p>
-            공개 TOF-MRA는 충분히 크지만 coarse sphere를 만든 실제 annotation
-            process와 independent precise mask가 같은 개발 환자에서 paired되지
-            않습니다. VP-UNet/FocalSegNet/WeakMed는 weak segmentation을,
-            cerebral sparse-view DSA와 AutoCAR는 sparse reconstruction을 직접
-            점유합니다. 따라서 fancy한 posterior/GNN을 붙이기 전에 source
-            admission에서 멈췄습니다.
+            Royal OpenNeuro의 공개 mask와 surface는 유용하지만 같은 annotation
+            pipeline의 두 표현이며 biological truth의 독립 관측자가 아닙니다.
+            COMPASS와 NeckSpline은 downstream metric·neck uncertainty를,
+            Neural Operator Processes는 sparse joint observation을 이미 다룹니다.
+            IAVS·RSNA·CQ500 후보는 필요한 public payload나 reader/annotation
+            manifest가 없습니다. 따라서 fancy한 posterior/GNN을 붙이기 전에
+            source admission에서 멈췄습니다.
           </p>
           <div class="gap-equation" aria-label="source admission 뒤 P0가 미완료되어 모델 권한으로 이어지지 않는 관계">
-            <span>source best 31.5/40 &lt; 32</span>
+            <span>source best 30.0/40 &lt; 32</span>
             <i>⇒</i>
             <span>no payload · no P0 · no model · no GPU</span>
           </div>
@@ -217,9 +220,9 @@
           <thead>
             <tr>
               <th>Axis</th>
-              <th>RHSIA field surrogate</th>
-              <th>Functional head / loss</th>
-              <th>DOPE debiasing</th>
+              <th>Reference morphometry</th>
+              <th>Partial-observation operator</th>
+              <th>Topology-to-CFD</th>
               <th>Residual candidate</th>
             </tr>
           </thead>
@@ -233,7 +236,7 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 최신 reconstruction/annotation batch는
+          현재 architecture는 없습니다. 최신 method–asset viability batch는
           source admission을 통과하지 못했습니다. 아래 흐름은 직전 Aneumo
           후보가 source admission 뒤에도 왜 model selection에 도달하지 못했는지
           보여주는 명시적 역사 기록입니다.
@@ -244,10 +247,10 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
-          U-Net/GNN/Transformer, outer-set likelihood, Mask-to-Box, vesselness,
-          sparse backprojection과 diffusion posterior는 strong controls 또는
-          직접 선행이지 현재 method가 아닙니다. Weak label을 다른 모양의
-          pseudo-mask로 바꾸는 것만으로 contribution이 되지 않습니다.
+          U-Net/GNN/Transformer, conformal metric head, functional loss,
+          arbitrary-mask conditioning과 topology-aware CFD head는 strong controls
+          또는 직접 선행이지 현재 method가 아닙니다. 공개 asset에 이들을
+          적용하는 것만으로 독립 contribution이 되지 않습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -591,7 +594,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Reconstruction/annotation best 31.5/40 · all rejected · shortlist/primary/P0/model/GPU 0</b>
+        <span>Current stage</span><b>Method–asset viability best 30.0/40 · all rejected · shortlist/primary/P0/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

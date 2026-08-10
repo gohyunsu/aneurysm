@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 method--asset viability source overlay:** Fresh five-candidate
+> scores are 30.0/30.0/29.0/26.0/23.0, all below the frozen 32/40 line. Royal
+> Brisbane has 63 patients/85 aneurysms and mask/STL outputs, but both outputs
+> share one annotation source. ICLR 2026 COMPASS already provides downstream
+> segmentation-metric conformal intervals and shift weighting; NeckSpline
+> directly occupies topology-preserving neck morphometry and perturbation UQ.
+> Neural Operator Processes, learned boundary extensions and amortized
+> conditioning directly occupy generic partial-observation operator components,
+> while historical N1c decision superiority remains failed. Exact public heads
+> remain Royal `0760bf8…`, AneuG-Flow dataset `9dd4180…`, code `4a090a0…`, and
+> IAVS `2e40088…`; IAVS remains README-only. RSNA terms are not user-accepted
+> and no public per-reader manifest is identified. The cited CQ500-IA Git remote
+> is not publicly resolvable. Schema 5.5 source of truth is
+> `docs/method-asset-viability-source-audit-2026-08-10.md` and
+> `problem_selection.method_asset_viability_source_audit`. Patient payload, P0,
+> primary, method, architecture, PBS/GPU, outer test and submission identity are
+> 0. Public-key access reached `introai9`/`ECE-util2`; PBS jobs were 0 and no
+> login-node GPU command ran. `junjinyong` was not accessed and remains excluded.
+> Closed P0s and failed confirmatory results are not repaired or relabeled.
+
 > **2026-08-10 reconstruction/annotation reliability source overlay:** Fresh
 > scores는 31.5/29.5/29.0/26.5/25.5/25.5로 모두 32 미만이며 31.5를 사후
 > 수리하지 않는다. Di Noto source는 284 subject/198 aneurysm과 weak sphere

@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Method--asset viability stops before payload and compute
+
+- Royal reference-morphometry certification, partial-observation
+  solution-functional operators, IAVS topology-to-CFD reliability, RSNA
+  reader-source reliability and CQ500 provenance-aware adaptation score
+  **30.0/30.0/29.0/26.0/23.0**. All are below 32.
+- COMPASS, conformal volumetry, NeckSpline, anatomical/morphological conformal
+  sets, Neural Operator Processes, learned boundary extensions and amortized
+  conditioning occupy the tempting method components. Historical N1c remains
+  failed; no generic joint density, GNN or conformal wrapper is promoted.
+- Exact public heads are unchanged for Royal, AneuG-Flow and IAVS. IAVS remains
+  README-only; RSNA remains controlled without user-accepted terms or a public
+  per-reader manifest; the cited CQ500-IA public Git remote is unresolved.
+- Schema 5.5 freezes shortlist/primary/P0/method/architecture/PBS/GPU/outer test/
+  submission identity at zero. `introai9` public-key access succeeded and its
+  PBS list was empty. No login-node GPU command ran and `junjinyong` was not
+  accessed.
+- 영향 파일: `docs/method-asset-viability-source-audit-2026-08-10.md`, machine
+  contract/validator/tests, research/data/model/experiment/ISBI/server guides,
+  public site, private manuscript history, `AGENTS.md` and this log.
+
 ## 2026-08-10 · Reconstruction/annotation reliability stops before payload and compute
 
 - One-sided outer-annotation morphometry, sparse-view DSA neck reconstruction,
