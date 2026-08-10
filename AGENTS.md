@@ -16,6 +16,12 @@
 > `problem_selection.rsna_aws_registry_correction_audit`. AURORA uses only
 > `introai9`; `junjinyong` remains excluded from connection, query, transfer,
 > submission and monitoring.
+> Exact scientific content `5690b104e6d3fc2644b3d934e12b834ea2c3c3da`
+> passed Quality run `31352980950` and Pages run `31352980597`. Direct live
+> checks of the overview, zero-assumption guide and detailed audit returned
+> HTTP 200 and rendered 31.5/40, `ControlledAccess`, vessel-mask semantics and
+> the no-P0/model/GPU boundary. This deployment evidence changes no access,
+> scientific or compute authorization.
 
 > **2026-08-10 broad-registry source overlay:** A bounded official-metadata
 > screen across Zenodo, DataCite, Figshare and Dryad freezes six candidate scores

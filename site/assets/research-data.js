@@ -610,6 +610,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "RSNA registry correction and no-compute boundary are live",
+      copy: "Exact scientific content 5690b104e6d3fc2644b3d934e12b834ea2c3c3da passed Quality 31352980950 and Pages 31352980597. Direct live checks of the overview, zero-assumption guide and detailed audit return HTTP 200 and render 31.5/40, ControlledAccess, vessel-anatomy-not-lesion-mask semantics and no P0/model/GPU. This provenance creates no terms acceptance, access request, method, compute or submission authorization; introai9 remains the only future execution target and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "docs/server-execution.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "Official RSNA registry metadata corrects scale, not access or novelty",
       copy: "The official AWS record adds 4,000+ scans, 18 institutions, 40+ radiologists and about 200 AI-segmented studies, but explicitly marks RSNA-ICA ControlledAccess. The user has not accepted terms or requested access, and no manifest or payload was read. Point/presence/territory supervision, vessel-anatomy masks, winning detectors and conformal risk controls freeze the residual candidate at 31.5/40. Schema 5.8 therefore creates no P0, PBS job, method, architecture, GPU, outer test or C21 claim; introai9 remains the only future execution target and junjinyong remains excluded.",

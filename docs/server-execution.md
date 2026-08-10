@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+## 2026-08-10 · RSNA registry deployment verification
+
+- Exact content `5690b104e6d3fc2644b3d934e12b834ea2c3c3da` passed Quality
+  `31352980950` and Pages `31352980597`; live overview, guide and detailed
+  audit return HTTP 200 with the same 31.5/40 and no-compute boundary.
+- This is provenance only. It creates no terms acceptance, data access, PBS/GPU
+  job or monitoring loop. `introai9` remains idle for AURORA and
+  `junjinyong` remains completely excluded.
+
 ## 2026-08-10 · RSNA AWS registry correction, no job authorized
 
 - Exact public registry YAML blob `97b8c1f…` at file commit `523ffd3…` was read;

@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-10 · RSNA registry content and live site verified
+
+- Exact scientific content `5690b104e6d3fc2644b3d934e12b834ea2c3c3da`
+  passed Quality run `31352980950` and Pages run `31352980597`.
+- Live overview, zero-assumption guide and detailed audit return HTTP 200 and
+  render the same 31.5/40, `ControlledAccess`, vessel-anatomy-not-lesion-mask
+  and no-P0/model/GPU boundary.
+- Deployment verification creates no terms acceptance, access request, P0,
+  architecture, compute, outer test or submission identity. `introai9` remains
+  the only possible future execution target after a fresh gate;
+  `junjinyong` remains excluded.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `docs/server-execution.md`,
+  `site/assets/research-data.js`.
+
 ## 2026-08-10 · RSNA AWS registry correction remains below source admission
 
 - Official AWS registry YAML blob `97b8c1f…` at exact file commit `523ffd3…`
