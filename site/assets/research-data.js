@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · OpenNeuro P0 execution-incomplete/no scientific verdict · active source lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    status: "Target locked · AneuG target-construction batch best 31.5/40 and all rejected · active source lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
     requirement: "a different problem must prospectively pass source and method-free task-adequacy gates before any architecture or GPU work",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A target-construction flaw is not automatically a novel learning problem",
+      copy: "Official AneuG-Flow code at 4a090a0… registers coordinates and WSS together with k=3 interpolation, retains common connectivity and recomputes normals, but exposes no explicit tangent projection or area/functional conservation. Its training path normalizes before split, evaluates test every epoch and selects the best checkpoint on test MSE. These are material risks, yet conservative remapping, surface-vector transport, train-only normalization and test-blind selection are established controls. Six fresh formulations peak at 31.5/40, so none earns payload, P0 or a model.",
+      status: "Best 31.5/40 · all rejected · introai9 queue empty · P0/method/architecture/GPU 0",
+      url: "../docs/aneug-target-construction-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Observed containment creates a narrow estimand without pretending the weak label is truth",
@@ -754,6 +761,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Schema 7.0 rejects the AneuG target-construction batch before compute",
+      copy: "The official paper, exact code 4a090a0… and dataset metadata 9dd4180… were inspected without field/mesh or checkpoint payload. Six target-transfer and evaluation formulations score 31.5/31.0/30.5/30.5/30.0/29.5, all below 32. No score repair, P0, architecture, PBS/GPU or paper claim is allowed. A read-only introai9 queue check was empty; no login-node GPU command ran. junjinyong remains prohibited for connection, query, transfer, submission and monitoring.",
+      files: ["docs/aneug-target-construction-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.10",
       category: "experiment",

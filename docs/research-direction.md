@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 7.0 direction · 2026-08-10:** AneuG-Flow target construction exposes
+> plausible surface-vector, conservative-functional and test-contamination
+> risks, but the obvious remedies are established controls rather than an
+> independent method. The fresh batch peaks at 31.5/40 and is rejected without
+> score repair, payload, P0, architecture or compute. Current architecture is
+> therefore **not GNN-based or otherwise selected**. The next admissible action
+> is a different problem-level source/asset audit. If a future candidate crosses
+> 32, it must first pass method-free CPU P0 on `introai9`; `junjinyong` is never
+> used or monitored.
+
 > **Schema 6.9 outcome · 2026-08-10:** The one-shot OpenNeuro metadata P0
 > ended execution-incomplete before any of its 10 high-level checks could be
 > evaluated. There is therefore no evidence that containment morphometry is

@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.0 no-model boundary · 2026-08-10:** The AneuG target-
+> construction batch is source-rejected at a best score of 31.5/40. GNN,
+> Graph Transformer, E(3) network, neural operator, tangent-projection head and
+> conservation loss are therefore unselected. The latter two are mandatory
+> controls/direct priors, not reserved novelty. No P0 or GPU architecture smoke
+> is authorized. A future model can be named only after a different candidate
+> crosses 32 and passes a method-free `introai9` CPU gate. `junjinyong` is
+> prohibited.
+
 > **Schema 6.9 · no architecture:** The containment candidate did not reach a
 > scientific or task-adequacy verdict. Its exact P0 is closed, so no GNN,
 > U-Net, Transformer, conformal head or morphometry regressor is selected or

@@ -1,5 +1,27 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 AneuG target-construction override · schema 7.0:** A fresh
+> source-only audit pins official code `4a090a0f12538deef6fcea88b81afe78ce38152e`
+> and dataset metadata `9dd418083899deddd93a67f9a6fca7a14304fa36`.
+> `new_version/loaders.py` uses `knn_interpolate(k=3)` for coordinates and WSS,
+> retains common connectivity, recomputes normals and exposes no explicit WSS
+> tangent projection or area/functional conservation. Official training code
+> normalizes processed steady data before split, evaluates the test loader each
+> epoch and selects the best checkpoint by test MSE; transient splitting uses
+> ordered prefix matching. These are target/evaluation risks, not proof of bad
+> labels. Conservative remapping, surface-vector transport, conservation laws,
+> train-only normalization and test-blind/family-disjoint evaluation are direct
+> priors or mandatory controls. Six scores are frozen at
+> 31.5/31.0/30.5/30.5/30.0/29.5, all below 32; never round up or repair them.
+> Field/mesh payload, P0, method, architecture, PBS/GPU, outer test, C21 and
+> result row remain zero. A bounded read-only `qstat -u introai9` was empty; no
+> login-node GPU command was run. AURORA uses `introai9` only. Never connect,
+> query, transfer, submit to or monitor `junjinyong`. Next work is a fresh
+> problem-level source/asset audit, not an AneuG target-construction repair.
+> Source of truth:
+> `docs/aneug-target-construction-source-audit-2026-08-10.md` and
+> `problem_selection.aneug_target_construction_source_audit`.
+
 > **2026-08-10 OpenNeuro P0 outcome override · schema 6.9:** Exact clean
 > public source `bb227edc86bf3b68e92b97f120a7918b0753c831` was deployed and
 > submitted exactly once to `introai9` PBS as `115622.ECE-util1`, CPU 2,

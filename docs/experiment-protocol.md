@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 7.0 current state · 2026-08-10:** No experiment is registered for
+> the AneuG target-construction batch. Six source scores peak at 31.5/40, so
+> payload, CPU P0, architecture smoke, validation/test and GPU are all zero.
+> The read-only `introai9` queue observation is empty and no login-node GPU
+> command was executed. Do not create a remapping or clean-split experiment as
+> a local repair; the next permitted step is a fresh problem-level source audit.
+> `junjinyong` must never be connected, queried, used for transfer/submission or
+> monitored for AURORA.
+
 > **Schema 6.9 P0 outcome · 2026-08-10:** Exact `introai9` job
 > `115622.ECE-util1` finished `F`/exit 1 after 00:02:24. The private status says
 > `scientific_gate_evaluated=false`; aggregate result and raw PBS output are

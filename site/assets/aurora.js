@@ -116,24 +116,24 @@
 
   const modes = {
     presence: {
-      description: "The weak sphere is an observed outer set W, not a precise lesion mask.",
-      connector: "Y ⊆ W only",
-      title: "Containment, not pseudo-truth",
-      copy: "The unknown lesion Y must lie inside W; the hidden annotation-coarsening mechanism is not estimated",
+      description: "A WSS vector belongs to the local tangent plane of an oriented vessel surface.",
+      connector: "tangent plane?",
+      title: "Tangency is unverified",
+      copy: "Normals are recomputed, but the inspected path has no explicit post-transfer WSS tangent projection",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Official small lists are reconciled to the released tree at the subject level only.",
-      connector: "subject join",
-      title: "246 weak + 38 precise",
-      copy: "Four code-only weak subjects are excluded; rewritten session strings are never used as identity keys",
+      description: "Pointwise interpolation need not conserve area-weighted WSS, extrema, hotspots or derived functionals.",
+      connector: "commute?",
+      title: "Functionals need a transfer contract",
+      copy: "Remap-then-integrate and integrate-then-remap must be compared under conservative and tangent-aware controls",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "The one-shot P0 finished without an aggregate, so none of its ten registered checks has a verdict.",
-      connector: "closed · 0/10",
-      title: "No scientific verdict",
-      copy: "Final F/exit 1; the exact source version closes without repair, rerun, P1, model or GPU",
+      description: "Normalization and checkpoint selection must not read the held-out test distribution.",
+      connector: "31.5 < 32",
+      title: "Important control, insufficient novelty",
+      copy: "Train-only statistics and validation-only selection are mandatory, but they do not create an independent algorithm",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

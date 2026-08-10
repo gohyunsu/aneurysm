@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.0 current boundary · 2026-08-10:** A credential-managed,
+> read-only `qstat -u introai9` observation returned an empty queue for AURORA.
+> No GPU command was executed on the login node. The new AneuG target-
+> construction source audit peaks at 31.5/40 below admission, so it creates no
+> PBS script, CPU P0, GPU allocation or monitoring loop. A future job may run
+> only through `introai9` PBS after a fresh candidate passes its source and
+> method-free gates. `junjinyong` belongs to another project and is forbidden
+> for SSH, status queries, code/data transfer, submission and monitoring.
+
 > **Schema 6.9 final execution · 2026-08-10:** Exact source `bb227edc…` ran
 > once on `introai9` CPU/PBS as `115622.ECE-util1`; final state `F`, exit 1,
 > walltime 00:02:24, CPU 00:00:00, memory 15,328 kB and GPU 0. Only the

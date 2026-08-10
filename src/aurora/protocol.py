@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.9":
-        raise ProtocolError("The current research-state schema must be version 6.9.")
+    if protocol["schema_version"] != "7.0":
+        raise ProtocolError("The current research-state schema must be version 7.0.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "openneuro_containment_morphometry_p0_execution_incomplete_closed_no_method_or_gpu"
+        != "aneug_target_construction_source_audit_all_rejected_no_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "introai9_openneuro_p0_final_F_exit_1_no_running_or_queued_aurora_job"
+        != "introai9_queue_empty_20260810_no_aurora_job_no_login_node_gpu_command"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -220,6 +220,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "topbrain2_source_audit",
             "four_d_cta_aaa_mechanics_source_audit",
             "openneuro_containment_morphometry_source_audit",
+            "aneug_target_construction_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -230,13 +231,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "openneuro_containment_morphometry_p0_execution_incomplete_closed_no_active_source_lead"
+        != "aneug_target_construction_source_audit_all_rejected_no_active_source_lead"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_git_tree_and_small_supervision_metadata_only_no_patient_image_or_mask_payload"
+        != "official_public_paper_code_and_repository_metadata_only_no_field_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -248,17 +249,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_primary_source_and_asset_audit_without_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/openneuro-containment-morphometry-source-audit-2026-08-10.md"
+        != "docs/aneug-target-construction-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "containment_identified_morphometry_envelopes_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "acquisition_quality_indexed_external_lesion_set_risk"
+        != "surface_vector_tangency_and_functional_commutation"
         or problem_selection["most_recent_conditional_source_lead"]
         != "containment_identified_morphometry_envelopes"
     ):
         raise ProtocolError(
-            "The incomplete OpenNeuro containment P0 must leave no active source lead, "
-            "patient payload, method, GPU, outer test, or submission claim."
+            "The AneuG target-construction audit must leave no active source lead, "
+            "field payload, method, GPU, outer test, or submission claim."
         )
     bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
     _require_keys(
@@ -600,6 +601,138 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "CPU-only execution-incomplete closure without payload, repair, or re-entry."
         )
     checks.append("OpenNeuro containment metadata/P0 boundary")
+    target_audit = problem_selection["aneug_target_construction_source_audit"]
+    _require_keys(
+        target_audit,
+        [
+            "status",
+            "audit_document",
+            "dataset_repo",
+            "dataset_commit",
+            "code_repo",
+            "code_commit",
+            "paper_release",
+            "reported_steady_cases",
+            "reported_transient_cases",
+            "reported_registered_wss_relative_l2_percent",
+            "registered_surface_interpolator",
+            "registered_coordinates_and_wss_interpolated_together",
+            "registered_common_connectivity_retained",
+            "registered_normals_recomputed_after_coordinate_transfer",
+            "explicit_wss_tangent_projection_after_transfer",
+            "explicit_area_or_functional_conservation_after_transfer",
+            "processed_steady_normalization_before_random_split",
+            "best_checkpoint_selected_on_test_loader_each_epoch",
+            "transient_split_uses_ordered_prefix_matching",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "candidates",
+            "direct_prior_threats",
+            "field_or_mesh_payload_accessed",
+            "large_model_or_checkpoint_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_pbs_jobs_observed",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_allowed_action",
+        ],
+        "AneuG target-construction source audit",
+    )
+    expected_target_scores = {
+        "surface_vector_tangency_and_functional_commutation": 31.5,
+        "area_integral_and_hotspot_conservative_target_transport": 31.0,
+        "coordinate_connectivity_orientation_and_area_validity": 30.5,
+        "remap_then_integrate_vs_integrate_then_remap_transient_functionals": 30.5,
+        "split_blind_normalization_provenance": 30.0,
+        "test_blind_checkpoint_and_prefix_split_reaudit": 29.5,
+    }
+    observed_target_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in target_audit["candidates"]
+    }
+    if (
+        target_audit["status"]
+        != "completed_source_only_all_rejected_below_admission_threshold"
+        or target_audit["audit_document"]
+        != "docs/aneug-target-construction-source-audit-2026-08-10.md"
+        or target_audit["dataset_commit"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or target_audit["code_commit"]
+        != "4a090a0f12538deef6fcea88b81afe78ce38152e"
+        or target_audit["reported_steady_cases"] != 14000
+        or target_audit["reported_transient_cases"] != 730
+        or target_audit["reported_registered_wss_relative_l2_percent"] != 4.67
+        or target_audit["registered_surface_interpolator"]
+        != "torch_geometric_knn_interpolate_k3"
+        or target_audit["registered_coordinates_and_wss_interpolated_together"]
+        is not True
+        or target_audit["registered_common_connectivity_retained"] is not True
+        or target_audit["registered_normals_recomputed_after_coordinate_transfer"]
+        is not True
+        or target_audit["explicit_wss_tangent_projection_after_transfer"] is not False
+        or target_audit["explicit_area_or_functional_conservation_after_transfer"]
+        is not False
+        or target_audit["processed_steady_normalization_before_random_split"]
+        is not True
+        or target_audit["best_checkpoint_selected_on_test_loader_each_epoch"]
+        is not True
+        or target_audit["transient_split_uses_ordered_prefix_matching"] is not True
+        or target_audit["automatic_selection_threshold"] != 32.0
+        or target_audit["best_candidate_id"]
+        != "surface_vector_tangency_and_functional_commutation"
+        or target_audit["best_score"] != 31.5
+        or observed_target_scores != expected_target_scores
+        or any(
+            sum(candidate["axis_scores"]) != candidate["score"]
+            for candidate in target_audit["candidates"]
+        )
+        or set(target_audit["direct_prior_threats"])
+        != {
+            "conservative_supermesh_interpolation_between_unstructured_meshes",
+            "optimal_transport_neural_operator_for_varying_geometries",
+            "conservation_law_neural_operator",
+            "generic_surface_vector_tangent_projection_or_parallel_transport",
+            "generic_train_only_normalization_and_test_blind_checkpoint_selection",
+        }
+        or any(
+            target_audit[key] is not False
+            for key in (
+                "field_or_mesh_payload_accessed",
+                "large_model_or_checkpoint_accessed",
+                "executable_p0_registered",
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "pbs_job_created",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or target_audit["execution_server"] != "introai9"
+        or target_audit["introai9_connection_verified"] is not True
+        or target_audit["introai9_pbs_jobs_observed"] != 0
+        or target_audit["decision"]
+        != "reject_all_without_score_repair_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or target_audit["next_allowed_action"]
+        != "fresh_problem_level_primary_source_and_asset_audit_not_aneug_target_construction_repair_or_training"
+    ):
+        raise ProtocolError(
+            "The AneuG target-construction audit must preserve all six frozen "
+            "sub-threshold scores, public-source-only access, and no compute or method."
+        )
+    checks.append("AneuG target-construction source rejection boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -720,6 +853,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "acquisition_quality_indexed_external_lesion_set_risk",
         "cross_center_weak_to_strong_segmentation",
         "conformal_lesion_fnr_control",
+        "surface_vector_tangency_and_functional_commutation",
+        "area_integral_and_hotspot_conservative_target_transport",
+        "coordinate_connectivity_orientation_and_area_validity",
+        "remap_then_integrate_vs_integrate_then_remap_transient_functionals",
+        "split_blind_normalization_provenance",
+        "test_blind_checkpoint_and_prefix_split_reaudit",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -827,6 +966,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_morphological_conformal_segmentation_set",
         "generic_downstream_segmentation_metric_conformal_interval",
         "generic_three_d_lesion_fnr_conformal_threshold",
+        "generic_knn_barycentric_or_conservative_surface_field_remapping",
+        "generic_surface_vector_tangent_projection_or_parallel_transport",
+        "generic_train_only_normalization_and_test_blind_checkpoint_selection",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -5519,7 +5661,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_after_openneuro_containment_p0_execution_incomplete_no_primary_method_or_gpu"
+        != "unselected_after_aneug_target_construction_source_rejection_no_primary_method_or_gpu"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -5682,7 +5824,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_candidate_after_openneuro_containment_p0_execution_incomplete"
+        != "no_active_candidate_after_aneug_target_construction_source_rejection"
         or task["candidate_primary_estimand"] is not None
         or task["candidate_secondary_estimand"] is not None
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

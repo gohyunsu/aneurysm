@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 AneuG target-construction audit · schema 7.0:** Official paper,
+> exact code `4a090a0…` and dataset metadata `9dd4180…` show that registered
+> coordinates and WSS are transferred together by `k=3` interpolation while
+> common connectivity is retained, without an explicit tangent projection or
+> area/functional conservation step. The official training path also normalizes
+> before split and selects its best checkpoint on test loss. These are real
+> target/evaluation risks, but conservative surface remapping, tangent-aware
+> vector transfer, train-only normalization and test-blind selection are direct
+> priors or mandatory controls. Six frozen candidates score
+> **31.5/31.0/30.5/30.5/30.0/29.5**, all below 32. No payload, P0, method,
+> architecture or GPU job is created. A read-only `introai9` queue check found
+> no AURORA job; no login-node GPU command ran. `junjinyong` is prohibited.
+> [Detailed audit](docs/aneug-target-construction-source-audit-2026-08-10.md)
+
 > **2026-08-10 OpenNeuro P0 outcome · schema 6.9:** Exact public source
 > `bb227edc86bf3b68e92b97f120a7918b0753c831` ran once on `introai9` as
 > CPU-only PBS job `115622.ECE-util1` (2 CPU, 4 GB, GPU 0). It finished `F`,

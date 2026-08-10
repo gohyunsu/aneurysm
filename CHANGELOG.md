@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-10 · Schema 7.0 rejects the AneuG target-construction batch
+
+- Pinned official AneuG-Flow paper, code commit `4a090a0…` and dataset commit
+  `9dd4180…`; inspected source and repository metadata without field/mesh or
+  checkpoint payload.
+- Recorded `k=3` coordinate/WSS registration with retained common connectivity,
+  absent explicit tangent/functional conservation, pre-split normalization,
+  test-loss checkpoint selection and ordered-prefix transient splitting.
+- Froze six candidates at 31.5/31.0/30.5/30.5/30.0/29.5, all below the unchanged
+  32-point admission line. Conservative remapping, tangent vector transfer and
+  test-blind evaluation remain direct priors/controls rather than novelty.
+- Created no P0, model, architecture, PBS/GPU, outer test or paper result. A
+  read-only `introai9` queue observation was empty and no login-node GPU command
+  ran. `junjinyong` remains completely prohibited for AURORA.
+- Added the detailed beginner-readable audit, schema guards, mutation tests and
+  synchronized public research/site/private-planning state.
+
 ## 2026-08-10 · Schema 6.9 closes OpenNeuro P0 without a scientific verdict
 
 - Ran exact source `bb227edc86bf3b68e92b97f120a7918b0753c831` once on

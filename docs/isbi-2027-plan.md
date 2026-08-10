@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.0 submission boundary · 2026-08-10:** AneuG-Flow target transfer
+> and evaluation hygiene do not define the paper identity. The best fresh
+> candidate is 31.5/40, so title, contribution, method, architecture, result
+> table and figure row remain unassigned. Do not fill the four-page paper with
+> conservative remapping, tangent projection or test-blind evaluation as if
+> they were novelty. A different source-admitted, method-free-gated problem is
+> required before any `introai9` GPU work. `junjinyong` is excluded.
+
 > **Schema 6.9 planning boundary · 2026-08-10:** The OpenNeuro candidate adds
 > no result row, contribution, architecture, figure or paper identity because
 > its P0 ended execution-incomplete with 0/10 checks evaluated. Active source

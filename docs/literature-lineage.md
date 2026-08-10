@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 target-construction update:** AneuG-Flow's public registration
+> path makes conservative/tangent-aware surface transfer and test-blind
+> evaluation mandatory controls. Farrell et al. already establish conservative
+> unstructured-mesh interpolation; OTNO handles varying-geometry transport; and
+> conservation-law neural operators occupy generic conserved-function learning.
+> Consequently, `k`-NN replacement, tangent projection, conservation loss,
+> train-only normalization and validation-only checkpoint selection cannot be
+> individual contributions. The fresh six-candidate batch peaks at 31.5/40 and
+> opens no P0/model/GPU. See
+> [the exact audit](aneug-target-construction-source-audit-2026-08-10.md).
+
 > **Schema 6.9 outcome · 2026-08-10:** The containment residual was not tested:
 > its metadata P0 produced no aggregate and no scientific verdict. Direct
 > priors still occupy aneurysm weak supervision, morphological/FNR conformal

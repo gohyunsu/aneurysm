@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — OpenNeuro containment metadata P0의 execution-incomplete/no-verdict 종료와 active source lead 0을 투명하게 보존하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — AneuG-Flow surface target construction과 evaluation leakage 위험을 검토하고 31.5/40 source rejection, no-model, introai9-only 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -42,25 +42,26 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          A source lead is not a result.<br>
-          <em>This P0 reached no scientific verdict.</em>
+          A real flaw is not automatically novelty.<br>
+          <em>Audit the target before training the model.</em>
         </h1>
         <p class="hero-lede">
-          새 후보는 거친 구형 라벨을 정답 마스크로 바꾸려 하지 않습니다. 실제
-          병변 <i>Y</i>가 관측된 외곽 집합 <i>W</i> 안에 있다는
-          <i>Y ⊆ W</i>만 사용해, 가능한 병변 마스크의 집합과 부피처럼 단조인
-          형태 지표의 구간을 정의할 수 있는지 물었습니다. Source score는
-          32.5/40이었지만, 정확히 한 번 실행한 metadata P0가 exit 1로 끝나
-          10개 검사가 모두 미평가입니다. 따라서 containment가 타당한지조차
-          아직 모릅니다. 이 exact version은 재실행 없이 닫혔고, 환자 영상·
-          마스크 본문, 모델, GPU와 outer test는 열지 않았습니다. 현재 active
-          source lead·primary·method·architecture·contribution은 모두 0입니다.
+          AneuG-Flow 공식 코드는 좌표와 WSS를 <i>k</i>=3 보간으로 공통 mesh에
+          함께 옮기고 연결성은 유지합니다. 그러나 확인한 경로에는 WSS tangent
+          projection이나 면적·functional 보존이 명시되어 있지 않고, 공식 학습
+          경로는 split 전 정규화와 test-loss checkpoint 선택을 사용합니다.
+          중요한 위험이지만, conservative surface transfer, tangent-aware vector
+          transport와 test-blind evaluation은 이미 직접 선행 또는 필수 통제입니다.
+          여섯 후보의 최고점은 31.5/40으로 32점선 아래입니다. 따라서 payload,
+          P0, GNN·Transformer·neural operator, GPU와 outer test를 열지 않았습니다.
+          현재 active source lead·primary·method·architecture·contribution은 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/openneuro-containment-morphometry-source-audit-2026-08-10.md">Current OpenNeuro audit ↗</a>
+          <a class="button ghost" href="../docs/aneug-target-construction-source-audit-2026-08-10.md">Current target audit ↗</a>
+          <a class="button ghost" href="../docs/openneuro-containment-morphometry-source-audit-2026-08-10.md">Historical OpenNeuro audit ↗</a>
           <a class="button ghost" href="../results/openneuro_containment_morphometry_p0_execution_20260810.json">P0 outcome ↗</a>
           <a class="button ghost" href="../configs/openneuro_containment_morphometry_p0.json">Frozen metadata P0 ↗</a>
           <a class="button ghost" href="../docs/aneumo-bc-transport-source-audit-2026-08-10.md">Historical BC-transport audit ↗</a>
@@ -101,8 +102,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="외곽 weak label 안의 가능한 병변 집합을 다루는 현재 연구 질문">
-        <div class="visual-caption">OPENNEURO · CLOSED SOURCE HISTORY · P0 INCOMPLETE</div>
+      <div class="hero-visual" aria-label="곡면 혈관에서 WSS 벡터와 surface target transfer를 설명하는 현재 연구 질문">
+        <div class="visual-caption">ANEUG-FLOW · TARGET CONSTRUCTION AUDIT · ALL REJECTED</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -125,25 +126,25 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>32.5</b><span>historical source score · not a result</span>
+            <b>31.5</b><span>best fresh source score · below 32</span>
           </div>
           <div class="posterior-card card-b">
-            <b>0/10</b><span>registered checks evaluated</span>
+            <b>6/6</b><span>fresh formulations rejected</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>active lead · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> 246 weak + 38 precise is preserved source-audit history</span>
-          <span><i class="dot coral"></i> weak sphere means containment, never a precise mask</span>
-          <span>introai9 P0 final F/exit 1 · no verdict · no rerun</span>
+          <span><i class="dot lime"></i> exact official code + dataset metadata inspected</span>
+          <span><i class="dot coral"></i> target risk ≠ independent algorithmic novelty</span>
+          <span>introai9 queue empty · no login-node GPU command · no job created</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Active source lead</span><b>0 · 32.5/40 preserved as history</b></div>
-        <div><span>Exact P0</span><b>F / exit 1 · 0/10 checks · no verdict</b></div>
+        <div><span>Active source lead</span><b>0 · fresh best 31.5/40 rejected</b></div>
+        <div><span>Current compute</span><b>introai9 queue empty · P0/PBS job 0</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
         <div><span>Next action</span><b>fresh problem-level source/asset audit</b></div>
       </div>
@@ -154,12 +155,11 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          기존 weak-to-strong 후보는 같은 피험자의 실제 weak·독립 precise pair가
-          없어 31.5/40으로 기각된 채 보존됩니다. 새 질문은 숨은 annotation 과정을
-          추정하지 않고 관측 가능한 containment만 사용합니다. 따라서 별도 evidence
-          version이었지만 metadata P0가 scientific verdict 전에 종료됐습니다.
-          같은 계약은 재실행하지 않으며, 이 후보를 방법론이나 negative result로
-          부르지 않습니다.
+          공식 target 생성이 물리적으로 완전한지와 그 결함을 고치는 일이 새
+          algorithm인지 분리했습니다. Tangency, 면적 보존, hotspot 보존과 clean
+          evaluation은 모두 중요하지만 established control입니다. 독립적인
+          operator-specific estimand와 guarantee가 남지 않은 상태에서 모델 이름을
+          붙이거나 GPU를 쓰지 않습니다.
         </p>
       </div>
 
@@ -213,16 +213,16 @@
           <p class="eyebrow">CURRENT GAP STATUS</p>
           <h3>No gap is currently active.</h3>
           <p>
-            Weak aneurysm segmentation, morphological conformal prediction,
-            lesion-FNR control, COMPASS와 partial identification이 직접 선행입니다.
-            남았던 질문은 hidden coarsening을 학습하지 않고도 containment가 더
-            좁고 유효한 morphometry envelope를 만드는가였습니다. 그러나 P0가
-            결과를 만들지 못해 이 gap은 검증되지 않았고 exact version은 닫혔습니다.
+            Conservative unstructured-mesh interpolation, surface-vector
+            projection/transport, OT-based varying-geometry operators,
+            conservation-law operators와 test-blind evaluation이 직접 선행 또는
+            필수 통제입니다. AneuG target 위험은 실제지만 이를 고치는 obvious
+            mechanism 뒤에 독립적인 algorithmic gap이 충분히 남지 않습니다.
           </p>
           <div class="gap-equation" aria-label="현재 source lead가 방법론 검증으로 이어지는 조건">
-            <span>32.5/40 historical source lead</span>
+            <span>31.5/40 fresh best</span>
             <i>⇒</i>
-            <span>P0 incomplete ⇒ 0/10 verdict · no repair/P1/model/GPU</span>
+            <span>&lt; 32 ⇒ no payload/P0/model/GPU</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -253,10 +253,10 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 아래는 환자 영상을 읽기 전에 공개
-          metadata만으로 무엇을 확인하는지 보여줍니다. P0는 라벨 계보와 독립 단위를
-          검증하려 했지만 result가 없어 segmentation 성능이나 morphometry 품질은
-          물론 metadata gate 자체도 평가되지 않았습니다.
+          현재 architecture는 없습니다. 아래는 대형 field를 받거나 GPU를 쓰기
+          전에 official source만으로 target transfer와 evaluation path를 어떻게
+          분해했는지 보여줍니다. 중요한 결함 후보와 새 contribution을 같은 것으로
+          취급하지 않는 것이 이 단계의 핵심입니다.
         </p>
       </div>
 
@@ -264,70 +264,69 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
-          맞습니다. 현재 모델은 없습니다. 과거 mesh GNN과 boundary-aware
-          Perceiver는 prospective gate를 통과하지 못했고, 이번 후보는 아직
-          닫힌 metadata P0 history입니다. 0/10 checks로 verdict가 없으므로 P1과
-          architecture를 열 수 없습니다.
+          현재 모델은 없습니다. GNN, Graph Transformer, E(3) network와 neural
+          operator는 모두 가능한 구현 계열일 뿐 novelty가 아닙니다. 이번 최고
+          source score가 31.5/40이라 P0와 architecture gate 자체가 열리지 않았습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="OpenNeuro containment metadata P0 설명">
-        <button class="active" type="button" data-mode="presence">Containment</button>
-        <button type="button" data-mode="point">Lineage</button>
-        <button type="button" data-mode="mask">Gate</button>
-          <span id="mode-description">The weak sphere is an observed outer set W, not a precise lesion mask.</span>
+      <div class="mode-switch" role="group" aria-label="AneuG-Flow target construction audit 설명">
+        <button class="active" type="button" data-mode="presence">Surface vector</button>
+        <button type="button" data-mode="point">Functional</button>
+        <button type="button" data-mode="mask">Evaluation</button>
+          <span id="mode-description">A WSS vector belongs to the local tangent plane of an oriented vessel surface.</span>
       </div>
 
       <div class="architecture-flow">
         <article class="arch-node input-node">
           <span class="arch-number">01</span>
-          <p class="arch-label">PUBLIC SOURCE SNAPSHOT</p>
-          <h3>Exact OpenNeuro tree</h3>
-          <p>5,737 paths · 284 subjects · no patient NIfTI body read</p>
+          <p class="arch-label">OFFICIAL SOURCE SNAPSHOT</p>
+          <h3>Exact AneuG-Flow code</h3>
+          <p>Code 4a090a0… · dataset 9dd4180… · no field/mesh body read</p>
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <a class="arch-learn" href="../docs/openneuro-containment-morphometry-source-audit-2026-08-10.md">근거 record</a>
+          <a class="arch-learn" href="../docs/aneug-target-construction-source-audit-2026-08-10.md">근거 record</a>
         </article>
-        <div class="arch-connector"><span>safe opcode parse</span></div>
+        <div class="arch-connector"><span>source inspection</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">SUPERVISION LISTS</p>
-          <h3>Weak 250 · precise 38</h3>
-          <p>Two tiny official pickle blobs are inspected without unpickling or execution</p>
+          <p class="arch-label">REGISTERED TARGET</p>
+          <h3>Coordinates + WSS</h3>
+          <p><code>knn_interpolate(k=3)</code> moves both onto common connectivity</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">라벨과 모델 구분</a>
         </article>
-        <div class="arch-connector accent"><span id="bc-connector-label">Y ⊆ W only</span></div>
+        <div class="arch-connector accent"><span id="bc-connector-label">tangent plane?</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">OBSERVED STATEMENT</p>
-          <h3 id="bc-node-title">Containment, not pseudo-truth</h3>
-          <p id="bc-node-copy">Unknown lesion Y must lie inside observed outer set W; the coarsening mechanism is not estimated</p>
+          <p class="arch-label">STRUCTURAL QUESTION</p>
+          <h3 id="bc-node-title">Tangency is unverified</h3>
+          <p id="bc-node-copy">Normals are recomputed, but the inspected path has no explicit post-transfer WSS tangent projection</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
-          <a class="arch-learn" href="../configs/openneuro_containment_morphometry_p0.json">frozen contract</a>
+          <a class="arch-learn" href="../configs/aurora_v1.json">machine contract</a>
         </article>
-        <div class="arch-connector"><span>subject-only join</span></div>
+        <div class="arch-connector"><span>leakage audit</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">SOURCE-AUDIT PARTITION</p>
-          <h3>246 weak + 38 precise</h3>
+          <p class="arch-label">EVALUATION CONTRACT</p>
+          <h3>Train / validation / test</h3>
           <div class="dual-branch">
-            <span><b>Code-only weak</b>4 excluded</span>
-            <span><b>Session matches</b>11 only</span>
+            <span><b>Normalization</b>before split</span>
+            <span><b>Checkpoint</b>test MSE</span>
           </div>
-          <p>Session dates are rejected as join keys after release de-identification</p>
+          <p>Clean controls require train-only statistics, family-disjoint split and validation-only selection</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
-        <div class="arch-connector"><span>all-or-none P0</span></div>
+        <div class="arch-connector"><span>frozen score</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">CURRENT DECISION</p>
-          <h3>Closed · no verdict</h3>
+          <h3>31.5 &lt; 32 · rejected</h3>
           <p>Final F/exit 1 · 0/10 checks · no result, repair, rerun or P1</p>
           <div class="output-meter"><i></i><span>primary / method / model / GPU</span><b>still 0</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
@@ -603,7 +602,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>No active source lead · P0 execution-incomplete · no paper identity</p>
+        <p>No active source lead · all fresh candidates rejected · no paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -611,7 +610,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>OpenNeuro P0 closed · 0/10 verdict · primary/method/model/GPU 0</b>
+        <span>Current stage</span><b>AneuG target audit best 31.5/40 · primary/method/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

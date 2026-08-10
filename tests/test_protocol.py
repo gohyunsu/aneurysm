@@ -89,15 +89,44 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment"):
+        with self.assertRaisesRegex(ProtocolError, "AneuG target-construction"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment"):
+        with self.assertRaisesRegex(ProtocolError, "AneuG target-construction"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment"):
+        with self.assertRaisesRegex(ProtocolError, "AneuG target-construction"):
+            validate_protocol(candidate)
+
+    def test_aneug_target_construction_audit_rejects_compute_and_score_repair(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "aneug_target_construction_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 31.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertFalse(audit["field_or_mesh_payload_accessed"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["introai9_pbs_jobs_observed"], 0)
+        self.assertFalse(audit["login_node_gpu_command_executed"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "aneug_target_construction_source_audit"
+        ]["best_score"] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "AneuG target-construction"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "aneug_target_construction_source_audit"
+        ]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "AneuG target-construction"):
             validate_protocol(candidate)
 
     def test_aneumo_bc_transport_p0_closes_execution_incomplete(self) -> None:

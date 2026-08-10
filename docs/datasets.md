@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.0 AneuG-Flow boundary · 2026-08-10:** Official paper/code and
+> repository metadata were inspected; no wall/blood tensor, OBJ body, external
+> GHD checkpoint or model weight was downloaded. The current audit records how
+> registered coordinates/WSS and evaluation splits are constructed, but rejects
+> every formulation below 32. AneuG-Flow remains source history and a possible
+> future baseline asset, not an active training dataset. Any new access requires
+> a different admitted candidate and `introai9`-only gate; never `junjinyong`.
+
 > **Schema 6.9 OpenNeuro outcome · 2026-08-10:** The metadata P0 produced no
 > aggregate and retained none of its five registered small objects. The public
 > 284 = 246 weak + 38 precise mapping remains source-audit history, not a
