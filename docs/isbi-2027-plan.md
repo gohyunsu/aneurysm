@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 6.8 planning boundary · 2026-08-10:** One OpenNeuro containment-
+> morphometry source candidate is admitted at 32.5/40, but it is not the paper's
+> selected primary or contribution. The current action is a metadata-only P0;
+> method, architecture, GPU, outer test, result table and submission identity
+> remain zero. Only a separate method-free P1 can test whether containment
+> produces a nontrivial, tighter and valid morphometry envelope against direct
+> controls. The ISBI manuscript remains `not submission-ready`. All authorized
+> AURORA execution is `introai9` PBS only; `junjinyong` remains prohibited.
+
 > **Schema 6.7 author-compliance boundary · 2026-08-10:** Official authorship,
 > originality, preprint, ethics, funding/COI and submission-link rules are now
 > machine-guarded and visible on the public site. This administrative hardening

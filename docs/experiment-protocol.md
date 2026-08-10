@@ -1,5 +1,18 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 6.8 prospective P0 · 2026-08-10:** One exact metadata-only audit is
+> registered for the OpenNeuro containment-morphometry lead. It may fetch only
+> the pinned 5,737-path Git tree, dataset description, two small supervision
+> lists parsed without unpickling, and the code license. The all-required gate
+> checks 284 public subjects, 296 manual-mask subject-session paths, 494 mask
+> paths, 246 weak + 38 precise subjects, exactly four code-only weak subjects,
+> disjoint supervision groups, subject-only joining and CC0/Apache-2.0 licenses.
+> Patient image/mask bodies, participants/clinical tables, model/checkpoint,
+> outer test and GPU access are forbidden. Run exactly once on `introai9` PBS
+> with CPU 2/4 GB/GPU 0; never use `junjinyong`. Pass authorizes only registration
+> of a distinct method-free P1. Fail or execution-incomplete closes this version
+> without repair/rerun.
+
 > **Schema 6.6 outcome · 2026-08-10:** Exact Aneumo BC-transport P0 job
 > `115518.ECE-util1` ended exit 1 before an aggregate result materialized. The
 > private status marks `scientific_gate_evaluated=false`; no raw PBS output is

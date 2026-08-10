@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · BC-transport P0 execution-incomplete/no verdict · active source lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "a different fresh problem must pass source and method-free task-adequacy gates before any architecture or GPU work",
+    status: "Target locked · OpenNeuro containment metadata P0 registered · one conditional source lead · primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "the metadata P0 and a separately registered method-free task-adequacy P1 must pass before any architecture or GPU work",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Observed containment creates a narrow estimand without pretending the weak label is truth",
+      copy: "OpenNeuro ds003949 and the official code reconcile 284 public subjects into 246 weak-label and 38 precise-label subjects after excluding four code-only weak subjects. The new formulation uses only Y ⊆ W for an observed outer sphere W; it neither learns the real coarsening mechanism nor creates same-subject weak/precise pairs. Weak aneurysm segmentation, WeakMed, morphological conformal prediction, lesion-FNR control, COMPASS and partial-identification evaluation are mandatory direct controls. The fresh score is 32.5/40, with residual gap only 2/5.",
+      status: "One conditional source lead · metadata P0 registered · no primary/method/architecture/GPU",
+      url: "../docs/openneuro-containment-morphometry-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "One anchor CFD solve creates a realistic transport question, not yet a method",
@@ -408,12 +415,19 @@ window.AURORA_DATA = Object.freeze({
   ],
   competition: [
     ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
-    ["Input", "geometry + U(q0) + q/q0", "analytic power scaling", "same-geometry field transport", "P0 semantics only"],
-    ["Learning", "eight observed steady flows", "DeltaPhi residual", "irregular condition orbit", "no architecture selected"],
-    ["Structure", "aligned coordinates", "scale consistency + boundary extensions", "identity + ratio/path diagnostics", "must beat controls prospectively"],
-    ["Evidence", "32-family pilot; P0 intended one family", "historical V1/V1e failures", "33.5/40; residual gap 2/5", "incomplete → close; no P1"]
+    ["Input", "weak outer set W; Y ⊆ W", "VP-UNet / FocalSegNet / WeakMed", "set-valued lesion support", "metadata lineage only"],
+    ["Uncertainty", "precise masks on disjoint subjects", "morphological conformal + lesion FNR", "valid monotone-morphometry interval", "no architecture selected"],
+    ["Evaluation", "subject-level 246 weak + 38 precise", "COMPASS + partial identification", "tightness without invalid pseudo-truth", "P1 required prospectively"],
+    ["Evidence", "exact public metadata; no NIfTI body", "historical 31.5 coarsening rejection", "32.5/40; residual gap 2/5", "one introai9 CPU P0 registered"]
   ],
   gates: [
+    {
+      id: "P0-C",
+      title: "Does the public OpenNeuro release support the registered subject-level containment task?",
+      copy: "One exact introai9 CPU/PBS metadata audit checks the 5,737-path tree, 284 public subjects, 296 manual-mask subject-session paths, 494 mask paths, safe opcode-only parsing of 38 precise and 262 weak list entries, the exact four code-only weak subjects, the 246+38 public partition, subject-only joining and CC0/Apache-2.0 licenses. It reads no NIfTI body, participant/clinical table, model, checkpoint, GPU or outer test.",
+      state: "Preregistered · CPU 2/4 GB/GPU 0 · pass opens method-free P1 only · fail/incomplete closes without rerun",
+      blocking: true
+    },
     {
       id: "P0-BC",
       title: "Does the Aneumo source support a nondegenerate anchor-conditioned transport task?",
@@ -563,6 +577,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "OpenNeuro ds003949 · containment metadata P0",
+      role: "current conditional source lead at metadata-lineage stage only; no training or outer-test role",
+      provenance: "CC0 · tag 1.0.1 / commit 896b884… · 284 public subjects = 246 weak + 38 precise · four code-only weak subjects · subject-only join · no NIfTI/clinical/model payload · one introai9 CPU P0 registered"
+    },
     {
       name: "Aneumo · anchor-conditioned BC transport P0",
       role: "closed BC-transport P0 source history; not current acquisition, training or evaluation",
@@ -735,6 +754,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Schema 6.8 opens one OpenNeuro containment metadata P0",
+      copy: "A distinct fresh formulation preserves the rejected 31.5/40 coarsening-mechanism candidate and uses only the observed statement Y ⊆ W. Exact public metadata reconcile 284 subjects into 246 weak and 38 precise subjects, with four code-only weak subjects and session strings rejected as join keys. The 32.5/40 score opens one all-required introai9 CPU metadata P0. Patient NIfTI, clinical tables, model/checkpoint, GPU and outer test remain zero. Pass can register method-free P1 only; failure or incomplete closes the exact version without repair/rerun. No primary, method, architecture, contribution or submission identity is selected, and junjinyong remains excluded.",
+      files: ["docs/openneuro-containment-morphometry-source-audit-2026-08-10.md", "configs/openneuro_containment_morphometry_p0.json", "src/aurora/openneuro_containment_morphometry_p0.py", "scripts/audit_openneuro_containment_morphometry_p0.py", "cluster/pbs_openneuro_containment_morphometry_p0.pbs", "configs/aurora_v1.json", "site/index.html", "site/learn.html", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

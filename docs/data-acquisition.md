@@ -1,5 +1,13 @@
 # Dataset acquisition plan
 
+> **Schema 6.8 acquisition boundary · 2026-08-10:** The only authorized read is
+> five small/public OpenNeuro/code metadata objects in one `introai9` CPU/PBS
+> P0: recursive Git tree JSON, dataset description, two supervision-list blobs
+> parsed without unpickling, and the code license. Do not read or download NIfTI
+> image/mask bodies, participant/clinical tables, pretrained models, checkpoints
+> or outer-test material. P0 pass is not acquisition permission; it opens only
+> registration of a separate method-free P1. `junjinyong` remains prohibited.
+
 > **Schema 6.6 acquisition outcome · 2026-08-10:** The one authorized Aneumo
 > selective-read P0 ended before an aggregate result. No persistent field cache,
 > completed/partial source payload or model artifact was retained. Do not repeat

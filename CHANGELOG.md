@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-10 · Schema 6.8 registers an OpenNeuro containment metadata P0
+
+- Preserved the rejected 31.5/40 coarsening-mechanism candidate without
+  relabelling it. A distinct formulation uses only observed containment
+  `Y ⊆ W` and asks for a set-valued lesion mask plus intervals for monotone
+  morphometry; it scores 32.5/40 in a fresh frozen six-candidate batch.
+- Pinned OpenNeuro `ds003949` tag `1.0.1`/commit `896b884…` and official code
+  commit `5ecdf6e…`. Safe opcode-only inspection reconciles 284 public subjects
+  into 246 weak and 38 precise subjects, with exactly four code-only weak
+  subjects. Session strings are explicitly rejected as join keys.
+- Registered one all-or-none metadata P0 reading only the Git tree, dataset
+  description, two small supervision-list blobs and licenses. Patient NIfTI,
+  participant/clinical tables, model/checkpoint, GPU and outer-test access are
+  zero. Pass opens only a separately registered method-free P1; failure or
+  incomplete closes the exact version without same-contract repair/rerun.
+- Execution is restricted to one `introai9` PBS submission with CPU 2, 4 GB,
+  GPU 0 and 20-minute walltime. `junjinyong` remains prohibited for connection,
+  query, transfer, submission and monitoring.
+- Added the detailed source audit, frozen config, stdlib audit implementation,
+  one-shot PBS wrapper, unit tests, schema-6.8 protocol guards and beginner site
+  explanations. No primary, method, architecture, contribution or paper result
+  is selected.
+
 ## 2026-08-10 · Schema 6.7 hardens the ISBI author-compliance contract
 
 - Rechecked the live official ISBI 2027 author instructions. The existing

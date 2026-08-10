@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "Aneumo BC-transport"):
+        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "Aneumo BC-transport"):
+        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "Aneumo BC-transport"):
+        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment"):
             validate_protocol(candidate)
 
     def test_aneumo_bc_transport_p0_closes_execution_incomplete(self) -> None:
@@ -105,7 +105,8 @@ class ProtocolTests(unittest.TestCase):
         audit = problem["aneumo_bc_transport_source_audit"]
         self.assertEqual(audit["score"], 33.5)
         self.assertAlmostEqual(sum(audit["axis_scores"]), 33.5)
-        self.assertEqual(problem["conditional_source_lead_count"], 0)
+        self.assertEqual(audit["conditional_source_lead_count"], 0)
+        self.assertEqual(problem["conditional_source_lead_count"], 1)
         self.assertTrue(audit["p0_registered"])
         self.assertEqual(audit["p0_train_base_families"], [1])
         self.assertEqual(audit["p0_cases"], [1, 2])
@@ -603,7 +604,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["outer_test_authorized"])
         self.assertEqual(audit["conditional_source_lead_count"], 1)
         self.assertEqual(
-            self.protocol["problem_selection"]["conditional_source_lead_count"], 0
+            self.protocol["problem_selection"]["conditional_source_lead_count"], 1
         )
         self.assertTrue(
             all(not item["payload_accessed"] for item in audit["candidates"])
@@ -614,6 +615,35 @@ class ProtocolTests(unittest.TestCase):
             "gpu_training_authorized"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "TopAneu material release"):
+            validate_protocol(candidate)
+
+    def test_openneuro_containment_lead_opens_metadata_p0_only(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["openneuro_containment_morphometry_source_audit"]
+        self.assertEqual(problem["conditional_source_lead_count"], 1)
+        self.assertEqual(audit["score"], 32.5)
+        self.assertAlmostEqual(sum(audit["axis_scores"]), 32.5)
+        self.assertEqual(audit["public_weak_subjects"], 246)
+        self.assertEqual(audit["public_precise_subjects"], 38)
+        self.assertEqual(audit["code_weak_entries"], 262)
+        self.assertEqual(audit["code_only_weak_subjects"], ["sub-115", "sub-143", "sub-181", "sub-272"])
+        self.assertFalse(audit["p0_job_submitted"])
+        self.assertFalse(audit["patient_nifti_image_or_mask_payload_accessed"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["openneuro_containment_morphometry_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment P0"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["openneuro_containment_morphometry_source_audit"][
+            "session_date_is_registered_join_key"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "OpenNeuro containment P0"):
             validate_protocol(candidate)
 
     def test_topaneu_code_semantics_red_team_rejects_historical_lead_without_relabel(self) -> None:

@@ -57,6 +57,7 @@ REQUIRED_DATASETS = {
     "tornadic_wss_topology_2026_figshare",
     "maximus_tof_model_2025",
     "rheology_slip_aneurysm_case01_2026",
+    "openneuro_ds003949",
 }
 
 
@@ -122,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.7":
-        raise ProtocolError("The current research-state schema must be version 6.7.")
+    if protocol["schema_version"] != "6.8":
+        raise ProtocolError("The current research-state schema must be version 6.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -147,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "aneumo_bc_transport_p0_execution_incomplete_no_scientific_verdict_no_method_or_gpu"
+        != "openneuro_containment_morphometry_metadata_p0_registered_no_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "introai9_scheduler_empty_after_bc_transport_p0_exit_and_removal"
+        != "introai9_scheduler_last_verified_empty_before_openneuro_metadata_p0_registration"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -218,6 +219,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "rsna_aws_registry_correction_audit",
             "topbrain2_source_audit",
             "four_d_cta_aaa_mechanics_source_audit",
+            "openneuro_containment_morphometry_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -228,13 +230,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_source_lead_after_aneumo_bc_transport_p0_execution_incomplete"
-        or problem_selection["shortlisted_candidate"] is not None
-        or problem_selection["conditional_source_lead_count"] != 0
-        or problem_selection["candidate_dataset"] is not None
-        or problem_selection["candidate_estimand"] is not None
+        != "conditional_openneuro_containment_morphometry_lead_metadata_p0_registered"
+        or problem_selection["shortlisted_candidate"]
+        != "containment_identified_morphometry_envelopes"
+        or problem_selection["conditional_source_lead_count"] != 1
+        or problem_selection["candidate_dataset"] != "openneuro_ds003949_metadata_only"
+        or problem_selection["candidate_estimand"]
+        != "set_valued_lesion_mask_and_monotone_morphometry_envelope_under_observed_containment"
         or problem_selection["asset_access_status"]
-        != "bc_transport_p0_status_only_no_aggregate_result_or_scientific_asset_verdict"
+        != "public_git_tree_and_small_supervision_metadata_only_no_patient_image_or_mask_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -244,19 +248,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_direct_prior_audit_without_bc_transport_repair_or_rerun"
+        != "submit_exact_method_free_cpu_read_only_openneuro_metadata_p0_once_on_introai9_pbs"
         or problem_selection["audit_document"]
-        != "docs/aneumo-bc-transport-source-audit-2026-08-10.md"
+        != "docs/openneuro-containment-morphometry-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "similarity_quotiented_anchor_conditioned_bc_transport_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied"
+        != "acquisition_quality_indexed_external_lesion_set_risk"
         or problem_selection["most_recent_conditional_source_lead"]
-        != "similarity_quotiented_anchor_conditioned_bc_transport"
+        != "containment_identified_morphometry_envelopes"
     ):
         raise ProtocolError(
-            "The Aneumo BC-transport lead may open only its preregistered CPU P0 "
-            "without selecting a method, GPU, outer test, or submission claim."
+            "The OpenNeuro containment lead may open only its preregistered metadata CPU P0 "
+            "without patient payload, method, GPU, outer test, or submission claim."
         )
     bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
     _require_keys(
@@ -387,6 +391,170 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "one-shot on introai9 with junjinyong excluded."
         )
     checks.append("Aneumo BC-transport conditional source/P0 boundary")
+    containment = problem_selection["openneuro_containment_morphometry_source_audit"]
+    _require_keys(
+        containment,
+        [
+            "status",
+            "audit_document",
+            "config",
+            "candidate_id",
+            "score",
+            "axis_scores",
+            "automatic_selection_threshold",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "historical_one_sided_outer_annotation_candidate_score",
+            "historical_candidate_rejected_preserved",
+            "new_version_estimates_real_coarsening_mechanism",
+            "new_version_observed_statement",
+            "same_subject_real_weak_and_independent_precise_pairs_available",
+            "dataset_commit",
+            "dataset_license",
+            "dataset_tree_paths",
+            "dataset_public_subjects",
+            "dataset_manual_mask_subject_sessions",
+            "dataset_manual_mask_nifti_paths",
+            "code_commit",
+            "code_license",
+            "code_precise_entries",
+            "code_precise_subjects",
+            "code_weak_entries",
+            "code_weak_subjects",
+            "public_precise_subjects",
+            "public_weak_subjects",
+            "code_only_weak_subjects",
+            "code_session_pairs_matching_public_tree",
+            "subject_id_is_registered_join_key",
+            "session_date_is_registered_join_key",
+            "direct_prior_threats",
+            "candidates",
+            "patient_nifti_image_or_mask_payload_accessed",
+            "participants_or_clinical_table_accessed",
+            "pretrained_model_or_checkpoint_accessed",
+            "p0_protocol_id",
+            "p0_registered",
+            "p0_submission_limit",
+            "p0_job_submitted",
+            "p0_scientific_gate_evaluated",
+            "p1_registration_authorized",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_last_verified_pbs_jobs_observed",
+            "pbs_ncpus",
+            "pbs_memory_gb",
+            "pbs_ngpus",
+            "pbs_walltime",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "p0_pass_authorizes",
+            "p0_failure_action",
+        ],
+        "OpenNeuro containment-morphometry source audit",
+    )
+    expected_containment_scores = {
+        "containment_identified_morphometry_envelopes": 32.5,
+        "openneuro_longitudinal_surface_growth_detection_direct_prior_and_unit_limited": 31.5,
+        "acquisition_quality_indexed_external_lesion_set_risk": 31.0,
+        "cross_center_weak_to_strong_segmentation": 30.5,
+        "royal_reference_morphometry_certificate_direct_prior_occupied": 30.0,
+        "conformal_lesion_fnr_control": 30.0,
+    }
+    observed_containment_scores = {
+        candidate["id"]: candidate["score"] for candidate in containment["candidates"]
+    }
+    if (
+        containment["status"]
+        != "conditional_source_lead_metadata_p0_registered_before_execution"
+        or containment["audit_document"]
+        != "docs/openneuro-containment-morphometry-source-audit-2026-08-10.md"
+        or containment["config"]
+        != "configs/openneuro_containment_morphometry_p0.json"
+        or containment["candidate_id"]
+        != "containment_identified_morphometry_envelopes"
+        or containment["score"] != 32.5
+        or sum(containment["axis_scores"]) != 32.5
+        or containment["automatic_selection_threshold"] != 32.0
+        or containment["conditional_source_lead_count"] != 1
+        or containment["primary_problem_selected"] is not False
+        or containment["historical_one_sided_outer_annotation_candidate_score"]
+        != 31.5
+        or containment["historical_candidate_rejected_preserved"] is not True
+        or containment["new_version_estimates_real_coarsening_mechanism"] is not False
+        or containment["new_version_observed_statement"]
+        != "true_lesion_mask_is_subset_of_observed_outer_sphere"
+        or containment["same_subject_real_weak_and_independent_precise_pairs_available"]
+        is not False
+        or containment["dataset_commit"]
+        != "896b8846d899acee68c0246cc987ca96e77267d4"
+        or containment["dataset_license"] != "CC0"
+        or containment["dataset_tree_paths"] != 5737
+        or containment["dataset_public_subjects"] != 284
+        or containment["dataset_manual_mask_subject_sessions"] != 296
+        or containment["dataset_manual_mask_nifti_paths"] != 494
+        or containment["code_commit"]
+        != "5ecdf6e5b9a811e4ec7472c210dada42e60cc3dc"
+        or containment["code_license"] != "Apache-2.0"
+        or containment["code_precise_entries"] != 38
+        or containment["code_precise_subjects"] != 38
+        or containment["code_weak_entries"] != 262
+        or containment["code_weak_subjects"] != 250
+        or containment["public_precise_subjects"] != 38
+        or containment["public_weak_subjects"] != 246
+        or containment["code_only_weak_subjects"]
+        != ["sub-115", "sub-143", "sub-181", "sub-272"]
+        or containment["code_session_pairs_matching_public_tree"] != 11
+        or containment["subject_id_is_registered_join_key"] is not True
+        or containment["session_date_is_registered_join_key"] is not False
+        or observed_containment_scores != expected_containment_scores
+        or any(
+            sum(candidate["axis_scores"]) != candidate["score"]
+            for candidate in containment["candidates"]
+        )
+        or any(
+            containment[key] is not False
+            for key in (
+                "patient_nifti_image_or_mask_payload_accessed",
+                "participants_or_clinical_table_accessed",
+                "pretrained_model_or_checkpoint_accessed",
+                "p0_job_submitted",
+                "p0_scientific_gate_evaluated",
+                "p1_registration_authorized",
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or containment["p0_protocol_id"]
+        != "openneuro_containment_morphometry_metadata_p0_v1"
+        or containment["p0_registered"] is not True
+        or containment["p0_submission_limit"] != 1
+        or containment["execution_server"] != "introai9"
+        or containment["introai9_connection_verified"] is not True
+        or containment["introai9_last_verified_pbs_jobs_observed"] != 0
+        or containment["pbs_ncpus"] != 2
+        or containment["pbs_memory_gb"] != 4
+        or containment["pbs_ngpus"] != 0
+        or containment["pbs_walltime"] != "00:20:00"
+        or containment["p0_pass_authorizes"]
+        != "register_separate_method_free_p1_task_adequacy_audit_only"
+        or containment["p0_failure_action"]
+        != "close_exact_candidate_version_without_same_contract_repair_or_rerun"
+    ):
+        raise ProtocolError(
+            "OpenNeuro containment P0 must preserve the exact 32.5/40 source lead, "
+            "subject-level metadata mapping, no patient payload, and CPU-only one-shot introai9 boundary."
+        )
+    checks.append("OpenNeuro containment metadata/P0 boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -504,6 +672,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "four_d_cta_centre_pipeline_invariant_structural_integrity_mapping",
         "four_d_cta_progression_or_rupture_prediction_from_released_mechanics",
         "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied",
+        "acquisition_quality_indexed_external_lesion_set_risk",
+        "cross_center_weak_to_strong_segmentation",
+        "conformal_lesion_fnr_control",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -607,6 +778,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "software_threshold_or_inter_user_morphometry_variability_audit",
         "biplane_silhouette_curve_morphing_reconstruction",
         "phantom_dose_reconstruction_ai_consistency",
+        "generic_outer_containment_as_dense_pseudo_mask",
+        "generic_morphological_conformal_segmentation_set",
+        "generic_downstream_segmentation_metric_conformal_interval",
+        "generic_three_d_lesion_fnr_conformal_threshold",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -5174,8 +5349,6 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or not set(expected_mechanics_scores).issubset(
             set(problem_selection["rejected_candidates"])
         )
-        or problem_selection["most_recent_source_rejected_candidate"]
-        != "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied"
         or mechanics_audit["executable_p0_registered"] is not False
         or mechanics_audit["method_selected"] is not False
         or mechanics_audit["architecture_selected"] is not False
@@ -5301,7 +5474,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_bc_transport_execution_incomplete"
+        != "conditional_openneuro_containment_morphometry_source_lead_metadata_p0_only_no_primary_method_or_gpu"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -5462,11 +5635,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_metric"] != "functional_energy_score"
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
-        or task["active_candidate_problem"] != "unselected"
+        or task["active_candidate_problem"]
+        != "containment_identified_morphometry_envelopes"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_rsna_aws_registry_source_rejection_no_primary_method_architecture_or_gpu"
-        or task["candidate_primary_estimand"] != "unselected"
-        or task["candidate_secondary_estimand"] != "unselected"
+        != "conditional_source_lead_metadata_p0_registered_no_primary_method_architecture_or_gpu"
+        or task["candidate_primary_estimand"]
+        != "set_valued_lesion_mask_under_observed_outer_containment"
+        or task["candidate_secondary_estimand"]
+        != "interval_for_monotone_aneurysm_morphometry_induced_by_mask_envelope"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -5557,6 +5733,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     rsna_ica = next(
         item for item in datasets if item["name"] == "rsna_ica_2025_controlled_access"
     )
+    openneuro_lausanne = next(
+        item for item in datasets if item["name"] == "openneuro_ds003949"
+    )
     open_cta = next(
         item
         for item in datasets
@@ -5567,6 +5746,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     dias = next(item for item in datasets if item["name"] == "dias_dsa_sequence_2024")
     if (
+        openneuro_lausanne.get("role")
+        != "conditional_source_lead_metadata_p0_only_not_training_or_outer_test"
+        or openneuro_lausanne.get("status")
+        != "exact_public_subject_mapping_pending_one_method_free_metadata_p0_no_patient_payload"
+        or openneuro_lausanne.get("dataset_commit")
+        != "896b8846d899acee68c0246cc987ca96e77267d4"
+        or openneuro_lausanne.get("license") != "CC0"
+        or openneuro_lausanne.get("public_subjects") != 284
+        or openneuro_lausanne.get("public_weak_subjects_expected") != 246
+        or openneuro_lausanne.get("public_precise_subjects_expected") != 38
+        or openneuro_lausanne.get("patient_nifti_image_or_mask_payload_accessed")
+        is not False
+        or openneuro_lausanne.get("method_or_gpu_authorized") is not False
+        or
         cmha["field_provenance"] != "real_cfd"
         or cmha.get("role") != "closed_goal_oriented_s0a_asset_history_not_an_active_primary"
         or cmha.get("status")

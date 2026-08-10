@@ -116,24 +116,24 @@
 
   const modes = {
     presence: {
-      description: "The frozen P0 intended to verify one observed CFD anchor at q0, but produced no aggregate.",
-      connector: "unevaluated",
-      title: "Anchor identity has no verdict",
-      copy: "No result records whether the fixed analytic control reached or verified U(q0 | U(q0)) = U(q0)",
+      description: "The weak sphere is an observed outer set W, not a precise lesion mask.",
+      connector: "Y ⊆ W only",
+      title: "Containment, not pseudo-truth",
+      copy: "The unknown lesion Y must lie inside W; the hidden annotation-coarsening mechanism is not estimated",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "The observed ratio q/q0 was intended to index a same-geometry condition orbit.",
-      connector: "not reached",
-      title: "Transport response has no verdict",
-      copy: "Member completion, aligned coordinates and non-anchor response energy are all unevaluated",
+      description: "Official small lists are reconciled to the released tree at the subject level only.",
+      connector: "subject join",
+      title: "246 weak + 38 precise",
+      copy: "Four code-only weak subjects are excluded; rewritten session strings are never used as identity keys",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "The 33.5/40 historical source lead closed when its one-shot CPU P0 ended incomplete.",
-      connector: "gate closed",
-      title: "Fresh problem next",
-      copy: "No repair, rerun, P1, method, architecture, GPU, outer test or paper claim is authorized",
+      description: "The 32.5/40 source score permits one metadata P0, not a method or training run.",
+      connector: "all required",
+      title: "Method-free P0 first",
+      copy: "Pass opens a separate task-adequacy P1 only; fail or incomplete closes the exact version without rerun",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

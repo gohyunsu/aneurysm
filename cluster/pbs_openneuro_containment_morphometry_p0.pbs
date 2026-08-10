@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+#PBS -N aurora_openneuro_meta_p0
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=2:mem=4gb:ngpus=0
+#PBS -l walltime=00:20:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+
+: "${PBS_JOBID:?this audit must run inside a PBS allocation}"
+: "${AURORA_PROJECT_ROOT:?set the exact clean public checkout}"
+: "${AURORA_GIT_COMMIT:?set the exact public SHA}"
+: "${AURORA_OUTPUT_ROOT:?set a private writable output root}"
+: "${AURORA_PYTHON:?set an approved Python 3.9+ executable}"
+
+if [[ ! "$AURORA_GIT_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "AURORA_GIT_COMMIT must be a full lowercase SHA." >&2
+  exit 2
+fi
+if [ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]; then
+  echo "Project checkout does not match AURORA_GIT_COMMIT." >&2
+  exit 2
+fi
+if [ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]; then
+  echo "Project checkout must be clean before P0." >&2
+  exit 2
+fi
+if [ ! -x "$AURORA_PYTHON" ]; then
+  echo "AURORA_PYTHON is not executable." >&2
+  exit 2
+fi
+
+record_root="$AURORA_OUTPUT_ROOT/openneuro_containment_morphometry_p0/records"
+run_root="$AURORA_OUTPUT_ROOT/openneuro_containment_morphometry_p0/runs/$PBS_JOBID"
+status_path="$record_root/status.$PBS_JOBID.json"
+result_path="$record_root/result.$PBS_JOBID.json"
+mkdir -p "$record_root" "$run_root/tmp"
+
+shopt -s nullglob
+for prior_status in "$record_root"/status.*.json; do
+  if grep -Fq '"protocol_id":"openneuro_containment_morphometry_metadata_p0_v1"' "$prior_status" \
+      && grep -Fq "\"public_source_commit\":\"$AURORA_GIT_COMMIT\"" "$prior_status"; then
+    echo "An exact-source P0 record exists; resubmission is forbidden." >&2
+    exit 2
+  fi
+done
+shopt -u nullglob
+
+write_status() {
+  local state="$1"
+  local exit_code="$2"
+  local gate_evaluated="$3"
+  local temporary="$status_path.partial"
+  printf '{"protocol_id":"openneuro_containment_morphometry_metadata_p0_v1","state":"%s","exit_code":%s,"public_source_commit":"%s","scientific_gate_evaluated":%s,"patient_payload_access":false,"method_access":false,"gpu_access":false,"outer_test_access":false}\n' \
+    "$state" "$exit_code" "$AURORA_GIT_COMMIT" "$gate_evaluated" > "$temporary"
+  mv "$temporary" "$status_path"
+}
+
+write_status running 0 false
+audit_complete=false
+on_exit() {
+  local exit_code=$?
+  trap - EXIT
+  if [ "$audit_complete" != true ]; then
+    write_status execution_incomplete "$exit_code" false
+  fi
+  exit "$exit_code"
+}
+trap on_exit EXIT
+
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONHASHSEED=0
+export PYTHONPATH="$AURORA_PROJECT_ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
+export TMPDIR="$run_root/tmp"
+
+set +e
+"$AURORA_PYTHON" -m aurora.openneuro_containment_morphometry_p0 \
+  --config "$AURORA_PROJECT_ROOT/configs/openneuro_containment_morphometry_p0.json" \
+  --result "$result_path" \
+  --public-source-commit "$AURORA_GIT_COMMIT"
+audit_exit=$?
+set -e
+
+if [ ! -s "$result_path" ]; then
+  exit "$audit_exit"
+fi
+
+read -r result_status gate_evaluated < <(
+  "$AURORA_PYTHON" - "$result_path" <<'PY'
+import json
+import sys
+with open(sys.argv[1], encoding="utf-8") as stream:
+    result = json.load(stream)
+print(result.get("status", "invalid"), str(bool(result.get("scientific_gate_evaluated"))).lower())
+PY
+)
+
+case "$result_status" in
+  passed_asset_semantics_gate)
+    write_status completed_pass 0 true
+    ;;
+  failed_asset_semantics_gate)
+    write_status completed_fail "$audit_exit" true
+    ;;
+  *)
+    exit 2
+    ;;
+esac
+
+audit_complete=true
+exit "$audit_exit"

@@ -1,0 +1,115 @@
+{
+  "schema_version": "aurora.openneuro_containment_morphometry_p0.v1",
+  "protocol_id": "openneuro_containment_morphometry_metadata_p0_v1",
+  "status": "preregistered_before_first_introai9_pbs_execution",
+  "as_of": "2026-08-10",
+  "source_audit": "docs/openneuro-containment-morphometry-source-audit-2026-08-10.md",
+  "candidate": {
+    "id": "containment_identified_morphometry_envelopes",
+    "score": 32.5,
+    "admission_threshold": 32.0,
+    "axis_scores": [4.5, 4.0, 2.0, 4.0, 5.0, 5.0, 5.0, 3.0],
+    "role": "conditional_source_lead_not_method_architecture_or_contribution",
+    "observed_weak_statement": "true_lesion_mask_is_subset_of_observed_outer_sphere",
+    "coarsening_mechanism_estimated": false
+  },
+  "sources": {
+    "dataset_repo": "OpenNeuroDatasets/ds003949",
+    "dataset_tag": "1.0.1",
+    "dataset_commit": "896b8846d899acee68c0246cc987ca96e77267d4",
+    "dataset_tree_api": "https://api.github.com/repos/OpenNeuroDatasets/ds003949/git/trees/896b8846d899acee68c0246cc987ca96e77267d4?recursive=1",
+    "dataset_description_url": "https://raw.githubusercontent.com/OpenNeuroDatasets/ds003949/896b8846d899acee68c0246cc987ca96e77267d4/dataset_description.json",
+    "dataset_description_sha256": "39baee3ef549835c0ae13c83eed3235a6597d7ea24b1f94bf361fc1f32fffc35",
+    "dataset_license": "CC0",
+    "dataset_doi": "10.18112/openneuro.ds003949.v1.0.1",
+    "code_repo": "connectomicslab/Aneurysm_Detection",
+    "code_commit": "5ecdf6e5b9a811e4ec7472c210dada42e60cc3dc",
+    "precise_list_url": "https://raw.githubusercontent.com/connectomicslab/Aneurysm_Detection/5ecdf6e5b9a811e4ec7472c210dada42e60cc3dc/extra_files/patients_with_voxelwise_labels.pkl",
+    "precise_list_sha256": "18824f1c3f14a1909b966247ed7e6ac2d6144be762c6aa487ecc853baa3150eb",
+    "weak_list_url": "https://raw.githubusercontent.com/connectomicslab/Aneurysm_Detection/5ecdf6e5b9a811e4ec7472c210dada42e60cc3dc/extra_files/patients_with_weak_labels.pkl",
+    "weak_list_sha256": "14935ecf1791fc8448ce2b8ae1c79bfaf925f0ff975676381db86845c3581799",
+    "code_license_url": "https://raw.githubusercontent.com/connectomicslab/Aneurysm_Detection/5ecdf6e5b9a811e4ec7472c210dada42e60cc3dc/LICENSE",
+    "code_license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "code_license": "Apache-2.0"
+  },
+  "expected": {
+    "dataset_tree_paths": 5737,
+    "public_subjects": 284,
+    "manual_mask_subject_sessions": 296,
+    "manual_mask_nifti_paths": 494,
+    "precise_list_entries": 38,
+    "precise_list_subjects": 38,
+    "weak_list_entries": 262,
+    "weak_list_subjects": 250,
+    "public_precise_subjects": 38,
+    "public_weak_subjects": 246,
+    "code_only_weak_subjects": ["sub-115", "sub-143", "sub-181", "sub-272"],
+    "code_session_pairs_matching_public_tree": 11,
+    "public_subject_partition_overlap": 0,
+    "public_subjects_unmapped": 0
+  },
+  "access": {
+    "allowed_http_objects": [
+      "dataset_tree_json",
+      "dataset_description_json",
+      "precise_subject_list_pickle_bytes_opcode_only",
+      "weak_subject_list_pickle_bytes_opcode_only",
+      "code_license_text"
+    ],
+    "pickle_unpickling_or_execution": false,
+    "patient_nifti_image_or_mask_body_access": false,
+    "participants_or_clinical_table_access": false,
+    "pretrained_model_or_checkpoint_access": false,
+    "outer_test_access": false,
+    "maximum_bytes_by_object": {
+      "dataset_tree_json": 5000000,
+      "dataset_description_json": 20000,
+      "precise_subject_list_pickle_bytes_opcode_only": 20000,
+      "weak_subject_list_pickle_bytes_opcode_only": 20000,
+      "code_license_text": 20000
+    }
+  },
+  "transport": {
+    "attempt_delays_seconds": [0, 10, 30],
+    "timeout_seconds_per_attempt": 30,
+    "user_agent": "AURORA-openneuro-containment-p0/1.0"
+  },
+  "gate": {
+    "rule": "all_registered_checks",
+    "checks": [
+      "exact_commits_and_small_blob_hashes",
+      "dataset_tree_complete_and_path_count_exact",
+      "public_subject_and_manual_mask_counts_exact",
+      "supervision_lists_parsed_without_unpickling",
+      "weak_and_precise_code_lists_are_disjoint",
+      "public_release_excludes_exactly_four_registered_weak_subjects",
+      "public_subjects_partition_exactly_into_246_weak_and_38_precise",
+      "subject_join_unique_and_session_join_explicitly_rejected",
+      "dataset_and_code_licenses_match",
+      "no_patient_payload_table_model_checkpoint_gpu_or_outer_test_access"
+    ],
+    "pass_authorizes": "register_separate_method_free_p1_task_adequacy_audit_only",
+    "pass_does_not_authorize": [
+      "method_selection",
+      "architecture_selection",
+      "patient_payload_download",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution",
+      "relabel_historical_31_5_candidate"
+    ],
+    "failure_action": "close_exact_candidate_version_without_same_contract_repair_or_rerun"
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 2,
+    "memory_gb": 4,
+    "ngpus": 0,
+    "walltime": "00:20:00",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_command": false,
+    "maximum_submissions_for_exact_public_source": 1
+  }
+}

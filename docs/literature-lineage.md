@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **Schema 6.8 current lineage · 2026-08-10:** The source-admitted residual is
+> not generic weak segmentation or conformal uncertainty. Di Noto, VP-UNet,
+> FocalSegNet and WeakMed occupy aneurysm weak supervision; morphological
+> conformal prediction and Conformal Lesion Segmentation occupy spatial/FNR
+> sets; COMPASS occupies downstream morphometry intervals; partial-identification
+> work occupies weak-supervision evaluation. The remaining question is narrower:
+> whether observed containment `Y ⊆ W`, without estimating the hidden coarsening
+> mechanism, can yield a valid and meaningfully tighter lesion/morphometry
+> envelope on disjoint precise subjects. Its residual-gap score is only 2/5.
+> Metadata P0 is registered; method, architecture, GPU and paper contribution
+> remain unselected.
+
 > **Schema 6.6 outcome · 2026-08-10:** The narrow anchor-transport gap remains
 > scientifically unevaluated because its one-shot P0 produced no aggregate.
 > DeltaPhi, scale-consistent operators, learned boundary extensions and analytic

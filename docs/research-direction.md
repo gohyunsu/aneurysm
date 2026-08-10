@@ -1,5 +1,18 @@
 # AURORA 연구 방향
 
+> **Schema 6.8 conditional direction · 2026-08-10:** The current candidate is
+> not a GNN and not weak-to-strong pseudo-segmentation. It treats each observed
+> weak sphere only as an outer containment set and asks whether a valid,
+> informative lesion-mask set and monotone-morphometry interval can be defined
+> without learning the hidden annotation process. The fresh source score is
+> 32.5/40, but residual novelty is only 2/5 because aneurysm weak supervision,
+> morphological conformal prediction, lesion-FNR control, COMPASS metric
+> intervals and partial-identification evaluation are direct controls. One
+> metadata-only P0 is registered to verify the 246 weak + 38 precise subject
+> partition and safe subject-only lineage. It selects no method, architecture,
+> contribution or GPU experiment. Execute only on `introai9`; never access or
+> monitor `junjinyong`.
+
 > **Schema 6.6 outcome · 2026-08-10:** The anchor-conditioned BC-transport P0
 > ended execution-incomplete with no aggregate result or scientific verdict.
 > Do not repair/rerun it or promote the 33.5/40 source idea to P1, a method or a

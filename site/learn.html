@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류, CFD anchor, boundary-condition transport, mesh·GNN과 AURORA의 현재 CPU P0 검증 경계를 단계별로 설명하는 입문 가이드.">
+  <meta name="description" content="뇌동맥류, weak·precise annotation, containment, 형태계측 구간, mesh·GNN과 AURORA의 현재 metadata P0 경계를 단계별로 설명하는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -42,8 +42,8 @@
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
-          한 geometry에서 한 번 계산한 CFD 해를 왜 anchor라고 부르는지,
-          유량 비율을 따라 다른 조건으로 이동한다는 것이 무엇인지,
+          weak sphere와 precise mask가 어떻게 다른지, containment가 무엇인지,
+          환자·session·lesion을 왜 다른 독립 단위로 세어야 하는지,
           TopAneu의 52개 위치 label과 silver vessel mask,
           DSA sequence와 prefix risk, 반복 CTP와 informative observation,
           rigid-wall CFD와 compliant-wall FSI,
@@ -53,46 +53,44 @@
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>현재 활성 후보도 GNN도 없습니다.</strong>
+          <strong>조건부 source 후보는 하나지만, 현재 모델은 없습니다.</strong>
           <p>
-            과거 mesh GNN과 boundary-aware Perceiver 계열은 geometry와 유량에서
-            절대 velocity field를 바로 예측하려 했고 gate를 통과하지 못했습니다.
-            CFD anchor에서 다른 관측 유량으로 이동하는 더 현실적인 문제는
-            33.5/40이었지만, exact CPU P0가 aggregate 없이 exit 1로 끝났습니다.
-            Scientific check는 하나도 판정되지 않았고 후보는 재실행 없이 닫혔습니다.
+            새 OpenNeuro 후보는 32.5/40으로 source gate를 넘었지만 아직 공개
+            metadata의 라벨 계보만 확인하는 P0 단계입니다. GNN, U-Net,
+            Transformer 또는 conformal head는 선택하지 않았습니다. 과거 mesh
+            GNN과 boundary-aware Perceiver 실패도 그대로 보존합니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>다른 문제를 source와 direct prior 수준에서 다시 찾습니다.</strong>
+          <strong>284명의 supervision lineage를 먼저 검증합니다.</strong>
           <p>
-            닫힌 P0의 reader를 고치거나 같은 source를 다시 제출하지 않습니다.
-            새 후보가 실제 asset, 독립 단위, 식별 가능한 endpoint와 unoccupied
-            algorithmic gap을 함께 갖추는지 다시 감사합니다. 32/40 source gate와
-            별도 method-free adequacy gate 전에는 architecture와 GPU를 열지 않습니다.
+            공개 tree 5,737개 경로와 두 개의 작은 공식 supervision list가
+            246 weak + 38 precise subject로 정확히 맞는지 확인합니다. Pickle은
+            실행하지 않고 opcode만 읽으며, 환자 NIfTI와 clinical table은 열지
+            않습니다. 이 P0가 통과해도 다음은 method-free P1이지 학습이 아닙니다.
           </p>
-          <a href="../docs/aneumo-bc-transport-source-audit-2026-08-10.md">현재 source audit 읽기 ↗</a>
+          <a href="../docs/openneuro-containment-morphometry-source-audit-2026-08-10.md">현재 source audit 읽기 ↗</a>
         </div>
         <div class="answer-card">
-          <span>anchor transport란?</span>
-          <strong>아이디어는 이해할 수 있지만 현재는 closed history입니다.</strong>
+          <span>containment란?</span>
+          <strong>정답을 추측하지 않고 가능한 범위를 남기는 것입니다.</strong>
           <p>
-            같은 혈관 geometry에서 유량 q0의 velocity field U(q0)를 이미 계산했다고
-            합시다. 목표는 관측된 비율 r=q/q0를 받아 U(q)를 추정하는 것입니다.
-            r=1이면 출력은 anchor와 정확히 같아야 하고, q0→q1→q2로 이동한 결과와
-            q0→q2로 직접 이동한 결과도 가까워야 합니다. 새 geometry에는 여전히
-            한 번의 CFD가 필요합니다. 이번 P0는 이 조건들을 평가하지 못했으므로
-            유효한 방법, 음성 결과 또는 contribution으로 부르지 않습니다.
+            실제 병변 마스크를 Y, 전문가가 빠르게 그린 바깥 구를 W라고 두면
+            관측 가능한 약속은 Y가 W 안에 있다는 Y ⊆ W입니다. W 전체를 병변으로
+            간주하면 부피를 과대평가하고, 임의로 작은 pseudo-mask를 만들면 근거 없는
+            정밀도를 발명합니다. 대신 가능한 Y들의 집합과 각 Y에서 나오는 부피·
+            최대 직경 같은 지표 범위를 유지하는 것이 현재 estimand입니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 architecture는?</span>
           <strong>GNN 기반으로 확정되지 않았습니다.</strong>
           <p>
-            확정되지 않았고 이번 후보에서는 설계하지 않습니다. DeltaPhi residual,
-            scale-consistent operator, learned boundary extension과 analytic power
-            law가 강한 baseline이므로 GNN이나 cycle loss 자체는 novelty가 아닙니다.
-            다른 fresh task가 gate를 통과한 뒤에만 그 task에 맞는 표현을 고릅니다.
+            확정되지 않았고 이번 P0에서는 설계하지 않습니다. VP-UNet,
+            FocalSegNet, WeakMed, morphological conformal prediction, lesion-FNR
+            control과 COMPASS가 강한 baseline입니다. P1에서 이들보다 유효하면서
+            더 좁은 envelope가 가능한지 확인한 뒤에만 표현과 학습기를 고릅니다.
           </p>
         </div>
       </div>
@@ -465,19 +463,24 @@
             <p class="eyebrow">04 · CURRENT BOUNDARY</p>
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
-              최신 판단은 network가 아니라 source/direct-prior/reference
-              audit입니다. TopAneu factorized leaf-risk의 역사적 33/40은 보존되지만
-              fresh code-semantics audit에서 31/40으로 기각됐습니다. 아래 AneuG,
-              Aneumo와 과거 graph/operator stack은 현재 선택된 architecture가
-              아닌 역사 기록입니다.
+              최신 판단은 network가 아니라 OpenNeuro supervision lineage의
+              metadata audit입니다. 약한 외곽 라벨의 containment로 정의한 문제는
+              32.5/40 조건부 lead지만, P0는 데이터 단위만 검증합니다. 아래
+              TopAneu, AneuG, Aneumo와 graph/operator stack은 현재 선택된
+              architecture가 아닌 역사 기록입니다.
             </p>
           </header>
 
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Conditional source lead, active executable shortlist, selected primary와 architecture는 모두 0입니다. Historical score와 fresh evidence decision은 구분합니다. Silver vessel을 gold anatomy처럼 취급하거나 generic graph/taxonomy block을 새 contribution으로 이름만 바꾸지 않습니다.</p>
+              <p>Conditional source lead는 1개지만 selected primary, method와 architecture는 모두 0입니다. Source admission과 method admission을 구분합니다. Weak sphere를 gold mask처럼 취급하거나 conformal/GNN block에 이름만 붙여 contribution으로 만들지 않습니다.</p>
             </aside>
+            <article>
+              <span>CURRENT · OPENNEURO CONTAINMENT · METADATA P0</span>
+              <div><h3>거친 구형 라벨로 어떻게 정밀한 형태를 말할 수 있는가?</h3><p>정밀한 한 개 마스크를 발명하지 않습니다. 가능한 병변 Y가 관측된 외곽 W 안에 있다는 제약을 유지하고, 그 집합에서 가능한 mask와 단조 morphometry의 구간을 다룹니다. 현재 P0는 284 subject가 246 weak + 38 precise로 정확히 나뉘는지와 subject-only join만 확인합니다.</p></div>
+              <b>상태</b><small>32.5/40 conditional lead · metadata P0 registered · no model/GPU</small>
+            </article>
             <article>
               <span>CURRENT · TOPANEU CODE SEMANTICS · REJECTED</span>
               <div><h3>과거 33/40이면 지금도 U-Net·Transformer·GNN을 학습하는가?</h3><p>아닙니다. 공식 52-class mapping이 proposed hierarchy를 이미 담고, test template는 원 영상만 받으며, Task 2는 instance를 class volume으로 합칩니다. Training-only anatomy, hierarchical taxonomy, vessel-aware detection과 lesion counting도 직접 선행입니다. 새 batch 최고 31.5/40이므로 terms나 P0로 진행하지 않습니다.</p></div>

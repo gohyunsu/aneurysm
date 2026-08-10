@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 6.8 OpenNeuro role · 2026-08-10:** OpenNeuro `ds003949` is currently
+> a metadata-P0 source only. The registered evidence is its exact public Git
+> tree and dataset description plus official code supervision lists: 284 public
+> subjects partition into 246 weak and 38 precise subjects after excluding four
+> code-only weak subjects. Session strings are not valid joins after release
+> de-identification; subject ID is the only registered key. No patient NIfTI
+> image or mask body, participants/clinical table, pretrained model or outer
+> test has been read. This source role does not make a weak sphere a gold mask
+> and does not authorize training.
+
 > **Schema 6.6 Aneumo outcome · 2026-08-10:** The BC-transport P0 created only
 > an execution-incomplete status. No aggregate records which members completed,
 > which arrays parsed or whether coordinates/velocity responses were valid.

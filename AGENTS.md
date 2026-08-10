@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 OpenNeuro containment-morphometry override · schema 6.8:**
+> `containment_identified_morphometry_envelopes` is one conditional source lead
+> at 32.5/40. It does not learn the real annotation-coarsening mechanism and
+> does not treat a weak sphere as a precise lesion mask. The only registered
+> object is a method-free metadata P0 over exact OpenNeuro tree metadata,
+> dataset description, two small supervision-list blobs parsed with
+> `pickletools` opcodes only, and the code license. Patient NIfTI image/mask
+> bodies, participant/clinical tables, pretrained models, checkpoints and outer
+> test remain unread. The source mapping to verify is 284 public subjects = 246
+> weak + 38 precise, with four registered code-only weak subjects and subject ID
+> as the sole join because released session strings were rewritten. P0 is one
+> exact `introai9` PBS submission, CPU 2/4 GB/GPU 0/20 min. Pass opens only
+> registration of a separate method-free P1 task-adequacy audit; fail or
+> execution-incomplete closes this version without repair/rerun. Primary,
+> method, architecture, contribution, GPU and outer test remain 0. Never
+> connect/query/transfer/submit/monitor `junjinyong`; never run GPU commands on
+> an `introai9` login node. Source of truth:
+> `docs/openneuro-containment-morphometry-source-audit-2026-08-10.md` and
+> `configs/openneuro_containment_morphometry_p0.json`.
+
 > **2026-08-10 ISBI author-compliance override · schema 6.7:** The live official
 > author instructions are frozen as machine guards: single blind, four
 > technical pages, at most two first-author submissions per person, no

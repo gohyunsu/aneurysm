@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 6.8 · no architecture yet:** The OpenNeuro containment candidate is
+> at a metadata P0, not a learning stage. No GNN, U-Net, Transformer, conformal
+> head or morphometry regressor is selected. P0 checks subject-level supervision
+> lineage and access boundaries only. Even a P0 pass opens a separate
+> method-free P1, where the observed containment task must prove nontrivial and
+> evaluable against weak-segmentation, morphological conformal, lesion-FNR,
+> COMPASS and partial-identification controls. Architecture and GPU authority
+> remain zero. AURORA uses only `introai9`; `junjinyong` is excluded.
+
 > **Schema 6.6 outcome · 2026-08-10:** No current architecture exists. The
 > BC-transport P0 closed execution-incomplete before task adequacy was evaluated,
 > so it cannot open P1 or justify GNN/Perceiver/operator design. All architecture

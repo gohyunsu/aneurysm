@@ -1,5 +1,22 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 OpenNeuro containment-morphometry lead · schema 6.8:** A fresh
+> source/direct-prior screen admits `containment_identified_morphometry_envelopes`
+> at **32.5/40** as one conditional source lead. A weak sphere is used only as
+> the observable statement that the true lesion lies inside it; the project
+> does not call it a precise mask or estimate the unobserved annotation process.
+> Exact public metadata reconcile 284 released subjects into 246 weak-label and
+> 38 precise-label subjects, while four code-listed weak subjects are absent
+> from the public tree. Session dates cannot be joined after de-identification,
+> so subject ID is the only registered key. One method-free metadata P0 is
+> frozen for `introai9` PBS (CPU 2, 4 GB, GPU 0). It reads no patient NIfTI,
+> clinical table, model, checkpoint or outer test. Pass may open only a separate
+> method-free P1; fail/incomplete closes the exact version without repair or
+> rerun. No primary, method, architecture, contribution or GPU experiment is
+> selected. `junjinyong` is prohibited for every AURORA operation.
+> [Detailed audit](docs/openneuro-containment-morphometry-source-audit-2026-08-10.md) ·
+> [Frozen P0](configs/openneuro_containment_morphometry_p0.json)
+
 > **2026-08-10 BC-transport P0 outcome · schema 6.6:** Exact public source
 > `38e7894fc5ae56ffb3efbe469c4e1f7480f81feb` ran once on `introai9` as CPU/PBS
 > job `115518.ECE-util1`. It ended exit 1 after 00:08:21 with CPU time 0 and

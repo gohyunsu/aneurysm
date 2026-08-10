@@ -1,5 +1,15 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 6.8 registered execution boundary · 2026-08-10:** The only next
+> AURORA job is one exact OpenNeuro metadata P0 on `introai9` PBS: queue
+> `coss_agpu`, CPU 2, memory 4 GB, GPU 0, walltime 20 minutes. It reads only five
+> pinned small/public metadata objects and may make three in-job transient HTTP
+> attempts per object at 0/10/30 seconds. That retry budget is not permission for
+> a second PBS submission. No patient payload, model, checkpoint or outer test
+> is accessed; no login-node GPU command is run. `junjinyong` is another
+> project's server and must not be connected, queried, used for transfer or
+> submission, or monitored for AURORA.
+
 > **Schema 6.6 deployment verification · 2026-08-10:** Exact outcome content
 > `bb16d90d2e06bd1f12972efaf67093d425048d49` passed Quality
 > `31375709669` and Pages `31375709322`. Live overview, Learn and execution JSON
