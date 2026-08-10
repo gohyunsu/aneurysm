@@ -1,5 +1,10 @@
 # Public source watch · IAVS + TopBrain 2.0
 
+> **2026-08-11 direct-prior note:** A separate TRELLIS surface-feature paper
+> review changed the future baseline boundary, not the watched asset state. Its
+> stated code repository currently returns 404 and supplies no material E0
+> source. See [`trellis-surface-feature-direct-prior-delta-2026-08-11.md`](trellis-surface-feature-direct-prior-delta-2026-08-11.md).
+
 > **2026-08-11 refresh:** the live watch returned
 > `same_as_all_frozen_snapshots=true`. IAVS remains exact `2e40088d…`,
 > README-only, with no release, license, code or payload. TopBrain 2.0 remains a

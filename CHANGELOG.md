@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.6 adds the TRELLIS surface-feature direct prior
+
+- Verified the paper/source contract for arXiv:2509.03095 and DOI
+  10.1016/j.neuri.2026.100259: 1,024-dimensional TRELLIS features from a
+  500,000-object non-medical pretraining corpus augment PointNet/PointNet++ and
+  an AnXplore mesh GNN.
+- Recorded 101 sacs on one uniform parent vessel, five with/without-feature
+  runs, and rollout RMSE 7.57→6.09 and 4.03→3.55 without converting these
+  values into surface-WSS topology evidence.
+- Verified that the inspected source reports no critical-point/worldline
+  endpoint or independent sealed GNN split and that the stated GitHub URL
+  returns 404 with zero exact repository-search matches.
+- Added foundation-surface features as a future matched direct control. No
+  candidate score, closed P0, payload, method, architecture, server query,
+  PBS/GPU, outer test, result row or contribution changed.
+- AURORA remains `introai9`-only after a future gate; `junjinyong` remains
+  prohibited.
+
 ## 2026-08-11 · Schema 7.5 rejects measurement-functional inverse flow
 
 - Added Bayesian finite-element regression (arXiv:2607.20224) as a direct prior

@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.6 no-model boundary · 2026-08-11:** Do not select TRELLIS, another
+> 3D foundation encoder or a wider mesh-GNN input as the AURORA architecture.
+> TRELLIS feature augmentation is now an explicit future baseline family: it
+> improves AnXplore rollout RMSE but does not evaluate tangent-WSS topology,
+> uses one uniform parent-vessel context and has no verified current code at the
+> stated URL. A faithful available implementation may be compute-matched only
+> after E0–E2; it creates no architecture or GPU authority now.
+
 > **Schema 7.5 no-model boundary · 2026-08-11:** Do not replace the inactive
 > surface-vector idea with an inverse-flow GNN, probabilistic neural operator,
 > PINN, unrolled MRI network or uncertainty head. FER, FlowMRI-Net, pressure

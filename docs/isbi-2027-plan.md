@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.6 submission boundary · 2026-08-11:** Foundation-model surface
+> features cannot be a numbered contribution: TRELLIS has already augmented
+> aneurysm point/mesh models and reduced AnXplore rollout error. The paper does
+> not test surface-WSS critical-point/worldline fidelity, so the narrower
+> inactive hypothesis survives, but it gains no title, method, result slot or
+> figure. If a material source appears, TRELLIS-style features join matched
+> controls subject to implementation availability. Submission identity,
+> architecture, result rows and GPU remain 0.
+
 > **Schema 7.5 submission boundary · 2026-08-11:** Measurement-conditioned
 > inverse-flow reconstruction is not the fallback paper identity. A new FER
 > direct prior already supplies calibrated velocity/pressure/WSS inference from

@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.6 surface-feature lineage boundary · 2026-08-11:**
+> [TRELLIS-enhanced aneurysm analysis](https://doi.org/10.1016/j.neuri.2026.100259)
+> transfers 1,024-dimensional features from a 500,000-object non-medical 3D
+> encoder into PointNet/PointNet++ and an AnXplore mesh GNN. It reports lower
+> rollout RMSE on 101 sacs sharing one uniform parent vessel. Thus foundation
+> surface pretraining, rendering-based geometric descriptors and feature
+> concatenation are direct priors. It does not report transient tangent-WSS
+> critical points or worldlines, and its stated code URL currently returns 404.
+> The residual gap remains a field-error-matched structural failure plus an
+> operator-specific explanation and fresh geometry-family evidence—not a
+> stronger surface embedding. [Exact delta](trellis-surface-feature-direct-prior-delta-2026-08-11.md).
+
 > **Schema 7.5 inverse-flow lineage boundary · 2026-08-11:**
 > [Bayesian finite-element regression](https://arxiv.org/abs/2607.20224)
 > directly covers noisy under-resolved velocity observations, unknown BC, exact

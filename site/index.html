@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — inverse-flow direct prior와 30/40 source rejection, inactive surface-vector WSS hypothesis, critical-point·worldline·material re-entry gate와 no-model·introai9-only 경계를 설명하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — TRELLIS surface-feature direct prior, inverse-flow rejection, inactive surface-vector WSS hypothesis, critical-point·worldline·material re-entry gate와 no-model·introai9-only 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -61,9 +61,16 @@
           sparse velocity, unknown BC, pressure/WSS posterior를 이미 직접 다룸을
           확인했습니다. BenchAnXplore·FlowMRI·CMRx·physical reference를 묶은
           여섯 inverse-flow 후보도 최고 30.0/40에 그쳐 모두 기각했습니다.
+          또한 TRELLIS가 1,024차원 foundation surface feature를 AnXplore
+          mesh GNN에 이미 결합했으므로, pretrained 3D feature를 붙이는 것 역시
+          novelty가 아닙니다. 다만 그 연구는 critical point나 worldline을
+          평가하지 않았고 명시된 code URL은 현재 404이므로, 가설 자체를
+          반증하거나 새 E0 asset을 제공하지는 않습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#architecture">TRELLIS baseline 이해하기</a>
+          <a class="button ghost" href="../docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md">Latest direct-prior delta ↗</a>
           <a class="button ghost" href="learn.html#inverse-flow-delta">Inverse-flow 판정 이해하기</a>
           <a class="button ghost" href="../docs/measurement-functional-inverse-flow-source-delta-2026-08-11.md">Latest inverse-flow audit ↗</a>
           <a class="button ghost" href="learn.html#pair-correction">새 pair 판정 이해하기</a>
@@ -230,8 +237,9 @@
           <h3>One hypothesis is retained, but no gap is active.</h3>
           <p>
             Surface Hodge/DEC, SE(3)-equivariant transient WSS prediction,
-            vector-field topology와 aneurysm WSS critical-point analysis가 직접
-            선행입니다. 남은 질문은 단순 topology loss가 아니라 학습된 tangent
+            vector-field topology, aneurysm WSS critical-point analysis와
+            TRELLIS 기반 foundation surface features가 직접 선행입니다. 남은
+            질문은 더 큰 feature나 단순 topology loss가 아니라 학습된 tangent
             1-form의 근사오차가 signed index와 시간 worldline event를 언제
             보존하는지 설명하고 실제로 더 잘 맞히는가입니다. 그러나 old P0는
             0/10 미평가로 닫혔으므로 현재는 source lead조차 아닌 inactive

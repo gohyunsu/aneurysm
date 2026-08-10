@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 TRELLIS surface-feature direct-prior override · schema 7.6:**
+> TRELLIS-Enhanced Surface Features (`arXiv:2509.03095`, DOI
+> `10.1016/j.neuri.2026.100259`) already augments aneurysm point/mesh models
+> with 1,024-dimensional features from a 500,000-object non-medical 3D
+> foundation encoder. Its AnXplore experiment uses 101 sacs on one uniform
+> parent vessel and reports rollout RMSE 7.57→6.09 and 4.03→3.55. It does not
+> evaluate transient tangent-WSS critical points, signed index or worldlines,
+> and no independent sealed GNN split is stated in the inspected source. The
+> stated GitHub URL returned 404 and exact repository search returned zero on
+> 2026-08-11. Treat foundation surface features/rendering/concatenation as a
+> direct control, not novelty or a material E0 source. Do not change the
+> historical 32/40 score or closed 0/10 P0. No payload, checkpoint, candidate,
+> P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or
+> contribution is opened. Source of truth is
+> `docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md` and schema
+> 7.6. Use only `introai9` after a future gate; never access or monitor
+> `junjinyong`.
+
 > **2026-08-11 measurement-functional inverse-flow source-delta override ·
 > schema 7.5:** Bayesian finite-element regression now directly reconstructs
 > steady vascular velocity/pressure from noisy under-resolved velocity with

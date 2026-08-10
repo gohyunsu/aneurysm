@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 7.6 direct-prior correction · 2026-08-11:** Generic 3D foundation
+> surface features are no longer a plausible novelty path. TRELLIS features
+> already improve an AnXplore mesh-GNN rollout on 101 sacs sharing one uniform
+> parent vessel. The paper does not evaluate transient surface-WSS critical
+> points/worldlines and its stated code URL is currently unavailable, so it
+> neither activates nor refutes the retained surface-vector hypothesis. A future
+> material source must treat foundation features as a matched control and still
+> establish a distinct field-error-matched structural failure mechanism. No
+> task, method, architecture or GPU is active. See the [direct-prior delta](trellis-surface-feature-direct-prior-delta-2026-08-11.md).
+
 > **Schema 7.5 direction · 2026-08-11:** The tempting pivot from surface WSS to
 > measurement-conditioned inverse flow is not an easier novelty path. Bayesian
 > finite-element regression already maps noisy sparse velocity with unknown BC

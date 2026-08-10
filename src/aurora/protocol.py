@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.5":
-        raise ProtocolError("The current research-state schema must be version 7.5.")
+    if protocol["schema_version"] != "7.6":
+        raise ProtocolError("The current research-state schema must be version 7.6.")
 
     project = protocol["project"]
     _require_keys(
@@ -932,6 +932,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "candidate_components_are_novel_individually",
             "candidate_components",
             "direct_prior_components",
+            "foundation_surface_feature_direct_prior",
             "new_evidence_version_requires_material_source_or_asset_change",
             "new_wrapper_downloader_retry_or_model_name_is_new_evidence",
             "same_contract_repair_or_rerun_allowed",
@@ -965,6 +966,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "field_error_matched_transient_wss_surrogates_may_disagree_on_robust_signed_critical_points_and_cardiac_cycle_worldlines"
         or conditional_surface["evaluation_problem_is_independently_novel"] is not False
         or conditional_surface["candidate_components_are_novel_individually"] is not False
+        or set(conditional_surface["direct_prior_components"])
+        != {
+            "hodge_and_dec_operator_learning",
+            "se3_equivariant_surface_wss_prediction",
+            "critical_point_extraction_and_robust_tracking",
+            "trajectory_preserving_vector_field_compression",
+            "aneurysm_specific_cardiac_cycle_wss_critical_point_tracking",
+            "nonmedical_3d_foundation_surface_feature_augmentation_for_aneurysm_flow_gnn",
+        }
         or conditional_surface["new_evidence_version_requires_material_source_or_asset_change"] is not True
         or conditional_surface["new_wrapper_downloader_retry_or_model_name_is_new_evidence"] is not False
         or conditional_surface["same_contract_repair_or_rerun_allowed"] is not False
@@ -1008,6 +1018,90 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "whose exact P0 is closed and whose re-entry requires a material source change."
         )
     checks.append("inactive surface-vector hypothesis and material re-entry boundary")
+    foundation_prior = conditional_surface["foundation_surface_feature_direct_prior"]
+    _require_keys(
+        foundation_prior,
+        [
+            "status",
+            "audit_document",
+            "arxiv",
+            "publication_doi",
+            "anxplore_cases_reported",
+            "common_uniform_parent_vessel",
+            "pretraining_nonmedical_3d_assets",
+            "feature_dimension",
+            "rendered_views_per_object",
+            "voxel_grid_edge",
+            "active_surface_voxels_approximate",
+            "gnn_core_modified_beyond_feature_addition",
+            "runs_with_features",
+            "runs_without_features",
+            "small_model_rollout_rmse_without_features",
+            "small_model_rollout_rmse_with_features",
+            "large_model_rollout_rmse_without_features",
+            "large_model_rollout_rmse_with_features",
+            "paper_summary_error_reduction_percent_approximate",
+            "surface_wss_critical_point_or_worldline_endpoint_reported",
+            "independent_sealed_gnn_split_stated_in_inspected_source",
+            "stated_code_url",
+            "stated_code_url_http_status_on_2026_08_11",
+            "github_exact_repository_search_count_on_2026_08_11",
+            "medical_payload_or_checkpoint_accessed",
+            "server_queried",
+            "pbs_job_created",
+            "gpu_training_authorized",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+        ],
+        "TRELLIS surface-feature direct prior",
+    )
+    if (
+        foundation_prior["status"]
+        != "paper_verified_stated_code_url_currently_404_no_candidate_or_authorization_change"
+        or foundation_prior["audit_document"]
+        != "docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md"
+        or foundation_prior["arxiv"] != "2509.03095"
+        or foundation_prior["publication_doi"]
+        != "10.1016/j.neuri.2026.100259"
+        or foundation_prior["anxplore_cases_reported"] != 101
+        or foundation_prior["common_uniform_parent_vessel"] is not True
+        or foundation_prior["pretraining_nonmedical_3d_assets"] != 500000
+        or foundation_prior["feature_dimension"] != 1024
+        or foundation_prior["rendered_views_per_object"] != 200
+        or foundation_prior["voxel_grid_edge"] != 64
+        or foundation_prior["active_surface_voxels_approximate"] != 5000
+        or foundation_prior["gnn_core_modified_beyond_feature_addition"] is not False
+        or foundation_prior["runs_with_features"] != 5
+        or foundation_prior["runs_without_features"] != 5
+        or foundation_prior["small_model_rollout_rmse_without_features"] != 7.57
+        or foundation_prior["small_model_rollout_rmse_with_features"] != 6.09
+        or foundation_prior["large_model_rollout_rmse_without_features"] != 4.03
+        or foundation_prior["large_model_rollout_rmse_with_features"] != 3.55
+        or foundation_prior["paper_summary_error_reduction_percent_approximate"] != 15
+        or foundation_prior["surface_wss_critical_point_or_worldline_endpoint_reported"] is not False
+        or foundation_prior["independent_sealed_gnn_split_stated_in_inspected_source"] is not False
+        or foundation_prior["stated_code_url"]
+        != "https://github.com/clementhrv/trellis_for_intra"
+        or foundation_prior["stated_code_url_http_status_on_2026_08_11"] != 404
+        or foundation_prior["github_exact_repository_search_count_on_2026_08_11"] != 0
+        or any(
+            foundation_prior[key] is not False
+            for key in (
+                "medical_payload_or_checkpoint_accessed",
+                "server_queried",
+                "pbs_job_created",
+                "gpu_training_authorized",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or foundation_prior["decision"]
+        != "treat_foundation_surface_features_as_direct_control_without_reopening_surface_vector_source_score_p0_method_architecture_gpu_or_claim"
+    ):
+        raise ProtocolError(
+            "The TRELLIS update must remain a direct-prior correction with a "
+            "currently unavailable stated code URL and no candidate or compute authority."
+        )
+    checks.append("TRELLIS surface-feature direct-prior and no-authority boundary")
     removal_delta = problem_selection["expert_virtual_removal_pair_source_delta"]
     _require_keys(
         removal_delta,

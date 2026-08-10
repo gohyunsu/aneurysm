@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest inverse-flow batch best 30.0/40 rejected · surface-vector retained only as inactive conditional hypothesis · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
+    status: "Target locked · TRELLIS surface features added as direct prior · latest inverse-flow batch best 30.0/40 rejected · surface-vector retained only as inactive conditional hypothesis · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
     requirement: "a genuinely fresh problem or materially changed phase-resolved WSS source must pass source entry, method-free stability and failure-mechanism gates before architecture or GPU; already-used BenchAnXplore simulations, geometry-only pairs and wrapper/downloader/model renaming cannot reopen a closed contract",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Foundation surface features strengthen the baseline, not the claim",
+      copy: "TRELLIS-enhanced aneurysm analysis already transfers 1,024-dimensional features from a 500,000-object non-medical 3D encoder into PointNet/PointNet++ and an AnXplore mesh GNN. The 101 sacs share one uniform parent vessel; rollout RMSE improves from 7.57 to 6.09 and 4.03 to 3.55. The paper reports no transient surface-WSS critical-point or worldline endpoint and no independent sealed GNN split in the inspected source. Its stated GitHub URL currently returns 404. Foundation features are therefore a future matched direct control, not AURORA novelty, a material E0 asset or architecture authorization.",
+      status: "Direct-prior correction · code URL 404 · candidate/P0/method/architecture/server/GPU 0",
+      url: "../docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Bayesian inverse flow narrows the gap before a neural operator is named",
@@ -797,6 +804,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 7.6 adds TRELLIS surface features as a direct control",
+      copy: "The inspected paper already augments aneurysm point/mesh models with 1,024-dimensional features from a 500,000-object non-medical 3D encoder. Its AnXplore experiment uses 101 sacs on one uniform parent vessel and reports rollout RMSE 7.57→6.09 and 4.03→3.55, but no transient surface-WSS critical-point/worldline endpoint or independent sealed GNN split. The stated code URL currently returns 404. This narrows future baselines without changing a score, source lead, closed P0, method, architecture, server query, PBS/GPU, outer test or claim.",
+      files: ["docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/literature-lineage.md", "docs/surface-vector-conditional-assessment-2026-08-10.md", "docs/source-watch.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "research",

@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 surface-feature direct-prior correction · schema 7.6:** TRELLIS-
+> enhanced aneurysm analysis already adds 1,024-dimensional features from a
+> non-medical 3D foundation model to PointNet/PointNet++ and an AnXplore mesh
+> GNN. On 101 sacs placed on one uniform parent vessel it reports lower rollout
+> RMSE, so foundation surface encoders and feature concatenation are direct
+> controls, not novelty. It does not report transient surface-WSS critical
+> points, signed indices or worldlines; an independent sealed GNN split is not
+> stated in the inspected source; and the paper's stated code URL returned 404
+> on 2026-08-11. This narrows future baselines without changing any candidate
+> score or authorization. Surface-vector remains inactive; active lead,
+> primary, P0/P1, method, architecture, server query, PBS/GPU, outer test and
+> claim remain 0. [Direct-prior delta](docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md)
+
 > **2026-08-11 inverse-flow direct-prior delta · schema 7.5:** Bayesian finite-
 > element regression now directly covers noisy under-resolved vascular velocity
 > observations, unknown BC, exact no-slip, velocity/pressure posterior and WSS

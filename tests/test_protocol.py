@@ -297,6 +297,39 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "inverse-flow batch"):
             validate_protocol(candidate)
 
+    def test_trellis_surface_feature_update_is_direct_prior_only(self) -> None:
+        assessment = self.protocol["problem_selection"][
+            "surface_vector_conditional_assessment"
+        ]
+        prior = assessment["foundation_surface_feature_direct_prior"]
+        self.assertEqual(prior["arxiv"], "2509.03095")
+        self.assertEqual(prior["anxplore_cases_reported"], 101)
+        self.assertTrue(prior["common_uniform_parent_vessel"])
+        self.assertEqual(prior["feature_dimension"], 1024)
+        self.assertEqual(prior["stated_code_url_http_status_on_2026_08_11"], 404)
+        self.assertFalse(
+            prior["surface_wss_critical_point_or_worldline_endpoint_reported"]
+        )
+        self.assertFalse(prior["medical_payload_or_checkpoint_accessed"])
+        self.assertFalse(prior["server_queried"])
+        self.assertFalse(prior["gpu_training_authorized"])
+        self.assertFalse(prior["junjinyong_accessed_for_this_audit"])
+        self.assertFalse(assessment["architecture_selected"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_conditional_assessment"][
+            "foundation_surface_feature_direct_prior"
+        ]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "TRELLIS"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_conditional_assessment"][
+            "foundation_surface_feature_direct_prior"
+        ]["surface_wss_critical_point_or_worldline_endpoint_reported"] = True
+        with self.assertRaisesRegex(ProtocolError, "TRELLIS"):
+            validate_protocol(candidate)
+
     def test_aneumo_bc_transport_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneumo_bc_transport_source_audit"]

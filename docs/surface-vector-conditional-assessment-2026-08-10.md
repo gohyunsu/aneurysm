@@ -1,5 +1,13 @@
 # Surface-vector conditional hypothesis assessment
 
+> **2026-08-11 direct-prior addendum · schema 7.6:** TRELLIS-based
+> 1,024-dimensional surface features already improve a mesh-GNN rollout on 101
+> AnXplore sacs sharing one uniform vessel. Generic foundation-surface
+> augmentation is therefore an additional direct control. The paper does not
+> report transient surface-WSS critical points/worldlines and its stated code
+> URL currently returns 404, so this addendum neither activates nor rejects the
+> hypothesis below. [Exact delta](trellis-surface-feature-direct-prior-delta-2026-08-11.md).
+
 > **Decision · schema 7.3 · 2026-08-10 KST:** The proposed surface-vector
 > direction is scientifically coherent enough to retain as an **inactive,
 > conditional application hypothesis**. It is not an active source lead,
@@ -96,8 +104,9 @@ at the geometry level. Thresholds are fixed before aggregate inspection.
 Establish that models matched within a frozen field-error tolerance can still
 separate on stable structural endpoints. Required controls are Cartesian
 regression, post-hoc tangent projection, an equivariant surface model, an
-official or faithful GHD-family baseline, a Hodge-spectral operator and a
-non-learned field perturbation floor. If field error nearly determines all
+official or faithful GHD-family baseline, a Hodge-spectral operator, a
+TRELLIS-style foundation-surface-feature control when faithfully available,
+and a non-learned field perturbation floor. If field error nearly determines all
 stable structural endpoints, the proposed paper identity is unsupported.
 
 ### E3 · Bounded validation development
