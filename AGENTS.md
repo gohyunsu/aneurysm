@@ -15,6 +15,9 @@
 > shortlist, selected primary, method, architecture and GPU are 0. Future work
 > is a fresh problem-level source/asset audit, not local repair. `junjinyong`
 > was not accessed and remains prohibited for all AURORA operations.
+> Exact outcome content `9632ee5a5e507318fd18bff217c934c30a0b1a02`
+> passed Quality `31364095951` and Pages `31364095339`; this deployment
+> evidence changes no gate, repair or compute authorization.
 
 > **2026-08-10 AneuG-Flow P0-v2a operational override:** Historical exact
 > P0-v1 (`754ed746…`, job `115168.ECE-util1`, exit 28) remains

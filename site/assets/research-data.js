@@ -664,7 +664,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.10",
       category: "experiment",
       title: "AneuG-Flow P0-v2a closes execution-incomplete without a verdict",
-      copy: "Exact clean public source 690035ae… ran once on introai9 as CPU/PBS job 115467.ECE-util1. It was observed in E with exit 1 after 8 seconds, CPU time 0 and 16824 kB memory; only a 319-byte execution-incomplete status materialized. Aggregate result and raw PBS output are absent, so completed HEAD/range operations, verified bytes, transport pass/fail and all scientific checks remain unevaluated. The one repair round is consumed. No rerun, v2b, P1, method, architecture, GPU, outer test or claim is authorized; active shortlist returns to 0 and junjinyong remains excluded.",
+      copy: "Exact clean public source 690035ae… ran once on introai9 as CPU/PBS job 115467.ECE-util1. It was observed in E with exit 1 after 8 seconds, CPU time 0 and 16824 kB memory; only a 319-byte execution-incomplete status materialized. Aggregate result and raw PBS output are absent, so completed HEAD/range operations, verified bytes, transport pass/fail and all scientific checks remain unevaluated. The one repair round is consumed. No rerun, v2b, P1, method, architecture, GPU, outer test or claim is authorized; active shortlist returns to 0. Exact outcome content 9632ee5a… passed Quality 31364095951 and Pages 31364095339. junjinyong remains excluded.",
       files: ["results/aneug_cycle_transport_p0_v2a_execution_20260810.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/aneug-cycle-transport-reentry-2026-08-10.md", "site/index.html", "site/learn.html", "AGENTS.md"]
     },
     {

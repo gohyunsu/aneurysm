@@ -6,6 +6,8 @@
 > result and raw PBS output did not. The job later stopped returning from
 > `qstat`. Do not repeat the connection, submission or repair loop. No v2b/P1/
 > model/GPU is authorized. `junjinyong` was not used and remains prohibited.
+> Exact public outcome `9632ee5a5e507318fd18bff217c934c30a0b1a02`
+> passed Quality `31364095951` and Pages `31364095339`.
 
 > **Current execution boundary · 2026-08-10:** `junjinyong` is prohibited for
 > connection, query, transfer, submission and monitoring. The only pending
