@@ -624,6 +624,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "TopBrain 2.0 source boundary is live",
+      copy: "Exact scientific content 8b2a70c9a6bab21962d22b66601481d323e4a52e passed Quality 31354245210 and Pages 31354244348. Direct live checks of the overview, zero-assumption guide and detailed audit return HTTP 200 and render best 29.0/40, all six rejected, design-PDF-only semantics and no medical payload/P0/model/GPU. This provenance creates no release/license assumption, method, compute or submission authorization; introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "docs/server-execution.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "TopBrain 2.0 proposal does not identify a released residual aneurysm problem",
       copy: "A bounded official-source audit freezes six candidates at 29.0/28.5/28.0/27.5/27.0/23.5. The only official Zenodo file is a 35-page design PDF; the challenge is under construction and not accepting submissions. Aneurysm is a planned robustness context for vessel anatomy, not a released lesion target. TopBrain 1, TopAneu, RSNA multitask systems and topology/connectivity losses are direct priors. Schema 5.9 creates no medical payload, P0, PBS job, method, architecture, GPU, outer test or C21 claim; introai9 remains exclusive and junjinyong remains excluded.",

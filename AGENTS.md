@@ -15,6 +15,12 @@
 > row and submission identity are 0. AURORA uses only `introai9` after a fresh
 > gate; `junjinyong` must not be connected to, queried, used for transfer or
 > submission, or monitored.
+> Exact scientific content `8b2a70c9a6bab21962d22b66601481d323e4a52e`
+> passed Quality `31354245210` and Pages `31354244348`. Direct live checks of
+> overview, zero-assumption guide and detailed audit returned HTTP 200 and
+> rendered TopBrain 2.0 best 29.0/40, all rejected, no medical payload/P0/
+> model/GPU. This deployment evidence changes no source score, task, method,
+> compute or submission authorization.
 
 > **2026-08-10 RSNA AWS registry correction overlay:** Official AWS registry
 > YAML blob `97b8c1f…` at file commit `523ffd3…` reports RSNA-ICA as 4,000+

@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-10 · TopBrain 2.0 content and live site verified
+
+- Exact scientific content `8b2a70c9a6bab21962d22b66601481d323e4a52e`
+  passed Quality `31354245210` and Pages `31354244348`.
+- Live overview, zero-assumption guide and detailed audit return HTTP 200 and
+  render TopBrain 2.0 best 29.0/40, all six rejected, design-PDF-only source
+  semantics and no medical payload/P0/model/GPU.
+- Deployment verification creates no release/license/target assumption, P0,
+  architecture, compute, outer test or submission identity. Future authorized
+  execution remains `introai9`-only; `junjinyong` remains excluded.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `docs/server-execution.md`,
+  `site/assets/research-data.js`.
+
 ## 2026-08-10 · TopBrain 2.0 proposal remains below source admission
 
 - Verified the official Zenodo record, 35-page/139,840-byte design PDF,

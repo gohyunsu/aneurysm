@@ -1,5 +1,15 @@
 # AURORA 서버 실행과 provenance
 
+## 2026-08-10 · TopBrain 2.0 deployment verification
+
+- Exact content `8b2a70c9a6bab21962d22b66601481d323e4a52e` passed Quality
+  `31354245210` and Pages `31354244348`.
+- Live overview, guide and detailed audit return HTTP 200 with the same
+  29.0/40, all-rejected and no-compute boundary.
+- This is provenance only. It creates no medical payload, P0, PBS/GPU job or
+  monitoring loop. `introai9` remains the only possible future execution
+  target, and `junjinyong` remains completely excluded.
+
 ## 2026-08-10 · TopBrain 2.0 source audit, no job authorized
 
 - Six source-only candidates score 29.0/28.5/28.0/27.5/27.0/23.5, all below
