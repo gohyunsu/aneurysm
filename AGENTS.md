@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 TopBrain 2.0 source overlay:** Official Zenodo record
+> `10.5281/zenodo.19707577` contains one 35-page, 139,840-byte design PDF
+> (MD5 `da6c835d…`, SHA-256 `15a2269b…`), not a verified medical-image
+> release. The challenge page is `Under construction`; Grand Challenge reports
+> `Not accepting submissions`; a versioned dataset, attached license,
+> casewise target/lineage and executable 2026 evaluation contract are not
+> verified. Planned aneurysm cases are a vessel-anatomy robustness condition,
+> not lesion supervision. Six frozen scores are
+> 29.0/28.5/28.0/27.5/27.0/23.5, all below 32. Schema 5.9 source of truth is
+> `docs/topbrain2-source-audit-2026-08-10.md` and
+> `problem_selection.topbrain2_source_audit`. Active shortlist, primary,
+> medical payload, P0, method, architecture, PBS/GPU, outer test, C21/result
+> row and submission identity are 0. AURORA uses only `introai9` after a fresh
+> gate; `junjinyong` must not be connected to, queried, used for transfer or
+> submission, or monitored.
+
 > **2026-08-10 RSNA AWS registry correction overlay:** Official AWS registry
 > YAML blob `97b8c1f…` at file commit `523ffd3…` reports RSNA-ICA as 4,000+
 > scans, 40+ radiologists, about 200 AI-segmented studies and 18 institutions.

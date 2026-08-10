@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 TopBrain 2.0 asset boundary:** The official Zenodo record has
+> one 139,840-byte design PDF and no verified patient image, vessel mask,
+> aneurysm annotation, clinical table, split or held-out-test payload. Planned
+> counts (Task 1: 215 train/123 test; Task 2: 315/183) are not available units.
+> Aneurysm-bearing TopAneu volumes are planned robustness cases for vessel
+> anatomy, not lesion labels. Current role: watch-only rejected source, never a
+> train/validation/test asset.
+
 > **2026-08-10 RSNA-ICA registry correction:** AWS registry metadata reports
 > 4,000+ scans, 40+ radiologists, about 200 AI-segmented studies and 18
 > institutions, but the bucket is `ControlledAccess` and no terms/request or

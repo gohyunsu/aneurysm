@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 TopBrain 2.0 source boundary:** The official source is one
+> 35-page, 139.8 kB challenge-design PDF, while the challenge page is `Under
+> construction` and Grand Challenge says `Not accepting submissions`. A
+> versioned medical dataset, attached license, casewise target/lineage and
+> executable 2026 evaluation contract were not verified. Planned TopAneu
+> aneurysm cases are a vessel-anatomy robustness condition, not a released
+> lesion target. Six frozen candidates score **29.0/28.5/28.0/27.5/27.0/23.5**;
+> TopBrain 1, TopAneu, RSNA multitask and topology/connectivity methods are
+> direct priors. [`Detailed audit`](docs/topbrain2-source-audit-2026-08-10.md).
+> All are rejected below 32 without medical payload, P0, method, architecture,
+> PBS/GPU, outer test or claim. Future execution is `introai9` PBS only;
+> `junjinyong` is excluded from connection, query, transfer, submission and
+> monitoring.
+
 > **2026-08-10 RSNA AWS registry correction:** The official AWS Open Data
 > Registry now documents RSNA-ICA as 4,000+ scans from 18 institutions with
 > 40+ radiologists, but the resource is explicitly `ControlledAccess`; the

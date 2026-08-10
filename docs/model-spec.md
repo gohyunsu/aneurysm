@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 TopBrain 2.0 architecture boundary:** No GNN, U-Net,
+> Transformer, topology loss, modality head, uncertainty head or conformal
+> wrapper is selected. The only official asset is a design PDF and the obvious
+> lesion/vessel, anatomy, topology and connectivity components are direct
+> priors. The best source score is 29.0/40; model and GPU authorization remain
+> zero until a different released problem passes source and method-free gates.
+
 > **2026-08-10 RSNA registry correction:** No detector, GNN, U-Net,
 > Transformer, lesion-set decoder or conformal head is selected. The new
 > official registry remains controlled-access and the strongest residual

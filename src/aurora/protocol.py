@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.8":
-        raise ProtocolError("The current research-state schema must be version 5.8.")
+    if protocol["schema_version"] != "5.9":
+        raise ProtocolError("The current research-state schema must be version 5.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_rsna_aws_registry_source_rejection_aneumo_lineage_p0_closed"
+        != "failed_branches_preserved_no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_closed"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -207,6 +207,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "registry_gap_source_audit",
             "broad_registry_source_audit",
             "rsna_aws_registry_correction_audit",
+            "topbrain2_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -216,12 +217,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_rsna_aws_registry_source_rejection_aneumo_lineage_p0_remains_closed"
+        != "no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_rsna_aws_registry_correction_official_metadata_only_controlled_access_no_mira_terms_request_s3_listing_or_payload_aneumo_lineage_p0_history_unchanged"
+        != "latest_topbrain2_official_design_pdf_only_no_versioned_medical_dataset_license_or_executable_evaluation_release_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not True
@@ -231,13 +232,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "user_personally_accepts_rsna_terms_and_official_manifest_exposes_development_label_lineage_and_sealed_evaluation_then_run_a_fresh_source_task_audit_or_monitor_other_material_sources_without_repairing_closed_branches"
+        != "monitor_for_a_versioned_licensed_topbrain2_release_with_casewise_target_lineage_or_a_genuinely_new_source_then_run_only_a_fresh_source_audit_without_repairing_closed_branches"
         or problem_selection["audit_document"]
-        != "docs/rsna-aws-registry-audit-2026-08-10.md"
+        != "docs/topbrain2-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "rsna_registry_backed_study_level_lesion_set_miss_risk_control"
+        != "topbrain2_joint_lesion_parent_vessel_consistency"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -348,6 +349,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "vwi_habitat_instability_reanalysis",
         "synthetic_dsa_reader_realism",
         "rsna_registry_backed_study_level_lesion_set_miss_risk_control",
+        "topbrain2_joint_lesion_parent_vessel_consistency",
+        "topbrain2_disease_conditioned_selective_vessel_segmentation",
+        "topbrain2_aneurysm_conditioned_vessel_integrity_failure_localization",
+        "topbrain2_unified_modality_source_invariant_artery_vein_anatomy",
+        "topbrain2_class_contamination_aware_multiclass_vessel_calibration",
+        "topbrain2_compositional_aneurysm_stenosis_ordinal_diagnosis",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -4194,6 +4201,188 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "and complete junjinyong exclusion."
         )
     checks.append("RSNA AWS controlled-access registry correction boundary")
+
+    topbrain2_audit = problem_selection["topbrain2_source_audit"]
+    _require_keys(
+        topbrain2_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_ids",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "zenodo_record",
+            "zenodo_publication_date",
+            "design_pdf_bytes",
+            "design_pdf_pages",
+            "design_pdf_md5",
+            "design_pdf_sha256",
+            "zenodo_license_identifier_present",
+            "challenge_page_status",
+            "grand_challenge_submission_status",
+            "planned_training_release_date",
+            "planned_test_window",
+            "versioned_topbrain2_dataset_release_verified",
+            "versioned_topbrain2_executable_evaluation_contract_verified",
+            "topbrain2025_evaluation_repository_head",
+            "topbrain2025_evaluation_repository_scope",
+            "planned_task1_train_volumes",
+            "planned_task1_test_volumes",
+            "planned_task1_labels_at_least",
+            "planned_task1_modalities",
+            "planned_task1_topaneu_train_volumes",
+            "planned_task1_topaneu_test_volumes",
+            "planned_task1_aneurysm_is_robustness_condition_not_lesion_target",
+            "planned_task1_metrics",
+            "planned_task2_train_volumes",
+            "planned_task2_test_volumes",
+            "planned_task2_endpoint",
+            "planned_task2_single_expert_per_case_without_merge",
+            "casewise_aneurysm_mask_parent_vessel_attachment_acquisition_reader_or_cross_challenge_identity_manifest_verified",
+            "patient_image_mask_clinical_split_or_test_payload_accessed",
+            "direct_prior_threats",
+            "candidates",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_pbs_jobs_observed",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.topbrain2_source_audit",
+    )
+    expected_topbrain2_scores = {
+        "topbrain2_joint_lesion_parent_vessel_consistency": 29.0,
+        "topbrain2_disease_conditioned_selective_vessel_segmentation": 28.5,
+        "topbrain2_aneurysm_conditioned_vessel_integrity_failure_localization": 28.0,
+        "topbrain2_unified_modality_source_invariant_artery_vein_anatomy": 27.5,
+        "topbrain2_class_contamination_aware_multiclass_vessel_calibration": 27.0,
+        "topbrain2_compositional_aneurysm_stenosis_ordinal_diagnosis": 23.5,
+    }
+    observed_topbrain2_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in topbrain2_audit["candidates"]
+    }
+    topbrain2_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in topbrain2_audit["candidates"]
+    )
+    expected_topbrain2_priors = {
+        "topbrain1_multimodal_multiclass_whole_brain_vessel_segmentation",
+        "topaneu_multimodal_aneurysm_detection_classification_and_segmentation",
+        "rsna_multitask_aneurysm_and_vessel_classification_and_segmentation",
+        "multiclass_betti_matching_topology_loss",
+        "cbdice_radius_boundary_topology_loss",
+        "centerline_cross_entropy_connectivity_loss",
+        "generic_pathology_aware_domain_generalization_and_selective_segmentation",
+    }
+    if (
+        topbrain2_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or topbrain2_audit["audit_document"]
+        != "docs/topbrain2-source-audit-2026-08-10.md"
+        or topbrain2_audit["automatic_selection_threshold"] != 32.0
+        or topbrain2_audit["best_candidate_ids"]
+        != ["topbrain2_joint_lesion_parent_vessel_consistency"]
+        or topbrain2_audit["best_score"] != 29.0
+        or topbrain2_audit["best_score"]
+        >= topbrain2_audit["automatic_selection_threshold"]
+        or topbrain2_audit["active_shortlist_count"] != 0
+        or topbrain2_audit["primary_problem_selected"] is not False
+        or topbrain2_audit["zenodo_record"] != "10.5281/zenodo.19707577"
+        or topbrain2_audit["zenodo_publication_date"] != "2026-04-23"
+        or topbrain2_audit["design_pdf_bytes"] != 139840
+        or topbrain2_audit["design_pdf_pages"] != 35
+        or topbrain2_audit["design_pdf_md5"]
+        != "da6c835d0336db81a94b78e7601f47b8"
+        or topbrain2_audit["design_pdf_sha256"]
+        != "15a2269bc00b6720f10d6efd41d8996010703451aef32de14f599cd3357ff4f7"
+        or topbrain2_audit["zenodo_license_identifier_present"] is not False
+        or topbrain2_audit["challenge_page_status"] != "under_construction"
+        or topbrain2_audit["grand_challenge_submission_status"]
+        != "not_accepting_submissions"
+        or topbrain2_audit["versioned_topbrain2_dataset_release_verified"]
+        is not False
+        or topbrain2_audit[
+            "versioned_topbrain2_executable_evaluation_contract_verified"
+        ]
+        is not False
+        or topbrain2_audit["topbrain2025_evaluation_repository_head"]
+        != "ba4252ab0dbe9d59a9ae45058ae040b016aae0ad"
+        or topbrain2_audit["planned_task1_train_volumes"] != 215
+        or topbrain2_audit["planned_task1_test_volumes"] != 123
+        or topbrain2_audit["planned_task1_labels_at_least"] != 55
+        or topbrain2_audit["planned_task1_topaneu_train_volumes"] != 50
+        or topbrain2_audit["planned_task1_topaneu_test_volumes"] != 20
+        or topbrain2_audit[
+            "planned_task1_aneurysm_is_robustness_condition_not_lesion_target"
+        ]
+        is not True
+        or topbrain2_audit["planned_task2_train_volumes"] != 315
+        or topbrain2_audit["planned_task2_test_volumes"] != 183
+        or topbrain2_audit["planned_task2_endpoint"]
+        != "per_vessel_stenosis_and_occlusion_ordinal_grading"
+        or topbrain2_audit[
+            "planned_task2_single_expert_per_case_without_merge"
+        ]
+        is not True
+        or topbrain2_audit[
+            "casewise_aneurysm_mask_parent_vessel_attachment_acquisition_reader_or_cross_challenge_identity_manifest_verified"
+        ]
+        is not False
+        or topbrain2_audit[
+            "patient_image_mask_clinical_split_or_test_payload_accessed"
+        ]
+        is not False
+        or set(topbrain2_audit["direct_prior_threats"])
+        != expected_topbrain2_priors
+        or observed_topbrain2_scores != expected_topbrain2_scores
+        or not topbrain2_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in topbrain2_audit["candidates"]
+        )
+        or not set(expected_topbrain2_scores).issubset(
+            set(problem_selection["rejected_candidates"])
+        )
+        or problem_selection["most_recent_source_rejected_candidate"]
+        != "topbrain2_joint_lesion_parent_vessel_consistency"
+        or topbrain2_audit["executable_p0_registered"] is not False
+        or topbrain2_audit["method_selected"] is not False
+        or topbrain2_audit["architecture_selected"] is not False
+        or topbrain2_audit["gpu_training_authorized"] is not False
+        or topbrain2_audit["outer_test_authorized"] is not False
+        or topbrain2_audit["submission_identity_active"] is not False
+        or topbrain2_audit["execution_server"] != "introai9"
+        or topbrain2_audit["introai9_connection_verified"] is not True
+        or topbrain2_audit["introai9_pbs_jobs_observed"] != 0
+        or topbrain2_audit["pbs_job_created"] is not False
+        or topbrain2_audit["login_node_gpu_command_executed"] is not False
+        or topbrain2_audit["junjinyong_accessed_for_this_audit"] is not False
+        or topbrain2_audit["decision"]
+        != "reject_all_without_score_repair_medical_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or topbrain2_audit["next_allowed_action"]
+        != "monitor_for_a_versioned_licensed_release_and_casewise_target_lineage_then_run_only_a_fresh_source_audit_not_automatic_download_p0_or_training"
+    ):
+        raise ProtocolError(
+            "The TopBrain 2.0 source audit must retain the six frozen "
+            "rejections, proposal-only release boundary, no medical payload/"
+            "P0/model/PBS/GPU, introai9-only execution, and complete "
+            "junjinyong exclusion."
+        )
+    checks.append("TopBrain 2.0 proposal-only source rejection boundary")
 
     venue = protocol["venue"]
     _require_keys(

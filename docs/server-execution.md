@@ -1,5 +1,15 @@
 # AURORA 서버 실행과 provenance
 
+## 2026-08-10 · TopBrain 2.0 source audit, no job authorized
+
+- Six source-only candidates score 29.0/28.5/28.0/27.5/27.0/23.5, all below
+  32. The official object is a design PDF; no medical payload or P0 was opened.
+- Therefore no PBS job, GPU allocation or monitoring loop was created. The
+  last bounded `introai9` AURORA queue observation remains empty; no login-node
+  GPU command ran.
+- `junjinyong` was not connected to, queried, used for transfer/submission or
+  monitored and remains completely excluded from AURORA.
+
 ## 2026-08-10 · RSNA registry deployment verification
 
 - Exact content `5690b104e6d3fc2644b3d934e12b834ea2c3c3da` passed Quality

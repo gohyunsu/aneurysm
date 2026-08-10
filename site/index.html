@@ -45,19 +45,20 @@
           <em>First prove that a residual gap remains.</em>
         </h1>
         <p class="hero-lede">
-          공식 AWS 레지스트리는 RSNA-ICA를 4,000+ scan, 18개 기관, 40명 이상
-          판독자의 대규모 자산으로 설명하지만, 동시에 RSNA MIRA를 통한
-          ControlledAccess로 명시합니다. 사용자 terms·access request·manifest·
-          payload는 모두 0이고, winning code의 aneurysm supervision은 point/
-          presence/territory이며 13-class mask는 lesion extent가 아니라 vessel
-          anatomy입니다. Detection과 conformal risk-control 직접 선행을 반영한
-          최신 점수는 31.5/40으로 admission line 32에 못 미칩니다.
+          TopBrain 2.0은 55개 이상의 whole-brain vessel label, 다섯 modality와
+          stenosis/occlusion task를 계획합니다. 그러나 공식 Zenodo object는
+          35-page design PDF 하나뿐이고 challenge는 under construction이며
+          submission을 받지 않습니다. 계획된 TopAneu aneurysm case도 vessel
+          anatomy의 robustness context이지 공개 lesion target이 아닙니다.
+          TopBrain 1, TopAneu, RSNA multitask와 topology loss 직접 선행을 반영한
+          최신 최고점은 29.0/40으로 admission line 32에 못 미칩니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/rsna-aws-registry-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/topbrain2-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/rsna-aws-registry-audit-2026-08-10.md">RSNA registry history ↗</a>
           <a class="button ghost" href="../docs/broad-registry-source-audit-2026-08-10.md">Broad-registry history ↗</a>
           <a class="button ghost" href="../docs/registry-gap-source-audit-2026-08-10.md">Registry-gap history ↗</a>
           <a class="button ghost" href="../docs/method-asset-viability-source-audit-2026-08-10.md">Method–asset history ↗</a>
@@ -87,7 +88,7 @@
       </div>
 
       <div class="hero-visual" aria-label="공개 record가 있어도 development cohort와 식별 가능한 endpoint가 있어야 한다는 현재 연구 경계">
-        <div class="visual-caption">RSNA REGISTRY · 31.5/40 · CONTROLLED / REJECTED</div>
+        <div class="visual-caption">TOPBRAIN 2.0 · 29.0/40 · PROPOSAL / REJECTED</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -110,25 +111,25 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>31.5</b><span>latest source score / 40</span>
+            <b>29.0</b><span>latest best source score / 40</span>
           </div>
           <div class="posterior-card card-b">
-            <b>18</b><span>RSNA institutions reported</span>
+            <b>1</b><span>official file · design PDF only</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>admitted residual gaps</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> an official registry entry does not mean anonymous open access</span>
-          <span><i class="dot coral"></i> vessel-anatomy masks are not aneurysm-extent masks</span>
+          <span><i class="dot lime"></i> a challenge proposal is not a released medical dataset</span>
+          <span><i class="dot coral"></i> aneurysm robustness context is not a lesion target</span>
           <span>active primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
         <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>RSNA registry correction 31.5/40 · rejected</b></div>
+        <div><span>Current evidence</span><b>TopBrain 2.0 best 29.0/40 · all six rejected</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
       </div>
@@ -197,15 +198,14 @@
           <p class="eyebrow">CURRENT GAP STATUS</p>
           <h3>No active gap survives direct priors and reference adequacy.</h3>
           <p>
-            RSNA 공식 레지스트리는 대규모·다기관 자산의 존재를 확인하지만
-            ControlledAccess이며 사용자가 terms를 수락하거나 access를 요청하지
-            않았습니다. 공개 winning code는 aneurysm point/presence/territory와
-            vessel-anatomy mask 경계를 보여줍니다. Winning detector와 conformal
-            object/instance risk control 뒤에 독립 알고리즘을 식별하지 못했으므로
-            network 선택 전에 멈췄습니다.
+            TopBrain 2.0은 풍부한 anatomy와 pathology 계획을 제시하지만 실제
+            의료영상 release, license, casewise lesion–parent-vessel lineage와
+            executable sealed test는 확인되지 않았습니다. Aneurysm은 planned
+            robustness condition이고, joint lesion/vessel와 topology modeling은
+            이미 직접 선행이 점유합니다. 따라서 network 선택 전에 멈췄습니다.
           </p>
           <div class="gap-equation" aria-label="source admission 뒤 P0가 미완료되어 모델 권한으로 이어지지 않는 관계">
-            <span>latest source 31.5/40 &lt; 32</span>
+            <span>latest best source 29.0/40 &lt; 32</span>
             <i>⇒</i>
             <span>no payload · no P0 · no model · no GPU</span>
           </div>
@@ -238,9 +238,9 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 최신 RSNA registry correction은
-          controlled access, unresolved manifest/label lineage와 dense direct
-          priors 때문에 source admission을 통과하지 못했습니다.
+          현재 architecture는 없습니다. 최신 TopBrain 2.0 audit은 design-only
+          source, 미확인 release/license/target lineage와 dense direct priors
+          때문에 source admission을 통과하지 못했습니다.
           아래 흐름은 직전 Aneumo 후보가 source admission 뒤에도 왜 model
           selection에 도달하지 못했는지 보여주는 명시적 역사 기록입니다.
         </p>
@@ -597,7 +597,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>RSNA registry correction 31.5/40 · rejected · shortlist/primary/P0/model/GPU 0</b>
+        <span>Current stage</span><b>TopBrain 2.0 best 29.0/40 · all rejected · shortlist/primary/P0/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

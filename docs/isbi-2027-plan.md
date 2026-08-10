@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 TopBrain 2.0 boundary:** Six source-only candidates score
+> 29.0/28.5/28.0/27.5/27.0/23.5. The official object is a design PDF rather
+> than a released medical dataset, and aneurysm is not the Task 1 lesion
+> target. No title, numbered contribution, architecture, result row, method
+> figure, P0 or GPU experiment is added. This audit is unnumbered rejected
+> history; the IEEE ISBI 2027 four-page paper remains **not submission-ready**.
+
 > **2026-08-10 RSNA registry correction:** The target remains an IEEE ISBI 2027
 > four-page regular paper and the project remains not submission-ready. The
 > newest source candidate scores 31.5/40 because the 4,000+/18-institution

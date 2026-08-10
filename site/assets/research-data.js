@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · official RSNA registry correction scores 31.5/40 and is rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
-    requirement: "personally accepted controlled-access terms plus an auditable manifest, or another genuinely identifiable fresh problem ≥32 → new source/task audit before any method-free P0; do not repair closed branches",
+    status: "Target locked · TopBrain 2.0 source-only best 29.0/40 and all six are rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    requirement: "versioned licensed medical release plus casewise target/lineage and a genuinely identifiable fresh problem ≥32 → new source/task audit before any method-free P0; do not repair closed branches",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A challenge design document is not a released aneurysm task",
+      copy: "TopBrain 2.0 plans 55+ whole-brain vessel labels across CTA/MRA/CTV/MRV/7T MRA and a stenosis/occlusion task. The official Zenodo object is only a 35-page, 139.8 kB design PDF; the challenge page is under construction and Grand Challenge says not accepting submissions. Aneurysm-bearing TopAneu scans are planned as a robustness condition for vessel anatomy, not a released lesion target. No versioned dataset, attached license, casewise cross-challenge lineage or executable 2026 evaluation contract was verified.",
+      status: "Best 29.0/40 · all six rejected · medical payload/P0/PBS/model/GPU 0",
+      url: "../docs/topbrain2-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "An official registry entry is not the same as an open, model-ready dataset",
@@ -331,12 +338,19 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Direct prior", "Global/local anatomy-aware detection · point/presence/territory multitask", "Sequential risk control · instance prediction sets", "4,000+ scans · 18 institutions · 40+ radiologists", "None admitted"],
-    ["Observable target", "Lesion center and territory under study-level presence", "Detection/instance error under declared risk", "Manifest and adjudication lineage not yet audited", "Study-level lesion-set miss risk with a task-specific guarantee"],
-    ["Known boundary", "13-class masks are vessel anatomy, not lesion extent", "Generic wrapper is not a new aneurysm method", "ControlledAccess · user terms/request/payload 0", "Released observation process plus sealed test and unoccupied algorithm required"],
-    ["Current decision", "Mandatory baseline", "Mandatory baseline", "No access action", "31.5/40 reject · no P0/method/GPU"]
+    ["Direct prior", "TopBrain 1 multiclass artery/vein segmentation", "TopAneu + RSNA lesion/vessel multitask", "Betti matching · cbDice · clCE", "None admitted"],
+    ["Observable target", "Planned 55+ vessel-anatomy labels", "Aneurysm only as planned robustness context", "Organizer topology/contamination metrics", "No released joint lesion–parent-vessel target"],
+    ["Known boundary", "Design PDF only", "No versioned data/license/lineage", "Challenge under construction", "Released observation process plus sealed test and unoccupied algorithm required"],
+    ["Current decision", "Mandatory baseline", "Mandatory baseline", "No access action", "29.0/40 reject · no P0/method/GPU"]
   ],
   gates: [
+    {
+      id: "S-TB2",
+      title: "Does TopBrain 2.0 expose a released aneurysm target with an unoccupied algorithmic gap?",
+      copy: "No. The official object is a challenge-design PDF, not a medical dataset. Aneurysm is a planned vessel-segmentation robustness condition, while TopAneu/RSNA already occupy joint lesion–vessel modeling and TopBrain/Betti/cbDice/clCE occupy anatomy and topology. Planned sample counts cannot replace a license, casewise target lineage or executable sealed test.",
+      state: "Best 29.0/40 < 32 · all six rejected · medical payload/P0/PBS/model/GPU 0",
+      blocking: true
+    },
     {
       id: "S-RSNA",
       title: "Does the official RSNA registry correction identify an accessible, unoccupied study-level risk-control problem?",
@@ -608,6 +622,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "TopBrain 2.0 proposal does not identify a released residual aneurysm problem",
+      copy: "A bounded official-source audit freezes six candidates at 29.0/28.5/28.0/27.5/27.0/23.5. The only official Zenodo file is a 35-page design PDF; the challenge is under construction and not accepting submissions. Aneurysm is a planned robustness context for vessel anatomy, not a released lesion target. TopBrain 1, TopAneu, RSNA multitask systems and topology/connectivity losses are direct priors. Schema 5.9 creates no medical payload, P0, PBS job, method, architecture, GPU, outer test or C21 claim; introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["docs/topbrain2-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

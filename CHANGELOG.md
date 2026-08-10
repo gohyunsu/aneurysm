@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-10 · TopBrain 2.0 proposal remains below source admission
+
+- Verified the official Zenodo record, 35-page/139,840-byte design PDF,
+  under-construction challenge page, not-accepting-submissions state and exact
+  TopBrain 2025 evaluation-repository head.
+- Froze six candidate scores at **29.0/28.5/28.0/27.5/27.0/23.5**. Planned
+  aneurysm cases are vessel-anatomy robustness context, not a released lesion
+  target; TopBrain 1, TopAneu, RSNA multitask and topology/connectivity methods
+  are direct priors.
+- Schema 5.9 preserves active shortlist/primary/medical payload/P0/method/
+  architecture/PBS/GPU/outer test/C21 at zero. No score repair or scheduler job
+  was created. Future authorized execution remains `introai9`-only;
+  `junjinyong` is fully excluded.
+- 영향 파일: `docs/topbrain2-source-audit-2026-08-10.md`, machine protocol,
+  validator/tests, research docs, site, `AGENTS.md` and private paper history.
+
 ## 2026-08-10 · RSNA registry content and live site verified
 
 - Exact scientific content `5690b104e6d3fc2644b3d934e12b834ea2c3c3da`

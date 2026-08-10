@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **2026-08-10 TopBrain 2.0 direction:** A challenge proposal with attractive
+> multimodal anatomy is not yet an executable aneurysm problem. Aneurysm is a
+> planned robustness condition, not a released target; data/license/lineage/
+> sealed-test contracts are unverified; TopBrain 1, TopAneu, RSNA multitask and
+> topology losses directly occupy the obvious methods. The best residual
+> candidate, joint lesion–parent-vessel consistency, scores 29.0/40. There is
+> no current architecture or GPU experiment. Only a future material release
+> can trigger a fresh source audit, never automatic training.
+
 > **2026-08-10 RSNA registry correction:** AWS registry metadata materially
 > strengthens the reported unit boundary (4,000+ scans, 18 institutions) but
 > not the executable task. Access remains controlled, the wiki/manifest and

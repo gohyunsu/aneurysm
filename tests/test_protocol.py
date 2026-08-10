@@ -392,6 +392,68 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "RSNA AWS registry correction"):
             validate_protocol(candidate)
 
+    def test_topbrain2_proposal_only_batch_cannot_open_compute(self) -> None:
+        audit = self.protocol["problem_selection"]["topbrain2_source_audit"]
+        self.assertEqual(audit["best_score"], 29.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["design_pdf_bytes"], 139840)
+        self.assertEqual(audit["design_pdf_pages"], 35)
+        self.assertFalse(audit["zenodo_license_identifier_present"])
+        self.assertEqual(audit["challenge_page_status"], "under_construction")
+        self.assertEqual(
+            audit["grand_challenge_submission_status"], "not_accepting_submissions"
+        )
+        self.assertFalse(audit["versioned_topbrain2_dataset_release_verified"])
+        self.assertFalse(
+            audit["versioned_topbrain2_executable_evaluation_contract_verified"]
+        )
+        self.assertTrue(
+            audit[
+                "planned_task1_aneurysm_is_robustness_condition_not_lesion_target"
+            ]
+        )
+        self.assertFalse(
+            audit[
+                "casewise_aneurysm_mask_parent_vessel_attachment_acquisition_reader_or_cross_challenge_identity_manifest_verified"
+            ]
+        )
+        self.assertFalse(
+            audit["patient_image_mask_clinical_split_or_test_payload_accessed"]
+        )
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["introai9_pbs_jobs_observed"], 0)
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not candidate["payload_accessed"] for candidate in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topbrain2_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopBrain 2.0 source audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topbrain2_source_audit"]["candidates"][0][
+            "score"
+        ] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "TopBrain 2.0 source audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topbrain2_source_audit"][
+            "versioned_topbrain2_dataset_release_verified"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopBrain 2.0 source audit"):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Current gate · schema 5.9:** TopBrain 2.0 source candidates score
+> 29.0/28.5/28.0/27.5/27.0/23.5, all below 32. Only the official design PDF
+> was read; no medical payload, executable P0, PBS/GPU job, method,
+> architecture or outer test is authorized. A future versioned licensed
+> release must first undergo a fresh source audit. Only a separately frozen
+> candidate at least 32 may open a method-free CPU/read-only P0 on `introai9`.
+> `junjinyong` is forbidden for AURORA connection, query, transfer, submission
+> and monitoring.
+
 > **Current gate · schema 5.8:** The RSNA AWS registry correction scores
 > 31.5/40, below the 32-point source line. Controlled-access terms were not
 > accepted and no MIRA request, S3 listing, CSV/DICOM/segmentation payload, P0,

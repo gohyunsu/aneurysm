@@ -1,9 +1,9 @@
 {
-  "schema_version": "5.8",
+  "schema_version": "5.9",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_rsna_aws_registry_source_rejection_aneumo_lineage_p0_closed",
+    "status": "failed_branches_preserved_no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_closed",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_rsna_aws_registry_source_rejection_aneumo_lineage_p0_remains_closed",
+    "status": "no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_remains_closed",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "latest_rsna_aws_registry_correction_official_metadata_only_controlled_access_no_mira_terms_request_s3_listing_or_payload_aneumo_lineage_p0_history_unchanged",
+    "asset_access_status": "latest_topbrain2_official_design_pdf_only_no_versioned_medical_dataset_license_or_executable_evaluation_release_aneumo_lineage_p0_history_unchanged",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": true,
     "annotation_selection_mechanism_audited": true,
@@ -26,8 +26,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "user_personally_accepts_rsna_terms_and_official_manifest_exposes_development_label_lineage_and_sealed_evaluation_then_run_a_fresh_source_task_audit_or_monitor_other_material_sources_without_repairing_closed_branches",
-    "audit_document": "docs/rsna-aws-registry-audit-2026-08-10.md",
+    "next_allowed_action": "monitor_for_a_versioned_licensed_topbrain2_release_with_casewise_target_lineage_or_a_genuinely_new_source_then_run_only_a_fresh_source_audit_without_repairing_closed_branches",
+    "audit_document": "docs/topbrain2-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -2129,8 +2129,123 @@
       "decision": "reject_without_score_repair_terms_acceptance_access_request_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
       "next_allowed_action": "after_user_personal_terms_acceptance_and_official_manifest_release_register_a_fresh_source_task_audit_not_automatic_p0_or_training"
     },
+    "topbrain2_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/topbrain2-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_ids": [
+        "topbrain2_joint_lesion_parent_vessel_consistency"
+      ],
+      "best_score": 29.0,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "zenodo_record": "10.5281/zenodo.19707577",
+      "zenodo_publication_date": "2026-04-23",
+      "design_pdf_bytes": 139840,
+      "design_pdf_pages": 35,
+      "design_pdf_md5": "da6c835d0336db81a94b78e7601f47b8",
+      "design_pdf_sha256": "15a2269bc00b6720f10d6efd41d8996010703451aef32de14f599cd3357ff4f7",
+      "zenodo_license_identifier_present": false,
+      "challenge_page_status": "under_construction",
+      "grand_challenge_submission_status": "not_accepting_submissions",
+      "planned_training_release_date": "2026-07-05",
+      "planned_test_window": "2026-09-05_to_2026-09-15",
+      "versioned_topbrain2_dataset_release_verified": false,
+      "versioned_topbrain2_executable_evaluation_contract_verified": false,
+      "topbrain2025_evaluation_repository_head": "ba4252ab0dbe9d59a9ae45058ae040b016aae0ad",
+      "topbrain2025_evaluation_repository_scope": "topbrain25_six_anatomy_segmentation_metrics",
+      "planned_task1_train_volumes": 215,
+      "planned_task1_test_volumes": 123,
+      "planned_task1_labels_at_least": 55,
+      "planned_task1_modalities": ["cta", "mra", "ctv", "mrv", "7t_mra"],
+      "planned_task1_topaneu_train_volumes": 50,
+      "planned_task1_topaneu_test_volumes": 20,
+      "planned_task1_aneurysm_is_robustness_condition_not_lesion_target": true,
+      "planned_task1_metrics": [
+        "dice",
+        "hd95",
+        "component_count_error",
+        "cldice",
+        "invalid_neighbor_error",
+        "side_road_vessel_detection_f1",
+        "four_class_contamination_metrics"
+      ],
+      "planned_task2_train_volumes": 315,
+      "planned_task2_test_volumes": 183,
+      "planned_task2_endpoint": "per_vessel_stenosis_and_occlusion_ordinal_grading",
+      "planned_task2_single_expert_per_case_without_merge": true,
+      "casewise_aneurysm_mask_parent_vessel_attachment_acquisition_reader_or_cross_challenge_identity_manifest_verified": false,
+      "patient_image_mask_clinical_split_or_test_payload_accessed": false,
+      "direct_prior_threats": [
+        "topbrain1_multimodal_multiclass_whole_brain_vessel_segmentation",
+        "topaneu_multimodal_aneurysm_detection_classification_and_segmentation",
+        "rsna_multitask_aneurysm_and_vessel_classification_and_segmentation",
+        "multiclass_betti_matching_topology_loss",
+        "cbdice_radius_boundary_topology_loss",
+        "centerline_cross_entropy_connectivity_loss",
+        "generic_pathology_aware_domain_generalization_and_selective_segmentation"
+      ],
+      "candidates": [
+        {
+          "id": "topbrain2_joint_lesion_parent_vessel_consistency",
+          "score": 29.0,
+          "axis_scores": [5.0, 3.5, 1.5, 1.0, 4.0, 5.0, 5.0, 4.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_no_released_joint_target_or_casewise_lineage_and_topaneu_rsna_multitask_systems_are_direct_priors"
+        },
+        {
+          "id": "topbrain2_disease_conditioned_selective_vessel_segmentation",
+          "score": 28.5,
+          "axis_scores": [4.5, 3.0, 2.0, 1.0, 4.0, 5.0, 5.0, 4.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_aneurysm_is_only_a_planned_robustness_condition_without_casewise_failure_target_or_released_asset"
+        },
+        {
+          "id": "topbrain2_aneurysm_conditioned_vessel_integrity_failure_localization",
+          "score": 28.0,
+          "axis_scores": [4.5, 3.5, 1.5, 1.0, 4.0, 5.0, 5.0, 3.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_organizer_owned_anatomy_topology_metrics_and_no_aneurysm_conditioned_error_annotation_or_release"
+        },
+        {
+          "id": "topbrain2_unified_modality_source_invariant_artery_vein_anatomy",
+          "score": 27.5,
+          "axis_scores": [4.0, 3.5, 1.0, 1.0, 4.5, 5.0, 4.5, 4.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_unified_multimodal_segmentation_is_the_challenge_task_and_generic_domain_generalization_is_direct_prior"
+        },
+        {
+          "id": "topbrain2_class_contamination_aware_multiclass_vessel_calibration",
+          "score": 27.0,
+          "axis_scores": [4.0, 4.0, 1.0, 1.0, 4.0, 5.0, 4.5, 3.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_four_contamination_metrics_are_organizer_defined_and_topology_connectivity_losses_are_direct_priors"
+        },
+        {
+          "id": "topbrain2_compositional_aneurysm_stenosis_ordinal_diagnosis",
+          "score": 23.5,
+          "axis_scores": [3.5, 3.5, 0.5, 1.0, 4.5, 5.0, 3.5, 2.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_task2_target_is_stenosis_occlusion_not_aneurysm_and_a_multihead_union_is_not_a_residual_problem"
+        }
+      ],
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "introai9_connection_verified": true,
+      "introai9_pbs_jobs_observed": 0,
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "decision": "reject_all_without_score_repair_medical_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
+      "next_allowed_action": "monitor_for_a_versioned_licensed_release_and_casewise_target_lineage_then_run_only_a_fresh_source_audit_not_automatic_download_p0_or_training"
+    },
     "most_recent_closed_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
-    "most_recent_source_rejected_candidate": "rsna_registry_backed_study_level_lesion_set_miss_risk_control",
+    "most_recent_source_rejected_candidate": "topbrain2_joint_lesion_parent_vessel_consistency",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -2234,7 +2349,13 @@
       "asah_day21_hydrocephalus_dynamic_imaging",
       "vwi_habitat_instability_reanalysis",
       "synthetic_dsa_reader_realism",
-      "rsna_registry_backed_study_level_lesion_set_miss_risk_control"
+      "rsna_registry_backed_study_level_lesion_set_miss_risk_control",
+      "topbrain2_joint_lesion_parent_vessel_consistency",
+      "topbrain2_disease_conditioned_selective_vessel_segmentation",
+      "topbrain2_aneurysm_conditioned_vessel_integrity_failure_localization",
+      "topbrain2_unified_modality_source_invariant_artery_vein_anatomy",
+      "topbrain2_class_contamination_aware_multiclass_vessel_calibration",
+      "topbrain2_compositional_aneurysm_stenosis_ordinal_diagnosis"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",

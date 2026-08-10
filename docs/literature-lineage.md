@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 TopBrain 2.0 lineage:** TopBrain 1 already defines multimodal
+> multiclass whole-brain vessel anatomy; TopAneu targets aneurysm detection,
+> location and segmentation; RSNA's public second-place system jointly models
+> aneurysm and vessel outputs; Betti matching, cbDice and centerline cross
+> entropy occupy multiclass topology/connectivity. With no released TopBrain
+> 2.0 target/lineage contract, the strongest remaining combination scores
+> 29.0/40 and is rejected history, not a contribution or architecture.
+
 > **2026-08-10 RSNA registry lineage:** official registry → controlled MIRA
 > access → point/presence/territory lesion supervision plus 13-class vessel
 > anatomy → RSNA winning global/local and multitask systems → vessel-aware
