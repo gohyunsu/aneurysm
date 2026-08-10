@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-10 · TopAneu code semantics reject the historical source lead
+
+- Preserved the earlier schema-6.3 33.0/40 score as immutable history rather
+  than repairing it retrospectively.
+- Audited official taxonomy mappings, Task 1/2 evaluators and image-only test
+  templates at commit `018c243…`, without reading patient medical payload.
+- Confirmed that location factorization is explicit metadata, silver anatomy is
+  absent from test inputs, and Task 2 collapses instances into per-class binary
+  volumes; direct priors already cover training-only anatomy supervision,
+  hierarchy, vessel-aware detection and lesion counting.
+- Froze six fresh scores at 31.5/31.0/31.0/30.5/28.5/20.0. All are below 32;
+  active and conditional shortlist, P0, model, GPU and outer test remain zero.
+- Advanced the machine contract to schema 6.4, added mutation guards, and made
+  the public overview, Learn guide and decision history expose the rejection.
+- Future AURORA execution remains `introai9` PBS only after a new gate;
+  `junjinyong` remains completely excluded.
+
 ## 2026-08-10 · TopAneu schema 6.3 content and site verified
 
 - Exact scientific content `e4038ca6d052def5f275c4118bd904c4ab543135`

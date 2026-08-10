@@ -51,24 +51,25 @@
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>33/40 source lead는 하나지만 실행형 shortlist와 모델은 없습니다.</strong>
+          <strong>활성 source lead도, 실행형 shortlist도, 모델도 없습니다.</strong>
           <p>
-            TopAneu-26은 409명 417 scan에 52개 동맥류 위치와 3개 유형을
-            제공합니다. 위치를 영역·좌우·분지 역할로 분해하고 silver 혈관
-            정보를 학습 때만 쓰는 문제는 33/40입니다. 그러나 약관을 수락하지
-            않았고 의료 payload도 열지 않았으므로 P0·GNN·GPU는 모두 0입니다.
+            과거 TopAneu 후보는 33/40이었지만 공식 mapping과 evaluator를 더
+            깊게 읽은 새 evidence version에서는 최고 31.5/40입니다. 제안한
+            hierarchy와 image-only 조건은 이미 task에 들어 있고 학습 mechanism도
+            직접 선행이 점유합니다. 과거 점수는 보존하지만 현재 후보는 기각되어
+            P0·GNN·GPU가 모두 0입니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>약관 뒤에도 곧바로 학습하지 않고 P0-R부터 등록합니다.</strong>
+          <strong>다른 문제를 source와 direct prior 수준에서 다시 찾습니다.</strong>
           <p>
-            P0-R은 417 scan이 409 patient에 어떻게 묶이는지, 52개 위치와 3개
-            유형이 일관적인지, 한 환자의 여러 병변과 같은 위치의 여러 병변을
-            표현할 수 있는지, JSON과 mask가 맞는지, silver 혈관의 생성 계보와
-            UMCU sealed test 경계가 정확한지만 CPU/read-only로 확인합니다.
+            기각된 TopAneu formulation은 약관 수락으로 되살리지 않습니다.
+            새 후보가 실제 asset, 독립 단위, endpoint와 unoccupied algorithmic
+            gap을 동시에 갖추는지 먼저 감사하고, 32/40을 넘은 뒤에만 별도
+            method-free P0를 등록합니다.
           </p>
-          <a href="../docs/topaneu-release-evaluation-audit-2026-08-10.md">TopAneu source audit 읽기 ↗</a>
+          <a href="../docs/topaneu-code-semantics-red-team-2026-08-10.md">TopAneu red team 읽기 ↗</a>
         </div>
         <div class="answer-card">
           <span>용어를 먼저 이해하기</span>
@@ -86,12 +87,11 @@
           <span>현재 architecture는?</span>
           <strong>GNN 기반으로 확정되지 않았습니다.</strong>
           <p>
-            TopAneu의 입력은 CTA/MRA 3D 영상이므로 U-Net·Transformer detector가
-            먼저 필요한 강한 baseline이며, 혈관 graph는 선택 가능한 보조 표현일
-            뿐입니다. ARAN의 centerline GAT, vessel-distance attention과 joint
-            lesion–vessel 학습이 이미 존재하므로 graph를 붙이는 것 자체는
-            novelty가 아닙니다. P0-R과 method-free P1 뒤에도 factorized risk의
-            독립 gap이 남을 때에만 architecture를 설계합니다.
+            TopAneu의 입력은 CTA/MRA 3D 영상이고 혈관 graph는 선택 가능한 보조
+            표현일 뿐입니다. Centerline GAT, vessel-distance attention, hierarchy와
+            train-only anatomy supervision이 이미 존재하므로 graph를 붙이는 것
+            자체는 novelty가 아닙니다. 다른 문제가 source와 task-adequacy gate를
+            통과한 뒤에만 그 문제에 맞는 architecture를 설계합니다.
           </p>
         </div>
       </div>
@@ -465,8 +465,8 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/reference
-              audit입니다. TopAneu factorized leaf-risk는 33/40 source lead지만
-              terms와 payload가 0이고 P0-R도 등록되지 않았습니다. 아래 AneuG,
+              audit입니다. TopAneu factorized leaf-risk의 역사적 33/40은 보존되지만
+              fresh code-semantics audit에서 31/40으로 기각됐습니다. 아래 AneuG,
               Aneumo와 과거 graph/operator stack은 현재 선택된 architecture가
               아닌 역사 기록입니다.
             </p>
@@ -475,12 +475,12 @@
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Conditional source lead는 1개지만 active executable shortlist, selected primary와 architecture는 모두 0입니다. Source admission과 model admission은 다른 조건입니다. Silver vessel을 gold anatomy처럼 취급하거나 generic graph/taxonomy block을 새 contribution으로 이름만 바꾸지 않습니다.</p>
+              <p>Conditional source lead, active executable shortlist, selected primary와 architecture는 모두 0입니다. Historical score와 fresh evidence decision은 구분합니다. Silver vessel을 gold anatomy처럼 취급하거나 generic graph/taxonomy block을 새 contribution으로 이름만 바꾸지 않습니다.</p>
             </aside>
             <article>
-              <span>CURRENT · TOPANEU SOURCE LEAD · TERMS PENDING</span>
-              <div><h3>33/40이면 바로 U-Net·Transformer·GNN을 학습하는가?</h3><p>아닙니다. 52 leaf factorization이 실제 label support를 갖는지, silver vessel 오류가 source/centre confounding을 주입하지 않는지, image-only flat 52-class baseline보다 의미 있는 effect size가 가능한지 아직 모릅니다. Terms 수락 뒤 P0-R이 asset semantics를 모두 통과하고 method-free P1이 task adequacy를 보여야만 architecture 논의를 시작합니다.</p></div>
-              <b>상태</b><small>conditional lead 1 · terms/payload/P0-R/primary/model/GPU 0</small>
+              <span>CURRENT · TOPANEU CODE SEMANTICS · REJECTED</span>
+              <div><h3>과거 33/40이면 지금도 U-Net·Transformer·GNN을 학습하는가?</h3><p>아닙니다. 공식 52-class mapping이 proposed hierarchy를 이미 담고, test template는 원 영상만 받으며, Task 2는 instance를 class volume으로 합칩니다. Training-only anatomy, hierarchical taxonomy, vessel-aware detection과 lesion counting도 직접 선행입니다. 새 batch 최고 31.5/40이므로 terms나 P0로 진행하지 않습니다.</p></div>
+              <b>상태</b><small>historical 33 preserved · fresh best 31.5 rejected · lead/P0/model/GPU 0</small>
             </article>
             <article>
               <span>HISTORY · ANEUG-FLOW P0-v2a CLOSED</span>

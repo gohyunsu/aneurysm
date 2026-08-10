@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 6.4 · no architecture:** The TopAneu code-semantics red team rejects
+> all fresh candidates below 32/40. GNN, U-Net, Transformer, taxonomy decoder,
+> train-only anatomy teacher, count head and conformal wrapper remain direct
+> controls or engineering choices, not an AURORA method. No P0, GPU smoke or
+> outer test is authorized; model design resumes only after a different problem
+> passes source and method-free task-adequacy gates.
+
 > **Schema 6.3 · still no architecture:** TopAneu's material release creates a
 > 33/40 terms-pending problem lead, not a model decision. GNN, centerline GAT,
 > U-Net, Transformer, taxonomy decoder, privileged-information distillation and

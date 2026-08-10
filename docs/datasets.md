@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 6.4 TopAneu role:** Public code, mappings, evaluators, templates and
+> checksum/path manifests were audited without reading medical members. The
+> resulting method formulation is rejected at a fresh maximum of 31.5/40, so
+> TopAneu is not a current acquisition, training, validation or outer-test
+> asset. User terms remain unaccepted, but even future acceptance does not
+> reopen the rejected P0-R. Patient images/masks and patient location-JSON
+> content remain unread.
+
 > **TopAneu-26 material-release role · 2026-08-10:** Official public metadata
 > describe 417 scans from 409 patients, 52-class location masks/JSON, 3-class
 > type masks and organizer-predicted silver vessel masks, with UMCU reserved for

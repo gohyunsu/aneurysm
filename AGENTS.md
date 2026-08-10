@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 TopAneu code-semantics override · schema 6.4:** The official
+> repository remains pinned at `018c243445f99199f484018c4c80575c84c72293`.
+> Bounded public-code inspection established that the 52 location leaves already
+> encode territory, laterality and branch role; Task 1 preserves repeated class
+> IDs as counts; Task 2's active path scores per-class binary volumes and its
+> instance branch is disabled; and official test templates accept CTA/MRA images
+> but no vessel mask. MIDL-26 training-only automatic anatomy supervision,
+> MIDL-22 probabilistic lesion counting, HATs and vessel-aware aneurysm detection
+> directly occupy the obvious method components. Preserve the schema-6.3
+> 33.0/40 score as historical evidence; do not edit or relabel it. In the fresh
+> evidence version the same formulation is 31.0/40 and the six-candidate maximum
+> is 31.5/40, so every candidate is rejected below 32. Active shortlist,
+> conditional lead, primary, executable P0, method, architecture, GPU, outer
+> test, result row and submission identity are all 0. Terms acceptance no longer
+> opens P0-R for this rejected formulation. The next permitted work is a fresh
+> problem-level primary-source/direct-prior audit, not a TopAneu repair or model.
+> No patient image/mask, patient location-JSON content or SWITCHdrive medical
+> member was read. Source of truth:
+> `docs/topaneu-code-semantics-red-team-2026-08-10.md` and
+> `problem_selection.topaneu_code_semantics_red_team`. AURORA may use only
+> `introai9` PBS after a future gate; never connect/query/transfer/submit/monitor
+> `junjinyong`.
+
 > **2026-08-10 TopAneu deployment provenance:** Exact schema-6.3 scientific
 > content `e4038ca6d052def5f275c4118bd904c4ab543135` passed Research contract and
 > site quality run `31367056976` and Pages run `31367056610`. The deployed

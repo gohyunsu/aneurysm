@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 TopAneu code-semantics red team · schema 6.4:** The earlier
+> 33/40 material-release score remains immutable history. Reading the official
+> taxonomy mappings, submission templates and active evaluators at exact commit
+> `018c243…` changes the current decision: the 52 labels already encode
+> territory, laterality and branch role; test containers already receive images
+> without vessel masks; and Task 2 evaluates merged per-class binary volumes
+> while instance code is disabled. Training-only automatic anatomy supervision,
+> hierarchical taxonomy learning, vessel-aware detection and probabilistic
+> lesion counting are also direct priors. The fresh six-candidate batch peaks at
+> **31.5/40** and the former formulation scores **31.0/40** under the new evidence
+> version. All are rejected. Active/conditional shortlist, primary, P0, method,
+> architecture, GPU and outer test are 0; terms acceptance does not reopen this
+> rejected formulation. Next is a fresh problem-level source/prior audit.
+> [Detailed red team](docs/topaneu-code-semantics-red-team-2026-08-10.md).
+> AURORA remains `introai9`-only; `junjinyong` is prohibited.
+
 > **2026-08-10 TopAneu material-release decision · schema 6.3:** The official
 > release now defines an executable multi-centre task: 417 scans from 409
 > patients, a 52-leaf aneurysm-location mask, a 3-class type mask, location

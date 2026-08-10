@@ -2,16 +2,23 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · TopAneu material release is a 33/40 terms-pending source lead · active executable shortlist/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "explicit user acceptance of TopAneu terms before a separately preregistered CPU/read-only P0-R; never auto-download or train",
+    status: "Target locked · TopAneu code-semantics fresh best 31.5/40 and all rejected · conditional/executable shortlist/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "a different fresh problem must pass source and method-free task-adequacy gates before any model or compute",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
-      title: "A material TopAneu release creates one falsifiable, terms-pending problem lead",
+      title: "Official code semantics remove the apparent TopAneu gap",
+      copy: "At exact official commit 018c243…, the 52 location mapping already encodes territory, laterality and trunk/junction/terminus/distal role; Task 1 preserves repeated labels as counts; Task 2 scores merged per-class binary volumes while its instance branch is disabled; and the test templates accept CTA/MRA images without vessel masks. MIDL-26 train-only automatic anatomy supervision, MIDL-22 probabilistic lesion counting, HATs and MICCAI-24 vessel-aware aneurysm detection directly occupy the obvious mechanisms. The earlier 33/40 score remains immutable history, while the same formulation is 31/40 in the fresh evidence version and the batch maximum is 31.5/40.",
+      status: "All rejected · conditional/executable shortlist/P0/method/architecture/GPU 0",
+      url: "../docs/topaneu-code-semantics-red-team-2026-08-10.md"
+    },
+    {
+      year: "2026.08",
+      title: "Historical schema 6.3 · material TopAneu release created a provisional source lead",
       copy: "Official TopAneu-26 commit 018c243… and the live challenge define 417 scans from 409 patients, 52 aneurysm-location leaves, three aneurysm types, location JSON, organizer-predicted silver vessel masks and an unseen-centre UMCU test. The new 33/40 question factorizes observable leaves into territory, laterality and branch role, restricts silver anatomy to noisy train-time privileged information, and requires image-only test inference. Centerline GATs, vessel-distance attention, joint lesion-vessel learning, hierarchical taxonomies, privileged-information distillation and conformal segmentation are mandatory direct controls, not novelty by themselves.",
-      status: "33/40 conditional source lead · terms/payload/P0/method/architecture/GPU 0",
+      status: "Historical 33/40 record · superseded by fresh code-semantics rejection",
       url: "../docs/topaneu-release-evaluation-audit-2026-08-10.md"
     },
     {
@@ -359,12 +366,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Direct prior", "RHSIA transient-WSS Graph Transformer", "GHD + steady augmentation", "functional head/loss + temporal decoder + E(3) GNN", "No architecture selected"],
-    ["Observable target", "steady object · 9.63 GB", "transient object · 23.74 GB", "same field must imply TAWSS/OSI/RRT", "scientific schema still unaudited"],
-    ["Known boundary", "exact dataset/code commits", "CC BY-SA 4.0", "v1 closed at exit 28 before payload", "v2a changes transport only"],
-    ["Current decision", "one submitted job", "exit 1 · 8 s", "result/raw log absent · operations unresolved", "candidate closed · no rerun/model/GPU"]
+    ["Axis", "Official TopAneu contract", "Direct prior", "Former formulation", "Current decision"],
+    ["Hierarchy", "52 names encode territory/side/role", "HATs taxonomy segmentation", "factorize 52 leaves", "metadata, not novelty"],
+    ["Anatomy", "vessel mask absent at test", "MIDL-26 train-only anatomy; vessel-aware detection", "silver train-only teacher", "direct-prior occupied"],
+    ["Instances", "Task 2 merges class volumes", "MIDL-22 probabilistic lesion counting", "count–mask coherence", "support/metric mismatch"],
+    ["Score", "historical 33 preserved", "fresh priors added", "fresh same formulation 31", "batch best 31.5 · all rejected"]
   ],
   gates: [
+    {
+      id: "S-TA",
+      title: "Does official TopAneu code leave an unoccupied factorized/silver-anatomy problem?",
+      copy: "No. The taxonomy, image-only test interface and volume-level evaluator already encode the proposed structure, while training-only anatomy supervision, hierarchical taxonomy learning, vessel-aware detection and lesion counting are direct priors. This source-only verdict required no medical payload or server experiment.",
+      state: "Fresh best 31.5/40 < 32 · all rejected · conditional lead/P0/PBS/model/GPU 0",
+      blocking: true
+    },
     {
       id: "P0-v2a",
       title: "Can introai9 reach the exact AneuG-Flow objects within a frozen 4 MiB budget?",
@@ -557,8 +572,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "TopAneu 2026 · terms gated",
-      role: "conditional P0 asset/semantics audit only after explicit user terms acceptance",
-      provenance: "Live 417 scans/409 patients · 52 location classes · organizer-predicted silver vessel masks · source audit 29/40 · payload/model/GPU 0"
+      role: "source-rejected code-semantics history; no active acquisition or P0 role",
+      provenance: "417 scans/409 patients · 52 location classes · image-only test · Task 2 class-volume metric · historical 33 preserved · fresh best 31.5 rejected · medical payload/model/GPU 0"
     },
     {
       name: "RSNA-ICA 2025 · controlled access",
@@ -667,6 +682,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "TopAneu code semantics and direct priors reject the provisional lead",
+      copy: "Official mappings, Task 1/2 evaluators and test templates at commit 018c243… show that the proposed hierarchy and image-only condition are already task metadata/interface, while active Task 2 collapses same-class instances. Training-only anatomy supervision, hierarchical taxonomy, vessel-aware detection and lesion counting are direct priors. Historical schema-6.3 score 33 remains immutable; fresh same-formulation score is 31 and the six-candidate maximum is 31.5. All are rejected without medical payload, P0, method, architecture, PBS/GPU or outer test. Next is a different fresh problem audit on the introai9-only boundary; junjinyong remains prohibited.",
+      files: ["docs/topaneu-code-semantics-red-team-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "TopAneu release audit"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "TopAneu release audit"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "TopAneu release audit"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
             validate_protocol(candidate)
 
     def test_aneumo_lineage_candidate_closes_after_one_cpu_metadata_p0(self) -> None:
@@ -530,7 +530,7 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "4D-CTA AAA mechanics source audit"):
             validate_protocol(candidate)
 
-    def test_topaneu_material_release_keeps_terms_pending_lead_method_free(self) -> None:
+    def test_topaneu_material_release_preserves_historical_33_record(self) -> None:
         audit = self.protocol["problem_selection"][
             "topaneu_release_evaluation_source_audit"
         ]
@@ -554,6 +554,9 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["architecture_selected"])
         self.assertFalse(audit["gpu_training_authorized"])
         self.assertFalse(audit["outer_test_authorized"])
+        self.assertEqual(
+            self.protocol["problem_selection"]["conditional_source_lead_count"], 0
+        )
         self.assertTrue(
             all(not item["payload_accessed"] for item in audit["candidates"])
         )
@@ -563,6 +566,67 @@ class ProtocolTests(unittest.TestCase):
             "gpu_training_authorized"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "TopAneu material release"):
+            validate_protocol(candidate)
+
+    def test_topaneu_code_semantics_red_team_rejects_historical_lead_without_relabel(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["topaneu_code_semantics_red_team"]
+        self.assertEqual(audit["best_score"], 31.5)
+        self.assertLess(audit["best_score"], audit["automatic_selection_threshold"])
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(audit["conditional_source_lead_count"], 0)
+        self.assertEqual(audit["historical_schema_6_3_score"], 33.0)
+        self.assertFalse(audit["historical_score_relabelled"])
+        self.assertEqual(audit["fresh_same_formulation_score"], 31.0)
+        self.assertEqual(audit["official_location_leaf_count"], 52)
+        self.assertEqual(audit["official_right_lateralized_leaves"], 24)
+        self.assertEqual(audit["official_left_lateralized_leaves"], 24)
+        self.assertEqual(audit["official_non_lateralized_leaves"], 4)
+        self.assertTrue(audit["task1_preserves_repeated_class_ids_as_counts"])
+        self.assertTrue(audit["task2_active_path_evaluates_per_class_binary_volume"])
+        self.assertFalse(audit["task2_instance_level_code_active"])
+        self.assertFalse(audit["official_test_interface_includes_vessel_mask"])
+        for key in (
+            "user_terms_acceptance_verified",
+            "patient_image_or_mask_payload_accessed",
+            "patient_location_json_content_accessed",
+            "switchdrive_medical_member_accessed",
+            "medical_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+        ):
+            self.assertFalse(audit[key])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topaneu_code_semantics_red_team"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topaneu_code_semantics_red_team"][
+            "historical_score_relabelled"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topaneu_code_semantics_red_team"][
+            "candidates"
+        ][0]["score"] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topaneu_code_semantics_red_team"][
+            "patient_image_or_mask_payload_accessed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
             validate_protocol(candidate)
 
         candidate = copy.deepcopy(self.protocol)

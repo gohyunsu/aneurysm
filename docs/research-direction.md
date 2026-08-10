@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Current direction · schema 6.4:** The TopAneu 33/40 release lead is now
+> historical evidence, not an active lead. Official code shows that its proposed
+> label factorization is explicit metadata, image-only inference is already the
+> challenge interface, and active Task 2 evaluation collapses same-class
+> instances. Direct priors occupy training-only anatomy supervision, taxonomy,
+> vessel-aware detection and lesion counting. A fresh batch peaks at 31.5/40;
+> all candidates are rejected. Current primary, method, architecture, P0 and GPU
+> remain unselected. The next direction is a fresh problem-level source/prior
+> search, not a renamed TopAneu model or local repair.
+
 > **Current direction · TopAneu material release · 2026-08-10:** A real
 > multi-centre, 52-location/3-type aneurysm task now exists, so the strongest
 > residual question is no longer “add a GNN”. It is whether observable leaf

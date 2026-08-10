@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **2026-08-10 schema 6.4 override:** Do not acquire TopAneu for the rejected
+> factorized/silver-anatomy formulation. The official-code red team leaves no
+> active source lead or P0, and terms acceptance alone cannot reopen it. Only a
+> different prospectively admitted problem may define a new acquisition
+> contract. Any authorized execution remains `introai9` PBS only; never use
+> `junjinyong`.
+
 > **2026-08-10 TopAneu release boundary:** Public challenge prose, source code,
 > path/checksum manifests and download-share metadata are audited, but medical
 > files and location-JSON content remain unread. The user must personally review

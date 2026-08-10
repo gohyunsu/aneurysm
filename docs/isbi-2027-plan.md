@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 schema 6.4 submission boundary:** AURORA remains **not
+> submission-ready** and now has zero conditional source leads. Official
+> TopAneu code/evaluator semantics and direct priors reduce the fresh maximum to
+> 31.5/40; the former 33/40 score is preserved only as historical evidence. No
+> title identity, contribution, method figure, result row, architecture, P0,
+> GPU experiment or outer test is active. The paper resumes only after a new
+> problem passes source admission and method-free task adequacy without repair.
+
 > **2026-08-10 submission-status update:** TopAneu-26 is now a materially
 > executable source and the factorized leaf-risk question scores 33/40, but the
 > project is still **not submission-ready**. This is a terms-pending source lead,

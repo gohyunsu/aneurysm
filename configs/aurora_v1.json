@@ -1,9 +1,9 @@
 {
-  "schema_version": "6.3",
+  "schema_version": "6.4",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "topaneu_release_source_lead_33_pending_terms_no_active_primary_method_or_gpu",
+    "status": "topaneu_code_semantics_red_team_all_rejected_no_active_primary_method_or_gpu",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -14,12 +14,12 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "conditional_topaneu_release_source_lead_pending_terms_no_active_shortlist_or_method",
+    "status": "topaneu_code_semantics_red_team_all_rejected_no_active_shortlist_or_method",
     "shortlisted_candidate": "none",
-    "conditional_source_lead_count": 1,
+    "conditional_source_lead_count": 0,
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "topaneu_public_source_metadata_and_path_sha_manifests_only_no_medical_payload",
+    "asset_access_status": "topaneu_public_code_taxonomy_evaluator_and_path_sha_manifests_only_no_medical_payload",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -28,8 +28,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "explicit_user_topaneu_terms_acceptance_then_register_a_fresh_cpu_read_only_p0_asset_semantics_audit_or_continue_other_fresh_source_audits",
-    "audit_document": "docs/topaneu-release-evaluation-audit-2026-08-10.md",
+    "next_allowed_action": "fresh_problem_level_primary_source_and_direct_prior_audit_only_no_topaneu_p0_from_rejected_formulation",
+    "audit_document": "docs/topaneu-code-semantics-red-team-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -188,6 +188,102 @@
       "p0_pass_authorizes": "register_one_method_free_p1_task_adequacy_audit_only",
       "decision": "retain_one_conditional_source_lead_without_active_shortlist_payload_p0_method_architecture_gpu_outer_test_or_claim",
       "next_allowed_action": "after_explicit_user_terms_acceptance_register_a_fresh_cpu_read_only_p0_release_asset_and_semantics_audit_or_continue_other_fresh_source_audits"
+    },
+    "topaneu_code_semantics_red_team": {
+      "status": "completed_public_code_and_primary_prior_red_team_all_rejected",
+      "audit_document": "docs/topaneu-code-semantics-red-team-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_score": 31.5,
+      "active_shortlist_count": 0,
+      "conditional_source_lead_count": 0,
+      "primary_problem_selected": false,
+      "historical_schema_6_3_candidate_id": "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy",
+      "historical_schema_6_3_score": 33.0,
+      "historical_score_relabelled": false,
+      "fresh_same_formulation_score": 31.0,
+      "official_repository_commit": "018c243445f99199f484018c4c80575c84c72293",
+      "public_checkout_bytes_class": "44mb_source_evaluation_simulations_mapping_metadata_and_sha_manifests",
+      "location_mapping_sha256": "815c021012f499bff80b517bab1c7a351f4967ce628c0a8055d98e2ac8bc69fa",
+      "type_mapping_sha256": "2c75d432539028ac4c58f726c89bd216089015575388e51701a30f8b2f4833c6",
+      "vessel_mapping_sha256": "0ecca1d2a962a08c7c0fcdd41ed94af11e0e121be8b31677902396ea52dafe7f",
+      "task1_evaluator_sha256": "58cda5d310ec2e4588428b73fbadee5bfdd30a40a79ecec8c9a10f2ceefc462e",
+      "task2_evaluator_sha256": "5e24667a47f2141344c07666c7d0492bd8e92122a276512f801f1154ba00e09e",
+      "task2_readme_sha256": "10ee0d290be010cc70c69b175621bd9db6ec2a0dbbabceb6ff3b55ba80bd2fa9",
+      "task1_template_main_sha256": "5f87a02222cc2d0cb9903f012a7b77252407707e5fb3ebdadca8fa8cbee7f6d1",
+      "task2_template_main_sha256": "7b431588eebff8e154dab9ca286c5fa07a775b29e48b134ad6ec11d2afdb26dd",
+      "official_location_leaf_count": 52,
+      "official_right_lateralized_leaves": 24,
+      "official_left_lateralized_leaves": 24,
+      "official_non_lateralized_leaves": 4,
+      "official_taxonomy_already_encodes": ["territory_numeric_prefix", "laterality", "trunk_junction_terminus_or_distal_branch_role"],
+      "official_test_interface_inputs": ["head_ct_angiography", "head_mr_angiography"],
+      "official_test_interface_includes_vessel_mask": false,
+      "task1_preserves_repeated_class_ids_as_counts": true,
+      "task2_active_path_evaluates_per_class_binary_volume": true,
+      "task2_instance_level_code_active": false,
+      "task2_documented_same_class_multiple_aneurysms": "very_unlikely",
+      "user_terms_acceptance_verified": false,
+      "patient_image_or_mask_payload_accessed": false,
+      "patient_location_json_content_accessed": false,
+      "switchdrive_medical_member_accessed": false,
+      "direct_prior_threats": [
+        "midl_2026_scaling_supervision_for_free_training_only_automatic_anatomy_supervision",
+        "midl_2022_segmentation_consistent_probabilistic_lesion_counting",
+        "ml4h_2021_image_classification_with_consistent_supporting_evidence",
+        "miccai_2024_hierarchical_adaptive_taxonomy_segmentation",
+        "miccai_2024_vessel_aware_aneurysm_detection_with_distance_maps",
+        "deepsetnet_set_cardinality_prediction",
+        "generic_joint_lesion_classification_and_segmentation",
+        "aran_patient_specific_centerline_gat_and_artery_aware_fusion",
+        "generic_lupi_distillation_and_conformal_segmentation"
+      ],
+      "candidates": [
+        {
+          "id": "topaneu_official_metric_instance_collapse_aware_training",
+          "score": 31.5,
+          "axis_scores": [4.0, 5.0, 0.5, 5.0, 4.5, 5.0, 3.5, 4.0],
+          "decision": "reject_metric_engineering_and_explicit_task_contract"
+        },
+        {
+          "id": "topaneu_explicit_hierarchical_52_leaf_taxonomy",
+          "score": 31.0,
+          "axis_scores": [4.5, 5.0, 0.5, 4.0, 4.5, 5.0, 4.5, 3.0],
+          "decision": "reject_hierarchy_explicit_in_metadata_and_hats_direct_prior"
+        },
+        {
+          "id": "topaneu_image_only_source_generalization_with_train_only_silver_anatomy",
+          "score": 31.0,
+          "axis_scores": [5.0, 4.0, 1.0, 4.0, 4.5, 5.0, 5.0, 2.5],
+          "decision": "reject_vessel_aware_and_training_only_anatomy_supervision_direct_priors"
+        },
+        {
+          "id": "topaneu_type_location_compositional_auxiliary_segmentation_v2",
+          "score": 30.5,
+          "axis_scores": [4.5, 4.0, 1.0, 4.0, 4.5, 5.0, 4.5, 3.0],
+          "decision": "reject_generic_multitask_composition"
+        },
+        {
+          "id": "topaneu_multiset_mask_cardinality_coherence",
+          "score": 28.5,
+          "axis_scores": [4.5, 2.5, 1.0, 4.0, 4.5, 4.5, 5.0, 2.5],
+          "decision": "reject_same_leaf_support_unknown_rare_and_direct_counting_prior"
+        },
+        {
+          "id": "topaneu_center4_longitudinal_growth_v2",
+          "score": 20.0,
+          "axis_scores": [5.0, 0.5, 1.5, 2.0, 0.5, 4.0, 5.0, 1.5],
+          "decision": "reject_order_endpoint_and_independent_units_absent"
+        }
+      ],
+      "medical_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "decision": "reject_all_fresh_candidates_without_repairing_historical_33_score_or_opening_terms_payload_p0_method_architecture_gpu_outer_test_or_claim",
+      "next_allowed_action": "fresh_problem_level_primary_source_and_direct_prior_audit_only_no_topaneu_p0_from_rejected_formulation"
     },
     "open_cta_physical_grid_candidate": {
       "status": "closed_after_registered_p0_execution_incomplete_no_scientific_verdict",
@@ -2534,9 +2630,10 @@
       "next_allowed_action": "seek_an_independent_clinical_or_physical_target_with_sufficient_patient_units_then_run_only_a_fresh_source_audit_not_automatic_download_p0_or_training"
     },
     "most_recent_closed_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
-    "most_recent_source_rejected_candidate": "four_d_cta_phase_subset_rsii_hotspot_preservation",
+    "most_recent_source_rejected_candidate": "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied",
     "most_recent_conditional_source_lead": "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy",
     "rejected_candidates": [
+      "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied",
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
       "geometry_boundary_condition_shape_response_operator",

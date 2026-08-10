@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **2026-08-10 schema 6.4 execution boundary:** The TopAneu code-semantics
+> audit is source-only and rejects all candidates, maximum 31.5/40. It created
+> no medical payload access, P0, PBS job, GPU allocation or monitoring loop.
+> No TopAneu experiment is pending on `introai9`; current AURORA GPU jobs remain
+> zero. A future experiment requires a different candidate to pass its frozen
+> gates and must run through `introai9` PBS. `junjinyong` is never connected,
+> queried, used for transfer/submission or monitored.
+
 > **2026-08-10 TopAneu deployment verification:** Exact content
 > `e4038ca6d052def5f275c4118bd904c4ab543135` passed Quality `31367056976` and
 > Pages `31367056610`; live overview, Learn and detailed audit expose the same

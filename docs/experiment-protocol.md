@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 6.4 current boundary:** No TopAneu P0-R is pending. The official-code
+> red team rejects every fresh formulation, maximum 31.5/40, while preserving
+> the old 33/40 score as history. Terms acceptance cannot authorize payload or
+> experiment for this rejected formulation. There is no active source lead,
+> executable P0, architecture, PBS/GPU job or outer test. The next allowable
+> action is a fresh problem-level source/direct-prior audit; any future admitted
+> candidate executes only through `introai9` PBS and never `junjinyong`.
+
 > **Schema 6.3 prospective boundary:** The current 33/40 TopAneu lead has no
 > executable experiment. Explicit personal terms acceptance is required first.
 > Only then may a new exact CPU/read-only P0-R be preregistered to verify the

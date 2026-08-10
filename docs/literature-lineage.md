@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 code-semantics correction:** The former TopAneu residual gap is
+> occupied on both sides. Official mappings already encode the proposed
+> territory/laterality/branch-role hierarchy and official test templates are
+> image-only. MIDL-26 covers train-time automatic anatomy supervision removed at
+> inference; MIDL-22 covers segmentation-consistent probabilistic lesion counts;
+> HATs covers hierarchical taxonomy segmentation; and MICCAI-24 vessel-aware
+> detection covers distance-map anatomy guidance. Metric/instance-collapse-aware
+> training is evaluation alignment, not novelty. Hence the new maximum is
+> 31.5/40 and no active research gap or architecture is claimed.
+
 > **2026-08-10 TopAneu release lineage:** The observable 52-leaf location and
 > three-type task is real, but none of its obvious components is independently
 > novel: patient-specific centerline GAT/artery-aware fusion, vessel-distance

@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "Official release는 417 scan/409 patient, 52 location leaf와 3 type을 명시합니다.",
-      connector: "source audited",
-      title: "Silver anatomy boundary",
-      copy: "Vessel masks are organizer predictions: train-time privilege, never a test-time requirement",
+      description: "Official mappings already encode territory, laterality and branch role in 52 leaves.",
+      connector: "semantics audited",
+      title: "Hierarchy already explicit",
+      copy: "Factorization is observable task metadata, not a new independent mechanism",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "52 leaf를 territory·laterality·branch role로 분해할 수 있는지는 payload support로 검증해야 합니다.",
-      connector: "labels factorized",
-      title: "Observable hierarchy",
-      copy: "The factor map is a testable hypothesis, not a renamed taxonomy head",
+      description: "Task 2 merges same-class components into a binary class volume; instance code is disabled.",
+      connector: "metric audited",
+      title: "Instance-collapse boundary",
+      copy: "A count-aware model would optimize beyond the active challenge metric and needs separate support",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Terms를 수락해도 P0-R 전체 통과 뒤 method-free P1만 열립니다.",
+      description: "Fresh best 31.5/40 is below admission; terms cannot reopen the rejected formulation.",
       connector: "gate closed",
-      title: "No model authorization",
-      copy: "Terms, payload, P0, P1, architecture, GPU, outer test and claim are all zero",
+      title: "All candidates rejected",
+      copy: "Conditional lead, payload, P0, architecture, GPU, outer test and claim are all zero",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };
