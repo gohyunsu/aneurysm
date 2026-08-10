@@ -21,6 +21,9 @@
   submission identity at zero. `introai9` public-key access succeeded and its
   PBS list was empty. No login-node GPU command ran and `junjinyong` was not
   accessed.
+- Exact content `3d21c005bd97b58e87310c3aee9989e91f78e61f` passed Quality
+  `31347355040` and Pages `31347354527`; the live `/site/` and detailed audit
+  return HTTP 200 with the frozen 30.0/40 boundary.
 - 영향 파일: `docs/method-asset-viability-source-audit-2026-08-10.md`, machine
   contract/validator/tests, research/data/model/experiment/ISBI/server guides,
   public site, private manuscript history, `AGENTS.md` and this log.

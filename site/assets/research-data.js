@@ -575,7 +575,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.10",
       category: "research",
       title: "Method–asset viability audit leaves no compute-worthy candidate",
-      copy: "Five frozen scores are 30.0/30.0/29.0/26.0/23.0. COMPASS, NeckSpline, conformal morphometry and partial-observation neural operators close the tempting method gaps; IAVS remains README-only, RSNA lacks a public per-reader manifest and CQ500-IA is not publicly auditable. Schema 5.5 creates no payload, P0, PBS, model or GPU. introai9 is reachable and idle; it remains the only future execution target, while junjinyong remains completely excluded.",
+      copy: "Five frozen scores are 30.0/30.0/29.0/26.0/23.0. COMPASS, NeckSpline, conformal morphometry and partial-observation neural operators close the tempting method gaps; IAVS remains README-only, RSNA lacks a public per-reader manifest and CQ500-IA is not publicly auditable. Schema 5.5 creates no payload, P0, PBS, model or GPU. Exact content 3d21c00… passed Quality 31347355040 and Pages 31347354527; live site and audit return HTTP 200. introai9 is reachable and idle; it remains the only future execution target, while junjinyong remains completely excluded.",
       files: ["docs/method-asset-viability-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
     },
     {

@@ -19,6 +19,10 @@
 > 0. Public-key access reached `introai9`/`ECE-util2`; PBS jobs were 0 and no
 > login-node GPU command ran. `junjinyong` was not accessed and remains excluded.
 > Closed P0s and failed confirmatory results are not repaired or relabeled.
+> Exact content `3d21c005bd97b58e87310c3aee9989e91f78e61f`의 Quality
+> run `31347355040`과 Pages run `31347354527`이 성공했다. Live `/site/`와
+> 상세 audit가 HTTP 200으로 30.0/40, all rejected와
+> no-payload/P0/model/GPU 경계를 표시함을 확인했다.
 
 > **2026-08-10 reconstruction/annotation reliability source overlay:** Fresh
 > scores는 31.5/29.5/29.0/26.5/25.5/25.5로 모두 32 미만이며 31.5를 사후
