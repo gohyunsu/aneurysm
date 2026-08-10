@@ -4,6 +4,21 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Broad-registry content and live site verified
+
+- Exact scientific content `162903a6b66a9982c011fd96d8faf99e92de7eda`
+  passed Quality run `31351395527`.
+- Pages run `31351394932` succeeded. Its API head metadata remained at the
+  preceding public SHA, so it is not represented as an exact-content pin;
+  direct live checks of overview, Learn and the detailed audit returned HTTP
+  200 and rendered the current broad-registry 30.5/40, all-rejected,
+  no-payload/P0/model/GPU boundary.
+- Deployment verification creates no access request, P0, architecture, compute,
+  outer test or submission identity. `introai9` remains the sole future
+  execution target and `junjinyong` remains excluded.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `docs/server-execution.md`,
+  `site/assets/research-data.js`.
+
 ## 2026-08-10 · Broad-registry audit rejects restricted and pseudoreplicated leads
 
 - A bounded official-metadata screen covered 100 recent Zenodo records from a

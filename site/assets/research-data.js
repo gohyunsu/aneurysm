@@ -597,6 +597,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Broad-registry content and live site verified",
+      copy: "Exact scientific content 162903a… passed Quality 31351395527. Pages 31351394932 succeeded, but its API head metadata remained at the preceding public SHA, so it is not treated as an exact-content pin. Direct live checks of overview, Learn and the detailed audit return HTTP 200 and render broad-registry 30.5/40, all rejected and no payload/P0/model/GPU. This provenance changes no access, method, compute or submission authorization; introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "docs/server-execution.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "Broad-registry audit rejects restricted scale and solver pseudoreplication",
       copy: "A bounded Zenodo/DataCite/Figshare/Dryad screen freezes six scores at 30.5/29.5/26.0/26.0/24.5/18.0. LargeIA is restricted and direct-prior dense; the CFD Challenge has only five independent anatomies despite 28 submissions; longitudinal SIG, aSAH and VWI are supplement-only/directly occupied; synthetic DSA is embargoed past the deadline. Schema 5.7 creates no access request, payload, P0, PBS job, method, architecture or GPU. introai9 remains the only future execution target and junjinyong remains completely excluded.",

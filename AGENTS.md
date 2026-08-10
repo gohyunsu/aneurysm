@@ -19,6 +19,12 @@
 > identity are all 0. Only `introai9` PBS may be used after a separately frozen
 > >=32 candidate gate; `junjinyong` must not be connected to, queried, used for
 > transfer/submission or monitored.
+> Exact scientific content `162903a6b66a9982c011fd96d8faf99e92de7eda`
+> passed Quality `31351395527`. Pages run `31351394932` also succeeded, although
+> its API head metadata remained at the preceding public SHA; direct live checks
+> of overview, Learn and the detailed audit returned HTTP 200 and rendered
+> broad-registry 30.5/40 with no payload/P0/model/GPU. This deployment evidence
+> changes no scientific or compute authorization.
 
 > **2026-08-10 registry-gap source overlay:** The official exact-title Zenodo
 > query returned 49 records. Five previously unregistered candidates score

@@ -2,6 +2,17 @@
 
 최종 갱신: 2026-08-10 KST
 
+## 2026-08-10 · Broad-registry deployment verification
+
+- Exact content `162903a6b66a9982c011fd96d8faf99e92de7eda` passed Quality
+  `31351395527`.
+- Pages `31351394932` succeeded but exposed the preceding public SHA in run API
+  metadata, so it is not treated as an exact-content pin. Direct live checks of
+  overview, Learn and the detailed audit returned HTTP 200 with 30.5/40 and the
+  no-payload/P0/model/GPU boundary.
+- This is provenance only. It creates no server job or monitoring loop and does
+  not authorize `junjinyong`.
+
 ## 2026-08-10 · Broad-registry source-only stop; introai9 remains exclusive
 
 - Six frozen scores are 30.5/29.5/26.0/26.0/24.5/18.0, all below 32. No access
