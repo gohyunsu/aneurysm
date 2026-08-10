@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.8 no-execution boundary · 2026-08-11:** The structure-faithful
+> WSS reappraisal peaks at 31.0/40 and registers no P0/PBS/GPU work. No
+> scientific server was connected to or queried during the source-only audit.
+> Historical `115645.ECE-util1` remains closed at 0/10 checks and cannot be
+> repaired or rerun. Future eligible work remains `introai9` PBS only; never
+> access, query, submit to or monitor `junjinyong`, and never run GPU commands
+> on an `introai9` login node.
+
 > **Schema 7.7 deployment verification · 2026-08-11:** Exact content
 > `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality
 > `31413485546`, Pages `31413484543` and manual source-watch

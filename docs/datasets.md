@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.8 Aneurisk structure role · 2026-08-11:** Zenodo 19455127 v1 is
+> an open 76-geometry, CC BY 4.0 source candidate for cycle-averaged WSS
+> structure, not an admitted transient-worldline training cohort. Its public
+> README does not enumerate VTP arrays, phase count/alignment, critical-point
+> annotations or tolerances. Only that 1,436-byte README was read; the
+> 1,430,889,142-byte archive and VTP members were not accessed. The source
+> reappraisal peaks at 31.0/40, so no asset P0, staging or model is authorized.
+> [Exact reappraisal](structure-faithful-wss-source-reappraisal-2026-08-11.md).
+
 > **Schema 7.7 asset-watch boundary · 2026-08-11:** IAVS and TopBrain 2.0 remain
 > non-material for training, while TRELLIS remains an unavailable stated code
 > repository rather than a dataset. The watcher reads public metadata only and

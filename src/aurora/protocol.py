@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.7":
-        raise ProtocolError("The current research-state schema must be version 7.7.")
+    if protocol["schema_version"] != "7.8":
+        raise ProtocolError("The current research-state schema must be version 7.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,7 +148,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_inverse_flow_delta_rejected_surface_vector_retained_inactive"
+        != "no_active_problem_structure_faithful_wss_reappraisal_rejected_surface_vector_retained_inactive"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -225,6 +225,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "surface_vector_conditional_assessment",
             "expert_virtual_removal_pair_source_delta",
             "measurement_functional_inverse_flow_source_delta",
+            "structure_faithful_wss_source_reappraisal",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -235,13 +236,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_inverse_flow_delta_rejected_surface_vector_inactive"
+        != "no_active_problem_latest_structure_faithful_wss_reappraisal_rejected_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "source_only_inverse_flow_primary_sources_verified_no_new_payload_latest_p0_history_closed"
+        != "source_only_structure_wss_primary_sources_and_public_readme_verified_no_archive_or_vtp_payload_latest_p0_history_closed"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -253,11 +254,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_audit_or_material_phase_resolved_wss_asset_change_not_same_contract_repair_or_already_used_benchanxplore_simulation"
         or problem_selection["audit_document"]
-        != "docs/measurement-functional-inverse-flow-source-delta-2026-08-11.md"
+        != "docs/structure-faithful-wss-source-reappraisal-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "time_varying_surface_wss_index_structure_prediction_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "benchanxplore_transient_measurement_to_functional_posterior"
+        != "aneurisk_cycle_averaged_fixed_point_faithful_surrogation"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
@@ -1402,6 +1403,221 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "the already-used BenchAnXplore limit, and zero method or compute."
         )
     checks.append("measurement-functional inverse-flow source-only rejection")
+    structure_reappraisal = problem_selection[
+        "structure_faithful_wss_source_reappraisal"
+    ]
+    _require_keys(
+        structure_reappraisal,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "surface_vector_hypothesis_status",
+            "historical_aneug_source_score",
+            "historical_aneug_p0_job_id",
+            "historical_aneug_p0_scientific_checks_evaluated",
+            "historical_aneug_p0_closed_without_repair_or_rerun",
+            "aneug_code_head",
+            "aneug_dataset_head",
+            "aneug_material_source_change_observed",
+            "aneurisk_record",
+            "aneurisk_record_version",
+            "aneurisk_license",
+            "aneurisk_geometries",
+            "aneurisk_archive_bytes",
+            "aneurisk_archive_md5",
+            "aneurisk_readme_bytes",
+            "aneurisk_public_readme_accessed",
+            "aneurisk_archive_or_vtp_payload_accessed",
+            "aneurisk_manifest_enumerates_vtp_arrays",
+            "aneurisk_manifest_enumerates_phase_count_and_alignment",
+            "aneurisk_manifest_exposes_critical_point_annotations_or_tolerances",
+            "companion_paper_cycle_averaged_fixed_points_and_separatrices",
+            "companion_paper_cardio_cycle_critical_point_worldlines",
+            "companion_temporal_evolution_cases_shown",
+            "aneurysm_specific_tracking_prior_lesions",
+            "aneurysm_specific_tracking_prior_patients",
+            "cfd_challenge_cases",
+            "cfd_challenge_submissions",
+            "cfd_challenge_teams",
+            "cfd_challenge_independent_anatomy_count",
+            "critical_points_and_worldlines_start_as_evaluation_not_loss",
+            "hodge_is_required_strong_baseline_not_selected_proposal",
+            "edge_one_form_guarantees_critical_point_fidelity",
+            "poincare_hopf_boundary_contract_required",
+            "candidates",
+            "direct_prior_threats",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "server_queried",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_allowed_action",
+        ],
+        "structure-faithful WSS source reappraisal",
+    )
+    expected_structure_candidates = [
+        (
+            "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+            31.0,
+            [4.5, 3.5, 1.5, 4.0, 3.5, 5.0, 5.0, 4.0],
+        ),
+        (
+            "aneurisk_cycle_averaged_separatrix_network_surrogation",
+            30.0,
+            [4.5, 3.0, 1.5, 4.0, 3.5, 5.0, 5.0, 3.5],
+        ),
+        (
+            "aneurisk_phase_resolved_critical_point_worldlines",
+            29.0,
+            [4.5, 2.0, 2.0, 3.5, 3.5, 5.0, 5.0, 3.5],
+        ),
+        (
+            "aneurisk_structure_selective_surrogate_abstention",
+            28.5,
+            [4.5, 2.5, 1.5, 4.0, 3.5, 5.0, 4.5, 3.0],
+        ),
+        (
+            "cfd_challenge_multi_pipeline_wss_topology_robustness",
+            27.5,
+            [4.5, 4.0, 1.0, 4.5, 0.5, 5.0, 4.5, 3.5],
+        ),
+        (
+            "rhsia_structure_fidelity_benchmark_extension",
+            27.0,
+            [4.5, 2.0, 1.0, 1.5, 4.5, 5.0, 5.0, 3.5],
+        ),
+    ]
+    observed_structure_candidates = [
+        (candidate.get("id"), candidate.get("score"), candidate.get("axis_scores"))
+        for candidate in structure_reappraisal["candidates"]
+    ]
+    expected_structure_priors = {
+        "hodge_spectral_duality_discrete_form_topology_preserving_operator",
+        "se3_equivariant_transient_surface_wss_mesh_prediction",
+        "rhsia_graph_transformer_ghd_transient_wss_surrogation",
+        "robust_critical_point_tracking",
+        "critical_point_trajectory_preserving_vector_field_compression",
+        "aneurysm_specific_cardiac_cycle_wss_critical_point_tracking",
+    }
+    if (
+        structure_reappraisal["status"]
+        != "completed_source_only_all_candidates_rejected_below_admission_threshold"
+        or structure_reappraisal["audit_document"]
+        != "docs/structure-faithful-wss-source-reappraisal-2026-08-11.md"
+        or structure_reappraisal["automatic_selection_threshold"] != 32.0
+        or structure_reappraisal["best_candidate_id"]
+        != "aneurisk_cycle_averaged_fixed_point_faithful_surrogation"
+        or structure_reappraisal["best_score"] != 31.0
+        or structure_reappraisal["active_shortlist_count"] != 0
+        or structure_reappraisal["primary_problem_selected"] is not False
+        or structure_reappraisal["surface_vector_hypothesis_status"]
+        != "inactive_conditional_not_active_paper_identity"
+        or structure_reappraisal["historical_aneug_source_score"] != 32.0
+        or structure_reappraisal["historical_aneug_p0_job_id"]
+        != "115645.ECE-util1"
+        or structure_reappraisal["historical_aneug_p0_scientific_checks_evaluated"]
+        != 0
+        or structure_reappraisal[
+            "historical_aneug_p0_closed_without_repair_or_rerun"
+        ]
+        is not True
+        or structure_reappraisal["aneug_code_head"]
+        != "4a090a0f12538deef6fcea88b81afe78ce38152e"
+        or structure_reappraisal["aneug_dataset_head"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or structure_reappraisal["aneug_material_source_change_observed"] is not False
+        or structure_reappraisal["aneurisk_record"] != "10.5281/zenodo.19455127"
+        or structure_reappraisal["aneurisk_record_version"] != "v1"
+        or structure_reappraisal["aneurisk_license"] != "CC_BY_4_0"
+        or structure_reappraisal["aneurisk_geometries"] != 76
+        or structure_reappraisal["aneurisk_archive_bytes"] != 1430889142
+        or structure_reappraisal["aneurisk_archive_md5"]
+        != "8c66e7bb359d04bd1a5d6db6da3f3926"
+        or structure_reappraisal["aneurisk_readme_bytes"] != 1436
+        or structure_reappraisal["aneurisk_public_readme_accessed"] is not True
+        or structure_reappraisal["aneurisk_archive_or_vtp_payload_accessed"]
+        is not False
+        or structure_reappraisal["aneurisk_manifest_enumerates_vtp_arrays"]
+        is not False
+        or structure_reappraisal[
+            "aneurisk_manifest_enumerates_phase_count_and_alignment"
+        ]
+        is not False
+        or structure_reappraisal[
+            "aneurisk_manifest_exposes_critical_point_annotations_or_tolerances"
+        ]
+        is not False
+        or structure_reappraisal[
+            "companion_paper_cycle_averaged_fixed_points_and_separatrices"
+        ]
+        is not True
+        or structure_reappraisal[
+            "companion_paper_cardio_cycle_critical_point_worldlines"
+        ]
+        is not False
+        or structure_reappraisal["companion_temporal_evolution_cases_shown"] != 1
+        or structure_reappraisal["aneurysm_specific_tracking_prior_lesions"] != 359
+        or structure_reappraisal["aneurysm_specific_tracking_prior_patients"] != 268
+        or structure_reappraisal["cfd_challenge_cases"] != 5
+        or structure_reappraisal["cfd_challenge_submissions"] != 28
+        or structure_reappraisal["cfd_challenge_teams"] != 26
+        or structure_reappraisal["cfd_challenge_independent_anatomy_count"] != 5
+        or structure_reappraisal[
+            "critical_points_and_worldlines_start_as_evaluation_not_loss"
+        ]
+        is not True
+        or structure_reappraisal[
+            "hodge_is_required_strong_baseline_not_selected_proposal"
+        ]
+        is not True
+        or structure_reappraisal["edge_one_form_guarantees_critical_point_fidelity"]
+        is not False
+        or structure_reappraisal["poincare_hopf_boundary_contract_required"]
+        is not True
+        or observed_structure_candidates != expected_structure_candidates
+        or any(
+            sum(candidate["axis_scores"]) != candidate["score"]
+            for candidate in structure_reappraisal["candidates"]
+        )
+        or set(structure_reappraisal["direct_prior_threats"])
+        != expected_structure_priors
+        or any(
+            structure_reappraisal[key] is not False
+            for key in (
+                "executable_p0_registered",
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "server_queried",
+                "pbs_job_created",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or structure_reappraisal["decision"]
+        != "reject_all_six_without_score_repair_archive_vtp_p0_method_architecture_server_compute_outer_test_or_claim"
+        or structure_reappraisal["next_allowed_action"]
+        != "fresh_problem_level_source_audit_or_material_official_phase_resolved_surface_wss_manifest_change_only_not_same_contract_repair"
+    ):
+        raise ProtocolError(
+            "The structure-faithful WSS reappraisal must preserve all six "
+            "sub-threshold scores, keep Hodge as a control, avoid treating "
+            "critical structures as a loss before stability, and open no compute."
+        )
+    checks.append("structure-faithful WSS source rejection and no-compute boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -1535,6 +1751,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "amortized_exact_boundary_bayesian_fer_across_geometries",
         "flowmri_cerebrovascular_kspace_to_wss_pressure_posterior",
         "cmrx_functional_risk_reconstruction_embargoed",
+        "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+        "aneurisk_cycle_averaged_separatrix_network_surrogation",
+        "aneurisk_phase_resolved_critical_point_worldlines",
+        "aneurisk_structure_selective_surrogate_abstention",
+        "cfd_challenge_multi_pipeline_wss_topology_robustness",
+        "rhsia_structure_fidelity_benchmark_extension",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {

@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.8 submission boundary · 2026-08-11:** The proposed structure-
+> faithful WSS identity is not assigned a title, contribution, architecture,
+> figure or result row. The fresh source screen peaks at 31.0/40. A viable
+> application paper would require stable structures, a demonstrated failure
+> among field-error-matched controls, and confirmatory field non-inferiority
+> plus geometry-level structural gains. Hodge and critical-point tracking are
+> baselines, not contributions. Current paper identity, P0/P1, method,
+> architecture, GPU and outer test are zero; the manuscript remains **not
+> submission-ready**. [Exact reappraisal](structure-faithful-wss-source-reappraisal-2026-08-11.md).
+
 > **Schema 7.7 submission boundary · 2026-08-11:** A scheduled source-watch
 > failure is a manual review request, not evidence or a paper-state transition.
 > Current active identity, contribution, method, result table and GPU remain 0.

@@ -297,6 +297,66 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "inverse-flow batch"):
             validate_protocol(candidate)
 
+    def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["structure_faithful_wss_source_reappraisal"]
+        self.assertEqual(self.protocol["schema_version"], "7.8")
+        self.assertEqual(audit["best_score"], 31.0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertTrue(
+            all(
+                sum(candidate["axis_scores"]) == candidate["score"]
+                for candidate in audit["candidates"]
+            )
+        )
+        self.assertLess(
+            max(candidate["score"] for candidate in audit["candidates"]),
+            audit["automatic_selection_threshold"],
+        )
+        self.assertEqual(audit["aneurisk_geometries"], 76)
+        self.assertTrue(audit["aneurisk_public_readme_accessed"])
+        self.assertFalse(audit["aneurisk_archive_or_vtp_payload_accessed"])
+        self.assertFalse(audit["aneug_material_source_change_observed"])
+        self.assertTrue(
+            audit["critical_points_and_worldlines_start_as_evaluation_not_loss"]
+        )
+        self.assertTrue(
+            audit["hodge_is_required_strong_baseline_not_selected_proposal"]
+        )
+        self.assertFalse(audit["edge_one_form_guarantees_critical_point_fidelity"])
+        self.assertEqual(audit["cfd_challenge_independent_anatomy_count"], 5)
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["server_queried"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertEqual(
+            problem["most_recent_source_rejected_candidate"],
+            "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "structure_faithful_wss_source_reappraisal"
+        ]["best_score"] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "structure-faithful WSS"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "structure_faithful_wss_source_reappraisal"
+        ]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "structure-faithful WSS"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "structure_faithful_wss_source_reappraisal"
+        ]["critical_points_and_worldlines_start_as_evaluation_not_loss"] = False
+        with self.assertRaisesRegex(ProtocolError, "structure-faithful WSS"):
+            validate_protocol(candidate)
+
     def test_trellis_surface_feature_update_is_direct_prior_only(self) -> None:
         assessment = self.protocol["problem_selection"][
             "surface_vector_conditional_assessment"

@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.8 rejects structure-faithful WSS before compute
+
+- Reframed the submitted surface-vector analysis as an inactive, falsifiable
+  application hypothesis rather than an active paper identity.
+- Verified unchanged official AneuG heads and preserved the historical
+  `115645.ECE-util1` execution-incomplete, 0/10, no-repair outcome.
+- Audited the open 76-geometry Aneurisk v1 record and its 1,436-byte README
+  without reading the 1.4 GB archive or VTP members. The manifest does not
+  enumerate vector arrays, phases, annotations or extraction tolerances.
+- Froze six formulations at 31.0/30.0/29.0/28.5/27.5/27.0; none crosses 32.
+- Corrected the architecture logic: Hodge is a required baseline, critical
+  structures begin as evaluation rather than a loss, edge 1-forms do not
+  guarantee zeros, and surface boundaries require explicit index/Hodge
+  conventions.
+- Added machine guards and mutation tests preserving zero P0/P1, method,
+  architecture, server query, GPU, outer test and paper claim. No scientific
+  server was queried; `junjinyong` remains prohibited.
+
 ## 2026-08-11 · Schema 7.7 deployment verified
 
 - Exact content `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality

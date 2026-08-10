@@ -1,9 +1,9 @@
 {
-  "schema_version": "7.7",
+  "schema_version": "7.8",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "no_active_problem_inverse_flow_delta_rejected_surface_vector_retained_inactive",
+    "status": "no_active_problem_structure_faithful_wss_reappraisal_rejected_surface_vector_retained_inactive",
     "as_of": "2026-08-11",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -14,12 +14,12 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_problem_latest_inverse_flow_delta_rejected_surface_vector_inactive",
+    "status": "no_active_problem_latest_structure_faithful_wss_reappraisal_rejected_surface_vector_inactive",
     "shortlisted_candidate": null,
     "conditional_source_lead_count": 0,
     "candidate_dataset": null,
     "candidate_estimand": null,
-    "asset_access_status": "source_only_inverse_flow_primary_sources_verified_no_new_payload_latest_p0_history_closed",
+    "asset_access_status": "source_only_structure_wss_primary_sources_and_public_readme_verified_no_archive_or_vtp_payload_latest_p0_history_closed",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -29,7 +29,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "fresh_problem_level_source_audit_or_material_phase_resolved_wss_asset_change_not_same_contract_repair_or_already_used_benchanxplore_simulation",
-    "audit_document": "docs/measurement-functional-inverse-flow-source-delta-2026-08-11.md",
+    "audit_document": "docs/structure-faithful-wss-source-reappraisal-2026-08-11.md",
     "aneumo_bc_transport_source_audit": {
       "status": "p0_execution_incomplete_no_scientific_verdict_closed_without_repair_or_rerun",
       "audit_document": "docs/aneumo-bc-transport-source-audit-2026-08-10.md",
@@ -3154,8 +3154,102 @@
       "surface_vector_hypothesis_status": "inactive_not_rejected_not_activated",
       "decision": "reject_all_six_without_new_payload_p0_method_architecture_server_compute_outer_test_or_claim"
     },
+    "structure_faithful_wss_source_reappraisal": {
+      "status": "completed_source_only_all_candidates_rejected_below_admission_threshold",
+      "audit_document": "docs/structure-faithful-wss-source-reappraisal-2026-08-11.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_id": "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+      "best_score": 31.0,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "surface_vector_hypothesis_status": "inactive_conditional_not_active_paper_identity",
+      "historical_aneug_source_score": 32.0,
+      "historical_aneug_p0_job_id": "115645.ECE-util1",
+      "historical_aneug_p0_scientific_checks_evaluated": 0,
+      "historical_aneug_p0_closed_without_repair_or_rerun": true,
+      "aneug_code_head": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+      "aneug_dataset_head": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+      "aneug_material_source_change_observed": false,
+      "aneurisk_record": "10.5281/zenodo.19455127",
+      "aneurisk_record_version": "v1",
+      "aneurisk_license": "CC_BY_4_0",
+      "aneurisk_geometries": 76,
+      "aneurisk_archive_bytes": 1430889142,
+      "aneurisk_archive_md5": "8c66e7bb359d04bd1a5d6db6da3f3926",
+      "aneurisk_readme_bytes": 1436,
+      "aneurisk_public_readme_accessed": true,
+      "aneurisk_archive_or_vtp_payload_accessed": false,
+      "aneurisk_manifest_enumerates_vtp_arrays": false,
+      "aneurisk_manifest_enumerates_phase_count_and_alignment": false,
+      "aneurisk_manifest_exposes_critical_point_annotations_or_tolerances": false,
+      "companion_paper_cycle_averaged_fixed_points_and_separatrices": true,
+      "companion_paper_cardio_cycle_critical_point_worldlines": false,
+      "companion_temporal_evolution_cases_shown": 1,
+      "aneurysm_specific_tracking_prior_lesions": 359,
+      "aneurysm_specific_tracking_prior_patients": 268,
+      "cfd_challenge_cases": 5,
+      "cfd_challenge_submissions": 28,
+      "cfd_challenge_teams": 26,
+      "cfd_challenge_independent_anatomy_count": 5,
+      "critical_points_and_worldlines_start_as_evaluation_not_loss": true,
+      "hodge_is_required_strong_baseline_not_selected_proposal": true,
+      "edge_one_form_guarantees_critical_point_fidelity": false,
+      "poincare_hopf_boundary_contract_required": true,
+      "candidates": [
+        {
+          "id": "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+          "score": 31.0,
+          "axis_scores": [4.5, 3.5, 1.5, 4.0, 3.5, 5.0, 5.0, 4.0]
+        },
+        {
+          "id": "aneurisk_cycle_averaged_separatrix_network_surrogation",
+          "score": 30.0,
+          "axis_scores": [4.5, 3.0, 1.5, 4.0, 3.5, 5.0, 5.0, 3.5]
+        },
+        {
+          "id": "aneurisk_phase_resolved_critical_point_worldlines",
+          "score": 29.0,
+          "axis_scores": [4.5, 2.0, 2.0, 3.5, 3.5, 5.0, 5.0, 3.5]
+        },
+        {
+          "id": "aneurisk_structure_selective_surrogate_abstention",
+          "score": 28.5,
+          "axis_scores": [4.5, 2.5, 1.5, 4.0, 3.5, 5.0, 4.5, 3.0]
+        },
+        {
+          "id": "cfd_challenge_multi_pipeline_wss_topology_robustness",
+          "score": 27.5,
+          "axis_scores": [4.5, 4.0, 1.0, 4.5, 0.5, 5.0, 4.5, 3.5]
+        },
+        {
+          "id": "rhsia_structure_fidelity_benchmark_extension",
+          "score": 27.0,
+          "axis_scores": [4.5, 2.0, 1.0, 1.5, 4.5, 5.0, 5.0, 3.5]
+        }
+      ],
+      "direct_prior_threats": [
+        "hodge_spectral_duality_discrete_form_topology_preserving_operator",
+        "se3_equivariant_transient_surface_wss_mesh_prediction",
+        "rhsia_graph_transformer_ghd_transient_wss_surrogation",
+        "robust_critical_point_tracking",
+        "critical_point_trajectory_preserving_vector_field_compression",
+        "aneurysm_specific_cardiac_cycle_wss_critical_point_tracking"
+      ],
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "server_queried": false,
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "decision": "reject_all_six_without_score_repair_archive_vtp_p0_method_architecture_server_compute_outer_test_or_claim",
+      "next_allowed_action": "fresh_problem_level_source_audit_or_material_official_phase_resolved_surface_wss_manifest_change_only_not_same_contract_repair"
+    },
     "most_recent_closed_candidate": "time_varying_surface_wss_index_structure_prediction_execution_incomplete",
-    "most_recent_source_rejected_candidate": "benchanxplore_transient_measurement_to_functional_posterior",
+    "most_recent_source_rejected_candidate": "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
     "most_recent_conditional_source_lead": null,
     "rejected_candidates": [
       "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied",
@@ -3289,7 +3383,13 @@
       "device_state_posterior_wss_reconstruction_single_anatomy",
       "amortized_exact_boundary_bayesian_fer_across_geometries",
       "flowmri_cerebrovascular_kspace_to_wss_pressure_posterior",
-      "cmrx_functional_risk_reconstruction_embargoed"
+      "cmrx_functional_risk_reconstruction_embargoed",
+      "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+      "aneurisk_cycle_averaged_separatrix_network_surrogation",
+      "aneurisk_phase_resolved_critical_point_worldlines",
+      "aneurisk_structure_selective_surrogate_abstention",
+      "cfd_challenge_multi_pipeline_wss_topology_robustness",
+      "rhsia_structure_fidelity_benchmark_extension"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",

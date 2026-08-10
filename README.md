@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 structure-faithful WSS reappraisal · schema 7.8:** The proposed
+> direction is retained only as an inactive application hypothesis. A fresh
+> Aneurisk/CFD-Challenge/RHSIA six-way screen scores
+> **31.0/30.0/29.0/28.5/27.5/27.0**, all below 32. The 76-case Aneurisk v1
+> record is open, but its public manifest does not enumerate VTP arrays,
+> phases, critical-point annotations or tolerances; only the 1,436-byte README
+> was read, not the archive/VTP payload. Hodge is a required baseline, critical
+> points/worldlines begin as evaluation rather than a loss, and an edge 1-form
+> does not guarantee their preservation. AneuG upstream remains unchanged and
+> historical job `115645.ECE-util1` stays closed at 0/10 checks. Active lead,
+> primary, P0/P1, method, architecture, GPU, outer test and paper identity are
+> zero. [Detailed reappraisal](docs/structure-faithful-wss-source-reappraisal-2026-08-11.md)
+
 > **2026-08-11 schema 7.7 deployment verification:** Exact content
 > `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality
 > `31413485546`, Pages `31413484543` and manual Public source watch

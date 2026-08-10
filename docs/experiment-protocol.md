@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 7.8 no-experiment boundary · 2026-08-11:** A fresh six-candidate
+> structure-faithful WSS source audit peaks at 31.0/40 and opens no P0. The
+> AneuG official heads are unchanged, so historical job `115645.ECE-util1`
+> cannot be repaired or rerun. The Aneurisk public README does not specify an
+> executable vector/phase/critical-structure schema; archive/VTP access remains
+> zero. Critical structures must first pass a future method-free stability gate
+> and cannot yet be installed as a training loss. No server was queried and no
+> PBS/GPU job exists.
+
 > **Schema 7.2 P0-SV outcome · 2026-08-10:** Exact job
 > `115645.ECE-util1` ran once on `introai9` with CPU 4, 16 GB and GPU 0, then
 > ended `E`/exit 2 after 00:27:02. A bounded private no-verdict result exists,

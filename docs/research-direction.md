@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 7.8 direction · 2026-08-11:** The surface-vector idea survives only
+> as an inactive, falsifiable application hypothesis. A fresh six-formulation
+> reappraisal peaks at 31.0/40 because the most identifiable open Aneurisk
+> target is cycle-averaged fixed-point fidelity, while the paper already
+> analyzes those structures and the public manifest does not expose an exact
+> vector/phase/extraction contract. Hodge is a strong baseline, not the method;
+> critical points/worldlines are evaluation-only before stability; edge
+> 1-forms do not guarantee zeros. No source is admitted and no method,
+> architecture or GPU is active. See the [exact reappraisal](structure-faithful-wss-source-reappraisal-2026-08-11.md).
+
 > **Schema 7.7 monitoring boundary · 2026-08-11:** IAVS, TopBrain 2.0 and the
 > TRELLIS stated-code repository match their frozen public states. The
 > fail-closed watch can request manual re-audit only; it cannot activate the

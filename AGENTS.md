@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 structure-faithful WSS reappraisal override · schema 7.8:**
+> Surface-vector WSS는 폐기하지 않지만 active paper identity도 아니다. Fresh
+> Aneurisk/CFD-Challenge/RHSIA six-way screen은
+> **31.0/30.0/29.0/28.5/27.5/27.0**으로 모두 32 미만이다. Aneurisk v1은
+> 76 geometry와 CC BY 4.0 VTP archive를 보고하지만 public manifest는 array,
+> phase, alignment, critical-point annotation/tolerance를 열거하지 않는다.
+> 1,436-byte README만 읽었고 archive/VTP는 접근하지 않았다. Companion paper의
+> fixed point와 separatrix는 cycle-averaged WSS 대상이며 cardiac-cycle
+> critical-point worldline이 아니다. Hodge/HSD는 proposal이 아니라 mandatory
+> strong baseline이고, critical point/worldline은 stability 전에는 loss가 아닌
+> evaluation이다. Edge 1-form도 zero/index 보존을 보장하지 않으며 wall boundary
+> convention이 필요하다. AneuG code `4a090a0…`/dataset `9dd4180…`는 unchanged;
+> historical `115645.ECE-util1`, 32/40, 0/10과 no-repair 판정을 보존한다. Active
+> shortlist/primary/P0/P1/method/architecture/GPU/outer test/paper contribution은
+> 모두 0이다. Source of truth는
+> `docs/structure-faithful-wss-source-reappraisal-2026-08-11.md`와 schema 7.8이다.
+> No scientific server was queried. Future gate-authorized execution은
+> `introai9` PBS만 사용하며 `junjinyong`에는 절대 접속·조회·제출·모니터링하지
+> 않는다.
+
 > **2026-08-11 schema 7.7 deployment verification overlay:** Exact content
 > `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality
 > `31413485546`, Pages `31413484543` and manual Public source watch

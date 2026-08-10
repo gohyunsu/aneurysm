@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · fail-closed IAVS/TopBrain/TRELLIS source watch matches frozen state · TRELLIS surface features are direct prior · latest inverse-flow batch best 30.0/40 rejected · surface-vector remains inactive · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
-    requirement: "a genuinely fresh problem or materially changed phase-resolved WSS source must pass source entry, method-free stability and failure-mechanism gates before architecture or GPU; already-used BenchAnXplore simulations, geometry-only pairs and wrapper/downloader/model renaming cannot reopen a closed contract",
+    status: "Target locked · latest structure-faithful WSS batch best 31.0/40 rejected · Aneurisk archive/VTP unread · Hodge is a baseline · critical structures are evaluation-first · surface-vector remains inactive · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
+    requirement: "a genuinely fresh problem or materially changed official phase-resolved WSS manifest must pass source entry, method-free stability and field-error-matched failure-mechanism gates before architecture or GPU; Hodge/edge forms/tracking, already-used simulations and wrapper/downloader/model renaming cannot reopen a closed contract",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Structure-faithful WSS remains a hypothesis after a 31/40 reappraisal",
+      copy: "A fresh Aneurisk/CFD-Challenge/RHSIA screen retains the failure question but rejects all six formulations at 31.0/30.0/29.0/28.5/27.5/27.0. The open 76-geometry Aneurisk v1 record does not enumerate VTP vector arrays, phase alignment, critical-point labels or extraction tolerances; only its 1,436-byte README was read. Its companion paper analyzes cycle-averaged fixed points and separatrices, not cardiac-cycle critical-point worldlines. HSD, SE(3) transient WSS, RHSIA, robust tracking, trajectory-preserving compression and aneurysm-specific cycle tracking are direct controls. Hodge is therefore a baseline, structural targets start as evaluation rather than a loss, and edge 1-forms do not guarantee critical-point fidelity.",
+      status: "Best 31.0/40 · all rejected · archive/VTP/P0/method/architecture/server/GPU 0",
+      url: "../docs/structure-faithful-wss-source-reappraisal-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Foundation surface features strengthen the baseline, not the claim",
@@ -759,8 +766,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "Aneurisk CFD curvature · 2026",
-      role: "source-rejected curvature/hemodynamic control; not training",
-      provenance: "76 selected geometries · 1.4 GB VTP archive · CC BY 4.0 · two population age-group inflows scaled by diameter · record/paper outlet mismatch · archive/payload 0 · best candidate 31/40"
+      role: "source-rejected curvature/hemodynamic and cycle-averaged structure control; not training",
+      provenance: "76 selected geometries · 1.4 GB VTP archive · CC BY 4.0 · 1,436-byte README read · array/phase/critical-point manifest absent · record/paper outlet mismatch · archive/VTP 0 · latest structure candidate 31/40"
     },
     {
       name: "Tornadic WSS topology · Figshare 2026",
@@ -804,6 +811,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 7.8 critically reappraises structure-faithful surface WSS",
+      copy: "The submitted direction is retained as an inactive application hypothesis, not an architecture. Six frozen formulations score 31.0/30.0/29.0/28.5/27.5/27.0. The official AneuG heads are unchanged and historical P0 115645 remains closed at 0/10 checks. Only the public Aneurisk README was read; archive and VTP access remain zero. Hodge is frozen as a strong baseline, critical points/worldlines as evaluation-first, and edge 1-forms as non-guaranteeing representations. No P0/P1, model, architecture, server query, GPU, outer test or claim is opened.",
+      files: ["docs/structure-faithful-wss-source-reappraisal-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/literature-lineage.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

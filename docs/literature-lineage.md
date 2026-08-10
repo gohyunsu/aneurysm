@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.8 calibrated gap · 2026-08-11:** The gap is not edge 1-forms,
+> Hodge/DEC, equivariance, periodic prediction, critical-point extraction,
+> tracking or topology loss. HSD, SE(3) transient WSS, RHSIA, robust tracking,
+> trajectory-preserving compression and 359-lesion aneurysm WSS tracking occupy
+> them. The only residual hypothesis is a field-error-matched structural failure
+> plus a minimal operator-specific correction with no field-accuracy tax. The
+> best currently identifiable open formulation is cycle-averaged and scores
+> 31.0/40, so the gap remains unverified and inactive. [Exact reappraisal](structure-faithful-wss-source-reappraisal-2026-08-11.md).
+
 > **Schema 7.7 lineage watch · 2026-08-11:** The TRELLIS stated repository is
 > still HTTP 404 under the live frozen watch. Future availability would improve
 > baseline auditability, not create novelty or phase-resolved WSS evidence.

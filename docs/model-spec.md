@@ -1,5 +1,16 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.8 no-model boundary · 2026-08-11:** No architecture is selected.
+> HSD/Hodge must be an official or faithful strong baseline rather than the
+> proposal. Critical-point coordinates and worldline events begin as
+> deterministic evaluation because they are unstable near degenerate zeros and
+> ambiguous at events. An edge-integral output guarantees neither tangent-vector
+> reconstruction nor critical-point fidelity. Only a future E1/E2 pass may
+> justify the smallest candidate: a matched strong WSS backbone plus oriented
+> edge output, explicit tangent recovery and, if supported, a margin-aware local
+> `C1`/degree control. The fresh source score is 31.0/40, so even this candidate
+> is not executable. [Decision details](structure-faithful-wss-source-reappraisal-2026-08-11.md).
+
 > **Schema 7.7 monitoring boundary · 2026-08-11:** Source-watch automation is
 > not an architecture-selection mechanism. Even if TRELLIS code appears, only
 > a baseline-feasibility re-audit opens; E0–E2 and all no-model/no-GPU gates
