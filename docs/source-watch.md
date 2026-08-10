@@ -1,5 +1,13 @@
 # Public source watch · IAVS + TopBrain 2.0
 
+> **2026-08-11 refresh:** the live watch returned
+> `same_as_all_frozen_snapshots=true`. IAVS remains exact `2e40088d…`,
+> README-only, with no release, license, code or payload. TopBrain 2.0 remains a
+> design-PDF/under-construction source with no material task route. This creates
+> no source re-audit, P0, method or GPU authorization. The separate schema-7.5
+> inverse-flow audit was triggered by a new published direct prior, not by a
+> watched asset change. No server was queried.
+
 상태: **watch-only · 두 official source 모두 frozen snapshot과 동일 · no
 medical payload/source-score repair/P0/model/GPU**
 

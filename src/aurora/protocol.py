@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.4":
-        raise ProtocolError("The current research-state schema must be version 7.4.")
+    if protocol["schema_version"] != "7.5":
+        raise ProtocolError("The current research-state schema must be version 7.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,7 +148,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_virtual_removal_pair_rejected_surface_vector_retained_inactive"
+        != "no_active_problem_inverse_flow_delta_rejected_surface_vector_retained_inactive"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -224,6 +224,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneug_surface_vector_structure_source_audit",
             "surface_vector_conditional_assessment",
             "expert_virtual_removal_pair_source_delta",
+            "measurement_functional_inverse_flow_source_delta",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -234,13 +235,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_virtual_removal_pair_rejected_surface_vector_inactive"
+        != "no_active_problem_latest_inverse_flow_delta_rejected_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "source_only_figshare_v3_metadata_verified_no_vtp_payload_latest_p0_history_closed"
+        != "source_only_inverse_flow_primary_sources_verified_no_new_payload_latest_p0_history_closed"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -250,13 +251,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_source_audit_or_material_surface_vector_source_change_for_new_e0_not_same_contract_repair_rerun_or_training"
+        != "fresh_problem_level_source_audit_or_material_phase_resolved_wss_asset_change_not_same_contract_repair_or_already_used_benchanxplore_simulation"
         or problem_selection["audit_document"]
-        != "docs/expert-virtual-removal-pair-source-delta-2026-08-11.md"
+        != "docs/measurement-functional-inverse-flow-source-delta-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "time_varying_surface_wss_index_structure_prediction_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "expert_virtual_removal_pair_counterfactual_emulation"
+        != "benchanxplore_transient_measurement_to_functional_posterior"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
@@ -1129,6 +1130,174 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "surface-vector E0 asset and authorizes no payload, method, or compute."
         )
     checks.append("expert virtual-removal pair source-only rejection boundary")
+    inverse_delta = problem_selection[
+        "measurement_functional_inverse_flow_source_delta"
+    ]
+    _require_keys(
+        inverse_delta,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "new_direct_prior_arxiv",
+            "new_direct_prior_title",
+            "new_direct_prior_submission_date",
+            "new_direct_prior_velocity_observation_is_noisy_and_underresolved",
+            "new_direct_prior_unknown_boundary_conditions",
+            "new_direct_prior_exact_no_slip",
+            "new_direct_prior_laplace_posterior",
+            "new_direct_prior_wss_uncertainty_propagation",
+            "new_direct_prior_reported_geometries",
+            "new_direct_prior_code_or_data_link_exposed_on_arxiv_record",
+            "benchanxplore_cases",
+            "benchanxplore_timeframes",
+            "benchanxplore_common_idealized_parent_vessel",
+            "benchanxplore_compact_contract",
+            "benchanxplore_compact_pressure_or_wss_contract_verified",
+            "benchanxplore_all_cases_previously_used_for_representation_selection",
+            "flowmri_dataset_doi",
+            "flowmri_dataset_license",
+            "flowmri_cerebrovascular_volunteers",
+            "flowmri_cerebrovascular_training_volunteers",
+            "flowmri_cerebrovascular_reference_test_volunteers",
+            "cmrx_independent_research_embargo_end",
+            "isbi_submission_deadline",
+            "minnesota_in_vitro_effective_anatomies",
+            "candidates",
+            "new_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "server_queried",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "surface_vector_hypothesis_status",
+            "decision",
+        ],
+        "measurement-functional inverse-flow source delta",
+    )
+    expected_inverse_candidates = [
+        (
+            "benchanxplore_transient_measurement_to_functional_posterior",
+            30.0,
+            [5.0, 3.0, 1.5, 4.5, 2.5, 5.0, 5.0, 3.5],
+        ),
+        (
+            "in_vitro_cross_physics_functional_calibration_single_anatomy",
+            29.0,
+            [4.5, 4.5, 1.5, 4.0, 0.5, 5.0, 5.0, 4.0],
+        ),
+        (
+            "device_state_posterior_wss_reconstruction_single_anatomy",
+            28.0,
+            [5.0, 3.0, 1.5, 5.0, 0.5, 5.0, 5.0, 3.0],
+        ),
+        (
+            "amortized_exact_boundary_bayesian_fer_across_geometries",
+            26.5,
+            [5.0, 5.0, 1.0, 1.5, 1.5, 5.0, 4.5, 3.0],
+        ),
+        (
+            "flowmri_cerebrovascular_kspace_to_wss_pressure_posterior",
+            26.0,
+            [5.0, 1.5, 1.5, 4.0, 1.0, 5.0, 5.0, 3.0],
+        ),
+        (
+            "cmrx_functional_risk_reconstruction_embargoed",
+            25.0,
+            [5.0, 2.0, 1.0, 1.0, 5.0, 5.0, 5.0, 1.0],
+        ),
+    ]
+    observed_inverse_candidates = [
+        (candidate.get("id"), candidate.get("score"), candidate.get("axis_scores"))
+        for candidate in inverse_delta["candidates"]
+    ]
+    if (
+        inverse_delta["status"]
+        != "completed_source_only_all_candidates_rejected_below_admission_threshold"
+        or inverse_delta["audit_document"]
+        != "docs/measurement-functional-inverse-flow-source-delta-2026-08-11.md"
+        or inverse_delta["automatic_selection_threshold"] != 32.0
+        or inverse_delta["best_candidate_id"]
+        != "benchanxplore_transient_measurement_to_functional_posterior"
+        or inverse_delta["best_score"] != 30.0
+        or inverse_delta["active_shortlist_count"] != 0
+        or inverse_delta["primary_problem_selected"] is not False
+        or inverse_delta["new_direct_prior_arxiv"] != "2607.20224"
+        or inverse_delta["new_direct_prior_submission_date"] != "2026-07-22"
+        or inverse_delta["new_direct_prior_reported_geometries"] != 3
+        or inverse_delta[
+            "new_direct_prior_code_or_data_link_exposed_on_arxiv_record"
+        ]
+        is not False
+        or any(
+            inverse_delta[key] is not True
+            for key in (
+                "new_direct_prior_velocity_observation_is_noisy_and_underresolved",
+                "new_direct_prior_unknown_boundary_conditions",
+                "new_direct_prior_exact_no_slip",
+                "new_direct_prior_laplace_posterior",
+                "new_direct_prior_wss_uncertainty_propagation",
+                "benchanxplore_common_idealized_parent_vessel",
+                "benchanxplore_all_cases_previously_used_for_representation_selection",
+            )
+        )
+        or inverse_delta["benchanxplore_cases"] != 105
+        or inverse_delta["benchanxplore_timeframes"] != 80
+        or inverse_delta["benchanxplore_compact_contract"]
+        != ["coordinates", "tetrahedra", "velocity", "boundary_mask"]
+        or inverse_delta["benchanxplore_compact_pressure_or_wss_contract_verified"]
+        is not False
+        or inverse_delta["flowmri_dataset_doi"]
+        != "10.3929/ethz-b-000705347"
+        or inverse_delta["flowmri_dataset_license"] != "CC_BY_SA_4_0"
+        or inverse_delta["flowmri_cerebrovascular_volunteers"] != 10
+        or inverse_delta["flowmri_cerebrovascular_training_volunteers"] != 9
+        or inverse_delta["flowmri_cerebrovascular_reference_test_volunteers"]
+        != 1
+        or inverse_delta["cmrx_independent_research_embargo_end"] != "2026-12"
+        or inverse_delta["isbi_submission_deadline"]
+        != "2026-10-26T23:59:00-04:00"
+        or inverse_delta["minnesota_in_vitro_effective_anatomies"] != 1
+        or observed_inverse_candidates != expected_inverse_candidates
+        or any(sum(axis_scores) != score for _, score, axis_scores in expected_inverse_candidates)
+        or max(score for _, score, _ in expected_inverse_candidates)
+        >= inverse_delta["automatic_selection_threshold"]
+        or any(
+            inverse_delta[key] is not False
+            for key in (
+                "new_payload_accessed",
+                "executable_p0_registered",
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "server_queried",
+                "pbs_job_created",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or inverse_delta["surface_vector_hypothesis_status"]
+        != "inactive_not_rejected_not_activated"
+        or inverse_delta["decision"]
+        != "reject_all_six_without_new_payload_p0_method_architecture_server_compute_outer_test_or_claim"
+    ):
+        raise ProtocolError(
+            "The measurement-functional inverse-flow batch must preserve the "
+            "30.0/40 source-only rejection, the new FER direct-prior boundary, "
+            "the already-used BenchAnXplore limit, and zero method or compute."
+        )
+    checks.append("measurement-functional inverse-flow source-only rejection")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -1256,6 +1425,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "split_blind_normalization_provenance",
         "test_blind_checkpoint_and_prefix_split_reaudit",
         "expert_virtual_removal_pair_counterfactual_emulation",
+        "benchanxplore_transient_measurement_to_functional_posterior",
+        "in_vitro_cross_physics_functional_calibration_single_anatomy",
+        "device_state_posterior_wss_reconstruction_single_anatomy",
+        "amortized_exact_boundary_bayesian_fer_across_geometries",
+        "flowmri_cerebrovascular_kspace_to_wss_pressure_posterior",
+        "cmrx_functional_risk_reconstruction_embargoed",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {

@@ -1,5 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.5 inverse-flow role · 2026-08-11:** BenchAnXplore remains a
+> controlled transient-velocity benchmark, not a fresh WSS/pressure posterior
+> confirmation cohort. The current decoded compact contract is coordinates,
+> tetrahedra, 80 velocity arrays and a boundary mask; pressure/WSS is not
+> verified in that contract. Its 105 bulges share an idealized parent vessel and
+> all cases already informed D0/D0b. FlowMRI is open CC BY-SA 4.0 but its
+> cerebrovascular branch has ten healthy volunteers and only one reference test.
+> CMRx remains terms-gated and independently usable after the ISBI deadline.
+> Minnesota and dual-VENC device assets have one effective anatomy each. No new
+> payload was accessed. [Exact audit](measurement-functional-inverse-flow-source-delta-2026-08-11.md).
+
 > **Schema 7.4 Figshare virtual-removal role · 2026-08-11:** Record `1159108`
 > v3 registers ten pathological surfaces, ten expert virtual-removal partners
 > and ten matched controls (30 VTP files, 163,634,666 bytes). No VTP body was

@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.5 submission boundary · 2026-08-11:** Measurement-conditioned
+> inverse-flow reconstruction is not the fallback paper identity. A new FER
+> direct prior already supplies calibrated velocity/pressure/WSS inference from
+> noisy under-resolved observations, and the strongest executable-looking open
+> formulation scores only 30.0/40. The available data cannot support a fresh
+> multi-geometry functional claim. Therefore no experiment/table/result slot or
+> numbered contribution is allocated to this branch. Surface-vector remains an
+> inactive hypothesis only. The paper stays not submission-ready with zero
+> active problem, method, architecture and GPU job.
+
 > **Schema 7.4 submission boundary · 2026-08-11:** The ten-case expert virtual-
 > removal pair is useful for an interpretable pathological/removed/control
 > figure, but not sufficient evidence for a new ISBI method. It is a pseudo-

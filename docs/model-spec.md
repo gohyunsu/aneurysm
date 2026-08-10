@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.5 no-model boundary · 2026-08-11:** Do not replace the inactive
+> surface-vector idea with an inverse-flow GNN, probabilistic neural operator,
+> PINN, unrolled MRI network or uncertainty head. FER, FlowMRI-Net, pressure
+> super-resolution and VAST already occupy the obvious mechanisms. The fresh
+> inverse-flow batch peaks at 30.0/40, while available assets lack a fresh,
+> multi-geometry functional reference. Architecture remains unselected. A later
+> model may be designed only after a material asset passes source and method-free
+> task gates; GPU authorization remains false.
+
 > **Schema 7.4 no-model boundary · 2026-08-11:** The newly verified expert
 > virtual-removal pair changes source inventory, not model authority. A mesh
 > completion network, diffusion editor, GNN, GHD/VAE, cycle loss or uncertainty

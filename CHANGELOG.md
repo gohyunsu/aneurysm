@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.5 rejects measurement-functional inverse flow
+
+- Added Bayesian finite-element regression (arXiv:2607.20224) as a direct prior
+  for noisy under-resolved velocity, unknown BC, exact wall constraints,
+  velocity/pressure posterior inference and WSS uncertainty propagation.
+- Froze six formulations at 30.0/29.0/28.0/26.5/26.0/25.0; none reaches the
+  unchanged 32/40 source-admission line.
+- Recorded why BenchAnXplore cannot carry fresh functional confirmation: the
+  decoded compact contract has velocity and masks but no verified pressure/WSS
+  target, the parent vessel is shared, and all 105 cases already informed
+  representation selection.
+- Recorded FlowMRI's ten healthy cerebrovascular volunteers and one reference
+  test, CMRx's post-deadline independent-use embargo, and one-effective-anatomy
+  physical/device sources without inflating scans or frames into patients.
+- Added schema guards and mutation tests enforcing exact scores, direct-prior
+  facts, 30<32 and zero payload/P0/method/architecture/server/PBS/GPU/outer
+  test/claim. Surface-vector remains inactive and its closed P0 remains intact.
+- No server was queried and no job was created. `introai9` is the only future
+  gate-authorized target; `junjinyong` remains prohibited.
+
 ## 2026-08-11 · Schema 7.4 corrects the public virtual-removal asset record
 
 - Verified official Figshare v3 metadata for 30 checksum-pinned VTP files:

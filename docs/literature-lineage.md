@@ -1,5 +1,21 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.5 inverse-flow lineage boundary · 2026-08-11:**
+> [Bayesian finite-element regression](https://arxiv.org/abs/2607.20224)
+> directly covers noisy under-resolved velocity observations, unknown BC, exact
+> no-slip, velocity/pressure posterior inference and WSS uncertainty.
+> [FlowMRI-Net](https://doi.org/10.1016/j.jocmr.2025.101913) owns self-supervised
+> complex unrolling and encoding fusion; [cerebrovascular super-resolution plus
+> pressure](https://doi.org/10.1016/j.media.2023.102831) owns learned resolution
+> enhancement followed by physics-based pressure inference; and
+> [VAST](https://arxiv.org/abs/2601.13393) owns segmentation, unwrapping,
+> denoising and continuity consistency. Thus sparse input, probabilistic BC,
+> physics loss, pressure/WSS propagation, unrolling and uncertainty are direct
+> priors or controls. A residual contribution would need a new transient
+> functional failure mechanism, an operator-specific solution and fresh
+> multi-geometry evidence. Current sources do not provide that combination, so
+> the six-candidate batch is rejected at best 30.0/40. [Exact audit](measurement-functional-inverse-flow-source-delta-2026-08-11.md).
+
 > **Schema 7.4 pair correction · 2026-08-11:** The public Figshare pair removes
 > “no expert virtual-removal pair exists” from the gap. It does not remove the
 > actual gap—there is no observed biological pre-aneurysm target or released

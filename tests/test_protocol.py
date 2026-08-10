@@ -246,6 +246,57 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "virtual-removal pair"):
             validate_protocol(candidate)
 
+    def test_inverse_flow_delta_rejects_all_candidates_and_opens_no_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "measurement_functional_inverse_flow_source_delta"
+        ]
+        self.assertEqual(audit["best_score"], 30.0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertTrue(
+            all(
+                sum(candidate["axis_scores"]) == candidate["score"]
+                for candidate in audit["candidates"]
+            )
+        )
+        self.assertLess(
+            max(candidate["score"] for candidate in audit["candidates"]),
+            audit["automatic_selection_threshold"],
+        )
+        self.assertEqual(audit["new_direct_prior_arxiv"], "2607.20224")
+        self.assertEqual(audit["new_direct_prior_reported_geometries"], 3)
+        self.assertEqual(audit["benchanxplore_cases"], 105)
+        self.assertEqual(audit["benchanxplore_timeframes"], 80)
+        self.assertTrue(audit["benchanxplore_common_idealized_parent_vessel"])
+        self.assertFalse(
+            audit["benchanxplore_compact_pressure_or_wss_contract_verified"]
+        )
+        self.assertTrue(
+            audit["benchanxplore_all_cases_previously_used_for_representation_selection"]
+        )
+        self.assertEqual(audit["flowmri_cerebrovascular_volunteers"], 10)
+        self.assertEqual(audit["flowmri_cerebrovascular_reference_test_volunteers"], 1)
+        self.assertFalse(audit["new_payload_accessed"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["server_queried"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "measurement_functional_inverse_flow_source_delta"
+        ]["best_score"] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "inverse-flow batch"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "measurement_functional_inverse_flow_source_delta"
+        ]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "inverse-flow batch"):
+            validate_protocol(candidate)
+
     def test_aneumo_bc_transport_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneumo_bc_transport_source_audit"]

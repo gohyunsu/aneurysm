@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 measurement-functional inverse-flow source-delta override ·
+> schema 7.5:** Bayesian finite-element regression now directly reconstructs
+> steady vascular velocity/pressure from noisy under-resolved velocity with
+> unknown BC, exact no-slip, a Laplace posterior and WSS uncertainty. This
+> removes sparse observation, probabilistic BC, physics reconstruction and WSS
+> propagation as standalone novelty. Six fresh formulations score
+> **30.0/29.0/28.0/26.5/26.0/25.0**, all below 32. BenchAnXplore is the best at
+> 30.0, but its current compact contract is velocity/mask-only, all 105 cases
+> share an idealized parent context and all were already used in D0/D0b.
+> FlowMRI has ten healthy cerebrovascular volunteers and one reference test;
+> CMRx independent use begins after the ISBI deadline; physical aneurysm
+> references have one effective anatomy. No new payload, P0, split, model,
+> architecture, server query, PBS/GPU job, outer test, result row or paper
+> contribution exists. Surface-vector remains inactive—not rejected and not
+> activated—and its closed 32.0/40 P0 is not repaired. Source of truth is
+> `docs/measurement-functional-inverse-flow-source-delta-2026-08-11.md` and
+> schema 7.5. Use only `introai9` after a future gate; never access or monitor
+> `junjinyong`.
+
 > **2026-08-11 expert virtual-removal source-delta override · schema 7.4:**
 > Figshare `1159108` v3 exposes 30 checksum-pinned VTP objects: ten pathological
 > cases, ten corresponding expert virtual-removal surfaces and ten matched

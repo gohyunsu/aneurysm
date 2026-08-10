@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 inverse-flow direct-prior delta · schema 7.5:** Bayesian finite-
+> element regression now directly covers noisy under-resolved vascular velocity
+> observations, unknown BC, exact no-slip, velocity/pressure posterior and WSS
+> uncertainty. Six fresh measurement-to-functional formulations were therefore
+> re-screened and score **30.0/29.0/28.0/26.5/26.0/25.0**, all below 32. The
+> strongest BenchAnXplore version is not confirmatory: its current compact
+> contract is velocity/mask-only, 105 bulges share an idealized parent vessel,
+> and all 105 cases already informed D0/D0b representation selection. FlowMRI's
+> cerebrovascular branch has ten healthy volunteers but only one reference test;
+> CMRx independent use starts after the ISBI deadline; public physical references
+> have one effective anatomy. No payload, P0, split, model, architecture, server
+> query, PBS/GPU job, outer test or claim is opened. Surface-vector remains the
+> better inactive hypothesis, not an active paper identity.
+> [Detailed audit](docs/measurement-functional-inverse-flow-source-delta-2026-08-11.md)
+
 > **2026-08-11 source correction · schema 7.4:** Figshare v3 does contain ten
 > pathological surfaces paired with ten expert virtual-removal surfaces, plus
 > ten matched controls. This corrects the broad historical impression that no

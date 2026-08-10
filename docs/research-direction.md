@@ -1,5 +1,19 @@
 # AURORA 연구 방향
 
+> **Schema 7.5 direction · 2026-08-11:** The tempting pivot from surface WSS to
+> measurement-conditioned inverse flow is not an easier novelty path. Bayesian
+> finite-element regression already maps noisy sparse velocity with unknown BC
+> to a calibrated velocity/pressure posterior and propagates it to WSS. The
+> residual learned question would require transient amortization plus a new,
+> independently validated functional failure mechanism. Current assets do not
+> identify that claim: BenchAnXplore's decoded compact contract lacks verified
+> pressure/WSS, shares a parent vessel and is no longer fresh; FlowMRI has one
+> cerebrovascular reference test; CMRx misses the deadline; physical references
+> have one effective anatomy. The six-candidate batch peaks at 30.0/40 and is
+> rejected. Surface-vector remains the more distinctive inactive hypothesis,
+> but still has no active task, method, architecture or GPU authorization. See
+> the [inverse-flow source delta](measurement-functional-inverse-flow-source-delta-2026-08-11.md).
+
 > **Schema 7.4 direction · 2026-08-11:** A public ten-case expert virtual-
 > removal pair corrects the historical source inventory, but it does not make
 > inverse editing identifiable as biological counterfactual recovery. It
