@@ -1,5 +1,11 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 TopBrain 2.0 correction:** Zenodo revision 4 licenses the sole
+> design PDF under `CC BY 4.0`; it does not provide or license medical images,
+> masks or a casewise manifest. The challenge remains under construction with
+> Join registration but without executable task navigation. Schema 6.0 and
+> source-watch v2 preserve payload/P0/model/GPU at 0.
+
 > **2026-08-10 TopBrain 2.0 asset boundary:** The official Zenodo record has
 > one 139,840-byte design PDF and no verified patient image, vessel mask,
 > aneurysm annotation, clinical table, split or held-out-test payload. Planned

@@ -1,8 +1,15 @@
 # AURORA 연구 방향
 
+> **2026-08-10 source correction:** TopBrain 2.0's `CC BY 4.0` applies to its
+> public design PDF, not to unreleased medical data. Join registration is
+> visible, but a task-executable data/evaluation/submission contract is not.
+> This improves factual provenance, not candidate viability: 29/40 remains
+> rejected, architecture/GPU remain 0, and source-watch v2 can open only a
+> fresh audit.
+
 > **2026-08-10 TopBrain 2.0 direction:** A challenge proposal with attractive
 > multimodal anatomy is not yet an executable aneurysm problem. Aneurysm is a
-> planned robustness condition, not a released target; data/license/lineage/
+> planned robustness condition, not a released target; medical-data license/lineage/
 > sealed-test contracts are unverified; TopBrain 1, TopAneu, RSNA multitask and
 > topology losses directly occupy the obvious methods. The best residual
 > candidate, joint lesion–parent-vessel consistency, scores 29.0/40. There is

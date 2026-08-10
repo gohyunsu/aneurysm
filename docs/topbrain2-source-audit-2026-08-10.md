@@ -1,5 +1,13 @@
 # TopBrain 2.0 source audit · 2026-08-10
 
+> **Official-API correction · 2026-08-10:** Zenodo revision 4 marks the
+> published design object `open` under `CC BY 4.0`. That license covers the
+> only released object—the 35-page design PDF—not an unreleased medical
+> dataset. The live challenge page is still `Under construction` and exposes
+> a Join registration route, but no Data, Evaluation, Rules or Submission
+> task route. This corrects the earlier “no license identifier” and “not
+> accepting submissions” wording without changing any score or gate decision.
+
 ## Decision
 
 TopBrain 2.0 is a material new challenge **proposal**, not a verified medical-
@@ -27,19 +35,22 @@ The [official Zenodo record](https://zenodo.org/records/19707577), DOI
   manifest and held-out test payload accessed: **0**.
 
 The [official challenge page](https://topbrain2026.grand-challenge.org/topbrain2026/)
-is `Under construction`, and the Grand Challenge index reports `Not accepting
-submissions`. The design document planned a 2026-07-05 training release and a
-2026-09-05--15 test window, but the bounded official-source screen did not
-identify a versioned TopBrain 2.0 dataset or executable 2026 evaluation
-contract. This is recorded as **not verified**, not as proof that no private or
-future asset exists.
+is `Under construction` and exposes a Join registration route. Registration
+is not an executable task submission contract: no Data, Evaluation, Rules or
+Submission task route was present in the bounded page inventory. The design
+document planned a 2026-07-05 training release and a 2026-09-05--15 test
+window, but the bounded official-source screen did not identify a versioned
+TopBrain 2.0 dataset or executable 2026 evaluation contract. This is recorded
+as **not verified**, not as proof that no private or future asset exists.
 
 The public evaluation repository remains explicitly the TopBrain **2025**
 package at exact head `ba4252ab0dbe9d59a9ae45058ae040b016aae0ad`.
 It implements six anatomy-segmentation metrics. It does not establish the ten
 planned TopBrain 2.0 metrics, the ordinal clinical task or a sealed 2026 test.
-The Zenodo page exposes no license identifier. Intended use terms described in
-the proposal cannot substitute for a license attached to a concrete release.
+Zenodo revision 4 attaches `CC BY 4.0` to this public design record. Because
+the record contains only the PDF, that identifier does not establish a license
+or terms for medical data that have not been released. Intended use terms in
+the proposal likewise cannot substitute for a data-release contract.
 
 ## Planned tasks are not released targets
 
@@ -122,6 +133,12 @@ release may trigger a new versioned source audit only if it exposes concrete
 development units, label provenance, license, cross-challenge lineage and a
 sealed evaluation contract. It does not reopen the historical TopBrain 1.0
 29.5/40 rejection or authorize automatic download, P0 or training.
+
+The machine-auditable watch is
+[`configs/source_watch_v2.json`](../configs/source_watch_v2.json). It freezes
+Zenodo revision, license scope, file inventory and challenge navigation while
+retaining a single automatic outcome: request a fresh source audit. It cannot
+download, accept terms, register P0, select a model or authorize GPU work.
 
 The next allowable action remains a fresh problem-level source audit. Only a
 candidate frozen at at least 32/40 can register a separate method-free,

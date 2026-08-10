@@ -400,11 +400,20 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertEqual(audit["design_pdf_bytes"], 139840)
         self.assertEqual(audit["design_pdf_pages"], 35)
-        self.assertFalse(audit["zenodo_license_identifier_present"])
-        self.assertEqual(audit["challenge_page_status"], "under_construction")
+        self.assertTrue(audit["zenodo_license_identifier_present"])
+        self.assertEqual(audit["zenodo_design_object_license_id"], "cc-by-4.0")
         self.assertEqual(
-            audit["grand_challenge_submission_status"], "not_accepting_submissions"
+            audit["zenodo_license_scope"],
+            "design_record_only_not_unreleased_medical_dataset",
         )
+        self.assertEqual(audit["challenge_page_status"], "under_construction")
+        self.assertTrue(audit["challenge_join_registration_available"])
+        self.assertEqual(
+            audit["grand_challenge_submission_status"],
+            "join_registration_available_but_no_executable_task_submission_contract",
+        )
+        self.assertEqual(audit["source_watch_config"], "configs/source_watch_v2.json")
+        self.assertTrue(audit["source_watch_current_snapshot_matches"])
         self.assertFalse(audit["versioned_topbrain2_dataset_release_verified"])
         self.assertFalse(
             audit["versioned_topbrain2_executable_evaluation_contract_verified"]

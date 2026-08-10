@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-10 · TopBrain 2.0 official metadata corrected; source watch v2
+
+- Official Zenodo revision 4 marks the only released TopBrain 2.0 object—the
+  35-page design PDF—`open` under `CC BY 4.0`. This does not license medical
+  images, masks or manifests that have not been released. The live challenge
+  remains `Under construction` and exposes Join registration but no executable
+  Data, Evaluation, Rules or Submission task route.
+- Schema 6.0 corrects the older license/submission wording without altering the
+  frozen 29/40 rejection. Active shortlist, primary, payload, P0, method,
+  architecture, PBS/GPU, outer test and C21 remain zero.
+- `source_watch_v2.json` watches exact IAVS GitHub and TopBrain 2.0
+  Zenodo/challenge snapshots. Live fetch matched both frozen states and returned
+  `continue_watch_only`; all automatic download/P0/model/GPU flags remained
+  false.
+- Future gate-authorized execution remains `introai9` PBS only. `junjinyong` is
+  excluded from connection, query, transfer, submission and monitoring.
+- 영향 파일: machine protocol/validator/tests, source watcher/CLI/tests,
+  detailed audits and plans, overview/Learn/changelog UI, `AGENTS.md`.
+
 ## 2026-08-10 · TopBrain 2.0 content and live site verified
 
 - Exact scientific content `8b2a70c9a6bab21962d22b66601481d323e4a52e`
@@ -16,13 +35,14 @@
 ## 2026-08-10 · TopBrain 2.0 proposal remains below source admission
 
 - Verified the official Zenodo record, 35-page/139,840-byte design PDF,
-  under-construction challenge page, not-accepting-submissions state and exact
-  TopBrain 2025 evaluation-repository head.
+  under-construction challenge page and exact TopBrain 2025 evaluation-
+  repository head. Schema 6.0 later corrected the design-object license and
+  Join-registration wording without changing this scoring decision.
 - Froze six candidate scores at **29.0/28.5/28.0/27.5/27.0/23.5**. Planned
   aneurysm cases are vessel-anatomy robustness context, not a released lesion
   target; TopBrain 1, TopAneu, RSNA multitask and topology/connectivity methods
   are direct priors.
-- Schema 5.9 preserves active shortlist/primary/medical payload/P0/method/
+- Historical schema 5.9 preserved active shortlist/primary/medical payload/P0/method/
   architecture/PBS/GPU/outer test/C21 at zero. No score repair or scheduler job
   was created. Future authorized execution remains `introai9`-only;
   `junjinyong` is fully excluded.

@@ -1,14 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 source-metadata correction + operational override:** Official
+> TopBrain 2.0 Zenodo revision 4 marks the published design object `open` under
+> `CC BY 4.0`; this covers the sole 35-page PDF, not unreleased patient data.
+> The live challenge is `Under construction` and offers Join registration but
+> no executable Data/Evaluation/Rules/Submission task route. Schema **6.0** and
+> `configs/source_watch_v2.json` supersede the older license/submission wording
+> without repairing the frozen 29/40 score or opening payload, P0, method,
+> architecture, GPU, outer test or C21. The watcher may request only a fresh
+> source audit. Any future gate-authorized execution uses `introai9` PBS;
+> `junjinyong` must never be connected to, queried, used for transfer or
+> submission, or monitored for AURORA.
+
 > **2026-08-10 TopBrain 2.0 source overlay:** Official Zenodo record
 > `10.5281/zenodo.19707577` contains one 35-page, 139,840-byte design PDF
 > (MD5 `da6c835d…`, SHA-256 `15a2269b…`), not a verified medical-image
-> release. The challenge page is `Under construction`; Grand Challenge reports
-> `Not accepting submissions`; a versioned dataset, attached license,
+> release. The challenge page is `Under construction` with Join registration
+> but no executable task-submission contract; a versioned dataset, data license,
 > casewise target/lineage and executable 2026 evaluation contract are not
 > verified. Planned aneurysm cases are a vessel-anatomy robustness condition,
 > not lesion supervision. Six frozen scores are
-> 29.0/28.5/28.0/27.5/27.0/23.5, all below 32. Schema 5.9 source of truth is
+> 29.0/28.5/28.0/27.5/27.0/23.5, all below 32. Schema 6.0 source of truth is
 > `docs/topbrain2-source-audit-2026-08-10.md` and
 > `problem_selection.topbrain2_source_audit`. Active shortlist, primary,
 > medical payload, P0, method, architecture, PBS/GPU, outer test, C21/result

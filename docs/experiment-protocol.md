@@ -1,6 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
-> **Current gate · schema 5.9:** TopBrain 2.0 source candidates score
+> **Current gate · schema 6.0 correction:** TopBrain 2.0's `CC BY 4.0` covers
+> the design PDF only. Join registration is not an executable evaluation
+> contract. The frozen score and all no-compute gates remain unchanged;
+> source-watch v2 may request a fresh source audit but cannot authorize P0 or
+> GPU work.
+
+> **Historical scoring gate · schema 5.9 content retained:** TopBrain 2.0 source candidates score
 > 29.0/28.5/28.0/27.5/27.0/23.5, all below 32. Only the official design PDF
 > was read; no medical payload, executable P0, PBS/GPU job, method,
 > architecture or outer test is authorized. A future versioned licensed
@@ -213,7 +219,7 @@ assisted-manual label과 여러 algorithm output을 섞는다. CTA phantom의 12
 
 2026-08-10 official `AbsoluteResonance/IAVS` `main` exact `2e40088…`은 90-byte
 README 한 파일뿐이고 release, explicit repository license와 payload/code가 0이다.
-[`configs/source_watch_v1.json`](../configs/source_watch_v1.json)은 이 snapshot과
+[`configs/source_watch_v2.json`](../configs/source_watch_v2.json)은 이 snapshot과
 no-download/no-P0/no-model/no-GPU 경계를 고정한다. Read-only monitor는 main
 commit+non-README entry, versioned release와 license 변화를 자동 감지한다.
 Official dataset record는 별도 1차 출처의 manual review로만 붙인다. 변화가
@@ -224,7 +230,7 @@ payload P0를 등록하지 않는다. P0/P1 전에는 architecture와 GPU가 없
 
 ```bash
 python scripts/audit_source_watch.py \
-  --config configs/source_watch_v1.json \
+  --config configs/source_watch_v2.json \
   --validate-only
 ```
 

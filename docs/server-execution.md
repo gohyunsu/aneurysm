@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+## 2026-08-10 · Source-watch v2; no compute opened
+
+- Official IAVS and TopBrain 2.0 snapshots match their frozen records. The
+  TopBrain design object is `CC BY 4.0`, while no medical payload or executable
+  task route appeared. The watcher returned `continue_watch_only`.
+- Automatic download, P0, model, GPU and outer test remain false. No PBS job or
+  monitoring loop was created. Future authorized execution remains
+  `introai9`-only; `junjinyong` is completely excluded.
+
 ## 2026-08-10 · TopBrain 2.0 deployment verification
 
 - Exact content `8b2a70c9a6bab21962d22b66601481d323e4a52e` passed Quality

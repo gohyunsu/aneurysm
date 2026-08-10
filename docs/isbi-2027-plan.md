@@ -1,5 +1,11 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 source correction:** TopBrain 2.0 design metadata are openly
+> licensed under `CC BY 4.0`; patient data are not released or licensed by that
+> record, and Join registration supplies no executable task contract. The
+> source score stays 29/40 and the paper remains not submission-ready with no
+> active method or experiment.
+
 > **2026-08-10 TopBrain 2.0 boundary:** Six source-only candidates score
 > 29.0/28.5/28.0/27.5/27.0/23.5. The official object is a design PDF rather
 > than a released medical dataset, and aneurysm is not the Task 1 lesion

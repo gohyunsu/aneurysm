@@ -1,5 +1,11 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 source correction:** The official `CC BY 4.0` identifier belongs
+> to the TopBrain 2.0 design record, not an unreleased dataset. Join
+> registration does not supply target lineage or an executable evaluation
+> contract. The direct-prior analysis and 29/40 rejection therefore remain
+> unchanged; source-watch v2 only detects a future material source change.
+
 > **2026-08-10 TopBrain 2.0 lineage:** TopBrain 1 already defines multimodal
 > multiclass whole-brain vessel anatomy; TopAneu targets aneurysm detection,
 > location and segmentation; RSNA's public second-place system jointly models

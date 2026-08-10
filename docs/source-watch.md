@@ -1,7 +1,7 @@
-# Public source watch · IAVS
+# Public source watch · IAVS + TopBrain 2.0
 
-상태: **watch-only · README-only repository · release 0 · explicit repository
-license 0 · payload/code 0 · no source score/P0/model/GPU**
+상태: **watch-only · 두 official source 모두 frozen snapshot과 동일 · no
+medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가
 
@@ -32,18 +32,29 @@ functional의 risk를 얼마나 보존하는지 같은 질문도 uncertainty pro
 task-based segmentation과 topology direct prior를 다시 대조해야 한다. 현재는
 가설이나 모델로 등록하지 않는다.
 
+TopBrain 2.0은 별도의 이유로 감시한다. 공식 Zenodo revision 4는 139,840-byte
+설계 PDF 하나만 제공하며 그 **설계 객체**는 `CC BY 4.0`이다. 이 라이선스를
+아직 공개되지 않은 환자 영상·mask의 라이선스로 확장하지 않는다. Challenge
+page는 `Under construction`이고 Join registration은 열려 있지만 Data,
+Evaluation, Rules, Submission task route는 없다. 따라서 29/40 기각과 payload,
+P0, model, GPU 0 경계는 변하지 않는다.
+
 ## 기계적 감시 계약
 
-[`configs/source_watch_v1.json`](../configs/source_watch_v1.json)은 현재 commit,
-root entry, release count와 license를 고정한다.
+[`configs/source_watch_v2.json`](../configs/source_watch_v2.json)은 IAVS의 현재
+commit, root entry, release count와 license에 더해 TopBrain 2.0의 Zenodo
+revision, design-object license, exact file inventory와 challenge navigation을
+고정한다. 기존 v1은 IAVS-only historical contract로 보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
-공식 metadata만 읽고 다음 1--3 변화를 자동 감지한다. 4는 별도의 1차 출처를
-사람이 확인해 붙이는 수동 trigger다.
+공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
 
 1. 새 commit과 non-README code/payload가 함께 나타남
 2. versioned release가 생김
 3. 명시적 repository license가 생김
 4. 공식 versioned dataset record가 별도로 확인됨 · manual review
+5. TopBrain 2.0의 Zenodo revision/file/license가 바뀜
+6. challenge의 under-construction 표지가 사라지거나 Data/Evaluation/Rules/
+   Submission navigation이 생김
 
 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 자동 download,
 약관 수락, 점수 재가중, P0 등록, model/architecture 선택, GPU와 outer test는
@@ -54,11 +65,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v1.json \
+  --config configs/source_watch_v2.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v1.json \
+  --config configs/source_watch_v2.json \
   --fetch
 ```
 

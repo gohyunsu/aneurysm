@@ -1,5 +1,10 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 source correction:** A `CC BY 4.0` design PDF and Join button do
+> not establish a released TopBrain 2.0 learning task. Source-watch v2 records
+> this distinction; it does not select a GNN, U-Net, Transformer or authorize
+> `introai9` GPU work.
+
 > **2026-08-10 TopBrain 2.0 architecture boundary:** No GNN, U-Net,
 > Transformer, topology loss, modality head, uncertainty head or conformal
 > wrapper is selected. The only official asset is a design PDF and the obvious

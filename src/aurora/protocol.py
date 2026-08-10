@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.9":
-        raise ProtocolError("The current research-state schema must be version 5.9.")
+    if protocol["schema_version"] != "6.0":
+        raise ProtocolError("The current research-state schema must be version 6.0.")
 
     project = protocol["project"]
     _require_keys(
@@ -222,7 +222,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_topbrain2_official_design_pdf_only_no_versioned_medical_dataset_license_or_executable_evaluation_release_aneumo_lineage_p0_history_unchanged"
+        != "latest_topbrain2_design_object_cc_by_4_0_but_no_versioned_medical_dataset_license_or_executable_evaluation_release_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not True
@@ -4220,7 +4220,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "design_pdf_md5",
             "design_pdf_sha256",
             "zenodo_license_identifier_present",
+            "zenodo_design_object_license_id",
+            "zenodo_license_scope",
             "challenge_page_status",
+            "challenge_join_registration_available",
             "grand_challenge_submission_status",
             "planned_training_release_date",
             "planned_test_window",
@@ -4242,6 +4245,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "planned_task2_single_expert_per_case_without_merge",
             "casewise_aneurysm_mask_parent_vessel_attachment_acquisition_reader_or_cross_challenge_identity_manifest_verified",
             "patient_image_mask_clinical_split_or_test_payload_accessed",
+            "source_watch_config",
+            "source_watch_current_snapshot_matches",
             "direct_prior_threats",
             "candidates",
             "executable_p0_registered",
@@ -4309,10 +4314,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "da6c835d0336db81a94b78e7601f47b8"
         or topbrain2_audit["design_pdf_sha256"]
         != "15a2269bc00b6720f10d6efd41d8996010703451aef32de14f599cd3357ff4f7"
-        or topbrain2_audit["zenodo_license_identifier_present"] is not False
+        or topbrain2_audit["zenodo_license_identifier_present"] is not True
+        or topbrain2_audit["zenodo_design_object_license_id"] != "cc-by-4.0"
+        or topbrain2_audit["zenodo_license_scope"]
+        != "design_record_only_not_unreleased_medical_dataset"
         or topbrain2_audit["challenge_page_status"] != "under_construction"
+        or topbrain2_audit["challenge_join_registration_available"] is not True
         or topbrain2_audit["grand_challenge_submission_status"]
-        != "not_accepting_submissions"
+        != "join_registration_available_but_no_executable_task_submission_contract"
         or topbrain2_audit["versioned_topbrain2_dataset_release_verified"]
         is not False
         or topbrain2_audit[
@@ -4346,6 +4355,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "patient_image_mask_clinical_split_or_test_payload_accessed"
         ]
         is not False
+        or topbrain2_audit["source_watch_config"] != "configs/source_watch_v2.json"
+        or topbrain2_audit["source_watch_current_snapshot_matches"] is not True
         or set(topbrain2_audit["direct_prior_threats"])
         != expected_topbrain2_priors
         or observed_topbrain2_scores != expected_topbrain2_scores

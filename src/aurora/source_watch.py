@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import urllib.request
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -25,11 +26,23 @@ def _sha256(payload: bytes) -> str:
 def load_config(path: str | Path) -> dict[str, Any]:
     source = Path(path)
     payload = json.loads(source.read_text(encoding="utf-8"))
-    if payload.get("schema_version") != "aurora.source_watch.v1":
+    schema = payload.get("schema_version")
+    if schema not in {"aurora.source_watch.v1", "aurora.source_watch.v2"}:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
         raise SourceWatchContractError("watch_status_changed")
 
+    if schema == "aurora.source_watch.v1":
+        _validate_v1(payload)
+    else:
+        _validate_v2(payload)
+
+    _validate_common_boundary(payload)
+    payload["_config_sha256"] = _sha256(source.read_bytes())
+    return payload
+
+
+def _validate_v1(payload: Mapping[str, Any]) -> None:
     official = payload.get("source", {})
     if (
         official.get("repository") != "AbsoluteResonance/IAVS"
@@ -50,6 +63,8 @@ def load_config(path: str | Path) -> dict[str, Any]:
     ):
         raise SourceWatchContractError("frozen_snapshot_changed")
 
+
+def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
     authorization = payload.get("authorization", {})
     forbidden = (
         "automatic_download",
@@ -83,21 +98,77 @@ def load_config(path: str | Path) -> dict[str, Any]:
     ):
         raise SourceWatchContractError("execution_boundary_changed")
 
-    payload["_config_sha256"] = _sha256(source.read_bytes())
-    return payload
+
+def _validate_v2(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or [watch.get("watch_id") for watch in watches] != [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+    ]:
+        raise SourceWatchContractError("v2_watch_set_changed")
+
+    iavs, topbrain = watches
+    if iavs.get("kind") != "github":
+        raise SourceWatchContractError("iavs_watch_kind_changed")
+    _validate_v1(
+        {
+            "source": iavs.get("source", {}),
+            "frozen_snapshot": iavs.get("frozen_snapshot", {}),
+        }
+    )
+
+    source = topbrain.get("source", {})
+    if (
+        topbrain.get("kind") != "zenodo_challenge"
+        or source.get("zenodo_record_id") != 19707577
+        or source.get("zenodo_api_url")
+        != "https://zenodo.org/api/records/19707577"
+        or source.get("challenge_page_url")
+        != "https://topbrain2026.grand-challenge.org/topbrain2026/"
+    ):
+        raise SourceWatchContractError("topbrain2_official_source_changed")
+
+    snapshot = topbrain.get("frozen_snapshot", {})
+    files = snapshot.get("zenodo_files", [])
+    if (
+        snapshot.get("zenodo_record_id") != 19707577
+        or snapshot.get("zenodo_modified")
+        != "2026-04-23T11:14:24.475500+00:00"
+        or snapshot.get("zenodo_revision") != 4
+        or snapshot.get("zenodo_status") != "published"
+        or snapshot.get("zenodo_access_right") != "open"
+        or snapshot.get("zenodo_license_id") != "cc-by-4.0"
+        or files
+        != [
+            {
+                "key": "339-TopBrain_Segmentation_Challenge_for_Whole_Brain_Vessel_Anatomy_2026-04-22T16-37-16.pdf",
+                "size": 139840,
+                "checksum": "md5:da6c835d0336db81a94b78e7601f47b8",
+            }
+        ]
+        or snapshot.get("payload_or_manifest_files") != []
+        or snapshot.get("challenge_under_construction") is not True
+        or snapshot.get("challenge_join_registration_available") is not True
+        or snapshot.get("challenge_material_navigation_entries") != []
+    ):
+        raise SourceWatchContractError("topbrain2_frozen_snapshot_changed")
 
 
-def _json_get(url: str) -> Any:
+def _url_get(url: str, accept: str) -> bytes:
     request = urllib.request.Request(
         url,
         headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "AURORA-source-watch/1.0",
-            "X-GitHub-Api-Version": "2022-11-28",
+            "Accept": accept,
+            "User-Agent": "AURORA-source-watch/2.0",
         },
     )
     with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response)
+        return response.read()
+
+
+def _json_get(url: str, *, github: bool = False) -> Any:
+    accept = "application/vnd.github+json" if github else "application/json"
+    return json.loads(_url_get(url, accept).decode("utf-8"))
 
 
 def _material_entries(entries: Sequence[Mapping[str, Any]]) -> list[str]:
@@ -119,10 +190,10 @@ def _material_entries(entries: Sequence[Mapping[str, Any]]) -> list[str]:
 
 def fetch_github_snapshot(repository: str, branch: str) -> dict[str, Any]:
     base = f"https://api.github.com/repos/{repository}"
-    metadata = _json_get(base)
-    root = _json_get(f"{base}/contents?ref={branch}")
-    releases = _json_get(f"{base}/releases")
-    commit = _json_get(f"{base}/commits/{branch}")
+    metadata = _json_get(base, github=True)
+    root = _json_get(f"{base}/contents?ref={branch}", github=True)
+    releases = _json_get(f"{base}/releases", github=True)
+    commit = _json_get(f"{base}/commits/{branch}", github=True)
     if not isinstance(root, list) or not isinstance(releases, list):
         raise SourceWatchContractError("unexpected_github_response")
     license_info = metadata.get("license") or {}
@@ -144,7 +215,114 @@ def fetch_github_snapshot(repository: str, branch: str) -> dict[str, Any]:
     }
 
 
-def evaluate_snapshot(config: Mapping[str, Any], observed: Mapping[str, Any]) -> dict[str, Any]:
+class _ChallengeAnchorParser(HTMLParser):
+    material_labels = {
+        "data",
+        "dataset",
+        "datasets",
+        "evaluation",
+        "leaderboard",
+        "rules",
+        "submission",
+        "submissions",
+        "submit",
+    }
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._href: str | None = None
+        self._text: list[str] = []
+        self.material_entries: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() != "a":
+            return
+        self._href = dict(attrs).get("href")
+        self._text = []
+
+    def handle_data(self, data: str) -> None:
+        if self._href is not None:
+            self._text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() != "a" or self._href is None:
+            return
+        label = " ".join(" ".join(self._text).split()).strip().lower()
+        if label in self.material_labels:
+            self.material_entries.append(f"{label}|{self._href}")
+        self._href = None
+        self._text = []
+
+
+def _zenodo_payload_or_manifest_files(files: Sequence[Mapping[str, Any]]) -> list[str]:
+    material_suffixes = (
+        ".7z",
+        ".csv",
+        ".dcm",
+        ".h5",
+        ".json",
+        ".mha",
+        ".nii",
+        ".nii.gz",
+        ".npy",
+        ".npz",
+        ".stl",
+        ".tar",
+        ".tar.gz",
+        ".vtk",
+        ".vtp",
+        ".yaml",
+        ".yml",
+        ".zip",
+    )
+    return sorted(
+        str(item.get("key"))
+        for item in files
+        if str(item.get("key", "")).lower().endswith(material_suffixes)
+    )
+
+
+def fetch_zenodo_challenge_snapshot(
+    zenodo_api_url: str, challenge_page_url: str
+) -> dict[str, Any]:
+    record = _json_get(zenodo_api_url)
+    html = _url_get(challenge_page_url, "text/html").decode("utf-8", errors="replace")
+    parser = _ChallengeAnchorParser()
+    parser.feed(html)
+    files = sorted(
+        [
+            {
+                "key": str(item.get("key")),
+                "size": int(item.get("size", 0)),
+                "checksum": str(item.get("checksum")),
+            }
+            for item in record.get("files", [])
+        ],
+        key=lambda item: item["key"].lower(),
+    )
+    metadata = record.get("metadata", {})
+    license_info = metadata.get("license") or {}
+    lowered = html.lower()
+    return {
+        "zenodo_record_id": int(record.get("id", 0)),
+        "zenodo_modified": str(record.get("modified", "")),
+        "zenodo_revision": int(record.get("revision", 0)),
+        "zenodo_status": str(record.get("status", "")),
+        "zenodo_access_right": str(metadata.get("access_right", "")),
+        "zenodo_license_id": license_info.get("id"),
+        "zenodo_files": files,
+        "payload_or_manifest_files": _zenodo_payload_or_manifest_files(files),
+        "challenge_under_construction": "under construction" in lowered,
+        "challenge_join_registration_available": (
+            "/participants/registration/create/" in lowered
+        ),
+        "challenge_material_navigation_entries": sorted(set(parser.material_entries)),
+    }
+
+
+def evaluate_snapshot(
+    config: Mapping[str, Any], observed: Mapping[str, Any]
+) -> dict[str, Any]:
     frozen = config["frozen_snapshot"]
     signals: list[str] = []
     head_changed = observed.get("main_head_sha") != frozen.get("main_head_sha")
@@ -172,10 +350,109 @@ def evaluate_snapshot(config: Mapping[str, Any], observed: Mapping[str, Any]) ->
         "same_as_frozen_snapshot": same_snapshot,
         "material_change_signals": signals,
         "fresh_source_reaudit_triggered": bool(signals),
-        "next_action": "fresh_source_reaudit_only" if signals else "continue_watch_only",
+        "next_action": (
+            "fresh_source_reaudit_only" if signals else "continue_watch_only"
+        ),
         "automatic_download_authorized": False,
         "p0_authorized": False,
         "method_or_architecture_authorized": False,
         "gpu_or_outer_test_authorized": False,
         "observed": dict(observed),
+    }
+
+
+def evaluate_watch(
+    watch: Mapping[str, Any], observed: Mapping[str, Any]
+) -> dict[str, Any]:
+    if watch.get("kind") == "github":
+        return evaluate_snapshot(watch, observed)
+    if watch.get("kind") != "zenodo_challenge":
+        raise SourceWatchContractError("unsupported_watch_kind")
+
+    frozen = watch["frozen_snapshot"]
+    signals: list[str] = []
+    if observed.get("zenodo_modified") != frozen.get("zenodo_modified"):
+        signals.append("zenodo_record_modified")
+    if observed.get("zenodo_revision") != frozen.get("zenodo_revision"):
+        signals.append("zenodo_revision_changed")
+    if observed.get("zenodo_files") != frozen.get("zenodo_files"):
+        signals.append("zenodo_file_inventory_changed")
+    if observed.get("payload_or_manifest_files"):
+        signals.append("zenodo_payload_or_manifest_file_appeared")
+    if observed.get("zenodo_license_id") != frozen.get("zenodo_license_id"):
+        signals.append("zenodo_license_changed")
+    if (
+        frozen.get("challenge_under_construction") is True
+        and observed.get("challenge_under_construction") is False
+    ):
+        signals.append("challenge_under_construction_removed")
+    new_navigation = sorted(
+        set(observed.get("challenge_material_navigation_entries", []))
+        - set(frozen.get("challenge_material_navigation_entries", []))
+    )
+    if new_navigation:
+        signals.append("challenge_material_navigation_appeared")
+    if observed.get("challenge_join_registration_available") != frozen.get(
+        "challenge_join_registration_available"
+    ):
+        signals.append("challenge_registration_state_changed")
+
+    keys = tuple(frozen.keys())
+    same_snapshot = all(observed.get(key) == frozen.get(key) for key in keys)
+    if not same_snapshot and not signals:
+        signals.append("other_frozen_snapshot_field_changed")
+    return {
+        "watch_id": watch["watch_id"],
+        "same_as_frozen_snapshot": same_snapshot,
+        "material_change_signals": signals,
+        "fresh_source_reaudit_triggered": bool(signals),
+        "next_action": (
+            "fresh_source_reaudit_only" if signals else "continue_watch_only"
+        ),
+        "automatic_download_authorized": False,
+        "p0_authorized": False,
+        "method_or_architecture_authorized": False,
+        "gpu_or_outer_test_authorized": False,
+        "observed": dict(observed),
+    }
+
+
+def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
+    source = watch["source"]
+    if (
+        watch.get("kind") == "github"
+        or watch.get("schema_version") == "aurora.source_watch.v1"
+    ):
+        return fetch_github_snapshot(source["repository"], source["default_branch"])
+    if watch.get("kind") == "zenodo_challenge":
+        return fetch_zenodo_challenge_snapshot(
+            source["zenodo_api_url"], source["challenge_page_url"]
+        )
+    raise SourceWatchContractError("unsupported_watch_kind")
+
+
+def evaluate_config(
+    config: Mapping[str, Any], observations: Mapping[str, Mapping[str, Any]]
+) -> dict[str, Any]:
+    if config.get("schema_version") == "aurora.source_watch.v1":
+        return evaluate_snapshot(config, observations[config["watch_id"]])
+    results = [
+        evaluate_watch(watch, observations[watch["watch_id"]])
+        for watch in config["watches"]
+    ]
+    triggered = any(item["fresh_source_reaudit_triggered"] for item in results)
+    return {
+        "schema_version": config["schema_version"],
+        "same_as_all_frozen_snapshots": all(
+            item["same_as_frozen_snapshot"] for item in results
+        ),
+        "fresh_source_reaudit_triggered": triggered,
+        "next_action": (
+            "fresh_source_reaudit_only" if triggered else "continue_watch_only"
+        ),
+        "automatic_download_authorized": False,
+        "p0_authorized": False,
+        "method_or_architecture_authorized": False,
+        "gpu_or_outer_test_authorized": False,
+        "watches": results,
     }

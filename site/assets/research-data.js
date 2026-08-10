@@ -10,7 +10,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "A challenge design document is not a released aneurysm task",
-      copy: "TopBrain 2.0 plans 55+ whole-brain vessel labels across CTA/MRA/CTV/MRV/7T MRA and a stenosis/occlusion task. The official Zenodo object is only a 35-page, 139.8 kB design PDF; the challenge page is under construction and Grand Challenge says not accepting submissions. Aneurysm-bearing TopAneu scans are planned as a robustness condition for vessel anatomy, not a released lesion target. No versioned dataset, attached license, casewise cross-challenge lineage or executable 2026 evaluation contract was verified.",
+      copy: "TopBrain 2.0 plans 55+ whole-brain vessel labels across CTA/MRA/CTV/MRV/7T MRA and a stenosis/occlusion task. The official Zenodo object is only a 35-page, 139.8 kB design PDF licensed CC BY 4.0; that license does not cover unreleased medical data. The challenge page is under construction and offers Join registration, but no executable Data, Evaluation, Rules or Submission task route. Aneurysm-bearing TopAneu scans are planned as a robustness condition for vessel anatomy, not a released lesion target. No versioned medical dataset, data license, casewise cross-challenge lineage or executable 2026 evaluation contract was verified.",
       status: "Best 29.0/40 · all six rejected · medical payload/P0/PBS/model/GPU 0",
       url: "../docs/topbrain2-source-audit-2026-08-10.md"
     },
@@ -340,7 +340,7 @@ window.AURORA_DATA = Object.freeze({
   competition: [
     ["Direct prior", "TopBrain 1 multiclass artery/vein segmentation", "TopAneu + RSNA lesion/vessel multitask", "Betti matching · cbDice · clCE", "None admitted"],
     ["Observable target", "Planned 55+ vessel-anatomy labels", "Aneurysm only as planned robustness context", "Organizer topology/contamination metrics", "No released joint lesion–parent-vessel target"],
-    ["Known boundary", "Design PDF only", "No versioned data/license/lineage", "Challenge under construction", "Released observation process plus sealed test and unoccupied algorithm required"],
+    ["Known boundary", "CC BY design PDF only", "No versioned medical data/data-license/lineage", "Under construction · Join only", "Released observation process plus sealed test and unoccupied algorithm required"],
     ["Current decision", "Mandatory baseline", "Mandatory baseline", "No access action", "29.0/40 reject · no P0/method/GPU"]
   ],
   gates: [
@@ -624,6 +624,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "operations",
+      title: "Official metadata are corrected and two sources are under a no-compute watch",
+      copy: "Zenodo revision 4 identifies the TopBrain 2.0 design object as open under CC BY 4.0; the licensed object is the sole PDF, not unreleased patient data. The live challenge remains under construction with Join registration but no Data, Evaluation, Rules or Submission task route. Source-watch v2 confirms both TopBrain 2.0 and IAVS match their frozen snapshots and returns continue-watch-only. Schema 6.0 preserves 29/40 rejection and automatic download/P0/model/GPU/outer test false. Any future execution remains introai9 PBS only; junjinyong is fully excluded.",
+      files: ["configs/source_watch_v2.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/source-watch.md", "docs/topbrain2-source-audit-2026-08-10.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
+    {
+      date: "2026.08.10",
       category: "site",
       title: "TopBrain 2.0 source boundary is live",
       copy: "Exact scientific content 8b2a70c9a6bab21962d22b66601481d323e4a52e passed Quality 31354245210 and Pages 31354244348. Direct live checks of the overview, zero-assumption guide and detailed audit return HTTP 200 and render best 29.0/40, all six rejected, design-PDF-only semantics and no medical payload/P0/model/GPU. This provenance creates no release/license assumption, method, compute or submission authorization; introai9 remains exclusive and junjinyong remains excluded.",
@@ -633,7 +640,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.10",
       category: "research",
       title: "TopBrain 2.0 proposal does not identify a released residual aneurysm problem",
-      copy: "A bounded official-source audit freezes six candidates at 29.0/28.5/28.0/27.5/27.0/23.5. The only official Zenodo file is a 35-page design PDF; the challenge is under construction and not accepting submissions. Aneurysm is a planned robustness context for vessel anatomy, not a released lesion target. TopBrain 1, TopAneu, RSNA multitask systems and topology/connectivity losses are direct priors. Schema 5.9 creates no medical payload, P0, PBS job, method, architecture, GPU, outer test or C21 claim; introai9 remains exclusive and junjinyong remains excluded.",
+      copy: "A bounded official-source audit freezes six candidates at 29.0/28.5/28.0/27.5/27.0/23.5. The only official Zenodo file is a 35-page CC BY 4.0 design PDF; the challenge is under construction with Join registration but no executable task submission contract. Aneurysm is a planned robustness context for vessel anatomy, not a released lesion target. TopBrain 1, TopAneu, RSNA multitask systems and topology/connectivity losses are direct priors. The historical schema 5.9 decision creates no medical payload, P0, PBS job, method, architecture, GPU, outer test or C21 claim; schema 6.0 corrects metadata without changing that decision. Introai9 remains exclusive and junjinyong remains excluded.",
       files: ["docs/topbrain2-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
     },
     {
@@ -879,7 +886,7 @@ window.AURORA_DATA = Object.freeze({
       category: "operations",
       title: "IAVS public state is frozen as watch-only",
       copy: "Official GitHub metadata exactly matches the frozen snapshot at main 2e40088d9eaa671c592929a154b7b2cf99f9320a: one 90-byte README, zero releases, no explicit repository license and no code/data entries. The standard-library monitor validates that any future signal opens only a fresh source audit; automatic download, terms acceptance, score repair, P0, method, architecture, GPU and outer test remain false. Introai9 connectivity and zero AURORA PBS jobs were reconfirmed without a login-node GPU command; junjinyong was not accessed.",
-      files: ["configs/source_watch_v1.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", "docs/source-watch.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+      files: ["configs/source_watch_v1.json", "configs/source_watch_v2.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", "docs/source-watch.md", "README.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
     },
     {
       date: "2026.08.09",

@@ -1,9 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 official-source correction + watch v2:** TopBrain 2.0 Zenodo
+> revision 4 is `open` under `CC BY 4.0`, but the licensed object is the sole
+> 35-page design PDF—not an unreleased medical dataset. The challenge remains
+> `Under construction`; Join registration exists, while executable Data,
+> Evaluation, Rules and Submission task routes do not. Schema **6.0** and
+> [`source_watch_v2.json`](configs/source_watch_v2.json) preserve the 29/40
+> rejection and zero payload/P0/model/GPU boundary. A material change can
+> request only a fresh source audit. Future authorized compute is `introai9`
+> PBS only; `junjinyong` is completely excluded.
+
 > **2026-08-10 TopBrain 2.0 source boundary:** The official source is one
 > 35-page, 139.8 kB challenge-design PDF, while the challenge page is `Under
-> construction` and Grand Challenge says `Not accepting submissions`. A
-> versioned medical dataset, attached license, casewise target/lineage and
+> construction` with Join registration but no executable task-submission
+> contract. A versioned medical dataset, data license, casewise target/lineage and
 > executable 2026 evaluation contract were not verified. Planned TopAneu
 > aneurysm cases are a vessel-anatomy robustness condition, not a released
 > lesion target. Six frozen candidates score **29.0/28.5/28.0/27.5/27.0/23.5**;
