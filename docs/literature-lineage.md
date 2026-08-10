@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.3 calibrated lineage · 2026-08-10:** The remaining surface-vector
+> gap is not Hodge, DEC, equivariance, topology loss, critical-point extraction
+> or trajectory tracking. It is the still-unverified conjunction of (i) a
+> field-error-matched structural failure mechanism, (ii) an operator-specific
+> explanation or representation that addresses it, and (iii) prospective
+> non-inferior field plus superior structure evidence on independent geometry
+> families. We retain this only as an inactive hypothesis. The closed P0 and
+> direct-prior boundary are unchanged. [Assessment](surface-vector-conditional-assessment-2026-08-10.md).
+
 > **Schema 7.2 lineage verdict · 2026-08-10:** The surface-vector P0 produced
 > no scientific evidence and is closed. The prior boundary is also stronger
 > than at registration: Hodge Spectral Duality is accepted at ICML 2026;

@@ -1,5 +1,19 @@
 # AURORA 연구 방향
 
+> **Schema 7.3 critical direction · 2026-08-10:** Surface-vector WSS is neither
+> discarded nor active. It is retained as a falsifiable hypothesis that models
+> matched on field error may disagree on robust signed critical points and
+> worldlines. This is narrower than claiming that critical-point evaluation is
+> new: tracking, trajectory preservation and aneurysm-specific WSS analysis are
+> direct prior. A viable application paper would first demonstrate the failure
+> mechanism, then obtain non-inferior field accuracy and geometry-level gains
+> against equivariant, GHD and Hodge controls. Edge 1-forms, equivariance,
+> Hodge splitting and structural losses are not standalone novelty. The exact
+> P0 remains closed; a new wrapper or downloader cannot reopen it. Only a
+> material source/asset change may enter a new E0. There is no active problem,
+> method, architecture or GPU job. See the
+> [critical assessment](surface-vector-conditional-assessment-2026-08-10.md).
+
 > **Schema 7.2 direction · 2026-08-10:** The surface-vector formulation remains
 > a reasonable question but not an active research identity. Its single exact
 > P0 ended execution-incomplete before all 10 checks, and direct priors already

@@ -1,5 +1,12 @@
 # Time-varying surface-WSS structure source audit
 
+> **Schema 7.3 interpretation:** This document remains the immutable source and
+> execution history. It does not define the current active direction. The
+> subsequent [critical assessment](surface-vector-conditional-assessment-2026-08-10.md)
+> retains only an inactive hypothesis, corrects stale active-candidate fields
+> and requires a material source/asset change before any new E0. Nothing in
+> schema 7.3 repairs, reruns or reinterprets the P0 below.
+
 > **Closed execution outcome · schema 7.2:** Exact public source
 > `8a06de209892c09fe4adf86a3125a612a5030d9f` was submitted exactly once to
 > `introai9` PBS as CPU-only job `115645.ECE-util1` (4 CPU, 16 GB, GPU 0).

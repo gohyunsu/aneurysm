@@ -1,5 +1,17 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.3 candidate-only architecture · 2026-08-10:** No architecture is
+> selected. If a materially new source version passes method-free stability and
+> field-error-matched failure-mechanism gates, one candidate may represent WSS
+> as oriented edge integrals, compare SE(3)-equivariant mesh and Hodge operators
+> at matched compute, predict a periodic full cycle and evaluate deterministic
+> critical points/worldlines. Boundary-aware Hodge conventions, the 1-form to
+> tangent-vector recovery map, near-degenerate zeros and temporal phase
+> alignment must be audited. Structural matching should begin as evaluation,
+> not an assumed differentiable loss. These blocks are controls/components,
+> not novelty; active method, architecture and GPU authority remain zero.
+> [Decision details](surface-vector-conditional-assessment-2026-08-10.md).
+
 > **Schema 7.2 no-model outcome · 2026-08-10:** The surface-vector P0 ended
 > execution-incomplete with no evaluated scientific check, so it cannot select
 > a GNN, Graph Transformer, Hodge operator, equivariant mesh model or topology

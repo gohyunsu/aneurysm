@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.2":
-        raise ProtocolError("The current research-state schema must be version 7.2.")
+    if protocol["schema_version"] != "7.3":
+        raise ProtocolError("The current research-state schema must be version 7.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,7 +148,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "aneug_surface_vector_structure_p0_execution_incomplete_closed_no_method_or_gpu"
+        != "no_active_problem_surface_vector_retained_as_inactive_conditional_hypothesis_only"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -222,6 +222,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "openneuro_containment_morphometry_source_audit",
             "aneug_target_construction_source_audit",
             "aneug_surface_vector_structure_source_audit",
+            "surface_vector_conditional_assessment",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -232,7 +233,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "aneug_surface_vector_structure_p0_execution_incomplete_closed_no_active_shortlist_method_or_gpu"
+        != "no_active_problem_surface_vector_closed_history_and_inactive_conditional_hypothesis_only"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
@@ -248,9 +249,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_not_surface_vector_p0_repair_rerun_p1_or_training"
+        != "fresh_problem_level_source_audit_or_material_surface_vector_source_change_for_new_e0_not_same_contract_repair_rerun_or_training"
         or problem_selection["audit_document"]
-        != "docs/aneug-surface-vector-structure-source-audit-2026-08-10.md"
+        != "docs/surface-vector-conditional-assessment-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "time_varying_surface_wss_index_structure_prediction_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
@@ -913,6 +914,98 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "and closed after one incomplete introai9 CPU P0 without P1 or model authority."
         )
     checks.append("AneuG surface-vector structure conditional P0 boundary")
+    conditional_surface = problem_selection["surface_vector_conditional_assessment"]
+    _require_keys(
+        conditional_surface,
+        [
+            "status",
+            "assessment_document",
+            "historical_candidate_id",
+            "historical_source_score",
+            "historical_p0_closed",
+            "historical_p0_scientific_checks_evaluated",
+            "hypothesis",
+            "evaluation_problem_is_independently_novel",
+            "architecture_selected",
+            "candidate_components_are_novel_individually",
+            "candidate_components",
+            "direct_prior_components",
+            "new_evidence_version_requires_material_source_or_asset_change",
+            "new_wrapper_downloader_retry_or_model_name_is_new_evidence",
+            "same_contract_repair_or_rerun_allowed",
+            "executable_p0_registered",
+            "method_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "evidence_ladder",
+            "independent_evaluation_unit",
+            "mandatory_structural_endpoints",
+            "field_guard",
+            "current_authorization",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_assessment",
+        ],
+        "surface-vector conditional assessment",
+    )
+    if (
+        conditional_surface["status"]
+        != "inactive_conditional_application_hypothesis_not_active_paper_identity"
+        or conditional_surface["assessment_document"]
+        != "docs/surface-vector-conditional-assessment-2026-08-10.md"
+        or conditional_surface["historical_candidate_id"]
+        != "time_varying_surface_wss_index_structure_prediction"
+        or conditional_surface["historical_source_score"] != 32.0
+        or conditional_surface["historical_p0_closed"] is not True
+        or conditional_surface["historical_p0_scientific_checks_evaluated"] != 0
+        or conditional_surface["hypothesis"]
+        != "field_error_matched_transient_wss_surrogates_may_disagree_on_robust_signed_critical_points_and_cardiac_cycle_worldlines"
+        or conditional_surface["evaluation_problem_is_independently_novel"] is not False
+        or conditional_surface["candidate_components_are_novel_individually"] is not False
+        or conditional_surface["new_evidence_version_requires_material_source_or_asset_change"] is not True
+        or conditional_surface["new_wrapper_downloader_retry_or_model_name_is_new_evidence"] is not False
+        or conditional_surface["same_contract_repair_or_rerun_allowed"] is not False
+        or conditional_surface["independent_evaluation_unit"]
+        != "generator_geometry_family_or_patient_not_vertices_triangles_phases_or_critical_points"
+        or conditional_surface["field_guard"]
+        != "area_weighted_field_error_noninferiority_and_calibration_language_only_for_probabilistic_outputs"
+        or conditional_surface["execution_server"] != "introai9"
+        or any(
+            conditional_surface[key] is not False
+            for key in (
+                "architecture_selected",
+                "executable_p0_registered",
+                "method_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_assessment",
+            )
+        )
+        or conditional_surface["evidence_ladder"]
+        != [
+            "e0_material_source_reentry",
+            "e1_method_free_structure_stability",
+            "e2_field_error_matched_failure_mechanism_and_baseline_feasibility",
+            "e3_bounded_family_disjoint_validation_development",
+            "e4_fresh_confirmatory_noninferior_field_and_superior_structure_evidence",
+            "e5_external_physical_interpretation_without_clinical_overclaim",
+        ]
+        or set(conditional_surface["mandatory_structural_endpoints"])
+        != {
+            "signed_critical_point_precision_recall_with_geodesic_tolerance",
+            "total_index_discrepancy_per_frame",
+            "trajectory_assignment_distance",
+            "temporally_tolerant_birth_death_event_f1",
+        }
+    ):
+        raise ProtocolError(
+            "The surface-vector idea must remain an inactive conditional hypothesis "
+            "whose exact P0 is closed and whose re-entry requires a material source change."
+        )
+    checks.append("inactive surface-vector hypothesis and material re-entry boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -5841,7 +5934,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "surface_vector_p0_execution_incomplete_no_active_primary_method_architecture_gpu_or_submission_identity"
+        != "no_active_primary_surface_vector_retained_only_as_inactive_conditional_hypothesis_no_method_architecture_gpu_or_submission_identity"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -6002,12 +6095,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_metric"] != "functional_energy_score"
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
-        or task["active_candidate_problem"]
-        != "time_varying_surface_wss_index_structure_prediction_conditional_p0_only"
+        or task["active_candidate_problem"] != "none"
         or task["active_candidate_status"]
-        != "source_admitted_exactly_at_32_p0_preregistered_no_method_or_gpu"
-        or task["candidate_primary_estimand"]
-        != "time_resolved_tangent_wss_one_form_per_frame_signed_critical_point_index_and_later_worldline_events"
+        != "none_surface_vector_exact_version_closed_hypothesis_retained_inactive"
+        or task["candidate_primary_estimand"] is not None
         or task["candidate_secondary_estimand"] is not None
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
@@ -6052,11 +6143,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The task must keep the AneuX lead at source-shortlist/P0 only while "
-            "historical 4D-flow evidence retains the exact I0a result and I0b "
-            "execution record."
+            "The task must keep every active candidate and primary estimand "
+            "unselected while historical 4D-flow evidence retains the exact "
+            "I0a result and I0b execution record."
         )
-    checks.append("closed AneuX task boundary and historical 4D-flow guardrails")
+    checks.append("no-active-candidate task boundary and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:
@@ -6302,6 +6393,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     _require_keys(
         model,
         [
+            "current_headline_architecture",
             *numeric_model_keys,
             "observation_modes",
             "temporal_representation",
@@ -6309,6 +6401,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ],
         "model",
     )
+    if (
+        model["current_headline_architecture"]
+        != "unselected_no_active_problem_surface_vector_components_are_conditional_controls_only"
+    ):
+        raise ProtocolError(
+            "No surface-vector, GNN, Hodge, equivariant, or temporal architecture "
+            "may be selected while the hypothesis is inactive."
+        )
     for key in numeric_model_keys:
         if not isinstance(model[key], int) or model[key] <= 0:
             raise ProtocolError(f"model.{key} must be a positive integer.")

@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 surface-vector conditional-assessment override · schema 7.3:**
+> The surface-vector idea is retained only as an inactive, falsifiable
+> application hypothesis: field-error-matched transient-WSS surrogates may
+> disagree on robust signed critical points and cardiac-cycle worldlines. It is
+> not an active source lead, primary problem, method, architecture,
+> contribution or paper identity. Edge-integrated 1-forms, SE(3) mesh message
+> passing, Hodge decomposition, periodic temporal operators and structural
+> losses are candidate controls/components, not novelty. The exact 32.0/40
+> source score and job `115645.ECE-util1` outcome remain immutable; 0/10 checks
+> were evaluated and that contract cannot be repaired, reconstructed or rerun.
+> A fresh executable version requires a material official source/asset change;
+> changing a wrapper, downloader, retry rule or model name is not new evidence.
+> Then E0 source entry, E1 method-free stability, E2 field-error-matched failure
+> mechanism, E3 bounded development, E4 fresh confirmation and E5 external
+> interpretation must occur in order. Current P0/P1/method/architecture/GPU/
+> outer test/submission identity are all 0. Source of truth is
+> `docs/surface-vector-conditional-assessment-2026-08-10.md` and schema 7.3.
+> AURORA uses `introai9` PBS only; never access or monitor `junjinyong`, and
+> never run a GPU command on an `introai9` login node.
+
 > **2026-08-10 surface-vector structure outcome override · schema 7.2:** Exact
 > public source `8a06de209892c09fe4adf86a3125a612a5030d9f` was submitted exactly
 > once to `introai9` PBS as `115645.ECE-util1`, CPU 4, memory 16 GB, GPU 0.

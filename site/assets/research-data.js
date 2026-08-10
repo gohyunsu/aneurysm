@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · surface-vector 32.0/40 source history closed execution-incomplete · 0/10 checks evaluated · active lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "a genuinely fresh problem must pass source admission and method-free asset/task gates before any architecture or GPU work; the closed surface-vector contract cannot be repaired or rerun",
+    status: "Target locked · surface-vector retained only as inactive conditional hypothesis · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
+    requirement: "a genuinely fresh problem or materially changed surface-vector source must pass E0 source entry, method-free stability and failure-mechanism gates before architecture or GPU; wrapper/downloader/ retry/model renaming cannot reopen the closed contract",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -43,10 +43,10 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
-      title: "A time-varying tangent field has index structure that channel MSE does not describe",
-      copy: "Transient WSS lives in the tangent plane of an oriented vessel surface. Its zeros carry signed local indices and form trajectories with birth/death events over the cardiac cycle. The frozen problem score is 32.0/40, but its exact introai9 CPU P0 ended E/exit 2 after 27:02 with no scientific aggregate or raw log; 0/10 checks were evaluated. This is no verdict, not a negative hypothesis result. ICML-2026 Hodge Spectral Duality, SE(3)-equivariant transient WSS prediction, robust vector-field feature tracking, trajectory-preserving compression and aneurysm-specific cardiac-cycle critical-point tracking are direct priors. The version is closed without repair/rerun and no residual algorithmic gap is active.",
-      status: "Closed source history 32.0/40 · P0 execution-incomplete/no verdict · active lead/P1/method/model/GPU 0",
-      url: "../docs/aneug-surface-vector-structure-source-audit-2026-08-10.md"
+      title: "Surface-vector structure remains a hypothesis, not an active model identity",
+      copy: "Transient WSS lives in the tangent plane and its robust zeros can carry signed indices and cardiac-cycle trajectories. The defensible hypothesis is narrower than the original pitch: field-error-matched surrogates may disagree on these structures. Critical-point tracking, trajectory preservation, aneurysm-specific WSS analysis, Hodge operators and equivariant prediction are direct priors, so their combination is not novelty. Exact source score 32.0/40 and the E/exit-2 P0 remain closed history with 0/10 checks evaluated. Only a material source/asset change may open a new E0, followed by stability and field-error-matched failure-mechanism gates.",
+      status: "Inactive conditional hypothesis · active lead/primary/P0/P1/method/architecture/GPU 0",
+      url: "../docs/surface-vector-conditional-assessment-2026-08-10.md"
     },
     {
       year: "2026.08",
@@ -768,6 +768,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Schema 7.3 separates a plausible surface-vector hypothesis from an active paper identity",
+      copy: "A critical assessment retains only the falsifiable possibility that field-error-matched transient-WSS surrogates disagree on robust signed critical points and worldlines. It rejects edge 1-forms, SE(3) message passing, Hodge splitting, periodic decoding and structural losses as standalone novelty. The machine contract corrects stale active-candidate fields to none. A new executable version requires a material official source/asset change, then E1 stability, E2 matched failure-mechanism evidence, bounded development, fresh confirmation and external interpretation. The old 32.0/40 score and 0/10-check P0 remain immutable closed history; active lead, primary, P0/P1, method, architecture, GPU, outer test and submission identity are zero.",
+      files: ["docs/surface-vector-conditional-assessment-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.10",
       category: "experiment",

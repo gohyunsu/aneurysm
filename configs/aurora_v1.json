@@ -1,9 +1,9 @@
 {
-  "schema_version": "7.2",
+  "schema_version": "7.3",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "aneug_surface_vector_structure_p0_execution_incomplete_closed_no_method_or_gpu",
+    "status": "no_active_problem_surface_vector_retained_as_inactive_conditional_hypothesis_only",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -14,7 +14,7 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "aneug_surface_vector_structure_p0_execution_incomplete_closed_no_active_shortlist_method_or_gpu",
+    "status": "no_active_problem_surface_vector_closed_history_and_inactive_conditional_hypothesis_only",
     "shortlisted_candidate": null,
     "conditional_source_lead_count": 0,
     "candidate_dataset": null,
@@ -28,8 +28,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_not_surface_vector_p0_repair_rerun_p1_or_training",
-    "audit_document": "docs/aneug-surface-vector-structure-source-audit-2026-08-10.md",
+    "next_allowed_action": "fresh_problem_level_source_audit_or_material_surface_vector_source_change_for_new_e0_not_same_contract_repair_rerun_or_training",
+    "audit_document": "docs/surface-vector-conditional-assessment-2026-08-10.md",
     "aneumo_bc_transport_source_audit": {
       "status": "p0_execution_incomplete_no_scientific_verdict_closed_without_repair_or_rerun",
       "audit_document": "docs/aneumo-bc-transport-source-audit-2026-08-10.md",
@@ -2929,6 +2929,60 @@
       "p0_failure_action": "close_exact_candidate_version_without_same_contract_repair_or_rerun",
       "decision": "preserve_exact_32_source_history_but_close_execution_incomplete_without_repair_rerun_p1_method_architecture_gpu_outer_test_or_submission_claim"
     },
+    "surface_vector_conditional_assessment": {
+      "status": "inactive_conditional_application_hypothesis_not_active_paper_identity",
+      "assessment_document": "docs/surface-vector-conditional-assessment-2026-08-10.md",
+      "historical_candidate_id": "time_varying_surface_wss_index_structure_prediction",
+      "historical_source_score": 32.0,
+      "historical_p0_closed": true,
+      "historical_p0_scientific_checks_evaluated": 0,
+      "hypothesis": "field_error_matched_transient_wss_surrogates_may_disagree_on_robust_signed_critical_points_and_cardiac_cycle_worldlines",
+      "evaluation_problem_is_independently_novel": false,
+      "architecture_selected": false,
+      "candidate_components_are_novel_individually": false,
+      "candidate_components": [
+        "oriented_edge_integrated_surface_wss_one_form",
+        "se3_equivariant_mesh_message_passing_control",
+        "discrete_hodge_operator_control",
+        "periodic_full_cycle_temporal_operator",
+        "deterministic_critical_point_index_worldline_event_evaluator"
+      ],
+      "direct_prior_components": [
+        "hodge_and_dec_operator_learning",
+        "se3_equivariant_surface_wss_prediction",
+        "critical_point_extraction_and_robust_tracking",
+        "trajectory_preserving_vector_field_compression",
+        "aneurysm_specific_cardiac_cycle_wss_critical_point_tracking"
+      ],
+      "new_evidence_version_requires_material_source_or_asset_change": true,
+      "new_wrapper_downloader_retry_or_model_name_is_new_evidence": false,
+      "same_contract_repair_or_rerun_allowed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "evidence_ladder": [
+        "e0_material_source_reentry",
+        "e1_method_free_structure_stability",
+        "e2_field_error_matched_failure_mechanism_and_baseline_feasibility",
+        "e3_bounded_family_disjoint_validation_development",
+        "e4_fresh_confirmatory_noninferior_field_and_superior_structure_evidence",
+        "e5_external_physical_interpretation_without_clinical_overclaim"
+      ],
+      "independent_evaluation_unit": "generator_geometry_family_or_patient_not_vertices_triangles_phases_or_critical_points",
+      "mandatory_structural_endpoints": [
+        "signed_critical_point_precision_recall_with_geodesic_tolerance",
+        "total_index_discrepancy_per_frame",
+        "trajectory_assignment_distance",
+        "temporally_tolerant_birth_death_event_f1"
+      ],
+      "field_guard": "area_weighted_field_error_noninferiority_and_calibration_language_only_for_probabilistic_outputs",
+      "current_authorization": "monitor_material_source_delta_or_audit_a_genuinely_fresh_problem_only_no_payload_p0_p1_method_architecture_gpu_outer_test_or_claim",
+      "execution_server": "introai9",
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_assessment": false
+    },
     "most_recent_closed_candidate": "time_varying_surface_wss_index_structure_prediction_execution_incomplete",
     "most_recent_source_rejected_candidate": "surface_vector_tangency_and_functional_commutation",
     "most_recent_conditional_source_lead": null,
@@ -3187,7 +3241,7 @@
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "surface_vector_p0_execution_incomplete_no_active_primary_method_architecture_gpu_or_submission_identity",
+    "required_headline_domain": "no_active_primary_surface_vector_retained_only_as_inactive_conditional_hypothesis_no_method_architecture_gpu_or_submission_identity",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",
@@ -3251,9 +3305,9 @@
     "historical_application_endpoint": "cross_sectional_rupture_status",
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
-    "active_candidate_problem": "time_varying_surface_wss_index_structure_prediction_conditional_p0_only",
-    "active_candidate_status": "source_admitted_exactly_at_32_p0_preregistered_no_method_or_gpu",
-    "candidate_primary_estimand": "time_resolved_tangent_wss_one_form_per_frame_signed_critical_point_index_and_later_worldline_events",
+    "active_candidate_problem": "none",
+    "active_candidate_status": "none_surface_vector_exact_version_closed_hypothesis_retained_inactive",
+    "candidate_primary_estimand": null,
     "candidate_secondary_estimand": null,
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
     "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",
@@ -3682,7 +3736,7 @@
     }
   ],
   "model": {
-    "current_headline_architecture": "unselected_no_active_problem_after_aneumo_lineage_p0_execution_incomplete",
+    "current_headline_architecture": "unselected_no_active_problem_surface_vector_components_are_conditional_controls_only",
     "goal_oriented_candidate_is_model": false,
     "surface_queries": 4096,
     "volume_queries": 8192,

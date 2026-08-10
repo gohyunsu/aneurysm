@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 시간에 따라 변하는 WSS 곡면 접선 벡터장의 critical-point index와 trajectory를 검증하는 32.0/40 조건부 source lead, CPU-only P0, no-model·introai9-only 경계를 설명하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — surface-vector WSS를 inactive conditional hypothesis로 보존하고, field-error-matched 구조 실패·critical-point·worldline·material re-entry gate와 no-model·introai9-only 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -49,20 +49,22 @@
           WSS는 혈관 표면의 각 점에서 벽을 스치는 방향과 세기를 나타내는
           <b>접선 벡터</b>입니다. 이 벡터가 0이 되는 critical point에는 회전·분리·
           부착 패턴을 구분하는 signed index가 있고, 박동 주기 동안 이 점들은
-          이동하거나 쌍으로 생성·소멸할 수 있습니다. Fresh audit은 이러한
-          시공간 구조를 예측하는 문제를 정확히 32.0/40으로 동결했습니다. 이는
-          raw asset이 질문을 지지하는지 확인할 P0 자격일 뿐, 방법론 채택이나
-          novelty 확정이 아닙니다. 세 raw wall/OBJ pair의 hash·schema·정렬·tangency·
-          temporal variation·critical-point extractability를 `introai9` CPU에서만
-          검사합니다. 현재 primary, GNN·Transformer·operator, contribution, GPU와
-          outer test는 모두 0입니다.
+          이동하거나 쌍으로 생성·소멸할 수 있습니다. 이 문제의 frozen source
+          score는 32.0/40이었지만, exact CPU P0는 0/10 scientific check 상태에서
+          종료되어 해당 version은 닫혔습니다. 지금 남기는 것은 “field error가
+          비슷한 surrogate도 robust critical point와 worldline에서는 다를 수
+          있다”는 <b>inactive conditional hypothesis</b>뿐입니다. Edge 1-form,
+          Hodge, equivariance와 topology loss는 novelty가 아닙니다. Material한 새
+          source/asset이 나타나 E0–E2를 통과하기 전에는 primary, GNN·Transformer·
+          operator, contribution, P0/P1, GPU와 outer test가 모두 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/aneug-surface-vector-structure-source-audit-2026-08-10.md">Current surface-vector audit ↗</a>
-          <a class="button ghost" href="../configs/aneug_surface_vector_structure_p0.json">Frozen CPU P0 ↗</a>
+          <a class="button ghost" href="../docs/surface-vector-conditional-assessment-2026-08-10.md">Current critical assessment ↗</a>
+          <a class="button ghost" href="../docs/aneug-surface-vector-structure-source-audit-2026-08-10.md">Closed source audit ↗</a>
+          <a class="button ghost" href="../configs/aneug_surface_vector_structure_p0.json">Historical frozen P0 ↗</a>
           <a class="button ghost" href="../docs/aneug-target-construction-source-audit-2026-08-10.md">Current target audit ↗</a>
           <a class="button ghost" href="../docs/openneuro-containment-morphometry-source-audit-2026-08-10.md">Historical OpenNeuro audit ↗</a>
           <a class="button ghost" href="../results/openneuro_containment_morphometry_p0_execution_20260810.json">P0 outcome ↗</a>
@@ -106,7 +108,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">ANEUG-FLOW · SURFACE VECTOR STRUCTURE · P0 ONLY</div>
+        <div class="visual-caption">SURFACE VECTOR · INACTIVE CONDITIONAL HYPOTHESIS · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -149,7 +151,7 @@
         <div><span>Active source lead</span><b>0 · latest 32.0/40 version closed incomplete</b></div>
         <div><span>Current compute</span><b>0 active jobs · P0 exit 2/no verdict</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh problem-level source/asset audit</b></div>
+        <div><span>Next action</span><b>fresh problem audit or material surface-vector source delta</b></div>
       </div>
     </section>
 
@@ -163,7 +165,9 @@
           critical-point loss는 이미 선행 요소입니다. 따라서 독립 contribution은
           1-form 오차와 index/worldline 보존을 연결하는 operator-specific 표현 또는
           보장, 그리고 strong baseline 대비 prospective 이득이 함께 있을 때만
-          성립합니다. 지금은 그 전제인 raw task extractability만 검사합니다.
+          성립합니다. 현재 exact raw P0는 미평가 상태로 닫혔고, 새 wrapper나
+          downloader로 재개하지 않습니다. Material한 새 evidence version만 먼저
+          method-free stability와 field-error-matched failure mechanism을 검증할 수 있습니다.
         </p>
       </div>
 
@@ -215,19 +219,20 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">CURRENT GAP STATUS</p>
-          <h3>One residual gap is conditionally admitted.</h3>
+          <h3>One hypothesis is retained, but no gap is active.</h3>
           <p>
             Surface Hodge/DEC, SE(3)-equivariant transient WSS prediction,
             vector-field topology와 aneurysm WSS critical-point analysis가 직접
             선행입니다. 남은 질문은 단순 topology loss가 아니라 학습된 tangent
             1-form의 근사오차가 signed index와 시간 worldline event를 언제
-            보존하는지 설명하고 실제로 더 잘 맞히는가입니다. 아직 method가 아니라
-            source-admitted task hypothesis입니다.
+            보존하는지 설명하고 실제로 더 잘 맞히는가입니다. 그러나 old P0는
+            0/10 미평가로 닫혔으므로 현재는 source lead조차 아닌 inactive
+            hypothesis입니다.
           </p>
-          <div class="gap-equation" aria-label="현재 source lead가 방법론 검증으로 이어지는 조건">
-            <span>32.0/40 conditional lead</span>
+          <div class="gap-equation" aria-label="비활성 가설이 향후 방법론 검증으로 이어지기 위한 조건">
+            <span>32.0/40 closed history</span>
             <i>⇒</i>
-            <span>3-probe P0 ⇒ no model/GPU</span>
+            <span>material E0 ⇒ E1 stability ⇒ E2 failure gap</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -258,10 +263,10 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 아래는 GPU 모델이 아니라 raw field와
-          surface mesh에서 연구 target을 추출할 수 있는지 검증하는 CPU P0입니다.
-          구조가 실제 asset에서 안정적으로 존재한다는 증거 없이 topology head나
-          fancy한 GNN을 설계하지 않습니다.
+          현재 architecture는 없습니다. 아래는 이미 종료된 raw-field P0가 무엇을
+          확인하려 했는지와, material한 새 source가 생길 때 어떤 evidence ladder를
+          거쳐야 하는지 보여주는 기록입니다. 구조 안정성과 field-error-matched
+          failure gap 없이 topology head나 fancy한 GNN을 선택하지 않습니다.
         </p>
       </div>
 
@@ -270,13 +275,14 @@
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
           현재 모델은 없습니다. GNN, Graph Transformer, E(3) network와 neural
-          operator는 모두 가능한 baseline 계열일 뿐 novelty가 아닙니다. 32.0점은
-          raw-asset P0만 열었고 architecture gate와 GPU는 아직 닫혀 있습니다.
+          operator는 모두 가능한 baseline 계열일 뿐 novelty가 아닙니다. 과거
+          32.0점 P0는 0/10 checks 상태로 닫혔고 architecture gate와 GPU는
+          계속 닫혀 있습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="AneuG-Flow surface vector structure P0 설명">
+      <div class="mode-switch" role="group" aria-label="폐쇄된 surface-vector P0와 조건부 가설 설명">
         <button class="active" type="button" data-mode="presence">Tangent field</button>
         <button type="button" data-mode="point">Critical index</button>
         <button type="button" data-mode="mask">Worldline</button>
@@ -297,7 +303,7 @@
         <div class="arch-connector"><span>source inspection</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">RAW P0 INPUT</p>
+          <p class="arch-label">HISTORICAL RAW P0 INPUT</p>
           <h3>80-frame WSS + OBJ</h3>
           <p>Safe tensor keys, static coordinates and triangular surface are checked</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
@@ -331,8 +337,8 @@
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">CURRENT DECISION</p>
-          <h3>32.0 = admission · P0 only</h3>
-          <p>Not submitted · CPU 4 · 16 GB · GPU 0 · all checks required</p>
+          <h3>32.0 = closed history · hypothesis only</h3>
+          <p>Old P0 E/exit 2 · 0/10 evaluated · no repair/rerun · GPU 0</p>
           <div class="output-meter"><i></i><span>primary / method / model / GPU</span><b>still 0</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -340,16 +346,16 @@
 
       <div class="architecture-notes">
         <article>
-          <span>SOURCE INTEGRITY</span>
-          <p>Exact commit, hash, path 수, subject partition과 두 license를 함께 확인합니다.</p>
+          <span>MATERIAL RE-ENTRY</span>
+          <p>새 official release·reader·manifest 또는 independently licensed field asset이 있어야만 E0를 엽니다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
-          <p>VP-UNet, FocalSegNet, WeakMed, morphological conformal, lesion-FNR와 COMPASS를 강한 control로 둡니다.</p>
+          <p>Hodge Spectral Duality, SE(3) WSS prediction, robust tracking, trajectory-preserving compression과 aneurysm WSS tracking을 strong control로 둡니다.</p>
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>고정한 한 번의 introai9 CPU job은 결과 없이 끝났고, 같은 계약을 반복하지 않습니다.</p>
+          <p>E1 stability → E2 field-error-matched failure gap → bounded development → fresh confirmation 순서를 건너뛰지 않습니다.</p>
         </article>
       </div>
       <div class="architecture-links">

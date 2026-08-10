@@ -173,6 +173,41 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "surface-vector structure"):
             validate_protocol(candidate)
 
+    def test_surface_vector_is_retained_only_as_an_inactive_hypothesis(self) -> None:
+        problem = self.protocol["problem_selection"]
+        assessment = problem["surface_vector_conditional_assessment"]
+        task = self.protocol["task"]
+        self.assertEqual(problem["conditional_source_lead_count"], 0)
+        self.assertEqual(task["active_candidate_problem"], "none")
+        self.assertIsNone(task["candidate_primary_estimand"])
+        self.assertEqual(assessment["historical_source_score"], 32.0)
+        self.assertTrue(assessment["historical_p0_closed"])
+        self.assertFalse(assessment["architecture_selected"])
+        self.assertFalse(assessment["executable_p0_registered"])
+        self.assertFalse(assessment["gpu_training_authorized"])
+        self.assertTrue(
+            assessment["new_evidence_version_requires_material_source_or_asset_change"]
+        )
+        self.assertFalse(
+            assessment["new_wrapper_downloader_retry_or_model_name_is_new_evidence"]
+        )
+        self.assertEqual(assessment["execution_server"], "introai9")
+        self.assertFalse(assessment["junjinyong_accessed_for_this_assessment"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_conditional_assessment"][
+            "architecture_selected"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "inactive conditional hypothesis"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_conditional_assessment"][
+            "new_wrapper_downloader_retry_or_model_name_is_new_evidence"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "material source change"):
+            validate_protocol(candidate)
+
     def test_aneumo_bc_transport_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneumo_bc_transport_source_audit"]
@@ -1564,7 +1599,7 @@ class ProtocolTests(unittest.TestCase):
     def test_i0a_pass_cannot_select_a_method_or_call_cfd_mri_truth(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["active_candidate_status"] = "method_selected"
-        with self.assertRaisesRegex(ProtocolError, "source-shortlist/P0 only"):
+        with self.assertRaisesRegex(ProtocolError, "active candidate"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["task"]["cfd_field_is_clinical_mri_ground_truth"] = True

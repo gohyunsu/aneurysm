@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-10 · Schema 7.3 retains an inactive surface-vector hypothesis
+
+- Accepted the falsifiable possibility that field-error-matched transient-WSS
+  surrogates disagree on robust signed critical points and cardiac-cycle
+  worldlines, but did not promote it to an active source lead or paper identity.
+- Rejected edge 1-forms, SE(3) message passing, Hodge splitting, periodic
+  decoding and structural losses as standalone novelty. They remain future
+  candidate controls only after task stability.
+- Added a six-level evidence ladder: material source E0, method-free stability,
+  field-error-matched failure-mechanism and baseline audit, bounded development,
+  fresh confirmation, and external physical interpretation.
+- Corrected stale machine/site fields that still described the closed 32.0/40
+  version as an active conditional P0. Active lead, primary, method,
+  architecture, executable P0/P1, GPU, outer test and submission identity are
+  all zero.
+- Preserved job `115645.ECE-util1` and 0/10 evaluated checks as immutable closed
+  history. A wrapper, downloader, retry rule or model rename cannot constitute
+  a new evidence version; a material source/asset change is required.
+
 ## 2026-08-10 · Schema 7.2 closes the surface-vector P0 without a verdict
 
 - Submitted exact public source `8a06de209892c09fe4adf86a3125a612a5030d9f`

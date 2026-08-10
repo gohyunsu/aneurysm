@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 critical assessment · schema 7.3:** The surface-vector direction
+> is retained as an **inactive conditional hypothesis**, not an active paper
+> identity. The testable claim is that field-error-matched transient-WSS
+> surrogates may disagree on robust signed critical points and cardiac-cycle
+> worldlines. Edge 1-forms, equivariance, Hodge layers and topology/trajectory
+> losses are direct-prior components, not contributions. Exact 32.0/40 and the
+> incomplete `115645.ECE-util1` history remain unchanged; the old P0 cannot be
+> repaired or rerun. A new executable version requires a material source/asset
+> change, then method-free stability and failure-mechanism gates. Active lead,
+> primary, method, architecture, P0/P1, GPU, outer test and submission identity
+> remain zero. [Critical assessment](docs/surface-vector-conditional-assessment-2026-08-10.md)
+
 > **2026-08-10 surface-vector structure P0 outcome · schema 7.2:** Exact source
 > `8a06de209892c09fe4adf86a3125a612a5030d9f` ran once on `introai9` as CPU-only
 > PBS job `115645.ECE-util1` (4 CPU, 16 GB, GPU 0). It ended `E`/exit 2 after

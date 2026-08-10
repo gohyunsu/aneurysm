@@ -1,5 +1,16 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.3 submission assessment · 2026-08-10:** A future surface-vector
+> application paper is plausible only if a material new source version first
+> establishes stable structure and a distinct field-error-matched failure
+> mechanism. Confirmatory evidence must show field-error non-inferiority plus
+> geometry-family-level gains in signed critical points, total index,
+> trajectories and birth/death events against equivariant, GHD and Hodge
+> controls. Until then the proposed identity and edge-1-form architecture are
+> conditional planning, not title, abstract contribution or result. Current
+> submission identity, method, architecture, P0/P1, GPU and outer test are 0.
+> See the [critical assessment](surface-vector-conditional-assessment-2026-08-10.md).
+
 > **Schema 7.2 submission boundary · 2026-08-10:** The 32.0/40 surface-vector
 > source lead produced no scientific verdict: its one CPU P0 ended incomplete
 > with 0/10 checks evaluated. It adds no result, figure, architecture,
