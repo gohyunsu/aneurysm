@@ -1,5 +1,5 @@
 {
-  "schema_version": "7.6",
+  "schema_version": "7.7",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
@@ -2519,7 +2519,7 @@
       "planned_task2_single_expert_per_case_without_merge": true,
       "casewise_aneurysm_mask_parent_vessel_attachment_acquisition_reader_or_cross_challenge_identity_manifest_verified": false,
       "patient_image_mask_clinical_split_or_test_payload_accessed": false,
-      "source_watch_config": "configs/source_watch_v2.json",
+      "source_watch_config": "configs/source_watch_v3.json",
       "source_watch_current_snapshot_matches": true,
       "direct_prior_threats": [
         "topbrain1_multimodal_multiclass_whole_brain_vessel_segmentation",
@@ -2980,6 +2980,10 @@
         "stated_code_url": "https://github.com/clementhrv/trellis_for_intra",
         "stated_code_url_http_status_on_2026_08_11": 404,
         "github_exact_repository_search_count_on_2026_08_11": 0,
+        "source_watch_config": "configs/source_watch_v3.json",
+        "source_watch_current_snapshot_matches": true,
+        "source_watch_next_action": "continue_watch_only",
+        "source_watch_change_opens_only": "direct_prior_baseline_feasibility_reaudit_only",
         "medical_payload_or_checkpoint_accessed": false,
         "server_queried": false,
         "pbs_job_created": false,

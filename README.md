@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 fail-closed source watch · schema 7.7:** IAVS, TopBrain 2.0 and
+> the TRELLIS paper's stated code repository now have one read-only machine
+> contract and a twice-weekly/manual GitHub Action. The live refresh matches
+> all frozen snapshots: IAVS is still README-only at `2e40088d…`, TopBrain is
+> still a design-PDF/under-construction source, and TRELLIS still returns HTTP
+> 404. A change only raises a manual review signal—source re-audit for
+> IAVS/TopBrain or direct-prior baseline-feasibility re-audit for TRELLIS. It
+> never downloads data, accepts terms, repairs a score, registers P0, selects a
+> model or authorizes GPU/outer test. [Watch contract](docs/source-watch.md)
+
 > **2026-08-11 schema 7.6 deployment verification:** Exact content
 > `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality run
 > `31411063368` and Pages run `31411180740`. The live Overview, Learn page and
@@ -477,13 +487,14 @@ TopBrain 29.5/40도 historical rejection으로 보존합니다.
 직전 [`source-delta audit`](docs/source-delta-audit-2026-08-09.md)의 최고
 OpenNeuro paired-surface growth 31.5/40도 historical rejection으로 보존합니다.
 
-IAVS는 향후 자산 변화만 감시합니다. 논문은 641개 3D MRA와 587개
+IAVS·TopBrain 2.0·TRELLIS code availability는 향후 공개 상태 변화만
+감시합니다. IAVS 논문은 641개 3D MRA와 587개
 aneurysm–parent-vessel annotation 및 CFD outcome을 보고하지만, 2026-08-10
 공식 저장소 exact `2e40088…`에는 90-byte README 한 파일만 있고 release,
 명시적 license와 code/data payload는 모두 0입니다. 따라서 source score도
-부여하지 않습니다. [`watch-only 계약`](docs/source-watch.md)은 새 release를
-발견해도 fresh source 재평가만 요청하며 download/P0/model/GPU를 자동으로
-열지 않습니다.
+부여하지 않습니다. [`watch-only 계약`](docs/source-watch.md)은 IAVS/TopBrain
+변화에는 fresh source 재감사만, TRELLIS 저장소 공개에는 direct-prior baseline
+feasibility 재검토만 요청하며 download/P0/model/GPU를 자동으로 열지 않습니다.
 
 직전 DIAS DSA prefix-risk 후보도 31.0/40으로 source에서 기각된 history입니다.
 전문의가 arterial phase만 4--14 frame으로 미리 잘랐고 full sequence DSC는

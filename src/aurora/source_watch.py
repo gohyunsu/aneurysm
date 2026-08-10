@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import urllib.error
 import urllib.request
 from html.parser import HTMLParser
 from pathlib import Path
@@ -27,15 +29,21 @@ def load_config(path: str | Path) -> dict[str, Any]:
     source = Path(path)
     payload = json.loads(source.read_text(encoding="utf-8"))
     schema = payload.get("schema_version")
-    if schema not in {"aurora.source_watch.v1", "aurora.source_watch.v2"}:
+    if schema not in {
+        "aurora.source_watch.v1",
+        "aurora.source_watch.v2",
+        "aurora.source_watch.v3",
+    }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
         raise SourceWatchContractError("watch_status_changed")
 
     if schema == "aurora.source_watch.v1":
         _validate_v1(payload)
-    else:
+    elif schema == "aurora.source_watch.v2":
         _validate_v2(payload)
+    else:
+        _validate_v3(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -77,7 +85,18 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
     )
     if any(authorization.get(key) is not False for key in forbidden):
         raise SourceWatchContractError("authorization_boundary_changed")
-    if authorization.get("only_automatic_outcome") != "fresh_source_reaudit_only":
+    if payload.get("schema_version") == "aurora.source_watch.v3":
+        if (
+            authorization.get("only_automatic_outcome")
+            != "manual_review_signal_only"
+            or authorization.get("permitted_review_requests")
+            != [
+                "fresh_source_reaudit_only",
+                "direct_prior_baseline_feasibility_reaudit_only",
+            ]
+        ):
+            raise SourceWatchContractError("automatic_outcome_changed")
+    elif authorization.get("only_automatic_outcome") != "fresh_source_reaudit_only":
         raise SourceWatchContractError("automatic_outcome_changed")
 
     gate = payload.get("future_gate", {})
@@ -154,13 +173,76 @@ def _validate_v2(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("topbrain2_frozen_snapshot_changed")
 
 
+def _validate_v3(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v3_watch_set_changed")
+
+    iavs, topbrain, trellis = watches
+    _validate_v2({"watches": [iavs, topbrain]})
+    if any(
+        watch.get("review_request") != "fresh_source_reaudit_only"
+        for watch in (iavs, topbrain)
+    ):
+        raise SourceWatchContractError("source_review_request_changed")
+
+    source = trellis.get("source", {})
+    snapshot = trellis.get("frozen_snapshot", {})
+    if (
+        trellis.get("kind") != "github_repository_availability"
+        or trellis.get("review_request")
+        != "direct_prior_baseline_feasibility_reaudit_only"
+        or source.get("repository") != "clementhrv/trellis_for_intra"
+        or source.get("repository_url")
+        != "https://github.com/clementhrv/trellis_for_intra"
+        or source.get("repository_api_url")
+        != "https://api.github.com/repos/clementhrv/trellis_for_intra"
+        or source.get("paper_url") != "https://arxiv.org/abs/2509.03095"
+        or source.get("publication_doi") != "10.1016/j.neuri.2026.100259"
+    ):
+        raise SourceWatchContractError("trellis_official_source_changed")
+    if snapshot != {
+        "repository_api_http_status": 404,
+        "repository_available": False,
+        "default_branch": None,
+        "main_head_sha": None,
+        "root_entries": [],
+        "release_count": None,
+        "license_spdx_id": None,
+        "repository_size_kib": None,
+        "payload_or_code_entries": [],
+        "availability": "stated_repository_not_publicly_readable",
+    }:
+        raise SourceWatchContractError("trellis_frozen_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("source_reaudit_is_not_asset_access") is not True
+        or detection.get("direct_prior_review_is_not_method_selection") is not True
+        or detection.get("score_repair_allowed") is not False
+        or detection.get("frozen_snapshot_auto_update_allowed") is not False
+    ):
+        raise SourceWatchContractError("v3_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
+    headers = {
+        "Accept": accept,
+        "User-Agent": "AURORA-source-watch/3.0",
+    }
+    github_token = os.environ.get("GITHUB_TOKEN")
+    if github_token and url.startswith("https://api.github.com/"):
+        headers["Authorization"] = f"Bearer {github_token}"
     request = urllib.request.Request(
         url,
-        headers={
-            "Accept": accept,
-            "User-Agent": "AURORA-source-watch/2.0",
-        },
+        headers=headers,
     )
     with urllib.request.urlopen(request, timeout=30) as response:
         return response.read()
@@ -212,6 +294,59 @@ def fetch_github_snapshot(repository: str, branch: str) -> dict[str, Any]:
         "license_spdx_id": license_info.get("spdx_id"),
         "repository_size_kib": int(metadata.get("size", 0)),
         "payload_or_code_entries": _material_entries(entries),
+    }
+
+
+def fetch_github_repository_availability_snapshot(
+    repository_api_url: str,
+) -> dict[str, Any]:
+    try:
+        metadata = _json_get(repository_api_url, github=True)
+    except urllib.error.HTTPError as error:
+        if error.code != 404:
+            raise SourceWatchContractError(
+                f"github_repository_availability_unresolved_http_{error.code}"
+            ) from error
+        return {
+            "repository_api_http_status": 404,
+            "repository_available": False,
+            "default_branch": None,
+            "main_head_sha": None,
+            "root_entries": [],
+            "release_count": None,
+            "license_spdx_id": None,
+            "repository_size_kib": None,
+            "payload_or_code_entries": [],
+            "availability": "stated_repository_not_publicly_readable",
+        }
+
+    default_branch = str(metadata.get("default_branch") or "main")
+    base = repository_api_url.rstrip("/")
+    root = _json_get(f"{base}/contents?ref={default_branch}", github=True)
+    releases = _json_get(f"{base}/releases", github=True)
+    commit = _json_get(f"{base}/commits/{default_branch}", github=True)
+    if not isinstance(root, list) or not isinstance(releases, list):
+        raise SourceWatchContractError("unexpected_github_response")
+    license_info = metadata.get("license") or {}
+    entries = [
+        {
+            "name": str(entry.get("name")),
+            "type": str(entry.get("type")),
+            "size": int(entry.get("size", 0)),
+        }
+        for entry in root
+    ]
+    return {
+        "repository_api_http_status": 200,
+        "repository_available": True,
+        "default_branch": default_branch,
+        "main_head_sha": str(commit.get("sha", "")),
+        "root_entries": sorted(entries, key=lambda item: item["name"].lower()),
+        "release_count": len(releases),
+        "license_spdx_id": license_info.get("spdx_id"),
+        "repository_size_kib": int(metadata.get("size", 0)),
+        "payload_or_code_entries": _material_entries(entries),
+        "availability": "publicly_readable_repository",
     }
 
 
@@ -365,7 +500,55 @@ def evaluate_watch(
     watch: Mapping[str, Any], observed: Mapping[str, Any]
 ) -> dict[str, Any]:
     if watch.get("kind") == "github":
-        return evaluate_snapshot(watch, observed)
+        result = evaluate_snapshot(watch, observed)
+        if watch.get("review_request"):
+            result["next_action"] = (
+                watch["review_request"]
+                if result["fresh_source_reaudit_triggered"]
+                else "continue_watch_only"
+            )
+            result["manual_review_triggered"] = result[
+                "fresh_source_reaudit_triggered"
+            ]
+            result["review_request"] = watch["review_request"]
+        return result
+    if watch.get("kind") == "github_repository_availability":
+        frozen = watch["frozen_snapshot"]
+        signals: list[str] = []
+        if (
+            frozen.get("repository_available") is False
+            and observed.get("repository_available") is True
+        ):
+            signals.append("stated_repository_became_publicly_readable")
+        if observed.get("payload_or_code_entries"):
+            signals.append("repository_code_or_payload_appeared")
+        if observed.get("release_count") not in (None, 0):
+            signals.append("repository_release_appeared")
+        if observed.get("license_spdx_id"):
+            signals.append("explicit_repository_license_appeared")
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": False,
+            "direct_prior_baseline_feasibility_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") != "zenodo_challenge":
         raise SourceWatchContractError("unsupported_watch_kind")
 
@@ -401,7 +584,7 @@ def evaluate_watch(
     same_snapshot = all(observed.get(key) == frozen.get(key) for key in keys)
     if not same_snapshot and not signals:
         signals.append("other_frozen_snapshot_field_changed")
-    return {
+    result = {
         "watch_id": watch["watch_id"],
         "same_as_frozen_snapshot": same_snapshot,
         "material_change_signals": signals,
@@ -415,6 +598,13 @@ def evaluate_watch(
         "gpu_or_outer_test_authorized": False,
         "observed": dict(observed),
     }
+    if watch.get("review_request"):
+        result["next_action"] = (
+            watch["review_request"] if signals else "continue_watch_only"
+        )
+        result["manual_review_triggered"] = bool(signals)
+        result["review_request"] = watch["review_request"]
+    return result
 
 
 def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
@@ -428,6 +618,10 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         return fetch_zenodo_challenge_snapshot(
             source["zenodo_api_url"], source["challenge_page_url"]
         )
+    if watch.get("kind") == "github_repository_availability":
+        return fetch_github_repository_availability_snapshot(
+            source["repository_api_url"]
+        )
     raise SourceWatchContractError("unsupported_watch_kind")
 
 
@@ -440,6 +634,45 @@ def evaluate_config(
         evaluate_watch(watch, observations[watch["watch_id"]])
         for watch in config["watches"]
     ]
+    if config.get("schema_version") == "aurora.source_watch.v3":
+        source_triggered = any(
+            item["fresh_source_reaudit_triggered"] for item in results
+        )
+        direct_prior_triggered = any(
+            item.get("direct_prior_baseline_feasibility_reaudit_triggered", False)
+            for item in results
+        )
+        manual_triggered = source_triggered or direct_prior_triggered
+        requests = sorted(
+            {
+                item["review_request"]
+                for item in results
+                if item.get("manual_review_triggered", False)
+            }
+        )
+        return {
+            "schema_version": config["schema_version"],
+            "same_as_all_frozen_snapshots": all(
+                item["same_as_frozen_snapshot"] for item in results
+            ),
+            "manual_review_triggered": manual_triggered,
+            "fresh_source_reaudit_triggered": source_triggered,
+            "direct_prior_baseline_feasibility_reaudit_triggered": (
+                direct_prior_triggered
+            ),
+            "manual_review_requests": requests,
+            "next_action": (
+                "manual_review_signal_only"
+                if manual_triggered
+                else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "watches": results,
+        }
+
     triggered = any(item["fresh_source_reaudit_triggered"] for item in results)
     return {
         "schema_version": config["schema_version"],

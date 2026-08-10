@@ -1,5 +1,10 @@
 # AURORA 연구 방향
 
+> **Schema 7.7 monitoring boundary · 2026-08-11:** IAVS, TopBrain 2.0 and the
+> TRELLIS stated-code repository match their frozen public states. The
+> fail-closed watch can request manual re-audit only; it cannot activate the
+> surface-vector hypothesis, repair a score or open P0/model/GPU.
+
 > **Schema 7.6 direct-prior correction · 2026-08-11:** Generic 3D foundation
 > surface features are no longer a plausible novelty path. TRELLIS features
 > already improve an AnXplore mesh-GNN rollout on 101 sacs sharing one uniform

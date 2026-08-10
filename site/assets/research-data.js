@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · TRELLIS surface features added as direct prior · latest inverse-flow batch best 30.0/40 rejected · surface-vector retained only as inactive conditional hypothesis · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
+    status: "Target locked · fail-closed IAVS/TopBrain/TRELLIS source watch matches frozen state · TRELLIS surface features are direct prior · latest inverse-flow batch best 30.0/40 rejected · surface-vector remains inactive · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
     requirement: "a genuinely fresh problem or materially changed phase-resolved WSS source must pass source entry, method-free stability and failure-mechanism gates before architecture or GPU; already-used BenchAnXplore simulations, geometry-only pairs and wrapper/downloader/model renaming cannot reopen a closed contract",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -239,9 +239,9 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       year: "2026.08",
-      title: "IAVS remains an unreleased watch-only source",
-      copy: "The IAVS paper reports 641 3D MRA images, 587 aneurysm/parent-vessel annotations and CFD outcomes, but official main 2e40088… contains only a 90-byte README. Releases, explicit repository license and code/data payload are all zero. The paper already occupies two-stage localization/segmentation and CFD-applicability evaluation, so generic segmentation-to-CFD scoring is not residual novelty. A machine-readable monitor can request only a fresh source audit after a material release; it cannot download data, register P0, select a model or authorize GPU compute.",
-      status: "Watch-only · README 1 · release/license/payload 0 · no score/P0/model/GPU",
+      title: "IAVS, TopBrain and TRELLIS remain frozen watch-only sources",
+      copy: "The fail-closed v3 monitor separates task-source change from direct-prior code availability. IAVS remains README-only at 2e40088…; TopBrain remains a revision-4 design PDF with an under-construction page; the TRELLIS stated repository remains HTTP 404. IAVS/TopBrain changes can request only a fresh source audit, while a TRELLIS change can request only baseline-feasibility review. Twice-weekly/manual automation cannot update the snapshot, download data, accept terms, repair scores, register P0, select a model or authorize GPU compute.",
+      status: "Watch-only · all 3 snapshots match · manual review 0 · no score/P0/model/GPU",
       url: "../docs/source-watch.md"
     },
     {
@@ -804,6 +804,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "operations",
+      title: "Schema 7.7 makes public-source monitoring fail closed",
+      copy: "One immutable v3 contract now watches IAVS, TopBrain 2.0 and the TRELLIS paper's stated code repository. A live read-only refresh matched all snapshots: IAVS remains README-only at 2e40088…, TopBrain remains revision-4 design-PDF/under-construction, and TRELLIS remains HTTP 404. Twice-weekly/manual GitHub Actions fail on material change or observation error. IAVS/TopBrain can request only a fresh source audit; TRELLIS can request only a direct-prior baseline-feasibility review. Automatic snapshot update, data download, terms acceptance, score repair, P0/P1, model selection, GPU and outer test remain disabled.",
+      files: ["configs/source_watch_v3.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", ".github/workflows/source-watch.yml", ".github/workflows/quality.yml", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/source-watch.md", "docs/experiment-protocol.md", "README.md", "AGENTS.md", "site/index.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.6":
-        raise ProtocolError("The current research-state schema must be version 7.6.")
+    if protocol["schema_version"] != "7.7":
+        raise ProtocolError("The current research-state schema must be version 7.7.")
 
     project = protocol["project"]
     _require_keys(
@@ -1046,6 +1046,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "stated_code_url",
             "stated_code_url_http_status_on_2026_08_11",
             "github_exact_repository_search_count_on_2026_08_11",
+            "source_watch_config",
+            "source_watch_current_snapshot_matches",
+            "source_watch_next_action",
+            "source_watch_change_opens_only",
             "medical_payload_or_checkpoint_accessed",
             "server_queried",
             "pbs_job_created",
@@ -1084,6 +1088,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "https://github.com/clementhrv/trellis_for_intra"
         or foundation_prior["stated_code_url_http_status_on_2026_08_11"] != 404
         or foundation_prior["github_exact_repository_search_count_on_2026_08_11"] != 0
+        or foundation_prior["source_watch_config"]
+        != "configs/source_watch_v3.json"
+        or foundation_prior["source_watch_current_snapshot_matches"] is not True
+        or foundation_prior["source_watch_next_action"] != "continue_watch_only"
+        or foundation_prior["source_watch_change_opens_only"]
+        != "direct_prior_baseline_feasibility_reaudit_only"
         or any(
             foundation_prior[key] is not False
             for key in (
@@ -6019,7 +6029,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "patient_image_mask_clinical_split_or_test_payload_accessed"
         ]
         is not False
-        or topbrain2_audit["source_watch_config"] != "configs/source_watch_v2.json"
+        or topbrain2_audit["source_watch_config"] != "configs/source_watch_v3.json"
         or topbrain2_audit["source_watch_current_snapshot_matches"] is not True
         or set(topbrain2_audit["direct_prior_threats"])
         != expected_topbrain2_priors

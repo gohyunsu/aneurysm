@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 fail-closed source-watch override · schema 7.7:**
+> `configs/source_watch_v3.json`은 IAVS, TopBrain 2.0과 TRELLIS stated-code
+> repository를 분리해 감시한다. 2026-08-11 live read-only refresh에서 세
+> source 모두 frozen snapshot과 같았다: IAVS는 exact `2e40088d…`의
+> README-only 상태, TopBrain은 revision-4 design PDF/under-construction 상태,
+> TRELLIS repository API는 HTTP 404다. 따라서 manual review request, source
+> re-audit, direct-prior baseline review, payload, P0/P1, method, architecture,
+> GPU와 outer test는 모두 0이다. Scheduled/manual GitHub Action은 material
+> change나 관측 실패 시 fail closed하며 repository state를 쓰거나 frozen
+> snapshot을 자동 갱신하지 않는다. IAVS·TopBrain change는 fresh source
+> re-audit만, TRELLIS code availability change는 direct-prior baseline
+> feasibility re-audit만 요청한다. 어느 경로도 score repair, download,
+> terms acceptance, P0 또는 compute를 열지 않는다. 이 public-metadata
+> monitor는 scientific server execution이 아니다. AURORA는 future gate 뒤
+> `introai9` PBS만 사용하고 `junjinyong`에는 절대 접속·조회·제출·모니터링하지
+> 않는다.
+
 > **2026-08-11 schema 7.6 deployment verification overlay:** Exact content
 > `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality
 > `31411063368` and Pages `31411180740`. Live Overview, Learn and

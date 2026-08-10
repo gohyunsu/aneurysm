@@ -1,0 +1,132 @@
+{
+  "schema_version": "aurora.source_watch.v3",
+  "status": "watch_only",
+  "observed_on": "2026-08-11",
+  "watches": [
+    {
+      "watch_id": "iavs_public_release_v1",
+      "kind": "github",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "repository": "AbsoluteResonance/IAVS",
+        "repository_url": "https://github.com/AbsoluteResonance/IAVS",
+        "paper_url": "https://arxiv.org/abs/2512.01319",
+        "default_branch": "main"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "2e40088d9eaa671c592929a154b7b2cf99f9320a",
+        "root_entries": [
+          {
+            "name": "README.md",
+            "type": "file",
+            "size": 90
+          }
+        ],
+        "release_count": 0,
+        "license_spdx_id": null,
+        "repository_size_kib": 2,
+        "payload_or_code_entries": [],
+        "availability": "unreleased_readme_only"
+      }
+    },
+    {
+      "watch_id": "topbrain2_material_release_v1",
+      "kind": "zenodo_challenge",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "zenodo_record_id": 19707577,
+        "zenodo_api_url": "https://zenodo.org/api/records/19707577",
+        "record_url": "https://zenodo.org/records/19707577",
+        "challenge_page_url": "https://topbrain2026.grand-challenge.org/topbrain2026/"
+      },
+      "frozen_snapshot": {
+        "zenodo_record_id": 19707577,
+        "zenodo_modified": "2026-04-23T11:14:24.475500+00:00",
+        "zenodo_revision": 4,
+        "zenodo_status": "published",
+        "zenodo_access_right": "open",
+        "zenodo_license_id": "cc-by-4.0",
+        "zenodo_files": [
+          {
+            "key": "339-TopBrain_Segmentation_Challenge_for_Whole_Brain_Vessel_Anatomy_2026-04-22T16-37-16.pdf",
+            "size": 139840,
+            "checksum": "md5:da6c835d0336db81a94b78e7601f47b8"
+          }
+        ],
+        "payload_or_manifest_files": [],
+        "challenge_under_construction": true,
+        "challenge_join_registration_available": true,
+        "challenge_material_navigation_entries": []
+      }
+    },
+    {
+      "watch_id": "trellis_stated_code_availability_v1",
+      "kind": "github_repository_availability",
+      "review_request": "direct_prior_baseline_feasibility_reaudit_only",
+      "source": {
+        "repository": "clementhrv/trellis_for_intra",
+        "repository_url": "https://github.com/clementhrv/trellis_for_intra",
+        "repository_api_url": "https://api.github.com/repos/clementhrv/trellis_for_intra",
+        "paper_url": "https://arxiv.org/abs/2509.03095",
+        "publication_doi": "10.1016/j.neuri.2026.100259"
+      },
+      "frozen_snapshot": {
+        "repository_api_http_status": 404,
+        "repository_available": false,
+        "default_branch": null,
+        "main_head_sha": null,
+        "root_entries": [],
+        "release_count": null,
+        "license_spdx_id": null,
+        "repository_size_kib": null,
+        "payload_or_code_entries": [],
+        "availability": "stated_repository_not_publicly_readable"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "IAVS non-README payload, release or explicit repository license appears",
+      "TopBrain2 Zenodo revision, file inventory or license changes",
+      "TopBrain2 data, evaluation, rules or submission navigation appears",
+      "TopBrain2 under-construction marker is removed",
+      "TRELLIS stated repository becomes publicly readable or exposes code, a release or a license"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": [
+      "fresh_source_reaudit_only",
+      "direct_prior_baseline_feasibility_reaudit_only"
+    ]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

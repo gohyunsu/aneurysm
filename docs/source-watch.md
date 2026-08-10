@@ -1,11 +1,24 @@
-# Public source watch · IAVS + TopBrain 2.0
+# Public source watch · IAVS + TopBrain 2.0 + TRELLIS code
+
+> **2026-08-11 v3 decision:** One fail-closed read-only contract now separates
+> two different kinds of evidence change. IAVS/TopBrain material changes can
+> request only a fresh problem/source audit. A TRELLIS stated-code change can
+> request only a direct-prior baseline-feasibility review. Neither route is
+> asset access, score repair, P0 registration, method selection or compute
+> authorization.
+
+> **2026-08-11 live v3 refresh:**
+> `same_as_all_frozen_snapshots=true`, `manual_review_triggered=false` and exit
+> code 0. IAVS remains exact `2e40088d…` and README-only; TopBrain 2.0 remains
+> Zenodo revision 4 with one design PDF and an under-construction challenge;
+> the TRELLIS stated repository API remains HTTP 404. No server was queried.
 
 > **2026-08-11 direct-prior note:** A separate TRELLIS surface-feature paper
 > review changed the future baseline boundary, not the watched asset state. Its
 > stated code repository currently returns 404 and supplies no material E0
 > source. See [`trellis-surface-feature-direct-prior-delta-2026-08-11.md`](trellis-surface-feature-direct-prior-delta-2026-08-11.md).
 
-> **2026-08-11 refresh:** the live watch returned
+> **Historical v2 refresh:** the 2026-08-11 two-source watch returned
 > `same_as_all_frozen_snapshots=true`. IAVS remains exact `2e40088d…`,
 > README-only, with no release, license, code or payload. TopBrain 2.0 remains a
 > design-PDF/under-construction source with no material task route. This creates
@@ -13,8 +26,8 @@
 > inverse-flow audit was triggered by a new published direct prior, not by a
 > watched asset change. No server was queried.
 
-상태: **watch-only · 두 official source 모두 frozen snapshot과 동일 · no
-medical payload/source-score repair/P0/model/GPU**
+상태: **watch-only · 세 official public states 모두 frozen snapshot과 동일 ·
+manual review 0 · no medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가
 
@@ -52,12 +65,22 @@ page는 `Under construction`이고 Join registration은 열려 있지만 Data,
 Evaluation, Rules, Submission task route는 없다. 따라서 29/40 기각과 payload,
 P0, model, GPU 0 경계는 변하지 않는다.
 
+TRELLIS는 task asset이 아니라 **direct-prior baseline feasibility** 때문에
+감시한다. 논문에 적힌
+[`clementhrv/trellis_for_intra`](https://github.com/clementhrv/trellis_for_intra)는
+2026-08-11 repository API에서 HTTP 404다. 향후 repository가 공개되더라도 그
+사실은 phase-resolved WSS asset, E0 pass 또는 proposal 선택을 뜻하지 않는다.
+코드와 license를 읽어 faithful TRELLIS-style control을 재현할 수 있는지 별도로
+검토할 이유만 생긴다. 논문의 feature encoder, rendering과 concatenation은 이미
+direct prior이므로 repository 공개를 novelty로 바꾸지 않는다.
+
 ## 기계적 감시 계약
 
-[`configs/source_watch_v2.json`](../configs/source_watch_v2.json)은 IAVS의 현재
-commit, root entry, release count와 license에 더해 TopBrain 2.0의 Zenodo
-revision, design-object license, exact file inventory와 challenge navigation을
-고정한다. 기존 v1은 IAVS-only historical contract로 보존한다.
+[`configs/source_watch_v3.json`](../configs/source_watch_v3.json)은 IAVS의 현재
+commit, root entry, release count와 license, TopBrain 2.0의 Zenodo revision,
+design-object license, exact file inventory와 challenge navigation, TRELLIS의
+stated repository HTTP 404 상태를 고정한다. 기존 v1·v2는 historical contract로
+보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
 공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
 
@@ -68,25 +91,36 @@ revision, design-object license, exact file inventory와 challenge navigation을
 5. TopBrain 2.0의 Zenodo revision/file/license가 바뀜
 6. challenge의 under-construction 표지가 사라지거나 Data/Evaluation/Rules/
    Submission navigation이 생김
+7. TRELLIS stated repository가 공개되거나 code/release/license가 나타남
 
-변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 자동 download,
-약관 수락, 점수 재가중, P0 등록, model/architecture 선택, GPU와 outer test는
-모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
+1--6의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
+**direct-prior baseline-feasibility review 요청**만 만든다. 자동 download, 약관
+수락, 점수 재가중, frozen snapshot 갱신, P0 등록, model/architecture 선택,
+GPU와 outer test는 모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
 machine-auditable manifest, independent-unit semantics와 새 direct-prior audit을
 갖춘 후보가 frozen 32/40 source gate를 통과한 뒤에만 별도 version으로 등록할
 수 있다.
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v2.json \
+  --config configs/source_watch_v3.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v2.json \
-  --fetch
+  --config configs/source_watch_v3.json \
+  --fetch --fail-on-change
 ```
 
-두 번째 명령은 source state를 출력할 뿐 파일을 다운로드하거나 실행 권한을
-바꾸지 않는다. Scientific CPU/PBS와 향후 gate-authorized GPU는 `introai9`에서만
-수행한다. `junjinyong`은 접속·조회·제출·모니터링하지 않고 login node GPU
-명령도 실행하지 않는다.
+두 번째 명령은 source state를 stdout에 출력한다. Frozen state와 같으면 0,
+material change면 근거를 출력한 뒤 3을 반환한다. HTTP rate limit, transport,
+schema failure는 change signal로 바꾸지 않고 command 자체를 실패시킨다.
+
+[`source-watch.yml`](../.github/workflows/source-watch.yml)은 월·목요일 02:17 UTC와
+manual dispatch에 같은 명령을 실행한다. Workflow permission은 `contents: read`뿐이고
+snapshot commit, issue/PR 생성, artifact download 또는 server login을 수행하지
+않는다. 실패는 사람이 evidence version을 명시적으로 열어야 한다는 알림이지,
+자동 연구 상태 전이가 아니다.
+
+Scientific CPU/PBS와 향후 gate-authorized GPU는 `introai9`에서만 수행한다.
+이 public metadata watch는 `introai9`도 조회하지 않는다. `junjinyong`은 접속·조회·
+제출·모니터링하지 않고 login node GPU 명령도 실행하지 않는다.

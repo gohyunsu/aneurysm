@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import copy
+import contextlib
+import io
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
+from scripts import audit_source_watch
 from aurora.source_watch import (
     SourceWatchContractError,
     evaluate_config,
@@ -17,6 +21,8 @@ from aurora.source_watch import (
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "source_watch_v1.json"
 CONFIG_V2 = ROOT / "configs" / "source_watch_v2.json"
+CONFIG_V3 = ROOT / "configs" / "source_watch_v3.json"
+WORKFLOW_V3 = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
 class SourceWatchContractTests(unittest.TestCase):
@@ -146,6 +152,173 @@ class SourceWatchContractTests(unittest.TestCase):
             candidate.write_text(json.dumps(payload), encoding="utf-8")
             with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
                 load_config(candidate)
+
+    def test_v3_frozen_snapshots_require_no_manual_review(self) -> None:
+        config = load_config(CONFIG_V3)
+        self.assertEqual(
+            [watch["watch_id"] for watch in config["watches"]],
+            [
+                "iavs_public_release_v1",
+                "topbrain2_material_release_v1",
+                "trellis_stated_code_availability_v1",
+            ],
+        )
+        trellis = config["watches"][2]
+        self.assertEqual(trellis["frozen_snapshot"]["repository_api_http_status"], 404)
+        self.assertFalse(trellis["frozen_snapshot"]["repository_available"])
+        self.assertEqual(
+            trellis["review_request"],
+            "direct_prior_baseline_feasibility_reaudit_only",
+        )
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertEqual(result["manual_review_requests"], [])
+        self.assertEqual(result["next_action"], "continue_watch_only")
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_trellis_code_appearance_opens_only_baseline_review(self) -> None:
+        config = load_config(CONFIG_V3)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observations["trellis_stated_code_availability_v1"] = {
+            "repository_api_http_status": 200,
+            "repository_available": True,
+            "default_branch": "main",
+            "main_head_sha": "f" * 40,
+            "root_entries": [
+                {"name": "src", "type": "dir", "size": 0},
+                {"name": "LICENSE", "type": "file", "size": 11357},
+            ],
+            "release_count": 1,
+            "license_spdx_id": "Apache-2.0",
+            "repository_size_kib": 512,
+            "payload_or_code_entries": ["src"],
+            "availability": "publicly_readable_repository",
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertFalse(result["fresh_source_reaudit_triggered"])
+        self.assertTrue(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertEqual(
+            result["manual_review_requests"],
+            ["direct_prior_baseline_feasibility_reaudit_only"],
+        )
+        self.assertEqual(result["next_action"], "manual_review_signal_only")
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v3_source_and_direct_prior_changes_remain_manual_only(self) -> None:
+        config = load_config(CONFIG_V3)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observations["iavs_public_release_v1"]["main_head_sha"] = "e" * 40
+        observations["iavs_public_release_v1"]["root_entries"].append(
+            {"name": "code", "type": "dir", "size": 0}
+        )
+        observations["iavs_public_release_v1"]["payload_or_code_entries"] = [
+            "code"
+        ]
+        observations["trellis_stated_code_availability_v1"][
+            "repository_api_http_status"
+        ] = 200
+        observations["trellis_stated_code_availability_v1"][
+            "repository_available"
+        ] = True
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertTrue(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertEqual(
+            result["manual_review_requests"],
+            [
+                "direct_prior_baseline_feasibility_reaudit_only",
+                "fresh_source_reaudit_only",
+            ],
+        )
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v3_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V3.read_text(encoding="utf-8"))
+        payload["watches"][2]["frozen_snapshot"]["repository_available"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            candidate = Path(directory) / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(SourceWatchContractError, "trellis"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V3.read_text(encoding="utf-8"))
+        payload["authorization"]["architecture_selection"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            candidate = Path(directory) / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v3_workflow_is_read_only_scheduled_and_fail_closed(self) -> None:
+        workflow = WORKFLOW_V3.read_text(encoding="utf-8")
+        self.assertIn('cron: "17 2 * * 1,4"', workflow)
+        self.assertIn("workflow_dispatch:", workflow)
+        self.assertIn("permissions:\n  contents: read", workflow)
+        self.assertIn("configs/source_watch_v3.json", workflow)
+        self.assertIn("--fetch --fail-on-change", workflow)
+        self.assertNotIn("contents: write", workflow)
+        self.assertNotIn("introai9", workflow)
+        self.assertNotIn("junjinyong", workflow)
+        self.assertNotIn("ssh ", workflow)
+
+    def test_fail_on_change_cli_returns_three_without_authorizing_compute(self) -> None:
+        config = load_config(CONFIG_V3)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        trellis = observations["trellis_stated_code_availability_v1"]
+        trellis["repository_api_http_status"] = 200
+        trellis["repository_available"] = True
+
+        def fake_fetch(watch: dict[str, object]) -> dict[str, object]:
+            return observations[str(watch["watch_id"])]
+
+        output = io.StringIO()
+        with mock.patch.object(
+            audit_source_watch, "fetch_watch_snapshot", side_effect=fake_fetch
+        ), contextlib.redirect_stdout(output):
+            exit_code = audit_source_watch.main(
+                [
+                    "--config",
+                    str(CONFIG_V3),
+                    "--fetch",
+                    "--fail-on-change",
+                ]
+            )
+        result = json.loads(output.getvalue())
+        self.assertEqual(exit_code, 3)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
 
 
 if __name__ == "__main__":

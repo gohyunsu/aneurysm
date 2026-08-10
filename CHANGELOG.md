@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.7 adds a fail-closed three-source watch
+
+- Added `source_watch_v3.json` for IAVS, TopBrain 2.0 and the TRELLIS stated-code
+  repository while preserving v1/v2 as historical contracts.
+- The live read-only refresh matches all three frozen snapshots. TRELLIS remains
+  HTTP 404; no manual review, source re-audit, baseline-feasibility re-audit,
+  payload, P0/P1, model, GPU or outer test is opened.
+- Separated change semantics: IAVS/TopBrain can request only a fresh source
+  audit, while TRELLIS can request only a direct-prior baseline-feasibility
+  review. Neither path can mutate the snapshot or scientific authorization.
+- Added a scheduled/manual read-only GitHub Action. Material change exits 3
+  after printing evidence; network/contract failure also fails the workflow
+  rather than being misreported as a scientific change.
+- Added mutation tests for frozen-state equality, independent review routing and
+  the no-download/no-P0/no-architecture/no-GPU boundary. No scientific server
+  was queried; `junjinyong` remains prohibited.
+
 ## 2026-08-11 · Schema 7.6 deployment verified
 
 - Exact content `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality

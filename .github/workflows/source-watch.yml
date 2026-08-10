@@ -1,0 +1,33 @@
+name: Public source watch
+
+on:
+  schedule:
+    - cron: "17 2 * * 1,4"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aurora-public-source-watch
+  cancel-in-progress: false
+
+jobs:
+  frozen-metadata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate fail-closed watch contract
+        run: >-
+          PYTHONPATH=src python scripts/audit_source_watch.py
+          --config configs/source_watch_v3.json --validate-only
+      - name: Compare official public metadata with frozen snapshots
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: >-
+          PYTHONPATH=src python scripts/audit_source_watch.py
+          --config configs/source_watch_v3.json --fetch --fail-on-change

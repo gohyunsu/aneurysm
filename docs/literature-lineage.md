@@ -1,5 +1,9 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.7 lineage watch · 2026-08-11:** The TRELLIS stated repository is
+> still HTTP 404 under the live frozen watch. Future availability would improve
+> baseline auditability, not create novelty or phase-resolved WSS evidence.
+
 > **Schema 7.6 surface-feature lineage boundary · 2026-08-11:**
 > [TRELLIS-enhanced aneurysm analysis](https://doi.org/10.1016/j.neuri.2026.100259)
 > transfers 1,024-dimensional features from a 500,000-object non-medical 3D

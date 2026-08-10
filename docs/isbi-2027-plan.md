@@ -1,5 +1,9 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.7 submission boundary · 2026-08-11:** A scheduled source-watch
+> failure is a manual review request, not evidence or a paper-state transition.
+> Current active identity, contribution, method, result table and GPU remain 0.
+
 > **Schema 7.6 submission boundary · 2026-08-11:** Foundation-model surface
 > features cannot be a numbered contribution: TRELLIS has already augmented
 > aneurysm point/mesh models and reduced AnXplore rollout error. The paper does

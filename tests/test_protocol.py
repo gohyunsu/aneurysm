@@ -307,6 +307,13 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(prior["common_uniform_parent_vessel"])
         self.assertEqual(prior["feature_dimension"], 1024)
         self.assertEqual(prior["stated_code_url_http_status_on_2026_08_11"], 404)
+        self.assertEqual(prior["source_watch_config"], "configs/source_watch_v3.json")
+        self.assertTrue(prior["source_watch_current_snapshot_matches"])
+        self.assertEqual(prior["source_watch_next_action"], "continue_watch_only")
+        self.assertEqual(
+            prior["source_watch_change_opens_only"],
+            "direct_prior_baseline_feasibility_reaudit_only",
+        )
         self.assertFalse(
             prior["surface_wss_critical_point_or_worldline_endpoint_reported"]
         )
@@ -690,7 +697,7 @@ class ProtocolTests(unittest.TestCase):
             audit["grand_challenge_submission_status"],
             "join_registration_available_but_no_executable_task_submission_contract",
         )
-        self.assertEqual(audit["source_watch_config"], "configs/source_watch_v2.json")
+        self.assertEqual(audit["source_watch_config"], "configs/source_watch_v3.json")
         self.assertTrue(audit["source_watch_current_snapshot_matches"])
         self.assertFalse(audit["versioned_topbrain2_dataset_release_verified"])
         self.assertFalse(

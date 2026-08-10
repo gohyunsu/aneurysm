@@ -1,5 +1,10 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.7 asset-watch boundary · 2026-08-11:** IAVS and TopBrain 2.0 remain
+> non-material for training, while TRELLIS remains an unavailable stated code
+> repository rather than a dataset. The watcher reads public metadata only and
+> cannot download, accept terms, stage payload or authorize compute.
+
 > **Schema 7.5 inverse-flow role · 2026-08-11:** BenchAnXplore remains a
 > controlled transient-velocity benchmark, not a fresh WSS/pressure posterior
 > confirmation cohort. The current decoded compact contract is coordinates,

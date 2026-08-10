@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.7 public-metadata watch · 2026-08-11:** The v3 live refresh read
+> only official public GitHub/Zenodo/Grand Challenge metadata and matched all
+> frozen snapshots. It did not query `introai9`, access `junjinyong`, submit PBS
+> or execute GPU commands. Scheduled/manual GitHub Actions remain read-only and
+> cannot authorize scientific execution.
+
 > **Schema 7.6 deployment verification · 2026-08-11:** Exact content
 > `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality
 > `31411063368` and Pages `31411180740`; live pages expose TRELLIS direct-prior,

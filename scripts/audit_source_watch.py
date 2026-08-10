@@ -20,7 +20,12 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument(
         "--watch-id",
-        help="Fetch one v2 watch while retaining the same no-authorization boundary.",
+        help="Fetch one multi-source watch while retaining the no-authorization boundary.",
+    )
+    parser.add_argument(
+        "--fail-on-change",
+        action="store_true",
+        help="With --fetch, exit 3 after printing if a frozen source changed.",
     )
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--validate-only", action="store_true")
@@ -30,6 +35,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
+    if args.fail_on_change and not args.fetch:
+        raise SystemExit("--fail-on-change requires --fetch")
     config = load_config(args.config)
     if args.validate_only:
         watch_ids = (
@@ -72,6 +79,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         else:
             result = evaluate_config(config, observations)
     print(json.dumps(result, indent=2, sort_keys=True))
+    if args.fail_on_change and result.get(
+        "manual_review_triggered",
+        result.get("fresh_source_reaudit_triggered", False),
+    ):
+        return 3
     return 0
 
 

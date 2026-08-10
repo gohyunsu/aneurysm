@@ -1,5 +1,10 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.7 monitoring boundary · 2026-08-11:** Source-watch automation is
+> not an architecture-selection mechanism. Even if TRELLIS code appears, only
+> a baseline-feasibility re-audit opens; E0–E2 and all no-model/no-GPU gates
+> remain mandatory.
+
 > **Schema 7.6 no-model boundary · 2026-08-11:** Do not select TRELLIS, another
 > 3D foundation encoder or a wider mesh-GNN input as the AURORA architecture.
 > TRELLIS feature augmentation is now an explicit future baseline family: it

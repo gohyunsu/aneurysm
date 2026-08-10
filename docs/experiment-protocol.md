@@ -342,27 +342,32 @@ assisted-manual label과 여러 algorithm output을 섞는다. CTA phantom의 12
 없다. 향후 compute는 `introai9` PBS만 사용하고 `junjinyong`은 접속·조회·제출·
 모니터링하지 않는다.
 
-## S-WATCH · IAVS public-release monitor · no experiment authorization
+## S-WATCH · three-source fail-closed monitor · no experiment authorization
 
 2026-08-10 official `AbsoluteResonance/IAVS` `main` exact `2e40088…`은 90-byte
 README 한 파일뿐이고 release, explicit repository license와 payload/code가 0이다.
-[`configs/source_watch_v2.json`](../configs/source_watch_v2.json)은 이 snapshot과
-no-download/no-P0/no-model/no-GPU 경계를 고정한다. Read-only monitor는 main
-commit+non-README entry, versioned release와 license 변화를 자동 감지한다.
-Official dataset record는 별도 1차 출처의 manual review로만 붙인다. 변화가
-있어도 허용되는 다음 단계는 별도 **fresh source
-audit**뿐이며 source score 32, 명시적 license/사용자-confirmed terms,
+TopBrain 2.0은 revision-4 design PDF/under-construction이고 TRELLIS stated code
+repository는 HTTP 404다.
+[`configs/source_watch_v3.json`](../configs/source_watch_v3.json)은 세 snapshot과
+no-download/no-P0/no-model/no-GPU 경계를 고정한다. Read-only monitor는 IAVS
+commit+non-README entry/release/license, TopBrain Zenodo/challenge navigation,
+TRELLIS repository availability를 감지한다. Official dataset record는 별도 1차
+출처의 manual review로만 붙인다. IAVS/TopBrain 변화가 있어도 허용되는 다음
+단계는 **fresh source audit**, TRELLIS 변화는 **direct-prior baseline-feasibility
+review**뿐이며 source score 32, 명시적 license/사용자-confirmed terms,
 machine-auditable manifest와 independent-unit semantics를 통과하기 전에는
 payload P0를 등록하지 않는다. P0/P1 전에는 architecture와 GPU가 없다.
 
 ```bash
 python scripts/audit_source_watch.py \
-  --config configs/source_watch_v2.json \
-  --validate-only
+  --config configs/source_watch_v3.json \
+  --fetch --fail-on-change
 ```
 
-`--fetch`도 GitHub metadata만 읽고 결과를 stdout으로 출력한다. 이 절은
-실험·development repair round나 scientific evidence가 아니다.
+동일 명령은 scheduled/manual GitHub Action에서도 실행된다. Frozen state면 0,
+material change면 3, 관측 실패면 nonzero다. 어느 경우도 snapshot을 쓰거나
+scientific authorization을 바꾸지 않는다. 이 절은 실험·development repair
+round나 scientific evidence가 아니다.
 
 ## S-CLARIFY · INSTED source semantics · no score repair
 
