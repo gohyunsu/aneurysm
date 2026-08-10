@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 7.6 deployment verification overlay:** Exact content
+> `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality
+> `31411063368` and Pages `31411180740`. Live Overview, Learn and
+> `docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md` expose the
+> same direct-prior/no-authority boundary. This verifies publication only; it
+> does not change a score, source lead, closed P0, method, architecture, server
+> query, PBS/GPU, outer test or claim. No AURORA server was queried. Any later
+> gate-authorized execution is `introai9` PBS only; never access or monitor
+> `junjinyong`.
+
 > **2026-08-11 TRELLIS surface-feature direct-prior override · schema 7.6:**
 > TRELLIS-Enhanced Surface Features (`arXiv:2509.03095`, DOI
 > `10.1016/j.neuri.2026.100259`) already augments aneurysm point/mesh models

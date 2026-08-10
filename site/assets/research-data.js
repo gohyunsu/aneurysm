@@ -806,6 +806,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 7.6 direct-prior boundary is live and verified",
+      copy: "Exact content aec4b76… passed Quality 31411063368 and Pages 31411180740. Live Overview, Learn and the detailed delta expose TRELLIS as a future matched direct control, the stated-code-404 boundary and active lead/P0/P1/method/architecture/GPU 0. This publication record changes no score, candidate, server state, experiment or claim.",
+      files: ["README.md", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Schema 7.6 adds TRELLIS surface features as a direct control",
       copy: "The inspected paper already augments aneurysm point/mesh models with 1,024-dimensional features from a 500,000-object non-medical 3D encoder. Its AnXplore experiment uses 101 sacs on one uniform parent vessel and reports rollout RMSE 7.57→6.09 and 4.03→3.55, but no transient surface-WSS critical-point/worldline endpoint or independent sealed GNN split. The stated code URL currently returns 404. This narrows future baselines without changing a score, source lead, closed P0, method, architecture, server query, PBS/GPU, outer test or claim.",

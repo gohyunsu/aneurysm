@@ -1,5 +1,12 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 7.6 deployment verification:** Exact content
+> `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality run
+> `31411063368` and Pages run `31411180740`. The live Overview, Learn page and
+> detailed delta expose TRELLIS as a direct control, the current code-404
+> boundary and active lead/method/architecture/GPU 0. This deployment record
+> changes no score, candidate, P0, model or compute authorization.
+
 > **2026-08-11 surface-feature direct-prior correction · schema 7.6:** TRELLIS-
 > enhanced aneurysm analysis already adds 1,024-dimensional features from a
 > non-medical 3D foundation model to PointNet/PointNet++ and an AnXplore mesh

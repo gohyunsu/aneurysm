@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.6 deployment verification · 2026-08-11:** Exact content
+> `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality
+> `31411063368` and Pages `31411180740`; live pages expose TRELLIS direct-prior,
+> stated-code-404 and active lead/P0/P1/method/architecture/GPU 0. No SSH,
+> scheduler query, transfer, PBS/GPU job or login-node GPU command occurred.
+> Future eligible execution remains `introai9` PBS only and `junjinyong`
+> remains prohibited.
+
 > **Schema 7.2 final execution · 2026-08-10:** Exact source `8a06de2…` ran
 > once on `introai9` PBS as CPU-only job `115645.ECE-util1`. Final evidence is
 > state `E`, exit 2, walltime 00:27:02, CPU 00:00:06, memory 625,780 kB, CPU 4,

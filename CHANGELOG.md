@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.6 deployment verified
+
+- Exact content `aec4b76a1646a4e3508640a1a0ecb7ac146979cc` passed Quality
+  run `31411063368` and Pages run `31411180740`.
+- Live Overview, Learn and the detailed delta were checked for TRELLIS
+  direct-prior, current code-404 and zero candidate/model/GPU boundaries.
+- This provenance-only record creates no server query, job, scientific result,
+  score repair, P0, method, architecture, outer test or paper claim.
+
 ## 2026-08-11 · Schema 7.6 adds the TRELLIS surface-feature direct prior
 
 - Verified the paper/source contract for arXiv:2509.03095 and DOI
