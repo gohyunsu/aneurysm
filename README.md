@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 P0-v2a outcome:** Exact public source `690035ae…` was checked
+> out cleanly on `introai9` and submitted once as CPU/PBS job
+> `115467.ECE-util1`. It was observed in state `E` with exit 1 after 8 seconds,
+> CPU time 0 and 16,824 kB memory. Only the 319-byte execution-incomplete status
+> materialized; aggregate result and raw PBS output did not. Therefore the
+> transport gate, its HEAD/range operation counts and every scientific check are
+> unevaluated, and the low-level cause is unresolved. The sole repair round is
+> consumed: no rerun, P0-v2b, P1, method, architecture, GPU, outer test or paper
+> claim is authorized. [Execution record](results/aneug_cycle_transport_p0_v2a_execution_20260810.json).
+> Active shortlist and selected primary return to 0. `junjinyong` was not used.
+
 > **2026-08-10 AneuG-Flow bounded transport re-entry:** The historical
 > cycle-functional P0-v1 remains closed and is not relabelled. Its 33/40 source
 > score is reused only to preregister a distinct one-round P0-v2a transport
@@ -212,9 +223,9 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active source shortlist는 **조건부 1개**, selected primary problem은
-**0개**입니다. 이 shortlist는 AneuG-Flow의 4 MiB transport P0-v2a만 허용하며
-scientific P0, model 또는 GPU 권한이 아닙니다.
+현재 active source shortlist와 selected primary problem은 모두 **0개**입니다.
+AneuG-Flow P0-v2a의 one-round execution-incomplete 결과는 transport 또는
+scientific failure로 바꾸지 않고 닫힌 이력으로 보존합니다.
 Aneumo의 독립 단위를 deformation이 아닌 427개 base family로 봐야 한다는
 source-level finding은 보존하지만, exact CPU P0가 첫 small source 전에
 execution-incomplete로 끝나 scientific task gate를 평가하지 못했습니다. Split을

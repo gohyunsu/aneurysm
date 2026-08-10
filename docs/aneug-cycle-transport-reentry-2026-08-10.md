@@ -1,5 +1,16 @@
 # AneuG-Flow cycle-functional P0-v2a transport re-entry
 
+> **Outcome · closed:** Exact source `690035ae…` was submitted once on
+> `introai9` as CPU/PBS job `115467.ECE-util1`. It reached scheduler state E
+> with exit 1 after 8 seconds, but produced only a 319-byte
+> execution-incomplete status. No aggregate result or raw PBS output
+> materialized. Consequently the number of completed HEAD/range operations,
+> verified bytes and transport/scientific gates are unevaluated; low-level cause
+> is unresolved. The sole repair round is consumed. P0-v2a closes without
+> rerun, P0-v2b, P1, method, architecture, GPU, outer test or paper claim.
+> See `results/aneug_cycle_transport_p0_v2a_execution_20260810.json`.
+
+
 **Prospective status · 2026-08-10 KST:** the historical P0-v1 remains closed as
 execution-incomplete with no scientific verdict. A separate, one-round,
 CPU-only transport preflight is preregistered for `introai9` PBS. It reads two

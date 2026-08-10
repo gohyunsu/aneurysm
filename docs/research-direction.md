@@ -1,5 +1,11 @@
 # AURORA 연구 방향
 
+> **Current outcome · 2026-08-10:** The single AneuG-Flow P0-v2a job ended
+> execution-incomplete before an aggregate result. Transport and scientific
+> gates are unevaluated, not failed. The one repair round is exhausted; active
+> shortlist, primary, method, architecture, GPU and paper identity return to 0.
+> Next work must be a fresh problem-level source/asset audit.
+
 > **Current schema 6.2 boundary · 2026-08-10:** AneuG-Flow's historical 33/40
 > cycle-functional source candidate has one prospective, transport-only
 > P0-v2a re-entry. This is not a GNN/operator selection. P0-v1 remains closed;

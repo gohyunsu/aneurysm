@@ -2,16 +2,16 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · AneuG-Flow source 33/40 · one conditional transport P0-v2a re-entry · selected primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "one bounded 4 MiB transport preflight → separate reader/scientific P0 and task-adequacy gates before any method; preserve closed P0-v1",
+    status: "Target locked · AneuG-Flow P0-v2a execution-incomplete/no verdict and closed · active shortlist/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "fresh problem-level source/asset audit; do not rerun P0-v2a, open a second transport repair, or relabel closed v1/v2a",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
       title: "A source-admitted physical identity still has to cross an auditable transport boundary",
-      copy: "One transient WSS vector field deterministically defines TAWSS, OSI and RRT. The source candidate scored 33/40, but historical P0-v1 exited before any processed payload or scientific check and remains closed. Distinct P0-v2a tests a single transport hypothesis with two HEAD requests and four frozen 1 MiB ranges. It reads 4 MiB total, retry 0, and cannot open a reader, case ID, model, GPU or outer test. RHSIA Graph Transformer/GHD/steady augmentation and generic functional heads, losses, temporal decoders and E(3) GNNs remain direct priors.",
-      status: "33/40 source · P0-v2a preregistered · scientific verdict/primary/model/GPU 0",
+      copy: "One transient WSS vector field deterministically defines TAWSS, OSI and RRT. The source candidate scored 33/40, but historical P0-v1 exited before payload. Distinct P0-v2a ran once on exact public source 690035ae… as introai9 CPU/PBS job 115467 and ended exit 1 after eight seconds. Only an execution-incomplete status materialized; result and raw log did not. HEAD/range counts, verified bytes, transport and scientific gates are unevaluated. The one repair round is consumed. RHSIA Graph Transformer/GHD/steady augmentation and generic functional heads, temporal decoders and E(3) GNNs remain direct priors.",
+      status: "P0-v2a execution-incomplete · no verdict · candidate closed · shortlist/primary/model/GPU 0",
       url: "../docs/aneug-cycle-transport-reentry-2026-08-10.md"
     },
     {
@@ -355,14 +355,14 @@ window.AURORA_DATA = Object.freeze({
     ["Direct prior", "RHSIA transient-WSS Graph Transformer", "GHD + steady augmentation", "functional head/loss + temporal decoder + E(3) GNN", "No architecture selected"],
     ["Observable target", "steady object · 9.63 GB", "transient object · 23.74 GB", "same field must imply TAWSS/OSI/RRT", "scientific schema still unaudited"],
     ["Known boundary", "exact dataset/code commits", "CC BY-SA 4.0", "v1 closed at exit 28 before payload", "v2a changes transport only"],
-    ["Current decision", "two HEAD", "four frozen 1 MiB ranges", "retry 0 · one round", "33/40 source · 4 MiB P0-v2a · no model/GPU"]
+    ["Current decision", "one submitted job", "exit 1 · 8 s", "result/raw log absent · operations unresolved", "candidate closed · no rerun/model/GPU"]
   ],
   gates: [
     {
       id: "P0-v2a",
       title: "Can introai9 reach the exact AneuG-Flow objects within a frozen 4 MiB budget?",
-      copy: "This is a transport gate, not a scientific experiment. Two HEAD responses must match the exact repository commit, linked size/etag, Xet hash and range support; four prefix/suffix ranges must return exact byte intervals and SHA-256. Historical P0-v1 remains closed. Pass can only register a separate fixed-budget reader P0-v2b; fail ends the sole repair round.",
-      state: "Preregistered · not submitted · current scheduler state unknown · no full object/reader/model/GPU",
+      copy: "This was a transport gate, not a scientific experiment. Exact job 115467 reached scheduler E/exit 1 after eight seconds, but no aggregate result or raw log materialized. Completed HEAD/range counts and low-level cause are unresolved, so the gate is unevaluated rather than failed. Historical P0-v1 remains closed and the only v2a repair round is consumed.",
+      state: "Execution-incomplete · no verdict · no rerun/v2b/P1/model/GPU · candidate closed",
       blocking: true
     },
     {
@@ -495,8 +495,8 @@ window.AURORA_DATA = Object.freeze({
   datasets: [
     {
       name: "AneuG-Flow · exact source pair",
-      role: "conditional source lead under transport P0-v2a; not current training or outer test",
-      provenance: "CC BY-SA 4.0 · dataset 9dd4180… · code 4a090a0… · 9.63 GB steady + 23.74 GB transient · metadata + four 1 MiB discovery ranges only · full object/reader/case IDs 0 · source 33/40"
+      role: "closed P0-v2a source history; not current training or outer test",
+      provenance: "CC BY-SA 4.0 · dataset 9dd4180… · code 4a090a0… · 9.63 GB steady + 23.74 GB transient · local metadata + four 1 MiB discovery ranges only · introai9 result absent/operations unresolved · no reader/case IDs/model/GPU"
     },
     {
       name: "4D-CTA AAA mechanics · Zenodo 19182978",
@@ -660,6 +660,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "experiment",
+      title: "AneuG-Flow P0-v2a closes execution-incomplete without a verdict",
+      copy: "Exact clean public source 690035ae… ran once on introai9 as CPU/PBS job 115467.ECE-util1. It was observed in E with exit 1 after 8 seconds, CPU time 0 and 16824 kB memory; only a 319-byte execution-incomplete status materialized. Aggregate result and raw PBS output are absent, so completed HEAD/range operations, verified bytes, transport pass/fail and all scientific checks remain unevaluated. The one repair round is consumed. No rerun, v2b, P1, method, architecture, GPU, outer test or claim is authorized; active shortlist returns to 0 and junjinyong remains excluded.",
+      files: ["results/aneug_cycle_transport_p0_v2a_execution_20260810.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/aneug-cycle-transport-reentry-2026-08-10.md", "site/index.html", "site/learn.html", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

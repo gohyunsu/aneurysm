@@ -997,15 +997,27 @@ class ProtocolTests(unittest.TestCase):
 
     def test_cycle_transport_v2a_is_one_round_cpu_only_reentry(self) -> None:
         audit = self.protocol["problem_selection"]["aneug_cycle_transport_reentry_v2a"]
-        self.assertEqual(audit["active_shortlist_count"], 1)
+        self.assertEqual(audit["active_shortlist_count"], 0)
         self.assertEqual(audit["maximum_transport_repair_rounds"], 1)
         self.assertEqual(audit["maximum_total_payload_bytes"], 4194304)
         self.assertFalse(audit["historical_v1_failure_relabelled"])
         self.assertFalse(audit["scientific_p0_evaluated"])
+        self.assertFalse(audit["transport_gate_evaluated"])
+        self.assertIsNone(audit["transport_gate_passed"])
+        self.assertTrue(audit["pbs_job_submitted"])
+        self.assertEqual(audit["p0_scheduler_job_id"], "115467.ECE-util1")
+        self.assertEqual(audit["p0_scheduler_exit_status"], 1)
+        self.assertFalse(audit["second_transport_repair_round_allowed"])
+        self.assertFalse(audit["p0_v2b_authorized"])
         self.assertFalse(audit["method_selected"])
         self.assertFalse(audit["gpu_training_authorized"])
         self.assertEqual(audit["execution_server"], "introai9")
         self.assertFalse(audit["junjinyong_accessed_for_this_reentry"])
+        execution_path = ROOT / audit["p0_execution_record"]
+        self.assertEqual(
+            hashlib.sha256(execution_path.read_bytes()).hexdigest(),
+            audit["p0_execution_record_sha256"],
+        )
 
         for field, value in (
             ("maximum_transport_repair_rounds", 2),

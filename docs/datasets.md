@@ -1,5 +1,10 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Current outcome · 2026-08-10:** The exact `introai9` P0-v2a created no
+> aggregate result, so completed HEAD/range counts and verified server-side
+> bytes are unknown. Local discovery remains metadata-only evidence; no full
+> object, reader or case ID was accessed. The candidate closes without v2b.
+
 > **Current access boundary · 2026-08-10:** AneuG-Flow dataset commit
 > `9dd418083899deddd93a67f9a6fca7a14304fa36` and official code commit
 > `4a090a0f12538deef6fcea88b81afe78ce38152e` are pinned under CC BY-SA 4.0.

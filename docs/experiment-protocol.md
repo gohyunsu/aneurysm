@@ -1,5 +1,10 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **P0-v2a outcome · closed:** Exact job `115467.ECE-util1` ended exit 1 after
+> 8 seconds with only an execution-incomplete status. No aggregate/raw log
+> materialized, so transport operations and gates are unevaluated. The one
+> repair round is consumed; do not rerun or open v2b/P1/model/GPU.
+
 > **P0-v2a · preregistered 2026-08-10:** Preserve closed P0-v1. Run exactly one
 > `introai9` PBS CPU job with 2 CPU, 4 GB, GPU 0 and 15 minutes. It performs two
 > HEAD operations and four exact 1 MiB range reads, retry 0, then deletes range

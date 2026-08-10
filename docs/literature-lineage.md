@@ -1,5 +1,10 @@
 # 선행연구 계보와 research gap
 
+> **Current outcome · 2026-08-10:** AneuG-Flow P0-v2a produced no transport or
+> scientific verdict, so cycle-functional consistency cannot be promoted to an
+> active research gap. The direct-prior list remains binding and the candidate
+> version is closed after its one repair round.
+
 > **Current narrowing · 2026-08-10:** The only conditional source re-entry is
 > AneuG-Flow cycle-functional consistency at 33/40, and its immediate step is a
 > 4 MiB transport preflight—not a model. RHSIA's transient-WSS Graph

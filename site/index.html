@@ -48,10 +48,12 @@
           순간별 wall shear stress(WSS) 벡터장이 하나라면 TAWSS·OSI·RRT도 그
           같은 장에서 계산되어야 합니다. 이 cycle-functional 문제는 source
           score 33/40으로 admission line을 넘었지만, 과거 P0-v1은 대형 object를
-          읽기 전에 exit 28로 끝났습니다. 그 실패는 그대로 닫아 둡니다. 새
-          P0-v2a는 단 한 번, <code>introai9</code> CPU/PBS에서 HEAD 2회와 정확한
-          1 MiB range 4개만 읽어 전송 경계를 검증합니다. 아직 scientific P0,
-          GNN, architecture, GPU 또는 논문 contribution은 선택하지 않았습니다.
+          읽기 전에 exit 28로 끝났습니다. 별도 P0-v2a를 단 한 번
+          <code>introai9</code> CPU/PBS에 제출했으나 8초 뒤 exit 1이었고 aggregate
+          result와 raw log가 남지 않았습니다. 따라서 HEAD/range 수행 수와
+          transport/scientific gate는 미평가입니다. 유일한 repair round를
+          소진했으므로 후보를 닫았고, GNN·architecture·GPU·contribution은
+          선택하지 않았습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
@@ -59,6 +61,7 @@
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
           <a class="button ghost" href="../docs/aneug-cycle-transport-reentry-2026-08-10.md">Current P0-v2a rationale ↗</a>
           <a class="button ghost" href="../configs/aneug_cycle_transport_p0_v2a.json">Frozen P0-v2a ↗</a>
+          <a class="button ghost" href="../results/aneug_cycle_transport_p0_v2a_execution_20260810.json">P0-v2a outcome ↗</a>
           <a class="button ghost" href="../docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md">Latest 4D-CTA audit ↗</a>
           <a class="button ghost" href="../docs/topbrain2-source-audit-2026-08-10.md">Latest audit ↗</a>
           <a class="button ghost" href="../docs/rsna-aws-registry-audit-2026-08-10.md">RSNA registry history ↗</a>
@@ -91,7 +94,7 @@
       </div>
 
       <div class="hero-visual" aria-label="AneuG-Flow cycle-functional 후보의 조건부 source admission과 4 MiB transport-only 사전검증 경계">
-        <div class="visual-caption">AneuG-FLOW · 33/40 · CONDITIONAL P0-v2a</div>
+        <div class="visual-caption">AneuG-FLOW · P0-v2a CLOSED · NO VERDICT</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -114,27 +117,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>33</b><span>source score / 40 · not a model result</span>
+            <b>33</b><span>historical source score / 40</span>
           </div>
           <div class="posterior-card card-b">
-            <b>4 MiB</b><span>maximum range bytes · no full object</span>
+            <b>8 s</b><span>exit 1 · aggregate result absent</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>scientific verdicts · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> exact commits, object sizes and four range hashes are frozen</span>
-          <span><i class="dot coral"></i> transport pass is not a scientific or method pass</span>
-          <span>primary/architecture/GPU 0 · historical v1 remains closed</span>
+          <span><i class="dot lime"></i> exact public source and scheduler provenance are frozen</span>
+          <span><i class="dot coral"></i> transport/scientific gates are unevaluated, not failed</span>
+          <span>shortlist/primary/architecture/GPU 0 · no rerun</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Active shortlist</span><b>1 conditional transport re-entry · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>AneuG-Flow 33/40 · P0-v2a preregistered</b></div>
+        <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
+        <div><span>Current evidence</span><b>P0-v2a execution-incomplete · no verdict · closed</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>one introai9 CPU/PBS 4 MiB preflight</b></div>
+        <div><span>Next authorization</span><b>fresh problem-level source/asset audit only</b></div>
       </div>
     </section>
 
@@ -147,8 +150,9 @@
           neural operator와 topology-aware segmentation-to-CFD는 이미 직접 계보를
           이룹니다. 새 block을 고르기 전에 target identifiability, public asset,
           independent unit와 residual algorithmic gap을 함께 검증했습니다. 두
-          AneuG-Flow 후보는 source gate만 넘었습니다. Scientific asset과 task
-          adequacy는 아직 미평가이므로 model을 만들지 않았습니다.
+          AneuG-Flow 후보는 source gate만 넘었고 P0-v2a는 execution-incomplete로
+          닫혔습니다. Scientific asset과 task adequacy는 미평가이므로 model을
+          만들지 않았습니다.
         </p>
       </div>
 
@@ -200,18 +204,18 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">CURRENT GAP STATUS</p>
-          <h3>One source lead survives, but no model gap is yet established.</h3>
+          <h3>The source lead closed before a model gap was established.</h3>
           <p>
             한 transient WSS field와 그 cycle functionals의 모순을 막는 문제는
-            33/40으로 source gate를 넘었습니다. 그러나 RHSIA Graph Transformer,
-            GHD, steady augmentation, functional head/loss와 temporal decoder가
-            직접 선행입니다. 따라서 먼저 exact payload의 물리 단위·schema·case
-            linkage가 검증 가능한지 단계적으로 확인해야 합니다.
+            33/40으로 source gate를 넘었습니다. 그러나 exact transport P0-v2a가
+            aggregate 전에 execution-incomplete로 끝나 물리 단위·schema·case
+            linkage를 평가하지 못했습니다. 유일한 repair round가 소진됐으므로
+            현재 gap으로 유지하지 않습니다.
           </p>
           <div class="gap-equation" aria-label="source admission이 transport gate를 열지만 모델 권한을 직접 열지 않는 관계">
-            <span>source 33/40 ≥ 32</span>
+            <span>source 33/40 ≥ 32 · P0-v2a no verdict</span>
             <i>⇒</i>
-            <span>4 MiB transport P0-v2a only · no model/GPU</span>
+            <span>candidate closed · no model/GPU/rerun</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -593,7 +597,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>One conditional source re-entry · no active paper identity</p>
+        <p>No active shortlist · no active paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -601,7 +605,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>AneuG-Flow 33/40 · transport P0-v2a preregistered · primary/model/GPU 0</b>
+        <span>Current stage</span><b>AneuG-Flow P0-v2a execution-incomplete/no verdict · shortlist/primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

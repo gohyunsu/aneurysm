@@ -1,5 +1,9 @@
 # AURORA v2 모델 명세
 
+> **Current outcome · no architecture:** P0-v2a ended execution-incomplete
+> before transport evaluation. The candidate is closed; GNN, Graph Transformer,
+> neural operator, temporal decoder and functional head remain unselected.
+
 > **No current architecture · schema 6.2:** AneuG-Flow P0-v2a is a
 > transport-only source gate. A GNN, Graph Transformer, neural operator,
 > temporal decoder, functional head and uncertainty module are all unselected.

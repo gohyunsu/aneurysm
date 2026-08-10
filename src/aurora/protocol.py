@@ -147,13 +147,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "historical_failures_preserved_aneug_transport_p0_v2a_preregistered_no_primary_method_or_gpu"
+        != "aneug_transport_p0_v2a_execution_incomplete_closed_no_primary_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "unknown_after_connection_reset_before_remote_command_no_new_v2a_job_submitted"
+        != "job_115467_observed_exiting_exit_1_then_no_longer_returned_by_qstat_no_result_or_raw_log"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -223,15 +223,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "one_conditional_source_reentry_aneug_transport_p0_v2a_preregistered_no_primary"
-        or problem_selection["shortlisted_candidate"]
-        != "cycle_functional_compatible_transient_wss_surrogation_transport_reentry_only"
-        or problem_selection["candidate_dataset"]
-        != "aneug_flow_exact_commit_9dd418083899deddd93a67f9a6fca7a14304fa36"
-        or problem_selection["candidate_estimand"]
-        != "transient_wss_cycle_functionals_conditioned_on_the_same_recovered_physical_field_pending_scientific_p0"
+        != "no_active_shortlist_after_aneug_transport_p0_v2a_execution_incomplete_no_verdict"
+        or problem_selection["shortlisted_candidate"] != "none"
+        or problem_selection["candidate_dataset"] != "none"
+        or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "aneug_flow_metadata_and_four_frozen_one_mib_discovery_ranges_only_no_full_object_reader_or_case_access"
+        != "aneug_flow_local_discovery_metadata_and_four_one_mib_ranges_only_introai9_v2a_created_no_result_and_transport_operations_are_unresolved"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -241,7 +238,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "execute_the_single_preregistered_introai9_cpu_pbs_aneug_cycle_transport_p0_v2a_without_full_payload_reader_model_or_gpu_access"
+        != "fresh_problem_level_primary_source_and_asset_audit_only_without_aneug_v2a_rerun_or_second_transport_repair"
         or problem_selection["audit_document"]
         != "docs/aneug-cycle-transport-reentry-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
@@ -1318,6 +1315,26 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "scheduler",
             "resources",
             "pbs_job_submitted",
+            "p0_source_commit",
+            "p0_config_sha256",
+            "p0_execution_record",
+            "p0_execution_record_sha256",
+            "p0_scheduler_job_id",
+            "p0_scheduler_last_observed_state",
+            "p0_scheduler_exit_status",
+            "p0_scheduler_walltime",
+            "p0_scheduler_cput",
+            "p0_scheduler_memory",
+            "p0_result_created",
+            "p0_raw_log_materialized",
+            "p0_status_artifact_sha256",
+            "transport_gate_evaluated",
+            "transport_gate_passed",
+            "transport_operations_completed",
+            "low_level_failure_cause",
+            "repair_rounds_used",
+            "second_transport_repair_round_allowed",
+            "p0_v2b_authorized",
             "scheduler_observation",
             "login_node_gpu_command_executed",
             "junjinyong_accessed_for_this_reentry",
@@ -1325,7 +1342,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "problem_selection.aneug_cycle_transport_reentry_v2a",
     )
     if (
-        cycle_reentry["status"] != "preregistered_before_introai9_v2a_execution"
+        cycle_reentry["status"]
+        != "closed_after_introai9_execution_incomplete_no_transport_or_scientific_verdict"
         or cycle_reentry["audit_document"]
         != "docs/aneug-cycle-transport-reentry-2026-08-10.md"
         or cycle_reentry["config"] != "configs/aneug_cycle_transport_p0_v2a.json"
@@ -1336,7 +1354,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or cycle_reentry["score"] != 33.0
         or cycle_reentry["maximum_score"] != 40.0
         or cycle_reentry["automatic_selection_threshold"] != 32.0
-        or cycle_reentry["active_shortlist_count"] != 1
+        or cycle_reentry["active_shortlist_count"] != 0
         or cycle_reentry["primary_problem_selected"] is not False
         or cycle_reentry["method_selected"] is not False
         or cycle_reentry["architecture_selected"] is not False
@@ -1371,16 +1389,41 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or cycle_reentry["execution_server"] != "introai9"
         or cycle_reentry["scheduler"] != "pbs"
         or cycle_reentry["resources"] != "select=1:ncpus=2:mem=4gb:ngpus=0"
-        or cycle_reentry["pbs_job_submitted"] is not False
+        or cycle_reentry["pbs_job_submitted"] is not True
+        or cycle_reentry["p0_source_commit"]
+        != "690035ae5385328780fbaace9f956ce142a78f33"
+        or cycle_reentry["p0_config_sha256"]
+        != "814e14f2114d13cae5581184c1696ba50aafff2aa43b364bde5cf338e131e503"
+        or cycle_reentry["p0_execution_record"]
+        != "results/aneug_cycle_transport_p0_v2a_execution_20260810.json"
+        or cycle_reentry["p0_execution_record_sha256"]
+        != "85f7c2e7b159d4353972f3ae6f16f3f9a8997eacc61563e8740e8dac26406e63"
+        or cycle_reentry["p0_scheduler_job_id"] != "115467.ECE-util1"
+        or cycle_reentry["p0_scheduler_last_observed_state"] != "E"
+        or cycle_reentry["p0_scheduler_exit_status"] != 1
+        or cycle_reentry["p0_scheduler_walltime"] != "00:00:08"
+        or cycle_reentry["p0_scheduler_cput"] != "00:00:00"
+        or cycle_reentry["p0_scheduler_memory"] != "16824kb"
+        or cycle_reentry["p0_result_created"] is not False
+        or cycle_reentry["p0_raw_log_materialized"] is not False
+        or cycle_reentry["p0_status_artifact_sha256"]
+        != "5a3322f2f44ef6300865ac841ead92a240853fa0d7df3209c55bc1c4d935f1ef"
+        or cycle_reentry["transport_gate_evaluated"] is not False
+        or cycle_reentry["transport_gate_passed"] is not None
+        or cycle_reentry["transport_operations_completed"] is not None
+        or cycle_reentry["low_level_failure_cause"] != "unresolved"
+        or cycle_reentry["repair_rounds_used"] != 1
+        or cycle_reentry["second_transport_repair_round_allowed"] is not False
+        or cycle_reentry["p0_v2b_authorized"] is not False
         or cycle_reentry["scheduler_observation"]
-        != "unknown_after_connection_reset_before_remote_command"
+        != "job_observed_exiting_then_no_longer_returned_by_qstat"
         or cycle_reentry["login_node_gpu_command_executed"] is not False
         or cycle_reentry["junjinyong_accessed_for_this_reentry"] is not False
     ):
         raise ProtocolError(
-            "The AneuG-Flow P0-v2a re-entry must remain a single bounded "
-            "introai9 CPU/PBS transport preflight with no v1 relabel, full "
-            "payload, scientific gate, method, model, GPU, or outer test."
+            "The AneuG-Flow P0-v2a re-entry must remain closed after its single "
+            "introai9 CPU/PBS execution-incomplete outcome, with no v1 relabel, "
+            "second repair, transport verdict, method, model, GPU, or outer test."
         )
     checks.append("bounded AneuG-Flow P0-v2a transport re-entry")
 

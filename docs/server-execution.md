@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Current execution outcome · 2026-08-10:** Exact `introai9` CPU/PBS job
+> `115467.ECE-util1` was observed in E with exit 1, walltime 8 s, CPU time 0 and
+> 16824 kB memory. Only a 319-byte execution-incomplete status materialized;
+> result and raw PBS output did not. The job later stopped returning from
+> `qstat`. Do not repeat the connection, submission or repair loop. No v2b/P1/
+> model/GPU is authorized. `junjinyong` was not used and remains prohibited.
+
 > **Current execution boundary · 2026-08-10:** `junjinyong` is prohibited for
 > connection, query, transfer, submission and monitoring. The only pending
 > action is one preregistered `introai9` CPU/PBS P0-v2a (2 CPU, 4 GB, GPU 0,

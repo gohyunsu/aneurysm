@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 AneuG-Flow P0-v2a outcome override:** Exact clean public source
+> `690035ae5385328780fbaace9f956ce142a78f33` ran once on `introai9` as PBS
+> CPU job `115467.ECE-util1`. Last observed scheduler state was `E`, exit 1,
+> walltime 00:00:08, CPU 00:00:00 and memory 16824 kB; the record later stopped
+> returning from `qstat`. The 319-byte status artifact (SHA-256
+> `5a3322f2…`) says execution-incomplete before aggregate result. Result JSON and
+> raw PBS output did not materialize, so HEAD/range operations, verified bytes,
+> transport gate and all scientific checks are unevaluated; low-level cause is
+> unresolved. The single repair round is consumed. Do not rerun v2a, open a
+> second transport repair, register v2b/P1, select a method/architecture, use
+> GPU/outer test or create a paper claim. Public execution source of truth is
+> `results/aneug_cycle_transport_p0_v2a_execution_20260810.json`. Active
+> shortlist, selected primary, method, architecture and GPU are 0. Future work
+> is a fresh problem-level source/asset audit, not local repair. `junjinyong`
+> was not accessed and remains prohibited for all AURORA operations.
+
 > **2026-08-10 AneuG-Flow P0-v2a operational override:** Historical exact
 > P0-v1 (`754ed746…`, job `115168.ECE-util1`, exit 28) remains
 > execution-incomplete/no scientific verdict and closed. Under the goal's

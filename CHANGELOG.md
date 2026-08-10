@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-10 · AneuG-Flow P0-v2a closes execution-incomplete
+
+- Exact public source `690035ae…` was cloned into a dedicated clean detached
+  checkout and submitted once on `introai9` as CPU/PBS job
+  `115467.ECE-util1`; `junjinyong` was not accessed.
+- Scheduler observation was state E, exit 1, walltime 00:00:08, CPU 00:00:00
+  and 16824 kB memory. A 319-byte execution-incomplete status materialized, but
+  aggregate result and raw PBS output did not, and the job later stopped being
+  returned by `qstat`.
+- Transport operation counts, verified range bytes, transport pass/fail and all
+  scientific checks are unevaluated. The low-level cause is unresolved. The
+  sole repair round is consumed and the candidate closes without rerun, v2b,
+  P1, model, GPU, outer test or claim. Active shortlist returns to 0.
+- 영향 파일: public execution record, schema/validator/tests, research docs,
+  overview/Learn/change UI, private manuscript history and operations guides.
+
 ## 2026-08-10 · AneuG-Flow transport P0-v2a preregistered
 
 - Preserved the historical 33/40 P0-v1 execution-incomplete result without

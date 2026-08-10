@@ -1,5 +1,9 @@
 # ISBI 2027 제출 계획
 
+> **Current outcome · not submission-ready:** AneuG-Flow P0-v2a is closed
+> execution-incomplete/no verdict. It creates no result row, contribution,
+> architecture or submission identity. Active source shortlist is 0.
+
 > **Current submission boundary · 2026-08-10:** AURORA is not submission-ready.
 > One 33/40 source candidate is conditionally active only for a bounded
 > AneuG-Flow transport P0-v2a. There is no selected primary, model,
