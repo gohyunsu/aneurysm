@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-10 · TopAneu schema 6.3 content and site verified
+
+- Exact scientific content `e4038ca6d052def5f275c4118bd904c4ab543135`
+  passed Quality `31367056976` and Pages `31367056610`.
+- Live overview, zero-assumption guide and detailed source audit render the
+  same 33/40 conditional lead, 417 scans/409 patients, terms-pending state and
+  no-payload/P0/method/architecture/GPU boundary.
+- Deployment provenance does not accept terms, activate a shortlist, authorize
+  compute or turn the problem lead into a paper contribution.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `docs/server-execution.md`,
+  `site/assets/research-data.js`.
+
 ## 2026-08-10 · TopAneu material release creates a terms-pending source lead
 
 - Verified official TopAneu-26 repo commit `018c243445f99199f484018c4c80575c84c72293`

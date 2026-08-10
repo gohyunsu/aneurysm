@@ -1,5 +1,12 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 TopAneu deployment provenance:** Exact schema-6.3 scientific
+> content `e4038ca6d052def5f275c4118bd904c4ab543135` passed Research contract and
+> site quality run `31367056976` and Pages run `31367056610`. The deployed
+> overview, Learn guide and detailed audit render 33/40, 417 scans/409 patients,
+> terms pending and executable shortlist/payload/P0/model/GPU 0. This deployment
+> record changes no access, scientific gate or execution authority.
+
 > **2026-08-10 TopAneu material-release override:** Official TopAneu-26 repo
 > commit `018c243445f99199f484018c4c80575c84c72293` and the live challenge now
 > define 417 scans/409 patients, 52 location leaves, three aneurysm types,

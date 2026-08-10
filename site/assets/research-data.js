@@ -669,6 +669,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "TopAneu schema 6.3 content and explanatory site are live",
+      copy: "Exact scientific content e4038ca6d052def5f275c4118bd904c4ab543135 passed Quality 31367056976 and Pages 31367056610. Direct live checks of the overview, Learn guide and detailed audit render 33/40, 417 scans/409 patients, terms pending and executable shortlist/payload/P0/model/GPU zero. Deployment provenance changes no access, scientific gate or compute authority.",
+      files: ["AGENTS.md", "CHANGELOG.md", "docs/server-execution.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "TopAneu material release creates a distinct terms-pending source lead",
       copy: "Official repo commit 018c243… and the live challenge now specify 417 scans/409 patients, 52 location leaves, three types, location JSON, silver vessel masks, UMCU held-out test, official metrics and a seven-minute/T4 contract. Factorized leaf risk with silver anatomy limited to noisy train-time privileged information scores 33/40. The old 29/40 attachment candidate remains rejected. This is not an active executable shortlist: terms, medical payload, P0, primary, method, architecture, PBS/GPU, outer test and contribution remain zero. Explicit user terms acceptance may open only a separately frozen CPU/read-only P0-R on introai9; junjinyong is prohibited.",

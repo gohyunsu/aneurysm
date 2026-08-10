@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **2026-08-10 TopAneu deployment verification:** Exact content
+> `e4038ca6d052def5f275c4118bd904c4ab543135` passed Quality `31367056976` and
+> Pages `31367056610`; live overview, Learn and detailed audit expose the same
+> 33/40 terms-pending/no-payload/no-compute boundary. This is GitHub deployment
+> provenance, not an `introai9` experiment, and creates no PBS/GPU job.
+
 > **2026-08-10 TopAneu source-lead boundary:** This was a public source and
 > direct-prior audit, not a server experiment. TopAneu terms are not accepted,
 > so no payload, PBS job, GPU allocation or monitoring loop was created. If the
