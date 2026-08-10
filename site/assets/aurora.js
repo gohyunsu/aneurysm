@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "Corrected official mapping은 10,660 generated case와 427 source family를 명시합니다.",
+      description: "Official release는 417 scan/409 patient, 52 location leaf와 3 type을 명시합니다.",
       connector: "source audited",
-      title: "Generation lineage",
-      copy: "Exact case overlap is 0, yet validation-family overlap is 20/20",
+      title: "Silver anatomy boundary",
+      copy: "Vessel masks are organizer predictions: train-time privilege, never a test-time requirement",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Generated deformation이 아니라 base family가 unseen-anatomy generalization의 독립 단위입니다.",
-      connector: "unit corrected",
-      title: "Case-disjoint is not family-disjoint",
-      copy: "Split hygiene is required, but it is not an algorithmic contribution",
+      description: "52 leaf를 territory·laterality·branch role로 분해할 수 있는지는 payload support로 검증해야 합니다.",
+      connector: "labels factorized",
+      title: "Observable hierarchy",
+      copy: "The factor map is a testable hypothesis, not a renamed taxonomy head",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "첫 small source 전에 종료되어 11개 P0 check는 모두 미평가이며 exact cause는 unresolved입니다.",
-      connector: "closed",
+      description: "Terms를 수락해도 P0-R 전체 통과 뒤 method-free P1만 열립니다.",
+      connector: "gate closed",
       title: "No model authorization",
-      copy: "No repair, rerun, P1, architecture, GPU, outer test or performance claim",
+      copy: "Terms, payload, P0, P1, architecture, GPU, outer test and claim are all zero",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

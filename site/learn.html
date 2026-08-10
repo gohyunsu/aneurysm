@@ -42,6 +42,7 @@
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
+          TopAneu의 52개 위치 label과 silver vessel mask,
           DSA sequence와 prefix risk, 반복 CTP와 informative observation,
           rigid-wall CFD와 compliant-wall FSI,
           WSS 시계열에서 TAWSS·OSI·RRT가 어떻게 계산되는지, mesh와 GNN은
@@ -50,50 +51,47 @@
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>Active shortlist, primary와 모델은 모두 없습니다.</strong>
+          <strong>33/40 source lead는 하나지만 실행형 shortlist와 모델은 없습니다.</strong>
           <p>
-            AneuG-Flow에서 하나의 시간별 WSS field와 그 field가 결정하는
-            TAWSS·OSI·RRT를 함께 다루는 문제는 33/40으로 source gate를
-            넘었습니다. 그러나 이것은 “GNN을 쓰자”는 결정이 아닙니다. 과거
-            P0-v1은 payload 전에 끝났고 그대로 실패 이력으로 보존됩니다. 현재
-            허용됐던 4 MiB transport P0-v2a도 aggregate 전에
-            execution-incomplete로 끝나 닫혔습니다.
+            TopAneu-26은 409명 417 scan에 52개 동맥류 위치와 3개 유형을
+            제공합니다. 위치를 영역·좌우·분지 역할로 분해하고 silver 혈관
+            정보를 학습 때만 쓰는 문제는 33/40입니다. 그러나 약관을 수락하지
+            않았고 의료 payload도 열지 않았으므로 P0·GNN·GPU는 모두 0입니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>한 번의 전송 사전검증은 verdict 없이 종료됐습니다.</strong>
+          <strong>약관 뒤에도 곧바로 학습하지 않고 P0-R부터 등록합니다.</strong>
           <p>
-            <code>introai9</code> PBS job `115467`은 8초 뒤 exit 1이었고 319-byte
-            status만 남겼습니다. Aggregate result와 raw PBS log가 없어 HEAD/range
-            수행 수와 transport pass/fail은 알 수 없습니다. 이를 source failure로
-            바꾸지도, 성공한 local discovery로 메우지도 않습니다. 두 번째 repair
-            round와 reader P0-v2b 없이 후보를 닫았습니다.
+            P0-R은 417 scan이 409 patient에 어떻게 묶이는지, 52개 위치와 3개
+            유형이 일관적인지, 한 환자의 여러 병변과 같은 위치의 여러 병변을
+            표현할 수 있는지, JSON과 mask가 맞는지, silver 혈관의 생성 계보와
+            UMCU sealed test 경계가 정확한지만 CPU/read-only로 확인합니다.
           </p>
-          <a href="../docs/aneug-cycle-transport-reentry-2026-08-10.md">P0-v2a 상세 계약 읽기 ↗</a>
+          <a href="../docs/topaneu-release-evaluation-audit-2026-08-10.md">TopAneu source audit 읽기 ↗</a>
         </div>
         <div class="answer-card">
           <span>용어를 먼저 이해하기</span>
-          <strong>WSS, TAWSS, OSI와 RRT는 무엇인가?</strong>
+          <strong>52-leaf와 silver privileged information은 무엇인가?</strong>
           <p>
-            WSS는 흐르는 혈액이 혈관벽을 접선 방향으로 미는 벡터입니다. TAWSS는
-            한 심장 주기 동안 그 크기의 평균, OSI는 방향이 얼마나 왕복하는지,
-            RRT는 낮고 진동하는 전단 때문에 입자가 벽 근처에 오래 머무는 경향을
-            요약합니다. 세 값은 별도 정답이 아니라 동일 WSS 시계열의 결정론적
-            함수입니다. 따라서 field head와 scalar head가 서로 모순되면 모델이
-            물리적으로 같은 양을 두 번 다르게 말하는 셈입니다.
+            Leaf는 위치 taxonomy의 가장 세밀한 최종 항목입니다. 52개 이름을
+            서로 무관한 번호로만 배우지 않고 상위 territory, 좌우, 분지 역할을
+            공유시키려는 것이 factorization입니다. Silver mask는 전문가가 직접
+            확정한 gold label이 아니라 organizer 모델의 예측입니다. 따라서 정답
+            혈관처럼 취급하지 않고 학습을 돕는 noisy privileged information으로만
+            쓰며, 실제 테스트에서는 없어도 동작해야 합니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 architecture는?</span>
           <strong>GNN 기반으로 확정되지 않았습니다.</strong>
           <p>
-            혈관 surface가 graph로 표현되므로 GNN은 자연스러운 baseline이지만,
-            RHSIA의 Graph Transformer·GHD·steady augmentation과 일반 E(3) GNN이
-            이미 직접 선행입니다. Graph backbone, temporal decoder, functional
-            head를 붙이는 것만으로 novelty가 되지 않습니다. Reader/scientific
-            P0와 task-adequacy gate 뒤에도 독립 gap이 남을 때에만 architecture를
-            설계합니다.
+            TopAneu의 입력은 CTA/MRA 3D 영상이므로 U-Net·Transformer detector가
+            먼저 필요한 강한 baseline이며, 혈관 graph는 선택 가능한 보조 표현일
+            뿐입니다. ARAN의 centerline GAT, vessel-distance attention과 joint
+            lesion–vessel 학습이 이미 존재하므로 graph를 붙이는 것 자체는
+            novelty가 아닙니다. P0-R과 method-free P1 뒤에도 factorized risk의
+            독립 gap이 남을 때에만 architecture를 설계합니다.
           </p>
         </div>
       </div>

@@ -86,18 +86,18 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "source-delta audit"):
             validate_protocol(candidate)
 
-    def test_transport_reentry_cannot_select_method_or_gpu(self) -> None:
+    def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "bounded AneuG-Flow transport re-entry"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu release audit"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "bounded AneuG-Flow transport re-entry"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu release audit"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "bounded AneuG-Flow transport re-entry"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu release audit"):
             validate_protocol(candidate)
 
     def test_aneumo_lineage_candidate_closes_after_one_cpu_metadata_p0(self) -> None:
@@ -528,6 +528,55 @@ class ProtocolTests(unittest.TestCase):
             "reported_patients"
         ] = 200
         with self.assertRaisesRegex(ProtocolError, "4D-CTA AAA mechanics source audit"):
+            validate_protocol(candidate)
+
+    def test_topaneu_material_release_keeps_terms_pending_lead_method_free(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "topaneu_release_evaluation_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 33.0)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["conditional_source_lead_count"], 1)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(
+            audit["official_repository_commit"],
+            "018c243445f99199f484018c4c80575c84c72293",
+        )
+        self.assertEqual(audit["official_release_scans"], 417)
+        self.assertEqual(audit["official_unique_patients"], 409)
+        self.assertEqual(audit["official_location_classes"], 52)
+        self.assertEqual(audit["location_json_paths"], 417)
+        self.assertEqual(audit["batch1_cases_revised_in_current_release"], 52)
+        self.assertFalse(audit["user_terms_acceptance_verified"])
+        self.assertFalse(audit["medical_payload_accessed"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["outer_test_authorized"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topaneu_release_evaluation_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu material release"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topaneu_release_evaluation_source_audit"][
+            "medical_payload_accessed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu material release"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["topaneu_release_evaluation_source_audit"][
+            "user_terms_acceptance_verified"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu material release"):
             validate_protocol(candidate)
 
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:

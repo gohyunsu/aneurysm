@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 6.3 · still no architecture:** TopAneu's material release creates a
+> 33/40 terms-pending problem lead, not a model decision. GNN, centerline GAT,
+> U-Net, Transformer, taxonomy decoder, privileged-information distillation and
+> uncertainty head remain unselected. If P0-R and P1 later pass, flat 52-class
+> multitask, artery-aware ARAN-style, vessel-distance, universal-taxonomy and
+> image-only controls must be established before any new architecture is
+> designed. Silver vessel masks may never be required at test time. No GPU job
+> is authorized.
+
 > **Current outcome · no architecture:** P0-v2a ended execution-incomplete
 > before transport evaluation. The candidate is closed; GNN, Graph Transformer,
 > neural operator, temporal decoder and functional head remain unselected.

@@ -1,5 +1,16 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 submission-status update:** TopAneu-26 is now a materially
+> executable source and the factorized leaf-risk question scores 33/40, but the
+> project is still **not submission-ready**. This is a terms-pending source lead,
+> not a result or C21 contribution. No medical payload, P0, method,
+> architecture, GPU experiment, outer-test estimate, table row or headline
+> claim exists. The path to a four-page paper is: explicit user terms
+> acceptance → preregistered P0-R → method-free P1 → prospective method and
+> baseline plan → bounded development → sealed centre-held-out evaluation.
+> Any failure closes the candidate without local repair or retrospective
+> identity changes.
+
 > **Current outcome · not submission-ready:** AneuG-Flow P0-v2a is closed
 > execution-incomplete/no verdict. It creates no result row, contribution,
 > architecture or submission identity. Active source shortlist is 0.

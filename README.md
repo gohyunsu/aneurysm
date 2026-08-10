@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 TopAneu material-release decision · schema 6.3:** The official
+> release now defines an executable multi-centre task: 417 scans from 409
+> patients, a 52-leaf aneurysm-location mask, a 3-class type mask, location
+> JSON and an organizer-predicted silver vessel mask, with UMCU held out for
+> test. A new and distinct problem—factorized leaf risk with the vessel mask
+> used only as noisy train-time privileged information—scores **33.0/40**.
+> This is one **conditional source lead**, not an active executable shortlist,
+> selected primary, method or contribution. The historical 29/40 vascular-
+> attachment candidate remains rejected. TopAneu terms have not been accepted,
+> so medical payload, P0, architecture, PBS/GPU and outer-test access remain
+> zero. After the user personally reviews and accepts the terms, the only next
+> action is a separately preregistered CPU/read-only release-semantics P0.
+> [Detailed source and direct-prior audit](docs/topaneu-release-evaluation-audit-2026-08-10.md).
+> All AURORA compute remains `introai9` PBS only; `junjinyong` is prohibited.
+
 > **2026-08-10 P0-v2a outcome:** Exact public source `690035ae…` was checked
 > out cleanly on `introai9` and submitted once as CPU/PBS job
 > `115467.ECE-util1`. It was observed in state `E` with exit 1 after 8 seconds,

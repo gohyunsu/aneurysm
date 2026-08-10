@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · AneuG-Flow P0-v2a execution-incomplete/no verdict and closed · active shortlist/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "fresh problem-level source/asset audit; do not rerun P0-v2a, open a second transport repair, or relabel closed v1/v2a",
+    status: "Target locked · TopAneu material release is a 33/40 terms-pending source lead · active executable shortlist/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "explicit user acceptance of TopAneu terms before a separately preregistered CPU/read-only P0-R; never auto-download or train",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A material TopAneu release creates one falsifiable, terms-pending problem lead",
+      copy: "Official TopAneu-26 commit 018c243… and the live challenge define 417 scans from 409 patients, 52 aneurysm-location leaves, three aneurysm types, location JSON, organizer-predicted silver vessel masks and an unseen-centre UMCU test. The new 33/40 question factorizes observable leaves into territory, laterality and branch role, restricts silver anatomy to noisy train-time privileged information, and requires image-only test inference. Centerline GATs, vessel-distance attention, joint lesion-vessel learning, hierarchical taxonomies, privileged-information distillation and conformal segmentation are mandatory direct controls, not novelty by themselves.",
+      status: "33/40 conditional source lead · terms/payload/P0/method/architecture/GPU 0",
+      url: "../docs/topaneu-release-evaluation-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "A source-admitted physical identity still has to cross an auditable transport boundary",
@@ -660,6 +667,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "TopAneu material release creates a distinct terms-pending source lead",
+      copy: "Official repo commit 018c243… and the live challenge now specify 417 scans/409 patients, 52 location leaves, three types, location JSON, silver vessel masks, UMCU held-out test, official metrics and a seven-minute/T4 contract. Factorized leaf risk with silver anatomy limited to noisy train-time privileged information scores 33/40. The old 29/40 attachment candidate remains rejected. This is not an active executable shortlist: terms, medical payload, P0, primary, method, architecture, PBS/GPU, outer test and contribution remain zero. Explicit user terms acceptance may open only a separately frozen CPU/read-only P0-R on introai9; junjinyong is prohibited.",
+      files: ["docs/topaneu-release-evaluation-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "experiment",

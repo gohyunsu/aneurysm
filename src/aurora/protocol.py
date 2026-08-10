@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.2":
-        raise ProtocolError("The current research-state schema must be version 6.2.")
+    if protocol["schema_version"] != "6.3":
+        raise ProtocolError("The current research-state schema must be version 6.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -147,7 +147,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "aneug_transport_p0_v2a_execution_incomplete_closed_no_primary_method_or_gpu"
+        != "topaneu_release_source_lead_33_pending_terms_no_active_primary_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -170,6 +170,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         [
             "status",
             "shortlisted_candidate",
+            "conditional_source_lead_count",
             "candidate_dataset",
             "candidate_estimand",
             "asset_access_status",
@@ -185,6 +186,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "audit_document",
             "source_only_dataset_substitution_screen",
             "topaneu_attachment_source_audit",
+            "topaneu_release_evaluation_source_audit",
             "open_cta_physical_grid_candidate",
             "inverse_healthy_vessel_counterfactual_source_audit",
             "rsna_supervision_semantics_red_team",
@@ -216,6 +218,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "four_d_cta_aaa_mechanics_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
+            "most_recent_conditional_source_lead",
             "rejected_candidates",
             "non_novel_components",
         ],
@@ -223,12 +226,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_aneug_transport_p0_v2a_execution_incomplete_no_verdict"
+        != "conditional_topaneu_release_source_lead_pending_terms_no_active_shortlist_or_method"
         or problem_selection["shortlisted_candidate"] != "none"
+        or problem_selection["conditional_source_lead_count"] != 1
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "aneug_flow_local_discovery_metadata_and_four_one_mib_ranges_only_introai9_v2a_created_no_result_and_transport_operations_are_unresolved"
+        != "topaneu_public_source_metadata_and_path_sha_manifests_only_no_medical_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -238,17 +242,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_only_without_aneug_v2a_rerun_or_second_transport_repair"
+        != "explicit_user_topaneu_terms_acceptance_then_register_a_fresh_cpu_read_only_p0_asset_semantics_audit_or_continue_other_fresh_source_audits"
         or problem_selection["audit_document"]
-        != "docs/aneug-cycle-transport-reentry-2026-08-10.md"
+        != "docs/topaneu-release-evaluation-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "four_d_cta_phase_subset_rsii_hotspot_preservation"
+        or problem_selection["most_recent_conditional_source_lead"]
+        != "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy"
     ):
         raise ProtocolError(
-            "The bounded AneuG-Flow transport re-entry must retain no selected "
-            "primary, method, GPU, outer test, or repair of historical failures."
+            "The TopAneu release audit may retain one terms-pending source lead, "
+            "but no active primary, method, GPU, outer test, payload, or repair of "
+            "historical failures."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -675,6 +682,161 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The TopAneu attachment audit must remain a below-threshold source-only "
             "conditional lead with no accepted terms, payload, method, GPU, or outer test."
         )
+    release_audit = problem_selection["topaneu_release_evaluation_source_audit"]
+    _require_keys(
+        release_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "conditional_source_lead_count",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "official_repository_commit",
+            "official_release_scans",
+            "official_unique_patients",
+            "official_centers",
+            "reserved_test_center",
+            "official_location_classes",
+            "official_type_classes",
+            "official_share_bytes",
+            "image_sha_manifest_paths",
+            "location_mask_sha_manifest_paths",
+            "type_mask_sha_manifest_paths",
+            "vessel_mask_sha_manifest_paths",
+            "location_json_paths",
+            "terms_sha256",
+            "readme_sha256",
+            "changelog_sha256",
+            "task1_evaluator_sha256",
+            "task2_evaluator_sha256",
+            "batch1_cases_revised_in_current_release",
+            "vessel_mask_provenance",
+            "task2_evaluation_unit",
+            "official_metrics",
+            "official_ranking",
+            "runtime_seconds_per_case",
+            "runtime_ram_gb",
+            "runtime_gpu",
+            "terms_state",
+            "user_terms_acceptance_verified",
+            "medical_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "direct_prior_threats",
+            "candidates",
+            "p0_registration_condition",
+            "p0_pass_authorizes",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.topaneu_release_evaluation_source_audit",
+    )
+    release_candidates = release_audit["candidates"]
+    release_ids = _unique_ids(release_candidates, "id", "TopAneu release candidates")
+    expected_release_ids = {
+        "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy",
+        "topaneu_bilateral_reflection_equivariant_leaf_taxonomy",
+        "topaneu_type_location_compositional_auxiliary_segmentation",
+        "topaneu_official_mean_rank_aligned_optimization",
+        "topaneu_batch_revision_aware_annotation_robustness",
+        "topaneu_center4_longitudinal_growth",
+    }
+    release_scores = {item["id"]: item["score"] for item in release_candidates}
+    if (
+        release_audit["status"]
+        != "completed_source_only_one_conditional_lead_above_admission_pending_user_terms"
+        or release_audit["audit_document"]
+        != "docs/topaneu-release-evaluation-audit-2026-08-10.md"
+        or release_audit["automatic_selection_threshold"] != 32.0
+        or release_audit["best_candidate_id"]
+        != "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy"
+        or release_audit["best_score"] != 33.0
+        or release_audit["conditional_source_lead_count"] != 1
+        or release_audit["active_shortlist_count"] != 0
+        or release_audit["primary_problem_selected"] is not False
+        or release_audit["official_repository_commit"]
+        != "018c243445f99199f484018c4c80575c84c72293"
+        or release_audit["official_release_scans"] != 417
+        or release_audit["official_unique_patients"] != 409
+        or release_audit["official_centers"] != 4
+        or release_audit["reserved_test_center"] != "center_3_umcu"
+        or release_audit["official_location_classes"] != 52
+        or release_audit["official_type_classes"] != 3
+        or release_audit["official_share_bytes"] != 21025241495
+        or any(
+            release_audit[key] != 417
+            for key in (
+                "image_sha_manifest_paths",
+                "location_mask_sha_manifest_paths",
+                "type_mask_sha_manifest_paths",
+                "vessel_mask_sha_manifest_paths",
+                "location_json_paths",
+            )
+        )
+        or release_audit["terms_sha256"]
+        != "aa7d73eefe57adae20fafd23ddafc068341468aec53db33948060a203ba3432e"
+        or release_audit["readme_sha256"]
+        != "ea7c5cd4898b5abeef9c251ec05e962d769b51e83d35b0678c41aaa5f9273577"
+        or release_audit["changelog_sha256"]
+        != "5a992240cb6f4089c138d8dd62830204326693d859f159794e681e44f8e7f0b1"
+        or release_audit["task1_evaluator_sha256"]
+        != "58cda5d310ec2e4588428b73fbadee5bfdd30a40a79ecec8c9a10f2ceefc462e"
+        or release_audit["task2_evaluator_sha256"]
+        != "5e24667a47f2141344c07666c7d0492bd8e92122a276512f801f1154ba00e09e"
+        or release_audit["batch1_cases_revised_in_current_release"] != 52
+        or release_audit["vessel_mask_provenance"]
+        != "organizer_model_prediction_silver_training_only_not_ground_truth"
+        or release_audit["task2_evaluation_unit"]
+        != "per_class_binary_volume_not_aneurysm_instance"
+        or set(release_audit["official_metrics"])
+        != {"precision", "recall", "mcc", "dice", "volumetric_similarity", "normalized_hd95"}
+        or release_audit["official_ranking"] != "mean_rank_across_task_metrics"
+        or release_audit["runtime_seconds_per_case"] != 420
+        or release_audit["runtime_ram_gb"] != 32
+        or release_audit["runtime_gpu"] != "nvidia_t4_16gb"
+        or release_audit["terms_state"]
+        != "downloading_constitutes_agreement_user_acceptance_not_verified"
+        or release_audit["user_terms_acceptance_verified"] is not False
+        or release_audit["medical_payload_accessed"] is not False
+        or release_audit["executable_p0_registered"] is not False
+        or release_audit["method_selected"] is not False
+        or release_audit["architecture_selected"] is not False
+        or release_audit["gpu_training_authorized"] is not False
+        or release_audit["outer_test_authorized"] is not False
+        or release_audit["submission_identity_active"] is not False
+        or release_ids != expected_release_ids
+        or release_scores
+        != {
+            "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy": 33.0,
+            "topaneu_bilateral_reflection_equivariant_leaf_taxonomy": 31.5,
+            "topaneu_type_location_compositional_auxiliary_segmentation": 31.0,
+            "topaneu_official_mean_rank_aligned_optimization": 30.5,
+            "topaneu_batch_revision_aware_annotation_robustness": 28.5,
+            "topaneu_center4_longitudinal_growth": 20.0,
+        }
+        or any(sum(item["axis_scores"]) != item["score"] for item in release_candidates)
+        or any(item["payload_accessed"] is not False for item in release_candidates)
+        or release_audit["p0_registration_condition"]
+        != "explicit_user_confirmation_of_topaneu_data_use_terms"
+        or release_audit["p0_pass_authorizes"]
+        != "register_one_method_free_p1_task_adequacy_audit_only"
+        or release_audit["decision"]
+        != "retain_one_conditional_source_lead_without_active_shortlist_payload_p0_method_architecture_gpu_outer_test_or_claim"
+        or release_audit["next_allowed_action"]
+        != "after_explicit_user_terms_acceptance_register_a_fresh_cpu_read_only_p0_release_asset_and_semantics_audit_or_continue_other_fresh_source_audits"
+    ):
+        raise ProtocolError(
+            "The TopAneu material release may retain exactly one 33/40 terms-pending "
+            "source lead, but must not open payload, P0, method, GPU, outer test, or claim."
+        )
+    checks.append("TopAneu material-release conditional source-lead boundary")
     physical_candidate = problem_selection["open_cta_physical_grid_candidate"]
     _require_keys(
         physical_candidate,

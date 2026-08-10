@@ -1,10 +1,23 @@
 # AURORA 연구 방향
 
-> **Current outcome · 2026-08-10:** The single AneuG-Flow P0-v2a job ended
+> **Current direction · TopAneu material release · 2026-08-10:** A real
+> multi-centre, 52-location/3-type aneurysm task now exists, so the strongest
+> residual question is no longer “add a GNN”. It is whether observable leaf
+> labels can be factorized into territory, laterality and branch role, while an
+> organizer-predicted vessel mask is treated as noisy train-only privileged
+> information and inference remains image-only. This candidate scores 33/40,
+> but is only a terms-pending source lead. No payload, P0, selected primary,
+> method, architecture, GPU, outer test or contribution exists. The old 29/40
+> attachment formulation stays rejected. Explicit user acceptance of the
+> TopAneu terms may open only a separately frozen CPU/read-only P0-R, followed
+> by method-free P1 if and only if every asset/semantics check passes.
+
+> **Closed AneuG history · 2026-08-10:** The single AneuG-Flow P0-v2a job ended
 > execution-incomplete before an aggregate result. Transport and scientific
 > gates are unevaluated, not failed. The one repair round is exhausted; active
 > shortlist, primary, method, architecture, GPU and paper identity return to 0.
-> Next work must be a fresh problem-level source/asset audit.
+> That candidate remains closed; the newer TopAneu material-release lead above
+> is a distinct problem and does not repair or relabel it.
 
 > **Current schema 6.2 boundary · 2026-08-10:** AneuG-Flow's historical 33/40
 > cycle-functional source candidate has one prospective, transport-only

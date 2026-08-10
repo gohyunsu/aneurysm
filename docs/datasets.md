@@ -1,5 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **TopAneu-26 material-release role · 2026-08-10:** Official public metadata
+> describe 417 scans from 409 patients, 52-class location masks/JSON, 3-class
+> type masks and organizer-predicted silver vessel masks, with UMCU reserved for
+> testing. For AURORA this is currently a **terms-gated source candidate only**.
+> The user has not explicitly accepted the download terms; no image, mask or
+> location-JSON payload has been read. If terms are accepted, P0-R must first
+> establish patient grouping, source/centre lineage, factor-map validity,
+> empty/multiple same-leaf support, mask–JSON agreement and silver-label
+> provenance. Silver vessels may be train-time privileged information only and
+> must not be a test-time input. No P0/model/GPU/outer-test use is authorized.
+
 > **Current outcome · 2026-08-10:** The exact `introai9` P0-v2a created no
 > aggregate result, so completed HEAD/range counts and verified server-side
 > bytes are unknown. Local discovery remains metadata-only evidence; no full
@@ -382,7 +393,7 @@
 
 | 자료 | 직접 제공하는 것 | 규모/범위 | 적합한 용도 | 신뢰도 메모 |
 |---|---|---:|---|---|
-| TopAneu 2026 | CTA/MRA, 52-class location mask/JSON, lesion type mask, predicted vessel mask | live train 417 scan/409 patient | explicit user terms 수락 뒤 P0 asset/semantics audit 후보 | MICCAI challenge; vessel mask는 silver; payload 0; conditional lead 29/40; method/GPU 없음 |
+| TopAneu 2026 | CTA/MRA, 52-class location mask/JSON, lesion type mask, predicted vessel mask | live train 417 scan/409 patient | explicit user terms 수락 뒤 P0-R asset/semantics audit 후보 | MICCAI challenge; vessel mask는 silver; new factorized leaf-risk source lead 33/40, historical attachment candidate 29/40 rejected; payload/P0/method/GPU 없음 |
 | RSNA-ICA 2025 | Multisite CT/MR angiography, study/location labels, aneurysm center points와 일부 13-class vessel-anatomy segmentation | official description: >4,000 scans, 18 institutions, 13 locations; second-place report: 4,348 series/178 vessel-mask cases | rejected for mixed-granularity lesion-selection task; possible future benchmark only after a new task audit | controlled access; not staged; no official voxel aneurysm mask; no redistribution |
 | CADA 2020 | 3DRA와 task별 center/mask supervision | detection 109 volume/127 lesion; segmentation 110 volume/128 lesion | user access 뒤 fully supervised external detection/segmentation stress test | registration required; CC BY-NC-ND 4.0; selection-aware cohort 아님 |
 | ADAM 2020 | TOF-MRA+structural MR, center/radius와 consensus binary mask | 113 scans; 93 positive, 20 negative; 일부 baseline/follow-up | user access 뒤 MRA fully supervised baseline | registration/confidentiality agreement; subject-group split 필수; selection-aware cohort 아님 |

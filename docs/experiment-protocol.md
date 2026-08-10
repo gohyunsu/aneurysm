@@ -1,5 +1,17 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 6.3 prospective boundary:** The current 33/40 TopAneu lead has no
+> executable experiment. Explicit personal terms acceptance is required first.
+> Only then may a new exact CPU/read-only P0-R be preregistered to verify the
+> frozen release, 417 scan/409-patient mapping, 52-leaf and 3-type semantics,
+> empty/multiple-lesion support, JSON–mask agreement, silver-vessel provenance,
+> source/centre lineage, sealed UMCU test and official metrics/runtime. P0-R is
+> all-pass-or-close and a pass opens only method-free P1. P1 must quantify
+> support, source confounding, factor validity, trivial flat baselines and
+> plausible effect size before any architecture, GPU smoke or outer test.
+> Execution, if later authorized, is `introai9` PBS only; `junjinyong` is never
+> an AURORA target.
+
 > **P0-v2a outcome · closed:** Exact job `115467.ECE-util1` ended exit 1 after
 > 8 seconds with only an execution-incomplete status. No aggregate/raw log
 > materialized, so transport operations and gates are unevaluated. The one

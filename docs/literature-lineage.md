@@ -1,5 +1,19 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 TopAneu release lineage:** The observable 52-leaf location and
+> three-type task is real, but none of its obvious components is independently
+> novel: patient-specific centerline GAT/artery-aware fusion, vessel-distance
+> attention, joint lesion–vessel multitask learning, universal/hierarchical
+> taxonomy losses, sparse vascular representations, annotation-ambiguity
+> learning, privileged-information distillation and morphological conformal
+> segmentation are direct priors or mandatory controls. The residual 33/40
+> question is their falsifiable intersection: a predeclared factorization must
+> improve patient-level leaf localization and mask risk on an unseen centre,
+> while silver anatomy is noisy train-only privileged information and the test
+> model is image-only. This is not yet novelty; it becomes a contribution only
+> after P0/P1 and prospective strong-baseline superiority. The earlier 29/40
+> vascular-attachment formulation remains rejected.
+
 > **Current outcome · 2026-08-10:** AneuG-Flow P0-v2a produced no transport or
 > scientific verdict, so cycle-functional consistency cannot be promoted to an
 > active research gap. The direct-prior list remains binding and the candidate

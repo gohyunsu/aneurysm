@@ -1,5 +1,14 @@
 # Dataset acquisition plan
 
+> **2026-08-10 TopAneu release boundary:** Public challenge prose, source code,
+> path/checksum manifests and download-share metadata are audited, but medical
+> files and location-JSON content remain unread. The user must personally review
+> and explicitly accept the TopAneu data-use terms before any acquisition.
+> Acceptance would authorize only registration of the bounded CPU/read-only
+> P0-R in `docs/topaneu-release-evaluation-audit-2026-08-10.md`; it is not
+> permission to train, use the sealed test, or create a GPU job. Any authorized
+> server operation is `introai9` PBS only, never `junjinyong`.
+
 > **Current override · 2026-08-09:** AneuX preprocessing-orbit P0는 exact public
 > commit 뒤 `introai9` CPU/PBS에서 한 번 실행됐지만 initial tabular transport
 > attempt를 소진해 complete/partial archive와 CSV parse 없이 종료됐다. Model

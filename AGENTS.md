@@ -1,5 +1,31 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 TopAneu material-release override:** Official TopAneu-26 repo
+> commit `018c243445f99199f484018c4c80575c84c72293` and the live challenge now
+> define 417 scans/409 patients, 52 location leaves, three aneurysm types,
+> location JSON, organizer-predicted silver vessel masks, UMCU held-out test,
+> official metrics and a seven-minute/T4 execution contract. The fresh
+> `topaneu_factorized_leaf_risk_with_train_only_silver_anatomy` problem scores
+> 33.0/40 and is retained only as one **conditional source lead**. It asks
+> whether a predeclared territory/laterality/branch-role factorization improves
+> patient-level leaf localization plus mask risk on an unseen centre while the
+> silver vessel mask is train-time privileged information and test inference is
+> image-only. The historical 29/40 attachment candidate remains rejected; do
+> not relabel it. The user has not explicitly accepted the TopAneu terms.
+> Therefore medical payload/JSON content, executable P0, active shortlist,
+> selected primary, method, architecture, GPU, outer test, result row and paper
+> contribution are all 0. Terms acceptance, if explicitly confirmed by the
+> user, authorizes only prospective registration of a CPU/read-only P0-R; it
+> does not authorize automatic download or training. P0-R must close unless all
+> 417 mappings, 409-patient grouping, factor map, empty/multiple same-leaf
+> support, mask–JSON agreement, silver provenance, centre/source lineage,
+> sealed-test boundary and official metric/runtime contract pass. A P0-R pass
+> opens only method-free P1. AURORA never connects to, queries, transfers to,
+> submits on or monitors `junjinyong`; future authorized execution is PBS on
+> `introai9` only. Source of truth:
+> `docs/topaneu-release-evaluation-audit-2026-08-10.md` and
+> `problem_selection.topaneu_release_evaluation_source_audit` in schema 6.3.
+
 > **2026-08-10 AneuG-Flow P0-v2a outcome override:** Exact clean public source
 > `690035ae5385328780fbaace9f956ce142a78f33` ran once on `introai9` as PBS
 > CPU job `115467.ECE-util1`. Last observed scheduler state was `E`, exit 1,

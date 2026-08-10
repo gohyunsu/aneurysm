@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **2026-08-10 TopAneu source-lead boundary:** This was a public source and
+> direct-prior audit, not a server experiment. TopAneu terms are not accepted,
+> so no payload, PBS job, GPU allocation or monitoring loop was created. If the
+> user explicitly accepts the terms, a separately preregistered CPU/read-only
+> P0-R may run on `introai9` PBS only. `junjinyong` is prohibited for connection,
+> query, transfer, submission and monitoring.
+
 > **Current execution outcome · 2026-08-10:** Exact `introai9` CPU/PBS job
 > `115467.ECE-util1` was observed in E with exit 1, walltime 8 s, CPU time 0 and
 > 16824 kB memory. Only a 319-byte execution-incomplete status materialized;

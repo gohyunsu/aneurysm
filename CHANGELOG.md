@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-10 · TopAneu material release creates a terms-pending source lead
+
+- Verified official TopAneu-26 repo commit `018c243445f99199f484018c4c80575c84c72293`
+  and live challenge metadata: 417 scans/409 patients, 52 location leaves,
+  three aneurysm types, location JSON, silver vessel masks, UMCU held-out test,
+  official metrics and seven-minute/T4 runtime.
+- Froze six candidates. Factorized leaf risk with silver anatomy restricted to
+  noisy train-time privileged information scores 33.0/40; the other five score
+  31.5/31.0/30.5/28.5/20.0. The historical 29/40 attachment candidate is not
+  repaired or relabelled.
+- This is one conditional source lead, not an active executable shortlist.
+  User terms acceptance, medical payload, P0, selected primary, method,
+  architecture, PBS/GPU, outer test and paper contribution remain zero.
+- The only possible next execution is a separately preregistered CPU/read-only
+  P0-R after explicit user terms acceptance, followed by method-free P1 only on
+  an all-pass result. AURORA remains `introai9`-only; `junjinyong` is prohibited.
+- 영향 파일: detailed audit, schema/validator/tests, research/experiment/model/
+  dataset/ISBI/server docs, overview/Learn/change UI and private paper history.
+
 ## 2026-08-10 · AneuG-Flow P0-v2a closes execution-incomplete
 
 - Exact public source `690035ae…` was cloned into a dedicated clean detached
