@@ -703,6 +703,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Schema 6.6 no-verdict outcome is live and verified",
+      copy: "Exact public content bb16d90d2e06bd1f12972efaf67093d425048d49 passed Quality 31375709669 and Pages 31375709322. Direct live checks of overview, Learn and the public execution record render P0 closed/no scientific verdict, no repair/P1/model/GPU and junjinyong_accessed=false. Private paper head b530d51b4e461c883dcc0d9c9e2e24b56cbddb17 pins the outcome as unnumbered history. Deployment provenance changes no scientific or compute authorization.",
+      files: ["AGENTS.md", "CHANGELOG.md", "docs/server-execution.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "experiment",
       title: "Anchor-conditioned BC-transport P0 closes execution-incomplete",
       copy: "Exact public source 38e7894fc5ae56ffb3efbe469c4e1f7480f81feb ran once on introai9 as CPU/PBS job 115518.ECE-util1 and ended E/exit 1 after 00:08:21, CPU time 0 and 39,160 kB memory. Only a 275-byte private status materialized; aggregate result and raw PBS output are absent. All source/scientific checks and the low-level cause are unresolved. The 33.5/40 candidate closes without repair, rerun or P1. Active lead, primary, method, architecture, GPU, outer test and paper claim return to zero. junjinyong was never accessed.",

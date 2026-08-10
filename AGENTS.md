@@ -16,6 +16,13 @@
 > submission identity and contribution are 0. Next is a fresh problem-level
 > source/direct-prior audit. AURORA remains `introai9`-only; `junjinyong` was not
 > accessed and is prohibited for connection/query/transfer/submission/monitoring.
+> Exact schema-6.6 outcome content
+> `bb16d90d2e06bd1f12972efaf67093d425048d49` passed Quality
+> `31375709669` and Pages `31375709322`. Direct live checks of overview, Learn
+> and the public execution record show P0 closed/no scientific verdict, active
+> lead/P1/method/model/GPU 0 and `junjinyong_accessed=false`. Private paper head
+> `b530d51b4e461c883dcc0d9c9e2e24b56cbddb17` pins this public content and the
+> repository remains PRIVATE.
 
 > **2026-08-10 anchor-conditioned BC-transport override · schema 6.5:** A fresh
 > source/prior red team admits

@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 6.6 deployment verification · 2026-08-10:** Exact outcome content
+> `bb16d90d2e06bd1f12972efaf67093d425048d49` passed Quality
+> `31375709669` and Pages `31375709322`. Live overview, Learn and execution JSON
+> expose P0 closed/no verdict, no P1/model/GPU and `junjinyong_accessed=false`.
+> This is deployment provenance only; it does not reopen the job, P0 or any
+> scientific/compute authorization.
+
 > **Schema 6.6 final execution · 2026-08-10:** Exact source `38e7894…` ran once
 > on `introai9` CPU/PBS as `115518.ECE-util1`; final observed state was E/exit 1,
 > walltime 00:08:21, CPU 00:00:00, memory 39,160 kB. Only a 275-byte private

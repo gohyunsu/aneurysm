@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-10 · Schema 6.6 outcome and explanatory site are live
+
+- Exact scientific content `bb16d90d2e06bd1f12972efaf67093d425048d49`
+  passed Quality run `31375709669` and Pages run `31375709322`.
+- Live overview, beginner Learn guide and public execution JSON expose the same
+  `execution-incomplete/no scientific verdict`, no-repair/no-P1 and active
+  lead/primary/method/architecture/GPU 0 boundary.
+- Private paper head `b530d51b4e461c883dcc0d9c9e2e24b56cbddb17`
+  pins the public schema-6.6 content as unnumbered history. Repository visibility
+  is PRIVATE and the three-page structural PDF was visually checked.
+- Deployment verification changes no scientific verdict, source score, access,
+  compute or submission authorization. Future eligible compute remains
+  `introai9` PBS only; `junjinyong` remains excluded.
+
 ## 2026-08-10 · BC-transport P0 closes execution-incomplete without a verdict
 
 - Ran exact public source `38e7894fc5ae56ffb3efbe469c4e1f7480f81feb`
