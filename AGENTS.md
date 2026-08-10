@@ -11,6 +11,11 @@
 > source audit. Any future gate-authorized execution uses `introai9` PBS;
 > `junjinyong` must never be connected to, queried, used for transfer or
 > submission, or monitored for AURORA.
+> Exact schema-6.0 content `545df1b570ea9df6d3feac545bbc0f02cab18178`
+> passed Quality `31357501911` and Pages `31357501328`. Direct live checks of
+> overview, Learn, change data and the detailed audit rendered the corrected
+> license scope, 29/40 rejection and no-P0/model/GPU boundary. This deployment
+> evidence creates no scientific or compute authorization.
 
 > **2026-08-10 TopBrain 2.0 source overlay:** Official Zenodo record
 > `10.5281/zenodo.19707577` contains one 35-page, 139,840-byte design PDF

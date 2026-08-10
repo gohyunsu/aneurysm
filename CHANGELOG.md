@@ -14,6 +14,9 @@
   Zenodo/challenge snapshots. Live fetch matched both frozen states and returned
   `continue_watch_only`; all automatic download/P0/model/GPU flags remained
   false.
+- Exact content `545df1b570ea9df6d3feac545bbc0f02cab18178` passed Quality
+  `31357501911` and Pages `31357501328`; direct live checks rendered the same
+  corrected license scope and no-compute boundary.
 - Future gate-authorized execution remains `introai9` PBS only. `junjinyong` is
   excluded from connection, query, transfer, submission and monitoring.
 - 영향 파일: machine protocol/validator/tests, source watcher/CLI/tests,

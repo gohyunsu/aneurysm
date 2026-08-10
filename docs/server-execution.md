@@ -8,6 +8,9 @@
 - Automatic download, P0, model, GPU and outer test remain false. No PBS job or
   monitoring loop was created. Future authorized execution remains
   `introai9`-only; `junjinyong` is completely excluded.
+- Exact content `545df1b570ea9df6d3feac545bbc0f02cab18178` passed Quality
+  `31357501911` and Pages `31357501328`; live overview, Learn, change data and
+  detailed audit expose the same correction and no-compute boundary.
 
 ## 2026-08-10 · TopBrain 2.0 deployment verification
 
