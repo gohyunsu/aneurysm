@@ -21,6 +21,9 @@
 - Schema 5.4 freezes shortlist/primary/method/architecture/P0/PBS/GPU/outer
   test/submission identity at zero. No `introai9` job was needed;
   `junjinyong` remains excluded. Closed branches are not repaired or rerun.
+- Exact content `41d579c0963bd3c7f72c2cd372f1c3cf3dbd77f1` passed Quality
+  `31345064183` and Pages `31345063921`; the live site and detailed audit return
+  HTTP 200 with the frozen 31.5/40 boundary.
 - 영향 파일: `docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md`,
   machine contract/validator/tests, research/data/model/experiment/ISBI/server
   guides, public site, private manuscript history, `AGENTS.md` and this log.

@@ -15,6 +15,10 @@
 > Patient payload, P0, primary, method, architecture, PBS/GPU, outer test와
 > submission identity는 0이다. AURORA는 `introai9`만 사용하고 `junjinyong`은
 > 접속·조회·제출·모니터링하지 않는다. Closed branch는 repair/rerun하지 않는다.
+> Exact content `41d579c0963bd3c7f72c2cd372f1c3cf3dbd77f1`의 Quality
+> run `31345064183`과 Pages run `31345063921`이 성공했고 live site와 상세
+> audit가 HTTP 200으로 31.5/40, all rejected와 no-payload/P0/model/GPU를
+> 표시함을 확인했다.
 
 > **2026-08-10 failure-mechanism/biology source overlay:** Fresh six-candidate
 > score는 cause-specific CTA false-positive risk, post-release TopAneu

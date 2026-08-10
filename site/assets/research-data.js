@@ -561,7 +561,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.10",
       category: "research",
       title: "Reconstruction and annotation reliability stops before payload and compute",
-      copy: "Six frozen scores are 31.5/29.5/29.0/26.5/25.5/25.5. VP-UNet, FocalSegNet, WeakMed, ultra-sparse DSA, AutoCAR, the 600-model variability study, biplane reconstruction and phantom consistency are direct priors. A real same-subject weak/precise annotation manifest and independent reconstruction truth are absent. Schema 5.4 creates no patient payload, P0, PBS, model or GPU. introai9 remains the only future execution target and junjinyong remains excluded.",
+      copy: "Six frozen scores are 31.5/29.5/29.0/26.5/25.5/25.5. VP-UNet, FocalSegNet, WeakMed, ultra-sparse DSA, AutoCAR, the 600-model variability study, biplane reconstruction and phantom consistency are direct priors. A real same-subject weak/precise annotation manifest and independent reconstruction truth are absent. Schema 5.4 creates no patient payload, P0, PBS, model or GPU. Exact content 41d579c… passed Quality 31345064183 and Pages 31345063921. introai9 remains the only future execution target and junjinyong remains excluded.",
       files: ["docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
     },
     {
