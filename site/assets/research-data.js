@@ -587,6 +587,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "Registry-gap deployment and private-paper synchronization verified",
+      copy: "Exact public content b4c3d48… passed Quality 31349424733 and Pages 31349424311. Live overview, Learn guide and detailed audit return HTTP 200 with the same 26.5/40, all-rejected and no-payload/P0/model/GPU boundary. Private paper head 2403b746… pins this public content as unnumbered rejected history; the private repository returns 404 without authentication. This provenance record changes no score, gate, architecture, compute or submission identity. introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "docs/server-execution.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "Registry-gap audit rejects test-only and endpoint-mismatched assets",
       copy: "The official exact-title Zenodo query returned 49 records. Five previously unregistered candidates score 26.5/26.0/26.0/25.5/23.5. The public rupture blobs are test-only and lack a public development lineage or prospective endpoint; VWE is a 41-unruptured-aneurysm scalar table; solver software has no cohort; post-presentation omics and aggregate autopsy anatomy have no casewise imaging bridge. Schema 5.6 creates no payload, P0, PBS job, method, architecture or GPU. Future authorized execution is introai9 PBS only; junjinyong remains completely excluded.",

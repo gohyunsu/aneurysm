@@ -4,6 +4,20 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Registry-gap deployment and private-paper sync verified
+
+- Exact public content `b4c3d48a107b969ce26cbc86abd9b36814116a3a`
+  passed Quality `31349424733` and Pages `31349424311`.
+- Live overview, Learn guide and detailed audit return HTTP 200 and show the
+  same 26.5/40, all-rejected, no-payload/P0/model/GPU boundary.
+- Private paper head `2403b746e8bbc663f87e08cc8493f5ed31cc85ab`
+  pins the exact public content and records this batch only as unnumbered
+  rejected history. The repository is private; unauthenticated GitHub API
+  access returns 404. No credential or private result was copied publicly.
+- Deployment verification changes no source score, gate, scientific verdict,
+  architecture, compute authorization or submission identity. `introai9`
+  remains the only future execution target and `junjinyong` remains excluded.
+
 ## 2026-08-10 · Registry-gap audit rejects test-only and endpoint-mismatched assets
 
 - The official exact-title Zenodo query returned 49 records. Five previously

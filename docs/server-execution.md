@@ -2,6 +2,16 @@
 
 최종 갱신: 2026-08-10 KST
 
+## 2026-08-10 · Registry-gap deployment verification
+
+- Public content `b4c3d48a107b969ce26cbc86abd9b36814116a3a` passed Quality
+  `31349424733` and Pages `31349424311`; the live overview, Learn guide and
+  detailed audit return HTTP 200.
+- Private paper head `2403b746e8bbc663f87e08cc8493f5ed31cc85ab` pins that public
+  content. The repository is private and unauthenticated API access returns 404.
+- This is provenance verification only. It creates no PBS/GPU job and does not
+  change the scientific early-stop boundary or authorize `junjinyong`.
+
 ## 2026-08-10 · Registry-gap source-only stop; introai9 remains exclusive
 
 - Five metadata-only candidates score 26.5/26.0/26.0/25.5/23.5, all below 32.

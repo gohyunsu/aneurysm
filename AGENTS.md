@@ -18,6 +18,13 @@
 > AURORA may use only `introai9` PBS after a separately frozen candidate reaches
 > 32 and passes a method-free P0. `junjinyong` must not be connected to, queried,
 > submitted to or monitored for this project.
+> Exact registry-gap content `b4c3d48a107b969ce26cbc86abd9b36814116a3a`
+> passed Quality run `31349424733` and Pages run `31349424311`. Live overview,
+> Learn guide and detailed audit return HTTP 200 and render the same 26.5/40,
+> all-rejected, no-payload/P0/model/GPU boundary. Private paper head
+> `2403b746e8bbc663f87e08cc8493f5ed31cc85ab` pins this public content and stores
+> the batch as unnumbered rejected history without C21 or a result row. The paper
+> repository is private and its unauthenticated API response is 404.
 
 > **2026-08-10 method--asset viability source overlay:** Fresh five-candidate
 > scores are 30.0/30.0/29.0/26.0/23.0, all below the frozen 32/40 line. Royal
