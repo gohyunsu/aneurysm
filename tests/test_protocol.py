@@ -463,6 +463,73 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "TopBrain 2.0 source audit"):
             validate_protocol(candidate)
 
+    def test_four_d_cta_aaa_mechanics_batch_cannot_open_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "four_d_cta_aaa_mechanics_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 31.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["zenodo_record"], "10.5281/zenodo.19182978")
+        self.assertEqual(audit["zenodo_license_id"], "cc-by-4.0")
+        self.assertEqual(audit["archive_bytes"], 1857980948)
+        self.assertEqual(
+            audit["archive_md5"], "11b74684e382d1410a2d64f81967e613"
+        )
+        self.assertFalse(audit["archive_or_member_payload_accessed"])
+        self.assertEqual(audit["reported_patients"], 20)
+        self.assertEqual(audit["reported_centres"], 3)
+        self.assertFalse(
+            audit[
+                "future_growth_rupture_treatment_wall_strength_or_histology_endpoint_available"
+            ]
+        )
+        self.assertTrue(
+            audit[
+                "released_mechanics_are_derived_workflow_outputs_not_independent_clinical_ground_truth"
+            ]
+        )
+        self.assertEqual(
+            audit["synthetic_displacement_ground_truth_effective_patient_units"],
+            1,
+        )
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(
+            audit["introai9_current_status_attempt"],
+            "connection_reset_before_remote_command_no_scheduler_observation",
+        )
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not candidate["payload_accessed"] for candidate in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["four_d_cta_aaa_mechanics_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "4D-CTA AAA mechanics source audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["four_d_cta_aaa_mechanics_source_audit"][
+            "candidates"
+        ][0]["score"] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "4D-CTA AAA mechanics source audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["four_d_cta_aaa_mechanics_source_audit"][
+            "reported_patients"
+        ] = 200
+        with self.assertRaisesRegex(ProtocolError, "4D-CTA AAA mechanics source audit"):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **2026-08-10 4D-CTA mechanics direction:** 공개 20-patient AAA asset은
+> 실제 cardiac 3D CTA와 surface mechanics를 함께 제공하지만, 독립 임상 정답이
+> 아니라 동일 registration/FE workflow의 strain·tension·SII·RSII 파생값이다.
+> Phase-subset RSII hotspot 보존이 가장 강한 후보지만 31.5/40이고, 원 연구가
+> 이미 systole/diastole 선택과 RSII를 정의했으며 registration consistency/UQ와
+> field-surrogate UQ도 직접 선행이다. 따라서 현재 방향은 GNN이나 neural
+> operator를 붙이는 것이 아니라 이 formulation을 기각하고, 충분한 patient
+> unit과 독립 clinical/physical target을 함께 갖춘 새 source를 찾는 것이다.
+> Primary/method/architecture/GPU는 0이다.
+
 > **2026-08-10 source correction:** TopBrain 2.0's `CC BY 4.0` applies to its
 > public design PDF, not to unreleased medical data. Join registration is
 > visible, but a task-executable data/evaluation/submission contract is not.

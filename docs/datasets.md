@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 4D-CTA AAA asset boundary:** Zenodo `19182978`은 CC BY 4.0,
+> 단일 1,857,980,948-byte ZIP, 20 patient/3 centre와 환자별 2--10 cardiac
+> phase를 보고한다. Wall/ILT surface, FE mesh, strain, tension, SII와 RSII가
+> 포함되지만 phase·vertex·mesh node는 독립 환자 수를 늘리지 않는다. P01--P10은
+> PRAEVAorta, P11--P20은 nnInteractive assistance를 사용해 centre/acquisition과
+> processing이 부분 confounded하다. Metadata/article만 읽었고 ZIP/NRRD/VTP/INP
+> payload는 0이다. 현재 역할은 **source-rejected future figure/reproducibility
+> asset**, train/validation/test asset이 아니다.
+
 > **2026-08-10 TopBrain 2.0 correction:** Zenodo revision 4 licenses the sole
 > design PDF under `CC BY 4.0`; it does not provide or license medical images,
 > masks or a casewise manifest. The challenge remains under construction with

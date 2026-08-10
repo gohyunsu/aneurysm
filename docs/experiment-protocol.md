@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **2026-08-10 4D-CTA source gate:** Six candidates are frozen at
+> 31.5/30.5/30.0/29.0/28.5/25.5, below the unchanged 32/40 line. The 1.86 GB
+> archive and all NRRD/VTP/INP members remain unread; executable P0, model,
+> outer test and GPU are zero. A bounded `introai9` status attempt was reset
+> before any remote command, so no current scheduler observation is claimed and
+> no repair loop is opened. A future admitted candidate must first receive a
+> separate method-free P0; any execution is PBS on `introai9` only.
+
 > **Current gate · schema 6.0 correction:** TopBrain 2.0's `CC BY 4.0` covers
 > the design PDF only. Join registration is not an executable evaluation
 > contract. The frozen score and all no-compute gates remain unchanged;

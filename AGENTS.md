@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 4D-CTA AAA mechanics source override:** Official Zenodo
+> `10.5281/zenodo.19182978` is open under `CC BY 4.0` and reports one
+> 1,857,980,948-byte archive (MD5 `11b74684e382d1410a2d64f81967e613`), 20
+> patients from three centres, 2--10 cardiac phases, wall/ILT surfaces, FE
+> meshes and strain/tension/SII/RSII maps. Metadata and primary article text
+> were read; ZIP/NRRD/VTP/INP payload access is 0. Six frozen candidate scores
+> are 31.5/30.5/30.0/29.0/28.5/25.5, all below 32. Repeated phases/nodes do not
+> increase independent patient units, the synthetic displacement truth has one
+> effective case, and no future growth/rupture/treatment/wall-strength/histology
+> endpoint is released. Schema **6.1** source of truth is
+> `docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md` and
+> `problem_selection.four_d_cta_aaa_mechanics_source_audit`. Active shortlist,
+> primary, P0, method, architecture, PBS/GPU, outer test, C21/result row and
+> submission identity are 0. One bounded `introai9` status attempt reset before
+> remote command, so no current queue observation is claimed and no repair loop
+> is opened. AURORA uses only `introai9` PBS after a fresh admitted source and
+> separate method-free P0. `junjinyong` must never be connected to, queried,
+> used for transfer/submission or monitored for AURORA.
+
 > **2026-08-10 source-metadata correction + operational override:** Official
 > TopBrain 2.0 Zenodo revision 4 marks the published design object `open` under
 > `CC BY 4.0`; this covers the sole 35-page PDF, not unreleased patient data.

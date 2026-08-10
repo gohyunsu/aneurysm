@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 manuscript boundary:** The open 4D-CTA AAA release does not
+> create a paper title, numbered contribution, architecture, result row or
+> method figure. Its strongest phase-subset RSII formulation is 31.5/40, and
+> its target is a derived workflow output over 20 patients rather than a future
+> clinical endpoint. The batch is retained as unnumbered rejected-source
+> history only. The ISBI 2027 four-page paper remains not submission-ready.
+
 > **2026-08-10 source correction:** TopBrain 2.0 design metadata are openly
 > licensed under `CC BY 4.0`; patient data are not released or licensed by that
 > record, and Join registration supplies no executable task contract. The

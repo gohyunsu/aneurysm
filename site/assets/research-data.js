@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · TopBrain 2.0 source-only best 29.0/40 and all six are rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
-    requirement: "versioned licensed medical release plus casewise target/lineage and a genuinely identifiable fresh problem ≥32 → new source/task audit before any method-free P0; do not repair closed branches",
+    status: "Target locked · 4D-CTA AAA mechanics best 31.5/40 and all six are rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    requirement: "independent clinical or physical target plus sufficient patient units and a residual algorithmic gap ≥32 → fresh source audit before any method-free P0; do not repair closed branches",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Open 4D images and mechanics fields still do not manufacture an independent endpoint",
+      copy: "Zenodo 19182978 releases 20 patients from three centres with 2–10 cardiac 3D CTA phases, wall/ILT surfaces, FE meshes and strain/tension/SII/RSII maps. The effective unit is 20 patients, not phases, vertices or mesh nodes. The maps are outputs of the published registration/FE workflow and no future growth, rupture, treatment, wall-strength or histology target is released. AAA kinematics and RSII already occupy the domain method; CARL/SGDIR, registration uncertainty and calibrated functional-surrogate UQ occupy the generic method components.",
+      status: "Best 31.5/40 · all six rejected · archive/P0/PBS/model/GPU 0",
+      url: "../docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "A challenge design document is not a released aneurysm task",
@@ -338,12 +345,19 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Direct prior", "TopBrain 1 multiclass artery/vein segmentation", "TopAneu + RSNA lesion/vessel multitask", "Betti matching · cbDice · clCE", "None admitted"],
-    ["Observable target", "Planned 55+ vessel-anatomy labels", "Aneurysm only as planned robustness context", "Organizer topology/contamination metrics", "No released joint lesion–parent-vessel target"],
-    ["Known boundary", "CC BY design PDF only", "No versioned medical data/data-license/lineage", "Under construction · Join only", "Released observation process plus sealed test and unoccupied algorithm required"],
-    ["Current decision", "Mandatory baseline", "Mandatory baseline", "No access action", "29.0/40 reject · no P0/method/GPU"]
+    ["Direct prior", "4D-CTA registration → displacement/strain", "FE tension + strain → SII/RSII", "CARL/SGDIR + registration/functional UQ", "None admitted"],
+    ["Observable target", "Released derived strain/tension/SII/RSII", "20 patients · 2–10 correlated phases", "One synthetic displacement-GT case", "No future clinical or independent physical endpoint"],
+    ["Known boundary", "CC BY 4.0 · one 1.86 GB archive", "Centre/acquisition partly confounded with processing", "Generic GNN/operator/UQ is direct-prior dense", "Independent target + sufficient patient units required"],
+    ["Current decision", "Mandatory reproduction baseline", "Patient-grouped only", "No payload action", "31.5/40 reject · no P0/method/GPU"]
   ],
   gates: [
+    {
+      id: "S-4D",
+      title: "Does open 4D-CTA plus released AAA mechanics identify a new model-worthy problem?",
+      copy: "No. The source is rich and reusable, but the confirmatory unit is 20 patients and the released mechanics are derived outputs of the published workflow. Phases and surface nodes are correlated observations. The strongest reduced-phase RSII task reproduces that workflow rather than an independent clinical endpoint; registration consistency/UQ and functional surrogate UQ are direct priors.",
+      state: "Best 31.5/40 < 32 · all six rejected · archive/P0/PBS/model/GPU 0",
+      blocking: true
+    },
     {
       id: "S-TB2",
       title: "Does TopBrain 2.0 expose a released aneurysm target with an unoccupied algorithmic gap?",
@@ -465,6 +479,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "4D-CTA AAA mechanics · Zenodo 19182978",
+      role: "source-rejected reproducibility and future figure asset; not current training or outer test",
+      provenance: "CC BY 4.0 · 20 patients/3 centres · 2–10 cardiac phases · wall/ILT surfaces + FE + strain/tension/SII/RSII · one 1.86 GB ZIP · metadata/article only · archive payload 0 · best 31.5/40"
+    },
     {
       name: "LargeIA",
       role: "source-rejected restricted multicenter detection candidate; not training or outer test",
@@ -622,6 +641,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Open 4D-CTA AAA mechanics remains below source admission",
+      copy: "Official Zenodo 19182978 provides 20 patients/three centres, 2–10 cardiac phases and wall/ILT/FE plus strain/tension/SII/RSII under CC BY 4.0. Six candidates freeze at 31.5/30.5/30.0/29.0/28.5/25.5. Phases and vertices are not independent patients; one synthetic case is not population ground truth; released mechanics are derived targets without future clinical outcome. Schema 6.1 therefore opens no archive payload, P0, method, architecture, PBS/GPU, outer test or claim. The bounded introai9 status attempt reset before remote command and no repair loop was opened; junjinyong remains excluded.",
+      files: ["docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "operations",

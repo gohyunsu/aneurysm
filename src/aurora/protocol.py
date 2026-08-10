@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.0":
-        raise ProtocolError("The current research-state schema must be version 6.0.")
+    if protocol["schema_version"] != "6.1":
+        raise ProtocolError("The current research-state schema must be version 6.1.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_closed"
+        != "failed_branches_preserved_no_active_shortlist_after_four_d_cta_aaa_source_rejection_aneumo_lineage_p0_closed"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -208,6 +208,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "broad_registry_source_audit",
             "rsna_aws_registry_correction_audit",
             "topbrain2_source_audit",
+            "four_d_cta_aaa_mechanics_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -217,12 +218,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_remains_closed"
+        != "no_active_shortlist_after_four_d_cta_aaa_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_topbrain2_design_object_cc_by_4_0_but_no_versioned_medical_dataset_license_or_executable_evaluation_release_aneumo_lineage_p0_history_unchanged"
+        != "four_d_cta_aaa_official_open_cc_by_4_0_metadata_only_twenty_patient_single_archive_not_accessed_and_derived_mechanics_have_no_progression_or_rupture_endpoint"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not True
@@ -232,13 +233,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_for_a_versioned_licensed_topbrain2_release_with_casewise_target_lineage_or_a_genuinely_new_source_then_run_only_a_fresh_source_audit_without_repairing_closed_branches"
+        != "seek_a_genuinely_new_source_with_independent_clinical_or_physical_ground_truth_and_sufficient_patient_units_then_run_only_a_fresh_source_audit_without_repairing_closed_branches"
         or problem_selection["audit_document"]
-        != "docs/topbrain2-source-audit-2026-08-10.md"
+        != "docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "topbrain2_joint_lesion_parent_vessel_consistency"
+        != "four_d_cta_phase_subset_rsii_hotspot_preservation"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -355,6 +356,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "topbrain2_unified_modality_source_invariant_artery_vein_anatomy",
         "topbrain2_class_contamination_aware_multiclass_vessel_calibration",
         "topbrain2_compositional_aneurysm_stenosis_ordinal_diagnosis",
+        "four_d_cta_phase_subset_rsii_hotspot_preservation",
+        "four_d_cta_image_to_rsii_surface_operator",
+        "four_d_cta_mechanics_consistent_cardiac_cycle_registration",
+        "four_d_cta_synthetic_gt_calibrated_selective_strain_mapping",
+        "four_d_cta_centre_pipeline_invariant_structural_integrity_mapping",
+        "four_d_cta_progression_or_rupture_prediction_from_released_mechanics",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -425,6 +432,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_patient_source_or_lineage_disjoint_split",
         "generic_near_duplicate_shape_hash_or_embedding",
         "generic_source_aware_calibration_abstention_or_domain_adaptation",
+        "regularized_or_deep_four_d_medical_image_registration",
+        "generic_equivariant_cycle_or_semigroup_registration",
+        "generic_registration_uncertainty_or_selective_prediction",
+        "generic_image_or_mesh_to_fe_strain_stress_surface_surrogate",
+        "generic_functional_surrogate_prediction_set_or_neural_operator_uq",
+        "generic_phase_masking_active_acquisition_or_task_fidelity_loss",
         "flow_diverter_outcome_ml_from_morphology_virtual_stenting_or_cfd",
         "time_to_occlusion_statistical_modeling",
         "propensity_score_device_comparison",
@@ -4368,8 +4381,6 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or not set(expected_topbrain2_scores).issubset(
             set(problem_selection["rejected_candidates"])
         )
-        or problem_selection["most_recent_source_rejected_candidate"]
-        != "topbrain2_joint_lesion_parent_vessel_consistency"
         or topbrain2_audit["executable_p0_registered"] is not False
         or topbrain2_audit["method_selected"] is not False
         or topbrain2_audit["architecture_selected"] is not False
@@ -4394,6 +4405,180 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "junjinyong exclusion."
         )
     checks.append("TopBrain 2.0 proposal-only source rejection boundary")
+
+    mechanics_audit = problem_selection["four_d_cta_aaa_mechanics_source_audit"]
+    _require_keys(
+        mechanics_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_ids",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "zenodo_record",
+            "zenodo_concept_record",
+            "zenodo_publication_date",
+            "zenodo_revision",
+            "zenodo_access_right",
+            "zenodo_license_id",
+            "archive_name",
+            "archive_bytes",
+            "archive_md5",
+            "archive_or_member_payload_accessed",
+            "reported_patients",
+            "reported_centres",
+            "reported_minimum_cardiac_phases_per_patient",
+            "reported_maximum_cardiac_phases_per_patient",
+            "reported_surface_and_fe_outputs",
+            "p01_to_p10_segmentation_assistance",
+            "p11_to_p20_segmentation_assistance",
+            "future_growth_rupture_treatment_wall_strength_or_histology_endpoint_available",
+            "released_mechanics_are_derived_workflow_outputs_not_independent_clinical_ground_truth",
+            "synthetic_displacement_ground_truth_effective_patient_units",
+            "direct_prior_threats",
+            "candidates",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_previously_verified",
+            "introai9_current_status_attempt",
+            "introai9_last_verified_pbs_jobs_observed",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.four_d_cta_aaa_mechanics_source_audit",
+    )
+    expected_mechanics_scores = {
+        "four_d_cta_phase_subset_rsii_hotspot_preservation": 31.5,
+        "four_d_cta_image_to_rsii_surface_operator": 30.5,
+        "four_d_cta_mechanics_consistent_cardiac_cycle_registration": 30.0,
+        "four_d_cta_synthetic_gt_calibrated_selective_strain_mapping": 29.0,
+        "four_d_cta_centre_pipeline_invariant_structural_integrity_mapping": 28.5,
+        "four_d_cta_progression_or_rupture_prediction_from_released_mechanics": 25.5,
+    }
+    observed_mechanics_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in mechanics_audit["candidates"]
+    }
+    mechanics_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in mechanics_audit["candidates"]
+    )
+    expected_mechanics_priors = {
+        "regularized_four_d_cta_registration_displacement_and_strain",
+        "fe_tension_plus_registered_strain_sii_and_rsii",
+        "equivariant_cycle_and_semigroup_consistent_deformable_registration",
+        "uncertainty_aware_deformable_registration",
+        "aneurysm_wall_stress_and_hemodynamic_neural_surrogates",
+        "functional_surrogate_prediction_sets",
+        "function_valued_neural_operator_uncertainty",
+    }
+    expected_mechanics_outputs = {
+        "wall_surface",
+        "ilt_surface",
+        "aaa_fe_model",
+        "wall_fe_mesh",
+        "ilt_fe_mesh",
+        "strain_map",
+        "tension_map",
+        "sii_map",
+        "rsii_map",
+    }
+    if (
+        mechanics_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or mechanics_audit["audit_document"]
+        != "docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md"
+        or mechanics_audit["automatic_selection_threshold"] != 32.0
+        or mechanics_audit["best_candidate_ids"]
+        != ["four_d_cta_phase_subset_rsii_hotspot_preservation"]
+        or mechanics_audit["best_score"] != 31.5
+        or mechanics_audit["best_score"]
+        >= mechanics_audit["automatic_selection_threshold"]
+        or mechanics_audit["active_shortlist_count"] != 0
+        or mechanics_audit["primary_problem_selected"] is not False
+        or mechanics_audit["zenodo_record"] != "10.5281/zenodo.19182978"
+        or mechanics_audit["zenodo_concept_record"] != "10.5281/zenodo.19182977"
+        or mechanics_audit["zenodo_publication_date"] != "2026-03-23"
+        or mechanics_audit["zenodo_revision"] != 3
+        or mechanics_audit["zenodo_access_right"] != "open"
+        or mechanics_audit["zenodo_license_id"] != "cc-by-4.0"
+        or mechanics_audit["archive_name"] != "Dataset_root.zip"
+        or mechanics_audit["archive_bytes"] != 1857980948
+        or mechanics_audit["archive_md5"]
+        != "11b74684e382d1410a2d64f81967e613"
+        or mechanics_audit["archive_or_member_payload_accessed"] is not False
+        or mechanics_audit["reported_patients"] != 20
+        or mechanics_audit["reported_centres"] != 3
+        or mechanics_audit["reported_minimum_cardiac_phases_per_patient"] != 2
+        or mechanics_audit["reported_maximum_cardiac_phases_per_patient"] != 10
+        or set(mechanics_audit["reported_surface_and_fe_outputs"])
+        != expected_mechanics_outputs
+        or mechanics_audit["p01_to_p10_segmentation_assistance"] != "praevaorta"
+        or mechanics_audit["p11_to_p20_segmentation_assistance"]
+        != "nninteractive"
+        or mechanics_audit[
+            "future_growth_rupture_treatment_wall_strength_or_histology_endpoint_available"
+        ]
+        is not False
+        or mechanics_audit[
+            "released_mechanics_are_derived_workflow_outputs_not_independent_clinical_ground_truth"
+        ]
+        is not True
+        or mechanics_audit[
+            "synthetic_displacement_ground_truth_effective_patient_units"
+        ]
+        != 1
+        or set(mechanics_audit["direct_prior_threats"])
+        != expected_mechanics_priors
+        or observed_mechanics_scores != expected_mechanics_scores
+        or not mechanics_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in mechanics_audit["candidates"]
+        )
+        or not set(expected_mechanics_scores).issubset(
+            set(problem_selection["rejected_candidates"])
+        )
+        or problem_selection["most_recent_source_rejected_candidate"]
+        != "four_d_cta_phase_subset_rsii_hotspot_preservation"
+        or mechanics_audit["executable_p0_registered"] is not False
+        or mechanics_audit["method_selected"] is not False
+        or mechanics_audit["architecture_selected"] is not False
+        or mechanics_audit["gpu_training_authorized"] is not False
+        or mechanics_audit["outer_test_authorized"] is not False
+        or mechanics_audit["submission_identity_active"] is not False
+        or mechanics_audit["execution_server"] != "introai9"
+        or mechanics_audit["introai9_connection_previously_verified"] is not True
+        or mechanics_audit["introai9_current_status_attempt"]
+        != "connection_reset_before_remote_command_no_scheduler_observation"
+        or mechanics_audit["introai9_last_verified_pbs_jobs_observed"] != 0
+        or mechanics_audit["pbs_job_created"] is not False
+        or mechanics_audit["login_node_gpu_command_executed"] is not False
+        or mechanics_audit["junjinyong_accessed_for_this_audit"] is not False
+        or mechanics_audit["decision"]
+        != "reject_all_without_score_repair_archive_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or mechanics_audit["next_allowed_action"]
+        != "seek_an_independent_clinical_or_physical_target_with_sufficient_patient_units_then_run_only_a_fresh_source_audit_not_automatic_download_p0_or_training"
+    ):
+        raise ProtocolError(
+            "The 4D-CTA AAA mechanics source audit must retain the six frozen "
+            "sub-threshold rejections, twenty-patient and derived-target "
+            "boundaries, no archive/P0/model/PBS/GPU, introai9-only execution, "
+            "and complete junjinyong exclusion."
+        )
+    checks.append("4D-CTA AAA mechanics source rejection boundary")
 
     venue = protocol["venue"]
     _require_keys(

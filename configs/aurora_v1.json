@@ -1,9 +1,9 @@
 {
-  "schema_version": "6.0",
+  "schema_version": "6.1",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_closed",
+    "status": "failed_branches_preserved_no_active_shortlist_after_four_d_cta_aaa_source_rejection_aneumo_lineage_p0_closed",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_topbrain2_source_rejection_aneumo_lineage_p0_remains_closed",
+    "status": "no_active_shortlist_after_four_d_cta_aaa_source_rejection_aneumo_lineage_p0_remains_closed",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "latest_topbrain2_design_object_cc_by_4_0_but_no_versioned_medical_dataset_license_or_executable_evaluation_release_aneumo_lineage_p0_history_unchanged",
+    "asset_access_status": "four_d_cta_aaa_official_open_cc_by_4_0_metadata_only_twenty_patient_single_archive_not_accessed_and_derived_mechanics_have_no_progression_or_rupture_endpoint",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": true,
     "annotation_selection_mechanism_audited": true,
@@ -26,8 +26,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "monitor_for_a_versioned_licensed_topbrain2_release_with_casewise_target_lineage_or_a_genuinely_new_source_then_run_only_a_fresh_source_audit_without_repairing_closed_branches",
-    "audit_document": "docs/topbrain2-source-audit-2026-08-10.md",
+    "next_allowed_action": "seek_a_genuinely_new_source_with_independent_clinical_or_physical_ground_truth_and_sufficient_patient_units_then_run_only_a_fresh_source_audit_without_repairing_closed_branches",
+    "audit_document": "docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -2249,8 +2249,117 @@
       "decision": "reject_all_without_score_repair_medical_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
       "next_allowed_action": "monitor_for_a_versioned_licensed_release_and_casewise_target_lineage_then_run_only_a_fresh_source_audit_not_automatic_download_p0_or_training"
     },
+    "four_d_cta_aaa_mechanics_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_ids": [
+        "four_d_cta_phase_subset_rsii_hotspot_preservation"
+      ],
+      "best_score": 31.5,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "zenodo_record": "10.5281/zenodo.19182978",
+      "zenodo_concept_record": "10.5281/zenodo.19182977",
+      "zenodo_publication_date": "2026-03-23",
+      "zenodo_revision": 3,
+      "zenodo_access_right": "open",
+      "zenodo_license_id": "cc-by-4.0",
+      "archive_name": "Dataset_root.zip",
+      "archive_bytes": 1857980948,
+      "archive_md5": "11b74684e382d1410a2d64f81967e613",
+      "archive_or_member_payload_accessed": false,
+      "reported_patients": 20,
+      "reported_centres": 3,
+      "reported_minimum_cardiac_phases_per_patient": 2,
+      "reported_maximum_cardiac_phases_per_patient": 10,
+      "reported_surface_and_fe_outputs": [
+        "wall_surface",
+        "ilt_surface",
+        "aaa_fe_model",
+        "wall_fe_mesh",
+        "ilt_fe_mesh",
+        "strain_map",
+        "tension_map",
+        "sii_map",
+        "rsii_map"
+      ],
+      "p01_to_p10_segmentation_assistance": "praevaorta",
+      "p11_to_p20_segmentation_assistance": "nninteractive",
+      "future_growth_rupture_treatment_wall_strength_or_histology_endpoint_available": false,
+      "released_mechanics_are_derived_workflow_outputs_not_independent_clinical_ground_truth": true,
+      "synthetic_displacement_ground_truth_effective_patient_units": 1,
+      "direct_prior_threats": [
+        "regularized_four_d_cta_registration_displacement_and_strain",
+        "fe_tension_plus_registered_strain_sii_and_rsii",
+        "equivariant_cycle_and_semigroup_consistent_deformable_registration",
+        "uncertainty_aware_deformable_registration",
+        "aneurysm_wall_stress_and_hemodynamic_neural_surrogates",
+        "functional_surrogate_prediction_sets",
+        "function_valued_neural_operator_uncertainty"
+      ],
+      "candidates": [
+        {
+          "id": "four_d_cta_phase_subset_rsii_hotspot_preservation",
+          "score": 31.5,
+          "axis_scores": [4.5, 3.5, 2.0, 5.0, 2.0, 5.0, 5.0, 4.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_only_reproduces_a_derived_rsii_target_on_twenty_patients_and_primary_workflow_already_selects_systolic_diastolic_phases"
+        },
+        {
+          "id": "four_d_cta_image_to_rsii_surface_operator",
+          "score": 30.5,
+          "axis_scores": [4.0, 5.0, 1.0, 5.0, 2.0, 5.0, 5.0, 3.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_generic_image_or_mesh_to_mechanics_surrogation_is_direct_prior_dense_and_has_only_twenty_patient_units"
+        },
+        {
+          "id": "four_d_cta_mechanics_consistent_cardiac_cycle_registration",
+          "score": 30.0,
+          "axis_scores": [4.5, 4.0, 1.0, 5.0, 2.0, 5.0, 5.0, 3.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_equivariant_cycle_semigroup_registration_and_original_aaa_kinematics_pipeline_are_direct_priors"
+        },
+        {
+          "id": "four_d_cta_synthetic_gt_calibrated_selective_strain_mapping",
+          "score": 29.0,
+          "axis_scores": [4.5, 3.0, 2.0, 5.0, 0.5, 5.0, 5.0, 4.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_synthetic_displacement_ground_truth_has_one_effective_patient_and_cannot_calibrate_twenty_real_patients"
+        },
+        {
+          "id": "four_d_cta_centre_pipeline_invariant_structural_integrity_mapping",
+          "score": 28.5,
+          "axis_scores": [4.0, 2.0, 2.0, 5.0, 2.5, 5.0, 4.5, 3.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_centre_acquisition_phase_naming_and_segmentation_assistance_are_confounded_without_a_crossed_intervention"
+        },
+        {
+          "id": "four_d_cta_progression_or_rupture_prediction_from_released_mechanics",
+          "score": 25.5,
+          "axis_scores": [5.0, 0.5, 2.0, 5.0, 2.0, 4.5, 5.0, 1.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_no_future_growth_rupture_treatment_wall_strength_or_histology_endpoint_is_released"
+        }
+      ],
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "introai9_connection_previously_verified": true,
+      "introai9_current_status_attempt": "connection_reset_before_remote_command_no_scheduler_observation",
+      "introai9_last_verified_pbs_jobs_observed": 0,
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "decision": "reject_all_without_score_repair_archive_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
+      "next_allowed_action": "seek_an_independent_clinical_or_physical_target_with_sufficient_patient_units_then_run_only_a_fresh_source_audit_not_automatic_download_p0_or_training"
+    },
     "most_recent_closed_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
-    "most_recent_source_rejected_candidate": "topbrain2_joint_lesion_parent_vessel_consistency",
+    "most_recent_source_rejected_candidate": "four_d_cta_phase_subset_rsii_hotspot_preservation",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -2360,7 +2469,13 @@
       "topbrain2_aneurysm_conditioned_vessel_integrity_failure_localization",
       "topbrain2_unified_modality_source_invariant_artery_vein_anatomy",
       "topbrain2_class_contamination_aware_multiclass_vessel_calibration",
-      "topbrain2_compositional_aneurysm_stenosis_ordinal_diagnosis"
+      "topbrain2_compositional_aneurysm_stenosis_ordinal_diagnosis",
+      "four_d_cta_phase_subset_rsii_hotspot_preservation",
+      "four_d_cta_image_to_rsii_surface_operator",
+      "four_d_cta_mechanics_consistent_cardiac_cycle_registration",
+      "four_d_cta_synthetic_gt_calibrated_selective_strain_mapping",
+      "four_d_cta_centre_pipeline_invariant_structural_integrity_mapping",
+      "four_d_cta_progression_or_rupture_prediction_from_released_mechanics"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -2430,6 +2545,12 @@
       "generic_patient_source_or_lineage_disjoint_split",
       "generic_near_duplicate_shape_hash_or_embedding",
       "generic_source_aware_calibration_abstention_or_domain_adaptation",
+      "regularized_or_deep_four_d_medical_image_registration",
+      "generic_equivariant_cycle_or_semigroup_registration",
+      "generic_registration_uncertainty_or_selective_prediction",
+      "generic_image_or_mesh_to_fe_strain_stress_surface_surrogate",
+      "generic_functional_surrogate_prediction_set_or_neural_operator_uq",
+      "generic_phase_masking_active_acquisition_or_task_fidelity_loss",
       "flow_diverter_outcome_ml_from_morphology_virtual_stenting_or_cfd",
       "time_to_occlusion_statistical_modeling",
       "propensity_score_device_comparison",

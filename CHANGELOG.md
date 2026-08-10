@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-10 · Open 4D-CTA AAA mechanics source remains below admission
+
+- Verified official Zenodo `19182978`: CC BY 4.0, one 1.86 GB archive, 20
+  patients/three centres, 2--10 cardiac phases and released wall/ILT/FE plus
+  strain/tension/SII/RSII outputs. Archive and member payload access remain 0.
+- Froze six candidates at **31.5/30.5/30.0/29.0/28.5/25.5**. Repeated phases
+  and vertices are not independent patients; one synthetic deformation case is
+  not population ground truth; no future clinical endpoint is released.
+- Schema 6.1 adds a machine-validated source decision. Active shortlist,
+  primary, executable P0, method, architecture, PBS/GPU, outer test, result row
+  and submission identity remain zero without score repair.
+- The current `introai9` status attempt reset before remote execution; no job
+  was submitted and no repair loop was opened. `junjinyong` remains completely
+  excluded.
+- 영향 파일: detailed audit, protocol/validator/tests, research docs, public
+  overview/Learn/change UI, `AGENTS.md` and private rejected-source history.
+
 ## 2026-08-10 · TopBrain 2.0 official metadata corrected; source watch v2
 
 - Official Zenodo revision 4 marks the only released TopBrain 2.0 object—the

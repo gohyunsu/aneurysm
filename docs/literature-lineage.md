@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 4D-CTA mechanics lineage:** AAA kinematics는 regularized
+> deformable registration으로 wall displacement/strain을 이미 계산했고, 후속
+> structural-integrity 연구는 FE tension과 strain을 결합해 SII/RSII를 정의했다.
+> CARL·SGDIR은 equivariant/cycle/semigroup registration을, registration-UQ는
+> correspondence uncertainty를, UAI functional prediction sets와 ICML LUNO는
+> field surrogate의 calibrated/function-valued UQ를 직접 점유한다. 따라서
+> “GNN/Transformer/operator + cycle loss + uncertainty head”는 contribution이
+> 아니라 baseline 조합이다. 남는 임상·물리 target과 독립 unit이 없어서 최고
+> 후보는 31.5/40으로 기각된다.
+
 > **2026-08-10 source correction:** The official `CC BY 4.0` identifier belongs
 > to the TopBrain 2.0 design record, not an unreleased dataset. Join
 > registration does not supply target lineage or an executable evaluation

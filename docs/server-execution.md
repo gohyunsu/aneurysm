@@ -1,5 +1,16 @@
 # AURORA 서버 실행과 provenance
 
+## 2026-08-10 · 4D-CTA AAA source rejection; no compute opened
+
+- Six frozen scores are 31.5/30.5/30.0/29.0/28.5/25.5. No candidate reaches
+  32, so the 1.86 GB archive, P0, PBS submission, model, GPU, outer test and
+  monitoring loop remain zero.
+- One bounded `introai9` read-only status attempt reached the configured
+  endpoint but was reset before a remote command. It yielded no current
+  scheduler observation and was not followed by a connection-repair loop.
+- `junjinyong` was not connected to, queried, used for transfer/submission or
+  monitored. All future gate-authorized execution remains `introai9` PBS only.
+
 ## 2026-08-10 · Source-watch v2; no compute opened
 
 - Official IAVS and TopBrain 2.0 snapshots match their frozen records. The

@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 4D-CTA AAA mechanics boundary:** Official Zenodo
+> `10.5281/zenodo.19182978` is a CC BY 4.0, 20-patient/three-centre release with
+> 2--10 cardiac phases, wall/ILT surfaces, FE meshes and strain/tension/SII/RSII
+> maps. It is a valuable reproducibility and figure asset, but the maps are
+> derived workflow outputs and no future growth, rupture, treatment, wall-
+> strength or histology endpoint is released. Six frozen candidates score
+> **31.5/30.5/30.0/29.0/28.5/25.5**, all below 32. Schema **6.1** therefore
+> preserves active shortlist/primary/archive payload/P0/method/architecture/
+> PBS/GPU/outer test at zero. [Detailed audit](docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md).
+> Future authorized execution remains `introai9` PBS only; `junjinyong` is
+> excluded from connection, query, transfer, submission and monitoring.
+
 > **2026-08-10 official-source correction + watch v2:** TopBrain 2.0 Zenodo
 > revision 4 is `open` under `CC BY 4.0`, but the licensed object is the sole
 > 35-page design PDF—not an unreleased medical dataset. The challenge remains

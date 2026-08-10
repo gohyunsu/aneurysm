@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 architecture boundary:** 4D-CTA AAA batch의 최고점은 31.5/40이라
+> 현재 선택된 GNN, CNN, Transformer, registration network, neural operator 또는
+> uncertainty model은 없다. Graph/surface encoding, diffeomorphic cycle loss,
+> phase masking, functional head와 conformal field UQ는 모두 direct-prior control
+> 또는 engineering choice다. 독립 target과 충분한 patient unit 없이 이를
+> 조합한 “fancy architecture”를 주 방법으로 만들지 않는다.
+
 > **2026-08-10 source correction:** A `CC BY 4.0` design PDF and Join button do
 > not establish a released TopBrain 2.0 learning task. Source-watch v2 records
 > this distinction; it does not select a GNN, U-Net, Transformer or authorize
