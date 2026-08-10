@@ -1,5 +1,11 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 7.7 deployment verification:** Exact content
+> `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality
+> `31413485546`, Pages `31413484543` and manual Public source watch
+> `31413562860`. The GitHub-hosted monitor matched all IAVS/TopBrain/TRELLIS
+> frozen snapshots and opened no review or scientific authorization.
+
 > **2026-08-11 fail-closed source watch · schema 7.7:** IAVS, TopBrain 2.0 and
 > the TRELLIS paper's stated code repository now have one read-only machine
 > contract and a twice-weekly/manual GitHub Action. The live refresh matches

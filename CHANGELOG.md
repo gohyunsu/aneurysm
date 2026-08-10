@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.7 deployment verified
+
+- Exact content `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality
+  run `31413485546` and Pages run `31413484543`.
+- Manual Public source watch run `31413562860` succeeded on the same content;
+  IAVS, TopBrain 2.0 and TRELLIS matched their frozen snapshots and requested
+  no manual review.
+- This provenance record changes no source score, active candidate, closed P0,
+  method, architecture, server state, GPU, outer test or paper claim.
+
 ## 2026-08-11 · Schema 7.7 adds a fail-closed three-source watch
 
 - Added `source_watch_v3.json` for IAVS, TopBrain 2.0 and the TRELLIS stated-code

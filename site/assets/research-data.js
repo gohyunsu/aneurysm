@@ -806,6 +806,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 7.7 source-watch boundary is live and verified",
+      copy: "Exact content 611848c… passed Quality 31413485546 and Pages 31413484543. Manual Public source watch 31413562860 also succeeded: IAVS, TopBrain 2.0 and TRELLIS matched all frozen snapshots and requested no review. These GitHub-hosted checks create no server query, scientific evidence, score repair, P0, model, GPU, outer test or claim.",
+      files: ["README.md", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "operations",
       title: "Schema 7.7 makes public-source monitoring fail closed",
       copy: "One immutable v3 contract now watches IAVS, TopBrain 2.0 and the TRELLIS paper's stated code repository. A live read-only refresh matched all snapshots: IAVS remains README-only at 2e40088…, TopBrain remains revision-4 design-PDF/under-construction, and TRELLIS remains HTTP 404. Twice-weekly/manual GitHub Actions fail on material change or observation error. IAVS/TopBrain can request only a fresh source audit; TRELLIS can request only a direct-prior baseline-feasibility review. Automatic snapshot update, data download, terms acceptance, score repair, P0/P1, model selection, GPU and outer test remain disabled.",

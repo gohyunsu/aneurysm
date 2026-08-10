@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.7 deployment verification · 2026-08-11:** Exact content
+> `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality
+> `31413485546`, Pages `31413484543` and manual source-watch
+> `31413562860`. All watched public states matched. These GitHub-hosted checks
+> queried neither `introai9` nor `junjinyong` and authorized no PBS/GPU work.
+
 > **Schema 7.7 public-metadata watch · 2026-08-11:** The v3 live refresh read
 > only official public GitHub/Zenodo/Grand Challenge metadata and matched all
 > frozen snapshots. It did not query `introai9`, access `junjinyong`, submit PBS

@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 7.7 deployment verification overlay:** Exact content
+> `611848cba1f19675ab850ebc0c9e2bcd8672c0ef` passed Quality
+> `31413485546`, Pages `31413484543` and manual Public source watch
+> `31413562860`. The watch matched all three frozen snapshots and returned no
+> manual review request. This verifies code, publication and public-metadata
+> monitoring only; it creates no scientific evidence or authorization. No
+> AURORA server was queried. Future eligible execution is `introai9` PBS only;
+> never access or monitor `junjinyong`.
+
 > **2026-08-11 fail-closed source-watch override · schema 7.7:**
 > `configs/source_watch_v3.json`은 IAVS, TopBrain 2.0과 TRELLIS stated-code
 > repository를 분리해 감시한다. 2026-08-11 live read-only refresh에서 세
