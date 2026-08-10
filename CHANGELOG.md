@@ -22,6 +22,9 @@
   outer test/submission identity at zero. No `introai9` job was created;
   `junjinyong` remains excluded from connection, query, submission and
   monitoring. The closed Aneumo P0 is not repaired or rerun.
+- Exact audit content `e954d7d8852498d99e7063891d33d36a967e4284` passed Quality
+  run `31343371108` and Pages run `31343370635`; the live site and detailed
+  audit both returned HTTP 200 with the frozen 30.5/40 boundary.
 - 영향 파일: `docs/failure-mechanism-biology-source-audit-2026-08-10.md`,
   machine contract/validator/tests, research/data/model/experiment/ISBI/server
   guides, public site, private manuscript history, `AGENTS.md` and this log.

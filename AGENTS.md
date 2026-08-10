@@ -22,6 +22,9 @@
 > primary, method, architecture, PBS/GPU, outer test와 submission identity는
 > 모두 0이며 closed Aneumo P0는 repair/rerun하지 않는다. AURORA는
 > `introai9`만 사용하고 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+> Exact audit content `e954d7d8852498d99e7063891d33d36a967e4284`의 Quality
+> run `31343371108`과 Pages run `31343370635`는 모두 성공했고, live
+> `/aneurysm/site/`와 상세 audit 문서의 HTTP 200 및 30.5/40 판정을 확인했다.
 
 > **2026-08-10 Aneumo generation-lineage P0 outcome overlay:** Exact public
 > source `d3eb3d344d284aaae42db1490f2946d54c94029e`의 method-free CPU/PBS
