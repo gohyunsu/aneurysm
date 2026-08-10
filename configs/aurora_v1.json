@@ -1,5 +1,5 @@
 {
-  "schema_version": "6.6",
+  "schema_version": "6.7",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
@@ -2927,13 +2927,20 @@
     "submission_deadline": "2026-10-26T23:59:00-04:00",
     "review": "single_blind",
     "technical_page_limit": 4,
+    "maximum_first_author_submissions": 2,
+    "substantially_similar_prior_publication_prohibited": true,
+    "substantially_similar_concurrent_submission_prohibited": true,
+    "preprint_posting_allowed": true,
+    "ethics_statement_required_irrespective_of_approval_need": true,
+    "conflict_of_interest_disclosure_required": true,
+    "submission_link_status": "coming_soon",
     "fifth_page_allowed_content": [
       "references",
       "compliance_with_ethical_standards",
       "acknowledgments_and_conflict_of_interest"
     ],
     "submission_ready": false,
-    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_rsna_aws_registry_source_rejection",
+    "required_headline_domain": "unselected_primary_with_no_active_shortlist_after_bc_transport_execution_incomplete",
     "development_cache_is_confirmatory": false,
     "m0_alone_may_authorize_submission": false,
     "v0_task_audit_config": "configs/aneumo_isbi_v0.json",

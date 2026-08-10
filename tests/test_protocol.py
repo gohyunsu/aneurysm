@@ -1532,6 +1532,26 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "3D evidence"):
             validate_protocol(candidate)
 
+    def test_isbi_author_compliance_contract_is_frozen(self) -> None:
+        venue = self.protocol["venue"]
+        self.assertEqual(venue["maximum_first_author_submissions"], 2)
+        self.assertTrue(venue["substantially_similar_prior_publication_prohibited"])
+        self.assertTrue(venue["substantially_similar_concurrent_submission_prohibited"])
+        self.assertTrue(venue["preprint_posting_allowed"])
+        self.assertTrue(venue["ethics_statement_required_irrespective_of_approval_need"])
+        self.assertTrue(venue["conflict_of_interest_disclosure_required"])
+        self.assertEqual(venue["submission_link_status"], "coming_soon")
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["ethics_statement_required_irrespective_of_approval_need"] = False
+        with self.assertRaisesRegex(ProtocolError, "authorship, originality"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["venue"]["substantially_similar_concurrent_submission_prohibited"] = False
+        with self.assertRaisesRegex(ProtocolError, "authorship, originality"):
+            validate_protocol(candidate)
+
     def test_v0_cannot_authorize_outer_test(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["venue"]["v0_pass_authorizes"] = "outer_test"

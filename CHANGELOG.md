@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-10 · Schema 6.7 hardens the ISBI author-compliance contract
+
+- Rechecked the live official ISBI 2027 author instructions. The existing
+  single-blind, four-technical-page, optional non-technical fifth-page and
+  2026-10-26 23:59 USA EDT rules remain correct.
+- Added machine guards for the two-first-author-submission limit, prohibition
+  on substantially similar prior or concurrent peer-reviewed submissions,
+  allowed preprints, mandatory ethics wording irrespective of approval need,
+  mandatory funding/COI disclosure, and the current `Coming Soon` submission
+  link state.
+- Corrected the stale venue headline-domain string to the current BC-transport
+  execution-incomplete/no-active-shortlist state. This format correction does
+  not select a problem, method, architecture, GPU job, result, or submission.
+- Added a visible, beginner-readable ISBI contract panel and decision-history
+  entry to the public site. Future eligible compute remains `introai9` PBS only;
+  `junjinyong` remains prohibited.
+
 ## 2026-08-10 · Schema 6.6 outcome and explanatory site are live
 
 - Exact scientific content `bb16d90d2e06bd1f12972efaf67093d425048d49`

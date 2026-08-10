@@ -699,6 +699,19 @@ em { font-family: var(--serif); font-weight: 400; }
 .scope-line b { font-size: 12px; font-weight: 560; }
 .scope-line b:last-child { color: #a74439; text-decoration: line-through; }
 
+.submission-section { border-top: 1px solid var(--line); }
+.venue-status-card { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 45px; align-items: end; padding: 34px; background: var(--ink); color: var(--white); }
+.venue-status-card span { display: block; margin-bottom: 10px; color: var(--lime); font-family: var(--mono); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; }
+.venue-status-card strong { display: block; max-width: 560px; font-family: var(--serif); font-size: clamp(24px, 3vw, 42px); font-weight: 400; line-height: 1.08; }
+.venue-status-card p { margin: 0; color: var(--muted-dark); font-size: 14px; }
+.venue-contract-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.venue-rule { min-height: 250px; padding: 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.venue-rule > span { color: var(--coral); font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+.venue-rule h3 { margin: 45px 0 12px; font-size: 24px; font-weight: 560; letter-spacing: -0.045em; }
+.venue-rule p { margin: 0; color: var(--muted); font-size: 13px; }
+.venue-links { display: flex; justify-content: flex-end; gap: 24px; padding-top: 18px; }
+.venue-links a { font-family: var(--mono); font-size: 8px; text-transform: uppercase; }
+
 .changelog-section { padding-top: 95px; }
 .change-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
 .filter-group { display: flex; gap: 5px; }
@@ -782,6 +795,8 @@ footer p { color: var(--muted-dark); font-size: 11px; }
   .g1-result-decision { grid-template-columns: 1fr 1.5fr; }
   .g1-result-decision a { grid-column: 2; }
   .protocol-callout { grid-template-columns: 1fr; }
+  .venue-status-card { grid-template-columns: 1fr; }
+  .venue-contract-grid { grid-template-columns: repeat(2, 1fr); }
   .paper-title { grid-template-columns: 1fr; gap: 40px; }
   .paper-title > p:last-child { margin: 0; }
   footer { grid-template-columns: repeat(2, 1fr); }
@@ -836,6 +851,9 @@ footer p { color: var(--muted-dark); font-size: 11px; }
   .paper-title h2 { max-width: 100%; font-size: clamp(68px, 20vw, 110px); white-space: nowrap; }
   .contribution-grid { grid-template-columns: 1fr; }
   .scope-line { grid-template-columns: 90px 1fr; }
+  .venue-contract-grid { grid-template-columns: 1fr; }
+  .venue-rule { min-height: 210px; }
+  .venue-links { align-items: flex-start; flex-direction: column; }
   .change-toolbar { align-items: flex-start; flex-direction: column; gap: 18px; }
   .filter-group { flex-wrap: wrap; }
   .change-item { grid-template-columns: 1fr; gap: 8px; }

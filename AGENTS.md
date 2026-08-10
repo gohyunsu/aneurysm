@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 ISBI author-compliance override · schema 6.7:** The live official
+> author instructions are frozen as machine guards: single blind, four
+> technical pages, at most two first-author submissions per person, no
+> substantially similar prior or concurrent peer-reviewed submission, preprints
+> allowed, mandatory ethics wording irrespective of approval need, mandatory
+> funding/COI disclosure, and submission link `Coming Soon`. The stale venue
+> headline-domain value is corrected to the current BC-transport
+> execution-incomplete/no-active-shortlist boundary. This is a format and public
+> explanation update only: source lead, primary, method, architecture, GPU,
+> outer test, result and submission identity remain 0. AURORA uses only
+> `introai9` PBS; never connect/query/transfer/submit/monitor `junjinyong`.
+
 > **2026-08-10 BC-transport P0 outcome override · schema 6.6:** Exact clean
 > public source `38e7894fc5ae56ffb3efbe469c4e1f7480f81feb` was submitted once to
 > `introai9` CPU/PBS as job `115518.ECE-util1` (CPU 2, 8 GB, GPU 0). Final
@@ -1601,6 +1613,13 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 - 자세한 단일 출처는 `docs/isbi-2027-plan.md`다.
 - 모든 기술 내용·표·그림은 official template 첫 4쪽 안에 둔다. 5쪽은
   reference, ethics, acknowledgments/COI 외 기술 내용을 금지한다.
+- 한 사람의 제1저자 제출은 최대 2편이다. 이미 출판·채택되었거나 ISBI 심사
+  기간 중 다른 conference/workshop에 동시 제출된 substantially similar 원고는
+  금지하고, preprint는 허용한다.
+- `Compliance with Ethical Standards`는 별도 윤리 승인이 필요하지 않은
+  simulation/open-data 연구에도 필수다. Funding과 실제 COI 또는 그 부재도
+  acknowledgments에서 저자가 확인해 공개한다. Submission link는 현재
+  `Coming Soon`이며 임의 endpoint를 기록하지 않는다.
 - 현재 primary, headline domain과 source shortlist는 모두 미선정이다. AneuX
   preprocessing-orbit P0/P1은 닫혔으며 이 candidate를 primary로 부르지 않는다.
   다음 fresh candidate가 데이터 의미, 식별 가능한 estimand, direct-prior gap과

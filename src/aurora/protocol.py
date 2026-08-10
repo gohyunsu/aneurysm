@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.6":
-        raise ProtocolError("The current research-state schema must be version 6.6.")
+    if protocol["schema_version"] != "6.7":
+        raise ProtocolError("The current research-state schema must be version 6.7.")
 
     project = protocol["project"]
     _require_keys(
@@ -5211,6 +5211,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_deadline",
             "review",
             "technical_page_limit",
+            "maximum_first_author_submissions",
+            "substantially_similar_prior_publication_prohibited",
+            "substantially_similar_concurrent_submission_prohibited",
+            "preprint_posting_allowed",
+            "ethics_statement_required_irrespective_of_approval_need",
+            "conflict_of_interest_disclosure_required",
+            "submission_link_status",
             "fifth_page_allowed_content",
             "submission_ready",
             "required_headline_domain",
@@ -5273,6 +5280,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("The ISBI 2027 official EDT deadline changed.")
     if venue["review"] != "single_blind" or venue["technical_page_limit"] != 4:
         raise ProtocolError("ISBI review mode and four-page technical limit are fixed.")
+    if (
+        venue["maximum_first_author_submissions"] != 2
+        or venue["substantially_similar_prior_publication_prohibited"] is not True
+        or venue["substantially_similar_concurrent_submission_prohibited"] is not True
+        or venue["preprint_posting_allowed"] is not True
+        or venue["ethics_statement_required_irrespective_of_approval_need"] is not True
+        or venue["conflict_of_interest_disclosure_required"] is not True
+        or venue["submission_link_status"] != "coming_soon"
+    ):
+        raise ProtocolError(
+            "ISBI authorship, originality, preprint, ethics, COI, and submission-link rules changed."
+        )
     if set(venue["fifth_page_allowed_content"]) != {
         "references",
         "compliance_with_ethical_standards",
@@ -5282,7 +5301,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_rsna_aws_registry_source_rejection"
+        != "unselected_primary_with_no_active_shortlist_after_bc_transport_execution_incomplete"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"

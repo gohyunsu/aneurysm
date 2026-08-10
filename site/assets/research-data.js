@@ -4,6 +4,40 @@ window.AURORA_DATA = Object.freeze({
     deadline: "2026.10.26 · 23:59 USA EDT",
     status: "Target locked · BC-transport P0 execution-incomplete/no verdict · active source lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
     requirement: "a different fresh problem must pass source and method-free task-adequacy gates before any architecture or GPU work",
+    authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
+    submissionLink: "Coming soon on the official ISBI 2027 author page",
+    rules: [
+      {
+        label: "Format",
+        title: "Four technical pages",
+        copy: "Single-blind review. An optional fifth page may contain only references, ethics, acknowledgments and conflict-of-interest disclosure."
+      },
+      {
+        label: "Authorship",
+        title: "At most two first-author submissions",
+        copy: "The limit applies per person and must be checked across the team's complete ISBI submission slate."
+      },
+      {
+        label: "Originality",
+        title: "No substantially similar peer-reviewed duplicate",
+        copy: "Prior publication or acceptance is prohibited, as is concurrent submission to another conference or workshop during ISBI review. Preprints are allowed."
+      },
+      {
+        label: "Required statements",
+        title: "Ethics, funding and COI are not optional",
+        copy: "A separately titled ethics section is required even when no new approval was needed. Human authors must verify funding and conflicts, including an explicit no-conflict statement when applicable."
+      },
+      {
+        label: "Deadline",
+        title: "26 October 2026 · 23:59 USA EDT",
+        copy: "The deadline is frozen in the machine contract and must be rechecked against the official author page before submission."
+      },
+      {
+        label: "Submission endpoint",
+        title: "Coming Soon",
+        copy: "No unofficial or guessed submission URL is recorded while the official author page has not published the endpoint."
+      }
+    ],
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
@@ -701,6 +735,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "site",
+      title: "Schema 6.7 makes the ISBI author contract explicit",
+      copy: "The official single-blind/four-technical-page contract is supplemented with machine guards for the two-first-author limit, originality and concurrent-submission restrictions, allowed preprints, mandatory ethics and funding/COI wording, and the current Coming Soon submission endpoint. A dedicated public panel explains every rule. The stale venue headline domain now matches the closed BC-transport/no-active-shortlist state. This administrative change creates no problem, method, architecture, GPU job, result or submission identity; introai9 remains the only permitted AURORA server and junjinyong remains excluded.",
+      files: ["configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/isbi-2027-plan.md", "site/index.html", "site/assets/aurora.js", "site/assets/aurora.css", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

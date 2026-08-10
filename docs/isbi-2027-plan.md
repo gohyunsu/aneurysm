@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 6.7 author-compliance boundary · 2026-08-10:** Official authorship,
+> originality, preprint, ethics, funding/COI and submission-link rules are now
+> machine-guarded and visible on the public site. This administrative hardening
+> changes no scientific state: active source lead/primary/method/architecture/
+> GPU/outer test/result/submission identity remain 0, and AURORA remains
+> `introai9`-only with `junjinyong` prohibited.
+
 > **Schema 6.6 submission boundary · 2026-08-10:** AURORA remains **not
 > submission-ready**. The 33.5/40 BC-transport lead produced no aggregate or
 > scientific verdict and is closed without P1. It adds no paper title,
@@ -229,6 +236,14 @@ references와 compliance statements, acknowledgments, conflict of interest에만
 사용할 수 있다. 제출 마감은 **2026-10-26 23:59 USA EDT**다. 형식과 마감은
 [ISBI 2027 author instructions](https://biomedicalimaging.org/2027/papers/)를
 최종 제출 직전에 다시 확인한다.
+
+Desk-reject 방지 계약도 함께 고정한다. 한 사람은 최대 두 편에만 제1저자로
+제출할 수 있고, 이미 출판·채택된 substantially similar 논문이나 ISBI 심사
+기간 동안 다른 conference/workshop에 동시 제출된 유사 논문은 허용되지 않는다.
+Preprint는 허용된다. `Compliance with Ethical Standards` 절은 새 피험자나 별도
+윤리 승인이 필요하지 않은 연구에도 필수이며, acknowledgments에는 실제 funding과
+COI 또는 그 부재를 저자가 확인한 문구로 반드시 공개한다. 현재 submission link는
+공식 페이지에서 `Coming Soon`이므로 임의 링크를 만들지 않는다.
 
 현재 제출 가능한 paper identity는 없다. 최신 hemodynamic–endpoint batch의
 다섯 후보는 모두 32점 미만이고, 최고 curvature-only surrogate는 직접 prior의

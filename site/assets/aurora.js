@@ -61,6 +61,22 @@
     )
     .join("");
 
+  const venueStatus = document.querySelector("#venue-status");
+  const venueRequirement = document.querySelector("#venue-requirement");
+  const venueContractGrid = document.querySelector("#venue-contract-grid");
+  venueStatus.textContent = data.venue.status;
+  venueRequirement.textContent = data.venue.requirement;
+  venueContractGrid.innerHTML = data.venue.rules
+    .map(
+      (rule, index) => `
+        <article class="venue-rule">
+          <span>${String(index + 1).padStart(2, "0")} · ${escapeHtml(rule.label)}</span>
+          <h3>${escapeHtml(rule.title)}</h3>
+          <p>${escapeHtml(rule.copy)}</p>
+        </article>`
+    )
+    .join("");
+
   const changeList = document.querySelector("#change-list");
   const renderChanges = (filter = "all") => {
     const changes =
