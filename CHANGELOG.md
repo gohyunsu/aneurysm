@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Registry-gap audit rejects test-only and endpoint-mismatched assets
+
+- The official exact-title Zenodo query returned 49 records. Five previously
+  unregistered candidate problems score **26.5/26.0/26.0/25.5/23.5**, all below
+  the frozen 32/40 admission line.
+- The two rupture-status blobs are public but test-only and lack a public
+  development cohort, exact patient/center/raw-CTA lineage and prospective
+  endpoint. TransIAR and GN-Net are direct method priors; reading the labels
+  during development would also destroy the outer-test role.
+- The VWE source is a 41-unruptured-aneurysm scalar association table; the CFD
+  release is solver infrastructure; processed post-presentation transcriptomics
+  has no casewise imaging bridge; the autopsy record has no casewise geometry
+  asset. None identifies an ISBI learning target.
+- Schema 5.6 records no payload, P0, PBS/GPU job, method, architecture, outer
+  test or claim. Future authorized execution remains `introai9` PBS only;
+  `junjinyong` remains excluded from connection, query, submission and
+  monitoring.
+- 영향 파일: `docs/registry-gap-source-audit-2026-08-10.md`, machine protocol,
+  validator/tests, public site, research/experiment/dataset/literature/ISBI/
+  server documents, private paper boundary and this changelog.
+
 ## 2026-08-10 · Method--asset viability stops before payload and compute
 
 - Royal reference-morphometry certification, partial-observation

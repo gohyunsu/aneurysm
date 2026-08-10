@@ -1,9 +1,9 @@
 {
-  "schema_version": "5.5",
+  "schema_version": "5.6",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "failed_branches_preserved_no_active_shortlist_after_aneumo_lineage_p0_execution_incomplete",
+    "status": "failed_branches_preserved_no_active_shortlist_after_registry_gap_source_rejection_aneumo_lineage_p0_closed",
     "as_of": "2026-08-10",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_method_asset_viability_source_rejection_aneumo_lineage_p0_remains_closed",
+    "status": "no_active_shortlist_after_registry_gap_source_rejection_aneumo_lineage_p0_remains_closed",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "latest_method_asset_viability_audit_source_metadata_and_exact_refs_only_no_patient_image_mask_mesh_cfd_or_controlled_payload_aneumo_lineage_p0_history_unchanged",
+    "asset_access_status": "latest_registry_gap_audit_official_metadata_only_no_csv_pkl_zip_image_wall_map_cfd_case_rna_or_patient_payload_aneumo_lineage_p0_history_unchanged",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": true,
     "annotation_selection_mechanism_audited": true,
@@ -27,7 +27,7 @@
     "outer_test_authorized": false,
     "submission_identity_active": false,
     "next_allowed_action": "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_closed_p0_or_confirmatory_failures",
-    "audit_document": "docs/method-asset-viability-source-audit-2026-08-10.md",
+    "audit_document": "docs/registry-gap-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -1815,8 +1815,117 @@
       "decision": "reject_all_without_score_repair_patient_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
       "next_allowed_action": "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_then_register_only_a_fresh_candidate_scoring_at_least_32"
     },
+    "registry_gap_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/registry-gap-source-audit-2026-08-10.md",
+      "official_registry_query": "zenodo_metadata_title_exact_phrase_intracranial_aneurysm_sorted_most_recent",
+      "official_registry_records_returned": 49,
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_ids": [
+        "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved"
+      ],
+      "best_score": 26.5,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "official_metadata_and_primary_sources_read": true,
+      "any_csv_pkl_zip_image_wall_map_cfd_case_rna_or_patient_payload_accessed": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "introai9_connection_verified": true,
+      "introai9_remote_user": "introai9",
+      "introai9_pbs_jobs_observed": 0,
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "iavs_watch_same_as_frozen_snapshot": true,
+      "iavs_watch_material_change_signals": [],
+      "transiar_test_record": "10.5281/zenodo.7536330",
+      "transiar_test_archive_bytes": 578924037,
+      "transiar_test_archive_md5": "f0770b8f59306f6db33f5411575020c9",
+      "unlinked_test_record": "10.5281/zenodo.7757069",
+      "unlinked_test_blob_bytes": 2321552713,
+      "unlinked_test_blob_md5": "b579b4368ec7d14c621529554e394c6e",
+      "transiar_retained_patients": 423,
+      "transiar_retained_aneurysms": 449,
+      "transiar_balanced_test_aneurysms": 82,
+      "transiar_imbalanced_test_aneurysms": 249,
+      "gn_net_reported_patients": 423,
+      "exact_cross_record_case_lineage_manifest_public": false,
+      "public_test_payload_accessed": false,
+      "vwe_record": "10.5061/dryad.p2ngf1vrg",
+      "vwe_unruptured_aneurysms": 41,
+      "vwe_csv_bytes": 3572,
+      "vwe_csv_md5": "4ba44d3becf0a0f327aa9aa7aede01d2",
+      "vwe_observed_future_instability_endpoint_present": false,
+      "vwe_image_wall_map_or_cfd_field_public": false,
+      "transcriptomic_record": "10.5281/zenodo.21249929",
+      "transcriptomic_discovery_labeled_aneurysms": 43,
+      "transcriptomic_discovery_ruptured": 22,
+      "transcriptomic_discovery_unruptured": 21,
+      "transcriptomic_raw_geo_included": false,
+      "transcriptomic_casewise_imaging_bridge_public": false,
+      "autopsy_record": "10.5281/zenodo.15692542",
+      "autopsy_adults": 221,
+      "autopsy_aneurysm_cases": 29,
+      "autopsy_casewise_table_or_imaging_public": false,
+      "vortex_cfd_record": "10.5281/zenodo.20732293",
+      "vortex_cfd_independent_patient_or_experimental_reference_included": false,
+      "direct_prior_threats": [
+        "transiar_multiscale_3d_branch_transformer_and_anatomical_features",
+        "gn_net_geometric_and_neighborhood_aware_rupture_status_model",
+        "vwe_hemodynamic_risk_metric_correlation_analysis",
+        "three_dimensional_vwe_mapping_and_enhancement_area_workflows",
+        "multi_cohort_geo_immune_signature_and_rupture_status_models",
+        "anatomy_aware_detection_centerline_graphs_and_fine_vessel_taxonomies",
+        "standard_openfoam_pulsatile_cfd_and_biomarker_extraction"
+      ],
+      "candidates": [
+        {
+          "id": "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved",
+          "score": 26.5,
+          "axis_scores": [4.5, 3.5, 0.0, 2.5, 3.5, 5.0, 4.5, 3.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_test_only_asset_no_public_train_or_case_lineage_and_transiar_gn_net_directly_occupy_the_method"
+        },
+        {
+          "id": "scalar_vwe_hemodynamic_association_without_instability_endpoint_or_fields",
+          "score": 26.0,
+          "axis_scores": [4.5, 1.5, 0.5, 4.5, 3.0, 5.0, 3.0, 4.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_all_41_aneurysms_are_unruptured_target_is_size_or_derived_rrs_and_only_scalar_csv_is_public"
+        },
+        {
+          "id": "open_cfd_pipeline_numerical_certificate_without_independent_reference",
+          "score": 26.0,
+          "axis_scores": [4.0, 2.5, 0.5, 5.0, 0.5, 5.0, 4.5, 4.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_solver_automation_has_no_independent_patient_unit_experimental_reference_or_new_learning_target"
+        },
+        {
+          "id": "cross_cohort_rupture_transcriptomic_core_without_imaging_bridge",
+          "score": 25.5,
+          "axis_scores": [4.5, 3.0, 0.5, 4.5, 2.5, 5.0, 3.0, 2.5],
+          "payload_accessed": false,
+          "decision": "reject_current_version_post_presentation_wall_tissue_mixed_external_labels_direct_geo_priors_and_no_casewise_imaging_link"
+        },
+        {
+          "id": "autopsy_circle_of_willis_variant_geometry_prior_without_casewise_asset",
+          "score": 23.5,
+          "axis_scores": [4.0, 3.0, 0.5, 1.0, 4.5, 4.5, 3.0, 3.0],
+          "payload_accessed": false,
+          "decision": "reject_current_version_only_aggregate_pdf_and_semantic_png_no_casewise_table_imaging_surface_or_segmentation"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim",
+      "next_allowed_action": "monitor_material_source_changes_or_a_genuinely_new_observable_imaging_endpoint_with_auditable_development_units_and_sealed_outer_test_then_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
-    "most_recent_source_rejected_candidate": "royal_reference_morphometry_certificate_direct_prior_occupied",
+    "most_recent_source_rejected_candidate": "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -1908,7 +2017,12 @@
       "partial_observation_solution_functional_operator_direct_prior_occupied",
       "iavs_topology_to_cfd_reliability_unreleased_and_direct_prior_occupied",
       "rsna_reader_source_reliability_without_per_reader_manifest",
-      "cq500_provenance_aware_multimodal_adaptation_without_versioned_annotation_source"
+      "cq500_provenance_aware_multimodal_adaptation_without_versioned_annotation_source",
+      "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved",
+      "scalar_vwe_hemodynamic_association_without_instability_endpoint_or_fields",
+      "open_cfd_pipeline_numerical_certificate_without_independent_reference",
+      "cross_cohort_rupture_transcriptomic_core_without_imaging_bridge",
+      "autopsy_circle_of_willis_variant_geometry_prior_without_casewise_asset"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",

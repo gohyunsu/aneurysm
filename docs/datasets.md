@@ -1,5 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 registry-gap asset boundary:** Zenodo exact-title query 49건 중
+> 새로 식별한 rupture-status record `7536330`/`7757069`는 각각 578,924,037/
+> 2,321,552,713-byte test blob이지만 public development cohort, exact case
+> lineage와 prospective endpoint가 없다. VWE Dryad/Zenodo는 41 unruptured
+> aneurysm의 3,572-byte scalar table이며 image/wall-map/CFD field가 아니다.
+> vortex-cfd는 cohort가 없는 software이고, transcriptomic record는 43 labeled
+> post-presentation wall samples에서 시작하나 casewise CTA/MRA bridge가 없으며,
+> autopsy record는 aggregate paper/PNG뿐이다. Metadata와 file manifest만 읽었고
+> CSV/PKL/ZIP/image/mesh/field/RNA/patient payload는 0이다. 어느 source에도
+> active training 또는 outer-test role을 부여하지 않는다.
+
 > **2026-08-10 method--asset viability boundary:** Royal OpenNeuro exact
 > `0760bf8…`은 63 patient/85 aneurysm의 image, mask와 STL을 제공하지만 mask와
 > STL은 independent reference가 아니라 같은 annotation pipeline의 표현이다.

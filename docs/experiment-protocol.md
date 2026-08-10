@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Current exact gate · 2026-08-10 schema 5.6:** Registry-gap candidates score
+> 26.5/26.0/26.0/25.5/23.5, all below 32. The leading public rupture-status blob
+> is test-only and has no public development cohort, exact lineage or prospective
+> endpoint. No CSV/PKL/ZIP/image/wall-map/CFD/RNA/patient payload, executable P0,
+> PBS/GPU job, method, architecture or outer test is authorized. A material new
+> source must first score at least 32; only then may a separately frozen,
+> method-free CPU/read-only P0 run through PBS on `introai9`. `junjinyong` is
+> excluded from connection, query, submission and monitoring.
+
 > **Current exact gate · 2026-08-10 schema 5.5:** Method--asset viability scores
 > are 30/30/29/26/23, all below 32. No patient payload, P0, method, architecture,
 > PBS/GPU or outer test is authorized. Exact upstream heads show no material
@@ -29,7 +38,7 @@
 > central directory/member, method, architecture, GPU와 outer test 접근은 0이다.
 > 이 version은 repair, same-contract rerun과 P1 없이 닫는다.
 
-버전: 5.4 · 2026-08-10
+버전: 5.6 · 2026-08-10
 
 > **Current gate:** longitudinal-MRA growth batch 최고점은 31.5/40이다.
 > OpenNeuro의 126 raw angiogram은 63 patient에서 왔고 longitudinal patient는

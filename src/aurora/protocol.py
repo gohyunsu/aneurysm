@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.5":
-        raise ProtocolError("The current research-state schema must be version 5.5.")
+    if protocol["schema_version"] != "5.6":
+        raise ProtocolError("The current research-state schema must be version 5.6.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_aneumo_lineage_p0_execution_incomplete"
+        != "failed_branches_preserved_no_active_shortlist_after_registry_gap_source_rejection_aneumo_lineage_p0_closed"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -204,6 +204,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "failure_mechanism_biology_source_audit",
             "reconstruction_annotation_reliability_source_audit",
             "method_asset_viability_source_audit",
+            "registry_gap_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -213,12 +214,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_method_asset_viability_source_rejection_aneumo_lineage_p0_remains_closed"
+        != "no_active_shortlist_after_registry_gap_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_method_asset_viability_audit_source_metadata_and_exact_refs_only_no_patient_image_mask_mesh_cfd_or_controlled_payload_aneumo_lineage_p0_history_unchanged"
+        != "latest_registry_gap_audit_official_metadata_only_no_csv_pkl_zip_image_wall_map_cfd_case_rna_or_patient_payload_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not True
@@ -230,11 +231,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_closed_p0_or_confirmatory_failures"
         or problem_selection["audit_document"]
-        != "docs/method-asset-viability-source-audit-2026-08-10.md"
+        != "docs/registry-gap-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "royal_reference_morphometry_certificate_direct_prior_occupied"
+        != "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -333,6 +334,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "iavs_topology_to_cfd_reliability_unreleased_and_direct_prior_occupied",
         "rsna_reader_source_reliability_without_per_reader_manifest",
         "cq500_provenance_aware_multimodal_adaptation_without_versioned_annotation_source",
+        "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved",
+        "scalar_vwe_hemodynamic_association_without_instability_endpoint_or_fields",
+        "open_cfd_pipeline_numerical_certificate_without_independent_reference",
+        "cross_cohort_rupture_transcriptomic_core_without_imaging_bridge",
+        "autopsy_circle_of_willis_variant_geometry_prior_without_casewise_asset",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -3543,6 +3549,198 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "heads, no payload/P0/model/PBS/GPU, and introai9-only execution."
         )
     checks.append("method--asset viability rejection and source-version boundary")
+
+    registry_gap_audit = problem_selection["registry_gap_source_audit"]
+    _require_keys(
+        registry_gap_audit,
+        [
+            "status",
+            "audit_document",
+            "official_registry_query",
+            "official_registry_records_returned",
+            "automatic_selection_threshold",
+            "best_candidate_ids",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "official_metadata_and_primary_sources_read",
+            "any_csv_pkl_zip_image_wall_map_cfd_case_rna_or_patient_payload_accessed",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_remote_user",
+            "introai9_pbs_jobs_observed",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "iavs_watch_same_as_frozen_snapshot",
+            "iavs_watch_material_change_signals",
+            "transiar_test_record",
+            "transiar_test_archive_bytes",
+            "transiar_test_archive_md5",
+            "unlinked_test_record",
+            "unlinked_test_blob_bytes",
+            "unlinked_test_blob_md5",
+            "transiar_retained_patients",
+            "transiar_retained_aneurysms",
+            "transiar_balanced_test_aneurysms",
+            "transiar_imbalanced_test_aneurysms",
+            "gn_net_reported_patients",
+            "exact_cross_record_case_lineage_manifest_public",
+            "public_test_payload_accessed",
+            "vwe_record",
+            "vwe_unruptured_aneurysms",
+            "vwe_csv_bytes",
+            "vwe_csv_md5",
+            "vwe_observed_future_instability_endpoint_present",
+            "vwe_image_wall_map_or_cfd_field_public",
+            "transcriptomic_record",
+            "transcriptomic_discovery_labeled_aneurysms",
+            "transcriptomic_discovery_ruptured",
+            "transcriptomic_discovery_unruptured",
+            "transcriptomic_raw_geo_included",
+            "transcriptomic_casewise_imaging_bridge_public",
+            "autopsy_record",
+            "autopsy_adults",
+            "autopsy_aneurysm_cases",
+            "autopsy_casewise_table_or_imaging_public",
+            "vortex_cfd_record",
+            "vortex_cfd_independent_patient_or_experimental_reference_included",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.registry_gap_source_audit",
+    )
+    expected_registry_gap_scores = {
+        "public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved": 26.5,
+        "scalar_vwe_hemodynamic_association_without_instability_endpoint_or_fields": 26.0,
+        "open_cfd_pipeline_numerical_certificate_without_independent_reference": 26.0,
+        "cross_cohort_rupture_transcriptomic_core_without_imaging_bridge": 25.5,
+        "autopsy_circle_of_willis_variant_geometry_prior_without_casewise_asset": 23.5,
+    }
+    observed_registry_gap_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in registry_gap_audit["candidates"]
+    }
+    registry_gap_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in registry_gap_audit["candidates"]
+    )
+    expected_registry_gap_priors = {
+        "transiar_multiscale_3d_branch_transformer_and_anatomical_features",
+        "gn_net_geometric_and_neighborhood_aware_rupture_status_model",
+        "vwe_hemodynamic_risk_metric_correlation_analysis",
+        "three_dimensional_vwe_mapping_and_enhancement_area_workflows",
+        "multi_cohort_geo_immune_signature_and_rupture_status_models",
+        "anatomy_aware_detection_centerline_graphs_and_fine_vessel_taxonomies",
+        "standard_openfoam_pulsatile_cfd_and_biomarker_extraction",
+    }
+    if (
+        registry_gap_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or registry_gap_audit["audit_document"]
+        != "docs/registry-gap-source-audit-2026-08-10.md"
+        or registry_gap_audit["official_registry_query"]
+        != "zenodo_metadata_title_exact_phrase_intracranial_aneurysm_sorted_most_recent"
+        or registry_gap_audit["official_registry_records_returned"] != 49
+        or registry_gap_audit["automatic_selection_threshold"] != 32.0
+        or registry_gap_audit["best_candidate_ids"]
+        != ["public_test_only_rupture_status_reuse_direct_prior_and_lineage_unresolved"]
+        or registry_gap_audit["best_score"] != 26.5
+        or registry_gap_audit["best_score"]
+        >= registry_gap_audit["automatic_selection_threshold"]
+        or registry_gap_audit["active_shortlist_count"] != 0
+        or registry_gap_audit["primary_problem_selected"] is not False
+        or registry_gap_audit["official_metadata_and_primary_sources_read"] is not True
+        or registry_gap_audit[
+            "any_csv_pkl_zip_image_wall_map_cfd_case_rna_or_patient_payload_accessed"
+        ]
+        is not False
+        or registry_gap_audit["executable_p0_registered"] is not False
+        or registry_gap_audit["method_selected"] is not False
+        or registry_gap_audit["architecture_selected"] is not False
+        or registry_gap_audit["gpu_training_authorized"] is not False
+        or registry_gap_audit["outer_test_authorized"] is not False
+        or registry_gap_audit["submission_identity_active"] is not False
+        or registry_gap_audit["execution_server"] != "introai9"
+        or registry_gap_audit["introai9_connection_verified"] is not True
+        or registry_gap_audit["introai9_remote_user"] != "introai9"
+        or registry_gap_audit["introai9_pbs_jobs_observed"] != 0
+        or registry_gap_audit["pbs_job_created"] is not False
+        or registry_gap_audit["login_node_gpu_command_executed"] is not False
+        or registry_gap_audit["junjinyong_accessed_for_this_audit"] is not False
+        or registry_gap_audit["iavs_watch_same_as_frozen_snapshot"] is not True
+        or registry_gap_audit["iavs_watch_material_change_signals"] != []
+        or registry_gap_audit["transiar_test_record"]
+        != "10.5281/zenodo.7536330"
+        or registry_gap_audit["transiar_test_archive_bytes"] != 578924037
+        or registry_gap_audit["transiar_test_archive_md5"]
+        != "f0770b8f59306f6db33f5411575020c9"
+        or registry_gap_audit["unlinked_test_record"]
+        != "10.5281/zenodo.7757069"
+        or registry_gap_audit["unlinked_test_blob_bytes"] != 2321552713
+        or registry_gap_audit["unlinked_test_blob_md5"]
+        != "b579b4368ec7d14c621529554e394c6e"
+        or registry_gap_audit["transiar_retained_patients"] != 423
+        or registry_gap_audit["transiar_retained_aneurysms"] != 449
+        or registry_gap_audit["transiar_balanced_test_aneurysms"] != 82
+        or registry_gap_audit["transiar_imbalanced_test_aneurysms"] != 249
+        or registry_gap_audit["gn_net_reported_patients"] != 423
+        or registry_gap_audit["exact_cross_record_case_lineage_manifest_public"]
+        is not False
+        or registry_gap_audit["public_test_payload_accessed"] is not False
+        or registry_gap_audit["vwe_record"] != "10.5061/dryad.p2ngf1vrg"
+        or registry_gap_audit["vwe_unruptured_aneurysms"] != 41
+        or registry_gap_audit["vwe_csv_bytes"] != 3572
+        or registry_gap_audit["vwe_csv_md5"]
+        != "4ba44d3becf0a0f327aa9aa7aede01d2"
+        or registry_gap_audit["vwe_observed_future_instability_endpoint_present"]
+        is not False
+        or registry_gap_audit["vwe_image_wall_map_or_cfd_field_public"] is not False
+        or registry_gap_audit["transcriptomic_record"]
+        != "10.5281/zenodo.21249929"
+        or registry_gap_audit["transcriptomic_discovery_labeled_aneurysms"] != 43
+        or registry_gap_audit["transcriptomic_discovery_ruptured"] != 22
+        or registry_gap_audit["transcriptomic_discovery_unruptured"] != 21
+        or registry_gap_audit["transcriptomic_raw_geo_included"] is not False
+        or registry_gap_audit["transcriptomic_casewise_imaging_bridge_public"]
+        is not False
+        or registry_gap_audit["autopsy_record"] != "10.5281/zenodo.15692542"
+        or registry_gap_audit["autopsy_adults"] != 221
+        or registry_gap_audit["autopsy_aneurysm_cases"] != 29
+        or registry_gap_audit["autopsy_casewise_table_or_imaging_public"]
+        is not False
+        or registry_gap_audit["vortex_cfd_record"]
+        != "10.5281/zenodo.20732293"
+        or registry_gap_audit[
+            "vortex_cfd_independent_patient_or_experimental_reference_included"
+        ]
+        is not False
+        or set(registry_gap_audit["direct_prior_threats"])
+        != expected_registry_gap_priors
+        or observed_registry_gap_scores != expected_registry_gap_scores
+        or not registry_gap_axis_sums_match
+        or any(candidate["payload_accessed"] for candidate in registry_gap_audit["candidates"])
+        or registry_gap_audit["decision"]
+        != "reject_all_without_score_repair_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or registry_gap_audit["next_allowed_action"]
+        != "monitor_material_source_changes_or_a_genuinely_new_observable_imaging_endpoint_with_auditable_development_units_and_sealed_outer_test_then_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The registry-gap source audit must retain all five source-only "
+            "rejections, the 26.5/40 maximum, exact public metadata, no "
+            "payload/P0/model/PBS/GPU, and introai9-only execution."
+        )
+    checks.append("registry-gap rejection and public-test sealing boundary")
 
     venue = protocol["venue"]
     _require_keys(

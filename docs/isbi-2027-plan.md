@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 registry-gap boundary:** Five new metadata-only candidates score
+> 26.5/26.0/26.0/25.5/23.5. A public test-only rupture-status blob, scalar VWE
+> association, solver software, post-presentation transcriptomics and aggregate
+> autopsy anatomy do not provide the development/endpoint/lineage combination
+> needed for a new ISBI method. No title, numbered contribution, architecture,
+> result row, figure claim or GPU experiment is added. This screen is preserved
+> as unnumbered rejected history in the private paper. The four-page ISBI 2027
+> target remains, but the manuscript is **not submission-ready**.
+
 > **2026-08-10 method--asset viability boundary:** Latest scores are
 > 30/30/29/26/23, all below 32. COMPASS/NeckSpline and modern partial-observation
 > neural-operator work remove the apparent independent novelty; IAVS remains

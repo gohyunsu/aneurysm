@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 registry-gap source overlay:** The official exact-title Zenodo
+> query returned 49 records. Five previously unregistered candidates score
+> 26.5/26.0/26.0/25.5/23.5, all below the frozen 32/40 admission line. The best
+> record is a public test-only rupture-status blob from a source-reported
+> 423-patient lineage; it has no public development cohort, patient/center/raw-
+> CTA manifest or prospective endpoint, and TransIAR/GN-Net directly occupy the
+> method space. VWE is a 3,572-byte scalar table from 41 unruptured aneurysms;
+> vortex-cfd is software without independent patient units; the processed
+> transcriptomic record has no casewise imaging bridge; the autopsy record has
+> no casewise table or geometry payload. Schema 5.6 source of truth is
+> `docs/registry-gap-source-audit-2026-08-10.md` and
+> `problem_selection.registry_gap_source_audit`. CSV/PKL/ZIP/image/wall-map/CFD/
+> RNA/patient payload, active shortlist, selected primary, P0, method,
+> architecture, PBS/GPU, outer test, submission identity and paper claim are 0.
+> Closed P0s and failed gates remain closed without local repair or relabeling.
+> AURORA may use only `introai9` PBS after a separately frozen candidate reaches
+> 32 and passes a method-free P0. `junjinyong` must not be connected to, queried,
+> submitted to or monitored for this project.
+
 > **2026-08-10 method--asset viability source overlay:** Fresh five-candidate
 > scores are 30.0/30.0/29.0/26.0/23.0, all below the frozen 32/40 line. Royal
 > Brisbane has 63 patients/85 aneurysms and mask/STL outputs, but both outputs

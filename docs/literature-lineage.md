@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 registry-gap lineage:** TransIAR은 423 patient/449 lesion에서
+> geometry와 CTA neighborhood를 결합했고, GN-Net은 같은 423-patient count와
+> 겹치는 authorship 아래 geometric branch와 3D-CNN/Transformer neighborhood
+> branch를 직접 제안했다. 공개 test blobs 사이의 exact lineage는 확인되지
+> 않으므로 독립 external cohort로 가정할 수 없다. VWE primary paper가 이미
+> 41 unruptured aneurysm에서 size/RRS/WSS/OSI association을 분석했고, 후속 3D
+> VWE mapping도 direct prior다. GSE122897 기반 immune/gene signatures는 작은
+> post-presentation tissue cohorts를 반복 사용한다. OpenFOAM automation과 CoW
+> aggregate anatomy association은 각각 infrastructure와 biological prior이지
+> 새 imaging algorithm gap이 아니다. 이 direct-prior 계보를 반영한 최고점은
+> 26.5/40이며 active contribution은 없다.
+
 > **2026-08-10 method--asset viability lineage:** ICLR 2026 COMPASS는 medical
 > segmentation에서 파생되는 downstream metric의 conformal interval과
 > covariate-shift weighting을 직접 다루고, NeckSpline은 aneurysm neck을

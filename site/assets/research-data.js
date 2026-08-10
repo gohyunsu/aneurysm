@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · method–asset viability best 30.0/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    status: "Target locked · registry-gap best 26.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
     requirement: "material source release or genuinely identifiable fresh problem ≥32 → method-free CPU/read-only P0; do not repair closed branches",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A public test blob is not a development cohort or a future-risk endpoint",
+      copy: "An exact-title Zenodo screen returned 49 records. The best new candidate is a test-only rupture-status blob from a source-reported 423-patient lineage, but its public development cohort, patient/center/raw-CTA manifest and prospective endpoint are absent. TransIAR and GN-Net directly occupy geometry-plus-neighborhood modeling. The VWE table contains scalar associations for 41 unruptured aneurysms; CFD software has no cohort; processed post-presentation transcriptomics and aggregate autopsy anatomy have no casewise imaging bridge.",
+      status: "Best 26.5/40 · all rejected · payload/P0/PBS/model/GPU 0",
+      url: "../docs/registry-gap-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "A usable dataset plus a fashionable method is still not a research gap",
@@ -317,13 +324,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Reference morphometry", "Partial-observation operator", "Topology-to-CFD", "Residual research gap"],
-    ["Direct prior", "COMPASS · NeckSpline · robust CP", "Neural Operator Processes · learned BC extensions", "IAVS topology-aware pipeline", "None admitted"],
-    ["Observable target", "Released-annotation-derived scalar", "Paired condition–field–decision law", "Segmentation plus CFD applicability", "Independent, obtainable endpoint"],
-    ["Known boundary", "Not biological truth; method occupied", "No aneurysm joint asset; old N1c failed", "Official repository has no payload/license", "Material release or new identifiable task required"],
-    ["Current decision", "30.0/40 reject", "30.0/40 reject", "29.0/40 reject", "No P0 · no method · no GPU"]
+    ["Axis", "Public rupture test", "Scalar VWE", "Transcriptomics", "Residual research gap"],
+    ["Direct prior", "TransIAR · GN-Net", "Primary association · 3D VWE mapping", "GEO immune/gene signatures", "None admitted"],
+    ["Observable target", "Presentation rupture status", "Released scalar association", "Post-presentation tissue label", "Prospective or decision-relevant imaging endpoint"],
+    ["Known boundary", "Test-only; no public development lineage", "41 unruptured lesions; no wall map/field", "No casewise CTA/MRA bridge", "Independent units plus sealed outer test required"],
+    ["Current decision", "26.5/40 reject", "26.0/40 reject", "25.5/40 reject", "No payload · no P0 · no method · no GPU"]
   ],
   gates: [
+    {
+      id: "S-RG",
+      title: "Do registry-only records expose a development cohort, identifiable endpoint and residual method gap?",
+      copy: "No. The leading rupture-status asset is test-only and lacks an exact public development lineage or prospective endpoint. Scalar VWE, solver infrastructure, post-presentation omics and aggregate autopsy anatomy do not supply a new casewise imaging target. Direct geometry/neighborhood and association methods already occupy the obvious approaches.",
+      state: "Best 26.5/40 · all five below 32 · no payload/P0/PBS/model/GPU",
+      blocking: true
+    },
     {
       id: "S-MA",
       title: "Does an obtainable asset leave a residual algorithmic gap after 2025–2026 direct priors?",
@@ -571,6 +585,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Registry-gap audit rejects test-only and endpoint-mismatched assets",
+      copy: "The official exact-title Zenodo query returned 49 records. Five previously unregistered candidates score 26.5/26.0/26.0/25.5/23.5. The public rupture blobs are test-only and lack a public development lineage or prospective endpoint; VWE is a 41-unruptured-aneurysm scalar table; solver software has no cohort; post-presentation omics and aggregate autopsy anatomy have no casewise imaging bridge. Schema 5.6 creates no payload, P0, PBS job, method, architecture or GPU. Future authorized execution is introai9 PBS only; junjinyong remains completely excluded.",
+      files: ["docs/registry-gap-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

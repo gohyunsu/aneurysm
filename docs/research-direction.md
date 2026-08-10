@@ -1,5 +1,18 @@
 # AURORA 연구 방향
 
+> **2026-08-10 registry-gap direction:** 공식 Zenodo exact-title metadata 49건을
+> 재검토했지만 새 후보 최고점은 public test-only rupture-status reuse의
+> 26.5/40이다. 423-patient source lineage의 public blob에는 개발 cohort와 exact
+> patient/center/raw-CTA lineage가 없고 presentation rupture status는 prospective
+> risk가 아니다. TransIAR/GN-Net이 geometry와 neighborhood fusion을 이미 직접
+> 다룬다. 41 unruptured aneurysm의 VWE scalar association, patient cohort 없는
+> CFD software, imaging bridge 없는 post-presentation transcriptomics와 casewise
+> geometry 없는 autopsy record도 독립 문제를 만들지 못한다. 따라서 현재 연구
+> 방향은 architecture를 억지로 정하는 것이 아니라 이 exact version들을
+> rejection history로 고정하는 것이다. Active primary/method/model/GPU는 0이며,
+> 새로운 관측 endpoint·독립 개발 단위·sealed outer test·residual method gap을
+> 함께 제공하는 material source change만 다음 source audit을 연다.
+
 > **2026-08-10 method--asset viability boundary:** Royal reference-morphometry
 > certificate와 partial-observation solution-functional operator가 각각 30/40,
 > IAVS/RSNA/CQ500 후보가 29/26/23으로 모두 32 미만이다. COMPASS와

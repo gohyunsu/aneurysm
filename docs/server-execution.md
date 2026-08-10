@@ -2,6 +2,18 @@
 
 최종 갱신: 2026-08-10 KST
 
+## 2026-08-10 · Registry-gap source-only stop; introai9 remains exclusive
+
+- Five metadata-only candidates score 26.5/26.0/26.0/25.5/23.5, all below 32.
+  No payload, executable P0, PBS submission, GPU job or monitoring loop was
+  created. This is a scientific source-gate stop, not a server failure.
+- A future job is authorized only after a genuinely new candidate reaches 32
+  and a separate method-free P0 is frozen. Such work must use PBS on `introai9`;
+  login-node GPU commands remain forbidden.
+- `junjinyong` is assigned to other work and is completely outside AURORA. Do
+  not connect, query scheduler state, submit, transfer AURORA code/data or
+  monitor it.
+
 ## 2026-08-10 · Method--asset source-only stop and introai9 status
 
 - Five scores are 30/30/29/26/23, all below 32. No payload, P0, PBS/GPU job or

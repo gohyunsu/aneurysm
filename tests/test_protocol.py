@@ -254,6 +254,45 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "method--asset viability audit"):
             validate_protocol(candidate)
 
+    def test_registry_gap_audit_keeps_public_test_and_payload_sealed(self) -> None:
+        audit = self.protocol["problem_selection"]["registry_gap_source_audit"]
+        self.assertEqual(audit["best_score"], 26.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["official_registry_records_returned"], 49)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 5)
+        self.assertEqual(audit["transiar_retained_patients"], 423)
+        self.assertEqual(audit["transiar_retained_aneurysms"], 449)
+        self.assertEqual(audit["gn_net_reported_patients"], 423)
+        self.assertFalse(audit["exact_cross_record_case_lineage_manifest_public"])
+        self.assertFalse(audit["public_test_payload_accessed"])
+        self.assertEqual(audit["vwe_unruptured_aneurysms"], 41)
+        self.assertFalse(audit["vwe_observed_future_instability_endpoint_present"])
+        self.assertFalse(audit["transcriptomic_casewise_imaging_bridge_public"])
+        self.assertFalse(audit["autopsy_casewise_table_or_imaging_public"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not candidate["payload_accessed"] for candidate in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["registry_gap_source_audit"][
+            "public_test_payload_accessed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "registry-gap source audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["registry_gap_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "registry-gap source audit"):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 registry-gap boundary:** An exact-title Zenodo metadata screen
+> found 49 records and froze five previously unregistered problem candidates at
+> **26.5/26.0/26.0/25.5/23.5**, all below 32/40. The best public rupture-status
+> asset is a test-only blob from a 423-patient lineage; its train cohort, raw CTA
+> lineage, patient manifest and prospective endpoint are not public, while
+> TransIAR and GN-Net already occupy geometry-plus-neighborhood modeling. The
+> open VWE table contains 41 unruptured aneurysms and scalar associations already
+> analyzed by its primary paper. CFD software supplies no independent cohort;
+> post-presentation transcriptomics has no casewise imaging bridge; the autopsy
+> record has no casewise geometry asset. The
+> [`detailed audit`](docs/registry-gap-source-audit-2026-08-10.md) freezes no
+> payload, P0, method, architecture, PBS/GPU, outer test or claim. Future
+> gate-authorized execution is `introai9` PBS only. `junjinyong` is excluded from
+> connection, query, submission and monitoring.
+
 > **2026-08-10 method--asset viability boundary:** Five source-only candidates
 > score **30.0/30.0/29.0/26.0/23.0**, all below 32/40. Royal Brisbane provides
 > 63 patients, 85 aneurysms and mask/STL representations, but COMPASS already
