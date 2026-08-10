@@ -344,6 +344,54 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "broad-registry source audit"):
             validate_protocol(candidate)
 
+    def test_rsna_aws_registry_correction_remains_controlled_and_precompute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "rsna_aws_registry_correction_audit"
+        ]
+        self.assertEqual(audit["score"], 31.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertAlmostEqual(sum(audit["axis_scores"]), audit["score"])
+        self.assertTrue(audit["controlled_access"])
+        self.assertFalse(audit["user_terms_accepted_verified"])
+        self.assertFalse(audit["access_request_submitted"])
+        self.assertFalse(audit["s3_listing_or_payload_accessed"])
+        self.assertEqual(audit["reported_institutions"], 18)
+        self.assertEqual(audit["official_wiki_status"], "coming_soon")
+        self.assertFalse(audit["release_modality_contract_publicly_reconciled"])
+        self.assertFalse(audit["public_per_reader_or_adjudication_manifest_verified"])
+        self.assertEqual(
+            audit["first_place_repository_commit"],
+            "e1dcdf0058e1e0d0044d8053e92243b4b4794555",
+        )
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertEqual(audit["introai9_pbs_jobs_observed"], 0)
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["rsna_aws_registry_correction_audit"][
+            "user_terms_accepted_verified"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "RSNA AWS registry correction"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["rsna_aws_registry_correction_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "RSNA AWS registry correction"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["rsna_aws_registry_correction_audit"][
+            "provided_voxel_segmentation_semantics"
+        ] = "aneurysm_extent"
+        with self.assertRaisesRegex(ProtocolError, "RSNA AWS registry correction"):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

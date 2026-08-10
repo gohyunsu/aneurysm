@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-10 · RSNA AWS registry correction remains below source admission
+
+- Official AWS registry YAML blob `97b8c1f…` at exact file commit `523ffd3…`
+  reports 4,000+ scans, 40+ radiologists, about 200 AI-segmented studies and 18
+  institutions, correcting the earlier registry-visibility boundary.
+- The resource is explicitly controlled-access; the wiki remains `Coming soon`,
+  terms/request/S3/payload access are zero, and registry/competition modality
+  plus reader/center/sealed-test contracts remain unresolved.
+- Point/presence/territory supervision and 13-class vessel masks are preserved;
+  vessel masks are not relabeled as aneurysm extent. Winning RSNA systems and
+  conformal object/instance risk control remain direct priors.
+- The frozen candidate score is **31.5/40**, so schema 5.8 retains no active
+  shortlist, primary, P0, method, architecture, PBS/GPU, outer test, C21/result
+  row or submission identity. Future authorized execution remains
+  `introai9`-only; `junjinyong` remains excluded.
+- 영향 파일: detailed audit, protocol/validator/tests, synchronized research
+  documents, public site, private manuscript boundary, `AGENTS.md` and this log.
+
 연구 결정, 데이터 계약, 모델 설계, 실험 프로토콜, 사이트 변경을 함께
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.

@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.7":
-        raise ProtocolError("The current research-state schema must be version 5.7.")
+    if protocol["schema_version"] != "5.8":
+        raise ProtocolError("The current research-state schema must be version 5.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -146,7 +146,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_broad_registry_source_rejection_aneumo_lineage_p0_closed"
+        != "failed_branches_preserved_no_active_shortlist_after_rsna_aws_registry_source_rejection_aneumo_lineage_p0_closed"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -206,6 +206,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "method_asset_viability_source_audit",
             "registry_gap_source_audit",
             "broad_registry_source_audit",
+            "rsna_aws_registry_correction_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -215,12 +216,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_broad_registry_source_rejection_aneumo_lineage_p0_remains_closed"
+        != "no_active_shortlist_after_rsna_aws_registry_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_broad_registry_audit_official_metadata_and_primary_sources_only_no_patient_image_mesh_spreadsheet_document_or_model_payload_aneumo_lineage_p0_history_unchanged"
+        != "latest_rsna_aws_registry_correction_official_metadata_only_controlled_access_no_mira_terms_request_s3_listing_or_payload_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not True
@@ -230,13 +231,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_material_source_releases_or_a_genuinely_new_identifiable_problem_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_closed_p0_or_confirmatory_failures"
+        != "user_personally_accepts_rsna_terms_and_official_manifest_exposes_development_label_lineage_and_sealed_evaluation_then_run_a_fresh_source_task_audit_or_monitor_other_material_sources_without_repairing_closed_branches"
         or problem_selection["audit_document"]
-        != "docs/broad-registry-source-audit-2026-08-10.md"
+        != "docs/rsna-aws-registry-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "multicenter_study_level_lesion_set_risk_control"
+        != "rsna_registry_backed_study_level_lesion_set_miss_risk_control"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -346,6 +347,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "asah_day21_hydrocephalus_dynamic_imaging",
         "vwi_habitat_instability_reanalysis",
         "synthetic_dsa_reader_realism",
+        "rsna_registry_backed_study_level_lesion_set_miss_risk_control",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -4032,6 +4034,167 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("broad-registry rejection and restricted-access boundary")
 
+    rsna_registry_audit = problem_selection["rsna_aws_registry_correction_audit"]
+    _require_keys(
+        rsna_registry_audit,
+        [
+            "status",
+            "audit_document",
+            "candidate_id",
+            "score",
+            "axis_scores",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "registry_entry",
+            "registry_yaml_file_commit",
+            "registry_yaml_blob_sha",
+            "registry_yaml_bytes",
+            "dataset_doi",
+            "controlled_access",
+            "noncommercial_no_redistribution_terms_reported",
+            "user_terms_accepted_verified",
+            "access_request_submitted",
+            "mira_account_created",
+            "s3_listing_or_payload_accessed",
+            "reported_brain_scans_more_than",
+            "reported_volunteer_radiologists_more_than",
+            "reported_institutions",
+            "reported_ai_segmented_studies_approximately",
+            "official_wiki_status",
+            "registry_description_modality",
+            "public_competition_implementation_modalities",
+            "release_modality_contract_publicly_reconciled",
+            "data_resource_publication_status",
+            "registry_data_at_work_url_points_to_unrelated_pulmonary_embolism_paper",
+            "first_place_repository_commit",
+            "second_place_preprint",
+            "official_aneurysm_supervision_semantics",
+            "provided_voxel_segmentation_semantics",
+            "public_per_reader_or_adjudication_manifest_verified",
+            "public_center_modality_and_sealed_outer_test_manifest_verified",
+            "direct_prior_threats",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_pbs_jobs_observed",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.rsna_aws_registry_correction_audit",
+    )
+    expected_rsna_registry_priors = {
+        "rsna_2025_first_place_global_local_anatomy_aware_detection",
+        "rsna_2025_second_place_multitask_vessel_and_aneurysm_system",
+        "vessel_aware_multiscale_deformable_3d_attention",
+        "sequential_conformal_risk_control_for_object_detection",
+        "conformal_prediction_sets_for_instance_segmentation",
+        "generic_point_supervised_3d_lesion_detection_and_set_prediction",
+    }
+    rsna_registry_axis_scores = rsna_registry_audit["axis_scores"]
+    if (
+        rsna_registry_audit["status"]
+        != "completed_source_only_rejected_below_admission_threshold"
+        or rsna_registry_audit["audit_document"]
+        != "docs/rsna-aws-registry-audit-2026-08-10.md"
+        or rsna_registry_audit["candidate_id"]
+        != "rsna_registry_backed_study_level_lesion_set_miss_risk_control"
+        or rsna_registry_audit["score"] != 31.5
+        or len(rsna_registry_axis_scores) != 8
+        or any(score < 0.0 or score > 5.0 for score in rsna_registry_axis_scores)
+        or abs(sum(rsna_registry_axis_scores) - rsna_registry_audit["score"]) >= 1e-12
+        or rsna_registry_audit["automatic_selection_threshold"] != 32.0
+        or rsna_registry_audit["score"]
+        >= rsna_registry_audit["automatic_selection_threshold"]
+        or rsna_registry_audit["active_shortlist_count"] != 0
+        or rsna_registry_audit["primary_problem_selected"] is not False
+        or rsna_registry_audit["registry_entry"]
+        != "https://registry.opendata.aws/rsna-intracranial-aneurysm-detection-dataset/"
+        or rsna_registry_audit["registry_yaml_file_commit"]
+        != "523ffd3914ba99e6c4b17441f1633cc3eec74c69"
+        or rsna_registry_audit["registry_yaml_blob_sha"]
+        != "97b8c1f16b2809d2e82ec0c39d3b156b174c8c83"
+        or rsna_registry_audit["registry_yaml_bytes"] != 2626
+        or rsna_registry_audit["dataset_doi"] != "10.1148/dataset.ica.2025"
+        or rsna_registry_audit["controlled_access"] is not True
+        or rsna_registry_audit[
+            "noncommercial_no_redistribution_terms_reported"
+        ]
+        is not True
+        or rsna_registry_audit["user_terms_accepted_verified"] is not False
+        or rsna_registry_audit["access_request_submitted"] is not False
+        or rsna_registry_audit["mira_account_created"] is not False
+        or rsna_registry_audit["s3_listing_or_payload_accessed"] is not False
+        or rsna_registry_audit["reported_brain_scans_more_than"] != 4000
+        or rsna_registry_audit["reported_volunteer_radiologists_more_than"] != 40
+        or rsna_registry_audit["reported_institutions"] != 18
+        or rsna_registry_audit["reported_ai_segmented_studies_approximately"] != 200
+        or rsna_registry_audit["official_wiki_status"] != "coming_soon"
+        or rsna_registry_audit["registry_description_modality"]
+        != "ct_brain_scans"
+        or rsna_registry_audit["public_competition_implementation_modalities"]
+        != ["cta", "mra", "t1_post", "t2"]
+        or rsna_registry_audit[
+            "release_modality_contract_publicly_reconciled"
+        ]
+        is not False
+        or rsna_registry_audit["data_resource_publication_status"] != "forthcoming"
+        or rsna_registry_audit[
+            "registry_data_at_work_url_points_to_unrelated_pulmonary_embolism_paper"
+        ]
+        is not True
+        or rsna_registry_audit["first_place_repository_commit"]
+        != "e1dcdf0058e1e0d0044d8053e92243b4b4794555"
+        or rsna_registry_audit["second_place_preprint"] != "arxiv_2606.26706v1"
+        or rsna_registry_audit["official_aneurysm_supervision_semantics"]
+        != "center_points_study_presence_and_vascular_territory"
+        or rsna_registry_audit["provided_voxel_segmentation_semantics"]
+        != "thirteen_class_circle_of_willis_vessel_anatomy_not_aneurysm_extent"
+        or rsna_registry_audit[
+            "public_per_reader_or_adjudication_manifest_verified"
+        ]
+        is not False
+        or rsna_registry_audit[
+            "public_center_modality_and_sealed_outer_test_manifest_verified"
+        ]
+        is not False
+        or set(rsna_registry_audit["direct_prior_threats"])
+        != expected_rsna_registry_priors
+        or rsna_registry_audit["executable_p0_registered"] is not False
+        or rsna_registry_audit["method_selected"] is not False
+        or rsna_registry_audit["architecture_selected"] is not False
+        or rsna_registry_audit["gpu_training_authorized"] is not False
+        or rsna_registry_audit["outer_test_authorized"] is not False
+        or rsna_registry_audit["submission_identity_active"] is not False
+        or rsna_registry_audit["execution_server"] != "introai9"
+        or rsna_registry_audit["introai9_connection_verified"] is not True
+        or rsna_registry_audit["introai9_pbs_jobs_observed"] != 0
+        or rsna_registry_audit["pbs_job_created"] is not False
+        or rsna_registry_audit["login_node_gpu_command_executed"] is not False
+        or rsna_registry_audit["junjinyong_accessed_for_this_audit"] is not False
+        or rsna_registry_audit["decision"]
+        != "reject_without_score_repair_terms_acceptance_access_request_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or rsna_registry_audit["next_allowed_action"]
+        != "after_user_personal_terms_acceptance_and_official_manifest_release_register_a_fresh_source_task_audit_not_automatic_p0_or_training"
+        or rsna_registry_audit["candidate_id"]
+        not in set(problem_selection["rejected_candidates"])
+    ):
+        raise ProtocolError(
+            "The RSNA AWS registry correction must remain a 31.5/40 source "
+            "rejection with controlled access, unresolved release semantics, "
+            "no terms/request/payload/P0/model/GPU, introai9-only execution, "
+            "and complete junjinyong exclusion."
+        )
+    checks.append("RSNA AWS controlled-access registry correction boundary")
+
     venue = protocol["venue"]
     _require_keys(
         venue,
@@ -4111,7 +4274,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "unselected_primary_with_no_active_shortlist_after_aneumo_lineage_p0_execution_incomplete"
+        != "unselected_primary_with_no_active_shortlist_after_rsna_aws_registry_source_rejection"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -4274,7 +4437,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
         or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "no_active_shortlist_after_aneumo_lineage_p0_execution_incomplete_no_primary_method_architecture_or_gpu"
+        != "no_active_shortlist_after_rsna_aws_registry_source_rejection_no_primary_method_architecture_or_gpu"
         or task["candidate_primary_estimand"] != "unselected"
         or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

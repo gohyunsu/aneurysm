@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · broad-registry best 30.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
-    requirement: "material source release or genuinely identifiable fresh problem ≥32 → method-free CPU/read-only P0; do not repair closed branches",
+    status: "Target locked · official RSNA registry correction scores 31.5/40 and is rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    requirement: "personally accepted controlled-access terms plus an auditable manifest, or another genuinely identifiable fresh problem ≥32 → new source/task audit before any method-free P0; do not repair closed branches",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "An official registry entry is not the same as an open, model-ready dataset",
+      copy: "The AWS Open Data Registry now describes RSNA-ICA as 4,000+ scans from 18 institutions and 40+ volunteer radiologists, with about 200 AI-segmented studies. The same record explicitly marks the resource ControlledAccess through RSNA MIRA, while the official data wiki remains Coming soon. No user terms, access request, manifest or payload were opened. Exact winning code still establishes point/presence/territory aneurysm supervision and 13-class vessel-anatomy masks, not official aneurysm-extent masks. Winning detectors and conformal object/instance risk control leave only a narrow residual gap.",
+      status: "31.5/40 · rejected below 32 · terms/request/payload/P0/PBS/model/GPU 0",
+      url: "../docs/rsna-aws-registry-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Multicenter scale and many solver outputs still need independent, auditable units",
@@ -324,13 +331,19 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Restricted LargeIA", "CFD solver population", "Longitudinal SIG", "Residual research gap"],
-    ["Direct prior", "GLIA-Net · anatomy-aware detection · conformal object sets", "2015 workflow UQ · MATCH · operator UQ", "Primary SIG/geometric/hemodynamic analysis", "None admitted"],
-    ["Observable target", "Study-level detection under declared risk", "Solver-conditioned WSS functionals", "Observed future rupture under serial TOF-MRA", "New endpoint with auditable train and sealed test"],
-    ["Known boundary", "Restricted; reader/outer-test semantics absent", "28 submissions but five anatomies", "Duplicate supplement PDF; no casewise images/table", "Independent units plus unoccupied method gap required"],
-    ["Current decision", "30.5/40 reject", "29.5/40 reject", "26.0/40 reject", "No access request · payload · P0 · method · GPU"]
+    ["Direct prior", "Global/local anatomy-aware detection · point/presence/territory multitask", "Sequential risk control · instance prediction sets", "4,000+ scans · 18 institutions · 40+ radiologists", "None admitted"],
+    ["Observable target", "Lesion center and territory under study-level presence", "Detection/instance error under declared risk", "Manifest and adjudication lineage not yet audited", "Study-level lesion-set miss risk with a task-specific guarantee"],
+    ["Known boundary", "13-class masks are vessel anatomy, not lesion extent", "Generic wrapper is not a new aneurysm method", "ControlledAccess · user terms/request/payload 0", "Released observation process plus sealed test and unoccupied algorithm required"],
+    ["Current decision", "Mandatory baseline", "Mandatory baseline", "No access action", "31.5/40 reject · no P0/method/GPU"]
   ],
   gates: [
+    {
+      id: "S-RSNA",
+      title: "Does the official RSNA registry correction identify an accessible, unoccupied study-level risk-control problem?",
+      copy: "No. The registry establishes multicenter scale but explicitly routes access through RSNA MIRA terms. The public first-place semantics remain point/presence/territory plus vessel-anatomy masks, while winning detection systems and conformal object/instance risk control are direct priors. The registry wording does not identify a new algorithm or an audited sealed evaluation contract.",
+      state: "31.5/40 < 32 · user terms/request/manifest/payload/P0/PBS/model/GPU 0",
+      blocking: true
+    },
     {
       id: "S-BR",
       title: "Does the broad registry expose an accessible independent cohort and an unoccupied method gap?",
@@ -490,8 +503,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "RSNA-ICA 2025 · controlled access",
-      role: "rejected for the mixed-granularity selection task; possible future challenge benchmark only after a new task audit",
-      provenance: "Official >4,000 CT/MR scans · second-place report 4,348 series/178 13-class vessel masks · aneurysm points, no official voxel lesion mask · controlled/not staged/no redistribution"
+      role: "source-rejected registry-backed study-level lesion-set risk candidate; possible benchmark only after personal terms acceptance and a new source/task audit",
+      provenance: "AWS registry: >4,000 scans · 18 institutions · 40+ radiologists · about 200 AI-segmented studies · MIRA ControlledAccess/no redistribution · user terms/request/manifest/payload 0 · point/presence/territory lesions · 13-class vessel masks are not lesion extent · 31.5/40"
     },
     {
       name: "CADA 2020 · registration required",
@@ -595,6 +608,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Official RSNA registry metadata corrects scale, not access or novelty",
+      copy: "The official AWS record adds 4,000+ scans, 18 institutions, 40+ radiologists and about 200 AI-segmented studies, but explicitly marks RSNA-ICA ControlledAccess. The user has not accepted terms or requested access, and no manifest or payload was read. Point/presence/territory supervision, vessel-anatomy masks, winning detectors and conformal risk controls freeze the residual candidate at 31.5/40. Schema 5.8 therefore creates no P0, PBS job, method, architecture, GPU, outer test or C21 claim; introai9 remains the only future execution target and junjinyong remains excluded.",
+      files: ["docs/rsna-aws-registry-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

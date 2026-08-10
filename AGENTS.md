@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 RSNA AWS registry correction overlay:** Official AWS registry
+> YAML blob `97b8c1f…` at file commit `523ffd3…` reports RSNA-ICA as 4,000+
+> scans, 40+ radiologists, about 200 AI-segmented studies and 18 institutions.
+> It explicitly links `ControlledAccess`; the official wiki remains `Coming
+> soon`, the data-resource paper is forthcoming, and its DataAtWork URL points
+> to an unrelated pulmonary-embolism paper. User terms, MIRA account/request,
+> S3 listing and patient/image/CSV/segmentation/model payload access are 0.
+> Public competition code preserves point/presence/territory aneurysm labels
+> and 13-class vessel masks, not official aneurysm-extent masks. The frozen
+> source score is 31.5/40, so active shortlist, primary, P0, method,
+> architecture, PBS/GPU, outer test, C21/result row and submission identity are
+> all 0. Schema 5.8 source of truth is
+> `docs/rsna-aws-registry-audit-2026-08-10.md` and
+> `problem_selection.rsna_aws_registry_correction_audit`. AURORA uses only
+> `introai9`; `junjinyong` remains excluded from connection, query, transfer,
+> submission and monitoring.
+
 > **2026-08-10 broad-registry source overlay:** A bounded official-metadata
 > screen across Zenodo, DataCite, Figshare and Dryad freezes six candidate scores
 > at 30.5/29.5/26.0/26.0/24.5/18.0, all below the unchanged 32/40 admission line.

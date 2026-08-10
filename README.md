@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 RSNA AWS registry correction:** The official AWS Open Data
+> Registry now documents RSNA-ICA as 4,000+ scans from 18 institutions with
+> 40+ radiologists, but the resource is explicitly `ControlledAccess`; the
+> official wiki remains `Coming soon`, user terms/access request/payload are
+> zero, and registry-versus-competition modality semantics are unresolved.
+> The exact first-place code still shows point/presence/territory aneurysm
+> supervision and 13-class vessel-anatomy masks rather than aneurysm extent.
+> Study-level lesion-set miss-risk control scores **31.5/40**, below 32, because
+> winning detectors and conformal object/instance risk control are direct
+> priors. [`Detailed audit`](docs/rsna-aws-registry-audit-2026-08-10.md).
+> Active shortlist/primary/P0/method/architecture/PBS/GPU/outer test remain 0;
+> future execution is `introai9` only and `junjinyong` is fully excluded.
+
 > **2026-08-10 broad-registry boundary:** Zenodo, DataCite, Figshare and Dryad를
 > 넓게 다시 검색하고 1차 논문·직접 선행과 대조했습니다. Frozen six-candidate
 > score는 **30.5/29.5/26.0/26.0/24.5/18.0**이며 모두 32/40 미만입니다.

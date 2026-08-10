@@ -1,5 +1,16 @@
 # AURORA 서버 실행과 provenance
 
+## 2026-08-10 · RSNA AWS registry correction, no job authorized
+
+- Exact public registry YAML blob `97b8c1f…` at file commit `523ffd3…` was read;
+  controlled MIRA terms were not accepted and no account, request, S3 listing
+  or data payload was accessed.
+- The frozen candidate score is 31.5/40, below 32. Therefore no P0, PBS job,
+  model, GPU allocation, outer test or monitoring loop was created.
+- Credential-managed `introai9` access succeeded and login-profile
+  `qstat -u introai9` returned an empty list. No login-node GPU command ran.
+  `junjinyong` was not accessed and remains fully excluded.
+
 최종 갱신: 2026-08-10 KST
 
 ## 2026-08-10 · Broad-registry deployment verification

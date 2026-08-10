@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 RSNA registry correction:** The target remains an IEEE ISBI 2027
+> four-page regular paper and the project remains not submission-ready. The
+> newest source candidate scores 31.5/40 because the 4,000+/18-institution
+> registry is controlled-access, its label/center/test manifest is incomplete,
+> and direct detector/risk-control priors are dense. No paper identity, method,
+> result row, figure claim or compute is opened. User terms plus an official
+> versioned manifest would permit a fresh source/task audit, not training.
+
 > **2026-08-10 broad-registry boundary:** Six source-only candidates score
 > 30.5/29.5/26.0/26.0/24.5/18.0. Restricted LargeIA, five-anatomy CFD solver
 > population, supplement-only longitudinal SIG/aSAH/VWI and post-deadline

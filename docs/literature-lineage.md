@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 RSNA registry lineage:** official registry → controlled MIRA
+> access → point/presence/territory lesion supervision plus 13-class vessel
+> anatomy → RSNA winning global/local and multitask systems → vessel-aware
+> deformable attention → sequential conformal object detection and conformal
+> instance sets. The remaining study-level miss-risk idea lacks a released
+> reader/center/sealed-test manifest and independent method gap, scoring
+> 31.5/40. It is rejected source history, not C21 or an architecture.
+
 > **2026-08-10 broad-registry lineage:** LargeIA→GLIA-Net은 multicenter CTA의
 > global localization과 fine 3D segmentation을 직접 점유하고, conformal risk
 > control·sequential conformal object detection·instance-segmentation sets가

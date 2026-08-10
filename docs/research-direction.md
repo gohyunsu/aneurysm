@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **2026-08-10 RSNA registry correction:** AWS registry metadata materially
+> strengthens the reported unit boundary (4,000+ scans, 18 institutions) but
+> not the executable task. Access remains controlled, the wiki/manifest and
+> reader/center/sealed-test lineage are unresolved, and direct competition plus
+> conformal detection priors leave only 1.5/5 residual novelty. The exact
+> study-level lesion-set miss-risk candidate scores 31.5/40 and is rejected.
+> There is no current architecture. Personal terms acceptance plus an official
+> manifest would open a fresh source/task audit only, not automatic P0 or GPU.
+
 > **2026-08-10 broad-registry direction:** 넓은 official-registry screen 뒤에도
 > admission-qualified 문제는 없다. LargeIA의 multicenter scale은 매력적이지만
 > restricted access, public reader/outer-test semantics 부재와 GLIA-Net/conformal

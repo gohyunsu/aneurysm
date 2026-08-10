@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 RSNA registry correction:** No detector, GNN, U-Net,
+> Transformer, lesion-set decoder or conformal head is selected. The new
+> official registry remains controlled-access and the strongest residual
+> candidate is 31.5/40. RSNA winning global/local and multitask systems,
+> vessel-aware deformable attention, sequential conformal object detection and
+> conformal instance sets are mandatory direct priors. Model specification
+> stays historical until a fresh task passes source and method-free adequacy
+> gates.
+
 > **2026-08-10 broad-registry architecture boundary:** 현재 모델은 없다.
 > LargeIA에 global-local detector, centerline GNN 또는 conformal head를 붙이는
 > 것은 GLIA-Net/anatomy-aware detection/conformal object-set direct prior의

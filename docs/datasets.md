@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 RSNA-ICA registry correction:** AWS registry metadata reports
+> 4,000+ scans, 40+ radiologists, about 200 AI-segmented studies and 18
+> institutions, but the bucket is `ControlledAccess` and no terms/request or
+> payload access occurred. The wiki is still `Coming soon`; the registry says
+> CT while public competition implementations use CTA/MRA/T1-post/T2, so exact
+> release modalities and center/reader manifests remain unaudited. Supplied
+> voxel masks are 13-class vessel anatomy, not aneurysm extent. Current role:
+> source-only rejected candidate, not a train/validation/test asset.
+
 > **2026-08-10 broad-registry asset boundary:** LargeIA는 공식 record상
 > 1,338 internal CTA/1,489 aneurysm/6 institution과 138 external CTA/
 > 101 aneurysm/2 institution의 voxel mask·age·sex·rupture status를 보고하지만

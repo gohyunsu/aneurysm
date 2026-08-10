@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Current gate · schema 5.8:** The RSNA AWS registry correction scores
+> 31.5/40, below the 32-point source line. Controlled-access terms were not
+> accepted and no MIRA request, S3 listing, CSV/DICOM/segmentation payload, P0,
+> model, PBS/GPU or outer test exists. A user-accepted, versioned manifest would
+> trigger a new source/task audit only. All future authorized execution remains
+> on `introai9`; `junjinyong` is forbidden for AURORA.
+
 > **Current exact gate · 2026-08-10 schema 5.7:** Broad-registry candidates
 > score 30.5/29.5/26.0/26.0/24.5/18.0, all below 32. Restricted LargeIA access
 > was not requested; no CFD challenge DICOM/WSS/velocity, longitudinal SIG,
