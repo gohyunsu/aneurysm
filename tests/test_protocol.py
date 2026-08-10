@@ -89,15 +89,47 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
+        with self.assertRaisesRegex(ProtocolError, "Aneumo BC-transport"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
+        with self.assertRaisesRegex(ProtocolError, "Aneumo BC-transport"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "TopAneu code-semantics"):
+        with self.assertRaisesRegex(ProtocolError, "Aneumo BC-transport"):
+            validate_protocol(candidate)
+
+    def test_aneumo_bc_transport_opens_only_one_train_family_cpu_p0(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["aneumo_bc_transport_source_audit"]
+        self.assertEqual(audit["score"], 33.5)
+        self.assertAlmostEqual(sum(audit["axis_scores"]), 33.5)
+        self.assertEqual(problem["conditional_source_lead_count"], 1)
+        self.assertTrue(audit["p0_registered"])
+        self.assertEqual(audit["p0_train_base_families"], [1])
+        self.assertEqual(audit["p0_cases"], [1, 2])
+        self.assertEqual(audit["p0_required_members"], 16)
+        self.assertFalse(audit["p0_job_submitted"])
+        self.assertFalse(audit["p0_scientific_gate_evaluated"])
+        self.assertFalse(audit["p0_persistent_field_cache"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_bc_transport_source_audit"][
+            "p0_train_base_families"
+        ] = [13]
+        with self.assertRaisesRegex(ProtocolError, "BC-transport P0"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_bc_transport_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "BC-transport P0"):
             validate_protocol(candidate)
 
     def test_aneumo_lineage_candidate_closes_after_one_cpu_metadata_p0(self) -> None:
@@ -554,8 +586,9 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["architecture_selected"])
         self.assertFalse(audit["gpu_training_authorized"])
         self.assertFalse(audit["outer_test_authorized"])
+        self.assertEqual(audit["conditional_source_lead_count"], 1)
         self.assertEqual(
-            self.protocol["problem_selection"]["conditional_source_lead_count"], 0
+            self.protocol["problem_selection"]["conditional_source_lead_count"], 1
         )
         self.assertTrue(
             all(not item["payload_accessed"] for item in audit["candidates"])

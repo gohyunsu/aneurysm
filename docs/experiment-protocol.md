@@ -1,5 +1,17 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 6.5 P0 boundary · 2026-08-10:** Exactly one method-free CPU/PBS
+> source-semantics audit is preregistered in
+> `configs/aneumo_bc_transport_p0.json`. It reads only Aneumo historical train
+> family 1, cases 1–2 and eight observed flows (16 members), verifies ZIP/CRC,
+> N×7 finite arrays, bit-identical coordinates, nondegenerate velocity and
+> nonzero response energy, and evaluates the fixed power-1.075 analytic control
+> over 1,024 deterministic nodes. It does not analyze pressure or read
+> validation/test fields; it creates no field cache, model, checkpoint, GPU or
+> outer-test result. All checks pass → register separate train-only method-free
+> P1 only. Fail/incomplete → close exact P0 without repair/rerun. Run through
+> `introai9` PBS only; `junjinyong` is excluded from every operation.
+
 > **Schema 6.4 current boundary:** No TopAneu P0-R is pending. The official-code
 > red team rejects every fresh formulation, maximum 31.5/40, while preserving
 > the old 33/40 score as history. Terms acceptance cannot authorize payload or

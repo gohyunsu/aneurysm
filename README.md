@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 anchor-conditioned BC transport · schema 6.5:** The current
+> conditional source lead is no longer a geometry-to-field model. Given one
+> CFD velocity field on a geometry at an observed anchor flow `q0`, the proposed
+> task asks whether the solution can be transported to another observed flow
+> `q` with exact identity at `q=q0` and auditable ratio/path consistency. It
+> scores **33.5/40**, but residual novelty is only 2/5: DeltaPhi,
+> scale-consistent operators and learned boundary extensions are mandatory
+> direct controls. Exactly one train-family-only, method-free CPU P0 is
+> preregistered: Aneumo family 1, cases 1–2, eight flows, 16 CRC-checked members,
+> 1,024 deterministic nodes, pressure/validation/test/model/checkpoint/GPU/
+> outer-test access all 0. P0 runs only through `introai9` PBS. `junjinyong` is
+> prohibited for connection, query, transfer, submission and monitoring. No
+> method, architecture, contribution or ISBI paper identity is selected; P0
+> pass may open only a separate train-only method-free P1.
+
 > **2026-08-10 TopAneu code-semantics red team · schema 6.4:** The earlier
 > 33/40 material-release score remains immutable history. Reading the official
 > taxonomy mappings, submission templates and active evaluators at exact commit

@@ -1,5 +1,27 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 anchor-conditioned BC-transport override · schema 6.5:** A fresh
+> source/prior red team admits
+> `similarity_quotiented_anchor_conditioned_bc_transport` at 33.5/40 as one
+> **conditional source lead**. The task takes geometry, one same-geometry anchor
+> CFD velocity field at `q0`, and an observed ratio `q/q0`; it predicts the
+> target-flow response with exact anchor identity and ratio/path diagnostics.
+> This is a one-solve scenario-sweep question, not geometry-only hemodynamics,
+> missing patient BC inference, prospective rupture risk or clinical utility.
+> Historical V1/V1e failures remain failures. DeltaPhi, scale-consistent neural
+> operators, learned boundary extensions, power-law normalization and generic
+> cycle consistency are direct priors/controls; residual novelty is only 2/5.
+> Exact `configs/aneumo_bc_transport_p0.json` registers one method-free P0 on
+> historical train family 1/cases 1–2/all eight flows: 16 CRC-checked members,
+> 1,024 deterministic nodes, pressure/validation/test/model/checkpoint/GPU/
+> outer-test access 0, persistent field cache 0, one submission only. Pass opens
+> only a separate train-only method-free P1; failure or execution-incomplete
+> closes the exact P0 without same-contract repair/rerun. There is no selected
+> primary, method, architecture, contribution or submission identity.
+> **AURORA uses `introai9` PBS only. `junjinyong` is another project's server and
+> must never be connected, queried, used for transfer/submission or monitored.**
+> Do not run GPU commands on a login node; this P0 is CPU 2/8 GB/GPU 0.
+
 > **2026-08-10 TopAneu code-semantics override · schema 6.4:** The official
 > repository remains pinned at `018c243445f99199f484018c4c80575c84c72293`.
 > Bounded public-code inspection established that the 52 location leaves already

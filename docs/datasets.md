@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 6.5 Aneumo role · 2026-08-10:** Aneumo is currently a conditional
+> source-audit asset for same-geometry anchor-conditioned velocity transport.
+> P0 may range-read only archive `1.zip`, historical train family 1/cases 1–2,
+> all eight flows and 16 exact members. It may sample 1,024 aligned nodes and
+> emit aggregate semantics, but may not persist fields, analyze pressure, read
+> validation/test families, train a model or open an outer test. The historical
+> 32-family compact pilot establishes the future split only; it is not a current
+> training authorization. P0 is `introai9` CPU/PBS only.
+
 > **Schema 6.4 TopAneu role:** Public code, mappings, evaluators, templates and
 > checksum/path manifests were audited without reading medical members. The
 > resulting method formulation is rejected at a fresh maximum of 31.5/40, so

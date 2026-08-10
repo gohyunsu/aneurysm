@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **Schema 6.5 residual lineage · 2026-08-10:** Generic residual learning is
+> occupied by DeltaPhi; cross-scale/Reynolds consistency by scale-consistent
+> neural operators; varying boundary-data conditioning by learned function
+> extensions and boundary-aware operators. Power-law normalization,
+> dimensionless inputs, paired-response loss and generic cycle/semigroup
+> consistency are controls, not contributions. The narrow residual question is
+> whether an irregular vascular **condition orbit** supports anchor-conditioned
+> transport with exact identity, ratio/path diagnostics and family-disjoint
+> functional accuracy beyond a strong analytic similarity control. Its source
+> score is 33.5/40 but novelty remains unconfirmed (2/5 residual-gap score).
+> P0/P1 and prospective superiority are required before naming an architecture.
+
 > **2026-08-10 code-semantics correction:** The former TopAneu residual gap is
 > occupied on both sides. Official mappings already encode the proposed
 > territory/laterality/branch-role hierarchy and official test templates are

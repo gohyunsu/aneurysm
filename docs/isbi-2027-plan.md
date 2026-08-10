@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 6.5 submission boundary · 2026-08-10:** AURORA remains **not
+> submission-ready**. Anchor-conditioned BC transport is one 33.5/40
+> conditional source lead, not a title identity, numbered contribution or
+> method. The immediate evidence is a train-family-only CPU P0 with no model or
+> validation/test access. Even a P0 pass opens only method-free P1. A paper
+> identity requires P1 task adequacy, a prospectively frozen method/control
+> comparison, family-disjoint development, fresh confirmatory evidence and a
+> clear advantage beyond DeltaPhi/scale-consistent/boundary-conditioning direct
+> priors. All execution is `introai9` PBS only; `junjinyong` is prohibited.
+
 > **2026-08-10 schema 6.4 submission boundary:** AURORA remains **not
 > submission-ready** and now has zero conditional source leads. Official
 > TopAneu code/evaluator semantics and direct priors reduce the fresh maximum to

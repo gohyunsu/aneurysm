@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 6.5 architecture boundary · 2026-08-10:** There is no current GNN,
+> Perceiver, neural operator or selected architecture. The only active object is
+> a method-free Aneumo P0 asking whether one same-geometry anchor CFD field and
+> a target flow ratio identify a stable transport task beyond a fixed analytic
+> power control. DeltaPhi, scale-consistent operators, learned boundary
+> extensions and generic cycle/semigroup losses are mandatory controls. No
+> network may be named before P0 and a separately registered train-only P1 show
+> a nontrivial, family-stable margin. GPU authorization remains false.
+
 > **Schema 6.4 · no architecture:** The TopAneu code-semantics red team rejects
 > all fresh candidates below 32/40. GNN, U-Net, Transformer, taxonomy decoder,
 > train-only anatomy teacher, count head and conformal wrapper remain direct

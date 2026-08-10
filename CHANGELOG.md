@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-08-10 · Anchor-conditioned BC transport opens one method-free CPU P0
+
+- Froze a new problem rather than relabelling failed geometry-to-field V1/V1e:
+  one CFD velocity field at anchor flow `q0` conditions transport to another
+  observed flow `q` on the same aligned geometry.
+- The six-candidate direct-prior screen admits only
+  `similarity_quotiented_anchor_conditioned_bc_transport` at 33.5/40. Its
+  residual-gap score is 2/5 because DeltaPhi, scale-consistent operators,
+  learned boundary extensions and generic scaling/cycle mechanisms are direct
+  controls, not novelty.
+- Preregistered one exact method-free `introai9` CPU/PBS P0 over historical
+  Aneumo train family 1, cases 1–2, eight flows and 16 members. Pressure,
+  validation/test, persistent field cache, model/checkpoint, GPU and outer-test
+  access are forbidden. Pass opens only a separate train-only method-free P1;
+  fail or execution-incomplete closes this exact version without repair/rerun.
+- Advanced the machine contract to schema 6.5 and added mutation guards,
+  synthetic execution tests, PBS one-shot provenance, full research/site
+  explanations and an explicit `introai9`-only boundary. `junjinyong` remains
+  prohibited for connection, query, transfer, submission and monitoring.
+- Affected files: `docs/aneumo-bc-transport-source-audit-2026-08-10.md`,
+  `configs/aneumo_bc_transport_p0.json`, `src/aurora/aneumo_bc_transport_p0.py`,
+  `scripts/audit_aneumo_bc_transport_p0.py`,
+  `cluster/pbs_aneumo_bc_transport_p0.pbs`,
+  `tests/test_aneumo_bc_transport_p0.py`, `configs/aurora_v1.json`, protocol
+  guards, research docs, site, README and `AGENTS.md`.
+
 ## 2026-08-10 · TopAneu code semantics reject the historical source lead
 
 - Preserved the earlier schema-6.3 33.0/40 score as immutable history rather

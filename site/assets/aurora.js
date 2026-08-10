@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "Official mappings already encode territory, laterality and branch role in 52 leaves.",
-      connector: "semantics audited",
-      title: "Hierarchy already explicit",
-      copy: "Factorization is observable task metadata, not a new independent mechanism",
+      description: "One observed CFD velocity field anchors the same aligned geometry at q0.",
+      connector: "identity audited",
+      title: "Exact anchor identity",
+      copy: "The fixed analytic control and every later model must satisfy U(q0 | U(q0)) = U(q0)",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Task 2 merges same-class components into a binary class volume; instance code is disabled.",
-      connector: "metric audited",
-      title: "Instance-collapse boundary",
-      copy: "A count-aware model would optimize beyond the active challenge metric and needs separate support",
+      description: "The observed ratio q/q0 indexes transport along the same geometry's condition orbit.",
+      connector: "response audited",
+      title: "Nonzero transport response",
+      copy: "All non-anchor targets must have positive response energy before a learned residual can be meaningful",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Fresh best 31.5/40 is below admission; terms cannot reopen the rejected formulation.",
-      connector: "gate closed",
-      title: "All candidates rejected",
-      copy: "Conditional lead, payload, P0, architecture, GPU, outer test and claim are all zero",
+      description: "A 33.5/40 source score authorizes one CPU P0, not a network or performance claim.",
+      connector: "P0 decision",
+      title: "P1 or exact closure",
+      copy: "All checks pass opens separate train-only adequacy; fail or incomplete closes without repair or rerun",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

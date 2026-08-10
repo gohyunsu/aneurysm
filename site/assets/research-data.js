@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · TopAneu code-semantics fresh best 31.5/40 and all rejected · conditional/executable shortlist/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "a different fresh problem must pass source and method-free task-adequacy gates before any model or compute",
+    status: "Target locked · anchor-conditioned BC transport 33.5/40 conditional source lead · one train-only CPU P0 · primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "the exact CPU P0 and a separately registered method-free P1 must pass before any architecture or GPU work",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "One anchor CFD solve creates a realistic transport question, not yet a method",
+      copy: "Failed V1/V1e branches tried geometry-to-field inference; the boundary Perceiver still had worst validation full-field/response relative L2 of 0.878/0.949. A fixed same-case anchor power control was far stronger at validation response L2 0.228, motivating a new estimand: geometry plus one observed anchor solution U(q0) and ratio q/q0 predict U(q) on the same aligned geometry. DeltaPhi, scale-consistent operators, learned boundary extensions, analytic scaling and generic path consistency are mandatory controls. The residual gap is only 2/5.",
+      status: "33.5/40 conditional source lead · CPU P0 registered · method/architecture/GPU 0",
+      url: "../docs/aneumo-bc-transport-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Official code semantics remove the apparent TopAneu gap",
@@ -366,13 +373,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Official TopAneu contract", "Direct prior", "Former formulation", "Current decision"],
-    ["Hierarchy", "52 names encode territory/side/role", "HATs taxonomy segmentation", "factorize 52 leaves", "metadata, not novelty"],
-    ["Anatomy", "vessel mask absent at test", "MIDL-26 train-only anatomy; vessel-aware detection", "silver train-only teacher", "direct-prior occupied"],
-    ["Instances", "Task 2 merges class volumes", "MIDL-22 probabilistic lesion counting", "count–mask coherence", "support/metric mismatch"],
-    ["Score", "historical 33 preserved", "fresh priors added", "fresh same formulation 31", "batch best 31.5 · all rejected"]
+    ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
+    ["Input", "geometry + U(q0) + q/q0", "analytic power scaling", "same-geometry field transport", "P0 semantics only"],
+    ["Learning", "eight observed steady flows", "DeltaPhi residual", "irregular condition orbit", "no architecture selected"],
+    ["Structure", "aligned coordinates", "scale consistency + boundary extensions", "identity + ratio/path diagnostics", "must beat controls prospectively"],
+    ["Evidence", "32-family pilot; P0 reads one family", "historical V1/V1e failures", "33.5/40; residual gap 2/5", "P0 → P1 or close"]
   ],
   gates: [
+    {
+      id: "P0-BC",
+      title: "Does the Aneumo source support a nondegenerate anchor-conditioned transport task?",
+      copy: "One exact introai9 CPU/PBS audit reads only historical train family 1, cases 1–2 and all eight flows. It checks 16 ZIP/CRC members, finite N×7 arrays, bit-identical coordinates, nonzero velocity responses and exact anchor identity of the fixed power-1.075 control over 1,024 deterministic nodes. It trains no model and reads no pressure, validation or test field.",
+      state: "Registered, not yet submitted · GPU 0 · pass opens separate train-only P1 only · fail/incomplete closes",
+      blocking: true
+    },
     {
       id: "S-TA",
       title: "Does official TopAneu code leave an unoccupied factorized/silver-anatomy problem?",
@@ -515,6 +529,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "Aneumo · anchor-conditioned BC transport P0",
+      role: "current conditional source-audit asset; train-family-only method-free P0, not model training",
+      provenance: "CC BY-NC-ND 4.0 · HF f801ade… / upstream 701d53d… · family 1 · cases 1–2 · eight flows · 16 members · 1,024 aligned nodes · pressure/validation/test/cache/model/GPU/outer test 0"
+    },
     {
       name: "AneuG-Flow · exact source pair",
       role: "closed P0-v2a source history; not current training or outer test",
@@ -682,6 +701,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Anchor-conditioned BC transport opens one method-free CPU P0",
+      copy: "The failed geometry-to-field V1/V1e line remains failed. A fresh six-candidate screen instead asks whether one same-geometry CFD anchor and an observed flow ratio support solution transport with exact identity and ratio/path diagnostics. The candidate scores 33.5/40, while its direct-prior residual is only 2/5 because DeltaPhi, scale-consistent operators and learned boundary extensions are mandatory controls. One train-family-only, 16-member CPU P0 is prospectively frozen. It runs only on introai9; junjinyong is excluded. P0 creates no method, architecture, GPU, outer test or paper claim.",
+      files: ["docs/aneumo-bc-transport-source-audit-2026-08-10.md", "configs/aneumo_bc_transport_p0.json", "src/aurora/aneumo_bc_transport_p0.py", "cluster/pbs_aneumo_bc_transport_p0.pbs", "configs/aurora_v1.json", "site/index.html", "site/learn.html", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

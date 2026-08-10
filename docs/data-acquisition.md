@@ -1,5 +1,13 @@
 # Dataset acquisition plan
 
+> **Schema 6.5 acquisition override · 2026-08-10:** The only newly authorized
+> read is the one-shot Aneumo P0's selective ZIP64 range access: train family 1,
+> cases 1–2, eight flows, 16 members. Do not download a full archive, persist a
+> field cache, inspect pressure or access validation/test data. Run only inside
+> an `introai9` PBS CPU allocation. `junjinyong` is prohibited for connection,
+> query, transfer, submission and monitoring. P0 pass is not permission to
+> acquire more data; it permits registration of a separate train-only P1 only.
+
 > **2026-08-10 schema 6.4 override:** Do not acquire TopAneu for the rejected
 > factorized/silver-anatomy formulation. The official-code red team leaves no
 > active source lead or P0, and terms acceptance alone cannot reopen it. Only a

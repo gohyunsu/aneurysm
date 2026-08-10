@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 6.5 conditional direction · 2026-08-10:** The current question is
+> same-geometry, anchor-conditioned boundary-condition transport—not an active
+> GNN and not geometry-to-field inference. One CFD velocity solution at `q0`
+> plus the observed target ratio `q/q0` defines a one-solve scenario sweep. The
+> candidate scores 33.5/40, but direct-prior residual novelty is only 2/5. A
+> train-family-only, method-free CPU P0 must first establish aligned source
+> semantics and the fixed analytic-power control. P0 pass may register only P1
+> task adequacy; architecture, GPU, validation/test and paper claims remain
+> closed. Execute only on `introai9`; never access or monitor `junjinyong`.
+
 > **Current direction · schema 6.4:** The TopAneu 33/40 release lead is now
 > historical evidence, not an active lead. Official code shows that its proposed
 > label factorization is explicit metadata, image-only inference is already the

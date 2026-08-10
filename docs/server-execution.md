@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 6.5 pending execution · 2026-08-10:** One exact method-free Aneumo
+> BC-transport P0 is preregistered but not yet submitted. Its allocation is
+> `introai9` PBS, queue `coss_agpu`, CPU 2, memory 8 GB, GPU 0, walltime 45 min.
+> The last bounded pre-registration observation verified the credential-managed
+> public-key boundary and an empty `qstat -u introai9`; no login-node GPU command
+> was run. Submit only an exact clean public commit, once. Failure or incomplete
+> execution closes this version without repair/rerun. `junjinyong` is forbidden
+> for connection, query, code/data transfer, submission and monitoring.
+
 > **2026-08-10 schema 6.4 execution boundary:** The TopAneu code-semantics
 > audit is source-only and rejects all candidates, maximum 31.5/40. It created
 > no medical payload access, P0, PBS job, GPU allocation or monitoring loop.

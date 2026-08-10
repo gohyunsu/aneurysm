@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.4":
-        raise ProtocolError("The current research-state schema must be version 6.4.")
+    if protocol["schema_version"] != "6.5":
+        raise ProtocolError("The current research-state schema must be version 6.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -147,13 +147,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "topaneu_code_semantics_red_team_all_rejected_no_active_primary_method_or_gpu"
+        != "aneumo_bc_transport_conditional_source_lead_p0_registered_cpu_only_no_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "job_115467_observed_exiting_exit_1_then_no_longer_returned_by_qstat_no_result_or_raw_log"
+        != "introai9_public_key_verified_scheduler_empty_before_bc_transport_p0_registration"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -184,6 +184,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_identity_active",
             "next_allowed_action",
             "audit_document",
+            "aneumo_bc_transport_source_audit",
             "source_only_dataset_substitution_screen",
             "topaneu_attachment_source_audit",
             "topaneu_release_evaluation_source_audit",
@@ -227,13 +228,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "topaneu_code_semantics_red_team_all_rejected_no_active_shortlist_or_method"
-        or problem_selection["shortlisted_candidate"] != "none"
-        or problem_selection["conditional_source_lead_count"] != 0
-        or problem_selection["candidate_dataset"] != "none"
-        or problem_selection["candidate_estimand"] != "unselected"
+        != "aneumo_bc_transport_conditional_source_lead_with_preregistered_cpu_p0_no_method_or_gpu"
+        or problem_selection["shortlisted_candidate"]
+        != "similarity_quotiented_anchor_conditioned_bc_transport_conditional_only"
+        or problem_selection["conditional_source_lead_count"] != 1
+        or problem_selection["candidate_dataset"] != "aneumo"
+        or problem_selection["candidate_estimand"]
+        != "same_geometry_anchor_conditioned_velocity_response_across_observed_mass_flow_ratios"
         or problem_selection["asset_access_status"]
-        != "topaneu_public_code_taxonomy_evaluator_and_path_sha_manifests_only_no_medical_payload"
+        != "historical_pinned_range_reader_and_compact_pilot_verified_fresh_train_family_only_p0_pending"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -243,21 +246,116 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_direct_prior_audit_only_no_topaneu_p0_from_rejected_formulation"
+        != "run_exact_one_shot_introai9_cpu_pbs_aneumo_bc_transport_p0_then_open_only_train_only_method_free_p1_if_all_checks_pass"
         or problem_selection["audit_document"]
-        != "docs/topaneu-code-semantics-red-team-2026-08-10.md"
+        != "docs/aneumo-bc-transport-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied"
         or problem_selection["most_recent_conditional_source_lead"]
-        != "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy"
+        != "similarity_quotiented_anchor_conditioned_bc_transport"
     ):
         raise ProtocolError(
-            "The fresh TopAneu code-semantics red team must reject every candidate "
-            "without changing the historical 33/40 record or opening payload, P0, "
-            "method, GPU, outer test, or a submission claim."
+            "The Aneumo BC-transport lead may open only its preregistered CPU P0 "
+            "without selecting a method, GPU, outer test, or submission claim."
         )
+    bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
+    _require_keys(
+        bc_transport,
+        [
+            "status",
+            "audit_document",
+            "config",
+            "candidate_id",
+            "score",
+            "axis_scores",
+            "automatic_selection_threshold",
+            "conditional_source_lead_count",
+            "active_method_count",
+            "primary_problem_selected",
+            "hf_repo_commit",
+            "upstream_code_commit",
+            "historical_v1e_failed_preserved",
+            "direct_prior_threats",
+            "p0_protocol_id",
+            "p0_registered",
+            "p0_train_base_families",
+            "p0_cases",
+            "p0_conditions",
+            "p0_required_members",
+            "p0_persistent_field_cache",
+            "p0_pressure_validation_test_model_checkpoint_gpu_or_outer_test_access",
+            "p0_submission_limit",
+            "p0_job_submitted",
+            "p0_scientific_gate_evaluated",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "introai9_connection_verified",
+            "introai9_pbs_jobs_observed_before_registration",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "p0_pass_authorizes",
+            "p0_failure_action",
+        ],
+        "Aneumo BC-transport source audit",
+    )
+    if (
+        bc_transport["status"]
+        != "conditional_source_lead_with_preregistered_train_family_only_p0_not_yet_submitted"
+        or bc_transport["candidate_id"]
+        != "similarity_quotiented_anchor_conditioned_bc_transport"
+        or bc_transport["score"] != 33.5
+        or sum(bc_transport["axis_scores"]) != 33.5
+        or bc_transport["automatic_selection_threshold"] != 32.0
+        or bc_transport["conditional_source_lead_count"] != 1
+        or bc_transport["active_method_count"] != 0
+        or bc_transport["primary_problem_selected"] is not False
+        or bc_transport["historical_v1e_failed_preserved"] is not True
+        or bc_transport["p0_protocol_id"]
+        != "aneumo_anchor_conditioned_bc_transport_p0_v1"
+        or bc_transport["p0_registered"] is not True
+        or bc_transport["p0_train_base_families"] != [1]
+        or bc_transport["p0_cases"] != [1, 2]
+        or bc_transport["p0_conditions"] != 8
+        or bc_transport["p0_required_members"] != 16
+        or bc_transport["p0_persistent_field_cache"] is not False
+        or bc_transport[
+            "p0_pressure_validation_test_model_checkpoint_gpu_or_outer_test_access"
+        ]
+        is not False
+        or bc_transport["p0_submission_limit"] != 1
+        or bc_transport["p0_job_submitted"] is not False
+        or bc_transport["p0_scientific_gate_evaluated"] is not False
+        or any(
+            bc_transport[key] is not False
+            for key in (
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or bc_transport["execution_server"] != "introai9"
+        or bc_transport["introai9_connection_verified"] is not True
+        or bc_transport["introai9_pbs_jobs_observed_before_registration"] != 0
+        or bc_transport["p0_pass_authorizes"]
+        != "register_separate_train_only_method_free_p1_task_adequacy_audit_only"
+        or bc_transport["p0_failure_action"]
+        != "close_exact_p0_without_same_contract_repair_or_rerun"
+    ):
+        raise ProtocolError(
+            "Aneumo BC-transport P0 must remain train-only, method-free, CPU-only, "
+            "one-shot on introai9 with junjinyong excluded."
+        )
+    checks.append("Aneumo BC-transport conditional source/P0 boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
