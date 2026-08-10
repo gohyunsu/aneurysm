@@ -1,5 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.1 AneuG raw-probe role · 2026-08-10:** Dataset commit
+> `9dd418083899deddd93a67f9a6fca7a14304fa36` is admitted only for three
+> lexicographically fixed raw wall-tensor/OBJ pairs: `stable_0`, `stable_100`
+> and `stable_10001`. The six exact objects total 276,642,685 bytes. Their sizes,
+> wall SHA-256 values and OBJ git-blob SHA-1 values are frozen before body
+> access. P0 may read them once in `introai9` job scratch to audit tensor schema,
+> mesh alignment, tangency, temporal variation and critical-point
+> extractability. Blood tensors, processed archives, checkpoints, models,
+> clinical data and outer test remain inaccessible. No body has yet been read;
+> this is a registered probe role, not a training dataset authorization.
+
 > **Schema 7.0 AneuG-Flow boundary · 2026-08-10:** Official paper/code and
 > repository metadata were inspected; no wall/blood tensor, OBJ body, external
 > GHD checkpoint or model weight was downloaded. The current audit records how

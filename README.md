@@ -1,5 +1,23 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 surface-vector structure P0 registration · schema 7.1:** A
+> fresh problem asks whether transient wall shear stress (WSS) can be treated as
+> a time-varying tangent 1-form whose signed critical-point indices and temporal
+> trajectories are measurable from the released raw AneuG-Flow assets. It scores
+> exactly **32.0/40** and is therefore one conditional source lead—not a selected
+> primary, method, architecture or contribution. Hodge/DEC representations,
+> SE(3)-equivariance, tangency and generic critical-point losses are direct
+> priors or controls. One exact method-free P0 is preregistered over three raw
+> wall-tensor/OBJ pairs (`stable_0`, `stable_100`, `stable_10001`; 276,642,685
+> bytes total). It checks hashes, safe schema, coordinate alignment, tangency,
+> temporal variation and whether indexed critical points are extractable. The
+> job is `introai9` PBS CPU-only (4 CPU, 16 GB, GPU 0), has not yet been
+> submitted, and may open only a separately registered 32-case method-free P1.
+> Failure or incomplete execution closes this exact version without repair or
+> rerun. `junjinyong` is prohibited for connection, query, transfer, submission
+> and monitoring. [Detailed audit](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md) ·
+> [Frozen P0](configs/aneug_surface_vector_structure_p0.json)
+
 > **2026-08-10 AneuG target-construction audit · schema 7.0:** Official paper,
 > exact code `4a090a0…` and dataset metadata `9dd4180…` show that registered
 > coordinates and WSS are transferred together by `k=3` interpolation while

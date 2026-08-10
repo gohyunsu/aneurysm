@@ -1,5 +1,20 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.1 surface-vector lineage · 2026-08-10:** AneuG-Flow provides a
+> large transient WSS source and existing aneurysm graph surrogates already
+> predict WSS. Surface finite-element/DEC and Hodge methods already represent
+> tangent vector fields; SE(3)-equivariant mesh models already predict transient
+> WSS; vector-field topology already defines critical points, signed indices and
+> trajectory compression; and aneurysm literature already associates WSS
+> critical points with regions of influence. Thus a GNN, Hodge layer, tangent
+> projection, critical-point loss or clean split is not independently novel.
+> The residual gap is narrower: an operator-specific representation or guarantee
+> that connects learned time-varying 1-form error to per-frame index and
+> worldline-event preservation, demonstrated beyond field-error-matched direct
+> baselines. The 32.0/40 score opens only a three-probe raw-asset P0; no method
+> or GPU experiment is authorized. See
+> [the frozen source audit](aneug-surface-vector-structure-source-audit-2026-08-10.md).
+
 > **2026-08-10 target-construction update:** AneuG-Flow's public registration
 > path makes conservative/tangent-aware surface transfer and test-blind
 > evaluation mandatory controls. Farrell et al. already establish conservative

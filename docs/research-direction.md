@@ -1,5 +1,18 @@
 # AURORA 연구 방향
 
+> **Schema 7.1 conditional direction · 2026-08-10:** The current question is
+> not “which GNN predicts WSS MSE best?” A time-varying WSS field lives in the
+> tangent plane of an oriented vessel surface. Its zeros have signed indices,
+> and those zeros move, appear or disappear across the cardiac cycle. A fresh
+> source screen scores the problem of predicting this index/trajectory structure
+> at exactly 32.0/40. This admits only a three-case method-free raw-asset P0.
+> Hodge/DEC, equivariance, tangent projection and generic topology losses are
+> direct priors. A defensible later method would need an operator-specific
+> representation or guarantee connecting 1-form approximation to critical-point
+> index/worldline preservation, plus strong-baseline superiority. No method,
+> architecture or GPU experiment is selected. P0 runs once on `introai9` CPU/PBS;
+> `junjinyong` is never accessed.
+
 > **Schema 7.0 direction · 2026-08-10:** AneuG-Flow target construction exposes
 > plausible surface-vector, conservative-functional and test-contamination
 > risks, but the obvious remedies are established controls rather than an

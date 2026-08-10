@@ -1,5 +1,18 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.1 no-model boundary · 2026-08-10:** A surface-vector structure
+> problem has crossed the source line at exactly 32.0/40, but only a raw-asset
+> CPU P0 is registered. There is still no current GNN, Graph Transformer,
+> neural operator or topology head. Hodge/DEC coefficients, tangent projection,
+> SE(3)-equivariance, critical-point losses and temporal matching are baseline
+> components, not novelty. If P0 and a separately registered method-free P1
+> establish a stable task, future architecture selection must compare raw
+> Cartesian vector regression, tangent-frame regression, mesh/graph message
+> passing and Hodge-spectral operators at matched compute. A new method is
+> justified only by an operator-specific representation/guarantee and prospective
+> per-frame index plus worldline-event gains—not by a decorative model name.
+> GPU authorization remains false. Use `introai9` only; never `junjinyong`.
+
 > **Schema 7.0 no-model boundary · 2026-08-10:** The AneuG target-
 > construction batch is source-rejected at a best score of 31.5/40. GNN,
 > Graph Transformer, E(3) network, neural operator, tangent-projection head and

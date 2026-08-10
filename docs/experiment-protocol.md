@@ -1,5 +1,32 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 7.1 current P0 · 2026-08-10:** Exactly one method-free experiment is
+> preregistered: three raw AneuG-Flow wall-tensor/OBJ probe pairs, selected
+> lexicographically before access, are checked for exact hashes, safe tensor
+> schema, 80-frame availability, mesh/coordinate correspondence, WSS tangency,
+> temporal variation and signed-index critical-point extractability. All checks
+> are required. It is one `introai9` PBS job with CPU 4, 16 GB, GPU 0 and one
+> hour; no blood field, processed archive, checkpoint, model, clinical data or
+> outer test is read. Pass registers nothing automatically except permission to
+> write a distinct method-free 32-case P1. Failure or incomplete execution
+> closes the candidate without same-contract repair/rerun. The P0 has not yet
+> been submitted. `junjinyong` is prohibited.
+
+## P0-SV · AneuG transient surface-vector structure · registered, not submitted
+
+- Source score: 32.0/40; conditional lead only.
+- Probes: `stable_0`, `stable_100`, `stable_10001`; six exact objects,
+  276,642,685 bytes total.
+- Required gate: byte/hash identity, weights-only dictionary schema, at least
+  80 finite/static phases, valid triangular OBJ and normals, coordinate match
+  fraction >=0.999, median/p95 normal-component ratio <=0.05/0.25, nonzero
+  temporal variation, and indexed critical points in >=5% of frames per probe.
+- Output: private per-probe diagnostics plus a deidentified aggregate; raw
+  tensors/meshes are deleted with job scratch.
+- Machine contract: `configs/aneug_surface_vector_structure_p0.json`.
+- Executor: `src/aurora/aneug_surface_vector_structure_p0.py` through
+  `cluster/pbs_aneug_surface_vector_structure_p0.pbs`.
+
 > **Schema 7.0 current state · 2026-08-10:** No experiment is registered for
 > the AneuG target-construction batch. Six source scores peak at 31.5/40, so
 > payload, CPU P0, architecture smoke, validation/test and GPU are all zero.

@@ -1,0 +1,150 @@
+{
+  "schema_version": "aurora.aneug_surface_vector_structure_p0.v1",
+  "protocol_id": "aneug_surface_vector_structure_raw_probe_p0_v1",
+  "status": "preregistered_before_first_introai9_pbs_execution",
+  "as_of": "2026-08-10",
+  "candidate": {
+    "id": "time_varying_surface_wss_index_structure_prediction",
+    "score": 32.0,
+    "maximum_score": 40.0,
+    "admission_threshold": 32.0,
+    "axis_scores": [4.5, 4.0, 2.5, 3.5, 4.5, 5.0, 5.0, 3.0],
+    "estimand": "time_resolved_tangent_wss_one_form_per_frame_signed_critical_point_index_and_later_worldline_events",
+    "p0_scope": "raw_mesh_wss_correspondence_tangency_and_per_frame_index_extractability_only",
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false
+  },
+  "sources": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "dataset_license": "CC-BY-SA-4.0",
+    "official_code_repository": "WenHaoDing/AneuG-Flow",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "reported_transient_cases": 730,
+    "probe_selection_rule": "three_public_lexicographically_fixed_schema_probes_not_a_scientific_sample",
+    "cases": [
+      {
+        "id": "stable_0",
+        "wall_path": "transient_data/stable_0/wall_data.pt",
+        "wall_bytes": 79495962,
+        "wall_sha256": "895652c006f6eef53710486936950b80fb8015abac63e6a6f08c7de0b320fef1",
+        "mesh_path": "transient_data/stable_0/shape_remeshed.obj",
+        "mesh_bytes": 5844998,
+        "mesh_git_blob_oid": "d4936fd72def5ff287775295ea8f47bd1298d21f"
+      },
+      {
+        "id": "stable_100",
+        "wall_path": "transient_data/stable_100/wall_data.pt",
+        "wall_bytes": 98007322,
+        "wall_sha256": "4478d67df4fd50b627739c7aa1b680183db80fdf383e2c779ce6ae03010d7c5c",
+        "mesh_path": "transient_data/stable_100/shape_remeshed.obj",
+        "mesh_bytes": 8469495,
+        "mesh_git_blob_oid": "1c1b482e4df377f32f6fc0e2e1933bef91866ebd"
+      },
+      {
+        "id": "stable_10001",
+        "wall_path": "transient_data/stable_10001/wall_data.pt",
+        "wall_bytes": 78676122,
+        "wall_sha256": "8138124a8b37907df6efc226339431764d45ef9df2fbc773c336ad13c3bee77e",
+        "mesh_path": "transient_data/stable_10001/shape_remeshed.obj",
+        "mesh_bytes": 6148786,
+        "mesh_git_blob_oid": "4f4a3092f4eabf0db4cb1e954446b43408622cf3"
+      }
+    ]
+  },
+  "discovery_boundary": {
+    "observed_before_registration": [
+      "official_paper_code_dataset_card_license_case_count",
+      "repository_tree_file_names_sizes_lfs_sha256_git_blob_oid_and_safe_pickle_imports",
+      "official_raw_loader_key_names_and_final_80_phase_policy",
+      "direct_prior_titles_abstracts_methods_and_public_code"
+    ],
+    "not_read_before_registration": [
+      "wall_tensor_payload_body",
+      "remeshed_obj_body",
+      "per_case_tangency_or_critical_point_metrics",
+      "blood_volume_fields",
+      "processed_archives",
+      "model_or_checkpoint_payload"
+    ]
+  },
+  "access": {
+    "required_tensor_keys": [
+      "x_coordinate",
+      "y_coordinate",
+      "z_coordinate",
+      "x_wall_shear",
+      "y_wall_shear",
+      "z_wall_shear"
+    ],
+    "minimum_phases": 80,
+    "phases_used": 80,
+    "maximum_total_download_bytes": 276642685,
+    "blood_data_access": false,
+    "checkpoint_access": false,
+    "processed_archive_access": false,
+    "model_weight_access": false,
+    "patient_data_access": false,
+    "outer_test_access": false
+  },
+  "transport": {
+    "base_resolve_url": "https://huggingface.co/datasets/whding123/AneuG-Flow/resolve/9dd418083899deddd93a67f9a6fca7a14304fa36/",
+    "attempt_delays_seconds": [0, 10, 30],
+    "timeout_seconds_per_attempt": 900,
+    "chunk_bytes": 1048576,
+    "user_agent": "AURORA-ISBI2027-method-free-asset-audit/1.0"
+  },
+  "gate": {
+    "all_checks_required": true,
+    "coordinate_static_max_abs_tolerance": 1e-6,
+    "mesh_coordinate_match_fraction_minimum": 0.999,
+    "mesh_coordinate_tolerance_fraction_of_bbox_diagonal": 1e-6,
+    "median_normal_component_ratio_maximum": 0.05,
+    "p95_normal_component_ratio_maximum": 0.25,
+    "minimum_nonempty_critical_frame_fraction_per_case": 0.05,
+    "critical_barycentric_interior_margin": 0.0001,
+    "critical_determinant_relative_floor": 1e-8,
+    "checks": [
+      "all_exact_bytes_hashes_and_blob_oids_match",
+      "weights_only_tensor_dictionary_loads",
+      "all_required_coordinate_and_wss_keys_exist",
+      "at_least_80_finite_phases_and_static_coordinates",
+      "triangular_mesh_indices_and_nonzero_normals_are_valid",
+      "coordinate_to_mesh_vertex_match_fraction_at_least_0_999",
+      "median_and_p95_normal_component_ratios_within_bounds",
+      "wss_is_nonzero_and_varies_over_time",
+      "every_probe_has_nonempty_indexed_critical_points_in_at_least_5_percent_of_frames",
+      "no_model_gpu_outer_test_or_patient_interpretation"
+    ],
+    "pass_authorizes": "register_separate_method_free_32_case_p1_structure_stability_audit_only",
+    "failure_action": "close_exact_candidate_version_without_same_contract_repair_or_rerun",
+    "execution_incomplete_action": "close_exact_candidate_version_without_transport_reader_dependency_repair_or_rerun",
+    "does_not_authorize": [
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution",
+      "submission_identity"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 16,
+    "ngpus": 0,
+    "walltime": "01:00:00",
+    "container": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+    "maximum_submissions_for_exact_public_source": 1,
+    "download_location": "pbs_job_local_temporary_storage_only",
+    "published_output": "deidentified_aggregate_only",
+    "same_contract_repair_or_rerun_allowed": false,
+    "login_node_gpu_command_allowed": false
+  }
+}

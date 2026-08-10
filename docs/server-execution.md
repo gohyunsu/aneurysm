@@ -1,5 +1,15 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.1 registered boundary · 2026-08-10:** Credential-managed SSH to
+> `introai9` was verified and `qstat -u introai9` returned an empty queue after
+> the site profile was loaded. No login-node GPU command ran. One exact
+> AneuG-Flow surface-vector P0 is preregistered but not submitted: PBS queue
+> `coss_agpu`, CPU 4, memory 16 GB, GPU 0, walltime one hour, pinned CPU
+> container, three raw wall/OBJ probe pairs and a one-submission guard. Submit
+> only an exact clean public commit. Failure or incomplete execution closes the
+> candidate without repair/rerun. `junjinyong` belongs to another project and is
+> forbidden for connection, query, transfer, submission and monitoring.
+
 > **Schema 7.0 current boundary · 2026-08-10:** A credential-managed,
 > read-only `qstat -u introai9` observation returned an empty queue for AURORA.
 > No GPU command was executed on the login node. The new AneuG target-

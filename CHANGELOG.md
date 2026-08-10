@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-10 · Schema 7.1 registers a surface-vector structure P0
+
+- Froze `time_varying_surface_wss_index_structure_prediction` at exactly
+  32.0/40 as one conditional source lead, with no selected primary, method,
+  architecture, contribution, outer test or GPU job.
+- Pinned AneuG-Flow dataset/code commits and six exact raw files for three
+  lexicographic probes (`stable_0`, `stable_100`, `stable_10001`), totaling
+  276,642,685 bytes; no payload body has yet been accessed.
+- Added a one-shot `introai9` CPU/PBS P0 that verifies safe tensor schema,
+  mesh/coordinate alignment, tangency, temporal variation and signed-index
+  critical-point extractability. It reads no blood field, processed archive,
+  checkpoint, model, clinical data or outer test.
+- Made Hodge/DEC, equivariance, tangent projection, generic critical-point loss
+  and clean evaluation explicit direct priors/controls. Independent novelty
+  requires an operator-specific representation or guarantee plus prospective
+  index/worldline superiority; a P0 pass opens only method-free P1.
+- Added the executable config, PBS wrapper, bounded reader, synthetic tests,
+  protocol guards and beginner-readable source audit. `junjinyong` remains
+  prohibited; all execution is `introai9` PBS only.
+
 ## 2026-08-10 · Schema 7.0 rejects the AneuG target-construction batch
 
 - Pinned official AneuG-Flow paper, code commit `4a090a0…` and dataset commit

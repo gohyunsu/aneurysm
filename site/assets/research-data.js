@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · AneuG target-construction batch best 31.5/40 and all rejected · active source lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "a different problem must prospectively pass source and method-free task-adequacy gates before any architecture or GPU work",
+    status: "Target locked · surface-vector structure is one 32.0/40 conditional source lead · 3-probe CPU P0 registered, not submitted · primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "the exact raw-asset P0 and a separately registered method-free 32-case P1 must pass before any architecture or GPU work",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A time-varying tangent field has index structure that channel MSE does not describe",
+      copy: "Transient WSS lives in the tangent plane of an oriented vessel surface. Its zeros carry signed local indices and form trajectories with birth/death events over the cardiac cycle. A fresh problem screen scores prediction of this structure at exactly 32.0/40. Surface Hodge/DEC, SE(3)-equivariant transient WSS prediction, vector-field critical-point analysis and generic topology losses are direct priors, so none is claimed as novelty. The residual gap requires an operator-specific representation or guarantee connecting 1-form error to index/worldline preservation plus prospective strong-baseline gains. Only a three-probe raw-asset CPU P0 is registered.",
+      status: "Conditional source lead 32.0/40 · P0 registered/not submitted · primary/method/model/GPU 0",
+      url: "../docs/aneug-surface-vector-structure-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "A target-construction flaw is not automatically a novel learning problem",
@@ -761,6 +768,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Schema 7.1 registers a three-probe surface-vector structure P0",
+      copy: "A fresh source/direct-prior audit freezes time-varying surface WSS index-structure prediction at exactly 32.0/40 as one conditional lead. Three lexicographically fixed raw wall/OBJ pairs total 276,642,685 bytes. One introai9 CPU/PBS P0 checks exact hashes, safe schema, mesh-coordinate alignment, tangency, temporal variation and signed-index critical-point extractability; it is registered but not submitted. Hodge/DEC, equivariance, tangent projection and generic topology loss remain direct controls. Primary, method, architecture, contribution, outer test and GPU are zero; junjinyong remains prohibited.",
+      files: ["docs/aneug-surface-vector-structure-source-audit-2026-08-10.md", "configs/aneug_surface_vector_structure_p0.json", "src/aurora/aneug_surface_vector_structure_p0.py", "cluster/pbs_aneug_surface_vector_structure_p0.pbs", "tests/test_aneug_surface_vector_structure_p0.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/server-execution.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

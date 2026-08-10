@@ -1,5 +1,16 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.1 submission boundary · 2026-08-10:** The surface-vector structure
+> problem is one 32.0/40 conditional source lead, not the paper identity. Its
+> only current artifact is a three-probe CPU P0 registered on `introai9`; no
+> result, method, architecture, GPU, contribution, headline table or figure
+> claim exists. Even a P0 pass opens only a separate method-free 32-case task-
+> adequacy P1. A four-page paper becomes plausible only if P1 establishes stable
+> indexed critical points/worldlines and a prospectively frozen method shows an
+> independent operator-specific guarantee plus strong-baseline gains. Hodge,
+> equivariance, tangency and generic topology loss must not be numbered as
+> contributions. The manuscript remains **not submission-ready**.
+
 > **Schema 7.0 submission boundary · 2026-08-10:** AneuG-Flow target transfer
 > and evaluation hygiene do not define the paper identity. The best fresh
 > candidate is 31.5/40, so title, contribution, method, architecture, result

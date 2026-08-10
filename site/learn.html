@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류, WSS surface vector, target remapping, test leakage, mesh·GNN과 AURORA의 현재 no-model·introai9-only 경계를 단계별로 설명하는 입문 가이드.">
+  <meta name="description" content="뇌동맥류, WSS 접선 벡터장, critical point의 signed index와 시간 궤적, mesh·GNN, CPU P0와 AURORA의 no-model·introai9-only 경계를 단계별로 설명하는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -42,6 +42,8 @@
         <p>
           이 가이드는 의학·유체역학·그래프 신경망을 미리 안다고 가정하지
           않습니다. 뇌동맥류의 모양이 어떻게 데이터가 되고, 왜 CFD가 필요하며,
+          WSS가 왜 단순한 세 숫자가 아니라 곡면 위 벡터장인지,
+          critical point·signed index·시간 궤적이 무엇인지,
           weak sphere와 precise mask가 어떻게 다른지, containment가 무엇인지,
           환자·session·lesion을 왜 다른 독립 단위로 세어야 하는지,
           TopAneu의 52개 위치 label과 silver vessel mask,
@@ -53,34 +55,34 @@
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>현재 active source 후보도, 모델도 없습니다.</strong>
+          <strong>32.0/40 조건부 source lead 하나, 모델은 0개입니다.</strong>
           <p>
-            최신 AneuG-Flow target-construction batch의 최고점은 31.5/40으로
-            frozen 32점선 아래입니다. 그래서 field payload, P0, GNN, Transformer,
-            neural operator와 GPU를 열지 않았습니다. 과거 OpenNeuro P0의 no-verdict
-            상태도 별도 history로 그대로 보존합니다.
+            시간에 따라 변하는 WSS 접선 벡터장의 critical-point index와 trajectory를
+            예측하는 문제가 frozen 32점선을 정확히 넘었습니다. 그래서 세 raw
+            wall/OBJ pair의 구조를 확인하는 CPU P0만 등록했습니다. Primary, GNN,
+            Transformer, neural operator, contribution, GPU와 outer test는 여전히
+            선택되지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>target risk와 algorithmic novelty를 먼저 분리합니다.</strong>
+          <strong>먼저 ‘구조가 실제 데이터에 존재하는가’를 확인합니다.</strong>
           <p>
-            WSS tangency, 면적·hotspot 보존, train-only normalization과 test-blind
-            checkpoint selection은 중요합니다. 하지만 established control만으로
-            새 contribution을 주장할 수 없습니다. 독립적인 estimand와 residual
-            method gap을 가진 다른 문제만 다시 source gate에 올립니다.
+            P0는 정확한 hash, tensor key, 80개 phase, mesh 정렬, tangency,
+            시간 변화와 signed-index critical point를 측정합니다. 모델을 학습하지
+            않고 GPU도 쓰지 않습니다. 세 probe 모두 조건을 만족해야만 별도의
+            32-case method-free P1을 설계할 수 있습니다.
           </p>
-          <a href="../docs/aneug-target-construction-source-audit-2026-08-10.md">현재 target audit 읽기 ↗</a>
+          <a href="../docs/aneug-surface-vector-structure-source-audit-2026-08-10.md">현재 source audit 읽기 ↗</a>
         </div>
         <div class="answer-card">
-          <span>containment란?</span>
-          <strong>정답을 추측하지 않고 가능한 범위를 남기는 것입니다.</strong>
+          <span>WSS 접선 벡터장이란?</span>
+          <strong>혈관 벽을 뚫는 힘이 아니라, 벽을 따라 미는 힘의 지도입니다.</strong>
           <p>
-            실제 병변 마스크를 Y, 전문가가 빠르게 그린 바깥 구를 W라고 두면
-            관측 가능한 약속은 Y가 W 안에 있다는 Y ⊆ W입니다. W 전체를 병변으로
-            간주하면 부피를 과대평가하고, 임의로 작은 pseudo-mask를 만들면 근거 없는
-            정밀도를 발명합니다. 대신 가능한 Y들의 집합과 각 Y에서 나오는 부피·
-            최대 직경 같은 지표 범위를 유지하는 것이 현재 estimand입니다.
+            표면의 각 점에는 바깥쪽 normal 방향이 있습니다. 이상적인 WSS는 그
+            normal과 수직이어서 국소 tangent plane 안에 놓입니다. 세 Cartesian
+            성분의 MSE만 작아도 normal 방향 누출이나 방향 구조를 틀릴 수 있으므로,
+            P0는 먼저 <code>|w·n|/||w||</code>을 직접 확인합니다.
           </p>
         </div>
         <div class="answer-card">
@@ -88,11 +90,44 @@
           <strong>GNN 기반으로 확정되지 않았습니다.</strong>
           <p>
             GNN, Graph Transformer, E(3) network, neural operator는 모두 가능한
-            구현 계열이지 novelty가 아닙니다. 현재 source gate가 닫혔기 때문에
-            어느 계열도 선택하지 않습니다. 미래 후보가 32점을 넘고 method-free
-            P0를 통과한 뒤에만 strong baseline과 compute-matched architecture를
-            정합니다.
+            구현 계열이지 novelty가 아닙니다. 현재 model gate가 닫혀 있으므로
+            어느 계열도 선택하지 않습니다. 현재 32.0점은 raw P0만 열었습니다.
+            P0와 별도 P1이 모두 통과한 뒤에만 Cartesian regression, tangent-frame,
+            mesh GNN과 Hodge-spectral operator를 같은 compute에서 비교합니다.
           </p>
+        </div>
+        <div class="answer-card">
+          <span>critical point와 signed index</span>
+          <strong>벡터가 0인 점은 흐름 구조가 바뀌는 표지입니다.</strong>
+          <p>
+            삼각형 안에서 꼭짓점 벡터를 선형 보간했을 때 0이 되는 위치를 찾습니다.
+            그 주변 벡터 방향이 한 바퀴 도는 방식에 따라 부호 있는 index가 생깁니다.
+            개별 픽셀 오차보다 분리·부착·회전 구조를 직접 요약하지만, 검출 자체와
+            generic topology loss는 이미 선행이므로 AURORA novelty가 아닙니다.
+          </p>
+        </div>
+        <div class="answer-card">
+          <span>trajectory 또는 worldline</span>
+          <strong>critical point를 80개 phase에 걸쳐 연결한 시간 경로입니다.</strong>
+          <p>
+            인접 phase의 같은 부호 점을 표면 거리와 국소 구조로 연결하면 이동
+            궤적이 됩니다. 점이 쌍으로 나타나거나 사라지는 birth/death event도
+            기록할 수 있습니다. 향후 독립 contribution은 1-form 근사오차가 이런
+            index와 event를 언제 보존하는지 설명하고 strong baseline보다 잘 맞힐
+            때만 성립합니다. P0는 아직 trajectory를 학습하지 않습니다.
+          </p>
+        </div>
+        <div class="answer-card">
+          <span>실행 경계</span>
+          <strong>`introai9` PBS CPU-only, 한 번만 실행합니다.</strong>
+          <p>
+            세 probe는 합계 276,642,685 bytes입니다. Job scratch에서만 읽고 raw
+            payload는 보존하지 않습니다. 성공은 P1 등록만 허용하며, 실패나
+            incomplete는 reader·transport를 고쳐 같은 계약을 다시 돌리지 않고
+            닫습니다. Login node GPU 명령은 실행하지 않으며 `junjinyong`은 연결·
+            조회·전송·제출·모니터링 모두 금지합니다.
+          </p>
+          <a href="../configs/aneug_surface_vector_structure_p0.json">동결된 P0 계약 보기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">

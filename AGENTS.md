@@ -1,5 +1,31 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 surface-vector structure override · schema 7.1:** The only
+> conditional source lead is `time_varying_surface_wss_index_structure_prediction`
+> at the frozen score 32.0/40. It treats transient WSS as an oriented-surface
+> tangent 1-form and asks whether signed critical-point indices and temporal
+> trajectories are measurable and later predictable; it is not a generic
+> three-channel regression task. Exact source pins are AneuG-Flow dataset
+> `9dd418083899deddd93a67f9a6fca7a14304fa36` and code
+> `4a090a0f12538deef6fcea88b81afe78ce38152e`. The only executable object is
+> `configs/aneug_surface_vector_structure_p0.json`: three lexicographically
+> fixed raw wall/OBJ pairs, 276,642,685 bytes total, one `introai9` PBS
+> submission, CPU 4, memory 16 GB, GPU 0, walltime 1 hour. P0 checks exact
+> bytes/hashes, weights-only schema, 80 finite/static phases, triangular mesh
+> validity, coordinate match >=0.999, tangency ratios, temporal variation and
+> per-frame signed-index extractability. It reads no blood field, processed
+> archive, checkpoint, model, clinical data or outer test. It has not yet been
+> submitted. Pass opens only registration of a separate method-free 32-case P1;
+> failure/incomplete closes the exact version without reader, transport or
+> same-contract repair/rerun. Hodge/DEC, E(3)/SE(3) equivariance, tangent
+> projection, generic critical-point losses and clean evaluation are direct
+> priors/controls, not contribution claims. Primary, method, architecture,
+> contribution, GPU and outer test remain 0. Execute and monitor only through
+> `introai9` PBS; never run a GPU command on its login node. Never connect,
+> query, transfer, submit to or monitor `junjinyong`. Source of truth:
+> `docs/aneug-surface-vector-structure-source-audit-2026-08-10.md`, the frozen
+> P0 config and `problem_selection.aneug_surface_vector_structure_source_audit`.
+
 > **2026-08-10 AneuG target-construction override · schema 7.0:** A fresh
 > source-only audit pins official code `4a090a0f12538deef6fcea88b81afe78ce38152e`
 > and dataset metadata `9dd418083899deddd93a67f9a6fca7a14304fa36`.
