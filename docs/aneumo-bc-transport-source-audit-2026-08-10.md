@@ -1,5 +1,17 @@
 # Aneumo anchor-conditioned boundary-transport source audit
 
+> **P0 outcome · closed without a scientific verdict:** Exact public source
+> `38e7894fc5ae56ffb3efbe469c4e1f7480f81feb` ran once on `introai9` CPU/PBS as
+> job `115518.ECE-util1`. It ended E/exit 1 after 00:08:21 with CPU time
+> 00:00:00 and 39,160 kB memory. A 275-byte private execution-incomplete status
+> materialized, but aggregate result and raw PBS output did not. Therefore member
+> completion, array parsing, coordinate identity, response energy and analytic
+> power diagnostics were not evaluated; the low-level cause is unresolved. The
+> frozen one-shot rule closes this exact P0 without repair/rerun or P1. This is
+> not a data/hypothesis failure and creates no method, architecture, GPU or paper
+> result. Public record:
+> `results/aneumo_bc_transport_p0_execution_20260810.json`.
+
 **Frozen source decision · 2026-08-10 KST:** one fresh problem scores
 **33.5/40** and may open exactly one method-free, train-family-only CPU P0 on
 `introai9`. It is not a selected method, architecture, result, contribution or

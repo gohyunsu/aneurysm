@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **Schema 6.6 outcome · 2026-08-10:** No current architecture exists. The
+> BC-transport P0 closed execution-incomplete before task adequacy was evaluated,
+> so it cannot open P1 or justify GNN/Perceiver/operator design. All architecture
+> content below is historical or a future control catalogue; selected method and
+> GPU authorization remain 0.
+
 > **Schema 6.5 architecture boundary · 2026-08-10:** There is no current GNN,
 > Perceiver, neural operator or selected architecture. The only active object is
 > a method-free Aneumo P0 asking whether one same-geometry anchor CFD field and

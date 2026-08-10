@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 BC-transport P0 outcome override · schema 6.6:** Exact clean
+> public source `38e7894fc5ae56ffb3efbe469c4e1f7480f81feb` was submitted once to
+> `introai9` CPU/PBS as job `115518.ECE-util1` (CPU 2, 8 GB, GPU 0). Final
+> scheduler evidence was E/exit 1, walltime 00:08:21, CPU time 00:00:00 and
+> memory 39,160 kB; the job later disappeared and `qstat -u introai9` was empty.
+> Only a 275-byte private status artifact materialized (SHA-256
+> `5f0c26118e86cc68ed6c494c782e301537b11589565e77996a672c442c266207`).
+> Aggregate result and raw PBS output are absent, so source-member completion,
+> array parsing, coordinate identity, response energy and analytic-control checks
+> are all unevaluated and the low-level cause is unresolved. Preserve the state
+> as `execution-incomplete/no scientific verdict`; do not call it a source,
+> hypothesis or method failure. The exact P0 is closed with no repair/rerun or
+> P1. Active source lead, primary, method, architecture, GPU, outer test,
+> submission identity and contribution are 0. Next is a fresh problem-level
+> source/direct-prior audit. AURORA remains `introai9`-only; `junjinyong` was not
+> accessed and is prohibited for connection/query/transfer/submission/monitoring.
+
 > **2026-08-10 anchor-conditioned BC-transport override · schema 6.5:** A fresh
 > source/prior red team admits
 > `similarity_quotiented_anchor_conditioned_bc_transport` at 33.5/40 as one

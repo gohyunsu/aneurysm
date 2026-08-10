@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 6.6 submission boundary · 2026-08-10:** AURORA remains **not
+> submission-ready**. The 33.5/40 BC-transport lead produced no aggregate or
+> scientific verdict and is closed without P1. It adds no paper title,
+> contribution, architecture, figure or result row. Active source lead/primary/
+> method/GPU/outer test are 0; paper work resumes only after a different fresh
+> problem passes source and method-free adequacy gates prospectively.
+
 > **Schema 6.5 submission boundary · 2026-08-10:** AURORA remains **not
 > submission-ready**. Anchor-conditioned BC transport is one 33.5/40
 > conditional source lead, not a title identity, numbered contribution or

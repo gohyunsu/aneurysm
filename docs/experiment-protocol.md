@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 6.6 outcome · 2026-08-10:** Exact Aneumo BC-transport P0 job
+> `115518.ECE-util1` ended exit 1 before an aggregate result materialized. The
+> private status marks `scientific_gate_evaluated=false`; no raw PBS output is
+> available. Consequently none of the nine source/scientific checks has a
+> verdict. The one-shot contract is exhausted: no repair, rerun, P1, model, GPU,
+> validation/test or outer test. Preserve the prospective contract below as
+> closed history only.
+
 > **Schema 6.5 P0 boundary · 2026-08-10:** Exactly one method-free CPU/PBS
 > source-semantics audit is preregistered in
 > `configs/aneumo_bc_transport_p0.json`. It reads only Aneumo historical train

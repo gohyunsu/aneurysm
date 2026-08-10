@@ -1,5 +1,12 @@
 # AURORA 연구 방향
 
+> **Schema 6.6 outcome · 2026-08-10:** The anchor-conditioned BC-transport P0
+> ended execution-incomplete with no aggregate result or scientific verdict.
+> Do not repair/rerun it or promote the 33.5/40 source idea to P1, a method or a
+> paper identity. Active lead/primary/architecture/GPU are all 0. The next
+> allowed step is a fresh problem-level source/direct-prior audit, still on the
+> `introai9`-only boundary and never through `junjinyong`.
+
 > **Schema 6.5 conditional direction · 2026-08-10:** The current question is
 > same-geometry, anchor-conditioned boundary-condition transport—not an active
 > GNN and not geometry-to-field inference. One CFD velocity solution at `q0`

@@ -53,47 +53,46 @@
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>현재는 GNN이 아니라, 방법론 없는 CPU P0 단계입니다.</strong>
+          <strong>현재 활성 후보도 GNN도 없습니다.</strong>
           <p>
             과거 mesh GNN과 boundary-aware Perceiver 계열은 geometry와 유량에서
             절대 velocity field를 바로 예측하려 했고 gate를 통과하지 못했습니다.
-            지금은 새 geometry마다 CFD 해 하나를 anchor로 제공하고 다른 관측
-            유량의 해로 이동하는 더 현실적인 문제를 검토합니다. Source score는
-            33.5/40이지만 아직 선택된 model·architecture·GPU job은 없습니다.
+            CFD anchor에서 다른 관측 유량으로 이동하는 더 현실적인 문제는
+            33.5/40이었지만, exact CPU P0가 aggregate 없이 exit 1로 끝났습니다.
+            Scientific check는 하나도 판정되지 않았고 후보는 재실행 없이 닫혔습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>한 train family의 source semantics와 task 비자명성을 먼저 봅니다.</strong>
+          <strong>다른 문제를 source와 direct prior 수준에서 다시 찾습니다.</strong>
           <p>
-            P0는 Aneumo family 1의 두 case와 여덟 유량, 총 16개 member만
-            선택적으로 읽습니다. 좌표 정렬, CRC, finite shape, response energy와
-            고정 analytic power control을 확인합니다. 학습·pressure 분석·validation/
-            test 접근·field cache·GPU는 모두 금지됩니다. 통과해도 별도 train-only
-            P1을 등록할 수 있을 뿐입니다.
+            닫힌 P0의 reader를 고치거나 같은 source를 다시 제출하지 않습니다.
+            새 후보가 실제 asset, 독립 단위, 식별 가능한 endpoint와 unoccupied
+            algorithmic gap을 함께 갖추는지 다시 감사합니다. 32/40 source gate와
+            별도 method-free adequacy gate 전에는 architecture와 GPU를 열지 않습니다.
           </p>
           <a href="../docs/aneumo-bc-transport-source-audit-2026-08-10.md">현재 source audit 읽기 ↗</a>
         </div>
         <div class="answer-card">
           <span>anchor transport란?</span>
-          <strong>아예 모르는 해를 생성하는 것과 다릅니다.</strong>
+          <strong>아이디어는 이해할 수 있지만 현재는 closed history입니다.</strong>
           <p>
             같은 혈관 geometry에서 유량 q0의 velocity field U(q0)를 이미 계산했다고
             합시다. 목표는 관측된 비율 r=q/q0를 받아 U(q)를 추정하는 것입니다.
             r=1이면 출력은 anchor와 정확히 같아야 하고, q0→q1→q2로 이동한 결과와
             q0→q2로 직접 이동한 결과도 가까워야 합니다. 새 geometry에는 여전히
-            한 번의 CFD가 필요하므로 geometry-only surrogate라는 과장은 하지 않습니다.
+            한 번의 CFD가 필요합니다. 이번 P0는 이 조건들을 평가하지 못했으므로
+            유효한 방법, 음성 결과 또는 contribution으로 부르지 않습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 architecture는?</span>
           <strong>GNN 기반으로 확정되지 않았습니다.</strong>
           <p>
-            아직 확정되지 않았습니다. 이후 P1이 task의 비자명성을 보이면 mesh
-            GNN, point operator, cross-attention transport 등을 공정하게 비교할 수
-            있습니다. 그러나 DeltaPhi residual, scale-consistent operator, learned
-            boundary extension과 analytic power law가 이미 강한 baseline이므로
-            GNN이나 cycle loss를 붙이는 것 자체는 novelty가 아닙니다.
+            확정되지 않았고 이번 후보에서는 설계하지 않습니다. DeltaPhi residual,
+            scale-consistent operator, learned boundary extension과 analytic power
+            law가 강한 baseline이므로 GNN이나 cycle loss 자체는 novelty가 아닙니다.
+            다른 fresh task가 gate를 통과한 뒤에만 그 task에 맞는 표현을 고릅니다.
           </p>
         </div>
       </div>

@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-10 · BC-transport P0 closes execution-incomplete without a verdict
+
+- Ran exact public source `38e7894fc5ae56ffb3efbe469c4e1f7480f81feb`
+  once on `introai9` as CPU/PBS job `115518.ECE-util1`; no GPU or login-node GPU
+  command was used and `junjinyong` was never accessed.
+- The job ended E/exit 1 after 00:08:21, CPU time 00:00:00 and 39,160 kB memory.
+  Only a 275-byte private status artifact was created. Aggregate result and raw
+  PBS output were absent; the low-level cause and every scientific/source check
+  remain unresolved/unevaluated.
+- Closed this exact 33.5/40 candidate version as
+  `execution-incomplete/no scientific verdict`. No repair, rerun, P1, method,
+  architecture, validation/test access, GPU, outer test or paper contribution
+  is authorized. Active conditional source lead returns to 0.
+- Added the deidentified execution record
+  `results/aneumo_bc_transport_p0_execution_20260810.json`, advanced the machine
+  contract to schema 6.6 and synchronized protocol guards, public docs, site,
+  private planning paper and shared operations boundary.
+
 ## 2026-08-10 · Anchor-conditioned BC transport opens one method-free CPU P0
 
 - Froze a new problem rather than relabelling failed geometry-to-field V1/V1e:

@@ -41,18 +41,17 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          One CFD anchor, then transport the condition.<br>
-          <em>Do not infer everything from geometry.</em>
+          One CFD anchor was plausible.<br>
+          <em>The gate produced no scientific evidence.</em>
         </h1>
         <p class="hero-lede">
-          과거 GNN/Perceiver 계열은 geometry와 유량만으로 절대 velocity field를
-          예측하려 했고 prospective gate에서 실패했습니다. 반면 같은 geometry의
-          실제 CFD 한 장을 anchor로 쓰는 단순 power control은 response error가
-          훨씬 작았습니다. 그래서 질문을 현실적으로 바꿨습니다. 한 유량
-          <i>q0</i>의 CFD 해가 있을 때 다른 관측 유량 <i>q</i>의 해로 얼마나
-          정확하고 일관되게 이동할 수 있는가? 새 후보는 33.5/40이지만 아직
-          방법론도 아키텍처도 아닙니다. 먼저 train family 하나만 읽는 CPU P0로
-          데이터 정렬·response energy·analytic control을 검증하며 GPU는 0입니다.
+          Anchor-conditioned BC transport는 33.5/40으로 source gate를 넘었지만,
+          exact `introai9` CPU P0는 8분 21초 뒤 exit 1로 끝났습니다. Private
+          execution status만 남고 aggregate result와 raw PBS output은 없었습니다.
+          따라서 어떤 source member가 완료됐는지, 좌표가 정렬됐는지, response가
+          비자명한지조차 판단할 수 없습니다. 이를 실패한 가설이나 음성 결과로
+          포장하지 않습니다. Exact 후보는 수리·재실행 없이 닫혔고, 현재 활성
+          source lead·method·architecture·GPU·paper contribution은 모두 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
@@ -60,6 +59,7 @@
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
           <a class="button ghost" href="../docs/aneumo-bc-transport-source-audit-2026-08-10.md">Current BC-transport audit ↗</a>
           <a class="button ghost" href="../configs/aneumo_bc_transport_p0.json">Frozen CPU P0 ↗</a>
+          <a class="button ghost" href="../results/aneumo_bc_transport_p0_execution_20260810.json">P0 execution record ↗</a>
           <a class="button ghost" href="../docs/topaneu-code-semantics-red-team-2026-08-10.md">Current TopAneu red team ↗</a>
           <a class="button ghost" href="../docs/topaneu-release-evaluation-audit-2026-08-10.md">Historical 33/40 audit ↗</a>
           <a class="button ghost" href="../docs/aneug-cycle-transport-reentry-2026-08-10.md">Historical P0-v2a rationale ↗</a>
@@ -97,7 +97,7 @@
       </div>
 
       <div class="hero-visual" aria-label="한 anchor CFD 해에서 다른 유량 조건으로 이동하는 현재 연구 질문">
-        <div class="visual-caption">ANEUMO · ONE ANCHOR SOLVE · P0 REGISTERED</div>
+        <div class="visual-caption">ANEUMO · P0 CLOSED · NO SCIENTIFIC VERDICT</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -120,27 +120,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>q0</b><span>one same-geometry CFD anchor</span>
+            <b>33.5</b><span>source score · historical lead</span>
           </div>
           <div class="posterior-card card-b">
-            <b>q/q0</b><span>observed target-flow ratio</span>
+            <b>8:21</b><span>walltime · exit 1</span>
           </div>
           <div class="posterior-card card-c">
-            <b>0</b><span>selected models · GPU jobs · claims</span>
+            <b>0</b><span>scientific checks · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> exact identity at q=q0 and aligned-coordinate source checks</span>
-          <span><i class="dot coral"></i> DeltaPhi and scale-consistent operators remain direct controls</span>
-          <span>source lead 33.5/40 · P0 CPU only · method/model/GPU 0</span>
+          <span><i class="dot lime"></i> one exact introai9 CPU/PBS submission is preserved</span>
+          <span><i class="dot coral"></i> aggregate/raw output absent; low-level cause unresolved</span>
+          <span>active lead/P1/method/model/GPU 0 · no repair or rerun</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Conditional source lead</span><b>1 · 33.5/40</b></div>
-        <div><span>Exact P0</span><b>1 family · 2 cases · 16 members</b></div>
+        <div><span>Conditional source lead</span><b>0 · historical score 33.5/40</b></div>
+        <div><span>Exact P0</span><b>execution-incomplete · no verdict</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>one-shot introai9 CPU/PBS P0</b></div>
+        <div><span>Next action</span><b>fresh problem-level source/prior audit</b></div>
       </div>
     </section>
 
@@ -149,10 +149,10 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          실패한 geometry-to-field 모델을 이름만 바꾸지 않았습니다. 실제 운영에서
-          가능한 “새 geometry마다 anchor CFD 한 번, 이후 유량 scenario sweep”으로
-          estimand를 좁혔고, direct prior를 반영한 source gate와 값싼 P0를 먼저
-          고정했습니다. 모델은 task가 비자명하다는 증거 뒤에만 설계합니다.
+          실패한 geometry-to-field 모델을 이름만 바꾸지 않았고, 더 현실적인
+          anchor-transport 질문도 결과 전에 P0로 고정했습니다. 그러나 실행이
+          scientific gate 전에 끝났으므로 후보를 구제하지 않습니다. “검증하지
+          못했다”와 “가설이 틀렸다”를 구분하는 것이 다음 문제 선택의 출발점입니다.
         </p>
       </div>
 
@@ -204,18 +204,17 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">CURRENT GAP STATUS</p>
-          <h3>A narrow condition-transport gap is admitted, not yet proven.</h3>
+          <h3>No active gap; condition transport is closed without a verdict.</h3>
           <p>
-            DeltaPhi는 유사 physical state 간 residual을, scale-consistent
-            operator는 유량·Reynolds scale consistency를, learned extensions는
-            변하는 boundary condition을 이미 다룹니다. 남는 질문은 irregular
-            vascular field의 condition orbit에서 anchor identity와 ratio/path
-            consistency를 함께 지키면서 analytic power control을 실제로 넘는가입니다.
+            DeltaPhi, scale-consistent operator와 learned boundary extension 뒤의
+            좁은 질문은 source gate를 넘었지만 P0 aggregate가 생성되지 않았습니다.
+            그러므로 analytic control을 넘는지, task가 비자명한지, architecture가
+            필요한지 어떤 결론도 낼 수 없습니다. 이 version은 closed history입니다.
           </p>
           <div class="gap-equation" aria-label="현재 source lead가 방법론 검증으로 이어지는 조건">
-            <span>33.5/40 source lead + CPU P0</span>
+            <span>33.5/40 historical lead + incomplete P0</span>
             <i>⇒</i>
-            <span>P1 adequacy first · no method/model/GPU yet</span>
+            <span>no P1 · no method/model/GPU · fresh problem next</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -246,10 +245,9 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 아래는 network diagram이 아니라 P0의
-          정보 흐름입니다. 실제 anchor field, target flow ratio, aligned target을
-          확인하고 analytic similarity control의 비자명성을 측정한 뒤에만 P1과
-          architecture 후보를 논의합니다.
+          현재 architecture는 없습니다. 아래는 닫힌 P0가 무엇을 확인하려 했는지
+          설명하는 historical flow입니다. Aggregate가 없어 어느 check도 판정하지
+          않았으며 P1과 architecture 설계는 열리지 않았습니다.
         </p>
       </div>
 
@@ -257,10 +255,10 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
         <p>
-          과거 구현은 mesh GNN과 boundary-aware Perceiver 계열이었지만 prospective
-          absolute-field gate를 통과하지 못했습니다. 지금의 P0는 학습을 하지
-          않습니다. 이후에도 DeltaPhi residual, analytic power scaling,
-          scale-consistent operator와 learned boundary extension이 필수 baseline입니다.
+          과거 mesh GNN과 boundary-aware Perceiver는 prospective absolute-field
+          gate를 통과하지 못했습니다. BC-transport P0도 science 이전에 종료됐습니다.
+          GNN으로 돌아가거나 P0 reader를 수리하지 않으며, 다른 fresh problem이
+          gate를 통과할 때까지 method와 GPU는 0입니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -295,9 +293,9 @@
         <div class="arch-connector accent"><span id="bc-connector-label">identity audited</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">METHOD-FREE P0</p>
-          <h3 id="bc-node-title">Exact identity at q=q0</h3>
-          <p id="bc-node-copy">Coordinates, CRC, response energy and analytic power control are checked without training</p>
+          <p class="arch-label">METHOD-FREE P0 · UNEVALUATED</p>
+          <h3 id="bc-node-title">Exact identity was not evaluated</h3>
+          <p id="bc-node-copy">No aggregate records CRC, coordinates, response energy or analytic power diagnostics</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
@@ -307,21 +305,21 @@
         <div class="arch-connector"><span>all checks</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">SOURCE ADMISSION · CONDITIONAL</p>
-          <h3>33.5 ≥ 32</h3>
+          <p class="arch-label">EXECUTION OUTCOME</p>
+          <h3>Exit 1 · no result</h3>
           <div class="dual-branch">
-            <span><b>Residual gap</b>2 / 5</span>
-            <span><b>P0 scope</b>1 family · 2 cases</span>
+            <span><b>Walltime</b>00:08:21</span>
+            <span><b>Scientific checks</b>0 evaluated</span>
           </div>
-          <p>Admission opens source semantics only; it does not select a method</p>
+          <p>The source score is preserved as history; execution did not validate it</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
-        <div class="arch-connector"><span>pass only</span></div>
+        <div class="arch-connector"><span>closed</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
-          <p class="arch-label">NEXT DECISION</p>
-          <h3>Register P1 or close</h3>
-          <p>P0 pass opens train-only task adequacy; fail/incomplete closes without repair</p>
+          <p class="arch-label">CURRENT DECISION</p>
+          <h3>Fresh problem audit</h3>
+          <p>No repair, rerun, P1, method, architecture or performance claim</p>
           <div class="output-meter"><i></i><span>method / GPU / outer test</span><b>still 0</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -330,7 +328,7 @@
       <div class="architecture-notes">
         <article>
           <span>SOURCE INTEGRITY</span>
-          <p>16개 member의 ZIP/CRC, N×7 shape와 flow 간 bit-identical coordinate를 검증합니다.</p>
+          <p>16개 member를 확인하도록 등록했지만 aggregate가 없어 완료 수를 단정하지 않습니다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
@@ -338,7 +336,7 @@
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>결과를 보기 전에 P0 범위와 kill rule을 고정했습니다. P0는 논문 성능표가 아닙니다.</p>
+          <p>결과를 보기 전에 kill rule을 고정했고, incomplete outcome에 그대로 적용했습니다.</p>
         </article>
       </div>
       <div class="architecture-links">
@@ -596,7 +594,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>One conditional source lead · one CPU P0 · no method or paper identity</p>
+        <p>No active source lead · P0 closed without verdict · no paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -604,7 +602,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>BC transport 33.5/40 · CPU P0 registered · primary/model/GPU 0</b>
+        <span>Current stage</span><b>BC transport P0 incomplete · active lead/primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

@@ -100,24 +100,24 @@
 
   const modes = {
     presence: {
-      description: "One observed CFD velocity field anchors the same aligned geometry at q0.",
-      connector: "identity audited",
-      title: "Exact anchor identity",
-      copy: "The fixed analytic control and every later model must satisfy U(q0 | U(q0)) = U(q0)",
+      description: "The frozen P0 intended to verify one observed CFD anchor at q0, but produced no aggregate.",
+      connector: "unevaluated",
+      title: "Anchor identity has no verdict",
+      copy: "No result records whether the fixed analytic control reached or verified U(q0 | U(q0)) = U(q0)",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "The observed ratio q/q0 indexes transport along the same geometry's condition orbit.",
-      connector: "response audited",
-      title: "Nonzero transport response",
-      copy: "All non-anchor targets must have positive response energy before a learned residual can be meaningful",
+      description: "The observed ratio q/q0 was intended to index a same-geometry condition orbit.",
+      connector: "not reached",
+      title: "Transport response has no verdict",
+      copy: "Member completion, aligned coordinates and non-anchor response energy are all unevaluated",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "A 33.5/40 source score authorizes one CPU P0, not a network or performance claim.",
-      connector: "P0 decision",
-      title: "P1 or exact closure",
-      copy: "All checks pass opens separate train-only adequacy; fail or incomplete closes without repair or rerun",
+      description: "The 33.5/40 historical source lead closed when its one-shot CPU P0 ended incomplete.",
+      connector: "gate closed",
+      title: "Fresh problem next",
+      copy: "No repair, rerun, P1, method, architecture, GPU, outer test or paper claim is authorized",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

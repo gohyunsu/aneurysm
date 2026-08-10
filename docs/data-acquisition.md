@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **Schema 6.6 acquisition outcome · 2026-08-10:** The one authorized Aneumo
+> selective-read P0 ended before an aggregate result. No persistent field cache,
+> completed/partial source payload or model artifact was retained. Do not repeat
+> the read, download the full archive or open P1. Fresh acquisition requires a
+> different prospectively admitted problem and remains `introai9`-only;
+> `junjinyong` is prohibited.
+
 > **Schema 6.5 acquisition override · 2026-08-10:** The only newly authorized
 > read is the one-shot Aneumo P0's selective ZIP64 range access: train family 1,
 > cases 1–2, eight flows, 16 members. Do not download a full archive, persist a

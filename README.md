@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 BC-transport P0 outcome · schema 6.6:** Exact public source
+> `38e7894fc5ae56ffb3efbe469c4e1f7480f81feb` ran once on `introai9` as CPU/PBS
+> job `115518.ECE-util1`. It ended exit 1 after 00:08:21 with CPU time 0 and
+> 39,160 kB memory. Only a 275-byte private execution-incomplete status
+> materialized; aggregate result and raw PBS output did not. Thus source members,
+> array semantics, coordinate identity, response energy and analytic control are
+> all unevaluated. This is **execution-incomplete / no scientific verdict**, not
+> a data or hypothesis failure. The exact candidate closes without repair,
+> rerun or P1; active source lead, primary, method, architecture, GPU, outer test
+> and paper contribution return to 0. `introai9` is the only execution server;
+> `junjinyong` was not accessed and remains prohibited.
+
 > **2026-08-10 anchor-conditioned BC transport · schema 6.5:** The current
 > conditional source lead is no longer a geometry-to-field model. Given one
 > CFD velocity field on a geometry at an observed anchor flow `q0`, the proposed

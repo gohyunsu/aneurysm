@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 6.6 final execution · 2026-08-10:** Exact source `38e7894…` ran once
+> on `introai9` CPU/PBS as `115518.ECE-util1`; final observed state was E/exit 1,
+> walltime 00:08:21, CPU 00:00:00, memory 39,160 kB. Only a 275-byte private
+> status artifact exists; aggregate result and raw PBS output do not. After exit
+> the job disappeared and `qstat -u introai9` was empty. Do not reconnect for
+> repair, resubmit, open P1 or use GPU. The scientific gate is unevaluated and
+> the low-level cause unresolved. `junjinyong` was not accessed and remains
+> prohibited.
+
 > **Schema 6.5 pending execution · 2026-08-10:** One exact method-free Aneumo
 > BC-transport P0 is preregistered but not yet submitted. Its allocation is
 > `introai9` PBS, queue `coss_agpu`, CPU 2, memory 8 GB, GPU 0, walltime 45 min.

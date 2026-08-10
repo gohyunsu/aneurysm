@@ -2,16 +2,16 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · anchor-conditioned BC transport 33.5/40 conditional source lead · one train-only CPU P0 · primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "the exact CPU P0 and a separately registered method-free P1 must pass before any architecture or GPU work",
+    status: "Target locked · BC-transport P0 execution-incomplete/no verdict · active source lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "a different fresh problem must pass source and method-free task-adequacy gates before any architecture or GPU work",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
       title: "One anchor CFD solve creates a realistic transport question, not yet a method",
-      copy: "Failed V1/V1e branches tried geometry-to-field inference; the boundary Perceiver still had worst validation full-field/response relative L2 of 0.878/0.949. A fixed same-case anchor power control was far stronger at validation response L2 0.228, motivating a new estimand: geometry plus one observed anchor solution U(q0) and ratio q/q0 predict U(q) on the same aligned geometry. DeltaPhi, scale-consistent operators, learned boundary extensions, analytic scaling and generic path consistency are mandatory controls. The residual gap is only 2/5.",
-      status: "33.5/40 conditional source lead · CPU P0 registered · method/architecture/GPU 0",
+      copy: "Failed V1/V1e branches tried geometry-to-field inference; a fixed same-case anchor power control motivated the narrower geometry + U(q0) + q/q0 transport estimand. It scored 33.5/40 with only a 2/5 residual gap. Exact introai9 CPU/PBS job 115518 then ended exit 1 after 8:21. Only a 275-byte private incomplete status materialized; aggregate result and raw PBS output did not. Member completion and all scientific checks are unevaluated. The idea is closed source history, neither novelty nor a negative hypothesis result.",
+      status: "P0 execution-incomplete · no scientific verdict · active lead/P1/method/architecture/GPU 0",
       url: "../docs/aneumo-bc-transport-source-audit-2026-08-10.md"
     },
     {
@@ -377,14 +377,14 @@ window.AURORA_DATA = Object.freeze({
     ["Input", "geometry + U(q0) + q/q0", "analytic power scaling", "same-geometry field transport", "P0 semantics only"],
     ["Learning", "eight observed steady flows", "DeltaPhi residual", "irregular condition orbit", "no architecture selected"],
     ["Structure", "aligned coordinates", "scale consistency + boundary extensions", "identity + ratio/path diagnostics", "must beat controls prospectively"],
-    ["Evidence", "32-family pilot; P0 reads one family", "historical V1/V1e failures", "33.5/40; residual gap 2/5", "P0 → P1 or close"]
+    ["Evidence", "32-family pilot; P0 intended one family", "historical V1/V1e failures", "33.5/40; residual gap 2/5", "incomplete → close; no P1"]
   ],
   gates: [
     {
       id: "P0-BC",
       title: "Does the Aneumo source support a nondegenerate anchor-conditioned transport task?",
-      copy: "One exact introai9 CPU/PBS audit reads only historical train family 1, cases 1–2 and all eight flows. It checks 16 ZIP/CRC members, finite N×7 arrays, bit-identical coordinates, nonzero velocity responses and exact anchor identity of the fixed power-1.075 control over 1,024 deterministic nodes. It trains no model and reads no pressure, validation or test field.",
-      state: "Registered, not yet submitted · GPU 0 · pass opens separate train-only P1 only · fail/incomplete closes",
+      copy: "One exact introai9 CPU/PBS audit was registered for train family 1, cases 1–2 and eight flows. Job 115518 ended exit 1 after 8:21 with only a private incomplete status. No aggregate or raw PBS output exists, so member completion, N×7 arrays, coordinate identity, response energy and analytic power diagnostics are all unevaluated. Frozen rules forbid repair/rerun.",
+      state: "Closed execution-incomplete · no verdict · no P1/model/GPU · queue empty after removal",
       blocking: true
     },
     {
@@ -531,8 +531,8 @@ window.AURORA_DATA = Object.freeze({
   datasets: [
     {
       name: "Aneumo · anchor-conditioned BC transport P0",
-      role: "current conditional source-audit asset; train-family-only method-free P0, not model training",
-      provenance: "CC BY-NC-ND 4.0 · HF f801ade… / upstream 701d53d… · family 1 · cases 1–2 · eight flows · 16 members · 1,024 aligned nodes · pressure/validation/test/cache/model/GPU/outer test 0"
+      role: "closed BC-transport P0 source history; not current acquisition, training or evaluation",
+      provenance: "CC BY-NC-ND 4.0 · HF f801ade… / upstream 701d53d… · exact CPU job 115518 exit 1/8:21 · status only · aggregate/raw output absent · scientific checks unevaluated · no rerun/P1/model/GPU"
     },
     {
       name: "AneuG-Flow · exact source pair",
@@ -701,6 +701,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "experiment",
+      title: "Anchor-conditioned BC-transport P0 closes execution-incomplete",
+      copy: "Exact public source 38e7894fc5ae56ffb3efbe469c4e1f7480f81feb ran once on introai9 as CPU/PBS job 115518.ECE-util1 and ended E/exit 1 after 00:08:21, CPU time 0 and 39,160 kB memory. Only a 275-byte private status materialized; aggregate result and raw PBS output are absent. All source/scientific checks and the low-level cause are unresolved. The 33.5/40 candidate closes without repair, rerun or P1. Active lead, primary, method, architecture, GPU, outer test and paper claim return to zero. junjinyong was never accessed.",
+      files: ["results/aneumo_bc_transport_p0_execution_20260810.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_aneumo_bc_transport_execution_record.py", "README.md", "docs/aneumo-bc-transport-source-audit-2026-08-10.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

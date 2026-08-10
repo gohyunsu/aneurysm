@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 6.6 Aneumo outcome · 2026-08-10:** The BC-transport P0 created only
+> an execution-incomplete status. No aggregate records which members completed,
+> which arrays parsed or whether coordinates/velocity responses were valid.
+> Thus no fresh Aneumo asset semantics are claimed and no additional acquisition,
+> P1, training, validation/test or GPU use is authorized. The historical pinned
+> release and compact pilot remain provenance, not an active dataset role.
+
 > **Schema 6.5 Aneumo role · 2026-08-10:** Aneumo is currently a conditional
 > source-audit asset for same-geometry anchor-conditioned velocity transport.
 > P0 may range-read only archive `1.zip`, historical train family 1/cases 1–2,

@@ -1,5 +1,12 @@
 # 선행연구 계보와 research gap
 
+> **Schema 6.6 outcome · 2026-08-10:** The narrow anchor-transport gap remains
+> scientifically unevaluated because its one-shot P0 produced no aggregate.
+> DeltaPhi, scale-consistent operators, learned boundary extensions and analytic
+> scaling remain direct controls, but no comparison was run. Preserve the idea
+> as closed source history—not novelty, a negative result or an active research
+> gap. The next lineage review must begin from a different fresh problem.
+
 > **Schema 6.5 residual lineage · 2026-08-10:** Generic residual learning is
 > occupied by DeltaPhi; cross-scale/Reynolds consistency by scale-consistent
 > neural operators; varying boundary-data conditioning by learned function
