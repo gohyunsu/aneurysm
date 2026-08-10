@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.9 no-model boundary · 2026-08-11:** No architecture is selected.
+> The admitted object is a model-agnostic certificate problem, not a conformal
+> GNN. The only executable is a method-free archive/semantics P0. Cartesian,
+> tangent-projected, equivariant mesh, Hodge/HSD, RHSIA and functional-surrogate
+> conformal methods are future controls only after P0 and a separate stability
+> P1. Do not add a topology loss or train on GPU at this stage.
+
 > **Schema 7.8 no-model boundary · 2026-08-11:** No architecture is selected.
 > HSD/Hodge must be an official or faithful strong baseline rather than the
 > proposal. Critical-point coordinates and worldline events begin as

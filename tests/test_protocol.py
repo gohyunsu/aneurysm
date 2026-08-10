@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "surface-vector structure"):
+        with self.assertRaisesRegex(ProtocolError, "conformal-degree candidate"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "surface-vector structure"):
+        with self.assertRaisesRegex(ProtocolError, "conformal-degree candidate"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "surface-vector structure"):
+        with self.assertRaisesRegex(ProtocolError, "conformal-degree candidate"):
             validate_protocol(candidate)
 
     def test_aneug_target_construction_audit_rejects_compute_and_score_repair(self) -> None:
@@ -132,8 +132,11 @@ class ProtocolTests(unittest.TestCase):
     def test_aneug_surface_vector_structure_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneug_surface_vector_structure_source_audit"]
-        self.assertEqual(problem["conditional_source_lead_count"], 0)
-        self.assertIsNone(problem["shortlisted_candidate"])
+        self.assertEqual(problem["conditional_source_lead_count"], 1)
+        self.assertEqual(
+            problem["shortlisted_candidate"],
+            "patient_level_conformal_degree_certificate_for_surface_wss_surrogates",
+        )
         self.assertEqual(audit["score"], 32.0)
         self.assertEqual(sum(audit["axis_scores"]), 32.0)
         self.assertEqual(audit["registered_probe_cases"], 3)
@@ -177,7 +180,7 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         assessment = problem["surface_vector_conditional_assessment"]
         task = self.protocol["task"]
-        self.assertEqual(problem["conditional_source_lead_count"], 0)
+        self.assertEqual(problem["conditional_source_lead_count"], 1)
         self.assertEqual(task["active_candidate_problem"], "none")
         self.assertIsNone(task["candidate_primary_estimand"])
         self.assertEqual(assessment["historical_source_score"], 32.0)
@@ -300,7 +303,7 @@ class ProtocolTests(unittest.TestCase):
     def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["structure_faithful_wss_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "7.8")
+        self.assertEqual(self.protocol["schema_version"], "7.9")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertTrue(
@@ -341,6 +344,50 @@ class ProtocolTests(unittest.TestCase):
             "structure_faithful_wss_source_reappraisal"
         ]["best_score"] = 32.0
         with self.assertRaisesRegex(ProtocolError, "structure-faithful WSS"):
+            validate_protocol(candidate)
+
+    def test_conformal_degree_candidate_is_only_a_fresh_cpu_p0_lead(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["conformal_degree_certificate_source_audit"]
+        self.assertEqual(self.protocol["schema_version"], "7.9")
+        self.assertEqual(audit["best_score"], 32.5)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["conditional_source_lead_count"], 1)
+        self.assertEqual(audit["active_shortlist_count"], 1)
+        self.assertFalse(audit["new_estimand_is_historical_endpoint_fidelity_score_repair"])
+        self.assertTrue(audit["historical_surface_vector_source_scores_preserved"])
+        self.assertFalse(audit["historical_surface_vector_p0_rerun_or_repair"])
+        self.assertFalse(
+            audit["certificate_guarantees_exact_critical_point_count_location_or_type"]
+        )
+        self.assertTrue(
+            audit["certificate_guarantees_nonzero_degree_implies_at_least_one_zero"]
+        )
+        self.assertEqual(audit["independent_unit"], "patient")
+        self.assertEqual(audit["reported_patient_specific_geometries"], 76)
+        self.assertFalse(audit["archive_or_vtp_payload_accessed"])
+        self.assertTrue(audit["p0_registered"])
+        self.assertFalse(audit["p0_job_submitted"])
+        self.assertEqual(audit["p0_scientific_check_count"], 10)
+        self.assertFalse(audit["p0_critical_point_or_conformal_computation"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["server_queried_for_this_audit"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["conformal_degree_certificate_source_audit"][
+            "best_score"
+        ] = 33.0
+        with self.assertRaisesRegex(ProtocolError, "conformal-degree audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["conformal_degree_certificate_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "conformal-degree audit"):
             validate_protocol(candidate)
 
         candidate = copy.deepcopy(self.protocol)
@@ -403,7 +450,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["score"], 33.5)
         self.assertAlmostEqual(sum(audit["axis_scores"]), 33.5)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
-        self.assertEqual(problem["conditional_source_lead_count"], 0)
+        self.assertEqual(problem["conditional_source_lead_count"], 1)
         self.assertTrue(audit["p0_registered"])
         self.assertEqual(audit["p0_train_base_families"], [1])
         self.assertEqual(audit["p0_cases"], [1, 2])
@@ -901,7 +948,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["outer_test_authorized"])
         self.assertEqual(audit["conditional_source_lead_count"], 1)
         self.assertEqual(
-            self.protocol["problem_selection"]["conditional_source_lead_count"], 0
+            self.protocol["problem_selection"]["conditional_source_lead_count"], 1
         )
         self.assertTrue(
             all(not item["payload_accessed"] for item in audit["candidates"])
@@ -917,8 +964,11 @@ class ProtocolTests(unittest.TestCase):
     def test_openneuro_containment_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["openneuro_containment_morphometry_source_audit"]
-        self.assertEqual(problem["conditional_source_lead_count"], 0)
-        self.assertIsNone(problem["shortlisted_candidate"])
+        self.assertEqual(problem["conditional_source_lead_count"], 1)
+        self.assertEqual(
+            problem["shortlisted_candidate"],
+            "patient_level_conformal_degree_certificate_for_surface_wss_surrogates",
+        )
         self.assertEqual(audit["score"], 32.5)
         self.assertAlmostEqual(sum(audit["axis_scores"]), 32.5)
         self.assertEqual(audit["public_weak_subjects"], 246)

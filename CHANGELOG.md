@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.9 registers a conformal-degree semantics P0
+
+- Froze a fresh six-candidate problem-level screen at
+  32.5/31.0/29.5/29.5/29.0/28.5. Only patient-level conformal signed-degree
+  certification crosses the unchanged 32/40 source line.
+- Separated the new validity/efficiency estimand from the closed surface-vector
+  endpoint-fidelity P0; historical scores, job `115645.ECE-util1`, 0/10 checks
+  and no-repair verdict remain immutable.
+- Limited the proposed guarantee to patient-marginal simultaneous tangent-field
+  coverage and signed total degree in boundary-margin-certified regions. It
+  does not guarantee exact critical-point count/location/type, conditional
+  coverage, rupture risk or clinical utility.
+- Added functional surrogate conformal prediction, whole-field downstream
+  certificates, conformal neural operators, uncertain vector-field topology
+  and multilevel robustness as direct priors.
+- Registered one method-free `introai9` CPU/PBS P0 for the checksum-pinned
+  1.43 GB Aneurisk archive. It checks safe tar inventory, 76 patient cases,
+  VTP/three-component cycle-averaged WSS, units and age/inflow input semantics;
+  it performs no critical-point extraction, conformal calibration, model or
+  GPU work.
+- Added a bounded standard-library reader, synthetic contract tests, machine
+  guards and beginner-readable site/audit material. P0 pass can open only a
+  separate CPU-only method-free stability P1; fail/incomplete closes without
+  same-contract repair or rerun. `junjinyong` remains prohibited.
+
 ## 2026-08-11 · Schema 7.8 deployment verified
 
 - Exact scientific content `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee`

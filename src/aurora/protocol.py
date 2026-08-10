@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.8":
-        raise ProtocolError("The current research-state schema must be version 7.8.")
+    if protocol["schema_version"] != "7.9":
+        raise ProtocolError("The current research-state schema must be version 7.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,7 +148,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_structure_faithful_wss_reappraisal_rejected_surface_vector_retained_inactive"
+        != "conditional_source_lead_aneurisk_conformal_degree_p0_registered_no_primary_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -226,6 +226,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "expert_virtual_removal_pair_source_delta",
             "measurement_functional_inverse_flow_source_delta",
             "structure_faithful_wss_source_reappraisal",
+            "conformal_degree_certificate_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -236,13 +237,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_structure_faithful_wss_reappraisal_rejected_surface_vector_inactive"
-        or problem_selection["shortlisted_candidate"] is not None
-        or problem_selection["conditional_source_lead_count"] != 0
-        or problem_selection["candidate_dataset"] is not None
-        or problem_selection["candidate_estimand"] is not None
+        != "one_conditional_source_lead_aneurisk_conformal_degree_p0_registered_not_executed"
+        or problem_selection["shortlisted_candidate"]
+        != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates"
+        or problem_selection["conditional_source_lead_count"] != 1
+        or problem_selection["candidate_dataset"] != "aneurisk_cfd_curvature_2026"
+        or problem_selection["candidate_estimand"]
+        != "patient_level_marginal_simultaneous_tangent_field_coverage_degree_certificate_correctness_and_certificate_efficiency"
         or problem_selection["asset_access_status"]
-        != "source_only_structure_wss_primary_sources_and_public_readme_verified_no_archive_or_vtp_payload_latest_p0_history_closed"
+        != "source_only_zenodo_api_and_readme_verified_archive_vtp_unread_new_method_free_p0_registered"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -252,19 +255,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_source_audit_or_material_phase_resolved_wss_asset_change_not_same_contract_repair_or_already_used_benchanxplore_simulation"
+        != "submit_exact_clean_public_source_once_to_introai9_cpu_pbs_for_aneurisk_conformal_degree_archive_semantics_p0_only"
         or problem_selection["audit_document"]
-        != "docs/structure-faithful-wss-source-reappraisal-2026-08-11.md"
+        != "docs/conformal-degree-certificate-source-audit-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "time_varying_surface_wss_index_structure_prediction_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "aneurisk_cycle_averaged_fixed_point_faithful_surrogation"
-        or problem_selection["most_recent_conditional_source_lead"] is not None
+        or problem_selection["most_recent_conditional_source_lead"]
+        != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates"
     ):
         raise ProtocolError(
-            "The surface-vector structure P0 must remain closed after its one "
-            "introai9 execution-incomplete run, with no active lead, method, GPU, "
-            "outer test, or claim."
+            "The conformal-degree candidate must remain one conditional source "
+            "lead with only an unexecuted introai9 CPU P0 and no primary, method, "
+            "GPU, outer test, or claim."
         )
     bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
     _require_keys(
@@ -1618,6 +1622,229 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "critical structures as a loss before stability, and open no compute."
         )
     checks.append("structure-faithful WSS source rejection and no-compute boundary")
+    degree_audit = problem_selection["conformal_degree_certificate_source_audit"]
+    _require_keys(
+        degree_audit,
+        [
+            "status",
+            "audit_document",
+            "config",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "conditional_source_lead_count",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "new_estimand_is_historical_endpoint_fidelity_score_repair",
+            "historical_surface_vector_source_scores_preserved",
+            "historical_surface_vector_p0_job_id",
+            "historical_surface_vector_p0_rerun_or_repair",
+            "certificate_target",
+            "certificate_guarantees_exact_critical_point_count_location_or_type",
+            "certificate_guarantees_nonzero_degree_implies_at_least_one_zero",
+            "coverage_scope",
+            "independent_unit",
+            "zenodo_record",
+            "zenodo_record_revision",
+            "zenodo_created",
+            "zenodo_modified",
+            "zenodo_status",
+            "zenodo_access_right",
+            "zenodo_license",
+            "reported_patient_specific_geometries",
+            "archive_bytes",
+            "archive_md5",
+            "readme_bytes",
+            "readme_md5",
+            "public_readme_accessed",
+            "archive_or_vtp_payload_accessed",
+            "companion_cycle_averaged_wss_fixed_points",
+            "companion_phase_resolved_worldlines",
+            "companion_inflow_uses_inlet_diameter_and_patient_age",
+            "manifest_enumerates_vtp_arrays_units_or_case_mapping",
+            "candidates",
+            "direct_prior_threats",
+            "p0_registered",
+            "p0_protocol_id",
+            "p0_archive_download_bytes",
+            "p0_archive_job_local_only",
+            "p0_scientific_check_count",
+            "p0_critical_point_or_conformal_computation",
+            "p0_submission_limit",
+            "p0_job_submitted",
+            "p0_job_id",
+            "p0_scientific_gate_evaluated",
+            "p1_registration_authorized",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "result_row_created",
+            "paper_contribution_created",
+            "submission_identity_active",
+            "execution_server",
+            "server_queried_for_this_audit",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "p0_pass_authorizes",
+            "p0_failure_or_incomplete_action",
+            "decision",
+            "next_allowed_action",
+        ],
+        "conformal degree certificate source audit",
+    )
+    expected_degree_candidates = [
+        (
+            "patient_level_conformal_degree_certificate_for_surface_wss_surrogates",
+            32.5,
+            [4.5, 4.0, 3.0, 4.0, 3.5, 5.0, 5.0, 3.5],
+            "conditional_source_lead_p0_only",
+        ),
+        (
+            "conformal_critical_region_localization",
+            31.0,
+            [4.5, 3.5, 2.0, 4.0, 3.5, 5.0, 5.0, 3.5],
+            "reject",
+        ),
+        (
+            "conformal_separatrix_network_certificate",
+            29.5,
+            [4.5, 2.5, 2.0, 4.0, 3.5, 5.0, 5.0, 3.0],
+            "reject",
+        ),
+        (
+            "margin_trained_topology_preserving_surrogate",
+            29.5,
+            [4.5, 3.0, 1.0, 4.0, 3.5, 5.0, 5.0, 3.5],
+            "reject",
+        ),
+        (
+            "generic_structure_selective_abstention",
+            29.0,
+            [4.5, 3.0, 1.0, 4.0, 3.5, 5.0, 4.5, 3.5],
+            "reject",
+        ),
+        (
+            "phase_resolved_worldline_event_certificate",
+            28.5,
+            [4.5, 1.5, 2.5, 3.5, 3.5, 5.0, 5.0, 3.0],
+            "reject",
+        ),
+    ]
+    observed_degree_candidates = [
+        (
+            candidate.get("id"),
+            candidate.get("score"),
+            candidate.get("axis_scores"),
+            candidate.get("decision"),
+        )
+        for candidate in degree_audit["candidates"]
+    ]
+    expected_degree_priors = {
+        "uai_2025_guaranteed_prediction_sets_for_functional_surrogate_models",
+        "functional_conformalized_distance_fields_with_uniform_downstream_certificate",
+        "simultaneous_conformal_neural_operator_field_coverage",
+        "uncertain_2d_vector_field_topology",
+        "multilevel_critical_point_robustness",
+        "hodge_spectral_duality",
+        "se3_equivariant_transient_surface_wss_prediction",
+        "rhsia_transient_wss_surrogation",
+        "aneurisk_cycle_averaged_fixed_point_analysis",
+    }
+    if (
+        degree_audit["status"] != "conditional_source_lead_p0_registered_not_executed"
+        or degree_audit["audit_document"]
+        != "docs/conformal-degree-certificate-source-audit-2026-08-11.md"
+        or degree_audit["config"] != "configs/aneurisk_conformal_degree_p0.json"
+        or degree_audit["automatic_selection_threshold"] != 32.0
+        or degree_audit["best_candidate_id"]
+        != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates"
+        or degree_audit["best_score"] != 32.5
+        or degree_audit["conditional_source_lead_count"] != 1
+        or degree_audit["active_shortlist_count"] != 1
+        or degree_audit["primary_problem_selected"] is not False
+        or degree_audit["new_estimand_is_historical_endpoint_fidelity_score_repair"]
+        is not False
+        or degree_audit["historical_surface_vector_source_scores_preserved"] is not True
+        or degree_audit["historical_surface_vector_p0_job_id"] != "115645.ECE-util1"
+        or degree_audit["historical_surface_vector_p0_rerun_or_repair"] is not False
+        or degree_audit["certificate_guarantees_exact_critical_point_count_location_or_type"]
+        is not False
+        or degree_audit["certificate_guarantees_nonzero_degree_implies_at_least_one_zero"]
+        is not True
+        or degree_audit["coverage_scope"]
+        != "marginal_over_exchangeable_patient_units_not_conditional_or_per_critical_point"
+        or degree_audit["independent_unit"] != "patient"
+        or degree_audit["zenodo_record"] != 19455127
+        or degree_audit["zenodo_record_revision"] != 4
+        or degree_audit["zenodo_modified"] != "2026-04-07T14:32:30.723519+00:00"
+        or degree_audit["zenodo_status"] != "published"
+        or degree_audit["zenodo_access_right"] != "open"
+        or degree_audit["zenodo_license"] != "CC_BY_4_0"
+        or degree_audit["reported_patient_specific_geometries"] != 76
+        or degree_audit["archive_bytes"] != 1430889142
+        or degree_audit["archive_md5"] != "8c66e7bb359d04bd1a5d6db6da3f3926"
+        or degree_audit["readme_bytes"] != 1436
+        or degree_audit["readme_md5"] != "f552f4d1440848f0cdb8700371579115"
+        or degree_audit["public_readme_accessed"] is not True
+        or degree_audit["archive_or_vtp_payload_accessed"] is not False
+        or degree_audit["companion_cycle_averaged_wss_fixed_points"] is not True
+        or degree_audit["companion_phase_resolved_worldlines"] is not False
+        or degree_audit["companion_inflow_uses_inlet_diameter_and_patient_age"]
+        is not True
+        or degree_audit["manifest_enumerates_vtp_arrays_units_or_case_mapping"]
+        is not False
+        or observed_degree_candidates != expected_degree_candidates
+        or any(
+            sum(candidate["axis_scores"]) != candidate["score"]
+            for candidate in degree_audit["candidates"]
+        )
+        or set(degree_audit["direct_prior_threats"]) != expected_degree_priors
+        or degree_audit["p0_registered"] is not True
+        or degree_audit["p0_protocol_id"]
+        != "aneurisk_conformal_degree_archive_semantics_p0_v1"
+        or degree_audit["p0_archive_download_bytes"] != 1430889142
+        or degree_audit["p0_archive_job_local_only"] is not True
+        or degree_audit["p0_scientific_check_count"] != 10
+        or degree_audit["p0_critical_point_or_conformal_computation"] is not False
+        or degree_audit["p0_submission_limit"] != 1
+        or degree_audit["p0_job_submitted"] is not False
+        or degree_audit["p0_job_id"] is not None
+        or degree_audit["p0_scientific_gate_evaluated"] is not False
+        or degree_audit["p1_registration_authorized"] is not False
+        or any(
+            degree_audit[key] is not False
+            for key in (
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "result_row_created",
+                "paper_contribution_created",
+                "submission_identity_active",
+                "server_queried_for_this_audit",
+                "pbs_job_created",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or degree_audit["execution_server"] != "introai9"
+        or degree_audit["p0_pass_authorizes"]
+        != "register_separate_method_free_cpu_only_p1_intrinsic_field_boundary_and_degree_stability_audit_only"
+        or degree_audit["p0_failure_or_incomplete_action"]
+        != "close_exact_candidate_version_without_same_contract_repair_or_rerun"
+        or degree_audit["decision"]
+        != "admit_one_conditional_source_lead_and_register_method_free_cpu_p0_without_primary_method_architecture_gpu_outer_test_or_claim"
+        or degree_audit["next_allowed_action"]
+        != "one_exact_clean_public_source_introai9_cpu_pbs_p0_submission_only"
+    ):
+        raise ProtocolError(
+            "The conformal-degree audit must preserve the fresh 32.5/40 "
+            "certificate estimand, patient-level marginal guarantee limits, "
+            "one unexecuted CPU P0, and zero method/GPU/claim boundary."
+        )
+    checks.append("conformal degree conditional source/P0 boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",

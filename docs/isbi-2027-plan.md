@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.9 submission boundary · 2026-08-11:** A 32.5/40 conditional source
+> lead exists, but the paper is still not submission-ready. The candidate could
+> become an ISBI application paper only if asset semantics, method-free degree
+> stability, non-vacuous patient-level conformal validity/efficiency, bounded
+> development and a fresh outer test all pass against functional-conformal,
+> equivariant and Hodge controls. It is not yet the title, contribution list,
+> method, result table or figure.
+
 > **Schema 7.8 submission boundary · 2026-08-11:** The proposed structure-
 > faithful WSS identity is not assigned a title, contribution, architecture,
 > figure or result row. The fresh source screen peaks at 31.0/40. A viable

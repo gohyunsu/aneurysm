@@ -1,5 +1,31 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 patient-level conformal-degree source lead · schema 7.9:** Fresh
+> problem-level red team은
+> `patient_level_conformal_degree_certificate_for_surface_wss_surrogates`를
+> **32.5/40**으로 조건부 입장시켰다. 이는 historical surface-vector
+> 31.0/40 또는 `115645.ECE-util1`의 32.0/40·0/10·no-verdict를 사후 수리한
+> 것이 아니다. 새 estimand는 exchangeable patient 단위의 simultaneous tangent-
+> field residual coverage, signed **total degree** certificate correctness와
+> certificate efficiency/abstention이다. Whole-field conformal event에서
+> predicted boundary margin이 calibrated radius보다 큰 region만 true/predicted
+> degree equality를 인증한다. Nonzero degree는 최소 한 zero의 존재만 뜻하며
+> exact critical-point 수·좌표·type, conditional/per-point coverage, 임상 위험을
+> 보장하지 않는다. UAI-2025 functional surrogate prediction sets, functional
+> conformal distance fields, conformal neural operators, uncertain vector-field
+> topology와 multilevel robustness는 direct prior다. Exactly one method-free
+> `introai9` CPU/PBS P0만 등록한다: Zenodo 19455127 revision 4의
+> 1,430,889,142-byte/MD5 `8c66e7bb…` tar.gz를 job-local scratch에 받아 safe
+> inventory, 76 case, VTP PolyData/3-component cycle-averaged WSS, units와
+> age/inflow input semantics만 검사한다. Critical-point extraction, conformal
+> calibration, model, architecture, GPU, outer test, result row, C21과 submission
+> identity는 0이다. Pass도 별도 CPU-only method-free P1 stability 등록만
+> 허용하며 fail/incomplete는 같은 contract의 repair/rerun 없이 닫는다. Source
+> of truth는 `docs/conformal-degree-certificate-source-audit-2026-08-11.md`,
+> `configs/aneurisk_conformal_degree_p0.json`과 schema 7.9다. AURORA는
+> `introai9` PBS만 사용하며 `junjinyong`에는 절대 접속·조회·전송·제출·
+> 모니터링하지 않는다. Login node GPU 명령도 금지한다.
+
 > **2026-08-11 schema 7.8 deployment verification overlay:** Exact scientific
 > content `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee` passed Quality
 > `31416106615` and Pages `31416105439`. Live Overview, Learn, detailed audit

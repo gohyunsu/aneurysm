@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.9 calibrated gap · 2026-08-11:** Functional surrogate conformal
+> prediction already supplies whole-field coverage; conformalized distance
+> fields already turn such coverage into downstream safety; uncertain-vector-
+> field topology and multilevel robustness already study uncertain critical
+> structures. The narrow residual question is whether an intrinsic tangent-field
+> residual envelope can be converted into a patient-level, boundary-margin
+> signed-degree certificate with useful non-vacuous efficiency on aneurysm WSS.
+> Hodge, equivariance, critical-point extraction and conformal calibration are
+> direct priors/components, not standalone novelty.
+
 > **Schema 7.8 calibrated gap · 2026-08-11:** The gap is not edge 1-forms,
 > Hodge/DEC, equivariance, periodic prediction, critical-point extraction,
 > tracking or topology loss. HSD, SE(3) transient WSS, RHSIA, robust tracking,

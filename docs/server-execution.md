@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.9 prospective execution boundary · 2026-08-11:** Exactly one new
+> CPU-only P0 may be submitted from an exact clean public commit to `introai9`
+> PBS (`coss_agpu`, CPU 4, 16 GB, GPU 0, two hours). It reads the registered
+> Aneurisk archive only in job-local scratch. No server query or job has yet
+> occurred for this version. Never run a login-node GPU command and never
+> connect to, query, transfer to, submit to or monitor `junjinyong`.
+
 > **Schema 7.8 deployment verification · 2026-08-11:** Exact scientific
 > content `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee` passed Quality
 > `31416106615` and Pages `31416105439`. Live pages expose the same 31.0/40

@@ -116,24 +116,24 @@
 
   const modes = {
     presence: {
-      description: "A WSS vector belongs to the local tangent plane of an oriented vessel surface.",
-      connector: "tangent plane?",
-      title: "Tangency is unverified",
-      copy: "Normals are recomputed, but the inspected path has no explicit post-transfer WSS tangent projection",
+      description: "One exchangeable patient contributes one score for the maximum intrinsic tangent-field residual.",
+      connector: "whole field?",
+      title: "Coverage must be simultaneous",
+      copy: "Vertexwise intervals do not support an adaptive region certificate; the registered event must cover the complete field",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "Pointwise interpolation need not conserve area-weighted WSS, extrema, hotspots or derived functionals.",
-      connector: "commute?",
-      title: "Functionals need a transfer contract",
-      copy: "Remap-then-integrate and integrate-then-remap must be compared under conservative and tangent-aware controls",
+      description: "A region is eligible only when the minimum predicted boundary-vector norm exceeds the calibrated radius.",
+      connector: "margin > q?",
+      title: "Boundary zeros must be excluded",
+      copy: "On the whole-field coverage event, the straight-line homotopy then remains nonzero along the complete region boundary",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Normalization and checkpoint selection must not read the held-out test distribution.",
-      connector: "31.5 < 32",
-      title: "Important control, insufficient novelty",
-      copy: "Train-only statistics and validation-only selection are mandatory, but they do not create an independent algorithm",
+      description: "Degree equality certifies signed total index, not an exact critical-point count, coordinate or type.",
+      connector: "degree only",
+      title: "The guarantee is deliberately narrow",
+      copy: "Nonzero certified degree implies at least one true zero; uncaptured ± pairs and subtype-conditional coverage remain outside the claim",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

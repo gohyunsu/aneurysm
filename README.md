@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 conformal degree certificate lead · schema 7.9:** A new
+> problem-level screen admits one conditional source lead at **32.5/40**:
+> patient-level conformal certificates for the signed total degree of a
+> predicted surface-WSS field. This is not another Hodge/GNN/topology-loss
+> proposal and does not repair the closed surface-vector P0. A whole-field
+> split-conformal residual radius can certify degree equality only where the
+> predicted boundary-vector margin exceeds that radius; it does not certify an
+> exact critical-point count, location or type, conditional coverage, rupture
+> risk or clinical utility. One new method-free, CPU-only `introai9` P0 is
+> registered to inspect the exact 1.43 GB Aneurisk archive for 76 recoverable
+> cases, VTP/three-component cycle-averaged WSS, units and age/inflow input
+> semantics. Archive/VTP access has not yet occurred. Primary problem, method,
+> architecture, GPU, outer test, result row, paper contribution and submission
+> identity remain unselected. [Detailed source audit](docs/conformal-degree-certificate-source-audit-2026-08-11.md) ·
+> [Frozen P0](configs/aneurisk_conformal_degree_p0.json)
+
 > **2026-08-11 schema 7.8 deployment verification:** Exact scientific content
 > `720e4c5e441c96bd2b35e31cb2a1a19da0ff6dee` passed Quality
 > `31416106615` and Pages `31416105439`. Live Overview, Learn, detailed audit

@@ -1,0 +1,133 @@
+{
+  "schema_version": "aurora.aneurisk_conformal_degree_p0.v1",
+  "protocol_id": "aneurisk_conformal_degree_archive_semantics_p0_v1",
+  "status": "preregistered_before_first_introai9_pbs_execution",
+  "as_of": "2026-08-11",
+  "candidate": {
+    "id": "patient_level_conformal_degree_certificate_for_surface_wss_surrogates",
+    "score": 32.5,
+    "maximum_score": 40.0,
+    "admission_threshold": 32.0,
+    "axis_scores": [4.5, 4.0, 3.0, 4.0, 3.5, 5.0, 5.0, 3.5],
+    "estimand": "patient_level_marginal_simultaneous_tangent_field_coverage_degree_certificate_correctness_and_certificate_efficiency",
+    "historical_surface_vector_score_repaired": false,
+    "historical_surface_vector_p0_rerun": false,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false
+  },
+  "sources": {
+    "record_id": 19455127,
+    "record_doi": "10.5281/zenodo.19455127",
+    "record_revision": 4,
+    "record_created": "2026-04-07T14:32:30.463424+00:00",
+    "record_modified": "2026-04-07T14:32:30.723519+00:00",
+    "record_status": "published",
+    "access_right": "open",
+    "license": "CC-BY-4.0",
+    "reported_patient_specific_geometries": 76,
+    "archive": {
+      "name": "AneuriskCFDResults_Zenodo.tar.gz",
+      "bytes": 1430889142,
+      "md5": "8c66e7bb359d04bd1a5d6db6da3f3926",
+      "url": "https://zenodo.org/api/records/19455127/files/AneuriskCFDResults_Zenodo.tar.gz/content"
+    },
+    "readme": {
+      "name": "README.md",
+      "bytes": 1436,
+      "md5": "f552f4d1440848f0cdb8700371579115",
+      "payload_accessed_before_registration": true
+    },
+    "companion_preprint": "arXiv:2602.21409",
+    "companion_target": "cycle_averaged_wss_vector_field_fixed_points_and_separatrices",
+    "companion_inflow_contract": "inlet_diameter_scaled_and_patient_age_group_waveform"
+  },
+  "discovery_boundary": {
+    "observed_before_registration": [
+      "official_zenodo_record_api_metadata_file_names_sizes_checksums_license_and_revision",
+      "public_1436_byte_readme",
+      "companion_preprint_methods_and_cycle_averaged_fixed_point_definition",
+      "direct_prior_titles_abstracts_methods_and_public_code_availability"
+    ],
+    "not_read_before_registration": [
+      "archive_bytes",
+      "tar_member_names",
+      "vtp_headers_or_payload",
+      "case_level_arrays_units_or_covariates",
+      "critical_points_or_separatrices",
+      "model_checkpoint_or_outer_test"
+    ]
+  },
+  "access": {
+    "archive_download_location": "pbs_job_local_temporary_storage_only",
+    "maximum_download_bytes": 1430889142,
+    "maximum_vtp_header_bytes_per_member": 4194304,
+    "case_id_regex": "C[0-9]{4}",
+    "minimum_vtp_members": 76,
+    "exact_unique_case_ids": 76,
+    "wss_vector_name_regex": "(?i)(wss|wall[_ -]*shear|shear[_ -]*stress)",
+    "cycle_average_name_regex": "(?i)(mean|avg|average|cycle|time[_ -]*averag|tawss)",
+    "age_or_inflow_name_regex": "(?i)(age|inflow|waveform|flow[_ -]*rate|q[_ -]*in)",
+    "coordinate_semantics_regex": "(?i)(coord|point|length|spatial)",
+    "coordinate_unit_regex": "(?i)(unit|millimet(?:er|re)s?|mm|met(?:er|re)s?)",
+    "wss_unit_regex": "(?i)(unit|pascal|pascals|pa)",
+    "archive_persisted_after_job": false,
+    "vtp_member_persisted_after_job": false,
+    "critical_point_extraction": false,
+    "conformal_calibration": false,
+    "model_or_checkpoint_access": false,
+    "outer_test_access": false
+  },
+  "transport": {
+    "attempt_delays_seconds": [0, 10, 30],
+    "timeout_seconds_per_attempt": 1800,
+    "chunk_bytes": 1048576,
+    "user_agent": "AURORA-ISBI2027-method-free-Aneurisk-asset-audit/1.0"
+  },
+  "gate": {
+    "all_checks_required": true,
+    "checks": [
+      "exact_archive_bytes_and_md5_match",
+      "tar_contains_only_safe_unique_regular_members_without_links",
+      "at_least_76_vtp_members_and_exactly_76_case_ids",
+      "every_case_id_maps_to_at_least_one_vtp_member",
+      "every_vtp_header_identifies_vtk_polydata",
+      "every_case_exposes_three_component_point_coordinates",
+      "every_case_exposes_a_consistent_three_component_wss_vector_array",
+      "cycle_averaged_vector_semantics_are_explicit_for_every_case",
+      "coordinate_wss_units_and_age_or_inflow_input_contract_are_explicit",
+      "no_extraction_conformal_model_gpu_outer_test_or_persistent_payload"
+    ],
+    "pass_authorizes": "register_separate_method_free_cpu_only_p1_intrinsic_field_boundary_and_degree_stability_audit_only",
+    "failure_action": "close_exact_candidate_version_without_same_contract_repair_or_rerun",
+    "execution_incomplete_action": "close_exact_candidate_version_without_transport_reader_dependency_repair_or_rerun",
+    "does_not_authorize": [
+      "primary_problem_selection",
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "result_row",
+      "paper_contribution",
+      "submission_identity"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 16,
+    "ngpus": 0,
+    "walltime": "02:00:00",
+    "container": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+    "maximum_submissions_for_exact_public_source": 1,
+    "published_output": "deidentified_schema_aggregate_only",
+    "same_contract_repair_or_rerun_allowed": false,
+    "login_node_gpu_command_allowed": false
+  }
+}

@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 7.9 current gate · 2026-08-11:** Only one exact, method-free
+> Aneurisk archive/semantics P0 is authorized. It runs on `introai9` PBS with
+> CPU 4, memory 16 GB and GPU 0, downloads the checksum-pinned 1.43 GB archive
+> into job-local scratch, and inspects safe tar/VTP/case/vector/unit/input
+> semantics. It computes no critical point, conformal quantile or model metric.
+> Pass opens only a separately registered CPU-only P1 stability audit;
+> fail/incomplete closes the exact version without repair or rerun.
+
 > **Schema 7.8 no-experiment boundary · 2026-08-11:** A fresh six-candidate
 > structure-faithful WSS source audit peaks at 31.0/40 and opens no P0. The
 > AneuG official heads are unchanged, so historical job `115645.ECE-util1`

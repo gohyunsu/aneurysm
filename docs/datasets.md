@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.9 Aneurisk candidate role · 2026-08-11:** Zenodo 19455127 revision
+> 4 is the only candidate asset for the new conformal-degree semantics P0. The
+> official record reports 76 patient-specific geometries, an open CC BY 4.0
+> 1,430,889,142-byte tar.gz and a 1,436-byte README. Archive/VTP payload is still
+> unread. P0 must verify 76 recoverable case units, a consistent three-component
+> cycle-averaged WSS vector, units and the patient-age/inlet-flow input contract
+> before any task or split is selected.
+
 > **Schema 7.8 Aneurisk structure role · 2026-08-11:** Zenodo 19455127 v1 is
 > an open 76-geometry, CC BY 4.0 source candidate for cycle-averaged WSS
 > structure, not an admitted transient-worldline training cohort. Its public

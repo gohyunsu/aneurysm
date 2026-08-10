@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 7.9 direction · 2026-08-11:** The current conditional source lead is
+> not a GNN architecture. It asks whether a patient-level whole-field conformal
+> residual bound can selectively certify the signed total degree of a predicted
+> tangent WSS field. The guarantee is marginal over exchangeable patients and
+> certifies only total degree inside regions whose predicted boundary margin
+> clears the calibrated radius. One CPU-only Aneurisk semantics P0 is registered;
+> no primary problem, method, model, GPU, outer test or paper claim is active.
+> The closed transient surface-vector P0 remains immutable history.
+
 > **Schema 7.8 direction · 2026-08-11:** The surface-vector idea survives only
 > as an inactive, falsifiable application hypothesis. A fresh six-formulation
 > reappraisal peaks at 31.0/40 because the most identifiable open Aneurisk
