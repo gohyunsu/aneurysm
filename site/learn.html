@@ -52,24 +52,24 @@
           <span>짧은 답</span>
           <strong>Active shortlist, primary와 모델은 모두 없습니다.</strong>
           <p>
-            최신 source batch의 최고점은 cause-specific CTA false-positive
-            risk 30.5/40으로 admission line 32보다 낮습니다. Public error-cause
-            label과 paired imaging--biology endpoint가 없어 현재 GNN, neural
-            operator, U-Net, multimodal graph와 Transformer 어느 것도 선택하지
-            않았습니다.
+            최신 source batch의 최고점은 one-sided outer-annotation
+            morphometry 31.5/40으로 admission line 32보다 낮습니다. 실제 weak
+            annotation과 independent precise reference의 same-subject pairing이
+            없어 현재 GNN, neural operator, U-Net, diffusion과 Transformer 어느
+            것도 선택하지 않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
           <strong>이번 batch는 payload와 P0 전에 정상 종료됐습니다.</strong>
           <p>
-            Anatomy-based false-positive filtering과 directional topology는
-            이미 직접 선행이고, spatial wall atlas와 preclinical ingrowth에는
-            clinical image와 조직을 잇는 공개 pair가 없습니다. ICAN table은
-            simulated data입니다. 따라서 image, mask, histology, patient table,
-            P0, PBS/GPU 접근을 열지 않았습니다.
+            VP-UNet/FocalSegNet/WeakMed는 weak segmentation을, ultra-sparse DSA와
+            AutoCAR는 sparse vascular reconstruction을 직접 다룹니다. 600-model
+            variability study도 software/threshold/user effect를 이미 정량화합니다.
+            따라서 patient image/mask/mesh/projection, P0와 PBS/GPU를 열지
+            않았습니다.
           </p>
-          <a href="../docs/failure-mechanism-biology-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -441,22 +441,22 @@
             <p class="eyebrow">04 · CURRENT BOUNDARY</p>
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
-              최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              Failure-mechanism/biology batch의 최고점은 30.5/40으로 P0도 열지
-              않았습니다. 아래 Aneumo와 과거 graph/operator stack은 현재 선택된
-              architecture가 아닌 역사 기록입니다.
+              최신 판단은 network가 아니라 source/direct-prior/reference
+              audit입니다. Reconstruction/annotation batch의 최고점은 31.5/40으로
+              P0도 열지 않았습니다. 아래 Aneumo와 과거 graph/operator stack은
+              현재 선택된 architecture가 아닌 역사 기록입니다.
             </p>
           </header>
 
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 최신 batch에는 public casewise false-positive cause label, paired image--tissue coordinates와 paired angiography--histology endpoint가 없습니다. 큰 public cohort, 많은 cells나 simulated rows를 독립 patient evidence로 바꾸어 세지 않습니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 최신 batch에는 real weak annotation과 independent precise reference의 same-subject prospective manifest가 없습니다. Coarse sphere를 정밀 mask로, 반복 reconstruction을 독립 patient로 바꾸어 세지 않습니다.</p>
             </aside>
             <article>
-              <span>CURRENT · FAILURE-MECHANISM/BIOLOGY REJECTED</span>
-              <div><h3>오류 원인을 설명하면 새 모델 문제가 되는가?</h3><p>아닙니다. 원인별 label이 public casewise target으로 있어야 하고, 기존 anatomy/topology filter보다 risk와 sensitivity를 함께 개선해야 합니다. 현재 direct paper가 compartment filtering을 두 외부 cohort에서 점유하고 SECT가 bifurcation topology를 점유합니다. Biology 축도 imaging과 tissue의 같은-case 좌표가 없습니다.</p></div>
-              <b>상태</b><small>best 30.5/40 · payload/P0/PBS/model/GPU 0</small>
+              <span>CURRENT · RECONSTRUCTION/ANNOTATION REJECTED</span>
+              <div><h3>큰 sphere를 정밀 aneurysm mask로 배울 수 있는가?</h3><p>Sphere가 보장하는 것은 위치와 outer containment뿐입니다. Image evidence로 내부 shape를 추론할 수는 있지만 실제 annotator의 center/radius 선택과 independent precise mask가 same subject에서 paired되어야 calibration을 검증할 수 있습니다. VP-UNet, FocalSegNet과 WeakMed가 direct baselines입니다.</p></div>
+              <b>상태</b><small>best 31.5/40 · payload/P0/PBS/model/GPU 0</small>
             </article>
             <article>
               <span>HISTORY · ANEUMO LINEAGE P0 CLOSED</span>

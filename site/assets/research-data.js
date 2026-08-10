@@ -2,17 +2,17 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · failure-mechanism/biology best 30.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
-    requirement: "fresh genuinely revised source with public casewise endpoint ≥32 → new method-free P0; do not repair or rerun closed Aneumo lineage P0",
+    status: "Target locked · reconstruction/annotation best 31.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    requirement: "fresh same-subject annotation/reconstruction orbit with independent reference ≥32 → method-free P0; do not repair closed branches",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
     {
       year: "2026.08",
-      title: "An interpretable error taxonomy still needs public casewise targets",
-      copy: "Cause-specific CTA false-positive risk control scores 30.5/40, the best of six fresh candidates. A direct study already tests brain/artery/vein/cavernous-sinus filters using 1,186 open training CTAs and two external cohorts, while its reviewed casewise error causes are not public. Directional SECT already occupies small-lesion bifurcation filtering. TopAneu remains verified-account gated; wall biology and preclinical healing lack paired imaging targets; ICAN rows are explicitly simulated.",
-      status: "Best 30.5/40 · all rejected · payload/P0/PBS/model/GPU 0",
-      url: "../docs/failure-mechanism-biology-source-audit-2026-08-10.md"
+      title: "A coarse outer label does not identify a precise anatomy",
+      copy: "Open TOF-MRA reports 284 subjects, 198 aneurysms and weak spheres that are four times faster to draw. VP-UNet uses 246 coarse-label subjects, a 38-subject precise test and 113 ADAM subjects; FocalSegNet and CVPR 2026 WeakMed are direct priors. The public lineage does not expose a prospective same-subject manifest pairing real weak annotation choices with an independently adjudicated precise mask. Sparse reconstruction, software/threshold variability, biplane shape and phantom consistency are likewise directly occupied or target-limited.",
+      status: "Best 31.5/40 · all rejected · patient payload/P0/PBS/model/GPU 0",
+      url: "../docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md"
     },
     {
       year: "2026.08",
@@ -310,17 +310,17 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Anatomy-compartment filter", "Directional topology", "Imaging–biology bridge", "Residual research gap"],
-    ["What it tests", "Background/venous/arterial FP", "Aneurysm vs bifurcation", "Wall or healing state", "Casewise risk or paired biology"],
-    ["Required control", "Published hybrid detector", "SECT/persistence summaries", "Atlas/ingrowth direct papers", "Fresh patient-disjoint external test"],
-    ["Known boundary", "Reviewed cause labels not public", "Method identity occupied", "No paired coordinates/manifest", "No identified target"],
-    ["Current decision", "30.5/40 reject", "28.0/40 reject", "21.0–24.5/40 reject", "No P0 · no method · no GPU"]
+    ["Axis", "Weak aneurysm segmentation", "Sparse vascular reconstruction", "Reconstruction variability", "Residual research gap"],
+    ["Direct prior", "VP-UNet · FocalSegNet · WeakMed", "Ultra-sparse DSA · AutoCAR", "600-model orbit · biplane · phantom", "One-sided set-valued morphometry"],
+    ["Observable target", "Coarse sphere / refined test mask", "Dense-view reference", "Software/threshold/user differences", "Real weak choice + independent truth"],
+    ["Known boundary", "Real coarsening process not paired", "Raw cerebral patient data not public", "No absolute anatomical truth", "Same-subject manifest absent"],
+    ["Current decision", "31.5/40 reject", "29.5/40 reject", "25.5–29.0/40 reject", "No P0 · no method · no GPU"]
   ],
   gates: [
     {
-      id: "S-FB",
-      title: "Does a public source identify an error mechanism or imaging–biology endpoint?",
-      copy: "The best fresh candidate scores 30.5/40. Public casewise false-positive causes, paired preoperative imaging–tissue coordinates and paired angiography–histology endpoints are absent, while anatomy/topology/ingrowth/synthetic-data methods are direct priors.",
+      id: "S-RA",
+      title: "Does a source identify the real coarsening/reconstruction mechanism and an independent reference?",
+      copy: "The best fresh candidate scores 31.5/40. Public data support weak outer localization and refined evaluation, but not a prospective same-subject pairing of actual weak annotation choices with independent precise truth. Direct weak-segmentation and sparse-reconstruction methods are already strong.",
       state: "All six below 32 · no payload/P0/PBS/model/GPU",
       blocking: true
     },
@@ -557,6 +557,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Reconstruction and annotation reliability stops before payload and compute",
+      copy: "Six frozen scores are 31.5/29.5/29.0/26.5/25.5/25.5. VP-UNet, FocalSegNet, WeakMed, ultra-sparse DSA, AutoCAR, the 600-model variability study, biplane reconstruction and phantom consistency are direct priors. A real same-subject weak/precise annotation manifest and independent reconstruction truth are absent. Schema 5.4 creates no patient payload, P0, PBS, model or GPU. introai9 remains the only future execution target and junjinyong remains excluded.",
+      files: ["docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

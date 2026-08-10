@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **2026-08-10 current boundary:** Reconstruction/annotation reliability
+> batch의 최고점은 one-sided outer-annotation morphometry 31.5/40이며 여섯
+> 후보가 모두 32 미만이다. 공개 TOF-MRA의 weak sphere는 값싼 outer set이지만
+> same-subject real weak annotation과 independent precise reference의 prospective
+> pairing이 없다. VP-UNet/FocalSegNet/WeakMed가 직접 선행이고 sparse-view
+> DSA·software/threshold orbit·biplane·phantom도 residual endpoint가 부족하다.
+> Primary, architecture, P0와 GPU는 0이며 상세 판정은
+> [`source audit`](reconstruction-annotation-reliability-source-audit-2026-08-10.md)이다.
+
 > **2026-08-10 current boundary:** Failure-mechanism/biology batch의 최고점은
 > cause-specific CTA false-positive risk 30.5/40이며 여섯 후보가 모두 32
 > 미만이다. Public casewise FP-cause label, paired image--tissue coordinate와

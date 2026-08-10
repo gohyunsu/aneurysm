@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 reconstruction/annotation lineage:** Di Noto의 weak spheres 뒤
+> VP-UNet/FocalSegNet이 aneurysm-specific weak segmentation을 수행하고 CVPR
+> 2026 WeakMed가 Mask-to-Box와 scale consistency로 generic box bias를 직접
+> 다룬다. Sparse vascular reconstruction은 202-patient cerebral DSA와 Nature
+> Machine Intelligence 2025 AutoCAR가, reconstruction variability는 600-model
+> software/threshold/user study가, biplane reconstruction과 phantom consistency도
+> 각각 direct paper가 점유한다. 남는 gap은 same-subject real coarsening orbit,
+> independent anatomical reference와 decision-relevant uncertainty가 함께 있을
+> 때뿐이다. Frozen best는 31.5/40이며
+> [`source audit`](reconstruction-annotation-reliability-source-audit-2026-08-10.md)에
+> 계보와 단위 경계를 고정한다.
+
 > **2026-08-10 failure-mechanism/biology lineage:** Anatomy-based CTA
 > false-positive filtering은 brain/artery/vein/cavernous-sinus compartment와
 > 두 external cohort까지 직접 평가됐고, directional SECT는 small-lesion

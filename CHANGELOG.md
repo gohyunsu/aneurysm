@@ -4,6 +4,27 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Reconstruction/annotation reliability stops before payload and compute
+
+- One-sided outer-annotation morphometry, sparse-view DSA neck reconstruction,
+  software/threshold-orbit calibration, phantom consistency, biplane posterior
+  reconstruction and reconstruction-to-hemodynamic propagation score
+  **31.5/29.5/29.0/26.5/25.5/25.5**. All are below 32.
+- The open TOF-MRA lineage has 284 subjects and four-times-faster weak spheres.
+  VP-UNet uses 246 coarse-label subjects, a 38-subject precise test set and 113
+  external ADAM subjects; FocalSegNet and CVPR 2026 WeakMed are direct priors.
+  A public same-subject real-weak versus independently precise annotation
+  manifest is absent.
+- The 600-model study is author-request data without a public per-case orbit.
+  The 202-patient sparse-view DSA, 150-aneurysm biplane reconstruction and
+  one-anatomy phantom do not supply the residual independent target.
+- Schema 5.4 freezes shortlist/primary/method/architecture/P0/PBS/GPU/outer
+  test/submission identity at zero. No `introai9` job was needed;
+  `junjinyong` remains excluded. Closed branches are not repaired or rerun.
+- 영향 파일: `docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md`,
+  machine contract/validator/tests, research/data/model/experiment/ISBI/server
+  guides, public site, private manuscript history, `AGENTS.md` and this log.
+
 ## 2026-08-10 · Failure-mechanism/biology batch stops before payload and compute
 
 - Cause-specific CTA false-positive risk, post-release TopAneu attachment,

@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.3":
-        raise ProtocolError("The current research-state schema must be version 5.3.")
+    if protocol["schema_version"] != "5.4":
+        raise ProtocolError("The current research-state schema must be version 5.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -202,6 +202,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "longitudinal_mra_growth_source_audit",
             "aneumo_lineage_split_source_audit",
             "failure_mechanism_biology_source_audit",
+            "reconstruction_annotation_reliability_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -211,28 +212,28 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_failure_mechanism_biology_source_rejection_aneumo_lineage_p0_remains_closed"
+        != "no_active_shortlist_after_reconstruction_annotation_reliability_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "latest_batch_source_only_no_image_mask_histology_spatial_transcriptomic_patient_table_or_controlled_payload_aneumo_lineage_p0_history_unchanged"
+        != "latest_batch_source_only_no_patient_dicom_nifti_mask_mesh_projection_cfd_or_phantom_payload_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
-        or problem_selection["annotation_selection_mechanism_audited"] is not False
+        or problem_selection["annotation_selection_mechanism_audited"] is not True
         or problem_selection["coarsening_at_random_assumed"] is not False
         or problem_selection["method_selected"] is not False
         or problem_selection["gpu_training_authorized"] is not False
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_genuinely_new_or_revised_primary_sources_with_public_casewise_endpoint_labels_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0"
+        != "monitor_for_same_subject_paired_annotation_or_reconstruction_orbits_with_independent_reference_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0"
         or problem_selection["audit_document"]
-        != "docs/failure-mechanism-biology-source-audit-2026-08-10.md"
+        != "docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "cause_specific_false_positive_risk_control"
+        != "one_sided_outer_annotation_morphometry_sets"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -320,6 +321,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "synthetic_avatar_structural_fidelity_for_rupture_status",
         "angiography_to_preclinical_tissue_ingrowth_translation",
         "imaging_to_spatial_wall_cell_state_alignment",
+        "one_sided_outer_annotation_morphometry_sets",
+        "sparse_view_dsa_neck_risk_reconstruction",
+        "segmentation_software_threshold_orbit_calibrated_morphometry",
+        "dose_reconstruction_phantom_aneurysm_consistency",
+        "biplane_shape_posterior_for_neck_and_lobulation",
+        "reconstruction_induced_hemodynamic_risk_propagation",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -411,6 +418,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "imaging_to_spatial_transcriptomic_alignment_without_paired_coordinates",
         "preclinical_unetplusplus_tissue_ingrowth_segmentation",
         "generic_synthetic_tabular_privacy_utility_generation",
+        "mask_to_box_or_scale_consistency_weak_medical_segmentation",
+        "vesselness_prior_multitask_weak_aneurysm_segmentation",
+        "sparse_backprojection_pose_adaptation_and_vascular_graph_reconstruction",
+        "software_threshold_or_inter_user_morphometry_variability_audit",
+        "biplane_silhouette_curve_morphing_reconstruction",
+        "phantom_dose_reconstruction_ai_consistency",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -3191,6 +3204,184 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "PBS/GPU, and the introai9-only execution boundary."
         )
     checks.append("failure-mechanism/biology rejection and introai9-only boundary")
+
+    reconstruction_audit = problem_selection[
+        "reconstruction_annotation_reliability_source_audit"
+    ]
+    _require_keys(
+        reconstruction_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "any_patient_dicom_nifti_mask_mesh_projection_cfd_or_phantom_payload_accessed",
+            "article_supplementary_document_read",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "di_noto_dataset_id",
+            "di_noto_total_subjects",
+            "di_noto_patients",
+            "di_noto_controls",
+            "di_noto_aneurysms",
+            "di_noto_reported_weak_label_speedup",
+            "vp_unet_coarse_label_subjects",
+            "vp_unet_precise_label_test_subjects",
+            "vp_unet_external_adam_subjects",
+            "same_subject_prospective_real_weak_and_independent_precise_annotation_manifest_public",
+            "weakmed_tasks",
+            "weakmed_datasets",
+            "weakmed_modalities",
+            "reconstruction_variability_patient_dsas",
+            "reconstruction_variability_models",
+            "reconstruction_variability_software_platforms",
+            "reconstruction_variability_thresholds",
+            "reconstruction_variability_users",
+            "reconstruction_variability_max_user_percent_difference",
+            "reconstruction_variability_patient_mesh_table_public",
+            "ultrasparse_dsa_patients",
+            "ultrasparse_dsa_projection_counts",
+            "ultrasparse_dsa_aneurysms_identified_at_eight_views",
+            "ultrasparse_dsa_raw_patient_projection_data_public",
+            "biplane_isuia_aneurysms",
+            "biplane_unidentifiable_neck_aneurysms",
+            "biplane_volumetric_validation_models",
+            "phantomx_axial_images",
+            "phantomx_series",
+            "phantomx_dose_levels",
+            "phantomx_reconstruction_methods",
+            "phantomx_aneurysms",
+            "phantomx_effective_anatomies",
+            "autocar_clinical_imaging_parameter_cases_minimum",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.reconstruction_annotation_reliability_source_audit",
+    )
+    expected_reconstruction_scores = {
+        "one_sided_outer_annotation_morphometry_sets": 31.5,
+        "sparse_view_dsa_neck_risk_reconstruction": 29.5,
+        "segmentation_software_threshold_orbit_calibrated_morphometry": 29.0,
+        "dose_reconstruction_phantom_aneurysm_consistency": 26.5,
+        "biplane_shape_posterior_for_neck_and_lobulation": 25.5,
+        "reconstruction_induced_hemodynamic_risk_propagation": 25.5,
+    }
+    observed_reconstruction_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in reconstruction_audit["candidates"]
+    }
+    reconstruction_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in reconstruction_audit["candidates"]
+    )
+    if (
+        reconstruction_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or reconstruction_audit["audit_document"]
+        != "docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md"
+        or reconstruction_audit["automatic_selection_threshold"] != 32.0
+        or reconstruction_audit["best_candidate_id"]
+        != "one_sided_outer_annotation_morphometry_sets"
+        or reconstruction_audit["best_score"] != 31.5
+        or reconstruction_audit["best_score"]
+        >= reconstruction_audit["automatic_selection_threshold"]
+        or reconstruction_audit["active_shortlist_count"] != 0
+        or reconstruction_audit["primary_problem_selected"] is not False
+        or reconstruction_audit[
+            "any_patient_dicom_nifti_mask_mesh_projection_cfd_or_phantom_payload_accessed"
+        ]
+        is not False
+        or reconstruction_audit["article_supplementary_document_read"] is not True
+        or reconstruction_audit["executable_p0_registered"] is not False
+        or reconstruction_audit["method_selected"] is not False
+        or reconstruction_audit["architecture_selected"] is not False
+        or reconstruction_audit["gpu_training_authorized"] is not False
+        or reconstruction_audit["outer_test_authorized"] is not False
+        or reconstruction_audit["submission_identity_active"] is not False
+        or reconstruction_audit["execution_server"] != "introai9"
+        or reconstruction_audit["pbs_job_created"] is not False
+        or reconstruction_audit["login_node_gpu_command_executed"] is not False
+        or reconstruction_audit["junjinyong_accessed_for_this_audit"] is not False
+        or reconstruction_audit["di_noto_dataset_id"] != "openneuro_ds003949"
+        or reconstruction_audit["di_noto_total_subjects"] != 284
+        or reconstruction_audit["di_noto_patients"] != 157
+        or reconstruction_audit["di_noto_controls"] != 127
+        or reconstruction_audit["di_noto_aneurysms"] != 198
+        or reconstruction_audit["di_noto_reported_weak_label_speedup"] != 4.0
+        or reconstruction_audit["vp_unet_coarse_label_subjects"] != 246
+        or reconstruction_audit["vp_unet_precise_label_test_subjects"] != 38
+        or reconstruction_audit["vp_unet_external_adam_subjects"] != 113
+        or reconstruction_audit[
+            "same_subject_prospective_real_weak_and_independent_precise_annotation_manifest_public"
+        ]
+        is not False
+        or reconstruction_audit["weakmed_tasks"] != 9
+        or reconstruction_audit["weakmed_datasets"] != 9
+        or reconstruction_audit["weakmed_modalities"] != 6
+        or reconstruction_audit["reconstruction_variability_patient_dsas"] != 100
+        or reconstruction_audit["reconstruction_variability_models"] != 600
+        or reconstruction_audit["reconstruction_variability_software_platforms"]
+        != 2
+        or reconstruction_audit["reconstruction_variability_thresholds"] != 3
+        or reconstruction_audit["reconstruction_variability_users"] != 3
+        or reconstruction_audit[
+            "reconstruction_variability_max_user_percent_difference"
+        ]
+        != 22.7
+        or reconstruction_audit["reconstruction_variability_patient_mesh_table_public"]
+        is not False
+        or reconstruction_audit["ultrasparse_dsa_patients"] != 202
+        or reconstruction_audit["ultrasparse_dsa_projection_counts"]
+        != [4, 6, 8, 10, 12]
+        or reconstruction_audit[
+            "ultrasparse_dsa_aneurysms_identified_at_eight_views"
+        ]
+        != 82
+        or reconstruction_audit["ultrasparse_dsa_raw_patient_projection_data_public"]
+        is not False
+        or reconstruction_audit["biplane_isuia_aneurysms"] != 150
+        or reconstruction_audit["biplane_unidentifiable_neck_aneurysms"] != 23
+        or reconstruction_audit["biplane_volumetric_validation_models"] != 10
+        or reconstruction_audit["phantomx_axial_images"] != 39000
+        or reconstruction_audit["phantomx_series"] != 120
+        or reconstruction_audit["phantomx_dose_levels"] != 30
+        or reconstruction_audit["phantomx_reconstruction_methods"] != 4
+        or reconstruction_audit["phantomx_aneurysms"] != 3
+        or reconstruction_audit["phantomx_effective_anatomies"] != 1
+        or reconstruction_audit["autocar_clinical_imaging_parameter_cases_minimum"]
+        != 1000
+        or observed_reconstruction_scores != expected_reconstruction_scores
+        or not reconstruction_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in reconstruction_audit["candidates"]
+        )
+        or reconstruction_audit["decision"]
+        != "reject_all_without_score_repair_patient_payload_p0_method_architecture_pbs_gpu_outer_test_or_submission_claim"
+        or reconstruction_audit["next_allowed_action"]
+        != "monitor_for_same_subject_paired_annotation_or_reconstruction_orbits_with_independent_reference_then_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The reconstruction/annotation reliability audit must retain all six "
+            "frozen source-only rejections, the 31.5/40 maximum, no patient "
+            "payload/P0/model/PBS/GPU, and the introai9-only boundary."
+        )
+    checks.append("reconstruction/annotation rejection and introai9-only boundary")
 
     venue = protocol["venue"]
     _require_keys(

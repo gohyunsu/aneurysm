@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Current exact gate · 2026-08-10:** Reconstruction/annotation reliability
+> 최고점은 31.5/40으로 32 미만이다. Patient payload, executable P0, PBS job,
+> method, architecture, GPU와 outer test는 없다. 다음 실험은 same-subject
+> annotation/reconstruction orbit과 independent reference가 있는 fresh source가
+> 32를 넘은 뒤, patient grouping·orbit membership·coordinate frame·containment·
+> reference independence·license를 검사하는 method-free CPU/read-only P0부터
+> `introai9` PBS에서 실행한다. Closed branch는 repair하거나 relabel하지 않는다.
+
 > **Current exact gate · 2026-08-10:** Failure-mechanism/biology six-candidate
 > batch의 최고점은 30.5/40으로 32 미만이다. 따라서 이번 cycle에는 executable
 > P0, PBS job, method, architecture, GPU 또는 outer test가 없다. Closed Aneumo
@@ -13,7 +21,7 @@
 > central directory/member, method, architecture, GPU와 outer test 접근은 0이다.
 > 이 version은 repair, same-contract rerun과 P1 없이 닫는다.
 
-버전: 5.3 · 2026-08-10
+버전: 5.4 · 2026-08-10
 
 > **Current gate:** longitudinal-MRA growth batch 최고점은 31.5/40이다.
 > OpenNeuro의 126 raw angiogram은 63 patient에서 왔고 longitudinal patient는

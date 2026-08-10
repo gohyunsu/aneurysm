@@ -172,6 +172,49 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "failure-mechanism/biology audit"):
             validate_protocol(candidate)
 
+    def test_reconstruction_annotation_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "reconstruction_annotation_reliability_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 31.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["di_noto_total_subjects"], 284)
+        self.assertEqual(audit["vp_unet_precise_label_test_subjects"], 38)
+        self.assertFalse(
+            audit[
+                "same_subject_prospective_real_weak_and_independent_precise_annotation_manifest_public"
+            ]
+        )
+        self.assertEqual(audit["reconstruction_variability_models"], 600)
+        self.assertEqual(audit["ultrasparse_dsa_patients"], 202)
+        self.assertEqual(audit["biplane_unidentifiable_neck_aneurysms"], 23)
+        self.assertEqual(audit["phantomx_effective_anatomies"], 1)
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "reconstruction_annotation_reliability_source_audit"
+        ]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(
+            ProtocolError, "reconstruction/annotation reliability audit"
+        ):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "reconstruction_annotation_reliability_source_audit"
+        ]["candidates"][0]["score"] = 32.0
+        with self.assertRaisesRegex(
+            ProtocolError, "reconstruction/annotation reliability audit"
+        ):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

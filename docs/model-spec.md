@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 current architecture boundary:** 현재 모델은 GNN도 U-Net도
+> Transformer도 diffusion posterior도 아니다—선택된 architecture가 없다.
+> Outer-set loss, vesselness prior, Mask-to-Box, scale consistency, sparse
+> backprojection, vascular graph optimization과 orbit invariance는 direct prior
+> 또는 engineering control이다. Same-subject coarsening mechanism과 independent
+> reference를 method-free P0/P1에서 확인하기 전에는 GPU를 열지 않는다.
+
 > **2026-08-10 current architecture boundary:** Failure-mechanism/biology
 > source batch도 30.5/40 이하로 모두 기각됐다. Public error-cause 또는 paired
 > imaging--biology target가 없고 direct anatomy/topology/ingrowth/synthetic-data

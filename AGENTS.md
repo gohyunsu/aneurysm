@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 reconstruction/annotation reliability source overlay:** Fresh
+> scores는 31.5/29.5/29.0/26.5/25.5/25.5로 모두 32 미만이며 31.5를 사후
+> 수리하지 않는다. Di Noto source는 284 subject/198 aneurysm과 weak sphere
+> annotation 4× speedup을 보고하고 VP-UNet은 246 coarse-label subject/38
+> precise-label test/113 ADAM external subject를 사용한다. 그러나 real weak
+> annotation과 independently adjudicated precise mask의 same-subject
+> prospective manifest는 public하지 않다. VP-UNet/FocalSegNet, CVPR 2026
+> WeakMed, 202-patient ultra-sparse DSA, AutoCAR, 600-model reconstruction
+> variability, biplane curve morphing과 phantom consistency가 direct prior다.
+> Schema 5.4 source of truth는
+> `docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md`와
+> `problem_selection.reconstruction_annotation_reliability_source_audit`이다.
+> Patient payload, P0, primary, method, architecture, PBS/GPU, outer test와
+> submission identity는 0이다. AURORA는 `introai9`만 사용하고 `junjinyong`은
+> 접속·조회·제출·모니터링하지 않는다. Closed branch는 repair/rerun하지 않는다.
+
 > **2026-08-10 failure-mechanism/biology source overlay:** Fresh six-candidate
 > score는 cause-specific CTA false-positive risk, post-release TopAneu
 > attachment, directional topology, synthetic-avatar fidelity, preclinical

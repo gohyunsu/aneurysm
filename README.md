@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 reconstruction/annotation reliability boundary:** Fresh scores
+> are **31.5/29.5/29.0/26.5/25.5/25.5**, all below 32/40. Open TOF-MRA has
+> 284 subjects and four-times-faster weak spheres, but VP-UNet, FocalSegNet and
+> CVPR 2026 WeakMed directly occupy weak-label segmentation. A prospective
+> same-subject manifest pairing real weak annotations with an independent
+> precise reference is absent. The 600-model software/threshold study,
+> 202-patient sparse-view study, biplane reconstruction and phantom study also
+> lack a public independent target for the residual claim. The
+> [`detailed audit`](docs/reconstruction-annotation-reliability-source-audit-2026-08-10.md)
+> freezes no patient payload, P0, method, architecture, PBS/GPU, outer test or
+> claim. Future execution is `introai9`-only; `junjinyong` remains excluded.
+
 > **2026-08-10 failure-mechanism/biology boundary:** A fresh six-candidate
 > source screen scores cause-specific CTA false-positive risk control,
 > post-release TopAneu attachment consistency, directional topology,

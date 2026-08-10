@@ -2,6 +2,17 @@
 
 최종 갱신: 2026-08-10 KST
 
+## 2026-08-10 · Reconstruction/annotation source-only stop
+
+- Frozen scores are 31.5/29.5/29.0/26.5/25.5/25.5, all below 32. No P0, PBS,
+  GPU job or scheduler query was needed.
+- Future execution remains PBS-only on `introai9`, beginning with a method-free
+  CPU/read-only P0 only after a fresh source passes 32. `junjinyong` is excluded
+  from connection, query, submission and monitoring.
+- Patient image/mask/mesh/projection/CFD/phantom payload remains zero. The
+  article supplement is literature evidence, not patient data.
+- Closed Aneumo/Open-CTA and prior model branches are not repaired or rerun.
+
 ## 2026-08-10 · Failure-mechanism/biology source-only stop
 
 - All six scores are below 32; the maximum is 30.5/40. No P0 or PBS/GPU job was

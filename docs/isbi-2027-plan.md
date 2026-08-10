@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 current boundary:** Reconstruction/annotation reliability scores
+> are 31.5/29.5/29.0/26.5/25.5/25.5, all below 32. Weak segmentation, sparse
+> reconstruction and reconstruction-variability analysis have strong direct
+> priors while the residual same-subject reference is absent. There is no active
+> title, contribution, method figure, result row or GPU experiment. Private
+> writing records this as unnumbered rejected history, not a new claim.
+
 > **2026-08-10 current boundary:** Failure-mechanism/biology source batch scores
 > 30.5/29.0/28.0/25.5/24.5/21.0. None admits a problem. A public error-cause
 > target or paired imaging--biology endpoint is still missing, while direct
