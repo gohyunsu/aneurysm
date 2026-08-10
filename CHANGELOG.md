@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-10 · 4D-CTA source decision and explanatory site verified
+
+- Exact schema-6.1 scientific content
+  `f95b73a68ddc20b993ebd5dd0d28e4645a3dafc9` passed Quality `31359594992`
+  and Pages `31359594475`.
+- Direct live checks of the overview, beginner guide, detailed audit and
+  research-data object render 31.5/40, 20 independent patients, the distinction
+  between derived RSII and future clinical truth, and archive/P0/model/GPU 0.
+- Deployment provenance changes no source score, method, compute or submission
+  authorization. Future execution remains `introai9` PBS only and
+  `junjinyong` remains fully excluded.
+- 영향 파일: `AGENTS.md`, `CHANGELOG.md`, `docs/server-execution.md`,
+  `site/assets/research-data.js`.
+
 ## 2026-08-10 · Open 4D-CTA AAA mechanics source remains below admission
 
 - Verified official Zenodo `19182978`: CC BY 4.0, one 1.86 GB archive, 20

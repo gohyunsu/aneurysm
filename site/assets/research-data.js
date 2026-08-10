@@ -643,6 +643,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.10",
+      category: "site",
+      title: "4D-CTA source boundary is live and verified",
+      copy: "Exact schema-6.1 scientific content f95b73a68ddc20b993ebd5dd0d28e4645a3dafc9 passed Quality 31359594992 and Pages 31359594475. Direct live checks of overview, Learn, the detailed audit and research-data object render 31.5/40, 20 independent patients, derived-RSII-not-future-outcome semantics and archive/P0/model/GPU 0. This provenance creates no method, compute, outer-test or submission authorization; introai9 remains exclusive and junjinyong remains excluded.",
+      files: ["AGENTS.md", "CHANGELOG.md", "docs/server-execution.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.10",
       category: "research",
       title: "Open 4D-CTA AAA mechanics remains below source admission",
       copy: "Official Zenodo 19182978 provides 20 patients/three centres, 2–10 cardiac phases and wall/ILT/FE plus strain/tension/SII/RSII under CC BY 4.0. Six candidates freeze at 31.5/30.5/30.0/29.0/28.5/25.5. Phases and vertices are not independent patients; one synthetic case is not population ground truth; released mechanics are derived targets without future clinical outcome. Schema 6.1 therefore opens no archive payload, P0, method, architecture, PBS/GPU, outer test or claim. The bounded introai9 status attempt reset before remote command and no repair loop was opened; junjinyong remains excluded.",

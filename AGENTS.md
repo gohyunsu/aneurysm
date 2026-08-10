@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 4D-CTA source deployment provenance:** Exact schema-6.1
+> scientific content `f95b73a68ddc20b993ebd5dd0d28e4645a3dafc9` passed Quality
+> `31359594992` and Pages `31359594475`. Direct live checks of the overview,
+> zero-assumption guide, detailed audit and research-data object render
+> 31.5/40, 20 independent patients, derived-target semantics and
+> archive/P0/model/GPU 0. This deployment evidence creates no source-score,
+> task, method, compute, outer-test, C21 or submission authorization. All
+> future authorized execution remains `introai9` PBS only; `junjinyong` remains
+> completely excluded.
+
 > **2026-08-10 4D-CTA AAA mechanics source override:** Official Zenodo
 > `10.5281/zenodo.19182978` is open under `CC BY 4.0` and reports one
 > 1,857,980,948-byte archive (MD5 `11b74684e382d1410a2d64f81967e613`), 20

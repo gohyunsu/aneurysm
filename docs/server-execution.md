@@ -1,5 +1,15 @@
 # AURORA 서버 실행과 provenance
 
+## 2026-08-10 · 4D-CTA source content and live site verified
+
+- Exact content `f95b73a68ddc20b993ebd5dd0d28e4645a3dafc9` passed Quality
+  `31359594992` and Pages `31359594475`.
+- Live overview, Learn guide, detailed audit and research-data object expose
+  the same 31.5/40, 20-patient, derived-target and no-compute boundary.
+- This is deployment provenance only. It creates no archive access, P0, PBS/GPU
+  job, monitoring loop, outer test or submission identity. `introai9` remains
+  the only future execution target; `junjinyong` remains excluded.
+
 ## 2026-08-10 · 4D-CTA AAA source rejection; no compute opened
 
 - Six frozen scores are 31.5/30.5/30.0/29.0/28.5/25.5. No candidate reaches
