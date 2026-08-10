@@ -4,6 +4,28 @@
 기록한다. 단순 오탈자는 묶어서 기록할 수 있지만 연구 주장을 바꾼 변경은
 독립 항목으로 남긴다.
 
+## 2026-08-10 · Failure-mechanism/biology batch stops before payload and compute
+
+- Cause-specific CTA false-positive risk, post-release TopAneu attachment,
+  directional topology, synthetic-avatar fidelity, preclinical ingrowth
+  translation and imaging--spatial-wall alignment score
+  **30.5/29.0/28.0/25.5/24.5/21.0**. All are below 32.
+- The strongest direct study already tests anatomy-compartment filters using
+  1,186 open training CTAs and two external cohorts, but public casewise
+  false-positive cause labels are absent. Directional SECT independently
+  occupies the small-lesion/bifurcation topology path.
+- TopAneu now states open use with attribution and about 850 scans, but still
+  requires a verified account. No join request, terms acceptance or payload
+  access was performed. Paired image--tissue and angiography--histology targets
+  are absent; ICAN's downloadable table is explicitly simulated.
+- Schema 5.3 freezes active shortlist/primary/method/architecture/P0/PBS/GPU/
+  outer test/submission identity at zero. No `introai9` job was created;
+  `junjinyong` remains excluded from connection, query, submission and
+  monitoring. The closed Aneumo P0 is not repaired or rerun.
+- 영향 파일: `docs/failure-mechanism-biology-source-audit-2026-08-10.md`,
+  machine contract/validator/tests, research/data/model/experiment/ISBI/server
+  guides, public site, private manuscript history, `AGENTS.md` and this log.
+
 ## 2026-08-10 · Current-site panels align with the Aneumo lineage outcome
 
 - Replaced stale longitudinal-perfusion and historical AneuX text in the live

@@ -52,23 +52,24 @@
           <span>짧은 답</span>
           <strong>Active shortlist, primary와 모델은 모두 없습니다.</strong>
           <p>
-            Aneumo 공식 validation은 train과 case ID가 다르지만 20개 base
-            geometry family가 전부 겹칩니다. 같은 원본 해부구조의 다른
-            deformation을 새 anatomy로 해석할 수 없습니다. 현재 GNN, neural
-            operator, U-Net과 Transformer 어느 것도 선택하지 않았습니다.
+            최신 source batch의 최고점은 cause-specific CTA false-positive
+            risk 30.5/40으로 admission line 32보다 낮습니다. Public error-cause
+            label과 paired imaging--biology endpoint가 없어 현재 GNN, neural
+            operator, U-Net, multimodal graph와 Transformer 어느 것도 선택하지
+            않았습니다.
           </p>
         </div>
         <div class="answer-card">
           <span>현재 해야 하는 일</span>
-          <strong>Exact metadata P0는 scientific gate 전에 종료됐습니다.</strong>
+          <strong>이번 batch는 payload와 P0 전에 정상 종료됐습니다.</strong>
           <p>
-            P0는 10,660-to-427 mapping, train/validation family overlap, 두
-            license 문구와 Git LFS pointer만 검사하도록 등록됐지만 첫 source도
-            완료하지 못해 check는 모두 미평가입니다. Archive, field와 GPU 접근은
-            0입니다. Split 정정 자체는 novelty가 아니며 이 exact version은
-            repair, rerun과 P1 없이 닫혔습니다.
+            Anatomy-based false-positive filtering과 directional topology는
+            이미 직접 선행이고, spatial wall atlas와 preclinical ingrowth에는
+            clinical image와 조직을 잇는 공개 pair가 없습니다. ICAN table은
+            simulated data입니다. 따라서 image, mask, histology, patient table,
+            P0, PBS/GPU 접근을 열지 않았습니다.
           </p>
-          <a href="../docs/aneumo-lineage-split-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
+          <a href="../docs/failure-mechanism-biology-source-audit-2026-08-10.md">최신 source audit 읽기 ↗</a>
         </div>
       </div>
       <div class="learning-map" aria-label="가이드 학습 경로">
@@ -441,19 +442,24 @@
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
               최신 판단은 network가 아니라 source/direct-prior/unit audit입니다.
-              Aneumo lineage 후보는 35.0/40으로 P0까지 열렸지만 첫 small source
-              전에 종료됐습니다. 아래 과거 graph/operator stack은 현재 선택된
-              architecture가 아닙니다.
+              Failure-mechanism/biology batch의 최고점은 30.5/40으로 P0도 열지
+              않았습니다. 아래 Aneumo와 과거 graph/operator stack은 현재 선택된
+              architecture가 아닌 역사 기록입니다.
             </p>
           </header>
 
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. Aneumo의 10,660 generated case는 10,660개 독립 anatomy가 아니라 427개 source family의 deformation입니다. Official validation 20개 family가 train과 모두 겹치므로 case-disjoint와 family-disjoint를 구분해야 합니다.</p>
+              <p>Active source shortlist, selected primary와 architecture는 모두 0입니다. 최신 batch에는 public casewise false-positive cause label, paired image--tissue coordinates와 paired angiography--histology endpoint가 없습니다. 큰 public cohort, 많은 cells나 simulated rows를 독립 patient evidence로 바꾸어 세지 않습니다.</p>
             </aside>
             <article>
-              <span>CURRENT · ANEUMO LINEAGE P0 CLOSED</span>
+              <span>CURRENT · FAILURE-MECHANISM/BIOLOGY REJECTED</span>
+              <div><h3>오류 원인을 설명하면 새 모델 문제가 되는가?</h3><p>아닙니다. 원인별 label이 public casewise target으로 있어야 하고, 기존 anatomy/topology filter보다 risk와 sensitivity를 함께 개선해야 합니다. 현재 direct paper가 compartment filtering을 두 외부 cohort에서 점유하고 SECT가 bifurcation topology를 점유합니다. Biology 축도 imaging과 tissue의 같은-case 좌표가 없습니다.</p></div>
+              <b>상태</b><small>best 30.5/40 · payload/P0/PBS/model/GPU 0</small>
+            </article>
+            <article>
+              <span>HISTORY · ANEUMO LINEAGE P0 CLOSED</span>
               <div><h3>Case ID가 다르면 보지 못한 anatomy인가?</h3><p>아닙니다. Official train과 validation의 exact case overlap은 0이지만 validation 20개 base family가 train에 모두 존재합니다. 이 source finding은 35/40으로 metadata P0를 열었지만, exact CPU job은 첫 small source 전에 종료돼 11개 scientific check가 모두 미평가입니다. Split correction은 평가 위생이며 그 자체로 새 GNN/operator가 되지 않습니다.</p></div>
               <b>상태</b><small>execution-incomplete · shortlist/P1/method/GPU 0 · no repair/rerun</small>
             </article>

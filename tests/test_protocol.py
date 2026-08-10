@@ -133,6 +133,45 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "Aneumo generation-lineage audit"):
             validate_protocol(candidate)
 
+    def test_failure_mechanism_biology_batch_rejects_all_before_compute(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "failure_mechanism_biology_source_audit"
+        ]
+        self.assertEqual(audit["best_score"], 30.5)
+        self.assertEqual(audit["automatic_selection_threshold"], 32.0)
+        self.assertEqual(audit["active_shortlist_count"], 0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertEqual(audit["anatomy_fp_open_training_ctas"], 1186)
+        self.assertFalse(audit["anatomy_fp_casewise_cause_labels_public"])
+        self.assertTrue(audit["topaneu_verified_account_required"])
+        self.assertFalse(audit["topaneu_payload_accessed"])
+        self.assertEqual(audit["spatial_atlas_aneurysm_donors"], 6)
+        self.assertFalse(
+            audit["paired_preoperative_imaging_tissue_coordinate_manifest_found"]
+        )
+        self.assertTrue(audit["ican_public_table_is_simulated"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["pbs_job_created"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertTrue(
+            all(not item["payload_accessed"] for item in audit["candidates"])
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["failure_mechanism_biology_source_audit"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "failure-mechanism/biology audit"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["failure_mechanism_biology_source_audit"][
+            "candidates"
+        ][0]["payload_accessed"] = True
+        with self.assertRaisesRegex(ProtocolError, "failure-mechanism/biology audit"):
+            validate_protocol(candidate)
+
     def test_pinn_rupture_direct_prior_is_rejected_before_compute(self) -> None:
         audit = self.protocol["problem_selection"][
             "pinn_rupture_direct_prior_audit"

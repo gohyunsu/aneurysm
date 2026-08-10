@@ -41,23 +41,24 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          Disjoint cases are not disjoint anatomy.<br>
-          <em>First audit the generation family.</em>
+          An error taxonomy is not yet a learnable endpoint.<br>
+          <em>First audit who labeled the error.</em>
         </h1>
         <p class="hero-lede">
-          Aneumo의 공식 validation case 40개는 train case와 다르지만, 20개 base
-          family가 모두 train에 있습니다. 10,660 deformation을 독립 anatomy로
-          세지 않고 427개 generation family로 묶는 후보가 35/40으로 source
-          gate를 통과했지만, exact CPU P0는 첫 small source 전에 walltime으로
-          끝났습니다. Scientific gate는 미평가이고 active shortlist, selected
-          primary, model, GPU와 outer test는 다시 모두 없습니다.
+          CTA false positive를 원인별로 통제하는 질문은 중요하지만, 공개
+          casewise 원인 label이 없고 anatomy filter와 directional topology가
+          이미 직접 검증됐습니다. Wall biology와 healing source도 paired
+          imaging--tissue target이 없습니다. Fresh six-candidate 최고점은
+          30.5/40으로 32에 못 미칩니다. Active shortlist, selected primary,
+          model, P0, PBS/GPU와 outer test는 모두 없습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/aneumo-lineage-split-source-audit-2026-08-10.md">Latest audit ↗</a>
-          <a class="button ghost" href="../configs/aneumo_lineage_p0.json">Frozen P0 ↗</a>
+          <a class="button ghost" href="../docs/failure-mechanism-biology-source-audit-2026-08-10.md">Latest audit ↗</a>
+          <a class="button ghost" href="../docs/aneumo-lineage-split-source-audit-2026-08-10.md">Aneumo P0 history ↗</a>
+          <a class="button ghost" href="../configs/aneumo_lineage_p0.json">Historical frozen P0 ↗</a>
           <a class="button ghost" href="../results/aneumo_lineage_p0_execution_20260810.json">P0 outcome ↗</a>
           <a class="button ghost" href="../docs/longitudinal-mra-growth-source-audit-2026-08-10.md">MRA history ↗</a>
           <a class="button ghost" href="../docs/longitudinal-perfusion-source-audit-2026-08-10.md">Perfusion history ↗</a>
@@ -79,8 +80,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="Aneumo의 case-disjoint split과 generation-family overlap을 구분하는 개념도">
-        <div class="visual-caption">ANEUMO LINEAGE · 35/40 SOURCE · P0 INCOMPLETE</div>
+      <div class="hero-visual" aria-label="공개 오류 라벨과 paired biology target의 부재를 보여주는 현재 연구 경계">
+        <div class="visual-caption">FAILURE MECHANISM × BIOLOGY · BEST 30.5/40 · ALL REJECTED</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -103,25 +104,25 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>427</b><span>source families</span>
+            <b>30.5</b><span>best source score / 40</span>
           </div>
           <div class="posterior-card card-b">
-            <b>10,660</b><span>generated cases</span>
+            <b>0</b><span>public casewise FP-cause labels</span>
           </div>
           <div class="posterior-card card-c">
-            <b>20/20</b><span>validation families overlap</span>
+            <b>0</b><span>paired imaging–biology cohorts</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> case-disjoint ≠ family-disjoint</span>
-          <span><i class="dot coral"></i> first small source 0 · checks unevaluated</span>
+          <span><i class="dot lime"></i> anatomy/topology filters are direct prior</span>
+          <span><i class="dot coral"></i> source gate stops before payload and compute</span>
           <span>active primary/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
         <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>Aneumo lineage P0 incomplete · scientific verdict 0</b></div>
+        <div><span>Current evidence</span><b>Fresh source best 30.5/40 · all rejected</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
         <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
       </div>
@@ -189,17 +190,17 @@
           <p class="eyebrow">CURRENT GAP STATUS</p>
           <h3>No active gap survives both direct priors and unit adequacy.</h3>
           <p>
-            Aneumo의 10,660 case는 427개 base geometry에서 생성됐습니다.
-            Official validation은 case ID가 train과 다르지만 20개 base family가
-            모두 train에 있습니다. 이 35/40 finding은 평가 단위를 바로잡지만,
-            split correction 자체는 novelty가 아닙니다. Exact CPU P0도 첫 source
-            전에 종료돼 새로운 task gap이나 방법 필요성을 과학적으로 평가하지
-            못했습니다.
+            공개 CTA는 크지만 reviewed false-positive cause label은 공개되지
+            않았고 anatomy-compartment filter와 directional topology가 이미
+            직접 선행입니다. Spatial wall atlas와 preclinical ingrowth는 paired
+            clinical imaging target가 없고 synthetic rows는 real patient unit가
+            아닙니다. 따라서 멋진 multimodal block을 붙이기 전에 문제 자체가
+            admission line에서 멈췄습니다.
           </p>
           <div class="gap-equation" aria-label="source admission 뒤 P0가 미완료되어 모델 권한으로 이어지지 않는 관계">
-            <span>source 35/40 → P0 incomplete</span>
+            <span>source best 30.5/40 &lt; 32</span>
             <i>⇒</i>
-            <span>shortlist 0 · no model · no GPU</span>
+            <span>no payload · no P0 · no model · no GPU</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -230,9 +231,10 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 아래 흐름은 최신 Aneumo generation-
-          lineage 후보가 source admission을 통과했지만 scientific task gate와
-          model selection에는 도달하지 못한 이유를 단계별로 설명합니다.
+          현재 architecture는 없습니다. 최신 failure-mechanism/biology batch는
+          source admission도 통과하지 못했습니다. 아래 흐름은 직전 Aneumo
+          후보가 source admission 뒤에도 왜 model selection에 도달하지 못했는지
+          보여주는 명시적 역사 기록입니다.
         </p>
       </div>
 
@@ -248,7 +250,7 @@
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="Aneumo generation-lineage P0 evidence stage">
+      <div class="mode-switch" role="group" aria-label="Historical Aneumo generation-lineage P0 evidence stage">
         <button class="active" type="button" data-mode="presence">Source</button>
         <button type="button" data-mode="point">Units</button>
         <button type="button" data-mode="mask">Decision</button>
@@ -587,7 +589,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>Aneumo lineage P0 incomplete · scientific verdict 0 · shortlist/primary/model/GPU 0</b>
+        <span>Current stage</span><b>Failure-mechanism/biology best 30.5/40 · all rejected · shortlist/primary/P0/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

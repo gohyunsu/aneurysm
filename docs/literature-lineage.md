@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-10 failure-mechanism/biology lineage:** Anatomy-based CTA
+> false-positive filtering은 brain/artery/vein/cavernous-sinus compartment와
+> 두 external cohort까지 직접 평가됐고, directional SECT는 small-lesion
+> bifurcation과 scanner shift를 이미 점유한다. Human spatial atlas, preclinical
+> ingrowth U-Net++와 synthetic clinical generation도 각각 biology, healing,
+> privacy/utility 축의 direct prior다. 남는 cross-modal 질문은 public paired
+> endpoint가 없어 식별되지 않으며 frozen best는 30.5/40이다. 자세한 계보는
+> [`source audit`](failure-mechanism-biology-source-audit-2026-08-10.md)에 있다.
+
 > **2026-08-10 Aneumo-lineage update:** corrected 10,660-to-427 mapping은
 > 공식 validation 20개 base family가 train과 전부 겹침을 드러낸다. 그러나
 > family-disjoint split, augmentation leakage audit, GINO, boundary-augmented

@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-10 current source boundary:** 새 batch에서 image, mask, reviewed
+> FP-cause label, histology, spatial transcriptomics, patient table와 controlled
+> payload를 읽지 않았다. RSNA와 TopAneu terms를 대신 수락하지 않았고, ICAN
+> downloadable table은 simulated data다. Human spatial atlas와 preclinical
+> ingrowth source에는 paired preoperative-image/tissue 또는 angiography/
+> histology manifest가 없다. 이들은 source history이지 active training data가
+> 아니다.
+
 > **2026-08-10 Aneumo lineage audit:** 10,660 generated geometries map to 427
 > base families. Official steady validation is case-disjoint but shares all 20
 > base families with training. Aneumo's current role is therefore a pinned

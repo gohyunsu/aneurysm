@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **2026-08-10 current boundary:** Failure-mechanism/biology batch의 최고점은
+> cause-specific CTA false-positive risk 30.5/40이며 여섯 후보가 모두 32
+> 미만이다. Public casewise FP-cause label, paired image--tissue coordinate와
+> paired angiography--histology endpoint가 없다. Anatomy/topology filter,
+> spatial atlas, ingrowth segmentation과 synthetic tabular utility도 direct
+> prior다. 따라서 primary, model, P0와 GPU는 0이며 상세 판정은
+> [`source audit`](failure-mechanism-biology-source-audit-2026-08-10.md)이다.
+
 > **2026-08-10 Aneumo lineage boundary:** corrected mapping `701d53d…`의
 > 10,660 case는 427 base family에서 생성됐다. 공식 validation 40 case는 train과
 > case ID가 겹치지 않지만 20 base family가 모두 train에 있다. 새 batch의

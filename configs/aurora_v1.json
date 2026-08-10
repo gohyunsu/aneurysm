@@ -1,5 +1,5 @@
 {
-  "schema_version": "5.2",
+  "schema_version": "5.3",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
@@ -13,11 +13,11 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_shortlist_after_aneumo_generation_lineage_p0_execution_incomplete_no_primary_or_method",
+    "status": "no_active_shortlist_after_failure_mechanism_biology_source_rejection_aneumo_lineage_p0_remains_closed",
     "shortlisted_candidate": "none",
     "candidate_dataset": "none",
     "candidate_estimand": "unselected",
-    "asset_access_status": "source_level_pinned_public_small_text_csv_git_tree_and_lfs_pointer_metadata_only_registered_p0_completed_no_small_source_file_no_archive_central_directory_member_mesh_mask_point_cloud_field_or_model_weight_payload",
+    "asset_access_status": "latest_batch_source_only_no_image_mask_histology_spatial_transcriptomic_patient_table_or_controlled_payload_aneumo_lineage_p0_history_unchanged",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": true,
     "annotation_selection_mechanism_audited": false,
@@ -26,8 +26,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0",
-    "audit_document": "docs/aneumo-lineage-split-source-audit-2026-08-10.md",
+    "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_with_public_casewise_endpoint_labels_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0",
+    "audit_document": "docs/failure-mechanism-biology-source-audit-2026-08-10.md",
     "source_only_dataset_substitution_screen": {
       "status": "completed_primary_source_metadata_only",
       "payload_accessed": false,
@@ -1539,8 +1539,116 @@
       "p0_pass_authorizes": "seek_publisher_license_clarification_then_register_one_method_free_p1_only_if_a_single_pinned_license_is_unambiguous",
       "decision": "close_this_exact_candidate_version_after_execution_incomplete_without_transport_repair_rerun_p1_method_architecture_gpu_outer_test_or_scientific_claim"
     },
+    "failure_mechanism_biology_source_audit": {
+      "status": "completed_source_only_all_candidates_below_admission_threshold",
+      "audit_document": "docs/failure-mechanism-biology-source-audit-2026-08-10.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_id": "cause_specific_false_positive_risk_control",
+      "best_score": 30.5,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "any_image_mask_histology_spatial_transcriptomic_patient_table_or_controlled_payload_accessed": false,
+      "user_accepted_rsna_or_topaneu_terms_verified": false,
+      "executable_p0_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "submission_identity_active": false,
+      "execution_server": "introai9",
+      "pbs_job_created": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "anatomy_fp_open_training_ctas": 1186,
+      "anatomy_fp_open_training_aneurysms": 1373,
+      "anatomy_fp_private_test_ctas": 143,
+      "anatomy_fp_public_rsna_test_ctas": 843,
+      "anatomy_fp_casewise_cause_labels_public": false,
+      "rsna_registry_scans_minimum": 4000,
+      "rsna_registry_institutions": 18,
+      "rsna_access": "controlled_noncommercial_no_redistribution",
+      "topaneu_current_total_scans_approximate": 850,
+      "topaneu_current_location_classes_minimum": 50,
+      "topaneu_open_use_with_attribution_stated": true,
+      "topaneu_verified_account_required": true,
+      "topaneu_payload_accessed": false,
+      "sect_scanner_manufacturers": 4,
+      "sect_exact_curated_manifest_publicly_identified": false,
+      "spatial_atlas_total_aneurysms": 14,
+      "spatial_atlas_total_control_vessels": 11,
+      "spatial_atlas_aneurysm_donors": 6,
+      "spatial_atlas_control_donors": 3,
+      "paired_preoperative_imaging_tissue_coordinate_manifest_found": false,
+      "preclinical_ingrowth_histology_images": 64,
+      "preclinical_ingrowth_dataset_public": false,
+      "paired_angiography_histology_manifest_public": false,
+      "ican_public_table_is_simulated": true,
+      "ican_public_medical_images": false,
+      "cleo_real_multicenter_records": 1035,
+      "cleo_formal_differential_privacy_guarantee": false,
+      "direct_prior_threats": [
+        "anatomy_based_brain_artery_vein_and_cavernous_sinus_false_positive_filter",
+        "directional_sect_topological_bifurcation_filter",
+        "topaneu_vessel_specific_classification_and_segmentation_challenge",
+        "cell_resolution_spatial_transcriptomic_aneurysm_atlas",
+        "preclinical_unetplusplus_ingrowth_segmentation",
+        "generic_synthetic_tabular_privacy_utility_generation"
+      ],
+      "candidates": [
+        {
+          "id": "cause_specific_false_positive_risk_control",
+          "score": 30.5,
+          "axis_scores": [5.0, 3.0, 1.0, 3.0, 4.5, 5.0, 5.0, 4.0],
+          "independent_units": "1186_open_training_ctas_and_large_external_evaluations_but_casewise_false_positive_cause_labels_are_not_public",
+          "payload_accessed": false,
+          "decision": "reject_current_version_anatomy_cause_filtering_is_directly_occupied_and_public_casewise_cause_labels_are_absent"
+        },
+        {
+          "id": "topaneu_post_release_attachment_consistency",
+          "score": 29.0,
+          "axis_scores": [5.0, 3.0, 2.0, 2.5, 4.0, 4.5, 5.0, 3.0],
+          "independent_units": "approximately_850_total_challenge_scans_but_verified_account_payload_and_ambiguous_multi_parent_reference_distribution_are_unavailable",
+          "payload_accessed": false,
+          "decision": "reject_current_version_open_use_clarification_does_not_remove_direct_task_occupation_or_hard_label_ambiguity"
+        },
+        {
+          "id": "directional_topology_small_lesion_bifurcation_error_control",
+          "score": 28.0,
+          "axis_scores": [4.5, 4.5, 0.0, 2.0, 3.5, 5.0, 5.0, 3.5],
+          "independent_units": "stratified_rsna_subset_across_four_manufacturers_but_exact_curated_manifest_is_not_a_standalone_public_asset",
+          "payload_accessed": false,
+          "decision": "reject_current_version_directional_sect_small_lesion_and_scanner_stratified_method_identity_is_direct_prior"
+        },
+        {
+          "id": "synthetic_avatar_structural_fidelity_for_rupture_status",
+          "score": 25.5,
+          "axis_scores": [2.5, 5.0, 0.5, 5.0, 1.0, 5.0, 2.0, 4.5],
+          "independent_units": "downloadable_ican_rows_are_simulated_and_do_not_add_real_patient_or_medical_image_units",
+          "payload_accessed": false,
+          "decision": "reject_current_version_simulated_rows_cannot_validate_real_clinical_generalization_and_synthetic_privacy_utility_is_direct_prior"
+        },
+        {
+          "id": "angiography_to_preclinical_tissue_ingrowth_translation",
+          "score": 24.5,
+          "axis_scores": [4.0, 3.5, 0.5, 1.5, 2.0, 5.0, 5.0, 3.0],
+          "independent_units": "64_preclinical_histology_images_without_a_public_animal_level_paired_angiography_histology_manifest",
+          "payload_accessed": false,
+          "decision": "reject_current_version_direct_ingrowth_segmentation_is_occupied_and_the_cross_modal_healing_target_is_not_publicly_paired"
+        },
+        {
+          "id": "imaging_to_spatial_wall_cell_state_alignment",
+          "score": 21.0,
+          "axis_scores": [5.0, 1.0, 2.5, 1.0, 1.5, 3.0, 5.0, 2.0],
+          "independent_units": "six_aneurysm_and_three_control_spatial_donors_without_casewise_preoperative_imaging_to_tissue_coordinates",
+          "payload_accessed": false,
+          "decision": "reject_current_version_cell_counts_are_not_patient_units_and_imaging_tissue_spatial_correspondence_is_unidentified"
+        }
+      ],
+      "decision": "reject_all_without_score_repair_image_mask_histology_spatial_transcriptomic_patient_table_controlled_payload_p0_method_architecture_pbs_or_gpu",
+      "next_allowed_action": "monitor_genuinely_new_or_revised_primary_sources_with_public_casewise_error_or_paired_imaging_biology_endpoints_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    },
     "most_recent_closed_candidate": "generation_family_disjoint_hemodynamic_operator_model_selection",
-    "most_recent_source_rejected_candidate": "family_disjoint_transient_wss_forecasting",
+    "most_recent_source_rejected_candidate": "cause_specific_false_positive_risk_control",
     "rejected_candidates": [
       "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
       "public_cohort_longitudinal_growth_detection",
@@ -1615,7 +1723,13 @@
       "hierarchical_deformation_vs_family_uncertainty_calibration",
       "shape_derivative_informed_deformation_response",
       "synthetic_to_real_selection_on_ten_original_cases",
-      "family_disjoint_transient_wss_forecasting"
+      "family_disjoint_transient_wss_forecasting",
+      "cause_specific_false_positive_risk_control",
+      "topaneu_post_release_attachment_consistency",
+      "directional_topology_small_lesion_bifurcation_error_control",
+      "synthetic_avatar_structural_fidelity_for_rupture_status",
+      "angiography_to_preclinical_tissue_ingrowth_translation",
+      "imaging_to_spatial_wall_cell_state_alignment"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -1700,7 +1814,12 @@
       "generic_temporal_transformer_or_latent_diffusion",
       "observational_ctp_dci_classification",
       "generic_cross_modality_consistency",
-      "tabular_vwe_hemodynamic_association_model"
+      "tabular_vwe_hemodynamic_association_model",
+      "anatomy_compartment_false_positive_filter",
+      "directional_sect_topological_bifurcation_filter",
+      "imaging_to_spatial_transcriptomic_alignment_without_paired_coordinates",
+      "preclinical_unetplusplus_tissue_ingrowth_segmentation",
+      "generic_synthetic_tabular_privacy_utility_generation"
     ]
   },
   "venue": {

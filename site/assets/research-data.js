@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · Aneumo generation-lineage P0 execution-incomplete/no scientific verdict · active shortlist/selected primary/method/architecture/GPU 0 · introai9-only compute · not submission-ready",
-    requirement: "fresh genuinely revised source ≥32 → new method-free P0; do not repair or rerun closed Aneumo lineage P0",
+    status: "Target locked · failure-mechanism/biology best 30.5/40 and all rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
+    requirement: "fresh genuinely revised source with public casewise endpoint ≥32 → new method-free P0; do not repair or rerun closed Aneumo lineage P0",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "An interpretable error taxonomy still needs public casewise targets",
+      copy: "Cause-specific CTA false-positive risk control scores 30.5/40, the best of six fresh candidates. A direct study already tests brain/artery/vein/cavernous-sinus filters using 1,186 open training CTAs and two external cohorts, while its reviewed casewise error causes are not public. Directional SECT already occupies small-lesion bifurcation filtering. TopAneu remains verified-account gated; wall biology and preclinical healing lack paired imaging targets; ICAN rows are explicitly simulated.",
+      status: "Best 30.5/40 · all rejected · payload/P0/PBS/model/GPU 0",
+      url: "../docs/failure-mechanism-biology-source-audit-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Disjoint case IDs still share every validation base family",
@@ -303,13 +310,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Axis", "Official case split", "Base-family split", "Robust operator controls", "Residual research gap"],
-    ["What it tests", "New generated case IDs", "Unseen source anatomy", "OOD/group/shape robustness", "Model-selection consequence"],
-    ["Required control", "Released benchmark", "Group-disjoint development", "GINO/group DRO/shape derivative/UQ", "Matched field + functional selection"],
-    ["Known boundary", "Case overlap 0", "Validation overlap 20/20", "Direct prior, not novelty", "P0 scientific checks unevaluated"],
-    ["Current decision", "Insufficient alone", "Necessary evaluation hygiene", "Mandatory baselines", "35/40 source history · P0 incomplete · no method/GPU"]
+    ["Axis", "Anatomy-compartment filter", "Directional topology", "Imaging–biology bridge", "Residual research gap"],
+    ["What it tests", "Background/venous/arterial FP", "Aneurysm vs bifurcation", "Wall or healing state", "Casewise risk or paired biology"],
+    ["Required control", "Published hybrid detector", "SECT/persistence summaries", "Atlas/ingrowth direct papers", "Fresh patient-disjoint external test"],
+    ["Known boundary", "Reviewed cause labels not public", "Method identity occupied", "No paired coordinates/manifest", "No identified target"],
+    ["Current decision", "30.5/40 reject", "28.0/40 reject", "21.0–24.5/40 reject", "No P0 · no method · no GPU"]
   ],
   gates: [
+    {
+      id: "S-FB",
+      title: "Does a public source identify an error mechanism or imaging–biology endpoint?",
+      copy: "The best fresh candidate scores 30.5/40. Public casewise false-positive causes, paired preoperative imaging–tissue coordinates and paired angiography–histology endpoints are absent, while anatomy/topology/ingrowth/synthetic-data methods are direct priors.",
+      state: "All six below 32 · no payload/P0/PBS/model/GPU",
+      blocking: true
+    },
     {
       id: "P0-L",
       title: "Does Aneumo support generation-family-disjoint model selection?",
@@ -543,6 +557,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "Failure-mechanism and biology candidates stop before payload and compute",
+      copy: "Six frozen scores are 30.5/29.0/28.0/25.5/24.5/21.0. Anatomy-based false-positive filtering and directional topology are direct prior; public cause labels and paired imaging–biology endpoints are absent. No TopAneu/RSNA terms, image, mask, histology, spatial-transcriptomic or patient-table payload was accessed. Schema 5.3 creates no P0/PBS/GPU and keeps the closed Aneumo P0 unrepaired. introai9 remains the only future execution target and junjinyong remains excluded.",
+      files: ["docs/failure-mechanism-biology-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

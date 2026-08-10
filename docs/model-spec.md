@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **2026-08-10 current architecture boundary:** Failure-mechanism/biology
+> source batch도 30.5/40 이하로 모두 기각됐다. Public error-cause 또는 paired
+> imaging--biology target가 없고 direct anatomy/topology/ingrowth/synthetic-data
+> methods가 이미 존재한다. 따라서 현재 선택된 GNN, U-Net, Transformer,
+> multimodal graph, neural operator나 foundation model은 없다.
+
 > **2026-08-10 current architecture boundary:** Aneumo generation-lineage
 > candidate 35/40은 metadata P0만 통과할 자격이었으나 exact job이 first source
 > 전에 execution-incomplete로 닫혔다. 현재 아키텍처는 GNN도,

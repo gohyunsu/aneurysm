@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-10 current boundary:** Failure-mechanism/biology source batch scores
+> 30.5/29.0/28.0/25.5/24.5/21.0. None admits a problem. A public error-cause
+> target or paired imaging--biology endpoint is still missing, while direct
+> anatomy/topology, spatial-atlas, ingrowth and synthetic-data priors occupy the
+> obvious methods. No C21, result row, primary identity, model or compute is
+> added; the submission remains not ready.
+
 > **2026-08-10 Aneumo-lineage boundary:** generation-family-disjoint model
 > selection is a conditional 35/40 source candidate, not an accepted paper
 > identity. Its one exact metadata-only `introai9` CPU P0 ended before the

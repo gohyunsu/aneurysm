@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 failure-mechanism/biology source overlay:** Fresh six-candidate
+> score는 cause-specific CTA false-positive risk, post-release TopAneu
+> attachment, directional topology, synthetic-avatar fidelity, preclinical
+> ingrowth translation과 imaging--spatial-wall alignment 순으로
+> 30.5/29.0/28.0/25.5/24.5/21.0이다. 모두 frozen admission line 32 미만이며
+> score를 사후 수리하지 않는다. 1,186 open CTA/1,373 aneurysm으로 학습한
+> direct paper가 anatomy-compartment filtering을 143 private CTA와 843 public
+> RSNA CTA에서 이미 검증했지만 reviewed casewise FP-cause label은 public
+> target이 아니다. Directional SECT도 small-lesion/bifurcation과 four-
+> manufacturer analysis를 직접 점유한다. TopAneu current page는 약 850
+> CTA/MRA와 open use with attribution을 명시하지만 verified account가 필요해
+> 사용자를 대신해 join/terms를 수락하지 않았다. Human spatial atlas는 14
+> aneurysm/11 control vessel과 6/3 spatial donor를 보고하지만 paired
+> preoperative image--tissue coordinate manifest가 없다. Preclinical ingrowth
+> source는 64 histology image를 쓰며 dataset은 author request이고 public
+> angiography--histology pair가 없다. ICAN table은 명시적 simulated clinical
+> data다. Schema 5.3 source of truth는
+> `docs/failure-mechanism-biology-source-audit-2026-08-10.md`와
+> `problem_selection.failure_mechanism_biology_source_audit`이다. Payload, P0,
+> primary, method, architecture, PBS/GPU, outer test와 submission identity는
+> 모두 0이며 closed Aneumo P0는 repair/rerun하지 않는다. AURORA는
+> `introai9`만 사용하고 `junjinyong`은 접속·조회·제출·모니터링하지 않는다.
+
 > **2026-08-10 Aneumo generation-lineage P0 outcome overlay:** Exact public
 > source `d3eb3d344d284aaae42db1490f2946d54c94029e`의 method-free CPU/PBS
 > job `115386.ECE-util1`은 `introai9`에서 final state `F`, exit `-29`, walltime
@@ -12,7 +35,7 @@
 > (SHA-256 `c10c65766f0f0564cbddb911f10c32a03eb41f4aa7e8adbff99094cb5ad7b30d`)다.
 > Exact outcome content `5b98fa296bc7e25f2a3cff97a4a0e3df81c64f8a`의 Quality
 > run `31341512723`과 Pages run `31341512255`는 모두 성공했다.
-> Schema 5.2는 이 candidate version을 `execution-incomplete/no scientific
+> Historical schema 5.2는 이 candidate version을 `execution-incomplete/no scientific
 > verdict`로 닫고 active shortlist, P1, primary, method, architecture, GPU,
 > outer test와 submission identity를 0으로 되돌린다. Transport repair와
 > same-contract rerun은 금지한다. `junjinyong`은 접속·조회·제출·모니터링하지

@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "5.2":
-        raise ProtocolError("The current research-state schema must be version 5.2.")
+    if protocol["schema_version"] != "5.3":
+        raise ProtocolError("The current research-state schema must be version 5.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -201,6 +201,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "longitudinal_perfusion_source_audit",
             "longitudinal_mra_growth_source_audit",
             "aneumo_lineage_split_source_audit",
+            "failure_mechanism_biology_source_audit",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "rejected_candidates",
@@ -210,12 +211,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_aneumo_generation_lineage_p0_execution_incomplete_no_primary_or_method"
+        != "no_active_shortlist_after_failure_mechanism_biology_source_rejection_aneumo_lineage_p0_remains_closed"
         or problem_selection["shortlisted_candidate"] != "none"
         or problem_selection["candidate_dataset"] != "none"
         or problem_selection["candidate_estimand"] != "unselected"
         or problem_selection["asset_access_status"]
-        != "source_level_pinned_public_small_text_csv_git_tree_and_lfs_pointer_metadata_only_registered_p0_completed_no_small_source_file_no_archive_central_directory_member_mesh_mask_point_cloud_field_or_model_weight_payload"
+        != "latest_batch_source_only_no_image_mask_histology_spatial_transcriptomic_patient_table_or_controlled_payload_aneumo_lineage_p0_history_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -225,13 +226,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_genuinely_new_or_revised_primary_sources_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0"
+        != "monitor_genuinely_new_or_revised_primary_sources_with_public_casewise_endpoint_labels_and_register_only_a_fresh_candidate_scoring_at_least_32_without_repairing_or_rerunning_aneumo_lineage_p0"
         or problem_selection["audit_document"]
-        != "docs/aneumo-lineage-split-source-audit-2026-08-10.md"
+        != "docs/failure-mechanism-biology-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "family_disjoint_transient_wss_forecasting"
+        != "cause_specific_false_positive_risk_control"
     ):
         raise ProtocolError(
             "The closed Aneumo-lineage P0 boundary must retain no active source "
@@ -313,6 +314,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "shape_derivative_informed_deformation_response",
         "synthetic_to_real_selection_on_ten_original_cases",
         "family_disjoint_transient_wss_forecasting",
+        "cause_specific_false_positive_risk_control",
+        "topaneu_post_release_attachment_consistency",
+        "directional_topology_small_lesion_bifurcation_error_control",
+        "synthetic_avatar_structural_fidelity_for_rupture_status",
+        "angiography_to_preclinical_tissue_ingrowth_translation",
+        "imaging_to_spatial_wall_cell_state_alignment",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -399,6 +406,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "observational_ctp_dci_classification",
         "generic_cross_modality_consistency",
         "tabular_vwe_hemodynamic_association_model",
+        "anatomy_compartment_false_positive_filter",
+        "directional_sect_topological_bifurcation_filter",
+        "imaging_to_spatial_transcriptomic_alignment_without_paired_coordinates",
+        "preclinical_unetplusplus_tissue_ingrowth_segmentation",
+        "generic_synthetic_tabular_privacy_utility_generation",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -3019,6 +3031,166 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "rerun, and no model/GPU/outer-test boundary."
         )
     checks.append("closed Aneumo generation-lineage metadata-P0 boundary")
+
+    failure_biology_audit = problem_selection[
+        "failure_mechanism_biology_source_audit"
+    ]
+    _require_keys(
+        failure_biology_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "any_image_mask_histology_spatial_transcriptomic_patient_table_or_controlled_payload_accessed",
+            "user_accepted_rsna_or_topaneu_terms_verified",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "anatomy_fp_open_training_ctas",
+            "anatomy_fp_open_training_aneurysms",
+            "anatomy_fp_private_test_ctas",
+            "anatomy_fp_public_rsna_test_ctas",
+            "anatomy_fp_casewise_cause_labels_public",
+            "rsna_registry_scans_minimum",
+            "rsna_registry_institutions",
+            "rsna_access",
+            "topaneu_current_total_scans_approximate",
+            "topaneu_current_location_classes_minimum",
+            "topaneu_open_use_with_attribution_stated",
+            "topaneu_verified_account_required",
+            "topaneu_payload_accessed",
+            "sect_scanner_manufacturers",
+            "sect_exact_curated_manifest_publicly_identified",
+            "spatial_atlas_total_aneurysms",
+            "spatial_atlas_total_control_vessels",
+            "spatial_atlas_aneurysm_donors",
+            "spatial_atlas_control_donors",
+            "paired_preoperative_imaging_tissue_coordinate_manifest_found",
+            "preclinical_ingrowth_histology_images",
+            "preclinical_ingrowth_dataset_public",
+            "paired_angiography_histology_manifest_public",
+            "ican_public_table_is_simulated",
+            "ican_public_medical_images",
+            "cleo_real_multicenter_records",
+            "cleo_formal_differential_privacy_guarantee",
+            "direct_prior_threats",
+            "candidates",
+            "decision",
+            "next_allowed_action",
+        ],
+        "problem_selection.failure_mechanism_biology_source_audit",
+    )
+    expected_failure_biology_scores = {
+        "cause_specific_false_positive_risk_control": 30.5,
+        "topaneu_post_release_attachment_consistency": 29.0,
+        "directional_topology_small_lesion_bifurcation_error_control": 28.0,
+        "synthetic_avatar_structural_fidelity_for_rupture_status": 25.5,
+        "angiography_to_preclinical_tissue_ingrowth_translation": 24.5,
+        "imaging_to_spatial_wall_cell_state_alignment": 21.0,
+    }
+    observed_failure_biology_scores = {
+        candidate["id"]: candidate["score"]
+        for candidate in failure_biology_audit["candidates"]
+    }
+    failure_biology_axis_sums_match = all(
+        len(candidate["axis_scores"]) == 8
+        and all(0.0 <= score <= 5.0 for score in candidate["axis_scores"])
+        and abs(sum(candidate["axis_scores"]) - candidate["score"]) < 1e-12
+        for candidate in failure_biology_audit["candidates"]
+    )
+    if (
+        failure_biology_audit["status"]
+        != "completed_source_only_all_candidates_below_admission_threshold"
+        or failure_biology_audit["audit_document"]
+        != "docs/failure-mechanism-biology-source-audit-2026-08-10.md"
+        or failure_biology_audit["automatic_selection_threshold"] != 32.0
+        or failure_biology_audit["best_candidate_id"]
+        != "cause_specific_false_positive_risk_control"
+        or failure_biology_audit["best_score"] != 30.5
+        or failure_biology_audit["best_score"]
+        >= failure_biology_audit["automatic_selection_threshold"]
+        or failure_biology_audit["active_shortlist_count"] != 0
+        or failure_biology_audit["primary_problem_selected"] is not False
+        or failure_biology_audit[
+            "any_image_mask_histology_spatial_transcriptomic_patient_table_or_controlled_payload_accessed"
+        ]
+        is not False
+        or failure_biology_audit["user_accepted_rsna_or_topaneu_terms_verified"]
+        is not False
+        or failure_biology_audit["executable_p0_registered"] is not False
+        or failure_biology_audit["method_selected"] is not False
+        or failure_biology_audit["architecture_selected"] is not False
+        or failure_biology_audit["gpu_training_authorized"] is not False
+        or failure_biology_audit["outer_test_authorized"] is not False
+        or failure_biology_audit["submission_identity_active"] is not False
+        or failure_biology_audit["execution_server"] != "introai9"
+        or failure_biology_audit["pbs_job_created"] is not False
+        or failure_biology_audit["login_node_gpu_command_executed"] is not False
+        or failure_biology_audit["junjinyong_accessed_for_this_audit"] is not False
+        or failure_biology_audit["anatomy_fp_open_training_ctas"] != 1186
+        or failure_biology_audit["anatomy_fp_open_training_aneurysms"] != 1373
+        or failure_biology_audit["anatomy_fp_private_test_ctas"] != 143
+        or failure_biology_audit["anatomy_fp_public_rsna_test_ctas"] != 843
+        or failure_biology_audit["anatomy_fp_casewise_cause_labels_public"]
+        is not False
+        or failure_biology_audit["rsna_registry_scans_minimum"] != 4000
+        or failure_biology_audit["rsna_registry_institutions"] != 18
+        or failure_biology_audit["rsna_access"]
+        != "controlled_noncommercial_no_redistribution"
+        or failure_biology_audit["topaneu_current_total_scans_approximate"] != 850
+        or failure_biology_audit["topaneu_current_location_classes_minimum"] != 50
+        or failure_biology_audit["topaneu_open_use_with_attribution_stated"]
+        is not True
+        or failure_biology_audit["topaneu_verified_account_required"] is not True
+        or failure_biology_audit["topaneu_payload_accessed"] is not False
+        or failure_biology_audit["sect_scanner_manufacturers"] != 4
+        or failure_biology_audit["sect_exact_curated_manifest_publicly_identified"]
+        is not False
+        or failure_biology_audit["spatial_atlas_total_aneurysms"] != 14
+        or failure_biology_audit["spatial_atlas_total_control_vessels"] != 11
+        or failure_biology_audit["spatial_atlas_aneurysm_donors"] != 6
+        or failure_biology_audit["spatial_atlas_control_donors"] != 3
+        or failure_biology_audit[
+            "paired_preoperative_imaging_tissue_coordinate_manifest_found"
+        ]
+        is not False
+        or failure_biology_audit["preclinical_ingrowth_histology_images"] != 64
+        or failure_biology_audit["preclinical_ingrowth_dataset_public"] is not False
+        or failure_biology_audit["paired_angiography_histology_manifest_public"]
+        is not False
+        or failure_biology_audit["ican_public_table_is_simulated"] is not True
+        or failure_biology_audit["ican_public_medical_images"] is not False
+        or failure_biology_audit["cleo_real_multicenter_records"] != 1035
+        or failure_biology_audit["cleo_formal_differential_privacy_guarantee"]
+        is not False
+        or observed_failure_biology_scores != expected_failure_biology_scores
+        or not failure_biology_axis_sums_match
+        or any(
+            candidate["payload_accessed"]
+            for candidate in failure_biology_audit["candidates"]
+        )
+        or failure_biology_audit["decision"]
+        != "reject_all_without_score_repair_image_mask_histology_spatial_transcriptomic_patient_table_controlled_payload_p0_method_architecture_pbs_or_gpu"
+        or failure_biology_audit["next_allowed_action"]
+        != "monitor_genuinely_new_or_revised_primary_sources_with_public_casewise_error_or_paired_imaging_biology_endpoints_and_register_only_a_fresh_candidate_scoring_at_least_32"
+    ):
+        raise ProtocolError(
+            "The failure-mechanism/biology audit must retain all six frozen "
+            "source-only rejections, the 30.5/40 maximum, no payload/P0/model/"
+            "PBS/GPU, and the introai9-only execution boundary."
+        )
+    checks.append("failure-mechanism/biology rejection and introai9-only boundary")
 
     venue = protocol["venue"]
     _require_keys(

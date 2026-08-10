@@ -53,11 +53,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 수 있다.
 
 ```bash
-python scripts/audit_source_watch.py \
+PYTHONPATH=src python scripts/audit_source_watch.py \
   --config configs/source_watch_v1.json \
   --validate-only
 
-python scripts/audit_source_watch.py \
+PYTHONPATH=src python scripts/audit_source_watch.py \
   --config configs/source_watch_v1.json \
   --fetch
 ```

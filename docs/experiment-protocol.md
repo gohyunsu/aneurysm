@@ -1,5 +1,11 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Current exact gate · 2026-08-10:** Failure-mechanism/biology six-candidate
+> batch의 최고점은 30.5/40으로 32 미만이다. 따라서 이번 cycle에는 executable
+> P0, PBS job, method, architecture, GPU 또는 outer test가 없다. Closed Aneumo
+> P0는 repair/rerun하지 않으며 다음 compute는 별도 fresh source가 32를 넘고
+> method-free P0가 등록된 뒤에만 `introai9`에서 가능하다.
+
 > **Current exact gate · 2026-08-10:** Aneumo generation-lineage source score
 > 35/40이 단 하나의 `introai9` PBS CPU P0를 열었다. Exact job
 > `115386.ECE-util1`은 first small source 전에 exit `-29`, walltime 20:36으로
@@ -7,7 +13,7 @@
 > central directory/member, method, architecture, GPU와 outer test 접근은 0이다.
 > 이 version은 repair, same-contract rerun과 P1 없이 닫는다.
 
-버전: 5.2 · 2026-08-10
+버전: 5.3 · 2026-08-10
 
 > **Current gate:** longitudinal-MRA growth batch 최고점은 31.5/40이다.
 > OpenNeuro의 126 raw angiogram은 63 patient에서 왔고 longitudinal patient는

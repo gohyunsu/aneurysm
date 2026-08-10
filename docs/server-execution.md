@@ -2,6 +2,16 @@
 
 최종 갱신: 2026-08-10 KST
 
+## 2026-08-10 · Failure-mechanism/biology source-only stop
+
+- All six scores are below 32; the maximum is 30.5/40. No P0 or PBS/GPU job was
+  created and no scheduler query was required.
+- This is a normal source-gate stop, not an `introai9` connection or execution
+  failure. The last Aneumo P0 remains closed without repair or rerun.
+- Any future authorized execution remains PBS-only on `introai9`.
+  `junjinyong` remains forbidden for connection, query, submission and
+  monitoring.
+
 ## 2026-08-10 · Aneumo lineage metadata P0 outcome
 
 - AURORA execution remains `introai9` PBS only. `junjinyong` is forbidden for

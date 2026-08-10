@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 failure-mechanism/biology boundary:** A fresh six-candidate
+> source screen scores cause-specific CTA false-positive risk control,
+> post-release TopAneu attachment consistency, directional topology,
+> synthetic-avatar fidelity, preclinical ingrowth translation and imaging-to-
+> spatial-wall alignment at **30.5/29.0/28.0/25.5/24.5/21.0**. All are below
+> the frozen 32/40 admission line. The strongest public CTA study already
+> evaluates anatomy-compartment filtering on 1,186 open training CTAs and two
+> external cohorts, while public casewise false-positive cause labels are
+> absent. Wall biology and healing sources lack paired imaging--tissue targets;
+> the ICAN table is explicitly simulated. The
+> [`detailed audit`](docs/failure-mechanism-biology-source-audit-2026-08-10.md)
+> therefore freezes no payload, P0, method, architecture, PBS/GPU or outer
+> test. The Aneumo P0 remains closed without repair. Execution is
+> `introai9`-only and `junjinyong` remains excluded from connection, query,
+> submission and monitoring.
+
 > **2026-08-10 Aneumo generation-lineage P0 outcome:** Corrected official
 > mapping commit `701d53d…` exposes 10,660 deformations from 427 base families.
 > The official train/validation case IDs are disjoint, but all 20 validation
