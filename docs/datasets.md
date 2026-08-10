@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Current access boundary · 2026-08-10:** AneuG-Flow dataset commit
+> `9dd418083899deddd93a67f9a6fca7a14304fa36` and official code commit
+> `4a090a0f12538deef6fcea88b81afe78ce38152e` are pinned under CC BY-SA 4.0.
+> Discovery read only metadata plus four exact 1 MiB ranges from the 9.63 GB
+> steady and 23.74 GB transient objects. No full object, torch payload or case
+> identifier was accessed; patient/case count, physical WSS recovery, 80-frame
+> schema and topology remain unaudited. The next permitted action is the same
+> bounded preflight on `introai9`, not training.
+
 > **2026-08-10 4D-CTA AAA asset boundary:** Zenodo `19182978`은 CC BY 4.0,
 > 단일 1,857,980,948-byte ZIP, 20 patient/3 centre와 환자별 2--10 cardiac
 > phase를 보고한다. Wall/ILT surface, FE mesh, strain, tension, SII와 RSII가

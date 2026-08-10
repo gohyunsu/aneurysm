@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **P0-v2a · preregistered 2026-08-10:** Preserve closed P0-v1. Run exactly one
+> `introai9` PBS CPU job with 2 CPU, 4 GB, GPU 0 and 15 minutes. It performs two
+> HEAD operations and four exact 1 MiB range reads, retry 0, then deletes range
+> bytes and stores a privacy-safe aggregate. Total read budget is 4 MiB. No
+> full object, reader, case ID, model or outer test is allowed. All checks must
+> pass to authorize only registration of a separate fixed-budget P0-v2b; any
+> failure closes this repair round. Config:
+> `configs/aneug_cycle_transport_p0_v2a.json`.
+
 > **2026-08-10 4D-CTA source gate:** Six candidates are frozen at
 > 31.5/30.5/30.0/29.0/28.5/25.5, below the unchanged 32/40 line. The 1.86 GB
 > archive and all NRRD/VTP/INP members remain unread; executable P0, model,

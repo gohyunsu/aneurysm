@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **No current architecture · schema 6.2:** AneuG-Flow P0-v2a is a
+> transport-only source gate. A GNN, Graph Transformer, neural operator,
+> temporal decoder, functional head and uncertainty module are all unselected.
+> The old GNN-centered design is direct-prior engineering, not a contribution.
+> Architecture work is forbidden until a later reader/scientific P0 and a
+> method-free task-adequacy gate establish an executable residual gap.
+
 > **2026-08-10 architecture boundary:** 4D-CTA AAA batch의 최고점은 31.5/40이라
 > 현재 선택된 GNN, CNN, Transformer, registration network, neural operator 또는
 > uncertainty model은 없다. Graph/surface encoding, diffeomorphic cycle loss,

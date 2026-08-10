@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+#PBS -N aurora_aneug_v2a
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=2:mem=4gb:ngpus=0
+#PBS -l walltime=00:15:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+
+: "${PBS_JOBID:?this preflight must run inside a PBS allocation}"
+: "${AURORA_PROJECT_ROOT:?set the exact clean public checkout}"
+: "${AURORA_GIT_COMMIT:?set the exact registered public SHA}"
+: "${AURORA_OUTPUT_ROOT:?set a private writable aggregate root}"
+: "${AURORA_PYTHON:?set an approved Python 3.9+ executable}"
+: "${AURORA_CURL:?set the exact curl executable}"
+
+if [[ ! "$AURORA_GIT_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "AURORA_GIT_COMMIT must be a full lowercase SHA." >&2
+  exit 90
+fi
+if [[ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]]; then
+  echo "source commit mismatch" >&2
+  exit 90
+fi
+if [[ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]]; then
+  echo "source checkout must be clean" >&2
+  exit 91
+fi
+if [[ ! -x "$AURORA_PYTHON" || ! -x "$AURORA_CURL" ]]; then
+  echo "python or curl is not executable" >&2
+  exit 92
+fi
+
+record_root="$AURORA_OUTPUT_ROOT/aneug_cycle_transport_p0_v2a/records"
+result_path="$record_root/result.$PBS_JOBID.json"
+status_path="$record_root/status.$PBS_JOBID.json"
+mkdir -p "$record_root"
+
+shopt -s nullglob
+for prior_status in "$record_root"/status.*.json; do
+  if grep -Fq '"protocol_id":"aneug_cycle_transport_p0_v2a"' "$prior_status"; then
+    echo "the single v2a repair round has already been used" >&2
+    exit 93
+  fi
+done
+shopt -u nullglob
+
+write_status() {
+  local state="$1"
+  local exit_code="$2"
+  local gate_evaluated="$3"
+  local temporary="$status_path.partial"
+  printf '{"protocol_id":"aneug_cycle_transport_p0_v2a","state":"%s","exit_code":%s,"public_source_commit":"%s","transport_gate_evaluated":%s,"scientific_p0_evaluated":false,"full_object_download":false,"torch_reader":false,"method":false,"gpu":false,"outer_test":false}\n' \
+    "$state" "$exit_code" "$AURORA_GIT_COMMIT" "$gate_evaluated" > "$temporary"
+  mv "$temporary" "$status_path"
+}
+
+write_status running 0 false
+completed=false
+on_exit() {
+  local exit_code=$?
+  trap - EXIT
+  if [[ "$completed" != true ]]; then
+    write_status execution_incomplete "$exit_code" false
+  fi
+  exit "$exit_code"
+}
+trap on_exit EXIT
+
+export PYTHONDONTWRITEBYTECODE=1
+export PYTHONHASHSEED=0
+export PYTHONPATH="$AURORA_PROJECT_ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
+
+set +e
+"$AURORA_PYTHON" -m aurora.aneug_cycle_transport_p0_v2a \
+  --config "$AURORA_PROJECT_ROOT/configs/aneug_cycle_transport_p0_v2a.json" \
+  --output "$result_path" \
+  --curl "$AURORA_CURL"
+audit_exit=$?
+set -e
+
+if [[ ! -s "$result_path" ]]; then
+  exit "$audit_exit"
+fi
+
+read -r result_status gate_evaluated < <(
+  "$AURORA_PYTHON" - "$result_path" <<'PY'
+import json
+import sys
+with open(sys.argv[1], encoding="utf-8") as stream:
+    result = json.load(stream)
+print(result.get("status", "invalid"), str(bool(result.get("transport_gate_evaluated"))).lower())
+PY
+)
+
+case "$result_status" in
+  completed_transport_preflight_passed)
+    write_status completed_pass 0 true
+    ;;
+  completed_transport_preflight_failed_no_scientific_verdict)
+    write_status completed_fail "$audit_exit" true
+    ;;
+  *)
+    exit 94
+    ;;
+esac
+
+completed=true
+exit "$audit_exit"

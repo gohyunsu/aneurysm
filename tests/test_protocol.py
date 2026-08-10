@@ -19,7 +19,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertGreaterEqual(len(checks), 8)
         self.assertEqual(len(canonical_hash(self.protocol)), 64)
 
-    def test_compute_is_introai9_only_and_currently_idle(self) -> None:
+    def test_compute_is_introai9_only_with_no_gpu_authority(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["project"]["execution_server"] = "junjinyong"
         with self.assertRaisesRegex(ProtocolError, "introai9-only"):
@@ -27,7 +27,7 @@ class ProtocolTests(unittest.TestCase):
 
         candidate = copy.deepcopy(self.protocol)
         candidate["project"]["current_gpu_job_count"] = 1
-        with self.assertRaisesRegex(ProtocolError, "no active GPU job"):
+        with self.assertRaisesRegex(ProtocolError, "no tracked AURORA GPU job"):
             validate_protocol(candidate)
 
     def test_dsa_prefix_candidate_is_rejected_before_payload_or_training(self) -> None:
@@ -86,18 +86,18 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "source-delta audit"):
             validate_protocol(candidate)
 
-    def test_closed_problem_selection_cannot_select_method_or_gpu(self) -> None:
+    def test_transport_reentry_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "closed Aneumo-lineage P0 boundary"):
+        with self.assertRaisesRegex(ProtocolError, "bounded AneuG-Flow transport re-entry"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "closed Aneumo-lineage P0 boundary"):
+        with self.assertRaisesRegex(ProtocolError, "bounded AneuG-Flow transport re-entry"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "closed Aneumo-lineage P0 boundary"):
+        with self.assertRaisesRegex(ProtocolError, "bounded AneuG-Flow transport re-entry"):
             validate_protocol(candidate)
 
     def test_aneumo_lineage_candidate_closes_after_one_cpu_metadata_p0(self) -> None:
@@ -994,6 +994,29 @@ class ProtocolTests(unittest.TestCase):
         ] = True
         with self.assertRaisesRegex(ProtocolError, "cycle-functional candidate"):
             validate_protocol(candidate)
+
+    def test_cycle_transport_v2a_is_one_round_cpu_only_reentry(self) -> None:
+        audit = self.protocol["problem_selection"]["aneug_cycle_transport_reentry_v2a"]
+        self.assertEqual(audit["active_shortlist_count"], 1)
+        self.assertEqual(audit["maximum_transport_repair_rounds"], 1)
+        self.assertEqual(audit["maximum_total_payload_bytes"], 4194304)
+        self.assertFalse(audit["historical_v1_failure_relabelled"])
+        self.assertFalse(audit["scientific_p0_evaluated"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertEqual(audit["execution_server"], "introai9")
+        self.assertFalse(audit["junjinyong_accessed_for_this_reentry"])
+
+        for field, value in (
+            ("maximum_transport_repair_rounds", 2),
+            ("maximum_total_payload_bytes", 8388608),
+            ("gpu_training_authorized", True),
+            ("historical_v1_failure_relabelled", True),
+        ):
+            candidate = copy.deepcopy(self.protocol)
+            candidate["problem_selection"]["aneug_cycle_transport_reentry_v2a"][field] = value
+            with self.assertRaisesRegex(ProtocolError, "P0-v2a re-entry"):
+                validate_protocol(candidate)
 
     def test_inverse_counterfactual_source_rejection_cannot_register_or_train(self) -> None:
         candidate = copy.deepcopy(self.protocol)

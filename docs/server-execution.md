@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Current execution boundary · 2026-08-10:** `junjinyong` is prohibited for
+> connection, query, transfer, submission and monitoring. The only pending
+> action is one preregistered `introai9` CPU/PBS P0-v2a (2 CPU, 4 GB, GPU 0,
+> 15 min; two HEAD + four 1 MiB reads; retry 0). No job has yet been submitted.
+> The last bounded connection attempt reset before its remote command, so no
+> current PBS queue state is claimed. Do not enter a connection or local repair
+> loop. The job may run only from an exact clean public commit and may write
+> only aggregate status/result plus ephemeral range bytes.
+
 ## 2026-08-10 · 4D-CTA source content and live site verified
 
 - Exact content `f95b73a68ddc20b993ebd5dd0d28e4645a3dafc9` passed Quality

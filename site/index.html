@@ -41,23 +41,24 @@
       <div class="hero-copy">
         <p class="eyebrow"><span>ISBI 2027 TARGET</span> 26 OCT 2026 · NOT SUBMISSION-READY</p>
         <h1>
-          A rich 4D field release is not yet a novel problem.<br>
-          <em>First prove that a residual gap remains.</em>
+          One coherent WSS field should imply one set of cycle functionals.<br>
+          <em>First prove that the exact source is auditable.</em>
         </h1>
         <p class="hero-lede">
-          새 공개 4D-CTA AAA 자산은 20명·3개 센터의 실제 cardiac CT, wall/ILT
-          surface, FE mesh와 strain·tension·SII·RSII map을 함께 제공합니다.
-          하지만 phase와 surface vertex는 독립 환자가 아니고, mechanics map은
-          동일 registration/FE workflow의 파생값이며 미래 성장·파열·치료·벽
-          강도 정답은 없습니다. AAA kinematics/RSII, equivariant·semigroup
-          registration, registration uncertainty와 functional surrogate UQ 직접
-          선행까지 반영한 최신 최고점은 31.5/40으로 admission line 32에
-          못 미칩니다. 그래서 공개 ZIP을 열거나 모델을 고르지 않았습니다.
+          순간별 wall shear stress(WSS) 벡터장이 하나라면 TAWSS·OSI·RRT도 그
+          같은 장에서 계산되어야 합니다. 이 cycle-functional 문제는 source
+          score 33/40으로 admission line을 넘었지만, 과거 P0-v1은 대형 object를
+          읽기 전에 exit 28로 끝났습니다. 그 실패는 그대로 닫아 둡니다. 새
+          P0-v2a는 단 한 번, <code>introai9</code> CPU/PBS에서 HEAD 2회와 정확한
+          1 MiB range 4개만 읽어 전송 경계를 검증합니다. 아직 scientific P0,
+          GNN, architecture, GPU 또는 논문 contribution은 선택하지 않았습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
+          <a class="button ghost" href="../docs/aneug-cycle-transport-reentry-2026-08-10.md">Current P0-v2a rationale ↗</a>
+          <a class="button ghost" href="../configs/aneug_cycle_transport_p0_v2a.json">Frozen P0-v2a ↗</a>
           <a class="button ghost" href="../docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md">Latest 4D-CTA audit ↗</a>
           <a class="button ghost" href="../docs/topbrain2-source-audit-2026-08-10.md">Latest audit ↗</a>
           <a class="button ghost" href="../docs/rsna-aws-registry-audit-2026-08-10.md">RSNA registry history ↗</a>
@@ -89,8 +90,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="풍부한 4D 영상과 표면 역학 map도 독립 임상 endpoint와 충분한 환자 단위가 필요하다는 현재 연구 경계">
-        <div class="visual-caption">4D-CTA AAA · 31.5/40 · OPEN / REJECTED</div>
+      <div class="hero-visual" aria-label="AneuG-Flow cycle-functional 후보의 조건부 source admission과 4 MiB transport-only 사전검증 경계">
+        <div class="visual-caption">AneuG-FLOW · 33/40 · CONDITIONAL P0-v2a</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -113,27 +114,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>31.5</b><span>latest best source score / 40</span>
+            <b>33</b><span>source score / 40 · not a model result</span>
           </div>
           <div class="posterior-card card-b">
-            <b>20</b><span>independent patients · not cardiac phases</span>
+            <b>4 MiB</b><span>maximum range bytes · no full object</span>
           </div>
           <div class="posterior-card card-c">
-            <b>0</b><span>admitted residual gaps</span>
+            <b>0</b><span>scientific verdicts · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> open images and fields make a strong reproducibility asset</span>
-          <span><i class="dot coral"></i> derived RSII is not future rupture or growth ground truth</span>
-          <span>active primary/model/GPU 0</span>
+          <span><i class="dot lime"></i> exact commits, object sizes and four range hashes are frozen</span>
+          <span><i class="dot coral"></i> transport pass is not a scientific or method pass</span>
+          <span>primary/architecture/GPU 0 · historical v1 remains closed</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Active shortlist</span><b>0 · selected primary 0</b></div>
-        <div><span>Current evidence</span><b>4D-CTA AAA best 31.5/40 · all six rejected</b></div>
+        <div><span>Active shortlist</span><b>1 conditional transport re-entry · selected primary 0</b></div>
+        <div><span>Current evidence</span><b>AneuG-Flow 33/40 · P0-v2a preregistered</b></div>
         <div><span>Architecture</span><b>Not selected</b></div>
-        <div><span>Next authorization</span><b>fresh ≥32 source → method-free P0</b></div>
+        <div><span>Next authorization</span><b>one introai9 CPU/PBS 4 MiB preflight</b></div>
       </div>
     </section>
 
@@ -146,7 +147,8 @@
           neural operator와 topology-aware segmentation-to-CFD는 이미 직접 계보를
           이룹니다. 새 block을 고르기 전에 target identifiability, public asset,
           independent unit와 residual algorithmic gap을 함께 검증했습니다. 두
-          조건을 동시에 만족한 후보가 없어 model을 만들지 않았습니다.
+          AneuG-Flow 후보는 source gate만 넘었습니다. Scientific asset과 task
+          adequacy는 아직 미평가이므로 model을 만들지 않았습니다.
         </p>
       </div>
 
@@ -198,18 +200,18 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">CURRENT GAP STATUS</p>
-          <h3>No active gap survives direct priors and reference adequacy.</h3>
+          <h3>One source lead survives, but no model gap is yet established.</h3>
           <p>
-            4D-CTA AAA source는 실제 영상과 surface mechanics를 공개하지만
-            confirmatory unit은 20명뿐이고, RSII는 published workflow의 파생
-            target이며 미래 임상 endpoint가 아닙니다. Registration consistency,
-            uncertainty와 field-surrogate calibration도 이미 직접 선행이
-            점유합니다. 따라서 network 선택 전에 멈췄습니다.
+            한 transient WSS field와 그 cycle functionals의 모순을 막는 문제는
+            33/40으로 source gate를 넘었습니다. 그러나 RHSIA Graph Transformer,
+            GHD, steady augmentation, functional head/loss와 temporal decoder가
+            직접 선행입니다. 따라서 먼저 exact payload의 물리 단위·schema·case
+            linkage가 검증 가능한지 단계적으로 확인해야 합니다.
           </p>
-          <div class="gap-equation" aria-label="source admission 뒤 P0가 미완료되어 모델 권한으로 이어지지 않는 관계">
-            <span>latest best source 31.5/40 &lt; 32</span>
+          <div class="gap-equation" aria-label="source admission이 transport gate를 열지만 모델 권한을 직접 열지 않는 관계">
+            <span>source 33/40 ≥ 32</span>
             <i>⇒</i>
-            <span>no payload · no P0 · no model · no GPU</span>
+            <span>4 MiB transport P0-v2a only · no model/GPU</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -240,10 +242,9 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. 최신 4D-CTA AAA audit은 open asset에도
-          불구하고 20-patient unit, derived target, missing clinical endpoint와
-          dense registration/surrogate direct priors 때문에 source admission을
-          통과하지 못했습니다.
+          현재 architecture는 없습니다. AneuG-Flow cycle-functional 후보는
+          33/40으로 source admission만 통과했고, 아직 full payload의 물리 단위,
+          schema, independent unit와 task adequacy를 검증하지 못했습니다.
           아래 흐름은 직전 Aneumo 후보가 source admission 뒤에도 왜 model
           selection에 도달하지 못했는지 보여주는 명시적 역사 기록입니다.
         </p>
@@ -592,7 +593,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>No active shortlist · no active paper identity</p>
+        <p>One conditional source re-entry · no active paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -600,7 +601,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>4D-CTA AAA best 31.5/40 · all rejected · shortlist/primary/P0/model/GPU 0</b>
+        <span>Current stage</span><b>AneuG-Flow 33/40 · transport P0-v2a preregistered · primary/model/GPU 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

@@ -122,8 +122,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "6.1":
-        raise ProtocolError("The current research-state schema must be version 6.1.")
+    if protocol["schema_version"] != "6.2":
+        raise ProtocolError("The current research-state schema must be version 6.2.")
 
     project = protocol["project"]
     _require_keys(
@@ -136,6 +136,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "allowed_pbs_queues",
             "excluded_execution_servers",
             "current_gpu_job_count",
+            "current_scheduler_observation",
             "first_future_gpu_action",
         ],
         "project",
@@ -146,17 +147,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "failed_branches_preserved_no_active_shortlist_after_four_d_cta_aaa_source_rejection_aneumo_lineage_p0_closed"
+        != "historical_failures_preserved_aneug_transport_p0_v2a_preregistered_no_primary_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
+        or project["current_scheduler_observation"]
+        != "unknown_after_connection_reset_before_remote_command_no_new_v2a_job_submitted"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
         raise ProtocolError(
             "AURORA compute must remain introai9-only with junjinyong excluded, "
-            "no active GPU job, and a scheduler smoke as the first authorized action."
+            "no tracked AURORA GPU job, an explicit unknown current scheduler state, "
+            "and a scheduler smoke as the first authorized GPU action."
         )
     checks.append("research-only project boundary")
 
@@ -187,6 +191,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "goal_oriented_segmentation_cold_audit",
             "aneux_preprocessing_orbit_candidate",
             "aneug_cycle_functional_source_audit",
+            "aneug_cycle_transport_reentry_v2a",
             "dsa_prefix_risk_source_audit",
             "source_delta_audit",
             "vascular_semantics_source_audit",
@@ -218,33 +223,35 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_shortlist_after_four_d_cta_aaa_source_rejection_aneumo_lineage_p0_remains_closed"
-        or problem_selection["shortlisted_candidate"] != "none"
-        or problem_selection["candidate_dataset"] != "none"
-        or problem_selection["candidate_estimand"] != "unselected"
+        != "one_conditional_source_reentry_aneug_transport_p0_v2a_preregistered_no_primary"
+        or problem_selection["shortlisted_candidate"]
+        != "cycle_functional_compatible_transient_wss_surrogation_transport_reentry_only"
+        or problem_selection["candidate_dataset"]
+        != "aneug_flow_exact_commit_9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or problem_selection["candidate_estimand"]
+        != "transient_wss_cycle_functionals_conditioned_on_the_same_recovered_physical_field_pending_scientific_p0"
         or problem_selection["asset_access_status"]
-        != "four_d_cta_aaa_official_open_cc_by_4_0_metadata_only_twenty_patient_single_archive_not_accessed_and_derived_mechanics_have_no_progression_or_rupture_endpoint"
+        != "aneug_flow_metadata_and_four_frozen_one_mib_discovery_ranges_only_no_full_object_reader_or_case_access"
         or problem_selection["user_accepted_data_terms_verified"] is not False
-        or problem_selection["task_unit_audited"] is not True
-        or problem_selection["annotation_selection_mechanism_audited"] is not True
+        or problem_selection["task_unit_audited"] is not False
+        or problem_selection["annotation_selection_mechanism_audited"] is not False
         or problem_selection["coarsening_at_random_assumed"] is not False
         or problem_selection["method_selected"] is not False
         or problem_selection["gpu_training_authorized"] is not False
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "seek_a_genuinely_new_source_with_independent_clinical_or_physical_ground_truth_and_sufficient_patient_units_then_run_only_a_fresh_source_audit_without_repairing_closed_branches"
+        != "execute_the_single_preregistered_introai9_cpu_pbs_aneug_cycle_transport_p0_v2a_without_full_payload_reader_model_or_gpu_access"
         or problem_selection["audit_document"]
-        != "docs/four-d-cta-aaa-mechanics-source-audit-2026-08-10.md"
+        != "docs/aneug-cycle-transport-reentry-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
         != "generation_family_disjoint_hemodynamic_operator_model_selection"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "four_d_cta_phase_subset_rsii_hotspot_preservation"
     ):
         raise ProtocolError(
-            "The closed Aneumo-lineage P0 boundary must retain no active source "
-            "shortlist, selected primary, method, GPU, outer test, P1, or repair "
-            "of closed branches."
+            "The bounded AneuG-Flow transport re-entry must retain no selected "
+            "primary, method, GPU, outer test, or repair of historical failures."
         )
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
@@ -1266,7 +1273,116 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "The cycle-functional candidate must remain closed after its exact P0 "
             "execution-incomplete outcome, with no payload, P1, model, or GPU authority."
         )
-    checks.append("closed candidate histories preserved with no active shortlist")
+    checks.append("historical cycle-functional P0 failure preserved")
+
+    cycle_reentry = problem_selection["aneug_cycle_transport_reentry_v2a"]
+    _require_keys(
+        cycle_reentry,
+        [
+            "status",
+            "audit_document",
+            "config",
+            "historical_v1_status",
+            "historical_v1_same_contract_rerun_allowed",
+            "historical_v1_failure_relabelled",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "single_failure_hypothesis",
+            "only_changed_layer",
+            "repair_round_index",
+            "maximum_transport_repair_rounds",
+            "dataset_repository_commit",
+            "dataset_license",
+            "official_code_commit",
+            "head_operations",
+            "range_operations",
+            "range_bytes_per_operation",
+            "maximum_total_payload_bytes",
+            "retry_count",
+            "local_discovery_range_bytes_read",
+            "full_object_downloaded",
+            "torch_or_pickle_reader_accessed",
+            "case_identifier_accessed",
+            "scientific_p0_evaluated",
+            "pass_authorizes",
+            "failure_action",
+            "execution_server",
+            "scheduler",
+            "resources",
+            "pbs_job_submitted",
+            "scheduler_observation",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_reentry",
+        ],
+        "problem_selection.aneug_cycle_transport_reentry_v2a",
+    )
+    if (
+        cycle_reentry["status"] != "preregistered_before_introai9_v2a_execution"
+        or cycle_reentry["audit_document"]
+        != "docs/aneug-cycle-transport-reentry-2026-08-10.md"
+        or cycle_reentry["config"] != "configs/aneug_cycle_transport_p0_v2a.json"
+        or cycle_reentry["historical_v1_status"]
+        != "closed_after_registered_p0_execution_incomplete_no_scientific_verdict"
+        or cycle_reentry["historical_v1_same_contract_rerun_allowed"] is not False
+        or cycle_reentry["historical_v1_failure_relabelled"] is not False
+        or cycle_reentry["score"] != 33.0
+        or cycle_reentry["maximum_score"] != 40.0
+        or cycle_reentry["automatic_selection_threshold"] != 32.0
+        or cycle_reentry["active_shortlist_count"] != 1
+        or cycle_reentry["primary_problem_selected"] is not False
+        or cycle_reentry["method_selected"] is not False
+        or cycle_reentry["architecture_selected"] is not False
+        or cycle_reentry["gpu_training_authorized"] is not False
+        or cycle_reentry["outer_test_authorized"] is not False
+        or cycle_reentry["submission_identity_active"] is not False
+        or cycle_reentry["single_failure_hypothesis"]
+        != "unbounded_whole_object_transport_obscured_source_reachability_before_the_v1_reader_gate"
+        or cycle_reentry["only_changed_layer"]
+        != "transport_preflight_before_any_full_object_or_reader_access"
+        or cycle_reentry["repair_round_index"] != 1
+        or cycle_reentry["maximum_transport_repair_rounds"] != 1
+        or cycle_reentry["dataset_repository_commit"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or cycle_reentry["dataset_license"] != "cc-by-sa-4.0"
+        or cycle_reentry["official_code_commit"]
+        != "4a090a0f12538deef6fcea88b81afe78ce38152e"
+        or cycle_reentry["head_operations"] != 2
+        or cycle_reentry["range_operations"] != 4
+        or cycle_reentry["range_bytes_per_operation"] != 1048576
+        or cycle_reentry["maximum_total_payload_bytes"] != 4194304
+        or cycle_reentry["retry_count"] != 0
+        or cycle_reentry["local_discovery_range_bytes_read"] != 4194304
+        or cycle_reentry["full_object_downloaded"] is not False
+        or cycle_reentry["torch_or_pickle_reader_accessed"] is not False
+        or cycle_reentry["case_identifier_accessed"] is not False
+        or cycle_reentry["scientific_p0_evaluated"] is not False
+        or cycle_reentry["pass_authorizes"]
+        != "register_one_separate_aneug_cycle_full_payload_reader_p0_v2b_with_fixed_total_transfer_budget_only"
+        or cycle_reentry["failure_action"]
+        != "close_v2a_without_second_transport_repair_round_v2b_p1_method_architecture_gpu_or_outer_test"
+        or cycle_reentry["execution_server"] != "introai9"
+        or cycle_reentry["scheduler"] != "pbs"
+        or cycle_reentry["resources"] != "select=1:ncpus=2:mem=4gb:ngpus=0"
+        or cycle_reentry["pbs_job_submitted"] is not False
+        or cycle_reentry["scheduler_observation"]
+        != "unknown_after_connection_reset_before_remote_command"
+        or cycle_reentry["login_node_gpu_command_executed"] is not False
+        or cycle_reentry["junjinyong_accessed_for_this_reentry"] is not False
+    ):
+        raise ProtocolError(
+            "The AneuG-Flow P0-v2a re-entry must remain a single bounded "
+            "introai9 CPU/PBS transport preflight with no v1 relabel, full "
+            "payload, scientific gate, method, model, GPU, or outer test."
+        )
+    checks.append("bounded AneuG-Flow P0-v2a transport re-entry")
 
     dsa_audit = problem_selection["dsa_prefix_risk_source_audit"]
     _require_keys(

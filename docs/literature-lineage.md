@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Current narrowing · 2026-08-10:** The only conditional source re-entry is
+> AneuG-Flow cycle-functional consistency at 33/40, and its immediate step is a
+> 4 MiB transport preflight—not a model. RHSIA's transient-WSS Graph
+> Transformer/GHD/steady augmentation, generic functional heads or losses,
+> POD/Fourier/DCT temporal decoders, goal-oriented operator correction,
+> scalar functional debiasing and generic E(3)-equivariant GNNs are direct
+> priors or controls. Any later novelty must survive a scientific asset gate and
+> task-adequacy audit before an architecture is designed.
+
 > **2026-08-10 4D-CTA mechanics lineage:** AAA kinematics는 regularized
 > deformable registration으로 wall displacement/strain을 이미 계산했고, 후속
 > structural-integrity 연구는 FE tension과 strain을 결합해 SII/RSII를 정의했다.

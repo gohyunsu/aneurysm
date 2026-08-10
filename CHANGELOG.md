@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-10 · AneuG-Flow transport P0-v2a preregistered
+
+- Preserved the historical 33/40 P0-v1 execution-incomplete result without
+  rerun or relabelling and froze one distinct validation-development repair
+  round around a single transport hypothesis.
+- P0-v2a is `introai9` CPU/PBS only: two HEAD requests, four exact 1 MiB
+  ranges, 4 MiB total, retry 0, no full object, reader, case ID, model, GPU or
+  outer test. Pass can register only a separately budgeted P0-v2b; fail closes
+  v2a.
+- Schema 6.2 records one conditional source shortlist but no selected primary,
+  method, architecture, scientific P0 verdict, GPU authority or paper claim.
+  Current PBS state remains unknown because the latest connection reset before
+  a remote command; no v2a job has yet been submitted. `junjinyong` remains
+  fully excluded.
+- 영향 파일: frozen config, stdlib audit CLI, CPU/PBS script, tests, rationale,
+  central protocol, research documents, overview/Learn/change UI and
+  `AGENTS.md`.
+
 ## 2026-08-10 · 4D-CTA source decision and explanatory site verified
 
 - Exact schema-6.1 scientific content

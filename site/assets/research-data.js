@@ -2,11 +2,18 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · 4D-CTA AAA mechanics best 31.5/40 and all six are rejected · active shortlist/selected primary/P0/method/architecture/GPU 0 · introai9-only future compute · not submission-ready",
-    requirement: "independent clinical or physical target plus sufficient patient units and a residual algorithmic gap ≥32 → fresh source audit before any method-free P0; do not repair closed branches",
+    status: "Target locked · AneuG-Flow source 33/40 · one conditional transport P0-v2a re-entry · selected primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "one bounded 4 MiB transport preflight → separate reader/scientific P0 and task-adequacy gates before any method; preserve closed P0-v1",
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A source-admitted physical identity still has to cross an auditable transport boundary",
+      copy: "One transient WSS vector field deterministically defines TAWSS, OSI and RRT. The source candidate scored 33/40, but historical P0-v1 exited before any processed payload or scientific check and remains closed. Distinct P0-v2a tests a single transport hypothesis with two HEAD requests and four frozen 1 MiB ranges. It reads 4 MiB total, retry 0, and cannot open a reader, case ID, model, GPU or outer test. RHSIA Graph Transformer/GHD/steady augmentation and generic functional heads, losses, temporal decoders and E(3) GNNs remain direct priors.",
+      status: "33/40 source · P0-v2a preregistered · scientific verdict/primary/model/GPU 0",
+      url: "../docs/aneug-cycle-transport-reentry-2026-08-10.md"
+    },
     {
       year: "2026.08",
       title: "Open 4D images and mechanics fields still do not manufacture an independent endpoint",
@@ -345,12 +352,19 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   competition: [
-    ["Direct prior", "4D-CTA registration → displacement/strain", "FE tension + strain → SII/RSII", "CARL/SGDIR + registration/functional UQ", "None admitted"],
-    ["Observable target", "Released derived strain/tension/SII/RSII", "20 patients · 2–10 correlated phases", "One synthetic displacement-GT case", "No future clinical or independent physical endpoint"],
-    ["Known boundary", "CC BY 4.0 · one 1.86 GB archive", "Centre/acquisition partly confounded with processing", "Generic GNN/operator/UQ is direct-prior dense", "Independent target + sufficient patient units required"],
-    ["Current decision", "Mandatory reproduction baseline", "Patient-grouped only", "No payload action", "31.5/40 reject · no P0/method/GPU"]
+    ["Direct prior", "RHSIA transient-WSS Graph Transformer", "GHD + steady augmentation", "functional head/loss + temporal decoder + E(3) GNN", "No architecture selected"],
+    ["Observable target", "steady object · 9.63 GB", "transient object · 23.74 GB", "same field must imply TAWSS/OSI/RRT", "scientific schema still unaudited"],
+    ["Known boundary", "exact dataset/code commits", "CC BY-SA 4.0", "v1 closed at exit 28 before payload", "v2a changes transport only"],
+    ["Current decision", "two HEAD", "four frozen 1 MiB ranges", "retry 0 · one round", "33/40 source · 4 MiB P0-v2a · no model/GPU"]
   ],
   gates: [
+    {
+      id: "P0-v2a",
+      title: "Can introai9 reach the exact AneuG-Flow objects within a frozen 4 MiB budget?",
+      copy: "This is a transport gate, not a scientific experiment. Two HEAD responses must match the exact repository commit, linked size/etag, Xet hash and range support; four prefix/suffix ranges must return exact byte intervals and SHA-256. Historical P0-v1 remains closed. Pass can only register a separate fixed-budget reader P0-v2b; fail ends the sole repair round.",
+      state: "Preregistered · not submitted · current scheduler state unknown · no full object/reader/model/GPU",
+      blocking: true
+    },
     {
       id: "S-4D",
       title: "Does open 4D-CTA plus released AAA mechanics identify a new model-worthy problem?",
@@ -479,6 +493,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "AneuG-Flow · exact source pair",
+      role: "conditional source lead under transport P0-v2a; not current training or outer test",
+      provenance: "CC BY-SA 4.0 · dataset 9dd4180… · code 4a090a0… · 9.63 GB steady + 23.74 GB transient · metadata + four 1 MiB discovery ranges only · full object/reader/case IDs 0 · source 33/40"
+    },
     {
       name: "4D-CTA AAA mechanics · Zenodo 19182978",
       role: "source-rejected reproducibility and future figure asset; not current training or outer test",
@@ -641,6 +660,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "research",
+      title: "AneuG-Flow transport P0-v2a is prospectively frozen",
+      copy: "Historical P0-v1 remains closed at execution-incomplete/no scientific verdict. Schema 6.2 registers one distinct repair round around one transport hypothesis: introai9 CPU/PBS, two HEAD requests, four exact 1 MiB ranges, 4 MiB total, retry 0. Pass opens only registration of a separate reader P0-v2b; fail closes v2a. No full object, case ID, scientific result, primary, method, architecture, GPU, outer test or paper claim is authorized. No v2a job is yet submitted and current scheduler state is not claimed; junjinyong is completely excluded.",
+      files: ["configs/aneug_cycle_transport_p0_v2a.json", "src/aurora/aneug_cycle_transport_p0_v2a.py", "cluster/pbs_aneug_cycle_transport_p0_v2a.pbs", "tests/test_aneug_cycle_transport_p0_v2a.py", "docs/aneug-cycle-transport-reentry-2026-08-10.md", "configs/aurora_v1.json", "site/index.html", "site/learn.html", "AGENTS.md"]
+    },
     {
       date: "2026.08.10",
       category: "site",

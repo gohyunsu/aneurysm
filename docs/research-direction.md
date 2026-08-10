@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Current schema 6.2 boundary · 2026-08-10:** AneuG-Flow's historical 33/40
+> cycle-functional source candidate has one prospective, transport-only
+> P0-v2a re-entry. This is not a GNN/operator selection. P0-v1 remains closed;
+> v2a changes only whole-object transfer into two HEAD plus four frozen 1 MiB
+> reads on `introai9` CPU/PBS. A pass opens only a separately registered reader
+> gate; a fail closes the one repair round. Primary problem, method,
+> architecture, GPU, outer test and paper identity remain unselected.
+
 > **2026-08-10 4D-CTA mechanics direction:** 공개 20-patient AAA asset은
 > 실제 cardiac 3D CTA와 surface mechanics를 함께 제공하지만, 독립 임상 정답이
 > 아니라 동일 registration/FE workflow의 strain·tension·SII·RSII 파생값이다.

@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Current submission boundary · 2026-08-10:** AURORA is not submission-ready.
+> One 33/40 source candidate is conditionally active only for a bounded
+> AneuG-Flow transport P0-v2a. There is no selected primary, model,
+> architecture, scientific result row or contribution. ISBI paper identity is
+> reconsidered only after distinct reader/scientific and task-adequacy gates;
+> transport success is never a paper result.
+
 > **2026-08-10 manuscript boundary:** The open 4D-CTA AAA release does not
 > create a paper title, numbered contribution, architecture, result row or
 > method figure. Its strongest phase-subset RSII formulation is 31.5/40, and

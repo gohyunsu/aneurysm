@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-10 AneuG-Flow bounded transport re-entry:** The historical
+> cycle-functional P0-v1 remains closed and is not relabelled. Its 33/40 source
+> score is reused only to preregister a distinct one-round P0-v2a transport
+> preflight. The exact `introai9` CPU/PBS job will issue two HEAD requests and
+> four frozen 1 MiB range reads (4 MiB total, retry 0); it cannot download the
+> 9.63/23.74 GB objects, invoke a PyTorch reader, inspect case IDs, select a
+> method or architecture, use a GPU, or access an outer test. Pass opens only
+> registration of a separately budgeted reader P0-v2b; fail closes v2a without
+> a second transport repair round. Schema **6.2** source of truth:
+> [protocol](configs/aneug_cycle_transport_p0_v2a.json) ·
+> [rationale](docs/aneug-cycle-transport-reentry-2026-08-10.md). The current
+> scheduler state is not claimed because the last connection reset preceded
+> the remote command, and no v2a job has yet been submitted. `junjinyong` is
+> excluded from every AURORA operation.
+
 > **2026-08-10 4D-CTA AAA mechanics boundary:** Official Zenodo
 > `10.5281/zenodo.19182978` is a CC BY 4.0, 20-patient/three-centre release with
 > 2--10 cardiac phases, wall/ILT surfaces, FE meshes and strain/tension/SII/RSII
@@ -197,7 +212,9 @@
 검증하는 공개 연구 저장소입니다. 기존 partial/missing-BC operator identity는
 N1c와 후속 3D gate에서 지지되지 않았고, 현재 선택된 method는 없습니다.
 
-현재 active source shortlist는 **0개**, selected primary problem도 **0개**입니다.
+현재 active source shortlist는 **조건부 1개**, selected primary problem은
+**0개**입니다. 이 shortlist는 AneuG-Flow의 4 MiB transport P0-v2a만 허용하며
+scientific P0, model 또는 GPU 권한이 아닙니다.
 Aneumo의 독립 단위를 deformation이 아닌 427개 base family로 봐야 한다는
 source-level finding은 보존하지만, exact CPU P0가 첫 small source 전에
 execution-incomplete로 끝나 scientific task gate를 평가하지 못했습니다. Split을

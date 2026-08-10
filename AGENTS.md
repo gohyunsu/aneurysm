@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-10 AneuG-Flow P0-v2a operational override:** Historical exact
+> P0-v1 (`754ed746…`, job `115168.ECE-util1`, exit 28) remains
+> execution-incomplete/no scientific verdict and closed. Under the goal's
+> bounded validation-development rule, schema 6.2 preregisters one distinct
+> transport-only re-entry for the unchanged 33/40 source candidate. The single
+> failure hypothesis is that whole-object transfer obscured reachability before
+> reader evaluation. The only changed layer is a process-bounded preflight: two
+> HEAD requests and four exact 1 MiB ranges, 4 MiB total, retry 0, one repair
+> round, `introai9` PBS CPU 2/4 GB/GPU 0/15 min. Local discovery fixed the
+> expected headers and range hashes but is not scientific evidence. No full
+> object, torch/pickle reader, case ID, method, architecture, GPU or outer test
+> is allowed. Pass permits only prospective registration of a separate fixed-
+> budget reader P0-v2b; fail closes v2a without another transport repair. The
+> current scheduler state is unknown after a connection reset before the
+> remote command; no v2a job is yet submitted. Source of truth:
+> `configs/aneug_cycle_transport_p0_v2a.json`,
+> `docs/aneug-cycle-transport-reentry-2026-08-10.md` and
+> `problem_selection.aneug_cycle_transport_reentry_v2a`. `junjinyong` must not
+> be connected to, queried, used for transfer/submission, or monitored.
+
 > **2026-08-10 4D-CTA source deployment provenance:** Exact schema-6.1
 > scientific content `f95b73a68ddc20b993ebd5dd0d28e4645a3dafc9` passed Quality
 > `31359594992` and Pages `31359594475`. Direct live checks of the overview,

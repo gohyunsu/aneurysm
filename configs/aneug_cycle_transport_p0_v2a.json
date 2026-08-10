@@ -1,0 +1,149 @@
+{
+  "schema_version": "aurora.aneug_cycle_transport_p0_v2a.v1",
+  "protocol_id": "aneug_cycle_transport_p0_v2a",
+  "status": "preregistered_before_introai9_v2a_execution",
+  "as_of": "2026-08-10",
+  "candidate": {
+    "id": "cycle_functional_compatible_transient_wss_surrogation",
+    "source_score": 33.0,
+    "maximum_score": 40.0,
+    "automatic_selection_threshold": 32.0,
+    "axis_scores": [4.0, 5.0, 4.0, 5.0, 3.0, 4.0, 4.0, 4.0],
+    "active_source_shortlist_count": 1,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false
+  },
+  "prospective_reentry": {
+    "historical_v1_config": "configs/aneug_cycle_functional_p0.json",
+    "historical_v1_execution_record": "results/aneug_cycle_functional_p0_execution_20260809.json",
+    "historical_v1_status": "execution_incomplete_no_scientific_verdict_candidate_closed",
+    "historical_v1_same_contract_rerun_allowed": false,
+    "historical_v1_failure_relabelled": false,
+    "repair_round_index": 1,
+    "maximum_transport_repair_rounds": 1,
+    "single_failure_hypothesis": "unbounded_whole_object_transport_obscured_source_reachability_before_the_v1_reader_gate",
+    "only_changed_layer": "transport_preflight_before_any_full_object_or_reader_access"
+  },
+  "source": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_repository_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "license": "cc-by-sa-4.0",
+    "official_code_repository": "WenHaoDing/AneuG-Flow",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "objects": {
+      "steady": {
+        "url": "https://huggingface.co/datasets/whding123/AneuG-Flow/resolve/9dd418083899deddd93a67f9a6fca7a14304fa36/processed_data/assembled_registered_steady_data_1k_v4.pth?download=true",
+        "bytes": 9632510050,
+        "sha256_linked_etag": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+        "xet_hash": "3325d68e3fc1a6b20abf80213bbd71c32baf52da1af5e9cd99e405529bb86a00",
+        "ranges": [
+          {
+            "id": "prefix",
+            "start": 0,
+            "end": 1048575,
+            "bytes": 1048576,
+            "sha256": "c427dc1394bf6c0c14e86a3e52ff004066660d9bfb0a16333a8c35500793b845"
+          },
+          {
+            "id": "suffix",
+            "start": 9631461474,
+            "end": 9632510049,
+            "bytes": 1048576,
+            "sha256": "416f4c703a761153fbf966a77129a97c2d1904c68f47bf2584f4e558263e5b1b"
+          }
+        ]
+      },
+      "transient": {
+        "url": "https://huggingface.co/datasets/whding123/AneuG-Flow/resolve/9dd418083899deddd93a67f9a6fca7a14304fa36/processed_data/assembled_registered_data_1k_v4.pth?download=true",
+        "bytes": 23744862051,
+        "sha256_linked_etag": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+        "xet_hash": "3779ed5392d38eefc55e43fb9db42e108a15f0f8bdce0899b699f14aec8393f4",
+        "ranges": [
+          {
+            "id": "prefix",
+            "start": 0,
+            "end": 1048575,
+            "bytes": 1048576,
+            "sha256": "ee53973d872f42c717e5ca1020c9a8ef71049aaa98862b38c508aeebf9c82a87"
+          },
+          {
+            "id": "suffix",
+            "start": 23743813475,
+            "end": 23744862050,
+            "bytes": 1048576,
+            "sha256": "2a2d95cf0b4b01df06eba293c8ee82081ec1875fb00cfec685656864f43522ce"
+          }
+        ]
+      }
+    }
+  },
+  "discovery_boundary": {
+    "local_head_requests_completed": 2,
+    "local_range_requests_completed": 4,
+    "local_range_bytes_read": 4194304,
+    "full_object_downloaded": false,
+    "torch_payload_deserialized": false,
+    "case_identifier_accessed": false,
+    "scientific_gate_evaluated": false,
+    "purpose": "freeze_expected_transport_identity_only_not_model_or_scientific_evidence"
+  },
+  "transport": {
+    "head_operations": 2,
+    "range_operations": 4,
+    "range_bytes_per_operation": 1048576,
+    "maximum_total_payload_bytes": 4194304,
+    "retry_count": 0,
+    "connect_timeout_seconds": 10,
+    "head_max_time_seconds": 45,
+    "range_max_time_seconds": 90,
+    "process_timeout_slack_seconds": 15,
+    "maximum_curl_file_size_bytes": 2097152,
+    "resume_allowed": false,
+    "full_object_download_allowed": false,
+    "torch_or_pickle_reader_allowed": false
+  },
+  "gate": {
+    "all_checks_required": true,
+    "checks": [
+      "both_head_redirects_resolve_to_http_200",
+      "x_repo_commit_matches_exact_dataset_commit",
+      "x_linked_size_matches_each_full_object",
+      "x_linked_etag_matches_each_full_sha256",
+      "accept_ranges_is_bytes",
+      "xet_hash_matches_each_exact_object",
+      "all_four_ranges_return_http_206_and_exact_content_range",
+      "all_four_range_sizes_and_sha256_match",
+      "total_payload_bytes_do_not_exceed_4194304",
+      "no_full_object_reader_case_identifier_model_gpu_or_outer_test_access"
+    ],
+    "pass_status": "completed_transport_preflight_passed",
+    "pass_authorizes": "register_one_separate_aneug_cycle_full_payload_reader_p0_v2b_with_fixed_total_transfer_budget_only",
+    "failure_action": "close_v2a_without_second_transport_repair_round_v2b_p1_method_architecture_gpu_or_outer_test",
+    "does_not_authorize": [
+      "scientific_p0_pass",
+      "p1_task_adequacy",
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution",
+      "submission_identity"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "resources": "select=1:ncpus=2:mem=4gb:ngpus=0",
+    "walltime": "00:15:00",
+    "source_commit_rule": "exact_clean_public_git_head_at_execution",
+    "private_write_scope": "aggregate_result_status_and_ephemeral_range_bytes_only",
+    "gpu_requested": false,
+    "login_node_gpu_command": false,
+    "excluded_server": "junjinyong"
+  }
+}
