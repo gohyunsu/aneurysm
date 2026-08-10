@@ -208,6 +208,44 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "material source change"):
             validate_protocol(candidate)
 
+    def test_virtual_removal_pair_corrects_source_but_opens_no_model(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "expert_virtual_removal_pair_source_delta"
+        ]
+        self.assertEqual(audit["score"], 28.5)
+        self.assertEqual(sum(audit["axis_scores"]), 28.5)
+        self.assertEqual(audit["figshare_file_count"], 30)
+        self.assertEqual(
+            audit["figshare_canonical_name_size_md5_manifest_sha256"],
+            "875cc1f92f586ab4c9fba8b28180b57fa2c2e58657c6a98c2fb98e128e04a2fb",
+        )
+        self.assertEqual(audit["independent_paired_case_units"], 10)
+        self.assertTrue(audit["target_is_investigator_virtual_removal"])
+        self.assertFalse(
+            audit["target_is_observed_same_patient_preaneurysm_anatomy"]
+        )
+        self.assertTrue(audit["license_statements_conflict"])
+        self.assertFalse(audit["payload_accessed"])
+        self.assertFalse(audit["surface_vector_e0_satisfied"])
+        self.assertFalse(audit["executable_p0_registered"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["server_queried"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "expert_virtual_removal_pair_source_delta"
+        ]["target_is_observed_same_patient_preaneurysm_anatomy"] = True
+        with self.assertRaisesRegex(ProtocolError, "virtual-removal pair"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "expert_virtual_removal_pair_source_delta"
+        ]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "virtual-removal pair"):
+            validate_protocol(candidate)
+
     def test_aneumo_bc_transport_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneumo_bc_transport_source_audit"]

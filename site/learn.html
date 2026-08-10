@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#pair-correction" data-chapter-link>Source correction</a>
       <a href="#architecture" data-chapter-link>Architecture</a>
       <a href="#datasets" data-chapter-link>Data</a>
       <a href="#experiments" data-chapter-link>Experiments</a>
@@ -76,6 +77,27 @@
             gap이 확인되기 전에는 모델과 GPU를 열지 않습니다.
           </p>
           <a href="../docs/surface-vector-conditional-assessment-2026-08-10.md">현재 비판적 판정 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="pair-correction">
+          <span>새로 확인한 virtual-removal pair는 무엇을 바꾸나?</span>
+          <strong>“공개된 제거 pair가 전혀 없다”는 사실만 고칩니다.</strong>
+          <p>
+            Figshare v3에는 동맥류가 있는 표면 10개, 전문가가 동맥류를 가상으로
+            제거한 대응 표면 10개, matched control 10개가 있습니다. 따라서 한
+            전문가의 제거 결과를 모사하는 평가는 가능해 보입니다. 그러나 제거
+            표면은 같은 환자를 질병 전에 촬영한 실제 healthy anatomy가 아닙니다.
+            논문은 두 번째 관찰자 민감도 분석을 보고하지만 공개 manifest에는
+            case당 한 제거면만 보입니다. 독립 paired unit도 10개뿐입니다.
+          </p>
+          <p>
+            더구나 repository 상단은 CC BY 4.0, 설명은 CC BY-NC 3.0과 bona-fide
+            researcher 제한을 적어 서로 충돌합니다. 그래서 VTP는 읽지 않았고,
+            엄격한 조건을 우선 적용했습니다. SynVA/AneuG, point completion,
+            AneuSI와 counterfactual reconstruction이 직접 선행이므로 새 formulation은
+            28.5/40으로 기각했습니다. 이 자산에는 시간별 WSS가 없어서 surface-
+            vector E0도 열지 않습니다.
+          </p>
+          <a href="../docs/expert-virtual-removal-pair-source-delta-2026-08-11.md">점수표·선행연구·라이선스 판정 전체 읽기 ↗</a>
         </div>
         <div class="answer-card">
           <span>WSS 접선 벡터장이란?</span>

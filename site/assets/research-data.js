@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · surface-vector retained only as inactive conditional hypothesis · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
-    requirement: "a genuinely fresh problem or materially changed surface-vector source must pass E0 source entry, method-free stability and failure-mechanism gates before architecture or GPU; wrapper/downloader/ retry/model renaming cannot reopen the closed contract",
+    status: "Target locked · latest expert virtual-removal pair 28.5/40 rejected · surface-vector retained only as inactive conditional hypothesis · exact 32.0/40 P0 history closed with 0/10 checks · active lead/primary/method/architecture/P0/P1/GPU 0 · introai9-only · not submission-ready",
+    requirement: "a genuinely fresh problem or materially changed surface-vector field source must pass E0 source entry, method-free stability and failure-mechanism gates before architecture or GPU; a geometry-only virtual-removal pair and wrapper/downloader/retry/model renaming cannot reopen the closed contract",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A public virtual-removal pair corrects the inventory, not the counterfactual",
+      copy: "Figshare 1159108 v3 exposes ten pathological surfaces, ten corresponding expert virtual-removal surfaces and ten matched controls. This corrects the old broad pair-absence premise. The target is nevertheless an investigator construction that mimics pre-aneurysm anatomy, not observed same-patient healthy anatomy; one public removal per case cannot identify reader uncertainty. The top-level CC BY 4.0 field conflicts with the description's CC BY-NC 3.0 plus researcher restriction. With only ten paired units and dense SynVA/AneuG, completion, isolation and counterfactual priors, the fresh formulation scores 28.5/40. No VTP payload, P0, method or compute is authorized, and the geometry-only asset does not satisfy surface-vector E0.",
+      status: "Source correction · 28.5/40 rejected · payload/P0/method/architecture/GPU 0",
+      url: "../docs/expert-virtual-removal-pair-source-delta-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Surface-vector structure remains a hypothesis, not an active model identity",
@@ -592,6 +599,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "Figshare 1159108 v3 · expert virtual-removal pairs",
+      role: "source-rejected ten-case expert-construction evaluation asset; not training, biological counterfactual or surface-vector E0",
+      provenance: "30 VTP files/163,634,666 bytes · 10 pathological + 10 virtual-removal + 10 matched control · one public removal per paired case · API CC BY 4.0 conflicts with description CC BY-NC 3.0 + researcher restriction · payload 0 · 28.5/40"
+    },
+    {
       name: "OpenNeuro ds003949 · closed containment P0 history",
       role: "closed metadata-P0 source history; no active acquisition, training or outer-test role",
       provenance: "CC0 · tag 1.0.1 / commit 896b884… · source-audit mapping 284 = 246 weak + 38 precise · exact introai9 job 115622 F/exit 1/2:24 · 310-byte status only · 0/10 checks · no NIfTI/clinical/model payload · no rerun/P1/GPU"
@@ -768,6 +780,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 7.4 corrects the expert virtual-removal pair inventory without opening a method",
+      copy: "Official Figshare v3 metadata registers 30 checksum-pinned VTP files totaling 163,634,666 bytes: ten pathological cases, ten virtual-removal partners and ten matched controls. The new evidence corrects the old broad pair-absence premise, but the removal is an investigator-created proxy rather than observed pre-aneurysm anatomy, the paired unit is ten, a second-reader pair is not in the public manifest and license statements conflict. Direct priors reduce the fresh score to 28.5/40. No VTP payload, P0, model, architecture, server query, PBS/GPU job, outer test or claim is created; the asset has no transient WSS and does not satisfy surface-vector E0.",
+      files: ["docs/expert-virtual-removal-pair-source-delta-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

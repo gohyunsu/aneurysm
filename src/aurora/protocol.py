@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.3":
-        raise ProtocolError("The current research-state schema must be version 7.3.")
+    if protocol["schema_version"] != "7.4":
+        raise ProtocolError("The current research-state schema must be version 7.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,7 +148,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_surface_vector_retained_as_inactive_conditional_hypothesis_only"
+        != "no_active_problem_virtual_removal_pair_rejected_surface_vector_retained_inactive"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -223,6 +223,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneug_target_construction_source_audit",
             "aneug_surface_vector_structure_source_audit",
             "surface_vector_conditional_assessment",
+            "expert_virtual_removal_pair_source_delta",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -233,13 +234,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_surface_vector_closed_history_and_inactive_conditional_hypothesis_only"
+        != "no_active_problem_latest_virtual_removal_pair_rejected_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "p0_execution_incomplete_no_completed_or_retained_probe_payload_scientific_gate_unevaluated"
+        != "source_only_figshare_v3_metadata_verified_no_vtp_payload_latest_p0_history_closed"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -251,11 +252,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_audit_or_material_surface_vector_source_change_for_new_e0_not_same_contract_repair_rerun_or_training"
         or problem_selection["audit_document"]
-        != "docs/surface-vector-conditional-assessment-2026-08-10.md"
+        != "docs/expert-virtual-removal-pair-source-delta-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "time_varying_surface_wss_index_structure_prediction_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "surface_vector_tangency_and_functional_commutation"
+        != "expert_virtual_removal_pair_counterfactual_emulation"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
@@ -1006,6 +1007,128 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "whose exact P0 is closed and whose re-entry requires a material source change."
         )
     checks.append("inactive surface-vector hypothesis and material re-entry boundary")
+    removal_delta = problem_selection["expert_virtual_removal_pair_source_delta"]
+    _require_keys(
+        removal_delta,
+        [
+            "status",
+            "audit_document",
+            "candidate_id",
+            "score",
+            "maximum_score",
+            "automatic_selection_threshold",
+            "axis_scores",
+            "active_shortlist_count",
+            "figshare_article_id",
+            "figshare_doi",
+            "figshare_version",
+            "figshare_file_count",
+            "figshare_total_bytes",
+            "figshare_canonical_name_size_md5_manifest_sha256",
+            "pathological_case_surfaces",
+            "virtual_removal_case_surfaces",
+            "matched_control_surfaces",
+            "independent_paired_case_units",
+            "top_level_license",
+            "description_license",
+            "license_statements_conflict",
+            "payload_accessed",
+            "official_paper_doi",
+            "target_is_investigator_virtual_removal",
+            "target_is_observed_same_patient_preaneurysm_anatomy",
+            "second_observer_sensitivity_reported_in_paper",
+            "second_observer_pair_exposed_in_public_manifest",
+            "surface_vector_e0_satisfied",
+            "phase_resolved_wss_field_available",
+            "direct_prior_threats",
+            "executable_p0_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "server_queried",
+            "pbs_job_created",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_allowed_action",
+        ],
+        "expert virtual-removal pair source delta",
+    )
+    if (
+        removal_delta["status"]
+        != "completed_source_only_rejected_below_admission_threshold"
+        or removal_delta["audit_document"]
+        != "docs/expert-virtual-removal-pair-source-delta-2026-08-11.md"
+        or removal_delta["candidate_id"]
+        != "expert_virtual_removal_pair_counterfactual_emulation"
+        or removal_delta["score"] != 28.5
+        or removal_delta["maximum_score"] != 40.0
+        or removal_delta["automatic_selection_threshold"] != 32.0
+        or removal_delta["axis_scores"]
+        != [4.5, 3.0, 1.5, 3.5, 1.5, 5.0, 5.0, 4.5]
+        or sum(removal_delta["axis_scores"]) != removal_delta["score"]
+        or removal_delta["active_shortlist_count"] != 0
+        or removal_delta["figshare_article_id"] != 1159108
+        or removal_delta["figshare_doi"] != "10.6084/m9.figshare.1159108.v3"
+        or removal_delta["figshare_version"] != 3
+        or removal_delta["figshare_file_count"] != 30
+        or removal_delta["figshare_total_bytes"] != 163634666
+        or removal_delta["figshare_canonical_name_size_md5_manifest_sha256"]
+        != "875cc1f92f586ab4c9fba8b28180b57fa2c2e58657c6a98c2fb98e128e04a2fb"
+        or removal_delta["pathological_case_surfaces"] != 10
+        or removal_delta["virtual_removal_case_surfaces"] != 10
+        or removal_delta["matched_control_surfaces"] != 10
+        or removal_delta["independent_paired_case_units"] != 10
+        or removal_delta["top_level_license"] != "CC_BY_4_0"
+        or removal_delta["description_license"]
+        != "CC_BY_NC_3_0_plus_bona_fide_researcher_restriction"
+        or removal_delta["license_statements_conflict"] is not True
+        or removal_delta["official_paper_doi"] != "10.1007/s10237-016-0804-3"
+        or removal_delta["target_is_investigator_virtual_removal"] is not True
+        or removal_delta["target_is_observed_same_patient_preaneurysm_anatomy"]
+        is not False
+        or removal_delta["second_observer_sensitivity_reported_in_paper"] is not True
+        or removal_delta["second_observer_pair_exposed_in_public_manifest"] is not False
+        or removal_delta["surface_vector_e0_satisfied"] is not False
+        or removal_delta["phase_resolved_wss_field_available"] is not False
+        or set(removal_delta["direct_prior_threats"])
+        != {
+            "original_virtual_removal_and_wss_initiation_analysis",
+            "synva_healthy_vessel_generation_and_localized_aneurysm_editing",
+            "aneug_morphology_conditioned_aneurysm_surface_generation",
+            "intra_point_cloud_vessel_and_aneurysm_completion",
+            "aneusi_automatic_aneurysm_and_neck_surface_isolation",
+            "generic_counterfactual_reconstruction_and_anomaly_localization",
+        }
+        or any(
+            removal_delta[key] is not False
+            for key in (
+                "payload_accessed",
+                "executable_p0_registered",
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "server_queried",
+                "pbs_job_created",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or removal_delta["decision"]
+        != "correct_historical_pair_absence_premise_but_reject_new_version_without_payload_p0_method_architecture_gpu_outer_test_or_claim"
+        or removal_delta["next_allowed_action"]
+        != "fresh_problem_level_source_audit_or_explicit_license_clarification_for_a_new_asset_audit_only_not_training"
+    ):
+        raise ProtocolError(
+            "The expert virtual-removal pair must remain a source-only 28.5/40 "
+            "rejection: it is not an observed healthy counterfactual or a "
+            "surface-vector E0 asset and authorizes no payload, method, or compute."
+        )
+    checks.append("expert virtual-removal pair source-only rejection boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -1132,6 +1255,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "remap_then_integrate_vs_integrate_then_remap_transient_functionals",
         "split_blind_normalization_provenance",
         "test_blind_checkpoint_and_prefix_split_reaudit",
+        "expert_virtual_removal_pair_counterfactual_emulation",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {

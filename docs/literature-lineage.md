@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.4 pair correction · 2026-08-11:** The public Figshare pair removes
+> “no expert virtual-removal pair exists” from the gap. It does not remove the
+> actual gap—there is no observed biological pre-aneurysm target or released
+> reader distribution. More importantly, the method space is already occupied
+> by the original virtual-removal WSS study, SynVA healthy-vessel generation and
+> aneurysm editing, AneuG conditional surface generation, IntrACompletion,
+> AneuSI and generic counterfactual reconstruction. A named inverse editor or
+> GNN is therefore not novelty. The fresh 28.5/40 version is rejected and is not
+> a surface-vector E0 asset. [Exact audit](expert-virtual-removal-pair-source-delta-2026-08-11.md).
+
 > **Schema 7.3 calibrated lineage · 2026-08-10:** The remaining surface-vector
 > gap is not Hodge, DEC, equivariance, topology loss, critical-point extraction
 > or trajectory tracking. It is the still-unverified conjunction of (i) a

@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 expert virtual-removal source-delta override · schema 7.4:**
+> Figshare `1159108` v3 exposes 30 checksum-pinned VTP objects: ten pathological
+> cases, ten corresponding expert virtual-removal surfaces and ten matched
+> controls, totaling 163,634,666 bytes. This corrects the historical pair-
+> absence premise only. The removal is investigator-created to mimic a
+> pre-aneurysm geometry, not observed same-patient healthy anatomy; the public
+> manifest exposes one removal per case although the paper reports a second-
+> observer sensitivity analysis. The independent paired unit is 10. The API's
+> CC BY 4.0 field conflicts with the description's CC BY-NC 3.0 plus bona-fide-
+> researcher restriction, so no VTP payload is accessed. Fresh score is
+> **28.5/40**, below 32, and must not be repaired. This is not surface-vector E0
+> because it has no phase-resolved WSS field. Active shortlist, P0, method,
+> architecture, GPU, outer test, result row and paper contribution remain 0.
+> Historical inverse-editing 27/40 and surface-vector 32/40/P0 outcomes remain
+> immutable. Source of truth is
+> `docs/expert-virtual-removal-pair-source-delta-2026-08-11.md` and schema 7.4.
+> No server was queried or job created. Use only `introai9` for any later
+> gate-authorized PBS work and never access or monitor `junjinyong`.
+
 > **2026-08-10 surface-vector conditional-assessment override · schema 7.3:**
 > The surface-vector idea is retained only as an inactive, falsifiable
 > application hypothesis: field-error-matched transient-WSS surrogates may

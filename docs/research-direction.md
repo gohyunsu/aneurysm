@@ -1,5 +1,17 @@
 # AURORA 연구 방향
 
+> **Schema 7.4 direction · 2026-08-11:** A public ten-case expert virtual-
+> removal pair corrects the historical source inventory, but it does not make
+> inverse editing identifiable as biological counterfactual recovery. It
+> supports at most expert-removal emulation, with no released reader
+> distribution, only ten paired units and conflicting license statements.
+> SynVA/AneuG, point completion, surface isolation and counterfactual
+> reconstruction leave little residual method gap. The fresh candidate is
+> rejected at 28.5/40 without payload or compute. Because the release has no
+> transient WSS field, it also does not satisfy surface-vector E0. There remains
+> no active problem, method, architecture or GPU job. See the
+> [source-delta audit](expert-virtual-removal-pair-source-delta-2026-08-11.md).
+
 > **Schema 7.3 critical direction · 2026-08-10:** Surface-vector WSS is neither
 > discarded nor active. It is retained as a falsifiable hypothesis that models
 > matched on field error may disagree on robust signed critical points and

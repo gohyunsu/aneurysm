@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.4 no-model boundary · 2026-08-11:** The newly verified expert
+> virtual-removal pair changes source inventory, not model authority. A mesh
+> completion network, diffusion editor, GNN, GHD/VAE, cycle loss or uncertainty
+> head cannot convert one virtual construction per ten cases into observed
+> healthy anatomy or reader-distribution ground truth. The candidate is rejected
+> at 28.5/40 and the asset has no transient WSS field, so neither inverse-editing
+> development nor surface-vector E0 is open. Current architecture and GPU
+> authorization remain unselected/false.
+
 > **Schema 7.3 candidate-only architecture · 2026-08-10:** No architecture is
 > selected. If a materially new source version passes method-free stability and
 > field-error-matched failure-mechanism gates, one candidate may represent WSS

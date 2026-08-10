@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-11 · Schema 7.4 corrects the public virtual-removal asset record
+
+- Verified official Figshare v3 metadata for 30 checksum-pinned VTP files:
+  ten pathological cases, ten paired virtual-removal surfaces and ten matched
+  controls, totaling 163,634,666 bytes; no VTP payload was accessed.
+- Corrected the old broad pair-absence premise without relabeling its 27/40
+  Aneumo/IntrA decision. The new pair is an investigator-created target, not an
+  observed same-patient biological counterfactual, and has only ten independent
+  paired cases.
+- Recorded the repository license conflict (top-level CC BY 4.0 versus the
+  description's CC BY-NC 3.0 plus researcher restriction) and froze the stricter
+  no-payload boundary pending explicit clarification.
+- Rejected the fresh formulation at 28.5/40. SynVA/AneuG, IntrACompletion,
+  AneuSI, virtual-removal WSS analysis and counterfactual reconstruction are
+  direct priors. The asset has no phase-resolved WSS and does not satisfy
+  surface-vector E0.
+- Created no P0, split, method, architecture, PBS/GPU job, outer test, result or
+  contribution. No server was queried; `introai9` remains the only allowed
+  execution target and `junjinyong` remains prohibited.
+
 ## 2026-08-10 · Schema 7.3 retains an inactive surface-vector hypothesis
 
 - Accepted the falsifiable possibility that field-error-matched transient-WSS

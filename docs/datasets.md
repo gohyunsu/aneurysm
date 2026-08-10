@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.4 Figshare virtual-removal role · 2026-08-11:** Record `1159108`
+> v3 registers ten pathological surfaces, ten expert virtual-removal partners
+> and ten matched controls (30 VTP files, 163,634,666 bytes). No VTP body was
+> accessed. This is a ten-case expert-construction evaluation asset, not an
+> observed same-patient healthy counterfactual and not a transient-WSS dataset.
+> The top-level CC BY 4.0 field conflicts with the description's CC BY-NC 3.0
+> plus bona-fide-researcher restriction; use the stricter boundary pending
+> clarification. The 28.5/40 rejection authorizes neither acquisition nor
+> training and does not satisfy surface-vector E0.
+
 > **Schema 7.2 AneuG raw-probe outcome · 2026-08-10:** The exact three-probe
 > P0 ended execution-incomplete before any scientific aggregate. No persistent
 > probe cache, raw scheduler log, blood field, processed archive, checkpoint,

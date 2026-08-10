@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 source correction · schema 7.4:** Figshare v3 does contain ten
+> pathological surfaces paired with ten expert virtual-removal surfaces, plus
+> ten matched controls. This corrects the broad historical impression that no
+> public removal pair exists. It does not provide observed pre-aneurysm anatomy,
+> reader-distribution ground truth or phase-resolved WSS. The top-level
+> `CC BY 4.0` metadata also conflicts with the description's `CC BY-NC 3.0` and
+> bona-fide-researcher restriction. The fresh expert-emulation formulation is
+> therefore frozen and rejected at **28.5/40** without VTP payload, P0, method,
+> architecture, GPU, outer test or paper claim. It does not satisfy surface-
+> vector E0 or reopen the closed P0. [Detailed audit](docs/expert-virtual-removal-pair-source-delta-2026-08-11.md)
+
 > **2026-08-10 critical assessment · schema 7.3:** The surface-vector direction
 > is retained as an **inactive conditional hypothesis**, not an active paper
 > identity. The testable claim is that field-error-matched transient-WSS

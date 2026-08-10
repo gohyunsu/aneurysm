@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.4 submission boundary · 2026-08-11:** The ten-case expert virtual-
+> removal pair is useful for an interpretable pathological/removed/control
+> figure, but not sufficient evidence for a new ISBI method. It is a pseudo-
+> counterfactual target with one public removal per case, conflicting license
+> statements and dense direct priors. The 28.5/40 formulation receives no title,
+> contribution, result row, model or GPU experiment. It also lacks transient WSS
+> and cannot reopen the surface-vector paper identity. The manuscript remains
+> **not submission-ready**.
+
 > **Schema 7.3 submission assessment · 2026-08-10:** A future surface-vector
 > application paper is plausible only if a material new source version first
 > establishes stable structure and a distinct field-error-matched failure
