@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 7.2 AneuG raw-probe outcome · 2026-08-10:** The exact three-probe
+> P0 ended execution-incomplete before any scientific aggregate. No persistent
+> probe cache, raw scheduler log, blood field, processed archive, checkpoint,
+> model, clinical object or outer test was retained. Transient partial bytes are
+> not reconstructable, so completed probe count is unknown rather than imputed.
+> The six pinned objects remain source-registration history, not an audited
+> training dataset. This version is closed without repair, rerun or P1.
+
 > **Schema 7.1 AneuG raw-probe role · 2026-08-10:** Dataset commit
 > `9dd418083899deddd93a67f9a6fca7a14304fa36` is admitted only for three
 > lexicographically fixed raw wall-tensor/OBJ pairs: `stable_0`, `stable_100`

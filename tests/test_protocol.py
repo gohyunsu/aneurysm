@@ -129,20 +129,30 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "AneuG target-construction"):
             validate_protocol(candidate)
 
-    def test_aneug_surface_vector_structure_lead_only_opens_cpu_p0(self) -> None:
+    def test_aneug_surface_vector_structure_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneug_surface_vector_structure_source_audit"]
-        self.assertEqual(problem["conditional_source_lead_count"], 1)
-        self.assertEqual(
-            problem["shortlisted_candidate"],
-            "time_varying_surface_wss_index_structure_prediction",
-        )
+        self.assertEqual(problem["conditional_source_lead_count"], 0)
+        self.assertIsNone(problem["shortlisted_candidate"])
         self.assertEqual(audit["score"], 32.0)
         self.assertEqual(sum(audit["axis_scores"]), 32.0)
         self.assertEqual(audit["registered_probe_cases"], 3)
         self.assertEqual(audit["registered_total_bytes"], 276642685)
         self.assertTrue(audit["executable_p0_registered"])
-        self.assertFalse(audit["p0_job_submitted"])
+        self.assertTrue(audit["p0_job_submitted"])
+        self.assertEqual(audit["p0_job_id"], "115645.ECE-util1")
+        self.assertEqual(audit["p0_final_job_state"], "E")
+        self.assertEqual(audit["p0_exit_status"], 2)
+        self.assertEqual(audit["p0_registered_high_level_checks_evaluated"], 0)
+        self.assertFalse(audit["p0_aggregate_scientific_result_materialized"])
+        self.assertFalse(audit["p0_raw_scheduler_output_materialized"])
+        self.assertFalse(audit["p0_scientific_gate_evaluated"])
+        self.assertFalse(audit["p1_registration_authorized"])
+        execution_path = ROOT / audit["p0_execution_record"]
+        self.assertEqual(
+            hashlib.sha256(execution_path.read_bytes()).hexdigest(),
+            audit["p0_execution_record_sha256"],
+        )
         self.assertFalse(audit["field_or_mesh_payload_accessed"])
         self.assertEqual(audit["execution_server"], "introai9")
         self.assertEqual(audit["pbs_ngpus"], 0)
@@ -153,14 +163,14 @@ class ProtocolTests(unittest.TestCase):
         candidate["problem_selection"][
             "aneug_surface_vector_structure_source_audit"
         ]["score"] = 32.5
-        with self.assertRaisesRegex(ProtocolError, "surface-vector structure lead"):
+        with self.assertRaisesRegex(ProtocolError, "surface-vector structure"):
             validate_protocol(candidate)
 
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"][
             "aneug_surface_vector_structure_source_audit"
         ]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "surface-vector structure lead"):
+        with self.assertRaisesRegex(ProtocolError, "surface-vector structure"):
             validate_protocol(candidate)
 
     def test_aneumo_bc_transport_p0_closes_execution_incomplete(self) -> None:
@@ -169,7 +179,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["score"], 33.5)
         self.assertAlmostEqual(sum(audit["axis_scores"]), 33.5)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
-        self.assertEqual(problem["conditional_source_lead_count"], 1)
+        self.assertEqual(problem["conditional_source_lead_count"], 0)
         self.assertTrue(audit["p0_registered"])
         self.assertEqual(audit["p0_train_base_families"], [1])
         self.assertEqual(audit["p0_cases"], [1, 2])
@@ -667,7 +677,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["outer_test_authorized"])
         self.assertEqual(audit["conditional_source_lead_count"], 1)
         self.assertEqual(
-            self.protocol["problem_selection"]["conditional_source_lead_count"], 1
+            self.protocol["problem_selection"]["conditional_source_lead_count"], 0
         )
         self.assertTrue(
             all(not item["payload_accessed"] for item in audit["candidates"])
@@ -683,11 +693,8 @@ class ProtocolTests(unittest.TestCase):
     def test_openneuro_containment_p0_closes_execution_incomplete(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["openneuro_containment_morphometry_source_audit"]
-        self.assertEqual(problem["conditional_source_lead_count"], 1)
-        self.assertEqual(
-            problem["shortlisted_candidate"],
-            "time_varying_surface_wss_index_structure_prediction",
-        )
+        self.assertEqual(problem["conditional_source_lead_count"], 0)
+        self.assertIsNone(problem["shortlisted_candidate"])
         self.assertEqual(audit["score"], 32.5)
         self.assertAlmostEqual(sum(audit["axis_scores"]), 32.5)
         self.assertEqual(audit["public_weak_subjects"], 246)

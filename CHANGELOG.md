@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-10 · Schema 7.2 closes the surface-vector P0 without a verdict
+
+- Submitted exact public source `8a06de209892c09fe4adf86a3125a612a5030d9f`
+  once to `introai9` PBS as CPU-only job `115645.ECE-util1`; it ended `E`/exit
+  2 after 00:27:02 with CPU time 00:00:06, peak memory 625,780 kB and GPU 0.
+- Retained only a 301-byte private status and a 588-byte bounded private result.
+  No aggregate scientific result, raw scheduler log or persistent probe cache
+  exists, so 0/10 registered checks were evaluated and the low-level cause is
+  unresolved.
+- Preserved the exact 32.0/40 source finding but closed this candidate version
+  as execution-incomplete/no scientific verdict. Same-contract repair/rerun,
+  P1, method, architecture, GPU, outer test, paper contribution and submission
+  identity remain unauthorized; active shortlist and conditional lead are 0.
+- Added `results/aneug_surface_vector_structure_p0_execution_20260810.json` and
+  strengthened the direct-prior boundary: Hodge Spectral Duality is ICML 2026,
+  critical-point trajectory preservation and aneurysm-specific cardiac-cycle
+  tracking are already established, and the arterial SE(3) paper DOI is
+  corrected to `10.1016/j.compbiomed.2024.108328`.
+
 ## 2026-08-10 · Schema 7.1 registers a surface-vector structure P0
 
 - Froze `time_varying_surface_wss_index_structure_prediction` at exactly

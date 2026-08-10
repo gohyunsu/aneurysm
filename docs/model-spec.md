@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 7.2 no-model outcome · 2026-08-10:** The surface-vector P0 ended
+> execution-incomplete with no evaluated scientific check, so it cannot select
+> a GNN, Graph Transformer, Hodge operator, equivariant mesh model or topology
+> head. Hodge Spectral Duality, transient SE(3)-equivariant WSS prediction and
+> critical-point trajectory preservation are direct priors. Active architecture,
+> method and GPU authority are zero. Resume only after a fresh problem passes
+> source and method-free adequacy gates; do not repair this contract.
+
 > **Schema 7.1 no-model boundary · 2026-08-10:** A surface-vector structure
 > problem has crossed the source line at exactly 32.0/40, but only a raw-asset
 > CPU P0 is registered. There is still no current GNN, Graph Transformer,

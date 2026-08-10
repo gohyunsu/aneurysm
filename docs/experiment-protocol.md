@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 7.2 P0-SV outcome · 2026-08-10:** Exact job
+> `115645.ECE-util1` ran once on `introai9` with CPU 4, 16 GB and GPU 0, then
+> ended `E`/exit 2 after 00:27:02. A bounded private no-verdict result exists,
+> but no scientific aggregate, raw PBS log or persistent probe cache exists.
+> Therefore 0/10 high-level checks were evaluated. The exact contract is closed:
+> no transport/reader/runtime repair, resubmission, P1, method or GPU work.
+
 > **Schema 7.1 current P0 · 2026-08-10:** Exactly one method-free experiment is
 > preregistered: three raw AneuG-Flow wall-tensor/OBJ probe pairs, selected
 > lexicographically before access, are checked for exact hashes, safe tensor
@@ -12,7 +19,7 @@
 > closes the candidate without same-contract repair/rerun. The P0 has not yet
 > been submitted. `junjinyong` is prohibited.
 
-## P0-SV · AneuG transient surface-vector structure · registered, not submitted
+## P0-SV · AneuG transient surface-vector structure · closed, no verdict
 
 - Source score: 32.0/40; conditional lead only.
 - Probes: `stable_0`, `stable_100`, `stable_10001`; six exact objects,
@@ -26,6 +33,7 @@
 - Machine contract: `configs/aneug_surface_vector_structure_p0.json`.
 - Executor: `src/aurora/aneug_surface_vector_structure_p0.py` through
   `cluster/pbs_aneug_surface_vector_structure_p0.pbs`.
+- Outcome: execution-incomplete; all scientific checks unevaluated; no rerun.
 
 > **Schema 7.0 current state · 2026-08-10:** No experiment is registered for
 > the AneuG target-construction batch. Six source scores peak at 31.5/40, so

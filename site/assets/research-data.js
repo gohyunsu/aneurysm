@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · surface-vector structure is one 32.0/40 conditional source lead · 3-probe CPU P0 registered, not submitted · primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
-    requirement: "the exact raw-asset P0 and a separately registered method-free 32-case P1 must pass before any architecture or GPU work",
+    status: "Target locked · surface-vector 32.0/40 source history closed execution-incomplete · 0/10 checks evaluated · active lead/primary/method/architecture/GPU 0 · introai9-only · not submission-ready",
+    requirement: "a genuinely fresh problem must pass source admission and method-free asset/task gates before any architecture or GPU work; the closed surface-vector contract cannot be repaired or rerun",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -44,8 +44,8 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "A time-varying tangent field has index structure that channel MSE does not describe",
-      copy: "Transient WSS lives in the tangent plane of an oriented vessel surface. Its zeros carry signed local indices and form trajectories with birth/death events over the cardiac cycle. A fresh problem screen scores prediction of this structure at exactly 32.0/40. Surface Hodge/DEC, SE(3)-equivariant transient WSS prediction, vector-field critical-point analysis and generic topology losses are direct priors, so none is claimed as novelty. The residual gap requires an operator-specific representation or guarantee connecting 1-form error to index/worldline preservation plus prospective strong-baseline gains. Only a three-probe raw-asset CPU P0 is registered.",
-      status: "Conditional source lead 32.0/40 · P0 registered/not submitted · primary/method/model/GPU 0",
+      copy: "Transient WSS lives in the tangent plane of an oriented vessel surface. Its zeros carry signed local indices and form trajectories with birth/death events over the cardiac cycle. The frozen problem score is 32.0/40, but its exact introai9 CPU P0 ended E/exit 2 after 27:02 with no scientific aggregate or raw log; 0/10 checks were evaluated. This is no verdict, not a negative hypothesis result. ICML-2026 Hodge Spectral Duality, SE(3)-equivariant transient WSS prediction, robust vector-field feature tracking, trajectory-preserving compression and aneurysm-specific cardiac-cycle critical-point tracking are direct priors. The version is closed without repair/rerun and no residual algorithmic gap is active.",
+      status: "Closed source history 32.0/40 · P0 execution-incomplete/no verdict · active lead/P1/method/model/GPU 0",
       url: "../docs/aneug-surface-vector-structure-source-audit-2026-08-10.md"
     },
     {
@@ -768,6 +768,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.10",
+      category: "experiment",
+      title: "Schema 7.2 closes the surface-vector P0 without a scientific verdict",
+      copy: "Exact public source 8a06de2… ran once on introai9 as CPU-only PBS job 115645. It ended E/exit 2 after 27:02 with CPU time 6 seconds, peak memory 625,780 kB and GPU 0. Only a 301-byte private status and 588-byte bounded private result exist; aggregate scientific output, raw PBS log and persistent probe cache are absent, so 0/10 registered checks were evaluated and the low-level cause remains unresolved. The 32.0/40 source score is preserved, while active shortlist, P1, method, architecture, GPU, outer test and paper identity return to zero. Same-contract repair/rerun is forbidden. Direct-prior metadata is tightened: Hodge Spectral Duality is ICML 2026 and trajectory/aneurysm critical-point tracking already exists.",
+      files: ["results/aneug_surface_vector_structure_p0_execution_20260810.json", "docs/aneug-surface-vector-structure-source-audit-2026-08-10.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/server-execution.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.10",
       category: "research",

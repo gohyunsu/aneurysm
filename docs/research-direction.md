@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 7.2 direction · 2026-08-10:** The surface-vector formulation remains
+> a reasonable question but not an active research identity. Its single exact
+> P0 ended execution-incomplete before all 10 checks, and direct priors already
+> cover Hodge neural operators, equivariant transient WSS prediction and robust
+> critical-point trajectory preservation. Source score 32.0/40 is immutable
+> history; active shortlist, primary problem, method, architecture and GPU are
+> zero. Next is a genuinely fresh problem-level source/asset audit on
+> `introai9`, not a repair, rerun or renamed topology model.
+
 > **Schema 7.1 conditional direction · 2026-08-10:** The current question is
 > not “which GNN predicts WSS MSE best?” A time-varying WSS field lives in the
 > tangent plane of an oriented vessel surface. Its zeros have signed indices,

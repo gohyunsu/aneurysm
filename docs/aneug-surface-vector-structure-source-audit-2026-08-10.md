@@ -1,5 +1,20 @@
 # Time-varying surface-WSS structure source audit
 
+> **Closed execution outcome · schema 7.2:** Exact public source
+> `8a06de209892c09fe4adf86a3125a612a5030d9f` was submitted exactly once to
+> `introai9` PBS as CPU-only job `115645.ECE-util1` (4 CPU, 16 GB, GPU 0).
+> It ended in state `E`, exit 2 after 00:27:02; CPU time was 00:00:06 and peak
+> memory was 625,780 kB. Only a 301-byte private status and a 588-byte bounded
+> no-verdict result were retained. No aggregate scientific result, raw PBS log
+> or persistent probe cache exists, so 0/10 registered high-level checks were
+> evaluated. The low-level transport, reader or runtime cause is unresolved.
+> This is **execution-incomplete / no scientific verdict**, not evidence for or
+> against surface-WSS index structure. The frozen 32.0/40 source decision is
+> preserved, but active shortlist, P1, method, architecture, GPU, outer test and
+> submission identity are all zero. This exact version is closed without cause
+> reconstruction, repair or rerun. See the
+> [deidentified execution record](../results/aneug_surface_vector_structure_p0_execution_20260810.json).
+
 **Prospective decision · 2026-08-10 KST:** a genuinely new formulation scores
 **32.0/40**, exactly meeting the unchanged admission line. It is a conditional
 source lead, not a selected method or paper contribution. The only authorized
@@ -58,15 +73,18 @@ test cases and not a training subset.
 This candidate is intentionally narrower than a generic “topology-aware neural
 operator.” Direct controls and threats include:
 
-- the 2026 [Hodge Spectral Duality operator](https://arxiv.org/abs/2605.13834),
-  which already learns physical fields through discrete differential forms and
-  Hodge splitting;
-- [SE(3)-equivariant transient WSS estimation](https://doi.org/10.1016/j.compbiomed.2024.108238)
+- the ICML 2026 [Hodge Spectral Duality operator](https://arxiv.org/abs/2605.13834),
+  which already learns physical fields through discrete differential forms,
+  Hodge splitting and an operator-level structure-preserving decomposition;
+- [SE(3)-equivariant transient WSS estimation](https://doi.org/10.1016/j.compbiomed.2024.108328)
   on arterial surface meshes;
-- classical and modern time-varying vector-field critical-point tracking;
-- topology-preserving compression of critical-point trajectories;
-- existing aneurysm studies that extract WSS critical points and their areas
-  of influence;
+- classical and modern time-varying vector-field critical-point tracking,
+  including [multilevel robustness](https://doi.org/10.1111/cgf.14799);
+- [time-varying vector-field compression that exactly preserves critical-point
+  trajectories](https://arxiv.org/abs/2510.25143);
+- an aneurysm-specific 359-aneurysm study that already [extracts WSS critical
+  points at each phase, tracks them over the cardiac cycle and computes areas
+  of influence](https://doi.org/10.1002/cnm.3844);
 - conservative remapping, tangent projection, train-only normalization and
   test-blind model selection.
 
@@ -92,10 +110,11 @@ Each axis is 0--5. The total is not rounded or repaired.
 | ISBI schedule/runtime fit | 3.0 | Four pages and large objects are restrictive; staged raw probes keep the first decision bounded. |
 | **Total** | **32.0/40** | **Conditional source admission only** |
 
-## 5. Registered P0
+## 5. Registered P0 · closed history
 
 [`configs/aneug_surface_vector_structure_p0.json`](../configs/aneug_surface_vector_structure_p0.json)
-freezes a single `introai9` PBS CPU job: 4 CPU, 16 GB memory, GPU 0 and one hour.
+freezes the exact `introai9` PBS CPU contract that was executed once: 4 CPU,
+16 GB memory, GPU 0 and one hour.
 It downloads only the three exact raw WSS objects and their remeshed OBJ files
 into job-local temporary storage. It uses `torch.load(weights_only=True)`,
 never reads blood-volume fields, GHD checkpoints, processed archives, model
@@ -116,6 +135,8 @@ All checks are required:
 Pass authorizes only a separately preregistered, method-free 32-case P1 that
 tests perturbation, remeshing and extraction stability. Failure or incomplete
 execution closes this exact version without same-contract repair or rerun.
+The observed outcome was execution-incomplete, so P1 is not authorized and
+this registration is no longer executable.
 
 ## 6. What would be required after P1
 

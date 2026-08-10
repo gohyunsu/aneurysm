@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 7.2 final execution · 2026-08-10:** Exact source `8a06de2…` ran
+> once on `introai9` PBS as CPU-only job `115645.ECE-util1`. Final evidence is
+> state `E`, exit 2, walltime 00:27:02, CPU 00:00:06, memory 625,780 kB, CPU 4,
+> 16 GB and GPU 0. Only bounded private status/result records materialized; no
+> aggregate, raw PBS log or persistent probe cache exists. The scientific gate
+> is unevaluated and the low-level cause unresolved. Do not repair, resubmit,
+> open P1 or use GPU. No login-node GPU command ran. `junjinyong` was not
+> accessed and remains prohibited for all AURORA operations.
+
 > **Schema 7.1 registered boundary · 2026-08-10:** Credential-managed SSH to
 > `introai9` was verified and `qstat -u introai9` returned an empty queue after
 > the site profile was loaded. No login-node GPU command ran. One exact

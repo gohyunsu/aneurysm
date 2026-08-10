@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 7.2 submission boundary · 2026-08-10:** The 32.0/40 surface-vector
+> source lead produced no scientific verdict: its one CPU P0 ended incomplete
+> with 0/10 checks evaluated. It adds no result, figure, architecture,
+> contribution or paper identity and opens no P1 or GPU experiment. ICML-2026
+> Hodge operator learning, equivariant transient WSS prediction and established
+> critical-point trajectory methods further exclude those components as
+> novelty. Active shortlist is 0; the manuscript remains **not submission-ready**.
+> Next work is a fresh problem-level source/asset audit, not prose or model repair.
+
 > **Schema 7.1 submission boundary · 2026-08-10:** The surface-vector structure
 > problem is one 32.0/40 conditional source lead, not the paper identity. Its
 > only current artifact is a three-probe CPU P0 registered on `introai9`; no

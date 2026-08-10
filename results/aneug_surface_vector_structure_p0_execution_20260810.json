@@ -1,0 +1,84 @@
+{
+  "schema_version": "aurora.aneug_surface_vector_structure_p0.execution_record.v1",
+  "protocol_id": "aneug_surface_vector_structure_raw_probe_p0_v1",
+  "candidate_id": "time_varying_surface_wss_index_structure_prediction",
+  "source_score": 32.0,
+  "status": "closed_after_execution_incomplete_no_scientific_verdict",
+  "scientific_verdict": null,
+  "scientific_gate_evaluated": false,
+  "public_source_commit": "8a06de209892c09fe4adf86a3125a612a5030d9f",
+  "registered_source": {
+    "dataset_commit": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "probe_cases": 3,
+    "registered_total_bytes": 276642685
+  },
+  "p0_config": {
+    "path": "configs/aneug_surface_vector_structure_p0.json",
+    "sha256": "a4c69ec215cf71a2120adfa0ee365f2678601c89e9a3fddeb9f7df397effc31f"
+  },
+  "pbs_wrapper": {
+    "path": "cluster/pbs_aneug_surface_vector_structure_p0.pbs",
+    "sha256": "2910ef54f98fdb1918b670b91dc177b0d23be30bbcac11684edb741cfa2906b7"
+  },
+  "implementation": {
+    "path": "src/aurora/aneug_surface_vector_structure_p0.py",
+    "sha256": "95deb6217e47be7b4f0e9f9e8397aad554ca10e01786cb8430d442c1bc8a39e7"
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "job_id": "115645.ECE-util1",
+    "submission_count_for_exact_source": 1,
+    "final_job_state": "E",
+    "exit_status": 2,
+    "resources_used_walltime": "00:27:02",
+    "resources_used_cput": "00:00:06",
+    "resources_used_cpupercent": 8,
+    "resources_used_memory_kb": 625780,
+    "resources_used_vmemory_kb": 5076920,
+    "run_count": 1,
+    "requested_resources": "select=1:ncpus=4:mem=16gb:ngpus=0",
+    "requested_walltime": "01:00:00",
+    "gpu_requested": 0,
+    "gpu_accessed": false,
+    "login_node_gpu_command_executed": false,
+    "junjinyong_accessed": false
+  },
+  "materialization": {
+    "private_status_record_created": true,
+    "private_status_record_bytes": 301,
+    "private_status_record_sha256": "4881bcae77e39748fdf015ba886db4bea6c0485404a7271bed8b93ed7aaf15e2",
+    "private_result_record_created": true,
+    "private_result_record_bytes": 588,
+    "private_result_record_sha256": "e52117efddf8102e80b7249fcfa2d23d926b074570d373f5e32c72f485ca296e",
+    "aggregate_scientific_result_created": false,
+    "raw_scheduler_stdout_or_stderr_materialized": false,
+    "persistent_probe_cache_files": 0,
+    "completed_probe_pairs_reported": null,
+    "transient_partial_bytes_recoverable": false,
+    "blood_or_processed_payload_accessed": false,
+    "model_or_checkpoint_accessed": false,
+    "patient_or_clinical_data_accessed": false,
+    "outer_test_accessed": false
+  },
+  "boundary": {
+    "last_verified_stage": "pinned_runtime_entered_and_returned_a_bounded_execution_incomplete_record_before_any_scientific_aggregate",
+    "low_level_transport_reader_or_runtime_cause": "unresolved_without_raw_scheduler_log_or_stage_specific_private_record",
+    "registered_high_level_checks_evaluated": 0,
+    "registered_high_level_checks_total": 10,
+    "source_score_repaired_after_execution": false,
+    "same_contract_transport_reader_dependency_repair_allowed": false,
+    "same_contract_resubmission_allowed": false,
+    "p1_registration_authorized": false,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false,
+    "active_source_shortlist_count_after_closure": 0
+  },
+  "decision": "preserve_the_exact_32_source_finding_but_close_this_candidate_version_without_cause_reconstruction_repair_rerun_p1_method_architecture_gpu_outer_test_or_scientific_claim"
+}

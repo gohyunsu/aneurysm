@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "7.1":
-        raise ProtocolError("The current research-state schema must be version 7.1.")
+    if protocol["schema_version"] != "7.2":
+        raise ProtocolError("The current research-state schema must be version 7.2.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "aneug_surface_vector_structure_p0_preregistered_cpu_only_no_method_or_gpu"
+        != "aneug_surface_vector_structure_p0_execution_incomplete_closed_no_method_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "introai9_queue_empty_20260810_no_aurora_job_no_login_node_gpu_command"
+        != "introai9_p0_115645_e_exit2_no_active_gpu_job_no_login_node_gpu_command"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -232,15 +232,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "aneug_surface_vector_structure_conditional_source_lead_p0_preregistered_no_method_or_gpu"
-        or problem_selection["shortlisted_candidate"]
-        != "time_varying_surface_wss_index_structure_prediction"
-        or problem_selection["conditional_source_lead_count"] != 1
-        or problem_selection["candidate_dataset"] != "aneug_flow"
-        or problem_selection["candidate_estimand"]
-        != "time_resolved_tangent_wss_one_form_per_frame_signed_critical_point_index_and_later_worldline_events"
+        != "aneug_surface_vector_structure_p0_execution_incomplete_closed_no_active_shortlist_method_or_gpu"
+        or problem_selection["shortlisted_candidate"] is not None
+        or problem_selection["conditional_source_lead_count"] != 0
+        or problem_selection["candidate_dataset"] is not None
+        or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "official_public_paper_code_and_repository_metadata_only_raw_probe_p0_not_yet_submitted"
+        != "p0_execution_incomplete_no_completed_or_retained_probe_payload_scientific_gate_unevaluated"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -250,19 +248,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "submit_exact_clean_public_source_once_to_introai9_cpu_p0_then_close_or_register_separate_method_free_p1"
+        != "fresh_problem_level_primary_source_and_asset_audit_not_surface_vector_p0_repair_rerun_p1_or_training"
         or problem_selection["audit_document"]
         != "docs/aneug-surface-vector-structure-source-audit-2026-08-10.md"
         or problem_selection["most_recent_closed_candidate"]
-        != "containment_identified_morphometry_envelopes_execution_incomplete"
+        != "time_varying_surface_wss_index_structure_prediction_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "surface_vector_tangency_and_functional_commutation"
-        or problem_selection["most_recent_conditional_source_lead"]
-        != "time_varying_surface_wss_index_structure_prediction"
+        or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The surface-vector structure lead must remain source-admitted for one "
-            "introai9 CPU P0 only, with no payload yet, method, GPU, outer test, or claim."
+            "The surface-vector structure P0 must remain closed after its one "
+            "introai9 execution-incomplete run, with no active lead, method, GPU, "
+            "outer test, or claim."
         )
     bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
     _require_keys(
@@ -765,6 +763,27 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p0_protocol_id",
             "executable_p0_registered",
             "p0_job_submitted",
+            "p0_job_id",
+            "p0_public_source_commit",
+            "p0_execution_record",
+            "p0_execution_record_sha256",
+            "p0_execution_status",
+            "p0_final_job_state",
+            "p0_exit_status",
+            "p0_resources_used_walltime",
+            "p0_resources_used_cput",
+            "p0_resources_used_cpupercent",
+            "p0_resources_used_memory_kb",
+            "p0_resources_used_vmemory_kb",
+            "p0_private_status_bytes",
+            "p0_private_status_sha256",
+            "p0_private_result_bytes",
+            "p0_private_result_sha256",
+            "p0_aggregate_scientific_result_materialized",
+            "p0_raw_scheduler_output_materialized",
+            "p0_persistent_probe_cache_files",
+            "p0_registered_high_level_checks_evaluated",
+            "p0_registered_high_level_checks_total",
             "p0_scientific_gate_evaluated",
             "p1_registration_authorized",
             "method_selected",
@@ -791,7 +810,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         vector_structure["status"]
-        != "conditional_source_lead_exactly_at_admission_p0_preregistered_not_submitted"
+        != "p0_execution_incomplete_no_scientific_verdict_closed_without_repair_or_rerun"
         or vector_structure["audit_document"]
         != "docs/aneug-surface-vector-structure-source-audit-2026-08-10.md"
         or vector_structure["candidate_id"]
@@ -802,8 +821,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or vector_structure["axis_scores"]
         != [4.5, 4.0, 2.5, 3.5, 4.5, 5.0, 5.0, 3.0]
         or sum(vector_structure["axis_scores"]) != vector_structure["score"]
-        or vector_structure["conditional_source_lead_count"] != 1
-        or vector_structure["active_shortlist_count"] != 1
+        or vector_structure["conditional_source_lead_count"] != 0
+        or vector_structure["active_shortlist_count"] != 0
         or vector_structure["primary_problem_selected"] is not False
         or vector_structure["dataset_repo"] != "whding123/AneuG-Flow"
         or vector_structure["dataset_commit"]
@@ -820,7 +839,34 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or vector_structure["p0_protocol_id"]
         != "aneug_surface_vector_structure_raw_probe_p0_v1"
         or vector_structure["executable_p0_registered"] is not True
-        or vector_structure["p0_job_submitted"] is not False
+        or vector_structure["p0_job_submitted"] is not True
+        or vector_structure["p0_job_id"] != "115645.ECE-util1"
+        or vector_structure["p0_public_source_commit"]
+        != "8a06de209892c09fe4adf86a3125a612a5030d9f"
+        or vector_structure["p0_execution_record"]
+        != "results/aneug_surface_vector_structure_p0_execution_20260810.json"
+        or vector_structure["p0_execution_record_sha256"]
+        != "4384651030883669bd8594606b125ee9597d32df4a9fd7cdb9010f37a96ec691"
+        or vector_structure["p0_execution_status"]
+        != "execution_incomplete_no_scientific_verdict"
+        or vector_structure["p0_final_job_state"] != "E"
+        or vector_structure["p0_exit_status"] != 2
+        or vector_structure["p0_resources_used_walltime"] != "00:27:02"
+        or vector_structure["p0_resources_used_cput"] != "00:00:06"
+        or vector_structure["p0_resources_used_cpupercent"] != 8
+        or vector_structure["p0_resources_used_memory_kb"] != 625780
+        or vector_structure["p0_resources_used_vmemory_kb"] != 5076920
+        or vector_structure["p0_private_status_bytes"] != 301
+        or vector_structure["p0_private_status_sha256"]
+        != "4881bcae77e39748fdf015ba886db4bea6c0485404a7271bed8b93ed7aaf15e2"
+        or vector_structure["p0_private_result_bytes"] != 588
+        or vector_structure["p0_private_result_sha256"]
+        != "e52117efddf8102e80b7249fcfa2d23d926b074570d373f5e32c72f485ca296e"
+        or vector_structure["p0_aggregate_scientific_result_materialized"] is not False
+        or vector_structure["p0_raw_scheduler_output_materialized"] is not False
+        or vector_structure["p0_persistent_probe_cache_files"] != 0
+        or vector_structure["p0_registered_high_level_checks_evaluated"] != 0
+        or vector_structure["p0_registered_high_level_checks_total"] != 10
         or vector_structure["p0_scientific_gate_evaluated"] is not False
         or vector_structure["p1_registration_authorized"] is not False
         or set(vector_structure["direct_prior_threats"])
@@ -843,11 +889,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "gpu_training_authorized",
                 "outer_test_authorized",
                 "submission_identity_active",
-                "pbs_job_created",
                 "login_node_gpu_command_executed",
                 "junjinyong_accessed_for_this_audit",
             )
         )
+        or vector_structure["pbs_job_created"] is not True
         or vector_structure["execution_server"] != "introai9"
         or vector_structure["introai9_connection_verified"] is not True
         or vector_structure["introai9_pbs_jobs_observed_before_registration"] != 0
@@ -860,11 +906,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or vector_structure["p0_failure_action"]
         != "close_exact_candidate_version_without_same_contract_repair_or_rerun"
         or vector_structure["decision"]
-        != "admit_exactly_at_32_for_method_free_cpu_p0_only_without_method_architecture_gpu_outer_test_or_submission_claim"
+        != "preserve_exact_32_source_history_but_close_execution_incomplete_without_repair_rerun_p1_method_architecture_gpu_outer_test_or_submission_claim"
     ):
         raise ProtocolError(
-            "The AneuG surface-vector structure lead must stay exactly at 32/40, "
-            "before raw payload, and authorize only one introai9 CPU P0."
+            "The AneuG surface-vector structure history must stay exactly at 32/40 "
+            "and closed after one incomplete introai9 CPU P0 without P1 or model authority."
         )
     checks.append("AneuG surface-vector structure conditional P0 boundary")
     if set(problem_selection["rejected_candidates"]) != {
@@ -5795,7 +5841,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "conditional_surface_vector_structure_source_lead_p0_only_no_primary_method_or_gpu"
+        != "surface_vector_p0_execution_incomplete_no_active_primary_method_architecture_gpu_or_submission_identity"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -6147,22 +6193,24 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     if (
         aneug_flow.get("role")
-        != "conditional_raw_surface_vector_structure_p0_only_with_closed_cycle_functional_history_preserved"
+        != "closed_raw_surface_vector_p0_execution_incomplete_with_closed_cycle_functional_history_preserved"
         or aneug_flow.get("field_provenance") != "synthetic_cfd"
         or aneug_flow.get("split_unit") != "generator_seed_geometry"
         or aneug_flow.get("status")
-        != "new_raw_structure_p0_preregistered_not_submitted_old_processed_cycle_p0_closed_no_rerun"
+        != "raw_structure_p0_execution_incomplete_no_verdict_no_rerun_old_processed_cycle_p0_closed_no_rerun"
         or aneug_flow.get("dataset_repository_commit")
         != "9dd418083899deddd93a67f9a6fca7a14304fa36"
         or aneug_flow.get("p0_config")
-        != "configs/aneug_cycle_functional_p0.json"
+        != "configs/aneug_surface_vector_structure_p0.json"
         or aneug_flow.get("p0_execution_record")
+        != "results/aneug_surface_vector_structure_p0_execution_20260810.json"
+        or aneug_flow.get("historical_cycle_p0_execution_record")
         != "results/aneug_cycle_functional_p0_execution_20260809.json"
         or aneug_flow.get("method_or_gpu_authorized") is not False
     ):
         raise ProtocolError(
-            "AneuG-Flow must remain synthetic and payload-unread before the new raw "
-            "structure P0, while preserving the closed processed-P0 history and no GPU."
+            "AneuG-Flow must remain synthetic with both raw-structure and processed "
+            "P0 versions closed without a verdict, rerun, method, or GPU authority."
         )
     if (
         flow_2021.get("status")

@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 7.2 lineage verdict · 2026-08-10:** The surface-vector P0 produced
+> no scientific evidence and is closed. The prior boundary is also stronger
+> than at registration: Hodge Spectral Duality is accepted at ICML 2026;
+> time-varying vector-field work already preserves complete critical-point
+> trajectories; multilevel robustness already supports stable tracking; and a
+> 359-aneurysm study identifies and tracks WSS critical points across the cardiac
+> cycle. Therefore GNN/Hodge/tangent projection/topology loss/tracking cannot be
+> repackaged as novelty. No active gap, method or GPU experiment is selected.
+
 > **Schema 7.1 surface-vector lineage · 2026-08-10:** AneuG-Flow provides a
 > large transient WSS source and existing aneurysm graph surrogates already
 > predict WSS. Surface finite-element/DEC and Hodge methods already represent

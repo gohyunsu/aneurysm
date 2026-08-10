@@ -1,22 +1,19 @@
 # AURORA · Aneurysm Research
 
-> **2026-08-10 surface-vector structure P0 registration · schema 7.1:** A
-> fresh problem asks whether transient wall shear stress (WSS) can be treated as
-> a time-varying tangent 1-form whose signed critical-point indices and temporal
-> trajectories are measurable from the released raw AneuG-Flow assets. It scores
-> exactly **32.0/40** and is therefore one conditional source lead—not a selected
-> primary, method, architecture or contribution. Hodge/DEC representations,
-> SE(3)-equivariance, tangency and generic critical-point losses are direct
-> priors or controls. One exact method-free P0 is preregistered over three raw
-> wall-tensor/OBJ pairs (`stable_0`, `stable_100`, `stable_10001`; 276,642,685
-> bytes total). It checks hashes, safe schema, coordinate alignment, tangency,
-> temporal variation and whether indexed critical points are extractable. The
-> job is `introai9` PBS CPU-only (4 CPU, 16 GB, GPU 0), has not yet been
-> submitted, and may open only a separately registered 32-case method-free P1.
-> Failure or incomplete execution closes this exact version without repair or
-> rerun. `junjinyong` is prohibited for connection, query, transfer, submission
-> and monitoring. [Detailed audit](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md) ·
-> [Frozen P0](configs/aneug_surface_vector_structure_p0.json)
+> **2026-08-10 surface-vector structure P0 outcome · schema 7.2:** Exact source
+> `8a06de209892c09fe4adf86a3125a612a5030d9f` ran once on `introai9` as CPU-only
+> PBS job `115645.ECE-util1` (4 CPU, 16 GB, GPU 0). It ended `E`/exit 2 after
+> 00:27:02 with CPU time 00:00:06 and peak memory 625,780 kB. Only a 301-byte
+> private status and 588-byte bounded no-verdict result were retained; aggregate
+> scientific result, raw PBS log and persistent probe cache are absent. Thus
+> 0/10 registered checks were evaluated and the low-level cause is unresolved.
+> This is **execution-incomplete / no scientific verdict**. The exact 32.0/40
+> source score remains immutable history, but active shortlist, P1, primary,
+> method, architecture, contribution, GPU, outer test and submission identity
+> are all zero. Do not repair or rerun this version. Hodge/DEC, SE(3), critical-
+> point tracking and trajectory preservation remain direct priors, not novelty.
+> `junjinyong` was not accessed and remains prohibited. [Detailed audit](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md) ·
+> [Execution record](results/aneug_surface_vector_structure_p0_execution_20260810.json)
 
 > **2026-08-10 AneuG target-construction audit · schema 7.0:** Official paper,
 > exact code `4a090a0…` and dataset metadata `9dd4180…` show that registered
