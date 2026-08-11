@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 9.8 deployment/private verification:** Exact scientific
+> source `975b6e360f71d6948c6cb09b6661704cf5732687` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31507256370) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31507253480). Private
+> ledger `0075d080272b3d462d57d6ba07c7ed9a7df59080` is remote exact and
+> anonymous API returns 404. Manuscript and references remain byte-for-byte
+> unchanged. This is provenance only and opens no lead, P0/P1, method,
+> architecture, server query, PBS/GPU, outer test, result, C21 or claim.
+
 > **Current research state (schema 9.8, 2026-08-12):** A fresh longitudinal,
 > intervention-linked and patient-reliability screen rejects all six candidates
 > at **32.0/31.0/29.5/29.5/26.5/23.0**. The additive 32.0 RSNA all-lesion

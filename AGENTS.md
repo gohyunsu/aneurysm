@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 9.8 deployment·private synchronization:** Exact public
+> scientific source `975b6e360f71d6948c6cb09b6661704cf5732687` passed Quality
+> `31507256370` and Pages `31507253480`. Private paper ledger
+> `0075d080272b3d462d57d6ba07c7ed9a7df59080` is remote exact and anonymous
+> API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization adds no lead, P0/P1, method, architecture, scientific-
+> server query, PBS/GPU, outer test, result row, C21 or claim. Future authorized
+> work is `introai9` PBS only; prohibit login-node GPU and never access, query,
+> transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 longitudinal/intervention/patient-reliability reappraisal ·
 > schema 9.8:** Six fresh rows are frozen at
 > 32.0/31.0/29.5/29.5/26.5/23.0 and all are rejected. Never treat the additive

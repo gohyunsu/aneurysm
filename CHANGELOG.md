@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-12 · Schema 9.8 deployed and privately pinned
+
+- Exact scientific source `975b6e360f71d6948c6cb09b6661704cf5732687`
+  passed Quality `31507256370` and Pages `31507253480`; the public site exposes
+  the 32.0 additive rejection and no-model/no-compute boundary.
+- Private ledger `0075d080272b3d462d57d6ba07c7ed9a7df59080` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- This deployment provenance opens no P0/P1, method, architecture, server,
+  PBS/GPU, outer test, result row, C21 or claim.
+
 ## 2026-08-12 · Longitudinal, intervention and patient reliability rejected · schema 9.8
 
 - Audited the 2026 Bayesian surface-displacement growth source: 39 patients/42

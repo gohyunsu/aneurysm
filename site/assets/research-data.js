@@ -998,6 +998,20 @@ window.AURORA_DATA = Object.freeze({
   ],
   changes: [
     {
+      date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 9.8 exact source is deployed and privately pinned",
+      copy: "Exact public scientific source 975b6e360f71d6948c6cb09b6661704cf5732687 passed Quality 31507256370 and Pages 31507253480. Live Overview and Learn expose the 32.0 additive rejection, residual novelty 1.5/5, asset readiness 2.5/5 and no-payload/no-model/no-compute boundary. Private ledger 0075d080272b3d462d57d6ba07c7ed9a7df59080 is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. This provenance creates no lead, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row, C21 or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 9.8 rejects longitudinal, intervention-linked and reliability pivots",
+      copy: "The Bayesian growth direct prior uses adjacent-vessel displacement and includes only 16 public patients/19 aneurysms selected from 24 follow-up patients. RSNA remains controlled and publicly contract-incomplete, while generic lesion and instance conformal risk control already owns error-budget mechanisms. The open flow-diverter release contains 126 subjects/141 procedures with tabular follow-up and selected 2D DSA JPEGs, not paired pre/post 3D imaging. Six frozen rows score 32.0/31.0/29.5/29.5/26.5/23.0. The additive leader fails residual novelty 1.5/5 and asset readiness 2.5/5 mandatory floors. Patient-level all-lesion reliability remains evaluation-only; no terms, payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim is opened.",
+      files: ["docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
+    {
       date: "2026.08.11",
       category: "deployment",
       title: "Schema 9.7 exact source is deployed and privately pinned",
