@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.2 deployment verification:** Exact scientific content
+> `205d3d534a80ef5e3821d321a403158148e68ac5` passed Quality
+> `31453522210` and Pages `31453521880`. Live Learn exposes the 355-versus-11
+> unit correction, WSS/ICC/bias explanation and 25.5/40 rejection. Private
+> paper ledger `138f764…` remains nonpublic and leaves manuscript sources
+> unchanged. This is provenance only and creates no scientific or compute
+> authority.
+
 > **2026-08-11 functional 4D-flow direct-prior correction · schema 8.2:** A
 > new intracranial 4D-flow study already evaluates segmentation-induced flow
 > and WSS error using nnU-Net pretrained on 355 TOF-MRA scans and fine-tuned on

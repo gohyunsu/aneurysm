@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.2 deployment verification:** Exact content
+> `205d3d534a80ef5e3821d321a403158148e68ac5` passed Quality
+> `31453522210` and Pages `31453521880`. Live Learn directly exposes the
+> schema-8.2 unit/asset/direct-prior correction. Private ledger head
+> `138f764f9dae6f6cf1ae8e26f5ae4ad30a45c866` is remote exact and anonymous
+> GitHub API returns 404; `paper/main.tex` and references hashes remain
+> unchanged. This is provenance only. No scientific server query, P0/P1,
+> method, PBS/GPU, outer test or claim is opened.
+
 > **2026-08-11 functional 4D-flow segmentation delta · schema 8.2:** 2026
 > intracranial 4D-flow work already evaluates segmentation-to-flow/WSS bias:
 > 355 public TOF-MRA pretraining scans, eleven nonpublic clinical 7T 4D-flow

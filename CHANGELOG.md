@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.2 public deployment and private ledger verified
+
+- Exact scientific content `205d3d534a80ef5e3821d321a403158148e68ac5`
+  passed Quality `31453522210` and Pages `31453521880`.
+- Live Learn exposes the 355-versus-11 unit correction, WSS/ICC/bias glossary,
+  direct-prior boundary and frozen 25.5/40 rejection.
+- Private ledger head `138f764…` is remote exact and remains anonymous-API
+  invisible; manuscript and references are byte-for-byte unchanged.
+- This provenance record opens no scientific asset, P0/P1, method,
+  architecture, server query, PBS/GPU, outer test or claim.
+
 ## 2026-08-11 · Schema 8.2 rejects functional 4D-flow segmentation wrappers
 
 - Added the direct 2026 intracranial 4D-flow segmentation-to-WSS prior and

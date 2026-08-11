@@ -834,6 +834,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.2 public deployment and private ledger are verified",
+      copy: "Exact scientific content 205d3d5… passed Quality 31453522210 and Pages 31453521880. Live Learn exposes the 355-versus-11 independent-unit correction, WSS/ICC/bias explanation and 25.5/40 rejection. Private ledger head 138f764… is remote exact and anonymous-API invisible; manuscript and references remain byte-for-byte unchanged. This adds no experiment or authorization.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Schema 8.2 rejects functional 4D-flow segmentation as the paper identity",
       copy: "A direct 2026 source already measures segmentation-induced flow and WSS error. The 355 scans are TOF-MRA pretraining images, not 4D-flow functional units; the eleven clinical 7T scans are nonpublic and weights are only promised upon publication. VAST and COMPASS occupy physics-aware processing and downstream-metric certification. Six candidates freeze at 25.5/24.5/23.5/23.5/23.5/23.0, all rejected. Surface-vector remains inactive; no payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row or claim was opened.",
