@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.0 scientific deployment/private synchronization:**
+> Exact scientific source `d7cf037cfd7b1833f12a0f90d24a8b070c0d7df6`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31516119754)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31516119241).
+> Live Overview and Learn expose schema 10.0. Private ledger
+> `f0d172d8fa5f5578de487c532399532949b66198` is remote exact, PRIVATE and its
+> anonymous repository API returns 404. Manuscript and references remain byte-
+> for-byte unchanged. This synchronization opens no lead, terms, P0/P1, method,
+> architecture, scientific server, PBS/GPU, outer test, result, C21 or claim.
+
 > **Current research state (schema 10.0, 2026-08-12):** The supplied
 > surface-vector reasoning is retained only as a gate sequence: first establish
 > structure-extraction stability and an observed field-error-matched failure,

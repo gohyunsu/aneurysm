@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.0 scientific source deployed and privately pinned
+
+- Exact scientific source `d7cf037cfd7b1833f12a0f90d24a8b070c0d7df6`
+  passed Quality `31516119754` and Pages `31516119241`; live Overview and Learn
+  expose the ADAM semantics correction and no-model/no-compute boundary.
+- Private ledger `f0d172d8fa5f5578de487c532399532949b66198` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- This deployment provenance opens no terms, P0/P1, method, architecture,
+  scientific server, PBS/GPU, outer test, result row, C21 or claim.
+
 ## 2026-08-12 · ADAM longitudinal semantics corrected and rejected · schema 10.0
 
 - Retained the supplied surface-vector task-stability → matched-failure →

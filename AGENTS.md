@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.0 scientific deployment·private synchronization:**
+> Exact scientific source `d7cf037cfd7b1833f12a0f90d24a8b070c0d7df6`의
+> Quality `31516119754`와 Pages `31516119241`이 성공했고 live Overview/Learn은
+> schema 10.0을 표시한다. Private ledger
+> `f0d172d8fa5f5578de487c532399532949b66198`은 remote exact, PRIVATE이고
+> anonymous API는 404다. `paper/main.tex` SHA-256
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`와
+> references SHA-256
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`는
+> unchanged다. 이 synchronization은 provenance뿐이며 lead, terms, P0/P1,
+> method, architecture, scientific-server query, PBS/GPU, outer test, result,
+> C21과 claim을 열지 않는다. Future authorized execution은 `introai9` PBS만
+> 사용하고 `junjinyong`에는 절대 접근하지 않는다.
+
 > **2026-08-12 ADAM longitudinal/treated-exclusion correction · schema 10.0:**
 > 전달된 surface-vector 분석에서는 field accuracy와 structure fidelity의
 > 분리, task stability→matched failure→bounded development→fresh confirmation
