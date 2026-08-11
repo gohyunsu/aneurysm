@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.5 no-experiment boundary · 2026-08-11:** The six
+> post-treatment formulations are below 32/40. No PETRA/TOF/DSA image was
+> requested, no FINDATA decision was sought, and no clipped-table payload was
+> opened. No P0/P1, method, architecture, scientific-server query, PBS/GPU job
+> or outer test is registered. Historical no-verdict P0s remain closed without
+> repair/rerun.
+
 > **Schema 8.4 no-experiment boundary · 2026-08-11:** Six downstream/model-
 > form formulations are below 32/40, so no P0 is registered. Public
 > PointFlowNet code was inspected but not executed; Dryad rigid/FSI payload was

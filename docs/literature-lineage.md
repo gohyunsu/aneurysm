@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 8.5 post-treatment correction · 2026-08-11:** A prospective
+> PETRA/TOF/DSA study already performs the paired device-aware follow-up
+> comparison and proposes non-invasive DSA substitution; prospective SILENT
+> MRA and older PETRA/UTE studies occupy artifact-reduced surveillance.
+> SelectiveNet, learning-to-defer and conformal risk control occupy generic
+> abstention and bounded-risk mechanisms. The Helsinki study already analyzes
+> technique-specific DWI/occlusion tradeoffs. The residual patient-level
+> missed-residual budget is identifiable in principle but has no public image
+> asset, so it is not an active AURORA contribution.
+
 > **Schema 8.4 downstream-surrogate correction · 2026-08-11:** PointFlowNet
 > directly occupies distance-to-wall point-cloud prediction of peak-systolic
 > velocity/WSS on 984 idealized MCA geometries; Hemo-MPO directly occupies

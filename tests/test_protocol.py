@@ -89,15 +89,74 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "team downstream-utility source batch"):
+        with self.assertRaisesRegex(ProtocolError, "post-treatment reference-linked imaging"):
+            validate_protocol(candidate)
+
+    def test_posttreatment_reference_linked_imaging_batch_is_rejected(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["posttreatment_reference_linked_imaging_source_delta"]
+        self.assertEqual(self.protocol["schema_version"], "8.5")
+        self.assertEqual(audit["best_score"], 28.5)
+        self.assertEqual(
+            audit["all_candidate_scores"],
+            [28.5, 27.5, 26.5, 26.5, 26.0, 24.5],
+        )
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertTrue(
+            all(
+                sum(candidate["axis_scores"]) == candidate["total"]
+                for candidate in audit["candidates"]
+            )
+        )
+        self.assertEqual(audit["petra_prospective_patients"], 100)
+        self.assertEqual(audit["petra_stent_assisted_coiling_units"], 72)
+        self.assertEqual(audit["petra_flow_diverter_units"], 28)
+        self.assertTrue(audit["petra_dsa_reference_at_both_timepoints"])
+        self.assertFalse(audit["petra_raw_data_publicly_versioned"])
+        self.assertFalse(audit["petra_raw_images_accessed"])
+        self.assertEqual(audit["helsinki_treated_patients_with_dwi"], 119)
+        self.assertEqual(
+            audit["helsinki_patients_with_six_month_angiographic_followup"], 113
+        )
+        self.assertFalse(audit["helsinki_researcher_initiated_data_sharing_possible"])
+        self.assertTrue(audit["helsinki_findata_official_decision_required"])
+        self.assertEqual(audit["clipped_table_patients"], 58)
+        self.assertFalse(audit["clipped_table_contains_raw_cta_tof_or_petra_images"])
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+        self.assertEqual(
+            problem["most_recent_source_rejected_candidate"],
+            "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget_rejected",
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "posttreatment_reference_linked_imaging_source_delta"
+        ]["best_score"] = 32.0
+        with self.assertRaisesRegex(
+            ProtocolError, "post-treatment reference-linked imaging source delta"
+        ):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "posttreatment_reference_linked_imaging_source_delta"
+        ]["gpu_training_authorized"] = True
+        with self.assertRaisesRegex(
+            ProtocolError, "post-treatment reference-linked imaging source delta"
+        ):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "team downstream-utility source batch"):
+        with self.assertRaisesRegex(ProtocolError, "post-treatment reference-linked imaging"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "team downstream-utility source batch"):
+        with self.assertRaisesRegex(ProtocolError, "post-treatment reference-linked imaging"):
             validate_protocol(candidate)
 
     def test_aneug_target_construction_audit_rejects_compute_and_score_repair(self) -> None:
@@ -300,7 +359,7 @@ class ProtocolTests(unittest.TestCase):
     def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["structure_faithful_wss_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "8.4")
+        self.assertEqual(self.protocol["schema_version"], "8.5")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertTrue(
@@ -333,7 +392,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "geometry_only_peak_systolic_point_surrogation_direct_prior_occupied",
+            "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget_rejected",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -346,7 +405,7 @@ class ProtocolTests(unittest.TestCase):
     def test_conformal_degree_candidate_closes_after_incomplete_cpu_p0(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["conformal_degree_certificate_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "8.4")
+        self.assertEqual(self.protocol["schema_version"], "8.5")
         self.assertEqual(audit["best_score"], 32.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
@@ -418,7 +477,7 @@ class ProtocolTests(unittest.TestCase):
     def test_cross_view_projection_batch_rejects_proxy_and_no_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["cross_view_projection_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "8.4")
+        self.assertEqual(self.protocol["schema_version"], "8.5")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -467,7 +526,7 @@ class ProtocolTests(unittest.TestCase):
     def test_functional_4dflow_segmentation_batch_is_direct_prior_limited(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["functional_4dflow_segmentation_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "8.4")
+        self.assertEqual(self.protocol["schema_version"], "8.5")
         self.assertEqual(audit["best_score"], 25.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -499,7 +558,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "geometry_only_peak_systolic_point_surrogation_direct_prior_occupied",
+            "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget_rejected",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -512,7 +571,7 @@ class ProtocolTests(unittest.TestCase):
     def test_aneux_transient_material_source_is_rejected_without_access(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneux_transient_cfd_material_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "8.4")
+        self.assertEqual(self.protocol["schema_version"], "8.5")
         self.assertEqual(audit["best_score"], 28.0)
         self.assertLess(
             max(audit["all_candidate_scores"]),
@@ -536,7 +595,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "geometry_only_peak_systolic_point_surrogation_direct_prior_occupied",
+            "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget_rejected",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -652,7 +711,7 @@ class ProtocolTests(unittest.TestCase):
     def test_team_downstream_utility_batch_rejects_architecture_first_reentry(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["team_downstream_utility_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "8.4")
+        self.assertEqual(self.protocol["schema_version"], "8.5")
         self.assertEqual(audit["best_score"], 27.0)
         self.assertEqual(
             audit["all_candidate_scores"],

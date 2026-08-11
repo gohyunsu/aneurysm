@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 8.5 asset boundary · 2026-08-11:** The 100-patient paired
+> PETRA/TOF/DSA images are author-request only and have no versioned public
+> manifest/license/split. Helsinki DWI/occlusion processing requires an
+> official FINDATA decision; no patient image/table was accessed. The public
+> clipped source contains only an 18.5-KB XLSX and 37.3-KB PDF for 58 patients,
+> not raw images. None is admitted for training, calibration or outer testing.
+
 > **Schema 8.4 asset boundary · 2026-08-11:** The CC0 Dryad rigid/FSI record
 > provides one rigid and two deformable simulations on two grids with 55 time
 > samples, but all conditions share one synthetic anatomy. It is a future

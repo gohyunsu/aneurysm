@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.5 no-model boundary · 2026-08-11:** PETRA artifact correction,
+> device conditioning, longitudinal fusion, reject heads, learning-to-defer and
+> conformal calibration are baselines/direct priors, not a selected model. The
+> leading post-treatment formulation scores 28.5/40 and has no public image
+> contract. Surface-vector edge 1-forms, Hodge/DEC and equivariant GNNs also
+> remain unselected. No architecture, loss, checkpoint or GPU run is authorized.
+
 > **Schema 8.4 no-model boundary · 2026-08-11:** The team suggestions
 > (attention, multigrid, masking, inlet conditioning, GNN rollout and temporal
 > decoding) are not a selected architecture. PointFlowNet and Hemo-MPO already

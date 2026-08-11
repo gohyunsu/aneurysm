@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 post-treatment reference-linked imaging · schema 8.5:**
+> Prospective PETRA/TOF/DSA는 100 patient/100 aneurysm, day-1/6-month pair,
+> SAC 72/FD 28과 DSA reference를 제공하지만 raw image는 versioned public
+> asset이 아니다. Helsinki는 DWI 119명, 6-month angiographic follow-up
+> 113명이지만 researcher-initiated sharing이 불가능하고 FINDATA 공식 결정이
+> 필요하다. Public clipped source는 58 patient/72 aneurysm/141 branch의
+> 18.5-KB XLSX와 37.3-KB PDF 표이며 raw CTA/TOF/PETRA image가 아니다.
+> SelectiveNet, learning-to-defer, conformal risk control, PETRA/UTE/SILENT MRA
+> comparison과 published DWI/occlusion tradeoff는 direct prior/control이다.
+> Fresh scores 28.5/27.5/26.5/26.5/26.0/24.5는 모두 32 미만이며 score repair,
+> P0/P1, method, architecture, server query, PBS/GPU, outer test와 claim은 0이다.
+> Surface-vector는 inactive hypothesis로 유지하고 closed jobs `115645`/
+> `115684`를 repair/rerun하지 않는다. 이번 update에서 scientific server는
+> 조회하지 않았다. Future gate-authorized work는 `introai9` PBS만 사용하고
+> login-node GPU command를 금지하며 `junjinyong`에는 절대 접근하지 않는다.
+
 > **2026-08-11 schema 8.4 deployment verification:** Exact scientific content
 > `62a3d7f252b1b73bcf4dc4113e6fd27880183be7` passed Quality
 > `31459082444` and Pages `31459081698`. Private paper head

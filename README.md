@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 post-treatment reference-linked imaging audit · schema 8.5:**
+> A prospective 100-patient PETRA-MRA/TOF-MRA/DSA study gives a clear clinical
+> reference but no versioned public image asset. Helsinki reports DWI for 119
+> treated patients and six-month angiographic follow-up for 113, but sharing
+> requires a FINDATA decision. The open clipped-aneurysm source is an Excel/PDF
+> table for 58 patients, not raw images. SelectiveNet, learning-to-defer,
+> conformal risk control and prior PETRA/SILENT MRA work are direct controls.
+> Six formulations score **28.5/27.5/26.5/26.5/26.0/24.5**, all rejected.
+> Surface-vector remains inactive; no image payload, P0/P1, model,
+> architecture, server query, PBS/GPU, outer test or claim is opened.
+> [Exact source delta](docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md)
+
 > **2026-08-11 schema 8.4 deployment verification:** Exact scientific content
 > `62a3d7f252b1b73bcf4dc4113e6fd27880183be7` passed Quality
 > `31459082444` and Pages `31459081698`. Private paper ledger

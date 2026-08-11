@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.5 rejects post-treatment reference-linked imaging
+
+- Audited a prospective 100-patient PETRA/TOF/DSA cohort, Helsinki
+  DWI/occlusion cohorts and the public 58-patient post-clipping table without
+  requesting or opening patient images.
+- Separated clear observed DSA/DWI endpoints from executable asset readiness.
+  PETRA images are author-request only, Helsinki processing requires FINDATA,
+  and the clipped source is tabular only.
+- Added selective prediction, learning-to-defer, conformal risk control and
+  prior PETRA/SILENT MRA work as direct controls. Froze six formulations at
+  28.5/27.5/26.5/26.5/26.0/24.5, all below 32.
+- Preserved surface-vector as inactive and opened no P0/P1, method,
+  architecture, server query, PBS/GPU, outer test, result row or paper claim.
+
 ## 2026-08-11 · Schema 8.4 scientific content deployed and privately pinned
 
 - Exact public scientific content `62a3d7f252b1b73bcf4dc4113e6fd27880183be7`

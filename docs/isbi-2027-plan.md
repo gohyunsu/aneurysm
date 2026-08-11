@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.5 submission boundary · 2026-08-11:** Do not title the ISBI
+> paper around PETRA-first DSA deferral, device-conditioned surveillance or
+> DWI/occlusion decision modeling. The strongest residual formulation is
+> 28.5/40, image assets are not publicly executable, and generic selective
+> inference is established. Surface-vector also remains inactive. Submission
+> identity, contribution, result table, method figure and model remain zero.
+
 > **Schema 8.4 submission boundary · 2026-08-11:** Do not build the ISBI title
 > around “GNN surrogate preserves CFD rupture signal.” The required joint
 > patient-level cohort is absent, the CMHA signal is exploratory, and the

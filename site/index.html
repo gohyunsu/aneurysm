@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — CFD-to-surrogate downstream utility를 비판적으로 재심사하고 27.0/40 기각, direct prior, no-model·no-compute 경계를 설명하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — prospective PETRA-MRA/TOF-MRA/DSA와 DWI/occlusion 자산을 비판적으로 재심사하고 28.5/40 기각, no-model·no-compute 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,27 +40,28 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST SCREEN 27.0/40 REJECTED · NOT SUBMISSION-READY</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST SCREEN 28.5/40 REJECTED · NOT SUBMISSION-READY</p>
         <h1>
-          A useful evaluation question is not yet a paper identity.<br>
-          <em>Joint evidence before architecture.</em>
+          A clear clinical reference is not yet a paper identity.<br>
+          <em>Executable evidence before architecture.</em>
         </h1>
         <p class="hero-lede">
-          <b>현재 active paper identity나 선택된 모델은 없습니다.</b> 팀의 최신
-          질문인 “real CFD가 주는 rupture-status 정보를 surrogate가 보존하는가?”는
-          좋은 평가 template입니다. 그러나 CMHA에는 matched surrogate field가
-          없고 기존 음성 결과는 exploratory입니다. PointFlowNet은 984 idealized
-          MCA에서 peak-systolic velocity/WSS point surrogate를 이미 다루며,
-          Hemo-MPO는 SE(3) mesh+physics+operator 조합을 직접 점유합니다. 새 CC0
-          rigid/FSI record도 독립 anatomy는 하나뿐입니다. 여섯 formulation은
-          <b>27.0/25.5/24.0/24.0/23.5/21.5</b>로 모두 기각했습니다. Attention,
-          multigrid, masking, GNN rollout과 temporal decoder는 novelty가 아니라
-          future control입니다. Surface-structure 질문은 계속 inactive이며 과거
-          CPU P0 두 건은 0/10 scientific check가 미평가된 no-verdict history로
-          닫혀 repair/rerun하지 않습니다.
+          <b>현재 active paper identity나 선택된 모델은 없습니다.</b> 새 prospective
+          study는 100명에게 수술 다음 날과 6개월에 PETRA-MRA, TOF-MRA와 DSA를
+          모두 시행해 임상 target을 명확히 합니다. 그러나 raw image는 versioned
+          public asset이 아니며, Helsinki DWI/occlusion cohort도 FINDATA 공식 결정
+          없이는 공유할 수 없습니다. 공개 post-clipping source는 58명의 표 자료일
+          뿐 원영상이 아닙니다. SelectiveNet, learning-to-defer, conformal risk
+          control과 기존 PETRA/SILENT MRA 비교가 obvious method space를 점유합니다.
+          여섯 formulation은 <b>28.5/27.5/26.5/26.5/26.0/24.5</b>로 모두
+          기각했습니다. Surface-vector와 CFD downstream 질문은 inactive evaluation
+          hypothesis로 보존합니다. 과거 CPU P0 두 건은 0/10 scientific check가
+          미평가된 no-verdict history로 닫혀 repair/rerun하지 않습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#posttreatment-imaging">Post-treatment 판정 이해하기</a>
+          <a class="button ghost" href="../docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md">Latest source delta ↗</a>
           <a class="button ghost" href="learn.html#downstream-utility">Downstream 판정 이해하기</a>
           <a class="button ghost" href="../docs/team-downstream-utility-reappraisal-2026-08-11.md">Latest critical reappraisal ↗</a>
           <a class="button ghost" href="../configs/source_watch_v7.json">Source watch v7 ↗</a>
@@ -130,7 +131,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">LATEST 27.0/40 REJECTED · EVALUATION TEMPLATE ≠ ACTIVE TASK · NO MODEL</div>
+        <div class="visual-caption">LATEST 28.5/40 REJECTED · CLEAR REFERENCE ≠ EXECUTABLE TASK · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -153,27 +154,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>27.0</b><span>latest downstream screen · rejected</span>
+            <b>28.5</b><span>latest post-treatment imaging screen · rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>1</b><span>effective anatomy in public paired rigid/FSI data</span>
+            <b>100</b><span>prospective PETRA/TOF/DSA patients · images not public</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> CMHA 99 patients: no matched surrogate prediction</span>
-          <span><i class="dot coral"></i> PointFlowNet code ≠ complete licensed matched baseline</span>
+          <span><i class="dot lime"></i> DSA/DWI reference exists: public learning asset does not</span>
+          <span><i class="dot coral"></i> Selective prediction/defer/conformal are mandatory controls</span>
           <span>P0 E/exit 2 · all 10 checks unevaluated · no scientific verdict · GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>27.0/40 · all six rejected · active lead 0</b></div>
+        <div><span>Latest source screen</span><b>28.5/40 · all six rejected · active lead 0</b></div>
         <div><span>Current compute</span><b>no scientific-server query · no new job · GPU 0</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh joint patient–CFD–surrogate asset audit or PointFlowNet baseline re-audit · no P0</b></div>
+        <div><span>Next action</span><b>versioned paired post-treatment images with DSA/DWI reference or unrelated fresh problem audit · no P0</b></div>
       </div>
     </section>
 

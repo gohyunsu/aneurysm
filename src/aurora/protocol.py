@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.4":
-        raise ProtocolError("The current research-state schema must be version 8.4.")
+    if protocol["schema_version"] != "8.5":
+        raise ProtocolError("The current research-state schema must be version 8.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_team_downstream_utility_batch_best_27_0_rejected_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_posttreatment_reference_linked_imaging_batch_best_28_5_rejected_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_4_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_5_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -185,6 +185,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_identity_active",
             "next_allowed_action",
             "audit_document",
+            "posttreatment_reference_linked_imaging_source_delta",
             "aneumo_bc_transport_source_audit",
             "source_only_dataset_substitution_screen",
             "topaneu_attachment_source_audit",
@@ -245,13 +246,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_team_downstream_utility_batch_best_27_0_rejected"
+        != "no_active_problem_latest_posttreatment_reference_linked_imaging_batch_best_28_5_rejected"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_metadata_and_open_source_code_only_no_new_scientific_payload_no_joint_downstream_cohort_closed_p0s_unchanged"
+        != "public_article_metadata_and_clipped_tabular_supplement_only_no_posttreatment_image_level_payload_no_p0_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -261,21 +262,178 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_joint_patient_cfd_surrogate_asset_audit_or_pointflownet_material_release_baseline_reaudit_not_p0_or_model"
+        != "monitor_for_a_versioned_patient_level_paired_posttreatment_image_release_with_dsa_or_dwi_reference_or_run_an_unrelated_fresh_problem_level_source_audit_not_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/team-downstream-utility-reappraisal-2026-08-11.md"
+        != "docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "geometry_only_peak_systolic_point_surrogation_direct_prior_occupied"
+        != "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget_rejected"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The team downstream-utility source batch must remain rejected below 32 while "
+            "The post-treatment reference-linked imaging source batch must remain rejected below 32 while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
         )
+    posttreatment = problem_selection[
+        "posttreatment_reference_linked_imaging_source_delta"
+    ]
+    _require_keys(
+        posttreatment,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "axis_scores",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "petra_prospective_doi",
+            "petra_prospective_patients",
+            "petra_prospective_aneurysms",
+            "petra_timepoints",
+            "petra_stent_assisted_coiling_units",
+            "petra_flow_diverter_units",
+            "petra_dsa_reference_at_both_timepoints",
+            "petra_raw_data_publicly_versioned",
+            "petra_raw_images_accessed",
+            "petra_article_already_proposes_noninvasive_dsa_alternative",
+            "helsinki_technique_dwi_occlusion_doi",
+            "helsinki_treated_patients_with_dwi",
+            "helsinki_patients_with_six_month_angiographic_followup",
+            "helsinki_parent_quality_cohort_doi",
+            "helsinki_parent_quality_cohort_patients",
+            "helsinki_researcher_initiated_data_sharing_possible",
+            "helsinki_findata_official_decision_required",
+            "helsinki_image_or_patient_table_accessed",
+            "clipped_table_doi",
+            "clipped_table_patients",
+            "clipped_table_aneurysms",
+            "clipped_table_branches",
+            "clipped_table_public_xlsx_display_size",
+            "clipped_table_public_pdf_display_size",
+            "clipped_table_contains_raw_cta_tof_or_petra_images",
+            "clipped_table_payload_accessed",
+            "direct_prior_threats",
+            "candidates",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+        ],
+        "post-treatment reference-linked imaging source delta",
+    )
+    expected_posttreatment_priors = {
+        "prospective_petra_tof_dsa_comparison_and_noninvasive_followup_proposal",
+        "prior_petra_ute_and_silent_mra_posttreatment_followup",
+        "prospective_silent_mra_endovascular_followup",
+        "selectivenet_integrated_reject_option",
+        "learning_to_defer_to_an_expert",
+        "conformal_risk_control_for_bounded_selective_error",
+        "prospective_technique_specific_dwi_and_occlusion_tradeoff",
+    }
+    expected_posttreatment_scores = [28.5, 27.5, 26.5, 26.5, 26.0, 24.5]
+    expected_posttreatment_ids = {
+        "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget",
+        "device_conditioned_residual_filling_estimation",
+        "longitudinal_occlusion_change_concordance",
+        "dwi_lesion_size_outcome_stratification",
+        "postclip_branch_visibility_reliability",
+        "treatment_technique_benefit_harm_decision_model",
+    }
+    candidates = posttreatment["candidates"]
+    if (
+        posttreatment["status"]
+        != "fresh_source_batch_rejected_below_admission_no_public_image_level_development_asset"
+        or posttreatment["audit_document"]
+        != "docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md"
+        or posttreatment["automatic_selection_threshold"] != 32.0
+        or posttreatment["best_candidate_id"]
+        != "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget"
+        or posttreatment["best_score"] != 28.5
+        or posttreatment["axis_scores"] != [5.0, 4.5, 1.5, 1.0, 4.5, 5.0, 5.0, 2.0]
+        or sum(posttreatment["axis_scores"]) != posttreatment["best_score"]
+        or posttreatment["all_candidate_scores"] != expected_posttreatment_scores
+        or max(posttreatment["all_candidate_scores"])
+        >= posttreatment["automatic_selection_threshold"]
+        or posttreatment["conditional_source_lead_count"] != 0
+        or posttreatment["primary_problem_selected"] is not False
+        or posttreatment["petra_prospective_doi"] != "10.3389/fneur.2026.1786151"
+        or posttreatment["petra_prospective_patients"] != 100
+        or posttreatment["petra_prospective_aneurysms"] != 100
+        or posttreatment["petra_timepoints"]
+        != ["postoperative_day_1", "six_months"]
+        or posttreatment["petra_stent_assisted_coiling_units"] != 72
+        or posttreatment["petra_flow_diverter_units"] != 28
+        or posttreatment["petra_dsa_reference_at_both_timepoints"] is not True
+        or posttreatment["petra_raw_data_publicly_versioned"] is not False
+        or posttreatment["petra_raw_images_accessed"] is not False
+        or posttreatment["petra_article_already_proposes_noninvasive_dsa_alternative"]
+        is not True
+        or posttreatment["helsinki_technique_dwi_occlusion_doi"]
+        != "10.1007/s00701-026-06934-z"
+        or posttreatment["helsinki_treated_patients_with_dwi"] != 119
+        or posttreatment["helsinki_patients_with_six_month_angiographic_followup"]
+        != 113
+        or posttreatment["helsinki_parent_quality_cohort_doi"]
+        != "10.3171/2025.7.JNS25775"
+        or posttreatment["helsinki_parent_quality_cohort_patients"] != 169
+        or posttreatment["helsinki_researcher_initiated_data_sharing_possible"]
+        is not False
+        or posttreatment["helsinki_findata_official_decision_required"] is not True
+        or posttreatment["helsinki_image_or_patient_table_accessed"] is not False
+        or posttreatment["clipped_table_doi"] != "10.1016/j.dib.2021.106874"
+        or posttreatment["clipped_table_patients"] != 58
+        or posttreatment["clipped_table_aneurysms"] != 72
+        or posttreatment["clipped_table_branches"] != 141
+        or posttreatment["clipped_table_public_xlsx_display_size"] != "18.5_KB"
+        or posttreatment["clipped_table_public_pdf_display_size"] != "37.3_KB"
+        or posttreatment["clipped_table_contains_raw_cta_tof_or_petra_images"]
+        is not False
+        or posttreatment["clipped_table_payload_accessed"] is not False
+        or set(posttreatment["direct_prior_threats"])
+        != expected_posttreatment_priors
+        or len(candidates) != 6
+        or _unique_ids(candidates, "id", "post-treatment candidates")
+        != expected_posttreatment_ids
+        or [candidate["total"] for candidate in candidates]
+        != expected_posttreatment_scores
+        or any(sum(candidate["axis_scores"]) != candidate["total"] for candidate in candidates)
+        or any(
+            posttreatment[key] is not False
+            for key in [
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            ]
+        )
+        or posttreatment["execution_server"] != "introai9"
+    ):
+        raise ProtocolError(
+            "The post-treatment reference-linked imaging source delta must preserve "
+            "the prospective PETRA/DSA and Helsinki unit boundaries, tabular-only "
+            "clipped source, direct-prior threats, frozen sub-32 scores and no-compute state."
+        )
+    checks.append("post-treatment reference-linked imaging rejection and no-compute boundary")
+
     bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
     _require_keys(
         bc_transport,

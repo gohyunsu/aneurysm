@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest CFD-to-surrogate downstream-utility batch best 27.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
-    requirement: "a distinct fresh problem with a material joint patient-level asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; exploratory CMHA, one-anatomy FSI, partial PointFlowNet code, GNN/operator stacking or a new loss cannot create novelty or compute authority",
+    status: "Target locked · latest post-treatment reference-linked imaging batch best 28.5/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    requirement: "a distinct fresh problem with a versioned patient-level image asset and independently observed reference must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; request-only PETRA images, FINDATA-controlled DWI, tabular visibility data, generic selective inference, GNN/operator stacking or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A clear DSA/DWI reference still needs an executable image asset",
+      copy: "A prospective 100-patient study pairs PETRA-MRA, TOF-MRA and DSA at postoperative day 1 and six months, but raw images are author-request only. Helsinki reports DWI for 119 treated patients and six-month angiographic follow-up for 113, while researcher-initiated sharing requires an official FINDATA decision. The only open clipped-aneurysm source is an Excel/PDF table for 58 patients, not raw images. SelectiveNet, learning to defer, conformal risk control and prior PETRA/SILENT MRA comparison remove the obvious method novelty. Six formulations score 28.5/27.5/26.5/26.5/26.0/24.5 and are rejected.",
+      status: "Best 28.5/40 rejected · image payload/P0/method/architecture/server/GPU 0",
+      url: "../docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Downstream CFD retention is retained as evaluation, not identity",
@@ -861,6 +868,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 8.5 rejects post-treatment reference-linked imaging formulations",
+      copy: "The prospective PETRA/TOF/DSA study improves target identifiability but supplies no versioned image asset; Helsinki DWI/occlusion data require a FINDATA decision; the public clipped source is tabular only. Generic reject-option, defer and conformal mechanisms are direct controls. Six formulations freeze at 28.5/27.5/26.5/26.5/26.0/24.5. Surface-vector remains inactive and no P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",
+      files: ["docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

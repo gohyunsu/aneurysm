@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 8.5 direction · 2026-08-11:** Do not replace the inactive
+> surface-vector hypothesis with a PETRA/DWI wrapper. The new sources have
+> clearer observed references, but no lawful versioned image-level development
+> asset. A future residual PETRA-first problem would control the patient-level
+> risk of missing clinically relevant residual filling while reducing DSA;
+> reject-option, defer and conformal methods are mandatory controls, not
+> novelty. The frozen batch peaks at 28.5/40. Continue source discovery and
+> open no P0 or compute. [Exact audit](posttreatment-reference-linked-imaging-source-delta-2026-08-11.md)
+
 > **Schema 8.4 direction · 2026-08-11:** Preserve the team's CFD-versus-
 > surrogate downstream question only as an evaluation template. The joint
 > patient-level observation needed to identify it is absent, CMHA has no
