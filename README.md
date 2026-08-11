@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 longitudinal-biology delta deployment and private pin:** Exact
+> public scientific source `0cadda2cf03144f2e876862a727714858999b56c`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31547562160)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31547561485).
+> Private ledger `6189db9532203207d411e8983dcd8586cbe8efc4` is remote exact,
+> PRIVATE and anonymously returns 404. Full regression is 451 tests: 385
+> pass/66 optional skip and 89 protocol invariant groups. Manuscript and
+> references remain byte-for-byte unchanged; this provenance opens no paper,
+> model, compute or claim.
+
 > **2026-08-12 longitudinal-biology/cross-scale delta · schema 10.7
 > unchanged:** Real future follow-up exists: a two-centre study follows 198
 > patients/224 untreated aneurysms for median 6.8 years and directly owns the

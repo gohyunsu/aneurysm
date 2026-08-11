@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-12 · Longitudinal-biology delta deployed and privately pinned
+
+- Exact public scientific source `0cadda2cf03144f2e876862a727714858999b56c`
+  passed Quality `31547562160` and Pages `31547561485`; live Learn exposes
+  `#biology-chain`, the exact detailed audit and filterable change history.
+- Private ledger `6189db9532203207d411e8983dcd8586cbe8efc4` is remote exact,
+  PRIVATE and returns 404 to an anonymous API request. Manuscript and reference
+  hashes are unchanged.
+- Full regression is 451 tests: 385 pass/66 optional-dependency skip and 89
+  protocol invariant groups. This provenance-only pin opens no scientific or
+  submission authority.
+
 ## 2026-08-12 · Longitudinal biology and cross-scale mechanism delta · no state change
 
 - Corrected the scope of the current evidence: genuine future follow-up exists

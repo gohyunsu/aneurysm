@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 longitudinal-biology delta deployment·private synchronization:**
+> Exact public scientific source
+> `0cadda2cf03144f2e876862a727714858999b56c` passed Quality `31547562160`
+> and Pages `31547561485`. Live Learn `#biology-chain`, the detailed audit and
+> filterable change history are deployed. Private paper ledger
+> `6189db9532203207d411e8983dcd8586cbe8efc4` is remote exact, PRIVATE and
+> anonymous API is 404. Full regression is 451 tests: 385 pass/66 optional
+> skip with 89 protocol invariant groups; site/JavaScript/diff hygiene pass.
+> `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization opens no lead/P0/P1/method/model/server/PBS/GPU/outer
+> test/result/C21/claim and changes no schema-10.7 scientific state.
+
 > **2026-08-12 longitudinal-biology/cross-scale mechanism delta · schema 10.7
 > unchanged:** Long-term AWE source `10.1002/ana.78106` follows 198 patients/
 > 224 untreated aneurysms for median 6.8 years and directly owns the association

@@ -1116,6 +1116,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Longitudinal-biology delta is live and privately pinned",
+      copy: "Exact public scientific source 0cadda2cf03144f2e876862a727714858999b56c passed Quality 31547562160 and Pages 31547561485. Live Learn exposes #biology-chain and the exact detailed audit. Private ledger 6189db9532203207d411e8983dcd8586cbe8efc4 is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes are unchanged. Full regression is 451 tests: 385 pass/66 optional skip and 89 protocol invariant groups. This provenance changes no schema-10.7 score, active lead, P0/P1, method, model, scientific server, PBS/GPU, outer test or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Future follow-up is acknowledged without inventing a biological mechanism or model",
       copy: "The long-term AWE source demonstrates genuine future follow-up on 198 patients/224 aneurysms, correcting any overly broad statement that all available evidence is cross-sectional. Its composite instability association is direct prior and no versioned public patient–image–event–split asset was identified. NHR/SIRI–AWE, growth and incident-aSAH results arise from distinct datasets and do not identify same-patient mediation. The 13-animal serial MRA/SEM study exposes a real sub-resolution failure but is request-only and not a human benchmark. Six candidates score 28.5/26.5/25.0/23.0/22.5/20.0 and all fail novelty, asset, unit or identifiability floors. Schema 10.7 and the aSAH primary batch are unchanged; surface-vector remains inactive and no request, payload, P0/P1, architecture, scientific server, PBS/GPU, outer test or claim opened.",
