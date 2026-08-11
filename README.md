@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 surface-vector analysis delta review · no state change:** The
+> supplied closed-job, no-repair and staged-gate conclusions are retained.
+> Public/shared AGENTS already recorded `115645.ECE-util1` as closed, not
+> running. The current architecture is **none**, not GNN; In-PI-MGN is an
+> explicit physics-constrained transient mesh-GNN direct prior. Surface-vector
+> remains an inactive evaluation hypothesis, and schema 10.7, scores and all
+> no-model/no-compute boundaries are unchanged. See the
+> [authoritative adjudication](docs/surface-vector-analysis-adjudication-2026-08-11.md).
+
 > **2026-08-12 schema 10.7 scientific deployment/private synchronization:**
 > Exact scientific source `39b94a7c42d40c70c18fe76744349507bffb2ea8`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31540996594)

@@ -5562,6 +5562,8 @@
       "historical_p0_scientific_checks_evaluated": 0,
       "hypothesis": "field_error_matched_transient_wss_surrogates_may_disagree_on_robust_signed_critical_points_and_cardiac_cycle_worldlines",
       "evaluation_problem_is_independently_novel": false,
+      "current_architecture": null,
+      "current_architecture_is_gnn": false,
       "architecture_selected": false,
       "candidate_components_are_novel_individually": false,
       "candidate_components": [
@@ -5572,6 +5574,7 @@
         "deterministic_critical_point_index_worldline_event_evaluator"
       ],
       "direct_prior_components": [
+        "physics_constrained_autoregressive_transient_aneurysm_mesh_gnn",
         "hodge_and_dec_operator_learning",
         "se3_equivariant_surface_wss_prediction",
         "critical_point_extraction_and_robust_tracking",
@@ -5579,6 +5582,9 @@
         "aneurysm_specific_cardiac_cycle_wss_critical_point_tracking",
         "nonmedical_3d_foundation_surface_feature_augmentation_for_aneurysm_flow_gnn"
       ],
+      "latest_external_analysis_review_date": "2026-08-12",
+      "latest_external_analysis_changed_scientific_state": false,
+      "agents_running_status_correction_needed_at_review": false,
       "foundation_surface_feature_direct_prior": {
         "status": "paper_verified_stated_code_url_currently_404_no_candidate_or_authorization_change",
         "audit_document": "docs/trellis-surface-feature-direct-prior-delta-2026-08-11.md",

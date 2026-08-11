@@ -1087,6 +1087,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "analysis",
+      title: "Surface-vector analysis re-reviewed without inventing a current GNN",
+      copy: "The supplied job-state, no-repair and staged-gate analysis is accepted, but it changes no scientific state. Public and shared AGENTS already record 115645.ECE-util1 as closed E/exit 2 with 0/10 checks evaluated; no stale running state remained. The current architecture is none, not GNN. In-PI-MGN/BenchAnXplore is now explicitly cross-linked in the authoritative contract as a physics-constrained autoregressive transient aneurysm mesh-GNN direct prior. It leaves a possible structure-fidelity evaluation question, not model novelty or permission for P0/P1, architecture, server/GPU, outer test or a paper claim.",
+      files: ["docs/surface-vector-analysis-adjudication-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/learn.html", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.12",
       category: "deployment",
       title: "Schema 10.7 scientific source is live and privately pinned",
       copy: "Exact scientific source 39b94a7c42d40c70c18fe76744349507bffb2ea8 passed Quality 31540996594 and Pages 31540995837. Live Overview, Learn, detailed audit and the machine protocol expose best 29.0/40, all six rejected on residual-novelty or joined-asset floors and active lead/P0/method/model/server/GPU/claim zero. Private ledger f04716e7c39f90a33fe76ccf677c4285a074819a is remote exact; manuscript and references remain byte-for-byte unchanged. Full regression is 448 tests: 382 pass/66 optional skip and protocol 86 invariant groups; site and JavaScript checks pass. This provenance creates no scientific or submission authority.",

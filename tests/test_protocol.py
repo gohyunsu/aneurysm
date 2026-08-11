@@ -1626,6 +1626,8 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(assessment["historical_source_score"], 32.0)
         self.assertTrue(assessment["historical_p0_closed"])
         self.assertFalse(assessment["historical_p0_job_running"])
+        self.assertIsNone(assessment["current_architecture"])
+        self.assertFalse(assessment["current_architecture_is_gnn"])
         self.assertFalse(assessment["architecture_selected"])
         self.assertFalse(assessment["executable_p0_registered"])
         self.assertFalse(assessment["gpu_training_authorized"])
@@ -1650,6 +1652,13 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(
             assessment["structural_training_loss_before_e2_failure_allowed"]
         )
+        self.assertIn(
+            "physics_constrained_autoregressive_transient_aneurysm_mesh_gnn",
+            assessment["direct_prior_components"],
+        )
+        self.assertEqual(assessment["latest_external_analysis_review_date"], "2026-08-12")
+        self.assertFalse(assessment["latest_external_analysis_changed_scientific_state"])
+        self.assertFalse(assessment["agents_running_status_correction_needed_at_review"])
         self.assertEqual(len(assessment["isbi_result_contract_all_required"]), 5)
 
         candidate = copy.deepcopy(self.protocol)

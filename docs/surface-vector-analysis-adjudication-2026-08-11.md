@@ -7,6 +7,16 @@
 
 상태: **accepted in part · corrected in part · no active lead/model/P0/P1/GPU**
 
+> **2026-08-12 delta review · no scientific-state change:** 새로 전달된 분석을
+> 항목별로 다시 대조했다. Job 종료 상태, 32.0/40의 역사적 의미, same-contract
+> no-repair, staged gate와 no-`junjinyong` 경계는 모두 정확하다. 다만
+> “AGENTS.md 상단이 running으로 남아 있다”는 지적은 현재 snapshot에는 적용되지
+> 않는다. Public/shared AGENTS는 이미 `115645.ECE-util1`을 closed no-verdict로
+> 기록한다. 또한 현재 architecture는 GNN이 아니라 **선택된 architecture 없음**이다.
+> Physics-constrained transient aneurysm mesh GNN은 아래의 direct prior이지 AURORA
+> current model이 아니다. 이 재검토는 schema, score, source admission, P0/P1,
+> method, architecture, server/GPU 또는 paper claim을 열지 않는다.
+
 이 문서는 현재 surface-vector 판정의 authoritative record다. 과거 conditional
 assessment의 넓은 endpoint 목록보다 이 문서의 primary/secondary hierarchy가
 우선한다.
@@ -128,6 +138,14 @@ prediction, robust critical-point tracking, trajectory-preserving vector-field
 compression, aneurysm WSS fixed-point/cycle analysis와 whole-field conformal
 functional certification이 포함된다. 이름을 바꾸거나 이들을 합치는 것은 residual
 gap이 아니다.
+
+여기에 [In-PI-MGN/BenchAnXplore](https://www.nature.com/articles/s41746-026-02404-z)도
+명시적으로 포함한다. 이 2026 npj Digital Medicine 연구는 semi-idealized aneurysm
+mesh에서 cardiac-cycle 3D velocity/pressure를 autoregressive physics-constrained
+GNN으로 예측하고 inflow OOD와 rollout을 평가한다. 따라서 “aneurysm mesh GNN +
+transient decoder + physics loss”도 이미 강한 direct control이다. 이 연구가
+surface-WSS signed critical point/worldline fidelity를 직접 해결하지 않았다는 점은
+미래의 **평가 질문**을 남기지만, 곧바로 새 architecture novelty를 만들지는 않는다.
 
 ## 4. 향후 재진입 시의 최소 연구 계약
 

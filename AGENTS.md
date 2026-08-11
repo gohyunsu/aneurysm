@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 surface-vector external-analysis delta review · no state
+> change:** The supplied job-state/no-repair/staged-gate reasoning is accepted.
+> The claimed stale running label is not present in the current snapshot:
+> `115645.ECE-util1` is already closed at E/exit 2, GPU 0, 0/10 scientific
+> checks evaluated. Current architecture is null—not GNN. In-PI-MGN/
+> BenchAnXplore is now explicitly cross-linked as a physics-constrained
+> autoregressive transient aneurysm mesh-GNN direct prior. Surface-vector
+> remains an inactive hypothesis; schema 10.7, scores, lead/P0/P1/method/
+> architecture/server/GPU/outer-test/claim 0 and all execution prohibitions are
+> unchanged. No server query, transfer, submission or monitoring occurred.
+
 > **2026-08-12 schema 10.7 scientific deployment·private synchronization:**
 > Exact scientific public source
 > `39b94a7c42d40c70c18fe76744349507bffb2ea8` passed Quality

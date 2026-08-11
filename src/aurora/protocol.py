@@ -4891,10 +4891,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "historical_p0_scientific_checks_evaluated",
             "hypothesis",
             "evaluation_problem_is_independently_novel",
+            "current_architecture",
+            "current_architecture_is_gnn",
             "architecture_selected",
             "candidate_components_are_novel_individually",
             "candidate_components",
             "direct_prior_components",
+            "latest_external_analysis_review_date",
+            "latest_external_analysis_changed_scientific_state",
+            "agents_running_status_correction_needed_at_review",
             "foundation_surface_feature_direct_prior",
             "new_evidence_version_requires_material_source_or_asset_change",
             "new_wrapper_downloader_retry_or_model_name_is_new_evidence",
@@ -4936,9 +4941,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or conditional_surface["hypothesis"]
         != "field_error_matched_transient_wss_surrogates_may_disagree_on_robust_signed_critical_points_and_cardiac_cycle_worldlines"
         or conditional_surface["evaluation_problem_is_independently_novel"] is not False
+        or conditional_surface["current_architecture"] is not None
+        or conditional_surface["current_architecture_is_gnn"] is not False
         or conditional_surface["candidate_components_are_novel_individually"] is not False
         or set(conditional_surface["direct_prior_components"])
         != {
+            "physics_constrained_autoregressive_transient_aneurysm_mesh_gnn",
             "hodge_and_dec_operator_learning",
             "se3_equivariant_surface_wss_prediction",
             "critical_point_extraction_and_robust_tracking",
@@ -4946,6 +4954,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneurysm_specific_cardiac_cycle_wss_critical_point_tracking",
             "nonmedical_3d_foundation_surface_feature_augmentation_for_aneurysm_flow_gnn",
         }
+        or conditional_surface["latest_external_analysis_review_date"] != "2026-08-12"
+        or conditional_surface["latest_external_analysis_changed_scientific_state"] is not False
+        or conditional_surface["agents_running_status_correction_needed_at_review"] is not False
         or conditional_surface["new_evidence_version_requires_material_source_or_asset_change"] is not True
         or conditional_surface["new_wrapper_downloader_retry_or_model_name_is_new_evidence"] is not False
         or conditional_surface["same_contract_repair_or_rerun_allowed"] is not False

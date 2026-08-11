@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-12 · Surface-vector external-analysis delta review · no state change
+
+- Accepted the exact closed-job, no-repair and staged-gate conclusions, but
+  recorded that current public/shared `AGENTS.md` already showed job
+  `115645.ECE-util1` as closed rather than running.
+- Made the current architecture explicit: it is unselected, not GNN. Added
+  In-PI-MGN/BenchAnXplore to the authoritative direct-prior contract for
+  physics-constrained autoregressive transient aneurysm mesh GNNs.
+- Preserved surface-vector as an inactive evaluation hypothesis. Schema 10.7,
+  every score, source decision and the zero P0/P1/method/architecture/server/
+  GPU/outer-test/claim boundary are unchanged; no server was queried and no
+  experiment was opened.
+
 ## 2026-08-12 · Schema 10.7 scientific source deployed and privately pinned
 
 - Exact scientific source `39b94a7c42d40c70c18fe76744349507bffb2ea8`

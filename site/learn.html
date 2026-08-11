@@ -1221,6 +1221,13 @@
           <span>제안된 surface-vector 분석을 어떻게 반영했나?</span>
           <strong>문제의식은 보존했지만, 모델과 loss는 채택하지 않았습니다.</strong>
           <p>
+            <b>현재 아키텍처가 GNN인가?</b> 아닙니다. 현재 선택된 architecture와
+            active model은 0입니다. 과거 코드와 후보군에 mesh GNN이 있고,
+            In-PI-MGN은 physics-constrained autoregressive mesh GNN으로 동맥류의
+            cardiac-cycle 3D velocity/pressure를 이미 예측하지만, 이것은 AURORA의
+            current model이 아니라 반드시 비교해야 할 direct prior입니다.
+          </p>
+          <p>
             “field error가 작아도 flow organization은 틀릴 수 있다”는 문장은
             검증할 가치가 있습니다. 그러나 Hodge/DEC operator, SE(3) transient
             WSS, robust critical-point tracking, trajectory-preserving compression과
@@ -1228,6 +1235,12 @@
             novelty가 아닙니다. 가장 중요한 새 실험은 먼저 field-error-matched
             strong baseline들이 안정적인 구조 지표에서 실제로 갈리는지 보는
             것입니다.
+          </p>
+          <p>
+            2026-08-12 재검토에서도 과학적 상태는 바뀌지 않았습니다. 제시된 job
+            종료·no-repair·gate 순서는 맞지만, AGENTS의 running 표시는 이미 이전에
+            closed no-verdict로 교정돼 있었습니다. 따라서 과거 job을 다시 최신
+            실험처럼 올리거나 같은 contract를 수리하지 않습니다.
           </p>
           <p>
             Open Aneurisk record는 76 geometry와 VTP archive를 제공하지만 public
