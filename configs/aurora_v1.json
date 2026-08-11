@@ -6492,7 +6492,7 @@
       "status": "watch_only_all_twenty_frozen_snapshots_match",
       "config": "configs/source_watch_v13.json",
       "extends_historical_config": "configs/source_watch_v12.json",
-      "config_sha256": "352d3af9404cc5ec66726413ba171f909febe8d2c0cdc0337cc3239630948c32",
+      "config_sha256": "c24c4f88391c3a9712b9932b54fb3c8c83362bd6dfbc6d069eaa4efe20ff9e8f",
       "watch_count": 20,
       "added_watch_ids": [
         "da4dcta_zenodo_material_release_v1",

@@ -1160,6 +1160,10 @@ class SourceWatchContractTests(unittest.TestCase):
         )
         self.assertEqual(github["frozen_snapshot"]["release_count"], 1)
         self.assertIsNone(github["frozen_snapshot"]["license_spdx_id"])
+        self.assertEqual(
+            github["frozen_snapshot"]["payload_or_code_entries"][0],
+            "LSTM_model.py",
+        )
 
         observations = {
             watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])

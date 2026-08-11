@@ -1417,7 +1417,20 @@ def _validate_v13(payload: Mapping[str, Any]) -> None:
         {"name": "raw_data", "type": "dir", "size": 0},
         {"name": "viz_utils.py", "type": "file", "size": 42496},
     ]
-    expected_material = [entry["name"] for entry in expected_entries]
+    expected_material = [
+        "LSTM_model.py",
+        "attention.py",
+        "constant_value.py",
+        "feature.py",
+        "gui.py",
+        "io_utils.py",
+        "jupyter_notebook",
+        "navi_feature.py",
+        "pipeline.py",
+        "project.py",
+        "raw_data",
+        "viz_utils.py",
+    ]
     if (
         github.get("watch_id")
         != "da4dcta_github_release_and_baseline_v1"
