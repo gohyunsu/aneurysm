@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **Schema 8.0 lineage status · 2026-08-11:** The conformal-degree composition
+> remains a plausible but unverified residual hypothesis. Its exact asset P0
+> ended execution-incomplete with 0/10 checks, so it is neither a contribution
+> nor a negative scientific result. Functional conformal sets, downstream
+> certificates, vector-field uncertainty/robustness, Hodge/HSD, equivariant WSS
+> and Aneurisk fixed-point analysis remain direct priors for any distinct fresh
+> future problem.
+
 > **Schema 7.9 calibrated gap · 2026-08-11:** Functional surrogate conformal
 > prediction already supplies whole-field coverage; conformalized distance
 > fields already turn such coverage into downstream safety; uncertain-vector-

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 환자 수준 whole-field conformal residual로 surface-WSS signed total degree를 선택적으로 인증하는 32.5/40 조건부 연구 후보와 method-free introai9 CPU P0 경계를 설명하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — surface-WSS signed total degree certificate의 32.5/40 source history와 0/10 no-verdict CPU P0, no-model 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -48,7 +48,7 @@
         <p class="hero-lede">
           WSS는 혈관 표면을 따라 흐르는 <b>접선 벡터장</b>입니다. 예측 벡터장이
           reference와 평균적으로 비슷해도, 그 안에 실제로 critical point가 있는지
-          확신할 수는 없습니다. 새 32.5/40 조건부 후보는 더 큰 GNN을 먼저 만드는
+          확신할 수는 없습니다. 이번 32.5/40 source hypothesis는 더 큰 GNN을 먼저 만드는
           대신, 환자 단위 calibration으로 예측 전체장의 오차 반경을 구합니다.
           어떤 surface region의 경계에서 예측 벡터 크기가 이 반경보다 모두 크면,
           예측장과 실제장은 경계를 지나 0을 만들 수 없으므로 그 region의
@@ -59,15 +59,18 @@
           아닙니다. Functional conformal prediction과 vector-field robustness가
           이미 존재하므로 novelty는 이 둘의 조합 자체가 아니라, intrinsic surface
           certificate가 실제로 유효하면서도 충분한 영역을 인증하는지에 달려 있습니다.
-          현재는 정확한 Aneurisk archive semantics만 확인하는 CPU-only P0가 등록됐고,
-          archive/VTP는 아직 읽지 않았습니다. Primary, method, architecture, GPU,
-          outer test와 paper contribution은 여전히 0입니다.
+          그러나 exact CPU-only P0는 `execution-incomplete/no scientific verdict`로
+          끝나 10개 check가 모두 미평가입니다. Complete archive integrity와 VTP
+          semantics는 확인되지 않았고, 동일 contract는 수리하거나 재실행하지 않습니다.
+          따라서 conditional lead, primary, method, architecture, GPU, outer test와
+          paper contribution은 모두 0으로 돌아갔습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
           <a class="button ghost" href="learn.html#conformal-degree">새 certificate 이해하기</a>
           <a class="button ghost" href="../docs/conformal-degree-certificate-source-audit-2026-08-11.md">Conformal-degree audit ↗</a>
           <a class="button ghost" href="../configs/aneurisk_conformal_degree_p0.json">Frozen CPU P0 ↗</a>
+          <a class="button ghost" href="../results/aneurisk_conformal_degree_p0_execution_20260811.json">Closed P0 outcome ↗</a>
           <a class="button ghost" href="learn.html#structure-reappraisal">최신 구조 판정 이해하기</a>
           <a class="button ghost" href="../docs/structure-faithful-wss-source-reappraisal-2026-08-11.md">Latest WSS reappraisal ↗</a>
           <a class="button ghost" href="learn.html#architecture">TRELLIS baseline 이해하기</a>
@@ -78,7 +81,7 @@
           <a class="button ghost" href="../docs/expert-virtual-removal-pair-source-delta-2026-08-11.md">Virtual-removal history ↗</a>
           <a class="button ghost" href="#architecture">아키텍처 요약</a>
           <a class="button ghost" href="../docs/research-direction.md">Research brief ↗</a>
-          <a class="button ghost" href="../docs/surface-vector-conditional-assessment-2026-08-10.md">Current critical assessment ↗</a>
+          <a class="button ghost" href="../docs/conformal-degree-certificate-source-audit-2026-08-11.md">Current critical assessment ↗</a>
           <a class="button ghost" href="../docs/aneug-surface-vector-structure-source-audit-2026-08-10.md">Closed source audit ↗</a>
           <a class="button ghost" href="../configs/aneug_surface_vector_structure_p0.json">Historical frozen P0 ↗</a>
           <a class="button ghost" href="../docs/aneug-target-construction-source-audit-2026-08-10.md">Current target audit ↗</a>
@@ -124,7 +127,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">CONFORMAL DEGREE · CONDITIONAL SOURCE LEAD · NO MODEL</div>
+        <div class="visual-caption">CONFORMAL DEGREE · CLOSED NO-VERDICT P0 · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -147,7 +150,7 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>32.5</b><span>fresh source score · P0 only</span>
+            <b>32.5</b><span>preserved source score · closed history</span>
           </div>
           <div class="posterior-card card-b">
             <b>76</b><span>reported patient-specific geometries</span>
@@ -159,15 +162,15 @@
         <div class="visual-legend">
           <span><i class="dot lime"></i> whole-field residual bound → boundary margin → signed degree certificate</span>
           <span><i class="dot coral"></i> total degree ≠ exact zero count, location or clinical risk</span>
-          <span>introai9 CPU/PBS P0 registered · archive unread · GPU 0</span>
+          <span>P0 E/exit 2 · 0/10 evaluated · no scientific verdict · GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Conditional source lead</span><b>1 · patient-level conformal degree · 32.5/40</b></div>
-        <div><span>Current compute</span><b>one CPU P0 registered · not submitted · GPU 0</b></div>
+        <div><span>Conditional source lead</span><b>0 · 32.5/40 preserved as closed source history</b></div>
+        <div><span>Current compute</span><b>queue empty · latest P0 E/exit 2 · GPU 0</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>exact clean source → one introai9 CPU archive/semantics P0</b></div>
+        <div><span>Next action</span><b>fresh problem-level source/asset audit · no same-contract repair</b></div>
       </div>
     </section>
 
@@ -234,7 +237,7 @@
         <div class="lineage-list" id="lineage-list" aria-live="polite"></div>
         <aside class="gap-panel">
           <p class="eyebrow">CURRENT GAP STATUS</p>
-          <h3>One narrow certificate gap is conditionally active.</h3>
+          <h3>The certificate gap is plausible, but no longer active.</h3>
           <p>
             Functional-surrogate conformal prediction, whole-field downstream
             certificates, uncertain vector-field topology, Hodge/DEC와 aneurysm
@@ -242,13 +245,14 @@
             붙이기가 아니라, intrinsic tangent-field residual coverage로
             boundary-margin region의 signed total degree를 patient-level에서
             유효하게 인증하면서 certificate가 공집합에 가까워지지 않는가입니다.
-            Source admission은 통과했지만 archive semantics P0 전이므로 아직 method나
-            paper contribution은 아닙니다.
+            Source admission은 통과했지만 exact archive-semantics P0가 0/10
+            no-verdict로 끝났습니다. 따라서 method나 paper contribution이 아니며
+            이 version은 닫혔습니다.
           </p>
           <div class="gap-equation" aria-label="비활성 가설이 향후 방법론 검증으로 이어지기 위한 조건">
-            <span>32.5/40 conditional source lead</span>
+            <span>32.5/40 preserved source history</span>
             <i>⇒</i>
-            <span>P0 semantics ⇒ P1 degree stability ⇒ validity + efficiency</span>
+            <span>P0 0/10 no verdict ⇒ closed · no P1/model/GPU</span>
           </div>
           <a href="../docs/literature-lineage.md">전체 계보와 출처 읽기 ↗</a>
         </aside>
@@ -294,9 +298,9 @@
         <p>
           현재 모델은 없습니다. GNN, Graph Transformer, E(3) network와 neural
           operator는 모두 가능한 baseline 계열일 뿐 novelty가 아닙니다. 과거
-          conformal-degree 후보는 32.5/40으로 source gate만 넘었습니다. 정확한
-          archive semantics와 method-free degree stability 전에는 architecture
-          gate와 GPU가 계속 닫혀 있습니다.
+          conformal-degree 후보는 32.5/40으로 source gate만 넘었지만 exact P0가
+          0/10 no-verdict로 끝났습니다. 이 version의 architecture gate와 GPU는
+          닫혔고, 같은 contract를 수리하거나 다시 실행하지 않습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -322,9 +326,9 @@
         <div class="arch-connector"><span>source inspection</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">PROSPECTIVE METHOD-FREE P0</p>
-          <h3>Tar inventory + VTP headers</h3>
-          <p>Safe members, 76 case IDs, PolyData, vector arrays and associations are checked</p>
+          <p class="arch-label">CLOSED METHOD-FREE P0</p>
+          <h3>Archive semantics not evaluated</h3>
+          <p>Exact job ended E/exit 2; complete archive/VTP contract and all 10 checks remain unevaluated</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">라벨과 모델 구분</a>
         </article>
@@ -356,8 +360,8 @@
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
           <p class="arch-label">CURRENT DECISION</p>
-          <h3>32.5 = conditional source lead · P0 only</h3>
-          <p>New archive/semantics P0 registered · not submitted · GPU 0</p>
+          <h3>32.5 = preserved source history · closed P0</h3>
+          <p>Job 115684 · E/exit 2 · 0/10 · no verdict · no rerun · GPU 0</p>
           <div class="output-meter"><i></i><span>primary / method / model / GPU</span><b>still 0</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
@@ -366,11 +370,11 @@
       <div class="architecture-notes">
         <article>
           <span>LATEST SOURCE VERDICT</span>
-          <p>Patient-level conformal signed-degree certificate가 32.5/40으로 유일하게 source line을 넘었지만 method-free P0만 허용합니다.</p>
+          <p>Patient-level conformal signed-degree certificate의 32.5/40 source score는 보존하지만 exact P0가 no-verdict로 끝나 active lead는 0입니다.</p>
         </article>
         <article>
-          <span>CURRENT P0</span>
-          <p>Exact 1.43 GB Aneurisk archive에서 76 case, VTP vector, units와 age/inflow input semantics만 검사합니다.</p>
+          <span>CLOSED P0</span>
+          <p>Exact CPU job은 E/exit 2, 00:40:06, 0/10 evaluated였습니다. Complete archive/VTP semantics와 low-level cause는 확인되지 않았습니다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR</span>
@@ -636,7 +640,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>One 32.5/40 conditional conformal-degree source lead · CPU P0 only · no method or paper identity</p>
+        <p>32.5/40 conformal-degree source history · P0 closed 0/10 no verdict · no active method or paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
@@ -644,7 +648,7 @@
         <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>conditional source lead 1 · P0 registered/not submitted · primary/method/model/GPU/claim 0</b>
+        <span>Current stage</span><b>active lead 0 · latest P0 E/exit 2, 0/10 no verdict · primary/method/model/GPU/claim 0</b>
         <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
       </div>
     </section>

@@ -1,19 +1,19 @@
 # AURORA · Aneurysm Research
 
-> **2026-08-11 conformal degree certificate lead · schema 7.9:** A new
-> problem-level screen admits one conditional source lead at **32.5/40**:
-> patient-level conformal certificates for the signed total degree of a
-> predicted surface-WSS field. This is not another Hodge/GNN/topology-loss
-> proposal and does not repair the closed surface-vector P0. A whole-field
-> split-conformal residual radius can certify degree equality only where the
-> predicted boundary-vector margin exceeds that radius; it does not certify an
-> exact critical-point count, location or type, conditional coverage, rupture
-> risk or clinical utility. One new method-free, CPU-only `introai9` P0 is
-> registered to inspect the exact 1.43 GB Aneurisk archive for 76 recoverable
-> cases, VTP/three-component cycle-averaged WSS, units and age/inflow input
-> semantics. Archive/VTP access has not yet occurred. Primary problem, method,
-> architecture, GPU, outer test, result row, paper contribution and submission
-> identity remain unselected. [Detailed source audit](docs/conformal-degree-certificate-source-audit-2026-08-11.md) ·
+> **2026-08-11 conformal-degree P0 outcome · schema 8.0:** The exact
+> **32.5/40** source finding is preserved, but the conditional lead is closed.
+> Public source `4a0fa65b…` ran once on `introai9` as CPU-only PBS job
+> `115684.ECE-util1` and ended `E`/exit 2 after 00:40:06 (CPU 00:00:01,
+> memory 56,812 kB, GPU 0). A 323-byte status and 971-byte bounded result report
+> `execution-incomplete / no scientific verdict`; the registered 10 scientific
+> checks are all unevaluated. No complete archive integrity, VTP header or
+> scientific aggregate was reported; transient partial download bytes are
+> unknown, and no archive/VTP file or raw scheduler log persisted. The
+> low-level cause remains unresolved. Do not repair or rerun this contract or
+> open P1, method, architecture, GPU, outer test, result row or C21. Active
+> shortlist, primary problem and paper identity return to zero.
+> [Execution record](results/aneurisk_conformal_degree_p0_execution_20260811.json) ·
+> [Detailed source audit](docs/conformal-degree-certificate-source-audit-2026-08-11.md) ·
 > [Frozen P0](configs/aneurisk_conformal_degree_p0.json)
 
 > **2026-08-11 schema 7.8 deployment verification:** Exact scientific content

@@ -1,5 +1,12 @@
 # AURORA 연구 방향
 
+> **Schema 8.0 direction · 2026-08-11:** The 32.5/40 conformal-degree source
+> hypothesis is preserved but inactive after exact CPU P0 job
+> `115684.ECE-util1` ended execution-incomplete with 0/10 checks evaluated.
+> There is no scientific asset verdict and therefore no P1, method, model, GPU,
+> outer test or contribution. Do not repair the reader/transport path. The next
+> allowed work is a fresh problem-level source/asset audit.
+
 > **Schema 7.9 direction · 2026-08-11:** The current conditional source lead is
 > not a GNN architecture. It asks whether a patient-level whole-field conformal
 > residual bound can selectively certify the signed total degree of a predicted

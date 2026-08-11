@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류 surface-WSS, whole-field conformal coverage, boundary margin과 signed total degree certificate를 기초부터 설명하고 32.5/40 conditional source lead·CPU-only P0·no-model 경계를 밝히는 입문 가이드.">
+  <meta name="description" content="뇌동맥류 surface-WSS, whole-field conformal coverage, boundary margin과 signed total degree certificate를 기초부터 설명하고 32.5/40 source history·0/10 no-verdict P0·no-model 경계를 밝히는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -59,15 +59,16 @@
         </p>
         <div class="answer-card">
           <span>짧은 답</span>
-          <strong>Conditional source lead는 1개이고, 모델은 여전히 0개입니다.</strong>
+          <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
             새 32.5/40 후보는 예측 전체장의 patient-level conformal residual
             radius로 boundary margin이 충분한 region의 signed total degree만
             인증하는 문제입니다. 이는 과거 surface-vector score나 0/10 P0를
             수리한 것이 아닙니다. Exact Aneurisk archive semantics를 확인할
-            CPU-only P0 하나만 등록됐고 아직 제출되지 않았습니다. Primary, GNN,
-            Transformer, neural operator, contribution, GPU와 outer test는
-            선택되지 않았습니다.
+            CPU-only P0는 `E`/exit 2, 0/10 checks, no scientific verdict로
+            끝났습니다. Complete archive/VTP semantics는 확인되지 않았고 동일
+            contract를 재실행하지 않습니다. Primary, GNN, Transformer, neural
+            operator, contribution, GPU와 outer test는 선택되지 않았습니다.
           </p>
         </div>
         <div class="answer-card" id="structure-reappraisal">
@@ -630,24 +631,24 @@
               <b>남은 gap</b><small>intrinsic tangent residual → boundary-margin degree certificate → non-vacuous patient-level efficiency</small>
             </article>
             <article>
-              <span>CURRENT · METHOD-FREE P0 ONLY</span>
-              <div><h3>왜 지금 바로 모델을 학습하지 않는가?</h3><p>공식 record는 76 geometry와 1.43 GB VTP archive를 말하지만 array names, association, units, case mapping과 age/inflow input contract를 열거하지 않습니다. Exact CPU P0가 이를 먼저 확인합니다. Critical point, conformal quantile, network prediction과 GPU는 계산하지 않습니다.</p></div>
-              <b>권한</b><small>conditional lead 1 · primary/method/architecture/GPU/outer test/claim 0</small>
+              <span>CLOSED · METHOD-FREE P0 · NO VERDICT</span>
+              <div><h3>왜 지금 바로 모델을 학습하지 않는가?</h3><p>공식 record는 76 geometry와 1.43 GB VTP archive를 말하지만 array names, association, units, case mapping과 age/inflow input contract를 열거하지 않습니다. Exact CPU P0는 E/exit 2, 0/10 evaluated로 끝나 이를 확인하지 못했습니다. Critical point, conformal quantile, network prediction과 GPU는 계산되지 않았습니다.</p></div>
+              <b>권한</b><small>active lead/primary/method/architecture/GPU/outer test/claim 0</small>
             </article>
           </div>
 
           <div class="verdict-panel">
             <p class="eyebrow">FROZEN DECISION</p>
-            <h3>32.5/40은 paper accept 신호가 아니라 asset gate 진입권입니다.</h3>
-            <p>P0 pass도 별도 CPU-only P1 stability audit만 열 수 있습니다. Archive가 vector/input semantics를 식별하지 못하거나 degree가 mesh·tolerance에 불안정하거나 certificate가 거의 모든 곳에서 abstain하면 이 version을 닫습니다.</p>
+            <h3>32.5/40은 paper accept 신호가 아니며, 이제 닫힌 source history입니다.</h3>
+            <p>Exact P0가 scientific gate 전에 execution-incomplete로 끝났습니다. 이를 pass/fail로 바꾸지 않고 no-verdict로 보존하며, transport/reader/dependency repair, rerun과 P1을 열지 않습니다.</p>
             <div class="model-labels">
               <span class="yes">Fresh estimand · historical score repair 아님</span>
               <span class="yes">Patient-level marginal validity target</span>
               <span class="no">No exact critical-point or clinical guarantee</span>
-              <span class="no">No model or GPU yet</span>
+              <span class="no">No P1, model, GPU or rerun</span>
             </div>
           </div>
-          <p><a href="../docs/conformal-degree-certificate-source-audit-2026-08-11.md">수식·red team·stop rule 전체 읽기 ↗</a></p>
+          <p><a href="../docs/conformal-degree-certificate-source-audit-2026-08-11.md">수식·red team·stop rule 전체 읽기 ↗</a> · <a href="../results/aneurisk_conformal_degree_p0_execution_20260811.json">P0 execution record ↗</a></p>
           <button class="chapter-next" type="button" data-next="architecture">다음 · 현재 architecture 경계 <span>→</span></button>
         </section>
 
@@ -657,17 +658,17 @@
             <p class="eyebrow">05 · CURRENT BOUNDARY</p>
             <h2>Asset first.<br><em>Architecture later.</em></h2>
             <p>
-              새 conformal-degree 후보는 model-agnostic certificate 문제이며 아직
-              architecture가 아닙니다. 기존 surface-vector 방향도 폐기하지 않지만
-              historical inactive hypothesis로 보존합니다. 아래 stack은 P0/P1 뒤에만
-              비교할 수 있는 controls와 과거 graph/operator 기록입니다.
+              conformal-degree 가설은 model-agnostic certificate 문제였지만 exact
+              P0가 no-verdict로 닫혀 architecture가 아닙니다. 기존 surface-vector
+              방향도 historical inactive hypothesis로 보존합니다. 아래 stack은
+              미래의 distinct fresh problem에서만 비교할 controls와 과거 기록입니다.
             </p>
           </header>
 
           <div class="architecture-stack">
             <aside class="honesty-note">
               <b>먼저 구분하기</b>
-              <p>Conditional source lead는 1이지만 selected primary, method와 architecture는 모두 0입니다. Source admission과 새 algorithm은 같은 말이 아닙니다. Conformal calibration, tangent projection, Hodge 또는 GNN block에 이름만 붙여 contribution으로 만들지 않습니다.</p>
+              <p>Conditional source lead, selected primary, method와 architecture는 모두 0입니다. 32.5/40 source history와 새 algorithm은 같은 말이 아닙니다. Conformal calibration, tangent projection, Hodge 또는 GNN block에 이름만 붙여 contribution으로 만들지 않습니다.</p>
             </aside>
             <article>
               <span>CURRENT · SCHEMA 7.8 REAPPRAISAL · REJECTED</span>

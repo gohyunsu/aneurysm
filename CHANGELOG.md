@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.0 closes the conformal-degree P0 without a verdict
+
+- Ran exact public source `4a0fa65b…` once on `introai9` as CPU-only PBS job
+  `115684.ECE-util1`; final state `E`, exit 2, walltime 00:40:06, CPU 00:00:01,
+  memory 56,812 kB and GPU 0.
+- Recorded a 323-byte status and 971-byte bounded result. They report
+  `execution-incomplete/no scientific verdict`; 0/10 scientific checks were
+  evaluated and the only reported error class is
+  `AneuriskConformalDegreeP0Error`.
+- Did not infer a low-level cause. Complete archive integrity, VTP access and a
+  scientific aggregate were not reported; transient partial bytes are unknown,
+  and no persistent archive/VTP or raw scheduler log exists.
+- Preserved 32.5/40 as immutable source history while returning active
+  shortlist/conditional lead/primary/method/architecture/GPU/outer test/result
+  row/C21/submission identity to zero.
+- Closed without transport, reader or dependency repair, same-contract rerun,
+  or P1. The next allowed action is a fresh problem-level source/asset audit.
+  Final `introai9` queue was empty; `junjinyong` remained untouched.
+
 ## 2026-08-11 · Schema 7.9 registers a conformal-degree semantics P0
 
 - Froze a fresh six-candidate problem-level screen at

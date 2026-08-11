@@ -1,5 +1,16 @@
 # Patient-level conformal degree certificates for surface WSS
 
+> **Execution outcome override · schema 8.0 · 2026-08-11 KST:** Exact source
+> `4a0fa65b…` ran once as `introai9` CPU/PBS job `115684.ECE-util1` and ended
+> `E`/exit 2 after 00:40:06 with GPU 0. Its bounded status/result report
+> `execution-incomplete/no scientific verdict`; 0/10 registered checks were
+> evaluated. Complete archive integrity and VTP access were not reported,
+> transient partial bytes are unknown, and no payload or raw scheduler log
+> persisted. The low-level cause is unresolved. Preserve 32.5/40 as source
+> history but close this exact candidate without repair/rerun, P1, method,
+> architecture, GPU, outer test or paper claim. See the
+> [deidentified execution record](../results/aneurisk_conformal_degree_p0_execution_20260811.json).
+
 > **Prospective source decision · schema 7.9 · 2026-08-11 KST:** A fresh
 > problem-level screen admits
 > `patient_level_conformal_degree_certificate_for_surface_wss_surrogates` at

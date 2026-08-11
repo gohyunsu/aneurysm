@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.0 submission boundary · 2026-08-11:** The conformal-degree
+> candidate is closed after exact CPU P0 `115684.ECE-util1` returned
+> execution-incomplete/no scientific verdict with 0/10 checks evaluated.
+> Preserve its theorem and 32.5/40 source score as planning history, not as the
+> title, contribution, method, table or negative scientific result. Active
+> paper identity, primary problem, architecture, result row and GPU are zero;
+> AURORA remains not submission-ready.
+
 > **Schema 7.9 submission boundary · 2026-08-11:** A 32.5/40 conditional source
 > lead exists, but the paper is still not submission-ready. The candidate could
 > become an ISBI application paper only if asset semantics, method-free degree

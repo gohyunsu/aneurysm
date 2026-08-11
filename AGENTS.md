@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 conformal-degree P0 outcome · schema 8.0:** Exact public source
+> `4a0fa65b37d69696ff232420e09c4560349fd27b` ran once on `introai9` PBS as
+> CPU-only job `115684.ECE-util1`; final state is `E`, exit 2, walltime
+> 00:40:06, CPU 00:00:01, memory 56,812 kB and GPU 0. The 323-byte private
+> status (SHA-256 `c03716ad…`) and 971-byte bounded private result (SHA-256
+> `7e9f04e2…`) say `execution-incomplete/no scientific verdict` and report only
+> `AneuriskConformalDegreeP0Error`. All 10 scientific checks are unevaluated.
+> Complete archive integrity, VTP header access and a scientific aggregate were
+> not reported; transient partial download bytes are unknown. No archive/VTP
+> file or raw PBS log persisted, so do not invent a low-level transport or
+> reader cause. Preserve 32.5/40 as source history but close the exact candidate
+> without repair/rerun, P1, method, architecture, GPU, outer test, result row,
+> C21 or submission identity. Active shortlist and conditional lead are 0;
+> final `qstat -u introai9` was empty. Source of truth is
+> `results/aneurisk_conformal_degree_p0_execution_20260811.json`. No login-node
+> GPU command ran. `junjinyong` was not accessed and remains absolutely
+> prohibited for AURORA.
+
 > **2026-08-11 patient-level conformal-degree source lead · schema 7.9:** Fresh
 > problem-level red team은
 > `patient_level_conformal_degree_certificate_for_surface_wss_surrogates`를

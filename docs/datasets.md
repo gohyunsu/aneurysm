@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 8.0 Aneurisk P0 outcome · 2026-08-11:** The exact 1.43 GB archive
+> audit ended execution-incomplete before archive integrity or VTP semantics
+> were reported. The 10 checks remain unevaluated, transient partial bytes are
+> unknown, and no archive/VTP payload persisted. Therefore Aneurisk is not an
+> admitted training, calibration or evaluation dataset for AURORA. Do not
+> repair/rerun this contract or infer array, unit, case or input semantics.
+
 > **Schema 7.9 Aneurisk candidate role · 2026-08-11:** Zenodo 19455127 revision
 > 4 is the only candidate asset for the new conformal-degree semantics P0. The
 > official record reports 76 patient-specific geometries, an open CC BY 4.0

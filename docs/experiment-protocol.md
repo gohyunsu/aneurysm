@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.0 P0 outcome · 2026-08-11:** Exact job
+> `115684.ECE-util1` ended `E`/exit 2 after 00:40:06 with CPU 4, memory 16 GB
+> and GPU 0. The bounded result is execution-incomplete/no scientific verdict;
+> 0/10 checks were evaluated. No same-contract transport/reader/dependency
+> repair, rerun or P1 is allowed. Method, architecture, GPU and outer test stay
+> closed.
+
 > **Schema 7.9 current gate · 2026-08-11:** Only one exact, method-free
 > Aneurisk archive/semantics P0 is authorized. It runs on `introai9` PBS with
 > CPU 4, memory 16 GB and GPU 0, downloads the checksum-pinned 1.43 GB archive

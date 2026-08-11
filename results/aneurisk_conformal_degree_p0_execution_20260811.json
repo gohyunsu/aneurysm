@@ -1,0 +1,87 @@
+{
+  "schema_version": "aurora.aneurisk_conformal_degree_p0.execution_record.v1",
+  "protocol_id": "aneurisk_conformal_degree_archive_semantics_p0_v1",
+  "candidate_id": "patient_level_conformal_degree_certificate_for_surface_wss_surrogates",
+  "source_score": 32.5,
+  "status": "closed_after_execution_incomplete_no_scientific_verdict",
+  "scientific_verdict": null,
+  "scientific_gate_evaluated": false,
+  "public_source_commit": "4a0fa65b37d69696ff232420e09c4560349fd27b",
+  "registered_source": {
+    "zenodo_record": 19455127,
+    "record_revision": 4,
+    "archive_bytes": 1430889142,
+    "archive_md5": "8c66e7bb359d04bd1a5d6db6da3f3926",
+    "reported_patient_specific_geometries": 76
+  },
+  "p0_config": {
+    "path": "configs/aneurisk_conformal_degree_p0.json",
+    "file_sha256": "f0b8d82a07a4d353edb1036ff40118f4ff2baf21d8ab4ca1ebbccc1ebc594164",
+    "canonical_config_sha256": "0b3c55802e842d30adaf1826482b9f3d32ddf176dd5ead976707deedc5f06e53"
+  },
+  "pbs_wrapper": {
+    "path": "cluster/pbs_aneurisk_conformal_degree_p0.pbs",
+    "sha256": "1ee173d1cb8a1e98ee19e7f6e827dce41f452b99761fff37d56d98c70f103157"
+  },
+  "implementation": {
+    "path": "src/aurora/aneurisk_conformal_degree_p0.py",
+    "sha256": "a1d8ed548d22719ff17a87db4ffe7a67384cc061d5a6ff9bf3ac742dca27699c"
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "job_id": "115684.ECE-util1",
+    "submission_count_for_exact_source": 1,
+    "final_job_state": "E",
+    "exit_status": 2,
+    "resources_used_walltime": "00:40:06",
+    "resources_used_cput": "00:00:01",
+    "resources_used_cpupercent": 2,
+    "resources_used_memory_kb": 56812,
+    "resources_used_vmemory_kb": 1484532,
+    "run_count": 1,
+    "requested_resources": "select=1:ncpus=4:mem=16gb:ngpus=0",
+    "requested_walltime": "02:00:00",
+    "gpu_requested": 0,
+    "gpu_accessed": false,
+    "login_node_gpu_command_executed": false,
+    "junjinyong_accessed": false
+  },
+  "materialization": {
+    "private_status_record_created": true,
+    "private_status_record_bytes": 323,
+    "private_status_record_sha256": "c03716ad792dc21aec3fb21f1208f3d7c6d21ad38d35eff692788e1ba0955823",
+    "private_result_record_created": true,
+    "private_result_record_bytes": 971,
+    "private_result_record_sha256": "7e9f04e2d68c1ed987fad4f1c5a2a230e8117e49f419b2717faaf534618ed8e4",
+    "aggregate_scientific_result_created": false,
+    "raw_scheduler_stdout_or_stderr_materialized": false,
+    "persistent_archive_or_vtp_files": 0,
+    "complete_archive_bytes_verified": false,
+    "vtp_header_or_member_access_reported": false,
+    "transient_partial_download_bytes": null,
+    "model_or_checkpoint_accessed": false,
+    "patient_or_clinical_data_accessed": false,
+    "outer_test_accessed": false
+  },
+  "boundary": {
+    "reported_error_class": "AneuriskConformalDegreeP0Error",
+    "last_verified_stage": "pinned_runtime_returned_a_bounded_execution_incomplete_record_before_archive_integrity_or_scientific_aggregate",
+    "low_level_transport_reader_or_runtime_cause": "unresolved_without_raw_scheduler_log_or_stage_specific_private_record",
+    "registered_high_level_checks_evaluated": 0,
+    "registered_high_level_checks_total": 10,
+    "source_score_repaired_after_execution": false,
+    "same_contract_transport_reader_dependency_repair_allowed": false,
+    "same_contract_resubmission_allowed": false,
+    "p1_registration_authorized": false,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false,
+    "active_source_shortlist_count_after_closure": 0
+  },
+  "decision": "preserve_the_exact_32_5_source_finding_but_close_this_candidate_version_without_cause_reconstruction_repair_rerun_p1_method_architecture_gpu_outer_test_or_scientific_claim"
+}

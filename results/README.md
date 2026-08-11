@@ -26,6 +26,17 @@ mapping, feature provenance, 사전 정의 model family와 protocol을 모두
 
 현재 ISBI task-translation 결과:
 
+- `aneurisk_conformal_degree_p0_execution_20260811.json`: exact public source
+  `4a0fa65b37d69696ff232420e09c4560349fd27b`의 one-shot CPU/PBS P0
+  execution-incomplete record. Job `115684.ECE-util1`은 00:40:06 뒤
+  `E`/exit 2였고 GPU는 요청·사용하지 않았다. Bounded status/result만
+  생성됐으며 complete archive integrity, VTP semantics, scientific aggregate와
+  raw scheduler log는 보고되지 않았다. 10개 scientific check는 모두
+  미평가이고 low-level cause는 unresolved다. 32.5/40 source score만 history로
+  보존하고 repair/rerun/P1/method/architecture/GPU/outer test 없이 exact
+  candidate를 닫는다. Artifact SHA-256은
+  `82480a830f8518f7ecfde71b4b7b19259426fa033f18230754e932a775fdf1ef`다.
+
 - `aneug_cycle_functional_p0_execution_20260809.json`: exact public source
   `754ed746fb60aef707f639189ad59e84a0fca556`의 one-shot CPU/PBS P0
   execution-incomplete record. Job `115168`은 5분 16초 뒤 exit 28이었고 exact

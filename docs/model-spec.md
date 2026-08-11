@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.0 no-model outcome · 2026-08-11:** The conformal-degree P0 is
+> closed execution-incomplete with no scientific verdict. No architecture is
+> selected and no GPU model may be run. Edge 1-forms, Hodge/HSD, equivariant
+> message passing, critical-structure losses and conformal calibration remain
+> direct priors or possible future controls, not AURORA components.
+
 > **Schema 7.9 no-model boundary · 2026-08-11:** No architecture is selected.
 > The admitted object is a model-agnostic certificate problem, not a conformal
 > GNN. The only executable is a method-free archive/semantics P0. Cartesian,

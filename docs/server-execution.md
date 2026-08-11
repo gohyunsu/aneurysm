@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 8.0 final P0 execution · 2026-08-11:** Exact source `4a0fa65b…`
+> ran once on `introai9` PBS as job `115684.ECE-util1`, CPU 4, 16 GB, GPU 0.
+> Final state was `E`, exit 2, walltime 00:40:06, CPU 00:00:01 and memory
+> 56,812 kB. A bounded 323-byte status and 971-byte result report
+> execution-incomplete/no scientific verdict and 0/10 evaluated checks. No raw
+> PBS log or persistent archive/VTP exists; partial bytes and low-level cause
+> are unknown. Do not repair, rerun or open P1/GPU. Final user queue was empty.
+> No login-node GPU command ran and `junjinyong` was never accessed.
+
 > **Schema 7.9 prospective execution boundary · 2026-08-11:** Exactly one new
 > CPU-only P0 may be submitted from an exact clean public commit to `introai9`
 > PBS (`coss_agpu`, CPU 4, 16 GB, GPU 0, two hours). It reads the registered

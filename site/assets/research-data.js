@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · one 32.5/40 conditional source lead for patient-level conformal signed-degree certificates · exact Aneurisk archive/VTP unread · one method-free introai9 CPU P0 registered/not submitted · primary/method/architecture/GPU/outer test/claim 0 · historical surface-vector P0 remains closed at 0/10 · not submission-ready",
-    requirement: "the exact Aneurisk semantics P0, a separate method-free intrinsic degree-stability P1, non-vacuous marginal validity/efficiency, bounded development and a sealed fresh outer test must pass before a method, architecture, GPU result or manuscript contribution; historical scores and closed P0s cannot be repaired",
+    status: "Target locked · active source lead 0 · latest 32.5/40 conformal-degree history closed after introai9 CPU P0 115684 E/exit 2, 0/10 no scientific verdict · primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "a distinct fresh problem must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test before a method, architecture, GPU result or manuscript contribution; the closed Aneurisk P0 and historical scores cannot be repaired or rerun",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -43,9 +43,9 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
-      title: "Patient-level conformal degree certification becomes one conditional source lead",
-      copy: "A fresh six-candidate problem screen scores 32.5/31.0/29.5/29.5/29.0/28.5. The leader calibrates one whole-field tangent residual score per exchangeable patient and certifies signed total degree only in prediction-derived regions whose boundary-vector margin exceeds the conformal radius. It does not certify exact critical-point count, location or type, conditional coverage, rupture risk or clinical utility. Functional surrogate prediction sets, whole-field downstream conformal certificates, conformal neural operators, uncertain vector-field topology, multilevel robustness, Hodge/HSD and aneurysm fixed-point analysis are direct priors. One method-free Aneurisk archive/semantics P0 is registered on introai9 CPU only; archive/VTP, model, GPU and outer test remain zero.",
-      status: "32.5/40 conditional lead · P0 registered/not submitted · primary/method/architecture/GPU/claim 0",
+      title: "Conformal degree certification closes after an incomplete asset P0",
+      copy: "The fresh source screen remains 32.5/31.0/29.5/29.5/29.0/28.5, but the leader is no longer active. Exact introai9 CPU/PBS job 115684 ended E/exit 2 after 00:40:06 and produced only a bounded execution-incomplete/no-verdict result. Complete archive integrity and VTP semantics were not reported, transient partial bytes are unknown, and 0/10 scientific checks were evaluated. The 32.5 score is source history, not a method or negative result. No repair, rerun, P1, architecture, GPU or outer test is authorized.",
+      status: "32.5/40 source history · P0 E/exit 2 · 0/10 no verdict · active lead/method/GPU/claim 0",
       url: "../docs/conformal-degree-certificate-source-audit-2026-08-11.md"
     },
     {
@@ -773,8 +773,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "Aneurisk CFD curvature · 2026",
-      role: "conditional conformal-degree asset semantics P0; not training",
-      provenance: "Zenodo 19455127 revision 4 · 76 selected patient geometries · 1,430,889,142-byte MD5-pinned VTP tar.gz · CC BY 4.0 · API/1,436-byte README read · archive/VTP 0 · one introai9 CPU P0 registered/not submitted · no model/GPU/outer test"
+      role: "closed conformal-degree asset P0 history; not training",
+      provenance: "Zenodo 19455127 revision 4 · 76 reported geometries · exact CPU P0 115684 E/exit 2 after 00:40:06 · 0/10 checks · no scientific verdict · complete archive/VTP semantics unreported · no persistent payload/log · no rerun/P1/model/GPU/outer test"
     },
     {
       name: "Tornadic WSS topology · Figshare 2026",
@@ -818,6 +818,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "execution",
+      title: "Schema 8.0 closes the conformal-degree P0 without a scientific verdict",
+      copy: "Exact source 4a0fa65b… ran once on introai9 as CPU-only PBS job 115684. It ended E/exit 2 after 00:40:06 with CPU 00:00:01, memory 56,812 kB and GPU 0. A 323-byte status and 971-byte bounded result report execution-incomplete/no scientific verdict; all 10 checks are unevaluated. Complete archive integrity, VTP access and low-level cause were not established, transient partial bytes are unknown, and no payload or raw log persisted. The 32.5/40 source score is preserved, but active lead, P1, method, architecture, GPU, outer test, result row and claim return to zero without repair or rerun.",
+      files: ["results/aneurisk_conformal_degree_p0_execution_20260811.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/conformal-degree-certificate-source-audit-2026-08-11.md", "docs/research-direction.md", "docs/model-spec.md", "docs/literature-lineage.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "research",
