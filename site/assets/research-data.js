@@ -949,6 +949,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 9.3 exact source is deployed and privately pinned",
+      copy: "Exact public scientific source 56b173ef98898fe6d0934f39a253f34ed348288c passed Quality 31490372870 and Pages 31490372720. Private ledger 27ca806e4a640cb842d310d5a51e98035bf0b5a5 is remote exact, PRIVATE and preserves manuscript and references byte-for-byte. Live Overview, Learn and detailed change history expose the 27.5/40 source rejection, claimed-but-unversioned SynVA release, inactive surface-vector question and no-model/no-compute state. This provenance creates no lead, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 9.3 rejects SynVA utility variants without an executable release contract",
       copy: "Exact arXiv 2605.17620v1 reports 50,000 procedural meshes, 769 processed real samples and eleven synthetic-to-real segmentation regimes. These are prior-paper claims, not AURORA reproductions. The paper provides no dedicated versioned code/data URL, license, checksums, seeds or patient-grouped real split; exact public GitHub searches found no release. SynVA itself and direct priors on synthetic counterfactuals, shape artifacts, leakage and generic synthetic-data evaluation remove the obvious novelty. Six candidates freeze at 27.5/26.5/26.0/26.0/23.5/23.5 and all fail total or critical novelty/asset floors. No payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result or claim is opened.",

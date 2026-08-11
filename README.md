@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 9.3 deployment verification:** Exact scientific source
+> `56b173ef98898fe6d0934f39a253f34ed348288c` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31490372870) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31490372720).
+> Private ledger `27ca806e4a640cb842d310d5a51e98035bf0b5a5` is remote exact and
+> PRIVATE; manuscript and references remain byte-for-byte unchanged. This is
+> provenance only and opens no lead, P0/P1, method, architecture, server query,
+> PBS/GPU, outer test, result row, C21 or claim.
+
 > **2026-08-11 SynVA release and synthetic-utility audit · schema 9.3:**
 > SynVA is a substantive direct prior, not a new executable AURORA asset. Its
 > paper already evaluates procedural synthetic pretraining for real aneurysm

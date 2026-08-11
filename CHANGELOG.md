@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-11 · Schema 9.3 deployed and privately pinned
+
+- Exact scientific source `56b173ef98898fe6d0934f39a253f34ed348288c`
+  passed Quality `31490372870` and Pages `31490372720`.
+- Private ledger `27ca806e4a640cb842d310d5a51e98035bf0b5a5` is remote exact and
+  PRIVATE; manuscript and references hashes are unchanged.
+- Live Overview, Learn and change history expose the 27.5/40 rejection,
+  claimed-but-unversioned SynVA release, inactive surface-vector question and
+  no-model/no-compute state. This provenance creates no scientific result or
+  claim.
+
 ## 2026-08-11 · SynVA release and synthetic utility rejected · schema 9.3
 
 - Audited exact arXiv `2605.17620v1` and its 25,831,786-byte PDF without

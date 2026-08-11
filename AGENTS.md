@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 9.3 deployment·private synchronization:** Exact public
+> scientific source `56b173ef98898fe6d0934f39a253f34ed348288c` passed
+> Quality `31490372870` and Pages `31490372720`. Private paper ledger
+> `27ca806e4a640cb842d310d5a51e98035bf0b5a5` is remote exact and PRIVATE.
+> `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization is provenance only and creates no lead, P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test, result row, C21
+> or claim. Future authorized execution is `introai9` PBS only; prohibit
+> login-node GPU and never access, query, transfer to, submit to or monitor
+> `junjinyong`.
+
 > **2026-08-11 SynVA release and synthetic-utility override · schema 9.3:**
 > Exact arXiv `2605.17620v1` reports a procedural generator, a claimed 50,000-
 > mesh release, 769 processed real samples and eleven synthetic-to-real
