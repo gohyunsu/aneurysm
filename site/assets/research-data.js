@@ -1025,6 +1025,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.1 scientific source is live and privately pinned",
+      copy: "Exact scientific source 2abc73e07275e31ad87db3cf39b77864e1419322 passed Quality 31519811493 and Pages 31519810721. Live Overview, Learn and the detailed audit expose best 26.5/40, all six rejected, no joined patient-outcome asset and active lead/P0/method/model/GPU/claim zero. Private ledger 8a9c1a905e715f0f47972a658528149620dfd6c9 is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.1 rejects device-planning and mechanistic-occlusion pivots",
       copy: "NeurAneuNet directly occupies 3DRA-to-PED size/landing-zone planning and clinician assistance, but its endpoint is expert deployment consensus rather than delayed patient benefit and its data are request-only. Device-resolved thrombosis and virtual DSA are also direct prior on three representative geometries without clinical follow-up or versioned outputs. The paired physical bridge has only two source patient anatomies. Six frozen rows score 26.5/25.0/24.5/24.5/24.0/23.5; all fail total or critical novelty, asset and independent-unit floors. Outcome-grounded planning remains evaluation-only, volume vortices are not equated with surface-WSS topology, and no payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens.",

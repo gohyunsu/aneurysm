@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.1 scientific deployment/private synchronization:**
+> Exact scientific source `2abc73e07275e31ad87db3cf39b77864e1419322`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31519811493)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31519810721).
+> Live Overview, Learn and the detailed audit expose best 26.5/40, all six
+> rejected and the no-joined-outcome/no-model/no-compute boundary. Private
+> ledger `8a9c1a905e715f0f47972a658528149620dfd6c9` is remote exact, PRIVATE and
+> anonymous API returns 404. Manuscript and references remain byte-for-byte
+> unchanged. This provenance opens no scientific or submission authority.
+
 > **Current research state (schema 10.1, 2026-08-12):** A fresh treatment-
 > planning screen rejects all six formulations at
 > **26.5/25.0/24.5/24.5/24.0/23.5**. NeurAneuNet already covers 3DRA-to-PED

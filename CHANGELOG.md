@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.1 scientific source deployed and privately pinned
+
+- Exact scientific source `2abc73e07275e31ad87db3cf39b77864e1419322`
+  passed Quality `31519811493` and Pages `31519810721`; live Overview, Learn
+  and detailed audit expose the 26.5/40 rejection and no-model/no-compute state.
+- Private ledger `8a9c1a905e715f0f47972a658528149620dfd6c9` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- This deployment provenance opens no P0/P1, method, architecture, scientific
+  server, PBS/GPU, outer test, result row, C21 or claim.
+
 ## 2026-08-12 · Device planning and mechanistic occlusion rejected · schema 10.1
 
 - Added NeurAneuNet as a direct prior for 3DRA-to-PED size/landing-zone planning

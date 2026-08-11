@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.1 scientific deployment·private synchronization:**
+> Exact scientific source `2abc73e07275e31ad87db3cf39b77864e1419322`
+> passed Quality `31519811493` and Pages `31519810721`. Live Overview, Learn
+> and the detailed audit expose best 26.5/40, all six rejected, no joined
+> patient-outcome asset and lead/P0/model/compute 0. Private ledger
+> `8a9c1a905e715f0f47972a658528149620dfd6c9` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization opens no lead, P0/P1, method, architecture, scientific-
+> server query, PBS/GPU, outer test, result row, C21 or claim. Future authorized
+> execution is `introai9` PBS only; prohibit login-node GPU and never access,
+> query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 device-planning/mechanistic-occlusion reappraisal · schema
 > 10.1:** NeurAneuNet (`10.1002/cns.71047`) already maps pre-operative 3DRA to
 > PED size and landing zones and reports a 21-case/six-reader assistance study;
