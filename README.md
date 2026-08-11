@@ -1,5 +1,26 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 team downstream-utility reappraisal · schema 8.4:** The latest
+> team question—whether a surrogate preserves real-CFD incremental information
+> for patient-grouped rupture-status classification—is retained as an
+> evaluation template, not a paper identity. Existing CMHA evidence is
+> exploratory and contains no matched surrogate prediction; PointFlowNet
+> already occupies peak-systolic point-cloud surrogation, Hemo-MPO occupies the
+> mesh+physics+operator combination, and the new public rigid/FSI asset has one
+> effective synthetic anatomy. Six formulations score
+> **27.0/25.5/24.0/24.0/23.5/21.5**, all rejected. No P0/P1, model, architecture,
+> server query, PBS/GPU, outer test or claim is opened.
+> [Critical reappraisal](docs/team-downstream-utility-reappraisal-2026-08-11.md) ·
+> [Eleven-source watch](configs/source_watch_v7.json)
+
+> **2026-08-11 fail-closed source watch v7:** Exact PointFlowNet head
+> `5cb4f254…` is added as a direct-prior baseline watch. The public repository
+> has code, a checkpoint and two result CSVs, but no license/release, CFD
+> payload or tracked train/validation/test split manifest; its 35-byte README
+> says release is forthcoming. A change requests baseline-feasibility re-audit
+> only and cannot download data, repair a score, select architecture or
+> authorize compute.
+
 > **2026-08-11 AneuX-derived transient-CFD material audit · schema 8.3:** A
 > newly audited Hugging Face record at exact `38c574bc…` names transient CFD
 > for selected AneuX side-wall and bifurcation geometries. Its public API shows

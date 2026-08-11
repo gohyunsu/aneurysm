@@ -36,6 +36,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v4",
         "aurora.source_watch.v5",
         "aurora.source_watch.v6",
+        "aurora.source_watch.v7",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -60,7 +61,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v5_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v5(payload)
-    else:
+    elif schema == "aurora.source_watch.v6":
         if payload.get("extends") != "source_watch_v5.json":
             raise SourceWatchContractError("v6_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -71,6 +72,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v6_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v6(payload)
+    else:
+        if payload.get("extends") != "source_watch_v6.json":
+            raise SourceWatchContractError("v7_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v6":
+            raise SourceWatchContractError("v7_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v7_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v7(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -117,6 +129,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v4",
         "aurora.source_watch.v5",
         "aurora.source_watch.v6",
+        "aurora.source_watch.v7",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -607,6 +620,89 @@ def _validate_v6(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v6_change_boundary_changed")
 
 
+def _validate_v7(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+        "aneug_huggingface_material_revision_v1",
+        "aneurisk_zenodo_material_revision_v1",
+        "largeia_zenodo_access_revision_v1",
+        "topaneu_material_release_v1",
+        "aneux_transient_cfd_material_revision_v1",
+        "pointflownet_baseline_release_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v7_watch_set_changed")
+
+    _validate_v6(
+        {
+            "watches": watches[:10],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    pointflownet = watches[10]
+    if (
+        pointflownet.get("kind") != "github"
+        or pointflownet.get("review_request")
+        != "direct_prior_baseline_feasibility_reaudit_only"
+        or pointflownet.get("source")
+        != {
+            "repository": "yiyingsheng07/PointFlowNet",
+            "repository_url": "https://github.com/yiyingsheng07/PointFlowNet",
+            "default_branch": "main",
+            "paper_doi": "10.1016/j.cmpb.2026.109308",
+        }
+    ):
+        raise SourceWatchContractError("pointflownet_source_changed")
+    if pointflownet.get("frozen_snapshot") != {
+        "main_head_sha": "5cb4f2545d25b6e8b855806cb3a345b8b1d72594",
+        "root_entries": [
+            {"name": "dataloader.py", "type": "file", "size": 4782},
+            {"name": "dataset", "type": "dir", "size": 0},
+            {"name": "figs", "type": "dir", "size": 0},
+            {"name": "logs", "type": "dir", "size": 0},
+            {"name": "loss.py", "type": "file", "size": 2282},
+            {"name": "model.py", "type": "file", "size": 12703},
+            {"name": "README.md", "type": "file", "size": 35},
+            {"name": "test.py", "type": "file", "size": 4836},
+            {"name": "train.py", "type": "file", "size": 7239},
+        ],
+        "release_count": 0,
+        "license_spdx_id": None,
+        "repository_size_kib": 41563,
+        "payload_or_code_entries": [
+            "dataloader.py",
+            "dataset",
+            "figs",
+            "logs",
+            "loss.py",
+            "model.py",
+            "test.py",
+            "train.py",
+        ],
+        "availability": (
+            "public_partial_code_checkpoint_and_results_without_dataset_"
+            "split_manifest_or_license"
+        ),
+    }:
+        raise SourceWatchContractError("pointflownet_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("partial_baseline_repository_is_not_executable_baseline")
+        is not True
+        or detection.get("repository_change_is_not_architecture_selection")
+        is not True
+    ):
+        raise SourceWatchContractError("v7_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -1029,15 +1125,22 @@ def evaluate_watch(
     if watch.get("kind") == "github":
         result = evaluate_snapshot(watch, observed)
         if watch.get("review_request"):
+            triggered = result["fresh_source_reaudit_triggered"]
             result["next_action"] = (
                 watch["review_request"]
-                if result["fresh_source_reaudit_triggered"]
+                if triggered
                 else "continue_watch_only"
             )
-            result["manual_review_triggered"] = result[
-                "fresh_source_reaudit_triggered"
-            ]
+            result["manual_review_triggered"] = triggered
             result["review_request"] = watch["review_request"]
+            if (
+                watch["review_request"]
+                == "direct_prior_baseline_feasibility_reaudit_only"
+            ):
+                result["fresh_source_reaudit_triggered"] = False
+                result[
+                    "direct_prior_baseline_feasibility_reaudit_triggered"
+                ] = triggered
         return result
     if watch.get("kind") == "github_repository_availability":
         frozen = watch["frozen_snapshot"]
@@ -1328,6 +1431,7 @@ def evaluate_config(
         "aurora.source_watch.v4",
         "aurora.source_watch.v5",
         "aurora.source_watch.v6",
+        "aurora.source_watch.v7",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

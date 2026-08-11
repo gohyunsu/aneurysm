@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.4 submission boundary · 2026-08-11:** Do not build the ISBI title
+> around “GNN surrogate preserves CFD rupture signal.” The required joint
+> patient-level cohort is absent, the CMHA signal is exploratory, and the
+> obvious architecture combinations are directly occupied. All six fresh
+> formulations are rejected, best 27.0/40. The team question may later become
+> a secondary evaluation if another independently admitted paper problem
+> supplies matched reference/surrogate fields. It is not a contribution,
+> result table, method, figure claim or active submission identity now.
+
 > **Schema 8.3 submission boundary · 2026-08-11:** The AneuX-derived
 > transient-CFD material record does not activate a title, contribution,
 > architecture, result table or figure. Its strongest source formulation is

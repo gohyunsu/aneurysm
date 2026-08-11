@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 8.4 asset boundary · 2026-08-11:** The CC0 Dryad rigid/FSI record
+> provides one rigid and two deformable simulations on two grids with 55 time
+> samples, but all conditions share one synthetic anatomy. It is a future
+> paired diagnostic/figure source, not an independent learning cohort, and its
+> payload was not opened. PointFlowNet's repository contains partial code,
+> checkpoint/results and normalization statistics but no CFD data or tracked
+> split manifests; Hemo-MPO data are request-only. CMHA has patient-level
+> summaries but no matched surrogate fields. None is newly admitted for
+> training, calibration or outer testing.
+
 > **Source-watch v5 asset boundary · 2026-08-11:** AneuG is unchanged at exact
 > HF `9dd4180…`; Aneurisk is unchanged at Zenodo revision 4; LargeIA remains
 > restricted with zero public files; TopAneu exposes live challenge navigation

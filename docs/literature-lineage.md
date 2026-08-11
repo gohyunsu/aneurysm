@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **Schema 8.4 downstream-surrogate correction · 2026-08-11:** PointFlowNet
+> directly occupies distance-to-wall point-cloud prediction of peak-systolic
+> velocity/WSS on 984 idealized MCA geometries; Hemo-MPO directly occupies
+> SE(3) mesh encoding + physics constraints + DeepONet decoding; the July 2026
+> AneuX work already couples per-geometry PINN fields, PointNeXt and clinical
+> fusion. Therefore attention, multigrid, masking, GNN, PINN and operator
+> combinations are priors/controls. The residual real-CFD→surrogate downstream
+> retention question lacks a cohort jointly containing patient grouping,
+> clinical/morphology variables, reference fields, matched surrogate outputs
+> and verified conditions. One-anatomy rigid/FSI data cannot fill that gap.
+
 > **Schema 8.2 functional-segmentation correction · 2026-08-11:** Zhang et
 > al. directly connect intracranial 4D-flow segmentation to area, flow,
 > velocity, mean WSS and maximum WSS; VAST couples segmentation with

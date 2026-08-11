@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — AneuX-derived transient-CFD material source 28.0/40 기각, surface-WSS no-verdict history와 no-model 경계를 설명하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — CFD-to-surrogate downstream utility를 비판적으로 재심사하고 27.0/40 기각, direct prior, no-model·no-compute 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,29 +40,30 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST SCREEN 28.0/40 REJECTED · NOT SUBMISSION-READY</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST SCREEN 27.0/40 REJECTED · NOT SUBMISSION-READY</p>
         <h1>
-          A material release is not yet a research identity.<br>
-          <em>Lineage and semantics before architecture.</em>
+          A useful evaluation question is not yet a paper identity.<br>
+          <em>Joint evidence before architecture.</em>
         </h1>
         <p class="hero-lede">
-          <b>현재 active paper identity나 선택된 모델은 없습니다.</b> 새로 확인한
-          exact HF record는 AneuX-derived side-wall 143개와 bifurcation 180개
-          geometry folder의 transient CFD를 기술합니다. 그러나 `SNF365`가 두
-          root에 중복되어 visible unique ID는 322개이며, 이것이 patient 또는
-          independent base family라는 mapping은 없습니다. Record는 contact-sharing
-          동의가 필요한 manual gate이고 tensor key, units, phases, BC, solver와
-          split을 공개 card에 명시하지 않습니다. Terms와 payload는 열지 않았습니다.
-          RHSIA, physics-constrained aneurysm mesh GNN, multiphysics thrombosis GNN,
-          Hodge/HSD와 equivariant WSS가 직접 선행이므로 graph Transformer,
-          edge 1-form, topology loss의 조합은 novelty가 아닙니다. 여섯 후보는 최고
-          28.0/40으로 모두 기각했습니다. “작은 field error가 critical-flow
-          organization을 보장하지 않는다”는 질문은 여전히 <b>inactive
-          hypothesis</b>이며, 과거 CPU P0 두 건은 scientific check 미평가인
-          no-verdict history로 닫혀 repair/rerun하지 않습니다.
+          <b>현재 active paper identity나 선택된 모델은 없습니다.</b> 팀의 최신
+          질문인 “real CFD가 주는 rupture-status 정보를 surrogate가 보존하는가?”는
+          좋은 평가 template입니다. 그러나 CMHA에는 matched surrogate field가
+          없고 기존 음성 결과는 exploratory입니다. PointFlowNet은 984 idealized
+          MCA에서 peak-systolic velocity/WSS point surrogate를 이미 다루며,
+          Hemo-MPO는 SE(3) mesh+physics+operator 조합을 직접 점유합니다. 새 CC0
+          rigid/FSI record도 독립 anatomy는 하나뿐입니다. 여섯 formulation은
+          <b>27.0/25.5/24.0/24.0/23.5/21.5</b>로 모두 기각했습니다. Attention,
+          multigrid, masking, GNN rollout과 temporal decoder는 novelty가 아니라
+          future control입니다. Surface-structure 질문은 계속 inactive이며 과거
+          CPU P0 두 건은 0/10 scientific check가 미평가된 no-verdict history로
+          닫혀 repair/rerun하지 않습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#downstream-utility">Downstream 판정 이해하기</a>
+          <a class="button ghost" href="../docs/team-downstream-utility-reappraisal-2026-08-11.md">Latest critical reappraisal ↗</a>
+          <a class="button ghost" href="../configs/source_watch_v7.json">Source watch v7 ↗</a>
           <a class="button ghost" href="learn.html#aneux-transient">새 transient source 판정 이해하기</a>
           <a class="button ghost" href="../docs/aneux-transient-cfd-material-source-audit-2026-08-11.md">Latest material-source audit ↗</a>
           <a class="button ghost" href="learn.html#functional-4dflow">최신 4D-flow 판정 이해하기</a>
@@ -119,7 +120,7 @@
           <a class="button ghost" href="../docs/hemodynamic-endpoint-source-audit-2026-08-10.md">Hemodynamic audit ↗</a>
           <a class="button ghost" href="../docs/pinn-rupture-direct-prior-audit-2026-08-10.md">PINN prior audit ↗</a>
           <a class="button ghost" href="../docs/vascular-semantics-source-audit-2026-08-10.md">Vascular audit ↗</a>
-          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v6 ↗</a>
+          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v7 ↗</a>
           <a class="button ghost" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">AneuX history ↗</a>
           <a class="button ghost" href="../results/aneux_preprocessing_orbit_p0_execution_20260809.json">Historical P0 ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
@@ -129,7 +130,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">LATEST 28.0/40 REJECTED · MATERIAL SOURCE ≠ ACTIVE TASK · NO MODEL</div>
+        <div class="visual-caption">LATEST 27.0/40 REJECTED · EVALUATION TEMPLATE ≠ ACTIVE TASK · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -152,27 +153,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>28.0</b><span>latest material-source score · rejected</span>
+            <b>27.0</b><span>latest downstream screen · rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>322</b><span>unique visible IDs · not verified patients</span>
+            <b>1</b><span>effective anatomy in public paired rigid/FSI data</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> latest: 323 topology folders = 322 visible IDs ≠ verified patients</span>
-          <span><i class="dot coral"></i> total degree ≠ exact zero count, location or clinical risk</span>
+          <span><i class="dot lime"></i> CMHA 99 patients: no matched surrogate prediction</span>
+          <span><i class="dot coral"></i> PointFlowNet code ≠ complete licensed matched baseline</span>
           <span>P0 E/exit 2 · all 10 checks unevaluated · no scientific verdict · GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>28.0/40 · all six rejected · active lead 0</b></div>
+        <div><span>Latest source screen</span><b>27.0/40 · all six rejected · active lead 0</b></div>
         <div><span>Current compute</span><b>no scientific-server query · no new job · GPU 0</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh problem-level source audit or new official schema/lineage version · no gate acceptance</b></div>
+        <div><span>Next action</span><b>fresh joint patient–CFD–surrogate asset audit or PointFlowNet baseline re-audit · no P0</b></div>
       </div>
     </section>
 
@@ -181,13 +182,14 @@
         <p class="eyebrow">01 · THE THESIS</p>
         <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
         <p>
-          단순 WSS MSE가 비슷해도 벡터장의 critical structure가 맞는다는 보장은
-          없습니다. 반대로 topology loss를 붙였다고 통계적 신뢰성이 생기는 것도
-          아닙니다. 새 후보는 patient-level whole-field coverage와 deterministic
-          degree theorem을 연결해, margin이 충분한 region만 인증하고 나머지는
-          명시적으로 abstain합니다. 중요한 성능은 MSE 하나가 아니라 validity를
-          지킨 상태의 certificate coverage/size입니다. 다만 archive semantics와
-          degree stability가 먼저 통과해야 하며, 현재 모델은 선택되지 않았습니다.
+          Field MSE와 downstream decision fidelity, 그리고 critical structure는
+          서로 다른 endpoint입니다. 그러나 이 차이를 말하는 것만으로 contribution이
+          되지는 않습니다. 같은 patient/base family에서 reference CFD, matched
+          surrogate, clinical/morphology 변수와 조건 provenance가 함께 관측되어야
+          보존 여부를 식별할 수 있습니다. 현재 그런 joint asset은 없고 obvious
+          point/mesh/GNN/operator 조합은 direct prior가 점유합니다. 그래서 모델을
+          먼저 고르지 않고, 문제와 independent unit이 실제로 식별될 때까지
+          active identity를 비워 둡니다.
         </p>
       </div>
 

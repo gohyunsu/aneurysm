@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.4 no-experiment boundary · 2026-08-11:** Six downstream/model-
+> form formulations are below 32/40, so no P0 is registered. Public
+> PointFlowNet code was inspected but not executed; Dryad rigid/FSI payload was
+> not opened; CMHA's historical exploratory aggregate is unchanged. Source
+> watch v7 may request only a baseline-feasibility re-audit. No scientific
+> server or scheduler was queried, no PBS/GPU job was made, historical no-
+> verdict jobs are not repaired/rerun, and outer test remains sealed.
+
 > **Schema 8.3 no-experiment boundary · 2026-08-11:** The manually gated
 > AneuX-derived transient-CFD record was inspected through public metadata only.
 > No terms, tensor, mesh, raw README or commit history was opened. The best

@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.4 no-model boundary · 2026-08-11:** The team suggestions
+> (attention, multigrid, masking, inlet conditioning, GNN rollout and temporal
+> decoding) are not a selected architecture. PointFlowNet and Hemo-MPO already
+> occupy the obvious point/mesh/physics/operator combinations, while the
+> downstream estimand has no joint asset. The batch peaks at 27.0/40. No model,
+> loss, checkpoint adaptation or GPU run is authorized; future architecture
+> design begins only after a new problem and method-free gate pass.
+
 > **Schema 8.3 no-model boundary · 2026-08-11:** The new AneuX-derived
 > transient-CFD metadata does not select a graph Transformer, GHD, Hodge/DEC,
 > equivariant mesh network, edge 1-form decoder, topology loss or conformal

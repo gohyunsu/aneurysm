@@ -1,5 +1,16 @@
 # AURORA 연구 방향
 
+> **Schema 8.4 direction · 2026-08-11:** Preserve the team's CFD-versus-
+> surrogate downstream question only as an evaluation template. The joint
+> patient-level observation needed to identify it is absent, CMHA has no
+> matched surrogate prediction, and the architecture space is directly
+> occupied by PointFlowNet, Hemo-MPO and AneuX PINN fusion. A public rigid/FSI
+> record improves model-form illustration but has one effective anatomy. The
+> fresh batch peaks at 27.0/40. Continue problem/asset discovery and a
+> fail-closed PointFlowNet baseline watch; do not promote attention, multigrid,
+> masking, GNN rollout or operator decoding to novelty, and do not open P0 or
+> compute. [Exact reappraisal](team-downstream-utility-reappraisal-2026-08-11.md)
+
 > **Schema 8.3 direction · 2026-08-11:** The AneuX-derived transient-CFD
 > record is a genuine material source change but not a task admission. Public
 > metadata exposes 323 topology-qualified folders, 322 unique visible IDs and

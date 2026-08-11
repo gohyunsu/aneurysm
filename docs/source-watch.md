@@ -1,4 +1,14 @@
-# Public source watch · ten material source states
+# Public source watch · eleven material/direct-prior source states
+
+> **2026-08-11 v7 decision:** v6 is extended with exact public PointFlowNet
+> head `5cb4f254…`. Its repository currently has code, a checkpoint and result
+> CSVs but no release, recognized license, CFD payload or tracked
+> train/validation/test split manifests; the README is 35 bytes and promises a
+> future release. A head/root/release/license/size change requests only a
+> direct-prior baseline-feasibility re-audit. It cannot download data, execute
+> the checkpoint, repair a source score, select architecture, register P0/P1
+> or authorize GPU/outer test. All eleven frozen snapshots currently match.
+
 
 > **2026-08-11 v6 decision:** v5 is extended with the exact manually gated
 > AneuX-derived transient-CFD metadata state. The canonical record is

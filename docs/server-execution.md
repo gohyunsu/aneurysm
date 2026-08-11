@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 8.4 source/code-only update · 2026-08-11:** The team reappraisal,
+> public PointFlowNet code audit, Dryad metadata audit and source-watch v7
+> registration queried no scientific server, transferred no scientific
+> payload and created no PBS/GPU job. The last actual `introai9` observation
+> remains the post-`115684` empty queue and was not refreshed. `junjinyong` was
+> not accessed and remains prohibited; login-node GPU commands remain
+> prohibited.
+
 > **Source-watch v5 update · 2026-08-11:** The nine-source live metadata
 > refresh queried no scientific server, transferred no patient/CFD payload and
 > created no PBS/GPU job. The last actual `introai9` observation was not

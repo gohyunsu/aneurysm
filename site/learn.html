@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AneuX-derived transient CFD, WSS, 독립 표본, surface topology와 연구 gate를 기초부터 설명하고 최신 28.0/40 기각·no-model 경계를 밝히는 입문 가이드.">
+  <meta name="description" content="CFD와 surrogate의 downstream 정보 보존, PointFlowNet·Hemo-MPO direct prior, 독립 표본과 연구 gate를 기초부터 설명하고 최신 27.0/40 기각·no-model 경계를 밝히는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#downstream-utility">Downstream utility</a>
       <a href="#aneux-transient">Transient source</a>
       <a href="#functional-4dflow">4D-flow gap</a>
       <a href="#cross-view">Cross-view</a>
@@ -61,19 +62,57 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 8.3</span>
+          <span>짧은 답 · schema 8.4</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
-            새 AneuX-derived transient-CFD source도 최고 28.0/40으로
-            기각됐습니다. 323개 topology folder는 `SNF365` 중복 때문에 322개
-            visible ID이고 patient/base-family 독립성은 확인되지 않았습니다.
-            Manual gate는 수락하지 않았고 field·mesh payload도 읽지 않았습니다.
+            팀의 CFD→surrogate downstream 질문을 새로 심사했지만 최고
+            27.0/40으로 기각했습니다. CMHA에는 matched surrogate output이 없고,
+            PointFlowNet과 Hemo-MPO가 obvious point/mesh/operator 공간을 이미
+            점유하며, 공개 rigid/FSI pair는 독립 anatomy가 하나뿐입니다.
             Surface-vector와 conformal-degree는 중요한 역사지만 active topic이
             아닙니다. Exact P0 두 건의 scientific checks는 실패한 것이 아니라
             모두 미평가였고, 동일 contract를 재실행하지 않습니다. Primary, GNN,
             Transformer, neural operator, contribution, GPU와 outer test는
             선택되지 않았습니다.
           </p>
+        </div>
+        <div class="answer-card" id="downstream-utility">
+          <span>Real CFD 정보를 surrogate가 보존하는지 왜 바로 실험하지 않나?</span>
+          <strong>질문은 타당하지만, 같은 환자에서 비교할 joint observation이 없습니다.</strong>
+          <p>
+            검증하려면 같은 patient 또는 base family에 대해 clinical·morphology
+            변수, reference CFD field와 고정 summary, matched surrogate prediction,
+            boundary/model-form provenance가 모두 있어야 합니다. CMHA의 99-patient
+            aggregate는 clinical+morphology AUPRC 0.7592와 +hemodynamics 0.7173을
+            보여 주지만 official case map이 미확인이고 surrogate field가 없습니다.
+            따라서 이 음성 signal은 exploratory이며 real-CFD→surrogate retention을
+            측정하지 않습니다.
+          </p>
+          <p>
+            PointFlowNet은 이미 984 idealized MCA geometry에서 distance-to-wall
+            point representation으로 peak-systolic velocity와 WSS를 예측합니다.
+            공개 repository에는 코드·checkpoint·result CSV가 있지만 license,
+            release, CFD payload와 tracked train/validation/test manifest가 없어
+            matched executable baseline은 아닙니다. Hemo-MPO도 SE(3) mesh encoder,
+            physics constraint와 DeepONet decoder를 이미 결합하지만 data는 request
+            only입니다. 따라서 attention, multigrid, masking 또는 GNN을 더하는 것은
+            contribution이 아닙니다.
+          </p>
+          <p>
+            CC0 Dryad rigid/FSI dataset은 1 rigid + 2 deformable condition, 두 grid,
+            55 time sample을 제공하지만 모두 한 synthetic anatomy입니다. Phase와
+            grid cell을 독립 표본으로 세면 pseudoreplication입니다. 이 자료는
+            future diagnostic/figure에는 유용하지만 population surrogate를
+            학습하거나 확인할 수 없습니다. 여섯 후보의 동결 점수는
+            27.0/25.5/24.0/24.0/23.5/21.5입니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Evaluation question retained</span>
+            <span class="yes">PointFlowNet watched as direct prior</span>
+            <span class="no">No joint cohort</span>
+            <span class="no">No P0, model or GPU</span>
+          </div>
+          <a href="../docs/team-downstream-utility-reappraisal-2026-08-11.md">점수표·source·direct prior 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="structure-reappraisal">
           <span>제안된 surface-vector 분석을 어떻게 반영했나?</span>
@@ -788,7 +827,12 @@
               <p>Conditional source lead, selected primary, method와 architecture는 모두 0입니다. 32.5/40 source history와 새 algorithm은 같은 말이 아닙니다. Conformal calibration, tangent projection, Hodge 또는 GNN block에 이름만 붙여 contribution으로 만들지 않습니다.</p>
             </aside>
             <article>
-              <span>LATEST · SCHEMA 8.3 ANEUX-DERIVED TRANSIENT CFD · REJECTED</span>
+              <span>LATEST · SCHEMA 8.4 DOWNSTREAM SURROGATE IDENTITY · REJECTED</span>
+              <div><h3>Real CFD 정보를 보존하는 GNN이면 왜 아직 model을 고르지 않는가?</h3><p>그 비교에는 같은 patient 또는 base family의 clinical·morphology 변수, reference CFD, matched surrogate output과 boundary/model-form provenance가 함께 필요합니다. CMHA에는 matched surrogate field가 없고, 공개 rigid/FSI 자료는 한 anatomy뿐입니다. PointFlowNet은 peak-systolic point surrogate를, Hemo-MPO는 SE(3) mesh+physics+operator 조합을 이미 점유합니다. 따라서 attention, multigrid, masking이나 다른 GNN block을 붙이는 것은 결측 joint estimand를 해결하지 못합니다.</p></div>
+              <b>판정</b><small>best 27.0/40 · evaluation template only · P0/method/architecture/server/GPU 0</small>
+            </article>
+            <article>
+              <span>HISTORICAL · SCHEMA 8.3 ANEUX-DERIVED TRANSIENT CFD · REJECTED</span>
               <div><h3>Transient CFD 323개 folder가 생겼는데 왜 GNN을 고르지 않는가?</h3><p>Folder는 학습 단위가 아닙니다. 180개 bifurcation과 143개 side-wall folder에는 cross-root 중복 `SNF365`가 있어 visible ID는 322개이고, patient/base-family mapping은 공개되지 않았습니다. Tensor key·units·phase·BC·solver·split도 card에 없습니다. RHSIA의 graph Transformer/GHD, physics-constrained aneurysm mesh GNN과 multiphysics thrombosis GNN이 이미 직접 선행이므로 architecture 조합은 남은 gap이 아닙니다.</p></div>
               <b>판정</b><small>best 28.0/40 · terms/payload/P0/method/architecture/server/GPU 0</small>
             </article>
@@ -809,13 +853,13 @@
             </article>
             <article>
               <span>DIRECT PRIOR · TRELLIS SURFACE FEATURE</span>
-              <div><h3>3D foundation feature를 GNN에 붙이면 새 방법인가?</h3><p>아닙니다. TRELLIS 연구는 비의료 3D object 50만 개에서 학습한 1,024차원 surface feature를 PointNet/PointNet++와 AnXplore mesh GNN에 이미 결합했고 rollout RMSE를 낮췄습니다. 그러나 101개 sac이 하나의 uniform parent vessel을 공유하고, surface-WSS critical point·signed index·worldline은 평가하지 않았습니다. 명시된 code URL도 현재 404입니다. v5 source watch는 repository 공개 여부만 읽고, 변화가 생겨도 faithful baseline 구현 가능성을 사람이 재검토하도록 알릴 뿐 E0·P0·architecture·GPU를 열지 않습니다. 따라서 foundation feature는 향후 faithful implementation이 있을 때의 matched control이지, 지금 선택된 architecture나 structure-faithful evidence가 아닙니다.</p></div>
+              <div><h3>3D foundation feature를 GNN에 붙이면 새 방법인가?</h3><p>아닙니다. TRELLIS 연구는 비의료 3D object 50만 개에서 학습한 1,024차원 surface feature를 PointNet/PointNet++와 AnXplore mesh GNN에 이미 결합했고 rollout RMSE를 낮췄습니다. 그러나 101개 sac이 하나의 uniform parent vessel을 공유하고, surface-WSS critical point·signed index·worldline은 평가하지 않았습니다. 명시된 code URL도 현재 404입니다. v7 source watch는 repository 공개 여부만 읽고, 변화가 생겨도 faithful baseline 구현 가능성을 사람이 재검토하도록 알릴 뿐 E0·P0·architecture·GPU를 열지 않습니다. 따라서 foundation feature는 향후 faithful implementation이 있을 때의 matched control이지, 지금 선택된 architecture나 structure-faithful evidence가 아닙니다.</p></div>
               <b>판정</b><small>direct prior · code URL 404 · fail-closed watch · candidate/asset/P0/model/GPU 0</small>
             </article>
             <article>
-              <span>CURRENT · SOURCE WATCH V6 · WATCH ONLY</span>
-              <div><h3>공개 페이지가 바뀌면 왜 바로 실험하지 않는가?</h3><p>Metadata 변화는 “다시 읽어 볼 이유”일 뿐 task adequacy가 아닙니다. v6는 v5의 아홉 source에 exact AneuX-derived transient-CFD revision·gate·license·card·manifest를 열 번째로 더합니다. AneuG/Aneurisk 변화도 닫힌 job의 repair 근거가 아니고, LargeIA/TopAneu/AneuX access 변화도 개인 약관을 대신 수락하지 않습니다. 변화가 있으면 사람이 독립 단위·target lineage·direct prior를 새 version으로 다시 평가하고 32/40을 넘어야 method-free P0를 별도 등록할 수 있습니다.</p></div>
-              <b>현재 관측</b><small>10/10 exact match · manual review 0 · download/terms/P0/P1/model/GPU/outer test 0</small>
+              <span>CURRENT · SOURCE WATCH V7 · WATCH ONLY</span>
+              <div><h3>공개 페이지가 바뀌면 왜 바로 실험하지 않는가?</h3><p>Metadata 변화는 “다시 읽어 볼 이유”일 뿐 task adequacy가 아닙니다. v7은 기존 열 source에 PointFlowNet의 exact head, release, license, README, split manifest와 CFD payload 상태를 열한 번째로 더합니다. PointFlowNet 변화는 baseline-feasibility 재심사만 요청하고, AneuG/Aneurisk 변화도 닫힌 job의 repair 근거가 아닙니다. 사람이 독립 단위·target lineage·direct prior를 새 version으로 다시 평가하고 32/40을 넘어야 method-free P0를 별도 등록할 수 있습니다.</p></div>
+              <b>현재 관측</b><small>11/11 exact match · review trigger 0 · download/terms/P0/P1/model/GPU/outer test 0</small>
             </article>
             <article>
               <span>RETAINED · SURFACE-VECTOR · INACTIVE CONDITIONAL HYPOTHESIS</span>

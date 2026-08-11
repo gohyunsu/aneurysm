@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 team downstream-utility reappraisal · schema 8.4:** Exact team
+> source hashes remain `ad99cc…`/`6d50cb…`; no discussion later than
+> 2026-08-02 was found. The real-CFD→surrogate downstream-retention question is
+> an evaluation template only. CMHA's 99-patient exploratory negative signal is
+> not relabelled as confirmatory and contains no matched surrogate output.
+> PointFlowNet, Hemo-MPO, AneuX PINN fusion and task-based functional evaluation
+> are direct priors. Dryad rigid/FSI data have one effective anatomy. Frozen
+> scores 27.0/25.5/24.0/24.0/23.5/21.5 are all rejected; lead/primary/P0/P1/
+> method/architecture/server query/PBS/GPU/outer test/claim remain 0.
+
+> **2026-08-11 source-watch v7:** Exact public PointFlowNet head is
+> `5cb4f2545d25b6e8b855806cb3a345b8b1d72594`, release 0, license null,
+> README 35 bytes. The repository contains a 14,120,802-byte checkpoint and a
+> 538-byte normalization file but no tracked train/val/test manifest or CFD
+> payload. A material change requests direct-prior baseline-feasibility review
+> only. Never auto-download, repair a score, select a model or open compute.
+> This update queried no scientific server. AURORA remains `introai9` PBS only;
+> never access `junjinyong` or run login-node GPU commands.
+
 > **2026-08-11 AneuX-derived transient-CFD material audit · schema 8.3:** Exact
 > HF metadata `yiyings/transient-dataset` revision `38c574bc…`은 AneuX-derived
 > side-wall/bifurcation transient CFD를 새로 확인시킨다. Public API manifest는

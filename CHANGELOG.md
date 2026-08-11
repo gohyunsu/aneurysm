@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.4 rejects downstream-surrogate identity
+
+- Re-read exact team-source hashes and found no discussion later than
+  2026-08-02. Retained real-CFD→surrogate downstream retention as an evaluation
+  template, not an active paper identity.
+- Preserved the 99-patient CMHA result as exploratory; it has no matched
+  surrogate output and cannot be relabelled as a confirmatory failure.
+- Audited PointFlowNet exact head `5cb4f254…`, Hemo-MPO, the one-anatomy CC0
+  rigid/FSI record and an eight-case rupture-overlap study as direct
+  priors/assets without executing code or opening scientific payload.
+- Froze six formulations at 27.0/25.5/24.0/24.0/23.5/21.5, all below 32. Opened
+  no P0/P1, method, architecture, server query, PBS/GPU, outer test or claim.
+
+## 2026-08-11 · Source watch v7 adds PointFlowNet baseline state
+
+- Added exact PointFlowNet head, root manifest, release/license state and
+  repository size as the eleventh fail-closed watch.
+- Recorded that the public repository has partial code, checkpoint/results and
+  normalization statistics but no CFD payload or tracked train/val/test split
+  manifest.
+- A change requests direct-prior baseline-feasibility re-audit only; it cannot
+  download data, repair a score, select architecture or authorize compute.
+
 ## 2026-08-11 · Schema 8.3 rejects the AneuX-derived transient-CFD source branch
 
 - Audited exact HF metadata `38c574bc…` without accepting the manual contact-

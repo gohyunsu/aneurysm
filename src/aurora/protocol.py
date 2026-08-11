@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.3":
-        raise ProtocolError("The current research-state schema must be version 8.3.")
+    if protocol["schema_version"] != "8.4":
+        raise ProtocolError("The current research-state schema must be version 8.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_aneux_transient_cfd_material_source_batch_best_28_0_rejected_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_team_downstream_utility_batch_best_27_0_rejected_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_3_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_4_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -230,9 +230,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "cross_view_projection_source_delta",
             "functional_4dflow_segmentation_source_delta",
             "aneux_transient_cfd_material_source_audit",
+            "team_downstream_utility_reappraisal",
             "public_source_watch_v4",
             "public_source_watch_v5",
             "public_source_watch_v6",
+            "public_source_watch_v7",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -243,13 +245,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_aneux_transient_cfd_material_source_batch_best_28_0_rejected"
+        != "no_active_problem_latest_team_downstream_utility_batch_best_27_0_rejected"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_huggingface_metadata_only_manual_gate_not_accepted_no_tensor_mesh_or_raw_readme_payload_closed_p0s_unchanged"
+        != "public_metadata_and_open_source_code_only_no_new_scientific_payload_no_joint_downstream_cohort_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -259,17 +261,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_or_new_material_manifest_evidence_version_not_terms_acceptance_not_closed_wss_p0_repair_or_rerun"
+        != "fresh_problem_level_joint_patient_cfd_surrogate_asset_audit_or_pointflownet_material_release_baseline_reaudit_not_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/aneux-transient-cfd-material-source-audit-2026-08-11.md"
+        != "docs/team-downstream-utility-reappraisal-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "topology_stratified_sidewall_bifurcation_transient_wss_generalization"
+        != "geometry_only_peak_systolic_point_surrogation_direct_prior_occupied"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The AneuX-derived transient-CFD source batch must remain rejected below 32 while "
+            "The team downstream-utility source batch must remain rejected below 32 while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
@@ -2387,6 +2389,197 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("AneuX-derived transient-CFD material rejection and no-compute boundary")
 
+    downstream = problem_selection["team_downstream_utility_reappraisal"]
+    _require_keys(
+        downstream,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "axis_scores",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "tmp_kakaotalk_sha256",
+            "tmp_tistory_sha256",
+            "latest_team_discussion_date",
+            "new_team_discussion_detected",
+            "team_question_retained_as_evaluation_template_only",
+            "cmha_exploratory_result",
+            "cmha_patients",
+            "cmha_lesions",
+            "cmha_clinical_morphology_auprc",
+            "cmha_plus_hemodynamics_auprc",
+            "cmha_delta_auprc",
+            "cmha_patient_bootstrap_ci95",
+            "cmha_official_case_map_verified",
+            "cmha_contains_matched_surrogate_predictions",
+            "cmha_negative_exploratory_signal_relabelled_as_confirmatory_failure",
+            "historical_patient_condition_incremental_utility_score",
+            "historical_patient_condition_incremental_utility_repaired",
+            "pointflownet_publication_doi",
+            "pointflownet_idealized_mca_geometries",
+            "pointflownet_peak_systolic_only",
+            "pointflownet_repository",
+            "pointflownet_repository_head",
+            "pointflownet_repository_release_count",
+            "pointflownet_repository_license_spdx_id",
+            "pointflownet_readme_bytes",
+            "pointflownet_norm_stats_bytes",
+            "pointflownet_checkpoint_bytes",
+            "pointflownet_tracked_train_val_test_manifests_present",
+            "pointflownet_cfd_payload_present",
+            "pointflownet_code_executed",
+            "pointflownet_public_repository_is_complete_executable_matched_baseline",
+            "hemo_mpo_publication_doi",
+            "hemo_mpo_public_code_contract_available",
+            "hemo_mpo_data_publicly_available",
+            "hemo_mpo_aneumo_patient_semantics_reconciled",
+            "dryad_fsi_doi",
+            "dryad_fsi_license",
+            "dryad_fsi_effective_anatomies",
+            "dryad_fsi_rigid_cases",
+            "dryad_fsi_deformable_cases",
+            "dryad_fsi_grid_resolutions",
+            "dryad_fsi_time_samples_per_case",
+            "dryad_fsi_payload_accessed",
+            "dryad_grid_or_time_samples_counted_as_independent_units",
+            "rupture_overlap_arxiv_id",
+            "rupture_overlap_total_cases",
+            "rupture_overlap_classifier_or_prediction_rule_reported",
+            "direct_prior_threats",
+            "source_watch_config",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+        ],
+        "team downstream-utility reappraisal",
+    )
+    expected_downstream_priors = {
+        "pointflownet_peak_systolic_distance_to_wall_point_surrogation",
+        "hemo_mpo_se3_mesh_physics_deeponet_operator",
+        "aneux_pointnext_per_geometry_pinn_clinical_fusion",
+        "aneug_rhsia_and_physics_constrained_transient_mesh_surrogates",
+        "task_based_downstream_functional_evaluation",
+        "generic_attention_multigrid_masked_rollout_and_temporal_operator_components",
+    }
+    if (
+        downstream["status"]
+        != "fresh_problem_batch_rejected_below_admission_no_joint_estimand_or_executable_new_baseline"
+        or downstream["audit_document"]
+        != "docs/team-downstream-utility-reappraisal-2026-08-11.md"
+        or downstream["automatic_selection_threshold"] != 32.0
+        or downstream["best_candidate_id"]
+        != "geometry_only_peak_systolic_point_surrogation"
+        or downstream["best_score"] != 27.0
+        or downstream["axis_scores"]
+        != [3.5, 4.0, 0.5, 2.0, 4.0, 5.0, 4.5, 3.5]
+        or sum(downstream["axis_scores"]) != downstream["best_score"]
+        or downstream["all_candidate_scores"]
+        != [27.0, 25.5, 24.0, 24.0, 23.5, 21.5]
+        or max(downstream["all_candidate_scores"])
+        >= downstream["automatic_selection_threshold"]
+        or downstream["conditional_source_lead_count"] != 0
+        or downstream["primary_problem_selected"] is not False
+        or downstream["tmp_kakaotalk_sha256"]
+        != "ad99ccdcc66fcb57a049e6f2dfaa7ee11dd305779dd49a6e545b9b6b6cab175d"
+        or downstream["tmp_tistory_sha256"]
+        != "6d50cb4ae8db683cf2b4f1aa48c402a8765a64d0f19b5c67687912ab660c2b38"
+        or downstream["latest_team_discussion_date"] != "2026-08-02"
+        or downstream["new_team_discussion_detected"] is not False
+        or downstream["team_question_retained_as_evaluation_template_only"]
+        is not True
+        or downstream["cmha_exploratory_result"]
+        != "results/cmha_g1_exploratory_20260803.json"
+        or downstream["cmha_patients"] != 99
+        or downstream["cmha_lesions"] != 105
+        or downstream["cmha_official_case_map_verified"] is not False
+        or downstream["cmha_contains_matched_surrogate_predictions"] is not False
+        or downstream[
+            "cmha_negative_exploratory_signal_relabelled_as_confirmatory_failure"
+        ]
+        is not False
+        or downstream["historical_patient_condition_incremental_utility_score"]
+        != 23.5
+        or downstream["historical_patient_condition_incremental_utility_repaired"]
+        is not False
+        or downstream["pointflownet_publication_doi"]
+        != "10.1016/j.cmpb.2026.109308"
+        or downstream["pointflownet_idealized_mca_geometries"] != 984
+        or downstream["pointflownet_peak_systolic_only"] is not True
+        or downstream["pointflownet_repository"]
+        != "yiyingsheng07/PointFlowNet"
+        or downstream["pointflownet_repository_head"]
+        != "5cb4f2545d25b6e8b855806cb3a345b8b1d72594"
+        or downstream["pointflownet_repository_release_count"] != 0
+        or downstream["pointflownet_repository_license_spdx_id"] is not None
+        or downstream["pointflownet_readme_bytes"] != 35
+        or downstream["pointflownet_norm_stats_bytes"] != 538
+        or downstream["pointflownet_checkpoint_bytes"] != 14120802
+        or downstream["pointflownet_tracked_train_val_test_manifests_present"]
+        is not False
+        or downstream["pointflownet_cfd_payload_present"] is not False
+        or downstream["pointflownet_code_executed"] is not False
+        or downstream[
+            "pointflownet_public_repository_is_complete_executable_matched_baseline"
+        ]
+        is not False
+        or downstream["hemo_mpo_publication_doi"]
+        != "10.1016/j.aej.2026.05.044"
+        or downstream["hemo_mpo_public_code_contract_available"] is not False
+        or downstream["hemo_mpo_data_publicly_available"] is not False
+        or downstream["hemo_mpo_aneumo_patient_semantics_reconciled"] is not False
+        or downstream["dryad_fsi_doi"] != "10.5061/dryad.pc866t22m"
+        or downstream["dryad_fsi_license"] != "CC0"
+        or downstream["dryad_fsi_effective_anatomies"] != 1
+        or downstream["dryad_fsi_rigid_cases"] != 1
+        or downstream["dryad_fsi_deformable_cases"] != 2
+        or downstream["dryad_fsi_grid_resolutions"] != 2
+        or downstream["dryad_fsi_time_samples_per_case"] != 55
+        or downstream["dryad_fsi_payload_accessed"] is not False
+        or downstream["dryad_grid_or_time_samples_counted_as_independent_units"]
+        is not False
+        or downstream["rupture_overlap_arxiv_id"] != "2606.00072"
+        or downstream["rupture_overlap_total_cases"] != 8
+        or downstream["rupture_overlap_classifier_or_prediction_rule_reported"]
+        is not False
+        or set(downstream["direct_prior_threats"])
+        != expected_downstream_priors
+        or downstream["source_watch_config"] != "configs/source_watch_v7.json"
+        or any(
+            downstream[key] is not False
+            for key in (
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or downstream["execution_server"] != "introai9"
+    ):
+        raise ProtocolError(
+            "The team downstream-utility reappraisal must preserve exploratory CMHA, "
+            "direct-prior and one-anatomy boundaries, reject all scores below 32, "
+            "and open no P0, method, architecture or compute."
+        )
+    checks.append("team downstream-utility rejection and no-compute boundary")
+
     source_watch_v4 = problem_selection["public_source_watch_v4"]
     _require_keys(
         source_watch_v4,
@@ -2670,7 +2863,98 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "create no gated access, historical repair, payload, or compute authority."
         )
     checks.append("ten-source fail-closed metadata watch boundary")
+    source_watch_v7 = problem_selection["public_source_watch_v7"]
+    _require_keys(
+        source_watch_v7,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "watch_ids",
+            "pointflownet_repository",
+            "pointflownet_head",
+            "pointflownet_release_count",
+            "pointflownet_license_spdx_id",
+            "pointflownet_readme_bytes",
+            "pointflownet_norm_stats_bytes",
+            "pointflownet_checkpoint_bytes",
+            "pointflownet_split_manifests_present",
+            "pointflownet_cfd_payload_present",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v7",
+    )
+    if (
+        source_watch_v7["status"]
+        != "watch_only_all_eleven_frozen_snapshots_match"
+        or source_watch_v7["config"] != "configs/source_watch_v7.json"
+        or source_watch_v7["extends_historical_config"]
+        != "configs/source_watch_v6.json"
+        or source_watch_v7["config_sha256"]
+        != "351608168228d0877a6467ec9190d8bca31addaef9ad5592145768f6e2933015"
+        or source_watch_v7["watch_count"] != 11
+        or source_watch_v7["watch_ids"][-1]
+        != "pointflownet_baseline_release_v1"
+        or source_watch_v7["pointflownet_repository"]
+        != "yiyingsheng07/PointFlowNet"
+        or source_watch_v7["pointflownet_head"]
+        != "5cb4f2545d25b6e8b855806cb3a345b8b1d72594"
+        or source_watch_v7["pointflownet_release_count"] != 0
+        or source_watch_v7["pointflownet_license_spdx_id"] is not None
+        or source_watch_v7["pointflownet_readme_bytes"] != 35
+        or source_watch_v7["pointflownet_norm_stats_bytes"] != 538
+        or source_watch_v7["pointflownet_checkpoint_bytes"] != 14120802
+        or source_watch_v7["pointflownet_split_manifests_present"] is not False
+        or source_watch_v7["pointflownet_cfd_payload_present"] is not False
+        or source_watch_v7["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v7[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v7["decision"]
+        != "continue_fail_closed_eleven_source_watch_only_pointflownet_change_requests_baseline_reaudit"
+    ):
+        raise ProtocolError(
+            "Source watch v7 must preserve all eleven exact snapshots and allow a "
+            "PointFlowNet change to request baseline review only, never data, method or compute."
+        )
+    checks.append("eleven-source fail-closed baseline watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "geometry_only_peak_systolic_point_surrogation_direct_prior_occupied",
+        "rigid_fsi_model_form_robust_functional_concordance_effective_anatomy_one",
+        "real_cfd_to_surrogate_downstream_status_retention_joint_observation_absent",
+        "attention_multigrid_masked_rollout_gnn_architecture_only",
+        "hemodynamic_overlap_aware_selective_status_abstention_eight_case_qualitative_source",
         "topology_stratified_sidewall_bifurcation_transient_wss_generalization",
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",

@@ -25,6 +25,7 @@ CONFIG_V3 = ROOT / "configs" / "source_watch_v3.json"
 CONFIG_V4 = ROOT / "configs" / "source_watch_v4.json"
 CONFIG_V5 = ROOT / "configs" / "source_watch_v5.json"
 CONFIG_V6 = ROOT / "configs" / "source_watch_v6.json"
+CONFIG_V7 = ROOT / "configs" / "source_watch_v7.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -545,12 +546,107 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v6.json", workflow)
+        self.assertIn("configs/source_watch_v7.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
         self.assertNotIn("junjinyong", workflow)
         self.assertNotIn("ssh ", workflow)
+
+    def test_v7_adds_partial_pointflownet_baseline_without_authority(self) -> None:
+        config = load_config(CONFIG_V7)
+        self.assertEqual(config["extends"], "source_watch_v6.json")
+        self.assertEqual(len(config["watches"]), 11)
+        pointflownet = config["watches"][-1]
+        self.assertEqual(pointflownet["watch_id"], "pointflownet_baseline_release_v1")
+        self.assertEqual(
+            pointflownet["review_request"],
+            "direct_prior_baseline_feasibility_reaudit_only",
+        )
+        frozen = pointflownet["frozen_snapshot"]
+        self.assertEqual(
+            frozen["main_head_sha"],
+            "5cb4f2545d25b6e8b855806cb3a345b8b1d72594",
+        )
+        self.assertEqual(frozen["release_count"], 0)
+        self.assertIsNone(frozen["license_spdx_id"])
+        self.assertEqual(frozen["root_entries"][6]["name"], "README.md")
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v7_pointflownet_change_requests_baseline_review_only(self) -> None:
+        config = load_config(CONFIG_V7)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observed = observations["pointflownet_baseline_release_v1"]
+        observed["main_head_sha"] = "f" * 40
+        observed["license_spdx_id"] = "MIT"
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertFalse(result["fresh_source_reaudit_triggered"])
+        self.assertTrue(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertEqual(
+            result["manual_review_requests"],
+            ["direct_prior_baseline_feasibility_reaudit_only"],
+        )
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v7_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V7.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["release_count"] = 1
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            (source / "source_watch_v6.json").write_text(
+                CONFIG_V6.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            (source / "source_watch_v5.json").write_text(
+                CONFIG_V5.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            (source / "source_watch_v4.json").write_text(
+                CONFIG_V4.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(SourceWatchContractError, "pointflownet"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V7.read_text(encoding="utf-8"))
+        payload["authorization"]["gpu_training"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            (source / "source_watch_v6.json").write_text(
+                CONFIG_V6.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            (source / "source_watch_v5.json").write_text(
+                CONFIG_V5.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            (source / "source_watch_v4.json").write_text(
+                CONFIG_V4.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
 
     def test_fail_on_change_cli_returns_three_without_authorizing_compute(self) -> None:
         config = load_config(CONFIG_V3)

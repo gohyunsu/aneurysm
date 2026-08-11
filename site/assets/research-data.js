@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest AneuX-derived transient-CFD material source best 28.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
-    requirement: "a distinct fresh problem with a material usable patient-level asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; a manually gated manifest, topology label, visible case ID, GNN/Hodge stack or new loss cannot repair the closed WSS P0 or create novelty",
+    status: "Target locked · latest CFD-to-surrogate downstream-utility batch best 27.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    requirement: "a distinct fresh problem with a material joint patient-level asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; exploratory CMHA, one-anatomy FSI, partial PointFlowNet code, GNN/operator stacking or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Downstream CFD retention is retained as evaluation, not identity",
+      copy: "The team asks whether surrogate hemodynamics preserve real-CFD incremental rupture-status information. CMHA has a 99-patient exploratory aggregate but no matched surrogate fields and its official case map is unverified. PointFlowNet already predicts peak-systolic velocity/WSS on 984 idealized MCA geometries; Hemo-MPO occupies SE(3) mesh+physics+DeepONet; AneuX PINN fusion occupies geometry-derived hemodynamics plus clinical fusion. A new public rigid/FSI source contains three conditions but one effective synthetic anatomy. Six frozen formulations score 27.0/25.5/24.0/24.0/23.5/21.5 and all are rejected without P0 or compute.",
+      status: "Evaluation template only · best 27.0/40 rejected · joint cohort/P0/method/architecture/server/GPU 0",
+      url: "../docs/team-downstream-utility-reappraisal-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "A material transient-CFD release changes the inventory, not the paper identity",
@@ -648,6 +655,16 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "PointFlowNet · exact public head 5cb4f254…",
+      role: "direct-prior baseline watch; partial public implementation, not admitted training data or executable matched control",
+      provenance: "984 idealized MCA geometries reported · peak-systolic velocity/WSS · repository release 0/license null/README 35 bytes · checkpoint 14,120,802 bytes · norm stats 538 bytes · no tracked train/val/test manifest or CFD payload · code not executed"
+    },
+    {
+      name: "Dryad rigid/FSI aneurysm flow · 10.5061/dryad.pc866t22m",
+      role: "future one-anatomy paired model-form diagnostic/figure source only; not admitted learning or confirmation cohort",
+      provenance: "CC0 · reported 289.37 MB · 1 rigid + 2 deformable conditions · 2 grids · 55 time samples · effective anatomy 1 · payload 0 · grid/time samples are repeated measures"
+    },
+    {
       name: "BenchAnXplore · inverse-flow audit role",
       role: "controlled transient-velocity benchmark; not fresh WSS/pressure confirmation",
       provenance: "105 semi-idealized bulges × 80 frames · common idealized parent context · decoded compact contract coordinates/tetrahedra/velocity/boundary mask · verified pressure/WSS contract 0 · all 105 already used in D0/D0b · candidate 30.0/40"
@@ -844,6 +861,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 8.4 rejects downstream-surrogate identity without discarding the question",
+      copy: "The team question is retained as an evaluation template, but CMHA has no matched surrogate field, PointFlowNet and Hemo-MPO occupy the obvious method space, and public paired rigid/FSI data have one effective anatomy. Six formulations freeze at 27.0/25.5/24.0/24.0/23.5/21.5 and all are rejected. The historical CMHA signal remains exploratory; no P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",
+      files: ["docs/team-downstream-utility-reappraisal-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
+      category: "operations",
+      title: "Source watch v7 freezes partial PointFlowNet baseline state",
+      copy: "Exact head 5cb4f254… has partial code, checkpoint and results but no license/release, CFD payload or tracked split manifest. Any repository change requests direct-prior baseline-feasibility re-audit only. The eleven-source contract cannot download data, execute a checkpoint, repair a score, register P0/P1, select architecture or authorize GPU/outer test.",
+      files: ["configs/source_watch_v7.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", ".github/workflows/source-watch.yml", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/source-watch.md", "README.md", "AGENTS.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "research",
