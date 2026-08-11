@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · decision-time/clinical-precision best 30.0/40 rejected; all six fail total or critical novelty/asset/independent-unit floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; re-entry requires patient/centre/lesion/timestamp identifiers with separate preoperative, postdeployment and follow-up information sets, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · target-time/instability best 27.0/40 rejected; all six fail total or critical asset/independent-unit floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh versioned timestamped material-asset audit; re-entry requires patient/centre/lesion/index-time/horizon/component-outcome identifiers and proof that every feature precedes target time, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Instability prediction needs a target time before an architecture",
+      copy: "A seven-hospital 2026 study already uses pre-growth/pre-rupture CTA, MRA and DSA radiomics on 646 patients/840 aneurysms with a six-hospital external cohort of 206/271. Source external AUC is 0.85 radiomics, 0.61 clinical+morphology and 0.78 combined. Another study already fuses VWI habitat radiomics, DenseNet features, clinical variables, a Transformer, SHAP, calibration and DCA on 293 patients/312 aneurysms. Its composite unstable label mixes prior symptoms/growth with future progression/rupture. Registered ANEURYSM@RISK plans 3,800 retrospective MRA participants but has no results until 2028. Six candidates score 27.0/26.5/26.0/25.5/25.5/25.5 and all fail the non-compensatory gate.",
+      status: "Best 27.0/40 rejected · timestamped multicentre public asset 0 · lead/P0/method/model/server/GPU 0",
+      url: "../docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "A prediction is defined by what was knowable at its decision time",
@@ -989,6 +996,11 @@ window.AURORA_DATA = Object.freeze({
       provenance: "MIT v1.0.0 · one patient-specific aneurysm mesh · Newtonian/Carreau × no/partial slip · repository tree/README only · generated fields 0"
     },
     {
+      name: "Seven-hospital pre-event radiomics + VWI Transformer + ANEURYSM@RISK",
+      role: "source-rejected target-time/instability branch; evaluation principles only",
+      provenance: "seven-hospital 852 patients/1,111 aneurysms with external 206/271 · VWI Transformer 293 patients/312 aneurysms, patient-random 205/88, mixed-time instability composite · NCT07111975 estimated 3,800/3 centres, results 0, 2028 completion · no versioned timestamped public joined asset · P0/model/GPU 0"
+    },
+    {
       name: "PED decision-time + commercial precision direct-prior boundary",
       role: "source-rejected information-time and measurement-precision branch; evaluation principles only",
       provenance: "PED nomogram 362 patients/426 aneurysms/4 centres · pooled random 298/128 aneurysm split · 61 multi-aneurysm patients · apposition/migration occur after baseline · commercial precision 148 patients/163 aneurysms, 86 paired CTA–DSA · all method-vs-DSA LOA fail ±1 mm · request-only · payload/P0/model/GPU 0"
@@ -1035,6 +1047,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.3 separates target time from a mixed instability label",
+      copy: "Seven-hospital pre-event radiomics directly occupies broad multimodality stability prediction, while a 293-patient VWI study already combines habitat radiomics, DenseNet, clinical variables, Transformer fusion, SHAP, calibration and DCA. Its unstable label mixes prior symptoms/growth with future rupture/progression, so target-time and component-endpoint separation remain necessary evaluation principles. NCT07111975 is a 3,800-participant future direct prior, not a current result or asset. Six frozen rows score 27.0/26.5/26.0/25.5/25.5/25.5; all fail total or critical asset/independent-unit floors. No payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens.",
+      files: ["docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

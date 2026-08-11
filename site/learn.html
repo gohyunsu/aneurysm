@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류 PED 예측의 decision time, clinical precision, device planning과 outcome, surface-vector 구조 가설과 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="뇌동맥류 instability prediction의 target time, endpoint semantics, PED decision time, clinical precision과 surface-vector 연구 gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#target-time">Target time</a>
       <a href="#decision-time">Decision time</a>
       <a href="#device-planning">Device planning</a>
       <a href="#adam-longitudinal">ADAM longitudinal</a>
@@ -75,16 +76,69 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 10.2</span>
-          <strong>미래 예측에는 그 시점에 실제로 알 수 있었던 정보만 들어가야 합니다.</strong>
+          <span>짧은 답 · schema 10.3</span>
+          <strong>“불안정”은 관측 시점과 사건 시점을 나누기 전에는 하나의 예측 표적이 아닙니다.</strong>
           <p>
-            최신 여섯 후보는 30.0/26.0/25.5/25.0/24.5/23.0이고 모두
-            기각됐습니다. Baseline CFD, 시술 직후 apposition, 추적 중 migration은 서로
-            다른 시간의 정보입니다. 이를 한 모델에 섞고 “시술 전 예측”이라 부르면
-            질문 자체가 바뀝니다. Commercial CTA AI의 반복성 향상도 DSA agreement나
-            실제 growth 검출을 자동으로 뜻하지 않습니다. 공개 timestamped patient
-            cohort가 없어 P0, method, model, server와 GPU는 모두 0입니다.
+            최신 여섯 후보는 27.0/26.5/26.0/25.5/25.5/25.5이고 모두
+            기각됐습니다. Seven-hospital pre-event radiomics와 VWI
+            habitat–DenseNet–Transformer fusion이 broad architecture gap을 이미
+            차지합니다. 남은 핵심은 prior symptom, 이미 관측된 growth와 future
+            rupture/progression을 같은 label로 섞지 않는 것입니다. 이를 검증할 공개
+            multicentre timestamped cohort가 없어 P0, method, model, server와 GPU는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="target-time">
+          <span>Target time과 instability label을 처음부터 이해하기</span>
+          <strong>모델은 label 이름이 아니라 “언제부터 언제까지 무엇이 생기는가?”를 예측합니다.</strong>
+          <p>
+            <b>Index time</b>은 예측을 만드는 기준 시점이고, <b>prediction horizon</b>은
+            그 뒤 얼마 동안의 사건을 예측하는지입니다. 예를 들어 baseline MRA를 찍은 날을
+            index로 정하고 이후 12개월의 새로운 growth만 예측한다면, index 이전에 이미
+            관측된 growth나 증상은 outcome이 아니라 입력 또는 제외 기준이어야 합니다.
+          </p>
+          <p>
+            2026년 seven-hospital 연구는 852 patients/1,111 aneurysms에서
+            pre-growth 또는 pre-rupture CTA·MRA·DSA radiomics를 사용합니다. Internal
+            cohort는 646 patients/840 aneurysms, six-hospital external cohort는
+            206/271입니다. Source external AUC는 radiomics 0.85,
+            clinical+morphology 0.61, combined 0.78입니다. 이는 AURORA 재현 결과가
+            아니며, 공개 metadata에는 실행 가능한 patient/image/mask/split asset이 없습니다.
+          </p>
+          <p>
+            다른 VWI 연구는 293 patients/312 aneurysms를 patient-level 7:3으로 나눠
+            wall habitat radiomics, DenseNet feature, clinical variable,
+            Transformer attention, SHAP, calibration과 decision curve를 결합했습니다.
+            따라서 “fancy multimodal Transformer” 자체는 새 contribution이 아닙니다.
+          </p>
+          <p>
+            더 중요한 문제는 그 연구의 unstable label입니다. 최근 ipsilateral symptom,
+            이전 검사에서 이미 확인한 growth/daughter sac, index 뒤 3개월 내 rupture,
+            두 검사 사이 6개월 내 progression을 함께 포함합니다. 모두 임상적으로 중요하지만
+            시간 방향이 다르므로 하나의 pure future-event target으로 부를 수 없습니다.
+          </p>
+          <p>
+            등록 연구 ANEURYSM@RISK도 세 유럽 centre에서 약 3,800 retrospective MRA
+            participant를 대상으로 자동 segmentation, morphology/clinical risk prediction과
+            clinician vignette를 계획합니다. 그러나 completion은 2028년이고 현재 result나
+            즉시 쓸 수 있는 public patient asset은 없습니다. 미래 연구 계획을 현재 evidence로
+            계산하면 안 됩니다.
+          </p>
+          <p>
+            따라서 새 데이터가 생기면 먼저 patient–lesion mapping, centre, index timestamp,
+            outcome timestamp, horizon과 모든 feature가 index 이전 정보인지 검사합니다.
+            Growth, rupture, prior growth와 symptom을 각각 보고한 뒤에만 composite가 타당한지
+            봅니다. 이 method-free audit가 통과하기 전에는 GNN, Transformer, survival head나
+            uncertainty module을 고르지 않습니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Retain: explicit index time and horizon</span>
+            <span class="yes">Retain: component outcomes before composite</span>
+            <span class="yes">Retain: patient-grouped centre-held-out incremental value</span>
+            <span class="no">Fusion/attention/SHAP ≠ novelty</span>
+            <span class="no">No public timestamped multicentre asset</span>
+            <span class="no">No P0 · method · model · server · GPU</span>
+          </div>
+          <a href="../docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md">source facts, six scores와 future gate 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="decision-time">
           <span>Decision time, information set과 clinical precision을 처음부터 이해하기</span>

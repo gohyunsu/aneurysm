@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 10.3 server boundary · 2026-08-12:** This reappraisal read public
+> article, Crossref and ClinicalTrials.gov metadata only. No scientific server
+> was queried, no patient image/table/model payload was transferred and no
+> PBS/GPU job was created or monitored. Future gate-authorized execution
+> remains `introai9` PBS only; login-node GPU is prohibited. Never access,
+> query, transfer to, submit to or monitor `junjinyong`.
+
 > **Schema 10.2 server boundary · 2026-08-12:** This reappraisal used public
 > article text and metadata only. No scientific server was queried, no patient
 > image/table/CFD/model payload was transferred and no PBS/GPU job was created

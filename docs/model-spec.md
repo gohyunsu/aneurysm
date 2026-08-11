@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.3 no-model boundary · 2026-08-12:** No radiomics pipeline, CNN,
+> Transformer, GNN, survival head, uncertainty propagator or selective
+> classifier is selected. Habitat radiomics + DenseNet + clinical Transformer
+> fusion is already direct prior. Architecture remains closed until one public
+> asset proves index time, component outcomes, patient/lesion mapping,
+> centre-held-out confirmation and an independent residual gap.
+
 > **Schema 10.2 no-model boundary · 2026-08-12:** No GNN, mesh operator,
 > temporal landmark model, causal mediator model, calibration head or
 > morphology network is selected. The present failure is information-time and

@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.2":
-        raise ProtocolError("The current research-state schema must be version 10.2.")
+    if protocol["schema_version"] != "10.3":
+        raise ProtocolError("The current research-state schema must be version 10.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_decision_time_clinical_precision_batch_rejected_best_30_no_p0_no_compute"
+        != "no_active_problem_target_time_instability_batch_rejected_best_27_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "target_time_and_instability_prediction_reappraisal",
             "decision_time_and_clinical_precision_reappraisal",
             "device_planning_and_mechanistic_occlusion_reappraisal",
             "adam_longitudinal_and_treated_exclusion_source_correction",
@@ -267,13 +268,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_decision_time_clinical_precision_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_target_time_instability_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "decision_time_ped_nomogram_and_clinical_precision_public_paper_text_only_no_patient_image_table_cfd_or_proprietary_model_payload_no_scientific_server"
+        != "target_time_instability_prediction_public_paper_and_trial_metadata_only_no_timestamped_patient_image_mask_outcome_or_model_payload_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -285,15 +286,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/decision-time-and-clinical-precision-reappraisal-2026-08-12.md"
+        != "docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "acquisition_conditioned_longitudinal_morphology_precision_certificate_rejected_at_30_four_control_patients_and_direct_priors"
+        != "target_time_disjoint_future_event_benchmark_rejected_at_27_no_timestamped_multicentre_public_asset"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The decision-time/clinical-precision batch must remain rejected and the VMR candidate "
+            "The target-time/instability batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -355,7 +356,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 30.0
+        or admission_v2["current_batch_best_score"] != 27.0
         or admission_v2["current_batch_best_residual_novelty"] != 3.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
@@ -365,6 +366,187 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    target_time = problem_selection[
+        "target_time_and_instability_prediction_reappraisal"
+    ]
+    expected_target_time_candidates = [
+        (
+            "target_time_disjoint_future_event_benchmark",
+            [5.0, 5.0, 3.0, 0.5, 1.0, 5.0, 5.0, 2.5],
+            27.0,
+        ),
+        (
+            "segmentation_acquisition_uncertainty_propagation_to_instability",
+            [5.0, 4.5, 2.5, 0.5, 1.0, 5.0, 5.0, 3.0],
+            26.5,
+        ),
+        (
+            "cross_modality_site_conditional_pre_event_radiomics_transport",
+            [5.0, 4.5, 1.5, 0.5, 1.0, 5.0, 5.0, 3.5],
+            26.0,
+        ),
+        (
+            "growth_rupture_multistate_competing_risk_prediction",
+            [5.0, 5.0, 2.5, 0.5, 1.0, 5.0, 4.5, 2.0],
+            25.5,
+        ),
+        (
+            "external_centre_hemodynamic_incremental_value_over_radiomics",
+            [5.0, 4.5, 2.0, 0.5, 1.0, 5.0, 5.0, 2.5],
+            25.5,
+        ),
+        (
+            "patient_grouped_centre_heldout_calibrated_selective_referral",
+            [5.0, 5.0, 1.0, 0.5, 1.0, 5.0, 5.0, 3.0],
+            25.5,
+        ),
+    ]
+    observed_target_time_candidates = [
+        (row["id"], row["axis_scores"], float(row["total"]))
+        for row in target_time["candidates"]
+    ]
+    if (
+        target_time["status"]
+        != "fresh_batch_rejected_best_27_fails_total_asset_and_independent_unit_floors_no_active_lead"
+        or target_time["audit_document"]
+        != "docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md"
+        or target_time["automatic_selection_threshold"] != 32.0
+        or target_time["best_candidate_id"]
+        != "target_time_disjoint_future_event_benchmark"
+        or target_time["best_score"] != 27.0
+        or target_time["best_residual_novelty_score"] != 3.0
+        or target_time["all_candidate_scores"]
+        != [27.0, 26.5, 26.0, 25.5, 25.5, 25.5]
+        or target_time["conditional_source_lead_count"] != 0
+        or target_time["primary_problem_selected"] is not False
+        or target_time["paper_identity_active"] is not False
+        or target_time["seven_hospital_doi"]
+        != "10.1016/j.jocn.2026.111974"
+        or target_time["seven_hospital_pmid"] != 41843961
+        or (
+            target_time["seven_hospital_patients_total"],
+            target_time["seven_hospital_aneurysms_total"],
+            target_time["seven_hospital_centres_total"],
+        )
+        != (852, 1111, 7)
+        or (
+            target_time["seven_hospital_internal_patients"],
+            target_time["seven_hospital_internal_aneurysms"],
+            target_time["seven_hospital_external_patients"],
+            target_time["seven_hospital_external_aneurysms"],
+            target_time["seven_hospital_external_centres"],
+        )
+        != (646, 840, 206, 271, 6)
+        or target_time["seven_hospital_modalities"] != ["CTA", "MRA", "DSA"]
+        or (
+            target_time["seven_hospital_source_auc_external_radiomics"],
+            target_time["seven_hospital_source_auc_external_conventional"],
+            target_time["seven_hospital_source_auc_external_combined"],
+        )
+        != (0.85, 0.61, 0.78)
+        or target_time["vwi_transformer_doi"]
+        != "10.3389/fnins.2026.1818110"
+        or (
+            target_time["vwi_transformer_patients"],
+            target_time["vwi_transformer_aneurysms"],
+            target_time["vwi_transformer_stable_patients"],
+            target_time["vwi_transformer_stable_aneurysms"],
+            target_time["vwi_transformer_unstable_patients"],
+            target_time["vwi_transformer_unstable_aneurysms"],
+        )
+        != (293, 312, 188, 197, 105, 115)
+        or (
+            target_time["vwi_transformer_training_patients"],
+            target_time["vwi_transformer_training_aneurysms"],
+            target_time["vwi_transformer_validation_patients"],
+            target_time["vwi_transformer_validation_aneurysms"],
+        )
+        != (205, 218, 88, 94)
+        or target_time["vwi_transformer_patient_random_split_ratio"] != "7:3"
+        or (
+            target_time["vwi_transformer_source_validation_auc_fusion"],
+            target_time["vwi_transformer_source_validation_auc_densenet169"],
+            target_time[
+                "vwi_transformer_source_validation_auc_radiomics_habitat"
+            ],
+        )
+        != (0.844, 0.816, 0.721)
+        or target_time["vwi_transformer_unstable_label_components"]
+        != [
+            "recent_ipsilateral_symptoms_before_admission",
+            "growth_or_daughter_sac_on_previous_examination",
+            "rupture_within_three_months_after_index_examination",
+            "progression_across_two_examinations_within_six_months",
+        ]
+        or target_time["aneurysm_at_risk_nct"] != "NCT07111975"
+        or target_time["aneurysm_at_risk_status"] != "ACTIVE_NOT_RECRUITING"
+        or target_time["aneurysm_at_risk_design"]
+        != "retrospective_observational_cohort"
+        or (
+            target_time["aneurysm_at_risk_estimated_enrollment"],
+            target_time["aneurysm_at_risk_centres"],
+            target_time["aneurysm_at_risk_primary_completion_estimated"],
+            target_time["aneurysm_at_risk_completion_estimated"],
+        )
+        != (3800, 3, "2028-06", "2028-12")
+        or observed_target_time_candidates != expected_target_time_candidates
+        or any(row["critical_axis_pass"] for row in target_time["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in target_time["candidates"]
+        )
+        or any(
+            target_time[key] is not False
+            for key in (
+                "seven_hospital_source_results_reproduced_by_aurora",
+                "seven_hospital_public_versioned_patient_image_mask_release_identified",
+                "seven_hospital_public_code_repository_identified",
+                "seven_hospital_patient_grouping_and_centrewise_external_manifest_established_by_inspected_public_metadata",
+                "vwi_transformer_independent_external_validation",
+                "vwi_transformer_optimism_corrected_bootstrap",
+                "vwi_transformer_source_results_reproduced_by_aurora",
+                "vwi_transformer_label_is_single_pure_future_event_estimand",
+                "vwi_transformer_raw_data_public_versioned_release",
+                "aneurysm_at_risk_results_available",
+                "aneurysm_at_risk_ipd_available_before_main_publication",
+                "joined_public_timestamped_multicentre_patient_lesion_image_mask_component_outcome_asset_identified",
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_score_or_job_relabelled",
+                "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or any(
+            target_time[key] is not True
+            for key in (
+                "seven_hospital_each_patient_has_imaging_followup",
+                "seven_hospital_features_use_pre_growth_or_pre_rupture_images",
+                "vwi_transformer_single_centre",
+                "vwi_transformer_raw_data_author_available",
+                "target_time_declaration_retained_as_evaluation_principle_only",
+                "component_endpoint_separation_retained_as_evaluation_principle_only",
+                "external_centre_incremental_value_retained_as_evaluation_principle_only",
+            )
+        )
+        or target_time["next_allowed_action"]
+        != "fresh_problem_level_source_or_material_timestamped_asset_audit_only_no_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "Target-time and instability prediction must remain a rejected, "
+            "metadata-only batch with no timestamped multicentre public asset, "
+            "P0, model, server or claim."
+        )
+    checks.append("target-time and instability-prediction rejected-source boundary")
 
     decision_time = problem_selection[
         "decision_time_and_clinical_precision_reappraisal"

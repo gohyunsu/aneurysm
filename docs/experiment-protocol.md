@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.3 experiment boundary · 2026-08-12:** Zero candidates are
+> admitted. Do not request restricted cohorts, infer event timestamps, register
+> P0/P1, choose a fusion model, query a scientific server or create PBS/GPU
+> work. A future method-free P0 may inventory only patient/lesion multiplicity,
+> centre, index time, horizon, component outcomes, pre-index features,
+> checksums and patient-grouped sealed confirmation semantics. A pass would
+> still not authorize architecture or GPU.
+
 > **Schema 10.2 experiment boundary · 2026-08-12:** Zero candidates are
 > admitted. Do not request patient rows, download imaging/CFD payload, infer a
 > patient-grouped split, register P0/P1, select a model, query a scientific

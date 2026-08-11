@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.3 submission boundary · 2026-08-12:** Do not title the paper
+> around multimodal radiomics, VWI-habitat Transformer fusion, instability
+> calibration or automated longitudinal morphology; each is direct prior or an
+> active registered program. A target-time audit alone is evaluation discipline
+> without a public confirmatory asset. Latest best 27.0/40. No title, abstract
+> claim, contribution, result table, figure or C21 is authorized. The official
+> format remains four technical pages, with only ethics/acknowledgments/
+> conflict/references allowed on a paid fifth page; deadline 26 October 2026.
+
 > **Schema 10.2 submission boundary · 2026-08-12:** Do not title the paper
 > around a hemodynamic PED predictor, temporal leakage correction, commercial
 > AI precision or centre-held-out revalidation. The first is direct prior; the

@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 10.3 direction · 2026-08-12:** A fancy fusion model is no longer a
+> defensible direction: seven-hospital pre-event radiomics and VWI
+> habitat--deep Transformer fusion directly occupy it, while ANEURYSM@RISK
+> prospectively occupies broad longitudinal MRA risk prediction. The residual
+> scientific requirement is target-time and component-endpoint separation,
+> followed by external-centre incremental-value testing. Six rows peak at
+> 27.0/40 because no public timestamped multicentre image/outcome asset exists.
+> No primary problem, architecture, P0 or compute is active.
+
 > **Schema 10.2 direction · 2026-08-12:** Preserve three evaluation principles,
 > not a paper identity: declare the information available at each decision
 > time; test whether hemodynamics adds value beyond clinical+morphology under

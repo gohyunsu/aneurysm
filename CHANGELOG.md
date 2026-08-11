@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-12 · Target time and instability prediction rejected · schema 10.3
+
+- Added the 852-patient/1,111-aneurysm seven-hospital pre-event radiomics study
+  as a direct prior, including its source-reported six-hospital external AUCs.
+- Added the 293-patient/312-aneurysm VWI habitat--deep Transformer study and
+  separated its mixed prior/current/future instability components instead of
+  treating the composite as one future-event target.
+- Added NCT07111975 as a 3,800-participant, three-centre future direct prior,
+  not a current result or public asset.
+- Froze six candidates at 27.0/26.5/26.0/25.5/25.5/25.5. All fail total or
+  mandatory asset/independent-unit floors; no P0/model/compute or paper identity
+  opened.
+- Added schema 10.3 machine invariants, regression coverage, an exact audit and
+  beginner-facing target-time explanation. No scientific server was queried;
+  `junjinyong` remains completely excluded.
+
 ## 2026-08-12 · Schema 10.2 scientific source deployed and privately pinned
 
 - Exact scientific source `c6906134ad2cea6a7f1918edb2b515c95a9d0b41`

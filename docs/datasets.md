@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.3 target-time asset boundary · 2026-08-12:** No active dataset is
+> opened. The seven-hospital source reports 852 patients/1,111 aneurysms but no
+> versioned public patient/image/mask/centre/split payload was identified. The
+> VWI Transformer cohort is 293 patients/312 aneurysms, single-centre and
+> author-available; it is not a public training asset. NCT07111975 estimates
+> 3,800 retrospective MRA participants, but has no results and plans qualified-
+> researcher request access only after its main publication. Metadata and paper
+> text are not patient data.
+
 > **Schema 10.2 decision-time asset boundary · 2026-08-12:** No active dataset
 > is opened. The PED nomogram contains 362 patients/426 aneurysms from four
 > centres, but raw patient rows, centre assignment, case-wise CFD and split

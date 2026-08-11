@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.3, 2026-08-12):** A seven-hospital
+> pre-growth/pre-rupture study now directly occupies multimodality radiomics
+> stability prediction with an independent six-hospital cohort. A separate
+> single-centre study already combines vessel-wall MRI, habitat radiomics,
+> DenseNet features, clinical variables, Transformer fusion, SHAP, calibration
+> and decision curves. Its “unstable” label mixes prior symptoms/growth and
+> future progression/rupture, which shows why target time must precede model
+> choice. Registered ANEURYSM@RISK plans the broad automated longitudinal MRA
+> task on 3,800 participants but has no results until after the ISBI window.
+> Six fresh formulations score **27.0/26.5/26.0/25.5/25.5/25.5** and all fail
+> the public-asset and independent-unit floors. Lead/P0/method/model/server/GPU/
+> claim remain zero; surface-vector stays inactive. See the
+> [exact reappraisal](docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 10.2 scientific deployment/private synchronization:**
 > Exact scientific source `c6906134ad2cea6a7f1918edb2b515c95a9d0b41`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31522903059)

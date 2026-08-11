@@ -1,5 +1,34 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 target-time and instability-prediction reappraisal · schema
+> 10.3:** Seven-hospital source `10.1016/j.jocn.2026.111974` reports 852
+> patients/1,111 aneurysms: internal 646/840 and six-hospital external 206/271,
+> with source external AUC 0.85 radiomics, 0.61 clinical+morphology and 0.78
+> combined. These are not AURORA results. The inspected public metadata expose
+> no versioned patient/image/mask/split/code asset and do not establish complete
+> patient-grouping or centre-wise external-manifest semantics.
+>
+> VWI Transformer source `10.3389/fnins.2026.1818110` has 293 patients/312
+> aneurysms and a patient-random 205/88 split. It directly occupies habitat
+> radiomics, deep features, clinical fusion, attention, SHAP, calibration and
+> DCA. Its composite unstable label mixes recent symptoms, previously observed
+> growth, and future rupture/progression, so it is not one pure future-event
+> estimand. Source AUC 0.844 is not reproduced; the study is single-centre,
+> author-available and has no external validation or optimism-corrected
+> bootstrap.
+>
+> NCT07111975 plans 3,800 retrospective MRA participants across three European
+> centres, automated morphology/clinical prediction and a vignette study, but
+> has no results and completes in 2028. Six fresh scores
+> 27.0/26.5/26.0/25.5/25.5/25.5 all fail the non-compensatory gate. Target-time
+> declaration, component-endpoint separation and external-centre incremental
+> value remain evaluation principles only. Surface-vector stays inactive; job
+> `115645.ECE-util1` remains 0/10 no-verdict without repair/rerun. Lead,
+> P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test,
+> result, C21 and claim are zero. Future authorized work is `introai9` PBS
+> only; prohibit login-node GPU and never access, query, transfer to, submit to
+> or monitor `junjinyong`.
+
 > **2026-08-12 schema 10.2 scientific deployment·private synchronization:**
 > Exact scientific source `c6906134ad2cea6a7f1918edb2b515c95a9d0b41`
 > passed Quality `31522903059` and Pages `31522901393`. Live Learn and the

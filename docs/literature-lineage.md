@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.3 lineage · 2026-08-12:** Cross-sectional rupture-status
+> radiomics → pre-growth/pre-rupture seven-hospital radiomics with six-hospital
+> external validation → VWI wall-habitat/deep Transformer state assessment →
+> registered three-centre longitudinal MRA automation. This removes novelty
+> from radiomics+CNN/Transformer+clinical fusion, SHAP, calibration and DCA.
+> The remaining target-time/component-endpoint discipline is necessary but has
+> no executable public multicentre cohort and is not yet a method contribution.
+
 > **Schema 10.2 lineage · 2026-08-12:** Clinical/morphology PED outcome models
 > → four-centre baseline-DSA/CFD nomogram → post-deployment apposition/migration
 > updater; manual/AI CTA morphometry → DSA agreement and platform-bias audit →

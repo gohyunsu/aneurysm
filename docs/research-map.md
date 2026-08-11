@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.3 map · 2026-08-12:** Pre-event multimodality radiomics,
+> VWI-habitat/deep Transformer fusion and future automated longitudinal MRA are
+> direct-prior branches. Target-time-disjoint evaluation is retained only as a
+> problem-definition template because the public versioned patient/lesion/
+> centre/timestamp/component-outcome join is zero. Latest best 27.0/40; active
+> lead/method/model/compute zero.
+
 > **Schema 10.2 map · 2026-08-12:** Decision-time-stratified PED outcome and
 > acquisition-aware clinical precision are rejected discovery branches, not
 > active workstreams. The strongest public open control still has four
