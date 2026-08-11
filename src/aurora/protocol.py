@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.6":
-        raise ProtocolError("The current research-state schema must be version 8.6.")
+    if protocol["schema_version"] != "8.8":
+        raise ProtocolError("The current research-state schema must be version 8.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_cross_vascular_transient_wss_batch_best_30_rejected_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_open_model_transport_best_32_rejected_by_novelty_floor_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_6_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_8_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -185,6 +185,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_identity_active",
             "next_allowed_action",
             "audit_document",
+            "future_source_admission_v2",
+            "open_model_transport_source_reappraisal",
             "cross_vascular_transient_wss_source_correction",
             "posttreatment_reference_linked_imaging_source_delta",
             "aneumo_bc_transport_source_audit",
@@ -248,13 +250,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_cross_vascular_transient_wss_batch_best_30_rejected"
+        != "no_active_problem_latest_open_model_transport_best_32_rejected_by_novelty_floor"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_article_repository_and_dataset_metadata_only_no_transient_wss_field_payload_no_p0_closed_p0s_unchanged"
+        != "public_article_repository_and_model_metadata_only_no_patient_payload_no_p0_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -264,21 +266,236 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_for_a_versioned_phase_resolved_patient_or_family_mapped_tangent_wss_release_with_executable_strong_baseline_or_run_an_unrelated_fresh_problem_level_source_audit_not_p0_or_model"
+        != "run_a_fresh_problem_level_source_asset_audit_under_prospective_noncompensatory_admission_v2_or_wait_for_material_versioned_surface_vector_evidence_not_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/cross-vascular-transient-wss-source-correction-2026-08-11.md"
+        != "docs/open-model-transport-and-admission-reappraisal-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "sano_anatomical_fidelity_low_wss_reproduction_rejected"
+        != "fixed_open_model_external_tof_mra_transport_and_morphometry_rejected_by_novelty_floor"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The cross-vascular transient-WSS source batch must remain rejected below 32 while "
+            "The open-model transport batch must remain rejected by the novelty floor while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
         )
+    admission_v2 = problem_selection["future_source_admission_v2"]
+    _require_keys(
+        admission_v2,
+        [
+            "status",
+            "effective_schema",
+            "prospective_only",
+            "historical_scores_relabelled",
+            "historical_job_outcomes_relabelled",
+            "axis_order",
+            "total_threshold",
+            "critical_axis_minima",
+            "requires_noncompositional_residual_gap",
+            "requires_prospective_failure_mechanism_and_falsifier",
+            "component_stacking_or_model_naming_can_satisfy_novelty",
+            "pass_authorizes_only",
+            "pass_authorizes_method_architecture_or_gpu",
+            "current_batch_best_score",
+            "current_batch_best_residual_novelty",
+            "current_batch_admitted_count",
+        ],
+        "future source admission v2",
+    )
+    expected_admission_axes = [
+        "clinical_importance",
+        "target_identifiability",
+        "residual_novelty",
+        "asset_readiness",
+        "effective_independent_unit",
+        "strong_baseline_feasibility",
+        "interpretable_evidence",
+        "isbi_schedule_fit",
+    ]
+    expected_critical_minima = {
+        "target_identifiability": 3.5,
+        "residual_novelty": 2.5,
+        "asset_readiness": 3.0,
+        "effective_independent_unit": 3.0,
+        "strong_baseline_feasibility": 3.0,
+    }
+    if (
+        admission_v2["status"]
+        != "prospective_noncompensatory_gate_active_for_fresh_candidates_only"
+        or admission_v2["effective_schema"] != "8.8"
+        or admission_v2["prospective_only"] is not True
+        or admission_v2["historical_scores_relabelled"] is not False
+        or admission_v2["historical_job_outcomes_relabelled"] is not False
+        or admission_v2["axis_order"] != expected_admission_axes
+        or admission_v2["total_threshold"] != 32.0
+        or admission_v2["critical_axis_minima"] != expected_critical_minima
+        or admission_v2["requires_noncompositional_residual_gap"] is not True
+        or admission_v2["requires_prospective_failure_mechanism_and_falsifier"]
+        is not True
+        or admission_v2["component_stacking_or_model_naming_can_satisfy_novelty"]
+        is not False
+        or admission_v2["pass_authorizes_only"]
+        != "prospectively_registered_method_free_p0"
+        or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
+        or admission_v2["current_batch_best_score"] != 32.0
+        or admission_v2["current_batch_best_residual_novelty"] != 0.5
+        or admission_v2["current_batch_admitted_count"] != 0
+    ):
+        raise ProtocolError(
+            "Future source admission v2 must remain prospective and non-compensatory: "
+            "a total score cannot override novelty, identifiability, asset, unit, or "
+            "baseline floors, and a pass opens only a method-free P0."
+        )
+    checks.append("prospective non-compensatory source-admission boundary")
+
+    open_model = problem_selection["open_model_transport_source_reappraisal"]
+    _require_keys(
+        open_model,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "maximus_zenodo_record_id",
+            "maximus_zenodo_revision",
+            "maximus_license",
+            "maximus_file_name",
+            "maximus_file_bytes",
+            "maximus_file_md5",
+            "rsna_first_place_repository",
+            "rsna_first_place_head",
+            "rsna_first_place_release_count",
+            "rsna_first_place_license_spdx_id",
+            "tar_repository",
+            "tar_repository_head",
+            "tar_release_count",
+            "tar_license_spdx_id",
+            "iavs_repository_head",
+            "topaneu_repository_head",
+            "openneuro_ds005096_head",
+            "openneuro_patients",
+            "openneuro_aneurysms",
+            "openneuro_longitudinal_subjects",
+            "openneuro_same_session_multi_acquisition_patients",
+            "patient_or_model_payload_accessed",
+            "direct_prior_threats",
+            "candidates",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+        ],
+        "open-model transport source reappraisal",
+    )
+    expected_open_model_scores = [32.0, 31.5, 29.0, 28.5, 27.5, 27.0]
+    expected_open_model_ids = {
+        "fixed_open_model_external_tof_mra_transport_and_morphometry",
+        "patient_level_selective_morphometry_under_domain_shift",
+        "dual_public_model_disagreement_triage",
+        "topology_conditioned_parent_vessel_failure_audit",
+        "public_model_pseudolabel_self_training",
+        "longitudinal_prediction_consistency",
+    }
+    expected_open_model_priors = {
+        "multicentre_tof_mra_detection_segmentation_and_morphometry",
+        "rsna_multimodal_tri_axial_roi_and_multitask_3d_nnunet",
+        "topology_aware_semi_supervised_aneurysm_vessel_segmentation",
+        "selective_and_conformal_segmentation_under_domain_shift",
+        "external_segmentation_and_morphometry_validation",
+    }
+    open_model_candidates = open_model["candidates"]
+    if (
+        open_model["status"]
+        != "fresh_batch_rejected_best_additive_score_meets_32_but_residual_novelty_floor_fails"
+        or open_model["audit_document"]
+        != "docs/open-model-transport-and-admission-reappraisal-2026-08-11.md"
+        or open_model["automatic_selection_threshold"] != 32.0
+        or open_model["best_candidate_id"]
+        != "fixed_open_model_external_tof_mra_transport_and_morphometry"
+        or open_model["best_score"] != 32.0
+        or open_model["best_residual_novelty_score"] != 0.5
+        or open_model["all_candidate_scores"] != expected_open_model_scores
+        or open_model["conditional_source_lead_count"] != 0
+        or open_model["primary_problem_selected"] is not False
+        or open_model["maximus_zenodo_record_id"] != 13386859
+        or open_model["maximus_zenodo_revision"] != 10
+        or open_model["maximus_license"] != "cc-by-nc-4.0"
+        or open_model["maximus_file_name"] != "Dataset610_AP+DD+ADAM.zip"
+        or open_model["maximus_file_bytes"] != 1143245289
+        or open_model["maximus_file_md5"] != "dc7478e2595739306ec7ef85d05699be"
+        or open_model["rsna_first_place_repository"]
+        != "uchiyama33/rsna2025_1st_place"
+        or open_model["rsna_first_place_head"]
+        != "e1dcdf0058e1e0d0044d8053e92243b4b4794555"
+        or open_model["rsna_first_place_release_count"] != 0
+        or open_model["rsna_first_place_license_spdx_id"] is not None
+        or open_model["tar_repository"] != "AbsoluteResonance/TAR"
+        or open_model["tar_repository_head"]
+        != "5e852dd919feb98406067a8034dd744ddb78877f"
+        or open_model["tar_release_count"] != 0
+        or open_model["tar_license_spdx_id"] is not None
+        or open_model["iavs_repository_head"]
+        != "2e40088d9eaa671c592929a154b7b2cf99f9320a"
+        or open_model["topaneu_repository_head"]
+        != "018c243445f99199f484018c4c80575c84c72293"
+        or open_model["openneuro_ds005096_head"]
+        != "0760bf865612600c4eee85f6f437aefaeb534204"
+        or open_model["openneuro_patients"] != 63
+        or open_model["openneuro_aneurysms"] != 85
+        or open_model["openneuro_longitudinal_subjects"] != 24
+        or open_model["openneuro_same_session_multi_acquisition_patients"] != 4
+        or open_model["patient_or_model_payload_accessed"] is not False
+        or set(open_model["direct_prior_threats"]) != expected_open_model_priors
+        or len(open_model_candidates) != 6
+        or _unique_ids(open_model_candidates, "id", "open-model candidates")
+        != expected_open_model_ids
+        or [candidate["total"] for candidate in open_model_candidates]
+        != expected_open_model_scores
+        or any(
+            sum(candidate["axis_scores"]) != candidate["total"]
+            for candidate in open_model_candidates
+        )
+        or any(candidate["critical_axis_pass"] is not False for candidate in open_model_candidates)
+        or open_model_candidates[0]["axis_scores"][2]
+        >= admission_v2["critical_axis_minima"]["residual_novelty"]
+        or any(
+            open_model[key] is not False
+            for key in [
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            ]
+        )
+        or open_model["execution_server"] != "introai9"
+    ):
+        raise ProtocolError(
+            "The open-model transport batch must preserve the exact public-model "
+            "metadata, frozen candidate scores, novelty-floor rejection, no payload, "
+            "no active lead and no-compute state."
+        )
+    checks.append("open-model transport rejection and no-compute boundary")
+
     cross_vascular = problem_selection[
         "cross_vascular_transient_wss_source_correction"
     ]
@@ -3414,6 +3631,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("twelve-source fail-closed baseline watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "fixed_open_model_external_tof_mra_transport_and_morphometry_novelty_floor",
+        "patient_level_selective_morphometry_total_and_novelty_floor",
+        "dual_public_model_disagreement_not_reference_linked",
+        "topology_conditioned_parent_vessel_failure_asset_and_novelty_floor",
+        "public_model_pseudolabel_self_training_no_ground_truth_or_novelty",
+        "longitudinal_prediction_consistency_change_not_identified",
         "sano_anatomical_fidelity_low_wss_reproduction_directly_occupied_and_n12",
         "sano_steady_wss_structural_stability_nonaneurysm_n12",
         "new_cfd_generation_on_aaa100_geometry_not_independent_confirmation",

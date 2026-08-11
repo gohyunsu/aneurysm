@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 open-model transport and admission reappraisal · schema 8.8:**
+> The supplied surface-vector analysis remains an inactive, falsifiable
+> question—not a selected edge-1-form/Hodge/GNN architecture. A fixed public
+> TOF-MRA model makes external evaluation feasible, but multicentre
+> segmentation/morphometry, RSNA multi-task pipelines, topology-aware vessel
+> segmentation and selective/conformal evaluation directly occupy the obvious
+> claims. The best fresh formulation scores **32.0/40** under the old additive
+> screen yet only **0.5/5 residual novelty**, so it is rejected. From schema 8.8,
+> fresh candidates must meet both 32/40 and critical novelty, identifiability,
+> asset, independent-unit and baseline floors. The rule is prospective; no
+> historical score or no-verdict job is relabelled. No P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test or claim is open.
+> [Exact reappraisal](docs/open-model-transport-and-admission-reappraisal-2026-08-11.md)
+
 > **2026-08-11 schema 8.7 deployment verification:** Exact contract content
 > `d04abd841a553c024c0aa5ba684d93b305773123` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31473930058) and

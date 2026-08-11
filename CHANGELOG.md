@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-11 · Open-model transport rejected; admission gate becomes non-compensatory · schema 8.8
+
+- Retained surface-vector only as an inactive problem question and rejected the
+  proposed component bundle as a selected architecture or contribution.
+- Audited the public multicentre TOF-MRA model, RSNA pipelines, TAR/IAVS,
+  TopAneu and OpenNeuro states without opening model or patient payload.
+- Froze six formulations at 32.0/31.5/29.0/28.5/27.5/27.0. The apparent
+  32.0 candidate has residual novelty 0.5/5 and is not a lead.
+- Added a prospective non-compensatory gate: total ≥32 plus critical floors for
+  novelty, identifiability, assets, independent units and strong baselines, with
+  an explicit failure mechanism and falsifier. Historical scores and closed
+  no-verdict jobs remain unchanged.
+- Opened no P0/P1, method, architecture, server query, PBS/GPU, outer test,
+  result row or paper claim.
+
 ## 2026-08-11 · Schema 8.7 deployed and privately pinned
 
 - Exact contract content `d04abd841a553c024c0aa5ba684d93b305773123`

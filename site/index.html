@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — patient-specific AAA transient-WSS direct prior와 공개 cross-vascular WSS 자산을 비판적으로 재심사하고 30.0/40 기각, inactive surface-vector·no-model·no-compute 경계를 설명하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — surface-vector 가설과 공개 TOF-MRA 모델 transport를 비판적으로 재심사하고, 32.0/40 후보도 novelty floor로 기각하는 비보상형 연구 gate·no-model·no-compute 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,26 +40,28 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST SCREEN 30.0/40 REJECTED · NOT SUBMISSION-READY</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> 32.0/40 BUT NOVELTY 0.5/5 · REJECTED · NOT SUBMISSION-READY</p>
         <h1>
           A strong direct prior is not an executable study identity.<br>
           <em>Executable evidence before architecture.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          100 AAA patient와 29-patient/118-scan 외부 cohort를 쓴 연구가
-          E(3)-equivariant transient vector WSS, TAWSS/OSI, BC·remodelling·
-          topology·mesh generalization을 이미 다룹니다. 그러나 stated public
-          code는 183-byte README 하나이고, AAA-100은 geometry만 공개하며
-          transient field는 없습니다. CC0 SANO source도 12 patient iliac-vein
-          steady CFD이고 geometry-fidelity→low-WSS를 원 논문이 이미 분석합니다.
-          여섯 formulation은 <b>30.0/29.0/28.5/25.5/23.0/21.5</b>로 모두
-          기각했습니다. Surface-vector는 inactive hypothesis로 보존하고 과거
-          CPU P0 두 건은 0/10 scientific check 미평가 no-verdict history로 닫아
-          repair/rerun하지 않습니다.
+          Surface-vector의 field-error 대 structure-fidelity 질문은 타당하지만
+          아직 선택된 architecture나 paper identity가 아닙니다. 공개 multicentre
+          TOF-MRA 모델 덕분에 외부 평가는 실행 가능해 보이지만, detection·
+          segmentation·morphometry transport, RSNA multi-task pipeline,
+          topology-aware vessel segmentation과 selective/conformal evaluation은
+          이미 직접 선행이 있습니다. 최고 후보는 기존 합산식에서 <b>32.0/40</b>을
+          얻지만 residual novelty가 <b>0.5/5</b>라 기각했습니다. 이제 fresh
+          candidate는 총점뿐 아니라 novelty·identifiability·asset·독립 표본·
+          strong baseline 최소선을 모두 넘어야 합니다. 역사적 점수와 0/10
+          no-verdict P0는 그대로 보존하며 repair/rerun하지 않습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#admission-v2">왜 32점도 기각했나?</a>
+          <a class="button ghost" href="../docs/open-model-transport-and-admission-reappraisal-2026-08-11.md">Latest admission reappraisal ↗</a>
           <a class="button ghost" href="learn.html#cross-vascular-wss">AAA/WSS 판정 이해하기</a>
           <a class="button ghost" href="../docs/cross-vascular-transient-wss-source-correction-2026-08-11.md">Latest WSS source correction ↗</a>
           <a class="button ghost" href="learn.html#posttreatment-imaging">Post-treatment 판정 이해하기</a>
@@ -133,7 +135,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">LATEST 28.5/40 REJECTED · CLEAR REFERENCE ≠ EXECUTABLE TASK · NO MODEL</div>
+        <div class="visual-caption">LATEST 32.0/40 REJECTED · NOVELTY FLOOR 0.5 &lt; 2.5 · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -156,27 +158,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>30.0</b><span>latest cross-vascular WSS screen · rejected</span>
+            <b>32.0</b><span>additive score · rejected by critical novelty floor</span>
           </div>
           <div class="posterior-card card-b">
-            <b>100 + 29</b><span>AAA train + external patients · transient fields not public</span>
+            <b>0.5 / 2.5</b><span>residual novelty / required minimum</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Strong AAA direct prior exists: executable matched baseline does not</span>
-          <span><i class="dot coral"></i> E(3), transient WSS and geometry descriptors are mandatory controls</span>
-          <span>P0 E/exit 2 · all 10 checks unevaluated · no scientific verdict · GPU 0</span>
+          <span><i class="dot lime"></i> Executable public model ≠ independent paper contribution</span>
+          <span><i class="dot coral"></i> Total score cannot compensate for a near-zero residual gap</span>
+          <span>Surface P0 E/exit 2 · all 10 checks unevaluated · no scientific verdict · GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>30.0/40 · all six rejected · active lead 0</b></div>
+        <div><span>Latest source screen</span><b>32.0/40 but novelty 0.5/5 · all six rejected · active lead 0</b></div>
         <div><span>Current compute</span><b>no scientific-server query · no new job · GPU 0</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>versioned phase-resolved tangent-WSS + patient/family mapping + executable strong baseline, or unrelated fresh problem audit · no P0</b></div>
+        <div><span>Next action</span><b>fresh problem/source audit under non-compensatory gate, or material surface evidence version · no P0/model</b></div>
       </div>
     </section>
 

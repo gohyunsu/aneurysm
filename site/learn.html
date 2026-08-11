@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AAA transient-WSS direct prior, surface-vector 가설, 독립 표본과 연구 gate를 기초부터 설명하고 최신 30.0/40 기각·no-model 경계를 밝히는 입문 가이드.">
+  <meta name="description" content="surface-vector 가설, 공개 TOF-MRA 모델 transport, 독립 표본과 비보상형 연구 gate를 기초부터 설명하고 32.0/40 후보의 novelty-floor 기각·no-model 경계를 밝히는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#admission-v2">Why 32 is rejected</a>
       <a href="#cross-vascular-wss">AAA/WSS correction</a>
       <a href="#posttreatment-imaging">Post-treatment imaging</a>
       <a href="#downstream-utility">Downstream utility</a>
@@ -64,21 +65,52 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 8.6</span>
+          <span>짧은 답 · schema 8.8</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
-            100-patient AAA transient-WSS 연구와 CC0 SANO source까지
-            심사했지만 최고 30.0/40으로 기각했습니다. AAA 연구는
-            E(3)-equivariant vector WSS와 일반화를 이미 다루지만 stated-code
-            repository에는 README만 있고 transient field는 공개되지 않았습니다.
-            SANO는 12 patient·steady venous CFD이며 원 연구가 geometry fidelity→
-            low-WSS를 이미 분석합니다. Surface-vector 질문은 평가 가설로
-            보존하지만 active topic은 아닙니다. Exact P0 두 건의 scientific
-            checks는 실패한 것이
-            아니라 모두 미평가였고, 동일 contract를 재실행하지 않습니다.
-            Primary, GNN, Transformer, neural operator, contribution, GPU와 outer
-            test는 선택되지 않았습니다.
+            공개 multicentre TOF-MRA 모델로 외부 평가를 수행하는 후보는 기존
+            합산식에서 32.0/40이지만 residual novelty가 0.5/5라 기각했습니다.
+            실행 가능성, 좋은 figure와 짧은 일정이 실제 research gap을 대신할 수
+            없기 때문입니다. Surface-vector 질문도 평가 가설로 보존하지만 active
+            topic이나 선택된 GNN/Hodge architecture는 아닙니다. Exact P0 두 건의
+            scientific checks는 실패한 것이 아니라 모두 미평가였고, 동일 contract를
+            재실행하지 않습니다. Primary, contribution, GPU와 outer test는 선택되지
+            않았습니다.
           </p>
+        </div>
+        <div class="answer-card" id="admission-v2">
+          <span>왜 32.0/40인데도 기각했나?</span>
+          <strong>총점은 높지만, 연구의 핵심인 residual novelty가 0.5/5이기 때문입니다.</strong>
+          <p>
+            기존 여덟 축 점수는 후보를 비교하기에는 편하지만 합산식입니다. 공개
+            weight, 쉬운 baseline, 명확한 그림과 ISBI 일정에서 높은 점수를 받으면
+            새 알고리즘 질문이 거의 없어도 32점에 도달할 수 있습니다. 실제로
+            fixed public model의 external TOF-MRA transport와 morphometry 후보는
+            32.0점이지만, multicentre model 연구가 detection·segmentation·volume·
+            diameter를 이미 평가하고 RSNA 상위 pipeline과 selective/conformal
+            방법도 존재해 남은 독립 gap은 0.5점뿐입니다.
+          </p>
+          <p>
+            Schema 8.8부터 fresh candidate는 <b>총점 32 이상</b>과 함께
+            <b>target identifiability 3.5, residual novelty 2.5, asset readiness 3.0,
+            independent unit 3.0, strong-baseline feasibility 3.0 이상</b>을 모두
+            만족해야 합니다. 또한 “기존 모듈을 합쳤다”가 아닌 residual gap,
+            관측된 failure mechanism과 미리 정한 falsifier가 필요합니다. 한 축이
+            임계값보다 낮으면 다른 축의 높은 점수로 보상할 수 없습니다.
+          </p>
+          <p>
+            이 규칙은 앞으로 들어오는 후보에만 적용합니다. 과거 32점 후보를
+            소급해 다시 이름 붙이거나, execution-incomplete를 scientific failure로
+            바꾸지 않습니다. 모든 축을 통과해도 열리는 것은 새 method-free P0
+            하나뿐이며 architecture나 GPU는 자동 승인되지 않습니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Prospective only</span>
+            <span class="yes">Total + five critical floors</span>
+            <span class="no">No score compensation</span>
+            <span class="no">No P0, model or GPU</span>
+          </div>
+          <a href="../docs/open-model-transport-and-admission-reappraisal-2026-08-11.md">source·점수·gate 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="cross-vascular-wss">
           <span>100명 AAA transient-WSS 연구가 있다면 우리 방향은 사라지나?</span>

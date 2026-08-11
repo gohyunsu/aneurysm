@@ -1,5 +1,17 @@
 # AURORA 연구 방향
 
+> **Schema 8.8 direction · 2026-08-11:** Keep surface-vector inactive and do
+> not start architecture development. A fixed public TOF-MRA model makes an
+> external audit operationally feasible, but the central transport,
+> morphometry, topology and selective-evaluation claims are directly occupied.
+> The best fresh candidate reaches 32.0 only because operational readiness
+> compensates for residual novelty 0.5/5. Future source admission is therefore
+> non-compensatory: total ≥32, novelty ≥2.5, identifiability ≥3.5 and asset,
+> independent-unit and baseline scores ≥3.0, plus a mechanism-linked falsifier.
+> This prospective rule changes no historical score or job. Continue fresh
+> problem/source discovery; open no P0 or model.
+> [Exact reappraisal](open-model-transport-and-admission-reappraisal-2026-08-11.md)
+
 > **Schema 8.6 direction · 2026-08-11:** Retain structure-faithful transient
 > WSS only as an inactive evaluation question. Patient-specific AAA work
 > already owns E(3)-equivariant vector-WSS prediction and broad generalisation;

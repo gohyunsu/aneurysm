@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 open-model transport and admission reappraisal · schema 8.8:**
+> Surface-vector는 inactive falsifiable question으로만 유지하며 edge 1-form,
+> Hodge/DEC, SE(3), periodic decoder와 structural loss를 architecture나 novelty로
+> 선택하지 않는다. MAXIMUS Zenodo revision 10의 1,143,245,289-byte public
+> weight bundle, RSNA first-place exact `e1dcdf…`, TAR exact `5e852d…`, IAVS
+> exact `2e4008…`, TopAneu exact `018c24…`, OpenNeuro exact `0760bf…`를
+> read-only metadata/code state로 재심사했다. Best fresh candidate는 기존 합산
+> 기준 32.0/40이지만 residual novelty 0.5/5라 기각한다. Schema 8.8 이후 fresh
+> candidate에는 total≥32와 identifiability≥3.5, novelty≥2.5, asset/unit/baseline
+> 각각 ≥3.0을 동시에 요구한다. Component stacking과 model naming은 novelty를
+> 충족하지 못하며 explicit residual gap+failure mechanism+falsifier가 필요하다.
+> 이 규칙은 prospective-only이고 historical score/job verdict를 relabel하지 않으며
+> pass도 method-free P0만 연다. Active lead/P0/P1/method/architecture/server query/
+> PBS/GPU/outer test/result/claim은 0이다. Future gate-authorized execution은
+> `introai9` PBS만 사용하고 login-node GPU command를 금지한다. `junjinyong`에는
+> 절대 접속·조회·전송·제출·모니터링하지 않는다.
+
 > **2026-08-11 schema 8.7 deployment·private synchronization:** Exact public
 > contract content `d04abd841a553c024c0aa5ba684d93b305773123` passed Quality
 > `31473930058` and Pages `31473929481`. Private paper ledger

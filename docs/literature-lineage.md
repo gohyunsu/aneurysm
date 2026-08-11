@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **Schema 8.8 open-model lineage correction · 2026-08-11:** The public
+> multicentre TOF-MRA nnU-Net already supports detection, segmentation and
+> morphometry transport; RSNA leaders occupy multi-view/multi-task multimodal
+> pipelines; TAR occupies topology-aware semi-supervised IA-vessel
+> segmentation; generic selective and conformal evaluation already cover
+> bounded error under shift. OpenNeuro is useful external stress evidence but
+> sparse selected-session labels do not identify longitudinal biology. Thus a
+> fixed-model external validation can be a strong baseline or engineering
+> audit, not the current AURORA contribution. The additive best is 32.0 with
+> residual novelty 0.5 and fails the prospective critical-axis gate.
+> [Exact reappraisal](open-model-transport-and-admission-reappraisal-2026-08-11.md)
+
 > **Schema 8.5 post-treatment correction · 2026-08-11:** A prospective
 > PETRA/TOF/DSA study already performs the paired device-aware follow-up
 > comparison and proposes non-invasive DSA substitution; prospective SILENT

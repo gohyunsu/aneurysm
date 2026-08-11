@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.8 submission boundary · 2026-08-11:** Do not title the paper
+> around surface-vector component stacking or fixed-model external TOF-MRA
+> transport. The latter is executable but scores only 0.5/5 residual novelty;
+> the old additive total of 32.0 cannot compensate. A future ISBI identity must
+> pass the prospective critical-axis gate, prospectively register a method-free
+> falsifier, and only then establish a minimal mechanism-linked intervention.
+> No title, contribution, method figure, result table, P0/P1, model or GPU run
+> is assigned; the manuscript remains not submission-ready.
+
 > **Schema 8.6 submission boundary · 2026-08-11:** Do not title the ISBI
 > paper around an edge-1-form/Hodge/equivariant transient-WSS architecture.
 > Patient-specific AAA work already owns the obvious model and generalisation

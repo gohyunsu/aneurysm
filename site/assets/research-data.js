@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest cross-vascular transient-WSS batch best 30.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
-    requirement: "a distinct fresh problem with versioned phase-resolved tangent-WSS semantics, patient/family mapping, reproducible mesh/BC provenance, development/confirmation units and an executable strong baseline must pass source admission and method-free stability/failure gates; E(3) equivariance, transient WSS, geometry descriptors, an empty stated-code repository, GNN/operator stacking or a new loss cannot create novelty or compute authority",
+    status: "Target locked · latest open-model transport candidate 32.0/40 but residual novelty 0.5/5 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "An executable public model still fails when the residual gap is almost empty",
+      copy: "The multicentre TOF-MRA nnU-Net record provides a versioned 1,143,245,289-byte weight bundle, but its study already evaluates detection, segmentation and morphometry. RSNA leaders occupy multi-view and multi-task multimodal pipelines; TAR occupies topology-aware semi-supervised IA-vessel segmentation; selective and conformal evaluation occupy generic bounded-error wrappers. The fixed-model external transport candidate therefore reaches 32.0/40 through assets, baselines, visualisation and schedule while residual novelty is only 0.5/5. Schema 8.8 rejects it and makes future admission non-compensatory. Historical scores and no-verdict jobs are unchanged.",
+      status: "32.0/40 rejected by novelty floor · active lead/P0/method/architecture/server/GPU 0",
+      url: "../docs/open-model-transport-and-admission-reappraisal-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Patient-specific AAA transient WSS removes architecture novelty, not the unanswered structure question",
@@ -890,6 +897,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 8.8 rejects an additive 32.0 and makes source admission non-compensatory",
+      copy: "Surface-vector remains an inactive question, not an edge-1-form/Hodge/GNN identity. A fixed public-model external TOF-MRA audit is executable but has residual novelty 0.5/5 because multicentre morphometry, RSNA pipelines, TAR and selective/conformal evaluation already occupy the obvious claims. Six candidates freeze at 32.0/31.5/29.0/28.5/27.5/27.0 and all are rejected. Future candidates need total ≥32 plus critical novelty, identifiability, asset, independent-unit and baseline floors and a mechanism-linked falsifier. The rule is prospective and opens no P0, model, server query or GPU.",
+      files: ["docs/open-model-transport-and-admission-reappraisal-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",
