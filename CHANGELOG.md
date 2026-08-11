@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.2 scientific source deployed and privately pinned
+
+- Exact scientific source `c6906134ad2cea6a7f1918edb2b515c95a9d0b41`
+  passed Quality `31522903059` and Pages `31522901393`; live Learn and the
+  machine protocol expose the 30.0/40 rejection and no-model/no-compute state.
+- Private ledger `b66700864bd9f43d21ce8e1cff60d16f80a1d679` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- This deployment provenance opens no P0/P1, method, architecture, scientific
+  server, PBS/GPU, outer test, result row, C21 or claim.
+
 ## 2026-08-12 · Decision-time and clinical-precision reappraisal · schema 10.2
 
 - Added the 426-aneurysm/362-patient four-centre PED occlusion nomogram as a

@@ -1037,6 +1037,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.2 scientific source is live and privately pinned",
+      copy: "Exact scientific source c6906134ad2cea6a7f1918edb2b515c95a9d0b41 passed Quality 31522903059 and Pages 31522901393. Live Learn and the machine protocol expose best 30.0/40, all six rejected, no joined timestamped public asset and active lead/P0/method/model/server/GPU/claim zero. Private ledger b66700864bd9f43d21ce8e1cff60d16f80a1d679 is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.2 separates decision-time information from delayed outcome",
       copy: "A four-centre hemodynamic PED nomogram directly occupies baseline-DSA/CFD occlusion prediction, but its pooled 298/128 aneurysm split is not centre-held-out, patient grouping is unstated despite 61 multi-aneurysm patients, and apposition/migration enter only after deployment. A commercial CTA study shows improved reproducibility without DSA agreement inside ±1 mm and is cross-sectional rather than longitudinal. Six frozen rows score 30.0/26.0/25.5/25.0/24.5/23.0; all fail total or critical novelty, asset and independent-unit floors. Information-set declaration, hemodynamic incremental value and clinical precision remain evaluation principles only. No payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens.",

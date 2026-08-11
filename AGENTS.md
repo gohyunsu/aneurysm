@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.2 scientific deployment·private synchronization:**
+> Exact scientific source `c6906134ad2cea6a7f1918edb2b515c95a9d0b41`
+> passed Quality `31522903059` and Pages `31522901393`. Live Learn and the
+> machine protocol expose best 30.0/40 rejected, all six rejected and lead/P0/
+> method/model/server/GPU/claim zero. Private ledger
+> `b66700864bd9f43d21ce8e1cff60d16f80a1d679` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization opens no lead, P0/P1, method, architecture, scientific-
+> server query, PBS/GPU, outer test, result row, C21 or claim. Future authorized
+> execution is `introai9` PBS only; prohibit login-node GPU and never access,
+> query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 decision-time and clinical-precision reappraisal · schema
 > 10.2:** Four-centre PED source `10.3389/fneur.2026.1756374` reports 362
 > patients/426 aneurysms, 298/128 pooled random aneurysm split, 61 patients with

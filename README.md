@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.2 scientific deployment/private synchronization:**
+> Exact scientific source `c6906134ad2cea6a7f1918edb2b515c95a9d0b41`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31522903059)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31522901393).
+> Live Learn and the machine protocol expose best 30.0/40, all six rejected and
+> the no-joined-timestamped-asset/no-model/no-compute boundary. Private ledger
+> `b66700864bd9f43d21ce8e1cff60d16f80a1d679` is remote exact, PRIVATE and
+> anonymous API returns 404. Manuscript and references remain byte-for-byte
+> unchanged. This provenance opens no scientific or submission authority.
+
 > **Current research state (schema 10.2, 2026-08-12):** A fresh decision-time
 > and clinical-precision screen rejects all six formulations at
 > **30.0/26.0/25.5/25.0/24.5/23.0**. A 2026 four-centre study already combines
