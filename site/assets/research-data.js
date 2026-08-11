@@ -1087,6 +1087,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.7 scientific source is live and privately pinned",
+      copy: "Exact scientific source 39b94a7c42d40c70c18fe76744349507bffb2ea8 passed Quality 31540996594 and Pages 31540995837. Live Overview, Learn, detailed audit and the machine protocol expose best 29.0/40, all six rejected on residual-novelty or joined-asset floors and active lead/P0/method/model/server/GPU/claim zero. Private ledger f04716e7c39f90a33fe76ccf677c4285a074819a is remote exact; manuscript and references remain byte-for-byte unchanged. Full regression is 448 tests: 382 pass/66 optional skip and protocol 86 invariant groups; site and JavaScript checks pass. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.7 separates an open aSAH mask archive from a joined outcome asset",
       copy: "Exact Zenodo revision 2, official pipeline head 3fbd7a9… and multiclass baseline head 269f472… are frozen in fail-closed source-watch v14. The RAR was not opened and public metadata does not join patient, centre, split, treatment, endpoint time or outcome. Existing work already covers Swin-UNETR/nnU-Net segmentation, six-month-GOS volume equivalence, three-month mortality, multiclass segmentation, LoRA/DoRA transfer and longitudinal maps. Six rows score 29.0/28.5/28.0/28.0/27.0/22.5; all fail residual novelty or joined-asset floors. No checkpoint, scientific server, P0/P1, method, architecture, PBS/GPU, outer test or claim opened; surface-vector stays inactive.",

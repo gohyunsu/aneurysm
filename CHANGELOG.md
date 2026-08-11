@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.7 scientific source deployed and privately pinned
+
+- Exact scientific source `39b94a7c42d40c70c18fe76744349507bffb2ea8`
+  passed Quality `31540996594` and Pages `31540995837`; live Overview, Learn,
+  detailed audit and machine protocol expose the 29.0/40 novelty/joined-asset
+  rejection and no-model/no-compute state.
+- Private ledger `f04716e7c39f90a33fe76ccf677c4285a074819a` is remote exact.
+  Manuscript and reference hashes are unchanged.
+- Full regression is 448 tests: 382 pass/66 optional skip and protocol 86
+  invariant groups; site and JavaScript checks pass. This provenance opens no
+  P0/P1, method, model, compute or claim.
+
 ## 2026-08-12 · aSAH segmentation/outcome asset reappraisal · schema 10.7
 
 - Froze exact Zenodo revision 2, official pipeline head `3fbd7a9…` and public

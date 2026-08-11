@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.7 scientific deployment·private synchronization:**
+> Exact scientific public source
+> `39b94a7c42d40c70c18fe76744349507bffb2ea8` passed Quality
+> `31540996594` and Pages `31540995837`. Live Overview, Learn, detailed audit
+> and machine protocol expose schema 10.7, best 29.0/40 rejected, all six
+> rejected and lead/P0/method/model/server/GPU/claim 0. Private paper ledger
+> `f04716e7c39f90a33fe76ccf677c4285a074819a` is remote exact; `paper/main.tex`
+> SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 448 tests: 382 pass/66 optional skip, protocol 86
+> invariant groups and site/JavaScript checks pass. This synchronization opens
+> no scientific or submission authority.
+
 > **2026-08-12 aSAH segmentation/outcome reappraisal · schema 10.7:** Exact
 > Zenodo record `8228847` revision 2 is open CC BY 4.0 and contains one
 > 648,502,298-byte RAR of stated NCCT/mask pairs. The archive body was not

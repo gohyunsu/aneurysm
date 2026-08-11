@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.7 scientific deployment/private synchronization:**
+> Exact scientific source `39b94a7c42d40c70c18fe76744349507bffb2ea8`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31540996594)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31540995837).
+> Live Overview, Learn and the detailed audit expose best 29.0/40, all six
+> rejected, joined outcome asset 0 and no-model/no-compute. Private ledger
+> `f04716e7c39f90a33fe76ccf677c4285a074819a` is remote exact and preserves
+> manuscript/reference bytes. This provenance opens no scientific or
+> submission authority.
+
 > **Current research state (schema 10.7, 2026-08-12):** The open aSAH NCCT
 > record is a real CC-BY-4.0 mask asset, but not a joined outcome benchmark.
 > Its single 648,502,298-byte RAR has no public top-level patient/centre/split/
