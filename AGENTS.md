@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.5 deployment verification:** Exact scientific content
+> `6ceff3e1f5554a7d640089e14ef6808956b782c9` passed Quality
+> `31468054437` and Pages `31468053500`. Live Overview/Learn expose the
+> post-treatment 28.5/40 rejection and no-image/no-model/no-compute boundary.
+> This provenance creates no P0/P1, method, architecture, scientific-server
+> query, PBS/GPU, outer test, result row or claim. Future authorized execution
+> remains `introai9` PBS only; never access `junjinyong` or run login-node GPU.
+
 > **2026-08-11 post-treatment reference-linked imaging · schema 8.5:**
 > Prospective PETRA/TOF/DSA는 100 patient/100 aneurysm, day-1/6-month pair,
 > SAC 72/FD 28과 DSA reference를 제공하지만 raw image는 versioned public

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.5 scientific content deployed
+
+- Exact public scientific content `6ceff3e1f5554a7d640089e14ef6808956b782c9`
+  passed Quality `31468054437` and Pages `31468053500`.
+- Live Overview and Learn expose the 28.5/40 rejection, public-asset boundary,
+  direct controls and no-model/no-compute state.
+- This is deployment provenance, not a scientific result or authorization for
+  P0/P1, a method, PBS/GPU, outer test, result row or claim.
+
 ## 2026-08-11 · Schema 8.5 rejects post-treatment reference-linked imaging
 
 - Audited a prospective 100-patient PETRA/TOF/DSA cohort, Helsinki

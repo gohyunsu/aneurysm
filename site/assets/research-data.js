@@ -870,6 +870,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.5 exact scientific content passed Quality and Pages",
+      copy: "Exact public content 6ceff3e1f5554a7d640089e14ef6808956b782c9 passed Quality 31468054437 and Pages 31468053500. Live Overview and Learn expose the 28.5/40 post-treatment rejection, the no-public-image boundary, direct controls and no-model/no-compute state. This provenance opens no candidate, P0/P1, model, server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Schema 8.5 rejects post-treatment reference-linked imaging formulations",
       copy: "The prospective PETRA/TOF/DSA study improves target identifiability but supplies no versioned image asset; Helsinki DWI/occlusion data require a FINDATA decision; the public clipped source is tabular only. Generic reject-option, defer and conformal mechanisms are direct controls. Six formulations freeze at 28.5/27.5/26.5/26.5/26.0/24.5. Surface-vector remains inactive and no P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",

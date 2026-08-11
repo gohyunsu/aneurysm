@@ -1,5 +1,12 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.5 deployment verification:** Exact scientific content
+> `6ceff3e1f5554a7d640089e14ef6808956b782c9` passed GitHub-hosted Quality
+> `31468054437` and Pages `31468053500`. The live Overview and Learn pages show
+> the 28.5/40 rejection, no-image/no-model/no-compute boundary and exact audit
+> route. This is deployment provenance only; it opens no source lead, P0/P1,
+> method, architecture, scientific-server query, PBS/GPU, outer test or claim.
+
 > **2026-08-11 post-treatment reference-linked imaging audit · schema 8.5:**
 > A prospective 100-patient PETRA-MRA/TOF-MRA/DSA study gives a clear clinical
 > reference but no versioned public image asset. Helsinki reports DWI for 119
