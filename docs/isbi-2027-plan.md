@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.6 submission boundary · 2026-08-12:** Do not title or draft a
+> paper around 4D-CTA wall-phenotype GNNs, temporal transformers, calibration or
+> motion-to-growth. The central task and reliability questions have direct
+> priors, while the public release lacks a confirmatory target contract. Latest
+> best is 29.0/40. Title, abstract claim, contribution, method figure, result
+> table, C21, P0/P1, model and GPU remain unchanged/closed.
+
 > **Schema 10.5 submission boundary · 2026-08-12:** Do not title or draft a
 > paper around culprit-set learning or infundibulum deferral. The best residual
 > scores 30.5/40 but fails asset readiness at 0.5/5, and direct CTA/VWI priors

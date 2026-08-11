@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 4D-CTA wall-phenotype release reappraisal · schema 10.6:**
+> PeerJ source `10.7717/peerj.19393` reports 52 aneurysms from four hospitals,
+> 100 Hz one-second trajectories and source average accuracy 92%; none is an
+> AURORA result. Exact Zenodo record `13788524` revision 4 contains one
+> 1,934,055,674-byte CC-BY-4.0 archive. Exact GitHub head `8df7d45…` exposes
+> code and 52 visible case directories, but no source DICOM, operative RGB/
+> video, registration reference, surface adjacency, complete patient/centre/
+> fold contract or dense independent wall truth. Directory count is not
+> verified patient count. Six rows score 29.0/28.5/28.0/27.5/26.5/24.5 and
+> all fail total or critical floors. Source-watch v13 freezes 20 sources;
+> changes request review only. Active lead/P0/P1/method/architecture/server/
+> PBS/GPU/outer test/result/C21/claim are 0. Surface-vector stays inactive and
+> historical no-verdict jobs are not repaired or rerun. Future gate-authorized
+> execution uses `introai9` PBS only, never login-node GPU. Never access,
+> query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 schema 10.5 scientific deployment·private synchronization:**
 > Exact scientific public source
 > `e69718448c85eedf4a4edad5c66fcd33ca791ff1` passed Quality

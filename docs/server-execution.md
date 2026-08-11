@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 10.6 server state · 2026-08-12:** The 4D-CTA wall-phenotype audit
+> queried no scientific server, transferred no payload and created no PBS/GPU
+> job. Active AURORA job count is zero. Future gate-authorized execution uses
+> `introai9` PBS only, never a login-node GPU command. Never access, query,
+> transfer to, submit to or monitor `junjinyong`.
+
 > **Schema 10.5 server boundary · 2026-08-12:** This reappraisal used public
 > article, challenge and government-portal metadata only. No scientific server
 > was queried, no data request or transfer occurred and no PBS/GPU job was

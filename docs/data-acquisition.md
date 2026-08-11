@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **Schema 10.6 acquisition boundary · 2026-08-12:** Do not download the
+> 1,934,055,674-byte DA_4DCTA archive or derive new labels from its trajectory
+> CSVs. Source-watch v13 is metadata-only. A fresh P0 requires an official
+> source-image/operative-reference/registration/surface contract, verified
+> patient and centre grouping, explicit partial-label semantics and independent
+> confirmation units. A watch change requests review only.
+
 > **Schema 10.5 acquisition boundary · 2026-08-12:** Do not contact authors,
 > accept challenge terms, download patient images or infer culprit/mimic labels
 > for this rejected batch. A material source must first expose lawful access,

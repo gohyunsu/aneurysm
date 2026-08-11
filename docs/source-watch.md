@@ -1,4 +1,10 @@
-# Public source watch · eighteen material/direct-prior source states
+# Public source watch · twenty material/direct-prior source states
+
+> **Schema 10.6 watch · 2026-08-12:** `source_watch_v13.json` extends the
+> immutable 18-source ledger with exact DA_4DCTA Zenodo revision 4 and GitHub
+> head `8df7d45…`. All 20 frozen snapshots authorize nothing. A source change
+> may request fresh manual re-audit only; it cannot download data, repair a
+> score, register P0, select a model or authorize compute.
 
 > **2026-08-12 v12 decision:** v11 is extended with exact TopBrain 2025 data
 > revision 14, exact podium-Docker revision 18 and BraveCoWCoW repository head

@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-12 · 4D-CTA wall-phenotype release reappraisal · schema 10.6
+
+- Froze the exact DA_4DCTA Zenodo revision 4 and GitHub head `8df7d45…` in a
+  fail-closed 20-source watch. No archive body or patient image was downloaded.
+- Separated derived trajectory CSVs from source 4D-CTA, operative reference,
+  registration, surface topology and patient/centre/fold semantics. Fifty-two
+  visible directories are not asserted to be 52 independent patients.
+- Added 2025–2026 dynamic repeatability and intraoperative phenotype direct
+  priors. The source paper already owns trajectory-to-wall-phenotype prediction.
+- Froze six candidates at 29.0/28.5/28.0/27.5/26.5/24.5. All fail total or
+  mandatory target, novelty, asset or independent-unit floors; no P0, model,
+  scientific-server query or compute opened.
+
 ## 2026-08-12 · Schema 10.5 scientific source deployed and privately pinned
 
 - Exact scientific source `e69718448c85eedf4a4edad5c66fcd33ca791ff1`

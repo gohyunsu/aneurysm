@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 10.6 direction · 2026-08-12:** Do not pivot to a GNN, transformer
+> or conformal wrapper for DA_4DCTA. The source paper already owns 4D-CTA
+> trajectory-to-intraoperative-wall-phenotype prediction, while the release
+> omits the measurements needed to separate acquisition, visual selection,
+> registration and prediction error. The best residual, verification-aware
+> partial identification, scores 29.0/40 and fails target and independent-unit
+> floors. Retain the release as a material/direct-prior watch only; open no
+> payload, P0, architecture or compute.
+
 > **Schema 10.5 direction · 2026-08-12:** The most defensible residual is not
 > lesion-wise rupture classification but haemorrhage-conditioned culprit
 > identification over the complete within-patient lesion set. It is not active:

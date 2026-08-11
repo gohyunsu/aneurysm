@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.6 model boundary · 2026-08-12:** No model is selected. A surface
+> GNN cannot be defined from trajectory CSVs when the release lacks frozen
+> surface adjacency; an attention/LSTM replacement would also be a direct-prior
+> architecture swap. GNN/Hodge/equivariance/periodic operators and structural
+> losses remain unselected controls. Model specification resumes only after an
+> admitted task and method-free gates.
+
 > **Schema 10.5 no-model boundary · 2026-08-12:** No patient-set ranker,
 > haemorrhage--lesion alignment network, VWI fusion model, conformal shortlist,
 > mimic classifier or acquisition-policy model is selected. These names do not

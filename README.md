@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.6, 2026-08-12):** The public DA_4DCTA
+> release is a material real-data source—52 visible case directories, derived
+> 100 Hz trajectories, code and an exact 1.93 GB Zenodo archive—but not an
+> admitted AURORA task. The source paper already predicts intraoperative wall
+> phenotype from 4D-CTA motion. Source DICOM, operative RGB/video, registration
+> reference, surface adjacency, complete patient/centre/fold grouping and dense
+> independent whole-wall truth are absent. Six residual formulations score
+> **29.0/28.5/28.0/27.5/26.5/24.5** and all fail a mandatory identifiability,
+> novelty, asset or independent-unit floor. Source-watch v13 freezes 20 public
+> snapshots. Active lead/P0/P1/method/model/server/GPU/claim remain zero and
+> surface-vector stays inactive. See the
+> [exact reappraisal](docs/four-d-cta-wall-phenotype-release-and-target-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 10.5 scientific deployment/private synchronization:**
 > Exact scientific source `e69718448c85eedf4a4edad5c66fcd33ca791ff1`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31534693949)

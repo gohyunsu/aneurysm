@@ -1,0 +1,157 @@
+{
+  "schema_version": "aurora.source_watch.v13",
+  "extends": "source_watch_v12.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-12",
+  "added_watches": [
+    {
+      "watch_id": "da4dcta_zenodo_material_release_v1",
+      "kind": "zenodo_record",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "zenodo_record_id": 13788524,
+        "zenodo_api_url": "https://zenodo.org/api/records/13788524",
+        "record_url": "https://zenodo.org/records/13788524"
+      },
+      "frozen_snapshot": {
+        "zenodo_record_id": 13788524,
+        "zenodo_modified": "2024-09-23T04:40:53.613542+00:00",
+        "zenodo_revision": 4,
+        "zenodo_status": "published",
+        "zenodo_access_right": "open",
+        "zenodo_license_id": "cc-by-4.0",
+        "zenodo_files": [
+          {
+            "key": "Kumrai-T/DA_4DCTA-v1.0.1.zip",
+            "size": 1934055674,
+            "checksum": "md5:fd9f856b485983cd430ab94d01a24596"
+          }
+        ],
+        "payload_or_manifest_files": [
+          "Kumrai-T/DA_4DCTA-v1.0.1.zip"
+        ],
+        "availability": "zenodo_record_metadata_state"
+      }
+    },
+    {
+      "watch_id": "da4dcta_github_release_and_baseline_v1",
+      "kind": "github",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "repository": "Kumrai-T/DA_4DCTA",
+        "repository_url": "https://github.com/Kumrai-T/DA_4DCTA",
+        "default_branch": "main",
+        "paper_url": "https://doi.org/10.7717/peerj.19393"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "8df7d45e9f65e3cbfd4ae3fc430c65a98905bdfc",
+        "root_entries": [
+          {"name": "attention.py", "type": "file", "size": 3910},
+          {"name": "constant_value.py", "type": "file", "size": 95},
+          {"name": "feature.py", "type": "file", "size": 8800},
+          {"name": "gui.py", "type": "file", "size": 25563},
+          {"name": "io_utils.py", "type": "file", "size": 16392},
+          {"name": "jupyter_notebook", "type": "dir", "size": 0},
+          {"name": "LSTM_model.py", "type": "file", "size": 13061},
+          {"name": "navi_feature.py", "type": "file", "size": 6195},
+          {"name": "pipeline.py", "type": "file", "size": 42564},
+          {"name": "project.py", "type": "file", "size": 4433},
+          {"name": "raw_data", "type": "dir", "size": 0},
+          {"name": "viz_utils.py", "type": "file", "size": 42496}
+        ],
+        "release_count": 1,
+        "license_spdx_id": null,
+        "repository_size_kib": 3598858,
+        "payload_or_code_entries": [
+          "attention.py",
+          "constant_value.py",
+          "feature.py",
+          "gui.py",
+          "io_utils.py",
+          "jupyter_notebook",
+          "LSTM_model.py",
+          "navi_feature.py",
+          "pipeline.py",
+          "project.py",
+          "raw_data",
+          "viz_utils.py"
+        ],
+        "availability": "public_derived_trajectory_csv_and_code_without_source_dicom_rgb_video_registration_surface_or_fold_contract"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v12 material, direct-prior, target-contract or version-contract source state changes",
+      "The DA_4DCTA Zenodo record or GitHub repository changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "row_count_is_not_independent_patient_count": true,
+    "card_license_is_not_upstream_medical_data_lineage": true,
+    "postreview_metadata_change_is_not_e0_pass": true,
+    "visible_viewer_examples_are_not_registered_quality_prevalence": true,
+    "versioned_annotation_history_is_not_method_novelty": true,
+    "git_blob_change_is_not_terms_acceptance": true,
+    "annotation_metadata_is_not_medical_image_access": true,
+    "registry_or_wiki_change_is_not_terms_acceptance": true,
+    "controlled_access_metadata_is_not_payload_access": true,
+    "release_contract_change_is_not_p0_authority": true,
+    "reference_provenance_issue_is_not_method_novelty": true,
+    "topbrain2025_data_terms_not_automatically_accepted": true,
+    "public_vessel_labels_are_not_aneurysm_targets": true,
+    "podium_dockers_are_direct_priors_not_method_selection": true,
+    "rsna_pseudomasks_are_not_independent_dense_reference": true,
+    "baseline_code_is_not_controlled_challenge_data": true,
+    "derived_trajectory_csv_is_not_source_4dcta_or_intraoperative_reference": true,
+    "visible_case_directory_is_not_verified_independent_patient": true,
+    "source_wall_phenotype_result_is_not_aurora_reproduced_evidence": true,
+    "repository_license_absence_is_not_method_novelty": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": [
+      "fresh_source_reaudit_only",
+      "direct_prior_baseline_feasibility_reaudit_only"
+    ]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

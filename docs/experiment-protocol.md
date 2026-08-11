@@ -1,5 +1,11 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.6 execution boundary · 2026-08-12:** No experiment is active.
+> DA_4DCTA re-entry requires source images, operative reference, registration,
+> surface adjacency, patient/centre/fold grouping and an identifiable dense or
+> partial-label estimand before a fresh method-free P0 may be registered.
+> Source-watch change signals do not authorize payload, model or compute.
+
 > **Schema 10.5 experiment boundary · 2026-08-12:** Zero candidates are
 > admitted. Do not request author-held culprit/mimic data, download TopAneu or
 > other patient payload, construct pseudo-culprit labels, register P0/P1,

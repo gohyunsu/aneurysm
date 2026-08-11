@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · culprit/mimic batch best 30.5/40 rejected on the asset floor; all six fail total or a critical floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or material joined-target asset audit; culprit re-entry requires lawful NCCT/CTA, every within-patient lesion, explicit adjudication provenance and patient-grouped centre-separated confirmation, while mimic re-entry requires expert/DSA reference and action semantics; surface-vector remains inactive, no data request, payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · 4D-CTA wall-phenotype batch best 29.0/40 rejected on target-identifiability and independent-unit floors; all six fail total or a critical floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem or complete joined 4D-CTA/operative-reference asset audit; re-entry requires source images, operative RGB/video, frozen registration, surface adjacency, machine-auditable patient/centre/fold semantics and dense or precisely declared partial-label truth; surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A public 4D-CTA trajectory release is material, but its core phenotype task is already occupied",
+      copy: "The DA_4DCTA source reports 52 unruptured aneurysms from four hospitals, 100 Hz one-second point trajectories and intraoperative thin/hyperplastic wall labels. Source average accuracy 92% is not an AURORA result. Exact Zenodo revision 4 exposes one 1,934,055,674-byte CC-BY-4.0 archive and exact GitHub head 8df7d45… exposes code plus 52 visible case directories. The release omits source 4D-CTA DICOM, operative RGB/video, registration reference, surface adjacency, complete patient/centre/fold grouping and dense independent whole-wall truth. Directory count is not verified patient count. Recent first-harmonic, repeated-cycle and intraoperative-video/hemodynamic studies are direct priors. Six residual formulations score 29.0/28.5/28.0/27.5/26.5/24.5 and all are rejected.",
+      status: "Best 29.0/40 rejected · target/unit floors fail · source image/operative-reference join 0 · lead/P0/method/server/GPU 0",
+      url: "../docs/four-d-cta-wall-phenotype-release-and-target-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Culprit identification is a patient-set problem, but the joined target asset is absent",
@@ -1066,6 +1073,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.6 freezes the DA_4DCTA release without inventing a wall-phenotype paper",
+      copy: "Exact Zenodo revision 4 and GitHub head 8df7d45… are now tracked by fail-closed source-watch v13. The release is derived trajectory CSV and code, not source 4D-CTA, operative RGB/video, registration, surface topology or a complete patient/centre/fold/dense-reference contract. The source paper directly occupies trajectory-to-wall-phenotype prediction, while 2025–2026 dynamic repeatability and intraoperative phenotype studies further narrow the gap. Six rows score 29.0/28.5/28.0/27.5/26.5/24.5 and all fail total or critical target, novelty, asset or independent-unit floors. No archive body, scientific server, P0/P1, method, architecture, PBS/GPU, outer test or claim opened.",
+      files: ["docs/four-d-cta-wall-phenotype-release-and-target-reappraisal-2026-08-12.md", "configs/source_watch_v13.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", ".github/workflows/source-watch.yml"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

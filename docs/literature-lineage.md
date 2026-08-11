@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.6 lineage · 2026-08-12:** The direct line now includes (i) the
+> 52-aneurysm DA_4DCTA trajectory-to-intraoperative-wall-phenotype source,
+> (ii) a 10-patient/11-aneurysm prospective first-harmonic wall-pulsation study,
+> (iii) a 15-subject/17-aneurysm three-cycle repeatability study and (iv) a
+> 133-patient/148-aneurysm intraoperative-video+morphology+hemodynamics study.
+> Their combination closes broad motion/phenotype novelty; it does not create
+> a joined public target. Generic spatiotemporal GNN, centre-DG, weak-label and
+> conformal methods remain controls rather than contributions.
+
 > **Schema 10.5 lineage · 2026-08-12:** multiple-aneurysm rupture morphology →
 > eight-hospital CTA culprit identification → three-institution VWI symptomatic
 > lesion localization → smaller-counterpart rupture analysis; in parallel,

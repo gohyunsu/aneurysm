@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.6 map · 2026-08-12:** DA_4DCTA contributes derived trajectory
+> CSVs and public code, not a complete image–operative-reference–registration–
+> surface–patient contract. Its central phenotype task is direct prior. Six
+> residual branches are frozen and rejected at 29.0/28.5/28.0/27.5/26.5/24.5;
+> the graph/model branch remains closed. The only open branch is fresh
+> problem-level or complete joined-asset discovery.
+
 > **Schema 10.5 map · 2026-08-12:** Acute culprit identification, symptomatic
 > lesion localization, future rupture prediction and aneurysm--infundibulum
 > differential are four distinct branches. CTA morphology and VWI directly

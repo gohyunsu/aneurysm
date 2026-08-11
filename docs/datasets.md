@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.6 DA_4DCTA asset boundary · 2026-08-12:** Exact Zenodo revision
+> 4 and GitHub head expose one 1.93 GB archive, code and derived trajectory
+> CSVs across 52 visible case directories. They do not expose source 4D-CTA
+> DICOM, operative RGB/video, registration reference, surface adjacency,
+> complete patient/centre/fold semantics or dense independent wall truth.
+> Directory count is not treated as independent-patient count. No archive body,
+> source image or scientific server was accessed; no dataset is active.
+
 > **Schema 10.5 culprit/mimic asset boundary · 2026-08-12:** No public
 > versioned asset joins aligned NCCT, CTA, all within-patient candidate lesions,
 > culprit adjudication and a patient-grouped centre-separated split. The

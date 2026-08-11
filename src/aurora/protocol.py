@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.5":
-        raise ProtocolError("The current research-state schema must be version 10.5.")
+    if protocol["schema_version"] != "10.6":
+        raise ProtocolError("The current research-state schema must be version 10.6.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_culprit_mimic_batch_rejected_best_30_5_asset_floor_no_p0_no_compute"
+        != "no_active_problem_4dcta_wall_phenotype_batch_rejected_best_29_target_and_unit_floors_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "four_d_cta_wall_phenotype_release_reappraisal",
             "culprit_lesion_and_mimic_differential_reappraisal",
             "topbrain2025_and_rsna_multitask_source_correction",
             "target_time_and_instability_prediction_reappraisal",
@@ -261,6 +262,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v10",
             "public_source_watch_v11",
             "public_source_watch_v12",
+            "public_source_watch_v13",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -271,13 +273,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_culprit_mimic_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_4dcta_wall_phenotype_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "culprit_and_mimic_primary_source_metadata_only_no_public_joined_patient_set_or_dsa_reference_asset_no_scientific_server"
+        != "derived_trajectory_csv_and_code_only_no_source_4dcta_intraoperative_reference_registration_surface_or_verified_patient_manifest_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -289,15 +291,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_material_joined_asset_audit_only_no_data_request_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md"
+        != "docs/four-d-cta-wall-phenotype-release-and-target-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "hemorrhage_conditioned_patient_set_evidence_alignment_rejected_at_30_5_asset_floor"
+        != "verification_aware_wall_phenotype_partial_identification_rejected_at_29_target_and_independent_unit_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The culprit/mimic batch must remain rejected and the VMR candidate "
+            "The 4D-CTA wall-phenotype batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -359,7 +361,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 30.5
+        or admission_v2["current_batch_best_score"] != 29.0
         or admission_v2["current_batch_best_residual_novelty"] != 2.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
@@ -369,6 +371,188 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    wall_release = problem_selection[
+        "four_d_cta_wall_phenotype_release_reappraisal"
+    ]
+    _require_keys(
+        wall_release,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "source_paper_doi",
+            "source_paper_pmid",
+            "source_reported_aneurysms",
+            "source_reported_hospitals",
+            "source_trajectory_sampling_hz",
+            "source_trajectory_duration_seconds",
+            "source_reported_average_accuracy_percent",
+            "source_results_reproduced_by_aurora",
+            "source_directly_predicts_intraoperative_wall_phenotype_from_4dcta_trajectory",
+            "zenodo_record_id",
+            "zenodo_record_revision",
+            "zenodo_record_modified",
+            "zenodo_record_license",
+            "zenodo_archive_name",
+            "zenodo_archive_bytes",
+            "zenodo_archive_md5",
+            "zenodo_archive_downloaded",
+            "github_repository",
+            "github_repository_head",
+            "github_repository_release_count",
+            "github_recognized_license",
+            "visible_top_level_case_directories",
+            "visible_case_directory_count_equated_to_independent_patient_count",
+            "suffix_identifier_semantics_machine_auditable",
+            "recursive_git_tree_truncated",
+            "source_4dcta_dicom_public",
+            "intraoperative_rgb_or_video_public",
+            "image_to_wall_registration_reference_public",
+            "surface_geometry_and_adjacency_contract_public",
+            "complete_patient_centre_fold_manifest_public",
+            "dense_independent_whole_wall_reference_public",
+            "future_growth_or_progression_target_joined",
+            "recent_dynamic_direct_priors",
+            "direct_prior_threats",
+            "candidates",
+            "required_reentry_observables",
+            "surface_vector_reactivated",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "historical_score_or_job_relabelled",
+            "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "4D-CTA wall-phenotype release reappraisal",
+    )
+    wall_candidate_ids = [
+        "verification_aware_wall_phenotype_partial_identification",
+        "centre_held_out_spatiotemporal_surface_mapping",
+        "patient_clustered_conformal_wall_phenotype_mapping",
+        "temporal_resolution_stable_wall_phenotype_inference",
+        "joint_motion_hemodynamics_wall_map",
+        "motion_to_future_growth_bridge",
+    ]
+    wall_axes = [
+        [5.0, 2.0, 2.5, 3.5, 2.5, 4.5, 5.0, 4.0],
+        [5.0, 3.5, 1.5, 3.0, 2.5, 4.5, 5.0, 3.5],
+        [4.5, 3.0, 1.0, 3.0, 2.5, 5.0, 5.0, 4.0],
+        [4.5, 2.5, 2.0, 2.5, 2.5, 4.5, 5.0, 4.0],
+        [5.0, 3.0, 1.5, 1.5, 2.5, 5.0, 5.0, 3.0],
+        [5.0, 1.5, 2.5, 1.0, 1.0, 5.0, 5.0, 3.5],
+    ]
+    wall_scores = [29.0, 28.5, 28.0, 27.5, 26.5, 24.5]
+    wall_candidates = wall_release["candidates"]
+    if (
+        wall_release["status"]
+        != "fresh_material_source_batch_rejected_best_29_fails_target_identifiability_and_independent_unit_floors_no_active_lead"
+        or wall_release["audit_document"]
+        != "docs/four-d-cta-wall-phenotype-release-and-target-reappraisal-2026-08-12.md"
+        or wall_release["automatic_selection_threshold"] != 32.0
+        or wall_release["best_candidate_id"] != wall_candidate_ids[0]
+        or wall_release["best_score"] != 29.0
+        or wall_release["best_residual_novelty_score"] != 2.5
+        or wall_release["all_candidate_scores"] != wall_scores
+        or wall_release["conditional_source_lead_count"] != 0
+        or wall_release["primary_problem_selected"] is not False
+        or wall_release["paper_identity_active"] is not False
+        or wall_release["source_paper_doi"] != "10.7717/peerj.19393"
+        or wall_release["source_paper_pmid"] != 40356666
+        or wall_release["source_reported_aneurysms"] != 52
+        or wall_release["source_reported_hospitals"] != 4
+        or wall_release["source_trajectory_sampling_hz"] != 100
+        or wall_release["source_trajectory_duration_seconds"] != 1
+        or wall_release["source_reported_average_accuracy_percent"] != 92
+        or wall_release["source_results_reproduced_by_aurora"] is not False
+        or wall_release[
+            "source_directly_predicts_intraoperative_wall_phenotype_from_4dcta_trajectory"
+        ]
+        is not True
+        or wall_release["zenodo_record_id"] != 13788524
+        or wall_release["zenodo_record_revision"] != 4
+        or wall_release["zenodo_record_modified"]
+        != "2024-09-23T04:40:53.613542+00:00"
+        or wall_release["zenodo_record_license"] != "cc-by-4.0"
+        or wall_release["zenodo_archive_name"]
+        != "Kumrai-T/DA_4DCTA-v1.0.1.zip"
+        or wall_release["zenodo_archive_bytes"] != 1934055674
+        or wall_release["zenodo_archive_md5"]
+        != "fd9f856b485983cd430ab94d01a24596"
+        or wall_release["zenodo_archive_downloaded"] is not False
+        or wall_release["github_repository"] != "Kumrai-T/DA_4DCTA"
+        or wall_release["github_repository_head"]
+        != "8df7d45e9f65e3cbfd4ae3fc430c65a98905bdfc"
+        or wall_release["github_repository_release_count"] != 1
+        or wall_release["github_recognized_license"] is not None
+        or wall_release["visible_top_level_case_directories"] != 52
+        or wall_release[
+            "visible_case_directory_count_equated_to_independent_patient_count"
+        ]
+        is not False
+        or wall_release["suffix_identifier_semantics_machine_auditable"]
+        is not False
+        or wall_release["recursive_git_tree_truncated"] is not True
+        or any(
+            wall_release[key] is not False
+            for key in (
+                "source_4dcta_dicom_public",
+                "intraoperative_rgb_or_video_public",
+                "image_to_wall_registration_reference_public",
+                "surface_geometry_and_adjacency_contract_public",
+                "complete_patient_centre_fold_manifest_public",
+                "dense_independent_whole_wall_reference_public",
+                "future_growth_or_progression_target_joined",
+            )
+        )
+        or not isinstance(wall_candidates, list)
+        or len(wall_candidates) != 6
+        or [item.get("id") for item in wall_candidates] != wall_candidate_ids
+        or [item.get("axis_scores") for item in wall_candidates] != wall_axes
+        or [item.get("total") for item in wall_candidates] != wall_scores
+        or any(item.get("critical_axis_pass") is not False for item in wall_candidates)
+        or any(
+            wall_release[key] is not False
+            for key in (
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_score_or_job_relabelled",
+                "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or wall_release["next_allowed_action"]
+        != "fresh_problem_level_source_or_complete_4dcta_intraoperative_joined_asset_audit_only_no_payload_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "The 4D-CTA wall-phenotype release must remain a rejected source "
+            "lead: derived trajectories do not identify registration, selection, "
+            "dense wall truth or independent patient units and authorize no compute."
+        )
+    checks.append("4D-CTA wall-phenotype release and target rejection boundary")
 
     culprit_mimic = problem_selection[
         "culprit_lesion_and_mimic_differential_reappraisal"
@@ -7069,6 +7253,88 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "never terms, payload, score repair, P0, model or compute."
         )
     checks.append("eighteen-source fail-closed TopBrain and RSNA baseline watch boundary")
+    source_watch_v13 = problem_selection["public_source_watch_v13"]
+    _require_keys(
+        source_watch_v13,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "added_watch_ids",
+            "da4dcta_zenodo_revision",
+            "da4dcta_archive_bytes",
+            "da4dcta_archive_md5",
+            "da4dcta_repository_head",
+            "da4dcta_visible_case_directories",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v13",
+    )
+    if (
+        source_watch_v13["status"]
+        != "watch_only_all_twenty_frozen_snapshots_match"
+        or source_watch_v13["config"] != "configs/source_watch_v13.json"
+        or source_watch_v13["extends_historical_config"]
+        != "configs/source_watch_v12.json"
+        or source_watch_v13["config_sha256"]
+        != "352d3af9404cc5ec66726413ba171f909febe8d2c0cdc0337cc3239630948c32"
+        or source_watch_v13["watch_count"] != 20
+        or source_watch_v13["added_watch_ids"]
+        != [
+            "da4dcta_zenodo_material_release_v1",
+            "da4dcta_github_release_and_baseline_v1",
+        ]
+        or source_watch_v13["da4dcta_zenodo_revision"] != 4
+        or source_watch_v13["da4dcta_archive_bytes"] != 1934055674
+        or source_watch_v13["da4dcta_archive_md5"]
+        != "fd9f856b485983cd430ab94d01a24596"
+        or source_watch_v13["da4dcta_repository_head"]
+        != "8df7d45e9f65e3cbfd4ae3fc430c65a98905bdfc"
+        or source_watch_v13["da4dcta_visible_case_directories"] != 52
+        or source_watch_v13["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v13[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v13["decision"]
+        != "continue_fail_closed_twenty_source_watch_only_da4dcta_change_requests_fresh_source_reaudit_without_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v13 must preserve twenty exact public snapshots; a "
+            "DA_4DCTA change may request fresh source re-audit only, never payload, "
+            "score repair, P0, model or compute."
+        )
+    checks.append("twenty-source fail-closed DA_4DCTA watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
         "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",

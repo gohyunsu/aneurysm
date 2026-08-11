@@ -31,6 +31,7 @@ CONFIG_V9 = ROOT / "configs" / "source_watch_v9.json"
 CONFIG_V10 = ROOT / "configs" / "source_watch_v10.json"
 CONFIG_V11 = ROOT / "configs" / "source_watch_v11.json"
 CONFIG_V12 = ROOT / "configs" / "source_watch_v12.json"
+CONFIG_V13 = ROOT / "configs" / "source_watch_v13.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -551,7 +552,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v12.json", workflow)
+        self.assertIn("configs/source_watch_v13.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
@@ -1122,6 +1123,105 @@ class SourceWatchContractTests(unittest.TestCase):
             candidate = source / "source_watch.json"
             candidate.write_text(json.dumps(payload), encoding="utf-8")
             for config_path in (
+                CONFIG_V11,
+                CONFIG_V10,
+                CONFIG_V9,
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v13_adds_da4dcta_material_watches_without_authority(self) -> None:
+        config = load_config(CONFIG_V13)
+        self.assertEqual(config["extends"], "source_watch_v12.json")
+        self.assertEqual(len(config["watches"]), 20)
+        zenodo, github = config["watches"][-2:]
+        self.assertEqual(zenodo["watch_id"], "da4dcta_zenodo_material_release_v1")
+        self.assertEqual(zenodo["frozen_snapshot"]["zenodo_revision"], 4)
+        self.assertEqual(
+            zenodo["frozen_snapshot"]["zenodo_files"][0]["size"], 1934055674
+        )
+        self.assertEqual(
+            zenodo["frozen_snapshot"]["zenodo_license_id"], "cc-by-4.0"
+        )
+        self.assertEqual(
+            github["watch_id"], "da4dcta_github_release_and_baseline_v1"
+        )
+        self.assertEqual(
+            github["frozen_snapshot"]["main_head_sha"],
+            "8df7d45e9f65e3cbfd4ae3fc430c65a98905bdfc",
+        )
+        self.assertEqual(github["frozen_snapshot"]["release_count"], 1)
+        self.assertIsNone(github["frozen_snapshot"]["license_spdx_id"])
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v13_change_requests_fresh_source_reaudit_only(self) -> None:
+        config = load_config(CONFIG_V13)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observations["da4dcta_zenodo_material_release_v1"]["zenodo_revision"] = 5
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(result["direct_prior_baseline_feasibility_reaudit_triggered"])
+        self.assertEqual(result["manual_review_requests"], ["fresh_source_reaudit_only"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v13_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V13.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["zenodo_revision"] = 5
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V12,
+                CONFIG_V11,
+                CONFIG_V10,
+                CONFIG_V9,
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "da4dcta"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V13.read_text(encoding="utf-8"))
+        payload["authorization"]["gpu_training"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V12,
                 CONFIG_V11,
                 CONFIG_V10,
                 CONFIG_V9,

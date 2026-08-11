@@ -42,6 +42,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v10",
         "aurora.source_watch.v11",
         "aurora.source_watch.v12",
+        "aurora.source_watch.v13",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -132,7 +133,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v11_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v11(payload)
-    else:
+    elif schema == "aurora.source_watch.v12":
         if payload.get("extends") != "source_watch_v11.json":
             raise SourceWatchContractError("v12_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -143,6 +144,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v12_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v12(payload)
+    else:
+        if payload.get("extends") != "source_watch_v12.json":
+            raise SourceWatchContractError("v13_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v12":
+            raise SourceWatchContractError("v13_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v13_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v13(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -195,6 +207,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v10",
         "aurora.source_watch.v11",
         "aurora.source_watch.v12",
+        "aurora.source_watch.v13",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1346,6 +1359,113 @@ def _validate_v12(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v12_change_boundary_changed")
 
 
+def _validate_v13(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 20:
+        raise SourceWatchContractError("v13_watch_set_changed")
+    _validate_v12(
+        {
+            "watches": watches[:18],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    zenodo, github = watches[18:]
+    if (
+        zenodo.get("watch_id") != "da4dcta_zenodo_material_release_v1"
+        or zenodo.get("kind") != "zenodo_record"
+        or zenodo.get("review_request") != "fresh_source_reaudit_only"
+        or zenodo.get("source")
+        != {
+            "zenodo_record_id": 13788524,
+            "zenodo_api_url": "https://zenodo.org/api/records/13788524",
+            "record_url": "https://zenodo.org/records/13788524",
+        }
+        or zenodo.get("frozen_snapshot")
+        != {
+            "zenodo_record_id": 13788524,
+            "zenodo_modified": "2024-09-23T04:40:53.613542+00:00",
+            "zenodo_revision": 4,
+            "zenodo_status": "published",
+            "zenodo_access_right": "open",
+            "zenodo_license_id": "cc-by-4.0",
+            "zenodo_files": [
+                {
+                    "key": "Kumrai-T/DA_4DCTA-v1.0.1.zip",
+                    "size": 1934055674,
+                    "checksum": "md5:fd9f856b485983cd430ab94d01a24596",
+                }
+            ],
+            "payload_or_manifest_files": [
+                "Kumrai-T/DA_4DCTA-v1.0.1.zip"
+            ],
+            "availability": "zenodo_record_metadata_state",
+        }
+    ):
+        raise SourceWatchContractError("da4dcta_zenodo_contract_changed")
+
+    expected_entries = [
+        {"name": "attention.py", "type": "file", "size": 3910},
+        {"name": "constant_value.py", "type": "file", "size": 95},
+        {"name": "feature.py", "type": "file", "size": 8800},
+        {"name": "gui.py", "type": "file", "size": 25563},
+        {"name": "io_utils.py", "type": "file", "size": 16392},
+        {"name": "jupyter_notebook", "type": "dir", "size": 0},
+        {"name": "LSTM_model.py", "type": "file", "size": 13061},
+        {"name": "navi_feature.py", "type": "file", "size": 6195},
+        {"name": "pipeline.py", "type": "file", "size": 42564},
+        {"name": "project.py", "type": "file", "size": 4433},
+        {"name": "raw_data", "type": "dir", "size": 0},
+        {"name": "viz_utils.py", "type": "file", "size": 42496},
+    ]
+    expected_material = [entry["name"] for entry in expected_entries]
+    if (
+        github.get("watch_id")
+        != "da4dcta_github_release_and_baseline_v1"
+        or github.get("kind") != "github"
+        or github.get("review_request") != "fresh_source_reaudit_only"
+        or github.get("source")
+        != {
+            "repository": "Kumrai-T/DA_4DCTA",
+            "repository_url": "https://github.com/Kumrai-T/DA_4DCTA",
+            "default_branch": "main",
+            "paper_url": "https://doi.org/10.7717/peerj.19393",
+        }
+        or github.get("frozen_snapshot")
+        != {
+            "main_head_sha": "8df7d45e9f65e3cbfd4ae3fc430c65a98905bdfc",
+            "root_entries": expected_entries,
+            "release_count": 1,
+            "license_spdx_id": None,
+            "repository_size_kib": 3598858,
+            "payload_or_code_entries": expected_material,
+            "availability": (
+                "public_derived_trajectory_csv_and_code_without_source_dicom_"
+                "rgb_video_registration_surface_or_fold_contract"
+            ),
+        }
+    ):
+        raise SourceWatchContractError("da4dcta_github_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get(
+            "derived_trajectory_csv_is_not_source_4dcta_or_intraoperative_reference"
+        )
+        is not True
+        or detection.get(
+            "visible_case_directory_is_not_verified_independent_patient"
+        )
+        is not True
+        or detection.get(
+            "source_wall_phenotype_result_is_not_aurora_reproduced_evidence"
+        )
+        is not True
+        or detection.get("repository_license_absence_is_not_method_novelty")
+        is not True
+    ):
+        raise SourceWatchContractError("v13_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -2422,6 +2542,7 @@ def evaluate_config(
         "aurora.source_watch.v10",
         "aurora.source_watch.v11",
         "aurora.source_watch.v12",
+        "aurora.source_watch.v13",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results
