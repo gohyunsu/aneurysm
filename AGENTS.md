@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.5 scientific deployment·private synchronization:**
+> Exact scientific public source
+> `e69718448c85eedf4a4edad5c66fcd33ca791ff1` passed Quality
+> `31534693949` and Pages `31534693040`. Live Overview, Learn and machine
+> protocol expose schema 10.5, best 30.5/40 rejected, all six rejected and
+> lead/P0/method/model/server/GPU/claim 0. Private paper head
+> `529a38f30717d427b6b02f8f25e2962cd04b6ff0` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 438 tests: 372 pass/66 optional skip, protocol 82
+> invariant groups and site/JavaScript checks pass. This synchronization opens
+> no scientific or submission authority.
+
 > **2026-08-12 culprit-lesion/mimic reappraisal · schema 10.5:** The
 > eight-hospital CTA culprit study contains 207 patients/460 aneurysms for
 > development/internal validation and 65/147 from four other hospitals for

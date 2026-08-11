@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.5 scientific source deployed and privately pinned
+
+- Exact scientific source `e69718448c85eedf4a4edad5c66fcd33ca791ff1`
+  passed Quality `31534693949` and Pages `31534693040`; live Overview, Learn
+  and machine protocol expose the 30.5/40 asset-floor rejection and
+  no-model/no-compute state.
+- Private ledger `529a38f30717d427b6b02f8f25e2962cd04b6ff0` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- Full regression is 438 tests: 372 pass/66 optional skip and protocol 82
+  invariant groups; site and JavaScript checks pass. This provenance opens no
+  P0/P1, method, model, compute or claim.
+
 ## 2026-08-12 · Culprit-lesion and mimic-differential reappraisal · schema 10.5
 
 - Separated acute culprit, symptomatic-lesion, future-rupture and

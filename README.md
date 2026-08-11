@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.5 scientific deployment/private synchronization:**
+> Exact scientific source `e69718448c85eedf4a4edad5c66fcd33ca791ff1`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31534693949)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31534693040).
+> Live Overview, Learn and machine protocol expose best 30.5/40, all six
+> rejected, 272 patients/607 aneurysms in the direct CTA prior and no-model/
+> no-compute. Private ledger `529a38f30717d427b6b02f8f25e2962cd04b6ff0`
+> is remote exact, PRIVATE and anonymous API returns 404. Manuscript and
+> references remain byte-for-byte unchanged. This provenance opens no
+> scientific or submission authority.
+
 > **Current research state (schema 10.5, 2026-08-12):** Culprit lesion,
 > symptomatic lesion, future rupture and aneurysm--infundibulum differential
 > are now explicitly separated. An eight-hospital CTA study already identifies

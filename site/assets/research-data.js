@@ -1068,6 +1068,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.5 scientific source is live and privately pinned",
+      copy: "Exact scientific source e69718448c85eedf4a4edad5c66fcd33ca791ff1 passed Quality 31534693949 and Pages 31534693040. Live Overview, Learn and the machine protocol expose best 30.5/40, all six rejected on total or critical floors and active lead/P0/method/model/server/GPU/claim zero. Private ledger 529a38f30717d427b6b02f8f25e2962cd04b6ff0 is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. Full regression is 438 tests: 372 pass/66 optional skip and protocol 82 invariant groups; site and JavaScript checks pass. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.5 separates culprit, symptomatic, future-risk and mimic targets",
       copy: "The fresh screen treats all lesions from one patient as one statistical set. The eight-hospital CTA culprit study and three-institution VWI symptomatic-lesion study are direct priors; the 285-patient smaller-counterpart cohort is cross-sectional/request-only, and the 665-outpouching infundibulum cohort does not release a joined image/DSA/reader/action benchmark. The public ICAN table is simulated rather than patient evidence. Haemorrhage-conditioned patient-set evidence alignment is the strongest residual formulation, but it scores 30.5/40 and fails asset readiness at 0.5/5 because no public versioned NCCT--CTA--all-lesion--culprit-reference--patient-split join was identified. All six candidates are rejected without data request, payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim.",
