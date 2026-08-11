@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-11 · Fail-closed source watch v5 covers material re-entry states
+
+- Preserved v4 and added exact AneuG-Flow, Aneurisk WSS, LargeIA and TopAneu
+  metadata as four separate watches.
+- A live read-only refresh matched all nine snapshots. AneuG is unchanged at
+  `9dd4180…`; Aneurisk remains revision 4 with the exact 1,430,889,142-byte
+  archive; LargeIA remains restricted with zero public files; TopAneu exposes
+  Data/Evaluation navigation but still requires verified-account participation.
+- Changes can request only manual source re-audit. The monitor cannot accept
+  terms, repair/rerun closed P0s, download payload, change scores, register
+  P0/P1, select architecture or authorize GPU/outer test.
+
 ## 2026-08-11 · Schema 8.2 public deployment and private ledger verified
 
 - Exact scientific content `205d3d534a80ef5e3821d321a403158148e68ac5`

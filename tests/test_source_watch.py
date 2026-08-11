@@ -23,6 +23,7 @@ CONFIG = ROOT / "configs" / "source_watch_v1.json"
 CONFIG_V2 = ROOT / "configs" / "source_watch_v2.json"
 CONFIG_V3 = ROOT / "configs" / "source_watch_v3.json"
 CONFIG_V4 = ROOT / "configs" / "source_watch_v4.json"
+CONFIG_V5 = ROOT / "configs" / "source_watch_v5.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -357,12 +358,109 @@ class SourceWatchContractTests(unittest.TestCase):
             with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
                 load_config(candidate)
 
-    def test_v4_workflow_is_read_only_scheduled_and_fail_closed(self) -> None:
+    def test_v5_frozen_snapshots_add_material_sources_without_authority(self) -> None:
+        config = load_config(CONFIG_V5)
+        self.assertEqual(config["extends"], "source_watch_v4.json")
+        self.assertEqual(len(config["watches"]), 9)
+        self.assertEqual(
+            [watch["watch_id"] for watch in config["watches"][-4:]],
+            [
+                "aneug_huggingface_material_revision_v1",
+                "aneurisk_zenodo_material_revision_v1",
+                "largeia_zenodo_access_revision_v1",
+                "topaneu_material_release_v1",
+            ],
+        )
+        aneug, aneurisk, largeia, topaneu = config["watches"][-4:]
+        self.assertEqual(
+            aneug["frozen_snapshot"]["sha"],
+            "9dd418083899deddd93a67f9a6fca7a14304fa36",
+        )
+        self.assertEqual(aneurisk["frozen_snapshot"]["zenodo_revision"], 4)
+        self.assertEqual(
+            aneurisk["frozen_snapshot"]["zenodo_files"][0]["size"],
+            1430889142,
+        )
+        self.assertEqual(
+            largeia["frozen_snapshot"]["zenodo_access_right"], "restricted"
+        )
+        self.assertEqual(largeia["frozen_snapshot"]["zenodo_files"], [])
+        self.assertFalse(
+            topaneu["frozen_snapshot"]["challenge_under_construction"]
+        )
+        self.assertEqual(
+            topaneu["frozen_snapshot"]["challenge_material_navigation_entries"],
+            [
+                "data|https://topaneu-26.grand-challenge.org/data/",
+                "evaluation|https://topaneu-26.grand-challenge.org/evaluation/",
+            ],
+        )
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertEqual(result["next_action"], "continue_watch_only")
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v5_material_changes_request_only_fresh_source_reaudit(self) -> None:
+        config = load_config(CONFIG_V5)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observations["aneug_huggingface_material_revision_v1"]["sha"] = "f" * 40
+        observations["largeia_zenodo_access_revision_v1"][
+            "zenodo_access_right"
+        ] = "open"
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertEqual(
+            result["manual_review_requests"], ["fresh_source_reaudit_only"]
+        )
+        self.assertEqual(result["next_action"], "manual_review_signal_only")
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v5_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V5.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["sha"] = "e" * 40
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            (source / "source_watch_v4.json").write_text(
+                CONFIG_V4.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(SourceWatchContractError, "aneug"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V5.read_text(encoding="utf-8"))
+        payload["authorization"]["automatic_terms_acceptance"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            (source / "source_watch_v4.json").write_text(
+                CONFIG_V4.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v5_workflow_is_read_only_scheduled_and_fail_closed(self) -> None:
         workflow = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v4.json", workflow)
+        self.assertIn("configs/source_watch_v5.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)

@@ -1,5 +1,11 @@
 # ISBI 2027 제출 계획
 
+> **Source-watch v5 submission boundary · 2026-08-11:** Nine exact public
+> metadata states match their frozen snapshots. This creates no paper identity,
+> contribution, method, result or experiment. A future watch change can request
+> only a fresh source audit; it cannot repair closed P0s or convert access and
+> navigation changes into submission evidence.
+
 > **Schema 8.2 submission boundary · 2026-08-11:** Functional 4D-flow
 > segmentation is rejected as the paper identity at best 25.5/40. A direct
 > study already measures segmentation-induced WSS bias, and the remaining

@@ -1,5 +1,11 @@
 # AURORA 연구 방향
 
+> **Source-watch v5 direction · 2026-08-11:** AneuG, Aneurisk, LargeIA and
+> TopAneu were added as material-change signals, not candidate methods. All nine
+> live snapshots match. Continue problem/asset discovery; do not repair the two
+> closed WSS P0s, accept personal terms, choose architecture or run compute from
+> a metadata change alone.
+
 > **Schema 8.2 direction · 2026-08-11:** Functional 4D-flow segmentation is
 > not the replacement identity. A 2026 direct prior already evaluates
 > segmentation-induced WSS bias; its 355 TOF scans are pretraining data, while

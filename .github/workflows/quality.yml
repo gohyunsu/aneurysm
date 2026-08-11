@@ -23,7 +23,7 @@ jobs:
       - name: Validate research protocol
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
       - name: Validate fail-closed public source watch
-        run: PYTHONPATH=src python scripts/audit_source_watch.py --config configs/source_watch_v3.json --validate-only
+        run: PYTHONPATH=src python scripts/audit_source_watch.py --config configs/source_watch_v5.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0
         run: PYTHONPATH=src python -m aurora.aneux_preprocessing_orbit_p0 --config configs/aneux_preprocessing_orbit_p0.json --validate-only
       - name: Validate frozen Aneurisk conformal-degree P0 contract

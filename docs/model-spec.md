@@ -1,5 +1,10 @@
 # AURORA v2 모델 명세
 
+> **Source-watch v5 no-model boundary · 2026-08-11:** AneuG, Aneurisk,
+> LargeIA and TopAneu metadata were added to the fail-closed watch, not to a
+> model. All nine snapshots match. No GNN, Hodge operator, U-Net, detector,
+> certificate or GPU run is selected.
+
 > **Schema 8.2 no-model boundary · 2026-08-11:** nnU-Net, U-Net, DenseNet
 > U-Net, VAST-style physics processing, TOF transfer, downstream-metric
 > conformal intervals and resolution adaptation are direct controls. All six

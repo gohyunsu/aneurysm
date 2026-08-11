@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 fail-closed source watch v5:** Historical v4를 그대로 상속하고
+> AneuG-Flow HF, Aneurisk WSS Zenodo, LargeIA Zenodo와 TopAneu challenge를
+> 추가한 아홉-source metadata contract다. Live read-only refresh는 nine snapshot
+> 모두 exact match, manual review 0이었다. AneuG는 `9dd4180…`/2.63 TB,
+> Aneurisk는 revision 4와 1,430,889,142-byte/MD5 `8c66e7bb…`, LargeIA는
+> revision 10/restricted/public file 0, TopAneu는 revision 4/Data+Evaluation
+> navigation/verified-account participation 상태다. 이는 새 scientific evidence나
+> E0가 아니며 terms acceptance, score repair, jobs `115645`/`115684` repair·
+> rerun, payload/P0/P1/method/architecture/GPU/outer test를 자동으로 열지 않는다.
+> Source of truth는 `configs/source_watch_v5.json`과 `docs/source-watch.md`다.
+> Scientific server query는 0이고 AURORA는 future gate-authorized `introai9`
+> PBS만 사용한다. `junjinyong`에는 절대 접근하지 않는다.
+
 > **2026-08-11 schema 8.2 deployment verification:** Exact content
 > `205d3d534a80ef5e3821d321a403158148e68ac5` passed Quality
 > `31453522210` and Pages `31453521880`. Live Learn directly exposes the

@@ -1,4 +1,14 @@
-# Public source watch · IAVS + TopBrain 2.0 + TRELLIS + Aneumo
+# Public source watch · nine material source states
+
+> **2026-08-11 v5 decision:** the watch inherits the immutable v4 five-source
+> contract and adds AneuG-Flow, Aneurisk WSS, restricted LargeIA and live
+> TopAneu. A read-only refresh matched all **nine** frozen snapshots. AneuG
+> remains exact `9dd4180…`; Aneurisk remains Zenodo revision 4 with the exact
+> 1,430,889,142-byte archive; LargeIA remains revision 10, restricted and has
+> zero public files; TopAneu remains revision 4 with live Data and Evaluation
+> navigation behind verified-account participation. No source change, score
+> repair, terms acceptance, historical execution repair, P0/model/GPU or
+> server action was opened.
 
 > **2026-08-11 v4 decision:** the same fail-closed metadata contract now also
 > watches the official Aneumo GitHub repository and Hugging Face dataset for a
@@ -36,7 +46,7 @@
 > inverse-flow audit was triggered by a new published direct prior, not by a
 > watched asset change. No server was queried.
 
-상태: **watch-only · 다섯 official public states 모두 frozen snapshot과 동일 ·
+상태: **watch-only · 아홉 official public states 모두 frozen snapshot과 동일 ·
 manual review 0 · no medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가
@@ -92,13 +102,31 @@ mapping을 식별할 수 있는 manifest가 없다. 따라서 revision이나 fil
 inventory 변화는 fresh source re-audit만 요청하며, historical score/P0를
 되살리거나 payload download를 자동화하지 않는다.
 
+v5에서 추가한 네 source는 서로 다른 막힘을 감시한다.
+
+- **AneuG-Flow**는 surface-vector history의 exact 2.63-TB HF revision이다.
+  새 revision은 fresh source audit을 요청할 수 있지만 job `115645`의 repair나
+  재실행 근거가 아니다.
+- **Aneurisk WSS**는 conformal-degree history의 exact Zenodo revision이다.
+  Archive/README/version 변화만 감지하며 job `115684`를 되살리지 않는다.
+- **LargeIA**는 1,338 internal + 138 external CTA를 보고하지만 현재 restricted
+  record이고 public file manifest는 비어 있다. Access 또는 manifest 변화는
+  personal terms를 자동 수락하지 않고 source audit만 요청한다.
+- **TopAneu**는 Data/Evaluation route가 실제로 열린 challenge다. 이는 design
+  PDF의 CC BY 4.0을 의료 payload에 확장하거나 verified-account 조건을 대신
+  수락한다는 뜻이 아니다.
+
 ## 기계적 감시 계약
 
-[`configs/source_watch_v4.json`](../configs/source_watch_v4.json)은 IAVS의 현재
+[`configs/source_watch_v5.json`](../configs/source_watch_v5.json)은 historical
+[`source_watch_v4.json`](../configs/source_watch_v4.json)을 명시적으로 상속하고,
+IAVS의 현재
 commit, root entry, release count와 license, TopBrain 2.0의 Zenodo revision,
 design-object license, exact file inventory와 challenge navigation, TRELLIS의
 stated repository HTTP 404 상태, Aneumo GitHub/Hugging Face의 exact revision,
-license/access state와 filename-manifest hash를 고정한다. 기존 v1--v3는
+license/access state와 filename-manifest hash에 더해 AneuG HF revision/storage,
+Aneurisk와 LargeIA Zenodo revision/access/file manifest, TopAneu live navigation을
+고정한다. 기존 v1--v4는
 historical contract로 보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
 공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
@@ -114,8 +142,12 @@ historical contract로 보존한다.
 8. Aneumo official GitHub release/license/root inventory가 바뀜
 9. Aneumo Hugging Face revision/license/access state나 370-entry manifest가
    바뀌거나 real/undeformed/AneuX/mapping marker가 나타남
+10. AneuG Hugging Face revision/license/access/storage가 바뀜
+11. Aneurisk Zenodo revision/access/license/archive manifest가 바뀜
+12. LargeIA restricted/open state, revision, license 또는 public manifest가 바뀜
+13. TopAneu Zenodo revision 또는 live Data/Evaluation/registration state가 바뀜
 
-1--6과 8--9의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
+1--6과 8--13의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
 **direct-prior baseline-feasibility review 요청**만 만든다. 자동 download, 약관
 수락, 점수 재가중, frozen snapshot 갱신, P0 등록, model/architecture 선택,
 GPU와 outer test는 모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
@@ -125,11 +157,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v4.json \
+  --config configs/source_watch_v5.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v4.json \
+  --config configs/source_watch_v5.json \
   --fetch --fail-on-change
 ```
 

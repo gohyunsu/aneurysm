@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 fail-closed source watch v5:** The immutable v4 watch is extended
+> with exact AneuG-Flow, Aneurisk WSS, LargeIA and TopAneu metadata. A live
+> read-only refresh matched all nine frozen snapshots: AneuG `9dd4180…`,
+> Aneurisk revision 4/exact 1.43-GB archive, LargeIA revision 10/restricted/no
+> public files, and TopAneu revision 4 with Data/Evaluation navigation. This is
+> not new scientific evidence and cannot accept terms, repair either closed WSS
+> P0, download data, register P0/P1, select a model or authorize GPU/outer test.
+> [Watch contract](docs/source-watch.md)
+
 > **2026-08-11 schema 8.2 deployment verification:** Exact scientific content
 > `205d3d534a80ef5e3821d321a403158148e68ac5` passed Quality
 > `31453522210` and Pages `31453521880`. Live Learn exposes the 355-versus-11
@@ -17,8 +26,8 @@
 > processing, while COMPASS already certifies downstream segmentation metrics.
 > Six fresh formulations score 25.5/24.5/23.5/23.5/23.5/23.0 and are rejected.
 > The surface-vector question remains inactive, not validated. Active lead,
-> method, architecture, P0/P1 and GPU remain zero. A five-source v4 metadata
-> watch adds Aneumo but matched every frozen snapshot and authorizes nothing.
+> method, architecture, P0/P1 and GPU remain zero. The nine-source v5 metadata
+> watch matched every frozen snapshot and authorizes nothing.
 > [Detailed audit](docs/functional-4dflow-segmentation-source-delta-2026-08-11.md) ·
 > [Source watch](docs/source-watch.md)
 

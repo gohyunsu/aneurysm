@@ -834,6 +834,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "operations",
+      title: "Source watch v5 monitors nine material re-entry states",
+      copy: "The immutable v4 contract is extended with exact AneuG-Flow, Aneurisk WSS, LargeIA and TopAneu metadata. A live read-only refresh matched all nine snapshots: AneuG 9dd4180…/2.63 TB, Aneurisk revision 4/exact 1.43-GB archive, LargeIA revision 10/restricted/no public files, and TopAneu revision 4 with Data/Evaluation navigation behind verified-account participation. A change requests manual source re-audit only; the watch cannot accept terms, repair closed P0s, download payload, alter scores, register P0/P1, select a model or authorize GPU/outer test.",
+      files: ["configs/source_watch_v5.json", "configs/source_watch_v4.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", ".github/workflows/source-watch.yml", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/source-watch.md", "docs/experiment-protocol.md", "README.md", "AGENTS.md", "site/index.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "deployment",
       title: "Schema 8.2 public deployment and private ledger are verified",
       copy: "Exact scientific content 205d3d5… passed Quality 31453522210 and Pages 31453521880. Live Learn exposes the 355-versus-11 independent-unit correction, WSS/ICC/bias explanation and 25.5/40 rejection. Private ledger head 138f764… is remote exact and anonymous-API invisible; manuscript and references remain byte-for-byte unchanged. This adds no experiment or authorization.",

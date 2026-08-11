@@ -34,6 +34,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v2",
         "aurora.source_watch.v3",
         "aurora.source_watch.v4",
+        "aurora.source_watch.v5",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -45,8 +46,19 @@ def load_config(path: str | Path) -> dict[str, Any]:
         _validate_v2(payload)
     elif schema == "aurora.source_watch.v3":
         _validate_v3(payload)
-    else:
+    elif schema == "aurora.source_watch.v4":
         _validate_v4(payload)
+    else:
+        if payload.get("extends") != "source_watch_v4.json":
+            raise SourceWatchContractError("v5_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v4":
+            raise SourceWatchContractError("v5_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v5_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v5(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -91,6 +103,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
     if payload.get("schema_version") in {
         "aurora.source_watch.v3",
         "aurora.source_watch.v4",
+        "aurora.source_watch.v5",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -344,6 +357,158 @@ def _validate_v4(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v4_change_boundary_changed")
 
 
+def _validate_v5(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+        "aneug_huggingface_material_revision_v1",
+        "aneurisk_zenodo_material_revision_v1",
+        "largeia_zenodo_access_revision_v1",
+        "topaneu_material_release_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v5_watch_set_changed")
+
+    _validate_v4(
+        {
+            "watches": watches[:5],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    aneug, aneurisk, largeia, topaneu = watches[5:]
+
+    if aneug.get("kind") != "huggingface_revision" or aneug.get(
+        "review_request"
+    ) != "fresh_source_reaudit_only":
+        raise SourceWatchContractError("aneug_huggingface_watch_changed")
+    if aneug.get("source") != {
+        "dataset_id": "whding123/AneuG-Flow",
+        "dataset_url": "https://huggingface.co/datasets/whding123/AneuG-Flow",
+        "dataset_api_url": "https://huggingface.co/api/datasets/whding123/AneuG-Flow",
+    }:
+        raise SourceWatchContractError("aneug_huggingface_source_changed")
+    if aneug.get("frozen_snapshot") != {
+        "sha": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+        "last_modified": "2026-01-13T17:09:10.000Z",
+        "private": False,
+        "gated": False,
+        "disabled": False,
+        "license_tags": ["license:cc-by-sa-4.0"],
+        "used_storage_bytes": 2632691749582,
+        "availability": "public_synthetic_transient_wss_payload_exact_revision",
+    }:
+        raise SourceWatchContractError("aneug_huggingface_snapshot_changed")
+
+    expected_zenodo = {
+        "aneurisk_zenodo_material_revision_v1": {
+            "source": {
+                "zenodo_record_id": 19455127,
+                "zenodo_api_url": "https://zenodo.org/api/records/19455127",
+                "record_url": "https://zenodo.org/records/19455127",
+            },
+            "snapshot": {
+                "zenodo_record_id": 19455127,
+                "zenodo_modified": "2026-04-07T14:32:30.723519+00:00",
+                "zenodo_revision": 4,
+                "zenodo_status": "published",
+                "zenodo_access_right": "open",
+                "zenodo_license_id": "cc-by-4.0",
+                "zenodo_files": [
+                    {
+                        "key": "AneuriskCFDResults_Zenodo.tar.gz",
+                        "size": 1430889142,
+                        "checksum": "md5:8c66e7bb359d04bd1a5d6db6da3f3926",
+                    },
+                    {
+                        "key": "README.md",
+                        "size": 1436,
+                        "checksum": "md5:f552f4d1440848f0cdb8700371579115",
+                    },
+                ],
+                "payload_or_manifest_files": ["AneuriskCFDResults_Zenodo.tar.gz"],
+                "availability": "public_cycle_averaged_wss_vtp_archive_exact_revision",
+            },
+        },
+        "largeia_zenodo_access_revision_v1": {
+            "source": {
+                "zenodo_record_id": 6801398,
+                "zenodo_api_url": "https://zenodo.org/api/records/6801398",
+                "record_url": "https://zenodo.org/records/6801398",
+            },
+            "snapshot": {
+                "zenodo_record_id": 6801398,
+                "zenodo_modified": "2025-07-10T02:07:42.142484+00:00",
+                "zenodo_revision": 10,
+                "zenodo_status": "published",
+                "zenodo_access_right": "restricted",
+                "zenodo_license_id": None,
+                "zenodo_files": [],
+                "payload_or_manifest_files": [],
+                "availability": "restricted_metadata_only_no_public_files",
+            },
+        },
+    }
+    for watch in (aneurisk, largeia):
+        expected = expected_zenodo[watch["watch_id"]]
+        if watch.get("kind") != "zenodo_record" or watch.get(
+            "review_request"
+        ) != "fresh_source_reaudit_only":
+            raise SourceWatchContractError("zenodo_record_watch_changed")
+        if watch.get("source") != expected["source"]:
+            raise SourceWatchContractError("zenodo_record_source_changed")
+        if watch.get("frozen_snapshot") != expected["snapshot"]:
+            raise SourceWatchContractError("zenodo_record_snapshot_changed")
+
+    if topaneu.get("kind") != "zenodo_challenge" or topaneu.get(
+        "review_request"
+    ) != "fresh_source_reaudit_only":
+        raise SourceWatchContractError("topaneu_watch_changed")
+    if topaneu.get("source") != {
+        "zenodo_record_id": 19848807,
+        "zenodo_api_url": "https://zenodo.org/api/records/19848807",
+        "record_url": "https://zenodo.org/records/19848807",
+        "challenge_page_url": "https://topaneu-26.grand-challenge.org/",
+    }:
+        raise SourceWatchContractError("topaneu_source_changed")
+    if topaneu.get("frozen_snapshot") != {
+        "zenodo_record_id": 19848807,
+        "zenodo_modified": "2026-04-28T09:48:58.486163+00:00",
+        "zenodo_revision": 4,
+        "zenodo_status": "published",
+        "zenodo_access_right": "open",
+        "zenodo_license_id": "cc-by-4.0",
+        "zenodo_files": [
+            {
+                "key": "335-TopAneu_2026_Multimodal_Vessel-Specific_Intracranial_Aneurysm_Classification_and_2026-04-22T16-37-15.pdf",
+                "size": 150978,
+                "checksum": "md5:773b04597d4ff2c798837fb5d40b4bf9",
+            }
+        ],
+        "payload_or_manifest_files": [],
+        "challenge_under_construction": False,
+        "challenge_join_registration_available": True,
+        "challenge_material_navigation_entries": [
+            "data|https://topaneu-26.grand-challenge.org/data/",
+            "evaluation|https://topaneu-26.grand-challenge.org/evaluation/",
+        ],
+    }:
+        raise SourceWatchContractError("topaneu_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("historical_execution_repair_trigger_allowed") is not False
+        or detection.get("terms_acceptance_automatic_allowed") is not False
+        or detection.get("watch_expansion_is_not_new_scientific_evidence") is not True
+    ):
+        raise SourceWatchContractError("v5_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -496,6 +661,25 @@ def fetch_huggingface_dataset_snapshot(dataset_api_url: str) -> dict[str, Any]:
     }
 
 
+def fetch_huggingface_revision_snapshot(dataset_api_url: str) -> dict[str, Any]:
+    """Fetch revision/access metadata without treating the file list as payload."""
+    metadata = _json_get(dataset_api_url)
+    return {
+        "sha": str(metadata.get("sha", "")),
+        "last_modified": str(metadata.get("lastModified", "")),
+        "private": bool(metadata.get("private", False)),
+        "gated": metadata.get("gated", False),
+        "disabled": bool(metadata.get("disabled", False)),
+        "license_tags": sorted(
+            str(tag)
+            for tag in metadata.get("tags", [])
+            if str(tag).startswith("license:")
+        ),
+        "used_storage_bytes": int(metadata.get("usedStorage", 0)),
+        "availability": "public_synthetic_transient_wss_payload_exact_revision",
+    }
+
+
 class _ChallengeAnchorParser(HTMLParser):
     material_labels = {
         "data",
@@ -598,6 +782,43 @@ def fetch_zenodo_challenge_snapshot(
             "/participants/registration/create/" in lowered
         ),
         "challenge_material_navigation_entries": sorted(set(parser.material_entries)),
+    }
+
+
+def fetch_zenodo_record_snapshot(zenodo_api_url: str) -> dict[str, Any]:
+    """Fetch a Zenodo record's immutable metadata and file manifest only."""
+    record = _json_get(zenodo_api_url)
+    files = sorted(
+        [
+            {
+                "key": str(item.get("key")),
+                "size": int(item.get("size", 0)),
+                "checksum": str(item.get("checksum")),
+            }
+            for item in record.get("files", [])
+        ],
+        key=lambda item: item["key"].lower(),
+    )
+    metadata = record.get("metadata", {})
+    license_info = metadata.get("license") or {}
+    access_right = str(metadata.get("access_right", ""))
+    record_id = int(record.get("id", 0))
+    if record_id == 19455127:
+        availability = "public_cycle_averaged_wss_vtp_archive_exact_revision"
+    elif record_id == 6801398 and access_right == "restricted" and not files:
+        availability = "restricted_metadata_only_no_public_files"
+    else:
+        availability = "zenodo_record_metadata_state"
+    return {
+        "zenodo_record_id": record_id,
+        "zenodo_modified": str(record.get("modified", "")),
+        "zenodo_revision": int(record.get("revision", 0)),
+        "zenodo_status": str(record.get("status", "")),
+        "zenodo_access_right": access_right,
+        "zenodo_license_id": license_info.get("id"),
+        "zenodo_files": files,
+        "payload_or_manifest_files": _zenodo_payload_or_manifest_files(files),
+        "availability": availability,
     }
 
 
@@ -735,6 +956,78 @@ def evaluate_watch(
             "gpu_or_outer_test_authorized": False,
             "observed": dict(observed),
         }
+    if watch.get("kind") == "huggingface_revision":
+        frozen = watch["frozen_snapshot"]
+        signals: list[str] = []
+        for key, signal in (
+            ("sha", "huggingface_revision_changed"),
+            ("last_modified", "huggingface_last_modified_changed"),
+            ("license_tags", "huggingface_license_changed"),
+            ("used_storage_bytes", "huggingface_storage_size_changed"),
+        ):
+            if observed.get(key) != frozen.get(key):
+                signals.append(signal)
+        for key in ("private", "gated", "disabled"):
+            if observed.get(key) != frozen.get(key):
+                signals.append(f"huggingface_{key}_state_changed")
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
+    if watch.get("kind") == "zenodo_record":
+        frozen = watch["frozen_snapshot"]
+        signals: list[str] = []
+        for key, signal in (
+            ("zenodo_modified", "zenodo_record_modified"),
+            ("zenodo_revision", "zenodo_revision_changed"),
+            ("zenodo_status", "zenodo_status_changed"),
+            ("zenodo_access_right", "zenodo_access_right_changed"),
+            ("zenodo_license_id", "zenodo_license_changed"),
+            ("zenodo_files", "zenodo_file_inventory_changed"),
+            ("payload_or_manifest_files", "zenodo_payload_manifest_changed"),
+        ):
+            if observed.get(key) != frozen.get(key):
+                signals.append(signal)
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") != "zenodo_challenge":
         raise SourceWatchContractError("unsupported_watch_kind")
 
@@ -810,6 +1103,10 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         )
     if watch.get("kind") == "huggingface_dataset":
         return fetch_huggingface_dataset_snapshot(source["dataset_api_url"])
+    if watch.get("kind") == "huggingface_revision":
+        return fetch_huggingface_revision_snapshot(source["dataset_api_url"])
+    if watch.get("kind") == "zenodo_record":
+        return fetch_zenodo_record_snapshot(source["zenodo_api_url"])
     raise SourceWatchContractError("unsupported_watch_kind")
 
 
@@ -825,6 +1122,7 @@ def evaluate_config(
     if config.get("schema_version") in {
         "aurora.source_watch.v3",
         "aurora.source_watch.v4",
+        "aurora.source_watch.v5",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

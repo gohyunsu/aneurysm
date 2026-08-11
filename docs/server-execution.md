@@ -1,7 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Source-watch v5 update · 2026-08-11:** The nine-source live metadata
+> refresh queried no scientific server, transferred no patient/CFD payload and
+> created no PBS/GPU job. The last actual `introai9` observation was not
+> refreshed. `junjinyong` was not accessed and remains prohibited.
+
 > **Schema 8.2 source-only update · 2026-08-11:** The functional 4D-flow
-> audit and five-source watch queried no scientific server, transferred no
+> audit and historical five-source watch queried no scientific server, transferred no
 > image/mask/checkpoint and created no PBS/GPU job. The last actual `introai9`
 > observation remains the post-`115684` empty queue and was not refreshed.
 > `junjinyong` was not accessed and remains prohibited; login-node GPU commands

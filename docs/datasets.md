@@ -1,5 +1,11 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Source-watch v5 asset boundary · 2026-08-11:** AneuG is unchanged at exact
+> HF `9dd4180…`; Aneurisk is unchanged at Zenodo revision 4; LargeIA remains
+> restricted with zero public files; TopAneu exposes live challenge navigation
+> but still requires verified-account participation. None is newly admitted as
+> an AURORA training, calibration or outer-test asset.
+
 > **Schema 8.2 4D-flow asset correction · 2026-08-11:** COSTA's 355 TOF-MRA
 > scans are pretraining images, not paired velocity/WSS units. The direct
 > 4D-flow study's eleven 7T clinical scans cannot be shared and its weights are

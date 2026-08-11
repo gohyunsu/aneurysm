@@ -543,6 +543,39 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "Source watch v4"):
             validate_protocol(candidate)
 
+    def test_source_watch_v5_expands_material_signals_without_authority(self) -> None:
+        watch = self.protocol["problem_selection"]["public_source_watch_v5"]
+        self.assertEqual(watch["config"], "configs/source_watch_v5.json")
+        self.assertEqual(watch["extends_historical_config"], "configs/source_watch_v4.json")
+        self.assertEqual(watch["watch_count"], 9)
+        self.assertEqual(
+            watch["aneug_huggingface_sha"],
+            "9dd418083899deddd93a67f9a6fca7a14304fa36",
+        )
+        self.assertEqual(watch["aneurisk_zenodo_revision"], 4)
+        self.assertEqual(watch["aneurisk_archive_bytes"], 1430889142)
+        self.assertEqual(watch["largeia_access_right"], "restricted")
+        self.assertEqual(watch["largeia_public_file_count"], 0)
+        self.assertFalse(watch["topaneu_challenge_under_construction"])
+        self.assertTrue(watch["topaneu_join_registration_available"])
+        self.assertTrue(watch["same_as_all_frozen_snapshots"])
+        self.assertFalse(watch["manual_review_triggered"])
+        self.assertFalse(watch["automatic_download_authorized"])
+        self.assertFalse(watch["automatic_terms_acceptance_authorized"])
+        self.assertFalse(watch["historical_execution_repair_or_rerun_authorized"])
+        self.assertFalse(watch["p0_or_p1_authorized"])
+        self.assertFalse(watch["method_or_architecture_authorized"])
+        self.assertFalse(watch["gpu_or_outer_test_authorized"])
+        self.assertFalse(watch["server_queried"])
+        self.assertFalse(watch["junjinyong_accessed_for_this_watch"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v5"][
+            "automatic_terms_acceptance_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v5"):
+            validate_protocol(candidate)
+
     def test_trellis_surface_feature_update_is_direct_prior_only(self) -> None:
         assessment = self.protocol["problem_selection"][
             "surface_vector_conditional_assessment"

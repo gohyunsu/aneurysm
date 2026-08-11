@@ -2349,6 +2349,116 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "create only a manual source re-audit signal, never payload or compute authority."
         )
     checks.append("five-source fail-closed metadata watch boundary")
+    source_watch_v5 = problem_selection["public_source_watch_v5"]
+    _require_keys(
+        source_watch_v5,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "watch_ids",
+            "aneug_huggingface_sha",
+            "aneug_huggingface_last_modified",
+            "aneug_huggingface_used_storage_bytes",
+            "aneurisk_zenodo_revision",
+            "aneurisk_archive_bytes",
+            "aneurisk_archive_md5",
+            "largeia_zenodo_revision",
+            "largeia_access_right",
+            "largeia_public_file_count",
+            "topaneu_zenodo_revision",
+            "topaneu_challenge_under_construction",
+            "topaneu_join_registration_available",
+            "topaneu_material_navigation_entries",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v5",
+    )
+    if (
+        source_watch_v5["status"]
+        != "watch_only_all_nine_frozen_snapshots_match"
+        or source_watch_v5["config"] != "configs/source_watch_v5.json"
+        or source_watch_v5["extends_historical_config"]
+        != "configs/source_watch_v4.json"
+        or source_watch_v5["config_sha256"]
+        != "24c4d9b6d25bfe5fd77cddb9bf9fd593ce492ea70930051f070ee44c1b5438cb"
+        or source_watch_v5["watch_count"] != 9
+        or source_watch_v5["watch_ids"]
+        != [
+            "iavs_public_release_v1",
+            "topbrain2_material_release_v1",
+            "trellis_stated_code_availability_v1",
+            "aneumo_github_material_release_v1",
+            "aneumo_huggingface_material_release_v1",
+            "aneug_huggingface_material_revision_v1",
+            "aneurisk_zenodo_material_revision_v1",
+            "largeia_zenodo_access_revision_v1",
+            "topaneu_material_release_v1",
+        ]
+        or source_watch_v5["aneug_huggingface_sha"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or source_watch_v5["aneug_huggingface_last_modified"]
+        != "2026-01-13T17:09:10.000Z"
+        or source_watch_v5["aneug_huggingface_used_storage_bytes"]
+        != 2632691749582
+        or source_watch_v5["aneurisk_zenodo_revision"] != 4
+        or source_watch_v5["aneurisk_archive_bytes"] != 1430889142
+        or source_watch_v5["aneurisk_archive_md5"]
+        != "8c66e7bb359d04bd1a5d6db6da3f3926"
+        or source_watch_v5["largeia_zenodo_revision"] != 10
+        or source_watch_v5["largeia_access_right"] != "restricted"
+        or source_watch_v5["largeia_public_file_count"] != 0
+        or source_watch_v5["topaneu_zenodo_revision"] != 4
+        or source_watch_v5["topaneu_challenge_under_construction"] is not False
+        or source_watch_v5["topaneu_join_registration_available"] is not True
+        or source_watch_v5["topaneu_material_navigation_entries"]
+        != [
+            "data|https://topaneu-26.grand-challenge.org/data/",
+            "evaluation|https://topaneu-26.grand-challenge.org/evaluation/",
+        ]
+        or source_watch_v5["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v5[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v5["decision"]
+        != "continue_fail_closed_nine_source_metadata_watch_only_without_new_scientific_evidence"
+    ):
+        raise ProtocolError(
+            "Source watch v5 must preserve all nine exact public snapshots, "
+            "the terms and no-repair boundaries, and zero payload or compute authority."
+        )
+    checks.append("nine-source fail-closed metadata watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
