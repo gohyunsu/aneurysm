@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 rupture-time delta deployment and private pin:** Exact public
+> scientific source `309e16205a82f1fe7599a24719486da40375193d` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31545461242)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31545460523).
+> Private ledger `7d7a5883f9c876d1e32b7fcafeb46ed6a7f8fef8` is remote
+> exact, PRIVATE and anonymously returns 404. Full regression is 450 tests:
+> 384 pass/66 optional skip and 88 protocol invariant groups. Manuscript and
+> references remain byte-for-byte unchanged; this provenance opens no paper,
+> model, compute or claim.
+
 > **2026-08-12 rupture-state/future-risk delta · schema 10.7 unchanged:** A
 > new three-centre source reports 756 patients/877 aneurysms and source AUCs
 > 0.887/0.910/0.773/0.735, but it classifies observed rupture status rather

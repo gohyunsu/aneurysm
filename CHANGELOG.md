@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-12 · Rupture-time delta deployed and privately pinned
+
+- Exact public scientific source `309e16205a82f1fe7599a24719486da40375193d`
+  passed Quality `31545461242` and Pages `31545460523`; the live Learn anchor
+  and exact detailed audit were verified.
+- Private ledger `7d7a5883f9c876d1e32b7fcafeb46ed6a7f8fef8` is remote
+  exact, PRIVATE and returns 404 to an anonymous API request. Manuscript and
+  reference hashes are unchanged.
+- Full regression is 450 tests: 384 pass/66 optional-dependency skip and 88
+  protocol invariant groups. This provenance-only pin opens no scientific or
+  submission authority.
+
 ## 2026-08-12 · Rupture-state/future-risk and patient-unit delta · no state change
 
 - Added the three-centre QIMS source: 756 patients/877 aneurysms, reported

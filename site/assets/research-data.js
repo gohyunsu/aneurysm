@@ -1109,6 +1109,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Rupture-time delta is live and privately pinned",
+      copy: "Exact public scientific source 309e16205a82f1fe7599a24719486da40375193d passed Quality 31545461242 and Pages 31545460523. Private ledger 7d7a5883f9c876d1e32b7fcafeb46ed6a7f8fef8 is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes are unchanged. Full regression is 450 tests: 384 pass/66 optional skip and 88 protocol invariant groups. This provenance changes no schema-10.7 score, active lead, P0/P1, method, model, scientific server, PBS/GPU, outer test or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Rupture state is separated from future risk without opening a model",
       copy: "A new three-centre source reports 756 patients/877 aneurysms and train/internal/external AUC 0.887/0.910/0.773/0.735, but its target is cross-sectional rupture status and admission glucose is post-event for ruptured presentations. The 314/136 centre-I division is reported over 450 aneurysm rows while patient grouping is not explicit; this is unresolved dependence, not an allegation of leakage. PLOS Figshare 28661913 contains one 5,632-byte aggregate Table 1.xls rather than patient rows or CTA. Six candidates score 27.5/27.0/25.5/25.0/24.0/23.5 and all fail a critical floor. Schema 10.7 and the aSAH primary batch are unchanged; no payload, request, P0/P1, method, architecture, scientific server, PBS/GPU, outer test or claim opened.",

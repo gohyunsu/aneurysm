@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 rupture-time delta deployment·private synchronization:** Exact
+> public scientific source `309e16205a82f1fe7599a24719486da40375193d`
+> passed Quality `31545461242` and Pages `31545460523`. Private paper ledger
+> `7d7a5883f9c876d1e32b7fcafeb46ed6a7f8fef8` is remote exact, PRIVATE and
+> anonymous API is 404. Full regression is 450 tests: 384 pass/66 optional
+> skip with 88 protocol invariant groups; site/JavaScript/diff hygiene pass.
+> `paper/main.tex` and references remain byte-for-byte unchanged. This
+> provenance pin opens no lead/P0/P1/method/model/server/PBS/GPU/outer test/
+> result/C21/claim and changes no schema-10.7 scientific state.
+
 > **2026-08-12 rupture-state/future-risk and unit-semantics delta · no state
 > change:** QIMS `10.21037/qims-2025-1-2593` reports 756 patients/877
 > aneurysms from three centres. Its endpoint is observed rupture status, not a
