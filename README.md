@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.6 scientific deployment/private synchronization:**
+> Exact scientific source `1f8ce3cf774b3a5562fbbc4c9ee5a48005056660`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31537504625)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31537503585).
+> Live Overview, Learn and machine protocol expose best 29.0/40, all six
+> rejected, the 52-directory derived-trajectory boundary and no-model/
+> no-compute. Private ledger `3f510fabad9f19a5e3d01a288bbbd23996d23f73`
+> is remote exact, PRIVATE and anonymous API returns 404. Manuscript and
+> references remain byte-for-byte unchanged. This provenance opens no
+> scientific or submission authority.
+
 > **Current research state (schema 10.6, 2026-08-12):** The public DA_4DCTA
 > release is a material real-data source—52 visible case directories, derived
 > 100 Hz trajectories, code and an exact 1.93 GB Zenodo archive—but not an

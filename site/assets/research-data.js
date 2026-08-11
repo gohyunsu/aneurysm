@@ -1075,6 +1075,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.6 scientific source is live and privately pinned",
+      copy: "Exact scientific source 1f8ce3cf774b3a5562fbbc4c9ee5a48005056660 passed Quality 31537504625 and Pages 31537503585. Live Overview, Learn and the machine protocol expose best 29.0/40, all six rejected on total or critical floors and active lead/P0/method/model/server/GPU/claim zero. Private ledger 3f510fabad9f19a5e3d01a288bbbd23996d23f73 is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. Full regression is 443 tests: 377 pass/66 optional skip and protocol 84 invariant groups; site and JavaScript checks pass. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.6 freezes the DA_4DCTA release without inventing a wall-phenotype paper",
       copy: "Exact Zenodo revision 4 and GitHub head 8df7d45… are now tracked by fail-closed source-watch v13. The release is derived trajectory CSV and code, not source 4D-CTA, operative RGB/video, registration, surface topology or a complete patient/centre/fold/dense-reference contract. The source paper directly occupies trajectory-to-wall-phenotype prediction, while 2025–2026 dynamic repeatability and intraoperative phenotype studies further narrow the gap. Six rows score 29.0/28.5/28.0/27.5/26.5/24.5 and all fail total or critical target, novelty, asset or independent-unit floors. No archive body, scientific server, P0/P1, method, architecture, PBS/GPU, outer test or claim opened.",

@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.6 scientific source deployed and privately pinned
+
+- Exact scientific source `1f8ce3cf774b3a5562fbbc4c9ee5a48005056660`
+  passed Quality `31537504625` and Pages `31537503585`; live Overview, Learn
+  and machine protocol expose the 29.0/40 target/unit-floor rejection and
+  no-model/no-compute state.
+- Private ledger `3f510fabad9f19a5e3d01a288bbbd23996d23f73` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- Full regression is 443 tests: 377 pass/66 optional skip and protocol 84
+  invariant groups; site and JavaScript checks pass. This provenance opens no
+  P0/P1, method, model, compute or claim.
+
 ## 2026-08-12 · 4D-CTA wall-phenotype release reappraisal · schema 10.6
 
 - Froze the exact DA_4DCTA Zenodo revision 4 and GitHub head `8df7d45…` in a

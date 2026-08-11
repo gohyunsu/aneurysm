@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.6 scientific deployment·private synchronization:**
+> Exact scientific public source
+> `1f8ce3cf774b3a5562fbbc4c9ee5a48005056660` passed Quality
+> `31537504625` and Pages `31537503585`. Live Overview, Learn and machine
+> protocol expose schema 10.6, best 29.0/40 rejected, all six rejected and
+> lead/P0/method/model/server/GPU/claim 0. Private paper head
+> `3f510fabad9f19a5e3d01a288bbbd23996d23f73` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 443 tests: 377 pass/66 optional skip, protocol 84
+> invariant groups and site/JavaScript checks pass. This synchronization opens
+> no scientific or submission authority.
+
 > **2026-08-12 4D-CTA wall-phenotype release reappraisal · schema 10.6:**
 > PeerJ source `10.7717/peerj.19393` reports 52 aneurysms from four hospitals,
 > 100 Hz one-second trajectories and source average accuracy 92%; none is an
