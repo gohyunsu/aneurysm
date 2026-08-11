@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.6 submission outcome · 2026-08-11:** VMR P0 `115848` ended
+> execution-incomplete with 0/10 checks and no scientific verdict. The source
+> score does not support a title, abstract claim, contribution, result table or
+> architecture figure. P1 and all model/GPU work are closed without repair or
+> rerun. AURORA remains not submission-ready and must return to a fresh
+> problem-level source/asset audit.
+
 > **Schema 9.5 submission boundary · 2026-08-11:** One VMR structure-stability
 > source row passes the admission gate at 32.5/40, but AURORA is still not
 > submission-ready. This authorizes only a method-free asset/semantics P0. No

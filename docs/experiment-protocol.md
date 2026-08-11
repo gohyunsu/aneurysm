@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.6 P0 outcome · 2026-08-11:** The one allowed VMR CPU/PBS P0
+> (`115848.ECE-util1`) ended `E`/exit 2 after 00:04:44, CPU 00:00:01, memory
+> 57,084 kB and GPU 0. Bounded records report 0/10 checks,
+> execution-incomplete/no scientific verdict, unknown archive/VTP access extent
+> and no persisted payload. The exact one-shot budget is consumed. Do not
+> inspect the raw log, diagnose and repair transport/reader code, resubmit, open
+> P1, select a method or use GPU.
+
 > **Schema 9.5 execution boundary · 2026-08-11:** Exactly one fresh VMR
 > method-free asset/semantics P0 is preregistered. It runs on `introai9` PBS
 > with 4 CPU, 16 GB, GPU 0 and sequential job-local inspection of 22 result

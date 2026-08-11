@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 9.6 server outcome · 2026-08-11:** Exact source `9206093…` ran
+> once on `introai9` as CPU/PBS job `115848.ECE-util1`. Final state is
+> `E`/exit 2, walltime 00:04:44, CPU 00:00:01, memory 57,084 kB and GPU 0.
+> Bounded status/result hashes are `d4c67a…` and `6ec006…`; 0/10 checks were
+> evaluated and no payload persisted. Do not read the raw PBS log, repair,
+> rerun or submit P1. No login-node GPU command ran, and `junjinyong` was never
+> accessed, queried, used for transfer/submission or monitored.
+
 > **Schema 9.5 registered server state · 2026-08-11:** The VMR source audit
 > queried no scientific server. One exact CPU-only P0 is preregistered for
 > future `introai9` PBS execution with 4 CPUs, 16 GB, GPU 0 and a four-hour

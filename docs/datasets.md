@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.6 VMR outcome boundary · 2026-08-11:** Exact CPU P0 `115848`
+> evaluated 0/10 checks and created no scientific aggregate. Its bounded record
+> cannot determine transient archive/VTP access extent, while confirming no
+> payload persisted. The 22-patient/11-pair metadata remain source history only;
+> they are not an active development, validation or external-test dataset and
+> no P1/model split is opened.
+
 > **Schema 9.5 VMR asset boundary · 2026-08-11:** Three exact public metadata
 > CSVs identify 22 patient entries, eleven prespecified growing/stable pairs and
 > 22 time-resolved surface-result archives totaling 1,998,793,994 bytes. The

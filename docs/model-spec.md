@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.6 model outcome · 2026-08-11:** No model is selected. VMR P0
+> `115848` ended execution-incomplete with 0/10 checks, so the stability P1 and
+> every architecture stage remain closed. Edge 1-form, Hodge/DEC, SE(3),
+> periodic decoding and structural losses remain inactive controls/direct
+> priors. Do not redesign the reader or choose a GNN to repair this no-verdict
+> source version.
+
 > **Schema 9.5 model boundary · 2026-08-11:** No model is selected. The VMR
 > matched-growth source lead is method-free and its registered P0 only checks
 > patient/pair/result joins, ZIP/VTP integrity, three-component WSS and phase

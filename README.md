@@ -1,13 +1,19 @@
 # AURORA · Aneurysm Research
 
-> **Current research state (schema 9.5, 2026-08-11):** one conditional VMR
-> source lead is admitted at 32.5/40 for a method-free CPU asset/semantics P0
-> only. It asks whether growth-paired transient surface-WSS data are coherent
-> enough to support a later mesh/phase/tolerance stability audit. There is no
-> selected paper identity, model, GNN, architecture, GPU experiment, outer test
-> or clinical claim. The source paper already owns WSS/OSI/low-shear growth
-> analysis; edge 1-form, Hodge, equivariance and structural loss remain direct
-> controls. See the [exact source audit](docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md).
+> **Current research state (schema 9.6, 2026-08-11):** Exact `introai9`
+> CPU-only P0 job `115848.ECE-util1` ended `E`/exit 2 after 00:04:44 with GPU 0.
+> Its bounded records report execution-incomplete/no scientific verdict: 0/10
+> registered checks were evaluated, no aggregate scientific result exists,
+> archive/VTP access extent is unknown and no payload persisted. The 32.5/40
+> source score remains history, but active lead, P1, primary, method,
+> architecture, GPU, outer test and paper identity are all zero. Do not repair
+> or rerun this exact version. See the [public execution record](results/vmr_growth_surface_structure_p0_execution_20260811.json)
+> and [source audit](docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md).
+
+> **Schema 9.5 registration history:** Exact VMR metadata established 22
+> patient-specific aneurysms, eleven growing/stable pairs and 22 advertised
+> time-resolved surface-WSS archives. This source passed the prospective screen
+> at 32.5/40 and opened the one method-free P0 above, never a model or claim.
 
 > **2026-08-11 schema 9.4 deployment verification:** Exact scientific source
 > `eb9a6ae9db3980ca41814b3852b68fd4a0804c09` passed

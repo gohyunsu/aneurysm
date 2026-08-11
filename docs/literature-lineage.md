@@ -1,5 +1,12 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.6 evidence status · 2026-08-11:** The direct-prior correction
+> below remains valid, but the VMR source did not establish endpoint
+> identifiability: exact P0 `115848` ended with 0/10 checks and no scientific
+> verdict. Therefore the residual gap is not promoted to an active method gap.
+> Preserve it only as a falsifiable historical question until a material fresh
+> source version independently clears its own prospective gate.
+
 > **Schema 9.5 residual-gap correction · 2026-08-11:** Weiss et al. already
 > compare WSS, OSI, low-shear area and mesh convergence in eleven matched
 > growing/stable pairs; a later 481-patient prospective study already reports

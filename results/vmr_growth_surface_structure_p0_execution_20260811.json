@@ -1,0 +1,67 @@
+{
+  "schema_version": "aurora.vmr_growth_surface_structure_p0.execution.v1",
+  "as_of": "2026-08-11",
+  "protocol_id": "vmr_growth_surface_structure_asset_semantics_p0_v1",
+  "public_source_commit": "92060937529f915649fcbbc06fc2856ce45d61ea",
+  "config_canonical_sha256": "f21ea4f07fa0197ce69644546f96bbe4929065222e219285fcd14b69f2f3b947",
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "job_id": "115848.ECE-util1",
+    "queue": "coss_agpu",
+    "requested_ncpus": 4,
+    "requested_memory_gb": 16,
+    "requested_ngpus": 0,
+    "requested_walltime": "04:00:00",
+    "final_state": "E",
+    "exit_status": 2,
+    "resources_used_walltime": "00:04:44",
+    "resources_used_cput": "00:00:01",
+    "resources_used_memory_kb": 57084
+  },
+  "outcome": {
+    "status": "execution_incomplete_no_scientific_verdict",
+    "scientific_gate_evaluated": false,
+    "gate_passed": null,
+    "registered_checks_total": 10,
+    "registered_checks_evaluated": 0,
+    "aggregate_scientific_result_created": false,
+    "error_class": "VMRGrowthSurfaceStructureP0Error",
+    "low_level_cause": null,
+    "low_level_cause_determined_from_bounded_records": false
+  },
+  "bounded_records": {
+    "status_bytes": 325,
+    "status_sha256": "d4c67a168be0fc90fa21073048b8b00096dcb33ccff48e2ce471221921b4523f",
+    "result_bytes": 980,
+    "result_sha256": "6ec0067b9c349810aa625066e47ffa626442920e2c09e79ab96b04054a35f51f",
+    "raw_pbs_log_accessed": false,
+    "raw_pbs_log_published": false
+  },
+  "access": {
+    "archive_or_vtp_access_extent_known": false,
+    "archive_or_vtp_persisted": false,
+    "medical_image_or_project_archive": false,
+    "critical_point_or_degree_extraction": false,
+    "growth_association": false,
+    "model": false,
+    "gpu": false,
+    "outer_test": false
+  },
+  "adjudication": {
+    "historical_source_score": 32.5,
+    "historical_source_score_relabelled": false,
+    "scientific_failure_claimed": false,
+    "scientific_success_claimed": false,
+    "same_contract_repair_or_rerun_allowed": false,
+    "p1_authorized": false,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "paper_contribution_authorized": false,
+    "submission_identity_active": false,
+    "next_allowed_action": "fresh_problem_level_source_or_asset_audit_only"
+  }
+}

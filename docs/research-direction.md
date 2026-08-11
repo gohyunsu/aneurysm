@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Schema 9.6 outcome · 2026-08-11:** Exact VMR P0 job `115848` ended
+> `E`/exit 2 with 0/10 checks and no scientific verdict. Archive/VTP access
+> extent and low-level cause are unknown from the bounded records; no payload
+> persisted. Preserve 32.5/40 as source-screen history, close the conditional
+> lead and do not repair/rerun. No P1, surface operator, architecture, GPU or
+> paper identity is authorized. The next allowed action is a fresh problem-
+> level source/asset audit, not another VMR transport attempt.
+
 > **Schema 9.5 direction · 2026-08-11:** A material VMR source now exposes
 > 22 patient-specific cerebral-aneurysm entries, eleven reciprocal growth/stable
 > pairs and 22 advertised time-resolved surface-VTP CFD archives. This admits

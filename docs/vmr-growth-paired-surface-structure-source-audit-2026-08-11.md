@@ -6,6 +6,22 @@ method-free CPU/PBS P0
 **Not authorized:** paper identity, growth biomarker, surrogate, method,
 architecture, GPU, outer test, result row or clinical claim
 
+## Final P0 outcome
+
+Exact public source `92060937529f915649fcbbc06fc2856ce45d61ea` ran once as
+`introai9` CPU/PBS job `115848.ECE-util1`. It ended `E`/exit 2 after 00:04:44
+with CPU 00:00:01, memory 57,084 kB and GPU 0. The bounded status/result report
+`execution_incomplete_no_scientific_verdict`: all ten registered checks are
+unevaluated and no scientific aggregate exists. The records do not determine
+how much archive/VTP content was transiently read or the low-level cause; no
+archive/VTP persisted and the raw PBS log was not accessed.
+
+This is neither a scientific pass nor fail. The 32.5/40 source score remains
+immutable registration history, but the conditional lead is closed. P1,
+primary problem, method, architecture, GPU, outer test, paper contribution and
+submission identity remain unauthorized. The exact contract is not repaired
+or rerun. [Public execution record](../results/vmr_growth_surface_structure_p0_execution_20260811.json)
+
 ## Bottom line
 
 The proposed surface-vector direction should not be discarded, but the

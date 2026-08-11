@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · one VMR growth-paired transient-WSS structure-stability source lead admitted at 32.5/40 for method-free CPU P0 only · paper identity/primary/method/architecture/GPU/outer test/claim 0 · historical no-verdict P0s remain closed · not submission-ready",
-    requirement: "the registered VMR P0 must first verify exact 22-patient/11-pair/result-archive vector-phase semantics; even a pass opens only a separate mesh/phase/tolerance stability audit, never a model, growth association or GPU experiment",
+    status: "Target locked · VMR 32.5/40 source history closed after CPU P0 E/exit 2 with 0/10 checks evaluated · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem-level source/asset audit; the closed VMR contract cannot be repaired or rerun and opens no P1, structure extraction, growth association, model or GPU experiment",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -43,9 +43,16 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "The VMR asset-semantics P0 closes without a scientific verdict",
+      copy: "Exact public source 9206093… ran once on introai9 as CPU-only PBS job 115848.ECE-util1. It ended E/exit 2 after 00:04:44 with CPU 00:00:01, peak memory 57,084 kB and GPU 0. A 325-byte bounded status and 980-byte bounded result report execution-incomplete/no scientific verdict; all ten registered checks are unevaluated. Complete archive/VTP access extent and the low-level cause remain unknown, and no archive, VTP or raw PBS log was persisted. The 32.5/40 source score remains history, while active lead, P1, method, architecture, GPU, outer test and claim return to zero without repair or rerun.",
+      status: "32.5/40 history · P0 E/exit 2 · 0/10 no verdict · active lead/method/model/GPU/claim 0",
+      url: "../results/vmr_growth_surface_structure_p0_execution_20260811.json"
+    },
+    {
+      year: "2026.08",
       title: "A growth-linked transient-WSS source opens an audit, not a model",
       copy: "Three exact VMR metadata CSVs identify 22 patient-specific cerebral-aneurysm entries, eleven reciprocal growing/stable pairs and 22 advertised time-resolved surface-VTP result archives totaling 1,998,793,994 bytes. No medical image, project ZIP, result archive or VTP was opened before registration. The source paper already tests WSS, OSI, low-shear area and mesh convergence; a later 481-patient prospective study owns size-dependent WSS growth mechanisms, while aneurysm critical tracking and equivariant/Hodge operators are direct priors. The only residual question is whether degree and secondary critical structures are numerically stable enough to become later surrogate endpoints. Six candidates score 32.5/30.5/30.5/30.0/26.0/23.0.",
-      status: "Conditional source lead 32.5/40 · exact CPU P0 registered · no result archive/VTP read yet · paper identity/method/model/GPU 0",
+      status: "Historical registration · superseded by 0/10 no-verdict outcome · no P1/method/model/GPU",
       url: "../docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md"
     },
     {
@@ -726,8 +733,8 @@ window.AURORA_DATA = Object.freeze({
   datasets: [
     {
       name: "VMR growth-matched cerebral aneurysm cohort",
-      role: "conditional source lead for method-free transient-WSS structure-stability asset audit only",
-      provenance: "22 patients · 11 prespecified growing/stable pairs · 22 time-resolved surface-VTP result archives advertised · 1,998,793,994 total bytes · exact public metadata only · archive/VTP/image/project payload 0 before P0 · no model/GPU"
+      role: "closed source-admission history; not active training, P1 or confirmation data",
+      provenance: "22 patients · 11 prespecified growing/stable pairs · 22 advertised time-resolved surface-VTP result archives · 1,998,793,994 total bytes · P0 115848 E/exit 2 · 0/10 no verdict · access extent unknown · no persisted archive/VTP · no repair/P1/model/GPU"
     },
     {
       name: "AAA transcriptomic reproducibility · Zenodo 21868617 rev. 4",
@@ -971,6 +978,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "experiment",
+      title: "Schema 9.6 closes VMR P0 with 0/10 checks and no scientific verdict",
+      copy: "Exact source 9206093… ran once on introai9 as CPU-only PBS job 115848.ECE-util1 and ended E/exit 2 after 00:04:44 with CPU 00:00:01, memory 57,084 kB and GPU 0. The 325-byte status and 980-byte bounded result report execution-incomplete/no scientific verdict; all ten checks remain unevaluated. Archive/VTP access extent and low-level cause are unknown, while raw PBS log and payload were not persisted. The exact version closes without repair/rerun, P1, method, architecture, GPU, outer test, result row or paper claim. The 32.5/40 score is preserved only as source history; the next admissible action is a fresh problem-level source/asset audit.",
+      files: ["results/vmr_growth_surface_structure_p0_execution_20260811.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.11",
       category: "analysis",

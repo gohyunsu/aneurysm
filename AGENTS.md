@@ -1,5 +1,30 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 VMR P0 outcome · schema 9.6:** Exact public source
+> `92060937529f915649fcbbc06fc2856ce45d61ea` ran once on `introai9` as
+> CPU-only PBS job `115848.ECE-util1`. It ended `E`/exit 2 after 00:04:44 with
+> CPU 00:00:01, memory 57,084 kB and GPU 0. The 325-byte status and 980-byte
+> bounded result have SHA-256 `d4c67a…` and `6ec006…` and report
+> `execution_incomplete_no_scientific_verdict`. Registered checks are 0/10;
+> no aggregate scientific result exists.
+>
+> The bounded records do not identify the low-level cause or how much
+> archive/VTP content was transiently read. Do not infer transport, reader,
+> dependency or source failure. No archive/VTP persisted, the raw PBS log was
+> not accessed and medical images/project archives, critical structure, growth
+> association, model, GPU and outer test remain zero. Preserve 32.5/40 as
+> source-screen history but close the active/conditional lead. Same-contract
+> repair/rerun, P1, primary, method, architecture, result row, paper
+> contribution and submission identity are forbidden. The next allowed action
+> is a fresh problem-level source/asset audit only.
+>
+> Public execution record is
+> `results/vmr_growth_surface_structure_p0_execution_20260811.json` with
+> SHA-256 `c3c7c5f4984436b43cde94ed8f76f3abe006ba15d027f22ae43b1bf5b97e18a1`.
+> Historical jobs `115645` and `115684` remain independently closed and are not
+> relabelled. AURORA remains `introai9` PBS only; never access, query, transfer
+> to, submit to or monitor `junjinyong`, and never run GPU work on a login node.
+
 > **2026-08-11 VMR growth-paired structure source lead · schema 9.5
 > prospective:** Exact official VMR metadata CSVs establish 22 patient-specific
 > cerebral-aneurysm entries, eleven declared growing/stable pairs and 22

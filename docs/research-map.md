@@ -1,5 +1,11 @@
 # 연구 지형과 현재 작업
 
+> **Schema 9.6 closure · 2026-08-11:** VMR P0 `115848` ended
+> execution-incomplete/no scientific verdict with 0/10 checks. The 32.5/40 row
+> remains source history, not an active lead. There is no P1, primary problem,
+> method, architecture, GPU or paper identity, and the exact version is not
+> repaired or rerun. Resume only with a genuinely fresh problem/source version.
+
 > **Schema 9.5 conditional decision · 2026-08-11:** Exact VMR metadata is a
 > material source change: 22 patient-specific aneurysms form eleven declared
 > growing/stable pairs and link to 22 time-resolved surface-WSS archives. The

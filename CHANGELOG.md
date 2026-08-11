@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-11 · VMR P0 closed without a scientific verdict · schema 9.6
+
+- Ran exact source `92060937529f915649fcbbc06fc2856ce45d61ea` once on
+  `introai9` as CPU/PBS job `115848.ECE-util1`: `E`/exit 2, walltime
+  00:04:44, CPU 00:00:01, memory 57,084 kB and GPU 0.
+- Preserved the 325-byte status and 980-byte bounded result by hash. They report
+  execution-incomplete/no scientific verdict, 0/10 checks, no aggregate result
+  and no persisted archive/VTP. Access extent and low-level cause are unknown;
+  raw PBS output was not read.
+- Closed the exact 32.5/40 conditional source lead without score relabelling,
+  repair or rerun. P1, primary, method, architecture, GPU, outer test, result
+  row, contribution and submission identity remain zero.
+- Added the deidentified public execution record and returned the next allowed
+  action to a fresh problem-level source/asset audit. `junjinyong` remained
+  completely excluded and no login-node GPU command ran.
+
 ## 2026-08-11 · VMR growth-paired structure source lead · schema 9.5
 
 - Pinned three exact official VMR metadata CSVs: 22 patient-specific cerebral-

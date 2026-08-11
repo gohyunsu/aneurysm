@@ -69,8 +69,8 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.5</span>
-          <strong>Conditional source lead는 1개지만, 모델과 paper identity는 0개입니다.</strong>
+          <span>짧은 답 · schema 9.6</span>
+          <strong>VMR P0도 0/10 no-verdict로 닫혀, active lead와 paper identity는 모두 0개입니다.</strong>
           <p>
             Surface-vector 질문은 보존하지만 active topic이나 선택된 GNN/Hodge
             architecture는 아닙니다. P0 `115645`는 0/10 checks가 미평가된
@@ -78,16 +78,17 @@
             새 VMR metadata는 22 patient와 11 growth/stable matched pair, 22개
             time-resolved surface-VTP result archive를 연결합니다. 이 material source
             때문에 structure-stability 문제만 32.5/40으로 조건부 입장했고 CPU P0를
-            등록했습니다. 하지만 source paper가 WSS/OSI/low-shear growth 분석과
+            한 번 실행했습니다. Job `115848.ECE-util1`은 E/exit 2로 끝나 10개
+            scientific check가 모두 미평가됐습니다. 하지만 source paper가 WSS/OSI/low-shear growth 분석과
             mesh convergence를 이미 수행했으므로 growth biomarker는 novelty가
-            아닙니다. Result archive/VTP, critical structure와 association은 아직
-            읽거나 계산하지 않았습니다. Primary, contribution, method, architecture,
-            GPU와 outer test는 0입니다.
+            아닙니다. Complete archive/VTP access extent와 low-level cause는 unknown이고
+            payload는 남기지 않았습니다. 이 exact version은 수리·재실행 없이 닫혔고
+            P1, primary, contribution, method, architecture, GPU와 outer test는 0입니다.
           </p>
         </div>
         <div class="answer-card" id="vmr-growth-structure">
           <span>VMR source lead는 무엇이며 왜 곧바로 GNN을 학습하지 않나?</span>
-          <strong>공개 자산은 질문을 실행 가능하게 만들었지만, 구조 endpoint가 안정적이라는 보장은 아직 없습니다.</strong>
+          <strong>공개 metadata는 질문을 제안하게 했지만, exact P0는 자산 semantics조차 과학적으로 판정하지 못했습니다.</strong>
           <p>
             VMR의 세 공개 CSV를 exact byte와 SHA-256으로 고정했습니다. Project
             table은 `0199_H_CERE_CA`부터 `0220_H_CERE_CA`까지 22개 patient entry를
@@ -113,22 +114,24 @@
             묶는 것은 contribution이 아닙니다.
           </p>
           <p>
-            등록된 P0는 22개 archive를 `introai9` PBS의 job-local scratch로 하나씩
-            받아 exact size, ZIP CRC, safe member, whole/dome/parent VTP, PolyData,
-            3-component coordinates/WSS와 최소 두 phase array만 확인하고 즉시
-            삭제합니다. Critical point, signed degree, track, growth association,
-            model과 GPU는 전혀 계산하지 않습니다. 10개 check가 모두 pass해야만
-            별도 CPU P1에서 mesh·phase·tolerance·field perturbation stability를
-            등록할 수 있습니다. Fail 또는 execution-incomplete면 같은 contract를
+            등록된 P0는 22개 archive의 exact size, ZIP CRC, safe member,
+            whole/dome/parent VTP, PolyData, 3-component coordinates/WSS와 최소 두
+            phase array를 확인하도록 설계됐습니다. 하지만 job `115848`은 E/exit 2,
+            walltime 00:04:44, CPU 00:00:01, memory 57,084 kB, GPU 0으로 종료됐고
+            10개 check는 0개 평가됐습니다. Bounded status/result만 남겼으며 raw PBS
+            log, archive 또는 VTP를 보존하지 않았습니다. Access extent와 원인은
+            추정하지 않습니다. 따라서 별도 stability P1도 열지 않고 같은 contract를
             수리하거나 재실행하지 않습니다.
           </p>
           <div class="model-labels">
             <span class="yes">Material source change</span>
-            <span class="yes">32.5/40 · P0 only</span>
+            <span class="yes">32.5/40 · preserved history</span>
+            <span class="no">P0 E/exit 2 · 0/10 no verdict</span>
             <span class="no">Not a growth biomarker</span>
             <span class="no">No GNN · architecture · GPU · claim</span>
           </div>
           <a href="../docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md">source lineage, six scores와 exact P0 contract 전체 읽기 ↗</a>
+          <a href="../results/vmr_growth_surface_structure_p0_execution_20260811.json">deidentified bounded execution record 읽기 ↗</a>
         </div>
         <div class="answer-card" id="latent-transport">
           <span>Latent shape와 transport는 무엇이며 왜 바로 새 논문이 아닌가?</span>
