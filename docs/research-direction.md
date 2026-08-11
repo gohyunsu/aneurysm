@@ -1,5 +1,17 @@
 # AURORA 연구 방향
 
+> **Schema 9.8 direction · 2026-08-12:** Do not pivot to longitudinal surface-
+> displacement learning, RSNA detector calibration or flow-diverter tabular
+> outcome prediction. A 2026 direct prior already owns adjacent-vessel Bayesian
+> growth detection; generic lesion CRC owns the error-budget mechanism; RSNA's
+> public contract remains controlled/incomplete; and the open intervention
+> table is not paired 3D response imaging. The batch's additive best is 32.0/40
+> but novelty 1.5/5 and asset 2.5/5 fail mandatory floors. Retain patient-level
+> all-lesion reliability as evaluation only. Open no P0, model or compute and
+> require a genuinely new patient-grouped reference contract plus a non-
+> compositional failure mechanism.
+> [Exact reappraisal](longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md)
+
 > **Schema 9.7 direction · 2026-08-11:** Do not pivot to an AneuSI/NeckSpline
 > neck-conditioned GNN, clip-factor robustness paper or open-model uncertainty
 > wrapper. AneuSI supplies deterministic isolation views from an already given

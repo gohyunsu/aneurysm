@@ -1,5 +1,39 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 longitudinal/intervention/patient-reliability reappraisal ·
+> schema 9.8:** Six fresh rows are frozen at
+> 32.0/31.0/29.5/29.5/26.5/23.0 and all are rejected. Never treat the additive
+> 32.0 `patient_level_all_lesion_miss_risk_control_on_rsna` row as admitted:
+> its residual novelty 1.5/5 and asset readiness 2.5/5 fail the prospective
+> non-compensatory floors. Generic pulmonary-nodule/medical-instance CRC owns
+> the error-budget mechanism, while RSNA remains controlled, nonredistributable
+> and publicly contract-incomplete. Terms/request/payload access is zero.
+>
+> Bayesian growth preprint `arXiv:2604.06649v1` uses adjacent-vessel
+> displacement as an internal control. Distinguish its 39-patient/42-aneurysm
+> internal cohort from its public subset: 24 follow-up patients were screened,
+> only 16 patients/19 aneurysms were included, and the baseline--follow-up pair
+> was selected partly for growth-event representation. Do not call the reported
+> AUC/kappa AURORA results. The source states no versioned code release. The
+> underlying public dataset has 63 patients/85 aneurysms, 24 follow-up patients
+> and 16 multiple-aneurysm patients; sessions, pairs, vertices and lesions are
+> not independent patients.
+>
+> Mendeley `10.17632/nzzx92ky6r.2` is CC BY 4.0 and contains 126 subjects/141
+> procedures, a workbook, an R script in Word and selected 2D DSA JPEGs in
+> PowerPoint. Never describe it as 141 patients or paired pre/post 3D imaging.
+> PETRA paired raw images remain request-only. Patient-level all-lesion
+> reliability is an evaluation template, not paper identity. Surface-vector is
+> not reactivated. Active lead/primary/P0/P1/method/architecture/server query/
+> PBS/GPU/outer test/result/C21/claim remain zero; historical jobs and scores
+> are not repaired, rerun or relabelled. Future gate-authorized execution is
+> `introai9` PBS only; prohibit login-node GPU and never access, query, transfer
+> to, submit to or monitor `junjinyong`.
+> Full regression is 427 tests: 361 pass and 66 optional-dependency skips. The
+> machine protocol passes 74 invariant groups; all 15 frozen source-watch
+> entries, historical P0/asset contracts, site links/anchors/assets, JavaScript
+> syntax and diff hygiene pass.
+
 > **2026-08-11 schema 9.7 deployment·private synchronization:** Exact public
 > scientific source `7b3208595f60f3c6972efec0c63d21c980a62353` passed Quality
 > `31503802787` and Pages `31503801773`; live Overview and Learn expose the

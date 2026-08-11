@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-08-12 · Longitudinal, intervention and patient reliability rejected · schema 9.8
+
+- Audited the 2026 Bayesian surface-displacement growth source: 39 patients/42
+  aneurysms internally, but only 16 patients/19 aneurysms selected from 24
+  public follow-up patients; AURORA reproduced none of its reported results.
+- Separated RSNA scale from its contract. The latest second-place method uses
+  4,348 series with random series-level folds, while official data remain
+  controlled and the official wiki remains `Coming soon`.
+- Corrected intervention counts: the open CC BY 4.0 flow-diverter release has
+  126 subjects/141 procedures and selected 2D DSA JPEGs, not 141 independent
+  patients or a paired pre/post 3D cohort.
+- Froze six candidates at 32.0/31.0/29.5/29.5/26.5/23.0. The additive 32.0
+  all-lesion miss-risk row fails residual-novelty 1.5/5 and asset-readiness
+  2.5/5 floors; total score cannot compensate. Retained patient-level all-
+  lesion reliability only as an evaluation template.
+- Opened no data terms, payload, P0/P1, method, architecture, scientific-server
+  query, PBS/GPU, outer test or claim. Surface-vector and all no-verdict
+  histories remain inactive and immutable; `junjinyong` remained excluded.
+- Full regression passed 361 tests with 66 optional-dependency skips out of
+  427. The protocol passed 74 invariant groups; all 15 source-watch entries,
+  frozen contracts, site graph and JavaScript checks also passed.
+
 ## 2026-08-11 · Schema 9.7 deployed and privately pinned
 
 - Exact scientific source `7b3208595f60f3c6972efec0c63d21c980a62353`

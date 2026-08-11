@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 9.8, 2026-08-12):** A fresh longitudinal,
+> intervention-linked and patient-reliability screen rejects all six candidates
+> at **32.0/31.0/29.5/29.5/26.5/23.0**. The additive 32.0 RSNA all-lesion
+> miss-risk row is not admitted: residual novelty is 1.5/5 and public asset
+> readiness is 2.5/5, both below mandatory floors. A 2026 Bayesian study already
+> uses adjacent-vessel displacement as an internal control for longitudinal
+> growth and includes only 16 public patients/19 aneurysms selected from 24
+> follow-up patients. Generic lesion-detection conformal risk control is direct
+> prior; RSNA remains controlled with an incomplete public contract. The open
+> flow-diverter asset is 126 subjects/141 procedures with tabular follow-up and
+> selected 2D DSA JPEGs, not paired pre/post 3D imaging. No data terms, payload,
+> P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or
+> paper claim was opened. Patient-level all-lesion reliability is retained only
+> as an evaluation template; surface-vector remains inactive. See the
+> [exact reappraisal](docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md).
+
 > **2026-08-11 schema 9.7 deployment/private verification:** Exact scientific
 > source `7b3208595f60f3c6972efec0c63d21c980a62353` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31503802787) and

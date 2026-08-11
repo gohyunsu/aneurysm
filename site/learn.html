@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#longitudinal-reliability">Longitudinal &amp; reliability</a>
       <a href="#neck-isolation">Neck &amp; isolation</a>
       <a href="#vmr-growth-structure">VMR structure gate</a>
       <a href="#latent-transport">Latent transport</a>
@@ -70,19 +71,89 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.7</span>
-          <strong>AneuSI는 유용한 공개 baseline이지만 새 paper identity는 아니며, active lead는 여전히 0개입니다.</strong>
+          <span>짧은 답 · schema 9.8</span>
+          <strong>총점 32.0 후보도 critical floor를 넘지 못했으며, active lead는 여전히 0개입니다.</strong>
           <p>
-            AneuSI는 주어진 neck polygon을 기준으로 동맥류 주변 혈관을 일정 길이만큼
-            남겨 잘라내는 도구입니다. 공개 repository의 103 lesion-labelled model은
-            99 visible base ID이고, 일곱 `clipFactor`에서 나온 714 VTK는 반복 변환이지
-            714명의 환자가 아닙니다. NeckSpline은 영상에서 연속 neck curve를
-            예측하는 문제를 이미 다루고, CFD workflow 변화 연구도 직접 prior입니다.
-            최신 여섯 후보는 최고 31.5/40, residual novelty 0.5/5로 모두 기각됐습니다.
-            Surface-vector 질문과 과거 VMR 0/10 no-verdict 기록은 보존하지만,
-            P0/P1, contribution, method, architecture, server query, GPU와 outer test는
-            모두 0입니다.
+            최신 여섯 후보는 32.0/31.0/29.5/29.5/26.5/23.0입니다. 그러나
+            32.0 후보의 residual novelty는 1.5/5, 공개 asset readiness는 2.5/5라
+            필수 하한을 통과하지 못합니다. Longitudinal growth internal control과
+            lesion-detection risk control은 이미 직접 선행이 있고, RSNA는 controlled
+            access입니다. Patient-level all-lesion reliability는 좋은 평가 원칙이지만
+            아직 paper contribution이 아닙니다. Surface-vector 질문과 과거 VMR 0/10
+            no-verdict 기록은 보존하되 P0/P1, method, architecture, server query, GPU와
+            outer test는 모두 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="longitudinal-reliability">
+          <span>Longitudinal growth, 치료 결과와 patient-level reliability를 처음부터 이해하기</span>
+          <strong>중요한 임상 질문과 새 연구 기여는 같은 말이 아닙니다. 공개 데이터가 무엇을 실제로 식별하는지부터 분리해야 합니다.</strong>
+          <p>
+            <em>Longitudinal imaging</em>은 같은 환자를 여러 시점에 촬영해 동맥류가
+            커졌는지 비교하는 영상입니다. 공개 TOF-MRA 자료에는 63명과 85개
+            aneurysm이 있으며 24명이 follow-up 촬영을 받았습니다. 16명은 둘 이상의
+            aneurysm을 가집니다. 여기서 session, surface vertex, timepoint pair를
+            각각 환자로 세면 표본 수가 부풀어 오릅니다. 독립 단위는 환자이고,
+            같은 환자의 모든 시점과 병변은 같은 split에 남아야 합니다.
+          </p>
+          <p>
+            2026 Bayesian growth 연구는 baseline과 follow-up surface를 맞춘 뒤
+            aneurysm 영역의 평균 displacement에서 주변 정상 혈관의 평균 displacement를
+            뺍니다. 주변 혈관을 scanner·segmentation·registration drift의
+            <em>internal control</em>로 사용하는 셈입니다. 이 아이디어는 합리적이지만
+            이미 공개된 직접 prior입니다. 연구는 24 follow-up 환자를 검토한 뒤
+            영상 품질과 growth-event representation을 고려해 16명/19 aneurysm만
+            포함했습니다. 따라서 AUC 0.86–0.87은 unbiased public-cohort confirmation이
+            아니며, AURORA가 재현한 결과도 아닙니다.
+          </p>
+          <p>
+            <em>Patient-level all-lesion reliability</em>는 “환자에게 동맥류가 하나라도
+            있는가?”보다 더 엄격합니다. 한 환자에게 두 개가 있는데 모델이 하나만
+            찾으면 presence AUC는 맞을 수 있지만 치료 계획에는 중요한 두 번째 병변을
+            놓칩니다. 그래서 한 study의 전체 병변 집합을 하나의 prediction set으로
+            평가하고, 적어도 하나를 놓칠 확률이나 false-output burden을 함께 보는
+            것이 타당합니다. 이 원칙은 향후 모든 detection 평가에 보존합니다.
+          </p>
+          <p>
+            그러나 이 평가를 conformal risk control이라고 부르는 것만으로 새 방법이
+            되지는 않습니다. Pulmonary-nodule detection과 medical instance
+            segmentation에서 FNR/FDR risk control이 이미 연구됐습니다. RSNA도
+            4,348 series, 네 modality와 13 location을 이용한 2026 second-place
+            multi-task pipeline과 공개 weights가 강한 baseline입니다. 공식 registry는
+            controlled/nonredistributable이고 wiki는 아직 `Coming soon`이라 patient,
+            split, adjudication lineage를 public contract로 검증할 수 없습니다.
+          </p>
+          <p>
+            치료 후 결과를 연결하는 공개 자료도 구분해야 합니다. Flow-diverter
+            Mendeley 자료는 126 subjects가 받은 141 procedures를 담습니다. Excel의
+            임상·시술 변수와 첫째/둘째 DSA follow-up의 complete-occlusion 여부,
+            tortuosity 평가용 selected 2D DSA JPEG가 핵심입니다. 141 procedures는
+            141 patients가 아니고, 이 파일들은 같은 환자의 pre/post 3D 혈관 영상을
+            직접 학습하는 cohort도 아닙니다. PETRA-MRA/TOF-MRA/DSA를 두 시점에
+            비교한 100명 prospective 연구는 있지만 raw image는 request-only입니다.
+          </p>
+          <p>
+            여덟 축 점수에서 RSNA all-lesion miss-risk 후보는 중요도 5.0,
+            식별가능성 4.0, novelty 1.5, asset 2.5, 독립 단위 4.5, baseline 5.0,
+            figure 5.0, 일정 4.5로 총 32.0입니다. 하지만 schema-8.8 gate는 total
+            32만 요구하지 않습니다. Novelty는 최소 2.5, asset은 최소 3.0이어야
+            하므로 이 후보는 기각됩니다. 쉬운 축의 높은 점수로 핵심 결함을 덮지
+            않는 것이 non-compensatory gate의 목적입니다.
+          </p>
+          <p>
+            재진입하려면 공개된 patient-grouped split과 reference provenance,
+            all-session inclusion rule, 독립 adjudication, 그리고 기존 CRC나
+            adjacent-vessel contrast로 설명되지 않는 aneurysm-specific failure
+            mechanism이 함께 필요합니다. 그 전에는 더 큰 GNN·Transformer,
+            hierarchical Bayesian head, conformal wrapper를 구현하지 않습니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Evaluation template: all lesions per patient</span>
+            <span class="no">32.0 total ≠ admitted</span>
+            <span class="no">Novelty 1.5 &lt; 2.5</span>
+            <span class="no">Asset 2.5 &lt; 3.0</span>
+            <span class="no">No terms · payload · P0 · model · GPU</span>
+          </div>
+          <a href="../docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md">exact sources, six frozen scores와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="neck-isolation">
           <span>동맥류 neck과 surface isolation을 처음부터 이해하기</span>

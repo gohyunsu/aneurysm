@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.7":
-        raise ProtocolError("The current research-state schema must be version 9.7.")
+    if protocol["schema_version"] != "9.8":
+        raise ProtocolError("The current research-state schema must be version 9.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_neck_isolation_batch_rejected_best_31_5_no_p0_no_compute_vmr_p0_history_closed"
+        != "no_active_problem_longitudinal_intervention_reliability_batch_rejected_additive_best_32_critical_fail_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "longitudinal_intervention_and_patient_reliability_reappraisal",
             "neck_isolation_and_open_model_source_reappraisal",
             "vmr_growth_paired_surface_structure_source_audit",
             "latent_shape_open_cta_transport_reappraisal",
@@ -262,13 +263,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_neck_isolation_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_longitudinal_intervention_reliability_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_metadata_readme_and_license_only_no_aneusi_vtk_ods_neckspline_code_or_open_model_archive_payload"
+        != "public_paper_source_and_metadata_only_no_rsna_terms_or_payload_no_mendeley_or_openneuro_payload_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -280,15 +281,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md"
+        != "docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "clipfactor_orbit_morphometry_stability_audit_rejected_at_31_5_with_residual_novelty_0_5"
+        != "patient_level_all_lesion_miss_risk_control_on_rsna_rejected_at_32_with_residual_novelty_1_5_and_asset_2_5"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The neck/isolation batch must remain rejected and the VMR candidate "
+            "The longitudinal/intervention/reliability batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -350,8 +351,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 31.5
-        or admission_v2["current_batch_best_residual_novelty"] != 0.5
+        or admission_v2["current_batch_best_score"] != 32.0
+        or admission_v2["current_batch_best_residual_novelty"] != 1.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -360,6 +361,210 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    longitudinal_reliability = problem_selection[
+        "longitudinal_intervention_and_patient_reliability_reappraisal"
+    ]
+    _require_keys(
+        longitudinal_reliability,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_additive_candidate_id",
+            "best_additive_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "bayesian_growth_preprint",
+            "bayesian_growth_preprint_date",
+            "bayesian_growth_code_release_stated",
+            "bayesian_growth_internal_patients",
+            "bayesian_growth_internal_aneurysms",
+            "bayesian_growth_public_followup_patients_screened",
+            "bayesian_growth_public_patients_included",
+            "bayesian_growth_public_aneurysms_included",
+            "bayesian_growth_public_pair_selection_uses_growth_event_representation",
+            "bayesian_growth_reported_results_reproduced_by_aurora",
+            "open_longitudinal_dataset_doi",
+            "open_longitudinal_openneuro_doi",
+            "open_longitudinal_patients",
+            "open_longitudinal_aneurysms",
+            "open_longitudinal_followup_patients",
+            "open_longitudinal_multiple_aneurysm_patients",
+            "open_longitudinal_payload_accessed_this_schema",
+            "rsna_registry_controlled_access",
+            "rsna_registry_nonredistributable",
+            "rsna_registry_institutions",
+            "rsna_official_wiki_coming_soon_only",
+            "rsna_terms_acceptance_verified",
+            "rsna_mira_access_requested",
+            "rsna_payload_accessed_this_schema",
+            "rsna_second_place_preprint",
+            "rsna_second_place_training_series",
+            "rsna_second_place_split_unit",
+            "rsna_second_place_best_two_folds_selected",
+            "rsna_second_place_repository_head",
+            "flow_diverter_dataset_doi",
+            "flow_diverter_dataset_license",
+            "flow_diverter_subjects",
+            "flow_diverter_procedures",
+            "flow_diverter_contains_paired_pre_post_3d_images",
+            "flow_diverter_payload_accessed_this_schema",
+            "petra_prospective_patients",
+            "petra_raw_images_public",
+            "direct_prior_threats",
+            "candidates",
+            "patient_level_all_lesion_reliability_retained_as_evaluation_template_only",
+            "surface_vector_reactivated",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "historical_vmr_or_surface_vector_score_or_job_relabelled",
+            "historical_vmr_or_surface_vector_job_repaired_or_rerun",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "longitudinal/intervention/patient-reliability reappraisal",
+    )
+    expected_longitudinal_reliability_candidates = [
+        (
+            "patient_level_all_lesion_miss_risk_control_on_rsna",
+            32.0,
+            [5.0, 4.0, 1.5, 2.5, 4.5, 5.0, 5.0, 4.5],
+        ),
+        (
+            "selection_audited_adjacent_vessel_longitudinal_growth_benchmark",
+            31.0,
+            [5.0, 3.0, 1.5, 4.5, 2.5, 5.0, 5.0, 4.5],
+        ),
+        (
+            "flow_diverter_occlusion_prediction_from_open_procedural_table",
+            29.5,
+            [4.5, 3.5, 0.5, 4.5, 2.5, 5.0, 4.0, 5.0],
+        ),
+        (
+            "multimodality_second_reader_selective_referral_on_rsna",
+            29.5,
+            [5.0, 3.5, 0.5, 2.5, 4.5, 5.0, 4.5, 4.0],
+        ),
+        (
+            "local_posterior_growth_maps_with_adjacent_vessel_control",
+            26.5,
+            [4.5, 2.5, 1.0, 3.5, 2.5, 4.5, 5.0, 3.0],
+        ),
+        (
+            "noninvasive_posttreatment_image_to_dsa_concordance",
+            23.0,
+            [5.0, 4.0, 0.5, 1.0, 2.0, 4.5, 4.5, 1.5],
+        ),
+    ]
+    observed_longitudinal_reliability_candidates = [
+        (row["id"], float(row["total"]), row["axis_scores"])
+        for row in longitudinal_reliability["candidates"]
+    ]
+    if (
+        longitudinal_reliability["status"]
+        != "fresh_batch_rejected_additive_best_32_fails_residual_novelty_and_asset_floors_no_active_lead"
+        or longitudinal_reliability["audit_document"]
+        != "docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md"
+        or longitudinal_reliability["automatic_selection_threshold"] != 32.0
+        or longitudinal_reliability["best_additive_candidate_id"]
+        != "patient_level_all_lesion_miss_risk_control_on_rsna"
+        or longitudinal_reliability["best_additive_score"] != 32.0
+        or longitudinal_reliability["best_residual_novelty_score"] != 1.5
+        or longitudinal_reliability["all_candidate_scores"]
+        != [32.0, 31.0, 29.5, 29.5, 26.5, 23.0]
+        or longitudinal_reliability["conditional_source_lead_count"] != 0
+        or longitudinal_reliability["primary_problem_selected"] is not False
+        or longitudinal_reliability["paper_identity_active"] is not False
+        or longitudinal_reliability["bayesian_growth_preprint"]
+        != "arXiv:2604.06649v1"
+        or longitudinal_reliability["bayesian_growth_code_release_stated"] is not False
+        or longitudinal_reliability["bayesian_growth_internal_patients"] != 39
+        or longitudinal_reliability["bayesian_growth_internal_aneurysms"] != 42
+        or longitudinal_reliability["bayesian_growth_public_followup_patients_screened"]
+        != 24
+        or longitudinal_reliability["bayesian_growth_public_patients_included"] != 16
+        or longitudinal_reliability["bayesian_growth_public_aneurysms_included"] != 19
+        or longitudinal_reliability[
+            "bayesian_growth_public_pair_selection_uses_growth_event_representation"
+        ]
+        is not True
+        or longitudinal_reliability["bayesian_growth_reported_results_reproduced_by_aurora"]
+        is not False
+        or longitudinal_reliability["open_longitudinal_patients"] != 63
+        or longitudinal_reliability["open_longitudinal_aneurysms"] != 85
+        or longitudinal_reliability["open_longitudinal_followup_patients"] != 24
+        or longitudinal_reliability["open_longitudinal_multiple_aneurysm_patients"]
+        != 16
+        or longitudinal_reliability["rsna_registry_controlled_access"] is not True
+        or longitudinal_reliability["rsna_registry_nonredistributable"] is not True
+        or longitudinal_reliability["rsna_registry_institutions"] != 18
+        or longitudinal_reliability["rsna_official_wiki_coming_soon_only"] is not True
+        or longitudinal_reliability["rsna_second_place_training_series"] != 4348
+        or longitudinal_reliability["rsna_second_place_split_unit"] != "series"
+        or longitudinal_reliability["rsna_second_place_repository_head"]
+        != "e59e2368a722eabedc6b2228b1c6e1e7325cacd5"
+        or longitudinal_reliability["flow_diverter_dataset_doi"]
+        != "10.17632/nzzx92ky6r.2"
+        or longitudinal_reliability["flow_diverter_dataset_license"] != "CC-BY-4.0"
+        or longitudinal_reliability["flow_diverter_subjects"] != 126
+        or longitudinal_reliability["flow_diverter_procedures"] != 141
+        or longitudinal_reliability["petra_prospective_patients"] != 100
+        or observed_longitudinal_reliability_candidates
+        != expected_longitudinal_reliability_candidates
+        or any(row["critical_axis_pass"] for row in longitudinal_reliability["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in longitudinal_reliability["candidates"]
+        )
+        or longitudinal_reliability[
+            "patient_level_all_lesion_reliability_retained_as_evaluation_template_only"
+        ]
+        is not True
+        or any(
+            longitudinal_reliability[key] is not False
+            for key in (
+                "open_longitudinal_payload_accessed_this_schema",
+                "rsna_terms_acceptance_verified",
+                "rsna_mira_access_requested",
+                "rsna_payload_accessed_this_schema",
+                "flow_diverter_contains_paired_pre_post_3d_images",
+                "flow_diverter_payload_accessed_this_schema",
+                "petra_raw_images_public",
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_vmr_or_surface_vector_score_or_job_relabelled",
+                "historical_vmr_or_surface_vector_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or longitudinal_reliability["next_allowed_action"]
+        != "fresh_problem_level_source_or_material_asset_audit_only_no_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "Longitudinal/intervention/patient-reliability sources must remain a "
+            "public-source-only rejected batch: the additive 32 row fails critical "
+            "novelty and asset floors and cannot open P0, method, server or GPU."
+        )
+    checks.append("longitudinal intervention and patient-reliability rejected-source boundary")
 
     neck_audit = problem_selection[
         "neck_isolation_and_open_model_source_reappraisal"

@@ -40,26 +40,30 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> NECK/ISOLATION BEST 31.5 · NOVELTY 0.5 · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ADDITIVE BEST 32.0 · CRITICAL FAIL · ACTIVE LEAD 0</p>
         <h1>
-          A useful public tool is not automatically a paper.<br>
-          <em>Count patients, isolate the gap.</em>
+          A high total score is not an admission.<br>
+          <em>Protect the scientific gap.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          AneuSI는 실제 공개 코드와 surface·centerline·neck·isolation 결과를
-          제공하지만, 이미 주어진 neck polygon을 이용해 ROI를 자르는 도구입니다.
-          103 lesion-labelled model은 99 visible base ID이고, `clipFactor` 20–50의
-          714 VTK는 같은 anatomy의 반복 변환입니다. NeckSpline은 CTA/MRA의 연속
-          neck curve를 이미 예측하고, 1,024-run 연구는 CFD workflow variability를
-          이미 분석합니다. 따라서 neck + GNN/operator + uncertainty 조합은 독립
-          novelty가 아닙니다. 여섯 후보는 <b>31.5/30.0/29.0/28.0/24.0/22.5</b>로
-          모두 기각됐고, 최고 후보도 residual novelty 0.5/5입니다. VTK/ODS/model
-          archive, P0/P1, scientific server, model과 GPU는 열지 않았습니다.
-          Surface-vector와 VMR no-verdict 기록도 수리하거나 재해석하지 않습니다.
+          여섯 fresh 후보는 <b>32.0/31.0/29.5/29.5/26.5/23.0</b>이지만 모두
+          기각됐습니다. RSNA에서 한 환자의 모든 동맥류를 빠짐없이 찾는 miss-risk
+          control은 임상적으로 중요하지만, lesion-detection conformal risk control이
+          이미 직접 선행이고 RSNA의 공개 contract는 controlled/incomplete입니다.
+          따라서 총점 32.0이어도 novelty 1.5/5와 asset 2.5/5가 critical floor를
+          통과하지 못합니다. Longitudinal MRA도 2026 Bayesian 연구가 adjacent vessel을
+          internal control로 이미 사용하며, 공개 subset은 24 follow-up 환자 중
+          선택된 16명/19 aneurysm입니다. Open flow-diverter 자료의 141 procedure도
+          126 subjects이며 paired pre/post 3D 영상이 아닙니다. Patient-level all-lesion
+          reliability는 evaluation template로만 남기고, data terms, payload, P0/P1,
+          scientific server, model과 GPU는 열지 않았습니다. Surface-vector와 VMR
+          no-verdict 기록도 수리하거나 재해석하지 않습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#longitudinal-reliability">왜 32.0도 기각됐나?</a>
+          <a class="button ghost" href="../docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md">Latest source reappraisal ↗</a>
           <a class="button ghost" href="learn.html#neck-isolation">Neck/isolation 판정 이해하기</a>
           <a class="button ghost" href="../docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md">Latest neck/isolation audit ↗</a>
           <a class="button ghost" href="learn.html#vmr-growth-structure">VMR source lead 이해하기</a>
@@ -176,25 +180,25 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>31.5</b><span>latest batch best · rejected</span>
+            <b>32.0</b><span>additive best · critical-floor rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>99 bases</b><span>103 lesion files · not 714 patients</span>
+            <b>16 / 19</b><span>selected public patients / aneurysms</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Public isolation code, neck inputs and deterministic ROI outputs</span>
-          <span><i class="dot coral"></i> Neck inference and workflow robustness are already direct-prior occupied</span>
-          <span>Novelty 0.5/5 · no payload/P0/P1/server/model/GPU</span>
+          <span><i class="dot lime"></i> Patient-level all-lesion reliability remains a useful evaluation principle</span>
+          <span><i class="dot coral"></i> Growth internal control and detection risk control are direct-prior occupied</span>
+          <span>Novelty 1.5/5 · asset 2.5/5 · no terms/payload/P0/server/model/GPU</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>Neck/isolation best 31.5/40 · novelty 0.5/5 · admitted 0</b></div>
-        <div><span>Latest compute</span><b>No server query or job in schema 9.7 · historical VMR P0 remains closed</b></div>
+        <div><span>Latest source screen</span><b>Additive best 32.0/40 · novelty 1.5/5 · asset 2.5/5 · admitted 0</b></div>
+        <div><span>Latest compute</span><b>No server query or job in schema 9.8 · historical VMR P0 remains closed</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
         <div><span>Next action</span><b>fresh problem-level source/asset audit only · no VMR repair or rerun</b></div>
       </div>
@@ -670,7 +674,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>Neck/isolation best 31.5/40 rejected · novelty 0.5/5 · no active lead, method or paper identity</p>
+        <p>Additive best 32.0/40 rejected by critical floors · no active lead, method or paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>

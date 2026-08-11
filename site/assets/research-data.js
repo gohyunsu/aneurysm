@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · neck/isolation batch best 31.5/40 with residual novelty 0.5/5 rejected · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem-level source/asset audit; AneuSI/NeckSpline/workflow components open no payload, P0/P1, model or GPU experiment, and closed VMR contracts remain unrepaired",
+    status: "Target locked · longitudinal/intervention/reliability additive best 32.0/40 rejected by novelty 1.5/5 and asset 2.5/5 critical floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem-level source/material-asset audit; patient-level all-lesion reliability remains evaluation-only, no data terms, payload, P0/P1, model or GPU experiment opens, and closed VMR contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A high additive score cannot hide an occupied method and incomplete asset",
+      copy: "A 2026 Bayesian study already uses adjacent-vessel displacement as an internal control for longitudinal growth. It reports 39 patients/42 aneurysms internally but includes only 16 public patients/19 aneurysms selected from 24 follow-up patients, partly to improve growth-event representation. RSNA supplies 4,348 training series and a released second-place multimodal baseline, but official access remains controlled and its public wiki is Coming soon. Generic lesion-detection and medical-instance conformal risk control already own FNR/FDR budgets. The open flow-diverter record has 126 subjects/141 procedures with tabular follow-up and selected 2D DSA JPEGs, not paired pre/post 3D imaging. Six candidates score 32.0/31.0/29.5/29.5/26.5/23.0. The additive 32.0 row fails novelty 1.5/5 and asset 2.5/5 mandatory floors.",
+      status: "Additive best 32.0 rejected · admitted 0 · terms/payload/P0/method/server/GPU 0",
+      url: "../docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "A public neck-isolation tool strengthens the baseline, not the paper identity",

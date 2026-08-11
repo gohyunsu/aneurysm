@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.8 submission boundary · 2026-08-12:** Do not title the paper around
+> Bayesian longitudinal growth, patient-level RSNA risk control, selective
+> referral or flow-diverter outcome prediction. The additive best is 32.0/40,
+> but novelty 1.5/5 and asset readiness 2.5/5 fail mandatory floors. Patient-
+> level all-lesion reliability is evaluation-only. No title, abstract claim,
+> contribution, method figure, result table, C21, terms acceptance, payload,
+> P0/P1, model or GPU run is authorized. Re-entry needs a public patient/split/
+> adjudication contract and an aneurysm-specific failure mechanism not already
+> owned by adjacent-vessel growth inference or generic conformal risk control.
+
 > **Schema 9.7 submission boundary · 2026-08-11:** Do not title the paper around
 > automatic neck curves, AneuSI isolation, clip-factor robustness, fixed-model
 > calibration or a neck-conditioned surface operator. The best fresh row is
