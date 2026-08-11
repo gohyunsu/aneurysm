@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-12 · Culprit-lesion and mimic-differential reappraisal · schema 10.5
+
+- Separated acute culprit, symptomatic-lesion, future-rupture and
+  aneurysm--infundibulum targets rather than treating all rupture-related
+  labels as interchangeable.
+- Added the eight-hospital 272-patient/607-aneurysm CTA culprit study and the
+  three-institution 30-patient/82-aneurysm VWI study as direct priors. Their
+  source metrics are not AURORA results.
+- Added the 285-patient smaller-counterpart and 665-outpouching infundibulum
+  cohorts with bounded design/data-access interpretation. The public ICAN
+  table is recorded as simulated, not patient evidence.
+- Froze six candidates at 30.5/29.5/28.0/26.0/25.5/24.0. The best residual,
+  haemorrhage-conditioned patient-set evidence alignment, fails the asset floor
+  because no public NCCT--CTA--all-lesion--culprit-reference join was found.
+- Added schema 10.5 protocol invariants, regression coverage, an exact audit
+  and a beginner-facing site chapter. No data request, payload, P0, model,
+  scientific-server query or compute opened.
+
 ## 2026-08-12 · Schema 10.4 scientific source deployed and privately pinned
 
 - Exact scientific source `fb5fabce61cd6df53cd806538da86bbf81ec4f74`

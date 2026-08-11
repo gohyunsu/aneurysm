@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="TopBrain 2025의 25 paired CTA/MRA patient, vessel anatomy와 aneurysm target, pseudo-label과 independent reference, 연구 gate를 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="다발성 뇌동맥류의 culprit lesion, symptomatic lesion, future rupture risk와 infundibulum 감별, 환자 단위 자산 gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#culprit-mimic">Culprit &amp; mimic</a>
       <a href="#topbrain-pairs">TopBrain pairs</a>
       <a href="#target-time">Target time</a>
       <a href="#decision-time">Decision time</a>
@@ -77,16 +78,62 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 10.4</span>
-          <strong>50개의 영상 volume은 25명의 paired patient이고, 혈관 라벨은 동맥류 정답이 아닙니다.</strong>
+          <span>짧은 답 · schema 10.5</span>
+          <strong>환자 안에서 원인 병변을 고르는 문제는 타당하지만, 학습 가능한 공개 정답 묶음이 아직 없습니다.</strong>
           <p>
-            최신 여섯 후보는 30.5/29.0/27.0/25.0/25.0/24.5이고 모두
-            기각됐습니다. TopBrain 2025는 paired CTA/MRA whole-brain vessel
-            anatomy를 공개했지만 aneurysm mask나 outcome은 아닙니다. TopCoW와
-            BraveCoWCoW가 paired topology와 multimodal multi-task learning을 이미
-            차지합니다. 독립적인 paired aneurysm target과 reference가 없으므로
-            P0, method, model, scientific server와 GPU는 0입니다.
+            최신 여섯 후보는 30.5/29.5/28.0/26.0/25.5/24.0이고 모두
+            기각됐습니다. 최근 8병원 연구가 CTA morphology로 culprit aneurysm을,
+            3기관 연구가 VWI로 symptomatic aneurysm을 이미 다룹니다. 그러나 NCCT
+            출혈, CTA의 모든 병변, adjudicated culprit와 patient split을 함께 공개한
+            versioned asset은 찾지 못했습니다. Infundibulum 감별도 공개 image/DSA
+            reference가 없습니다. 따라서 P0, method, model, scientific server와 GPU는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="culprit-mimic">
+          <span>Culprit lesion과 vascular mimic을 처음부터 이해하기</span>
+          <strong>“동맥류가 있는가?”, “어느 병변이 출혈했는가?”, “앞으로 터질 것인가?”는 서로 다른 질문입니다.</strong>
+          <p>
+            한 사람에게 동맥류가 여러 개 있을 수 있습니다. 급성 지주막하출혈이 생겼을
+            때 <b>culprit lesion</b>은 실제 출혈의 원인이 된 하나의 병변입니다. 영상에
+            동맥류가 존재하는지를 찾는 detection, 이미 출혈한 병변과 그렇지 않은 병변을
+            섞어 학습하는 rupture-status classification, 아직 터지지 않은 병변의 미래
+            위험을 예측하는 prognosis와는 표적이 다릅니다.
+          </p>
+          <p>
+            이때 독립 단위는 lesion row가 아니라 <b>patient set</b>입니다. 같은 환자의
+            병변 A와 B를 train과 validation에 나누면 환자 특성이 누출될 수 있습니다.
+            모델도 각 병변을 따로 점수화하는 데 그치지 않고, 한 환자 안의 모든 후보를
+            함께 비교해야 합니다. 평가 역시 lesion AUC만이 아니라 환자별 top-1 정답률,
+            올바른 병변을 포함하는 shortlist coverage와 shortlist 크기를 봐야 합니다.
+          </p>
+          <p>
+            <b>NCCT</b>는 조영제를 쓰지 않은 CT로 피가 어디에 분포하는지 보여주고,
+            <b>CTA</b>는 조영제로 혈관과 여러 동맥류를 보여줍니다. 따라서 “피의 위치와
+            어떤 병변의 해부학적 위치가 가장 잘 맞는가?”는 합리적인 evidence-alignment
+            질문입니다. 하지만 최근 8병원 연구가 이미 morphology 기반 culprit 식별과
+            haemorrhage-pattern control을 평가했습니다. 단순히 두 encoder와 attention을
+            붙이는 것은 contribution이 아닙니다.
+          </p>
+          <p>
+            <b>Symptomatic aneurysm</b>은 통증, 신경 증상 또는 wall enhancement와 연관된
+            병변을 포함할 수 있어 acute rupture culprit와 항상 같지 않습니다. 3기관 VWI
+            연구의 30 patient/82 aneurysm 결과를 더 큰 rupture cohort처럼 세거나, source가
+            보고한 specificity와 NPV를 AURORA 성능으로 쓰면 안 됩니다.
+          </p>
+          <p>
+            <b>Infundibulum</b>은 작은 혈관이 시작되는 부위의 깔때기 모양 확장으로,
+            영상에서는 작은 동맥류처럼 보일 수 있습니다. 2026 종단 연구는 321개의
+            명확한 infundibulum과 344개의 “aneurysm versus infundibulum” 병변을 분석했지만,
+            모호한 병변 중 DSA 재검토는 10개뿐입니다. 보고서 label은 독자의 불확실성을
+            반영할 수 있으므로 그 자체를 완전한 생물학적 ground truth로 쓰면 안 됩니다.
+          </p>
+          <p>
+            연구가 실행 가능하려면 같은 환자의 NCCT, CTA, 모든 후보 병변, culprit 판정의
+            근거(출혈 분포·수술·시술·합의), 모호성 처리와 centre-separated split이 함께
+            있어야 합니다. 현재 공개 source에는 이 join이 없습니다. 그래서 가장 높은
+            30.5/40 후보도 asset readiness 0.5/5로 기각됩니다.
+          </p>
+          <a href="../docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md">source facts, six scores와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="topbrain-pairs">
           <span>TopBrain 2025, patient pair와 reference provenance를 처음부터 이해하기</span>

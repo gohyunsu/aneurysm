@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.4":
-        raise ProtocolError("The current research-state schema must be version 10.4.")
+    if protocol["schema_version"] != "10.5":
+        raise ProtocolError("The current research-state schema must be version 10.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_topbrain_rsna_release_batch_rejected_best_30_5_no_p0_no_compute"
+        != "no_active_problem_culprit_mimic_batch_rejected_best_30_5_asset_floor_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "culprit_lesion_and_mimic_differential_reappraisal",
             "topbrain2025_and_rsna_multitask_source_correction",
             "target_time_and_instability_prediction_reappraisal",
             "decision_time_and_clinical_precision_reappraisal",
@@ -270,13 +271,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_topbrain_rsna_release_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_culprit_mimic_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "topbrain2025_and_bravecowcow_public_metadata_and_code_only_no_terms_or_patient_payload_no_aneurysm_ground_truth_join_no_scientific_server"
+        != "culprit_and_mimic_primary_source_metadata_only_no_public_joined_patient_set_or_dsa_reference_asset_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -286,17 +287,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_source_or_asset_audit_only_no_topbrain_terms_or_payload_or_compute"
+        != "fresh_problem_level_source_or_material_joined_asset_audit_only_no_data_request_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md"
+        != "docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "paired_cta_mra_graph_agreement_certificate_rejected_at_30_5_novelty_and_asset_floors"
+        != "hemorrhage_conditioned_patient_set_evidence_alignment_rejected_at_30_5_asset_floor"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The TopBrain/RSNA release batch must remain rejected and the VMR candidate "
+            "The culprit/mimic batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -368,6 +369,257 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    culprit_mimic = problem_selection[
+        "culprit_lesion_and_mimic_differential_reappraisal"
+    ]
+    _require_keys(
+        culprit_mimic,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "cta_culprit_doi",
+            "cta_culprit_development_patients",
+            "cta_culprit_development_aneurysms",
+            "cta_culprit_development_hospitals",
+            "cta_culprit_external_patients",
+            "cta_culprit_external_aneurysms",
+            "cta_culprit_external_hospitals",
+            "cta_culprit_total_patients",
+            "cta_culprit_total_aneurysms",
+            "cta_culprit_total_hospitals",
+            "cta_culprit_reference_uses_ct_hematoma_or_neurosurgical_findings",
+            "cta_culprit_source_external_auc_gaussian_process",
+            "cta_culprit_source_external_auc_logistic_regression",
+            "cta_culprit_source_external_auc_quadratic_discriminant",
+            "cta_culprit_source_results_reproduced_by_aurora",
+            "cta_culprit_public_versioned_joined_image_lesion_reference_asset_identified",
+            "vwi_symptomatic_doi",
+            "vwi_symptomatic_institutions",
+            "vwi_symptomatic_patients",
+            "vwi_symptomatic_aneurysms",
+            "vwi_symptomatic_aneurysms_positive",
+            "vwi_symptomatic_aneurysms_negative",
+            "vwi_symptomatic_source_cutoff",
+            "vwi_symptomatic_source_specificity",
+            "vwi_symptomatic_source_negative_predictive_value",
+            "vwi_symptomatic_source_results_reproduced_by_aurora",
+            "vwi_symptomatic_status_equated_to_acute_rupture_culprit",
+            "vwi_symptomatic_public_versioned_patient_image_release_identified",
+            "smaller_counterpart_doi",
+            "smaller_counterpart_single_centre",
+            "smaller_counterpart_patients",
+            "smaller_counterpart_largest_ruptured_patients",
+            "smaller_counterpart_smaller_ruptured_patients",
+            "smaller_counterpart_data_request_only",
+            "smaller_counterpart_cross_sectional_label_is_future_rupture_estimand",
+            "infundibulum_doi",
+            "infundibulum_single_centre",
+            "infundibulum_total_outpouchings",
+            "infundibulum_unequivocal_count",
+            "infundibulum_conundrum_count",
+            "infundibulum_unequivocal_followed",
+            "infundibulum_conundrum_followed",
+            "infundibulum_followup_lesion_years",
+            "infundibulum_dsa_rereview_count",
+            "infundibulum_source_reports_morphological_change_or_complication",
+            "infundibulum_source_results_reproduced_by_aurora",
+            "infundibulum_public_versioned_image_dsa_reader_action_asset_identified",
+            "ican_public_table_is_simulated_not_patient_evidence",
+            "topaneu_target_is_vessel_location_and_segmentation_not_culprit_or_mimic_reference",
+            "joined_public_ncct_cta_all_lesions_culprit_reference_patient_split_asset_identified",
+            "direct_prior_threats",
+            "candidates",
+            "patient_set_unit_retained_as_evaluation_principle_only",
+            "culprit_reference_provenance_retained_as_evaluation_principle_only",
+            "symptomatic_status_and_rupture_culprit_separated",
+            "surface_vector_reactivated",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "historical_score_or_job_relabelled",
+            "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "culprit-lesion and mimic-differential reappraisal",
+    )
+    expected_culprit_mimic_candidates = [
+        (
+            "hemorrhage_conditioned_patient_set_evidence_alignment",
+            [5.0, 5.0, 2.5, 0.5, 3.5, 5.0, 5.0, 4.0],
+            30.5,
+        ),
+        (
+            "patient_set_conformal_culprit_shortlist",
+            [5.0, 5.0, 1.5, 0.5, 3.5, 5.0, 5.0, 4.0],
+            29.5,
+        ),
+        (
+            "smaller_counterpart_prospective_triage",
+            [5.0, 3.0, 1.5, 1.0, 3.5, 5.0, 5.0, 4.0],
+            28.0,
+        ),
+        (
+            "infundibulum_aware_dsa_escalation",
+            [4.5, 4.5, 2.0, 0.5, 1.0, 5.0, 5.0, 3.5],
+            26.0,
+        ),
+        (
+            "vwi_morphology_discordance_localization",
+            [5.0, 4.5, 0.5, 0.5, 1.0, 5.0, 5.0, 4.0],
+            25.5,
+        ),
+        (
+            "longitudinal_conundrum_surveillance_deferral",
+            [4.5, 2.5, 1.5, 0.5, 2.0, 5.0, 4.5, 3.5],
+            24.0,
+        ),
+    ]
+    observed_culprit_mimic_candidates = [
+        (row["id"], row["axis_scores"], float(row["total"]))
+        for row in culprit_mimic["candidates"]
+    ]
+    culprit_mimic_false_keys = [
+        "primary_problem_selected",
+        "paper_identity_active",
+        "cta_culprit_source_results_reproduced_by_aurora",
+        "cta_culprit_public_versioned_joined_image_lesion_reference_asset_identified",
+        "vwi_symptomatic_source_results_reproduced_by_aurora",
+        "vwi_symptomatic_status_equated_to_acute_rupture_culprit",
+        "vwi_symptomatic_public_versioned_patient_image_release_identified",
+        "smaller_counterpart_cross_sectional_label_is_future_rupture_estimand",
+        "infundibulum_source_reports_morphological_change_or_complication",
+        "infundibulum_source_results_reproduced_by_aurora",
+        "infundibulum_public_versioned_image_dsa_reader_action_asset_identified",
+        "joined_public_ncct_cta_all_lesions_culprit_reference_patient_split_asset_identified",
+        "surface_vector_reactivated",
+        "p0_registered",
+        "p1_registered",
+        "method_selected",
+        "architecture_selected",
+        "scientific_server_queried",
+        "gpu_training_authorized",
+        "outer_test_authorized",
+        "submission_identity_active",
+        "historical_score_or_job_relabelled",
+        "historical_job_repaired_or_rerun",
+        "login_node_gpu_command_executed",
+        "junjinyong_accessed",
+    ]
+    if (
+        culprit_mimic["status"]
+        != "fresh_batch_rejected_best_30_5_fails_asset_floor_no_active_lead"
+        or culprit_mimic["audit_document"]
+        != "docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md"
+        or culprit_mimic["automatic_selection_threshold"] != 32.0
+        or culprit_mimic["best_candidate_id"]
+        != "hemorrhage_conditioned_patient_set_evidence_alignment"
+        or culprit_mimic["best_score"] != 30.5
+        or culprit_mimic["best_residual_novelty_score"] != 2.5
+        or culprit_mimic["all_candidate_scores"]
+        != [30.5, 29.5, 28.0, 26.0, 25.5, 24.0]
+        or culprit_mimic["conditional_source_lead_count"] != 0
+        or (
+            culprit_mimic["cta_culprit_development_patients"],
+            culprit_mimic["cta_culprit_development_aneurysms"],
+            culprit_mimic["cta_culprit_development_hospitals"],
+            culprit_mimic["cta_culprit_external_patients"],
+            culprit_mimic["cta_culprit_external_aneurysms"],
+            culprit_mimic["cta_culprit_external_hospitals"],
+            culprit_mimic["cta_culprit_total_patients"],
+            culprit_mimic["cta_culprit_total_aneurysms"],
+            culprit_mimic["cta_culprit_total_hospitals"],
+        )
+        != (207, 460, 4, 65, 147, 4, 272, 607, 8)
+        or (
+            culprit_mimic["cta_culprit_source_external_auc_gaussian_process"],
+            culprit_mimic["cta_culprit_source_external_auc_logistic_regression"],
+            culprit_mimic["cta_culprit_source_external_auc_quadratic_discriminant"],
+        )
+        != (0.898, 0.892, 0.897)
+        or culprit_mimic[
+            "cta_culprit_reference_uses_ct_hematoma_or_neurosurgical_findings"
+        ]
+        is not True
+        or (
+            culprit_mimic["vwi_symptomatic_institutions"],
+            culprit_mimic["vwi_symptomatic_patients"],
+            culprit_mimic["vwi_symptomatic_aneurysms"],
+            culprit_mimic["vwi_symptomatic_aneurysms_positive"],
+            culprit_mimic["vwi_symptomatic_aneurysms_negative"],
+        )
+        != (3, 30, 82, 30, 52)
+        or (
+            culprit_mimic["vwi_symptomatic_source_cutoff"],
+            culprit_mimic["vwi_symptomatic_source_specificity"],
+            culprit_mimic["vwi_symptomatic_source_negative_predictive_value"],
+        )
+        != (1.02, 0.88, 0.79)
+        or (
+            culprit_mimic["smaller_counterpart_patients"],
+            culprit_mimic["smaller_counterpart_largest_ruptured_patients"],
+            culprit_mimic["smaller_counterpart_smaller_ruptured_patients"],
+        )
+        != (285, 261, 24)
+        or culprit_mimic["smaller_counterpart_single_centre"] is not True
+        or culprit_mimic["smaller_counterpart_data_request_only"] is not True
+        or (
+            culprit_mimic["infundibulum_total_outpouchings"],
+            culprit_mimic["infundibulum_unequivocal_count"],
+            culprit_mimic["infundibulum_conundrum_count"],
+            culprit_mimic["infundibulum_unequivocal_followed"],
+            culprit_mimic["infundibulum_conundrum_followed"],
+            culprit_mimic["infundibulum_followup_lesion_years"],
+            culprit_mimic["infundibulum_dsa_rereview_count"],
+        )
+        != (665, 321, 344, 146, 208, 1040, 10)
+        or culprit_mimic["infundibulum_single_centre"] is not True
+        or culprit_mimic["ican_public_table_is_simulated_not_patient_evidence"]
+        is not True
+        or culprit_mimic[
+            "topaneu_target_is_vessel_location_and_segmentation_not_culprit_or_mimic_reference"
+        ]
+        is not True
+        or observed_culprit_mimic_candidates
+        != expected_culprit_mimic_candidates
+        or any(
+            sum(row["axis_scores"]) != row["total"]
+            or row["critical_axis_pass"] is not False
+            for row in culprit_mimic["candidates"]
+        )
+        or any(culprit_mimic[key] is not False for key in culprit_mimic_false_keys)
+        or culprit_mimic["patient_set_unit_retained_as_evaluation_principle_only"]
+        is not True
+        or culprit_mimic[
+            "culprit_reference_provenance_retained_as_evaluation_principle_only"
+        ]
+        is not True
+        or culprit_mimic["symptomatic_status_and_rupture_culprit_separated"]
+        is not True
+        or culprit_mimic["next_allowed_action"]
+        != "fresh_problem_or_material_joined_asset_audit_only_no_data_request_payload_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "Culprit-lesion and mimic-differential candidates must remain rejected "
+            "without a public joined patient-set or DSA reference asset; no request, "
+            "payload, P0, method, server, GPU, outer test or claim may open."
+        )
+    checks.append("culprit-lesion and mimic-differential no-compute boundary")
 
     topbrain_rsna = problem_selection[
         "topbrain2025_and_rsna_multitask_source_correction"

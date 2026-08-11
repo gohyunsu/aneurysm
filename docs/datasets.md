@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.5 culprit/mimic asset boundary · 2026-08-12:** No public
+> versioned asset joins aligned NCCT, CTA, all within-patient candidate lesions,
+> culprit adjudication and a patient-grouped centre-separated split. The
+> inspected infundibulum cohort likewise exposes no joined image/DSA/reader/
+> action benchmark, and the public ICAN table is simulated. Literature cohort
+> counts and source AUCs are metadata, not staged AURORA data. Payload, server
+> and compute remain zero.
+
 > **Schema 10.4 TopBrain/RSNA asset boundary · 2026-08-12:** TopBrain 2025
 > metadata identifies one 1,958,849,592-byte archive with 50 volumes from 25
 > same-patient CTA/MRA pairs. Count 25 independent patients. The 40 CTA, 42 MRA

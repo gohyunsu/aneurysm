@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.5 experiment boundary · 2026-08-12:** Zero candidates are
+> admitted. Do not request author-held culprit/mimic data, download TopAneu or
+> other patient payload, construct pseudo-culprit labels, register P0/P1,
+> select a set/graph/fusion model, query a scientific server or create PBS/GPU
+> work. A future method-free P0 requires lawful aligned NCCT/CTA, every lesion
+> grouped by patient, adjudication provenance, ambiguity rules and a centre-
+> separated sealed confirmation manifest. A pass still would not authorize an
+> architecture or GPU.
+
 > **Schema 10.4 experiment boundary · 2026-08-12:** Zero candidates are
 > admitted. Do not accept TopBrain custom terms, download patient/Docker/RSNA
 > payload, count paired volumes as patients, register P0/P1, select a paired-

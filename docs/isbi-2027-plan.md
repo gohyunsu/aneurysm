@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.5 submission boundary · 2026-08-12:** Do not title or draft a
+> paper around culprit-set learning or infundibulum deferral. The best residual
+> scores 30.5/40 but fails asset readiness at 0.5/5, and direct CTA/VWI priors
+> already occupy the broad task. A future ISBI identity requires one lawful
+> joined patient-set target, a mechanism-linked minimal method, strong
+> morphology/haemorrhage-pattern controls and centre-separated confirmation.
+> Manuscript contribution, result table, figure and claim remain unchanged.
+
 > **Schema 10.4 submission boundary · 2026-08-12:** Do not title the paper
 > around paired CTA/MRA graph agreement, topology-aware small-branch
 > segmentation, anatomy-conditioned multimodal aneurysm learning or

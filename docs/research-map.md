@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.5 map · 2026-08-12:** Acute culprit identification, symptomatic
+> lesion localization, future rupture prediction and aneurysm--infundibulum
+> differential are four distinct branches. CTA morphology and VWI directly
+> occupy the first two broad branches; after-rupture smaller-counterpart status
+> does not identify future risk; the mimic branch lacks a released expert/DSA
+> action asset. Haemorrhage-conditioned patient-set evidence alignment remains
+> an evaluation template only. Active lead/method/compute branches are empty.
+
 > **Schema 10.4 map · 2026-08-12:** TopBrain 2025 is a material source branch,
 > not an active workstream. Its public unit is 25 paired patients and its target
 > is whole-brain vessel anatomy. TopCoW, TopBrain challenge endpoints and

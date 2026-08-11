@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.5 lineage · 2026-08-12:** multiple-aneurysm rupture morphology →
+> eight-hospital CTA culprit identification → three-institution VWI symptomatic
+> lesion localization → smaller-counterpart rupture analysis; in parallel,
+> aneurysm/infundibulum morphology → multiphase CTA/DSA differentiation →
+> 665-outpouching longitudinal conundrum analysis. This lineage leaves a
+> conditional multimodal evidence-alignment question, but no public joined
+> target asset. Set prediction, conformal risk control and deferral are generic
+> method priors, not standalone novelty.
+
 > **Schema 10.4 lineage · 2026-08-12:** TopCoW paired CTA/MRA CoW topology →
 > TopBrain 2025 same-patient whole-brain anatomy plus small-branch/topology/
 > contamination evaluation and exact podium Dockers → BraveCoWCoW four-

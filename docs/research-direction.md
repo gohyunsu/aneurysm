@@ -1,5 +1,16 @@
 # AURORA 연구 방향
 
+> **Schema 10.5 direction · 2026-08-12:** The most defensible residual is not
+> lesion-wise rupture classification but haemorrhage-conditioned culprit
+> identification over the complete within-patient lesion set. It is not active:
+> eight-hospital CTA morphology and three-institution VWI studies are direct
+> priors, while no public versioned NCCT--CTA--all-lesion--culprit-reference
+> asset exists. Infundibulum differential likewise lacks a public image/DSA/
+> reader/action join. Six rows peak at 30.5/40 and fail the asset floor. Retain
+> patient-set accounting, reference provenance and target separation as
+> evaluation principles; open no request, P0, model or compute.
+> [Exact reappraisal](culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md)
+
 > **Schema 10.4 direction · 2026-08-12:** Do not pivot to a paired-modality
 > graph, topology loss or anatomy-conditioned multi-task model. TopBrain 2025
 > already provides 25 same-patient CTA/MRA vessel-anatomy pairs and exact

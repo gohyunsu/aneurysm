@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.5, 2026-08-12):** Culprit lesion,
+> symptomatic lesion, future rupture and aneurysm--infundibulum differential
+> are now explicitly separated. An eight-hospital CTA study already identifies
+> the responsible aneurysm in 272 patients/607 aneurysms, and a three-
+> institution VWI study directly addresses symptomatic-lesion localization.
+> The most defensible residual is haemorrhage-conditioned patient-set evidence
+> alignment, but no public versioned asset joins NCCT, CTA, every candidate
+> lesion, adjudicated culprit and a patient-grouped centre-separated split. A
+> 665-outpouching infundibulum cohort likewise exposes no public image/DSA/
+> reader/action benchmark; the public ICAN table is simulated. Six rows score
+> **30.5/29.5/28.0/26.0/25.5/24.0** and all are rejected. Active lead/P0/P1/
+> method/model/server/GPU/claim remain zero; surface-vector stays inactive. See
+> the [exact reappraisal](docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 10.4 scientific deployment/private synchronization:**
 > Exact scientific source `fb5fabce61cd6df53cd806538da86bbf81ec4f74`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31532823553)

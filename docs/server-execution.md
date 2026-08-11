@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 10.5 server boundary · 2026-08-12:** This reappraisal used public
+> article, challenge and government-portal metadata only. No scientific server
+> was queried, no data request or transfer occurred and no PBS/GPU job was
+> created or monitored. Future gate-authorized execution remains `introai9`
+> PBS only; login-node GPU is prohibited. Never access, query, transfer to,
+> submit to or monitor `junjinyong`.
+
 > **Schema 10.4 server boundary · 2026-08-12:** This correction used official
 > public article, Zenodo and Git metadata only. No TopBrain/RSNA/Docker payload
 > or terms, scientific-server query, transfer, PBS/GPU submission or monitoring

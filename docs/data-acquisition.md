@@ -1,5 +1,13 @@
 # Dataset acquisition plan
 
+> **Schema 10.5 acquisition boundary · 2026-08-12:** Do not contact authors,
+> accept challenge terms, download patient images or infer culprit/mimic labels
+> for this rejected batch. A material source must first expose lawful access,
+> patient and lesion identifiers, aligned modalities, adjudication provenance,
+> ambiguity rules, centre and sealed patient-grouped splits. Only then may a
+> prospectively registered method-free P0 inspect bounded metadata and file
+> integrity.
+
 > **Schema 10.4 acquisition boundary · 2026-08-12:** Do not accept TopBrain
 > 2025 custom download terms or open its 1,958,849,592-byte patient archive,
 > exact podium Dockers, controlled RSNA data or Kaggle weights. Fifty public

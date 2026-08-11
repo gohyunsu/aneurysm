@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — TopBrain 2025 paired CTA/MRA, TopCoW와 RSNA 멀티태스크 직접 선행을 환자 단위·표적·reference provenance 기준으로 재심사한 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — 다발성 뇌동맥류의 culprit lesion 식별과 infundibulum 감별을 환자 단위·표적·공개 자산 기준으로 재심사한 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,24 +40,27 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.4 · BEST 30.5 · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.5 · BEST 30.5 · ACTIVE LEAD 0</p>
         <h1>
-          Fifty volumes are not fifty patients,<br>
-          <em>and vessel labels are not aneurysm truth.</em>
+          The target is the responsible lesion within a patient,<br>
+          <em>but a clinical cohort is not an executable asset.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          여섯 fresh 후보는 <b>30.5/29.0/27.0/25.0/25.0/24.5</b>로 모두
-          기각됐습니다. TopBrain 2025의 공개 50 volume은 25명의 same-patient
-          CTA/MRA pair이고, 40 CTA/42 MRA label은 whole-brain vessel anatomy이지
-          aneurysm mask나 outcome이 아닙니다. TopCoW는 paired-modality topology를,
-          BraveCoWCoW는 four-modality ROI와 multi-task pseudo-mask learning을 이미
-          다룹니다. 그러므로 graph/topology/cross-attention을 더하는 것보다 독립적인
-          paired aneurysm target과 reference provenance가 먼저입니다. Custom terms와
-          payload는 열지 않았고, surface-vector도 inactive이며 P0/P1/server/model/GPU는 0입니다.
+          여섯 fresh 후보는 <b>30.5/29.5/28.0/26.0/25.5/24.0</b>으로 모두
+          기각됐습니다. 다발성 동맥류 환자에서 출혈을 일으킨 병변을 고르는 것은
+          독립 병변 rupture 분류보다 정확한 문제이지만, 8병원 CTA morphology 연구와
+          3기관 VWI 연구가 이미 직접 다룹니다. 가장 타당한 잔여 문제는 NCCT 출혈
+          분포와 CTA의 전체 lesion set을 정렬하는 것이지만, 이를 patient-level culprit
+          reference와 함께 공개한 versioned asset이 없습니다. Infundibulum 감별도
+          665-lesion 종단 연구가 중요성을 보이지만 공개 image/DSA/reader/action join은
+          없습니다. 따라서 set transformer, graph, conformal wrapper보다 target asset이
+          먼저입니다. Surface-vector는 inactive이며 P0/P1/server/model/GPU는 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#culprit-mimic">Culprit와 mimic 차근차근 이해하기</a>
+          <a class="button ghost" href="../docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md">Latest culprit/mimic reappraisal ↗</a>
           <a class="button ghost" href="learn.html#topbrain-pairs">50 volume과 25 patient 이해하기</a>
           <a class="button ghost" href="../docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md">Latest TopBrain/RSNA correction ↗</a>
           <a class="button ghost" href="learn.html#target-time">Target time과 instability 이해하기</a>
@@ -164,8 +167,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="ADAM longitudinal과 treated-exclusion 의미의 최신 기각 경계를 설명하는 상태">
-        <div class="visual-caption">ADAM 113 CASES · 35 PAIRED SUBJECTS · GROWTH TRUTH 0</div>
+      <div class="hero-visual" aria-label="환자 내 culprit lesion과 공개 자산 경계를 설명하는 상태">
+        <div class="visual-caption">272 PATIENTS · 607 ANEURYSMS · 8 HOSPITALS · PUBLIC JOIN 0</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="절차적으로 생성할 수 있는 혈관 분지와 동맥류 형상 예시">
             <defs>
@@ -188,27 +191,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>30.5</b><span>best · novelty/asset rejected</span>
+            <b>30.5</b><span>best · asset floor rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>25</b><span>paired patients · not 50 independent volumes</span>
+            <b>1 patient</b><span>one set · multiple candidate lesions</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Same-patient CTA/MRA pair = one independent patient unit</span>
-          <span><i class="dot coral"></i> Vessel anatomy context ≠ aneurysm mask, event or treatment outcome</span>
-          <span>Best novelty 2.0/5 · no independent paired aneurysm target · no terms/payload/P0/server/model/GPU</span>
+          <span><i class="dot lime"></i> All aneurysms from one patient stay in one split and one uncertainty unit</span>
+          <span><i class="dot coral"></i> Symptomatic lesion, acute rupture culprit and future rupture risk are different targets</span>
+          <span>Best novelty 2.5/5 · joined NCCT/CTA/lesion-set/culprit asset 0 · P0/server/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
         <div><span>Latest source screen</span><b>Best 30.5/40 · all six rejected · admitted 0</b></div>
-        <div><span>Latest compute</span><b>No scientific-server query or job in schema 10.4 · historical P0s remain closed</b></div>
+        <div><span>Latest compute</span><b>No scientific-server query or job in schema 10.5 · historical P0s remain closed</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh aneurysm-target/reference asset audit only · no terms, payload, repair or rerun</b></div>
+        <div><span>Next action</span><b>fresh problem or joined target-asset audit only · no request, payload, repair or rerun</b></div>
       </div>
     </section>
 

@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 culprit-lesion/mimic reappraisal · schema 10.5:** The
+> eight-hospital CTA culprit study contains 207 patients/460 aneurysms for
+> development/internal validation and 65/147 from four other hospitals for
+> external validation. Source external AUC 0.898/0.892/0.897 is not an AURORA
+> result. A three-institution VWI study directly covers symptomatic-lesion
+> identification in 30 patients/82 aneurysms. The 285-patient smaller-
+> counterpart cohort is cross-sectional and request-only; the 665-outpouching
+> infundibulum cohort has 1,040 lesion-years but only ten DSA re-reviews and no
+> public joined image/reference/action release. ICAN public tables are
+> simulated, not patient evidence. Six frozen rows score
+> 30.5/29.5/28.0/26.0/25.5/24.0; all fail total or critical floors. Best asset
+> readiness is 0.5/5. Patient-set accounting, culprit-reference provenance and
+> target separation remain evaluation principles only. Active lead/P0/P1/
+> method/architecture/server/PBS/GPU/outer test/result/C21/claim are 0.
+> Surface-vector stays inactive and historical no-verdict jobs are not repaired
+> or rerun. No scientific server was queried, no transfer/job occurred. Future
+> gate-authorized execution uses `introai9` PBS only, never login-node GPU.
+> Never access, query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 schema 10.4 scientific deployment·private synchronization:**
 > Exact scientific public source
 > `fb5fabce61cd6df53cd806538da86bbf81ec4f74` passed Quality

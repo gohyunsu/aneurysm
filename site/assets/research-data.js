@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · TopBrain/RSNA release batch best 30.5/40 rejected; all six fail total or critical novelty/asset floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh versioned aneurysm-target/reference asset audit; re-entry requires lawful terms, same-patient pairing, an aneurysm-specific independently referenced target, patient-grouped confirmation and a non-compositional residual gap, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · culprit/mimic batch best 30.5/40 rejected on the asset floor; all six fail total or a critical floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem or material joined-target asset audit; culprit re-entry requires lawful NCCT/CTA, every within-patient lesion, explicit adjudication provenance and patient-grouped centre-separated confirmation, while mimic re-entry requires expert/DSA reference and action semantics; surface-vector remains inactive, no data request, payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Culprit identification is a patient-set problem, but the joined target asset is absent",
+      copy: "An eight-hospital 2025 study already develops CTA morphology models for responsible-aneurysm identification on 207 patients/460 aneurysms with 65 patients/147 aneurysms from four other hospitals; its source external AUCs are 0.898/0.892/0.897 and are not AURORA results. A three-institution VWI study directly tests symptomatic-lesion identification in 30 patients/82 aneurysms. A 285-patient smaller-counterpart cohort is retrospective and request-only. The largest recent infundibulum analysis reports 665 outpouchings and 1,040 lesion-years, but only ten ambiguous lesions received DSA re-review. No stable public release joins NCCT, CTA, all lesions, culprit adjudication and a patient-grouped split, or image/DSA/reader/action labels for mimics. Six rows score 30.5/29.5/28.0/26.0/25.5/24.0 and all are rejected.",
+      status: "Best 30.5/40 rejected · asset 0.5/5 · joined patient-set culprit asset 0 · lead/P0/method/server/GPU 0",
+      url: "../docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Paired volumes, vessel context and aneurysm truth are different objects",
@@ -1059,6 +1066,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.5 separates culprit, symptomatic, future-risk and mimic targets",
+      copy: "The fresh screen treats all lesions from one patient as one statistical set. The eight-hospital CTA culprit study and three-institution VWI symptomatic-lesion study are direct priors; the 285-patient smaller-counterpart cohort is cross-sectional/request-only, and the 665-outpouching infundibulum cohort does not release a joined image/DSA/reader/action benchmark. The public ICAN table is simulated rather than patient evidence. Haemorrhage-conditioned patient-set evidence alignment is the strongest residual formulation, but it scores 30.5/40 and fails asset readiness at 0.5/5 because no public versioned NCCT--CTA--all-lesion--culprit-reference--patient-split join was identified. All six candidates are rejected without data request, payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim.",
+      files: ["docs/culprit-lesion-and-mimic-differential-source-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

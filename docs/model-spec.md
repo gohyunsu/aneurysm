@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.5 no-model boundary · 2026-08-12:** No patient-set ranker,
+> haemorrhage--lesion alignment network, VWI fusion model, conformal shortlist,
+> mimic classifier or acquisition-policy model is selected. These names do not
+> repair the absent joined reference asset or the direct-prior gap. Edge
+> 1-forms/Hodge/equivariance remain inactive surface-vector controls. Model,
+> loss, checkpoint and GPU authority are zero.
+
 > **Schema 10.4 no-model boundary · 2026-08-12:** No paired CTA/MRA graph
 > network, topology loss, small-branch selective head, multimodal ROI model,
 > cross-attention block or hemodynamic uncertainty propagator is selected.
