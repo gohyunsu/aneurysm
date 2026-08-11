@@ -834,6 +834,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Source-watch v5 exact content passed Quality and Pages",
+      copy: "Exact public content 4de91614991… passed Quality run 31455085579 and Pages run 31455085014. This verifies the nine-source fail-closed contract, 385-test regression and rendered site; it is not scientific evidence and opens no candidate, payload, terms acceptance, P0/P1, model, GPU, outer test or claim.",
+      files: ["AGENTS.md", "README.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "operations",
       title: "Source watch v5 monitors nine material re-entry states",
       copy: "The immutable v4 contract is extended with exact AneuG-Flow, Aneurisk WSS, LargeIA and TopAneu metadata. A live read-only refresh matched all nine snapshots: AneuG 9dd4180…/2.63 TB, Aneurisk revision 4/exact 1.43-GB archive, LargeIA revision 10/restricted/no public files, and TopAneu revision 4 with Data/Evaluation navigation behind verified-account participation. A change requests manual source re-audit only; the watch cannot accept terms, repair closed P0s, download payload, alter scores, register P0/P1, select a model or authorize GPU/outer test.",

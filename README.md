@@ -1,5 +1,11 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 source-watch v5 deployment:** Exact content `4de91614991…`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31455085579)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31455085014).
+> This verifies the nine-source fail-closed contract and site, not a scientific
+> result or experiment authorization.
+
 > **2026-08-11 fail-closed source watch v5:** The immutable v4 watch is extended
 > with exact AneuG-Flow, Aneurisk WSS, LargeIA and TopAneu metadata. A live
 > read-only refresh matched all nine frozen snapshots: AneuG `9dd4180…`,

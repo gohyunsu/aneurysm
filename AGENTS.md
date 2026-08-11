@@ -1,5 +1,12 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 source-watch v5 deployment verification:** Exact public content
+> `4de91614991dea82441599136dcbf567f0bbc8bd` passed Quality
+> `31455085579` and Pages `31455085014`. The validated contract has nine exact
+> metadata watches, manual review 0 and no download/terms/P0/P1/model/GPU
+> authority. This deployment queried no scientific server and created no PBS or
+> GPU job. `junjinyong` was not accessed and remains prohibited.
+
 > **2026-08-11 fail-closed source watch v5:** Historical v4를 그대로 상속하고
 > AneuG-Flow HF, Aneurisk WSS Zenodo, LargeIA Zenodo와 TopAneu challenge를
 > 추가한 아홉-source metadata contract다. Live read-only refresh는 nine snapshot

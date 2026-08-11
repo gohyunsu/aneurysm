@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-08-11 · Source-watch v5 deployment verified
+
+- Exact public content `4de91614991dea82441599136dcbf567f0bbc8bd`
+  passed Quality run `31455085579` and Pages run `31455085014`.
+- The evidence verifies the contract, tests and rendered site only. It adds no
+  candidate, scientific result, method, model, PBS/GPU job or submission claim.
+
 ## 2026-08-11 · Fail-closed source watch v5 covers material re-entry states
 
 - Preserved v4 and added exact AneuG-Flow, Aneurisk WSS, LargeIA and TopAneu
