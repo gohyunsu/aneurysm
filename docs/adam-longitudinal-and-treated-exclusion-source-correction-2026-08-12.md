@@ -68,13 +68,15 @@ exists.
 
 The 2025 [MSDA-Net paper](https://doi.org/10.1049/ipr2.70199) reports the public
 ADAM branch as 78 “distinct/baseline” and 35 “post-treatment (follow-up)”
-volumes, while also excluding label 2 from evaluation. This wording conflicts
-with the official target semantics: follow-up is a time relation, whereas label
-2 is the only treatment-related annotation and is ignored. The private Uppsala
-post-treatment cohort in that paper is separate.
+volumes, while also excluding label 2 from evaluation. This wording does not,
+by itself, establish a public contract in which all 35 scans have known
+intervention time, treated-lesion identity and response outcome. Follow-up is a
+time relation; label 2 is a treatment-related exclusion region. The private
+Uppsala post-treatment cohort in that paper is separate.
 
-AURORA records this as a **bounded semantic correction**, not an accusation
-that every result in the paper is invalid. It also cannot be paper novelty:
+AURORA records this as **bounded semantic uncertainty**, not an accusation that
+the authors' interpretation or every result in the paper is invalid. It also
+cannot be paper novelty:
 source interpretation and reproducibility provenance are valuable, but they do
 not supply an estimand, intervention or independent confirmatory cohort.
 

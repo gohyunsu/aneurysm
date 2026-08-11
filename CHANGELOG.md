@@ -24,7 +24,8 @@
   rough one-pixel-dilated ignored region and cannot label remnant, occlusion,
   treatment response or clinical action.
 - Recorded the 2025 MSDA-Net “post-treatment (follow-up)” wording as bounded
-  source-semantic provenance, not a new ground truth or method contribution.
+  source-semantic uncertainty: it neither proves the authors wrong nor creates
+  a public intervention/lesion/response ground truth or method contribution.
 - Froze six candidates at 28.5/28.0/28.0/27.0/27.0/24.5. All fail total or
   critical identifiability/novelty/asset floors. Accepted no ADAM terms, read no
   payload, queried no scientific server and opened no P0/model/GPU/claim.

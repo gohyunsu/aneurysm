@@ -471,6 +471,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "adam_organizer_approval_obtained_by_aurora",
                 "adam_payload_accessed_this_schema",
                 "msdanet_results_reproduced_by_aurora",
+                "msdanet_followup_posttreatment_equivalence_publicly_established",
                 "surface_vector_material_e0_identified",
                 "surface_vector_reactivated",
                 "p0_registered",
@@ -496,7 +497,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "adam_registration_and_signed_agreement_required",
                 "adam_nonchallenge_reuse_requires_organizer_approval",
                 "msdanet_excludes_label_2_from_evaluation",
-                "msdanet_semantic_conflation_treated_as_bounded_source_correction",
+                "msdanet_wording_treated_as_bounded_source_uncertainty",
             )
         )
         or adam_longitudinal["next_allowed_action"]

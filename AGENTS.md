@@ -29,8 +29,9 @@
 > treatment artifact의 rough mask이고 in-plane 1 pixel dilation 뒤 official
 > evaluation에서 ignore된다. Remnant, occlusion, treatment response나 action
 > target으로 해석하지 않는다. MSDA-Net의 78 baseline/distinct + 35
-> post-treatment(follow-up) 표현은 bounded semantics correction일 뿐 invalidity
-> 판정이나 contribution이 아니다.
+> post-treatment(follow-up) 표현은 public intervention/lesion/response equivalence를
+> 확립하지 않는 bounded semantic uncertainty일 뿐 invalidity 판정이나 contribution이
+> 아니다.
 >
 > Fresh scores 28.5/28.0/28.0/27.0/27.0/24.5는 모두 기각한다. ADAM
 > registration/agreement/organizer approval, payload, P0/P1, method,

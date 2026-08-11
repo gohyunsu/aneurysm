@@ -118,9 +118,11 @@
             2025 MSDA-Net paper는 ADAM을 78 “distinct/baseline”과 35
             “post-treatment (follow-up)”로 표기합니다. 하지만 follow-up은 시간 관계이고,
             treatment-related label 2는 별도로 존재하면서 평가에서 제외됩니다. Private
-            Uppsala post-treatment cohort도 별도입니다. AURORA는 이 충돌을 bounded
-            source correction으로 기록합니다. 논문 전체가 틀렸다고 단정하지 않지만,
-            이 표현을 새 post-treatment ground truth로 재사용하지도 않습니다.
+            Uppsala post-treatment cohort도 별도입니다. 공개 source만으로 35건 모두의
+            intervention time·treated lesion·response가 식별된다고 확인할 수 없으므로
+            AURORA는 이를 bounded semantic uncertainty로 기록합니다. 저자 해석이나
+            논문 전체가 틀렸다고 단정하지 않지만, 이 표현을 새 post-treatment ground
+            truth로 재사용하지도 않습니다.
           </p>
           <p>
             Longitudinal measurement에는 이미 강한 direct prior가 있습니다. 72 patients,
