@@ -1,4 +1,15 @@
-# Public source watch · nine material source states
+# Public source watch · ten material source states
+
+> **2026-08-11 v6 decision:** v5 is extended with the exact manually gated
+> AneuX-derived transient-CFD metadata state. The canonical record is
+> `yiyings/transient-dataset` at `38c574bc…`; its older sidewall alias resolves
+> to the same revision. Public API metadata exposes 180 bifurcation and 143
+> side-wall folders but only 322 unique visible IDs because `SNF365` occurs in
+> both groups. The card does not expose patient/base-family lineage, tensor
+> schema, units, phases, BC, split or linked code, and raw members require
+> contact-sharing acceptance. The fresh source screen peaks at 28.0/40, so
+> this watch is provenance only—not an E0 pass, terms acceptance, payload
+> route, P0 or model authorization.
 
 > **2026-08-11 v5 decision:** the watch inherits the immutable v4 five-source
 > contract and adds AneuG-Flow, Aneurisk WSS, restricted LargeIA and live
@@ -46,7 +57,7 @@
 > inverse-flow audit was triggered by a new published direct prior, not by a
 > watched asset change. No server was queried.
 
-상태: **watch-only · 아홉 official public states 모두 frozen snapshot과 동일 ·
+상태: **watch-only · 열 개 official public states 모두 frozen snapshot과 동일 ·
 manual review 0 · no medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가
@@ -116,17 +127,26 @@ v5에서 추가한 네 source는 서로 다른 막힘을 감시한다.
   PDF의 CC BY 4.0을 의료 payload에 확장하거나 verified-account 조건을 대신
   수락한다는 뜻이 아니다.
 
+v6의 **AneuX-derived transient CFD** watch는 새 source audit의 결과다. Public
+API가 file-path inventory를 반환하더라도 gated tensor나 mesh를 읽었다는 뜻은
+아니다. 323 topology-qualified folder를 323 patient로 세지 않으며, 322 unique
+visible ID도 patient/base-family mapping이 나오기 전에는 독립 환자 수가 아니다.
+Revision, license, gating, dataset card 또는 manifest가 바뀌면 fresh source
+re-audit만 요청한다. Historical AneuG job `115645`나 Aneurisk job `115684`는
+repair/rerun하지 않는다.
+
 ## 기계적 감시 계약
 
-[`configs/source_watch_v5.json`](../configs/source_watch_v5.json)은 historical
-[`source_watch_v4.json`](../configs/source_watch_v4.json)을 명시적으로 상속하고,
+[`configs/source_watch_v6.json`](../configs/source_watch_v6.json)은 historical
+[`source_watch_v5.json`](../configs/source_watch_v5.json)을 명시적으로 상속하고,
 IAVS의 현재
 commit, root entry, release count와 license, TopBrain 2.0의 Zenodo revision,
 design-object license, exact file inventory와 challenge navigation, TRELLIS의
 stated repository HTTP 404 상태, Aneumo GitHub/Hugging Face의 exact revision,
 license/access state와 filename-manifest hash에 더해 AneuG HF revision/storage,
-Aneurisk와 LargeIA Zenodo revision/access/file manifest, TopAneu live navigation을
-고정한다. 기존 v1--v4는
+Aneurisk와 LargeIA Zenodo revision/access/file manifest, TopAneu live navigation,
+그리고 AneuX-derived transient-CFD revision/gate/license/card와 case-path manifest를
+고정한다. 기존 v1--v5는
 historical contract로 보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
 공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
@@ -146,8 +166,10 @@ historical contract로 보존한다.
 11. Aneurisk Zenodo revision/access/license/archive manifest가 바뀜
 12. LargeIA restricted/open state, revision, license 또는 public manifest가 바뀜
 13. TopAneu Zenodo revision 또는 live Data/Evaluation/registration state가 바뀜
+14. AneuX-derived transient-CFD HF revision/gate/license/card/storage 또는
+    topology-qualified/unique-ID manifest가 바뀜
 
-1--6과 8--13의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
+1--6과 8--14의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
 **direct-prior baseline-feasibility review 요청**만 만든다. 자동 download, 약관
 수락, 점수 재가중, frozen snapshot 갱신, P0 등록, model/architecture 선택,
 GPU와 outer test는 모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
@@ -157,11 +179,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v5.json \
+  --config configs/source_watch_v6.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v5.json \
+  --config configs/source_watch_v6.json \
   --fetch --fail-on-change
 ```
 

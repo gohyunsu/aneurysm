@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.2":
-        raise ProtocolError("The current research-state schema must be version 8.2.")
+    if protocol["schema_version"] != "8.3":
+        raise ProtocolError("The current research-state schema must be version 8.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_functional_4dflow_segmentation_source_batch_best_25_5_rejected_conformal_p0_no_verdict_preserved"
+        != "no_active_problem_latest_aneux_transient_cfd_material_source_batch_best_28_0_rejected_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_2_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_3_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -229,7 +229,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "conformal_degree_certificate_source_audit",
             "cross_view_projection_source_delta",
             "functional_4dflow_segmentation_source_delta",
+            "aneux_transient_cfd_material_source_audit",
             "public_source_watch_v4",
+            "public_source_watch_v5",
+            "public_source_watch_v6",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -240,13 +243,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_functional_4dflow_segmentation_source_batch_best_25_5_rejected"
+        != "no_active_problem_latest_aneux_transient_cfd_material_source_batch_best_28_0_rejected"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "source_only_functional_4dflow_segmentation_audit_no_clinical_image_mask_or_weight_payload_conformal_degree_p0_remains_closed"
+        != "public_huggingface_metadata_only_manual_gate_not_accepted_no_tensor_mesh_or_raw_readme_payload_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -256,18 +259,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_not_functional_segmentation_wrapper_and_not_closed_aneurisk_repair_or_rerun"
+        != "fresh_problem_level_primary_source_and_asset_audit_or_new_material_manifest_evidence_version_not_terms_acceptance_not_closed_wss_p0_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/functional-4dflow-segmentation-source-delta-2026-08-11.md"
+        != "docs/aneux-transient-cfd-material-source-audit-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "public_phantom_to_clinical_wss_segmentation_transfer"
+        != "topology_stratified_sidewall_bifurcation_transient_wss_generalization"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The functional 4D-flow segmentation source batch must remain rejected below 32 while "
-            "the conformal-degree candidate stays closed after its exact "
+            "The AneuX-derived transient-CFD source batch must remain rejected below 32 while "
+            "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
         )
@@ -2266,6 +2269,124 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("functional 4D-flow segmentation direct-prior rejection")
 
+    aneux_transient = problem_selection["aneux_transient_cfd_material_source_audit"]
+    _require_keys(
+        aneux_transient,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "axis_scores",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "dataset_id",
+            "legacy_alias_id",
+            "dataset_revision",
+            "dataset_gated",
+            "user_terms_or_contact_sharing_accepted",
+            "license_tag",
+            "sibling_count",
+            "topology_qualified_case_folders",
+            "bifurcation_case_folders",
+            "sidewall_case_folders",
+            "unique_visible_case_ids",
+            "cross_topology_overlap_ids",
+            "visible_id_is_verified_patient_or_base_family",
+            "tensor_mesh_or_raw_readme_payload_accessed",
+            "public_card_exposes_tensor_units_phases_bc_solver_split",
+            "material_source_change_signal",
+            "e0_pass",
+            "historical_aneug_p0_repair_or_rerun_authorized",
+            "direct_prior_threats",
+            "source_watch_config",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+        ],
+        "AneuX-derived transient-CFD material source audit",
+    )
+    expected_aneux_transient_priors = {
+        "aneug_flow_transient_cfd_and_wss_baselines",
+        "rhsia_graph_transformer_ghd_temporal_wss_and_steady_augmentation",
+        "physics_constrained_aneurysm_mesh_gnn_and_inflow_ood",
+        "multiphysics_transformer_gnn_thrombosis_surrogation",
+        "hodge_hsd_and_se3_equivariant_surface_field_operators",
+        "critical_point_tracking_and_trajectory_preservation",
+    }
+    if (
+        aneux_transient["status"]
+        != "fresh_source_batch_rejected_below_admission_metadata_only"
+        or aneux_transient["audit_document"]
+        != "docs/aneux-transient-cfd-material-source-audit-2026-08-11.md"
+        or aneux_transient["automatic_selection_threshold"] != 32.0
+        or aneux_transient["best_candidate_id"]
+        != "topology_stratified_sidewall_bifurcation_transient_wss_generalization"
+        or aneux_transient["best_score"] != 28.0
+        or aneux_transient["axis_scores"]
+        != [4.5, 3.0, 1.5, 2.5, 4.0, 5.0, 5.0, 2.5]
+        or sum(aneux_transient["axis_scores"]) != aneux_transient["best_score"]
+        or aneux_transient["all_candidate_scores"]
+        != [28.0, 27.5, 27.5, 27.0, 26.0, 26.0]
+        or max(aneux_transient["all_candidate_scores"])
+        >= aneux_transient["automatic_selection_threshold"]
+        or aneux_transient["conditional_source_lead_count"] != 0
+        or aneux_transient["primary_problem_selected"] is not False
+        or aneux_transient["dataset_id"] != "yiyings/transient-dataset"
+        or aneux_transient["legacy_alias_id"] != "yiyings/sidewall-transient-cfd"
+        or aneux_transient["dataset_revision"]
+        != "38c574bc54a1ead9a4830da09ae5087e42b9d6c2"
+        or aneux_transient["dataset_gated"] != "manual"
+        or aneux_transient["user_terms_or_contact_sharing_accepted"] is not False
+        or aneux_transient["license_tag"] != "cc-by-nc-4.0"
+        or aneux_transient["sibling_count"] != 1940
+        or aneux_transient["topology_qualified_case_folders"] != 323
+        or aneux_transient["bifurcation_case_folders"] != 180
+        or aneux_transient["sidewall_case_folders"] != 143
+        or aneux_transient["unique_visible_case_ids"] != 322
+        or aneux_transient["cross_topology_overlap_ids"] != ["SNF365"]
+        or aneux_transient["visible_id_is_verified_patient_or_base_family"] is not False
+        or aneux_transient["tensor_mesh_or_raw_readme_payload_accessed"] is not False
+        or aneux_transient["public_card_exposes_tensor_units_phases_bc_solver_split"] is not False
+        or aneux_transient["material_source_change_signal"] is not True
+        or aneux_transient["e0_pass"] is not False
+        or aneux_transient["historical_aneug_p0_repair_or_rerun_authorized"] is not False
+        or set(aneux_transient["direct_prior_threats"])
+        != expected_aneux_transient_priors
+        or aneux_transient["source_watch_config"] != "configs/source_watch_v6.json"
+        or any(
+            aneux_transient[key] is not False
+            for key in (
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or aneux_transient["execution_server"] != "introai9"
+    ):
+        raise ProtocolError(
+            "The AneuX-derived transient-CFD audit must count visible IDs conservatively, "
+            "reject all scores below 32, accept no gate, and open no P0, method, or compute."
+        )
+    checks.append("AneuX-derived transient-CFD material rejection and no-compute boundary")
+
     source_watch_v4 = problem_selection["public_source_watch_v4"]
     _require_keys(
         source_watch_v4,
@@ -2459,7 +2580,98 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "the terms and no-repair boundaries, and zero payload or compute authority."
         )
     checks.append("nine-source fail-closed metadata watch boundary")
+    source_watch_v6 = problem_selection["public_source_watch_v6"]
+    _require_keys(
+        source_watch_v6,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "watch_ids",
+            "aneux_transient_dataset_id",
+            "aneux_transient_legacy_alias_id",
+            "aneux_transient_sha",
+            "aneux_transient_gated",
+            "aneux_transient_license_tags",
+            "aneux_transient_sibling_count",
+            "aneux_transient_bifurcation_case_folders",
+            "aneux_transient_sidewall_case_folders",
+            "aneux_transient_unique_visible_case_ids",
+            "aneux_transient_cross_topology_overlap_ids",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v6",
+    )
+    if (
+        source_watch_v6["status"] != "watch_only_all_ten_frozen_snapshots_match"
+        or source_watch_v6["config"] != "configs/source_watch_v6.json"
+        or source_watch_v6["extends_historical_config"]
+        != "configs/source_watch_v5.json"
+        or source_watch_v6["config_sha256"]
+        != "72487198df76491cf95547581438695fc04e09275a1f477e5017781ded1da5fe"
+        or source_watch_v6["watch_count"] != 10
+        or source_watch_v6["watch_ids"][-1]
+        != "aneux_transient_cfd_material_revision_v1"
+        or source_watch_v6["aneux_transient_dataset_id"]
+        != "yiyings/transient-dataset"
+        or source_watch_v6["aneux_transient_legacy_alias_id"]
+        != "yiyings/sidewall-transient-cfd"
+        or source_watch_v6["aneux_transient_sha"]
+        != "38c574bc54a1ead9a4830da09ae5087e42b9d6c2"
+        or source_watch_v6["aneux_transient_gated"] != "manual"
+        or source_watch_v6["aneux_transient_license_tags"]
+        != ["license:cc-by-nc-4.0"]
+        or source_watch_v6["aneux_transient_sibling_count"] != 1940
+        or source_watch_v6["aneux_transient_bifurcation_case_folders"] != 180
+        or source_watch_v6["aneux_transient_sidewall_case_folders"] != 143
+        or source_watch_v6["aneux_transient_unique_visible_case_ids"] != 322
+        or source_watch_v6["aneux_transient_cross_topology_overlap_ids"]
+        != ["SNF365"]
+        or source_watch_v6["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v6[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v6["decision"]
+        != "continue_fail_closed_ten_source_metadata_watch_only_without_new_scientific_evidence"
+    ):
+        raise ProtocolError(
+            "Source watch v6 must preserve all ten exact metadata snapshots and "
+            "create no gated access, historical repair, payload, or compute authority."
+        )
+    checks.append("ten-source fail-closed metadata watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "topology_stratified_sidewall_bifurcation_transient_wss_generalization",
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
         "geometry_boundary_condition_shape_response_operator",

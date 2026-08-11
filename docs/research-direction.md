@@ -1,5 +1,19 @@
 # AURORA 연구 방향
 
+> **Schema 8.3 direction · 2026-08-11:** The AneuX-derived transient-CFD
+> record is a genuine material source change but not a task admission. Public
+> metadata exposes 323 topology-qualified folders, 322 unique visible IDs and
+> no patient/base-family, tensor, unit, phase, BC, solver or split contract.
+> Manual terms were not accepted. Dense RHSIA/mesh-GNN/Hodge priors leave the
+> batch at best 28.0/40. Continue problem-level source discovery or wait for a
+> new official schema/lineage evidence version; do not repair the closed WSS
+> P0, select architecture or run compute.
+
+> **Source-watch v6 direction · 2026-08-11:** Ten exact metadata states are
+> fail-closed. A change requests source re-audit only and cannot accept the
+> AneuX gate, promote a visible ID to a patient, download a member or authorize
+> P0/model/GPU.
+
 > **Source-watch v5 direction · 2026-08-11:** AneuG, Aneurisk, LargeIA and
 > TopAneu were added as material-change signals, not candidate methods. All nine
 > live snapshots match. Continue problem/asset discovery; do not repair the two

@@ -35,6 +35,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v3",
         "aurora.source_watch.v4",
         "aurora.source_watch.v5",
+        "aurora.source_watch.v6",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -48,7 +49,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         _validate_v3(payload)
     elif schema == "aurora.source_watch.v4":
         _validate_v4(payload)
-    else:
+    elif schema == "aurora.source_watch.v5":
         if payload.get("extends") != "source_watch_v4.json":
             raise SourceWatchContractError("v5_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -59,6 +60,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v5_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v5(payload)
+    else:
+        if payload.get("extends") != "source_watch_v5.json":
+            raise SourceWatchContractError("v6_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v5":
+            raise SourceWatchContractError("v6_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v6_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v6(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -104,6 +116,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v3",
         "aurora.source_watch.v4",
         "aurora.source_watch.v5",
+        "aurora.source_watch.v6",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -509,6 +522,91 @@ def _validate_v5(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v5_change_boundary_changed")
 
 
+def _validate_v6(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+        "aneug_huggingface_material_revision_v1",
+        "aneurisk_zenodo_material_revision_v1",
+        "largeia_zenodo_access_revision_v1",
+        "topaneu_material_release_v1",
+        "aneux_transient_cfd_material_revision_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v6_watch_set_changed")
+
+    _validate_v5(
+        {
+            "watches": watches[:9],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    transient = watches[9]
+    if transient.get("kind") != "huggingface_aneux_transient_revision" or transient.get(
+        "review_request"
+    ) != "fresh_source_reaudit_only":
+        raise SourceWatchContractError("aneux_transient_watch_changed")
+    if transient.get("source") != {
+        "dataset_id": "yiyings/transient-dataset",
+        "legacy_alias_id": "yiyings/sidewall-transient-cfd",
+        "dataset_url": "https://huggingface.co/datasets/yiyings/transient-dataset",
+        "dataset_api_url": "https://huggingface.co/api/datasets/yiyings/transient-dataset",
+    }:
+        raise SourceWatchContractError("aneux_transient_source_changed")
+    if transient.get("frozen_snapshot") != {
+        "sha": "38c574bc54a1ead9a4830da09ae5087e42b9d6c2",
+        "created_at": "2026-05-04T03:02:11.000Z",
+        "last_modified": "2026-06-20T09:40:19.000Z",
+        "private": False,
+        "gated": "manual",
+        "disabled": False,
+        "license_tags": ["license:cc-by-nc-4.0"],
+        "used_storage_bytes": 1381031461556,
+        "description_sha256": (
+            "2650b26a6ee0234cacc107b6dc6b5fc200942616e0d2d5e7a12db08d8a8df29f"
+        ),
+        "sibling_count": 1940,
+        "siblings_sha256": (
+            "7874b4520d455f8921317ad1d97de7614d1ed95185df2b77f6bce40e39c6508d"
+        ),
+        "bifurcation_case_folders": 180,
+        "sidewall_case_folders": 143,
+        "unique_visible_case_ids": 322,
+        "cross_topology_overlap_ids": ["SNF365"],
+        "topology_case_manifest_sha256": (
+            "53d0f8145b69f42ec630703fff27282a1e562009fa6b0136488ee5172cb6d5c3"
+        ),
+        "unique_id_manifest_sha256": (
+            "2693754f1de732289ac5d15b94061dfe2815bca2bfe126da1c5460fb7ae5a648"
+        ),
+        "extension_counts": {
+            "": 1,
+            ".csv": 323,
+            ".md": 1,
+            ".npz": 323,
+            ".obj": 323,
+            ".ply": 323,
+            ".pt": 646,
+        },
+        "availability": "manual_gated_aneux_derived_transient_cfd_metadata_only",
+    }:
+        raise SourceWatchContractError("aneux_transient_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("gated_manifest_metadata_is_not_payload_access") is not True
+        or detection.get("visible_case_id_is_not_verified_patient_unit") is not True
+        or detection.get("material_source_change_is_not_e0_pass") is not True
+    ):
+        raise SourceWatchContractError("v6_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -677,6 +775,68 @@ def fetch_huggingface_revision_snapshot(dataset_api_url: str) -> dict[str, Any]:
         ),
         "used_storage_bytes": int(metadata.get("usedStorage", 0)),
         "availability": "public_synthetic_transient_wss_payload_exact_revision",
+    }
+
+
+def fetch_huggingface_aneux_transient_snapshot(
+    dataset_api_url: str,
+) -> dict[str, Any]:
+    """Read the gated record's public API metadata without opening a member."""
+    metadata = _json_get(dataset_api_url)
+    siblings = sorted(
+        str(item.get("rfilename"))
+        for item in metadata.get("siblings", [])
+        if item.get("rfilename")
+    )
+    topology_cases: dict[str, set[str]] = {
+        "aneux_bifurcation_shapes": set(),
+        "aneux_sidewall_shapes": set(),
+    }
+    extension_counts: dict[str, int] = {}
+    for name in siblings:
+        suffix = Path(name).suffix
+        extension_counts[suffix] = extension_counts.get(suffix, 0) + 1
+        parts = name.split("/")
+        if len(parts) >= 3 and parts[0] in topology_cases:
+            topology_cases[parts[0]].add(parts[1])
+
+    bifurcation = topology_cases["aneux_bifurcation_shapes"]
+    sidewall = topology_cases["aneux_sidewall_shapes"]
+    topology_manifest = sorted(
+        [f"bifurcation|{case_id}" for case_id in bifurcation]
+        + [f"sidewall|{case_id}" for case_id in sidewall]
+    )
+    unique_ids = sorted(bifurcation | sidewall)
+    sibling_manifest = ("\n".join(siblings) + "\n").encode("utf-8")
+    topology_manifest_bytes = ("\n".join(topology_manifest) + "\n").encode(
+        "utf-8"
+    )
+    unique_manifest = ("\n".join(unique_ids) + "\n").encode("utf-8")
+    description = str(metadata.get("description", "")).encode("utf-8")
+    return {
+        "sha": str(metadata.get("sha", "")),
+        "created_at": str(metadata.get("createdAt", "")),
+        "last_modified": str(metadata.get("lastModified", "")),
+        "private": bool(metadata.get("private", False)),
+        "gated": metadata.get("gated", False),
+        "disabled": bool(metadata.get("disabled", False)),
+        "license_tags": sorted(
+            str(tag)
+            for tag in metadata.get("tags", [])
+            if str(tag).startswith("license:")
+        ),
+        "used_storage_bytes": int(metadata.get("usedStorage", 0)),
+        "description_sha256": _sha256(description),
+        "sibling_count": len(siblings),
+        "siblings_sha256": _sha256(sibling_manifest),
+        "bifurcation_case_folders": len(bifurcation),
+        "sidewall_case_folders": len(sidewall),
+        "unique_visible_case_ids": len(unique_ids),
+        "cross_topology_overlap_ids": sorted(bifurcation & sidewall),
+        "topology_case_manifest_sha256": _sha256(topology_manifest_bytes),
+        "unique_id_manifest_sha256": _sha256(unique_manifest),
+        "extension_counts": dict(sorted(extension_counts.items())),
+        "availability": "manual_gated_aneux_derived_transient_cfd_metadata_only",
     }
 
 
@@ -992,6 +1152,46 @@ def evaluate_watch(
             "gpu_or_outer_test_authorized": False,
             "observed": dict(observed),
         }
+    if watch.get("kind") == "huggingface_aneux_transient_revision":
+        frozen = watch["frozen_snapshot"]
+        signals: list[str] = []
+        for key, signal in (
+            ("sha", "huggingface_revision_changed"),
+            ("last_modified", "huggingface_last_modified_changed"),
+            ("license_tags", "huggingface_license_changed"),
+            ("used_storage_bytes", "huggingface_storage_size_changed"),
+            ("description_sha256", "huggingface_dataset_card_changed"),
+            ("siblings_sha256", "huggingface_file_inventory_changed"),
+            ("topology_case_manifest_sha256", "topology_case_manifest_changed"),
+            ("unique_id_manifest_sha256", "unique_id_manifest_changed"),
+        ):
+            if observed.get(key) != frozen.get(key):
+                signals.append(signal)
+        for key in ("private", "gated", "disabled"):
+            if observed.get(key) != frozen.get(key):
+                signals.append(f"huggingface_{key}_state_changed")
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") == "zenodo_record":
         frozen = watch["frozen_snapshot"]
         signals: list[str] = []
@@ -1105,6 +1305,10 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         return fetch_huggingface_dataset_snapshot(source["dataset_api_url"])
     if watch.get("kind") == "huggingface_revision":
         return fetch_huggingface_revision_snapshot(source["dataset_api_url"])
+    if watch.get("kind") == "huggingface_aneux_transient_revision":
+        return fetch_huggingface_aneux_transient_snapshot(
+            source["dataset_api_url"]
+        )
     if watch.get("kind") == "zenodo_record":
         return fetch_zenodo_record_snapshot(source["zenodo_api_url"])
     raise SourceWatchContractError("unsupported_watch_kind")
@@ -1123,6 +1327,7 @@ def evaluate_config(
         "aurora.source_watch.v3",
         "aurora.source_watch.v4",
         "aurora.source_watch.v5",
+        "aurora.source_watch.v6",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

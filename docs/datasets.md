@@ -399,6 +399,17 @@
 > CC BY 4.0 표기와 Zenodo v1.0 배포 record의 CC BY-NC 4.0+추가 attribution
 > 조건이 충돌하므로, 실제 파일 배포 record의 더 엄격한 조건을 적용한다.
 
+> **2026-08-11 AneuX-derived transient-CFD source correction:** Official HF
+> metadata at exact `38c574bc…` names transient CFD for 180 bifurcation and
+> 143 side-wall AneuX-derived folders. `SNF365` appears in both, so visible
+> unique ID count is 322 rather than 323. The record is manually gated under
+> `CC-BY-NC-4.0`; contact-sharing terms were not accepted and no tensor, mesh,
+> raw README or commit history was opened. Public metadata does not expose
+> patient/base-family lineage, tensor schema, units, phases, BC, solver or
+> split. Six fresh candidates peak at 28.0/40 and are rejected. The revision is
+> watched in `source_watch_v6.json`, but it is not E0, P0, a model or a repair
+> route for the closed AneuG history.
+
 > **2026-08-09 AneuG-Flow closed P0:** Current dataset commit
 > `9dd4180…`의 processed steady/transient 두 파일 identity와 CC BY-SA 4.0
 > license를 source-only로 확인했다. Transient assembled object는 steady

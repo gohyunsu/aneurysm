@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.3 no-model boundary · 2026-08-11:** The new AneuX-derived
+> transient-CFD metadata does not select a graph Transformer, GHD, Hodge/DEC,
+> equivariant mesh network, edge 1-form decoder, topology loss or conformal
+> head. RHSIA and 2026 physics/multiphysics GNNs make these direct controls.
+> The fresh source screen peaks at 28.0/40; terms, payload, P0/P1, architecture
+> and GPU remain closed.
+
 > **Source-watch v5 no-model boundary · 2026-08-11:** AneuG, Aneurisk,
 > LargeIA and TopAneu metadata were added to the fail-closed watch, not to a
 > model. All nine snapshots match. No GNN, Hodge operator, U-Net, detector,

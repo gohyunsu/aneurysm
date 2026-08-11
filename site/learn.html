@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="4D-flow MRI segmentation, WSS, 독립 표본, surface topology와 연구 gate를 기초부터 설명하고 최신 25.5/40 기각·no-model 경계를 밝히는 입문 가이드.">
+  <meta name="description" content="AneuX-derived transient CFD, WSS, 독립 표본, surface topology와 연구 gate를 기초부터 설명하고 최신 28.0/40 기각·no-model 경계를 밝히는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#aneux-transient">Transient source</a>
       <a href="#functional-4dflow">4D-flow gap</a>
       <a href="#cross-view">Cross-view</a>
       <a href="#conformal-degree" data-chapter-link>Degree certificate</a>
@@ -60,16 +61,18 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 8.2</span>
+          <span>짧은 답 · schema 8.3</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
-            최신 functional 4D-flow segmentation 후보도 최고 25.5/40으로
-            기각됐습니다. Direct prior가 WSS bias를 이미 측정했고, 실제 functional
-            unit은 비공개 11건뿐입니다. Surface-vector와 conformal-degree는
-            중요한 역사지만 active topic이 아닙니다. Exact P0 두 건의 scientific
-            checks는 실패한 것이 아니라 모두 미평가였고, 동일 contract를
-            재실행하지 않습니다. Primary, GNN, Transformer, neural operator,
-            contribution, GPU와 outer test는 선택되지 않았습니다.
+            새 AneuX-derived transient-CFD source도 최고 28.0/40으로
+            기각됐습니다. 323개 topology folder는 `SNF365` 중복 때문에 322개
+            visible ID이고 patient/base-family 독립성은 확인되지 않았습니다.
+            Manual gate는 수락하지 않았고 field·mesh payload도 읽지 않았습니다.
+            Surface-vector와 conformal-degree는 중요한 역사지만 active topic이
+            아닙니다. Exact P0 두 건의 scientific checks는 실패한 것이 아니라
+            모두 미평가였고, 동일 contract를 재실행하지 않습니다. Primary, GNN,
+            Transformer, neural operator, contribution, GPU와 outer test는
+            선택되지 않았습니다.
           </p>
         </div>
         <div class="answer-card" id="structure-reappraisal">
@@ -103,6 +106,43 @@
             확인된 뒤에만 검토합니다.
           </p>
           <a href="../docs/structure-faithful-wss-source-reappraisal-2026-08-11.md">점수표·direct prior·architecture correction 전체 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="aneux-transient">
+          <span>새 transient-CFD source는 왜 바로 실험으로 이어지지 않나?</span>
+          <strong>Material source change는 맞지만, task와 독립 표본이 아직 식별되지 않습니다.</strong>
+          <p>
+            Dataset card는 AneuX에서 고른 side-wall과 bifurcation 형상에 authors가
+            transient CFD를 생성했다고 설명합니다. Public API path inventory에는
+            각 folder마다 volume field로 보이는 `blood_data.pt`, wall field로
+            보이는 `wall_data.pt`, surface/volume geometry와 mapping 파일이
+            있습니다. 그러나 파일 이름은 내용의 schema가 아닙니다. Tensor key,
+            단위, cardiac phase, inlet/outlet BC, solver convergence와 좌표
+            correspondence를 card가 정의하지 않으므로 WSS target을 확정할 수
+            없습니다.
+          </p>
+          <p>
+            180개 bifurcation folder와 143개 side-wall folder를 단순 합치면 323이지만
+            `SNF365`가 양쪽에 존재해 visible unique ID는 322입니다. 더 중요한 것은
+            ID→patient 또는 ID→base geometry family mapping이 없다는 점입니다.
+            같은 환자의 여러 병변이나 같은 형상의 파생물이 train/test에 갈릴 수
+            있으므로 322를 독립 환자 수로 보고 통계 검정을 하면 안 됩니다.
+          </p>
+          <p>
+            접근은 contact information 공유 동의가 필요한 manual gate이며, 이를
+            대신 수락하지 않았습니다. RHSIA는 이미 graph Transformer+GHD+temporal
+            input+steady augmentation으로 transient WSS를 예측하고, 다른 2026
+            연구들은 physics-constrained mesh GNN과 multiphysics thrombosis
+            surrogation을 다룹니다. 따라서 topology split, GNN, Hodge, edge 1-form,
+            periodic decoder 또는 topology loss를 붙이는 것만으로는 새 contribution이
+            아닙니다. Fresh six-way screen의 최고점은 28.0/40입니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Real material source signal</span>
+            <span class="yes">Exact 322-ID manifest accounting</span>
+            <span class="no">No terms or payload access</span>
+            <span class="no">No E0, model, P0 or GPU</span>
+          </div>
+          <a href="../docs/aneux-transient-cfd-material-source-audit-2026-08-11.md">Manifest·점수표·direct prior 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="surface-adjudication">
           <span>이번 분석에서 무엇을 채택·수정·기각했나?</span>
@@ -748,32 +788,37 @@
               <p>Conditional source lead, selected primary, method와 architecture는 모두 0입니다. 32.5/40 source history와 새 algorithm은 같은 말이 아닙니다. Conformal calibration, tangent projection, Hodge 또는 GNN block에 이름만 붙여 contribution으로 만들지 않습니다.</p>
             </aside>
             <article>
-              <span>CURRENT · SCHEMA 8.2 FUNCTIONAL 4D-FLOW SEGMENTATION · REJECTED</span>
+              <span>LATEST · SCHEMA 8.3 ANEUX-DERIVED TRANSIENT CFD · REJECTED</span>
+              <div><h3>Transient CFD 323개 folder가 생겼는데 왜 GNN을 고르지 않는가?</h3><p>Folder는 학습 단위가 아닙니다. 180개 bifurcation과 143개 side-wall folder에는 cross-root 중복 `SNF365`가 있어 visible ID는 322개이고, patient/base-family mapping은 공개되지 않았습니다. Tensor key·units·phase·BC·solver·split도 card에 없습니다. RHSIA의 graph Transformer/GHD, physics-constrained aneurysm mesh GNN과 multiphysics thrombosis GNN이 이미 직접 선행이므로 architecture 조합은 남은 gap이 아닙니다.</p></div>
+              <b>판정</b><small>best 28.0/40 · terms/payload/P0/method/architecture/server/GPU 0</small>
+            </article>
+            <article>
+              <span>HISTORICAL · SCHEMA 8.2 FUNCTIONAL 4D-FLOW SEGMENTATION · REJECTED</span>
               <div><h3>WSS-aware segmentation이면 충분히 fancy한가?</h3><p>아닙니다. Intracranial 4D-flow segmentation-to-WSS bias, TOF transfer와 resolution testing이 이미 직접 보고됐고, VAST와 COMPASS가 physics-aware processing과 metric certification을 각각 점유합니다. 사용할 수 있는 patient-level aneurysm velocity/WSS asset도 없습니다. 그러므로 architecture를 고르는 순간이 아니라 문제를 기각할 순간입니다.</p></div>
               <b>판정</b><small>best 25.5/40 · all six rejected · image/mask/weight/P0/method/server/GPU 0</small>
             </article>
             <article>
-              <span>CURRENT · SCHEMA 8.1 CROSS-VIEW PROJECTION · REJECTED</span>
+              <span>HISTORICAL · SCHEMA 8.1 CROSS-VIEW PROJECTION · REJECTED</span>
               <div><h3>두 projection과 conformal set이면 왜 아직 새 방법이 아닌가?</h3><p>MIDL 2026은 ADAM 3D MRA에서 AP/lateral MIP를 만들고 shared-z prompting과 consistency loss를 이미 사용합니다. 하지만 실제 biplane DSA가 아니며 test 때는 한 view만 씁니다. 두 view를 test 때 써서 3D로 올리는 단계도 RibAssist 3D의 selective correspondence/triangulation, ProVLNet의 projective fusion, MedIA의 conformal 3D region이 직접 선행입니다. 실제 clinical pair와 calibration geometry가 없으면 새 이름의 결합일 뿐입니다.</p></div>
               <b>판정</b><small>best 31.0/40 · all six rejected · terms/payload/P0/method/server/GPU 0</small>
             </article>
             <article>
-              <span>CURRENT · SCHEMA 7.8 REAPPRAISAL · REJECTED</span>
+              <span>HISTORICAL · SCHEMA 7.8 REAPPRAISAL · REJECTED</span>
               <div><h3>왜 타당해 보이는 방향도 아직 active paper가 아닌가?</h3><p>Aneurisk cycle-averaged fixed-point fidelity가 여섯 후보 중 최고였지만 31.0/40입니다. Public manifest가 exact vector/phase/extraction contract를 주지 않고, source paper와 direct priors가 fixed-point analysis, Hodge operator와 tracking을 이미 점유합니다. 따라서 점수를 32로 반올림하거나 historical AneuG 32와 합치지 않습니다.</p></div>
               <b>판정</b><small>best 31.0/40 · archive/VTP/P0/method/architecture/server/GPU 0</small>
             </article>
             <article>
-              <span>CURRENT · TRELLIS SURFACE FEATURE · DIRECT PRIOR</span>
+              <span>DIRECT PRIOR · TRELLIS SURFACE FEATURE</span>
               <div><h3>3D foundation feature를 GNN에 붙이면 새 방법인가?</h3><p>아닙니다. TRELLIS 연구는 비의료 3D object 50만 개에서 학습한 1,024차원 surface feature를 PointNet/PointNet++와 AnXplore mesh GNN에 이미 결합했고 rollout RMSE를 낮췄습니다. 그러나 101개 sac이 하나의 uniform parent vessel을 공유하고, surface-WSS critical point·signed index·worldline은 평가하지 않았습니다. 명시된 code URL도 현재 404입니다. v5 source watch는 repository 공개 여부만 읽고, 변화가 생겨도 faithful baseline 구현 가능성을 사람이 재검토하도록 알릴 뿐 E0·P0·architecture·GPU를 열지 않습니다. 따라서 foundation feature는 향후 faithful implementation이 있을 때의 matched control이지, 지금 선택된 architecture나 structure-faithful evidence가 아닙니다.</p></div>
               <b>판정</b><small>direct prior · code URL 404 · fail-closed watch · candidate/asset/P0/model/GPU 0</small>
             </article>
             <article>
-              <span>CURRENT · SOURCE WATCH V5 · WATCH ONLY</span>
-              <div><h3>공개 페이지가 바뀌면 왜 바로 실험하지 않는가?</h3><p>Metadata 변화는 “다시 읽어 볼 이유”일 뿐 task adequacy가 아닙니다. v5는 IAVS·TopBrain·TRELLIS·Aneumo에 AneuG, Aneurisk, LargeIA와 TopAneu를 더해 아홉 source의 revision·license·access·manifest 상태를 비교합니다. AneuG/Aneurisk 변화도 닫힌 job의 repair 근거가 아니고, LargeIA/TopAneu 변화도 개인 약관을 대신 수락하지 않습니다. 변화가 있으면 사람이 독립 단위·target lineage·direct prior를 새 version으로 다시 평가하고 32/40을 넘어야 method-free P0를 별도 등록할 수 있습니다.</p></div>
-              <b>현재 관측</b><small>9/9 exact match · manual review 0 · download/terms/P0/P1/model/GPU/outer test 0</small>
+              <span>CURRENT · SOURCE WATCH V6 · WATCH ONLY</span>
+              <div><h3>공개 페이지가 바뀌면 왜 바로 실험하지 않는가?</h3><p>Metadata 변화는 “다시 읽어 볼 이유”일 뿐 task adequacy가 아닙니다. v6는 v5의 아홉 source에 exact AneuX-derived transient-CFD revision·gate·license·card·manifest를 열 번째로 더합니다. AneuG/Aneurisk 변화도 닫힌 job의 repair 근거가 아니고, LargeIA/TopAneu/AneuX access 변화도 개인 약관을 대신 수락하지 않습니다. 변화가 있으면 사람이 독립 단위·target lineage·direct prior를 새 version으로 다시 평가하고 32/40을 넘어야 method-free P0를 별도 등록할 수 있습니다.</p></div>
+              <b>현재 관측</b><small>10/10 exact match · manual review 0 · download/terms/P0/P1/model/GPU/outer test 0</small>
             </article>
             <article>
-              <span>CURRENT · SURFACE-VECTOR · INACTIVE CONDITIONAL HYPOTHESIS</span>
+              <span>RETAINED · SURFACE-VECTOR · INACTIVE CONDITIONAL HYPOTHESIS</span>
               <div><h3>어떤 주장만 살아 있고, 무엇은 아직 선택되지 않았는가?</h3><p>살아 있는 가설은 field error가 비슷한 transient-WSS surrogate도 robust signed critical point와 worldline에서는 다를 수 있다는 것입니다. Edge-integrated 1-form, SE(3) mesh message passing, Hodge operator와 periodic temporal map은 이 가설을 검사할 candidate/control이지 novelty가 아닙니다. Old P0는 0/10 미평가로 닫혔고 새 wrapper로 재개하지 않습니다.</p></div>
               <b>상태</b><small>inactive hypothesis · lead/primary/P0/P1/method/architecture/GPU/outer test 0</small>
             </article>

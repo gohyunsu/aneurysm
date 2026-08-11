@@ -1,5 +1,17 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.3 submission boundary · 2026-08-11:** The AneuX-derived
+> transient-CFD material record does not activate a title, contribution,
+> architecture, result table or figure. Its strongest source formulation is
+> 28.0/40; field schema, independent patient/family units and split are not
+> public, and direct transient-WSS GNN priors are dense. Terms and payload were
+> not opened. Submission identity remains zero and the manuscript stays a
+> planning shell.
+
+> **Source-watch v6 submission boundary · 2026-08-11:** Ten frozen metadata
+> states are operational provenance only. A watch change cannot become paper
+> evidence, a model choice or compute authorization.
+
 > **Source-watch v5 submission boundary · 2026-08-11:** Nine exact public
 > metadata states match their frozen snapshots. This creates no paper identity,
 > contribution, method, result or experiment. A future watch change can request

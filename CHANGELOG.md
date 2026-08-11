@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.3 rejects the AneuX-derived transient-CFD source branch
+
+- Audited exact HF metadata `38c574bc…` without accepting the manual contact-
+  sharing gate or opening tensor, mesh, raw README or commit-history payload.
+- Counted 180 bifurcation + 143 side-wall folders but only 322 unique visible
+  IDs because `SNF365` occurs in both topology roots. Did not relabel visible
+  IDs as patients or base families.
+- Added the 2026 RHSIA, physics-constrained mesh-GNN and multiphysics
+  thrombosis-GNN boundaries. Froze six source formulations at
+  28.0/27.5/27.5/27.0/26.0/26.0, all below 32.
+- Preserved jobs `115645` and `115684` as closed no-verdict history. Opened no
+  P0/P1, method, architecture, server query, PBS/GPU, outer test or claim.
+
+## 2026-08-11 · Fail-closed source watch v6 adds the gated transient manifest
+
+- Extended immutable v5 with a tenth exact source state: revision, gate,
+  license, dataset-card hash, storage metadata, sibling inventory and
+  topology-qualified/unique-ID manifests for `yiyings/transient-dataset`.
+- A change can request only fresh source re-audit. The watcher cannot accept
+  terms, download a member, repair a closed P0, alter a score, register P0/P1,
+  select a model or authorize GPU/outer test.
+- Added contract validation and regression tests; the workflow remains
+  read-only and contains no scientific-server or SSH path.
+
 ## 2026-08-11 · Source-watch v5 deployment verified
 
 - Exact public content `4de91614991dea82441599136dcbf567f0bbc8bd`

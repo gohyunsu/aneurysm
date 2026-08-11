@@ -547,6 +547,27 @@ execution-incomplete outcome과 kill rule은
 [`aneux-preprocessing-orbit-audit-2026-08-09.md`](aneux-preprocessing-orbit-audit-2026-08-09.md)에
 고정한다.
 
+## 0-W2. Rejected material source · AneuX-derived transient CFD
+
+[공식 HF record](https://huggingface.co/datasets/yiyings/transient-dataset)는
+side-wall 143개와 bifurcation 180개 AneuX-derived geometry folder의 transient
+CFD를 공개 metadata로 기술한다. 두 topology root에 `SNF365`가 중복되어 visible
+unique ID는 322개다. 하지만 manual contact-sharing gate가 있고, public card에는
+tensor key·단위·phase·BC·solver·patient/base-family mapping·split이 없다. 따라서
+folder를 patient로 세거나 filename이 같다는 이유로 AneuG schema를 가정하지
+않는다.
+
+[RHSIA](https://arxiv.org/abs/2601.19876)는 graph Transformer, GHD, temporal
+conditioning과 steady-flow augmentation을 이미 transient surface-WSS에 적용했고,
+[physics-constrained aneurysm GNN](https://www.nature.com/articles/s41746-026-02404-z)과
+[multiphysics thrombosis GNN](https://doi.org/10.1016/j.compbiomed.2026.111649)도
+mesh autoregression, inflow OOD와 multiphysics field surrogation을 직접 다룬다.
+Cross-topology generalization을 포함한 여섯 fresh formulation은 최고 28.0/40으로
+기각했다. 이는 material source-change signal이지 E0 pass, old P0 repair 또는
+architecture authorization이 아니다. 상세 근거는
+[`aneux-transient-cfd-material-source-audit-2026-08-11.md`](aneux-transient-cfd-material-source-audit-2026-08-11.md)를
+따른다.
+
 ## 0-W. Closed conditional gap · full transient WSS와 cycle-functional compatibility
 
 [AneuG-Flow](https://papers.nips.cc/paper_files/paper/2025/file/e2b8ff0035bc9f572a7deefbcbea85bc-Paper-Datasets_and_Benchmarks_Track.pdf)는

@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 AneuX-derived transient-CFD material audit · schema 8.3:** Exact
+> HF metadata `yiyings/transient-dataset` revision `38c574bc…`은 AneuX-derived
+> side-wall/bifurcation transient CFD를 새로 확인시킨다. Public API manifest는
+> 180+143 topology folder, 322 unique visible ID와 cross-root duplicate
+> `SNF365`를 보인다. Manual contact-sharing gate는 수락하지 않았고 tensor,
+> mesh, raw README와 commit history는 읽지 않았다. Card에는 patient/base-
+> family mapping, tensor/units/phases/BC/solver/split이 없다. Fresh six-way
+> screen 28.0/27.5/27.5/27.0/26.0/26.0은 모두 32 미만이므로 기각한다. 이는
+> material source-change signal이지 E0 pass나 historical job `115645`의
+> repair/rerun 근거가 아니다. Lead/primary/P0/P1/method/architecture/server
+> query/PBS/GPU/outer test/claim은 0이다.
+
+> **2026-08-11 source-watch v6:** `configs/source_watch_v6.json`은 immutable
+> v5 아홉 source에 위 exact gated metadata를 열 번째로 추가한다. Revision,
+> access, license, card 또는 manifest 변화는 fresh source re-audit만 요청한다.
+> Automatic terms acceptance/download/score repair/P0/model/GPU/outer test는
+> 금지한다. Visible ID는 verified patient나 base family가 아니다. 이 update는
+> scientific server를 조회하지 않았고 job을 만들지 않았다. Future eligible
+> execution은 `introai9` PBS뿐이며 `junjinyong`은 절대 접근하지 않는다.
+
 > **2026-08-11 source-watch v5 deployment verification:** Exact public content
 > `4de91614991dea82441599136dcbf567f0bbc8bd` passed Quality
 > `31455085579` and Pages `31455085014`. The validated contract has nine exact

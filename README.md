@@ -1,5 +1,28 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 AneuX-derived transient-CFD material audit · schema 8.3:** A
+> newly audited Hugging Face record at exact `38c574bc…` names transient CFD
+> for selected AneuX side-wall and bifurcation geometries. Its public API shows
+> 180 bifurcation + 143 side-wall folders but only 322 unique visible IDs
+> because `SNF365` occurs in both. The record is manually gated; contact-
+> sharing terms were not accepted, and no tensor, mesh, raw README or commit
+> history was opened. Public metadata lacks patient/base-family lineage,
+> tensor units/phase/BC/solver semantics and a split. RHSIA, physics-constrained
+> mesh GNNs and multiphysics thrombosis GNNs occupy the obvious architecture
+> space. Six fresh formulations score **28.0/27.5/27.5/27.0/26.0/26.0** and
+> are rejected. This is a material source-change signal, not E0 or a repair of
+> job `115645`. Active lead, P0/P1, method, architecture, server query, GPU,
+> outer test and claim remain zero.
+> [Detailed audit](docs/aneux-transient-cfd-material-source-audit-2026-08-11.md) ·
+> [Ten-source watch](docs/source-watch.md)
+
+> **2026-08-11 fail-closed source watch v6:** The exact manually gated AneuX-
+> derived transient-CFD metadata state is added as the tenth watch. Revision,
+> gate, license, card or visible-manifest change can request only a fresh
+> source audit. It cannot accept terms, download a member, promote a visible ID
+> to a patient, repair a closed P0, select a model or authorize compute.
+> [Watch contract](configs/source_watch_v6.json)
+
 > **2026-08-11 source-watch v5 deployment:** Exact content `4de91614991…`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31455085579)
 > and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31455085014).

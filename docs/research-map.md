@@ -1,16 +1,21 @@
 # 연구 지형과 현재 작업
 
-> **2026-08-03 방향 변경:** 이 문서는 초기 In-PI-MGN 재현 맥락을 보존한다.
-> 현재 primary method와 contribution은
-> [`research-direction.md`](research-direction.md), 모델은
-> [`model-spec.md`](model-spec.md), 실험은
+> **2026-08-11 현재 상태:** 이 문서는 초기 In-PI-MGN 재현 맥락을 보존하는
+> historical map이다. 현재 active primary problem, method, architecture와
+> contribution은 모두 0이다. 새 AneuX-derived transient-CFD source도 public
+> metadata만으로는 patient/base-family, tensor, unit, phase, BC, solver와 split을
+> 식별할 수 없어 최고 28.0/40으로 기각됐다. 최신 판단은
+> [`research-direction.md`](research-direction.md), 모델 경계는
+> [`model-spec.md`](model-spec.md), 실행 경계는
 > [`experiment-protocol.md`](experiment-protocol.md)를 기준으로 한다.
 
 ## 1. 연구가 진행되는 맥락
 
 뇌동맥류의 임상적 난점은 비파열 동맥류를 발견한 뒤 치료의 이득과 시술 위험을 비교해야 한다는 점이다. 크기·모양·위치·환자 임상정보만으로는 개인별 위험을 충분히 설명하기 어렵고, 혈류가 벽에 가하는 힘(WSS, OSI, pressure/velocity field)이 보완 정보를 제공할 가능성이 있다. 그러나 CFD는 geometry segmentation, meshing, 경계조건 설정과 수치해석에 시간·전문성이 필요하다.
 
-현재 프로젝트는 이 병목을 **CFD-trained graph surrogate**로 줄이는 재현 연구다.
+초기 프로젝트는 이 병목을 **CFD-trained graph surrogate**로 줄이는 재현
+연구로 시작했다. 아래 흐름은 현재 선택된 방법이 아니라 historical baseline
+lineage다.
 
 `geometry → CFD ground truth → mesh graph → In-PI-MGN → velocity rollout → WSS/OSI/summary features`
 
@@ -43,13 +48,23 @@ MeshGraphNet의 encode–15-step message passing–decode 구조를 기반으로
 - surrogate가 빠르다는 사실만으로 임상적으로 유용한 risk biomarker가 되는 것은 아니다.
 - PI loss가 실제로 보존법칙·경계조건을 만족하는지 residual, mass flux, wall boundary를 별도로 보고해야 한다.
 
-## 4. 현재 작업
+## 4. 초기 작업 기록과 현재 경계
 
-1. 원문과 정리글의 주장/근거를 분리한다.
-2. AneuriskWeb, AneuX, CMHA(Gong et al.), BenchAnXplore를 case-level manifest로 통합한다.
-3. raw asset과 derived asset을 분리하고, geometry-disjoint split을 고정한다.
-4. 공개 재현 run의 1-step/50-step discrepancy 원인을 조사한다.
-5. 이후 hemodynamics를 rupture stratification에 넣되 real CFD와 surrogate를 비교한다.
+초기 계획은 원문과 2차 설명을 분리하고, 여러 공개 asset을 case manifest로
+정리하며, geometry-disjoint split에서 In-PI-MGN을 재현하는 것이었다. 이 계획은
+source audit을 거치며 active plan에서 내려왔다. 현재는 다음 경계를 따른다.
+
+1. `patient`, `lesion`, `base geometry`, `derived case`의 lineage를 확인하기 전에는
+   folder나 mesh를 독립 표본으로 세지 않는다.
+2. Field schema, units, cardiac phases, BC, solver provenance와 split이 공개적으로
+   식별되지 않으면 architecture나 GPU 실험을 열지 않는다.
+3. Surface-vector 질문은 inactive hypothesis로만 보존한다. Exact critical
+   point/worldline보다 remesh·tolerance·perturbation stability와 signed degree/
+   abstention을 먼저 검토해야 한다.
+4. GNN, graph Transformer, Hodge/DEC, equivariance, edge 1-form, periodic decoder와
+   topology loss는 direct-prior component 또는 baseline이지 contribution이 아니다.
+5. Historical no-verdict P0는 원인 복원이나 same-contract repair/rerun 없이 닫고,
+   별도 material evidence version만 fresh source gate에서 평가한다.
 
 ## 5. 다른 도메인으로의 확장
 

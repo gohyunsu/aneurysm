@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation source batch"):
+        with self.assertRaisesRegex(ProtocolError, "AneuX-derived transient-CFD source batch"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation source batch"):
+        with self.assertRaisesRegex(ProtocolError, "AneuX-derived transient-CFD source batch"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation source batch"):
+        with self.assertRaisesRegex(ProtocolError, "AneuX-derived transient-CFD source batch"):
             validate_protocol(candidate)
 
     def test_aneug_target_construction_audit_rejects_compute_and_score_repair(self) -> None:
@@ -300,7 +300,7 @@ class ProtocolTests(unittest.TestCase):
     def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["structure_faithful_wss_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "8.2")
+        self.assertEqual(self.protocol["schema_version"], "8.3")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertTrue(
@@ -333,7 +333,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "public_phantom_to_clinical_wss_segmentation_transfer",
+            "topology_stratified_sidewall_bifurcation_transient_wss_generalization",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -346,7 +346,7 @@ class ProtocolTests(unittest.TestCase):
     def test_conformal_degree_candidate_closes_after_incomplete_cpu_p0(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["conformal_degree_certificate_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "8.2")
+        self.assertEqual(self.protocol["schema_version"], "8.3")
         self.assertEqual(audit["best_score"], 32.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
@@ -418,7 +418,7 @@ class ProtocolTests(unittest.TestCase):
     def test_cross_view_projection_batch_rejects_proxy_and_no_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["cross_view_projection_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "8.2")
+        self.assertEqual(self.protocol["schema_version"], "8.3")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -467,7 +467,7 @@ class ProtocolTests(unittest.TestCase):
     def test_functional_4dflow_segmentation_batch_is_direct_prior_limited(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["functional_4dflow_segmentation_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "8.2")
+        self.assertEqual(self.protocol["schema_version"], "8.3")
         self.assertEqual(audit["best_score"], 25.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -499,7 +499,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "public_phantom_to_clinical_wss_segmentation_transfer",
+            "topology_stratified_sidewall_bifurcation_transient_wss_generalization",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -507,6 +507,50 @@ class ProtocolTests(unittest.TestCase):
             "best_score"
         ] = 32.0
         with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation"):
+            validate_protocol(candidate)
+
+    def test_aneux_transient_material_source_is_rejected_without_access(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["aneux_transient_cfd_material_source_audit"]
+        self.assertEqual(self.protocol["schema_version"], "8.3")
+        self.assertEqual(audit["best_score"], 28.0)
+        self.assertLess(
+            max(audit["all_candidate_scores"]),
+            audit["automatic_selection_threshold"],
+        )
+        self.assertEqual(audit["dataset_gated"], "manual")
+        self.assertFalse(audit["user_terms_or_contact_sharing_accepted"])
+        self.assertEqual(audit["topology_qualified_case_folders"], 323)
+        self.assertEqual(audit["unique_visible_case_ids"], 322)
+        self.assertEqual(audit["cross_topology_overlap_ids"], ["SNF365"])
+        self.assertFalse(audit["visible_id_is_verified_patient_or_base_family"])
+        self.assertFalse(audit["tensor_mesh_or_raw_readme_payload_accessed"])
+        self.assertTrue(audit["material_source_change_signal"])
+        self.assertFalse(audit["e0_pass"])
+        self.assertFalse(audit["historical_aneug_p0_repair_or_rerun_authorized"])
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+        self.assertEqual(
+            problem["most_recent_source_rejected_candidate"],
+            "topology_stratified_sidewall_bifurcation_transient_wss_generalization",
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneux_transient_cfd_material_source_audit"][
+            "best_score"
+        ] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "AneuX-derived transient-CFD"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneux_transient_cfd_material_source_audit"][
+            "user_terms_or_contact_sharing_accepted"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "AneuX-derived transient-CFD"):
             validate_protocol(candidate)
 
         candidate = copy.deepcopy(self.protocol)
@@ -574,6 +618,35 @@ class ProtocolTests(unittest.TestCase):
             "automatic_terms_acceptance_authorized"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "Source watch v5"):
+            validate_protocol(candidate)
+
+    def test_source_watch_v6_adds_gated_manifest_without_authority(self) -> None:
+        watch = self.protocol["problem_selection"]["public_source_watch_v6"]
+        self.assertEqual(watch["config"], "configs/source_watch_v6.json")
+        self.assertEqual(watch["extends_historical_config"], "configs/source_watch_v5.json")
+        self.assertEqual(watch["watch_count"], 10)
+        self.assertEqual(watch["aneux_transient_gated"], "manual")
+        self.assertEqual(watch["aneux_transient_sibling_count"], 1940)
+        self.assertEqual(watch["aneux_transient_bifurcation_case_folders"], 180)
+        self.assertEqual(watch["aneux_transient_sidewall_case_folders"], 143)
+        self.assertEqual(watch["aneux_transient_unique_visible_case_ids"], 322)
+        self.assertEqual(watch["aneux_transient_cross_topology_overlap_ids"], ["SNF365"])
+        self.assertTrue(watch["same_as_all_frozen_snapshots"])
+        self.assertFalse(watch["manual_review_triggered"])
+        self.assertFalse(watch["automatic_download_authorized"])
+        self.assertFalse(watch["automatic_terms_acceptance_authorized"])
+        self.assertFalse(watch["historical_execution_repair_or_rerun_authorized"])
+        self.assertFalse(watch["p0_or_p1_authorized"])
+        self.assertFalse(watch["method_or_architecture_authorized"])
+        self.assertFalse(watch["gpu_or_outer_test_authorized"])
+        self.assertFalse(watch["server_queried"])
+        self.assertFalse(watch["junjinyong_accessed_for_this_watch"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v6"][
+            "automatic_terms_acceptance_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v6"):
             validate_protocol(candidate)
 
     def test_trellis_surface_feature_update_is_direct_prior_only(self) -> None:

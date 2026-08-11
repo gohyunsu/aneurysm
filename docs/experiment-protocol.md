@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.3 no-experiment boundary · 2026-08-11:** The manually gated
+> AneuX-derived transient-CFD record was inspected through public metadata only.
+> No terms, tensor, mesh, raw README or commit history was opened. The best
+> fresh source score is 28.0/40, so no method-free P0, data transfer,
+> scientific-server query, PBS/GPU job or outer test is registered. Visible IDs
+> are not verified patient/base-family units. Historical jobs `115645` and
+> `115684` remain closed no-verdict contracts without repair/rerun.
+
 > **Schema 8.2 no-experiment boundary · 2026-08-11:** The functional 4D-flow
 > screen is source-only. Eleven clinical scans and masks are nonpublic, promised
 > weights are not current assets, and the public phantom has one effective

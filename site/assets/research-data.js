@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest functional 4D-flow segmentation source best 25.5/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · conformal-degree P0 115684 remains closed 0/10 no verdict · not submission-ready",
-    requirement: "a distinct fresh problem with a material usable patient-level asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; WSS-aware segmentation, TOF transfer, physics consistency, a promised checkpoint or a conformal wrapper cannot repair the rejected functional 4D-flow batch or closed Aneurisk P0",
+    status: "Target locked · latest AneuX-derived transient-CFD material source best 28.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    requirement: "a distinct fresh problem with a material usable patient-level asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; a manually gated manifest, topology label, visible case ID, GNN/Hodge stack or new loss cannot repair the closed WSS P0 or create novelty",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A material transient-CFD release changes the inventory, not the paper identity",
+      copy: "Exact Hugging Face metadata 38c574bc… describes author-generated transient CFD on selected AneuX side-wall and bifurcation geometries. The manifest exposes 180 bifurcation and 143 side-wall folders but only 322 unique visible IDs because SNF365 occurs in both roots. Access is manually gated with contact sharing; no terms, tensor, mesh, raw README or commit history was opened. The public card omits patient/base-family mapping, tensor/units/phases/BC/solver semantics and split keys. RHSIA, physics-constrained aneurysm GNNs, multiphysics thrombosis GNNs and Hodge/equivariant controls leave six formulations at 28.0/27.5/27.5/27.0/26.0/26.0, all rejected.",
+      status: "Material source-change signal · best 28.0/40 rejected · gate/payload/P0/method/architecture/server/GPU 0",
+      url: "../docs/aneux-transient-cfd-material-source-audit-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Functional 4D-flow segmentation is direct-prior dense and asset poor",
@@ -821,6 +828,11 @@ window.AURORA_DATA = Object.freeze({
       provenance: "750 lesions · 605 source-reported patients · historical 3 resolutions/up to 4 cuts/170 features · initial tabular transport exhausted · no CSV/model range · 13 checks unevaluated · no rerun/P1 · CC BY-NC 4.0"
     },
     {
+      name: "AneuX-derived transient CFD · exact HF 38c574bc…",
+      role: "source-rejected manually gated material state; watch-only, not training",
+      provenance: "180 bifurcation + 143 side-wall folders · 322 unique visible IDs · SNF365 cross-root duplicate · CC BY-NC 4.0 · patient/family/schema/units/phases/BC/solver/split unresolved · terms/payload/P0/model/GPU 0"
+    },
+    {
       name: "DIAS",
       role: "source-rejected prefix-risk candidate; future patient-grouped DSA segmentation baseline only",
       provenance: "60 patients · 120 sequences · 60 fully annotated · expert-preselected 4–14 arterial frames · CC BY 4.0 · payload 0 · no P0/model/GPU"
@@ -832,6 +844,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 8.3 rejects AneuX-derived transient CFD as an active identity",
+      copy: "The new record is a genuine material source change, but not a task admission. Public metadata exposes 323 topology-qualified folders and 322 unique visible IDs; it does not expose patient/base-family lineage, field schema, units, phases, boundary conditions, solver provenance or split. Manual contact-sharing terms were not accepted and no member was opened. Dense transient-WSS and mesh-GNN priors reduce the six frozen formulations to a best 28.0/40. Historical jobs 115645 and 115684 remain closed no-verdict records without repair.",
+      files: ["docs/aneux-transient-cfd-material-source-audit-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/literature-lineage.md", "docs/datasets.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
+      category: "operations",
+      title: "Source watch v6 freezes ten fail-closed metadata states",
+      copy: "The exact manually gated AneuX-derived transient-CFD revision is added as the tenth watch. Revision, access, license, card, storage or visible-manifest change can request only a fresh source re-audit. The contract cannot accept terms, open a member, count a visible ID as a patient, repair a historical execution, alter a score, register P0/P1, select a model or authorize GPU/outer test.",
+      files: ["configs/source_watch_v6.json", "configs/source_watch_v5.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", ".github/workflows/source-watch.yml", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/source-watch.md", "README.md", "AGENTS.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",
