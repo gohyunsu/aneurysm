@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 9.9, 2026-08-12):** A fresh diagnostic-
+> action and human-AI screen rejects all six candidates at
+> **29.5/27.0/26.0/26.0/25.0/24.5**. The strongest row, CFD-applicability-
+> certified segmentation on IAVS, is directly occupied by the source task and
+> fails residual novelty at 0.5/5; its exact official repository remains a
+> one-file README with no released patient rows, masks, license or split.
+> Automation bias around vascular-loop, infundibulum and perforator mimics is
+> clinically real, but the 20-examination/9-reader study and 6-patient 7 T
+> reference study do not provide a versioned patient-level reader/reference
+> asset. Contrast-retention functionals and treatment-specific MARTA risk are
+> also direct prior without a public joined imaging/CFD/outcome contract. No
+> active lead, data terms, payload, P0/P1, method, architecture, scientific-
+> server query, PBS/GPU, outer test or paper claim was opened. Mimic taxonomy
+> and patient-level acquisition/recommendation actions are retained only as
+> future evaluation templates. See the [exact reappraisal](docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 9.8 deployment/private verification:** Exact scientific
 > source `975b6e360f71d6948c6cb09b6661704cf5732687` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31507256370) and

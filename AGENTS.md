@@ -1,5 +1,37 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 diagnostic-action and human-AI reappraisal · schema 9.9:** Six
+> fresh rows are frozen at 29.5/27.0/26.0/26.0/25.0/24.5 and all are rejected.
+> `cfd_applicability_certified_segmentation_on_iavs` is the additive best, but
+> CFD applicability is the source task itself and residual novelty is 0.5/5.
+> Exact IAVS head `2e40088d9eaa671c592929a154b7b2cf99f9320a` remains README-only
+> with no license or released patient rows, masks, CFD targets or split.
+>
+> The automation-bias source has 20 TOF-MRA examinations, nine radiologists and
+> ten false-positive-AI cases (five vascular loops, three infundibula and two
+> perforators). The 7 T reference source has six patients with 0.9--2.0 mm
+> suspected lesions, five clarified as infundibula. These establish clinical
+> importance, not a public patient-level reader/reference contract. The open
+> multicentre model, generic complementarity/deferral and cross-view methods are
+> direct baselines. Mimic-aware selective diagnosis or acquisition escalation
+> remains an evaluation template only.
+>
+> The contrast-retention source already defines functional flow markers on 271
+> cross-sectional PCOM aneurysms and 41 longitudinal cases; MARTA already owns
+> treatment-specific risk on 2,647 patients. Neither exposes the required
+> versioned joined imaging/CFD/outcome rows. Real-biplane DSA calibration also
+> lacks a public acquired-pair reference asset. No terms, payload, P0/P1,
+> method, architecture, server query, PBS/GPU, outer test, result, C21 or claim
+> is opened. The incomplete 15-source watch observation caused by GitHub HTTP
+> 403 is neither a source change nor a scientific failure and is not repaired
+> or retried. Surface-vector stays inactive. Future gate-authorized execution
+> is `introai9` PBS only; prohibit login-node GPU and never access, query,
+> transfer to, submit to or monitor `junjinyong`.
+> Full regression is 428 tests: 362 pass and 66 optional-dependency skips. The
+> machine protocol passes 75 invariant groups; all 15 frozen source-watch
+> entries validate, and historical contracts, site links/anchors/assets,
+> JavaScript syntax and diff hygiene pass without scientific execution.
+
 > **2026-08-12 schema 9.8 deployment·private synchronization:** Exact public
 > scientific source `975b6e360f71d6948c6cb09b6661704cf5732687` passed Quality
 > `31507256370` and Pages `31507253480`. Private paper ledger

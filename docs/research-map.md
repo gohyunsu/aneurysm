@@ -1,5 +1,14 @@
 # 연구 지형과 현재 작업
 
+> **Schema 9.9 map · 2026-08-12:** Diagnostic action and human-AI interaction
+> are a rejected discovery branch, not an active workstream. Automation bias
+> establishes harm; 7 T/DSA establish possible reference escalation; IAVS/TAR
+> occupy segmentation-to-CFD applicability; contrast retention and MARTA
+> occupy functional and treatment endpoints; generic deferral occupies the
+> policy mechanism. The public assets do not join patient images, expert
+> references, reader actions and outcomes. Best score 29.5/40, novelty 0.5/5,
+> active lead/method/model/compute zero. Return to fresh problem/source search.
+
 > **Schema 9.7 map · 2026-08-11:** The neck/isolation branch is source-rejected,
 > not an active workstream. AneuSI is a fixed neck-conditioned ROI baseline;
 > NeckSpline, workflow variability, TAR and the open nnU-Net occupy the obvious

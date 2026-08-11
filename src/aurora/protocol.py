@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.8":
-        raise ProtocolError("The current research-state schema must be version 9.8.")
+    if protocol["schema_version"] != "9.9":
+        raise ProtocolError("The current research-state schema must be version 9.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_longitudinal_intervention_reliability_batch_rejected_additive_best_32_critical_fail_no_p0_no_compute"
+        != "no_active_problem_diagnostic_action_human_ai_batch_rejected_best_29_5_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "diagnostic_action_and_human_ai_reappraisal",
             "longitudinal_intervention_and_patient_reliability_reappraisal",
             "neck_isolation_and_open_model_source_reappraisal",
             "vmr_growth_paired_surface_structure_source_audit",
@@ -263,13 +264,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_longitudinal_intervention_reliability_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_diagnostic_action_human_ai_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_paper_source_and_metadata_only_no_rsna_terms_or_payload_no_mendeley_or_openneuro_payload_no_scientific_server"
+        != "public_paper_and_repository_metadata_only_no_iavs_or_mimic_or_contrast_or_treatment_patient_payload_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -281,15 +282,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/longitudinal-intervention-and-patient-reliability-reappraisal-2026-08-12.md"
+        != "docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "patient_level_all_lesion_miss_risk_control_on_rsna_rejected_at_32_with_residual_novelty_1_5_and_asset_2_5"
+        != "cfd_applicability_certified_segmentation_on_iavs_rejected_at_29_5_with_residual_novelty_0_5_and_asset_1"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The longitudinal/intervention/reliability batch must remain rejected and the VMR candidate "
+            "The diagnostic-action/human-AI batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -351,8 +352,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 32.0
-        or admission_v2["current_batch_best_residual_novelty"] != 1.5
+        or admission_v2["current_batch_best_score"] != 29.5
+        or admission_v2["current_batch_best_residual_novelty"] != 0.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -361,6 +362,234 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    diagnostic_action = problem_selection[
+        "diagnostic_action_and_human_ai_reappraisal"
+    ]
+    _require_keys(
+        diagnostic_action,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "automation_bias_paper_doi",
+            "automation_bias_tof_mra_examinations",
+            "automation_bias_radiologists",
+            "automation_bias_false_positive_cases",
+            "automation_bias_false_positive_vascular_loops",
+            "automation_bias_false_positive_infundibula",
+            "automation_bias_false_positive_perforators",
+            "automation_bias_results_reproduced_by_aurora",
+            "seven_t_mimic_patients",
+            "seven_t_mimic_infundibula_clarified",
+            "open_tof_model_private_cohort_patients",
+            "open_tof_model_private_cohort_scans",
+            "open_tof_model_adam_cases",
+            "open_tof_model_weights_public",
+            "open_tof_model_differential_diagnosis_patient_rows_public",
+            "iavs_reported_mra_volumes",
+            "iavs_reported_annotations",
+            "iavs_repository_head",
+            "iavs_repository_blob_paths",
+            "iavs_repository_license",
+            "iavs_dataset_code_or_cfd_payload_public",
+            "contrast_retention_cross_sectional_aneurysms",
+            "contrast_retention_longitudinal_aneurysms",
+            "contrast_retention_versioned_public_patient_bundle_identified",
+            "marta_treated_patients",
+            "marta_endovascular_patients",
+            "marta_neurosurgical_patients",
+            "marta_public_patient_image_join_identified",
+            "topaneu_repository_head_unchanged",
+            "full_source_watch_refresh_completed",
+            "full_source_watch_observation_failure",
+            "aneumo_metadata_request_completed",
+            "aneumo_metadata_observation_failure",
+            "candidates",
+            "mimic_taxonomy_retained_as_future_evaluation_only",
+            "patient_recommendation_or_acquisition_action_retained_as_future_evaluation_only",
+            "surface_vector_reactivated",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "historical_score_or_job_relabelled",
+            "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "diagnostic action and human-AI reappraisal",
+    )
+    expected_diagnostic_action_candidates = [
+        (
+            "cfd_applicability_certified_segmentation_on_iavs",
+            [5.0, 5.0, 0.5, 1.0, 5.0, 5.0, 5.0, 3.0],
+            29.5,
+            False,
+            "reject_task_directly_occupied_and_official_release_is_readme_only",
+        ),
+        (
+            "contrast_retention_instability_functional_surrogate",
+            [5.0, 4.5, 1.0, 1.0, 3.0, 5.0, 5.0, 2.5],
+            27.0,
+            False,
+            "reject_functional_directly_occupied_and_matched_public_patient_bundle_absent",
+        ),
+        (
+            "mimic_aware_selective_diagnosis_with_acquisition_escalation",
+            [5.0, 4.0, 2.0, 1.0, 1.5, 5.0, 5.0, 2.5],
+            26.0,
+            False,
+            "reject_paired_mimic_and_reference_asset_absent",
+        ),
+        (
+            "real_biplane_dsa_crossview_lesion_set_localization",
+            [5.0, 4.0, 0.5, 1.0, 3.0, 5.0, 5.0, 2.5],
+            26.0,
+            False,
+            "reject_direct_prior_and_no_public_acquired_pair_contract",
+        ),
+        (
+            "imaging_augmented_treatment_specific_marta_risk",
+            [5.0, 2.0, 0.5, 1.0, 5.0, 5.0, 4.5, 2.0],
+            25.0,
+            False,
+            "reject_counterfactual_and_joined_image_asset_absent",
+        ),
+        (
+            "automation_bias_aware_evidence_display_policy",
+            [5.0, 3.5, 1.5, 1.0, 1.5, 5.0, 5.0, 2.0],
+            24.5,
+            False,
+            "reject_direct_human_ai_prior_and_no_development_reader_asset",
+        ),
+    ]
+    observed_diagnostic_action_candidates = [
+        (
+            row["id"],
+            row["axis_scores"],
+            row["total"],
+            row["critical_axis_pass"],
+            row["decision"],
+        )
+        for row in diagnostic_action["candidates"]
+    ]
+    if (
+        diagnostic_action["status"]
+        != "fresh_batch_rejected_best_29_5_fails_total_novelty_and_asset_floors_no_active_lead"
+        or diagnostic_action["audit_document"]
+        != "docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md"
+        or diagnostic_action["automatic_selection_threshold"] != 32.0
+        or diagnostic_action["best_candidate_id"]
+        != "cfd_applicability_certified_segmentation_on_iavs"
+        or diagnostic_action["best_score"] != 29.5
+        or diagnostic_action["best_residual_novelty_score"] != 0.5
+        or diagnostic_action["all_candidate_scores"]
+        != [29.5, 27.0, 26.0, 26.0, 25.0, 24.5]
+        or diagnostic_action["conditional_source_lead_count"] != 0
+        or diagnostic_action["primary_problem_selected"] is not False
+        or diagnostic_action["paper_identity_active"] is not False
+        or diagnostic_action["automation_bias_tof_mra_examinations"] != 20
+        or diagnostic_action["automation_bias_radiologists"] != 9
+        or diagnostic_action["automation_bias_false_positive_cases"] != 10
+        or (
+            diagnostic_action["automation_bias_false_positive_vascular_loops"],
+            diagnostic_action["automation_bias_false_positive_infundibula"],
+            diagnostic_action["automation_bias_false_positive_perforators"],
+        )
+        != (5, 3, 2)
+        or diagnostic_action["automation_bias_results_reproduced_by_aurora"]
+        is not False
+        or diagnostic_action["seven_t_mimic_patients"] != 6
+        or diagnostic_action["seven_t_mimic_infundibula_clarified"] != 5
+        or (
+            diagnostic_action["open_tof_model_private_cohort_patients"],
+            diagnostic_action["open_tof_model_private_cohort_scans"],
+            diagnostic_action["open_tof_model_adam_cases"],
+        )
+        != (364, 385, 113)
+        or diagnostic_action["open_tof_model_weights_public"] is not True
+        or diagnostic_action[
+            "open_tof_model_differential_diagnosis_patient_rows_public"
+        ]
+        is not False
+        or (
+            diagnostic_action["iavs_reported_mra_volumes"],
+            diagnostic_action["iavs_reported_annotations"],
+        )
+        != (641, 587)
+        or diagnostic_action["iavs_repository_head"]
+        != "2e40088d9eaa671c592929a154b7b2cf99f9320a"
+        or diagnostic_action["iavs_repository_blob_paths"] != ["README.md"]
+        or diagnostic_action["iavs_repository_license"] is not None
+        or diagnostic_action["iavs_dataset_code_or_cfd_payload_public"] is not False
+        or diagnostic_action["contrast_retention_cross_sectional_aneurysms"] != 271
+        or diagnostic_action["contrast_retention_longitudinal_aneurysms"] != 41
+        or diagnostic_action[
+            "contrast_retention_versioned_public_patient_bundle_identified"
+        ]
+        is not False
+        or (
+            diagnostic_action["marta_treated_patients"],
+            diagnostic_action["marta_endovascular_patients"],
+            diagnostic_action["marta_neurosurgical_patients"],
+        )
+        != (2647, 1907, 740)
+        or diagnostic_action["marta_public_patient_image_join_identified"] is not False
+        or diagnostic_action["topaneu_repository_head_unchanged"]
+        != "018c243445f99199f484018c4c80575c84c72293"
+        or diagnostic_action["full_source_watch_refresh_completed"] is not False
+        or diagnostic_action["full_source_watch_observation_failure"]
+        != "github_unauthenticated_api_http_403_rate_limit_no_source_verdict"
+        or diagnostic_action["aneumo_metadata_request_completed"] is not False
+        or diagnostic_action["aneumo_metadata_observation_failure"]
+        != "prolonged_response_terminated_no_source_verdict"
+        or observed_diagnostic_action_candidates
+        != expected_diagnostic_action_candidates
+        or diagnostic_action["mimic_taxonomy_retained_as_future_evaluation_only"]
+        is not True
+        or diagnostic_action[
+            "patient_recommendation_or_acquisition_action_retained_as_future_evaluation_only"
+        ]
+        is not True
+        or any(
+            diagnostic_action[key] is not False
+            for key in [
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_score_or_job_relabelled",
+                "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            ]
+        )
+        or diagnostic_action["next_allowed_action"]
+        != "fresh_problem_level_source_or_material_asset_audit_only_no_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "Diagnostic-action/human-AI sources must remain a rejected, "
+            "public-metadata-only batch with no model, compute or claim."
+        )
+    checks.append("diagnostic action and human-AI rejected-source boundary")
 
     longitudinal_reliability = problem_selection[
         "longitudinal_intervention_and_patient_reliability_reappraisal"

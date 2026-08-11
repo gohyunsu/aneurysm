@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.9 experiment boundary · 2026-08-12:** The diagnostic-action/
+> human-AI batch admits zero candidates. Do not accept data terms, stage reader
+> or image payload, register P0/P1, implement a display/deferral/operator model,
+> query a scientific server or create a PBS/GPU job. The incomplete 15-source
+> watch fetch caused by unauthenticated GitHub HTTP 403 is an observation
+> failure, not a material source change, and does not authorize retry or local
+> repair. Future work must begin with a new versioned problem/asset contract.
+
 > **Schema 9.7 experiment boundary · 2026-08-11:** The fresh six-way neck/
 > isolation screen admits zero candidates. Do not stage AneuSI VTKs, download
 > the open-model archive, register P0/P1, train a model or create a PBS job.

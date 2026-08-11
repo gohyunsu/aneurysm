@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-08-12 · Diagnostic action and human-AI pivots rejected · schema 9.9
+
+- Audited aneurysm automation bias, 7 T mimic clarification, the open
+  multicentre TOF model, IAVS/TAR, contrast-retention functionals, MARTA,
+  real-biplane cross-view localization and generic deferral priors.
+- Froze six candidates at 29.5/27.0/26.0/26.0/25.0/24.5. All fail the total or
+  critical novelty/asset floors; the additive leader is directly occupied by
+  IAVS's stated CFD-applicability task and has residual novelty 0.5/5.
+- Verified exact IAVS head `2e40088d…` is still README-only and exact TopAneu
+  head `018c2434…` is unchanged. Read no medical payload and accepted no terms.
+- Retained mimic taxonomy and patient-level recommendation/acquisition action
+  as evaluation templates only. Opened no lead, P0/P1, method, architecture,
+  scientific-server query, PBS/GPU, outer test, result or manuscript claim.
+- Recorded an incomplete source-watch observation caused by GitHub HTTP 403
+  and a terminated metadata request as operational non-verdicts, without
+  retry, snapshot change or scientific interpretation. `junjinyong` remained
+  completely excluded.
+- Full regression passed 362 tests with 66 optional-dependency skips out of
+  428. The protocol passed 75 invariant groups; all 15 frozen watch entries,
+  historical contracts, site graph, JavaScript and diff hygiene also passed.
+
 ## 2026-08-12 · Schema 9.8 deployed and privately pinned
 
 - Exact scientific source `975b6e360f71d6948c6cb09b6661704cf5732687`

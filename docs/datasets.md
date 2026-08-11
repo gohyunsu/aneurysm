@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.9 asset boundary · 2026-08-12:** No active dataset is opened. The
+> automation-bias study's 20 examinations/9 readers and the 7 T source's six
+> patients are reported study cohorts, not versioned public reader/reference
+> rows. Exact IAVS head `2e40088d…` exposes only `README.md`, with no license,
+> patient rows, masks, CFD targets or split. The contrast-retention and MARTA
+> cohorts do not publish a joined image/geometry/flow/outcome bundle, and no
+> public acquired real-biplane reference pair was identified. Study, reader,
+> lesion, projection and phase are not interchangeable independent units. No
+> terms or payload were accessed and no split is authorized.
+
 > **Schema 9.7 asset boundary · 2026-08-11:** AneuSI tracks 103 lesion-labelled
 > surface/centerline/neck files but only 99 visible base IDs. Its seven groups
 > of 102 clip-factor VTK outputs are deterministic repeated views. Repository

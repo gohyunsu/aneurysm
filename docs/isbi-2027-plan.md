@@ -1,5 +1,16 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.9 submission boundary · 2026-08-12:** Do not title an ISBI paper
+> around automation-bias-aware display, mimic abstention, IAVS CFD utility,
+> contrast retention, real-biplane fusion or imaging-augmented MARTA risk. The
+> six rows peak at 29.5/40 and all fail total or critical novelty/asset floors.
+> Clinical importance alone cannot substitute for an identifiable task,
+> executable patient-level asset and independent method gap. No title,
+> abstract claim, contribution, method figure, result table, C21, terms,
+> payload, P0/P1, model or GPU run is authorized. A future submission needs a
+> sealed patient/reference/action contract, an observed baseline failure and a
+> mechanism-linked intervention confirmed on an independent cohort.
+
 > **Schema 9.8 submission boundary · 2026-08-12:** Do not title the paper around
 > Bayesian longitudinal growth, patient-level RSNA risk control, selective
 > referral or flow-diverter outcome prediction. The additive best is 32.0/40,

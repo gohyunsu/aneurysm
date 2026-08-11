@@ -1,5 +1,17 @@
 # AURORA 연구 방향
 
+> **Schema 9.9 direction · 2026-08-12:** Do not pivot to mimic-aware selective
+> diagnosis, IAVS CFD-applicability certification, contrast-retention
+> surrogation, real-biplane fusion, treatment-risk augmentation or evidence-
+> display optimization. These are important clinical questions, but the best
+> fresh row is 29.5/40 with residual novelty 0.5/5, and every row fails a
+> non-compensatory floor. Keep mimic classes and patient-level acquisition or
+> recommendation actions as evaluation templates only. Re-entry requires a
+> versioned patient/split/reference contract and a failure mechanism not
+> already owned by IAVS/TAR, contrast-retention analysis, MARTA, cross-view
+> localization or generic deferral. Open no P0, model or compute.
+> [Exact reappraisal](diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md)
+
 > **Schema 9.8 direction · 2026-08-12:** Do not pivot to longitudinal surface-
 > displacement learning, RSNA detector calibration or flow-diverter tabular
 > outcome prediction. A 2026 direct prior already owns adjacent-vessel Bayesian

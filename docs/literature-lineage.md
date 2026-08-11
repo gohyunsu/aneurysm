@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.9 lineage · 2026-08-12:** Open multicentre TOF detection → small-
+> lesion model baseline; 7 T/DSA → mimic reference escalation; automation-bias
+> reader study → human harm; CoDoC/selective clinical AI → deferral and
+> complementarity; IAVS/TAR → vessel/aneurysm segmentation and CFD
+> applicability; cross-view localization → projection fusion; contrast-
+> retention analysis → functional instability marker; MARTA → treatment-
+> specific risk. This lineage leaves no independent novelty in combining a
+> detector, uncertainty head, display policy, acquisition recommendation or
+> GNN/operator. The residual gap is a missing public, patient-grouped contract
+> that joins reference provenance, action and consequence—not yet a method gap.
+
 > **Schema 9.7 lineage · 2026-08-11:** NeckSpline → continuous image-derived
 > neck curve; AneuSI → supplied-neck surface isolation and clip-factor orbit;
 > workflow-variability analysis → reconstruction/segmentation/BC/ostium

@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 9.9 server boundary · 2026-08-12:** This reappraisal used public
+> literature and Git metadata only. No scientific server was queried, no data
+> was transferred and no PBS/GPU job was created or monitored. One full public
+> source-watch fetch was incomplete at unauthenticated GitHub HTTP 403, and a
+> separate metadata request was terminated without a source verdict; neither
+> observation is retried, repaired or treated as scientific evidence. Future
+> gate-authorized execution is `introai9` PBS only. Prohibit login-node GPU and
+> never access, query, transfer to, submit to or monitor `junjinyong`.
+
 > **Schema 9.7 server boundary · 2026-08-11:** This source reappraisal queried
 > no scientific server, transferred no data and created no PBS/GPU job. Public
 > web/Git metadata inspection is not an `introai9` observation. Future execution

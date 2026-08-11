@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류 neck, AneuSI surface isolation, 반복 clipFactor와 독립 환자 단위, surface-vector 구조 안정성과 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="뇌동맥류 false-positive mimic, 자동화 편향, reference escalation, IAVS CFD utility, 독립 환자 단위와 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#diagnostic-action">Diagnostic action</a>
       <a href="#longitudinal-reliability">Longitudinal &amp; reliability</a>
       <a href="#neck-isolation">Neck &amp; isolation</a>
       <a href="#vmr-growth-structure">VMR structure gate</a>
@@ -71,18 +72,78 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.8</span>
-          <strong>총점 32.0 후보도 critical floor를 넘지 못했으며, active lead는 여전히 0개입니다.</strong>
+          <span>짧은 답 · schema 9.9</span>
+          <strong>임상적으로 실제인 자동화 편향도 공개 reference/action contract와 독립 novelty가 없으면 연구 주제로 승인되지 않습니다.</strong>
           <p>
-            최신 여섯 후보는 32.0/31.0/29.5/29.5/26.5/23.0입니다. 그러나
-            32.0 후보의 residual novelty는 1.5/5, 공개 asset readiness는 2.5/5라
-            필수 하한을 통과하지 못합니다. Longitudinal growth internal control과
-            lesion-detection risk control은 이미 직접 선행이 있고, RSNA는 controlled
-            access입니다. Patient-level all-lesion reliability는 좋은 평가 원칙이지만
-            아직 paper contribution이 아닙니다. Surface-vector 질문과 과거 VMR 0/10
-            no-verdict 기록은 보존하되 P0/P1, method, architecture, server query, GPU와
-            outer test는 모두 0입니다.
+            최신 여섯 후보는 29.5/27.0/26.0/26.0/25.0/24.5이고 모두
+            기각됐습니다. IAVS의 CFD applicability, contrast-retention functional,
+            MARTA risk, cross-view localization과 generic deferral가 직접 선행이며,
+            공개 자산은 환자 영상·expert reference·reader action·outcome을 연결하지
+            못합니다. Mimic taxonomy와 환자 단위 recommendation/acquisition action은
+            좋은 평가 원칙이지만 아직 contribution이 아닙니다. Surface-vector와 과거
+            no-verdict 기록은 보존하되 P0/P1, method, architecture, scientific-server
+            query, GPU와 outer test는 모두 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="diagnostic-action">
+          <span>False-positive mimic, 자동화 편향과 진단 행동을 처음부터 이해하기</span>
+          <strong>모델의 오답이 의사의 행동을 바꿀 수 있다는 사실은 중요하지만, 그 사실만으로 새 학습 방법이 생기지는 않습니다.</strong>
+          <p>
+            TOF-MRA에서 작은 동맥류처럼 보이는 구조를 <em>mimic</em>이라고 합니다.
+            혈관이 겹쳐 고리처럼 보이는 vascular loop, 정상 혈관 기시부가 깔때기처럼
+            넓어진 infundibulum, 아주 작은 perforator가 대표적입니다. 최근 reader
+            study는 20개 검사와 9명의 radiologist를 사용했고, 의도적으로 넣은 열
+            개의 false-positive AI 사례는 vascular loop 5개, infundibulum 3개,
+            perforator 2개였습니다. AI의 잘못된 표시가 병변 의심을 높였고 경험이
+            적은 독자의 follow-up 권고도 늘렸습니다. 이것이 <em>automation bias</em>,
+            즉 보조 시스템의 제안 때문에 인간 판단이 체계적으로 이동하는 현상입니다.
+          </p>
+          <p>
+            Reference escalation은 애매한 TOF 소견을 더 강한 검사로 확인하는
+            과정입니다. 7 T 연구는 0.9–2.0 mm 의심 병변을 가진 6명을 조사했고
+            5명을 infundibulum으로 명확히 했습니다. DSA도 중요한 기준 검사입니다.
+            하지만 두 연구가 임상 개념을 뒷받침한다고 해서 공개 학습 데이터가 되는
+            것은 아닙니다. 필요한 것은 환자별 TOF 영상, AI 표시, 전문가 판독,
+            7 T/DSA reference, 실제 follow-up 결정이 동일 ID와 split으로 연결된
+            versioned asset입니다. 현재 그런 공개 contract는 확인되지 않았습니다.
+          </p>
+          <p>
+            공개 multicentre TOF 모델은 385 scans/364 patients와 ADAM 113건을
+            사용하고 weight도 공개하므로 강한 detector baseline입니다. IAVS는 641
+            3D MRA와 587 IA-vessel annotation 및 CFD applicability를 주장합니다.
+            그러나 2026-08-12 exact official Git head에는 `README.md` 한 파일만 있고
+            license, patient rows, masks, CFD target과 split이 없습니다. 더구나 CFD
+            utility 자체가 IAVS의 명시된 source task여서 “segmentation + CFD head”는
+            독립 novelty가 아닙니다. TAR도 topology-aware IA-vessel segmentation을,
+            CoDoC와 selective clinical AI는 deferral/complementarity를 직접 다룹니다.
+          </p>
+          <p>
+            다른 임상 endpoint도 같은 원칙으로 걸렀습니다. Contrast-retention
+            연구는 271개의 PCOM aneurysm과 41 longitudinal cases에서 정규화된
+            retention functional을 이미 정의하고 instability, rupture와 WSS critical
+            point를 연결합니다. MARTA는 15개 센터 2,647명의 treatment-specific
+            complication risk를 이미 구축합니다. 공개 patient geometry/flow/contrast/
+            outcome join이 없으므로 surrogate나 imaging-augmented risk model을 곧바로
+            만들 수 없습니다. 실제 biplane DSA도 공개 acquired pair가 없고, 기존
+            cross-view 연구는 ADAM 3D MRA에서 만든 deterministic MIP입니다.
+          </p>
+          <p>
+            여덟 축 비보상형 gate에서 여섯 후보의 총점은
+            29.5/27.0/26.0/26.0/25.0/24.5입니다. 최고 후보는 중요도와 baseline은
+            높지만 novelty 0.5/5와 asset 1.0/5라 탈락합니다. 다른 축의 점수를 올려
+            핵심 결함을 덮지 않습니다. 따라서 지금의 올바른 산출물은 모델이 아니라
+            명시적 기각 기록입니다. 향후 재진입에는 공개 patient/reference/action
+            join, family-disjoint split, strong baseline에서 실제 관찰된 action failure,
+            그리고 그 failure와 직접 연결된 최소 개입이 함께 필요합니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Evaluation template: mimic class + patient action</span>
+            <span class="no">Best 29.5 &lt; 32</span>
+            <span class="no">Best novelty 0.5 &lt; 2.5</span>
+            <span class="no">No joined public reference/action asset</span>
+            <span class="no">No terms · payload · P0 · model · server · GPU</span>
+          </div>
+          <a href="../docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md">exact sources, six frozen scores와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="longitudinal-reliability">
           <span>Longitudinal growth, 치료 결과와 patient-level reliability를 처음부터 이해하기</span>

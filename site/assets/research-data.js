@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · longitudinal/intervention/reliability additive best 32.0/40 rejected by novelty 1.5/5 and asset 2.5/5 critical floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem-level source/material-asset audit; patient-level all-lesion reliability remains evaluation-only, no data terms, payload, P0/P1, model or GPU experiment opens, and closed VMR contracts remain unrepaired",
+    status: "Target locked · diagnostic-action/human-AI best 29.5/40 rejected; all six fail total or critical novelty/asset floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; mimic taxonomy and patient-level recommendation/acquisition action remain evaluation-only, no data terms, payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A real automation-bias harm still fails without a public reference/action contract",
+      copy: "A 20-examination, 9-radiologist reader study shows that ten false-positive AI marks—five vascular loops, three infundibula and two perforators—raise suspicion and follow-up recommendations. A 7 T study clarifies five of six 0.9–2.0 mm suspected lesions as infundibula. These establish importance, not a versioned patient-level reader/reference asset. IAVS already states CFD applicability on 641 3D MRA/587 annotations, but exact official head 2e40088d… is README-only without license, patient rows, masks, CFD targets or split. Contrast retention, MARTA, cross-view localization and generic deferral are direct priors. Six candidates score 29.5/27.0/26.0/26.0/25.0/24.5 and all fail total or critical novelty/asset floors.",
+      status: "Best 29.5/40 rejected · novelty 0.5/5 · joined asset/P0/method/server/GPU 0",
+      url: "../docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "A high additive score cannot hide an occupied method and incomplete asset",
@@ -997,6 +1004,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 9.9 rejects diagnostic-action and human-AI pivots",
+      copy: "Automation-bias and 7 T sources establish clinically meaningful false-positive mimics and reference escalation, but no public patient-level reader/reference/action contract. IAVS directly owns CFD applicability and exact head 2e40088d… remains README-only. Contrast-retention functionals, MARTA, cross-view localization and generic deferral occupy the other obvious tasks and mechanisms. Six frozen rows score 29.5/27.0/26.0/26.0/25.0/24.5 and all fail total or critical novelty/asset floors. Mimic taxonomy and patient-level recommendation/acquisition action remain evaluation templates only. No terms, payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens. A source-watch HTTP 403 and terminated metadata request remain operational non-verdicts without retry or repair.",
+      files: ["docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

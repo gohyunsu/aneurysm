@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.9 architecture boundary · 2026-08-12:** There is no selected
+> model. A mimic-aware detector, conformal/selective head, complementarity-
+> driven deferral policy, evidence display, acquisition recommender, cross-view
+> fusion module, CFD-utility head, contrast functional surrogate or imaging-
+> augmented MARTA model would instantiate direct priors on an unready asset.
+> A GNN, Hodge block, equivariance or operator does not create a research gap.
+> Keep the architecture section conditional; authorize no training code or GPU.
+
 > **Schema 9.7 architecture boundary · 2026-08-11:** There is still no current
 > GNN, operator or segmentation model. A neck-conditioned mesh network would
 > implement an already occupied task around AneuSI/NeckSpline; uncertainty,
