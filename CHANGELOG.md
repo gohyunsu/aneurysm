@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.3 scientific source deployed and privately pinned
+
+- Exact scientific source `8d09d34ad2b05e1c65530811ede4d8aa5ada66ec`
+  passed Quality `31525137390` and Pages `31525136523`; live Overview,
+  Learn and the machine protocol expose the 27.0/40 rejection and
+  no-model/no-compute state.
+- Private ledger `7281f013695b8522cb901b75e397d50c7d5ddd3a` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- This deployment provenance opens no P0/P1, method, architecture, scientific
+  server, PBS/GPU, outer test, result row, C21 or claim.
+
 ## 2026-08-12 · Target time and instability prediction rejected · schema 10.3
 
 - Added the 852-patient/1,111-aneurysm seven-hospital pre-event radiomics study

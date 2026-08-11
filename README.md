@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.3 scientific deployment/private synchronization:**
+> Exact scientific source `8d09d34ad2b05e1c65530811ede4d8aa5ada66ec`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31525137390)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31525136523).
+> Live Overview, Learn and the machine protocol expose best 27.0/40, all six
+> rejected and the no-timestamped-multicentre-asset/no-model/no-compute
+> boundary. Private ledger `7281f013695b8522cb901b75e397d50c7d5ddd3a` is
+> remote exact, PRIVATE and anonymous API returns 404. Manuscript and references
+> remain byte-for-byte unchanged. This provenance opens no scientific or
+> submission authority.
+
 > **Current research state (schema 10.3, 2026-08-12):** A seven-hospital
 > pre-growth/pre-rupture study now directly occupies multimodality radiomics
 > stability prediction with an independent six-hospital cohort. A separate

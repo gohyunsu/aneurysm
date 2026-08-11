@@ -1049,6 +1049,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.3 scientific source is live and privately pinned",
+      copy: "Exact scientific source 8d09d34ad2b05e1c65530811ede4d8aa5ada66ec passed Quality 31525137390 and Pages 31525136523. Live Overview, Learn and the machine protocol expose best 27.0/40, all six rejected, no timestamped multicentre public asset and active lead/P0/method/model/server/GPU/claim zero. Private ledger 7281f013695b8522cb901b75e397d50c7d5ddd3a is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.3 separates target time from a mixed instability label",
       copy: "Seven-hospital pre-event radiomics directly occupies broad multimodality stability prediction, while a 293-patient VWI study already combines habitat radiomics, DenseNet, clinical variables, Transformer fusion, SHAP, calibration and DCA. Its unstable label mixes prior symptoms/growth with future rupture/progression, so target-time and component-endpoint separation remain necessary evaluation principles. NCT07111975 is a 3,800-participant future direct prior, not a current result or asset. Six frozen rows score 27.0/26.5/26.0/25.5/25.5/25.5; all fail total or critical asset/independent-unit floors. No payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens.",
