@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 8.2 direction · 2026-08-11:** Functional 4D-flow segmentation is
+> not the replacement identity. A 2026 direct prior already evaluates
+> segmentation-induced WSS bias; its 355 TOF scans are pretraining data, while
+> only eleven nonpublic 7T 4D-flow scans carry the downstream task. VAST and
+> COMPASS further occupy physics-aware processing and metric certification.
+> The fresh batch peaks at 25.5/40. The rational direction is therefore to keep
+> searching at the problem/asset level, not invent a WSS-aware loss or GNN.
+> Surface-vector remains an inactive falsifiable hypothesis pending material E0
+> and method-free stability. No model or compute is active.
+
 > **Schema 8.1 direction · 2026-08-11:** A fresh cross-view/projection audit
 > rejects all six candidates; the best ADAM projection-consistent 3D lesion-set
 > formulation is 31.0/40. The apparent DSA pair is actually two deterministic

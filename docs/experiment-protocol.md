@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.2 no-experiment boundary · 2026-08-11:** The functional 4D-flow
+> screen is source-only. Eleven clinical scans and masks are nonpublic, promised
+> weights are not current assets, and the public phantom has one effective
+> anatomy. No P0/P1, data transfer, method, architecture, scientific-server
+> query or PBS/GPU job is registered. Any future version requires a new usable
+> patient-level aneurysm 4D-flow mask/velocity/WSS asset and an independent
+> estimand before compute.
+
 > **Schema 8.1 no-experiment boundary · 2026-08-11:** The cross-view source
 > batch peaks at 31.0/40 and opens no experiment. ADAM access terms were not
 > accepted, no patient payload was read, and the clinical multicenter DSA source
@@ -373,16 +381,18 @@ assisted-manual label과 여러 algorithm output을 섞는다. CTA phantom의 12
 없다. 향후 compute는 `introai9` PBS만 사용하고 `junjinyong`은 접속·조회·제출·
 모니터링하지 않는다.
 
-## S-WATCH · three-source fail-closed monitor · no experiment authorization
+## S-WATCH · five-source fail-closed monitor · no experiment authorization
 
 2026-08-10 official `AbsoluteResonance/IAVS` `main` exact `2e40088…`은 90-byte
 README 한 파일뿐이고 release, explicit repository license와 payload/code가 0이다.
 TopBrain 2.0은 revision-4 design PDF/under-construction이고 TRELLIS stated code
-repository는 HTTP 404다.
-[`configs/source_watch_v3.json`](../configs/source_watch_v3.json)은 세 snapshot과
+repository는 HTTP 404다. Aneumo GitHub/Hugging Face는 exact `701d53dd…`/
+`f801adee…`이며 linked real/undeformed-case mapping marker가 없다.
+[`configs/source_watch_v4.json`](../configs/source_watch_v4.json)은 다섯 snapshot과
 no-download/no-P0/no-model/no-GPU 경계를 고정한다. Read-only monitor는 IAVS
 commit+non-README entry/release/license, TopBrain Zenodo/challenge navigation,
-TRELLIS repository availability를 감지한다. Official dataset record는 별도 1차
+TRELLIS repository availability, Aneumo repository/revision/license/access state와
+filename manifest를 감지한다. Official dataset record는 별도 1차
 출처의 manual review로만 붙인다. IAVS/TopBrain 변화가 있어도 허용되는 다음
 단계는 **fresh source audit**, TRELLIS 변화는 **direct-prior baseline-feasibility
 review**뿐이며 source score 32, 명시적 license/사용자-confirmed terms,
@@ -391,7 +401,7 @@ payload P0를 등록하지 않는다. P0/P1 전에는 architecture와 GPU가 없
 
 ```bash
 python scripts/audit_source_watch.py \
-  --config configs/source_watch_v3.json \
+  --config configs/source_watch_v4.json \
   --fetch --fail-on-change
 ```
 

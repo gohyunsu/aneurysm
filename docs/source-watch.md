@@ -1,4 +1,14 @@
-# Public source watch · IAVS + TopBrain 2.0 + TRELLIS code
+# Public source watch · IAVS + TopBrain 2.0 + TRELLIS + Aneumo
+
+> **2026-08-11 v4 decision:** the same fail-closed metadata contract now also
+> watches the official Aneumo GitHub repository and Hugging Face dataset for a
+> genuinely material real-case/undeformed-case mapping release. A live refresh
+> matched all five frozen snapshots. Aneumo GitHub remains exact `701d53dd…`,
+> has no release and no GitHub-recognized license; Hugging Face remains exact
+> `f801adee…`, has 370 entries under `CC-BY-NC-ND-4.0` and no filename marker
+> for a real, undeformed, AneuX or mapping asset. Maintainer plans for a future
+> linked release are a watch signal, not an E0 pass. No payload was downloaded,
+> no scientific server was queried and no P0/model/GPU authority was created.
 
 > **2026-08-11 v3 decision:** One fail-closed read-only contract now separates
 > two different kinds of evidence change. IAVS/TopBrain material changes can
@@ -26,7 +36,7 @@
 > inverse-flow audit was triggered by a new published direct prior, not by a
 > watched asset change. No server was queried.
 
-상태: **watch-only · 세 official public states 모두 frozen snapshot과 동일 ·
+상태: **watch-only · 다섯 official public states 모두 frozen snapshot과 동일 ·
 manual review 0 · no medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가
@@ -74,13 +84,22 @@ TRELLIS는 task asset이 아니라 **direct-prior baseline feasibility** 때문�
 검토할 이유만 생긴다. 논문의 feature encoder, rendering과 concatenation은 이미
 direct prior이므로 repository 공개를 novelty로 바꾸지 않는다.
 
+Aneumo는 과거 33.5/40 BC-transport source candidate와 닫힌 one-shot P0를
+사후 수리하기 위해 감시하는 것이 아니다. Official repository issue에서
+maintainer는 synthetic variant와 연결된 추가 real undeformed case/CFD 결과를
+향후 공개할 계획이라고 답했다. 현재 GitHub/Hugging Face metadata에는 그
+mapping을 식별할 수 있는 manifest가 없다. 따라서 revision이나 filename
+inventory 변화는 fresh source re-audit만 요청하며, historical score/P0를
+되살리거나 payload download를 자동화하지 않는다.
+
 ## 기계적 감시 계약
 
-[`configs/source_watch_v3.json`](../configs/source_watch_v3.json)은 IAVS의 현재
+[`configs/source_watch_v4.json`](../configs/source_watch_v4.json)은 IAVS의 현재
 commit, root entry, release count와 license, TopBrain 2.0의 Zenodo revision,
 design-object license, exact file inventory와 challenge navigation, TRELLIS의
-stated repository HTTP 404 상태를 고정한다. 기존 v1·v2는 historical contract로
-보존한다.
+stated repository HTTP 404 상태, Aneumo GitHub/Hugging Face의 exact revision,
+license/access state와 filename-manifest hash를 고정한다. 기존 v1--v3는
+historical contract로 보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
 공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
 
@@ -92,8 +111,11 @@ stated repository HTTP 404 상태를 고정한다. 기존 v1·v2는 historical c
 6. challenge의 under-construction 표지가 사라지거나 Data/Evaluation/Rules/
    Submission navigation이 생김
 7. TRELLIS stated repository가 공개되거나 code/release/license가 나타남
+8. Aneumo official GitHub release/license/root inventory가 바뀜
+9. Aneumo Hugging Face revision/license/access state나 370-entry manifest가
+   바뀌거나 real/undeformed/AneuX/mapping marker가 나타남
 
-1--6의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
+1--6과 8--9의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
 **direct-prior baseline-feasibility review 요청**만 만든다. 자동 download, 약관
 수락, 점수 재가중, frozen snapshot 갱신, P0 등록, model/architecture 선택,
 GPU와 outer test는 모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
@@ -103,11 +125,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v3.json \
+  --config configs/source_watch_v4.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v3.json \
+  --config configs/source_watch_v4.json \
   --fetch --fail-on-change
 ```
 

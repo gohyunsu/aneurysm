@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.1":
-        raise ProtocolError("The current research-state schema must be version 8.1.")
+    if protocol["schema_version"] != "8.2":
+        raise ProtocolError("The current research-state schema must be version 8.2.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_cross_view_projection_source_batch_best_31_rejected_conformal_p0_no_verdict_preserved"
+        != "no_active_problem_latest_functional_4dflow_segmentation_source_batch_best_25_5_rejected_conformal_p0_no_verdict_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_1_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_2_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -228,6 +228,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "structure_faithful_wss_source_reappraisal",
             "conformal_degree_certificate_source_audit",
             "cross_view_projection_source_delta",
+            "functional_4dflow_segmentation_source_delta",
+            "public_source_watch_v4",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -238,13 +240,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_cross_view_projection_source_batch_best_31_rejected"
+        != "no_active_problem_latest_functional_4dflow_segmentation_source_batch_best_25_5_rejected"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "source_only_cross_view_projection_audit_no_new_payload_conformal_degree_p0_remains_closed"
+        != "source_only_functional_4dflow_segmentation_audit_no_clinical_image_mask_or_weight_payload_conformal_degree_p0_remains_closed"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -254,17 +256,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_not_cross_view_loss_or_wrapper_and_not_closed_aneurisk_repair_or_rerun"
+        != "fresh_problem_level_primary_source_and_asset_audit_not_functional_segmentation_wrapper_and_not_closed_aneurisk_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/cross-view-projection-source-delta-2026-08-11.md"
+        != "docs/functional-4dflow-segmentation-source-delta-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "adam_projection_consistent_3d_lesion_set"
+        != "public_phantom_to_clinical_wss_segmentation_transfer"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The cross-view source batch must remain rejected below 32 while "
+            "The functional 4D-flow segmentation source batch must remain rejected below 32 while "
             "the conformal-degree candidate stays closed after its exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
@@ -1093,7 +1095,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or foundation_prior["stated_code_url_http_status_on_2026_08_11"] != 404
         or foundation_prior["github_exact_repository_search_count_on_2026_08_11"] != 0
         or foundation_prior["source_watch_config"]
-        != "configs/source_watch_v3.json"
+        != "configs/source_watch_v4.json"
         or foundation_prior["source_watch_current_snapshot_matches"] is not True
         or foundation_prior["source_watch_next_action"] != "continue_watch_only"
         or foundation_prior["source_watch_change_opens_only"]
@@ -2080,6 +2082,273 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "no access agreement, payload, method, server query, or GPU work."
         )
     checks.append("cross-view projection source rejection and no-compute boundary")
+    functional_seg = problem_selection["functional_4dflow_segmentation_source_delta"]
+    _require_keys(
+        functional_seg,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "conditional_source_lead_count",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "direct_source_title",
+            "direct_source_doi",
+            "direct_source_posted",
+            "tof_mra_pretraining_scans",
+            "clinical_7t_4dflow_scans",
+            "tof_pretraining_scans_are_downstream_4dflow_units",
+            "segmentation_target",
+            "time_resolved_wss_uses_time_averaged_static_mask",
+            "baseline_masks_manually_cleaned_for_functional_analysis",
+            "nnunet_mean_wss_pa_mean",
+            "nnunet_mean_wss_pa_sd",
+            "nnunet_mean_wss_icc",
+            "nnunet_max_wss_pa_mean",
+            "nnunet_max_wss_pa_sd",
+            "nnunet_max_wss_icc",
+            "nnunet_wss_bias_percent_upper_bound",
+            "unet_wss_bias_percent_approximate",
+            "densenet_unet_wss_bias_percent_approximate",
+            "clinical_imaging_publicly_shareable",
+            "trained_weights_currently_released",
+            "weights_promised_upon_publication",
+            "public_phantom_effective_anatomy_count",
+            "public_phantom_is_fresh_asset",
+            "candidates",
+            "direct_prior_threats",
+            "clinical_image_or_mask_payload_accessed",
+            "model_weight_or_checkpoint_accessed",
+            "p0_or_p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "server_queried",
+            "pbs_or_gpu_job_created",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "result_row_created",
+            "paper_contribution_created",
+            "submission_identity_active",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_material_change",
+        ],
+        "functional 4D-flow segmentation source delta",
+    )
+    expected_functional_candidates = [
+        (
+            "public_phantom_to_clinical_wss_segmentation_transfer",
+            25.5,
+            [5.0, 3.0, 1.5, 3.0, 0.5, 5.0, 5.0, 2.5],
+            "reject",
+        ),
+        (
+            "aneurysm_sac_aware_4dflow_functional_segmentation",
+            24.5,
+            [5.0, 3.5, 2.0, 0.5, 1.0, 5.0, 5.0, 2.5],
+            "reject",
+        ),
+        (
+            "patient_level_selective_wss_error_certificate",
+            23.5,
+            [5.0, 4.0, 1.0, 0.5, 1.0, 5.0, 5.0, 2.0],
+            "reject",
+        ),
+        (
+            "segmentation_induced_hemodynamic_ranking_reversal",
+            23.5,
+            [5.0, 4.0, 1.0, 0.5, 1.0, 5.0, 5.0, 2.0],
+            "reject",
+        ),
+        (
+            "resolution_shift_functional_segmentation",
+            23.5,
+            [4.5, 4.5, 0.5, 0.5, 1.0, 5.0, 5.0, 2.5],
+            "reject",
+        ),
+        (
+            "tof_pretrained_4dflow_anatomy_transfer",
+            23.0,
+            [4.5, 5.0, 0.0, 0.5, 1.0, 5.0, 5.0, 2.0],
+            "reject",
+        ),
+    ]
+    observed_functional_candidates = [
+        (
+            candidate.get("id"),
+            candidate.get("score"),
+            candidate.get("axis_scores"),
+            candidate.get("decision"),
+        )
+        for candidate in functional_seg["candidates"]
+    ]
+    expected_functional_priors = {
+        "medrxiv_2026_intracranial_4dflow_segmentation_and_wss_quantification",
+        "vast_unsupervised_intracranial_4dflow_segmentation_and_physics_reconstruction",
+        "compass_conformal_downstream_segmentation_metric_intervals",
+        "generic_task_based_or_goal_oriented_segmentation",
+        "segmentation_to_cfd_uncertainty_propagation",
+        "tof_to_4dflow_transfer_and_resolution_adaptation",
+    }
+    if (
+        functional_seg["status"] != "completed_source_only_all_candidates_rejected"
+        or functional_seg["audit_document"]
+        != "docs/functional-4dflow-segmentation-source-delta-2026-08-11.md"
+        or functional_seg["automatic_selection_threshold"] != 32.0
+        or functional_seg["best_candidate_id"]
+        != "public_phantom_to_clinical_wss_segmentation_transfer"
+        or functional_seg["best_score"] != 25.5
+        or functional_seg["conditional_source_lead_count"] != 0
+        or functional_seg["active_shortlist_count"] != 0
+        or functional_seg["primary_problem_selected"] is not False
+        or functional_seg["direct_source_title"]
+        != "Automated Segmentation of Intracranial Arteries on 4D Flow MRI for Hemodynamic Quantification"
+        or functional_seg["direct_source_doi"] != "10.64898/2026.03.09.26347567"
+        or functional_seg["direct_source_posted"] != "2026-03-10"
+        or functional_seg["tof_mra_pretraining_scans"] != 355
+        or functional_seg["clinical_7t_4dflow_scans"] != 11
+        or functional_seg["tof_pretraining_scans_are_downstream_4dflow_units"] is not False
+        or functional_seg["segmentation_target"]
+        != "circle_of_willis_not_aneurysm_sac"
+        or functional_seg["time_resolved_wss_uses_time_averaged_static_mask"] is not True
+        or functional_seg["baseline_masks_manually_cleaned_for_functional_analysis"] is not True
+        or functional_seg["nnunet_mean_wss_pa_mean"] != 1.57
+        or functional_seg["nnunet_mean_wss_pa_sd"] != 0.63
+        or functional_seg["nnunet_mean_wss_icc"] != 0.96
+        or functional_seg["nnunet_max_wss_pa_mean"] != 2.16
+        or functional_seg["nnunet_max_wss_pa_sd"] != 1.05
+        or functional_seg["nnunet_max_wss_icc"] != 0.97
+        or functional_seg["nnunet_wss_bias_percent_upper_bound"] != 1.7
+        or functional_seg["unet_wss_bias_percent_approximate"] != -5.0
+        or functional_seg["densenet_unet_wss_bias_percent_approximate"] != 7.0
+        or functional_seg["clinical_imaging_publicly_shareable"] is not False
+        or functional_seg["trained_weights_currently_released"] is not False
+        or functional_seg["weights_promised_upon_publication"] is not True
+        or functional_seg["public_phantom_effective_anatomy_count"] != 1
+        or functional_seg["public_phantom_is_fresh_asset"] is not False
+        or observed_functional_candidates != expected_functional_candidates
+        or any(
+            sum(candidate["axis_scores"]) != candidate["score"]
+            for candidate in functional_seg["candidates"]
+        )
+        or set(functional_seg["direct_prior_threats"]) != expected_functional_priors
+        or any(
+            functional_seg[key] is not False
+            for key in (
+                "clinical_image_or_mask_payload_accessed",
+                "model_weight_or_checkpoint_accessed",
+                "p0_or_p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "server_queried",
+                "pbs_or_gpu_job_created",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "result_row_created",
+                "paper_contribution_created",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or functional_seg["decision"]
+        != "reject_all_without_score_repair_future_weight_promise_or_architecture_combination_novelty"
+        or functional_seg["next_material_change"]
+        != "usable_patient_level_aneurysm_4dflow_mask_velocity_wss_asset_with_split_keys_and_independently_novel_estimand"
+    ):
+        raise ProtocolError(
+            "The functional 4D-flow segmentation audit must preserve the direct "
+            "segmentation-to-WSS prior, distinguish 355 TOF pretraining scans from "
+            "11 unavailable 4D-flow units, reject all scores below 32, and open no compute."
+        )
+    checks.append("functional 4D-flow segmentation direct-prior rejection")
+
+    source_watch_v4 = problem_selection["public_source_watch_v4"]
+    _require_keys(
+        source_watch_v4,
+        [
+            "status",
+            "config",
+            "watch_count",
+            "watch_ids",
+            "aneumo_github_head",
+            "aneumo_github_release_count",
+            "aneumo_github_license_spdx_id",
+            "aneumo_github_repository_size_kib",
+            "aneumo_huggingface_sha",
+            "aneumo_huggingface_last_modified",
+            "aneumo_huggingface_license_tags",
+            "aneumo_huggingface_sibling_count",
+            "aneumo_huggingface_siblings_sha256",
+            "aneumo_real_case_or_mapping_entries",
+            "maintainer_future_real_undeformed_release_statement_not_material_e0",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "automatic_download_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v4",
+    )
+    if (
+        source_watch_v4["status"] != "watch_only_all_five_frozen_snapshots_match"
+        or source_watch_v4["config"] != "configs/source_watch_v4.json"
+        or source_watch_v4["watch_count"] != 5
+        or source_watch_v4["watch_ids"]
+        != [
+            "iavs_public_release_v1",
+            "topbrain2_material_release_v1",
+            "trellis_stated_code_availability_v1",
+            "aneumo_github_material_release_v1",
+            "aneumo_huggingface_material_release_v1",
+        ]
+        or source_watch_v4["aneumo_github_head"]
+        != "701d53dde3489d84dbe9bc8324254629162eb45a"
+        or source_watch_v4["aneumo_github_release_count"] != 0
+        or source_watch_v4["aneumo_github_license_spdx_id"] is not None
+        or source_watch_v4["aneumo_github_repository_size_kib"] != 97770
+        or source_watch_v4["aneumo_huggingface_sha"]
+        != "f801adee816c18d3e18b23e6fcb147fe4c264209"
+        or source_watch_v4["aneumo_huggingface_last_modified"]
+        != "2026-03-19T11:17:28.000Z"
+        or source_watch_v4["aneumo_huggingface_license_tags"]
+        != ["license:cc-by-nc-nd-4.0"]
+        or source_watch_v4["aneumo_huggingface_sibling_count"] != 370
+        or source_watch_v4["aneumo_huggingface_siblings_sha256"]
+        != "8cfc7347c80a52b19d43c83991dbc987cb154463f9669cfb259281d9b7331aa3"
+        or source_watch_v4["aneumo_real_case_or_mapping_entries"] != []
+        or source_watch_v4["maintainer_future_real_undeformed_release_statement_not_material_e0"] is not True
+        or source_watch_v4["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v4[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "automatic_download_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v4["decision"] != "continue_fail_closed_metadata_watch_only"
+    ):
+        raise ProtocolError(
+            "Source watch v4 must preserve all five exact public snapshots and "
+            "create only a manual source re-audit signal, never payload or compute authority."
+        )
+    checks.append("five-source fail-closed metadata watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -2225,6 +2494,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "multicenter_single_frame_dsa_shift_abstention",
         "cross_view_quantitative_dsa_functional_calibration",
         "clinical_biplane_dsa_projection_set_localization",
+        "public_phantom_to_clinical_wss_segmentation_transfer",
+        "aneurysm_sac_aware_4dflow_functional_segmentation",
+        "patient_level_selective_wss_error_certificate",
+        "segmentation_induced_hemodynamic_ranking_reversal",
+        "resolution_shift_functional_segmentation",
+        "tof_pretrained_4dflow_anatomy_transfer",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -2340,6 +2615,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_multioutput_conformal_2d_or_3d_localization_region",
         "task_driven_conformal_uncertainty_for_imaging_inverse_problems",
         "projective_geometry_aware_biplanar_feature_fusion",
+        "intracranial_4dflow_segmentation_to_wss_bias_evaluation",
+        "tof_to_4dflow_transfer_learning",
+        "generic_resolution_shift_functional_segmentation",
+        "generic_downstream_wss_metric_conformal_interval",
+        "joint_4dflow_segmentation_and_physics_consistency",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 
@@ -6724,7 +7004,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "patient_image_mask_clinical_split_or_test_payload_accessed"
         ]
         is not False
-        or topbrain2_audit["source_watch_config"] != "configs/source_watch_v3.json"
+        or topbrain2_audit["source_watch_config"] != "configs/source_watch_v4.json"
         or topbrain2_audit["source_watch_current_snapshot_matches"] is not True
         or set(topbrain2_audit["direct_prior_threats"])
         != expected_topbrain2_priors

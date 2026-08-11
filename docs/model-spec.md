@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.2 no-model boundary · 2026-08-11:** nnU-Net, U-Net, DenseNet
+> U-Net, VAST-style physics processing, TOF transfer, downstream-metric
+> conformal intervals and resolution adaptation are direct controls. All six
+> functional 4D-flow formulations are below 32; no segmentation model, GNN,
+> WSS head, conformal head or GPU run is selected. A future surface operator
+> still begins with an estimand-stability audit, not an architecture.
+
 > **Schema 8.1 no-model boundary · 2026-08-11:** Cross-view prompting,
 > projective fusion, detection-to-correspondence triangulation, conformal 3D
 > regions and abstention are now explicit direct priors/controls. The fresh

@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.2 rejects functional 4D-flow segmentation wrappers
+
+- Added the direct 2026 intracranial 4D-flow segmentation-to-WSS prior and
+  separated 355 TOF-MRA pretraining scans from eleven nonpublic functional
+  4D-flow units.
+- Frozen six candidates at 25.5/24.5/23.5/23.5/23.5/23.0. VAST, COMPASS,
+  task-based segmentation and TOF transfer remove component-level novelty.
+- No image, mask, checkpoint, P0/P1, method, architecture, server query,
+  PBS/GPU, outer test, result row or paper claim was opened. Surface-vector
+  stays inactive and both prior P0 jobs remain closed without repair/rerun.
+
+## 2026-08-11 · Fail-closed source watch v4 adds Aneumo material-release signals
+
+- Froze official Aneumo GitHub head `701d53dd…` and Hugging Face revision
+  `f801adee…` alongside IAVS, TopBrain and TRELLIS.
+- Live metadata-only refresh matched all five snapshots. No linked real/
+  undeformed-case mapping is present; future maintainer plans are not E0.
+- Material change can request only a manual fresh source audit. Automatic
+  payload download, snapshot rewrite, score repair, P0/P1, model, GPU and outer
+  test remain disabled.
+
 ## 2026-08-11 · Adjudication deployment and private ledger verified
 
 - Exact public content `9d3280c8e5946134eddf2d1791e2a9fb18d8151d`

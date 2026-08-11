@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.2 submission boundary · 2026-08-11:** Functional 4D-flow
+> segmentation is rejected as the paper identity at best 25.5/40. A direct
+> study already measures segmentation-induced WSS bias, and the remaining
+> aneurysm-specific gap has no usable patient-level asset. Do not write a title,
+> contribution, method table or experiment around a WSS-aware segmentation
+> wrapper. Submission identity remains zero; continue fresh problem/source
+> discovery while preserving the inactive surface-structure hypothesis.
+
 > **Schema 8.1 submission boundary · 2026-08-11:** Cross-view projection is
 > not the replacement paper identity. Its strongest exact candidate scores
 > 31.0/40 because ADAM MIPs do not establish acquired biplane DSA, access remains

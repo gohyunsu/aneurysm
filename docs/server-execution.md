@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 8.2 source-only update · 2026-08-11:** The functional 4D-flow
+> audit and five-source watch queried no scientific server, transferred no
+> image/mask/checkpoint and created no PBS/GPU job. The last actual `introai9`
+> observation remains the post-`115684` empty queue and was not refreshed.
+> `junjinyong` was not accessed and remains prohibited; login-node GPU commands
+> remain prohibited.
+
 > **Schema 8.1 source-only update · 2026-08-11:** The cross-view projection
 > audit queried no scientific server, transferred no dataset and created no
 > PBS/GPU job. The last observed `introai9` state remains the post-`115684`

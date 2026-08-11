@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 functional 4D-flow direct-prior correction · schema 8.2:** A
+> new intracranial 4D-flow study already evaluates segmentation-induced flow
+> and WSS error using nnU-Net pretrained on 355 TOF-MRA scans and fine-tuned on
+> eleven 7T 4D-flow scans. The 355 scans are not downstream 4D-flow units; the
+> eleven clinical scans are nonpublic, and weights are only promised upon
+> publication. VAST already couples segmentation and physics-aware velocity
+> processing, while COMPASS already certifies downstream segmentation metrics.
+> Six fresh formulations score 25.5/24.5/23.5/23.5/23.5/23.0 and are rejected.
+> The surface-vector question remains inactive, not validated. Active lead,
+> method, architecture, P0/P1 and GPU remain zero. A five-source v4 metadata
+> watch adds Aneumo but matched every frozen snapshot and authorizes nothing.
+> [Detailed audit](docs/functional-4dflow-segmentation-source-delta-2026-08-11.md) ·
+> [Source watch](docs/source-watch.md)
+
 > **2026-08-11 adjudication deployment verification:** Exact public content
 > `9d3280c8e5946134eddf2d1791e2a9fb18d8151d` passed Quality
 > `31451731627` and Pages `31451730835`. Private paper ledger head

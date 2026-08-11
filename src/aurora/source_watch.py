@@ -33,6 +33,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v1",
         "aurora.source_watch.v2",
         "aurora.source_watch.v3",
+        "aurora.source_watch.v4",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -42,8 +43,10 @@ def load_config(path: str | Path) -> dict[str, Any]:
         _validate_v1(payload)
     elif schema == "aurora.source_watch.v2":
         _validate_v2(payload)
-    else:
+    elif schema == "aurora.source_watch.v3":
         _validate_v3(payload)
+    else:
+        _validate_v4(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -85,7 +88,10 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
     )
     if any(authorization.get(key) is not False for key in forbidden):
         raise SourceWatchContractError("authorization_boundary_changed")
-    if payload.get("schema_version") == "aurora.source_watch.v3":
+    if payload.get("schema_version") in {
+        "aurora.source_watch.v3",
+        "aurora.source_watch.v4",
+    }:
         if (
             authorization.get("only_automatic_outcome")
             != "manual_review_signal_only"
@@ -232,6 +238,112 @@ def _validate_v3(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v3_change_boundary_changed")
 
 
+def _validate_v4(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v4_watch_set_changed")
+
+    _validate_v3(
+        {
+            "watches": watches[:3],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    github, huggingface = watches[3:]
+    if github.get("kind") != "github" or github.get(
+        "review_request"
+    ) != "fresh_source_reaudit_only":
+        raise SourceWatchContractError("aneumo_github_watch_changed")
+    github_source = github.get("source", {})
+    if (
+        github_source.get("repository") != "Xigui-Li/Aneumo"
+        or github_source.get("repository_url")
+        != "https://github.com/Xigui-Li/Aneumo"
+        or github_source.get("default_branch") != "main"
+        or github_source.get("paper_url") != "https://arxiv.org/abs/2505.14717"
+    ):
+        raise SourceWatchContractError("aneumo_github_source_changed")
+
+    expected_root = [
+        {"name": "baselines", "type": "dir", "size": 0},
+        {"name": "cfd_opt_deeponet", "type": "dir", "size": 0},
+        {"name": "cfd_opt_swin_deeponet", "type": "dir", "size": 0},
+        {"name": "Connection.csv", "type": "file", "size": 206795},
+        {"name": "Data_preprocessing", "type": "dir", "size": 0},
+        {"name": "datasheet_aneumo.md", "type": "file", "size": 17058},
+        {"name": "fig", "type": "dir", "size": 0},
+        {"name": "inference_deeponet.py", "type": "file", "size": 14333},
+        {"name": "inference_swint.py", "type": "file", "size": 16309},
+        {"name": "MPs.csv", "type": "file", "size": 2993817},
+        {"name": "README.md", "type": "file", "size": 17598},
+        {"name": "real_data", "type": "dir", "size": 0},
+        {"name": "requirements.txt", "type": "file", "size": 98},
+        {"name": "result", "type": "dir", "size": 0},
+        {"name": "scripts", "type": "dir", "size": 0},
+        {"name": "transient", "type": "dir", "size": 0},
+        {"name": "visualization", "type": "dir", "size": 0},
+    ]
+    expected_root = sorted(expected_root, key=lambda item: item["name"].lower())
+    github_snapshot = github.get("frozen_snapshot", {})
+    if github_snapshot != {
+        "main_head_sha": "701d53dde3489d84dbe9bc8324254629162eb45a",
+        "root_entries": expected_root,
+        "release_count": 0,
+        "license_spdx_id": None,
+        "repository_size_kib": 97770,
+        "payload_or_code_entries": sorted(
+            item["name"] for item in expected_root if item["name"] != "README.md"
+        ),
+        "availability": "public_code_and_synthetic_payload_without_real_case_mapping",
+    }:
+        raise SourceWatchContractError("aneumo_github_snapshot_changed")
+
+    if huggingface.get("kind") != "huggingface_dataset" or huggingface.get(
+        "review_request"
+    ) != "fresh_source_reaudit_only":
+        raise SourceWatchContractError("aneumo_huggingface_watch_changed")
+    hf_source = huggingface.get("source", {})
+    if (
+        hf_source.get("dataset_id") != "SAIS-Life-Science/Aneumo"
+        or hf_source.get("dataset_url")
+        != "https://huggingface.co/datasets/SAIS-Life-Science/Aneumo"
+        or hf_source.get("dataset_api_url")
+        != "https://huggingface.co/api/datasets/SAIS-Life-Science/Aneumo"
+    ):
+        raise SourceWatchContractError("aneumo_huggingface_source_changed")
+    if huggingface.get("frozen_snapshot") != {
+        "sha": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+        "last_modified": "2026-03-19T11:17:28.000Z",
+        "private": False,
+        "gated": False,
+        "disabled": False,
+        "license_tags": ["license:cc-by-nc-nd-4.0"],
+        "sibling_count": 370,
+        "siblings_sha256": (
+            "8cfc7347c80a52b19d43c83991dbc987cb154463f9669cfb259281d9b7331aa3"
+        ),
+        "real_case_or_mapping_entries": [],
+        "availability": "public_synthetic_payload_without_real_case_mapping",
+    }:
+        raise SourceWatchContractError("aneumo_huggingface_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("metadata_watch_is_not_payload_access") is not True
+        or detection.get("material_release_signal_is_not_e0_pass") is not True
+    ):
+        raise SourceWatchContractError("v4_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -347,6 +459,40 @@ def fetch_github_repository_availability_snapshot(
         "repository_size_kib": int(metadata.get("size", 0)),
         "payload_or_code_entries": _material_entries(entries),
         "availability": "publicly_readable_repository",
+    }
+
+
+def fetch_huggingface_dataset_snapshot(dataset_api_url: str) -> dict[str, Any]:
+    metadata = _json_get(dataset_api_url)
+    siblings = sorted(
+        str(item.get("rfilename"))
+        for item in metadata.get("siblings", [])
+        if item.get("rfilename")
+    )
+    sibling_manifest = ("\n".join(siblings) + "\n").encode("utf-8")
+    material_tokens = ("aneux", "mapping", "real", "test", "undeform")
+    material_entries = sorted(
+        name for name in siblings if any(token in name.lower() for token in material_tokens)
+    )
+    return {
+        "sha": str(metadata.get("sha", "")),
+        "last_modified": str(metadata.get("lastModified", "")),
+        "private": bool(metadata.get("private", False)),
+        "gated": metadata.get("gated", False),
+        "disabled": bool(metadata.get("disabled", False)),
+        "license_tags": sorted(
+            str(tag)
+            for tag in metadata.get("tags", [])
+            if str(tag).startswith("license:")
+        ),
+        "sibling_count": len(siblings),
+        "siblings_sha256": _sha256(sibling_manifest),
+        "real_case_or_mapping_entries": material_entries,
+        "availability": (
+            "public_payload_with_real_case_or_mapping_marker"
+            if material_entries
+            else "public_synthetic_payload_without_real_case_mapping"
+        ),
     }
 
 
@@ -549,6 +695,46 @@ def evaluate_watch(
             "gpu_or_outer_test_authorized": False,
             "observed": dict(observed),
         }
+    if watch.get("kind") == "huggingface_dataset":
+        frozen = watch["frozen_snapshot"]
+        signals: list[str] = []
+        if observed.get("sha") != frozen.get("sha"):
+            signals.append("huggingface_revision_changed")
+        if observed.get("siblings_sha256") != frozen.get("siblings_sha256"):
+            signals.append("huggingface_file_inventory_changed")
+        new_material = sorted(
+            set(observed.get("real_case_or_mapping_entries", []))
+            - set(frozen.get("real_case_or_mapping_entries", []))
+        )
+        if new_material:
+            signals.append("real_case_or_mapping_material_appeared")
+        if observed.get("license_tags") != frozen.get("license_tags"):
+            signals.append("huggingface_license_changed")
+        for key in ("private", "gated", "disabled"):
+            if observed.get(key) != frozen.get(key):
+                signals.append(f"huggingface_{key}_state_changed")
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") != "zenodo_challenge":
         raise SourceWatchContractError("unsupported_watch_kind")
 
@@ -622,6 +808,8 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         return fetch_github_repository_availability_snapshot(
             source["repository_api_url"]
         )
+    if watch.get("kind") == "huggingface_dataset":
+        return fetch_huggingface_dataset_snapshot(source["dataset_api_url"])
     raise SourceWatchContractError("unsupported_watch_kind")
 
 
@@ -634,7 +822,10 @@ def evaluate_config(
         evaluate_watch(watch, observations[watch["watch_id"]])
         for watch in config["watches"]
     ]
-    if config.get("schema_version") == "aurora.source_watch.v3":
+    if config.get("schema_version") in {
+        "aurora.source_watch.v3",
+        "aurora.source_watch.v4",
+    }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results
         )

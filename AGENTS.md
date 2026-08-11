@@ -1,5 +1,27 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 functional 4D-flow segmentation delta · schema 8.2:** 2026
+> intracranial 4D-flow work already evaluates segmentation-to-flow/WSS bias:
+> 355 public TOF-MRA pretraining scans, eleven nonpublic clinical 7T 4D-flow
+> scans, Circle-of-Willis rather than aneurysm-sac target, static time-averaged
+> mask and future-not-current weight release. VAST and COMPASS occupy joint
+> physics-aware processing and downstream-metric certification. Frozen scores
+> 25.5/24.5/23.5/23.5/23.5/23.0 are all rejected without repair. Do not count
+> 355 as functional patient units or promote a promised checkpoint to an asset.
+> Surface-vector remains inactive and jobs `115645`/`115684` remain closed
+> no-verdict histories. Lead/primary/P0/P1/method/architecture/GPU/outer test/
+> claim are zero.
+
+> **2026-08-11 source watch v4:** exact IAVS, TopBrain, TRELLIS, Aneumo GitHub
+> and Aneumo Hugging Face metadata all match frozen snapshots. Aneumo GitHub is
+> exact `701d53dd…`, release 0, license null; Hugging Face is exact
+> `f801adee…`, 370 entries, `CC-BY-NC-ND-4.0`, with no real/undeformed/AneuX/
+> mapping filename marker. A maintainer's planned linked real-case release is
+> not E0. Changes request manual source re-audit only; never auto-download,
+> score repair, P0, method, GPU or outer test. No scientific server was queried.
+> `introai9` is the only future execution server; `junjinyong` remains strictly
+> prohibited.
+
 > **2026-08-11 adjudication deployment verification:** Exact adjudication
 > content `9d3280c8e5946134eddf2d1791e2a9fb18d8151d` passed Quality
 > `31451731627` and Pages `31451730835`. Private paper ledger head

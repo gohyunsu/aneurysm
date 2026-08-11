@@ -22,7 +22,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "source_watch_v1.json"
 CONFIG_V2 = ROOT / "configs" / "source_watch_v2.json"
 CONFIG_V3 = ROOT / "configs" / "source_watch_v3.json"
-WORKFLOW_V3 = ROOT / ".github" / "workflows" / "source-watch.yml"
+CONFIG_V4 = ROOT / "configs" / "source_watch_v4.json"
+WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
 class SourceWatchContractTests(unittest.TestCase):
@@ -276,12 +277,92 @@ class SourceWatchContractTests(unittest.TestCase):
             with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
                 load_config(candidate)
 
-    def test_v3_workflow_is_read_only_scheduled_and_fail_closed(self) -> None:
-        workflow = WORKFLOW_V3.read_text(encoding="utf-8")
+    def test_v4_frozen_snapshots_include_aneumo_without_authority(self) -> None:
+        config = load_config(CONFIG_V4)
+        self.assertEqual(
+            [watch["watch_id"] for watch in config["watches"]],
+            [
+                "iavs_public_release_v1",
+                "topbrain2_material_release_v1",
+                "trellis_stated_code_availability_v1",
+                "aneumo_github_material_release_v1",
+                "aneumo_huggingface_material_release_v1",
+            ],
+        )
+        github = config["watches"][3]["frozen_snapshot"]
+        huggingface = config["watches"][4]["frozen_snapshot"]
+        self.assertEqual(
+            github["main_head_sha"],
+            "701d53dde3489d84dbe9bc8324254629162eb45a",
+        )
+        self.assertIsNone(github["license_spdx_id"])
+        self.assertEqual(
+            huggingface["sha"], "f801adee816c18d3e18b23e6fcb147fe4c264209"
+        )
+        self.assertEqual(huggingface["sibling_count"], 370)
+        self.assertEqual(huggingface["real_case_or_mapping_entries"], [])
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertEqual(result["next_action"], "continue_watch_only")
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v4_aneumo_real_case_marker_opens_only_source_reaudit(self) -> None:
+        config = load_config(CONFIG_V4)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        huggingface = observations["aneumo_huggingface_material_release_v1"]
+        huggingface["sha"] = "a" * 40
+        huggingface["sibling_count"] += 1
+        huggingface["siblings_sha256"] = "b" * 64
+        huggingface["real_case_or_mapping_entries"] = [
+            "real_cases_with_cfd_mapping.csv"
+        ]
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertEqual(result["manual_review_requests"], ["fresh_source_reaudit_only"])
+        self.assertEqual(result["next_action"], "manual_review_signal_only")
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v4_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V4.read_text(encoding="utf-8"))
+        payload["watches"][4]["frozen_snapshot"]["sibling_count"] = 371
+        with tempfile.TemporaryDirectory() as directory:
+            candidate = Path(directory) / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(SourceWatchContractError, "huggingface"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V4.read_text(encoding="utf-8"))
+        payload["authorization"]["automatic_p0_registration"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            candidate = Path(directory) / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v4_workflow_is_read_only_scheduled_and_fail_closed(self) -> None:
+        workflow = WORKFLOW.read_text(encoding="utf-8")
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v3.json", workflow)
+        self.assertIn("configs/source_watch_v4.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)

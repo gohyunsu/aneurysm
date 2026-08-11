@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 8.2 4D-flow asset correction · 2026-08-11:** COSTA's 355 TOF-MRA
+> scans are pretraining images, not paired velocity/WSS units. The direct
+> 4D-flow study's eleven 7T clinical scans cannot be shared and its weights are
+> not yet released. Previously audited public phantoms supply repeated states
+> of one effective anatomy, not a patient-level clinical cohort. None is an
+> admitted AURORA training or confirmation dataset.
+
 > **Schema 8.1 cross-view asset boundary · 2026-08-11:** ADAM remains behind
 > registration/confidentiality agreement and was not accessed. The MIDL 2026
 > pair is derived from AP/lateral MIPs of those 3D MRA scans, not clinical

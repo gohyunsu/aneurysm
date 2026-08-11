@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "cross-view source batch"):
+        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation source batch"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "cross-view source batch"):
+        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation source batch"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "cross-view source batch"):
+        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation source batch"):
             validate_protocol(candidate)
 
     def test_aneug_target_construction_audit_rejects_compute_and_score_repair(self) -> None:
@@ -300,7 +300,7 @@ class ProtocolTests(unittest.TestCase):
     def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["structure_faithful_wss_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "8.1")
+        self.assertEqual(self.protocol["schema_version"], "8.2")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertTrue(
@@ -333,7 +333,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "adam_projection_consistent_3d_lesion_set",
+            "public_phantom_to_clinical_wss_segmentation_transfer",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -346,7 +346,7 @@ class ProtocolTests(unittest.TestCase):
     def test_conformal_degree_candidate_closes_after_incomplete_cpu_p0(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["conformal_degree_certificate_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "8.1")
+        self.assertEqual(self.protocol["schema_version"], "8.2")
         self.assertEqual(audit["best_score"], 32.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
@@ -418,7 +418,7 @@ class ProtocolTests(unittest.TestCase):
     def test_cross_view_projection_batch_rejects_proxy_and_no_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["cross_view_projection_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "8.1")
+        self.assertEqual(self.protocol["schema_version"], "8.2")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -464,6 +464,85 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "cross-view projection"):
             validate_protocol(candidate)
 
+    def test_functional_4dflow_segmentation_batch_is_direct_prior_limited(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["functional_4dflow_segmentation_source_delta"]
+        self.assertEqual(self.protocol["schema_version"], "8.2")
+        self.assertEqual(audit["best_score"], 25.5)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertLess(
+            max(candidate["score"] for candidate in audit["candidates"]),
+            audit["automatic_selection_threshold"],
+        )
+        self.assertTrue(
+            all(
+                sum(candidate["axis_scores"]) == candidate["score"]
+                for candidate in audit["candidates"]
+            )
+        )
+        self.assertEqual(audit["tof_mra_pretraining_scans"], 355)
+        self.assertEqual(audit["clinical_7t_4dflow_scans"], 11)
+        self.assertFalse(audit["tof_pretraining_scans_are_downstream_4dflow_units"])
+        self.assertEqual(audit["segmentation_target"], "circle_of_willis_not_aneurysm_sac")
+        self.assertTrue(audit["time_resolved_wss_uses_time_averaged_static_mask"])
+        self.assertFalse(audit["clinical_imaging_publicly_shareable"])
+        self.assertFalse(audit["trained_weights_currently_released"])
+        self.assertTrue(audit["weights_promised_upon_publication"])
+        self.assertFalse(audit["clinical_image_or_mask_payload_accessed"])
+        self.assertFalse(audit["model_weight_or_checkpoint_accessed"])
+        self.assertFalse(audit["p0_or_p1_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["server_queried"])
+        self.assertFalse(audit["pbs_or_gpu_job_created"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+        self.assertEqual(
+            problem["most_recent_source_rejected_candidate"],
+            "public_phantom_to_clinical_wss_segmentation_transfer",
+        )
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["functional_4dflow_segmentation_source_delta"][
+            "best_score"
+        ] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["functional_4dflow_segmentation_source_delta"][
+            "trained_weights_currently_released"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "functional 4D-flow segmentation"):
+            validate_protocol(candidate)
+
+    def test_source_watch_v4_is_metadata_only_and_fail_closed(self) -> None:
+        watch = self.protocol["problem_selection"]["public_source_watch_v4"]
+        self.assertEqual(watch["config"], "configs/source_watch_v4.json")
+        self.assertEqual(watch["watch_count"], 5)
+        self.assertEqual(watch["aneumo_github_release_count"], 0)
+        self.assertIsNone(watch["aneumo_github_license_spdx_id"])
+        self.assertEqual(watch["aneumo_huggingface_sibling_count"], 370)
+        self.assertEqual(watch["aneumo_real_case_or_mapping_entries"], [])
+        self.assertTrue(
+            watch["maintainer_future_real_undeformed_release_statement_not_material_e0"]
+        )
+        self.assertTrue(watch["same_as_all_frozen_snapshots"])
+        self.assertFalse(watch["manual_review_triggered"])
+        self.assertFalse(watch["automatic_download_authorized"])
+        self.assertFalse(watch["p0_or_p1_authorized"])
+        self.assertFalse(watch["method_or_architecture_authorized"])
+        self.assertFalse(watch["gpu_or_outer_test_authorized"])
+        self.assertFalse(watch["server_queried"])
+        self.assertFalse(watch["junjinyong_accessed_for_this_watch"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v4"][
+            "automatic_download_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v4"):
+            validate_protocol(candidate)
+
     def test_trellis_surface_feature_update_is_direct_prior_only(self) -> None:
         assessment = self.protocol["problem_selection"][
             "surface_vector_conditional_assessment"
@@ -474,7 +553,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(prior["common_uniform_parent_vessel"])
         self.assertEqual(prior["feature_dimension"], 1024)
         self.assertEqual(prior["stated_code_url_http_status_on_2026_08_11"], 404)
-        self.assertEqual(prior["source_watch_config"], "configs/source_watch_v3.json")
+        self.assertEqual(prior["source_watch_config"], "configs/source_watch_v4.json")
         self.assertTrue(prior["source_watch_current_snapshot_matches"])
         self.assertEqual(prior["source_watch_next_action"], "continue_watch_only")
         self.assertEqual(
@@ -864,7 +943,7 @@ class ProtocolTests(unittest.TestCase):
             audit["grand_challenge_submission_status"],
             "join_registration_available_but_no_executable_task_submission_contract",
         )
-        self.assertEqual(audit["source_watch_config"], "configs/source_watch_v3.json")
+        self.assertEqual(audit["source_watch_config"], "configs/source_watch_v4.json")
         self.assertTrue(audit["source_watch_current_snapshot_matches"])
         self.assertFalse(audit["versioned_topbrain2_dataset_release_verified"])
         self.assertFalse(

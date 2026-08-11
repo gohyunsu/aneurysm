@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest cross-view source best 31.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · conformal-degree P0 115684 remains closed 0/10 no verdict · not submission-ready",
-    requirement: "a distinct fresh problem with a material usable asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; MRA-derived projection pairs, a new consistency loss, or a conformal wrapper cannot repair the rejected cross-view batch or closed Aneurisk P0",
+    status: "Target locked · latest functional 4D-flow segmentation source best 25.5/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · conformal-degree P0 115684 remains closed 0/10 no verdict · not submission-ready",
+    requirement: "a distinct fresh problem with a material usable patient-level asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; WSS-aware segmentation, TOF transfer, physics consistency, a promised checkpoint or a conformal wrapper cannot repair the rejected functional 4D-flow batch or closed Aneurisk P0",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Functional 4D-flow segmentation is direct-prior dense and asset poor",
+      copy: "A March 2026 intracranial study already evaluates how segmentation changes area, flow, velocity, mean WSS and maximum WSS. Its nnU-Net uses 355 public TOF-MRA scans only for pretraining and eleven nonpublic 7T 4D-flow scans for the functional task; the target is Circle-of-Willis anatomy rather than the aneurysm sac, and all phases use a time-averaged mask. VAST already couples segmentation with physics-aware velocity reconstruction, while COMPASS already gives conformal intervals for downstream segmentation metrics. Six formulations score 25.5/24.5/23.5/23.5/23.5/23.0 and are rejected without image, mask, weight, P0, model or compute.",
+      status: "Best 25.5/40 · all rejected · clinical image/mask/weight/P0/method/architecture/server/GPU 0",
+      url: "../docs/functional-4dflow-segmentation-source-delta-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Cross-view projection remains a proxy experiment, not a paper identity",
@@ -825,6 +832,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 8.2 rejects functional 4D-flow segmentation as the paper identity",
+      copy: "A direct 2026 source already measures segmentation-induced flow and WSS error. The 355 scans are TOF-MRA pretraining images, not 4D-flow functional units; the eleven clinical 7T scans are nonpublic and weights are only promised upon publication. VAST and COMPASS occupy physics-aware processing and downstream-metric certification. Six candidates freeze at 25.5/24.5/23.5/23.5/23.5/23.0, all rejected. Surface-vector remains inactive; no payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row or claim was opened.",
+      files: ["docs/functional-4dflow-segmentation-source-delta-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/literature-lineage.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
+      category: "operations",
+      title: "Source watch v4 adds fail-closed Aneumo material-release signals",
+      copy: "The watch now freezes IAVS, TopBrain, TRELLIS, Aneumo GitHub and Aneumo Hugging Face metadata. Live refresh matched all five snapshots. Aneumo remains at GitHub 701d53dd… with no release/license and Hugging Face f801adee… with 370 entries, CC-BY-NC-ND-4.0 and no real/undeformed/AneuX/mapping marker. Maintainer plans are not E0. Any change requests manual source re-audit only; automatic download, score repair, P0/P1, method, GPU and outer test remain disabled.",
+      files: ["configs/source_watch_v4.json", "src/aurora/source_watch.py", "scripts/audit_source_watch.py", "tests/test_source_watch.py", ".github/workflows/source-watch.yml", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/source-watch.md", "README.md", "AGENTS.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류 surface-WSS, whole-field conformal coverage, boundary margin과 signed total degree certificate를 기초부터 설명하고 32.5/40 source history·0/10 no-verdict P0·no-model 경계를 밝히는 입문 가이드.">
+  <meta name="description" content="4D-flow MRI segmentation, WSS, 독립 표본, surface topology와 연구 gate를 기초부터 설명하고 최신 25.5/40 기각·no-model 경계를 밝히는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#functional-4dflow">4D-flow gap</a>
       <a href="#cross-view">Cross-view</a>
       <a href="#conformal-degree" data-chapter-link>Degree certificate</a>
       <a href="#structure-reappraisal">WSS reappraisal</a>
@@ -59,17 +60,16 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답</span>
+          <span>짧은 답 · schema 8.2</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
-            새 32.5/40 후보는 예측 전체장의 patient-level conformal residual
-            radius로 boundary margin이 충분한 region의 signed total degree만
-            인증하는 문제입니다. 이는 과거 surface-vector score나 0/10 P0를
-            수리한 것이 아닙니다. Exact Aneurisk archive semantics를 확인할
-            CPU-only P0는 `E`/exit 2, scientific check 10개 전부 미평가인 no scientific verdict로
-            끝났습니다. Complete archive/VTP semantics는 확인되지 않았고 동일
-            contract를 재실행하지 않습니다. Primary, GNN, Transformer, neural
-            operator, contribution, GPU와 outer test는 선택되지 않았습니다.
+            최신 functional 4D-flow segmentation 후보도 최고 25.5/40으로
+            기각됐습니다. Direct prior가 WSS bias를 이미 측정했고, 실제 functional
+            unit은 비공개 11건뿐입니다. Surface-vector와 conformal-degree는
+            중요한 역사지만 active topic이 아닙니다. Exact P0 두 건의 scientific
+            checks는 실패한 것이 아니라 모두 미평가였고, 동일 contract를
+            재실행하지 않습니다. Primary, GNN, Transformer, neural operator,
+            contribution, GPU와 outer test는 선택되지 않았습니다.
           </p>
         </div>
         <div class="answer-card" id="structure-reappraisal">
@@ -680,6 +680,40 @@
             </div>
           </div>
           <p><a href="../docs/conformal-degree-certificate-source-audit-2026-08-11.md">수식·red team·stop rule 전체 읽기 ↗</a> · <a href="../results/aneurisk_conformal_degree_p0_execution_20260811.json">P0 execution record ↗</a></p>
+          <div class="verdict-panel" id="functional-4dflow">
+            <p class="eyebrow">LATEST FRESH SCREEN · SCHEMA 8.2</p>
+            <h3>“분할을 잘하면 WSS도 정확하다”는 이미 직접 검증된 질문입니다.</h3>
+            <p><b>4D-flow MRI</b>는 심장 주기 동안 혈액의 3차원 속도를 측정합니다. 혈관 내부와 외부를 나누는 segmentation mask가 조금만 달라도 경계 위치와 근벽 속도 기울기가 바뀌어 WSS가 달라집니다. 새 direct prior는 이 연결을 Dice로 추측하지 않고 area, flow, velocity, mean WSS와 max WSS로 직접 측정했습니다. nnU-Net은 mean/max WSS ICC 0.96/0.97과 1.7% 이하 bias를 보고했고, 두 기존 network는 약 -5%/+7%의 체계적 bias를 보였습니다.</p>
+            <div class="architecture-stack">
+              <article>
+                <span>355 ≠ 355 FUNCTIONAL PATIENTS</span>
+                <div><h3>왜 355가 큰 4D-flow cohort가 아닌가?</h3><p>355건은 형상을 배우기 위한 public TOF-MRA pretraining scan입니다. 실제 velocity와 WSS를 평가하는 7T 4D-flow scan은 11건이며 비공개입니다. Vessel segment, analysis plane, cardiac phase와 surface vertex를 독립 환자로 세면 표본 수가 부풀려집니다.</p></div>
+                <b>독립 단위</b><small>clinical patient · not vessel/phase/vertex/TOF pretraining scan</small>
+              </article>
+              <article>
+                <span>WSS · WALL SHEAR STRESS</span>
+                <div><h3>ICC와 bias는 무엇을 말하나?</h3><p>ICC는 여러 대상에서 자동 mask와 manual mask가 비슷한 순서와 값을 내는지 보는 agreement 지표입니다. Bias는 한 방법이 WSS를 체계적으로 높거나 낮게 만드는 정도입니다. 높은 ICC는 유용하지만 새 모델의 causality, 환자별 안전성, aneurysm rupture risk 또는 외부 병원 일반화를 보장하지 않습니다.</p></div>
+                <b>보고된 범위</b><small>CoW segmentation · time-averaged static mask · not sac-specific clinical utility</small>
+              </article>
+              <article>
+                <span>DIRECT PRIORS</span>
+                <div><h3>어떤 fancy 조합이 이미 점유됐나?</h3><p>VAST는 intracranial 4D-flow segmentation에 phase unwrapping, denoising와 continuity constraint를 결합합니다. COMPASS는 segmentation에서 얻는 downstream scalar metric에 conformal interval을 만듭니다. 따라서 physics loss, TOF transfer, resolution adaptation 또는 WSS conformal head는 이름을 합쳐도 독립 novelty가 아닙니다.</p></div>
+                <b>필수 통제</b><small>nnU-Net · U-Net · DenseNet U-Net · VAST-style processing · COMPASS-style metric CP</small>
+              </article>
+              <article>
+                <span>ASSET REALITY</span>
+                <div><h3>“weights will be released”는 왜 현재 자산이 아닌가?</h3><p>논문은 clinical images를 privacy 때문에 공유할 수 없고 weights/configuration은 publication 때 공개할 예정이라고 씁니다. 예정은 현재 다운로드 가능한 checkpoint가 아닙니다. 공개 phantom도 반복 상태가 많아 보여도 effective anatomy가 하나여서 patient-level clinical confirmation을 대신하지 못합니다.</p></div>
+                <b>현재 권한</b><small>image/mask/weight/P0/P1/model/server/GPU/outer test 0</small>
+              </article>
+            </div>
+            <div class="model-labels">
+              <span class="yes">Direct-prior boundary corrected</span>
+              <span class="yes">Independent unit counted honestly</span>
+              <span class="no">Best 25.5/40 · all six rejected</span>
+              <span class="no">No active model or experiment</span>
+            </div>
+            <p><a href="../docs/functional-4dflow-segmentation-source-delta-2026-08-11.md">Functional 4D-flow source delta 전체 읽기 ↗</a></p>
+          </div>
           <div class="verdict-panel" id="cross-view">
             <p class="eyebrow">LATEST FRESH SCREEN · SCHEMA 8.1</p>
             <h3>Cross-view projection도 대체 paper identity가 아니다.</h3>
@@ -714,6 +748,11 @@
               <p>Conditional source lead, selected primary, method와 architecture는 모두 0입니다. 32.5/40 source history와 새 algorithm은 같은 말이 아닙니다. Conformal calibration, tangent projection, Hodge 또는 GNN block에 이름만 붙여 contribution으로 만들지 않습니다.</p>
             </aside>
             <article>
+              <span>CURRENT · SCHEMA 8.2 FUNCTIONAL 4D-FLOW SEGMENTATION · REJECTED</span>
+              <div><h3>WSS-aware segmentation이면 충분히 fancy한가?</h3><p>아닙니다. Intracranial 4D-flow segmentation-to-WSS bias, TOF transfer와 resolution testing이 이미 직접 보고됐고, VAST와 COMPASS가 physics-aware processing과 metric certification을 각각 점유합니다. 사용할 수 있는 patient-level aneurysm velocity/WSS asset도 없습니다. 그러므로 architecture를 고르는 순간이 아니라 문제를 기각할 순간입니다.</p></div>
+              <b>판정</b><small>best 25.5/40 · all six rejected · image/mask/weight/P0/method/server/GPU 0</small>
+            </article>
+            <article>
               <span>CURRENT · SCHEMA 8.1 CROSS-VIEW PROJECTION · REJECTED</span>
               <div><h3>두 projection과 conformal set이면 왜 아직 새 방법이 아닌가?</h3><p>MIDL 2026은 ADAM 3D MRA에서 AP/lateral MIP를 만들고 shared-z prompting과 consistency loss를 이미 사용합니다. 하지만 실제 biplane DSA가 아니며 test 때는 한 view만 씁니다. 두 view를 test 때 써서 3D로 올리는 단계도 RibAssist 3D의 selective correspondence/triangulation, ProVLNet의 projective fusion, MedIA의 conformal 3D region이 직접 선행입니다. 실제 clinical pair와 calibration geometry가 없으면 새 이름의 결합일 뿐입니다.</p></div>
               <b>판정</b><small>best 31.0/40 · all six rejected · terms/payload/P0/method/server/GPU 0</small>
@@ -725,7 +764,7 @@
             </article>
             <article>
               <span>CURRENT · TRELLIS SURFACE FEATURE · DIRECT PRIOR</span>
-              <div><h3>3D foundation feature를 GNN에 붙이면 새 방법인가?</h3><p>아닙니다. TRELLIS 연구는 비의료 3D object 50만 개에서 학습한 1,024차원 surface feature를 PointNet/PointNet++와 AnXplore mesh GNN에 이미 결합했고 rollout RMSE를 낮췄습니다. 그러나 101개 sac이 하나의 uniform parent vessel을 공유하고, surface-WSS critical point·signed index·worldline은 평가하지 않았습니다. 명시된 code URL도 현재 404입니다. v3 source watch는 repository 공개 여부만 읽고, 변화가 생겨도 faithful baseline 구현 가능성을 사람이 재검토하도록 알릴 뿐 E0·P0·architecture·GPU를 열지 않습니다. 따라서 foundation feature는 향후 faithful implementation이 있을 때의 matched control이지, 지금 선택된 architecture나 structure-faithful evidence가 아닙니다.</p></div>
+              <div><h3>3D foundation feature를 GNN에 붙이면 새 방법인가?</h3><p>아닙니다. TRELLIS 연구는 비의료 3D object 50만 개에서 학습한 1,024차원 surface feature를 PointNet/PointNet++와 AnXplore mesh GNN에 이미 결합했고 rollout RMSE를 낮췄습니다. 그러나 101개 sac이 하나의 uniform parent vessel을 공유하고, surface-WSS critical point·signed index·worldline은 평가하지 않았습니다. 명시된 code URL도 현재 404입니다. v4 source watch는 repository 공개 여부만 읽고, 변화가 생겨도 faithful baseline 구현 가능성을 사람이 재검토하도록 알릴 뿐 E0·P0·architecture·GPU를 열지 않습니다. 따라서 foundation feature는 향후 faithful implementation이 있을 때의 matched control이지, 지금 선택된 architecture나 structure-faithful evidence가 아닙니다.</p></div>
               <b>판정</b><small>direct prior · code URL 404 · fail-closed watch · candidate/asset/P0/model/GPU 0</small>
             </article>
             <article>

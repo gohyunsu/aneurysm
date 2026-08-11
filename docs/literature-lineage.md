@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 8.2 functional-segmentation correction · 2026-08-11:** Zhang et
+> al. directly connect intracranial 4D-flow segmentation to area, flow,
+> velocity, mean WSS and maximum WSS; VAST couples segmentation with
+> physics-aware velocity reconstruction; COMPASS provides conformal intervals
+> for downstream segmentation metrics. Thus “improve Dice and preserve WSS,”
+> TOF-to-4D-flow transfer, physics consistency and scalar metric certification
+> are direct priors, not AURORA novelty. The remaining aneurysm-sac gap lacks a
+> usable patient-level asset and is not an active topic.
+
 > **Schema 8.1 cross-view correction · 2026-08-11:** A MIDL 2026 aneurysm
 > study already uses ADAM-derived AP/lateral MIPs, shared-axis prompting and
 > detection consistency. It is synthetic projection evidence and single-view

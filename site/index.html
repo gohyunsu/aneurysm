@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — cross-view projection 후보 31.0/40 기각, surface-WSS/conformal-degree no-verdict history와 no-model 경계를 설명하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — functional 4D-flow segmentation 후보 25.5/40 기각, surface-WSS/conformal-degree no-verdict history와 no-model 경계를 설명하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,39 +40,33 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST SCREEN 31/40 REJECTED · NOT SUBMISSION-READY</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST SCREEN 25.5/40 REJECTED · NOT SUBMISSION-READY</p>
         <h1>
-          Accuracy is not a certificate.<br>
-          <em>Report topology only where the field supports it.</em>
+          A useful metric is not yet a new problem.<br>
+          <em>Asset and estimand before architecture.</em>
         </h1>
         <p class="hero-lede">
-          <b>현재 active paper identity나 선택된 모델은 없습니다.</b> 최신
-          cross-view 후보는 ADAM 3D MRA에서 만든 두 MIP를 사용하므로 실제
-          biplane DSA가 아니고, selective triangulation·conformal 3D region도
-          이미 직접 선행이 있어 31.0/40으로 기각했습니다. 아래 surface-WSS
-          certificate는 가장 최근의 실행 가능한 아이디어가 아니라, exact P0가
-          no-verdict로 닫힌 중요한 역사입니다.
-          WSS는 혈관 표면을 따라 흐르는 <b>접선 벡터장</b>입니다. 예측 벡터장이
-          reference와 평균적으로 비슷해도, 그 안에 실제로 critical point가 있는지
-          확신할 수는 없습니다. 이번 32.5/40 source hypothesis는 더 큰 GNN을 먼저 만드는
-          대신, 환자 단위 calibration으로 예측 전체장의 오차 반경을 구합니다.
-          어떤 surface region의 경계에서 예측 벡터 크기가 이 반경보다 모두 크면,
-          예측장과 실제장은 경계를 지나 0을 만들 수 없으므로 그 region의
-          <b>signed total degree</b>가 같다고 인증할 수 있습니다. Nonzero degree는
-          내부에 적어도 하나의 zero가 있다는 뜻이지만, 개수·정확한 위치·type이나
-          임상 파열 위험까지 보장하지는 않습니다. Coverage도 exchangeable patient에
-          대한 marginal guarantee이지 subtype별 또는 critical-point별 보장이
-          아닙니다. Functional conformal prediction과 vector-field robustness가
-          이미 존재하므로 novelty는 이 둘의 조합 자체가 아니라, intrinsic surface
-          certificate가 실제로 유효하면서도 충분한 영역을 인증하는지에 달려 있습니다.
-          그러나 exact CPU-only P0는 `execution-incomplete/no scientific verdict`로
-          끝나 10개 check가 모두 미평가입니다. Complete archive integrity와 VTP
-          semantics는 확인되지 않았고, 동일 contract는 수리하거나 재실행하지 않습니다.
-          따라서 conditional lead, primary, method, architecture, GPU, outer test와
-          paper contribution은 모두 0으로 돌아갔습니다.
+          <b>현재 active paper identity나 선택된 모델은 없습니다.</b> 최신 2026
+          연구는 이미 intracranial 4D-flow segmentation이 flow와 WSS에 주는
+          영향을 직접 측정합니다. 355개라는 수는 TOF-MRA pretraining scan이며,
+          downstream velocity/WSS를 가진 임상 7T 4D-flow unit은 비공개 11건뿐입니다.
+          nnU-Net은 mean/max WSS에서 ICC 0.96/0.97과 1.7% 이하 bias를 보고하고,
+          VAST는 segmentation과 physics-aware velocity processing을, COMPASS는
+          downstream segmentation metric의 conformal interval을 이미 다룹니다.
+          따라서 WSS-aware loss, TOF transfer, resolution adaptation 또는 conformal
+          head를 결합하는 것만으로는 novelty가 아닙니다. 여섯 후보는 최고
+          25.5/40으로 모두 기각됐고 image·mask·weight payload도 읽지 않았습니다.
+          Surface-vector의 “작은 field error가 critical-flow organization을 보장하지
+          않는다”는 질문은 여전히 유효한 <b>inactive hypothesis</b>지만, signed
+          total degree와 abstention의 method-free stability가 먼저입니다. Edge
+          1-form, Hodge/DEC, equivariance와 topology loss는 proposal이 아니라
+          controls입니다. 과거 CPU P0 두 건은 모두 scientific check 미평가인
+          no-verdict history로 닫혀 있으며 repair/rerun하지 않습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#functional-4dflow">최신 4D-flow 판정 이해하기</a>
+          <a class="button ghost" href="../docs/functional-4dflow-segmentation-source-delta-2026-08-11.md">Latest 4D-flow audit ↗</a>
           <a class="button ghost" href="../docs/cross-view-projection-source-delta-2026-08-11.md">Latest cross-view audit ↗</a>
           <a class="button ghost" href="learn.html#conformal-degree">새 certificate 이해하기</a>
           <a class="button ghost" href="../docs/conformal-degree-certificate-source-audit-2026-08-11.md">Conformal-degree audit ↗</a>
@@ -125,7 +119,7 @@
           <a class="button ghost" href="../docs/hemodynamic-endpoint-source-audit-2026-08-10.md">Hemodynamic audit ↗</a>
           <a class="button ghost" href="../docs/pinn-rupture-direct-prior-audit-2026-08-10.md">PINN prior audit ↗</a>
           <a class="button ghost" href="../docs/vascular-semantics-source-audit-2026-08-10.md">Vascular audit ↗</a>
-          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v3 ↗</a>
+          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v4 ↗</a>
           <a class="button ghost" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">AneuX history ↗</a>
           <a class="button ghost" href="../results/aneux_preprocessing_orbit_p0_execution_20260809.json">Historical P0 ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
@@ -135,7 +129,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">LATEST 31/40 REJECTED · CONFORMAL DEGREE HISTORY CLOSED · NO MODEL</div>
+        <div class="visual-caption">LATEST 25.5/40 REJECTED · SURFACE HYPOTHESIS INACTIVE · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -158,7 +152,7 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>31.0</b><span>latest cross-view score · rejected</span>
+            <b>25.5</b><span>latest functional 4D-flow score · rejected</span>
           </div>
           <div class="posterior-card card-b">
             <b>76</b><span>reported patient-specific geometries</span>
@@ -168,17 +162,17 @@
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> latest: MRA-derived projection pair ≠ acquired biplane DSA</span>
+          <span><i class="dot lime"></i> latest: 355 TOF pretraining scans ≠ 355 functional 4D-flow patients</span>
           <span><i class="dot coral"></i> total degree ≠ exact zero count, location or clinical risk</span>
           <span>P0 E/exit 2 · all 10 checks unevaluated · no scientific verdict · GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>31.0/40 · all six rejected · active lead 0</b></div>
+        <div><span>Latest source screen</span><b>25.5/40 · all six rejected · active lead 0</b></div>
         <div><span>Current compute</span><b>no fresh server query · last P0 E/exit 2 · GPU 0</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>material paired clinical asset audit · no loss/wrapper score repair</b></div>
+        <div><span>Next action</span><b>fresh problem-level asset audit · no WSS-loss/wrapper score repair</b></div>
       </div>
     </section>
 
