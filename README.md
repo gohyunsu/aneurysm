@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.1 deployment verification:** Exact source-audit head
+> `6de391eafcabea5ba398c49892353a8a707565d1` passed Quality
+> `31450399461` and Pages `31450398671`. The public and private ledgers agree on
+> best 31.0/40 rejected, proxy-MIP versus clinical-biplane distinction and zero
+> active lead/model/compute authorization. Private paper head `567a995…` pins
+> this public source while keeping `paper/main.tex` and references unchanged.
+> This is provenance only; it creates no P0, server query or experiment.
+
 > **2026-08-11 cross-view projection source delta · schema 8.1:** The most
 > attractive new formulation—an ADAM-derived projection-consistent 3D lesion
 > set with abstention—scores **31.0/40** and is rejected below the unchanged

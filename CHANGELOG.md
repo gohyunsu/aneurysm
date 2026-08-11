@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.1 deployment and private ledger verified
+
+- Exact public source `6de391eafcabea5ba398c49892353a8a707565d1`
+  passed Quality `31450399461` and Pages `31450398671`.
+- Private paper head `567a995b7ce09887ffe3c480ce09f06b4d42fc0d`
+  pins the same decision while preserving the manuscript and references.
+- This provenance update opens no agreement, payload, P0/P1, model, server
+  query, PBS/GPU, outer test, result row or paper claim.
+
 ## 2026-08-11 · Schema 8.1 rejects the cross-view projection branch
 
 - Audited MIDL 2026 cross-view ADAM MIPs, multicenter clinical SDAN, selective

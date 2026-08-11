@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.1 deployment verification:** Exact public source
+> `6de391eafcabea5ba398c49892353a8a707565d1` passed Quality
+> `31450399461` and Pages `31450398671`. Private paper head
+> `567a995b7ce09887ffe3c480ce09f06b4d42fc0d` is PRIVATE, remote-exact and
+> pins that source; manuscript and references remain unchanged. This
+> provenance update changes no score, lead, P0/P1, method, architecture,
+> scientific-server query, PBS/GPU, outer test or claim. AURORA remains
+> `introai9`-only and `junjinyong` remains prohibited.
+
 > **2026-08-11 cross-view projection source delta · schema 8.1:** Fresh MIDL
 > cross-view, clinical SDAN, RibAssist 3D, conformal landmark/inverse-problem
 > UQ, ProVLNet and quantitative-DSA evidence yields a best score of 31.0/40.

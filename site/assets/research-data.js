@@ -827,6 +827,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.1 public deployment and private ledger are exact",
+      copy: "Exact public source 6de391e… passed Quality 31450399461 and Pages 31450398671. Private paper head 567a995… pins the same 31.0/40 rejection and proxy-versus-clinical boundary while leaving the manuscript and references unchanged. This provenance record creates no access agreement, P0/P1, architecture, scientific-server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Schema 8.1 rejects the cross-view projection branch",
       copy: "A fresh primary-source audit distinguishes deterministic ADAM MRA-derived AP/lateral MIPs from acquired clinical biplane DSA. Cross-view prompting and consistency are directly occupied; selective 3D correspondence/triangulation, projective fusion, conformal 2D/3D regions and inverse-problem task UQ are also direct priors. The six candidates freeze at 31.0/30.0/29.5/26.5/22.5/21.5, all below 32. No access agreement, patient payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row or paper contribution was opened.",
