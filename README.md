@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 9.1 deployment verification:** Exact scientific source
+> `4619c0e77a02588c0b47d3b615442339f60968b0` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31484751195) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31484750528).
+> Private ledger `7d506e0e0a614c9067aae7a64293f90668813ea9` remains PRIVATE and
+> preserves the manuscript and references byte-for-byte. This is provenance
+> only; it opens no lead, P0/P1, method, architecture, server query, PBS/GPU,
+> outer test, result row or claim.
+
 > **2026-08-11 surface-vector + TopAneu version-orbit adjudication · schema
 > 9.1:** The supplied surface-vector direction is retained only as a falsifiable
 > evaluation question. Exact CPU-only P0 `115645.ECE-util1` remains `E`/exit 2,

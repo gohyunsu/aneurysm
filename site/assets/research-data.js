@@ -935,6 +935,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 9.1 exact source is deployed and privately pinned",
+      copy: "Exact public scientific source 4619c0e77a02588c0b47d3b615442339f60968b0 passed Quality 31484751195 and Pages 31484750528. Private ledger 7d506e0e0a614c9067aae7a64293f90668813ea9 remains PRIVATE and preserves manuscript and references byte-for-byte. Live Overview, Learn and change history expose the TopAneu critical-floor rejection, inactive surface-vector question and no-model/no-compute state. This provenance creates no lead, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 9.1 rejects TopAneu version-aware methods and keeps surface-vector inactive",
       copy: "The supplied surface-vector analysis is accepted only as a falsifiable evaluation question; exact job 115645 remains E/exit 2, GPU 0 and 0/10 no-verdict without repair. Official TopAneu Git history now verifies a 98-case → 417-scan annotation version orbit, but metadata does not establish patient pairs or expert contour corrections. Six candidates freeze at 32.0/31.5/31.5/30.5/28.5/24.5. The additive 32.0 evaluator candidate has novelty 0.5/5; the revision-aware candidate has novelty 2.0/5, below the 2.5 floor. Source-watch v10 pins both Git states and can request source re-audit only. Terms, individual annotations, medical payload, P0/P1, method, architecture, server query, PBS/GPU, outer test, result and claim remain zero.",

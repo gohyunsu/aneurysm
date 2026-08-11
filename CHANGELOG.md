@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-11 · Schema 9.1 deployed and privately pinned
+
+- Exact scientific source `4619c0e77a02588c0b47d3b615442339f60968b0`
+  passed Quality `31484751195` and Pages `31484750528`.
+- Private ledger `7d506e0e0a614c9067aae7a64293f90668813ea9` is remote exact and
+  PRIVATE; manuscript and references hashes are unchanged.
+- Live Overview, Learn and change history expose the TopAneu critical-floor
+  rejection, inactive surface-vector question and no-model/no-compute state.
+  This provenance creates no scientific result or claim.
+
 ## 2026-08-11 · Schema 9.1 rejects TopAneu annotation-version formulations
 
 - Retained surface-vector only as an inactive falsifiable evaluation question;
