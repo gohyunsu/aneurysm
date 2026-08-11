@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.8 deployment·private synchronization:** Exact public
+> scientific contract `765916bbfec7304c4813fb485116a7f2b634dbca` passed
+> Quality `31476095988` and Pages `31476095342`. Private paper ledger
+> `c285781c639fba9240d9c1ec143b59c487d2ea12` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> references SHA-256 remains
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization creates no source lead, P0/P1, method, architecture,
+> server query, PBS/GPU, outer test, result row, C21 or claim. Future authorized
+> work remains `introai9` PBS only; never access `junjinyong` or run login-node
+> GPU commands.
+
 > **2026-08-11 open-model transport and admission reappraisal · schema 8.8:**
 > Surface-vector는 inactive falsifiable question으로만 유지하며 edge 1-form,
 > Hodge/DEC, SE(3), periodic decoder와 structural loss를 architecture나 novelty로

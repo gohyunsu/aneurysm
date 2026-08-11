@@ -899,6 +899,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.8 exact contract is deployed and privately pinned",
+      copy: "Exact public scientific contract 765916bbfec7304c4813fb485116a7f2b634dbca passed Quality 31476095988 and Pages 31476095342. Private ledger c285781c639fba9240d9c1ec143b59c487d2ea12 remains PRIVATE and preserves manuscript and references byte-for-byte. Live Overview and Learn expose the 32.0 additive score, residual novelty 0.5/5 rejection and no-model/no-compute state. This provenance creates no lead, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 8.8 rejects an additive 32.0 and makes source admission non-compensatory",
       copy: "Surface-vector remains an inactive question, not an edge-1-form/Hodge/GNN identity. A fixed public-model external TOF-MRA audit is executable but has residual novelty 0.5/5 because multicentre morphometry, RSNA pipelines, TAR and selective/conformal evaluation already occupy the obvious claims. Six candidates freeze at 32.0/31.5/29.0/28.5/27.5/27.0 and all are rejected. Future candidates need total ≥32 plus critical novelty, identifiability, asset, independent-unit and baseline floors and a mechanism-linked falsifier. The rule is prospective and opens no P0, model, server query or GPU.",

@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.8 deployment verification:** Exact scientific contract
+> `765916bbfec7304c4813fb485116a7f2b634dbca` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31476095988) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31476095342).
+> Private ledger `c285781c639fba9240d9c1ec143b59c487d2ea12` pins the
+> no-claim boundary and remains PRIVATE. Live Overview and Learn expose the
+> additive 32.0/40 but novelty 0.5/5 rejection. This is provenance only; it
+> opens no P0/P1, method, architecture, server query, PBS/GPU, outer test,
+> result row or claim.
+
 > **2026-08-11 open-model transport and admission reappraisal · schema 8.8:**
 > The supplied surface-vector analysis remains an inactive, falsifiable
 > question—not a selected edge-1-form/Hodge/GNN architecture. A fixed public

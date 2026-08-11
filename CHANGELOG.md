@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.8 deployed and privately pinned
+
+- Exact scientific contract `765916bbfec7304c4813fb485116a7f2b634dbca`
+  passed Quality `31476095988` and Pages `31476095342`.
+- Private ledger `c285781c639fba9240d9c1ec143b59c487d2ea12` remains PRIVATE;
+  anonymous API returns 404 and manuscript/references hashes are unchanged.
+- Live Overview and Learn expose the 32.0 additive score, 0.5/5 novelty-floor
+  rejection and no-model/no-compute state. This provenance creates no
+  scientific or compute authority.
+
 ## 2026-08-11 · Open-model transport rejected; admission gate becomes non-compensatory · schema 8.8
 
 - Retained surface-vector only as an inactive problem question and rejected the
