@@ -1,5 +1,12 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.0 deployment verification:** Exact outcome content
+> `6123f0e917f084aad0bf352306ba9cf70f57e835` passed Quality
+> `31448501704` and Pages `31448501265`. The live Overview and Learn pages,
+> machine protocol and public execution record agree on 32.5/40 closed source
+> history, 0/10 no-verdict and zero active lead/model/GPU. This provenance
+> record changes no scientific decision or compute authorization.
+
 > **2026-08-11 conformal-degree P0 outcome · schema 8.0:** The exact
 > **32.5/40** source finding is preserved, but the conditional lead is closed.
 > Public source `4a0fa65b…` ran once on `introai9` as CPU-only PBS job

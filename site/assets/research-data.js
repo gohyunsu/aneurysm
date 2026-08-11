@@ -820,6 +820,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.0 no-verdict outcome is live and verified",
+      copy: "Exact outcome content 6123f0e… passed Quality 31448501704 and Pages 31448501265. Live Overview, Learn, machine protocol and the public execution record agree on 32.5/40 closed source history, P0 0/10 no scientific verdict, and active lead/primary/method/architecture/GPU/outer test/claim 0. This provenance record creates no scientific or compute authority.",
+      files: ["README.md", "AGENTS.md", "docs/server-execution.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "execution",
       title: "Schema 8.0 closes the conformal-degree P0 without a scientific verdict",
       copy: "Exact source 4a0fa65b… ran once on introai9 as CPU-only PBS job 115684. It ended E/exit 2 after 00:40:06 with CPU 00:00:01, memory 56,812 kB and GPU 0. A 323-byte status and 971-byte bounded result report execution-incomplete/no scientific verdict; all 10 checks are unevaluated. Complete archive integrity, VTP access and low-level cause were not established, transient partial bytes are unknown, and no payload or raw log persisted. The 32.5/40 source score is preserved, but active lead, P1, method, architecture, GPU, outer test, result row and claim return to zero without repair or rerun.",

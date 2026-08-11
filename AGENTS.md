@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.0 deployment verification:** Exact outcome content
+> `6123f0e917f084aad0bf352306ba9cf70f57e835` passed Quality
+> `31448501704` and Pages `31448501265`. Live Overview, Learn, machine protocol
+> and the execution record expose the same 32.5/40 closed history, 0/10
+> no-verdict and lead/primary/method/architecture/GPU/outer-test/claim 0.
+> This is publication provenance only. It does not reopen the exact P0 or
+> authorize a server action; `introai9` remains the only eligible AURORA PBS
+> server and `junjinyong` remains absolutely prohibited.
+
 > **2026-08-11 conformal-degree P0 outcome · schema 8.0:** Exact public source
 > `4a0fa65b37d69696ff232420e09c4560349fd27b` ran once on `introai9` PBS as
 > CPU-only job `115684.ECE-util1`; final state is `E`, exit 2, walltime

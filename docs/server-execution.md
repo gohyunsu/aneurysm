@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 8.0 deployment verification · 2026-08-11:** Exact outcome content
+> `6123f0e917f084aad0bf352306ba9cf70f57e835` passed GitHub-hosted Quality
+> `31448501704` and Pages `31448501265`. Live content matched the closed P0
+> state. These checks did not query a scientific server and authorize no PBS or
+> GPU work.
+
 > **Schema 8.0 final P0 execution · 2026-08-11:** Exact source `4a0fa65b…`
 > ran once on `introai9` PBS as job `115684.ECE-util1`, CPU 4, 16 GB, GPU 0.
 > Final state was `E`, exit 2, walltime 00:40:06, CPU 00:00:01 and memory

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.0 outcome deployment verified
+
+- Exact outcome content `6123f0e917f084aad0bf352306ba9cf70f57e835`
+  passed Quality `31448501704` and Pages `31448501265`.
+- Verified the live site exposes job `115684`, 0/10 no-verdict, closed
+  32.5/40 source history and zero active lead/model/GPU.
+- This deployment record adds no result, repair, rerun, P1 or compute authority.
+
 ## 2026-08-11 · Schema 8.0 closes the conformal-degree P0 without a verdict
 
 - Ran exact public source `4a0fa65b…` once on `introai9` as CPU-only PBS job
