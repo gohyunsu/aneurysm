@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.6 deployment·private synchronization:** Exact
+> scientific content `8d6ac0f1c29f613178817fe1c07e8292e5f1fb79` passed
+> Quality `31472138451` and Pages `31472137714`. Private paper ledger
+> `2e8e7c37080db942d3d58973f724ae398222cde3` records the rejection and
+> remains PRIVATE; `paper/main.tex` SHA-256
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and references SHA-256
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`
+> are byte-for-byte unchanged. This synchronization creates no source lead,
+> P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test,
+> result row, C21 or claim. Future authorized execution remains `introai9` PBS
+> only; never access `junjinyong` or run a login-node GPU command.
+
 > **2026-08-11 cross-vascular transient-WSS correction · schema 8.6:**
 > Rygiel et al.은 100 AAA patient training, 29 patient/118 scan external
 > cohort와 1,090 transient CFD로 E(3)-equivariant vector-WSS, TAWSS/OSI,

@@ -892,6 +892,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.6 exact content is deployed and privately pinned",
+      copy: "Exact scientific content 8d6ac0f1c29f613178817fe1c07e8292e5f1fb79 passed Quality 31472138451 and Pages 31472137714. Private ledger 2e8e7c37080db942d3d58973f724ae398222cde3 records the rejected identity while preserving manuscript and references byte-for-byte. This provenance opens no source lead, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Schema 8.6 corrects the transient-WSS direct-prior and asset boundary",
       copy: "The patient-specific AAA study directly occupies E(3)-equivariant transient WSS, TAWSS/OSI and BC/remodelling/topology/mesh generalisation, but its stated code repository is README-only and AAA-100 lacks the published transient fields. The CC0 SANO source has twelve steady iliac-vein cases and already owns geometry-fidelity-to-low-WSS analysis. Six formulations freeze at 30.0/29.0/28.5/25.5/23.0/21.5 and all are rejected. The surface-vector question remains inactive; no P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",

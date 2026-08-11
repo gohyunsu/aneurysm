@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.6 deployed and privately pinned
+
+- Exact scientific content `8d6ac0f1c29f613178817fe1c07e8292e5f1fb79`
+  passed Quality `31472138451` and Pages `31472137714`.
+- Private paper ledger `2e8e7c37080db942d3d58973f724ae398222cde3` records the
+  rejected identity while preserving manuscript and references byte-for-byte.
+- This is provenance only; no source lead, P0/P1, method, architecture,
+  scientific-server query, PBS/GPU, outer test, result row or claim opened.
+
 ## 2026-08-11 · cross-vascular transient-WSS correction · schema 8.6
 
 - Audited the patient-specific AAA transient-WSS direct prior: 100 training

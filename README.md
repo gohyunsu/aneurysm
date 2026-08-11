@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.6 deployment verification:** Exact scientific content
+> `8d6ac0f1c29f613178817fe1c07e8292e5f1fb79` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31472138451) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31472137714).
+> Private ledger `2e8e7c37080db942d3d58973f724ae398222cde3` pins the rejected
+> identity while the manuscript and references remain byte-for-byte unchanged.
+> This is provenance only; it opens no P0/P1, method, architecture, server
+> query, PBS/GPU, outer test, result row or claim.
+
 > **2026-08-11 cross-vascular transient-WSS correction · schema 8.6:** A
 > 100-patient AAA study with a 29-patient/118-scan external cohort already
 > owns E(3)-equivariant transient vector-WSS prediction, TAWSS/OSI and
