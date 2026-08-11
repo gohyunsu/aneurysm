@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 surface-vector external-analysis adjudication:** 전달된 분석의
+> application question과 evidence ladder는 채택하되 architecture 제안은 채택하지
+> 않는다. Field-error와 critical organization의 불일치 가능성은 inactive
+> hypothesis이고 아직 관측된 result가 아니다. Exact point/worldline은 mesh·
+> tolerance 안정성 전에는 loss가 아니라 secondary evaluation이며, boundary-margin
+> signed total degree와 abstention이 더 먼저 검증될 estimand다. Edge 1-form,
+> Hodge/DEC, equivariance, periodic decoder와 structural loss는 direct-prior
+> component/control이지 novelty가 아니다. Jobs `115645`와 `115684`는 모두
+> execution-incomplete/no-verdict로 닫혀 repair/rerun하지 않는다. Active lead,
+> primary, P0/P1, method, architecture, server query, PBS/GPU, outer test와 claim은
+> 0이다. Exact adjudication은
+> `docs/surface-vector-analysis-adjudication-2026-08-11.md`를 따른다. AURORA는
+> `introai9`만 사용하고 `junjinyong`에는 절대 접근하지 않는다.
+
 > **2026-08-11 schema 8.1 deployment verification:** Exact public source
 > `6de391eafcabea5ba398c49892353a8a707565d1` passed Quality
 > `31450399461` and Pages `31450398671`. Private paper head

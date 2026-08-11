@@ -66,7 +66,7 @@
             radius로 boundary margin이 충분한 region의 signed total degree만
             인증하는 문제입니다. 이는 과거 surface-vector score나 0/10 P0를
             수리한 것이 아닙니다. Exact Aneurisk archive semantics를 확인할
-            CPU-only P0는 `E`/exit 2, 0/10 checks, no scientific verdict로
+            CPU-only P0는 `E`/exit 2, scientific check 10개 전부 미평가인 no scientific verdict로
             끝났습니다. Complete archive/VTP semantics는 확인되지 않았고 동일
             contract를 재실행하지 않습니다. Primary, GNN, Transformer, neural
             operator, contribution, GPU와 outer test는 선택되지 않았습니다.
@@ -103,6 +103,36 @@
             확인된 뒤에만 검토합니다.
           </p>
           <a href="../docs/structure-faithful-wss-source-reappraisal-2026-08-11.md">점수표·direct prior·architecture correction 전체 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="surface-adjudication">
+          <span>이번 분석에서 무엇을 채택·수정·기각했나?</span>
+          <strong>질문과 gate 순서는 채택하고, architecture-first 해석은 기각했습니다.</strong>
+          <p>
+            <b>채택:</b> field MSE가 작아도 critical-flow organization은 틀릴 수
+            있다는 falsifiable question, 그리고 source semantics → stability →
+            field-error-matched failure → bounded development → fresh confirmation
+            순서입니다. 단, 이 failure는 아직 관측되지 않았습니다.
+          </p>
+          <p>
+            <b>수정:</b> exact critical-point 위치·type과 worldline은 mesh,
+            tolerance, matching과 near-degenerate zero에 민감합니다. 따라서 먼저
+            boundary margin이 충분한 region의 signed total degree와 abstention을
+            검증하고, point/track은 안정성을 통과한 뒤 secondary endpoint로 둡니다.
+            Nonzero degree는 적어도 한 zero만 뜻하며 exact 개수를 보장하지 않습니다.
+          </p>
+          <p>
+            <b>기각:</b> edge 1-form, Hodge/DEC, SE(3) message passing, 80-phase
+            decoder와 topology loss의 조합을 novelty로 부르지 않습니다. 이들은
+            strong control 또는 후보 component입니다. 먼저 compute·field-error-
+            matched baseline에서 실제 structural gap을 확인하고, 그 원인에 직접
+            대응하는 최소 intervention만 미래 development 대상으로 삼습니다.
+          </p>
+          <p>
+            Jobs <code>115645</code>와 <code>115684</code>는 모두 scientific
+            check 10개가 전부 미평가인 no-verdict history입니다. 어느 쪽도 수리·
+            재실행하지 않으며, 현재 active lead·model·GPU는 0입니다.
+          </p>
+          <a href="../docs/surface-vector-analysis-adjudication-2026-08-11.md">채택·수정·기각 및 재진입 gate 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="inverse-flow-delta">
           <span>왜 inverse flow로 바로 전환하지 않나?</span>
@@ -633,7 +663,7 @@
             </article>
             <article>
               <span>CLOSED · METHOD-FREE P0 · NO VERDICT</span>
-              <div><h3>왜 지금 바로 모델을 학습하지 않는가?</h3><p>공식 record는 76 geometry와 1.43 GB VTP archive를 말하지만 array names, association, units, case mapping과 age/inflow input contract를 열거하지 않습니다. Exact CPU P0는 E/exit 2, 0/10 evaluated로 끝나 이를 확인하지 못했습니다. Critical point, conformal quantile, network prediction과 GPU는 계산되지 않았습니다.</p></div>
+              <div><h3>왜 지금 바로 모델을 학습하지 않는가?</h3><p>공식 record는 76 geometry와 1.43 GB VTP archive를 말하지만 array names, association, units, case mapping과 age/inflow input contract를 열거하지 않습니다. Exact CPU P0는 E/exit 2로 끝났고 scientific check 10개가 전부 미평가라 이를 확인하지 못했습니다. Critical point, conformal quantile, network prediction과 GPU는 계산되지 않았습니다.</p></div>
               <b>권한</b><small>active lead/primary/method/architecture/GPU/outer test/claim 0</small>
             </article>
           </div>

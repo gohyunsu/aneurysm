@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-11 · Surface-vector analysis critically adjudicated
+
+- Retained the falsifiable application question and staged evidence ladder,
+  while keeping the structural failure unobserved and the paper identity
+  inactive.
+- Put signed total degree/abstention before exact point/worldline endpoints;
+  the latter remain secondary evaluation until mesh/tolerance stability passes.
+- Rejected edge 1-form, Hodge/DEC, equivariance, periodic decoding and
+  structural-loss composition as standalone novelty or a selected architecture.
+- Clarified on the public guide that all ten registered checks in both related
+  P0 histories were unevaluated, not failed scientific checks. No experiment,
+  server query, model, GPU, outer test or paper claim was opened.
+
 ## 2026-08-11 · Schema 8.1 deployment and private ledger verified
 
 - Exact public source `6de391eafcabea5ba398c49892353a8a707565d1`

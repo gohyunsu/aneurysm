@@ -827,6 +827,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "research",
+      title: "Surface-vector question retained; architecture-first proposal rejected",
+      copy: "The external analysis was split into accepted, corrected and rejected claims. The field-error-versus-structure question and staged gates remain useful, but the failure is unobserved. Signed total degree with abstention precedes unstable exact point/worldline endpoints. Edge 1-forms, Hodge/DEC, equivariance, periodic decoding and structural losses remain controls/components rather than novelty. Jobs 115645 and 115684 stay closed no-verdict histories with all ten scientific checks unevaluated; no model or compute is opened.",
+      files: ["docs/surface-vector-analysis-adjudication-2026-08-11.md", "AGENTS.md", "README.md", "site/index.html", "site/learn.html", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "deployment",
       title: "Schema 8.1 public deployment and private ledger are exact",
       copy: "Exact public source 6de391e… passed Quality 31450399461 and Pages 31450398671. Private paper head 567a995… pins the same 31.0/40 rejection and proxy-versus-clinical boundary while leaving the manuscript and references unchanged. This provenance record creates no access agreement, P0/P1, architecture, scientific-server query, PBS/GPU, outer test, result row or claim.",

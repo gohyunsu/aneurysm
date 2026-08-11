@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 surface-vector analysis adjudication:** The proposed application
+> question is retained, but the proposed architecture is not selected. A small
+> field error need not imply faithful critical-flow organization; this remains
+> an unobserved, inactive hypothesis. Exact points/worldlines must first pass
+> mesh/tolerance stability, while signed total degree with abstention is the
+> safer first estimand. Edge 1-forms, Hodge/DEC, equivariance, periodic decoding
+> and structural losses are controls/components—not novelty. Both relevant P0s
+> remain closed without a verdict or rerun, so active lead, model and compute
+> authority stay zero. [Critical adjudication](docs/surface-vector-analysis-adjudication-2026-08-11.md)
+
 > **2026-08-11 schema 8.1 deployment verification:** Exact source-audit head
 > `6de391eafcabea5ba398c49892353a8a707565d1` passed Quality
 > `31450399461` and Pages `31450398671`. The public and private ledgers agree on
@@ -145,7 +155,7 @@
 > 00:27:02 with CPU time 00:00:06 and peak memory 625,780 kB. Only a 301-byte
 > private status and 588-byte bounded no-verdict result were retained; aggregate
 > scientific result, raw PBS log and persistent probe cache are absent. Thus
-> 0/10 registered checks were evaluated and the low-level cause is unresolved.
+> none of the 10 registered checks reached evaluation and the low-level cause is unresolved.
 > This is **execution-incomplete / no scientific verdict**. The exact 32.0/40
 > source score remains immutable history, but active shortlist, P1, primary,
 > method, architecture, contribution, GPU, outer test and submission identity

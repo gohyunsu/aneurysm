@@ -1,0 +1,114 @@
+# Surface-vector analysis adjudication
+
+> **Decision · 2026-08-11 KST:** The supplied analysis is scientifically useful,
+> but it mixes a defensible application question with an architecture proposal
+> that current evidence does not authorize. We retain the question, narrow the
+> estimand, demote the proposed components to controls, and open no experiment.
+
+상태: **accepted in part · corrected in part · no active lead/model/P0/P1/GPU**
+
+## 1. 무엇을 그대로 받아들이는가
+
+다음 판단은 현재 기록과 일치하며 유지한다.
+
+- Job `115645.ECE-util1`은 `E`/exit 2, walltime `00:27:02`, GPU 0으로
+  종료됐다. Aggregate scientific result, raw PBS log와 persistent probe
+  cache가 없고 등록된 10개 scientific check는 모두 **미평가**다.
+- 따라서 결과는 `execution-incomplete / no scientific verdict`다. 32.0/40은
+  source-admission history이지 모델 성능이나 가설 검증 점수가 아니다. 같은
+  contract의 repair, cause reconstruction과 rerun은 금지한다.
+- “Cartesian field error가 작아도 임계 흐름 구조가 맞는다는 보장은 없다”는
+  문장은 중요한 **검증 가능 가설**이다. 다만 아직 관측된 failure가 아니며 active
+  paper identity도 아니다.
+- 새 evidence version이 열린다면 task stability → field-error-matched failure
+  evidence → bounded development → fresh confirmation → external interpretation
+  순서를 지켜야 한다. 환자 또는 base-geometry family만 독립 단위로 센다.
+- 파열 위험, 임상 효용 또는 exact critical-point recovery로 주장을 확대하지
+  않는다.
+
+## 2. 무엇을 수정하는가
+
+### Exact point/worldline보다 degree가 먼저다
+
+Critical-point 위치, type과 birth/death track은 mesh, interpolation, tolerance,
+matching rule과 near-degenerate zero에 민감하다. 안정성 확인 전에는 이들을
+training loss나 primary endpoint로 쓰지 않는다. 더 먼저 물을 수 있는 것은
+boundary에서 field가 충분히 0에서 떨어진 region의 **signed total degree**다.
+Degree가 0이 아니면 내부에 적어도 한 zero가 존재한다는 것만 보장한다. Exact
+개수·위치·type이나 상쇄되는 ± pair는 보장하지 않는다.
+
+이 수정은 과거 surface-vector score를 수리한 것이 아니다. 별도 32.5/40
+conformal-degree 후보가 이 좁은 estimand를 제안했지만, 그 exact P0 job
+`115684.ECE-util1`도 `E`/exit 2와 10/10 미평가로 닫혔다. 따라서 degree 역시
+현재 검증된 contribution이나 active lead가 아니라, 미래 후보가 만족해야 할 더
+타당한 estimand hierarchy다.
+
+### Architecture보다 failure mechanism이 먼저다
+
+제안된 edge-integrated 1-form은 좌표 회전에 덜 임의적인 flux-like 표현을 줄 수
+있지만 vertex field의 zero, index 또는 track을 자동 보존하지 않는다. Hodge
+decomposition은 boundary convention에 의존하며, SE(3)-equivariance와 periodic
+temporal decoding도 이미 알려진 inductive bias다. 따라서 미래 evidence가
+열리더라도 첫 모델 질문은 “어떤 fancy block을 붙일까”가 아니라 다음 두 가지다.
+
+1. Field-error-matched Cartesian, tangent-projected, equivariant와 Hodge/DEC
+   baseline이 안정적인 structure endpoint에서 실제로 갈리는가?
+2. Proposal의 structural gain이 field-error 또는 compute 증가만으로 설명되지
+   않는가?
+
+이 두 질문에 답하기 전에는 structural loss를 추가하지 않는다. 먼저 evaluation
+endpoint로 failure를 확인하고, 그 failure와 직접 연결되는 가장 작은 intervention만
+bounded development에서 검토한다.
+
+## 3. 무엇을 명시적으로 기각하는가
+
+다음은 contribution이나 novelty 문장으로 사용할 수 없다.
+
+- “GNN + Hodge + equivariance + topology loss”라는 구성요소 조합
+- Edge 1-form을 썼다는 사실 자체
+- MSE 개선만으로 structure-faithful하다고 부르는 것
+- Critical-point metric을 많이 추가했다는 사실
+- 기존 P0의 downloader, parser, retry 또는 dependency를 고쳐 같은 source score를
+  다시 여는 것
+- 환자 수 대신 vertex, triangle, phase, point 또는 track 수를 표본 수로 세는 것
+
+관련 direct prior에는 Hodge spectral/duality 계열, equivariant transient WSS
+prediction, robust critical-point tracking, trajectory-preserving vector-field
+compression, aneurysm WSS fixed-point/cycle analysis와 whole-field conformal
+functional certification이 포함된다. 이름을 바꾸거나 이들을 합치는 것은 residual
+gap이 아니다.
+
+## 4. 향후 재진입 시의 최소 연구 계약
+
+현재 허용되는 실행은 없다. Material official source/asset change가 생겨 fresh
+candidate가 다시 admission line을 넘는 경우에만 아래를 별도 prospective
+version으로 등록할 수 있다.
+
+| Gate | 먼저 답할 질문 | 통과해도 아직 열리지 않는 것 |
+|---|---|---|
+| E0 · source | License, manifest, patient/family unit, tangent-field semantics가 식별되는가? | Model, GPU |
+| E1 · stability | Degree와 보조 point/track endpoint가 mesh·tolerance·perturbation에 안정적인가? | Structural loss |
+| E2 · failure | Field-error-matched strong baselines가 structure에서 실제로 실패하는가? | Paper claim |
+| E3 · development | Family-disjoint validation에서 최소 intervention이 compute-matched controls를 이기는가? | Outer-test access |
+| E4 · confirmation | Fresh sealed units에서 field tax 없이 degree validity/efficiency와 보조 structure가 개선되는가? | Clinical claim |
+| E5 · interpretation | 동일 좌표계·색상 범위의 실제 surface figure가 failure와 correction을 설명하는가? | Rupture-risk claim |
+
+Primary statistical target이 열리는 경우에는 환자 단위 simultaneous field coverage,
+degree-certificate correctness, efficiency/abstention을 먼저 둔다. Critical-point
+precision/recall, index discrepancy, trajectory distance와 event F1은 E1에서 안정성이
+입증된 뒤의 secondary endpoint다.
+
+## 5. 현재 결론
+
+이 방향은 **폐기할 아이디어는 아니지만, 현재 ISBI 논문 주제도 모델도 아니다.**
+좋은 성능이 나오면 경쟁력이 있을 수 있다는 조건문만으로는 admission 근거가 되지
+않는다. Accept 가능한 application identity가 되려면 (i) field accuracy로 설명되지
+않는 재현 가능한 structural failure, (ii) 그 failure에 직접 대응하는 최소 방법,
+(iii) patient/family-disjoint fresh confirmation이 모두 필요하다.
+
+현재 active shortlist, primary problem, method, architecture, P0/P1, scientific
+server query, PBS/GPU, outer test, result row와 paper contribution은 모두 0이다.
+다음 허용 작업은 닫힌 job의 repair가 아니라 **fresh problem-level source/asset
+audit**다. AURORA는 gate 이후에도 `introai9` PBS만 사용하며 `junjinyong`에는
+접속·조회·전송·제출·모니터링하지 않는다.
+
