@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 9.2 decision · 2026-08-11:** The newest reference-provenance/RSNA
+> batch is rejected at 31.0/40. Biased-ruler, weak-reference partial
+> identification, noisy-label benchmarking and active cleaning are direct
+> priors; the official RSNA registry/wiki still lacks a public patient, split,
+> annotation-lineage or clean-reference contract. Surface-vector remains an
+> inactive question and closed P0s remain no-verdict. Active problem, method,
+> architecture and compute are all zero. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

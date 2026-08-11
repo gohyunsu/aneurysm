@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 9.2 server state · 2026-08-11:** This update queried no scientific
+> server and created no PBS/GPU job. The latest source batch is rejected, so
+> there is nothing to transfer or execute. Future gate-authorized work may use
+> only `introai9` PBS; login-node GPU commands are prohibited. Never connect
+> to, query, transfer to, submit to or monitor `junjinyong` for AURORA.
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

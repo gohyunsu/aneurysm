@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 9.2 direction · 2026-08-11:** Preserve surface-vector only as an
+> inactive falsifiable question and do not pivot to generic reference-robust
+> segmentation. Biased-ruler analysis, partial identification, label-noise
+> benchmarking and active cleaning are direct priors. The official RSNA source
+> remains controlled access with a forthcoming publication and a `Coming soon`
+> wiki, so no clean-reference, lineage, split or patient manifest identifies a
+> new estimand. Six candidates peak at 31.0/40 with novelty at most 2.0/5 and
+> are rejected. Wait for a material release-contract change or audit a fresh
+> problem; open no terms, P0, model or compute. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

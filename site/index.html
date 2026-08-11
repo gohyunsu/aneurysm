@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — surface-vector를 inactive/no-verdict로 보존하고 TopAneu의 실제 annotation version orbit를 direct-prior와 비보상식 novelty gate로 기각한 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — surface-vector를 inactive/no-verdict로 보존하고 RSNA·TopAneu reference provenance를 direct-prior와 비보상식 gate로 재심사한 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,7 +40,7 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST 32.0/40 · NOVELTY FLOOR FAILED · NOT SUBMISSION-READY</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST 31.0/40 · CRITICAL FLOORS FAILED · NOT SUBMISSION-READY</p>
         <h1>
           A strong direct prior is not an executable study identity.<br>
           <em>Identifiable evidence before architecture.</em>
@@ -50,15 +50,19 @@
           Surface-vector는 중요한 평가 질문이지만 edge 1-form, Hodge, SE(3), periodic
           operator와 topology loss를 묶은 모델 정체성은 아닙니다. CPU-only P0
           `115645`는 E/exit 2와 0/10 checks인 execution-incomplete/no-verdict로
-          보존하며 repair/rerun하지 않습니다. 새 공식 TopAneu Git 감사에서는
-          98-case batch와 417-scan release 사이의 실제 annotation version orbit를
-          확인했습니다. 그러나 evaluator-unit 교정 후보는 합산 <b>32.0/40</b>이어도
-          novelty 0.5/5이고, 더 의미 있는 revision-aware 후보는 31.5/40·novelty
-          2.0/5로 최소 2.5를 못 넘습니다. Terms, individual label, medical payload,
-          P0, model과 GPU는 모두 닫혀 있습니다.
+          보존하며 repair/rerun하지 않습니다. Reference provenance도 중요한
+          평가 문제지만 biased-ruler analysis, partial identification, label-noise
+          benchmark와 active cleaning이 이미 직접 선행연구를 이룹니다. RSNA의
+          official registry는 여전히 controlled access와 forthcoming publication만
+          명시하고, 연결된 wiki는 <b>Coming soon</b>뿐입니다. Public patient manifest,
+          split, adjudicated clean subset과 annotation-lineage contract가 없어 새
+          여섯 후보는 최고 <b>31.0/40</b>·novelty 2.0/5에서 모두 기각됐습니다.
+          Terms, MIRA, payload, P0, model과 GPU는 모두 닫혀 있습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#reference-provenance">Reference provenance 판정 이해하기</a>
+          <a class="button ghost" href="../docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md">Latest reappraisal ↗</a>
           <a class="button ghost" href="learn.html#topaneu-version-orbit">TopAneu version orbit 이해하기</a>
           <a class="button ghost" href="../docs/surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md">Latest adjudication ↗</a>
           <a class="button ghost" href="learn.html#aaa-cross-scale">AAA cross-scale 판정 이해하기</a>
@@ -73,7 +77,7 @@
           <a class="button ghost" href="../docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md">Latest source delta ↗</a>
           <a class="button ghost" href="learn.html#downstream-utility">Downstream 판정 이해하기</a>
           <a class="button ghost" href="../docs/team-downstream-utility-reappraisal-2026-08-11.md">Latest critical reappraisal ↗</a>
-          <a class="button ghost" href="../configs/source_watch_v10.json">Source watch v10 ↗</a>
+          <a class="button ghost" href="../configs/source_watch_v11.json">Source watch v11 ↗</a>
           <a class="button ghost" href="learn.html#aneux-transient">새 transient source 판정 이해하기</a>
           <a class="button ghost" href="../docs/aneux-transient-cfd-material-source-audit-2026-08-11.md">Latest material-source audit ↗</a>
           <a class="button ghost" href="learn.html#functional-4dflow">최신 4D-flow 판정 이해하기</a>
@@ -130,7 +134,7 @@
           <a class="button ghost" href="../docs/hemodynamic-endpoint-source-audit-2026-08-10.md">Hemodynamic audit ↗</a>
           <a class="button ghost" href="../docs/pinn-rupture-direct-prior-audit-2026-08-10.md">PINN prior audit ↗</a>
           <a class="button ghost" href="../docs/vascular-semantics-source-audit-2026-08-10.md">Vascular audit ↗</a>
-          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v10 ↗</a>
+          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v11 ↗</a>
           <a class="button ghost" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">AneuX history ↗</a>
           <a class="button ghost" href="../results/aneux_preprocessing_orbit_p0_execution_20260809.json">Historical P0 ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
@@ -140,7 +144,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">LATEST 32.0/40 REJECTED · NOVELTY FLOOR FAILED · NO MODEL</div>
+        <div class="visual-caption">LATEST 31.0/40 REJECTED · RELEASE CONTRACT INCOMPLETE · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>

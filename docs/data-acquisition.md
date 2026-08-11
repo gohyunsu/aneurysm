@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **Schema 9.2 acquisition boundary · 2026-08-11:** Do not request RSNA MIRA
+> access or accept terms for the rejected reference-provenance batch. Public
+> registry/wiki changes are monitored read-only by source-watch v11. A change
+> opens only a fresh source audit; actual access still requires an admitted
+> candidate, verified terms, a machine-auditable manifest and independent-unit
+> semantics. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 reference-provenance and RSNA release-contract reappraisal ·
+> schema 9.2:** Surface-vector remains an inactive falsifiable question, not a
+> selected edge-1-form/Hodge/GNN model. Biased-ruler analysis, weak-reference
+> partial identification, medical label-noise benchmarking and active label
+> cleaning already occupy the generic reference-robustness claims. The official
+> RSNA registry still exposes controlled-access prose and a forthcoming
+> publication, while its linked wiki is exactly `Coming soon`; no public patient
+> manifest, split, adjudicated clean subset or annotation-lineage contract is
+> identified. Six frozen candidates score **31.0/31.0/29.5/28.5/28.0/25.5** and
+> all fail the total or critical novelty/identifiability floors. No terms, MIRA
+> request, payload, P0/P1, method, architecture, scientific-server query,
+> PBS/GPU, outer test or claim is open. [Exact reappraisal](docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md) ·
+> [Fifteen-source watch](configs/source_watch_v11.json)
+
 > **2026-08-11 schema 9.1 deployment verification:** Exact scientific source
 > `4619c0e77a02588c0b47d3b615442339f60968b0` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31484751195) and

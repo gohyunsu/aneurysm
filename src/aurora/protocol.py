@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.1":
-        raise ProtocolError("The current research-state schema must be version 9.1.")
+    if protocol["schema_version"] != "9.2":
+        raise ProtocolError("The current research-state schema must be version 9.2.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_topaneu_version_orbit_additive_best_32_rejected_by_residual_novelty_floor_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_reference_provenance_batch_best_31_rejected_rsna_release_contract_incomplete_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_1_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_2_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -186,6 +186,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "reference_provenance_and_rsna_release_contract_reappraisal",
             "topaneu_annotation_version_orbit_reappraisal",
             "aaa_cross_scale_source_reappraisal",
             "mris_bench_target_contract_audit",
@@ -245,6 +246,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v8",
             "public_source_watch_v9",
             "public_source_watch_v10",
+            "public_source_watch_v11",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -255,13 +257,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_topaneu_version_orbit_additive_best_32_rejected_by_residual_novelty_floor"
+        != "no_active_problem_latest_reference_provenance_batch_best_31_rejected_by_total_and_residual_novelty_floors"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_topaneu_git_tree_and_blob_metadata_only_no_individual_annotation_content_medical_payload_terms_p0_closed_p0s_unchanged"
+        != "public_rsna_registry_and_wiki_release_metadata_only_no_terms_mira_payload_or_manifest_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -271,18 +273,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "continue_fresh_problem_level_source_and_direct_prior_audit_or_wait_for_material_source_change_not_topaneu_p0_or_model"
+        != "wait_for_material_rsna_release_contract_change_or_continue_fresh_problem_level_source_audit_no_terms_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md"
+        != "docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "topaneu_revision_conditioned_hierarchical_lesion_set_robustness_rejected_by_total_and_residual_novelty_floors"
+        != "versioned_morphometry_partial_identification_rejected_by_total_and_residual_novelty_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The TopAneu version-orbit batch must remain rejected by the "
-            "residual-novelty floor while "
+            "The reference-provenance batch must remain rejected by the "
+            "total and residual-novelty floors while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
@@ -345,7 +347,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 32.0
+        or admission_v2["current_batch_best_score"] != 31.0
         or admission_v2["current_batch_best_residual_novelty"] != 2.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
@@ -355,6 +357,194 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    reference_audit = problem_selection[
+        "reference_provenance_and_rsna_release_contract_reappraisal"
+    ]
+    _require_keys(
+        reference_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_ids",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "registry_repository",
+            "registry_file_path",
+            "registry_file_commit_sha",
+            "registry_blob_sha",
+            "registry_file_bytes",
+            "registry_file_sha256",
+            "registry_scans_reported",
+            "registry_radiologists_reported",
+            "registry_institutions_reported",
+            "registry_ai_segmented_studies_reported",
+            "controlled_access_declared",
+            "data_resource_publication_forthcoming",
+            "noncommercial_no_redistribution_terms_declared",
+            "wiki_repository_head",
+            "wiki_page_bytes",
+            "wiki_page_sha256",
+            "wiki_page_is_coming_soon_only",
+            "machine_auditable_release_contract_present",
+            "public_patient_manifest_present",
+            "public_split_contract_present",
+            "public_annotation_lineage_and_adjudication_contract_present",
+            "clean_reference_subset_public",
+            "about_200_ai_segmentations_treated_as_independent_lesion_masks",
+            "user_terms_acceptance_verified",
+            "mira_access_requested",
+            "registry_s3_medical_or_case_level_payload_accessed",
+            "direct_prior_threats",
+            "candidates",
+            "surface_vector_retained_only_as_inactive_falsifiable_question",
+            "surface_vector_closed_job_repaired_or_rerun",
+            "historical_scores_or_job_outcomes_relabelled",
+            "recurring_source_watch_added",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "reference-provenance and RSNA release-contract reappraisal",
+    )
+    expected_reference_scores = [31.0, 31.0, 29.5, 28.5, 28.0, 25.5]
+    expected_reference_candidates = [
+        (
+            "topaneu_revision_robust_lesion_set_ranking_interval",
+            31.0,
+            [4.0, 4.0, 1.0, 4.0, 4.0, 5.0, 5.0, 4.0],
+        ),
+        (
+            "versioned_morphometry_partial_identification",
+            31.0,
+            [4.5, 3.5, 2.0, 3.5, 4.0, 5.0, 5.0, 3.5],
+        ),
+        (
+            "rsna_clean_calibration_subgroup_risk_bound",
+            29.5,
+            [5.0, 3.0, 1.5, 2.0, 5.0, 5.0, 4.5, 3.5],
+        ),
+        (
+            "reference_provenance_conditioned_segmentation",
+            28.5,
+            [4.5, 3.0, 1.0, 3.0, 4.0, 5.0, 4.5, 3.5],
+        ),
+        (
+            "active_review_allocation_by_morphometric_utility",
+            28.0,
+            [4.5, 3.0, 0.5, 3.0, 4.0, 5.0, 4.5, 3.5],
+        ),
+        (
+            "subgroup_biased_ruler_audit_for_aneurysm_masks",
+            25.5,
+            [4.5, 2.0, 0.5, 2.0, 4.0, 5.0, 4.0, 3.5],
+        ),
+    ]
+    observed_reference_candidates = [
+        (candidate.get("id"), candidate.get("total"), candidate.get("axis_scores"))
+        for candidate in reference_audit["candidates"]
+    ]
+    if (
+        reference_audit["status"]
+        != "fresh_batch_rejected_best_31_fails_total_and_residual_novelty_floors_rsna_release_contract_incomplete"
+        or reference_audit["audit_document"]
+        != "docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md"
+        or reference_audit["automatic_selection_threshold"] != 32.0
+        or reference_audit["best_candidate_ids"]
+        != [
+            "topaneu_revision_robust_lesion_set_ranking_interval",
+            "versioned_morphometry_partial_identification",
+        ]
+        or reference_audit["best_score"] != 31.0
+        or reference_audit["best_residual_novelty_score"] != 2.0
+        or reference_audit["all_candidate_scores"] != expected_reference_scores
+        or observed_reference_candidates != expected_reference_candidates
+        or any(
+            candidate["critical_axis_pass"] is not False
+            or sum(candidate["axis_scores"]) != candidate["total"]
+            for candidate in reference_audit["candidates"]
+        )
+        or reference_audit["conditional_source_lead_count"] != 0
+        or reference_audit["primary_problem_selected"] is not False
+        or reference_audit["registry_repository"] != "awslabs/open-data-registry"
+        or reference_audit["registry_file_path"]
+        != "datasets/rsna-intracranial-aneurysm-detection-dataset.yaml"
+        or reference_audit["registry_file_commit_sha"]
+        != "523ffd3914ba99e6c4b17441f1633cc3eec74c69"
+        or reference_audit["registry_blob_sha"]
+        != "97b8c1f16b2809d2e82ec0c39d3b156b174c8c83"
+        or reference_audit["registry_file_bytes"] != 2626
+        or reference_audit["registry_file_sha256"]
+        != "864f0716a8f6618e90f4c257c417f599fd6bb454abe73fc06eee8e771d3d8a10"
+        or reference_audit["registry_scans_reported"] != "over_4000"
+        or reference_audit["registry_radiologists_reported"] != "over_40"
+        or reference_audit["registry_institutions_reported"] != 18
+        or reference_audit["registry_ai_segmented_studies_reported"]
+        != "about_200"
+        or reference_audit["controlled_access_declared"] is not True
+        or reference_audit["data_resource_publication_forthcoming"] is not True
+        or reference_audit["noncommercial_no_redistribution_terms_declared"]
+        is not True
+        or reference_audit["wiki_repository_head"]
+        != "11dcd6571b312543b63f059617e5f34c265b984b"
+        or reference_audit["wiki_page_bytes"] != 11
+        or reference_audit["wiki_page_sha256"]
+        != "4f7d64017689437e6d93f5724f3f797054f3935d98a13148025b616b8db8fb2c"
+        or reference_audit["wiki_page_is_coming_soon_only"] is not True
+        or reference_audit[
+            "surface_vector_retained_only_as_inactive_falsifiable_question"
+        ]
+        is not True
+        or reference_audit["recurring_source_watch_added"] is not True
+        or any(
+            reference_audit[key] is not False
+            for key in (
+                "machine_auditable_release_contract_present",
+                "public_patient_manifest_present",
+                "public_split_contract_present",
+                "public_annotation_lineage_and_adjudication_contract_present",
+                "clean_reference_subset_public",
+                "about_200_ai_segmentations_treated_as_independent_lesion_masks",
+                "user_terms_acceptance_verified",
+                "mira_access_requested",
+                "registry_s3_medical_or_case_level_payload_accessed",
+                "surface_vector_closed_job_repaired_or_rerun",
+                "historical_scores_or_job_outcomes_relabelled",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or reference_audit["execution_server"] != "introai9"
+        or reference_audit["next_allowed_action"]
+        != "wait_for_material_rsna_release_contract_change_or_fresh_unrelated_problem_level_source_audit_no_terms_payload_p0_or_model"
+    ):
+        raise ProtocolError(
+            "The reference-provenance and RSNA release-contract batch must remain "
+            "source-only, below the non-compensatory gate and without terms, "
+            "payload, P0, model, server query or compute."
+        )
+    checks.append("reference-provenance and RSNA release-contract rejection boundary")
 
     topaneu_orbit = problem_selection[
         "topaneu_annotation_version_orbit_reappraisal"
@@ -4267,7 +4457,100 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "payload, score repair, P0, model or compute."
         )
     checks.append("fourteen-source fail-closed TopAneu version watch boundary")
+    source_watch_v11 = problem_selection["public_source_watch_v11"]
+    _require_keys(
+        source_watch_v11,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "added_watch_id",
+            "rsna_registry_file_commit_sha",
+            "rsna_registry_blob_sha",
+            "rsna_wiki_page_sha256",
+            "rsna_controlled_access_declared",
+            "rsna_data_resource_publication_forthcoming",
+            "rsna_wiki_page_is_coming_soon_only",
+            "rsna_machine_auditable_release_contract_present",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v11",
+    )
+    if (
+        source_watch_v11["status"]
+        != "watch_only_all_fifteen_frozen_snapshots_match"
+        or source_watch_v11["config"] != "configs/source_watch_v11.json"
+        or source_watch_v11["extends_historical_config"]
+        != "configs/source_watch_v10.json"
+        or source_watch_v11["config_sha256"]
+        != "7bb95ea965615e3499d09039c28ad8ab6cdf3afbea53871d0c4c7268cab8025c"
+        or source_watch_v11["watch_count"] != 15
+        or source_watch_v11["added_watch_id"] != "rsna_ica_release_contract_v1"
+        or source_watch_v11["rsna_registry_file_commit_sha"]
+        != "523ffd3914ba99e6c4b17441f1633cc3eec74c69"
+        or source_watch_v11["rsna_registry_blob_sha"]
+        != "97b8c1f16b2809d2e82ec0c39d3b156b174c8c83"
+        or source_watch_v11["rsna_wiki_page_sha256"]
+        != "4f7d64017689437e6d93f5724f3f797054f3935d98a13148025b616b8db8fb2c"
+        or source_watch_v11["rsna_controlled_access_declared"] is not True
+        or source_watch_v11["rsna_data_resource_publication_forthcoming"]
+        is not True
+        or source_watch_v11["rsna_wiki_page_is_coming_soon_only"] is not True
+        or source_watch_v11[
+            "rsna_machine_auditable_release_contract_present"
+        ]
+        is not False
+        or source_watch_v11["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v11[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v11["decision"]
+        != "continue_fail_closed_fifteen_source_watch_only_rsna_release_contract_change_requests_fresh_source_reaudit"
+    ):
+        raise ProtocolError(
+            "Source watch v11 must preserve fifteen exact public snapshots; an "
+            "RSNA registry or wiki change may request source re-audit only, never "
+            "terms, payload, score repair, P0, model or compute."
+        )
+    checks.append("fifteen-source fail-closed RSNA release-contract watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "topaneu_revision_robust_lesion_set_ranking_interval_total_and_novelty_floors",
+        "versioned_morphometry_partial_identification_total_and_novelty_floors",
+        "rsna_clean_calibration_subgroup_risk_bound_no_clean_subset_or_public_asset",
+        "reference_provenance_conditioned_segmentation_biased_ruler_direct_prior",
+        "active_review_allocation_by_morphometric_utility_active_cleaning_direct_prior",
+        "subgroup_biased_ruler_audit_no_adjudicated_reference",
         "topaneu_official_evaluator_patient_instance_unit_correction_novelty_floor",
         "topaneu_revision_conditioned_hierarchical_lesion_set_robustness_total_and_novelty_floors",
         "topaneu_type_location_factorized_instance_set_prediction_direct_prior_occupied",

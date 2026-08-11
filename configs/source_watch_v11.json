@@ -1,0 +1,100 @@
+{
+  "schema_version": "aurora.source_watch.v11",
+  "extends": "source_watch_v10.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-11",
+  "added_watches": [
+    {
+      "watch_id": "rsna_ica_release_contract_v1",
+      "kind": "github_registry_wiki_contract",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "registry_repository": "awslabs/open-data-registry",
+        "registry_file_path": "datasets/rsna-intracranial-aneurysm-detection-dataset.yaml",
+        "registry_contents_api_url": "https://api.github.com/repos/awslabs/open-data-registry/contents/datasets/rsna-intracranial-aneurysm-detection-dataset.yaml?ref=main",
+        "registry_commits_api_url": "https://api.github.com/repos/awslabs/open-data-registry/commits?path=datasets/rsna-intracranial-aneurysm-detection-dataset.yaml&per_page=1",
+        "wiki_repository": "RSNA/AI-Challenge-Data.wiki",
+        "wiki_raw_url": "https://raw.githubusercontent.com/wiki/RSNA/AI-Challenge-Data/RSNA-Intracranial-Aneurysm-Detection-Dataset.md"
+      },
+      "frozen_snapshot": {
+        "registry_file_commit_sha": "523ffd3914ba99e6c4b17441f1633cc3eec74c69",
+        "registry_blob_sha": "97b8c1f16b2809d2e82ec0c39d3b156b174c8c83",
+        "registry_file_bytes": 2626,
+        "registry_file_sha256": "864f0716a8f6618e90f4c257c417f599fd6bb454abe73fc06eee8e771d3d8a10",
+        "controlled_access_declared": true,
+        "data_resource_publication_forthcoming": true,
+        "noncommercial_no_redistribution_terms_declared": true,
+        "wiki_page_bytes": 11,
+        "wiki_page_sha256": "4f7d64017689437e6d93f5724f3f797054f3935d98a13148025b616b8db8fb2c",
+        "wiki_page_is_coming_soon_only": true,
+        "machine_auditable_release_contract_present": false,
+        "availability": "controlled_access_registry_with_forthcoming_publication_and_coming_soon_wiki_without_machine_auditable_release_contract"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v10 material, direct-prior, target-contract or version-contract source state changes",
+      "The RSNA registry file or official dataset wiki changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "row_count_is_not_independent_patient_count": true,
+    "card_license_is_not_upstream_medical_data_lineage": true,
+    "postreview_metadata_change_is_not_e0_pass": true,
+    "visible_viewer_examples_are_not_registered_quality_prevalence": true,
+    "versioned_annotation_history_is_not_method_novelty": true,
+    "git_blob_change_is_not_terms_acceptance": true,
+    "annotation_metadata_is_not_medical_image_access": true,
+    "registry_or_wiki_change_is_not_terms_acceptance": true,
+    "controlled_access_metadata_is_not_payload_access": true,
+    "release_contract_change_is_not_p0_authority": true,
+    "reference_provenance_issue_is_not_method_novelty": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": [
+      "fresh_source_reaudit_only",
+      "direct_prior_baseline_feasibility_reaudit_only"
+    ]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

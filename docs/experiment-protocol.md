@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.2 execution boundary · 2026-08-11:** No experiment is active.
+> The six reference-provenance candidates all fail the non-compensatory source
+> gate, and the RSNA registry/wiki state is not a machine-auditable task
+> contract. Source-watch v11 may request a manual source re-audit after a
+> public change; it cannot accept terms, access MIRA/S3, register P0, select a
+> model or authorize compute. Closed job `115645` remains no-verdict and is not
+> repaired. Future eligible execution is `introai9` PBS only; no login-node GPU
+> command and no `junjinyong` access. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

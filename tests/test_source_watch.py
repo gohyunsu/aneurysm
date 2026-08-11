@@ -29,6 +29,7 @@ CONFIG_V7 = ROOT / "configs" / "source_watch_v7.json"
 CONFIG_V8 = ROOT / "configs" / "source_watch_v8.json"
 CONFIG_V9 = ROOT / "configs" / "source_watch_v9.json"
 CONFIG_V10 = ROOT / "configs" / "source_watch_v10.json"
+CONFIG_V11 = ROOT / "configs" / "source_watch_v11.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -549,7 +550,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v10.json", workflow)
+        self.assertIn("configs/source_watch_v11.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
@@ -912,6 +913,98 @@ class SourceWatchContractTests(unittest.TestCase):
             candidate = source / "source_watch.json"
             candidate.write_text(json.dumps(payload), encoding="utf-8")
             for config_path in (
+                CONFIG_V9,
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v11_adds_rsna_release_contract_watch_without_authority(self) -> None:
+        config = load_config(CONFIG_V11)
+        self.assertEqual(config["extends"], "source_watch_v10.json")
+        self.assertEqual(len(config["watches"]), 15)
+        rsna = config["watches"][-1]
+        self.assertEqual(rsna["watch_id"], "rsna_ica_release_contract_v1")
+        self.assertEqual(rsna["review_request"], "fresh_source_reaudit_only")
+        frozen = rsna["frozen_snapshot"]
+        self.assertEqual(
+            frozen["registry_file_commit_sha"],
+            "523ffd3914ba99e6c4b17441f1633cc3eec74c69",
+        )
+        self.assertTrue(frozen["controlled_access_declared"])
+        self.assertTrue(frozen["data_resource_publication_forthcoming"])
+        self.assertTrue(frozen["wiki_page_is_coming_soon_only"])
+        self.assertFalse(frozen["machine_auditable_release_contract_present"])
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v11_rsna_change_requests_source_reaudit_only(self) -> None:
+        config = load_config(CONFIG_V11)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observed = observations["rsna_ica_release_contract_v1"]
+        observed["wiki_page_sha256"] = "e" * 64
+        observed["wiki_page_is_coming_soon_only"] = False
+        observed["machine_auditable_release_contract_present"] = True
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(result["direct_prior_baseline_feasibility_reaudit_triggered"])
+        self.assertEqual(result["manual_review_requests"], ["fresh_source_reaudit_only"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v11_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V11.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["wiki_page_bytes"] = 12
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V10,
+                CONFIG_V9,
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "rsna"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V11.read_text(encoding="utf-8"))
+        payload["authorization"]["gpu_training"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V10,
                 CONFIG_V9,
                 CONFIG_V8,
                 CONFIG_V7,

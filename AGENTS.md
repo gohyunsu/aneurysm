@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 reference-provenance and RSNA release-contract override ·
+> schema 9.2:** Surface-vector는 inactive falsifiable evaluation question으로만
+> 유지한다. Job `115645.ECE-util1`은 E/exit 2, GPU 0, aggregate/raw log/cache 0,
+> scientific check 0/10의 execution-incomplete/no-verdict history이며 repair/
+> rerun하지 않는다. Edge 1-form/Hodge/SE(3)/periodic operator/structural loss는
+> component/control이지 선택 architecture나 novelty가 아니다. Exact RSNA
+> registry file `523ffd…`/blob `97b8c1…`은 controlled access, forthcoming Data
+> Resource Publication, 4,000+ study/40+ radiologist/18 institution/about 200
+> AI-segmentation aggregate만 보고하고 official wiki는 11-byte `Coming soon`
+> 뿐이다. 이를 patient, lesion mask, expert revision 또는 clean/noisy pair로
+> relabel하지 않는다. Terms, MIRA, S3/image/CSV/mask payload access는 0이다.
+> Biased-ruler analysis, weak-reference partial identification, LNMBench,
+> active label cleaning과 challenge-ranking robustness는 direct prior다. Frozen
+> scores 31.0/31.0/29.5/28.5/28.0/25.5는 모두 total 또는 critical floor를
+> 실패하며 사후 수리하지 않는다. Source-watch v11은 15개 public state를
+> fail-closed 감시하며 change는 fresh manual source re-audit만 요청한다. Active
+> lead/primary/P0/P1/method/architecture/server query/PBS/GPU/outer test/result/
+> C21/claim은 0이다. Future gate-authorized execution은 `introai9` PBS만
+> 사용하고 login-node GPU command를 금지한다. `junjinyong`에는 절대 접속·조회·
+> 전송·제출·모니터링하지 않는다.
+
 > **2026-08-11 schema 9.1 deployment·private synchronization:** Exact public
 > scientific source `4619c0e77a02588c0b47d3b615442339f60968b0` passed
 > Quality `31484751195` and Pages `31484750528`. Private paper ledger

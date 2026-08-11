@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.2 direct-prior correction · 2026-08-11:** Medical
+> segmentation's biased-ruler effect, weak-supervision partial identification,
+> broad label-noise benchmarking and active label cleaning directly occupy the
+> obvious reference-provenance mechanisms. Therefore TopAneu/RSNA annotation
+> provenance is an evaluation validity problem, not standalone method novelty.
+> The official RSNA release contract still lacks a public patient manifest,
+> split, adjudication protocol and clean-reference subset. Six candidates peak
+> at 31.0/40 and are rejected without model or compute. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

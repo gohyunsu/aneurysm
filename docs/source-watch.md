@@ -188,8 +188,8 @@ checkpoint가 나와도 strong baseline 재현성을 다시 검토할 신호일
 
 ## 기계적 감시 계약
 
-[`configs/source_watch_v10.json`](../configs/source_watch_v10.json)은 historical
-[`source_watch_v9.json`](../configs/source_watch_v9.json)을 명시적으로 상속하고,
+[`configs/source_watch_v11.json`](../configs/source_watch_v11.json)은 historical
+[`source_watch_v10.json`](../configs/source_watch_v10.json)을 명시적으로 상속하고,
 IAVS의 현재
 commit, root entry, release count와 license, TopBrain 2.0의 Zenodo revision,
 design-object license, exact file inventory와 challenge navigation, TRELLIS의
@@ -198,8 +198,9 @@ license/access state와 filename-manifest hash에 더해 AneuG HF revision/stora
 Aneurisk와 LargeIA Zenodo revision/access/file manifest, TopAneu live navigation,
 그리고 AneuX-derived transient-CFD revision/gate/license/card와 case-path manifest,
 PointFlowNet partial baseline, AAA-WSS README-only repository와 MRIS-Bench의
-revision/card/access/file-inventory metadata를 고정한다.
-기존 v1--v9는
+revision/card/access/file-inventory metadata, TopAneu current/batch-1 Git tree,
+그리고 RSNA AWS registry file + official `Coming soon` wiki contract를 고정한다.
+기존 v1--v10은
 historical contract로 보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
 공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
@@ -227,8 +228,10 @@ historical contract로 보존한다.
     Arrow inventory가 바뀜
 18. TopAneu current/batch-1 Git tree, README/changelog/terms blob 또는 aggregate
     manifest count가 바뀜
+19. RSNA registry file commit/blob/content, controlled-access/publication state
+    또는 official wiki content가 바뀜
 
-1--6, 8--13, 16--18의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다.
+1--6, 8--13, 16--19의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다.
 7, 14, 15는 **direct-prior baseline-feasibility review 요청**만 만든다.
 자동 download, 약관 수락, 점수 재가중, frozen snapshot 갱신, P0 등록,
 model/architecture 선택,
@@ -239,11 +242,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v10.json \
+  --config configs/source_watch_v11.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v10.json \
+  --config configs/source_watch_v11.json \
   --fetch --fail-on-change
 ```
 

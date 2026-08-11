@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest TopAneu batch additive best 32.0/40 rejected by novelty veto; revision-aware candidate 31.5/40 with novelty 2.0/5 < 2.5 · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    status: "Target locked · latest reference-provenance/RSNA batch best 31.0/40 rejected by total and critical floors · official registry remains controlled access and wiki remains Coming soon · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
     requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Reference provenance is a validity problem, not automatic method novelty",
+      copy: "The official RSNA registry reports over 4,000 CT studies, over 40 radiologists, 18 institutions and about 200 AI-segmented studies, but access is controlled, the Data Resource Publication is forthcoming and the official wiki is only Coming soon. No public patient manifest, split, adjudicated clean subset or annotation-lineage contract identifies a new estimand. Biased-ruler analysis, weak-reference partial identification, broad medical label-noise benchmarking and active label cleaning directly occupy the generic mechanisms. Six prospectively frozen candidates score 31.0/31.0/29.5/28.5/28.0/25.5 and all fail total or critical floors.",
+      status: "Best 31.0/40 rejected · no clean-reference contract · terms/MIRA/payload/P0/model/GPU 0",
+      url: "../docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "A real annotation version orbit is evidence, not automatic method novelty",
@@ -933,6 +940,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 9.2 rejects generic reference-provenance methods and adds an RSNA release-contract watch",
+      copy: "Surface-vector remains an inactive falsifiable question and closed job 115645 remains E/exit 2 with 0/10 no-verdict, without repair. The exact RSNA registry file is controlled access and says its Data Resource Publication is forthcoming; the official wiki is an 11-byte Coming soon page. New direct priors on biased rulers, partial identification, label-noise benchmarking and active cleaning remove the generic novelty claim. Six candidates freeze at 31.0/31.0/29.5/28.5/28.0/25.5 and all fail the non-compensatory gate. Source-watch v11 observes fifteen public states and can request only manual source re-audit. Terms, MIRA, medical payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result and claim remain zero.",
+      files: ["docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md", "configs/source_watch_v11.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "docs/research-map.md", "docs/source-watch.md", ".github/workflows/quality.yml", ".github/workflows/source-watch.yml", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

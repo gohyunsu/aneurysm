@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AAA transcriptomics·synthetic CFD의 환자 연결성, surface-vector 가설, 독립 표본과 비보상형 research gate를 기초부터 설명하는 입문 가이드.">
+  <meta name="description" content="Reference provenance, RSNA release contract, surface-vector 가설, 독립 표본과 비보상형 research gate를 기초부터 설명하는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#reference-provenance">Reference provenance</a>
       <a href="#admission-v2">Why 32 is rejected</a>
       <a href="#cross-vascular-wss">AAA/WSS correction</a>
       <a href="#posttreatment-imaging">Post-treatment imaging</a>
@@ -65,18 +66,64 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.1</span>
+          <span>짧은 답 · schema 9.2</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
             Surface-vector 질문은 보존하지만 active topic이나 선택된 GNN/Hodge
             architecture는 아닙니다. P0 `115645`는 0/10 checks가 미평가된
             execution-incomplete/no-verdict이고 동일 contract를 재실행하지 않습니다.
-            TopAneu에는 실제 98-case → 417-scan annotation version orbit가 있지만,
-            generic label cleaning과 benchmark revision, hierarchy/multitask prior를
-            빼면 충분한 독립 novelty가 남지 않습니다. 합산 최고 32.0도 novelty
-            veto로, revision-aware 후보 31.5도 novelty 2.0/5로 기각했습니다.
-            Primary, contribution, terms, payload, P0, GPU와 outer test는 0입니다.
+            Reference provenance는 중요한 평가 문제지만 biased-ruler analysis,
+            partial identification, label-noise benchmark와 active cleaning을 빼면
+            충분한 독립 novelty가 남지 않습니다. RSNA official wiki는 여전히
+            `Coming soon`이고 공개 clean reference나 split contract가 없습니다.
+            최신 여섯 후보는 최고 31.0/40·novelty 2.0/5로 기각했습니다. Primary,
+            contribution, terms, MIRA, payload, P0, GPU와 outer test는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="reference-provenance">
+          <span>Reference provenance는 무엇이며 왜 새 논문 주제가 아닌가?</span>
+          <strong>정답표가 어떻게 만들어졌는지는 중요하지만, 그 질문 자체가 새 방법은 아닙니다.</strong>
+          <p>
+            의료영상 모델은 보통 expert label을 정답처럼 사용합니다. 그러나 label도
+            관찰·도구·판독 규칙·자동 보조 결과에 의존합니다. Reference가 특정
+            집단이나 모양을 체계적으로 다르게 재면, 모델을 그 reference로 평가할
+            때 reference bias와 model bias가 섞입니다. 이를 <em>biased ruler</em>
+            문제로 생각할 수 있습니다. Weak reference만 있을 때 하나의 성능 숫자를
+            강제로 보고하지 않고 가능한 성능 범위를 구하는 partial identification도
+            이미 제안돼 있습니다.
+          </p>
+          <p>
+            RSNA registry는 4,000건 초과 CT, 40명 초과 radiologist, 18개 기관과 약
+            200개의 AI-generated segmentation을 보고합니다. 하지만 이것은 공개된
+            case manifest가 아닙니다. 약 200건이 어떤 환자·병변·anatomy를 가리키는지,
+            human label과 paired인지, adjudication을 거쳤는지, train/test 어디에
+            속하는지 현재 공개 contract만으로는 알 수 없습니다. Official wiki는
+            정확히 11-byte `Coming soon`입니다. 따라서 “AI label 200개”를 clean/noisy
+            pair나 200개의 독립 lesion mask로 세면 안 됩니다.
+          </p>
+          <p>
+            방법론적으로도 generic robust loss, label correction, disagreement-based
+            review, subgroup bias audit와 metric interval은 이미 strong direct prior가
+            있습니다. Aneurysm에 적용하고 새 이름을 붙이는 것만으로는 독립 novelty가
+            생기지 않습니다. Frozen screen의 동점 최고 두 후보—revision-robust
+            ranking interval과 versioned morphometry partial identification—는 각각
+            31.0/40이며 novelty는 1.0/5와 2.0/5입니다. 총점 32와 novelty 2.5를 모두
+            넘어야 하므로 둘 다 reject입니다.
+          </p>
+          <p>
+            다음 re-entry에는 versioned publication, patient/study grouping, split,
+            annotation lineage, adjudicated clean subset 또는 실제 review action이
+            먼저 필요합니다. Source-watch v11은 registry나 wiki가 바뀌면 사람에게
+            재감사를 요청할 뿐, terms 수락·MIRA access·P0·model·GPU를 자동으로 열지
+            않습니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Important validity problem</span>
+            <span class="yes">Fail-closed release watch</span>
+            <span class="no">Not standalone novelty</span>
+            <span class="no">No terms · MIRA · payload · model</span>
+          </div>
+          <a href="../docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md">source contract, direct prior, frozen scores와 re-entry 조건 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="topaneu-version-orbit">
           <span>TopAneu annotation version orbit는 무엇이며 왜 바로 학습하지 않나?</span>

@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.2 model boundary · 2026-08-11:** There is no selected model.
+> Surface edge 1-forms, Hodge/DEC, equivariant message passing, periodic
+> operators and structural losses remain hypothetical components or controls.
+> Reference-provenance conditioning, robust loss, partial-identification heads
+> and active-cleaning policies are also not selected architectures: direct
+> priors are strong and the RSNA release contract does not identify a clean
+> target or review action. The fresh batch peaks at 31.0/40 and opens no P0,
+> architecture or GPU. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

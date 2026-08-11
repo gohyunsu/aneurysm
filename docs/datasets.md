@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.2 RSNA contract boundary · 2026-08-11:** The official registry
+> reports over 4,000 studies, over 40 radiologists, 18 institutions and about
+> 200 AI-segmented studies, but access is controlled and the linked wiki is
+> only `Coming soon`. These aggregate counts do not identify patients, lesion
+> masks, expert revisions, clean/noisy pairs or independent evaluation units.
+> No terms were accepted, no MIRA request was made and no S3/image/CSV/mask was
+> accessed. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

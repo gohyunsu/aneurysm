@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-08-11 · Reference provenance rejected; RSNA release-contract watch · schema 9.2
+
+- Retained surface-vector only as an inactive falsifiable evaluation question;
+  job `115645.ECE-util1` remains closed execution-incomplete/no verdict with
+  0/10 scientific checks and no repair or rerun.
+- Pinned the exact RSNA registry file and official 11-byte `Coming soon` wiki.
+  The registry remains controlled access, says the Data Resource Publication
+  is forthcoming and exposes no machine-auditable patient, split, annotation-
+  lineage, adjudication or clean-reference contract. No terms, MIRA request or
+  medical payload was opened.
+- Added direct-prior corrections for biased-ruler analysis, weak-reference
+  partial identification, LNMBench and active label cleaning. Generic robust
+  loss, metric interval, subgroup audit and review allocation are not novel by
+  being applied to aneurysm data.
+- Froze six candidates at 31.0/31.0/29.5/28.5/28.0/25.5. Every candidate fails
+  the total or a non-compensatory critical floor; active lead, primary, P0/P1,
+  method, architecture, result and claim remain zero.
+- Added source-watch v11 over fifteen public metadata states. A registry/wiki
+  change requests manual source re-audit only and cannot accept terms, repair a
+  score, register P0, select a model or authorize compute.
+- Queried no scientific server and created no PBS/GPU job. Future eligible
+  execution remains `introai9` PBS only; login-node GPU and all `junjinyong`
+  access/query/transfer/submission/monitoring remain prohibited.
+
 ## 2026-08-11 · Schema 9.1 deployed and privately pinned
 
 - Exact scientific source `4619c0e77a02588c0b47d3b615442339f60968b0`

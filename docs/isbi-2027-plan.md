@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.2 submission decision · 2026-08-11:** AURORA is not
+> submission-ready. Structure-faithful WSS remains unobserved as a stable
+> failure, while generic reference-provenance robustness is direct-prior
+> occupied and lacks an adjudicated public task contract. The latest batch
+> peaks at 31.0/40 and admits zero candidates. Do not write a method,
+> contribution, headline result, architecture figure or result table until a
+> fresh problem passes the non-compensatory gate and subsequent prospective
+> evidence stages. [Exact reappraisal](reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md)
+
 > **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
 > evaluation question; job `115645` is still execution-incomplete with 0/10
 > checks and is not repaired. TopAneu's official Git history now verifies a

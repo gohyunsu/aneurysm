@@ -40,6 +40,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v8",
         "aurora.source_watch.v9",
         "aurora.source_watch.v10",
+        "aurora.source_watch.v11",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -108,7 +109,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v9_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v9(payload)
-    else:
+    elif schema == "aurora.source_watch.v10":
         if payload.get("extends") != "source_watch_v9.json":
             raise SourceWatchContractError("v10_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -119,6 +120,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v10_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v10(payload)
+    else:
+        if payload.get("extends") != "source_watch_v10.json":
+            raise SourceWatchContractError("v11_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v10":
+            raise SourceWatchContractError("v11_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v11_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v11(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -169,6 +181,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v8",
         "aurora.source_watch.v9",
         "aurora.source_watch.v10",
+        "aurora.source_watch.v11",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1004,6 +1017,102 @@ def _validate_v10(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v10_change_boundary_changed")
 
 
+def _validate_v11(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+        "aneug_huggingface_material_revision_v1",
+        "aneurisk_zenodo_material_revision_v1",
+        "largeia_zenodo_access_revision_v1",
+        "topaneu_material_release_v1",
+        "aneux_transient_cfd_material_revision_v1",
+        "pointflownet_baseline_release_v1",
+        "aaa_wss_neural_surrogate_baseline_release_v1",
+        "mris_bench_postreview_target_contract_v1",
+        "topaneu_github_release_contract_v2",
+        "rsna_ica_release_contract_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v11_watch_set_changed")
+
+    _validate_v10(
+        {
+            "watches": watches[:14],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    rsna = watches[14]
+    if (
+        rsna.get("kind") != "github_registry_wiki_contract"
+        or rsna.get("review_request") != "fresh_source_reaudit_only"
+        or rsna.get("source")
+        != {
+            "registry_repository": "awslabs/open-data-registry",
+            "registry_file_path": (
+                "datasets/rsna-intracranial-aneurysm-detection-dataset.yaml"
+            ),
+            "registry_contents_api_url": (
+                "https://api.github.com/repos/awslabs/open-data-registry/"
+                "contents/datasets/rsna-intracranial-aneurysm-detection-"
+                "dataset.yaml?ref=main"
+            ),
+            "registry_commits_api_url": (
+                "https://api.github.com/repos/awslabs/open-data-registry/"
+                "commits?path=datasets/rsna-intracranial-aneurysm-detection-"
+                "dataset.yaml&per_page=1"
+            ),
+            "wiki_repository": "RSNA/AI-Challenge-Data.wiki",
+            "wiki_raw_url": (
+                "https://raw.githubusercontent.com/wiki/RSNA/AI-Challenge-Data/"
+                "RSNA-Intracranial-Aneurysm-Detection-Dataset.md"
+            ),
+        }
+    ):
+        raise SourceWatchContractError("rsna_release_contract_source_changed")
+
+    if rsna.get("frozen_snapshot") != {
+        "registry_file_commit_sha": (
+            "523ffd3914ba99e6c4b17441f1633cc3eec74c69"
+        ),
+        "registry_blob_sha": "97b8c1f16b2809d2e82ec0c39d3b156b174c8c83",
+        "registry_file_bytes": 2626,
+        "registry_file_sha256": (
+            "864f0716a8f6618e90f4c257c417f599fd6bb454abe73fc06eee8e771d3d8a10"
+        ),
+        "controlled_access_declared": True,
+        "data_resource_publication_forthcoming": True,
+        "noncommercial_no_redistribution_terms_declared": True,
+        "wiki_page_bytes": 11,
+        "wiki_page_sha256": (
+            "4f7d64017689437e6d93f5724f3f797054f3935d98a13148025b616b8db8fb2c"
+        ),
+        "wiki_page_is_coming_soon_only": True,
+        "machine_auditable_release_contract_present": False,
+        "availability": (
+            "controlled_access_registry_with_forthcoming_publication_and_"
+            "coming_soon_wiki_without_machine_auditable_release_contract"
+        ),
+    }:
+        raise SourceWatchContractError("rsna_release_contract_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("registry_or_wiki_change_is_not_terms_acceptance") is not True
+        or detection.get("controlled_access_metadata_is_not_payload_access")
+        is not True
+        or detection.get("release_contract_change_is_not_p0_authority") is not True
+        or detection.get("reference_provenance_issue_is_not_method_novelty")
+        is not True
+    ):
+        raise SourceWatchContractError("v11_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -1151,6 +1260,62 @@ def fetch_github_versioned_release_contract_snapshot(
         "availability": (
             "public_versioned_git_manifest_and_annotation_metadata_"
             "without_medical_payload_access_or_terms_acceptance"
+        ),
+    }
+
+
+def fetch_github_registry_wiki_contract_snapshot(
+    registry_contents_api_url: str,
+    registry_commits_api_url: str,
+    wiki_raw_url: str,
+) -> dict[str, Any]:
+    """Read public release-document metadata without requesting medical data."""
+
+    contents = _json_get(registry_contents_api_url, github=True)
+    commits = _json_get(registry_commits_api_url, github=True)
+    if (
+        not isinstance(contents, Mapping)
+        or not isinstance(commits, list)
+        or not commits
+    ):
+        raise SourceWatchContractError("unexpected_registry_contract_response")
+    download_url = contents.get("download_url")
+    if not isinstance(download_url, str) or not download_url:
+        raise SourceWatchContractError("registry_contract_download_url_missing")
+
+    registry_payload = _url_get(download_url, "text/plain")
+    wiki_payload = _url_get(wiki_raw_url, "text/plain")
+    registry_text = registry_payload.decode("utf-8")
+    wiki_text = wiki_payload.decode("utf-8")
+
+    controlled = "ControlledAccess:" in registry_text
+    forthcoming = "forthcoming Data Resource Publication" in registry_text
+    restricted_terms = (
+        "for non-commercial purposes only" in registry_text
+        and "You may not share or redistribute" in registry_text
+    )
+    wiki_coming_soon = wiki_text.strip() == "Coming soon"
+    machine_contract = not wiki_coming_soon and all(
+        token in wiki_text.lower()
+        for token in ("manifest", "patient", "annotation", "split")
+    )
+    return {
+        "registry_file_commit_sha": str(commits[0].get("sha", "")),
+        "registry_blob_sha": str(contents.get("sha", "")),
+        "registry_file_bytes": int(contents.get("size", 0)),
+        "registry_file_sha256": _sha256(registry_payload),
+        "controlled_access_declared": controlled,
+        "data_resource_publication_forthcoming": forthcoming,
+        "noncommercial_no_redistribution_terms_declared": restricted_terms,
+        "wiki_page_bytes": len(wiki_payload),
+        "wiki_page_sha256": _sha256(wiki_payload),
+        "wiki_page_is_coming_soon_only": wiki_coming_soon,
+        "machine_auditable_release_contract_present": machine_contract,
+        "availability": (
+            "controlled_access_registry_with_forthcoming_publication_and_"
+            "coming_soon_wiki_without_machine_auditable_release_contract"
+            if controlled and forthcoming and wiki_coming_soon and not machine_contract
+            else "rsna_release_contract_state_changed"
         ),
     }
 
@@ -1613,6 +1778,55 @@ def evaluate_watch(
             "gpu_or_outer_test_authorized": False,
             "observed": dict(observed),
         }
+    if watch.get("kind") == "github_registry_wiki_contract":
+        frozen = watch["frozen_snapshot"]
+        signal_names = {
+            "registry_file_commit_sha": "registry_file_commit_changed",
+            "registry_blob_sha": "registry_blob_changed",
+            "registry_file_bytes": "registry_file_size_changed",
+            "registry_file_sha256": "registry_file_content_changed",
+            "controlled_access_declared": "controlled_access_state_changed",
+            "data_resource_publication_forthcoming": (
+                "data_resource_publication_state_changed"
+            ),
+            "noncommercial_no_redistribution_terms_declared": (
+                "registry_terms_state_changed"
+            ),
+            "wiki_page_bytes": "wiki_page_size_changed",
+            "wiki_page_sha256": "wiki_page_content_changed",
+            "wiki_page_is_coming_soon_only": "wiki_release_state_changed",
+            "machine_auditable_release_contract_present": (
+                "machine_auditable_release_contract_state_changed"
+            ),
+            "availability": "rsna_release_contract_availability_changed",
+        }
+        signals = [
+            signal
+            for key, signal in signal_names.items()
+            if observed.get(key) != frozen.get(key)
+        ]
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") == "github_repository_availability":
         frozen = watch["frozen_snapshot"]
         signals: list[str] = []
@@ -1927,6 +2141,12 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
             source["batch1_anchor_commit"],
             source["release_prefix"],
         )
+    if watch.get("kind") == "github_registry_wiki_contract":
+        return fetch_github_registry_wiki_contract_snapshot(
+            source["registry_contents_api_url"],
+            source["registry_commits_api_url"],
+            source["wiki_raw_url"],
+        )
     if watch.get("kind") == "huggingface_dataset":
         return fetch_huggingface_dataset_snapshot(source["dataset_api_url"])
     if watch.get("kind") == "huggingface_revision":
@@ -1960,6 +2180,7 @@ def evaluate_config(
         "aurora.source_watch.v8",
         "aurora.source_watch.v9",
         "aurora.source_watch.v10",
+        "aurora.source_watch.v11",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results
