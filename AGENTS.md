@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.4 deployment verification:** Exact scientific content
+> `62a3d7f252b1b73bcf4dc4113e6fd27880183be7` passed Quality
+> `31459082444` and Pages `31459081698`. Private paper head
+> `e659a0bb03e45eafe23e0e1ebb4e8e0d42a9a50b` is remote exact and anonymous
+> GitHub API returns 404. Manuscript and references hashes remain
+> `42738a36…`/`5b7d6732…`. This provenance creates no scientific or compute
+> authority; `introai9` remains the only future eligible server and
+> `junjinyong` remains prohibited.
+
 > **2026-08-11 team downstream-utility reappraisal · schema 8.4:** Exact team
 > source hashes remain `ad99cc…`/`6d50cb…`; no discussion later than
 > 2026-08-02 was found. The real-CFD→surrogate downstream-retention question is

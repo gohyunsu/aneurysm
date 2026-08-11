@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.4 scientific content deployed and privately pinned
+
+- Exact public scientific content `62a3d7f252b1b73bcf4dc4113e6fd27880183be7`
+  passed Quality `31459082444` and Pages `31459081698`.
+- Private paper ledger `e659a0bb03e45eafe23e0e1ebb4e8e0d42a9a50b` pins the
+  rejected identity and source-watch boundary while preserving manuscript and
+  references byte-for-byte.
+- This is deployment provenance, not a scientific result or authorization for
+  P0/P1, a method, PBS/GPU, outer test, result row or claim.
+
 ## 2026-08-11 · Schema 8.4 rejects downstream-surrogate identity
 
 - Re-read exact team-source hashes and found no discussion later than

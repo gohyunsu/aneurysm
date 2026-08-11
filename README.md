@@ -1,5 +1,12 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.4 deployment verification:** Exact scientific content
+> `62a3d7f252b1b73bcf4dc4113e6fd27880183be7` passed Quality
+> `31459082444` and Pages `31459081698`. Private paper ledger
+> `e659a0bb03e45eafe23e0e1ebb4e8e0d42a9a50b` pins that public content while
+> keeping `paper/main.tex` and references byte-for-byte unchanged. This is
+> provenance only; it opens no lead, P0/P1, model, compute, outer test or claim.
+
 > **2026-08-11 team downstream-utility reappraisal · schema 8.4:** The latest
 > team question—whether a surrogate preserves real-CFD incremental information
 > for patient-grouped rupture-status classification—is retained as an

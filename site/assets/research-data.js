@@ -863,6 +863,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.4 exact content passed Quality and Pages",
+      copy: "Exact public scientific content 62a3d7f252b1… passed Quality 31459082444 and Pages 31459081698. Private paper ledger e659a0bb03e45eafe23e0e1ebb4e8e0d42a9a50b pins the rejected-source boundary while leaving manuscript and references byte-for-byte unchanged. This provenance opens no candidate, P0/P1, model, server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Schema 8.4 rejects downstream-surrogate identity without discarding the question",
       copy: "The team question is retained as an evaluation template, but CMHA has no matched surrogate field, PointFlowNet and Hemo-MPO occupy the obvious method space, and public paired rigid/FSI data have one effective anatomy. Six formulations freeze at 27.0/25.5/24.0/24.0/23.5/21.5 and all are rejected. The historical CMHA signal remains exploratory; no P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",
