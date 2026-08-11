@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-12 · Decision-time and clinical-precision reappraisal · schema 10.2
+
+- Added the 426-aneurysm/362-patient four-centre PED occlusion nomogram as a
+  direct hemodynamic outcome prior, while distinguishing its random pooled
+  aneurysm hold-out from centre-held-out external validation.
+- Recorded the unresolved patient-dependence risk from 61 multi-aneurysm
+  patients without claiming that cross-split leakage definitely occurred.
+- Separated pre-operative CFD from immediate apposition and follow-up migration,
+  preventing a post-deployment updater from being presented as a purely
+  pre-operative treatment-selection model.
+- Added the 148-patient/163-aneurysm commercial AI precision study: improved
+  reproducibility did not yield DSA agreement within ±1 mm, and its
+  cross-sectional design does not validate longitudinal growth.
+- Froze six candidates at 30.0/26.0/25.5/25.0/24.5/23.0. All fail the total or
+  mandatory novelty, asset and independent-unit floors; no P0/model/compute or
+  paper identity opened.
+- Added schema 10.2 machine invariants, regression coverage, an exact audit and
+  a beginner-facing decision-time chapter. No scientific server was queried;
+  `junjinyong` remains completely excluded.
+
 ## 2026-08-12 · Schema 10.1 scientific source deployed and privately pinned
 
 - Exact scientific source `2abc73e07275e31ad87db3cf39b77864e1419322`

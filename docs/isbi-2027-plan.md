@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.2 submission boundary · 2026-08-12:** Do not title the paper
+> around a hemodynamic PED predictor, temporal leakage correction, commercial
+> AI precision or centre-held-out revalidation. The first is direct prior; the
+> latter three are necessary evaluation discipline without a public
+> confirmatory asset or sufficient independent novelty. The latest rows peak at
+> 30.0/40 and fail mandatory floors. No title, abstract claim, contribution,
+> method figure, result table, C21, payload, P0/P1, model or GPU is authorized.
+
 > **Schema 10.1 submission boundary · 2026-08-12:** Do not title the paper
 > around AI PED planning, hemodynamics-guided device choice, acute thrombosis
 > surrogation or virtual DSA. Direct priors already own expert planning and

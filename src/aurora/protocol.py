@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.1":
-        raise ProtocolError("The current research-state schema must be version 10.1.")
+    if protocol["schema_version"] != "10.2":
+        raise ProtocolError("The current research-state schema must be version 10.2.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_device_planning_mechanistic_occlusion_batch_rejected_best_26_5_no_p0_no_compute"
+        != "no_active_problem_decision_time_clinical_precision_batch_rejected_best_30_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "decision_time_and_clinical_precision_reappraisal",
             "device_planning_and_mechanistic_occlusion_reappraisal",
             "adam_longitudinal_and_treated_exclusion_source_correction",
             "diagnostic_action_and_human_ai_reappraisal",
@@ -266,13 +267,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_device_planning_mechanistic_occlusion_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_decision_time_clinical_precision_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "neuraneunet_and_device_thrombosis_public_paper_text_only_no_patient_image_device_simulation_or_outcome_payload_no_scientific_server"
+        != "decision_time_ped_nomogram_and_clinical_precision_public_paper_text_only_no_patient_image_table_cfd_or_proprietary_model_payload_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -284,15 +285,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md"
+        != "docs/decision-time-and-clinical-precision-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "paired_in_vitro_multidevice_response_ranking_rejected_at_26_5_two_source_anatomies_and_direct_prior"
+        != "acquisition_conditioned_longitudinal_morphology_precision_certificate_rejected_at_30_four_control_patients_and_direct_priors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The device-planning/mechanistic-occlusion batch must remain rejected and the VMR candidate "
+            "The decision-time/clinical-precision batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -354,7 +355,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 26.5
+        or admission_v2["current_batch_best_score"] != 30.0
         or admission_v2["current_batch_best_residual_novelty"] != 3.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
@@ -364,6 +365,186 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    decision_time = problem_selection[
+        "decision_time_and_clinical_precision_reappraisal"
+    ]
+    expected_decision_time_candidates = [
+        (
+            "acquisition_conditioned_longitudinal_morphology_precision_certificate",
+            [5.0, 4.5, 2.0, 4.0, 1.5, 5.0, 5.0, 3.0],
+            30.0,
+        ),
+        (
+            "decision_time_stratified_ped_occlusion_prediction",
+            [5.0, 4.5, 3.0, 0.5, 1.0, 5.0, 5.0, 2.0],
+            26.0,
+        ),
+        (
+            "preoperative_cfd_incremental_value_over_geometry",
+            [5.0, 5.0, 1.0, 0.5, 1.0, 5.0, 5.0, 3.0],
+            25.5,
+        ),
+        (
+            "patient_grouped_centre_heldout_nomogram_revalidation",
+            [5.0, 5.0, 0.5, 0.5, 1.0, 5.0, 4.0, 4.0],
+            25.0,
+        ),
+        (
+            "deployment_mediator_aware_dynamic_occlusion_update",
+            [5.0, 4.0, 2.5, 0.5, 1.0, 4.5, 5.0, 2.0],
+            24.5,
+        ),
+        (
+            "outcome_grounded_autonomous_morphometry_and_neck_planning",
+            [5.0, 3.5, 1.0, 0.5, 1.0, 5.0, 5.0, 2.0],
+            23.0,
+        ),
+    ]
+    observed_decision_time_candidates = [
+        (row["id"], row["axis_scores"], float(row["total"]))
+        for row in decision_time["candidates"]
+    ]
+    if (
+        decision_time["status"]
+        != "fresh_batch_rejected_best_30_fails_total_novelty_asset_and_independent_unit_floors_no_active_lead"
+        or decision_time["audit_document"]
+        != "docs/decision-time-and-clinical-precision-reappraisal-2026-08-12.md"
+        or decision_time["automatic_selection_threshold"] != 32.0
+        or decision_time["best_candidate_id"]
+        != "acquisition_conditioned_longitudinal_morphology_precision_certificate"
+        or decision_time["best_score"] != 30.0
+        or decision_time["best_residual_novelty_score"] != 3.0
+        or decision_time["all_candidate_scores"]
+        != [30.0, 26.0, 25.5, 25.0, 24.5, 23.0]
+        or decision_time["conditional_source_lead_count"] != 0
+        or decision_time["primary_problem_selected"] is not False
+        or decision_time["paper_identity_active"] is not False
+        or decision_time["ped_nomogram_doi"] != "10.3389/fneur.2026.1756374"
+        or decision_time["ped_nomogram_pmid"] != 41738005
+        or decision_time["ped_nomogram_pmcid"] != "PMC12926474"
+        or (
+            decision_time["ped_nomogram_patients"],
+            decision_time["ped_nomogram_aneurysms"],
+            decision_time["ped_nomogram_centres"],
+            decision_time["ped_nomogram_multi_aneurysm_patients_one_ped"],
+        )
+        != (362, 426, 4, 61)
+        or (
+            decision_time["ped_nomogram_development_aneurysms"],
+            decision_time["ped_nomogram_validation_aneurysms"],
+            decision_time["ped_nomogram_median_followup_days"],
+        )
+        != (298, 128, 199)
+        or (
+            decision_time["ped_nomogram_complete_occlusion_numerator"],
+            decision_time["ped_nomogram_complete_occlusion_denominator"],
+            decision_time["ped_nomogram_complete_occlusion_percent"],
+        )
+        != (340, 426, 79.8)
+        or (
+            decision_time["ped_nomogram_source_auc_development"],
+            decision_time["ped_nomogram_source_auc_validation"],
+        )
+        != (0.785, 0.809)
+        or decision_time["ped_nomogram_final_predictors"]
+        != [
+            "smoking",
+            "flow_complexity",
+            "device_migration",
+            "poor_wall_apposition",
+            "aneurysm_angle",
+            "low_wss_area_ratio",
+        ]
+        or decision_time["commercial_precision_doi"]
+        != "10.1186/s12880-026-02209-2"
+        or decision_time["commercial_precision_pmid"] != 41654787
+        or decision_time["commercial_precision_pmcid"] != "PMC12977671"
+        or (
+            decision_time["commercial_precision_patients"],
+            decision_time["commercial_precision_aneurysms"],
+            decision_time["commercial_precision_paired_cta_dsa_patients"],
+            decision_time["commercial_precision_ai_platforms"],
+        )
+        != (148, 163, 86, 2)
+        or decision_time["commercial_precision_clinical_agreement_threshold_mm"]
+        != 1.0
+        or decision_time["autonomous_morphometry_doi"]
+        != "10.1148/ryai.251093"
+        or decision_time["autonomous_morphometry_pmid"] != 42159477
+        or (
+            decision_time["autonomous_morphometry_patients"],
+            decision_time["autonomous_morphometry_aneurysms"],
+            decision_time["autonomous_morphometry_centres"],
+        )
+        != (2980, 2585, 5)
+        or (
+            decision_time["openneuro_longitudinal_patients"],
+            decision_time["openneuro_same_session_control_patients"],
+            decision_time["bayesian_direct_prior_public_patients_retained"],
+            decision_time["bayesian_direct_prior_public_aneurysms_retained"],
+            decision_time["bayesian_direct_prior_public_growth_positives"],
+        )
+        != (24, 4, 16, 19, 6)
+        or observed_decision_time_candidates
+        != expected_decision_time_candidates
+        or any(row["critical_axis_pass"] for row in decision_time["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in decision_time["candidates"]
+        )
+        or any(
+            decision_time[key] is not False
+            for key in (
+                "ped_nomogram_patient_grouped_split_explicitly_stated",
+                "ped_nomogram_centre_held_out_validation",
+                "ped_nomogram_source_results_reproduced_by_aurora",
+                "ped_nomogram_pure_preoperative_information_set",
+                "ped_nomogram_raw_data_public_versioned_release",
+                "ped_nomogram_public_code_release_stated_in_inspected_article",
+                "commercial_precision_all_method_dsa_limits_within_threshold",
+                "commercial_precision_data_public_versioned_release",
+                "autonomous_morphometry_public_web_platform_is_patient_training_release",
+                "joined_public_timestamped_patient_centre_image_cfd_device_outcome_asset_identified",
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_score_or_job_relabelled",
+                "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or any(
+            decision_time[key] is not True
+            for key in (
+                "ped_nomogram_whole_cohort_random_split",
+                "ped_nomogram_source_calls_random_holdout_external_validation",
+                "ped_nomogram_preoperative_cfd_uses_normal_subject_waveform",
+                "ped_nomogram_data_author_available_without_versioned_contract",
+                "commercial_precision_cross_sectional_not_longitudinal",
+                "commercial_precision_single_centre",
+                "commercial_precision_data_reasonable_request_only",
+                "information_set_declaration_retained_as_evaluation_principle_only",
+                "hemodynamic_incremental_value_retained_as_evaluation_principle_only",
+                "clinical_precision_before_longitudinal_claim_retained_as_evaluation_principle_only",
+            )
+        )
+        or decision_time["next_allowed_action"]
+        != "fresh_problem_level_source_or_material_asset_audit_only_no_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "Decision-time and clinical precision must remain a rejected, "
+            "paper-text-only batch with no joined timestamped patient asset, "
+            "P0, model, server or claim."
+        )
+    checks.append("decision-time and clinical-precision rejected-source boundary")
 
     device_planning = problem_selection[
         "device_planning_and_mechanistic_occlusion_reappraisal"

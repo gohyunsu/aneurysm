@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.2, 2026-08-12):** A fresh decision-time
+> and clinical-precision screen rejects all six formulations at
+> **30.0/26.0/25.5/25.0/24.5/23.0**. A 2026 four-centre study already combines
+> baseline DSA/CFD with PED occlusion prediction, but its 426 aneurysms from 362
+> patients are randomly split at the aneurysm level, patient grouping is not
+> stated, and two final predictors become known only after deployment. A second
+> study shows that two commercial CTA systems improve reproducibility yet all
+> comparisons with DSA exceed the ±1 mm clinical agreement boundary; it is
+> cross-sectional, not longitudinal. The defensible residual is information-
+> set-stratified, patient-grouped, centre-held-out incremental-value evaluation,
+> but no public timestamped image/CFD/device/outcome cohort identifies it.
+> Lead/P0/method/model/server/GPU/claim remain zero; surface-vector remains an
+> inactive hypothesis. See the [exact reappraisal](docs/decision-time-and-clinical-precision-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 10.1 scientific deployment/private synchronization:**
 > Exact scientific source `2abc73e07275e31ad87db3cf39b77864e1419322`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31519811493)

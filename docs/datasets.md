@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.2 decision-time asset boundary · 2026-08-12:** No active dataset
+> is opened. The PED nomogram contains 362 patients/426 aneurysms from four
+> centres, but raw patient rows, centre assignment, case-wise CFD and split
+> identifiers are not publicly versioned; 61 patients have multiple aneurysms
+> under one PED and patient-grouped splitting is unstated. The commercial
+> precision study has 148 patients/163 aneurysms and 86 paired CTA--DSA patients,
+> but is cross-sectional and request-only. OpenNeuro remains 24 longitudinal
+> patients with four same-session controls. No timestamped public image/CFD/
+> device/outcome join, payload, P0 or model role is authorized.
+
 > **Schema 10.1 treatment-asset boundary · 2026-08-12:** No active dataset is
 > opened. NeurAneuNet reports 600 aneurysms (390 non-PED, 210 PED-treated) and
 > PED case partitions 147/21/42, but does not explicitly establish a patient-

@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 10.2 direction · 2026-08-12:** Preserve three evaluation principles,
+> not a paper identity: declare the information available at each decision
+> time; test whether hemodynamics adds value beyond clinical+morphology under
+> patient-grouped centre shift; and establish agreement/precision before
+> claiming longitudinal growth. The latest six candidates score
+> 30.0/26.0/25.5/25.0/24.5/23.0 and all fail the non-compensatory gate. No P0,
+> method, architecture or compute opens. Surface-vector remains inactive.
+> [Exact reappraisal](decision-time-and-clinical-precision-reappraisal-2026-08-12.md)
+
 > **Schema 10.1 direction · 2026-08-12:** Do not pivot to “hemodynamics-guided
 > PED planning” by joining unrelated sources. NeurAneuNet already owns expert-
 > consensus planning; acute thrombosis/virtual DSA is already a direct

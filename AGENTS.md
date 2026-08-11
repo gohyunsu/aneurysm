@@ -1,5 +1,34 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 decision-time and clinical-precision reappraisal · schema
+> 10.2:** Four-centre PED source `10.3389/fneur.2026.1756374` reports 362
+> patients/426 aneurysms, 298/128 pooled random aneurysm split, 61 patients with
+> one PED covering multiple aneurysms, median follow-up 199 days and source AUC
+> 0.785/0.809. Patient-grouped splitting is not explicitly stated and the
+> described validation is not centre-held-out. Do not assert definite leakage;
+> preserve unresolved patient dependence. Poor apposition is immediate VasoCT
+> information and migration is postoperative/follow-up information, so the
+> final nomogram is not a pure pre-operative information set.
+>
+> Commercial-precision source `10.1186/s12880-026-02209-2` has 148 patients/
+> 163 aneurysms and 86 paired CTA--DSA patients. Two commercial AI systems are
+> more reproducible than manual CTA in the source, but all method-vs-DSA limits
+> exceed the prospective ±1 mm agreement boundary. It is cross-sectional,
+> single-centre and request-only, not longitudinal growth validation. Five-
+> centre autonomous CTA morphometry `10.1148/ryai.251093` is direct prior; its
+> public web tool is not a patient-level training release.
+>
+> Six fresh rows are frozen at 30.0/26.0/25.5/25.0/24.5/23.0 and all fail the
+> non-compensatory gate. Retain information-set declaration, hemodynamic
+> incremental-value testing and clinical precision before growth claims as
+> evaluation principles only. No joined timestamped public patient/centre/
+> image/CFD/device/outcome asset exists. Surface-vector remains inactive; job
+> `115645.ECE-util1` remains 0/10 no-verdict without repair/rerun. Lead, P0/P1,
+> method, architecture, scientific-server query, PBS/GPU, outer test, result,
+> C21 and claim are zero. Future authorized work is `introai9` PBS only;
+> prohibit login-node GPU and never access, query, transfer to, submit to or
+> monitor `junjinyong`.
+
 > **2026-08-12 schema 10.1 scientific deployment·private synchronization:**
 > Exact scientific source `2abc73e07275e31ad87db3cf39b77864e1419322`
 > passed Quality `31519811493` and Pages `31519810721`. Live Overview, Learn

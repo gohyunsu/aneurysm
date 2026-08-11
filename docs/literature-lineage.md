@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.2 lineage · 2026-08-12:** Clinical/morphology PED outcome models
+> → four-centre baseline-DSA/CFD nomogram → post-deployment apposition/migration
+> updater; manual/AI CTA morphometry → DSA agreement and platform-bias audit →
+> five-centre autonomous CTA morphology; longitudinal surface registration →
+> adjacent-vessel Bayesian measurement control. This lineage removes novelty
+> from “geometry + CFD + nomogram/GNN + calibration.” The residual is a
+> prospectively timed, patient-grouped, centre-held-out incremental-value
+> question, but the public timestamped patient asset is absent. It is an
+> estimand/evaluation contract, not yet an algorithmic gap.
+
 > **Schema 10.1 lineage · 2026-08-12:** NeurAneuNet → 3DRA segmentation,
 > parent-vessel measurement, PED size/landing-zone planning and clinician
 > assistance; device-thrombosis/virtual-DSA → device-resolved acute fibrin and

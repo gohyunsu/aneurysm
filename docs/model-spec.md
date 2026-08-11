@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.2 no-model boundary · 2026-08-12:** No GNN, mesh operator,
+> temporal landmark model, causal mediator model, calibration head or
+> morphology network is selected. The present failure is information-time and
+> patient-unit identifiability: immediate wall apposition and follow-up
+> migration cannot enter a pre-operative model, and a random aneurysm split is
+> not a centre-held-out patient confirmation. Architecture remains closed until
+> a joined timestamped outcome asset passes a fresh method-free gate.
+
 > **Schema 10.1 no-model boundary · 2026-08-12:** No device planner, mesh GNN,
 > thrombosis surrogate, differentiable simulator, virtual-DSA renderer or
 > outcome head is selected. NeurAneuNet and device-resolved clot simulation

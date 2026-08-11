@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · device-planning/mechanistic-occlusion best 26.5/40 rejected; all six fail total or critical novelty/asset/independent-unit floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; re-entry requires one patient-level preoperative-image/device/early-mechanism/delayed-outcome join, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · decision-time/clinical-precision best 30.0/40 rejected; all six fail total or critical novelty/asset/independent-unit floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; re-entry requires patient/centre/lesion/timestamp identifiers with separate preoperative, postdeployment and follow-up information sets, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A prediction is defined by what was knowable at its decision time",
+      copy: "A four-centre PED study already combines pre-operative 3D DSA/CFD with delayed occlusion prediction in 426 aneurysms from 362 patients. The source randomly splits 298/128 aneurysm rows from the pooled cohort, while 61 patients have multiple aneurysms covered by one PED and patient-grouped splitting is unstated. Two final predictors—immediate wall apposition and device migration observed postoperatively or at follow-up—are not available to a purely pre-operative planner. A separate 148-patient/163-aneurysm study shows two commercial CTA systems improve reproducibility but all AI/manual comparisons exceed the ±1 mm agreement limit against DSA; its 86 paired CTA–DSA patients form a cross-sectional precision study, not longitudinal growth validation. Six candidates score 30.0/26.0/25.5/25.0/24.5/23.0 and all fail the non-compensatory gate.",
+      status: "Best 30.0/40 rejected · timestamped joined asset 0 · lead/P0/method/model/server/GPU 0",
+      url: "../docs/decision-time-and-clinical-precision-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Expert device planning and mechanistic occlusion still do not identify patient benefit",
@@ -982,6 +989,11 @@ window.AURORA_DATA = Object.freeze({
       provenance: "MIT v1.0.0 · one patient-specific aneurysm mesh · Newtonian/Carreau × no/partial slip · repository tree/README only · generated fields 0"
     },
     {
+      name: "PED decision-time + commercial precision direct-prior boundary",
+      role: "source-rejected information-time and measurement-precision branch; evaluation principles only",
+      provenance: "PED nomogram 362 patients/426 aneurysms/4 centres · pooled random 298/128 aneurysm split · 61 multi-aneurysm patients · apposition/migration occur after baseline · commercial precision 148 patients/163 aneurysms, 86 paired CTA–DSA · all method-vs-DSA LOA fail ±1 mm · request-only · payload/P0/model/GPU 0"
+    },
+    {
       name: "NeurAneuNet + device-thrombosis direct-prior boundary",
       role: "source-rejected treatment-planning/mechanistic-occlusion branch; outcome-grounded planning evaluation template only",
       provenance: "600 reported aneurysms = 390 non-PED + 210 PED-treated · PED 147/21/42 cases, patient-disjointness unstated · 21-case/6-reader study · request-only data · acute clot/virtual DSA on 3 representative geometries · no joined patient outcome asset · payload/P0/model/GPU 0"
@@ -1023,6 +1035,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.2 separates decision-time information from delayed outcome",
+      copy: "A four-centre hemodynamic PED nomogram directly occupies baseline-DSA/CFD occlusion prediction, but its pooled 298/128 aneurysm split is not centre-held-out, patient grouping is unstated despite 61 multi-aneurysm patients, and apposition/migration enter only after deployment. A commercial CTA study shows improved reproducibility without DSA agreement inside ±1 mm and is cross-sectional rather than longitudinal. Six frozen rows score 30.0/26.0/25.5/25.0/24.5/23.0; all fail total or critical novelty, asset and independent-unit floors. Information-set declaration, hemodynamic incremental value and clinical precision remain evaluation principles only. No payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens.",
+      files: ["docs/decision-time-and-clinical-precision-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.2 map · 2026-08-12:** Decision-time-stratified PED outcome and
+> acquisition-aware clinical precision are rejected discovery branches, not
+> active workstreams. The strongest public open control still has four
+> independent same-session patients; the clinically rich PED and CTA--DSA
+> cohorts are request-only. Best 30.0/40; active problem/method/model/compute
+> zero. Information-set and incremental-value rules remain evaluation templates.
+
 > **Schema 10.1 map · 2026-08-12:** Device planning and mechanistic occlusion
 > are a rejected discovery branch, not an active workstream. Expert-consensus
 > PED planning, acute clot/virtual DSA and small paired physical-device studies

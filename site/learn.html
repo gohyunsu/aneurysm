@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류 device planning과 outcome, ADAM follow-up, surface-vector 구조 가설, 독립 환자 단위와 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="뇌동맥류 PED 예측의 decision time, clinical precision, device planning과 outcome, surface-vector 구조 가설과 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#decision-time">Decision time</a>
       <a href="#device-planning">Device planning</a>
       <a href="#adam-longitudinal">ADAM longitudinal</a>
       <a href="#diagnostic-action">Diagnostic action</a>
@@ -74,17 +75,87 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 10.1</span>
-          <strong>장치 계획을 잘 흉내 내는 것과 환자에게 가장 좋은 치료를 고르는 것은 다른 문제입니다.</strong>
+          <span>짧은 답 · schema 10.2</span>
+          <strong>미래 예측에는 그 시점에 실제로 알 수 있었던 정보만 들어가야 합니다.</strong>
           <p>
-            최신 여섯 후보는 26.5/25.0/24.5/24.5/24.0/23.5이고 모두
-            기각됐습니다. Expert-consensus PED planning과 device-resolved acute
-            thrombosis는 이미 direct prior지만, pre-operative image부터 delayed
-            occlusion/safety까지 같은 환자에서 연결한 공개 자산은 없습니다.
-            Surface-vector의 stability→matched-failure 순서는 보존하지만 architecture는
-            고르지 않았습니다. Payload, P0/P1, method, scientific-server query, GPU와
-            outer test는 모두 0입니다.
+            최신 여섯 후보는 30.0/26.0/25.5/25.0/24.5/23.0이고 모두
+            기각됐습니다. Baseline CFD, 시술 직후 apposition, 추적 중 migration은 서로
+            다른 시간의 정보입니다. 이를 한 모델에 섞고 “시술 전 예측”이라 부르면
+            질문 자체가 바뀝니다. Commercial CTA AI의 반복성 향상도 DSA agreement나
+            실제 growth 검출을 자동으로 뜻하지 않습니다. 공개 timestamped patient
+            cohort가 없어 P0, method, model, server와 GPU는 모두 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="decision-time">
+          <span>Decision time, information set과 clinical precision을 처음부터 이해하기</span>
+          <strong>예측 모델의 입력은 “언제 예측하는가?”를 정하는 순간 함께 고정됩니다.</strong>
+          <p>
+            예를 들어 환자가 PED 시술을 받기 <b>전</b>이라면 나이, 흡연력, baseline
+            DSA, aneurysm geometry와 그 영상에서 계산한 CFD는 사용할 수 있습니다.
+            반면 device가 혈관 벽에 잘 붙었는지는 배치 직후 VasoCT를 찍어야 알 수 있고,
+            device migration은 수술 후 또는 follow-up DSA를 비교해야 알 수 있습니다.
+            뒤의 두 변수는 미래에 생긴 정보이므로 pre-operative treatment choice의 입력이
+            될 수 없습니다.
+          </p>
+          <p>
+            이 구분을 <b>information set</b>이라고 합니다. 같은 환자라도 baseline set,
+            immediate post-deployment set, follow-up update set은 서로 다릅니다. Late
+            variable을 쓰는 것이 항상 잘못은 아닙니다. 다만 그 모델은 “치료 전 선택”이
+            아니라 “치료 후 위험 업데이트”에 답합니다. 각각의 AUC를 따로 보고하고,
+            뒤 시점 모델의 성능을 앞 시점의 임상 의사결정 성능처럼 제시하지 않아야 합니다.
+          </p>
+          <p>
+            2026년 four-centre PED 연구는 362 patients의 426 aneurysms를 분석하고
+            development 298, validation 128 aneurysm으로 무작위 분할했습니다. 61명은
+            한 PED가 두 개 이상의 adjacent aneurysm을 덮었습니다. 논문이 patient-grouped
+            split을 명시하지 않으므로 같은 사람의 두 lesion이 양쪽 split에 들어갔는지는
+            확인할 수 없습니다. AURORA는 leakage가 있었다고 단정하지 않지만, 독립성이
+            검증되지 않았다고 기록합니다. 또한 이 validation은 pooled cohort의 random
+            hold-out이므로 centre 전체를 남겨 둔 external validation과 다릅니다.
+          </p>
+          <p>
+            Source가 보고한 complete occlusion은 340/426, median follow-up은 199일이며,
+            development/validation AUC는 0.785/0.809입니다. 이는 source result이지 AURORA
+            재현 결과가 아닙니다. Final predictors에는 smoking, flow complexity,
+            aneurysm angle, low-WSS area ratio와 함께 immediate apposition 및 migration이
+            들어갑니다. 따라서 baseline CFD의 임상 추가 가치를 보려면 clinical-only,
+            morphology-only, clinical+morphology, 그리고 +hemodynamics를 <em>같은
+            baseline information set</em>에서 비교해야 합니다.
+          </p>
+          <p>
+            <b>Repeatability</b>는 같은 조건에서 비슷한 값을 내는지, <b>agreement</b>는
+            reference와 충분히 가까운지, <b>longitudinal validity</b>는 시간에 따른 실제
+            생물학적 변화를 구별하는지를 뜻합니다. 이 셋은 다릅니다. 148 patients/163
+            aneurysms의 commercial AI 연구에서 두 CTA AI는 manual measurement보다
+            반복성이 좋았지만, 86 paired CTA–DSA patients의 모든 method-vs-DSA limits of
+            agreement가 사전 정의한 ±1 mm 범위를 벗어났습니다. 더구나 같은 주 안의 CTA와
+            DSA를 비교한 cross-sectional 연구라 실제 growth를 추적한 연구가 아닙니다.
+          </p>
+          <p>
+            가장 엄밀한 future experiment는 patient ID, centre, lesion map, timestamp를
+            먼저 고정하고 patient-grouped centre-held-out confirmation을 수행합니다.
+            Discrimination뿐 아니라 calibration, decision utility와 patient-clustered
+            confidence interval을 보고합니다. 그러나 현재 public asset은 이 contract를
+            제공하지 않습니다. OpenNeuro에는 24 longitudinal patients가 있어도
+            no-biological-change same-session control은 네 명이고, 최신 Bayesian prior는
+            이미 16 patients/19 aneurysms에서 adjacent-vessel measurement control을
+            사용합니다.
+          </p>
+          <p>
+            그래서 latest best 30.0도 기각됩니다. 중요하고 그림으로 설명하기 쉬워도
+            residual novelty 2.0과 independent unit 1.5가 mandatory floor를 통과하지
+            못합니다. “temporal GNN”, “causal head” 또는 “calibrated operator”라는 이름은
+            환자와 시간 정보가 없는 문제를 고치지 못합니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Retain: information-set declaration</span>
+            <span class="yes">Retain: hemodynamic incremental-value falsifier</span>
+            <span class="yes">Retain: precision before growth claim</span>
+            <span class="no">Random aneurysm hold-out ≠ centre-held-out confirmation</span>
+            <span class="no">No timestamped public joined asset</span>
+            <span class="no">No P0 · method · model · server · GPU</span>
+          </div>
+          <a href="../docs/decision-time-and-clinical-precision-reappraisal-2026-08-12.md">source facts, six scores와 future evidence contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="device-planning">
           <span>Device planning, mechanistic occlusion과 patient outcome을 처음부터 이해하기</span>

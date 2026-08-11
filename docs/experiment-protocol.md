@@ -1,5 +1,15 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.2 experiment boundary · 2026-08-12:** Zero candidates are
+> admitted. Do not request patient rows, download imaging/CFD payload, infer a
+> patient-grouped split, register P0/P1, select a model, query a scientific
+> server or create PBS/GPU work. A future re-entry must first expose lawful
+> versioned patient, centre, lesion and timestamp identifiers and prospectively
+> separate baseline, immediate post-deployment and follow-up information sets.
+> It must compare clinical-only, morphology-only and +hemodynamics models under
+> patient-grouped centre-held-out confirmation. Even a source-gate pass opens
+> only a method-free asset P0.
+
 > **Schema 10.1 experiment boundary · 2026-08-12:** The device-planning/
 > mechanistic-occlusion batch admits zero candidates. Do not request private
 > NeurAneuNet rows, download paired MRI or simulation payload, construct a
