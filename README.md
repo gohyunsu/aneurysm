@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.4 scientific deployment/private synchronization:**
+> Exact scientific source `fb5fabce61cd6df53cd806538da86bbf81ec4f74`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31532823553)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31532823420).
+> Live Overview, Learn and machine protocol expose best 30.5/40, all six
+> rejected, 25 paired TopBrain patients and no-model/no-compute. Private ledger
+> `7522d43ee1cfb3c73cc914593e36b8d24ae3dfa6` is remote exact, PRIVATE and
+> anonymous API returns 404. Manuscript and references remain byte-for-byte
+> unchanged. This provenance opens no scientific or submission authority.
+
 > **Current research state (schema 10.4, 2026-08-12):** The already public
 > TopBrain 2025 release corrects an incomplete source premise: it contains 50
 > volumes from **25 same-patient CTA/MRA pairs**, not 50 independent patients.

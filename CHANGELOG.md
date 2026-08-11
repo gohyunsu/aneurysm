@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.4 scientific source deployed and privately pinned
+
+- Exact scientific source `fb5fabce61cd6df53cd806538da86bbf81ec4f74`
+  passed Quality `31532823553` and Pages `31532823420`; live Overview, Learn
+  and machine protocol expose the 30.5/40 rejection and no-model/no-compute
+  state.
+- Private ledger `7522d43ee1cfb3c73cc914593e36b8d24ae3dfa6` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- Full regression is 437 tests: 371 pass/66 optional skip, protocol 81
+  invariant groups, source-watch 18/18 exact and site/JavaScript checks pass.
+  This provenance opens no P0/P1, method, model, compute or claim.
+
 ## 2026-08-12 · TopBrain 2025 and RSNA multitask source correction · schema 10.4
 
 - Corrected the source ledger to distinguish the already public TopBrain 2025

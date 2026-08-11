@@ -1061,6 +1061,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.4 scientific source is live and privately pinned",
+      copy: "Exact scientific source fb5fabce61cd6df53cd806538da86bbf81ec4f74 passed Quality 31532823553 and Pages 31532823420. Live Overview, Learn and the machine protocol expose best 30.5/40, all six rejected, 25 paired TopBrain patients and active lead/P0/method/model/server/GPU/claim zero. Private ledger 7522d43ee1cfb3c73cc914593e36b8d24ae3dfa6 is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. Full regression is 437 tests: 371 pass/66 optional skip, protocol 81 invariant groups, source-watch 18/18 exact and site/JavaScript checks pass. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.4 corrects TopBrain 2025 material state without opening compute",
       copy: "The source ledger now separates the already public TopBrain 2025 data record from the future TopBrain 2.0 design. Exact data revision 14 contains one 1,958,849,592-byte archive representing 50 volumes from 25 same-patient CTA/MRA pairs; vessel-anatomy labels are not aneurysm truth. Exact podium revision 18 and BraveCoWCoW head e59e2368… are strong direct controls. TopCoW and BraveCoWCoW occupy paired topology and multimodal ROI multi-task learning, while pseudo-masks are not an independent dense benchmark. Six rows score 30.5/29.0/27.0/25.0/25.0/24.5 and all fail total or critical novelty/asset floors. Source-watch v12 live refresh matched 18/18 exact snapshots. No terms, payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opened.",

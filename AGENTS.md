@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.4 scientific deployment·private synchronization:**
+> Exact scientific public source
+> `fb5fabce61cd6df53cd806538da86bbf81ec4f74` passed Quality
+> `31532823553` and Pages `31532823420`. Live Overview, Learn and machine
+> protocol expose schema 10.4, best 30.5/40 rejected, 25 paired TopBrain
+> patients, all six rejected and lead/P0/method/model/server/GPU/claim 0.
+> Private paper head `7522d43ee1cfb3c73cc914593e36b8d24ae3dfa6` is remote
+> exact, PRIVATE and anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 437 tests: 371 pass/66 optional skip, protocol 81
+> invariant groups, source-watch 18/18 exact and site/JavaScript checks pass.
+> This synchronization opens no scientific or submission authority.
+
 > **2026-08-12 TopBrain 2025/RSNA material correction · schema 10.4:** Public
 > TopBrain record `16878417` revision 14 contains one 1,958,849,592-byte archive
 > representing 50 volumes from 25 same-patient CTA/MRA pairs. It is 25
