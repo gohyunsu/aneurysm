@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 cross-view projection source delta · schema 8.1:** The most
+> attractive new formulation—an ADAM-derived projection-consistent 3D lesion
+> set with abstention—scores **31.0/40** and is rejected below the unchanged
+> 32-point line. The MIDL 2026 cross-view study uses 113 AP/lateral MIPs rendered
+> from ADAM 3D MRA, not acquired biplane DSA, and uses one view at inference.
+> RibAssist 3D already owns selective correspondence/triangulation under a
+> false-output budget; MedIA 2026 owns flexible multi-output conformal 2D/3D
+> regions; ECCV owns task-driven conformal inverse-problem UQ. The 62,187-image
+> SDAN cohort is third-party-owned and not publicly distributable. All six
+> formulations are rejected; no agreement, payload, P0/P1, method,
+> architecture, server query, PBS/GPU job, outer test, result row or paper claim
+> is opened. Historical jobs `115645` and `115684` remain closed without
+> repair/rerun. [Detailed source delta](docs/cross-view-projection-source-delta-2026-08-11.md)
+
 > **2026-08-11 schema 8.0 deployment verification:** Exact outcome content
 > `6123f0e917f084aad0bf352306ba9cf70f57e835` passed Quality
 > `31448501704` and Pages `31448501265`. The live Overview and Learn pages,

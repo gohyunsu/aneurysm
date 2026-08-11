@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.1 no-experiment boundary · 2026-08-11:** The cross-view source
+> batch peaks at 31.0/40 and opens no experiment. ADAM access terms were not
+> accepted, no patient payload was read, and the clinical multicenter DSA source
+> is request-only. Cross-view prompting, triangulation, conformal regions and
+> abstention are direct controls rather than an approved model. This update
+> queried no scientific server and created no P0/P1/PBS/GPU job.
+
 > **Schema 8.0 P0 outcome · 2026-08-11:** Exact job
 > `115684.ECE-util1` ended `E`/exit 2 after 00:40:06 with CPU 4, memory 16 GB
 > and GPU 0. The bounded result is execution-incomplete/no scientific verdict;

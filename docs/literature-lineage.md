@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 8.1 cross-view correction · 2026-08-11:** A MIDL 2026 aneurysm
+> study already uses ADAM-derived AP/lateral MIPs, shared-axis prompting and
+> detection consistency. It is synthetic projection evidence and single-view
+> inference, not clinical biplane DSA validation. RibAssist 3D directly covers
+> correspondence-gated triangulation and abstention; MedIA 2026 covers
+> multi-output conformal 2D/3D localization regions; ECCV 2024 covers
+> task-driven conformal inverse-problem UQ; ProVLNet covers projective biplanar
+> fusion. These are strong baselines/direct priors, not ingredients to rename as
+> AURORA novelty. [Source delta](cross-view-projection-source-delta-2026-08-11.md)
+
 > **Schema 8.0 lineage status · 2026-08-11:** The conformal-degree composition
 > remains a plausible but unverified residual hypothesis. Its exact asset P0
 > ended execution-incomplete with 0/10 checks, so it is neither a contribution

@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.1 submission boundary · 2026-08-11:** Cross-view projection is
+> not the replacement paper identity. Its strongest exact candidate scores
+> 31.0/40 because ADAM MIPs do not establish acquired biplane DSA, access remains
+> gated, and selective triangulation plus conformal 3D localization have direct
+> priors. No candidate, method, architecture, result or submission identity is
+> active. A material clinical paired-view asset—not a new loss—is required.
+
 > **Schema 8.0 submission boundary · 2026-08-11:** The conformal-degree
 > candidate is closed after exact CPU P0 `115684.ECE-util1` returned
 > execution-incomplete/no scientific verdict with 0/10 checks evaluated.

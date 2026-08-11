@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 cross-view projection source delta · schema 8.1:** Fresh MIDL
+> cross-view, clinical SDAN, RibAssist 3D, conformal landmark/inverse-problem
+> UQ, ProVLNet and quantitative-DSA evidence yields a best score of 31.0/40.
+> ADAM views are deterministic MRA-derived MIPs, not acquired biplane DSA;
+> SDAN data are non-public; correspondence-gated triangulation, conformal 3D
+> regions and abstention are direct prior. All six candidates are rejected
+> without score repair. Patient payload, terms acceptance, P0/P1, method,
+> architecture, server query, PBS/GPU, outer test, result row and paper identity
+> are 0. Historical jobs `115645.ECE-util1` and `115684.ECE-util1` remain closed
+> and are not repaired/rerun. Future work requires a material paired clinical
+> asset. AURORA remains `introai9` PBS only; never access `junjinyong`.
+
 > **2026-08-11 schema 8.0 deployment verification:** Exact outcome content
 > `6123f0e917f084aad0bf352306ba9cf70f57e835` passed Quality
 > `31448501704` and Pages `31448501265`. Live Overview, Learn, machine protocol

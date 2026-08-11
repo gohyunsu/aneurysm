@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.1 no-model boundary · 2026-08-11:** Cross-view prompting,
+> projective fusion, detection-to-correspondence triangulation, conformal 3D
+> regions and abstention are now explicit direct priors/controls. The fresh
+> source batch peaks at 31.0/40, so none is an approved AURORA architecture.
+> No detector, GNN, conformal head or GPU run is selected.
+
 > **Schema 8.0 no-model outcome · 2026-08-11:** The conformal-degree P0 is
 > closed execution-incomplete with no scientific verdict. No architecture is
 > selected and no GPU model may be run. Edge 1-forms, Hodge/HSD, equivariant

@@ -1,5 +1,11 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 8.1 cross-view asset boundary · 2026-08-11:** ADAM remains behind
+> registration/confidentiality agreement and was not accessed. The MIDL 2026
+> pair is derived from AP/lateral MIPs of those 3D MRA scans, not clinical
+> biplane DSA. The 62,187-image SDAN cohort cannot be publicly distributed and
+> is reasonable-request only. Neither is an admitted AURORA dataset.
+
 > **Schema 8.0 Aneurisk P0 outcome · 2026-08-11:** The exact 1.43 GB archive
 > audit ended execution-incomplete before archive integrity or VTP semantics
 > were reported. The 10 checks remain unevaluated, transient partial bytes are

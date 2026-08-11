@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.0":
-        raise ProtocolError("The current research-state schema must be version 8.0.")
+    if protocol["schema_version"] != "8.1":
+        raise ProtocolError("The current research-state schema must be version 8.1.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,19 +148,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_aneurisk_conformal_degree_p0_execution_incomplete_no_scientific_verdict"
+        != "no_active_problem_latest_cross_view_projection_source_batch_best_31_rejected_conformal_p0_no_verdict_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "introai9_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_1_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
         raise ProtocolError(
             "AURORA compute must remain introai9-only with junjinyong excluded, "
-            "no tracked AURORA GPU job, the final CPU-only P0 observation, "
+            "no tracked AURORA GPU job, the last CPU-only P0 observation, "
             "and a scheduler smoke as the first authorized GPU action."
         )
     checks.append("research-only project boundary")
@@ -227,6 +227,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "measurement_functional_inverse_flow_source_delta",
             "structure_faithful_wss_source_reappraisal",
             "conformal_degree_certificate_source_audit",
+            "cross_view_projection_source_delta",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -237,13 +238,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_aneurisk_conformal_degree_p0_closed_execution_incomplete_no_scientific_verdict"
+        != "no_active_problem_latest_cross_view_projection_source_batch_best_31_rejected"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "source_metadata_and_readme_verified_no_complete_archive_or_vtp_scientific_aggregate_p0_closed"
+        != "source_only_cross_view_projection_audit_no_new_payload_conformal_degree_p0_remains_closed"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -253,18 +254,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_primary_source_and_asset_audit_not_same_contract_aneurisk_transport_reader_dependency_repair_or_rerun"
+        != "fresh_problem_level_primary_source_and_asset_audit_not_cross_view_loss_or_wrapper_and_not_closed_aneurisk_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/conformal-degree-certificate-source-audit-2026-08-11.md"
+        != "docs/cross-view-projection-source-delta-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "aneurisk_cycle_averaged_fixed_point_faithful_surrogation"
+        != "adam_projection_consistent_3d_lesion_set"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The conformal-degree candidate must be closed after its exact "
-            "execution-incomplete introai9 CPU P0 with no active lead, primary, "
+            "The cross-view source batch must remain rejected below 32 while "
+            "the conformal-degree candidate stays closed after its exact "
+            "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
         )
     bc_transport = problem_selection["aneumo_bc_transport_source_audit"]
@@ -1894,6 +1896,190 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "exact closed CPU P0 outcome, and zero active lead/method/GPU/claim boundary."
         )
     checks.append("conformal degree closed execution-incomplete P0 boundary")
+    cross_view = problem_selection["cross_view_projection_source_delta"]
+    _require_keys(
+        cross_view,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "conditional_source_lead_count",
+            "active_shortlist_count",
+            "primary_problem_selected",
+            "midl_cross_view_source",
+            "midl_source_uses_real_clinical_biplane_dsa",
+            "midl_source_projection_origin",
+            "midl_source_cases",
+            "midl_source_split_ratio",
+            "midl_source_inference_uses_both_views",
+            "midl_source_rt_detr_ap_map50",
+            "midl_source_joint_prompt_ap_map50",
+            "adam_registration_and_confidentiality_agreement_required",
+            "adam_payload_accessed",
+            "adam_reported_scans",
+            "adam_positive_scans",
+            "adam_negative_scans",
+            "adam_repeated_subject_scans_require_group_split",
+            "sdan_clinical_dsa_images",
+            "sdan_clinical_dsa_patients",
+            "sdan_clinical_dsa_centers",
+            "sdan_public_distribution_permitted",
+            "sdan_reasonable_request_only",
+            "path_length_correction_independent_cases",
+            "path_length_correction_tdc_rmse_before",
+            "path_length_correction_tdc_rmse_after",
+            "candidates",
+            "direct_prior_threats",
+            "patient_payload_accessed",
+            "user_access_agreement_accepted",
+            "p0_or_p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "server_queried",
+            "pbs_or_gpu_job_created",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "result_row_created",
+            "paper_contribution_created",
+            "submission_identity_active",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_audit",
+            "decision",
+            "next_material_change",
+        ],
+        "cross-view projection source delta",
+    )
+    expected_cross_view_candidates = [
+        (
+            "adam_projection_consistent_3d_lesion_set",
+            31.0,
+            [4.5, 4.0, 1.0, 3.0, 4.0, 5.0, 5.0, 4.5],
+            "reject",
+        ),
+        (
+            "adam_selective_biplanar_3d_point_localization",
+            30.0,
+            [4.5, 4.0, 0.5, 3.0, 4.0, 5.0, 5.0, 4.0],
+            "reject",
+        ),
+        (
+            "adam_cross_view_consistency_failure_audit",
+            29.5,
+            [4.5, 4.0, 1.0, 3.0, 4.0, 5.0, 5.0, 3.0],
+            "reject",
+        ),
+        (
+            "multicenter_single_frame_dsa_shift_abstention",
+            26.5,
+            [5.0, 4.0, 0.5, 0.5, 5.0, 5.0, 5.0, 1.5],
+            "reject",
+        ),
+        (
+            "cross_view_quantitative_dsa_functional_calibration",
+            22.5,
+            [5.0, 4.0, 0.5, 0.5, 0.5, 5.0, 5.0, 2.0],
+            "reject",
+        ),
+        (
+            "clinical_biplane_dsa_projection_set_localization",
+            21.5,
+            [5.0, 2.0, 1.5, 0.5, 0.5, 5.0, 5.0, 2.0],
+            "reject",
+        ),
+    ]
+    observed_cross_view_candidates = [
+        (
+            candidate.get("id"),
+            candidate.get("score"),
+            candidate.get("axis_scores"),
+            candidate.get("decision"),
+        )
+        for candidate in cross_view["candidates"]
+    ]
+    expected_cross_view_priors = {
+        "midl_2026_adam_mip_cross_view_z_prompting_and_consistency",
+        "ribassist3d_selective_biplanar_localization_and_false_output_budget",
+        "medical_image_analysis_2026_multioutput_conformal_2d_3d_landmark_regions",
+        "eccv_2024_task_driven_conformal_uncertainty_for_inverse_problems",
+        "provl_net_projective_geometry_aware_biplanar_3d_localization",
+        "aneurysm_biplane_silhouette_curve_morphing_reconstruction",
+        "clinical_dsa_path_length_and_kvp_cross_view_correction",
+    }
+    if (
+        cross_view["status"] != "completed_source_only_all_candidates_rejected"
+        or cross_view["audit_document"]
+        != "docs/cross-view-projection-source-delta-2026-08-11.md"
+        or cross_view["automatic_selection_threshold"] != 32.0
+        or cross_view["best_candidate_id"]
+        != "adam_projection_consistent_3d_lesion_set"
+        or cross_view["best_score"] != 31.0
+        or cross_view["conditional_source_lead_count"] != 0
+        or cross_view["active_shortlist_count"] != 0
+        or cross_view["primary_problem_selected"] is not False
+        or cross_view["midl_cross_view_source"]
+        != "openreview_f943ad69f9a9542edf4f959c51bb2a2b2ba7f2d2"
+        or cross_view["midl_source_uses_real_clinical_biplane_dsa"] is not False
+        or cross_view["midl_source_projection_origin"]
+        != "deterministic_ap_and_lateral_mip_from_adam_3d_mra"
+        or cross_view["midl_source_cases"] != 113
+        or cross_view["midl_source_split_ratio"]
+        != "8_1_1_case_split_subject_grouping_not_reported"
+        or cross_view["midl_source_inference_uses_both_views"] is not False
+        or cross_view["midl_source_rt_detr_ap_map50"] != 0.270
+        or cross_view["midl_source_joint_prompt_ap_map50"] != 0.643
+        or cross_view["adam_registration_and_confidentiality_agreement_required"]
+        is not True
+        or cross_view["adam_payload_accessed"] is not False
+        or cross_view["adam_reported_scans"] != 113
+        or cross_view["adam_positive_scans"] != 93
+        or cross_view["adam_negative_scans"] != 20
+        or cross_view["adam_repeated_subject_scans_require_group_split"] is not True
+        or cross_view["sdan_clinical_dsa_images"] != 62187
+        or cross_view["sdan_clinical_dsa_patients"] != 1114
+        or cross_view["sdan_clinical_dsa_centers"] != 3
+        or cross_view["sdan_public_distribution_permitted"] is not False
+        or cross_view["sdan_reasonable_request_only"] is not True
+        or cross_view["path_length_correction_independent_cases"] != 3
+        or cross_view["path_length_correction_tdc_rmse_before"] != 0.23
+        or cross_view["path_length_correction_tdc_rmse_after"] != 0.14
+        or observed_cross_view_candidates != expected_cross_view_candidates
+        or any(
+            sum(candidate["axis_scores"]) != candidate["score"]
+            for candidate in cross_view["candidates"]
+        )
+        or set(cross_view["direct_prior_threats"]) != expected_cross_view_priors
+        or any(
+            cross_view[key] is not False
+            for key in (
+                "patient_payload_accessed",
+                "user_access_agreement_accepted",
+                "p0_or_p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "server_queried",
+                "pbs_or_gpu_job_created",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "result_row_created",
+                "paper_contribution_created",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_audit",
+            )
+        )
+        or cross_view["decision"]
+        != "reject_all_without_score_repair_source_combination_novelty_or_compute"
+        or cross_view["next_material_change"]
+        != "paired_calibrated_clinical_ap_lateral_dsa_with_patient_split_keys_acquisition_geometry_timing_and_3d_reference_or_identified_set_target"
+    ):
+        raise ProtocolError(
+            "The cross-view projection source delta must preserve the synthetic-MIP "
+            "versus clinical-DSA distinction, reject all scores below 32, and open "
+            "no access agreement, payload, method, server query, or GPU work."
+        )
+    checks.append("cross-view projection source rejection and no-compute boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "generic_3d_aneurysm_segmentation_or_detection_with_uncertainty",
         "public_cohort_longitudinal_growth_detection",
@@ -2033,6 +2219,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "aneurisk_structure_selective_surrogate_abstention",
         "cfd_challenge_multi_pipeline_wss_topology_robustness",
         "rhsia_structure_fidelity_benchmark_extension",
+        "adam_projection_consistent_3d_lesion_set",
+        "adam_selective_biplanar_3d_point_localization",
+        "adam_cross_view_consistency_failure_audit",
+        "multicenter_single_frame_dsa_shift_abstention",
+        "cross_view_quantitative_dsa_functional_calibration",
+        "clinical_biplane_dsa_projection_set_localization",
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
@@ -2143,6 +2335,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "generic_knn_barycentric_or_conservative_surface_field_remapping",
         "generic_surface_vector_tangent_projection_or_parallel_transport",
         "generic_train_only_normalization_and_test_blind_checkpoint_selection",
+        "cross_view_prompting_or_consistency_loss",
+        "biplanar_detection_correspondence_triangulation_and_abstention",
+        "generic_multioutput_conformal_2d_or_3d_localization_region",
+        "task_driven_conformal_uncertainty_for_imaging_inverse_problems",
+        "projective_geometry_aware_biplanar_feature_fusion",
     }:
         raise ProtocolError("Direct prior-art boundaries must remain explicit.")
 

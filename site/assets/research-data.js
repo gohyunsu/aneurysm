@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · active source lead 0 · latest 32.5/40 conformal-degree history closed after introai9 CPU P0 115684 E/exit 2, 0/10 no scientific verdict · primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "a distinct fresh problem must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test before a method, architecture, GPU result or manuscript contribution; the closed Aneurisk P0 and historical scores cannot be repaired or rerun",
+    status: "Target locked · latest cross-view source best 31.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · conformal-degree P0 115684 remains closed 0/10 no verdict · not submission-ready",
+    requirement: "a distinct fresh problem with a material usable asset must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; MRA-derived projection pairs, a new consistency loss, or a conformal wrapper cannot repair the rejected cross-view batch or closed Aneurisk P0",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Cross-view projection remains a proxy experiment, not a paper identity",
+      copy: "The fresh MIDL study renders AP and lateral MIPs from all 113 ADAM 3D MRA cases, applies shared-z prompting plus detection consistency, and uses only one view at inference. It is not acquired biplane DSA. ADAM still requires registration/confidentiality agreement; the 62,187-image three-center SDAN cohort cannot be publicly distributed. RibAssist 3D directly covers correspondence-gated triangulation and a false-output budget, MedIA 2026 covers flexible multi-output conformal 2D/3D regions, ECCV covers task-driven inverse-problem UQ, and ProVLNet covers projective biplanar fusion. Six exact candidates score 31.0/30.0/29.5/26.5/22.5/21.5 and are rejected without access or compute.",
+      status: "Best 31.0/40 · all rejected · terms/payload/P0/method/architecture/server/GPU 0",
+      url: "../docs/cross-view-projection-source-delta-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Conformal degree certification closes after an incomplete asset P0",
@@ -818,6 +825,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 8.1 rejects the cross-view projection branch",
+      copy: "A fresh primary-source audit distinguishes deterministic ADAM MRA-derived AP/lateral MIPs from acquired clinical biplane DSA. Cross-view prompting and consistency are directly occupied; selective 3D correspondence/triangulation, projective fusion, conformal 2D/3D regions and inverse-problem task UQ are also direct priors. The six candidates freeze at 31.0/30.0/29.5/26.5/22.5/21.5, all below 32. No access agreement, patient payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row or paper contribution was opened.",
+      files: ["docs/cross-view-projection-source-delta-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/literature-lineage.md", "docs/experiment-protocol.md", "docs/datasets.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 8.1 direction · 2026-08-11:** A fresh cross-view/projection audit
+> rejects all six candidates; the best ADAM projection-consistent 3D lesion-set
+> formulation is 31.0/40. The apparent DSA pair is actually two deterministic
+> MIPs rendered from the same 3D MRA, while real clinical DSA has calibration,
+> path-length, kVp and timing effects. Selective biplanar localization,
+> projective fusion, conformal 2D/3D regions and inverse-problem task UQ are
+> direct priors. This is therefore not a new GNN or certificate identity. No
+> active problem, method, architecture, server query or GPU job exists. See the
+> [exact source delta](cross-view-projection-source-delta-2026-08-11.md).
+
 > **Schema 8.0 direction · 2026-08-11:** The 32.5/40 conformal-degree source
 > hypothesis is preserved but inactive after exact CPU P0 job
 > `115684.ECE-util1` ended execution-incomplete with 0/10 checks evaluated.

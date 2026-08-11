@@ -89,15 +89,15 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "conformal-degree candidate"):
+        with self.assertRaisesRegex(ProtocolError, "cross-view source batch"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "conformal-degree candidate"):
+        with self.assertRaisesRegex(ProtocolError, "cross-view source batch"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "conformal-degree candidate"):
+        with self.assertRaisesRegex(ProtocolError, "cross-view source batch"):
             validate_protocol(candidate)
 
     def test_aneug_target_construction_audit_rejects_compute_and_score_repair(self) -> None:
@@ -300,7 +300,7 @@ class ProtocolTests(unittest.TestCase):
     def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["structure_faithful_wss_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "8.0")
+        self.assertEqual(self.protocol["schema_version"], "8.1")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertTrue(
@@ -333,7 +333,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+            "adam_projection_consistent_3d_lesion_set",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -346,7 +346,7 @@ class ProtocolTests(unittest.TestCase):
     def test_conformal_degree_candidate_closes_after_incomplete_cpu_p0(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["conformal_degree_certificate_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "8.0")
+        self.assertEqual(self.protocol["schema_version"], "8.1")
         self.assertEqual(audit["best_score"], 32.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
@@ -413,6 +413,55 @@ class ProtocolTests(unittest.TestCase):
             "structure_faithful_wss_source_reappraisal"
         ]["critical_points_and_worldlines_start_as_evaluation_not_loss"] = False
         with self.assertRaisesRegex(ProtocolError, "structure-faithful WSS"):
+            validate_protocol(candidate)
+
+    def test_cross_view_projection_batch_rejects_proxy_and_no_compute(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["cross_view_projection_source_delta"]
+        self.assertEqual(self.protocol["schema_version"], "8.1")
+        self.assertEqual(audit["best_score"], 31.0)
+        self.assertEqual(len(audit["candidates"]), 6)
+        self.assertLess(
+            max(candidate["score"] for candidate in audit["candidates"]),
+            audit["automatic_selection_threshold"],
+        )
+        self.assertTrue(
+            all(
+                sum(candidate["axis_scores"]) == candidate["score"]
+                for candidate in audit["candidates"]
+            )
+        )
+        self.assertEqual(audit["midl_source_cases"], 113)
+        self.assertFalse(audit["midl_source_uses_real_clinical_biplane_dsa"])
+        self.assertFalse(audit["midl_source_inference_uses_both_views"])
+        self.assertTrue(
+            audit["adam_registration_and_confidentiality_agreement_required"]
+        )
+        self.assertFalse(audit["adam_payload_accessed"])
+        self.assertEqual(audit["sdan_clinical_dsa_images"], 62187)
+        self.assertFalse(audit["sdan_public_distribution_permitted"])
+        self.assertTrue(audit["sdan_reasonable_request_only"])
+        self.assertEqual(audit["path_length_correction_independent_cases"], 3)
+        self.assertFalse(audit["p0_or_p1_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["server_queried"])
+        self.assertFalse(audit["pbs_or_gpu_job_created"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["cross_view_projection_source_delta"][
+            "best_score"
+        ] = 32.0
+        with self.assertRaisesRegex(ProtocolError, "cross-view projection"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["cross_view_projection_source_delta"][
+            "gpu_training_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "cross-view projection"):
             validate_protocol(candidate)
 
     def test_trellis_surface_feature_update_is_direct_prior_only(self) -> None:

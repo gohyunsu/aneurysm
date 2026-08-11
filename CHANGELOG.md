@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.1 rejects the cross-view projection branch
+
+- Audited MIDL 2026 cross-view ADAM MIPs, multicenter clinical SDAN, selective
+  biplanar 3D localization, conformal 2D/3D regions, inverse-problem task UQ,
+  projective fusion and real-DSA path-length correction.
+- Froze six exact scores at 31.0/30.0/29.5/26.5/22.5/21.5; all are below the
+  32-point admission line. Synthetic MIP pairs are not clinical biplane DSA.
+- Added a machine-validated source-only boundary and detailed site explanation.
+  No agreement, payload, P0/P1, method, architecture, server query, PBS/GPU,
+  outer test, result row or paper claim was opened.
+
 ## 2026-08-11 · Schema 8.0 outcome deployment verified
 
 - Exact outcome content `6123f0e917f084aad0bf352306ba9cf70f57e835`

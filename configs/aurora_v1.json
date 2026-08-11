@@ -1,25 +1,25 @@
 {
-  "schema_version": "8.0",
+  "schema_version": "8.1",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "no_active_problem_latest_aneurisk_conformal_degree_p0_execution_incomplete_no_scientific_verdict",
+    "status": "no_active_problem_latest_cross_view_projection_source_batch_best_31_rejected_conformal_p0_no_verdict_preserved",
     "as_of": "2026-08-11",
     "clinical_use": false,
     "execution_server": "introai9",
     "allowed_pbs_queues": ["coss_agpu", "coss_a6gpu"],
     "excluded_execution_servers": ["junjinyong"],
     "current_gpu_job_count": 0,
-    "current_scheduler_observation": "introai9_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command",
+    "current_scheduler_observation": "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_1_no_server_query",
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "no_active_problem_latest_aneurisk_conformal_degree_p0_closed_execution_incomplete_no_scientific_verdict",
+    "status": "no_active_problem_latest_cross_view_projection_source_batch_best_31_rejected",
     "shortlisted_candidate": null,
     "conditional_source_lead_count": 0,
     "candidate_dataset": null,
     "candidate_estimand": null,
-    "asset_access_status": "source_metadata_and_readme_verified_no_complete_archive_or_vtp_scientific_aggregate_p0_closed",
+    "asset_access_status": "source_only_cross_view_projection_audit_no_new_payload_conformal_degree_p0_remains_closed",
     "user_accepted_data_terms_verified": false,
     "task_unit_audited": false,
     "annotation_selection_mechanism_audited": false,
@@ -28,8 +28,8 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_not_same_contract_aneurisk_transport_reader_dependency_repair_or_rerun",
-    "audit_document": "docs/conformal-degree-certificate-source-audit-2026-08-11.md",
+    "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_not_cross_view_loss_or_wrapper_and_not_closed_aneurisk_repair_or_rerun",
+    "audit_document": "docs/cross-view-projection-source-delta-2026-08-11.md",
     "aneumo_bc_transport_source_audit": {
       "status": "p0_execution_incomplete_no_scientific_verdict_closed_without_repair_or_rerun",
       "audit_document": "docs/aneumo-bc-transport-source-audit-2026-08-10.md",
@@ -3384,8 +3384,103 @@
       "decision": "preserve_exact_32_5_source_history_but_close_candidate_after_execution_incomplete_without_scientific_verdict_repair_rerun_p1_method_architecture_gpu_outer_test_or_claim",
       "next_allowed_action": "fresh_problem_level_primary_source_and_asset_audit_not_same_contract_repair_or_rerun"
     },
+    "cross_view_projection_source_delta": {
+      "status": "completed_source_only_all_candidates_rejected",
+      "audit_document": "docs/cross-view-projection-source-delta-2026-08-11.md",
+      "automatic_selection_threshold": 32.0,
+      "best_candidate_id": "adam_projection_consistent_3d_lesion_set",
+      "best_score": 31.0,
+      "conditional_source_lead_count": 0,
+      "active_shortlist_count": 0,
+      "primary_problem_selected": false,
+      "midl_cross_view_source": "openreview_f943ad69f9a9542edf4f959c51bb2a2b2ba7f2d2",
+      "midl_source_uses_real_clinical_biplane_dsa": false,
+      "midl_source_projection_origin": "deterministic_ap_and_lateral_mip_from_adam_3d_mra",
+      "midl_source_cases": 113,
+      "midl_source_split_ratio": "8_1_1_case_split_subject_grouping_not_reported",
+      "midl_source_inference_uses_both_views": false,
+      "midl_source_rt_detr_ap_map50": 0.270,
+      "midl_source_joint_prompt_ap_map50": 0.643,
+      "adam_registration_and_confidentiality_agreement_required": true,
+      "adam_payload_accessed": false,
+      "adam_reported_scans": 113,
+      "adam_positive_scans": 93,
+      "adam_negative_scans": 20,
+      "adam_repeated_subject_scans_require_group_split": true,
+      "sdan_clinical_dsa_images": 62187,
+      "sdan_clinical_dsa_patients": 1114,
+      "sdan_clinical_dsa_centers": 3,
+      "sdan_public_distribution_permitted": false,
+      "sdan_reasonable_request_only": true,
+      "path_length_correction_independent_cases": 3,
+      "path_length_correction_tdc_rmse_before": 0.23,
+      "path_length_correction_tdc_rmse_after": 0.14,
+      "candidates": [
+        {
+          "id": "adam_projection_consistent_3d_lesion_set",
+          "score": 31.0,
+          "axis_scores": [4.5, 4.0, 1.0, 3.0, 4.0, 5.0, 5.0, 4.5],
+          "decision": "reject"
+        },
+        {
+          "id": "adam_selective_biplanar_3d_point_localization",
+          "score": 30.0,
+          "axis_scores": [4.5, 4.0, 0.5, 3.0, 4.0, 5.0, 5.0, 4.0],
+          "decision": "reject"
+        },
+        {
+          "id": "adam_cross_view_consistency_failure_audit",
+          "score": 29.5,
+          "axis_scores": [4.5, 4.0, 1.0, 3.0, 4.0, 5.0, 5.0, 3.0],
+          "decision": "reject"
+        },
+        {
+          "id": "multicenter_single_frame_dsa_shift_abstention",
+          "score": 26.5,
+          "axis_scores": [5.0, 4.0, 0.5, 0.5, 5.0, 5.0, 5.0, 1.5],
+          "decision": "reject"
+        },
+        {
+          "id": "cross_view_quantitative_dsa_functional_calibration",
+          "score": 22.5,
+          "axis_scores": [5.0, 4.0, 0.5, 0.5, 0.5, 5.0, 5.0, 2.0],
+          "decision": "reject"
+        },
+        {
+          "id": "clinical_biplane_dsa_projection_set_localization",
+          "score": 21.5,
+          "axis_scores": [5.0, 2.0, 1.5, 0.5, 0.5, 5.0, 5.0, 2.0],
+          "decision": "reject"
+        }
+      ],
+      "direct_prior_threats": [
+        "midl_2026_adam_mip_cross_view_z_prompting_and_consistency",
+        "ribassist3d_selective_biplanar_localization_and_false_output_budget",
+        "medical_image_analysis_2026_multioutput_conformal_2d_3d_landmark_regions",
+        "eccv_2024_task_driven_conformal_uncertainty_for_inverse_problems",
+        "provl_net_projective_geometry_aware_biplanar_3d_localization",
+        "aneurysm_biplane_silhouette_curve_morphing_reconstruction",
+        "clinical_dsa_path_length_and_kvp_cross_view_correction"
+      ],
+      "patient_payload_accessed": false,
+      "user_access_agreement_accepted": false,
+      "p0_or_p1_registered": false,
+      "method_selected": false,
+      "architecture_selected": false,
+      "server_queried": false,
+      "pbs_or_gpu_job_created": false,
+      "gpu_training_authorized": false,
+      "outer_test_authorized": false,
+      "result_row_created": false,
+      "paper_contribution_created": false,
+      "submission_identity_active": false,
+      "login_node_gpu_command_executed": false,
+      "junjinyong_accessed_for_this_audit": false,
+      "decision": "reject_all_without_score_repair_source_combination_novelty_or_compute",
+      "next_material_change": "paired_calibrated_clinical_ap_lateral_dsa_with_patient_split_keys_acquisition_geometry_timing_and_3d_reference_or_identified_set_target"
+    },
     "most_recent_closed_candidate": "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete",
-    "most_recent_source_rejected_candidate": "aneurisk_cycle_averaged_fixed_point_faithful_surrogation",
+    "most_recent_source_rejected_candidate": "adam_projection_consistent_3d_lesion_set",
     "most_recent_conditional_source_lead": null,
     "rejected_candidates": [
       "topaneu_factorized_leaf_risk_with_train_only_silver_anatomy_v2_direct_prior_occupied",
@@ -3525,7 +3620,13 @@
       "aneurisk_phase_resolved_critical_point_worldlines",
       "aneurisk_structure_selective_surrogate_abstention",
       "cfd_challenge_multi_pipeline_wss_topology_robustness",
-      "rhsia_structure_fidelity_benchmark_extension"
+      "rhsia_structure_fidelity_benchmark_extension",
+      "adam_projection_consistent_3d_lesion_set",
+      "adam_selective_biplanar_3d_point_localization",
+      "adam_cross_view_consistency_failure_audit",
+      "multicenter_single_frame_dsa_shift_abstention",
+      "cross_view_quantitative_dsa_functional_calibration",
+      "clinical_biplane_dsa_projection_set_localization"
     ],
     "non_novel_components": [
       "vessel_graph_or_gnn",
@@ -3634,7 +3735,12 @@
       "generic_three_d_lesion_fnr_conformal_threshold",
       "generic_knn_barycentric_or_conservative_surface_field_remapping",
       "generic_surface_vector_tangent_projection_or_parallel_transport",
-      "generic_train_only_normalization_and_test_blind_checkpoint_selection"
+      "generic_train_only_normalization_and_test_blind_checkpoint_selection",
+      "cross_view_prompting_or_consistency_loss",
+      "biplanar_detection_correspondence_triangulation_and_abstention",
+      "generic_multioutput_conformal_2d_or_3d_localization_region",
+      "task_driven_conformal_uncertainty_for_imaging_inverse_problems",
+      "projective_geometry_aware_biplanar_feature_fusion"
     ]
   },
   "venue": {

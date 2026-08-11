@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 8.1 source-only update · 2026-08-11:** The cross-view projection
+> audit queried no scientific server, transferred no dataset and created no
+> PBS/GPU job. The last observed `introai9` state remains the post-`115684`
+> empty queue; it was not refreshed in this audit. `junjinyong` was not accessed
+> and remains prohibited.
+
 > **Schema 8.0 deployment verification · 2026-08-11:** Exact outcome content
 > `6123f0e917f084aad0bf352306ba9cf70f57e835` passed GitHub-hosted Quality
 > `31448501704` and Pages `31448501265`. Live content matched the closed P0
