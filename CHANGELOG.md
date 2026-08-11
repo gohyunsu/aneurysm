@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-11 · Schema 9.7 deployed and privately pinned
+
+- Exact scientific source `7b3208595f60f3c6972efec0c63d21c980a62353`
+  passed Quality `31503802787` and Pages `31503801773`; live Overview and Learn
+  render the 31.5/40, novelty 0.5/5, 99-base and 714-view boundaries.
+- Private ledger `0bb7ffda374f801c0761fee7b589990eb175ab4f` is remote exact,
+  PRIVATE and anonymous API returns 404. Manuscript and references hashes are
+  unchanged.
+- This deployment provenance opens no P0/P1, method, architecture, server,
+  PBS/GPU, outer test, result row, C21 or claim.
+
 ## 2026-08-11 · Neck/isolation assets rejected as a paper identity · schema 9.7
 
 - Audited exact AneuSI head `5b4c454…`: 1,041 blobs/977,740,269 bytes,

@@ -992,6 +992,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 9.7 exact source is deployed and privately pinned",
+      copy: "Exact public scientific source 7b3208595f60f3c6972efec0c63d21c980a62353 passed Quality 31503802787 and Pages 31503801773. Live Overview and Learn render the 31.5/40 rejection, residual novelty 0.5/5, 99 visible AneuSI base IDs, 714 repeated views and no-payload/no-model/no-compute boundary. Private ledger 0bb7ffda374f801c0761fee7b589990eb175ab4f is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. This provenance creates no lead, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row, C21 or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 9.7 rejects neck/isolation, workflow-orbit and open-model variants",
       copy: "Exact AneuSI head 5b4c454… provides executable isolation code and a large tracked Aneurisk tree, but requires an input neck polygon. Its 103 lesion files reduce to 99 visible base IDs, and 714 clip-factor VTKs are repeated transformations rather than patients. NeckSpline directly predicts continuous CTA/MRA neck curves; the stated code endpoint currently returns HTTP 401. Zenodo v2 is an open 1,167,744,043-byte model trained partly on Lausanne and ADAM, not a clean external cohort. CFD workflow variability, TAR and generic selective/conformal topology UQ are direct priors. Six frozen rows score 31.5/30.0/29.0/28.0/24.0/22.5; the leader has residual novelty 0.5/5. All are rejected without VTK/ODS/model archive, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim.",

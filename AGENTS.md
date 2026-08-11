@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 9.7 deployment·private synchronization:** Exact public
+> scientific source `7b3208595f60f3c6972efec0c63d21c980a62353` passed Quality
+> `31503802787` and Pages `31503801773`; live Overview and Learn expose the
+> 31.5/40 rejection, novelty 0.5/5, 99 visible base IDs, 714 repeated views and
+> no-model/no-compute boundary. Private paper ledger
+> `0bb7ffda374f801c0761fee7b589990eb175ab4f` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization adds no lead, P0/P1, method, architecture, scientific-
+> server query, PBS/GPU, outer test, result row, C21 or claim. Future authorized
+> work is `introai9` PBS only; prohibit login-node GPU and never access, query,
+> transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-11 neck/isolation and open-model reappraisal · schema 9.7:** Exact
 > AneuSI head `5b4c454…` is a substantive public baseline with MIT code and a
 > bundled CC BY-NC 3.0 Aneurisk notice. Its complete tree has 1,041 blobs/

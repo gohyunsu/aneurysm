@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 9.7 deployment/private verification:** Exact scientific
+> source `7b3208595f60f3c6972efec0c63d21c980a62353` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31503802787) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31503801773). Private
+> ledger `0bb7ffda374f801c0761fee7b589990eb175ab4f` is remote exact and
+> PRIVATE; anonymous API returns 404. Manuscript and references remain byte-
+> for-byte unchanged. This is provenance only and opens no lead, P0/P1,
+> method, architecture, server query, PBS/GPU, outer test, result, C21 or claim.
+
 > **Current research state (schema 9.7, 2026-08-11):** Fresh neck/isolation,
 > workflow-orbit and open-model reappraisal rejects all six candidates at
 > **31.5/30.0/29.0/28.0/24.0/22.5**. AneuSI is a useful executable baseline,
