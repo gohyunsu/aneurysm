@@ -3,8 +3,8 @@
 > **2026-08-12 rupture-time delta deployment and private pin:** Exact public
 > scientific source `309e16205a82f1fe7599a24719486da40375193d` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31545461242)
-> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31545460523).
-> Private ledger `7d7a5883f9c876d1e32b7fcafeb46ed6a7f8fef8` is remote
+> and exact-head [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31545766452).
+> Private ledger `7fb0fccb002763c2827d46b5c2186af53893ca2b` is remote
 > exact, PRIVATE and anonymously returns 404. Full regression is 450 tests:
 > 384 pass/66 optional skip and 88 protocol invariant groups. Manuscript and
 > references remain byte-for-byte unchanged; this provenance opens no paper,

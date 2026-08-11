@@ -1111,7 +1111,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.12",
       category: "deployment",
       title: "Rupture-time delta is live and privately pinned",
-      copy: "Exact public scientific source 309e16205a82f1fe7599a24719486da40375193d passed Quality 31545461242 and Pages 31545460523. Private ledger 7d7a5883f9c876d1e32b7fcafeb46ed6a7f8fef8 is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes are unchanged. Full regression is 450 tests: 384 pass/66 optional skip and 88 protocol invariant groups. This provenance changes no schema-10.7 score, active lead, P0/P1, method, model, scientific server, PBS/GPU, outer test or claim.",
+      copy: "Exact public scientific source 309e16205a82f1fe7599a24719486da40375193d passed Quality 31545461242 and exact-head Pages 31545766452. Private ledger 7fb0fccb002763c2827d46b5c2186af53893ca2b is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes are unchanged. Full regression is 450 tests: 384 pass/66 optional skip and 88 protocol invariant groups. This provenance changes no schema-10.7 score, active lead, P0/P1, method, model, scientific server, PBS/GPU, outer test or claim.",
       files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
     },
     {

@@ -2,8 +2,8 @@
 
 > **2026-08-12 rupture-time delta deployment·private synchronization:** Exact
 > public scientific source `309e16205a82f1fe7599a24719486da40375193d`
-> passed Quality `31545461242` and Pages `31545460523`. Private paper ledger
-> `7d7a5883f9c876d1e32b7fcafeb46ed6a7f8fef8` is remote exact, PRIVATE and
+> passed Quality `31545461242` and exact-head Pages `31545766452`. Private paper
+> ledger `7fb0fccb002763c2827d46b5c2186af53893ca2b` is remote exact, PRIVATE and
 > anonymous API is 404. Full regression is 450 tests: 384 pass/66 optional
 > skip with 88 protocol invariant groups; site/JavaScript/diff hygiene pass.
 > `paper/main.tex` and references remain byte-for-byte unchanged. This
