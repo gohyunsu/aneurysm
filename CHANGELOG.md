@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-11 · Surface-vector follow-up deployed
+
+- Exact analysis content `8616257d501707df6d26b07841124d426fac6d86`
+  passed Quality `31469240409` and Pages `31469239803`.
+- Live Learn and machine-rendered change history expose the stricter E0–E5
+  result contract and qDSA direct-prior correction.
+- This is provenance only; it opens no source lead, P0/P1, method,
+  architecture, scientific-server query, PBS/GPU, outer test or claim.
+
 ## 2026-08-11 · Surface-vector analysis follow-up tightens the result contract
 
 - Clarified that hypothetical model quality cannot substitute for E0 source

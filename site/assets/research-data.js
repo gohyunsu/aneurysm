@@ -870,6 +870,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Surface-vector follow-up is live and verified",
+      copy: "Exact analysis content 8616257d… passed Quality 31469240409 and Pages 31469239803. Live Learn and change history expose the stricter E0–E5/result-contract distinction and the 458-patient qDSA direct prior. This is publication provenance only and creates no source lead, P0/P1, method, architecture, server query, PBS/GPU, outer test or claim.",
+      files: ["README.md", "AGENTS.md", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Surface-vector follow-up separates result quality from admission",
       copy: "The application question and E0→E5 ladder remain, but hypothetical model performance cannot substitute for source admission, endpoint stability or matched baseline failure. A future positive result must jointly show fresh patient/family field non-inferiority, stable structure superiority, bootstrap uncertainty and matched-case interpretation. A 458-patient qDSA direct prior already occupies injection standardization, occlusion prediction and LIME. No source, P0/P1, architecture, server query, PBS/GPU, outer test or claim is opened.",

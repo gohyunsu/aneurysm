@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.5 overlay deployment verification:** Exact analysis
+> content `8616257d501707df6d26b07841124d426fac6d86` passed Quality
+> `31469240409` and Pages `31469239803`. Live Learn and change history expose
+> the stricter E0–E5/result-contract distinction and 458-patient qDSA direct
+> prior. This is publication provenance only. It creates no source lead,
+> P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test,
+> result row or claim. Future gate-authorized work remains `introai9` PBS only;
+> never access `junjinyong` or run login-node GPU commands.
+
 > **2026-08-11 surface-vector analysis follow-up · schema 8.5 overlay:**
 > Application question과 E0→E5 evidence ladder는 유지하지만 “좋은 architecture와
 > 성능이면 경쟁력이 있다”는 조건문은 admission 근거가 아니다. Good performance는

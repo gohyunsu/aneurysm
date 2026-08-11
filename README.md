@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.5 overlay deployment verification:** Exact analysis
+> content `8616257d501707df6d26b07841124d426fac6d86` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31469240409) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31469239803).
+> Live Learn and detailed change history expose the stricter result contract
+> and qDSA direct-prior correction. This provenance opens no source lead,
+> P0/P1, model, server query, PBS/GPU, outer test or claim.
+
 > **2026-08-11 surface-vector analysis follow-up · schema 8.5 overlay:** The
 > field-error-versus-structure question and E0→E5 evidence ladder are retained,
 > but hypothetical architecture performance is not source admission. A future
