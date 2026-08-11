@@ -204,8 +204,11 @@ these outcomes into an architecture claim.
 
 ## 8. Authorization
 
-There is one conditional source lead and one registered method-free P0. There
-is still no selected primary problem, architecture, model, GPU experiment,
-outer test, result row, C21 or manuscript contribution. AURORA uses only
-`introai9` PBS. Never connect to, query, transfer to, submit to or monitor
-`junjinyong`; never execute a GPU command on the `introai9` login node.
+At prospective registration there was one conditional source lead and one
+method-free P0. Schema 8.0 closes both after the one-shot execution-incomplete
+outcome: current conditional lead, primary problem, architecture, model, GPU
+experiment, outer test, result row, C21 and manuscript contribution are all
+zero. The exact contract cannot be repaired or rerun and cannot open P1.
+AURORA uses only `introai9` PBS. Never connect to, query, transfer to, submit
+to or monitor `junjinyong`; never execute a GPU command on the `introai9`
+login node.
