@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.7 deployment verification:** Exact contract content
+> `d04abd841a553c024c0aa5ba684d93b305773123` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31473930058) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31473929481).
+> Private ledger `5adc050227c03265c514242776839c7c429329e4` records this
+> no-claim boundary and remains PRIVATE. Live Learn and detailed change history
+> expose the degree-first hierarchy and no-running-job state. This is
+> provenance only; it opens no lead, P0/P1, method, architecture, server query,
+> PBS/GPU, outer test, result row or claim.
+
 > **2026-08-11 surface-vector contract hardening · schema 8.7 prospective:**
 > The supplied analysis is accepted only as an inactive, falsifiable problem
 > question. Job `115645.ECE-util1` is closed—not running—at E/exit 2 with

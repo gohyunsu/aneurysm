@@ -892,6 +892,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.7 exact contract is deployed and privately pinned",
+      copy: "Exact public contract content d04abd841a553c024c0aa5ba684d93b305773123 passed Quality 31473930058 and Pages 31473929481. Private ledger 5adc050227c03265c514242776839c7c429329e4 remains PRIVATE and preserves manuscript and references byte-for-byte. Live Learn exposes the degree-first endpoint hierarchy and no-running-job status. This provenance creates no lead, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 8.7 hardens the surface-vector endpoint and result contract",
       copy: "The application question and E0→E5 order are retained, but job 115645 is explicitly closed—not running—at E/exit 2 with 0/10 scientific checks and no verdict. Before E1, only boundary-margin signed total degree validity and certificate efficiency/abstention are primary; point, index, trajectory and event metrics are secondary after stability. Structural loss remains prohibited before a field-error-matched E2 failure. Five fresh patient/family-level conditions are jointly required for any future ISBI result. No lead, P0/P1, method, architecture, server query, PBS/GPU, outer test or claim is opened.",

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.7 deployed and privately pinned
+
+- Exact contract content `d04abd841a553c024c0aa5ba684d93b305773123`
+  passed Quality `31473930058` and Pages `31473929481`.
+- Private ledger `5adc050227c03265c514242776839c7c429329e4` remains PRIVATE;
+  anonymous API returns 404 and manuscript/references hashes are unchanged.
+- Live Learn and machine-rendered change history expose the degree-first
+  endpoint hierarchy and no-running-job status. This provenance creates no
+  scientific or compute authority.
+
 ## 2026-08-11 · Surface-vector endpoint contract hardened · schema 8.7
 
 - Accepted the application question and E0→E5 order, but kept the paper

@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.7 deployment·private synchronization:** Exact public
+> contract content `d04abd841a553c024c0aa5ba684d93b305773123` passed Quality
+> `31473930058` and Pages `31473929481`. Private paper ledger
+> `5adc050227c03265c514242776839c7c429329e4` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> references SHA-256 remains
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization creates no source lead, P0/P1, method, architecture,
+> server query, PBS/GPU, outer test, result row, C21 or claim. Future authorized
+> work remains `introai9` PBS only; never access `junjinyong` or run login-node
+> GPU commands.
+
 > **2026-08-11 surface-vector contract hardening · schema 8.7 prospective:**
 > 전달된 분석은 inactive falsifiable question과 E0→E5 순서만 채택한다. Job
 > `115645.ECE-util1`은 running이 아니라 E/exit 2, 0/10 check 미평가로 닫힌
