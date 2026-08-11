@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — surface-vector 가설을 비활성으로 보존하고 MRIS-Bench의 target·patient·split 계약을 비판적으로 감사해 24.0/40 후보를 기각한 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — AAA transcriptomics와 synthetic CFD를 환자 연결성·독립 표본·direct prior 관점에서 감사해 30.0/40 후보를 기각하고 architecture를 열지 않은 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,25 +40,28 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST 24.0/40 · CRITICAL FLOORS FAILED · NOT SUBMISSION-READY</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> LATEST 30.0/40 · NOVELTY/TASK LINKAGE FAILED · NOT SUBMISSION-READY</p>
         <h1>
           A strong direct prior is not an executable study identity.<br>
           <em>Identifiable evidence before architecture.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          Surface-vector의 field-error 대 structure-fidelity 질문은 타당하지만
-          아직 선택된 architecture나 paper identity가 아닙니다. 새 MRIS-Bench는
-          30,110 rows와 여덟 Arrow shard를 공개했지만, 현재 under-review contract에는
-          mask target, patient grouping, split, source lineage와 annotation protocol이
-          없습니다. 따라서 VLM이나 SAM을 붙이는 방향은 연구 문제가 식별되기 전에
-          모델을 고르는 일입니다. 여섯 후보의 최고점은 <b>24.0/40</b>이며
-          identifiability·novelty·asset·독립 표본 최소선을 함께 실패했습니다.
-          Visible viewer의 모순은 경고일 뿐 measured error rate가 아닙니다. 역사적
-          32점 후보와 0/10 no-verdict P0는 그대로 보존하며 repair/rerun하지 않습니다.
+          새 transcriptomic package는 rupture·wall stress·size·thrombus·cell state를
+          여섯 GEO cohort에서 통합하지만 같은 환자의 imaging–mechanics–molecular
+          table이 아닙니다. GSE205071의 12명 paired stress biopsy도 public
+          image/mesh/field 좌표가 없습니다. 새 synthetic-AAA/OpenFOAM pipeline은
+          258 CTA 측정에서 182 virtual geometry와 364 simulation을 만들지만 실제 CTA
+          cohort와 real-patient paired CFD outer reference를 공개하지 않습니다.
+          AAA WSS surrogate 자체는 이미 direct prior가 점유합니다. 따라서 여섯 후보의
+          최고점은 <b>30.0/40</b>이지만 residual novelty가 0.5/5라 기각했습니다.
+          Surface-vector와 역사적 0/10 no-verdict P0도 그대로 보존하며 repair/rerun하지
+          않습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#aaa-cross-scale">AAA cross-scale 판정 이해하기</a>
+          <a class="button ghost" href="../docs/aaa-cross-scale-source-reappraisal-2026-08-11.md">Latest cross-scale audit ↗</a>
           <a class="button ghost" href="learn.html#mris-contract">MRIS target contract 이해하기</a>
           <a class="button ghost" href="../docs/mris-bench-target-contract-audit-2026-08-11.md">Latest target audit ↗</a>
           <a class="button ghost" href="learn.html#admission-v2">왜 32점도 기각했나?</a>
@@ -136,7 +139,7 @@
       </div>
 
       <div class="hero-visual" aria-label="곡면 혈관의 WSS 접선 벡터, critical point와 시간 궤적을 설명하는 현재 연구 질문">
-        <div class="visual-caption">LATEST 24.0/40 REJECTED · FOUR CRITICAL FLOORS FAILED · NO MODEL</div>
+        <div class="visual-caption">LATEST 30.0/40 REJECTED · RESIDUAL NOVELTY 0.5/5 · NO MODEL</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="혈관 해부구조와 동맥류 위치 annotation의 의미 차이">
             <defs>
@@ -159,27 +162,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>24.0</b><span>latest score · rejected by multiple critical floors</span>
+            <b>30.0</b><span>latest score · rejected by non-compensatory floors</span>
           </div>
           <div class="posterior-card card-b">
-            <b>1.5 / 2.5</b><span>residual novelty / required minimum</span>
+            <b>0.5 / 2.5</b><span>residual novelty / required minimum</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> 30,110 rows ≠ 30,110 independent patients</span>
-          <span><i class="dot coral"></i> A box/point string ≠ a segmentation mask contract</span>
+          <span><i class="dot lime"></i> 182 virtual geometries ≠ 182 observed patients</span>
+          <span><i class="dot coral"></i> Six GEO cohorts ≠ one joinable patient cohort</span>
           <span>Surface P0 E/exit 2 · all 10 checks unevaluated · no scientific verdict · GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>24.0/40 · all six rejected by critical floors · active lead 0</b></div>
+        <div><span>Latest source screen</span><b>30.0/40 · all six rejected · residual novelty 0.5/5 · active lead 0</b></div>
         <div><span>Current compute</span><b>no scientific-server query · no new job · GPU 0</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>wait for post-review target contract, material surface evidence, or audit a different problem · no P0/model</b></div>
+        <div><span>Next action</span><b>wait for patient-linked imaging/field/molecular data or a real paired AAA field reference · no P0/model</b></div>
       </div>
     </section>
 

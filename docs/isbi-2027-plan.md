@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.0 submission boundary · 2026-08-11:** Do not title the paper as
+> an AAA neural operator, mechanics--omics digital twin or transcriptome-guided
+> GNN. The first is direct-prior occupied; the latter two have no joint patient
+> target. No contribution, method figure, result table or architecture is
+> defensible yet. The four-page ISBI manuscript remains a private planning shell
+> until a fresh task passes all source floors and yields confirmatory evidence.
+> Synthetic-case count, transcript rows and technical replicates must never be
+> presented as independent patients.
+
 > **Schema 8.9 submission boundary · 2026-08-11:** Do not title the paper
 > around MRIS-Bench, a medical VLM, semantic contradiction detection or
 > selective referring segmentation. The released contract has no mask target

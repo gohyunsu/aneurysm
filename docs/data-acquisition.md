@@ -1,5 +1,13 @@
 # Dataset acquisition plan
 
+> **Schema 9.0 acquisition boundary · 2026-08-11:** The new AAA audit used
+> public metadata and README text only. Do not download Zenodo ZIPs,
+> `aaa_data.xlsx`, example OpenFOAM cases, GEO matrices, CFD fields or images;
+> no candidate passed the source gate. A future acquisition must be a new,
+> versioned same-patient imaging--field--molecular contract or a real paired
+> AAA CFD reference and must first receive a prospectively frozen method-free
+> P0. Routine source version changes do not authorize acquisition.
+
 > **Schema 6.9 acquisition outcome · 2026-08-10:** The single authorized
 > metadata read ended execution-incomplete and retained no registered source
 > object. Do not repeat the HTTP read, download NIfTI/image/mask or clinical

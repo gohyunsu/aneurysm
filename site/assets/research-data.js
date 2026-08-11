@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest MRIS-Bench candidate 24.0/40 rejected by identifiability, novelty, asset and independent-unit floors · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    status: "Target locked · latest AAA cross-scale candidate 30.0/40 rejected by residual-novelty and patient/task-linkage floors · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
     requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Cross-cohort molecular evidence and synthetic CFD do not form a patient-linked digital twin",
+      copy: "Zenodo 21868617 integrates six GEO cohorts, and GSE205071 genuinely contains paired high/low wall-stress biopsies from 12 patients. It nevertheless exposes no common CTA, surface mesh, FEA field or biopsy coordinate, and the other rupture, size, thrombus and single-cell endpoints come from different patients. Zenodo 21435232 and GitHub v1.0.0 exact 98363a0… provide an MIT synthetic-AAA/OpenFOAM pipeline derived from 258 CTA measurements and report 182 selected virtual geometries/364 simulations, but not the real CTA cohort or a real-patient paired CFD outer reference. AAA transient-WSS surrogation and geometry–hemodynamics are direct priors. Six formulations score 30.0/28.5/26.5/26.5/23.0/22.0; the leader has residual novelty 0.5/5 and is rejected.",
+      status: "Best 30.0/40 rejected · common patient/surface join 0 · payload/P0/method/architecture/server/GPU 0",
+      url: "../docs/aaa-cross-scale-source-reappraisal-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "A large public MRIS row count does not identify a segmentation study",
@@ -683,6 +690,16 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "AAA transcriptomic reproducibility · Zenodo 21868617 rev. 4",
+      role: "source-rejected cross-cohort evidence package; not a patient-linked imaging–mechanics–molecular training set",
+      provenance: "CC BY 4.0 · one 293,641-byte ZIP/MD5 264d9a… · six GEO cohorts · GSE205071 paired high/low stress biopsy n=12 · no public common CTA/mesh/field/biopsy coordinate · ZIP/expression/image payload 0"
+    },
+    {
+      name: "Synthetic AAA CFD framework · Zenodo 21435232 / GitHub v1.0.0",
+      role: "source-rejected executable generator and direct-prior control; not observed-patient training or real-field confirmation",
+      provenance: "MIT · exact head 98363a0… · 258 CTA-derived measurement cases · 182 selected virtual geometries · 364 reported simulations · generated units ≠ patients · real CTA cohort/paired real CFD outer field absent · ZIP/XLSX/example/CFD payload 0"
+    },
+    {
       name: "MRIS-Bench · exact HF 6f2d6d9…",
       role: "source-rejected under-review target contract; watch-only, not training",
       provenance: "30,110 public rows ≠ patient units · 8 Arrow shards · no public mask field, patient grouping, split, source lineage or annotation protocol · visible viewer examples are not registered quality prevalence · Arrow/image payload/P0/model/GPU 0"
@@ -909,6 +926,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 9.0 rejects a synthetic-AAA operator and an unmatched mechanics–omics join",
+      copy: "Exact public metadata corrects one premise: GSE205071 has paired high/low wall-stress biopsies from 12 patients. It still lacks a public image/mesh/field/biopsy-coordinate contract, and six GEO cohorts are not a common patient table. The new synthetic AAA/OpenFOAM pipeline is executable and reports 182 virtual geometries/364 simulations from 258 CTA-derived measurements, but releases neither the real CTA cohort nor a paired real-patient field outer reference. AAA WSS surrogation is direct-prior occupied. Six candidates freeze at 30.0/28.5/26.5/26.5/23.0/22.0; best novelty is 0.5/5. No payload, P0/P1, method, architecture, server query, PBS/GPU, outer test, result or claim is opened.",
+      files: ["docs/aaa-cross-scale-source-reappraisal-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "docs/research-map.md", ".github/workflows/quality.yml", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

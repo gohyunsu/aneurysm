@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 AAA cross-scale source reappraisal · schema 9.0:** A new
+> transcriptomic reproducibility package does not create a patient-linked
+> imaging--mechanics--molecular dataset. Its only regionally paired wall-stress
+> cohort is GSE205071 with 12 patients and no public image/mesh/field coordinate
+> contract. A new MIT synthetic-AAA CFD framework is executable code derived
+> from 258 CTA measurements and reports 182 virtual geometries/364 simulations,
+> but it omits the real CTA cohort and a real-patient paired CFD outer reference;
+> AAA WSS neural surrogation is already direct prior. Six frozen formulations
+> score **30.0/28.5/26.5/26.5/23.0/22.0**. The best fails residual novelty at
+> 0.5/5, so active lead/P0/P1/method/architecture/server query/PBS/GPU/outer
+> test/result/claim remain zero. Surface-vector stays inactive and closed jobs
+> `115645`/`115684` are not repaired. [Exact audit](docs/aaa-cross-scale-source-reappraisal-2026-08-11.md)
+
 > **2026-08-11 schema 8.9 deployment verification:** Exact scientific source
 > `646698c66c1eed75ecd4466823bb2cc18ed5ca98` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31479001176) and

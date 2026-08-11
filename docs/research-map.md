@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **2026-08-11 schema 9.0 현재 상태:** 새 AAA transcriptomic package와
+> synthetic OpenFOAM pipeline까지 재심사했지만 active primary problem,
+> method, architecture와 contribution은 여전히 0이다. Cross-cohort molecular
+> evidence는 common patient target이 아니고, executable synthetic WSS
+> surrogation은 direct-prior occupied이며 real paired outer field가 없다.
+> 최신 여섯 점수는 30.0/28.5/26.5/26.5/23.0/22.0으로 모두 기각됐다.
+
 > **2026-08-11 현재 상태:** 이 문서는 초기 In-PI-MGN 재현 맥락을 보존하는
 > historical map이다. 현재 active primary problem, method, architecture와
 > contribution은 모두 0이다. 새 AneuX-derived transient-CFD source도 public

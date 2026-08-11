@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 AAA cross-scale source reappraisal · schema 9.0:** Zenodo
+> `21868617` revision 4 is a CC-BY-4.0 reproducibility package over six distinct
+> GEO cohorts, not a common patient table. GSE205071 contains paired high/low
+> wall-stress biopsies from 12 patients but no public CTA/surface/FEA-field/
+> biopsy-coordinate contract. Zenodo `21435232` revision 4 and GitHub release
+> `v1.0.0` exact `98363a0…` provide an MIT synthetic-AAA/OpenFOAM pipeline based
+> on 258 CTA measurements; 182 selected virtual geometries and 364 simulations
+> are generated units, not observed patients, and no public real-patient paired
+> CFD outer reference exists. Rygiel transient AAA WSS, WSSNet, the source
+> geometry--hemodynamics study and regional wall-stress transcriptomics are
+> direct priors. Frozen scores 30.0/28.5/26.5/26.5/23.0/22.0 all fail the
+> non-compensatory gate; best residual novelty is 0.5/5. Do not select a GNN,
+> operator, omics branch or architecture. Do not add these already-public
+> rejected records to the recurring watch merely to create activity. Active
+> lead/P0/P1/method/architecture/server query/PBS/GPU/outer test/result/claim
+> remain 0. Surface-vector stays inactive; jobs `115645`/`115684` remain closed
+> no-verdict histories without repair/rerun. Future eligible execution is
+> `introai9` PBS only, never login-node GPU. Never access, query, transfer to,
+> submit to or monitor `junjinyong`.
+
 > **2026-08-11 schema 8.9 deployment·private synchronization:** Exact public
 > scientific source `646698c66c1eed75ecd4466823bb2cc18ed5ca98` passed
 > Quality `31479001176` and Pages `31479000353`. Private paper ledger

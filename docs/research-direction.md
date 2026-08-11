@@ -1,5 +1,16 @@
 # AURORA 연구 방향
 
+> **Schema 9.0 direction · 2026-08-11:** Do not pivot to a synthetic-AAA WSS
+> operator or an imaging--omics “digital twin.” The synthetic pipeline is
+> executable but the neural-surrogate task is directly occupied and has no
+> public real-patient paired field outer reference. The transcriptomic package
+> joins evidence across cohorts, not patients; GSE205071's 12 paired stress
+> biopsies have no public imaging/mesh/field coordinates. Six candidates peak
+> at 30.0/40 with novelty 0.5/5. Keep active problem, method and architecture at
+> zero. A future cross-scale version needs same-patient registered imaging,
+> mechanics and molecular observations; a future surrogate version needs a
+> sealed real paired field reference. [Exact audit](aaa-cross-scale-source-reappraisal-2026-08-11.md)
+
 > **Schema 8.9 direction · 2026-08-11:** Reject the tempting MRIS/VLM pivot.
 > The current release does not identify a mask target, patient unit, split,
 > source lineage or annotation process, and VividMed, NTP-MRISeg, Semi-MedRef,

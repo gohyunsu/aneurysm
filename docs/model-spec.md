@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.0 no-model boundary · 2026-08-11:** No GNN, SE(3) mesh network,
+> neural operator, Hodge layer, omics-conditioning branch or synthetic-to-real
+> head is selected. The most executable candidate is already occupied by AAA
+> transient-WSS surrogates; the cross-scale candidates lack a common patient
+> and coordinate target. Architecture cannot repair a missing observation.
+> Only a future admitted, method-free linkage/task gate may reopen model design,
+> and then one failure-linked intervention must be isolated against strong
+> direct controls.
+
 > **Schema 8.9 no-model boundary · 2026-08-11:** No MRIS/VLM architecture is
 > selected. VLM, SAM, cross-attention, cross-slice consistency, uncertainty and
 > abstention are direct-prior controls, while the public target contract lacks

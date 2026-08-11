@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 9.0 source-only update · 2026-08-11:** The cross-scale AAA audit
+> queried no scientific server and created no PBS/GPU job. The last introai9
+> scheduler observation is preserved as historical provenance rather than
+> restated as current. Future authorized work remains PBS-only on `introai9`,
+> with no login-node GPU command. `junjinyong` remains prohibited for access,
+> query, transfer, submission and monitoring.
+
 > **Schema 8.5 source-only update · 2026-08-11:** PETRA/TOF/DSA, Helsinki
 > DWI/occlusion and clipped-table sources were audited through public article
 > metadata only. No scientific server was queried, no image/patient/CFD

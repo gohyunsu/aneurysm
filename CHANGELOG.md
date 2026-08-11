@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-11 · Cross-scale AAA sources rejected without an architecture · schema 9.0
+
+- Audited exact Zenodo transcriptomic record `21868617` revision 4 and synthetic
+  CFD record `21435232` revision 4 plus GitHub release head `98363a0…`, without
+  downloading ZIP/XLSX/expression/CFD/image payloads.
+- Corrected the broad “wall stress is unlinked” premise: GSE205071 does have
+  paired high/low wall-stress biopsies from 12 patients. It still lacks the
+  public imaging, mesh, field and biopsy-coordinate linkage needed for an ISBI
+  model, and the six GEO sources are not one joint cohort.
+- Froze six formulations at 30.0/28.5/26.5/26.5/23.0/22.0. The executable
+  synthetic WSS operator leads on total but has residual novelty 0.5/5 because
+  AAA transient WSS surrogation and geometry--hemodynamics analysis are direct
+  priors. No candidate passes all non-compensatory floors.
+- Added the detailed audit, schema-9.0 machine guard and mutation tests. Kept
+  source watch v9 at thirteen meaningful states and corrected CI to validate
+  that current watch rather than legacy v5; a routine version change in these
+  already-public rejected records cannot repair the missing patient join or
+  real paired outer reference.
+- Opened no source payload, P0/P1, method, architecture, scientific-server
+  query, PBS/GPU job, outer test, result row or claim. Surface-vector and closed
+  jobs `115645`/`115684` are unchanged. Future compute remains introai9 PBS only;
+  junjinyong remains prohibited.
+
 ## 2026-08-11 · Schema 8.9 deployed and privately pinned
 
 - Exact scientific source `646698c66c1eed75ecd4466823bb2cc18ed5ca98`

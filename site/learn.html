@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="surface-vector 가설과 MRIS-Bench의 target·mask·patient·split 계약, 독립 표본과 비보상형 연구 gate를 기초부터 설명하는 입문 가이드.">
+  <meta name="description" content="AAA transcriptomics·synthetic CFD의 환자 연결성, surface-vector 가설, 독립 표본과 비보상형 research gate를 기초부터 설명하는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -65,18 +65,60 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 8.9</span>
+          <span>짧은 답 · schema 9.0</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
-            최신 MRIS-Bench 후보는 30,110 rows가 있어도 mask target, patient
-            grouping, split과 source lineage가 식별되지 않아 최고 24.0/40으로
-            기각했습니다. 공개 규모와 fashionable한 VLM이 실제 research gap을
-            대신할 수 없기 때문입니다. Surface-vector 질문도 평가 가설로 보존하지만
-            active topic이나 선택된 GNN/Hodge architecture는 아닙니다. Exact P0 두
-            건의 scientific checks는 실패한 것이 아니라 모두 미평가였고, 동일
-            contract를 재실행하지 않습니다. Primary, contribution, GPU와 outer
-            test는 선택되지 않았습니다.
+            최신 AAA cross-scale batch는 synthetic CFD가 실행 가능해도 neural WSS
+            surrogate가 direct-prior occupied이고, transcriptomic cohorts에는 공통
+            patient/surface coordinate가 없어 최고 30.0/40, residual novelty 0.5/5로
+            기각했습니다. 실행 가능성과 paper novelty는 다릅니다. Surface-vector
+            질문도 평가 가설로 보존하지만 active topic이나 선택된 GNN/Hodge
+            architecture는 아닙니다. Exact P0 두 건의 scientific checks는 실패한 것이
+            아니라 모두 미평가였고, 동일 contract를 재실행하지 않습니다. Primary,
+            contribution, GPU와 outer test는 선택되지 않았습니다.
           </p>
+        </div>
+        <div class="answer-card" id="aaa-cross-scale">
+          <span>AAA transcriptomics와 synthetic CFD를 합치면 fancy한 주제가 되지 않나?</span>
+          <strong>서로 다른 cohort의 evidence를 통합하는 것과 같은 환자의 modality를 학습하는 것은 다릅니다.</strong>
+          <p>
+            새 transcriptomic package는 여섯 GEO study의 rupture, aneurysm size,
+            thrombus coverage, regional wall stress와 single-cell programme을 한 분석
+            체계로 정리합니다. 여기서 중요한 정정은 GSE205071이 정말로 12명의
+            high/low wall-stress biopsy pair를 갖는다는 점입니다. 그러나 public CTA,
+            surface mesh, FEA field와 biopsy-to-surface 좌표는 없습니다. 다른 GEO의
+            rupture label, thrombus region과 cell state도 이 12명과 같은 환자가
+            아닙니다. 따라서 row를 합쳐 imaging-to-biology model을 만들 수 없습니다.
+          </p>
+          <p>
+            Synthetic AAA framework는 더 실행 가능합니다. 258 CTA에서 얻은 diameter
+            measurement로 분포와 convex hull을 만들고, parametric surface를 생성해
+            OpenFOAM case와 WSS/TAWSS/OSI를 계산합니다. 논문 cohort의 182 selected
+            geometry와 364 simulation은 generated units이며, 182명의 새로운 환자가
+            아닙니다. Public release에는 258 CTA image와 complete CFD cohort가 없고,
+            synthetic result를 검증할 같은 환자의 real reference field도 없습니다.
+          </p>
+          <p>
+            더 근본적으로 AAA transient WSS surrogate는 E(3)-equivariant model과
+            template-aligned WSSNet이 이미 직접 다룹니다. 그래서 SE(3), GNN, operator,
+            Hodge, UQ 또는 omics-conditioning branch를 붙이는 일은 architecture
+            engineering이지 독립 contribution이 아닙니다. 여섯 후보는
+            30.0/28.5/26.5/26.5/23.0/22.0이고, 30점 후보도 novelty 0.5/5라 veto됩니다.
+          </p>
+          <p>
+            Cross-scale 방향이 실제 연구가 되려면 같은 환자의 CTA/4D imaging,
+            registered mesh와 FEA/CFD field, biopsy coordinate, regional molecular
+            measurement, patient-grouped split이 함께 필요합니다. Synthetic-to-real
+            방향이라면 sealed real-patient paired field outer cohort가 필요합니다.
+            그 전에는 model이 아니라 missing observation이 병목입니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">GSE205071 paired stress biopsy · n=12</span>
+            <span class="yes">Synthetic pipeline executable</span>
+            <span class="no">No common patient/surface join</span>
+            <span class="no">No GNN/operator/GPU</span>
+          </div>
+          <a href="../docs/aaa-cross-scale-source-reappraisal-2026-08-11.md">source·점수·미래 asset contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="mris-contract">
           <span>MRIS-Bench를 왜 바로 쓰지 않나?</span>

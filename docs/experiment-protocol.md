@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.0 no-experiment boundary · 2026-08-11:** Public Zenodo/GitHub
+> README and GEO metadata were audited only. No ZIP, XLSX, example OpenFOAM
+> case, CFD field, expression matrix or medical image was opened. Six candidates
+> fail the non-compensatory source gate, so no method-free P0, server query,
+> PBS/GPU job, development loop or outer test exists. The next permissible P0
+> must belong to a material patient-linked imaging--field--molecular release or
+> a real paired AAA field reference and must be prospectively registered as a
+> new evidence version.
+
 > **Schema 8.9 no-experiment boundary · 2026-08-11:** MRIS-Bench was audited
 > through public metadata and the visible viewer only. No Arrow shard, image,
 > model or checkpoint was opened. Six formulations fail the prospective

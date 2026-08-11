@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.0 asset boundary · 2026-08-11:** Zenodo `21868617` is an open
+> reproducibility package over six separate GEO cohorts; it is not a joinable
+> patient table. GSE205071 contributes only 12 independent wall-stress patients
+> and no public imaging/mesh/coordinate object. Zenodo `21435232` and GitHub
+> `v1.0.0` provide a synthetic-AAA/OpenFOAM generator, not the 258 real CTA
+> images or a public real-patient paired CFD outer set. Generated geometry,
+> phase, vertex, biopsy, cell and transcript rows are not independent patients.
+> Neither source is admitted as training, calibration or confirmation data.
+
 > **Schema 8.9 asset boundary · 2026-08-11:** MRIS-Bench exact revision
 > `6f2d6d9…` is public and exposes eight Arrow shards, but its current card is
 > under review and omits source lineage, patient grouping, split, mask semantics

@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.9":
-        raise ProtocolError("The current research-state schema must be version 8.9.")
+    if protocol["schema_version"] != "9.0":
+        raise ProtocolError("The current research-state schema must be version 9.0.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_mris_bench_best_24_rejected_by_critical_floors_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_aaa_cross_scale_best_30_rejected_by_residual_novelty_and_task_linkage_floors_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_9_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_0_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -186,6 +186,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "aaa_cross_scale_source_reappraisal",
             "mris_bench_target_contract_audit",
             "open_model_transport_source_reappraisal",
             "cross_vascular_transient_wss_source_correction",
@@ -252,13 +253,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_mris_bench_best_24_rejected_by_critical_floors"
+        != "no_active_problem_latest_aaa_cross_scale_best_30_rejected_by_residual_novelty_and_task_linkage_floors"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_huggingface_metadata_and_visible_viewer_only_no_arrow_or_medical_image_download_no_p0_closed_p0s_unchanged"
+        != "public_zenodo_github_readme_and_geo_metadata_only_no_zip_xlsx_cfd_expression_or_medical_image_payload_no_p0_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -268,17 +269,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "wait_for_mris_postreview_target_contract_or_material_surface_vector_evidence_or_run_a_different_fresh_problem_level_source_asset_audit_not_p0_or_model"
+        != "wait_for_patient_linked_imaging_field_molecular_contract_or_real_paired_aaa_cfd_outer_reference_or_material_surface_vector_evidence_not_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/mris-bench-target-contract-audit-2026-08-11.md"
+        != "docs/aaa-cross-scale-source-reappraisal-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "modality_semantic_contradiction_detection_with_selective_abstention_rejected_by_critical_floors"
+        != "synthetic_aaa_transient_wss_neural_operator_rejected_by_residual_novelty_floor"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The MRIS-Bench batch must remain rejected by critical floors while "
+            "The AAA cross-scale batch must remain rejected by residual-novelty "
+            "and task-linkage floors while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
@@ -341,8 +343,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 24.0
-        or admission_v2["current_batch_best_residual_novelty"] != 1.5
+        or admission_v2["current_batch_best_score"] != 30.0
+        or admission_v2["current_batch_best_residual_novelty"] != 0.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -351,6 +353,155 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    cross_scale = problem_selection["aaa_cross_scale_source_reappraisal"]
+    _require_keys(
+        cross_scale,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "transcriptomic_zenodo_record_id",
+            "transcriptomic_zenodo_revision",
+            "transcriptomic_license",
+            "transcriptomic_archive_bytes",
+            "transcriptomic_archive_md5",
+            "transcriptomic_upstream_geo_count",
+            "regional_wall_stress_geo_id",
+            "regional_wall_stress_independent_patients",
+            "regional_wall_stress_public_image_mesh_field_coordinate_contract",
+            "synthetic_cfd_zenodo_record_id",
+            "synthetic_cfd_zenodo_revision",
+            "synthetic_cfd_license",
+            "synthetic_cfd_archive_bytes",
+            "synthetic_cfd_archive_md5",
+            "synthetic_cfd_repository",
+            "synthetic_cfd_release",
+            "synthetic_cfd_release_head",
+            "source_cta_measurement_cases",
+            "selected_virtual_geometries",
+            "reported_cfd_simulations",
+            "selected_virtual_geometries_treated_as_observed_patients",
+            "public_real_cta_image_cohort_present",
+            "public_real_patient_paired_cfd_outer_reference_present",
+            "zip_xlsx_example_case_cfd_expression_or_image_payload_accessed",
+            "direct_prior_threats",
+            "candidates",
+            "recurring_source_watch_added",
+            "recurring_watch_not_added_reason",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+        ],
+        "AAA cross-scale source reappraisal",
+    )
+    expected_cross_scale_scores = [30.0, 28.5, 26.5, 26.5, 23.0, 22.0]
+    expected_cross_scale_ids = [
+        "synthetic_aaa_transient_wss_neural_operator",
+        "selection_aware_virtual_population_validity_and_uncertainty",
+        "synthetic_to_real_aaa_hemodynamic_transport_with_abstention",
+        "paired_regional_wall_stress_transcriptomic_program_prediction",
+        "mechanobiology_conditioned_surface_operator",
+        "local_wss_to_cell_state_spatial_alignment",
+    ]
+    if (
+        cross_scale["status"]
+        != "fresh_batch_rejected_best_30_fails_residual_novelty_and_task_linkage_floors"
+        or cross_scale["audit_document"]
+        != "docs/aaa-cross-scale-source-reappraisal-2026-08-11.md"
+        or cross_scale["automatic_selection_threshold"] != 32.0
+        or cross_scale["best_candidate_id"]
+        != "synthetic_aaa_transient_wss_neural_operator"
+        or cross_scale["best_score"] != 30.0
+        or cross_scale["best_residual_novelty_score"] != 0.5
+        or cross_scale["all_candidate_scores"] != expected_cross_scale_scores
+        or cross_scale["conditional_source_lead_count"] != 0
+        or cross_scale["primary_problem_selected"] is not False
+        or cross_scale["transcriptomic_zenodo_record_id"] != 21868617
+        or cross_scale["transcriptomic_zenodo_revision"] != 4
+        or cross_scale["transcriptomic_license"] != "cc-by-4.0"
+        or cross_scale["transcriptomic_archive_bytes"] != 293641
+        or cross_scale["transcriptomic_archive_md5"]
+        != "264d9ada285aa65a09239266147a1ad5"
+        or cross_scale["transcriptomic_upstream_geo_count"] != 6
+        or cross_scale["regional_wall_stress_geo_id"] != "GSE205071"
+        or cross_scale["regional_wall_stress_independent_patients"] != 12
+        or cross_scale[
+            "regional_wall_stress_public_image_mesh_field_coordinate_contract"
+        ]
+        is not False
+        or cross_scale["synthetic_cfd_zenodo_record_id"] != 21435232
+        or cross_scale["synthetic_cfd_zenodo_revision"] != 4
+        or cross_scale["synthetic_cfd_license"] != "mit"
+        or cross_scale["synthetic_cfd_archive_bytes"] != 37064038
+        or cross_scale["synthetic_cfd_archive_md5"]
+        != "93cec210d801786fe3728dbffe990067"
+        or cross_scale["synthetic_cfd_repository"]
+        != "Harish-Research-Lab/Synthetic-AAA-CFD-framework"
+        or cross_scale["synthetic_cfd_release"] != "v1.0.0"
+        or cross_scale["synthetic_cfd_release_head"]
+        != "98363a0104701dcc4bea11c2ee808eed1febafbe"
+        or cross_scale["source_cta_measurement_cases"] != 258
+        or cross_scale["selected_virtual_geometries"] != 182
+        or cross_scale["reported_cfd_simulations"] != 364
+        or cross_scale["selected_virtual_geometries_treated_as_observed_patients"]
+        is not False
+        or cross_scale["public_real_cta_image_cohort_present"] is not False
+        or cross_scale["public_real_patient_paired_cfd_outer_reference_present"]
+        is not False
+        or cross_scale[
+            "zip_xlsx_example_case_cfd_expression_or_image_payload_accessed"
+        ]
+        is not False
+        or [item["id"] for item in cross_scale["candidates"]]
+        != expected_cross_scale_ids
+        or [item["total"] for item in cross_scale["candidates"]]
+        != expected_cross_scale_scores
+        or any(
+            sum(item["axis_scores"]) != item["total"]
+            or item["critical_axis_pass"] is not False
+            for item in cross_scale["candidates"]
+        )
+        or cross_scale["recurring_source_watch_added"] is not False
+        or cross_scale["recurring_watch_not_added_reason"]
+        != "public_version_change_alone_cannot_supply_missing_patient_linkage_or_real_paired_outer_reference"
+        or any(
+            cross_scale[key] is not False
+            for key in (
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or cross_scale["execution_server"] != "introai9"
+    ):
+        raise ProtocolError(
+            "The AAA cross-scale source reappraisal must preserve exact public "
+            "metadata, independent-unit and no-payload facts, all six rejected "
+            "scores, no recurring-watch inflation and no P0/model/compute authority."
+        )
+    checks.append("AAA cross-scale source reappraisal boundary")
 
     mris = problem_selection["mris_bench_target_contract_audit"]
     _require_keys(
@@ -3848,6 +3999,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("thirteen-source fail-closed target-contract watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "synthetic_aaa_transient_wss_neural_operator_directly_occupied_no_real_paired_outer_reference",
+        "selection_aware_virtual_population_validity_source_method_no_observed_target",
+        "synthetic_to_real_aaa_hemodynamic_transport_no_matched_real_reference",
+        "paired_regional_wall_stress_transcriptomic_program_direct_source_question_n12",
+        "mechanobiology_conditioned_surface_operator_no_joint_patient_observation",
+        "local_wss_to_cell_state_spatial_alignment_no_registered_local_field",
         "modality_semantic_contradiction_detection_no_adjudicated_reference_or_patient_grouping",
         "evidence_grounded_aneurysm_referring_segmentation_no_mask_target",
         "dataset_contract_and_provenance_benchmark_missing_lineage_and_adjudication",

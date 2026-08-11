@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.0 AAA cross-scale correction · 2026-08-11:** Regional wall-stress
+> transcriptomics is not absent: GSE205071 contains paired high/low-stress
+> biopsies from 12 patients. The new reproducibility package directly integrates
+> rupture, stress, size, thrombus and cell-state programmes across six GEO
+> cohorts. In parallel, Rygiel et al., WSSNet and the synthetic-AAA framework
+> occupy transient WSS surrogation, template-aligned AAA field prediction and
+> virtual-population geometry--hemodynamics. The residual gap is therefore not
+> “combine GNN + CFD + omics.” It is the currently unobserved same-patient,
+> surface-registered imaging--mechanics--molecular estimand, or a real paired
+> outer-field test for synthetic-to-real surrogation.
+
 > **Schema 8.9 MRIS lineage correction · 2026-08-11:** VividMed already owns
 > grounded boxes/masks over 2D/3D medical data; NTP-MRISeg directly predicts
 > referring masks; Semi-MedRef targets image-text alignment under augmentation;
