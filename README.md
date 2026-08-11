@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 latent-shape/open-CTA transport reappraisal · schema 9.4:** The
+> official latent-shape paper and exact MIT repository make a strong baseline,
+> not a new active paper. The source already reports LODO AUC 0.66 despite low
+> reconstruction error. The release tracks code, weights and 885-row aggregate
+> caches but not processed OBJ data, `rupture_labels.csv` or an immutable LODO
+> manifest; a loader bug and default file-level 80/20 scripts are reproducibility
+> issues, not novelty. Open-CTA morphology metadata cannot serve as latent-
+> support truth, and the old physical-grid P0 is not repaired. Six frozen
+> candidates score **29.5/29.0/28.5/28.0/28.0/23.0** and all fail total or
+> critical novelty/identifiability floors. No medical payload, P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test or claim is open.
+> [Exact reappraisal](docs/latent-shape-open-cta-transport-reappraisal-2026-08-11.md)
+
 > **2026-08-11 schema 9.3 deployment verification:** Exact scientific source
 > `56b173ef98898fe6d0934f39a253f34ed348288c` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31490372870) and

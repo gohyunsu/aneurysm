@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.4 execution boundary · 2026-08-11:** No latent-shape/open-CTA
+> experiment is authorized. Static public code/cache audit is complete, but all
+> six candidates fail total or critical novelty/identifiability floors. Do not
+> download CTA/STL payload, repair the old physical-grid parser, fix a loader and
+> call it a method, register P0/P1, select an architecture, or query a scientific
+> server. A future admitted problem may open only a separate prospective
+> method-free P0. `introai9` PBS is the only future execution path;
+> `junjinyong` and login-node GPU commands remain prohibited.
+
 > **Schema 9.3 execution boundary · 2026-08-11:** No SynVA experiment is
 > authorized. All six candidates fail the source gate, the claimed release has
 > no executable contract and the source paper already performs the obvious

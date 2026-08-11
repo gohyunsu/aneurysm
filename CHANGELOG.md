@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-11 · Latent-shape/open-CTA transport rejected · schema 9.4
+
+- Audited the exact 958-surface latent-shape paper and official MIT repository
+  head `43e8219…`, including public code, weights and aggregate caches without
+  opening medical mesh or image payload.
+- Preserved the paper's own LODO accuracy 0.68/AUC 0.66 and low reconstruction
+  error as direct-prior evidence, not an AURORA result.
+- Found that the released training scripts use a seed-42 file-level 80/20
+  loader, the complete LODO driver/fold manifest and processed labels/OBJ are
+  absent, and the unknown-status condition is always truthy. These are bounded
+  reproducibility findings, not paper invalidation or method novelty.
+- Froze six candidates at 29.5/29.0/28.5/28.0/28.0/23.0. All fail total or
+  critical novelty/identifiability floors; no CTA/STL payload, P0/P1, method,
+  architecture, result or claim is opened.
+- Queried no scientific server and created no PBS/GPU job. Historical no-
+  verdict P0s remain unrepaired; future eligible execution is `introai9` PBS
+  only and every `junjinyong` operation remains prohibited.
+
 ## 2026-08-11 · Schema 9.3 deployed and privately pinned
 
 - Exact scientific source `56b173ef98898fe6d0934f39a253f34ed348288c`

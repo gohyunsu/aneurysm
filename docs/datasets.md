@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.4 latent/open-CTA asset boundary · 2026-08-11:** Exact latent repo
+> `43e8219…` is MIT and releases code, weights and caches, but no processed OBJ,
+> `rupture_labels.csv` or immutable source-fold manifest. Its 3k VAE cache has
+> 885 unique rows, 734 nonblank statuses and 261 ruptured labels versus the
+> paper's 958/338 headline; no case mapping is inferred. Open CTA remains the
+> previously audited 172-case/122-lesion CC-BY asset. No STL or PixelData was
+> opened in this schema, and the old DICOM-header P0 is not repaired. Neither
+> cache row nor lesion is promoted to an independent patient without mapping.
+> [Exact reappraisal](latent-shape-open-cta-transport-reappraisal-2026-08-11.md)
+
 > **Schema 9.3 SynVA asset boundary · 2026-08-11:** The paper reports 50,000
 > independently generated procedural meshes and 769 processed real samples,
 > but publishes no dedicated versioned code/data endpoint, license, checksums,

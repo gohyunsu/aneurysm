@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.4 direct-prior correction · 2026-08-11:** The 958-surface
+> latent-shape paper already performs five-source LODO and reports low
+> reconstruction error with AUC 0.66 under source-held-out rupture-status
+> transfer. Graham et al., Know Your Space, OpenMIBOOD and task-aligned medical
+> OOD studies occupy generative likelihood, calibrated OOD benchmarking and
+> abstention. Topology-aware registration, anatomical shape synthesis and
+> conformal wrapping are also method families. A released loader fix or “VAE +
+> OOD” combination is not residual novelty. [Exact reappraisal](latent-shape-open-cta-transport-reappraisal-2026-08-11.md)
+
 > **Schema 9.3 direct-prior correction · 2026-08-11:** SynVA already performs
 > the obvious procedural synthetic-pretraining study on real aneurysm
 > segmentation. Synthetic intervention auditing, knowledge-based shape-artifact

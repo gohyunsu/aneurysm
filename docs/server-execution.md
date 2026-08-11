@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 9.4 server state · 2026-08-11:** The latent-shape/open-CTA
+> reappraisal used public web/Git metadata and aggregate caches only. No
+> scientific server or scheduler was queried; no transfer, PBS submission,
+> monitoring or GPU command occurred. Active AURORA jobs remain 0. Historical
+> open-CTA and surface-vector executions remain no-verdict and unrepaired.
+> Future gate-authorized work is `introai9` PBS only. Never access, query,
+> transfer to, submit to or monitor `junjinyong`; never run GPU work on a login
+> node.
+
 > **Schema 9.3 server state · 2026-08-11:** The SynVA audit queried no
 > scientific server and created no PBS/GPU job. The batch is source-rejected,
 > so there is nothing to transfer or execute. Future gate-authorized work may

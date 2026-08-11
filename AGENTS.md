@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 latent-shape/open-CTA transport override · schema 9.4:** Exact
+> latent-shape paper DOI `10.1016/j.cmpb.2026.109445`은 five-source 958
+> saccular surface/338 rupture-status label과 LODO accuracy 0.68, AUC 0.66,
+> AE/VAE MSE 0.16/0.14를 이미 보고한다. Low reconstruction error와 weak label
+> transport의 분리는 direct-prior result이며 AURORA finding이 아니다. Official
+> repo exact `43e8219…`은 MIT code/weights/cache를 제공하지만 processed OBJ,
+> `rupture_labels.csv`, complete LODO driver/fold manifest는 없다. Default train
+> scripts는 seed-42 file-level 80/20 loader를 사용하고 두 loader의
+> `status == "unruptured" or "other"` 조건은 unknown을 0으로 보낸다. 이를
+> paper invalidation이나 novelty로 relabel하지 않는다. Exact 3k VAE cache는
+> SHA-256 `4ceafa78…`, 885 unique row/734 nonblank status/261 ruptured이며
+> paper 958/338과 immutable mapping이 없다. Open CTA metadata는 172 case/122
+> lesion/30 miliary/9 ruptured row를 보존하지만 STL/PixelData는 이번 schema에서
+> 열지 않았고 expert morphology를 latent-support truth로 쓰지 않는다. Frozen
+> scores 29.5/29.0/28.5/28.0/28.0/23.0은 모두 total 또는 novelty/
+> identifiability floor를 실패한다. Active lead/primary/P0/P1/method/
+> architecture/scientific-server query/PBS/GPU/outer test/result/C21/claim은 0이다.
+> Open-CTA physical-grid와 surface-vector no-verdict P0를 repair/rerun하지 않는다.
+> Future gate-authorized work는 `introai9` PBS만 사용하고 login-node GPU를
+> 금지한다. `junjinyong`에는 절대 접속·조회·전송·제출·모니터링하지 않는다.
+
 > **2026-08-11 schema 9.3 deployment·private synchronization:** Exact public
 > scientific source `56b173ef98898fe6d0934f39a253f34ed348288c` passed
 > Quality `31490372870` and Pages `31490372720`. Private paper ledger

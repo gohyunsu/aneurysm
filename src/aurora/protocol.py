@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.3":
-        raise ProtocolError("The current research-state schema must be version 9.3.")
+    if protocol["schema_version"] != "9.4":
+        raise ProtocolError("The current research-state schema must be version 9.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_synva_synthetic_utility_batch_best_27_5_rejected_release_contract_absent_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_latent_shape_open_cta_batch_best_29_5_rejected_by_novelty_and_identifiability_floors_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_3_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_4_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -186,6 +186,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "latent_shape_open_cta_transport_reappraisal",
             "synva_release_and_synthetic_utility_source_audit",
             "reference_provenance_and_rsna_release_contract_reappraisal",
             "topaneu_annotation_version_orbit_reappraisal",
@@ -258,13 +259,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_synva_synthetic_utility_batch_best_27_5_rejected_by_total_residual_novelty_and_asset_floors"
+        != "no_active_problem_latest_latent_shape_open_cta_batch_best_29_5_rejected_by_total_residual_novelty_and_identifiability_floors"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_synva_v1_paper_and_repository_search_metadata_only_no_synva_code_dataset_or_medical_payload_closed_p0s_unchanged"
+        != "public_latent_shape_paper_exact_git_code_weights_and_aggregate_cache_plus_previously_audited_open_cta_metadata_only_no_medical_mesh_or_image_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -274,18 +275,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "wait_for_versioned_synva_release_contract_or_other_material_source_change_or_continue_fresh_problem_level_source_audit_no_payload_p0_or_model"
+        != "continue_fresh_problem_level_source_audit_or_wait_for_patient_mapped_latent_release_and_distinct_failure_target_no_payload_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/synva-release-and-synthetic-utility-source-audit-2026-08-11.md"
+        != "docs/latent-shape-open-cta-transport-reappraisal-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "ostium_segmentation_with_synva_pretraining_rejected_as_direct_prior_and_missing_release_contract"
+        != "released_code_paper_contract_reproducibility_audit_rejected_as_non_novel"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The SynVA synthetic-utility batch must remain rejected by the "
-            "total, residual-novelty, and asset floors while "
+            "The latent-shape/open-CTA transport batch must remain rejected by "
+            "the total, residual-novelty, and identifiability floors while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
@@ -348,8 +349,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 27.5
-        or admission_v2["current_batch_best_residual_novelty"] != 1.5
+        or admission_v2["current_batch_best_score"] != 29.5
+        or admission_v2["current_batch_best_residual_novelty"] != 2.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -358,6 +359,225 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    latent_transport = problem_selection[
+        "latent_shape_open_cta_transport_reappraisal"
+    ]
+    _require_keys(
+        latent_transport,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_doi",
+            "paper_patient_derived_surfaces",
+            "paper_ruptured_status_surfaces",
+            "paper_source_dataset_count",
+            "paper_lodo_accuracy",
+            "paper_lodo_auc",
+            "paper_lodo_ae_mse",
+            "paper_lodo_vae_mse",
+            "paper_results_reproduced_by_aurora",
+            "repository",
+            "repository_head",
+            "repository_license",
+            "processed_obj_dataset_tracked",
+            "rupture_labels_csv_tracked",
+            "released_model_weights_present",
+            "released_aggregate_latent_caches_present",
+            "loo_loader_present",
+            "released_training_scripts_use_default_seed42_file_level_80_20_split",
+            "released_complete_lodo_driver_and_fold_manifest_present",
+            "unknown_status_label_condition_is_always_truthy",
+            "paper_results_invalidated_by_static_code_audit",
+            "vae_3k_cache_sha256",
+            "vae_3k_cache_rows",
+            "vae_3k_cache_unique_ids",
+            "vae_3k_cache_nonblank_hospital",
+            "vae_3k_cache_nonblank_status",
+            "vae_3k_cache_ruptured_status",
+            "cache_to_paper_patient_mapping_present",
+            "open_cta_record_id",
+            "open_cta_record_revision",
+            "open_cta_license",
+            "open_cta_archive_bytes",
+            "open_cta_archive_md5",
+            "open_cta_cases",
+            "open_cta_positive_cases",
+            "open_cta_lesions",
+            "open_cta_miliary_lesions",
+            "open_cta_ruptured_lesion_rows",
+            "open_cta_stl_payload_accessed_this_schema",
+            "open_cta_dicom_pixel_accessed_this_schema",
+            "open_cta_stl_ostium_topology_compatibility_identified",
+            "expert_morphology_category_treated_as_latent_support_ground_truth",
+            "direct_prior_threats",
+            "candidates",
+            "surface_vector_retained_only_as_inactive_falsifiable_question",
+            "open_cta_physical_grid_or_surface_vector_job_repaired_or_rerun",
+            "historical_scores_or_job_outcomes_relabelled",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "latent-shape/open-CTA transport reappraisal",
+    )
+    expected_latent_transport_candidates = [
+        (
+            "released_code_paper_contract_reproducibility_audit",
+            29.5,
+            [3.5, 4.0, 0.5, 4.0, 4.0, 5.0, 4.5, 4.0],
+        ),
+        (
+            "source_disjoint_latent_transport_reliability",
+            29.0,
+            [4.0, 4.0, 0.5, 3.5, 4.0, 5.0, 4.5, 3.5],
+        ),
+        (
+            "miliary_shape_support_abstention",
+            28.5,
+            [4.5, 3.0, 1.5, 3.0, 3.5, 5.0, 5.0, 3.0],
+        ),
+        (
+            "support_certified_saccular_model_transport_to_open_cta",
+            28.0,
+            [4.0, 3.0, 1.5, 3.0, 3.5, 5.0, 5.0, 3.0],
+        ),
+        (
+            "nonsaccular_topology_aware_registration_extension",
+            28.0,
+            [4.0, 2.5, 2.0, 3.0, 3.5, 5.0, 5.0, 3.0],
+        ),
+        (
+            "open_cta_rupture_selective_prediction",
+            23.0,
+            [4.5, 1.5, 1.0, 3.0, 1.0, 5.0, 4.5, 2.5],
+        ),
+    ]
+    observed_latent_transport_candidates = [
+        (candidate["id"], candidate["total"], candidate["axis_scores"])
+        for candidate in latent_transport["candidates"]
+    ]
+    latent_transport_sums_match = all(
+        abs(sum(candidate["axis_scores"]) - candidate["total"]) < 1e-9
+        for candidate in latent_transport["candidates"]
+    )
+    latent_transport_false_boundaries = [
+        "paper_results_reproduced_by_aurora",
+        "processed_obj_dataset_tracked",
+        "rupture_labels_csv_tracked",
+        "released_complete_lodo_driver_and_fold_manifest_present",
+        "paper_results_invalidated_by_static_code_audit",
+        "cache_to_paper_patient_mapping_present",
+        "open_cta_stl_payload_accessed_this_schema",
+        "open_cta_dicom_pixel_accessed_this_schema",
+        "open_cta_stl_ostium_topology_compatibility_identified",
+        "expert_morphology_category_treated_as_latent_support_ground_truth",
+        "open_cta_physical_grid_or_surface_vector_job_repaired_or_rerun",
+        "historical_scores_or_job_outcomes_relabelled",
+        "p0_registered",
+        "p1_registered",
+        "method_selected",
+        "architecture_selected",
+        "scientific_server_queried",
+        "gpu_training_authorized",
+        "outer_test_authorized",
+        "submission_identity_active",
+        "login_node_gpu_command_executed",
+        "junjinyong_accessed",
+    ]
+    if (
+        latent_transport["status"]
+        != "fresh_batch_rejected_best_29_5_fails_total_residual_novelty_and_identifiability_floors"
+        or latent_transport["audit_document"]
+        != "docs/latent-shape-open-cta-transport-reappraisal-2026-08-11.md"
+        or latent_transport["automatic_selection_threshold"] != 32.0
+        or latent_transport["best_candidate_id"]
+        != "released_code_paper_contract_reproducibility_audit"
+        or latent_transport["best_score"] != 29.5
+        or latent_transport["best_residual_novelty_score"] != 2.0
+        or latent_transport["all_candidate_scores"]
+        != [29.5, 29.0, 28.5, 28.0, 28.0, 23.0]
+        or latent_transport["conditional_source_lead_count"] != 0
+        or latent_transport["primary_problem_selected"] is not False
+        or latent_transport["paper_doi"] != "10.1016/j.cmpb.2026.109445"
+        or latent_transport["paper_patient_derived_surfaces"] != 958
+        or latent_transport["paper_ruptured_status_surfaces"] != 338
+        or latent_transport["paper_source_dataset_count"] != 5
+        or latent_transport["paper_lodo_accuracy"] != 0.68
+        or latent_transport["paper_lodo_auc"] != 0.66
+        or latent_transport["paper_lodo_ae_mse"] != 0.16
+        or latent_transport["paper_lodo_vae_mse"] != 0.14
+        or latent_transport["repository"]
+        != "PepeEulzer/aneurysm-latent-space"
+        or latent_transport["repository_head"]
+        != "43e8219e947cfa318ab83a01df01c6602e7d5756"
+        or latent_transport["repository_license"] != "MIT"
+        or latent_transport["released_model_weights_present"] is not True
+        or latent_transport["released_aggregate_latent_caches_present"] is not True
+        or latent_transport["loo_loader_present"] is not True
+        or latent_transport[
+            "released_training_scripts_use_default_seed42_file_level_80_20_split"
+        ]
+        is not True
+        or latent_transport["unknown_status_label_condition_is_always_truthy"]
+        is not True
+        or latent_transport["vae_3k_cache_sha256"]
+        != "4ceafa78bee07a50f94b844840ba7c94b64ca3414258ec06ca431f82fded3173"
+        or latent_transport["vae_3k_cache_rows"] != 885
+        or latent_transport["vae_3k_cache_unique_ids"] != 885
+        or latent_transport["vae_3k_cache_nonblank_hospital"] != 749
+        or latent_transport["vae_3k_cache_nonblank_status"] != 734
+        or latent_transport["vae_3k_cache_ruptured_status"] != 261
+        or latent_transport["open_cta_record_id"] != 15697196
+        or latent_transport["open_cta_record_revision"] != 4
+        or latent_transport["open_cta_license"] != "cc-by-4.0"
+        or latent_transport["open_cta_archive_bytes"] != 25578845008
+        or latent_transport["open_cta_archive_md5"]
+        != "264ff9ee868c022d108b7c7aa7396d32"
+        or latent_transport["open_cta_cases"] != 172
+        or latent_transport["open_cta_positive_cases"] != 82
+        or latent_transport["open_cta_lesions"] != 122
+        or latent_transport["open_cta_miliary_lesions"] != 30
+        or latent_transport["open_cta_ruptured_lesion_rows"] != 9
+        or observed_latent_transport_candidates
+        != expected_latent_transport_candidates
+        or not latent_transport_sums_match
+        or any(
+            candidate["critical_axis_pass"]
+            for candidate in latent_transport["candidates"]
+        )
+        or any(latent_transport[key] for key in latent_transport_false_boundaries)
+        or latent_transport[
+            "surface_vector_retained_only_as_inactive_falsifiable_question"
+        ]
+        is not True
+        or latent_transport["execution_server"] != "introai9"
+        or latent_transport["next_allowed_action"]
+        != "continue_fresh_problem_level_source_audit_or_wait_for_patient_mapped_latent_release_and_distinct_failure_target"
+    ):
+        raise ProtocolError(
+            "The latent-shape/open-CTA reappraisal must preserve the source "
+            "paper's own LODO failure, the exact code/cache mismatch boundary, "
+            "all six critical-floor rejections, closed historical P0s and zero "
+            "payload or compute authority."
+        )
+    checks.append("latent-shape/open-CTA transport rejection boundary")
 
     synva_audit = problem_selection["synva_release_and_synthetic_utility_source_audit"]
     _require_keys(
@@ -4727,6 +4947,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("fifteen-source fail-closed RSNA release-contract watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "released_code_paper_contract_reproducibility_audit_non_novel",
+        "source_disjoint_latent_transport_reliability_directly_reported_by_source_paper",
+        "miliary_shape_support_abstention_support_target_not_identified",
+        "support_certified_saccular_model_transport_calibration_direct_prior",
+        "nonsaccular_topology_aware_registration_target_not_identified",
+        "open_cta_rupture_selective_prediction_nine_positive_units",
         "ostium_segmentation_with_synva_pretraining_direct_prior_and_missing_release_contract",
         "procedural_intervention_effect_audit_direct_prior_and_missing_action_asset",
         "source_disjoint_synthetic_pretraining_utility_evaluation_only_and_missing_manifest",

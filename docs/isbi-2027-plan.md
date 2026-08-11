@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.4 submission boundary · 2026-08-11:** A latent-shape transport,
+> OOD or reproducibility paper is not admitted. The source paper already owns
+> the main LODO failure, and the strongest fresh row is 29.5/40 with novelty
+> 0.5/5. Loader repair, a fixed VAE, OOD score, conformal wrapper or topology-
+> aware remesher does not define an ISBI contribution. Title, abstract,
+> contribution list, result table, figure and C21 remain frozen. Re-entry needs
+> a distinct downstream failure target, patient/source-sealed units, compatible
+> external surfaces and a non-compositional mechanism that survives a
+> prospective falsifier.
+
 > **Schema 9.3 submission decision · 2026-08-11:** AURORA remains not
 > submission-ready. SynVA is a direct prior for procedural synthetic-to-real
 > aneurysm segmentation, not an available new task: its claimed release lacks

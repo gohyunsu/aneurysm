@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.4 model boundary · 2026-08-11:** No model is selected. The released
+> PointNet AE/VAE is a fixed direct baseline; reconstruction residual, latent
+> density, ensembles, conformal calibration, topology-aware registration and an
+> OOD head cannot rescue a problem that fails novelty or target
+> identifiability. The public loader defect is reproducibility debt, not an
+> architecture contribution. Do not train or alter the model before a fresh
+> problem passes the non-compensatory gate and a method-free asset/target audit.
+
 > **Schema 9.3 model boundary · 2026-08-11:** There is still no selected
 > architecture. Point Transformer, GNN, diffusion, curriculum weighting or an
 > uncertainty head cannot rescue SynVA candidates whose best residual novelty

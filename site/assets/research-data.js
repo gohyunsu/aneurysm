@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest SynVA release/synthetic-utility batch best 27.5/40 rejected by novelty and asset floors · claimed 50,000-mesh release has no versioned executable contract · active source lead/primary/method/architecture/GPU/outer test/claim 0 · surface-vector remains inactive and closed WSS P0s remain no verdict · not submission-ready",
+    status: "Target locked · latest latent-shape/open-CTA transport batch best 29.5/40 rejected by novelty and identifiability floors · source paper already reports low-error/weak-label LODO transport · active source lead/primary/method/architecture/GPU/outer test/claim 0 · surface-vector remains inactive and closed P0s remain no verdict · not submission-ready",
     requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A released latent model is a baseline, not an automatic transport paper",
+      copy: "The 958-surface saccular latent-shape paper already reports the central failure: five-source LODO reaches accuracy 0.68 and AUC 0.66 while AE/VAE reconstruction MSE stays 0.16/0.14. Exact MIT repo head 43e8219… releases code, weights and 885-row aggregate caches but not processed OBJ, rupture_labels.csv or a complete LODO driver/fold manifest. Default scripts use a seed-42 file-level 80/20 split and both loaders contain an always-truthy unknown-status branch; these are reproducibility issues, not independent novelty or proof that paper results are invalid. Open-CTA expert morphology is not latent-support truth and STL compatibility with the saccular remesher is unaudited. Medical OOD, likelihood, abstention, conformal calibration and anatomical registration are direct priors. Six candidates score 29.5/29.0/28.5/28.0/28.0/23.0 and all fail total or critical floors.",
+      status: "Best 29.5/40 rejected · batch-max novelty 2.0/5 · CTA/STL payload/P0/model/server/GPU 0",
+      url: "../docs/latent-shape-open-cta-transport-reappraisal-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "A claimed synthetic release is not an executable asset or a residual research gap",
@@ -921,9 +928,14 @@ window.AURORA_DATA = Object.freeze({
       provenance: "63 patients/85 aneurysms · selected-session expert masks/STL · 24 longitudinal subjects but not longitudinal dense supervision"
     },
     {
+      name: "Saccular aneurysm latent-shape release · exact Git 43e8219…",
+      role: "fixed source-rejected baseline and visualization tool; no active model role",
+      provenance: "paper 958 surfaces/338 rupture-status labels · repo code/weights/885-row caches · processed OBJ/rupture label/fold manifest absent · LODO AUC 0.66 already reported · MIT"
+    },
+    {
       name: "Open multi-center CTA 2026",
-      role: "closed physical-grid P0 history; no active primary role",
-      provenance: "172 CTA series · P0 execution-incomplete after partial header prefixes · no PixelData/STL · scientific gate unevaluated · no repair/rerun/model/GPU · CC BY 4.0"
+      role: "closed physical-grid P0 history; source-only morphology transport asset, no active primary role",
+      provenance: "172 CTA series/122 lesions/30 miliary/9 ruptured rows · expert morphology is not latent-support truth · P0 execution-incomplete after partial header prefixes · no PixelData/STL · no repair/rerun/model/GPU · CC BY 4.0"
     },
     {
       name: "AneuX v1.0",
@@ -947,6 +959,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 9.4 rejects latent-shape/open-CTA transport and OOD wrappers",
+      copy: "Exact paper DOI 10.1016/j.cmpb.2026.109445 already reports five-source LODO accuracy 0.68/AUC 0.66 with low AE/VAE reconstruction MSE 0.16/0.14. Official MIT repo head 43e8219… provides code, weights and aggregate caches, but processed OBJ, rupture_labels.csv and a complete executable LODO manifest are absent. Static inspection found default seed-42 file-level 80/20 scripts and an always-truthy unknown-status branch; these are bounded reproducibility findings, not paper invalidation or novelty. Open-CTA expert morphology is not latent-support ground truth, and no STL/PixelData was opened. Medical OOD, likelihood, abstention, conformal calibration and anatomical registration are direct priors. Six candidates freeze at 29.5/29.0/28.5/28.0/28.0/23.0 and all fail total or critical novelty/identifiability floors. Historical no-verdict jobs remain unrepaired; no P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result or claim is opened.",
+      files: ["docs/latent-shape-open-cta-transport-reappraisal-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

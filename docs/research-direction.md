@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 9.4 direction · 2026-08-11:** Do not pivot to “fixed aneurysm VAE +
+> OOD/conformal.” The source paper already reports source-held-out
+> reconstruction/classification separation, and medical OOD/calibrated
+> abstention is direct prior. The released loader/split defects are useful
+> reproducibility findings but not method novelty. Open-CTA expert morphology
+> categories do not identify latent support, and its sac STL compatibility with
+> the saccular remesher is unaudited. Six candidates peak at 29.5/40; novelty
+> peaks at 2.0/5. Keep active problem, method, architecture and compute at zero.
+> [Exact reappraisal](latent-shape-open-cta-transport-reappraisal-2026-08-11.md)
+
 > **Schema 9.3 direction · 2026-08-11:** Do not pivot from the inactive
 > surface-vector question to generic synthetic pretraining. SynVA itself
 > already reports procedural-to-real aneurysm segmentation utility, while no

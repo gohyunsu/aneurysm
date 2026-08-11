@@ -1,5 +1,15 @@
 # 연구 지형과 현재 작업
 
+> **Schema 9.4 decision · 2026-08-11:** The new exact latent-shape release is a
+> strong baseline but not an active paper. Its paper already reports LODO AUC
+> 0.66 with low reconstruction error; generic OOD, likelihood, abstention and
+> conformal wrappers are direct prior. Static code inspection found a default
+> file-level split, missing executable data/fold manifest and an always-truthy
+> label condition, but reproduction repair is not novelty. Open-CTA metadata
+> does not identify latent support. Six candidates peak at 29.5/40 and all are
+> rejected. Active problem/method/architecture/compute remain zero.
+> [Exact reappraisal](latent-shape-open-cta-transport-reappraisal-2026-08-11.md)
+
 > **Schema 9.2 decision · 2026-08-11:** The newest reference-provenance/RSNA
 > batch is rejected at 31.0/40. Biased-ruler, weak-reference partial
 > identification, noisy-label benchmarking and active cleaning are direct
