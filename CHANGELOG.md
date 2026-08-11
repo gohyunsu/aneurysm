@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-11 · Adjudication deployment and private ledger verified
+
+- Exact public content `9d3280c8e5946134eddf2d1791e2a9fb18d8151d`
+  passed Quality `31451731627` and Pages `31451730835`.
+- Private paper head `382d1d77f3a66ec36df0d8c2170e6c53bd0b78cb` is
+  PRIVATE and pins the public decision without changing manuscript sources.
+- Live Overview and Learn expose the accepted/corrected/rejected split and the
+  all-checks-unevaluated wording. No experiment or authorization was added.
+
 ## 2026-08-11 · Surface-vector analysis critically adjudicated
 
 - Retained the falsifiable application question and staged evidence ladder,

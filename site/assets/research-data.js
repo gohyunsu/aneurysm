@@ -827,6 +827,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Surface-vector adjudication deployment and private ledger verified",
+      copy: "Exact public content 9d3280c… passed Quality 31451731627 and Pages 31451730835. Private paper head 382d1d7… remains PRIVATE and pins the same decision without changing manuscript sources. Live Overview and Learn expose the accepted/corrected/rejected split and clarify that all ten scientific checks were unevaluated rather than failed. This adds no experiment or authorization.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "research",
       title: "Surface-vector question retained; architecture-first proposal rejected",
       copy: "The external analysis was split into accepted, corrected and rejected claims. The field-error-versus-structure question and staged gates remain useful, but the failure is unobserved. Signed total degree with abstention precedes unstable exact point/worldline endpoints. Edge 1-forms, Hodge/DEC, equivariance, periodic decoding and structural losses remain controls/components rather than novelty. Jobs 115645 and 115684 stay closed no-verdict histories with all ten scientific checks unevaluated; no model or compute is opened.",

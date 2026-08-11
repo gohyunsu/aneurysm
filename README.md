@@ -1,5 +1,12 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 adjudication deployment verification:** Exact public content
+> `9d3280c8e5946134eddf2d1791e2a9fb18d8151d` passed Quality
+> `31451731627` and Pages `31451730835`. Private paper ledger head
+> `382d1d77f3a66ec36df0d8c2170e6c53bd0b78cb` remains PRIVATE and leaves the
+> manuscript/references unchanged. This verifies publication and provenance;
+> it creates no scientific result or compute authority.
+
 > **2026-08-11 surface-vector analysis adjudication:** The proposed application
 > question is retained, but the proposed architecture is not selected. A small
 > field error need not imply faithful critical-flow organization; this remains

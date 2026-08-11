@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 adjudication deployment verification:** Exact adjudication
+> content `9d3280c8e5946134eddf2d1791e2a9fb18d8151d` passed Quality
+> `31451731627` and Pages `31451730835`. Private paper ledger head
+> `382d1d77f3a66ec36df0d8c2170e6c53bd0b78cb` is PRIVATE and pins that public
+> source; manuscript and references remain unchanged. Live Overview and Learn
+> expose the accepted/corrected/rejected split and state that all ten checks
+> were unevaluated rather than scientific failures. This is provenance only and
+> opens no lead, P0/P1, model, server query, PBS/GPU, outer test or claim.
+
 > **2026-08-11 surface-vector external-analysis adjudication:** 전달된 분석의
 > application question과 evidence ladder는 채택하되 architecture 제안은 채택하지
 > 않는다. Field-error와 critical organization의 불일치 가능성은 inactive
