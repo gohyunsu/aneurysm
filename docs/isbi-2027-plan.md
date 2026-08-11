@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.9 submission boundary · 2026-08-11:** Do not title the paper
+> around MRIS-Bench, a medical VLM, semantic contradiction detection or
+> selective referring segmentation. The released contract has no mask target
+> or patient-level split and the best formulation is 24.0/40. A post-review
+> release may trigger a fresh source audit only. Surface-vector also remains
+> inactive. There is still no title, contribution, method figure, result table,
+> P0/P1, model or GPU run; the manuscript remains not submission-ready.
+
 > **Schema 8.8 submission boundary · 2026-08-11:** Do not title the paper
 > around surface-vector component stacking or fixed-model external TOF-MRA
 > transport. The latter is executable but scores only 0.5/5 residual novelty;

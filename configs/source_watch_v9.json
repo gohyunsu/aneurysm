@@ -1,0 +1,95 @@
+{
+  "schema_version": "aurora.source_watch.v9",
+  "extends": "source_watch_v8.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-11",
+  "added_watches": [
+    {
+      "watch_id": "mris_bench_postreview_target_contract_v1",
+      "kind": "huggingface_under_review_dataset",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "dataset_id": "lixiangcog/MRIS-Bench",
+        "legacy_alias_id": "lixiang007666/MRIS-Bench",
+        "dataset_url": "https://huggingface.co/datasets/lixiangcog/MRIS-Bench",
+        "dataset_api_url": "https://huggingface.co/api/datasets/lixiangcog/MRIS-Bench"
+      },
+      "frozen_snapshot": {
+        "sha": "6f2d6d9ad10eba68700ce95c7523ec78934f7a3d",
+        "created_at": "2026-05-05T03:13:24.000Z",
+        "last_modified": "2026-05-15T03:22:31.000Z",
+        "private": false,
+        "gated": false,
+        "disabled": false,
+        "license_tags": [
+          "license:mit"
+        ],
+        "used_storage_bytes": 7449574455,
+        "description_sha256": "626e6f483bc768f40a23d43ed2c3540e475525634bae9c9f3b14500267eb7f03",
+        "sibling_count": 12,
+        "siblings_sha256": "f90a9ad569f6d7b552a811fe435f3c54cdebe742013bb4c4e02b93aa9d3fc71a",
+        "arrow_shard_count": 8,
+        "under_review_release_statement_present": true,
+        "availability": "public_arrow_payload_under_review_without_detailed_metadata_split_or_source_lineage"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v8 IAVS, TopBrain, TRELLIS, Aneumo, AneuG, Aneurisk, LargeIA, TopAneu, AneuX transient, PointFlowNet or AAA-WSS signal changes",
+      "MRIS-Bench revision, dataset card, access state, license tag, storage, under-review statement or file inventory changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "row_count_is_not_independent_patient_count": true,
+    "card_license_is_not_upstream_medical_data_lineage": true,
+    "postreview_metadata_change_is_not_e0_pass": true,
+    "visible_viewer_examples_are_not_registered_quality_prevalence": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": [
+      "fresh_source_reaudit_only",
+      "direct_prior_baseline_feasibility_reaudit_only"
+    ]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

@@ -27,6 +27,7 @@ CONFIG_V5 = ROOT / "configs" / "source_watch_v5.json"
 CONFIG_V6 = ROOT / "configs" / "source_watch_v6.json"
 CONFIG_V7 = ROOT / "configs" / "source_watch_v7.json"
 CONFIG_V8 = ROOT / "configs" / "source_watch_v8.json"
+CONFIG_V9 = ROOT / "configs" / "source_watch_v9.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -547,7 +548,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v8.json", workflow)
+        self.assertIn("configs/source_watch_v9.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
@@ -736,6 +737,98 @@ class SourceWatchContractTests(unittest.TestCase):
             candidate = source / "source_watch.json"
             candidate.write_text(json.dumps(payload), encoding="utf-8")
             for config_path in (CONFIG_V7, CONFIG_V6, CONFIG_V5, CONFIG_V4):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v9_adds_mris_postreview_watch_without_authority(self) -> None:
+        config = load_config(CONFIG_V9)
+        self.assertEqual(config["extends"], "source_watch_v8.json")
+        self.assertEqual(len(config["watches"]), 13)
+        mris = config["watches"][-1]
+        self.assertEqual(
+            mris["watch_id"], "mris_bench_postreview_target_contract_v1"
+        )
+        self.assertEqual(mris["review_request"], "fresh_source_reaudit_only")
+        frozen = mris["frozen_snapshot"]
+        self.assertEqual(
+            frozen["sha"], "6f2d6d9ad10eba68700ce95c7523ec78934f7a3d"
+        )
+        self.assertEqual(frozen["sibling_count"], 12)
+        self.assertEqual(frozen["arrow_shard_count"], 8)
+        self.assertTrue(frozen["under_review_release_statement_present"])
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v9_postreview_change_requests_source_reaudit_only(self) -> None:
+        config = load_config(CONFIG_V9)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observed = observations["mris_bench_postreview_target_contract_v1"]
+        observed["sha"] = "d" * 40
+        observed["description_sha256"] = "e" * 64
+        observed["under_review_release_statement_present"] = False
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertEqual(
+            result["manual_review_requests"], ["fresh_source_reaudit_only"]
+        )
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v9_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V9.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["arrow_shard_count"] = 9
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "mris_bench"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V9.read_text(encoding="utf-8"))
+        payload["authorization"]["automatic_download"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
                 (source / config_path.name).write_text(
                     config_path.read_text(encoding="utf-8"), encoding="utf-8"
                 )

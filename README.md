@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 MRIS-Bench target-contract audit · schema 8.9:** A large public
+> MRIS repository is not an automatic paper pivot. Exact revision `6f2d6d9…`
+> reports 30,110 rows and exposes eight Arrow shards, but its under-review card
+> omits source lineage, patient grouping, split and annotation semantics; the
+> machine schema has box/point strings and no mask field. Six prospectively
+> frozen formulations score **24.0/23.5/23.0/22.5/22.0/21.0** and all fail
+> multiple critical floors. Visible viewer inconsistencies are a fail-closed
+> warning, not a measured corruption rate. Surface-vector remains inactive;
+> no payload, P0/P1, model, server query, PBS/GPU, outer test or claim is open.
+> [Exact audit](docs/mris-bench-target-contract-audit-2026-08-11.md) ·
+> [Thirteen-source watch](configs/source_watch_v9.json)
+
 > **2026-08-11 schema 8.8 deployment verification:** Exact scientific contract
 > `765916bbfec7304c4813fb485116a7f2b634dbca` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31476095988) and

@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **Schema 8.9 MRIS lineage correction · 2026-08-11:** VividMed already owns
+> grounded boxes/masks over 2D/3D medical data; NTP-MRISeg directly predicts
+> referring masks; Semi-MedRef targets image-text alignment under augmentation;
+> MedRIS covers multi-lesion reference uncertainty; OmniCT targets slice/volume
+> consistency. The current MRIS-Bench release does not expose the target and
+> independent-unit contract needed to separate a residual scientific gap from
+> label-generation error. VLM/SAM/cross-attention/uncertainty/abstention
+> stacking is therefore baseline space, not contribution. All six formulations
+> are rejected, best 24.0/40.
+> [Exact audit](mris-bench-target-contract-audit-2026-08-11.md)
+
 > **Schema 8.8 open-model lineage correction · 2026-08-11:** The public
 > multicentre TOF-MRA nnU-Net already supports detection, segmentation and
 > morphometry transport; RSNA leaders occupy multi-view/multi-task multimodal

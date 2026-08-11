@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-11 · MRIS-Bench target contract rejected; thirteen-source watch · schema 8.9
+
+- Audited exact public MRIS-Bench revision `6f2d6d9…`: 30,110 reported rows,
+  eight Arrow shards and no public mask field, patient grouping, split, source
+  lineage or annotation protocol. No Arrow/image payload was opened.
+- Froze six formulations at 24.0/23.5/23.0/22.5/22.0/21.0. Every candidate
+  fails multiple non-compensatory floors; visible viewer contradictions remain
+  warnings, not a measured dataset-wide error rate.
+- Added source-watch v9. A live read-only refresh matched all thirteen exact
+  snapshots; an MRIS card/revision/inventory change can request only a fresh
+  source audit, never download, score repair, P0, method or compute.
+- Kept surface-vector as an inactive falsifiable question and jobs `115645` and
+  `115684` as closed execution-incomplete/no-verdict history. No scientific
+  server was queried and no model, PBS/GPU job, outer test or paper claim was
+  created.
+
 ## 2026-08-11 · Schema 8.8 deployed and privately pinned
 
 - Exact scientific contract `765916bbfec7304c4813fb485116a7f2b634dbca`

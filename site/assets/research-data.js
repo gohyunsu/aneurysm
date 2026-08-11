@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest open-model transport candidate 32.0/40 but residual novelty 0.5/5 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    status: "Target locked · latest MRIS-Bench candidate 24.0/40 rejected by identifiability, novelty, asset and independent-unit floors · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
     requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A large public MRIS row count does not identify a segmentation study",
+      copy: "MRIS-Bench exact revision 6f2d6d9… reports 30,110 rows and exposes eight Arrow shards, but its under-review card withholds source lineage, patient grouping, split and annotation semantics. The machine schema contains image, free-text problem and string solution with box/point values, not a mask field. Visible contradictions justify a fail-closed audit but are not a measured corruption rate. VividMed, NTP-MRISeg, Semi-MedRef, MedRIS and OmniCT occupy the obvious grounding, alignment and consistency mechanisms. Six formulations score 24.0/23.5/23.0/22.5/22.0/21.0 and fail multiple critical floors.",
+      status: "Best 24.0/40 rejected · Arrow/image payload/P0/method/architecture/server/GPU 0",
+      url: "../docs/mris-bench-target-contract-audit-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "An executable public model still fails when the residual gap is almost empty",
@@ -676,6 +683,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "MRIS-Bench · exact HF 6f2d6d9…",
+      role: "source-rejected under-review target contract; watch-only, not training",
+      provenance: "30,110 public rows ≠ patient units · 8 Arrow shards · no public mask field, patient grouping, split, source lineage or annotation protocol · visible viewer examples are not registered quality prevalence · Arrow/image payload/P0/model/GPU 0"
+    },
+    {
       name: "PointFlowNet · exact public head 5cb4f254…",
       role: "direct-prior baseline watch; partial public implementation, not admitted training data or executable matched control",
       provenance: "984 idealized MCA geometries reported · peak-systolic velocity/WSS · repository release 0/license null/README 35 bytes · checkpoint 14,120,802 bytes · norm stats 538 bytes · no tracked train/val/test manifest or CFD payload · code not executed"
@@ -897,6 +909,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 8.9 rejects the MRIS-Bench pivot and adds a fail-closed target-contract watch",
+      copy: "Exact public MRIS-Bench metadata exposes 30,110 rows and eight Arrow shards, but the under-review release has no mask target, patient grouping, split, source lineage or annotation protocol. Visible viewer inconsistencies are recorded only as a warning, never a dataset-wide error estimate. Direct MRIS and medical-VLM priors occupy the obvious model mechanisms. Six candidates freeze at 24.0/23.5/23.0/22.5/22.0/21.0 and all fail critical floors. Source watch v9 matches all thirteen snapshots and can request only a fresh audit. Surface-vector remains inactive; no payload, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",
+      files: ["docs/mris-bench-target-contract-audit-2026-08-11.md", "configs/source_watch_v9.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/literature-lineage.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

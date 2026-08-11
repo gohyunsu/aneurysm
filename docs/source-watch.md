@@ -1,4 +1,14 @@
-# Public source watch · twelve material/direct-prior source states
+# Public source watch · thirteen material/direct-prior source states
+
+> **2026-08-11 v9 decision:** v8 is extended with exact public MRIS-Bench
+> revision `6f2d6d9…`. The repository exposes eight Arrow shards and reports
+> 30,110 rows, but the under-review card withholds detailed metadata, source
+> lineage, patient grouping, split and annotation semantics; its machine schema
+> has box/point strings and no mask field. A card, citation, split, access or
+> inventory change requests a fresh target-contract audit only. It cannot treat
+> rows as patients, turn visible viewer examples into an error prevalence,
+> download payload, repair a score, select a VLM or authorize compute. A live
+> read-only refresh matched all thirteen frozen snapshots.
 
 > **2026-08-11 v8 decision:** v7 is extended with the stated-code repository
 > for the 100-patient AAA transient-WSS direct prior. Exact head `2f78bf18…`
@@ -75,7 +85,7 @@
 > inverse-flow audit was triggered by a new published direct prior, not by a
 > watched asset change. No server was queried.
 
-상태: **watch-only · 열두 개 official public states 모두 frozen snapshot과 동일 ·
+상태: **watch-only · 열세 개 official public states 모두 frozen snapshot과 동일 ·
 manual review 0 · no medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가
@@ -153,6 +163,13 @@ Revision, license, gating, dataset card 또는 manifest가 바뀌면 fresh sourc
 re-audit만 요청한다. Historical AneuG job `115645`나 Aneurisk job `115684`는
 repair/rerun하지 않는다.
 
+v9의 **MRIS-Bench** watch는 fashionable VLM pivot을 자동 활성화하지 않기 위한
+target-contract watch다. 공개 row 수는 patient/session/lesion 수가 아니며, card의
+MIT tag도 upstream medical-image lineage를 증명하지 않는다. Detailed metadata가
+공개되면 observable target, mask semantics, patient-level split과 source license를
+처음부터 다시 감사한다. 현재 visible viewer의 모순은 경고 신호일 뿐 등록된
+quality prevalence나 논문 결과가 아니다.
+
 v8의 **AAA-WSS neural-surrogate** watch는 task source가 아니라
 direct-prior reproducibility를 감시한다. 논문은 code가 public이라고
 쓰지만 현재 exact repository는 README 하나뿐이다. 후속 code·license·
@@ -162,8 +179,8 @@ checkpoint가 나와도 strong baseline 재현성을 다시 검토할 신호일
 
 ## 기계적 감시 계약
 
-[`configs/source_watch_v8.json`](../configs/source_watch_v8.json)은 historical
-[`source_watch_v7.json`](../configs/source_watch_v7.json)을 명시적으로 상속하고,
+[`configs/source_watch_v9.json`](../configs/source_watch_v9.json)은 historical
+[`source_watch_v8.json`](../configs/source_watch_v8.json)을 명시적으로 상속하고,
 IAVS의 현재
 commit, root entry, release count와 license, TopBrain 2.0의 Zenodo revision,
 design-object license, exact file inventory와 challenge navigation, TRELLIS의
@@ -171,8 +188,9 @@ stated repository HTTP 404 상태, Aneumo GitHub/Hugging Face의 exact revision,
 license/access state와 filename-manifest hash에 더해 AneuG HF revision/storage,
 Aneurisk와 LargeIA Zenodo revision/access/file manifest, TopAneu live navigation,
 그리고 AneuX-derived transient-CFD revision/gate/license/card와 case-path manifest,
-PointFlowNet partial baseline, AAA-WSS README-only repository를 고정한다.
-기존 v1--v7은
+PointFlowNet partial baseline, AAA-WSS README-only repository와 MRIS-Bench의
+revision/card/access/file-inventory metadata를 고정한다.
+기존 v1--v8은
 historical contract로 보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
 공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
@@ -196,8 +214,10 @@ historical contract로 보존한다.
 15. AAA-WSS stated-code repository head/root/release/license/size가 변경됨
 16. AneuX-derived transient-CFD HF revision/gate/license/card/storage 또는
     topology-qualified/unique-ID manifest가 바뀜
+17. MRIS-Bench revision/card/access/license/storage/under-review statement 또는
+    Arrow inventory가 바뀜
 
-1--6, 8--13, 16의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다.
+1--6, 8--13, 16--17의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다.
 7, 14, 15는 **direct-prior baseline-feasibility review 요청**만 만든다.
 자동 download, 약관 수락, 점수 재가중, frozen snapshot 갱신, P0 등록,
 model/architecture 선택,
@@ -208,11 +228,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v8.json \
+  --config configs/source_watch_v9.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v8.json \
+  --config configs/source_watch_v9.json \
   --fetch --fail-on-change
 ```
 

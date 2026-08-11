@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.9 no-model boundary · 2026-08-11:** No MRIS/VLM architecture is
+> selected. VLM, SAM, cross-attention, cross-slice consistency, uncertainty and
+> abstention are direct-prior controls, while the public target contract lacks
+> a mask, patient grouping and split. Surface-vector edge 1-forms, Hodge/DEC,
+> equivariant message passing and structural losses also remain unselected.
+> Architecture design is prohibited before a fresh method-free gate passes.
+
 > **Schema 8.6 no-model boundary · 2026-08-11:** E(3)-equivariant LaB-GATr,
 > geometric descriptors, flow priors, inflow conditioning, transient vector
 > WSS and BC/remodelling/topology/remeshing generalisation are direct prior,

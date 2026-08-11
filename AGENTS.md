@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 MRIS-Bench target-contract audit · schema 8.9:** Exact public
+> HF revision `6f2d6d9…` reports 30,110 rows and exposes eight Arrow shards,
+> but the under-review release has no public mask field, patient grouping,
+> split, source lineage or annotation protocol. Rows are not independent
+> patients, the card MIT tag is not upstream medical-image lineage, and visible
+> viewer contradictions are warnings rather than registered error prevalence.
+> Six frozen formulations score 24.0/23.5/23.0/22.5/22.0/21.0 and all fail
+> several non-compensatory floors. Source watch v9 matches 13/13 exact states
+> and a change requests fresh source re-audit only. Surface-vector remains an
+> inactive falsifiable question; closed jobs `115645`/`115684` are unchanged.
+> No Arrow/image payload, P0/P1, method, architecture, scientific-server query,
+> PBS/GPU, outer test, result row or claim was opened. Future gate-authorized
+> execution uses `introai9` PBS only; login-node GPU commands are prohibited.
+> Never access, query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-11 schema 8.8 deployment·private synchronization:** Exact public
 > scientific contract `765916bbfec7304c4813fb485116a7f2b634dbca` passed
 > Quality `31476095988` and Pages `31476095342`. Private paper ledger

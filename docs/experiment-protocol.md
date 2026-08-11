@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.9 no-experiment boundary · 2026-08-11:** MRIS-Bench was audited
+> through public metadata and the visible viewer only. No Arrow shard, image,
+> model or checkpoint was opened. Six formulations fail the prospective
+> non-compensatory gate, so no P0/P1, server query, transfer, PBS/GPU job or
+> outer test is registered. Source watch v9 can request only a fresh audit;
+> closed jobs `115645` and `115684` remain untouched.
+
 > **Schema 8.6 no-experiment boundary · 2026-08-11:** Six cross-vascular
 > WSS formulations are below 32/40. AAA-WSS/AAA-100/SANO metadata and primary
 > papers were inspected, but no data member or code was executed. Source watch

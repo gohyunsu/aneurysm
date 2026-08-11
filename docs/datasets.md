@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 8.9 asset boundary · 2026-08-11:** MRIS-Bench exact revision
+> `6f2d6d9…` is public and exposes eight Arrow shards, but its current card is
+> under review and omits source lineage, patient grouping, split, mask semantics
+> and annotation protocol. The 30,110 rows are not counted as patients. No
+> Arrow/image member was downloaded, and the card's MIT tag is not extended to
+> unreported upstream medical-image rights. The source is watch-only, not a
+> training, calibration or outer-test asset.
+
 > **Schema 8.6 asset boundary · 2026-08-11:** AAA-100 revision 10 provides
 > 100 watertight geometries/centerlines under CC BY-NC 4.0, not the transient
 > WSS fields used by Rygiel et al. Their stated code repository is one README.

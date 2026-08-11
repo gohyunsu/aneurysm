@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 8.9 direction · 2026-08-11:** Reject the tempting MRIS/VLM pivot.
+> The current release does not identify a mask target, patient unit, split,
+> source lineage or annotation process, and VividMed, NTP-MRISeg, Semi-MedRef,
+> MedRIS and OmniCT occupy the obvious grounding/alignment/consistency claims.
+> The best frozen formulation is 24.0/40 and fails four critical floors.
+> Surface-vector remains an inactive falsifiable question; wait for a material
+> target-contract change or audit a different problem. Open no P0 or model.
+> [Exact audit](mris-bench-target-contract-audit-2026-08-11.md)
+
 > **Schema 8.8 direction · 2026-08-11:** Keep surface-vector inactive and do
 > not start architecture development. A fixed public TOF-MRA model makes an
 > external audit operationally feasible, but the central transport,

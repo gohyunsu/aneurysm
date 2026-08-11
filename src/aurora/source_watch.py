@@ -38,6 +38,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v6",
         "aurora.source_watch.v7",
         "aurora.source_watch.v8",
+        "aurora.source_watch.v9",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -84,7 +85,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v7_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v7(payload)
-    else:
+    elif schema == "aurora.source_watch.v8":
         if payload.get("extends") != "source_watch_v7.json":
             raise SourceWatchContractError("v8_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -95,6 +96,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v8_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v8(payload)
+    else:
+        if payload.get("extends") != "source_watch_v8.json":
+            raise SourceWatchContractError("v9_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v8":
+            raise SourceWatchContractError("v9_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v9_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v9(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -143,6 +155,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v6",
         "aurora.source_watch.v7",
         "aurora.source_watch.v8",
+        "aurora.source_watch.v9",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -789,6 +802,90 @@ def _validate_v8(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v8_change_boundary_changed")
 
 
+def _validate_v9(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+        "aneug_huggingface_material_revision_v1",
+        "aneurisk_zenodo_material_revision_v1",
+        "largeia_zenodo_access_revision_v1",
+        "topaneu_material_release_v1",
+        "aneux_transient_cfd_material_revision_v1",
+        "pointflownet_baseline_release_v1",
+        "aaa_wss_neural_surrogate_baseline_release_v1",
+        "mris_bench_postreview_target_contract_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v9_watch_set_changed")
+
+    _validate_v8(
+        {
+            "watches": watches[:12],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    mris = watches[12]
+    if (
+        mris.get("kind") != "huggingface_under_review_dataset"
+        or mris.get("review_request") != "fresh_source_reaudit_only"
+        or mris.get("source")
+        != {
+            "dataset_id": "lixiangcog/MRIS-Bench",
+            "legacy_alias_id": "lixiang007666/MRIS-Bench",
+            "dataset_url": (
+                "https://huggingface.co/datasets/lixiangcog/MRIS-Bench"
+            ),
+            "dataset_api_url": (
+                "https://huggingface.co/api/datasets/lixiangcog/MRIS-Bench"
+            ),
+        }
+    ):
+        raise SourceWatchContractError("mris_bench_source_changed")
+    if mris.get("frozen_snapshot") != {
+        "sha": "6f2d6d9ad10eba68700ce95c7523ec78934f7a3d",
+        "created_at": "2026-05-05T03:13:24.000Z",
+        "last_modified": "2026-05-15T03:22:31.000Z",
+        "private": False,
+        "gated": False,
+        "disabled": False,
+        "license_tags": ["license:mit"],
+        "used_storage_bytes": 7449574455,
+        "description_sha256": (
+            "626e6f483bc768f40a23d43ed2c3540e475525634bae9c9f3b14500267eb7f03"
+        ),
+        "sibling_count": 12,
+        "siblings_sha256": (
+            "f90a9ad569f6d7b552a811fe435f3c54cdebe742013bb4c4e02b93aa9d3fc71a"
+        ),
+        "arrow_shard_count": 8,
+        "under_review_release_statement_present": True,
+        "availability": (
+            "public_arrow_payload_under_review_without_detailed_metadata_"
+            "split_or_source_lineage"
+        ),
+    }:
+        raise SourceWatchContractError("mris_bench_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("row_count_is_not_independent_patient_count") is not True
+        or detection.get("card_license_is_not_upstream_medical_data_lineage")
+        is not True
+        or detection.get("postreview_metadata_change_is_not_e0_pass") is not True
+        or detection.get(
+            "visible_viewer_examples_are_not_registered_quality_prevalence"
+        )
+        is not True
+    ):
+        raise SourceWatchContractError("v9_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -957,6 +1054,47 @@ def fetch_huggingface_revision_snapshot(dataset_api_url: str) -> dict[str, Any]:
         ),
         "used_storage_bytes": int(metadata.get("usedStorage", 0)),
         "availability": "public_synthetic_transient_wss_payload_exact_revision",
+    }
+
+
+def fetch_huggingface_under_review_snapshot(
+    dataset_api_url: str,
+) -> dict[str, Any]:
+    """Read card and inventory metadata without opening Arrow or image payloads."""
+    metadata = _json_get(dataset_api_url)
+    siblings = sorted(
+        str(item.get("rfilename"))
+        for item in metadata.get("siblings", [])
+        if item.get("rfilename")
+    )
+    sibling_manifest = ("\n".join(siblings) + "\n").encode("utf-8")
+    description_text = str(metadata.get("description", ""))
+    description = description_text.encode("utf-8")
+    return {
+        "sha": str(metadata.get("sha", "")),
+        "created_at": str(metadata.get("createdAt", "")),
+        "last_modified": str(metadata.get("lastModified", "")),
+        "private": bool(metadata.get("private", False)),
+        "gated": metadata.get("gated", False),
+        "disabled": bool(metadata.get("disabled", False)),
+        "license_tags": sorted(
+            str(tag)
+            for tag in metadata.get("tags", [])
+            if str(tag).startswith("license:")
+        ),
+        "used_storage_bytes": int(metadata.get("usedStorage", 0)),
+        "description_sha256": _sha256(description),
+        "sibling_count": len(siblings),
+        "siblings_sha256": _sha256(sibling_manifest),
+        "arrow_shard_count": sum(name.endswith(".arrow") for name in siblings),
+        "under_review_release_statement_present": (
+            "double-blind review" in description_text.lower()
+            and "detailed metadata" in description_text.lower()
+        ),
+        "availability": (
+            "public_arrow_payload_under_review_without_detailed_metadata_"
+            "split_or_source_lineage"
+        ),
     }
 
 
@@ -1341,6 +1479,51 @@ def evaluate_watch(
             "gpu_or_outer_test_authorized": False,
             "observed": dict(observed),
         }
+    if watch.get("kind") == "huggingface_under_review_dataset":
+        frozen = watch["frozen_snapshot"]
+        signals: list[str] = []
+        for key, signal in (
+            ("sha", "huggingface_revision_changed"),
+            ("created_at", "huggingface_created_at_changed"),
+            ("last_modified", "huggingface_last_modified_changed"),
+            ("license_tags", "huggingface_license_changed"),
+            ("used_storage_bytes", "huggingface_storage_size_changed"),
+            ("description_sha256", "huggingface_dataset_card_changed"),
+            ("sibling_count", "huggingface_file_count_changed"),
+            ("siblings_sha256", "huggingface_file_inventory_changed"),
+            ("arrow_shard_count", "huggingface_arrow_shard_count_changed"),
+            (
+                "under_review_release_statement_present",
+                "huggingface_under_review_statement_changed",
+            ),
+        ):
+            if observed.get(key) != frozen.get(key):
+                signals.append(signal)
+        for key in ("private", "gated", "disabled"):
+            if observed.get(key) != frozen.get(key):
+                signals.append(f"huggingface_{key}_state_changed")
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") == "huggingface_aneux_transient_revision":
         frozen = watch["frozen_snapshot"]
         signals: list[str] = []
@@ -1494,6 +1677,8 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         return fetch_huggingface_dataset_snapshot(source["dataset_api_url"])
     if watch.get("kind") == "huggingface_revision":
         return fetch_huggingface_revision_snapshot(source["dataset_api_url"])
+    if watch.get("kind") == "huggingface_under_review_dataset":
+        return fetch_huggingface_under_review_snapshot(source["dataset_api_url"])
     if watch.get("kind") == "huggingface_aneux_transient_revision":
         return fetch_huggingface_aneux_transient_snapshot(
             source["dataset_api_url"]
@@ -1519,6 +1704,7 @@ def evaluate_config(
         "aurora.source_watch.v6",
         "aurora.source_watch.v7",
         "aurora.source_watch.v8",
+        "aurora.source_watch.v9",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

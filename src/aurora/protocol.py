@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.8":
-        raise ProtocolError("The current research-state schema must be version 8.8.")
+    if protocol["schema_version"] != "8.9":
+        raise ProtocolError("The current research-state schema must be version 8.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_open_model_transport_best_32_rejected_by_novelty_floor_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_mris_bench_best_24_rejected_by_critical_floors_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_8_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_9_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -186,6 +186,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "mris_bench_target_contract_audit",
             "open_model_transport_source_reappraisal",
             "cross_vascular_transient_wss_source_correction",
             "posttreatment_reference_linked_imaging_source_delta",
@@ -240,6 +241,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v6",
             "public_source_watch_v7",
             "public_source_watch_v8",
+            "public_source_watch_v9",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -250,13 +252,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_open_model_transport_best_32_rejected_by_novelty_floor"
+        != "no_active_problem_latest_mris_bench_best_24_rejected_by_critical_floors"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_article_repository_and_model_metadata_only_no_patient_payload_no_p0_closed_p0s_unchanged"
+        != "public_huggingface_metadata_and_visible_viewer_only_no_arrow_or_medical_image_download_no_p0_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -266,17 +268,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "run_a_fresh_problem_level_source_asset_audit_under_prospective_noncompensatory_admission_v2_or_wait_for_material_versioned_surface_vector_evidence_not_p0_or_model"
+        != "wait_for_mris_postreview_target_contract_or_material_surface_vector_evidence_or_run_a_different_fresh_problem_level_source_asset_audit_not_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/open-model-transport-and-admission-reappraisal-2026-08-11.md"
+        != "docs/mris-bench-target-contract-audit-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "fixed_open_model_external_tof_mra_transport_and_morphometry_rejected_by_novelty_floor"
+        != "modality_semantic_contradiction_detection_with_selective_abstention_rejected_by_critical_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The open-model transport batch must remain rejected by the novelty floor while "
+            "The MRIS-Bench batch must remain rejected by critical floors while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
@@ -339,8 +341,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 32.0
-        or admission_v2["current_batch_best_residual_novelty"] != 0.5
+        or admission_v2["current_batch_best_score"] != 24.0
+        or admission_v2["current_batch_best_residual_novelty"] != 1.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -349,6 +351,131 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    mris = problem_selection["mris_bench_target_contract_audit"]
+    _require_keys(
+        mris,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "canonical_dataset_id",
+            "legacy_alias_id",
+            "huggingface_revision",
+            "huggingface_last_modified",
+            "public_rows_reported",
+            "sibling_count",
+            "arrow_shard_count",
+            "arrow_shard_bytes",
+            "used_storage_bytes",
+            "machine_schema_fields",
+            "machine_schema_mask_field_present",
+            "state_split",
+            "source_dataset_lineage_public",
+            "patient_grouping_public",
+            "annotation_protocol_public",
+            "upstream_medical_image_license_public",
+            "under_review_release_statement_present",
+            "visible_viewer_examples_are_registered_quality_prevalence",
+            "row_count_treated_as_independent_patient_count",
+            "arrow_or_image_payload_accessed",
+            "direct_prior_threats",
+            "candidates",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+        ],
+        "MRIS-Bench target-contract audit",
+    )
+    expected_mris_candidate_ids = [
+        "modality_semantic_contradiction_detection_with_selective_abstention",
+        "evidence_grounded_aneurysm_referring_segmentation",
+        "dataset_contract_and_provenance_benchmark",
+        "patient_grouped_cross_slice_statement_consistency",
+        "label_noise_robust_mris_training",
+        "two_dimensional_descriptions_to_three_dimensional_lesion_consistency",
+    ]
+    if (
+        mris["status"]
+        != "fresh_batch_rejected_best_24_fails_identifiability_novelty_asset_and_independent_unit_floors"
+        or mris["audit_document"]
+        != "docs/mris-bench-target-contract-audit-2026-08-11.md"
+        or mris["automatic_selection_threshold"] != 32.0
+        or mris["best_candidate_id"] != expected_mris_candidate_ids[0]
+        or mris["best_score"] != 24.0
+        or mris["best_residual_novelty_score"] != 1.5
+        or mris["all_candidate_scores"]
+        != [24.0, 23.5, 23.0, 22.5, 22.0, 21.0]
+        or mris["conditional_source_lead_count"] != 0
+        or mris["primary_problem_selected"] is not False
+        or mris["canonical_dataset_id"] != "lixiangcog/MRIS-Bench"
+        or mris["legacy_alias_id"] != "lixiang007666/MRIS-Bench"
+        or mris["huggingface_revision"]
+        != "6f2d6d9ad10eba68700ce95c7523ec78934f7a3d"
+        or mris["huggingface_last_modified"] != "2026-05-15T03:22:31.000Z"
+        or mris["public_rows_reported"] != 30110
+        or mris["sibling_count"] != 12
+        or mris["arrow_shard_count"] != 8
+        or mris["arrow_shard_bytes"] != 3728270168
+        or mris["used_storage_bytes"] != 7449574455
+        or mris["machine_schema_fields"]
+        != ["id", "problem", "solution", "image", "height", "width"]
+        or mris["machine_schema_mask_field_present"] is not False
+        or mris["state_split"] is not None
+        or any(
+            mris[key] is not False
+            for key in (
+                "source_dataset_lineage_public",
+                "patient_grouping_public",
+                "annotation_protocol_public",
+                "upstream_medical_image_license_public",
+                "visible_viewer_examples_are_registered_quality_prevalence",
+                "row_count_treated_as_independent_patient_count",
+                "arrow_or_image_payload_accessed",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or mris["under_review_release_statement_present"] is not True
+        or mris["execution_server"] != "introai9"
+        or [item.get("id") for item in mris["candidates"]]
+        != expected_mris_candidate_ids
+        or [item.get("total") for item in mris["candidates"]]
+        != mris["all_candidate_scores"]
+        or any(
+            sum(item.get("axis_scores", [])) != item.get("total")
+            or item.get("critical_axis_pass") is not False
+            for item in mris["candidates"]
+        )
+    ):
+        raise ProtocolError(
+            "MRIS-Bench must remain a metadata-only rejected target contract: rows "
+            "are not patient units, box/point strings are not masks, visible examples "
+            "are not a measured error rate, and no method or compute is authorized."
+        )
+    checks.append("MRIS-Bench target-contract rejection boundary")
 
     open_model = problem_selection["open_model_transport_source_reappraisal"]
     _require_keys(
@@ -3630,7 +3757,103 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "task-asset access, architecture selection or compute."
         )
     checks.append("twelve-source fail-closed baseline watch boundary")
+    source_watch_v9 = problem_selection["public_source_watch_v9"]
+    _require_keys(
+        source_watch_v9,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "watch_ids",
+            "mris_bench_dataset_id",
+            "mris_bench_legacy_alias_id",
+            "mris_bench_sha",
+            "mris_bench_last_modified",
+            "mris_bench_license_tags",
+            "mris_bench_sibling_count",
+            "mris_bench_arrow_shard_count",
+            "mris_bench_under_review_release_statement_present",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v9",
+    )
+    if (
+        source_watch_v9["status"]
+        != "watch_only_all_thirteen_frozen_snapshots_match"
+        or source_watch_v9["config"] != "configs/source_watch_v9.json"
+        or source_watch_v9["extends_historical_config"]
+        != "configs/source_watch_v8.json"
+        or source_watch_v9["config_sha256"]
+        != "92e7cb9d87ad6ead118d4e41e230bd3bbd6b83d79b7ae78df34626a006a43c35"
+        or source_watch_v9["watch_count"] != 13
+        or source_watch_v9["watch_ids"][-1]
+        != "mris_bench_postreview_target_contract_v1"
+        or source_watch_v9["mris_bench_dataset_id"]
+        != "lixiangcog/MRIS-Bench"
+        or source_watch_v9["mris_bench_legacy_alias_id"]
+        != "lixiang007666/MRIS-Bench"
+        or source_watch_v9["mris_bench_sha"]
+        != "6f2d6d9ad10eba68700ce95c7523ec78934f7a3d"
+        or source_watch_v9["mris_bench_last_modified"]
+        != "2026-05-15T03:22:31.000Z"
+        or source_watch_v9["mris_bench_license_tags"] != ["license:mit"]
+        or source_watch_v9["mris_bench_sibling_count"] != 12
+        or source_watch_v9["mris_bench_arrow_shard_count"] != 8
+        or source_watch_v9[
+            "mris_bench_under_review_release_statement_present"
+        ]
+        is not True
+        or source_watch_v9["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v9[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v9["decision"]
+        != "continue_fail_closed_thirteen_source_watch_only_mris_change_requests_fresh_source_reaudit"
+    ):
+        raise ProtocolError(
+            "Source watch v9 must preserve thirteen exact metadata snapshots and "
+            "allow an MRIS-Bench change to request a fresh source audit only, never "
+            "payload access, score repair, method selection or compute."
+        )
+    checks.append("thirteen-source fail-closed target-contract watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "modality_semantic_contradiction_detection_no_adjudicated_reference_or_patient_grouping",
+        "evidence_grounded_aneurysm_referring_segmentation_no_mask_target",
+        "dataset_contract_and_provenance_benchmark_missing_lineage_and_adjudication",
+        "patient_grouped_cross_slice_statement_consistency_no_patient_session_manifest",
+        "label_noise_robust_mris_training_target_not_identified",
+        "two_dimensional_descriptions_to_three_dimensional_lesion_consistency_no_volume_contract",
         "fixed_open_model_external_tof_mra_transport_and_morphometry_novelty_floor",
         "patient_level_selective_morphometry_total_and_novelty_floor",
         "dual_public_model_disagreement_not_reference_linked",
