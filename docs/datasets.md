@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.4 TopBrain/RSNA asset boundary · 2026-08-12:** TopBrain 2025
+> metadata identifies one 1,958,849,592-byte archive with 50 volumes from 25
+> same-patient CTA/MRA pairs. Count 25 independent patients. The 40 CTA, 42 MRA
+> and 34 overlapping labels are whole-brain vessel anatomy, not aneurysm masks
+> or outcomes. The API license field is null and the record imposes custom
+> download terms; AURORA accepted no terms and opened neither patient archive
+> nor podium Docker. BraveCoWCoW code is public, but controlled RSNA images and
+> an independent dense aneurysm reference are not. No dataset is active.
+
 > **Schema 10.3 target-time asset boundary · 2026-08-12:** No active dataset is
 > opened. The seven-hospital source reports 852 patients/1,111 aneurysms but no
 > versioned public patient/image/mask/centre/split payload was identified. The

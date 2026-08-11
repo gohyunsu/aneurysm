@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 뇌동맥류 PED 예측의 decision time, 임상 측정 정밀도와 surface-vector 가설을 환자 수준 식별가능성, 직접 선행연구와 공개 자산 기준으로 재심사한 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — TopBrain 2025 paired CTA/MRA, TopCoW와 RSNA 멀티태스크 직접 선행을 환자 단위·표적·reference provenance 기준으로 재심사한 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,26 +40,26 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.3 · BEST 27.0 · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.4 · BEST 30.5 · ACTIVE LEAD 0</p>
         <h1>
-          Instability is not one label until<br>
-          <em>its target time is fixed.</em>
+          Fifty volumes are not fifty patients,<br>
+          <em>and vessel labels are not aneurysm truth.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          여섯 fresh 후보는 <b>27.0/26.5/26.0/25.5/25.5/25.5</b>로 모두
-          기각됐습니다. Seven-hospital 연구는 이미 pre-growth/pre-rupture
-          CTA·MRA·DSA radiomics를 852 patients/1,111 aneurysms에서 다루고,
-          206 patients/271 aneurysms의 six-hospital external cohort를 둡니다.
-          또 다른 연구는 VWI habitat radiomics, DenseNet, clinical variables,
-          Transformer, SHAP와 DCA를 이미 결합했습니다. 하지만 그 “unstable” label은
-          이전 symptoms/growth와 이후 rupture/progression을 섞습니다. 따라서 새 모델보다
-          index time과 component outcome을 먼저 고정해야 합니다. 이를 실행할 공개
-          timestamped multicentre patient asset이 없으므로 surface-vector도 inactive,
-          payload/P0/P1/server/model/GPU도 0입니다.
+          여섯 fresh 후보는 <b>30.5/29.0/27.0/25.0/25.0/24.5</b>로 모두
+          기각됐습니다. TopBrain 2025의 공개 50 volume은 25명의 same-patient
+          CTA/MRA pair이고, 40 CTA/42 MRA label은 whole-brain vessel anatomy이지
+          aneurysm mask나 outcome이 아닙니다. TopCoW는 paired-modality topology를,
+          BraveCoWCoW는 four-modality ROI와 multi-task pseudo-mask learning을 이미
+          다룹니다. 그러므로 graph/topology/cross-attention을 더하는 것보다 독립적인
+          paired aneurysm target과 reference provenance가 먼저입니다. Custom terms와
+          payload는 열지 않았고, surface-vector도 inactive이며 P0/P1/server/model/GPU는 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#topbrain-pairs">50 volume과 25 patient 이해하기</a>
+          <a class="button ghost" href="../docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md">Latest TopBrain/RSNA correction ↗</a>
           <a class="button ghost" href="learn.html#target-time">Target time과 instability 이해하기</a>
           <a class="button ghost" href="../docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md">Latest target-time reappraisal ↗</a>
           <a class="button ghost" href="learn.html#decision-time">Decision time과 leakage 이해하기</a>
@@ -98,7 +98,7 @@
           <a class="button ghost" href="../docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md">Latest source delta ↗</a>
           <a class="button ghost" href="learn.html#downstream-utility">Downstream 판정 이해하기</a>
           <a class="button ghost" href="../docs/team-downstream-utility-reappraisal-2026-08-11.md">Latest critical reappraisal ↗</a>
-          <a class="button ghost" href="../configs/source_watch_v11.json">Source watch v11 ↗</a>
+          <a class="button ghost" href="../configs/source_watch_v12.json">Source watch v12 ↗</a>
           <a class="button ghost" href="learn.html#aneux-transient">새 transient source 판정 이해하기</a>
           <a class="button ghost" href="../docs/aneux-transient-cfd-material-source-audit-2026-08-11.md">Latest material-source audit ↗</a>
           <a class="button ghost" href="learn.html#functional-4dflow">최신 4D-flow 판정 이해하기</a>
@@ -155,7 +155,7 @@
           <a class="button ghost" href="../docs/hemodynamic-endpoint-source-audit-2026-08-10.md">Hemodynamic audit ↗</a>
           <a class="button ghost" href="../docs/pinn-rupture-direct-prior-audit-2026-08-10.md">PINN prior audit ↗</a>
           <a class="button ghost" href="../docs/vascular-semantics-source-audit-2026-08-10.md">Vascular audit ↗</a>
-          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v11 ↗</a>
+          <a class="button ghost" href="../docs/source-watch.md">Fail-closed source watch v12 ↗</a>
           <a class="button ghost" href="../docs/aneux-preprocessing-orbit-audit-2026-08-09.md">AneuX history ↗</a>
           <a class="button ghost" href="../results/aneux_preprocessing_orbit_p0_execution_20260809.json">Historical P0 ↗</a>
           <a class="button ghost" href="../docs/open-cta-physical-grid-audit-2026-08-09.md">Candidate audit ↗</a>
@@ -188,27 +188,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>28.5</b><span>best · identifiability/asset rejected</span>
+            <b>30.5</b><span>best · novelty/asset rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>35</b><span>paired subjects · not 70 independent patients</span>
+            <b>25</b><span>paired patients · not 50 independent volumes</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Task-stability → matched-failure sequence retained as a future gate</span>
-          <span><i class="dot coral"></i> Follow-up ≠ treatment outcome; rough ignored label 2 ≠ response truth</span>
-          <span>Best novelty 2.0/5 · no public pair/growth contract · no terms/payload/P0/server/model/GPU</span>
+          <span><i class="dot lime"></i> Same-patient CTA/MRA pair = one independent patient unit</span>
+          <span><i class="dot coral"></i> Vessel anatomy context ≠ aneurysm mask, event or treatment outcome</span>
+          <span>Best novelty 2.0/5 · no independent paired aneurysm target · no terms/payload/P0/server/model/GPU</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>Best 27.0/40 · all six rejected · admitted 0</b></div>
-        <div><span>Latest compute</span><b>No scientific-server query or job in schema 10.3 · historical P0s remain closed</b></div>
+        <div><span>Latest source screen</span><b>Best 30.5/40 · all six rejected · admitted 0</b></div>
+        <div><span>Latest compute</span><b>No scientific-server query or job in schema 10.4 · historical P0s remain closed</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh timestamped material-asset audit only · no historical repair or rerun</b></div>
+        <div><span>Next action</span><b>fresh aneurysm-target/reference asset audit only · no terms, payload, repair or rerun</b></div>
       </div>
     </section>
 
@@ -412,7 +412,7 @@
       <div class="architecture-notes">
         <article>
           <span>LATEST SOURCE VERDICT</span>
-          <p>Target-time/instability batch의 최고점은 27.0/40입니다. Pre-event radiomics와 VWI Transformer는 direct prior이고 timestamped multicentre public asset이 없어 active lead는 0입니다.</p>
+          <p>TopBrain/RSNA batch의 최고점은 30.5/40입니다. TopCoW와 BraveCoWCoW가 paired topology와 multimodal multi-task를 선점하고, independent paired aneurysm target이 없어 active lead는 0입니다.</p>
         </article>
         <article>
           <span>CLOSED P0</span>
@@ -682,7 +682,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>Latest best 27.0/40 rejected · no timestamped multicentre joined asset, active lead, method or paper identity</p>
+        <p>Latest best 30.5/40 rejected · no independent paired aneurysm target, active lead, method or paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>

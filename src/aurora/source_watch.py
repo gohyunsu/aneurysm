@@ -41,6 +41,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v9",
         "aurora.source_watch.v10",
         "aurora.source_watch.v11",
+        "aurora.source_watch.v12",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -120,7 +121,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v10_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v10(payload)
-    else:
+    elif schema == "aurora.source_watch.v11":
         if payload.get("extends") != "source_watch_v10.json":
             raise SourceWatchContractError("v11_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -131,6 +132,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v11_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v11(payload)
+    else:
+        if payload.get("extends") != "source_watch_v11.json":
+            raise SourceWatchContractError("v12_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v11":
+            raise SourceWatchContractError("v12_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v12_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v12(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -182,6 +194,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v9",
         "aurora.source_watch.v10",
         "aurora.source_watch.v11",
+        "aurora.source_watch.v12",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1113,6 +1126,226 @@ def _validate_v11(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v11_change_boundary_changed")
 
 
+def _validate_v12(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+        "aneug_huggingface_material_revision_v1",
+        "aneurisk_zenodo_material_revision_v1",
+        "largeia_zenodo_access_revision_v1",
+        "topaneu_material_release_v1",
+        "aneux_transient_cfd_material_revision_v1",
+        "pointflownet_baseline_release_v1",
+        "aaa_wss_neural_surrogate_baseline_release_v1",
+        "mris_bench_postreview_target_contract_v1",
+        "topaneu_github_release_contract_v2",
+        "rsna_ica_release_contract_v1",
+        "topbrain2025_data_release_v1",
+        "topbrain2025_podium_dockers_v1",
+        "bravecowcow_rsna_multitask_baseline_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v12_watch_set_changed")
+
+    _validate_v11(
+        {
+            "watches": watches[:15],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    data, dockers, bravecow = watches[15:]
+    expected_zenodo = {
+        "topbrain2025_data_release_v1": {
+            "source": {
+                "zenodo_record_id": 16878417,
+                "zenodo_api_url": "https://zenodo.org/api/records/16878417",
+                "record_url": "https://zenodo.org/records/16878417",
+            },
+            "snapshot": {
+                "zenodo_record_id": 16878417,
+                "zenodo_modified": "2026-06-02T16:56:20.313691+00:00",
+                "zenodo_revision": 14,
+                "zenodo_status": "published",
+                "zenodo_access_right": "open",
+                "zenodo_license_id": None,
+                "zenodo_files": [
+                    {
+                        "key": "TopBrain_Data_Release_Batches1n2_081425.zip",
+                        "size": 1958849592,
+                        "checksum": "md5:b703ea31cd1f0e7115a5d3e6e61f59b3",
+                    }
+                ],
+                "payload_or_manifest_files": [
+                    "TopBrain_Data_Release_Batches1n2_081425.zip"
+                ],
+                "availability": (
+                    "open_metadata_with_custom_clickthrough_terms_"
+                    "and_unopened_patient_payload"
+                ),
+            },
+        },
+        "topbrain2025_podium_dockers_v1": {
+            "source": {
+                "zenodo_record_id": 20158639,
+                "zenodo_api_url": "https://zenodo.org/api/records/20158639",
+                "record_url": "https://zenodo.org/records/20158639",
+            },
+            "snapshot": {
+                "zenodo_record_id": 20158639,
+                "zenodo_modified": "2026-06-02T16:51:06.110189+00:00",
+                "zenodo_revision": 18,
+                "zenodo_status": "published",
+                "zenodo_access_right": "open",
+                "zenodo_license_id": "cc-by-4.0",
+                "zenodo_files": [
+                    {
+                        "key": "reorient_nii.py",
+                        "size": 2459,
+                        "checksum": "md5:3c540a37710c1c7c84c3704246fbe220",
+                    },
+                    {
+                        "key": "run_docker_topbrain_2025.py",
+                        "size": 5581,
+                        "checksum": "md5:e9f0d16e497c28f897aa892a5e328b4c",
+                    },
+                    {
+                        "key": "Team_ARG_2025_topbrain_segmentation_ct.tar.gz",
+                        "size": 5863399183,
+                        "checksum": "md5:35d5434f91a274456f72f428fce067e0",
+                    },
+                    {
+                        "key": "Team_ARG_2025_topbrain_segmentation_mr.tar.gz",
+                        "size": 6094969422,
+                        "checksum": "md5:e1fe74d1707907918b1b91002962f40f",
+                    },
+                    {
+                        "key": "Team_KDH_2025_topbrain_segmentation_ct.tar.gz",
+                        "size": 8038457100,
+                        "checksum": "md5:4b71fe691b99e8a76cd0d83ebcf2da95",
+                    },
+                    {
+                        "key": "Team_KDH_2025_topbrain_segmentation_mr.tar.gz",
+                        "size": 11864241848,
+                        "checksum": "md5:0224662747a594f5bc17932f5c85c313",
+                    },
+                    {
+                        "key": "Team_UZH_2025_topbrain_segmentation_ct_mr.tar.gz",
+                        "size": 4795293483,
+                        "checksum": "md5:7d04086c75bdd459f4a8af44e753be0a",
+                    },
+                ],
+                "payload_or_manifest_files": [
+                    "Team_ARG_2025_topbrain_segmentation_ct.tar.gz",
+                    "Team_ARG_2025_topbrain_segmentation_mr.tar.gz",
+                    "Team_KDH_2025_topbrain_segmentation_ct.tar.gz",
+                    "Team_KDH_2025_topbrain_segmentation_mr.tar.gz",
+                    "Team_UZH_2025_topbrain_segmentation_ct_mr.tar.gz",
+                ],
+                "availability": "open_podium_docker_metadata_exact_revision",
+            },
+        },
+    }
+    for watch in (data, dockers):
+        expected = expected_zenodo[watch["watch_id"]]
+        if watch.get("kind") != "zenodo_record":
+            raise SourceWatchContractError("topbrain2025_zenodo_kind_changed")
+        if watch.get("source") != expected["source"]:
+            raise SourceWatchContractError("topbrain2025_zenodo_source_changed")
+        if watch.get("frozen_snapshot") != expected["snapshot"]:
+            raise SourceWatchContractError("topbrain2025_zenodo_snapshot_changed")
+    if data.get("review_request") != "fresh_source_reaudit_only" or dockers.get(
+        "review_request"
+    ) != "direct_prior_baseline_feasibility_reaudit_only":
+        raise SourceWatchContractError("topbrain2025_review_request_changed")
+
+    if (
+        bravecow.get("kind") != "github"
+        or bravecow.get("review_request")
+        != "direct_prior_baseline_feasibility_reaudit_only"
+        or bravecow.get("source")
+        != {
+            "repository": (
+                "PengchengShi1220/RSNA2025_Intracranial-Aneurysm-Detection"
+            ),
+            "repository_url": (
+                "https://github.com/PengchengShi1220/"
+                "RSNA2025_Intracranial-Aneurysm-Detection"
+            ),
+            "default_branch": "master",
+            "paper_url": "https://arxiv.org/abs/2606.26706",
+        }
+    ):
+        raise SourceWatchContractError("bravecowcow_source_changed")
+    if bravecow.get("frozen_snapshot") != {
+        "main_head_sha": "e59e2368a722eabedc6b2228b1c6e1e7325cacd5",
+        "root_entries": [
+            {
+                "name": "bravecowcow-2nd-place-inference-demo.ipynb",
+                "type": "file",
+                "size": 64594,
+            },
+            {
+                "name": "bravecowcow-2nd-place-inference-final-submission.ipynb",
+                "type": "file",
+                "size": 64984,
+            },
+            {"name": "LICENSE", "type": "file", "size": 11400},
+            {"name": "nifti_by_dicom2nifti.py", "type": "file", "size": 2205},
+            {"name": "nnXNet", "type": "dir", "size": 0},
+            {
+                "name": "nnXNetResEncUNetM_two_seg_with_cls_ps_224_224_224_Plans.json",
+                "type": "file",
+                "size": 11427,
+            },
+            {
+                "name": "process_RSNA2025_all_data.py",
+                "type": "file",
+                "size": 11954,
+            },
+            {"name": "README.md", "type": "file", "size": 6387},
+            {"name": "requirements.txt", "type": "file", "size": 2718},
+        ],
+        "release_count": 0,
+        "license_spdx_id": "Apache-2.0",
+        "repository_size_kib": 464,
+        "payload_or_code_entries": [
+            "bravecowcow-2nd-place-inference-demo.ipynb",
+            "bravecowcow-2nd-place-inference-final-submission.ipynb",
+            "nifti_by_dicom2nifti.py",
+            "nnXNet",
+            "nnXNetResEncUNetM_two_seg_with_cls_ps_224_224_224_Plans.json",
+            "process_RSNA2025_all_data.py",
+            "requirements.txt",
+        ],
+        "availability": (
+            "public_apache_code_without_controlled_rsna_payload_"
+            "or_independent_dense_reference"
+        ),
+    }:
+        raise SourceWatchContractError("bravecowcow_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get("topbrain2025_data_terms_not_automatically_accepted")
+        is not True
+        or detection.get("public_vessel_labels_are_not_aneurysm_targets")
+        is not True
+        or detection.get("podium_dockers_are_direct_priors_not_method_selection")
+        is not True
+        or detection.get("rsna_pseudomasks_are_not_independent_dense_reference")
+        is not True
+        or detection.get("baseline_code_is_not_controlled_challenge_data")
+        is not True
+    ):
+        raise SourceWatchContractError("v12_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -1656,6 +1889,13 @@ def fetch_zenodo_record_snapshot(zenodo_api_url: str) -> dict[str, Any]:
         availability = "public_cycle_averaged_wss_vtp_archive_exact_revision"
     elif record_id == 6801398 and access_right == "restricted" and not files:
         availability = "restricted_metadata_only_no_public_files"
+    elif record_id == 16878417:
+        availability = (
+            "open_metadata_with_custom_clickthrough_terms_"
+            "and_unopened_patient_payload"
+        )
+    elif record_id == 20158639:
+        availability = "open_podium_docker_metadata_exact_revision"
     else:
         availability = "zenodo_record_metadata_state"
     return {
@@ -2181,6 +2421,7 @@ def evaluate_config(
         "aurora.source_watch.v9",
         "aurora.source_watch.v10",
         "aurora.source_watch.v11",
+        "aurora.source_watch.v12",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

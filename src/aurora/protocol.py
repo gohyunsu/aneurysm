@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.3":
-        raise ProtocolError("The current research-state schema must be version 10.3.")
+    if protocol["schema_version"] != "10.4":
+        raise ProtocolError("The current research-state schema must be version 10.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_target_time_instability_batch_rejected_best_27_no_p0_no_compute"
+        != "no_active_problem_topbrain_rsna_release_batch_rejected_best_30_5_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "topbrain2025_and_rsna_multitask_source_correction",
             "target_time_and_instability_prediction_reappraisal",
             "decision_time_and_clinical_precision_reappraisal",
             "device_planning_and_mechanistic_occlusion_reappraisal",
@@ -258,6 +259,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v9",
             "public_source_watch_v10",
             "public_source_watch_v11",
+            "public_source_watch_v12",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -268,13 +270,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_target_time_instability_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_topbrain_rsna_release_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "target_time_instability_prediction_public_paper_and_trial_metadata_only_no_timestamped_patient_image_mask_outcome_or_model_payload_no_scientific_server"
+        != "topbrain2025_and_bravecowcow_public_metadata_and_code_only_no_terms_or_patient_payload_no_aneurysm_ground_truth_join_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -284,17 +286,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
+        != "fresh_problem_level_source_or_asset_audit_only_no_topbrain_terms_or_payload_or_compute"
         or problem_selection["audit_document"]
-        != "docs/target-time-and-instability-prediction-reappraisal-2026-08-12.md"
+        != "docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "target_time_disjoint_future_event_benchmark_rejected_at_27_no_timestamped_multicentre_public_asset"
+        != "paired_cta_mra_graph_agreement_certificate_rejected_at_30_5_novelty_and_asset_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The target-time/instability batch must remain rejected and the VMR candidate "
+            "The TopBrain/RSNA release batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -356,8 +358,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 27.0
-        or admission_v2["current_batch_best_residual_novelty"] != 3.0
+        or admission_v2["current_batch_best_score"] != 30.5
+        or admission_v2["current_batch_best_residual_novelty"] != 2.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -366,6 +368,287 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    topbrain_rsna = problem_selection[
+        "topbrain2025_and_rsna_multitask_source_correction"
+    ]
+    _require_keys(
+        topbrain_rsna,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "topbrain2025_data_zenodo_record_id",
+            "topbrain2025_data_zenodo_revision",
+            "topbrain2025_data_modified",
+            "topbrain2025_data_archive_name",
+            "topbrain2025_data_archive_bytes",
+            "topbrain2025_data_archive_md5",
+            "topbrain2025_api_license_id",
+            "topbrain2025_custom_download_terms_present",
+            "topbrain2025_terms_accepted",
+            "topbrain2025_payload_accessed",
+            "topbrain2025_public_volumes",
+            "topbrain2025_public_same_patient_cta_mra_pairs",
+            "topbrain2025_public_independent_patients",
+            "topbrain2025_cta_label_count",
+            "topbrain2025_mra_label_count",
+            "topbrain2025_overlapping_cta_mra_label_count",
+            "topbrain2025_challenge_total_volumes",
+            "topbrain2025_challenge_total_patients",
+            "topbrain2025_hidden_test_volumes",
+            "topbrain2025_hidden_test_patients",
+            "topbrain2025_source_anatomy_classes",
+            "topbrain2025_public_labels_are_whole_brain_vessel_anatomy_not_aneurysm_masks",
+            "topbrain2025_independent_dense_repeated_reference_established",
+            "topbrain2025_podium_zenodo_record_id",
+            "topbrain2025_podium_zenodo_revision",
+            "topbrain2025_podium_file_count",
+            "topbrain2025_podium_docker_archive_count",
+            "topbrain2025_podium_license_id",
+            "topbrain2025_podium_payload_accessed",
+            "topbrain2025_source_topology_and_small_branch_endpoints_present",
+            "topbrain2025_source_results_reproduced_by_aurora",
+            "topcow_unique_patients",
+            "topcow_train_patients",
+            "topcow_validation_patients",
+            "topcow_test_patients",
+            "topcow_same_patient_paired_cta_mra",
+            "topcow_large_aneurysms_excluded_from_cow_roi",
+            "topcow_external_largeia_aneurysm_patients",
+            "bravecowcow_arxiv_id",
+            "bravecowcow_repository",
+            "bravecowcow_repository_head",
+            "bravecowcow_repository_license",
+            "bravecowcow_repository_release_count",
+            "bravecowcow_modalities",
+            "bravecowcow_aneurysm_location_classes",
+            "bravecowcow_vessel_classes",
+            "bravecowcow_pseudomask_training_series",
+            "bravecowcow_source_public_auc",
+            "bravecowcow_source_private_auc",
+            "bravecowcow_source_results_reproduced_by_aurora",
+            "bravecowcow_controlled_rsna_payload_accessed",
+            "bravecowcow_independent_expert_dense_aneurysm_mask_benchmark_established",
+            "joined_public_same_patient_cta_mra_aneurysm_mask_or_outcome_target_identified",
+            "direct_prior_threats",
+            "candidates",
+            "patient_pair_counting_retained_as_evaluation_principle_only",
+            "reference_provenance_retained_as_evaluation_principle_only",
+            "vessel_anatomy_and_aneurysm_target_separation_retained_as_evaluation_principle_only",
+            "surface_vector_reactivated",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "historical_score_or_job_relabelled",
+            "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "TopBrain 2025 and RSNA multitask source correction",
+    )
+    expected_topbrain_rsna_candidates = [
+        (
+            "paired_cta_mra_graph_agreement_certificate",
+            [4.0, 5.0, 2.0, 2.5, 3.0, 5.0, 5.0, 4.0],
+            30.5,
+        ),
+        (
+            "small_branch_failure_aware_selective_segmentation",
+            [4.0, 4.5, 1.0, 2.5, 3.0, 5.0, 5.0, 4.0],
+            29.0,
+        ),
+        (
+            "paired_modality_aneurysm_location_robustness",
+            [5.0, 3.5, 1.5, 1.5, 2.0, 5.0, 5.0, 3.5],
+            27.0,
+        ),
+        (
+            "reference_provenance_aware_rsna_dense_pseudolabel_audit",
+            [5.0, 3.0, 2.5, 0.5, 1.0, 5.0, 5.0, 3.0],
+            25.0,
+        ),
+        (
+            "segmentation_uncertainty_to_hemodynamic_pressure_certificate",
+            [5.0, 4.0, 1.5, 0.5, 1.0, 5.0, 5.0, 3.0],
+            25.0,
+        ),
+        (
+            "anatomy_conditioned_multimodal_aneurysm_segmentation",
+            [5.0, 4.5, 0.5, 0.5, 1.0, 5.0, 5.0, 3.0],
+            24.5,
+        ),
+    ]
+    observed_topbrain_rsna_candidates = [
+        (row["id"], row["axis_scores"], float(row["total"]))
+        for row in topbrain_rsna["candidates"]
+    ]
+    expected_topbrain_rsna_priors = [
+        "topbrain2025_same_patient_cta_mra_whole_brain_vessel_anatomy_segmentation",
+        "topbrain2025_topology_contamination_small_branch_and_detection_endpoints",
+        "topcow_paired_cta_mra_cow_topology_and_external_aneurysm_location_evaluation",
+        "bravecowcow_multimodal_roi_multitask_aneurysm_classification_and_pseudomask_segmentation",
+        "paired_data_cross_modality_cerebrovascular_segmentation",
+        "multimodal_pre_post_treatment_consistency_learning",
+        "generic_selective_segmentation_conformal_and_graph_consistency",
+    ]
+    if (
+        topbrain_rsna["status"]
+        != "fresh_material_source_correction_rejected_best_30_5_fails_total_novelty_and_asset_floors_no_active_lead"
+        or topbrain_rsna["audit_document"]
+        != "docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md"
+        or topbrain_rsna["automatic_selection_threshold"] != 32.0
+        or topbrain_rsna["best_candidate_id"]
+        != "paired_cta_mra_graph_agreement_certificate"
+        or topbrain_rsna["best_score"] != 30.5
+        or topbrain_rsna["best_residual_novelty_score"] != 2.5
+        or topbrain_rsna["all_candidate_scores"]
+        != [30.5, 29.0, 27.0, 25.0, 25.0, 24.5]
+        or topbrain_rsna["conditional_source_lead_count"] != 0
+        or (
+            topbrain_rsna["topbrain2025_data_zenodo_record_id"],
+            topbrain_rsna["topbrain2025_data_zenodo_revision"],
+            topbrain_rsna["topbrain2025_data_modified"],
+            topbrain_rsna["topbrain2025_data_archive_name"],
+            topbrain_rsna["topbrain2025_data_archive_bytes"],
+            topbrain_rsna["topbrain2025_data_archive_md5"],
+            topbrain_rsna["topbrain2025_api_license_id"],
+        )
+        != (
+            16878417,
+            14,
+            "2026-06-02T16:56:20.313691+00:00",
+            "TopBrain_Data_Release_Batches1n2_081425.zip",
+            1958849592,
+            "b703ea31cd1f0e7115a5d3e6e61f59b3",
+            None,
+        )
+        or (
+            topbrain_rsna["topbrain2025_public_volumes"],
+            topbrain_rsna["topbrain2025_public_same_patient_cta_mra_pairs"],
+            topbrain_rsna["topbrain2025_public_independent_patients"],
+            topbrain_rsna["topbrain2025_cta_label_count"],
+            topbrain_rsna["topbrain2025_mra_label_count"],
+            topbrain_rsna["topbrain2025_overlapping_cta_mra_label_count"],
+        )
+        != (50, 25, 25, 40, 42, 34)
+        or (
+            topbrain_rsna["topbrain2025_challenge_total_volumes"],
+            topbrain_rsna["topbrain2025_challenge_total_patients"],
+            topbrain_rsna["topbrain2025_hidden_test_volumes"],
+            topbrain_rsna["topbrain2025_hidden_test_patients"],
+            topbrain_rsna["topbrain2025_source_anatomy_classes"],
+        )
+        != (90, 45, 40, 20, 48)
+        or (
+            topbrain_rsna["topbrain2025_podium_zenodo_record_id"],
+            topbrain_rsna["topbrain2025_podium_zenodo_revision"],
+            topbrain_rsna["topbrain2025_podium_file_count"],
+            topbrain_rsna["topbrain2025_podium_docker_archive_count"],
+            topbrain_rsna["topbrain2025_podium_license_id"],
+        )
+        != (20158639, 18, 7, 5, "cc-by-4.0")
+        or (
+            topbrain_rsna["topcow_unique_patients"],
+            topbrain_rsna["topcow_train_patients"],
+            topbrain_rsna["topcow_validation_patients"],
+            topbrain_rsna["topcow_test_patients"],
+            topbrain_rsna["topcow_external_largeia_aneurysm_patients"],
+        )
+        != (200, 125, 5, 70, 12)
+        or topbrain_rsna["bravecowcow_arxiv_id"] != "2606.26706"
+        or topbrain_rsna["bravecowcow_repository"]
+        != "PengchengShi1220/RSNA2025_Intracranial-Aneurysm-Detection"
+        or topbrain_rsna["bravecowcow_repository_head"]
+        != "e59e2368a722eabedc6b2228b1c6e1e7325cacd5"
+        or topbrain_rsna["bravecowcow_repository_license"] != "Apache-2.0"
+        or topbrain_rsna["bravecowcow_repository_release_count"] != 0
+        or topbrain_rsna["bravecowcow_modalities"]
+        != ["CTA", "MRA", "T2", "T1-post"]
+        or (
+            topbrain_rsna["bravecowcow_aneurysm_location_classes"],
+            topbrain_rsna["bravecowcow_vessel_classes"],
+            topbrain_rsna["bravecowcow_pseudomask_training_series"],
+        )
+        != (13, 13, 4348)
+        or (
+            topbrain_rsna["bravecowcow_source_public_auc"],
+            topbrain_rsna["bravecowcow_source_private_auc"],
+        )
+        != (0.90035, 0.86727)
+        or topbrain_rsna["direct_prior_threats"]
+        != expected_topbrain_rsna_priors
+        or observed_topbrain_rsna_candidates
+        != expected_topbrain_rsna_candidates
+        or any(row["critical_axis_pass"] for row in topbrain_rsna["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in topbrain_rsna["candidates"]
+        )
+        or any(
+            topbrain_rsna[key] is not True
+            for key in (
+                "topbrain2025_custom_download_terms_present",
+                "topbrain2025_public_labels_are_whole_brain_vessel_anatomy_not_aneurysm_masks",
+                "topbrain2025_source_topology_and_small_branch_endpoints_present",
+                "topcow_same_patient_paired_cta_mra",
+                "topcow_large_aneurysms_excluded_from_cow_roi",
+                "patient_pair_counting_retained_as_evaluation_principle_only",
+                "reference_provenance_retained_as_evaluation_principle_only",
+                "vessel_anatomy_and_aneurysm_target_separation_retained_as_evaluation_principle_only",
+            )
+        )
+        or any(
+            topbrain_rsna[key] is not False
+            for key in (
+                "primary_problem_selected",
+                "paper_identity_active",
+                "topbrain2025_terms_accepted",
+                "topbrain2025_payload_accessed",
+                "topbrain2025_independent_dense_repeated_reference_established",
+                "topbrain2025_podium_payload_accessed",
+                "topbrain2025_source_results_reproduced_by_aurora",
+                "bravecowcow_source_results_reproduced_by_aurora",
+                "bravecowcow_controlled_rsna_payload_accessed",
+                "bravecowcow_independent_expert_dense_aneurysm_mask_benchmark_established",
+                "joined_public_same_patient_cta_mra_aneurysm_mask_or_outcome_target_identified",
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_score_or_job_relabelled",
+                "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or topbrain_rsna["next_allowed_action"]
+        != "fresh_problem_level_source_or_material_aneurysm_target_audit_only_no_terms_payload_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "TopBrain 2025 and BraveCoWCoW must remain a material source correction, "
+            "not a patient-count inflation, aneurysm target, independent dense reference, "
+            "selected method, P0 or compute authority."
+        )
+    checks.append("TopBrain 2025 and RSNA multitask rejected-source boundary")
 
     target_time = problem_selection[
         "target_time_and_instability_prediction_reappraisal"
@@ -6451,6 +6734,89 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "terms, payload, score repair, P0, model or compute."
         )
     checks.append("fifteen-source fail-closed RSNA release-contract watch boundary")
+    source_watch_v12 = problem_selection["public_source_watch_v12"]
+    _require_keys(
+        source_watch_v12,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "added_watch_ids",
+            "topbrain2025_data_zenodo_revision",
+            "topbrain2025_data_archive_bytes",
+            "topbrain2025_data_archive_md5",
+            "topbrain2025_podium_zenodo_revision",
+            "bravecowcow_repository_head",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v12",
+    )
+    if (
+        source_watch_v12["status"]
+        != "watch_only_all_eighteen_frozen_snapshots_match"
+        or source_watch_v12["config"] != "configs/source_watch_v12.json"
+        or source_watch_v12["extends_historical_config"]
+        != "configs/source_watch_v11.json"
+        or source_watch_v12["config_sha256"]
+        != "6c5ae0c328550bdc2cd0af66006250eee25766db73c0df81714e546b57e7fa7b"
+        or source_watch_v12["watch_count"] != 18
+        or source_watch_v12["added_watch_ids"]
+        != [
+            "topbrain2025_data_release_v1",
+            "topbrain2025_podium_dockers_v1",
+            "bravecowcow_rsna_multitask_baseline_v1",
+        ]
+        or source_watch_v12["topbrain2025_data_zenodo_revision"] != 14
+        or source_watch_v12["topbrain2025_data_archive_bytes"] != 1958849592
+        or source_watch_v12["topbrain2025_data_archive_md5"]
+        != "b703ea31cd1f0e7115a5d3e6e61f59b3"
+        or source_watch_v12["topbrain2025_podium_zenodo_revision"] != 18
+        or source_watch_v12["bravecowcow_repository_head"]
+        != "e59e2368a722eabedc6b2228b1c6e1e7325cacd5"
+        or source_watch_v12["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v12[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v12["decision"]
+        != "continue_fail_closed_eighteen_source_watch_only_changes_request_registered_review_without_terms_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v12 must preserve eighteen exact public snapshots; a "
+            "TopBrain or BraveCoWCoW change may request only its registered review, "
+            "never terms, payload, score repair, P0, model or compute."
+        )
+    checks.append("eighteen-source fail-closed TopBrain and RSNA baseline watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
         "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",

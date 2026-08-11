@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.4 submission boundary · 2026-08-12:** Do not title the paper
+> around paired CTA/MRA graph agreement, topology-aware small-branch
+> segmentation, anatomy-conditioned multimodal aneurysm learning or
+> pseudo-label uncertainty. Direct priors already own those components and no
+> public paired aneurysm target with independent reference was identified.
+> Latest best 30.5/40 fails novelty and asset floors. No title, abstract claim,
+> contribution, method figure, result table, C21, P0/P1, model or GPU is
+> authorized. The four-page technical-content boundary remains unchanged.
+
 > **Schema 10.3 submission boundary · 2026-08-12:** Do not title the paper
 > around multimodal radiomics, VWI-habitat Transformer fusion, instability
 > calibration or automated longitudinal morphology; each is direct prior or an

@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 10.4 server boundary · 2026-08-12:** This correction used official
+> public article, Zenodo and Git metadata only. No TopBrain/RSNA/Docker payload
+> or terms, scientific-server query, transfer, PBS/GPU submission or monitoring
+> occurred. The 18-source live watch is public-web metadata access, not a
+> scientific-server observation. Future gate-authorized execution remains
+> `introai9` PBS only; login-node GPU is prohibited. Never access, query,
+> transfer to, submit to or monitor `junjinyong`.
+
 > **Schema 10.3 server boundary · 2026-08-12:** This reappraisal read public
 > article, Crossref and ClinicalTrials.gov metadata only. No scientific server
 > was queried, no patient image/table/model payload was transferred and no

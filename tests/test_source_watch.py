@@ -30,6 +30,7 @@ CONFIG_V8 = ROOT / "configs" / "source_watch_v8.json"
 CONFIG_V9 = ROOT / "configs" / "source_watch_v9.json"
 CONFIG_V10 = ROOT / "configs" / "source_watch_v10.json"
 CONFIG_V11 = ROOT / "configs" / "source_watch_v11.json"
+CONFIG_V12 = ROOT / "configs" / "source_watch_v12.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -550,7 +551,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v11.json", workflow)
+        self.assertIn("configs/source_watch_v12.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
@@ -1004,6 +1005,124 @@ class SourceWatchContractTests(unittest.TestCase):
             candidate = source / "source_watch.json"
             candidate.write_text(json.dumps(payload), encoding="utf-8")
             for config_path in (
+                CONFIG_V10,
+                CONFIG_V9,
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v12_adds_topbrain_and_bravecowcow_watches_without_authority(self) -> None:
+        config = load_config(CONFIG_V12)
+        self.assertEqual(config["extends"], "source_watch_v11.json")
+        self.assertEqual(len(config["watches"]), 18)
+        data, dockers, bravecow = config["watches"][-3:]
+        self.assertEqual(data["watch_id"], "topbrain2025_data_release_v1")
+        self.assertEqual(data["frozen_snapshot"]["zenodo_revision"], 14)
+        self.assertEqual(
+            data["frozen_snapshot"]["zenodo_files"][0]["size"], 1958849592
+        )
+        self.assertIsNone(data["frozen_snapshot"]["zenodo_license_id"])
+        self.assertEqual(
+            dockers["watch_id"], "topbrain2025_podium_dockers_v1"
+        )
+        self.assertEqual(dockers["frozen_snapshot"]["zenodo_revision"], 18)
+        self.assertEqual(len(dockers["frozen_snapshot"]["zenodo_files"]), 7)
+        self.assertEqual(
+            bravecow["watch_id"], "bravecowcow_rsna_multitask_baseline_v1"
+        )
+        self.assertEqual(
+            bravecow["frozen_snapshot"]["main_head_sha"],
+            "e59e2368a722eabedc6b2228b1c6e1e7325cacd5",
+        )
+        self.assertEqual(bravecow["frozen_snapshot"]["release_count"], 0)
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v12_changes_request_only_the_registered_review(self) -> None:
+        config = load_config(CONFIG_V12)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observations["topbrain2025_data_release_v1"]["zenodo_revision"] = 15
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(result["direct_prior_baseline_feasibility_reaudit_triggered"])
+        self.assertEqual(result["manual_review_requests"], ["fresh_source_reaudit_only"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observations["bravecowcow_rsna_multitask_baseline_v1"][
+            "main_head_sha"
+        ] = "f" * 40
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertFalse(result["fresh_source_reaudit_triggered"])
+        self.assertTrue(result["direct_prior_baseline_feasibility_reaudit_triggered"])
+        self.assertEqual(
+            result["manual_review_requests"],
+            ["direct_prior_baseline_feasibility_reaudit_only"],
+        )
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v12_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V12.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["zenodo_revision"] = 15
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V11,
+                CONFIG_V10,
+                CONFIG_V9,
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "topbrain2025"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V12.read_text(encoding="utf-8"))
+        payload["authorization"]["gpu_training"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V11,
                 CONFIG_V10,
                 CONFIG_V9,
                 CONFIG_V8,

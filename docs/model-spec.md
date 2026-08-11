@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.4 no-model boundary · 2026-08-12:** No paired CTA/MRA graph
+> network, topology loss, small-branch selective head, multimodal ROI model,
+> cross-attention block or hemodynamic uncertainty propagator is selected.
+> TopBrain, TopCoW and BraveCoWCoW already occupy those component families,
+> while the public assets do not identify an independent paired aneurysm target.
+> Architecture remains closed until a new lawful target/reference version
+> passes method-free gates. Surface-vector modules remain inactive controls.
+
 > **Schema 10.3 no-model boundary · 2026-08-12:** No radiomics pipeline, CNN,
 > Transformer, GNN, survival head, uncertainty propagator or selective
 > classifier is selected. Habitat radiomics + DenseNet + clinical Transformer

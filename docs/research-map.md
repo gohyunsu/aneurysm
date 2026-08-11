@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.4 map · 2026-08-12:** TopBrain 2025 is a material source branch,
+> not an active workstream. Its public unit is 25 paired patients and its target
+> is whole-brain vessel anatomy. TopCoW, TopBrain challenge endpoints and
+> BraveCoWCoW occupy paired-modality topology, small-branch failure and
+> multimodal aneurysm multi-task branches. Best 30.5/40; active lead/method/
+> model/compute zero. Patient-pair counting, target separation and reference
+> provenance remain evaluation rules only.
+
 > **Schema 10.3 map · 2026-08-12:** Pre-event multimodality radiomics,
 > VWI-habitat/deep Transformer fusion and future automated longitudinal MRA are
 > direct-prior branches. Target-time-disjoint evaluation is retained only as a

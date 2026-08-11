@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.4, 2026-08-12):** The already public
+> TopBrain 2025 release corrects an incomplete source premise: it contains 50
+> volumes from **25 same-patient CTA/MRA pairs**, not 50 independent patients.
+> Its 40 CTA/42 MRA labels describe whole-brain vessel anatomy, not aneurysm
+> masks or outcomes. Exact podium Dockers are strong direct controls, while
+> TopCoW already owns paired-modality topology and BraveCoWCoW already owns
+> four-modality ROI multi-task aneurysm learning with iterative pseudo-masks.
+> The strongest fresh row scores **30.5/40** but fails residual-novelty and
+> asset-readiness floors; all six are rejected at
+> **30.5/29.0/27.0/25.0/25.0/24.5**. No terms, payload, P0, method, model,
+> scientific-server query, GPU or claim opened. The
+> [exact source correction](docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md)
+> and [18-source watch](configs/source_watch_v12.json) are public.
+
 > **2026-08-12 schema 10.3 scientific deployment/private synchronization:**
 > Exact scientific source `8d09d34ad2b05e1c65530811ede4d8aa5ada66ec`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31525137390)

@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 10.4 direction · 2026-08-12:** Do not pivot to a paired-modality
+> graph, topology loss or anatomy-conditioned multi-task model. TopBrain 2025
+> already provides 25 same-patient CTA/MRA vessel-anatomy pairs and exact
+> podium controls; TopCoW owns paired topology, and BraveCoWCoW owns four-
+> modality ROI multi-task aneurysm learning. The remaining need is an
+> aneurysm-specific, independently referenced paired target—not a fancier
+> fusion block. Six rows peak at 30.5/40 and all fail a total or critical
+> novelty/asset floor. Continue fresh problem/material-target discovery with
+> no terms, payload, P0, architecture or compute.
+
 > **Schema 10.3 direction · 2026-08-12:** A fancy fusion model is no longer a
 > defensible direction: seven-hospital pre-event radiomics and VWI
 > habitat--deep Transformer fusion directly occupy it, while ANEURYSM@RISK

@@ -1,5 +1,14 @@
 # Dataset acquisition plan
 
+> **Schema 10.4 acquisition boundary · 2026-08-12:** Do not accept TopBrain
+> 2025 custom download terms or open its 1,958,849,592-byte patient archive,
+> exact podium Dockers, controlled RSNA data or Kaggle weights. Fifty public
+> volumes are 25 paired patients and the labels are vessel anatomy, not an
+> admitted aneurysm target. Source-watch v12 is metadata-only; change signals
+> request review and never authorize acquisition. Re-entry requires a fresh
+> lawful aneurysm-specific target/reference contract that independently passes
+> the non-compensatory gate.
+
 > **Schema 9.2 acquisition boundary · 2026-08-11:** Do not request RSNA MIRA
 > access or accept terms for the rejected reference-provenance batch. Public
 > registry/wiki changes are monitored read-only by source-watch v11. A change

@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.4 lineage · 2026-08-12:** TopCoW paired CTA/MRA CoW topology →
+> TopBrain 2025 same-patient whole-brain anatomy plus small-branch/topology/
+> contamination evaluation and exact podium Dockers → BraveCoWCoW four-
+> modality tri-axial ROI, vessel context and pseudo-mask multi-task aneurysm
+> learning. This removes novelty from “paired modality + graph/topology +
+> cross-attention + uncertainty.” The residual gap is a lawful public paired
+> aneurysm target with independent dense reference or outcome; no such joined
+> asset was identified. It is an asset/estimand gap, not an architecture gap.
+
 > **Schema 10.3 lineage · 2026-08-12:** Cross-sectional rupture-status
 > radiomics → pre-growth/pre-rupture seven-hospital radiomics with six-hospital
 > external validation → VWI wall-habitat/deep Transformer state assessment →

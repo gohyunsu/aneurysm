@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-12 · TopBrain 2025 and RSNA multitask source correction · schema 10.4
+
+- Corrected the source ledger to distinguish the already public TopBrain 2025
+  release from the future TopBrain 2.0 design record. Frozen exact Zenodo data
+  revision 14, podium revision 18 and BraveCoWCoW Git head are now monitored by
+  fail-closed source-watch v12; live read-only refresh matched 18/18 snapshots.
+- Counted 50 public volumes as 25 same-patient CTA/MRA pairs and separated
+  whole-brain vessel-anatomy labels from aneurysm targets. No custom terms were
+  accepted and no patient/Docker/RSNA payload was opened.
+- Added TopCoW and BraveCoWCoW as direct priors for paired-modality topology and
+  multimodal ROI multi-task aneurysm learning. Pseudo-masks are not an
+  independent expert-dense benchmark; public code is not controlled RSNA data.
+- Froze six candidates at 30.5/29.0/27.0/25.0/25.0/24.5. All fail total or
+  mandatory novelty/asset floors. Added schema 10.4 protocol invariants and
+  source-watch tests; no P0, model, scientific-server query or compute opened.
+
 ## 2026-08-12 · Schema 10.3 scientific source deployed and privately pinned
 
 - Exact scientific source `8d09d34ad2b05e1c65530811ede4d8aa5ada66ec`

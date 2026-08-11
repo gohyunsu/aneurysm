@@ -1,0 +1,208 @@
+{
+  "schema_version": "aurora.source_watch.v12",
+  "extends": "source_watch_v11.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-12",
+  "added_watches": [
+    {
+      "watch_id": "topbrain2025_data_release_v1",
+      "kind": "zenodo_record",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "zenodo_record_id": 16878417,
+        "zenodo_api_url": "https://zenodo.org/api/records/16878417",
+        "record_url": "https://zenodo.org/records/16878417"
+      },
+      "frozen_snapshot": {
+        "zenodo_record_id": 16878417,
+        "zenodo_modified": "2026-06-02T16:56:20.313691+00:00",
+        "zenodo_revision": 14,
+        "zenodo_status": "published",
+        "zenodo_access_right": "open",
+        "zenodo_license_id": null,
+        "zenodo_files": [
+          {
+            "key": "TopBrain_Data_Release_Batches1n2_081425.zip",
+            "size": 1958849592,
+            "checksum": "md5:b703ea31cd1f0e7115a5d3e6e61f59b3"
+          }
+        ],
+        "payload_or_manifest_files": [
+          "TopBrain_Data_Release_Batches1n2_081425.zip"
+        ],
+        "availability": "open_metadata_with_custom_clickthrough_terms_and_unopened_patient_payload"
+      }
+    },
+    {
+      "watch_id": "topbrain2025_podium_dockers_v1",
+      "kind": "zenodo_record",
+      "review_request": "direct_prior_baseline_feasibility_reaudit_only",
+      "source": {
+        "zenodo_record_id": 20158639,
+        "zenodo_api_url": "https://zenodo.org/api/records/20158639",
+        "record_url": "https://zenodo.org/records/20158639"
+      },
+      "frozen_snapshot": {
+        "zenodo_record_id": 20158639,
+        "zenodo_modified": "2026-06-02T16:51:06.110189+00:00",
+        "zenodo_revision": 18,
+        "zenodo_status": "published",
+        "zenodo_access_right": "open",
+        "zenodo_license_id": "cc-by-4.0",
+        "zenodo_files": [
+          {
+            "key": "reorient_nii.py",
+            "size": 2459,
+            "checksum": "md5:3c540a37710c1c7c84c3704246fbe220"
+          },
+          {
+            "key": "run_docker_topbrain_2025.py",
+            "size": 5581,
+            "checksum": "md5:e9f0d16e497c28f897aa892a5e328b4c"
+          },
+          {
+            "key": "Team_ARG_2025_topbrain_segmentation_ct.tar.gz",
+            "size": 5863399183,
+            "checksum": "md5:35d5434f91a274456f72f428fce067e0"
+          },
+          {
+            "key": "Team_ARG_2025_topbrain_segmentation_mr.tar.gz",
+            "size": 6094969422,
+            "checksum": "md5:e1fe74d1707907918b1b91002962f40f"
+          },
+          {
+            "key": "Team_KDH_2025_topbrain_segmentation_ct.tar.gz",
+            "size": 8038457100,
+            "checksum": "md5:4b71fe691b99e8a76cd0d83ebcf2da95"
+          },
+          {
+            "key": "Team_KDH_2025_topbrain_segmentation_mr.tar.gz",
+            "size": 11864241848,
+            "checksum": "md5:0224662747a594f5bc17932f5c85c313"
+          },
+          {
+            "key": "Team_UZH_2025_topbrain_segmentation_ct_mr.tar.gz",
+            "size": 4795293483,
+            "checksum": "md5:7d04086c75bdd459f4a8af44e753be0a"
+          }
+        ],
+        "payload_or_manifest_files": [
+          "Team_ARG_2025_topbrain_segmentation_ct.tar.gz",
+          "Team_ARG_2025_topbrain_segmentation_mr.tar.gz",
+          "Team_KDH_2025_topbrain_segmentation_ct.tar.gz",
+          "Team_KDH_2025_topbrain_segmentation_mr.tar.gz",
+          "Team_UZH_2025_topbrain_segmentation_ct_mr.tar.gz"
+        ],
+        "availability": "open_podium_docker_metadata_exact_revision"
+      }
+    },
+    {
+      "watch_id": "bravecowcow_rsna_multitask_baseline_v1",
+      "kind": "github",
+      "review_request": "direct_prior_baseline_feasibility_reaudit_only",
+      "source": {
+        "repository": "PengchengShi1220/RSNA2025_Intracranial-Aneurysm-Detection",
+        "repository_url": "https://github.com/PengchengShi1220/RSNA2025_Intracranial-Aneurysm-Detection",
+        "default_branch": "master",
+        "paper_url": "https://arxiv.org/abs/2606.26706"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "e59e2368a722eabedc6b2228b1c6e1e7325cacd5",
+        "root_entries": [
+          {"name": "bravecowcow-2nd-place-inference-demo.ipynb", "type": "file", "size": 64594},
+          {"name": "bravecowcow-2nd-place-inference-final-submission.ipynb", "type": "file", "size": 64984},
+          {"name": "LICENSE", "type": "file", "size": 11400},
+          {"name": "nifti_by_dicom2nifti.py", "type": "file", "size": 2205},
+          {"name": "nnXNet", "type": "dir", "size": 0},
+          {"name": "nnXNetResEncUNetM_two_seg_with_cls_ps_224_224_224_Plans.json", "type": "file", "size": 11427},
+          {"name": "process_RSNA2025_all_data.py", "type": "file", "size": 11954},
+          {"name": "README.md", "type": "file", "size": 6387},
+          {"name": "requirements.txt", "type": "file", "size": 2718}
+        ],
+        "release_count": 0,
+        "license_spdx_id": "Apache-2.0",
+        "repository_size_kib": 464,
+        "payload_or_code_entries": [
+          "bravecowcow-2nd-place-inference-demo.ipynb",
+          "bravecowcow-2nd-place-inference-final-submission.ipynb",
+          "nifti_by_dicom2nifti.py",
+          "nnXNet",
+          "nnXNetResEncUNetM_two_seg_with_cls_ps_224_224_224_Plans.json",
+          "process_RSNA2025_all_data.py",
+          "requirements.txt"
+        ],
+        "availability": "public_apache_code_without_controlled_rsna_payload_or_independent_dense_reference"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v11 material, direct-prior, target-contract or version-contract source state changes",
+      "The TopBrain 2025 data record, exact podium Docker record or BraveCoWCoW repository changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "row_count_is_not_independent_patient_count": true,
+    "card_license_is_not_upstream_medical_data_lineage": true,
+    "postreview_metadata_change_is_not_e0_pass": true,
+    "visible_viewer_examples_are_not_registered_quality_prevalence": true,
+    "versioned_annotation_history_is_not_method_novelty": true,
+    "git_blob_change_is_not_terms_acceptance": true,
+    "annotation_metadata_is_not_medical_image_access": true,
+    "registry_or_wiki_change_is_not_terms_acceptance": true,
+    "controlled_access_metadata_is_not_payload_access": true,
+    "release_contract_change_is_not_p0_authority": true,
+    "reference_provenance_issue_is_not_method_novelty": true,
+    "topbrain2025_data_terms_not_automatically_accepted": true,
+    "public_vessel_labels_are_not_aneurysm_targets": true,
+    "podium_dockers_are_direct_priors_not_method_selection": true,
+    "rsna_pseudomasks_are_not_independent_dense_reference": true,
+    "baseline_code_is_not_controlled_challenge_data": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": [
+      "fresh_source_reaudit_only",
+      "direct_prior_baseline_feasibility_reaudit_only"
+    ]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

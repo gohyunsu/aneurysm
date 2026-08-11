@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 TopBrain 2025/RSNA material correction · schema 10.4:** Public
+> TopBrain record `16878417` revision 14 contains one 1,958,849,592-byte archive
+> representing 50 volumes from 25 same-patient CTA/MRA pairs. It is 25
+> independent patients, and its vessel-anatomy labels are not aneurysm masks.
+> API license is null, custom download terms were not accepted and payload was
+> not opened. Exact podium record `20158639` revision 18 and BraveCoWCoW head
+> `e59e2368…` are direct-prior controls, not architecture authority. Six frozen
+> rows score 30.5/29.0/27.0/25.0/25.0/24.5 and all fail total or critical
+> novelty/asset floors. Source-watch v12 live refresh is 18/18 exact with review
+> signal 0. Active lead/P0/P1/method/architecture/server/PBS/GPU/outer test/
+> result/C21/claim remain 0. Surface-vector remains inactive; historical
+> no-verdict jobs are not repaired or rerun. Future gate-authorized work uses
+> `introai9` PBS only, never login-node GPU. Never access, query, transfer to,
+> submit to or monitor `junjinyong`.
+
 > **2026-08-12 schema 10.3 scientific deployment·private synchronization:**
 > Exact scientific source `8d09d34ad2b05e1c65530811ede4d8aa5ada66ec`
 > passed Quality `31525137390` and Pages `31525136523`. Live Overview,

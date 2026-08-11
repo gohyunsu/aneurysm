@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.4 experiment boundary · 2026-08-12:** Zero candidates are
+> admitted. Do not accept TopBrain custom terms, download patient/Docker/RSNA
+> payload, count paired volumes as patients, register P0/P1, select a paired-
+> modality model, query a scientific server or create PBS/GPU work. A fresh
+> method-free P0 requires a lawful aneurysm-specific target, patient pairing,
+> independent reference provenance, checksums and patient-grouped sealed
+> confirmation semantics. Even a pass would not authorize architecture or GPU.
+
 > **Schema 10.3 experiment boundary · 2026-08-12:** Zero candidates are
 > admitted. Do not request restricted cohorts, infer event timestamps, register
 > P0/P1, choose a fusion model, query a scientific server or create PBS/GPU

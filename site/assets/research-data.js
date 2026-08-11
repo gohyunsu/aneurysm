@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · target-time/instability best 27.0/40 rejected; all six fail total or critical asset/independent-unit floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh versioned timestamped material-asset audit; re-entry requires patient/centre/lesion/index-time/horizon/component-outcome identifiers and proof that every feature precedes target time, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · TopBrain/RSNA release batch best 30.5/40 rejected; all six fail total or critical novelty/asset floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh versioned aneurysm-target/reference asset audit; re-entry requires lawful terms, same-patient pairing, an aneurysm-specific independently referenced target, patient-grouped confirmation and a non-compositional residual gap, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Paired volumes, vessel context and aneurysm truth are different objects",
+      copy: "TopBrain 2025 already releases 50 volumes from 25 same-patient CTA/MRA pairs with whole-brain vessel anatomy labels and exact podium Dockers. Count 25 independent patients, not 50. TopCoW already owns paired CTA/MRA topology-aware CoW segmentation and a 12-patient external aneurysm-location analysis. BraveCoWCoW already combines CTA, MRA, T2 and post-contrast T1, tri-axial ROI, vessel context, cross-attention and iterative pseudo-mask multi-task learning across 4,348 series. Pseudo-masks are not an independent expert-dense reference, and public code is not controlled RSNA data. Six frozen rows score 30.5/29.0/27.0/25.0/25.0/24.5; every row fails a total or critical novelty/asset floor.",
+      status: "Best 30.5/40 rejected · 25 paired public patients · independent paired aneurysm target 0 · terms/payload/P0/method/server/GPU 0",
+      url: "../docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Instability prediction needs a target time before an architecture",
@@ -781,6 +788,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "TopBrain 2025 + exact podium controls + BraveCoWCoW",
+      role: "source-corrected paired-modality anatomy/direct-prior branch; watch-only, not active aneurysm training",
+      provenance: "TopBrain data Zenodo 16878417 rev.14 · 50 volumes = 25 same-patient CTA/MRA pairs · 40 CTA/42 MRA/34 shared whole-brain vessel labels ≠ aneurysm target · API license null/custom terms not accepted/archive 0 · podium Zenodo 20158639 rev.18 with five Docker archives unopened · BraveCoWCoW exact head e59e2368…/Apache-2.0/release 0 · 4,348-series pseudo-mask supervision ≠ independent dense reference · controlled RSNA payload 0 · best 30.5/40 rejected · no P0/model/GPU"
+    },
+    {
       name: "VMR growth-matched cerebral aneurysm cohort",
       role: "closed source-admission history; not active training, P1 or confirmation data",
       provenance: "22 patients · 11 prespecified growing/stable pairs · 22 advertised time-resolved surface-VTP result archives · 1,998,793,994 total bytes · P0 115848 E/exit 2 · 0/10 no verdict · access extent unknown · no persisted archive/VTP · no repair/P1/model/GPU"
@@ -1047,6 +1059,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.4 corrects TopBrain 2025 material state without opening compute",
+      copy: "The source ledger now separates the already public TopBrain 2025 data record from the future TopBrain 2.0 design. Exact data revision 14 contains one 1,958,849,592-byte archive representing 50 volumes from 25 same-patient CTA/MRA pairs; vessel-anatomy labels are not aneurysm truth. Exact podium revision 18 and BraveCoWCoW head e59e2368… are strong direct controls. TopCoW and BraveCoWCoW occupy paired topology and multimodal ROI multi-task learning, while pseudo-masks are not an independent dense benchmark. Six rows score 30.5/29.0/27.0/25.0/25.0/24.5 and all fail total or critical novelty/asset floors. Source-watch v12 live refresh matched 18/18 exact snapshots. No terms, payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opened.",
+      files: ["docs/topbrain-2025-release-and-rsna-multitask-source-correction-2026-08-12.md", "configs/source_watch_v12.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", ".github/workflows/source-watch.yml"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",
