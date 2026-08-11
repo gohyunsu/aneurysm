@@ -1,5 +1,15 @@
 # 연구 지형과 현재 작업
 
+> **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
+> evaluation question; job `115645` is still execution-incomplete with 0/10
+> checks and is not repaired. TopAneu's official Git history now verifies a
+> 98-case → 417-scan annotation version orbit, but this does not clear novelty.
+> The evaluator-unit candidate scores 32.0 with novelty 0.5/5, while the
+> revision-aware formulation scores 31.5 with novelty 2.0/5, below the frozen
+> 2.5 floor. Terms, individual labels, medical payload, P0/P1, model, server
+> query and GPU remain closed. See
+> [the exact adjudication](surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md).
+
 > **2026-08-11 schema 9.0 현재 상태:** 새 AAA transcriptomic package와
 > synthetic OpenFOAM pipeline까지 재심사했지만 active primary problem,
 > method, architecture와 contribution은 여전히 0이다. Cross-cohort molecular

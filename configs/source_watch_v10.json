@@ -1,0 +1,116 @@
+{
+  "schema_version": "aurora.source_watch.v10",
+  "extends": "source_watch_v9.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-11",
+  "added_watches": [
+    {
+      "watch_id": "topaneu_github_release_contract_v2",
+      "kind": "github_versioned_release_contract",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "repository": "Bangulli/TopAneu-26",
+        "repository_api_url": "https://api.github.com/repos/Bangulli/TopAneu-26",
+        "default_branch": "main",
+        "batch1_anchor_commit": "15afd4b95e770f69cd3ff1dba9f625c65446a6e5",
+        "release_prefix": "topaneu_release/"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "018c243445f99199f484018c4c80575c84c72293",
+        "main_root_tree_sha": "e7af931d6d9e1e236bac5b96903ab6a2a65daa06",
+        "current_release_tree_sha": "0bab2856144db5f0ba11e4151a59d44517481e95",
+        "readme_blob": {
+          "sha": "36a91bcc6889964e9992a65d04467384ba052dcc",
+          "size": 11184
+        },
+        "changelog_blob": {
+          "sha": "e937e8ba276df5290f9c02590b295c8414423bc7",
+          "size": 3868
+        },
+        "terms_blob": {
+          "sha": "9897d02ae58e1f69482ec7f2a9a5d3f208a6c87a",
+          "size": 1107
+        },
+        "current_manifest_counts": {
+          "image_checksum_count": 417,
+          "location_json_count": 417,
+          "location_mask_checksum_count": 417,
+          "type_mask_checksum_count": 417,
+          "vessel_mask_checksum_count": 417
+        },
+        "batch1_anchor_commit": "15afd4b95e770f69cd3ff1dba9f625c65446a6e5",
+        "batch1_root_tree_sha": "8ca0e92bed6e75713557e2f8e10111ebfd9f489f",
+        "batch1_release_tree_sha": "3bf4db45c1c1100fbcb6fd763bf0fb554f15c831",
+        "batch1_manifest_counts": {
+          "image_checksum_count": 98,
+          "location_json_count": 98,
+          "location_mask_checksum_count": 98,
+          "type_mask_checksum_count": 98,
+          "vessel_mask_checksum_count": 98
+        },
+        "availability": "public_versioned_git_manifest_and_annotation_metadata_without_medical_payload_access_or_terms_acceptance"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v9 material, direct-prior or target-contract source state changes",
+      "TopAneu current head, release tree, README, changelog, terms, aggregate manifest count or immutable batch-1 anchor changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "row_count_is_not_independent_patient_count": true,
+    "card_license_is_not_upstream_medical_data_lineage": true,
+    "postreview_metadata_change_is_not_e0_pass": true,
+    "visible_viewer_examples_are_not_registered_quality_prevalence": true,
+    "versioned_annotation_history_is_not_method_novelty": true,
+    "git_blob_change_is_not_terms_acceptance": true,
+    "annotation_metadata_is_not_medical_image_access": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": [
+      "fresh_source_reaudit_only",
+      "direct_prior_baseline_feasibility_reaudit_only"
+    ]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

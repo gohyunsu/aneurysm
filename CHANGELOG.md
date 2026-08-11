@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-11 · Schema 9.1 rejects TopAneu annotation-version formulations
+
+- Retained surface-vector only as an inactive falsifiable evaluation question;
+  job `115645.ECE-util1` remains execution-incomplete/no verdict with 0/10
+  scientific checks and no repair, model or compute authority.
+- Pinned official TopAneu current head/release tree and immutable 98-case batch
+  anchor. Metadata-only comparison establishes a real annotation version orbit
+  but does not interpret changed dense-mask hashes as expert contour revisions.
+- Froze six candidates at 32.0/31.5/31.5/30.5/28.5/24.5. The additive 32.0
+  evaluator candidate fails novelty at 0.5/5; the revision-aware formulation
+  scores 31.5 with novelty 2.0/5, below the prospective 2.5 floor.
+- Added source-watch v10 for current/batch-1 Git trees, README/changelog/terms
+  blobs and aggregate manifests. It can request source re-audit only.
+- Opened no TopAneu terms, individual annotations, medical payload, P0/P1,
+  method, architecture, scientific-server query, PBS/GPU, outer test, result or
+  paper claim. `introai9` remains the only future gated execution server and
+  `junjinyong` remains prohibited.
+
 ## 2026-08-11 · Cross-scale AAA sources rejected without an architecture · schema 9.0
 
 - Audited exact Zenodo transcriptomic record `21868617` revision 4 and synthetic

@@ -24,10 +24,10 @@ jobs:
       - name: Validate fail-closed watch contract
         run: >-
           PYTHONPATH=src python scripts/audit_source_watch.py
-          --config configs/source_watch_v9.json --validate-only
+          --config configs/source_watch_v10.json --validate-only
       - name: Compare official public metadata with frozen snapshots
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: >-
           PYTHONPATH=src python scripts/audit_source_watch.py
-          --config configs/source_watch_v9.json --fetch --fail-on-change
+          --config configs/source_watch_v10.json --fetch --fail-on-change

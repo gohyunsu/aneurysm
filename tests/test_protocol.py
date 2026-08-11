@@ -89,14 +89,14 @@ class ProtocolTests(unittest.TestCase):
     def test_top_level_problem_selection_cannot_select_method_or_gpu(self) -> None:
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
-        with self.assertRaisesRegex(ProtocolError, "AAA cross-scale"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu version"):
             validate_protocol(candidate)
 
     def test_future_source_admission_is_noncompensatory_and_prospective(self) -> None:
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["open_model_transport_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertTrue(gate["prospective_only"])
         self.assertFalse(gate["historical_scores_relabelled"])
         self.assertEqual(gate["total_threshold"], 32.0)
@@ -117,12 +117,43 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "source admission v2"):
             validate_protocol(candidate)
 
+    def test_topaneu_version_orbit_is_rejected_without_terms_or_p0(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "topaneu_annotation_version_orbit_reappraisal"
+        ]
+        self.assertEqual(audit["best_additive_score"], 32.0)
+        self.assertEqual(audit["most_relevant_candidate_score"], 31.5)
+        self.assertEqual(audit["best_residual_novelty_score"], 2.0)
+        self.assertEqual(audit["conditional_source_lead_count"], 0)
+        self.assertEqual(audit["current_manifest_case_paths"], 417)
+        self.assertEqual(audit["batch1_manifest_case_paths"], 98)
+        self.assertEqual(
+            audit["version_manifest_comparison"][
+                "minimum_same_path_unchanged_image_and_changed_location_json"
+            ],
+            39,
+        )
+        self.assertFalse(audit["user_terms_acceptance_verified"])
+        self.assertFalse(audit["individual_annotation_content_accessed"])
+        self.assertFalse(audit["medical_image_or_mask_payload_accessed"])
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["junjinyong_accessed"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "topaneu_annotation_version_orbit_reappraisal"
+        ]["p0_registered"] = True
+        with self.assertRaisesRegex(ProtocolError, "TopAneu version orbit"):
+            validate_protocol(candidate)
+
     def test_aaa_cross_scale_sources_do_not_create_a_model_or_patient_join(self) -> None:
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["aaa_cross_scale_source_reappraisal"]
-        self.assertEqual(gate["current_batch_best_score"], 30.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 0.5)
+        self.assertEqual(gate["current_batch_best_score"], 32.0)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.0)
         self.assertEqual(audit["best_score"], 30.0)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -186,8 +217,8 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["mris_bench_target_contract_audit"]
-        self.assertEqual(gate["current_batch_best_score"], 30.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 0.5)
+        self.assertEqual(gate["current_batch_best_score"], 32.0)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.0)
         self.assertEqual(audit["best_score"], 24.0)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -225,7 +256,7 @@ class ProtocolTests(unittest.TestCase):
     def test_cross_vascular_transient_wss_batch_is_rejected(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["cross_vascular_transient_wss_source_correction"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 30.0)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -265,7 +296,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "synthetic_aaa_transient_wss_neural_operator_rejected_by_residual_novelty_floor",
+            "topaneu_revision_conditioned_hierarchical_lesion_set_robustness_rejected_by_total_and_residual_novelty_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -285,7 +316,7 @@ class ProtocolTests(unittest.TestCase):
     def test_posttreatment_reference_linked_imaging_batch_is_rejected(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["posttreatment_reference_linked_imaging_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 28.5)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -320,7 +351,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "synthetic_aaa_transient_wss_neural_operator_rejected_by_residual_novelty_floor",
+            "topaneu_revision_conditioned_hierarchical_lesion_set_robustness_rejected_by_total_and_residual_novelty_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -342,11 +373,11 @@ class ProtocolTests(unittest.TestCase):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
-        with self.assertRaisesRegex(ProtocolError, "AAA cross-scale"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu version"):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
-        with self.assertRaisesRegex(ProtocolError, "AAA cross-scale"):
+        with self.assertRaisesRegex(ProtocolError, "TopAneu version"):
             validate_protocol(candidate)
 
     def test_aneug_target_construction_audit_rejects_compute_and_score_repair(self) -> None:
@@ -578,7 +609,7 @@ class ProtocolTests(unittest.TestCase):
     def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["structure_faithful_wss_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertTrue(
@@ -611,7 +642,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "synthetic_aaa_transient_wss_neural_operator_rejected_by_residual_novelty_floor",
+            "topaneu_revision_conditioned_hierarchical_lesion_set_robustness_rejected_by_total_and_residual_novelty_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -624,7 +655,7 @@ class ProtocolTests(unittest.TestCase):
     def test_conformal_degree_candidate_closes_after_incomplete_cpu_p0(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["conformal_degree_certificate_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 32.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
@@ -696,7 +727,7 @@ class ProtocolTests(unittest.TestCase):
     def test_cross_view_projection_batch_rejects_proxy_and_no_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["cross_view_projection_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -745,7 +776,7 @@ class ProtocolTests(unittest.TestCase):
     def test_functional_4dflow_segmentation_batch_is_direct_prior_limited(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["functional_4dflow_segmentation_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 25.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -777,7 +808,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "synthetic_aaa_transient_wss_neural_operator_rejected_by_residual_novelty_floor",
+            "topaneu_revision_conditioned_hierarchical_lesion_set_robustness_rejected_by_total_and_residual_novelty_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -790,7 +821,7 @@ class ProtocolTests(unittest.TestCase):
     def test_aneux_transient_material_source_is_rejected_without_access(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneux_transient_cfd_material_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 28.0)
         self.assertLess(
             max(audit["all_candidate_scores"]),
@@ -814,7 +845,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "synthetic_aaa_transient_wss_neural_operator_rejected_by_residual_novelty_floor",
+            "topaneu_revision_conditioned_hierarchical_lesion_set_robustness_rejected_by_total_and_residual_novelty_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -930,7 +961,7 @@ class ProtocolTests(unittest.TestCase):
     def test_team_downstream_utility_batch_rejects_architecture_first_reentry(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["team_downstream_utility_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "9.0")
+        self.assertEqual(self.protocol["schema_version"], "9.1")
         self.assertEqual(audit["best_score"], 27.0)
         self.assertEqual(
             audit["all_candidate_scores"],

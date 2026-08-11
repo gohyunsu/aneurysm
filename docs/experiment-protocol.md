@@ -1,5 +1,15 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.1 decision · 2026-08-11:** Surface-vector remains an inactive
+> evaluation question; job `115645` is still execution-incomplete with 0/10
+> checks and is not repaired. TopAneu's official Git history now verifies a
+> 98-case → 417-scan annotation version orbit, but this does not clear novelty.
+> The evaluator-unit candidate scores 32.0 with novelty 0.5/5, while the
+> revision-aware formulation scores 31.5 with novelty 2.0/5, below the frozen
+> 2.5 floor. Terms, individual labels, medical payload, P0/P1, model, server
+> query and GPU remain closed. See
+> [the exact adjudication](surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md).
+
 > **Schema 9.0 no-experiment boundary · 2026-08-11:** Public Zenodo/GitHub
 > README and GEO metadata were audited only. No ZIP, XLSX, example OpenFOAM
 > case, CFD field, expression matrix or medical image was opened. Six candidates

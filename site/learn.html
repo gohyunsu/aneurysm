@@ -65,18 +65,64 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.0</span>
+          <span>짧은 답 · schema 9.1</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
-            최신 AAA cross-scale batch는 synthetic CFD가 실행 가능해도 neural WSS
-            surrogate가 direct-prior occupied이고, transcriptomic cohorts에는 공통
-            patient/surface coordinate가 없어 최고 30.0/40, residual novelty 0.5/5로
-            기각했습니다. 실행 가능성과 paper novelty는 다릅니다. Surface-vector
-            질문도 평가 가설로 보존하지만 active topic이나 선택된 GNN/Hodge
-            architecture는 아닙니다. Exact P0 두 건의 scientific checks는 실패한 것이
-            아니라 모두 미평가였고, 동일 contract를 재실행하지 않습니다. Primary,
-            contribution, GPU와 outer test는 선택되지 않았습니다.
+            Surface-vector 질문은 보존하지만 active topic이나 선택된 GNN/Hodge
+            architecture는 아닙니다. P0 `115645`는 0/10 checks가 미평가된
+            execution-incomplete/no-verdict이고 동일 contract를 재실행하지 않습니다.
+            TopAneu에는 실제 98-case → 417-scan annotation version orbit가 있지만,
+            generic label cleaning과 benchmark revision, hierarchy/multitask prior를
+            빼면 충분한 독립 novelty가 남지 않습니다. 합산 최고 32.0도 novelty
+            veto로, revision-aware 후보 31.5도 novelty 2.0/5로 기각했습니다.
+            Primary, contribution, terms, payload, P0, GPU와 outer test는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="topaneu-version-orbit">
+          <span>TopAneu annotation version orbit는 무엇이며 왜 바로 학습하지 않나?</span>
+          <strong>실제 수정 이력은 확인됐지만, 수정 이력 자체는 새 방법이 아닙니다.</strong>
+          <p>
+            TopAneu의 현재 official Git head에는 417개 image checksum, 417개 location
+            JSON, 그리고 location/type/vessel mask checksum이 각각 417개 있습니다.
+            과거 immutable commit에는 같은 다섯 family가 각각 98개 있습니다. 두
+            tree를 label 내용 없이 path와 Git blob만 비교하면 common path는 87개,
+            unchanged image blob은 73개, changed location JSON blob은 53개입니다.
+            따라서 같은 path에서 image는 같고 location JSON은 달라진 사례가 최소
+            39개 존재합니다. 이는 annotation이 실제로 진화했다는 강한 metadata
+            evidence입니다.
+          </p>
+          <p>
+            하지만 39는 patient 수가 아닙니다. 11개 rename, 일곱 longitudinal
+            patient, non-chronological suffix와 defacing/cropping change가 섞여 있기
+            때문입니다. Dense mask checksum도 common path 87개 전부에서 바뀌어,
+            이를 87개의 expert contour correction이라고 해석할 수 없습니다. 파일
+            재생성, metadata나 taxonomy remapping이 원인일 수 있습니다.
+          </p>
+          <p>
+            과학적으로 더 큰 문제는 direct prior입니다. Active label cleaning은
+            correction이 training·evaluation·model selection을 바꾼다는 점을 이미
+            다루고, revised medical benchmarks와 real-world noisy-label learning도
+            존재합니다. Aneurysm 분야에서도 13-location classification,
+            aneurysm segmentation과 vessel segmentation을 함께 수행하는 multimodal
+            multi-task 모델이 이미 공개됐습니다. 그래서 co-teaching, hierarchy
+            loss, location × type head, silver-vessel distillation을 붙이는 것으로는
+            contribution이 되지 않습니다.
+          </p>
+          <p>
+            Frozen screen에서 official-evaluator unit correction은 32.0이지만 novelty
+            0.5/5, revision-conditioned lesion-set robustness는 31.5이고 novelty
+            2.0/5입니다. Prospectively frozen minimum은 2.5이므로 둘 다 reject입니다.
+            TopAneu terms에는 downloading이 agreement를 뜻한다고 적혀 있어, rejected
+            problem을 위해 terms를 임의 수락하거나 image/mask/individual label을
+            열지 않았습니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Real Git version orbit</span>
+            <span class="yes">Metadata-only lower bound ≥39</span>
+            <span class="no">Not verified patient pairs</span>
+            <span class="no">No terms · payload · P0 · model</span>
+          </div>
+          <a href="../docs/surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md">source, score, direct-prior와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aaa-cross-scale">
           <span>AAA transcriptomics와 synthetic CFD를 합치면 fancy한 주제가 되지 않나?</span>

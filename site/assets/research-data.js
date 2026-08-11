@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest AAA cross-scale candidate 30.0/40 rejected by residual-novelty and patient/task-linkage floors · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    status: "Target locked · latest TopAneu batch additive best 32.0/40 rejected by novelty veto; revision-aware candidate 31.5/40 with novelty 2.0/5 < 2.5 · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
     requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A real annotation version orbit is evidence, not automatic method novelty",
+      copy: "Official TopAneu Git history pins a 98-case batch and a current 417-scan release. Metadata-only comparison finds 87 common paths, 73 unchanged image checksum blobs and 53 changed location JSON blobs, implying at least 39 same-path unchanged-image/changed-label cases. Renames, longitudinal scans and preprocessing changes prevent patient-pair inference; all 87 dense-mask checksums changed, so they are not asserted as expert contour revisions. Active label cleaning, revised medical benchmarks, hierarchical noisy-label learning and direct aneurysm multi-task learning occupy the generic mechanisms. The evaluator correction scores 32.0 with novelty 0.5; the revision-aware candidate scores 31.5 with novelty 2.0, below the mandatory 2.5 floor. All six are rejected without terms, payload, P0 or compute.",
+      status: "Additive best 32.0 rejected · revision candidate 31.5/40, novelty 2.0/5 · active lead/P0/model/GPU 0",
+      url: "../docs/surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Cross-cohort molecular evidence and synthetic CFD do not form a patient-linked digital twin",
@@ -926,6 +933,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 9.1 rejects TopAneu version-aware methods and keeps surface-vector inactive",
+      copy: "The supplied surface-vector analysis is accepted only as a falsifiable evaluation question; exact job 115645 remains E/exit 2, GPU 0 and 0/10 no-verdict without repair. Official TopAneu Git history now verifies a 98-case → 417-scan annotation version orbit, but metadata does not establish patient pairs or expert contour corrections. Six candidates freeze at 32.0/31.5/31.5/30.5/28.5/24.5. The additive 32.0 evaluator candidate has novelty 0.5/5; the revision-aware candidate has novelty 2.0/5, below the 2.5 floor. Source-watch v10 pins both Git states and can request source re-audit only. Terms, individual annotations, medical payload, P0/P1, method, architecture, server query, PBS/GPU, outer test, result and claim remain zero.",
+      files: ["docs/surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md", "configs/source_watch_v10.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "docs/research-map.md", "docs/source-watch.md", ".github/workflows/source-watch.yml", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "analysis",

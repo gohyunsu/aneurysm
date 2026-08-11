@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 surface-vector + TopAneu version-orbit adjudication · schema
+> 9.1:** The supplied surface-vector direction is retained only as a falsifiable
+> evaluation question. Exact CPU-only P0 `115645.ECE-util1` remains `E`/exit 2,
+> 0/10 checks and execution-incomplete/no verdict; no repair, architecture or
+> GPU is opened. A fresh official TopAneu Git audit found a real 98-case →
+> 417-scan annotation version orbit, including at least 39 same-path cases with
+> unchanged image checksum and changed location JSON by a metadata-only lower
+> bound. This is a material asset correction, not sufficient novelty. The
+> evaluator-unit candidate reaches additive **32.0/40** but novelty 0.5/5; the
+> scientifically relevant revision-aware candidate reaches **31.5/40** and
+> novelty 2.0/5, below the mandatory 2.5 floor. All six are rejected. TopAneu
+> terms, individual annotations and medical payload remain unopened; active
+> lead/P0/P1/method/architecture/server/PBS/GPU/outer test/result/claim are 0.
+> [Exact adjudication](docs/surface-vector-and-topaneu-version-orbit-adjudication-2026-08-11.md) ·
+> [Fourteen-source watch](configs/source_watch_v10.json)
+
 > **2026-08-11 AAA cross-scale source reappraisal · schema 9.0:** A new
 > transcriptomic reproducibility package does not create a patient-linked
 > imaging--mechanics--molecular dataset. Its only regionally paired wall-stress

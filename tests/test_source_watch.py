@@ -28,6 +28,7 @@ CONFIG_V6 = ROOT / "configs" / "source_watch_v6.json"
 CONFIG_V7 = ROOT / "configs" / "source_watch_v7.json"
 CONFIG_V8 = ROOT / "configs" / "source_watch_v8.json"
 CONFIG_V9 = ROOT / "configs" / "source_watch_v9.json"
+CONFIG_V10 = ROOT / "configs" / "source_watch_v10.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -548,7 +549,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v9.json", workflow)
+        self.assertIn("configs/source_watch_v10.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
@@ -823,6 +824,95 @@ class SourceWatchContractTests(unittest.TestCase):
             candidate = source / "source_watch.json"
             candidate.write_text(json.dumps(payload), encoding="utf-8")
             for config_path in (
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v10_adds_topaneu_versioned_release_watch_without_authority(self) -> None:
+        config = load_config(CONFIG_V10)
+        self.assertEqual(config["extends"], "source_watch_v9.json")
+        self.assertEqual(len(config["watches"]), 14)
+        topaneu = config["watches"][-1]
+        self.assertEqual(
+            topaneu["watch_id"], "topaneu_github_release_contract_v2"
+        )
+        self.assertEqual(topaneu["review_request"], "fresh_source_reaudit_only")
+        frozen = topaneu["frozen_snapshot"]
+        self.assertEqual(
+            frozen["main_head_sha"],
+            "018c243445f99199f484018c4c80575c84c72293",
+        )
+        self.assertEqual(frozen["current_manifest_counts"]["location_json_count"], 417)
+        self.assertEqual(frozen["batch1_manifest_counts"]["location_json_count"], 98)
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v10_topaneu_change_requests_source_reaudit_only(self) -> None:
+        config = load_config(CONFIG_V10)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observed = observations["topaneu_github_release_contract_v2"]
+        observed["main_head_sha"] = "c" * 40
+        observed["changelog_blob"]["sha"] = "d" * 40
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(result["direct_prior_baseline_feasibility_reaudit_triggered"])
+        self.assertEqual(result["manual_review_requests"], ["fresh_source_reaudit_only"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v10_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V10.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["terms_blob"]["size"] = 1108
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V9,
+                CONFIG_V8,
+                CONFIG_V7,
+                CONFIG_V6,
+                CONFIG_V5,
+                CONFIG_V4,
+            ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "topaneu"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V10.read_text(encoding="utf-8"))
+        payload["authorization"]["automatic_terms_acceptance"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (
+                CONFIG_V9,
                 CONFIG_V8,
                 CONFIG_V7,
                 CONFIG_V6,

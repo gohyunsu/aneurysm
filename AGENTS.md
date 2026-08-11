@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 surface-vector + TopAneu version-orbit override · schema 9.1:**
+> 전달된 surface-vector 분석은 문제 가설과 평가 순서만 채택한다. Job
+> `115645.ECE-util1`은 E/exit 2, 00:27:02, GPU 0, aggregate/raw log/cache 0,
+> scientific check 0/10인 execution-incomplete/no-verdict history이며
+> repair/rerun하지 않는다. Edge 1-form/Hodge/SE(3)/periodic operator/critical-
+> point loss는 선택 architecture나 novelty가 아니다. TopAneu official Git
+> history의 immutable 98-case batch와 current 417-scan release는 실제
+> annotation version orbit를 제공한다. Metadata-only comparison은 common path
+> 87, same image blob 73, changed location JSON blob 53이며 intersection lower
+> bound는 39다. 이를 patient pair나 contour revision 수로 부르지 않는다.
+> Fresh scores 32.0/31.5/31.5/30.5/28.5/24.5는 모두 기각한다. 32.0 metric
+> candidate는 novelty 0.5, revision-aware candidate는 novelty 2.0으로 frozen
+> minimum 2.5를 못 넘는다. Terms/individual annotation/image/mask/P0/P1/method/
+> architecture/server query/PBS/GPU/outer test/result/claim은 0이다. Source
+> watch v10만 current/batch-1 Git trees와 aggregate manifest를 fail-closed
+> 감시한다. AURORA future execution은 gate-authorized `introai9` PBS만
+> 허용하고 login-node GPU command를 금지한다. `junjinyong`에는 절대 접속·
+> 조회·전송·제출·모니터링하지 않는다.
+
 > **2026-08-11 AAA cross-scale source reappraisal · schema 9.0:** Zenodo
 > `21868617` revision 4 is a CC-BY-4.0 reproducibility package over six distinct
 > GEO cohorts, not a common patient table. GSE205071 contains paired high/low
