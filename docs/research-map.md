@@ -1,5 +1,11 @@
 # 연구 지형과 현재 작업
 
+> **Schema 9.7 map · 2026-08-11:** The neck/isolation branch is source-rejected,
+> not an active workstream. AneuSI is a fixed neck-conditioned ROI baseline;
+> NeckSpline, workflow variability, TAR and the open nnU-Net occupy the obvious
+> task/method space. Best score 31.5/40, residual novelty 0.5/5, active lead and
+> compute zero. The map returns to fresh problem/source discovery.
+
 > **Schema 9.6 closure · 2026-08-11:** VMR P0 `115848` ended
 > execution-incomplete/no scientific verdict with 0/10 checks. The 32.5/40 row
 > remains source history, not an active lead. There is no P1, primary problem,

@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.7 submission boundary · 2026-08-11:** Do not title the paper around
+> automatic neck curves, AneuSI isolation, clip-factor robustness, fixed-model
+> calibration or a neck-conditioned surface operator. The best fresh row is
+> 31.5/40 with residual novelty 0.5/5; all six are rejected. No title, abstract
+> claim, contribution, method figure, result table, C21, model or GPU run is
+> authorized. Re-entry needs a public expert neck/ROI lineage contract, a truly
+> independent patient/base-family split and a downstream failure mechanism not
+> already owned by NeckSpline, AneuSI or workflow-variability studies.
+
 > **Schema 9.6 submission outcome · 2026-08-11:** VMR P0 `115848` ended
 > execution-incomplete with 0/10 checks and no scientific verdict. The source
 > score does not support a title, abstract claim, contribution, result table or

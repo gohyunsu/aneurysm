@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.6":
-        raise ProtocolError("The current research-state schema must be version 9.6.")
+    if protocol["schema_version"] != "9.7":
+        raise ProtocolError("The current research-state schema must be version 9.7.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_vmr_growth_paired_p0_execution_incomplete_no_scientific_verdict_exact_candidate_closed_no_repair"
+        != "no_active_problem_neck_isolation_batch_rejected_best_31_5_no_p0_no_compute_vmr_p0_history_closed"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "neck_isolation_and_open_model_source_reappraisal",
             "vmr_growth_paired_surface_structure_source_audit",
             "latent_shape_open_cta_transport_reappraisal",
             "synva_release_and_synthetic_utility_source_audit",
@@ -261,13 +262,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_vmr_growth_paired_p0_execution_incomplete_0_of_10_no_scientific_verdict_exact_version_closed"
+        != "no_active_problem_neck_isolation_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "vmr_p0_bounded_records_only_access_extent_unknown_no_archive_or_vtp_persisted_no_scientific_verdict"
+        != "public_metadata_readme_and_license_only_no_aneusi_vtk_ods_neckspline_code_or_open_model_archive_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -279,17 +280,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md"
+        != "docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "growth_paired_structure_faithful_surrogate_retention_rejected_without_compatible_executable_surrogate_or_development_asset"
+        != "clipfactor_orbit_morphometry_stability_audit_rejected_at_31_5_with_residual_novelty_0_5"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The VMR growth-paired candidate must remain closed after its exact "
-            "CPU P0 ended execution-incomplete with no scientific verdict; no "
-            "active lead, repair, method, GPU, outer test or claim may remain."
+            "The neck/isolation batch must remain rejected and the VMR candidate "
+            "must remain closed after its exact CPU P0 ended execution-incomplete; "
+            "no active lead, repair, method, GPU, outer test or claim may remain."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
     _require_keys(
@@ -349,9 +350,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 32.5
-        or admission_v2["current_batch_best_residual_novelty"] != 2.5
-        or admission_v2["current_batch_admitted_count"] != 1
+        or admission_v2["current_batch_best_score"] != 31.5
+        or admission_v2["current_batch_best_residual_novelty"] != 0.5
+        or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
             "Future source admission v2 must remain prospective and non-compensatory: "
@@ -359,6 +360,201 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    neck_audit = problem_selection[
+        "neck_isolation_and_open_model_source_reappraisal"
+    ]
+    _require_keys(
+        neck_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "aneusi_paper_doi",
+            "aneusi_repository",
+            "aneusi_repository_head",
+            "aneusi_code_license",
+            "aneusi_bundled_data_license",
+            "aneusi_release_count",
+            "aneusi_tree_truncated",
+            "aneusi_blob_count",
+            "aneusi_total_blob_bytes",
+            "aneusi_source_files",
+            "aneusi_model_files",
+            "aneusi_centerline_files",
+            "aneusi_neck_files",
+            "aneusi_visible_base_ids",
+            "aneusi_analysis_files",
+            "aneusi_clip_factors",
+            "aneusi_derived_vtk_per_clip_factor",
+            "aneusi_requires_input_neck_polygon",
+            "aneusi_cross_dataset_generalization_established",
+            "aneusi_vtk_or_ods_payload_body_accessed",
+            "neckspline_paper_doi",
+            "neckspline_directly_predicts_continuous_neck_curve",
+            "neckspline_expert_loop_training_asset_identified",
+            "neckspline_stated_code_url_http_status",
+            "neckspline_code_or_annotation_payload_accessed",
+            "open_model_record_id",
+            "open_model_record_revision",
+            "open_model_version",
+            "open_model_license",
+            "open_model_archive_name",
+            "open_model_archive_bytes",
+            "open_model_archive_md5",
+            "open_model_reported_positive_training_scans",
+            "open_model_training_sources_include_lausanne_and_adam",
+            "open_model_archive_accessed",
+            "workflow_variability_paper_doi",
+            "workflow_variability_transient_simulations",
+            "workflow_variability_patient_specific_anatomies",
+            "tar_repository",
+            "tar_repository_head",
+            "tar_repository_license",
+            "tar_blob_count",
+            "tar_total_blob_bytes",
+            "direct_prior_threats",
+            "candidates",
+            "surface_vector_reactivated",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "historical_vmr_or_surface_vector_score_or_job_relabelled",
+            "historical_vmr_or_surface_vector_job_repaired_or_rerun",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "neck-isolation/open-model source reappraisal",
+    )
+    expected_neck_candidates = [
+        (
+            "clipfactor_orbit_morphometry_stability_audit",
+            31.5,
+            [3.5, 4.5, 0.5, 5.0, 3.0, 5.0, 5.0, 5.0],
+        ),
+        (
+            "neck_conditioned_roi_isolation_transfer",
+            30.0,
+            [4.0, 3.5, 0.5, 4.5, 3.0, 5.0, 5.0, 4.5],
+        ),
+        (
+            "automatic_surface_neck_loop_transfer",
+            29.0,
+            [4.5, 3.0, 1.0, 4.0, 3.0, 4.5, 5.0, 4.0],
+        ),
+        (
+            "differential_diagnosis_set_calibration_of_open_model",
+            28.0,
+            [4.5, 2.5, 0.5, 4.0, 2.0, 5.0, 5.0, 4.5],
+        ),
+        (
+            "neck_uncertainty_to_hemodynamic_functional_certificate",
+            24.0,
+            [4.5, 2.0, 1.5, 2.0, 3.0, 3.5, 5.0, 2.5],
+        ),
+        (
+            "workflow_orbit_structure_faithful_wss_surrogate",
+            22.5,
+            [4.5, 3.0, 1.0, 1.5, 1.0, 4.0, 5.0, 2.5],
+        ),
+    ]
+    observed_neck_candidates = [
+        (row["id"], float(row["total"]), row["axis_scores"])
+        for row in neck_audit["candidates"]
+    ]
+    if (
+        neck_audit["status"]
+        != "fresh_batch_rejected_best_31_5_fails_total_and_residual_novelty_floor_no_active_lead"
+        or neck_audit["audit_document"]
+        != "docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md"
+        or neck_audit["automatic_selection_threshold"] != 32.0
+        or neck_audit["best_candidate_id"]
+        != "clipfactor_orbit_morphometry_stability_audit"
+        or neck_audit["best_score"] != 31.5
+        or neck_audit["best_residual_novelty_score"] != 0.5
+        or neck_audit["all_candidate_scores"]
+        != [31.5, 30.0, 29.0, 28.0, 24.0, 22.5]
+        or neck_audit["conditional_source_lead_count"] != 0
+        or neck_audit["primary_problem_selected"] is not False
+        or neck_audit["paper_identity_active"] is not False
+        or neck_audit["aneusi_repository_head"]
+        != "5b4c454ede46c4cd56d3831cb24748c7e1521eca"
+        or neck_audit["aneusi_code_license"] != "MIT"
+        or neck_audit["aneusi_bundled_data_license"] != "CC-BY-NC-3.0"
+        or neck_audit["aneusi_release_count"] != 0
+        or neck_audit["aneusi_tree_truncated"] is not False
+        or neck_audit["aneusi_blob_count"] != 1041
+        or neck_audit["aneusi_total_blob_bytes"] != 977740269
+        or neck_audit["aneusi_model_files"] != 103
+        or neck_audit["aneusi_centerline_files"] != 103
+        or neck_audit["aneusi_neck_files"] != 103
+        or neck_audit["aneusi_visible_base_ids"] != 99
+        or neck_audit["aneusi_analysis_files"] != 716
+        or neck_audit["aneusi_clip_factors"] != [20, 25, 30, 35, 40, 45, 50]
+        or neck_audit["aneusi_derived_vtk_per_clip_factor"] != 102
+        or neck_audit["aneusi_requires_input_neck_polygon"] is not True
+        or neck_audit["aneusi_cross_dataset_generalization_established"] is not False
+        or neck_audit["neckspline_stated_code_url_http_status"] != 401
+        or neck_audit["open_model_record_id"] != 17894703
+        or neck_audit["open_model_record_revision"] != 4
+        or neck_audit["open_model_archive_bytes"] != 1167744043
+        or neck_audit["open_model_archive_md5"]
+        != "3b38956f084d1570c00c47b232d6269d"
+        or neck_audit["open_model_reported_positive_training_scans"] != 1094
+        or neck_audit["workflow_variability_transient_simulations"] != 1024
+        or neck_audit["workflow_variability_patient_specific_anatomies"] != 4
+        or neck_audit["tar_repository_head"]
+        != "5e852dd919feb98406067a8034dd744ddb78877f"
+        or neck_audit["tar_repository_license"] is not None
+        or neck_audit["tar_blob_count"] != 153
+        or neck_audit["tar_total_blob_bytes"] != 4495522
+        or observed_neck_candidates != expected_neck_candidates
+        or any(row["critical_axis_pass"] for row in neck_audit["candidates"])
+        or any(abs(sum(row["axis_scores"]) - row["total"]) > 1e-9 for row in neck_audit["candidates"])
+        or any(
+            neck_audit[key] is not False
+            for key in (
+                "aneusi_vtk_or_ods_payload_body_accessed",
+                "neckspline_expert_loop_training_asset_identified",
+                "neckspline_code_or_annotation_payload_accessed",
+                "open_model_archive_accessed",
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_vmr_or_surface_vector_score_or_job_relabelled",
+                "historical_vmr_or_surface_vector_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or neck_audit["next_allowed_action"]
+        != "fresh_problem_level_source_or_asset_audit_only_no_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "Neck/isolation sources must remain a metadata-only rejected batch: "
+            "AneuSI views are not patients, NeckSpline and workflow variability "
+            "are direct priors, and no P0, method, server or GPU is authorized."
+        )
+    checks.append("neck isolation and open-model rejected-source boundary")
 
     vmr_growth = problem_selection["vmr_growth_paired_surface_structure_source_audit"]
     _require_keys(
@@ -5162,6 +5358,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("fifteen-source fail-closed RSNA release-contract watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
+        "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",
+        "automatic_surface_neck_loop_transfer_neckspline_direct_prior_and_missing_expert_loop_contract",
+        "differential_diagnosis_set_calibration_direct_prior_and_private_reference_errors",
+        "neck_uncertainty_to_hemodynamic_functional_certificate_missing_joint_asset",
+        "workflow_orbit_structure_faithful_wss_surrogate_direct_prior_and_four_anatomy_limit",
         "critical_flow_growth_biomarker_direct_prior_and_eleven_pair_limit",
         "low_shear_threshold_continuum_directly_tested_by_primary_paper",
         "mesh_fidelity_growth_signal_directly_tested_by_primary_paper",

@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 9.7, 2026-08-11):** Fresh neck/isolation,
+> workflow-orbit and open-model reappraisal rejects all six candidates at
+> **31.5/30.0/29.0/28.0/24.0/22.5**. AneuSI is a useful executable baseline,
+> but it consumes an input neck polygon and its 714 `clipFactor` surfaces are
+> repeated views of 99 visible base IDs, not patients. NeckSpline already owns
+> differentiable CTA/MRA neck-curve prediction; generic CFD workflow
+> variability, topology-aware segmentation and fixed open-model transport are
+> direct priors. The leader fails the total and residual-novelty floors
+> (0.5/5). No VTK/ODS/model archive, P0/P1, method, architecture, scientific-
+> server query, PBS/GPU, outer test or paper claim was opened. Surface-vector
+> remains inactive and historical VMR/job outcomes are unchanged. See the
+> [exact reappraisal](docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md).
+
 > **Current research state (schema 9.6, 2026-08-11):** Exact `introai9`
 > CPU-only P0 job `115848.ECE-util1` ended `E`/exit 2 after 00:04:44 with GPU 0.
 > Its bounded records report execution-incomplete/no scientific verdict: 0/10

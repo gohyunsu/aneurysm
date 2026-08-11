@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.7 architecture boundary · 2026-08-11:** There is still no current
+> GNN, operator or segmentation model. A neck-conditioned mesh network would
+> implement an already occupied task around AneuSI/NeckSpline; uncertainty,
+> Hodge, equivariance and topology losses cannot supply novelty. The model spec
+> remains a conditional template and no code path is authorized for training.
+
 > **Schema 9.6 model outcome · 2026-08-11:** No model is selected. VMR P0
 > `115848` ended execution-incomplete with 0/10 checks, so the stability P1 and
 > every architecture stage remain closed. Edge 1-form, Hodge/DEC, SE(3),

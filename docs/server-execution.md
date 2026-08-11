@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 9.7 server boundary · 2026-08-11:** This source reappraisal queried
+> no scientific server, transferred no data and created no PBS/GPU job. Public
+> web/Git metadata inspection is not an `introai9` observation. Future execution
+> remains gate-authorized `introai9` PBS only; no login-node GPU command and no
+> access/query/transfer/submission/monitoring of `junjinyong` is permitted.
+
 > **Schema 9.6 server outcome · 2026-08-11:** Exact source `9206093…` ran
 > once on `introai9` as CPU/PBS job `115848.ECE-util1`. Final state is
 > `E`/exit 2, walltime 00:04:44, CPU 00:00:01, memory 57,084 kB and GPU 0.

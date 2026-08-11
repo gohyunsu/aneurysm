@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · VMR 32.5/40 source history closed after CPU P0 E/exit 2 with 0/10 checks evaluated · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem-level source/asset audit; the closed VMR contract cannot be repaired or rerun and opens no P1, structure extraction, growth association, model or GPU experiment",
+    status: "Target locked · neck/isolation batch best 31.5/40 with residual novelty 0.5/5 rejected · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem-level source/asset audit; AneuSI/NeckSpline/workflow components open no payload, P0/P1, model or GPU experiment, and closed VMR contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A public neck-isolation tool strengthens the baseline, not the paper identity",
+      copy: "Exact AneuSI head 5b4c454… tracks MIT code plus bundled CC BY-NC 3.0 Aneurisk material: 1,041 blobs/977,740,269 bytes, 103 model/centerline/neck files and 716 analysis files. It requires an input neck polygon. The 103 lesion files reduce to 99 visible base IDs, while seven sets of 102 clip-factor VTKs are deterministic repeated views. NeckSpline already owns continuous CTA/MRA neck-curve prediction; a 1,024-run study owns broad CFD workflow variability; TAR and the open multicentre nnU-Net occupy the obvious segmentation/model controls. Six candidates score 31.5/30.0/29.0/28.0/24.0/22.5 and all fail total or critical floors.",
+      status: "Best 31.5/40 rejected · novelty 0.5/5 · VTK/ODS/model archive/P0/method/server/GPU 0",
+      url: "../docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "The VMR asset-semantics P0 closes without a scientific verdict",
@@ -934,7 +941,12 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "MAXIMUS TOF model · 2025",
       role: "future strong pretrained baseline only; not an open-set dataset",
-      provenance: "1.17 GB nnU-Net weights · CC BY-NC 4.0 · source images/mimic labels absent from record · archive 0 · no P0/model execution/GPU"
+      provenance: "v2 Zenodo 17894703 revision 4 · 1,167,744,043-byte nnU-Net archive · CC BY-NC 4.0 · reported 1,094 positive training scans include Lausanne and ADAM · archive 0 · no P0/model execution/GPU"
+    },
+    {
+      name: "AneuSI · exact Git 5b4c454…",
+      role: "source-rejected neck-conditioned isolation baseline; not training",
+      provenance: "MIT code + bundled CC BY-NC 3.0 notice · 103 lesion-labelled model/centerline/neck files → 99 visible base IDs · 7 × 102 deterministic clip-factor VTKs + 2 ODS · requires input neck polygon · VTK/ODS body/P0/model/GPU 0"
     },
     {
       name: "Rheology/slip case01 · 2026",
@@ -978,6 +990,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 9.7 rejects neck/isolation, workflow-orbit and open-model variants",
+      copy: "Exact AneuSI head 5b4c454… provides executable isolation code and a large tracked Aneurisk tree, but requires an input neck polygon. Its 103 lesion files reduce to 99 visible base IDs, and 714 clip-factor VTKs are repeated transformations rather than patients. NeckSpline directly predicts continuous CTA/MRA neck curves; the stated code endpoint currently returns HTTP 401. Zenodo v2 is an open 1,167,744,043-byte model trained partly on Lausanne and ADAM, not a clean external cohort. CFD workflow variability, TAR and generic selective/conformal topology UQ are direct priors. Six frozen rows score 31.5/30.0/29.0/28.0/24.0/22.5; the leader has residual novelty 0.5/5. All are rejected without VTK/ODS/model archive, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim.",
+      files: ["docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.11",
       category: "experiment",

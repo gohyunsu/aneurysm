@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-11 · Neck/isolation assets rejected as a paper identity · schema 9.7
+
+- Audited exact AneuSI head `5b4c454…`: 1,041 blobs/977,740,269 bytes,
+  103 model/centerline/neck files, 99 visible base IDs and 102 repeated derived
+  VTKs at each of seven `clipFactor` values. Read metadata, README and license;
+  opened no VTK or ODS body.
+- Corrected the interpretation: AneuSI requires an input neck polygon;
+  NeckSpline already predicts continuous CTA/MRA neck curves; 1,024-run CFD
+  workflow variability, TAR and the open multicentre nnU-Net are direct priors.
+- Froze six candidates at 31.5/30.0/29.0/28.0/24.0/22.5. The easiest executable
+  audit fails the 32 total and 2.5 residual-novelty floors with novelty 0.5.
+- Kept surface-vector inactive and opened no P0/P1, method, architecture,
+  scientific-server query, PBS/GPU, outer test, result or claim. Historical
+  no-verdict jobs remain immutable; `junjinyong` remained completely excluded.
+- Added a detailed beginner-facing site chapter and synchronized the protocol,
+  tests, research direction, ISBI boundary and decision history. Full regression
+  passed 360 tests with 66 optional-dependency skips out of 426; protocol 73
+  invariant groups, site graph, JavaScript and diff hygiene also passed.
+
 ## 2026-08-11 · VMR P0 closed without a scientific verdict · schema 9.6
 
 - Ran exact source `92060937529f915649fcbbc06fc2856ce45d61ea` once on

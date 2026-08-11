@@ -1,5 +1,37 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 neck/isolation and open-model reappraisal · schema 9.7:** Exact
+> AneuSI head `5b4c454…` is a substantive public baseline with MIT code and a
+> bundled CC BY-NC 3.0 Aneurisk notice. Its complete tree has 1,041 blobs/
+> 977,740,269 bytes, 103 model/centerline/neck files and 716 analysis files.
+> Strip `a`/`b` lesion suffixes to obtain 99 visible base IDs; never count the
+> 102 derived VTKs at each of seven `clipFactor` values as independent patients.
+> README/license metadata were read, but no VTK or ODS body was opened. AneuSI
+> requires an input neck polygon and does not establish cross-dataset neck
+> inference.
+>
+> NeckSpline DOI `10.1038/s41746-026-02613-6` directly owns differentiable
+> continuous CTA/MRA neck-curve prediction; its stated anonymous code endpoint
+> currently returns HTTP 401 and no expert-loop/code payload was accessed.
+> Open-model Zenodo `17894703` revision 4 exposes one 1,167,744,043-byte CC
+> BY-NC 4.0 v2 archive, but its reported 1,094 positive scans include Lausanne
+> and ADAM and are training provenance, not fresh external patients. Workflow
+> variability over 1,024 transient simulations/four anatomies, TAR and generic
+> selective/conformal topology UQ are direct priors.
+>
+> Six fresh rows are frozen at 31.5/30.0/29.0/28.0/24.0/22.5. The leader,
+> `clipfactor_orbit_morphometry_stability_audit`, fails total and residual
+> novelty at 0.5/5. Do not repair a score or promote isolation, neck inference,
+> uncertainty, Hodge/GNN/operator composition to novelty. Active lead/primary/
+> P0/P1/method/architecture/server query/PBS/GPU/outer test/result/C21/claim are
+> zero. Surface-vector is not reactivated and VMR/115645/115684/115848 histories
+> are not repaired, rerun or relabelled. Next action is a fresh problem-level
+> source/asset audit only. Future authorized execution is `introai9` PBS only;
+> prohibit login-node GPU and never access, query, transfer to, submit to or
+> monitor `junjinyong`. Full regression is 426 tests: 360 pass and 66 optional-
+> dependency skips. The machine protocol passes 73 invariant groups, while site
+> links/anchors/assets, JavaScript syntax and diff hygiene pass.
+
 > **2026-08-11 VMR P0 outcome · schema 9.6:** Exact public source
 > `92060937529f915649fcbbc06fc2856ce45d61ea` ran once on `introai9` as
 > CPU-only PBS job `115848.ECE-util1`. It ended `E`/exit 2 after 00:04:44 with

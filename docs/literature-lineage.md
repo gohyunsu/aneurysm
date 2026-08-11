@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.7 lineage · 2026-08-11:** NeckSpline → continuous image-derived
+> neck curve; AneuSI → supplied-neck surface isolation and clip-factor orbit;
+> workflow-variability analysis → reconstruction/segmentation/BC/ostium
+> sensitivity; TAR → topology-aware aneurysm-vessel segmentation; open nnU-Net
+> → multicentre detection/segmentation. This lineage leaves no independent
+> “neck + GNN/operator + UQ” gap. A downstream patient-grouped target and expert
+> neck provenance must both appear before re-entry.
+
 > **Schema 9.6 evidence status · 2026-08-11:** The direct-prior correction
 > below remains valid, but the VMR source did not establish endpoint
 > identifiability: exact P0 `115848` ended with 0/10 checks and no scientific

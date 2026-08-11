@@ -1,5 +1,11 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.7 experiment boundary · 2026-08-11:** The fresh six-way neck/
+> isolation screen admits zero candidates. Do not stage AneuSI VTKs, download
+> the open-model archive, register P0/P1, train a model or create a PBS job.
+> The proposed surface-vector sequence remains only a future gate order;
+> historical jobs are neither repaired nor reused as a local repair loop.
+
 > **Schema 9.6 P0 outcome · 2026-08-11:** The one allowed VMR CPU/PBS P0
 > (`115848.ECE-util1`) ended `E`/exit 2 after 00:04:44, CPU 00:00:01, memory
 > 57,084 kB and GPU 0. Bounded records report 0/10 checks,

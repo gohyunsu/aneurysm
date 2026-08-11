@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="VMR 성장 matched-pair transient WSS, surface-vector 구조 안정성, 독립 표본과 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="뇌동맥류 neck, AneuSI surface isolation, 반복 clipFactor와 독립 환자 단위, surface-vector 구조 안정성과 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#neck-isolation">Neck &amp; isolation</a>
       <a href="#vmr-growth-structure">VMR structure gate</a>
       <a href="#latent-transport">Latent transport</a>
       <a href="#synva-release">SynVA release</a>
@@ -69,22 +70,81 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.6</span>
-          <strong>VMR P0도 0/10 no-verdict로 닫혀, active lead와 paper identity는 모두 0개입니다.</strong>
+          <span>짧은 답 · schema 9.7</span>
+          <strong>AneuSI는 유용한 공개 baseline이지만 새 paper identity는 아니며, active lead는 여전히 0개입니다.</strong>
           <p>
-            Surface-vector 질문은 보존하지만 active topic이나 선택된 GNN/Hodge
-            architecture는 아닙니다. P0 `115645`는 0/10 checks가 미평가된
-            execution-incomplete/no-verdict이고 동일 contract를 재실행하지 않습니다.
-            새 VMR metadata는 22 patient와 11 growth/stable matched pair, 22개
-            time-resolved surface-VTP result archive를 연결합니다. 이 material source
-            때문에 structure-stability 문제만 32.5/40으로 조건부 입장했고 CPU P0를
-            한 번 실행했습니다. Job `115848.ECE-util1`은 E/exit 2로 끝나 10개
-            scientific check가 모두 미평가됐습니다. 하지만 source paper가 WSS/OSI/low-shear growth 분석과
-            mesh convergence를 이미 수행했으므로 growth biomarker는 novelty가
-            아닙니다. Complete archive/VTP access extent와 low-level cause는 unknown이고
-            payload는 남기지 않았습니다. 이 exact version은 수리·재실행 없이 닫혔고
-            P1, primary, contribution, method, architecture, GPU와 outer test는 0입니다.
+            AneuSI는 주어진 neck polygon을 기준으로 동맥류 주변 혈관을 일정 길이만큼
+            남겨 잘라내는 도구입니다. 공개 repository의 103 lesion-labelled model은
+            99 visible base ID이고, 일곱 `clipFactor`에서 나온 714 VTK는 반복 변환이지
+            714명의 환자가 아닙니다. NeckSpline은 영상에서 연속 neck curve를
+            예측하는 문제를 이미 다루고, CFD workflow 변화 연구도 직접 prior입니다.
+            최신 여섯 후보는 최고 31.5/40, residual novelty 0.5/5로 모두 기각됐습니다.
+            Surface-vector 질문과 과거 VMR 0/10 no-verdict 기록은 보존하지만,
+            P0/P1, contribution, method, architecture, server query, GPU와 outer test는
+            모두 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="neck-isolation">
+          <span>동맥류 neck과 surface isolation을 처음부터 이해하기</span>
+          <strong>“어디까지가 동맥류인가?”를 정해야 모양과 CFD 값을 비교할 수 있지만, 그 경계를 정하는 일과 경계를 이용해 자르는 일은 서로 다릅니다.</strong>
+          <p>
+            <em>Aneurysm neck</em>은 주머니처럼 부푼 동맥류와 원래 혈관이 만나는
+            입구입니다. Neck plane이나 닫힌 neck curve를 정하면 dome의 높이,
+            폭, aspect ratio, ostium area를 계산하고 CFD surface에서 dome만
+            분리할 수 있습니다. 경계가 조금만 달라져도 포함되는 triangle과 parent
+            vessel 길이가 달라져 morphology와 WSS 요약값이 변할 수 있습니다.
+          </p>
+          <p>
+            AneuSI는 이 경계를 <b>찾는 모델이 아닙니다.</b> Surface model,
+            centerline과 neck polygon을 입력받고, branch 직경에 사용자가 지정한
+            `clipFactor`를 곱해 neck 주변에 남길 혈관 길이를 결정합니다. 공개
+            분석은 factor 20, 25, 30, 35, 40, 45, 50의 결과를 제공합니다. 이는 한
+            anatomy를 일곱 번 바라본 <em>orbit</em>입니다. 같은 환자의 파생본을
+            서로 다른 train/test 환자로 나누면 leakage가 생기므로 모든 파생본은
+            base ID 단위로 함께 묶어야 합니다.
+          </p>
+          <p>
+            Repository에는 103개의 lesion-labelled model, centerline, neck 파일이
+            있지만 `a`/`b` suffix를 제거하면 99개 base ID입니다. 네 쌍의 model과
+            네 쌍의 centerline은 Git blob까지 동일합니다. 102개 결과 × 일곱 factor
+            = 714 VTK도 독립 표본 수가 아닙니다. 따라서 이 자산의 장점은 큰 환자
+            수가 아니라, 동일 anatomy에서 deterministic preprocessing choice를
+            비교할 수 있다는 점입니다.
+          </p>
+          <p>
+            그렇다면 “자동 neck predictor를 만들면 새롭지 않을까?”라는 질문이
+            생깁니다. NeckSpline이 이미 CTA/MRA에서 centerline-guided periodic
+            B-spline curve를 예측하고 width와 angle까지 평가합니다. 논문이 가리킨
+            anonymous code endpoint는 현재 HTTP 401이고 expert-loop training asset도
+            확인되지 않았지만, 자산 부족은 곧 algorithmic novelty가 아닙니다.
+            AneuSI와 NeckSpline을 연결하거나 GNN, Hodge, equivariance, topology loss,
+            conformal head를 추가하는 것만으로는 남은 research gap을 증명하지
+            못합니다.
+          </p>
+          <p>
+            여덟 축으로 가장 강한 `clipFactor` morphometry stability audit를 평가하면
+            중요도 3.5, 식별가능성 4.5, residual novelty 0.5, 자산 5.0, 독립 단위
+            3.0, baseline 5.0, figure 5.0, 일정 5.0으로 총 31.5/40입니다. 실행은
+            쉽지만 AneuSI release와 workflow-variability prior가 이미 핵심 질문을
+            점유해 novelty floor 2.5를 크게 밑돕니다. 그래서 payload를 열거나
+            “일단 돌려보는” P0를 만들지 않았습니다.
+          </p>
+          <p>
+            재진입에는 세 가지가 동시에 필요합니다. 첫째, 누가 어떤 영상에서
+            neck을 그렸는지와 reader variability를 추적하는 공개 provenance;
+            둘째, 파생 surface가 아니라 patient/base-family로 봉인된 split; 셋째,
+            morphology나 WSS 변화가 실제로 중요한 미점유 downstream endpoint를
+            훼손한다는 prospective failure mechanism입니다. 그 전까지 AneuSI는
+            baseline, NeckSpline은 direct prior, surface-vector는 inactive question입니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Useful public baseline</span>
+            <span class="yes">99 visible base IDs</span>
+            <span class="no">714 views ≠ 714 patients</span>
+            <span class="no">31.5/40 · novelty 0.5/5</span>
+            <span class="no">No payload · P0 · model · GPU</span>
+          </div>
+          <a href="../docs/neck-isolation-and-open-model-source-reappraisal-2026-08-11.md">exact sources, six frozen scores와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="vmr-growth-structure">
           <span>VMR source lead는 무엇이며 왜 곧바로 GNN을 학습하지 않나?</span>

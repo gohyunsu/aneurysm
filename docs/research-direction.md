@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 9.7 direction · 2026-08-11:** Do not pivot to an AneuSI/NeckSpline
+> neck-conditioned GNN, clip-factor robustness paper or open-model uncertainty
+> wrapper. AneuSI supplies deterministic isolation views from an already given
+> neck, NeckSpline owns automatic continuous neck curves, and broad CFD
+> workflow variability is direct prior. Six rows peak at 31.5/40 with residual
+> novelty 0.5/5. Surface-vector still lacks transient-WSS task-identifiability
+> evidence. Open no P0, model or compute; require a fresh versioned source that
+> joins expert neck/ROI provenance with an unoccupied patient-grouped downstream
+> target. [Exact reappraisal](neck-isolation-and-open-model-source-reappraisal-2026-08-11.md)
+
 > **Schema 9.6 outcome · 2026-08-11:** Exact VMR P0 job `115848` ended
 > `E`/exit 2 with 0/10 checks and no scientific verdict. Archive/VTP access
 > extent and low-level cause are unknown from the bounded records; no payload

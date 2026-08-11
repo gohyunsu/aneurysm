@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.7 asset boundary · 2026-08-11:** AneuSI tracks 103 lesion-labelled
+> surface/centerline/neck files but only 99 visible base IDs. Its seven groups
+> of 102 clip-factor VTK outputs are deterministic repeated views. Repository
+> metadata, README and license were read; VTK/ODS bodies were not. Zenodo v2 is
+> a 1,167,744,043-byte model artifact trained partly on Lausanne and ADAM, not a
+> fresh external cohort; its archive was not downloaded. Neither source is an
+> active train/validation/test dataset.
+
 > **Schema 9.6 VMR outcome boundary · 2026-08-11:** Exact CPU P0 `115848`
 > evaluated 0/10 checks and created no scientific aggregate. Its bounded record
 > cannot determine transient archive/VTP access extent, while confirming no
