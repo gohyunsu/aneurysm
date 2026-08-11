@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 9.9 scientific deployment·private interim
+> synchronization:** Exact scientific source
+> `ea30894b3df3721c22c2f2f312aac9cbb9990e18` passed Quality
+> `31511921846`. GitHub Pages deployment `5854315031` has success status and
+> live Overview/Learn expose schema 9.9. Exact Pages run `31511920868` has
+> successful build, report-build-status and deploy jobs, but its summary was
+> still `in_progress` at this observation; do not relabel the run conclusion.
+> Private interim ledger `048988e7bfc7ba482fb42518eca17c9e09f19523` is
+> remote exact, PRIVATE and anonymous API returns 404. `paper/main.tex`
+> SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization adds no lead, P0/P1, method, architecture, scientific-
+> server query, PBS/GPU, outer test, result row, C21 or claim. Future authorized
+> work is `introai9` PBS only; prohibit login-node GPU and never access, query,
+> transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 diagnostic-action and human-AI reappraisal · schema 9.9:** Six
 > fresh rows are frozen at 29.5/27.0/26.0/26.0/25.0/24.5 and all are rejected.
 > `cfd_applicability_certified_segmentation_on_iavs` is the additive best, but

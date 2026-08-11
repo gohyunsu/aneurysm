@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-12 · Schema 9.9 scientific source deployed and privately pinned
+
+- Exact scientific source `ea30894b3df3721c22c2f2f312aac9cbb9990e18`
+  passed Quality `31511921846`.
+- Pages deployment `5854315031` reports success and live Overview/Learn serve
+  schema 9.9. Exact Pages run `31511920868` has successful build,
+  report-build-status and deploy jobs, while the run summary remained
+  `in_progress` at this observation; no completed-run conclusion is asserted.
+- Private interim ledger `048988e7bfc7ba482fb42518eca17c9e09f19523` is
+  remote exact, PRIVATE and anonymous API returns 404. Manuscript and
+  references hashes remain unchanged.
+- This provenance opens no P0/P1, method, architecture, scientific server,
+  PBS/GPU, outer test, result row, C21 or claim.
+
 ## 2026-08-12 · Diagnostic action and human-AI pivots rejected · schema 9.9
 
 - Audited aneurysm automation bias, 7 T mimic clarification, the open

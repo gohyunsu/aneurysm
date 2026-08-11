@@ -1006,6 +1006,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 9.9 scientific source is live and privately pinned",
+      copy: "Exact scientific source ea30894b3df3721c22c2f2f312aac9cbb9990e18 passed Quality 31511921846. Pages deployment 5854315031 reports success and live Overview/Learn serve schema 9.9. Exact Pages run 31511920868 has successful build, report-build-status and deploy jobs, while its run summary remained in_progress at this observation, so no completed-run conclusion is asserted. Private interim ledger 048988e7bfc7ba482fb42518eca17c9e09f19523 is remote exact, PRIVATE and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. This provenance creates no lead, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row, C21 or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 9.9 rejects diagnostic-action and human-AI pivots",
       copy: "Automation-bias and 7 T sources establish clinically meaningful false-positive mimics and reference escalation, but no public patient-level reader/reference/action contract. IAVS directly owns CFD applicability and exact head 2e40088d… remains README-only. Contrast-retention functionals, MARTA, cross-view localization and generic deferral occupy the other obvious tasks and mechanisms. Six frozen rows score 29.5/27.0/26.0/26.0/25.0/24.5 and all fail total or critical novelty/asset floors. Mimic taxonomy and patient-level recommendation/acquisition action remain evaluation templates only. No terms, payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens. A source-watch HTTP 403 and terminated metadata request remain operational non-verdicts without retry or repair.",

@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 9.9 scientific deployment/private interim
+> verification:** Exact scientific source
+> `ea30894b3df3721c22c2f2f312aac9cbb9990e18` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31511921846).
+> GitHub Pages deployment `5854315031` reports success and the live Overview
+> and Learn pages expose schema 9.9. In exact Pages run
+> `31511920868`, build, report-build-status and deploy jobs all succeeded, while
+> the run summary remained `in_progress` at this provenance observation; it is
+> not called a completed run. Private interim ledger
+> `048988e7bfc7ba482fb42518eca17c9e09f19523` is remote exact, PRIVATE and
+> anonymous API returns 404. Manuscript and references remain byte-for-byte
+> unchanged. This is provenance only and opens no lead, P0/P1, method,
+> architecture, server query, PBS/GPU, outer test, result, C21 or claim.
+
 > **Current research state (schema 9.9, 2026-08-12):** A fresh diagnostic-
 > action and human-AI screen rejects all six candidates at
 > **29.5/27.0/26.0/26.0/25.0/24.5**. The strongest row, CFD-applicability-
