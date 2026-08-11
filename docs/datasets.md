@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.7 aSAH asset boundary · 2026-08-12:** Zenodo revision 2 exposes
+> one 648,502,298-byte CC-BY-4.0 RAR described as preprocessed NCCT plus expert
+> masks. Top-level metadata has no patient count, centre, endpoint, treatment,
+> repeated-scan or split table. The RAR was not opened. The linked pipeline
+> repository supplies code/template only and no tracked cohort, outcome table
+> or checkpoint. No dataset is active and no literature cohort count is used
+> as an archive manifest.
+
 > **Schema 10.6 DA_4DCTA asset boundary · 2026-08-12:** Exact Zenodo revision
 > 4 and GitHub head expose one 1.93 GB archive, code and derived trajectory
 > CSVs across 52 visible case directories. They do not expose source 4D-CTA

@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.7 map · 2026-08-12:** Open aSAH NCCT masks form a segmentation
+> asset branch, not an outcome branch. Swin-UNETR/nnU-Net, multiclass,
+> cross-aetiology transfer, mortality, GOS-volume equivalence and longitudinal
+> mapping already occupy the obvious descendants. The missing edge is a
+> versioned patient-level image--mask--endpoint--treatment--centre--split join.
+> All six residual branches are rejected; model and compute branches are empty.
+
 > **Schema 10.6 map · 2026-08-12:** DA_4DCTA contributes derived trajectory
 > CSVs and public code, not a complete image–operative-reference–registration–
 > surface–patient contract. Its central phenotype task is direct prior. Six

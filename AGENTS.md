@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 aSAH segmentation/outcome reappraisal · schema 10.7:** Exact
+> Zenodo record `8228847` revision 2 is open CC BY 4.0 and contains one
+> 648,502,298-byte RAR of stated NCCT/mask pairs. The archive body was not
+> opened and its metadata exposes no patient count, centre, split or outcome
+> join. Official pipeline head `3fbd7a9…` contains code and a non-patient
+> template, but no tracked patient cohort, mask set, mortality/GOS table or
+> checkpoint. The 2026 nnU-Net study directly compares manual/automatic volume
+> for six-month GOS; multiclass segmentation, LoRA/DoRA transfer and SAHVAI
+> 3D/4D are direct priors. Fresh scores 29.0/28.5/28.0/28.0/27.0/22.5 are all
+> rejected; best residual novelty is 1.0/5. Source-watch v14 freezes 23 public
+> states and can request review only. RAR/checkpoint/patient payload, active
+> lead/P0/P1/method/architecture/server/PBS/GPU/outer test/result/C21/claim are
+> 0. Surface-vector remains inactive and historical no-verdict jobs are not
+> repaired or rerun. Future gate-authorized execution uses `introai9` PBS only,
+> never login-node GPU. Never access, query, transfer to, submit to or monitor
+> `junjinyong`.
+
 > **2026-08-12 schema 10.6 scientific deployment·private synchronization:**
 > Exact scientific public source
 > `1f8ce3cf774b3a5562fbbc4c9ee5a48005056660` passed Quality

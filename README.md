@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.7, 2026-08-12):** The open aSAH NCCT
+> record is a real CC-BY-4.0 mask asset, but not a joined outcome benchmark.
+> Its single 648,502,298-byte RAR has no public top-level patient/centre/split/
+> outcome manifest, and the official code repository contains no tracked
+> patient cohort, outcome table or checkpoint. A 2026 study already tests
+> automatic-versus-manual haemorrhage volume for six-month GOS, while public
+> multiclass and LoRA/DoRA studies occupy the obvious model variants. Six fresh
+> formulations score **29.0/28.5/28.0/28.0/27.0/22.5**; all are rejected on
+> residual novelty or joined-asset floors. Source-watch v14 freezes 23 public
+> states. The RAR and checkpoint remain unopened; active lead/P0/P1/method/
+> model/server/GPU/claim are zero and surface-vector remains inactive. See the
+> [exact reappraisal](docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 10.6 scientific deployment/private synchronization:**
 > Exact scientific source `1f8ce3cf774b3a5562fbbc4c9ee5a48005056660`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31537504625)

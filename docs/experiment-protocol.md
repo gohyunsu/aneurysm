@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.7 execution boundary · 2026-08-12:** Zero candidates are
+> admitted. Do not open the RAR/checkpoint, invent an image--outcome join,
+> register P0/P1, choose a segmenter, query a scientific server or submit PBS/
+> GPU work. A future method-free P0 may begin only after a lawful row-level
+> endpoint manifest exists; it must first test whether Dice/volume-matched
+> errors alter patient outcome ranking or incremental value. A pass still does
+> not authorize an architecture or GPU.
+
 > **Schema 10.6 execution boundary · 2026-08-12:** No experiment is active.
 > DA_4DCTA re-entry requires source images, operative reference, registration,
 > surface adjacency, patient/centre/fold grouping and an identifiable dense or

@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 10.7 server state · 2026-08-12:** The aSAH source audit queried no
+> scientific server, transferred no patient/model payload and created or
+> monitored no PBS/GPU job. Active AURORA job count is zero. Future gate-
+> authorized execution uses `introai9` PBS only, never a login-node GPU
+> command. Never access, query, transfer to, submit to or monitor `junjinyong`.
+
 > **Schema 10.6 server state · 2026-08-12:** The 4D-CTA wall-phenotype audit
 > queried no scientific server, transferred no payload and created no PBS/GPU
 > job. Active AURORA job count is zero. Future gate-authorized execution uses

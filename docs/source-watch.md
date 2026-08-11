@@ -1,4 +1,11 @@
-# Public source watch · twenty material/direct-prior source states
+# Public source watch · twenty-three material/direct-prior source states
+
+> **Schema 10.7 watch · 2026-08-12:** `source_watch_v14.json` extends the
+> immutable 20-source ledger with exact aSAH mask-record revision 2, official
+> pipeline head `3fbd7a9…` and multiclass direct-prior head `269f472…`. All 23
+> snapshots authorize nothing. Source changes can request only their registered
+> source or baseline review; they cannot open the RAR/checkpoint, accept terms,
+> repair a score, register P0, select a model or authorize compute.
 
 > **Schema 10.6 watch · 2026-08-12:** `source_watch_v13.json` extends the
 > immutable 18-source ledger with exact DA_4DCTA Zenodo revision 4 and GitHub

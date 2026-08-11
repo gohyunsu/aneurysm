@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.7 lineage · 2026-08-12:** expert aSAH NCCT masks → Swin-UNETR
+> internal/external segmentation → multiclass haemorrhage nnU-Net →
+> cross-aetiology LoRA/DoRA small-volume transfer; in parallel, admission-CT
+> 3-month mortality → larger nnU-Net manual/automatic-volume equivalence for
+> 6-month GOS → SAHVAI 3D/4D longitudinal maps. This lineage removes novelty
+> from “better segmenter + outcome head/uncertainty.” The residual gap is a
+> reproducible joined endpoint asset and an observed information-preservation
+> failure, not an architecture name.
+
 > **Schema 10.6 lineage · 2026-08-12:** The direct line now includes (i) the
 > 52-aneurysm DA_4DCTA trajectory-to-intraoperative-wall-phenotype source,
 > (ii) a 10-patient/11-aneurysm prospective first-harmonic wall-pulsation study,

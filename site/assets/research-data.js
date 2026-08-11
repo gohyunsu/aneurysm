@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · 4D-CTA wall-phenotype batch best 29.0/40 rejected on target-identifiability and independent-unit floors; all six fail total or a critical floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or complete joined 4D-CTA/operative-reference asset audit; re-entry requires source images, operative RGB/video, frozen registration, surface adjacency, machine-auditable patient/centre/fold semantics and dense or precisely declared partial-label truth; surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · aSAH segmentation/outcome batch best 29.0/40 rejected on residual-novelty and joined-asset floors; all six fail total or a critical floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem or official versioned patient-level image–mask–outcome join audit; re-entry requires endpoint time, separate mortality/functional outcomes, treatment timing, patient/centre/repeat/split identifiers and adjudication; surface-vector remains inactive, no RAR/checkpoint, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Open aSAH masks do not create a joined outcome paper",
+      copy: "Exact Zenodo revision 2 contains one 648,502,298-byte CC-BY-4.0 RAR described as preprocessed NCCT plus expert masks, but its public metadata has no patient count, centre, treatment, endpoint or frozen split manifest. Exact official pipeline head 3fbd7a9… has code and a non-patient template but no tracked patient cohort, outcome table or checkpoint. A 2026 nnU-Net study already compares manual and automatic haemorrhage volume for six-month GOS; separate mortality, multiclass, LoRA/DoRA transfer and longitudinal mapping studies occupy the obvious variants. Six candidates score 29.0/28.5/28.0/28.0/27.0/22.5 and all are rejected.",
+      status: "Best 29.0/40 rejected · novelty 1.0/5 · joined image–mask–outcome asset 0 · RAR/checkpoint/P0/method/server/GPU 0",
+      url: "../docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "A public 4D-CTA trajectory release is material, but its core phenotype task is already occupied",
@@ -802,6 +809,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "aSAH NCCT expert-mask Zenodo · revision 2",
+      role: "watch-only segmentation asset; no active outcome or model role",
+      provenance: "one 648,502,298-byte CC-BY-4.0 RAR · MD5 a67bf358… · public patient/centre/split/outcome manifest 0 · archive body/checkpoint/P0/model/GPU 0"
+    },
+    {
       name: "TopBrain 2025 + exact podium controls + BraveCoWCoW",
       role: "source-corrected paired-modality anatomy/direct-prior branch; watch-only, not active aneurysm training",
       provenance: "TopBrain data Zenodo 16878417 rev.14 · 50 volumes = 25 same-patient CTA/MRA pairs · 40 CTA/42 MRA/34 shared whole-brain vessel labels ≠ aneurysm target · API license null/custom terms not accepted/archive 0 · podium Zenodo 20158639 rev.18 with five Docker archives unopened · BraveCoWCoW exact head e59e2368…/Apache-2.0/release 0 · 4,348-series pseudo-mask supervision ≠ independent dense reference · controlled RSNA payload 0 · best 30.5/40 rejected · no P0/model/GPU"
@@ -1073,6 +1085,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.7 separates an open aSAH mask archive from a joined outcome asset",
+      copy: "Exact Zenodo revision 2, official pipeline head 3fbd7a9… and multiclass baseline head 269f472… are frozen in fail-closed source-watch v14. The RAR was not opened and public metadata does not join patient, centre, split, treatment, endpoint time or outcome. Existing work already covers Swin-UNETR/nnU-Net segmentation, six-month-GOS volume equivalence, three-month mortality, multiclass segmentation, LoRA/DoRA transfer and longitudinal maps. Six rows score 29.0/28.5/28.0/28.0/27.0/22.5; all fail residual novelty or joined-asset floors. No checkpoint, scientific server, P0/P1, method, architecture, PBS/GPU, outer test or claim opened; surface-vector stays inactive.",
+      files: ["docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md", "configs/source_watch_v14.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", ".github/workflows/quality.yml", ".github/workflows/source-watch.yml"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.7 submission boundary · 2026-08-12:** Do not title or draft a
+> paper around aSAH Swin/nnU-Net, parameter-efficient transfer, uncertainty or
+> segmentation-to-outcome prediction. Direct priors occupy the obvious task,
+> and no public joined outcome asset supports confirmation. Latest best is
+> 29.0/40 with novelty 1.0/5. Title, abstract claim, contribution, method
+> figure, result table, C21, P0/P1, model and GPU remain unchanged/closed.
+
 > **Schema 10.6 submission boundary · 2026-08-12:** Do not title or draft a
 > paper around 4D-CTA wall-phenotype GNNs, temporal transformers, calibration or
 > motion-to-growth. The central task and reliability questions have direct

@@ -43,6 +43,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v11",
         "aurora.source_watch.v12",
         "aurora.source_watch.v13",
+        "aurora.source_watch.v14",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -144,7 +145,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v12_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v12(payload)
-    else:
+    elif schema == "aurora.source_watch.v13":
         if payload.get("extends") != "source_watch_v12.json":
             raise SourceWatchContractError("v13_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -155,6 +156,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v13_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v13(payload)
+    else:
+        if payload.get("extends") != "source_watch_v13.json":
+            raise SourceWatchContractError("v14_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v13":
+            raise SourceWatchContractError("v14_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v14_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v14(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -208,6 +220,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v11",
         "aurora.source_watch.v12",
         "aurora.source_watch.v13",
+        "aurora.source_watch.v14",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1481,6 +1494,136 @@ def _validate_v13(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v13_change_boundary_changed")
 
 
+def _validate_v14(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 23:
+        raise SourceWatchContractError("v14_watch_set_changed")
+    _validate_v13(
+        {
+            "watches": watches[:20],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    zenodo, pipeline, multiclass = watches[20:]
+    if (
+        zenodo.get("watch_id") != "asah_segmentation_zenodo_asset_v1"
+        or zenodo.get("kind") != "zenodo_record"
+        or zenodo.get("review_request") != "fresh_source_reaudit_only"
+        or zenodo.get("source")
+        != {
+            "zenodo_record_id": 8228847,
+            "zenodo_api_url": "https://zenodo.org/api/records/8228847",
+            "record_url": "https://zenodo.org/records/8228847",
+        }
+        or zenodo.get("frozen_snapshot")
+        != {
+            "zenodo_record_id": 8228847,
+            "zenodo_modified": "2023-08-10T02:26:49.570302+00:00",
+            "zenodo_revision": 2,
+            "zenodo_status": "published",
+            "zenodo_access_right": "open",
+            "zenodo_license_id": "cc-by-4.0",
+            "zenodo_files": [
+                {
+                    "key": "subarachnoid_hemorrhage_rhuh.rar",
+                    "size": 648502298,
+                    "checksum": "md5:a67bf358ebb326f156071864c318ab42",
+                }
+            ],
+            "payload_or_manifest_files": ["subarachnoid_hemorrhage_rhuh.rar"],
+            "availability": "zenodo_record_metadata_state",
+        }
+    ):
+        raise SourceWatchContractError("asah_zenodo_contract_changed")
+
+    pipeline_entries = [
+        {"name": "ct_template2mni.nii.gz", "type": "file", "size": 7493552},
+        {"name": "gui.py", "type": "file", "size": 4607},
+        {"name": "inference_2.py", "type": "file", "size": 7210},
+        {"name": "LICENSE", "type": "file", "size": 8829},
+        {"name": "README.md", "type": "file", "size": 8981},
+        {"name": "requirements.txt", "type": "file", "size": 299},
+        {"name": "SAH_mortality_prediction.py", "type": "file", "size": 16943},
+        {"name": "THIRDPARTYLICENSEREADME", "type": "file", "size": 9715},
+        {"name": "unvrh.png", "type": "file", "size": 162458},
+    ]
+    pipeline_material = [
+        "SAH_mortality_prediction.py",
+        "THIRDPARTYLICENSEREADME",
+        "ct_template2mni.nii.gz",
+        "gui.py",
+        "inference_2.py",
+        "requirements.txt",
+        "unvrh.png",
+    ]
+    if (
+        pipeline.get("watch_id") != "asah_segmentation_mortality_code_v1"
+        or pipeline.get("kind") != "github"
+        or pipeline.get("review_request") != "fresh_source_reaudit_only"
+        or pipeline.get("source")
+        != {
+            "repository": "smcch/Subarachnoid_Hemorrhage_segmentation_and_mortality_prediction",
+            "repository_url": "https://github.com/smcch/Subarachnoid_Hemorrhage_segmentation_and_mortality_prediction",
+            "default_branch": "main",
+            "paper_url": "https://doi.org/10.3390/brainsci14010010",
+        }
+        or pipeline.get("frozen_snapshot")
+        != {
+            "main_head_sha": "3fbd7a9282287a719aff5f603e9539b7a886b373",
+            "root_entries": pipeline_entries,
+            "release_count": 0,
+            "license_spdx_id": "NOASSERTION",
+            "repository_size_kib": 54931,
+            "payload_or_code_entries": pipeline_material,
+            "availability": "public_pipeline_code_and_template_without_patient_mask_outcome_split_or_tracked_checkpoint",
+        }
+    ):
+        raise SourceWatchContractError("asah_pipeline_contract_changed")
+
+    if (
+        multiclass.get("watch_id") != "asah_multiclass_baseline_release_v1"
+        or multiclass.get("kind") != "github"
+        or multiclass.get("review_request")
+        != "direct_prior_baseline_feasibility_reaudit_only"
+        or multiclass.get("source")
+        != {
+            "repository": "claim-berlin/Multiclass-Segmentation-of-Hemorrhages-in-CT",
+            "repository_url": "https://github.com/claim-berlin/Multiclass-Segmentation-of-Hemorrhages-in-CT",
+            "default_branch": "main",
+            "paper_url": "https://doi.org/10.3389/fneur.2024.1490216",
+        }
+        or multiclass.get("frozen_snapshot")
+        != {
+            "main_head_sha": "269f4724fde89515eac8dbdac648925dc24bf492",
+            "root_entries": [
+                {"name": "demo_data", "type": "dir", "size": 0},
+                {"name": "figures", "type": "dir", "size": 0},
+                {"name": "LICENSE.md", "type": "file", "size": 17689},
+                {"name": "nnUNET_results", "type": "dir", "size": 0},
+                {"name": "README.md", "type": "file", "size": 3590},
+            ],
+            "release_count": 0,
+            "license_spdx_id": "NOASSERTION",
+            "repository_size_kib": 21981,
+            "payload_or_code_entries": ["demo_data", "figures", "nnUNET_results"],
+            "availability": "public_config_demo_and_weight_link_without_patient_or_outcome_join",
+        }
+    ):
+        raise SourceWatchContractError("asah_multiclass_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "open_mask_archive_is_not_joined_outcome_asset",
+            "pipeline_code_is_not_patient_outcome_release",
+            "public_weights_are_direct_prior_not_task_identity",
+            "paper_cohort_count_is_not_archive_manifest",
+        )
+    ):
+        raise SourceWatchContractError("v14_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -2558,6 +2701,7 @@ def evaluate_config(
         "aurora.source_watch.v11",
         "aurora.source_watch.v12",
         "aurora.source_watch.v13",
+        "aurora.source_watch.v14",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

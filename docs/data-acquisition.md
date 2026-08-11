@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **Schema 10.7 acquisition boundary · 2026-08-12:** Do not open the aSAH RAR,
+> follow the Google-Drive checkpoint link, infer patient rows from paper counts
+> or join cohorts by institutional similarity. Source-watch v14 is metadata-
+> only. Re-entry requires an official row-level image, compartment mask,
+> endpoint time, separated mortality/functional outcome, treatment/withdrawal
+> timing, patient/centre/repeat/split identifiers and adjudication contract.
+
 > **Schema 10.6 acquisition boundary · 2026-08-12:** Do not download the
 > 1,934,055,674-byte DA_4DCTA archive or derive new labels from its trajectory
 > CSVs. Source-watch v13 is metadata-only. A fresh P0 requires an official

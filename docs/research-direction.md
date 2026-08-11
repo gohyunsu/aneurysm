@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Schema 10.7 direction · 2026-08-12:** Do not pivot to Swin-UNETR, nnU-Net,
+> LoRA/DoRA, uncertainty or an outcome-loss wrapper merely because an aSAH
+> mask archive is open. The obvious segmentation-to-GOS claim and model
+> variants are direct prior, while no public versioned patient-level image--
+> mask--outcome join exists. The best fresh row scores 29.0/40 with novelty
+> 1.0/5. Retain outcome-definition, small-volume failure and patient grouping
+> as evaluation principles only; open no RAR, checkpoint, P0, model or compute.
+
 > **Schema 10.6 direction · 2026-08-12:** Do not pivot to a GNN, transformer
 > or conformal wrapper for DA_4DCTA. The source paper already owns 4D-CTA
 > trajectory-to-intraoperative-wall-phenotype prediction, while the release

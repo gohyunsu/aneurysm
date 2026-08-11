@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-12 · aSAH segmentation/outcome asset reappraisal · schema 10.7
+
+- Froze exact Zenodo revision 2, official pipeline head `3fbd7a9…` and public
+  multiclass baseline head `269f472…` in a fail-closed 23-source watch. No RAR,
+  checkpoint or patient-level medical payload was opened.
+- Separated an open NCCT/mask archive from a versioned image--mask--outcome
+  join. Paper cohort counts are not treated as an archive manifest.
+- Added the 2026 six-month-GOS volume-equivalence study, 3-month mortality,
+  multiclass segmentation, LoRA/DoRA transfer and longitudinal SAHVAI as direct
+  priors; none of their results is an AURORA result.
+- Froze six candidates at 29.0/28.5/28.0/28.0/27.0/22.5. Every row fails
+  residual novelty or joined-asset floors; no P0, model, server query or compute
+  opened and surface-vector remains inactive.
+
 ## 2026-08-12 · Schema 10.6 scientific source deployed and privately pinned
 
 - Exact scientific source `1f8ce3cf774b3a5562fbbc4c9ee5a48005056660`

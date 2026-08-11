@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.6":
-        raise ProtocolError("The current research-state schema must be version 10.6.")
+    if protocol["schema_version"] != "10.7":
+        raise ProtocolError("The current research-state schema must be version 10.7.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_4dcta_wall_phenotype_batch_rejected_best_29_target_and_unit_floors_no_p0_no_compute"
+        != "no_active_problem_asah_segmentation_outcome_batch_rejected_best_29_novelty_and_joined_asset_floors_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "aneurysmal_sah_segmentation_outcome_reappraisal",
             "four_d_cta_wall_phenotype_release_reappraisal",
             "culprit_lesion_and_mimic_differential_reappraisal",
             "topbrain2025_and_rsna_multitask_source_correction",
@@ -263,6 +264,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v11",
             "public_source_watch_v12",
             "public_source_watch_v13",
+            "public_source_watch_v14",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -273,13 +275,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_4dcta_wall_phenotype_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_asah_segmentation_outcome_batch_rejected_no_method_no_compute_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "derived_trajectory_csv_and_code_only_no_source_4dcta_intraoperative_reference_registration_surface_or_verified_patient_manifest_no_scientific_server"
+        != "public_asah_zenodo_metadata_and_small_code_repositories_only_no_rar_checkpoint_patient_mask_outcome_join_or_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -291,16 +293,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_material_joined_asset_audit_only_no_data_request_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/four-d-cta-wall-phenotype-release-and-target-reappraisal-2026-08-12.md"
+        != "docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "verification_aware_wall_phenotype_partial_identification_rejected_at_29_target_and_independent_unit_floors"
+        != "cross_aetiology_small_volume_asah_transport_rejected_at_29_residual_novelty_floor"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The 4D-CTA wall-phenotype batch must remain rejected and the VMR candidate "
-            "must remain closed after its exact CPU P0 ended execution-incomplete; "
+            "The aSAH segmentation-outcome batch must remain rejected and surface-vector "
+            "must remain inactive after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
@@ -362,7 +364,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
         or admission_v2["current_batch_best_score"] != 29.0
-        or admission_v2["current_batch_best_residual_novelty"] != 2.5
+        or admission_v2["current_batch_best_residual_novelty"] != 1.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -371,6 +373,102 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    sah = problem_selection["aneurysmal_sah_segmentation_outcome_reappraisal"]
+    _require_keys(
+        sah,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "zenodo_record_id", "zenodo_record_revision", "zenodo_license",
+            "zenodo_archive_name", "zenodo_archive_bytes", "zenodo_archive_md5",
+            "zenodo_archive_opened",
+            "zenodo_metadata_declares_preprocessed_ncct_and_expert_mask_pairs",
+            "zenodo_top_level_manifest_public", "zenodo_patient_count_public",
+            "versioned_image_mask_outcome_join_public",
+            "versioned_patient_centre_split_manifest_public",
+            "official_pipeline_repository_head",
+            "official_pipeline_tracked_patient_data",
+            "official_pipeline_tracked_checkpoint",
+            "multiclass_baseline_repository_head", "source_results_reproduced_by_aurora",
+            "direct_prior_threats", "candidates", "required_reentry_observables",
+            "surface_vector_reactivated", "p0_registered", "p1_registered",
+            "method_selected", "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "submission_identity_active", "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "aneurysmal SAH segmentation-outcome reappraisal",
+    )
+    expected_sah_candidates = [
+        ("cross_aetiology_small_volume_asah_transport", 29.0),
+        ("segmentation_error_aware_six_month_gos_volume_equivalence", 28.5),
+        ("multicompartment_burden_beyond_modified_fisher", 28.0),
+        ("segmentation_conditioned_three_month_mortality", 28.0),
+        ("selective_outcome_preserving_segmentation", 27.0),
+        ("longitudinal_resolution_dci_trajectory_modelling", 22.5),
+    ]
+    if (
+        sah["status"]
+        != "fresh_problem_level_batch_rejected_best_29_fails_residual_novelty_and_joined_outcome_asset_floors"
+        or sah["audit_document"]
+        != "docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md"
+        or sah["automatic_selection_threshold"] != 32.0
+        or sah["best_candidate_id"] != "cross_aetiology_small_volume_asah_transport"
+        or sah["best_score"] != 29.0
+        or sah["best_residual_novelty_score"] != 1.0
+        or sah["all_candidate_scores"] != [29.0, 28.5, 28.0, 28.0, 27.0, 22.5]
+        or sah["conditional_source_lead_count"] != 0
+        or sah["primary_problem_selected"] is not False
+        or sah["paper_identity_active"] is not False
+        or sah["zenodo_record_id"] != 8228847
+        or sah["zenodo_record_revision"] != 2
+        or sah["zenodo_license"] != "cc-by-4.0"
+        or sah["zenodo_archive_name"] != "subarachnoid_hemorrhage_rhuh.rar"
+        or sah["zenodo_archive_bytes"] != 648502298
+        or sah["zenodo_archive_md5"] != "a67bf358ebb326f156071864c318ab42"
+        or sah["zenodo_archive_opened"] is not False
+        or sah["zenodo_metadata_declares_preprocessed_ncct_and_expert_mask_pairs"]
+        is not True
+        or any(
+            sah[key] is not False
+            for key in (
+                "zenodo_top_level_manifest_public", "zenodo_patient_count_public",
+                "versioned_image_mask_outcome_join_public",
+                "versioned_patient_centre_split_manifest_public",
+                "official_pipeline_tracked_patient_data",
+                "official_pipeline_tracked_checkpoint",
+                "source_results_reproduced_by_aurora",
+            )
+        )
+        or sah["official_pipeline_repository_head"]
+        != "3fbd7a9282287a719aff5f603e9539b7a886b373"
+        or sah["multiclass_baseline_repository_head"]
+        != "269f4724fde89515eac8dbdac648925dc24bf492"
+        or [(row["id"], row["total"]) for row in sah["candidates"]]
+        != expected_sah_candidates
+        or any(row["critical_axis_pass"] is not False for row in sah["candidates"])
+        or any(
+            sah[key] is not False
+            for key in (
+                "surface_vector_reactivated", "p0_registered", "p1_registered",
+                "method_selected", "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or sah["next_allowed_action"]
+        != "fresh_problem_level_source_or_versioned_joined_outcome_asset_audit_only_no_rar_checkpoint_payload_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "The aSAH mask release must remain a rejected metadata-only source: "
+            "no patient-level outcome join, residual novelty, payload, model or compute."
+        )
+    checks.append("aSAH segmentation-outcome joined-asset and novelty rejection boundary")
 
     wall_release = problem_selection[
         "four_d_cta_wall_phenotype_release_reappraisal"
@@ -7335,6 +7433,71 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "score repair, P0, model or compute."
         )
     checks.append("twenty-source fail-closed DA_4DCTA watch boundary")
+    source_watch_v14 = problem_selection["public_source_watch_v14"]
+    _require_keys(
+        source_watch_v14,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "asah_zenodo_revision",
+            "asah_archive_bytes", "asah_archive_md5",
+            "asah_pipeline_repository_head", "asah_multiclass_repository_head",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+            "p0_or_p1_authorized", "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized", "server_queried",
+            "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v14",
+    )
+    if (
+        source_watch_v14["status"]
+        != "watch_only_all_twenty_three_frozen_snapshots_match"
+        or source_watch_v14["config"] != "configs/source_watch_v14.json"
+        or source_watch_v14["extends_historical_config"]
+        != "configs/source_watch_v13.json"
+        or source_watch_v14["config_sha256"]
+        != "299c06ff709aa268a9f0b6b9bac22a30cb13d91f518df93971db3a9513c331ed"
+        or source_watch_v14["watch_count"] != 23
+        or source_watch_v14["added_watch_ids"]
+        != [
+            "asah_segmentation_zenodo_asset_v1",
+            "asah_segmentation_mortality_code_v1",
+            "asah_multiclass_baseline_release_v1",
+        ]
+        or source_watch_v14["asah_zenodo_revision"] != 2
+        or source_watch_v14["asah_archive_bytes"] != 648502298
+        or source_watch_v14["asah_archive_md5"]
+        != "a67bf358ebb326f156071864c318ab42"
+        or source_watch_v14["asah_pipeline_repository_head"]
+        != "3fbd7a9282287a719aff5f603e9539b7a886b373"
+        or source_watch_v14["asah_multiclass_repository_head"]
+        != "269f4724fde89515eac8dbdac648925dc24bf492"
+        or source_watch_v14["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v14[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+                "p0_or_p1_authorized", "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized", "server_queried",
+                "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v14["decision"]
+        != "continue_fail_closed_twenty_three_source_watch_only_asah_changes_request_registered_review_without_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v14 must preserve twenty-three exact public snapshots; "
+            "aSAH changes may request only their registered review, never payload, "
+            "score repair, P0, model or compute."
+        )
+    checks.append("twenty-three-source fail-closed aSAH asset and baseline watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
         "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",

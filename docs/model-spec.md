@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.7 model boundary · 2026-08-12:** No segmentation or outcome model
+> is selected. Swin-UNETR, nnU-Net, multiclass heads, LoRA/DoRA, longitudinal
+> maps, uncertainty and downstream-aware losses are direct priors or controls;
+> recombining them cannot repair the missing patient-level endpoint join.
+> Surface GNN/Hodge/equivariance modules remain inactive controls for a
+> different unverified task. Model specification resumes only after a stable,
+> source-identifiable failure passes method-free gates.
+
 > **Schema 10.6 model boundary · 2026-08-12:** No model is selected. A surface
 > GNN cannot be defined from trajectory CSVs when the release lacks frozen
 > surface adjacency; an attention/LSTM replacement would also be a direct-prior
