@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **2026-08-12 rupture-time acquisition boundary:** Do not request or infer the
+> QIMS patient rows, and do not treat PLOS `Table 1.xls` as CTA or patient-level
+> data. Re-entry requires one official versioned baseline-unruptured,
+> predictor-time, event/censoring, treatment, patient/lesion/centre/split
+> release. Metadata inspection authorizes no download, `introai9` query or
+> model training.
+
 > **Schema 10.7 acquisition boundary · 2026-08-12:** Do not open the aSAH RAR,
 > follow the Google-Drive checkpoint link, infer patient rows from paper counts
 > or join cohorts by institutional similarity. Source-watch v14 is metadata-

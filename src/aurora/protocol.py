@@ -189,6 +189,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "future_source_admission_v2",
             "aneurysmal_sah_segmentation_outcome_reappraisal",
             "rsna_release_layer_and_webgan_utility_delta",
+            "rupture_state_future_risk_and_unit_semantics_delta",
             "four_d_cta_wall_phenotype_release_reappraisal",
             "culprit_lesion_and_mimic_differential_reappraisal",
             "topbrain2025_and_rsna_multitask_source_correction",
@@ -630,6 +631,139 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "claim, original patient asset, model, server, compute or paper identity."
         )
     checks.append("RSNA release-layer and WEB-GAN donor-utility rejection boundary")
+
+    rupture_delta = problem_selection[
+        "rupture_state_future_risk_and_unit_semantics_delta"
+    ]
+    _require_keys(
+        rupture_delta,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "current_schema_or_primary_batch_changed", "qims_article_doi",
+            "qims_reported_patients", "qims_reported_aneurysms",
+            "qims_reported_centres", "qims_centre_1_patients",
+            "qims_centre_1_aneurysms", "qims_centre_1_split_rows",
+            "qims_external_set_1_patients", "qims_external_set_1_aneurysms",
+            "qims_external_set_2_patients", "qims_external_set_2_aneurysms",
+            "qims_reported_auc_train_internal_external",
+            "qims_target_is_cross_sectional_rupture_status",
+            "qims_admission_blood_glucose_is_post_event_for_ruptured_presentations",
+            "qims_patient_grouped_centre_1_split_explicit",
+            "qims_public_versioned_patient_image_feature_split_asset_identified",
+            "qims_source_results_reproduced_by_aurora", "plos_article_doi",
+            "plos_reported_aneurysm_patients", "plos_reported_controls",
+            "plos_reported_ruptured_unruptured", "plos_figshare_article_id",
+            "plos_figshare_license", "plos_figshare_file_name",
+            "plos_figshare_file_bytes", "plos_figshare_file_md5",
+            "plos_figshare_object_is_aggregate_table_not_patient_rows_or_cta",
+            "plos_figshare_xls_body_opened",
+            "patient_image_or_feature_payload_accessed", "candidates",
+            "source_watch_added", "surface_vector_reactivated", "p0_registered",
+            "p1_registered", "method_selected", "architecture_selected",
+            "scientific_server_queried", "gpu_training_authorized",
+            "outer_test_authorized", "submission_identity_active",
+            "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "rupture-state and future-risk unit-semantics delta",
+    )
+    expected_rupture_delta_candidates = [
+        ("external_centre_rupture_status_calibration_decomposition", 27.5),
+        ("mca_circle_of_willis_occurrence_transport", 27.0),
+        ("measurement_time_aware_incremental_radiomics_value", 25.5),
+        ("pre_event_only_individualized_future_rupture_prediction", 25.0),
+        ("patient_grouped_multi_aneurysm_external_validation", 24.0),
+        ("rupture_status_synthetic_data_external_utility", 23.5),
+    ]
+    if (
+        rupture_delta["status"]
+        != "delta_rejected_cross_sectional_rupture_status_is_not_future_risk_no_public_joined_asset_no_state_change"
+        or rupture_delta["audit_document"]
+        != "docs/rupture-state-future-risk-and-unit-semantics-delta-2026-08-12.md"
+        or rupture_delta["automatic_selection_threshold"] != 32.0
+        or rupture_delta["best_candidate_id"]
+        != "external_centre_rupture_status_calibration_decomposition"
+        or rupture_delta["best_score"] != 27.5
+        or rupture_delta["best_residual_novelty_score"] != 2.5
+        or rupture_delta["all_candidate_scores"]
+        != [27.5, 27.0, 25.5, 25.0, 24.0, 23.5]
+        or rupture_delta["conditional_source_lead_count"] != 0
+        or rupture_delta["qims_article_doi"] != "10.21037/qims-2025-1-2593"
+        or (
+            rupture_delta["qims_reported_patients"],
+            rupture_delta["qims_reported_aneurysms"],
+            rupture_delta["qims_reported_centres"],
+        ) != (756, 877, 3)
+        or (
+            rupture_delta["qims_centre_1_patients"],
+            rupture_delta["qims_centre_1_aneurysms"],
+            rupture_delta["qims_centre_1_split_rows"],
+        ) != (404, 450, [314, 136])
+        or (
+            rupture_delta["qims_external_set_1_patients"],
+            rupture_delta["qims_external_set_1_aneurysms"],
+            rupture_delta["qims_external_set_2_patients"],
+            rupture_delta["qims_external_set_2_aneurysms"],
+        ) != (125, 148, 227, 279)
+        or rupture_delta["qims_reported_auc_train_internal_external"]
+        != [0.887, 0.910, 0.773, 0.735]
+        or rupture_delta["plos_article_doi"] != "10.1371/journal.pone.0319500"
+        or (
+            rupture_delta["plos_reported_aneurysm_patients"],
+            rupture_delta["plos_reported_controls"],
+            rupture_delta["plos_reported_ruptured_unruptured"],
+        ) != (269, 269, [193, 76])
+        or rupture_delta["plos_figshare_article_id"] != 28661913
+        or rupture_delta["plos_figshare_license"] != "cc-by-4.0"
+        or rupture_delta["plos_figshare_file_name"] != "Table 1.xls"
+        or rupture_delta["plos_figshare_file_bytes"] != 5632
+        or rupture_delta["plos_figshare_file_md5"]
+        != "6e188acb4759df4b14ca4cb7d5eb3477"
+        or [
+            (row["id"], float(row["total"]))
+            for row in rupture_delta["candidates"]
+        ] != expected_rupture_delta_candidates
+        or any(row["critical_axis_pass"] is not False for row in rupture_delta["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in rupture_delta["candidates"]
+        )
+        or any(
+            rupture_delta[key] is not False
+            for key in (
+                "current_schema_or_primary_batch_changed",
+                "qims_patient_grouped_centre_1_split_explicit",
+                "qims_public_versioned_patient_image_feature_split_asset_identified",
+                "qims_source_results_reproduced_by_aurora",
+                "plos_figshare_xls_body_opened",
+                "patient_image_or_feature_payload_accessed", "source_watch_added",
+                "surface_vector_reactivated", "p0_registered", "p1_registered",
+                "method_selected", "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or any(
+            rupture_delta[key] is not True
+            for key in (
+                "qims_target_is_cross_sectional_rupture_status",
+                "qims_admission_blood_glucose_is_post_event_for_ruptured_presentations",
+                "plos_figshare_object_is_aggregate_table_not_patient_rows_or_cta",
+            )
+        )
+        or rupture_delta["next_allowed_action"]
+        != "fresh_problem_level_source_or_timestamped_patient_grouped_future_event_asset_audit_only_no_data_request_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "The rupture-state/future-risk delta must remain a rejected source "
+            "audit: status is not a future event, patient grouping is unresolved, "
+            "the public PLOS object is aggregate, and no model or compute may open."
+        )
+    checks.append("rupture-state versus future-risk and patient-unit rejection boundary")
 
     wall_release = problem_selection[
         "four_d_cta_wall_phenotype_release_reappraisal"

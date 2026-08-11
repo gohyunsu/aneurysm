@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **2026-08-12 rupture-time delta:** Scientific-server query, transfer,
+> submission and monitoring count are zero. Neither the QIMS cohort nor PLOS
+> patient CTA/feature rows were accessed; the 5,632-byte Figshare XLS body was
+> not opened. No P0, PBS or GPU authority exists. A future gate-authorized job
+> may use `introai9` PBS only; login-node GPU and every `junjinyong` action are
+> prohibited.
+
 > **Schema 10.7 server state · 2026-08-12:** The aSAH source audit queried no
 > scientific server, transferred no patient/model payload and created or
 > monitored no PBS/GPU job. Active AURORA job count is zero. Future gate-

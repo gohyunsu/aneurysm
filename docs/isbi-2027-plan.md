@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-12 rupture-time decision:** Cross-sectional rupture status is not
+> a viable new paper identity. Three-centre external validation, clinical+
+> morphology+radiomics fusion and synthetic tabular data are directly
+> occupied, while no public timestamped future-event cohort exists. The batch
+> scores 27.5/27.0/25.5/25.0/24.0/23.5 and all rows are rejected. Preserve
+> decision-time and patient-unit controls for any future proposal; select no
+> architecture and run no experiment.
+
 > **Schema 10.7 submission boundary · 2026-08-12:** Do not title or draft a
 > paper around aSAH Swin/nnU-Net, parameter-efficient transfer, uncertainty or
 > segmentation-to-outcome prediction. Direct priors occupy the obvious task,

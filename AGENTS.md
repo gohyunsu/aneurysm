@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 rupture-state/future-risk and unit-semantics delta · no state
+> change:** QIMS `10.21037/qims-2025-1-2593` reports 756 patients/877
+> aneurysms from three centres. Its endpoint is observed rupture status, not a
+> future-event estimand; admission blood glucose is post-event for ruptured
+> presentations. Centre-I 314/136 rows sum to 450 aneurysms from 404 patients,
+> and patient-grouped splitting is not explicit. Treat this as unresolved
+> dependence, never proven leakage. Source AUC 0.887/0.910/0.773/0.735 is not
+> an AURORA result. PLOS Figshare `28661913` exposes one 5,632-byte aggregate
+> `Table 1.xls`, not patient rows or CTA. Scores
+> 27.5/27.0/25.5/25.0/24.0/23.5 are all rejected. Schema 10.7, current aSAH
+> batch, surface-vector inactivity and lead/P0/P1/method/architecture/server/
+> PBS/GPU/outer-test/claim 0 remain unchanged. No patient payload, XLS body,
+> request or scientific server was opened. Future gate-authorized execution is
+> `introai9` PBS-only; never access, query, transfer to, submit to or monitor
+> `junjinyong`.
+
 > **2026-08-12 RSNA/WEB-GAN delta deployment·private synchronization:** Exact
 > public scientific source `445e3dc90abffad9e00bf0b1069acc949d66f536`
 > passed Quality `31543772897` and Pages `31543771957`. Private paper ledger

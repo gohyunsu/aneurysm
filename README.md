@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 rupture-state/future-risk delta · schema 10.7 unchanged:** A
+> new three-centre source reports 756 patients/877 aneurysms and source AUCs
+> 0.887/0.910/0.773/0.735, but it classifies observed rupture status rather
+> than a future event. Centre-I 314/136 rows sum to 450 aneurysms while patient
+> grouping is not explicit; admission glucose is post-event for ruptured
+> presentations. PLOS Figshare `28661913` is one 5,632-byte aggregate
+> `Table 1.xls`, not patient rows or CTA. Six candidates score
+> **27.5/27.0/25.5/25.0/24.0/23.5** and all are rejected. Source results were
+> not reproduced; no payload, request, P0/P1, model, server or compute opened.
+> See the [exact delta](docs/rupture-state-future-risk-and-unit-semantics-delta-2026-08-12.md).
+
 > **2026-08-12 RSNA/WEB-GAN delta deployment and private pin:** Exact public
 > scientific source `445e3dc90abffad9e00bf0b1069acc949d66f536` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31543772897)

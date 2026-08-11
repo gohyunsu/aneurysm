@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **2026-08-12 rupture-time model boundary:** No rupture classifier is
+> selected. Clinical+radiomics fusion, classical ML, transformers, GNNs,
+> synthetic generators, SHAP and calibration cannot convert observed rupture
+> status or post-event admission variables into future-risk evidence. Model
+> design remains downstream of a timestamped patient-grouped event asset and a
+> method-free failure audit; current candidate count and GPU authority are 0.
+
 > **Schema 10.7 model boundary · 2026-08-12:** No segmentation or outcome model
 > is selected. Swin-UNETR, nnU-Net, multiclass heads, LoRA/DoRA, longitudinal
 > maps, uncertainty and downstream-aware losses are direct priors or controls;

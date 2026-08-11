@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-12 · Rupture-state/future-risk and patient-unit delta · no state change
+
+- Added the three-centre QIMS source: 756 patients/877 aneurysms, reported
+  314/136 centre-I aneurysm rows and two external-centre sets. Separated its
+  observed rupture-status target from a prospective future-event estimand and
+  marked patient grouping as unresolved rather than asserting leakage.
+- Kept source AUC 0.887/0.910/0.773/0.735 as unreproduced paper results and
+  identified admission glucose as unavailable to a pure pre-event planner in
+  already ruptured presentations.
+- Pinned PLOS Figshare `28661913` metadata: one CC-BY-4.0 5,632-byte aggregate
+  `Table 1.xls`, not patient rows, raw CTA or longitudinal follow-up. Its body
+  and all patient payload remain unopened.
+- Froze six candidates at 27.5/27.0/25.5/25.0/24.0/23.5. All fail a mandatory
+  target, novelty, asset or independent-unit floor. Schema 10.7 and the aSAH
+  primary decision are unchanged; no request, P0/P1, method, architecture,
+  scientific-server query, PBS/GPU, outer test or claim opened.
+
 ## 2026-08-12 · RSNA/WEB-GAN delta deployed and privately pinned
 
 - Exact public scientific source `445e3dc90abffad9e00bf0b1069acc949d66f536`

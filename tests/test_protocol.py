@@ -184,6 +184,56 @@ class ProtocolTests(unittest.TestCase):
         ):
             validate_protocol(candidate)
 
+    def test_rupture_state_future_risk_delta_is_fail_closed(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "rupture_state_future_risk_and_unit_semantics_delta"
+        ]
+        self.assertEqual(self.protocol["schema_version"], "10.7")
+        self.assertFalse(audit["current_schema_or_primary_batch_changed"])
+        self.assertEqual(audit["best_score"], 27.5)
+        self.assertEqual(audit["best_residual_novelty_score"], 2.5)
+        self.assertEqual(
+            audit["all_candidate_scores"],
+            [27.5, 27.0, 25.5, 25.0, 24.0, 23.5],
+        )
+        self.assertEqual(
+            (
+                audit["qims_reported_patients"],
+                audit["qims_reported_aneurysms"],
+                audit["qims_reported_centres"],
+            ),
+            (756, 877, 3),
+        )
+        self.assertTrue(audit["qims_target_is_cross_sectional_rupture_status"])
+        self.assertTrue(
+            audit[
+                "qims_admission_blood_glucose_is_post_event_for_ruptured_presentations"
+            ]
+        )
+        self.assertFalse(audit["qims_patient_grouped_centre_1_split_explicit"])
+        self.assertFalse(
+            audit["qims_public_versioned_patient_image_feature_split_asset_identified"]
+        )
+        self.assertEqual(audit["plos_figshare_file_bytes"], 5632)
+        self.assertTrue(
+            audit["plos_figshare_object_is_aggregate_table_not_patient_rows_or_cta"]
+        )
+        self.assertFalse(audit["plos_figshare_xls_body_opened"])
+        self.assertFalse(audit["patient_image_or_feature_payload_accessed"])
+        self.assertTrue(all(not row["critical_axis_pass"] for row in audit["candidates"]))
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "rupture_state_future_risk_and_unit_semantics_delta"
+        ]["qims_patient_grouped_centre_1_split_explicit"] = True
+        with self.assertRaisesRegex(ProtocolError, "rupture-state/future-risk"):
+            validate_protocol(candidate)
+
     def test_source_watch_v14_is_exact_metadata_only_and_fail_closed(self) -> None:
         watch = self.protocol["problem_selection"]["public_source_watch_v14"]
         self.assertEqual(watch["config"], "configs/source_watch_v14.json")

@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **2026-08-12 rupture-time map:** The latest three-centre branch ends at
+> cross-sectional rupture-status classification and external-centre AUC. The
+> prospective future-risk branch is disconnected because baseline time,
+> predictor time, censoring, treatment and public patient-grouped rows are
+> absent. The PLOS branch ends at an aggregate table. Six residual branches
+> are rejected; architecture and compute nodes remain empty.
+
 > **Schema 10.7 map · 2026-08-12:** Open aSAH NCCT masks form a segmentation
 > asset branch, not an outcome branch. Swin-UNETR/nnU-Net, multiclass,
 > cross-aetiology transfer, mortality, GOS-volume equivalence and longitudinal

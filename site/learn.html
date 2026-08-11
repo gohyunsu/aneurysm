@@ -23,6 +23,7 @@
       <a href="index.html">Research hub</a>
       <a href="#asah-outcome">aSAH mask &amp; outcome</a>
       <a href="#release-utility">Release &amp; synthetic utility</a>
+      <a href="#rupture-time">Rupture state &amp; future risk</a>
       <a href="#wall-phenotype">4D-CTA wall phenotype</a>
       <a href="#culprit-mimic">Culprit &amp; mimic</a>
       <a href="#topbrain-pairs">TopBrain pairs</a>
@@ -212,6 +213,62 @@
             바꾸는 것은 이 식별 문제를 해결하지 않습니다.
           </p>
           <a href="../docs/rsna-release-layer-and-webgan-utility-delta-2026-08-12.md">세 출처의 숫자, notebook lineage와 six-way gate 전체 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="rupture-time">
+          <span>Rupture state와 future risk를 처음부터 이해하기</span>
+          <strong>이미 파열된 병변을 구분하는 일과, 아직 파열되지 않은 병변의 미래를 예측하는 일은 다른 문제입니다.</strong>
+          <p>
+            <b>Rupture-status classification</b>은 현재 영상과 진료 기록을 보고 병변이
+            이미 파열된 상태인지 구분합니다. 반면 <b>future rupture prediction</b>은
+            기준 시점에 파열되지 않은 동맥류만 모아, 정해진 기간 뒤 파열이 발생하는지
+            추적합니다. 두 문제는 label의 시간 방향, 필요한 환자군과 통계적 해석이
+            다릅니다. Cross-sectional status AUC를 미래 위험 AUC라고 부르면 안 됩니다.
+          </p>
+          <p>
+            새 QIMS 연구는 3기관 756명/877개 동맥류를 보고합니다. 첫 기관은
+            404명/450개 병변이고 314/136으로 나뉘며, 두 외부기관은 각각
+            125명/148개와 227명/279개입니다. 여러 동맥류를 가진 환자가 있으므로
+            <b>독립 단위</b>는 병변 행이 아니라 환자입니다. 공개 방법에는 첫 기관의
+            모든 병변을 환자별로 한쪽 split에 묶었다는 문장이 명확하지 않습니다.
+            이것은 leakage가 있었다는 단정이 아니라, 공개 정보만으로는 dependence가
+            해소되지 않았다는 뜻입니다.
+          </p>
+          <p>
+            이 연구는 SAH 혈종 인접성이나 수술 확인으로 rupture status를 정하고,
+            admission blood glucose를 최종 변수에 포함합니다. 이미 파열되어 입원한
+            환자의 혈당은 파열 <em>뒤</em>에 측정되므로, 순수한 pre-event planner가
+            사용할 수 있는 정보가 아닙니다. 따라서 “임상적으로 유용하지 않다”가 아니라
+            “의사결정 시점이 다르다”고 해석해야 정확합니다.
+          </p>
+          <p>
+            논문이 보고한 train/internal/external AUC 0.887/0.910/0.773/0.735는
+            AURORA 결과가 아닙니다. 외부기관 성능 저하는 중요하지만, 공개된 환자별
+            image–feature–centre–split table이 없어 calibration shift나 실패 원인을
+            다시 계산할 수 없습니다. 더 큰 transformer나 GNN을 붙여도 누락된 시간축과
+            원자료가 생기지는 않습니다.
+          </p>
+          <p>
+            PLOS 연구의 269 MCA aneurysm patient와 269 control은 규모가 있어 보이지만,
+            공개 Figshare object는 5,632-byte <code>Table 1.xls</code> 하나입니다.
+            논문에서 이 파일은 두 집단을 요약한 aggregate Table 1입니다. 환자 행,
+            CTA volume, mask, split 또는 follow-up clock가 아닙니다. 공개 파일이라는
+            이유만으로 영상 학습 데이터로 세지 않습니다.
+          </p>
+          <p>
+            여섯 후보는 27.5/27.0/25.5/25.0/24.0/23.5입니다. 가장 높은 외부기관
+            calibration 후보는 source row가 없고 평가 방법 자체의 novelty가 1.5/5입니다.
+            가장 올바른 future-risk 후보는 novelty 2.5/5에 도달하지만 baseline timestamp,
+            censoring, treatment time과 future event asset이 없어 identifiability와 asset
+            문턱을 실패합니다. 총점으로 이 실패를 상쇄하지 않습니다.
+          </p>
+          <p>
+            재진입에는 baseline에서 모두 unruptured였다는 선언, 모든 predictor의 측정
+            시점, future rupture/progression time과 censoring, treatment timing,
+            patient–lesion–centre–split manifest가 한 release에 함께 있어야 합니다.
+            그때도 첫 단계는 모델 학습이 아니라 사건 수, 추적 손실, 시간 leakage와
+            patient grouping을 확인하는 method-free audit입니다.
+          </p>
+          <a href="../docs/rupture-state-future-risk-and-unit-semantics-delta-2026-08-12.md">source facts, six scores와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="wall-phenotype">
           <span>4D-CTA wall phenotype을 처음부터 이해하기</span>

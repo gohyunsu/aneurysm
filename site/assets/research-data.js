@@ -816,6 +816,16 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "QIMS 2026 three-centre rupture-status cohort",
+      role: "source-only direct prior; not public training, validation or future-risk data",
+      provenance: "756 patients/877 aneurysms/3 centres · centre I 404/450 with reported 314/136 aneurysm-row division · external 125/148 and 227/279 · cross-sectional rupture status · admission glucose includes post-event information for ruptured presentations · public versioned patient/image/feature/split asset 0 · source AUCs not reproduced"
+    },
+    {
+      name: "PLOS MCA–A1 variation Figshare 28661913",
+      role: "open aggregate source table; not patient rows, CTA payload or longitudinal outcome data",
+      provenance: "269 MCA-aneurysm patients + 269 controls reported · 193/76 ruptured/unruptured · one 5,632-byte Table 1.xls · MD5 6e188acb… · CC BY 4.0 · XLS body/patient CTA/P0/model/GPU 0"
+    },
+    {
       name: "aSAH NCCT expert-mask Zenodo · revision 2",
       role: "watch-only segmentation asset; no active outcome or model role",
       provenance: "one 648,502,298-byte CC-BY-4.0 RAR · MD5 a67bf358… · public patient/centre/split/outcome manifest 0 · archive body/checkpoint/P0/model/GPU 0"
@@ -1097,6 +1107,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Rupture state is separated from future risk without opening a model",
+      copy: "A new three-centre source reports 756 patients/877 aneurysms and train/internal/external AUC 0.887/0.910/0.773/0.735, but its target is cross-sectional rupture status and admission glucose is post-event for ruptured presentations. The 314/136 centre-I division is reported over 450 aneurysm rows while patient grouping is not explicit; this is unresolved dependence, not an allegation of leakage. PLOS Figshare 28661913 contains one 5,632-byte aggregate Table 1.xls rather than patient rows or CTA. Six candidates score 27.5/27.0/25.5/25.0/24.0/23.5 and all fail a critical floor. Schema 10.7 and the aSAH primary batch are unchanged; no payload, request, P0/P1, method, architecture, scientific server, PBS/GPU, outer test or claim opened.",
+      files: ["docs/rupture-state-future-risk-and-unit-semantics-delta-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

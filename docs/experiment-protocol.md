@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **2026-08-12 rupture-time gate:** No rupture model is authorized. A future
+> candidate must first prove baseline-unruptured inclusion, predictor
+> timestamps, future event/censoring, treatment timing and patient-grouped
+> centre-separated splits in one immutable release. Status labels, post-event
+> admission variables, lesion-row random splits and aggregate tables cannot
+> satisfy this gate. Six fresh rows peak at 27.5/40; P0/P1/server/GPU remain 0.
+
 > **Schema 10.7 execution boundary · 2026-08-12:** Zero candidates are
 > admitted. Do not open the RAR/checkpoint, invent an image--outcome join,
 > register P0/P1, choose a segmenter, query a scientific server or submit PBS/

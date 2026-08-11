@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Rupture-time delta · 2026-08-12:** Do not pivot to another radiomics,
+> transformer, GNN or synthetic-tabular rupture classifier. The new
+> three-centre 756-patient/877-aneurysm study already occupies clinical+
+> morphology+radiomics status classification and external-centre evaluation,
+> while its admission glucose is post-event for ruptured presentations.
+> Patient grouping is unresolved and no public versioned rows exist. The
+> scientifically meaningful residual is pre-event future-risk estimation, but
+> no timestamped patient-grouped asset identifies it. Six rows peak at
+> 27.5/40; no active problem, method, architecture or compute opens.
+
 > **Schema 10.7 direction · 2026-08-12:** Do not pivot to Swin-UNETR, nnU-Net,
 > LoRA/DoRA, uncertainty or an outcome-loss wrapper merely because an aSAH
 > mask archive is open. The obvious segmentation-to-GOS claim and model

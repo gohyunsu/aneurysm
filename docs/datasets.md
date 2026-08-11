@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-12 rupture-time asset delta:** The new QIMS cohort reports 756
+> patients/877 aneurysms across three centres but exposes no versioned public
+> patient/image/feature/centre/split rows. PLOS Figshare `28661913` exposes one
+> 5,632-byte CC-BY-4.0 aggregate `Table 1.xls`, not the source CTA or patient
+> rows. CMHA remains cross-sectional rupture status without a future-event
+> clock. No dataset is admitted; no XLS body, patient payload or scientific
+> server was accessed.
+
 > **Schema 10.7 aSAH asset boundary · 2026-08-12:** Zenodo revision 2 exposes
 > one 648,502,298-byte CC-BY-4.0 RAR described as preprocessed NCCT plus expert
 > masks. Top-level metadata has no patient count, centre, endpoint, treatment,

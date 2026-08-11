@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-12 rupture-time lineage delta:** QIMS
+> `10.21037/qims-2025-1-2593` adds a three-centre, 756-patient/877-aneurysm
+> clinical+morphology+radiomics rupture-status study with source external AUC
+> 0.773/0.735. It does not establish a pre-event future-risk estimand, and its
+> patient-grouped centre-I split is unstated. Wiley `10.1155/int/1564250`, the
+> seven-hospital stability study and CLEO further occupy obvious fusion,
+> external-validation and synthetic-tabular variants. Measurement-time
+> declaration is an evaluation requirement, not a new architecture.
+
 > **Schema 10.7 lineage · 2026-08-12:** expert aSAH NCCT masks → Swin-UNETR
 > internal/external segmentation → multiclass haemorrhage nnU-Net →
 > cross-aetiology LoRA/DoRA small-volume transfer; in parallel, admission-CT
