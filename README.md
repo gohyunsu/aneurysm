@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 9.4 deployment verification:** Exact scientific source
+> `eb9a6ae9db3980ca41814b3852b68fd4a0804c09` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31493466627) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31493465268).
+> Private ledger `5764bd7f986d1e0a173cb18d168e4aca16676689` is remote exact and
+> PRIVATE; manuscript and references remain byte-for-byte unchanged. This is
+> provenance only and opens no lead, P0/P1, method, architecture, server query,
+> PBS/GPU, outer test, result row, C21 or claim.
+
 > **2026-08-11 latent-shape/open-CTA transport reappraisal · schema 9.4:** The
 > official latent-shape paper and exact MIT repository make a strong baseline,
 > not a new active paper. The source already reports LODO AUC 0.66 despite low

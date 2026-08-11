@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 9.4 deployment·private synchronization:** Exact public
+> scientific source `eb9a6ae9db3980ca41814b3852b68fd4a0804c09` passed
+> Quality `31493466627` and Pages `31493465268`. Private paper ledger
+> `5764bd7f986d1e0a173cb18d168e4aca16676689` is remote exact and PRIVATE.
+> `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 352 pass plus 66 optional-dependency skips out of 418.
+> This synchronization is provenance only and creates no lead, P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test, result row, C21
+> or claim. Future authorized execution is `introai9` PBS only; prohibit
+> login-node GPU and never access, query, transfer to, submit to or monitor
+> `junjinyong`.
+
 > **2026-08-11 latent-shape/open-CTA transport override · schema 9.4:** Exact
 > latent-shape paper DOI `10.1016/j.cmpb.2026.109445`은 five-source 958
 > saccular surface/338 rupture-status label과 LODO accuracy 0.68, AUC 0.66,

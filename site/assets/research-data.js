@@ -961,6 +961,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 9.4 exact source is deployed and privately pinned",
+      copy: "Exact public scientific source eb9a6ae9db3980ca41814b3852b68fd4a0804c09 passed Quality 31493466627 and Pages 31493465268. Private ledger 5764bd7f986d1e0a173cb18d168e4aca16676689 is remote exact, PRIVATE and preserves manuscript and references byte-for-byte. Live Overview, Learn and detailed change history expose the 29.5/40 critical-floor rejection, source-paper LODO failure, bounded code/cache reproducibility findings, inactive surface-vector question and no-model/no-compute state. This provenance creates no lead, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 9.4 rejects latent-shape/open-CTA transport and OOD wrappers",
       copy: "Exact paper DOI 10.1016/j.cmpb.2026.109445 already reports five-source LODO accuracy 0.68/AUC 0.66 with low AE/VAE reconstruction MSE 0.16/0.14. Official MIT repo head 43e8219… provides code, weights and aggregate caches, but processed OBJ, rupture_labels.csv and a complete executable LODO manifest are absent. Static inspection found default seed-42 file-level 80/20 scripts and an always-truthy unknown-status branch; these are bounded reproducibility findings, not paper invalidation or novelty. Open-CTA expert morphology is not latent-support ground truth, and no STL/PixelData was opened. Medical OOD, likelihood, abstention, conformal calibration and anatomical registration are direct priors. Six candidates freeze at 29.5/29.0/28.5/28.0/28.0/23.0 and all fail total or critical novelty/identifiability floors. Historical no-verdict jobs remain unrepaired; no P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result or claim is opened.",

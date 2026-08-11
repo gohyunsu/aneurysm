@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-11 · Schema 9.4 deployed and privately pinned
+
+- Exact scientific source `eb9a6ae9db3980ca41814b3852b68fd4a0804c09`
+  passed Quality `31493466627` and Pages `31493465268`.
+- Private ledger `5764bd7f986d1e0a173cb18d168e4aca16676689` is remote exact and
+  PRIVATE; manuscript and references hashes are unchanged.
+- Live Overview, Learn and change history expose the 29.5/40 rejection,
+  direct-prior LODO failure, bounded code/cache reproducibility findings and
+  no-model/no-compute state. This provenance creates no scientific result or
+  claim.
+
 ## 2026-08-11 · Latent-shape/open-CTA transport rejected · schema 9.4
 
 - Audited the exact 958-surface latent-shape paper and official MIT repository
