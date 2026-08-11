@@ -188,6 +188,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "audit_document",
             "future_source_admission_v2",
             "aneurysmal_sah_segmentation_outcome_reappraisal",
+            "rsna_release_layer_and_webgan_utility_delta",
             "four_d_cta_wall_phenotype_release_reappraisal",
             "culprit_lesion_and_mimic_differential_reappraisal",
             "topbrain2025_and_rsna_multitask_source_correction",
@@ -469,6 +470,166 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "no patient-level outcome join, residual novelty, payload, model or compute."
         )
     checks.append("aSAH segmentation-outcome joined-asset and novelty rejection boundary")
+
+    release_utility = problem_selection[
+        "rsna_release_layer_and_webgan_utility_delta"
+    ]
+    _require_keys(
+        release_utility,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "current_schema_or_primary_batch_changed", "rsna_launch_release_date",
+            "rsna_launch_imaging_studies_reported",
+            "rsna_launch_annotated_aneurysms_reported",
+            "rsna_launch_institutions_reported",
+            "rsna_launch_radiologists_reported", "rsna_launch_modalities",
+            "rsna_registry_scans_reported",
+            "rsna_registry_radiologists_reported",
+            "rsna_registry_institutions_reported",
+            "rsna_registry_ai_segmented_studies_reported",
+            "rsna_second_place_training_series_reported",
+            "rsna_three_counts_same_release_layer_proven",
+            "rsna_arithmetic_train_hidden_test_split_inferred",
+            "rsna_machine_readable_identity_map_public",
+            "rsna_terms_accepted_or_mira_requested",
+            "rsna_controlled_payload_accessed", "webgan_article_doi",
+            "webgan_original_cases_reported", "webgan_institutions_reported",
+            "webgan_synthetic_rows_reported", "webgan_target",
+            "webgan_original_data_access", "webgan_repository",
+            "webgan_repository_head", "webgan_repository_release_count",
+            "webgan_github_recognized_license",
+            "webgan_tracked_license_file_present", "webgan_readme_claims_mit",
+            "webgan_synthetic_csv_bytes",
+            "webgan_repository_shallow_cloned_for_static_code_audit",
+            "webgan_synthetic_csv_body_inspected",
+            "webgan_original_patient_table_present",
+            "webgan_generator_trained_on_complete_original_table_in_inspected_notebook",
+            "webgan_synthetic_model_evaluated_on_complete_original_table_in_inspected_notebook",
+            "webgan_real_test_donors_unseen_by_generator",
+            "webgan_patient_or_institution_disjoint_outer_test_executable",
+            "webgan_source_reported_results_reproduced_by_aurora",
+            "webgan_source_paper_invalidated_by_aurora", "candidates",
+            "source_watch_added", "surface_vector_reactivated", "p0_registered",
+            "p1_registered", "method_selected", "architecture_selected",
+            "scientific_server_queried", "gpu_training_authorized",
+            "outer_test_authorized", "submission_identity_active",
+            "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "RSNA release-layer and WEB-GAN utility delta",
+    )
+    expected_release_utility_candidates = [
+        ("rsna_release_layer_aware_multimodal_transport", 29.0),
+        ("rsna_modality_site_selective_risk", 28.5),
+        ("donor_disjoint_web_synthetic_utility", 26.0),
+        ("leave_one_institution_out_web_outcome_transport", 25.5),
+        ("leakage_aware_synthetic_utility_identified_set", 24.5),
+        ("released_synthetic_only_web_reproducibility", 23.0),
+    ]
+    if (
+        release_utility["status"]
+        != "delta_rejected_rsna_release_layers_unresolved_webgan_donor_overlap_original_unavailable_no_state_change"
+        or release_utility["audit_document"]
+        != "docs/rsna-release-layer-and-webgan-utility-delta-2026-08-12.md"
+        or release_utility["automatic_selection_threshold"] != 32.0
+        or release_utility["best_candidate_id"]
+        != "rsna_release_layer_aware_multimodal_transport"
+        or release_utility["best_score"] != 29.0
+        or release_utility["best_residual_novelty_score"] != 1.5
+        or release_utility["all_candidate_scores"]
+        != [29.0, 28.5, 26.0, 25.5, 24.5, 23.0]
+        or release_utility["conditional_source_lead_count"] != 0
+        or release_utility["rsna_launch_release_date"] != "2025-07-29"
+        or (
+            release_utility["rsna_launch_imaging_studies_reported"],
+            release_utility["rsna_launch_annotated_aneurysms_reported"],
+            release_utility["rsna_launch_institutions_reported"],
+            release_utility["rsna_launch_radiologists_reported"],
+        )
+        != ("over_6500", "over_3500", 18, "over_60")
+        or release_utility["rsna_launch_modalities"]
+        != ["CTA", "MRA", "T1_post_contrast", "T2_weighted_MRI"]
+        or (
+            release_utility["rsna_registry_scans_reported"],
+            release_utility["rsna_registry_radiologists_reported"],
+            release_utility["rsna_registry_institutions_reported"],
+            release_utility["rsna_registry_ai_segmented_studies_reported"],
+            release_utility["rsna_second_place_training_series_reported"],
+        )
+        != ("over_4000_CT_brain_scans", "over_40", 18, "about_200", 4348)
+        or release_utility["webgan_article_doi"]
+        != "10.1177/2997979X251369456"
+        or (
+            release_utility["webgan_original_cases_reported"],
+            release_utility["webgan_institutions_reported"],
+            release_utility["webgan_synthetic_rows_reported"],
+        )
+        != (78, 3, 1000)
+        or release_utility["webgan_target"] != "six_month_occlusion_grade"
+        or release_utility["webgan_original_data_access"]
+        != "corresponding_author_request_only"
+        or release_utility["webgan_repository"]
+        != "shrinitbabel/WEB-GAN-occlusion-prediction"
+        or release_utility["webgan_repository_head"]
+        != "42ce2a8c795b32e03163be3a9a324eba9a0a76e5"
+        or release_utility["webgan_repository_release_count"] != 0
+        or release_utility["webgan_github_recognized_license"] is not None
+        or release_utility["webgan_synthetic_csv_bytes"] != 109364
+        or [
+            (row["id"], float(row["total"]))
+            for row in release_utility["candidates"]
+        ]
+        != expected_release_utility_candidates
+        or any(row["critical_axis_pass"] is not False for row in release_utility["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in release_utility["candidates"]
+        )
+        or any(
+            release_utility[key] is not False
+            for key in (
+                "current_schema_or_primary_batch_changed",
+                "rsna_three_counts_same_release_layer_proven",
+                "rsna_arithmetic_train_hidden_test_split_inferred",
+                "rsna_machine_readable_identity_map_public",
+                "rsna_terms_accepted_or_mira_requested",
+                "rsna_controlled_payload_accessed",
+                "webgan_tracked_license_file_present",
+                "webgan_synthetic_csv_body_inspected",
+                "webgan_original_patient_table_present",
+                "webgan_real_test_donors_unseen_by_generator",
+                "webgan_patient_or_institution_disjoint_outer_test_executable",
+                "webgan_source_reported_results_reproduced_by_aurora",
+                "webgan_source_paper_invalidated_by_aurora",
+                "source_watch_added", "surface_vector_reactivated",
+                "p0_registered", "p1_registered", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or any(
+            release_utility[key] is not True
+            for key in (
+                "webgan_readme_claims_mit",
+                "webgan_repository_shallow_cloned_for_static_code_audit",
+                "webgan_generator_trained_on_complete_original_table_in_inspected_notebook",
+                "webgan_synthetic_model_evaluated_on_complete_original_table_in_inspected_notebook",
+            )
+        )
+        or release_utility["next_allowed_action"]
+        != "fresh_problem_level_source_or_versioned_patient_centre_disjoint_real_outer_test_asset_audit_only_no_data_request_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "The RSNA release-layer and WEB-GAN utility delta must remain a "
+            "rejected static-source audit: no count conflation, donor-disjoint "
+            "claim, original patient asset, model, server, compute or paper identity."
+        )
+    checks.append("RSNA release-layer and WEB-GAN donor-utility rejection boundary")
 
     wall_release = problem_selection[
         "four_d_cta_wall_phenotype_release_reappraisal"

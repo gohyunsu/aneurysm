@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-12 · RSNA release-layer and WEB-GAN utility delta · no state change
+
+- Separated the official RSNA launch corpus (>6,500 multimodal studies), AWS
+  controlled registry collection (>4,000 CT scans) and second-place training
+  count (4,348 series). No common unit, arithmetic split or release expansion
+  is inferred without a public identity map.
+- Pinned WEB-GAN article `10.1177/2997979X251369456` and exact public head
+  `42ce2a8…`. Static code inspection shows the generator trained on the full
+  78-case original table before the synthetic-trained predictor was evaluated
+  on that same original donor table. The request-only original patient and
+  institution data prevent a donor-disjoint reproduction.
+- Froze six delta candidates at 29.0/28.5/26.0/25.5/24.5/23.0. All fail
+  novelty or asset/unit floors. This is an evaluation limitation, not source-
+  paper invalidation, an active paper identity or a reason to select a model.
+- Added a full audit, machine invariants, a beginner-facing Learn window and a
+  filterable site change entry. Schema 10.7 and the current aSAH batch are
+  unchanged; no controlled payload, original patient data, scientific server,
+  P0/P1, architecture, PBS/GPU, outer test or claim opened.
+
 ## 2026-08-12 · Surface-vector external-analysis delta review · no state change
 
 - Accepted the exact closed-job, no-repair and staged-gate conclusions, but

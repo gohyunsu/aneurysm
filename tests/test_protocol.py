@@ -119,6 +119,71 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "aSAH mask release"):
             validate_protocol(candidate)
 
+    def test_rsna_release_layer_and_webgan_utility_delta_is_fail_closed(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["rsna_release_layer_and_webgan_utility_delta"]
+        self.assertEqual(self.protocol["schema_version"], "10.7")
+        self.assertFalse(audit["current_schema_or_primary_batch_changed"])
+        self.assertEqual(audit["best_score"], 29.0)
+        self.assertEqual(audit["best_residual_novelty_score"], 1.5)
+        self.assertEqual(
+            audit["all_candidate_scores"],
+            [29.0, 28.5, 26.0, 25.5, 24.5, 23.0],
+        )
+        self.assertEqual(
+            (
+                audit["rsna_launch_imaging_studies_reported"],
+                audit["rsna_registry_scans_reported"],
+                audit["rsna_second_place_training_series_reported"],
+            ),
+            ("over_6500", "over_4000_CT_brain_scans", 4348),
+        )
+        self.assertFalse(audit["rsna_three_counts_same_release_layer_proven"])
+        self.assertFalse(audit["rsna_arithmetic_train_hidden_test_split_inferred"])
+        self.assertFalse(audit["rsna_controlled_payload_accessed"])
+        self.assertEqual(
+            (
+                audit["webgan_original_cases_reported"],
+                audit["webgan_institutions_reported"],
+                audit["webgan_synthetic_rows_reported"],
+            ),
+            (78, 3, 1000),
+        )
+        self.assertEqual(
+            audit["webgan_repository_head"],
+            "42ce2a8c795b32e03163be3a9a324eba9a0a76e5",
+        )
+        self.assertTrue(
+            audit[
+                "webgan_generator_trained_on_complete_original_table_in_inspected_notebook"
+            ]
+        )
+        self.assertTrue(
+            audit[
+                "webgan_synthetic_model_evaluated_on_complete_original_table_in_inspected_notebook"
+            ]
+        )
+        self.assertFalse(audit["webgan_real_test_donors_unseen_by_generator"])
+        self.assertFalse(
+            audit["webgan_patient_or_institution_disjoint_outer_test_executable"]
+        )
+        self.assertFalse(audit["webgan_source_paper_invalidated_by_aurora"])
+        self.assertTrue(all(not row["critical_axis_pass"] for row in audit["candidates"]))
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "rsna_release_layer_and_webgan_utility_delta"
+        ]["webgan_real_test_donors_unseen_by_generator"] = True
+        with self.assertRaisesRegex(
+            ProtocolError, "RSNA release-layer and WEB-GAN utility delta"
+        ):
+            validate_protocol(candidate)
+
     def test_source_watch_v14_is_exact_metadata_only_and_fail_closed(self) -> None:
         watch = self.protocol["problem_selection"]["public_source_watch_v14"]
         self.assertEqual(watch["config"], "configs/source_watch_v14.json")

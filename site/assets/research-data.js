@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "Release counts and generated rows do not establish independent real-patient evidence",
+      copy: "The official RSNA launch release describes a 6,500+ multimodal challenge corpus, the AWS registry describes a controlled 4,000+ CT collection, and the public second-place method reports 4,348 training series. No public identity map proves that these are the same unit or an arithmetic train/test split. A separate WEB-GAN article reports 78 cases from three institutions and 1,000 generated rows for six-month occlusion prediction. At exact public head 42ce2a8…, the generator uses the complete original table and the synthetic-trained predictor is evaluated on that same original donor table. The original table and institution IDs are request-only, so donor-disjoint utility cannot be reconstructed. This is an evaluation limitation, not a source-paper invalidation or a new method.",
+      status: "Delta best 29.0/40 rejected · novelty ≤1.5/5 · original WEB donor asset/clean outer test 0 · current schema/lead/P0/model/server/GPU unchanged",
+      url: "../docs/rsna-release-layer-and-webgan-utility-delta-2026-08-12.md"
+    },
+    {
+      year: "2026.08",
       title: "Open aSAH masks do not create a joined outcome paper",
       copy: "Exact Zenodo revision 2 contains one 648,502,298-byte CC-BY-4.0 RAR described as preprocessed NCCT plus expert masks, but its public metadata has no patient count, centre, treatment, endpoint or frozen split manifest. Exact official pipeline head 3fbd7a9… has code and a non-patient template but no tracked patient cohort, outcome table or checkpoint. A 2026 nnU-Net study already compares manual and automatic haemorrhage volume for six-month GOS; separate mortality, multiclass, LoRA/DoRA transfer and longitudinal mapping studies occupy the obvious variants. Six candidates score 29.0/28.5/28.0/28.0/27.0/22.5 and all are rejected.",
       status: "Best 29.0/40 rejected · novelty 1.0/5 · joined image–mask–outcome asset 0 · RAR/checkpoint/P0/method/server/GPU 0",
@@ -936,7 +943,12 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "RSNA-ICA 2025 · controlled access",
       role: "source-rejected registry-backed study-level lesion-set risk candidate; possible benchmark only after personal terms acceptance and a new source/task audit",
-      provenance: "AWS registry: >4,000 scans · 18 institutions · 40+ radiologists · about 200 AI-segmented studies · MIRA ControlledAccess/no redistribution · user terms/request/manifest/payload 0 · point/presence/territory lesions · 13-class vessel masks are not lesion extent · 31.5/40"
+      provenance: "Launch release: >6,500 multimodal studies/>3,500 aneurysms/>60 readers · AWS registry: >4,000 CT scans/18 institutions/40+ readers/about 200 AI-segmented studies · second-place training: 4,348 series · layers/units are not proven identical · MIRA ControlledAccess/no redistribution · terms/request/manifest/payload 0"
+    },
+    {
+      name: "WEB-GAN occlusion prediction · public synthetic/code only",
+      role: "source-rejected treatment-outcome and synthetic-utility audit; not training or clinical validation",
+      provenance: "Paper: 78 cases/3 institutions/1,000 synthetic rows/6-month occlusion · exact repo 42ce2a8… · original table request-only · generator sees complete original table before synthetic-trained predictor tests on the same donors · no patient/institution-disjoint outer test · synthetic CSV body/P0/model/server/GPU 0"
     },
     {
       name: "CADA 2020 · registration required",
@@ -1085,6 +1097,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "RSNA release layers and WEB-GAN donor utility are separated without opening a paper",
+      copy: "Official RSNA sources expose 6,500+ multimodal challenge studies and a controlled 4,000+ CT registry collection, while the second-place method reports 4,348 training series; no public identity map proves one arithmetic split or common counting unit. Static inspection of exact WEB-GAN head 42ce2a8… shows the cGAN trained on the complete 78-case original table and the synthetic-trained classifier evaluated on that same original donor table. The original patient/institution table is request-only, so a clean outer test is not executable. Six delta candidates score 29.0/28.5/26.0/25.5/24.5/23.0 and all fail novelty or asset/unit floors. Schema 10.7 and the current aSAH batch are unchanged; no terms, original patient data, scientific server, P0/P1, architecture, PBS/GPU, outer test or claim opened.",
+      files: ["docs/rsna-release-layer-and-webgan-utility-delta-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "analysis",

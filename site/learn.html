@@ -22,6 +22,7 @@
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
       <a href="#asah-outcome">aSAH mask &amp; outcome</a>
+      <a href="#release-utility">Release &amp; synthetic utility</a>
       <a href="#wall-phenotype">4D-CTA wall phenotype</a>
       <a href="#culprit-mimic">Culprit &amp; mimic</a>
       <a href="#topbrain-pairs">TopBrain pairs</a>
@@ -146,6 +147,71 @@
             checkpoint, P0, model 또는 GPU를 자동으로 열지 않습니다.
           </p>
           <a href="../docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md">source facts, six scores와 re-entry 조건 전체 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="release-utility">
+          <span>Release layer와 synthetic utility를 처음부터 이해하기</span>
+          <strong>큰 숫자와 많은 가상 행은, 보지 않은 실제 환자에서의 성능을 자동으로 뜻하지 않습니다.</strong>
+          <p>
+            <b>Release layer</b>는 같은 프로젝트를 설명하는 자료라도 실제로 가리키는
+            범위가 다를 수 있다는 뜻입니다. RSNA 보도자료는 challenge 전체 reference
+            corpus를 6,500+ imaging study라고 설명합니다. AWS registry는 controlled-access
+            collection을 4,000+ CT brain scan이라고 쓰고, 2위 방법 논문은 학습에 사용한
+            4,348 series를 보고합니다. Study, scan, series는 반드시 같은 단위가 아니며,
+            세 숫자가 동일한 환자 목록을 나눈 결과라는 공개 identity map도 없습니다.
+          </p>
+          <p>
+            따라서 6,500에서 4,348을 빼서 hidden test 크기를 만들거나, AWS의 4,000+
+            범위를 challenge 전체 multimodal corpus라고 단정하지 않습니다. MRI subset의
+            13개 혈관 territory segmentation과 AWS가 말하는 약 200개의 AI-generated
+            segmentation도 같은 case와 같은 annotation이라는 근거가 없습니다. 숫자를
+            합치기 전에 patient–study–series–modality–split을 연결하는 manifest가
+            필요합니다.
+          </p>
+          <p>
+            <b>Synthetic data</b>는 실제 환자 표에서 분포를 학습해 새 행처럼 보이는
+            record를 생성한 것입니다. 1,000개 synthetic row는 1,000명의 새 환자가
+            아닙니다. 정보의 근원은 generator가 본 원래 donor 78건이므로, 통계적
+            독립 단위는 생성 행이 아니라 원 donor patient/procedure입니다.
+          </p>
+          <p>
+            WEB-GAN은 3기관 78건의 임상·시술·형태 변수를 사용해 6개월 WEB 폐색 등급을
+            예측하는 중요한 문제를 다룹니다. 공개 notebook에서 generator는 분할하지
+            않은 전체 original table을 학습한 뒤 1,000개 행을 만듭니다. downstream
+            RF/XGBoost는 그 synthetic table에서 학습하지만, 평가용 <code>X_test</code>는
+            generator의 donor였던 original table 전체입니다. Predictor가 원본을 직접
+            학습하지 않았어도 generator를 통해 test donor의 정보를 이미 사용했으므로,
+            이 평가는 unseen-patient generalization을 식별하지 못합니다.
+          </p>
+          <p>
+            올바른 검증에서는 먼저 실제 patient를 development와 outer test로 한 번만
+            나눕니다. Imputation, scaling, generator 학습, synthetic 생성, predictor
+            tuning은 모두 development 안에서 끝나야 하고, outer test 환자는 마지막
+            평가 전까지 어떤 단계에도 등장하면 안 됩니다. 세 기관이라면 가능한 경우
+            leave-one-institution-out 결과도 함께 봅니다. Generator와 predictor를 각각
+            nested하게 관리해야 하는 이유입니다.
+          </p>
+          <p>
+            이 문제를 발견했다고 해서 곧바로 새 방법론이 생기지는 않습니다. Held-out
+            real test와 train-synthetic/test-real 평가는 이미 synthetic-tabular 연구의
+            기본입니다. 더구나 원본 78건은 저자 요청형이고 공개 repository에는
+            <code>WEB_TARGET.csv</code>, patient ID, institution ID가 없습니다. 그래서
+            AURORA는 clean split을 재구성하거나 source AUC를 재현하지 않았고, 원 논문의
+            전체 유효성을 무효라고 선언하지도 않습니다.
+          </p>
+          <p>
+            여섯 후보는 29.0/28.5/26.0/25.5/24.5/23.0입니다. RSNA 후보는 controlled
+            contract와 direct prior 때문에, WEB 후보는 residual novelty 1.5/5 이하와
+            original donor asset·독립 단위 부족 때문에 모두 기각됩니다. 이 delta는
+            schema 10.7의 현재 aSAH batch를 바꾸지 않으며 P0, architecture, scientific
+            server와 GPU를 열지 않습니다.
+          </p>
+          <p>
+            재진입에는 versioned original table, patient/procedure와 institution ID,
+            고정된 6개월 endpoint, missing follow-up 규칙, generator가 전혀 보지 않은
+            real outer test가 필요합니다. 단순히 GAN을 diffusion이나 transformer로
+            바꾸는 것은 이 식별 문제를 해결하지 않습니다.
+          </p>
+          <a href="../docs/rsna-release-layer-and-webgan-utility-delta-2026-08-12.md">세 출처의 숫자, notebook lineage와 six-way gate 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="wall-phenotype">
           <span>4D-CTA wall phenotype을 처음부터 이해하기</span>

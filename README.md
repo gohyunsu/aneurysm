@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 RSNA release-layer/WEB-GAN utility delta · no state change:**
+> RSNA launch `>6,500` multimodal studies, AWS registry `>4,000` controlled CT
+> scans and the second-place method's 4,348 training series are separate source
+> claims; no public identity map proves a common unit or arithmetic split.
+> Exact WEB-GAN head `42ce2a8…` trains its cGAN on the complete 78-case original
+> table and evaluates the synthetic-trained predictor on that same original
+> donor table. The request-only original patient/institution data prevent a
+> donor-disjoint reproduction. Six delta rows score
+> **29.0/28.5/26.0/25.5/24.5/23.0** and all are rejected. This is a validity
+> boundary, not source-paper invalidation or model novelty; schema 10.7, the
+> current aSAH batch and lead/P0/method/model/server/GPU 0 are unchanged. See
+> the [exact audit](docs/rsna-release-layer-and-webgan-utility-delta-2026-08-12.md)
+> and [beginner explanation](site/learn.html#release-utility).
+
 > **2026-08-12 surface-vector analysis delta review · no state change:** The
 > supplied closed-job, no-repair and staged-gate conclusions are retained.
 > Public/shared AGENTS already recorded `115645.ECE-util1` as closed, not

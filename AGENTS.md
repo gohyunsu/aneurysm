@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 RSNA release-layer/WEB-GAN utility delta · no state change:**
+> Official RSNA launch `>6,500` multimodal studies, AWS registry `>4,000`
+> controlled CT scans and the second-place method's 4,348 training series are
+> different source claims. Never infer a common unit, public expansion or
+> arithmetic train/test split without an official identity map. WEB-GAN paper
+> `10.1177/2997979X251369456` reports 78 cases/3 institutions/1,000 synthetic
+> rows. Exact repository head `42ce2a8…` trains the generator on the complete
+> original table and tests the synthetic-trained predictor on those same
+> original donors; original patient/institution data are request-only. Treat
+> this as an evaluation-contract limitation, not paper invalidation or novelty.
+> Six delta scores 29.0/28.5/26.0/25.5/24.5/23.0 are all rejected. Schema
+> 10.7, the current aSAH batch, surface-vector inactivity and lead/P0/P1/method/
+> architecture/scientific-server/PBS/GPU/outer-test/claim 0 remain unchanged.
+> No controlled payload or synthetic CSV body was opened; no server was
+> queried. Future authorized execution remains `introai9` PBS-only and
+> `junjinyong` remains absolutely excluded.
+
 > **2026-08-12 surface-vector external-analysis delta review · no state
 > change:** The supplied job-state/no-repair/staged-gate reasoning is accepted.
 > The claimed stale running label is not present in the current snapshot:
