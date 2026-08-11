@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.5 VMR asset boundary · 2026-08-11:** Three exact public metadata
+> CSVs identify 22 patient entries, eleven prespecified growing/stable pairs and
+> 22 time-resolved surface-result archives totaling 1,998,793,994 bytes. The
+> independent unit is the patient; pair membership is design information, and
+> phase, triangle, vertex and critical point are repeated/derived units. No
+> medical image, project ZIP, result ZIP or VTP body was opened before the
+> registered P0. The source remains research-only and cannot yet support a
+> split, model, growth association or clinical claim. [Exact audit](vmr-growth-paired-surface-structure-source-audit-2026-08-11.md)
+
 > **Schema 9.4 latent/open-CTA asset boundary · 2026-08-11:** Exact latent repo
 > `43e8219…` is MIT and releases code, weights and caches, but no processed OBJ,
 > `rupture_labels.csv` or immutable source-fold manifest. Its 3k VAE cache has

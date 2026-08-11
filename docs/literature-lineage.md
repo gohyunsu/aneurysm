@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.5 residual-gap correction · 2026-08-11:** Weiss et al. already
+> compare WSS, OSI, low-shear area and mesh convergence in eleven matched
+> growing/stable pairs; a later 481-patient prospective study already reports
+> size-dependent WSS growth mechanisms. Aneurysm critical-point cycle tracking,
+> robust trajectory preservation, SE(3)-equivariant transient WSS prediction,
+> Hodge/DEC and geometric operators occupy the obvious components. The residual
+> gap is therefore ordered evidence, not component assembly: first determine
+> whether signed-degree and secondary critical structures are stable enough to
+> be endpoints; only a later field-error-matched failure could motivate a
+> minimal structure-aware surrogate. [Exact audit](vmr-growth-paired-surface-structure-source-audit-2026-08-11.md)
+
 > **Schema 9.4 direct-prior correction · 2026-08-11:** The 958-surface
 > latent-shape paper already performs five-source LODO and reports low
 > reconstruction error with AUC 0.66 under source-held-out rupture-status

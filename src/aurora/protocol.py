@@ -58,6 +58,7 @@ REQUIRED_DATASETS = {
     "maximus_tof_model_2025",
     "rheology_slip_aneurysm_case01_2026",
     "openneuro_ds003949",
+    "vmr_growth_matched_cerebral_aneurysm",
 }
 
 
@@ -123,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.4":
-        raise ProtocolError("The current research-state schema must be version 9.4.")
+    if protocol["schema_version"] != "9.5":
+        raise ProtocolError("The current research-state schema must be version 9.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +149,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_latent_shape_open_cta_batch_best_29_5_rejected_by_novelty_and_identifiability_floors_closed_p0_no_verdicts_preserved"
+        != "conditional_source_lead_vmr_growth_paired_structure_stability_32_5_p0_registered_no_active_problem_method_architecture_or_gpu"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_4_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_5_p0_not_yet_submitted"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -186,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "vmr_growth_paired_surface_structure_source_audit",
             "latent_shape_open_cta_transport_reappraisal",
             "synva_release_and_synthetic_utility_source_audit",
             "reference_provenance_and_rsna_release_contract_reappraisal",
@@ -259,13 +261,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_latent_shape_open_cta_batch_best_29_5_rejected_by_total_residual_novelty_and_identifiability_floors"
-        or problem_selection["shortlisted_candidate"] is not None
-        or problem_selection["conditional_source_lead_count"] != 0
-        or problem_selection["candidate_dataset"] is not None
-        or problem_selection["candidate_estimand"] is not None
+        != "conditional_source_lead_vmr_growth_paired_structure_stability_p0_registered_no_active_paper_identity"
+        or problem_selection["shortlisted_candidate"]
+        != "growth_paired_transient_wss_structure_stability"
+        or problem_selection["conditional_source_lead_count"] != 1
+        or problem_selection["candidate_dataset"]
+        != "vmr_twenty_two_patient_eleven_growth_stable_matched_pairs_with_time_resolved_surface_vtp_results"
+        or problem_selection["candidate_estimand"]
+        != "method_free_stability_of_growth_paired_transient_surface_wss_structure_before_any_surrogate_or_growth_association_claim"
         or problem_selection["asset_access_status"]
-        != "public_latent_shape_paper_exact_git_code_weights_and_aggregate_cache_plus_previously_audited_open_cta_metadata_only_no_medical_mesh_or_image_payload"
+        != "official_vmr_web_metadata_three_exact_csv_files_only_result_archives_vtp_and_medical_images_not_yet_read_p0_registered"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -275,21 +280,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "continue_fresh_problem_level_source_audit_or_wait_for_patient_mapped_latent_release_and_distinct_failure_target_no_payload_p0_or_model"
+        != "execute_exact_one_shot_introai9_cpu_pbs_vmr_asset_semantics_p0_only"
         or problem_selection["audit_document"]
-        != "docs/latent-shape-open-cta-transport-reappraisal-2026-08-11.md"
+        != "docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "released_code_paper_contract_reproducibility_audit_rejected_as_non_novel"
-        or problem_selection["most_recent_conditional_source_lead"] is not None
+        != "growth_paired_structure_faithful_surrogate_retention_rejected_without_compatible_executable_surrogate_or_development_asset"
+        or problem_selection["most_recent_conditional_source_lead"]
+        != "growth_paired_transient_wss_structure_stability"
     ):
         raise ProtocolError(
-            "The latent-shape/open-CTA transport batch must remain rejected by "
-            "the total, residual-novelty, and identifiability floors while "
-            "the conformal-degree and surface-vector candidates stay closed after exact "
-            "execution-incomplete introai9 CPU P0, with no active lead, primary, "
-            "method, GPU, outer test, or claim."
+            "The VMR growth-paired structure candidate must remain a conditional "
+            "source lead for one method-free CPU P0 only, with no active paper "
+            "identity, method, GPU, outer test or claim; historical no-verdict "
+            "surface candidates remain closed."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
     _require_keys(
@@ -349,9 +354,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 29.5
-        or admission_v2["current_batch_best_residual_novelty"] != 2.0
-        or admission_v2["current_batch_admitted_count"] != 0
+        or admission_v2["current_batch_best_score"] != 32.5
+        or admission_v2["current_batch_best_residual_novelty"] != 2.5
+        or admission_v2["current_batch_admitted_count"] != 1
     ):
         raise ProtocolError(
             "Future source admission v2 must remain prospective and non-compensatory: "
@@ -359,6 +364,171 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    vmr_growth = problem_selection["vmr_growth_paired_surface_structure_source_audit"]
+    _require_keys(
+        vmr_growth,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "primary_paper_doi",
+            "primary_paper_patient_count",
+            "primary_paper_matched_pair_count",
+            "primary_paper_growing_count",
+            "primary_paper_stable_count",
+            "primary_paper_directly_tests_wss_osi_low_shear_and_mesh_convergence",
+            "primary_paper_results_reproduced_by_aurora",
+            "later_prospective_growth_prior_doi",
+            "later_prospective_growth_prior_enrolled_patients",
+            "later_prior_directly_reports_size_dependent_wss_growth_mechanisms",
+            "vmr_project_metadata_bytes",
+            "vmr_project_metadata_sha256",
+            "vmr_result_metadata_bytes",
+            "vmr_result_metadata_sha256",
+            "vmr_size_metadata_bytes",
+            "vmr_size_metadata_sha256",
+            "vmr_cohort_case_rows",
+            "vmr_time_resolved_surface_result_rows",
+            "vmr_result_archive_count",
+            "vmr_result_archive_total_bytes",
+            "vmr_medical_image_or_project_zip_accessed",
+            "vmr_result_archive_or_vtp_accessed_before_p0",
+            "critical_structure_or_growth_association_computed",
+            "direct_prior_threats",
+            "candidates",
+            "p0_config",
+            "p0_protocol_id",
+            "p0_registered",
+            "p0_submitted",
+            "p0_execution_server",
+            "p0_cpu_only",
+            "p0_gpu_count",
+            "p0_pass_authorizes",
+            "p0_failure_or_incomplete_action",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "historical_surface_vector_score_or_job_relabelled",
+            "historical_surface_vector_p0_repaired_or_rerun",
+            "scientific_server_queried_this_schema",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "problem_selection.vmr_growth_paired_surface_structure_source_audit",
+    )
+    expected_vmr_candidates = {
+        "growth_paired_transient_wss_structure_stability": 32.5,
+        "critical_flow_growth_biomarker": 30.5,
+        "low_shear_threshold_continuum": 30.5,
+        "mesh_fidelity_growth_signal": 30.0,
+        "growth_paired_structure_faithful_surrogate_retention": 26.0,
+        "image_to_growth_hemodynamics": 23.0,
+    }
+    vmr_candidates = _unique_ids(vmr_growth["candidates"], "id", "VMR candidates")
+    vmr_scores = {
+        row["id"]: float(row["total"]) for row in vmr_growth["candidates"]
+    }
+    admitted_vmr = [
+        row for row in vmr_growth["candidates"] if row["critical_axis_pass"] is True
+    ]
+    if (
+        vmr_growth["status"]
+        != "fresh_material_source_admitted_32_5_only_for_registered_method_free_cpu_p0"
+        or vmr_growth["audit_document"]
+        != "docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md"
+        or vmr_growth["best_candidate_id"]
+        != "growth_paired_transient_wss_structure_stability"
+        or vmr_growth["best_score"] != 32.5
+        or vmr_growth["best_residual_novelty_score"] != 2.5
+        or vmr_growth["all_candidate_scores"]
+        != [32.5, 30.5, 30.5, 30.0, 26.0, 23.0]
+        or vmr_growth["conditional_source_lead_count"] != 1
+        or vmr_growth["primary_problem_selected"] is not False
+        or vmr_growth["paper_identity_active"] is not False
+        or vmr_growth["primary_paper_doi"] != "10.3389/fphys.2023.1300754"
+        or vmr_growth["primary_paper_patient_count"] != 22
+        or vmr_growth["primary_paper_matched_pair_count"] != 11
+        or vmr_growth["primary_paper_growing_count"] != 11
+        or vmr_growth["primary_paper_stable_count"] != 11
+        or vmr_growth["primary_paper_directly_tests_wss_osi_low_shear_and_mesh_convergence"]
+        is not True
+        or vmr_growth["primary_paper_results_reproduced_by_aurora"] is not False
+        or vmr_growth["later_prospective_growth_prior_doi"]
+        != "10.1177/0271678X251325972"
+        or vmr_growth["later_prospective_growth_prior_enrolled_patients"] != 481
+        or vmr_growth["later_prior_directly_reports_size_dependent_wss_growth_mechanisms"]
+        is not True
+        or vmr_growth["vmr_project_metadata_bytes"] != 152492
+        or vmr_growth["vmr_project_metadata_sha256"]
+        != "d8d43c633df5fa7d7b21edf6a2b6158686fed4c6dbf0253cfffe77dcb18e19e0"
+        or vmr_growth["vmr_result_metadata_bytes"] != 77713
+        or vmr_growth["vmr_result_metadata_sha256"]
+        != "9bf79ff7d79241c1e0b564ad4efbe7ae9da5a1405a9d3a36f3a5b5c6f39f6a14"
+        or vmr_growth["vmr_size_metadata_bytes"] != 39122
+        or vmr_growth["vmr_size_metadata_sha256"]
+        != "0522f4b076eb82c1f85db6eb687ac97ef995506145953161cc135ec7a488ab94"
+        or vmr_growth["vmr_cohort_case_rows"] != 22
+        or vmr_growth["vmr_time_resolved_surface_result_rows"] != 22
+        or vmr_growth["vmr_result_archive_count"] != 22
+        or vmr_growth["vmr_result_archive_total_bytes"] != 1998793994
+        or vmr_candidates != set(expected_vmr_candidates)
+        or vmr_scores != expected_vmr_candidates
+        or len(admitted_vmr) != 1
+        or admitted_vmr[0]["id"]
+        != "growth_paired_transient_wss_structure_stability"
+        or admitted_vmr[0]["axis_scores"]
+        != [4.5, 4.0, 2.5, 4.5, 3.0, 5.0, 5.0, 4.0]
+        or vmr_growth["p0_config"] != "configs/vmr_growth_surface_structure_p0.json"
+        or vmr_growth["p0_protocol_id"]
+        != "vmr_growth_surface_structure_asset_semantics_p0_v1"
+        or vmr_growth["p0_registered"] is not True
+        or vmr_growth["p0_submitted"] is not False
+        or vmr_growth["p0_execution_server"] != "introai9"
+        or vmr_growth["p0_cpu_only"] is not True
+        or vmr_growth["p0_gpu_count"] != 0
+        or vmr_growth["p0_pass_authorizes"]
+        != "register_separate_method_free_cpu_only_p1_mesh_phase_tolerance_and_perturbation_stability_audit_only"
+        or vmr_growth["p1_registered"] is not False
+        or any(
+            vmr_growth[key] is not False
+            for key in (
+                "vmr_medical_image_or_project_zip_accessed",
+                "vmr_result_archive_or_vtp_accessed_before_p0",
+                "critical_structure_or_growth_association_computed",
+                "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_surface_vector_score_or_job_relabelled",
+                "historical_surface_vector_p0_repaired_or_rerun",
+                "scientific_server_queried_this_schema",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or vmr_growth["next_allowed_action"]
+        != "execute_exact_one_shot_introai9_cpu_pbs_vmr_asset_semantics_p0_only"
+    ):
+        raise ProtocolError(
+            "The VMR source lead must preserve the exact 22-patient/11-pair "
+            "metadata contract, six frozen scores and one method-free introai9 "
+            "CPU P0 boundary without opening payload, structure, growth testing, "
+            "method, GPU, outer test or paper identity."
+        )
+    checks.append("VMR growth-paired source lead and method-free P0 boundary")
 
     latent_transport = problem_selection[
         "latent_shape_open_cta_transport_reappraisal"
@@ -4947,6 +5117,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("fifteen-source fail-closed RSNA release-contract watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "critical_flow_growth_biomarker_direct_prior_and_eleven_pair_limit",
+        "low_shear_threshold_continuum_directly_tested_by_primary_paper",
+        "mesh_fidelity_growth_signal_directly_tested_by_primary_paper",
+        "growth_paired_structure_faithful_surrogate_retention_no_compatible_executable_surrogate",
+        "image_to_growth_hemodynamics_no_open_image_contract_or_confirmatory_units",
         "released_code_paper_contract_reproducibility_audit_non_novel",
         "source_disjoint_latent_transport_reliability_directly_reported_by_source_paper",
         "miliary_shape_support_abstention_support_target_not_identified",
@@ -9967,7 +10142,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     if (
         venue["submission_ready"] is not False
         or venue["required_headline_domain"]
-        != "no_active_primary_surface_vector_retained_only_as_inactive_conditional_hypothesis_no_method_architecture_gpu_or_submission_identity"
+        != "conditional_vmr_growth_paired_structure_stability_source_lead_only_no_active_primary_method_architecture_gpu_or_submission_identity"
         or venue["development_cache_is_confirmatory"] is not False
         or venue["m0_alone_may_authorize_submission"] is not False
         or venue["v0_task_audit_config"] != "configs/aneumo_isbi_v0.json"
@@ -10128,11 +10303,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_metric"] != "functional_energy_score"
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
-        or task["active_candidate_problem"] != "none"
+        or task["active_candidate_problem"]
+        != "growth_paired_transient_wss_structure_stability"
         or task["active_candidate_status"]
-        != "none_surface_vector_exact_version_closed_hypothesis_retained_inactive"
-        or task["candidate_primary_estimand"] is not None
-        or task["candidate_secondary_estimand"] is not None
+        != "conditional_source_lead_p0_registered_paper_identity_inactive_surface_vector_historical_job_closed"
+        or task["candidate_primary_estimand"]
+        != "method_free_boundary_margin_signed_total_degree_stability_under_mesh_phase_tolerance_and_field_perturbations"
+        or task["candidate_secondary_estimand"]
+        != "critical_point_signed_index_worldline_and_birth_death_stability_only_after_primary_degree_identifiability"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -10176,11 +10354,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The task must keep every active candidate and primary estimand "
-            "unselected while historical 4D-flow evidence retains the exact "
-            "I0a result and I0b execution record."
+            "The active candidate must keep the VMR structure-stability row "
+            "conditional and method-free while every primary paper estimand "
+            "remains unselected; historical 4D-flow must retain the exact I0a "
+            "result and I0b execution record."
         )
-    checks.append("no-active-candidate task boundary and historical 4D-flow guardrails")
+    checks.append("conditional VMR task boundary and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:
@@ -10209,6 +10388,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     aneux = next(item for item in datasets if item["name"] == "aneux")
     aneumo = next(item for item in datasets if item["name"] == "aneumo")
     aneug_flow = next(item for item in datasets if item["name"] == "aneug_flow")
+    vmr_growth_dataset = next(
+        item
+        for item in datasets
+        if item["name"] == "vmr_growth_matched_cerebral_aneurysm"
+    )
     flow_2021 = next(
         item for item in datasets if item["name"] == "flow_mri_multiresolution_phantom_2021"
     )
@@ -10337,6 +10521,31 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "P0 versions closed without a verdict, rerun, method, or GPU authority."
         )
     if (
+        vmr_growth_dataset.get("role")
+        != "conditional_source_lead_for_method_free_transient_wss_structure_stability_asset_audit_only"
+        or vmr_growth_dataset.get("field_provenance") != "real_cfd"
+        or vmr_growth_dataset.get("split_unit") != "patient"
+        or vmr_growth_dataset.get("status")
+        != "three_exact_public_metadata_csv_files_audited_result_archive_and_vtp_access_pending_registered_p0"
+        or vmr_growth_dataset.get("primary_paper_doi")
+        != "10.3389/fphys.2023.1300754"
+        or vmr_growth_dataset.get("patients") != 22
+        or vmr_growth_dataset.get("matched_pairs") != 11
+        or vmr_growth_dataset.get("result_archives") != 22
+        or vmr_growth_dataset.get("result_archive_bytes") != 1998793994
+        or vmr_growth_dataset.get("p0_config")
+        != "configs/vmr_growth_surface_structure_p0.json"
+        or vmr_growth_dataset.get(
+            "medical_image_project_zip_result_archive_or_vtp_accessed"
+        )
+        is not False
+        or vmr_growth_dataset.get("method_or_gpu_authorized") is not False
+    ):
+        raise ProtocolError(
+            "The VMR matched-pair source must remain a 22-patient/11-pair, "
+            "metadata-only conditional lead for the registered method-free P0."
+        )
+    if (
         flow_2021.get("status")
         != "i0b_execution_incomplete_before_asset_access_no_field_read"
         or flow_2025.get("status")
@@ -10436,11 +10645,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         model["current_headline_architecture"]
-        != "unselected_no_active_problem_surface_vector_components_are_conditional_controls_only"
+        != "unselected_vmr_source_lead_is_method_free_surface_components_remain_controls_only"
     ):
         raise ProtocolError(
-            "No surface-vector, GNN, Hodge, equivariant, or temporal architecture "
-            "may be selected while the hypothesis is inactive."
+            "The VMR source lead is method-free: no surface-vector, GNN, Hodge, "
+            "equivariant, or temporal architecture may be selected before stability."
         )
     for key in numeric_model_keys:
         if not isinstance(model[key], int) or model[key] <= 0:

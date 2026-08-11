@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 9.5 registered server state · 2026-08-11:** The VMR source audit
+> queried no scientific server. One exact CPU-only P0 is preregistered for
+> future `introai9` PBS execution with 4 CPUs, 16 GB, GPU 0 and a four-hour
+> walltime. It is not yet submitted. It may inspect only job-local copies of 22
+> result archives, write bounded aggregate status/result records and retain no
+> payload. Failure or incomplete execution closes this exact version without
+> repair or rerun. Never access, query, transfer to, submit to or monitor
+> `junjinyong`; never execute a GPU command on the login node.
+
 > **Schema 9.4 server state · 2026-08-11:** The latent-shape/open-CTA
 > reappraisal used public web/Git metadata and aggregate caches only. No
 > scientific server or scheduler was queried; no transfer, PBS submission,

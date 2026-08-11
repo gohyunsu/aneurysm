@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 9.5, 2026-08-11):** one conditional VMR
+> source lead is admitted at 32.5/40 for a method-free CPU asset/semantics P0
+> only. It asks whether growth-paired transient surface-WSS data are coherent
+> enough to support a later mesh/phase/tolerance stability audit. There is no
+> selected paper identity, model, GNN, architecture, GPU experiment, outer test
+> or clinical claim. The source paper already owns WSS/OSI/low-shear growth
+> analysis; edge 1-form, Hodge, equivariance and structural loss remain direct
+> controls. See the [exact source audit](docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md).
+
 > **2026-08-11 schema 9.4 deployment verification:** Exact scientific source
 > `eb9a6ae9db3980ca41814b3852b68fd4a0804c09` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31493466627) and

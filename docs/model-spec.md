@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.5 model boundary · 2026-08-11:** No model is selected. The VMR
+> matched-growth source lead is method-free and its registered P0 only checks
+> patient/pair/result joins, ZIP/VTP integrity, three-component WSS and phase
+> semantics. Edge 1-forms, Hodge/DEC, SE(3) message passing, periodic operators
+> and structural losses remain unselected controls. Architecture development
+> is forbidden until a separate stability P1 passes and a later matched-
+> baseline experiment actually demonstrates field-error/structure discordance.
+
 > **Schema 9.4 model boundary · 2026-08-11:** No model is selected. The released
 > PointNet AE/VAE is a fixed direct baseline; reconstruction residual, latent
 > density, ensembles, conformal calibration, topology-aware registration and an

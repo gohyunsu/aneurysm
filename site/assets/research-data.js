@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest latent-shape/open-CTA transport batch best 29.5/40 rejected by novelty and identifiability floors · source paper already reports low-error/weak-label LODO transport · active source lead/primary/method/architecture/GPU/outer test/claim 0 · surface-vector remains inactive and closed P0s remain no verdict · not submission-ready",
-    requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
+    status: "Target locked · one VMR growth-paired transient-WSS structure-stability source lead admitted at 32.5/40 for method-free CPU P0 only · paper identity/primary/method/architecture/GPU/outer test/claim 0 · historical no-verdict P0s remain closed · not submission-ready",
+    requirement: "the registered VMR P0 must first verify exact 22-patient/11-pair/result-archive vector-phase semantics; even a pass opens only a separate mesh/phase/tolerance stability audit, never a model, growth association or GPU experiment",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A growth-linked transient-WSS source opens an audit, not a model",
+      copy: "Three exact VMR metadata CSVs identify 22 patient-specific cerebral-aneurysm entries, eleven reciprocal growing/stable pairs and 22 advertised time-resolved surface-VTP result archives totaling 1,998,793,994 bytes. No medical image, project ZIP, result archive or VTP was opened before registration. The source paper already tests WSS, OSI, low-shear area and mesh convergence; a later 481-patient prospective study owns size-dependent WSS growth mechanisms, while aneurysm critical tracking and equivariant/Hodge operators are direct priors. The only residual question is whether degree and secondary critical structures are numerically stable enough to become later surrogate endpoints. Six candidates score 32.5/30.5/30.5/30.0/26.0/23.0.",
+      status: "Conditional source lead 32.5/40 · exact CPU P0 registered · no result archive/VTP read yet · paper identity/method/model/GPU 0",
+      url: "../docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "A released latent model is a baseline, not an automatic transport paper",
@@ -718,6 +725,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "VMR growth-matched cerebral aneurysm cohort",
+      role: "conditional source lead for method-free transient-WSS structure-stability asset audit only",
+      provenance: "22 patients · 11 prespecified growing/stable pairs · 22 time-resolved surface-VTP result archives advertised · 1,998,793,994 total bytes · exact public metadata only · archive/VTP/image/project payload 0 before P0 · no model/GPU"
+    },
+    {
       name: "AAA transcriptomic reproducibility · Zenodo 21868617 rev. 4",
       role: "source-rejected cross-cohort evidence package; not a patient-linked imaging–mechanics–molecular training set",
       provenance: "CC BY 4.0 · one 293,641-byte ZIP/MD5 264d9a… · six GEO cohorts · GSE205071 paired high/low stress biopsy n=12 · no public common CTA/mesh/field/biopsy coordinate · ZIP/expression/image payload 0"
@@ -959,6 +971,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 9.5 admits one VMR growth-paired source lead for method-free P0",
+      copy: "Exact public VMR metadata establishes 22 patient entries, eleven reciprocal growth/stable pairs and 22 time-resolved surface-VTP result archives. The source and later prospective papers already own scalar WSS-growth analysis; critical tracking and surface operators are direct priors. Six candidates freeze at 32.5/30.5/30.5/30.0/26.0/23.0. Only structure stability passes all prospective floors, exactly at novelty 2.5 and unit 3.0. One introai9 CPU/PBS asset-semantics P0 is registered; it opens no structure extraction, growth association, method, architecture, GPU, outer test or claim. Historical jobs remain closed and junjinyong remains prohibited.",
+      files: ["docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md", "configs/vmr_growth_surface_structure_p0.json", "src/aurora/vmr_growth_surface_structure_p0.py", "cluster/pbs_vmr_growth_surface_structure_p0.pbs", "tests/test_vmr_growth_surface_structure_p0.py", ".github/workflows/quality.yml", "configs/aurora_v1.json", "src/aurora/protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

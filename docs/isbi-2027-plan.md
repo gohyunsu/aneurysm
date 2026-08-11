@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.5 submission boundary · 2026-08-11:** One VMR structure-stability
+> source row passes the admission gate at 32.5/40, but AURORA is still not
+> submission-ready. This authorizes only a method-free asset/semantics P0. No
+> title, abstract claim, contribution, architecture figure, model table or
+> clinical endpoint is opened. A viable ISBI identity would still require a
+> stable registered structural endpoint, an observed field-error-matched
+> baseline failure, a minimal mechanism-linked intervention and independent
+> confirmatory evidence. Component stacking or a growth-biomarker narrative is
+> explicitly insufficient. [Exact audit](vmr-growth-paired-surface-structure-source-audit-2026-08-11.md)
+
 > **Schema 9.4 submission boundary · 2026-08-11:** A latent-shape transport,
 > OOD or reproducibility paper is not admitted. The source paper already owns
 > the main LODO failure, and the strongest fresh row is 29.5/40 with novelty

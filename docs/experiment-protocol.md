@@ -1,5 +1,15 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.5 execution boundary · 2026-08-11:** Exactly one fresh VMR
+> method-free asset/semantics P0 is preregistered. It runs on `introai9` PBS
+> with 4 CPU, 16 GB, GPU 0 and sequential job-local inspection of 22 result
+> archives. It computes no critical point, degree, track, growth association or
+> model metric and persists no payload. Pass authorizes only registration of a
+> separate CPU-only mesh/phase/tolerance/perturbation stability P1; fail or
+> execution-incomplete closes the exact version without repair/rerun. Jobs
+> `115645` and `115684` remain closed. Never query or use `junjinyong`, and do
+> not run a GPU command on the login node.
+
 > **Schema 9.4 execution boundary · 2026-08-11:** No latent-shape/open-CTA
 > experiment is authorized. Static public code/cache audit is complete, but all
 > six candidates fail total or critical novelty/identifiability floors. Do not

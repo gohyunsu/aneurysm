@@ -1,5 +1,15 @@
 # 연구 지형과 현재 작업
 
+> **Schema 9.5 conditional decision · 2026-08-11:** Exact VMR metadata is a
+> material source change: 22 patient-specific aneurysms form eleven declared
+> growing/stable pairs and link to 22 time-resolved surface-WSS archives. The
+> only admitted row is method-free structure stability at 32.5/40. It does not
+> activate the paper, a growth biomarker, a surrogate or an architecture. The
+> source paper already owns scalar WSS/OSI/low-shear and mesh-convergence
+> analysis; later prospective work and critical-tracking/operator methods are
+> direct priors. One CPU-only asset/semantics P0 is registered. Pass may open a
+> separately registered stability P1 only. [Exact audit](vmr-growth-paired-surface-structure-source-audit-2026-08-11.md)
+
 > **Schema 9.4 decision · 2026-08-11:** The new exact latent-shape release is a
 > strong baseline but not an active paper. Its paper already reports LODO AUC
 > 0.66 with low reconstruction error; generic OOD, likelihood, abstention and

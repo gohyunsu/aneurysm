@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="Aneurysm latent-shape transport, open CTA, OOD와 재현성 계약, surface-vector 가설, 독립 표본과 비보상형 research gate를 기초부터 설명하는 입문 가이드.">
+  <meta name="description" content="VMR 성장 matched-pair transient WSS, surface-vector 구조 안정성, 독립 표본과 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#vmr-growth-structure">VMR structure gate</a>
       <a href="#latent-transport">Latent transport</a>
       <a href="#synva-release">SynVA release</a>
       <a href="#reference-provenance">Reference provenance</a>
@@ -68,20 +69,66 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.4</span>
-          <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
+          <span>짧은 답 · schema 9.5</span>
+          <strong>Conditional source lead는 1개지만, 모델과 paper identity는 0개입니다.</strong>
           <p>
             Surface-vector 질문은 보존하지만 active topic이나 선택된 GNN/Hodge
             architecture는 아닙니다. P0 `115645`는 0/10 checks가 미평가된
             execution-incomplete/no-verdict이고 동일 contract를 재실행하지 않습니다.
-            최신 latent-shape 논문은 low reconstruction error와 source-held-out
-            rupture-status AUC 0.66의 불일치를 이미 보고한 direct prior입니다.
-            Exact repo의 code/weights/cache는 유용하지만 missing data/fold manifest와
-            loader defect는 재현성 문제이지 novelty가 아닙니다. Open-CTA morphology도
-            latent-support 정답이 아닙니다. 최신 여섯 후보는 최고 29.5/40이고
-            batch-max novelty도 2.0/5라 기각했습니다.
-            Primary, contribution, payload, P0, GPU와 outer test는 0입니다.
+            새 VMR metadata는 22 patient와 11 growth/stable matched pair, 22개
+            time-resolved surface-VTP result archive를 연결합니다. 이 material source
+            때문에 structure-stability 문제만 32.5/40으로 조건부 입장했고 CPU P0를
+            등록했습니다. 하지만 source paper가 WSS/OSI/low-shear growth 분석과
+            mesh convergence를 이미 수행했으므로 growth biomarker는 novelty가
+            아닙니다. Result archive/VTP, critical structure와 association은 아직
+            읽거나 계산하지 않았습니다. Primary, contribution, method, architecture,
+            GPU와 outer test는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="vmr-growth-structure">
+          <span>VMR source lead는 무엇이며 왜 곧바로 GNN을 학습하지 않나?</span>
+          <strong>공개 자산은 질문을 실행 가능하게 만들었지만, 구조 endpoint가 안정적이라는 보장은 아직 없습니다.</strong>
+          <p>
+            VMR의 세 공개 CSV를 exact byte와 SHA-256으로 고정했습니다. Project
+            table은 `0199_H_CERE_CA`부터 `0220_H_CERE_CA`까지 22개 patient entry를
+            보여 주고, notes에서 growing 11개와 stable 11개를 서로 reciprocal하게
+            pair합니다. Growth는 두 개 이상 dimension에서 최소 1 mm 증가로
+            정의됩니다. Result table은 같은 22 ID에 대해 3D rigid-wall,
+            time-resolved surface VTP를 광고하며, 각 archive가 whole model, dome,
+            parent vessel의 pressure·velocity·WSS를 담는다고 설명합니다.
+          </p>
+          <p>
+            이것은 과거 AneuG P0의 downloader를 고치는 일이 아닙니다. Synthetic
+            source 대신 실제 patient geometry와 observed growth label이 직접 연결된
+            별도 source version입니다. 반대로 80 phase나 수백만 vertex를 환자 수로
+            세지 않습니다. 독립 단위는 22 patient, matched 분석 단위는 11 pair뿐이라
+            end-to-end growth predictor나 새로운 surrogate를 확증하기에는 작습니다.
+          </p>
+          <p>
+            원 논문은 이미 WSS, OSI, low-shear area와 mesh convergence를 비교했고,
+            이후 481-patient prospective study는 aneurysm size에 따른 WSS growth
+            mechanism을 보고했습니다. Aneurysm WSS critical-point tracking, robust
+            trajectory tracking, SE(3)-equivariant WSS surrogate와 Hodge operator도
+            direct prior입니다. 따라서 edge 1-form + Hodge + GNN + periodic decoder를
+            묶는 것은 contribution이 아닙니다.
+          </p>
+          <p>
+            등록된 P0는 22개 archive를 `introai9` PBS의 job-local scratch로 하나씩
+            받아 exact size, ZIP CRC, safe member, whole/dome/parent VTP, PolyData,
+            3-component coordinates/WSS와 최소 두 phase array만 확인하고 즉시
+            삭제합니다. Critical point, signed degree, track, growth association,
+            model과 GPU는 전혀 계산하지 않습니다. 10개 check가 모두 pass해야만
+            별도 CPU P1에서 mesh·phase·tolerance·field perturbation stability를
+            등록할 수 있습니다. Fail 또는 execution-incomplete면 같은 contract를
+            수리하거나 재실행하지 않습니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Material source change</span>
+            <span class="yes">32.5/40 · P0 only</span>
+            <span class="no">Not a growth biomarker</span>
+            <span class="no">No GNN · architecture · GPU · claim</span>
+          </div>
+          <a href="../docs/vmr-growth-paired-surface-structure-source-audit-2026-08-11.md">source lineage, six scores와 exact P0 contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="latent-transport">
           <span>Latent shape와 transport는 무엇이며 왜 바로 새 논문이 아닌가?</span>

@@ -1,5 +1,48 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 VMR growth-paired structure source lead · schema 9.5
+> prospective:** Exact official VMR metadata CSVs establish 22 patient-specific
+> cerebral-aneurysm entries, eleven declared growing/stable pairs and 22
+> advertised time-resolved surface-VTP result archives totaling 1,998,793,994
+> bytes. The three metadata hashes are `d8d43c…`, `9bf79f…` and `0522f4…`.
+> Medical images, project ZIPs, result archives and VTP bodies were not opened
+> before registration. Patient is the independent unit; pair membership is a
+> design variable, while phases, vertices, triangles and extracted structures
+> are never counted as patients.
+>
+> Six prospectively frozen rows score 32.5/30.5/30.5/30.0/26.0/23.0. Only
+> `growth_paired_transient_wss_structure_stability` passes schema-8.8's total
+> and every non-compensatory floor, exactly at residual novelty 2.5 and
+> effective-unit 3.0. This creates one conditional source lead, not an active
+> primary, paper identity, growth biomarker, contribution, model or clinical
+> claim. Weiss et al. already own WSS/OSI/low-shear and mesh-convergence growth
+> analysis; the 481-patient prospective study owns size-dependent WSS growth
+> mechanisms. Critical-point tracking, trajectory-preserving vector-field
+> methods, SE(3) transient-WSS prediction and Hodge/geometric operators are
+> direct priors. Edge 1-form, Hodge/DEC, equivariant GNN, periodic decoder and
+> structural loss remain unselected controls rather than novelty.
+>
+> Exact protocol `configs/vmr_growth_surface_structure_p0.json` registers one
+> method-free `introai9` PBS P0 with 4 CPU, 16 GB, GPU 0 and four-hour walltime.
+> It checks exact metadata, safe/complete ZIPs, three expected VTP surfaces,
+> PolyData, three-component WSS and phase semantics only. It computes no
+> critical point, signed degree, worldline, growth association, surrogate or
+> model metric and retains no payload. Pass authorizes only registration of a
+> separate CPU-only mesh/phase/tolerance/perturbation stability P1. Failure or
+> incomplete execution closes this exact version without same-contract repair
+> or rerun. At this prospective state P0 is registered but not submitted; no
+> scientific server was queried.
+>
+> Historical jobs `115645.ECE-util1` and `115684.ECE-util1` remain immutable
+> execution-incomplete/no-scientific-verdict records and must never be repaired,
+> rerun or relabelled. AURORA execution is `introai9` PBS only; never access,
+> query, transfer to, submit to or monitor `junjinyong`, and never run GPU work
+> on an `introai9` login node. Keep protocol, tests, research docs, Learn,
+> Overview, change history and this file synchronized at every state change.
+> Prospective registration regression is 425 tests: 359 pass and 66 optional-
+> dependency skips; the machine protocol passes 72 invariant groups, site graph,
+> JavaScript, PBS shell syntax and diff hygiene.
+
 > **2026-08-11 schema 9.4 deployment·private synchronization:** Exact public
 > scientific source `eb9a6ae9db3980ca41814b3852b68fd4a0804c09` passed
 > Quality `31493466627` and Pages `31493465268`. Private paper ledger

@@ -1,0 +1,206 @@
+{
+  "schema_version": "aurora.vmr_growth_surface_structure_p0.v1",
+  "protocol_id": "vmr_growth_surface_structure_asset_semantics_p0_v1",
+  "status": "preregistered_before_first_introai9_pbs_execution",
+  "as_of": "2026-08-11",
+  "candidate": {
+    "id": "growth_paired_transient_wss_structure_stability",
+    "score": 32.5,
+    "maximum_score": 40.0,
+    "admission_threshold": 32.0,
+    "axis_order": [
+      "clinical_importance",
+      "target_identifiability",
+      "residual_novelty",
+      "asset_readiness",
+      "effective_independent_unit",
+      "strong_baseline_feasibility",
+      "interpretable_evidence",
+      "isbi_schedule_fit"
+    ],
+    "axis_scores": [4.5, 4.0, 2.5, 4.5, 3.0, 5.0, 5.0, 4.0],
+    "estimand": "method_free_stability_of_growth_paired_transient_surface_wss_structure_before_any_surrogate_or_growth_association_claim",
+    "residual_gap": "public_growth_linked_transient_wss_exists_but_no_public_audit_establishes_that_signed_degree_or_critical_structure_is_stable_enough_to_be_a_surrogate_endpoint",
+    "failure_mechanism": "mesh_phase_or_numerical_perturbation_can_change_extracted_structure_even_when_the_underlying_cfd_field_is_fixed",
+    "falsifier": "registered_mesh_tolerance_and_field_perturbations_do_not_recover_stable_boundary_margin_degree_or_secondary_tracks",
+    "historical_surface_vector_score_repaired": false,
+    "historical_surface_vector_p0_rerun": false,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false
+  },
+  "sources": {
+    "repository_name": "Vascular Model Repository",
+    "repository_base_url": "https://www.vascularmodel.com/",
+    "license_url": "https://www.vascularmodel.com/license.html",
+    "license_scope": "research_and_development_with_required_notice_and_acknowledgment_as_is",
+    "primary_paper_doi": "10.3389/fphys.2023.1300754",
+    "primary_paper_design": "retrospective_eleven_matched_pairs_growing_vs_stable_by_location_and_size",
+    "primary_paper_growth_definition": "increase_of_at_least_one_mm_in_two_or_more_dimensions_between_checkups",
+    "primary_paper_directly_tests": [
+      "wall_shear_stress",
+      "oscillatory_shear_index",
+      "aneurysm_area_under_low_shear",
+      "mesh_convergence"
+    ],
+    "metadata": [
+      {
+        "name": "dataset-svprojects.csv",
+        "url": "https://www.vascularmodel.com/dataset/dataset-svprojects.csv",
+        "bytes": 152492,
+        "sha256": "d8d43c633df5fa7d7b21edf6a2b6158686fed4c6dbf0253cfffe77dcb18e19e0"
+      },
+      {
+        "name": "dataset-svresults.csv",
+        "url": "https://www.vascularmodel.com/dataset/dataset-svresults.csv",
+        "bytes": 77713,
+        "sha256": "9bf79ff7d79241c1e0b564ad4efbe7ae9da5a1405a9d3a36f3a5b5c6f39f6a14"
+      },
+      {
+        "name": "file_sizes.csv",
+        "url": "https://www.vascularmodel.com/dataset/file_sizes.csv",
+        "bytes": 39122,
+        "sha256": "0522f4b076eb82c1f85db6eb687ac97ef995506145953161cc135ec7a488ab94"
+      }
+    ],
+    "case_ids": [
+      "0199_H_CERE_CA", "0200_H_CERE_CA", "0201_H_CERE_CA", "0202_H_CERE_CA",
+      "0203_H_CERE_CA", "0204_H_CERE_CA", "0205_H_CERE_CA", "0206_H_CERE_CA",
+      "0207_H_CERE_CA", "0208_H_CERE_CA", "0209_H_CERE_CA", "0210_H_CERE_CA",
+      "0211_H_CERE_CA", "0212_H_CERE_CA", "0213_H_CERE_CA", "0214_H_CERE_CA",
+      "0215_H_CERE_CA", "0216_H_CERE_CA", "0217_H_CERE_CA", "0218_H_CERE_CA",
+      "0219_H_CERE_CA", "0220_H_CERE_CA"
+    ],
+    "matched_pairs": [
+      ["0199_H_CERE_CA", "0200_H_CERE_CA"],
+      ["0201_H_CERE_CA", "0202_H_CERE_CA"],
+      ["0203_H_CERE_CA", "0204_H_CERE_CA"],
+      ["0205_H_CERE_CA", "0206_H_CERE_CA"],
+      ["0207_H_CERE_CA", "0208_H_CERE_CA"],
+      ["0209_H_CERE_CA", "0210_H_CERE_CA"],
+      ["0211_H_CERE_CA", "0212_H_CERE_CA"],
+      ["0213_H_CERE_CA", "0214_H_CERE_CA"],
+      ["0215_H_CERE_CA", "0216_H_CERE_CA"],
+      ["0217_H_CERE_CA", "0218_H_CERE_CA"],
+      ["0219_H_CERE_CA", "0220_H_CERE_CA"]
+    ],
+    "result_archives": [
+      {"case_id": "0199_H_CERE_CA", "bytes": 87105324},
+      {"case_id": "0200_H_CERE_CA", "bytes": 84429937},
+      {"case_id": "0201_H_CERE_CA", "bytes": 66518911},
+      {"case_id": "0202_H_CERE_CA", "bytes": 61634876},
+      {"case_id": "0203_H_CERE_CA", "bytes": 55406600},
+      {"case_id": "0204_H_CERE_CA", "bytes": 332876814},
+      {"case_id": "0205_H_CERE_CA", "bytes": 48115338},
+      {"case_id": "0206_H_CERE_CA", "bytes": 46383035},
+      {"case_id": "0207_H_CERE_CA", "bytes": 72757546},
+      {"case_id": "0208_H_CERE_CA", "bytes": 183414466},
+      {"case_id": "0209_H_CERE_CA", "bytes": 194239138},
+      {"case_id": "0210_H_CERE_CA", "bytes": 49839911},
+      {"case_id": "0211_H_CERE_CA", "bytes": 55644065},
+      {"case_id": "0212_H_CERE_CA", "bytes": 81485231},
+      {"case_id": "0213_H_CERE_CA", "bytes": 63287949},
+      {"case_id": "0214_H_CERE_CA", "bytes": 65368930},
+      {"case_id": "0215_H_CERE_CA", "bytes": 119814097},
+      {"case_id": "0216_H_CERE_CA", "bytes": 61420429},
+      {"case_id": "0217_H_CERE_CA", "bytes": 68337511},
+      {"case_id": "0218_H_CERE_CA", "bytes": 78323196},
+      {"case_id": "0219_H_CERE_CA", "bytes": 60177011},
+      {"case_id": "0220_H_CERE_CA", "bytes": 62213679}
+    ],
+    "exact_total_result_archive_bytes": 1998793994
+  },
+  "discovery_boundary": {
+    "observed_before_registration": [
+      "official_public_web_application_and_javascript_url_construction",
+      "three_public_metadata_csv_files_and_exact_hashes",
+      "twenty_two_case_rows_eleven_explicit_pair_links_and_growth_labels",
+      "twenty_two_time_resolved_surface_vtp_result_rows_and_exact_archive_sizes",
+      "primary_paper_methods_results_limitations_and_direct_prior_abstracts"
+    ],
+    "not_read_before_registration": [
+      "medical_image_or_project_zip_bytes",
+      "result_archive_bytes_or_zip_member_names",
+      "vtp_headers_or_arrays",
+      "case_level_wss_values_or_growth_association",
+      "critical_points_degree_tracks_or_events",
+      "model_checkpoint_or_outer_test"
+    ]
+  },
+  "access": {
+    "download_location": "pbs_job_local_temporary_storage_only",
+    "maximum_total_result_archive_bytes": 1998793994,
+    "maximum_single_archive_bytes": 332876814,
+    "maximum_vtp_header_bytes_per_member": 4194304,
+    "expected_case_count": 22,
+    "expected_pair_count": 11,
+    "expected_growing_count": 11,
+    "expected_stable_count": 11,
+    "expected_vtp_members_per_archive": 3,
+    "required_member_suffixes": ["_last.vtp", "_dome.vtp", "_parent.vtp"],
+    "wss_vector_name_regex": "(?i)(wss|wall[_ -]*shear|shear[_ -]*stress)",
+    "phase_name_regex": "(?i)(time|phase|step|wss)[_ -]*[0-9]+",
+    "minimum_distinct_wss_phase_arrays": 2,
+    "archive_persisted_after_job": false,
+    "vtp_member_persisted_after_job": false,
+    "medical_image_or_project_archive_access": false,
+    "critical_point_or_degree_extraction": false,
+    "growth_association_testing": false,
+    "model_or_checkpoint_access": false,
+    "outer_test_access": false
+  },
+  "transport": {
+    "attempt_delays_seconds": [0, 20],
+    "timeout_seconds_per_attempt": 1800,
+    "chunk_bytes": 1048576,
+    "user_agent": "AURORA-ISBI2027-method-free-VMR-growth-surface-audit/1.0"
+  },
+  "gate": {
+    "all_checks_required": true,
+    "checks": [
+      "three_metadata_files_match_exact_bytes_and_sha256",
+      "metadata_identifies_twenty_two_unique_human_cerebral_aneurysm_cases",
+      "metadata_identifies_eleven_reciprocal_growth_stable_pairs",
+      "results_join_is_exactly_twenty_two_time_resolved_surface_vtp_rows",
+      "file_size_manifest_matches_all_twenty_two_archives_and_total_bytes",
+      "all_archives_match_registered_bytes_and_safe_three_member_vtp_contract",
+      "all_vtp_headers_identify_polydata_and_three_component_coordinates",
+      "every_case_exposes_consistent_three_component_wss_arrays",
+      "every_case_exposes_at_least_two_ordered_wss_phase_arrays",
+      "no_structure_growth_model_gpu_outer_test_or_persistent_payload"
+    ],
+    "pass_authorizes": "register_separate_method_free_cpu_only_p1_mesh_phase_tolerance_and_perturbation_stability_audit_only",
+    "failure_action": "close_exact_candidate_version_without_same_contract_repair_or_rerun",
+    "execution_incomplete_action": "close_exact_candidate_version_without_transport_reader_dependency_repair_or_rerun",
+    "does_not_authorize": [
+      "primary_problem_selection",
+      "growth_biomarker_claim",
+      "surrogate_training",
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "result_row",
+      "paper_contribution",
+      "submission_identity"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 16,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "container": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+    "maximum_submissions_for_exact_public_source": 1,
+    "published_output": "deidentified_schema_aggregate_only",
+    "same_contract_repair_or_rerun_allowed": false,
+    "login_node_gpu_command_allowed": false
+  }
+}

@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-08-11 · VMR growth-paired structure source lead · schema 9.5
+
+- Pinned three exact official VMR metadata CSVs: 22 patient-specific cerebral-
+  aneurysm rows, eleven reciprocal growth/stable pairs and 22 time-resolved
+  surface-VTP result rows. The advertised result archives total 1,998,793,994
+  bytes. No medical image, project ZIP, result archive or VTP was opened.
+- Corrected the gap against the source paper's WSS/OSI/low-shear and mesh-
+  convergence analysis, a later 481-patient prospective growth study,
+  aneurysm WSS critical tracking, robust trajectory preservation and
+  equivariant/Hodge surface operators.
+- Froze six candidates at 32.5/30.5/30.5/30.0/26.0/23.0. Only
+  `growth_paired_transient_wss_structure_stability` passes the prospective
+  non-compensatory gate, exactly at the 2.5 novelty and 3.0 unit floors.
+- Registered one exact method-free `introai9` CPU/PBS P0. It checks metadata,
+  pair/result/size joins and bounded ZIP/VTP vector-phase semantics. It does
+  not extract structure, test growth association, select a model or use GPU.
+  Pass can authorize only a separately registered stability P1; fail or
+  incomplete closes the exact version without repair/rerun.
+- Historical jobs `115645` and `115684` remain closed no-verdict histories.
+  No scientific server was queried in this registration update; all
+  `junjinyong` operations and login-node GPU commands remain prohibited.
+- Added the P0 to CI and passed 72 machine invariant groups plus 425 regression
+  tests (359 pass, 66 optional-dependency skips), site graph, JavaScript, PBS
+  shell syntax and diff hygiene.
+
 ## 2026-08-11 · Schema 9.4 deployed and privately pinned
 
 - Exact scientific source `eb9a6ae9db3980ca41814b3852b68fd4a0804c09`

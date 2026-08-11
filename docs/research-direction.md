@@ -1,5 +1,17 @@
 # AURORA 연구 방향
 
+> **Schema 9.5 direction · 2026-08-11:** A material VMR source now exposes
+> 22 patient-specific cerebral-aneurysm entries, eleven reciprocal growth/stable
+> pairs and 22 advertised time-resolved surface-VTP CFD archives. This admits
+> `growth_paired_transient_wss_structure_stability` at 32.5/40, but only as a
+> conditional source lead. The original paper already owns WSS/OSI/low-shear
+> growth analysis and mesh convergence; later prospective work owns size-
+> dependent WSS growth mechanisms; critical tracking and equivariant/Hodge
+> operators are direct priors. Register one method-free CPU P0 to verify the
+> archive and vector/phase semantics. Do not select an edge-1-form/Hodge/GNN
+> architecture, compute growth association or use GPU. A pass may open only a
+> separate stability P1. [Exact audit](vmr-growth-paired-surface-structure-source-audit-2026-08-11.md)
+
 > **Schema 9.4 direction · 2026-08-11:** Do not pivot to “fixed aneurysm VAE +
 > OOD/conformal.” The source paper already reports source-held-out
 > reconstruction/classification separation, and medical OOD/calibrated
