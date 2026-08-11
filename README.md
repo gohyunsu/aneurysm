@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 surface-vector contract hardening · schema 8.7 prospective:**
+> The supplied analysis is accepted only as an inactive, falsifiable problem
+> question. Job `115645.ECE-util1` is closed—not running—at E/exit 2 with
+> 0/10 scientific checks evaluated, and cannot be repaired or rerun. The
+> machine contract now places boundary-margin signed total degree validity and
+> efficiency/abstention before exact point/track metrics; critical-point,
+> index, trajectory and event endpoints are secondary only after E1 stability.
+> Structural loss remains prohibited before an E2 field-error-matched failure.
+> A future ISBI result must jointly satisfy fresh patient/family confirmation,
+> field non-inferiority, stable structural superiority, bootstrap uncertainty
+> and matched-case interpretation. This opens no lead, P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test or claim.
+> [Exact adjudication](docs/surface-vector-analysis-adjudication-2026-08-11.md)
+
 > **2026-08-11 schema 8.6 deployment verification:** Exact scientific content
 > `8d6ac0f1c29f613178817fe1c07e8292e5f1fb79` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31472138451) and

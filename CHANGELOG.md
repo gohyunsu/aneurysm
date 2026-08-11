@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-11 · Surface-vector endpoint contract hardened · schema 8.7
+
+- Accepted the application question and E0→E5 order, but kept the paper
+  identity, model and structural loss inactive.
+- Corrected the machine contract: E1 begins with boundary-margin signed total
+  degree validity and efficiency/abstention; exact point, index, track and event
+  metrics are secondary only after mesh/tolerance/perturbation/matching
+  stability.
+- Recorded job `115645.ECE-util1` explicitly as closed—not running—and retained
+  E/exit 2, 0/10 scientific checks, no verdict and no repair/rerun.
+- Froze five jointly required ISBI result conditions: fresh patient/family
+  confirmation, field non-inferiority, stable structure superiority over
+  compute- and field-error-matched controls, family bootstrap uncertainty and
+  matched-case interpretation.
+- Opened no source lead, P0/P1, method, architecture, scientific-server query,
+  PBS/GPU, outer test, result row or paper claim.
+
 ## 2026-08-11 · Schema 8.6 deployed and privately pinned
 
 - Exact scientific content `8d6ac0f1c29f613178817fe1c07e8292e5f1fb79`

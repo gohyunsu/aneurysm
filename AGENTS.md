@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 surface-vector contract hardening · schema 8.7 prospective:**
+> 전달된 분석은 inactive falsifiable question과 E0→E5 순서만 채택한다. Job
+> `115645.ECE-util1`은 running이 아니라 E/exit 2, 0/10 check 미평가로 닫힌
+> no-verdict history이며 same-contract repair/rerun을 금지한다. Machine contract는
+> E1 전 primary를 boundary-margin signed total degree validity와 certificate
+> efficiency/abstention으로 제한한다. Critical-point precision/recall, per-frame
+> index discrepancy, trajectory distance와 event F1은 mesh·tolerance·perturbation·
+> matching stability를 통과한 뒤의 secondary endpoint다. E2의 field-error-matched
+> failure 전 structural training loss를 금지한다. Future ISBI result는 fresh
+> patient/base-family confirmation, area-weighted field non-inferiority, compute- 및
+> field-error-matched control 대비 stable structure superiority, family bootstrap
+> uncertainty와 same-coordinate/same-color-scale matched figure를 모두 만족해야
+> 한다. Architecture bundle은 novelty가 아니며 failure에 대응하는 one-at-a-time
+> minimal intervention만 E3에서 고려한다. Active lead/P0/P1/method/architecture/
+> server query/PBS/GPU/outer test/result/claim은 0이다. Future authorized work는
+> `introai9` PBS만 사용하고 login-node GPU command를 금지한다. `junjinyong`에는
+> 절대 접속·조회·전송·제출·모니터링하지 않는다.
+
 > **2026-08-11 schema 8.6 deployment·private synchronization:** Exact
 > scientific content `8d6ac0f1c29f613178817fe1c07e8292e5f1fb79` passed
 > Quality `31472138451` and Pages `31472137714`. Private paper ledger

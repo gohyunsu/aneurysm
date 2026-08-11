@@ -1285,9 +1285,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         [
             "status",
             "assessment_document",
+            "analysis_reappraisal_status",
             "historical_candidate_id",
             "historical_source_score",
             "historical_p0_closed",
+            "historical_p0_job_running",
             "historical_p0_scientific_checks_evaluated",
             "hypothesis",
             "evaluation_problem_is_independently_novel",
@@ -1306,8 +1308,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_identity_active",
             "evidence_ladder",
             "independent_evaluation_unit",
-            "mandatory_structural_endpoints",
+            "primary_method_free_endpoints_before_e1",
+            "secondary_endpoints_after_e1_stability_only",
+            "critical_point_or_worldline_primary_before_e1_allowed",
+            "structural_training_loss_before_e2_failure_allowed",
             "field_guard",
+            "isbi_result_contract_all_required",
+            "isbi_application_identity_status",
             "current_authorization",
             "execution_server",
             "login_node_gpu_command_executed",
@@ -1319,11 +1326,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         conditional_surface["status"]
         != "inactive_conditional_application_hypothesis_not_active_paper_identity"
         or conditional_surface["assessment_document"]
-        != "docs/surface-vector-conditional-assessment-2026-08-10.md"
+        != "docs/surface-vector-analysis-adjudication-2026-08-11.md"
+        or conditional_surface["analysis_reappraisal_status"]
+        != "accept_problem_question_reject_architecture_selection_and_keep_paper_identity_inactive"
         or conditional_surface["historical_candidate_id"]
         != "time_varying_surface_wss_index_structure_prediction"
         or conditional_surface["historical_source_score"] != 32.0
         or conditional_surface["historical_p0_closed"] is not True
+        or conditional_surface["historical_p0_job_running"] is not False
         or conditional_surface["historical_p0_scientific_checks_evaluated"] != 0
         or conditional_surface["hypothesis"]
         != "field_error_matched_transient_wss_surrogates_may_disagree_on_robust_signed_critical_points_and_cardiac_cycle_worldlines"
@@ -1345,6 +1355,25 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "generator_geometry_family_or_patient_not_vertices_triangles_phases_or_critical_points"
         or conditional_surface["field_guard"]
         != "area_weighted_field_error_noninferiority_and_calibration_language_only_for_probabilistic_outputs"
+        or conditional_surface["primary_method_free_endpoints_before_e1"]
+        != [
+            "boundary_margin_signed_total_degree_validity",
+            "certificate_efficiency_and_abstention",
+        ]
+        or conditional_surface["critical_point_or_worldline_primary_before_e1_allowed"]
+        is not False
+        or conditional_surface["structural_training_loss_before_e2_failure_allowed"]
+        is not False
+        or conditional_surface["isbi_result_contract_all_required"]
+        != [
+            "fresh_patient_or_base_family_confirmation",
+            "area_weighted_field_error_noninferiority",
+            "stable_structure_superiority_over_compute_and_field_error_matched_controls",
+            "patient_or_base_family_bootstrap_uncertainty",
+            "matched_case_interpretation_in_same_coordinates_and_color_scale",
+        ]
+        or conditional_surface["isbi_application_identity_status"]
+        != "inactive_until_reproducible_field_error_matched_structural_failure_and_minimal_intervention_are_confirmed"
         or conditional_surface["execution_server"] != "introai9"
         or any(
             conditional_surface[key] is not False
@@ -1368,7 +1397,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "e4_fresh_confirmatory_noninferior_field_and_superior_structure_evidence",
             "e5_external_physical_interpretation_without_clinical_overclaim",
         ]
-        or set(conditional_surface["mandatory_structural_endpoints"])
+        or set(conditional_surface["secondary_endpoints_after_e1_stability_only"])
         != {
             "signed_critical_point_precision_recall_with_geodesic_tolerance",
             "total_index_discrepancy_per_frame",

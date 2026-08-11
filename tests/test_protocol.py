@@ -301,6 +301,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertIsNone(task["candidate_primary_estimand"])
         self.assertEqual(assessment["historical_source_score"], 32.0)
         self.assertTrue(assessment["historical_p0_closed"])
+        self.assertFalse(assessment["historical_p0_job_running"])
         self.assertFalse(assessment["architecture_selected"])
         self.assertFalse(assessment["executable_p0_registered"])
         self.assertFalse(assessment["gpu_training_authorized"])
@@ -312,6 +313,20 @@ class ProtocolTests(unittest.TestCase):
         )
         self.assertEqual(assessment["execution_server"], "introai9")
         self.assertFalse(assessment["junjinyong_accessed_for_this_assessment"])
+        self.assertEqual(
+            assessment["primary_method_free_endpoints_before_e1"],
+            [
+                "boundary_margin_signed_total_degree_validity",
+                "certificate_efficiency_and_abstention",
+            ],
+        )
+        self.assertFalse(
+            assessment["critical_point_or_worldline_primary_before_e1_allowed"]
+        )
+        self.assertFalse(
+            assessment["structural_training_loss_before_e2_failure_allowed"]
+        )
+        self.assertEqual(len(assessment["isbi_result_contract_all_required"]), 5)
 
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["surface_vector_conditional_assessment"][
@@ -325,6 +340,20 @@ class ProtocolTests(unittest.TestCase):
             "new_wrapper_downloader_retry_or_model_name_is_new_evidence"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "material source change"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_conditional_assessment"][
+            "critical_point_or_worldline_primary_before_e1_allowed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "inactive conditional hypothesis"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_conditional_assessment"][
+            "historical_p0_job_running"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "inactive conditional hypothesis"):
             validate_protocol(candidate)
 
     def test_virtual_removal_pair_corrects_source_but_opens_no_model(self) -> None:

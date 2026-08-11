@@ -892,6 +892,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 8.7 hardens the surface-vector endpoint and result contract",
+      copy: "The application question and E0→E5 order are retained, but job 115645 is explicitly closed—not running—at E/exit 2 with 0/10 scientific checks and no verdict. Before E1, only boundary-margin signed total degree validity and certificate efficiency/abstention are primary; point, index, trajectory and event metrics are secondary after stability. Structural loss remains prohibited before a field-error-matched E2 failure. Five fresh patient/family-level conditions are jointly required for any future ISBI result. No lead, P0/P1, method, architecture, server query, PBS/GPU, outer test or claim is opened.",
+      files: ["docs/surface-vector-analysis-adjudication-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.11",
       category: "deployment",
       title: "Schema 8.6 exact content is deployed and privately pinned",
       copy: "Exact scientific content 8d6ac0f1c29f613178817fe1c07e8292e5f1fb79 passed Quality 31472138451 and Pages 31472137714. Private ledger 2e8e7c37080db942d3d58973f724ae398222cde3 records the rejected identity while preserving manuscript and references byte-for-byte. This provenance opens no source lead, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim.",

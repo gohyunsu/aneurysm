@@ -1,11 +1,15 @@
 # Surface-vector analysis adjudication
 
-> **Decision · 2026-08-11 KST:** The supplied analysis is scientifically useful,
+> **Decision · schema 8.7 hardening · 2026-08-11 KST:** The supplied analysis is scientifically useful,
 > but it mixes a defensible application question with an architecture proposal
 > that current evidence does not authorize. We retain the question, narrow the
 > estimand, demote the proposed components to controls, and open no experiment.
 
 상태: **accepted in part · corrected in part · no active lead/model/P0/P1/GPU**
+
+이 문서는 현재 surface-vector 판정의 authoritative record다. 과거 conditional
+assessment의 넓은 endpoint 목록보다 이 문서의 primary/secondary hierarchy가
+우선한다.
 
 ## 1. 무엇을 그대로 받아들이는가
 
@@ -17,6 +21,8 @@
 - 따라서 결과는 `execution-incomplete / no scientific verdict`다. 32.0/40은
   source-admission history이지 모델 성능이나 가설 검증 점수가 아니다. 같은
   contract의 repair, cause reconstruction과 rerun은 금지한다.
+- 이 job은 **running이 아니다**. Queue monitor, retry worker 또는 후속 GPU
+  training도 없다.
 - “Cartesian field error가 작아도 임계 흐름 구조가 맞는다는 보장은 없다”는
   문장은 중요한 **검증 가능 가설**이다. 다만 아직 관측된 failure가 아니며 active
   paper identity도 아니다.
@@ -94,6 +100,17 @@ MSE나 구조 metric이 좋아질 가능성을 source·task gate를 건너뛸 �
 
 이 네 조건은 E4/E5의 결과 계약이지 E0 admission 조건을 대신하지 않는다.
 
+### “Fancy architecture”는 E2 이후에도 한 번에 묶지 않는다
+
+E2가 실제 structural failure를 확인하더라도 edge 1-form, Hodge block,
+equivariance, periodic operator와 topology loss를 동시에 넣는 설계는 원인 귀속이
+불가능하다. 첫 bounded proposal은 가장 강한 field-matched control을 고정한 채
+failure와 직접 연결된 **한 가지 최소 intervention**만 추가해야 한다. 예를 들면
+edge-integrated output parameterization 또는 boundary-margin degree regularizer 중
+하나를 먼저 비교하고, 다음 요소는 validation-only ablation에서 독립 효과가
+남을 때만 추가한다. 이 순서는 덜 화려해 보이기 위한 것이 아니라 novelty를
+구성요소 수가 아니라 설명 가능한 failure correction으로 만들기 위한 것이다.
+
 ## 3. 무엇을 명시적으로 기각하는가
 
 다음은 contribution이나 novelty 문장으로 사용할 수 없다.
@@ -127,10 +144,12 @@ version으로 등록할 수 있다.
 | E4 · confirmation | Fresh sealed units에서 field tax 없이 degree validity/efficiency와 보조 structure가 개선되는가? | Clinical claim |
 | E5 · interpretation | 동일 좌표계·색상 범위의 실제 surface figure가 failure와 correction을 설명하는가? | Rupture-risk claim |
 
-Primary statistical target이 열리는 경우에는 환자 단위 simultaneous field coverage,
-degree-certificate correctness, efficiency/abstention을 먼저 둔다. Critical-point
-precision/recall, index discrepancy, trajectory distance와 event F1은 E1에서 안정성이
-입증된 뒤의 secondary endpoint다.
+Primary statistical target이 열리는 경우에는 boundary-margin signed total degree의
+validity와 efficiency/abstention을 먼저 둔다. Critical-point precision/recall,
+per-frame index discrepancy, trajectory distance와 event F1은 E1에서 mesh,
+tolerance, perturbation과 matching-rule 안정성이 입증된 뒤의 secondary endpoint다.
+기존 machine contract의 이 네 지표를 무조건 `mandatory`로 부르던 표현은 schema
+8.7에서 이 hierarchy에 맞게 수정했다.
 
 ## 5. 현재 결론
 
