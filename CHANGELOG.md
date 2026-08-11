@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-11 · Schema 9.2 deployed and privately pinned
+
+- Exact scientific source `fd60885e4e6c5a34c7d65f6ed2c0013a31c15657`
+  passed Quality `31487538060` and Pages `31487537080`.
+- Private ledger `be7d016c222c744acbdf5669b6ac79cdc393bdcb` is remote exact and
+  PRIVATE; manuscript and references hashes are unchanged.
+- Live Overview, Learn and change history expose the 31.0/40 rejection,
+  incomplete RSNA release contract, inactive surface-vector question and
+  no-model/no-compute state. This provenance creates no scientific result or
+  claim.
+
 ## 2026-08-11 · Reference provenance rejected; RSNA release-contract watch · schema 9.2
 
 - Retained surface-vector only as an inactive falsifiable evaluation question;

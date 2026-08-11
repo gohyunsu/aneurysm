@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 9.2 deployment verification:** Exact scientific source
+> `fd60885e4e6c5a34c7d65f6ed2c0013a31c15657` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31487538060) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31487537080).
+> Private ledger `be7d016c222c744acbdf5669b6ac79cdc393bdcb` is remote exact and
+> PRIVATE; manuscript and references remain byte-for-byte unchanged. This is
+> provenance only and opens no lead, P0/P1, method, architecture, server query,
+> PBS/GPU, outer test, result row, C21 or claim.
+
 > **2026-08-11 reference-provenance and RSNA release-contract reappraisal ·
 > schema 9.2:** Surface-vector remains an inactive falsifiable question, not a
 > selected edge-1-form/Hodge/GNN model. Biased-ruler analysis, weak-reference

@@ -942,6 +942,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 9.2 exact source is deployed and privately pinned",
+      copy: "Exact public scientific source fd60885e4e6c5a34c7d65f6ed2c0013a31c15657 passed Quality 31487538060 and Pages 31487537080. Private ledger be7d016c222c744acbdf5669b6ac79cdc393bdcb is remote exact, PRIVATE and preserves manuscript and references byte-for-byte. Live Overview, Learn and detailed change history expose the 31.0/40 source rejection, incomplete RSNA release contract, inactive surface-vector question and no-model/no-compute state. This provenance creates no lead, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 9.2 rejects generic reference-provenance methods and adds an RSNA release-contract watch",
       copy: "Surface-vector remains an inactive falsifiable question and closed job 115645 remains E/exit 2 with 0/10 no-verdict, without repair. The exact RSNA registry file is controlled access and says its Data Resource Publication is forthcoming; the official wiki is an 11-byte Coming soon page. New direct priors on biased rulers, partial identification, label-noise benchmarking and active cleaning remove the generic novelty claim. Six candidates freeze at 31.0/31.0/29.5/28.5/28.0/25.5 and all fail the non-compensatory gate. Source-watch v11 observes fifteen public states and can request only manual source re-audit. Terms, MIRA, medical payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result and claim remain zero.",

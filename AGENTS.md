@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 9.2 deployment·private synchronization:** Exact public
+> scientific source `fd60885e4e6c5a34c7d65f6ed2c0013a31c15657` passed
+> Quality `31487538060` and Pages `31487537080`. Private paper ledger
+> `be7d016c222c744acbdf5669b6ac79cdc393bdcb` is remote exact and PRIVATE.
+> `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization is provenance only and creates no lead, P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test, result row, C21
+> or claim. Future authorized execution is `introai9` PBS only; never access,
+> query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-11 reference-provenance and RSNA release-contract override ·
 > schema 9.2:** Surface-vector는 inactive falsifiable evaluation question으로만
 > 유지한다. Job `115645.ECE-util1`은 E/exit 2, GPU 0, aggregate/raw log/cache 0,
