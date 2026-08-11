@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-12 · RSNA/WEB-GAN delta deployed and privately pinned
+
+- Exact public scientific source `445e3dc90abffad9e00bf0b1069acc949d66f536`
+  passed Quality `31543772897` and Pages `31543771957`; the live Learn anchor
+  and detailed audit were verified.
+- Private ledger `827ae95026409f62eba988ebc0ec80a02003c94a` is remote
+  exact, PRIVATE and returns 404 to an anonymous API request. Manuscript and
+  reference hashes are unchanged.
+- Full regression is 449 tests: 383 pass/66 optional-dependency skip and 87
+  protocol invariant groups. This provenance-only pin opens no scientific or
+  submission authority.
+
 ## 2026-08-12 · RSNA release-layer and WEB-GAN utility delta · no state change
 
 - Separated the official RSNA launch corpus (>6,500 multimodal studies), AWS

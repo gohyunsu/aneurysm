@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 RSNA/WEB-GAN delta deployment·private synchronization:** Exact
+> public scientific source `445e3dc90abffad9e00bf0b1069acc949d66f536`
+> passed Quality `31543772897` and Pages `31543771957`. Private paper ledger
+> `827ae95026409f62eba988ebc0ec80a02003c94a` is remote exact, PRIVATE and
+> anonymous API is 404. Full regression is 449 tests: 383 pass/66 optional
+> skip with 87 protocol invariant groups; site/JavaScript/diff hygiene pass.
+> `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization opens no lead/P0/P1/method/model/server/PBS/GPU/outer
+> test/result/C21/claim and changes no schema-10.7 scientific state.
+
 > **2026-08-12 RSNA release-layer/WEB-GAN utility delta · no state change:**
 > Official RSNA launch `>6,500` multimodal studies, AWS registry `>4,000`
 > controlled CT scans and the second-place method's 4,348 training series are

@@ -1099,6 +1099,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "RSNA/WEB-GAN scientific delta is live and privately pinned",
+      copy: "Exact public scientific source 445e3dc90abffad9e00bf0b1069acc949d66f536 passed Quality 31543772897 and Pages 31543771957. Live Learn exposes #release-utility and the detailed audit. Private ledger 827ae95026409f62eba988ebc0ec80a02003c94a is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes are unchanged. Full regression is 449 tests: 383 pass/66 optional skip and 87 protocol invariant groups. This provenance changes no schema-10.7 score, active lead, P0/P1, method, model, scientific server, PBS/GPU, outer test or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "RSNA release layers and WEB-GAN donor utility are separated without opening a paper",
       copy: "Official RSNA sources expose 6,500+ multimodal challenge studies and a controlled 4,000+ CT registry collection, while the second-place method reports 4,348 training series; no public identity map proves one arithmetic split or common counting unit. Static inspection of exact WEB-GAN head 42ce2a8… shows the cGAN trained on the complete 78-case original table and the synthetic-trained classifier evaluated on that same original donor table. The original patient/institution table is request-only, so a clean outer test is not executable. Six delta candidates score 29.0/28.5/26.0/25.5/24.5/23.0 and all fail novelty or asset/unit floors. Schema 10.7 and the current aSAH batch are unchanged; no terms, original patient data, scientific server, P0/P1, architecture, PBS/GPU, outer test or claim opened.",

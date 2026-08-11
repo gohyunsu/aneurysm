@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 RSNA/WEB-GAN delta deployment and private pin:** Exact public
+> scientific source `445e3dc90abffad9e00bf0b1069acc949d66f536` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31543772897)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31543771957).
+> Private ledger `827ae95026409f62eba988ebc0ec80a02003c94a` is remote
+> exact, PRIVATE and anonymous API returns 404. Full regression is 449 tests:
+> 383 pass/66 optional skip and 87 protocol invariant groups. Manuscript and
+> references remain byte-for-byte unchanged. This provenance changes no schema,
+> source score, paper identity, method, compute or claim.
+
 > **2026-08-12 RSNA release-layer/WEB-GAN utility delta · no state change:**
 > RSNA launch `>6,500` multimodal studies, AWS registry `>4,000` controlled CT
 > scans and the second-place method's 4,348 training series are separate source
