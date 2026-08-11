@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Longitudinal-biology delta · 2026-08-12:** A future-event estimand exists
+> in the literature, but it does not open an AURORA paper. Long-term baseline
+> AWE to composite instability is direct prior; inflammation, AWE, growth and
+> incident aSAH are not observed as one same-patient mediation chain; serial rat
+> MRA/SEM is request-only and not a human benchmark. The best residual scores
+> 28.5/40. Continue fresh problem or complete joined-asset discovery only.
+> Surface-vector remains inactive and no model or compute opens.
+
 > **Rupture-time delta · 2026-08-12:** Do not pivot to another radiomics,
 > transformer, GNN or synthetic-tabular rupture classifier. The new
 > three-centre 756-patient/877-aneurysm study already occupies clinical+

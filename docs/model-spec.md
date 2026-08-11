@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **2026-08-12 longitudinal-biology model boundary:** No survival transformer,
+> multimodal biomarker encoder, causal mediator, cross-species foundation
+> model, histology segmenter or surface operator is selected. These modules
+> cannot join separate cohorts or create missing event times. Surface-vector
+> still requires its own method-free stability and matched-failure evidence;
+> biological associations do not satisfy that gate.
+
 > **2026-08-12 rupture-time model boundary:** No rupture classifier is
 > selected. Clinical+radiomics fusion, classical ML, transformers, GNNs,
 > synthetic generators, SHAP and calibration cannot convert observed rupture

@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 longitudinal-biology/cross-scale delta · schema 10.7
+> unchanged:** Real future follow-up exists: a two-centre study follows 198
+> patients/224 untreated aneurysms for median 6.8 years and directly owns the
+> baseline-AWE-to-composite-instability association. A separate study uses
+> 308/416 for AWE, 80/85 for growth and UK Biobank for incident aSAH; these
+> distinct datasets do not identify one same-patient mediation chain. A 13-rat
+> serial MRA/SEM source exposes a resolution-linked detection failure but has
+> five early deaths and request-only data. Six candidates score
+> **28.5/26.5/25.0/23.0/22.5/20.0** and all are rejected. No joined
+> biological-mechanical asset, payload, request, P0/P1, method, architecture,
+> server or compute opened; surface-vector remains inactive. See the
+> [exact reappraisal](docs/longitudinal-biology-and-cross-scale-mechanism-reappraisal-2026-08-12.md)
+> and [beginner explanation](site/learn.html#biology-chain).
+
 > **2026-08-12 rupture-time delta deployment and private pin:** Exact public
 > scientific source `309e16205a82f1fe7599a24719486da40375193d` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31545461242)

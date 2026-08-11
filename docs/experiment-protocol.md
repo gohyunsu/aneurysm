@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **2026-08-12 longitudinal-biology gate:** Zero candidates are admitted. Do
+> not request human or animal data, infer cross-cohort mediation, stage images,
+> register P0/P1, choose an architecture, query a scientific server or submit
+> PBS/GPU work. Re-entry requires one immutable patient/lesion/centre contract
+> joining pre-index biomarkers, registered imaging, component event times,
+> treatment, censoring and patient-grouped confirmation. A surface claim also
+> requires geometry, transient CFD and stable structure references. A source
+> pass would open only a method-free audit.
+
 > **2026-08-12 rupture-time gate:** No rupture model is authorized. A future
 > candidate must first prove baseline-unruptured inclusion, predictor
 > timestamps, future event/censoring, treatment timing and patient-grouped

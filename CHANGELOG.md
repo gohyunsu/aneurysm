@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-12 · Longitudinal biology and cross-scale mechanism delta · no state change
+
+- Corrected the scope of the current evidence: genuine future follow-up exists
+  in a two-centre 198-patient/224-aneurysm AWE study, but the source already
+  owns the association with composite instability and exposes no versioned
+  public patient/image/event/split artifact.
+- Separated the 308-patient/416-aneurysm cross-sectional AWE cohort, the
+  80/85 growth cohort and UK Biobank incident-aSAH analysis. Their aligned
+  associations do not identify same-patient inflammation--AWE--growth--aSAH
+  mediation.
+- Recorded the 13-induced/6-control serial rat MRA study, its five early deaths,
+  reported 40%/60% sensitivity/specificity and 0.146-mm versus ≤0.10-mm
+  resolution failure. Request-only animal data are not a public human
+  progression benchmark.
+- Froze six candidates at 28.5/26.5/25.0/23.0/22.5/20.0. All fail a mandatory
+  novelty, asset, unit or identifiability floor. Schema 10.7 and the current
+  aSAH primary batch are unchanged; no payload, request, P0/P1, method,
+  architecture, scientific-server query, PBS/GPU, outer test or claim opened.
+
 ## 2026-08-12 · Rupture-time delta deployed and privately pinned
 
 - Exact public scientific source `309e16205a82f1fe7599a24719486da40375193d`

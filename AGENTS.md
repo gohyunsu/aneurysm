@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 longitudinal-biology/cross-scale mechanism delta · schema 10.7
+> unchanged:** Long-term AWE source `10.1002/ana.78106` follows 198 patients/
+> 224 untreated aneurysms for median 6.8 years and directly owns the association
+> with composite growth/morphological-change/rupture; reported adjusted HR 5.06
+> is not an AURORA result. Academic Radiology `10.1016/j.acra.2026.04.002`
+> uses separate 308/416 AWE, 80/85 growth and UK Biobank incident-aSAH datasets,
+> so never infer same-patient NHR/SIRI→AWE→growth→aSAH mediation. JMRI PMID
+> 41913331 supplies another 311/418 AWE cohort with a 67/84, median-7-month
+> growth subcohort; it is direct prior, not an open benchmark. Rat source
+> `10.1038/s41598-026-37369-2` has 13 induced/6 control animals, only eight
+> induced animals at W12, five early deaths, source sensitivity/specificity
+> 40%/60%, 0.146-mm MRA resolution and ≤0.10-mm false-negative lesions; data are
+> request-only. Six scores 28.5/26.5/25.0/23.0/22.5/20.0 are all rejected.
+> No source joins transient WSS critical structures to outcome; surface-vector
+> remains inactive. Active lead/P0/P1/method/architecture/server/PBS/GPU/outer
+> test/result/C21/claim are 0. Historical jobs are not repaired or rerun.
+> Future gate-authorized execution is `introai9` PBS-only with no login-node
+> GPU. Never access, query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 rupture-time delta deployment·private synchronization:** Exact
 > public scientific source `309e16205a82f1fe7599a24719486da40375193d`
 > passed Quality `31545461242` and exact-head Pages `31545766452`. Private paper

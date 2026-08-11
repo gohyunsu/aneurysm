@@ -190,6 +190,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneurysmal_sah_segmentation_outcome_reappraisal",
             "rsna_release_layer_and_webgan_utility_delta",
             "rupture_state_future_risk_and_unit_semantics_delta",
+            "longitudinal_biology_and_cross_scale_mechanism_reappraisal",
             "four_d_cta_wall_phenotype_release_reappraisal",
             "culprit_lesion_and_mimic_differential_reappraisal",
             "topbrain2025_and_rsna_multitask_source_correction",
@@ -764,6 +765,150 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "the public PLOS object is aggregate, and no model or compute may open."
         )
     checks.append("rupture-state versus future-risk and patient-unit rejection boundary")
+
+    biology_delta = problem_selection[
+        "longitudinal_biology_and_cross_scale_mechanism_reappraisal"
+    ]
+    _require_keys(
+        biology_delta,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "current_schema_or_primary_batch_changed", "long_term_awe_doi",
+            "long_term_awe_reported_patients", "long_term_awe_reported_aneurysms",
+            "long_term_awe_reported_centres", "long_term_awe_median_followup_years",
+            "long_term_awe_events_with_without_enhancement",
+            "long_term_awe_denominators_with_without_enhancement",
+            "long_term_awe_reported_adjusted_hr",
+            "long_term_awe_endpoint_is_growth_morphology_or_rupture_composite",
+            "long_term_awe_public_versioned_patient_image_event_split_asset_identified",
+            "academic_radiology_doi",
+            "academic_radiology_cross_sectional_patients_aneurysms",
+            "academic_radiology_longitudinal_patients_aneurysms",
+            "academic_radiology_uses_separate_cross_sectional_longitudinal_and_ukb_datasets",
+            "same_patient_nhr_siri_awe_growth_asah_mediation_identified",
+            "jmri_inflammation_pmid", "jmri_reported_patients_aneurysms",
+            "jmri_longitudinal_subcohort_patients_aneurysms",
+            "jmri_median_followup_months", "rat_mra_doi",
+            "rat_induced_analysis_animals", "rat_control_animals",
+            "rat_induced_w12_animals", "rat_early_deaths", "rat_sah_deaths",
+            "rat_mra_reported_sensitivity_specificity",
+            "rat_tof_mra_isotropic_resolution_mm",
+            "rat_largest_false_negative_aneurysm_mm", "rat_data_access",
+            "rat_public_versioned_mr_sem_animal_time_manifest_identified",
+            "tissue_ingrowth_doi", "tissue_ingrowth_direct_prior_already_audited",
+            "human_or_animal_transient_wss_critical_point_worldline_outcome_join_identified",
+            "source_results_reproduced_by_aurora", "patient_or_animal_payload_accessed",
+            "candidates", "source_watch_added", "surface_vector_reactivated",
+            "p0_registered", "p1_registered", "method_selected",
+            "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "submission_identity_active", "historical_job_repaired_or_rerun",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "longitudinal biology and cross-scale mechanism reappraisal",
+    )
+    expected_biology_candidates = [
+        ("baseline_awe_incremental_survival_value_beyond_clinical_morphology", 28.5),
+        ("component_specific_long_term_instability_with_intervention_censoring", 26.5),
+        ("resolution_calibrated_preclinical_mra_sem_detectability", 25.0),
+        ("angiography_to_histological_healing_bridge", 23.0),
+        ("same_patient_inflammation_awe_growth_asah_mediation", 22.5),
+        ("animal_to_human_longitudinal_instability_transport", 20.0),
+    ]
+    if (
+        biology_delta["status"]
+        != "delta_rejected_real_future_followup_exists_but_direct_association_prior_and_no_public_joined_biological_mechanical_asset_no_state_change"
+        or biology_delta["audit_document"]
+        != "docs/longitudinal-biology-and-cross-scale-mechanism-reappraisal-2026-08-12.md"
+        or biology_delta["automatic_selection_threshold"] != 32.0
+        or biology_delta["best_candidate_id"]
+        != "baseline_awe_incremental_survival_value_beyond_clinical_morphology"
+        or biology_delta["best_score"] != 28.5
+        or biology_delta["best_residual_novelty_score"] != 2.5
+        or biology_delta["all_candidate_scores"]
+        != [28.5, 26.5, 25.0, 23.0, 22.5, 20.0]
+        or biology_delta["conditional_source_lead_count"] != 0
+        or biology_delta["long_term_awe_doi"] != "10.1002/ana.78106"
+        or (
+            biology_delta["long_term_awe_reported_patients"],
+            biology_delta["long_term_awe_reported_aneurysms"],
+            biology_delta["long_term_awe_reported_centres"],
+        ) != (198, 224, 2)
+        or biology_delta["long_term_awe_median_followup_years"] != 6.8
+        or biology_delta["long_term_awe_events_with_without_enhancement"] != [15, 13]
+        or biology_delta["long_term_awe_denominators_with_without_enhancement"]
+        != [72, 152]
+        or biology_delta["long_term_awe_reported_adjusted_hr"] != 5.06
+        or biology_delta["academic_radiology_doi"] != "10.1016/j.acra.2026.04.002"
+        or biology_delta["academic_radiology_cross_sectional_patients_aneurysms"]
+        != [308, 416]
+        or biology_delta["academic_radiology_longitudinal_patients_aneurysms"]
+        != [80, 85]
+        or biology_delta["jmri_inflammation_pmid"] != 41913331
+        or biology_delta["jmri_reported_patients_aneurysms"] != [311, 418]
+        or biology_delta["jmri_longitudinal_subcohort_patients_aneurysms"]
+        != [67, 84]
+        or biology_delta["jmri_median_followup_months"] != 7.0
+        or biology_delta["rat_mra_doi"] != "10.1038/s41598-026-37369-2"
+        or (
+            biology_delta["rat_induced_analysis_animals"],
+            biology_delta["rat_control_animals"],
+            biology_delta["rat_induced_w12_animals"],
+            biology_delta["rat_early_deaths"],
+            biology_delta["rat_sah_deaths"],
+        ) != (13, 6, 8, 5, 3)
+        or biology_delta["rat_mra_reported_sensitivity_specificity"] != [0.40, 0.60]
+        or biology_delta["rat_tof_mra_isotropic_resolution_mm"] != 0.146
+        or biology_delta["rat_largest_false_negative_aneurysm_mm"] != 0.10
+        or biology_delta["rat_data_access"]
+        != "corresponding_author_reasonable_request"
+        or biology_delta["tissue_ingrowth_doi"] != "10.1038/s41598-026-43798-w"
+        or [
+            (row["id"], float(row["total"]))
+            for row in biology_delta["candidates"]
+        ] != expected_biology_candidates
+        or any(row["critical_axis_pass"] is not False for row in biology_delta["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in biology_delta["candidates"]
+        )
+        or any(
+            biology_delta[key] is not False
+            for key in (
+                "current_schema_or_primary_batch_changed",
+                "long_term_awe_public_versioned_patient_image_event_split_asset_identified",
+                "same_patient_nhr_siri_awe_growth_asah_mediation_identified",
+                "rat_public_versioned_mr_sem_animal_time_manifest_identified",
+                "human_or_animal_transient_wss_critical_point_worldline_outcome_join_identified",
+                "source_results_reproduced_by_aurora", "patient_or_animal_payload_accessed",
+                "source_watch_added", "surface_vector_reactivated", "p0_registered",
+                "p1_registered", "method_selected", "architecture_selected",
+                "scientific_server_queried", "gpu_training_authorized",
+                "outer_test_authorized", "submission_identity_active",
+                "historical_job_repaired_or_rerun", "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or any(
+            biology_delta[key] is not True
+            for key in (
+                "long_term_awe_endpoint_is_growth_morphology_or_rupture_composite",
+                "academic_radiology_uses_separate_cross_sectional_longitudinal_and_ukb_datasets",
+                "tissue_ingrowth_direct_prior_already_audited",
+            )
+        )
+        or biology_delta["next_allowed_action"]
+        != "fresh_problem_level_source_or_versioned_patient_image_biomarker_time_event_asset_audit_only_no_request_payload_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "The longitudinal-biology delta must preserve real future follow-up "
+            "without inferring cross-cohort mediation or opening a joined asset, "
+            "surface-vector method, server, compute or paper identity."
+        )
+    checks.append("longitudinal biology and cross-scale mechanism rejection boundary")
 
     wall_release = problem_selection[
         "four_d_cta_wall_phenotype_release_reappraisal"

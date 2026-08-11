@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "Real future follow-up does not identify a cross-cohort biological mechanism",
+      copy: "A two-country long-term study follows 198 patients/224 untreated aneurysms for a median 6.8 years and directly owns the association between baseline wall enhancement and a composite of growth, morphological change or rupture. A separate 2026 study uses 308 patients/416 aneurysms for cross-sectional NHR/SIRI–AWE analysis, 80/85 for growth and UK Biobank for incident aSAH; those cohorts do not identify one same-patient inflammation→AWE→growth→aSAH mediation path. A serial 7 T rat study provides a 0.146 mm resolution-linked MRA/SEM detection failure, but has 13 induced animals, five early deaths and request-only data. None joins transient WSS structures to future outcome. Six candidates score 28.5/26.5/25.0/23.0/22.5/20.0 and all fail a critical floor.",
+      status: "Delta best 28.5/40 rejected · joined biological-mechanical asset 0 · surface-vector inactive · P0/method/model/server/GPU 0",
+      url: "../docs/longitudinal-biology-and-cross-scale-mechanism-reappraisal-2026-08-12.md"
+    },
+    {
+      year: "2026.08",
       title: "Release counts and generated rows do not establish independent real-patient evidence",
       copy: "The official RSNA launch release describes a 6,500+ multimodal challenge corpus, the AWS registry describes a controlled 4,000+ CT collection, and the public second-place method reports 4,348 training series. No public identity map proves that these are the same unit or an arithmetic train/test split. A separate WEB-GAN article reports 78 cases from three institutions and 1,000 generated rows for six-month occlusion prediction. At exact public head 42ce2a8…, the generator uses the complete original table and the synthetic-trained predictor is evaluated on that same original donor table. The original table and institution IDs are request-only, so donor-disjoint utility cannot be reconstructed. This is an evaluation limitation, not a source-paper invalidation or a new method.",
       status: "Delta best 29.0/40 rejected · novelty ≤1.5/5 · original WEB donor asset/clean outer test 0 · current schema/lead/P0/model/server/GPU unchanged",
@@ -1107,6 +1114,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Future follow-up is acknowledged without inventing a biological mechanism or model",
+      copy: "The long-term AWE source demonstrates genuine future follow-up on 198 patients/224 aneurysms, correcting any overly broad statement that all available evidence is cross-sectional. Its composite instability association is direct prior and no versioned public patient–image–event–split asset was identified. NHR/SIRI–AWE, growth and incident-aSAH results arise from distinct datasets and do not identify same-patient mediation. The 13-animal serial MRA/SEM study exposes a real sub-resolution failure but is request-only and not a human benchmark. Six candidates score 28.5/26.5/25.0/23.0/22.5/20.0 and all fail novelty, asset, unit or identifiability floors. Schema 10.7 and the aSAH primary batch are unchanged; surface-vector remains inactive and no request, payload, P0/P1, architecture, scientific server, PBS/GPU, outer test or claim opened.",
+      files: ["docs/longitudinal-biology-and-cross-scale-mechanism-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

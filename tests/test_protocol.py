@@ -234,6 +234,79 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "rupture-state/future-risk"):
             validate_protocol(candidate)
 
+    def test_longitudinal_biology_delta_is_fail_closed(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "longitudinal_biology_and_cross_scale_mechanism_reappraisal"
+        ]
+        self.assertEqual(self.protocol["schema_version"], "10.7")
+        self.assertFalse(audit["current_schema_or_primary_batch_changed"])
+        self.assertEqual(audit["best_score"], 28.5)
+        self.assertEqual(audit["best_residual_novelty_score"], 2.5)
+        self.assertEqual(
+            audit["all_candidate_scores"],
+            [28.5, 26.5, 25.0, 23.0, 22.5, 20.0],
+        )
+        self.assertEqual(
+            (
+                audit["long_term_awe_reported_patients"],
+                audit["long_term_awe_reported_aneurysms"],
+                audit["long_term_awe_reported_centres"],
+            ),
+            (198, 224, 2),
+        )
+        self.assertEqual(
+            (
+                audit["academic_radiology_cross_sectional_patients_aneurysms"],
+                audit["academic_radiology_longitudinal_patients_aneurysms"],
+            ),
+            ([308, 416], [80, 85]),
+        )
+        self.assertTrue(
+            audit[
+                "academic_radiology_uses_separate_cross_sectional_longitudinal_and_ukb_datasets"
+            ]
+        )
+        self.assertFalse(
+            audit["same_patient_nhr_siri_awe_growth_asah_mediation_identified"]
+        )
+        self.assertEqual(
+            (
+                audit["rat_induced_analysis_animals"],
+                audit["rat_control_animals"],
+                audit["rat_induced_w12_animals"],
+                audit["rat_early_deaths"],
+            ),
+            (13, 6, 8, 5),
+        )
+        self.assertEqual(
+            audit["rat_mra_reported_sensitivity_specificity"], [0.40, 0.60]
+        )
+        self.assertFalse(
+            audit[
+                "human_or_animal_transient_wss_critical_point_worldline_outcome_join_identified"
+            ]
+        )
+        self.assertTrue(
+            all(
+                sum(row["axis_scores"]) == row["total"]
+                and not row["critical_axis_pass"]
+                for row in audit["candidates"]
+            )
+        )
+        self.assertFalse(audit["surface_vector_reactivated"])
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "longitudinal_biology_and_cross_scale_mechanism_reappraisal"
+        ]["same_patient_nhr_siri_awe_growth_asah_mediation_identified"] = True
+        with self.assertRaisesRegex(ProtocolError, "longitudinal-biology"):
+            validate_protocol(candidate)
+
     def test_source_watch_v14_is_exact_metadata_only_and_fail_closed(self) -> None:
         watch = self.protocol["problem_selection"]["public_source_watch_v14"]
         self.assertEqual(watch["config"], "configs/source_watch_v14.json")

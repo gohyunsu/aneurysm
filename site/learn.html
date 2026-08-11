@@ -24,6 +24,7 @@
       <a href="#asah-outcome">aSAH mask &amp; outcome</a>
       <a href="#release-utility">Release &amp; synthetic utility</a>
       <a href="#rupture-time">Rupture state &amp; future risk</a>
+      <a href="#biology-chain">Biology &amp; future follow-up</a>
       <a href="#wall-phenotype">4D-CTA wall phenotype</a>
       <a href="#culprit-mimic">Culprit &amp; mimic</a>
       <a href="#topbrain-pairs">TopBrain pairs</a>
@@ -269,6 +270,68 @@
             patient grouping을 확인하는 method-free audit입니다.
           </p>
           <a href="../docs/rupture-state-future-risk-and-unit-semantics-delta-2026-08-12.md">source facts, six scores와 re-entry contract 전체 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="biology-chain">
+          <span>염증, wall enhancement, growth와 future event를 처음부터 이해하기</span>
+          <strong>서로 방향이 맞는 여러 연구 결과는, 같은 환자에서 관측된 하나의 기전 사슬이 아닙니다.</strong>
+          <p>
+            <b>Aneurysm wall enhancement(AWE)</b>는 조영증강 vessel-wall MRI에서
+            동맥류 벽이 밝아지는 현상입니다. 벽의 염증이나 remodeling과 연관될 수
+            있지만, enhancement 자체가 rupture도 아니고 모든 enhanced aneurysm이
+            성장하는 것도 아닙니다. <b>NHR, SIRI, SII</b>는 혈액검사에서 계산하는
+            전신 염증 지표입니다. 국소 벽 영상과 전신 혈액 지표는 서로 다른 측정입니다.
+          </p>
+          <p>
+            2026 Academic Radiology 연구는 cross-sectional 308명/416개 동맥류에서
+            NHR/SIRI와 AWE를, 별도 longitudinal 80명/85개 동맥류에서 growth를,
+            UK Biobank에서는 incident aSAH를 분석합니다. 세 결과의 방향이 비슷해도
+            같은 사람이 <code>염증 → AWE → growth → aSAH</code> 순서로 진행했다는
+            뜻은 아닙니다. 서로 다른 cohort 사이에는 patient ID, 촬영 시점과 중간
+            사건이 연결되어 있지 않으므로 mediation이나 causal trajectory를 학습할
+            수 없습니다.
+          </p>
+          <p>
+            그렇다고 미래 추적 근거가 전혀 없는 것은 아닙니다. 두 국제 cohort의
+            198명/224개 untreated aneurysm을 중앙값 6.8년 추적한 연구는 baseline AWE와
+            이후 instability의 관계를 조사했습니다. 다만 endpoint는 growth,
+            morphological change 또는 rupture를 합친 <b>composite</b>이며, 28개 사건만
+            관측됐습니다. source가 보고한 adjusted HR 5.06은 AURORA 결과가 아니고,
+            공개된 재실행 가능 patient–image–event–split asset도 확인되지 않았습니다.
+          </p>
+          <p>
+            Composite endpoint는 사건 수를 늘릴 수 있지만 각 성분이 같은 임상 의미를
+            갖는다고 보장하지 않습니다. 예방 치료는 원래의 자연 경과를 바꾸고,
+            follow-up 중단과 사망은 censoring을 만듭니다. 따라서 rupture만 예측하는
+            모델, 모든 instability를 예측하는 모델과 치료 결정을 돕는 모델은 별도로
+            정의해야 합니다. Survival transformer를 붙이는 것만으로 이 정의 문제가
+            해결되지는 않습니다.
+          </p>
+          <p>
+            동물 연구는 또 다른 층의 증거입니다. Hashimoto rat 연구는 13마리 유도군과
+            6마리 대조군을 W0/W1/W4/W12에 7 T MRA로 추적하고 말기 SEM과 비교했습니다.
+            유도군은 W12에 8마리만 남았고, 보고된 MR sensitivity/specificity는
+            40%/60%입니다. MRA voxel은 약 0.146 mm인데 가장 큰 false-negative lesion도
+            0.10 mm여서 해상도 한계가 분명합니다. 이것은 중요한 측정 실패지만 이미
+            source가 보고한 결과이며, request-only animal data를 human progression
+            benchmark라고 부를 수는 없습니다.
+          </p>
+          <p>
+            이 자료들은 transient WSS, signed critical point, worldline과 future outcome을
+            같은 개체에서 연결하지 않습니다. 따라서 surface-vector E0를 충족하거나
+            edge-1-form/Hodge/GNN architecture를 승인하지 않습니다. 여섯 후보는
+            28.5/26.5/25.0/23.0/22.5/20.0으로 모두 기각됐습니다. 가장 실행 가능한 AWE
+            survival 후보는 direct association prior와 public asset 부재 때문에,
+            가장 흥미로운 mediation 후보는 target identifiability 때문에 탈락합니다.
+          </p>
+          <p>
+            재진입하려면 한 release 안에 baseline 혈액검사, HRVWI/MRA/CTA, 반복 growth
+            측정, rupture·growth·morphology의 개별 사건 시간, 치료·사망·추적손실,
+            patient–lesion–centre–split ID가 함께 있어야 합니다. surface claim이라면
+            registered geometry와 transient CFD도 추가로 필요합니다. 그 다음 첫 단계는
+            모델이 아니라 missingness, time leakage, event count와 측정 안정성을 확인하는
+            method-free audit입니다.
+          </p>
+          <a href="../docs/longitudinal-biology-and-cross-scale-mechanism-reappraisal-2026-08-12.md">human/animal source facts, six scores와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="wall-phenotype">
           <span>4D-CTA wall phenotype을 처음부터 이해하기</span>

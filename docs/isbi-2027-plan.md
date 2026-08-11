@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-12 longitudinal-biology decision:** Do not title the paper around
+> inflammation-aware AWE survival modelling, causal mediation, cross-species
+> transfer or MRA-to-histology translation. The association and preclinical
+> detectability tasks are direct priors, while no public same-subject target
+> joins biomarker, image, component event time, treatment/censoring and
+> confirmatory split. Six rows peak at 28.5/40. Title, abstract claim,
+> contribution, method figure, result table, C21, P0/P1, model and GPU remain
+> closed.
+
 > **2026-08-12 rupture-time decision:** Cross-sectional rupture status is not
 > a viable new paper identity. Three-centre external validation, clinical+
 > morphology+radiomics fusion and synthetic tabular data are directly
