@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest post-treatment reference-linked imaging batch best 28.5/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
-    requirement: "a distinct fresh problem with a versioned patient-level image asset and independently observed reference must pass source admission, method-free asset/task gates, bounded development and a sealed fresh outer test; request-only PETRA images, FINDATA-controlled DWI, tabular visibility data, generic selective inference, GNN/operator stacking or a new loss cannot create novelty or compute authority",
+    status: "Target locked · latest cross-vascular transient-WSS batch best 30.0/40 rejected · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    requirement: "a distinct fresh problem with versioned phase-resolved tangent-WSS semantics, patient/family mapping, reproducible mesh/BC provenance, development/confirmation units and an executable strong baseline must pass source admission and method-free stability/failure gates; E(3) equivariance, transient WSS, geometry descriptors, an empty stated-code repository, GNN/operator stacking or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Patient-specific AAA transient WSS removes architecture novelty, not the unanswered structure question",
+      copy: "A 100-patient AAA study evaluates E(3)-equivariant transient vector WSS, TAWSS/OSI and boundary-condition, remodelling, topology and mesh generalisation on a 29-patient/118-scan external cohort with 1,090 CFD simulations. It reports directional over-smoothing but does not evaluate signed degree, critical points or worldlines. Its stated public code is exact README-only head 2f78bf18…; AAA-100 publishes geometry and centerlines but not the transient fields. SANO is CC0/141 files but has twelve iliac-vein patients under steady CFD and already owns geometry-fidelity-to-low-WSS analysis. Six candidates score 30.0/29.0/28.5/25.5/23.0/21.5 and are rejected.",
+      status: "Best 30.0/40 rejected · surface question inactive · payload/P0/method/architecture/server/GPU 0",
+      url: "../docs/cross-vascular-transient-wss-source-correction-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "A clear DSA/DWI reference still needs an executable image asset",
@@ -817,6 +824,21 @@ window.AURORA_DATA = Object.freeze({
       provenance: "99 unique patients/105 MCA lesion rows + 44 controls · six multi-lesion groups · asset component 5/9 failed · exact lesion-level linkage unsupported · headers unopened"
     },
     {
+      name: "AAA-WSS stated-code direct prior · exact 2f78bf18…",
+      role: "strong scientific direct prior and watch-only baseline; not executable",
+      provenance: "100 AAA training patients · 29 external patients/118 scans · 1,090 transient CFD simulations · E(3) LaB-GATr · transient WSS/TAWSS/OSI · repository is one 183-byte README, release 0, license null, size 0 KiB · no code/checkpoint/CFD fields/P0/GPU"
+    },
+    {
+      name: "AAA-100 geometry release · Zenodo 10932957",
+      role: "geometry-only source; not the published transient-WSS field asset",
+      provenance: "revision 10 · CC BY-NC 4.0 · 100 watertight patient geometries · meshes/centerlines/description only · no transient CFD fields · payload not accessed"
+    },
+    {
+      name: "SANO iliac-vein morphology/WSS v1.0",
+      role: "cross-vascular geometry-fidelity diagnostic only; not confirmation",
+      provenance: "CC0 · 141 public files · 12 patient cases · steady CFD · original study already owns geometry-fidelity-to-low-WSS relation · payload not accessed"
+    },
+    {
       name: "Aneurisk CFD curvature · 2026",
       role: "closed conformal-degree asset P0 history; not training",
       provenance: "Zenodo 19455127 revision 4 · 76 reported geometries · exact CPU P0 115684 E/exit 2 after 00:40:06 · 0/10 checks · no scientific verdict · complete archive/VTP semantics unreported · no persistent payload/log · no rerun/P1/model/GPU/outer test"
@@ -868,6 +890,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "research",
+      title: "Schema 8.6 corrects the transient-WSS direct-prior and asset boundary",
+      copy: "The patient-specific AAA study directly occupies E(3)-equivariant transient WSS, TAWSS/OSI and BC/remodelling/topology/mesh generalisation, but its stated code repository is README-only and AAA-100 lacks the published transient fields. The CC0 SANO source has twelve steady iliac-vein cases and already owns geometry-fidelity-to-low-WSS analysis. Six formulations freeze at 30.0/29.0/28.5/25.5/23.0/21.5 and all are rejected. The surface-vector question remains inactive; no P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",
+      files: ["docs/cross-vascular-transient-wss-source-correction-2026-08-11.md", "configs/source_watch_v8.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/literature-lineage.md", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

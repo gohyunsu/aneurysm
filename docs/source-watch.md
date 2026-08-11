@@ -1,4 +1,12 @@
-# Public source watch · eleven material/direct-prior source states
+# Public source watch · twelve material/direct-prior source states
+
+> **2026-08-11 v8 decision:** v7 is extended with the stated-code repository
+> for the 100-patient AAA transient-WSS direct prior. Exact head `2f78bf18…`
+> contains one 183-byte README, zero releases, no recognized license, no
+> implementation/checkpoint/CFD field and repository size 0 KiB. A repository
+> change requests baseline-feasibility re-audit only. It cannot release a task
+> asset, select architecture or authorize compute. All twelve frozen snapshots
+> currently match.
 
 > **2026-08-11 v7 decision:** v6 is extended with exact public PointFlowNet
 > head `5cb4f254…`. Its repository currently has code, a checkpoint and result
@@ -67,7 +75,7 @@
 > inverse-flow audit was triggered by a new published direct prior, not by a
 > watched asset change. No server was queried.
 
-상태: **watch-only · 열 개 official public states 모두 frozen snapshot과 동일 ·
+상태: **watch-only · 열두 개 official public states 모두 frozen snapshot과 동일 ·
 manual review 0 · no medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가
@@ -145,18 +153,26 @@ Revision, license, gating, dataset card 또는 manifest가 바뀌면 fresh sourc
 re-audit만 요청한다. Historical AneuG job `115645`나 Aneurisk job `115684`는
 repair/rerun하지 않는다.
 
+v8의 **AAA-WSS neural-surrogate** watch는 task source가 아니라
+direct-prior reproducibility를 감시한다. 논문은 code가 public이라고
+쓰지만 현재 exact repository는 README 하나뿐이다. 후속 code·license·
+checkpoint가 나와도 strong baseline 재현성을 다시 검토할 신호일
+뿐, phase-resolved tangent-WSS asset, E0 pass, method 선택이나 GPU
+권한이 아니다.
+
 ## 기계적 감시 계약
 
-[`configs/source_watch_v6.json`](../configs/source_watch_v6.json)은 historical
-[`source_watch_v5.json`](../configs/source_watch_v5.json)을 명시적으로 상속하고,
+[`configs/source_watch_v8.json`](../configs/source_watch_v8.json)은 historical
+[`source_watch_v7.json`](../configs/source_watch_v7.json)을 명시적으로 상속하고,
 IAVS의 현재
 commit, root entry, release count와 license, TopBrain 2.0의 Zenodo revision,
 design-object license, exact file inventory와 challenge navigation, TRELLIS의
 stated repository HTTP 404 상태, Aneumo GitHub/Hugging Face의 exact revision,
 license/access state와 filename-manifest hash에 더해 AneuG HF revision/storage,
 Aneurisk와 LargeIA Zenodo revision/access/file manifest, TopAneu live navigation,
-그리고 AneuX-derived transient-CFD revision/gate/license/card와 case-path manifest를
-고정한다. 기존 v1--v5는
+그리고 AneuX-derived transient-CFD revision/gate/license/card와 case-path manifest,
+PointFlowNet partial baseline, AAA-WSS README-only repository를 고정한다.
+기존 v1--v7은
 historical contract로 보존한다.
 [`scripts/audit_source_watch.py`](../scripts/audit_source_watch.py)는 GitHub의
 공식 metadata와 Zenodo/Grand Challenge page만 읽고 다음 변화를 감지한다.
@@ -176,12 +192,15 @@ historical contract로 보존한다.
 11. Aneurisk Zenodo revision/access/license/archive manifest가 바뀜
 12. LargeIA restricted/open state, revision, license 또는 public manifest가 바뀜
 13. TopAneu Zenodo revision 또는 live Data/Evaluation/registration state가 바뀜
-14. AneuX-derived transient-CFD HF revision/gate/license/card/storage 또는
+14. PointFlowNet head/root/release/license/size가 변경됨
+15. AAA-WSS stated-code repository head/root/release/license/size가 변경됨
+16. AneuX-derived transient-CFD HF revision/gate/license/card/storage 또는
     topology-qualified/unique-ID manifest가 바뀜
 
-1--6과 8--14의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다. 7은
-**direct-prior baseline-feasibility review 요청**만 만든다. 자동 download, 약관
-수락, 점수 재가중, frozen snapshot 갱신, P0 등록, model/architecture 선택,
+1--6, 8--13, 16의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다.
+7, 14, 15는 **direct-prior baseline-feasibility review 요청**만 만든다.
+자동 download, 약관 수락, 점수 재가중, frozen snapshot 갱신, P0 등록,
+model/architecture 선택,
 GPU와 outer test는 모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
 machine-auditable manifest, independent-unit semantics와 새 direct-prior audit을
 갖춘 후보가 frozen 32/40 source gate를 통과한 뒤에만 별도 version으로 등록할
@@ -189,11 +208,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v6.json \
+  --config configs/source_watch_v8.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v6.json \
+  --config configs/source_watch_v8.json \
   --fetch --fail-on-change
 ```
 

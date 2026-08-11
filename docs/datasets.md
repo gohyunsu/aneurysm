@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 8.6 asset boundary · 2026-08-11:** AAA-100 revision 10 provides
+> 100 watertight geometries/centerlines under CC BY-NC 4.0, not the transient
+> WSS fields used by Rygiel et al. Their stated code repository is one README.
+> SANO v1.0 is CC0/141 files but represents twelve iliac-vein patients under
+> steady CFD. No member from either source was opened, and neither is admitted
+> for AURORA training, calibration or outer testing.
+
 > **Schema 8.5 asset boundary · 2026-08-11:** The 100-patient paired
 > PETRA/TOF/DSA images are author-request only and have no versioned public
 > manifest/license/split. Helsinki DWI/occlusion processing requires an

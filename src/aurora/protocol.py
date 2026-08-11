@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "8.5":
-        raise ProtocolError("The current research-state schema must be version 8.5.")
+    if protocol["schema_version"] != "8.6":
+        raise ProtocolError("The current research-state schema must be version 8.6.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_posttreatment_reference_linked_imaging_batch_best_28_5_rejected_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_cross_vascular_transient_wss_batch_best_30_rejected_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_5_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_8_6_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -185,6 +185,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "submission_identity_active",
             "next_allowed_action",
             "audit_document",
+            "cross_vascular_transient_wss_source_correction",
             "posttreatment_reference_linked_imaging_source_delta",
             "aneumo_bc_transport_source_audit",
             "source_only_dataset_substitution_screen",
@@ -236,6 +237,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v5",
             "public_source_watch_v6",
             "public_source_watch_v7",
+            "public_source_watch_v8",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -246,13 +248,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_posttreatment_reference_linked_imaging_batch_best_28_5_rejected"
+        != "no_active_problem_latest_cross_vascular_transient_wss_batch_best_30_rejected"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_article_metadata_and_clipped_tabular_supplement_only_no_posttreatment_image_level_payload_no_p0_closed_p0s_unchanged"
+        != "public_article_repository_and_dataset_metadata_only_no_transient_wss_field_payload_no_p0_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -262,21 +264,213 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "monitor_for_a_versioned_patient_level_paired_posttreatment_image_release_with_dsa_or_dwi_reference_or_run_an_unrelated_fresh_problem_level_source_audit_not_p0_or_model"
+        != "monitor_for_a_versioned_phase_resolved_patient_or_family_mapped_tangent_wss_release_with_executable_strong_baseline_or_run_an_unrelated_fresh_problem_level_source_audit_not_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md"
+        != "docs/cross-vascular-transient-wss-source-correction-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "petra_first_selective_dsa_referral_with_patient_level_missed_residual_budget_rejected"
+        != "sano_anatomical_fidelity_low_wss_reproduction_rejected"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The post-treatment reference-linked imaging source batch must remain rejected below 32 while "
+            "The cross-vascular transient-WSS source batch must remain rejected below 32 while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
         )
+    cross_vascular = problem_selection[
+        "cross_vascular_transient_wss_source_correction"
+    ]
+    _require_keys(
+        cross_vascular,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "axis_scores",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "aaa_wss_arxiv_id",
+            "aaa_wss_training_patients",
+            "aaa_wss_external_patients",
+            "aaa_wss_external_scans",
+            "aaa_wss_total_cfd_simulations",
+            "aaa_wss_extracted_cycle_phases",
+            "aaa_wss_reports_transient_vector_wss",
+            "aaa_wss_reports_tawss_and_osi",
+            "aaa_wss_reports_bc_remodelling_topology_and_mesh_generalization",
+            "aaa_wss_reports_high_frequency_directional_oversmoothing",
+            "aaa_wss_evaluates_signed_degree_critical_points_or_worldlines",
+            "aaa_wss_repository",
+            "aaa_wss_repository_head",
+            "aaa_wss_repository_commit_count",
+            "aaa_wss_repository_readme_bytes",
+            "aaa_wss_repository_release_count",
+            "aaa_wss_repository_size_kib",
+            "aaa_wss_repository_license_spdx_id",
+            "aaa_wss_repository_contains_implementation_checkpoint_or_cfd_fields",
+            "aaa100_zenodo_record_id",
+            "aaa100_zenodo_revision",
+            "aaa100_license",
+            "aaa100_patient_geometries",
+            "aaa100_public_file_count",
+            "aaa100_transient_cfd_fields_public",
+            "aaa100_payload_accessed",
+            "sano_dataverse_doi",
+            "sano_dataset_version",
+            "sano_license",
+            "sano_public_file_count",
+            "sano_independent_patient_cases",
+            "sano_flow_is_steady_state",
+            "sano_original_study_owns_geometry_fidelity_to_low_wss_relation",
+            "sano_payload_accessed",
+            "surface_vector_question_retained_as_inactive_hypothesis",
+            "architecture_selected_from_direct_prior",
+            "direct_prior_threats",
+            "candidates",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+        ],
+        "cross-vascular transient-WSS source correction",
+    )
+    expected_cross_scores = [30.0, 29.0, 28.5, 25.5, 23.0, 21.5]
+    expected_cross_ids = {
+        "sano_anatomical_fidelity_low_wss_reproduction",
+        "sano_steady_wss_structural_stability_audit",
+        "new_cfd_generation_on_open_aaa100_geometry",
+        "aaa_transient_wss_structure_failure_audit",
+        "aaa_longitudinal_structure_consistency",
+        "cross_vascular_structure_transfer",
+    }
+    expected_cross_priors = {
+        "lab_gatr_e3_equivariant_transient_aaa_wss_surrogate",
+        "boundary_condition_remodelling_topology_and_mesh_generalization",
+        "transient_wss_tawss_and_osi_external_evaluation",
+        "sano_geometry_fidelity_to_low_wss_analysis",
+        "hodge_dec_and_equivariant_surface_operator_components",
+        "robust_critical_point_and_vector_field_trajectory_tracking",
+    }
+    cross_candidates = cross_vascular["candidates"]
+    if (
+        cross_vascular["status"]
+        != "fresh_source_batch_rejected_below_admission_strong_direct_prior_but_no_executable_matched_baseline_or_transient_field_asset"
+        or cross_vascular["audit_document"]
+        != "docs/cross-vascular-transient-wss-source-correction-2026-08-11.md"
+        or cross_vascular["automatic_selection_threshold"] != 32.0
+        or cross_vascular["best_candidate_id"]
+        != "sano_anatomical_fidelity_low_wss_reproduction"
+        or cross_vascular["best_score"] != 30.0
+        or cross_vascular["axis_scores"]
+        != [4.0, 5.0, 0.5, 5.0, 1.0, 5.0, 5.0, 4.5]
+        or sum(cross_vascular["axis_scores"]) != cross_vascular["best_score"]
+        or cross_vascular["all_candidate_scores"] != expected_cross_scores
+        or max(cross_vascular["all_candidate_scores"])
+        >= cross_vascular["automatic_selection_threshold"]
+        or cross_vascular["conditional_source_lead_count"] != 0
+        or cross_vascular["primary_problem_selected"] is not False
+        or cross_vascular["aaa_wss_arxiv_id"] != "2507.22817"
+        or cross_vascular["aaa_wss_training_patients"] != 100
+        or cross_vascular["aaa_wss_external_patients"] != 29
+        or cross_vascular["aaa_wss_external_scans"] != 118
+        or cross_vascular["aaa_wss_total_cfd_simulations"] != 1090
+        or cross_vascular["aaa_wss_extracted_cycle_phases"] != 21
+        or cross_vascular["aaa_wss_reports_transient_vector_wss"] is not True
+        or cross_vascular["aaa_wss_reports_tawss_and_osi"] is not True
+        or cross_vascular[
+            "aaa_wss_reports_bc_remodelling_topology_and_mesh_generalization"
+        ]
+        is not True
+        or cross_vascular[
+            "aaa_wss_reports_high_frequency_directional_oversmoothing"
+        ]
+        is not True
+        or cross_vascular[
+            "aaa_wss_evaluates_signed_degree_critical_points_or_worldlines"
+        ]
+        is not False
+        or cross_vascular["aaa_wss_repository"]
+        != "PatRyg99/AAA-WSS-neural-surrogate"
+        or cross_vascular["aaa_wss_repository_head"]
+        != "2f78bf1879e5e555c3369d91822be3f567f9fbd1"
+        or cross_vascular["aaa_wss_repository_commit_count"] != 1
+        or cross_vascular["aaa_wss_repository_readme_bytes"] != 183
+        or cross_vascular["aaa_wss_repository_release_count"] != 0
+        or cross_vascular["aaa_wss_repository_size_kib"] != 0
+        or cross_vascular["aaa_wss_repository_license_spdx_id"] is not None
+        or cross_vascular[
+            "aaa_wss_repository_contains_implementation_checkpoint_or_cfd_fields"
+        ]
+        is not False
+        or cross_vascular["aaa100_zenodo_record_id"] != 10932957
+        or cross_vascular["aaa100_zenodo_revision"] != 10
+        or cross_vascular["aaa100_license"] != "cc-by-nc-4.0"
+        or cross_vascular["aaa100_patient_geometries"] != 100
+        or cross_vascular["aaa100_public_file_count"] != 3
+        or cross_vascular["aaa100_transient_cfd_fields_public"] is not False
+        or cross_vascular["aaa100_payload_accessed"] is not False
+        or cross_vascular["sano_dataverse_doi"] != "10.71580/SANO/GVPFQ5"
+        or cross_vascular["sano_dataset_version"] != "1.0"
+        or cross_vascular["sano_license"] != "CC0-1.0"
+        or cross_vascular["sano_public_file_count"] != 141
+        or cross_vascular["sano_independent_patient_cases"] != 12
+        or cross_vascular["sano_flow_is_steady_state"] is not True
+        or cross_vascular[
+            "sano_original_study_owns_geometry_fidelity_to_low_wss_relation"
+        ]
+        is not True
+        or cross_vascular["sano_payload_accessed"] is not False
+        or cross_vascular[
+            "surface_vector_question_retained_as_inactive_hypothesis"
+        ]
+        is not True
+        or cross_vascular["architecture_selected_from_direct_prior"] is not False
+        or set(cross_vascular["direct_prior_threats"])
+        != expected_cross_priors
+        or len(cross_candidates) != 6
+        or _unique_ids(cross_candidates, "id", "cross-vascular candidates")
+        != expected_cross_ids
+        or [candidate["total"] for candidate in cross_candidates]
+        != expected_cross_scores
+        or any(
+            sum(candidate["axis_scores"]) != candidate["total"]
+            for candidate in cross_candidates
+        )
+        or any(
+            cross_vascular[key] is not False
+            for key in [
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            ]
+        )
+        or cross_vascular["execution_server"] != "introai9"
+    ):
+        raise ProtocolError(
+            "The cross-vascular transient-WSS correction must preserve the "
+            "patient/unit, public-code, geometry-only and steady-flow boundaries, "
+            "frozen sub-32 scores, inactive surface question and no-compute state."
+        )
+    checks.append("cross-vascular transient-WSS correction and no-compute boundary")
     posttreatment = problem_selection[
         "posttreatment_reference_linked_imaging_source_delta"
     ]
@@ -3107,7 +3301,96 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "PointFlowNet change to request baseline review only, never data, method or compute."
         )
     checks.append("eleven-source fail-closed baseline watch boundary")
+    source_watch_v8 = problem_selection["public_source_watch_v8"]
+    _require_keys(
+        source_watch_v8,
+        [
+            "status",
+            "config",
+            "extends_historical_config",
+            "config_sha256",
+            "watch_count",
+            "watch_ids",
+            "aaa_wss_repository",
+            "aaa_wss_head",
+            "aaa_wss_release_count",
+            "aaa_wss_license_spdx_id",
+            "aaa_wss_readme_bytes",
+            "aaa_wss_repository_size_kib",
+            "aaa_wss_payload_or_code_entries",
+            "same_as_all_frozen_snapshots",
+            "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized",
+            "p0_or_p1_authorized",
+            "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized",
+            "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v8",
+    )
+    if (
+        source_watch_v8["status"]
+        != "watch_only_all_twelve_frozen_snapshots_match"
+        or source_watch_v8["config"] != "configs/source_watch_v8.json"
+        or source_watch_v8["extends_historical_config"]
+        != "configs/source_watch_v7.json"
+        or source_watch_v8["config_sha256"]
+        != "1f54a94637d064618227f9ed43c38e01901fde006cf452696903509ba58f9c7b"
+        or source_watch_v8["watch_count"] != 12
+        or source_watch_v8["watch_ids"][-1]
+        != "aaa_wss_neural_surrogate_baseline_release_v1"
+        or source_watch_v8["aaa_wss_repository"]
+        != "PatRyg99/AAA-WSS-neural-surrogate"
+        or source_watch_v8["aaa_wss_head"]
+        != "2f78bf1879e5e555c3369d91822be3f567f9fbd1"
+        or source_watch_v8["aaa_wss_release_count"] != 0
+        or source_watch_v8["aaa_wss_license_spdx_id"] is not None
+        or source_watch_v8["aaa_wss_readme_bytes"] != 183
+        or source_watch_v8["aaa_wss_repository_size_kib"] != 0
+        or source_watch_v8["aaa_wss_payload_or_code_entries"] != []
+        or source_watch_v8["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v8[key] is not False
+            for key in (
+                "manual_review_triggered",
+                "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized",
+                "p0_or_p1_authorized",
+                "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized",
+                "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v8["decision"]
+        != "continue_fail_closed_twelve_source_watch_only_aaa_wss_change_requests_baseline_reaudit"
+    ):
+        raise ProtocolError(
+            "Source watch v8 must preserve all twelve exact snapshots and allow "
+            "an AAA-WSS repository change to request baseline review only, never "
+            "task-asset access, architecture selection or compute."
+        )
+    checks.append("twelve-source fail-closed baseline watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "sano_anatomical_fidelity_low_wss_reproduction_directly_occupied_and_n12",
+        "sano_steady_wss_structural_stability_nonaneurysm_n12",
+        "new_cfd_generation_on_aaa100_geometry_not_independent_confirmation",
+        "aaa_transient_wss_structure_failure_fields_and_baseline_nonpublic",
+        "aaa_longitudinal_structure_consistency_external_fields_nonpublic",
+        "cross_vascular_structure_transfer_incompatible_contracts",
         "geometry_only_peak_systolic_point_surrogation_direct_prior_occupied",
         "rigid_fsi_model_form_robust_functional_concordance_effective_anatomy_one",
         "real_cfd_to_surrogate_downstream_status_retention_joint_observation_absent",

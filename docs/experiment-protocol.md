@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 8.6 no-experiment boundary · 2026-08-11:** Six cross-vascular
+> WSS formulations are below 32/40. AAA-WSS/AAA-100/SANO metadata and primary
+> papers were inspected, but no data member or code was executed. Source watch
+> v8 may request baseline-feasibility review only. No scientific server,
+> P0/P1, transfer, PBS/GPU job or outer test is registered; jobs `115645` and
+> `115684` remain closed without repair/rerun.
+
 > **Schema 8.5 no-experiment boundary · 2026-08-11:** The six
 > post-treatment formulations are below 32/40. No PETRA/TOF/DSA image was
 > requested, no FINDATA decision was sought, and no clipped-table payload was

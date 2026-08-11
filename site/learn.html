@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="PETRA-MRA·TOF-MRA·DSA와 DWI/occlusion cohort, surface-vector 가설, 독립 표본과 연구 gate를 기초부터 설명하고 최신 28.5/40 기각·no-model 경계를 밝히는 입문 가이드.">
+  <meta name="description" content="AAA transient-WSS direct prior, surface-vector 가설, 독립 표본과 연구 gate를 기초부터 설명하고 최신 30.0/40 기각·no-model 경계를 밝히는 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#cross-vascular-wss">AAA/WSS correction</a>
       <a href="#posttreatment-imaging">Post-treatment imaging</a>
       <a href="#downstream-utility">Downstream utility</a>
       <a href="#aneux-transient">Transient source</a>
@@ -63,19 +64,61 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 8.5</span>
+          <span>짧은 답 · schema 8.6</span>
           <strong>Conditional source lead와 모델은 모두 0개입니다.</strong>
           <p>
-            새 prospective PETRA-MRA/TOF-MRA/DSA 100명 연구와 Helsinki
-            DWI/occlusion cohort까지 심사했지만 최고 28.5/40으로 기각했습니다.
-            PETRA 연구는 raw image가 versioned public asset이 아니고, Helsinki
-            자료는 FINDATA 공식 결정 없이는 연구자 주도 공유가 불가능합니다.
-            Surface-vector와 CFD downstream 질문은 평가 가설로 보존하지만 active
-            topic은 아닙니다. Exact P0 두 건의 scientific checks는 실패한 것이
+            100-patient AAA transient-WSS 연구와 CC0 SANO source까지
+            심사했지만 최고 30.0/40으로 기각했습니다. AAA 연구는
+            E(3)-equivariant vector WSS와 일반화를 이미 다루지만 stated-code
+            repository에는 README만 있고 transient field는 공개되지 않았습니다.
+            SANO는 12 patient·steady venous CFD이며 원 연구가 geometry fidelity→
+            low-WSS를 이미 분석합니다. Surface-vector 질문은 평가 가설로
+            보존하지만 active topic은 아닙니다. Exact P0 두 건의 scientific
+            checks는 실패한 것이
             아니라 모두 미평가였고, 동일 contract를 재실행하지 않습니다.
             Primary, GNN, Transformer, neural operator, contribution, GPU와 outer
             test는 선택되지 않았습니다.
           </p>
+        </div>
+        <div class="answer-card" id="cross-vascular-wss">
+          <span>100명 AAA transient-WSS 연구가 있다면 우리 방향은 사라지나?</span>
+          <strong>아키텍처 novelty는 더 작아졌지만, 구조 보존 질문은 아직 미검증으로 남습니다.</strong>
+          <p>
+            해당 연구는 100 AAA patient로 학습하고 29 patient의 118 longitudinal
+            scan으로 외부 평가합니다. 총 1,090 CFD simulation에서 cycle당
+            21개 WSS field를 추출하고, E(3)-equivariant LaB-GATr으로 transient
+            vector WSS, TAWSS와 OSI를 예측합니다. Boundary condition, geometry
+            remodelling, 새 branch topology와 mesh resolution 일반화도 이미 평가했습니다.
+            따라서 equivariance, flow prior, geometry descriptor와 periodic WSS 예측은
+            contribution이 아니라 strong baseline입니다.
+          </p>
+          <p>
+            논문은 high-frequency directional pattern이 over-smooth된다고 보고합니다.
+            이것은 구조 실패의 가능한 메커니즘이지만, signed degree,
+            critical point, separatrix나 worldline을 측정한 결과는 아닙니다. Field
+            error만으로 구조를 추론할 수 없듯 over-smoothing 문장만으로도 구조
+            실패를 확정할 수 없습니다.
+          </p>
+          <p>
+            실행 가능성도 다른 문제입니다. 논문의 public code link는 exact
+            head <code>2f78bf18…</code>에서 183-byte README 하나뿐이고 release,
+            license, code, checkpoint와 CFD field가 없습니다. AAA-100 Zenodo는 100개
+            watertight geometry와 centerline만 공개합니다. 즉 scientific direct prior는
+            강하지만 matched executable baseline이나 새 transient-WSS task asset은 아닙니다.
+          </p>
+          <p>
+            SANO release는 CC0/141 public file이지만 common iliac vein 12 patient의
+            steady CFD입니다. 2D projection, 3D extrusion과 full 3D를 비교해 geometry
+            fidelity가 low-WSS burden을 바꾸는 관계를 이미 보고했습니다. 이는 좋은
+            diagnostic control이지 patient-disjoint transient aneurysm confirmation은 아닙니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Structure question retained</span>
+            <span class="yes">12-source fail-closed watch</span>
+            <span class="no">Architecture novelty rejected</span>
+            <span class="no">No P0, model or GPU</span>
+          </div>
+          <a href="../docs/cross-vascular-transient-wss-source-correction-2026-08-11.md">출처·점수·재진입 계약 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="posttreatment-imaging">
           <span>DSA reference가 있는 100명 prospective study라면 왜 바로 모델을 만들지 않나?</span>

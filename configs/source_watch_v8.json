@@ -1,0 +1,84 @@
+{
+  "schema_version": "aurora.source_watch.v8",
+  "extends": "source_watch_v7.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-11",
+  "added_watches": [
+    {
+      "watch_id": "aaa_wss_neural_surrogate_baseline_release_v1",
+      "kind": "github",
+      "review_request": "direct_prior_baseline_feasibility_reaudit_only",
+      "source": {
+        "repository": "PatRyg99/AAA-WSS-neural-surrogate",
+        "repository_url": "https://github.com/PatRyg99/AAA-WSS-neural-surrogate",
+        "default_branch": "main",
+        "paper_url": "https://arxiv.org/abs/2507.22817"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "2f78bf1879e5e555c3369d91822be3f567f9fbd1",
+        "root_entries": [
+          {"name": "README.md", "type": "file", "size": 183}
+        ],
+        "release_count": 0,
+        "license_spdx_id": null,
+        "repository_size_kib": 0,
+        "payload_or_code_entries": [],
+        "availability": "stated_public_code_repository_is_readme_only_without_license_code_checkpoint_or_cfd_fields"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v7 IAVS, TopBrain, TRELLIS, Aneumo, AneuG, Aneurisk, LargeIA, TopAneu, AneuX transient or PointFlowNet signal changes",
+      "AAA-WSS neural-surrogate head, root manifest, release count, license or repository size changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": [
+      "fresh_source_reaudit_only",
+      "direct_prior_baseline_feasibility_reaudit_only"
+    ]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

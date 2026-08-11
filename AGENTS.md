@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 cross-vascular transient-WSS correction · schema 8.6:**
+> Rygiel et al.은 100 AAA patient training, 29 patient/118 scan external
+> cohort와 1,090 transient CFD로 E(3)-equivariant vector-WSS, TAWSS/OSI,
+> BC·remodelling·topology·mesh generalization을 직접 점유한다. Reported
+> directional over-smoothing은 plausible mechanism이지 signed degree,
+> critical-point/worldline failure evidence가 아니다. Exact stated-code
+> repository `2f78bf18…`은 183-byte README 하나, release 0, license null,
+> size 0 KiB이며 code/checkpoint/CFD field가 없다. AAA-100 revision 10은
+> CC-BY-NC-4.0 geometry/centerline만 공개한다. SANO v1.0은 CC0/141 public
+> files지만 12 patient iliac-vein steady CFD이고 원 논문이 geometry fidelity→
+> low-WSS를 이미 분석한다. Fresh scores 30.0/29.0/28.5/25.5/23.0/21.5는
+> 모두 32 미만이며 lead/P0/P1/method/architecture/server query/PBS/GPU/outer
+> test/result/claim은 0이다. Source watch v8은 exact AAA-WSS repository를
+> 열두 번째로 감시하고 change 시 baseline-feasibility re-audit만 요청한다.
+> Closed jobs `115645`/`115684`는 repair/rerun하지 않는다. Future authorized
+> work는 `introai9` PBS만 사용하고 login-node GPU command를 금지한다.
+> `junjinyong`에는 절대 접속·조회·전송·제출·모니터링하지 않는다.
+
 > **2026-08-11 schema 8.5 overlay deployment verification:** Exact analysis
 > content `8616257d501707df6d26b07841124d426fac6d86` passed Quality
 > `31469240409` and Pages `31469239803`. Live Learn and change history expose

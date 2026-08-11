@@ -60,6 +60,18 @@ temporal decoding도 이미 알려진 inductive bias다. 따라서 미래 eviden
 endpoint로 failure를 확인하고, 그 failure와 직접 연결되는 가장 작은 intervention만
 bounded development에서 검토한다.
 
+Schema 8.6의 fresh direct-prior correction은 이 경계를 더 강하게 만든다.
+100-patient AAA/29-patient 118-scan external cohort의 LaB-GATr 연구가
+E(3)-equivariant transient vector WSS, TAWSS/OSI, BC·remodelling·topology·mesh
+generalization과 directional over-smoothing을 이미 보고한다. 따라서 equivariance,
+geometry descriptor, flow prior, inflow conditioning과 transient decoding은 명백한
+strong control이다. 다만 해당 연구도 signed degree, critical point나 worldline을
+평가하지 않았으므로, over-smoothing은 plausible failure mechanism이지 우리가
+필요로 하는 structural failure evidence는 아니다. 이 distinction의 exact source·asset
+감사는
+[`cross-vascular-transient-wss-source-correction-2026-08-11.md`](cross-vascular-transient-wss-source-correction-2026-08-11.md)를
+따른다.
+
 ### 좋은 architecture와 성능은 admission 근거가 아니다
 
 “충분히 좋은 architecture와 성능이 나오면 ISBI에서 경쟁력이 있다”는 조건문은

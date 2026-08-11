@@ -37,6 +37,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v5",
         "aurora.source_watch.v6",
         "aurora.source_watch.v7",
+        "aurora.source_watch.v8",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -72,7 +73,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v6_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v6(payload)
-    else:
+    elif schema == "aurora.source_watch.v7":
         if payload.get("extends") != "source_watch_v6.json":
             raise SourceWatchContractError("v7_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -83,6 +84,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v7_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v7(payload)
+    else:
+        if payload.get("extends") != "source_watch_v7.json":
+            raise SourceWatchContractError("v8_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v7":
+            raise SourceWatchContractError("v8_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v8_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v8(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -130,6 +142,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v5",
         "aurora.source_watch.v6",
         "aurora.source_watch.v7",
+        "aurora.source_watch.v8",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -701,6 +714,79 @@ def _validate_v7(payload: Mapping[str, Any]) -> None:
         is not True
     ):
         raise SourceWatchContractError("v7_change_boundary_changed")
+
+
+def _validate_v8(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    expected_ids = [
+        "iavs_public_release_v1",
+        "topbrain2_material_release_v1",
+        "trellis_stated_code_availability_v1",
+        "aneumo_github_material_release_v1",
+        "aneumo_huggingface_material_release_v1",
+        "aneug_huggingface_material_revision_v1",
+        "aneurisk_zenodo_material_revision_v1",
+        "largeia_zenodo_access_revision_v1",
+        "topaneu_material_release_v1",
+        "aneux_transient_cfd_material_revision_v1",
+        "pointflownet_baseline_release_v1",
+        "aaa_wss_neural_surrogate_baseline_release_v1",
+    ]
+    if not isinstance(watches, list) or [
+        watch.get("watch_id") for watch in watches
+    ] != expected_ids:
+        raise SourceWatchContractError("v8_watch_set_changed")
+
+    _validate_v7(
+        {
+            "watches": watches[:11],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    aaa_wss = watches[11]
+    if (
+        aaa_wss.get("kind") != "github"
+        or aaa_wss.get("review_request")
+        != "direct_prior_baseline_feasibility_reaudit_only"
+        or aaa_wss.get("source")
+        != {
+            "repository": "PatRyg99/AAA-WSS-neural-surrogate",
+            "repository_url": (
+                "https://github.com/PatRyg99/AAA-WSS-neural-surrogate"
+            ),
+            "default_branch": "main",
+            "paper_url": "https://arxiv.org/abs/2507.22817",
+        }
+    ):
+        raise SourceWatchContractError("aaa_wss_source_changed")
+    if aaa_wss.get("frozen_snapshot") != {
+        "main_head_sha": "2f78bf1879e5e555c3369d91822be3f567f9fbd1",
+        "root_entries": [
+            {"name": "README.md", "type": "file", "size": 183},
+        ],
+        "release_count": 0,
+        "license_spdx_id": None,
+        "repository_size_kib": 0,
+        "payload_or_code_entries": [],
+        "availability": (
+            "stated_public_code_repository_is_readme_only_without_license_"
+            "code_checkpoint_or_cfd_fields"
+        ),
+    }:
+        raise SourceWatchContractError("aaa_wss_snapshot_changed")
+
+    detection = payload.get("change_detection", {})
+    if (
+        detection.get(
+            "readme_only_stated_code_repository_is_not_executable_baseline"
+        )
+        is not True
+        or detection.get("direct_prior_code_release_is_not_task_asset_release")
+        is not True
+        or detection.get("repository_change_is_not_architecture_selection")
+        is not True
+    ):
+        raise SourceWatchContractError("v8_change_boundary_changed")
 
 
 def _url_get(url: str, accept: str) -> bytes:
@@ -1432,6 +1518,7 @@ def evaluate_config(
         "aurora.source_watch.v5",
         "aurora.source_watch.v6",
         "aurora.source_watch.v7",
+        "aurora.source_watch.v8",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

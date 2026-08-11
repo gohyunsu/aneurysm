@@ -26,6 +26,7 @@ CONFIG_V4 = ROOT / "configs" / "source_watch_v4.json"
 CONFIG_V5 = ROOT / "configs" / "source_watch_v5.json"
 CONFIG_V6 = ROOT / "configs" / "source_watch_v6.json"
 CONFIG_V7 = ROOT / "configs" / "source_watch_v7.json"
+CONFIG_V8 = ROOT / "configs" / "source_watch_v8.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -546,7 +547,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v7.json", workflow)
+        self.assertIn("configs/source_watch_v8.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
@@ -645,6 +646,99 @@ class SourceWatchContractTests(unittest.TestCase):
             (source / "source_watch_v4.json").write_text(
                 CONFIG_V4.read_text(encoding="utf-8"), encoding="utf-8"
             )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v8_adds_readme_only_aaa_wss_baseline_without_authority(self) -> None:
+        config = load_config(CONFIG_V8)
+        self.assertEqual(config["extends"], "source_watch_v7.json")
+        self.assertEqual(len(config["watches"]), 12)
+        aaa_wss = config["watches"][-1]
+        self.assertEqual(
+            aaa_wss["watch_id"],
+            "aaa_wss_neural_surrogate_baseline_release_v1",
+        )
+        self.assertEqual(
+            aaa_wss["review_request"],
+            "direct_prior_baseline_feasibility_reaudit_only",
+        )
+        frozen = aaa_wss["frozen_snapshot"]
+        self.assertEqual(
+            frozen["main_head_sha"],
+            "2f78bf1879e5e555c3369d91822be3f567f9fbd1",
+        )
+        self.assertEqual(frozen["root_entries"], [
+            {"name": "README.md", "type": "file", "size": 183}
+        ])
+        self.assertEqual(frozen["release_count"], 0)
+        self.assertIsNone(frozen["license_spdx_id"])
+        self.assertEqual(frozen["payload_or_code_entries"], [])
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v8_aaa_wss_code_change_requests_baseline_review_only(self) -> None:
+        config = load_config(CONFIG_V8)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observed = observations[
+            "aaa_wss_neural_surrogate_baseline_release_v1"
+        ]
+        observed["main_head_sha"] = "e" * 40
+        observed["root_entries"].append(
+            {"name": "src", "type": "dir", "size": 0}
+        )
+        observed["payload_or_code_entries"] = ["src"]
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertFalse(result["fresh_source_reaudit_triggered"])
+        self.assertTrue(
+            result["direct_prior_baseline_feasibility_reaudit_triggered"]
+        )
+        self.assertEqual(
+            result["manual_review_requests"],
+            ["direct_prior_baseline_feasibility_reaudit_only"],
+        )
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v8_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        payload = json.loads(CONFIG_V8.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["release_count"] = 1
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (CONFIG_V7, CONFIG_V6, CONFIG_V5, CONFIG_V4):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "aaa_wss"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V8.read_text(encoding="utf-8"))
+        payload["authorization"]["gpu_training"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in (CONFIG_V7, CONFIG_V6, CONFIG_V5, CONFIG_V4):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
             with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
                 load_config(candidate)
 

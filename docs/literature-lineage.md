@@ -967,6 +967,31 @@ point cloud, wall-distance feature와 single-snapshot fast surrogate도 직접
 - [Geometry-aware PointNet for rapid prediction of cerebral aneurysm
   hemodynamics (CMPB, 2026)](https://doi.org/10.1016/j.cmpb.2026.109308)
 
+Rygiel et al.은 이 경계를 patient-specific AAA로 더 강하게 확장한다. CTA에서
+얻은 100 patient surface와 29-patient/118-scan 외부 longitudinal cohort,
+1,090 transient CFD simulation을 사용해 E(3)-equivariant LaB-GATr로 21-phase
+vector WSS, TAWSS와 OSI를 예측한다. Boundary condition, remodelling, unseen
+branch topology와 mesh resolution 일반화를 이미 평가했고, high-frequency
+directional pattern의 over-smoothing도 보고한다. 따라서 equivariance, geometric
+descriptor, inflow conditioning, transient WSS와 remeshing robustness는 direct
+prior다. 다만 signed degree, critical point나 worldline은 평가하지 않았다.
+
+- [Wall Shear Stress Estimation in Abdominal Aortic Aneurysms
+  (arXiv, 2025)](https://arxiv.org/abs/2507.22817)
+- [Exact stated-code repository: README-only on 2026-08-11](https://github.com/PatRyg99/AAA-WSS-neural-surrogate)
+- [AAA-100 geometry-only release](https://doi.org/10.5281/zenodo.10932957)
+
+Cross-vascular evidence도 geometry representation을 단순한 preprocessing으로
+볼 수 없음을 보여준다. SANO의 12-patient common-iliac-vein source는 full 3D,
+2D projection과 3D extrusion에 steady CFD를 적용하고 low-WSS burden을 직접
+비교한다. 그러나 원 연구가 geometry fidelity→low-WSS 관계를 이미 점유하며,
+12 patient와 steady venous flow는 transient aneurysm structure confirmation이
+아니다.
+
+- [Iliac vein morphology and wall shear stress
+  (bioRxiv, 2026)](https://doi.org/10.64898/2026.02.17.706277)
+- [SANO CC0 data release](https://doi.org/10.71580/SANO/GVPFQ5)
+
 같은 연구 계열의 2025-12 arXiv preprint는 graph transformer, sparse/global
 attention, masking, multi-stage pretraining을 사용하고 AneuXplore,
 few-shot patient geometry, MATCH OOD에서 평가한다.

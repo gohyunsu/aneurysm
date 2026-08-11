@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 8.6 no-model boundary · 2026-08-11:** E(3)-equivariant LaB-GATr,
+> geometric descriptors, flow priors, inflow conditioning, transient vector
+> WSS and BC/remodelling/topology/remeshing generalisation are direct prior,
+> not a selected architecture. Edge 1-form, Hodge/DEC, degree/track losses and
+> periodic decoding also remain unselected until stable endpoints and a
+> field-error-matched failure are observed. No model, loss, checkpoint or GPU
+> run is authorized.
+
 > **Schema 8.5 no-model boundary · 2026-08-11:** PETRA artifact correction,
 > device conditioning, longitudinal fusion, reject heads, learning-to-defer and
 > conformal calibration are baselines/direct priors, not a selected model. The

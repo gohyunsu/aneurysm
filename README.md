@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 cross-vascular transient-WSS correction · schema 8.6:** A
+> 100-patient AAA study with a 29-patient/118-scan external cohort already
+> owns E(3)-equivariant transient vector-WSS prediction, TAWSS/OSI and
+> BC/remodelling/topology/remeshing generalisation. Its stated public code is
+> exact README-only head `2f78bf18…`; AAA-100 releases geometry but not the
+> transient fields. The new SANO source is CC0 but has twelve iliac-vein
+> patients, steady CFD, and directly owns geometry-fidelity-to-low-WSS
+> analysis. Six formulations score **30.0/29.0/28.5/25.5/23.0/21.5** and are
+> rejected. Surface-vector remains an inactive question; no P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test or claim is
+> opened. [Exact correction](docs/cross-vascular-transient-wss-source-correction-2026-08-11.md) ·
+> [Twelve-source watch](configs/source_watch_v8.json)
+
 > **2026-08-11 schema 8.5 overlay deployment verification:** Exact analysis
 > content `8616257d501707df6d26b07841124d426fac6d86` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31469240409) and

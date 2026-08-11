@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 8.6 submission boundary · 2026-08-11:** Do not title the ISBI
+> paper around an edge-1-form/Hodge/equivariant transient-WSS architecture.
+> Patient-specific AAA work already owns the obvious model and generalisation
+> space, while the residual structure endpoint lacks a public executable field
+> asset and observed matched-baseline failure. The fresh batch peaks at
+> 30.0/40. Submission identity, contribution, method, table and figure remain
+> zero.
+
 > **Schema 8.5 submission boundary · 2026-08-11:** Do not title the ISBI
 > paper around PETRA-first DSA deferral, device-conditioned surveillance or
 > DWI/occlusion decision modeling. The strongest residual formulation is

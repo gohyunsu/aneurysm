@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 8.6 direction · 2026-08-11:** Retain structure-faithful transient
+> WSS only as an inactive evaluation question. Patient-specific AAA work
+> already owns E(3)-equivariant vector-WSS prediction and broad generalisation;
+> reported over-smoothing is a plausible mechanism, not degree/point/worldline
+> failure evidence. The stated code is README-only, AAA-100 lacks transient
+> fields, and SANO is twelve-case steady venous CFD. The fresh batch peaks at
+> 30.0/40. Continue fail-closed source/baseline discovery; open no P0 or model.
+> [Exact correction](cross-vascular-transient-wss-source-correction-2026-08-11.md)
+
 > **Schema 8.5 direction · 2026-08-11:** Do not replace the inactive
 > surface-vector hypothesis with a PETRA/DWI wrapper. The new sources have
 > clearer observed references, but no lawful versioned image-level development

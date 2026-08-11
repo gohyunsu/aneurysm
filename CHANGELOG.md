@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-11 · cross-vascular transient-WSS correction · schema 8.6
+
+- Audited the patient-specific AAA transient-WSS direct prior: 100 training
+  patients, 29 external patients/118 scans, 1,090 CFD simulations, transient
+  WSS/TAWSS/OSI and BC/remodelling/topology/mesh generalisation.
+- Corrected the availability boundary: the stated public code repository is
+  exact head `2f78bf18…` with one 183-byte README, release 0, no recognized
+  license and no implementation/checkpoint/CFD fields. AAA-100 is an open
+  geometry/centerline source, not the published transient-WSS payload.
+- Audited SANO v1.0 as CC0/141 public files but only twelve independent
+  iliac-vein cases under steady CFD; the source paper already owns the
+  geometry-fidelity-to-low-WSS relation.
+- Froze six formulations at 30.0/29.0/28.5/25.5/23.0/21.5, all rejected below
+  32. Surface-vector stays inactive; no source lead, P0/P1, method,
+  architecture, server query, PBS/GPU, outer test, result row or claim opened.
+- Added fail-closed source watch v8 for the README-only AAA-WSS baseline. A
+  change requests baseline-feasibility re-audit only and cannot authorize task
+  data, architecture or compute.
+
 ## 2026-08-11 · Surface-vector follow-up deployed
 
 - Exact analysis content `8616257d501707df6d26b07841124d426fac6d86`
