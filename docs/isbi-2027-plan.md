@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 9.3 submission decision · 2026-08-11:** AURORA remains not
+> submission-ready. SynVA is a direct prior for procedural synthetic-to-real
+> aneurysm segmentation, not an available new task: its claimed release lacks
+> an executable version/license/checksum/seed/split contract. Six candidates
+> peak at 27.5/40. Do not write a method, contribution, architecture figure or
+> result table from this source. Surface-vector also remains an unobserved
+> inactive hypothesis. [Exact audit](synva-release-and-synthetic-utility-source-audit-2026-08-11.md)
+
 > **Schema 9.2 submission decision · 2026-08-11:** AURORA is not
 > submission-ready. Structure-faithful WSS remains unobserved as a stable
 > failure, while generic reference-provenance robustness is direct-prior

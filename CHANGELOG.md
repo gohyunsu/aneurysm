@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-08-11 · SynVA release and synthetic utility rejected · schema 9.3
+
+- Audited exact arXiv `2605.17620v1` and its 25,831,786-byte PDF without
+  opening synthetic meshes, processed medical data, a checkpoint or a split.
+  The paper reports 50,000 procedural meshes, 769 processed real samples and
+  an eleven-regime synthetic-to-real segmentation experiment; these remain
+  prior-paper claims rather than reproduced AURORA evidence.
+- Found no dedicated SynVA code or dataset URL in the paper and no exact public
+  GitHub repository/code match. A claimed release without version, license,
+  checksums, seeds and executable split manifests is not an admitted asset.
+- Corrected the research gap against SynVA itself, synthetic-counterfactual
+  auditing, knowledge-based shape-artifact detection, patient/institution
+  leakage audits and generic utility/fidelity/privacy/domain-adaptation work.
+- Froze six candidates at 27.5/26.5/26.0/26.0/23.5/23.5. All fail total or
+  critical novelty/asset floors; active lead, P0/P1, method, architecture,
+  result and claim remain zero.
+- Added no recurring watch because there is no stable official release endpoint.
+  A future versioned release requests a fresh manual source audit only.
+- Queried no scientific server and created no PBS/GPU job. Future eligible
+  execution remains `introai9` PBS only; login-node GPU and every form of
+  `junjinyong` access remain prohibited.
+
 ## 2026-08-11 · Schema 9.2 deployed and privately pinned
 
 - Exact scientific source `fd60885e4e6c5a34c7d65f6ed2c0013a31c15657`

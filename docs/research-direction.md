@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Schema 9.3 direction · 2026-08-11:** Do not pivot from the inactive
+> surface-vector question to generic synthetic pretraining. SynVA itself
+> already reports procedural-to-real aneurysm segmentation utility, while no
+> versioned/licensed/checksummed release or patient-grouped real split is
+> executable. Six candidates peak at 27.5/40 and fail novelty or asset floors.
+> Wait for a material release contract and a genuinely residual falsifier; open
+> no payload, P0, model or compute. [Exact audit](synva-release-and-synthetic-utility-source-audit-2026-08-11.md)
+
 > **Schema 9.2 direction · 2026-08-11:** Preserve surface-vector only as an
 > inactive falsifiable question and do not pivot to generic reference-robust
 > segmentation. Biased-ruler analysis, partial identification, label-noise

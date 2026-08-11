@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 SynVA release and synthetic-utility override · schema 9.3:**
+> Exact arXiv `2605.17620v1` reports a procedural generator, a claimed 50,000-
+> mesh release, 769 processed real samples and eleven synthetic-to-real
+> segmentation regimes. These are prior-paper claims, not AURORA results. The
+> paper exposes no dedicated versioned SynVA code/data URL, license, checksum
+> manifest, generator seeds, exact 40k/10k split or patient-grouped real-test
+> manifest; exact public GitHub title/project searches found no release.
+> SynVA itself already occupies the obvious synthetic-pretraining utility task.
+> Synthetic counterfactual, shape-artifact, patient/institution leakage and
+> generic utility/fidelity/privacy/domain-adaptation methods are direct priors.
+> Frozen scores 27.5/26.5/26.0/26.0/23.5/23.5 all fail total or critical novelty/
+> asset floors and are not repaired. Do not count generated meshes as patients
+> or use this source for hemodynamic, rupture, progression or clinical claims.
+> Recurring source-watch was not added because no stable official release URL
+> exists; a versioned release requests fresh manual source audit only. Active
+> lead/primary/P0/P1/method/architecture/scientific-server query/PBS/GPU/outer
+> test/result/C21/claim are 0. Surface-vector remains inactive and closed jobs
+> remain unrepaired. Future gate-authorized work may use only `introai9` PBS;
+> prohibit login-node GPU and never access, query, transfer to, submit to or
+> monitor `junjinyong`.
+
 > **2026-08-11 schema 9.2 deployment·private synchronization:** Exact public
 > scientific source `fd60885e4e6c5a34c7d65f6ed2c0013a31c15657` passed
 > Quality `31487538060` and Pages `31487537080`. Private paper ledger

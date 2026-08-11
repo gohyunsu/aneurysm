@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 9.3 SynVA asset boundary · 2026-08-11:** The paper reports 50,000
+> independently generated procedural meshes and 769 processed real samples,
+> but publishes no dedicated versioned code/data endpoint, license, checksums,
+> seeds or patient-grouped split manifest. Generated draws are not patients,
+> and the source explicitly cannot support hemodynamic, rupture, progression or
+> clinical claims. No mesh, point cloud, processed medical member or checkpoint
+> was opened. [Exact audit](synva-release-and-synthetic-utility-source-audit-2026-08-11.md)
+
 > **Schema 9.2 RSNA contract boundary · 2026-08-11:** The official registry
 > reports over 4,000 studies, over 40 radiologists, 18 institutions and about
 > 200 AI-segmented studies, but access is controlled and the linked wiki is

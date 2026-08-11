@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · latest reference-provenance/RSNA batch best 31.0/40 rejected by total and critical floors · official registry remains controlled access and wiki remains Coming soon · active source lead/primary/method/architecture/GPU/outer test/claim 0 · closed WSS P0s remain no verdict · not submission-ready",
+    status: "Target locked · latest SynVA release/synthetic-utility batch best 27.5/40 rejected by novelty and asset floors · claimed 50,000-mesh release has no versioned executable contract · active source lead/primary/method/architecture/GPU/outer test/claim 0 · surface-vector remains inactive and closed WSS P0s remain no verdict · not submission-ready",
     requirement: "a fresh problem must pass non-compensatory admission: total at least 32 plus critical novelty, identifiability, asset, independent-unit and strong-baseline floors, then a prospectively registered mechanism-linked falsifier; a public model, external transport, component stacking, naming or a new loss cannot create novelty or compute authority",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A claimed synthetic release is not an executable asset or a residual research gap",
+      copy: "SynVA is a substantive direct prior: the paper reports 50,000 independently generated procedural meshes, 769 processed real samples and eleven Point Transformer V3 regimes, including synthetic-only and synthetic-to-real pretraining. It already evaluates the obvious aneurysm-segmentation utility question. The paper exposes no dedicated versioned SynVA code/data URL, license, checksum manifest, generator seeds, exact synthetic split or patient-grouped real split, and exact public repository/code searches found no release. Synthetic counterfactual, shape-artifact, leakage and generic utility/fidelity/privacy/domain-adaptation methods further occupy the broad gap. Six candidates score 27.5/26.5/26.0/26.0/23.5/23.5 and all fail total or critical floors.",
+      status: "Best 27.5/40 rejected · claimed release not executable · payload/P0/model/server/GPU 0",
+      url: "../docs/synva-release-and-synthetic-utility-source-audit-2026-08-11.md"
+    },
     {
       year: "2026.08",
       title: "Reference provenance is a validity problem, not automatic method novelty",
@@ -940,6 +947,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Schema 9.3 rejects SynVA utility variants without an executable release contract",
+      copy: "Exact arXiv 2605.17620v1 reports 50,000 procedural meshes, 769 processed real samples and eleven synthetic-to-real segmentation regimes. These are prior-paper claims, not AURORA reproductions. The paper provides no dedicated versioned code/data URL, license, checksums, seeds or patient-grouped real split; exact public GitHub searches found no release. SynVA itself and direct priors on synthetic counterfactuals, shape artifacts, leakage and generic synthetic-data evaluation remove the obvious novelty. Six candidates freeze at 27.5/26.5/26.0/26.0/23.5/23.5 and all fail total or critical novelty/asset floors. No payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result or claim is opened.",
+      files: ["docs/synva-release-and-synthetic-utility-source-audit-2026-08-11.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",

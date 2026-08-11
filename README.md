@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 SynVA release and synthetic-utility audit · schema 9.3:**
+> SynVA is a substantive direct prior, not a new executable AURORA asset. Its
+> paper already evaluates procedural synthetic pretraining for real aneurysm
+> segmentation and reports a claimed 50,000-mesh release, but supplies no
+> dedicated versioned code/data URL, license, checksum manifest, generator-seed
+> ledger or patient-grouped real split. These are author-reported prior results,
+> not AURORA reproductions. Six frozen candidates score
+> **27.5/26.5/26.0/26.0/23.5/23.5** and all fail the total or critical novelty/
+> asset floors. Surface-vector remains an inactive falsifiable question; no
+> payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer
+> test or claim is open. [Exact audit](docs/synva-release-and-synthetic-utility-source-audit-2026-08-11.md)
+
 > **2026-08-11 schema 9.2 deployment verification:** Exact scientific source
 > `fd60885e4e6c5a34c7d65f6ed2c0013a31c15657` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31487538060) and

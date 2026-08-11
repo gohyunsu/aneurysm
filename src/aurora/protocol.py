@@ -123,8 +123,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.2":
-        raise ProtocolError("The current research-state schema must be version 9.2.")
+    if protocol["schema_version"] != "9.3":
+        raise ProtocolError("The current research-state schema must be version 9.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -148,13 +148,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_latest_reference_provenance_batch_best_31_rejected_rsna_release_contract_incomplete_closed_p0_no_verdicts_preserved"
+        != "no_active_problem_latest_synva_synthetic_utility_batch_best_27_5_rejected_release_contract_absent_closed_p0_no_verdicts_preserved"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_2_no_server_query"
+        != "last_observed_introai9_after_p0_115684_e_exit2_queue_empty_no_active_gpu_job_no_login_node_gpu_command_schema_9_3_no_server_query"
         or project["first_future_gpu_action"]
         != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
     ):
@@ -186,6 +186,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "synva_release_and_synthetic_utility_source_audit",
             "reference_provenance_and_rsna_release_contract_reappraisal",
             "topaneu_annotation_version_orbit_reappraisal",
             "aaa_cross_scale_source_reappraisal",
@@ -257,13 +258,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_latest_reference_provenance_batch_best_31_rejected_by_total_and_residual_novelty_floors"
+        != "no_active_problem_latest_synva_synthetic_utility_batch_best_27_5_rejected_by_total_residual_novelty_and_asset_floors"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_rsna_registry_and_wiki_release_metadata_only_no_terms_mira_payload_or_manifest_closed_p0s_unchanged"
+        != "public_synva_v1_paper_and_repository_search_metadata_only_no_synva_code_dataset_or_medical_payload_closed_p0s_unchanged"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -273,18 +274,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "wait_for_material_rsna_release_contract_change_or_continue_fresh_problem_level_source_audit_no_terms_p0_or_model"
+        != "wait_for_versioned_synva_release_contract_or_other_material_source_change_or_continue_fresh_problem_level_source_audit_no_payload_p0_or_model"
         or problem_selection["audit_document"]
-        != "docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md"
+        != "docs/synva-release-and-synthetic-utility-source-audit-2026-08-11.md"
         or problem_selection["most_recent_closed_candidate"]
         != "patient_level_conformal_degree_certificate_for_surface_wss_surrogates_execution_incomplete"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "versioned_morphometry_partial_identification_rejected_by_total_and_residual_novelty_floors"
+        != "ostium_segmentation_with_synva_pretraining_rejected_as_direct_prior_and_missing_release_contract"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The reference-provenance batch must remain rejected by the "
-            "total and residual-novelty floors while "
+            "The SynVA synthetic-utility batch must remain rejected by the "
+            "total, residual-novelty, and asset floors while "
             "the conformal-degree and surface-vector candidates stay closed after exact "
             "execution-incomplete introai9 CPU P0, with no active lead, primary, "
             "method, GPU, outer test, or claim."
@@ -347,8 +348,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 31.0
-        or admission_v2["current_batch_best_residual_novelty"] != 2.0
+        or admission_v2["current_batch_best_score"] != 27.5
+        or admission_v2["current_batch_best_residual_novelty"] != 1.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -357,6 +358,187 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    synva_audit = problem_selection["synva_release_and_synthetic_utility_source_audit"]
+    _require_keys(
+        synva_audit,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "arxiv_id",
+            "arxiv_version",
+            "arxiv_submitted_on",
+            "paper_pdf_bytes",
+            "paper_pdf_sha256",
+            "paper_claimed_synthetic_samples",
+            "paper_reported_synthetic_train_samples",
+            "paper_reported_synthetic_validation_samples",
+            "paper_reported_real_processed_samples",
+            "paper_reported_real_test_samples",
+            "paper_reported_downstream_regimes",
+            "paper_reported_synthetic_only_real_test_miou",
+            "paper_reported_ten_percent_real_only_miou",
+            "paper_reported_synthetic_pretrain_ten_percent_real_miou",
+            "paper_results_reproduced_by_aurora",
+            "dedicated_synva_code_url_present_in_paper",
+            "dedicated_synva_dataset_url_present_in_paper",
+            "public_synva_github_repository_found",
+            "versioned_release_manifest_present",
+            "explicit_release_license_present",
+            "immutable_release_checksums_present",
+            "executable_real_split_manifest_present",
+            "patient_grouped_real_split_explicitly_reported",
+            "paper_reports_dataset_stratified_real_split",
+            "procedural_samples_are_patients",
+            "procedural_samples_reported_independently_sampled",
+            "hemodynamic_construct_validity_reported",
+            "clinical_or_rupture_construct_validity_reported",
+            "direct_prior_threats",
+            "candidates",
+            "surface_vector_retained_only_as_inactive_falsifiable_question",
+            "closed_surface_vector_or_aneurisk_job_repaired_or_rerun",
+            "historical_scores_or_job_outcomes_relabelled",
+            "recurring_source_watch_added",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "SynVA release and synthetic-utility source audit",
+    )
+    expected_synva_candidates = [
+        (
+            "ostium_segmentation_with_synva_pretraining",
+            27.5,
+            [4.0, 5.0, 0.5, 1.0, 4.0, 5.0, 5.0, 3.0],
+        ),
+        (
+            "procedural_intervention_effect_audit",
+            26.5,
+            [3.5, 4.0, 1.0, 1.0, 4.0, 5.0, 5.0, 3.0],
+        ),
+        (
+            "source_disjoint_synthetic_pretraining_utility",
+            26.0,
+            [4.0, 3.5, 1.5, 1.0, 4.0, 5.0, 4.5, 2.5],
+        ),
+        (
+            "morphology_support_calibrated_synthetic_curriculum",
+            26.0,
+            [4.0, 3.0, 1.5, 1.0, 4.0, 5.0, 5.0, 2.5],
+        ),
+        (
+            "synthetic_to_real_hemodynamic_pretraining",
+            23.5,
+            [4.5, 1.5, 1.0, 0.5, 4.0, 5.0, 5.0, 2.0],
+        ),
+        (
+            "patient_privacy_or_membership_audit",
+            23.5,
+            [2.5, 5.0, 0.5, 1.0, 4.0, 5.0, 2.5, 3.0],
+        ),
+    ]
+    observed_synva_candidates = [
+        (candidate["id"], candidate["total"], candidate["axis_scores"])
+        for candidate in synva_audit["candidates"]
+    ]
+    synva_score_sums_match = all(
+        abs(sum(candidate["axis_scores"]) - candidate["total"]) < 1e-9
+        for candidate in synva_audit["candidates"]
+    )
+    synva_false_boundaries = [
+        "paper_results_reproduced_by_aurora",
+        "dedicated_synva_code_url_present_in_paper",
+        "dedicated_synva_dataset_url_present_in_paper",
+        "public_synva_github_repository_found",
+        "versioned_release_manifest_present",
+        "explicit_release_license_present",
+        "immutable_release_checksums_present",
+        "executable_real_split_manifest_present",
+        "patient_grouped_real_split_explicitly_reported",
+        "procedural_samples_are_patients",
+        "hemodynamic_construct_validity_reported",
+        "clinical_or_rupture_construct_validity_reported",
+        "closed_surface_vector_or_aneurisk_job_repaired_or_rerun",
+        "historical_scores_or_job_outcomes_relabelled",
+        "recurring_source_watch_added",
+        "p0_registered",
+        "p1_registered",
+        "method_selected",
+        "architecture_selected",
+        "scientific_server_queried",
+        "gpu_training_authorized",
+        "outer_test_authorized",
+        "submission_identity_active",
+        "login_node_gpu_command_executed",
+        "junjinyong_accessed",
+    ]
+    if (
+        synva_audit["status"]
+        != "fresh_batch_rejected_best_27_5_fails_total_residual_novelty_and_asset_floors_synva_release_contract_absent"
+        or synva_audit["audit_document"]
+        != "docs/synva-release-and-synthetic-utility-source-audit-2026-08-11.md"
+        or synva_audit["automatic_selection_threshold"] != 32.0
+        or synva_audit["best_candidate_id"]
+        != "ostium_segmentation_with_synva_pretraining"
+        or synva_audit["best_score"] != 27.5
+        or synva_audit["best_residual_novelty_score"] != 1.5
+        or synva_audit["all_candidate_scores"]
+        != [27.5, 26.5, 26.0, 26.0, 23.5, 23.5]
+        or synva_audit["conditional_source_lead_count"] != 0
+        or synva_audit["primary_problem_selected"] is not False
+        or synva_audit["arxiv_id"] != "2605.17620"
+        or synva_audit["arxiv_version"] != "v1"
+        or synva_audit["arxiv_submitted_on"] != "2026-05-13"
+        or synva_audit["paper_pdf_bytes"] != 25831786
+        or synva_audit["paper_pdf_sha256"]
+        != "f483f6b91bf8ab94d55dd456e22ea108468780131c9df9dcbcaff46d9f2d92fe"
+        or synva_audit["paper_claimed_synthetic_samples"] != 50000
+        or synva_audit["paper_reported_synthetic_train_samples"] != 40000
+        or synva_audit["paper_reported_synthetic_validation_samples"] != 10000
+        or synva_audit["paper_reported_real_processed_samples"] != 769
+        or synva_audit["paper_reported_real_test_samples"] != 100
+        or synva_audit["paper_reported_downstream_regimes"] != 11
+        or synva_audit["paper_reported_synthetic_only_real_test_miou"] != 36.78
+        or synva_audit["paper_reported_ten_percent_real_only_miou"] != 50.41
+        or synva_audit["paper_reported_synthetic_pretrain_ten_percent_real_miou"]
+        != 63.88
+        or any(synva_audit[key] for key in synva_false_boundaries)
+        or synva_audit["paper_reports_dataset_stratified_real_split"] is not True
+        or synva_audit["procedural_samples_reported_independently_sampled"]
+        is not True
+        or observed_synva_candidates != expected_synva_candidates
+        or not synva_score_sums_match
+        or any(candidate["critical_axis_pass"] for candidate in synva_audit["candidates"])
+        or synva_audit[
+            "surface_vector_retained_only_as_inactive_falsifiable_question"
+        ]
+        is not True
+        or synva_audit["execution_server"] != "introai9"
+        or synva_audit["next_allowed_action"]
+        != "wait_for_versioned_synva_code_dataset_license_checksum_and_split_contract_or_fresh_unrelated_problem_level_source_audit"
+    ):
+        raise ProtocolError(
+            "The SynVA v1 source audit must preserve the claimed-but-unreleased "
+            "50k asset boundary, the source paper's own synthetic-to-real utility "
+            "experiment, all six prospective rejections, and zero compute authority."
+        )
+    checks.append("SynVA release and synthetic-utility rejection boundary")
 
     reference_audit = problem_selection[
         "reference_provenance_and_rsna_release_contract_reappraisal"
@@ -4545,6 +4727,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("fifteen-source fail-closed RSNA release-contract watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "ostium_segmentation_with_synva_pretraining_direct_prior_and_missing_release_contract",
+        "procedural_intervention_effect_audit_direct_prior_and_missing_action_asset",
+        "source_disjoint_synthetic_pretraining_utility_evaluation_only_and_missing_manifest",
+        "morphology_support_calibrated_synthetic_curriculum_missing_support_truth",
+        "synthetic_to_real_hemodynamic_pretraining_construct_invalid",
+        "patient_privacy_membership_audit_no_patient_members",
         "topaneu_revision_robust_lesion_set_ranking_interval_total_and_novelty_floors",
         "versioned_morphometry_partial_identification_total_and_novelty_floors",
         "rsna_clean_calibration_subgroup_risk_bound_no_clean_subset_or_public_asset",
@@ -4740,6 +4928,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     }:
         raise ProtocolError("Rejected problem candidates must remain explicit.")
     if set(problem_selection["non_novel_components"]) != {
+        "generic_synthetic_to_real_pretraining_or_finetuning",
+        "generic_synthetic_data_utility_fidelity_privacy_or_scaling_benchmark",
+        "generic_patient_or_institution_leakage_audit",
+        "generic_synthetic_shape_artifact_or_counterfactual_effect_audit",
         "vessel_graph_or_gnn",
         "generic_set_prediction_or_point_process",
         "mixed_or_weak_supervision",

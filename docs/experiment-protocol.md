@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 9.3 execution boundary · 2026-08-11:** No SynVA experiment is
+> authorized. All six candidates fail the source gate, the claimed release has
+> no executable contract and the source paper already performs the obvious
+> synthetic-to-real utility study. A future versioned release triggers a fresh
+> source audit, not payload access or P0. No scientific server was queried.
+> Future eligible execution is `introai9` PBS only; prohibit login-node GPU and
+> all `junjinyong` access. [Exact audit](synva-release-and-synthetic-utility-source-audit-2026-08-11.md)
+
 > **Schema 9.2 execution boundary · 2026-08-11:** No experiment is active.
 > The six reference-provenance candidates all fail the non-compensatory source
 > gate, and the RSNA registry/wiki state is not a machine-auditable task

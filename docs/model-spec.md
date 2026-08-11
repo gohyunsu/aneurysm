@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 9.3 model boundary · 2026-08-11:** There is still no selected
+> architecture. Point Transformer, GNN, diffusion, curriculum weighting or an
+> uncertainty head cannot rescue SynVA candidates whose best residual novelty
+> is 0.5/5 and asset readiness is 1.0/5. The surface edge-1-form/Hodge/SE(3)
+> proposal also remains an inactive component set, not a model identity.
+> [Exact audit](synva-release-and-synthetic-utility-source-audit-2026-08-11.md)
+
 > **Schema 9.2 model boundary · 2026-08-11:** There is no selected model.
 > Surface edge 1-forms, Hodge/DEC, equivariant message passing, periodic
 > operators and structural losses remain hypothetical components or controls.

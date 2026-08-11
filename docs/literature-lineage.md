@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **Schema 9.3 direct-prior correction · 2026-08-11:** SynVA already performs
+> the obvious procedural synthetic-pretraining study on real aneurysm
+> segmentation. Synthetic intervention auditing, knowledge-based shape-artifact
+> detection, patient/institution leakage audits and generic utility/fidelity/
+> privacy/domain adaptation further occupy the broad evaluation gap. Without a
+> versioned release and a new identifiable failure/action, six candidates peak
+> at 27.5/40 and admit no method or compute. [Exact audit](synva-release-and-synthetic-utility-source-audit-2026-08-11.md)
+
 > **Schema 9.2 direct-prior correction · 2026-08-11:** Medical
 > segmentation's biased-ruler effect, weak-supervision partial identification,
 > broad label-noise benchmarking and active label cleaning directly occupy the
