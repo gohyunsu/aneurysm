@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · diagnostic-action/human-AI best 29.5/40 rejected; all six fail total or critical novelty/asset floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; mimic taxonomy and patient-level recommendation/acquisition action remain evaluation-only, no data terms, payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · ADAM longitudinal/treated-exclusion best 28.5/40 rejected; all six fail total or critical identifiability/novelty/asset floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; surface-vector stability and matched-failure remain a future gate order only, no ADAM terms, payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A follow-up scan is not a treatment or growth ground truth",
+      copy: "Official ADAM training has 113 cases: 93 positive and 20 negative, with 35 baseline/follow-up subject pairs and 23 unique positive subjects. Seventy paired scans are therefore 35 independent people, not 70 patients or 35 documented interventions. The public source exposes no exact pair manifest, lesion correspondence or adjudicated growth label. Label 2 merges treated aneurysm and treatment artifact, is a rough one-pixel-dilated region and is ignored in official evaluation; it cannot identify remnant, occlusion or response. MSDA-Net's 78 baseline/distinct plus 35 post-treatment(follow-up) wording is recorded as bounded provenance, not a new target. Six candidates score 28.5/28.0/28.0/27.0/27.0/24.5 and all fail the non-compensatory gate. Surface-vector retains only its stability-to-matched-failure sequence; its components remain unselected controls.",
+      status: "Best 28.5/40 rejected · novelty 2.0/5 · no public pair/growth contract · terms/payload/P0/method/server/GPU 0",
+      url: "../docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "A real automation-bias harm still fails without a public reference/action contract",

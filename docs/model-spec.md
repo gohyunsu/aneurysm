@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.0 no-model boundary · 2026-08-12:** No model is selected.
+> Surface-vector task stability and matched failure must be observed before an
+> edge-1-form/Hodge/SE(3)/periodic operator is even a proposal; those elements
+> are currently controls. ADAM does not identify a longitudinal-growth or
+> treatment-response target, so a Siamese U-Net, registration-consistency loss,
+> treatment-aware head or calibrated-growth wrapper is also unauthorized.
+
 > **Schema 9.9 architecture boundary · 2026-08-12:** There is no selected
 > model. A mimic-aware detector, conformal/selective head, complementarity-
 > driven deferral policy, evidence display, acquisition recommender, cross-view

@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.0 map · 2026-08-12:** ADAM longitudinal/treatment semantics is a
+> rejected provenance branch, not a workstream. Official baseline/follow-up
+> pairing supplies at most 35 training patients and no public growth or lesion-
+> correspondence target. Label 2 is a rough ignored mixture of treated lesion
+> and artifact. Longitudinal measurement, MSDA-Net, registration and selective
+> risk control occupy the obvious mechanisms. Best 28.5/40; active
+> problem/method/model/compute zero. Surface-vector remains an inactive question.
+
 > **Schema 9.9 map · 2026-08-12:** Diagnostic action and human-AI interaction
 > are a rejected discovery branch, not an active workstream. Automation bias
 > establishes harm; 7 T/DSA establish possible reference escalation; IAVS/TAR

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 뇌동맥류 진단 행동, 자동화 편향, mimic 감별, IAVS CFD utility와 기능·치료 endpoint를 식별가능성·공개 자산·residual novelty로 재심사한 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — ADAM longitudinal·treated-exclusion 의미와 surface-vector 가설을 식별가능성, 직접 선행연구와 공개 자산 기준으로 재심사한 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,29 +40,30 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> BEST 29.5 · DIRECT-PRIOR/ASSET FAIL · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.0 · BEST 28.5 · ACTIVE LEAD 0</p>
         <h1>
-          A real clinical harm is not automatically<br>
-          <em>a model gap.</em>
+          A follow-up scan is not automatically<br>
+          <em>a treatment outcome.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          여섯 fresh 후보는 <b>29.5/27.0/26.0/26.0/25.0/24.5</b>로 모두
-          기각됐습니다. TOF-MRA false-positive가 vascular loop, infundibulum,
-          perforator에서 생기고 독자의 의심과 추적 권고를 높인다는 reader evidence는
-          분명합니다. 그러나 임상적 위해가 곧 executable contribution은 아닙니다.
-          IAVS는 segmentation의 CFD applicability를 이미 목표로 삼고 있으며 exact
-          public repository는 아직 README 하나뿐입니다. Contrast-retention functional,
-          MARTA treatment risk, cross-view localization과 generic deferral도 직접
-          선행입니다. 공개 자산은 patient image, expert reference, reader action과
-          outcome을 하나의 versioned contract로 연결하지 않습니다. 따라서 mimic
-          taxonomy와 patient-level acquisition/recommendation action만 evaluation
-          template로 보존하고, data terms, payload, P0/P1, scientific server, model과
-          GPU는 열지 않았습니다. Surface-vector와 모든 no-verdict 기록도 그대로
-          유지합니다.
+          여섯 fresh 후보는 <b>28.5/28.0/28.0/27.0/27.0/24.5</b>로 모두
+          기각됐습니다. Official ADAM training 113 case에는 35명의 baseline/follow-up
+          pair가 있지만, public exact pair·lesion correspondence·growth truth는 없습니다.
+          Label 2도 treated aneurysm과 treatment artifact를 섞은 rough ignored mask일
+          뿐 remnant, occlusion 또는 treatment response가 아닙니다. 따라서 follow-up을
+          post-treatment outcome으로 부르는 최근 표현은 provenance correction 대상이지
+          새 learning target이 아닙니다. Surface-vector 분석에서는 task stability와
+          field-error-matched failure를 먼저 검증한다는 순서만 채택했습니다.
+          Edge-1-form, Hodge, SE(3), periodic operator와 structural loss는 아직
+          direct-prior control이며 선택된 architecture가 아닙니다. ADAM terms, payload,
+          P0/P1, scientific server, model과 GPU는 열지 않았고 모든 no-verdict 기록도
+          그대로 유지합니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#adam-longitudinal">ADAM pair와 label 2 이해하기</a>
+          <a class="button ghost" href="../docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md">Latest ADAM source correction ↗</a>
           <a class="button ghost" href="learn.html#diagnostic-action">진단 행동과 자동화 편향 이해하기</a>
           <a class="button ghost" href="../docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md">Latest diagnostic-action reappraisal ↗</a>
           <a class="button ghost" href="learn.html#longitudinal-reliability">왜 32.0도 기각됐나?</a>
@@ -159,8 +160,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="진단 행동과 인간-AI 상호작용 후보의 최신 기각 경계를 설명하는 상태">
-        <div class="visual-caption">IAVS 641 REPORTED · README-ONLY RELEASE · ACTIVE LEAD 0</div>
+      <div class="hero-visual" aria-label="ADAM longitudinal과 treated-exclusion 의미의 최신 기각 경계를 설명하는 상태">
+        <div class="visual-caption">ADAM 113 CASES · 35 PAIRED SUBJECTS · GROWTH TRUTH 0</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="절차적으로 생성할 수 있는 혈관 분지와 동맥류 형상 예시">
             <defs>
@@ -183,19 +184,19 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>29.5</b><span>best · direct-prior/novelty rejected</span>
+            <b>28.5</b><span>best · identifiability/asset rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>20 / 9</b><span>reader-study examinations / radiologists</span>
+            <b>35</b><span>paired subjects · not 70 independent patients</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Mimic taxonomy and patient-level action remain useful evaluation templates</span>
-          <span><i class="dot coral"></i> IAVS/TAR, deferral, contrast retention and MARTA are direct-prior occupied</span>
-          <span>Best novelty 0.5/5 · no joined public asset · no terms/payload/P0/server/model/GPU</span>
+          <span><i class="dot lime"></i> Task-stability → matched-failure sequence retained as a future gate</span>
+          <span><i class="dot coral"></i> Follow-up ≠ treatment outcome; rough ignored label 2 ≠ response truth</span>
+          <span>Best novelty 2.0/5 · no public pair/growth contract · no terms/payload/P0/server/model/GPU</span>
         </div>
       </div>
 

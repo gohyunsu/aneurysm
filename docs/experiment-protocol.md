@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.0 experiment boundary · 2026-08-12:** The ADAM semantics batch
+> admits zero candidates. Do not register/sign terms, contact organizers for
+> this rejected task, stage images, infer pair IDs, repair a historical job,
+> register P0/P1, query a scientific server or create PBS/GPU work. The retained
+> surface-vector sequence is a future gate order only. Re-entry must be a new
+> evidence version with a lawful versioned asset and prospectively registered
+> method-free falsifier.
+
 > **Schema 9.9 experiment boundary · 2026-08-12:** The diagnostic-action/
 > human-AI batch admits zero candidates. Do not accept data terms, stage reader
 > or image payload, register P0/P1, implement a display/deferral/operator model,

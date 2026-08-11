@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.0 lineage correction · 2026-08-12:** ADAM's official target is
+> untreated/unruptured aneurysm detection and segmentation. Its 35 training
+> baseline/follow-up pairs are temporal pairs, not documented post-treatment or
+> growth events. Mixed rough label 2 is ignored. MSDA-Net already covers
+> segmentation/volumetric quantification; paired MRA growth reliability,
+> registration and adjacent-vessel controls occupy longitudinal measurement;
+> generic selective/conformal methods occupy false-output budgets. The residual
+> batch reaches only 28.5/40. Surface edge/Hodge/equivariant/periodic components
+> remain direct-prior controls and no architecture is selected.
+
 > **Schema 9.9 lineage · 2026-08-12:** Open multicentre TOF detection → small-
 > lesion model baseline; 7 T/DSA → mimic reference escalation; automation-bias
 > reader study → human harm; CoDoC/selective clinical AI → deferral and

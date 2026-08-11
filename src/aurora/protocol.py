@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "9.9":
-        raise ProtocolError("The current research-state schema must be version 9.9.")
+    if protocol["schema_version"] != "10.0":
+        raise ProtocolError("The current research-state schema must be version 10.0.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_diagnostic_action_human_ai_batch_rejected_best_29_5_no_p0_no_compute"
+        != "no_active_problem_adam_longitudinal_semantics_batch_rejected_best_28_5_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "adam_longitudinal_and_treated_exclusion_source_correction",
             "diagnostic_action_and_human_ai_reappraisal",
             "longitudinal_intervention_and_patient_reliability_reappraisal",
             "neck_isolation_and_open_model_source_reappraisal",
@@ -264,13 +265,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_diagnostic_action_human_ai_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_adam_longitudinal_semantics_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_paper_and_repository_metadata_only_no_iavs_or_mimic_or_contrast_or_treatment_patient_payload_no_scientific_server"
+        != "official_adam_paper_label_and_terms_metadata_only_no_registration_agreement_pair_manifest_or_payload_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -282,15 +283,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/diagnostic-action-and-human-ai-source-reappraisal-2026-08-12.md"
+        != "docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "cfd_applicability_certified_segmentation_on_iavs_rejected_at_29_5_with_residual_novelty_0_5_and_asset_1"
+        != "patient_level_longitudinal_all_lesion_correspondence_on_adam_rejected_at_28_5_without_public_pair_lesion_or_change_contract"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The diagnostic-action/human-AI batch must remain rejected and the VMR candidate "
+            "The ADAM longitudinal-semantics batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -352,8 +353,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 29.5
-        or admission_v2["current_batch_best_residual_novelty"] != 0.5
+        or admission_v2["current_batch_best_score"] != 28.5
+        or admission_v2["current_batch_best_residual_novelty"] != 2.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -362,6 +363,150 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    adam_longitudinal = problem_selection[
+        "adam_longitudinal_and_treated_exclusion_source_correction"
+    ]
+    expected_adam_candidates = [
+        (
+            "patient_level_longitudinal_all_lesion_correspondence_on_adam",
+            [5.0, 3.0, 2.0, 2.0, 3.5, 5.0, 5.0, 3.0],
+            28.5,
+        ),
+        (
+            "ignored_treated_region_false_output_budget",
+            [5.0, 2.5, 2.0, 2.0, 3.0, 5.0, 5.0, 3.5],
+            28.0,
+        ),
+        (
+            "paired_timepoint_change_preserving_aneurysm_segmentation",
+            [5.0, 3.0, 1.5, 2.0, 3.5, 5.0, 5.0, 3.0],
+            28.0,
+        ),
+        (
+            "paired_mask_growth_interval_calibration",
+            [5.0, 2.5, 1.0, 2.0, 3.5, 5.0, 5.0, 3.0],
+            27.0,
+        ),
+        (
+            "baseline_followup_registration_failure_certificate",
+            [4.0, 3.5, 1.5, 2.0, 3.5, 5.0, 4.5, 3.0],
+            27.0,
+        ),
+        (
+            "pre_post_treatment_semantics_reaudit_of_msdanet",
+            [4.0, 2.0, 0.5, 2.0, 3.0, 5.0, 4.0, 4.0],
+            24.5,
+        ),
+    ]
+    observed_adam_candidates = [
+        (row["id"], row["axis_scores"], float(row["total"]))
+        for row in adam_longitudinal["candidates"]
+    ]
+    if (
+        adam_longitudinal["status"]
+        != "fresh_batch_rejected_best_28_5_fails_total_identifiability_novelty_and_asset_floors_no_active_lead"
+        or adam_longitudinal["audit_document"]
+        != "docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md"
+        or adam_longitudinal["automatic_selection_threshold"] != 32.0
+        or adam_longitudinal["best_candidate_id"]
+        != "patient_level_longitudinal_all_lesion_correspondence_on_adam"
+        or adam_longitudinal["best_score"] != 28.5
+        or adam_longitudinal["best_residual_novelty_score"] != 2.0
+        or adam_longitudinal["all_candidate_scores"]
+        != [28.5, 28.0, 28.0, 27.0, 27.0, 24.5]
+        or adam_longitudinal["conditional_source_lead_count"] != 0
+        or adam_longitudinal["primary_problem_selected"] is not False
+        or adam_longitudinal["paper_identity_active"] is not False
+        or (
+            adam_longitudinal["adam_training_cases"],
+            adam_longitudinal["adam_training_positive_cases"],
+            adam_longitudinal["adam_training_negative_cases"],
+            adam_longitudinal["adam_training_paired_subjects"],
+            adam_longitudinal["adam_training_unique_positive_subjects"],
+        )
+        != (113, 93, 20, 35, 23)
+        or (
+            adam_longitudinal["adam_test_cases_reported"],
+            adam_longitudinal["adam_test_positive_cases_reported"],
+            adam_longitudinal["adam_test_negative_cases_reported"],
+            adam_longitudinal["adam_test_paired_subjects_reported"],
+            adam_longitudinal["adam_test_unique_positive_subjects_reported"],
+        )
+        != (141, 115, 26, 43, 29)
+        or adam_longitudinal["adam_label_1_semantics"]
+        != "untreated_unruptured_aneurysm"
+        or adam_longitudinal["adam_label_2_semantics"]
+        != "treated_aneurysm_or_treatment_artifact_rough_mask"
+        or adam_longitudinal["msdanet_reports_adam_baseline_or_distinct_volumes"]
+        != 78
+        or adam_longitudinal["msdanet_reports_adam_followup_as_posttreatment_volumes"]
+        != 35
+        or adam_longitudinal["growth_measurement_patients"] != 72
+        or adam_longitudinal["growth_measurement_aneurysms"] != 84
+        or adam_longitudinal["growth_measurement_3d_change_icc"] != 0.76
+        or observed_adam_candidates != expected_adam_candidates
+        or any(row["critical_axis_pass"] for row in adam_longitudinal["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in adam_longitudinal["candidates"]
+        )
+        or adam_longitudinal[
+            "surface_vector_analysis_task_stability_sequence_retained"
+        ]
+        is not True
+        or adam_longitudinal[
+            "surface_vector_architecture_sketch_retained_as_unselected_control_set"
+        ]
+        is not True
+        or any(
+            adam_longitudinal[key] is not False
+            for key in (
+                "adam_test_publicly_released",
+                "adam_public_exact_pair_manifest_visible",
+                "adam_public_growth_adjudication_visible",
+                "adam_public_lesion_correspondence_visible",
+                "adam_label_2_identifies_posttreatment_remnant_or_outcome",
+                "adam_terms_accepted_by_aurora",
+                "adam_organizer_approval_obtained_by_aurora",
+                "adam_payload_accessed_this_schema",
+                "msdanet_results_reproduced_by_aurora",
+                "surface_vector_material_e0_identified",
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_score_or_job_relabelled",
+                "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or any(
+            adam_longitudinal[key] is not True
+            for key in (
+                "adam_label_2_dilated_one_pixel_in_plane",
+                "adam_label_2_ignored_in_official_evaluation",
+                "adam_live_legacy_pages_redirect_to_grand_challenge",
+                "adam_registration_and_signed_agreement_required",
+                "adam_nonchallenge_reuse_requires_organizer_approval",
+                "msdanet_excludes_label_2_from_evaluation",
+                "msdanet_semantic_conflation_treated_as_bounded_source_correction",
+            )
+        )
+        or adam_longitudinal["next_allowed_action"]
+        != "fresh_problem_level_source_or_material_asset_audit_only_no_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "ADAM longitudinal/treated-exclusion sources must remain a rejected, "
+            "terms-unaccepted metadata-only batch with no P0, model, server or claim."
+        )
+    checks.append("ADAM longitudinal and treated-exclusion rejected-source boundary")
 
     diagnostic_action = problem_selection[
         "diagnostic_action_and_human_ai_reappraisal"

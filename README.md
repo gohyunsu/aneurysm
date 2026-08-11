@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.0, 2026-08-12):** The supplied
+> surface-vector reasoning is retained only as a gate sequence: first establish
+> structure-extraction stability and an observed field-error-matched failure,
+> then consider bounded development. Edge 1-form, Hodge, SE(3), periodic
+> decoding and structural losses remain unselected controls, not novelty. A
+> fresh ADAM semantics audit rejects six longitudinal/treatment formulations at
+> **28.5/28.0/28.0/27.0/27.0/24.5**. Official ADAM has 113 training cases,
+> including 35 baseline/follow-up subject pairs; it exposes neither a public
+> pair/lesion manifest nor growth truth. Label 2 mixes treated aneurysm and
+> treatment artifact, is a rough one-pixel-dilated mask and is ignored in
+> evaluation, so it is not a post-treatment outcome. Terms were not accepted
+> and no payload or scientific server was accessed. Active lead, P0/P1, method,
+> architecture, GPU, outer test and claim remain zero. See the
+> [exact correction](docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md).
+
 > **2026-08-12 schema 9.9 scientific deployment/private interim
 > verification:** Exact scientific source
 > `ea30894b3df3721c22c2f2f312aac9cbb9990e18` passed

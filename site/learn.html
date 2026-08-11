@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="뇌동맥류 false-positive mimic, 자동화 편향, reference escalation, IAVS CFD utility, 독립 환자 단위와 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="ADAM baseline/follow-up, treated-exclusion label, surface-vector 구조 가설, 독립 환자 단위와 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#adam-longitudinal">ADAM longitudinal</a>
       <a href="#diagnostic-action">Diagnostic action</a>
       <a href="#longitudinal-reliability">Longitudinal &amp; reliability</a>
       <a href="#neck-isolation">Neck &amp; isolation</a>
@@ -72,18 +73,87 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 9.9</span>
-          <strong>임상적으로 실제인 자동화 편향도 공개 reference/action contract와 독립 novelty가 없으면 연구 주제로 승인되지 않습니다.</strong>
+          <span>짧은 답 · schema 10.0</span>
+          <strong>같은 환자의 follow-up 영상이 있다고 해서 성장·치료 반응이라는 학습 정답이 자동으로 생기지는 않습니다.</strong>
           <p>
-            최신 여섯 후보는 29.5/27.0/26.0/26.0/25.0/24.5이고 모두
-            기각됐습니다. IAVS의 CFD applicability, contrast-retention functional,
-            MARTA risk, cross-view localization과 generic deferral가 직접 선행이며,
-            공개 자산은 환자 영상·expert reference·reader action·outcome을 연결하지
-            못합니다. Mimic taxonomy와 환자 단위 recommendation/acquisition action은
-            좋은 평가 원칙이지만 아직 contribution이 아닙니다. Surface-vector와 과거
-            no-verdict 기록은 보존하되 P0/P1, method, architecture, scientific-server
-            query, GPU와 outer test는 모두 0입니다.
+            최신 여섯 후보는 28.5/28.0/28.0/27.0/27.0/24.5이고 모두
+            기각됐습니다. ADAM 113 training cases 중 35명이 두 시점을 갖지만 exact
+            public pair·lesion correspondence·growth truth는 없습니다. Label 2는 치료된
+            동맥류와 artifact를 섞은 rough ignored region이라 치료 결과도 아닙니다.
+            Surface-vector의 stability→matched-failure 순서는 보존하지만 architecture는
+            고르지 않았습니다. Terms, payload, P0/P1, method, scientific-server query,
+            GPU와 outer test는 모두 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="adam-longitudinal">
+          <span>ADAM의 baseline/follow-up과 label 2를 처음부터 이해하기</span>
+          <strong>“두 시점이 있다”는 관측 구조와 “무엇이 변했는지 안다”는 정답 구조는 다릅니다.</strong>
+          <p>
+            ADAM은 TOF-MRA에서 <em>untreated, unruptured intracranial aneurysm</em>을
+            찾아 분할하는 MICCAI 2020 challenge입니다. Training은 113 cases로,
+            aneurysm-positive 93과 negative 20으로 구성됩니다. Positive 쪽에는 같은
+            사람의 baseline 35 scans와 6개월보다 뒤의 follow-up 35 scans, 그리고 한
+            번만 촬영된 23 subjects가 있습니다. 즉 70 paired scans의 독립 환자는
+            70명이 아니라 35명입니다. Scan, timepoint와 lesion을 환자처럼 세면 표본
+            수와 confidence가 부풀어 오릅니다.
+          </p>
+          <p>
+            Pair가 있다는 것만으로 <em>growth label</em>이 생기지는 않습니다. 공개
+            source에는 어느 두 file이 한 사람인지 알려 주는 exact manifest, 여러
+            lesion 중 어느 것이 같은 lesion인지 알려 주는 correspondence, 실제로
+            자랐는지를 adjudicate한 label이 없습니다. Baseline/follow-up mask를 빼서
+            나온 부피 차이에는 registration, scan resolution, intensity와 contour
+            variability가 함께 들어갑니다. 그래서 mask difference를 biological growth로
+            부를 수 없습니다.
+          </p>
+          <p>
+            Label 2의 의미도 중요합니다. Label 1은 untreated/unruptured aneurysm으로
+            challenge의 실제 target입니다. Label 2는 <b>treated aneurysm 또는
+            treatment-related artifact</b>를 한데 묶은 rough mask입니다. Official
+            reference는 이 mask를 in-plane으로 한 pixel 확장하고 evaluation에서
+            ignore합니다. 따라서 label 2는 residual filling, complete occlusion,
+            device type, retreatment 필요성 또는 임상 action을 구분하지 못합니다.
+          </p>
+          <p>
+            2025 MSDA-Net paper는 ADAM을 78 “distinct/baseline”과 35
+            “post-treatment (follow-up)”로 표기합니다. 하지만 follow-up은 시간 관계이고,
+            treatment-related label 2는 별도로 존재하면서 평가에서 제외됩니다. Private
+            Uppsala post-treatment cohort도 별도입니다. AURORA는 이 충돌을 bounded
+            source correction으로 기록합니다. 논문 전체가 틀렸다고 단정하지 않지만,
+            이 표현을 새 post-treatment ground truth로 재사용하지도 않습니다.
+          </p>
+          <p>
+            Longitudinal measurement에는 이미 강한 direct prior가 있습니다. 72 patients,
+            84 aneurysms의 paired MRA 연구에서 2D change ICC는 0.5 미만으로 낮았고
+            3D change ICC도 0.76이었습니다. Registration, serial volumetry,
+            adjacent-vessel internal control, longitudinal consistency와 selective/conformal
+            false-output control도 기존 방법입니다. 따라서 Siamese U-Net, temporal
+            consistency loss, calibrated growth head라는 이름만으로 residual novelty가
+            생기지 않습니다.
+          </p>
+          <p>
+            접근 가능성도 별도 gate입니다. ADAM은 complete team registration과 signed
+            confidentiality agreement를 요구하고 재배포를 금지합니다. Challenge 외 연구
+            사용은 prior participation과 organizer approval가 필요합니다. AURORA는 terms를
+            수락하거나 approval를 얻거나 payload를 다운로드하지 않았습니다. Sealed test도
+            공개 outer test로 간주하지 않습니다.
+          </p>
+          <p>
+            그래서 가장 강한 patient-level all-lesion correspondence 후보도 중요도는
+            5이지만 identifiability 3, novelty 2, asset 2로 총 28.5에 그칩니다. 높은
+            baseline·figure 점수가 핵심 결함을 보상하지 않습니다. Re-entry에는 lawful
+            versioned pair manifest, lesion correspondence, adjudicated change/action target,
+            patient-disjoint confirmation과 기존 longitudinal measurement로 설명되지 않는
+            failure mechanism이 함께 필요합니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">35 paired subjects · not 70 patients</span>
+            <span class="no">Follow-up ≠ post-treatment outcome</span>
+            <span class="no">Label 2 = rough ignored mixture</span>
+            <span class="no">No public pair · lesion · growth contract</span>
+            <span class="no">No terms · payload · P0 · model · server · GPU</span>
+          </div>
+          <a href="../docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md">official semantics, six frozen scores와 re-entry contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="diagnostic-action">
           <span>False-positive mimic, 자동화 편향과 진단 행동을 처음부터 이해하기</span>

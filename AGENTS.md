@@ -1,5 +1,33 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 ADAM longitudinal/treated-exclusion correction · schema 10.0:**
+> 전달된 surface-vector 분석에서는 field accuracy와 structure fidelity의
+> 분리, task stability→matched failure→bounded development→fresh confirmation
+> 순서만 채택한다. Edge-1-form/Hodge/SE(3)/periodic/structural-loss는 선택된
+> architecture나 novelty가 아니라 unselected direct-prior control이다. Material
+> E0와 관측된 구조 failure가 없어 surface-vector는 inactive이고 closed job
+> `115645.ECE-util1`은 0/10 no-verdict로 repair/rerun하지 않는다.
+>
+> Official ADAM training 113 case는 positive 93/negative 20이며 35
+> baseline+follow-up subject pair와 23 unique positive subject를 포함한다. Scan,
+> timepoint, lesion은 independent patient가 아니다. Public exact pair/lesion
+> manifest와 growth adjudication은 없다. Label 2는 treated aneurysm 또는
+> treatment artifact의 rough mask이고 in-plane 1 pixel dilation 뒤 official
+> evaluation에서 ignore된다. Remnant, occlusion, treatment response나 action
+> target으로 해석하지 않는다. MSDA-Net의 78 baseline/distinct + 35
+> post-treatment(follow-up) 표현은 bounded semantics correction일 뿐 invalidity
+> 판정이나 contribution이 아니다.
+>
+> Fresh scores 28.5/28.0/28.0/27.0/27.0/24.5는 모두 기각한다. ADAM
+> registration/agreement/organizer approval, payload, P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test, result, C21과
+> claim은 0이다. Future gate-authorized work는 `introai9` PBS만 사용하고
+> login-node GPU를 금지한다. `junjinyong`에는 절대 접속·조회·전송·제출·
+> 모니터링하지 않는다.
+> Full regression은 429개 중 363 pass/66 dependency skip, machine protocol
+> 76 invariant group, site link/anchor/asset, JSON/JavaScript와 diff hygiene가
+> 통과했다.
+
 > **2026-08-12 schema 9.9 scientific deployment·private interim
 > synchronization:** Exact scientific source
 > `ea30894b3df3721c22c2f2f312aac9cbb9990e18` passed Quality

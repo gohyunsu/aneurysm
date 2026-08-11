@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.0 submission boundary · 2026-08-12:** Do not title the paper
+> around “structure-faithful” component stacking, longitudinal ADAM
+> segmentation, treatment-aware label 2 or paired-mask growth. The surface
+> failure is unobserved, ADAM pair/lesion/growth ground truth is not public and
+> label 2 is an ignored mixed exclusion mask. The six candidates peak at
+> 28.5/40. No title, abstract claim, contribution, method figure, table, C21,
+> terms, payload, P0/P1, model or GPU is authorized. Re-entry needs an
+> identifiable patient-level target, lawful versioned asset and a
+> non-compositional failure mechanism confirmed on fresh units.
+
 > **Schema 9.9 submission boundary · 2026-08-12:** Do not title an ISBI paper
 > around automation-bias-aware display, mimic abstention, IAVS CFD utility,
 > contrast retention, real-biplane fusion or imaging-augmented MARTA risk. The

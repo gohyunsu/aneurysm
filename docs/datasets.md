@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.0 ADAM boundary · 2026-08-12:** Training has 113 cases (93
+> positive, 20 negative), including 35 paired subjects and 23 unique positive
+> subjects. The sealed test is reported as 141 cases (115 positive, 26
+> negative), including 43 paired and 29 unique positive subjects. Public exact
+> pair IDs, lesion correspondence and growth adjudication are absent. Label 2
+> means treated aneurysm or treatment artifact, is rough, dilated one pixel
+> in-plane and ignored; it is not an outcome label. Registration and a signed
+> agreement are required, and non-challenge reuse needs organizer approval.
+> AURORA accepted no terms, obtained no approval and accessed no payload.
+
 > **Schema 9.9 asset boundary · 2026-08-12:** No active dataset is opened. The
 > automation-bias study's 20 examinations/9 readers and the 7 T source's six
 > patients are reported study cohorts, not versioned public reader/reference

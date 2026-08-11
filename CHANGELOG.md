@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-12 · ADAM longitudinal semantics corrected and rejected · schema 10.0
+
+- Retained the supplied surface-vector task-stability → matched-failure →
+  bounded-development → fresh-confirmation order, but kept its architecture
+  modules as unselected direct-prior controls. No material E0 or observed
+  structural failure was identified; closed job `115645` remains unrepaired.
+- Corrected ADAM units: 113 training cases include 35 paired subjects, not 70
+  independent patients or 35 known interventions. The public source exposes no
+  exact pair/lesion manifest or adjudicated growth target.
+- Corrected label 2: it merges treated aneurysm and treatment artifact, is a
+  rough one-pixel-dilated ignored region and cannot label remnant, occlusion,
+  treatment response or clinical action.
+- Recorded the 2025 MSDA-Net “post-treatment (follow-up)” wording as bounded
+  source-semantic provenance, not a new ground truth or method contribution.
+- Froze six candidates at 28.5/28.0/28.0/27.0/27.0/24.5. All fail total or
+  critical identifiability/novelty/asset floors. Accepted no ADAM terms, read no
+  payload, queried no scientific server and opened no P0/model/GPU/claim.
+- Added a fail-closed machine invariant, regression test, detailed audit and
+  beginner-facing site chapter. `junjinyong` remains completely excluded.
+- Full regression is 429 tests: 363 pass and 66 optional-dependency skips. The
+  machine protocol passes 76 invariant groups; site links/anchors/assets,
+  JavaScript, JSON and diff hygiene pass.
+
 ## 2026-08-12 · Schema 9.9 scientific source deployed and privately pinned
 
 - Exact scientific source `ea30894b3df3721c22c2f2f312aac9cbb9990e18`

@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 10.0 direction · 2026-08-12:** Preserve surface-vector only as an
+> inactive, falsifiable structure question. The scientifically sound order is
+> stability, field-error-matched failure, bounded validation-only development,
+> fresh confirmation and external interpretation; the proposed modules are
+> controls, not novelty. Do not pivot to ADAM longitudinal or post-treatment
+> modeling. Thirty-five train pairs lack public pair/lesion/growth truth, and
+> ignored mixed label 2 is not a treatment outcome. Six rows peak at 28.5/40.
+> Continue fresh problem/material-asset discovery with no terms, P0 or compute.
+> [Exact correction](adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md)
+
 > **Schema 9.9 direction · 2026-08-12:** Do not pivot to mimic-aware selective
 > diagnosis, IAVS CFD-applicability certification, contrast-retention
 > surrogation, real-biplane fusion, treatment-risk augmentation or evidence-
