@@ -7293,7 +7293,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or source_watch_v13["extends_historical_config"]
         != "configs/source_watch_v12.json"
         or source_watch_v13["config_sha256"]
-        != "c24c4f88391c3a9712b9932b54fb3c8c83362bd6dfbc6d069eaa4efe20ff9e8f"
+        != "9c7d8350ffb0bfe992c20c2736537296d027bedc48d9e017bcee38337fb6d10b"
         or source_watch_v13["watch_count"] != 20
         or source_watch_v13["added_watch_ids"]
         != [

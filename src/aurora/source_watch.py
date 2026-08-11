@@ -1413,12 +1413,14 @@ def _validate_v13(payload: Mapping[str, Any]) -> None:
         {"name": "LSTM_model.py", "type": "file", "size": 13061},
         {"name": "navi_feature.py", "type": "file", "size": 6195},
         {"name": "pipeline.py", "type": "file", "size": 42564},
+        {"name": "PlotLosses.py", "type": "file", "size": 1687},
         {"name": "project.py", "type": "file", "size": 4433},
         {"name": "raw_data", "type": "dir", "size": 0},
         {"name": "viz_utils.py", "type": "file", "size": 42496},
     ]
     expected_material = [
         "LSTM_model.py",
+        "PlotLosses.py",
         "attention.py",
         "constant_value.py",
         "feature.py",
