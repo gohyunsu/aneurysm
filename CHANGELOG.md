@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-11 · Surface-vector analysis follow-up tightens the result contract
+
+- Clarified that hypothetical model quality cannot substitute for E0 source
+  admission, E1 endpoint stability or E2 field-error-matched failure evidence.
+- Defined a future positive result as joint patient/family-level field
+  non-inferiority, stable structural superiority, bootstrap uncertainty and
+  matched-case interpretation—not a best validation run.
+- Added the 458-patient qDSA injection-standardization/occlusion-prediction
+  study as a direct prior. It does not provide a versioned patient release and
+  does not open a new source, method or compute gate.
+- Kept jobs `115645`/`115684` closed and opened no P0/P1, architecture,
+  scientific-server query, PBS/GPU, outer test, result row or paper claim.
+
 ## 2026-08-11 · Schema 8.5 scientific content deployed
 
 - Exact public scientific content `6ceff3e1f5554a7d640089e14ef6808956b782c9`

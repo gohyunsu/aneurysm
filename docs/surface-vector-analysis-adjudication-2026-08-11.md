@@ -60,6 +60,28 @@ temporal decoding도 이미 알려진 inductive bias다. 따라서 미래 eviden
 endpoint로 failure를 확인하고, 그 failure와 직접 연결되는 가장 작은 intervention만
 bounded development에서 검토한다.
 
+### 좋은 architecture와 성능은 admission 근거가 아니다
+
+“충분히 좋은 architecture와 성능이 나오면 ISBI에서 경쟁력이 있다”는 조건문은
+결과적으로는 맞지만 현재 의사결정에는 거의 정보를 주지 않는다. 성능은 이미
+식별된 task와 독립 단위, 고정된 reference, 실행 가능한 development/confirmation
+asset 위에서만 정의된다. 현재는 그 전제들이 충족되지 않았다. 따라서 validation
+MSE나 구조 metric이 좋아질 가능성을 source·task gate를 건너뛸 근거로 사용하지
+않는다.
+
+미래의 “좋은 성능”도 단일 best run이 아니라 다음 joint criterion을 뜻해야 한다.
+
+1. 환자 또는 base-geometry-family 단위의 fresh confirmation에서 field error가
+   사전 정의된 non-inferiority margin을 넘지 않는다.
+2. Signed-degree validity/efficiency와, E1에서 안정성이 확인된 secondary point·track
+   endpoint가 compute- 및 field-error-matched strong controls보다 개선된다.
+3. Seed, remeshing, tolerance와 boundary-margin 변화에 결론이 유지되고, 실패하기
+   쉬운 case를 숨기지 않는 patient/family bootstrap uncertainty를 보고한다.
+4. 동일 좌표계·color scale의 실제 surface figure가 aggregate metric의 개선이 어떤
+   failure를 바로잡았는지 보여 준다.
+
+이 네 조건은 E4/E5의 결과 계약이지 E0 admission 조건을 대신하지 않는다.
+
 ## 3. 무엇을 명시적으로 기각하는가
 
 다음은 contribution이나 novelty 문장으로 사용할 수 없다.
@@ -111,4 +133,3 @@ server query, PBS/GPU, outer test, result row와 paper contribution은 모두 0�
 다음 허용 작업은 닫힌 job의 repair가 아니라 **fresh problem-level source/asset
 audit**다. AURORA는 gate 이후에도 `introai9` PBS만 사용하며 `junjinyong`에는
 접속·조회·전송·제출·모니터링하지 않는다.
-

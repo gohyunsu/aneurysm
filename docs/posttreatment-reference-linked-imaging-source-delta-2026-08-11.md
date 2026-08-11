@@ -59,6 +59,18 @@ agreement. The new paper itself evaluates the paired modalities and proposes
 non-invasive substitution. A model must therefore solve a residual problem;
 “PETRA is better than TOF” is not that problem.
 
+The adjacent outcome-prediction space is also more occupied than a generic
+measurement-aware model would suggest. A 458-patient
+[quantitative-angiography study](https://arxiv.org/abs/2503.10887) already
+deconvolves the parent-artery input, reconvolves an idealized injection curve,
+and predicts six-month flow-diverter occlusion from the standardized
+angiographic response. It reports AUROC changing from 0.60±0.05 before the
+correction to 0.79±0.02 after it and adds per-case LIME explanations. The study
+is single-center, uses self-adjudicated outcomes and does not link a versioned
+patient dataset or code release. These limitations motivate external
+validation; they do not make injection normalization, an explanation head or
+occlusion prediction an unoccupied AURORA contribution.
+
 ### 2.2 Helsinki DWI and occlusion cohort
 
 The prospective study

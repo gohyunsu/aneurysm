@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 surface-vector analysis follow-up · schema 8.5 overlay:**
+> Application question과 E0→E5 evidence ladder는 유지하지만 “좋은 architecture와
+> 성능이면 경쟁력이 있다”는 조건문은 admission 근거가 아니다. Good performance는
+> E4/E5에서 fresh patient/family confirmation, field non-inferiority, stable
+> structure superiority, bootstrap uncertainty와 matched case figure를 함께 만족할
+> 때만 의미가 있다. 458-patient qDSA direct prior는 injection deconvolution+
+> standardized reconvolution+six-month occlusion DNN+LIME를 이미 수행하므로
+> measurement normalization/explanation도 novelty가 아니다. 새 source/asset gate,
+> P0/P1, method, architecture, server query, PBS/GPU와 claim은 열지 않는다.
+> `introai9`는 future gate-authorized PBS만 허용하며 login-node GPU command를
+> 금지한다. `junjinyong`에는 절대 접속·조회·전송·제출·모니터링하지 않는다.
+
 > **2026-08-11 schema 8.5 deployment verification:** Exact scientific content
 > `6ceff3e1f5554a7d640089e14ef6808956b782c9` passed Quality
 > `31468054437` and Pages `31468053500`. Live Overview/Learn expose the

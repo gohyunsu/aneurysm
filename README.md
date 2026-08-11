@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 surface-vector analysis follow-up · schema 8.5 overlay:** The
+> field-error-versus-structure question and E0→E5 evidence ladder are retained,
+> but hypothetical architecture performance is not source admission. A future
+> result must jointly show fresh patient/family-level field non-inferiority,
+> stable structural superiority, uncertainty and matched-case interpretation.
+> A 458-patient qDSA direct prior already performs injection deconvolution,
+> standardized reconvolution, six-month occlusion prediction and LIME, so
+> measurement normalization or explanation is not an adjacent novelty escape.
+> No lead, P0/P1, method, architecture, server query, PBS/GPU, outer test or
+> claim is opened. [Exact adjudication](docs/surface-vector-analysis-adjudication-2026-08-11.md)
+
 > **2026-08-11 schema 8.5 deployment verification:** Exact scientific content
 > `6ceff3e1f5554a7d640089e14ef6808956b782c9` passed GitHub-hosted Quality
 > `31468054437` and Pages `31468053500`. The live Overview and Learn pages show

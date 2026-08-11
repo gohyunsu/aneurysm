@@ -44,7 +44,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "A clear DSA/DWI reference still needs an executable image asset",
-      copy: "A prospective 100-patient study pairs PETRA-MRA, TOF-MRA and DSA at postoperative day 1 and six months, but raw images are author-request only. Helsinki reports DWI for 119 treated patients and six-month angiographic follow-up for 113, while researcher-initiated sharing requires an official FINDATA decision. The only open clipped-aneurysm source is an Excel/PDF table for 58 patients, not raw images. SelectiveNet, learning to defer, conformal risk control and prior PETRA/SILENT MRA comparison remove the obvious method novelty. Six formulations score 28.5/27.5/26.5/26.5/26.0/24.5 and are rejected.",
+      copy: "A prospective 100-patient study pairs PETRA-MRA, TOF-MRA and DSA at postoperative day 1 and six months, but raw images are author-request only. Helsinki reports DWI for 119 treated patients and six-month angiographic follow-up for 113, while researcher-initiated sharing requires an official FINDATA decision. The only open clipped-aneurysm source is an Excel/PDF table for 58 patients, not raw images. SelectiveNet, learning to defer, conformal risk control and prior PETRA/SILENT MRA comparison remove the obvious method novelty. A 458-patient qDSA study additionally occupies injection deconvolution, standardized reconvolution, six-month occlusion prediction and LIME. Six formulations score 28.5/27.5/26.5/26.5/26.0/24.5 and are rejected.",
       status: "Best 28.5/40 rejected · image payload/P0/method/architecture/server/GPU 0",
       url: "../docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md"
     },
@@ -868,6 +868,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.11",
+      category: "analysis",
+      title: "Surface-vector follow-up separates result quality from admission",
+      copy: "The application question and E0→E5 ladder remain, but hypothetical model performance cannot substitute for source admission, endpoint stability or matched baseline failure. A future positive result must jointly show fresh patient/family field non-inferiority, stable structure superiority, bootstrap uncertainty and matched-case interpretation. A 458-patient qDSA direct prior already occupies injection standardization, occlusion prediction and LIME. No source, P0/P1, architecture, server query, PBS/GPU, outer test or claim is opened.",
+      files: ["docs/surface-vector-analysis-adjudication-2026-08-11.md", "docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md", "README.md", "AGENTS.md", "site/learn.html", "site/assets/research-data.js", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.11",
       category: "deployment",
