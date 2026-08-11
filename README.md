@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-11 schema 8.9 deployment verification:** Exact scientific source
+> `646698c66c1eed75ecd4466823bb2cc18ed5ca98` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31479001176) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31479000353).
+> Private ledger `6b3dcb87a2c49e40e07ae2113605362eedcf4f0e` remains PRIVATE and
+> preserves the manuscript and references byte-for-byte. This is provenance
+> only; it opens no lead, P0/P1, method, architecture, server query, PBS/GPU,
+> outer test, result row or claim.
+
 > **2026-08-11 MRIS-Bench target-contract audit · schema 8.9:** A large public
 > MRIS repository is not an automatic paper pivot. Exact revision `6f2d6d9…`
 > reports 30,110 rows and exposes eight Arrow shards, but its under-review card

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-11 · Schema 8.9 deployed and privately pinned
+
+- Exact scientific source `646698c66c1eed75ecd4466823bb2cc18ed5ca98`
+  passed Quality `31479001176` and Pages `31479000353`.
+- Private ledger `6b3dcb87a2c49e40e07ae2113605362eedcf4f0e` is remote exact and
+  PRIVATE; manuscript and references hashes are unchanged.
+- Live Overview, Learn and change history expose the 24.0/40 critical-floor
+  rejection, thirteen-source watch and no-model/no-compute boundary. This
+  provenance creates no scientific result or claim.
+
 ## 2026-08-11 · MRIS-Bench target contract rejected; thirteen-source watch · schema 8.9
 
 - Audited exact public MRIS-Bench revision `6f2d6d9…`: 30,110 reported rows,

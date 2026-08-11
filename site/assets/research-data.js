@@ -911,6 +911,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.11",
+      category: "deployment",
+      title: "Schema 8.9 exact contract is deployed and privately pinned",
+      copy: "Exact public scientific source 646698c66c1eed75ecd4466823bb2cc18ed5ca98 passed Quality 31479001176 and Pages 31479000353. Private ledger 6b3dcb87a2c49e40e07ae2113605362eedcf4f0e remains PRIVATE and preserves manuscript and references byte-for-byte. Live Overview and Learn expose the 24.0/40 critical-floor rejection, thirteen-source watch and no-model/no-compute state. This provenance creates no lead, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.11",
       category: "analysis",
       title: "Schema 8.9 rejects the MRIS-Bench pivot and adds a fail-closed target-contract watch",
       copy: "Exact public MRIS-Bench metadata exposes 30,110 rows and eight Arrow shards, but the under-review release has no mask target, patient grouping, split, source lineage or annotation protocol. Visible viewer inconsistencies are recorded only as a warning, never a dataset-wide error estimate. Direct MRIS and medical-VLM priors occupy the obvious model mechanisms. Six candidates freeze at 24.0/23.5/23.0/22.5/22.0/21.0 and all fail critical floors. Source watch v9 matches all thirteen snapshots and can request only a fresh audit. Surface-vector remains inactive; no payload, P0/P1, method, architecture, server query, PBS/GPU, outer test, result row or claim is opened.",

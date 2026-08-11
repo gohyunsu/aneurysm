@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-11 schema 8.9 deployment·private synchronization:** Exact public
+> scientific source `646698c66c1eed75ecd4466823bb2cc18ed5ca98` passed
+> Quality `31479001176` and Pages `31479000353`. Private paper ledger
+> `6b3dcb87a2c49e40e07ae2113605362eedcf4f0e` is remote exact and PRIVATE.
+> `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`;
+> references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization is provenance only and creates no lead, P0/P1, method,
+> architecture, scientific-server query, PBS/GPU, outer test, result row, C21
+> or claim. Future authorized execution is `introai9` PBS only; never access,
+> query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-11 MRIS-Bench target-contract audit · schema 8.9:** Exact public
 > HF revision `6f2d6d9…` reports 30,110 rows and exposes eight Arrow shards,
 > but the under-review release has no public mask field, patient grouping,
