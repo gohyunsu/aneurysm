@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.1 experiment boundary · 2026-08-12:** The device-planning/
+> mechanistic-occlusion batch admits zero candidates. Do not request private
+> NeurAneuNet rows, download paired MRI or simulation payload, construct a
+> cross-source pseudo-cohort, register P0/P1, select a model, query a scientific
+> server or create PBS/GPU work. Re-entry requires one lawful versioned cohort
+> joining pre-operative 3D image, exact device deployment, registered early
+> flow/thrombus and delayed occlusion/safety at the same patient/lesion unit.
+> Even then, admission opens only a prospective method-free asset P0.
+
 > **Schema 10.0 experiment boundary · 2026-08-12:** The ADAM semantics batch
 > admits zero candidates. Do not register/sign terms, contact organizers for
 > this rejected task, stage images, infer pair IDs, repair a historical job,

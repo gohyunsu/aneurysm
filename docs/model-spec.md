@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.1 no-model boundary · 2026-08-12:** No device planner, mesh GNN,
+> thrombosis surrogate, differentiable simulator, virtual-DSA renderer or
+> outcome head is selected. NeurAneuNet and device-resolved clot simulation
+> already occupy the obvious modules; a joint model would train against
+> incompatible source identities rather than a patient-level treatment
+> estimand. Model design remains closed until a joined outcome asset passes a
+> new method-free gate. Surface edge/Hodge/equivariant modules remain controls.
+
 > **Schema 10.0 no-model boundary · 2026-08-12:** No model is selected.
 > Surface-vector task stability and matched failure must be observed before an
 > edge-1-form/Hodge/SE(3)/periodic operator is even a proposal; those elements

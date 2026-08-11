@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.1 submission boundary · 2026-08-12:** Do not title the paper
+> around AI PED planning, hemodynamics-guided device choice, acute thrombosis
+> surrogation or virtual DSA. Direct priors already own expert planning and
+> mechanistic simulation, while no public patient-level asset connects them to
+> delayed benefit or harm. The six rows peak at 26.5/40. No title, abstract
+> claim, contribution, method figure, result table, C21, payload, P0/P1, model
+> or GPU is authorized. A future identity requires an outcome-grounded
+> estimand, a lawful joined cohort, an observed geometry/expert-baseline failure
+> and fresh patient-level confirmation—not a fancier architecture.
+
 > **Schema 10.0 submission boundary · 2026-08-12:** Do not title the paper
 > around “structure-faithful” component stacking, longitudinal ADAM
 > segmentation, treatment-aware label 2 or paired-mask growth. The surface

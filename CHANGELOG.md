@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-12 · Device planning and mechanistic occlusion rejected · schema 10.1
+
+- Added NeurAneuNet as a direct prior for 3DRA-to-PED size/landing-zone planning
+  and six-reader AI assistance, while bounding its endpoint to expert-consensus
+  deployment adequacy rather than durable outcome.
+- Added the device-thrombosis/virtual-DSA preprint as a direct mechanistic prior:
+  three treatment strategies on three representative geometries, without
+  clinical follow-up validation or a versioned simulation-output cohort.
+- Kept the paired 33/38-dataset 4D-flow/black-blood material at its true two-
+  anatomy unit and did not equate volume vortices with surface-WSS topology.
+- Froze six candidates at 26.5/25.0/24.5/24.5/24.0/23.5. All fail total or
+  critical novelty, asset and independent-unit floors; no P0/model/compute or
+  paper identity opened.
+- Added a fail-closed schema 10.1 invariant, regression test, exact audit and
+  beginner-facing site explanation. No scientific server was queried;
+  `junjinyong` remains completely excluded.
+- Full regression passed 364 tests with 66 optional-dependency skips out of
+  430. The protocol reports 77 invariant groups; JSON, JavaScript, site links,
+  anchors, assets and diff hygiene pass.
+
 ## 2026-08-12 · Schema 10.0 scientific source deployed and privately pinned
 
 - Exact scientific source `d7cf037cfd7b1833f12a0f90d24a8b070c0d7df6`

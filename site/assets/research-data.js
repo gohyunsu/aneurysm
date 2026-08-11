@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · ADAM longitudinal/treated-exclusion best 28.5/40 rejected; all six fail total or critical identifiability/novelty/asset floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; surface-vector stability and matched-failure remain a future gate order only, no ADAM terms, payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · device-planning/mechanistic-occlusion best 26.5/40 rejected; all six fail total or critical novelty/asset/independent-unit floors · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh versioned problem/material-asset audit; re-entry requires one patient-level preoperative-image/device/early-mechanism/delayed-outcome join, while surface-vector remains inactive, no payload, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Expert device planning and mechanistic occlusion still do not identify patient benefit",
+      copy: "NeurAneuNet already maps 3DRA to PED size and landing zones and evaluates AI assistance on 21 cases with six readers. Its reference is three-senior-reader consensus on wall apposition, length and diameter, not durable occlusion or safety; the data are request-only. A May 2026 preprint already models coiling, flow diversion and stent-assisted coiling with acute fibrin, contrast transport and virtual DSA, but on three representative geometries without clinical follow-up or released outputs. Paired 4D-flow/black-blood releases contain 33/38 datasets and 15 devices but only two source patient anatomies. No public patient-level asset joins pre-operative image, exact deployment, early mechanism and delayed outcome. Six candidates score 26.5/25.0/24.5/24.5/24.0/23.5 and all fail the non-compensatory gate.",
+      status: "Best 26.5/40 rejected · joined outcome asset 0 · lead/P0/method/model/server/GPU 0",
+      url: "../docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "A follow-up scan is not a treatment or growth ground truth",
@@ -975,6 +982,11 @@ window.AURORA_DATA = Object.freeze({
       provenance: "MIT v1.0.0 · one patient-specific aneurysm mesh · Newtonian/Carreau × no/partial slip · repository tree/README only · generated fields 0"
     },
     {
+      name: "NeurAneuNet + device-thrombosis direct-prior boundary",
+      role: "source-rejected treatment-planning/mechanistic-occlusion branch; outcome-grounded planning evaluation template only",
+      provenance: "600 reported aneurysms = 390 non-PED + 210 PED-treated · PED 147/21/42 cases, patient-disjointness unstated · 21-case/6-reader study · request-only data · acute clot/virtual DSA on 3 representative geometries · no joined patient outcome asset · payload/P0/model/GPU 0"
+    },
+    {
       name: "OpenNeuro ds005096",
       role: "TOF-MRA external modality/geometry stress only",
       provenance: "63 patients/85 aneurysms · selected-session expert masks/STL · 24 longitudinal subjects but not longitudinal dense supervision"
@@ -1011,6 +1023,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.1 rejects device-planning and mechanistic-occlusion pivots",
+      copy: "NeurAneuNet directly occupies 3DRA-to-PED size/landing-zone planning and clinician assistance, but its endpoint is expert deployment consensus rather than delayed patient benefit and its data are request-only. Device-resolved thrombosis and virtual DSA are also direct prior on three representative geometries without clinical follow-up or versioned outputs. The paired physical bridge has only two source patient anatomies. Six frozen rows score 26.5/25.0/24.5/24.5/24.0/23.5; all fail total or critical novelty, asset and independent-unit floors. Outcome-grounded planning remains evaluation-only, volume vortices are not equated with surface-WSS topology, and no payload, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test or claim opens.",
+      files: ["docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "AGENTS.md", "CHANGELOG.md", "docs/research-direction.md", "docs/research-map.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.0 scientific source is live and privately pinned",
+      copy: "Exact scientific source d7cf037cfd7b1833f12a0f90d24a8b070c0d7df6 passed Quality 31516119754 and Pages 31516119241. Private ledger f0d172d8fa5f5578de487c532399532949b66198 is remote exact and PRIVATE; manuscript and references remain byte-for-byte unchanged. Live Overview and Learn expose the ADAM semantics correction, retained surface-vector evidence order and no-model/no-compute boundary. This provenance creates no lead, terms, P0/P1, method, architecture, scientific-server query, PBS/GPU, outer test, result row, C21 or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

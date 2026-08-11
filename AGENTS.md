@@ -1,5 +1,37 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 device-planning/mechanistic-occlusion reappraisal · schema
+> 10.1:** NeurAneuNet (`10.1002/cns.71047`) already maps pre-operative 3DRA to
+> PED size and landing zones and reports a 21-case/six-reader assistance study;
+> its reference is three-senior-reader consensus on deployment adequacy, not
+> durable occlusion, safety or patient utility. Its 600 reported aneurysms split
+> into 390 non-PED and 210 PED-treated cases; the 147/21/42 PED partitions are
+> preserved as cases because patient-disjointness is not explicitly stated.
+> Data are request-only with ethics/DUA and the inspected paper states no public
+> code release.
+>
+> The exact device-thrombosis direct prior `arXiv:2605.03536v1` already couples
+> coiling, flow diversion and stent-assisted coiling to acute fibrin, contrast
+> transport and virtual DSA on three representative challenge geometries. It
+> has no clinical follow-up validation or versioned output cohort. The paired
+> 4D-flow/black-blood releases contain 33/38 datasets, five models, 15 devices
+> but only two source patient anatomies. Volume-flow vortex evidence is not
+> equivalent to signed surface-WSS critical points or worldlines and is no
+> surface-vector E0.
+>
+> Six fresh formulations score 26.5/25.0/24.5/24.5/24.0/23.5; all fail the
+> prospective non-compensatory gate. The best executable row is a two-anatomy
+> direct-prior phantom, while the strongest residual novelty belongs to an
+> unidentified counterfactual target. Outcome-grounded device planning remains
+> an evaluation template only. Active lead/paper identity/P0/P1/method/
+> architecture/server query/PBS/GPU/outer test/result/C21/claim are 0. No
+> scientific server was queried. Future gate-authorized execution is
+> `introai9` PBS only; prohibit login-node GPU and never access, query, transfer
+> to, submit to or monitor `junjinyong`.
+> Full regression is 430 tests: 364 pass and 66 optional-dependency skips. The
+> machine protocol passes 77 invariant groups; JavaScript, JSON, site link/
+> anchor/asset checks and diff hygiene pass.
+
 > **2026-08-12 schema 10.0 scientific deployment·private synchronization:**
 > Exact scientific source `d7cf037cfd7b1833f12a0f90d24a8b070c0d7df6`의
 > Quality `31516119754`와 Pages `31516119241`이 성공했고 live Overview/Learn은

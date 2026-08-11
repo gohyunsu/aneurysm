@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **Current research state (schema 10.1, 2026-08-12):** A fresh treatment-
+> planning screen rejects all six formulations at
+> **26.5/25.0/24.5/24.5/24.0/23.5**. NeurAneuNet already covers 3DRA-to-PED
+> size/landing-zone planning and clinician assistance, but its target is expert
+> deployment consensus rather than durable patient outcome and its data are
+> request-only. A May 2026 preprint already couples three device strategies to
+> acute fibrin and virtual DSA, but uses three representative geometries with
+> no clinical follow-up or released output cohort. The public paired MRI bridge
+> has only two source patient anatomies. No lawful versioned asset joins
+> pre-operative image, exact device placement, early flow/thrombus and delayed
+> occlusion/safety for the same patients. Architecture cannot repair that
+> missing estimand. Outcome-grounded device planning remains evaluation-only;
+> surface-vector remains inactive, and lead/P0/model/server/GPU/claim stay zero.
+> See the [exact reappraisal](docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 10.0 scientific deployment/private synchronization:**
 > Exact scientific source `d7cf037cfd7b1833f12a0f90d24a8b070c0d7df6`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31516119754)

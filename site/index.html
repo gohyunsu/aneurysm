@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — ADAM longitudinal·treated-exclusion 의미와 surface-vector 가설을 식별가능성, 직접 선행연구와 공개 자산 기준으로 재심사한 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — 뇌동맥류 device planning, mechanistic occlusion과 surface-vector 가설을 환자 수준 식별가능성, 직접 선행연구와 공개 자산 기준으로 재심사한 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,28 +40,30 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.0 · BEST 28.5 · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.1 · BEST 26.5 · ACTIVE LEAD 0</p>
         <h1>
-          A follow-up scan is not automatically<br>
-          <em>a treatment outcome.</em>
+          Planning a device is not the same as<br>
+          <em>proving patient benefit.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          여섯 fresh 후보는 <b>28.5/28.0/28.0/27.0/27.0/24.5</b>로 모두
-          기각됐습니다. Official ADAM training 113 case에는 35명의 baseline/follow-up
-          pair가 있지만, public exact pair·lesion correspondence·growth truth는 없습니다.
-          Label 2도 treated aneurysm과 treatment artifact를 섞은 rough ignored mask일
-          뿐 remnant, occlusion 또는 treatment response가 아닙니다. 따라서 follow-up을
-          post-treatment outcome으로 부르는 최근 표현은 provenance correction 대상이지
-          새 learning target이 아닙니다. Surface-vector 분석에서는 task stability와
-          field-error-matched failure를 먼저 검증한다는 순서만 채택했습니다.
-          Edge-1-form, Hodge, SE(3), periodic operator와 structural loss는 아직
-          direct-prior control이며 선택된 architecture가 아닙니다. ADAM terms, payload,
-          P0/P1, scientific server, model과 GPU는 열지 않았고 모든 no-verdict 기록도
-          그대로 유지합니다.
+          여섯 fresh 후보는 <b>26.5/25.0/24.5/24.5/24.0/23.5</b>로 모두
+          기각됐습니다. NeurAneuNet은 이미 3DRA에서 PED 크기와 landing zone을
+          추천하고 임상의 보조평가까지 수행하지만, 정답은 장기 환자 결과가 아니라
+          expert deployment consensus입니다. 최신 device-thrombosis 연구도 세 치료
+          전략의 급성 fibrin과 virtual DSA를 직접 모델링하지만 세 대표 geometry에
+          그치고 clinical follow-up이나 공개 output cohort가 없습니다. 공개 paired MRI도
+          두 source patient anatomy뿐입니다. 즉 pre-operative image, 정확한 device
+          placement, early flow/thrombus와 delayed occlusion/safety를 같은 환자에서 잇는
+          versioned asset이 없습니다. Fancy한 GNN이나 differentiable simulator는 이
+          missing estimand를 고칠 수 없습니다. Surface-vector는 task stability와
+          field-error-matched failure가 먼저인 inactive hypothesis로 유지합니다. Payload,
+          P0/P1, scientific server, model과 GPU는 열지 않았습니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#device-planning">Device planning과 outcome 이해하기</a>
+          <a class="button ghost" href="../docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md">Latest treatment reappraisal ↗</a>
           <a class="button ghost" href="learn.html#adam-longitudinal">ADAM pair와 label 2 이해하기</a>
           <a class="button ghost" href="../docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md">Latest ADAM source correction ↗</a>
           <a class="button ghost" href="learn.html#diagnostic-action">진단 행동과 자동화 편향 이해하기</a>
@@ -408,7 +410,7 @@
       <div class="architecture-notes">
         <article>
           <span>LATEST SOURCE VERDICT</span>
-          <p>ADAM projection-consistent 3D lesion-set 후보는 31.0/40입니다. MRA-derived MIP proxy와 dense direct prior 때문에 기각했고 active lead는 0입니다.</p>
+          <p>Device-planning/mechanistic-occlusion batch의 최고점은 26.5/40입니다. Expert planning과 acute mechanism은 direct prior이고 joined patient outcome asset이 없어 active lead는 0입니다.</p>
         </article>
         <article>
           <span>CLOSED P0</span>
@@ -678,7 +680,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>Additive best 32.0/40 rejected by critical floors · no active lead, method or paper identity</p>
+        <p>Latest best 26.5/40 rejected · no joined outcome asset, active lead, method or paper identity</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>

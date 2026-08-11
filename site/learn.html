@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="ADAM baseline/follow-up, treated-exclusion label, surface-vector 구조 가설, 독립 환자 단위와 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="뇌동맥류 device planning과 outcome, ADAM follow-up, surface-vector 구조 가설, 독립 환자 단위와 비보상형 research gate를 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#device-planning">Device planning</a>
       <a href="#adam-longitudinal">ADAM longitudinal</a>
       <a href="#diagnostic-action">Diagnostic action</a>
       <a href="#longitudinal-reliability">Longitudinal &amp; reliability</a>
@@ -73,17 +74,87 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 10.0</span>
-          <strong>같은 환자의 follow-up 영상이 있다고 해서 성장·치료 반응이라는 학습 정답이 자동으로 생기지는 않습니다.</strong>
+          <span>짧은 답 · schema 10.1</span>
+          <strong>장치 계획을 잘 흉내 내는 것과 환자에게 가장 좋은 치료를 고르는 것은 다른 문제입니다.</strong>
           <p>
-            최신 여섯 후보는 28.5/28.0/28.0/27.0/27.0/24.5이고 모두
-            기각됐습니다. ADAM 113 training cases 중 35명이 두 시점을 갖지만 exact
-            public pair·lesion correspondence·growth truth는 없습니다. Label 2는 치료된
-            동맥류와 artifact를 섞은 rough ignored region이라 치료 결과도 아닙니다.
+            최신 여섯 후보는 26.5/25.0/24.5/24.5/24.0/23.5이고 모두
+            기각됐습니다. Expert-consensus PED planning과 device-resolved acute
+            thrombosis는 이미 direct prior지만, pre-operative image부터 delayed
+            occlusion/safety까지 같은 환자에서 연결한 공개 자산은 없습니다.
             Surface-vector의 stability→matched-failure 순서는 보존하지만 architecture는
-            고르지 않았습니다. Terms, payload, P0/P1, method, scientific-server query,
-            GPU와 outer test는 모두 0입니다.
+            고르지 않았습니다. Payload, P0/P1, method, scientific-server query, GPU와
+            outer test는 모두 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="device-planning">
+          <span>Device planning, mechanistic occlusion과 patient outcome을 처음부터 이해하기</span>
+          <strong>“임상의가 선택한 장치와 일치한다”는 것은 “그 장치가 장기적으로 최선이다”와 같지 않습니다.</strong>
+          <p>
+            <b>PED</b>는 동맥류 안으로 들어가는 혈류를 줄이기 위해 parent vessel에
+            배치하는 flow-diverting stent입니다. 계획에는 device diameter와 length,
+            aneurysm neck 양쪽의 landing zone, 혈관 벽에 잘 밀착되는지가 포함됩니다.
+            이 단계의 질문은 “어떤 장치를 어디에 놓을 것인가?”입니다. 반면 outcome
+            질문은 수개월 뒤 완전 폐색, 재치료, 혈전색전 또는 출혈 합병증처럼 환자에게
+            실제로 일어난 결과를 묻습니다.
+          </p>
+          <p>
+            2026년 NeurAneuNet은 이미 3D rotational angiography를 분할하고 parent
+            vessel을 측정해 PED size와 landing zone을 추천합니다. 보고된 600 aneurysm은
+            non-PED 390과 PED-treated 210으로 나뉘며, PED model partition은
+            147/21/42 <em>cases</em>입니다. 논문이 patient-disjoint split을 명시하지
+            않으므로 AURORA는 이를 환자 수로 바꾸지 않습니다. 별도 21-case reader
+            study에는 여섯 neurointerventionalist가 참여했습니다.
+          </p>
+          <p>
+            이 연구의 reference PED는 세 senior specialist가 postoperative wall
+            apposition, length와 diameter를 보고 합의한 장치입니다. Source는 top-1
+            agreement 20/21, planning time 44.8% 감소와 NASA-TLX 33→21을 보고합니다.
+            이는 유용한 source evidence지만 AURORA 재현 결과가 아닙니다. 더 중요하게,
+            이 reference는 expert deployment adequacy이지 durable occlusion, safety 또는
+            patient utility가 아닙니다. 자료도 ethics approval와 DUA가 필요한 request-only
+            자산이고, inspected paper에는 public code release가 명시되지 않았습니다.
+          </p>
+          <p>
+            2026년 5월 device-thrombosis preprint는 다른 빈칸을 이미 채웁니다. Coiling,
+            flow diversion과 stent-assisted coiling을 geometry 안에 배치하고 pulsatile
+            flow, 급성 fibrin/porosity, contrast transport와 projection-based virtual
+            DSA를 연결합니다. 하지만 Flow Diverter 2016 challenge의 대표 geometry
+            세 개를 사용한 mechanistic demonstration이며 clinical follow-up validation과
+            versioned output cohort는 없습니다. 첫 수분의 clot model을 장기 생물학적
+            occlusion으로 읽어서는 안 됩니다.
+          </p>
+          <p>
+            공개 4D-flow와 black-blood MRI bridge도 33/38 datasets, five models,
+            15 devices로 보이지만 source patient anatomy는 두 개뿐입니다. Device,
+            acquisition, time sample을 환자처럼 세면 pseudoreplication이 됩니다.
+            여러 데이터셋을 억지로 합치면 modality와 source identity가 treatment effect와
+            완전히 confounded되어 모델이 “어느 데이터셋인가”를 맞히면서 성능이 좋아
+            보일 수 있습니다.
+          </p>
+          <p>
+            Volume-flow vortex가 acute fibrin과 관련된다는 관찰은 structure-aware
+            evaluation의 물리적 동기입니다. 그러나 혈관 내부 3D vortex와 벽 표면의
+            tangent WSS zero, signed index, cardiac-cycle worldline은 같은 대상이 아닙니다.
+            따라서 이 논문은 surface-vector 가설의 E0나 causal validation이 아닙니다.
+          </p>
+          <p>
+            비보상형 gate에서 최고 26.5는 two-anatomy paired device-response ranking이고,
+            residual novelty가 가장 높은 3.0은 outcome-grounded counterfactual planner입니다.
+            전자는 독립 단위와 novelty가 부족하고 후자는 counterfactual target과 joined
+            asset이 없습니다. Re-entry에는 같은 환자의 pre-operative 3D image, exact
+            device deployment, registered early flow/thrombus, delayed occlusion/safety,
+            patient-disjoint confirmation과 geometry/expert baseline을 이기는 falsifier가
+            모두 필요합니다. 그때도 첫 단계는 model-free asset P0이지 GNN training이
+            아닙니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Direct prior: expert PED planning</span>
+            <span class="yes">Direct prior: acute clot + virtual DSA</span>
+            <span class="no">No public patient-level joined outcome asset</span>
+            <span class="no">Volume vortex ≠ surface-WSS topology</span>
+            <span class="no">No P0 · method · model · server · GPU</span>
+          </div>
+          <a href="../docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md">direct priors, six frozen scores와 future evidence contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="adam-longitudinal">
           <span>ADAM의 baseline/follow-up과 label 2를 처음부터 이해하기</span>

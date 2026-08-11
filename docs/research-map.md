@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.1 map · 2026-08-12:** Device planning and mechanistic occlusion
+> are a rejected discovery branch, not an active workstream. Expert-consensus
+> PED planning, acute clot/virtual DSA and small paired physical-device studies
+> are direct priors, but they do not share patient identity or delayed outcome.
+> Best 26.5/40; active problem/method/model/compute zero. Outcome-grounded
+> planning is future evaluation only and surface-vector remains inactive.
+
 > **Schema 10.0 map · 2026-08-12:** ADAM longitudinal/treatment semantics is a
 > rejected provenance branch, not a workstream. Official baseline/follow-up
 > pairing supplies at most 35 training patients and no public growth or lesion-

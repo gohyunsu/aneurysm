@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.0":
-        raise ProtocolError("The current research-state schema must be version 10.0.")
+    if protocol["schema_version"] != "10.1":
+        raise ProtocolError("The current research-state schema must be version 10.1.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_adam_longitudinal_semantics_batch_rejected_best_28_5_no_p0_no_compute"
+        != "no_active_problem_device_planning_mechanistic_occlusion_batch_rejected_best_26_5_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "device_planning_and_mechanistic_occlusion_reappraisal",
             "adam_longitudinal_and_treated_exclusion_source_correction",
             "diagnostic_action_and_human_ai_reappraisal",
             "longitudinal_intervention_and_patient_reliability_reappraisal",
@@ -265,13 +266,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_adam_longitudinal_semantics_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
+        != "no_active_problem_device_planning_mechanistic_occlusion_batch_rejected_no_method_no_compute_vmr_exact_version_closed"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "official_adam_paper_label_and_terms_metadata_only_no_registration_agreement_pair_manifest_or_payload_no_scientific_server"
+        != "neuraneunet_and_device_thrombosis_public_paper_text_only_no_patient_image_device_simulation_or_outcome_payload_no_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -283,15 +284,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_asset_audit_only_no_vmr_same_contract_repair_or_rerun"
         or problem_selection["audit_document"]
-        != "docs/adam-longitudinal-and-treated-exclusion-source-correction-2026-08-12.md"
+        != "docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "patient_level_longitudinal_all_lesion_correspondence_on_adam_rejected_at_28_5_without_public_pair_lesion_or_change_contract"
+        != "paired_in_vitro_multidevice_response_ranking_rejected_at_26_5_two_source_anatomies_and_direct_prior"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The ADAM longitudinal-semantics batch must remain rejected and the VMR candidate "
+            "The device-planning/mechanistic-occlusion batch must remain rejected and the VMR candidate "
             "must remain closed after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -353,8 +354,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 28.5
-        or admission_v2["current_batch_best_residual_novelty"] != 2.0
+        or admission_v2["current_batch_best_score"] != 26.5
+        or admission_v2["current_batch_best_residual_novelty"] != 3.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -363,6 +364,156 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    device_planning = problem_selection[
+        "device_planning_and_mechanistic_occlusion_reappraisal"
+    ]
+    expected_device_planning_candidates = [
+        (
+            "paired_in_vitro_multidevice_response_ranking",
+            [5.0, 4.0, 1.0, 3.0, 1.0, 4.5, 5.0, 3.0],
+            26.5,
+        ),
+        (
+            "selective_certificate_for_expert_consensus_ped_planning",
+            [5.0, 4.0, 1.5, 0.5, 1.0, 5.0, 5.0, 3.0],
+            25.0,
+        ),
+        (
+            "mechanistic_clot_to_virtual_dsa_surrogate",
+            [5.0, 5.0, 0.5, 1.0, 1.0, 4.0, 5.0, 3.0],
+            24.5,
+        ),
+        (
+            "expert_imitation_versus_outcome_optimality_audit",
+            [5.0, 3.5, 2.5, 0.5, 1.0, 4.0, 5.0, 3.0],
+            24.5,
+        ),
+        (
+            "surface_flow_structure_as_clot_organization_predictor",
+            [5.0, 2.5, 2.5, 1.0, 1.0, 4.0, 5.0, 3.0],
+            24.0,
+        ),
+        (
+            "outcome_grounded_counterfactual_ped_planner",
+            [5.0, 4.0, 3.0, 0.5, 1.0, 3.0, 5.0, 2.0],
+            23.5,
+        ),
+    ]
+    observed_device_planning_candidates = [
+        (row["id"], row["axis_scores"], float(row["total"]))
+        for row in device_planning["candidates"]
+    ]
+    if (
+        device_planning["status"]
+        != "fresh_batch_rejected_best_26_5_fails_total_novelty_asset_and_independent_unit_floors_no_active_lead"
+        or device_planning["audit_document"]
+        != "docs/device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md"
+        or device_planning["automatic_selection_threshold"] != 32.0
+        or device_planning["best_candidate_id"]
+        != "paired_in_vitro_multidevice_response_ranking"
+        or device_planning["best_score"] != 26.5
+        or device_planning["best_residual_novelty_score"] != 3.0
+        or device_planning["all_candidate_scores"]
+        != [26.5, 25.0, 24.5, 24.5, 24.0, 23.5]
+        or device_planning["conditional_source_lead_count"] != 0
+        or device_planning["primary_problem_selected"] is not False
+        or device_planning["paper_identity_active"] is not False
+        or device_planning["neuraneunet_doi"] != "10.1002/cns.71047"
+        or device_planning["neuraneunet_pmid"] != 42484549
+        or device_planning["neuraneunet_pmcid"] != "PMC13390615"
+        or (
+            device_planning["neuraneunet_reported_aneurysms"],
+            device_planning["neuraneunet_non_ped_aneurysms"],
+            device_planning["neuraneunet_ped_treated_aneurysms"],
+        )
+        != (600, 390, 210)
+        or (
+            device_planning["neuraneunet_ped_train_cases"],
+            device_planning["neuraneunet_ped_validation_cases"],
+            device_planning["neuraneunet_ped_test_cases"],
+        )
+        != (147, 21, 42)
+        or (
+            device_planning["neuraneunet_reader_cohort_cases"],
+            device_planning["neuraneunet_reader_count"],
+            device_planning["neuraneunet_reference_consensus_senior_readers"],
+        )
+        != (21, 6, 3)
+        or (
+            device_planning["neuraneunet_source_top1_agreement_numerator"],
+            device_planning["neuraneunet_source_top1_agreement_denominator"],
+            device_planning["neuraneunet_source_top1_agreement_percent"],
+        )
+        != (20, 21, 95.2)
+        or device_planning["device_thrombosis_preprint"]
+        != "arXiv:2605.03536v1"
+        or device_planning["device_thrombosis_representative_geometries"] != 3
+        or device_planning["device_thrombosis_treatment_strategies"]
+        != ["coiling", "flow_diversion", "stent_assisted_coiling"]
+        or (
+            device_planning["paired_treatment_4d_flow_datasets"],
+            device_planning["paired_treatment_black_blood_datasets"],
+            device_planning["paired_treatment_models"],
+            device_planning["paired_treatment_source_patient_anatomies"],
+            device_planning["paired_treatment_devices"],
+        )
+        != (33, 38, 5, 2, 15)
+        or observed_device_planning_candidates
+        != expected_device_planning_candidates
+        or any(row["critical_axis_pass"] for row in device_planning["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in device_planning["candidates"]
+        )
+        or any(
+            device_planning[key] is not False
+            for key in (
+                "neuraneunet_patient_disjoint_split_explicitly_stated",
+                "neuraneunet_long_term_occlusion_or_safety_endpoint_evaluated",
+                "neuraneunet_data_public",
+                "neuraneunet_public_code_release_stated_in_inspected_paper",
+                "neuraneunet_results_reproduced_by_aurora",
+                "device_thrombosis_clinical_followup_validation",
+                "device_thrombosis_versioned_output_release_stated_in_inspected_v1",
+                "device_thrombosis_results_reproduced_by_aurora",
+                "paired_treatment_archives_accessed_this_schema",
+                "volume_vortex_evidence_equates_surface_wss_critical_topology",
+                "joined_public_preop_device_flow_thrombus_delayed_outcome_asset_identified",
+                "surface_vector_reactivated",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "historical_score_or_job_relabelled",
+                "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or any(
+            device_planning[key] is not True
+            for key in (
+                "neuraneunet_data_request_requires_ethics_and_dua",
+                "device_thrombosis_models_acute_fibrin_and_virtual_dsa",
+                "device_thrombosis_uses_flow_diverter_2016_challenge_geometries",
+                "outcome_grounded_device_planning_retained_as_future_evaluation_template_only",
+                "surface_vector_volume_vortex_motivation_retained_without_e0",
+            )
+        )
+        or device_planning["next_allowed_action"]
+        != "fresh_problem_level_source_or_material_asset_audit_only_no_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "Device planning and mechanistic occlusion must remain a rejected, "
+            "paper-text-only batch with no joined patient outcome asset, P0, model, "
+            "server or claim."
+        )
+    checks.append("device-planning and mechanistic-occlusion rejected-source boundary")
 
     adam_longitudinal = problem_selection[
         "adam_longitudinal_and_treated_exclusion_source_correction"

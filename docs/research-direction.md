@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 10.1 direction · 2026-08-12:** Do not pivot to “hemodynamics-guided
+> PED planning” by joining unrelated sources. NeurAneuNet already owns expert-
+> consensus planning; acute thrombosis/virtual DSA is already a direct
+> mechanistic prior. The meaningful residual is whether an intervention is
+> optimal for delayed patient outcome, but no public versioned cohort identifies
+> that target. Six candidates peak at 26.5/40. Preserve outcome-grounded device
+> planning as an evaluation template and surface-vector as an inactive
+> hypothesis; continue only fresh problem/material-asset discovery with no P0,
+> model or compute. [Exact reappraisal](device-planning-and-mechanistic-occlusion-reappraisal-2026-08-12.md)
+
 > **Schema 10.0 direction · 2026-08-12:** Preserve surface-vector only as an
 > inactive, falsifiable structure question. The scientifically sound order is
 > stability, field-error-matched failure, bounded validation-only development,

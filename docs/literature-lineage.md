@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 10.1 lineage · 2026-08-12:** NeurAneuNet → 3DRA segmentation,
+> parent-vessel measurement, PED size/landing-zone planning and clinician
+> assistance; device-thrombosis/virtual-DSA → device-resolved acute fibrin and
+> projection assessment; paired MRI → physical device-response observation on
+> two source anatomies; MARTA/clinical models → treatment-specific risk. This
+> lineage removes novelty from “segmentation + planner + CFD/thrombus + UQ.”
+> The residual question is outcome-optimal rather than expert-imitating device
+> choice, but the patient-level image/device/mechanism/delayed-outcome join is
+> absent. It is an asset/estimand gap, not yet an algorithmic gap.
+
 > **Schema 10.0 lineage correction · 2026-08-12:** ADAM's official target is
 > untreated/unruptured aneurysm detection and segmentation. Its 35 training
 > baseline/follow-up pairs are temporal pairs, not documented post-treatment or

@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.1 treatment-asset boundary · 2026-08-12:** No active dataset is
+> opened. NeurAneuNet reports 600 aneurysms (390 non-PED, 210 PED-treated) and
+> PED case partitions 147/21/42, but does not explicitly establish a patient-
+> disjoint split; data require ethics approval and a DUA. The acute device-
+> thrombosis study has three geometries and no versioned output cohort. Paired
+> 4D-flow/black-blood releases provide 33/38 datasets, five models and 15 devices
+> derived from only two source patient anatomies. No public asset joins image,
+> deployment, early mechanism and delayed outcome at the patient level; no
+> payload, split, P0 or model role is authorized.
+
 > **Schema 10.0 ADAM boundary · 2026-08-12:** Training has 113 cases (93
 > positive, 20 negative), including 35 paired subjects and 23 unique positive
 > subjects. The sealed test is reported as 141 cases (115 positive, 26
