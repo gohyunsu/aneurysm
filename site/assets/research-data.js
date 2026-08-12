@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "Surface-vector is sharpened as an evaluation hypothesis while sparse DSA remains a rejected composition",
+      copy: "The supplied field-error-versus-structure question and staged gate are retained, but exact point/worldline extraction remains evaluation-only until method-free stability, with boundary-margin signed total degree and abstention first. Historical job 115645 stays closed E/exit 2, GPU 0, 0/10 and no-verdict. SAVE-Net already occupies sparse DSA frame synthesis, dose framing, temporal curves and reader confidence; a dual-centre TransUNet source already evaluates real-DSA segmentation, morphology and QDSA biomarkers. The nearby downstream-composition gap has no public paired task asset. Six rows score 26.5/26.5/26.0/25.5/24.5/23.5 and all fail a mandatory floor. Zenodo 21104782 revision 4 is embargoed through 2026-10-31 and contains no original patient DSA in its metadata.",
+      status: "Delta best 26.5/40 rejected · current architecture null · source-watch v17: 28 states · P0/method/model/server/GPU 0",
+      url: "../docs/surface-vector-and-task-faithful-dsa-adjudication-2026-08-12.md"
+    },
+    {
+      year: "2026.08",
       title: "Clean weak-pose folds are a useful control, while new operator code narrows novelty",
       copy: "DeepAnePose exact 40042fa… exposes 270 selected subject/session IDs, 140 positive JSONs, 164 lesions and five folds whose test union covers each selected ID once. Its MICCAI 2023 paper already owns weak two-point pose, detection and reformatted planes, and the release has no independent dense pose distribution, annotation-time or reader-action truth. Graph Physics exact e4ac523…, Aneumo WSS Transolver 3087fc9… and EXPIGEO b287368… directly occupy generic spatiotemporal mesh, derived steady WSS and geometry-GNN variants. Six candidates score 29.0/28.5/27.0/26.0/25.5/21.5 and all fail a mandatory floor.",
       status: "Best 29.0/40 rejected · novelty 1.0/5 · transient-vector task asset 0 · source-watch v16: 27 states · E0/P0/method/model/server/GPU 0",
@@ -1127,12 +1134,24 @@ window.AURORA_DATA = Object.freeze({
       provenance: "60 patients · 120 sequences · 60 fully annotated · expert-preselected 4–14 arterial frames · CC BY 4.0 · payload 0 · no P0/model/GPU"
     },
     {
+      name: "Synthetic cerebral DSA reader study · Zenodo 21104782 revision 4",
+      role: "embargoed source-watch metadata; not a patient, downstream-task or training asset",
+      provenance: "400 synthetic PNG · four views · anterior/posterior circulation · CC BY 4.0 metadata · embargoed until 2026-10-31 · original patient DSA 0 · public lesion/mask/exposure/QDSA label 0 · payload/P0/model/GPU 0"
+    },
+    {
       name: "OpenNeuro ds005096",
       role: "source-rejected longitudinal surface-growth candidate; possible future external audit only",
       provenance: "CC0 · 63 patients · 85 aneurysms · 24 longitudinal patients · 126 raw paths · 4 same-session multi-acquisition controls · latest direct-prior subset 16 patients/19 aneurysms/6 growth · payload/P0/model/GPU 0"
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Surface-vector and task-faithful sparse DSA are adjudicated without reopening compute",
+      copy: "The scientific distinction between field accuracy and robust flow organization is retained, but no matched failure has been observed and a new version label cannot replace material evidence. Exact critical points and worldlines remain evaluation-only before stability; boundary-margin signed total degree with abstention comes first. SAVE-Net, dual-centre DSA TransUNet and the synthetic DSA reader study occupy or constrain the nearby sparse-DSA path. DIAS exposes the wrong target contract. Six alternatives score 26.5/26.5/26.0/25.5/24.5/23.5 and all are rejected. Source-watch v17 freezes the embargoed Zenodo record as state 28 and can request source review only. Full regression is 460 tests: 394 pass/66 optional skip and 95 protocol invariant groups. No payload/request, historical repair, E0/P0/P1, method, architecture, server, PBS/GPU, outer test or paper claim opened.",
+      files: ["docs/surface-vector-and-task-faithful-dsa-adjudication-2026-08-12.md", "configs/source_watch_v17.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", ".github/workflows/source-watch.yml", ".github/workflows/quality.yml", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

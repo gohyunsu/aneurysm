@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 surface-vector/task-faithful DSA delta · schema 10.7
+> unchanged:** The supplied field-error/structure hypothesis and staged gate
+> are retained, but a fresh version label cannot replace a whitelisted material
+> source. Exact critical points/worldlines remain evaluation-only before
+> stability; boundary-margin signed total degree with abstention comes first.
+> SAVE-Net, dual-centre DSA TransUNet and synthetic-DSA reader-study sources
+> already occupy or constrain the nearest sparse-DSA path, while no public
+> paired acquisition–aneurysm-mask–QDSA/action asset exists. Six candidates
+> score **26.5/26.5/26.0/25.5/24.5/23.5** and all are rejected. Source-watch
+> v17 freezes 28 states, including embargoed Zenodo 21104782. Current
+> architecture remains `null`; no payload/request, P0/P1, model, server or GPU
+> opens. See the [exact adjudication](docs/surface-vector-and-task-faithful-dsa-adjudication-2026-08-12.md)
+> and [beginner explanation](site/learn.html#dsa-task-fidelity).
+
 > **2026-08-12 pose/operator deployment and private pin:** Exact public
 > scientific source `8910e1b0f8148b45732493998983577d339ecdfd` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31551588925)

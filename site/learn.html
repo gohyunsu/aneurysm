@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#dsa-task-fidelity">Sparse DSA fidelity</a>
       <a href="#asah-outcome">aSAH mask &amp; outcome</a>
       <a href="#release-utility">Release &amp; synthetic utility</a>
       <a href="#rupture-time">Rupture state &amp; future risk</a>
@@ -137,6 +138,60 @@
             분리합니다. 현재는 그 첫 단계가 없으므로 GPU를 돌리지 않습니다.
           </p>
           <a href="../docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md">source facts, six scores와 re-entry 조건 전체 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="dsa-task-fidelity">
+          <span>Surface-vector 판정과 sparse DSA 대안을 처음부터 이해하기</span>
+          <strong>“영상이 진짜처럼 보인다”와 “동맥류 biomarker가 보존된다”는 서로 다른 검증 문제입니다.</strong>
+          <p>
+            전달된 surface-vector 아이디어의 핵심은 유효합니다. 평균 WSS vector
+            error가 작아도 flow의 zero, signed index와 cardiac-cycle track이 달라질
+            수 있습니다. 하지만 아직 그런 matched failure가 관측되지 않았고,
+            historical job <code>115645.ECE-util1</code>은 running이 아니라
+            E/exit 2, GPU 0, 0/10 no-verdict로 닫혀 있습니다. 새 wrapper나 seed를
+            붙이는 것은 새 evidence가 아니므로 같은 contract를 다시 열지 않습니다.
+          </p>
+          <p>
+            Edge-integrated 1-form, SE(3) mesh GNN, Hodge decomposition과 periodic
+            temporal operator는 나중에 비교할 수 있는 합리적인 control입니다.
+            그러나 이들을 합친 architecture name은 novelty가 아닙니다. 더 중요한
+            수정은 critical point와 worldline을 처음부터 training loss로 쓰지 않는
+            것입니다. Mesh, tolerance와 작은 perturbation에 따라 zero-pair가 생기거나
+            사라질 수 있으므로, 먼저 method-free stability를 확인합니다. 안정성 전에는
+            extractor가 평가 도구일 뿐 학습 정답이 아닙니다. 첫 topological endpoint도
+            exact point가 아니라 boundary margin이 충분한 region의 signed total
+            degree와 abstention입니다.
+          </p>
+          <p>
+            가까운 대안으로 sparse DSA를 검토했습니다. <b>SAVE-Net</b>은 한 병원의
+            17,335 sequence/15,286 patient와 두 외부 병원의 3,255 sequence에서
+            intermediate-frame synthesis, 1/7 dose framing, time-intensity curve,
+            guidewire motion과 5-reader 평가를 이미 다룹니다. 다만 formal diagnostic
+            consistency를 prospectively 정의하지 않았고 IA segmentation 같은 downstream
+            task는 평가하지 않았습니다. 이 빈칸은 흥미롭지만 data가 reasonable-request
+            조건이고 공개 patient/sequence/exposure/aneurysm-mask/QDSA split은 없습니다.
+          </p>
+          <p>
+            별도 dual-centre TransUNet 연구는 1,539 patient/2,777 DSA image에서
+            segmentation뿐 아니라 morphology와 CBF/CBV/MTT/TTP agreement를 이미
+            평가합니다. 따라서 generated DSA에 segmentation을 붙여 biomarker 보존을
+            보는 것은 SAVE-Net과 이 연구의 단순 결합에 가깝습니다. 독립적인 failure
+            mechanism과 공개 paired target이 없으면 AURORA contribution이 아닙니다.
+          </p>
+          <p>
+            Zenodo <code>21104782</code> revision 4는 2026-10-31까지 embargoed이며,
+            metadata상 400 synthetic PNG, four views와 anterior/posterior circulation만
+            제공합니다. Original patient DSA, lesion pair, aneurysm mask, exposure와
+            downstream label은 없습니다. DIAS는 공개 60 patient/120 sequence이지만
+            expert가 4--14 arterial frame을 미리 고른 merged vessel-mask task라 low-dose
+            acquisition이나 aneurysm QDSA reference가 아닙니다.
+          </p>
+          <p>
+            그래서 여섯 DSA 대안은 26.5/26.5/26.0/25.5/24.5/23.5로 모두
+            기각됐습니다. Surface-vector는 폐기하지 않지만 material phase-resolved
+            tangent-vector/family release가 생기기 전까지 닫습니다. DSA embargo 변화도
+            사람의 source re-audit만 요청하며 download, P0, model 또는 GPU를 열지 않습니다.
+          </p>
+          <a href="../docs/surface-vector-and-task-faithful-dsa-adjudication-2026-08-12.md">채택·수정·기각, source facts와 six-way score 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asah-outcome">
           <span>aSAH mask와 outcome join을 처음부터 이해하기</span>

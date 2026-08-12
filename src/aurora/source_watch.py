@@ -46,6 +46,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v14",
         "aurora.source_watch.v15",
         "aurora.source_watch.v16",
+        "aurora.source_watch.v17",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -180,7 +181,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v15_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v15(payload)
-    else:
+    elif schema == "aurora.source_watch.v16":
         if payload.get("extends") != "source_watch_v15.json":
             raise SourceWatchContractError("v16_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -191,6 +192,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v16_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v16(payload)
+    else:
+        if payload.get("extends") != "source_watch_v16.json":
+            raise SourceWatchContractError("v17_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v16":
+            raise SourceWatchContractError("v17_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v17_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v17(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -247,6 +259,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v14",
         "aurora.source_watch.v15",
         "aurora.source_watch.v16",
+        "aurora.source_watch.v17",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1809,6 +1822,55 @@ def _validate_v16(payload: Mapping[str, Any]) -> None:
         )
     ):
         raise SourceWatchContractError("v16_change_boundary_changed")
+
+
+def _validate_v17(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 28:
+        raise SourceWatchContractError("v17_watch_set_changed")
+    _validate_v16(
+        {
+            "watches": watches[:27],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    synthetic_dsa = watches[27]
+    if (
+        synthetic_dsa.get("watch_id")
+        != "synthetic_cerebral_dsa_reader_study_embargo_v1"
+        or synthetic_dsa.get("kind") != "zenodo_record"
+        or synthetic_dsa.get("review_request") != "fresh_source_reaudit_only"
+        or synthetic_dsa.get("source")
+        != {
+            "zenodo_record_id": 21104782,
+            "zenodo_api_url": "https://zenodo.org/api/records/21104782",
+            "record_url": "https://zenodo.org/records/21104782",
+            "paper_url": "https://arxiv.org/abs/2602.11703",
+        }
+        or synthetic_dsa.get("frozen_snapshot")
+        != {
+            "zenodo_record_id": 21104782,
+            "zenodo_modified": "2026-07-01T16:41:29.664703+00:00",
+            "zenodo_revision": 4,
+            "zenodo_status": "published",
+            "zenodo_access_right": "embargoed",
+            "zenodo_license_id": "cc-by-4.0",
+            "zenodo_files": [],
+            "payload_or_manifest_files": [],
+            "availability": "zenodo_record_metadata_state",
+        }
+    ):
+        raise SourceWatchContractError("synthetic_dsa_embargo_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "embargo_lift_is_not_automatic_asset_admission",
+            "synthetic_png_is_not_patient_pair_or_downstream_task_reference",
+        )
+    ):
+        raise SourceWatchContractError("v17_change_boundary_changed")
 
 
 def _url_get(url: str, accept: str) -> bytes:

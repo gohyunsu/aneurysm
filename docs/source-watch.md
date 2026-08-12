@@ -1,4 +1,11 @@
-# Public source watch · twenty-four material/direct-prior source states
+# Public source watch · twenty-eight material/direct-prior source states
+
+> **Synthetic DSA embargo watch · 2026-08-12:** `source_watch_v17.json`
+> extends v16 with Zenodo record `21104782` revision 4. The record is CC BY 4.0
+> but embargoed through 2026-10-31; its metadata describes 400 synthetic PNGs,
+> no original patient DSA and no public downstream label. The total is 28. An
+> access/revision/file change requests fresh source re-audit only. Embargo
+> expiry is not asset admission, E0/P0, method selection or compute authority.
 
 > **Pose/operator and surface-vector finite watch · 2026-08-12:**
 > `source_watch_v16.json` extends v15 with three exact direct-prior code states:
@@ -274,9 +281,11 @@ historical contract로 보존한다.
 25. Synthetic-AAA generated population/transient-field material state가 바뀜
 26. Graph Physics 또는 Aneumo WSS Transolver exact code state가 바뀜
 27. EXPIGEO exact code state가 바뀜
+28. Synthetic cerebral DSA Zenodo access/revision/license/file manifest가 바뀜
 
 1--6, 8--13, 16--20의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다.
-7, 14, 15, 21, 22, 26, 27은 **direct-prior baseline-feasibility review 요청**만 만든다.
+7, 14, 15, 21, 22, 26, 27은 **direct-prior baseline-feasibility review 요청**만 만들고,
+28은 **fresh source re-audit 요청**만 만든다.
 자동 download, 약관 수락, 점수 재가중, frozen snapshot 갱신, P0 등록,
 model/architecture 선택,
 GPU와 outer test는 모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
@@ -286,11 +295,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v16.json \
+  --config configs/source_watch_v17.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v16.json \
+  --config configs/source_watch_v17.json \
   --fetch --fail-on-change
 ```
 

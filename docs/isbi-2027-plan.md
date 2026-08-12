@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Latest submission checkpoint · 2026-08-12:** neither structure-faithful
+> WSS nor task-faithful sparse DSA is an active ISBI identity. The first lacks
+> material transient-vector/family evidence and an observed matched failure;
+> the second is a low-novelty composition of strong direct priors without a
+> public paired target. Do not create a title, architecture figure or result
+> table. Reconsider only after a new source clears every noncompensatory floor.
+
 > **Admission checkpoint · 2026-08-12:** the latest pose/workflow and
 > spatiotemporal-operator batch is not an ISBI submission identity. Clean public
 > folds make DeepAnePose reproducible enough for a control, but do not create an

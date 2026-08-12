@@ -188,6 +188,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "audit_document",
             "future_source_admission_v2",
             "pose_workflow_and_spatiotemporal_operator_reappraisal",
+            "surface_vector_and_task_faithful_dsa_delta",
             "aneurysmal_sah_segmentation_outcome_reappraisal",
             "rsna_release_layer_and_webgan_utility_delta",
             "rupture_state_future_risk_and_unit_semantics_delta",
@@ -272,6 +273,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v14",
             "public_source_watch_v15",
             "public_source_watch_v16",
+            "public_source_watch_v17",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -493,6 +495,134 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "direct-prior code do not create pose novelty or a transient-vector task asset."
         )
     checks.append("pose workflow and spatiotemporal operator rejection boundary")
+
+    dsa_delta = problem_selection["surface_vector_and_task_faithful_dsa_delta"]
+    _require_keys(
+        dsa_delta,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_ids", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "current_schema_or_primary_batch_changed",
+            "surface_vector_hypothesis_retained", "surface_vector_reactivated",
+            "surface_vector_current_architecture",
+            "structure_extractor_role_before_stability",
+            "first_topological_endpoint", "historical_aneug_job_id",
+            "historical_aneug_job_state", "historical_job_repaired_or_rerun",
+            "fresh_version_without_whitelisted_material_signal_allowed",
+            "save_net_doi", "save_net_internal_sequences_reported",
+            "save_net_internal_patients_reported",
+            "save_net_external_sequences_reported",
+            "save_net_external_hospitals_reported", "save_net_reader_count",
+            "save_net_reader_sequence_pairs",
+            "save_net_source_reports_six_generated_frames_and_one_seventh_dose",
+            "save_net_formal_diagnostic_consistency_prospectively_defined",
+            "save_net_downstream_ia_segmentation_or_cvs_detection_evaluated",
+            "save_net_data_public_versioned", "save_net_data_access",
+            "dsa_transunet_doi", "dsa_transunet_patients_reported",
+            "dsa_transunet_images_reported",
+            "dsa_transunet_evaluates_morphology_and_qdsa_biomarker_agreement",
+            "dsa_transunet_public_patient_image_mask_qdsa_split_asset_identified",
+            "synthetic_dsa_arxiv", "synthetic_dsa_training_frames_reported",
+            "synthetic_dsa_reader_images_reported", "synthetic_dsa_zenodo_record",
+            "synthetic_dsa_zenodo_revision", "synthetic_dsa_zenodo_access",
+            "synthetic_dsa_original_patient_images_present",
+            "synthetic_dsa_public_downstream_labels_present",
+            "dias_public_patient_count", "dias_public_sequence_count",
+            "dias_release_is_expert_pruned_arterial_phase",
+            "dias_framewise_arrival_exposure_aneurysm_qdsa_or_action_target_present",
+            "source_results_reproduced_by_aurora", "candidates",
+            "p0_registered", "p1_registered", "method_selected",
+            "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "submission_identity_active", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "next_allowed_action",
+        ],
+        "surface-vector and task-faithful DSA delta",
+    )
+    expected_dsa_candidates = [
+        ("task_faithful_sparse_dsa_biomarker_preservation", 26.5),
+        ("adaptive_acquisition_stopping_with_downstream_risk", 26.5),
+        ("posttreatment_coil_robust_qdsa_segmentation", 26.0),
+        ("downstream_segmentation_transport_on_generated_dsa", 25.5),
+        ("rare_pathology_ood_sparse_synthesis", 24.5),
+        ("reader_calibrated_hallucination_detection", 23.5),
+    ]
+    if (
+        dsa_delta["status"]
+        != "delta_rejected_surface_vector_no_material_e0_and_task_faithful_dsa_direct_prior_composition_no_state_change"
+        or dsa_delta["audit_document"]
+        != "docs/surface-vector-and-task-faithful-dsa-adjudication-2026-08-12.md"
+        or dsa_delta["automatic_selection_threshold"] != 32.0
+        or dsa_delta["best_score"] != 26.5
+        or dsa_delta["best_residual_novelty_score"] != 1.5
+        or dsa_delta["all_candidate_scores"]
+        != [26.5, 26.5, 26.0, 25.5, 24.5, 23.5]
+        or dsa_delta["conditional_source_lead_count"] != 0
+        or dsa_delta["surface_vector_current_architecture"] is not None
+        or dsa_delta["structure_extractor_role_before_stability"]
+        != "evaluation_only_not_training_loss"
+        or dsa_delta["first_topological_endpoint"]
+        != "boundary_margin_signed_total_degree_with_abstention_before_exact_points_or_worldlines"
+        or dsa_delta["historical_aneug_job_id"] != "115645.ECE-util1"
+        or dsa_delta["save_net_doi"] != "10.3389/fmed.2026.1793962"
+        or (
+            dsa_delta["save_net_internal_sequences_reported"],
+            dsa_delta["save_net_internal_patients_reported"],
+            dsa_delta["save_net_external_sequences_reported"],
+            dsa_delta["save_net_external_hospitals_reported"],
+            dsa_delta["save_net_reader_count"],
+            dsa_delta["save_net_reader_sequence_pairs"],
+        ) != (17335, 15286, 3255, 2, 5, 200)
+        or dsa_delta["dsa_transunet_doi"] != "10.1016/j.ejrad.2026.112882"
+        or (
+            dsa_delta["dsa_transunet_patients_reported"],
+            dsa_delta["dsa_transunet_images_reported"],
+        ) != (1539, 2777)
+        or dsa_delta["synthetic_dsa_arxiv"] != "2602.11703"
+        or dsa_delta["synthetic_dsa_training_frames_reported"] != 99349
+        or dsa_delta["synthetic_dsa_reader_images_reported"] != 400
+        or dsa_delta["synthetic_dsa_zenodo_record"] != 21104782
+        or dsa_delta["synthetic_dsa_zenodo_revision"] != 4
+        or dsa_delta["synthetic_dsa_zenodo_access"]
+        != "embargoed_until_2026_10_31"
+        or (dsa_delta["dias_public_patient_count"], dsa_delta["dias_public_sequence_count"])
+        != (60, 120)
+        or [
+            (candidate.get("id"), candidate.get("total"))
+            for candidate in dsa_delta["candidates"]
+        ] != expected_dsa_candidates
+        or any(candidate.get("critical_axis_pass") is not False for candidate in dsa_delta["candidates"])
+        or any(
+            dsa_delta[key] is not False
+            for key in (
+                "current_schema_or_primary_batch_changed", "surface_vector_reactivated",
+                "historical_job_repaired_or_rerun",
+                "fresh_version_without_whitelisted_material_signal_allowed",
+                "save_net_formal_diagnostic_consistency_prospectively_defined",
+                "save_net_downstream_ia_segmentation_or_cvs_detection_evaluated",
+                "save_net_data_public_versioned",
+                "dsa_transunet_public_patient_image_mask_qdsa_split_asset_identified",
+                "synthetic_dsa_original_patient_images_present",
+                "synthetic_dsa_public_downstream_labels_present",
+                "dias_framewise_arrival_exposure_aneurysm_qdsa_or_action_target_present",
+                "source_results_reproduced_by_aurora", "p0_registered",
+                "p1_registered", "method_selected", "architecture_selected",
+                "scientific_server_queried", "gpu_training_authorized",
+                "outer_test_authorized", "submission_identity_active",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or dsa_delta["surface_vector_hypothesis_retained"] is not True
+        or dsa_delta["save_net_source_reports_six_generated_frames_and_one_seventh_dose"] is not True
+        or dsa_delta["dsa_transunet_evaluates_morphology_and_qdsa_biomarker_agreement"] is not True
+        or dsa_delta["dias_release_is_expert_pruned_arterial_phase"] is not True
+    ):
+        raise ProtocolError(
+            "The surface-vector/DSA delta must remain fail-closed: a fresh label, "
+            "direct-prior composition or embargo change cannot create E0, a model or compute."
+        )
+    checks.append("surface-vector and task-faithful DSA fail-closed delta boundary")
 
     sah = problem_selection["aneurysmal_sah_segmentation_outcome_reappraisal"]
     _require_keys(
@@ -8300,6 +8430,64 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "new code can request direct-prior review only, never a task, method or compute."
         )
     checks.append("twenty-seven-source fail-closed direct-prior code watch boundary")
+    source_watch_v17 = problem_selection["public_source_watch_v17"]
+    _require_keys(
+        source_watch_v17,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "synthetic_dsa_zenodo_record",
+            "synthetic_dsa_zenodo_revision", "synthetic_dsa_zenodo_access",
+            "synthetic_dsa_embargo_date",
+            "synthetic_dsa_original_patient_images_present",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+            "p0_or_p1_authorized", "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized", "server_queried",
+            "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v17",
+    )
+    if (
+        source_watch_v17["status"]
+        != "watch_only_all_twenty_eight_frozen_snapshots_match"
+        or source_watch_v17["config"] != "configs/source_watch_v17.json"
+        or source_watch_v17["extends_historical_config"]
+        != "configs/source_watch_v16.json"
+        or source_watch_v17["config_sha256"]
+        != "ebd1bdf0e6708e93c77b59870cf8cedbf051c16d41467673c516cc26ac5b3653"
+        or source_watch_v17["watch_count"] != 28
+        or source_watch_v17["added_watch_ids"]
+        != ["synthetic_cerebral_dsa_reader_study_embargo_v1"]
+        or source_watch_v17["synthetic_dsa_zenodo_record"] != 21104782
+        or source_watch_v17["synthetic_dsa_zenodo_revision"] != 4
+        or source_watch_v17["synthetic_dsa_zenodo_access"] != "embargoed"
+        or source_watch_v17["synthetic_dsa_embargo_date"] != "2026-10-31"
+        or source_watch_v17["synthetic_dsa_original_patient_images_present"] is not False
+        or source_watch_v17["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v17[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+                "p0_or_p1_authorized", "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized", "server_queried",
+                "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v17["decision"]
+        != "continue_fail_closed_twenty_eight_source_watch_synthetic_dsa_embargo_change_requests_source_reaudit_only_without_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v17 must preserve twenty-eight exact public states; "
+            "an embargo change may request source review only, never task, method or compute."
+        )
+    checks.append("twenty-eight-source fail-closed synthetic DSA embargo watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
         "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",

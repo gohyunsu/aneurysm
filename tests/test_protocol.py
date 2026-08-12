@@ -415,6 +415,46 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "Source watch v16"):
             validate_protocol(candidate)
 
+    def test_surface_vector_and_task_faithful_dsa_delta_is_fail_closed(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["surface_vector_and_task_faithful_dsa_delta"]
+        watch = problem["public_source_watch_v17"]
+        self.assertFalse(audit["current_schema_or_primary_batch_changed"])
+        self.assertTrue(audit["surface_vector_hypothesis_retained"])
+        self.assertFalse(audit["surface_vector_reactivated"])
+        self.assertIsNone(audit["surface_vector_current_architecture"])
+        self.assertEqual(audit["historical_aneug_job_id"], "115645.ECE-util1")
+        self.assertFalse(audit["historical_job_repaired_or_rerun"])
+        self.assertEqual(
+            audit["all_candidate_scores"],
+            [26.5, 26.5, 26.0, 25.5, 24.5, 23.5],
+        )
+        self.assertTrue(all(not item["critical_axis_pass"] for item in audit["candidates"]))
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+        self.assertEqual(watch["watch_count"], 28)
+        self.assertEqual(watch["synthetic_dsa_zenodo_access"], "embargoed")
+        self.assertFalse(watch["automatic_download_authorized"])
+        self.assertFalse(watch["p0_or_p1_authorized"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_and_task_faithful_dsa_delta"][
+            "architecture_selected"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "surface-vector/DSA delta"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v17"][
+            "automatic_download_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v17"):
+            validate_protocol(candidate)
+
     def test_future_source_admission_is_noncompensatory_and_prospective(self) -> None:
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]

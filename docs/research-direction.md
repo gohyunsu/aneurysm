@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Surface-vector/DSA adjudication · 2026-08-12:** Retain the scientific
+> question, but do not reopen it without a whitelisted material source. Exact
+> point/worldline extraction is evaluation-only before stability; signed total
+> degree with boundary-margin abstention comes first. A sparse-DSA pivot also
+> fails: SAVE-Net and dual-centre DSA TransUNet directly occupy the nearest
+> synthesis→biomarker cells while no public paired task asset exists. Six DSA
+> rows peak at 26.5/40. Current architecture remains `null`; no P0 or compute.
+> [Exact adjudication](surface-vector-and-task-faithful-dsa-adjudication-2026-08-12.md)
+
 > **Latest direction · 2026-08-12:** Do not activate a pose model, GNN, Hodge
 > operator or temporal Transformer. DeepAnePose exposes unusually clean public
 > patient-wise folds, but weak pose/reformatted-view learning is the direct

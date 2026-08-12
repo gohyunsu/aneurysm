@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Latest DSA asset boundary · 2026-08-12:** SAVE-Net data are request-only;
+> the dual-centre TransUNet source exposes no inspected versioned patient/image/
+> mask/QDSA/split asset; Zenodo 21104782 revision 4 is embargoed through
+> 2026-10-31 and describes 400 synthetic PNGs with no original patient DSA;
+> DIAS is public but expert-pruned arterial-phase vessel-mask data, not a
+> low-dose/aneurysm-biomarker reference. None is downloaded or staged.
+
 > **Latest public-source audit · 2026-08-12:** DeepAnePose exact
 > `40042fa…` provides annotations and five folds for 270 selected
 > subject/session IDs: 140 positive JSONs and 164 lesions. Every selected ID is

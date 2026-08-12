@@ -1,5 +1,19 @@
 # 선행연구 계보와 research gap
 
+## 2026-08-12 sparse DSA와 structure-fidelity correction
+
+- [SAVE-Net](https://doi.org/10.3389/fmed.2026.1793962)은 17,335 internal
+  sequence와 3,255 external sequence에서 sparse frame synthesis, dose framing,
+  temporal curves, guidewire motion과 reader confidence를 직접 점유한다.
+- [dual-centre TransUNet](https://doi.org/10.1016/j.ejrad.2026.112882)은 real DSA
+  aneurysm segmentation에서 morphology와 QDSA biomarker agreement까지 평가한다.
+- [synthetic cerebral DSA](https://arxiv.org/abs/2602.11703)는 semantic diffusion과
+  400-image reader study를 직접 점유한다. Associated Zenodo asset은 embargoed이며
+  original patient DSA나 downstream label을 제공하지 않는다.
+- 따라서 generated DSA→segmentation→biomarker preservation은 현재 두 direct
+  prior의 obvious composition이다. Surface-vector에서도 edge/Hodge/equivariant/
+  periodic component 조합은 novelty가 아니며 extractor는 안정성 전 evaluation-only다.
+
 ## 2026-08-12 pose/workflow와 mesh-operator source correction
 
 - [DeepAnePose, MICCAI 2023](https://doi.org/10.1007/978-3-031-43895-0_51)는

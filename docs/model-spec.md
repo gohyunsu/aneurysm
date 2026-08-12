@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Latest model decision · 2026-08-12: still `null`.** Edge 1-form,
+> equivariance, Hodge and periodic operators remain a factorial control family,
+> not a stack to implement. Critical-point/worldline extractors are
+> evaluation-only until method-free stability; structural loss is considered
+> only after an observed field-error-matched failure and then as one bounded,
+> attribution-linked intervention. Sparse DSA direct priors do not select a
+> generator, segmenter or joint architecture.
+
 > **Current architecture · 2026-08-12: `null`.** DeepAnePose, Graph Physics,
 > Aneumo WSS Transolver and EXPIGEO are source/direct-prior controls, not a
 > selected AURORA stack. An edge-1-form + equivariant mesh encoder + Hodge

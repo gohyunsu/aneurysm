@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-12 · Surface-vector and task-faithful sparse DSA delta · no state change
+
+- Retained field-error-versus-structure as a falsifiable hypothesis, but made
+  material source change mandatory for re-entry. A fresh label, wrapper,
+  parser, cache, timeout or seed cannot reopen historical job `115645`.
+- Corrected the proposed architecture contract: exact point/worldline
+  extraction is evaluation-only before stability, and boundary-margin signed
+  total degree with abstention precedes individual-feature endpoints.
+- Added SAVE-Net, dual-centre DSA TransUNet and semantically conditioned
+  synthetic DSA to the direct-prior lineage. DIAS remains the wrong endpoint
+  contract for acquisition/dose/aneurysm-biomarker claims.
+- Rejected six DSA formulations at 26.5/26.5/26.0/25.5/24.5/23.5. No
+  payload/request, E0/P0/P1, method, architecture, scientific-server query,
+  PBS/GPU, outer test or claim opened.
+- Added source-watch v17 with embargoed Zenodo 21104782 revision 4 as the 28th
+  review-only state, a detailed audit, machine invariants, beginner site window
+  and filterable history entry.
+- Full regression is 460 tests: 394 pass/66 optional-dependency skip with 95
+  machine-protocol invariant groups; site, JSON and JavaScript checks pass.
+
 ## 2026-08-12 · Pose/operator audit deployed and privately pinned
 
 - Exact public scientific source `8910e1b0f8148b45732493998983577d339ecdfd`

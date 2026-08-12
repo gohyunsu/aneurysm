@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 surface-vector/task-faithful DSA delta · schema 10.7
+> unchanged:** 전달된 field-accuracy/structure 문제와 stability→matched
+> failure→bounded development→fresh confirmation 순서는 채택한다. 그러나
+> material source 없이 fresh version으로 같은 contract를 재개하지 않는다.
+> Exact critical point/worldline extractor는 E1 stability 전 evaluation-only이고
+> boundary-margin signed total degree+abstention이 먼저다. SAVE-Net은 sparse
+> frame synthesis/dose/TIC/reader confidence, dual-centre TransUNet은 real-DSA
+> segmentation→morphology/QDSA, arXiv 2602.11703은 semantic synthetic DSA와
+> reader study를 직접 점유한다. Zenodo 21104782 revision 4는 2026-10-31까지
+> embargoed이고 original patient DSA/downstream label이 없다. DIAS는 expert-
+> pruned vessel-mask task다. Fresh DSA scores 26.5/26.5/26.0/25.5/24.5/23.5는
+> 모두 기각한다. `115645`은 E/exit 2, GPU 0, 0/10 no-verdict로 immutable하며
+> repair/rerun 0이다. Architecture는 null, source-watch v17은 28 state review-
+> only다. 이번 update의 scientific server query/transfer/PBS/GPU/monitoring은
+> 0이다. Future authorized execution은 `introai9` PBS only, login-node GPU 금지,
+> `junjinyong`에는 절대 접속·조회·전송·제출·모니터링하지 않는다.
+> Full regression은 460개 중 394 pass/66 optional-dependency skip, machine
+> protocol 95 invariant group이며 site/JSON/JavaScript/diff hygiene가 통과했다.
+> Machine protocol canonical SHA-256은
+> `7edd19bed7d6cef1d727aa9185ce8a92660b60a4a29d84d7df5b47e4595cdd6b`,
+> source-watch v17 SHA-256은
+> `ebd1bdf0e6708e93c77b59870cf8cedbf051c16d41467673c516cc26ac5b3653`다.
+
 > **2026-08-12 pose/operator deployment·private synchronization:** Exact
 > public scientific source `8910e1b0f8148b45732493998983577d339ecdfd`
 > passed Quality `31551588925` and Pages `31551587888`. Private paper ledger

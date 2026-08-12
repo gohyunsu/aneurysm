@@ -1,5 +1,12 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Latest experiment decision · 2026-08-12:** no new run. `115645` remains
+> immutable no-verdict and a fresh label without material evidence cannot
+> reopen it. The DSA delta also fails admission at 26.5/40 because the public
+> paired acquisition/aneurysm-mask/QDSA/action contract is absent and the
+> nearest model cells are direct prior. Source-watch v17 is metadata-only.
+> Scientific-server query, transfer, PBS/GPU and monitoring are all zero.
+
 > **Current experiment state · 2026-08-12:** no active experiment. The latest
 > pose/operator batch is rejected at 29.0/40 and registers no E0/P0/P1. Public
 > fold metadata and direct-prior code were audited locally; medical-image
