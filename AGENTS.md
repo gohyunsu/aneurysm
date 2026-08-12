@@ -5,8 +5,10 @@
 > `31621343028` and Pages `31621342151`. Dependency-complete regression passes
 > 570/570; the machine protocol retains 112 invariant groups at canonical
 > SHA-256 `76dfe06a0c05130e68dd2c47a07c0db5dad4cbfa0462c57e195c05ed2983fde4`.
-> The separate private planning ledger is synchronized while manuscript and
-> reference bytes remain unchanged. This provenance opens no P0/P1, method,
+> `CHANGELOG.md` and the site's filterable `changes` ledger must expose this
+> same decision; lineage-only publication is insufficient. The separate
+> private planning ledger is synchronized while manuscript and reference bytes
+> remain unchanged. This provenance opens no P0/P1, method,
 > model, server, PBS/GPU, outer test, result or claim. No scientific server was
 > queried. Do not retry `introai9` before verified external change; never
 > access `junjinyong`.

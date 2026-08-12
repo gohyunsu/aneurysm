@@ -1387,6 +1387,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.13",
+      category: "research",
+      title: "Acquired-asset reuse survives only as a narrow residual application claim",
+      copy: "A fresh direct-prior screen lowers the effective Aneumo response-fidelity lead from historical 34.0/40 to 32.5/40, exactly on the 2.5/5 residual-novelty floor. General interventional consistency and aneurysm perturbation-response surrogation are already occupied. The remaining conjunction requires an observed field-error-matched Aneumo failure, one same-backbone identity-at-anchor mechanism, superiority to both learned direct and train-fitted power law, and confirmation on exactly 100 new base families excluding all historical 32. Selective/UQ, mixed geometry–flow, GNN benchmark, WSS/pressure and rupture-response alternatives are rejected. Exact science 1cdc360… passed Quality 31621343028 and Pages 31621342151; final provenance d7e3acf… passed Quality 31621602013 and Pages 31621600946. Regression passes 570/570 with 112 protocol invariants. Real P0 is 0/11 and no method, server, PBS/GPU, outer test, result or claim opens.",
+      files: ["docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/research-direction.md", "docs/research-map.md", "docs/data-asset-state-ledger-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.13",
       category: "protocol",
       title: "Confirmation v3 closes analytic-control, field-matching and hand-authored-summary loopholes",
       copy: "V2 is preserved before any eligibility metadata, field or prediction. V3 makes train-fitted power law a primary response comparator, changes one-sided field non-inferiority to bilateral ±2% equivalence against both controls, and requires all four comparator-by-endpoint response contrasts to pass effect, bootstrap, seed and family-prevalence gates. A deterministic evaluator accepts only complete raw error rows; learned-direct wins, minority-family means, better-field confounding, missing rows and analytic seed drift are explicit failing negative controls. Regression passes 570/570 with 111 protocol invariants. This creates no scientific result or compute authority.",

@@ -1,5 +1,38 @@
 # Changelog
 
+## 2026-08-13 · residual-novelty and acquired-asset reuse reappraisal
+
+- Re-screened the acquired holdings instead of requiring a perfect new
+  dataset. Aneumo response fidelity remains the sole conditional application
+  lead, but its effective score falls from historical 34.0/40 to 32.5/40 and
+  residual novelty remains exactly at the 2.5/5 floor.
+- Added NeurIPS 2024 interventionally consistent surrogates and the 2026
+  six-case aneurysm dilation-response surrogate to the direct-prior lineage.
+  General response preservation, perturbation-response prediction, multi-flow
+  learning, GNN/equivariance/physics, derivative supervision and residual
+  learning cannot be claimed as contributions.
+- Restricted the residual paper identity to one conjunction: an observed
+  Aneumo-specific field-error-matched response failure, a same-backbone exact
+  identity-at-anchor mechanism, superiority to both learned direct and
+  train-fitted power-law controls, and exactly 100 new-family confirmation
+  excluding all historical 32.
+- Rejected the same-holding alternatives: selective/UQ response surrogation
+  30.5, mixed geometry×flow fidelity 30.0, new GNN benchmark 28.0,
+  WSS/pressure response 25.5 and rupture-response phenotype 22.0. Synthetic
+  deformation is not longitudinal growth, and the compact velocity cache is
+  not relabelled as WSS, pressure or a clinical endpoint.
+- Added a four-page ISBI role/deletion contract, claim–evidence matrix and
+  consistent main-table/figure grammar to public and private planning. The
+  manuscript and references remain byte-for-byte unchanged because RF-C1 is
+  empty and real P0 remains 0/11.
+- Exact scientific source `1cdc360…fb90e` passed Quality `31621343028` and
+  Pages `31621342151`; final provenance head `d7e3acf…676a7d` passed Quality
+  `31621602013` and Pages `31621600946`. Regression passes 570/570 with 112
+  protocol invariants at `76dfe06a…2983fde4`.
+- No scientific server, scheduler, transfer, PBS/GPU job or monitoring was
+  used. Do not retry `introai9` before a verified external change and never
+  access `junjinyong`.
+
 ## 2026-08-13 · schema 11.8 · confirmation v3 evaluator red-team
 
 - Exact scientific source `9efe914…76157` passed Quality `31617703039` and
