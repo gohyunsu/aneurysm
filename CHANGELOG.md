@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.5 is deployed and privately pinned
+
+- Exact scientific source `5208bd2afb2e90894de3add5cc720c7f760a5a27`
+  passed Quality `31576238532` and Pages `31576237547`.
+- Private ledger `41cb0279ab911390929c5d9285827ea689414a98` was pushed and
+  remains anonymously invisible; manuscript/reference bytes are unchanged.
+- Full regression passes 474 tests: 408 pass/66 optional skip, 109 protocol
+  invariants, source-watch v21, site graph, JavaScript and diff hygiene.
+- This provenance creates no executable P0, method, result, GPU, outer test or
+  manuscript claim.
+
 ## 2026-08-12 · AneuX nested orbit becomes the sole conditional ISBI direction
 
 - Re-screened six research formulations that use already acquired/audited

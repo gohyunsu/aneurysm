@@ -1248,6 +1248,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.5 nested-orbit direction is live and the private no-claim ledger is pinned",
+      copy: "Exact scientific source 5208bd2afb2e90894de3add5cc720c7f760a5a27 passed Quality 31576238532 and Pages 31576237547. Private ledger 41cb0279ab911390929c5d9285827ea689414a98 is remote-pushed, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 474 tests: 408 pass/66 optional skip with 109 protocol invariants. The registered nested-orbit P0 remains non-executable and this provenance opens no model, GPU, outer test, result or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "research",
       title: "AneuX nested preprocessing-orbit becomes the sole conditional ISBI direction",
       copy: "A six-way acquired-asset screen admits one 33.0/40 conditional lead. The formulation separates fixed-cut resolution nuisance from cut-dependent parent-vessel context instead of forcing flat final-logit consistency. A new method-free CPU P0 scientific contract freezes three patient-bootstrap nontriviality signals and requires two; its exact private path and manifest remain unresolved, so it is not executable. The old 115177 job is not repaired or rerun. Primary problem, selected architecture, GPU, outer test and paper claim remain zero.",

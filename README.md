@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 11.5 deployment/private pin:** Exact scientific source
+> `5208bd2afb2e90894de3add5cc720c7f760a5a27` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31576238532) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31576237547).
+> Private ledger `41cb0279ab911390929c5d9285827ea689414a98` is remote-pushed,
+> PRIVATE and anonymously returns 404. The manuscript and references are
+> unchanged. Full regression is 474 tests: 408 pass/66 optional skip with 109
+> protocol invariants. This pin creates no executable P0, model, result, GPU or
+> paper claim.
+
 > **2026-08-12 acquired-asset application direction · schema 11.5:** AneuX
 > factorized nested preprocessing-orbit reliability is the sole conditional
 > lead at **33.0/40**. It uses the same lesion's three resolutions and up to

@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.5 deployment/private synchronization:** Exact public
+> scientific source `5208bd2afb2e90894de3add5cc720c7f760a5a27` passed Quality
+> `31576238532` and Pages `31576237547`. Private paper ledger head
+> `41cb0279ab911390929c5d9285827ea689414a98` is remote-pushed and anonymous API
+> returns 404. Manuscript and references remain byte-for-byte at SHA-256
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 474 tests: 408 pass/66 optional-dependency skip with 109
+> protocol invariant groups. This provenance opens no executable P0, model,
+> GPU, outer test or paper claim.
+
 > **2026-08-12 acquired-asset direction · schema 11.5:** Maintain exactly one
 > conditional source lead: `aneux_factorized_nested_preprocessing_orbit_reliability`
 > at 33.0/40. Treat resolution as a nuisance only within a fixed cut. Treat
