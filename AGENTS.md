@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.7 scientific/private synchronization:** Exact public
+> scientific source `3bad0861aa46a32855e5868811473f45fd0e57f1` passed Quality
+> `31584127030` and Pages `31584126536`. Private paper head
+> `2323d7f18c6d71a160374f63608a8095c577090f` is remote exact, PRIVATE and
+> anonymous API returns 404. Full regression is 486 tests: 420 pass/66
+> optional-dependency skip; protocol has 110 invariant groups. Manuscript and
+> references remain byte-for-byte at SHA-256
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This provenance opens no active lead, P0/P1, method, model, result, GPU,
+> outer test or claim. No scientific server was queried; never access/query/
+> transfer/submit/monitor `junjinyong`.
+
 > **2026-08-12 AneuX direct-prior closure · schema 11.7:** Preserve the
 > schema-11.6 33.0/40 score and P0 v1/v2 bytes as history. The fresh AneuX
 > reliability batch is rejected at 32.0/40 because residual novelty is 2.0/5,

@@ -1269,6 +1269,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.7 source rejection is live and the private no-claim ledger is exact",
+      copy: "Exact scientific source 3bad0861aa46a32855e5868811473f45fd0e57f1 passed Quality 31584127030 and Pages 31584126536. Private paper head 2323d7f18c6d71a160374f63608a8095c577090f is remote exact, PRIVATE and anonymously returns 404; manuscript/reference bytes are unchanged. Full regression passes 486 tests: 420 pass/66 optional skip with 110 protocol invariant groups. This provenance opens no active lead, P0/P1, method, model, PBS/GPU, outer test, result or claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "research",
       title: "Schema 11.7 closes AneuX reliability before execution",
       copy: "A fresh direct-prior reappraisal preserves the old 33.0/40 screen and P0 v1/v2 bytes but rejects the strongest current row at 32.0/40 because residual novelty is 2.0/5 below the fixed 2.5 floor. It records direct collisions from AneuX cut robustness, dome/cut1 PointNet++, DiffusionNet, perturbation reliability and preprocessing multiverse work. It also records source-qualified grouping and connected-surface contract defects without repairing them. Active lead, split, P0/P1, method, model, PBS/GPU, outer test, result and claim return to zero; no scientific server was queried.",

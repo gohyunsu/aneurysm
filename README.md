@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 11.7 scientific/private pin:** Exact scientific source
+> `3bad0861aa46a32855e5868811473f45fd0e57f1` passed Quality
+> `31584127030` and Pages `31584126536`. Private paper ledger
+> `2323d7f18c6d71a160374f63608a8095c577090f` is remote exact, PRIVATE and
+> anonymously returns 404. Full regression is 486 tests: 420 pass/66 optional
+> skip. Manuscript/reference bytes remain unchanged. This pin opens no active
+> lead, P0/P1, method, model, PBS/GPU, outer test, result or paper claim.
+
 > **2026-08-12 AneuX direct-prior closure · schema 11.7:** The former 33.0/40
 > nested-orbit score is preserved as source-screen history, but the candidate
 > is now rejected before execution. A fresh screen scores 32.0/40 and only

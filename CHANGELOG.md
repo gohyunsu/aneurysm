@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.7 is scientifically and privately pinned
+
+- Exact scientific source `3bad0861aa46a32855e5868811473f45fd0e57f1`
+  passed Quality `31584127030` and Pages `31584126536`.
+- Private paper ledger `2323d7f18c6d71a160374f63608a8095c577090f` is
+  remote exact, PRIVATE and anonymously returns 404; manuscript/reference
+  hashes are unchanged.
+- Full regression passes 486 tests: 420 pass/66 optional-dependency skip, with
+  110 machine-protocol invariant groups. Site links, anchors, assets and
+  browser JavaScript pass.
+- No scientific server, transfer, PBS/GPU job or monitoring action occurred;
+  active lead, experiment, model, result and claim remain zero.
+
 ## 2026-08-12 · AneuX reliability candidate closes before execution · schema 11.7
 
 - Preserved the schema-11.6 33.0/40 screen and both frozen P0 configs without
