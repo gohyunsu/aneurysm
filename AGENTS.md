@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 residual-novelty audit:** Fresh acquired-asset/direct-prior
+> review lowers the Aneumo response-fidelity lead from historical 34.0 to
+> 32.5/40; novelty remains exactly 2.5/5. General interventional consistency and
+> aneurysm perturbation-response surrogation are occupied. The only residual
+> conjunction is an observed Aneumo-specific matched-field response failure,
+> one same-backbone identity-at-anchor mechanism, superiority to learned direct
+> and analytic power-law controls, and exactly-100-new-family confirmation.
+> Alternative acquired-asset rows score 30.5 or lower and are rejected. Real
+> P0 remains 0/11; exact cache path, active split, method, architecture, server,
+> PBS/GPU, outer test, result and claim remain zero. Do not retry `introai9`
+> before verified external change; never access `junjinyong`.
+
 > **2026-08-13 schema 11.8 inactive independent-confirmation v3:** Preserve v2
 > unchanged and supersede it with eligibility metadata/field/prediction all zero.
 > Exact scientific public source `9efe9145e86086f951242fa86340b19020676157`

@@ -1,5 +1,19 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-13 novelty and paragraph-role audit:** The fresh acquired-asset
+> screen retains only Aneumo response fidelity at 32.5/40. NeurIPS 2024 already
+> establishes interventional consistency as a general surrogate objective, and
+> a 2026 aneurysm study already surrogates normal-versus-dilated haemodynamic
+> response. The four-page paper therefore cannot claim response preservation,
+> intervention prediction or a new GNN/operator broadly. Its only permissible
+> chain is repeated-flow application → observed field-error-matched failure →
+> isolated identity-at-anchor mechanism → learned and analytic control
+> superiority → exactly-100-new-family confirmation → bounded synthetic-CFD
+> interpretation. Each Introduction paragraph, contribution, method block,
+> table and figure now has one deletion-linked evidence role in the
+> [fresh audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md).
+> Manuscript prose remains frozen at real P0 0/11.
+
 > **2026-08-13 confirmation v3:** Preserve unexecuted v2. The current inactive
 > contract requires bilateral ±2% field equivalence and ≥10% response-error
 > reduction against both the same-backbone direct head and train-fitted analytic
@@ -77,7 +91,7 @@
 > **response-faithful multi-flow haemodynamic surrogation**이다. 하나의
 > nominal-flow CFD를 제공받아 대체 유량의 velocity field를 예측할 때, 낮은
 > field error가 response gain/direction/tangent/curvature fidelity를 보장하는지
-> 먼저 반증한다. Source score는 34.0/40이나 residual novelty는 정확히 2.5/5다.
+> 먼저 반증한다. Historical source score 34.0/40은 fresh audit에서 32.5/40으로 하향됐고 residual novelty는 정확히 2.5/5다.
 > Method-free P0가 endpoint stability를, field-error-matched P1이 실제 mismatch를
 > 확인하기 전에는 제목·abstract claim·method·result table·figure를 원고에 쓰지
 > 않는다. 둘 다 통과한 뒤에만 analytic anchor scaling과 zero-at-anchor residual을

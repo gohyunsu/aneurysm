@@ -4,7 +4,7 @@
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
     "status": "one_conditional_response_fidelity_source_lead_with_non_executable_method_free_p0_no_method_gpu_outer_test_or_claim",
-    "as_of": "2026-08-12",
+    "as_of": "2026-08-13",
     "clinical_use": false,
     "execution_server": "introai9",
     "allowed_pbs_queues": ["coss_agpu", "coss_a6gpu"],
@@ -60,6 +60,8 @@
       "pass_authorizes_only": "prospectively_registered_method_free_p0",
       "pass_authorizes_method_architecture_or_gpu": false,
       "current_batch_best_score": 34.0,
+      "historical_initial_response_fidelity_best_score": 34.0,
+      "latest_residual_novelty_reappraisal_best_score": 32.5,
       "current_batch_best_residual_novelty": 2.5,
       "current_batch_admitted_count": 1
     },
@@ -716,6 +718,45 @@
         {"id": "multi_flow_rupture_response_phenotype", "axis_scores": [4.5, 1.0, 0.5, 0.5, 3.0, 5.0, 4.5, 3.0], "total": 22.0, "critical_axis_pass": false, "decision": "reject_no_clinical_labels_and_direct_prior"}
       ],
       "next_allowed_action": "after_external_service_change_run_one_bounded_exact_cache_path_checksum_preflight_then_cpu_only_method_free_p0_no_model_gpu_validation_test_or_claim"
+    },
+    "aneumo_response_fidelity_residual_novelty_audit": {
+      "status": "conditional_application_lead_retained_at_32_5_after_general_intervention_and_aneurysm_response_prior_subtraction_no_method_compute_or_claim",
+      "audit_document": "docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md",
+      "decision_date": "2026-08-13",
+      "historical_source_screen_score": 34.0,
+      "historical_source_screen_relabelled": false,
+      "best_candidate_id": "field_error_matched_multi_flow_response_fidelity",
+      "best_score": 32.5,
+      "best_residual_novelty_score": 2.5,
+      "all_candidate_scores": [32.5, 30.5, 30.0, 28.0, 25.5, 22.0],
+      "conditional_source_lead_count": 1,
+      "general_response_preserving_surrogate_claim_allowed": false,
+      "aneurysm_perturbation_response_surrogate_claim_allowed": false,
+      "new_gnn_operator_component_claim_allowed": false,
+      "new_direct_prior_identifiers": [
+        "neurips_2024_interventionally_consistent_surrogates",
+        "doi:10.1016/j.cjph.2026.04.015"
+      ],
+      "residual_claim_conjunction": [
+        "aneumo_specific_field_error_matched_spatial_response_failure",
+        "same_backbone_identity_at_anchor_mechanism",
+        "field_equivalence_and_response_superiority_to_learned_direct_and_train_fitted_power_law",
+        "exactly_100_new_base_family_confirmation_excluding_all_historical_32"
+      ],
+      "real_p0_required_check_count": 11,
+      "real_p0_observed_check_count": 0,
+      "candidate_failure_observed": false,
+      "active_train_validation_test_counts": [0, 0, 0],
+      "method_selected": false,
+      "architecture_selected": false,
+      "scientific_server_queried": false,
+      "pbs_or_gpu_job_submitted": false,
+      "outer_test_authorized": false,
+      "paper_claim_active": false,
+      "manuscript_main_or_references_changed": false,
+      "introai9_retry_allowed_before_verified_external_change": false,
+      "junjinyong_accessed": false,
+      "next_allowed_action": "after_verified_external_service_or_administrator_change_run_one_bounded_exact_cache_path_preflight_then_cpu_only_method_free_p0_no_model_gpu_or_test"
     },
     "endovascular_collision_anticipation_and_release_reappraisal": {
       "status": "fresh_problem_level_batch_rejected_best_26_5_target_asset_unit_and_direct_prior_floors",

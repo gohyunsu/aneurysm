@@ -1,5 +1,13 @@
 # 데이터 자산 상태 원장
 
+> **2026-08-13 reuse decision:** 여섯 holding을 동일한 application 기준으로 다시
+> 비교했다. Aneumo만 동일 geometry의 eight-flow aligned response를 식별하므로
+> 32.5/40 conditional lead를 유지한다. 이는 active split 배정이 아니다. New
+> interventional-consistency와 aneurysm dilation-surrogate priors를 뺀 뒤에도 남는
+> gap은 field-error-matched response fidelity뿐이며, real P0 0/11과 unresolved
+> exact cache path 때문에 active train/validation/test는 계속 0/0/0이다.
+> [Fresh reuse audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md)
+
 > **Schema 11.8 current assignment:** Aneumo verified compact holding은 새
 > response-fidelity task의 conditional source다. Method-free P0 contract 1개가
 > 등록됐지만 current exact private cache path와 execution envelope가 고정되지 않아

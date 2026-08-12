@@ -23,10 +23,13 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["aneumo_response_fidelity_source_audit"]
+        residual_audit = problem["aneumo_response_fidelity_residual_novelty_audit"]
         ledger = problem["dataset_asset_state_ledger"]
 
         self.assertEqual(self.protocol["schema_version"], "11.8")
         self.assertEqual(gate["current_batch_best_score"], 34.0)
+        self.assertEqual(gate["historical_initial_response_fidelity_best_score"], 34.0)
+        self.assertEqual(gate["latest_residual_novelty_reappraisal_best_score"], 32.5)
         self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
         self.assertEqual(gate["current_batch_admitted_count"], 1)
         self.assertEqual(problem["conditional_source_lead_count"], 1)
@@ -188,6 +191,18 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["gpu_training_authorized"])
         self.assertFalse(audit["outer_test_authorized"])
         self.assertFalse(audit["paper_claim_active"])
+        self.assertEqual(residual_audit["historical_source_screen_score"], 34.0)
+        self.assertFalse(residual_audit["historical_source_screen_relabelled"])
+        self.assertEqual(residual_audit["best_score"], 32.5)
+        self.assertEqual(residual_audit["best_residual_novelty_score"], 2.5)
+        self.assertFalse(
+            residual_audit["general_response_preserving_surrogate_claim_allowed"]
+        )
+        self.assertFalse(
+            residual_audit["aneurysm_perturbation_response_surrogate_claim_allowed"]
+        )
+        self.assertFalse(residual_audit["candidate_failure_observed"])
+        self.assertEqual(residual_audit["real_p0_observed_check_count"], 0)
         self.assertEqual(
             ledger["registered_scientific_p0_pending_execution_envelope_count"], 1
         )
@@ -197,6 +212,13 @@ class ProtocolTests(unittest.TestCase):
             "p0_executable"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "aneumo_response_fidelity_residual_novelty_audit"
+        ]["general_response_preserving_surrogate_claim_allowed"] = True
+        with self.assertRaisesRegex(ProtocolError, "residual-novelty"):
             validate_protocol(candidate)
 
         candidate = copy.deepcopy(self.protocol)

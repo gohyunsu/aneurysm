@@ -1,5 +1,14 @@
 # 연구 지형과 현재 작업
 
+> **2026-08-13 residual-novelty edge:** General interventional consistency and
+> aneurysm perturbation-response surrogation are now explicit occupied nodes.
+> The current edge is narrower: verified Aneumo repeated-flow asset → stable
+> response endpoint → field-error-matched aneurysm failure → same-backbone
+> identity-at-anchor mechanism → superiority to direct and power-law controls →
+> exactly 100 new-family confirmation. Fresh score is 32.5/40 with novelty at
+> the 2.5 floor. Every downstream node remains inactive at real P0 0/11.
+> [Exact edge audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md)
+
 > **Schema 11.8 confirmation-v3 edge · 2026-08-13:** The final conditional edge
 > is now `field equivalence to direct AND power law → response superiority to
 > direct AND power law → majority-family confirmation`. Both comparator paths
@@ -24,7 +33,7 @@
 > remains 0/11 and no data, method, model, server, GPU, result or claim opens.
 
 > **Schema 11.8 response-fidelity map · 2026-08-12:** Aneumo's verified compact
-> node supports one conditional application question at 34.0/40 with residual
+> node historically supported one conditional application question at 34.0/40 with residual
 > novelty exactly 2.5/5. SC-FNO already occupies generic sensitivity-aware
 > operators; Hemo-MPO occupies Aneumo SE(3)+physics+DeepONet; AB-GATr occupies
 > anatomy-stratified equivariant Aneumo comparison. The only defensible P1 edge

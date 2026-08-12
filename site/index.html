@@ -50,7 +50,7 @@
           있다는 점입니다.</b> 하나의 nominal-flow velocity field를 이미 계산한 뒤,
           다른 유량의 field를 빠르게 예측하는 sensitivity sweep를 연구합니다. 평균
           field error가 낮아도 유량 변화의 크기·방향·tangent·curvature가 틀릴 수
-          있는지를 먼저 검증합니다. 조건부 source score는 34.0/40이지만 novelty는
+          있는지를 먼저 검증합니다. 최신 조건부 source score는 32.5/40이고 novelty는
           정확히 하한 2.5/5입니다. 따라서 화려한 GNN을 먼저 학습하지 않습니다.
           Train-only method-free P0로 endpoint 안정성을 확인하고, field-error-matched
           P1에서 실제 mismatch가 관측된 뒤에만 최소 anchor-response factorization을
@@ -71,6 +71,7 @@
           <a class="button ghost" href="../configs/aneumo_response_fidelity_confirmation_template_v3.json">비활성 100-family confirmation v3 ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md">Confirmation v3 evaluator red-team ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">직접 선행 재감사 ↗</a>
+          <a class="button ghost" href="../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md">최신 novelty·대안 후보 감사 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
@@ -257,7 +258,7 @@
 
       <div class="hero-meta">
         <div><span>Latest scientific decision</span><b>Aneumo response-faithful sensitivity sweep · conditional source lead</b></div>
-        <div><span>Score / critical floor</span><b>34.0/40 total · residual novelty 2.5/5 = floor</b></div>
+        <div><span>Score / critical floor</span><b>32.5/40 fresh total · residual novelty 2.5/5 = floor</b></div>
         <div><span>Lead / pending P0 / selected model / GPU / claim</span><b>1 / 1 / 0 / 0 / 0</b></div>
         <div><span>Next action</span><b>External service change → exact-path preflight → train-only CPU P0; no current retry</b></div>
       </div>
@@ -336,7 +337,7 @@
             최소 구조가 이를 줄이는지입니다.
           </p>
           <div class="gap-equation" aria-label="비활성 가설이 향후 방법론 검증으로 이어지기 위한 조건">
-            <span>34.0/40 conditional source lead</span>
+            <span>32.5/40 conditional source lead</span>
             <i>⇒</i>
             <span>P0 stability ⇒ matched P1 failure ⇒ bounded model</span>
           </div>
@@ -457,7 +458,7 @@
       <div class="architecture-notes">
         <article>
           <span>CURRENT SOURCE VERDICT</span>
-          <p>Aneumo response fidelity는 34.0/40, residual novelty 2.5/5로 조건부 lead입니다. 논문 또는 method admission은 아닙니다.</p>
+          <p>Aneumo response fidelity는 최신 감사에서 32.5/40, residual novelty 2.5/5로 조건부 lead입니다. 이전 34.0/40은 역사이며, 논문 또는 method admission은 아닙니다.</p>
         </article>
         <article>
           <span>METHOD-FREE P0 FIRST</span>

@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **2026-08-13 critical direction decision:** 확보 자산을 같은 기준으로 다시
+> 비교한 결과 Aneumo response fidelity만 32.5/40으로 조건부 admission을 유지한다.
+> Mixed geometry×flow interaction 30.0, selective/UQ response 30.5, WSS/pressure
+> response 25.5, rupture-response 22.0, new GNN benchmark 28.0은 기각한다.
+> NeurIPS interventional consistency와 2026 aneurysm dilation surrogate 때문에
+> general response story도 contribution에서 제외한다. Current identity는 matched
+> application failure→same-backbone anchor identity→learned+analytic control→100
+> new-family confirmation뿐이다. 34.0/40은 역사이며 real P0 0/11, selected
+> method/architecture/model/GPU/claim은 0이다. [Fresh audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md)
+
 > **Schema 11.8 confirmation-v3 falsifiability:** Fancy architecture는 analytic
 > scaling을 이겨야만 의미가 있다. Candidate가 same-backbone direct에는 이기지만
 > train-fitted power law에는 지는 경우를 명시적 실패로 둔다. 또한 field-error-
@@ -62,7 +72,7 @@
 > **response-faithful multi-flow haemodynamic surrogation**이다. 하나의 same-case
 > nominal field 이후의 CFD sensitivity sweep을 빠르게 근사하되, field MSE뿐
 > 아니라 response magnitude/direction/discrete tangent/curvature/case ranking을
-> 보존하는지를 묻는다. 34.0/40, novelty 2.5/5이며 아직 paper identity나 selected
+> 보존하는지를 묻는다. Fresh score는 32.5/40, novelty 2.5/5이며 아직 paper identity나 selected
 > model이 아니다. Method-free P0 stability와 field-error-matched P1 failure가
 > 순서대로 통과할 때만 최소 factorized model을 연다. Rupture risk, clinical
 > utility, patient-specific inflow와 WSS claim은 현재 자산으로 금지한다.

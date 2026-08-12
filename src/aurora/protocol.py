@@ -191,6 +191,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "acquired_asset_application_direction",
             "aneux_reliability_direct_prior_reappraisal",
             "aneumo_response_fidelity_source_audit",
+            "aneumo_response_fidelity_residual_novelty_audit",
             "open_clinical_outcome_and_target_time_reappraisal",
             "mechanistic_treatment_and_growth_asset_reappraisal",
             "introai9_dataset_inventory_audit",
@@ -350,6 +351,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "pass_authorizes_only",
             "pass_authorizes_method_architecture_or_gpu",
             "current_batch_best_score",
+            "historical_initial_response_fidelity_best_score",
+            "latest_residual_novelty_reappraisal_best_score",
             "current_batch_best_residual_novelty",
             "current_batch_admitted_count",
         ],
@@ -391,6 +394,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
         or admission_v2["current_batch_best_score"] != 34.0
+        or admission_v2["historical_initial_response_fidelity_best_score"] != 34.0
+        or admission_v2["latest_residual_novelty_reappraisal_best_score"] != 32.5
         or admission_v2["current_batch_best_residual_novelty"] != 2.5
         or admission_v2["current_batch_admitted_count"] != 1
     ):
@@ -1538,6 +1543,86 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "The registered Aneumo response-fidelity P0 implementation changed."
             )
     checks.append("Aneumo response-fidelity conditional lead and fail-closed P0 boundary")
+
+    residual_novelty = problem_selection[
+        "aneumo_response_fidelity_residual_novelty_audit"
+    ]
+    _require_keys(
+        residual_novelty,
+        [
+            "status", "audit_document", "decision_date",
+            "historical_source_screen_score",
+            "historical_source_screen_relabelled", "best_candidate_id",
+            "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "general_response_preserving_surrogate_claim_allowed",
+            "aneurysm_perturbation_response_surrogate_claim_allowed",
+            "new_gnn_operator_component_claim_allowed",
+            "new_direct_prior_identifiers", "residual_claim_conjunction",
+            "real_p0_required_check_count", "real_p0_observed_check_count",
+            "candidate_failure_observed", "active_train_validation_test_counts",
+            "method_selected", "architecture_selected",
+            "scientific_server_queried", "pbs_or_gpu_job_submitted",
+            "outer_test_authorized", "paper_claim_active",
+            "manuscript_main_or_references_changed",
+            "introai9_retry_allowed_before_verified_external_change",
+            "junjinyong_accessed", "next_allowed_action",
+        ],
+        "Aneumo response-fidelity residual-novelty audit",
+    )
+    if (
+        residual_novelty["status"]
+        != "conditional_application_lead_retained_at_32_5_after_general_intervention_and_aneurysm_response_prior_subtraction_no_method_compute_or_claim"
+        or residual_novelty["audit_document"]
+        != "docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md"
+        or residual_novelty["decision_date"] != "2026-08-13"
+        or residual_novelty["historical_source_screen_score"] != 34.0
+        or residual_novelty["best_candidate_id"]
+        != "field_error_matched_multi_flow_response_fidelity"
+        or residual_novelty["best_score"] != 32.5
+        or residual_novelty["best_residual_novelty_score"] != 2.5
+        or residual_novelty["all_candidate_scores"]
+        != [32.5, 30.5, 30.0, 28.0, 25.5, 22.0]
+        or residual_novelty["conditional_source_lead_count"] != 1
+        or residual_novelty["new_direct_prior_identifiers"]
+        != [
+            "neurips_2024_interventionally_consistent_surrogates",
+            "doi:10.1016/j.cjph.2026.04.015",
+        ]
+        or residual_novelty["residual_claim_conjunction"]
+        != [
+            "aneumo_specific_field_error_matched_spatial_response_failure",
+            "same_backbone_identity_at_anchor_mechanism",
+            "field_equivalence_and_response_superiority_to_learned_direct_and_train_fitted_power_law",
+            "exactly_100_new_base_family_confirmation_excluding_all_historical_32",
+        ]
+        or residual_novelty["real_p0_required_check_count"] != 11
+        or residual_novelty["real_p0_observed_check_count"] != 0
+        or residual_novelty["active_train_validation_test_counts"] != [0, 0, 0]
+        or any(
+            residual_novelty[key] is not False
+            for key in (
+                "historical_source_screen_relabelled",
+                "general_response_preserving_surrogate_claim_allowed",
+                "aneurysm_perturbation_response_surrogate_claim_allowed",
+                "new_gnn_operator_component_claim_allowed",
+                "candidate_failure_observed", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "pbs_or_gpu_job_submitted", "outer_test_authorized",
+                "paper_claim_active", "manuscript_main_or_references_changed",
+                "introai9_retry_allowed_before_verified_external_change",
+                "junjinyong_accessed",
+            )
+        )
+        or residual_novelty["next_allowed_action"]
+        != "after_verified_external_service_or_administrator_change_run_one_bounded_exact_cache_path_preflight_then_cpu_only_method_free_p0_no_model_gpu_or_test"
+    ):
+        raise ProtocolError(
+            "The fresh residual-novelty audit must preserve the historical score, "
+            "retain only the 32.5/40 application conjunction, and open no method, "
+            "compute, test, or paper claim."
+        )
+    checks.append("Aneumo residual-novelty and acquired-asset reuse boundary")
 
     collision = problem_selection[
         "endovascular_collision_anticipation_and_release_reappraisal"

@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · independent confirmation v3 requires bilateral field equivalence and response superiority against both learned direct and analytic power-law controls · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at fresh 32.5/40, novelty exactly 2.5/5 · general interventional consistency and aneurysm perturbation-response surrogation are direct priors · independent confirmation v3 requires bilateral field equivalence and response superiority against both learned direct and analytic power-law controls · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
     requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; multi-flow conditioning, Hemo-MPO and AB-GATr architecture components are direct priors, not contributions; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; inactive confirmation v3 then fixes exactly 100 new families and requires four development contrast dispersion checks, a complete two-model/five-seed workload within 40 GPU-hours, bilateral ±2% field equivalence to both same-backbone direct and train-fitted power law, ≥10% improvement on all four comparator-by-response contrasts, ≥4/5 positive seeds and ≥59/100 family wins for each, with summaries derived only from complete raw error rows under one pinned shared-family bootstrap; the exact introai9 cache path remains unresolved and no retry is allowed before an external change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Fresh direct priors narrow the lead to one application-specific conjunction",
+      copy: "NeurIPS 2024 already formalizes interventionally consistent surrogates and shows conventional surrogates can misjudge intervention effects. SC-FNO owns solution-versus-sensitivity accuracy, while a 2026 six-case aneurysm study already predicts normal-versus-dilated WSS, OSI and pressure. The remaining claim is therefore only an Aneumo-specific field-error-matched spatial response failure, an isolated same-backbone identity-at-anchor mechanism, superiority to learned direct and analytic scaling, and 100-new-family confirmation. A fresh acquired-asset screen lowers the lead from historical 34.0 to 32.5/40; novelty stays exactly at 2.5/5.",
+      status: "Conditional source lead only · real P0 0/11 · active split/method/model/server/PBS/GPU/outer test/result/claim 0",
+      url: "../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md"
+    },
     {
       year: "2026.08",
       title: "Confirmation v3 makes the analytic control and raw evaluator non-optional",
@@ -129,7 +136,7 @@ window.AURORA_DATA = Object.freeze({
       year: "2026.08",
       title: "Aneumo response fidelity becomes one conditional application lead",
       copy: "The verified compact contract has 32 Aneumo generation families, two cases per family, eight steady mass flows and 4,096 aligned internal points, split 20/6/6 by family. The task starts from one same-case nominal-flow velocity field and asks whether a surrogate preserves CFD response magnitude, direction, discrete tangent, curvature and family ranking at other flows. It is a sensitivity-sweep accelerator, not rupture prediction or patient-specific physiology. Direct priors already own multi-flow conditioning, response phenotypes, residual learning, derivative-informed operators, inflow-aware aneurysm GNNs and point-cloud flow prediction. The residual score is therefore only 2.5/5, exactly the novelty floor.",
-      status: "Schema 11.8 · 34.0/40 conditional lead · P0 registered/non-executable · failure observed 0 · method/model/GPU/test/claim 0",
+      status: "Schema 11.8 historical screen · 34.0/40 superseded by fresh 32.5/40 · P0 registered/non-executable · failure observed 0 · method/model/GPU/test/claim 0",
       url: "../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md"
     },
     {
@@ -861,7 +868,7 @@ window.AURORA_DATA = Object.freeze({
     ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO", "matched-field-error structural mismatch", "not yet observed"],
     ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "registered; non-executable"],
     ["Confirmation", "100 new families + prefield precision/complete-workload viability", "historical 32 excluded; exact case-log family estimator; ≥59/100 wins per response", "finite-release mean and majority-family generalization", "inactive until P0/P1/development/re-entry/viability pass"],
-    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 34.0; novelty 2.5", "P0 only; no method or claim"]
+    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 32.5; novelty 2.5", "P0 only; no method or claim"]
   ],
   gates: [
     {
@@ -1494,7 +1501,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.12",
       category: "research",
       title: "Schema 11.8 admits response-faithful multi-flow surrogation to a method-free P0 only",
-      copy: "A fresh acquired-asset screen gives field-error-matched multi-flow response fidelity 34.0/40, with residual novelty exactly at the 2.5/5 floor. The verified Aneumo compact contract has 32 generation families, 64 cases, eight flows and 4,096 aligned nodes. The proposed application accelerates a CFD sensitivity sweep after one nominal solve; it is not rupture prediction or patient-specific physiology. A train-only P0 now checks response endpoints under deterministic node halves and leave-one-flow interpolation. Its exact private path is unresolved, so it is non-executable. Failure mismatch, method, architecture, GPU, validation/test, outer test and claim remain closed. No scientific server was queried.",
+      copy: "The historical acquired-asset screen gave field-error-matched multi-flow response fidelity 34.0/40, with residual novelty exactly at the 2.5/5 floor; the 2026-08-13 residual-novelty audit supersedes the effective decision at 32.5/40 without relabelling this history. The verified Aneumo compact contract has 32 generation families, 64 cases, eight flows and 4,096 aligned nodes. The proposed application accelerates a CFD sensitivity sweep after one nominal solve; it is not rupture prediction or patient-specific physiology. A train-only P0 checks response endpoints under deterministic node halves and leave-one-flow interpolation. Its exact private path is unresolved, so it is non-executable. Failure mismatch, method, architecture, GPU, validation/test, outer test and claim remain closed.",
       files: ["docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "configs/aneumo_response_fidelity_p0_v2.json", "src/aurora/response_fidelity.py", "tests/test_response_fidelity.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/isbi-2027-plan.md", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
     },
     {

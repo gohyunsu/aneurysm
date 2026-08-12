@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-13 residual-novelty audit:** A fresh primary-source collision
+> screen retains the Aneumo response-fidelity direction only as a **32.5/40
+> conditional application lead**. NeurIPS 2024 already owns interventionally
+> consistent surrogates in general, and a 2026 six-case aneurysm study already
+> predicts haemodynamic change under vessel dilation. Therefore neither
+> response-preserving surrogation nor perturbation-response prediction is a
+> contribution. The residual conjunction is aneurysm-specific matched evidence:
+> equivalent field error, different multi-flow spatial response, one
+> same-backbone identity-at-anchor mechanism, superiority to learned direct and
+> analytic power-law controls, and 100-new-family confirmation. The prior
+> 34.0/40 remains history. Real P0 is 0/11; method/model/server/PBS/GPU/result/
+> claim remain zero. See the [exact audit](docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md).
+
 > **Schema 11.8 inactive independent-confirmation v3:** Preserved v2 is
 > superseded before eligibility metadata, field or prediction access. Current
 > [v3](configs/aneumo_response_fidelity_confirmation_template_v3.json) closes

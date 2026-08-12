@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-13 residual-novelty correction:**
+> [Interventionally Consistent Surrogates](https://proceedings.neurips.cc/paper_files/paper/2024/hash/26b8e3dc3a21fcd660d80c63b767f324-Abstract-Conference.html)는
+> conventional surrogate가 intervention effect를 잘못 판단할 수 있다는 일반 문제를
+> 이미 점유한다. [2026 aneurysm vessel-dilation surrogate](https://doi.org/10.1016/j.cjph.2026.04.015)도
+> 정상/확장 혈관에서 WSS·OSI·pressure response를 POD–Transformer/LSTM으로 예측한다.
+> 따라서 “response-preserving surrogate”와 “aneurysm perturbation response”는
+> broad novelty가 아니다. 정확히 남는 교차점은 *같은 velocity field error에서도
+> multi-flow spatial response가 달라지는지를 Aneumo에서 관측하고, 같은 backbone의
+> identity-at-anchor output이 learned direct와 analytic scaling을 모두 이기는지*다.
+> Fresh score는 32.5/40, novelty 2.5/5로 하향한다. [Collision matrix와 대안 후보](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md)
+
 > **2026-08-13 comparator correction:** The train-fitted analytic power law is
 > not merely a field-competence diagnostic. Because the proposed application is
 > repeated-flow response prediction after one nominal solve, scaling is a

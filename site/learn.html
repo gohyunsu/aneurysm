@@ -97,7 +97,7 @@
             Aneumo compact holding은 32 generation family, 64 case, case당 8개
             유량과 4,096 aligned node를 갖습니다. 한 nominal-flow CFD field가 주어진
             뒤 다른 유량의 velocity response를 예측하는 sensitivity-sweep 문제를
-            34.0/40 조건부 lead로 채택했습니다. 그러나 novelty는 정확히 2.5/5
+            최신 감사에서 32.5/40 조건부 lead로 유지했습니다. 그러나 novelty는 정확히 2.5/5
             하한선이고, field accuracy가 response를 실제로 망친다는 failure도 아직
             관측하지 않았습니다. 그래서 train-only method-free P0만 등록했으며 exact
             private path가 unresolved라 실행할 수 없습니다. Active split, method,
@@ -107,6 +107,17 @@
         <div class="answer-card" id="response-fidelity">
           <span>현재 조건부 방향 · RESPONSE-FAITHFUL MULTI-FLOW SURROGATION</span>
           <strong>평균 field error가 작다는 사실은 유량 변화에 대한 CFD 반응을 올바르게 보존한다는 뜻이 아닙니다.</strong>
+          <p>
+            다만 이 일반 명제 자체는 새롭지 않습니다. NeurIPS 2024는 conventional
+            surrogate가 intervention effect를 잘못 판단할 수 있음을 이미 보였고,
+            SC-FNO는 solution accuracy와 sensitivity accuracy를 분리했습니다. 2026년
+            aneurysm vessel-dilation 연구도 정상/확장 조건의 WSS·OSI·pressure를
+            surrogate로 예측합니다. 따라서 남는 novelty는 <b>Aneumo에서 같은 field
+            error로 맞춘 모델들이 spatial multi-flow response에서 실제로 갈리는지</b>,
+            그리고 같은 backbone의 exact anchor identity가 learned direct와 analytic
+            scaling을 모두 이기는지라는 좁은 교차점뿐입니다.
+            <a href="../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md">최신 collision matrix와 대안 후보 전체 읽기 ↗</a>
+          </p>
           <p>
             CFD는 혈관 안의 속도와 압력을 수치적으로 풉니다. 유입 유량
             <code>q</code>를 바꾸면 같은 혈관에서도 전체 속도장이 달라집니다.
@@ -253,7 +264,7 @@
             색상 범위로 제시합니다.
           </p>
           <p>
-            현재 상태는 34.0/40 conditional lead, novelty 2.5/5, failure observed 0,
+            현재 상태는 32.5/40 conditional lead, novelty 2.5/5, failure observed 0,
             P0 registered/non-executable입니다. Evaluator와 CPU 4/GPU 0 one-shot
             wrapper는 code-complete지만 현재 config가 cache access 전에 거부하므로
             제출할 수 없습니다. External service change가 확인되기
