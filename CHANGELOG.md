@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · P1 v2 and private ledger synchronized
+
+- Exact scientific public source `8b288c0…` passed Quality `31601736993` and
+  Pages `31601736273`; the live Overview and filterable history expose v2.
+- Private planning head `21a20cf…` is remote exact, PRIVATE and anonymously
+  404. Manuscript/reference bytes remain unchanged and no paper claim is active.
+- Scientific-server query, transfer, PBS/GPU submission and monitoring remain
+  zero; real P0 is 0/11 and P1 remains unregistered.
+
 ## 2026-08-12 · schema 11.8 · inactive P1 v2 closes five analysis loopholes
 
 - Preserved unexecuted P1 v1 and created a separate non-authoritative v2 before

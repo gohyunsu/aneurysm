@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 P1 v2/private synchronization:** Exact scientific public source
+> `8b288c0f6edacc4721f06bbd2a3cb21e73d83146` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31601736993)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31601736273).
+> Private planning head `21a20cf5b1fbd287b646297cb1ea64d4b1c21a37` is remote
+> exact, PRIVATE and anonymously returns 404. Manuscript/reference SHA-256
+> remains `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> No title, abstract claim, method, result table, figure or C21 was activated.
+
 > **Schema 11.8 inactive P1 v2 red-team:** The unexecuted v1 template is
 > preserved and prospectively superseded by
 > [v2](configs/aneumo_response_fidelity_p1_template_v2.json). V2 jointly assigns

@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "P1 v2 and the private no-claim ledger are synchronized",
+      copy: "Exact scientific public source 8b288c0… passed Quality 31601736993 and Pages 31601736273. Private planning head 21a20cf… is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes remain unchanged. The live site exposes duplicate-free matching, median co-primary screening and the cross-fit no-inference boundary. This creates no real P0 result, P1 registration, model, GPU, outer test or paper claim.",
+      status: "Public CI/Pages success · private remote exact/anonymous 404 · manuscript unchanged · real P0 0/11",
+      url: "../docs/isbi-2027-plan.md"
+    },
+    {
+      year: "2026.08",
       title: "Inactive P1 v2 closes selection and cross-fit inference loopholes",
       copy: "Before any prediction or response endpoint, v2 preserves unexecuted v1 and forbids checkpoint reuse across the three iso-error levels. The median paired-response and tangent endpoints are co-primary; low/high levels cannot rescue failure. The MeshGraphNet/DeltaPhi log-ratio direction and zero-seed tie rule are explicit, and each learned model must have a one-sided 95% stability upper field-error ratio versus power-law no greater than log(1.02). Because cross-fit models share training families, exact sign-flip, Holm, nominal-coverage and formal-power claims are forbidden; P1 is a development screen only.",
       status: "Inactive design v2 · regression 536/536 · 111 protocol invariants · v1 executed/prediction/response read 0 · real P0 0/11 · server/PBS/GPU/model/claim 0",
@@ -1322,6 +1329,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "deployment",
+      title: "P1 v2 and the private no-claim ledger are synchronized",
+      copy: "Exact scientific public source 8b288c0… passed Quality 31601736993 and Pages 31601736273. Private planning head 21a20cf… is remote exact, PRIVATE and anonymously 404; main.tex and references remain byte-for-byte unchanged. Real P0 remains 0/11, P1 remains unregistered and no server/PBS/GPU action occurred.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "protocol",
