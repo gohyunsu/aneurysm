@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "The inactive P1 design and private no-claim ledger are synchronized",
+      copy: "Exact public source fdef095… passed Quality 31597528606 and Pages 31597524201. Private planning head 62f5664… is remote exact and anonymously returns 404; manuscript and reference bytes remain unchanged. The deployed site exposes the one-pair, six-cell primary contract. This synchronization creates no P0 result, P1 registration, model, GPU run, outer test or paper claim.",
+      status: "Public CI/Pages success · private remote exact/anonymous 404 · manuscript unchanged · real P0 0/11",
+      url: "../docs/isbi-2027-plan.md"
+    },
+    {
+      year: "2026.08",
       title: "The future P1 mismatch test is made outcome-blind before P0 evidence",
       copy: "A non-authoritative template uses only the historical 20 train families in a seeded five-block cycle with 12 fit, 4 calibration and 4 outer families. Calibration field error alone defines 25/50/75% iso-error levels. The sole primary mechanism contrast is direct MeshGraphNet versus anchor-residual DeltaPhi; MLP and DeepONet pairs are secondary and cannot rescue it. Outer 90% log-error-ratio intervals must fit inside ±log(1.01). Six primary cells use exact 20-family two-sided sign-flip p-values, Holm control, an unadjusted bootstrap interval excluding zero, at least 10% multiplicative separation and the same direction in four of five seeds. Historical validation/test and future confirmation families remain sealed.",
       status: "Design template only · regression 526/526 · real P0 0/11 · P1 registration/model prediction/response metric/PBS/GPU/claim 0",
@@ -1308,6 +1315,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "deployment",
+      title: "Inactive P1 design and private no-claim ledger are synchronized",
+      copy: "Exact public source fdef095… passed Quality 31597528606 and Pages 31597524201. Private planning head 62f5664… is remote exact and anonymously 404; main.tex and references remain byte-for-byte unchanged. The live site exposes the six-cell primary contract. Real P0 remains 0/11, P1 remains unregistered and no server/PBS/GPU action occurred.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "protocol",

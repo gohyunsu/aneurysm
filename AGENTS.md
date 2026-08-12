@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 inactive P1/private synchronization:** Exact public
+> scientific source `fdef0955907cd7ec617a924e13c92c47dd2df205` passed Quality
+> `31597528606` and Pages `31597524201`. Private planning head
+> `62f5664156178290dda3753a67996b94eab15a87` is remote exact and anonymously
+> 404. Manuscript/reference SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> No title/abstract/method/result/figure/C21 is active. No scientific server,
+> transfer, PBS/GPU or monitoring occurred; real P0 is 0/11 and P1 remains
+> unregistered. Never access `junjinyong`; do not retry `introai9` before a
+> verified external change.
+
 > **2026-08-12 schema 11.8 inactive P1 design hardening:** Public
 > `configs/aneumo_response_fidelity_p1_template_v1.json` is a non-authoritative,
 > non-executable template, not P1 registration. It fixes historical-train-20

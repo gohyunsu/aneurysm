@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · inactive P1 and private ledger synchronized
+
+- Exact public source `fdef095…` passed Quality `31597528606` and Pages
+  `31597524201`; the deployed site exposes the six-cell primary contract.
+- Private planning head `62f5664…` is remote exact and anonymously 404.
+  Manuscript/reference bytes remain unchanged and no paper claim is active.
+- Scientific-server query, transfer, PBS/GPU submission and monitoring remain
+  zero; real P0 is 0/11 and P1 is still unregistered.
+
 ## 2026-08-12 · schema 11.8 · inactive P1 design hardened before P0 evidence
 
 - Rechecked the official ISBI 2027 author page: single blind, four technical
