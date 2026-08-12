@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-13 · public Quality discovery coverage aligned
+
+- The first changelog-only Quality run succeeded but discovered 560 tests with
+  85 optional-dependency skips, while the scientific source had been validated
+  over a 570-test discovery set.
+- Added lightweight NumPy and h5py installation to public Quality so array and
+  HDF5 contract classes are discovered remotely. PyTorch remains optional; its
+  numerical tests may stay explicit skips rather than blocking documentation
+  deployment.
+- This is CI coverage hardening, not a P0 run, model experiment or scientific
+  result. It changes no protocol threshold, field, split, seed, claim or
+  execution authority.
+
 ## 2026-08-13 · residual-novelty and acquired-asset reuse reappraisal
 
 - Re-screened the acquired holdings instead of requiring a perfect new

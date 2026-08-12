@@ -1387,6 +1387,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.13",
+      category: "site",
+      title: "Public Quality now discovers the full array/HDF5 contract set",
+      copy: "The first changelog-only Quality run succeeded but discovered 560 tests with 85 optional-dependency skips, so it is not relabelled dependency-complete. Quality now installs lightweight NumPy and h5py before validation, aligning remote discovery with the 570-test scientific-source scope while leaving PyTorch numerical tests explicit optional skips. This changes no scientific threshold, split, seed, result, compute authority or claim.",
+      files: [".github/workflows/quality.yml", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.13",
       category: "research",
       title: "Acquired-asset reuse survives only as a narrow residual application claim",
       copy: "A fresh direct-prior screen lowers the effective Aneumo response-fidelity lead from historical 34.0/40 to 32.5/40, exactly on the 2.5/5 residual-novelty floor. General interventional consistency and aneurysm perturbation-response surrogation are already occupied. The remaining conjunction requires an observed field-error-matched Aneumo failure, one same-backbone identity-at-anchor mechanism, superiority to both learned direct and train-fitted power law, and confirmation on exactly 100 new base families excluding all historical 32. Selective/UQ, mixed geometry–flow, GNN benchmark, WSS/pressure and rupture-response alternatives are rejected. Exact science 1cdc360… passed Quality 31621343028 and Pages 31621342151; final provenance d7e3acf… passed Quality 31621602013 and Pages 31621600946. Regression passes 570/570 with 112 protocol invariants. Real P0 is 0/11 and no method, server, PBS/GPU, outer test, result or claim opens.",

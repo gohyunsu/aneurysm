@@ -1,5 +1,12 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 Quality coverage correction:** The first changelog-only remote
+> Quality run `31624153346` succeeded but discovered 560 tests with 85 optional
+> skips. Do not call that run dependency-complete. Public Quality now installs
+> NumPy/h5py so the 570-test discovery set used by the scientific source is
+> exercised remotely; PyTorch remains an explicit optional skip. This is CI
+> coverage only and opens no scientific authority.
+
 > **2026-08-13 residual-novelty scientific synchronization:** Exact scientific
 > public source `1cdc360170739894dde6bd71508ade76ed7fb90e` passed Quality
 > `31621343028` and Pages `31621342151`. Dependency-complete regression passes

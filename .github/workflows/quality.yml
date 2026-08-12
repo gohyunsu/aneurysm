@@ -20,6 +20,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: Install scientific contract test dependencies
+        run: python -m pip install "numpy>=1.24,<3" "h5py==3.12.1"
       - name: Validate research protocol
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
       - name: Validate superseded inactive Aneumo response-fidelity P1 v1
