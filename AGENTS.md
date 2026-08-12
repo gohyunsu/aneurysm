@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 P0-v2/private synchronization:** Exact v2 public
+> source `5e431f87c996f354ac5ed6aaa62cb1dd2fadac56` passed Quality
+> `31594279674` and Pages `31594278998`. Private paper head
+> `a2eedb4d970b4895bb7050f8bdf7e061ad19053f` is remote exact, PRIVATE and
+> anonymously 404. Manuscript/reference SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 516/516 with 111 invariants. Real P0 is 0/11 and no
+> server/PBS/GPU/model/test/claim opens. Never access `junjinyong`; do not
+> retry `introai9` before verified external change.
+
 > **2026-08-12 schema 11.8 final pre-execution P0 v2:** Preserve unexecuted v1
 > `configs/aneumo_response_fidelity_p0.json` at SHA-256 `07c0c897…135f`.
 > A rank-preserving 8× coordinate-half response distortion passed v1's

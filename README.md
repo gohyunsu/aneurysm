@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 P0-v2/private synchronization:** Exact v2 source
+> `5e431f87c996f354ac5ed6aaa62cb1dd2fadac56` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31594279674)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31594278998).
+> Private ledger `a2eedb4d970b4895bb7050f8bdf7e061ad19053f` is remote exact,
+> PRIVATE and anonymously invisible. Manuscript/reference bytes remain
+> unchanged. Real P0 stays 0/11 and no method, model, GPU, test or claim opens.
+
 > **2026-08-12 final pre-execution P0 v2 · schema 11.8:** The unexecuted v1 is
 > preserved at SHA-256 `07c0c897…135f`. A rank-preserving eight-fold distortion
 > of one coordinate half passed its Spearman-only gate, so v1 is prospectively

@@ -1303,6 +1303,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Final P0 v2 and the private no-result ledger are synchronized",
+      copy: "Exact v2 source 5e431f8… passed Quality 31594279674 and Pages 31594278998. Private paper head a2eedb4… is remote exact and anonymously returns 404 while manuscript/reference bytes remain unchanged. Full regression passes 516/516 tests with 111 protocol invariant groups. Real P0 remains 0/11 and no result, method, model, GPU, outer test or claim opens.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "experiment",
       title: "Final pre-execution P0 v2 rejects rank-preserving magnitude distortion and hashes cache bytes",
       copy: "An eight-fold coordinate-half response distortion preserved family ranks and passed the unexecuted v1 Spearman-only gate. V1 remains immutable history; v2 adds family-bootstrap symmetric-relative-difference upper CI ≤0.25 and retains rank lower CI ≥0.80. The runner hashes observed cache bytes against registered and reported values and preserves the exact host path in the container. V2 has 11 all-pass checks and finalizes pre-execution red-team. Full regression passes 516/516 tests with 111 protocol invariant groups. Real P0 remains 0/11; no server, PBS, GPU, model, outer test or claim exists.",

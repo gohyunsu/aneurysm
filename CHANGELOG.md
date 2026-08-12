@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · P0 v2 and private ledger synchronized
+
+- Exact v2 source `5e431f8…` passed Quality `31594279674` and Pages
+  `31594278998`.
+- Private paper head `a2eedb4…` is remote exact, PRIVATE and anonymously 404;
+  manuscript/reference bytes remain unchanged.
+- Full regression is 516/516 with 111 invariants. Real P0 remains 0/11 and no
+  result, method, model, GPU, outer test or claim is opened.
+
 ## 2026-08-12 · schema 11.8 · final pre-execution response-fidelity P0 v2
 
 - Preserved unexecuted P0 v1 byte-for-byte after an 8× rank-preserving
