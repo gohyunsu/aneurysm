@@ -1166,6 +1166,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.8 source audit is live and the private no-claim ledger is pinned",
+      copy: "Exact public scientific source 6b153b7f988e2d1c6fe9def294a6348849a4c53a passed Quality 31557448461 and Pages 31557447516. The live Overview, zero-assumption chapter #topology-reference-embargo, detailed audit and source-watch v19 expose the same rejection. Private ledger e4c3f8f5b3d908d2be418e1506cacbb6cdbac5d9 is remote exact; manuscript and references remain byte-for-byte unchanged. This provenance opens no active problem, method, model, result, compute or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Structured-vessel and embargoed 4D-flow candidates are rejected without acquisition or compute",
       copy: "The exact public VeNet state is bounded to 20 masks without joined source MRA or an independent test; topology loss is already an obvious source-stated extension. RSNA multi-task/pseudo-label learning is direct prior with unresolved patient grouping. CMRx4DFlow data are controlled and embargoed after the ISBI deadline, and the open device phantom has one base anatomy. Six fresh rows score 27.5/27.0/27.0/26.5/26.0/21.0 and all fail. Source-watch v19 freezes 32 review-only states. No terms, payload, historical repair, P0/P1, method, architecture, scientific server, PBS/GPU, outer test or paper claim opened. Full regression passes 464 tests: 398 pass/66 optional skip and 99 protocol invariant groups.",

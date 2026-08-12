@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.8 deployment/private synchronization:** Exact public
+> scientific source `6b153b7f988e2d1c6fe9def294a6348849a4c53a` passed Quality
+> `31557448461` and Pages `31557447516`. Private paper head
+> `e4c3f8f5b3d908d2be418e1506cacbb6cdbac5d9` is remote exact. Manuscript and
+> references SHA-256 remain `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> No title, claim, method, result, figure, server or compute authority is added.
+
 > **2026-08-12 structured-vessel/embargoed-4D-flow · schema 10.8:** Exact
 > VeNet data/code heads `c233ab9…`/`7c9cf0f…`를 bounded public-state audit했다.
 > Public Git은 20 mask뿐이며 source MRA, independent test와 full-200 contract는

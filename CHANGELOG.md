@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.8 deployed and privately pinned
+
+- Exact scientific source `6b153b7f988e2d1c6fe9def294a6348849a4c53a`
+  passed Quality `31557448461` and Pages `31557447516`.
+- Private ledger `e4c3f8f5b3d908d2be418e1506cacbb6cdbac5d9` is remote exact;
+  manuscript and references remain byte-for-byte unchanged.
+- This provenance-only entry creates no task, method, model, result, compute or
+  submission authority.
+
 ## 2026-08-12 · Structured-vessel and embargoed 4D-flow reappraisal
 
 - Bounded exact-public audit found 20 masks in the inspected VeNet Git state,

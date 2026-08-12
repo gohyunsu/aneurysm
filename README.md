@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.8 deployment/private pin:** Exact scientific source
+> `6b153b7f988e2d1c6fe9def294a6348849a4c53a` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31557448461)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31557447516).
+> Private ledger `e4c3f8f5b3d908d2be418e1506cacbb6cdbac5d9` is remote exact;
+> manuscript and references remain byte-for-byte unchanged. This provenance
+> opens no active task, paper claim, model or compute.
+
 > **2026-08-12 structured-vessel/4D-flow reappraisal · schema 10.8:** VeNet의
 > 논문상 200-mask 설명과 달리 exact public Git state는 20 mask만 담고 원 IXI
 > MRA·independent test와 결합되지 않는다. Source가 topology discontinuity와
