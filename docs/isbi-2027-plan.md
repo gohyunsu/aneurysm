@@ -13,6 +13,11 @@
 > agreement는 flow 자체의 단조 효과를 제거하기 위해 target flow별 family rank로
 > 계산하며 5,000회 family bootstrap한다. 이 구현은 향후 Methods의 재현성 자산일
 > 뿐 contribution이나 result row가 아니다.
+> 또한 pre-execution red-team에서 omitted center를 치환한 뒤 같은 위치의
+> centered derivative를 비교하는 구현이 등간격 stencil에서 무감할 수 있음을
+> 발견했다. 현재 evaluator는 actual left/right one-sided tangent와 neighbour
+> secant 방향을 비교하며 jagged-response negative control을 반드시 기각한다.
+> 이는 threshold 변경이나 결과 repair가 아니라 data read 전 구현 교정이다.
 
 ## Schema 11.8 four-page claim–evidence map
 

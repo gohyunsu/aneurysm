@@ -6,6 +6,7 @@ from pathlib import Path
 
 from aurora.aneumo_response_fidelity_p0 import (
     AneumoResponseFidelityP0Error,
+    _case_summaries,
     evaluate_records,
     load_dependencies,
     run_authorized_p0,
@@ -104,6 +105,35 @@ class AneumoResponseFidelityP0Tests(unittest.TestCase):
         )
         self.assertNotIn("case_ids", result["asset"])
         self.assertNotIn("family_ids", result["asset"])
+
+    def test_leave_one_flow_metrics_reject_jagged_response(self) -> None:
+        record = self.records[0]
+        smooth = _case_summaries(
+            self.flows,
+            record["coordinates_m"],
+            record["velocity_m_s"],
+            anchor_flow=self.config["task"]["anchor_mass_flow_kg_s"],
+        )
+        jagged_velocity = np.asarray(record["velocity_m_s"]).copy()
+        orthogonal = np.column_stack(
+            (
+                -record["coordinates_m"][:, 1],
+                record["coordinates_m"][:, 0],
+                np.ones(4096, dtype=np.float64),
+            )
+        )
+        for index in range(1, self.flows.size - 1):
+            if index != 3:
+                jagged_velocity[index] += (1.0 if index % 2 else -1.0) * orthogonal
+        jagged = _case_summaries(
+            self.flows,
+            record["coordinates_m"],
+            jagged_velocity,
+            anchor_flow=self.config["task"]["anchor_mass_flow_kg_s"],
+        )
+        self.assertGreater(smooth["tangent_direction_agreement"], 0.99)
+        self.assertLess(jagged["tangent_direction_agreement"], 0.80)
+        self.assertGreater(jagged["interpolation_relative_error"], 0.35)
 
     def test_nontrain_or_changed_mapping_is_rejected(self) -> None:
         records = [dict(record) for record in self.records]

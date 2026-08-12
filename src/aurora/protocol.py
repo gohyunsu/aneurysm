@@ -1158,7 +1158,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or response_fidelity["p0_reference_evaluator"]
         != "src/aurora/aneumo_response_fidelity_p0.py"
         or response_fidelity["p0_reference_evaluator_sha256"]
-        != "b8799a857d9d172a39d13565b713300f6bfb7acbb7b8e6f183a510e1045b103e"
+        != "9ce64f931f779d9679ba26924d27a43916fc9d6f902c27a473465361cd2849ba"
         or response_fidelity["p0_pbs_wrapper"]
         != "cluster/pbs_aneumo_response_fidelity_p0.pbs"
         or response_fidelity["p0_pbs_wrapper_sha256"]

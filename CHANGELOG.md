@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · pre-execution P0 tangent audit
+
+- Found that same-location centered-difference comparison could be insensitive
+  to an omitted center value on equally spaced flow stencils.
+- Preserved the registered endpoint and 0.80 threshold, but corrected the
+  evaluator to compare actual left/right one-sided tangents with the
+  two-neighbour secant direction.
+- Added a jagged-response negative control that must fail tangent agreement and
+  the 0.35 interpolation-error bound; smooth response continues to pass.
+- This is a prospective implementation correction before private-data access,
+  execution or a scientific verdict—not threshold repair or result relabeling.
+- Full regression passes 514/514 tests; protocol retains 111 invariant groups
+  at canonical SHA-256 `635fcbd5…d773`.
+
 ## 2026-08-12 · schema 11.8 · implementation and private ledger synchronized
 
 - Exact public implementation source `3332bf6…` passed Quality `31591274490`

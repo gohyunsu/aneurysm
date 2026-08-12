@@ -117,6 +117,18 @@ evidence. The current config is tested to refuse before checking whether a
 private cache exists. The wrapper is therefore not submittable in the current
 state and has not been submitted.
 
+A pre-execution adversarial audit found and corrected one implementation defect
+without changing the registered endpoint or threshold. Replacing an omitted
+flow and comparing the centered derivative at that same grid point can be
+insensitive on an equally spaced stencil because the centered derivative does
+not use the center value. The evaluator now compares the actual left and right
+one-sided velocity tangents with the two-neighbour secant direction. A jagged
+synthetic response must fall below the registered 0.80 agreement threshold and
+above the 0.35 interpolation-error threshold, while a smooth response passes.
+This is a prospective code correction before any private row or scientific
+endpoint was read; the earlier implementation commit remains provenance, not a
+result or a closed confirmatory gate.
+
 P0 reads only the 20 historical train base families and only `coordinates_m`
 plus the three velocity channels. It does not read pressure, validation/test
 fields, a model, checkpoint or prediction. It checks:

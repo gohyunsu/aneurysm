@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 pre-execution P0 metric correction · schema 11.8:** Adversarial
+> validation found that comparing a replaced omitted-flow value at the same
+> centered-difference location can be insensitive on an equally spaced
+> stencil. Without changing the registered 0.80 tangent-agreement threshold,
+> the evaluator now compares actual left/right one-sided tangents with the
+> two-neighbour secant. A smooth synthetic response passes and a deliberately
+> jagged response fails both tangent agreement and the registered 0.35
+> interpolation-error bound. No private data row or scientific endpoint was
+> read; real P0, PBS, model, GPU, outer test and claim remain 0.
+> Full dependency-complete regression passes 514/514 tests; protocol retains
+> 111 invariant groups at canonical SHA-256
+> `635fcbd5d2655d7db7c708db3e8098a282527c7c7f3d94d1df03aa912713d773`.
+
 > **Schema 11.8 implementation/private synchronization:** Exact public
 > scientific source `3332bf605d7be8e200009a9cb165b58e6a27cbeb` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31591274490)

@@ -1296,6 +1296,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "experiment",
+      title: "A pre-execution negative control corrects an insensitive tangent implementation",
+      copy: "The first evaluator replaced an omitted flow and compared the centered derivative at that same index. On an equally spaced stencil the centered derivative does not use the center value, so the check could be insensitive. Before any private row or scientific endpoint was read, the implementation was corrected to compare actual left/right one-sided tangents with the two-neighbour secant direction. The registered 0.80 agreement and 0.35 interpolation-error thresholds are unchanged. Smooth synthetic response passes and deliberately jagged response fails; full regression passes 514/514 tests with 111 protocol invariant groups. Real P0 remains 0/10 with no server, PBS, GPU, model or claim.",
+      files: ["src/aurora/aneumo_response_fidelity_p0.py", "tests/test_aneumo_response_fidelity_p0.py", "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "configs/aurora_v1.json"]
+    },
+    {
+      date: "2026.08.12",
       category: "deployment",
       title: "Schema 11.8 P0 implementation and private no-claim ledger are synchronized",
       copy: "Exact public source 3332bf6… passed Quality 31591274490 and Pages 31591274071. Private paper head bd71c81… is remote exact and anonymously returns 404 while manuscript/reference bytes remain unchanged. Full regression passes 513/513 tests with 111 protocol invariant groups. This synchronization creates no real P0 endpoint, P1, method, model, GPU, outer test or paper claim.",

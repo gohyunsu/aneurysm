@@ -153,6 +153,15 @@
             통과하지만 real Aneumo 결과는 아직 0입니다.
           </p>
           <p>
+            구현도 반례로 검증했습니다. 처음 코드는 빠진 유량 값을 보간으로 바꾼
+            뒤 같은 위치의 centered derivative를 비교했지만, 등간격에서는 중앙차분이
+            그 중심값을 쓰지 않아 변화가 숨겨질 수 있었습니다. 실제 데이터나 결과를
+            보기 전에 이를 발견해, 각 누락 위치의 실제 left/right one-sided tangent를
+            양쪽 이웃의 secant 방향과 직접 비교하도록 고쳤습니다. Smooth response는
+            통과하고 일부러 지그재그로 만든 response는 tangent 0.80과 interpolation
+            error 0.35 gate를 모두 실패해야 합니다. Threshold는 바꾸지 않았습니다.
+          </p>
+          <p>
             P0가 통과해도 바로 fancy model을 만들지 않습니다. P1에서 analytic
             power-law scaling, linear interpolation, conditional MLP, DeepONet,
             DeltaPhi, MeshGraphNet과 과거 V1e를 동일 development 조건으로 비교하고,

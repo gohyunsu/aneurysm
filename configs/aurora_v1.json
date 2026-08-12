@@ -527,7 +527,7 @@
       "p0_config": "configs/aneumo_response_fidelity_p0.json",
       "p0_config_sha256": "07c0c89799e04fbee88a1218383aa7b7fd8fc3a5ab8d7bcb15d286195571135f",
       "p0_reference_evaluator": "src/aurora/aneumo_response_fidelity_p0.py",
-      "p0_reference_evaluator_sha256": "b8799a857d9d172a39d13565b713300f6bfb7acbb7b8e6f183a510e1045b103e",
+      "p0_reference_evaluator_sha256": "9ce64f931f779d9679ba26924d27a43916fc9d6f902c27a473465361cd2849ba",
       "p0_pbs_wrapper": "cluster/pbs_aneumo_response_fidelity_p0.pbs",
       "p0_pbs_wrapper_sha256": "d1341ca525176484ea51619967df50197f3f10381486f517a182df27b3f95974",
       "p0_reference_evaluator_synthetic_validation_passed": true,

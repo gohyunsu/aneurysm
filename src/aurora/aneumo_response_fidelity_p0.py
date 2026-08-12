@@ -18,7 +18,6 @@ from typing import Any, Mapping, Sequence
 from .response_fidelity import (
     ResponseFidelityError,
     coordinate_hash_partition,
-    discrete_tangent,
     load_p0_config,
     relative_l2,
     validate_case,
@@ -197,7 +196,6 @@ def _case_summaries(
     half_descriptors: list[list[float]] = [[], []]
     tangent_agreements: list[float] = []
     interpolation_errors: list[float] = []
-    reference_tangent = discrete_tangent(q, fields)
 
     for half in (0, 1):
         mask = halves == half
@@ -215,13 +213,22 @@ def _case_summaries(
         interpolated = _linear_interpolation(q, fields, index)
         interpolated_response = interpolated - fields[anchor_index]
         interpolation_errors.append(relative_l2(response[index], interpolated_response))
-        replaced = fields.copy()
-        replaced[index] = interpolated
-        estimated_tangent = discrete_tangent(q, replaced)
+        secant = (fields[index + 1] - fields[index - 1]) / (
+            q[index + 1] - q[index - 1]
+        )
+        left_tangent = (fields[index] - fields[index - 1]) / (
+            q[index] - q[index - 1]
+        )
+        right_tangent = (fields[index + 1] - fields[index]) / (
+            q[index + 1] - q[index]
+        )
         for half in (0, 1):
             mask = halves == half
-            tangent_agreements.append(
-                _cosine(reference_tangent[index, mask], estimated_tangent[index, mask])
+            tangent_agreements.extend(
+                (
+                    _cosine(left_tangent[mask], secant[mask]),
+                    _cosine(right_tangent[mask], secant[mask]),
+                )
             )
 
     response_energy = float(

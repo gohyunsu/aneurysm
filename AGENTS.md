@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 pre-execution P0 metric correction:** A red-team
+> negative control showed that replacing an omitted flow and comparing the
+> centered derivative at that same grid point can be insensitive on an equally
+> spaced stencil. Before any private row, job or scientific endpoint, the
+> evaluator was corrected to compare actual left/right one-sided velocity
+> tangents with the two-neighbour secant. Registered thresholds, split,
+> bootstrap seed/count and stop rules are unchanged. Smooth synthetic response
+> passes; deliberately jagged response falls below tangent agreement 0.80 and
+> above interpolation error 0.35. Evaluator SHA-256 is now
+> `9ce64f931f779d9679ba26924d27a43916fc9d6f902c27a473465361cd2849ba`.
+> Real P0 remains 0/10 and no server/scheduler/transfer/PBS/GPU action occurred.
+> Do not retry `introai9` before verified external change; never access
+> `junjinyong`.
+> Full dependency-complete regression passes 514/514 tests; protocol retains
+> 111 invariant groups at canonical SHA-256
+> `635fcbd5d2655d7db7c708db3e8098a282527c7c7f3d94d1df03aa912713d773`.
+
 > **2026-08-12 schema 11.8 implementation/private synchronization:** Exact
 > public scientific source `3332bf605d7be8e200009a9cb165b58e6a27cbeb`
 > passed Quality `31591274490` and Pages `31591274071`. Private paper head
@@ -16,7 +33,7 @@
 > `src/aurora/aneumo_response_fidelity_p0.py` and
 > `cluster/pbs_aneumo_response_fidelity_p0.pbs` implement the registered
 > aggregate evaluator and a CPU 4/GPU 0 one-shot wrapper. Protocol-pinned
-> SHA-256 values are `b8799a857d9d172a39d13565b713300f6bfb7acbb7b8e6f183a510e1045b103e`
+> SHA-256 values are `9ce64f931f779d9679ba26924d27a43916fc9d6f902c27a473465361cd2849ba`
 > and `d1341ca525176484ea51619967df50197f3f10381486f517a182df27b3f95974`.
 > Synthetic tests exercise all 10 checks; registered real-data bootstrap count
 > remains 5,000. Coordinate halves compare within-flow family ranks, not the

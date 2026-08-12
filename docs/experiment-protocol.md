@@ -13,6 +13,11 @@
 > Coordinate-half endpoint는 각 target flow 안에서 family rank를 계산하고
 > 5,000회 family-cluster bootstrap한다. 이는 code readiness일 뿐 P0 result,
 > submission 또는 model authority가 아니다.
+> Pre-execution red-team에서 equal-spacing centered derivative가 omitted
+> center value에 무감할 수 있음을 확인했다. Threshold와 estimand는 유지하고,
+> 실제 left/right one-sided tangent를 two-neighbour secant와 비교하도록 구현을
+> 수정했다. Smooth-pass/jagged-fail negative control을 추가했으며 real row와
+> scientific check는 여전히 0이다.
 
 > **Schema 11.7 current gate: no executable experiment.** The AneuX direct-
 > prior reappraisal rejects all six formulations; best 32.0/40 fails the

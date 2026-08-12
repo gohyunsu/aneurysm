@@ -498,7 +498,9 @@
             P0는 train family에서 response descriptor의 coordinate-half agreement와
             leave-one-flow 안정성만 확인합니다. 단조적인 flow 크기가 상관을 부풀리지
             않도록 각 target flow 안에서 family 순위를 비교하고 5,000회 family
-            bootstrap합니다. Pass는 baseline-only P1을 열 뿐입니다.
+            bootstrap합니다. Omitted center에 무감할 수 있는 centered-difference
+            비교는 실행 전에 제거하고, 실제 좌우 one-sided tangent와 neighbour
+            secant를 비교하도록 고쳤습니다. Pass는 baseline-only P1을 열 뿐입니다.
             P1에서 analytic scaling, interpolation, MLP, DeepONet, DeltaPhi와 graph
             controls를 field error로 먼저 match한 뒤 response 차이를 봅니다. 차이가
             없으면 논문 정체성과 architecture를 함께 닫습니다.
