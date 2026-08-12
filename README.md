@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 is synchronized:** Scientific source
+> `6512dfb83483ebfee8999f6e72717b096f46b8f3` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31587974877).
+> The expanded Overview head `fc12db9b28e1fa632c49b87667eed37b077bb2f0`
+> passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31588829344)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31588828745).
+> Private paper ledger `82dd511d8747015cb5a902891ea01d6791471b0b` is
+> remote exact and anonymously invisible; manuscript/reference bytes remain
+> unchanged. Full regression is 505 tests with 111 protocol invariant groups.
+> No scientific-server query, transfer, PBS/GPU execution or monitoring
+> occurred.
+
 > **2026-08-12 response-faithful direction · schema 11.8:** The verified
 > Aneumo compact-cache contract now supports one conditional source lead:
 > **field-error-matched multi-flow response fidelity**, scored 34.0/40 with

@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 public/private/site synchronization:** Exact
+> scientific source `6512dfb83483ebfee8999f6e72717b096f46b8f3` passed Quality
+> `31587974877`. Exact response-fidelity Overview head
+> `fc12db9b28e1fa632c49b87667eed37b077bb2f0` passed Quality
+> `31588829344` and Pages `31588828745`; the live Overview and Learn pages
+> expose schema 11.8. Private paper head
+> `82dd511d8747015cb5a902891ea01d6791471b0b` is remote exact and anonymous API
+> returns 404. Manuscript/reference SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 505/505 pass in the dependency-complete environment;
+> dependency-light CI retains its declared optional-dependency skips, and
+> protocol validation has 111 invariant groups. Title, abstract claim, method, result table,
+> figure and C21 remain inactive. This synchronization queried no scientific
+> server and used no transfer/PBS/GPU. Never access/query/transfer/submit/
+> monitor `junjinyong`; do not retry `introai9` before an external service
+> change.
+
 > **2026-08-12 response-faithful Aneumo direction · schema 11.8:** Fresh
 > acquired-asset screening admits only
 > `field_error_matched_multi_flow_response_fidelity` at 34.0/40 with residual

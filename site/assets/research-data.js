@@ -1289,6 +1289,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.8 Overview and private ISBI evidence plan are synchronized",
+      copy: "The public Overview now explains the acquired Aneumo task, response-fidelity gap, method-free P0, matched P1 falsifier, conditional anchor-response factorization and RF-C1--RF-C3 deletion rules instead of presenting the rejected AneuX direction as current. Scientific source 6512dfb… passed Quality 31587974877; Overview head fc12db9… passed Quality 31588829344 and Pages 31588828745. Private paper head 82dd511… is remote exact and anonymously invisible while manuscript/reference bytes remain unchanged. Full regression is 505 tests with 111 invariant groups. No scientific server or GPU was used.",
+      files: ["site/index.html", "site/assets/aurora.js", "site/learn.html", "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.12",
       category: "research",
       title: "Schema 11.8 admits response-faithful multi-flow surrogation to a method-free P0 only",
       copy: "A fresh acquired-asset screen gives field-error-matched multi-flow response fidelity 34.0/40, with residual novelty exactly at the 2.5/5 floor. The verified Aneumo compact contract has 32 generation families, 64 cases, eight flows and 4,096 aligned nodes. The proposed application accelerates a CFD sensitivity sweep after one nominal solve; it is not rupture prediction or patient-specific physiology. A train-only P0 now checks response endpoints under deterministic node halves and leave-one-flow interpolation. Its exact private path is unresolved, so it is non-executable. Failure mismatch, method, architecture, GPU, validation/test, outer test and claim remain closed. No scientific server was queried.",

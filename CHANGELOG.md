@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · public/private/site synchronization
+
+- Expanded the public Overview from the rejected AneuX hero to the current
+  Aneumo response-fidelity thesis, conditional architecture, falsification
+  sequence and evidence-locked RF-C1--RF-C3 paper blueprint.
+- Scientific source `6512dfb…` passed Quality `31587974877`; Overview head
+  `fc12db9…` passed Quality `31588829344` and Pages `31588828745` and is live.
+- Private paper head `82dd511…` records the ISBI page, claim, experiment and
+  table contracts while preserving `paper/main.tex` and references byte for
+  byte. Anonymous repository API returns 404.
+- Full local regression is 505/505 in the dependency-complete environment;
+  protocol validation reports 111 invariant groups. No scientific server,
+  transfer, PBS/GPU job or monitoring was used.
+
 ## 2026-08-12 · schema 11.8 · response-faithful Aneumo direction
 
 - Re-screened acquired assets and admitted one conditional application lead at
