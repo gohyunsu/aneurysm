@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 pose/operator deployment·private synchronization:** Exact
+> public scientific source `8910e1b0f8148b45732493998983577d339ecdfd`
+> passed Quality `31551588925` and Pages `31551587888`. Private paper ledger
+> `e26dadb61acf5b1268ad8d7f8f4943b6fb42cffe` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This provenance changes no schema-10.7 scientific state and opens no
+> lead/P0/P1/method/model/server/PBS/GPU/outer test/result/C21/claim.
+
 > **2026-08-12 pose/workflow and spatiotemporal-operator reappraisal · schema
 > 10.7 unchanged:** DeepAnePose exact `40042fa…` has 270 selected IDs, 140
 > positive JSON, 164 lesions and patient-wise five-fold test coverage, but weak

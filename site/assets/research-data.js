@@ -1135,6 +1135,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Pose/operator audit is live and privately pinned",
+      copy: "Exact public scientific source 8910e1b0f8148b45732493998983577d339ecdfd passed Quality 31551588925 and Pages 31551587888. Private ledger e26dadb61acf5b1268ad8d7f8f4943b6fb42cffe is remote exact, PRIVATE and anonymously returns 404. Manuscript and reference bytes are unchanged. Full regression is 458 tests: 392 pass/66 optional skip with 93 protocol invariant groups. This provenance opens no active problem, E0/P0/P1, method, model, scientific server, PBS/GPU, outer test, result or paper claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Pose/workflow and spatiotemporal-operator batch is rejected without opening compute",
       copy: "DeepAnePose's public folds are clean enough for a control but its weak-pose and reformatted-view task is direct prior. Graph Physics, Aneumo WSS Transolver and EXPIGEO further narrow generic temporal-mesh, derived-WSS and geometry-GNN novelty. The new six-way screen scores 29.0/28.5/27.0/26.0/25.5/21.5; all rows fail a mandatory floor. The edge-1-form/Hodge/equivariant/periodic proposal remains an unselected control family until a new material version demonstrates stable, field-error-matched structural failure. Source-watch v16 freezes 27 states and authorizes review only. No medical-image payload, checkpoint, E0/P0/P1, architecture, scientific server, PBS/GPU, outer test or paper claim opened.",

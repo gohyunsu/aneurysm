@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 pose/operator deployment and private pin:** Exact public
+> scientific source `8910e1b0f8148b45732493998983577d339ecdfd` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31551588925)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31551587888).
+> Private ledger `e26dadb61acf5b1268ad8d7f8f4943b6fb42cffe` is remote
+> exact, PRIVATE and anonymously returns 404. Manuscript and references remain
+> byte-for-byte unchanged. This provenance opens no paper, model or compute.
+
 > **2026-08-12 pose/workflow and spatiotemporal-operator reappraisal · schema
 > 10.7 unchanged:** DeepAnePose exact `40042fa…` provides 270 selected
 > subject/session IDs, 140 positive annotation JSONs, 164 lesions and clean

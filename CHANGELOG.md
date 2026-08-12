@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-12 · Pose/operator audit deployed and privately pinned
+
+- Exact public scientific source `8910e1b0f8148b45732493998983577d339ecdfd`
+  passed Quality `31551588925` and Pages `31551587888`.
+- Private ledger `e26dadb61acf5b1268ad8d7f8f4943b6fb42cffe` is remote exact,
+  PRIVATE and anonymously returns 404. Manuscript and reference hashes are
+  unchanged.
+- This provenance-only synchronization opens no active problem, method, model,
+  compute, result or paper claim.
+
 ## 2026-08-12 · Pose/workflow and spatiotemporal-operator source reappraisal
 
 - Audited DeepAnePose exact `40042fa…`: 270 selected subject/session IDs, 140
