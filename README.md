@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 surface-vector finite closure · schema 10.7 unchanged:** The
+> field-accuracy-versus-flow-organization question is retained, but the known
+> asset family is now `closed_until_whitelisted_material_release`. AneuG and
+> Aneurisk are unchanged; AneuX remains manually gated without field/family
+> semantics; AAA-WSS remains README-only; TRELLIS remains unavailable. The
+> only new Synthetic-AAA `main` diff changes `README.md` and `CITATION.cff`
+> to add DOI/citation metadata, not a generated population or transient field
+> cohort. Source-watch v15 freezes 24 states. There is no fresh E0, P0/P1,
+> architecture, scientific-server query or compute. See the
+> [finite closure and re-entry contract](docs/surface-vector-finite-closure-and-reentry-contract-2026-08-12.md).
+
 > **2026-08-12 longitudinal-biology delta deployment and private pin:** Exact
 > public scientific source `0cadda2cf03144f2e876862a727714858999b56c`
 > passed [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31547562160)
@@ -96,9 +107,10 @@
 > automatic-versus-manual haemorrhage volume for six-month GOS, while public
 > multiclass and LoRA/DoRA studies occupy the obvious model variants. Six fresh
 > formulations score **29.0/28.5/28.0/28.0/27.0/22.5**; all are rejected on
-> residual novelty or joined-asset floors. Source-watch v14 freezes 23 public
+> residual novelty or joined-asset floors. Source-watch v15 freezes 24 public
 > states. The RAR and checkpoint remain unopened; active lead/P0/P1/method/
-> model/server/GPU/claim are zero and surface-vector remains inactive. See the
+> model/server/GPU/claim are zero and surface-vector is closed until a
+> whitelisted material release. Source-watch v15 freezes 24 public states. See the
 > [exact reappraisal](docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md).
 
 > **2026-08-12 schema 10.6 scientific deployment/private synchronization:**

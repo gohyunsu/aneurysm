@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **2026-08-12 surface-vector finite gate:** No fresh E0 exists, so no new P0
+> is registered. Do not repair or rerun `115645`, accept gated terms, generate
+> a replacement synthetic cohort, inspect scientific-server data or select a
+> model. Source-watch v15 can request manual re-audit only. After a whitelisted
+> material release, the order is E0 source admission → E1 method-free signed-
+> degree stability/abstention → E2 matched-baseline failure → E3 bounded
+> family-disjoint development → E4 fresh confirmation → E5 matched-coordinate
+> interpretation. Any failure closes the new version without local repair.
+
 > **2026-08-12 longitudinal-biology gate:** Zero candidates are admitted. Do
 > not request human or animal data, infer cross-cohort mediation, stage images,
 > register P0/P1, choose an architecture, query a scientific server or submit

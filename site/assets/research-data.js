@@ -3,7 +3,7 @@ window.AURORA_DATA = Object.freeze({
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
     status: "Target locked · aSAH segmentation/outcome batch best 29.0/40 rejected on residual-novelty and joined-asset floors; all six fail total or a critical floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or official versioned patient-level image–mask–outcome join audit; re-entry requires endpoint time, separate mortality/functional outcomes, treatment timing, patient/centre/repeat/split identifiers and adjudication; surface-vector remains inactive, no RAR/checkpoint, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    requirement: "the next admissible action is a fresh problem or official versioned patient-level image–mask–outcome join audit; surface-vector is closed until a whitelisted material release and then requires method-free stability plus a matched failure; no RAR/checkpoint, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "The surface-vector question is retained while the current asset family is finitely closed",
+      copy: "AneuG remains the exact source version of closed job 115645; Aneurisk remains revision 4; AneuX remains manually gated without tensor and independent-family semantics; the AAA transient-WSS repository remains README-only; TRELLIS remains unavailable. Synthetic-AAA moved from release 98363a0… to main 7872b81…, but the complete diff changes only README and CITATION metadata and adds no generated population or transient field cohort. This is not fresh E0. Re-entry now requires a whitelisted material release and then method-free degree stability, a field-error-matched baseline failure, bounded development and fresh confirmation.",
+      status: "closed until material release · source-watch v15: 24 states · lead/P0/method/model/server/GPU 0",
+      url: "../docs/surface-vector-finite-closure-and-reentry-contract-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Real future follow-up does not identify a cross-cohort biological mechanism",
@@ -1114,6 +1121,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Surface-vector moves from open-ended inactivity to a finite material-release gate",
+      copy: "The field-accuracy-versus-structure hypothesis is preserved, but all known executable routes have a terminal disposition. Exact AneuG/Aneurisk histories remain closed without repair; AneuX lacks public schema/family lineage; AAA-WSS and TRELLIS do not provide executable matched baselines. The only fresh Synthetic-AAA commit changes DOI/citation metadata, not generated fields. Source-watch v15 freezes 24 states and can request source re-audit only. No payload, P0/P1, architecture, server, PBS/GPU, outer test or claim opened.",
+      files: ["docs/surface-vector-finite-closure-and-reentry-contract-2026-08-12.md", "configs/source_watch_v15.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

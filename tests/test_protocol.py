@@ -329,6 +329,63 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "Source watch v14"):
             validate_protocol(candidate)
 
+    def test_surface_vector_family_is_finitely_closed_without_deleting_hypothesis(self) -> None:
+        closure = self.protocol["problem_selection"]["surface_vector_finite_closure"]
+        self.assertEqual(closure["status"], "closed_until_whitelisted_material_release")
+        self.assertTrue(closure["scientific_hypothesis_retained"])
+        self.assertTrue(closure["current_asset_family_closed"])
+        self.assertFalse(closure["active_paper_identity"])
+        self.assertEqual(
+            closure["historical_aneug_scientific_checks_evaluated_total"], [0, 10]
+        )
+        self.assertFalse(closure["historical_job_repaired_or_rerun"])
+        self.assertEqual(
+            closure["synthetic_aaa_post_release_changed_paths"],
+            ["CITATION.cff", "README.md"],
+        )
+        self.assertTrue(
+            closure[
+                "synthetic_aaa_post_release_change_is_doi_and_citation_metadata_only"
+            ]
+        )
+        self.assertFalse(closure["fresh_material_e0_identified"])
+        self.assertIsNone(closure["current_architecture"])
+        self.assertFalse(closure["p0_registered"])
+        self.assertFalse(closure["scientific_server_queried"])
+        self.assertFalse(closure["junjinyong_accessed"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["surface_vector_finite_closure"][
+            "fresh_material_e0_identified"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "finite closure"):
+            validate_protocol(candidate)
+
+    def test_source_watch_v15_adds_synthetic_aaa_without_authority(self) -> None:
+        watch = self.protocol["problem_selection"]["public_source_watch_v15"]
+        self.assertEqual(watch["config"], "configs/source_watch_v15.json")
+        self.assertEqual(watch["watch_count"], 24)
+        self.assertEqual(
+            watch["synthetic_aaa_main_head"],
+            "7872b816f1803195bcb54524caeb715970bfdcc7",
+        )
+        self.assertTrue(watch["synthetic_aaa_post_release_change_is_metadata_only"])
+        self.assertTrue(watch["same_as_all_frozen_snapshots"])
+        self.assertFalse(watch["manual_review_triggered"])
+        self.assertFalse(watch["automatic_download_authorized"])
+        self.assertFalse(watch["p0_or_p1_authorized"])
+        self.assertFalse(watch["method_or_architecture_authorized"])
+        self.assertFalse(watch["gpu_or_outer_test_authorized"])
+        self.assertFalse(watch["server_queried"])
+        self.assertFalse(watch["junjinyong_accessed_for_this_watch"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v15"][
+            "method_or_architecture_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v15"):
+            validate_protocol(candidate)
+
     def test_future_source_admission_is_noncompensatory_and_prospective(self) -> None:
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]

@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Surface-vector finite decision · 2026-08-12:** Preserve the falsifiable
+> question but stop treating the same public objects as an open research loop.
+> The current family is closed until an official phase-resolved field schema,
+> independent-family manifest, executable matched baseline or physical paired
+> reference materially appears. The Synthetic-AAA post-release change is DOI/
+> citation metadata only. A future signal reopens source audit, not a model.
+> Exact points/tracks remain secondary to method-free signed-degree stability
+> and abstention; Hodge/equivariance remain controls. [Finite contract](surface-vector-finite-closure-and-reentry-contract-2026-08-12.md)
+
 > **Longitudinal-biology delta · 2026-08-12:** A future-event estimand exists
 > in the literature, but it does not open an AURORA paper. Long-term baseline
 > AWE to composite instability is direct prior; inflammation, AWE, growth and

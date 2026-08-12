@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-12 · Surface-vector finite closure and source-watch v15
+
+- Accepted the scientific distinction between field accuracy and stable flow
+  organization, but rejected architecture-first activation. The current asset
+  family is now explicitly closed until a whitelisted material release.
+- Reconfirmed AneuG `9dd4180…`, Aneurisk revision 4, AneuX `38c574b…`,
+  AAA-WSS `2f78bf1…` and unavailable TRELLIS. The only observed Synthetic-AAA
+  change from release `98363a0…` to main `7872b81…` touches README/CITATION
+  metadata only; no generated cohort or transient fields were added.
+- Added a finite re-entry whitelist and E0--E5 ladder. A README/DOI edit,
+  wrapper, timeout, parser, cache, seed or locally generated synthetic set is
+  not fresh evidence. Source-watch v15 freezes 24 public states and remains
+  manual-review-only.
+- Preserved `115645.ECE-util1` as E/exit 2, GPU 0, 0/10 no-verdict history.
+  No payload, P0/P1, model, scientific server, PBS/GPU, outer test or claim
+  opened; schema 10.7 and the current aSAH batch are unchanged.
+
 ## 2026-08-12 · Longitudinal-biology delta deployed and privately pinned
 
 - Exact public scientific source `0cadda2cf03144f2e876862a727714858999b56c`

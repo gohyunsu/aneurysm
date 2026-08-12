@@ -1,4 +1,12 @@
-# Public source watch · twenty-three material/direct-prior source states
+# Public source watch · twenty-four material/direct-prior source states
+
+> **Surface-vector finite watch · 2026-08-12:** `source_watch_v15.json`
+> extends v14 with exact Synthetic-AAA release tag `98363a0…` and current main
+> `7872b81…`. Their complete diff changes only README and CITATION metadata;
+> generated populations and transient CFD fields remain uncommitted. All 24
+> states match. A future head/root/release/license/size change can request
+> manual source re-audit only. It cannot satisfy E0, repair a closed job,
+> generate replacement evidence, select architecture or authorize compute.
 
 > **Schema 10.7 watch · 2026-08-12:** `source_watch_v14.json` extends the
 > immutable 20-source ledger with exact aSAH mask-record revision 2, official

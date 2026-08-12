@@ -1405,7 +1405,7 @@
         </div>
         <div class="answer-card" id="structure-reappraisal">
           <span>제안된 surface-vector 분석을 어떻게 반영했나?</span>
-          <strong>문제의식은 보존했지만, 모델과 loss는 채택하지 않았습니다.</strong>
+          <strong>문제의식은 보존하되, 현재 자산 계열은 material release 전까지 유한하게 닫았습니다.</strong>
           <p>
             <b>현재 아키텍처가 GNN인가?</b> 아닙니다. 현재 선택된 architecture와
             active model은 0입니다. 과거 코드와 후보군에 mesh GNN이 있고,
@@ -1429,6 +1429,16 @@
             실험처럼 올리거나 같은 contract를 수리하지 않습니다.
           </p>
           <p>
+            이번에는 “inactive”를 무기한 반복하는 대신 종료 조건을 명시했습니다.
+            AneuG는 exact closed version이고 Aneurisk는 revision 4 그대로이며,
+            AneuX는 manual gate와 미식별 schema/family lineage가 남아 있습니다.
+            AAA-WSS code는 README-only이고 TRELLIS repository는 여전히 공개되지
+            않았습니다. Synthetic-AAA의 <code>v1.0.0</code> 이후 새 main commit도
+            실제 diff는 README의 Zenodo DOI badge와 CITATION metadata뿐입니다.
+            Generated cohort와 transient CFD field가 추가되지 않았으므로 fresh E0가
+            아닙니다.
+          </p>
+          <p>
             Open Aneurisk record는 76 geometry와 VTP archive를 제공하지만 public
             README는 vector array, phase 수·정렬, critical-point annotation과
             tolerance를 명시하지 않습니다. Companion paper가 명시하는 것은
@@ -1446,7 +1456,13 @@
             reconstruction이며, margin-aware local C1/degree control은 안정성이
             확인된 뒤에만 검토합니다.
           </p>
-          <a href="../docs/structure-faithful-wss-source-reappraisal-2026-08-11.md">점수표·direct prior·architecture correction 전체 읽기 ↗</a>
+          <div class="model-labels">
+            <span class="yes">Scientific question retained</span>
+            <span class="yes">24-source fail-closed watch</span>
+            <span class="no">Current asset family closed</span>
+            <span class="no">No E0, model or GPU</span>
+          </div>
+          <a href="../docs/surface-vector-finite-closure-and-reentry-contract-2026-08-12.md">유한 종료·source disposition·E0–E5 재진입 계약 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-transient">
           <span>새 transient-CFD source는 왜 바로 실험으로 이어지지 않나?</span>
@@ -1528,6 +1544,13 @@
             check 10개가 전부 미평가인 no-verdict history입니다. 어느 쪽도 수리·
             재실행하지 않으며, 어느 job도 running이 아닙니다. 현재 active lead·
             model·GPU는 0입니다.
+          </p>
+          <p>
+            앞으로는 source-watch v15가 정한 whitelist—공식 field schema와 family
+            manifest, independent phase-resolved cohort, executable matched baseline,
+            또는 paired physical/clinical reference—중 하나가 material하게 바뀔 때만
+            새 source audit을 엽니다. DOI badge, wrapper, timeout, parser, cache, seed나
+            locally generated cohort는 재진입 사유가 아닙니다.
           </p>
           <div class="model-labels">
             <span class="yes">Question retained</span>

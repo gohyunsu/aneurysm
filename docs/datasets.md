@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **2026-08-12 surface-vector asset closure:** No fresh phase-resolved WSS
+> asset has appeared. AneuG is the exact closed version, Aneurisk is unchanged
+> revision 4, AneuX remains manually gated without tensor/family semantics,
+> AAA-WSS is README-only and TRELLIS is unavailable. Synthetic-AAA provides an
+> MIT generator/OpenFOAM pipeline but does not commit its generated population
+> or transient field cohort; its latest main change is DOI/citation metadata
+> only. No dataset is admitted or staged.
+
 > **2026-08-12 rupture-time asset delta:** The new QIMS cohort reports 756
 > patients/877 aneurysms across three centres but exposes no versioned public
 > patient/image/feature/centre/split rows. PLOS Figshare `28661913` exposes one

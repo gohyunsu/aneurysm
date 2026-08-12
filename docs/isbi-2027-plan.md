@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-12 surface-vector submission decision:** The potential application
+> identity remains scientifically attractive, but it is not a paper. Do not
+> assign a title, contribution, architecture diagram or result table until a
+> material release supports stable structure targets, an observed field-error-
+> matched failure and fresh family-level confirmation. “Edge 1-form + Hodge +
+> equivariance + topology loss” is not novelty. The current family is closed,
+> not discarded; manuscript and C21 remain unchanged.
+
 > **2026-08-12 longitudinal-biology decision:** Do not title the paper around
 > inflammation-aware AWE survival modelling, causal mediation, cross-species
 > transfer or MRA-to-histology translation. The association and preclinical

@@ -44,6 +44,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v12",
         "aurora.source_watch.v13",
         "aurora.source_watch.v14",
+        "aurora.source_watch.v15",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -156,7 +157,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v13_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v13(payload)
-    else:
+    elif schema == "aurora.source_watch.v14":
         if payload.get("extends") != "source_watch_v13.json":
             raise SourceWatchContractError("v14_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -167,6 +168,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v14_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v14(payload)
+    else:
+        if payload.get("extends") != "source_watch_v14.json":
+            raise SourceWatchContractError("v15_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v14":
+            raise SourceWatchContractError("v15_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v15_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v15(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -221,6 +233,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v12",
         "aurora.source_watch.v13",
         "aurora.source_watch.v14",
+        "aurora.source_watch.v15",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1624,6 +1637,86 @@ def _validate_v14(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v14_change_boundary_changed")
 
 
+def _validate_v15(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 24:
+        raise SourceWatchContractError("v15_watch_set_changed")
+    _validate_v14(
+        {
+            "watches": watches[:23],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    synthetic = watches[23]
+    expected_entries = [
+        {"name": ".gitattributes", "type": "file", "size": 66},
+        {"name": ".gitignore", "type": "file", "size": 190},
+        {"name": "__init__.py", "type": "file", "size": 0},
+        {"name": "analysis", "type": "dir", "size": 0},
+        {"name": "CITATION.cff", "type": "file", "size": 1588},
+        {"name": "config.py", "type": "file", "size": 11664},
+        {"name": "data", "type": "dir", "size": 0},
+        {"name": "LICENSE", "type": "file", "size": 1721},
+        {"name": "main.py", "type": "file", "size": 16440},
+        {"name": "README.md", "type": "file", "size": 15253},
+        {"name": "requirements.txt", "type": "file", "size": 467},
+        {"name": "run_pipeline.py", "type": "file", "size": 2132},
+        {"name": "src", "type": "dir", "size": 0},
+    ]
+    expected_material = [
+        ".gitattributes",
+        ".gitignore",
+        "__init__.py",
+        "analysis",
+        "config.py",
+        "data",
+        "main.py",
+        "requirements.txt",
+        "run_pipeline.py",
+        "src",
+    ]
+    if (
+        synthetic.get("watch_id") != "synthetic_aaa_cfd_material_release_v1"
+        or synthetic.get("kind") != "github"
+        or synthetic.get("review_request") != "fresh_source_reaudit_only"
+        or synthetic.get("source")
+        != {
+            "repository": "Harish-Research-Lab/Synthetic-AAA-CFD-framework",
+            "repository_url": "https://github.com/Harish-Research-Lab/Synthetic-AAA-CFD-framework",
+            "default_branch": "main",
+            "paper_url": "https://doi.org/10.64898/2026.02.27.708461",
+            "zenodo_doi": "10.5281/zenodo.21435232",
+            "release_tag": "v1.0.0",
+            "release_tag_commit": "98363a0104701dcc4bea11c2ee808eed1febafbe",
+        }
+        or synthetic.get("frozen_snapshot")
+        != {
+            "main_head_sha": "7872b816f1803195bcb54524caeb715970bfdcc7",
+            "root_entries": expected_entries,
+            "release_count": 1,
+            "license_spdx_id": "NOASSERTION",
+            "repository_size_kib": 143619,
+            "payload_or_code_entries": expected_material,
+            "availability": (
+                "public_mit_generator_and_openfoam_pipeline_without_committed_"
+                "generated_population_or_transient_field_cohort"
+            ),
+        }
+    ):
+        raise SourceWatchContractError("synthetic_aaa_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "doi_badge_only_commit_is_not_material_asset_change",
+            "generator_code_is_not_generated_cohort_or_transient_field_asset",
+            "surface_vector_reentry_requires_whitelisted_material_change",
+        )
+    ):
+        raise SourceWatchContractError("v15_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -2702,6 +2795,7 @@ def evaluate_config(
         "aurora.source_watch.v12",
         "aurora.source_watch.v13",
         "aurora.source_watch.v14",
+        "aurora.source_watch.v15",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

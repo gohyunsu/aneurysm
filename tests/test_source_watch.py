@@ -33,6 +33,7 @@ CONFIG_V11 = ROOT / "configs" / "source_watch_v11.json"
 CONFIG_V12 = ROOT / "configs" / "source_watch_v12.json"
 CONFIG_V13 = ROOT / "configs" / "source_watch_v13.json"
 CONFIG_V14 = ROOT / "configs" / "source_watch_v14.json"
+CONFIG_V15 = ROOT / "configs" / "source_watch_v15.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
@@ -553,7 +554,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v14.json", workflow)
+        self.assertIn("configs/source_watch_v15.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
@@ -1326,6 +1327,87 @@ class SourceWatchContractTests(unittest.TestCase):
                 CONFIG_V13, CONFIG_V12, CONFIG_V11, CONFIG_V10, CONFIG_V9,
                 CONFIG_V8, CONFIG_V7, CONFIG_V6, CONFIG_V5, CONFIG_V4,
             ):
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "authorization"):
+                load_config(candidate)
+
+    def test_v15_adds_synthetic_aaa_release_watch_without_authority(self) -> None:
+        config = load_config(CONFIG_V15)
+        self.assertEqual(config["extends"], "source_watch_v14.json")
+        self.assertEqual(len(config["watches"]), 24)
+        synthetic = config["watches"][-1]
+        self.assertEqual(
+            synthetic["watch_id"], "synthetic_aaa_cfd_material_release_v1"
+        )
+        self.assertEqual(
+            synthetic["frozen_snapshot"]["main_head_sha"],
+            "7872b816f1803195bcb54524caeb715970bfdcc7",
+        )
+        self.assertEqual(
+            synthetic["source"]["release_tag_commit"],
+            "98363a0104701dcc4bea11c2ee808eed1febafbe",
+        )
+        self.assertIn(
+            "without_committed_generated_population_or_transient_field_cohort",
+            synthetic["frozen_snapshot"]["availability"],
+        )
+
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v15_head_change_requests_review_only(self) -> None:
+        config = load_config(CONFIG_V15)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observations["synthetic_aaa_cfd_material_release_v1"][
+            "main_head_sha"
+        ] = "f" * 40
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertEqual(result["manual_review_requests"], ["fresh_source_reaudit_only"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v15_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        chain = (
+            CONFIG_V14, CONFIG_V13, CONFIG_V12, CONFIG_V11, CONFIG_V10,
+            CONFIG_V9, CONFIG_V8, CONFIG_V7, CONFIG_V6, CONFIG_V5, CONFIG_V4,
+        )
+        payload = json.loads(CONFIG_V15.read_text(encoding="utf-8"))
+        payload["added_watches"][0]["frozen_snapshot"]["release_count"] = 2
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in chain:
+                (source / config_path.name).write_text(
+                    config_path.read_text(encoding="utf-8"), encoding="utf-8"
+                )
+            with self.assertRaisesRegex(SourceWatchContractError, "synthetic_aaa"):
+                load_config(candidate)
+
+        payload = json.loads(CONFIG_V15.read_text(encoding="utf-8"))
+        payload["authorization"]["gpu_training"] = True
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory)
+            candidate = source / "source_watch.json"
+            candidate.write_text(json.dumps(payload), encoding="utf-8")
+            for config_path in chain:
                 (source / config_path.name).write_text(
                     config_path.read_text(encoding="utf-8"), encoding="utf-8"
                 )

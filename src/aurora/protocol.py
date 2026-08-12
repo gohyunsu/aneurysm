@@ -249,6 +249,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "aneug_target_construction_source_audit",
             "aneug_surface_vector_structure_source_audit",
             "surface_vector_conditional_assessment",
+            "surface_vector_finite_closure",
             "expert_virtual_removal_pair_source_delta",
             "measurement_functional_inverse_flow_source_delta",
             "structure_faithful_wss_source_reappraisal",
@@ -268,6 +269,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v12",
             "public_source_watch_v13",
             "public_source_watch_v14",
+            "public_source_watch_v15",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -278,7 +280,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_asah_segmentation_outcome_batch_rejected_no_method_no_compute_surface_vector_inactive"
+        != "no_active_problem_asah_segmentation_outcome_batch_rejected_no_method_no_compute_surface_vector_closed_until_material_release"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
@@ -305,7 +307,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ):
         raise ProtocolError(
             "The aSAH segmentation-outcome batch must remain rejected and surface-vector "
-            "must remain inactive after its exact CPU P0 ended execution-incomplete; "
+            "must remain closed until a material release after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
@@ -5367,11 +5369,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         conditional_surface["status"]
-        != "inactive_conditional_application_hypothesis_not_active_paper_identity"
+        != "closed_until_whitelisted_material_release_inactive_conditional_hypothesis"
         or conditional_surface["assessment_document"]
-        != "docs/surface-vector-analysis-adjudication-2026-08-11.md"
+        != "docs/surface-vector-finite-closure-and-reentry-contract-2026-08-12.md"
         or conditional_surface["analysis_reappraisal_status"]
-        != "accept_problem_question_reject_architecture_selection_and_keep_paper_identity_inactive"
+        != "accept_problem_question_reject_architecture_selection_and_finitely_close_current_asset_family"
         or conditional_surface["historical_candidate_id"]
         != "time_varying_surface_wss_index_structure_prediction"
         or conditional_surface["historical_source_score"] != 32.0
@@ -5455,10 +5457,122 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         }
     ):
         raise ProtocolError(
-            "The surface-vector idea must remain an inactive conditional hypothesis "
-            "whose exact P0 is closed and whose re-entry requires a material source change."
+            "The surface-vector idea must remain an inactive conditional hypothesis, "
+            "closed for the current asset family; its exact P0 is immutable and re-entry "
+            "requires a material source change through a whitelisted material release."
         )
-    checks.append("inactive surface-vector hypothesis and material re-entry boundary")
+    checks.append("finite surface-vector closure and material re-entry boundary")
+    surface_closure = problem_selection["surface_vector_finite_closure"]
+    _require_keys(
+        surface_closure,
+        [
+            "status", "audit_document", "scientific_hypothesis_retained",
+            "active_paper_identity", "current_asset_family_closed",
+            "historical_aneug_job_id", "historical_aneug_job_state",
+            "historical_aneug_exit_status", "historical_aneug_gpu_count",
+            "historical_aneug_scientific_checks_evaluated_total",
+            "historical_aneug_scientific_verdict", "historical_aneug_source_score",
+            "historical_job_repaired_or_rerun", "aneug_dataset_head",
+            "aneurisk_record_revision", "aneux_transient_head",
+            "aaa_wss_repository_head", "trellis_repository_publicly_readable",
+            "synthetic_aaa_release_tag", "synthetic_aaa_release_tag_commit",
+            "synthetic_aaa_main_head", "synthetic_aaa_post_release_changed_paths",
+            "synthetic_aaa_post_release_change_is_doi_and_citation_metadata_only",
+            "synthetic_aaa_generated_population_committed",
+            "synthetic_aaa_transient_field_cohort_committed",
+            "fresh_material_e0_identified",
+            "same_objects_new_wrapper_timeout_parser_cache_or_seed_is_fresh_evidence",
+            "architecture_selected", "current_architecture",
+            "current_architecture_is_gnn", "p0_registered", "p1_registered",
+            "method_selected", "gpu_training_authorized", "outer_test_authorized",
+            "paper_claim_authorized", "reentry_watch_config",
+            "whitelisted_material_reentry_signals", "evidence_ladder",
+            "scientific_server_queried", "pbs_or_gpu_job_created",
+            "execution_server_if_future_gate_authorized",
+            "login_node_gpu_command_executed", "junjinyong_accessed", "next_action",
+        ],
+        "surface-vector finite closure",
+    )
+    if (
+        surface_closure["status"] != "closed_until_whitelisted_material_release"
+        or surface_closure["audit_document"]
+        != "docs/surface-vector-finite-closure-and-reentry-contract-2026-08-12.md"
+        or surface_closure["scientific_hypothesis_retained"] is not True
+        or surface_closure["active_paper_identity"] is not False
+        or surface_closure["current_asset_family_closed"] is not True
+        or surface_closure["historical_aneug_job_id"] != "115645.ECE-util1"
+        or surface_closure["historical_aneug_job_state"] != "E"
+        or surface_closure["historical_aneug_exit_status"] != 2
+        or surface_closure["historical_aneug_gpu_count"] != 0
+        or surface_closure["historical_aneug_scientific_checks_evaluated_total"]
+        != [0, 10]
+        or surface_closure["historical_aneug_scientific_verdict"] != "not_available"
+        or surface_closure["historical_aneug_source_score"] != 32.0
+        or surface_closure["historical_job_repaired_or_rerun"] is not False
+        or surface_closure["aneug_dataset_head"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or surface_closure["aneurisk_record_revision"] != 4
+        or surface_closure["aneux_transient_head"]
+        != "38c574bc54a1ead9a4830da09ae5087e42b9d6c2"
+        or surface_closure["aaa_wss_repository_head"]
+        != "2f78bf1879e5e555c3369d91822be3f567f9fbd1"
+        or surface_closure["trellis_repository_publicly_readable"] is not False
+        or surface_closure["synthetic_aaa_release_tag"] != "v1.0.0"
+        or surface_closure["synthetic_aaa_release_tag_commit"]
+        != "98363a0104701dcc4bea11c2ee808eed1febafbe"
+        or surface_closure["synthetic_aaa_main_head"]
+        != "7872b816f1803195bcb54524caeb715970bfdcc7"
+        or surface_closure["synthetic_aaa_post_release_changed_paths"]
+        != ["CITATION.cff", "README.md"]
+        or surface_closure[
+            "synthetic_aaa_post_release_change_is_doi_and_citation_metadata_only"
+        ]
+        is not True
+        or surface_closure["synthetic_aaa_generated_population_committed"] is not False
+        or surface_closure["synthetic_aaa_transient_field_cohort_committed"] is not False
+        or surface_closure["fresh_material_e0_identified"] is not False
+        or surface_closure[
+            "same_objects_new_wrapper_timeout_parser_cache_or_seed_is_fresh_evidence"
+        ]
+        is not False
+        or surface_closure["current_architecture"] is not None
+        or surface_closure["current_architecture_is_gnn"] is not False
+        or surface_closure["reentry_watch_config"] != "configs/source_watch_v15.json"
+        or surface_closure["whitelisted_material_reentry_signals"]
+        != [
+            "official_phase_resolved_surface_vector_schema_units_time_correspondence_and_family_manifest",
+            "licensed_independent_phase_resolved_wss_cohort_with_prospective_split_capacity",
+            "executable_direct_prior_code_checkpoint_fold_and_compatible_field_release",
+            "physical_or_clinical_paired_reference_with_shared_coordinates_and_independent_anatomies",
+        ]
+        or surface_closure["evidence_ladder"]
+        != [
+            "e0_source_admission",
+            "e1_method_free_degree_stability_and_abstention",
+            "e2_field_error_matched_baseline_failure",
+            "e3_bounded_family_disjoint_validation_development",
+            "e4_fresh_field_noninferiority_and_structure_superiority_confirmation",
+            "e5_matched_coordinate_interpretation_without_clinical_overclaim",
+        ]
+        or any(
+            surface_closure[key] is not False
+            for key in (
+                "architecture_selected", "p0_registered", "p1_registered",
+                "method_selected", "gpu_training_authorized", "outer_test_authorized",
+                "paper_claim_authorized", "scientific_server_queried",
+                "pbs_or_gpu_job_created", "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or surface_closure["execution_server_if_future_gate_authorized"] != "introai9"
+        or surface_closure["next_action"]
+        != "source_watch_only_for_whitelisted_material_signal_or_genuinely_fresh_problem_class_no_local_repair_or_compute"
+    ):
+        raise ProtocolError(
+            "Surface-vector finite closure must preserve the exact no-verdict history, "
+            "reject metadata-only re-entry, and authorize no local repair, model or compute."
+        )
+    checks.append("surface-vector closed-until-material-release invariant")
     foundation_prior = conditional_surface["foundation_surface_feature_direct_prior"]
     _require_keys(
         foundation_prior,
@@ -7949,6 +8063,67 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "score repair, P0, model or compute."
         )
     checks.append("twenty-three-source fail-closed aSAH asset and baseline watch boundary")
+    source_watch_v15 = problem_selection["public_source_watch_v15"]
+    _require_keys(
+        source_watch_v15,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "synthetic_aaa_release_tag_commit",
+            "synthetic_aaa_main_head", "synthetic_aaa_post_release_changed_paths",
+            "synthetic_aaa_post_release_change_is_metadata_only",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+            "p0_or_p1_authorized", "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized", "server_queried",
+            "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v15",
+    )
+    if (
+        source_watch_v15["status"]
+        != "watch_only_all_twenty_four_frozen_snapshots_match"
+        or source_watch_v15["config"] != "configs/source_watch_v15.json"
+        or source_watch_v15["extends_historical_config"]
+        != "configs/source_watch_v14.json"
+        or source_watch_v15["config_sha256"]
+        != "a585e8b00fe10e168356edf9084fba5d861b75efa9fc609ac2a07cb7c0bf46af"
+        or source_watch_v15["watch_count"] != 24
+        or source_watch_v15["added_watch_ids"]
+        != ["synthetic_aaa_cfd_material_release_v1"]
+        or source_watch_v15["synthetic_aaa_release_tag_commit"]
+        != "98363a0104701dcc4bea11c2ee808eed1febafbe"
+        or source_watch_v15["synthetic_aaa_main_head"]
+        != "7872b816f1803195bcb54524caeb715970bfdcc7"
+        or source_watch_v15["synthetic_aaa_post_release_changed_paths"]
+        != ["CITATION.cff", "README.md"]
+        or source_watch_v15["synthetic_aaa_post_release_change_is_metadata_only"]
+        is not True
+        or source_watch_v15["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v15[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+                "p0_or_p1_authorized", "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized", "server_queried",
+                "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v15["decision"]
+        != "continue_fail_closed_twenty_four_source_watch_synthetic_aaa_change_requests_fresh_source_reaudit_only_without_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v15 must preserve twenty-four exact public snapshots; "
+            "a Synthetic-AAA change may request source re-audit only, never E0, "
+            "historical repair, method or compute."
+        )
+    checks.append("twenty-four-source fail-closed Synthetic-AAA material watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
         "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",

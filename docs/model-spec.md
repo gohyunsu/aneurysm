@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **2026-08-12 surface-vector no-model closure:** Current architecture is
+> `null`, not GNN. Edge 1-form, Hodge/DEC, SE(3), periodic decoding and
+> critical-point/worldline losses remain unselected controls. The known asset
+> family is closed until a whitelisted material release passes source
+> admission, method-free degree stability and a field-error-matched failure
+> audit. Only then may the smallest mechanism-linked intervention be developed;
+> a generator, DOI badge or wrapper does not select a model.
+
 > **2026-08-12 longitudinal-biology model boundary:** No survival transformer,
 > multimodal biomarker encoder, causal mediator, cross-species foundation
 > model, histology segmenter or surface operator is selected. These modules

@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 surface-vector finite closure · schema 10.7 unchanged:** Keep
+> the hypothesis, but mark the current asset family
+> `closed_until_whitelisted_material_release`. Job `115645.ECE-util1` remains
+> E/exit 2, GPU 0, 0/10 and no-verdict; never repair or rerun it. Exact source
+> states remain AneuG `9dd4180…`, Aneurisk revision 4, AneuX `38c574b…`,
+> AAA-WSS `2f78bf1…` and unavailable TRELLIS. Synthetic-AAA moved from tag
+> `98363a0…` to main `7872b81…`, but the complete diff changes only README and
+> CITATION metadata. It is not fresh E0. Source-watch v15 freezes 24 states and
+> may request source re-audit only. Architecture/GNN/P0/P1/server/PBS/GPU/
+> outer test/result/C21/claim remain 0. Future gate-authorized execution is
+> `introai9` PBS-only with no login-node GPU. Never access, query, transfer to,
+> submit to or monitor `junjinyong`.
+
 > **2026-08-12 longitudinal-biology delta deployment·private synchronization:**
 > Exact public scientific source
 > `0cadda2cf03144f2e876862a727714858999b56c` passed Quality `31547562160`

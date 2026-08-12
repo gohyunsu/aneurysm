@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **2026-08-12 surface-vector finite closure:** This review used official
+> public repository/record metadata only. It queried no scientific server,
+> transferred no field or medical payload and created or monitored no PBS/GPU
+> job. Historical `115645.ECE-util1` remains closed E/exit 2, GPU 0, 0/10
+> no-verdict and is not repaired or rerun. Future work requires a new material
+> gate and then uses `introai9` PBS only; login-node GPU and every
+> `junjinyong` action remain prohibited.
+
 > **2026-08-12 rupture-time delta:** Scientific-server query, transfer,
 > submission and monitoring count are zero. Neither the QIMS cohort nor PLOS
 > patient CTA/feature rows were accessed; the 5,632-byte Figshare XLS body was
