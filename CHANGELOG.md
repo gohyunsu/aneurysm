@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.0 deployed and privately pinned
+
+- Exact scientific source `b7ef613ee6ac906ba23bdf5df29e51b59ac66899`
+  passed Quality `31561077612` and Pages `31561073271`.
+- Private ledger `b33a5cc82c61eb1b1da5236b363441be0951b1ad` is remote exact,
+  PRIVATE and anonymously returns 404; manuscript/reference bytes are unchanged.
+- Full regression passes: 467 tests, 401 pass/66 optional skip, 102 protocol
+  invariants, site graph, JSON, JavaScript and diff hygiene. This provenance
+  creates no task, model, compute, result or paper claim.
+
 ## 2026-08-12 · Schema 11.0 rejects collision anticipation before payload or compute
 
 - Separated current-frame contact detection from a prospective pre-contact

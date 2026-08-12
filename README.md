@@ -1,5 +1,18 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 11.0 deployment/private pin:** Exact scientific source
+> `b7ef613ee6ac906ba23bdf5df29e51b59ac66899` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31561077612)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31561073271).
+> Private ledger `b33a5cc82c61eb1b1da5236b363441be0951b1ad` is remote exact,
+> PRIVATE and anonymously returns 404. Full regression is 467 tests: 401
+> pass/66 optional skip with 102 protocol invariants. Protocol SHA-256 is
+> `01860b4f7b0cee98c50cc546e78b0ba43f767a3aa144d7b57af18578b40a19a8`;
+> source-watch v20 SHA-256 is
+> `57d2a8671e09a2f49d3e3b265ee87353b86245ecdf2d0199f482c11d50580198`.
+> Manuscript and reference bytes remain unchanged. This provenance opens no
+> active task, method, model, result, compute or submission authority.
+
 > **2026-08-12 endovascular collision-anticipation reappraisal · schema
 > 11.0:** The supplied surface-vector claim is retained only as an inactive,
 > falsifiable application question: field accuracy may differ from stable

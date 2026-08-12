@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.0 deployment/private synchronization:** Exact public
+> scientific source `b7ef613ee6ac906ba23bdf5df29e51b59ac66899` passed Quality
+> `31561077612` and Pages `31561073271`. Private paper head
+> `b33a5cc82c61eb1b1da5236b363441be0951b1ad` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` and references SHA-256 remain
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 467 tests: 401 pass/66 optional skip with 102 protocol
+> invariants; canonical protocol SHA-256 is
+> `01860b4f7b0cee98c50cc546e78b0ba43f767a3aa144d7b57af18578b40a19a8`.
+> No title, claim, method, result, figure, server or compute authority is added.
+
 > **2026-08-12 endovascular collision-anticipation · schema 11.0:** 전달된
 > surface-vector 분석에서는 “field error와 stable flow structure가 다를 수
 > 있다”는 가설 및 task stability→matched failure→bounded development→fresh

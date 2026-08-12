@@ -1190,6 +1190,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.0 collision/release audit is live and the private no-claim ledger is pinned",
+      copy: "Exact public scientific source b7ef613ee6ac906ba23bdf5df29e51b59ac66899 passed Quality 31561077612 and Pages 31561073271. Live Overview, zero-assumption chapter #collision-anticipation, exact audit and source-watch v20 expose the same rejection. Private ledger b33a5cc82c61eb1b1da5236b363441be0951b1ad is remote exact, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 467 tests: 401 pass/66 optional skip and 102 protocol invariants. This provenance opens no active problem, method, model, result, compute or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 11.0 separates present collision detection from pre-contact warning and keeps surface-vector inactive",
       copy: "Exact CathAction metadata establish a material four-archive intervention release but not a first-contact warning target. The source already occupies action anticipation, collision detection, segmentation and phantom-to-animal adaptation. Human segmentation does not establish human collision, and frame count does not establish independent procedures. Six rows score 26.5/26.5/26.0/24.5/24.0/20.0 and all fail. Source-watch v20 freezes 33 review-only states. Historical surface-vector job 115645 remains E/exit 2, GPU 0, 0/10 and no-verdict with no repair. No form, terms, payload, P0/P1, method, architecture, server, PBS/GPU, outer test or paper claim opened.",
