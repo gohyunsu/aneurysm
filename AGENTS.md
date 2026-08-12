@@ -1,11 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
-> **2026-08-13 Quality coverage correction:** The first changelog-only remote
-> Quality run `31624153346` succeeded but discovered 560 tests with 85 optional
-> skips. Do not call that run dependency-complete. Public Quality now installs
-> NumPy/h5py so the 570-test discovery set used by the scientific source is
-> exercised remotely; PyTorch remains an explicit optional skip. This is CI
-> coverage only and opens no scientific authority.
+> **2026-08-13 Quality coverage failure preserved and v2 correction
+> registered:** The first changelog-only remote Quality run `31624153346`
+> succeeded but discovered only 560 tests with 85 optional skips. Coverage v1
+> source `96770ad5e7d874ae2353864da18eaad1724ddcef` then installed NumPy/h5py;
+> Quality `31624605016` correctly failed after discovering 561 tests because
+> three now-active array checks reached a shared runtime import that also
+> requires PyTorch. Do not relabel either run dependency-complete. Coverage v2
+> pins the previously documented contract runtime: NumPy 2.1.2, h5py 3.12.1
+> and CPU PyTorch 2.5.1. It is valid only after a fresh remote run reports the
+> full 570-test set with zero errors. This is CI coverage only and opens no
+> scientific authority, data access or experiment.
 
 > **2026-08-13 residual-novelty scientific synchronization:** Exact scientific
 > public source `1cdc360170739894dde6bd71508ade76ed7fb90e` passed Quality

@@ -1,14 +1,18 @@
 # Changelog
 
-## 2026-08-13 · public Quality discovery coverage aligned
+## 2026-08-13 · public Quality coverage v1 failed closed; v2 pins the full runtime
 
-- The first changelog-only Quality run succeeded but discovered 560 tests with
-  85 optional-dependency skips, while the scientific source had been validated
-  over a 570-test discovery set.
-- Added lightweight NumPy and h5py installation to public Quality so array and
-  HDF5 contract classes are discovered remotely. PyTorch remains optional; its
-  numerical tests may stay explicit skips rather than blocking documentation
-  deployment.
+- The first changelog-only Quality run `31624153346` succeeded but discovered
+  only 560 tests with 85 optional-dependency skips, while the scientific source
+  had been validated over a 570-test discovery set.
+- Coverage v1 source `96770ad…2ddcef` added NumPy/h5py. Quality
+  `31624605016` preserved a useful failure: it discovered 561 tests but three
+  now-active array checks errored because their shared scientific import also
+  requires PyTorch. Installation itself passed; the protocol-test step failed.
+- Coverage v2 pins NumPy 2.1.2, h5py 3.12.1 and CPU PyTorch 2.5.1 and verifies
+  their versions before the contract suite. It cannot be called
+  dependency-complete until a fresh remote run reports all 570 tests with zero
+  errors. No scientific contract, result or historical attempt was repaired.
 - This is CI coverage hardening, not a P0 run, model experiment or scientific
   result. It changes no protocol threshold, field, split, seed, claim or
   execution authority.

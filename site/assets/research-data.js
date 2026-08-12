@@ -1388,8 +1388,8 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.13",
       category: "site",
-      title: "Public Quality now discovers the full array/HDF5 contract set",
-      copy: "The first changelog-only Quality run succeeded but discovered 560 tests with 85 optional-dependency skips, so it is not relabelled dependency-complete. Quality now installs lightweight NumPy and h5py before validation, aligning remote discovery with the 570-test scientific-source scope while leaving PyTorch numerical tests explicit optional skips. This changes no scientific threshold, split, seed, result, compute authority or claim.",
+      title: "Quality coverage v1 fails closed and v2 pins the complete runtime",
+      copy: "The first changelog-only Quality run 31624153346 discovered only 560 tests with 85 optional skips. Coverage v1 source 96770ad… then installed NumPy/h5py, but Quality 31624605016 failed at 561 tests because three newly active array checks reached a shared import that also requires PyTorch. That failure is preserved. Coverage v2 pins NumPy 2.1.2, h5py 3.12.1 and CPU PyTorch 2.5.1; it is not dependency-complete unless a fresh remote run reaches all 570 tests with zero errors. This changes no scientific threshold, split, seed, result, compute authority or claim.",
       files: [".github/workflows/quality.yml", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
     },
     {
