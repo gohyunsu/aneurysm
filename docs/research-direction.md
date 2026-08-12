@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Schema 11.8 confirmation-v2 narrowing:** Aneumo 원 논문의 flow-diversity
+> study와 Hemo-MPO의 geometry+BC→full-field operator를 direct prior로 뺀다.
+> 현재 residual identity는 같은 backbone/field accuracy에서 response fidelity가
+> 별도로 실패하고 anchor identity가 most-family 수준에서 고치는지다. V2는
+> exactly 100 new family 전에 precision/compute viability를 통과해야 하며,
+> 평균 효과뿐 아니라 paired/tangent 각각 최소 59/100 family improvement를
+> 요구한다. 이는 여전히 hypothesis이고 method/architecture/result가 아니다.
+
 > **Schema 11.8 independent-confirmation closure:** RF-C3는 더 이상 “최소 50
 > family”가 아니다. Historical compact 32 family 전체를 제외한 exactly 100 new
 > base family를 field-blind hash rule로 먼저 잠그고, 모든 eligible case/8 flow와

@@ -1,5 +1,20 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-13 confirmation v2:** Historical 32-family compact holding은
+> 그대로 개발 자산이며, exactly 100 new family는 다른 dataset 탐색이 아니라
+> 427-base-geometry Aneumo release 내부 확장이다. V1은 evidence access 전에
+> 보존·supersede되었다. Current v2는 final-candidate development contrast의
+> prefield precision gate, complete 2-model×5-seed workload ≤40 GPU-hour,
+> case-log→family geometric estimator와 두 endpoint 각각 최소 59/100 family
+> win을 추가한다. Aneumo flow diversity와 Hemo-MPO boundary-conditioned
+> operator는 direct prior이므로 contribution에서 제외한다.
+
+> **2026-08-13 official format recheck:** Official author instructions remain
+> single blind, four technical pages, optional USD 200 fifth page restricted to
+> ethics/acknowledgments-conflicts/references, and 26 October 2026 23:59 USA EDT.
+> Ethics compliance and conflict disclosure remain mandatory, and the official
+> submission endpoint still says `Coming Soon`.
+
 > **2026-08-12 independent-confirmation contract:** “≥50 untouched family”는
 > sample enlargement, historical six-family reuse, within-family weighting,
 > seed aggregation과 figure cherry-picking을 닫지 못했다. Current inactive

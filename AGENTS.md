@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 schema 11.8 inactive independent-confirmation v2:** Preserve v1
+> unchanged and supersede it before confirmation metadata/field/prediction
+> access. Current v2 config/validator SHA-256 are
+> `570bbca4218e1ef22f681c8e308c012b62f92a93807a92dc4953226342f64481` /
+> `7c6dca01253dc7494ba013f72b0c2aee7a7c8ea49fc24e7215fdde97431a0564`.
+> Aneumo reports 427 base geometries; excluding historical 32 leaves at most
+> 395, so exactly 100 is same-release expansion, not new-dataset search. Before
+> outer field access, both final-candidate development response SDs must be
+> ≤0.2981054601 and the complete case-flow×2-model×5-seed projection must be
+> ≤40 GPU-hours. Case log-error ratios aggregate through five seeds to one row
+> per family. Both responses additionally require one-sided Wilson lower >0.5,
+> i.e. at least 59/100 family wins. Aneumo flow diversity and Hemo-MPO geometry+
+> BC full-field learning are direct priors; multi-flow/operator/component-stack
+> novelty is forbidden. Current viability/metadata/field/prediction/server/PBS/
+> GPU/result/claim are 0; real P0 remains 0/11. Never access `junjinyong` and do
+> not retry `introai9` before verified external change.
+> Dependency-complete regression passes 561/561 tests; protocol retains 111
+> invariant groups at canonical SHA-256
+> `4e37a1d3bdcda6456d7de07bbdaa5d8ad51022fb161fdbb58063f712a5293b1a`.
+
 > **2026-08-13 schema 11.8 confirmation/private synchronization:** Exact
 > scientific public source `d82745261c9b62e182a9b82f03207b90b3733960`
 > passed Quality `31610409552` and Pages `31610409674`. Private planning head

@@ -6,6 +6,14 @@ claim remain unselected**
 Target venue: **IEEE ISBI 2027**  
 Decision date: 2026-08-12 KST
 
+> **2026-08-13 confirmation-v2 correction:** Aneumo already studies flow-count
+> diversity and Hemo-MPO already maps geometry and boundary conditions to full
+> fields. Current novelty therefore excludes multi-flow/operator claims. The
+> preserved pre-evidence confirmation v1 is superseded by v2, which keeps 100
+> new families but adds prefield precision/complete-workload viability, an exact
+> case-log→family estimator and a ≥59/100 family-win safeguard for both response
+> endpoints. See the [v2 red-team](response-fidelity-confirmation-red-team-2026-08-13.md).
+
 > **Direct-prior reappraisal:** SC-FNO already occupies generic sensitivity-
 > constrained operator learning; Hemo-MPO already combines SE(3) mesh encoding,
 > physics constraints and DeepONet on Aneumo; AB-GATr already benchmarks

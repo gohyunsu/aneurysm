@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.8 inactive confirmation v2:** V1은 metadata/field/prediction 0
+> 상태에서 보존·supersede했다. Exactly 100 new family는 그대로 유지하되,
+> outer field 전에 final-candidate 20 development-family contrast로 두 response
+> endpoint의 dispersion adequacy를 확인하고 전체 `case-flow×2 model×5 seed`
+> runtime upper projection이 40 GPU-hour 이내인지 확인한다. Case error
+> log-ratio를 family와 seed 안에서 평균한 뒤 100 family만 bootstrap하며,
+> paired/tangent 모두 one-sided Wilson lower >0.5, 즉 최소 59/100 family win을
+> 요구한다. 실패하면 sample/threshold를 고치지 않고 exact version을 닫는다.
+
 > **Schema 11.8 inactive independent confirmation v1:** 이전 ≥50 family 문구를
 > exactly 100 new generation base family로 강화하고 historical compact 32
 > family 전체를 제외한다. Metadata-only SHA-256 selection manifest를 field read

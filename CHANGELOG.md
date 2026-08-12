@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-13 · schema 11.8 · confirmation v2 red-team
+
+- Preserved v1 and superseded it before confirmation metadata, field or
+  prediction access; no historical result was repaired or relabelled.
+- Reconciled the verified 32-family compact holding with Aneumo's reported 427
+  base geometries: 100 new families are a same-release expansion after excluding
+  historical 32, not a search for another dataset.
+- Added a prefield two-endpoint precision gate and complete
+  `case-flow×2 model×5 seed` workload projection under the 40 GPU-hour cap.
+- Defined the estimator as case log-error contrast → family/seed mean →
+  100-family geometric mean and bootstrap. Both responses also require at least
+  59/100 family wins so a minority of extreme families cannot create the claim.
+- Subtracted Aneumo flow-diversity analysis and Hemo-MPO geometry+BC full-field
+  learning as direct priors. Multi-flow conditioning and operator-component
+  stacking are not novelty.
+- Real P0 remains 0/11; no confirmation metadata, field, prediction, server,
+  PBS/GPU, result or paper claim was opened.
+- Dependency-complete regression passes 561/561 tests; protocol retains 111
+  invariant groups at canonical SHA-256 `4e37a1d3…293b1a`.
+
 ## 2026-08-13 · schema 11.8 · confirmation and private ledger synchronized
 
 - Exact scientific public source `d827452…` passed Quality `31610409552` and

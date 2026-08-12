@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-13 residual-gap correction:** Aneumo already evaluates training and
+> validation flow diversity, while Hemo-MPO already conditions a full-field
+> operator on geometry and physiological boundary conditions. Therefore the
+> lineage does not end in “multi-flow GNN/operator.” It ends in an unevaluated
+> matched endpoint: whether solution-field selection preserves anchor-relative
+> response curves, whether an identity output fixes the same-backbone failure,
+> and whether both mean and majority-family effects survive a prospectively
+> viable 100-family confirmation.
+
 > **Schema 11.8 direct-prior correction:** [SC-FNO](https://proceedings.iclr.cc/paper_files/paper/2025/hash/227b19598f79ed838b01933b9a6ace41-Abstract-Conference.html)는
 > parametric PDE의 solution path와 sensitivity를 함께 학습하는 문제를 이미
 > 점유한다. [Hemo-MPO](https://doi.org/10.1016/j.aej.2026.05.044)는 Aneumo에서

@@ -1290,17 +1290,35 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != 80.0
         or response_fidelity["p1_design_real_p0_required_check_count"] != 11
         or response_fidelity["p1_design_real_p0_observed_check_count"] != 0
-        or response_fidelity["confirmation_design_template"]
+        or response_fidelity["confirmation_design_v1_template"]
         != "configs/aneumo_response_fidelity_confirmation_template_v1.json"
-        or response_fidelity["confirmation_design_template_sha256"]
+        or response_fidelity["confirmation_design_v1_template_sha256"]
         != "aa2cf90f9b1d34ecf74f94ef8eb88559671458e126ab5004d1ae24024bc910ec"
-        or response_fidelity["confirmation_design_validator"]
+        or response_fidelity["confirmation_design_v1_validator"]
         != "src/aurora/aneumo_response_fidelity_confirmation_template_v1.py"
-        or response_fidelity["confirmation_design_validator_sha256"]
+        or response_fidelity["confirmation_design_v1_validator_sha256"]
         != "a03c9b754fc857298a6b8a136d7651edfcaa17092f9551b1a40cdd03a0958aac"
+        or response_fidelity["confirmation_design_template"]
+        != "configs/aneumo_response_fidelity_confirmation_template_v2.json"
+        or response_fidelity["confirmation_design_template_sha256"]
+        != "570bbca4218e1ef22f681c8e308c012b62f92a93807a92dc4953226342f64481"
+        or response_fidelity["confirmation_design_validator"]
+        != "src/aurora/aneumo_response_fidelity_confirmation_template_v2.py"
+        or response_fidelity["confirmation_design_validator_sha256"]
+        != "7c6dca01253dc7494ba013f72b0c2aee7a7c8ea49fc24e7215fdde97431a0564"
         or response_fidelity["confirmation_design_status"]
-        != "draft_non_authoritative_blocked_on_p0_p1_bounded_development_and_fresh_reentry"
+        != "draft_non_authoritative_blocked_on_p0_p1_bounded_development_fresh_reentry_and_prefield_viability"
+        or response_fidelity["confirmation_reported_total_base_family_count"] != 427
+        or response_fidelity["confirmation_maximum_post_exclusion_base_family_count"]
+        != 395
         or response_fidelity["confirmation_required_new_base_family_count"] != 100
+        or response_fidelity["confirmation_maximum_population_sampling_fraction"]
+        != 0.25316455696202533
+        or response_fidelity["confirmation_prefield_precision_minimum_development_families"]
+        != 20
+        or response_fidelity["confirmation_prefield_precision_maximum_observed_family_log_contrast_sd"]
+        != 0.29810546005930777
+        or response_fidelity["confirmation_prefield_precision_target_power"] != 0.8
         or response_fidelity["confirmation_bootstrap_unit"]
         != "aneumo_generation_base_family"
         or response_fidelity["confirmation_bootstrap_replicates"] != 10000
@@ -1308,6 +1326,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != 0.01980262729617973
         or response_fidelity["confirmation_minimum_response_point_reduction"] != 0.1
         or response_fidelity["confirmation_minimum_positive_seed_count"] != 4
+        or response_fidelity["confirmation_minimum_family_win_count_when_n_100"]
+        != 59
         or response_fidelity["confirmation_interpretable_figure_roles"]
         != ["candidate_worst_case", "typical_case", "candidate_best_case"]
         or response_fidelity["confirmation_maximum_gpu_hours"] != 40.0
@@ -1348,11 +1368,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p1_design_required_positive_residual_direction",
                 "p1_design_fresh_seed_or_disjoint_split_reentry_required",
                 "p1_design_validator_synthetic_tests_passed",
+                "confirmation_design_v1_superseded_pre_execution",
                 "confirmation_design_non_authoritative",
                 "confirmation_excludes_all_historical_32_base_families",
                 "confirmation_uses_all_eligible_cases_and_all_eight_flows",
                 "confirmation_family_mean_and_seed_mean_precede_resampling",
+                "confirmation_aneumo_flow_diversity_is_direct_prior",
+                "confirmation_hemo_mpo_boundary_condition_full_field_is_direct_prior",
+                "confirmation_prefield_viability_required",
+                "confirmation_prefield_compute_projection_counts_two_models_five_seeds",
+                "confirmation_exact_case_log_family_geometric_estimator",
                 "confirmation_intersection_union_all_primary_requirements",
+                "confirmation_majority_family_wilson_safeguard",
             )
         )
         or any(
@@ -1369,6 +1396,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p1_design_formal_power_claim_allowed",
                 "p1_design_bounded_development_authorized_now",
                 "historical_six_test_families_can_count_toward_confirmation",
+                "confirmation_design_v1_executed",
+                "confirmation_design_v1_metadata_read",
+                "confirmation_design_v1_field_or_prediction_read",
+                "confirmation_multi_flow_operator_or_component_stack_claim_allowed",
+                "confirmation_prefield_precision_viability_evaluated",
+                "confirmation_prefield_compute_viability_evaluated",
                 "confirmation_post_result_sample_enlargement_allowed",
                 "confirmation_authorized_now", "confirmation_manifest_created",
                 "confirmation_field_read",
@@ -1407,6 +1440,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("p1_design_v2_validator", "p1_design_v2_validator_sha256"),
         ("p1_design_template", "p1_design_template_sha256"),
         ("p1_design_validator", "p1_design_validator_sha256"),
+        ("confirmation_design_v1_template", "confirmation_design_v1_template_sha256"),
+        ("confirmation_design_v1_validator", "confirmation_design_v1_validator_sha256"),
         ("confirmation_design_template", "confirmation_design_template_sha256"),
         ("confirmation_design_validator", "confirmation_design_validator_sha256"),
     ):

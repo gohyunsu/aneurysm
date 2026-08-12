@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.8 confirmation-v2 edge · 2026-08-13:** The 427-family Aneumo
+> source node already owns flow-diversity evaluation; Hemo-MPO owns geometry+
+> boundary-condition full-field operator learning. The remaining edge is a
+> matched response-fidelity mechanism. Before 100-family field access, it now
+> passes a two-endpoint precision and complete-workload gate. Confirmation then
+> requires both mean improvement and a majority-family Wilson lower bound.
+> All nodes remain inactive because real P0 is 0/11.
+
 > **Schema 11.8 confirmation edge · 2026-08-12:** RF-C3 now terminates at a
 > prospective exactly-100-new-family node. All historical 32 compact families
 > count zero; every eligible case and eight flows collapse to one family mean;

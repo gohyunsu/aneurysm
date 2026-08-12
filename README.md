@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 inactive independent-confirmation v2:** The same Aneumo release
+> reports 427 base geometries; exactly 100 new families expand that release after
+> excluding the historical 32. Preserved v1 is superseded before metadata,
+> field or prediction access. Current
+> [v2](configs/aneumo_response_fidelity_confirmation_template_v2.json) adds a
+> two-endpoint development-dispersion gate, complete two-model/five-seed runtime
+> projection, exact case-log→family geometric estimator and a majority-family
+> safeguard: both responses need at least 59/100 family wins. Aneumo already
+> studies flow diversity and Hemo-MPO already learns geometry+BC→full fields, so
+> neither is a contribution. This is still a non-authoritative design: real P0
+> is 0/11 and viability/data/model/server/PBS/GPU/result/claim remain zero.
+> Dependency-complete regression passes 561/561 tests; the protocol retains
+> 111 invariant groups at canonical SHA-256
+> `4e37a1d3bdcda6456d7de07bbdaa5d8ad51022fb161fdbb58063f712a5293b1a`.
+
 > **Schema 11.8 confirmation/private synchronization:** Exact scientific
 > public source `d82745261c9b62e182a9b82f03207b90b3733960` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31610409552)

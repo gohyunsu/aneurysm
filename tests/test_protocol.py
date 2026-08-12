@@ -111,15 +111,40 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(audit["p1_design_fresh_seed_or_disjoint_split_reentry_required"])
         self.assertEqual(audit["p1_design_real_p0_observed_check_count"], 0)
         self.assertTrue(audit["p1_design_validator_synthetic_tests_passed"])
+        self.assertTrue(audit["confirmation_design_v1_superseded_pre_execution"])
+        self.assertFalse(audit["confirmation_design_v1_executed"])
+        self.assertFalse(audit["confirmation_design_v1_metadata_read"])
         self.assertEqual(
             audit["confirmation_design_template"],
-            "configs/aneumo_response_fidelity_confirmation_template_v1.json",
+            "configs/aneumo_response_fidelity_confirmation_template_v2.json",
         )
         self.assertTrue(audit["confirmation_design_non_authoritative"])
+        self.assertEqual(audit["confirmation_reported_total_base_family_count"], 427)
+        self.assertEqual(
+            audit["confirmation_maximum_post_exclusion_base_family_count"], 395
+        )
         self.assertEqual(audit["confirmation_required_new_base_family_count"], 100)
+        self.assertEqual(
+            audit["confirmation_maximum_population_sampling_fraction"], 100 / 395
+        )
         self.assertTrue(audit["confirmation_excludes_all_historical_32_base_families"])
         self.assertTrue(audit["confirmation_uses_all_eligible_cases_and_all_eight_flows"])
         self.assertTrue(audit["confirmation_family_mean_and_seed_mean_precede_resampling"])
+        self.assertTrue(audit["confirmation_aneumo_flow_diversity_is_direct_prior"])
+        self.assertTrue(
+            audit["confirmation_hemo_mpo_boundary_condition_full_field_is_direct_prior"]
+        )
+        self.assertFalse(
+            audit["confirmation_multi_flow_operator_or_component_stack_claim_allowed"]
+        )
+        self.assertTrue(audit["confirmation_prefield_viability_required"])
+        self.assertEqual(
+            audit["confirmation_prefield_precision_maximum_observed_family_log_contrast_sd"],
+            0.29810546005930777,
+        )
+        self.assertFalse(audit["confirmation_prefield_precision_viability_evaluated"])
+        self.assertFalse(audit["confirmation_prefield_compute_viability_evaluated"])
+        self.assertTrue(audit["confirmation_exact_case_log_family_geometric_estimator"])
         self.assertEqual(audit["confirmation_bootstrap_unit"], "aneumo_generation_base_family")
         self.assertEqual(audit["confirmation_bootstrap_replicates"], 10000)
         self.assertTrue(audit["confirmation_intersection_union_all_primary_requirements"])
@@ -129,6 +154,8 @@ class ProtocolTests(unittest.TestCase):
         )
         self.assertEqual(audit["confirmation_minimum_response_point_reduction"], 0.1)
         self.assertEqual(audit["confirmation_minimum_positive_seed_count"], 4)
+        self.assertTrue(audit["confirmation_majority_family_wilson_safeguard"])
+        self.assertEqual(audit["confirmation_minimum_family_win_count_when_n_100"], 59)
         self.assertFalse(audit["confirmation_post_result_sample_enlargement_allowed"])
         self.assertEqual(audit["confirmation_maximum_gpu_hours"], 40.0)
         self.assertFalse(audit["confirmation_authorized_now"])
@@ -154,6 +181,20 @@ class ProtocolTests(unittest.TestCase):
         candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
             "confirmation_post_result_sample_enlargement_allowed"
         ] = True
+        with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
+            "confirmation_prefield_precision_viability_evaluated"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
+            "confirmation_minimum_family_win_count_when_n_100"
+        ] = 50
         with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
             validate_protocol(candidate)
 

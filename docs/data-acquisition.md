@@ -1,5 +1,13 @@
 # Dataset acquisition plan
 
+> **2026-08-13 Aneumo same-release expansion:** 현재 검증된 과학 자산은
+> 32 base-family/64-case compact holding이며 local project workspace에는 private
+> field cache가 없다. Source는 427 base geometry를 보고하므로 future 100 new
+> family confirmation은 새로운 dataset을 찾는 것이 아니라 같은 Aneumo
+> release에서 historical 32를 제외해 확장하는 것이다. Exact eligibility,
+> case-flow workload와 cache path는 아직 읽거나 확정하지 않았고, prefield
+> precision/compute gate와 public manifest 전에는 field를 열지 않는다.
+
 > **Schema 11.8 acquisition plan:** 새 데이터셋 탐색보다 기존 Aneumo holding을
 > 우선한다. 외부 service/admin 상태 변화가 확인되기 전에는 `introai9` inventory를
 > 재시도하지 않는다. 변화 후 한 번의 bounded read-only preflight로 exact cache

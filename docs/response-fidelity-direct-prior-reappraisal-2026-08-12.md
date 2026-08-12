@@ -1,5 +1,14 @@
 # Aneumo response-fidelity direct-prior reappraisal
 
+> **2026-08-13 direct-prior correction:** Aneumo itself already studies
+> training/validation flow-condition diversity, and Hemo-MPO maps geometry plus
+> physiological boundary conditions to full hemodynamic fields. Neither
+> multi-flow conditioning nor a boundary-conditioned operator is a contribution.
+> Current confirmation v2 additionally requires prefield viability, exact
+> family estimators and majority-family improvement. The residual claim remains
+> only the field-error-matched response failure and same-backbone anchor-identity
+> mechanism described below.
+
 Status: **conditional application question retained; P1 v2 superseded before
 execution by an inactive v3 design; model, GPU, outer test and paper claim remain
 zero**  

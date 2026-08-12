@@ -56,14 +56,18 @@
           P1에서 실제 mismatch가 관측된 뒤에만 최소 anchor-response factorization을
           평가합니다. 현재 scientific result·selected model·GPU·outer test·paper
           claim은 모두 0입니다. P0 evaluator는 구현됐지만 현재 config가 private-cache
-          확인 전에 중단되므로 아직 실행·제출 가능한 job은 아닙니다.
+          확인 전에 중단되므로 아직 실행·제출 가능한 job은 아닙니다. Official
+          Aneumo의 427 base geometry 중 historical 32를 뺀 동일 release에서 future
+          100-family 확인을 설계하되, outer field 전에 precision과 전체 2-model×5-seed
+          workload가 충분한지도 먼저 통과해야 합니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html#response-fidelity">처음부터 이해하기</a>
           <a class="button ghost" href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">연구 질문·선행·실험 전체 읽기 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v2.json">등록된 method-free P0 v2 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v3.json">비활성 P1 v3 same-backbone contract ↗</a>
-          <a class="button ghost" href="../configs/aneumo_response_fidelity_confirmation_template_v1.json">비활성 100-family confirmation contract ↗</a>
+          <a class="button ghost" href="../configs/aneumo_response_fidelity_confirmation_template_v2.json">비활성 100-family confirmation v2 ↗</a>
+          <a class="button ghost" href="../docs/response-fidelity-confirmation-red-team-2026-08-13.md">Confirmation v2 red-team ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">직접 선행 재감사 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
@@ -289,7 +293,7 @@
           <ul>
             <li>20/6/6 generation-family split을 유지</li>
             <li>Strong analytic scaling과 operator/GNN controls</li>
-            <li>historical 32를 제외한 exactly 100 new family로 one-shot confirmation</li>
+            <li>historical 32를 제외한 100 new family + prefield viability + ≥59/100 family win</li>
           </ul>
         </article>
       </div>
@@ -778,7 +782,7 @@
       <div class="contribution-grid">
         <article><span>RF-C1</span><h3>Matched failure</h3><p>Field-error-matched P1에서 response fidelity 차이가 재현될 때만 활성화한다.</p></article>
         <article><span>RF-C2</span><h3>Minimal response factorization</h3><p>Field non-inferiority와 두 primary response endpoint 개선이 함께 필요하다.</p></article>
-        <article><span>RF-C3</span><h3>Family confirmation</h3><p>Field를 보기 전에 historical 32를 제외한 exactly 100 new base family를 고정해야 한다.</p></article>
+        <article><span>RF-C3</span><h3>Family confirmation</h3><p>Field 전에 historical 32를 제외한 100 new family와 precision/compute viability를 고정하고, 두 response 모두 최소 59/100 family에서 개선되어야 한다.</p></article>
       </div>
       <div class="scope-line">
         <span>Current stage</span><b>conditional lead 1 · pending P0 1 · P1/method/model/GPU/test/result/claim 0</b>

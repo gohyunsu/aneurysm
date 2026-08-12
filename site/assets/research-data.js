@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · direct priors close the broad architecture story · independent confirmation is fixed at exactly 100 new base families excluding all historical 32 · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; only positive direct/residual response-error contrast can pass, low/high iso-error levels cannot rescue the median co-primary failure and dependent cross-fit contrasts support no exact inference; Hemo-MPO and AB-GATr remain source-only direct priors, not silently executable baselines; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; inactive confirmation v1 then requires exactly 100 new families, all eligible cases and flows, family-first 10,000-bootstrap conjunction and a failure-revealing worst/typical/best figure; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · Aneumo flow diversity and Hemo-MPO boundary-conditioned full-field learning are direct priors · independent confirmation v2 fixes exactly 100 new families, prefield viability and majority-family benefit · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; only positive direct/residual response-error contrast can pass, low/high iso-error levels cannot rescue the median co-primary failure and dependent cross-fit contrasts support no exact inference; multi-flow conditioning, Hemo-MPO and AB-GATr architecture components are direct priors, not contributions or silently executable baselines; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; inactive confirmation v2 then requires exactly 100 new families, a two-endpoint development-dispersion gate, complete two-model/five-seed workload projection within 40 GPU-hours, exact case-log-to-family estimators, at least 59 of 100 family wins on both response endpoints, family-only 10,000-bootstrap conjunction and a failure-revealing worst/typical/best figure; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Confirmation v2 requires prefield viability and majority-family benefit",
+      copy: "Aneumo reports 427 base geometries, so 100 new families expand the same selected release after excluding the historical 32. V1 is preserved and superseded with metadata/field/prediction all zero. V2 requires both final-candidate development response dispersions to pass a prospective 100-family planning gate, projects the complete two-model/five-seed workload under 40 GPU-hours, defines the case-log-to-family geometric estimator exactly and requires at least 59 of 100 family wins for each response endpoint. Aneumo flow diversity and Hemo-MPO boundary-conditioned full-field learning are explicit direct priors.",
+      status: "Inactive v2 · regression 561/561 · protocol 111 invariants · v1 evidence access 0 · real P0 0/11 · precision/compute viability 0 · metadata/field/prediction/server/PBS/GPU/result/claim 0",
+      url: "../docs/response-fidelity-confirmation-red-team-2026-08-13.md"
+    },
     {
       year: "2026.08",
       title: "The 100-family contract and private no-claim ledger are synchronized",
@@ -846,7 +853,7 @@ window.AURORA_DATA = Object.freeze({
     ["Representation", "same-case anchor plus flow ratio and geometry", "SC-FNO; Hemo-MPO; AB-GATr; DeltaPhi; DeepONet/FNO", "same-backbone direct versus identity-residual mechanism test", "inactive directional falsifier; unselected"],
     ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO", "matched-field-error structural mismatch", "not yet observed"],
     ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "registered; non-executable"],
-    ["Confirmation", "exactly 100 new base families locked before field read", "all historical 32 excluded; old six test families count 0", "finite-release family generalization", "inactive until P0/P1/development/re-entry pass"],
+    ["Confirmation", "100 new families + prefield precision/complete-workload viability", "historical 32 excluded; exact case-log family estimator; ≥59/100 wins per response", "finite-release mean and majority-family generalization", "inactive until P0/P1/development/re-entry/viability pass"],
     ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 34.0; novelty 2.5", "P0 only; no method or claim"]
   ],
   gates: [
@@ -860,8 +867,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "C-RF",
       title: "Can the final response claim survive one independent 100-family evaluation?",
-      copy: "The inactive design excludes all historical 32 compact families and selects exactly 100 new base families using field-blind release metadata and a fixed hash seed. It uses every eligible case and all eight flows, averages nodes, flows, cases and five seeds before family bootstrap, and requires field non-inferiority, analytic competence and both response superiority endpoints together. Missing families are not replaced. The displayed figure must show candidate worst, typical and best cases with matched coordinates and reference-derived colours.",
-      state: "Non-authoritative template · qualified new family 0/100 · manifest/field/prediction/PBS/GPU/result/claim 0",
+      copy: "The current inactive v2 preserves unexecuted v1 and excludes all historical 32 compact families. Before any outer field, final-candidate development contrasts must support the fixed 100-family precision plan and the full two-model/five-seed workload must project below 40 GPU-hours. Exactly 100 new base families are then selected by field-blind hash. Case log-error ratios are averaged through seed to one row per family; both response endpoints need bootstrap superiority, geometric mean ratio at least 1.10, four of five positive seeds and at least 59 of 100 family wins. Missing families are not replaced. The figure shows candidate worst, typical and best cases with matched coordinates and reference-derived colours.",
+      state: "Non-authoritative v2 · v1 metadata/field/prediction 0 · precision/compute viability 0 · qualified new family 0/100 · manifest/field/prediction/PBS/GPU/result/claim 0",
       blocking: true
     },
     {
@@ -1364,6 +1371,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "protocol",
+      title: "Confirmation v2 closes precision, workload, estimator and minority-effect loopholes",
+      copy: "V1 is preserved and superseded before confirmation metadata, field or prediction access. The same Aneumo release has 427 reported base geometries; historical 32 are excluded and 100 remain fixed. Before outer fields, both final-candidate development response dispersions must support the 100-family plan and the complete two-model/five-seed workload must project within 40 GPU-hours. V2 fixes case-log-to-family geometric estimators and requires a one-sided Wilson lower bound above 0.5 for both response endpoints, which means at least 59 of 100 family wins. Aneumo flow diversity and Hemo-MPO boundary-conditioned full-field learning are direct priors, not contributions. Regression passes 561/561 with 111 protocol invariants. Real P0 remains 0/11 and no server, PBS/GPU, result or claim was opened.",
+      files: ["configs/aneumo_response_fidelity_confirmation_template_v2.json", "src/aurora/aneumo_response_fidelity_confirmation_template_v2.py", "tests/test_aneumo_response_fidelity_confirmation_template_v2.py", "docs/response-fidelity-confirmation-red-team-2026-08-13.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "docs/isbi-2027-plan.md", "docs/experiment-protocol.md", "docs/research-direction.md", "site/index.html", "site/learn.html"]
+    },
     {
       date: "2026.08.12",
       category: "protocol",
