@@ -9,7 +9,8 @@
 > equivariance, mesh operator와 physics module은 모두 control이다. 남는 gap은
 > 같은 strong backbone과 같은 field error에서 direct output과 anchor-identity
 > residual output의 aneurysm multi-flow response fidelity를 방향성 있게 비교하고,
-> 이를 ≥50 untouched family에서 확인하는 application gap뿐이다.
+> 이를 historical 32를 제외한 exactly 100 new family에서 확인하는 application
+> gap뿐이다.
 
 > **Schema 11.8 lineage boundary:** Aneumo는 multi-flow conditioning과 DeepONet/
 > Swin controls를, Cebral et al.은 multi-inflow response variables를, DeltaPhi는

@@ -4,8 +4,9 @@
 > 우선한다. 외부 service/admin 상태 변화가 확인되기 전에는 `introai9` inventory를
 > 재시도하지 않는다. 변화 후 한 번의 bounded read-only preflight로 exact cache
 > path와 SHA-256만 고정한다. P0/P1 통과 뒤 confirmation을 열 경우에는 official
-> `Connection.csv`와 train-only morphometrics로 ≥50 base-family ID를 field read
-> 전에 잠그고, coordinates와 velocity만 selective range-read한다. Raw/compact
+> `Connection.csv`와 archive metadata만으로 historical 32를 제외한 exactly 100
+> new base-family ID를 field read 전에 잠그고, selected family의 모든 eligible
+> case에 필요한 coordinates와 velocity만 selective range-read한다. Raw/compact
 > fields는 public Git에 올리지 않는다.
 
 > **Schema 11.4 acquisition decision:** Do not download the open aSAH XLSX

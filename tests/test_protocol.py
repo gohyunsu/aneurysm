@@ -37,7 +37,9 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["candidate_dataset"], "aneumo_verified_compact_cache")
         self.assertEqual(audit["train_validation_test_base_families"], [20, 6, 6])
         self.assertEqual(audit["current_confirmation_family_count"], 6)
-        self.assertEqual(audit["required_locked_confirmation_family_count"], 50)
+        self.assertEqual(audit["current_qualified_new_confirmation_family_count"], 0)
+        self.assertFalse(audit["historical_six_test_families_can_count_toward_confirmation"])
+        self.assertEqual(audit["required_locked_confirmation_family_count"], 100)
         self.assertTrue(audit["p0_scientific_contract_registered"])
         self.assertTrue(audit["p0_method_free"])
         self.assertTrue(audit["p0_reference_evaluator_synthetic_validation_passed"])
@@ -109,6 +111,30 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(audit["p1_design_fresh_seed_or_disjoint_split_reentry_required"])
         self.assertEqual(audit["p1_design_real_p0_observed_check_count"], 0)
         self.assertTrue(audit["p1_design_validator_synthetic_tests_passed"])
+        self.assertEqual(
+            audit["confirmation_design_template"],
+            "configs/aneumo_response_fidelity_confirmation_template_v1.json",
+        )
+        self.assertTrue(audit["confirmation_design_non_authoritative"])
+        self.assertEqual(audit["confirmation_required_new_base_family_count"], 100)
+        self.assertTrue(audit["confirmation_excludes_all_historical_32_base_families"])
+        self.assertTrue(audit["confirmation_uses_all_eligible_cases_and_all_eight_flows"])
+        self.assertTrue(audit["confirmation_family_mean_and_seed_mean_precede_resampling"])
+        self.assertEqual(audit["confirmation_bootstrap_unit"], "aneumo_generation_base_family")
+        self.assertEqual(audit["confirmation_bootstrap_replicates"], 10000)
+        self.assertTrue(audit["confirmation_intersection_union_all_primary_requirements"])
+        self.assertEqual(
+            audit["confirmation_field_noninferiority_margin_log_ratio"],
+            0.01980262729617973,
+        )
+        self.assertEqual(audit["confirmation_minimum_response_point_reduction"], 0.1)
+        self.assertEqual(audit["confirmation_minimum_positive_seed_count"], 4)
+        self.assertFalse(audit["confirmation_post_result_sample_enlargement_allowed"])
+        self.assertEqual(audit["confirmation_maximum_gpu_hours"], 40.0)
+        self.assertFalse(audit["confirmation_authorized_now"])
+        self.assertFalse(audit["confirmation_manifest_created"])
+        self.assertFalse(audit["confirmation_field_read"])
+        self.assertEqual(audit["confirmation_result_count"], 0)
         self.assertFalse(audit["method_selected"])
         self.assertFalse(audit["gpu_training_authorized"])
         self.assertFalse(audit["outer_test_authorized"])
@@ -121,6 +147,20 @@ class ProtocolTests(unittest.TestCase):
         candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
             "p0_executable"
         ] = True
+        with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
+            "confirmation_post_result_sample_enlargement_allowed"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
+            "required_locked_confirmation_family_count"
+        ] = 50
         with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
             validate_protocol(candidate)
 

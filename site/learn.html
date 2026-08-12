@@ -237,10 +237,13 @@
           </p>
           <p>
             현재 compact test는 6 family뿐이라 최종 주장을 지지하기에 약합니다.
-            P0와 P1이 통과한 경우에만 official metadata로 최소 50개 untouched base
-            family를 field read 전에 잠그고 confirmation을 수행합니다. ISBI 표에는
-            field non-inferiority와 두 primary response endpoint를 함께 제시하며,
-            reference/baseline/proposal을 동일 좌표와 색상 범위로 시각화합니다.
+            P0와 P1이 통과한 경우에만 official metadata로 historical compact 32개를
+            전부 제외한 exactly 100개 new base family를 field read 전에 잠급니다.
+            Selected family의 모든 eligible case와 8 flow를 쓰고 node→flow→case→
+            five-seed mean 뒤 family만 10,000회 bootstrap합니다. Field
+            non-inferiority와 두 primary response superiority를 모두 통과해야 합니다.
+            Figure는 유리한 사례만 고르지 않고 candidate worst, median, best family를
+            같은 좌표·camera·reference-derived 색상 범위로 제시합니다.
           </p>
           <p>
             현재 상태는 34.0/40 conditional lead, novelty 2.5/5, failure observed 0,
@@ -253,6 +256,8 @@
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">직접 선행·six-way score·P0/P1·ISBI claim 삭제 규칙 전체 읽기 ↗</a>
           <a href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">SC-FNO·Hemo-MPO·AB-GATr 직접 선행 재감사 읽기 ↗</a>
           <a href="../configs/aneumo_response_fidelity_p1_template_v3.json">P1 v3 same-backbone·방향성·bounded-development 계약 읽기 ↗</a>
+          <a href="../docs/response-fidelity-confirmation-design-2026-08-12.md">100-family independent-confirmation 설계 읽기 ↗</a>
+          <a href="../configs/aneumo_response_fidelity_confirmation_template_v1.json">비활성 confirmation v1 machine contract 읽기 ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Fail-closed aggregate evaluator 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">

@@ -1,5 +1,15 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.8 inactive independent confirmation v1:** 이전 ≥50 family 문구를
+> exactly 100 new generation base family로 강화하고 historical compact 32
+> family 전체를 제외한다. Metadata-only SHA-256 selection manifest를 field read
+> 전에 공개하고, selected family의 모든 eligible case·8 flow를 사용한다. Node→
+> flow→case→five-seed mean 뒤 family만 10,000회 bootstrap한다. Same-backbone
+> direct control 대비 field upper bound ≤`log(1.02)`와 두 response lower bound
+> >0, point ratio ≥1.10, 4/5 positive seed를 모두 요구한다. Candidate worst,
+> median, best case를 같은 좌표/색상으로 제시한다. Template는 비실행이며 P0
+> 0/11, P1/model/GPU/outer test/claim 0이다.
+
 > **Schema 11.8 inactive P1 v3:** SC-FNO, Hemo-MPO and AB-GATr make generic
 > sensitivity learning and Aneumo equivariant/physics architecture novelty
 > unavailable. Preserve v1/v2 as unexecuted history. The current
@@ -55,7 +65,7 @@
 > **Schema 11.8 prospective order:** (1) existing 20 train base families에서
 > method-free endpoint stability P0, (2) development-only field-selected strong
 > baselines 사이의 response-fidelity mismatch P1, (3) 통과 시에만 bounded model
-> development, (4) metadata-only로 먼저 잠근 ≥50 untouched Aneumo base families의
+> development, (4) metadata-only로 먼저 잠근 exactly 100 new Aneumo base families의
 > confirmation 순서다. Primary endpoints는 paired-response relative L2와 discrete
 > tangent relative L2이며 family-cluster bootstrap과 5 seeds를 사용한다. Field
 > relative L2 non-inferiority도 동시에 만족해야 한다. 현재 P0는 exact private

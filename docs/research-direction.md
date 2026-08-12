@@ -1,5 +1,12 @@
 # AURORA 연구 방향
 
+> **Schema 11.8 independent-confirmation closure:** RF-C3는 더 이상 “최소 50
+> family”가 아니다. Historical compact 32 family 전체를 제외한 exactly 100 new
+> base family를 field-blind hash rule로 먼저 잠그고, 모든 eligible case/8 flow와
+> five frozen seeds를 family 단위로 집계한다. Field non-inferiority와 두 response
+> superiority가 모두 통과해야 하며, candidate worst/typical/best figure를 함께
+> 제시한다. 이 prospective template는 outer-test authority나 contribution이 아니다.
+
 > **Schema 11.8 direct-prior-complete P1 v3:** SC-FNO는 일반적인 parameter-
 > sensitivity 학습을, Hemo-MPO는 Aneumo의 SE(3) mesh+physics+DeepONet 조합을,
 > AB-GATr는 base-anatomy-stratified Aneumo equivariant surrogate 비교를 이미

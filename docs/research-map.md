@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.8 confirmation edge · 2026-08-12:** RF-C3 now terminates at a
+> prospective exactly-100-new-family node. All historical 32 compact families
+> count zero; every eligible case and eight flows collapse to one family mean;
+> only family means enter the bootstrap. The edge can open only when both field
+> safeguards and both response improvements pass jointly. Worst/median/best
+> panels are disclosure, not rescue. This is an inactive design node: real P0
+> remains 0/11 and no data, method, model, server, GPU, result or claim opens.
+
 > **Schema 11.8 response-fidelity map · 2026-08-12:** Aneumo's verified compact
 > node supports one conditional application question at 34.0/40 with residual
 > novelty exactly 2.5/5. SC-FNO already occupies generic sensitivity-aware

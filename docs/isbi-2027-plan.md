@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-12 independent-confirmation contract:** “≥50 untouched family”는
+> sample enlargement, historical six-family reuse, within-family weighting,
+> seed aggregation과 figure cherry-picking을 닫지 못했다. Current inactive
+> [confirmation v1](../configs/aneumo_response_fidelity_confirmation_template_v1.json)은
+> historical 32 family 전체를 제외한 exactly 100 new base family, 모든 eligible
+> case와 8 flow, family 평균 뒤 five-seed 평균, 10,000 family bootstrap과
+> field-noninferiority/두 response superiority의 intersection–union conjunction을
+> 고정한다. Candidate worst/median/best 사례를 같은 좌표·색상으로 보여주는 figure
+> 규칙도 고정한다. 이는 P0/P1/모델/GPU/outer-test/claim authority가 아니다.
+
 > **2026-08-12 direct-prior-complete P1 v3 paper contract:** SC-FNO, Hemo-MPO와
 > AB-GATr를 반영하면 논문은 sensitivity-aware operator, equivariant GNN 또는
 > physics-module 조합을 contribution으로 쓸 수 없다. 현재 비활성 v3는 동일
@@ -68,12 +78,13 @@ US EDT, 결과 통지는 2027-01-12, final은 2027-01-26이다.
 |---|---:|---|---|
 | Introduction | 0.65 | field accuracy와 multi-flow response fidelity가 구별되는 application gap | matched P1 mismatch 없음 |
 | Method | 1.15 | 관측된 failure에 직접 대응하는 anchor-response factorization | P0/P1 미통과 또는 architecture 미승인 |
-| Experiments | 0.70 | family-disjoint split, field-error/compute matching, cluster bootstrap | ≥50 locked confirmation family 미확보 |
+| Experiments | 0.70 | family-disjoint split, field-error/compute matching, family bootstrap | exactly 100 new-family manifest 미확보 |
 | Results | 1.15 | field non-inferiority와 response primary endpoint 개선 | CI/seed 기준 미충족 |
 | Discussion | 0.35 | steady synthetic CFD와 modeled inflow의 한계 | 임상·파열·patient-specific 표현이 남음 |
 
 세 contribution 후보는 C1 matched baseline failure, C2 field accuracy를 훼손하지
-않는 response improvement, C3 최소 50개 untouched base-family confirmation이다.
+않는 response improvement, C3 historical 32개를 제외한 exactly 100개 new
+base-family confirmation이다.
 각 evidence cell이 비면 해당 contribution 문장을 삭제한다. 자세한 direct-prior와
 통계 계약은 [source audit](response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md)에
 고정한다.

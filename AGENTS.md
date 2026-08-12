@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 inactive independent-confirmation v1:** Supersede
+> the vague historical ≥50-family phrase before any confirmation access. The
+> current non-authoritative template is
+> `configs/aneumo_response_fidelity_confirmation_template_v1.json`, SHA-256
+> `aa2cf90f9b1d34ecf74f94ef8eb88559671458e126ab5004d1ae24024bc910ec`;
+> validator SHA-256 is
+> `a03c9b754fc857298a6b8a136d7651edfcaa17092f9551b1a40cdd03a0958aac`.
+> It excludes all historical 32 families, requires exactly 100 new families,
+> uses all eligible cases/eight flows and averages node→flow→case→five seeds
+> before 10,000 family bootstraps. Field non-inferiority, power-law competence
+> and both response-superiority endpoints form one intersection–union pass.
+> Candidate worst/typical/best figure roles are predeclared. No family
+> substitution, sample enlargement, partial aggregation or favourable-only
+> visualization is allowed. The 40 GPU-hour value is a future inference-only
+> ceiling, not authority. Current qualified new family/manifest/metadata/field/
+> prediction/server/PBS/GPU/result/claim are 0. Real P0 remains 0/11; never
+> access `junjinyong` and do not retry `introai9` before verified external change.
+> Dependency-complete regression passes 552/552 tests; protocol retains 111
+> invariant groups at canonical SHA-256
+> `6851f372fe52ef10e069b34b59e6997b96db93bcf1fcd315d59eb7b4845c2050`.
+
 > **2026-08-12 schema 11.8 P1 v3/private synchronization:** Exact scientific
 > public source `0f443c8d68f5d8dced3b9e092a1f6e3bb0b8a723` passed Quality
 > `31606655510` and Pages `31606655150`. Private planning head
@@ -229,8 +250,9 @@
 > matched P1. If P1 does not observe a response-fidelity mismatch, close the
 > direction. Only P0+P1 may open an analytic anchor-scaling plus zero-at-anchor
 > residual hypothesis. GNN, SE(3), DeepONet/FNO, DeltaPhi, derivative losses
-> and boundary tokens are controls/implementation, not novelty. Confirmation
-> requires at least 50 untouched base families locked before field read.
+> and boundary tokens are controls/implementation, not novelty. The historical
+> ≥50 confirmation minimum is superseded by exactly 100 new base families with
+> all historical 32 excluded and locked before field read.
 >
 > This update performs zero scientific-server query, transfer, scheduler/PBS
 > submission and GPU use. Do not retry `introai9` inventory before an external

@@ -1055,6 +1055,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "compact_cases", "conditions_per_case", "nodes_per_case",
             "train_validation_test_base_families",
             "current_confirmation_family_count",
+            "current_qualified_new_confirmation_family_count",
+            "historical_six_test_families_can_count_toward_confirmation",
             "required_locked_confirmation_family_count",
             "validation_or_test_fields_read_for_this_audit",
             "v1e_absolute_train_relative_l2",
@@ -1118,6 +1120,23 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p1_design_real_p0_required_check_count",
             "p1_design_real_p0_observed_check_count",
             "p1_design_validator_synthetic_tests_passed",
+            "confirmation_design_template", "confirmation_design_template_sha256",
+            "confirmation_design_validator", "confirmation_design_validator_sha256",
+            "confirmation_design_status", "confirmation_design_non_authoritative",
+            "confirmation_required_new_base_family_count",
+            "confirmation_excludes_all_historical_32_base_families",
+            "confirmation_uses_all_eligible_cases_and_all_eight_flows",
+            "confirmation_family_mean_and_seed_mean_precede_resampling",
+            "confirmation_bootstrap_unit", "confirmation_bootstrap_replicates",
+            "confirmation_intersection_union_all_primary_requirements",
+            "confirmation_field_noninferiority_margin_log_ratio",
+            "confirmation_minimum_response_point_reduction",
+            "confirmation_minimum_positive_seed_count",
+            "confirmation_post_result_sample_enlargement_allowed",
+            "confirmation_interpretable_figure_roles",
+            "confirmation_maximum_gpu_hours", "confirmation_authorized_now",
+            "confirmation_manifest_created", "confirmation_field_read",
+            "confirmation_result_count",
             "candidate_architecture_status", "candidate_architecture",
             "primary_problem_selected", "method_selected",
             "architecture_selected", "scientific_server_queried",
@@ -1189,7 +1208,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ] != [32, 64, 8, 4096]
         or response_fidelity["train_validation_test_base_families"] != [20, 6, 6]
         or response_fidelity["current_confirmation_family_count"] != 6
-        or response_fidelity["required_locked_confirmation_family_count"] != 50
+        or response_fidelity["current_qualified_new_confirmation_family_count"] != 0
+        or response_fidelity["required_locked_confirmation_family_count"] != 100
         or [
             response_fidelity["v1e_absolute_train_relative_l2"],
             response_fidelity["v1e_absolute_validation_relative_l2"],
@@ -1270,6 +1290,28 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != 80.0
         or response_fidelity["p1_design_real_p0_required_check_count"] != 11
         or response_fidelity["p1_design_real_p0_observed_check_count"] != 0
+        or response_fidelity["confirmation_design_template"]
+        != "configs/aneumo_response_fidelity_confirmation_template_v1.json"
+        or response_fidelity["confirmation_design_template_sha256"]
+        != "aa2cf90f9b1d34ecf74f94ef8eb88559671458e126ab5004d1ae24024bc910ec"
+        or response_fidelity["confirmation_design_validator"]
+        != "src/aurora/aneumo_response_fidelity_confirmation_template_v1.py"
+        or response_fidelity["confirmation_design_validator_sha256"]
+        != "a03c9b754fc857298a6b8a136d7651edfcaa17092f9551b1a40cdd03a0958aac"
+        or response_fidelity["confirmation_design_status"]
+        != "draft_non_authoritative_blocked_on_p0_p1_bounded_development_and_fresh_reentry"
+        or response_fidelity["confirmation_required_new_base_family_count"] != 100
+        or response_fidelity["confirmation_bootstrap_unit"]
+        != "aneumo_generation_base_family"
+        or response_fidelity["confirmation_bootstrap_replicates"] != 10000
+        or response_fidelity["confirmation_field_noninferiority_margin_log_ratio"]
+        != 0.01980262729617973
+        or response_fidelity["confirmation_minimum_response_point_reduction"] != 0.1
+        or response_fidelity["confirmation_minimum_positive_seed_count"] != 4
+        or response_fidelity["confirmation_interpretable_figure_roles"]
+        != ["candidate_worst_case", "typical_case", "candidate_best_case"]
+        or response_fidelity["confirmation_maximum_gpu_hours"] != 40.0
+        or response_fidelity["confirmation_result_count"] != 0
         or response_fidelity["candidate_architecture_status"]
         != "mechanism_linked_hypothesis_only_unselected"
         or response_fidelity["execution_server"] != "introai9"
@@ -1306,6 +1348,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p1_design_required_positive_residual_direction",
                 "p1_design_fresh_seed_or_disjoint_split_reentry_required",
                 "p1_design_validator_synthetic_tests_passed",
+                "confirmation_design_non_authoritative",
+                "confirmation_excludes_all_historical_32_base_families",
+                "confirmation_uses_all_eligible_cases_and_all_eight_flows",
+                "confirmation_family_mean_and_seed_mean_precede_resampling",
+                "confirmation_intersection_union_all_primary_requirements",
             )
         )
         or any(
@@ -1321,6 +1368,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p1_design_confirmatory_or_paper_efficacy_claim_allowed",
                 "p1_design_formal_power_claim_allowed",
                 "p1_design_bounded_development_authorized_now",
+                "historical_six_test_families_can_count_toward_confirmation",
+                "confirmation_post_result_sample_enlargement_allowed",
+                "confirmation_authorized_now", "confirmation_manifest_created",
+                "confirmation_field_read",
                 "architecture_selected", "scientific_server_queried",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "submission_identity_active",
@@ -1356,6 +1407,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("p1_design_v2_validator", "p1_design_v2_validator_sha256"),
         ("p1_design_template", "p1_design_template_sha256"),
         ("p1_design_validator", "p1_design_validator_sha256"),
+        ("confirmation_design_template", "confirmation_design_template_sha256"),
+        ("confirmation_design_validator", "confirmation_design_validator_sha256"),
     ):
         implementation_path = (
             Path(__file__).resolve().parents[2] / response_fidelity[path_key]

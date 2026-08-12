@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · independent confirmation fixed at 100 new families
+
+- Replaced the under-specified “at least 50 untouched families” phrase before
+  any confirmation metadata, field or prediction was read.
+- The inactive template excludes all historical 32 compact families and fixes
+  exactly 100 new families by field-blind SHA-256 order, all eligible cases and
+  all eight flows, with no post-lock substitution or sample enlargement.
+- Nodes, flows, cases and five frozen seeds are averaged within family before
+  10,000 family bootstraps. Field non-inferiority, analytic competence and both
+  response-superiority endpoints form a non-rescuing intersection–union pass.
+- The primary figure must disclose candidate worst, typical and best families
+  using matched coordinates, camera and a reference-derived colour range.
+- The contract is non-authoritative and opens no manifest, metadata, field,
+  prediction, server, PBS/GPU, outer test, result or claim. Real P0 stays 0/11.
+- Dependency-complete regression passes 552/552 tests; protocol retains 111
+  invariant groups at canonical SHA-256 `6851f372…5c2050`.
+
 ## 2026-08-12 · schema 11.8 · P1 v3 and private ledger synchronized
 
 - Exact scientific public source `0f443c8…` passed Quality `31606655510` and
@@ -56,7 +73,9 @@
 - Removed v1's invalid exact-inference claim: overlapping cross-fit training
   sets preclude independent-family exact sign flipping, Holm p-values, nominal
   bootstrap coverage and formal power. P1 is a development screen only;
-  confirmatory inference is reserved for ≥50 untouched families.
+  confirmatory inference was historically reserved for ≥50 untouched families;
+  the later inactive confirmation v1 supersedes this minimum with exactly 100
+  new families and excludes all historical 32.
 - No scientific server, PBS/GPU, model or claim was opened; real P0 is 0/11.
 - Dependency-complete regression passes 536/536 tests; the protocol retains
   111 invariant groups at canonical SHA-256 `df65f22a…b5166d`.

@@ -1,0 +1,182 @@
+{
+  "schema_version": "aurora.aneumo_response_fidelity_confirmation_template.v1",
+  "template_id": "aneumo_response_fidelity_independent_confirmation_template_v1",
+  "status": "draft_non_authoritative_blocked_on_p0_p1_bounded_development_and_fresh_reentry",
+  "purpose": "Close confirmation sample, aggregation, inference, visualization and stop-rule choices before any independent-family field is read, without authorizing execution or a paper claim.",
+  "activation_boundary": {
+    "this_file_can_be_executed": false,
+    "this_file_can_be_submitted_to_pbs": false,
+    "confirmation_registered": false,
+    "real_p0_required_verdict": "pass_all_11_checks",
+    "real_p0_observed_verdict": null,
+    "p1_required_template": "configs/aneumo_response_fidelity_p1_template_v3.json",
+    "p1_required_template_sha256": "fb18827b6153422f2e97c7cf6151c653b0490f09e2942572c064dc1ea66adbc0",
+    "p1_required_verdict": "positive_same_backbone_residual_benefit",
+    "p1_observed_verdict": null,
+    "bounded_development_candidate_frozen": false,
+    "fresh_seed_or_disjoint_split_reentry_passed": false,
+    "confirmation_manifest_frozen_before_any_confirmation_field_read": false,
+    "activation_requires_separate_public_executable_registration": true,
+    "activation_requires_exact_manifest_container_checkpoint_and_evaluator_hashes": true
+  },
+  "estimand_and_scope": {
+    "application_estimand": "finite_release_generalization_of_multi_flow_velocity_response_fidelity_after_one_nominal_reference_solve",
+    "independent_unit": "aneumo_generation_base_family",
+    "patient_level_or_clinical_population_inference_allowed": false,
+    "rupture_risk_or_patient_specific_physiology_claim_allowed": false,
+    "cfd_role": "reference_simulator_not_biological_ground_truth"
+  },
+  "confirmation_sample": {
+    "official_source": "aneumo_arxiv_2505_14717_release",
+    "required_new_base_family_count": 100,
+    "historical_compact_base_family_count": 32,
+    "all_historical_train_validation_test_base_families_excluded": true,
+    "historical_six_test_families_can_count_toward_confirmation": false,
+    "selection_information_allowed": [
+      "official_release_family_identifier",
+      "connection_lineage",
+      "archive_member_name",
+      "archive_member_size",
+      "archive_member_crc",
+      "eight_flow_member_completeness"
+    ],
+    "selection_information_forbidden": [
+      "velocity_or_pressure_value",
+      "response_endpoint",
+      "model_prediction",
+      "model_error",
+      "rupture_status",
+      "clinical_variable"
+    ],
+    "family_selection_rule": "sort_eligible_nonhistorical_family_ids_by_sha256_of_utf8_selection_seed_colon_exact_family_id_and_take_first_100",
+    "selection_seed": 2027081301,
+    "selected_family_ids_published_before_field_read": true,
+    "case_policy": "use_all_release_cases_with_complete_eight_flow_alignment_in_each_selected_family",
+    "flow_policy": "use_all_eight_steady_mass_flow_conditions_with_the_registered_nominal_anchor",
+    "family_weighting": "equal_family_weight_after_within_family_mean_over_all_eligible_cases_and_target_flows",
+    "fewer_than_100_eligible_families_action": "close_confirmation_without_replacement_or_sample_size_reduction",
+    "post_lock_missing_or_corrupt_family_action": "execution_incomplete_no_verdict_no_family_substitution",
+    "post_result_sample_enlargement_allowed": false
+  },
+  "frozen_models": {
+    "training_or_tuning_on_confirmation_allowed": false,
+    "checkpoint_selection_on_confirmation_allowed": false,
+    "primary_candidate": "fresh_reentry_frozen_identity_preserving_response_candidate",
+    "primary_control": "fresh_reentry_frozen_same_backbone_direct_target_field_control",
+    "analytic_competence_control": "train_fitted_power_law_scaling_frozen_before_confirmation",
+    "shared_information_set": [
+      "same_case_geometry",
+      "same_case_nominal_velocity_field_q0",
+      "target_mass_flow_q"
+    ],
+    "same_backbone_parameter_optimizer_sampler_precision_and_update_budget": true,
+    "training_seed_count": 5,
+    "all_five_seed_checkpoints_required": true,
+    "container_preprocessing_checkpoint_and_evaluator_hashes_required_before_field_read": true,
+    "descriptive_controls_can_rescue_primary_failure": false
+  },
+  "family_level_aggregation": {
+    "node_level": "node_weighted_metric_within_case_and_target_flow",
+    "flow_level": "mean_over_all_nonanchor_target_flows_with_no_flow_selection",
+    "case_level": "mean_over_all_eligible_cases_in_family_with_no_case_selection",
+    "seed_level": "mean_over_five_frozen_seed_models_within_family_before_any_resampling",
+    "bootstrap_unit": "base_family",
+    "nodes_cases_flows_or_seeds_treated_as_independent_replicates": false
+  },
+  "primary_endpoints": {
+    "field_metric": "node_weighted_velocity_relative_l2",
+    "response_metrics": [
+      "paired_response_relative_l2",
+      "discrete_tangent_relative_l2"
+    ],
+    "field_log_error_ratio": "natural_log_candidate_field_error_divided_by_same_backbone_direct_field_error",
+    "field_noninferiority_margin_log_ratio": 0.01980262729617973,
+    "candidate_power_law_competence_margin_log_ratio": 0.01980262729617973,
+    "response_log_error_ratio": "natural_log_same_backbone_direct_response_error_divided_by_candidate_response_error",
+    "minimum_point_estimate_multiplicative_response_reduction": 0.1,
+    "minimum_positive_seed_count_per_response_endpoint": 4,
+    "zero_seed_ties_count_as_positive": false
+  },
+  "confirmatory_inference": {
+    "family_bootstrap_replicates": 10000,
+    "family_bootstrap_seed": 2027081302,
+    "interval": "one_sided_95_percent_percentile_family_bootstrap_confidence_bound_on_seed_averaged_family_contrast",
+    "finite_release_scope_only": true,
+    "exact_p_value_reported": false,
+    "formal_power_claim_reported": false,
+    "global_rule": "intersection_union_all_primary_requirements_must_pass",
+    "multiplicity_adjustment_required_for_conjunctive_primary_claim": false,
+    "pass_requires": [
+      "field_candidate_over_direct_one_sided_95_percent_upper_bound_at_most_log_1_02",
+      "candidate_over_power_law_field_error_one_sided_95_percent_upper_bound_at_most_log_1_02",
+      "paired_response_direct_over_candidate_one_sided_95_percent_lower_bound_above_zero",
+      "tangent_direct_over_candidate_one_sided_95_percent_lower_bound_above_zero",
+      "both_response_point_estimate_ratios_at_least_1_10",
+      "both_response_endpoints_positive_in_at_least_4_of_5_seeds"
+    ],
+    "secondary_endpoints": [
+      "gain_absolute_error",
+      "direction_cosine_error",
+      "discrete_curvature_relative_l2",
+      "family_response_energy_rank_correlation",
+      "high_response_region_overlap"
+    ],
+    "secondary_endpoint_can_rescue_primary_failure": false
+  },
+  "interpretable_figure": {
+    "family_roles": [
+      "minimum_mean_primary_response_contrast_candidate_worst_case",
+      "median_mean_primary_response_contrast_typical_case",
+      "maximum_mean_primary_response_contrast_candidate_best_case"
+    ],
+    "family_role_tie_break": "predeclared_family_hash_order",
+    "within_family_case_selection": "first_eligible_case_by_predeclared_case_hash_order",
+    "target_flow_selection": "largest_absolute_log_flow_ratio_from_nominal_tie_lower_mass_flow",
+    "panels": [
+      "reference_target_velocity",
+      "same_backbone_direct_prediction",
+      "identity_preserving_candidate_prediction",
+      "direct_absolute_vector_error",
+      "candidate_absolute_vector_error",
+      "reference_direct_candidate_response_curve"
+    ],
+    "same_coordinates_camera_and_reference_derived_color_range": true,
+    "roles_and_selection_rule_disclosed_in_caption": true,
+    "favorable_only_case_selection_allowed": false,
+    "clinical_interpretation_allowed": false
+  },
+  "compute_and_execution": {
+    "execution_server": "introai9",
+    "pbs_only": true,
+    "login_node_gpu_allowed": false,
+    "junjinyong_allowed": false,
+    "confirmation_is_inference_only_no_training": true,
+    "maximum_confirmation_gpu_hours": 40.0,
+    "gpu_authorized_now": false,
+    "pbs_job_submitted": false,
+    "gpu_job_submitted": false
+  },
+  "stopping_and_claim_deletion": {
+    "all_100_families_all_eligible_cases_all_flows_and_all_five_seeds_required": true,
+    "partial_aggregation_allowed": false,
+    "same_version_repair_rerun_or_threshold_margin_sample_rule_change_after_any_confirmation_field_or_prediction_read_allowed": false,
+    "execution_incomplete_action": "close_exact_confirmation_no_scientific_verdict",
+    "field_noninferiority_failure_action": "delete_method_and_performance_claims",
+    "either_response_endpoint_failure_action": "delete_method_and_performance_claims",
+    "negative_or_mixed_direction_action": "delete_method_and_performance_claims_without_narrative_reversal",
+    "confirmation_pass_authorizes_submission_automatically": false,
+    "human_isbi_compliance_and_full_claim_evidence_audit_still_required": true
+  },
+  "current_state": {
+    "confirmation_config_registered": false,
+    "confirmation_manifest_created": false,
+    "confirmation_family_metadata_read": false,
+    "confirmation_field_read": false,
+    "model_prediction_read": false,
+    "scientific_server_queried": false,
+    "pbs_job_submitted": false,
+    "gpu_job_submitted": false,
+    "scientific_result_count": 0,
+    "paper_claim_active": false
+  }
+}

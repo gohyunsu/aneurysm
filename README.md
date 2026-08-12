@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 inactive independent-confirmation v1:** The former “at least
+> 50 families” phrase is superseded before any confirmation access by
+> [a machine contract](configs/aneumo_response_fidelity_confirmation_template_v1.json)
+> requiring exactly 100 new base families and excluding all historical 32.
+> Field-blind hash selection, every eligible case and eight flows, family-first
+> five-seed aggregation, 10,000 family bootstraps, field non-inferiority plus
+> two response superiority endpoints, and candidate worst/typical/best figure
+> roles are fixed. No post-result enlargement, substitution or favourable-only
+> visual selection is allowed. This is not an outer-test registration or GPU
+> authority. Qualified new families, manifest, metadata, field, prediction,
+> server/PBS/GPU, result and claim remain 0.
+> Dependency-complete regression passes 552/552 tests; the protocol retains
+> 111 invariant groups at canonical SHA-256
+> `6851f372fe52ef10e069b34b59e6997b96db93bcf1fcd315d59eb7b4845c2050`.
+
 > **Schema 11.8 P1 v3/private synchronization:** Exact scientific public source
 > `0f443c8d68f5d8dced3b9e092a1f6e3bb0b8a723` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31606655510)

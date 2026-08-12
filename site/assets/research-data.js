@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · direct priors close the broad architecture story · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; only positive direct/residual response-error contrast can pass, low/high iso-error levels cannot rescue the median co-primary failure and dependent cross-fit contrasts support no exact inference; Hemo-MPO and AB-GATr remain source-only direct priors, not silently executable baselines; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · direct priors close the broad architecture story · independent confirmation is fixed at exactly 100 new base families excluding all historical 32 · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; only positive direct/residual response-error contrast can pass, low/high iso-error levels cannot rescue the median co-primary failure and dependent cross-fit contrasts support no exact inference; Hemo-MPO and AB-GATr remain source-only direct priors, not silently executable baselines; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; inactive confirmation v1 then requires exactly 100 new families, all eligible cases and flows, family-first 10,000-bootstrap conjunction and a failure-revealing worst/typical/best figure; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Independent confirmation becomes a 100-new-family one-shot conjunction",
+      copy: "The earlier at-least-50 phrase left sample enlargement, reuse of the six historical test families, within-family weighting, seed handling and visual cherry-picking open. Inactive confirmation v1 excludes all historical 32 families and fixes exactly 100 new families by field-blind hash selection, every eligible case and all eight flows, node-to-flow-to-case-to-five-seed family aggregation, 10,000 family bootstraps and a conjunction of field non-inferiority, analytic competence and two response superiority endpoints. The figure must disclose candidate worst, typical and best families on matched coordinates and colours.",
+      status: "Inactive confirmation design · regression 552/552 · protocol 111 invariants · qualified new family 0/100 · manifest/metadata/field/prediction/server/PBS/GPU/result/claim 0",
+      url: "../docs/response-fidelity-confirmation-design-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "P1 v3 and the private no-claim ledger are synchronized",
@@ -832,7 +839,7 @@ window.AURORA_DATA = Object.freeze({
     ["Representation", "same-case anchor plus flow ratio and geometry", "SC-FNO; Hemo-MPO; AB-GATr; DeltaPhi; DeepONet/FNO", "same-backbone direct versus identity-residual mechanism test", "inactive directional falsifier; unselected"],
     ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO", "matched-field-error structural mismatch", "not yet observed"],
     ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "registered; non-executable"],
-    ["Confirmation", "≥50 untouched base families locked before field read", "current compact test has six families", "source-anatomy generalization", "closed until P0/P1 pass"],
+    ["Confirmation", "exactly 100 new base families locked before field read", "all historical 32 excluded; old six test families count 0", "finite-release family generalization", "inactive until P0/P1/development/re-entry pass"],
     ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 34.0; novelty 2.5", "P0 only; no method or claim"]
   ],
   gates: [
@@ -841,6 +848,13 @@ window.AURORA_DATA = Object.freeze({
       title: "Are multi-flow velocity-response endpoints stable before any model is trained?",
       copy: "The registered v2 P0 reads only 20 historical Aneumo train families, coordinates and velocity. It checks exact alignment, within-flow coordinate-half family ranks, coordinate-half symmetric magnitude difference, leave-one-interior-flow interpolation and one-sided tangent versus neighbour secant with family-cluster bootstrap. It hashes actual cache bytes. Pressure, validation/test fields, checkpoints and predictions are forbidden. The current exact private cache path is unresolved, so the contract is deliberately non-executable.",
       state: "Conditional lead · P0 v2 registered/non-executable · 0/11 real scientific checks · no server query/PBS/GPU/model/test/claim",
+      blocking: true
+    },
+    {
+      id: "C-RF",
+      title: "Can the final response claim survive one independent 100-family evaluation?",
+      copy: "The inactive design excludes all historical 32 compact families and selects exactly 100 new base families using field-blind release metadata and a fixed hash seed. It uses every eligible case and all eight flows, averages nodes, flows, cases and five seeds before family bootstrap, and requires field non-inferiority, analytic competence and both response superiority endpoints together. Missing families are not replaced. The displayed figure must show candidate worst, typical and best cases with matched coordinates and reference-derived colours.",
+      state: "Non-authoritative template · qualified new family 0/100 · manifest/field/prediction/PBS/GPU/result/claim 0",
       blocking: true
     },
     {
@@ -1343,6 +1357,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "protocol",
+      title: "Independent confirmation is fixed at 100 new families with no visual cherry-picking",
+      copy: "The vague at-least-50 rule is replaced prospectively. Inactive confirmation v1 excludes all historical 32 families, selects exactly 100 new families by field-blind hash, uses every eligible case and all eight flows, averages five seeds within family before 10,000 family bootstraps, and requires field non-inferiority plus both response superiority endpoints as one conjunction. No post-result enlargement or family substitution is allowed. The primary figure shows candidate worst, median and best families under the same camera and reference-derived colour range. Real P0 remains 0/11 and no confirmation metadata, field, prediction, server, PBS/GPU, result or claim was opened.",
+      files: ["configs/aneumo_response_fidelity_confirmation_template_v1.json", "src/aurora/aneumo_response_fidelity_confirmation_template_v1.py", "tests/test_aneumo_response_fidelity_confirmation_template_v1.py", "docs/response-fidelity-confirmation-design-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "docs/isbi-2027-plan.md", "docs/experiment-protocol.md", "docs/research-direction.md", "site/index.html", "site/learn.html"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

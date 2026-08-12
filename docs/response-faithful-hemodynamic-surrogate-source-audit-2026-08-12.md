@@ -252,7 +252,7 @@ claim. Learned baselines use 2M±10% parameters, 20,000 equal node-condition
 update budgets and a total P1 cap of 160 GPU-hours; actual FLOPs, GPU-seconds,
 memory and latency must be reported. These numbers are future bounds, not
 current GPU authority. Confirmatory intervals and hypothesis tests are
-reserved for the separately frozen ≥50-family evaluation.
+reserved for the separately frozen exactly-100-new-family evaluation.
 
 The direction stops if either condition holds:
 
@@ -285,8 +285,9 @@ The current six untouched compact-cache test families are too few for a strong
 standalone claim. Before model development, the existing 20/6 development
 families remain fixed. If P0 and P1 pass, select additional untouched Aneumo
 base families from the same official release using only `Connection.csv` and
-train-only morphometrics, then freeze their IDs before any field read. A
-minimum of 50 independent confirmation families is required; deformations,
+train-only morphometrics, then freeze their IDs before any field read.
+Exactly 100 new independent confirmation families are required; all 32
+historical compact families are excluded and deformations,
 flows and nodes never increase that count. Selective ZIP64 range reads may
 stage only coordinates and velocity, and raw/compact fields remain private and
 non-redistributed under the more restrictive observed dataset terms.
@@ -331,7 +332,7 @@ Provisional claims and their deletion rules are:
 |---|---|---|
 | C1. Field accuracy can hide response error | field-error-matched P1 mismatch | delete the problem identity |
 | C2. The minimal factorization preserves CFD response | primary response improvement with field non-inferiority | delete the method contribution |
-| C3. The result generalizes across source anatomies | at least 50 locked, family-disjoint confirmation families | label all results exploratory |
+| C3. The result generalizes across source anatomies | exactly 100 new locked, family-disjoint confirmation families, excluding all historical 32 | label all results exploratory |
 
 No sentence may claim clinical risk, patient-specific inflow, in-vivo
 validation, WSS fidelity or prospective utility from this velocity-only,

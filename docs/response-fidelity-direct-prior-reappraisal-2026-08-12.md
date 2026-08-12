@@ -119,7 +119,8 @@ are:
    does not guarantee multi-flow response fidelity;
 2. a same-backbone test showing that an anchor-identity residual
    parameterization corrects the observed failure without field regression; and
-3. confirmation on at least 50 prospectively frozen base families.
+3. confirmation on exactly 100 prospectively frozen new base families, with
+   all historical 32 excluded.
 
 Every contribution is deleted if its evidence cell is empty. Until real P0 and
 P1 pass, the manuscript title, abstract claim, method, result table and figure
