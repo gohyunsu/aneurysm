@@ -17,6 +17,8 @@
   invariants. Protocol SHA-256 is `c4a226aaa12f6285aef0e584118b833a83bcf8aa9540ca26bf2a89e0e59c473b`.
 - Private ledger `46ef9ff1fbb3880b552c06a964007611aac16925` is remote exact,
   PRIVATE and anonymously returns 404; manuscript and references are unchanged.
+- Exact scientific source `6f276cab968b073a297bd61c21d01bde4758b227`
+  passed Quality `31567525126` and Pages `31567524764`.
 
 ## 2026-08-12 · Schema 11.2 rejects an unobserved mechanics–response–outcome join
 

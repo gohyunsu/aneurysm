@@ -19,6 +19,8 @@
 > PRIVATE and anonymous API returns 404; manuscript/reference hashes remain
 > `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
 > `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Exact scientific source `6f276cab968b073a297bd61c21d01bde4758b227`
+> passed Quality `31567525126` and Pages `31567524764`.
 
 > **2026-08-12 mechanistic treatment/growth asset boundary · schema 11.2:**
 > Fresh public metadata review separates six source objects: 500 synthetic
