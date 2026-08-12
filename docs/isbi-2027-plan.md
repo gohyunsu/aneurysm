@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.8 checkpoint:** None of topology-aware vessel segmentation,
+> RSNA revalidation, CMRx4DFlow reconstruction or one-anatomy phantom response
+> is an active ISBI identity. The highest row is 27.5/40 and fails the
+> independent-unit floor. Do not add a title, abstract claim, contribution,
+> method figure, results table or C21. Surface-vector can re-enter only after a
+> new material cohort demonstrates stable targets and a field-error-matched
+> structural failure before model development.
+
 > **Latest submission checkpoint · ADAM fold release:** Do not turn a large
 > patch archive or a patient-grouping correction into a paper title. The release
 > lacks a lawful patient-disjoint outer-test contract, while DINO-3DRA,

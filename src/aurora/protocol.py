@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.7":
-        raise ProtocolError("The current research-state schema must be version 10.7.")
+    if protocol["schema_version"] != "10.8":
+        raise ProtocolError("The current research-state schema must be version 10.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_pose_workflow_and_spatiotemporal_operator_batch_rejected_best_29_no_p0_no_compute"
+        != "no_active_problem_structured_vessel_and_embargoed_4dflow_batch_rejected_best_27_5_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "structured_vessel_and_embargoed_4dflow_reappraisal",
             "pose_workflow_and_spatiotemporal_operator_reappraisal",
             "surface_vector_and_task_faithful_dsa_delta",
             "adam_patch_fold_and_segmentation_prior_delta",
@@ -276,6 +277,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v16",
             "public_source_watch_v17",
             "public_source_watch_v18",
+            "public_source_watch_v19",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -286,13 +288,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_pose_workflow_and_spatiotemporal_operator_batch_rejected_no_method_no_compute_surface_vector_closed_until_material_release"
+        != "no_active_problem_structured_vessel_and_embargoed_4dflow_batch_rejected_no_method_no_compute_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_pose_annotations_fold_metadata_and_direct_prior_code_only_no_medical_image_payload_checkpoint_transient_vector_cohort_or_scientific_server"
+        != "public_code_and_twenty_venet_masks_only_no_joined_image_mask_independent_test_controlled_4dflow_payload_or_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -304,11 +306,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_whitelisted_material_task_asset_audit_only_no_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md"
+        != "docs/structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "patient_wise_weak_pose_benchmark_repair_rejected_at_29_direct_prior_novelty_floor"
+        != "device_phantom_venc_stable_hemodynamic_response_rejected_at_27_5_independent_unit_floor"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
@@ -374,8 +376,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 29.0
-        or admission_v2["current_batch_best_residual_novelty"] != 1.0
+        or admission_v2["current_batch_best_score"] != 27.5
+        or admission_v2["current_batch_best_residual_novelty"] != 1.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -384,6 +386,147 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    structured = problem_selection[
+        "structured_vessel_and_embargoed_4dflow_reappraisal"
+    ]
+    _require_keys(
+        structured,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "venet_source_doi", "venet_dataset_repository",
+            "venet_dataset_exact_head", "venet_code_exact_head",
+            "venet_paper_reported_dataset_masks", "venet_exact_public_git_masks",
+            "venet_public_source_mra_redistributed", "venet_full_dataset_contact_only",
+            "venet_independent_test_reported",
+            "venet_topology_discontinuity_acknowledged_by_source",
+            "venet_topology_aware_loss_is_source_stated_future_work",
+            "rsna_multitask_arxiv", "rsna_multitask_repository_exact_head",
+            "rsna_multitask_series", "rsna_split_unit",
+            "rsna_patient_grouped_split_explicit",
+            "rsna_independent_dense_reference_test",
+            "rsna_source_results_reproduced_by_aurora",
+            "cmrx4dflow_repository_exact_head",
+            "cmrx4dflow_reported_total_cases_lower_bound",
+            "cmrx4dflow_reported_centers_lower_bound",
+            "cmrx4dflow_regular_training_cases",
+            "cmrx4dflow_regular_validation_cases",
+            "cmrx4dflow_regular_test_cases", "cmrx4dflow_terms_accepted_by_aurora",
+            "cmrx4dflow_payload_accessed", "cmrx4dflow_embargo_date",
+            "isbi_2027_submission_deadline",
+            "cmrx4dflow_embargo_after_submission_deadline",
+            "cmrx4dflow_aneurysm_patient_rows_identified",
+            "device_phantom_zenodo_record", "device_phantom_base_anatomies",
+            "device_phantom_models", "device_phantom_acquisitions",
+            "device_phantom_venc_per_model", "device_phantom_cardiac_phases",
+            "device_phantom_human_patients", "candidates",
+            "surface_vector_question_retained_as_inactive_hypothesis",
+            "historical_surface_vector_source_score_or_job_relabelled",
+            "historical_surface_vector_p0_repaired_or_rerun", "source_watch_added",
+            "p0_registered", "p1_registered", "method_selected",
+            "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "submission_identity_active", "execution_server",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "structured vessel and embargoed 4D-flow reappraisal",
+    )
+    expected_structured_candidates = [
+        ("device_phantom_venc_stable_hemodynamic_response", 27.5),
+        ("topology_faithful_cerebral_vessel_segmentation_for_downstream_simulation", 27.0),
+        ("reference_aware_multitask_aneurysm_segmentation", 27.0),
+        ("patient_grouped_multimodal_rsna_multitask_revalidation", 26.5),
+        ("venet_label_uncertainty_and_topology_audit", 26.0),
+        ("aneurysm_specific_4dflow_reconstruction_under_shift", 21.0),
+    ]
+    if (
+        structured["status"]
+        != "fresh_problem_level_batch_rejected_best_27_5_unit_novelty_asset_and_schedule_floors"
+        or structured["audit_document"]
+        != "docs/structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md"
+        or structured["automatic_selection_threshold"] != 32.0
+        or structured["best_candidate_id"]
+        != "device_phantom_venc_stable_hemodynamic_response"
+        or structured["best_score"] != 27.5
+        or structured["best_residual_novelty_score"] != 1.5
+        or structured["all_candidate_scores"]
+        != [27.5, 27.0, 27.0, 26.5, 26.0, 21.0]
+        or structured["conditional_source_lead_count"] != 0
+        or structured["venet_source_doi"] != "10.1038/s41598-026-54176-x"
+        or structured["venet_dataset_exact_head"]
+        != "c233ab9074f2e531028d8485794dd873e0b23b29"
+        or structured["venet_code_exact_head"]
+        != "7c9cf0f2f3bde20ad76082ae306cd9b0c4dcb86f"
+        or structured["venet_paper_reported_dataset_masks"] != 200
+        or structured["venet_exact_public_git_masks"] != 20
+        or structured["rsna_multitask_arxiv"] != "2606.26706"
+        or structured["rsna_multitask_repository_exact_head"]
+        != "e59e2368a722eabedc6b2228b1c6e1e7325cacd5"
+        or structured["rsna_multitask_series"] != 4348
+        or structured["rsna_split_unit"] != "series_level_random_five_fold"
+        or structured["cmrx4dflow_repository_exact_head"]
+        != "f6f835f34b86464256e3ce4362e7831325f32590"
+        or [
+            structured["cmrx4dflow_regular_training_cases"],
+            structured["cmrx4dflow_regular_validation_cases"],
+            structured["cmrx4dflow_regular_test_cases"],
+        ] != [138, 32, 43]
+        or structured["cmrx4dflow_embargo_date"] != "2026-12-01"
+        or structured["isbi_2027_submission_deadline"] != "2026-10-26"
+        or [
+            structured["device_phantom_zenodo_record"],
+            structured["device_phantom_base_anatomies"],
+            structured["device_phantom_models"],
+            structured["device_phantom_acquisitions"],
+            structured["device_phantom_venc_per_model"],
+            structured["device_phantom_cardiac_phases"],
+            structured["device_phantom_human_patients"],
+        ] != [14981710, 1, 4, 8, 2, 20, 0]
+        or [(row["id"], row["total"]) for row in structured["candidates"]]
+        != expected_structured_candidates
+        or any(row["critical_axis_pass"] for row in structured["candidates"])
+        or any(
+            structured[key] is not False
+            for key in (
+                "primary_problem_selected", "paper_identity_active",
+                "venet_public_source_mra_redistributed",
+                "venet_independent_test_reported",
+                "rsna_patient_grouped_split_explicit",
+                "rsna_independent_dense_reference_test",
+                "rsna_source_results_reproduced_by_aurora",
+                "cmrx4dflow_terms_accepted_by_aurora", "cmrx4dflow_payload_accessed",
+                "cmrx4dflow_aneurysm_patient_rows_identified",
+                "historical_surface_vector_source_score_or_job_relabelled",
+                "historical_surface_vector_p0_repaired_or_rerun", "p0_registered",
+                "p1_registered", "method_selected", "architecture_selected",
+                "scientific_server_queried", "gpu_training_authorized",
+                "outer_test_authorized", "submission_identity_active",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or any(
+            structured[key] is not True
+            for key in (
+                "venet_full_dataset_contact_only",
+                "venet_topology_discontinuity_acknowledged_by_source",
+                "venet_topology_aware_loss_is_source_stated_future_work",
+                "cmrx4dflow_embargo_after_submission_deadline",
+                "surface_vector_question_retained_as_inactive_hypothesis",
+                "source_watch_added",
+            )
+        )
+        or structured["execution_server"] != "introai9"
+    ):
+        raise ProtocolError(
+            "The structured-vessel/4D-flow batch must remain rejected: the "
+            "public VeNet subset, RSNA reference semantics, challenge embargo "
+            "and one-anatomy phantom cannot authorize a task, model or compute."
+        )
+    checks.append("structured-vessel and embargoed 4D-flow non-admission boundary")
 
     pose_operator = problem_selection[
         "pose_workflow_and_spatiotemporal_operator_reappraisal"
@@ -8738,7 +8881,69 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "release or code changes may request review only, never payload, method or compute."
         )
     checks.append("thirty-one-source fail-closed ADAM-fold and segmentation-prior watch boundary")
+    source_watch_v19 = problem_selection["public_source_watch_v19"]
+    _require_keys(
+        source_watch_v19,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "cmrx4dflow_repository_head",
+            "cmrx4dflow_release_count", "cmrx4dflow_license_spdx_id",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized", "p0_or_p1_authorized",
+            "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+            "server_queried", "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch", "decision",
+        ],
+        "public source watch v19",
+    )
+    if (
+        source_watch_v19["status"]
+        != "watch_only_all_thirty_two_frozen_snapshots_match"
+        or source_watch_v19["config"] != "configs/source_watch_v19.json"
+        or source_watch_v19["extends_historical_config"]
+        != "configs/source_watch_v18.json"
+        or source_watch_v19["config_sha256"]
+        != "911fa8b327b8f828de9ca349c577c9375d32e5fc3ddbe33ae8d06b0f04d1c228"
+        or source_watch_v19["watch_count"] != 32
+        or source_watch_v19["added_watch_ids"]
+        != ["cmrx4dflow2026_embargoed_challenge_code_v1"]
+        or source_watch_v19["cmrx4dflow_repository_head"]
+        != "f6f835f34b86464256e3ce4362e7831325f32590"
+        or source_watch_v19["cmrx4dflow_release_count"] != 0
+        or source_watch_v19["cmrx4dflow_license_spdx_id"] is not None
+        or source_watch_v19["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v19[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized", "p0_or_p1_authorized",
+                "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+                "server_queried", "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v19["decision"]
+        != "continue_fail_closed_thirty_two_source_watch_challenge_code_or_embargo_change_requests_review_only_without_terms_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v19 must preserve thirty-two exact public states; "
+            "challenge-code changes request review only, never data, terms, method or compute."
+        )
+    checks.append("thirty-two-source fail-closed embargoed 4D-flow code watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "device_phantom_venc_stable_hemodynamic_response_one_anatomy_unit_floor",
+        "topology_faithful_cerebral_vessel_segmentation_direct_prior_and_twenty_mask_asset_floor",
+        "reference_aware_multitask_aneurysm_segmentation_no_independent_dense_reference",
+        "patient_grouped_multimodal_rsna_multitask_revalidation_not_method_novelty",
+        "venet_label_uncertainty_and_topology_audit_evaluation_only",
+        "aneurysm_specific_4dflow_reconstruction_embargo_after_deadline_and_unknown_units",
         "dino_feature_3dra_segmentation_extension_direct_code_prior_and_missing_training_fold_result_contract",
         "geometry_splatting_cta_segmentation_extension_direct_prior_and_unresolved_clinical_units",
         "modality_agnostic_anatomy_aware_weak_supervision_public_component_combination",

@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.8 asset boundary:** VeNet exact public Git = 20 masks, source IXI
+> MRA redistributed = 0, full 200 = contact-only, independent test = 0.
+> CMRx4DFlow regular 138/32/43 data are controlled, terms acceptance/payload =
+> 0, embargo after ISBI deadline. Device phantom = one anatomy, four models,
+> eight acquisitions, two VENC/model, 20 phases, human patient = 0. None is
+> admitted as AURORA training or confirmatory data.
+
 > **ADAM patch-fold release boundary · 2026-08-12:** Exact v1.0 has 35 assets,
 > 61,506,611,200 bytes and a public 93-scan organization JSON. It is not acquired:
 > repository dataset license, upstream ADAM reuse/redistribution evidence,

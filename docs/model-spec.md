@@ -1,5 +1,12 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.8 model decision: `null`.** Do not implement a topology-aware
+> segmenter, RSNA multi-task network, 4D-flow reconstructor, device-response
+> model, GNN/Hodge operator or named stack. Each nearest architecture cell is
+> directly occupied or lacks a lawful, independent confirmatory unit. The
+> surface-vector architecture sketch remains controls only; a method-free
+> structural failure must be observed before any mechanism-linked model exists.
+
 > **ADAM/segmentation update · 2026-08-12: model remains `null`.** DINO-3DRA
 > already projects frozen 2D foundation features into a 3D U-Net; GeoP2VNet
 > already splats explicit vessel-surface descriptors into CTA voxels; public

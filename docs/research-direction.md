@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Latest decision · schema 10.8:** Vessel topology, RSNA multi-task
+> segmentation, CMRx4DFlow reconstruction and device-phantom response were
+> reconsidered as fresh problem identities. All fail a non-compensatory floor.
+> VeNet's exact public Git state has 20 masks without joined source MRA or an
+> independent test; topology loss is an obvious direct extension. RSNA already
+> occupies multi-task/pseudo-label learning. CMRx4DFlow is controlled and
+> embargoed after the submission deadline. The phantom is one anatomy. Best is
+> 27.5/40, so current problem and architecture remain null. [Exact audit](structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md)
+
 > **ADAM fold-release delta · 2026-08-12:** A 61.5 GB release is material but
 > fails the lawful-asset and independent-unit gates. Its public manifest has 93
 > positive scans/58 bases, no validation or negative IDs, and official ADAM B/F

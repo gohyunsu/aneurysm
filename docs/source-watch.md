@@ -1,4 +1,11 @@
-# Public source watch · thirty-one material/direct-prior source states
+# Public source watch · thirty-two material/direct-prior source states
+
+> **CMRx4DFlow2026 watch · schema 10.8:** `source_watch_v19.json` extends v18
+> with exact official code head `f6f835f…`, root, release/license state and
+> 32-state total. A repository change requests fresh source review only. Public
+> challenge code is not controlled-data access; registration is not terms
+> acceptance; an embargo change is not automatic asset admission, P0, method
+> selection or compute authority.
 
 > **ADAM release and segmentation-prior watch · 2026-08-12:**
 > `source_watch_v18.json` extends v17 with the exact ADAM patch-fold repository,

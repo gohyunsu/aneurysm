@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 10.8 server state:** This audit used public web/repository metadata
+> only. No scientific server, transfer, PBS submission, GPU, or monitoring was
+> used. Current AURORA job count is zero. Future gate-authorized execution is
+> `introai9` PBS-only; login-node GPU is forbidden. Never access, query,
+> transfer to, submit to, or monitor `junjinyong`.
+
 > **2026-08-12 ADAM/segmentation delta:** GitHub and Zenodo public metadata only.
 > No scientific server was queried; no dataset, DICOM, patch archive or model
 > weight was transferred; no PBS/GPU job was submitted or monitored. Source-watch

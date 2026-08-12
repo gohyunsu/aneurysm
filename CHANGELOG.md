@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-12 · Structured-vessel and embargoed 4D-flow reappraisal
+
+- Bounded exact-public audit found 20 masks in the inspected VeNet Git state,
+  not a joined 200 image–mask benchmark or independent test. The paper itself
+  flags topology discontinuity/topology-aware loss, narrowing residual novelty.
+- RSNA multi-task learning already occupies the tri-axial ROI, 3D multi-task and
+  pseudo-label route; its series-level split does not explicitly establish
+  patient grouping. No leakage claim is made.
+- CMRx4DFlow data are controlled and embargoed beyond the ISBI deadline. The
+  open device phantom has eight acquisitions but one base anatomy.
+- Rejected all six candidates at 27.5/27.0/27.0/26.5/26.0/21.0. Added
+  source-watch v19 (32 states). No terms, payload, P0, model, server or compute.
+- Full regression passes: 464 tests, 398 pass/66 optional skip, 99 protocol
+  invariants, site graph, JSON, JavaScript and diff hygiene. Protocol canonical
+  SHA-256 is `b4c4f18a…`; source-watch v19 is `911fa8b3…`.
+
 ## 2026-08-12 · ADAM-fold audit deployed and privately pinned
 
 - Exact public scientific source `836293006a835c421aac474c668387daeb659f77`

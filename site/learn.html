@@ -84,15 +84,63 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 10.7</span>
-          <strong>깨끗한 공개 fold는 좋은 control이지만, 이미 점유된 task를 새 논문으로 바꾸지는 못합니다.</strong>
+          <span>짧은 답 · schema 10.8</span>
+          <strong>현재 선택된 문제와 모델은 없으며, 최신 여섯 후보도 모두 기각됐습니다.</strong>
           <p>
-            최신 pose/operator 여섯 후보는 29.0/28.5/27.0/26.0/25.5/21.5이고
-            모두 기각됐습니다. DeepAnePose fold는 재현성 있는 control이지만 원
-            논문이 weak pose와 reformatted view를 직접 점유합니다. Transient WSS는
-            vector/family/structure reference가 없습니다. 따라서 P0, method, model,
+            최신 vessel/4D-flow 후보는 27.5/27.0/27.0/26.5/26.0/21.0입니다.
+            공개 mask 수, 독립 환자 단위, dense reference와 submission 전에 쓸 수
+            있는 lawful data가 동시에 충족되지 않습니다. 따라서 P0, method, model,
             scientific server와 GPU는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="topology-reference-embargo">
+          <span>Topology, reference, embargo를 처음부터 이해하기</span>
+          <strong>“파일이 공개됨”, “정답이 있음”, “독립 검증이 가능함”은 서로 다른 조건입니다.</strong>
+          <p>
+            <b>Topology</b>는 혈관 mask가 단순히 겹치는 정도를 넘어 끊기거나 잘못
+            이어지지 않는지를 뜻합니다. 작은 voxel 공백 하나도 downstream
+            centerline이나 CFD domain을 깨뜨릴 수 있어 중요한 문제입니다. 그러나
+            중요한 문제가 곧 새 novelty는 아닙니다. VeNet source는 skipped voxel로
+            생기는 topology discontinuity와 topology-aware loss를 이미 future work로
+            밝힙니다. clDice 같은 generic loss를 붙이는 것만으로 독립 contribution이
+            되지 않습니다.
+          </p>
+          <p>
+            VeNet 논문은 200개의 expert-reviewed mask를 설명하지만, AURORA가 exact
+            head에서 확인한 공개 Git에는 NIfTI mask 20개만 있습니다. README는 full
+            set을 contact로 안내하며 원 IXI MRA는 별도로 받아야 합니다. 이는 논문이
+            틀렸다는 뜻이 아니라, 지금 누구나 같은 버전으로 실행할 수 있는 joined
+            image–mask benchmark가 200개라고 말할 수 없다는 뜻입니다. 별도 independent
+            test도 보고되지 않아 topology 개선을 확인할 untouched cohort가 없습니다.
+          </p>
+          <p>
+            <b>Reference</b>는 모델 예측을 비교하는 신뢰 가능한 정답입니다. RSNA
+            2026 방법은 4,348 series에 tri-axial ROI, 3D multi-task dual decoder와
+            pseudo-label/manual correction을 이미 적용했습니다. Paper가 명시한 split
+            unit은 series입니다. Patient grouping이 명시되지 않았다는 사실만으로
+            leakage를 단정하지 않지만, patient-disjoint confirmation도 성립했다고
+            보지 않습니다. Pseudo-label은 독립 expert-dense reference와 다릅니다.
+          </p>
+          <p>
+            <b>Embargo</b>는 특정 날짜 전에는 data를 공개·사용할 수 없다는 제한입니다.
+            CMRx4DFlow2026 code는 공개됐지만 data는 registration/terms가 필요한 controlled
+            challenge이고 December 2026 embargo는 26 October ISBI deadline보다 늦습니다.
+            “400+ multi-organ cases”도 aneurysm patient 수가 아닙니다. AURORA는 terms를
+            수락하거나 payload를 열지 않았습니다.
+          </p>
+          <p>
+            마지막으로 open device phantom의 8 acquisitions은 네 model마다 두 VENC를
+            찍은 결과지만 모두 한 paraophthalmic anatomy에서 파생됩니다. Acquisition
+            sensitivity figure에는 좋지만 여덟 독립 환자 증거가 아닙니다. 그래서 최고
+            후보도 27.5/40, independent-unit 0.5/5로 기각했습니다.
+          </p>
+          <p>
+            Surface-vector 제안은 폐기하지 않습니다. 다만 새 material cohort가 먼저
+            critical-point/track 안정성과 field-error-matched baseline failure를 보여야
+            합니다. Edge 1-form, Hodge, equivariance와 periodic operator는 그 뒤의
+            control/최소 개입 후보이지 현재 architecture나 novelty가 아닙니다.
+          </p>
+          <a href="../docs/structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md">exact source state, 점수와 re-entry contract 읽기 ↗</a>
         </div>
         <div class="answer-card" id="adam-fold-release">
           <span>ADAM patch release와 patient grouping을 처음부터 이해하기</span>

@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 structured-vessel/4D-flow reappraisal · schema 10.8:** VeNet의
+> 논문상 200-mask 설명과 달리 exact public Git state는 20 mask만 담고 원 IXI
+> MRA·independent test와 결합되지 않는다. Source가 topology discontinuity와
+> topology-aware loss를 이미 future work로 명시하므로 generic topology loss는
+> novelty가 아니다. RSNA 4,348-series multi-task/pseudo-label 방법도 직접 선행이다.
+> CMRx4DFlow2026 data embargo는 ISBI deadline 뒤이며 terms/payload는 0이다.
+> Open device phantom은 8 acquisition이지만 한 anatomy의 네 configuration이다.
+> Fresh scores 27.5/27.0/27.0/26.5/26.0/21.0은 모두 기각한다. Surface-vector는
+> inactive hypothesis로만 남고 architecture는 `null`이다. Source-watch v19는 32
+> state review-only이며 P0/P1/server/PBS/GPU/claim은 0이다.
+> Full regression은 464개 중 398 pass/66 optional-dependency skip, protocol 99
+> invariant group이다. Machine protocol canonical SHA-256은
+> `b4c4f18ad7a7f6c31179c015a63c751933268a955491efc9698f6847c5d9eb5e`,
+> source-watch v19 SHA-256은
+> `911fa8b327b8f828de9ca349c577c9375d32e5fc3ddbe33ae8d06b0f04d1c228`다.
+
 > **2026-08-12 ADAM-fold audit deployment and private pin:** Exact public
 > scientific source `836293006a835c421aac474c668387daeb659f77` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31555748252)

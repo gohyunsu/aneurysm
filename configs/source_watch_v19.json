@@ -1,0 +1,131 @@
+{
+  "schema_version": "aurora.source_watch.v19",
+  "extends": "source_watch_v18.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-12",
+  "added_watches": [
+    {
+      "watch_id": "cmrx4dflow2026_embargoed_challenge_code_v1",
+      "kind": "github",
+      "review_request": "fresh_source_reaudit_only",
+      "source": {
+        "repository": "CmrxRecon/CMRx4DFlow2026",
+        "repository_url": "https://github.com/CmrxRecon/CMRx4DFlow2026",
+        "default_branch": "main",
+        "challenge_url": "https://cmrxrecon.github.io/CMRx4DFlow2026/"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "f6f835f34b86464256e3ce4362e7831325f32590",
+        "root_entries": [
+          {"name": "ChallengeDataFormat", "type": "dir", "size": 0},
+          {"name": "CMRx4DFlowMaskGeneration", "type": "dir", "size": 0},
+          {"name": "CMRx4DFlowReconDemo", "type": "dir", "size": 0},
+          {"name": "Intro2026.gif", "type": "file", "size": 13806069},
+          {"name": "README.md", "type": "file", "size": 10701},
+          {"name": "Submission", "type": "dir", "size": 0},
+          {"name": "TaskImage2026.png", "type": "file", "size": 1500447}
+        ],
+        "release_count": 0,
+        "license_spdx_id": null,
+        "repository_size_kib": 36729,
+        "payload_or_code_entries": [
+          "ChallengeDataFormat", "CMRx4DFlowMaskGeneration",
+          "CMRx4DFlowReconDemo", "Intro2026.gif", "Submission",
+          "TaskImage2026.png"
+        ],
+        "availability": "public_challenge_code_only_controlled_data_embargo_after_isbi_deadline"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v18 material, direct-prior, target-contract or version-contract source state changes",
+      "CMRx4DFlow2026 exact code head, license, release or root state changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "row_count_is_not_independent_patient_count": true,
+    "card_license_is_not_upstream_medical_data_lineage": true,
+    "postreview_metadata_change_is_not_e0_pass": true,
+    "visible_viewer_examples_are_not_registered_quality_prevalence": true,
+    "versioned_annotation_history_is_not_method_novelty": true,
+    "git_blob_change_is_not_terms_acceptance": true,
+    "annotation_metadata_is_not_medical_image_access": true,
+    "registry_or_wiki_change_is_not_terms_acceptance": true,
+    "controlled_access_metadata_is_not_payload_access": true,
+    "release_contract_change_is_not_p0_authority": true,
+    "reference_provenance_issue_is_not_method_novelty": true,
+    "topbrain2025_data_terms_not_automatically_accepted": true,
+    "public_vessel_labels_are_not_aneurysm_targets": true,
+    "podium_dockers_are_direct_priors_not_method_selection": true,
+    "rsna_pseudomasks_are_not_independent_dense_reference": true,
+    "baseline_code_is_not_controlled_challenge_data": true,
+    "derived_trajectory_csv_is_not_source_4dcta_or_intraoperative_reference": true,
+    "visible_case_directory_is_not_verified_independent_patient": true,
+    "source_wall_phenotype_result_is_not_aurora_reproduced_evidence": true,
+    "repository_license_absence_is_not_method_novelty": true,
+    "open_mask_archive_is_not_joined_outcome_asset": true,
+    "pipeline_code_is_not_patient_outcome_release": true,
+    "public_weights_are_direct_prior_not_task_identity": true,
+    "paper_cohort_count_is_not_archive_manifest": true,
+    "doi_badge_only_commit_is_not_material_asset_change": true,
+    "generator_code_is_not_generated_cohort_or_transient_field_asset": true,
+    "surface_vector_reentry_requires_whitelisted_material_change": true,
+    "direct_prior_code_is_not_material_task_asset": true,
+    "public_patientwise_folds_are_not_new_task_novelty": true,
+    "derived_wss_magnitude_is_not_transient_vector_ground_truth": true,
+    "embargo_lift_is_not_automatic_asset_admission": true,
+    "synthetic_png_is_not_patient_pair_or_downstream_task_reference": true,
+    "release_asset_manifest_is_not_dataset_provenance_or_license": true,
+    "patch_fold_label_is_not_patient_grouped_outer_test": true,
+    "same_subject_timepoints_must_not_cross_development_and_test": true,
+    "repository_reported_result_is_not_peer_review_or_aurora_evidence": true,
+    "challenge_code_is_not_data_access": true,
+    "embargo_after_submission_deadline_is_not_current_asset": true,
+    "challenge_registration_is_not_automatic_terms_acceptance": true,
+    "multi_organ_case_count_is_not_aneurysm_patient_count": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": ["fresh_source_reaudit_only", "direct_prior_baseline_feasibility_reaudit_only"]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

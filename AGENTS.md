@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 structured-vessel/embargoed-4D-flow · schema 10.8:** Exact
+> VeNet data/code heads `c233ab9…`/`7c9cf0f…`를 bounded public-state audit했다.
+> Public Git은 20 mask뿐이며 source MRA, independent test와 full-200 contract는
+> 없다. RSNA multi-task `e59e236…`은 series-level five-fold/pseudo-label direct
+> prior이고 patient grouping은 unresolved다. CMRx4DFlow exact `f6f835f…`은 code
+> only; 138/32/43 regular split은 controlled이고 Dec-2026 embargo가 Oct-26 ISBI
+> deadline 뒤다. Zenodo 14981710의 8 acquisition은 한 anatomy/4 model/2 VENC다.
+> Fresh scores 27.5/27.0/27.0/26.5/26.0/21.0, 모두 reject. Active lead/P0/P1/
+> method/architecture/server/PBS/GPU/outer-test/result/claim은 0이다. `115645`을
+> repair/rerun하지 않는다. Future gate-authorized execution은 `introai9` PBS만
+> 사용하고 login-node GPU를 금지한다. `junjinyong`에는 절대 접속·조회·전송·
+> 제출·모니터링하지 않는다. Source-watch v19는 32-state review-only다.
+> Full regression은 464개 중 398 pass/66 optional-dependency skip, protocol 99
+> invariant group이다. Machine protocol canonical SHA-256은
+> `b4c4f18ad7a7f6c31179c015a63c751933268a955491efc9698f6847c5d9eb5e`,
+> source-watch v19 SHA-256은
+> `911fa8b327b8f828de9ca349c577c9375d32e5fc3ddbe33ae8d06b0f04d1c228`다.
+
 > **2026-08-12 ADAM-fold deployment·private synchronization:** Exact public
 > scientific source `836293006a835c421aac474c668387daeb659f77` passed Quality
 > `31555748252` and Pages `31555747611`. Live Overview, Learn

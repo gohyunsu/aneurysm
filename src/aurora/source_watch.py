@@ -48,6 +48,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v16",
         "aurora.source_watch.v17",
         "aurora.source_watch.v18",
+        "aurora.source_watch.v19",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -204,7 +205,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v17_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v17(payload)
-    else:
+    elif schema == "aurora.source_watch.v18":
         if payload.get("extends") != "source_watch_v17.json":
             raise SourceWatchContractError("v18_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -215,6 +216,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v18_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v18(payload)
+    else:
+        if payload.get("extends") != "source_watch_v18.json":
+            raise SourceWatchContractError("v19_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v18":
+            raise SourceWatchContractError("v19_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v19_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v19(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -273,6 +285,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v16",
         "aurora.source_watch.v17",
         "aurora.source_watch.v18",
+        "aurora.source_watch.v19",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -2074,6 +2087,77 @@ def _validate_v18(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v18_change_boundary_changed")
 
 
+def _validate_v19(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 32:
+        raise SourceWatchContractError("v19_watch_set_changed")
+    _validate_v18(
+        {
+            "watches": watches[:31],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    challenge = watches[31]
+    expected_root = sorted(
+        [
+            {"name": "ChallengeDataFormat", "type": "dir", "size": 0},
+            {"name": "CMRx4DFlowMaskGeneration", "type": "dir", "size": 0},
+            {"name": "CMRx4DFlowReconDemo", "type": "dir", "size": 0},
+            {"name": "Intro2026.gif", "type": "file", "size": 13806069},
+            {"name": "README.md", "type": "file", "size": 10701},
+            {"name": "Submission", "type": "dir", "size": 0},
+            {"name": "TaskImage2026.png", "type": "file", "size": 1500447},
+        ],
+        key=lambda item: item["name"].lower(),
+    )
+    if (
+        challenge.get("watch_id")
+        != "cmrx4dflow2026_embargoed_challenge_code_v1"
+        or challenge.get("kind") != "github"
+        or challenge.get("review_request") != "fresh_source_reaudit_only"
+        or challenge.get("source")
+        != {
+            "repository": "CmrxRecon/CMRx4DFlow2026",
+            "repository_url": "https://github.com/CmrxRecon/CMRx4DFlow2026",
+            "default_branch": "main",
+            "challenge_url": "https://cmrxrecon.github.io/CMRx4DFlow2026/",
+        }
+        or challenge.get("frozen_snapshot")
+        != {
+            "main_head_sha": "f6f835f34b86464256e3ce4362e7831325f32590",
+            "root_entries": expected_root,
+            "release_count": 0,
+            "license_spdx_id": None,
+            "repository_size_kib": 36729,
+            "payload_or_code_entries": [
+                "ChallengeDataFormat",
+                "CMRx4DFlowMaskGeneration",
+                "CMRx4DFlowReconDemo",
+                "Intro2026.gif",
+                "Submission",
+                "TaskImage2026.png",
+            ],
+            "availability": (
+                "public_challenge_code_only_controlled_data_embargo_after_"
+                "isbi_deadline"
+            ),
+        }
+    ):
+        raise SourceWatchContractError("cmrx4dflow2026_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "challenge_code_is_not_data_access",
+            "embargo_after_submission_deadline_is_not_current_asset",
+            "challenge_registration_is_not_automatic_terms_acceptance",
+            "multi_organ_case_count_is_not_aneurysm_patient_count",
+        )
+    ):
+        raise SourceWatchContractError("v19_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -3242,6 +3326,7 @@ def evaluate_config(
         "aurora.source_watch.v16",
         "aurora.source_watch.v17",
         "aurora.source_watch.v18",
+        "aurora.source_watch.v19",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

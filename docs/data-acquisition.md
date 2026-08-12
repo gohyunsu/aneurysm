@@ -1,5 +1,11 @@
 # Dataset acquisition plan
 
+> **Schema 10.8 acquisition boundary:** Do not contact VeNet authors for the
+> full set, infer a 200-case joined benchmark, accept CMRx4DFlow terms, download
+> challenge data, or stage the phantom as patient evidence. Source-watch v19
+> may request a manual public-source re-audit only. A change never authorizes
+> terms, payload, P0, method or compute.
+
 > **2026-08-12 ADAM release acquisition boundary:** Do not download the 61.5 GB
 > GitHub release. Public availability does not replace a repository dataset
 > license, upstream ADAM reuse/redistribution permission or patient-disjoint

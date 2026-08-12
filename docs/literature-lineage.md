@@ -1,5 +1,21 @@
 # 선행연구 계보와 research gap
 
+## 2026-08-12 vessel topology, RSNA multi-task와 4D-flow timing correction
+
+- [VeNet](https://doi.org/10.1038/s41598-026-54176-x)은 compact vessel
+  segmentation과 topology discontinuity 문제를 이미 제시한다. Exact public Git
+  subset은 20 mask이며 원 IXI MRA와 independent test가 결합되지 않는다.
+- [RSNA multi-task](https://arxiv.org/abs/2606.26706)는 tri-axial ROI, 3D
+  dual-decoder와 iterative pseudo-label correction을 4,348 series에서 직접
+  점유한다. Series-level split은 patient grouping을 명시하지 않지만 leakage를
+  입증하지도 않는다.
+- [CMRx4DFlow2026](https://github.com/CmrxRecon/CMRx4DFlow2026)은 public code와
+  controlled challenge를 제공한다. December embargo는 ISBI paper deadline 뒤며
+  multi-organ count를 aneurysm patient count로 바꿀 수 없다.
+- [Device phantom](https://zenodo.org/records/14981710)의 8 acquisition은 한
+  paraophthalmic anatomy에서 네 configuration과 두 VENC를 반복한 것이다.
+  Acquisition sensitivity에는 유용하지만 independent clinical confirmation은 아니다.
+
 ## 2026-08-12 ADAM patch fold와 segmentation direct-prior correction
 
 - [ADAM fold release](https://github.com/josedaviddr/Aneurysm_segmentation_DataSet_folds/tree/d36df7d19a96aa5b9fca0cc9050e021ac7319fee)는

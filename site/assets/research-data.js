@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · pose/workflow and spatiotemporal-operator batch best 29.0/40 rejected; all six fail total or a critical novelty/target/asset/unit floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or whitelisted material task-asset audit; surface-vector is closed until a phase-resolved tangent-vector/family contract enables method-free stability plus a field-error-matched failure; the 61.5 GB ADAM patch release lacks a lawful patient-grouped outer-test contract, and public folds or direct-prior code do not open E0/P0/P1, model or GPU",
+    status: "Target locked · structured-vessel/embargoed-4D-flow batch best 27.5/40 rejected; all six fail total or a critical novelty/asset/unit/schedule floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem or whitelisted material task-asset audit; 20 public VeNet masks, RSNA series-level pseudo-reference code, embargoed challenge data and one-anatomy phantom repetitions do not open E0/P0/P1, model or GPU; surface-vector still requires method-free stability plus a field-error-matched failure",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Vessel topology and 4D-flow are important, but the executable task and independent units are missing",
+      copy: "VeNet reports 200 expert-reviewed masks, while exact public data head c233ab9… contains 20 masks and no redistributed source IXI MRA or independent test. The source itself identifies topology discontinuity and topology-aware loss as future work. RSNA exact code e59e236… already occupies tri-axial ROI, 3D multi-task and pseudo-label correction on 4,348 series; its stated split is series-level and patient grouping remains unresolved. CMRx4DFlow exact f6f835f… is public code for controlled data embargoed after the ISBI deadline. Zenodo 14981710 has eight acquisitions but one base anatomy. Six rows score 27.5/27.0/27.0/26.5/26.0/21.0 and all fail a mandatory floor.",
+      status: "Best 27.5/40 rejected · independent anatomy 1 · joined public VeNet image–mask outer test 0 · terms/payload/P0/model/server/GPU 0",
+      url: "../docs/structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "A large ADAM patch release fails the patient-unit gate while new segmentation code narrows novelty",
@@ -1157,6 +1164,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Structured-vessel and embargoed 4D-flow candidates are rejected without acquisition or compute",
+      copy: "The exact public VeNet state is bounded to 20 masks without joined source MRA or an independent test; topology loss is already an obvious source-stated extension. RSNA multi-task/pseudo-label learning is direct prior with unresolved patient grouping. CMRx4DFlow data are controlled and embargoed after the ISBI deadline, and the open device phantom has one base anatomy. Six fresh rows score 27.5/27.0/27.0/26.5/26.0/21.0 and all fail. Source-watch v19 freezes 32 review-only states. No terms, payload, historical repair, P0/P1, method, architecture, scientific server, PBS/GPU, outer test or paper claim opened. Full regression passes 464 tests: 398 pass/66 optional skip and 99 protocol invariant groups.",
+      files: ["docs/structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md", "configs/source_watch_v19.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", ".github/workflows/source-watch.yml", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

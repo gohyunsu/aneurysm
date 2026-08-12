@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.8 experiment boundary:** no run. VeNet has no frozen joined
+> public image–mask/independent-test contract, RSNA patient grouping/reference
+> remains unresolved, CMRx4DFlow terms are unaccepted and its embargo is after
+> the deadline, and the device phantom has one independent anatomy. This batch
+> opens no P0/P1. No scientific server was queried and no PBS/GPU job was
+> submitted or monitored. Historical `115645` remains 0/10 no-verdict and is
+> never repaired or rerun.
+
 > **ADAM fold-release experiment boundary · 2026-08-12:** no acquisition and
 > no run. The 61.5 GB patch payload is not opened because repository license,
 > upstream reuse permission and patient-disjoint split are absent. Metadata
