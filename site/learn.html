@@ -244,10 +244,13 @@
             dispersion과 전체 <code>case-flow×2 model×5 seed</code> runtime upper
             projection을 먼저 검사합니다. Selected family의 모든 eligible case와 8
             flow에서 case error log-ratio를 계산해 family·five-seed 평균 뒤 family만
-            10,000회 bootstrap합니다. Field non-inferiority, 두 primary response
-            superiority와 각 response의 최소 59/100 family win을 모두 통과해야 합니다.
-            Figure는 유리한 사례만 고르지 않고 candidate worst, median, best family를
-            같은 좌표·camera·reference-derived 색상 범위로 제시합니다.
+            10,000회 bootstrap합니다. Candidate는 direct와 power-law 모두에 대해
+            ±2% bilateral field equivalence를 만족하고, 두 comparator×두 response의
+            네 contrast에서 각각 ≥10% geometric improvement, ≥4/5 positive seed와
+            ≥59/100 family win을 통과해야 합니다. Figure는 더 약한 comparator
+            contrast로 candidate worst, median, best family를 정하고 reference,
+            direct, power-law, candidate를 같은 좌표·camera·reference-derived
+            색상 범위로 제시합니다.
           </p>
           <p>
             현재 상태는 34.0/40 conditional lead, novelty 2.5/5, failure observed 0,
@@ -261,8 +264,8 @@
           <a href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">SC-FNO·Hemo-MPO·AB-GATr 직접 선행 재감사 읽기 ↗</a>
           <a href="../configs/aneumo_response_fidelity_p1_template_v3.json">P1 v3 same-backbone·방향성·bounded-development 계약 읽기 ↗</a>
           <a href="../docs/response-fidelity-confirmation-design-2026-08-12.md">100-family independent-confirmation 설계 읽기 ↗</a>
-          <a href="../docs/response-fidelity-confirmation-red-team-2026-08-13.md">Confirmation v2 통계·선행 red-team 읽기 ↗</a>
-          <a href="../configs/aneumo_response_fidelity_confirmation_template_v2.json">비활성 confirmation v2 machine contract 읽기 ↗</a>
+          <a href="../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md">Confirmation v3 comparator·evaluator red-team 읽기 ↗</a>
+          <a href="../configs/aneumo_response_fidelity_confirmation_template_v3.json">비활성 confirmation v3 machine contract 읽기 ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Fail-closed aggregate evaluator 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">

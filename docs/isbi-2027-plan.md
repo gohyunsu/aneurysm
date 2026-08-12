@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-13 confirmation v3:** Preserve unexecuted v2. The current inactive
+> contract requires bilateral ±2% field equivalence and ≥10% response-error
+> reduction against both the same-backbone direct head and train-fitted analytic
+> power law. Four comparator-by-endpoint response contrasts must each pass the
+> bootstrap, 4/5-seed and 59/100-family rules. Summary values are derived only
+> from complete long-form error rows under a pinned shared-family bootstrap and
+> type-7 quantile. This removes a paper-fatal loophole in which a complex model
+> could lose to scaling or win merely through lower field error.
+
 > **2026-08-13 confirmation v2:** Historical 32-family compact holding은
 > 그대로 개발 자산이며, exactly 100 new family는 다른 dataset 탐색이 아니라
 > 427-base-geometry Aneumo release 내부 확장이다. V1은 evidence access 전에
@@ -94,12 +103,12 @@ US EDT, 결과 통지는 2027-01-12, final은 2027-01-26이다.
 | Introduction | 0.65 | field accuracy와 multi-flow response fidelity가 구별되는 application gap | matched P1 mismatch 없음 |
 | Method | 1.15 | 관측된 failure에 직접 대응하는 anchor-response factorization | P0/P1 미통과 또는 architecture 미승인 |
 | Experiments | 0.70 | family-disjoint split, field-error/compute matching, family bootstrap | exactly 100 new-family manifest 미확보 |
-| Results | 1.15 | field non-inferiority와 response primary endpoint 개선 | CI/seed 기준 미충족 |
+| Results | 1.15 | direct·power-law 양쪽과 field equivalence를 유지한 네 response contrast 개선 | comparator별 CI/effect/seed/family 기준 중 하나라도 미충족 |
 | Discussion | 0.35 | steady synthetic CFD와 modeled inflow의 한계 | 임상·파열·patient-specific 표현이 남음 |
 
-세 contribution 후보는 C1 matched baseline failure, C2 field accuracy를 훼손하지
-않는 response improvement, C3 historical 32개를 제외한 exactly 100개 new
-base-family confirmation이다.
+세 contribution 후보는 C1 learned·analytic control의 matched baseline failure,
+C2 두 control과 field-equivalent한 anchor-identity response improvement, C3
+historical 32개를 제외한 exactly 100개 new base-family confirmation이다.
 각 evidence cell이 비면 해당 contribution 문장을 삭제한다. 자세한 direct-prior와
 통계 계약은 [source audit](response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md)에
 고정한다.

@@ -59,15 +59,17 @@
           확인 전에 중단되므로 아직 실행·제출 가능한 job은 아닙니다. Official
           Aneumo의 427 base geometry 중 historical 32를 뺀 동일 release에서 future
           100-family 확인을 설계하되, outer field 전에 precision과 전체 2-model×5-seed
-          workload가 충분한지도 먼저 통과해야 합니다.
+          workload가 충분한지도 먼저 통과해야 합니다. 최종 확인에서는 candidate가
+          learned direct와 analytic power-law 모두와 field-equivalent하면서 두
+          response endpoint에서 모두 우월해야 합니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html#response-fidelity">처음부터 이해하기</a>
           <a class="button ghost" href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">연구 질문·선행·실험 전체 읽기 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v2.json">등록된 method-free P0 v2 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v3.json">비활성 P1 v3 same-backbone contract ↗</a>
-          <a class="button ghost" href="../configs/aneumo_response_fidelity_confirmation_template_v2.json">비활성 100-family confirmation v2 ↗</a>
-          <a class="button ghost" href="../docs/response-fidelity-confirmation-red-team-2026-08-13.md">Confirmation v2 red-team ↗</a>
+          <a class="button ghost" href="../configs/aneumo_response_fidelity_confirmation_template_v3.json">비활성 100-family confirmation v3 ↗</a>
+          <a class="button ghost" href="../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md">Confirmation v3 evaluator red-team ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">직접 선행 재감사 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
@@ -292,8 +294,8 @@
           <p>같은 case의 anchor-relative response를 독립적인 application endpoint로 검증한다.</p>
           <ul>
             <li>20/6/6 generation-family split을 유지</li>
-            <li>Strong analytic scaling과 operator/GNN controls</li>
-            <li>historical 32를 제외한 100 new family + prefield viability + ≥59/100 family win</li>
+            <li>Direct와 analytic scaling 모두에 bilateral field equivalence</li>
+            <li>두 control × 두 endpoint + historical 32를 제외한 100 new family</li>
           </ul>
         </article>
       </div>
@@ -781,8 +783,8 @@
       </div>
       <div class="contribution-grid">
         <article><span>RF-C1</span><h3>Matched failure</h3><p>Field-error-matched P1에서 response fidelity 차이가 재현될 때만 활성화한다.</p></article>
-        <article><span>RF-C2</span><h3>Minimal response factorization</h3><p>Field non-inferiority와 두 primary response endpoint 개선이 함께 필요하다.</p></article>
-        <article><span>RF-C3</span><h3>Family confirmation</h3><p>Field 전에 historical 32를 제외한 100 new family와 precision/compute viability를 고정하고, 두 response 모두 최소 59/100 family에서 개선되어야 한다.</p></article>
+        <article><span>RF-C2</span><h3>Minimal response factorization</h3><p>Direct·power-law 모두와 ±2% field equivalence를 유지하며 네 primary response contrast를 개선해야 한다.</p></article>
+        <article><span>RF-C3</span><h3>Family confirmation</h3><p>Historical 32를 제외한 100 new family에서 네 response contrast가 각각 최소 59/100 family를 이겨야 한다.</p></article>
       </div>
       <div class="scope-line">
         <span>Current stage</span><b>conditional lead 1 · pending P0 1 · P1/method/model/GPU/test/result/claim 0</b>

@@ -116,8 +116,11 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["confirmation_design_v1_metadata_read"])
         self.assertEqual(
             audit["confirmation_design_template"],
-            "configs/aneumo_response_fidelity_confirmation_template_v2.json",
+            "configs/aneumo_response_fidelity_confirmation_template_v3.json",
         )
+        self.assertTrue(audit["confirmation_design_v2_superseded_pre_execution"])
+        self.assertFalse(audit["confirmation_design_v2_executed"])
+        self.assertFalse(audit["confirmation_design_v2_eligibility_metadata_read"])
         self.assertTrue(audit["confirmation_design_non_authoritative"])
         self.assertEqual(audit["confirmation_reported_total_base_family_count"], 427)
         self.assertEqual(
@@ -142,16 +145,35 @@ class ProtocolTests(unittest.TestCase):
             audit["confirmation_prefield_precision_maximum_observed_family_log_contrast_sd"],
             0.29810546005930777,
         )
+        self.assertEqual(
+            audit["confirmation_prefield_precision_required_response_contrast_count"],
+            4,
+        )
+        self.assertTrue(audit["confirmation_prefield_development_field_equivalence_required"])
         self.assertFalse(audit["confirmation_prefield_precision_viability_evaluated"])
         self.assertFalse(audit["confirmation_prefield_compute_viability_evaluated"])
         self.assertTrue(audit["confirmation_exact_case_log_family_geometric_estimator"])
         self.assertEqual(audit["confirmation_bootstrap_unit"], "aneumo_generation_base_family")
         self.assertEqual(audit["confirmation_bootstrap_replicates"], 10000)
+        self.assertEqual(audit["confirmation_bootstrap_seed"], 2027081303)
+        self.assertTrue(audit["confirmation_bootstrap_shared_family_draws"])
+        self.assertEqual(
+            audit["confirmation_bootstrap_quantile_method"],
+            "hyndman_fan_type_7_linear",
+        )
+        self.assertTrue(audit["confirmation_summary_derived_from_complete_error_rows"])
+        self.assertEqual(
+            audit["confirmation_required_error_row_models"],
+            ["candidate", "direct", "power_law"],
+        )
+        self.assertEqual(audit["confirmation_required_error_rows_per_case"], 45)
         self.assertTrue(audit["confirmation_intersection_union_all_primary_requirements"])
         self.assertEqual(
-            audit["confirmation_field_noninferiority_margin_log_ratio"],
+            audit["confirmation_field_equivalence_margin_log_ratio"],
             0.01980262729617973,
         )
+        self.assertEqual(audit["confirmation_response_primary_contrast_count"], 4)
+        self.assertTrue(audit["confirmation_analytic_power_law_response_superiority_required"])
         self.assertEqual(audit["confirmation_minimum_response_point_reduction"], 0.1)
         self.assertEqual(audit["confirmation_minimum_positive_seed_count"], 4)
         self.assertTrue(audit["confirmation_majority_family_wilson_safeguard"])

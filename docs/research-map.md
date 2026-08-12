@@ -1,5 +1,12 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.8 confirmation-v3 edge · 2026-08-13:** The final conditional edge
+> is now `field equivalence to direct AND power law → response superiority to
+> direct AND power law → majority-family confirmation`. Both comparator paths
+> are mandatory. A win on the learned path cannot compensate for failure on the
+> analytic path, and a field-accuracy difference cannot masquerade as a
+> response-specific mechanism.
+
 > **Schema 11.8 confirmation-v2 edge · 2026-08-13:** The 427-family Aneumo
 > source node already owns flow-diversity evaluation; Hemo-MPO owns geometry+
 > boundary-condition full-field operator learning. The remaining edge is a

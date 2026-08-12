@@ -1,5 +1,11 @@
 # Response-fidelity confirmation v2 red-team
 
+> **Superseded pre-evidence by v3:** V2 remains immutable and was not executed;
+> confirmation eligibility metadata, fields and predictions were all zero.
+> [V3](response-fidelity-confirmation-evaluator-red-team-2026-08-13.md) adds
+> analytic power-law response superiority, bilateral field equivalence, a
+> complete raw-row evaluator and deterministic resampling.
+
 Status: **inactive prefield design; v1 preserved and superseded before metadata,
 field or prediction access; real P0 0/11; no model, compute, result or claim**  
 Decision date: 2026-08-13 KST

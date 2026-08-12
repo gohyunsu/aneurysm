@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 inactive independent-confirmation v3:** Preserved v2 is
+> superseded before eligibility metadata, field or prediction access. Current
+> [v3](configs/aneumo_response_fidelity_confirmation_template_v3.json) closes
+> two paper-fatal loopholes: a candidate cannot pass while losing response
+> fidelity to train-fitted power-law scaling, and materially different field
+> error cannot be called field-error-matched. Both direct and power-law controls
+> require bilateral ±2% field equivalence; all four comparator×response
+> contrasts require ≥10% reduction, bootstrap lower >0, ≥4/5 positive seeds and
+> ≥59/100 family wins. A deterministic
+> [raw-row evaluator](src/aurora/aneumo_response_fidelity_confirmation_template_v3.py)
+> rejects incomplete factorials and pins shared family resampling and type-7
+> quantiles. Regression passes 570/570 with 111 protocol invariants at
+> `d3d1d6d9…f6f763f6`. This is synthetic pre-evidence validation only: real P0
+> is 0/11 and data/model/server/PBS/GPU/result/claim remain zero.
+
 > **Schema 11.8 inactive independent-confirmation v2:** The same Aneumo release
 > reports 427 base geometries; exactly 100 new families expand that release after
 > excluding the historical 32. Preserved v1 is superseded before metadata,

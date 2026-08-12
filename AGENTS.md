@@ -1,5 +1,29 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 schema 11.8 inactive independent-confirmation v3:** Preserve v2
+> unchanged and supersede it with eligibility metadata/field/prediction all zero.
+> Current v3 config/validator SHA-256 are
+> `f9d52aeb2abd9832289db4852ab7dfec03db125093762e5f515ceebd43018226` /
+> `d42e99fcea13eabe9f4a7bf8336487c5b7876c02e742031bcfb039a3325edccd`.
+> A candidate must be bilaterally field-equivalent within ±`log(1.02)` to both
+> same-backbone direct and train-fitted power-law controls, then improve paired
+> response and tangent error by at least 10% against both. All four response
+> contrasts independently require bootstrap lower >0, ≥4/5 positive seeds and
+> ≥59/100 family wins. Never demote a failed analytic control.
+> Derive evidence only from complete
+> `family×case×5 seed×3 model×3 metric` rows. Missing, duplicate, extra,
+> nonfinite or negative rows and non-identical replicated power-law seed rows
+> close the execution without verdict. Use one SHA-256 counter family-bootstrap
+> stream, shared draws, 10,000 replicates and Hyndman--Fan type-7 quantiles.
+> Figure ranking uses the weaker direct/power-law response contrast and shows
+> reference/direct/power-law/candidate under matched display settings.
+> Dependency-complete regression passes 570/570; protocol retains 111 invariant
+> groups at canonical SHA-256
+> `d3d1d6d9c066511f5bac6ef97a64c737b9db9c40de0f6c3b3de10996f6f763f6`.
+> Real P0 remains 0/11; eligibility metadata, manifest, field, prediction,
+> model, server, PBS/GPU, result and claim remain zero. Never access
+> `junjinyong`; do not retry `introai9` before verified external change.
+
 > **2026-08-13 schema 11.8 inactive independent-confirmation v2:** Preserve v1
 > unchanged and supersede it before confirmation metadata/field/prediction
 > access. Current v2 config/validator SHA-256 are

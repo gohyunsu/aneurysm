@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.8 inactive confirmation v3:** V2는 evidence access 0인 exact
+> history로 보존한다. Current v3는 direct와 power-law 모두에 대해 bilateral
+> ±2% field equivalence와 paired/tangent response ≥10% improvement를 요구한다.
+> 네 response contrast는 각각 bootstrap lower >0, ≥4/5 positive seed,
+> ≥59/100 family win을 통과해야 한다. Hand-authored summary는 금지하고
+> complete `family×case×seed×model×metric` error rows에서만 결과를 파생한다.
+> Bootstrap family draws, SHA-256 counter RNG와 type-7 quantile도 고정했다.
+
 > **Schema 11.8 inactive confirmation v2:** V1은 metadata/field/prediction 0
 > 상태에서 보존·supersede했다. Exactly 100 new family는 그대로 유지하되,
 > outer field 전에 final-candidate 20 development-family contrast로 두 response
@@ -76,8 +84,9 @@
 > baselines 사이의 response-fidelity mismatch P1, (3) 통과 시에만 bounded model
 > development, (4) metadata-only로 먼저 잠근 exactly 100 new Aneumo base families의
 > confirmation 순서다. Primary endpoints는 paired-response relative L2와 discrete
-> tangent relative L2이며 family-cluster bootstrap과 5 seeds를 사용한다. Field
-> relative L2 non-inferiority도 동시에 만족해야 한다. 현재 P0는 exact private
+> tangent relative L2이며 family-cluster bootstrap과 5 seeds를 사용한다. Direct와
+> power-law 각각에 대한 bilateral field equivalence와 네 response superiority를
+> 동시에 만족해야 한다. 현재 P0는 exact private
 > cache path가 unresolved라 non-executable이고 validation/test/model/GPU read는 0이다.
 > Aggregate evaluator와 CPU 4/GPU 0 one-shot PBS wrapper는 구현·synthetic
 > validation되었지만 현재 config가 private-cache 존재 확인 전에 fail closed한다.

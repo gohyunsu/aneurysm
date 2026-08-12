@@ -1120,20 +1120,64 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p1_design_real_p0_required_check_count",
             "p1_design_real_p0_observed_check_count",
             "p1_design_validator_synthetic_tests_passed",
+            "confirmation_design_v1_template", "confirmation_design_v1_template_sha256",
+            "confirmation_design_v1_validator", "confirmation_design_v1_validator_sha256",
+            "confirmation_design_v1_superseded_pre_execution",
+            "confirmation_design_v1_executed", "confirmation_design_v1_metadata_read",
+            "confirmation_design_v1_field_or_prediction_read",
+            "confirmation_design_v2_template", "confirmation_design_v2_template_sha256",
+            "confirmation_design_v2_validator", "confirmation_design_v2_validator_sha256",
+            "confirmation_design_v2_superseded_pre_execution",
+            "confirmation_design_v2_executed",
+            "confirmation_design_v2_eligibility_metadata_read",
+            "confirmation_design_v2_field_read", "confirmation_design_v2_prediction_read",
             "confirmation_design_template", "confirmation_design_template_sha256",
             "confirmation_design_validator", "confirmation_design_validator_sha256",
             "confirmation_design_status", "confirmation_design_non_authoritative",
+            "confirmation_reported_total_base_family_count",
+            "confirmation_maximum_post_exclusion_base_family_count",
+            "confirmation_maximum_population_sampling_fraction",
             "confirmation_required_new_base_family_count",
             "confirmation_excludes_all_historical_32_base_families",
             "confirmation_uses_all_eligible_cases_and_all_eight_flows",
             "confirmation_family_mean_and_seed_mean_precede_resampling",
+            "confirmation_aneumo_flow_diversity_is_direct_prior",
+            "confirmation_hemo_mpo_boundary_condition_full_field_is_direct_prior",
+            "confirmation_multi_flow_operator_or_component_stack_claim_allowed",
+            "confirmation_prefield_viability_required",
+            "confirmation_prefield_precision_minimum_development_families",
+            "confirmation_prefield_precision_maximum_observed_family_log_contrast_sd",
+            "confirmation_prefield_precision_target_power",
+            "confirmation_prefield_precision_required_response_contrast_count",
+            "confirmation_prefield_development_field_equivalence_required",
+            "confirmation_prefield_compute_projection_counts_two_models_five_seeds",
+            "confirmation_prefield_precision_viability_evaluated",
+            "confirmation_prefield_compute_viability_evaluated",
+            "confirmation_exact_case_log_family_geometric_estimator",
+            "confirmation_summary_derived_from_complete_error_rows",
+            "confirmation_required_error_row_models",
+            "confirmation_required_error_row_metric_count",
+            "confirmation_required_error_rows_per_case",
+            "confirmation_power_law_seed_rows_bitwise_identical",
             "confirmation_bootstrap_unit", "confirmation_bootstrap_replicates",
+            "confirmation_bootstrap_seed", "confirmation_bootstrap_shared_family_draws",
+            "confirmation_bootstrap_random_index_algorithm",
+            "confirmation_bootstrap_quantile_method",
             "confirmation_intersection_union_all_primary_requirements",
-            "confirmation_field_noninferiority_margin_log_ratio",
+            "confirmation_field_equivalence_margin_log_ratio",
+            "confirmation_field_comparator_count",
+            "confirmation_response_comparator_count",
+            "confirmation_response_endpoint_count",
+            "confirmation_response_primary_contrast_count",
+            "confirmation_analytic_power_law_response_superiority_required",
             "confirmation_minimum_response_point_reduction",
             "confirmation_minimum_positive_seed_count",
+            "confirmation_majority_family_wilson_safeguard",
+            "confirmation_minimum_family_win_count_when_n_100",
             "confirmation_post_result_sample_enlargement_allowed",
             "confirmation_interpretable_figure_roles",
+            "confirmation_interpretable_figure_includes_analytic_power_law",
+            "confirmation_interpretable_figure_ranks_by_weaker_comparator",
             "confirmation_maximum_gpu_hours", "confirmation_authorized_now",
             "confirmation_manifest_created", "confirmation_field_read",
             "confirmation_result_count",
@@ -1298,14 +1342,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "src/aurora/aneumo_response_fidelity_confirmation_template_v1.py"
         or response_fidelity["confirmation_design_v1_validator_sha256"]
         != "a03c9b754fc857298a6b8a136d7651edfcaa17092f9551b1a40cdd03a0958aac"
-        or response_fidelity["confirmation_design_template"]
+        or response_fidelity["confirmation_design_v2_template"]
         != "configs/aneumo_response_fidelity_confirmation_template_v2.json"
-        or response_fidelity["confirmation_design_template_sha256"]
+        or response_fidelity["confirmation_design_v2_template_sha256"]
         != "570bbca4218e1ef22f681c8e308c012b62f92a93807a92dc4953226342f64481"
-        or response_fidelity["confirmation_design_validator"]
+        or response_fidelity["confirmation_design_v2_validator"]
         != "src/aurora/aneumo_response_fidelity_confirmation_template_v2.py"
-        or response_fidelity["confirmation_design_validator_sha256"]
+        or response_fidelity["confirmation_design_v2_validator_sha256"]
         != "7c6dca01253dc7494ba013f72b0c2aee7a7c8ea49fc24e7215fdde97431a0564"
+        or response_fidelity["confirmation_design_template"]
+        != "configs/aneumo_response_fidelity_confirmation_template_v3.json"
+        or response_fidelity["confirmation_design_template_sha256"]
+        != "f9d52aeb2abd9832289db4852ab7dfec03db125093762e5f515ceebd43018226"
+        or response_fidelity["confirmation_design_validator"]
+        != "src/aurora/aneumo_response_fidelity_confirmation_template_v3.py"
+        or response_fidelity["confirmation_design_validator_sha256"]
+        != "d42e99fcea13eabe9f4a7bf8336487c5b7876c02e742031bcfb039a3325edccd"
         or response_fidelity["confirmation_design_status"]
         != "draft_non_authoritative_blocked_on_p0_p1_bounded_development_fresh_reentry_and_prefield_viability"
         or response_fidelity["confirmation_reported_total_base_family_count"] != 427
@@ -1319,17 +1371,32 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or response_fidelity["confirmation_prefield_precision_maximum_observed_family_log_contrast_sd"]
         != 0.29810546005930777
         or response_fidelity["confirmation_prefield_precision_target_power"] != 0.8
+        or response_fidelity["confirmation_prefield_precision_required_response_contrast_count"]
+        != 4
         or response_fidelity["confirmation_bootstrap_unit"]
         != "aneumo_generation_base_family"
         or response_fidelity["confirmation_bootstrap_replicates"] != 10000
-        or response_fidelity["confirmation_field_noninferiority_margin_log_ratio"]
+        or response_fidelity["confirmation_bootstrap_seed"] != 2027081303
+        or response_fidelity["confirmation_bootstrap_random_index_algorithm"]
+        != "sha256_counter_uint64_rejection_sampling_without_modulo_bias"
+        or response_fidelity["confirmation_bootstrap_quantile_method"]
+        != "hyndman_fan_type_7_linear"
+        or response_fidelity["confirmation_required_error_row_models"]
+        != ["candidate", "direct", "power_law"]
+        or response_fidelity["confirmation_required_error_row_metric_count"] != 3
+        or response_fidelity["confirmation_required_error_rows_per_case"] != 45
+        or response_fidelity["confirmation_field_equivalence_margin_log_ratio"]
         != 0.01980262729617973
+        or response_fidelity["confirmation_field_comparator_count"] != 2
+        or response_fidelity["confirmation_response_comparator_count"] != 2
+        or response_fidelity["confirmation_response_endpoint_count"] != 2
+        or response_fidelity["confirmation_response_primary_contrast_count"] != 4
         or response_fidelity["confirmation_minimum_response_point_reduction"] != 0.1
         or response_fidelity["confirmation_minimum_positive_seed_count"] != 4
         or response_fidelity["confirmation_minimum_family_win_count_when_n_100"]
         != 59
         or response_fidelity["confirmation_interpretable_figure_roles"]
-        != ["candidate_worst_case", "typical_case", "candidate_best_case"]
+        != ["candidate_worst", "typical_median", "candidate_best"]
         or response_fidelity["confirmation_maximum_gpu_hours"] != 40.0
         or response_fidelity["confirmation_result_count"] != 0
         or response_fidelity["candidate_architecture_status"]
@@ -1369,6 +1436,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p1_design_fresh_seed_or_disjoint_split_reentry_required",
                 "p1_design_validator_synthetic_tests_passed",
                 "confirmation_design_v1_superseded_pre_execution",
+                "confirmation_design_v2_superseded_pre_execution",
                 "confirmation_design_non_authoritative",
                 "confirmation_excludes_all_historical_32_base_families",
                 "confirmation_uses_all_eligible_cases_and_all_eight_flows",
@@ -1376,10 +1444,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "confirmation_aneumo_flow_diversity_is_direct_prior",
                 "confirmation_hemo_mpo_boundary_condition_full_field_is_direct_prior",
                 "confirmation_prefield_viability_required",
+                "confirmation_prefield_development_field_equivalence_required",
                 "confirmation_prefield_compute_projection_counts_two_models_five_seeds",
                 "confirmation_exact_case_log_family_geometric_estimator",
+                "confirmation_summary_derived_from_complete_error_rows",
+                "confirmation_power_law_seed_rows_bitwise_identical",
+                "confirmation_bootstrap_shared_family_draws",
                 "confirmation_intersection_union_all_primary_requirements",
+                "confirmation_analytic_power_law_response_superiority_required",
                 "confirmation_majority_family_wilson_safeguard",
+                "confirmation_interpretable_figure_includes_analytic_power_law",
+                "confirmation_interpretable_figure_ranks_by_weaker_comparator",
             )
         )
         or any(
@@ -1399,6 +1474,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "confirmation_design_v1_executed",
                 "confirmation_design_v1_metadata_read",
                 "confirmation_design_v1_field_or_prediction_read",
+                "confirmation_design_v2_executed",
+                "confirmation_design_v2_eligibility_metadata_read",
+                "confirmation_design_v2_field_read",
+                "confirmation_design_v2_prediction_read",
                 "confirmation_multi_flow_operator_or_component_stack_claim_allowed",
                 "confirmation_prefield_precision_viability_evaluated",
                 "confirmation_prefield_compute_viability_evaluated",
@@ -1442,6 +1521,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("p1_design_validator", "p1_design_validator_sha256"),
         ("confirmation_design_v1_template", "confirmation_design_v1_template_sha256"),
         ("confirmation_design_v1_validator", "confirmation_design_v1_validator_sha256"),
+        ("confirmation_design_v2_template", "confirmation_design_v2_template_sha256"),
+        ("confirmation_design_v2_validator", "confirmation_design_v2_validator_sha256"),
         ("confirmation_design_template", "confirmation_design_template_sha256"),
         ("confirmation_design_validator", "confirmation_design_validator_sha256"),
     ):

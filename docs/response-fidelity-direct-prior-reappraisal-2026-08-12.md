@@ -1,5 +1,12 @@
 # Aneumo response-fidelity direct-prior reappraisal
 
+> **2026-08-13 confirmation-v3 control correction:** Direct-prior subtraction
+> also changes the experimental burden. A learned residual cannot be presented
+> as useful merely by beating a learned direct head; it must beat the
+> train-fitted analytic power law on both response endpoints while remaining
+> field-equivalent to both controls. This is an evidence requirement, not a new
+> model contribution.
+
 > **2026-08-13 direct-prior correction:** Aneumo itself already studies
 > training/validation flow-condition diversity, and Hemo-MPO maps geometry plus
 > physiological boundary conditions to full hemodynamic fields. Neither

@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-13 · schema 11.8 · confirmation v3 evaluator red-team
+
+- Preserved v2 and superseded it before eligibility metadata, field or
+  prediction access; no historical contract or result was repaired.
+- Promoted train-fitted power law from field-competence check to a mandatory
+  primary response comparator. Candidate must beat both power law and the
+  same-backbone direct head on paired response and tangent error.
+- Replaced one-sided field non-inferiority with bilateral ±2% field equivalence
+  against both controls so better field accuracy cannot confound the claimed
+  response-specific mechanism.
+- Added a deterministic evaluator that derives every statistic from complete
+  long-form error rows, rejects missing/duplicate/extra/nonfinite cells and
+  requires bitwise-identical replicated analytic rows.
+- Pinned shared-family SHA-256 counter bootstrap draws, rejection sampling and
+  Hyndman--Fan type-7 quantiles. The figure ranks families by the weaker
+  comparator and includes reference/direct/power-law/candidate panels.
+- Synthetic negative controls reject learned-direct-only wins, minority-driven
+  means, field-mismatch confounding, incomplete rows and analytic seed drift.
+  They are software evidence, not Aneumo results.
+- Dependency-complete regression passes 570/570 tests; protocol retains 111
+  invariants at `d3d1d6d9…f6f763f6`. Real P0 remains 0/11 and no server,
+  PBS/GPU, result or claim was opened.
+
 ## 2026-08-13 · schema 11.8 · confirmation v2 red-team
 
 - Preserved v1 and superseded it before confirmation metadata, field or

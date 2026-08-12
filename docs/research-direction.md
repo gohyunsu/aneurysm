@@ -1,5 +1,12 @@
 # AURORA 연구 방향
 
+> **Schema 11.8 confirmation-v3 falsifiability:** Fancy architecture는 analytic
+> scaling을 이겨야만 의미가 있다. Candidate가 same-backbone direct에는 이기지만
+> train-fitted power law에는 지는 경우를 명시적 실패로 둔다. 또한 field-error-
+> matched mechanism을 주장하려면 두 control 모두와 ±2% bilateral equivalence가
+> 필요하다. Current v3 evaluator는 complete raw error rows에서 이 conjunctive
+> verdict를 직접 계산하며, 누락이나 comparator demotion을 허용하지 않는다.
+
 > **Schema 11.8 confirmation-v2 narrowing:** Aneumo 원 논문의 flow-diversity
 > study와 Hemo-MPO의 geometry+BC→full-field operator를 direct prior로 뺀다.
 > 현재 residual identity는 같은 backbone/field accuracy에서 response fidelity가

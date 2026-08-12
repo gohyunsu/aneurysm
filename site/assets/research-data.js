@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · Aneumo flow diversity and Hemo-MPO boundary-conditioned full-field learning are direct priors · independent confirmation v2 fixes exactly 100 new families, prefield viability and majority-family benefit · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; only positive direct/residual response-error contrast can pass, low/high iso-error levels cannot rescue the median co-primary failure and dependent cross-fit contrasts support no exact inference; multi-flow conditioning, Hemo-MPO and AB-GATr architecture components are direct priors, not contributions or silently executable baselines; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; inactive confirmation v2 then requires exactly 100 new families, a two-endpoint development-dispersion gate, complete two-model/five-seed workload projection within 40 GPU-hours, exact case-log-to-family estimators, at least 59 of 100 family wins on both response endpoints, family-only 10,000-bootstrap conjunction and a failure-revealing worst/typical/best figure; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · independent confirmation v3 requires bilateral field equivalence and response superiority against both learned direct and analytic power-law controls · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; multi-flow conditioning, Hemo-MPO and AB-GATr architecture components are direct priors, not contributions; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; inactive confirmation v3 then fixes exactly 100 new families and requires four development contrast dispersion checks, a complete two-model/five-seed workload within 40 GPU-hours, bilateral ±2% field equivalence to both same-backbone direct and train-fitted power law, ≥10% improvement on all four comparator-by-response contrasts, ≥4/5 positive seeds and ≥59/100 family wins for each, with summaries derived only from complete raw error rows under one pinned shared-family bootstrap; the exact introai9 cache path remains unresolved and no retry is allowed before an external change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Confirmation v3 makes the analytic control and raw evaluator non-optional",
+      copy: "V2 could pass when the candidate beat the learned direct head but lost response fidelity to a train-fitted power law, or when response gains followed a materially lower field error. V3 therefore requires bilateral ±2% field equivalence and paired/tangent superiority against both controls. It derives all contrasts from complete family×case×seed×model×metric rows, uses one SHA-256 counter family-bootstrap stream and type-7 quantiles, and ranks the figure by the weaker comparator.",
+      status: "Inactive v3 · regression 570/570 · protocol 111 invariants · v2 evidence access 0 · synthetic adversarial checks only · real P0 0/11 · eligibility metadata/field/prediction/server/PBS/GPU/result/claim 0",
+      url: "../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md"
+    },
     {
       year: "2026.08",
       title: "Confirmation v2 requires prefield viability and majority-family benefit",
@@ -1371,6 +1378,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "protocol",
+      title: "Confirmation v3 closes analytic-control, field-matching and hand-authored-summary loopholes",
+      copy: "V2 is preserved before any eligibility metadata, field or prediction. V3 makes train-fitted power law a primary response comparator, changes one-sided field non-inferiority to bilateral ±2% equivalence against both controls, and requires all four comparator-by-endpoint response contrasts to pass effect, bootstrap, seed and family-prevalence gates. A deterministic evaluator accepts only complete raw error rows; learned-direct wins, minority-family means, better-field confounding, missing rows and analytic seed drift are explicit failing negative controls. Regression passes 570/570 with 111 protocol invariants. This creates no scientific result or compute authority.",
+      files: ["configs/aneumo_response_fidelity_confirmation_template_v3.json", "src/aurora/aneumo_response_fidelity_confirmation_template_v3.py", "tests/test_aneumo_response_fidelity_confirmation_template_v3.py", "docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "docs/isbi-2027-plan.md", "docs/experiment-protocol.md", "docs/research-direction.md", "site/index.html", "site/learn.html"]
+    },
     {
       date: "2026.08.13",
       category: "protocol",

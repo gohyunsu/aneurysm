@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-13 comparator correction:** The train-fitted analytic power law is
+> not merely a field-competence diagnostic. Because the proposed application is
+> repeated-flow response prediction after one nominal solve, scaling is a
+> strong application baseline and must be a primary response comparator.
+> Confirmation v3 therefore requires the candidate to beat both scaling and the
+> same-backbone direct head at bilaterally equivalent field error. No architecture
+> novelty can substitute for this comparison.
+
 > **2026-08-13 residual-gap correction:** Aneumo already evaluates training and
 > validation flow diversity, while Hemo-MPO already conditions a full-field
 > operator on geometry and physiological boundary conditions. Therefore the

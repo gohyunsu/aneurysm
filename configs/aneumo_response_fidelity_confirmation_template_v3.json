@@ -1,0 +1,195 @@
+{
+  "schema_version": "aurora.aneumo_response_fidelity_confirmation_template.v3",
+  "template_id": "aneumo_response_fidelity_independent_confirmation_template_v3",
+  "status": "draft_non_authoritative_blocked_on_p0_p1_bounded_development_fresh_reentry_and_prefield_viability",
+  "purpose": "Close the remaining comparator, estimator, resampling and visualization discretion before any confirmation eligibility metadata, field or prediction is read.",
+  "supersession": {
+    "supersedes_template": "configs/aneumo_response_fidelity_confirmation_template_v2.json",
+    "supersedes_template_sha256": "570bbca4218e1ef22f681c8e308c012b62f92a93807a92dc4953226342f64481",
+    "supersedes_validator": "src/aurora/aneumo_response_fidelity_confirmation_template_v2.py",
+    "supersedes_validator_sha256": "7c6dca01253dc7494ba013f72b0c2aee7a7c8ea49fc24e7215fdde97431a0564",
+    "v2_executed": false,
+    "v2_confirmation_metadata_read": false,
+    "v2_confirmation_field_read": false,
+    "v2_model_prediction_read": false,
+    "reasons": [
+      "v2_response_superiority_was_required_against_the_learned_direct_control_but_not_the_strong_analytic_power_law_control",
+      "v2_prefield_dispersion_gate_did_not_require_all_four_endpoint_by_comparator_contrasts",
+      "v2_did_not_pin_seed_direction_aggregation_or_bootstrap_quantile_and_resampling_algorithms",
+      "v2_accepted_a_manually_supplied_summary_instead_of_deriving_it_from_complete_long_form_error_rows",
+      "v2_figure_ranking_could_ignore_failure_against_the_analytic_control"
+    ]
+  },
+  "inherited_v2_contract": {
+    "inherit_only_from_exact_v2_hashes": true,
+    "unchanged_sections": [
+      "direct_prior_boundary",
+      "estimand_and_scope",
+      "confirmation_sample",
+      "frozen_models_except_analytic_control_role",
+      "compute_and_execution",
+      "stopping_and_claim_deletion"
+    ],
+    "reported_total_base_family_count": 427,
+    "historical_compact_base_family_count": 32,
+    "required_new_base_family_count": 100,
+    "historical_families_excluded": true,
+    "field_blind_selection_seed": 2027081301,
+    "all_eligible_cases_and_all_eight_flows_required": true
+  },
+  "activation_boundary": {
+    "this_file_can_be_executed": false,
+    "this_file_can_be_submitted_to_pbs": false,
+    "confirmation_registered": false,
+    "real_p0_required_verdict": "pass_all_11_checks",
+    "real_p0_observed_verdict": null,
+    "p1_required_template": "configs/aneumo_response_fidelity_p1_template_v3.json",
+    "p1_required_template_sha256": "fb18827b6153422f2e97c7cf6151c653b0490f09e2942572c064dc1ea66adbc0",
+    "p1_required_verdict": "positive_same_backbone_residual_benefit",
+    "p1_observed_verdict": null,
+    "bounded_development_candidate_frozen": false,
+    "fresh_seed_or_disjoint_split_reentry_passed": false,
+    "prefield_precision_viability_passed": false,
+    "prefield_compute_viability_passed": false,
+    "template_frozen_before_eligibility_metadata_read": true,
+    "manifest_container_checkpoint_evaluator_hashes_frozen_before_field_read": false,
+    "activation_requires_separate_public_executable_registration": true
+  },
+  "prefield_viability": {
+    "precision_uses_confirmation_eligibility_metadata_field_or_prediction": false,
+    "compute_uses_only_field_blind_confirmation_eligibility_metadata": true,
+    "uses_confirmation_field_or_prediction": false,
+    "development_family_count": 20,
+    "training_seeds": [2027081211, 2027081212, 2027081213, 2027081214, 2027081215],
+    "minimum_effect_log_ratio": 0.09531017980432493,
+    "planning_confirmation_family_count": 100,
+    "planning_one_sided_alpha": 0.05,
+    "planning_target_power": 0.8,
+    "maximum_observed_20_family_sample_sd_per_contrast": 0.29810546005930777,
+    "required_response_contrasts": [
+      "paired_response_direct_over_candidate",
+      "tangent_direct_over_candidate",
+      "paired_response_power_law_over_candidate",
+      "tangent_power_law_over_candidate"
+    ],
+    "all_four_response_contrasts_must_pass_precision_gate": true,
+    "both_field_comparison_development_intervals_must_be_inside_plus_or_minus_log_1_02": true,
+    "precision_gate_is_planning_adequacy_not_paper_power_or_normality_claim": true,
+    "complete_workload_formula": "selected_case_flow_count_times_two_learned_models_times_five_frozen_seeds",
+    "analytic_power_law_evaluation_included_but_not_counted_as_gpu_inference": true,
+    "projected_gpu_hours_use_one_sided_95_percent_upper_inference_seconds": true,
+    "maximum_projected_confirmation_gpu_hours": 40.0,
+    "sequence": "freeze_template_then_read_field_blind_eligibility_metadata_then_lock_100_family_manifest_then_pass_precision_and_compute_viability_then_read_fields",
+    "viability_failure_action": "close_exact_confirmation_before_any_confirmation_field_or_prediction_read"
+  },
+  "complete_error_row_contract": {
+    "format": "long_form_one_row_per_family_case_seed_model_metric",
+    "required_models": ["candidate", "direct", "power_law"],
+    "required_metrics": [
+      "field_relative_l2",
+      "paired_response_relative_l2",
+      "discrete_tangent_relative_l2"
+    ],
+    "required_training_seeds": [2027081211, 2027081212, 2027081213, 2027081214, 2027081215],
+    "required_fields": ["family_id", "case_id", "seed", "model", "metric", "error"],
+    "exactly_one_row_per_factor_cell": true,
+    "all_manifest_families_and_no_extra_families_required": true,
+    "same_nonempty_case_set_for_every_model_seed_metric_within_family": true,
+    "power_law_errors_must_be_bitwise_identical_across_replicated_seed_rows": true,
+    "finite_nonnegative_errors_required": true,
+    "positive_error_floor": 2.220446049250313e-16,
+    "missing_duplicate_nonfinite_or_extra_row_action": "execution_incomplete_no_scientific_verdict"
+  },
+  "exact_estimators": {
+    "case_response_log_contrast": "log(max(comparator_error,2^-52)_divided_by_max(candidate_error,2^-52))",
+    "case_field_log_contrast": "log(max(candidate_error,2^-52)_divided_by_max(comparator_error,2^-52))",
+    "family_seed_contrast": "arithmetic_mean_over_all_complete_cases_within_family_and_seed",
+    "family_contrast": "arithmetic_mean_over_all_five_frozen_seed_contrasts",
+    "population_log_contrast": "arithmetic_mean_over_exactly_100_family_contrasts",
+    "reported_multiplicative_ratio": "exp_population_log_contrast",
+    "positive_seed_definition": "population_mean_log_contrast_over_all_100_families_for_one_seed_strictly_above_zero",
+    "family_win_definition": "five_seed_mean_family_response_log_contrast_strictly_above_zero",
+    "nodes_flows_cases_seeds_or_deformations_are_not_independent_replicates": true
+  },
+  "deterministic_family_bootstrap": {
+    "unit": "aneumo_real_base_geometry_generation_family",
+    "replicates": 10000,
+    "seed": 2027081303,
+    "resample_size": 100,
+    "sampling": "with_replacement",
+    "shared_family_index_draws_across_all_comparators_and_endpoints": true,
+    "random_index_algorithm": "sha256_counter_uint64_rejection_sampling_without_modulo_bias",
+    "counter_encoding": "ascii_seed_colon_replicate_colon_draw_colon_attempt",
+    "quantile_method": "hyndman_fan_type_7_linear",
+    "one_sided_lower_probability": 0.05,
+    "one_sided_upper_probability": 0.95,
+    "exact_p_value_or_nominal_bootstrap_coverage_claim_allowed": false
+  },
+  "primary_comparators_and_pass": {
+    "learned_control": "same_backbone_direct_target_field",
+    "analytic_control": "train_fitted_power_law_scaling_frozen_before_confirmation",
+    "field_comparisons": [
+      "candidate_over_direct",
+      "candidate_over_power_law"
+    ],
+    "response_comparisons": [
+      "direct_over_candidate",
+      "power_law_over_candidate"
+    ],
+    "response_endpoints": [
+      "paired_response_relative_l2",
+      "discrete_tangent_relative_l2"
+    ],
+    "field_equivalence_absolute_log_margin": 0.01980262729617973,
+    "minimum_response_geometric_error_ratio": 1.1,
+    "minimum_positive_seed_count_per_response_comparison_endpoint": 4,
+    "minimum_family_win_count_per_response_comparison_endpoint": 59,
+    "family_win_interval": "one_sided_95_percent_wilson_lower_strictly_above_0_5",
+    "global_rule": "intersection_union_every_field_and_every_response_requirement_must_pass",
+    "pass_requires": [
+      "prefield_precision_and_compute_viability_pass_after_manifest_lock_and_before_confirmation_field_read",
+      "both_field_comparison_family_bootstrap_intervals_are_inside_plus_or_minus_log_1_02",
+      "all_four_response_comparison_endpoint_family_bootstrap_lower_bounds_are_above_zero",
+      "all_four_response_geometric_error_ratios_are_at_least_1_10",
+      "all_four_response_comparison_endpoints_are_positive_in_at_least_4_of_5_seeds",
+      "all_four_response_comparison_endpoints_have_at_least_59_of_100_family_wins"
+    ],
+    "analytic_control_can_be_omitted_or_demoted_after_failure": false,
+    "secondary_endpoint_or_descriptive_model_can_rescue_failure": false
+  },
+  "interpretable_figure": {
+    "family_ranking_statistic": "minimum_of_direct_and_power_law_comparator_specific_half_paired_plus_half_tangent_five_seed_family_log_contrasts",
+    "family_roles": ["candidate_worst", "typical_median", "candidate_best"],
+    "family_role_tie_break": "predeclared_family_hash_order",
+    "within_family_case_selection": "first_eligible_case_by_predeclared_case_hash_order",
+    "target_flow_selection": "largest_absolute_log_flow_ratio_from_nominal_tie_lower_mass_flow",
+    "display_seed": 2027081211,
+    "panels": ["reference", "same_backbone_direct", "analytic_power_law", "candidate"],
+    "same_coordinates_camera_and_reference_derived_color_range": true,
+    "ranking_roles_case_flow_seed_and_color_rule_disclosed_in_caption": true,
+    "favorable_only_case_or_comparator_selection_allowed": false,
+    "clinical_interpretation_allowed": false
+  },
+  "stopping_and_claim_deletion": {
+    "all_100_families_all_cases_all_flows_all_models_all_metrics_and_all_five_seeds_required": true,
+    "partial_aggregation_allowed": false,
+    "same_version_repair_rerun_or_comparator_endpoint_margin_seed_sample_quantile_change_after_any_confirmation_eligibility_metadata_field_or_prediction_read_allowed": false,
+    "execution_incomplete_action": "close_exact_confirmation_no_scientific_verdict",
+    "any_primary_component_failure_action": "delete_method_and_performance_claims_without_dropping_or_demoting_failed_control",
+    "confirmation_pass_authorizes_submission_automatically": false
+  },
+  "current_state": {
+    "confirmation_config_registered": false,
+    "manifest_created": false,
+    "confirmation_eligibility_metadata_read": false,
+    "confirmation_field_read": false,
+    "model_prediction_read": false,
+    "scientific_server_queried": false,
+    "prefield_precision_viability_evaluated": false,
+    "prefield_compute_viability_evaluated": false,
+    "pbs_job_submitted": false,
+    "gpu_job_submitted": false,
+    "scientific_result_count": 0,
+    "paper_claim_active": false
+  }
+}
