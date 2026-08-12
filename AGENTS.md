@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 P1 v3/private synchronization:** Exact scientific
+> public source `0f443c8d68f5d8dced3b9e092a1f6e3bb0b8a723` passed Quality
+> `31606655510` and Pages `31606655150`. Private planning head
+> `bed6cb5d867a4f7ca28993bb9dda6da74b47ad6d` is remote exact, PRIVATE and
+> anonymously 404. Manuscript/reference SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> No title/abstract/method/result/figure/C21 is active. No scientific server,
+> transfer, PBS/GPU or monitoring occurred; real P0 is 0/11 and P1 remains
+> unregistered. Never access `junjinyong`; do not retry `introai9` before a
+> verified external change.
+
 > **2026-08-12 schema 11.8 direct-prior-complete P1 v3:** SC-FNO already owns
 > the generic solution-accuracy/sensitivity mismatch and sensitivity loss;
 > Hemo-MPO owns Aneumo SE(3) mesh encoding + physics constraint + DeepONet;

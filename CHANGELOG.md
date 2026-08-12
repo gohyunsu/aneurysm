@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · P1 v3 and private ledger synchronized
+
+- Exact scientific public source `0f443c8…` passed Quality `31606655510` and
+  Pages `31606655150`; the live site exposes the same-backbone directional
+  falsifier and direct-prior boundary.
+- Private planning head `bed6cb5…` is remote exact, PRIVATE and anonymously
+  404. Manuscript/reference bytes remain unchanged and no paper claim is active.
+- Scientific-server query, transfer, PBS/GPU submission and monitoring remain
+  zero; real P0 is 0/11 and P1 remains unregistered.
+
 ## 2026-08-12 · schema 11.8 · direct priors narrow P1 to one directional mechanism test
 
 - SC-FNO, Hemo-MPO and AB-GATr close the broad architecture-novelty story.

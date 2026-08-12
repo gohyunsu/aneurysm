@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 P1 v3/private synchronization:** Exact scientific public source
+> `0f443c8d68f5d8dced3b9e092a1f6e3bb0b8a723` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31606655510)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31606655150).
+> Private planning head `bed6cb5d867a4f7ca28993bb9dda6da74b47ad6d` is remote
+> exact, PRIVATE and anonymously returns 404. Manuscript/reference SHA-256
+> remains `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> No title, abstract claim, method, result table, figure or C21 was activated.
+
 > **Schema 11.8 direct-prior-complete P1 v3:**
 > [SC-FNO](https://proceedings.iclr.cc/paper_files/paper/2025/hash/227b19598f79ed838b01933b9a6ace41-Abstract-Conference.html),
 > [Hemo-MPO](https://doi.org/10.1016/j.aej.2026.05.044) and

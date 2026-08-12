@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "P1 v3 and the private no-claim ledger are synchronized",
+      copy: "Exact scientific public source 0f443c8… passed Quality 31606655510 and Pages 31606655150. Private planning head bed6cb5… is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes remain unchanged. The live site exposes the direct-prior boundary and same-backbone directional falsifier. This creates no real P0 result, P1 registration, model, GPU, outer test or paper claim.",
+      status: "Public CI/Pages success · private remote exact/anonymous 404 · manuscript unchanged · real P0 0/11",
+      url: "../docs/isbi-2027-plan.md"
+    },
+    {
+      year: "2026.08",
       title: "Direct priors narrow P1 to one same-backbone directional falsifier",
       copy: "SC-FNO already owns generic solution-versus-sensitivity mismatch and sensitivity supervision; Hemo-MPO owns an Aneumo SE(3) mesh encoder, physics constraint and DeepONet; AB-GATr owns base-anatomy-stratified equivariant Aneumo comparison. The unexecuted v2 is preserved and inactive v3 fixes one MIT-licensed LaB-GATr backbone, changing only direct field output versus v0 + log(q/q0) times residual. Only lower residual-head error can pass both median co-primary endpoints; negative or mixed evidence closes the direction. Source-only unavailable controls and descriptive baselines cannot rescue it.",
       status: "Inactive P1 v3 · regression 544/544 · 111 protocol invariants · real P0 0/11 · failure observed 0 · P1/model/server/PBS/GPU/outer test/result/claim 0",
@@ -1336,6 +1343,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "deployment",
+      title: "P1 v3 and the private no-claim ledger are synchronized",
+      copy: "Exact scientific public source 0f443c8… passed Quality 31606655510 and Pages 31606655150. Private planning head bed6cb5… is remote exact, PRIVATE and anonymously 404; main.tex and references remain byte-for-byte unchanged. Real P0 remains 0/11, P1 remains unregistered and no server/PBS/GPU action occurred.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
     {
       date: "2026.08.12",
       category: "protocol",
