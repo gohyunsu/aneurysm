@@ -4,7 +4,7 @@
 > `9206415e43bd85cf4e592cf81005bc1b34851465` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31563336315)
 > and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31563336017).
-> Private ledger `94da161002e11f49d44e8764ae2391e494ebf10a` is remote exact,
+> Private ledger `94da161d8de3589336aae5f0d0232c68814a3942` is remote exact,
 > PRIVATE and anonymously returns 404. Full regression is 468 tests: 402
 > pass/66 optional skip with 103 protocol invariants. Protocol SHA-256 is
 > `872a3917485512c5990d3e46185cddd2f74d1acbf568cfcfc7d8e3582a3d87cd`;

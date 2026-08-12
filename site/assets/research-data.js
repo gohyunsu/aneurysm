@@ -1199,7 +1199,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.12",
       category: "deployment",
       title: "Schema 11.1 TopAneu audit is live and the private no-claim ledger is pinned",
-      copy: "Exact public scientific source 9206415e43bd85cf4e592cf81005bc1b34851465 passed Quality 31563336315 and Pages 31563336017. Live Overview, zero-assumption chapter #topaneu-registered-release and the exact audit expose the same registered-design/realized-release rejection. Private ledger 94da161002e11f49d44e8764ae2391e494ebf10a is remote exact, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 468 tests: 402 pass/66 optional skip and 103 protocol invariants. This provenance opens no active problem, method, model, result, compute or submission authority.",
+      copy: "Exact public scientific source 9206415e43bd85cf4e592cf81005bc1b34851465 passed Quality 31563336315 and Pages 31563336017. Live Overview, zero-assumption chapter #topaneu-registered-release and the exact audit expose the same registered-design/realized-release rejection. Private ledger 94da161d8de3589336aae5f0d0232c68814a3942 is remote exact, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 468 tests: 402 pass/66 optional skip and 103 protocol invariants. This provenance opens no active problem, method, model, result, compute or submission authority.",
       files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
     },
     {

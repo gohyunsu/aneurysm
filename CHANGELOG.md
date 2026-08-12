@@ -4,7 +4,7 @@
 
 - Exact scientific source `9206415e43bd85cf4e592cf81005bc1b34851465`
   passed Quality `31563336315` and Pages `31563336017`.
-- Private ledger `94da161002e11f49d44e8764ae2391e494ebf10a` is remote exact,
+- Private ledger `94da161d8de3589336aae5f0d0232c68814a3942` is remote exact,
   PRIVATE and anonymously returns 404; manuscript/reference bytes are unchanged.
 - Full regression passes: 468 tests, 402 pass/66 optional skip, 103 protocol
   invariants, site graph, JSON, JavaScript and diff hygiene. This provenance

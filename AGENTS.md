@@ -3,7 +3,7 @@
 > **2026-08-12 schema 11.1 deployment/private synchronization:** Exact public
 > scientific source `9206415e43bd85cf4e592cf81005bc1b34851465` passed Quality
 > `31563336315` and Pages `31563336017`. Private paper head
-> `94da161002e11f49d44e8764ae2391e494ebf10a` is remote exact, PRIVATE and
+> `94da161d8de3589336aae5f0d0232c68814a3942` is remote exact, PRIVATE and
 > anonymous API returns 404. `paper/main.tex` and references SHA-256 remain
 > `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
 > `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
