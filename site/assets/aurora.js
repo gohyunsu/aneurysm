@@ -116,24 +116,24 @@
 
   const modes = {
     presence: {
-      description: "Within one cut context, remeshing should not flip the same lesion's decision.",
-      connector: "resolution",
-      title: "Discretization is a nuisance",
-      copy: "The shared anatomy token and prediction are stabilized across original, area-001 and area-005 meshes within the same cut",
+      description: "Anchor-relative gain should follow the reference CFD sweep.",
+      connector: "gain",
+      title: "Preserve response magnitude",
+      copy: "Compare the norm of each target-minus-anchor field, not only the absolute target field",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "A wider cut can add real neck and parent-vessel information, so its final prediction need not equal a dome-only view.",
-      connector: "context",
-      title: "Information-set changes are retained",
-      copy: "Only the shared aneurysm component is aligned across cuts; a regularized context residual is allowed to contribute",
+      description: "The predicted change must point in the same high-dimensional direction as the reference response.",
+      connector: "direction",
+      title: "Preserve response direction",
+      copy: "Measure cosine error on target-minus-anchor response fields so anchor bias cannot masquerade as fidelity",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "The full orbit exposes disagreement that a single-view model cannot observe.",
-      connector: "disagree?",
-      title: "Reliability is measured case by case",
-      copy: "We report decision flips, worst-view probability quality and disagreement-based selective risk in addition to average AUROC",
+      description: "A smooth-looking field can still bend incorrectly as mass flow changes.",
+      connector: "derivative",
+      title: "Preserve tangent and curvature",
+      copy: "Use the registered nonuniform flow grid to evaluate first- and second-order discrete response errors",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };
