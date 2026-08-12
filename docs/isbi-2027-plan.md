@@ -1,5 +1,11 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.4 readiness:** One real public clinical table is now verified in
+> principle, but active imaging data and staged train/validation/test remain 0
+> and 0/0/0. Mixed target times and direct-prior score development prevent an
+> independent ISBI identity. Do not write a title, contribution, method figure
+> or result table from file availability.
+
 > **Schema 11.3 readiness:** The project has no verified train, validation or
 > test dataset for the current direction. A fresh `introai9` inventory reached
 > the network and authenticated one endpoint but obtained no shell/SFTP

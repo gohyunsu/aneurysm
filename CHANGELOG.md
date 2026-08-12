@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.4 separates an open clinical table from an active imaging dataset
+
+- Verified Zenodo 17339029 revision 6: one CC-BY-4.0 XLSX, 39,686 bytes,
+  linked to 230 actual aSAH patients. The payload was not downloaded or opened.
+- Kept medical imaging, image–row join and fixed target time separate from
+  file availability. The source substitutes discharge or 3-month mRS for 70
+  patients without 6-month mRS.
+- Rejected six candidates at 29.5/28.0/27.0/27.0/26.0/25.5. Active dataset,
+  problem, P0/P1, method, model, result, claim and GPU remain zero.
+- Added fail-closed source-watch v21 with 34 exact public states. A change can
+  request re-audit only; it cannot download data or authorize compute.
+- Added a detailed beginner-facing site chapter and filterable change entry.
+  Full regression passes 472 tests: 406 pass/66 optional skip and 107 protocol
+  invariants. Protocol SHA-256 is
+  `0a9ccadb4841715a761188e209329bc468c5fe5631f0d1cc81e9086b82bf6645`;
+  source-watch v21 SHA-256 is
+  `ab34cf2b69e44877270250e1421eec057411a3a0a108c567bc8a22bf9a483dbb`.
+
 ## 2026-08-12 · Schema 11.3 records an incomplete introai9 inventory
 
 - Attempted a user-authorized, read-only inventory on both documented

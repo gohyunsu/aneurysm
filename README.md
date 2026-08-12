@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 open clinical outcome/target-time reappraisal · schema 11.4:**
+> Zenodo [`17339029`](https://zenodo.org/records/17339029) revision 6 is one
+> genuinely material public asset: a CC BY 4.0, 39,686-byte aSAH clinical XLSX
+> associated with 230 real patients. It is not medical imaging and was not
+> downloaded or opened. The source reports missing 6-month mRS for 70 patients
+> and substitution with discharge or 3-month values, so it does not identify a
+> pure fixed 6-month outcome. ASIS exposes synthetic—not its 487 actual
+> patient—data; the 2,258-aneurysm instability, 3,180-patient mixed-effects and
+> 2,073-subject Circle-of-Willis sources expose no verified public patient/image
+> asset. Six candidates score **29.5/28.0/27.0/27.0/26.0/25.5** and all fail.
+> Source-watch v21 freezes 34 states and can request re-audit only. Active
+> dataset/problem/model/P0/GPU remain 0; verified staged train/validation/test
+> remain 0/0/0. See the [exact audit](docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md)
+> and [beginner guide](site/learn.html#open-clinical-target-time).
+
 > **2026-08-12 introai9 dataset inventory · schema 11.3:** A user-authorized,
 > read-only inventory attempted both documented `introai9` login boundaries.
 > TCP/22 was reachable on both and public-key authentication was explicitly

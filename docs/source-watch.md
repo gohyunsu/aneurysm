@@ -1,4 +1,11 @@
-# Public source watch · thirty-three material/direct-prior source states
+# Public source watch · thirty-four material/direct-prior source states
+
+> **Current contract — schema 11.4 / v21:** `source_watch_v21.json` extends
+> v20 with exact Zenodo record 17339029 revision 6: one open CC-BY-4.0
+> clinical XLSX, 39,686 bytes. The watch freezes release metadata only. The
+> table is not medical imaging or fixed-time outcome truth; a change can
+> request re-audit but cannot download data, register P0, select a model or
+> authorize compute.
 
 > **Schema 11.3 server-inventory boundary:** An SSH/SFTP session timeout is an
 > operational no-verdict, not a public-source revision. Source-watch v20 stays

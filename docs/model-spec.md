@@ -1,5 +1,10 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.4 model decision: `null`.** A versioned clinical XLSX does not
+> justify a tabular score model, imaging network, GNN or fusion architecture.
+> It contains no images and does not identify one fixed outcome horizon. Model
+> selection remains closed until a task and asset pass all prospective gates.
+
 > **Schema 11.3 model decision: `null`.** A login endpoint and public-key
 > authentication are not a dataset. Because the current `introai9` inventory
 > returned no directory listing and verified train/validation/test counts are

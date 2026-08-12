@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.4 execution state:** Public bibliographic and release metadata
+> only. The XLSX was not downloaded or opened. No scientific server, SSH/SFTP,
+> scheduler, transfer, PBS/GPU or monitoring action occurred. Active jobs are
+> zero. Future gate-authorized work is `introai9` PBS-only; never use a
+> login-node GPU or access `junjinyong`.
+
 > **Schema 11.3 introai9 inventory state:** A user-authorized read-only audit
 > attempted both documented login boundaries. TCP/22 was reachable on both and
 > one public-key authentication was explicitly confirmed, but remote shell and

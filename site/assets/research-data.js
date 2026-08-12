@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · introai9 inventory incomplete/no asset verdict · verified current-direction train/validation/test 0/0/0 · mechanistic treatment/growth batch best 27.5/40 rejected · active lead/paper identity/method/model/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "after an external service-state change, a bounded exact-path introai9 inventory must establish files, schema, license and grouping; independently, the next scientific admission requires a fresh problem or versioned same-patient geometry–device–immediate-response–fixed-time-outcome asset, while surface-vector still needs material evidence, method-free stability and a field-error-matched failure",
+    status: "Target locked · public versioned clinical table 1 but active imaging dataset 0 · staged train/validation/test 0/0/0 · open-outcome batch best 29.5/40 rejected · active lead/paper identity/method/model/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admission requires a versioned image-linked fixed-time outcome asset with grouped units and a residual gap not directly occupied by score development; after an external service-state change, a bounded exact-path introai9 inventory may establish files, schema, license and grouping, while surface-vector still needs material evidence, method-free stability and a field-error-matched failure",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "An open clinical table is real data, but not automatically an imaging dataset or fixed-time target",
+      copy: "Zenodo 17339029 revision 6 exposes one CC-BY-4.0 XLSX of 39,686 bytes linked to a 230-patient aSAH source. The release has no CT/MR/angiographic image, mask or immutable image-row join, and AURORA did not download or open it. The source lacks six-month mRS for 70 patients and substitutes discharge or three-month values. Six candidates score 29.5/28.0/27.0/27.0/26.0/25.5; all fail a mandatory target, novelty or asset floor.",
+      status: "Public clinical table 1 · active imaging dataset 0 · source-watch v21: 34 states · P0/model/server/GPU 0",
+      url: "../docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Authentication is not a dataset: introai9 inventory remains incomplete",
@@ -894,6 +901,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "aSAH-Risk clinical table · Zenodo 17339029 revision 6",
+      role: "versioned public clinical-table metadata and target-time audit; not active imaging, training, validation or test data",
+      provenance: "230 source patients · 17 source variables · one 39,686-byte XLSX · CC BY 4.0 · MD5 8aaba92f5fb74175af76edd3701b7404 · six-month mRS unavailable 70 with discharge/three-month substitution · image/mask/join/split 0 · payload unopened · P0/model/GPU 0"
+    },
+    {
       name: "Mechanistic treatment/growth 2026 source group",
       role: "source-rejected direct-prior group; not one joined dataset and not active training/confirmation data",
       provenance: "500 synthetic coil sacs · 458 QA/6-month-occlusion patients · 34 aneurysms/17 matched longitudinal pairs · amplified-MRI growing 6/stable 6 · automated CFD 42 cases with five manually resolved initial failures · particle transport one idealized anatomy/28 configurations · public same-patient geometry–device–immediate-response–fixed-time-outcome join 0 · payload/P0/model/GPU 0"
@@ -1215,6 +1227,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "data",
+      title: "One real public clinical table is verified, but it is neither imaging nor fixed-time outcome truth",
+      copy: "Zenodo 17339029 revision 6 freezes one CC-BY-4.0 XLSX (39,686 bytes; 230 source patients). The linked source substitutes discharge or 3-month mRS where 6-month mRS is missing for 70 patients, and the release has no medical image or image-row join. Six candidates peak at 29.5/40 and all fail; source-watch v21 adds one review-only state. No download, P0, method, server or GPU opened.",
+      files: ["docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md", "configs/source_watch_v21.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "data",

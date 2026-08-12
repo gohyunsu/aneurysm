@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="Virtual device mechanics, immediate angiographic response, fixed-time outcome의 동일-patient join과 공개 자산 계약부터 WSS, GNN과 평가까지 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="공개 임상표와 고정 시점 outcome의 차이, 영상–환자–결과 join부터 WSS, GNN과 평가까지 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#open-clinical-target-time">Open table &amp; target time</a>
       <a href="#mechanistic-outcome-join">Mechanics &amp; outcome join</a>
       <a href="#collision-anticipation">Collision anticipation</a>
       <a href="#molecular-target-time">Omics &amp; target time</a>
@@ -89,7 +90,7 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 11.3</span>
+          <span>짧은 답 · schema 11.4</span>
           <strong>현재 확보가 검증된 연구 데이터, 선택된 문제와 모델은 모두 없습니다.</strong>
           <p>
             최신 treatment/growth 후보는
@@ -102,6 +103,34 @@
             endpoint의 TCP/22와 한 endpoint의 public-key 인증까지 확인했지만
             shell/SFTP listing이 모두 timeout되어 current server inventory도
             incomplete/no-verdict입니다. 이를 “없음”이나 “확보”로 단정하지 않습니다.
+          </p>
+        </div>
+        <div class="answer-card" id="open-clinical-target-time">
+          <span>공개된 임상표는 곧 영상 데이터셋인가?</span>
+          <strong>아닙니다. 공개 파일, 실제 환자, 의료 영상, 고정 시점 정답은 서로 다른 조건입니다.</strong>
+          <p>
+            Zenodo 17339029에는 230명의 실제 aSAH 환자와 연결된 39,686-byte
+            XLSX 한 개가 있습니다. revision 6, CC BY 4.0, 파일 checksum까지
+            확인되어 “안정된 공개 clinical-table asset”이라고 부를 수 있습니다.
+            반면 CT·MRI·혈관조영 영상, 동맥류 mask, image–row identifier와
+            patient-grouped split은 없습니다. 그래서 영상 모델의 train set으로
+            세지 않습니다.
+          </p>
+          <p>
+            <b>Target time</b>은 결과를 어느 시점에서 재는지 정하는 규칙입니다.
+            이 source는 6개월 mRS가 없는 70명에서 퇴원 또는 3개월 값을 대신
+            사용했습니다. 사망 환자의 퇴원 mRS 6은 임상적으로 명확하더라도,
+            3개월 상태와 6개월 상태를 하나의 정확한 시간점 정답으로 취급하면
+            다른 질문이 됩니다. 모델이 예후 대신 follow-up 가능성을 학습할 수도
+            있으므로, row-level 관찰 시점과 missingness가 없으면 순수한 6개월
+            예측이라고 주장하지 않습니다.
+          </p>
+          <p>
+            현재 숫자는 <b>public versioned table 1, active imaging dataset 0,
+            staged train/validation/test 0/0/0</b>입니다. XLSX는 내려받거나 열지
+            않았고, source-watch v21은 revision 변화가 생겨도 자동 학습이 아니라
+            재감사만 요청합니다. 자세한 근거와 여섯 후보 점수는
+            <a href="../docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md">exact audit</a>에서 확인할 수 있습니다.
           </p>
         </div>
         <div class="answer-card" id="mechanistic-outcome-join">

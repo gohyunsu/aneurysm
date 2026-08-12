@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **Schema 11.4 acquisition decision:** Do not download the open aSAH XLSX
+> merely because its metadata are complete. It has no medical image, image–row
+> join or fixed six-month outcome truth and the nearest task is direct prior.
+> Source-watch v21 observes revision/license/manifest only. Continue discovery
+> for a lawful image-linked fixed-time outcome asset; a source change opens
+> re-audit, not acquisition, P0 or compute.
+
 > **Schema 11.3 acquisition decision:** The incomplete `introai9` inventory
 > does not authorize transfer, download, staging or training. Authentication
 > and an old project-root trace are not a dataset manifest. Retry only after an

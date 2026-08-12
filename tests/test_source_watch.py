@@ -39,10 +39,44 @@ CONFIG_V17 = ROOT / "configs" / "source_watch_v17.json"
 CONFIG_V18 = ROOT / "configs" / "source_watch_v18.json"
 CONFIG_V19 = ROOT / "configs" / "source_watch_v19.json"
 CONFIG_V20 = ROOT / "configs" / "source_watch_v20.json"
+CONFIG_V21 = ROOT / "configs" / "source_watch_v21.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
 class SourceWatchContractTests(unittest.TestCase):
+    def test_v21_freezes_open_clinical_table_without_imaging_or_compute_authority(self) -> None:
+        config = load_config(CONFIG_V21)
+        self.assertEqual(config["schema_version"], "aurora.source_watch.v21")
+        self.assertEqual(len(config["watches"]), 34)
+        release = config["watches"][-1]
+        self.assertEqual(release["watch_id"], "asah_risk_open_clinical_table_v1")
+        self.assertEqual(release["kind"], "zenodo_record")
+        self.assertEqual(release["frozen_snapshot"]["zenodo_record_id"], 17339029)
+        self.assertEqual(release["frozen_snapshot"]["zenodo_license_id"], "cc-by-4.0")
+        self.assertEqual(
+            release["frozen_snapshot"]["payload_or_manifest_files"],
+            ["Data_aSAH-Risk_Score.xlsx"],
+        )
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+        observations[release["watch_id"]]["zenodo_revision"] = 7
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertEqual(result["manual_review_requests"], ["fresh_source_reaudit_only"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
     def test_v20_freezes_cathaction_release_without_warning_or_compute_authority(self) -> None:
         config = load_config(CONFIG_V20)
         self.assertEqual(config["schema_version"], "aurora.source_watch.v20")
@@ -728,7 +762,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v20.json", workflow)
+        self.assertIn("configs/source_watch_v21.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)

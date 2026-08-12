@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.3":
-        raise ProtocolError("The current research-state schema must be version 11.3.")
+    if protocol["schema_version"] != "11.4":
+        raise ProtocolError("The current research-state schema must be version 11.4.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_no_verified_dataset_introai9_inventory_incomplete_no_asset_verdict_no_p0_no_compute"
+        != "no_active_problem_one_versioned_open_nonimaging_clinical_table_metadata_no_active_dataset_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "open_clinical_outcome_and_target_time_reappraisal",
             "mechanistic_treatment_and_growth_asset_reappraisal",
             "introai9_dataset_inventory_audit",
             "endovascular_collision_anticipation_and_release_reappraisal",
@@ -284,6 +285,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v18",
             "public_source_watch_v19",
             "public_source_watch_v20",
+            "public_source_watch_v21",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -294,13 +296,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_no_verified_dataset_introai9_inventory_incomplete_no_method_no_compute_surface_vector_inactive"
+        != "no_active_problem_open_asah_clinical_table_not_active_imaging_dataset_no_method_no_compute_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_bibliographic_metadata_plus_introai9_inventory_attempt_without_remote_listing_no_verified_training_payload_or_same_patient_join"
+        != "versioned_open_asah_clinical_xlsx_metadata_verified_payload_unopened_not_imaging_not_active_training_data_introai9_inventory_incomplete"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -310,20 +312,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_unrelated_problem_level_source_or_versioned_same_patient_mechanics_response_outcome_asset_reaudit_only_no_payload_architecture_or_compute"
+        != "watch_versioned_asah_table_and_continue_fresh_image_linked_fixed_time_outcome_asset_discovery_no_payload_p0_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md"
+        != "docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "injection_invariant_qa_to_six_month_occlusion_rejected_at_27_5_direct_prior_and_asset_floors"
+        != "endpoint_provenance_aware_asah_six_month_prognosis_rejected_at_29_5_target_time_novelty_and_imaging_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The introai9 inventory is incomplete, the mechanistic treatment/growth batch "
-            "must remain rejected, and surface-vector must remain inactive until a versioned "
-            "same-patient asset exists; no active lead, repair, method, GPU, outer test or "
-            "claim may remain."
+            "The open aSAH table is not an active imaging dataset, the introai9 inventory "
+            "remains incomplete, the mechanistic treatment/growth batch remains rejected, "
+            "and surface-vector remains inactive; no active lead, payload, repair, method, "
+            "GPU, outer test or claim may remain."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
     _require_keys(
@@ -383,8 +385,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 27.5
-        or admission_v2["current_batch_best_residual_novelty"] != 0.5
+        or admission_v2["current_batch_best_score"] != 29.5
+        or admission_v2["current_batch_best_residual_novelty"] != 2.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -393,6 +395,88 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    open_outcome = problem_selection[
+        "open_clinical_outcome_and_target_time_reappraisal"
+    ]
+    _require_keys(
+        open_outcome,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "asah_risk_doi", "asah_risk_zenodo_record_id",
+            "asah_risk_zenodo_revision", "asah_risk_zenodo_license",
+            "asah_risk_file_name", "asah_risk_file_bytes",
+            "asah_risk_file_md5", "asah_risk_source_patients",
+            "asah_risk_source_variables",
+            "asah_risk_missing_six_month_mrs_patients",
+            "asah_risk_fixed_six_month_outcome_identified",
+            "asah_risk_medical_image_payload_present",
+            "asah_risk_xlsx_payload_downloaded_or_opened", "candidates",
+            "recurring_source_watch_added", "source_watch_config",
+            "p0_registered", "p1_registered", "method_selected",
+            "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "submission_identity_active", "execution_server",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+        ],
+        "open clinical outcome and target-time reappraisal",
+    )
+    expected_open_candidates = {
+        "endpoint_provenance_aware_asah_six_month_prognosis": 29.5,
+        "asis_management_to_one_year_mrs": 28.0,
+        "admission_only_external_calibration_of_asah_risk": 27.0,
+        "risk_score_refinement_for_future_instability": 27.0,
+        "circle_of_willis_imaging_marker_transport": 26.0,
+        "center_robust_rupture_phenotype_dependency": 25.5,
+    }
+    if (
+        open_outcome["status"]
+        != "fresh_batch_rejected_best_29_5_open_actual_clinical_table_but_not_imaging_and_fixed_time_target_unidentified"
+        or open_outcome["audit_document"]
+        != "docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md"
+        or open_outcome["automatic_selection_threshold"] != 32.0
+        or open_outcome["best_candidate_id"]
+        != "endpoint_provenance_aware_asah_six_month_prognosis"
+        or open_outcome["best_score"] != 29.5
+        or open_outcome["best_residual_novelty_score"] != 2.0
+        or open_outcome["all_candidate_scores"]
+        != [29.5, 28.0, 27.0, 27.0, 26.0, 25.5]
+        or open_outcome["conditional_source_lead_count"] != 0
+        or open_outcome["asah_risk_zenodo_record_id"] != 17339029
+        or open_outcome["asah_risk_zenodo_revision"] != 6
+        or open_outcome["asah_risk_file_bytes"] != 39686
+        or open_outcome["asah_risk_source_patients"] != 230
+        or open_outcome["asah_risk_missing_six_month_mrs_patients"] != 70
+        or {
+            item["id"]: item["total"] for item in open_outcome["candidates"]
+        } != expected_open_candidates
+        or any(item["critical_axis_pass"] for item in open_outcome["candidates"])
+        or open_outcome["asah_risk_fixed_six_month_outcome_identified"] is not False
+        or open_outcome["asah_risk_medical_image_payload_present"] is not False
+        or open_outcome["asah_risk_xlsx_payload_downloaded_or_opened"] is not False
+        or open_outcome["recurring_source_watch_added"] is not True
+        or open_outcome["source_watch_config"] != "configs/source_watch_v21.json"
+        or open_outcome["execution_server"] != "introai9"
+        or any(
+            open_outcome[key] is not False
+            for key in (
+                "primary_problem_selected", "paper_identity_active",
+                "p0_registered", "p1_registered", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+    ):
+        raise ProtocolError(
+            "The open aSAH clinical table is a versioned non-imaging source asset, "
+            "not a fixed-time outcome truth, active dataset, method or compute authority."
+        )
+    checks.append("open clinical table target-time and non-imaging boundary")
 
     mechanistic = problem_selection[
         "mechanistic_treatment_and_growth_asset_reappraisal"
@@ -9734,7 +9818,72 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "a CathAction change requests review only, never terms, payload, model or compute."
         )
     checks.append("thirty-three-source fail-closed intervention release watch boundary")
+    source_watch_v21 = problem_selection["public_source_watch_v21"]
+    _require_keys(
+        source_watch_v21,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "asah_risk_zenodo_record_id",
+            "asah_risk_zenodo_revision", "asah_risk_file_bytes",
+            "asah_risk_file_checksum", "asah_risk_medical_imaging_present",
+            "asah_risk_fixed_six_month_outcome_identified",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized", "p0_or_p1_authorized",
+            "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+            "server_queried", "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch", "decision",
+        ],
+        "source watch v21",
+    )
+    if (
+        source_watch_v21["status"]
+        != "watch_only_all_thirty_four_frozen_snapshots_match"
+        or source_watch_v21["config"] != "configs/source_watch_v21.json"
+        or source_watch_v21["extends_historical_config"]
+        != "configs/source_watch_v20.json"
+        or source_watch_v21["config_sha256"]
+        != "ab34cf2b69e44877270250e1421eec057411a3a0a108c567bc8a22bf9a483dbb"
+        or source_watch_v21["watch_count"] != 34
+        or source_watch_v21["added_watch_ids"]
+        != ["asah_risk_open_clinical_table_v1"]
+        or source_watch_v21["asah_risk_zenodo_record_id"] != 17339029
+        or source_watch_v21["asah_risk_zenodo_revision"] != 6
+        or source_watch_v21["asah_risk_file_bytes"] != 39686
+        or source_watch_v21["asah_risk_medical_imaging_present"] is not False
+        or source_watch_v21["asah_risk_fixed_six_month_outcome_identified"] is not False
+        or source_watch_v21["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v21[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized", "p0_or_p1_authorized",
+                "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+                "server_queried", "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v21["decision"]
+        != "continue_fail_closed_thirty_four_source_watch_open_clinical_table_change_requests_reaudit_only_without_download_p0_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v21 must preserve thirty-four exact public states; the open "
+            "clinical-table watch may request review only, never download, P0 or compute."
+        )
+    checks.append("thirty-four-source fail-closed open clinical table watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
+        "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",
+        "admission_only_external_calibration_of_asah_risk_no_external_cohort",
+        "risk_score_refinement_for_future_instability_direct_prior_and_private_asset",
+        "circle_of_willis_imaging_marker_transport_direct_prior_and_private_images",
+        "center_robust_rupture_phenotype_dependency_case_only_and_private_rows",
         "topaneu_official_metric_instance_collapse_aware_evaluation_total_and_novelty_floors",
         "topaneu_registered_to_realized_benchmark_contract_fidelity_novelty_floor",
         "topaneu_external_centre_modality_generalization_direct_challenge_objective_and_private_test",

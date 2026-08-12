@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Schema 11.4 direction · 2026-08-12:** Preserve Zenodo 17339029 as a real,
+> versioned open clinical-table asset, but do not pivot to tabular aSAH score
+> replication or call it an imaging dataset. Mixed discharge/3-month/6-month
+> observation times prevent a pure fixed-time estimand, while the linked paper
+> directly owns score development. The fresh batch peaks at 29.5/40 and fails
+> target-time, novelty and imaging-asset requirements. Keep problem and model
+> null; source-watch v21 may trigger re-audit only. Continue discovery for a
+> versioned image-linked fixed-time outcome asset. [Exact audit](open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md)
+
 > **Schema 11.3 direction · 2026-08-12:** Treat the attempted `introai9`
 > inventory as execution-incomplete/no asset verdict. Authentication does not
 > establish a usable dataset, and an old IntrA repository skeleton does not

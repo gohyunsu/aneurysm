@@ -50,6 +50,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v18",
         "aurora.source_watch.v19",
         "aurora.source_watch.v20",
+        "aurora.source_watch.v21",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -228,7 +229,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v19_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v19(payload)
-    else:
+    elif schema == "aurora.source_watch.v20":
         if payload.get("extends") != "source_watch_v19.json":
             raise SourceWatchContractError("v20_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -239,6 +240,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v20_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v20(payload)
+    else:
+        if payload.get("extends") != "source_watch_v20.json":
+            raise SourceWatchContractError("v21_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v20":
+            raise SourceWatchContractError("v21_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v21_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v21(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -299,6 +311,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v18",
         "aurora.source_watch.v19",
         "aurora.source_watch.v20",
+        "aurora.source_watch.v21",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -2237,6 +2250,62 @@ def _validate_v20(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v20_change_boundary_changed")
 
 
+def _validate_v21(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 34:
+        raise SourceWatchContractError("v21_watch_set_changed")
+    _validate_v20(
+        {
+            "watches": watches[:33],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    release = watches[33]
+    if (
+        release.get("watch_id") != "asah_risk_open_clinical_table_v1"
+        or release.get("kind") != "zenodo_record"
+        or release.get("review_request") != "fresh_source_reaudit_only"
+        or release.get("source")
+        != {
+            "zenodo_api_url": "https://zenodo.org/api/records/17339029",
+            "record_url": "https://zenodo.org/records/17339029",
+            "paper_url": (
+                "https://doi.org/10.3389/fneur.2026.1781480"
+            ),
+        }
+        or release.get("frozen_snapshot")
+        != {
+            "zenodo_record_id": 17339029,
+            "zenodo_modified": "2025-11-12T11:13:18.905620+00:00",
+            "zenodo_revision": 6,
+            "zenodo_status": "published",
+            "zenodo_access_right": "open",
+            "zenodo_license_id": "cc-by-4.0",
+            "zenodo_files": [
+                {
+                    "key": "Data_aSAH-Risk_Score.xlsx",
+                    "size": 39686,
+                    "checksum": "md5:8aaba92f5fb74175af76edd3701b7404",
+                }
+            ],
+            "payload_or_manifest_files": ["Data_aSAH-Risk_Score.xlsx"],
+            "availability": "zenodo_record_metadata_state",
+        }
+    ):
+        raise SourceWatchContractError("asah_risk_open_table_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "open_clinical_table_is_not_medical_imaging",
+            "mixed_followup_time_is_not_fixed_time_outcome_truth",
+            "public_table_release_is_not_p0_or_compute_authority",
+        )
+    ):
+        raise SourceWatchContractError("v21_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -2788,6 +2857,7 @@ def _zenodo_payload_or_manifest_files(files: Sequence[Mapping[str, Any]]) -> lis
         ".tar.gz",
         ".vtk",
         ".vtp",
+        ".xlsx",
         ".yaml",
         ".yml",
         ".zip",
@@ -3499,6 +3569,7 @@ def evaluate_config(
         "aurora.source_watch.v18",
         "aurora.source_watch.v19",
         "aurora.source_watch.v20",
+        "aurora.source_watch.v21",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

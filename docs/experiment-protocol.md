@@ -1,5 +1,10 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.4 experiment boundary:** No experiment is active. The public
+> aSAH clinical XLSX was not opened, is not imaging and mixes outcome
+> observation times. Source-admission best is 29.5/40 and fails mandatory
+> floors. No P0/P1, method, PBS/GPU or outer test opens.
+
 > **Schema 11.3 experiment boundary:** No dataset-backed experiment can be
 > registered from the incomplete `introai9` inventory. TCP reachability and
 > authentication do not establish files, cases, schema, license or split.

@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 open clinical outcome/target-time boundary · schema 11.4:**
+> Zenodo `17339029` revision 6 verifies one actual public clinical XLSX: CC BY
+> 4.0, 39,686 bytes, MD5 `8aaba92f5fb74175af76edd3701b7404`, linked to a
+> 230-patient aSAH source. It is not medical imaging and was not downloaded or
+> opened. Source 6-month mRS is unavailable for 70 patients and discharge or
+> 3-month values are substituted; do not relabel mixed observation times as
+> fixed 6-month truth. Fresh scores 29.5/28.0/27.0/27.0/26.0/25.5 are all
+> rejected. Source-watch v21 freezes 34 review-only states. Public versioned
+> table = 1, active dataset = 0, staged train/validation/test = 0/0/0. Active
+> lead/P0/P1/method/model/result/claim/GPU = 0. Full regression is 472 tests:
+> 406 pass/66 optional skip with 107 protocol invariants. Protocol SHA-256 is
+> `0a9ccadb4841715a761188e209329bc468c5fe5631f0d1cc81e9086b82bf6645`;
+> source-watch v21 SHA-256 is
+> `ab34cf2b69e44877270250e1421eec057411a3a0a108c567bc8a22bf9a483dbb`.
+> This update queried no scientific server and submitted no PBS/GPU work.
+> Future gate-authorized work uses `introai9` PBS only, never login-node GPU.
+> Never access/query/transfer/submit/monitor `junjinyong`. Preserve private
+> manuscript/reference bytes unchanged.
+
 > **2026-08-12 introai9 inventory no-verdict · schema 11.3:** User-authorized
 > read-only audit attempted the two documented `introai9` login boundaries.
 > TCP/22 was reachable on both; public-key authentication was confirmed on one.

@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.4 open clinical-table boundary:** Zenodo 17339029 revision 6
+> verifies one versioned 39,686-byte CC-BY-4.0 XLSX associated with 230 real
+> aSAH patients. It is a public clinical-table asset, not an imaging dataset.
+> No CT/MR/angiography, mask, image–row join or grouped split is declared in the
+> frozen release contract. Six-month mRS is unavailable for 70 patients and
+> the source substitutes discharge or 3-month values. The XLSX was not
+> downloaded or opened. Public-asset metadata count = 1; active dataset and
+> staged train/validation/test remain 0 and 0/0/0.
+
 > **Schema 11.3 verified-holdings boundary:** A fresh read-only `introai9`
 > inventory produced no remote listing: two login endpoints exposed TCP/22 and
 > one explicitly authenticated, but shell and SFTP sessions timed out. The last
