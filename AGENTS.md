@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 surface-vector finite closure deployment·private
+> synchronization:** Exact public scientific source
+> `a9d79f0446041555585a73f0fc7ed9a0cd990514` passed Quality `31549386632`
+> and Pages `31549386364`. Live Overview, Learn, the exact audit and filterable
+> history expose `closed_until_whitelisted_material_release`. Private paper
+> ledger `e8db8078f8c025b2715a4ee59fa5ff6aadea596c` is remote exact, PRIVATE and
+> anonymous API is 404. Full regression is 456 tests: 390 pass/66 optional
+> skip with 91 protocol invariant groups; site/JavaScript/diff hygiene pass.
+> `paper/main.tex` SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and references remain
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization opens no lead/P0/P1/method/model/server/PBS/GPU/outer
+> test/result/C21/claim and changes no schema-10.7 scientific state.
+
 > **2026-08-12 surface-vector finite closure · schema 10.7 unchanged:** Keep
 > the hypothesis, but mark the current asset family
 > `closed_until_whitelisted_material_release`. Job `115645.ECE-util1` remains

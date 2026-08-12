@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-12 · Surface-vector finite closure deployed and privately pinned
+
+- Exact public scientific source `a9d79f0446041555585a73f0fc7ed9a0cd990514`
+  passed Quality `31549386632` and Pages `31549386364`; the live site exposes
+  the finite closure, re-entry contract and filterable change record.
+- Private ledger `e8db8078f8c025b2715a4ee59fa5ff6aadea596c` is remote exact,
+  PRIVATE and returns 404 to an anonymous API request. Manuscript and reference
+  hashes are unchanged.
+- Full regression is 456 tests: 390 pass/66 optional-dependency skip and 91
+  protocol invariant groups. This provenance-only pin opens no scientific or
+  submission authority.
+
 ## 2026-08-12 · Surface-vector finite closure and source-watch v15
 
 - Accepted the scientific distinction between field accuracy and stable flow

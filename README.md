@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 surface-vector finite closure deployment and private pin:**
+> Exact public scientific source
+> `a9d79f0446041555585a73f0fc7ed9a0cd990514` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31549386632)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31549386364).
+> Private ledger `e8db8078f8c025b2715a4ee59fa5ff6aadea596c` is remote
+> exact, PRIVATE and anonymously returns 404. Full regression is 456 tests:
+> 390 pass/66 optional skip and 91 protocol invariant groups. Manuscript and
+> references remain byte-for-byte unchanged; this provenance opens no paper,
+> model, compute or claim.
+
 > **2026-08-12 surface-vector finite closure · schema 10.7 unchanged:** The
 > field-accuracy-versus-flow-organization question is retained, but the known
 > asset family is now `closed_until_whitelisted_material_release`. AneuG and
