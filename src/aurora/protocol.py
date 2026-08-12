@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.6":
-        raise ProtocolError("The current research-state schema must be version 11.6.")
+    if protocol["schema_version"] != "11.7":
+        raise ProtocolError("The current research-state schema must be version 11.7.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution_no_method_gpu_outer_test_or_claim"
+        != "all_current_candidates_source_rejected_no_active_lead_p0_method_gpu_outer_test_or_claim"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -157,12 +157,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or project["current_scheduler_observation"]
         != "introai9_p0_115848_e_exit2_walltime_00_04_44_gpu0_scientific_checks_0_of_10_no_login_node_gpu_command"
         or project["first_future_gpu_action"]
-        != "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
+        != "none_until_a_fresh_problem_passes_source_admission_and_a_later_gate_explicitly_authorizes_gpu"
     ):
         raise ProtocolError(
             "AURORA compute must remain introai9-only with junjinyong excluded, "
             "no tracked AURORA GPU job, the last CPU-only P0 observation, "
-            "and a scheduler smoke as the first authorized GPU action."
+            "and no future GPU action before a fresh scientific gate."
         )
     checks.append("research-only project boundary")
 
@@ -189,6 +189,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "future_source_admission_v2",
             "dataset_asset_state_ledger",
             "acquired_asset_application_direction",
+            "aneux_reliability_direct_prior_reappraisal",
             "open_clinical_outcome_and_target_time_reappraisal",
             "mechanistic_treatment_and_growth_asset_reappraisal",
             "introai9_dataset_inventory_audit",
@@ -298,14 +299,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution_no_primary_method_gpu_outer_test_or_claim"
-        or problem_selection["shortlisted_candidate"]
-        != "aneux_factorized_nested_preprocessing_orbit_reliability"
-        or problem_selection["conditional_source_lead_count"] != 1
-        or problem_selection["candidate_dataset"]
-        != "aneux_v1_0_private_holding_pending_exact_path_reconfirmation"
-        or problem_selection["candidate_estimand"]
-        != "cross_sectional_rupture_status_association_with_fixed_cut_resolution_reliability_and_cut_context_residual_not_future_risk"
+        != "all_current_candidates_source_rejected_no_active_lead_primary_p0_method_gpu_outer_test_or_claim"
+        or problem_selection["shortlisted_candidate"] is not None
+        or problem_selection["conditional_source_lead_count"] != 0
+        or problem_selection["candidate_dataset"] is not None
+        or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
         != "six_historical_holding_records_with_heterogeneous_payload_evidence_current_introai9_listing_incomplete_active_assignment_zero"
         or problem_selection["user_accepted_data_terms_verified"] is not False
@@ -317,20 +315,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "after_external_service_change_freeze_exact_private_aneux_path_manifest_and_reader_preflight_then_freeze_one_cpu_only_p0_v2_execution_envelope_no_network_method_gpu_or_outer_test"
+        != "fresh_problem_level_audit_over_documented_assets_only_no_aneux_p0_v2_repair_payload_compute_or_claim"
         or problem_selection["audit_document"]
-        != "docs/acquired-asset-application-direction-2026-08-12.md"
+        != "docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "endpoint_provenance_aware_asah_six_month_prognosis_rejected_at_29_5_target_time_novelty_and_imaging_floors"
-        or problem_selection["most_recent_conditional_source_lead"]
-        != "aneux_factorized_nested_preprocessing_orbit_reliability_33_0_corrected_p0_v2_registered_pre_execution"
+        != "aneux_factorized_nested_preprocessing_orbit_reliability_rejected_pre_execution_at_32_residual_novelty_2_below_2_5_floor"
+        or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "Exactly one AneuX nested-orbit conditional lead may exist while its exact "
-            "private path remains unresolved; this opens only a scientific P0 contract, "
-            "not a primary problem, method, GPU, outer test or paper claim."
+            "No active lead may remain after the AneuX direct-prior reappraisal; "
+            "historical holdings do not authorize a P0, method, GPU, outer test, or claim."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
     _require_keys(
@@ -390,9 +386,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 33.0
-        or admission_v2["current_batch_best_residual_novelty"] != 3.0
-        or admission_v2["current_batch_admitted_count"] != 1
+        or admission_v2["current_batch_best_score"] != 32.0
+        or admission_v2["current_batch_best_residual_novelty"] != 2.0
+        or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
             "Future source admission v2 must remain prospective and non-compensatory: "
@@ -752,7 +748,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or asset_ledger["blanket_dataset_rejection_claim_allowed"] is not False
         or asset_ledger[
             "registered_scientific_p0_pending_execution_envelope_count"
-        ] != 1
+        ] != 0
         or any(
             asset_ledger[key] != 0
             for key in (
@@ -776,7 +772,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     _require_keys(
         acquired_direction,
         [
-            "status", "audit_document", "automatic_selection_threshold",
+            "status", "current_authority", "superseded_by", "audit_document",
+            "automatic_selection_threshold",
             "best_candidate_id", "best_score", "best_residual_novelty_score",
             "all_candidate_scores", "conditional_source_lead_count",
             "primary_problem_selected", "paper_identity_active",
@@ -819,7 +816,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ]
     if (
         acquired_direction["status"]
-        != "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution"
+        != "historical_schema_11_6_conditional_lead_superseded_pre_execution_by_direct_prior_reappraisal"
+        or acquired_direction["current_authority"] is not False
+        or acquired_direction["superseded_by"]
+        != "aneux_reliability_direct_prior_reappraisal"
         or acquired_direction["audit_document"]
         != "docs/acquired-asset-application-direction-2026-08-12.md"
         or acquired_direction["automatic_selection_threshold"] != 32.0
@@ -905,7 +905,133 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != acquired_direction["p0_config_sha256"]
     ):
         raise ProtocolError("The AneuX nested-orbit P0 contract hash changed.")
-    checks.append("acquired-asset AneuX nested-orbit conditional-lead boundary")
+    checks.append("historical acquired-asset AneuX nested-orbit boundary")
+
+    aneux_reappraisal = problem_selection[
+        "aneux_reliability_direct_prior_reappraisal"
+    ]
+    _require_keys(
+        aneux_reappraisal,
+        [
+            "status", "audit_document", "supersedes_current_authority_of",
+            "historical_schema_11_6_score_preserved",
+            "historical_score_relabelled", "automatic_selection_threshold",
+            "residual_novelty_floor", "best_candidate_id", "best_score",
+            "best_residual_novelty_score", "all_candidate_scores",
+            "conditional_source_lead_count", "direct_prior_dois",
+            "diffusionnet_arxiv", "aneux_cut_robustness_already_studied",
+            "aneux_dome_cut1_surface_classification_already_studied",
+            "generic_same_unit_perturbation_reliability_already_studied",
+            "generic_preprocessing_multiverse_already_studied",
+            "implementation_source_qualified_patient_grouping_matches_contract",
+            "implementation_source_qualified_lesion_identity_matches_contract",
+            "implementation_single_connected_open_surface_gate_present",
+            "p0_v1_config", "p0_v1_config_sha256", "p0_v2_config",
+            "p0_v2_config_sha256", "p0_v1_or_v2_modified",
+            "p0_v2_repaired", "p0_v2_executed", "p0_v3_created",
+            "primary_problem_selected", "p0_active", "p1_registered",
+            "method_selected", "architecture_selected",
+            "scientific_server_queried", "gpu_training_authorized",
+            "outer_test_authorized", "paper_claim_active",
+            "submission_identity_active", "execution_server",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "candidates", "next_allowed_action",
+        ],
+        "AneuX reliability direct-prior reappraisal",
+    )
+    expected_aneux_reappraisal_candidates = [
+        ("aneux_factorized_nested_preprocessing_orbit_reliability", 32.0, False),
+        ("reliability_selected_robust_surface_signature", 31.5, False),
+        ("aneux_preprocessing_multiverse_aggregation", 31.0, False),
+        ("orbit_disagreement_abstention", 30.5, False),
+        ("adaptive_cut_or_view_selection", 29.5, False),
+        ("flat_consistency_across_all_cuts", 27.0, False),
+    ]
+    expected_aneux_direct_prior_dois = [
+        "10.3389/fneur.2022.809391",
+        "10.3389/fphys.2024.1293380",
+        "10.1038/s41598-022-14178-x",
+        "10.1038/s41598-023-45477-6",
+        "10.1162/imag_a_00523",
+    ]
+    if (
+        aneux_reappraisal["status"]
+        != "fresh_direct_prior_batch_rejected_best_32_residual_novelty_2_below_2_5_floor_and_frozen_p0_v2_not_executed"
+        or aneux_reappraisal["audit_document"]
+        != "docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md"
+        or aneux_reappraisal["supersedes_current_authority_of"]
+        != "acquired_asset_application_direction"
+        or aneux_reappraisal["historical_schema_11_6_score_preserved"] != 33.0
+        or aneux_reappraisal["historical_score_relabelled"] is not False
+        or aneux_reappraisal["automatic_selection_threshold"] != 32.0
+        or aneux_reappraisal["residual_novelty_floor"] != 2.5
+        or aneux_reappraisal["best_candidate_id"]
+        != "aneux_factorized_nested_preprocessing_orbit_reliability"
+        or aneux_reappraisal["best_score"] != 32.0
+        or aneux_reappraisal["best_residual_novelty_score"] != 2.0
+        or aneux_reappraisal["all_candidate_scores"]
+        != [32.0, 31.5, 31.0, 30.5, 29.5, 27.0]
+        or aneux_reappraisal["conditional_source_lead_count"] != 0
+        or aneux_reappraisal["direct_prior_dois"]
+        != expected_aneux_direct_prior_dois
+        or aneux_reappraisal["diffusionnet_arxiv"] != "2012.00888"
+        or aneux_reappraisal["p0_v1_config"]
+        != "configs/aneux_nested_orbit_p0.json"
+        or aneux_reappraisal["p0_v1_config_sha256"]
+        != "b82e3606ea76697dbdc44973a287538a436fe330c25edcd8bf9f113d147149c1"
+        or aneux_reappraisal["p0_v2_config"]
+        != "configs/aneux_nested_orbit_p0_v2.json"
+        or aneux_reappraisal["p0_v2_config_sha256"]
+        != "86de76c4c7e4d493f12d2eb300e78647a74daf88e469102411f959982a07d0da"
+        or aneux_reappraisal["execution_server"] != "introai9"
+        or aneux_reappraisal["next_allowed_action"]
+        != "fresh_problem_level_audit_over_existing_documented_assets_no_aneux_p0_v2_repair_or_compute"
+        or [
+            (row.get("id"), row.get("total"), row.get("critical_axis_pass"))
+            for row in aneux_reappraisal["candidates"]
+        ] != expected_aneux_reappraisal_candidates
+        or any(
+            aneux_reappraisal[key] is not True
+            for key in (
+                "aneux_cut_robustness_already_studied",
+                "aneux_dome_cut1_surface_classification_already_studied",
+                "generic_same_unit_perturbation_reliability_already_studied",
+                "generic_preprocessing_multiverse_already_studied",
+            )
+        )
+        or any(
+            aneux_reappraisal[key] is not False
+            for key in (
+                "implementation_source_qualified_patient_grouping_matches_contract",
+                "implementation_source_qualified_lesion_identity_matches_contract",
+                "implementation_single_connected_open_surface_gate_present",
+                "p0_v1_or_v2_modified", "p0_v2_repaired", "p0_v2_executed",
+                "p0_v3_created", "primary_problem_selected", "p0_active",
+                "p1_registered", "method_selected", "architecture_selected",
+                "scientific_server_queried", "gpu_training_authorized",
+                "outer_test_authorized", "paper_claim_active",
+                "submission_identity_active", "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+    ):
+        raise ProtocolError(
+            "The AneuX reliability direction must remain source-rejected before "
+            "execution: direct prior closes the novelty floor and the frozen v1/v2 "
+            "contracts cannot be repaired, executed, or promoted."
+        )
+    for config_key, hash_key in (
+        ("p0_v1_config", "p0_v1_config_sha256"),
+        ("p0_v2_config", "p0_v2_config_sha256"),
+    ):
+        frozen_path = Path(__file__).resolve().parents[2] / aneux_reappraisal[config_key]
+        if (
+            not frozen_path.is_file()
+            or hashlib.sha256(frozen_path.read_bytes()).hexdigest()
+            != aneux_reappraisal[hash_key]
+        ):
+            raise ProtocolError("A frozen AneuX P0 contract changed after rejection.")
+    checks.append("AneuX reliability direct-prior rejection and frozen-contract boundary")
 
     collision = problem_selection[
         "endovascular_collision_anticipation_and_release_reappraisal"
@@ -15319,14 +15445,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_metric"] != "functional_energy_score"
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
-        or task["active_candidate_problem"]
-        != "aneux_factorized_nested_preprocessing_orbit_reliability"
+        or task["active_candidate_problem"] != "unselected"
         or task["active_candidate_status"]
-        != "conditional_source_lead_corrected_p0_v2_registered_pre_execution_no_method_gpu_outer_test_or_claim"
-        or task["candidate_primary_estimand"]
-        != "fixed_cut_cross_resolution_probability_disagreement_for_an_adequate_cross_fitted_surface_signature_probe"
-        or task["candidate_secondary_estimand"]
-        != "orbit_disagreement_error_association_and_source_held_out_worst_view_reliability"
+        != "aneux_reliability_source_rejected_pre_execution_no_active_candidate"
+        or task["candidate_primary_estimand"] != "unselected"
+        or task["candidate_secondary_estimand"] != "unselected"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -15370,11 +15493,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "The AneuX nested-orbit direction may be an active conditional candidate "
-            "while the primary problem and endpoint remain unselected; historical "
+            "The AneuX nested-orbit direction is source-rejected and no active "
+            "candidate, estimand, primary problem, or endpoint may remain; historical "
             "4D-flow must retain the exact I0a result and I0b execution record."
         )
-    checks.append("conditional AneuX task and historical 4D-flow guardrails")
+    checks.append("no-active-task and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:

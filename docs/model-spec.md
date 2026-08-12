@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.7 model decision: unselected.** The AneuX candidate is rejected
+> at the source gate, so its nested surface architecture is not a development
+> target. DiffusionNet, PointNet++, equivariance, consistency, GroupDRO,
+> multiverse aggregation, calibration and abstention remain prior/baselines,
+> not pieces to stack into novelty. Do not repair P0 v2 or create v3. Model
+> selection can reopen only after a different application problem passes a
+> method-free failure gate.
+
 > **Schema 11.6 model decision: still unselected.** Corrected P0 v2 is a
 > deterministic surface-signature plus nested-CV logistic probe, not a GNN or
 > proposal. It tests whether fixed-dome mesh resolution causes material

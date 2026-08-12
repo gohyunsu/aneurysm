@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-12 · AneuX reliability candidate closes before execution · schema 11.7
+
+- Preserved the schema-11.6 33.0/40 screen and both frozen P0 configs without
+  relabelling or repair.
+- Added a fresh six-way direct-prior screen. The best AneuX factorized
+  reliability row is 32.0/40 but residual novelty is 2.0/5, below the fixed
+  2.5 floor, so all rows are rejected.
+- Recorded direct collisions from AneuX cut robustness, AneuX dome/cut1
+  PointNet++, DiffusionNet, perturbation-based radiomics reliability and
+  preprocessing multiverse analysis.
+- Recorded pre-execution contract defects: the code does not implement
+  source-qualified patient/lesion identities and does not require one connected
+  open surface. No v3 is created because scientific admission already fails.
+- Reset active lead, P0/P1, method, model, GPU, outer test, result and claim to
+  zero. No scientific server was queried and `junjinyong` remained untouched.
+
 ## 2026-08-12 · Schema 11.6 is deployed and privately pinned
 
 - Exact scientific source `4dfe08f35934901de5bc8d88a06869a1a5230998`

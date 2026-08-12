@@ -1,5 +1,16 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.7 submission state:** No paper identity is active. The AneuX
+> reliability candidate is rejected before execution because its residual
+> novelty is 2.0/5 after direct-prior review; the historical 33.0/40 screen and
+> frozen P0 files remain unchanged. Official ISBI 2027 instructions specify a
+> single-blind full paper, four technical pages, and an optional paid fifth
+> page limited to ethics, acknowledgments/conflicts and references. Submission
+> is due **26 October 2026**, notification **12 January 2027**, and final paper
+> **26 January 2027**, all 11:59pm US EDT. Until a new task passes admission,
+> manuscript title, abstract, contribution list, method, result table and
+> figures must remain empty rather than being filled with the rejected idea.
+
 > **Schema 11.5 acquired-asset direction:** One conditional ISBI direction now
 > exists: AneuX factorized nested preprocessing-orbit reliability, scored
 > 33.0/40 with every critical floor passed. Resolution is a nuisance only

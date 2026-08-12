@@ -26,9 +26,9 @@ jobs:
         run: PYTHONPATH=src python scripts/audit_source_watch.py --config configs/source_watch_v21.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0
         run: PYTHONPATH=src python -m aurora.aneux_preprocessing_orbit_p0 --config configs/aneux_preprocessing_orbit_p0.json --validate-only
-      - name: Validate prospective AneuX nested-orbit P0 scientific contract
+      - name: Validate frozen historical AneuX nested-orbit P0 contract
         run: PYTHONPATH=src python -m aurora.aneux_nested_orbit_p0 --config configs/aneux_nested_orbit_p0.json --validate-only
-      - name: Validate corrected AneuX nested-orbit P0 v2 scientific contract
+      - name: Validate frozen rejected AneuX nested-orbit P0 v2 contract
         run: PYTHONPATH=src python -m aurora.aneux_nested_orbit_p0_v2 --config configs/aneux_nested_orbit_p0_v2.json --validate-only
       - name: Validate frozen Aneurisk conformal-degree P0 contract
         run: PYTHONPATH=src python -m aurora.aneurisk_conformal_degree_p0 --config configs/aneurisk_conformal_degree_p0.json --validate-only

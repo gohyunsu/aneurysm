@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Schema 11.7 decision:** AneuX nested-orbit reliability is source-rejected
+> before execution. Its prior 33.0/40 screen remains history; the fresh score is
+> 32.0/40 with residual novelty 2.0/5, below the non-compensatory 2.5 floor.
+> Same-lesion preprocessing reliability remains a sound evaluation principle,
+> not a paper identity. P0 v1/v2 are frozen and unexecuted; no v3, active lead,
+> method, architecture, compute, outer test or manuscript claim exists. The next
+> permitted step is a fresh problem-level audit over documented holdings.
+
 > **Schema 11.6 correction:** The AneuX conditional lead remains 33.0/40, but
 > its evidence contract is now P0 v2. Official release semantics show that the
 > 170 morphometrics are area-005-only and official feature code is not yet

@@ -90,22 +90,59 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 11.6</span>
-          <strong>확보·감사한 자산은 있고, AneuX 기반 conditional direction 한 개를 골랐습니다. Active split과 모델은 아직 0입니다.</strong>
+          <span>짧은 답 · schema 11.7</span>
+          <strong>확보·감사한 자산은 있지만, 현재 채택된 연구 주제는 없습니다. AneuX 후보는 실행 전에 기각했습니다.</strong>
           <p>
             Aneumo, BenchAnXplore, CMHA, AneuX, AneuG-Flow와 Aneurisk에는 실제
             archive, compact cache, transient field, 임상표 또는 extracted sample을
             확인한 이력이 있습니다. Public repository의 <code>data/</code>에 raw
             payload가 없다는 사실은 비공개 server holding이 역사적으로 없었다는
-            뜻이 아닙니다. AneuX nested-orbit가 33.0/40 conditional lead로
-            선정됐지만 exact path와 patient/source manifest를 다시 고정하기 전이라
-            아직 prospective train/validation/test 역할은 0/0/0입니다.
+            뜻이 아닙니다. 다만 AneuX nested-orbit reliability는 fresh total
+            32.0/40에도 residual novelty가 2.0/5로 최소 2.5에 못 미쳤습니다.
+            직접 선행 검토 뒤 conditional lead와 pending P0를 0으로 되돌렸고,
+            prospective train/validation/test 역할도 0/0/0입니다.
             Introai9는 두
             endpoint의 TCP/22와 한 endpoint의 public-key 인증까지 확인했지만
             shell/SFTP listing이 모두 timeout되어 current server inventory도
             incomplete/no-verdict입니다. 과거 확보 이력, 현재 persistence,
             과학적 task 적합성과 active assignment를 서로 대신하지 않습니다.
           </p>
+        </div>
+        <div class="answer-card" id="aneux-reappraisal">
+          <span>왜 괜찮아 보이는 AneuX 아이디어를 실행하지 않았나?</span>
+          <strong>좋은 평가 질문과 독립적인 논문 contribution은 서로 다른 조건이기 때문입니다.</strong>
+          <p>
+            같은 병변을 다른 mesh로 만들었을 때 예측이 흔들리는지 확인하는 일은
+            중요합니다. 하지만 AneuX 원 논문은 이미 dome과 더 큰 vessel cut의
+            robustness를 비교했고, 후속 PointNet++ 논문도 dome/cut1 surface 분류를
+            internal·external cohort에서 비교했습니다. DiffusionNet은 surface
+            sampling 변화에 강한 표현을 직접 목표로 합니다.
+          </p>
+          <p>
+            더 넓게 보면 radiomics 분야는 동일 영상·윤곽을 perturb해 model
+            reliability를 평가하고, 여러 preprocessing pipeline을 한꺼번에 비교하는
+            multiverse 분석까지 이미 제시했습니다. 따라서 “평균 AUROC가 괜찮아도
+            개별 사례는 불안정할 수 있다”는 핵심 메시지는 새롭지 않습니다.
+            AneuX에 맞춰 resolution과 cut의 의미를 더 정확히 나누는 것은 훌륭한
+            protocol hygiene지만, 그것만으로 ISBI 논문의 독립 contribution이 되지는
+            않습니다.
+          </p>
+          <p>
+            코드도 사전등록과 완전히 같지 않았습니다. 계약은
+            <code>source:patient_id</code> 단위 분할·bootstrap을 요구하지만 prediction
+            record는 source를 보존하지 않았고, lesion ID도 source-qualified가
+            아니었습니다. Surface reader는 edge-level 오류를 걸러도 disconnected
+            component와 non-manifold vertex를 충분히 차단하지 않았습니다. 이 결함을
+            고치면 실행의 정확성은 올라가지만 novelty 부족은 해결되지 않습니다.
+          </p>
+          <p>
+            그래서 과거 33.0/40 screen과 P0 v1/v2 파일은 수정하지 않고 역사로
+            보존했습니다. 새 score는 32.0/40, novelty 2.0/5이며 active lead·P0·model·
+            GPU·claim은 모두 0입니다. 다음 연구는 확보 자산이 제공하는 또 다른
+            관측 구조에서 시작하되, 먼저 직접 선행과 구분되는 application failure를
+            식별해야 합니다.
+          </p>
+          <a href="../docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md">근거 문헌·six-way score·구현 불일치 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>
@@ -137,8 +174,8 @@
           <a href="../docs/data-asset-state-ledger-2026-08-12.md">자산별 실물 확인 범위·기각 유형·재사용 가능 역할 읽기 ↗</a>
         </div>
         <div class="answer-card" id="nested-orbit">
-          <span>현재 연구 방향 · 같은 동맥류인데 mesh가 달라지면 왜 문제가 되는가?</span>
-          <strong>평균 AUROC가 같아도 한 환자의 판단이 전처리에 따라 뒤집힐 수 있습니다.</strong>
+          <span>기각된 평가 가설 · 같은 동맥류인데 mesh가 달라지면 왜 문제가 되는가?</span>
+          <strong>평균 AUROC가 같아도 한 환자의 판단은 흔들릴 수 있지만, 이 사실만으로 새 논문이 되지는 않습니다.</strong>
           <p>
             3D 혈관 surface는 연속적인 해부학을 triangle mesh로 근사한 것입니다.
             같은 병변도 triangle을 더 촘촘하거나 성기게 만들 수 있고, 동맥류 dome만
@@ -163,7 +200,7 @@
             view에 같은 logit을 요구하는 flat consistency를 proposal로 쓰지 않습니다.
           </p>
           <p>
-            Conditional architecture는 surface를 <b>shared aneurysm anatomy token</b>과
+            당시 검토한 미선정 architecture는 surface를 <b>shared aneurysm anatomy token</b>과
             <b>cut-specific context residual</b>로 나눕니다. Fixed cut 안의 세 resolution
             사이에서는 anatomy와 prediction을 안정화하고, cut 사이에서는 shared
             anatomy만 맞추면서 context residual은 허용합니다. Available views는
@@ -172,12 +209,12 @@
             naive averaging, flat consistency와 GroupDRO를 모두 강한 baseline으로 둡니다.
           </p>
           <p>
-            Novelty는 이 부품의 조합이나 새 이름이 아닙니다. <b>동일 병변의
-            preprocessing reliability를 독립 application endpoint로 만들고, 변하지
-            않아야 하는 discretization과 달라져도 되는 information set을 분리하는
-            것</b>입니다. 향후 primary evidence는 probability range, worst-view
+            이 부품의 조합이나 새 이름은 novelty가 아닙니다. <b>동일 병변의
+            preprocessing reliability와 변환 의미의 분리</b>도 직접 선행을 다시
+            대조한 결과 독립성이 충분하지 않았습니다. Probability range, worst-view
             Brier/NLL/ECE, worst-pipeline AUROC/AUPRC와 disagreement-based selective
-            risk입니다. Cross-sectional rupture status만 다루며 미래 파열 위험이나
+            risk는 향후 다른 과제의 평가 도구로는 재사용할 수 있지만 현재 claim은
+            아닙니다. Cross-sectional rupture status만 다루며 미래 파열 위험이나
             임상 utility를 주장하지 않습니다.
           </p>
           <p>

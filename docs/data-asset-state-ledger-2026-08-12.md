@@ -1,5 +1,12 @@
 # 데이터 자산 상태 원장
 
+> **Schema 11.7 current assignment:** Historical holding evidence remains
+> unchanged, but AneuX nested-orbit reliability is now source-rejected before
+> execution. Its 33.0/40 score is historical; fresh direct-prior score 32.0/40
+> fails residual novelty at 2.0/5. Therefore conditional lead and registered
+> pending-execution P0 counts return to 0. This does not mean that the six
+> holdings disappeared or that their earlier audits failed.
+
 > **Schema 11.5 correction.** “현재 논문에 배정된 active dataset이 0”과
 > “과거에 확보·검사한 데이터가 0”은 전혀 다른 명제다. AURORA에는 실제 archive,
 > field, table 또는 extracted sample을 확인한 자산 이력이 있다. 다만 현재 선택된

@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.7 no-execution boundary:** The AneuX reliability candidate is
+> source-rejected, so the external-service-change preflight and P0 v2 execution
+> are cancelled. This update queried no scientific server, transferred no
+> payload, and submitted or monitored no PBS/GPU job. Do not repair v2, create
+> v3, or retry the incomplete inventory. Future execution requires a different
+> admitted problem and remains `introai9` PBS only; login-node GPU commands and
+> every form of `junjinyong` access remain prohibited.
+
 > **Schema 11.6 P0 v2 execution boundary:** This update used official public
 > documentation and repository contents only. It queried no scientific server,
 > transferred no AneuX payload and submitted or monitored no PBS/GPU job. V2

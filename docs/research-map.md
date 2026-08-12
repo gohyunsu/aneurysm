@@ -1,5 +1,11 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.7 map · 2026-08-12:** The AneuX conditional node is closed before
+> execution: 32.0/40 total but 2.0/5 residual novelty. The 11.6 33.0/40 node and
+> P0 v1/v2 bytes remain historical. Current active lead, primary, split, P0/P1,
+> method, model, GPU, outer test, result and claim are 0. The next legal edge is
+> a fresh problem-level source/asset audit, not P0 repair or compute.
+
 > **Schema 11.5 map · 2026-08-12:** AneuX nested preprocessing-orbit is the
 > sole conditional node: score 33.0/40, scientific P0 contract registered,
 > execution envelope pending exact private path. Active primary, data split,

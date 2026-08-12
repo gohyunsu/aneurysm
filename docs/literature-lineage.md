@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.7 direct-prior verdict:** The residual AneuX reliability gap is
+> too narrow for an active ISBI identity. Juchler et al. already evaluate
+> morphology and cut robustness; AneuX PointNet++ compares dome and cut1;
+> DiffusionNet targets discretization robustness; Teng et al. and Zhang et al.
+> establish perturbation-based model reliability; Ozenne et al. formalize
+> preprocessing multiverse sensitivity. Source-qualified grouping and
+> transformation semantics remain mandatory evaluation hygiene, not novelty.
+> Fresh best score 32.0/40 fails the 2.5 novelty floor at 2.0.
+
 > **Schema 11.6 source-semantics correction:** AneuX v1.0 exposes surfaces at
 > three resolutions, but `morpho-per-cut.csv` stores its 170 features at
 > `area-005` only. Exact official code head `a6b355e…` has no processing code.

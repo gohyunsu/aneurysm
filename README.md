@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 AneuX direct-prior closure · schema 11.7:** The former 33.0/40
+> nested-orbit score is preserved as source-screen history, but the candidate
+> is now rejected before execution. A fresh screen scores 32.0/40 and only
+> 2.0/5 residual novelty: AneuX cut robustness, dome/cut1 surface
+> classification, same-unit perturbation reliability and preprocessing
+> multiverse analysis are direct prior. Frozen P0 v1/v2 also disagree with the
+> registered source-qualified grouping and connected-surface contract; they
+> are not repaired or run. Active lead, P0/P1, method, model, GPU, outer test,
+> result and paper claim are all 0. See the
+> [direct-prior reappraisal](docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md).
+
 > **2026-08-12 schema 11.6 deployment/private pin:** Exact scientific source
 > `4dfe08f35934901de5bc8d88a06869a1a5230998` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31579905965) and

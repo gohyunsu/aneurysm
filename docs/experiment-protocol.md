@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.7 current gate: no executable experiment.** The AneuX direct-
+> prior reappraisal rejects all six formulations; best 32.0/40 fails the
+> residual-novelty floor at 2.0/5. P0 v1/v2 remain frozen, unexecuted records.
+> Their grouping and surface-validity mismatches are documented but not
+> repaired. No dataset split, P0/P1, method, GPU, outer test or result is open.
+> A future experiment requires a different prospectively admitted application
+> problem and a fresh contract.
+
 > **Schema 11.6 current gate:** `configs/aneux_nested_orbit_p0_v2.json`
 > supersedes the unexecuted v1 before any data row or job. The released 170
 > morphometrics are area-005-only, so v2 measures three-resolution behavior

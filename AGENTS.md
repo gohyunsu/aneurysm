@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 AneuX direct-prior closure · schema 11.7:** Preserve the
+> schema-11.6 33.0/40 score and P0 v1/v2 bytes as history. The fresh AneuX
+> reliability batch is rejected at 32.0/40 because residual novelty is 2.0/5,
+> below the fixed 2.5 floor. AneuX morphology/cut robustness, dome/cut1
+> PointNet++ evaluation, DiffusionNet discretization robustness, perturbation-
+> based radiomics reliability and preprocessing multiverse analysis are direct
+> prior. The frozen implementation also lacks source-qualified patient/lesion
+> identity and a single-connected-open-surface gate. Do not repair, execute or
+> promote v2 and do not create v3 for this direction. Active lead, P0/P1,
+> method, architecture, GPU, outer test, result, C21 and paper claim are 0.
+> This update queried no scientific server. Future authorized execution remains
+> `introai9` PBS only; never access/query/transfer/submit/monitor `junjinyong`.
+
 > **2026-08-12 schema 11.6 deployment/private synchronization:** Exact public
 > scientific source `4dfe08f35934901de5bc8d88a06869a1a5230998` passed Quality
 > `31579905965` and Pages `31579905336`. Private paper ledger head

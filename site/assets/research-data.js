@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · AneuX nested-orbit conditional source lead 1 at 33.0/40 · source-corrected P0 v2 registered but not executable · active train/validation/test 0/0/0 · primary/method/model/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "after an external service change, one bounded introai9 preflight must freeze the exact private AneuX path, manifest and reader dependencies; the CPU-only no-network P0 v2 must then pass probe adequacy and both preregistered threshold-free materiality checks before any P1, architecture, GPU or claim can open",
+    status: "Target locked · schema 11.7 · AneuX reliability source-rejected before execution at 32.0/40 with residual novelty 2.0/5 below 2.5 · active lead/train/validation/test/P0/P1/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "a fresh application problem over documented holdings must pass every non-compensatory source-admission floor and a method-free observable-failure gate before any split, P0, architecture, GPU, outer test or claim can open; frozen AneuX P0 v2 is not repaired or executed",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "AneuX reliability closes before execution after a direct-prior and contract audit",
+      copy: "The schema-11.6 33.0/40 screen remains immutable history. A fresh six-way screen scores the strongest factorized reliability formulation 32.0/40 but residual novelty 2.0/5, below the fixed 2.5 floor. AneuX morphology already studies cut robustness; AneuX PointNet++ compares dome and cut1; DiffusionNet targets discretization robustness; perturbation-based radiomics reliability and preprocessing multiverse analysis already occupy the general failure mechanism. Frozen P0 v2 also omits source-qualified patient/lesion identities and a single-connected-open-surface gate. These defects are recorded, not repaired, because execution cannot restore scientific novelty.",
+      status: "Schema 11.7 · all six rows rejected · lead/P0/P1/method/model/server/PBS/GPU/outer test/result/claim 0",
+      url: "../docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "The AneuX P0 is corrected before execution: 170 released features exist only at area-005",
@@ -758,13 +765,20 @@ window.AURORA_DATA = Object.freeze({
   ],
   competition: [
     ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
-    ["Mechanism→outcome", "same-lesion geometry + actual device + immediate DSA + fixed-time endpoint", "coil mechanics / normalized QA / longitudinal CFD", "mechanics and immediate response jointly explain follow-up outcome", "rejected: no public immutable join"],
-    ["Input", "weak outer set W; Y ⊆ W", "VP-UNet / FocalSegNet / WeakMed", "set-valued lesion support", "closed source formulation"],
-    ["Uncertainty", "precise masks on disjoint subjects", "morphological conformal + lesion FNR", "valid monotone-morphometry interval", "not evaluated; no architecture"],
-    ["Evaluation", "subject-level 246 weak + 38 precise", "COMPASS + partial identification", "tightness without invalid pseudo-truth", "P1 not authorized"],
-    ["Evidence", "exact public metadata; no NIfTI body", "historical 31.5 coarsening rejection", "32.5/40 historical source score", "P0 F/exit 1 · 0/10 checks · no rerun"]
+    ["Task", "AneuX cross-sectional status; same-lesion resolution/cut views", "Juchler morphology/cut robustness; AneuX PointNet++", "casewise reliability after source-qualified grouping", "useful audit, insufficient standalone novelty"],
+    ["Representation", "resolution nuisance within fixed cut; cut changes context", "DiffusionNet; PointNet++; equivariant surface encoders", "factorized anatomy/context representation", "technically coherent, unselected"],
+    ["Reliability", "probability range, worst-pipeline quality, calibration", "Teng/Zhang perturbation reliability; preprocessing multiverse", "AneuX-specific worst-view reporting", "generic mechanism already occupied"],
+    ["Implementation", "source:patient and source:lesion identities; one open component", "frozen P0 v2", "contract-exact method-free probe", "mismatch recorded; no repair because novelty fails"],
+    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best total 32.0; novelty 2.0", "source-rejected before execution"]
   ],
   gates: [
+    {
+      id: "S-AX",
+      title: "Does AneuX same-lesion reliability leave an independent ISBI application gap?",
+      copy: "No. The old 33.0/40 screen is preserved, but a fresh direct-prior review scores the strongest row 32.0/40 with residual novelty 2.0/5 below the fixed 2.5 floor. AneuX cut robustness, dome/cut1 PointNet++, DiffusionNet, perturbation reliability and preprocessing multiverse analysis occupy the core problem and solution space. Frozen P0 v2 also lacks source-qualified identities and a connected-surface gate; fixing those defects would not restore novelty.",
+      state: "Source-rejected before execution · lead/P0/P1/method/model/PBS/GPU/outer test/result/claim 0 · no v2 repair or v3",
+      blocking: true
+    },
     {
       id: "P0-C",
       title: "Does the public OpenNeuro release support the registered subject-level containment task?",
@@ -1253,6 +1267,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "research",
+      title: "Schema 11.7 closes AneuX reliability before execution",
+      copy: "A fresh direct-prior reappraisal preserves the old 33.0/40 screen and P0 v1/v2 bytes but rejects the strongest current row at 32.0/40 because residual novelty is 2.0/5 below the fixed 2.5 floor. It records direct collisions from AneuX cut robustness, dome/cut1 PointNet++, DiffusionNet, perturbation reliability and preprocessing multiverse work. It also records source-qualified grouping and connected-surface contract defects without repairing them. Active lead, split, P0/P1, method, model, PBS/GPU, outer test, result and claim return to zero; no scientific server was queried.",
+      files: ["docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

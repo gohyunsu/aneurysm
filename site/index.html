@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 동일 뇌동맥류의 mesh resolution과 parent-vessel cut이 만드는 prediction instability를 분리해 검증하는 AneuX nested preprocessing-orbit 연구 기록.">
+  <meta name="description" content="AURORA — 확보한 뇌동맥류 데이터 자산을 과장 없이 재평가하고 ISBI 2027에 필요한 독립적 application novelty를 찾는 검증 가능한 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,29 +40,28 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.6 · CONDITIONAL LEAD 1 · CORRECTED P0 V2 REGISTERED / NOT EXECUTABLE · MODEL / GPU / CLAIM 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.7 · CURRENT LEAD 0 · ANEUX REJECTED BEFORE EXECUTION · P0 / MODEL / GPU / CLAIM 0</p>
         <h1>
-          Same aneurysm.<br>
-          <em>Different mesh, different decision?</em>
+          A useful question<br>
+          <em>is not automatically a novel paper.</em>
         </h1>
         <p class="hero-lede">
-          <b>확보한 AneuX의 고유한 반복표현 구조를 연구 문제로 사용합니다.</b>
-          같은 병변은 세 mesh resolution과 최대 네 가지 dome/neck/parent-vessel
-          cut으로 표현될 수 있습니다. 평균 AUROC가 비슷해도 개별 병변의 판단은
-          뒤집힐 수 있습니다. 다만 resolution은 주로 discretization nuisance이고,
-          cut은 실제 parent-vessel context를 더하거나 뺍니다. 그래서 모든 view의
-          최종 예측을 같게 만드는 flat consistency가 아니라, <b>공통 aneurysm
-          anatomy와 유효한 context residual을 분리하는 nested orbit</b>을 검증합니다.
-          공식 명세를 다시 확인해 170개 morphometric이 area-005에만 있다는 v1 결함을
-          실행 전에 바로잡았습니다. 현재 33.0/40 conditional source lead 한 개와
-          corrected method-free CPU P0 v2만 등록했습니다. Exact private path, manifest와
-          reader preflight 전에는 실행할 수 없으며 primary problem·architecture·GPU·
-          outer test·논문 claim은 모두 0입니다.
+          <b>AneuX의 same-lesion preprocessing reliability는 타당한 평가 문제지만,
+          현재 독립적인 ISBI contribution은 아닙니다.</b> AneuX 원 연구가 이미 cut
+          robustness를, PointNet++ 연구가 dome/cut1 분류를, DiffusionNet이
+          discretization robustness를 다룹니다. Radiomics perturbation과 preprocessing
+          multiverse 문헌도 “평균 성능이 개별 사례의 불안정성을 숨긴다”는 핵심
+          메커니즘을 이미 점유합니다. fresh score는 32.0/40이지만 residual novelty가
+          2.0/5로 고정 하한 2.5에 미달합니다. 또한 frozen P0 v2 코드는
+          source-qualified patient/lesion grouping과 single connected surface 계약을
+          구현하지 않습니다. 이를 고쳐 실행하는 대신 <b>실행 전 기각</b>했습니다.
+          과거 33.0/40과 P0 v1/v2는 역사로 보존하며 현재 active lead·split·P0·method·
+          model·GPU·outer test·result·claim은 모두 0입니다.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="learn.html#nested-orbit">Nested orbit 처음부터 이해하기</a>
-          <a class="button ghost" href="../docs/acquired-asset-application-direction-2026-08-12.md">연구 방향 전체 읽기 ↗</a>
-          <a class="button ghost" href="../configs/aneux_nested_orbit_p0_v2.json">수정된 P0 v2 계약 ↗</a>
+          <a class="button primary" href="learn.html#aneux-reappraisal">왜 실행 전에 기각했는가?</a>
+          <a class="button ghost" href="../docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md">직접 선행·score·결함 전체 읽기 ↗</a>
+          <a class="button ghost" href="../configs/aneux_nested_orbit_p0_v2.json">동결된 역사적 P0 v2 ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
         <div class="hero-actions" hidden>
@@ -230,7 +229,7 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>33.0</b><span>conditional source lead · P0 only</span>
+            <b>32.0</b><span>rejected · novelty 2.0 &lt; 2.5</span>
           </div>
           <div class="posterior-card card-b">
             <b>3 × 4</b><span>resolution nuisance × context cut</span>
@@ -247,25 +246,24 @@
       </div>
 
       <div class="hero-meta">
-        <div><span>Conditional direction</span><b>AneuX factorized nested preprocessing-orbit reliability · 33.0/40</b></div>
-        <div><span>Scientific P0 v2</span><b>Registered · non-executable until exact path, manifest and reader preflight are frozen</b></div>
-        <div><span>Architecture / GPU / claim</span><b>Development hypothesis only / 0 / 0</b></div>
-        <div><span>Next action</span><b>After external service change: bounded introai9 path/manifest/reader preflight · then freeze CPU-only PBS or close</b></div>
+        <div><span>Latest scientific decision</span><b>AneuX nested-orbit reliability · source-rejected before execution</b></div>
+        <div><span>Score / critical floor</span><b>32.0/40 total · residual novelty 2.0/5 &lt; 2.5</b></div>
+        <div><span>Lead / P0 / architecture / GPU / claim</span><b>0 / 0 / 0 / 0 / 0</b></div>
+        <div><span>Next action</span><b>Fresh problem-level audit over documented holdings · no P0 v2 repair or compute</b></div>
       </div>
     </section>
 
     <section class="section thesis" id="thesis">
       <div class="section-heading">
         <p class="eyebrow">01 · THE THESIS</p>
-        <h2>평균 성능 뒤에 숨은<br><em>같은 병변의 판단 불안정성.</em></h2>
+        <h2>문제의식은 남기고,<br><em>논문 정체성은 기각합니다.</em></h2>
         <p>
-          AneuX는 동일 lesion을 여러 mesh resolution과 vessel cut으로 공개합니다.
-          기존 연구는 평균적인 mesh-quality/cut robustness와 dome/cut1 분류 성능을
-          보고했지만, 한 병변의 예측이 representation에 따라 임계값을 넘나드는지,
-          worst-view calibration이 무너지는지, 그 disagreement가 오류를 식별하는지는
-          주된 평가 대상이 아니었습니다. 우리의 application gap은 이 casewise
-          reliability입니다. Cross-sectional rupture status만 다루며 future rupture
-          risk나 clinical utility로 확대하지 않습니다.
+          AneuX의 여러 resolution과 cut을 한 lesion orbit으로 묶고 casewise
+          reliability를 보는 것은 올바른 평가 설계입니다. 그러나 cut robustness,
+          dome/cut1 surface classification, perturbation reliability와 preprocessing
+          multiverse가 이미 직접 선행입니다. 남은 차이는 유용한 protocol hygiene이지
+          ISBI paper를 지탱할 비조합적 novelty가 아닙니다. 따라서 성능을 만들기 위한
+          실험으로 넘어가지 않습니다.
         </p>
       </div>
 
@@ -281,23 +279,23 @@
           </ul>
         </article>
         <article class="pivot-card">
-          <div class="card-index">CONDITIONAL · NESTED ORBIT</div>
-          <h3>Separate anatomy from context</h3>
-          <p>Fixed-cut resolution에는 안정성을 요구하고, cut별 context residual은 허용한다.</p>
+          <div class="card-index">REJECTED · NESTED ORBIT PAPER</div>
+          <h3>Scientifically tidy, insufficiently independent</h3>
+          <p>변환 의미를 구분하는 설계는 타당하지만 reliability/multiverse 직접 선행과 분리되지 않는다.</p>
           <ul>
             <li>Adequate AUROC와 threshold-free probability range를 함께 측정</li>
             <li>Patient/source-grouped outer evaluation</li>
-            <li>P0에서 failure가 없으면 method를 만들지 않음</li>
+            <li>Novelty 2.0/5로 P0 전에 중단</li>
           </ul>
         </article>
       </div>
 
       <div class="claims-strip">
-        <p>이 conditional direction이 먼저 답할 세 질문</p>
+        <p>기각 판정을 결정한 세 질문</p>
         <ol>
-          <li><span>01</span> 동일 lesion orbit과 patient/source grouping을 private holding에서 재확인할 수 있는가?</li>
-          <li><span>02</span> Resolution-induced probability range와 disagreement–error association이 비자명한가?</li>
-          <li><span>03</span> Strong DiffusionNet/averaging이 이미 문제를 해결하지 않았는가?</li>
+          <li><span>01</span> AneuX와 generic perturbation 문헌 이후 독립적 application gap이 남는가? <b>충분하지 않음.</b></li>
+          <li><span>02</span> Frozen 코드가 source-qualified grouping과 surface validity 계약을 구현하는가? <b>아니오.</b></li>
+          <li><span>03</span> 코드를 고쳐 실행하면 novelty 문제가 해결되는가? <b>아니오.</b></li>
         </ol>
       </div>
     </section>
@@ -360,16 +358,15 @@
 
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
-        <p class="eyebrow">03 · CONDITIONAL ARCHITECTURE</p>
-        <h2>Invariant where it should be.<br><em>Context-aware where it matters.</em></h2>
+        <p class="eyebrow">03 · ARCHIVED ARCHITECTURE HYPOTHESIS</p>
+        <h2>Technically coherent.<br><em>Scientifically unselected.</em></h2>
         <p>
-          아직 선택된 architecture는 없습니다. P0가 실제 casewise instability를
-          확인할 때만 아래 최소 구조를 compute-matched development hypothesis로
-          엽니다. Surface encoder는 DiffusionNet을 strong control로 삼고, 공통
+          아래 구조는 구현 계획이 아니라 기각된 후보의 설계 기록입니다. Surface
+          encoder는 DiffusionNet을 strong control로 삼고, 공통
           aneurysm anatomy token과 cut-specific parent-vessel context residual을
           분리합니다. Orbit aggregator는 available views만 모으고 disagreement를
-          reliability score로 출력합니다. Final logit을 모든 cut에서 같게 강제하지
-          않습니다.
+          reliability score로 출력합니다. 설계는 합리적이지만 직접 선행 이후
+          residual novelty가 부족해 개발·실험 권한이 없습니다.
         </p>
       </div>
 
@@ -379,9 +376,9 @@
         <p>
           PointNet++, PointNeXt/DGCNN, DiffusionNet과 E(3)-equivariant mesh model을
           모두 baseline으로 비교합니다. Proposal의 독립성은 encoder 이름이 아니라
-          resolution nuisance와 cut context를 다른 수학적 역할로 두고, 평균 성능을
-          훼손하지 않으면서 same-lesion worst-view reliability를 개선하는 데 있습니다.
-          P0가 실패하면 이 architecture를 구현하지 않습니다.
+          resolution nuisance와 cut context를 다른 수학적 역할로 둔 점입니다.
+          그러나 이 차이는 현 상태에서 독립 contribution으로 충분하지 않아 이
+          architecture를 구현하지 않습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -450,62 +447,61 @@
 
       <div class="architecture-notes">
         <article>
-          <span>CONDITIONAL SOURCE VERDICT</span>
-          <p>AneuX nested orbit는 33.0/40으로 critical floor를 모두 통과했습니다. 이는 model admission이 아니라 새 method-free P0의 과학적 계약만 허용합니다.</p>
+          <span>CURRENT SOURCE VERDICT</span>
+          <p>AneuX nested orbit는 fresh 32.0/40이지만 residual novelty 2.0/5로 기각됐습니다. 총점은 critical floor를 보상하지 못합니다.</p>
         </article>
         <article>
-          <span>OLD P0 ISOLATION</span>
-          <p>과거 job 115177은 0/13 no-verdict로 닫혀 있습니다. 새 P0는 downloader repair가 아니라 private holding의 exact path와 nested failure를 검사하는 다른 계약입니다.</p>
+          <span>FROZEN P0 ISOLATION</span>
+          <p>과거 job 115177과 미실행 v1/v2는 모두 역사입니다. grouping·surface gate 결함을 고쳐 v3로 재진입하지 않습니다.</p>
         </article>
         <article>
           <span>DIRECT PRIOR CONTROLS</span>
           <p>AneuX morphometry/PointNet++, DiffusionNet, latent multi-resolution shape learning, E(3) mesh learning, consistency, GroupDRO와 calibration은 모두 baseline 또는 prior입니다.</p>
         </article>
         <article>
-          <span>PROSPECTIVE EVIDENCE</span>
-          <p>Exact holding → P0 casewise failure → P1 strong-baseline feasibility → compute-matched development → locked source-held-out confirmation 순서입니다.</p>
+          <span>NEXT ADMISSIBLE WORK</span>
+          <p>확보 자산의 관측 가능한 고유 구조 → 직접 선행과 분리되는 failure mechanism → method-free gate를 새 문제에서 처음부터 등록해야 합니다.</p>
         </article>
       </div>
       <div class="architecture-links">
-        <a class="text-link on-dark-link" href="learn.html#nested-orbit">입문자용 nested orbit 설명 ↗</a>
-        <a class="text-link on-dark-link" href="../docs/acquired-asset-application-direction-2026-08-12.md">Architecture·loss·baseline 명세 ↗</a>
+        <a class="text-link on-dark-link" href="learn.html#aneux-reappraisal">입문자용 기각 논리 ↗</a>
+        <a class="text-link on-dark-link" href="../docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md">Direct-prior reappraisal ↗</a>
       </div>
     </section>
 
     <section class="section experiment-section" id="experiments">
       <div class="section-heading">
         <p class="eyebrow">04 · EXPERIMENTS</p>
-        <h2>First prove the failure.<br><em>Then earn the model.</em></h2>
+        <h2>No admitted question.<br><em>No experiment to run.</em></h2>
         <p>
-          현재 우선순위는 AneuX에서 casewise preprocessing instability가 실제로
-          존재하는지 CPU-only baseline으로 반증하는 것입니다. P0가 통과하기 전에는
-          neural architecture나 GPU 성능 실험을 시작하지 않습니다.
+          현재는 실행 가능한 실험이 없습니다. AneuX P0는 scientific failure가
+          아니라 direct-prior source gate에서 닫혔습니다. 코드를 고쳐 성능을 내는
+          것은 novelty를 회복하지 못하므로 local repair loop를 열지 않습니다.
         </p>
       </div>
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">CURRENT P0 V2 · CORRECTED BEFORE EXECUTION / NOT EXECUTABLE</p>
-          <span>private holding only · CPU 4 · GPU 0 · network 0</span>
+          <p class="eyebrow">CURRENT DECISION · SOURCE-REJECTED BEFORE EXECUTION</p>
+          <span>P0 0 · PBS 0 · GPU 0 · network 0</span>
         </div>
         <div class="g1-result-metrics">
-          <div><span>Conditional score</span><b>33.0</b><small>/ 40 · all critical floors pass</small></div>
+          <div><span>Fresh score</span><b>32.0</b><small>/ 40 · necessary total reached</small></div>
           <i>→</i>
-          <div><span>Nontriviality</span><b>2 / 2</b><small>both threshold-free primary checks required</small></div>
-          <div class="delta negative"><span>Execution</span><b>Blocked</b><small>path + manifest + reader preflight unresolved</small></div>
+          <div><span>Residual novelty</span><b>2.0</b><small>/ 5 · required ≥ 2.5</small></div>
+          <div class="delta negative"><span>Execution</span><b>Closed</b><small>no repair · no v3 · no job</small></div>
         </div>
         <div class="g1-result-decision">
-          <strong>Probe adequacy와 두 materiality gate가 모두 확인돼야 다음 단계로 갑니다.</strong>
+          <strong>총점 통과는 novelty floor 실패를 보상하지 않습니다.</strong>
           <p>
-            Canonical area-005 OOF AUROC lower bound가 0.60을 넘어 probe가 먼저
-            유효해야 합니다. 이후 세 resolution probability range가 0.10을 넘는
-            lesion 비율의 lower bound &gt; 0.05, range와 orbit-mean Brier residual의
-            Spearman lower bound &gt; 0.10을 모두 요구합니다. Decision flip은 임의
-            threshold에 민감해 secondary입니다. 이는 engineering nontriviality이지
-            임상 위해 기준이 아닙니다. P0 pass도 P1 하나만 허용합니다.
+            AneuX cut robustness와 dome/cut1 분류, DiffusionNet, perturbation-based
+            radiomics reliability, preprocessing multiverse가 핵심 문제와 해결 공간을
+            상당 부분 점유합니다. Source-qualified ID와 connected-surface 검증을
+            추가하면 코드는 더 정확해지지만 contribution은 독립적으로 바뀌지
+            않습니다. 따라서 P0 수리보다 후보 기각이 더 타당합니다.
           </p>
-          <a href="../configs/aneux_nested_orbit_p0_v2.json">Corrected frozen contract ↗</a>
-          <a href="../docs/acquired-asset-application-direction-2026-08-12.md">전체 falsifier와 중단 조건 ↗</a>
+          <a href="../configs/aneux_nested_orbit_p0_v2.json">Frozen historical contract ↗</a>
+          <a href="../docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md">직접 선행·score·중단 근거 ↗</a>
         </div>
       </article>
 
@@ -747,17 +743,17 @@
     <section class="section paper-section" id="paper">
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
-        <h2>Same Aneurysm, Different Mesh</h2>
-        <p>Conditional title only · corrected P0 v2 registered · 33.0/40 source lead · no active manuscript claim before P0/P1</p>
+        <h2>No active title yet</h2>
+        <p>ISBI format is frozen; scientific identity is not. A rejected direction does not receive a title, contribution list, result table or figure.</p>
       </div>
       <div class="contribution-grid">
-        <article><span>C1</span><h3>Hidden application failure</h3><p>평균 discrimination이 같아도 same-lesion flip과 worst-view error가 material함을 보인다.</p></article>
-        <article><span>C2</span><h3>Factorized reliability</h3><p>Resolution nuisance와 cut context를 분리한 nested model이 flat consistency보다 타당함을 matched ablation으로 보인다.</p></article>
-        <article><span>C3</span><h3>Evidence without inflation</h3><p>Patient/source-held-out에서 AUROC를 훼손하지 않으면서 flip·Brier·selective risk를 개선한다.</p></article>
+        <article><span>C1</span><h3>Reserved</h3><p>새 task가 기존 평가로 설명되지 않는 observable application failure를 보여야 채운다.</p></article>
+        <article><span>C2</span><h3>Reserved</h3><p>모델 구성요소의 조합이 아니라 failure mechanism과 직접 연결된 방법만 채운다.</p></article>
+        <article><span>C3</span><h3>Reserved</h3><p>Strong baseline 대비 locked confirmation과 interpretable sample evidence가 있어야 채운다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>conditional lead 1 · corrected P0 v2 only · primary/method/model/GPU/claim 0</b>
-        <span>Claim boundary</span><b>cross-sectional status association only; no future-risk or clinical-utility claim</b>
+        <span>Current stage</span><b>lead/P0/P1/method/model/GPU/outer test/result/claim 0</b>
+        <span>Claim boundary</span><b>manuscript prose remains evidence-locked; rejected ideas stay in the audit ledger</b>
       </div>
     </section>
 

@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.7 active-assignment correction:** The six audited holding records
+> still exist, but none is assigned to an active paper. AneuX is no longer a
+> conditional source lead: its reliability formulation is source-rejected
+> before payload access or execution because direct prior closes the novelty
+> floor. Historical AneuX archive/extraction evidence and the old no-verdict job
+> are preserved. P0 v1/v2 are not repaired or rerun. Active train/validation/
+> test, P0/P1, model and GPU counts remain 0.
+
 > **Schema 11.5 conditional assignment:** AneuX v1.0 is now the source for one
 > conditional research direction, not yet an active train/validation/test
 > dataset. Its native same-lesion 3-resolution/up-to-4-cut structure motivates
