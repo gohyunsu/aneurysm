@@ -1296,6 +1296,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.8 P0 implementation and private no-claim ledger are synchronized",
+      copy: "Exact public source 3332bf6… passed Quality 31591274490 and Pages 31591274071. Private paper head bd71c81… is remote exact and anonymously returns 404 while manuscript/reference bytes remain unchanged. Full regression passes 513/513 tests with 111 protocol invariant groups. This synchronization creates no real P0 endpoint, P1, method, model, GPU, outer test or paper claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "experiment",
       title: "Schema 11.8 adds a fail-closed aggregate P0 evaluator without running it",
       copy: "The reference evaluator checks the frozen Aneumo train mapping, eight flows, 4,096 aligned nodes, coordinate-half response ranking, leave-one-flow tangent/interpolation stability and historical scaling dependency. Family ranks are computed within flow and uncertainty uses 5,000 family bootstrap replicates. The CPU 4/GPU 0 wrapper is one-shot, aggregate-only and not currently submittable; current config refuses before cache access. Synthetic 10/10 is implementation validation, not a scientific result. Full regression passes 513/513 tests with 111 protocol invariant groups. No server, scheduler, transfer, PBS or GPU action occurred.",

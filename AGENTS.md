@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 implementation/private synchronization:** Exact
+> public scientific source `3332bf605d7be8e200009a9cb165b58e6a27cbeb`
+> passed Quality `31591274490` and Pages `31591274071`. Private paper head
+> `bd71c81f9ef6bf73f6380832bee936ba8c8812d2` is remote exact, PRIVATE and
+> anonymously returns 404. `paper/main.tex` and references remain byte-for-byte
+> at SHA-256 `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b`
+> and `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full public regression passes 513/513 tests with 111 invariant groups. No
+> scientific server/scheduler query, transfer, PBS/GPU job or monitoring was
+> used. P0 result/P1/method/model/outer test/claim remain 0. Never access
+> `junjinyong`; do not retry `introai9` before a verified external change.
+
 > **2026-08-12 schema 11.8 P0 implementation boundary:**
 > `src/aurora/aneumo_response_fidelity_p0.py` and
 > `cluster/pbs_aneumo_response_fidelity_p0.pbs` implement the registered

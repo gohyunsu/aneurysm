@@ -1,5 +1,16 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 implementation/private synchronization:** Exact public
+> scientific source `3332bf605d7be8e200009a9cb165b58e6a27cbeb` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31591274490)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31591274071).
+> Private paper ledger `bd71c81f9ef6bf73f6380832bee936ba8c8812d2` is remote
+> exact and anonymously invisible. Manuscript/reference SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This synchronization opens no P0 result, P1, method, model, GPU, outer test
+> or claim.
+
 > **2026-08-12 method-free P0 implementation · schema 11.8:** The aggregate
 > reference evaluator and CPU 4/GPU 0 one-shot PBS wrapper are implemented and
 > pinned by the machine protocol. Synthetic validation covers all ten

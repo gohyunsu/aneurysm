@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · implementation and private ledger synchronized
+
+- Exact public implementation source `3332bf6…` passed Quality `31591274490`
+  and Pages `31591274071`.
+- Private paper head `bd71c81…` is remote exact, PRIVATE and anonymously 404;
+  manuscript/reference hashes remain byte-for-byte unchanged.
+- Full regression is 513/513 with 111 protocol invariant groups. This pin
+  opens no real P0 result, P1, method, model, GPU, outer test or paper claim.
+
 ## 2026-08-12 · schema 11.8 · fail-closed P0 reference implementation
 
 - Implemented the train-only aggregate Aneumo response-fidelity evaluator and
