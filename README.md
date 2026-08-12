@@ -4,7 +4,7 @@
 > `8b288c0f6edacc4721f06bbd2a3cb21e73d83146` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31601736993)
 > and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31601736273).
-> Private planning head `83fc886a139461398a9bba5e1aab13a1d19bcb65` is remote
+> Private planning head `83fc88618ca98707ba09540a4686b18c93085819` is remote
 > exact, PRIVATE and anonymously returns 404. Manuscript/reference SHA-256
 > remains `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
 > `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.

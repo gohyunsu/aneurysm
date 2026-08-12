@@ -4,7 +4,7 @@
 
 - Exact scientific public source `8b288c0…` passed Quality `31601736993` and
   Pages `31601736273`; the live Overview and filterable history expose v2.
-- Private planning head `83fc886…` is remote exact, PRIVATE and anonymously
+- Private planning head `83fc8861…` is remote exact, PRIVATE and anonymously
   404. Manuscript/reference bytes remain unchanged and no paper claim is active.
 - Scientific-server query, transfer, PBS/GPU submission and monitoring remain
   zero; real P0 is 0/11 and P1 remains unregistered.
