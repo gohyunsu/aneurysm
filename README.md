@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 ADAM-fold audit deployment and private pin:** Exact public
+> scientific source `836293006a835c421aac474c668387daeb659f77` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31555748252)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31555747611).
+> Private ledger `25b10dec320f58528702fad23d8bde232e111e65` is remote
+> exact and anonymously returns 404. Manuscript and references remain
+> byte-for-byte unchanged. This provenance opens no paper, model or compute.
+
 > **2026-08-12 ADAM patch-fold/segmentation-prior delta · schema 10.7
 > unchanged:** Exact GitHub release `d36df7d…` has 35 assets/61,506,611,200
 > bytes, but repository dataset license, upstream ADAM reuse permission,

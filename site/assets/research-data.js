@@ -1159,6 +1159,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "ADAM-fold audit is live and the private no-claim ledger is pinned",
+      copy: "Exact public scientific source 836293006a835c421aac474c668387daeb659f77 passed Quality 31555748252 and Pages 31555747611. Live Overview, Learn #adam-fold-release, the exact audit, machine protocol and source-watch v18 expose the same six-way rejection and no-payload/no-model/no-compute boundary. Private ledger 25b10dec320f58528702fad23d8bde232e111e65 is remote exact and anonymous API returns 404; manuscript and references remain byte-for-byte unchanged. This provenance creates no scientific or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "ADAM patch-fold release and 2026 segmentation priors are rejected without acquisition or compute",
       copy: "A real 61.5 GB v1.0 release is now frozen by an exact name/size/digest manifest rather than dismissed by file size alone. The public organization JSON covers 93 positive scans and 58 subject bases; official ADAM B/F semantics imply development/test base overlap of 2/3/5/6/2 across the five folds. No validation IDs, negative controls, repository dataset license or upstream reuse contract are present. DINO-3DRA, GeoP2VNet, modality-agnostic nnU-Net and anatomy-aware weak-supervision code narrow model novelty but do not provide an AURORA task asset. Six rows score 26.5/26.5/26.0/25.5/23.0/23.0 and all fail. Source-watch v18 freezes 31 states and can request review only; no payload, E0/P0/P1, architecture, server, PBS/GPU, outer test or paper claim opened. Full regression passes 462 tests: 396 pass/66 optional skip and 97 protocol invariant groups.",

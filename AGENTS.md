@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 ADAM-fold deployment·private synchronization:** Exact public
+> scientific source `836293006a835c421aac474c668387daeb659f77` passed Quality
+> `31555748252` and Pages `31555747611`. Live Overview, Learn
+> `#adam-fold-release`, the exact audit, machine protocol, source-watch v18 and
+> filterable history expose the same rejection. Private paper ledger
+> `25b10dec320f58528702fad23d8bde232e111e65` is remote exact and anonymous
+> API returns 404. `paper/main.tex` and references SHA-256 remain
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This provenance adds no lead/P0/P1/method/model/server/GPU/result/claim.
+
 > **2026-08-12 ADAM patch-fold/segmentation-prior delta · schema 10.7
 > unchanged:** Exact public fold repository `d36df7d…`의 v1.0은 35 asset,
 > 61,506,611,200 bytes지만 dataset license/upstream ADAM reuse contract가 없다.

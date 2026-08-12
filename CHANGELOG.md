@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-12 · ADAM-fold audit deployed and privately pinned
+
+- Exact public scientific source `836293006a835c421aac474c668387daeb659f77`
+  passed Quality `31555748252` and Pages `31555747611`; the live Overview,
+  beginner chapter, exact audit and source-watch v18 were verified.
+- Private ledger `25b10dec320f58528702fad23d8bde232e111e65` is remote exact
+  and anonymously returns 404. Manuscript and reference hashes are unchanged.
+- This provenance-only synchronization opens no active problem, method, model,
+  compute, result or manuscript claim.
+
 ## 2026-08-12 · ADAM patch-fold release and segmentation-prior reappraisal
 
 - Froze GitHub release v1.0 as 35 assets/61,506,611,200 bytes with canonical
