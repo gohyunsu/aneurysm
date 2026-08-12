@@ -1,7 +1,15 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.8 [P1 v2](../configs/aneumo_response_fidelity_p1_template_v2.json)
+> baseline boundary:** Primary pair는 여전히 direct
+> MeshGraphNet 대 anchor-residual DeltaPhi이며 proposal architecture가 아니다.
+> V2는 모델별 세 checkpoint를 중복 없이 배정하고, 두 learned member 각각이
+> power-law field control보다 2% 이상 열등하지 않음을 one-sided 95% upper
+> bound로 요구한다. 이 competence gate가 없으면 낮은 response error가 단순한
+> underfit/over-smoothing 산물일 수 있다. V2도 비활성이고 model code/GPU는 0이다.
+
 > **Schema 11.8 P1 baseline boundary:** P1의
-> [설계 템플릿](../configs/aneumo_response_fidelity_p1_template_v1.json)은 proposal
+> historical [v1 설계 템플릿](../configs/aneumo_response_fidelity_p1_template_v1.json)은 proposal
 > architecture가 아니라 failure falsifier다. 동일 정보 집합을 쓰는 conditional MLP,
 > anchor-conditioned DeepONet, DeltaPhi-style residual과 anchor-conditioned
 > MeshGraphNet을 2M±10% parameter, 20,000 update, 동일 node-condition budget과 5 seed로

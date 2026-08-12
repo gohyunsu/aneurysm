@@ -188,18 +188,31 @@
           <p>
             Response 지표를 숨긴 calibration 단계에서 두 모델의 field-error common
             support를 찾고, log scale의 25%, 50%, 75% iso-error 수준만 고릅니다.
-            가까운 checkpoint가 목표의 <code>log(1.01)</code> 밖이면 그 cell은 버리고
-            다른 수준으로 대체하거나 caliper를 넓히지 않습니다. Outer family에서는
-            paired log field-error-ratio 90% CI 전체가
-            <code>±log(1.01)</code> 안에 들어야 field-equivalent입니다. Primary는
-            direct MeshGraphNet 대 anchor-residual DeltaPhi 한 쌍뿐이며, 세 수준 × 두
-            endpoint의 6개 검정을 20 family exact two-sided sign-flip p-value와
-            Holm으로 판정합니다. Unadjusted family-bootstrap 95% CI zero exclusion,
-            최소 10% response gap과 4/5 seed 동일 방향도 함께 요구합니다.
+            각 모델은 세 수준에 서로 다른 predeclared checkpoint를 한 번에 공동
+            배정하며, checkpoint 재사용은 금지됩니다. 목표에서
+            <code>log(1.01)</code>보다 먼 수준은 다른 checkpoint나 수준으로 바꾸지
+            않고 부적격으로 둡니다. Median 50% 수준의 paired-response와 tangent만
+            co-primary이고, 25%와 75%는 primary failure를 구제하지 못하는
+            sensitivity입니다. Median match가 부적격이면 screen을 닫습니다.
+          </p>
+          <p>
+            Outer family에서는 paired log field-error-ratio 90% stability interval이
+            <code>±log(1.01)</code> 안에 들어야 합니다. 또한 각 모델의 power-law
+            대비 <code>log(model error / control error)</code> one-sided 95% stability
+            upper bound가 <code>log(1.02)</code> 이하여야 field-competent입니다. Primary는
+            direct MeshGraphNet(left) 대 anchor-residual DeltaPhi(right) 한 쌍이며,
+            positive <code>log(left/right)</code>는 DeltaPhi의 response error가 더
+            낮다는 뜻입니다. 두 co-primary 모두 stability interval zero exclusion,
+            최소 10% response gap과 4/5 nonzero seed 동일 방향을 요구합니다. Zero
+            tie는 세지 않습니다.
             MLP/DeepONet 비교는 secondary라 primary failure를 구제하지 않습니다.
             1% band는 field imbalance를 숨기지 못하게 하고 10% floor는 통계적으로만
-            유의한 사소한 차이를 막습니다.
-            하나도 통과하지 않으면 이 논문 identity를 닫습니다. P1 전체 GPU cap은
+            유의한 사소한 차이를 막습니다. 현재 model-contrast variance가 없으므로
+            formal power를 주장하지 않습니다. 더 근본적으로 cross-fit 모델의 학습
+            family가 겹치므로 20 family를 독립 단위로 둔 exact sign-flip/Holm 또는
+            nominal confidence interval도 주장하지 않습니다. P1은 개발 screen이며,
+            음성 결과 뒤 sample 수를 키워 같은 버전을 수리하지 않습니다.
+            두 co-primary 중 하나라도 실패하면 이 논문 identity를 닫습니다. P1 전체 GPU cap은
             160시간이지만 이는 미래 상한일 뿐 현재 GPU 승인이나 job이 아닙니다.
           </p>
           <p>
@@ -227,7 +240,7 @@
             <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
           </p>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">직접 선행·six-way score·P0/P1·ISBI claim 삭제 규칙 전체 읽기 ↗</a>
-          <a href="../configs/aneumo_response_fidelity_p1_template_v1.json">P1 iso-error matching·통계·중단 계약 읽기 ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p1_template_v2.json">P1 v2 iso-error matching·통계·중단 계약 읽기 ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Fail-closed aggregate evaluator 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">

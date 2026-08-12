@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 inactive P1 v2 red-team:** Preserve unexecuted v1
+> template/validator at SHA-256 `07d7b89e…32d06` / `b14e4c8d…4d9fa`.
+> Current non-authoritative v2 is
+> `configs/aneumo_response_fidelity_p1_template_v2.json`. It requires distinct
+> checkpoint assignment across three iso-levels, fixes the median level's two
+> endpoints as co-primary and makes low/high levels non-rescuing sensitivity.
+> Cross-fit overlap prohibits exact sign-flip, Holm, nominal-coverage and
+> formal-power claims. V2 also fixes response log-ratio direction and zero-seed
+> tie handling, and defines power-law field competence as a one-sided 95%
+> stability upper model/control log-error ratio ≤ `log(1.02)`. V1 had no
+> execution, prediction or response read. V2 is also non-executable; real P0
+> remains 0/11 and P1/model/GPU/claim remain 0. This update makes zero server,
+> transfer, PBS/GPU or monitoring action. Never access `junjinyong`; do not
+> retry `introai9` before verified external change.
+> Dependency-complete regression passes 536/536 tests; protocol retains 111
+> invariant groups at canonical SHA-256
+> `df65f22a1c3500effe5fc585201eb191560d70549897d1f413c661d534b5166d`.
+
 > **2026-08-12 schema 11.8 inactive P1/private synchronization:** Exact public
 > scientific source `fdef0955907cd7ec617a924e13c92c47dd2df205` passed Quality
 > `31597528606` and Pages `31597524201`. Private planning head
@@ -13,8 +31,9 @@
 > verified external change.
 
 > **2026-08-12 schema 11.8 inactive P1 design hardening:** Public
-> `configs/aneumo_response_fidelity_p1_template_v1.json` is a non-authoritative,
-> non-executable template, not P1 registration. It fixes historical-train-20
+> historical `configs/aneumo_response_fidelity_p1_template_v1.json` is a
+> superseded, non-authoritative and non-executable template—not P1
+> registration. It fixes historical-train-20
 > family cyclic 5-fold 12/4/4 fit/calibration/outer rotation; response-blind
 > log-field iso-error levels 25/50/75%; one mechanism-linked primary model pair;
 > exact log(1.01) outer field equivalence; six-cell Holm FWER 0.05 with exact

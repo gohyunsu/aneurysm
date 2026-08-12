@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-12 P1 v2 paper contract:** Technical paper에는 checkpoint search
+> mechanics를 장황하게 싣지 않는다. 다만 결과가 활성화되면 Methods에 세 문장으로
+> 충분히 재현 가능하게 보고한다: duplicate-free response-blind iso-error matching,
+> median-level paired/tangent co-primary screen, two-sided 90% field stability
+> plus one-sided 95% power-law competence stability. Low/high levels은
+> sensitivity이며 primary를 구제하지 않는다. Positive contrast의 의미와 4/5 seed
+> tie rule도 표 주석에 고정한다. Cross-fit 20 family에서 exact p-value나 formal power를
+> 주장하지 않고 v1→v2 운영 이력은 기술 4쪽에서 제외한다. 현재 manuscript
+> claim은 0이다.
+
 > **2026-08-12 official recheck and P1 page contract:** 공식 ISBI 2027 author
 > page를 재확인했다. Single-blind, 첫 4쪽의 모든 technical content, $200 optional
 > fifth page의 ethics/acknowledgments/COI/references-only 조건과 2026-10-26

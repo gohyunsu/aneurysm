@@ -166,11 +166,13 @@ family IDs, validation/test fields, checkpoints, predictions and GPU access.
 
 ## 6. P1 and model-selection falsifier
 
-P1 is not registered or executable. Its
-[inactive design template](../configs/aneumo_response_fidelity_p1_template_v1.json)
-exists only to remove post-result ambiguity before real P0 evidence. If P0
-passes all 11 checks, a separate registered version must be committed before
-any model prediction is produced.
+P1 is not registered or executable. The current
+[inactive v2 design template](../configs/aneumo_response_fidelity_p1_template_v2.json)
+exists only to remove post-result ambiguity before real P0 evidence. The
+[unexecuted v1 template](../configs/aneumo_response_fidelity_p1_template_v1.json)
+is immutable history: no model prediction or response endpoint was read before
+v2 superseded it. If P0 passes all 11 checks, a separate executable version
+must still be registered and committed before any model prediction is produced.
 
 The template uses only the historical 20 train base families. A seeded
 permutation creates five equal blocks; fold \(k\) uses block \(k\) as outer,
@@ -184,34 +186,61 @@ V1e is diagnostic only because it lacks the same-case anchor input.
 
 Response endpoints are unavailable during selection. The sole primary
 mechanism contrast is direct field prediction by anchor-conditioned
-MeshGraphNet versus DeltaPhi-style anchor residual prediction. For each seed,
-calibration field-error common support defines 25%, 50% and 75% iso-error
-levels on the log scale. The nearest predeclared checkpoint must lie within
-`log(1.01)` of the target; an unmatched level is not replaced and its caliper
-is not widened. On outer families, the complete paired 90% interval for the
-family/seed-mean log field-error ratio must lie inside `±log(1.01)`. Both
-models must also be field-competent relative to power-law scaling.
+MeshGraphNet (left) versus DeltaPhi-style anchor residual prediction (right).
+Positive log response-error ratio, `log(left/right)`, therefore means lower
+DeltaPhi response error; a negative ratio means lower MeshGraphNet error.
 
-One pair × three levels × two primary endpoints forms six tests fixed in
-advance. Each cell uses the seed-mean paired log response-error contrast per
-outer family. Its primary p-value is the exact two-sided sign-flip test over
-all 20 outer-family contrasts; Holm controls family-wise error at 0.05.
-Family-cluster bootstrap with 5,000 replicates supplies an unadjusted 95%
-interval, which must exclude zero. A mismatch additionally needs a
-multiplicative response gap of at least 10% with the same direction in at least
-four of five seeds. MLP--DeltaPhi and DeepONet--DeltaPhi comparisons are
-secondary and cannot rescue the primary test. The 1% band is deliberately
-tight so “matched” cannot hide a meaningful field-accuracy imbalance; the 10%
-floor blocks statistically detectable but application-trivial differences.
-P1 remains a development falsifier rather than a final efficacy claim. Learned
-baselines use 2M±10% parameters, 20,000 equal node-condition update budgets and
-a total P1 cap of 160 GPU-hours; actual FLOPs, GPU-seconds, memory and latency
-must be reported. These numbers are future bounds, not current GPU authority.
+For each seed, calibration field-error common support defines 25%, 50% and 75%
+iso-error targets on the log scale. For each model, the three targets are
+matched *jointly* to three distinct predeclared checkpoints by minimum total
+absolute log distance, with a lexicographic checkpoint-ID tie break. Reusing a
+checkpoint across levels is forbidden. A model checkpoint farther than
+`log(1.01)` from its target makes that level unqualified; the level is not
+replaced and its caliper is not widened.
+
+On outer families, the complete fixed-seed 5,000-replicate family-bootstrap
+90% *stability interval* for the seed-mean paired log field-error ratio must
+lie inside `±log(1.01)`. Each primary model must also be field-competent
+against the train-fitted power-law control: the one-sided family-bootstrap 95%
+stability upper bound of
+`log(model field error / power-law field error)` must not exceed `log(1.02)`.
+This is a directed screen, not an informal “within 2%” statement and not a
+nominal-coverage confidence interval.
+
+The median 50% iso-error level is the only primary level. Paired-response L2
+and discrete-tangent L2 are co-primary: both stability intervals must exclude
+zero in the same direction, both absolute log-error ratios must imply at least
+a 10% gap, and each direction must recur in at least four of five nonzero seed
+contrasts. Exact zero seed ties do not count. The 25% and 75% levels are fixed
+sensitivity analyses and cannot rescue a median-level failure. An unqualified
+median match closes the screen; it cannot be replaced by a low/high level or a
+wider caliper. MLP--DeltaPhi and DeepONet--DeltaPhi comparisons are likewise
+secondary and cannot rescue the primary pair.
+
+This simplification corrects a deeper v1 error. Outer predictions are
+cross-fitted, so models for different outer families share training families.
+The 20 family contrasts are therefore not independent exact-null units.
+Ordinary cross-validation intervals can undercover because fold errors are
+correlated ([Bates, Hastie, and Tibshirani](https://doi.org/10.1080/01621459.2023.2197686)).
+V2 consequently forbids exact sign-flip p-values, Holm claims, nominal
+bootstrap coverage and formal power. The stability intervals, 10% effect floor
+and 4/5 seed rule are deliberately conservative development criteria, not
+confirmatory inference. A negative P1 cannot be repaired by enlarging the
+sample after the outcome is read.
+
+The 1% equivalence band prevents a meaningful field-accuracy imbalance from
+being hidden by the word “matched”; the 10% floor blocks application-trivial
+differences. P1 remains a development falsifier rather than a final efficacy
+claim. Learned baselines use 2M±10% parameters, 20,000 equal node-condition
+update budgets and a total P1 cap of 160 GPU-hours; actual FLOPs, GPU-seconds,
+memory and latency must be reported. These numbers are future bounds, not
+current GPU authority. Confirmatory intervals and hypothesis tests are
+reserved for the separately frozen ≥50-family evaluation.
 
 The direction stops if either condition holds:
 
-- no predeclared pair-level cell is field-equivalent and response-distinct under
-  all frozen criteria; or
+- the median pair is not field-equivalent, competent and response-distinct on
+  both co-primary endpoints under all frozen stability criteria; or
 - execution is incomplete. In that case the exact P1 closes with no scientific
   verdict, partial aggregation or same-version repair/rerun.
 

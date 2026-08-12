@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.8 inactive P1 v2:** This is a local design red-team only. V1 was
+> never executed and v2 is also non-executable. Duplicate-free matching,
+> power-law competence, invalid-cell multiplicity and contrast direction were
+> fixed without a scientific-server/scheduler query, transfer, PBS submission,
+> model prediction, response read, monitoring or GPU action. Real P0 stays
+> 0/11. Do not retry `introai9` before verified external change and never access
+> `junjinyong`.
+
 > **Schema 11.8 inactive P1 compute ceiling:** The new P1 design template is
 > not executable and authorizes no model code or allocation. Its 160 GPU-hour
 > value is a future hard cap only if a real 11/11 P0 pass first permits a

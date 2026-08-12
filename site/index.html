@@ -62,7 +62,7 @@
           <a class="button primary" href="learn.html#response-fidelity">처음부터 이해하기</a>
           <a class="button ghost" href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">연구 질문·선행·실험 전체 읽기 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v2.json">등록된 method-free P0 v2 ↗</a>
-          <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v1.json">비활성 P1 matching template ↗</a>
+          <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v2.json">비활성 P1 v2 matching contract ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
@@ -504,17 +504,23 @@
             secant를 비교하도록 고쳤습니다. Rank가 같아도 크기가 8배 틀릴 수 있어
             symmetric magnitude difference CI 상한 0.25도 추가했습니다. V2의 11개
             check가 모두 통과해야 baseline-only P1을 열 뿐입니다.
-            P1은 아직 등록되지 않았지만 matching 정의는 미리 고정했습니다. Train
-            20 family를 12 fit/4 calibration/4 outer로 순환하고, response를 숨긴 채
-            calibration field L2 common support의 25/50/75% 수준만 고릅니다. Outer
-            90% log-error-ratio CI 전체가 ±log(1.01) field-equivalence 안에 든
-            MeshGraphNet--DeltaPhi 한 쌍의 6개 primary cell에서만 exact family
-            sign-flip 검정, Holm 보정, 최소 10% response gap과 4/5 seed 방향을
-            검사합니다. MLP/DeepONet 비교는 secondary라 primary를 구제하지 않습니다. 차이가
-            없으면 논문 정체성과 architecture를 함께 닫습니다.
+            P1은 아직 등록되지 않았지만 matching과 추론 규칙은 미리 고정했습니다.
+            Train 20 family를 12 fit/4 calibration/4 outer로 순환하고, response를
+            숨긴 calibration field L2 common support에서 25/50/75% 수준을 정합니다.
+            각 모델은 세 수준에 서로 다른 checkpoint를 공동 배정하며 재사용은
+            금지됩니다. Median 수준의 paired-response와 tangent가 co-primary이고,
+            low/high 수준은 primary를 구제하지 못합니다. Outer 90% field-error
+            stability interval 전체가 ±log(1.01)에 들고, 각 모델의 power-law 대비
+            one-sided 95% stability upper error ratio가 log(1.02) 이하여야 합니다.
+            두 co-primary 모두 최소 10% response gap과 nonzero 4/5 seed 방향을
+            만족해야 합니다. Cross-fit model들의 training family가 겹치므로 exact
+            p-value, Holm, nominal coverage와 formal power는 주장하지 않습니다.
+            Positive MeshGraphNet/DeltaPhi log-ratio는 DeltaPhi가 더 낮은 error임을
+            뜻합니다. MLP/DeepONet은 secondary라 primary를 구제하지 않습니다.
+            차이가 없으면 논문 정체성과 architecture를 함께 닫습니다.
           </p>
           <a href="../configs/aneumo_response_fidelity_p0_v2.json">Registered P0 v2 contract ↗</a>
-          <a href="../configs/aneumo_response_fidelity_p1_template_v1.json">Inactive P1 matching template ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p1_template_v2.json">Inactive P1 v2 matching contract ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator ↗</a>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">지표·baseline·중단 근거 ↗</a>
         </div>

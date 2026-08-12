@@ -3,7 +3,7 @@ window.AURORA_DATA = Object.freeze({
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
     status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; the inactive P1 template fixes a cyclic train-20-family cross-fit, one mechanism-linked primary pair, response-blind iso-error matching, exact family sign-flip inference and multiplicity but does not register or authorize P1; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v2 fixes cyclic train-20-family cross-fitting, a direction-explicit primary pair, response-blind duplicate-free iso-error matching, median paired/tangent co-primary screening, non-rescuing low/high sensitivity and power-law competence while forbidding exact inference from dependent cross-fit contrasts; it does not register or authorize P1; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "Inactive P1 v2 closes selection and cross-fit inference loopholes",
+      copy: "Before any prediction or response endpoint, v2 preserves unexecuted v1 and forbids checkpoint reuse across the three iso-error levels. The median paired-response and tangent endpoints are co-primary; low/high levels cannot rescue failure. The MeshGraphNet/DeltaPhi log-ratio direction and zero-seed tie rule are explicit, and each learned model must have a one-sided 95% stability upper field-error ratio versus power-law no greater than log(1.02). Because cross-fit models share training families, exact sign-flip, Holm, nominal-coverage and formal-power claims are forbidden; P1 is a development screen only.",
+      status: "Inactive design v2 · regression 536/536 · 111 protocol invariants · v1 executed/prediction/response read 0 · real P0 0/11 · server/PBS/GPU/model/claim 0",
+      url: "../configs/aneumo_response_fidelity_p1_template_v2.json"
+    },
+    {
+      year: "2026.08",
       title: "The inactive P1 design and private no-claim ledger are synchronized",
       copy: "Exact public source fdef095… passed Quality 31597528606 and Pages 31597524201. Private planning head 62f5664… is remote exact and anonymously returns 404; manuscript and reference bytes remain unchanged. The deployed site exposes the one-pair, six-cell primary contract. This synchronization creates no P0 result, P1 registration, model, GPU run, outer test or paper claim.",
       status: "Public CI/Pages success · private remote exact/anonymous 404 · manuscript unchanged · real P0 0/11",
@@ -50,9 +57,9 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       year: "2026.08",
-      title: "The future P1 mismatch test is made outcome-blind before P0 evidence",
+      title: "Historical P1 v1 first made the mismatch test outcome-blind",
       copy: "A non-authoritative template uses only the historical 20 train families in a seeded five-block cycle with 12 fit, 4 calibration and 4 outer families. Calibration field error alone defines 25/50/75% iso-error levels. The sole primary mechanism contrast is direct MeshGraphNet versus anchor-residual DeltaPhi; MLP and DeepONet pairs are secondary and cannot rescue it. Outer 90% log-error-ratio intervals must fit inside ±log(1.01). Six primary cells use exact 20-family two-sided sign-flip p-values, Holm control, an unadjusted bootstrap interval excluding zero, at least 10% multiplicative separation and the same direction in four of five seeds. Historical validation/test and future confirmation families remain sealed.",
-      status: "Design template only · regression 526/526 · real P0 0/11 · P1 registration/model prediction/response metric/PBS/GPU/claim 0",
+      status: "Preserved unexecuted v1 history · superseded by inactive v2 · real P0 0/11 · P1/model/PBS/GPU/claim 0",
       url: "../configs/aneumo_response_fidelity_p1_template_v1.json"
     },
     {
@@ -1315,6 +1322,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "protocol",
+      title: "Inactive P1 v2 makes matching, competence and inference fail closed",
+      copy: "Unexecuted v1 is retained as immutable history. V2 jointly assigns three distinct checkpoints per model, makes median paired-response and tangent co-primary, keeps low/high levels non-rescuing, fixes the MeshGraphNet/DeltaPhi contrast direction and excludes zero seed ties. Power-law competence is a one-sided 95% family-bootstrap stability upper model/control log-error ratio at most log(1.02). Cross-fit overlap forbids exact p-values, Holm, nominal coverage and formal power. Dependency-complete regression passes 536/536 with 111 protocol invariant groups. No prediction, response endpoint, scientific server, PBS/GPU, model or claim was opened; real P0 remains 0/11.",
+      files: ["configs/aneumo_response_fidelity_p1_template_v2.json", "src/aurora/aneumo_response_fidelity_p1_template_v2.py", "tests/test_aneumo_response_fidelity_p1_template_v2.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "site/index.html", "site/learn.html"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 inactive P1 v2 red-team:** The unexecuted v1 template is
+> preserved and prospectively superseded by
+> [v2](configs/aneumo_response_fidelity_p1_template_v2.json). V2 jointly assigns
+> three distinct checkpoints per model, fixes the median level's two endpoints
+> as co-primary and makes the low/high levels non-rescuing sensitivity checks.
+> Because cross-fit models share training families, v2 forbids exact sign-flip,
+> Holm, nominal-coverage and formal-power claims in this development screen.
+> Positive response log-ratio means lower DeltaPhi error; each learned model's
+> one-sided 95% stability upper field-error ratio versus power-law must be at
+> most `log(1.02)`. No prediction, response metric, server, PBS or GPU was used;
+> real P0 remains 0/11 and P1 remains unregistered. Dependency-complete
+> regression passes 536/536 tests; the protocol retains 111 invariant groups
+> at canonical SHA-256
+> `df65f22a1c3500effe5fc585201eb191560d70549897d1f413c661d534b5166d`.
+
 > **Schema 11.8 inactive P1/private synchronization:** Exact public scientific
 > source `fdef0955907cd7ec617a924e13c92c47dd2df205` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31597528606)
@@ -10,9 +25,9 @@
 > `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
 > No title, abstract claim, method, result table, figure or C21 was activated.
 
-> **Schema 11.8 P1 design hardening:** Added a non-authoritative,
-> P0-gated [P1 template](configs/aneumo_response_fidelity_p1_template_v1.json)
-> and deterministic validator. It fixes a cyclic train-20-family 12/4/4
+> **Schema 11.8 P1 design hardening:** The preserved
+> [historical P1 v1 template](configs/aneumo_response_fidelity_p1_template_v1.json)
+> and deterministic validator fixed a cyclic train-20-family 12/4/4
 > cross-fit, one mechanism-linked primary model pair, response-blind
 > 25/50/75% iso-error matching, exact 1% log-ratio field equivalence, a 10%
 > response-gap floor, Holm correction over six primary cells, exact family

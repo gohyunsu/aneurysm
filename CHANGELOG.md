@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · inactive P1 v2 closes five analysis loopholes
+
+- Preserved unexecuted P1 v1 and created a separate non-authoritative v2 before
+  any prediction or response metric was read.
+- V2 jointly assigns three distinct checkpoints per model; duplicated or
+  caliper-failing levels cannot be substituted. The median level's paired-
+  response and tangent endpoints are co-primary; low/high levels are
+  non-rescuing sensitivity checks.
+- Defined response contrast direction and seed ties. Field competence versus
+  power-law now requires a one-sided 95% family-bootstrap stability upper
+  model/control log-error ratio no greater than `log(1.02)`.
+- Removed v1's invalid exact-inference claim: overlapping cross-fit training
+  sets preclude independent-family exact sign flipping, Holm p-values, nominal
+  bootstrap coverage and formal power. P1 is a development screen only;
+  confirmatory inference is reserved for ≥50 untouched families.
+- No scientific server, PBS/GPU, model or claim was opened; real P0 is 0/11.
+- Dependency-complete regression passes 536/536 tests; the protocol retains
+  111 invariant groups at canonical SHA-256 `df65f22a…b5166d`.
+
 ## 2026-08-12 · schema 11.8 · inactive P1 and private ledger synchronized
 
 - Exact public source `fdef095…` passed Quality `31597528606` and Pages

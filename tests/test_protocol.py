@@ -58,23 +58,43 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["p0_submitted"])
         self.assertFalse(audit["p0_pbs_wrapper_submittable_now"])
         self.assertFalse(audit["p1_registered"])
+        self.assertTrue(audit["p1_design_v1_superseded_pre_execution"])
+        self.assertEqual(
+            audit["p1_design_v1_template"],
+            "configs/aneumo_response_fidelity_p1_template_v1.json",
+        )
+        self.assertEqual(
+            audit["p1_design_template"],
+            "configs/aneumo_response_fidelity_p1_template_v2.json",
+        )
         self.assertTrue(audit["p1_design_template_non_authoritative"])
         self.assertTrue(
             audit["p1_design_family_crossfit_uses_historical_20_train_families_only"]
         )
         self.assertTrue(audit["p1_design_response_blind_iso_error_matching"])
+        self.assertTrue(audit["p1_design_duplicate_free_checkpoint_assignment"])
         self.assertEqual(
-            audit["p1_design_predeclared_primary_pair_level_endpoint_cells"], 6
+            audit["p1_design_predeclared_primary_pair_level_endpoint_cells"], 2
         )
+        self.assertEqual(audit["p1_design_predeclared_nonrescuing_sensitivity_cells"], 4)
         self.assertEqual(
             audit["p1_design_field_equivalence_margin_log_ratio"],
             0.009950330853168092,
         )
-        self.assertTrue(audit["p1_design_exact_family_sign_flip_primary_test"])
+        self.assertEqual(
+            audit["p1_design_power_law_competence_margin_log_ratio"],
+            0.01980262729617973,
+        )
+        self.assertTrue(
+            audit["p1_design_median_co_primary_and_nonrescuing_sensitivity_roles"]
+        )
+        self.assertTrue(audit["p1_design_contrast_direction_and_seed_ties_explicit"])
+        self.assertFalse(audit["p1_design_crossfit_exact_null_inference_allowed"])
+        self.assertFalse(audit["p1_design_confirmatory_or_paper_efficacy_claim_allowed"])
+        self.assertFalse(audit["p1_design_formal_power_claim_allowed"])
         self.assertEqual(
             audit["p1_design_minimum_multiplicative_response_gap"], 0.1
         )
-        self.assertEqual(audit["p1_design_holm_familywise_alpha"], 0.05)
         self.assertEqual(audit["p1_design_minimum_same_direction_seeds"], 4)
         self.assertEqual(audit["p1_design_training_seed_count"], 5)
         self.assertEqual(audit["p1_design_total_gpu_hour_cap"], 160.0)
@@ -91,6 +111,13 @@ class ProtocolTests(unittest.TestCase):
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
             "p0_executable"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
+            "p1_design_crossfit_exact_null_inference_allowed"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
             validate_protocol(candidate)

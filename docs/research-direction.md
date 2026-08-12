@@ -1,8 +1,18 @@
 # AURORA 연구 방향
 
+> **Schema 11.8 P1 v2 red-team:** P1 v1은 실행되지 않았지만 distinct-checkpoint,
+> power-law competence interval, primary/sensitivity 역할, contrast direction과
+> cross-fit dependence가 완전히 닫히지 않았다. 결과를 보기 전에 별도 v2로
+> supersede했다. V2는 median level의 두 endpoint를 co-primary로 두고 low/high
+> level은 구제 불가능한 sensitivity로 내리며, 동일 checkpoint의 iso-level 재사용을
+> 금지한다. Positive log-ratio는 DeltaPhi가 더 낮은 response error임을 뜻하고 zero
+> seed는 4/5 direction count에 들어가지 않는다. Cross-fit overlap 때문에 exact
+> p-value, Holm, nominal coverage와 formal power는 금지한다. 이는 novelty가 아니라
+> selection-bias와 통계적 과장 방지 장치이며 P0/P1/GPU/claim을 열지 않는다.
+
 > **Schema 11.8 P1 design hardening:** P1은 아직 등록·실행 가능한 실험이 아니다.
 > 다만 향후 결과를 보고 “비슷한 field error”의 뜻을 바꾸지 못하도록
-> [비활성 설계 템플릿](../configs/aneumo_response_fidelity_p1_template_v1.json)을
+> historical [비활성 v1 템플릿](../configs/aneumo_response_fidelity_p1_template_v1.json)을
 > 먼저 고정했다. 기존 train 20 family를 seeded five-block cyclic rule로 나눠
 > fold마다 12 fit/4 calibration/4 outer family를 사용하고, response를 보지 않은
 > calibration field L2만으로 세 iso-error level을 정한다. Primary는 direct

@@ -1,8 +1,21 @@
 # AURORA v2 사전 실험 프로토콜
 
-> **Schema 11.8 inactive P1 design template:** P1 registration은 여전히 false지만,
-> matching ambiguity는 [template v1](../configs/aneumo_response_fidelity_p1_template_v1.json)에
-> 미리 제거했다. Historical train 20 family를 5-fold nested development로 사용해
+> **Schema 11.8 inactive P1 v2:** V1은 실행·prediction·response read 없이
+> 보존하고 [v2](../configs/aneumo_response_fidelity_p1_template_v2.json)로
+> supersede한다. 각 model은 세 iso-level에 서로 다른 checkpoint를 joint minimum-
+> distance/lexicographic tie-break로 배정한다. Median level의 paired-response와
+> tangent를 co-primary로 두고 low/high level은 primary를 구제하지 못한다. Outer
+> field equivalence는 90% percentile stability interval이 `±log(1.01)` 안에
+> 있어야 하고, 각 model의 power-law 대비 competence는 one-sided 95% stability upper
+> `log(model error / power-law error) ≤ log(1.02)`를 요구한다. Positive response
+> contrast는 DeltaPhi error가 더 낮음을 뜻하며 seed zero tie는 4/5에 세지 않는다.
+> Cross-fit 학습 집합이 겹치므로 exact sign-flip/Holm p-value와 nominal coverage,
+> formal power를 주장하지 않는다. P1은 개발 screen이며 최종 추론이 아니다.
+
+> **Schema 11.8 inactive P1 design history:** P1 registration은 여전히 false다.
+> Superseded [template v1](../configs/aneumo_response_fidelity_p1_template_v1.json)은
+> 주요 matching 골격을 먼저 고정했고, v2가 남아 있던 다섯 가지 선택·추론 여지를
+> 결과 확인 전에 닫았다. Historical train 20 family를 5-fold nested development로 사용해
 > fold당 12 fit/4 rotating calibration/4 outer family를 둔다. Seeded permutation을
 > 5개 equal block으로 나눈 뒤 outer block k, calibration block k+1(mod 5), 나머지
 > 3개 fit block으로 고정한다. Calibration response는
