@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.1":
-        raise ProtocolError("The current research-state schema must be version 11.1.")
+    if protocol["schema_version"] != "11.3":
+        raise ProtocolError("The current research-state schema must be version 11.3.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_topaneu_registered_release_batch_rejected_best_31_5_novelty_0_5_no_p0_no_compute"
+        != "no_active_problem_no_verified_dataset_introai9_inventory_incomplete_no_asset_verdict_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "mechanistic_treatment_and_growth_asset_reappraisal",
+            "introai9_dataset_inventory_audit",
             "endovascular_collision_anticipation_and_release_reappraisal",
             "molecular_biomarker_and_treatment_specific_outcome_reappraisal",
             "structured_vessel_and_embargoed_4dflow_reappraisal",
@@ -292,13 +294,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_topaneu_registered_release_batch_rejected_no_method_no_compute_surface_vector_inactive"
+        != "no_active_problem_no_verified_dataset_introai9_inventory_incomplete_no_method_no_compute_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_topaneu_registry_design_live_page_code_and_manifest_metadata_only_no_terms_medical_image_mask_or_annotation_payload"
+        != "public_bibliographic_metadata_plus_introai9_inventory_attempt_without_remote_listing_no_verified_training_payload_or_same_patient_join"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -308,19 +310,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_source_or_whitelisted_material_task_asset_audit_only_no_payload_architecture_or_compute"
+        != "fresh_unrelated_problem_level_source_or_versioned_same_patient_mechanics_response_outcome_asset_reaudit_only_no_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md"
+        != "docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "topaneu_official_metric_instance_collapse_aware_evaluation_rejected_at_31_5_total_and_novelty_floors"
+        != "injection_invariant_qa_to_six_month_occlusion_rejected_at_27_5_direct_prior_and_asset_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The TopAneu registered-design/release batch must remain rejected and surface-vector "
-            "must remain closed until a material release after its exact CPU P0 ended execution-incomplete; "
-            "no active lead, repair, method, GPU, outer test or claim may remain."
+            "The introai9 inventory is incomplete, the mechanistic treatment/growth batch "
+            "must remain rejected, and surface-vector must remain inactive until a versioned "
+            "same-patient asset exists; no active lead, repair, method, GPU, outer test or "
+            "claim may remain."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
     _require_keys(
@@ -380,7 +383,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 31.5
+        or admission_v2["current_batch_best_score"] != 27.5
         or admission_v2["current_batch_best_residual_novelty"] != 0.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
@@ -390,6 +393,222 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    mechanistic = problem_selection[
+        "mechanistic_treatment_and_growth_asset_reappraisal"
+    ]
+    _require_keys(
+        mechanistic,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "coil_mechanics_doi", "coil_mechanics_synthetic_sacs",
+            "coil_mechanics_reaction_force_source_r2",
+            "coil_mechanics_elastic_energy_source_r2",
+            "coil_mechanics_public_patient_geometry_device_outcome_join",
+            "qa_occlusion_doi", "qa_occlusion_source_patients",
+            "qa_occlusion_target_months", "qa_occlusion_source_auc_uncorrected",
+            "qa_occlusion_source_auc_corrected",
+            "qa_occlusion_public_patient_rows_images_split",
+            "longitudinal_growth_doi", "longitudinal_growth_aneurysms",
+            "longitudinal_growth_matched_pairs",
+            "longitudinal_growth_timepoints_per_aneurysm",
+            "longitudinal_growth_public_image_mesh_cfd_manifest",
+            "amplified_wall_motion_doi", "amplified_wall_motion_growing_cases",
+            "amplified_wall_motion_stable_cases",
+            "amplified_wall_motion_public_field_motion_growth_asset",
+            "automated_initiation_doi", "automated_initiation_cases",
+            "automated_initiation_initial_failures_manually_resolved",
+            "automated_initiation_public_casewise_failure_contract",
+            "particle_transport_doi", "particle_transport_idealized_anatomies",
+            "particle_transport_configurations",
+            "particle_transport_clinical_outcome_asset",
+            "same_patient_geometry_device_immediate_response_fixed_time_outcome_join_public",
+            "candidates", "subscription_full_text_accessed",
+            "supplement_payload_accessed",
+            "patient_image_or_geometry_payload_accessed",
+            "clinical_row_or_device_payload_accessed",
+            "surface_vector_question_retained_as_inactive_hypothesis",
+            "historical_surface_vector_source_score_or_job_relabelled",
+            "historical_surface_vector_p0_repaired_or_rerun", "p0_registered",
+            "p1_registered", "method_selected", "architecture_selected",
+            "scientific_server_queried", "gpu_training_authorized",
+            "outer_test_authorized", "submission_identity_active",
+            "execution_server", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "source_watch_added", "next_allowed_action",
+        ],
+        "mechanistic treatment and growth asset reappraisal",
+    )
+    expected_mechanistic_candidates = [
+        ("injection_invariant_qa_to_six_month_occlusion", 27.5),
+        ("longitudinal_hemodynamics_to_future_growth", 25.5),
+        ("patient_family_disjoint_coil_mechanics_transport", 24.0),
+        ("amplified_wall_motion_cfd_growth_mechanism", 23.5),
+        ("coil_mechanics_to_actual_followup_occlusion", 23.0),
+        ("particle_regime_guided_therapeutic_delivery", 22.5),
+    ]
+    if (
+        mechanistic["status"]
+        != "fresh_problem_level_batch_rejected_best_27_5_no_same_patient_mechanics_response_outcome_join"
+        or mechanistic["audit_document"]
+        != "docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md"
+        or mechanistic["automatic_selection_threshold"] != 32.0
+        or mechanistic["best_candidate_id"]
+        != "injection_invariant_qa_to_six_month_occlusion"
+        or mechanistic["best_score"] != 27.5
+        or mechanistic["best_residual_novelty_score"] != 3.0
+        or mechanistic["all_candidate_scores"]
+        != [27.5, 25.5, 24.0, 23.5, 23.0, 22.5]
+        or mechanistic["conditional_source_lead_count"] != 0
+        or mechanistic["primary_problem_selected"] is not False
+        or mechanistic["paper_identity_active"] is not False
+        or mechanistic["coil_mechanics_doi"] != "10.1063/5.0312971"
+        or mechanistic["coil_mechanics_synthetic_sacs"] != 500
+        or mechanistic["coil_mechanics_reaction_force_source_r2"] != 0.74
+        or mechanistic["coil_mechanics_elastic_energy_source_r2"] != 0.68
+        or mechanistic["coil_mechanics_public_patient_geometry_device_outcome_join"]
+        is not False
+        or mechanistic["qa_occlusion_doi"] != "10.1136/jnis-2025-023416"
+        or mechanistic["qa_occlusion_source_patients"] != 458
+        or mechanistic["qa_occlusion_target_months"] != 6
+        or mechanistic["qa_occlusion_source_auc_uncorrected"] != 0.60
+        or mechanistic["qa_occlusion_source_auc_corrected"] != 0.79
+        or mechanistic["qa_occlusion_public_patient_rows_images_split"] is not False
+        or mechanistic["longitudinal_growth_aneurysms"] != 34
+        or mechanistic["longitudinal_growth_matched_pairs"] != 17
+        or mechanistic["longitudinal_growth_timepoints_per_aneurysm"] != 3
+        or mechanistic["longitudinal_growth_public_image_mesh_cfd_manifest"]
+        is not False
+        or mechanistic["amplified_wall_motion_growing_cases"] != 6
+        or mechanistic["amplified_wall_motion_stable_cases"] != 6
+        or mechanistic["amplified_wall_motion_public_field_motion_growth_asset"]
+        is not False
+        or mechanistic["automated_initiation_cases"] != 42
+        or mechanistic["automated_initiation_initial_failures_manually_resolved"]
+        != 5
+        or mechanistic["automated_initiation_public_casewise_failure_contract"]
+        is not False
+        or mechanistic["particle_transport_idealized_anatomies"] != 1
+        or mechanistic["particle_transport_configurations"] != 28
+        or mechanistic["particle_transport_clinical_outcome_asset"] is not False
+        or mechanistic[
+            "same_patient_geometry_device_immediate_response_fixed_time_outcome_join_public"
+        ]
+        is not False
+        or [
+            (item.get("id"), item.get("total"))
+            for item in mechanistic["candidates"]
+        ]
+        != expected_mechanistic_candidates
+        or any(
+            item.get("critical_axis_pass") is not False
+            or item.get("decision") in (None, "")
+            for item in mechanistic["candidates"]
+        )
+        or any(
+            mechanistic[key] is not False
+            for key in [
+                "subscription_full_text_accessed",
+                "supplement_payload_accessed",
+                "patient_image_or_geometry_payload_accessed",
+                "clinical_row_or_device_payload_accessed",
+                "historical_surface_vector_source_score_or_job_relabelled",
+                "historical_surface_vector_p0_repaired_or_rerun",
+                "p0_registered", "p1_registered", "method_selected",
+                "architecture_selected",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "login_node_gpu_command_executed",
+                "junjinyong_accessed", "source_watch_added",
+            ]
+        )
+        or mechanistic["surface_vector_question_retained_as_inactive_hypothesis"]
+        is not True
+        or mechanistic["scientific_server_queried"] is not True
+        or mechanistic["execution_server"] != "introai9"
+        or mechanistic["next_allowed_action"]
+        != "fresh_unrelated_problem_level_source_or_versioned_same_patient_mechanics_response_outcome_asset_reaudit_only_no_payload_p0_model_or_compute"
+    ):
+        raise ProtocolError(
+            "The mechanistic-treatment/growth batch must remain rejected: source-reported "
+            "mechanics, QA, growth, wall-motion and transport results cannot be joined or "
+            "relabelled as AURORA evidence, and no payload, P0, method or compute may open."
+    )
+    checks.append("mechanistic treatment and growth asset non-admission boundary")
+
+    server_inventory = problem_selection["introai9_dataset_inventory_audit"]
+    _require_keys(
+        server_inventory,
+        [
+            "status", "requested_by_user", "read_only_audit",
+            "login_endpoints_attempted", "tcp_port_22_reachable_endpoints",
+            "public_key_authentication_confirmed_endpoints",
+            "authenticated_account", "remote_shell_listing_obtained",
+            "sftp_listing_obtained", "remote_command_output_lines",
+            "known_project_root_from_prior_successful_audit",
+            "prior_bounded_inventory_confirmed_aneurysm_asset_traces",
+            "prior_intra_repository_skeleton_observed",
+            "prior_intra_mesh_payload_verified",
+            "prior_deep_candidate_manifest_search_completed",
+            "current_dataset_presence_or_absence_determined",
+            "current_direction_verified_train_cases",
+            "current_direction_verified_validation_cases",
+            "current_direction_verified_test_cases",
+            "same_patient_geometry_device_immediate_response_outcome_dataset_verified",
+            "pbs_job_submitted", "scheduler_queried",
+            "login_node_gpu_command_executed", "gpu_used",
+            "files_transferred", "junjinyong_accessed", "verdict",
+            "next_allowed_action",
+        ],
+        "introai9 dataset inventory audit",
+    )
+    if (
+        server_inventory["status"] != "execution_incomplete_no_asset_verdict"
+        or server_inventory["requested_by_user"] is not True
+        or server_inventory["read_only_audit"] is not True
+        or server_inventory["login_endpoints_attempted"] != 2
+        or server_inventory["tcp_port_22_reachable_endpoints"] != 2
+        or server_inventory["public_key_authentication_confirmed_endpoints"] != 1
+        or server_inventory["authenticated_account"] != "introai9"
+        or server_inventory["remote_command_output_lines"] != 0
+        or server_inventory["known_project_root_from_prior_successful_audit"]
+        != "/home/introai9/AAAI"
+        or server_inventory["prior_bounded_inventory_confirmed_aneurysm_asset_traces"]
+        is not True
+        or server_inventory["prior_intra_repository_skeleton_observed"] is not True
+        or server_inventory["verdict"]
+        != "inventory_incomplete_no_dataset_can_be_claimed_secured_or_absent"
+        or server_inventory["next_allowed_action"]
+        != "administrator_or_service_recovery_then_new_bounded_read_only_exact_path_inventory_no_recursive_repair_loop"
+        or any(
+            server_inventory[key] is not False
+            for key in [
+                "remote_shell_listing_obtained", "sftp_listing_obtained",
+                "prior_intra_mesh_payload_verified",
+                "prior_deep_candidate_manifest_search_completed",
+                "current_dataset_presence_or_absence_determined",
+                "same_patient_geometry_device_immediate_response_outcome_dataset_verified",
+                "pbs_job_submitted", "scheduler_queried",
+                "login_node_gpu_command_executed", "gpu_used",
+                "files_transferred", "junjinyong_accessed",
+            ]
+        )
+        or any(
+            server_inventory[key] != 0
+            for key in [
+                "current_direction_verified_train_cases",
+                "current_direction_verified_validation_cases",
+                "current_direction_verified_test_cases",
+            ]
+        )
+    ):
+        raise ProtocolError(
+            "The introai9 inventory must remain execution-incomplete and no-verdict: "
+            "port reachability or public-key authentication cannot be relabelled as a "
+            "dataset listing, and no PBS, GPU, transfer, or junjinyong action may open."
+        )
+    checks.append("introai9 incomplete dataset-inventory no-verdict boundary")
 
     collision = problem_selection[
         "endovascular_collision_anticipation_and_release_reappraisal"

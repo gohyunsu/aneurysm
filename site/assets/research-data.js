@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · endovascular collision-anticipation batch best 26.5/40 rejected; all six fail total or a critical novelty/target/asset/unit floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or versioned first-contact onset, warning-horizon and independent-unit contract audit; current collision detection and human segmentation do not create pre-contact or human-collision evidence, and surface-vector still requires material evidence plus method-free stability and a field-error-matched failure",
+    status: "Target locked · introai9 inventory incomplete/no asset verdict · verified current-direction train/validation/test 0/0/0 · mechanistic treatment/growth batch best 27.5/40 rejected · active lead/paper identity/method/model/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "after an external service-state change, a bounded exact-path introai9 inventory must establish files, schema, license and grouping; independently, the next scientific admission requires a fresh problem or versioned same-patient geometry–device–immediate-response–fixed-time-outcome asset, while surface-vector still needs material evidence, method-free stability and a field-error-matched failure",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,20 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Authentication is not a dataset: introai9 inventory remains incomplete",
+      copy: "A user-authorized read-only audit attempted both documented introai9 login boundaries. TCP/22 was reachable on both and public-key authentication was explicitly confirmed on one, but remote shell and SFTP sessions timed out before any directory listing or command output. Prior bounded history knows /home/introai9/AAAI, aneurysm-related traces and an IntrA repository skeleton, not verified IntrA mesh payload; its broader recursive search also did not complete. Neither dataset presence nor absence can be claimed.",
+      status: "Inventory incomplete · listing 0 lines · verified train/validation/test 0/0/0 · PBS/scheduler/GPU/transfer/junjinyong 0",
+      url: "../docs/server-execution.md"
+    },
+    {
+      year: "2026.08",
+      title: "Mechanics, immediate response and outcome are observed separately, not as one patient-level evidence chain",
+      copy: "A new coil-mechanics paper models 500 synthetic sacs; a 458-patient flow-diverter study standardizes angiographic injection and predicts six-month occlusion; a matched study follows 34 aneurysms in 17 pairs at three CTA timepoints; amplified MRI links wall-motion heterogeneity to directional WSS variability in 6 growing and 6 stable cases; automated initiation CFD reports 42 cases with five initial failures manually reconstructed; particle transport studies 28 configurations on one idealized anatomy. These are direct source contributions, but no public immutable asset joins pre-treatment geometry, actual device, immediate response and fixed-time outcome in the same lesion. Six rows score 27.5/25.5/24.0/23.5/23.0/22.5 and all fail a mandatory floor.",
+      status: "Best 27.5/40 rejected · same-patient join 0 · surface-vector inactive · payload/P0/model/server/GPU 0",
+      url: "../docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Present collision detection is not pre-contact warning, and human segmentation is not human collision evidence",
@@ -716,6 +730,7 @@ window.AURORA_DATA = Object.freeze({
   ],
   competition: [
     ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
+    ["Mechanism→outcome", "same-lesion geometry + actual device + immediate DSA + fixed-time endpoint", "coil mechanics / normalized QA / longitudinal CFD", "mechanics and immediate response jointly explain follow-up outcome", "rejected: no public immutable join"],
     ["Input", "weak outer set W; Y ⊆ W", "VP-UNet / FocalSegNet / WeakMed", "set-valued lesion support", "closed source formulation"],
     ["Uncertainty", "precise masks on disjoint subjects", "morphological conformal + lesion FNR", "valid monotone-morphometry interval", "not evaluated; no architecture"],
     ["Evaluation", "subject-level 246 weak + 38 precise", "COMPASS + partial identification", "tightness without invalid pseudo-truth", "P1 not authorized"],
@@ -878,6 +893,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "Mechanistic treatment/growth 2026 source group",
+      role: "source-rejected direct-prior group; not one joined dataset and not active training/confirmation data",
+      provenance: "500 synthetic coil sacs · 458 QA/6-month-occlusion patients · 34 aneurysms/17 matched longitudinal pairs · amplified-MRI growing 6/stable 6 · automated CFD 42 cases with five manually resolved initial failures · particle transport one idealized anatomy/28 configurations · public same-patient geometry–device–immediate-response–fixed-time-outcome join 0 · payload/P0/model/GPU 0"
+    },
     {
       name: "CathAction intervention dataset · exact HF 8b04056…",
       role: "watch-only intervention-safety/direct-prior release; not active training, human collision or anticipation data",
@@ -1195,6 +1215,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "data",
+      title: "Schema 11.3 records introai9 inventory as incomplete rather than secured or absent",
+      copy: "Both documented introai9 endpoints exposed TCP/22 and one explicitly completed public-key authentication, but shell and SFTP sessions returned no listing before timeout. Prior history establishes only a project root, aneurysm traces and an IntrA repository skeleton with unverified mesh payload. Verified current-direction train/validation/test counts remain 0/0/0. No PBS job, scheduler query, GPU command, transfer or junjinyong access occurred. Full regression passes 470 tests: 404 pass/66 optional skip and 105 protocol invariants. Private ledger 46ef9ff1fbb3880b552c06a964007611aac16925 is remote exact, PRIVATE and anonymously invisible; manuscript bytes are unchanged. Retry requires an external service-state change and exact bounded paths, not a broad recursive repair loop.",
+      files: ["configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/model-spec.md", "docs/research-direction.md", "docs/research-map.md", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 11.2 rejects a missing mechanics–response–outcome join before architecture or compute",
+      copy: "Six fresh primary sources were separated by cohort, unit and target time. Virtual coil mechanics uses 500 synthetic sacs; injection-standardized QA uses 458 treated patients with six-month occlusion; longitudinal growth uses 34 aneurysms in 17 matched pairs; amplified MRI uses 12 cases; automated initiation CFD uses 42 cases; particle transport uses one idealized anatomy. Source metrics are not AURORA results. No public asset joins pre-treatment geometry, actual device, immediate response and fixed-time outcome for the same lesion. Six candidates score 27.5/25.5/24.0/23.5/23.0/22.5 and all fail. Surface-vector job 115645 remains no-verdict and unrepaired. No payload, P0/P1, method, architecture, server, PBS/GPU, outer test or claim opened; no source watch was added.",
+      files: ["docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/research-direction.md", "docs/research-map.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/data-acquisition.md", "docs/server-execution.md", "docs/source-watch.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

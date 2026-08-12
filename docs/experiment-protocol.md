@@ -1,5 +1,19 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.3 experiment boundary:** No dataset-backed experiment can be
+> registered from the incomplete `introai9` inventory. TCP reachability and
+> authentication do not establish files, cases, schema, license or split.
+> Verified current-direction train/validation/test counts are 0/0/0; P0/P1,
+> PBS, GPU and outer test remain closed.
+
+> **Schema 11.2 experiment boundary:** No experiment is active. Public metadata
+> do not establish a same-patient geometry–device–immediate-response–outcome
+> contract, so no cross-source fusion P0 is valid. Source metrics are not
+> reproduced results. No scientific server was queried and no transfer, PBS,
+> GPU or monitoring occurred. A material versioned join may authorize only a
+> fresh method-free P0. Historical surface-vector `115645` remains closed and
+> is never repaired/rerun.
+
 > **Schema 11.1 experiment boundary:** No experiment is active. Do not join
 > TopAneu, accept terms, download payload or infer realized units from the
 > registered plan. A material future release must first expose lawful casewise

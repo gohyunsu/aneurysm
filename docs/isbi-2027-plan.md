@@ -1,5 +1,19 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.3 readiness:** The project has no verified train, validation or
+> test dataset for the current direction. A fresh `introai9` inventory reached
+> the network and authenticated one endpoint but obtained no shell/SFTP
+> listing, so it is execution-incomplete/no asset verdict. Do not write a data,
+> method, result or submission claim from an old directory trace.
+
+> **Schema 11.2 readiness:** A mechanism-to-outcome paper could be compelling
+> only if virtual device mechanics, immediate angiographic response and a
+> prespecified follow-up endpoint are observed for the same independent lesions.
+> Current sources are disconnected and the closest executable QA task is direct
+> prior. Do not write a title, contribution, architecture, method figure or
+> result table. Current paper identity remains null; source metrics remain
+> literature context, never AURORA evidence.
+
 > **Schema 11.1 readiness:** TopAneu is not an ISBI paper identity. Its scale
 > and held-out center make it a potentially strong future benchmark, but the
 > obvious anatomy-aware/multi-task methods are directly occupied and the

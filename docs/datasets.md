@@ -1,5 +1,24 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.3 verified-holdings boundary:** A fresh read-only `introai9`
+> inventory produced no remote listing: two login endpoints exposed TCP/22 and
+> one explicitly authenticated, but shell and SFTP sessions timed out. The last
+> bounded successful history knew `/home/introai9/AAAI`, aneurysm traces and an
+> IntrA repository skeleton, not verified IntrA mesh payload. Hence the server
+> inventory is incomplete and neither presence nor absence may be asserted.
+> Verified current-direction train/validation/test cases remain **0/0/0**.
+
+> **Schema 11.2 mechanistic-join boundary:** The audited sources report 500
+> synthetic coil sacs, 458 flow-diverter patients with 6-month occlusion, 34
+> aneurysms in 17 longitudinal pairs, 12 amplified-MRI cases, 42 workflow cases
+> and 28 particle configurations on one idealized anatomy. These counts belong
+> to different cohorts and units. No public release joins patient/lesion,
+> pre-treatment 3D geometry, actual device configuration, immediate DSA and a
+> fixed-time outcome. None is admitted as AURORA training or confirmation data.
+> The tracked local `data/` tree contains only `data/schema/README.md`; it is a
+> schema contract, not a patient/image/mesh/field payload. Therefore the active
+> direction has **zero locally staged train/validation/test cases**.
+
 > **Schema 11.1 TopAneu asset boundary:** Registered design = 500 train/350
 > private test, 200 public-source train and 50/20 planned gold vessel masks.
 > Realized public train = 417 scan/409 patient, with public-source count 68 and

@@ -1,5 +1,17 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.3 model decision: `null`.** A login endpoint and public-key
+> authentication are not a dataset. Because the current `introai9` inventory
+> returned no directory listing and verified train/validation/test counts are
+> 0/0/0, no GNN, operator, fusion model, loss or GPU implementation is selected.
+
+> **Schema 11.2 model decision: `null`.** Do not implement a virtual-coiling
+> GNN, angiography fusion transformer, growth operator or surface-vector stack.
+> The strongest residual needs a same-patient mechanics–immediate-response–
+> fixed-time-outcome target that is not public. A network cannot reconstruct a
+> missing join. Edge 1-form/Hodge/SE(3)/periodic modules remain unselected
+> controls for a separate inactive hypothesis.
+
 > **Schema 11.1 model decision: `null`.** No TopAneu network is selected.
 > Metric-aware training, hierarchy, type/location factorization, train-only
 > silver-vessel distillation, bifurcation uncertainty and center/modality

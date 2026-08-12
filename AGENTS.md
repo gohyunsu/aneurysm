@@ -1,5 +1,41 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 introai9 inventory no-verdict · schema 11.3:** User-authorized
+> read-only audit attempted the two documented `introai9` login boundaries.
+> TCP/22 was reachable on both; public-key authentication was confirmed on one.
+> Remote shell and SFTP sessions timed out before listing output, so current
+> dataset presence/absence is unresolved. Prior bounded history knows
+> `/home/introai9/AAAI`, aneurysm-related traces and an IntrA repository
+> skeleton, but not verified IntrA mesh payload. Do not relabel those traces as
+> an acquired dataset. Verified current-direction train/validation/test cases
+> are 0. No PBS, scheduler query, GPU, transfer or login-node GPU command ran.
+> `junjinyong` was not accessed and remains prohibited. Repeat only after a
+> service/admin state change, against exact paths; do not enter a recursive
+> local-repair or broad-search loop.
+> Full regression is 470 tests: 404 pass/66 optional skip with 105 protocol
+> invariants. Canonical protocol SHA-256 is
+> `c4a226aaa12f6285aef0e584118b833a83bcf8aa9540ca26bf2a89e0e59c473b`.
+> Private ledger `46ef9ff1fbb3880b552c06a964007611aac16925` is remote exact,
+> PRIVATE and anonymous API returns 404; manuscript/reference hashes remain
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+
+> **2026-08-12 mechanistic treatment/growth asset boundary · schema 11.2:**
+> Fresh public metadata review separates six source objects: 500 synthetic
+> coil sacs; 458 flow-diverter patients with six-month occlusion; 34 aneurysms
+> in 17 longitudinal pairs; growing 6/stable 6 amplified-MRI cases; 42
+> semi-automated CFD cases with five initially failed/manual reconstructions;
+> and 28 particle configurations on one idealized anatomy. These counts are
+> not interchangeable patients or one cohort. No public immutable asset joins
+> pre-treatment geometry, actual device/deployment, immediate angiographic
+> response and fixed-time outcome for the same lesion. Fresh scores
+> 27.5/25.5/24.0/23.5/23.0/22.5 are all rejected. Source metrics are not AURORA
+> results. Active lead/E0/P0/P1/method/architecture/server/PBS/GPU/result/claim
+> are 0. Surface-vector remains inactive; job `115645` is not repaired/rerun.
+> No new source watch is added. Future gate-authorized work uses `introai9`
+> PBS only, never login-node GPU. Never access/query/transfer/submit/monitor
+> `junjinyong`.
+
 > **2026-08-12 schema 11.1 deployment/private synchronization:** Exact public
 > scientific source `9206415e43bd85cf4e592cf81005bc1b34851465` passed Quality
 > `31563336315` and Pages `31563336017`. Private paper head

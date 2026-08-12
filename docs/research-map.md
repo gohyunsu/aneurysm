@@ -1,5 +1,17 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.3 map · 2026-08-12:** The data node remains unresolved rather
+> than empty or acquired. Fresh `introai9` shell/SFTP listing = 0 output;
+> verified current-direction cases = 0/0/0; active problem/model/compute = 0.
+
+> **Schema 11.2 map · 2026-08-12:** Coil mechanics, immediate QA response,
+> fixed-time occlusion, longitudinal CFD, observed wall motion and particle
+> transport are six real but disconnected source nodes. The scientifically
+> meaningful edge would join pre-treatment geometry→actual device→immediate
+> response→prespecified outcome for the same lesion. No inspected public asset
+> contains that edge. Architecture cannot impute provenance. All six candidate
+> branches terminate below admission; method/model/compute remain empty.
+
 > **Schema 11.1 map · 2026-08-12:** TopAneu's registered-design node and
 > realized-release node are separate. The former specifies planned counts,
 > gold/silver options and test policy; the latter exposes 417 scans/409 patients

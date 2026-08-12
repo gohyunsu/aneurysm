@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — TopAneu 등록 설계와 실제 release, 독립 단위, 공개 자산 계약과 surface-vector 가설을 비판적으로 심사하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — virtual device mechanics, immediate angiographic response와 fixed-time outcome의 동일-patient 결합 가능성, 공개 자산 계약과 surface-vector 가설을 비판적으로 심사하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,26 +40,34 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.1 · BEST 31.5 REJECTED · NOVELTY 0.5 · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.3 · DATA INVENTORY INCOMPLETE · VERIFIED CASES 0 / 0 / 0 · MODEL / GPU 0</p>
         <h1>
-          A registered plan is not<br>
-          <em>a realized cohort.</em>
+          A plausible mechanism is not<br>
+          <em>an observed patient-level join.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          TopAneu 등록 설계는 500개 train, 350개 private test와 train/test
-          gold vessel mask 50/20개를 계획하지만, 실제 공개 train은
-          417 scan/409 patient이며 vessel mask는 organizer TopBrain prediction으로
-          설명됩니다. 공개 casewise gold/silver 구분, 완전한 patient-group split과
-          private-test manifest는 없습니다. 계획 수치를 실제 관측 단위로 바꾸거나
-          design PDF의 CC BY를 의료 데이터 약관으로 확장할 수 없습니다. Fresh 후보는
-          <b>31.5/30.5/27.5/26.5/26.5/20.5</b>로 모두 기각했습니다.
-          Surface-vector는 field error와 stable structure가 다를 수 있다는 비활성
-          가설일 뿐이며, Hodge/GNN/equivariance는 선택된 architecture나 novelty가
-          아닙니다. Terms/payload/P0/P1/server/model/GPU는 0입니다.
+          최신 1차 출처들은 500개 synthetic sac의 virtual coil mechanics,
+          458명 환자의 injection-standardized QA와 6개월 occlusion, 17개
+          longitudinal matched pair, 12-case wall motion, 42-case automated CFD와
+          one-anatomy particle transport를 각각 보고합니다. 그러나 동일 병변의
+          pre-treatment geometry, 실제 device deployment, immediate angiographic
+          response와 prespecified outcome을 잇는 공개 immutable asset은 없습니다.
+          서로 다른 cohort를 network로 붙이는 것은 mechanistic validation이 아닙니다.
+          Fresh 후보는 <b>27.5/25.5/24.0/23.5/23.0/22.5</b>로 모두 기각했습니다.
+          Source metric은 AURORA 결과가 아닙니다. Surface-vector는 비활성 가설이며
+          Hodge/GNN/equivariance는 선택 architecture나 novelty가 아닙니다.
+          Payload/P0/P1/model/GPU는 0입니다. 사용자 승인 아래 introai9를
+          read-only로 확인했지만, 두 endpoint의 TCP/22 도달과 한 endpoint의
+          public-key 인증 뒤 shell/SFTP session이 timeout되어 directory listing은
+          0 line입니다. 이는 dataset 부재도 확보도 증명하지 않습니다. 현재 방향의
+          검증된 train/validation/test는 <b>0/0/0</b>이며
+          inventory-incomplete/no asset verdict입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#mechanistic-outcome-join">Mechanics와 outcome join 이해하기</a>
+          <a class="button ghost" href="../docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md">Latest mechanism/outcome reappraisal ↗</a>
           <a class="button ghost" href="learn.html#topaneu-registered-release">TopAneu 계획과 release 이해하기</a>
           <a class="button ghost" href="../docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md">Latest TopAneu reappraisal ↗</a>
           <a class="button ghost" href="learn.html#collision-anticipation">Collision detection과 사전 경고 이해하기</a>
@@ -193,8 +201,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="공개 오믹스 자산과 미래사건 결합 자산의 차이를 설명하는 상태">
-        <div class="visual-caption">PUBLIC PATIENT-LEVEL OMICS · PRE-EVENT IMAGE–OUTCOME JOIN 0 · ACTIVE MODEL 0</div>
+      <div class="hero-visual" aria-label="서로 다른 기전 연구와 동일 환자 결합 자산의 차이를 설명하는 상태">
+        <div class="visual-caption">MECHANICS + IMMEDIATE RESPONSE + FIXED-TIME OUTCOME · SAME-PATIENT JOIN 0</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="절차적으로 생성할 수 있는 혈관 분지와 동맥류 형상 예시">
             <defs>
@@ -217,27 +225,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>26.5</b><span>best · target/asset/unit floors rejected</span>
+            <b>27.5</b><span>best · direct-prior and asset floors rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>4 archives</b><span>metadata only · no event contract</span>
+            <b>6 sources</b><span>disconnected cohorts · no immutable join</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Current-frame contact labels and human segmentation are material</span>
-          <span><i class="dot coral"></i> They do not identify first-contact warning or human collision</span>
-          <span>Best novelty 3.0/5 · onset/horizon/unit/join 0 · P0/server/model/GPU 0</span>
+          <span><i class="dot lime"></i> Mechanics, QA, occlusion and growth are meaningful observed source endpoints</span>
+          <span><i class="dot coral"></i> They are not observed together for the same public patient/lesion</span>
+          <span>Best-score novelty 0.5/5 · same-patient join 0 · P0/server/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>TopAneu registered/release fidelity best 31.5/40, novelty 0.5/5 · all six rejected · admitted 0</b></div>
-        <div><span>Latest compute</span><b>No scientific-server query or job in schema 11.1 · historical P0s remain closed</b></div>
+        <div><span>Latest source screen</span><b>Mechanics–response–outcome join best 27.5/40 · all six rejected · admitted 0</b></div>
+        <div><span>Latest compute</span><b>No scientific-server query or job in schema 11.2 · historical P0s remain closed</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh problem or material casewise TopAneu reference-contract audit only · no terms, payload, repair or rerun</b></div>
+        <div><span>Next action</span><b>fresh problem or versioned same-patient mechanics–response–outcome asset re-audit only · no payload, repair or rerun</b></div>
       </div>
     </section>
 
@@ -353,14 +361,15 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. CathAction의 present-contact label은
-          pre-contact warning onset/horizon을 식별하지 않고, surface-vector의 현재 asset family는
-          whitelisted material release 전까지 닫혀 있습니다. 아래는 이미 종료된 raw-field P0가 무엇을
-          확인하려 했는지와, material한 새 source가 생길 때 어떤 evidence ladder를
-          거쳐야 하는지 보여주는 기록입니다. 구조 안정성과 field-error-matched
-          failure gap 없이 topology head나 fancy한 GNN을 선택하지 않습니다.
-          Hodge는 필수 baseline이고, critical point/worldline은 stability 이전에는
-          loss가 아니라 evaluation입니다.
+          현재 architecture는 없습니다. 최신 치료·성장 출처들은 virtual mechanics,
+          immediate angiographic response와 follow-up outcome을 서로 다른 cohort에서
+          보고하므로, network가 missing patient-level join을 대신 만들 수 없습니다.
+          Surface-vector의 현재 asset family도 whitelisted material release 전까지
+          닫혀 있습니다. 아래는 이미 종료된 raw-field P0를 역사적 예로 삼아,
+          material한 새 source가 생길 때 거쳐야 할 evidence ladder를 보여줍니다.
+          구조 안정성과 field-error-matched failure 없이 topology head나 fancy한
+          GNN을 선택하지 않습니다. Hodge는 baseline이고, critical point/worldline은
+          stability 이전에는 loss가 아니라 evaluation입니다.
         </p>
       </div>
 
@@ -373,7 +382,8 @@
           conformal-degree 후보는 32.5/40으로 source gate만 넘었지만 exact P0가
           scientific check 10개가 모두 미평가인 no-verdict로 끝났습니다. 이 version의 architecture gate와 GPU는
           닫혔고, 같은 contract를 수리하거나 다시 실행하지 않습니다. 최신
-          collision batch도 26.5/40으로 source 단계에서 기각됐습니다.
+          mechanism/outcome batch도 최고 27.5/40으로 source 단계에서 기각됐고,
+          introai9 fresh inventory도 listing 0의 no-verdict로 끝났습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -443,7 +453,7 @@
       <div class="architecture-notes">
         <article>
           <span>LATEST SOURCE VERDICT</span>
-          <p>TopBrain/RSNA batch의 최고점은 30.5/40입니다. TopCoW와 BraveCoWCoW가 paired topology와 multimodal multi-task를 선점하고, independent paired aneurysm target이 없어 active lead는 0입니다.</p>
+          <p>Mechanism/outcome batch의 최고점은 27.5/40입니다. Injection-standardized QA→6-month occlusion은 direct prior이고, virtual mechanics→실제 outcome은 동일-patient join이 없습니다. Introai9 inventory도 remote listing 0의 no-verdict이므로 active lead는 0입니다.</p>
         </article>
         <article>
           <span>CLOSED P0</span>

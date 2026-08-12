@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.2 mechanism/outcome lineage:** 2026 work directly occupies
+> morphology→virtual coil mechanics, injection-normalized QA→6-month occlusion,
+> matched longitudinal morphology/CFD→growth association, amplified wall
+> motion↔directional WSS variability, semi-automated initiation CFD and
+> idealized particle-regime mapping. The residual gap is a same-lesion causal
+> evidence chain, not another component stack. No inspected public release
+> joins geometry, actual device, immediate response and fixed-time outcome;
+> therefore the gap is not executable. [Exact audit](mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md)
+
 > **Schema 11.1 TopAneu lineage:** TopAneu directly occupies multimodal
 > vessel-specific aneurysm location classification and segmentation. Tri-axial
 > ROI multi-task learning already combines aneurysm location, aneurysm masks

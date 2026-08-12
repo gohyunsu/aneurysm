@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="TopAneu 등록 설계와 실제 release, 공개 자산 계약, 독립 단위부터 WSS, GNN과 평가까지 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="Virtual device mechanics, immediate angiographic response, fixed-time outcome의 동일-patient join과 공개 자산 계약부터 WSS, GNN과 평가까지 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#mechanistic-outcome-join">Mechanics &amp; outcome join</a>
       <a href="#collision-anticipation">Collision anticipation</a>
       <a href="#molecular-target-time">Omics &amp; target time</a>
       <a href="#dsa-task-fidelity">Sparse DSA fidelity</a>
@@ -79,6 +80,7 @@
           critical point·signed index·시간 궤적이 무엇인지,
           weak sphere와 precise mask가 어떻게 다른지, containment가 무엇인지,
           환자·session·lesion을 왜 다른 독립 단위로 세어야 하는지,
+          virtual device mechanics와 실제 outcome을 같은 환자에서 연결한다는 의미,
           TopAneu의 등록 설계와 실제 release, 52개 위치 label과 predicted vessel mask,
           DSA sequence와 prefix risk, 반복 CTP와 informative observation,
           rigid-wall CFD와 compliant-wall FSI,
@@ -87,15 +89,109 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 11.0</span>
-          <strong>현재 선택된 문제와 모델은 없으며, 최신 여섯 후보도 모두 기각됐습니다.</strong>
+          <span>짧은 답 · schema 11.3</span>
+          <strong>현재 확보가 검증된 연구 데이터, 선택된 문제와 모델은 모두 없습니다.</strong>
           <p>
-            최신 collision/intervention 후보는
-            26.5/26.5/26.0/24.5/24.0/20.0입니다. 공개 archive는 있지만
-            first-contact onset, warning horizon, procedure/specimen grouping과
-            human collision label이 없어 사전 경고 문제를 만들 수 없습니다.
-            따라서 P0, method, model, scientific server와 GPU는 0입니다.
+            최신 treatment/growth 후보는
+            27.5/25.5/24.0/23.5/23.0/22.5입니다. Coil mechanics, immediate
+            angiographic response와 follow-up outcome은 각각 관측됐지만, 같은 공개
+            patient/lesion에서 연결되지 않았습니다. 따라서 P0, method, model,
+            scientific server와 GPU는 0입니다. Repository의 <code>data/</code>에는
+            schema 설명만 있고 patient/image/mesh/field payload는 없으므로, 현재
+            방향의 staged train/validation/test case도 0입니다. Introai9는 두
+            endpoint의 TCP/22와 한 endpoint의 public-key 인증까지 확인했지만
+            shell/SFTP listing이 모두 timeout되어 current server inventory도
+            incomplete/no-verdict입니다. 이를 “없음”이나 “확보”로 단정하지 않습니다.
           </p>
+        </div>
+        <div class="answer-card" id="mechanistic-outcome-join">
+          <span>Mechanics, immediate response와 outcome join을 처음부터 이해하기</span>
+          <strong>각각 타당한 물리량이 있어도, 같은 환자에서 이어지지 않으면 치료 기전을 검증한 것이 아닙니다.</strong>
+          <p>
+            뇌동맥류의 <b>coil embolization</b>은 금속 coil을 동맥류 sac 안에 배치해
+            혈류를 줄이는 시술입니다. Virtual deployment simulation은 환자 형상 안에
+            coil이 어떻게 휘고 벽과 접촉하는지를 계산합니다. Reaction force,
+            elastic energy와 contact pressure는 시술 난이도나 packing 상태를 설명할
+            수 있는 mechanistic quantity입니다. 하지만 이것이 실제 환자의 장기
+            폐색을 설명하려면 simulation과 임상 결과가 같은 병변에 대응해야 합니다.
+          </p>
+          <p>
+            최신 coil-mechanics source는 clinical morphology를 바탕으로 500개
+            synthetic sac을 생성하고 virtual coil deployment를 수행했습니다. Source
+            surrogate는 reaction force에 `R²=0.74`, elastic energy에 `R²=0.68`을
+            보고했습니다. 이 값은 AURORA가 재현한 결과가 아닙니다. 더 중요하게,
+            500 synthetic sac은 500 patient가 아니며 공개 patient ID, 실제 coil
+            sequence, immediate angiogram과 follow-up outcome에 연결되지 않습니다.
+          </p>
+          <p>
+            <b>Quantitative angiography(QA)</b>는 DSA contrast가 동맥류에 들어오고
+            빠져나가는 시간 곡선에서 수치를 계산합니다. 그런데 의사가 주입한
+            contrast의 양과 속도가 다르면 환자 혈류가 같아도 곡선이 달라집니다.
+            458명 flow-diverter cohort의 2026 source는 parent-artery input을
+            deconvolution하고 표준 curve로 reconvolution해 이 injection bias를 줄인
+            뒤 6개월 occlusion을 예측했습니다. Source AUROC 0.60→0.79는 QA
+            normalization이 중요한 direct prior임을 보여주지만, 공개 angiogram,
+            patient row와 immutable split은 확인되지 않았습니다.
+          </p>
+          <p>
+            자연스러운 새 질문은 “시술 전 virtual mechanics와 injection-invariant
+            immediate QA가 6개월 occlusion을 함께 설명하는가?”입니다. 이것은 단순히
+            GNN과 Transformer를 붙이는 것보다 의미가 있습니다. 첫 번째 정보는
+            device–geometry interaction을, 두 번째 정보는 실제 시술 직후 flow
+            response를 나타내기 때문입니다. 두 정보가 같은 병변에서 관측되면 어느
+            단계에서 예측이 실패하는지 해석할 수 있습니다.
+          </p>
+          <p>
+            하지만 서로 다른 논문의 500 synthetic shape와 458 patient를 embedding
+            space에서 합친다고 patient-level evidence가 생기지는 않습니다. 필요한
+            join key는 최소한 동일 patient/lesion ID, pre-treatment 3D geometry,
+            실제 device type과 deployment sequence, immediate raw DSA와 injection
+            curve, 미리 정한 follow-up 시점의 adjudicated occlusion, censoring과
+            patient-disjoint split입니다. 이 중 하나라도 없으면 target time이나
+            독립 단위를 임의로 복원하게 됩니다.
+          </p>
+          <p>
+            Growth branch도 같은 문제를 갖습니다. 한 source는 34 aneurysm을 17개
+            matched pair로 묶고 병변당 3개 CTA를 평균 4.10년 추적했습니다. 다른
+            amplified-MRI source는 growing 6/stable 6에서 wall motion과 directional
+            WSS-gradient variability의 연관을 분석했습니다. 둘 다 중요한 mechanistic
+            evidence이지만, 17 pair를 34 independent pair로 세거나 12-case association을
+            externally validated future predictor로 부를 수 없습니다. Public image–mesh–
+            CFD–growth manifest도 확인되지 않았습니다.
+          </p>
+          <p>
+            Method-free admission은 모델보다 먼저 다음을 확인해야 합니다. 첫째,
+            patient/lesion과 target time이 immutable한가. 둘째, 실제 device와
+            immediate response가 같은 row에 연결되는가. 셋째, complete negative와
+            censoring이 있는가. 넷째, patient/family-disjoint split과 strong baseline을
+            실행할 license·manifest가 있는가. 이를 통과해도 허용되는 것은 P0뿐이며,
+            architecture나 GPU는 자동 승인되지 않습니다.
+          </p>
+          <p>
+            최신 여섯 후보의 최고점은 27.5/40입니다. 가장 높은 QA→6개월 occlusion은
+            source가 이미 직접 점유했고 public asset이 없습니다. Residual novelty가
+            3.0/5인 mechanics→actual outcome 후보는 identifiability 2.0, asset 0.5,
+            independent unit 1.0으로 기각됩니다. 높은 아이디어 점수가 없는 관측을
+            보상할 수 없다는 것이 non-compensatory gate의 핵심입니다.
+          </p>
+          <p>
+            <b>그렇다면 introai9에는 무엇이 있는가?</b> Fresh read-only 감사에서는
+            directory output을 한 줄도 얻지 못했습니다. 과거 bounded 기록은
+            <code>/home/introai9/AAAI</code>와 aneurysm-related trace, IntrA repository
+            skeleton을 확인했지만 mesh payload는 확인하지 못했고 broad manifest
+            search도 미완료였습니다. 따라서 현재 검증된 train/validation/test는
+            0/0/0이며, 외부 service 상태가 달라진 뒤 exact-path inventory가
+            성공하기 전에는 어떤 dataset name도 “확보됨”으로 올리지 않습니다.
+          </p>
+          <p>
+            Surface-vector 가설도 이 출처들로 재활성화되지 않습니다. Coil force,
+            QA impulse response, wall motion과 particle trajectory는 signed surface-WSS
+            critical point/worldline reference가 아닙니다. Edge 1-form, Hodge,
+            SE(3), periodic operator와 structural loss는 계속 unselected control입니다.
+            Historical job `115645`은 0/10 no-verdict로 남고 수리하거나 재실행하지
+            않습니다.
+          </p>
+          <a href="../docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md">여섯 source, 점수, direct prior와 재진입 contract 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="collision-anticipation">
           <span>Collision detection과 사전 경고를 처음부터 이해하기</span>

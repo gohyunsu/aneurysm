@@ -1,5 +1,36 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 introai9 dataset inventory · schema 11.3:** A user-authorized,
+> read-only inventory attempted both documented `introai9` login boundaries.
+> TCP/22 was reachable on both and public-key authentication was explicitly
+> confirmed on one, but remote shell and SFTP sessions timed out before any
+> directory listing or command output. The prior successful bounded audit knew
+> `/home/introai9/AAAI` and aneurysm-related traces, but verified only an IntrA
+> repository skeleton—not its mesh payload; its broader recursive search also
+> did not complete. Therefore the current verdict is **inventory-incomplete / no
+> asset verdict**, not “dataset absent” or “dataset secured.” Verified current-
+> direction train/validation/test cases remain 0. No PBS, scheduler query, GPU,
+> transfer or `junjinyong` action occurred. Full regression is 470 tests: 404
+> pass/66 optional skip with 105 protocol invariants; canonical protocol SHA-256
+> is `c4a226aaa12f6285aef0e584118b833a83bcf8aa9540ca26bf2a89e0e59c473b`.
+> Private ledger `46ef9ff1fbb3880b552c06a964007611aac16925` is remote exact,
+> PRIVATE and anonymously returns 404; manuscript/reference bytes are unchanged.
+
+> **2026-08-12 mechanistic treatment/growth asset reappraisal · schema 11.2:**
+> Six new 2026 primary sources were audited without opening subscription full
+> text or scientific payload. Virtual coil mechanics (500 synthetic sacs),
+> injection-standardized QA (458 treated patients with 6-month occlusion),
+> 17 longitudinal matched pairs, a 12-case amplified-MRI study, a 42-case
+> semi-automated CFD workflow and one-anatomy particle transport are distinct
+> source contributions. No public immutable asset joins pre-treatment geometry,
+> actual device deployment, immediate response and fixed-time outcome in the
+> same lesion. Six rows score **27.5/25.5/24.0/23.5/23.0/22.5** and all fail.
+> Source-reported metrics are not AURORA results. Surface-vector remains
+> inactive; job `115645` is not repaired/rerun. No payload, P0/P1, method,
+> architecture, server or compute opened. See the
+> [exact reappraisal](docs/mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md)
+> and [beginner guide](site/learn.html#mechanistic-outcome-join).
+
 > **2026-08-12 schema 11.1 deployment/private pin:** Exact scientific source
 > `9206415e43bd85cf4e592cf81005bc1b34851465` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31563336315)

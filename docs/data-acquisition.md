@@ -1,5 +1,19 @@
 # Dataset acquisition plan
 
+> **Schema 11.3 acquisition decision:** The incomplete `introai9` inventory
+> does not authorize transfer, download, staging or training. Authentication
+> and an old project-root trace are not a dataset manifest. Retry only after an
+> administrator/service state change, with exact bounded paths and no recursive
+> search; then require case counts, checksums, license, schema and grouped split
+> before assigning any dataset role.
+
+> **Schema 11.2 acquisition decision:** Do not request subscription full text,
+> patient rows, angiograms, geometry, device deployments or follow-up tables
+> merely to fabricate a cross-source join. Reconsider only when an official,
+> lawful, versioned release exposes same-patient lesion IDs, pre-treatment
+> geometry, actual device/configuration, immediate response, fixed-time outcome,
+> censoring and grouped splits. Such a release triggers source re-audit only.
+
 > **Schema 11.1 acquisition decision:** Do not join TopAneu, accept its custom
 > medical-data agreement or download image/mask/JSON payload. The registered
 > plan does not establish realized casewise gold/silver, complete patient

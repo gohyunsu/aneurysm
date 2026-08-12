@@ -1,5 +1,17 @@
 # Public source watch · thirty-three material/direct-prior source states
 
+> **Schema 11.3 server-inventory boundary:** An SSH/SFTP session timeout is an
+> operational no-verdict, not a public-source revision. Source-watch v20 stays
+> unchanged at 33 states. Authentication never opens a data watch, payload,
+> P0, model or compute authority.
+
+> **Schema 11.2 no-new-watch decision:** The six treatment/growth papers expose
+> no stable official versioned patient/geometry/device/response/outcome release
+> endpoint. No recurring watch is added. A future explicit release requests a
+> manual source audit only; it cannot create a join, download payload, register
+> P0, select a model or authorize compute automatically. Existing v20 remains
+> the 33-state canonical watch.
+
 > **TopAneu registered/release interpretation · schema 11.1:** Existing v20
 > already freezes Zenodo design record `19848807` revision 4 and the live Data/
 > Evaluation route. No duplicate watch is added. A source change requests manual

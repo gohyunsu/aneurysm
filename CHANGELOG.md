@@ -1,5 +1,38 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.3 records an incomplete introai9 inventory
+
+- Attempted a user-authorized, read-only inventory on both documented
+  `introai9` login boundaries; both exposed TCP/22 and one explicitly completed
+  public-key authentication.
+- Obtained no remote shell or SFTP listing because session opening timed out.
+  Presence and absence are both unresolved; authentication is not an asset.
+- Preserved the prior bounded fact that `/home/introai9/AAAI` and aneurysm
+  traces existed while IntrA was only a repository skeleton with unverified
+  mesh payload. Current-direction verified train/validation/test cases remain 0.
+- Submitted no PBS job, queried no scheduler, used no GPU, transferred no file
+  and did not access `junjinyong`. A future retry requires an external service
+  state change and exact paths, not recursive repair or broad search.
+- Full regression passes 470 tests: 404 pass/66 optional skip and 105 protocol
+  invariants. Protocol SHA-256 is `c4a226aaa12f6285aef0e584118b833a83bcf8aa9540ca26bf2a89e0e59c473b`.
+- Private ledger `46ef9ff1fbb3880b552c06a964007611aac16925` is remote exact,
+  PRIVATE and anonymously returns 404; manuscript and references are unchanged.
+
+## 2026-08-12 · Schema 11.2 rejects an unobserved mechanics–response–outcome join
+
+- Audited six fresh primary sources spanning virtual coil mechanics,
+  injection-standardized QA/6-month occlusion, longitudinal growth CFD,
+  amplified-MRI wall motion, semi-automated initiation CFD and particle
+  transport.
+- Kept source-reported `R²`, AUROC and association results separate from
+  AURORA evidence. Synthetic geometry/configuration counts are not patients.
+- Rejected six candidates at 27.5/25.5/24.0/23.5/23.0/22.5. The conceptually
+  novel mechanics→outcome row fails because no public same-patient geometry–
+  device–immediate-response–fixed-time-outcome join exists.
+- Added no source watch because no stable versioned release endpoint was found.
+  No payload, P0/P1, method, architecture, scientific server, PBS/GPU, outer
+  test, result or paper claim opened; surface-vector `115645` stays unrepaired.
+
 ## 2026-08-12 · Schema 11.1 deployed and privately pinned
 
 - Exact scientific source `9206415e43bd85cf4e592cf81005bc1b34851465`

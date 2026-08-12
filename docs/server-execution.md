@@ -1,5 +1,20 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.3 introai9 inventory state:** A user-authorized read-only audit
+> attempted both documented login boundaries. TCP/22 was reachable on both and
+> one public-key authentication was explicitly confirmed, but remote shell and
+> SFTP sessions timed out before any output. Dataset inventory is therefore
+> incomplete/no-verdict. No PBS submission, scheduler query, GPU command,
+> transfer or monitoring occurred; `junjinyong` was never accessed. Do not
+> repeat until an external service/admin state change, and then use exact paths.
+
+> **Schema 11.2 execution state:** Public bibliographic/abstract metadata only.
+> No scientific-server query, transfer, PBS submission, GPU or monitoring
+> occurred. Current AURORA job count is zero; historical `115645` remains
+> immutable no-verdict. Future gate-authorized work is `introai9` PBS-only and
+> never login-node GPU. Never access, query, transfer to, submit to or monitor
+> `junjinyong`.
+
 > **Schema 11.1 execution state:** Public TopAneu registry/design/page/code
 > metadata only. No scientific-server query, transfer, PBS submission, GPU or
 > monitoring occurred. Historical `115645` remains immutable no-verdict.

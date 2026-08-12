@@ -1,5 +1,20 @@
 # AURORA 연구 방향
 
+> **Schema 11.3 direction · 2026-08-12:** Treat the attempted `introai9`
+> inventory as execution-incomplete/no asset verdict. Authentication does not
+> establish a usable dataset, and an old IntrA repository skeleton does not
+> establish mesh payload. Current-direction verified train/validation/test
+> cases remain 0/0/0; do not select a model or repair the search locally.
+
+> **Schema 11.2 direction · 2026-08-12:** The most coherent residual question
+> is not a named GNN/operator. It is whether patient-specific virtual device
+> mechanics and injection-invariant immediate angiography jointly explain a
+> prespecified follow-up outcome. Current sources expose the pieces in separate
+> cohorts, not a same-lesion join. Six candidates peak at 27.5/40 and fail
+> novelty or asset/identifiability/unit floors. Keep problem, estimand and model
+> null. Surface-vector remains an inactive conditional hypothesis and job
+> `115645` is immutable no-verdict. [Exact audit](mechanistic-treatment-and-growth-asset-reappraisal-2026-08-12.md)
+
 > **Schema 11.1 direction · 2026-08-12:** Do not turn TopAneu's
 > registered-to-realized release discrepancy into a model paper. It is a
 > provenance constraint. The actual 417-scan/409-patient release does not expose
