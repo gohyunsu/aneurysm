@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.4 deployment/private synchronization:** Exact public
+> scientific source `423cf18c14f506d46561592f8fa4ca2a78d51c9a` passed Quality
+> `31571433278` and Pages `31571433150`. Private paper head
+> `a1997946a38644f218b352e32b76d9fda60b06dc` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` and references SHA-256 remain
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 472 tests: 406 pass/66 optional skip with 107 protocol
+> invariants. This provenance opens no dataset, task, method, model, result,
+> compute or paper claim.
+
 > **2026-08-12 open clinical outcome/target-time boundary · schema 11.4:**
 > Zenodo `17339029` revision 6 verifies one actual public clinical XLSX: CC BY
 > 4.0, 39,686 bytes, MD5 `8aaba92f5fb74175af76edd3701b7404`, linked to a

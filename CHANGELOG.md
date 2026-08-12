@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.4 deployed and privately pinned
+
+- Exact scientific source `423cf18c14f506d46561592f8fa4ca2a78d51c9a`
+  passed Quality `31571433278` and Pages `31571433150`.
+- Private ledger `a1997946a38644f218b352e32b76d9fda60b06dc` is remote exact,
+  PRIVATE and anonymously returns 404; manuscript/reference bytes are unchanged.
+- Full regression passes 472 tests: 406 pass/66 optional skip, 107 protocol
+  invariants, source-watch v21, site graph, JavaScript and diff hygiene. This
+  provenance creates no active dataset, method, result, compute or paper claim.
+
 ## 2026-08-12 · Schema 11.4 separates an open clinical table from an active imaging dataset
 
 - Verified Zenodo 17339029 revision 6: one CC-BY-4.0 XLSX, 39,686 bytes,

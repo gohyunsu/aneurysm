@@ -1229,6 +1229,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.4 open-outcome audit is live and the private no-claim ledger is pinned",
+      copy: "Exact scientific source 423cf18c14f506d46561592f8fa4ca2a78d51c9a passed Quality 31571433278 and Pages 31571433150. Private ledger a1997946a38644f218b352e32b76d9fda60b06dc is remote exact, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 472 tests: 406 pass/66 optional skip with 107 protocol invariants. No active dataset, method, result, compute or claim opened.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "data",
       title: "One real public clinical table is verified, but it is neither imaging nor fixed-time outcome truth",
       copy: "Zenodo 17339029 revision 6 freezes one CC-BY-4.0 XLSX (39,686 bytes; 230 source patients). The linked source substitutes discharge or 3-month mRS where 6-month mRS is missing for 70 patients, and the release has no medical image or image-row join. Six candidates peak at 29.5/40 and all fail; source-watch v21 adds one review-only state. No download, P0, method, server or GPU opened.",

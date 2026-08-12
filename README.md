@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 11.4 deployment/private pin:** Exact scientific source
+> `423cf18c14f506d46561592f8fa4ca2a78d51c9a` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31571433278) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31571433150).
+> Private ledger `a1997946a38644f218b352e32b76d9fda60b06dc` is remote exact,
+> PRIVATE and anonymously returns 404. Manuscript/reference bytes remain
+> unchanged. Full regression is 472 tests: 406 pass/66 optional skip with 107
+> protocol invariants. This pin creates no active data, task, model or claim.
+
 > **2026-08-12 open clinical outcome/target-time reappraisal · schema 11.4:**
 > Zenodo [`17339029`](https://zenodo.org/records/17339029) revision 6 is one
 > genuinely material public asset: a CC BY 4.0, 39,686-byte aSAH clinical XLSX
