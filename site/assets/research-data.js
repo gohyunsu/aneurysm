@@ -1197,6 +1197,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.1 TopAneu audit is live and the private no-claim ledger is pinned",
+      copy: "Exact public scientific source 9206415e43bd85cf4e592cf81005bc1b34851465 passed Quality 31563336315 and Pages 31563336017. Live Overview, zero-assumption chapter #topaneu-registered-release and the exact audit expose the same registered-design/realized-release rejection. Private ledger 94da161002e11f49d44e8764ae2391e494ebf10a is remote exact, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 468 tests: 402 pass/66 optional skip and 103 protocol invariants. This provenance opens no active problem, method, model, result, compute or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 11.1 separates TopAneu's registered design from its realized release",
       copy: "Official registry, Zenodo design revision 4, live Data page and exact Git/evaluator state were compared without joining the challenge or opening medical payload. Planned 500 train/350 private test, 200 public-source train and 50/20 gold vessel masks are separated from realized 417 scans/409 patients, a public-source patient count of 68 and organizer-predicted vessel masks. The public contract does not expose casewise gold/silver, complete patient grouping or private-test units. Six candidates score 31.5/30.5/27.5/26.5/26.5/20.5 and all fail; best novelty is 0.5/5. Source-watch v20 is reused, historical scores and job 115645 are untouched, and no terms, payload, P0/P1, model, server or compute is opened.",
