@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 tangent-correction/private synchronization:**
+> Exact corrected source `7c48574199e330c2b55ffb29836ede4fee8cfc4b`
+> passed Quality `31592497232` and Pages `31592496090`. Private paper head
+> `b4e78f845f46c0443a1f3572ca80125bfb9586a3` is remote exact, PRIVATE and
+> anonymously 404. Manuscript/reference SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 514/514 with 111 invariants. This update used no
+> scientific server, transfer, PBS/GPU or monitoring and opens no result or
+> claim. Never access `junjinyong`; do not retry `introai9` before external
+> change.
+
 > **2026-08-12 schema 11.8 pre-execution P0 metric correction:** A red-team
 > negative control showed that replacing an omitted flow and comparing the
 > centered derivative at that same grid point can be insensitive on an equally

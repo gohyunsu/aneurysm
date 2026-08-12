@@ -1296,6 +1296,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "The corrected tangent audit and private no-result ledger are synchronized",
+      copy: "Exact corrected public source 7c48574… passed Quality 31592497232 and Pages 31592496090. Private paper head b4e78f8… is remote exact and anonymously returns 404 while manuscript/reference bytes remain unchanged. Full regression passes 514/514 tests with 111 protocol invariant groups. No real P0 endpoint, model, GPU, outer test or claim is opened.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "experiment",
       title: "A pre-execution negative control corrects an insensitive tangent implementation",
       copy: "The first evaluator replaced an omitted flow and compared the centered derivative at that same index. On an equally spaced stencil the centered derivative does not use the center value, so the check could be insensitive. Before any private row or scientific endpoint was read, the implementation was corrected to compare actual left/right one-sided tangents with the two-neighbour secant direction. The registered 0.80 agreement and 0.35 interpolation-error thresholds are unchanged. Smooth synthetic response passes and deliberately jagged response fails; full regression passes 514/514 tests with 111 protocol invariant groups. Real P0 remains 0/10 with no server, PBS, GPU, model or claim.",

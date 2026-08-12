@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · tangent correction privately synchronized
+
+- Corrected public source `7c48574…` passed Quality `31592497232` and Pages
+  `31592496090`.
+- Private paper head `b4e78f8…` is remote exact, PRIVATE and anonymously 404;
+  manuscript/reference bytes remain unchanged.
+- Full regression is 514/514 with 111 invariants. No real P0 endpoint, model,
+  GPU, outer test or paper claim is opened.
+
 ## 2026-08-12 · schema 11.8 · pre-execution P0 tangent audit
 
 - Found that same-location centered-difference comparison could be insensitive

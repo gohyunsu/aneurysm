@@ -1,5 +1,13 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 tangent-correction/private synchronization:** Exact corrected
+> public source `7c48574199e330c2b55ffb29836ede4fee8cfc4b` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31592497232)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31592496090).
+> Private ledger `b4e78f845f46c0443a1f3572ca80125bfb9586a3` is remote exact,
+> PRIVATE and anonymously invisible. Manuscript/reference hashes remain
+> unchanged. This synchronization creates no real P0 result, model or claim.
+
 > **2026-08-12 pre-execution P0 metric correction · schema 11.8:** Adversarial
 > validation found that comparing a replaced omitted-flow value at the same
 > centered-difference location can be insensitive on an equally spaced
