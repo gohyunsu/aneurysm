@@ -2,6 +2,8 @@
 
 > **2026-08-13 schema 11.8 inactive independent-confirmation v3:** Preserve v2
 > unchanged and supersede it with eligibility metadata/field/prediction all zero.
+> Exact scientific public source `9efe9145e86086f951242fa86340b19020676157`
+> passed Quality `31617703039` and Pages `31617702307`; remote main was exact.
 > Current v3 config/validator SHA-256 are
 > `f9d52aeb2abd9832289db4852ab7dfec03db125093762e5f515ceebd43018226` /
 > `d42e99fcea13eabe9f4a7bf8336487c5b7876c02e742031bcfb039a3325edccd`.

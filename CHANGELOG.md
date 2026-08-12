@@ -2,6 +2,8 @@
 
 ## 2026-08-13 · schema 11.8 · confirmation v3 evaluator red-team
 
+- Exact scientific source `9efe914…76157` passed Quality `31617703039` and
+  Pages `31617702307`; local and remote main were exact at verification.
 - Preserved v2 and superseded it before eligibility metadata, field or
   prediction access; no historical contract or result was repaired.
 - Promoted train-fitted power law from field-competence check to a mandatory

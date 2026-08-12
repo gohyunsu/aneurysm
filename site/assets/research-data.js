@@ -45,7 +45,7 @@ window.AURORA_DATA = Object.freeze({
       year: "2026.08",
       title: "Confirmation v3 makes the analytic control and raw evaluator non-optional",
       copy: "V2 could pass when the candidate beat the learned direct head but lost response fidelity to a train-fitted power law, or when response gains followed a materially lower field error. V3 therefore requires bilateral ±2% field equivalence and paired/tangent superiority against both controls. It derives all contrasts from complete family×case×seed×model×metric rows, uses one SHA-256 counter family-bootstrap stream and type-7 quantiles, and ranks the figure by the weaker comparator.",
-      status: "Inactive v3 · regression 570/570 · protocol 111 invariants · v2 evidence access 0 · synthetic adversarial checks only · real P0 0/11 · eligibility metadata/field/prediction/server/PBS/GPU/result/claim 0",
+      status: "Exact science 9efe914… · Quality 31617703039 · Pages 31617702307 · inactive v3 · regression 570/570 · protocol 111 invariants · v2 evidence access 0 · synthetic adversarial checks only · real P0 0/11 · eligibility metadata/field/prediction/server/PBS/GPU/result/claim 0",
       url: "../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md"
     },
     {

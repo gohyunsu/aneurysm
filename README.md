@@ -13,7 +13,10 @@
 > rejects incomplete factorials and pins shared family resampling and type-7
 > quantiles. Regression passes 570/570 with 111 protocol invariants at
 > `d3d1d6d9…f6f763f6`. This is synthetic pre-evidence validation only: real P0
-> is 0/11 and data/model/server/PBS/GPU/result/claim remain zero.
+> is 0/11 and data/model/server/PBS/GPU/result/claim remain zero. Exact science
+> source `9efe914…76157` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31617703039)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31617702307).
 
 > **Schema 11.8 inactive independent-confirmation v2:** The same Aneumo release
 > reports 427 base geometries; exactly 100 new families expand that release after
