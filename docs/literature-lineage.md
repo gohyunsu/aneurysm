@@ -1,5 +1,25 @@
 # 선행연구 계보와 research gap
 
+## 2026-08-12 molecular biomarkers, target time and treatment estimands
+
+- [PXD024615](https://doi.org/10.15252/emmm.202114713) already spans serum
+  proteomic discovery, internal validation and a 32-sample external cohort for
+  aneurysm/control and rupture-state classification. It is the strongest
+  executable control, not an unoccupied task.
+- [PXD013442](https://doi.org/10.1089/omi.2020.0057) supplies public molecular
+  files but pools five donors per clinical group into four discovery mixtures.
+  [GSE231922](https://doi.org/10.1007/s40120-023-00547-9) directly studies
+  smoking-associated plasma miRNA with 10/10/10 cross-sectional groups.
+- [NBC-GARUDA](https://doi.org/10.1016/j.jocn.2026.112073) directly occupies
+  treatment-specific in-hospital prognosis, using internal bootstrap
+  validation. Observed-treatment prognosis is not counterfactual treatment
+  effect estimation.
+- The residual gap is a same-patient, pre-event image--omics--component-event
+  target with censoring, treatment timing and external confirmation. No
+  inspected versioned release identifies that object, so it is a gap without
+  an executable asset, not an active paper identity. Six rows peak at 31.0/40
+  and all are rejected. [Exact reappraisal](molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md)
+
 ## 2026-08-12 vessel topology, RSNA multi-task와 4D-flow timing correction
 
 - [VeNet](https://doi.org/10.1038/s41598-026-54176-x)은 compact vessel

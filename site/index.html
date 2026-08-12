@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 공개 aSAH NCCT 마스크, future follow-up, 생물학적 기전 사슬과 patient-level outcome join을 비판적으로 재심사한 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — 공개 영상·오믹스 자산, target time, independent unit과 direct prior를 비판적으로 심사하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,25 +40,28 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.8 · BEST 27.5 REJECTED · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.9 · BEST 31.0 REJECTED · ACTIVE LEAD 0</p>
         <h1>
           Public files are not automatically<br>
           <em>an identifiable paper task.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          VeNet 논문은 200 mask를 설명하지만 exact public Git에는 20 mask만 있고
-          source IXI MRA·independent test와 결합되지 않습니다. 원 논문도 topology
-          discontinuity와 topology-aware loss를 future work로 명시합니다. RSNA
-          4,348-series 연구는 tri-axial ROI, 3D multi-task와 pseudo-label correction을
-          이미 점유합니다. CMRx4DFlow2026 data embargo는 ISBI deadline 뒤이며,
-          open device phantom의 8 acquisition은 한 anatomy에서 나온 반복 설정입니다.
-          Fresh 후보는 <b>27.5/27.0/27.0/26.5/26.0/21.0</b>으로 모두 기각했습니다.
-          Surface-vector는 여전히 유효한 질문이지만 architecture가 아닙니다.
-          Source-watch v19는 32 state review-only이고 payload/P0/P1/server/model/GPU는 0입니다.
+          PXD024615는 212개 discovery와 32개 external-cohort serum sample을
+          제공하는 실제 patient-level 공개 자산입니다. 그러나 원 연구가 이미
+          aneurysm/control과 rupture-state classification을 수행했고, 채혈 당시의
+          rupture status는 미래 rupture risk가 아닙니다. 공개 release에는 같은
+          환자의 baseline image, pre-event blood, treatment/censoring과 time-to-event가
+          연결돼 있지 않습니다. PXD013442의 discovery unit은 20명이 아니라 네 개의
+          pooled mixture이며, NBC-GARUDA의 치료별 예후 모델은 treatment effect가
+          아닙니다. Fresh 후보는 <b>31.0/28.0/27.0/27.0/26.0/23.0</b>으로 모두
+          기각했습니다. Surface-vector도 유효한 비활성 가설일 뿐 architecture가
+          아닙니다. Payload/P0/P1/server/model/GPU는 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#molecular-target-time">오믹스 자산과 target time 이해하기</a>
+          <a class="button ghost" href="../docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md">Latest molecular/outcome reappraisal ↗</a>
           <a class="button ghost" href="learn.html#topology-reference-embargo">Topology·reference·embargo 이해하기</a>
           <a class="button ghost" href="../docs/structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md">Latest exact reappraisal ↗</a>
           <a class="button ghost" href="learn.html#adam-fold-release">ADAM fold와 patient grouping 이해하기</a>
@@ -186,8 +189,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="공개 aSAH 마스크와 outcome 결합 자산의 차이를 설명하는 상태">
-        <div class="visual-caption">OPEN MASK RECORD · PATIENT-LEVEL OUTCOME JOIN 0 · ACTIVE MODEL 0</div>
+      <div class="hero-visual" aria-label="공개 오믹스 자산과 미래사건 결합 자산의 차이를 설명하는 상태">
+        <div class="visual-caption">PUBLIC PATIENT-LEVEL OMICS · PRE-EVENT IMAGE–OUTCOME JOIN 0 · ACTIVE MODEL 0</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="절차적으로 생성할 수 있는 혈관 분지와 동맥류 형상 예시">
             <defs>
@@ -210,27 +213,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>27.5</b><span>best · independent-unit floor rejected</span>
+            <b>31.0</b><span>best · residual-novelty floor rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>648.5 MB</b><span>one unopened RAR · no top-level manifest</span>
+            <b>212 + 32</b><span>public serum samples · occupied status task</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> NCCT masks are material, but paper cohort counts are not an archive manifest</span>
-          <span><i class="dot coral"></i> Image, mask, endpoint, treatment, centre and split are not joined</span>
-          <span>Best novelty 1.0/5 · patient-level outcome join 0 · P0/server/model/GPU 0</span>
+          <span><i class="dot lime"></i> Patient-level proteomics is material and externally partitioned</span>
+          <span><i class="dot coral"></i> Rupture at sampling is not a future event or treatment effect</span>
+          <span>Best novelty 0.5/5 · pre-event multimodal join 0 · P0/server/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>Structured-vessel/4D-flow best 27.5/40 · all six rejected · admitted 0</b></div>
-        <div><span>Latest compute</span><b>No scientific-server query or job in schema 10.8 · historical P0s remain closed</b></div>
+        <div><span>Latest source screen</span><b>Molecular biomarker/treatment outcome best 31.0/40 · all six rejected · admitted 0</b></div>
+        <div><span>Latest compute</span><b>No scientific-server query or job in schema 10.9 · historical P0s remain closed</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh problem or official row-level image–mask–outcome join audit only · no payload, repair or rerun</b></div>
+        <div><span>Next action</span><b>fresh problem or official same-patient pre-event image–omics–outcome join audit only · no payload, repair or rerun</b></div>
       </div>
     </section>
 
@@ -705,7 +708,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>AURORA</h2>
-        <p>Latest best 30.5/40 rejected · no independent paired aneurysm target, active lead, method or paper identity</p>
+        <p>Latest best 31.0/40 rejected · direct-prior status task and no pre-event multimodal join · active lead, method and paper identity 0</p>
       </div>
       <div class="contribution-grid">
         <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>

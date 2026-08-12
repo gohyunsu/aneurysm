@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.8":
-        raise ProtocolError("The current research-state schema must be version 10.8.")
+    if protocol["schema_version"] != "10.9":
+        raise ProtocolError("The current research-state schema must be version 10.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_structured_vessel_and_embargoed_4dflow_batch_rejected_best_27_5_no_p0_no_compute"
+        != "no_active_problem_molecular_biomarker_and_treatment_outcome_batch_rejected_best_31_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "molecular_biomarker_and_treatment_specific_outcome_reappraisal",
             "structured_vessel_and_embargoed_4dflow_reappraisal",
             "pose_workflow_and_spatiotemporal_operator_reappraisal",
             "surface_vector_and_task_faithful_dsa_delta",
@@ -288,13 +289,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_structured_vessel_and_embargoed_4dflow_batch_rejected_no_method_no_compute_surface_vector_inactive"
+        != "no_active_problem_molecular_biomarker_and_treatment_outcome_batch_rejected_no_method_no_compute_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_code_and_twenty_venet_masks_only_no_joined_image_mask_independent_test_controlled_4dflow_payload_or_scientific_server"
+        != "public_omics_article_repository_and_supplement_metadata_only_no_omics_payload_patient_image_future_event_or_treatment_rows"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -306,15 +307,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_whitelisted_material_task_asset_audit_only_no_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/structured-vessel-and-embargoed-4dflow-reappraisal-2026-08-12.md"
+        != "docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "device_phantom_venc_stable_hemodynamic_response_rejected_at_27_5_independent_unit_floor"
+        != "cross_cohort_serum_proteomic_rupture_state_calibration_rejected_at_31_direct_prior_novelty_floor"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The pose/operator batch must remain rejected and surface-vector "
+            "The molecular-biomarker/treatment-outcome batch must remain rejected and surface-vector "
             "must remain closed until a material release after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -376,8 +377,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 27.5
-        or admission_v2["current_batch_best_residual_novelty"] != 1.5
+        or admission_v2["current_batch_best_score"] != 31.0
+        or admission_v2["current_batch_best_residual_novelty"] != 2.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -386,6 +387,161 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    molecular = problem_selection[
+        "molecular_biomarker_and_treatment_specific_outcome_reappraisal"
+    ]
+    _require_keys(
+        molecular,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "pxd024615_source_doi", "pxd024615_accession",
+            "pxd024615_cohort_i_samples", "pxd024615_cohort_i_ruptured",
+            "pxd024615_cohort_i_unruptured", "pxd024615_cohort_i_controls",
+            "pxd024615_cohort_ii_samples", "pxd024615_cohort_ii_ruptured",
+            "pxd024615_cohort_ii_unruptured", "pxd024615_cohort_ii_controls",
+            "pxd024615_ev1_name", "pxd024615_ev1_bytes", "pxd024615_ev1_md5",
+            "pxd024615_ev2_name", "pxd024615_ev2_bytes", "pxd024615_ev2_md5",
+            "pxd024615_source_3dra_reviewed",
+            "pxd024615_public_3dra_image_release_identified",
+            "pxd024615_future_event_timeline_released",
+            "pxd024615_source_results_reproduced_by_aurora",
+            "pxd013442_accession", "pxd013442_listed_files",
+            "pxd013442_discovery_tissue_samples",
+            "pxd013442_discovery_serum_samples",
+            "pxd013442_samples_per_group_pool",
+            "pxd013442_effective_discovery_biological_pools",
+            "gse231922_accession", "gse231922_samples", "gse231922_smoking_ia",
+            "gse231922_nonsmoking_ia", "gse231922_controls",
+            "gse231922_future_rupture_endpoint_released", "treatment_source_doi",
+            "treatment_source_patients", "treatment_source_coiling",
+            "treatment_source_clipping", "treatment_source_ruptured_fraction",
+            "treatment_source_external_validation",
+            "treatment_source_public_patient_rows_identified",
+            "treatment_source_is_counterfactual_effect_model", "candidates",
+            "omics_spreadsheet_payload_downloaded",
+            "mass_spectrometry_payload_downloaded", "sequencing_payload_downloaded",
+            "patient_image_payload_downloaded", "clinical_row_table_downloaded",
+            "surface_vector_question_retained_as_inactive_hypothesis",
+            "historical_surface_vector_source_score_or_job_relabelled",
+            "historical_surface_vector_p0_repaired_or_rerun", "p0_registered",
+            "p1_registered", "method_selected", "architecture_selected",
+            "scientific_server_queried", "gpu_training_authorized",
+            "outer_test_authorized", "submission_identity_active",
+            "execution_server", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "next_allowed_action",
+        ],
+        "molecular biomarker and treatment-specific outcome reappraisal",
+    )
+    expected_molecular_candidates = [
+        ("cross_cohort_serum_proteomic_rupture_state_calibration", 31.0),
+        ("morphology_conditioned_proteomic_incremental_value", 28.0),
+        ("smoking_conditioned_plasma_mirna_mechanism", 27.0),
+        ("treatment_specific_inhospital_outcome_recalibration", 27.0),
+        ("pooled_tissue_serum_proteomic_reanalysis", 26.0),
+        ("pre_event_imaging_proteomic_progression_prediction", 23.0),
+    ]
+    if (
+        molecular["status"]
+        != "fresh_problem_level_batch_rejected_best_31_direct_task_prior_and_missing_joint_temporal_asset"
+        or molecular["audit_document"]
+        != "docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md"
+        or molecular["automatic_selection_threshold"] != 32.0
+        or molecular["best_candidate_id"]
+        != "cross_cohort_serum_proteomic_rupture_state_calibration"
+        or molecular["best_score"] != 31.0
+        or molecular["best_residual_novelty_score"] != 2.5
+        or molecular["all_candidate_scores"]
+        != [31.0, 28.0, 27.0, 27.0, 26.0, 23.0]
+        or molecular["conditional_source_lead_count"] != 0
+        or molecular["pxd024615_source_doi"] != "10.15252/emmm.202114713"
+        or molecular["pxd024615_accession"] != "PXD024615"
+        or [
+            molecular["pxd024615_cohort_i_samples"],
+            molecular["pxd024615_cohort_i_ruptured"],
+            molecular["pxd024615_cohort_i_unruptured"],
+            molecular["pxd024615_cohort_i_controls"],
+            molecular["pxd024615_cohort_ii_samples"],
+            molecular["pxd024615_cohort_ii_ruptured"],
+            molecular["pxd024615_cohort_ii_unruptured"],
+            molecular["pxd024615_cohort_ii_controls"],
+        ] != [212, 55, 57, 100, 32, 6, 6, 20]
+        or [
+            molecular["pxd024615_ev1_name"],
+            molecular["pxd024615_ev1_bytes"],
+            molecular["pxd024615_ev1_md5"],
+            molecular["pxd024615_ev2_name"],
+            molecular["pxd024615_ev2_bytes"],
+            molecular["pxd024615_ev2_md5"],
+        ] != [
+            "EMMM-14-e14713-s024.xlsx", 13784,
+            "b22ecc3da824b8a72a767ff39cb649be",
+            "EMMM-14-e14713-s022.xlsx", 13642,
+            "5f9b9b933f8546659378a11264089735",
+        ]
+        or [
+            molecular["pxd013442_accession"],
+            molecular["pxd013442_listed_files"],
+            molecular["pxd013442_discovery_tissue_samples"],
+            molecular["pxd013442_discovery_serum_samples"],
+            molecular["pxd013442_samples_per_group_pool"],
+            molecular["pxd013442_effective_discovery_biological_pools"],
+        ] != ["PXD013442", 42, 20, 20, 5, 4]
+        or [
+            molecular["gse231922_accession"], molecular["gse231922_samples"],
+            molecular["gse231922_smoking_ia"],
+            molecular["gse231922_nonsmoking_ia"],
+            molecular["gse231922_controls"],
+        ] != ["GSE231922", 30, 10, 10, 10]
+        or [
+            molecular["treatment_source_doi"],
+            molecular["treatment_source_patients"],
+            molecular["treatment_source_coiling"],
+            molecular["treatment_source_clipping"],
+            molecular["treatment_source_ruptured_fraction"],
+        ] != ["10.1016/j.jocn.2026.112073", 436, 224, 212, 0.869]
+        or [(row["id"], row["total"]) for row in molecular["candidates"]]
+        != expected_molecular_candidates
+        or any(row["critical_axis_pass"] for row in molecular["candidates"])
+        or any(
+            molecular[key] is not False
+            for key in (
+                "primary_problem_selected", "paper_identity_active",
+                "pxd024615_public_3dra_image_release_identified",
+                "pxd024615_future_event_timeline_released",
+                "pxd024615_source_results_reproduced_by_aurora",
+                "gse231922_future_rupture_endpoint_released",
+                "treatment_source_external_validation",
+                "treatment_source_public_patient_rows_identified",
+                "treatment_source_is_counterfactual_effect_model",
+                "omics_spreadsheet_payload_downloaded",
+                "mass_spectrometry_payload_downloaded",
+                "sequencing_payload_downloaded", "patient_image_payload_downloaded",
+                "clinical_row_table_downloaded",
+                "historical_surface_vector_source_score_or_job_relabelled",
+                "historical_surface_vector_p0_repaired_or_rerun", "p0_registered",
+                "p1_registered", "method_selected", "architecture_selected",
+                "scientific_server_queried", "gpu_training_authorized",
+                "outer_test_authorized", "submission_identity_active",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or molecular["pxd024615_source_3dra_reviewed"] is not True
+        or molecular["surface_vector_question_retained_as_inactive_hypothesis"]
+        is not True
+        or molecular["execution_server"] != "introai9"
+        or molecular["next_allowed_action"]
+        != "fresh_unrelated_problem_level_source_or_whitelisted_joint_temporal_asset_audit_only_no_payload_p0_model_or_compute"
+    ):
+        raise ProtocolError(
+            "The molecular-biomarker/treatment-outcome batch must remain rejected: "
+            "public omics data do not create a new future-event imaging task, and "
+            "the single-centre prognostic cohort cannot authorize a model or compute."
+        )
+    checks.append("molecular-biomarker and treatment-outcome non-admission boundary")
 
     structured = problem_selection[
         "structured_vessel_and_embargoed_4dflow_reappraisal"
@@ -8938,6 +9094,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("thirty-two-source fail-closed embargoed 4D-flow code watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "cross_cohort_serum_proteomic_rupture_state_calibration_direct_prior_and_not_future_risk",
+        "morphology_conditioned_proteomic_incremental_value_no_public_image_serum_join",
+        "smoking_conditioned_plasma_mirna_mechanism_small_cross_sectional_direct_prior",
+        "treatment_specific_inhospital_outcome_recalibration_no_public_rows_and_direct_prior",
+        "pooled_tissue_serum_proteomic_reanalysis_four_biological_pools",
+        "pre_event_imaging_proteomic_progression_prediction_missing_joint_temporal_asset",
         "device_phantom_venc_stable_hemodynamic_response_one_anatomy_unit_floor",
         "topology_faithful_cerebral_vessel_segmentation_direct_prior_and_twenty_mask_asset_floor",
         "reference_aware_multitask_aneurysm_segmentation_no_independent_dense_reference",

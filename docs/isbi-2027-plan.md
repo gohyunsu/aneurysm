@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Schema 10.9 checkpoint:** Public omics availability does not create an
+> ISBI identity. Cross-cohort serum rupture-state classification is directly
+> occupied; imaging-conditioned biomarkers lack a public join; treatment-
+> specific prognosis is not treatment-effect estimation. Best 31.0/40 fails
+> novelty. Do not add a title, claim, contribution, method figure, result table
+> or C21. Surface-vector also remains inactive pending material evidence.
+
 > **Schema 10.8 checkpoint:** None of topology-aware vessel segmentation,
 > RSNA revalidation, CMRx4DFlow reconstruction or one-anatomy phantom response
 > is an active ISBI identity. The highest row is 27.5/40 and fails the

@@ -1,5 +1,13 @@
 # Dataset acquisition plan
 
+> **Schema 10.9 acquisition boundary:** Do not download PXD024615/PXD013442
+> spreadsheets or raw spectra, GSE231922 sequencing payload, or request
+> NBC-GARUDA rows. Metadata already rejects the executable tasks on direct-
+> prior/target/unit grounds. A future molecular branch requires an immutable
+> same-patient baseline-image--pre-event-sample--event/censoring manifest; its
+> appearance requests a fresh source audit only, not automatic acquisition,
+> P0, model or compute.
+
 > **Schema 10.8 acquisition boundary:** Do not contact VeNet authors for the
 > full set, infer a 200-case joined benchmark, accept CMRx4DFlow terms, download
 > challenge data, or stage the phantom as patient evidence. Source-watch v19

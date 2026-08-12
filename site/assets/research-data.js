@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · structured-vessel/embargoed-4D-flow batch best 27.5/40 rejected; all six fail total or a critical novelty/asset/unit/schedule floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or whitelisted material task-asset audit; 20 public VeNet masks, RSNA series-level pseudo-reference code, embargoed challenge data and one-anatomy phantom repetitions do not open E0/P0/P1, model or GPU; surface-vector still requires method-free stability plus a field-error-matched failure",
+    status: "Target locked · molecular-biomarker/treatment-outcome batch best 31.0/40 rejected; all six fail total or a critical novelty/target/asset/unit floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem or immutable same-patient pre-event image–omics–future-outcome audit; public rupture-state proteomics is direct prior, pooled discovery and bootstrap prognosis do not create future risk or treatment effects, and surface-vector still requires material evidence plus method-free stability and a field-error-matched failure",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Public patient-level omics improves executability, but not novelty or target time",
+      copy: "PXD024615 exposes 212 discovery and 32 external-cohort serum samples, but the source already performs IA/control and ruptured/unruptured classification. Rupture at sampling is not a future event, and no public same-patient manifest joins pre-event blood, baseline imaging, treatment/censoring and time-to-event. PXD013442 pools five donors per group into four discovery mixtures; GSE231922 has 30 plasma-miRNA samples. NBC-GARUDA is internally bootstrapped treatment-specific prognosis, not counterfactual treatment-effect estimation. Six rows score 31.0/28.0/27.0/27.0/26.0/23.0 and all fail a mandatory floor.",
+      status: "Best 31.0/40 rejected · residual novelty 0.5/5 · pre-event image–omics–outcome join 0 · payload/P0/model/server/GPU 0",
+      url: "../docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Vessel topology and 4D-flow are important, but the executable task and independent units are missing",
@@ -1161,9 +1168,21 @@ window.AURORA_DATA = Object.freeze({
       name: "OpenNeuro ds005096",
       role: "source-rejected longitudinal surface-growth candidate; possible future external audit only",
       provenance: "CC0 · 63 patients · 85 aneurysms · 24 longitudinal patients · 126 raw paths · 4 same-session multi-acquisition controls · latest direct-prior subset 16 patients/19 aneurysms/6 growth · payload/P0/model/GPU 0"
+    },
+    {
+      name: "PXD024615 serum proteomics and adjacent molecular sources",
+      role: "source-rejected cross-sectional biomarker controls; not training, future-risk or treatment-effect evidence",
+      provenance: "PXD024615 cohort I 212 samples and cohort II 32 external samples · source already owns IA/control and rupture-state classification · PXD013442 four pooled discovery mixtures · GSE231922 30 plasma-miRNA samples · no pre-event image–omics–outcome join · payload/P0/model/GPU 0"
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 10.9 rejects molecular-biomarker and treatment-outcome pivots before payload or compute",
+      copy: "PXD024615 is a genuine patient-level public serum-proteomics release with 212 discovery and 32 external-cohort samples, but its source already owns aneurysm/control and rupture-state classification. Sampling-time rupture does not identify future risk, and no release joins pre-event blood, baseline image, treatment/censoring and event time in the same patients. PXD013442 has four pooled discovery mixtures, GSE231922 has 30 plasma-miRNA samples, and NBC-GARUDA is internally bootstrapped treatment-specific prognosis rather than counterfactual treatment-effect evidence. Six rows score 31.0/28.0/27.0/27.0/26.0/23.0 and all fail. Surface-vector remains inactive. No payload, P0/P1, method, architecture, scientific server, PBS/GPU, outer test or paper claim opened.",
+      files: ["docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/research-direction.md", "docs/research-map.md", "docs/datasets.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

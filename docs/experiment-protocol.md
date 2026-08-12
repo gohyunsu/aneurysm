@@ -1,5 +1,11 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 10.9 experiment boundary:** no acquisition and no run. Public omics
+> metadata reject the obvious tasks before payload access: executable rupture-
+> state classification is direct prior, while the novel pre-event imaging--
+> omics endpoint has no joined asset. No scientific server was queried and no
+> PBS/GPU job was submitted or monitored. Historical `115645` stays closed.
+
 > **Schema 10.8 experiment boundary:** no run. VeNet has no frozen joined
 > public image–mask/independent-test contract, RSNA patient grouping/reference
 > remains unresolved, CMRx4DFlow terms are unaccepted and its embargo is after

@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 10.9 server state:** Public metadata only. No omics payload,
+> scientific-server query, transfer, PBS submission, GPU or monitoring
+> occurred; active job count is zero. Future gate-authorized work is
+> `introai9` PBS-only and never login-node GPU. Never access, query, transfer
+> to, submit to or monitor `junjinyong`.
+
 > **Schema 10.8 server state:** This audit used public web/repository metadata
 > only. No scientific server, transfer, PBS submission, GPU, or monitoring was
 > used. Current AURORA job count is zero. Future gate-authorized execution is

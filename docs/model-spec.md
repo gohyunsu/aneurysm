@@ -1,5 +1,11 @@
 # AURORA v2 모델 명세
 
+> **Schema 10.9 model decision: `null`.** A proteomic encoder, imaging--omics
+> fusion transformer, survival head or treatment-policy network cannot create
+> a missing target time or same-patient join. The executable rupture-state task
+> is direct prior. Surface edge 1-forms, Hodge/SE(3) and periodic operators stay
+> inactive controls for a separate unverified question; none is selected.
+
 > **Schema 10.8 model decision: `null`.** Do not implement a topology-aware
 > segmenter, RSNA multi-task network, 4D-flow reconstructor, device-response
 > model, GNN/Hodge operator or named stack. Each nearest architecture cell is

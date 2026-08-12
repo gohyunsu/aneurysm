@@ -1,5 +1,13 @@
 # AURORA 연구 방향
 
+> **Latest decision · schema 10.9:** Do not pivot to a proteomic/miRNA
+> classifier, multimodal fusion network or treatment recommender. PXD024615 is
+> executable patient-level serum proteomics, but its IA/control and rupture-
+> state tasks are direct prior. No release joins pre-event blood, baseline
+> imaging, treatment/censoring and future outcomes in the same patients. Best
+> is 31.0/40 and fails novelty at 0.5/5; the conceptually novel future-event row
+> fails asset readiness. Problem and architecture remain `null`. [Exact audit](molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md)
+
 > **Latest decision · schema 10.8:** Vessel topology, RSNA multi-task
 > segmentation, CMRx4DFlow reconstruction and device-phantom response were
 > reconsidered as fresh problem identities. All fail a non-compensatory floor.

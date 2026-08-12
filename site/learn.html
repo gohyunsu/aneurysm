@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="공개 aSAH NCCT 마스크와 patient-level outcome join의 차이부터 WSS, GNN과 평가 계약까지 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="공개 영상·오믹스 자산, target time, 독립 단위부터 WSS, GNN과 평가 계약까지 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#molecular-target-time">Omics &amp; target time</a>
       <a href="#dsa-task-fidelity">Sparse DSA fidelity</a>
       <a href="#asah-outcome">aSAH mask &amp; outcome</a>
       <a href="#release-utility">Release &amp; synthetic utility</a>
@@ -84,14 +85,66 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 10.8</span>
+          <span>짧은 답 · schema 10.9</span>
           <strong>현재 선택된 문제와 모델은 없으며, 최신 여섯 후보도 모두 기각됐습니다.</strong>
           <p>
-            최신 vessel/4D-flow 후보는 27.5/27.0/27.0/26.5/26.0/21.0입니다.
-            공개 mask 수, 독립 환자 단위, dense reference와 submission 전에 쓸 수
-            있는 lawful data가 동시에 충족되지 않습니다. 따라서 P0, method, model,
-            scientific server와 GPU는 0입니다.
+            최신 molecular/outcome 후보는 31.0/28.0/27.0/27.0/26.0/23.0입니다.
+            공개 patient-level proteomics는 있지만 가장 실행 가능한 rupture-state
+            task는 direct prior이고, 더 새로운 future-event task에는 같은 환자의
+            pre-event image--blood--outcome join이 없습니다. 따라서 P0, method,
+            model, scientific server와 GPU는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="molecular-target-time">
+          <span>오믹스 자산, rupture state와 target time을 처음부터 이해하기</span>
+          <strong>“환자별 공개 데이터가 있다”는 사실만으로 새로운 예측 문제나 미래 위험 근거가 생기지는 않습니다.</strong>
+          <p>
+            <b>Proteomics</b>는 혈액이나 조직에 들어 있는 많은 단백질의 양을 한 번에
+            측정합니다. <b>miRNA</b>는 유전자 발현을 조절하는 작은 RNA입니다. 이런
+            표는 각 행이 sample이고 각 열이 molecule인 고차원 데이터입니다. 공개
+            accession은 재현성에 큰 장점이 있지만, 무엇을 언제 예측하는지와 독립
+            환자 수는 별도로 확인해야 합니다.
+          </p>
+          <p>
+            PXD024615는 가장 실행 가능성이 높은 자산입니다. 원 연구의 cohort I은
+            212개 serum sample—ruptured 55, unruptured 57, control 100—이고 내부
+            75/25 분할을 사용합니다. Cohort II는 ruptured 6, unruptured 6, control
+            20의 32개 sample로 외부 검증합니다. 그러나 원 논문이 이미 aneurysm 대
+            control 및 ruptured 대 unruptured 분류를 수행했습니다. 같은 table에서
+            다른 classifier를 쓰거나 calibration을 추가하는 것은 재현 연구가 될 수는
+            있어도 독립적인 ISBI method novelty가 아닙니다.
+          </p>
+          <p>
+            <b>Rupture state</b>는 채혈 시점에 이미 파열됐는지를 나타냅니다.
+            <b>Future rupture risk</b>는 아직 파열되지 않은 index time에서 시작해 이후
+            event와 censoring을 관찰해야 합니다. 파열 후 생긴 염증·치료·입원 변화는
+            원인 예측 변수가 아니라 event 이후 정보일 수 있습니다. 따라서 현재
+            rupture-state AUC를 미래 예방 의사결정 성능으로 바꿔 부를 수 없습니다.
+          </p>
+          <p>
+            PXD013442는 20 tissue와 20 serum donor를 설명하지만 discovery 단계에서
+            각 임상군 다섯 명을 한 pool로 합쳐 iTRAQ를 측정했습니다. 사람 수는
+            20이어도 discovery의 독립 측정 단위는 네 pooled mixture입니다.
+            GSE231922도 smoking IA 10, nonsmoking IA 10, control 10의 작은 plasma-miRNA
+            설계라 기전 탐색에는 유용하지만 일반화나 미래 사건 판정에는 부족합니다.
+          </p>
+          <p>
+            치료별 모델도 조심해야 합니다. NBC-GARUDA는 436명에서 clipping과
+            coiling 이후 병원 내 예후를 각각 예측하고 bootstrap으로 내부 검증합니다.
+            이는 “각 치료군 안에서 누가 나쁠까”라는 prognosis입니다. 같은 환자가
+            다른 치료를 받았을 때의 결과 차이를 식별하는 counterfactual treatment
+            effect가 아니므로 치료 추천 모델로 과장할 수 없습니다.
+          </p>
+          <p>
+            그래서 여섯 formulation은 31.0/28.0/27.0/27.0/26.0/23.0으로 모두
+            기각했습니다. 최고점은 asset이 좋지만 novelty 0.5/5이고, 가장 새로운
+            pre-event imaging--omics progression 질문은 필요한 same-patient target
+            asset이 없습니다. 재진입에는 baseline-unruptured inclusion, 채혈·영상
+            timestamp, future component event, censoring/treatment, patient grouping과
+            external-centre split이 하나의 versioned manifest에 함께 있어야 합니다.
+            그 전에는 모델이나 GPU가 아니라 문제 정의가 병목입니다.
+          </p>
+          <a href="../docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md">source facts, six-way score와 re-entry 조건 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="topology-reference-embargo">
           <span>Topology, reference, embargo를 처음부터 이해하기</span>

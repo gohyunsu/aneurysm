@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 molecular-biomarker/treatment-outcome reappraisal · schema
+> 10.9:** PXD024615 is a real public patient-level serum-proteomics asset
+> (212 discovery samples and 32 external-cohort samples), but its paper already
+> owns aneurysm/control and rupture-state classification. Rupture at sampling
+> is not future rupture risk, and the release has no same-patient baseline
+> image--pre-event blood--time-to-event join. PXD013442 pools five subjects per
+> group into four discovery mixtures; GSE231922 has 30 plasma-miRNA samples;
+> NBC-GARUDA is internally bootstrapped treatment-specific prognosis, not a
+> counterfactual treatment-effect asset. Six fresh rows score
+> **31.0/28.0/27.0/27.0/26.0/23.0** and all are rejected. Public omics improves
+> asset readiness, not residual novelty. Surface-vector remains inactive;
+> active problem/P0/P1/method/architecture/server/PBS/GPU/claim are zero. See
+> the [exact reappraisal](docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md)
+> and [beginner guide](site/learn.html#molecular-target-time).
+
 > **2026-08-12 schema 10.8 deployment/private pin:** Exact scientific source
 > `6b153b7f988e2d1c6fe9def294a6348849a4c53a` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31557448461)

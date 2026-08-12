@@ -1,5 +1,12 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 10.9 asset boundary:** PXD024615 exposes patient-level serum
+> proteomics for 212 discovery and 32 external-cohort samples, yet it has no
+> public baseline image, future-event time, censoring or treatment-linked join.
+> PXD013442 uses five-donor pooling into four discovery mixtures; GSE231922 has
+> 30 plasma-miRNA samples. These are real assets, not the target asset for pre-
+> event progression or treatment-effect claims. No payload was downloaded.
+
 > **Schema 10.8 asset boundary:** VeNet exact public Git = 20 masks, source IXI
 > MRA redistributed = 0, full 200 = contact-only, independent test = 0.
 > CMRx4DFlow regular 138/32/43 data are controlled, terms acceptance/payload =

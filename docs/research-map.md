@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 10.9 map · 2026-08-12:** Public serum proteomics reaches a usable
+> patient-level release, but the executable branch terminates at already-
+> occupied cross-sectional rupture-state classification. The stronger pre-
+> event imaging--omics--future-outcome branch has no immutable same-patient
+> join. Pooled discovery, small smoking-miRNA and bootstrap-only treatment-
+> prognosis branches do not bridge that edge. All six rows are rejected;
+> problem/method/model/compute branches remain empty.
+
 > **2026-08-12 rupture-time map:** The latest three-centre branch ends at
 > cross-sectional rupture-status classification and external-centre AUC. The
 > prospective future-risk branch is disconnected because baseline time,

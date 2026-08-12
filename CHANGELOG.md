@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-12 · Molecular biomarker and treatment-specific outcome reappraisal
+
+- Audited PXD024615 as patient-level serum proteomics: 212 discovery samples
+  and a 32-sample external cohort. Its source already owns IA/control and
+  rupture-state classification; sampling-time rupture is not a future event.
+- Distinguished PXD013442's four pooled discovery mixtures from its 20 stated
+  donors, and kept GSE231922's 30 samples as a small mechanism source.
+- Classified NBC-GARUDA as internally bootstrapped treatment-specific
+  prognosis, not counterfactual clipping-versus-coiling evidence.
+- Rejected all six rows at 31.0/28.0/27.0/27.0/26.0/23.0. No payload, model,
+  server query, PBS/GPU work or claim opened; surface-vector stays inactive.
+
 ## 2026-08-12 · Schema 10.8 deployed and privately pinned
 
 - Exact scientific source `6b153b7f988e2d1c6fe9def294a6348849a4c53a`

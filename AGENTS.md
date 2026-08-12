@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 molecular-biomarker/treatment-outcome · schema 10.9:** Exact
+> public-source audit separates downloadable patient-level data, an unoccupied
+> task, and a valid target time. PXD024615 supplies 212 discovery and 32
+> external serum-proteomics samples, but the source already performs IA/control
+> and rupture-state classification. It does not join pre-event blood, baseline
+> imaging and future event/censoring for the same patient. PXD013442 has four
+> pooled discovery mixtures; GSE231922 has 30 plasma samples; NBC-GARUDA has
+> bootstrap-only prognosis and no treatment-effect identification. Scores
+> 31.0/28.0/27.0/27.0/26.0/23.0 are all rejected. No payload, P0/P1, method,
+> architecture, server query, PBS/GPU, result or claim opens. Historical
+> `115645` remains closed 0/10 no-verdict and is never repaired/rerun. Future
+> execution is `introai9` PBS-only with no login-node GPU. Never access/query/
+> transfer/submit/monitor `junjinyong`.
+
 > **2026-08-12 schema 10.8 deployment/private synchronization:** Exact public
 > scientific source `6b153b7f988e2d1c6fe9def294a6348849a4c53a` passed Quality
 > `31557448461` and Pages `31557447516`. Private paper head
