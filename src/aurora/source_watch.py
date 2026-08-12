@@ -49,6 +49,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v17",
         "aurora.source_watch.v18",
         "aurora.source_watch.v19",
+        "aurora.source_watch.v20",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -216,7 +217,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v18_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v18(payload)
-    else:
+    elif schema == "aurora.source_watch.v19":
         if payload.get("extends") != "source_watch_v18.json":
             raise SourceWatchContractError("v19_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -227,6 +228,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v19_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v19(payload)
+    else:
+        if payload.get("extends") != "source_watch_v19.json":
+            raise SourceWatchContractError("v20_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v19":
+            raise SourceWatchContractError("v20_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v20_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v20(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -286,6 +298,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v17",
         "aurora.source_watch.v18",
         "aurora.source_watch.v19",
+        "aurora.source_watch.v20",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -2158,6 +2171,72 @@ def _validate_v19(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v19_change_boundary_changed")
 
 
+def _validate_v20(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 33:
+        raise SourceWatchContractError("v20_watch_set_changed")
+    _validate_v19(
+        {
+            "watches": watches[:32],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    release = watches[32]
+    if (
+        release.get("watch_id")
+        != "cathaction_intervention_release_contract_v1"
+        or release.get("kind") != "huggingface_intervention_release"
+        or release.get("review_request") != "fresh_source_reaudit_only"
+        or release.get("source")
+        != {
+            "dataset_api_url": "https://huggingface.co/api/datasets/airvlab/CathAction",
+            "dataset_url": "https://huggingface.co/datasets/airvlab/CathAction",
+            "paper_url": "https://arxiv.org/abs/2408.13126",
+            "challenge_url": "https://endomiccai.github.io/cathation/",
+        }
+        or release.get("frozen_snapshot")
+        != {
+            "sha": "8b04056f0f4fa4b04d8454728f000730af0d5560",
+            "last_modified": "2026-05-18T11:16:32Z",
+            "private": False,
+            "gated": False,
+            "disabled": False,
+            "license_tags": ["license:cc-by-nc-sa-4.0"],
+            "used_storage_bytes": 56678352136,
+            "sibling_count": 6,
+            "siblings_sha256": (
+                "30fdaad6d32078ffcb4c0b5bca83e4de0154162b52a4720be910cdbb0548bcb4"
+            ),
+            "archive_entries": [
+                "collision_detection.zip",
+                "segmentation_animal_phantom.zip",
+                "segmentation_human_train.zip",
+                "video_action_understanding.zip",
+            ],
+            "human_segmentation_archive_present": True,
+            "human_collision_archive_present": False,
+            "availability": (
+                "public_metadata_and_large_archives_card_requests_download_form_"
+                "and_license_agreement_independent_unit_onset_horizon_and_cross_"
+                "archive_join_unresolved"
+            ),
+        }
+    ):
+        raise SourceWatchContractError("cathaction_release_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "human_segmentation_is_not_human_collision_evidence",
+            "frame_count_is_not_independent_procedure_or_specimen_count",
+            "current_frame_collision_detection_is_not_precontact_anticipation",
+            "cross_archive_join_must_be_explicit_and_immutable",
+        )
+    ):
+        raise SourceWatchContractError("v20_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -2505,6 +2584,48 @@ def fetch_huggingface_revision_snapshot(dataset_api_url: str) -> dict[str, Any]:
         ),
         "used_storage_bytes": int(metadata.get("usedStorage", 0)),
         "availability": "public_synthetic_transient_wss_payload_exact_revision",
+    }
+
+
+def fetch_huggingface_intervention_release_snapshot(
+    dataset_api_url: str,
+) -> dict[str, Any]:
+    """Fetch CathAction release metadata without opening any archive payload."""
+    metadata = _json_get(dataset_api_url)
+    siblings = sorted(
+        str(item.get("rfilename"))
+        for item in metadata.get("siblings", [])
+        if item.get("rfilename")
+    )
+    archive_entries = sorted(name for name in siblings if name.endswith(".zip"))
+    sibling_manifest = ("\n".join(siblings) + "\n").encode("utf-8")
+    return {
+        "sha": str(metadata.get("sha", "")),
+        "last_modified": str(metadata.get("lastModified", "")),
+        "private": bool(metadata.get("private", False)),
+        "gated": metadata.get("gated", False),
+        "disabled": bool(metadata.get("disabled", False)),
+        "license_tags": sorted(
+            str(tag)
+            for tag in metadata.get("tags", [])
+            if str(tag).startswith("license:")
+        ),
+        "used_storage_bytes": int(metadata.get("usedStorage", 0)),
+        "sibling_count": len(siblings),
+        "siblings_sha256": _sha256(sibling_manifest),
+        "archive_entries": archive_entries,
+        "human_segmentation_archive_present": (
+            "segmentation_human_train.zip" in archive_entries
+        ),
+        "human_collision_archive_present": any(
+            "human" in name.lower() and "collision" in name.lower()
+            for name in archive_entries
+        ),
+        "availability": (
+            "public_metadata_and_large_archives_card_requests_download_form_"
+            "and_license_agreement_independent_unit_onset_horizon_and_cross_"
+            "archive_join_unresolved"
+        ),
     }
 
 
@@ -3074,6 +3195,52 @@ def evaluate_watch(
             "gpu_or_outer_test_authorized": False,
             "observed": dict(observed),
         }
+    if watch.get("kind") == "huggingface_intervention_release":
+        frozen = watch["frozen_snapshot"]
+        signal_names = {
+            "sha": "huggingface_revision_changed",
+            "last_modified": "huggingface_last_modified_changed",
+            "private": "huggingface_private_state_changed",
+            "gated": "huggingface_gated_state_changed",
+            "disabled": "huggingface_disabled_state_changed",
+            "license_tags": "huggingface_license_changed",
+            "used_storage_bytes": "huggingface_storage_size_changed",
+            "sibling_count": "huggingface_file_count_changed",
+            "siblings_sha256": "huggingface_file_inventory_changed",
+            "archive_entries": "huggingface_archive_inventory_changed",
+            "human_segmentation_archive_present": (
+                "human_segmentation_archive_state_changed"
+            ),
+            "human_collision_archive_present": "human_collision_archive_state_changed",
+            "availability": "huggingface_release_availability_changed",
+        }
+        signals = [
+            signal
+            for key, signal in signal_names.items()
+            if observed.get(key) != frozen.get(key)
+        ]
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") == "huggingface_under_review_dataset":
         frozen = watch["frozen_snapshot"]
         signals: list[str] = []
@@ -3289,6 +3456,10 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         return fetch_huggingface_dataset_snapshot(source["dataset_api_url"])
     if watch.get("kind") == "huggingface_revision":
         return fetch_huggingface_revision_snapshot(source["dataset_api_url"])
+    if watch.get("kind") == "huggingface_intervention_release":
+        return fetch_huggingface_intervention_release_snapshot(
+            source["dataset_api_url"]
+        )
     if watch.get("kind") == "huggingface_under_review_dataset":
         return fetch_huggingface_under_review_snapshot(source["dataset_api_url"])
     if watch.get("kind") == "huggingface_aneux_transient_revision":
@@ -3327,6 +3498,7 @@ def evaluate_config(
         "aurora.source_watch.v17",
         "aurora.source_watch.v18",
         "aurora.source_watch.v19",
+        "aurora.source_watch.v20",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

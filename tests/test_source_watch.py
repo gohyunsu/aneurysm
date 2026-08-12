@@ -38,10 +38,48 @@ CONFIG_V16 = ROOT / "configs" / "source_watch_v16.json"
 CONFIG_V17 = ROOT / "configs" / "source_watch_v17.json"
 CONFIG_V18 = ROOT / "configs" / "source_watch_v18.json"
 CONFIG_V19 = ROOT / "configs" / "source_watch_v19.json"
+CONFIG_V20 = ROOT / "configs" / "source_watch_v20.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
 class SourceWatchContractTests(unittest.TestCase):
+    def test_v20_freezes_cathaction_release_without_warning_or_compute_authority(self) -> None:
+        config = load_config(CONFIG_V20)
+        self.assertEqual(config["schema_version"], "aurora.source_watch.v20")
+        self.assertEqual(len(config["watches"]), 33)
+        release = config["watches"][-1]
+        self.assertEqual(
+            release["watch_id"], "cathaction_intervention_release_contract_v1"
+        )
+        self.assertEqual(
+            release["frozen_snapshot"]["sha"],
+            "8b04056f0f4fa4b04d8454728f000730af0d5560",
+        )
+        self.assertTrue(
+            release["frozen_snapshot"]["human_segmentation_archive_present"]
+        )
+        self.assertFalse(
+            release["frozen_snapshot"]["human_collision_archive_present"]
+        )
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+        observations[release["watch_id"]]["human_collision_archive_present"] = True
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
     def test_v19_freezes_embargoed_4dflow_code_without_data_authority(self) -> None:
         config = load_config(CONFIG_V19)
         self.assertEqual(config["schema_version"], "aurora.source_watch.v19")
@@ -690,7 +728,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v19.json", workflow)
+        self.assertIn("configs/source_watch_v20.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)

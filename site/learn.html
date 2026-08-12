@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="공개 영상·오믹스 자산, target time, 독립 단위부터 WSS, GNN과 평가 계약까지 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="현재 충돌 검출과 사전 경고, 공개 자산 계약, 독립 단위부터 WSS, GNN과 평가까지 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#collision-anticipation">Collision anticipation</a>
       <a href="#molecular-target-time">Omics &amp; target time</a>
       <a href="#dsa-task-fidelity">Sparse DSA fidelity</a>
       <a href="#asah-outcome">aSAH mask &amp; outcome</a>
@@ -85,15 +86,69 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 10.9</span>
+          <span>짧은 답 · schema 11.0</span>
           <strong>현재 선택된 문제와 모델은 없으며, 최신 여섯 후보도 모두 기각됐습니다.</strong>
           <p>
-            최신 molecular/outcome 후보는 31.0/28.0/27.0/27.0/26.0/23.0입니다.
-            공개 patient-level proteomics는 있지만 가장 실행 가능한 rupture-state
-            task는 direct prior이고, 더 새로운 future-event task에는 같은 환자의
-            pre-event image--blood--outcome join이 없습니다. 따라서 P0, method,
-            model, scientific server와 GPU는 0입니다.
+            최신 collision/intervention 후보는
+            26.5/26.5/26.0/24.5/24.0/20.0입니다. 공개 archive는 있지만
+            first-contact onset, warning horizon, procedure/specimen grouping과
+            human collision label이 없어 사전 경고 문제를 만들 수 없습니다.
+            따라서 P0, method, model, scientific server와 GPU는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="collision-anticipation">
+          <span>Collision detection과 사전 경고를 처음부터 이해하기</span>
+          <strong>“지금 접촉이 보인다”와 “곧 접촉하니 지금 행동을 바꿔야 한다”는 다른 예측 문제입니다.</strong>
+          <p>
+            혈관 내 시술에서는 catheter나 guidewire가 X-ray 영상에서 보입니다.
+            <b>Current-frame collision detection</b>은 현재 frame에 접촉 표시가 있는지
+            맞힙니다. 반면 <b>pre-contact anticipation</b>은 아직 접촉하지 않은 시점의
+            영상만 보고, 미리 정한 시간 안에 첫 접촉이 일어날지 경고해야 합니다.
+            후자는 의사가 속도나 방향을 바꿀 시간을 주기 때문에 더 중요한 질문일
+            수 있지만, 미래를 가리키는 정답이 별도로 필요합니다.
+          </p>
+          <p>
+            예를 들어 30 frame 뒤를 예측한다고 하겠습니다. 각 sequence에서
+            “처음 접촉한 frame”을 정하고, 그 앞의 관찰 구간과 안전 buffer, 경고
+            구간을 고정해야 합니다. 접촉하지 않은 완전한 sequence도 있어야 false
+            alarm을 셀 수 있습니다. 접촉 이후 frame을 입력에 섞거나 같은 접촉
+            event의 이웃 frame을 train과 test에 나누면 모델이 미래를 예측한 것이
+            아니라 이미 보이는 흔적이나 같은 사건을 기억한 셈이 됩니다.
+          </p>
+          <p>
+            CathAction 논문은 569 videos, 약 500,000 action/collision frame과 약
+            25,000 tool mask를 보고하고, action anticipation·recognition, collision
+            detection, segmentation과 phantom→animal adaptation을 이미 비교합니다.
+            2026 challenge도 segmentation, collision detection, domain adaptation,
+            joint/foundation approaches를 명시합니다. 따라서 여러 head를 결합하거나
+            Transformer라는 이름을 붙이는 것만으로는 새 contribution이 아닙니다.
+          </p>
+          <p>
+            Exact 공개 HF revision에는 네 대형 archive가 있고 human segmentation
+            archive도 있습니다. 하지만 공개 card가 설명하는 collision data는
+            phantom train과 phantom/animal validation의 image/label path이며, complete
+            chronological sequence, first-contact onset, warning horizon, specimen·anatomy·
+            procedure ID를 선언하지 않습니다. Temporal action annotation은 별 archive에
+            있고 collision event 및 tool mask와 연결하는 immutable ID가 없습니다.
+            그래서 파일 이름이나 가까운 frame을 임의로 이어 붙이지 않습니다.
+          </p>
+          <p>
+            <b>Human segmentation</b>은 사람 영상에서 도구가 어디 있는지를 알려줄
+            수 있지만, 도구가 혈관벽에 닿았는지, 힘이 얼마인지, 손상이 있었는지를
+            알려주지 않습니다. 2D 투영에서 경계가 겹쳐 보이는 것도 3D 물리 접촉과
+            같지 않습니다. 따라서 human mask archive를 human collision cohort로
+            세거나, frame 수를 독립 환자·procedure 수로 세지 않습니다.
+          </p>
+          <p>
+            가장 좋은 residual question인 pre-contact warning도 26.5/40입니다.
+            Conceptual novelty는 3.0/5지만 target, asset과 independent-unit floor를
+            실패합니다. 재진입하려면 versioned release가 onset/adjudication, frame
+            rate, observation/buffer/warning horizons, complete negatives, immutable
+            cross-archive join, grouped split과 untouched domain/specimen confirmation을
+            제공해야 합니다. 그때도 첫 실험은 network가 아니라 event count, onset
+            stability와 trivial motion/history baseline을 확인하는 method-free audit입니다.
+          </p>
+          <a href="../docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md">exact release, direct prior, 여섯 점수와 재진입 계약 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="molecular-target-time">
           <span>오믹스 자산, rupture state와 target time을 처음부터 이해하기</span>

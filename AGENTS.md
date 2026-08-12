@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 endovascular collision-anticipation · schema 11.0:** 전달된
+> surface-vector 분석에서는 “field error와 stable flow structure가 다를 수
+> 있다”는 가설 및 task stability→matched failure→bounded development→fresh
+> confirmation 순서만 보존한다. Job `115645.ECE-util1`은 E/exit 2,
+> walltime 00:27:02, GPU 0, 0/10, aggregate/raw log/cache 0인 execution-
+> incomplete/no-verdict history다. 32.0/40 source score를 유지하며 같은
+> contract를 repair/rerun하지 않는다. Edge-1-form/Hodge/SE(3)/periodic
+> operator/structural loss는 unselected controls이지 novelty나 architecture가
+> 아니다.
+>
+> Exact CathAction HF revision `8b04056…`은 네 archive와 56,678,352,136
+> used bytes를 공개하지만 card가 download form/license agreement를 요청하고,
+> public metadata에는 collision onset/horizon/complete negatives/procedure-
+> specimen-anatomy IDs/cross-archive join/human collision split이 없다. Human
+> segmentation은 human collision evidence가 아니고 frame 수는 독립 procedure
+> 수가 아니다. Source가 action anticipation, collision detection,
+> segmentation과 phantom→animal adaptation을 이미 점유한다. Fresh scores
+> 26.5/26.5/26.0/24.5/24.0/20.0은 모두 reject. Terms/payload/P0/P1/method/
+> architecture/server/PBS/GPU/outer test/result/C21/claim은 0이다. Source-watch
+> v20은 33-state review-only다. Future gate-authorized execution은 `introai9`
+> PBS만 사용하며 login-node GPU를 금지한다. `junjinyong`에는 절대 접속·조회·
+> 전송·제출·모니터링하지 않는다.
+
 > **2026-08-12 schema 10.9 deployment/private synchronization:** Exact public
 > scientific source `3a9fa3a1a3146457b7d0e8215db66ee26d5532ac` passed Quality
 > `31559316259` and Pages `31559316027`. Private paper head

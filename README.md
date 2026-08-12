@@ -1,5 +1,27 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 endovascular collision-anticipation reappraisal · schema
+> 11.0:** The supplied surface-vector claim is retained only as an inactive,
+> falsifiable application question: field accuracy may differ from stable
+> critical-flow structure, but no material E0 or matched failure has been
+> observed, and edge 1-forms/Hodge/equivariance/periodic operators remain
+> unselected controls. A separate exact CathAction audit distinguishes visible
+> current-frame collision detection from warning before first contact. Exact
+> Hugging Face revision `8b04056…` contains four archives/56,678,352,136 bytes,
+> including human segmentation, but inspected metadata declare no collision
+> onset, warning horizon, complete negative sequences, procedure/specimen IDs,
+> immutable action–mask–collision join or human collision split. CathAction
+> already benchmarks action anticipation, collision detection, segmentation
+> and phantom→animal adaptation. Six rows score
+> **26.5/26.5/26.0/24.5/24.0/20.0** and all fail a mandatory target, novelty,
+> asset or unit floor. Source-watch v20 freezes 33 review-only states. No form
+> completion, terms, archive payload, P0/P1, method, architecture, server query,
+> PBS/GPU, outer test, result or paper claim opened. Historical job
+> `115645.ECE-util1` remains E/exit 2, GPU 0, 0/10, execution-incomplete/no
+> scientific verdict and is never repaired or rerun. See the
+> [exact reappraisal](docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md)
+> and [beginner guide](site/learn.html#collision-anticipation).
+
 > **2026-08-12 schema 10.9 deployment/private pin:** Exact scientific source
 > `3a9fa3a1a3146457b7d0e8215db66ee26d5532ac` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31559316259)

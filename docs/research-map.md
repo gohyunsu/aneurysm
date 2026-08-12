@@ -1,5 +1,15 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.0 map · 2026-08-12:** CathAction splits into four already-
+> occupied branches—action anticipation, present collision detection, tool
+> segmentation and phantom→animal adaptation. A fifth, clinically stronger
+> branch asks for warning before first contact, but the public graph has no
+> collision-onset timestamp, horizon, complete negative sequence, independent
+> procedure/specimen identifier or immutable action–mask–collision edge. The
+> human node connects only to segmentation, not collision. All six descendants
+> are rejected; method/model/compute remain empty. Surface-vector stays on a
+> separate inactive branch pending material E0 and method-free matched failure.
+
 > **Schema 10.9 map · 2026-08-12:** Public serum proteomics reaches a usable
 > patient-level release, but the executable branch terminates at already-
 > occupied cross-sectional rupture-state classification. The stronger pre-

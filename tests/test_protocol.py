@@ -14,15 +14,57 @@ class ProtocolTests(unittest.TestCase):
     def setUp(self) -> None:
         self.protocol = load_protocol(CONFIG)
 
+    def test_endovascular_collision_anticipation_batch_is_fail_closed(self) -> None:
+        problem = self.protocol["problem_selection"]
+        gate = problem["future_source_admission_v2"]
+        audit = problem[
+            "endovascular_collision_anticipation_and_release_reappraisal"
+        ]
+        watch = problem["public_source_watch_v20"]
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
+        self.assertEqual(
+            audit["best_candidate_ids"],
+            [
+                "pre_contact_collision_onset_anticipation",
+                "phantom_to_animal_collision_calibration",
+            ],
+        )
+        self.assertEqual(
+            audit["all_candidate_scores"],
+            [26.5, 26.5, 26.0, 24.5, 24.0, 20.0],
+        )
+        self.assertEqual(audit["cathaction_paper_reported_videos"], 569)
+        self.assertEqual(audit["archive_count"], 4)
+        self.assertTrue(audit["human_segmentation_archive_present"])
+        self.assertFalse(audit["human_collision_archive_present"])
+        self.assertFalse(audit["chronological_collision_onset_contract_declared"])
+        self.assertFalse(audit["procedure_specimen_anatomy_identifiers_declared"])
+        self.assertFalse(audit["archive_payload_accessed"])
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+        self.assertEqual(watch["watch_count"], 33)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "endovascular_collision_anticipation_and_release_reappraisal"
+        ]["p0_registered"] = True
+        with self.assertRaisesRegex(ProtocolError, "collision-anticipation"):
+            validate_protocol(candidate)
+
     def test_molecular_biomarker_and_treatment_outcome_batch_is_fail_closed(self) -> None:
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem[
             "molecular_biomarker_and_treatment_specific_outcome_reappraisal"
         ]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(
             audit["best_candidate_id"],
             "cross_cohort_serum_proteomic_rupture_state_calibration",
@@ -59,9 +101,9 @@ class ProtocolTests(unittest.TestCase):
         gate = problem["future_source_admission_v2"]
         audit = problem["structured_vessel_and_embargoed_4dflow_reappraisal"]
         watch = problem["public_source_watch_v19"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(
             audit["best_candidate_id"],
             "device_phantom_venc_stable_hemodynamic_response",
@@ -165,7 +207,7 @@ class ProtocolTests(unittest.TestCase):
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
         with self.assertRaisesRegex(
-            ProtocolError, "molecular-biomarker/treatment-outcome batch"
+            ProtocolError, "endovascular collision-anticipation batch"
         ):
             validate_protocol(candidate)
 
@@ -173,9 +215,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["aneurysmal_sah_segmentation_outcome_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(audit["best_candidate_id"], "cross_aetiology_small_volume_asah_transport")
         self.assertEqual(audit["all_candidate_scores"], [29.0, 28.5, 28.0, 28.0, 27.0, 22.5])
         self.assertFalse(audit["zenodo_archive_opened"])
@@ -197,7 +239,7 @@ class ProtocolTests(unittest.TestCase):
     def test_rsna_release_layer_and_webgan_utility_delta_is_fail_closed(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["rsna_release_layer_and_webgan_utility_delta"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertFalse(audit["current_schema_or_primary_batch_changed"])
         self.assertEqual(audit["best_score"], 29.0)
         self.assertEqual(audit["best_residual_novelty_score"], 1.5)
@@ -263,7 +305,7 @@ class ProtocolTests(unittest.TestCase):
         audit = self.protocol["problem_selection"][
             "rupture_state_future_risk_and_unit_semantics_delta"
         ]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertFalse(audit["current_schema_or_primary_batch_changed"])
         self.assertEqual(audit["best_score"], 27.5)
         self.assertEqual(audit["best_residual_novelty_score"], 2.5)
@@ -313,7 +355,7 @@ class ProtocolTests(unittest.TestCase):
         audit = self.protocol["problem_selection"][
             "longitudinal_biology_and_cross_scale_mechanism_reappraisal"
         ]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertFalse(audit["current_schema_or_primary_batch_changed"])
         self.assertEqual(audit["best_score"], 28.5)
         self.assertEqual(audit["best_residual_novelty_score"], 2.5)
@@ -575,7 +617,7 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["open_model_transport_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertTrue(gate["prospective_only"])
         self.assertFalse(gate["historical_scores_relabelled"])
         self.assertEqual(gate["total_threshold"], 32.0)
@@ -602,9 +644,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["culprit_lesion_and_mimic_differential_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 30.5)
         self.assertEqual(audit["best_residual_novelty_score"], 2.5)
@@ -689,9 +731,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["four_d_cta_wall_phenotype_release_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 29.0)
         self.assertEqual(
@@ -746,9 +788,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["topbrain2025_and_rsna_multitask_source_correction"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 30.5)
         self.assertEqual(audit["best_residual_novelty_score"], 2.5)
@@ -886,9 +928,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["target_time_and_instability_prediction_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 27.0)
         self.assertEqual(audit["best_residual_novelty_score"], 3.0)
@@ -993,9 +1035,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["decision_time_and_clinical_precision_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 30.0)
         self.assertEqual(audit["best_residual_novelty_score"], 3.0)
@@ -1106,9 +1148,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["device_planning_and_mechanistic_occlusion_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 26.5)
         self.assertEqual(audit["best_residual_novelty_score"], 3.0)
@@ -1237,9 +1279,9 @@ class ProtocolTests(unittest.TestCase):
         audit = problem[
             "longitudinal_intervention_and_patient_reliability_reappraisal"
         ]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_additive_score"], 32.0)
         self.assertEqual(audit["best_residual_novelty_score"], 1.5)
@@ -1300,9 +1342,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["diagnostic_action_and_human_ai_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 29.5)
         self.assertEqual(audit["best_residual_novelty_score"], 0.5)
@@ -1364,9 +1406,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["adam_longitudinal_and_treated_exclusion_source_correction"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -1433,9 +1475,9 @@ class ProtocolTests(unittest.TestCase):
         gate = problem["future_source_admission_v2"]
         audit = problem["vmr_growth_paired_surface_structure_source_audit"]
         task = self.protocol["task"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 32.5)
         self.assertEqual(audit["primary_paper_patient_count"], 22)
@@ -1492,9 +1534,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["neck_isolation_and_open_model_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(gate["current_batch_admitted_count"], 0)
         self.assertEqual(audit["best_score"], 31.5)
         self.assertEqual(audit["best_residual_novelty_score"], 0.5)
@@ -1541,9 +1583,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["latent_shape_open_cta_transport_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(audit["best_score"], 29.5)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -1639,8 +1681,8 @@ class ProtocolTests(unittest.TestCase):
         audit = problem[
             "reference_provenance_and_rsna_release_contract_reappraisal"
         ]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(audit["best_residual_novelty_score"], 2.0)
         self.assertEqual(
@@ -1680,9 +1722,9 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["synva_release_and_synthetic_utility_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(self.protocol["schema_version"], "11.0")
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(audit["best_score"], 27.5)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -1740,8 +1782,8 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["aaa_cross_scale_source_reappraisal"]
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(audit["best_score"], 30.0)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -1805,8 +1847,8 @@ class ProtocolTests(unittest.TestCase):
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]
         audit = problem["mris_bench_target_contract_audit"]
-        self.assertEqual(gate["current_batch_best_score"], 31.0)
-        self.assertEqual(gate["current_batch_best_residual_novelty"], 2.5)
+        self.assertEqual(gate["current_batch_best_score"], 26.5)
+        self.assertEqual(gate["current_batch_best_residual_novelty"], 3.0)
         self.assertEqual(audit["best_score"], 24.0)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -1844,7 +1886,7 @@ class ProtocolTests(unittest.TestCase):
     def test_cross_vascular_transient_wss_batch_is_rejected(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["cross_vascular_transient_wss_source_correction"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 30.0)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -1884,7 +1926,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_cohort_serum_proteomic_rupture_state_calibration_rejected_at_31_direct_prior_novelty_floor",
+            "pre_contact_collision_onset_anticipation_rejected_at_26_5_target_asset_and_independent_unit_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -1904,7 +1946,7 @@ class ProtocolTests(unittest.TestCase):
     def test_posttreatment_reference_linked_imaging_batch_is_rejected(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["posttreatment_reference_linked_imaging_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 28.5)
         self.assertEqual(
             audit["all_candidate_scores"],
@@ -1939,7 +1981,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_cohort_serum_proteomic_rupture_state_calibration_rejected_at_31_direct_prior_novelty_floor",
+            "pre_contact_collision_onset_anticipation_rejected_at_26_5_target_asset_and_independent_unit_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -1962,13 +2004,13 @@ class ProtocolTests(unittest.TestCase):
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
         with self.assertRaisesRegex(
-            ProtocolError, "molecular-biomarker/treatment-outcome batch"
+            ProtocolError, "endovascular collision-anticipation batch"
         ):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
         with self.assertRaisesRegex(
-            ProtocolError, "molecular-biomarker/treatment-outcome batch"
+            ProtocolError, "endovascular collision-anticipation batch"
         ):
             validate_protocol(candidate)
 
@@ -2211,7 +2253,7 @@ class ProtocolTests(unittest.TestCase):
     def test_structure_faithful_wss_reappraisal_rejects_without_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["structure_faithful_wss_source_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertTrue(
@@ -2244,7 +2286,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_cohort_serum_proteomic_rupture_state_calibration_rejected_at_31_direct_prior_novelty_floor",
+            "pre_contact_collision_onset_anticipation_rejected_at_26_5_target_asset_and_independent_unit_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -2257,7 +2299,7 @@ class ProtocolTests(unittest.TestCase):
     def test_conformal_degree_candidate_closes_after_incomplete_cpu_p0(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["conformal_degree_certificate_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 32.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertEqual(audit["conditional_source_lead_count"], 0)
@@ -2329,7 +2371,7 @@ class ProtocolTests(unittest.TestCase):
     def test_cross_view_projection_batch_rejects_proxy_and_no_compute(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["cross_view_projection_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 31.0)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -2378,7 +2420,7 @@ class ProtocolTests(unittest.TestCase):
     def test_functional_4dflow_segmentation_batch_is_direct_prior_limited(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["functional_4dflow_segmentation_source_delta"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 25.5)
         self.assertEqual(len(audit["candidates"]), 6)
         self.assertLess(
@@ -2410,7 +2452,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_cohort_serum_proteomic_rupture_state_calibration_rejected_at_31_direct_prior_novelty_floor",
+            "pre_contact_collision_onset_anticipation_rejected_at_26_5_target_asset_and_independent_unit_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -2423,7 +2465,7 @@ class ProtocolTests(unittest.TestCase):
     def test_aneux_transient_material_source_is_rejected_without_access(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["aneux_transient_cfd_material_source_audit"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 28.0)
         self.assertLess(
             max(audit["all_candidate_scores"]),
@@ -2447,7 +2489,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_cohort_serum_proteomic_rupture_state_calibration_rejected_at_31_direct_prior_novelty_floor",
+            "pre_contact_collision_onset_anticipation_rejected_at_26_5_target_asset_and_independent_unit_floors",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -2563,7 +2605,7 @@ class ProtocolTests(unittest.TestCase):
     def test_team_downstream_utility_batch_rejects_architecture_first_reentry(self) -> None:
         problem = self.protocol["problem_selection"]
         audit = problem["team_downstream_utility_reappraisal"]
-        self.assertEqual(self.protocol["schema_version"], "10.9")
+        self.assertEqual(self.protocol["schema_version"], "11.0")
         self.assertEqual(audit["best_score"], 27.0)
         self.assertEqual(
             audit["all_candidate_scores"],

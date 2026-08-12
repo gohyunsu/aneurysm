@@ -1,5 +1,18 @@
 # AURORA 연구 방향
 
+> **Schema 11.0 direction · 2026-08-12:** The surface-vector proposal is
+> scientifically coherent only as an inactive failure hypothesis. Do not name
+> an edge-1-form/Hodge/equivariant/periodic stack as the contribution before a
+> material transient-vector asset demonstrates stable structure extraction and
+> a field-error-matched baseline failure. The fresh intervention-safety branch
+> also remains inactive: CathAction directly occupies action anticipation,
+> collision detection, segmentation and phantom→animal adaptation, while the
+> public contract does not identify first-contact onset, warning horizon,
+> independent procedure/specimen units or a human collision cohort. The most
+> meaningful residual—pre-contact warning—scores 26.5/40 and fails target,
+> asset and unit floors. Continue fresh source/target discovery only; no terms,
+> payload, P0, model or compute.
+
 > **Latest decision · schema 10.9:** Do not pivot to a proteomic/miRNA
 > classifier, multimodal fusion network or treatment recommender. PXD024615 is
 > executable patient-level serum proteomics, but its IA/control and rupture-

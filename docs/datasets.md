@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.0 CathAction boundary:** Exact HF revision `8b04056…` is a
+> material 56,678,352,136-byte release with four archives. The card separates
+> temporal action segments, phantom/animal collision images and phantom/animal/
+> human segmentation; it does not declare one immutable join across them.
+> Human segmentation is not a human collision cohort. No archive was opened,
+> no form or terms were accepted, and no patient/procedure/specimen unit may be
+> inferred from frame count. The release is watch-only, not a training asset.
+
 > **Schema 10.9 asset boundary:** PXD024615 exposes patient-level serum
 > proteomics for 212 discovery and 32 external-cohort samples, yet it has no
 > public baseline image, future-event time, censoring or treatment-linked join.

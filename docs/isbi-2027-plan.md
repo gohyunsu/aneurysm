@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.0 readiness:** The project is not submission-ready. Pre-contact
+> collision warning could be an application contribution only with a declared
+> temporal event contract, a mechanism-linked minimal model and event-level
+> confirmation beyond current-frame detection. Those prerequisites are absent.
+> Surface-vector likewise needs material E0, stable method-free endpoints and a
+> field-error-matched baseline failure before any paper identity. Current title,
+> contribution, result table and figure remain unchanged/null.
+
 > **Schema 10.9 checkpoint:** Public omics availability does not create an
 > ISBI identity. Cross-cohort serum rupture-state classification is directly
 > occupied; imaging-conditioned biomarkers lack a public join; treatment-

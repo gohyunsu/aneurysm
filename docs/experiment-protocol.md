@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.0 experiment boundary:** No experiment is active. A future
+> CathAction version must first pass a CPU/method-free audit of event counts,
+> onset stability, risk-window construction, complete negatives, independent
+> grouping and trivial motion/history baselines. Only a stable failure may open
+> validation-only bounded development and an untouched domain/specimen-held-out
+> confirmation. Historical surface-vector job `115645` remains E/exit 2,
+> 0/10/no-verdict and cannot be repaired or rerun.
+
 > **Schema 10.9 experiment boundary:** no acquisition and no run. Public omics
 > metadata reject the obvious tasks before payload access: executable rupture-
 > state classification is direct prior, while the novel pre-event imaging--

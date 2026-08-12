@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.0 null-model boundary:** There is no selected current model.
+> Neither a temporal collision-warning network nor an edge-1-form/Hodge/SE(3)
+> surface operator is authorized. For collision anticipation, no architecture
+> is meaningful before event onset, horizon, grouping and trivial history/
+> motion baselines are executable. For surface-vector, exact critical points
+> and worldlines remain evaluation-only until method-free stability, followed
+> by a field-error-matched failure. Component names cannot satisfy novelty.
+
 > **Schema 10.9 model decision: `null`.** A proteomic encoder, imaging--omics
 > fusion transformer, survival head or treatment-policy network cannot create
 > a missing target time or same-patient join. The executable rupture-state task

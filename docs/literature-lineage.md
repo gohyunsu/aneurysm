@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.0 lineage:** CathAction already occupies catheter action
+> anticipation, action recognition, current-frame collision detection,
+> catheter/guidewire segmentation and phantom→animal domain adaptation. The
+> 2026 challenge explicitly welcomes domain generalization, adaptation, joint
+> learning and foundation-style approaches. Generic surgical workflow
+> anticipation and uncertainty-aware anticipation are also direct priors. The
+> residual distinction—warning before first contact—is conceptually meaningful
+> but not identified by the inspected release contract. It is therefore a
+> rejected target/asset gap, not a model novelty. Hodge, equivariance and
+> critical-point tracking remain direct controls on the separate inactive
+> surface-vector branch.
+
 ## 2026-08-12 molecular biomarkers, target time and treatment estimands
 
 - [PXD024615](https://doi.org/10.15252/emmm.202114713) already spans serum

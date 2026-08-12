@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · molecular-biomarker/treatment-outcome batch best 31.0/40 rejected; all six fail total or a critical novelty/target/asset/unit floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or immutable same-patient pre-event image–omics–future-outcome audit; public rupture-state proteomics is direct prior, pooled discovery and bootstrap prognosis do not create future risk or treatment effects, and surface-vector still requires material evidence plus method-free stability and a field-error-matched failure",
+    status: "Target locked · endovascular collision-anticipation batch best 26.5/40 rejected; all six fail total or a critical novelty/target/asset/unit floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem or versioned first-contact onset, warning-horizon and independent-unit contract audit; current collision detection and human segmentation do not create pre-contact or human-collision evidence, and surface-vector still requires material evidence plus method-free stability and a field-error-matched failure",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Present collision detection is not pre-contact warning, and human segmentation is not human collision evidence",
+      copy: "CathAction already benchmarks action anticipation, action recognition, current-frame collision detection, tool segmentation and phantom-to-animal adaptation. Exact HF revision 8b04056… has four archives/56,678,352,136 used bytes and a human segmentation archive. Public metadata do not declare first-contact onset, warning horizon, complete negative sequences, procedure/specimen/anatomy identifiers, an immutable action–mask–collision join or a human collision split. The card requests a download form and license agreement; neither was completed. Six rows score 26.5/26.5/26.0/24.5/24.0/20.0 and all fail a mandatory floor.",
+      status: "Best 26.5/40 rejected · residual novelty 3.0/5 · onset/horizon/unit/join 0 · source-watch v20: 33 states · terms/payload/P0/model/server/GPU 0",
+      url: "../docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Public patient-level omics improves executability, but not novelty or target time",
@@ -865,6 +872,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "CathAction intervention dataset · exact HF 8b04056…",
+      role: "watch-only intervention-safety/direct-prior release; not active training, human collision or anticipation data",
+      provenance: "four ZIP archives · 56,678,352,136 used bytes · CC BY-NC-SA 4.0 tag · public/gated=false but card requests form/license agreement · action temporal annotations and collision/mask archives lack declared immutable join · human segmentation present/human collision archive absent · onset/horizon/procedure/specimen split contract 0 · form/terms/archive/image/label payload/P0/model/GPU 0"
+    },
+    {
       name: "DeepAnePose annotations and patient-wise folds · exact 40042fa…",
       role: "public weak-pose source and future control only; no active paper or training role",
       provenance: "270 selected subject/session IDs · 140 positive annotation JSON · 164 lesions · fold tests 54/54/53/54/55 and test union 270 exactly once · validation split 0 · tracked checkpoint 0 · repository LICENSE file 0 · MICCAI 2023 directly owns weak P1/P2 pose, detection and reformatted planes · image payload/P0/model/GPU 0"
@@ -1176,6 +1188,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 11.0 separates present collision detection from pre-contact warning and keeps surface-vector inactive",
+      copy: "Exact CathAction metadata establish a material four-archive intervention release but not a first-contact warning target. The source already occupies action anticipation, collision detection, segmentation and phantom-to-animal adaptation. Human segmentation does not establish human collision, and frame count does not establish independent procedures. Six rows score 26.5/26.5/26.0/24.5/24.0/20.0 and all fail. Source-watch v20 freezes 33 review-only states. Historical surface-vector job 115645 remains E/exit 2, GPU 0, 0/10 and no-verdict with no repair. No form, terms, payload, P0/P1, method, architecture, server, PBS/GPU, outer test or paper claim opened.",
+      files: ["docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md", "configs/source_watch_v20.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", ".github/workflows/source-watch.yml", "docs/source-watch.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/literature-lineage.md", "docs/research-direction.md", "docs/research-map.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

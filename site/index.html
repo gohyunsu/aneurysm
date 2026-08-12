@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 공개 영상·오믹스 자산, target time, independent unit과 direct prior를 비판적으로 심사하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — 현재 충돌 검출과 사전 경고, 독립 단위, 공개 자산 계약과 surface-vector 가설을 비판적으로 심사하는 ISBI 2027 공개 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,26 +40,28 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 10.9 · BEST 31.0 REJECTED · ACTIVE LEAD 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.0 · BEST 26.5 REJECTED · ACTIVE LEAD 0</p>
         <h1>
-          Public files are not automatically<br>
-          <em>an identifiable paper task.</em>
+          Detecting contact now is not<br>
+          <em>warning before first contact.</em>
         </h1>
         <p class="hero-lede">
           <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          PXD024615는 212개 discovery와 32개 external-cohort serum sample을
-          제공하는 실제 patient-level 공개 자산입니다. 그러나 원 연구가 이미
-          aneurysm/control과 rupture-state classification을 수행했고, 채혈 당시의
-          rupture status는 미래 rupture risk가 아닙니다. 공개 release에는 같은
-          환자의 baseline image, pre-event blood, treatment/censoring과 time-to-event가
-          연결돼 있지 않습니다. PXD013442의 discovery unit은 20명이 아니라 네 개의
-          pooled mixture이며, NBC-GARUDA의 치료별 예후 모델은 treatment effect가
-          아닙니다. Fresh 후보는 <b>31.0/28.0/27.0/27.0/26.0/23.0</b>으로 모두
-          기각했습니다. Surface-vector도 유효한 비활성 가설일 뿐 architecture가
-          아닙니다. Payload/P0/P1/server/model/GPU는 0입니다.
+          CathAction은 action anticipation, 현재-frame collision detection,
+          tool segmentation과 phantom→animal adaptation을 이미 다룹니다. Exact
+          공개 revision에는 네 archive와 human segmentation이 있지만, first-contact
+          onset, warning horizon, complete negative sequence, procedure/specimen ID,
+          action–mask–collision join과 human collision split이 없습니다. 따라서
+          “접촉이 보인 뒤 검출”을 “접촉 전에 경고”로 바꿔 부를 수 없습니다.
+          Fresh 후보는 <b>26.5/26.5/26.0/24.5/24.0/20.0</b>으로 모두 기각했습니다.
+          Surface-vector는 field error와 stable structure가 다를 수 있다는 비활성
+          가설일 뿐이며, Hodge/GNN/equivariance는 선택된 architecture나 novelty가
+          아닙니다. Terms/payload/P0/P1/server/model/GPU는 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#collision-anticipation">Collision detection과 사전 경고 이해하기</a>
+          <a class="button ghost" href="../docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md">Latest collision/release reappraisal ↗</a>
           <a class="button ghost" href="learn.html#molecular-target-time">오믹스 자산과 target time 이해하기</a>
           <a class="button ghost" href="../docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md">Latest molecular/outcome reappraisal ↗</a>
           <a class="button ghost" href="learn.html#topology-reference-embargo">Topology·reference·embargo 이해하기</a>
@@ -122,7 +124,7 @@
           <a class="button ghost" href="../docs/posttreatment-reference-linked-imaging-source-delta-2026-08-11.md">Latest source delta ↗</a>
           <a class="button ghost" href="learn.html#downstream-utility">Downstream 판정 이해하기</a>
           <a class="button ghost" href="../docs/team-downstream-utility-reappraisal-2026-08-11.md">Latest critical reappraisal ↗</a>
-          <a class="button ghost" href="../configs/source_watch_v19.json">Source watch v19 ↗</a>
+          <a class="button ghost" href="../configs/source_watch_v20.json">Source watch v20 ↗</a>
           <a class="button ghost" href="learn.html#aneux-transient">새 transient source 판정 이해하기</a>
           <a class="button ghost" href="../docs/aneux-transient-cfd-material-source-audit-2026-08-11.md">Latest material-source audit ↗</a>
           <a class="button ghost" href="learn.html#functional-4dflow">최신 4D-flow 판정 이해하기</a>
@@ -213,27 +215,27 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>31.0</b><span>best · residual-novelty floor rejected</span>
+            <b>26.5</b><span>best · target/asset/unit floors rejected</span>
           </div>
           <div class="posterior-card card-b">
-            <b>212 + 32</b><span>public serum samples · occupied status task</span>
+            <b>4 archives</b><span>metadata only · no event contract</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Patient-level proteomics is material and externally partitioned</span>
-          <span><i class="dot coral"></i> Rupture at sampling is not a future event or treatment effect</span>
-          <span>Best novelty 0.5/5 · pre-event multimodal join 0 · P0/server/model/GPU 0</span>
+          <span><i class="dot lime"></i> Current-frame contact labels and human segmentation are material</span>
+          <span><i class="dot coral"></i> They do not identify first-contact warning or human collision</span>
+          <span>Best novelty 3.0/5 · onset/horizon/unit/join 0 · P0/server/model/GPU 0</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>Molecular biomarker/treatment outcome best 31.0/40 · all six rejected · admitted 0</b></div>
-        <div><span>Latest compute</span><b>No scientific-server query or job in schema 10.9 · historical P0s remain closed</b></div>
+        <div><span>Latest source screen</span><b>Endovascular collision anticipation best 26.5/40 · all six rejected · admitted 0</b></div>
+        <div><span>Latest compute</span><b>No scientific-server query or job in schema 11.0 · historical P0s remain closed</b></div>
         <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh problem or official same-patient pre-event image–omics–outcome join audit only · no payload, repair or rerun</b></div>
+        <div><span>Next action</span><b>fresh problem or versioned collision-onset/independent-unit contract audit only · no terms, payload, repair or rerun</b></div>
       </div>
     </section>
 
@@ -349,7 +351,8 @@
         <p class="eyebrow">03 · DECISION BOUNDARY</p>
         <h2>Verify the question<br><em>before choosing a network.</em></h2>
         <p>
-          현재 architecture는 없습니다. Surface-vector의 현재 asset family는
+          현재 architecture는 없습니다. CathAction의 present-contact label은
+          pre-contact warning onset/horizon을 식별하지 않고, surface-vector의 현재 asset family는
           whitelisted material release 전까지 닫혀 있습니다. 아래는 이미 종료된 raw-field P0가 무엇을
           확인하려 했는지와, material한 새 source가 생길 때 어떤 evidence ladder를
           거쳐야 하는지 보여주는 기록입니다. 구조 안정성과 field-error-matched
@@ -368,7 +371,7 @@
           conformal-degree 후보는 32.5/40으로 source gate만 넘었지만 exact P0가
           scientific check 10개가 모두 미평가인 no-verdict로 끝났습니다. 이 version의 architecture gate와 GPU는
           닫혔고, 같은 contract를 수리하거나 다시 실행하지 않습니다. 최신
-          cross-view batch도 31.0/40으로 source 단계에서 기각됐습니다.
+          collision batch도 26.5/40으로 source 단계에서 기각됐습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>

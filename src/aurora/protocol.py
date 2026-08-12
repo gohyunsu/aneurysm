@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "10.9":
-        raise ProtocolError("The current research-state schema must be version 10.9.")
+    if protocol["schema_version"] != "11.0":
+        raise ProtocolError("The current research-state schema must be version 11.0.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_molecular_biomarker_and_treatment_outcome_batch_rejected_best_31_no_p0_no_compute"
+        != "no_active_problem_endovascular_collision_anticipation_batch_rejected_best_26_5_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "endovascular_collision_anticipation_and_release_reappraisal",
             "molecular_biomarker_and_treatment_specific_outcome_reappraisal",
             "structured_vessel_and_embargoed_4dflow_reappraisal",
             "pose_workflow_and_spatiotemporal_operator_reappraisal",
@@ -279,6 +280,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v17",
             "public_source_watch_v18",
             "public_source_watch_v19",
+            "public_source_watch_v20",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -289,13 +291,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_molecular_biomarker_and_treatment_outcome_batch_rejected_no_method_no_compute_surface_vector_inactive"
+        != "no_active_problem_endovascular_collision_anticipation_batch_rejected_no_method_no_compute_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_omics_article_repository_and_supplement_metadata_only_no_omics_payload_patient_image_future_event_or_treatment_rows"
+        != "public_cathaction_article_challenge_card_and_huggingface_metadata_only_no_terms_archive_image_label_feature_or_patient_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -307,15 +309,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_whitelisted_material_task_asset_audit_only_no_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/molecular-biomarker-and-treatment-specific-outcome-reappraisal-2026-08-12.md"
+        != "docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "cross_cohort_serum_proteomic_rupture_state_calibration_rejected_at_31_direct_prior_novelty_floor"
+        != "pre_contact_collision_onset_anticipation_rejected_at_26_5_target_asset_and_independent_unit_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The molecular-biomarker/treatment-outcome batch must remain rejected and surface-vector "
+            "The endovascular collision-anticipation batch must remain rejected and surface-vector "
             "must remain closed until a material release after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -377,8 +379,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 31.0
-        or admission_v2["current_batch_best_residual_novelty"] != 2.5
+        or admission_v2["current_batch_best_score"] != 26.5
+        or admission_v2["current_batch_best_residual_novelty"] != 3.0
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -387,6 +389,137 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    collision = problem_selection[
+        "endovascular_collision_anticipation_and_release_reappraisal"
+    ]
+    _require_keys(
+        collision,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_ids", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "cathaction_paper_arxiv", "cathaction_paper_reported_videos",
+            "cathaction_paper_reported_action_collision_frames_approx",
+            "cathaction_paper_reported_segmentation_masks_approx",
+            "cathaction_source_domains", "challenge_reports_human_domain",
+            "source_already_benchmarks_action_anticipation",
+            "source_already_benchmarks_collision_detection",
+            "source_already_benchmarks_segmentation",
+            "source_already_benchmarks_phantom_to_animal_adaptation",
+            "huggingface_exact_sha", "huggingface_last_modified",
+            "huggingface_used_storage_bytes", "huggingface_public",
+            "huggingface_gated", "huggingface_license_tag",
+            "dataset_card_requests_download_form_and_license_agreement",
+            "archive_count", "human_segmentation_archive_present",
+            "human_collision_archive_present",
+            "chronological_collision_onset_contract_declared",
+            "warning_horizon_contract_declared",
+            "complete_negative_sequence_contract_declared",
+            "procedure_specimen_anatomy_identifiers_declared",
+            "immutable_action_mask_collision_cross_archive_join_declared",
+            "challenge_collision_warning_output_interface_declared",
+            "candidates", "download_form_completed", "license_terms_accepted",
+            "archive_payload_accessed", "image_or_label_payload_accessed",
+            "source_watch_added",
+            "surface_vector_question_retained_as_inactive_hypothesis",
+            "historical_surface_vector_source_score_or_job_relabelled",
+            "historical_surface_vector_p0_repaired_or_rerun", "p0_registered",
+            "p1_registered", "method_selected", "architecture_selected",
+            "scientific_server_queried", "gpu_training_authorized",
+            "outer_test_authorized", "submission_identity_active",
+            "execution_server", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "next_allowed_action",
+        ],
+        "endovascular collision anticipation and release reappraisal",
+    )
+    expected_collision_candidates = [
+        ("pre_contact_collision_onset_anticipation", 26.5),
+        ("phantom_to_animal_collision_calibration", 26.5),
+        ("human_tool_segmentation_domain_generalization", 26.0),
+        ("action_conditioned_collision_early_warning", 24.5),
+        ("segmentation_conditioned_collision_detection", 24.0),
+        ("aneurysm_specific_navigation_safety_transfer", 20.0),
+    ]
+    if (
+        collision["status"]
+        != "fresh_problem_level_batch_rejected_best_26_5_target_asset_unit_and_direct_prior_floors"
+        or collision["audit_document"]
+        != "docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md"
+        or collision["automatic_selection_threshold"] != 32.0
+        or collision["best_candidate_ids"]
+        != [
+            "pre_contact_collision_onset_anticipation",
+            "phantom_to_animal_collision_calibration",
+        ]
+        or collision["best_score"] != 26.5
+        or collision["best_residual_novelty_score"] != 3.0
+        or collision["all_candidate_scores"]
+        != [26.5, 26.5, 26.0, 24.5, 24.0, 20.0]
+        or collision["conditional_source_lead_count"] != 0
+        or collision["cathaction_paper_arxiv"] != "2408.13126"
+        or collision["cathaction_paper_reported_videos"] != 569
+        or collision["cathaction_paper_reported_action_collision_frames_approx"]
+        != 500000
+        or collision["cathaction_paper_reported_segmentation_masks_approx"]
+        != 25000
+        or collision["cathaction_source_domains"] != ["phantom", "live_animal"]
+        or collision["huggingface_exact_sha"]
+        != "8b04056f0f4fa4b04d8454728f000730af0d5560"
+        or collision["huggingface_last_modified"] != "2026-05-18T11:16:32Z"
+        or collision["huggingface_used_storage_bytes"] != 56678352136
+        or collision["huggingface_license_tag"] != "cc-by-nc-sa-4.0"
+        or collision["archive_count"] != 4
+        or [(row["id"], row["total"]) for row in collision["candidates"]]
+        != expected_collision_candidates
+        or any(row["critical_axis_pass"] for row in collision["candidates"])
+        or any(
+            collision[key] is not True
+            for key in (
+                "challenge_reports_human_domain",
+                "source_already_benchmarks_action_anticipation",
+                "source_already_benchmarks_collision_detection",
+                "source_already_benchmarks_segmentation",
+                "source_already_benchmarks_phantom_to_animal_adaptation",
+                "huggingface_public",
+                "dataset_card_requests_download_form_and_license_agreement",
+                "human_segmentation_archive_present", "source_watch_added",
+                "surface_vector_question_retained_as_inactive_hypothesis",
+            )
+        )
+        or any(
+            collision[key] is not False
+            for key in (
+                "primary_problem_selected", "paper_identity_active",
+                "huggingface_gated", "human_collision_archive_present",
+                "chronological_collision_onset_contract_declared",
+                "warning_horizon_contract_declared",
+                "complete_negative_sequence_contract_declared",
+                "procedure_specimen_anatomy_identifiers_declared",
+                "immutable_action_mask_collision_cross_archive_join_declared",
+                "challenge_collision_warning_output_interface_declared",
+                "download_form_completed", "license_terms_accepted",
+                "archive_payload_accessed", "image_or_label_payload_accessed",
+                "historical_surface_vector_source_score_or_job_relabelled",
+                "historical_surface_vector_p0_repaired_or_rerun",
+                "p0_registered", "p1_registered", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or collision["execution_server"] != "introai9"
+        or collision["next_allowed_action"]
+        != "fresh_unrelated_problem_level_source_or_versioned_collision_onset_and_independent_unit_contract_reaudit_only_no_terms_payload_p0_model_or_compute"
+    ):
+        raise ProtocolError(
+            "The endovascular collision-anticipation batch must remain rejected: "
+            "current-frame detection and human segmentation do not identify a "
+            "pre-contact warning target or authorize payload, model, or compute."
+        )
+    checks.append("endovascular collision-anticipation non-admission boundary")
 
     molecular = problem_selection[
         "molecular_biomarker_and_treatment_specific_outcome_reappraisal"
@@ -9093,7 +9226,77 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "challenge-code changes request review only, never data, terms, method or compute."
         )
     checks.append("thirty-two-source fail-closed embargoed 4D-flow code watch boundary")
+    source_watch_v20 = problem_selection["public_source_watch_v20"]
+    _require_keys(
+        source_watch_v20,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "cathaction_exact_sha",
+            "cathaction_used_storage_bytes", "cathaction_archive_count",
+            "cathaction_human_segmentation_archive_present",
+            "cathaction_human_collision_archive_present",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized",
+            "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized", "p0_or_p1_authorized",
+            "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+            "server_queried", "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch", "decision",
+        ],
+        "source watch v20",
+    )
+    if (
+        source_watch_v20["status"]
+        != "watch_only_all_thirty_three_frozen_snapshots_match"
+        or source_watch_v20["config"] != "configs/source_watch_v20.json"
+        or source_watch_v20["extends_historical_config"]
+        != "configs/source_watch_v19.json"
+        or source_watch_v20["config_sha256"]
+        != "57d2a8671e09a2f49d3e3b265ee87353b86245ecdf2d0199f482c11d50580198"
+        or source_watch_v20["watch_count"] != 33
+        or source_watch_v20["added_watch_ids"]
+        != ["cathaction_intervention_release_contract_v1"]
+        or source_watch_v20["cathaction_exact_sha"]
+        != "8b04056f0f4fa4b04d8454728f000730af0d5560"
+        or source_watch_v20["cathaction_used_storage_bytes"] != 56678352136
+        or source_watch_v20["cathaction_archive_count"] != 4
+        or source_watch_v20["cathaction_human_segmentation_archive_present"]
+        is not True
+        or source_watch_v20["cathaction_human_collision_archive_present"]
+        is not False
+        or source_watch_v20["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v20[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized",
+                "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized", "p0_or_p1_authorized",
+                "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+                "server_queried", "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v20["decision"]
+        != "continue_fail_closed_thirty_three_source_watch_cathaction_change_requests_review_only_without_terms_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v20 must preserve thirty-three exact public states; "
+            "a CathAction change requests review only, never terms, payload, model or compute."
+        )
+    checks.append("thirty-three-source fail-closed intervention release watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "pre_contact_collision_onset_anticipation_missing_onset_horizon_and_independent_sequence_unit",
+        "phantom_to_animal_collision_calibration_direct_prior_and_specimen_grouping_absent",
+        "human_tool_segmentation_domain_generalization_direct_challenge_prior_and_unit_contract_absent",
+        "action_conditioned_collision_early_warning_missing_cross_archive_identity_join",
+        "segmentation_conditioned_collision_detection_missing_paired_mask_contact_reference",
+        "aneurysm_specific_navigation_safety_transfer_missing_aneurysm_procedure_target",
         "cross_cohort_serum_proteomic_rupture_state_calibration_direct_prior_and_not_future_risk",
         "morphology_conditioned_proteomic_incremental_value_no_public_image_serum_join",
         "smoking_conditioned_plasma_mirna_mechanism_small_cross_sectional_direct_prior",

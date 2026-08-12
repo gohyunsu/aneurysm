@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.0 execution state:** This update performed no scientific-server
+> query, transfer, PBS submission, GPU command or monitoring. Historical
+> `115645.ECE-util1` remains immutable at E/exit 2, walltime 00:27:02, GPU 0,
+> no aggregate/raw log/cache and 0/10 scientific checks. Do not repair or rerun
+> it. Future gate-authorized execution is `introai9` PBS-only; login-node GPU is
+> prohibited. Never access, query, transfer to, submit to or monitor
+> `junjinyong`.
+
 > **Schema 10.9 server state:** Public metadata only. No omics payload,
 > scientific-server query, transfer, PBS submission, GPU or monitoring
 > occurred; active job count is zero. Future gate-authorized work is

@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **Schema 11.0 acquisition decision:** Do not submit CathAction's download
+> form or accept its requested license agreement. A future manual re-audit may
+> proceed only after a versioned public contract declares complete chronological
+> collision sequences, first-contact onset, fixed warning horizons, complete
+> negatives, procedure/specimen/anatomy IDs, immutable cross-archive joins and
+> grouped splits. Metadata change is not permission to acquire payload.
+
 > **Schema 10.9 acquisition boundary:** Do not download PXD024615/PXD013442
 > spreadsheets or raw spectra, GSE231922 sequencing payload, or request
 > NBC-GARUDA rows. Metadata already rejects the executable tasks on direct-

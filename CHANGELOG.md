@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.0 rejects collision anticipation before payload or compute
+
+- Separated current-frame contact detection from a prospective pre-contact
+  warning estimand. A valid warning needs first-contact onset, fixed horizons,
+  complete negative sequences and procedure/specimen-grouped confirmation.
+- Froze exact CathAction revision `8b04056…`: four archives and
+  56,678,352,136 used bytes, with human segmentation but no declared human
+  collision archive or immutable action–mask–collision join. No form, terms or
+  archive payload was opened.
+- Rejected all six rows at 26.5/26.5/26.0/24.5/24.0/20.0. Source-watch v20
+  adds one review-only state for a total of 33 and authorizes no P0, model or
+  compute.
+- Retained surface-vector only as an inactive question and kept job `115645`
+  immutable at E/exit 2, GPU 0, 0/10 and no scientific verdict.
+
 ## 2026-08-12 · Schema 10.9 deployed and privately pinned
 
 - Exact scientific source `3a9fa3a1a3146457b7d0e8215db66ee26d5532ac`

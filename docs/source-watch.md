@@ -1,4 +1,13 @@
-# Public source watch · thirty-two material/direct-prior source states
+# Public source watch · thirty-three material/direct-prior source states
+
+> **CathAction intervention-release watch · schema 11.0:**
+> `source_watch_v20.json` extends v19 with exact public Hugging Face revision
+> `8b04056…`, access/license/storage state and the six-entry inventory containing
+> four ZIP archives. Human segmentation is present; a human collision archive
+> is not. A revision, access, license, storage or inventory change requests a
+> fresh manual source audit only. It cannot accept the card's requested form or
+> terms, open an archive, infer event chronology or independent units, repair
+> job `115645`, register P0, select a model or authorize compute.
 
 > **CMRx4DFlow2026 watch · schema 10.8:** `source_watch_v19.json` extends v18
 > with exact official code head `f6f835f…`, root, release/license state and
