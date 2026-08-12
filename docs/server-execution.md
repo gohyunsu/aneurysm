@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.8 inactive P1 v3:** This local direct-prior and design update
+> queried no scientific server and made no transfer, scheduler query, PBS
+> submission, prediction, response read, monitoring or GPU action. V3 is a
+> same-backbone directional falsifier, not an executable job. Even after a
+> separately registered P1 pass, bounded development permits at most two
+> validation-only rounds and 80 additional GPU hours before fresh re-entry.
+> Real P0 remains 0/11. Do not retry `introai9` before a verified external
+> service change and never access `junjinyong`.
+
 > **Schema 11.8 inactive P1 v2:** This is a local design red-team only. V1 was
 > never executed and v2 is also non-executable. Duplicate-free matching,
 > power-law competence, invalid-cell multiplicity and contrast direction were

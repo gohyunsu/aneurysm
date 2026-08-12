@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v2 fixes cyclic train-20-family cross-fitting, a direction-explicit primary pair, response-blind duplicate-free iso-error matching, median paired/tangent co-primary screening, non-rescuing low/high sensitivity and power-law competence while forbidding exact inference from dependent cross-fit contrasts; it does not register or authorize P1; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · direct priors close the broad architecture story · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; only positive direct/residual response-error contrast can pass, low/high iso-error levels cannot rescue the median co-primary failure and dependent cross-fit contrasts support no exact inference; Hemo-MPO and AB-GATr remain source-only direct priors, not silently executable baselines; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Direct priors narrow P1 to one same-backbone directional falsifier",
+      copy: "SC-FNO already owns generic solution-versus-sensitivity mismatch and sensitivity supervision; Hemo-MPO owns an Aneumo SE(3) mesh encoder, physics constraint and DeepONet; AB-GATr owns base-anatomy-stratified equivariant Aneumo comparison. The unexecuted v2 is preserved and inactive v3 fixes one MIT-licensed LaB-GATr backbone, changing only direct field output versus v0 + log(q/q0) times residual. Only lower residual-head error can pass both median co-primary endpoints; negative or mixed evidence closes the direction. Source-only unavailable controls and descriptive baselines cannot rescue it.",
+      status: "Inactive P1 v3 · regression 544/544 · 111 protocol invariants · real P0 0/11 · failure observed 0 · P1/model/server/PBS/GPU/outer test/result/claim 0",
+      url: "../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "P1 v2 and the private no-claim ledger are synchronized",
@@ -815,7 +822,7 @@ window.AURORA_DATA = Object.freeze({
   competition: [
     ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
     ["Task", "one nominal CFD field → velocity fields at seven alternative flows", "Aneumo multi-flow benchmarks; analytic q^α scaling", "field error versus response fidelity", "conditional application lead"],
-    ["Representation", "same-case anchor plus flow ratio and geometry", "DeltaPhi; DeepONet/FNO; aneurysm GNN", "zero-at-anchor response factorization", "hypothesis only; unselected"],
+    ["Representation", "same-case anchor plus flow ratio and geometry", "SC-FNO; Hemo-MPO; AB-GATr; DeltaPhi; DeepONet/FNO", "same-backbone direct versus identity-residual mechanism test", "inactive directional falsifier; unselected"],
     ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO", "matched-field-error structural mismatch", "not yet observed"],
     ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "registered; non-executable"],
     ["Confirmation", "≥50 untouched base families locked before field read", "current compact test has six families", "source-anatomy generalization", "closed until P0/P1 pass"],
@@ -1329,6 +1336,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "protocol",
+      title: "Direct priors replace the architecture story with a same-backbone directional falsifier",
+      copy: "SC-FNO, Hemo-MPO and AB-GATr make sensitivity supervision, Aneumo SE(3)+physics+DeepONet and anatomy-stratified equivariant surrogation direct prior art. Unexecuted P1 v2 remains history. Inactive v3 fixes one LaB-GATr backbone and compares direct target-field output with v0 + log(q/q0) times residual; only positive direct/residual response-error contrast can pass. Negative or mixed evidence closes the direction. Hemo-MPO and AB-GATr are source-only controls, descriptive baselines are non-rescuing, and any later development is capped at two validation-only rounds plus 80 GPU hours before fresh re-entry. Dependency-complete regression passes 544/544 with 111 protocol invariant groups. Real P0 remains 0/11; no server, PBS/GPU, prediction, response endpoint or claim was opened.",
+      files: ["configs/aneumo_response_fidelity_p1_template_v3.json", "src/aurora/aneumo_response_fidelity_p1_template_v3.py", "tests/test_aneumo_response_fidelity_p1_template_v3.py", "docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "docs/research-direction.md", "docs/literature-lineage.md", "docs/isbi-2027-plan.md", "site/learn.html"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

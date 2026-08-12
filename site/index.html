@@ -62,7 +62,8 @@
           <a class="button primary" href="learn.html#response-fidelity">처음부터 이해하기</a>
           <a class="button ghost" href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">연구 질문·선행·실험 전체 읽기 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v2.json">등록된 method-free P0 v2 ↗</a>
-          <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v2.json">비활성 P1 v2 matching contract ↗</a>
+          <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v3.json">비활성 P1 v3 same-backbone contract ↗</a>
+          <a class="button ghost" href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">직접 선행 재감사 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
@@ -374,10 +375,12 @@
         <span>IS THE CURRENT MODEL A GNN?</span>
         <strong>아직 아니다. 선택된 모델은 0이며, GNN은 조건부 encoder control이다.</strong>
         <p>
-          P1에서는 analytic scaling, interpolation, conditional MLP, DeepONet,
-          DeltaPhi와 MeshGraphNet/equivariant control을 먼저 비교합니다. GNN이 좋아
-          보여서 선택하는 것이 아니라, field L2가 같은 모델 사이의 response 차이가
-          확인될 때에만 local geometry interaction을 위한 최소 encoder 후보가 됩니다.
+          SC-FNO, Hemo-MPO와 AB-GATr 때문에 sensitivity loss, SE(3), physics loss,
+          DeepONet 또는 equivariant GNN은 novelty가 아닙니다. 비활성 P1 v3는 하나의
+          LaB-GATr backbone을 고정하고 direct target-field head와
+          <code>v0 + log(q/q0)·residual</code> head만 비교합니다. GNN이 좋아 보여서
+          선택하는 것이 아니라, field L2가 같은 두 head에서 사전 지정된 방향의
+          response 차이가 확인될 때에만 최소 output factorization을 개발합니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
@@ -515,12 +518,16 @@
             두 co-primary 모두 최소 10% response gap과 nonzero 4/5 seed 방향을
             만족해야 합니다. Cross-fit model들의 training family가 겹치므로 exact
             p-value, Holm, nominal coverage와 formal power는 주장하지 않습니다.
-            Positive MeshGraphNet/DeltaPhi log-ratio는 DeltaPhi가 더 낮은 error임을
-            뜻합니다. MLP/DeepONet은 secondary라 primary를 구제하지 않습니다.
-            차이가 없으면 논문 정체성과 architecture를 함께 닫습니다.
+            Primary pair는 동일한 LaB-GATr backbone에서 direct head와 identity-
+            residual head만 바꿉니다. Positive <code>log(direct/residual)</code>만
+            성공 방향이며, 반대 또는 혼합 결과는 서사를 뒤집지 않고 닫습니다.
+            MLP/DeepONet/MeshGraphNet은 descriptive라 primary를 구제하지 않습니다.
+            P1 뒤 개발도 별도 등록 아래 최대 두 validation-only round와 추가 80
+            GPU-hour로 제한하고 fresh seed 또는 disjoint split으로 재진입합니다.
           </p>
           <a href="../configs/aneumo_response_fidelity_p0_v2.json">Registered P0 v2 contract ↗</a>
-          <a href="../configs/aneumo_response_fidelity_p1_template_v2.json">Inactive P1 v2 matching contract ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p1_template_v3.json">Inactive P1 v3 same-backbone contract ↗</a>
+          <a href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">Direct-prior reappraisal ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator ↗</a>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">지표·baseline·중단 근거 ↗</a>
         </div>

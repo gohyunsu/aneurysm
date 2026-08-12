@@ -59,13 +59,14 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["p0_pbs_wrapper_submittable_now"])
         self.assertFalse(audit["p1_registered"])
         self.assertTrue(audit["p1_design_v1_superseded_pre_execution"])
+        self.assertTrue(audit["p1_design_v2_superseded_pre_execution"])
         self.assertEqual(
             audit["p1_design_v1_template"],
             "configs/aneumo_response_fidelity_p1_template_v1.json",
         )
         self.assertEqual(
             audit["p1_design_template"],
-            "configs/aneumo_response_fidelity_p1_template_v2.json",
+            "configs/aneumo_response_fidelity_p1_template_v3.json",
         )
         self.assertTrue(audit["p1_design_template_non_authoritative"])
         self.assertTrue(
@@ -89,6 +90,8 @@ class ProtocolTests(unittest.TestCase):
             audit["p1_design_median_co_primary_and_nonrescuing_sensitivity_roles"]
         )
         self.assertTrue(audit["p1_design_contrast_direction_and_seed_ties_explicit"])
+        self.assertTrue(audit["p1_design_same_backbone_primary_pair"])
+        self.assertTrue(audit["p1_design_required_positive_residual_direction"])
         self.assertFalse(audit["p1_design_crossfit_exact_null_inference_allowed"])
         self.assertFalse(audit["p1_design_confirmatory_or_paper_efficacy_claim_allowed"])
         self.assertFalse(audit["p1_design_formal_power_claim_allowed"])
@@ -98,6 +101,12 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["p1_design_minimum_same_direction_seeds"], 4)
         self.assertEqual(audit["p1_design_training_seed_count"], 5)
         self.assertEqual(audit["p1_design_total_gpu_hour_cap"], 160.0)
+        self.assertFalse(audit["p1_design_bounded_development_authorized_now"])
+        self.assertEqual(audit["p1_design_maximum_bounded_repair_rounds"], 2)
+        self.assertEqual(
+            audit["p1_design_maximum_additional_development_gpu_hours"], 80.0
+        )
+        self.assertTrue(audit["p1_design_fresh_seed_or_disjoint_split_reentry_required"])
         self.assertEqual(audit["p1_design_real_p0_observed_check_count"], 0)
         self.assertTrue(audit["p1_design_validator_synthetic_tests_passed"])
         self.assertFalse(audit["method_selected"])

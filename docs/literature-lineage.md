@@ -1,5 +1,16 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.8 direct-prior correction:** [SC-FNO](https://proceedings.iclr.cc/paper_files/paper/2025/hash/227b19598f79ed838b01933b9a6ace41-Abstract-Conference.html)는
+> parametric PDE의 solution path와 sensitivity를 함께 학습하는 문제를 이미
+> 점유한다. [Hemo-MPO](https://doi.org/10.1016/j.aej.2026.05.044)는 Aneumo에서
+> SE(3)-equivariant mesh encoder, physics constraint와 DeepONet을 결합한다.
+> [AB-GATr](https://arxiv.org/abs/2605.18816)는 base anatomy로 나눈 single-flow
+> Aneumo subset에서 equivariance를 직접 비교한다. 그러므로 sensitivity loss,
+> equivariance, mesh operator와 physics module은 모두 control이다. 남는 gap은
+> 같은 strong backbone과 같은 field error에서 direct output과 anchor-identity
+> residual output의 aneurysm multi-flow response fidelity를 방향성 있게 비교하고,
+> 이를 ≥50 untouched family에서 확인하는 application gap뿐이다.
+
 > **Schema 11.8 lineage boundary:** Aneumo는 multi-flow conditioning과 DeepONet/
 > Swin controls를, Cebral et al.은 multi-inflow response variables를, DeltaPhi는
 > nearby-state residual learning을, DINO/DIFNO는 derivative-informed operator

@@ -1,5 +1,17 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.8 response-fidelity map · 2026-08-12:** Aneumo's verified compact
+> node supports one conditional application question at 34.0/40 with residual
+> novelty exactly 2.5/5. SC-FNO already occupies generic sensitivity-aware
+> operators; Hemo-MPO occupies Aneumo SE(3)+physics+DeepONet; AB-GATr occupies
+> anatomy-stratified equivariant Aneumo comparison. The only defensible P1 edge
+> therefore holds one LaB-GATr backbone fixed and changes direct output to an
+> identity-preserving anchor residual. The edge is directional: residual-head
+> improvement may pass; negative or mixed evidence terminates it. This is an
+> inactive template, not a selected architecture. Real P0 is 0/11 and the
+> exact private cache path is unresolved, so P1/model/server/PBS/GPU/outer
+> test/result/claim remain 0.
+
 > **Schema 11.7 map · 2026-08-12:** The AneuX conditional node is closed before
 > execution: 32.0/40 total but 2.0/5 residual novelty. The 11.6 33.0/40 node and
 > P0 v1/v2 bytes remain historical. Current active lead, primary, split, P0/P1,

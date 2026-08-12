@@ -1,5 +1,31 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 direct-prior-complete P1 v3:** SC-FNO already owns
+> the generic solution-accuracy/sensitivity mismatch and sensitivity loss;
+> Hemo-MPO owns Aneumo SE(3) mesh encoding + physics constraint + DeepONet;
+> AB-GATr owns base-anatomy-stratified equivariant Aneumo comparison. Do not
+> claim GNN, equivariance, physics loss, DeepONet, sensitivity supervision or
+> their combination as AURORA novelty. Preserve unexecuted P1 v2 unchanged.
+> Current inactive P1 v3 is
+> `configs/aneumo_response_fidelity_p1_template_v3.json`, SHA-256
+> `fb18827b6153422f2e97c7cf6151c653b0490f09e2942572c064dc1ea66adbc0`;
+> validator SHA-256 is
+> `5b73037fa6320c2d39de80b5415e176625b6c259dbfc0db53223ebd9e457253c`.
+> Its sole primary pair shares one pinned LaB-GATr backbone and changes only
+> direct target-field versus `v0 + log(q/q0) * residual` output. Only positive
+> `log(direct error / residual error)` may pass both co-primary endpoints;
+> negative/mixed evidence closes the direction without narrative reversal.
+> Source-only Hemo-MPO/AB-GATr are not silently treated as executable controls.
+> MLP/DeepONet/MeshGraphNet are descriptive and non-rescuing. Post-P1
+> development, if separately registered, is validation-only, maximum two
+> rounds and 80 additional GPU hours, followed by fresh-seed/disjoint-split
+> re-entry. Real P0 remains 0/11; P1/model/server/PBS/GPU/outer test/result/
+> claim remain 0. Do not retry `introai9` before verified external change and
+> never access `junjinyong`.
+> Dependency-complete regression passes 544/544 tests; protocol retains 111
+> invariant groups at canonical SHA-256
+> `d3b368f7171a9dd900bd81e6e11dc0db98fba9fded21b1b301a47dc01b4f8c02`.
+
 > **2026-08-12 schema 11.8 P1 v2/private synchronization:** Exact scientific
 > public source `8b288c0f6edacc4721f06bbd2a3cb21e73d83146` passed Quality
 > `31601736993` and Pages `31601736273`. Private planning head

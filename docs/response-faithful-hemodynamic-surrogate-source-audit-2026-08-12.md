@@ -6,6 +6,17 @@ claim remain unselected**
 Target venue: **IEEE ISBI 2027**  
 Decision date: 2026-08-12 KST
 
+> **Direct-prior reappraisal:** SC-FNO already occupies generic sensitivity-
+> constrained operator learning; Hemo-MPO already combines SE(3) mesh encoding,
+> physics constraints and DeepONet on Aneumo; AB-GATr already benchmarks
+> equivariant CFD surrogates on a base-anatomy-stratified single-flow Aneumo
+> subset. The application question remains conditional, but P1 v2 is
+> prospectively superseded before execution. Current inactive
+> [P1 v3](../configs/aneumo_response_fidelity_p1_template_v3.json) compares
+> direct and identity-residual heads on the same LaB-GATr backbone and permits
+> only the prespecified residual-benefit direction. See the
+> [exact reappraisal](response-fidelity-direct-prior-reappraisal-2026-08-12.md).
+
 ## 1. Decision
 
 The most defensible use of the assets already acquired by AURORA is not another
@@ -70,6 +81,9 @@ The following sources define what cannot be claimed as AURORA novelty.
 | [DeltaPhi](https://proceedings.neurips.cc/paper_files/paper/2025/hash/12bf28fb68f295f855a5bf0c5a217d6e-Abstract-Conference.html) | Learning residuals between nearby physical states on regular and irregular domains | Anchor-to-target residual learning is a strong baseline, not the contribution |
 | [Derivative-Informed Neural Operator](https://doi.org/10.1016/j.jcp.2023.112555) | Joint operator/Jacobian accuracy for parametric PDE maps | Finite-difference or derivative loss alone cannot be claimed as novel |
 | [Derivative-Informed FNO](https://arxiv.org/abs/2512.14086) | Simultaneous output and Fréchet-derivative approximation, including Navier--Stokes examples | “Field accuracy is insufficient for derivatives” is a general SciML prior |
+| [Sensitivity-Constrained FNO](https://proceedings.iclr.cc/paper_files/paper/2025/hash/227b19598f79ed838b01933b9a6ace41-Abstract-Conference.html) | Solution and parameter-sensitivity learning for parametric PDEs | Generic sensitivity fidelity and sensitivity loss are direct prior |
+| [Hemo-MPO](https://doi.org/10.1016/j.aej.2026.05.044) | SE(3) mesh encoder, physics constraint and DeepONet evaluated on Aneumo | This architecture stack and Aneumo field-surrogate claim are direct prior; no public exact reproduction bundle was identified |
+| [AB-GATr](https://arxiv.org/abs/2605.18816) | Base-anatomy-stratified single-flow Aneumo evaluation of scalable equivariant CFD surrogates | Equivariance on Aneumo is direct prior; LaB-GATr is the strongest reimplementable backbone control |
 | [Physics-constrained aneurysm GNN](https://doi.org/10.1038/s41746-026-02404-z) | Inflow-aware transient aneurysm velocity rollout with regional errors and unseen-inflow evaluation | GNN, inflow tokens, physics loss and aneurysm flow surrogation are controls |
 | [Geometry-aware PointNet](https://doi.org/10.1016/j.cmpb.2026.109308) | Fast peak-systolic velocity/WSS prediction and non-idealized OOD degradation | Point-cloud surrogation and field-level speedup are not independent novelty |
 | [2015 aneurysm CFD challenge](https://pubmed.ncbi.nlm.nih.gov/30203115/) | Workflow, extent and inflow choices can materially change WSS | Response credibility is important, but variability itself is established |
@@ -167,11 +181,12 @@ family IDs, validation/test fields, checkpoints, predictions and GPU access.
 ## 6. P1 and model-selection falsifier
 
 P1 is not registered or executable. The current
-[inactive v2 design template](../configs/aneumo_response_fidelity_p1_template_v2.json)
+[inactive v3 design template](../configs/aneumo_response_fidelity_p1_template_v3.json)
 exists only to remove post-result ambiguity before real P0 evidence. The
 [unexecuted v1 template](../configs/aneumo_response_fidelity_p1_template_v1.json)
-is immutable history: no model prediction or response endpoint was read before
-v2 superseded it. If P0 passes all 11 checks, a separate executable version
+and [unexecuted v2 template](../configs/aneumo_response_fidelity_p1_template_v2.json)
+are immutable history: no model prediction or response endpoint was read before
+v3 superseded them. If P0 passes all 11 checks, a separate executable version
 must still be registered and committed before any model prediction is produced.
 
 The template uses only the historical 20 train base families. A seeded
@@ -185,10 +200,12 @@ DeepONet, DeltaPhi-style residual and anchor-conditioned MeshGraphNet. Frozen
 V1e is diagnostic only because it lacks the same-case anchor input.
 
 Response endpoints are unavailable during selection. The sole primary
-mechanism contrast is direct field prediction by anchor-conditioned
-MeshGraphNet (left) versus DeltaPhi-style anchor residual prediction (right).
-Positive log response-error ratio, `log(left/right)`, therefore means lower
-DeltaPhi response error; a negative ratio means lower MeshGraphNet error.
+mechanism contrast holds the strong anchor-conditioned LaB-GATr backbone fixed:
+the left head predicts the target field directly, whereas the right head adds a
+DeltaPhi-style residual multiplied by `log(q/q0)` to enforce exact identity at
+the anchor. Positive `log(direct/residual)` means lower residual-head error.
+Only this prespecified positive direction can pass; a negative or mixed result
+closes the exact hypothesis without reversing the narrative.
 
 For each seed, calibration field-error common support defines 25%, 50% and 75%
 iso-error targets on the log scale. For each model, the three targets are

@@ -1085,6 +1085,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p1_design_v1_template", "p1_design_v1_template_sha256",
             "p1_design_v1_validator", "p1_design_v1_validator_sha256",
             "p1_design_v1_superseded_pre_execution",
+            "p1_design_v2_template", "p1_design_v2_template_sha256",
+            "p1_design_v2_validator", "p1_design_v2_validator_sha256",
+            "p1_design_v2_superseded_pre_execution",
             "p1_design_template", "p1_design_template_sha256",
             "p1_design_validator", "p1_design_validator_sha256",
             "p1_design_template_status",
@@ -1098,12 +1101,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p1_design_power_law_competence_margin_log_ratio",
             "p1_design_median_co_primary_and_nonrescuing_sensitivity_roles",
             "p1_design_contrast_direction_and_seed_ties_explicit",
+            "p1_design_same_backbone_primary_pair",
+            "p1_design_required_positive_residual_direction",
+            "p1_design_source_only_unavailable_prior_controls",
+            "p1_design_reimplementable_lab_gatr_commit",
             "p1_design_crossfit_exact_null_inference_allowed",
             "p1_design_confirmatory_or_paper_efficacy_claim_allowed",
             "p1_design_formal_power_claim_allowed",
             "p1_design_minimum_multiplicative_response_gap",
             "p1_design_minimum_same_direction_seeds",
             "p1_design_training_seed_count", "p1_design_total_gpu_hour_cap",
+            "p1_design_bounded_development_authorized_now",
+            "p1_design_maximum_bounded_repair_rounds",
+            "p1_design_maximum_additional_development_gpu_hours",
+            "p1_design_fresh_seed_or_disjoint_split_reentry_required",
             "p1_design_real_p0_required_check_count",
             "p1_design_real_p0_observed_check_count",
             "p1_design_validator_synthetic_tests_passed",
@@ -1132,6 +1143,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         "neurips_2025_deltaphi",
         "doi:10.1016/j.jcp.2023.112555",
         "arxiv:2512.14086",
+        "iclr_2025_sensitivity_constrained_fno",
+        "doi:10.1016/j.aej.2026.05.044",
+        "arxiv:2605.18816",
         "doi:10.1038/s41746-026-02404-z",
         "doi:10.1016/j.cmpb.2026.109308",
         "pmid:30203115",
@@ -1214,14 +1228,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "src/aurora/aneumo_response_fidelity_p1_template.py"
         or response_fidelity["p1_design_v1_validator_sha256"]
         != "b14e4c8dcf9a236c5bfeb30b559b5799409d701e42a119f9ba5967394394d9fa"
-        or response_fidelity["p1_design_template"]
+        or response_fidelity["p1_design_v2_template"]
         != "configs/aneumo_response_fidelity_p1_template_v2.json"
-        or response_fidelity["p1_design_template_sha256"]
+        or response_fidelity["p1_design_v2_template_sha256"]
         != "67cbb858b0ffaaca9f6ee289872a4f2bd1d499deca95697b149bea86e5386918"
-        or response_fidelity["p1_design_validator"]
+        or response_fidelity["p1_design_v2_validator"]
         != "src/aurora/aneumo_response_fidelity_p1_template_v2.py"
-        or response_fidelity["p1_design_validator_sha256"]
+        or response_fidelity["p1_design_v2_validator_sha256"]
         != "d77cc99e9646ef64da4abfac441d0947101e634fb087d2e3a9b52ce1d3317530"
+        or response_fidelity["p1_design_template"]
+        != "configs/aneumo_response_fidelity_p1_template_v3.json"
+        or response_fidelity["p1_design_template_sha256"]
+        != "fb18827b6153422f2e97c7cf6151c653b0490f09e2942572c064dc1ea66adbc0"
+        or response_fidelity["p1_design_validator"]
+        != "src/aurora/aneumo_response_fidelity_p1_template_v3.py"
+        or response_fidelity["p1_design_validator_sha256"]
+        != "5b73037fa6320c2d39de80b5415e176625b6c259dbfc0db53223ebd9e457253c"
         or response_fidelity["p1_design_template_status"]
         != "draft_non_authoritative_blocked_on_real_p0_v2_all_11_pass"
         or response_fidelity["p1_design_predeclared_primary_pair_level_endpoint_cells"]
@@ -1236,6 +1258,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or response_fidelity["p1_design_minimum_same_direction_seeds"] != 4
         or response_fidelity["p1_design_training_seed_count"] != 5
         or response_fidelity["p1_design_total_gpu_hour_cap"] != 160.0
+        or response_fidelity["p1_design_source_only_unavailable_prior_controls"]
+        != [
+            "hemo_mpo_no_identified_code_or_exact_split_bundle",
+            "ab_gatr_no_declared_repository_license_and_experiments_coming_soon",
+        ]
+        or response_fidelity["p1_design_reimplementable_lab_gatr_commit"]
+        != "43379fddb7583d5a8527fc3e104b7c11f8f0afb9"
+        or response_fidelity["p1_design_maximum_bounded_repair_rounds"] != 2
+        or response_fidelity["p1_design_maximum_additional_development_gpu_hours"]
+        != 80.0
         or response_fidelity["p1_design_real_p0_required_check_count"] != 11
         or response_fidelity["p1_design_real_p0_observed_check_count"] != 0
         or response_fidelity["candidate_architecture_status"]
@@ -1263,12 +1295,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p0_future_metric_or_threshold_change_requires_new_evidence_version",
                 "p1_requires_field_error_matched_response_mismatch",
                 "p1_design_v1_superseded_pre_execution",
+                "p1_design_v2_superseded_pre_execution",
                 "p1_design_template_non_authoritative",
                 "p1_design_family_crossfit_uses_historical_20_train_families_only",
                 "p1_design_response_blind_iso_error_matching",
                 "p1_design_duplicate_free_checkpoint_assignment",
                 "p1_design_median_co_primary_and_nonrescuing_sensitivity_roles",
                 "p1_design_contrast_direction_and_seed_ties_explicit",
+                "p1_design_same_backbone_primary_pair",
+                "p1_design_required_positive_residual_direction",
+                "p1_design_fresh_seed_or_disjoint_split_reentry_required",
                 "p1_design_validator_synthetic_tests_passed",
             )
         )
@@ -1284,6 +1320,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p1_design_crossfit_exact_null_inference_allowed",
                 "p1_design_confirmatory_or_paper_efficacy_claim_allowed",
                 "p1_design_formal_power_claim_allowed",
+                "p1_design_bounded_development_authorized_now",
                 "architecture_selected", "scientific_server_queried",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "submission_identity_active",
@@ -1315,6 +1352,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("p0_pbs_wrapper", "p0_pbs_wrapper_sha256"),
         ("p1_design_v1_template", "p1_design_v1_template_sha256"),
         ("p1_design_v1_validator", "p1_design_v1_validator_sha256"),
+        ("p1_design_v2_template", "p1_design_v2_template_sha256"),
+        ("p1_design_v2_validator", "p1_design_v2_validator_sha256"),
         ("p1_design_template", "p1_design_template_sha256"),
         ("p1_design_validator", "p1_design_validator_sha256"),
     ):

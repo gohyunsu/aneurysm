@@ -180,10 +180,14 @@
           </p>
           <p>
             Linear와 train-fitted power-law scaling은 deterministic control입니다.
-            동일한 anchor 정보 집합을 쓰는 conditional MLP, DeepONet, DeltaPhi-style
-            residual과 MeshGraphNet은 약 2M parameter, 20,000 update와 동일
-            node-condition budget으로 맞춥니다. 과거 V1e는 anchor field를 입력받지
-            않았으므로 primary pair가 아니라 diagnostic history입니다.
+            새 선행연구 감사에서 SC-FNO가 일반적인 parameter-sensitivity 학습을,
+            Hemo-MPO가 Aneumo의 SE(3) mesh encoder+physics+DeepONet 조합을,
+            AB-GATr가 base-anatomy로 나눈 Aneumo에서 equivariant surrogate 비교를
+            이미 수행한 것을 확인했습니다. 따라서 GNN, equivariance, physics loss,
+            DeepONet 또는 sensitivity loss를 붙이는 것은 novelty가 아닙니다.
+            Hemo-MPO는 공개 exact reproduction bundle을 찾지 못했고 AB-GATr 공식
+            저장소는 experiment가 Coming Soon이며 SPDX license가 없으므로, 두 모델을
+            실행 가능한 matched baseline처럼 가장하지 않습니다.
           </p>
           <p>
             Response 지표를 숨긴 calibration 단계에서 두 모델의 field-error common
@@ -199,13 +203,17 @@
             Outer family에서는 paired log field-error-ratio 90% stability interval이
             <code>±log(1.01)</code> 안에 들어야 합니다. 또한 각 모델의 power-law
             대비 <code>log(model error / control error)</code> one-sided 95% stability
-            upper bound가 <code>log(1.02)</code> 이하여야 field-competent입니다. Primary는
-            direct MeshGraphNet(left) 대 anchor-residual DeltaPhi(right) 한 쌍이며,
-            positive <code>log(left/right)</code>는 DeltaPhi의 response error가 더
-            낮다는 뜻입니다. 두 co-primary 모두 stability interval zero exclusion,
-            최소 10% response gap과 4/5 nonzero seed 동일 방향을 요구합니다. Zero
-            tie는 세지 않습니다.
-            MLP/DeepONet 비교는 secondary라 primary failure를 구제하지 않습니다.
+            upper bound가 <code>log(1.02)</code> 이하여야 field-competent입니다. 최신
+            비활성 P1 v3의 primary는 MIT-licensed LaB-GATr backbone 하나를 공유합니다.
+            왼쪽 head는 target field를 직접 예측하고, 오른쪽 head는
+            <code>v0 + log(q/q0)·residual</code>로 anchor identity를 강제합니다.
+            즉 backbone 성능과 output parameterization을 혼동하지 않습니다.
+            Positive <code>log(direct/residual)</code>만 사전 지정된 성공 방향입니다.
+            두 co-primary 모두 positive stability lower bound, 최소 10% residual-head
+            error reduction과 4/5 positive seed를 요구하며 zero tie는 세지 않습니다.
+            반대 또는 혼합 방향은 method narrative를 뒤집지 않고 종료합니다.
+            MLP/DeepONet/MeshGraphNet은 descriptive control이라 primary failure를
+            구제하지 않습니다.
             1% band는 field imbalance를 숨기지 못하게 하고 10% floor는 통계적으로만
             유의한 사소한 차이를 막습니다. 현재 model-contrast variance가 없으므로
             formal power를 주장하지 않습니다. 더 근본적으로 cross-fit 모델의 학습
@@ -216,13 +224,16 @@
             160시간이지만 이는 미래 상한일 뿐 현재 GPU 승인이나 job이 아닙니다.
           </p>
           <p>
-            차이가 관측될 때만 최소 hypothesis를 엽니다. Analytic
+            차이가 사전 지정된 방향으로 관측될 때만 최소 hypothesis를 엽니다. Analytic
             <code>(q/q0)^α v0</code>를 강한 baseline으로 보존하고, anchor에서는 정확히
             0이 되는 learned residual만 더합니다. SE(3) GNN, boundary token,
             continuous query, derivative loss는 구현 선택 또는 direct control이지
             novelty가 아닙니다. Contribution은 관측된 failure와 그 failure를 고치는
             최소 factorization, 그리고 field accuracy를 희생하지 않는 confirmation에
-            있어야 합니다.
+            있어야 합니다. P1 pass 뒤에도 즉시 confirmatory test를 열지 않습니다.
+            별도 공개 등록 아래 validation-only 최대 2 round, 총 80 GPU-hour만
+            허용하고, round마다 attribution으로 지지된 실패 가설 하나만 검증합니다.
+            모든 variant를 기록하고 fresh seed 또는 disjoint split으로 재진입합니다.
           </p>
           <p>
             현재 compact test는 6 family뿐이라 최종 주장을 지지하기에 약합니다.
@@ -240,7 +251,8 @@
             <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
           </p>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">직접 선행·six-way score·P0/P1·ISBI claim 삭제 규칙 전체 읽기 ↗</a>
-          <a href="../configs/aneumo_response_fidelity_p1_template_v2.json">P1 v2 iso-error matching·통계·중단 계약 읽기 ↗</a>
+          <a href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">SC-FNO·Hemo-MPO·AB-GATr 직접 선행 재감사 읽기 ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p1_template_v3.json">P1 v3 same-backbone·방향성·bounded-development 계약 읽기 ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Fail-closed aggregate evaluator 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">

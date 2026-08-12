@@ -1,5 +1,17 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.8 current model boundary · P1 v3:** Selected architecture remains
+> zero. SC-FNO, Hemo-MPO and AB-GATr make sensitivity loss, Aneumo SE(3)+physics
+> +DeepONet and anatomy-stratified equivariant surrogation controls, not
+> contribution candidates. The inactive
+> [P1 v3](../configs/aneumo_response_fidelity_p1_template_v3.json) uses the
+> pinned MIT LaB-GATr implementation only as a same-backbone falsifier. Its
+> direct and identity-residual heads share all non-output choices. Only lower
+> residual-head error in both median co-primary endpoints can support later
+> development. Negative/mixed evidence closes the direction; descriptive
+> MLP/DeepONet/MeshGraphNet cannot rescue it. No model code, dependency install,
+> training or GPU run is authorized while real P0 is 0/11.
+
 > **Schema 11.8 [P1 v2](../configs/aneumo_response_fidelity_p1_template_v2.json)
 > baseline boundary:** Primary pair는 여전히 direct
 > MeshGraphNet 대 anchor-residual DeltaPhi이며 proposal architecture가 아니다.

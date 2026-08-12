@@ -1,5 +1,18 @@
 # AURORA 연구 방향
 
+> **Schema 11.8 direct-prior-complete P1 v3:** SC-FNO는 일반적인 parameter-
+> sensitivity 학습을, Hemo-MPO는 Aneumo의 SE(3) mesh+physics+DeepONet 조합을,
+> AB-GATr는 base-anatomy-stratified Aneumo equivariant surrogate 비교를 이미
+> 점유한다. 따라서 v2의 MeshGraphNet--DeltaPhi 비교는 backbone과 출력
+> parameterization을 혼동하므로 실행 전에 별도 v3로 supersede한다. V3 primary는
+> 동일한 MIT LaB-GATr backbone의 direct-field head와
+> `v0 + log(q/q0) residual` head만 비교한다. Positive
+> `log(direct/residual)` 방향에서 두 co-primary 모두 ≥10% gap, positive 95%
+> stability lower bound와 4/5 positive seed를 만족해야 한다. 반대 방향은 논리를
+> 뒤집지 않고 종료한다. P1 통과 후에도 별도 등록된 validation-only 최대 2 round/
+> 80 GPU-hour bounded development만 허용한다. 현재 real P0 0/11이며 P1/model/GPU/
+> claim은 0이다. [상세 재감사](response-fidelity-direct-prior-reappraisal-2026-08-12.md)
+
 > **Schema 11.8 P1 v2 red-team:** P1 v1은 실행되지 않았지만 distinct-checkpoint,
 > power-law competence interval, primary/sensitivity 역할, contrast direction과
 > cross-fit dependence가 완전히 닫히지 않았다. 결과를 보기 전에 별도 v2로
@@ -10,16 +23,15 @@
 > p-value, Holm, nominal coverage와 formal power는 금지한다. 이는 novelty가 아니라
 > selection-bias와 통계적 과장 방지 장치이며 P0/P1/GPU/claim을 열지 않는다.
 
-> **Schema 11.8 P1 design hardening:** P1은 아직 등록·실행 가능한 실험이 아니다.
+> **Historical schema 11.8 P1 v1 design:** P1은 등록·실행되지 않았다.
 > 다만 향후 결과를 보고 “비슷한 field error”의 뜻을 바꾸지 못하도록
 > historical [비활성 v1 템플릿](../configs/aneumo_response_fidelity_p1_template_v1.json)을
-> 먼저 고정했다. 기존 train 20 family를 seeded five-block cyclic rule로 나눠
+> 먼저 고정했으나 이후 v2와 v3가 결과 조회 없이 supersede했다. 기존 train 20 family를 seeded five-block cyclic rule로 나눠
 > fold마다 12 fit/4 calibration/4 outer family를 사용하고, response를 보지 않은
 > calibration field L2만으로 세 iso-error level을 정한다. Primary는 direct
 > MeshGraphNet 대 anchor-residual DeltaPhi 한 쌍의 3 level×2 endpoint, 총 6 cell이다.
-> Outer 90% log-error-ratio CI 전체가 ±log(1.01) field-equivalence band 안에 들고,
-> exact family sign-flip Holm rejection, unadjusted bootstrap CI zero exclusion,
-> 최소 10% multiplicative gap과 4/5 seed 방향 일치가 함께 있어야 mismatch다.
+> 이 역사적 v1의 exact sign-flip/Holm 조항은 cross-fit dependence 때문에 v2에서
+> 폐기됐다. V1은 설계 변화 계보일 뿐 현재 분석 계약이 아니다.
 > MLP/DeepONet pair는 secondary이며 primary를 구제하지 못한다. Historical
 > validation/test와 향후 confirmation family는
 > 읽지 않는다. Real P0 0/11인 현재 P1/model/GPU/claim은 계속 0이다.

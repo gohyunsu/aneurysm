@@ -1,5 +1,19 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.8 inactive P1 v3:** SC-FNO, Hemo-MPO and AB-GATr make generic
+> sensitivity learning and Aneumo equivariant/physics architecture novelty
+> unavailable. Preserve v1/v2 as unexecuted history. The current
+> [v3 template](../configs/aneumo_response_fidelity_p1_template_v3.json) holds
+> one LaB-GATr backbone fixed and changes only direct target-field versus
+> `v0 + log(q/q0) * residual` output. Positive `log(direct/residual)` is the
+> only pass direction. Both median co-primary stability lower bounds must be
+> above zero, pooled reduction must be at least 10%, and at least four of five
+> seeds must be positive. Negative or mixed evidence closes the direction.
+> MLP/DeepONet/MeshGraphNet are descriptive and non-rescuing. Any post-P1
+> development needs a separate validation-only registration, at most two
+> rounds and 80 additional GPU hours, then fresh-seed/disjoint-split re-entry.
+> Real P0 remains 0/11, so this is neither P1 registration nor compute authority.
+
 > **Schema 11.8 inactive P1 v2:** V1은 실행·prediction·response read 없이
 > 보존하고 [v2](../configs/aneumo_response_fidelity_p1_template_v2.json)로
 > supersede한다. 각 model은 세 iso-level에 서로 다른 checkpoint를 joint minimum-

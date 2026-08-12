@@ -1,5 +1,26 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 direct-prior-complete P1 v3:**
+> [SC-FNO](https://proceedings.iclr.cc/paper_files/paper/2025/hash/227b19598f79ed838b01933b9a6ace41-Abstract-Conference.html),
+> [Hemo-MPO](https://doi.org/10.1016/j.aej.2026.05.044) and
+> [AB-GATr](https://arxiv.org/abs/2605.18816) remove the broad architecture
+> story: sensitivity supervision, Aneumo SE(3)+physics+DeepONet and
+> anatomy-stratified equivariant CFD surrogation are direct prior art. The
+> unexecuted P1 v2 is therefore preserved and superseded by the inactive
+> [P1 v3](configs/aneumo_response_fidelity_p1_template_v3.json). V3 compares
+> two heads on the same MIT-licensed LaB-GATr backbone: direct target-field
+> prediction versus the identity-preserving
+> `v0 + log(q/q0) * residual` map. Only a positive direct/residual error ratio
+> can pass; negative or mixed evidence closes the direction without reversing
+> the story. MLP, DeepONet and MeshGraphNet are descriptive controls only.
+> Even after P1, development is capped at two validation-only rounds and 80
+> additional GPU hours before fresh re-entry. This is a prospective design,
+> not architecture selection or compute authority. Real P0 remains 0/11; no
+> server, PBS/GPU, prediction, response endpoint or claim was opened.
+> Dependency-complete regression passes 544/544 tests; the protocol retains
+> 111 invariant groups at canonical SHA-256
+> `d3b368f7171a9dd900bd81e6e11dc0db98fba9fded21b1b301a47dc01b4f8c02`.
+
 > **Schema 11.8 P1 v2/private synchronization:** Exact scientific public source
 > `8b288c0f6edacc4721f06bbd2a3cb21e73d83146` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31601736993)

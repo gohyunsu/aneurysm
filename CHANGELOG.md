@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · direct priors narrow P1 to one directional mechanism test
+
+- SC-FNO, Hemo-MPO and AB-GATr close the broad architecture-novelty story.
+  GNN, SE(3) equivariance, physics loss, DeepONet and generic sensitivity
+  supervision are direct-prior components, not contributions.
+- Preserved unexecuted P1 v2 and added inactive P1 v3 before any model output or
+  response endpoint. V3 holds an MIT-licensed LaB-GATr backbone fixed and
+  compares only direct target-field output with the identity-preserving
+  `v0 + log(q/q0) * residual` output map.
+- Fixed the success direction prospectively. Both median co-primary endpoints
+  require a positive stability lower bound, at least 10% residual-head error
+  reduction and four of five positive seeds. Negative or mixed evidence closes
+  the direction; it cannot be redescribed as a reverse mechanism.
+- Hemo-MPO and AB-GATr remain source-only controls because the inspected public
+  assets do not supply an executable exact reproduction contract. MLP,
+  DeepONet and MeshGraphNet are descriptive, non-gating controls.
+- Any post-P1 development requires a separate registration, at most two
+  validation-only rounds, 80 additional GPU hours and fresh-seed or disjoint-
+  split re-entry before confirmation. Real P0 remains 0/11 and no server,
+  PBS/GPU, prediction, response metric or claim was opened.
+- Dependency-complete regression passes 544/544 tests; the protocol retains
+  111 invariant groups at canonical SHA-256 `d3b368f7…f8c02`.
+
 ## 2026-08-12 · schema 11.8 · P1 v2 and private ledger synchronized
 
 - Exact scientific public source `8b288c0…` passed Quality `31601736993` and

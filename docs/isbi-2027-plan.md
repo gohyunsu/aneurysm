@@ -1,6 +1,17 @@
 # ISBI 2027 제출 계획
 
-> **2026-08-12 P1 v2 paper contract:** Technical paper에는 checkpoint search
+> **2026-08-12 direct-prior-complete P1 v3 paper contract:** SC-FNO, Hemo-MPO와
+> AB-GATr를 반영하면 논문은 sensitivity-aware operator, equivariant GNN 또는
+> physics-module 조합을 contribution으로 쓸 수 없다. 현재 비활성 v3는 동일
+> LaB-GATr backbone의 direct-field head와 anchor-identity residual head만 비교해
+> representation 효과를 분리한다. 논문 Methods에는 shared-backbone controlled
+> contrast, response-blind median iso-error match와 prespecified positive
+> residual-benefit direction만 남긴다. 반대 방향은 method story를 뒤집지 않고
+> identity를 닫는다. P1 통과 뒤 허용 가능한 개발도 별도 등록된 validation-only
+> 최대 2 round/80 GPU-hour이며, fresh seed 또는 disjoint split 재진입이 필요하다.
+> 현재 real P0 0/11, manuscript claim 0이다.
+
+> **Historical 2026-08-12 P1 v2 paper contract:** Technical paper에는 checkpoint search
 > mechanics를 장황하게 싣지 않는다. 다만 결과가 활성화되면 Methods에 세 문장으로
 > 충분히 재현 가능하게 보고한다: duplicate-free response-blind iso-error matching,
 > median-level paired/tangent co-primary screen, two-sided 90% field stability
@@ -8,16 +19,15 @@
 > sensitivity이며 primary를 구제하지 않는다. Positive contrast의 의미와 4/5 seed
 > tie rule도 표 주석에 고정한다. Cross-fit 20 family에서 exact p-value나 formal power를
 > 주장하지 않고 v1→v2 운영 이력은 기술 4쪽에서 제외한다. 현재 manuscript
-> claim은 0이다.
+> claim은 0이다. V2는 model prediction과 response read 없이 v3가 supersede했다.
 
 > **2026-08-12 official recheck and P1 page contract:** 공식 ISBI 2027 author
 > page를 재확인했다. Single-blind, 첫 4쪽의 모든 technical content, $200 optional
 > fifth page의 ethics/acknowledgments/COI/references-only 조건과 2026-10-26
 > 23:59 USA EDT 마감은 그대로다. Submission endpoint는 여전히 `Coming Soon`이다.
-> P1은 20 train family cyclic cross-fit, response-blind 3-level iso-error matching,
-> 한 mechanism-linked pair의 6개 primary multiplicity cell, exact family sign-flip
-> 검정과 160 GPU-hour cap을 담은 비활성 템플릿으로
-> 구체화했다. 이 운영 세부를 본문에 나열하지 않고, 논문에는 RF-C1을 판정한
+> 역사적 v1은 20 train family cyclic cross-fit, response-blind 3-level iso-error matching,
+> exact family sign-flip 검정을 담았으나 cross-fit dependence 때문에 v2에서
+> supersede됐다. 이 운영 이력을 본문에 나열하지 않고, 논문에는 RF-C1을 판정한
 > field-equivalence와 response-effect 결과만 넣는다. Real P0 0/11이므로 원고의
 > title/abstract/method/result/figure는 계속 동결한다.
 

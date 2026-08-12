@@ -1,0 +1,242 @@
+{
+  "schema_version": "aurora.aneumo_response_fidelity_p1_template.v3",
+  "template_id": "aneumo_backbone_controlled_response_failure_p1_template_v3",
+  "status": "draft_non_authoritative_blocked_on_real_p0_v2_all_11_pass",
+  "purpose": "Freeze a direct-prior-complete, backbone-controlled and directionally falsifiable future development screen without registering or executing P1.",
+  "supersession": {
+    "supersedes_template": "configs/aneumo_response_fidelity_p1_template_v2.json",
+    "supersedes_template_sha256": "67cbb858b0ffaaca9f6ee289872a4f2bd1d499deca95697b149bea86e5386918",
+    "supersedes_validator": "src/aurora/aneumo_response_fidelity_p1_template_v2.py",
+    "supersedes_validator_sha256": "d77cc99e9646ef64da4abfac441d0947101e634fb087d2e3a9b52ce1d3317530",
+    "v2_executed": false,
+    "v2_model_prediction_read": false,
+    "v2_response_metric_read": false,
+    "reasons": [
+      "new_aneumo_direct_priors_make_meshgraphnet_an_inadequate_primary_architecture_control",
+      "meshgraphnet_versus_deltaphi_confounded_backbone_with_output_parameterization",
+      "an_undirected_difference_could_post_hoc_reverse_the_mechanistic_story",
+      "bounded_post_gate_development_repair_was_not_prospectively_limited"
+    ]
+  },
+  "activation_boundary": {
+    "this_file_can_be_executed": false,
+    "this_file_can_be_submitted_to_pbs": false,
+    "p1_registered": false,
+    "real_p0_config": "configs/aneumo_response_fidelity_p0_v2.json",
+    "real_p0_config_sha256": "b82b3bfd3d83713f375378f471ec506e7b8437fd470e98366534d4cb1d021381",
+    "real_p0_required_verdict": "pass_all_11_checks",
+    "real_p0_observed_verdict": null,
+    "real_p0_required_check_count": 11,
+    "real_p0_observed_check_count": 0,
+    "activation_requires_separate_registered_config": true,
+    "activation_requires_exact_cache_path_and_execution_envelope": true,
+    "activation_requires_public_commit_before_any_model_prediction": true,
+    "core_match_pair_direction_or_inference_change_requires_new_evidence_version": true
+  },
+  "source_reappraisal": {
+    "date": "2026-08-12",
+    "scfno": {
+      "identifier": "iclr_2025_sensitivity_constrained_fno",
+      "occupies": "generic_solution_and_parameter_sensitivity_joint_learning",
+      "application_specific_aneurysm_response_evaluation": false
+    },
+    "hemo_mpo": {
+      "identifier": "doi:10.1016/j.aej.2026.05.044",
+      "uses_aneumo": true,
+      "occupies": "se3_mesh_encoder_plus_physics_constraint_plus_deeponet_on_aneumo",
+      "public_code_repository_identified": false,
+      "exact_family_split_and_reproduction_bundle_identified": false,
+      "execution_role": "source_only_non_executable_direct_prior"
+    },
+    "ab_gatr": {
+      "identifier": "arxiv:2605.18816",
+      "uses_aneumo_single_flow_kg_per_s": 0.001,
+      "aneumo_split_base_anatomy_stratified": true,
+      "official_repository": "https://github.com/PatRyg99/abgatr",
+      "official_repository_commit": "49acb32083d3389e57dde0f7f82703366c4cba27",
+      "repository_license_spdx": null,
+      "exact_experiment_release_status": "coming_soon",
+      "execution_role": "source_only_non_executable_direct_prior"
+    },
+    "lab_gatr": {
+      "identifier": "miccai_2024_lab_gatr",
+      "official_repository": "https://github.com/sukjulian/lab-gatr",
+      "official_repository_commit": "43379fddb7583d5a8527fc3e104b7c11f8f0afb9",
+      "repository_license_spdx": "MIT",
+      "ab_gatr_source_reports_slightly_lower_aneumo_field_error_than_ab_gatr": true,
+      "execution_role": "strong_reimplementable_backbone_control_after_p0_only"
+    },
+    "architecture_component_can_be_claimed_as_novelty": false
+  },
+  "scientific_question": {
+    "estimand": "At the same field-relative-L2 level, does changing only a strong equivariant surrogate's output parameterization from direct field to anchor residual materially improve multi-flow response fidelity?",
+    "independent_unit": "aneumo_generation_base_family",
+    "primary_field_metric": "node_weighted_velocity_relative_l2",
+    "primary_response_endpoints": [
+      "paired_response_relative_l2",
+      "discrete_tangent_relative_l2"
+    ],
+    "pass_interpretation": "field_error_selection_is_insufficient_and_anchor_residual_parameterization_has_a_directionally_supported_application_advantage",
+    "fail_interpretation": "close_the_exact_response_fidelity_direction_without_method_or_gpu_development",
+    "clinical_or_biological_interpretation_allowed": false
+  },
+  "data_boundary": {
+    "pool": "historical_20_train_base_families_only",
+    "historical_validation_families_read": false,
+    "historical_test_families_read": false,
+    "confirmation_families_read": false,
+    "outer_crossfit_folds": 5,
+    "families_per_outer_fold": 4,
+    "families_per_rotating_calibration_fold": 4,
+    "families_per_fit_partition": 12,
+    "fold_seed": 2027081201,
+    "fold_construction": "seeded_permutation_into_five_equal_blocks_outer_block_k_calibration_block_k_plus_1_mod_5_fit_remaining_three_blocks",
+    "all_cases_flows_nodes_for_a_family_are_atomic": true,
+    "outer_response_metrics_never_select_checkpoint_or_match_level": true
+  },
+  "information_set": {
+    "inputs": [
+      "same_case_geometry",
+      "same_case_nominal_velocity_field_q0",
+      "target_mass_flow_q"
+    ],
+    "target": "same_case_target_flow_velocity_field",
+    "nominal_mass_flow_kg_per_s": 0.0025,
+    "pressure_allowed": false,
+    "rupture_status_allowed": false,
+    "patient_specific_inflow_claim_allowed": false
+  },
+  "baseline_contract": {
+    "deterministic_controls": [
+      "linear_mass_flow_scaling",
+      "train_fitted_power_law_scaling"
+    ],
+    "descriptive_non_gating_architecture_controls": [
+      "pointwise_conditional_mlp",
+      "deeponet_anchor_conditioned",
+      "meshgraphnet_anchor_conditioned"
+    ],
+    "primary_pair": {
+      "shared_backbone": "lab_gatr_anchor_conditioned",
+      "left": "lab_gatr_direct_target_field",
+      "right": "lab_gatr_deltaphi_identity_residual",
+      "left_output_map": "predict_target_velocity_directly",
+      "right_output_map": "nominal_velocity_plus_log_flow_ratio_times_predicted_residual",
+      "all_non_output_parameterization_settings_identical": true,
+      "response_log_error_ratio": "natural_log_left_error_divided_by_right_error",
+      "required_positive_direction": "lab_gatr_deltaphi_identity_residual_has_lower_response_error",
+      "negative_or_mixed_direction_action": "close_exact_direction_without_reversing_narrative"
+    },
+    "source_only_unavailable_controls": [
+      "hemo_mpo_no_identified_code_or_exact_split_bundle",
+      "ab_gatr_no_declared_repository_license_and_experiments_coming_soon"
+    ],
+    "historical_v1e_role": "diagnostic_only_not_same_information_set",
+    "proposal_model_present": false,
+    "model_name_or_component_stack_can_satisfy_novelty": false
+  },
+  "compute_matching": {
+    "training_seeds": [
+      2027081211,
+      2027081212,
+      2027081213,
+      2027081214,
+      2027081215
+    ],
+    "target_trainable_parameters": 2000000,
+    "parameter_relative_tolerance": 0.1,
+    "optimizer_updates_per_run": 20000,
+    "node_condition_samples_per_update": 8192,
+    "checkpoint_fractions": [
+      0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,
+      0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0
+    ],
+    "same_container_optimizer_batch_sampler_precision_and_backbone": true,
+    "actual_flops_gpu_seconds_peak_memory_and_inference_latency_reported": true,
+    "total_p1_gpu_hour_cap": 160.0,
+    "gpu_authorized_now": false,
+    "execution_server": "introai9",
+    "pbs_only": true,
+    "login_node_gpu_allowed": false,
+    "junjinyong_allowed": false
+  },
+  "field_only_selection_and_matching": {
+    "response_metrics_available_during_selection": false,
+    "checkpoint_selection_metric": "calibration_family_mean_node_weighted_velocity_relative_l2_only",
+    "common_support_scale": "natural_log_field_relative_l2",
+    "iso_error_quantiles": [0.25, 0.5, 0.75],
+    "checkpoint_assignment_rule": "for_each_model_jointly_assign_three_distinct_predeclared_checkpoints_to_three_ordered_targets_minimizing_total_absolute_log_distance_with_lexicographic_checkpoint_id_tie_break",
+    "checkpoint_reuse_across_iso_error_levels_allowed": false,
+    "maximum_checkpoint_distance_log_ratio": 0.009950330853168092,
+    "unqualified_level_action": "retain_fixed_level_without_replacement_or_caliper_widening_primary_median_failure_closes_screen",
+    "outer_field_equivalence_interval": "fixed_seed_5000_replicate_family_percentile_90_percent_stability_interval_without_nominal_coverage_claim",
+    "outer_field_equivalence_margin_log_ratio": 0.009950330853168092,
+    "power_law_competence_interval": "one_sided_family_percentile_95_percent_stability_upper_bound_without_nominal_coverage_claim",
+    "power_law_field_noninferiority_margin_log_ratio": 0.01980262729617973,
+    "both_primary_pair_members_must_be_field_competent_against_power_law": true
+  },
+  "inference": {
+    "primary_iso_error_quantile": 0.5,
+    "sensitivity_iso_error_quantiles": [0.25, 0.75],
+    "sensitivity_cells_can_rescue_primary_failure": false,
+    "bootstrap_unit": "aneumo_generation_base_family",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 2027081221,
+    "bootstrap_interval": "percentile_stability_interval_without_nominal_coverage_claim",
+    "response_contrast": "per_family_seed_mean_natural_log_direct_error_divided_by_residual_error",
+    "response_stability_interval_level": 0.95,
+    "crossfit_family_contrasts_independent_for_exact_null_inference": false,
+    "exact_sign_flip_p_value_allowed": false,
+    "multiplicity_adjusted_p_value_claim_allowed": false,
+    "minimum_multiplicative_response_gap": 0.1,
+    "minimum_positive_seed_count": 4,
+    "training_seed_count": 5,
+    "zero_seed_ties_count_as_positive": false,
+    "p1_pass_requires": [
+      "median_iso_error_level_is_checkpoint_qualified_for_both_models",
+      "median_outer_field_equivalence_stability_interval_is_inside_plus_or_minus_log_1_01",
+      "both_primary_pair_members_power_law_competence_stability_upper_bound_is_at_most_log_1_02",
+      "both_co_primary_response_stability_interval_lower_bounds_are_above_zero",
+      "both_pooled_log_direct_over_residual_response_error_ratios_are_at_least_log_1_10",
+      "both_response_endpoints_have_positive_contrasts_in_at_least_4_of_5_seeds"
+    ],
+    "negative_direction_can_pass": false,
+    "descriptive_architecture_control_can_rescue_primary_failure": false,
+    "p1_result_can_be_reported_as_confirmatory_inference_or_paper_efficacy": false,
+    "formal_power_claim_allowed_before_independent_confirmation": false
+  },
+  "bounded_development_after_p1_pass": {
+    "authorized_now": false,
+    "requires_separate_public_registration": true,
+    "validation_only": true,
+    "historical_test_and_confirmation_families_remain_sealed": true,
+    "maximum_repair_rounds": 2,
+    "maximum_additional_gpu_hours": 80.0,
+    "one_attribution_supported_failure_hypothesis_per_round": true,
+    "all_variants_and_selection_rule_logged": true,
+    "fresh_seed_or_disjoint_split_prospective_reentry_required": true,
+    "prior_failure_relabelling_allowed": false
+  },
+  "stopping_and_repair": {
+    "all_primary_models_folds_seeds_required": true,
+    "partial_success_aggregation_allowed": false,
+    "outcome_conditioned_pair_checkpoint_margin_threshold_or_direction_change_allowed": false,
+    "same_version_repair_or_rerun_after_any_outer_response_metric_access_allowed": false,
+    "missing_common_support_or_no_qualified_primary_cell_action": "close_exact_direction_no_scientific_mismatch",
+    "negative_or_mixed_primary_direction_action": "close_exact_direction_no_post_hoc_reversal",
+    "execution_incomplete_action": "close_exact_p1_no_scientific_verdict",
+    "p1_pass_authorizes_only": "separate_bounded_validation_only_method_development_registration",
+    "p1_pass_authorizes_paper_claim_outer_test_or_submission": false
+  },
+  "current_state": {
+    "config_registered": false,
+    "model_code_authorized": false,
+    "validation_or_test_access_authorized": false,
+    "pbs_job_submitted": false,
+    "gpu_job_submitted": false,
+    "model_prediction_read": false,
+    "response_metric_read": false,
+    "scientific_result_count": 0,
+    "paper_claim_active": false
+  }
+}
