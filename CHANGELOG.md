@@ -10,9 +10,11 @@
   now-active array checks errored because their shared scientific import also
   requires PyTorch. Installation itself passed; the protocol-test step failed.
 - Coverage v2 pins NumPy 2.1.2, h5py 3.12.1 and CPU PyTorch 2.5.1 and verifies
-  their versions before the contract suite. It cannot be called
-  dependency-complete until a fresh remote run reports all 570 tests with zero
-  errors. No scientific contract, result or historical attempt was repaired.
+  their versions before the contract suite. Exact v2 source
+  `5d6f870…9c540` passed Quality `31625071586`: the log records all three
+  pinned versions, 112 protocol invariants and 570/570 tests with zero errors.
+  Pages `31625071537` also succeeded. No scientific contract, result or
+  historical attempt was repaired.
 - This is CI coverage hardening, not a P0 run, model experiment or scientific
   result. It changes no protocol threshold, field, split, seed, claim or
   execution authority.
