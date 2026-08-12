@@ -1,0 +1,158 @@
+{
+  "schema_version": "aurora.aneux_nested_orbit_p0.v1",
+  "experiment_id": "aneux_nested_orbit_nontriviality_p0",
+  "status": "scientific_contract_preregistered_execution_envelope_pending_exact_private_path",
+  "as_of": "2026-08-12",
+  "scientific_question": "Does an already-acquired AneuX holding expose a patient-groupable nested preprocessing orbit in which fixed-cut resolution is a nuisance, cut choice changes context, and casewise baseline instability remains material despite similar average discrimination?",
+  "relationship_to_closed_p0": {
+    "closed_experiment_id": "aneux_preprocessing_orbit_p0",
+    "closed_job_id": "115177.ECE-util1",
+    "closed_result": "execution_incomplete_zero_of_thirteen_scientific_checks",
+    "same_contract_rerun": false,
+    "downloader_or_reader_repair": false,
+    "material_new_problem": "factorized_resolution_nuisance_and_cut_context_nontriviality_on_an_existing_private_holding",
+    "network_access_allowed": false
+  },
+  "source": {
+    "dataset": "AneuX",
+    "record": "https://zenodo.org/records/6678442",
+    "doi": "10.5281/zenodo.6678442",
+    "version": "v1.0",
+    "license": "cc-by-nc-4.0_with_dataset_attribution_and_declaration_requirements",
+    "expected_tabular_archive": {
+      "name": "data-v1.0.zip",
+      "bytes": 12992074,
+      "md5": "a00dde7b974de724c6480dbda4585a8c"
+    },
+    "expected_model_archive": {
+      "name": "models-v1.0.zip",
+      "bytes": 6277720483,
+      "md5": "6248323006f67858b1eb1ec77ce8c0a6"
+    },
+    "source_reported_lesions": 750,
+    "source_reported_patients": 605,
+    "source_reported_status_observed": 735,
+    "mesh_resolutions": ["original", "area-001", "area-005"],
+    "cut_types": ["dome", "ninja", "cut1", "cut2"]
+  },
+  "admission": {
+    "score": 33.0,
+    "maximum": 40.0,
+    "threshold": 32.0,
+    "axis_order": [
+      "clinical_importance",
+      "target_identifiability",
+      "residual_novelty",
+      "asset_readiness",
+      "effective_independent_unit",
+      "strong_baseline_feasibility",
+      "interpretable_evidence",
+      "isbi_schedule_fit"
+    ],
+    "axis_scores": [4.0, 4.5, 3.0, 4.0, 4.0, 5.0, 4.5, 4.0],
+    "critical_axis_pass": true,
+    "authorizes_only": "method_free_cpu_p0_registration_pending_exact_private_path"
+  },
+  "estimand": {
+    "target": "cross_sectional_rupture_status_association_not_future_risk",
+    "independent_unit": "patient",
+    "orbit_atomic_unit": "all_available_resolution_and_cut_surfaces_for_one_lesion",
+    "resolution_role": "nuisance_within_fixed_cut",
+    "cut_role": "information_set_change_with_permitted_parent_vessel_context_residual",
+    "primary_failure_endpoints": [
+      "fixed_cut_resolution_decision_flip_fraction",
+      "fixed_cut_resolution_logit_range_exceedance_fraction",
+      "orbit_disagreement_to_baseline_error_spearman"
+    ],
+    "prohibited_labels": [
+      "prospective_rupture_risk",
+      "future_instability",
+      "growth_prediction",
+      "clinical_utility",
+      "causal_effect"
+    ]
+  },
+  "data_boundary": {
+    "private_holding_only": true,
+    "public_payload_write": false,
+    "case_identifier_write": false,
+    "external_source_labels_or_surfaces_opened": false,
+    "exact_dataset_root": null,
+    "exact_manifest_sha256": null,
+    "execution_envelope_can_be_frozen_only_after_bounded_read_only_inventory": true,
+    "missing_patient_id_primary_analysis_action": "exclude",
+    "unknown_status_primary_analysis_action": "exclude",
+    "multi_lesion_patient_split_action": "keep_all_lesions_in_one_split"
+  },
+  "development_scope": {
+    "allowed_sources": ["hug2016", "hug2016snf"],
+    "locked_external_sources": ["aneurist", "aneurisk"],
+    "external_source_payload_access_in_p0": false,
+    "baseline": "source_provided_170_morphometrics_with_nested_patient_grouped_regularized_logistic_regression",
+    "threshold_selection": "development_inner_cross_validation_only",
+    "bootstrap_unit": "patient",
+    "bootstrap_replicates": 2000,
+    "confidence_level": 0.95
+  },
+  "checks": {
+    "all_asset_checks_required": [
+      "exact_private_path_and_manifest_frozen_before_submission",
+      "archive_or_extracted_asset_integrity_matches_official_v1_0",
+      "lesion_patient_source_status_keys_are_unique_and_groupable",
+      "resolution_and_cut_orbit_completeness_is_reported",
+      "fixed_cut_resolution_and_cross_cut_context_are_analyzed_separately",
+      "external_sources_method_architecture_gpu_and_outer_test_remain_unopened"
+    ],
+    "nontriviality_two_of_three_required": [
+      {
+        "endpoint": "fixed_cut_resolution_decision_flip_fraction",
+        "criterion": "patient_bootstrap_95pct_lower_bound_gt_0_05"
+      },
+      {
+        "endpoint": "fraction_with_fixed_cut_resolution_logit_range_gt_0_20",
+        "criterion": "patient_bootstrap_95pct_lower_bound_gt_0_10"
+      },
+      {
+        "endpoint": "orbit_disagreement_to_baseline_error_spearman",
+        "criterion": "patient_bootstrap_95pct_lower_bound_gt_0_20"
+      }
+    ],
+    "threshold_interpretation": "engineering_nontriviality_not_a_clinical_harm_threshold"
+  },
+  "gate": {
+    "pass_authorizes": "register_one_compute_bounded_strong_baseline_feasibility_p1_only",
+    "fail_action": "close_nested_orbit_candidate_without_method_architecture_gpu_outer_test_or_paper_claim",
+    "execution_incomplete_action": "preserve_no_verdict_and_do_not_repair_or_resubmit_the_same_execution_envelope",
+    "does_not_authorize": [
+      "primary_problem_selection",
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "resources": "select=1:ncpus=4:mem=16gb:ngpus=0",
+    "walltime": "02:00:00",
+    "gpu_requested": false,
+    "login_node_gpu_command": false,
+    "network_access": false,
+    "excluded_server": "junjinyong",
+    "job_submitted": false,
+    "scheduler_queried": false
+  },
+  "scientific_state": {
+    "conditional_source_lead": true,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false,
+    "paper_claim_active": false
+  }
+}

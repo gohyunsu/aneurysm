@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="AURORA — 공개 aSAH 임상표와 fixed-time outcome의 차이, 영상–환자–결과 결합 가능성, 공개 자산 계약과 surface-vector 가설을 비판적으로 심사하는 ISBI 2027 공개 연구 기록.">
+  <meta name="description" content="AURORA — 동일 뇌동맥류의 mesh resolution과 parent-vessel cut이 만드는 prediction instability를 분리해 검증하는 AneuX nested preprocessing-orbit 연구 기록.">
   <title>AURORA · Aneurysm Research</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <script defer src="assets/research-data.js"></script>
@@ -40,27 +40,33 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.4 · OPEN CLINICAL TABLE 1 · ACTIVE DATASET 0 · VERIFIED CASES 0 / 0 / 0 · MODEL / GPU 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.5 · CONDITIONAL LEAD 1 · SCIENTIFIC P0 CONTRACT REGISTERED · MODEL / GPU / CLAIM 0</p>
         <h1>
-          A plausible mechanism is not<br>
-          <em>an observed patient-level join.</em>
+          Same aneurysm.<br>
+          <em>Different mesh, different decision?</em>
         </h1>
         <p class="hero-lede">
-          <b>현재 active paper identity나 선택된 모델은 없습니다.</b>
-          Zenodo 17339029 revision 6은 230명의 실제 aSAH 임상표 한 개를
-          CC BY 4.0으로 공개합니다. 그러나 39,686-byte XLSX는 의료 영상이 아니며
-          AURORA가 내려받거나 연 적도 없습니다. Source에서 6개월 mRS가 없는 70명은
-          퇴원 또는 3개월 값을 사용했으므로 한 이름 아래 서로 다른 관찰 시점이
-          섞입니다. 공개 파일이 있다는 사실은 중요하지만, 고정 6개월 outcome이나
-          ISBI 영상 학습셋이 확보됐다는 뜻은 아닙니다. Fresh 후보는
-          <b>29.5/28.0/27.0/27.0/26.0/25.5</b>로 모두 기각했습니다. 기존
-          introai9 확인도 shell/SFTP listing 전 timeout된 no-verdict입니다. 현재
-          active dataset/problem/P0/P1/model/GPU는 0이고, 검증된 staged
-          train/validation/test는 <b>0/0/0</b>입니다. Surface-vector는 비활성
-          가설이며 Hodge/GNN/equivariance는 선택 architecture나 novelty가 아닙니다.
+          <b>확보한 AneuX의 고유한 반복표현 구조를 연구 문제로 사용합니다.</b>
+          같은 병변은 세 mesh resolution과 최대 네 가지 dome/neck/parent-vessel
+          cut으로 표현될 수 있습니다. 평균 AUROC가 비슷해도 개별 병변의 판단은
+          뒤집힐 수 있습니다. 다만 resolution은 주로 discretization nuisance이고,
+          cut은 실제 parent-vessel context를 더하거나 뺍니다. 그래서 모든 view의
+          최종 예측을 같게 만드는 flat consistency가 아니라, <b>공통 aneurysm
+          anatomy와 유효한 context residual을 분리하는 nested orbit</b>을 검증합니다.
+          현재 33.0/40 conditional source lead 한 개와 method-free CPU P0의 과학적
+          계약만 등록했습니다. Exact private path가 다시 확인되기 전에는 실행할 수
+          없으며, primary problem·architecture·GPU·outer test·논문 claim은 모두 0입니다.
         </p>
         <div class="hero-actions">
+          <a class="button primary" href="learn.html#nested-orbit">Nested orbit 처음부터 이해하기</a>
+          <a class="button ghost" href="../docs/acquired-asset-application-direction-2026-08-12.md">연구 방향 전체 읽기 ↗</a>
+          <a class="button ghost" href="../configs/aneux_nested_orbit_p0.json">등록된 P0 계약 ↗</a>
+          <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
+        </div>
+        <div class="hero-actions" hidden>
           <a class="button primary" href="learn.html">처음부터 이해하기</a>
+          <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산과 active split 구분하기</a>
+          <a class="button ghost" href="../docs/data-asset-state-ledger-2026-08-12.md">Dataset state ledger ↗</a>
           <a class="button ghost" href="learn.html#open-clinical-target-time">공개 표와 outcome 시점 이해하기</a>
           <a class="button ghost" href="../docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md">Latest open-outcome reappraisal ↗</a>
           <a class="button ghost" href="learn.html#mechanistic-outcome-join">Mechanics와 outcome join 이해하기</a>
@@ -198,8 +204,8 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="서로 다른 기전 연구와 동일 환자 결합 자산의 차이를 설명하는 상태">
-        <div class="visual-caption">MECHANICS + IMMEDIATE RESPONSE + FIXED-TIME OUTCOME · SAME-PATIENT JOIN 0</div>
+      <div class="hero-visual" aria-label="같은 동맥류의 서로 다른 mesh resolution과 parent-vessel cut을 설명하는 그림">
+        <div class="visual-caption">ONE LESION · THREE RESOLUTIONS · UP TO FOUR CONTEXT CUTS</div>
         <div class="vessel-shell">
           <svg viewBox="0 0 520 420" role="img" aria-label="절차적으로 생성할 수 있는 혈관 분지와 동맥류 형상 예시">
             <defs>
@@ -222,77 +228,74 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>27.5</b><span>best · direct-prior and asset floors rejected</span>
+            <b>33.0</b><span>conditional source lead · P0 only</span>
           </div>
           <div class="posterior-card card-b">
-            <b>6 sources</b><span>disconnected cohorts · no immutable join</span>
+            <b>3 × 4</b><span>resolution nuisance × context cut</span>
           </div>
           <div class="posterior-card card-c">
             <b>0</b><span>selected methods · models · GPU jobs</span>
           </div>
         </div>
         <div class="visual-legend">
-          <span><i class="dot lime"></i> Mechanics, QA, occlusion and growth are meaningful observed source endpoints</span>
-          <span><i class="dot coral"></i> They are not observed together for the same public patient/lesion</span>
-          <span>Best-score novelty 0.5/5 · same-patient join 0 · P0/server/model/GPU 0</span>
+          <span><i class="dot lime"></i> Resolution 변화에는 안정적이어야 함</span>
+          <span><i class="dot coral"></i> Cut 변화의 유효한 parent-vessel 정보는 보존해야 함</span>
+          <span>Flat consistency 금지 · nested factorization은 아직 development hypothesis</span>
         </div>
       </div>
 
       <div class="hero-meta">
-        <div><span>Latest source screen</span><b>Mechanics–response–outcome join best 27.5/40 · all six rejected · admitted 0</b></div>
-        <div><span>Latest compute</span><b>No scientific-server query or job in schema 11.2 · historical P0s remain closed</b></div>
-        <div><span>Architecture / GPU</span><b>Not selected · 0</b></div>
-        <div><span>Next action</span><b>fresh problem or versioned same-patient mechanics–response–outcome asset re-audit only · no payload, repair or rerun</b></div>
+        <div><span>Conditional direction</span><b>AneuX factorized nested preprocessing-orbit reliability · 33.0/40</b></div>
+        <div><span>Scientific P0</span><b>Registered · non-executable until exact private path and manifest are frozen</b></div>
+        <div><span>Architecture / GPU / claim</span><b>Development hypothesis only / 0 / 0</b></div>
+        <div><span>Next action</span><b>One bounded read-only introai9 exact-path inventory · then CPU-only PBS or close</b></div>
       </div>
     </section>
 
     <section class="section thesis" id="thesis">
       <div class="section-heading">
         <p class="eyebrow">01 · THE THESIS</p>
-        <h2>Fancy한 모델보다 먼저,<br><em>평가 가능한 질문을 만든다.</em></h2>
+        <h2>평균 성능 뒤에 숨은<br><em>같은 병변의 판단 불안정성.</em></h2>
         <p>
-          Field MSE와 downstream decision fidelity, 그리고 critical structure는
-          서로 다른 endpoint입니다. 그러나 이 차이를 말하는 것만으로 contribution이
-          되지는 않습니다. 같은 patient/base family에서 reference CFD, matched
-          surrogate, clinical/morphology 변수와 조건 provenance가 함께 관측되어야
-          보존 여부를 식별할 수 있습니다. 최신 reader evidence는 false-positive AI가
-          의심과 추적 행동을 바꿀 수 있음을 보이지만, 공개 patient/reference/action
-          join은 없습니다. IAVS/TAR, generic deferral, contrast-retention functional과
-          MARTA 뒤에는 architecture-shaped gap도 남지 않습니다. 이전 P0들은
-          no-verdict로 닫혀 있습니다. 따라서 fresh source가 식별가능성과 독립
-          novelty를 동시에 세울 때까지 paper identity를 비워 둡니다.
+          AneuX는 동일 lesion을 여러 mesh resolution과 vessel cut으로 공개합니다.
+          기존 연구는 평균적인 mesh-quality/cut robustness와 dome/cut1 분류 성능을
+          보고했지만, 한 병변의 예측이 representation에 따라 임계값을 넘나드는지,
+          worst-view calibration이 무너지는지, 그 disagreement가 오류를 식별하는지는
+          주된 평가 대상이 아니었습니다. 우리의 application gap은 이 casewise
+          reliability입니다. Cross-sectional rupture status만 다루며 future rupture
+          risk나 clinical utility로 확대하지 않습니다.
         </p>
       </div>
 
       <div class="pivot-grid">
         <article class="pivot-card rejected">
-          <div class="card-index">OCCUPIED / REJECTED</div>
-          <h3>Another 3D detector + UQ</h3>
-          <p>Vessel graph, anatomy prompt와 uncertainty head를 기존 detector에 붙인다.</p>
+          <div class="card-index">REJECTED · FLAT ORBIT</div>
+          <h3>Make every view predict the same</h3>
+          <p>Resolution과 cut을 모두 nuisance로 보고 final logit consistency를 강제한다.</p>
           <ul>
-            <li>RSNA challenge 상위권 공개 pipeline이 강한 기준선</li>
-            <li>AMAP·ARAN이 anatomy/foundation graph를 직접 다룸</li>
-            <li>Topology·conformal uncertainty도 이미 점유됨</li>
+            <li>Resolution은 nuisance지만 cut은 정보량을 바꿈</li>
+            <li>Parent-vessel context를 제거할 수 있음</li>
+            <li>Generic consistency는 direct-prior control</li>
           </ul>
         </article>
-        <article class="pivot-card rejected">
-          <div class="card-index">REJECTED BY SEMANTICS</div>
-          <h3>Selection-aware lesion set</h3>
-          <p>Vessel anatomy mask를 lesion extent의 부분 annotation으로 볼 수 없다.</p>
+        <article class="pivot-card">
+          <div class="card-index">CONDITIONAL · NESTED ORBIT</div>
+          <h3>Separate anatomy from context</h3>
+          <p>Fixed-cut resolution에는 안정성을 요구하고, cut별 context residual은 허용한다.</p>
           <ul>
-            <li>178건의 segmentation은 13-class vessel anatomy</li>
-            <li>Aneurysm label은 point·presence·territory</li>
-            <li>공식 voxel lesion mask가 없어 estimand 기각</li>
+            <li>평균 AUROC와 casewise flip을 함께 측정</li>
+            <li>Patient/source-grouped outer evaluation</li>
+            <li>P0에서 failure가 없으면 method를 만들지 않음</li>
           </ul>
         </article>
       </div>
 
       <div class="claims-strip">
-        <p>모든 fresh candidate가 먼저 답할 세 질문</p>
+        <p>이 conditional direction이 먼저 답할 세 질문</p>
         <ol>
-          <li><span>01</span> 실제 asset의 target과 sampling unit이 주장할 estimand를 식별하는가?</li>
-          <li><span>02</span> Direct prior가 점유하지 않은 algorithmic gap이 남는가?</li>
-          <li><span>03</span> ISBI 규모에서 strong baseline과 fresh outer test가 가능한가?</li>
+          <li><span>01</span> 동일 lesion orbit과 patient/source grouping을 private holding에서 재확인할 수 있는가?</li>
+          <li><span>02</span> Resolution-induced flip과 disagreement–error association이 비자명한가?</li>
+          <li><span>03</span> Strong DiffusionNet/averaging이 이미 문제를 해결하지 않았는가?</li>
         </ol>
       </div>
     </section>
@@ -355,131 +358,153 @@
 
     <section class="architecture dark" id="architecture">
       <div class="section-heading on-dark">
-        <p class="eyebrow">03 · DECISION BOUNDARY</p>
-        <h2>Verify the question<br><em>before choosing a network.</em></h2>
+        <p class="eyebrow">03 · CONDITIONAL ARCHITECTURE</p>
+        <h2>Invariant where it should be.<br><em>Context-aware where it matters.</em></h2>
         <p>
-          현재 architecture는 없습니다. 최신 치료·성장 출처들은 virtual mechanics,
-          immediate angiographic response와 follow-up outcome을 서로 다른 cohort에서
-          보고하므로, network가 missing patient-level join을 대신 만들 수 없습니다.
-          Surface-vector의 현재 asset family도 whitelisted material release 전까지
-          닫혀 있습니다. 아래는 이미 종료된 raw-field P0를 역사적 예로 삼아,
-          material한 새 source가 생길 때 거쳐야 할 evidence ladder를 보여줍니다.
-          구조 안정성과 field-error-matched failure 없이 topology head나 fancy한
-          GNN을 선택하지 않습니다. Hodge는 baseline이고, critical point/worldline은
-          stability 이전에는 loss가 아니라 evaluation입니다.
+          아직 선택된 architecture는 없습니다. P0가 실제 casewise instability를
+          확인할 때만 아래 최소 구조를 compute-matched development hypothesis로
+          엽니다. Surface encoder는 DiffusionNet을 strong control로 삼고, 공통
+          aneurysm anatomy token과 cut-specific parent-vessel context residual을
+          분리합니다. Orbit aggregator는 available views만 모으고 disagreement를
+          reliability score로 출력합니다. Final logit을 모든 cut에서 같게 강제하지
+          않습니다.
         </p>
       </div>
 
       <div class="architecture-verdict">
         <span>IS THE CURRENT MODEL A GNN?</span>
-        <strong>현재 모델은 없다. GNN도, U-Net도 아직 선택하지 않았다.</strong>
+        <strong>아직 아니다. GNN은 가능한 encoder control이지 논문의 novelty가 아니다.</strong>
         <p>
-          현재 모델은 없습니다. GNN, Graph Transformer, E(3) network와 neural
-          operator는 모두 가능한 baseline 계열일 뿐 novelty가 아닙니다. 과거
-          conformal-degree 후보는 32.5/40으로 source gate만 넘었지만 exact P0가
-          scientific check 10개가 모두 미평가인 no-verdict로 끝났습니다. 이 version의 architecture gate와 GPU는
-          닫혔고, 같은 contract를 수리하거나 다시 실행하지 않습니다. 최신
-          mechanism/outcome batch도 최고 27.5/40으로 source 단계에서 기각됐고,
-          introai9 fresh inventory도 listing 0의 no-verdict로 끝났습니다.
+          PointNet++, PointNeXt/DGCNN, DiffusionNet과 E(3)-equivariant mesh model을
+          모두 baseline으로 비교합니다. Proposal의 독립성은 encoder 이름이 아니라
+          resolution nuisance와 cut context를 다른 수학적 역할로 두고, 평균 성능을
+          훼손하지 않으면서 same-lesion worst-view reliability를 개선하는 데 있습니다.
+          P0가 실패하면 이 architecture를 구현하지 않습니다.
         </p>
         <a href="learn.html#gnn">그 차이를 예제부터 읽기 →</a>
       </div>
 
-      <div class="mode-switch" role="group" aria-label="conformal degree certificate의 세 조건 설명">
-        <button class="active" type="button" data-mode="presence">Field coverage</button>
-        <button type="button" data-mode="point">Boundary margin</button>
-        <button type="button" data-mode="mask">Degree certificate</button>
-          <span id="mode-description">One patient contributes one simultaneous tangent-field residual score.</span>
+      <div class="mode-switch" role="group" aria-label="nested orbit의 세 역할 설명">
+        <button class="active" type="button" data-mode="presence">Resolution nuisance</button>
+        <button type="button" data-mode="point">Context residual</button>
+        <button type="button" data-mode="mask">Orbit reliability</button>
+          <span id="mode-description">Within a fixed cut, resolution should not flip the same lesion's decision.</span>
       </div>
 
       <div class="architecture-flow">
         <article class="arch-node input-node">
           <span class="arch-number">01</span>
-          <p class="arch-label">OFFICIAL SOURCE SNAPSHOT</p>
-          <h3>Exact Aneurisk record</h3>
-          <p>Zenodo 19455127 revision 4 · 76 geometries · 1.43 GB MD5-pinned archive</p>
+          <p class="arch-label">SAME-LESION INPUT ORBIT</p>
+          <h3>AneuX surface views</h3>
+          <p>Up to 3 resolutions × 4 cut contexts · always grouped by lesion and patient</p>
           <div class="mesh-mini" aria-hidden="true">
             <i></i><i></i><i></i><i></i><i></i><i></i>
           </div>
-          <a class="arch-learn" href="../docs/conformal-degree-certificate-source-audit-2026-08-11.md">근거 record</a>
+          <a class="arch-learn" href="https://zenodo.org/records/6678442">공식 AneuX record</a>
         </article>
-        <div class="arch-connector"><span>source inspection</span></div>
+        <div class="arch-connector"><span>surface encoding</span></div>
         <article class="arch-node">
           <span class="arch-number">02</span>
-          <p class="arch-label">CLOSED METHOD-FREE P0</p>
-          <h3>Archive semantics not evaluated</h3>
-          <p>Exact job ended E/exit 2; complete archive/VTP contract and all 10 checks remain unevaluated</p>
+          <p class="arch-label">DISCRETIZATION-AGNOSTIC ENCODER</p>
+          <h3>Strong backbone, not novelty</h3>
+          <p>DiffusionNet primary control · PointNet++/PointNeXt/DGCNN/E(3) matched baselines</p>
           <div class="token-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <a class="arch-learn" href="learn.html#architecture">라벨과 모델 구분</a>
         </article>
-        <div class="arch-connector accent"><span id="bc-connector-label">whole field?</span></div>
+        <div class="arch-connector accent"><span id="bc-connector-label">factorize</span></div>
         <article class="arch-node uncertainty-node">
           <span class="arch-number">03</span>
-          <p class="arch-label">CERTIFICATE QUESTION</p>
-          <h3 id="bc-node-title">Is the residual simultaneous?</h3>
-          <p id="bc-node-copy">One patient-level field score must cover the intrinsic tangent residual over the whole registered surface</p>
+          <p class="arch-label">SHARED ANEURYSM TOKEN</p>
+          <h3 id="bc-node-title">What should remain stable?</h3>
+          <p id="bc-node-copy">The dome-centered anatomy representation is aligned across resolutions and partially across cuts</p>
           <div class="scenario-row" aria-hidden="true">
             <i style="--h:35%"></i><i style="--h:52%"></i><i style="--h:73%"></i>
             <i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:64%"></i>
           </div>
           <a class="arch-learn" href="../configs/aurora_v1.json">machine contract</a>
         </article>
-        <div class="arch-connector"><span>leakage audit</span></div>
+        <div class="arch-connector"><span>retain context</span></div>
         <article class="arch-node dual-node">
           <span class="arch-number">04</span>
-          <p class="arch-label">CERTIFICATE CONDITION</p>
-          <h3>Boundary margin &gt; conformal radius</h3>
+          <p class="arch-label">CUT CONTEXT RESIDUAL</p>
+          <h3>Keep useful parent-vessel information</h3>
           <div class="dual-branch">
-            <span><b>Per patient</b>one whole-field residual score</span>
-            <span><b>Per region</b>boundary margin + total degree</span>
+            <span><b>Shared</b>aneurysm anatomy</span>
+            <span><b>Residual</b>neck / parent vessel</span>
           </div>
-          <p>Only margin-clearing regions are certified; all others abstain</p>
+          <p>Cross-cut final predictions are not forced to be identical</p>
           <a class="arch-learn" href="learn.html#experiments">Gate 원칙</a>
         </article>
-        <div class="arch-connector"><span>frozen score</span></div>
+        <div class="arch-connector"><span>aggregate + audit</span></div>
         <article class="arch-node output-node">
           <span class="arch-number">05</span>
-          <p class="arch-label">CURRENT DECISION</p>
-          <h3>32.5 = preserved source history · closed P0</h3>
-          <p>Job 115684 · E/exit 2 · all 10 checks unevaluated · no verdict · no rerun · GPU 0</p>
-          <div class="output-meter"><i></i><span>primary / method / model / GPU</span><b>still 0</b></div>
+          <p class="arch-label">ORBIT PREDICTION + RELIABILITY</p>
+          <h3>Average is not enough</h3>
+          <p>Output status score, worst-view quality, decision flips and disagreement-based selective risk</p>
+          <div class="output-meter"><i></i><span>selected model / GPU / claim</span><b>0 / 0 / 0</b></div>
           <a class="arch-learn" href="../docs/experiment-protocol.md">Gate 읽기</a>
         </article>
       </div>
 
       <div class="architecture-notes">
         <article>
-          <span>LATEST SOURCE VERDICT</span>
-          <p>Mechanism/outcome batch의 최고점은 27.5/40입니다. Injection-standardized QA→6-month occlusion은 direct prior이고, virtual mechanics→실제 outcome은 동일-patient join이 없습니다. Introai9 inventory도 remote listing 0의 no-verdict이므로 active lead는 0입니다.</p>
+          <span>CONDITIONAL SOURCE VERDICT</span>
+          <p>AneuX nested orbit는 33.0/40으로 critical floor를 모두 통과했습니다. 이는 model admission이 아니라 새 method-free P0의 과학적 계약만 허용합니다.</p>
         </article>
         <article>
-          <span>CLOSED P0</span>
-          <p>Exact CPU job은 E/exit 2, 00:40:06이었고 scientific check 10개는 전부 미평가였습니다. Complete archive/VTP semantics와 low-level cause는 확인되지 않았습니다.</p>
+          <span>OLD P0 ISOLATION</span>
+          <p>과거 job 115177은 0/13 no-verdict로 닫혀 있습니다. 새 P0는 downloader repair가 아니라 private holding의 exact path와 nested failure를 검사하는 다른 계약입니다.</p>
         </article>
         <article>
-          <span>DIRECT PRIOR</span>
-          <p>Functional surrogate conformal sets, downstream field certificates, uncertain topology, Hodge/HSD와 equivariant WSS를 strong control로 둡니다.</p>
+          <span>DIRECT PRIOR CONTROLS</span>
+          <p>AneuX morphometry/PointNet++, DiffusionNet, latent multi-resolution shape learning, E(3) mesh learning, consistency, GroupDRO와 calibration은 모두 baseline 또는 prior입니다.</p>
         </article>
         <article>
           <span>PROSPECTIVE EVIDENCE</span>
-          <p>P0 semantics → P1 intrinsic degree stability → validity/efficiency → bounded development → fresh confirmation 순서를 건너뛰지 않습니다.</p>
+          <p>Exact holding → P0 casewise failure → P1 strong-baseline feasibility → compute-matched development → locked source-held-out confirmation 순서입니다.</p>
         </article>
       </div>
       <div class="architecture-links">
-        <a class="text-link on-dark-link" href="learn.html#architecture">입문자용 전체 구조 ↗</a>
-        <a class="text-link on-dark-link" href="../docs/model-spec.md">Tensor·module·loss 명세 ↗</a>
+        <a class="text-link on-dark-link" href="learn.html#nested-orbit">입문자용 nested orbit 설명 ↗</a>
+        <a class="text-link on-dark-link" href="../docs/acquired-asset-application-direction-2026-08-12.md">Architecture·loss·baseline 명세 ↗</a>
       </div>
     </section>
 
     <section class="section experiment-section" id="experiments">
       <div class="section-heading">
         <p class="eyebrow">04 · EXPERIMENTS</p>
-        <h2>Expensive training begins<br><em>only after the gates pass.</em></h2>
+        <h2>First prove the failure.<br><em>Then earn the model.</em></h2>
         <p>
-          이 프로젝트의 우선순위는 전체 모델 구현이 아니라 가설을 가장 싸고
-          빠르게 반증하는 것이다.
+          현재 우선순위는 AneuX에서 casewise preprocessing instability가 실제로
+          존재하는지 CPU-only baseline으로 반증하는 것입니다. P0가 통과하기 전에는
+          neural architecture나 GPU 성능 실험을 시작하지 않습니다.
         </p>
       </div>
+
+      <article class="g1-result">
+        <div class="g1-result-head">
+          <p class="eyebrow">CURRENT P0 · SCIENTIFIC CONTRACT REGISTERED / NOT EXECUTABLE</p>
+          <span>private holding only · CPU 4 · GPU 0 · network 0</span>
+        </div>
+        <div class="g1-result-metrics">
+          <div><span>Conditional score</span><b>33.0</b><small>/ 40 · all critical floors pass</small></div>
+          <i>→</i>
+          <div><span>Nontriviality</span><b>2 / 3</b><small>prospectively required</small></div>
+          <div class="delta negative"><span>Execution</span><b>Blocked</b><small>exact path + manifest unresolved</small></div>
+        </div>
+        <div class="g1-result-decision">
+          <strong>세 failure 중 둘이 development data에서 확인돼야 다음 단계로 갑니다.</strong>
+          <p>
+            Fixed-cut resolution decision-flip fraction의 patient-bootstrap 95% lower
+            bound &gt; 5%, logit range &gt; 0.20인 lesion fraction의 lower bound &gt; 10%,
+            orbit disagreement–baseline error Spearman lower bound &gt; 0.20 중 두 개가
+            필요합니다. 모두 engineering nontriviality 기준이지 임상 위해 기준이
+            아닙니다. P0 pass도 강한 baseline feasibility P1 하나만 허용합니다.
+          </p>
+          <a href="../configs/aneux_nested_orbit_p0.json">Frozen scientific contract ↗</a>
+          <a href="../docs/acquired-asset-application-direction-2026-08-12.md">전체 falsifier와 중단 조건 ↗</a>
+        </div>
+      </article>
 
       <div class="gate-list" id="gate-list"></div>
 
@@ -719,17 +744,17 @@
     <section class="section paper-section" id="paper">
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
-        <h2>AURORA</h2>
-        <p>Latest best 31.0/40 rejected · direct-prior status task and no pre-event multimodal join · active lead, method and paper identity 0</p>
+        <h2>Same Aneurysm, Different Mesh</h2>
+        <p>Conditional title only · nested preprocessing-orbit reliability · 33.0/40 source lead · no active manuscript claim before P0/P1</p>
       </div>
       <div class="contribution-grid">
-        <article><span>P1</span><h3>Identifiable problem</h3><p>실제 supervision과 sampling unit이 biomedical-imaging estimand를 식별해야 한다.</p></article>
-        <article><span>P2</span><h3>Unoccupied gap</h3><p>Direct prior와 winning pipelines 뒤에도 algorithmic gap이 남아야 한다.</p></article>
-        <article><span>P3</span><h3>Prospective evidence</h3><p>Strong baseline, bounded validation development와 fresh outer test가 현실적으로 가능해야 한다.</p></article>
+        <article><span>C1</span><h3>Hidden application failure</h3><p>평균 discrimination이 같아도 same-lesion flip과 worst-view error가 material함을 보인다.</p></article>
+        <article><span>C2</span><h3>Factorized reliability</h3><p>Resolution nuisance와 cut context를 분리한 nested model이 flat consistency보다 타당함을 matched ablation으로 보인다.</p></article>
+        <article><span>C3</span><h3>Evidence without inflation</h3><p>Patient/source-held-out에서 AUROC를 훼손하지 않으면서 flip·Brier·selective risk를 개선한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>active lead 0 · fresh batch rejected · primary/method/model/GPU/claim 0</b>
-        <span>Secondary boundary</span><b>cross-sectional status only; no clinical-risk claim</b>
+        <span>Current stage</span><b>conditional lead 1 · P0 scientific contract only · primary/method/model/GPU/claim 0</b>
+        <span>Claim boundary</span><b>cross-sectional status association only; no future-risk or clinical-utility claim</b>
       </div>
     </section>
 

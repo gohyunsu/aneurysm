@@ -1,5 +1,21 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.5 nested-orbit execution boundary:** The scientific P0 contract
+> is registered but exact private AneuX path and manifest are unresolved, so no
+> job is submitted. After an external service-state change, run one bounded
+> read-only exact-path inventory on `introai9`; then freeze a CPU 4/GPU 0,
+> network-free PBS envelope or close. Do not broad-search, repair downloader
+> code or rerun historical job 115177. Never access `junjinyong`.
+
+> **Schema 11.5 holdings correction:** Historical server holdings and current
+> exact-path inventory are different clocks. The 2026-08-03 audit recorded
+> Aneumo, AneuG-Flow, BenchAnXplore, CMHA, AneuX and Aneurisk material at
+> heterogeneous verification depths. The latest SSH/SFTP listing still has no
+> verdict, so current persistence is neither asserted nor denied. Active
+> train/validation/test remains 0/0/0 because no paper problem is selected, not
+> because all historical datasets were absent or scientifically rejected. See
+> [the state ledger](data-asset-state-ledger-2026-08-12.md).
+
 > **Schema 11.4 execution state:** Public bibliographic and release metadata
 > only. The XLSX was not downloaded or opened. No scientific server, SSH/SFTP,
 > scheduler, transfer, PBS/GPU or monitoring action occurred. Active jobs are

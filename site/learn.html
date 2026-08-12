@@ -90,20 +90,97 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 11.4</span>
-          <strong>현재 확보가 검증된 연구 데이터, 선택된 문제와 모델은 모두 없습니다.</strong>
+          <span>짧은 답 · schema 11.5</span>
+          <strong>확보·감사한 자산은 있고, AneuX 기반 conditional direction 한 개를 골랐습니다. Active split과 모델은 아직 0입니다.</strong>
           <p>
-            최신 treatment/growth 후보는
-            27.5/25.5/24.0/23.5/23.0/22.5입니다. Coil mechanics, immediate
-            angiographic response와 follow-up outcome은 각각 관측됐지만, 같은 공개
-            patient/lesion에서 연결되지 않았습니다. 따라서 P0, method, model,
-            scientific server와 GPU는 0입니다. Repository의 <code>data/</code>에는
-            schema 설명만 있고 patient/image/mesh/field payload는 없으므로, 현재
-            방향의 staged train/validation/test case도 0입니다. Introai9는 두
+            Aneumo, BenchAnXplore, CMHA, AneuX, AneuG-Flow와 Aneurisk에는 실제
+            archive, compact cache, transient field, 임상표 또는 extracted sample을
+            확인한 이력이 있습니다. Public repository의 <code>data/</code>에 raw
+            payload가 없다는 사실은 비공개 server holding이 역사적으로 없었다는
+            뜻이 아닙니다. AneuX nested-orbit가 33.0/40 conditional lead로
+            선정됐지만 exact path와 patient/source manifest를 다시 고정하기 전이라
+            아직 prospective train/validation/test 역할은 0/0/0입니다.
+            Introai9는 두
             endpoint의 TCP/22와 한 endpoint의 public-key 인증까지 확인했지만
             shell/SFTP listing이 모두 timeout되어 current server inventory도
-            incomplete/no-verdict입니다. 이를 “없음”이나 “확보”로 단정하지 않습니다.
+            incomplete/no-verdict입니다. 과거 확보 이력, 현재 persistence,
+            과학적 task 적합성과 active assignment를 서로 대신하지 않습니다.
           </p>
+        </div>
+        <div class="answer-card" id="asset-state-ledger">
+          <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>
+          <strong>파일의 존재, payload 감사, task 적합성, 논문 split 배정은 네 개의 독립 상태입니다.</strong>
+          <p>
+            <b>Aneumo</b>는 64 case·512 member cache와 family-disjoint 40/12/12
+            split까지 검증됐지만 V1e absolute learnability가 실패했습니다.
+            <b>BenchAnXplore</b> 105×80 transient field는 감사·추출됐고 POD가
+            representation-eligible였지만 모든 case가 discovery에 사용돼 fresh
+            confirmation이 아닙니다. <b>CMHA</b> 공식 archive와 99 patient/105
+            lesion 표는 확인했지만 exact lesion-level image–mesh linkage가 5/9에서
+            실패했고 hemodynamic increment도 지지되지 않았습니다.
+          </p>
+          <p>
+            <b>AneuX</b> metadata·geometry archive·extracted copy,
+            <b>AneuG-Flow</b> geometry/release lineage, <b>Aneurisk</b> repository와
+            sample 확인도 기록되어 있습니다. 다만 이들의 최신 exact P0는 scientific
+            check 전에 종료된 no-verdict입니다. 이는 dataset failure가 아니며,
+            기존 job을 고쳐 다시 돌릴 권한도 아닙니다. 새 연구 질문은 확보 자산이
+            고유하게 제공하는 구조를 활용해 fresh version으로 등록해야 합니다.
+          </p>
+          <p>
+            따라서 현재 올바른 표기는 <b>historical holding records 6, current
+            introai9 listing incomplete, active train/validation/test 0/0/0</b>입니다.
+            각 자산은 performance failure, linkage failure, execution-incomplete,
+            task mismatch, controlled access 또는 discovery reuse 중 정확한 이유를
+            따로 표시합니다.
+          </p>
+          <a href="../docs/data-asset-state-ledger-2026-08-12.md">자산별 실물 확인 범위·기각 유형·재사용 가능 역할 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="nested-orbit">
+          <span>현재 연구 방향 · 같은 동맥류인데 mesh가 달라지면 왜 문제가 되는가?</span>
+          <strong>평균 AUROC가 같아도 한 환자의 판단이 전처리에 따라 뒤집힐 수 있습니다.</strong>
+          <p>
+            3D 혈관 surface는 연속적인 해부학을 triangle mesh로 근사한 것입니다.
+            같은 병변도 triangle을 더 촘촘하거나 성기게 만들 수 있고, 동맥류 dome만
+            자를 수도, neck과 parent vessel을 더 포함할 수도 있습니다. AneuX는 이
+            반복표현을 세 resolution과 최대 네 cut으로 제공합니다. 각각을 서로 다른
+            환자로 세면 leakage가 생기므로 한 lesion orbit으로 묶어야 합니다.
+          </p>
+          <p>
+            두 변화는 의미가 다릅니다. <b>Resolution</b>은 같은 cut의 점과 triangle
+            배치를 주로 바꾸므로 모델이 안정적이어야 할 nuisance입니다. 반면
+            <b>cut</b>은 parent-vessel의 길이와 bifurcation 문맥을 실제로 더하거나
+            제거합니다. 이 정보가 rupture-status association에 유용할 수 있으므로
+            dome과 cut1의 최종 예측을 무조건 같게 만들면 안 됩니다. 그래서 모든
+            view에 같은 logit을 요구하는 flat consistency를 proposal로 쓰지 않습니다.
+          </p>
+          <p>
+            Conditional architecture는 surface를 <b>shared aneurysm anatomy token</b>과
+            <b>cut-specific context residual</b>로 나눕니다. Fixed cut 안의 세 resolution
+            사이에서는 anatomy와 prediction을 안정화하고, cut 사이에서는 shared
+            anatomy만 맞추면서 context residual은 허용합니다. Available views는
+            permutation-invariant하게 합치고, 서로의 disagreement를 reliability score로
+            사용합니다. DiffusionNet, PointNet++, PointNeXt/DGCNN, E(3) mesh model,
+            naive averaging, flat consistency와 GroupDRO를 모두 강한 baseline으로 둡니다.
+          </p>
+          <p>
+            Novelty는 이 부품의 조합이나 새 이름이 아닙니다. <b>동일 병변의
+            preprocessing reliability를 독립 application endpoint로 만들고, 변하지
+            않아야 하는 discretization과 달라져도 되는 information set을 분리하는
+            것</b>입니다. Primary evidence는 decision flip, logit range, worst-view
+            Brier/NLL/ECE, worst-pipeline AUROC/AUPRC와 disagreement-based selective
+            risk입니다. Cross-sectional rupture status만 다루며 미래 파열 위험이나
+            임상 utility를 주장하지 않습니다.
+          </p>
+          <p>
+            아직 모델을 선택한 것은 아닙니다. 새 CPU-only P0는 private holding의 exact
+            path와 manifest가 확인된 뒤, HUG development source에서 frozen morphometric
+            baseline의 casewise failure 세 개 중 둘이 비자명한지 검사합니다. 실패가
+            없거나 DiffusionNet/naive averaging이 이미 해결하면 방향을 닫습니다.
+            통과해도 P1 strong-baseline feasibility만 열리고 GPU는 자동 승인되지 않습니다.
+          </p>
+          <a href="../docs/acquired-asset-application-direction-2026-08-12.md">연구 질문·수식·architecture·baseline·ISBI 지면 설계 전체 읽기 ↗</a>
+          <a href="../configs/aneux_nested_orbit_p0.json">Prospective P0 contract 읽기 ↗</a>
         </div>
         <div class="answer-card" id="open-clinical-target-time">
           <span>공개된 임상표는 곧 영상 데이터셋인가?</span>

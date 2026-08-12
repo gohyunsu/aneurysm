@@ -1,5 +1,17 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.5 nested-orbit gap:** AneuX morphometry already studies mesh/cut
+> robustness; AneuX PointNet++ already compares dome and cut1 with external
+> status evaluation; DiffusionNet already targets discretization robustness;
+> latent-shape work already spans multiple mesh resolutions. The residual gap
+> is not those components. It is casewise preprocessing reliability plus a
+> factorized distinction between resolution nuisance and cut-dependent
+> information. Generic consistency, domain robustness, equivariance and
+> uncertainty remain direct controls. In particular,
+> [EAMS](https://openreview.net/forum?id=sEMJHUb8Qf) already studies
+> resolution/pose robustness on anatomical meshes including intracranial
+> aneurysm segmentation; it is an equivariant control, not the proposal.
+
 > **Schema 11.2 mechanism/outcome lineage:** 2026 work directly occupies
 > morphology→virtual coil mechanics, injection-normalized QA→6-month occlusion,
 > matched longitudinal morphology/CFD→growth association, amplified wall

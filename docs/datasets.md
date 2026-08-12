@@ -1,5 +1,23 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.5 conditional assignment:** AneuX v1.0 is now the source for one
+> conditional research direction, not yet an active train/validation/test
+> dataset. Its native same-lesion 3-resolution/up-to-4-cut structure motivates
+> nested preprocessing-orbit reliability. Exact private path, immutable
+> manifest, patient/source grouping and actual orbit completeness must be
+> re-frozen before active assignment. Old P0 115177 remains no-verdict and is
+> not repaired or rerun.
+
+> **Schema 11.5 holdings correction:** “active dataset/split 0”은 “확보·검사한
+> 자산 0”이 아니다. 과거 `introai9` 감사와 public aggregates에는 Aneumo,
+> BenchAnXplore, CMHA, AneuX, AneuG-Flow와 Aneurisk의 실제 archive/cache/
+> field/table/sample 확인 이력이 있다. 다만 최근 exact-path listing은 미완료이고,
+> 현재 paper identity에 배정된 train/validation/test가 0/0/0이다. Aneumo는
+> performance gate failure, CMHA는 asset-linkage failure, BenchAnXplore는
+> discovery-used/no-fresh-confirmation, AneuX/AneuG/Aneurisk의 최신 exact P0는
+> execution-incomplete/no-verdict다. 이를 blanket dataset rejection이나 absence로
+> 쓰지 않는다. [네 상태와 자산별 판정 전체](data-asset-state-ledger-2026-08-12.md)
+
 > **Schema 11.4 open clinical-table boundary:** Zenodo 17339029 revision 6
 > verifies one versioned 39,686-byte CC-BY-4.0 XLSX associated with 230 real
 > aSAH patients. It is a public clinical-table asset, not an imaging dataset.

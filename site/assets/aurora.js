@@ -116,24 +116,24 @@
 
   const modes = {
     presence: {
-      description: "One exchangeable patient contributes one score for the maximum intrinsic tangent-field residual.",
-      connector: "whole field?",
-      title: "Coverage must be simultaneous",
-      copy: "Vertexwise intervals do not support an adaptive region certificate; the registered event must cover the complete field",
+      description: "Within one cut context, remeshing should not flip the same lesion's decision.",
+      connector: "resolution",
+      title: "Discretization is a nuisance",
+      copy: "The shared anatomy token and prediction are stabilized across original, area-001 and area-005 meshes within the same cut",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "A region is eligible only when the minimum predicted boundary-vector norm exceeds the calibrated radius.",
-      connector: "margin > q?",
-      title: "Boundary zeros must be excluded",
-      copy: "On the whole-field coverage event, the straight-line homotopy then remains nonzero along the complete region boundary",
+      description: "A wider cut can add real neck and parent-vessel information, so its final prediction need not equal a dome-only view.",
+      connector: "context",
+      title: "Information-set changes are retained",
+      copy: "Only the shared aneurysm component is aligned across cuts; a regularized context residual is allowed to contribute",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "Degree equality certifies signed total index, not an exact critical-point count, coordinate or type.",
-      connector: "degree only",
-      title: "The guarantee is deliberately narrow",
-      copy: "Nonzero certified degree implies at least one true zero; uncaptured ± pairs and subtype-conditional coverage remain outside the claim",
+      description: "The full orbit exposes disagreement that a single-view model cannot observe.",
+      connector: "disagree?",
+      title: "Reliability is measured case by case",
+      copy: "We report decision flips, worst-view probability quality and disagreement-based selective risk in addition to average AUROC",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

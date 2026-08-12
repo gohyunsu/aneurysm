@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.5 prospective P0 boundary:** The AneuX nested-orbit scientific
+> contract is registered at `configs/aneux_nested_orbit_p0.json` but is not yet
+> executable because exact private path and manifest are null. It is CPU-only,
+> network-free and development-source-only. It requires two of three frozen
+> patient-bootstrap nontriviality signals. A pass opens one strong-baseline P1,
+> not architecture/GPU/outer test. Old job 115177 remains closed and is not a
+> transport repair target.
+
 > **Schema 11.4 experiment boundary:** No experiment is active. The public
 > aSAH clinical XLSX was not opened, is not imaging and mixes outcome
 > observation times. Source-admission best is 29.5/40 and fails mandatory

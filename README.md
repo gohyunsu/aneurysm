@@ -1,5 +1,34 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 acquired-asset application direction · schema 11.5:** AneuX
+> factorized nested preprocessing-orbit reliability is the sole conditional
+> lead at **33.0/40**. It uses the same lesion's three resolutions and up to
+> four cut contexts without treating them as independent patients. Resolution
+> is a nuisance within a fixed cut; cut choice changes available parent-vessel
+> information and may contribute a context residual. The independent
+> application endpoint is casewise decision/worst-view reliability hidden by
+> average discrimination—not generic remeshing robustness, DiffusionNet,
+> consistency regularization or a new model name. A method-free CPU P0
+> scientific contract is registered but cannot execute until the exact private
+> path and manifest are frozen by one bounded read-only `introai9` inventory.
+> Old job `115177` remains closed at 0/13 and is not repaired or rerun.
+> Primary problem, selected architecture, GPU, outer test and paper claim are
+> still 0. See the [full direction](docs/acquired-asset-application-direction-2026-08-12.md),
+> [P0 contract](configs/aneux_nested_orbit_p0.json) and
+> [beginner guide](site/learn.html#nested-orbit).
+
+> **2026-08-12 data-state correction · schema 11.5:** `active dataset/split =
+> 0` never meant that AURORA had acquired or inspected no data. Six principal
+> historical holding records remain: Aneumo, BenchAnXplore, CMHA, AneuX,
+> AneuG-Flow and Aneurisk. Aneumo is a performance-gate failure; CMHA is an
+> exact-linkage failure; BenchAnXplore is representation-eligible but already
+> used for discovery; the latest exact AneuX/AneuG/Aneurisk P0 versions are
+> execution-incomplete/no-verdict. Current `introai9` persistence is unresolved
+> because the latest listing timed out. Active train/validation/test remains
+> 0/0/0 because no paper identity and prospective split are selected. Blanket
+> dataset absence or blanket scientific rejection is prohibited. See the
+> [authoritative state ledger](docs/data-asset-state-ledger-2026-08-12.md).
+
 > **2026-08-12 schema 11.4 deployment/private pin:** Exact scientific source
 > `423cf18c14f506d46561592f8fa4ca2a78d51c9a` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31571433278) and

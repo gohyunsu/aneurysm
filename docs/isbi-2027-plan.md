@@ -1,5 +1,19 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.5 acquired-asset direction:** One conditional ISBI direction now
+> exists: AneuX factorized nested preprocessing-orbit reliability, scored
+> 33.0/40 with every critical floor passed. Resolution is a nuisance only
+> within a fixed cut; cut choice changes the parent-vessel information set and
+> may contribute a context residual. Flat final-logit consistency is therefore
+> a control, not the proposal. The new scientific P0 contract is registered but
+> not executable until one bounded read-only `introai9` inventory freezes the
+> exact private path and manifest. It is not a repair or rerun of job 115177.
+> Primary problem, method, architecture, GPU, outer test and manuscript claim
+> remain 0. The conditional four-page claim structure is C1 hidden casewise
+> instability, C2 nested factorization versus flat consistency, and C3 improved
+> worst-view reliability without average-discrimination regression. Delete any
+> claim whose prospective evidence cell remains empty.
+
 > **Schema 11.4 readiness:** One real public clinical table is now verified in
 > principle, but active imaging data and staged train/validation/test remain 0
 > and 0/0/0. Mixed target times and direct-prior score development prevent an

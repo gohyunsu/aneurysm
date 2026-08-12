@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · public versioned clinical table 1 but active imaging dataset 0 · staged train/validation/test 0/0/0 · open-outcome batch best 29.5/40 rejected · active lead/paper identity/method/model/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admission requires a versioned image-linked fixed-time outcome asset with grouped units and a residual gap not directly occupied by score development; after an external service-state change, a bounded exact-path introai9 inventory may establish files, schema, license and grouping, while surface-vector still needs material evidence, method-free stability and a field-error-matched failure",
+    status: "Target locked · AneuX nested-orbit conditional source lead 1 at 33.0/40 · scientific P0 contract registered but not executable · active train/validation/test 0/0/0 · primary/method/model/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "one bounded read-only introai9 inventory must freeze the exact private AneuX path and manifest; the CPU-only, no-network P0 must then show at least two of three preregistered casewise instability signals before any strong-baseline P1, architecture, GPU or paper claim can open",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,20 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A factorized nested preprocessing orbit becomes the sole conditional direction",
+      copy: "AneuX uniquely exposes the same lesion at three mesh resolutions and up to four cut contexts. Resolution is treated as a nuisance within a fixed cut, whereas cut choice changes the available parent-vessel information and is allowed a context residual. The application gap is casewise decision reliability hidden by average discrimination, not generic remeshing robustness or consistency regularization. The direction scores 33.0/40 and all critical floors pass, but this authorizes only a non-executable method-free CPU P0 scientific contract. The old 115177 job remains closed at 0/13 and is neither repaired nor rerun.",
+      status: "Conditional lead 1 · exact path/manifest unresolved · primary/method/architecture/GPU/outer test/claim 0",
+      url: "../docs/acquired-asset-application-direction-2026-08-12.md"
+    },
+    {
+      year: "2026.08",
+      title: "Historical holdings, current server persistence and active paper splits are separate states",
+      copy: "Aneumo, BenchAnXplore, CMHA, AneuX, AneuG-Flow and Aneurisk have heterogeneous archive/cache/field/table/sample audit histories. Aneumo failed a performance gate, CMHA failed exact linkage, BenchAnXplore was consumed for representation discovery, and the latest AneuX/AneuG/Aneurisk P0 versions are execution-incomplete with no scientific verdict. The latest introai9 listing is still incomplete, while active train/validation/test is 0/0/0 because no paper identity or prospective split is selected. None of these facts supports a blanket dataset-absence or dataset-failure claim.",
+      status: "Audited holding records 6 · current inventory no-verdict · active split 0/0/0 · blanket rejection prohibited",
+      url: "../docs/data-asset-state-ledger-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "An open clinical table is real data, but not automatically an imaging dataset or fixed-time target",
@@ -901,6 +915,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "AURORA historical holdings state ledger · schema 11.5",
+      role: "authoritative separation of material history, current persistence, scientific admissibility and active split assignment",
+      provenance: "six named holding records · Aneumo performance-gate failure · BenchAnXplore discovery-used/no-fresh-confirmation · CMHA linkage-gate failure · AneuX/AneuG/Aneurisk latest exact versions execution-incomplete/no-verdict · current introai9 listing incomplete · active train/validation/test 0/0/0"
+    },
+    {
       name: "aSAH-Risk clinical table · Zenodo 17339029 revision 6",
       role: "versioned public clinical-table metadata and target-time audit; not active imaging, training, validation or test data",
       provenance: "230 source patients · 17 source variables · one 39,686-byte XLSX · CC BY 4.0 · MD5 8aaba92f5fb74175af76edd3701b7404 · six-month mRS unavailable 70 with discharge/three-month substitution · image/mask/join/split 0 · payload unopened · P0/model/GPU 0"
@@ -1192,8 +1211,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "AneuX v1.0",
-      role: "closed preprocessing-orbit P0 history; no active primary role",
-      provenance: "750 lesions · 605 source-reported patients · historical 3 resolutions/up to 4 cuts/170 features · initial tabular transport exhausted · no CSV/model range · 13 checks unevaluated · no rerun/P1 · CC BY-NC 4.0"
+      role: "conditional nested-orbit direction; scientific P0 contract only, not active training",
+      provenance: "750 lesions · 605 source-reported patients · 3 resolutions/up to 4 cuts/170 features · old transport job closed at 0/13 · new private-holding P0 exact path/manifest pending · no execution/method/model/GPU/outer test · CC BY-NC 4.0"
     },
     {
       name: "AneuX-derived transient CFD · exact HF 38c574bc…",
@@ -1227,6 +1246,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "research",
+      title: "AneuX nested preprocessing-orbit becomes the sole conditional ISBI direction",
+      copy: "A six-way acquired-asset screen admits one 33.0/40 conditional lead. The formulation separates fixed-cut resolution nuisance from cut-dependent parent-vessel context instead of forcing flat final-logit consistency. A new method-free CPU P0 scientific contract freezes three patient-bootstrap nontriviality signals and requires two; its exact private path and manifest remain unresolved, so it is not executable. The old 115177 job is not repaired or rerun. Primary problem, selected architecture, GPU, outer test and paper claim remain zero.",
+      files: ["docs/acquired-asset-application-direction-2026-08-12.md", "configs/aneux_nested_orbit_p0.json", "src/aurora/aneux_nested_orbit_p0.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.12",
+      category: "data",
+      title: "Schema 11.5 corrects active-zero without erasing acquired dataset history",
+      copy: "The site and machine protocol now separate source existence, historical payload/holding audit, current introai9 exact-path persistence and active scientific assignment. Six named holdings are retained with exact non-admission reasons: performance failure, linkage failure, discovery reuse or execution-incomplete/no-verdict. Active train/validation/test remains 0/0/0, but blanket dataset absence or blanket scientific rejection is explicitly forbidden.",
+      files: ["docs/data-asset-state-ledger-2026-08-12.md", "docs/datasets.md", "docs/server-execution.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 11.5 acquired-asset direction · 2026-08-12:** The sole conditional
+> lead is AneuX factorized nested preprocessing-orbit reliability at 33.0/40.
+> The application gap is same-lesion decision/worst-view instability hidden by
+> average discrimination. Resolution is a nuisance within a fixed cut; cut
+> choice changes the parent-vessel information set and may contribute a context
+> residual. Flat final-logit consistency is a baseline, not the proposal. A
+> method-free CPU P0 scientific contract is registered but non-executable until
+> exact private path and manifest are frozen. Primary/method/model/GPU/outer
+> test/claim remain 0; historical job 115177 stays closed 0/13 without repair.
+
 > **Schema 11.4 direction · 2026-08-12:** Preserve Zenodo 17339029 as a real,
 > versioned open clinical-table asset, but do not pivot to tabular aSAH score
 > replication or call it an imaging dataset. Mixed discharge/3-month/6-month

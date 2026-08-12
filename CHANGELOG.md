@@ -1,5 +1,41 @@
 # Changelog
 
+## 2026-08-12 · AneuX nested orbit becomes the sole conditional ISBI direction
+
+- Re-screened six research formulations that use already acquired/audited
+  assets. AneuX factorized nested preprocessing-orbit reliability is the only
+  row that passes the 32/40 total and every non-compensatory critical floor,
+  scoring 33.0/40.
+- Separated fixed-cut resolution nuisance from cut-dependent parent-vessel
+  context. Flat final-logit consistency is prohibited as the proposal because
+  it can erase a legitimate information-set difference.
+- Registered a new method-free CPU P0 scientific contract with three patient-
+  bootstrap failure endpoints and a two-of-three gate. Exact private path and
+  manifest are unresolved, so the execution envelope is not frozen and no job
+  was submitted.
+- Preserved historical job `115177.ECE-util1` as 0/13 no-verdict without
+  downloader repair or rerun. Primary problem, method, architecture, GPU,
+  outer test and paper claim remain 0.
+- Rebuilt the site entry narrative, detailed beginner explanation,
+  architecture hypothesis, experiment gate, paper claim matrix and filterable
+  history around the conditional direction.
+
+## 2026-08-12 · Schema 11.5 separates acquired holdings from active assignment
+
+- Corrected the misleading statement that no verified research data existed.
+  Six named historical holding records are preserved: Aneumo, BenchAnXplore,
+  CMHA, AneuX, AneuG-Flow and Aneurisk.
+- Added an authoritative four-layer ledger: official source/release, historical
+  payload or holding audit, current `introai9` exact-path inventory, and active
+  train/validation/test assignment.
+- Recorded exact non-admission classes rather than one blanket rejection:
+  performance failure, asset-linkage failure, execution-incomplete/no-verdict,
+  task mismatch, controlled access, discovery reuse and active-assignment zero.
+- Current server persistence remains unresolved after the incomplete listing;
+  active train/validation/test remains 0/0/0 because no prospective paper split
+  is selected. No historical job was repaired or relabelled and no compute was
+  opened.
+
 ## 2026-08-12 · Schema 11.4 deployed and privately pinned
 
 - Exact scientific source `423cf18c14f506d46561592f8fa4ca2a78d51c9a`

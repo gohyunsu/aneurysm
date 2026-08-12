@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.5 conditional model decision: unselected.** If and only if the
+> nested-orbit P0/P1 gates pass, compare a discretization-agnostic surface
+> encoder with a shared aneurysm token, cut-specific context residual, masked
+> orbit aggregator and disagreement reliability head. DiffusionNet, PointNet,
+> PointNeXt/DGCNN, E(3), flat consistency, GroupDRO and calibration are strong
+> controls. Do not force final-logit invariance across cuts. This is a
+> development hypothesis, not a selected architecture or novelty claim.
+
 > **Schema 11.4 model decision: `null`.** A versioned clinical XLSX does not
 > justify a tabular score model, imaging network, GNN or fusion architecture.
 > It contains no images and does not identify one fixed outcome horizon. Model

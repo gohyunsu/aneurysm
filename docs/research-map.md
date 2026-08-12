@@ -1,5 +1,11 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.5 map · 2026-08-12:** AneuX nested preprocessing-orbit is the
+> sole conditional node: score 33.0/40, scientific P0 contract registered,
+> execution envelope pending exact private path. Active primary, data split,
+> method, model, GPU, outer test and paper claim are still 0. The next legal
+> edge is bounded exact-path inventory → CPU P0 or close.
+
 > **Schema 11.3 map · 2026-08-12:** The data node remains unresolved rather
 > than empty or acquired. Fresh `introai9` shell/SFTP listing = 0 output;
 > verified current-direction cases = 0/0/0; active problem/model/compute = 0.

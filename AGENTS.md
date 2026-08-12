@@ -1,5 +1,40 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 acquired-asset direction · schema 11.5:** Maintain exactly one
+> conditional source lead: `aneux_factorized_nested_preprocessing_orbit_reliability`
+> at 33.0/40. Treat resolution as a nuisance only within a fixed cut. Treat
+> dome/ninja/cut1/cut2 as different information sets whose parent-vessel
+> context residual may legitimately change the final prediction. Never promote
+> flat final-logit consistency, DiffusionNet, PointNet, E(3), GroupDRO, set
+> attention or calibration as novelty. The claim candidate is casewise
+> preprocessing reliability hidden by average discrimination. The registered
+> contract is `configs/aneux_nested_orbit_p0.json`; it is non-executable until
+> one bounded read-only `introai9` inventory freezes an exact private path and
+> manifest. Never repair or rerun historical AneuX job `115177.ECE-util1`.
+> P0 is CPU-only, network-free and development-source-only; it must satisfy two
+> of three frozen nontriviality checks. P0 pass authorizes only one strong-
+> baseline feasibility P1, not a method, architecture, GPU, outer test or paper
+> claim. Preserve cross-sectional rupture-status wording and forbid future-risk,
+> clinical-utility and causal claims. Keep manuscript main/reference bytes
+> unchanged until the evidence gate explicitly opens writing. Execution is
+> `introai9` PBS-only; never access/query/transfer/submit/monitor `junjinyong`.
+
+> **2026-08-12 data-state correction · schema 11.5:** Never equate active
+> dataset/split 0 with historical dataset absence. Preserve six heterogeneous
+> holding records: Aneumo, BenchAnXplore, CMHA, AneuX, AneuG-Flow and Aneurisk.
+> Their exact states are respectively performance-gate failure;
+> discovery-used/no-fresh-confirmation; asset-linkage failure; and three latest
+> exact execution-incomplete/no-verdict records. The latest `introai9` listing
+> does not establish current persistence or absence. Active
+> train/validation/test remains 0/0/0 only because no paper identity and
+> prospective split are assigned. Use the reason taxonomy in
+> `docs/data-asset-state-ledger-2026-08-12.md`; do not write blanket “all
+> datasets rejected” or “no verified research data.” A fresh ISBI direction may
+> exploit a holding's native structure, but it must be a new problem/evidence
+> version and may not repair or relabel closed jobs. Future execution remains
+> `introai9` PBS-only with no login-node GPU. Never access/query/transfer/
+> submit/monitor `junjinyong`.
+
 > **2026-08-12 schema 11.4 deployment/private synchronization:** Exact public
 > scientific source `423cf18c14f506d46561592f8fa4ca2a78d51c9a` passed Quality
 > `31571433278` and Pages `31571433150`. Private paper head

@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.4":
-        raise ProtocolError("The current research-state schema must be version 11.4.")
+    if protocol["schema_version"] != "11.5":
+        raise ProtocolError("The current research-state schema must be version 11.5.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_one_versioned_open_nonimaging_clinical_table_metadata_no_active_dataset_no_p0_no_compute"
+        != "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending_no_method_gpu_outer_test_or_claim"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "dataset_asset_state_ledger",
+            "acquired_asset_application_direction",
             "open_clinical_outcome_and_target_time_reappraisal",
             "mechanistic_treatment_and_growth_asset_reappraisal",
             "introai9_dataset_inventory_audit",
@@ -296,13 +298,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_open_asah_clinical_table_not_active_imaging_dataset_no_method_no_compute_surface_vector_inactive"
-        or problem_selection["shortlisted_candidate"] is not None
-        or problem_selection["conditional_source_lead_count"] != 0
-        or problem_selection["candidate_dataset"] is not None
-        or problem_selection["candidate_estimand"] is not None
+        != "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending_no_primary_method_gpu_outer_test_or_claim"
+        or problem_selection["shortlisted_candidate"]
+        != "aneux_factorized_nested_preprocessing_orbit_reliability"
+        or problem_selection["conditional_source_lead_count"] != 1
+        or problem_selection["candidate_dataset"]
+        != "aneux_v1_0_private_holding_pending_exact_path_reconfirmation"
+        or problem_selection["candidate_estimand"]
+        != "cross_sectional_rupture_status_association_with_fixed_cut_resolution_reliability_and_cut_context_residual_not_future_risk"
         or problem_selection["asset_access_status"]
-        != "versioned_open_asah_clinical_xlsx_metadata_verified_payload_unopened_not_imaging_not_active_training_data_introai9_inventory_incomplete"
+        != "six_historical_holding_records_with_heterogeneous_payload_evidence_current_introai9_listing_incomplete_active_assignment_zero"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -312,20 +317,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "watch_versioned_asah_table_and_continue_fresh_image_linked_fixed_time_outcome_asset_discovery_no_payload_p0_architecture_or_compute"
+        != "freeze_exact_private_aneux_path_and_manifest_after_one_bounded_read_only_introai9_inventory_then_submit_the_preregistered_cpu_only_p0_no_network_method_gpu_or_outer_test"
         or problem_selection["audit_document"]
-        != "docs/open-clinical-outcome-and-target-time-reappraisal-2026-08-12.md"
+        != "docs/acquired-asset-application-direction-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "endpoint_provenance_aware_asah_six_month_prognosis_rejected_at_29_5_target_time_novelty_and_imaging_floors"
-        or problem_selection["most_recent_conditional_source_lead"] is not None
+        or problem_selection["most_recent_conditional_source_lead"]
+        != "aneux_factorized_nested_preprocessing_orbit_reliability_33_0_scientific_p0_contract_registered_execution_envelope_pending"
     ):
         raise ProtocolError(
-            "The open aSAH table is not an active imaging dataset, the introai9 inventory "
-            "remains incomplete, the mechanistic treatment/growth batch remains rejected, "
-            "and surface-vector remains inactive; no active lead, payload, repair, method, "
-            "GPU, outer test or claim may remain."
+            "Exactly one AneuX nested-orbit conditional lead may exist while its exact "
+            "private path remains unresolved; this opens only a scientific P0 contract, "
+            "not a primary problem, method, GPU, outer test or paper claim."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
     _require_keys(
@@ -385,9 +390,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 29.5
-        or admission_v2["current_batch_best_residual_novelty"] != 2.0
-        or admission_v2["current_batch_admitted_count"] != 0
+        or admission_v2["current_batch_best_score"] != 33.0
+        or admission_v2["current_batch_best_residual_novelty"] != 3.0
+        or admission_v2["current_batch_admitted_count"] != 1
     ):
         raise ProtocolError(
             "Future source admission v2 must remain prospective and non-compensatory: "
@@ -693,6 +698,197 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "dataset listing, and no PBS, GPU, transfer, or junjinyong action may open."
         )
     checks.append("introai9 incomplete dataset-inventory no-verdict boundary")
+
+    asset_ledger = problem_selection["dataset_asset_state_ledger"]
+    _require_keys(
+        asset_ledger,
+        [
+            "status", "audit_document", "historical_named_holding_records",
+            "historical_holdings_absent_claim",
+            "current_introai9_exact_path_inventory_complete",
+            "current_introai9_presence_or_absence_verdict",
+            "public_git_raw_patient_mesh_or_field_payload_count",
+            "active_dataset_count", "active_train_cases",
+            "active_validation_cases", "active_test_cases",
+            "active_p0_count", "active_p1_count", "active_model_count",
+            "active_gpu_job_count", "active_outer_test_count",
+            "registered_scientific_p0_pending_execution_envelope_count",
+            "blanket_dataset_rejection_claim_allowed", "reason_taxonomy",
+            "holdings", "next_allowed_action",
+        ],
+        "dataset asset state ledger",
+    )
+    expected_holding_status = {
+        "aneumo": "performance_gate_failed",
+        "benchanxplore": "discovery_used_not_fresh_confirmation",
+        "cmha": "asset_linkage_gate_failed",
+        "aneux": "execution_incomplete_no_verdict",
+        "aneug_flow": "execution_incomplete_no_verdict",
+        "aneurisk": "execution_incomplete_no_verdict",
+    }
+    expected_reason_taxonomy = [
+        "performance_gate_failed",
+        "asset_linkage_gate_failed",
+        "execution_incomplete_no_verdict",
+        "task_mismatch",
+        "controlled_or_terms_pending",
+        "discovery_used_not_fresh_confirmation",
+        "active_assignment_zero",
+    ]
+    if (
+        asset_ledger["status"]
+        != "historical_holdings_current_inventory_scientific_admission_and_active_assignment_are_separate"
+        or asset_ledger["audit_document"]
+        != "docs/data-asset-state-ledger-2026-08-12.md"
+        or asset_ledger["historical_named_holding_records"] != 6
+        or asset_ledger["historical_holdings_absent_claim"] is not False
+        or asset_ledger["current_introai9_exact_path_inventory_complete"] is not False
+        or asset_ledger["current_introai9_presence_or_absence_verdict"] is not False
+        or asset_ledger["public_git_raw_patient_mesh_or_field_payload_count"] != 0
+        or asset_ledger["reason_taxonomy"] != expected_reason_taxonomy
+        or {item["id"]: item["scientific_status"] for item in asset_ledger["holdings"]}
+        != expected_holding_status
+        or any(item["active_role"] is not None for item in asset_ledger["holdings"])
+        or asset_ledger["blanket_dataset_rejection_claim_allowed"] is not False
+        or asset_ledger[
+            "registered_scientific_p0_pending_execution_envelope_count"
+        ] != 1
+        or any(
+            asset_ledger[key] != 0
+            for key in (
+                "active_dataset_count", "active_train_cases",
+                "active_validation_cases", "active_test_cases",
+                "active_p0_count", "active_p1_count", "active_model_count",
+                "active_gpu_job_count", "active_outer_test_count",
+            )
+        )
+        or asset_ledger["next_allowed_action"]
+        != "after_external_service_change_run_bounded_read_only_exact_path_checksum_inventory_then_continue_fresh_problem_asset_admission_without_repairing_closed_jobs"
+    ):
+        raise ProtocolError(
+            "Historical audited holdings, current introai9 inventory, scientific "
+            "admission and active split assignment must remain separate; active zero "
+            "cannot be relabelled as historical dataset absence or blanket rejection."
+        )
+    checks.append("historical holdings and active-assignment state separation")
+
+    acquired_direction = problem_selection["acquired_asset_application_direction"]
+    _require_keys(
+        acquired_direction,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "candidate_dataset", "candidate_target", "candidate_failure_mechanism",
+            "resolution_role", "cut_role",
+            "flat_final_logit_consistency_allowed_as_proposal",
+            "source_reported_lesions", "source_reported_patients",
+            "source_reported_status_observed", "mesh_resolutions",
+            "cut_configurations", "morphometric_features", "p0_config",
+            "p0_config_sha256", "p0_scientific_contract_registered",
+            "p0_execution_envelope_frozen", "p0_exact_private_path_frozen",
+            "p0_exact_manifest_sha256_frozen", "p0_executable", "p0_submitted",
+            "p0_cpu_only", "p0_gpu_count", "p0_network_access_allowed",
+            "p0_previous_downloader_or_reader_repaired", "p0_previous_job_rerun",
+            "p0_previous_job_id", "p0_previous_scientific_checks_evaluated",
+            "p0_nontriviality_required_count", "p0_nontriviality_total_count",
+            "p0_external_sources_opened", "candidate_architecture_status",
+            "candidate_architecture", "non_novel_components",
+            "required_strong_baselines", "primary_evidence_roles", "candidates",
+            "method_selected", "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "submission_identity_active", "paper_claim_active", "execution_server",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "acquired-asset application direction",
+    )
+    expected_acquired_candidates = [
+        ("aneux_factorized_nested_preprocessing_orbit_reliability", 33.0, True),
+        ("benchanxplore_sac_local_transient_velocity_operator", 32.5, False),
+        ("aneumo_multibc_steady_surrogate_reentry", 32.5, False),
+        ("aneurisk_context_visualization_only", 29.5, False),
+        ("aneug_aneurisk_structure_faithful_wss", 28.0, False),
+        ("cmha_hemodynamic_incremental_value", 27.0, False),
+    ]
+    if (
+        acquired_direction["status"]
+        != "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending"
+        or acquired_direction["audit_document"]
+        != "docs/acquired-asset-application-direction-2026-08-12.md"
+        or acquired_direction["automatic_selection_threshold"] != 32.0
+        or acquired_direction["best_candidate_id"]
+        != "aneux_factorized_nested_preprocessing_orbit_reliability"
+        or acquired_direction["best_score"] != 33.0
+        or acquired_direction["best_residual_novelty_score"] != 3.0
+        or acquired_direction["all_candidate_scores"]
+        != [33.0, 32.5, 32.5, 29.5, 28.0, 27.0]
+        or acquired_direction["conditional_source_lead_count"] != 1
+        or acquired_direction["candidate_dataset"] != "aneux_v1_0"
+        or acquired_direction["candidate_target"]
+        != "cross_sectional_rupture_status_association_not_future_risk"
+        or acquired_direction["resolution_role"] != "nuisance_within_fixed_cut"
+        or acquired_direction["cut_role"]
+        != "information_set_change_with_permitted_parent_vessel_context_residual"
+        or acquired_direction["flat_final_logit_consistency_allowed_as_proposal"]
+        is not False
+        or acquired_direction["source_reported_lesions"] != 750
+        or acquired_direction["source_reported_patients"] != 605
+        or acquired_direction["source_reported_status_observed"] != 735
+        or acquired_direction["mesh_resolutions"] != 3
+        or acquired_direction["cut_configurations"] != 4
+        or acquired_direction["morphometric_features"] != 170
+        or acquired_direction["p0_config"] != "configs/aneux_nested_orbit_p0.json"
+        or acquired_direction["p0_config_sha256"]
+        != "b82e3606ea76697dbdc44973a287538a436fe330c25edcd8bf9f113d147149c1"
+        or acquired_direction["p0_scientific_contract_registered"] is not True
+        or acquired_direction["p0_cpu_only"] is not True
+        or acquired_direction["p0_gpu_count"] != 0
+        or acquired_direction["p0_previous_job_id"] != "115177.ECE-util1"
+        or acquired_direction["p0_previous_scientific_checks_evaluated"] != 0
+        or acquired_direction["p0_nontriviality_required_count"] != 2
+        or acquired_direction["p0_nontriviality_total_count"] != 3
+        or acquired_direction["candidate_architecture_status"]
+        != "development_hypothesis_only_unselected"
+        or [
+            (row.get("id"), row.get("total"), row.get("critical_axis_pass"))
+            for row in acquired_direction["candidates"]
+        ]
+        != expected_acquired_candidates
+        or acquired_direction["execution_server"] != "introai9"
+        or acquired_direction["next_allowed_action"]
+        != "one_bounded_read_only_introai9_exact_path_inventory_then_freeze_execution_envelope_or_close_no_broad_search_no_old_job_repair"
+        or any(
+            acquired_direction[key] is not False
+            for key in (
+                "primary_problem_selected", "paper_identity_active",
+                "p0_execution_envelope_frozen", "p0_exact_private_path_frozen",
+                "p0_exact_manifest_sha256_frozen", "p0_executable", "p0_submitted",
+                "p0_network_access_allowed",
+                "p0_previous_downloader_or_reader_repaired", "p0_previous_job_rerun",
+                "p0_external_sources_opened", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "paper_claim_active",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+    ):
+        raise ProtocolError(
+            "The acquired-asset direction may retain exactly one factorized AneuX "
+            "nested-orbit conditional lead and a non-executable CPU P0 scientific "
+            "contract; flat cut invariance, old-job repair, method, GPU, outer test "
+            "and paper claims remain forbidden."
+        )
+    p0_path = Path(__file__).resolve().parents[2] / acquired_direction["p0_config"]
+    if (
+        not p0_path.is_file()
+        or hashlib.sha256(p0_path.read_bytes()).hexdigest()
+        != acquired_direction["p0_config_sha256"]
+    ):
+        raise ProtocolError("The AneuX nested-orbit P0 contract hash changed.")
+    checks.append("acquired-asset AneuX nested-orbit conditional-lead boundary")
 
     collision = problem_selection[
         "endovascular_collision_anticipation_and_release_reappraisal"
@@ -15106,11 +15302,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["historical_primary_metric"] != "functional_energy_score"
         or task["historical_primary_status"]
         != "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete"
-        or task["active_candidate_problem"] != "none"
+        or task["active_candidate_problem"]
+        != "aneux_factorized_nested_preprocessing_orbit_reliability"
         or task["active_candidate_status"]
-        != "vmr_growth_paired_exact_version_closed_execution_incomplete_no_scientific_verdict_surface_vector_hypothesis_inactive"
-        or task["candidate_primary_estimand"] is not None
-        or task["candidate_secondary_estimand"] is not None
+        != "conditional_source_lead_scientific_p0_contract_registered_execution_envelope_pending_no_method_gpu_outer_test_or_claim"
+        or task["candidate_primary_estimand"]
+        != "fixed_cut_resolution_decision_instability_for_cross_sectional_rupture_status_association"
+        or task["candidate_secondary_estimand"]
+        != "orbit_disagreement_error_association_and_source_held_out_worst_view_reliability"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"
         or task["i0a_config_sha256"]
         != "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff"
@@ -15154,11 +15353,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["cfd_field_is_clinical_mri_ground_truth"] is not False
     ):
         raise ProtocolError(
-            "Every active candidate and primary estimand must be unselected after "
-            "the VMR no-verdict closure; historical 4D-flow must retain the exact "
-            "I0a result and I0b execution record."
+            "The AneuX nested-orbit direction may be an active conditional candidate "
+            "while the primary problem and endpoint remain unselected; historical "
+            "4D-flow must retain the exact I0a result and I0b execution record."
         )
-    checks.append("closed VMR task boundary and historical 4D-flow guardrails")
+    checks.append("conditional AneuX task and historical 4D-flow guardrails")
 
     datasets = protocol["datasets"]
     if not isinstance(datasets, list) or not datasets:
