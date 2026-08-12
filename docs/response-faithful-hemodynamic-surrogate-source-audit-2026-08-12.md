@@ -109,6 +109,14 @@ It is registered but non-executable because the current private cache path has
 not been re-established after the incomplete `introai9` inventory. No server
 retry is allowed until an external administrator/service state change.
 
+The aggregate evaluator and its CPU-only one-shot wrapper are now implemented
+at [`src/aurora/aneumo_response_fidelity_p0.py`](../src/aurora/aneumo_response_fidelity_p0.py)
+and [`cluster/pbs_aneumo_response_fidelity_p0.pbs`](../cluster/pbs_aneumo_response_fidelity_p0.pbs).
+This is implementation readiness, not execution authority or scientific
+evidence. The current config is tested to refuse before checking whether a
+private cache exists. The wrapper is therefore not submittable in the current
+state and has not been submitted.
+
 P0 reads only the 20 historical train base families and only `coordinates_m`
 plus the three velocity channels. It does not read pressure, validation/test
 fields, a model, checkpoint or prediction. It checks:
@@ -118,7 +126,8 @@ fields, a model, checkpoint or prediction. It checks:
 3. exact reproduction of the already published scaling-audit dependency,
    without relabelling it as a fresh result;
 4. response-descriptor agreement under two deterministic coordinate-hash
-   halves;
+   halves, ranking families separately within each non-anchor flow before
+   concatenation so the monotone flow grid cannot manufacture agreement;
 5. stability of direction, gain and discrete tangent/curvature summaries under
    leave-one-interior-flow interpolation;
 6. family-bootstrap uncertainty with family, not case/flow/node, as the unit.
@@ -126,6 +135,9 @@ fields, a model, checkpoint or prediction. It checks:
 Every check must pass. Failure or execution-incomplete closes this exact P0
 without threshold, parser, split or source repair. A pass opens a separately
 registered baseline-only P1; it does not select a model or authorize a GPU.
+All uncertainty uses 5,000 family-cluster bootstrap replicates. The evaluator
+publishes only aggregate endpoints and explicitly excludes pressure, case IDs,
+family IDs, validation/test fields, checkpoints, predictions and GPU access.
 
 ## 6. P1 and model-selection falsifier
 

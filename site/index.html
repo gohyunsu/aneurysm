@@ -55,12 +55,14 @@
           Train-only method-free P0로 endpoint 안정성을 확인하고, field-error-matched
           P1에서 실제 mismatch가 관측된 뒤에만 최소 anchor-response factorization을
           평가합니다. 현재 scientific result·selected model·GPU·outer test·paper
-          claim은 모두 0입니다.
+          claim은 모두 0입니다. P0 evaluator는 구현됐지만 현재 config가 private-cache
+          확인 전에 중단되므로 아직 실행·제출 가능한 job은 아닙니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html#response-fidelity">처음부터 이해하기</a>
           <a class="button ghost" href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">연구 질문·선행·실험 전체 읽기 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p0.json">등록된 method-free P0 ↗</a>
+          <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
         <div class="hero-actions" hidden>
@@ -472,6 +474,8 @@
         <p>
           현재 실행 가능한 job은 없습니다. Method-free P0 계약은 등록했지만 exact
           private cache path와 외부 서비스 상태가 해결되지 않아 non-executable입니다.
+          Aggregate evaluator와 CPU 4/GPU 0 wrapper는 구현됐고 synthetic test를
+          통과했지만, 현재 config는 cache 존재 확인 전에 fail closed합니다.
           P0가 endpoint를 식별한 뒤에도, P1이 field-error-matched response mismatch를
           실제로 보여야만 model development로 넘어갑니다.
         </p>
@@ -492,12 +496,15 @@
           <strong>Source admission은 failure, method 또는 성능 증거가 아닙니다.</strong>
           <p>
             P0는 train family에서 response descriptor의 coordinate-half agreement와
-            leave-one-flow 안정성만 확인합니다. Pass는 baseline-only P1을 열 뿐입니다.
+            leave-one-flow 안정성만 확인합니다. 단조적인 flow 크기가 상관을 부풀리지
+            않도록 각 target flow 안에서 family 순위를 비교하고 5,000회 family
+            bootstrap합니다. Pass는 baseline-only P1을 열 뿐입니다.
             P1에서 analytic scaling, interpolation, MLP, DeepONet, DeltaPhi와 graph
             controls를 field error로 먼저 match한 뒤 response 차이를 봅니다. 차이가
             없으면 논문 정체성과 architecture를 함께 닫습니다.
           </p>
           <a href="../configs/aneumo_response_fidelity_p0.json">Registered P0 contract ↗</a>
+          <a href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator ↗</a>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">지표·baseline·중단 근거 ↗</a>
         </div>
       </article>

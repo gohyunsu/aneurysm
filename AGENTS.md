@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 P0 implementation boundary:**
+> `src/aurora/aneumo_response_fidelity_p0.py` and
+> `cluster/pbs_aneumo_response_fidelity_p0.pbs` implement the registered
+> aggregate evaluator and a CPU 4/GPU 0 one-shot wrapper. Protocol-pinned
+> SHA-256 values are `b8799a857d9d172a39d13565b713300f6bfb7acbb7b8e6f183a510e1045b103e`
+> and `d1341ca525176484ea51619967df50197f3f10381486f517a182df27b3f95974`.
+> Synthetic tests exercise all 10 checks; registered real-data bootstrap count
+> remains 5,000. Coordinate halves compare within-flow family ranks, not the
+> trivially ordered flow sequence. Current config must refuse before cache
+> access and the wrapper is not submittable. No scientific server/scheduler
+> query, transfer, PBS submission, monitoring or GPU action occurred. P0
+> result/P1/method/architecture/outer test/claim remain 0. Never access
+> `junjinyong`; do not retry `introai9` before a verified external change.
+> Full dependency-complete regression passes 513/513 tests. Protocol validation
+> retains 111 invariant groups at canonical SHA-256
+> `fa6fb500606f1d52895042c25e78ba24ce757780493f4b7068d4ce5159b1cab1`.
+
 > **2026-08-12 schema 11.8 public/private/site synchronization:** Exact
 > scientific source `6512dfb83483ebfee8999f6e72717b096f46b8f3` passed Quality
 > `31587974877`. Exact response-fidelity Overview head

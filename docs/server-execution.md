@@ -6,6 +6,9 @@
 > path 확인 전에는 실행할 수 없다. Login-node GPU는 금지하며 `junjinyong`에는
 > 접속·조회·전송·제출·모니터링을 절대 하지 않는다. 동일 inventory/contract의
 > local repair 또는 반복 retry도 금지한다.
+> Reference evaluator와 CPU 4/GPU 0 PBS wrapper는 public code로 구현됐지만,
+> 현재 config는 cache path probe 전에 중단되고 wrapper는 submittable하지 않다.
+> 이번 구현에서도 server/scheduler query, transfer, submission, monitoring은 0이다.
 
 > **Schema 11.7 no-execution boundary:** The AneuX reliability candidate is
 > source-rejected, so the external-service-change preflight and P0 v2 execution

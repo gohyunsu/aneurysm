@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 method-free P0 implementation · schema 11.8:** The aggregate
+> reference evaluator and CPU 4/GPU 0 one-shot PBS wrapper are implemented and
+> pinned by the machine protocol. Synthetic validation covers all ten
+> registered checks. Coordinate-half agreement ranks families within each
+> target flow before a 5,000-replicate family bootstrap, avoiding a trivial
+> correlation induced by increasing flow. The current config refuses before
+> private-cache access; the wrapper is not submittable and no server,
+> scheduler, transfer, PBS or GPU action occurred. This is code readiness, not
+> a P0 result, method selection or paper claim. Full local regression passes
+> 513/513 tests; the machine protocol retains 111 invariant groups and has
+> canonical SHA-256 `fa6fb500606f1d52895042c25e78ba24ce757780493f4b7068d4ce5159b1cab1`.
+
 > **Schema 11.8 is synchronized:** Scientific source
 > `6512dfb83483ebfee8999f6e72717b096f46b8f3` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31587974877).

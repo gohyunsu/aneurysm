@@ -145,6 +145,14 @@
             validation/test field, checkpoint, prediction과 GPU는 읽지 않습니다.
           </p>
           <p>
+            여기서 두 절반의 모든 유량 값을 한꺼번에 상관분석하면 유량 증가라는
+            자명한 순서만으로 높은 값이 나올 수 있습니다. 구현된 evaluator는 각
+            target flow 안에서 family response 순위를 따로 계산한 뒤 합치고, 독립
+            단위인 20개 family를 5,000회 bootstrap합니다. 4,096 node 수와 frozen
+            family/case mapping도 강제합니다. Synthetic test는 10개 check를 모두
+            통과하지만 real Aneumo 결과는 아직 0입니다.
+          </p>
+          <p>
             P0가 통과해도 바로 fancy model을 만들지 않습니다. P1에서 analytic
             power-law scaling, linear interpolation, conditional MLP, DeepONet,
             DeltaPhi, MeshGraphNet과 과거 V1e를 동일 development 조건으로 비교하고,
@@ -169,11 +177,14 @@
           </p>
           <p>
             현재 상태는 34.0/40 conditional lead, novelty 2.5/5, failure observed 0,
-            P0 registered/non-executable입니다. External service change가 확인되기
+            P0 registered/non-executable입니다. Evaluator와 CPU 4/GPU 0 one-shot
+            wrapper는 code-complete지만 현재 config가 cache access 전에 거부하므로
+            제출할 수 없습니다. External service change가 확인되기
             전에는 <code>introai9</code> inventory를 재시도하지 않으며,
             <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
           </p>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">직접 선행·six-way score·P0/P1·ISBI claim 삭제 규칙 전체 읽기 ↗</a>
+          <a href="../src/aurora/aneumo_response_fidelity_p0.py">Fail-closed aggregate evaluator 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">
           <span>왜 괜찮아 보이는 AneuX 아이디어를 실행하지 않았나?</span>

@@ -8,6 +8,11 @@
 > tangent relative L2이며 family-cluster bootstrap과 5 seeds를 사용한다. Field
 > relative L2 non-inferiority도 동시에 만족해야 한다. 현재 P0는 exact private
 > cache path가 unresolved라 non-executable이고 validation/test/model/GPU read는 0이다.
+> Aggregate evaluator와 CPU 4/GPU 0 one-shot PBS wrapper는 구현·synthetic
+> validation되었지만 현재 config가 private-cache 존재 확인 전에 fail closed한다.
+> Coordinate-half endpoint는 각 target flow 안에서 family rank를 계산하고
+> 5,000회 family-cluster bootstrap한다. 이는 code readiness일 뿐 P0 result,
+> submission 또는 model authority가 아니다.
 
 > **Schema 11.7 current gate: no executable experiment.** The AneuX direct-
 > prior reappraisal rejects all six formulations; best 32.0/40 fails the

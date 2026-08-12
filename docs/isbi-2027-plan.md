@@ -9,6 +9,10 @@
 > 확인하기 전에는 제목·abstract claim·method·result table·figure를 원고에 쓰지
 > 않는다. 둘 다 통과한 뒤에만 analytic anchor scaling과 zero-at-anchor residual을
 > 결합한 최소 모델을 평가한다. 현재 method/architecture/GPU/outer test/claim은 0이다.
+> P0 evaluator가 구현됐지만 아직 real-data endpoint는 0이다. Coordinate-half
+> agreement는 flow 자체의 단조 효과를 제거하기 위해 target flow별 family rank로
+> 계산하며 5,000회 family bootstrap한다. 이 구현은 향후 Methods의 재현성 자산일
+> 뿐 contribution이나 result row가 아니다.
 
 ## Schema 11.8 four-page claim–evidence map
 

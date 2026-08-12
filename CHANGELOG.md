@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · fail-closed P0 reference implementation
+
+- Implemented the train-only aggregate Aneumo response-fidelity evaluator and
+  a CPU 4/GPU 0 one-shot PBS wrapper without submitting it.
+- Prevented trivial flow-order correlation by ranking families separately at
+  each target flow before family-cluster bootstrap; the registered run retains
+  5,000 replicates and exactly ten checks.
+- Enforced 4,096 aligned nodes, frozen family/case mapping and aggregate-only
+  output; pressure, identifiers, validation/test fields, model artifacts and
+  GPU remain excluded.
+- Added fail-closed tests proving the current non-executable config rejects
+  before private-cache access. No server, scheduler, transfer, PBS or GPU
+  action occurred and no scientific result or paper claim was created.
+- Full dependency-complete regression passes 513/513 tests; protocol validation
+  retains 111 invariant groups at canonical SHA-256 `fa6fb500…cab1`.
+
 ## 2026-08-12 · schema 11.8 · public/private/site synchronization
 
 - Expanded the public Overview from the rejected AneuX hero to the current

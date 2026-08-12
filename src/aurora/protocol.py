@@ -1062,6 +1062,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1e_repaired_or_rerun", "direct_prior_identifiers",
             "non_novel_components", "primary_response_endpoints",
             "secondary_response_endpoints", "p0_config", "p0_config_sha256",
+            "p0_reference_evaluator", "p0_reference_evaluator_sha256",
+            "p0_pbs_wrapper", "p0_pbs_wrapper_sha256",
+            "p0_reference_evaluator_synthetic_validation_passed",
+            "p0_current_config_refuses_before_cache_access",
+            "p0_coordinate_half_metric_flow_stratified_by_family",
+            "p0_registered_bootstrap_replicates",
+            "p0_pbs_wrapper_submittable_now",
             "p0_scientific_contract_registered", "p0_status", "p0_method_free",
             "p0_train_only", "p0_exact_private_cache_path_frozen",
             "p0_execution_envelope_frozen", "p0_executable", "p0_submitted",
@@ -1148,6 +1155,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "configs/aneumo_response_fidelity_p0.json"
         or response_fidelity["p0_config_sha256"]
         != "07c0c89799e04fbee88a1218383aa7b7fd8fc3a5ab8d7bcb15d286195571135f"
+        or response_fidelity["p0_reference_evaluator"]
+        != "src/aurora/aneumo_response_fidelity_p0.py"
+        or response_fidelity["p0_reference_evaluator_sha256"]
+        != "b8799a857d9d172a39d13565b713300f6bfb7acbb7b8e6f183a510e1045b103e"
+        or response_fidelity["p0_pbs_wrapper"]
+        != "cluster/pbs_aneumo_response_fidelity_p0.pbs"
+        or response_fidelity["p0_pbs_wrapper_sha256"]
+        != "d1341ca525176484ea51619967df50197f3f10381486f517a182df27b3f95974"
+        or response_fidelity["p0_registered_bootstrap_replicates"] != 5000
         or response_fidelity["p0_status"]
         != "registered_non_executable_pending_external_service_change_and_exact_private_cache_path"
         or response_fidelity["candidate_architecture_status"]
@@ -1163,7 +1179,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             response_fidelity[key] is not True
             for key in (
                 "p0_scientific_contract_registered", "p0_method_free",
-                "p0_train_only", "p1_requires_field_error_matched_response_mismatch",
+                "p0_train_only",
+                "p0_reference_evaluator_synthetic_validation_passed",
+                "p0_current_config_refuses_before_cache_access",
+                "p0_coordinate_half_metric_flow_stratified_by_family",
+                "p1_requires_field_error_matched_response_mismatch",
             )
         )
         or any(
@@ -1173,6 +1193,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "validation_or_test_fields_read_for_this_audit",
                 "v1e_repaired_or_rerun", "p0_exact_private_cache_path_frozen",
                 "p0_execution_envelope_frozen", "p0_executable", "p0_submitted",
+                "p0_pbs_wrapper_submittable_now",
                 "p1_registered", "primary_problem_selected", "method_selected",
                 "architecture_selected", "scientific_server_queried",
                 "gpu_training_authorized", "outer_test_authorized",
@@ -1196,6 +1217,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != response_fidelity["p0_config_sha256"]
     ):
         raise ProtocolError("The registered Aneumo response-fidelity P0 contract changed.")
+    for path_key, hash_key in (
+        ("p0_reference_evaluator", "p0_reference_evaluator_sha256"),
+        ("p0_pbs_wrapper", "p0_pbs_wrapper_sha256"),
+    ):
+        implementation_path = (
+            Path(__file__).resolve().parents[2] / response_fidelity[path_key]
+        )
+        if (
+            not implementation_path.is_file()
+            or hashlib.sha256(implementation_path.read_bytes()).hexdigest()
+            != response_fidelity[hash_key]
+        ):
+            raise ProtocolError(
+                "The registered Aneumo response-fidelity P0 implementation changed."
+            )
     checks.append("Aneumo response-fidelity conditional lead and fail-closed P0 boundary")
 
     collision = problem_selection[

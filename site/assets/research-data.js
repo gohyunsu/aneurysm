@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · method-free P0 registered/non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · method-free P0 evaluator implemented but registered/non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; code readiness does not authorize submission, the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "The method-free response-fidelity P0 becomes code-complete but remains non-executable",
+      copy: "A pinned aggregate evaluator now enforces the 20-family/40-case/8-flow/4,096-node train contract and emits only aggregate endpoints. To avoid a trivial correlation from monotonically increasing flow, coordinate-half agreement ranks families separately within every target flow before concatenation and a 5,000-replicate family bootstrap. A CPU 4/GPU 0 one-shot PBS wrapper is also pinned. The current config is tested to reject before probing a private cache, so no real-data result or execution authority exists.",
+      status: "Schema 11.8 implementation only · synthetic 10/10 · real P0 0/10 · PBS 0 · server/GPU/model/test/claim 0",
+      url: "../src/aurora/aneumo_response_fidelity_p0.py"
+    },
     {
       year: "2026.08",
       title: "Aneumo response fidelity becomes one conditional application lead",
@@ -1287,6 +1294,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "experiment",
+      title: "Schema 11.8 adds a fail-closed aggregate P0 evaluator without running it",
+      copy: "The reference evaluator checks the frozen Aneumo train mapping, eight flows, 4,096 aligned nodes, coordinate-half response ranking, leave-one-flow tangent/interpolation stability and historical scaling dependency. Family ranks are computed within flow and uncertainty uses 5,000 family bootstrap replicates. The CPU 4/GPU 0 wrapper is one-shot, aggregate-only and not currently submittable; current config refuses before cache access. Synthetic 10/10 is implementation validation, not a scientific result. Full regression passes 513/513 tests with 111 protocol invariant groups. No server, scheduler, transfer, PBS or GPU action occurred.",
+      files: ["src/aurora/aneumo_response_fidelity_p0.py", "cluster/pbs_aneumo_response_fidelity_p0.pbs", "tests/test_aneumo_response_fidelity_p0.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",
