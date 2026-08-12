@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 surface-vector/DSA deployment·private synchronization:** Exact
+> public scientific source `cb4f6b16183ddd10a3982edbbdabf77d8a0a3808`
+> passed Quality `31553310905` and Pages `31553310384`. Live Learn
+> `#dsa-task-fidelity`, the exact audit, machine protocol, source-watch v17 and
+> filterable change history expose the same fail-closed decision. Private paper
+> ledger `b708bc2581042d83e323c905035966a1047333bb` is remote exact, PRIVATE and
+> anonymously returns 404. `paper/main.tex` and references SHA-256 remain
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> This provenance opens no paper identity, method, model or compute.
+
 > **2026-08-12 surface-vector/task-faithful DSA delta · schema 10.7
 > unchanged:** 전달된 field-accuracy/structure 문제와 stability→matched
 > failure→bounded development→fresh confirmation 순서는 채택한다. 그러나

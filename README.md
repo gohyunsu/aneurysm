@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 surface-vector/DSA deployment and private pin:** Exact public
+> scientific source `cb4f6b16183ddd10a3982edbbdabf77d8a0a3808` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31553310905)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31553310384).
+> Live Learn, the audit and source-watch v17 expose the same decision. Private
+> ledger `b708bc2581042d83e323c905035966a1047333bb` is remote exact, PRIVATE and
+> anonymously returns 404. Manuscript and references remain byte-for-byte
+> unchanged. This provenance opens no paper, model or compute.
+
 > **2026-08-12 surface-vector/task-faithful DSA delta · schema 10.7
 > unchanged:** The supplied field-error/structure hypothesis and staged gate
 > are retained, but a fresh version label cannot replace a whitelisted material

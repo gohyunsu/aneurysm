@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-12 · Surface-vector/DSA audit deployed and privately pinned
+
+- Exact public scientific source `cb4f6b16183ddd10a3982edbbdabf77d8a0a3808`
+  passed Quality `31553310905` and Pages `31553310384`; the live beginner
+  chapter, exact audit, machine protocol and source-watch v17 were verified.
+- Private ledger `b708bc2581042d83e323c905035966a1047333bb` is remote exact,
+  PRIVATE and anonymously returns 404. Manuscript and reference hashes are
+  unchanged.
+- This provenance-only synchronization opens no active problem, method, model,
+  compute, result or paper claim.
+
 ## 2026-08-12 · Surface-vector and task-faithful sparse DSA delta · no state change
 
 - Retained field-error-versus-structure as a falsifiable hypothesis, but made
