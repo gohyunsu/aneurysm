@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.8 model boundary:** selected architecture는 없다. Gate가 열릴 때만
+> 다음 최소 hypothesis를 비교한다:
+> `v_hat(x,q)=(q/q0)^alpha v(x,q0)+phi(log(q/q0)) R_theta(G,v0,x,q)`,
+> `phi(0)=0`. 첫 항은 train-fitted analytic scaling baseline이고 두 번째만 learned
+> response residual이다. Exact anchor identity와 observed response failure의 직접
+> 대응이 목적이다. SE(3) graph encoder, boundary token, continuous query,
+> derivative loss, DeepONet/FNO는 novelty가 아니라 matched control/implementation
+> choice다. P0/P1 전에는 이 구조를 구현·학습·선택하거나 GNN 기반이라고 부르지 않는다.
+
 > **Schema 11.7 model decision: unselected.** The AneuX candidate is rejected
 > at the source gate, so its nested surface architecture is not a development
 > target. DiffusionNet, PointNet++, equivariance, consistency, GroupDRO,

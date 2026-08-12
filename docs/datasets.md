@@ -1,5 +1,14 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.8 active-use distinction:** Aneumo에는 checksum이 검증된 compact
+> holding 계약이 있다: 32 base families, family당 2 cases, case당 8 mass flows와
+> 4,096 aligned internal nodes, 기존 20/6/6 family split이다. Historical unit
+> 이름 `aneux_base_family`는 Aneumo `Connection.csv`의 generation-family 계약을
+> 가리키며 별도 AneuX rupture dataset을 뜻하지 않는다. 현재 exact `introai9`
+> private path는 unresolved이므로 active train/validation/test는 여전히 0/0/0이고,
+> registered non-executable P0만 1개다. Pressure와 validation/test fields는 P0에서
+> 읽지 않는다. 데이터가 없다는 뜻도, 바로 학습 가능하다는 뜻도 아니다.
+
 > **Schema 11.7 active-assignment correction:** The six audited holding records
 > still exist, but none is assigned to an active paper. AneuX is no longer a
 > conditional source lead: its reliability formulation is source-rejected

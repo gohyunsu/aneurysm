@@ -1,5 +1,35 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.8 conditional paper plan:** 현재 provisional identity는
+> **response-faithful multi-flow haemodynamic surrogation**이다. 하나의
+> nominal-flow CFD를 제공받아 대체 유량의 velocity field를 예측할 때, 낮은
+> field error가 response gain/direction/tangent/curvature fidelity를 보장하는지
+> 먼저 반증한다. Source score는 34.0/40이나 residual novelty는 정확히 2.5/5다.
+> Method-free P0가 endpoint stability를, field-error-matched P1이 실제 mismatch를
+> 확인하기 전에는 제목·abstract claim·method·result table·figure를 원고에 쓰지
+> 않는다. 둘 다 통과한 뒤에만 analytic anchor scaling과 zero-at-anchor residual을
+> 결합한 최소 모델을 평가한다. 현재 method/architecture/GPU/outer test/claim은 0이다.
+
+## Schema 11.8 four-page claim–evidence map
+
+ISBI 2027 공식 형식은 single blind, 기술 내용 4쪽이며 유료 5쪽째에는 ethics,
+acknowledgments/conflicts와 references만 둘 수 있다. 마감은 2026-10-26 23:59
+US EDT, 결과 통지는 2027-01-12, final은 2027-01-26이다.
+
+| 역할 | 4쪽 배정 | 반드시 뒷받침할 주장 | 삭제 조건 |
+|---|---:|---|---|
+| Introduction | 0.65 | field accuracy와 multi-flow response fidelity가 구별되는 application gap | matched P1 mismatch 없음 |
+| Method | 1.15 | 관측된 failure에 직접 대응하는 anchor-response factorization | P0/P1 미통과 또는 architecture 미승인 |
+| Experiments | 0.70 | family-disjoint split, field-error/compute matching, cluster bootstrap | ≥50 locked confirmation family 미확보 |
+| Results | 1.15 | field non-inferiority와 response primary endpoint 개선 | CI/seed 기준 미충족 |
+| Discussion | 0.35 | steady synthetic CFD와 modeled inflow의 한계 | 임상·파열·patient-specific 표현이 남음 |
+
+세 contribution 후보는 C1 matched baseline failure, C2 field accuracy를 훼손하지
+않는 response improvement, C3 최소 50개 untouched base-family confirmation이다.
+각 evidence cell이 비면 해당 contribution 문장을 삭제한다. 자세한 direct-prior와
+통계 계약은 [source audit](response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md)에
+고정한다.
+
 > **Schema 11.7 submission state:** No paper identity is active. The AneuX
 > reliability candidate is rejected before execution because its residual
 > novelty is 2.0/5 after direct-prior review; the historical 33.0/40 screen and

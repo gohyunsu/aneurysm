@@ -1,5 +1,12 @@
 # 데이터 자산 상태 원장
 
+> **Schema 11.8 current assignment:** Aneumo verified compact holding은 새
+> response-fidelity task의 conditional source다. Method-free P0 contract 1개가
+> 등록됐지만 current exact private cache path와 execution envelope가 고정되지 않아
+> non-executable이다. 따라서 conditional source lead/pending P0는 1/1이지만 active
+> train/validation/test, active P0/P1/model/GPU/outer test는 모두 0이다. 이는
+> schema-11.7 AneuX 기각을 되돌리는 것도, 실패한 Aneumo V1e를 수리하는 것도 아니다.
+
 > **Schema 11.7 current assignment:** Historical holding evidence remains
 > unchanged, but AneuX nested-orbit reliability is now source-rejected before
 > execution. Its 33.0/40 score is historical; fresh direct-prior score 32.0/40
@@ -35,10 +42,10 @@ server holding의 역사적 부재를 뜻하지 않는다.
 
 | 자산 | 실물 확인 범위 | 과학적 상태 | active가 아닌 정확한 이유 | 재사용 가능한 역할 |
 |---|---|---|---|---|
-| Aneumo | 32 base family × 2 deformation, 64 case, 8 steady-flow condition, 512-member compact cache; CRC/checksum과 family-disjoint 40/12/12 split 확인. Boundary/volume geometry audit V1b/V1c/V1d는 8/8, 8/8, 9/9 | **성능 gate 실패** | V1e boundary model은 matched geometry-only control보다 두 primary metric에서 3/3 seed 우수했지만 worst train/validation/response relative L2가 0.77221/0.87796/0.94918로 등록 기준 0.25/0.35/0.50을 모두 실패했다. Synthetic steady CFD이므로 임상 outcome이나 transient WSS evidence도 아니다. | 새 문제와 fresh version이 별도 admission을 통과할 때 asset sanity/control. 실패한 V1e를 repair하거나 재채점하지 않음 |
+| Aneumo | 32 base family × 2 deformation, 64 case, 8 steady-flow condition, 512-member compact cache; CRC/checksum과 family-disjoint 40/12/12 split 확인. Boundary/volume geometry audit V1b/V1c/V1d는 8/8, 8/8, 9/9 | **geometry-only V1e 성능 gate 실패; response-fidelity P0는 conditional/non-executable** | V1e boundary model은 matched geometry-only control보다 두 primary metric에서 3/3 seed 우수했지만 worst train/validation/response relative L2가 0.77221/0.87796/0.94918로 등록 기준 0.25/0.35/0.50을 모두 실패했다. 새 task는 one-anchor sensitivity sweep이라는 다른 estimand지만 exact current path가 unresolved이고 endpoint stability/matched failure도 미관측이다. | Train-only method-free response-stability P0. 실패한 V1e를 repair하거나 재채점하지 않으며 P0/P1 전 모델을 열지 않음 |
 | BenchAnXplore | Exact archive checksum, 105 geometry × 80 transient velocity frame, HDF5/XDMF, coordinates/connectivity/boundary mask 확인; 해석 가능한 field figure 생성 | **representation-eligible, confirmation에는 사용 불가** | D0/D0b에서 105 case 전체가 architecture discovery에 사용됐다. Train-only POD는 통과했지만 같은 case에서 learned superiority를 확인하면 fresh confirmation이 아니다. Semi-idealized ICA-sidewall velocity이며 verified pressure/WSS contract도 없다. | Compute-matched transient control과 engineering benchmark; 독립 pulsatile test가 있을 때만 confirmatory 보조 |
 | CMHA | 공식 archive 3개의 byte size/MD5, 다섯 CSV, 99 patient/105 lesion, 44 control, 6 multi-lesion group과 extracted patient material 확인 | **asset-linkage gate 실패; exploratory signal negative** | Patient directory 99개, morphology lesion ID 105개, hemodynamic ID 98개가 exact lesion-level image–parent STL–aneurysm STL triplet으로 연결되지 않아 5/9였다. Exploratory hemodynamic increment도 ΔAUPRC −0.04189, patient-bootstrap CI [−0.10834, 0.00664]로 지지되지 않았다. Single-centre cross-sectional rupture state다. | Patient-grouped descriptive/exploratory control. 공식 case map과 fresh task 없이는 primary/outer test 금지 |
-| AneuX v1.0 | 과거 inventory에서 metadata, geometry archive와 extracted copy를 관찰; source는 750 lesion/605 reported patient와 same-lesion multi-resolution/cut orbit을 기술 | **historical P0 no-verdict; fresh conditional direction registered** | 과거 P0가 첫 tabular archive completion 전에 bounded transport를 소진해 CSV, patient/source grouping과 13개 check는 미평가다. 그 job은 no-rerun으로 닫혔다. 별개 schema-11.5 계약은 exact private path/manifest가 아직 null이라 실행 불가다. | Fixed-cut resolution nuisance와 cut-dependent context를 분리한 새 method-free audit. 현재는 source lead/P0 contract일 뿐 train/test assignment가 아님 |
+| AneuX v1.0 | 과거 inventory에서 metadata, geometry archive와 extracted copy를 관찰; source는 750 lesion/605 reported patient와 same-lesion multi-resolution/cut orbit을 기술 | **historical P0 no-verdict; fresh reliability direction source-rejected** | 과거 P0는 첫 tabular archive completion 전에 종료됐다. 별개 schema-11.6 P0 v1/v2는 미실행 상태로 동결됐고, schema 11.7 direct-prior screen에서 residual novelty 2.0/5로 기각됐다. Grouping·surface-validity mismatch는 기록하되 repair/v3를 열지 않는다. | Source-qualified grouping, transformation semantics와 casewise reliability를 향후 다른 task의 평가 safeguard로만 재사용. 현재 source lead/P0/train/test 역할 없음 |
 | AneuG-Flow | 과거 geometry archive와 source lineage를 확인; exact release는 9.63 GB steady + 23.74 GB transient selected pair, broader repository 2.63 TB | **execution-incomplete/no scientific verdict** | Surface-vector P0 `115645`는 aggregate, raw log, persistent probe cache 없이 0/10으로 끝났다. 따라서 field/critical-point/worldline 적합성에 verdict가 없다. Synthetic release이고 direct priors도 강하다. | Material source change 뒤 fresh method-free structure audit 후보. 기존 job repair/rerun 금지 |
 | Aneurisk | Source-native repository와 sample을 조사해 clinical/mesh preview를 생성. 별도 2026 CFD record는 76 geometry, 1.43 GB archive metadata를 확인 | **기존 sample 확인과 새 CFD archive 미확보를 분리** | 새 CFD P0 `115684`는 complete archive/VTP 없이 0/10으로 끝났다. Patient-measured BC가 아니라 population inflow scaling이며 exact vector/phase/extraction contract도 미확인이다. | Geometry/context visualization과 strong baseline source; 새 archive는 fresh version gate 전 active화 금지 |
 
@@ -78,11 +85,12 @@ server holding의 역사적 부재를 뜻하지 않는다.
 - 공개 repo에 추적되는 raw patient/field payload: **0** — 비공개 또는 비재배포 자산과
   동일한 지표가 아님
 - 최근 `introai9` exact-path listing: **미완료/no-verdict**
-- conditional source lead / registered scientific P0 contract: **1/1**
+- conditional source lead / registered non-executable scientific P0: **1/1**
 - executable P0 / submitted PBS job: **0/0**
 - 현재 paper identity에 배정된 active train/validation/test: **0/0/0**
 - active P0/P1/model/GPU/outer test: **0/0/0/0/0**
 
-다음 server 확인은 외부 service 상태가 달라진 뒤, 이 원장에 기록된 exact path와
-expected checksum만 대상으로 하는 bounded read-only inventory여야 한다. Broad recursive
-search나 historical job repair loop는 열지 않는다.
+다음 server 확인은 fresh problem이 source admission을 통과하고 외부 service 상태도
+달라진 뒤에만, 해당 새 계약의 exact path와 expected checksum을 대상으로 하는 bounded
+read-only inventory여야 한다. Broad recursive search나 historical job repair loop는
+열지 않는다.

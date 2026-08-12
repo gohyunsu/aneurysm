@@ -1,5 +1,39 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 response-faithful Aneumo direction · schema 11.8:** Fresh
+> acquired-asset screening admits only
+> `field_error_matched_multi_flow_response_fidelity` at 34.0/40 with residual
+> novelty exactly 2.5/5. It is a CFD sensitivity-sweep application after one
+> nominal same-case solve, not rupture risk, patient-specific physiology, WSS
+> or clinical utility. Primary paper identity, method and architecture remain 0.
+>
+> The verified compact contract is Aneumo 32 generation families × two cases ×
+> eight flows × 4,096 aligned nodes with the historical 20/6/6 family split and
+> cache SHA-256 `9640b0ef…ab9`. Historical unit string `aneux_base_family` is an
+> Aneumo `Connection.csv` lineage key, not the separate AneuX rupture dataset.
+> Active train/validation/test remains 0/0/0 because the current exact private
+> path is unresolved.
+>
+> `configs/aneumo_response_fidelity_p0.json` SHA-256
+> `07c0c89799e04fbee88a1218383aa7b7fd8fc3a5ab8d7bcb15d286195571135f` is a
+> train-only, method-free, CPU-only, non-executable P0. It audits response
+> magnitude/direction/tangent/curvature under node-hash halves and leave-one-
+> interior-flow interpolation. It cannot read pressure, validation/test fields,
+> models, checkpoints or predictions and cannot use a GPU.
+>
+> P0 pass authorizes only registration of a development-only, field-error-
+> matched P1. If P1 does not observe a response-fidelity mismatch, close the
+> direction. Only P0+P1 may open an analytic anchor-scaling plus zero-at-anchor
+> residual hypothesis. GNN, SE(3), DeepONet/FNO, DeltaPhi, derivative losses
+> and boundary tokens are controls/implementation, not novelty. Confirmation
+> requires at least 50 untouched base families locked before field read.
+>
+> This update performs zero scientific-server query, transfer, scheduler/PBS
+> submission and GPU use. Do not retry `introai9` inventory before an external
+> service/admin change. Future authorized execution is `introai9` PBS-only with
+> no login-node GPU. Never access, query, transfer to, submit to or monitor
+> `junjinyong`. Manuscript title/abstract/method/result/figure remain unchanged.
+
 > **2026-08-12 schema 11.7 scientific/private synchronization:** Exact public
 > scientific source `3bad0861aa46a32855e5868811473f45fd0e57f1` passed Quality
 > `31584127030` and Pages `31584126536`. Private paper head

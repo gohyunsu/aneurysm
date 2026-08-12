@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · response-faithful Aneumo direction
+
+- Re-screened acquired assets and admitted one conditional application lead at
+  34.0/40: field-error-matched multi-flow response fidelity. Residual novelty is
+  exactly the 2.5/5 floor; no architecture name contributes to the score.
+- Registered a train-only, CPU-only, non-executable P0 contract and evaluation
+  primitives for response, tangent, curvature, gain and direction. Eight
+  numerical unit tests pass in the dependency-complete environment.
+- Preserved the failed V1e geometry-only result and historical scaling aggregate
+  without repair or recomputation. Validation/test fields, model, GPU, outer
+  test, result and paper claim remain closed.
+- Updated protocol, ISBI four-page claim–evidence plan, dataset/server guidance,
+  beginner documentation and public change history. No scientific server was
+  queried and no data were transferred.
+
 ## 2026-08-12 · Schema 11.7 is scientifically and privately pinned
 
 - Exact scientific source `3bad0861aa46a32855e5868811473f45fd0e57f1`

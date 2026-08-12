@@ -1,5 +1,20 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 response-faithful direction · schema 11.8:** The verified
+> Aneumo compact-cache contract now supports one conditional source lead:
+> **field-error-matched multi-flow response fidelity**, scored 34.0/40 with
+> residual novelty exactly at the 2.5/5 floor. The application is a CFD
+> sensitivity-sweep surrogate given one same-case nominal-flow field—not
+> rupture prediction, patient-specific physiology or a geometry-only CFD
+> replacement. A train-only, method-free [P0 contract](configs/aneumo_response_fidelity_p0.json)
+> is registered to test whether response magnitude, direction, discrete
+> tangent and curvature are stable under node partition and flow-grid
+> perturbation. It is not executable until an external service change and one
+> bounded exact-cache-path preflight on `introai9`. Failure mismatch, method,
+> architecture, GPU, validation/test access, outer test, result and paper claim
+> remain 0. See the [source audit](docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md)
+> and [beginner guide](site/learn.html#response-fidelity).
+
 > **2026-08-12 schema 11.7 scientific/private pin:** Exact scientific source
 > `3bad0861aa46a32855e5868811473f45fd0e57f1` passed Quality
 > `31584127030` and Pages `31584126536`. Private paper ledger

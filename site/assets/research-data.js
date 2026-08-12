@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.7 · AneuX reliability source-rejected before execution at 32.0/40 with residual novelty 2.0/5 below 2.5 · active lead/train/validation/test/P0/P1/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "a fresh application problem over documented holdings must pass every non-compensatory source-admission floor and a method-free observable-failure gate before any split, P0, architecture, GPU, outer test or claim can open; frozen AneuX P0 v2 is not repaired or executed",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · method-free P0 registered/non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Aneumo response fidelity becomes one conditional application lead",
+      copy: "The verified compact contract has 32 Aneumo generation families, two cases per family, eight steady mass flows and 4,096 aligned internal points, split 20/6/6 by family. The task starts from one same-case nominal-flow velocity field and asks whether a surrogate preserves CFD response magnitude, direction, discrete tangent, curvature and family ranking at other flows. It is a sensitivity-sweep accelerator, not rupture prediction or patient-specific physiology. Direct priors already own multi-flow conditioning, response phenotypes, residual learning, derivative-informed operators, inflow-aware aneurysm GNNs and point-cloud flow prediction. The residual score is therefore only 2.5/5, exactly the novelty floor.",
+      status: "Schema 11.8 · 34.0/40 conditional lead · P0 registered/non-executable · failure observed 0 · method/model/GPU/test/claim 0",
+      url: "../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "AneuX reliability closes before execution after a direct-prior and contract audit",
@@ -765,13 +772,21 @@ window.AURORA_DATA = Object.freeze({
   ],
   competition: [
     ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
-    ["Task", "AneuX cross-sectional status; same-lesion resolution/cut views", "Juchler morphology/cut robustness; AneuX PointNet++", "casewise reliability after source-qualified grouping", "useful audit, insufficient standalone novelty"],
-    ["Representation", "resolution nuisance within fixed cut; cut changes context", "DiffusionNet; PointNet++; equivariant surface encoders", "factorized anatomy/context representation", "technically coherent, unselected"],
-    ["Reliability", "probability range, worst-pipeline quality, calibration", "Teng/Zhang perturbation reliability; preprocessing multiverse", "AneuX-specific worst-view reporting", "generic mechanism already occupied"],
-    ["Implementation", "source:patient and source:lesion identities; one open component", "frozen P0 v2", "contract-exact method-free probe", "mismatch recorded; no repair because novelty fails"],
-    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best total 32.0; novelty 2.0", "source-rejected before execution"]
+    ["Task", "one nominal CFD field → velocity fields at seven alternative flows", "Aneumo multi-flow benchmarks; analytic q^α scaling", "field error versus response fidelity", "conditional application lead"],
+    ["Representation", "same-case anchor plus flow ratio and geometry", "DeltaPhi; DeepONet/FNO; aneurysm GNN", "zero-at-anchor response factorization", "hypothesis only; unselected"],
+    ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO", "matched-field-error structural mismatch", "not yet observed"],
+    ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "registered; non-executable"],
+    ["Confirmation", "≥50 untouched base families locked before field read", "current compact test has six families", "source-anatomy generalization", "closed until P0/P1 pass"],
+    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 34.0; novelty 2.5", "P0 only; no method or claim"]
   ],
   gates: [
+    {
+      id: "P0-RF",
+      title: "Are multi-flow velocity-response endpoints stable before any model is trained?",
+      copy: "The registered P0 reads only 20 historical Aneumo train families, coordinates and velocity. It checks exact alignment, deterministic coordinate-hash halves, leave-one-interior-flow interpolation, response magnitude/direction and discrete tangent/curvature with family-cluster bootstrap. Pressure, validation/test fields, checkpoints and predictions are forbidden. The current exact private cache path is unresolved, so the contract is deliberately non-executable.",
+      state: "Conditional lead · P0 registered/non-executable · 0 scientific checks · no server query/PBS/GPU/model/test/claim",
+      blocking: true
+    },
     {
       id: "S-AX",
       title: "Does AneuX same-lesion reliability leave an independent ISBI application gap?",
@@ -935,6 +950,11 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   datasets: [
+    {
+      name: "Aneumo verified compact response holding · schema 11.8",
+      role: "conditional source for a train-only method-free response-stability P0; not yet an active paper split",
+      provenance: "32 generation families × 2 cases × 8 mass flows × 4,096 aligned nodes · frozen 20/6/6 family split · cache SHA-256 9640b0ef…ab9 · historical q^1.075 response residual 0.2112 [0.2001, 0.2243] · exact current introai9 path unresolved · active train/validation/test 0/0/0 · pressure/test/model/GPU read 0"
+    },
     {
       name: "AURORA historical holdings state ledger · schema 11.5",
       role: "authoritative separation of material history, current persistence, scientific admissibility and active split assignment",
@@ -1267,6 +1287,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "research",
+      title: "Schema 11.8 admits response-faithful multi-flow surrogation to a method-free P0 only",
+      copy: "A fresh acquired-asset screen gives field-error-matched multi-flow response fidelity 34.0/40, with residual novelty exactly at the 2.5/5 floor. The verified Aneumo compact contract has 32 generation families, 64 cases, eight flows and 4,096 aligned nodes. The proposed application accelerates a CFD sensitivity sweep after one nominal solve; it is not rupture prediction or patient-specific physiology. A train-only P0 now checks response endpoints under deterministic node halves and leave-one-flow interpolation. Its exact private path is unresolved, so it is non-executable. Failure mismatch, method, architecture, GPU, validation/test, outer test and claim remain closed. No scientific server was queried.",
+      files: ["docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "configs/aneumo_response_fidelity_p0.json", "src/aurora/response_fidelity.py", "tests/test_response_fidelity.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/isbi-2027-plan.md", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

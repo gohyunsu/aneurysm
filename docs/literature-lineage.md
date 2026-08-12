@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.8 lineage boundary:** Aneumo는 multi-flow conditioning과 DeepONet/
+> Swin controls를, Cebral et al.은 multi-inflow response variables를, DeltaPhi는
+> nearby-state residual learning을, DINO/DIFNO는 derivative-informed operator
+> learning을, 2026 aneurysm GNN과 PointFlowNet은 inflow-aware/geometry-aware field
+> surrogation을 이미 점유한다. 따라서 GNN·operator·residual·derivative loss의
+> 조합은 novelty가 아니다. 남는 conditional gap은 *field-error-matched aneurysm
+> surrogates가 CFD response organization을 보존하는지*를 독립적으로 평가하고,
+> 관측된 failure에 최소한으로 대응하는 것이다. 상세 DOI와 falsifier는
+> [source audit](response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md)에 고정한다.
+
 > **Schema 11.7 direct-prior verdict:** The residual AneuX reliability gap is
 > too narrow for an active ISBI identity. Juchler et al. already evaluate
 > morphology and cut robustness; AneuX PointNet++ compares dome and cut1;

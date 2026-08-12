@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.7":
-        raise ProtocolError("The current research-state schema must be version 11.7.")
+    if protocol["schema_version"] != "11.8":
+        raise ProtocolError("The current research-state schema must be version 11.8.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "all_current_candidates_source_rejected_no_active_lead_p0_method_gpu_outer_test_or_claim"
+        != "one_conditional_response_fidelity_source_lead_with_non_executable_method_free_p0_no_method_gpu_outer_test_or_claim"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -190,6 +190,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "dataset_asset_state_ledger",
             "acquired_asset_application_direction",
             "aneux_reliability_direct_prior_reappraisal",
+            "aneumo_response_fidelity_source_audit",
             "open_clinical_outcome_and_target_time_reappraisal",
             "mechanistic_treatment_and_growth_asset_reappraisal",
             "introai9_dataset_inventory_audit",
@@ -299,15 +300,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "all_current_candidates_source_rejected_no_active_lead_primary_p0_method_gpu_outer_test_or_claim"
-        or problem_selection["shortlisted_candidate"] is not None
-        or problem_selection["conditional_source_lead_count"] != 0
-        or problem_selection["candidate_dataset"] is not None
-        or problem_selection["candidate_estimand"] is not None
+        != "one_conditional_source_lead_and_registered_non_executable_method_free_p0_no_primary_method_gpu_outer_test_or_claim"
+        or problem_selection["shortlisted_candidate"]
+        != "field_error_matched_multi_flow_response_fidelity"
+        or problem_selection["conditional_source_lead_count"] != 1
+        or problem_selection["candidate_dataset"] != "aneumo_verified_compact_cache"
+        or problem_selection["candidate_estimand"]
+        != "reference_velocity_multi_flow_response_fidelity_not_clinical_outcome"
         or problem_selection["asset_access_status"]
-        != "six_historical_holding_records_with_heterogeneous_payload_evidence_current_introai9_listing_incomplete_active_assignment_zero"
+        != "verified_historical_aneumo_compact_cache_contract_but_current_introai9_exact_private_path_unresolved_active_assignment_zero"
         or problem_selection["user_accepted_data_terms_verified"] is not False
-        or problem_selection["task_unit_audited"] is not False
+        or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not False
         or problem_selection["coarsening_at_random_assumed"] is not False
         or problem_selection["method_selected"] is not False
@@ -315,18 +318,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_audit_over_documented_assets_only_no_aneux_p0_v2_repair_payload_compute_or_claim"
+        != "after_external_service_change_run_one_bounded_exact_aneumo_cache_path_checksum_preflight_then_cpu_only_method_free_p0_no_model_gpu_or_test"
         or problem_selection["audit_document"]
-        != "docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md"
+        != "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "aneux_factorized_nested_preprocessing_orbit_reliability_rejected_pre_execution_at_32_residual_novelty_2_below_2_5_floor"
-        or problem_selection["most_recent_conditional_source_lead"] is not None
+        or problem_selection["most_recent_conditional_source_lead"]
+        != "field_error_matched_multi_flow_response_fidelity_method_free_p0_only"
     ):
         raise ProtocolError(
-            "No active lead may remain after the AneuX direct-prior reappraisal; "
-            "historical holdings do not authorize a P0, method, GPU, outer test, or claim."
+            "The sole response-fidelity source lead may authorize only its registered "
+            "non-executable method-free P0, never a primary method, GPU, test, or claim."
         )
     admission_v2 = problem_selection["future_source_admission_v2"]
     _require_keys(
@@ -386,9 +390,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 32.0
-        or admission_v2["current_batch_best_residual_novelty"] != 2.0
-        or admission_v2["current_batch_admitted_count"] != 0
+        or admission_v2["current_batch_best_score"] != 34.0
+        or admission_v2["current_batch_best_residual_novelty"] != 2.5
+        or admission_v2["current_batch_admitted_count"] != 1
     ):
         raise ProtocolError(
             "Future source admission v2 must remain prospective and non-compensatory: "
@@ -748,7 +752,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or asset_ledger["blanket_dataset_rejection_claim_allowed"] is not False
         or asset_ledger[
             "registered_scientific_p0_pending_execution_envelope_count"
-        ] != 0
+        ] != 1
         or any(
             asset_ledger[key] != 0
             for key in (
@@ -1032,6 +1036,167 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ):
             raise ProtocolError("A frozen AneuX P0 contract changed after rejection.")
     checks.append("AneuX reliability direct-prior rejection and frozen-contract boundary")
+
+    response_fidelity = problem_selection["aneumo_response_fidelity_source_audit"]
+    _require_keys(
+        response_fidelity,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "residual_novelty_floor", "best_candidate_id", "best_score",
+            "best_residual_novelty_score", "all_candidate_scores",
+            "conditional_source_lead_count", "candidate_dataset",
+            "candidate_estimand", "application_identity",
+            "candidate_failure_mechanism", "candidate_failure_observed",
+            "dataset_cache_sha256", "staging_config", "staging_config_sha256",
+            "historical_scaling_result", "historical_scaling_result_sha256",
+            "historical_scaling_result_recomputed", "historical_scaling_exponent",
+            "historical_velocity_response_residual",
+            "historical_velocity_response_ci95", "compact_base_families",
+            "compact_cases", "conditions_per_case", "nodes_per_case",
+            "train_validation_test_base_families",
+            "current_confirmation_family_count",
+            "required_locked_confirmation_family_count",
+            "validation_or_test_fields_read_for_this_audit",
+            "v1e_absolute_train_relative_l2",
+            "v1e_absolute_validation_relative_l2", "v1e_response_relative_l2",
+            "v1e_repaired_or_rerun", "direct_prior_identifiers",
+            "non_novel_components", "primary_response_endpoints",
+            "secondary_response_endpoints", "p0_config", "p0_config_sha256",
+            "p0_scientific_contract_registered", "p0_status", "p0_method_free",
+            "p0_train_only", "p0_exact_private_cache_path_frozen",
+            "p0_execution_envelope_frozen", "p0_executable", "p0_submitted",
+            "p0_scientific_checks_evaluated", "p1_registered",
+            "p1_requires_field_error_matched_response_mismatch",
+            "candidate_architecture_status", "candidate_architecture",
+            "primary_problem_selected", "method_selected",
+            "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "paper_claim_active", "submission_identity_active",
+            "clinical_risk_or_patient_specific_physiology_claim_allowed",
+            "execution_server", "pbs_only", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "candidates", "next_allowed_action",
+        ],
+        "Aneumo response-fidelity source audit",
+    )
+    expected_response_candidates = [
+        ("field_error_matched_multi_flow_response_fidelity", 34.0, True),
+        ("generic_anchor_state_residual_operator", 31.5, False),
+        ("derivative_informed_aneurysm_operator", 31.0, False),
+        ("multi_flow_condition_diversity_benchmark", 29.0, False),
+        ("geometry_only_full_field_reentry", 28.0, False),
+        ("multi_flow_rupture_response_phenotype", 22.0, False),
+    ]
+    expected_response_priors = [
+        "arxiv:2505.14717",
+        "pmid:32008209",
+        "neurips_2025_deltaphi",
+        "doi:10.1016/j.jcp.2023.112555",
+        "arxiv:2512.14086",
+        "doi:10.1038/s41746-026-02404-z",
+        "doi:10.1016/j.cmpb.2026.109308",
+        "pmid:30203115",
+    ]
+    if (
+        response_fidelity["status"]
+        != "conditional_source_lead_with_registered_non_executable_method_free_p0_no_primary_method_or_claim"
+        or response_fidelity["audit_document"]
+        != "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md"
+        or response_fidelity["automatic_selection_threshold"] != 32.0
+        or response_fidelity["residual_novelty_floor"] != 2.5
+        or response_fidelity["best_candidate_id"]
+        != "field_error_matched_multi_flow_response_fidelity"
+        or response_fidelity["best_score"] != 34.0
+        or response_fidelity["best_residual_novelty_score"] != 2.5
+        or response_fidelity["all_candidate_scores"]
+        != [34.0, 31.5, 31.0, 29.0, 28.0, 22.0]
+        or response_fidelity["conditional_source_lead_count"] != 1
+        or response_fidelity["candidate_dataset"] != "aneumo_verified_compact_cache"
+        or response_fidelity["candidate_estimand"]
+        != "reference_velocity_multi_flow_response_fidelity_not_clinical_outcome"
+        or response_fidelity["dataset_cache_sha256"]
+        != "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
+        or response_fidelity["staging_config"] != "configs/aneumo_g2_pilot_v1.json"
+        or response_fidelity["staging_config_sha256"]
+        != "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d"
+        or response_fidelity["historical_scaling_result"]
+        != "results/aneumo_scaling_audit_20260803.json"
+        or response_fidelity["historical_scaling_result_sha256"]
+        != "d1b8bfba9b904264d4e495d98b833a6f639b6438869e854a7c07ab88269562ca"
+        or response_fidelity["historical_scaling_exponent"] != 1.075
+        or response_fidelity["historical_velocity_response_residual"]
+        != 0.21116332234297996
+        or response_fidelity["historical_velocity_response_ci95"]
+        != [0.20013078657046568, 0.22433041263796377]
+        or [
+            response_fidelity["compact_base_families"],
+            response_fidelity["compact_cases"],
+            response_fidelity["conditions_per_case"],
+            response_fidelity["nodes_per_case"],
+        ] != [32, 64, 8, 4096]
+        or response_fidelity["train_validation_test_base_families"] != [20, 6, 6]
+        or response_fidelity["current_confirmation_family_count"] != 6
+        or response_fidelity["required_locked_confirmation_family_count"] != 50
+        or [
+            response_fidelity["v1e_absolute_train_relative_l2"],
+            response_fidelity["v1e_absolute_validation_relative_l2"],
+            response_fidelity["v1e_response_relative_l2"],
+        ] != [0.77221, 0.87796, 0.94918]
+        or response_fidelity["direct_prior_identifiers"] != expected_response_priors
+        or response_fidelity["primary_response_endpoints"]
+        != ["paired_response_relative_l2", "discrete_tangent_relative_l2"]
+        or response_fidelity["p0_config"]
+        != "configs/aneumo_response_fidelity_p0.json"
+        or response_fidelity["p0_config_sha256"]
+        != "07c0c89799e04fbee88a1218383aa7b7fd8fc3a5ab8d7bcb15d286195571135f"
+        or response_fidelity["p0_status"]
+        != "registered_non_executable_pending_external_service_change_and_exact_private_cache_path"
+        or response_fidelity["candidate_architecture_status"]
+        != "mechanism_linked_hypothesis_only_unselected"
+        or response_fidelity["execution_server"] != "introai9"
+        or response_fidelity["pbs_only"] is not True
+        or response_fidelity["p0_scientific_checks_evaluated"] != 0
+        or [
+            (row.get("id"), row.get("total"), row.get("critical_axis_pass"))
+            for row in response_fidelity["candidates"]
+        ] != expected_response_candidates
+        or any(
+            response_fidelity[key] is not True
+            for key in (
+                "p0_scientific_contract_registered", "p0_method_free",
+                "p0_train_only", "p1_requires_field_error_matched_response_mismatch",
+            )
+        )
+        or any(
+            response_fidelity[key] is not False
+            for key in (
+                "candidate_failure_observed", "historical_scaling_result_recomputed",
+                "validation_or_test_fields_read_for_this_audit",
+                "v1e_repaired_or_rerun", "p0_exact_private_cache_path_frozen",
+                "p0_execution_envelope_frozen", "p0_executable", "p0_submitted",
+                "p1_registered", "primary_problem_selected", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "paper_claim_active", "submission_identity_active",
+                "clinical_risk_or_patient_specific_physiology_claim_allowed",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or response_fidelity["next_allowed_action"]
+        != "after_external_service_change_run_one_bounded_exact_cache_path_checksum_preflight_then_cpu_only_method_free_p0_no_model_gpu_validation_test_or_claim"
+    ):
+        raise ProtocolError(
+            "The Aneumo response-fidelity direction must remain a conditional source "
+            "lead with a method-free, train-only, non-executable P0; direct-prior "
+            "components, architecture, GPU, validation/test, and paper claims stay closed."
+        )
+    response_p0_path = Path(__file__).resolve().parents[2] / response_fidelity["p0_config"]
+    if (
+        not response_p0_path.is_file()
+        or hashlib.sha256(response_p0_path.read_bytes()).hexdigest()
+        != response_fidelity["p0_config_sha256"]
+    ):
+        raise ProtocolError("The registered Aneumo response-fidelity P0 contract changed.")
+    checks.append("Aneumo response-fidelity conditional lead and fail-closed P0 boundary")
 
     collision = problem_selection[
         "endovascular_collision_anticipation_and_release_reappraisal"

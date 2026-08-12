@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.8:** 이번 방향 검토와 등록에서 scientific-server query, transfer,
+> scheduler query, PBS submission과 GPU 사용은 모두 0이다. Response-fidelity P0는
+> `introai9` PBS/CPU 4/GPU 0 계약이지만 external service change와 exact private
+> path 확인 전에는 실행할 수 없다. Login-node GPU는 금지하며 `junjinyong`에는
+> 접속·조회·전송·제출·모니터링을 절대 하지 않는다. 동일 inventory/contract의
+> local repair 또는 반복 retry도 금지한다.
+
 > **Schema 11.7 no-execution boundary:** The AneuX reliability candidate is
 > source-rejected, so the external-service-change preflight and P0 v2 execution
 > are cancelled. This update queried no scientific server, transferred no

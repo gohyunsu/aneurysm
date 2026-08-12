@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="가이드 탐색">
       <a href="index.html">Research hub</a>
+      <a href="#response-fidelity">Response fidelity</a>
       <a href="#open-clinical-target-time">Open table &amp; target time</a>
       <a href="#mechanistic-outcome-join">Mechanics &amp; outcome join</a>
       <a href="#collision-anticipation">Collision anticipation</a>
@@ -90,23 +91,89 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 11.7</span>
-          <strong>확보·감사한 자산은 있지만, 현재 채택된 연구 주제는 없습니다. AneuX 후보는 실행 전에 기각했습니다.</strong>
+          <span>짧은 답 · schema 11.8</span>
+          <strong>확보한 Aneumo 자산에서 하나의 조건부 연구 방향을 찾았지만, 아직 모델이나 논문 주장을 승인한 것은 아닙니다.</strong>
           <p>
-            Aneumo, BenchAnXplore, CMHA, AneuX, AneuG-Flow와 Aneurisk에는 실제
-            archive, compact cache, transient field, 임상표 또는 extracted sample을
-            확인한 이력이 있습니다. Public repository의 <code>data/</code>에 raw
-            payload가 없다는 사실은 비공개 server holding이 역사적으로 없었다는
-            뜻이 아닙니다. 다만 AneuX nested-orbit reliability는 fresh total
-            32.0/40에도 residual novelty가 2.0/5로 최소 2.5에 못 미쳤습니다.
-            직접 선행 검토 뒤 conditional lead와 pending P0를 0으로 되돌렸고,
-            prospective train/validation/test 역할도 0/0/0입니다.
-            Introai9는 두
-            endpoint의 TCP/22와 한 endpoint의 public-key 인증까지 확인했지만
-            shell/SFTP listing이 모두 timeout되어 current server inventory도
-            incomplete/no-verdict입니다. 과거 확보 이력, 현재 persistence,
-            과학적 task 적합성과 active assignment를 서로 대신하지 않습니다.
+            Aneumo compact holding은 32 generation family, 64 case, case당 8개
+            유량과 4,096 aligned node를 갖습니다. 한 nominal-flow CFD field가 주어진
+            뒤 다른 유량의 velocity response를 예측하는 sensitivity-sweep 문제를
+            34.0/40 조건부 lead로 채택했습니다. 그러나 novelty는 정확히 2.5/5
+            하한선이고, field accuracy가 response를 실제로 망친다는 failure도 아직
+            관측하지 않았습니다. 그래서 train-only method-free P0만 등록했으며 exact
+            private path가 unresolved라 실행할 수 없습니다. Active split, method,
+            architecture, GPU, outer test, result와 claim은 모두 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="response-fidelity">
+          <span>현재 조건부 방향 · RESPONSE-FAITHFUL MULTI-FLOW SURROGATION</span>
+          <strong>평균 field error가 작다는 사실은 유량 변화에 대한 CFD 반응을 올바르게 보존한다는 뜻이 아닙니다.</strong>
+          <p>
+            CFD는 혈관 안의 속도와 압력을 수치적으로 풉니다. 유입 유량
+            <code>q</code>를 바꾸면 같은 혈관에서도 전체 속도장이 달라집니다.
+            일반 surrogate는 각 조건의 예측 field와 정답 field 사이의 평균 오차를
+            줄입니다. 하지만 임상·공학 사용자는 “유량이 늘 때 어느 영역이 얼마나,
+            어느 방향으로 민감하게 변하는가”라는 <b>response</b>를 알고 싶을 수
+            있습니다. 두 모델의 field error가 비슷해도 한 모델은 이 변화량과
+            변화 방향을 더 잘못 표현할 수 있습니다.
+          </p>
+          <p>
+            새 task는 geometry만 보고 CFD 전체를 대신하지 않습니다. 같은 case의
+            nominal flow <code>q0=0.0025 kg/s</code>에서 계산한 velocity field를
+            anchor로 받고, 나머지 일곱 유량의 field를 빠르게 예측합니다. 따라서
+            현실적인 사용 장면은 “한 번의 reference CFD 뒤 여러 inflow 가정을
+            sweep하는 비용을 줄이는 것”입니다. 현재 데이터에는 환자별로 측정한
+            inflow나 rupture outcome이 없으므로 patient-specific physiology나
+            rupture risk라고 부르지 않습니다.
+          </p>
+          <div class="large-equation">
+            response(q) = v(x,q) − v(x,q0)
+          </div>
+          <p>
+            Primary endpoint는 paired-response relative L2와 flow에 대한 discrete
+            tangent error입니다. Secondary endpoint는 response gain, vector direction,
+            discrete curvature와 family response-energy ranking입니다. Node나 flow를
+            독립 표본처럼 세지 않고, Aneumo generation family를 bootstrap 단위로
+            사용합니다. 기존 config의 <code>aneux_base_family</code>라는 이름은
+            Aneumo <code>Connection.csv</code> lineage key이며 별도 AneuX rupture
+            dataset을 뜻하지 않습니다.
+          </p>
+          <p>
+            첫 P0는 모델을 전혀 학습하지 않습니다. 20개 train family에서 좌표
+            SHA-256 hash로 node를 두 절반으로 나눴을 때 response summary가 일치하는지,
+            interior flow 하나를 뺀 보간에서도 tangent와 direction이 안정적인지,
+            여덟 유량 grid가 curvature를 해상할 수 있는지를 검사합니다. Pressure,
+            validation/test field, checkpoint, prediction과 GPU는 읽지 않습니다.
+          </p>
+          <p>
+            P0가 통과해도 바로 fancy model을 만들지 않습니다. P1에서 analytic
+            power-law scaling, linear interpolation, conditional MLP, DeepONet,
+            DeltaPhi, MeshGraphNet과 과거 V1e를 동일 development 조건으로 비교하고,
+            field error가 비슷한 모델 사이에 response fidelity 차이가 실제로 있는지
+            봅니다. 차이가 없으면 이 논문 identity는 닫습니다.
+          </p>
+          <p>
+            차이가 관측될 때만 최소 hypothesis를 엽니다. Analytic
+            <code>(q/q0)^α v0</code>를 강한 baseline으로 보존하고, anchor에서는 정확히
+            0이 되는 learned residual만 더합니다. SE(3) GNN, boundary token,
+            continuous query, derivative loss는 구현 선택 또는 direct control이지
+            novelty가 아닙니다. Contribution은 관측된 failure와 그 failure를 고치는
+            최소 factorization, 그리고 field accuracy를 희생하지 않는 confirmation에
+            있어야 합니다.
+          </p>
+          <p>
+            현재 compact test는 6 family뿐이라 최종 주장을 지지하기에 약합니다.
+            P0와 P1이 통과한 경우에만 official metadata로 최소 50개 untouched base
+            family를 field read 전에 잠그고 confirmation을 수행합니다. ISBI 표에는
+            field non-inferiority와 두 primary response endpoint를 함께 제시하며,
+            reference/baseline/proposal을 동일 좌표와 색상 범위로 시각화합니다.
+          </p>
+          <p>
+            현재 상태는 34.0/40 conditional lead, novelty 2.5/5, failure observed 0,
+            P0 registered/non-executable입니다. External service change가 확인되기
+            전에는 <code>introai9</code> inventory를 재시도하지 않으며,
+            <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
+          </p>
+          <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">직접 선행·six-way score·P0/P1·ISBI claim 삭제 규칙 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">
           <span>왜 괜찮아 보이는 AneuX 아이디어를 실행하지 않았나?</span>

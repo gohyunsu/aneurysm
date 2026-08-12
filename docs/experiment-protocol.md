@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.8 prospective order:** (1) existing 20 train base families에서
+> method-free endpoint stability P0, (2) development-only field-selected strong
+> baselines 사이의 response-fidelity mismatch P1, (3) 통과 시에만 bounded model
+> development, (4) metadata-only로 먼저 잠근 ≥50 untouched Aneumo base families의
+> confirmation 순서다. Primary endpoints는 paired-response relative L2와 discrete
+> tangent relative L2이며 family-cluster bootstrap과 5 seeds를 사용한다. Field
+> relative L2 non-inferiority도 동시에 만족해야 한다. 현재 P0는 exact private
+> cache path가 unresolved라 non-executable이고 validation/test/model/GPU read는 0이다.
+
 > **Schema 11.7 current gate: no executable experiment.** The AneuX direct-
 > prior reappraisal rejects all six formulations; best 32.0/40 fails the
 > residual-novelty floor at 2.0/5. P0 v1/v2 remain frozen, unexecuted records.

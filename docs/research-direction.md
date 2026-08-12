@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **Current schema 11.8:** 유일한 conditional source lead는 Aneumo의
+> **response-faithful multi-flow haemodynamic surrogation**이다. 하나의 same-case
+> nominal field 이후의 CFD sensitivity sweep을 빠르게 근사하되, field MSE뿐
+> 아니라 response magnitude/direction/discrete tangent/curvature/case ranking을
+> 보존하는지를 묻는다. 34.0/40, novelty 2.5/5이며 아직 paper identity나 selected
+> model이 아니다. Method-free P0 stability와 field-error-matched P1 failure가
+> 순서대로 통과할 때만 최소 factorized model을 연다. Rupture risk, clinical
+> utility, patient-specific inflow와 WSS claim은 현재 자산으로 금지한다.
+
 > **Schema 11.7 decision:** AneuX nested-orbit reliability is source-rejected
 > before execution. Its prior 33.0/40 screen remains history; the fresh score is
 > 32.0/40 with residual novelty 2.0/5, below the non-compensatory 2.5 floor.

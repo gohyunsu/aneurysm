@@ -1,0 +1,96 @@
+{
+  "schema_version": "aurora.aneumo_response_fidelity_p0.v1",
+  "protocol_id": "aneumo_response_fidelity_method_free_p0_v1",
+  "status": "registered_non_executable_pending_external_service_change_and_exact_private_cache_path",
+  "as_of": "2026-08-12",
+  "source_audit": "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md",
+  "source": {
+    "dataset": "Aneumo",
+    "holding_role": "existing_verified_compact_cache_only",
+    "cache_sha256": "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9",
+    "staging_config": "configs/aneumo_g2_pilot_v1.json",
+    "staging_config_sha256": "f2b027c5f14107531ac1ae33eafab76513bcbdf49ad908c9a35641ae80181b7d",
+    "historical_scaling_result": "results/aneumo_scaling_audit_20260803.json",
+    "historical_scaling_result_sha256": "d1b8bfba9b904264d4e495d98b833a6f639b6438869e854a7c07ab88269562ca",
+    "historical_scaling_result_recomputed": false,
+    "exact_private_cache_path": null,
+    "external_service_state_changed_since_incomplete_inventory": false,
+    "allowed_split": "train",
+    "expected_base_families": 20,
+    "expected_cases": 40,
+    "expected_deformations_per_family": 2,
+    "expected_conditions": 8,
+    "expected_nodes_per_case": 4096,
+    "allowed_datasets": ["coordinates_m", "pressure_velocity_velocity_channels_only"],
+    "pressure_read_allowed": false,
+    "validation_or_test_field_read_allowed": false
+  },
+  "task": {
+    "anchor_mass_flow_kg_s": 0.0025,
+    "mass_flows_kg_s": [0.001, 0.0015, 0.002, 0.0025, 0.003, 0.0035, 0.00375, 0.004],
+    "estimand": "stability_and_grid_resolution_of_reference_velocity_response_endpoints_before_any_surrogate",
+    "independent_unit": "aneux_base_family",
+    "case_flow_or_node_as_independent_unit": false,
+    "clinical_or_rupture_target": false
+  },
+  "response_endpoints": {
+    "primary": [
+      "paired_response_relative_l2",
+      "discrete_tangent_relative_l2"
+    ],
+    "secondary": [
+      "gain_absolute_error",
+      "direction_cosine_error",
+      "discrete_curvature_relative_l2",
+      "family_response_energy_rank_correlation"
+    ],
+    "node_partition": "sha256_of_little_endian_float64_coordinates_mod_2",
+    "flow_grid_audit": "leave_one_interior_flow_linear_interpolation",
+    "thresholds_are_engineering_adequacy_not_clinical_harm_thresholds": true
+  },
+  "gate": {
+    "rule": "all_registered_checks",
+    "checks": [
+      "pinned_cache_and_dependency_hashes",
+      "train_only_twenty_family_forty_case_contract",
+      "eight_registered_flows_and_anchor_present_once",
+      "coordinates_and_velocity_finite_and_aligned",
+      "historical_velocity_response_nontriviality_dependency_exact",
+      "coordinate_half_response_descriptor_spearman_ci95_lower_at_least_0_80",
+      "leave_one_flow_tangent_direction_agreement_ci95_lower_at_least_0_80",
+      "leave_one_flow_relative_interpolation_error_ci95_upper_at_most_0_35",
+      "family_cluster_bootstrap_only",
+      "no_pressure_validation_test_model_checkpoint_prediction_or_gpu_read"
+    ],
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 20260812,
+    "confidence": 0.95,
+    "pass_authorizes": "register_baseline_only_field_error_matched_p1_on_development_families",
+    "pass_does_not_authorize": [
+      "select_method_or_architecture",
+      "gpu_training",
+      "validation_or_test_field_access",
+      "outer_test",
+      "paper_claim",
+      "clinical_interpretation"
+    ],
+    "failure_action": "close_exact_response_fidelity_p0_without_threshold_parser_split_or_source_repair",
+    "local_repair_allowed": false
+  },
+  "execution": {
+    "server": "introai9",
+    "pbs_only": true,
+    "queue": "coss_agpu",
+    "cpu": 4,
+    "memory_gb": 16,
+    "gpu": 0,
+    "network": false,
+    "login_node_gpu_command_allowed": false,
+    "junjinyong_allowed": false,
+    "execution_envelope_frozen": false,
+    "executable": false,
+    "submitted": false,
+    "job_id": null,
+    "scientific_checks_evaluated": 0
+  }
+}
