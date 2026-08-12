@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-13 residual-novelty synchronization:** Exact scientific source
+> `1cdc360170739894dde6bd71508ade76ed7fb90e` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31621343028)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31621342151).
+> Full regression passes 570/570 and the protocol retains 112 invariant groups
+> at `76dfe06a…2983fde4`. The private planning ledger is synchronized without
+> changing manuscript or reference bytes. This provenance opens no experiment,
+> model, result or paper claim.
+
 > **2026-08-13 residual-novelty audit:** A fresh primary-source collision
 > screen retains the Aneumo response-fidelity direction only as a **32.5/40
 > conditional application lead**. NeurIPS 2024 already owns interventionally

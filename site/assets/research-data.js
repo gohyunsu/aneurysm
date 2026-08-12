@@ -44,8 +44,8 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "Fresh direct priors narrow the lead to one application-specific conjunction",
-      copy: "NeurIPS 2024 already formalizes interventionally consistent surrogates and shows conventional surrogates can misjudge intervention effects. SC-FNO owns solution-versus-sensitivity accuracy, while a 2026 six-case aneurysm study already predicts normal-versus-dilated WSS, OSI and pressure. The remaining claim is therefore only an Aneumo-specific field-error-matched spatial response failure, an isolated same-backbone identity-at-anchor mechanism, superiority to learned direct and analytic scaling, and 100-new-family confirmation. A fresh acquired-asset screen lowers the lead from historical 34.0 to 32.5/40; novelty stays exactly at 2.5/5.",
-      status: "Conditional source lead only · real P0 0/11 · active split/method/model/server/PBS/GPU/outer test/result/claim 0",
+      copy: "NeurIPS 2024 already formalizes interventionally consistent surrogates and shows conventional surrogates can misjudge intervention effects. SC-FNO owns solution-versus-sensitivity accuracy, while a 2026 six-case aneurysm study already predicts normal-versus-dilated WSS, OSI and pressure. The remaining claim is therefore only an Aneumo-specific field-error-matched spatial response failure, an isolated same-backbone identity-at-anchor mechanism, superiority to learned direct and analytic scaling, and 100-new-family confirmation. A fresh acquired-asset screen lowers the lead from historical 34.0 to 32.5/40; novelty stays exactly at 2.5/5. Exact science 1cdc360… passed Quality 31621343028 and Pages 31621342151; full regression passes 570/570 with 112 protocol invariants.",
+      status: "Public CI/Pages success · conditional source lead only · real P0 0/11 · active split/method/model/server/PBS/GPU/outer test/result/claim 0",
       url: "../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md"
     },
     {

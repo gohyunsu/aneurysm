@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 residual-novelty scientific synchronization:** Exact scientific
+> public source `1cdc360170739894dde6bd71508ade76ed7fb90e` passed Quality
+> `31621343028` and Pages `31621342151`. Dependency-complete regression passes
+> 570/570; the machine protocol retains 112 invariant groups at canonical
+> SHA-256 `76dfe06a0c05130e68dd2c47a07c0db5dad4cbfa0462c57e195c05ed2983fde4`.
+> The separate private planning ledger is synchronized while manuscript and
+> reference bytes remain unchanged. This provenance opens no P0/P1, method,
+> model, server, PBS/GPU, outer test, result or claim. No scientific server was
+> queried. Do not retry `introai9` before verified external change; never
+> access `junjinyong`.
+
 > **2026-08-13 residual-novelty audit:** Fresh acquired-asset/direct-prior
 > review lowers the Aneumo response-fidelity lead from historical 34.0 to
 > 32.5/40; novelty remains exactly 2.5/5. General interventional consistency and
