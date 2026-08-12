@@ -1,9 +1,9 @@
 {
-  "schema_version": "11.5",
+  "schema_version": "11.6",
   "project": {
     "name": "AURORA",
     "expanded_name": "Aneurysm Uncertainty-aware Reconstruction Operator for Reliable Assessment",
-    "status": "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending_no_method_gpu_outer_test_or_claim",
+    "status": "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution_no_method_gpu_outer_test_or_claim",
     "as_of": "2026-08-12",
     "clinical_use": false,
     "execution_server": "introai9",
@@ -14,7 +14,7 @@
     "first_future_gpu_action": "scheduler_allocated_runtime_smoke_after_a_fresh_candidate_gate_authorizes_gpu"
   },
   "problem_selection": {
-    "status": "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending_no_primary_method_gpu_outer_test_or_claim",
+    "status": "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution_no_primary_method_gpu_outer_test_or_claim",
     "shortlisted_candidate": "aneux_factorized_nested_preprocessing_orbit_reliability",
     "conditional_source_lead_count": 1,
     "candidate_dataset": "aneux_v1_0_private_holding_pending_exact_path_reconfirmation",
@@ -28,7 +28,7 @@
     "gpu_training_authorized": false,
     "outer_test_authorized": false,
     "submission_identity_active": false,
-    "next_allowed_action": "freeze_exact_private_aneux_path_and_manifest_after_one_bounded_read_only_introai9_inventory_then_submit_the_preregistered_cpu_only_p0_no_network_method_gpu_or_outer_test",
+    "next_allowed_action": "after_external_service_change_freeze_exact_private_aneux_path_manifest_and_reader_preflight_then_freeze_one_cpu_only_p0_v2_execution_envelope_no_network_method_gpu_or_outer_test",
     "audit_document": "docs/acquired-asset-application-direction-2026-08-12.md",
     "future_source_admission_v2": {
       "status": "prospective_noncompensatory_gate_active_for_fresh_candidates_only",
@@ -301,7 +301,7 @@
       "next_allowed_action": "after_external_service_change_run_bounded_read_only_exact_path_checksum_inventory_then_continue_fresh_problem_asset_admission_without_repairing_closed_jobs"
     },
     "acquired_asset_application_direction": {
-      "status": "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending",
+      "status": "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution",
       "audit_document": "docs/acquired-asset-application-direction-2026-08-12.md",
       "automatic_selection_threshold": 32.0,
       "best_candidate_id": "aneux_factorized_nested_preprocessing_orbit_reliability",
@@ -323,8 +323,15 @@
       "mesh_resolutions": 3,
       "cut_configurations": 4,
       "morphometric_features": 170,
-      "p0_config": "configs/aneux_nested_orbit_p0.json",
-      "p0_config_sha256": "b82e3606ea76697dbdc44973a287538a436fe330c25edcd8bf9f113d147149c1",
+      "morphometric_feature_resolution": "area-005_only",
+      "official_code_head": "a6b355e8f271e9a88399a2e432ed924d99b85d64",
+      "official_feature_code_publicly_available": false,
+      "p0_v1_config": "configs/aneux_nested_orbit_p0.json",
+      "p0_v1_config_sha256": "b82e3606ea76697dbdc44973a287538a436fe330c25edcd8bf9f113d147149c1",
+      "p0_v1_status": "superseded_pre_execution_zero_rows_zero_job_because_170_morphometrics_are_area_005_only",
+      "p0_v1_post_result_repair": false,
+      "p0_config": "configs/aneux_nested_orbit_p0_v2.json",
+      "p0_config_sha256": "86de76c4c7e4d493f12d2eb300e78647a74daf88e469102411f959982a07d0da",
       "p0_scientific_contract_registered": true,
       "p0_execution_envelope_frozen": false,
       "p0_exact_private_path_frozen": false,
@@ -339,7 +346,9 @@
       "p0_previous_job_id": "115177.ECE-util1",
       "p0_previous_scientific_checks_evaluated": 0,
       "p0_nontriviality_required_count": 2,
-      "p0_nontriviality_total_count": 3,
+      "p0_nontriviality_total_count": 2,
+      "p0_decision_flip_primary": false,
+      "p0_baseline_adequacy_required": true,
       "p0_external_sources_opened": false,
       "candidate_architecture_status": "development_hypothesis_only_unselected",
       "candidate_architecture": "discretization_agnostic_surface_encoder_with_shared_aneurysm_token_cut_context_residual_masked_orbit_aggregation_and_disagreement_reliability_head",
@@ -387,7 +396,7 @@
       "execution_server": "introai9",
       "login_node_gpu_command_executed": false,
       "junjinyong_accessed": false,
-      "next_allowed_action": "one_bounded_read_only_introai9_exact_path_inventory_then_freeze_execution_envelope_or_close_no_broad_search_no_old_job_repair"
+      "next_allowed_action": "after_external_service_change_run_one_bounded_exact_path_manifest_and_reader_preflight_then_freeze_p0_v2_execution_envelope_or_close_no_broad_search_no_old_job_repair"
     },
     "endovascular_collision_anticipation_and_release_reappraisal": {
       "status": "fresh_problem_level_batch_rejected_best_26_5_target_asset_unit_and_direct_prior_floors",
@@ -7942,7 +7951,7 @@
     },
     "most_recent_closed_candidate": "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict",
     "most_recent_source_rejected_candidate": "endpoint_provenance_aware_asah_six_month_prognosis_rejected_at_29_5_target_time_novelty_and_imaging_floors",
-    "most_recent_conditional_source_lead": "aneux_factorized_nested_preprocessing_orbit_reliability_33_0_scientific_p0_contract_registered_execution_envelope_pending",
+    "most_recent_conditional_source_lead": "aneux_factorized_nested_preprocessing_orbit_reliability_33_0_corrected_p0_v2_registered_pre_execution",
     "rejected_candidates": [
       "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
       "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",
@@ -8403,8 +8412,8 @@
     "historical_primary_metric": "functional_energy_score",
     "historical_primary_status": "unsupported_after_n1c_and_inactive_after_m0_execution_incomplete",
     "active_candidate_problem": "aneux_factorized_nested_preprocessing_orbit_reliability",
-    "active_candidate_status": "conditional_source_lead_scientific_p0_contract_registered_execution_envelope_pending_no_method_gpu_outer_test_or_claim",
-    "candidate_primary_estimand": "fixed_cut_resolution_decision_instability_for_cross_sectional_rupture_status_association",
+    "active_candidate_status": "conditional_source_lead_corrected_p0_v2_registered_pre_execution_no_method_gpu_outer_test_or_claim",
+    "candidate_primary_estimand": "fixed_cut_cross_resolution_probability_disagreement_for_an_adequate_cross_fitted_surface_signature_probe",
     "candidate_secondary_estimand": "orbit_disagreement_error_association_and_source_held_out_worst_view_reliability",
     "i0a_config": "configs/flow_mri_protocol_i0a_asset_audit.json",
     "i0a_config_sha256": "ceb6413047b117ecbc7b52d83919b73117491e8de6c099c7b158f592788f40ff",

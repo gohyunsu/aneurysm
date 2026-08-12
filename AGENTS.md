@@ -1,5 +1,31 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 AneuX P0 v2 source correction · schema 11.6:** Official
+> `content-description-v1.0.pdf` states that `morpho-per-cut.csv` has the 170
+> morphometrics at mesh resolution `area-005` only. Exact official repository
+> head `a6b355e8f271e9a88399a2e432ed924d99b85d64` contains README/LICENSE/docs
+> only and says code publication is in progress; do not claim official multi-
+> resolution feature recomputation is available. Preserve v1 config SHA
+> `b82e3606…` as pre-execution superseded history: dataset row 0, job 0,
+> endpoint 0, post-result repair false. Current contract is
+> `configs/aneux_nested_orbit_p0_v2.json`, SHA-256
+> `86de76c4c7e4d493f12d2eb300e78647a74daf88e469102411f959982a07d0da`.
+> Canonical protocol SHA-256 is
+> `0a449a49badab859d75bb91a2af8536495f90e0b302e560e84ab8554d776f6b9`.
+> Full regression is 486 tests: 420 pass/66 optional-dependency skip. It freezes a
+> deterministic 11-feature signature on all three dome resolutions; canonical
+> area-005-only patient/source-grouped nested-CV logistic probing; clustered
+> bootstrap; mandatory AUROC adequacy; and both primary gates: probability
+> range >0.10 materiality and range–orbit-mean-Brier association. Decision flip
+> is secondary and no learned threshold is used. V2 remains non-executable
+> until an external service change permits one bounded exact-path/manifest/
+> reader preflight on `introai9`; do not query earlier. No P0 job, method,
+> architecture, GPU, outer test or claim is authorized. Never access/query/
+> transfer/submit/monitor `junjinyong`. The first unrestricted full-test attempt
+> failed only because the current sandbox exposes `/tmp` read-only; the same
+> suite passed with an approved repository-local temporary directory. Do not
+> interpret that environment failure as a scientific or code failure.
+
 > **2026-08-12 schema 11.5 deployment/private synchronization:** Exact public
 > scientific source `5208bd2afb2e90894de3add5cc720c7f760a5a27` passed Quality
 > `31576238532` and Pages `31576237547`. Private paper ledger head
@@ -11,7 +37,7 @@
 > protocol invariant groups. This provenance opens no executable P0, model,
 > GPU, outer test or paper claim.
 
-> **2026-08-12 acquired-asset direction · schema 11.5:** Maintain exactly one
+> **2026-08-12 acquired-asset direction · schema 11.5 historical registration:** Maintain exactly one
 > conditional source lead: `aneux_factorized_nested_preprocessing_orbit_reliability`
 > at 33.0/40. Treat resolution as a nuisance only within a fixed cut. Treat
 > dome/ninja/cut1/cut2 as different information sets whose parent-vessel
@@ -19,7 +45,7 @@
 > flat final-logit consistency, DiffusionNet, PointNet, E(3), GroupDRO, set
 > attention or calibration as novelty. The claim candidate is casewise
 > preprocessing reliability hidden by average discrimination. The registered
-> contract is `configs/aneux_nested_orbit_p0.json`; it is non-executable until
+> contract at that schema was `configs/aneux_nested_orbit_p0.json`; it was non-executable until
 > one bounded read-only `introai9` inventory freezes an exact private path and
 > manifest. Never repair or rerun historical AneuX job `115177.ECE-util1`.
 > P0 is CPU-only, network-free and development-source-only; it must satisfy two

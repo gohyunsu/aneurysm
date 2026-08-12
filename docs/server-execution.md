@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.6 P0 v2 execution boundary:** This update used official public
+> documentation and repository contents only. It queried no scientific server,
+> transferred no AneuX payload and submitted or monitored no PBS/GPU job. V2
+> is non-executable until an external service/admin change permits one bounded
+> `introai9` exact-path, immutable-manifest and VTP-reader dependency preflight.
+> That must precede freezing a CPU 4/GPU 0 network-free PBS envelope. Do not
+> retry the current incomplete inventory, broad-search, repair historical job
+> 115177 or access `junjinyong`.
+
 > **Schema 11.5 nested-orbit execution boundary:** The scientific P0 contract
 > is registered but exact private AneuX path and manifest are unresolved, so no
 > job is submitted. After an external service-state change, run one bounded

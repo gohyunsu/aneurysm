@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.6 model decision: still unselected.** Corrected P0 v2 is a
+> deterministic surface-signature plus nested-CV logistic probe, not a GNN or
+> proposal. It tests whether fixed-dome mesh resolution causes material
+> casewise probability variation in an adequate probe. The 170-feature v1 is
+> superseded because those features exist only at area-005. No architecture is
+> implemented until v2 and a separate strong-baseline P1 pass; nested
+> factorization remains a development hypothesis.
+
 > **Schema 11.5 conditional model decision: unselected.** If and only if the
 > nested-orbit P0/P1 gates pass, compare a discretization-agnostic surface
 > encoder with a shared aneurysm token, cut-specific context residual, masked

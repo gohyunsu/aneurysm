@@ -1,5 +1,16 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.6 current gate:** `configs/aneux_nested_orbit_p0_v2.json`
+> supersedes the unexecuted v1 before any data row or job. The released 170
+> morphometrics are area-005-only, so v2 measures three-resolution behavior
+> with one deterministic surface signature and a canonical area-005 patient-
+> grouped nested-CV logistic probe. Asset/reader integrity and canonical-view
+> AUROC lower CI >0.60 are mandatory. Both materiality endpoints must pass:
+> the lower CI of the lesion fraction with probability range >0.10 exceeds
+> 0.05, and the lower CI of Spearman between range and orbit-mean Brier residual
+> exceeds 0.10. Decision flips are secondary. No execution, method, GPU, outer
+> test or claim is open.
+
 > **Schema 11.5 prospective P0 boundary:** The AneuX nested-orbit scientific
 > contract is registered at `configs/aneux_nested_orbit_p0.json` but is not yet
 > executable because exact private path and manifest are null. It is CPU-only,

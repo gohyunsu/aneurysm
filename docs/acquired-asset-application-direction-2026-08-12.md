@@ -1,9 +1,27 @@
 # 확보 자산 기반 ISBI 2027 방향 재선정
 
-상태: **AneuX factorized nested preprocessing-orbit를 conditional source lead로
-선정 · 새 method-free P0만 사전등록 · primary problem/method/architecture/GPU/outer
+상태: **AneuX factorized nested preprocessing-orbit conditional source lead 유지 ·
+source-semantics 결함을 실행 전에 수정한 method-free P0 v2 사전등록 · exact path/
+manifest/reader preflight 미해결 · primary problem/method/architecture/GPU/outer
 test/paper claim 0**  
 기준일: 2026-08-12 KST
+
+## 0. 실행 전 source-semantics correction
+
+공식 `content-description-v1.0.pdf`를 다시 읽은 결과, `morpho-per-cut.csv`의
+170개 morphometric은 **area-005 resolution에만** 존재한다. 따라서 v1의
+“source-provided 170 morphometrics로 세 resolution의 prediction instability를
+측정한다”는 설계는 실행 불가능했다. 또한 exact official repository head
+`a6b355e8f271e9a88399a2e432ed924d99b85d64`에는 README, license와 figure만 있고
+README 자체가 code publication in progress라고 명시한다. 공식 feature code로 세
+resolution을 재계산할 수도 없다.
+
+이 결함은 data row, job 또는 endpoint를 보기 전에 발견했다. v1 config는 SHA-256
+`b82e3606…` 그대로 보존하며 **pre-execution superseded**로 처리한다. 이는 결과를 본
+뒤 threshold나 reader를 고치는 repair가 아니다. 현재 계약은
+[`aneux_nested_orbit_p0_v2.json`](../configs/aneux_nested_orbit_p0_v2.json)이며,
+정확한 private path, manifest와 reader dependency preflight가 아직 없으므로 실행할
+수 없다.
 
 ## 1. 결론부터
 
@@ -99,35 +117,46 @@ context residual과 최종 logit은 같다고 가정하지 않는다.
 
 이 네 항목 중 어느 것도 material하게 나타나지 않으면 논문 문제 자체를 닫는다.
 
-## 4. 새 method-free P0
+## 4. 수정된 method-free P0 v2
 
-새 계약은 [`configs/aneux_nested_orbit_p0.json`](../configs/aneux_nested_orbit_p0.json)에
-고정한다. 과거 downloader/reader를 재실행하지 않으며 network access도 금지한다.
-`introai9`의 이미 확보된 private holding을 CPU-only PBS에서 읽어 다음을 확인한다.
+V2는 `dome` cut만 primary로 사용해 **resolution nuisance**를 먼저 분리한다. Cut은
+정보 집합을 바꾸므로 P0에서는 area-005 cross-cut descriptive analysis에만 두고
+gate에 쓰지 않는다. 세 dome mesh 모두에서 같은 deterministic surface signature를
+계산한다. Piecewise-planar triangle 위의 면적 적분을 정확히 사용해 surface area,
+open boundary perimeter, centroid covariance/eigenvalue ratio, normalized radial
+fourth/sixth moment와 normal-tensor eigenvalue 등 11개를 고정한다. 동일 평면을
+triangle subdivision만 해도 값이 보존되도록 unit test한다. Vertex/face count,
+random point sampling과 watertight volume은 사용하지 않아 resolution 자체를
+feature로 누설하지 않는다. Degenerate triangle, non-manifold edge와 닫힌 dome은
+reader preflight에서 fail한다.
 
-1. exact archive/extracted-root 존재, expected size/checksum 또는 immutable manifest;
-2. lesion--patient--source--status grouping과 unknown/missing pattern;
-3. 세 resolution과 네 cut의 실제 completeness 및 동일 lesion mapping;
-4. fixed-cut resolution과 cross-cut context를 분리한 within-lesion/between-lesion
-   morphometric variation;
-5. development source와 patient group만 사용한 frozen regularized-morphometry
-   baseline의 casewise logit range, decision-flip rate, rank reversal와 calibration;
-6. external source, proposed method, neural architecture와 GPU에 접근하지 않았는지.
+HUG2016/HUG2016SNF만 development로 사용하고 @neurIST/Aneurisk는 열지 않는다.
+Known status, known patientID, 세 dome resolution이 모두 있는 lesion만 eligible이다.
+모든 lesion/view는 환자 단위로 5-fold outer/4-fold inner split에 함께 묶는다.
+L2 logistic probe는 canonical `dome_area-005`에서만 fit하고, 같은 held-out lesion의
+`original`, `area-001`, `area-005` signature에 동일하게 적용한다. Median imputation,
+standardization, C 선택은 training fold 안에서만 수행하고 seed, grid와 tie-break를
+고정한다.
 
-P0의 primary nontriviality gate는 development data에서 다음 세 조건 중 둘 이상을
-요구한다.
+먼저 probe가 무의미하지 않아야 한다. Canonical area-005 OOF AUROC의 patient-
+bootstrap 95% lower bound가 0.60을 넘지 못하면 **uninformative probe**로 닫고
+resolution reliability에 대한 과학 판정을 하지 않는다. Asset/reader/integrity와
+이 adequacy gate가 모두 통과한 뒤 다음 두 primary 조건을 **모두** 요구한다.
 
-- fixed-cut resolution 변화로 인한 decision flip fraction의 patient-bootstrap
-  95% lower bound가 5%를 넘는다;
-- lesion 중 10% 이상에서 fixed-cut resolution logit range가 0.20을 넘고 그 비율의
-  95% lower bound가 10%를 넘는다;
-- orbit disagreement와 baseline error 사이의 patient-bootstrap Spearman correlation
-  95% lower bound가 0.20을 넘는다.
+1. 세 resolution OOF probability의 `max-min > 0.10`인 lesion 비율에 대한
+   patient-bootstrap 95% lower bound가 0.05보다 크다.
+2. 같은 probability range와 `orbit-mean probability`의 Brier residual 사이
+   Spearman correlation의 patient-bootstrap 95% lower bound가 0.10보다 크다.
 
-이 수치는 임상적 위해 임계값이 아니라, 새 방법을 개발할 정도로 failure가
-비자명한지를 결정하는 prospectively frozen engineering threshold다. Gate가
-통과해도 한 개의 baseline-feasibility P1만 등록할 수 있다. P0에서 architecture,
-GPU, outer test 또는 논문 contribution을 열지 않는다.
+두 번째 error는 각 view Brier 평균이 아니라 orbit-mean probability의 squared
+error다. 따라서 disagreement variance를 error 정의에 다시 넣어 correlation을
+기계적으로 만드는 tautology를 피한다. 0.5 decision flip은 threshold에 민감하므로
+secondary sensitivity로 내렸고 data에서 threshold를 선택하지 않는다. 모든 bootstrap은
+환자를 복원추출하고 그 환자의 모든 lesion/view를 multiplicity와 함께 보존한다.
+
+이 기준은 임상적 위해나 치료 threshold가 아니라 method development가 정당한지를
+가르는 engineering effect size다. V2 pass도 strong-baseline feasibility P1 하나만
+등록할 수 있으며 architecture, GPU, outer test 또는 contribution을 열지 않는다.
 
 ## 5. P0 통과 뒤의 최소 architecture
 

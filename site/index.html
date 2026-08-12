@@ -40,7 +40,7 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.5 · CONDITIONAL LEAD 1 · SCIENTIFIC P0 CONTRACT REGISTERED · MODEL / GPU / CLAIM 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.6 · CONDITIONAL LEAD 1 · CORRECTED P0 V2 REGISTERED / NOT EXECUTABLE · MODEL / GPU / CLAIM 0</p>
         <h1>
           Same aneurysm.<br>
           <em>Different mesh, different decision?</em>
@@ -53,14 +53,16 @@
           cut은 실제 parent-vessel context를 더하거나 뺍니다. 그래서 모든 view의
           최종 예측을 같게 만드는 flat consistency가 아니라, <b>공통 aneurysm
           anatomy와 유효한 context residual을 분리하는 nested orbit</b>을 검증합니다.
-          현재 33.0/40 conditional source lead 한 개와 method-free CPU P0의 과학적
-          계약만 등록했습니다. Exact private path가 다시 확인되기 전에는 실행할 수
-          없으며, primary problem·architecture·GPU·outer test·논문 claim은 모두 0입니다.
+          공식 명세를 다시 확인해 170개 morphometric이 area-005에만 있다는 v1 결함을
+          실행 전에 바로잡았습니다. 현재 33.0/40 conditional source lead 한 개와
+          corrected method-free CPU P0 v2만 등록했습니다. Exact private path, manifest와
+          reader preflight 전에는 실행할 수 없으며 primary problem·architecture·GPU·
+          outer test·논문 claim은 모두 0입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html#nested-orbit">Nested orbit 처음부터 이해하기</a>
           <a class="button ghost" href="../docs/acquired-asset-application-direction-2026-08-12.md">연구 방향 전체 읽기 ↗</a>
-          <a class="button ghost" href="../configs/aneux_nested_orbit_p0.json">등록된 P0 계약 ↗</a>
+          <a class="button ghost" href="../configs/aneux_nested_orbit_p0_v2.json">수정된 P0 v2 계약 ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
         <div class="hero-actions" hidden>
@@ -246,9 +248,9 @@
 
       <div class="hero-meta">
         <div><span>Conditional direction</span><b>AneuX factorized nested preprocessing-orbit reliability · 33.0/40</b></div>
-        <div><span>Scientific P0</span><b>Registered · non-executable until exact private path and manifest are frozen</b></div>
+        <div><span>Scientific P0 v2</span><b>Registered · non-executable until exact path, manifest and reader preflight are frozen</b></div>
         <div><span>Architecture / GPU / claim</span><b>Development hypothesis only / 0 / 0</b></div>
-        <div><span>Next action</span><b>One bounded read-only introai9 exact-path inventory · then CPU-only PBS or close</b></div>
+        <div><span>Next action</span><b>After external service change: bounded introai9 path/manifest/reader preflight · then freeze CPU-only PBS or close</b></div>
       </div>
     </section>
 
@@ -283,7 +285,7 @@
           <h3>Separate anatomy from context</h3>
           <p>Fixed-cut resolution에는 안정성을 요구하고, cut별 context residual은 허용한다.</p>
           <ul>
-            <li>평균 AUROC와 casewise flip을 함께 측정</li>
+            <li>Adequate AUROC와 threshold-free probability range를 함께 측정</li>
             <li>Patient/source-grouped outer evaluation</li>
             <li>P0에서 failure가 없으면 method를 만들지 않음</li>
           </ul>
@@ -294,7 +296,7 @@
         <p>이 conditional direction이 먼저 답할 세 질문</p>
         <ol>
           <li><span>01</span> 동일 lesion orbit과 patient/source grouping을 private holding에서 재확인할 수 있는가?</li>
-          <li><span>02</span> Resolution-induced flip과 disagreement–error association이 비자명한가?</li>
+          <li><span>02</span> Resolution-induced probability range와 disagreement–error association이 비자명한가?</li>
           <li><span>03</span> Strong DiffusionNet/averaging이 이미 문제를 해결하지 않았는가?</li>
         </ol>
       </div>
@@ -483,25 +485,26 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">CURRENT P0 · SCIENTIFIC CONTRACT REGISTERED / NOT EXECUTABLE</p>
+          <p class="eyebrow">CURRENT P0 V2 · CORRECTED BEFORE EXECUTION / NOT EXECUTABLE</p>
           <span>private holding only · CPU 4 · GPU 0 · network 0</span>
         </div>
         <div class="g1-result-metrics">
           <div><span>Conditional score</span><b>33.0</b><small>/ 40 · all critical floors pass</small></div>
           <i>→</i>
-          <div><span>Nontriviality</span><b>2 / 3</b><small>prospectively required</small></div>
-          <div class="delta negative"><span>Execution</span><b>Blocked</b><small>exact path + manifest unresolved</small></div>
+          <div><span>Nontriviality</span><b>2 / 2</b><small>both threshold-free primary checks required</small></div>
+          <div class="delta negative"><span>Execution</span><b>Blocked</b><small>path + manifest + reader preflight unresolved</small></div>
         </div>
         <div class="g1-result-decision">
-          <strong>세 failure 중 둘이 development data에서 확인돼야 다음 단계로 갑니다.</strong>
+          <strong>Probe adequacy와 두 materiality gate가 모두 확인돼야 다음 단계로 갑니다.</strong>
           <p>
-            Fixed-cut resolution decision-flip fraction의 patient-bootstrap 95% lower
-            bound &gt; 5%, logit range &gt; 0.20인 lesion fraction의 lower bound &gt; 10%,
-            orbit disagreement–baseline error Spearman lower bound &gt; 0.20 중 두 개가
-            필요합니다. 모두 engineering nontriviality 기준이지 임상 위해 기준이
-            아닙니다. P0 pass도 강한 baseline feasibility P1 하나만 허용합니다.
+            Canonical area-005 OOF AUROC lower bound가 0.60을 넘어 probe가 먼저
+            유효해야 합니다. 이후 세 resolution probability range가 0.10을 넘는
+            lesion 비율의 lower bound &gt; 0.05, range와 orbit-mean Brier residual의
+            Spearman lower bound &gt; 0.10을 모두 요구합니다. Decision flip은 임의
+            threshold에 민감해 secondary입니다. 이는 engineering nontriviality이지
+            임상 위해 기준이 아닙니다. P0 pass도 P1 하나만 허용합니다.
           </p>
-          <a href="../configs/aneux_nested_orbit_p0.json">Frozen scientific contract ↗</a>
+          <a href="../configs/aneux_nested_orbit_p0_v2.json">Corrected frozen contract ↗</a>
           <a href="../docs/acquired-asset-application-direction-2026-08-12.md">전체 falsifier와 중단 조건 ↗</a>
         </div>
       </article>
@@ -745,7 +748,7 @@
       <div class="paper-title">
         <p class="eyebrow">05 · PAPER BLUEPRINT</p>
         <h2>Same Aneurysm, Different Mesh</h2>
-        <p>Conditional title only · nested preprocessing-orbit reliability · 33.0/40 source lead · no active manuscript claim before P0/P1</p>
+        <p>Conditional title only · corrected P0 v2 registered · 33.0/40 source lead · no active manuscript claim before P0/P1</p>
       </div>
       <div class="contribution-grid">
         <article><span>C1</span><h3>Hidden application failure</h3><p>평균 discrimination이 같아도 same-lesion flip과 worst-view error가 material함을 보인다.</p></article>
@@ -753,7 +756,7 @@
         <article><span>C3</span><h3>Evidence without inflation</h3><p>Patient/source-held-out에서 AUROC를 훼손하지 않으면서 flip·Brier·selective risk를 개선한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>conditional lead 1 · P0 scientific contract only · primary/method/model/GPU/claim 0</b>
+        <span>Current stage</span><b>conditional lead 1 · corrected P0 v2 only · primary/method/model/GPU/claim 0</b>
         <span>Claim boundary</span><b>cross-sectional status association only; no future-risk or clinical-utility claim</b>
       </div>
     </section>

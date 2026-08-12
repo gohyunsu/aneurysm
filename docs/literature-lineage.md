@@ -1,5 +1,14 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.6 source-semantics correction:** AneuX v1.0 exposes surfaces at
+> three resolutions, but `morpho-per-cut.csv` stores its 170 features at
+> `area-005` only. Exact official code head `a6b355e…` has no processing code.
+> The original feature table therefore cannot be a cross-resolution control.
+> P0 v2 uses one fixed deterministic geometric signature on all three dome
+> meshes and trains only on the canonical area-005 view. This narrows the gap;
+> it does not create novelty. The application hypothesis remains conditional
+> until an adequate probe exhibits material casewise disagreement.
+
 > **Schema 11.5 nested-orbit gap:** AneuX morphometry already studies mesh/cut
 > robustness; AneuX PointNet++ already compares dome and cut1 with external
 > status evaluation; DiffusionNet already targets discretization robustness;

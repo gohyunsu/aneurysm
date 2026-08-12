@@ -1,0 +1,193 @@
+{
+  "schema_version": "aurora.aneux_nested_orbit_p0.v2",
+  "experiment_id": "aneux_resolution_reliability_nontriviality_p0_v2",
+  "status": "prospectively_registered_pre_execution_exact_private_path_and_reader_preflight_pending",
+  "as_of": "2026-08-12",
+  "scientific_question": "On an already-acquired AneuX holding, does a fixed-cut, label-preserving change of mesh resolution induce material casewise prediction disagreement in an adequate frozen geometry probe, and does that disagreement identify harder lesions?",
+  "supersession": {
+    "superseded_config": "configs/aneux_nested_orbit_p0.json",
+    "superseded_config_sha256": "b82e3606ea76697dbdc44973a287538a436fe330c25edcd8bf9f113d147149c1",
+    "superseded_status": "pre_execution_zero_dataset_rows_zero_job_zero_scientific_endpoints",
+    "reason": "official_content_description_confirms_morpho_per_cut_contains_170_features_only_at_area_005_so_it_cannot_measure_cross_resolution_instability",
+    "post_result_repair": false,
+    "historical_job_115177_repaired_or_rerun": false
+  },
+  "source": {
+    "dataset": "AneuX",
+    "record": "https://zenodo.org/records/6678442",
+    "doi": "10.5281/zenodo.6678442",
+    "version": "v1.0",
+    "license": "cc_by_nc_4_0_record_terms_govern",
+    "source_reported_lesions": 750,
+    "source_reported_patients": 605,
+    "source_reported_status_observed": 735,
+    "source_reported_patient_id_observed_rows": 637,
+    "mesh_resolutions": ["original", "area-001", "area-005"],
+    "primary_cut": "dome",
+    "secondary_cut_contexts": ["ninja", "cut1", "cut2"],
+    "morphometry_table_resolution": "area-005_only",
+    "official_code_repository": "https://github.com/hirsch-lab/aneuxdb",
+    "official_code_head": "a6b355e8f271e9a88399a2e432ed924d99b85d64",
+    "official_code_tree_state": "readme_license_and_docs_only_code_publication_in_progress",
+    "official_feature_recomputation_available": false
+  },
+  "estimand": {
+    "target": "cross_sectional_rupture_status_association_not_future_risk",
+    "independent_resampling_unit": "patient",
+    "eligible_lesion": "known_status_known_patient_id_and_all_three_dome_resolution_surfaces",
+    "resolution_role": "label_preserving_nuisance_within_fixed_dome_cut",
+    "cut_role_in_p0": "secondary_descriptive_information_set_change_not_a_gate",
+    "primary_materiality_endpoints": [
+      "fraction_of_eligible_lesions_with_cross_resolution_probability_range_gt_0_10",
+      "spearman_between_probability_range_and_orbit_mean_brier_residual"
+    ],
+    "secondary_non_gating_endpoints": [
+      "fixed_probability_0_5_decision_flip_fraction",
+      "canonical_area_005_brier",
+      "worst_resolution_brier",
+      "area_005_cross_cut_probability_range"
+    ],
+    "prohibited_labels": [
+      "prospective_rupture_risk",
+      "future_instability",
+      "clinical_decision_support",
+      "causal_effect",
+      "patient_independent_mesh_views"
+    ]
+  },
+  "surface_signature": {
+    "implementation_status": "frozen_and_unit_tested_reader_not_yet_verified_on_private_holding",
+    "cell_rule": "all_primary_surface_cells_must_be_non_degenerate_triangles_non_manifold_edges_fail",
+    "weighting": "exact_uniform_area_integrals_over_each_piecewise_planar_triangle",
+    "eigenvalue_order": "descending",
+    "eigenvalue_floor_relative_to_covariance_trace": 1e-12,
+    "features_in_order": [
+      "log_total_surface_area",
+      "log_boundary_perimeter",
+      "log_surface_centroid_covariance_trace",
+      "log_covariance_eigenvalue_1_over_3",
+      "log_covariance_eigenvalue_2_over_3",
+      "surface_area_over_covariance_trace",
+      "boundary_perimeter_squared_over_surface_area",
+      "radial_fourth_moment_over_covariance_trace_squared",
+      "radial_sixth_moment_over_covariance_trace_cubed",
+      "normal_tensor_eigenvalue_1",
+      "normal_tensor_eigenvalue_2"
+    ],
+    "definitions": {
+      "surface_centroid": "area_weighted_exact_triangle_first_moment",
+      "covariance": "area_weighted_exact_triangle_second_central_moment",
+      "boundary_perimeter": "sum_lengths_of_undirected_edges_incident_to_exactly_one_triangle",
+      "radial_moments": "area_weighted_exact_dirichlet_integrals_of_norm_x_minus_centroid_power_4_and_6",
+      "normal_tensor": "area_weighted_outer_product_of_triangle_unit_normals_divided_by_total_area",
+      "logarithm": "natural_log"
+    },
+    "mesh_density_or_face_count_feature_allowed": false,
+    "volume_or_watertightness_required": false,
+    "random_surface_sampling_allowed": false,
+    "rotation_translation_invariant": true,
+    "scale_signal_retained": true
+  },
+  "cross_fitting": {
+    "development_sources": ["hug2016", "hug2016snf"],
+    "locked_external_sources": ["aneurist", "aneurisk"],
+    "outer_folds": 5,
+    "inner_folds": 4,
+    "fold_seed": 271828,
+    "splitter": "stratified_group_kfold_shuffle_true_group_source_colon_patient_id",
+    "all_lesions_and_views_for_a_patient_are_atomic": true,
+    "canonical_training_view": "dome_area-005",
+    "held_out_prediction_views": ["dome_original", "dome_area-001", "dome_area-005"],
+    "feature_imputation": "training_fold_median_only",
+    "feature_scaling": "training_fold_mean_and_population_standard_deviation_only",
+    "probe": "l2_penalized_logistic_regression_liblinear_class_weight_balanced",
+    "c_grid": [0.01, 0.1, 1.0, 10.0, 100.0],
+    "inner_selection_metric": "mean_patient_weighted_log_loss_minimize",
+    "tie_break": "smallest_c",
+    "threshold_selected_from_data": false
+  },
+  "bootstrap": {
+    "unit": "source_qualified_patient",
+    "replicates": 2000,
+    "seed": 314159,
+    "confidence_level": 0.95,
+    "interval": "percentile",
+    "quantile_method": "linear",
+    "resample_action": "sample_patients_with_replacement_and_retain_all_their_lesions_and_views_with_multiplicity"
+  },
+  "checks": {
+    "all_asset_and_adequacy_checks_required": [
+      "exact_private_root_and_immutable_manifest_frozen_before_submission",
+      "official_v1_archive_or_extracted_asset_integrity_verified_without_network",
+      "vtp_reader_and_required_numeric_dependencies_pass_preflight_before_submission",
+      "lesion_patient_source_status_and_resolution_keys_are_unique_and_groupable",
+      "eligible_and_excluded_counts_reported_by_source_and_reason",
+      "development_and_external_source_boundaries_are_disjoint",
+      "canonical_area_005_oof_auroc_patient_bootstrap_95pct_lower_bound_gt_0_60",
+      "no_external_source_payload_model_architecture_gpu_or_outer_test_opened"
+    ],
+    "both_nontriviality_checks_required": [
+      {
+        "endpoint": "fraction_of_eligible_lesions_with_cross_resolution_probability_range_gt_0_10",
+        "criterion": "patient_bootstrap_95pct_lower_bound_gt_0_05"
+      },
+      {
+        "endpoint": "spearman_between_probability_range_and_orbit_mean_brier_residual",
+        "criterion": "patient_bootstrap_95pct_lower_bound_gt_0_10"
+      }
+    ],
+    "probability_range_definition": "maximum_minus_minimum_of_three_cross_fitted_dome_resolution_probabilities_for_the_same_lesion",
+    "orbit_mean_brier_residual_definition": "square_of_mean_of_three_cross_fitted_probabilities_minus_binary_status",
+    "decision_flip_is_primary": false,
+    "threshold_interpretation": "prospective_engineering_effect_size_not_clinical_harm_or_treatment_threshold"
+  },
+  "data_boundary": {
+    "private_holding_only": true,
+    "raw_or_case_level_payload_in_public_repository": false,
+    "exact_dataset_root": null,
+    "exact_manifest_sha256": null,
+    "reader_dependency_preflight_passed": false,
+    "execution_envelope_frozen": false,
+    "missing_patient_id_primary_action": "exclude",
+    "unknown_status_primary_action": "exclude",
+    "incomplete_three_resolution_dome_orbit_primary_action": "exclude_and_report",
+    "multi_lesion_patient_action": "keep_all_lesions_in_one_fold_and_bootstrap_cluster"
+  },
+  "gate": {
+    "pass_authorizes": "register_one_compute_bounded_strong_baseline_feasibility_p1_only",
+    "fail_action": "close_candidate_without_method_architecture_gpu_outer_test_or_paper_claim",
+    "baseline_adequacy_fail_action": "close_as_uninformative_probe_without_interpreting_resolution_reliability",
+    "execution_incomplete_action": "preserve_no_verdict_and_do_not_repair_or_resubmit_the_same_execution_envelope",
+    "does_not_authorize": [
+      "primary_problem_selection",
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "resources": "select=1:ncpus=4:mem=16gb:ngpus=0",
+    "walltime": "04:00:00",
+    "gpu_requested": false,
+    "login_node_gpu_command": false,
+    "network_access": false,
+    "excluded_server": "junjinyong",
+    "server_queried_for_v2": false,
+    "job_submitted": false
+  },
+  "scientific_state": {
+    "conditional_source_lead": true,
+    "primary_problem_selected": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false,
+    "paper_claim_active": false
+  }
+}

@@ -1,5 +1,24 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 AneuX source-semantics correction · schema 11.6:** The official
+> content description states that `morpho-per-cut.csv` contains the 170
+> precomputed morphometrics at **area-005 only**. The exact official code head
+> `a6b355e8f271e9a88399a2e432ed924d99b85d64` contains README, license and
+> figures but no feature implementation; its README still says code
+> publication is in progress. Therefore the unexecuted v1 contract cannot use
+> those columns to measure resolution instability. It is preserved with zero
+> rows, jobs and endpoints as prospectively superseded—not repaired after a
+> result. The corrected [P0 v2](configs/aneux_nested_orbit_p0_v2.json) uses a
+> frozen deterministic fixed-dome surface signature, a canonical area-005
+> patient-grouped nested-CV logistic probe and threshold-free primary
+> endpoints. Both probability-range materiality and disagreement–orbit-mean-
+> error association must pass; canonical-view AUROC adequacy is mandatory and
+> decision flips are secondary. Exact path, manifest and reader preflight
+> remain unresolved, so P0 v2 is not executable and no server/PBS/GPU action
+> occurred. Full regression is 486 tests: 420 pass/66 optional-dependency skip;
+> canonical protocol SHA-256 is `0a449a49…` and P0 v2 SHA-256 is `86de76c4…`.
+> Primary problem, method, architecture, outer test and claim remain 0.
+
 > **2026-08-12 schema 11.5 deployment/private pin:** Exact scientific source
 > `5208bd2afb2e90894de3add5cc720c7f760a5a27` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31576238532) and
@@ -10,7 +29,7 @@
 > protocol invariants. This pin creates no executable P0, model, result, GPU or
 > paper claim.
 
-> **2026-08-12 acquired-asset application direction · schema 11.5:** AneuX
+> **2026-08-12 acquired-asset application direction · schema 11.5 history:** AneuX
 > factorized nested preprocessing-orbit reliability is the sole conditional
 > lead at **33.0/40**. It uses the same lesion's three resolutions and up to
 > four cut contexts without treating them as independent patients. Resolution
@@ -24,7 +43,8 @@
 > Old job `115177` remains closed at 0/13 and is not repaired or rerun.
 > Primary problem, selected architecture, GPU, outer test and paper claim are
 > still 0. See the [full direction](docs/acquired-asset-application-direction-2026-08-12.md),
-> [P0 contract](configs/aneux_nested_orbit_p0.json) and
+> [superseded P0 v1](configs/aneux_nested_orbit_p0.json),
+> [corrected P0 v2](configs/aneux_nested_orbit_p0_v2.json) and
 > [beginner guide](site/learn.html#nested-orbit).
 
 > **2026-08-12 data-state correction · schema 11.5:** `active dataset/split =

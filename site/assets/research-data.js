@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · AneuX nested-orbit conditional source lead 1 at 33.0/40 · scientific P0 contract registered but not executable · active train/validation/test 0/0/0 · primary/method/model/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "one bounded read-only introai9 inventory must freeze the exact private AneuX path and manifest; the CPU-only, no-network P0 must then show at least two of three preregistered casewise instability signals before any strong-baseline P1, architecture, GPU or paper claim can open",
+    status: "Target locked · AneuX nested-orbit conditional source lead 1 at 33.0/40 · source-corrected P0 v2 registered but not executable · active train/validation/test 0/0/0 · primary/method/model/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "after an external service change, one bounded introai9 preflight must freeze the exact private AneuX path, manifest and reader dependencies; the CPU-only no-network P0 v2 must then pass probe adequacy and both preregistered threshold-free materiality checks before any P1, architecture, GPU or claim can open",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "The AneuX P0 is corrected before execution: 170 released features exist only at area-005",
+      copy: "The official content description states that morpho-per-cut.csv contains 170 morphometrics at area-005 only. Exact official code head a6b355e… currently contains README, license and figures, while code publication remains in progress. The unchanged v1 therefore cannot measure resolution instability and is prospectively superseded with zero data rows, jobs and endpoints. V2 freezes one deterministic surface signature across the three dome resolutions, canonical area-005 patient-grouped nested cross-fitting, patient bootstrap, a mandatory AUROC adequacy gate and two threshold-free primary materiality endpoints. Decision flips are secondary.",
+      status: "Schema 11.6 · v1 superseded pre-execution · P0 v2 registered/non-executable · server/PBS/GPU/claim 0",
+      url: "../configs/aneux_nested_orbit_p0_v2.json"
+    },
     {
       year: "2026.08",
       title: "A factorized nested preprocessing orbit becomes the sole conditional direction",
@@ -1246,6 +1253,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "research",
+      title: "AneuX P0 v2 corrects an area-005-only source assumption before execution",
+      copy: "The official content description confirms that the released 170 morphometrics exist only at area-005, while official code head a6b355e… has no feature implementation. Unchanged v1 is preserved as prospectively superseded with zero rows, jobs and endpoints. Corrected v2 freezes one deterministic signature across three dome resolutions, canonical-view patient-grouped nested CV, patient bootstrap, mandatory AUROC adequacy and two threshold-free materiality checks; decision flip is secondary. Exact path, manifest and reader preflight remain unresolved, so no execution authority opens.",
+      files: ["configs/aneux_nested_orbit_p0_v2.json", "src/aurora/aneux_nested_orbit_p0_v2.py", "tests/test_aneux_nested_orbit_p0_v2.py", "docs/acquired-asset-application-direction-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

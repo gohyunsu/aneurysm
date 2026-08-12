@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.5":
-        raise ProtocolError("The current research-state schema must be version 11.5.")
+    if protocol["schema_version"] != "11.6":
+        raise ProtocolError("The current research-state schema must be version 11.6.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending_no_method_gpu_outer_test_or_claim"
+        != "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution_no_method_gpu_outer_test_or_claim"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -298,7 +298,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending_no_primary_method_gpu_outer_test_or_claim"
+        != "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution_no_primary_method_gpu_outer_test_or_claim"
         or problem_selection["shortlisted_candidate"]
         != "aneux_factorized_nested_preprocessing_orbit_reliability"
         or problem_selection["conditional_source_lead_count"] != 1
@@ -317,7 +317,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "freeze_exact_private_aneux_path_and_manifest_after_one_bounded_read_only_introai9_inventory_then_submit_the_preregistered_cpu_only_p0_no_network_method_gpu_or_outer_test"
+        != "after_external_service_change_freeze_exact_private_aneux_path_manifest_and_reader_preflight_then_freeze_one_cpu_only_p0_v2_execution_envelope_no_network_method_gpu_or_outer_test"
         or problem_selection["audit_document"]
         != "docs/acquired-asset-application-direction-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
@@ -325,7 +325,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["most_recent_source_rejected_candidate"]
         != "endpoint_provenance_aware_asah_six_month_prognosis_rejected_at_29_5_target_time_novelty_and_imaging_floors"
         or problem_selection["most_recent_conditional_source_lead"]
-        != "aneux_factorized_nested_preprocessing_orbit_reliability_33_0_scientific_p0_contract_registered_execution_envelope_pending"
+        != "aneux_factorized_nested_preprocessing_orbit_reliability_33_0_corrected_p0_v2_registered_pre_execution"
     ):
         raise ProtocolError(
             "Exactly one AneuX nested-orbit conditional lead may exist while its exact "
@@ -785,7 +785,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "flat_final_logit_consistency_allowed_as_proposal",
             "source_reported_lesions", "source_reported_patients",
             "source_reported_status_observed", "mesh_resolutions",
-            "cut_configurations", "morphometric_features", "p0_config",
+            "cut_configurations", "morphometric_features",
+            "morphometric_feature_resolution", "official_code_head",
+            "official_feature_code_publicly_available", "p0_v1_config",
+            "p0_v1_config_sha256", "p0_v1_status",
+            "p0_v1_post_result_repair", "p0_config",
             "p0_config_sha256", "p0_scientific_contract_registered",
             "p0_execution_envelope_frozen", "p0_exact_private_path_frozen",
             "p0_exact_manifest_sha256_frozen", "p0_executable", "p0_submitted",
@@ -793,6 +797,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p0_previous_downloader_or_reader_repaired", "p0_previous_job_rerun",
             "p0_previous_job_id", "p0_previous_scientific_checks_evaluated",
             "p0_nontriviality_required_count", "p0_nontriviality_total_count",
+            "p0_decision_flip_primary", "p0_baseline_adequacy_required",
             "p0_external_sources_opened", "candidate_architecture_status",
             "candidate_architecture", "non_novel_components",
             "required_strong_baselines", "primary_evidence_roles", "candidates",
@@ -814,7 +819,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     ]
     if (
         acquired_direction["status"]
-        != "one_conditional_aneux_nested_orbit_lead_scientific_p0_contract_registered_execution_envelope_pending"
+        != "one_conditional_aneux_nested_orbit_lead_corrected_p0_v2_registered_pre_execution"
         or acquired_direction["audit_document"]
         != "docs/acquired-asset-application-direction-2026-08-12.md"
         or acquired_direction["automatic_selection_threshold"] != 32.0
@@ -839,16 +844,28 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or acquired_direction["mesh_resolutions"] != 3
         or acquired_direction["cut_configurations"] != 4
         or acquired_direction["morphometric_features"] != 170
-        or acquired_direction["p0_config"] != "configs/aneux_nested_orbit_p0.json"
-        or acquired_direction["p0_config_sha256"]
+        or acquired_direction["morphometric_feature_resolution"] != "area-005_only"
+        or acquired_direction["official_code_head"]
+        != "a6b355e8f271e9a88399a2e432ed924d99b85d64"
+        or acquired_direction["official_feature_code_publicly_available"] is not False
+        or acquired_direction["p0_v1_config"] != "configs/aneux_nested_orbit_p0.json"
+        or acquired_direction["p0_v1_config_sha256"]
         != "b82e3606ea76697dbdc44973a287538a436fe330c25edcd8bf9f113d147149c1"
+        or acquired_direction["p0_v1_status"]
+        != "superseded_pre_execution_zero_rows_zero_job_because_170_morphometrics_are_area_005_only"
+        or acquired_direction["p0_v1_post_result_repair"] is not False
+        or acquired_direction["p0_config"] != "configs/aneux_nested_orbit_p0_v2.json"
+        or acquired_direction["p0_config_sha256"]
+        != "86de76c4c7e4d493f12d2eb300e78647a74daf88e469102411f959982a07d0da"
         or acquired_direction["p0_scientific_contract_registered"] is not True
         or acquired_direction["p0_cpu_only"] is not True
         or acquired_direction["p0_gpu_count"] != 0
         or acquired_direction["p0_previous_job_id"] != "115177.ECE-util1"
         or acquired_direction["p0_previous_scientific_checks_evaluated"] != 0
         or acquired_direction["p0_nontriviality_required_count"] != 2
-        or acquired_direction["p0_nontriviality_total_count"] != 3
+        or acquired_direction["p0_nontriviality_total_count"] != 2
+        or acquired_direction["p0_decision_flip_primary"] is not False
+        or acquired_direction["p0_baseline_adequacy_required"] is not True
         or acquired_direction["candidate_architecture_status"]
         != "development_hypothesis_only_unselected"
         or [
@@ -858,7 +875,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != expected_acquired_candidates
         or acquired_direction["execution_server"] != "introai9"
         or acquired_direction["next_allowed_action"]
-        != "one_bounded_read_only_introai9_exact_path_inventory_then_freeze_execution_envelope_or_close_no_broad_search_no_old_job_repair"
+        != "after_external_service_change_run_one_bounded_exact_path_manifest_and_reader_preflight_then_freeze_p0_v2_execution_envelope_or_close_no_broad_search_no_old_job_repair"
         or any(
             acquired_direction[key] is not False
             for key in (
@@ -15305,9 +15322,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or task["active_candidate_problem"]
         != "aneux_factorized_nested_preprocessing_orbit_reliability"
         or task["active_candidate_status"]
-        != "conditional_source_lead_scientific_p0_contract_registered_execution_envelope_pending_no_method_gpu_outer_test_or_claim"
+        != "conditional_source_lead_corrected_p0_v2_registered_pre_execution_no_method_gpu_outer_test_or_claim"
         or task["candidate_primary_estimand"]
-        != "fixed_cut_resolution_decision_instability_for_cross_sectional_rupture_status_association"
+        != "fixed_cut_cross_resolution_probability_disagreement_for_an_adequate_cross_fitted_surface_signature_probe"
         or task["candidate_secondary_estimand"]
         != "orbit_disagreement_error_association_and_source_held_out_worst_view_reliability"
         or task["i0a_config"] != "configs/flow_mri_protocol_i0a_asset_audit.json"

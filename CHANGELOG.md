@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-08-12 · AneuX P0 is corrected before execution · schema 11.6
+
+- Verified that the released 170 morphometrics are `area-005` only; the v1
+  tabular probe therefore could not identify cross-resolution instability.
+- Pinned official `hirsch-lab/aneuxdb` head `a6b355e…`: README, MIT license and
+  figures only, with code publication still in progress. Multi-resolution
+  official feature recomputation is not treated as available.
+- Preserved v1 byte-for-byte at SHA-256 `b82e3606…` as an unexecuted,
+  pre-result superseded contract. It saw zero data rows, submitted zero jobs
+  and evaluated zero endpoints; historical job `115177` remains untouched.
+- Added P0 v2 and a fail-closed validator/aggregate metric implementation. V2
+  fixes a deterministic 11-feature surface signature, canonical area-005
+  nested cross-fitting, exact patient bootstrap, AUROC adequacy and two
+  threshold-free primary materiality checks. Decision flip is secondary.
+- Added synthetic tests for config immutability, probability range, orbit-mean
+  Brier residual, tied-rank Spearman, AUROC, true clustered-bootstrap
+  multiplicity, exact triangle moments, planar subdivision, rigid invariance,
+  scale behavior and non-manifold/closed-surface rejection.
+- Full regression passes 486 tests: 420 pass and 66 optional-dependency skip.
+  The initial unrestricted run failed only because the sandbox made every
+  temporary directory read-only; the repository-local approved run passed.
+- No scientific server, transfer, scheduler, PBS/GPU, external source or outer
+  test was accessed. V2 is non-executable pending exact private path,
+  immutable manifest and reader preflight after an external service change.
+
 ## 2026-08-12 · Schema 11.5 is deployed and privately pinned
 
 - Exact scientific source `5208bd2afb2e90894de3add5cc720c7f760a5a27`
