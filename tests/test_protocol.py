@@ -455,6 +455,47 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "Source watch v17"):
             validate_protocol(candidate)
 
+    def test_adam_patch_fold_and_segmentation_prior_delta_is_fail_closed(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["adam_patch_fold_and_segmentation_prior_delta"]
+        watch = problem["public_source_watch_v18"]
+        self.assertFalse(audit["current_schema_or_primary_batch_changed"])
+        self.assertEqual(audit["adam_fold_exact_scan_ids"], 93)
+        self.assertEqual(audit["adam_fold_unique_base_ids"], 58)
+        self.assertEqual(
+            audit["adam_fold_base_id_train_test_overlap"], [2, 3, 5, 6, 2]
+        )
+        self.assertEqual(audit["adam_fold_validation_counts"], [0, 0, 0, 0, 0])
+        self.assertFalse(audit["adam_fold_negative_control_ids_present"])
+        self.assertFalse(audit["adam_fold_repository_license_present"])
+        self.assertFalse(audit["adam_fold_payload_accessed"])
+        self.assertEqual(
+            audit["all_candidate_scores"],
+            [26.5, 26.5, 26.0, 25.5, 23.0, 23.0],
+        )
+        self.assertTrue(all(not item["critical_axis_pass"] for item in audit["candidates"]))
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["junjinyong_accessed"])
+        self.assertEqual(watch["watch_count"], 31)
+        self.assertFalse(watch["automatic_download_authorized"])
+        self.assertFalse(watch["method_or_architecture_authorized"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["adam_patch_fold_and_segmentation_prior_delta"][
+            "architecture_selected"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "ADAM patch-fold"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v18"][
+            "automatic_download_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v18"):
+            validate_protocol(candidate)
+
     def test_future_source_admission_is_noncompensatory_and_prospective(self) -> None:
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]

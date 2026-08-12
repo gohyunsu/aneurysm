@@ -1,5 +1,12 @@
 # Dataset acquisition plan
 
+> **2026-08-12 ADAM release acquisition boundary:** Do not download the 61.5 GB
+> GitHub release. Public availability does not replace a repository dataset
+> license, upstream ADAM reuse/redistribution permission or patient-disjoint
+> split. Reconsider only after those are explicit and a machine manifest includes
+> subject grouping, validation-only selection and negative controls. Source-watch
+> v18 may request manual re-audit only.
+
 > **2026-08-12 rupture-time acquisition boundary:** Do not request or infer the
 > QIMS patient rows, and do not treat PLOS `Table 1.xls` as CTA or patient-level
 > data. Re-entry requires one official versioned baseline-unruptured,

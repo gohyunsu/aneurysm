@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-12 · ADAM patch-fold release and segmentation-prior reappraisal
+
+- Froze GitHub release v1.0 as 35 assets/61,506,611,200 bytes with canonical
+  name/size/digest manifest SHA-256 `7d5ebe80…`; no archive body was accessed.
+- The public JSON contains 93 positive scan IDs/58 bases, no validation IDs or
+  negative controls. Under official ADAM B/F semantics, development/test base
+  overlap is 2/3/5/6/2 across folds.
+- Added DINO-3DRA and GeoP2VNet as code-level direct-prior controls, not
+  peer-reviewed or AURORA-reproduced results. Rejected all six fresh candidates
+  at 26.5/26.5/26.0/25.5/23.0/23.0.
+- Added source-watch v18 with 31 exact states and release-asset-manifest change
+  detection. It may request review only; no download, P0, method or compute.
+- Full regression passes: 462 tests, 396 pass/66 optional-dependency skip,
+  97 protocol invariant groups, site/JSON/JavaScript/diff hygiene. Protocol
+  SHA-256 is `232bc58b12678481dbe9b89b1738f8ca284a88b93768a832208a481c32f05e98`;
+  source-watch v18 SHA-256 is
+  `ab69bca79ba70d8b6543dbcc1e11d9091eaef201f0da61a6f29fa26320d7cf00`.
+
 ## 2026-08-12 · Surface-vector/DSA audit deployed and privately pinned
 
 - Exact public scientific source `cb4f6b16183ddd10a3982edbbdabf77d8a0a3808`

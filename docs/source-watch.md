@@ -1,4 +1,12 @@
-# Public source watch · twenty-eight material/direct-prior source states
+# Public source watch · thirty-one material/direct-prior source states
+
+> **ADAM release and segmentation-prior watch · 2026-08-12:**
+> `source_watch_v18.json` extends v17 with the exact ADAM patch-fold repository,
+> DINO-3DRA and GeoP2VNet. The ADAM watch freezes repository state plus all 35
+> release asset names, sizes and digests as canonical SHA-256 `7d5ebe80…`;
+> payload bytes are never fetched. A release/license/manifest change requests
+> fresh source review only. Direct-prior code changes request baseline-feasibility
+> review only. Neither outcome authorizes download, P0, method or compute.
 
 > **Synthetic DSA embargo watch · 2026-08-12:** `source_watch_v17.json`
 > extends v16 with Zenodo record `21104782` revision 4. The record is CC BY 4.0

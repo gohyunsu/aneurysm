@@ -1,5 +1,9 @@
 # Aggregate research results
 
+> **2026-08-12:** The ADAM patch-fold/segmentation-prior update produced no
+> experiment result. It is a public metadata and direct-prior audit; payload,
+> scientific-server query, PBS/GPU, outer test and result rows remain zero.
+
 이 디렉터리는 공개 가능한 **aggregate exploratory result**만 버전 관리한다.
 
 포함:

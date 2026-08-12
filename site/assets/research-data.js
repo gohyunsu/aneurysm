@@ -3,7 +3,7 @@ window.AURORA_DATA = Object.freeze({
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
     status: "Target locked · pose/workflow and spatiotemporal-operator batch best 29.0/40 rejected; all six fail total or a critical novelty/target/asset/unit floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or whitelisted material task-asset audit; surface-vector is closed until a phase-resolved tangent-vector/family contract enables method-free stability plus a field-error-matched failure; public folds and direct-prior code do not open E0/P0/P1, model or GPU, and closed contracts remain unrepaired",
+    requirement: "the next admissible action is a fresh problem or whitelisted material task-asset audit; surface-vector is closed until a phase-resolved tangent-vector/family contract enables method-free stability plus a field-error-matched failure; the 61.5 GB ADAM patch release lacks a lawful patient-grouped outer-test contract, and public folds or direct-prior code do not open E0/P0/P1, model or GPU",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "A large ADAM patch release fails the patient-unit gate while new segmentation code narrows novelty",
+      copy: "Exact repository d36df7… exposes a real v1.0 release with 35 assets and 61,506,611,200 bytes, but no repository dataset license, upstream ADAM reuse/redistribution evidence or completed citation. Its organization JSON lists 93 positive scan IDs, 58 suffix-stripped bases and no validation IDs or negative controls. Under official ADAM B/F same-subject semantics, every fold crosses subject bases between development and test: 2/3/5/6/2. DINO-3DRA exact 5d9982e… and GeoP2VNet exact 25c59bc… already occupy foundation-feature 3DRA and geometry-to-voxel CTA segmentation; repository-reported results are not AURORA evidence. Six candidates score 26.5/26.5/26.0/25.5/23.0/23.0 and all fail a mandatory floor.",
+      status: "Delta best 26.5/40 rejected · release payload 0 · active architecture 0 · source-watch v18: 31 states · P0/server/GPU 0",
+      url: "../docs/adam-patch-fold-release-and-segmentation-prior-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "Surface-vector is sharpened as an evaluation hypothesis while sparse DSA remains a rejected composition",
@@ -1134,6 +1141,11 @@ window.AURORA_DATA = Object.freeze({
       provenance: "60 patients · 120 sequences · 60 fully annotated · expert-preselected 4–14 arterial frames · CC BY 4.0 · payload 0 · no P0/model/GPU"
     },
     {
+      name: "ADAM positive patch folds · GitHub v1.0 exact d36df7d…",
+      role: "source-rejected release contract and leakage-control example; not training, validation or outer test",
+      provenance: "35 assets · 61,506,611,200 bytes · 93 positive scan IDs/58 base IDs · B/F base overlap by fold 2/3/5/6/2 · validation ID 0 · negative ID 0 · repository dataset license/upstream reuse evidence 0 · payload/P0/model/GPU 0"
+    },
+    {
       name: "Synthetic cerebral DSA reader study · Zenodo 21104782 revision 4",
       role: "embargoed source-watch metadata; not a patient, downstream-task or training asset",
       provenance: "400 synthetic PNG · four views · anterior/posterior circulation · CC BY 4.0 metadata · embargoed until 2026-10-31 · original patient DSA 0 · public lesion/mask/exposure/QDSA label 0 · payload/P0/model/GPU 0"
@@ -1145,6 +1157,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "ADAM patch-fold release and 2026 segmentation priors are rejected without acquisition or compute",
+      copy: "A real 61.5 GB v1.0 release is now frozen by an exact name/size/digest manifest rather than dismissed by file size alone. The public organization JSON covers 93 positive scans and 58 subject bases; official ADAM B/F semantics imply development/test base overlap of 2/3/5/6/2 across the five folds. No validation IDs, negative controls, repository dataset license or upstream reuse contract are present. DINO-3DRA, GeoP2VNet, modality-agnostic nnU-Net and anatomy-aware weak-supervision code narrow model novelty but do not provide an AURORA task asset. Six rows score 26.5/26.5/26.0/25.5/23.0/23.0 and all fail. Source-watch v18 freezes 31 states and can request review only; no payload, E0/P0/P1, architecture, server, PBS/GPU, outer test or paper claim opened. Full regression passes 462 tests: 396 pass/66 optional skip and 97 protocol invariant groups.",
+      files: ["docs/adam-patch-fold-release-and-segmentation-prior-reappraisal-2026-08-12.md", "configs/source_watch_v18.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", ".github/workflows/source-watch.yml", "docs/source-watch.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/literature-lineage.md", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "analysis",

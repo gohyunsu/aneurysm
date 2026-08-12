@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **ADAM fold-release delta · 2026-08-12:** A 61.5 GB release is material but
+> fails the lawful-asset and independent-unit gates. Its public manifest has 93
+> positive scans/58 bases, no validation or negative IDs, and official ADAM B/F
+> semantics imply development/test subject-base overlap in every fold.
+> Patient-grouping repair is necessary provenance, not a paper identity.
+> DINO-3DRA, GeoP2VNet and public modality/weak-supervision pipelines make a
+> larger U-Net/foundation/geometry fusion an even weaker novelty claim. All six
+> candidates are rejected; current problem, architecture and compute remain null.
+
 > **Surface-vector/DSA adjudication · 2026-08-12:** Retain the scientific
 > question, but do not reopen it without a whitelisted material source. Exact
 > point/worldline extraction is evaluation-only before stability; signed total

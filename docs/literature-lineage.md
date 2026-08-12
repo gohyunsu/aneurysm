@@ -1,5 +1,20 @@
 # 선행연구 계보와 research gap
 
+## 2026-08-12 ADAM patch fold와 segmentation direct-prior correction
+
+- [ADAM fold release](https://github.com/josedaviddr/Aneurysm_segmentation_DataSet_folds/tree/d36df7d19a96aa5b9fca0cc9050e021ac7319fee)는
+  실제 61.5 GB patch archive를 공개하지만 license/upstream reuse contract가 없고,
+  public JSON의 B/F base가 모든 fold에서 development/test 사이에 겹친다.
+- [DINO-3DRA](https://github.com/JiayangDS/Dino3DRA/tree/5d9982ee794b531a8f04e73e849af0040976381f)는
+  2D foundation feature→3DRA U-Net을, [GeoP2VNet](https://github.com/somtiannes/GeoP2VNet/tree/25c59bc172d0fedac37c1b6cfc8fe4af0823bf65)는
+  vessel geometry→CTA voxel fusion을 직접 점유한다. Repository-reported results는
+  peer-reviewed confirmation이나 AURORA reproduction으로 올리지 않는다.
+- Modality-balanced nnU-Net, centroid prior, diffusion pseudo-label, vesselness,
+  TopCoW anatomy와 weak supervision도 public code-level direct prior다. Component
+  stacking의 residual novelty는 0.5/5 수준이다.
+- 한 patient의 PRE/POST 3D-DSA+geometry release는 qualitative control만 가능하며
+  learning/confirmation cohort가 아니다. Six-way best 26.5/40, 모두 기각한다.
+
 ## 2026-08-12 sparse DSA와 structure-fidelity correction
 
 - [SAVE-Net](https://doi.org/10.3389/fmed.2026.1793962)은 17,335 internal

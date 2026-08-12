@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **ADAM patch-fold release boundary · 2026-08-12:** Exact v1.0 has 35 assets,
+> 61,506,611,200 bytes and a public 93-scan organization JSON. It is not acquired:
+> repository dataset license, upstream ADAM reuse/redistribution evidence,
+> validation IDs and negative controls are absent. The 93 scan IDs reduce to 58
+> bases; official B/F pairing semantics imply development/test base overlap of
+> 2/3/5/6/2 by fold. This release is a provenance audit target, not training,
+> validation or outer-test data.
+
 > **Latest DSA asset boundary · 2026-08-12:** SAVE-Net data are request-only;
 > the dual-centre TransUNet source exposes no inspected versioned patient/image/
 > mask/QDSA/split asset; Zenodo 21104782 revision 4 is embargoed through

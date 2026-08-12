@@ -1,5 +1,12 @@
 # ISBI 2027 제출 계획
 
+> **Latest submission checkpoint · ADAM fold release:** Do not turn a large
+> patch archive or a patient-grouping correction into a paper title. The release
+> lacks a lawful patient-disjoint outer-test contract, while DINO-3DRA,
+> GeoP2VNet and weak/anatomy-aware pipelines occupy the obvious architecture
+> cells. Six fresh candidates top out at 26.5/40. No title, method figure,
+> result table or submission identity is opened.
+
 > **Latest submission checkpoint · 2026-08-12:** neither structure-faithful
 > WSS nor task-faithful sparse DSA is an active ISBI identity. The first lacks
 > material transient-vector/family evidence and an observed matched failure;

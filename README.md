@@ -1,5 +1,21 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 ADAM patch-fold/segmentation-prior delta · schema 10.7
+> unchanged:** Exact GitHub release `d36df7d…` has 35 assets/61,506,611,200
+> bytes, but repository dataset license, upstream ADAM reuse permission,
+> validation IDs and negative controls are absent. Its 93 positive scan IDs
+> reduce to 58 base IDs; under official B/F same-subject semantics every fold
+> crosses 2/3/5/6/2 subject bases between development and test. DINO-3DRA
+> `5d9982e…` and GeoP2VNet `25c59bc…` further narrow foundation-feature and
+> geometry-to-voxel segmentation novelty. Six candidates score
+> 26.5/26.5/26.0/25.5/23.0/23.0 and all are rejected. Source-watch v18 freezes
+> 31 review-only states. No payload, P0/P1, method, architecture, scientific
+> server, PBS/GPU, outer test or claim opened. Full regression is 462 tests:
+> 396 pass/66 optional-dependency skip with 97 protocol invariant groups;
+> machine protocol SHA-256 is `232bc58b12678481dbe9b89b1738f8ca284a88b93768a832208a481c32f05e98`
+> and source-watch v18 SHA-256 is
+> `ab69bca79ba70d8b6543dbcc1e11d9091eaef201f0da61a6f29fa26320d7cf00`.
+
 > **2026-08-12 surface-vector/DSA deployment and private pin:** Exact public
 > scientific source `cb4f6b16183ddd10a3982edbbdabf77d8a0a3808` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31553310905)

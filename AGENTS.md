@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 ADAM patch-fold/segmentation-prior delta · schema 10.7
+> unchanged:** Exact public fold repository `d36df7d…`의 v1.0은 35 asset,
+> 61,506,611,200 bytes지만 dataset license/upstream ADAM reuse contract가 없다.
+> Small organization JSON만 읽었고 archive payload는 0이다. 93 positive scan,
+> 58 base ID, B/F 35 pair+23 unique 구조에서 official ADAM same-subject
+> semantics를 적용하면 fold별 development/test base overlap은 2/3/5/6/2다.
+> Validation ID와 negative 20건은 manifest에 없다. DINO-3DRA `5d9982e…`,
+> GeoP2VNet `25c59bc…`, modality/weak-supervision public code는 direct-prior
+> control일 뿐 AURORA result나 selected model이 아니다. Fresh scores
+> 26.5/26.5/26.0/25.5/23.0/23.0은 모두 기각한다. Source-watch v18은 31
+> state review-only다. Active lead/E0/P0/P1/method/architecture/server/PBS/GPU/
+> outer test/result/C21/claim은 0이다. `115645`을 repair/rerun하지 않는다.
+> Future gate-authorized execution은 `introai9` PBS-only, login-node GPU 금지다.
+> `junjinyong`에는 절대 접속·조회·전송·제출·모니터링하지 않는다.
+> Full regression은 462개 중 396 pass/66 optional-dependency skip, machine
+> protocol 97 invariant group이며 site/JSON/JavaScript/diff hygiene가 통과했다.
+> Machine protocol SHA-256은
+> `232bc58b12678481dbe9b89b1738f8ca284a88b93768a832208a481c32f05e98`,
+> source-watch v18 SHA-256은
+> `ab69bca79ba70d8b6543dbcc1e11d9091eaef201f0da61a6f29fa26320d7cf00`다.
+
 > **2026-08-12 surface-vector/DSA deployment·private synchronization:** Exact
 > public scientific source `cb4f6b16183ddd10a3982edbbdabf77d8a0a3808`
 > passed Quality `31553310905` and Pages `31553310384`. Live Learn

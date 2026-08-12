@@ -36,10 +36,52 @@ CONFIG_V14 = ROOT / "configs" / "source_watch_v14.json"
 CONFIG_V15 = ROOT / "configs" / "source_watch_v15.json"
 CONFIG_V16 = ROOT / "configs" / "source_watch_v16.json"
 CONFIG_V17 = ROOT / "configs" / "source_watch_v17.json"
+CONFIG_V18 = ROOT / "configs" / "source_watch_v18.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
 class SourceWatchContractTests(unittest.TestCase):
+    def test_v18_freezes_adam_release_assets_and_two_direct_priors(self) -> None:
+        config = load_config(CONFIG_V18)
+        self.assertEqual(config["schema_version"], "aurora.source_watch.v18")
+        self.assertEqual(len(config["watches"]), 31)
+        self.assertEqual(
+            [watch["watch_id"] for watch in config["watches"][-3:]],
+            [
+                "adam_patch_fold_release_contract_v1",
+                "dino_3dra_foundation_segmentation_direct_prior_v1",
+                "geop2vnet_geometry_voxel_segmentation_direct_prior_v1",
+            ],
+        )
+        fold = config["watches"][-3]
+        self.assertEqual(fold["kind"], "github_release_asset_contract")
+        self.assertEqual(fold["frozen_snapshot"]["release_asset_count"], 35)
+        self.assertEqual(
+            fold["frozen_snapshot"]["release_asset_total_bytes"], 61506611200
+        )
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+        changed = copy.deepcopy(observations)
+        changed[fold["watch_id"]]["release_asset_manifest_sha256"] = "0" * 64
+        result = evaluate_config(config, changed)
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertIn(
+            "github_release_asset_manifest_changed",
+            result["watches"][-3]["material_change_signals"],
+        )
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+
     def test_v17_adds_embargo_watch_without_asset_or_compute_authority(self) -> None:
         config = load_config(CONFIG_V17)
         self.assertEqual(config["schema_version"], "aurora.source_watch.v17")
@@ -611,7 +653,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v17.json", workflow)
+        self.assertIn("configs/source_watch_v18.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)

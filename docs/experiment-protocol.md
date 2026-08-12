@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **ADAM fold-release experiment boundary · 2026-08-12:** no acquisition and
+> no run. The 61.5 GB patch payload is not opened because repository license,
+> upstream reuse permission and patient-disjoint split are absent. Metadata
+> audit finds 93 positive scans/58 bases, validation IDs 0, negative IDs 0 and
+> B/F base overlap 2/3/5/6/2 by fold. This fails E0 before baseline execution.
+> Source-watch v18 is metadata-only; scientific-server query, PBS/GPU and
+> monitoring are zero.
+
 > **Latest experiment decision · 2026-08-12:** no new run. `115645` remains
 > immutable no-verdict and a fresh label without material evidence cannot
 > reopen it. The DSA delta also fails admission at 26.5/40 because the public

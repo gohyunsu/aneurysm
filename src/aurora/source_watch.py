@@ -47,6 +47,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v15",
         "aurora.source_watch.v16",
         "aurora.source_watch.v17",
+        "aurora.source_watch.v18",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -192,7 +193,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v16_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v16(payload)
-    else:
+    elif schema == "aurora.source_watch.v17":
         if payload.get("extends") != "source_watch_v16.json":
             raise SourceWatchContractError("v17_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -203,6 +204,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v17_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v17(payload)
+    else:
+        if payload.get("extends") != "source_watch_v17.json":
+            raise SourceWatchContractError("v18_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v17":
+            raise SourceWatchContractError("v18_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v18_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v18(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -260,6 +272,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v15",
         "aurora.source_watch.v16",
         "aurora.source_watch.v17",
+        "aurora.source_watch.v18",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1873,6 +1886,194 @@ def _validate_v17(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v17_change_boundary_changed")
 
 
+def _validate_v18(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 31:
+        raise SourceWatchContractError("v18_watch_set_changed")
+    _validate_v17(
+        {
+            "watches": watches[:28],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    adam_folds, dino_3dra, geop2v = watches[28:]
+
+    fold_root = sorted(
+        [
+            {"name": "README.md", "type": "file", "size": 6209},
+            {
+                "name": "folds_data_organization.json",
+                "type": "file",
+                "size": 12859,
+            },
+        ],
+        key=lambda item: item["name"].lower(),
+    )
+    if (
+        adam_folds.get("watch_id") != "adam_patch_fold_release_contract_v1"
+        or adam_folds.get("kind") != "github_release_asset_contract"
+        or adam_folds.get("review_request") != "fresh_source_reaudit_only"
+        or adam_folds.get("source")
+        != {
+            "repository": "josedaviddr/Aneurysm_segmentation_DataSet_folds",
+            "repository_url": (
+                "https://github.com/josedaviddr/"
+                "Aneurysm_segmentation_DataSet_folds"
+            ),
+            "default_branch": "main",
+            "release_tag": "v1.0",
+            "dataset_name": "ADAM",
+            "manifest_path": "folds_data_organization.json",
+        }
+        or adam_folds.get("frozen_snapshot")
+        != {
+            "main_head_sha": "d36df7d19a96aa5b9fca0cc9050e021ac7319fee",
+            "root_entries": fold_root,
+            "release_count": 1,
+            "license_spdx_id": None,
+            "repository_size_kib": 10,
+            "payload_or_code_entries": ["folds_data_organization.json"],
+            "release_id": 349278633,
+            "release_tag": "v1.0",
+            "release_target_commitish": "main",
+            "release_published_at": "2026-07-06T00:50:46Z",
+            "release_asset_count": 35,
+            "release_asset_total_bytes": 61506611200,
+            "release_asset_manifest_sha256": (
+                "7d5ebe80859b4d781a13a3c1b65d3b18fb2dfa2bd13486bb64c36b980b133f9c"
+            ),
+            "availability": "public_github_release_asset_contract",
+        }
+    ):
+        raise SourceWatchContractError("adam_patch_fold_release_contract_changed")
+
+    dino_root = sorted(
+        [
+            {"name": ".DS_Store", "type": "file", "size": 8196},
+            {"name": ".gitattributes", "type": "file", "size": 108},
+            {"name": "LICENSE", "type": "file", "size": 1066},
+            {"name": "README.md", "type": "file", "size": 10617},
+            {"name": "__pycache__", "type": "dir", "size": 0},
+            {"name": "conda_env_backup", "type": "dir", "size": 0},
+            {"name": "data", "type": "dir", "size": 0},
+            {"name": "dino3dra_config.py", "type": "file", "size": 5212},
+            {
+                "name": "dino3dra_inference_inference.ipynb",
+                "type": "file",
+                "size": 33952,
+            },
+            {"name": "dino3dra_utils.py", "type": "file", "size": 7145},
+            {"name": "dino_3dra_net.py", "type": "file", "size": 33826},
+            {"name": "dino_backbone.py", "type": "file", "size": 30159},
+            {"name": "dino_inference_v2.py", "type": "file", "size": 32514},
+            {
+                "name": "dino_postprocessing_v2.py",
+                "type": "file",
+                "size": 45640,
+            },
+            {
+                "name": "dino_preprocessing_v2.py",
+                "type": "file",
+                "size": 13591,
+            },
+            {"name": "fapm_3d.py", "type": "file", "size": 34635},
+            {
+                "name": "visualize_3dra_notebook.py",
+                "type": "file",
+                "size": 21930,
+            },
+            {"name": "weight", "type": "dir", "size": 0},
+        ],
+        key=lambda item: item["name"].lower(),
+    )
+    geo_root = sorted(
+        [
+            {"name": "LICENSE", "type": "file", "size": 8960},
+            {"name": "README.md", "type": "file", "size": 6810},
+            {"name": "assets", "type": "dir", "size": 0},
+            {"name": "configs", "type": "dir", "size": 0},
+            {"name": "geop2vnet", "type": "dir", "size": 0},
+            {"name": "requirements.txt", "type": "file", "size": 332},
+            {"name": "scripts", "type": "dir", "size": 0},
+            {"name": "setup.py", "type": "file", "size": 1470},
+            {"name": "tools", "type": "dir", "size": 0},
+        ],
+        key=lambda item: item["name"].lower(),
+    )
+    direct_priors = [
+        (
+            dino_3dra,
+            "dino_3dra_foundation_segmentation_direct_prior_v1",
+            "JiayangDS/Dino3DRA",
+            "5d9982ee794b531a8f04e73e849af0040976381f",
+            "MIT",
+            57013,
+            dino_root,
+            [
+                ".DS_Store", ".gitattributes", "__pycache__",
+                "conda_env_backup", "data", "dino3dra_config.py",
+                "dino3dra_inference_inference.ipynb", "dino3dra_utils.py",
+                "dino_3dra_net.py", "dino_backbone.py", "dino_inference_v2.py",
+                "dino_postprocessing_v2.py", "dino_preprocessing_v2.py",
+                "fapm_3d.py", "visualize_3dra_notebook.py", "weight",
+            ],
+            (
+                "public_direct_prior_inference_code_sample_case_and_lfs_pointer_"
+                "without_training_or_fold_contract"
+            ),
+        ),
+        (
+            geop2v,
+            "geop2vnet_geometry_voxel_segmentation_direct_prior_v1",
+            "somtiannes/GeoP2VNet",
+            "25c59bc172d0fedac37c1b6cfc8fe4af0823bf65",
+            "NOASSERTION",
+            951,
+            geo_root,
+            [
+                "assets", "configs", "geop2vnet", "requirements.txt",
+                "scripts", "setup.py", "tools",
+            ],
+            "public_direct_prior_code_without_clinical_data_or_checkpoint",
+        ),
+    ]
+    for (
+        watch, watch_id, repository, head, license_id, size, root, material,
+        availability,
+    ) in direct_priors:
+        source = watch.get("source", {})
+        snapshot = watch.get("frozen_snapshot", {})
+        if (
+            watch.get("watch_id") != watch_id
+            or watch.get("kind") != "github"
+            or watch.get("review_request")
+            != "direct_prior_baseline_feasibility_reaudit_only"
+            or source.get("repository") != repository
+            or source.get("repository_url") != f"https://github.com/{repository}"
+            or source.get("default_branch") != "main"
+            or snapshot.get("main_head_sha") != head
+            or snapshot.get("root_entries") != root
+            or snapshot.get("release_count") != 0
+            or snapshot.get("license_spdx_id") != license_id
+            or snapshot.get("repository_size_kib") != size
+            or snapshot.get("payload_or_code_entries") != material
+            or snapshot.get("availability") != availability
+        ):
+            raise SourceWatchContractError("v18_segmentation_prior_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "release_asset_manifest_is_not_dataset_provenance_or_license",
+            "patch_fold_label_is_not_patient_grouped_outer_test",
+            "same_subject_timepoints_must_not_cross_development_and_test",
+            "repository_reported_result_is_not_peer_review_or_aurora_evidence",
+        )
+    ):
+        raise SourceWatchContractError("v18_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -1935,6 +2136,43 @@ def fetch_github_snapshot(repository: str, branch: str) -> dict[str, Any]:
         "license_spdx_id": license_info.get("spdx_id"),
         "repository_size_kib": int(metadata.get("size", 0)),
         "payload_or_code_entries": _material_entries(entries),
+    }
+
+
+def fetch_github_release_asset_contract_snapshot(
+    repository: str, branch: str, release_tag: str
+) -> dict[str, Any]:
+    """Read a GitHub repository and one release's asset metadata only."""
+
+    snapshot = fetch_github_snapshot(repository, branch)
+    base = f"https://api.github.com/repos/{repository}"
+    release = _json_get(f"{base}/releases/tags/{release_tag}", github=True)
+    assets = sorted(
+        [
+            {
+                "name": str(item.get("name", "")),
+                "size": int(item.get("size", 0)),
+                "digest": item.get("digest"),
+                "content_type": item.get("content_type"),
+                "state": item.get("state"),
+            }
+            for item in release.get("assets", [])
+        ],
+        key=lambda item: item["name"],
+    )
+    manifest = (json.dumps(assets, sort_keys=True, separators=(",", ":")) + "\n").encode(
+        "utf-8"
+    )
+    return {
+        **snapshot,
+        "release_id": int(release.get("id", 0)),
+        "release_tag": str(release.get("tag_name", "")),
+        "release_target_commitish": str(release.get("target_commitish", "")),
+        "release_published_at": str(release.get("published_at", "")),
+        "release_asset_count": len(assets),
+        "release_asset_total_bytes": sum(item["size"] for item in assets),
+        "release_asset_manifest_sha256": _sha256(manifest),
+        "availability": "public_github_release_asset_contract",
     }
 
 
@@ -2502,6 +2740,51 @@ def evaluate_watch(
                     "direct_prior_baseline_feasibility_reaudit_triggered"
                 ] = triggered
         return result
+    if watch.get("kind") == "github_release_asset_contract":
+        frozen = watch["frozen_snapshot"]
+        signal_names = {
+            "main_head_sha": "github_release_repository_head_changed",
+            "root_entries": "github_release_root_manifest_changed",
+            "release_count": "github_release_count_changed",
+            "license_spdx_id": "github_release_license_changed",
+            "repository_size_kib": "github_release_repository_size_changed",
+            "payload_or_code_entries": "github_release_material_entries_changed",
+            "release_id": "github_release_identity_changed",
+            "release_tag": "github_release_tag_changed",
+            "release_target_commitish": "github_release_target_changed",
+            "release_published_at": "github_release_publication_time_changed",
+            "release_asset_count": "github_release_asset_count_changed",
+            "release_asset_total_bytes": "github_release_asset_bytes_changed",
+            "release_asset_manifest_sha256": "github_release_asset_manifest_changed",
+            "availability": "github_release_availability_changed",
+        }
+        signals = [
+            signal
+            for key, signal in signal_names.items()
+            if observed.get(key) != frozen.get(key)
+        ]
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") == "github_versioned_release_contract":
         frozen = watch["frozen_snapshot"]
         signal_names = {
@@ -2893,6 +3176,10 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         or watch.get("schema_version") == "aurora.source_watch.v1"
     ):
         return fetch_github_snapshot(source["repository"], source["default_branch"])
+    if watch.get("kind") == "github_release_asset_contract":
+        return fetch_github_release_asset_contract_snapshot(
+            source["repository"], source["default_branch"], source["release_tag"]
+        )
     if watch.get("kind") == "zenodo_challenge":
         return fetch_zenodo_challenge_snapshot(
             source["zenodo_api_url"], source["challenge_page_url"]
@@ -2952,6 +3239,9 @@ def evaluate_config(
         "aurora.source_watch.v13",
         "aurora.source_watch.v14",
         "aurora.source_watch.v15",
+        "aurora.source_watch.v16",
+        "aurora.source_watch.v17",
+        "aurora.source_watch.v18",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

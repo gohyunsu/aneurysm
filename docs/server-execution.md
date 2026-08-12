@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **2026-08-12 ADAM/segmentation delta:** GitHub and Zenodo public metadata only.
+> No scientific server was queried; no dataset, DICOM, patch archive or model
+> weight was transferred; no PBS/GPU job was submitted or monitored. Source-watch
+> v18 runs as public metadata inspection. Any future gate-authorized execution is
+> `introai9` PBS-only with no login-node GPU. Every `junjinyong` action remains
+> prohibited.
+
 > **2026-08-12 surface-vector/DSA delta:** public source metadata only. No
 > scientific server was queried, no payload transferred, and no PBS/GPU job was
 > submitted or monitored. Source-watch v17 does not use `introai9`. Future

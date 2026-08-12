@@ -189,6 +189,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "future_source_admission_v2",
             "pose_workflow_and_spatiotemporal_operator_reappraisal",
             "surface_vector_and_task_faithful_dsa_delta",
+            "adam_patch_fold_and_segmentation_prior_delta",
             "aneurysmal_sah_segmentation_outcome_reappraisal",
             "rsna_release_layer_and_webgan_utility_delta",
             "rupture_state_future_risk_and_unit_semantics_delta",
@@ -274,6 +275,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v15",
             "public_source_watch_v16",
             "public_source_watch_v17",
+            "public_source_watch_v18",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -623,6 +625,189 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "direct-prior composition or embargo change cannot create E0, a model or compute."
         )
     checks.append("surface-vector and task-faithful DSA fail-closed delta boundary")
+
+    adam_fold = problem_selection["adam_patch_fold_and_segmentation_prior_delta"]
+    _require_keys(
+        adam_fold,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_ids", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "current_schema_or_primary_batch_changed", "adam_fold_repository",
+            "adam_fold_exact_head", "adam_fold_manifest_blob",
+            "adam_fold_release_tag", "adam_fold_release_id",
+            "adam_fold_release_assets", "adam_fold_release_total_bytes",
+            "adam_fold_release_manifest_sha256",
+            "adam_fold_repository_license_present",
+            "adam_fold_upstream_redistribution_or_reuse_permission_public",
+            "adam_fold_payload_accessed", "adam_fold_dataset_declared",
+            "adam_fold_exact_scan_ids", "adam_fold_unique_base_ids",
+            "adam_fold_suffix_counts", "adam_fold_train_counts",
+            "adam_fold_validation_counts", "adam_fold_test_counts",
+            "adam_fold_exact_train_test_overlap",
+            "adam_fold_base_id_train_test_overlap",
+            "adam_fold_test_union_exact_ids",
+            "adam_fold_each_exact_id_tested_once",
+            "adam_fold_negative_control_ids_present",
+            "adam_fold_patient_overlap_interpretation",
+            "official_adam_training_cases", "official_adam_positive_cases",
+            "official_adam_negative_cases",
+            "official_adam_baseline_followup_pairs",
+            "official_adam_additional_unique_positive_subjects",
+            "dino_3dra_repository", "dino_3dra_exact_head",
+            "dino_3dra_sample_image_present",
+            "dino_3dra_weight_is_git_lfs_pointer",
+            "dino_3dra_training_code_fold_manifest_or_completed_outputs_present",
+            "dino_3dra_arxiv_identifier_is_placeholder",
+            "geop2vnet_repository", "geop2vnet_exact_head",
+            "geop2vnet_repository_reported_cta_cases",
+            "geop2vnet_repository_reported_lesions",
+            "geop2vnet_clinical_data_or_checkpoint_present",
+            "geop2vnet_patient_grouped_fold_semantics_public",
+            "modality_agnostic_repository_head",
+            "anatomy_weak_supervision_repository_head",
+            "pre_post_stent_zenodo_record",
+            "pre_post_stent_independent_patients",
+            "pre_post_stent_dicom_bytes", "pre_post_stent_geometry_bytes",
+            "pre_post_stent_cfd_field_output_released",
+            "cow_gwas_zenodo_record", "cow_gwas_file_count",
+            "cow_gwas_total_bytes",
+            "cow_gwas_is_casewise_imaging_aneurysm_asset",
+            "source_results_reproduced_by_aurora", "candidates",
+            "p0_registered", "p1_registered", "method_selected",
+            "architecture_selected", "scientific_server_queried",
+            "gpu_training_authorized", "outer_test_authorized",
+            "submission_identity_active", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "next_allowed_action",
+        ],
+        "ADAM patch-fold and segmentation-prior delta",
+    )
+    expected_adam_fold_candidates = [
+        ("dino_feature_3dra_segmentation_extension", 26.5),
+        ("geometry_splatting_cta_segmentation_extension", 26.5),
+        ("modality_agnostic_anatomy_aware_weak_supervision", 26.0),
+        ("pre_post_stent_hemodynamic_remodeling_learning", 25.5),
+        ("patient_grouped_adam_patch_benchmark_repair", 23.0),
+        ("paired_adam_change_consistency_segmentation", 23.0),
+    ]
+    if (
+        adam_fold["status"]
+        != "fresh_public_release_and_direct_prior_batch_rejected_best_26_5_patient_grouping_novelty_asset_and_unit_floors_no_state_change"
+        or adam_fold["audit_document"]
+        != "docs/adam-patch-fold-release-and-segmentation-prior-reappraisal-2026-08-12.md"
+        or adam_fold["automatic_selection_threshold"] != 32.0
+        or adam_fold["best_candidate_ids"]
+        != [
+            "dino_feature_3dra_segmentation_extension",
+            "geometry_splatting_cta_segmentation_extension",
+        ]
+        or adam_fold["best_score"] != 26.5
+        or adam_fold["best_residual_novelty_score"] != 1.0
+        or adam_fold["all_candidate_scores"]
+        != [26.5, 26.5, 26.0, 25.5, 23.0, 23.0]
+        or adam_fold["conditional_source_lead_count"] != 0
+        or adam_fold["adam_fold_repository"]
+        != "josedaviddr/Aneurysm_segmentation_DataSet_folds"
+        or adam_fold["adam_fold_exact_head"]
+        != "d36df7d19a96aa5b9fca0cc9050e021ac7319fee"
+        or adam_fold["adam_fold_manifest_blob"]
+        != "2476524d617068206467e7b93306266e95b8779d"
+        or (adam_fold["adam_fold_release_tag"], adam_fold["adam_fold_release_id"])
+        != ("v1.0", 349278633)
+        or (
+            adam_fold["adam_fold_release_assets"],
+            adam_fold["adam_fold_release_total_bytes"],
+        ) != (35, 61506611200)
+        or adam_fold["adam_fold_release_manifest_sha256"]
+        != "7d5ebe80859b4d781a13a3c1b65d3b18fb2dfa2bd13486bb64c36b980b133f9c"
+        or (adam_fold["adam_fold_exact_scan_ids"], adam_fold["adam_fold_unique_base_ids"])
+        != (93, 58)
+        or adam_fold["adam_fold_suffix_counts"]
+        != {"B": 35, "F": 35, "none": 23}
+        or adam_fold["adam_fold_train_counts"] != [74, 74, 74, 75, 75]
+        or adam_fold["adam_fold_validation_counts"] != [0, 0, 0, 0, 0]
+        or adam_fold["adam_fold_test_counts"] != [19, 19, 19, 18, 18]
+        or adam_fold["adam_fold_exact_train_test_overlap"] != [0, 0, 0, 0, 0]
+        or adam_fold["adam_fold_base_id_train_test_overlap"] != [2, 3, 5, 6, 2]
+        or adam_fold["adam_fold_test_union_exact_ids"] != 93
+        or adam_fold["adam_fold_patient_overlap_interpretation"]
+        != "inference_under_official_adam_b_f_same_subject_semantics_not_raw_payload_duplication_claim"
+        or (
+            adam_fold["official_adam_training_cases"],
+            adam_fold["official_adam_positive_cases"],
+            adam_fold["official_adam_negative_cases"],
+            adam_fold["official_adam_baseline_followup_pairs"],
+            adam_fold["official_adam_additional_unique_positive_subjects"],
+        ) != (113, 93, 20, 35, 23)
+        or adam_fold["dino_3dra_exact_head"]
+        != "5d9982ee794b531a8f04e73e849af0040976381f"
+        or adam_fold["geop2vnet_exact_head"]
+        != "25c59bc172d0fedac37c1b6cfc8fe4af0823bf65"
+        or (
+            adam_fold["geop2vnet_repository_reported_cta_cases"],
+            adam_fold["geop2vnet_repository_reported_lesions"],
+        ) != (205, 266)
+        or adam_fold["modality_agnostic_repository_head"]
+        != "8ae1eec763d87887dac728d591c2c2b6df36be4f"
+        or adam_fold["anatomy_weak_supervision_repository_head"]
+        != "98072ee239ef6b61b8cd2a6ab01371b3f56c446d"
+        or (
+            adam_fold["pre_post_stent_zenodo_record"],
+            adam_fold["pre_post_stent_independent_patients"],
+            adam_fold["pre_post_stent_dicom_bytes"],
+            adam_fold["pre_post_stent_geometry_bytes"],
+        ) != (18944596, 1, 194755060, 3205118)
+        or (
+            adam_fold["cow_gwas_zenodo_record"],
+            adam_fold["cow_gwas_file_count"],
+            adam_fold["cow_gwas_total_bytes"],
+        ) != (15084068, 46, 9016438620)
+        or [
+            (candidate.get("id"), candidate.get("total"))
+            for candidate in adam_fold["candidates"]
+        ] != expected_adam_fold_candidates
+        or any(
+            candidate.get("critical_axis_pass") is not False
+            for candidate in adam_fold["candidates"]
+        )
+        or any(
+            adam_fold[key] is not False
+            for key in (
+                "current_schema_or_primary_batch_changed",
+                "adam_fold_repository_license_present",
+                "adam_fold_upstream_redistribution_or_reuse_permission_public",
+                "adam_fold_payload_accessed",
+                "adam_fold_negative_control_ids_present",
+                "dino_3dra_training_code_fold_manifest_or_completed_outputs_present",
+                "geop2vnet_clinical_data_or_checkpoint_present",
+                "geop2vnet_patient_grouped_fold_semantics_public",
+                "pre_post_stent_cfd_field_output_released",
+                "cow_gwas_is_casewise_imaging_aneurysm_asset",
+                "source_results_reproduced_by_aurora", "p0_registered",
+                "p1_registered", "method_selected", "architecture_selected",
+                "scientific_server_queried", "gpu_training_authorized",
+                "outer_test_authorized", "submission_identity_active",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or any(
+            adam_fold[key] is not True
+            for key in (
+                "adam_fold_each_exact_id_tested_once",
+                "dino_3dra_sample_image_present",
+                "dino_3dra_weight_is_git_lfs_pointer",
+                "dino_3dra_arxiv_identifier_is_placeholder",
+            )
+        )
+        or adam_fold["next_allowed_action"]
+        != "fresh_problem_or_material_patient_grouped_lawful_asset_audit_only_no_payload_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "The ADAM patch-fold delta must remain rejected: release size and "
+            "scan-wise folds cannot compensate for license, subject grouping, "
+            "independent-unit or direct-prior failures."
+        )
+    checks.append("ADAM patch-fold and segmentation-prior rejection boundary")
 
     sah = problem_selection["aneurysmal_sah_segmentation_outcome_reappraisal"]
     _require_keys(
@@ -8488,7 +8673,78 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "an embargo change may request source review only, never task, method or compute."
         )
     checks.append("twenty-eight-source fail-closed synthetic DSA embargo watch boundary")
+    source_watch_v18 = problem_selection["public_source_watch_v18"]
+    _require_keys(
+        source_watch_v18,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "adam_fold_repository_head",
+            "adam_fold_release_asset_manifest_sha256",
+            "dino_3dra_repository_head", "geop2vnet_repository_head",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized",
+            "score_repair_authorized", "p0_or_p1_authorized",
+            "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+            "server_queried", "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch", "decision",
+        ],
+        "public source watch v18",
+    )
+    if (
+        source_watch_v18["status"]
+        != "watch_only_all_thirty_one_frozen_snapshots_match"
+        or source_watch_v18["config"] != "configs/source_watch_v18.json"
+        or source_watch_v18["extends_historical_config"]
+        != "configs/source_watch_v17.json"
+        or source_watch_v18["config_sha256"]
+        != "ab69bca79ba70d8b6543dbcc1e11d9091eaef201f0da61a6f29fa26320d7cf00"
+        or source_watch_v18["watch_count"] != 31
+        or source_watch_v18["added_watch_ids"]
+        != [
+            "adam_patch_fold_release_contract_v1",
+            "dino_3dra_foundation_segmentation_direct_prior_v1",
+            "geop2vnet_geometry_voxel_segmentation_direct_prior_v1",
+        ]
+        or source_watch_v18["adam_fold_repository_head"]
+        != "d36df7d19a96aa5b9fca0cc9050e021ac7319fee"
+        or source_watch_v18["adam_fold_release_asset_manifest_sha256"]
+        != "7d5ebe80859b4d781a13a3c1b65d3b18fb2dfa2bd13486bb64c36b980b133f9c"
+        or source_watch_v18["dino_3dra_repository_head"]
+        != "5d9982ee794b531a8f04e73e849af0040976381f"
+        or source_watch_v18["geop2vnet_repository_head"]
+        != "25c59bc172d0fedac37c1b6cfc8fe4af0823bf65"
+        or source_watch_v18["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v18[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized",
+                "score_repair_authorized", "p0_or_p1_authorized",
+                "method_or_architecture_authorized", "gpu_or_outer_test_authorized",
+                "server_queried", "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v18["decision"]
+        != "continue_fail_closed_thirty_one_source_watch_patch_release_and_segmentation_code_request_review_only_without_payload_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v18 must preserve thirty-one exact public states; "
+            "release or code changes may request review only, never payload, method or compute."
+        )
+    checks.append("thirty-one-source fail-closed ADAM-fold and segmentation-prior watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "dino_feature_3dra_segmentation_extension_direct_code_prior_and_missing_training_fold_result_contract",
+        "geometry_splatting_cta_segmentation_extension_direct_prior_and_unresolved_clinical_units",
+        "modality_agnostic_anatomy_aware_weak_supervision_public_component_combination",
+        "pre_post_stent_hemodynamic_remodeling_learning_single_patient_no_field_confirmation",
+        "patient_grouped_adam_patch_benchmark_repair_provenance_not_paper_identity",
+        "paired_adam_change_consistency_segmentation_no_growth_target_and_base_id_overlap",
         "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
         "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",
         "automatic_surface_neck_loop_transfer_neckspline_direct_prior_and_missing_expert_loop_contract",

@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **ADAM/segmentation update · 2026-08-12: model remains `null`.** DINO-3DRA
+> already projects frozen 2D foundation features into a 3D U-Net; GeoP2VNet
+> already splats explicit vessel-surface descriptors into CTA voxels; public
+> code also combines modality balancing, priors, diffusion pseudo-labels,
+> vesselness, TopCoW anatomy and weak supervision. Repository claims are not
+> AURORA results, but these components cannot be renamed as novelty. The new
+> patch release fails patient grouping, license and control-cohort gates, so no
+> implementation or GPU architecture is selected.
+
 > **Latest model decision · 2026-08-12: still `null`.** Edge 1-form,
 > equivariance, Hodge and periodic operators remain a factorial control family,
 > not a stack to implement. Critical-point/worldline extractors are
