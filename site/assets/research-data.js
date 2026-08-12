@@ -218,6 +218,13 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       year: "2026.08",
+      title: "TopAneu's registered plan and realized release are different scientific objects",
+      copy: "The official design planned 500 Task-1 training volumes, 350 private-test volumes, 200 public-source training volumes and 50/20 train/test gold vessel masks. The realized public release reports 417 scans from 409 patients; the 409-patient source counts include 68 public-source patients, and vessel masks are predicted by the organizer's TopBrain model. It does not expose a casewise gold/silver flag, complete patient-grouped split, private-test manifest, realized per-location support or control fraction. The design record's CC BY 4.0 license is not the custom medical-data agreement. Official evaluator semantics are important validity constraints but not standalone method novelty. Six fresh candidates score 31.5/30.5/27.5/26.5/26.5/20.5 and all fail total or critical floors.",
+      status: "Best 31.5/40 rejected · novelty 0.5/5 · terms/payload/P0/model/server/GPU 0",
+      url: "../docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md"
+    },
+    {
+      year: "2026.08",
       title: "A real annotation version orbit is evidence, not automatic method novelty",
       copy: "Official TopAneu Git history pins a 98-case batch and a current 417-scan release. Metadata-only comparison finds 87 common paths, 73 unchanged image checksum blobs and 53 changed location JSON blobs, implying at least 39 same-path unchanged-image/changed-label cases. Renames, longitudinal scans and preprocessing changes prevent patient-pair inference; all 87 dense-mask checksums changed, so they are not asserted as expert contour revisions. Active label cleaning, revised medical benchmarks, hierarchical noisy-label learning and direct aneurysm multi-task learning occupy the generic mechanisms. The evaluator correction scores 32.0 with novelty 0.5; the revision-aware candidate scores 31.5 with novelty 2.0, below the mandatory 2.5 floor. All six are rejected without terms, payload, P0 or compute.",
       status: "Additive best 32.0 rejected · revision candidate 31.5/40, novelty 2.0/5 · active lead/P0/model/GPU 0",
@@ -1013,8 +1020,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "TopAneu 2026 · terms gated",
-      role: "source-rejected code-semantics history; no active acquisition or P0 role",
-      provenance: "417 scans/409 patients · 52 location classes · image-only test · Task 2 class-volume metric · historical 33 preserved · fresh best 31.5 rejected · medical payload/model/GPU 0"
+      role: "source-rejected registered-design/release and code-semantics benchmark; no active acquisition or P0 role",
+      provenance: "registered 500 train/350 private test and 50/20 planned gold masks ≠ realized 417 scans/409 patients · 409-patient source count includes public 68 · organizer-predicted vessel masks · casewise gold/silver/grouped test contract 0 · fresh best 31.5, novelty 0.5 rejected · terms/medical payload/model/GPU 0"
     },
     {
       name: "RSNA-ICA 2025 · controlled access",
@@ -1188,6 +1195,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Schema 11.1 separates TopAneu's registered design from its realized release",
+      copy: "Official registry, Zenodo design revision 4, live Data page and exact Git/evaluator state were compared without joining the challenge or opening medical payload. Planned 500 train/350 private test, 200 public-source train and 50/20 gold vessel masks are separated from realized 417 scans/409 patients, a public-source patient count of 68 and organizer-predicted vessel masks. The public contract does not expose casewise gold/silver, complete patient grouping or private-test units. Six candidates score 31.5/30.5/27.5/26.5/26.5/20.5 and all fail; best novelty is 0.5/5. Source-watch v20 is reused, historical scores and job 115645 are untouched, and no terms, payload, P0/P1, model, server or compute is opened.",
+      files: ["docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/literature-lineage.md", "docs/datasets.md", "docs/data-acquisition.md", "docs/server-execution.md", "docs/source-watch.md", "docs/research-map.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

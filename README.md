@@ -1,5 +1,27 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 TopAneu registered-design/release reappraisal · schema 11.1:**
+> The official design planned 500 training and 350 private-test volumes, 200
+> public-source training volumes and 50/20 train/test gold vessel masks. The
+> realized public training release instead reports 417 scans from 409 patients,
+> a public-source count of 68 and organizer-TopBrain-predicted vessel masks; a
+> casewise gold/silver indicator, complete patient-grouped split and private
+> test manifest are not public. The design PDF's CC BY 4.0 license is not the
+> medical-data agreement. Official Task-1 TN and active Task-2 global-class
+> overlap semantics also cannot be relabelled as patient-class TN or instance
+> detection. Six fresh rows score **31.5/30.5/27.5/26.5/26.5/20.5**; all fail
+> total or critical novelty/target/asset/unit floors. TopAneu remains a future
+> terms-gated benchmark, not an active paper identity. Surface-vector stays
+> inactive and `115645` stays immutable no-verdict. No terms, payload, P0/P1,
+> model, scientific-server query or compute opened. See the
+> [exact reappraisal](docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md)
+> and [beginner guide](site/learn.html#topaneu-registered-release).
+> Local regression is 468 tests: 402 pass/66 optional skip with 103 protocol
+> invariants. Canonical protocol SHA-256 is
+> `872a3917485512c5990d3e46185cddd2f74d1acbf568cfcfc7d8e3582a3d87cd`;
+> unchanged source-watch v20 SHA-256 is
+> `57d2a8671e09a2f49d3e3b265ee87353b86245ecdf2d0199f482c11d50580198`.
+
 > **2026-08-12 schema 11.0 deployment/private pin:** Exact scientific source
 > `b7ef613ee6ac906ba23bdf5df29e51b59ac66899` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31561077612)

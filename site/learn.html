@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#08121f">
-  <meta name="description" content="현재 충돌 검출과 사전 경고, 공개 자산 계약, 독립 단위부터 WSS, GNN과 평가까지 기초부터 설명하는 AURORA 입문 가이드.">
+  <meta name="description" content="TopAneu 등록 설계와 실제 release, 공개 자산 계약, 독립 단위부터 WSS, GNN과 평가까지 기초부터 설명하는 AURORA 입문 가이드.">
   <title>AURORA Field Guide · 처음부터 이해하기</title>
   <link rel="stylesheet" href="assets/aurora.css">
   <link rel="stylesheet" href="assets/learn.css">
@@ -42,6 +42,7 @@
       <a href="#latent-transport">Latent transport</a>
       <a href="#synva-release">SynVA release</a>
       <a href="#reference-provenance">Reference provenance</a>
+      <a href="#topaneu-registered-release">TopAneu plan vs release</a>
       <a href="#admission-v2">Why 32 is rejected</a>
       <a href="#cross-vascular-wss">AAA/WSS correction</a>
       <a href="#posttreatment-imaging">Post-treatment imaging</a>
@@ -78,7 +79,7 @@
           critical point·signed index·시간 궤적이 무엇인지,
           weak sphere와 precise mask가 어떻게 다른지, containment가 무엇인지,
           환자·session·lesion을 왜 다른 독립 단위로 세어야 하는지,
-          TopAneu의 52개 위치 label과 silver vessel mask,
+          TopAneu의 등록 설계와 실제 release, 52개 위치 label과 predicted vessel mask,
           DSA sequence와 prefix risk, 반복 CTP와 informative observation,
           rigid-wall CFD와 compliant-wall FSI,
           WSS 시계열에서 TAWSS·OSI·RRT가 어떻게 계산되는지, mesh와 GNN은
@@ -1438,6 +1439,77 @@
             <span class="no">No terms · MIRA · payload · model</span>
           </div>
           <a href="../docs/reference-provenance-and-rsna-release-contract-reappraisal-2026-08-11.md">source contract, direct prior, frozen scores와 re-entry 조건 전체 읽기 ↗</a>
+        </div>
+        <div class="answer-card" id="topaneu-registered-release">
+          <span>TopAneu 등록 설계와 실제 release는 왜 따로 읽어야 하나?</span>
+          <strong>계획한 cohort와 실제 공개한 cohort는 같은 과학적 객체가 아닙니다.</strong>
+          <p>
+            먼저 용어부터 구분합니다. <b>등록 설계</b>는 challenge가 시작되기 전에
+            무엇을 몇 건 모으고, 어떻게 나누고, 어떤 metric을 사용할지 선언한
+            문서입니다. <b>실제 release</b>는 연구자가 지금 접근할 수 있는 파일과
+            manifest입니다. 계획은 중요한 사전 약속이지만, 계획 숫자가 자동으로
+            공개 데이터의 행 수·환자 수·정답 품질이 되지는 않습니다.
+          </p>
+          <p>
+            TopAneu design은 Task-1 train 500 volume, private test 350 volume,
+            public-source train 200 volume을 계획합니다. 각 location에 train/test
+            positive를 최소 세 건, control을 최소 20% 포함하고, train/test vessel
+            mask 중 50/20개를 gold 또는 silver로 준비하는 설계입니다. Annotation은
+            한 명의 clinician이 각 label이나 mask를 검증하며, 여러 annotation을
+            merge하지 않는다고 밝힙니다. 이 정보는 challenge의 의도를 이해하는 데
+            중요하지만 아직 실현 여부를 casewise로 증명하지는 않습니다.
+          </p>
+          <p>
+            현재 live Data page가 보고하는 실제 public train은 <b>417 scan,
+            409 patient</b>입니다. 409 patient의 source count는 CHUV 200,
+            HUG 87, Mie-Chuo 54, public 68이며,
+            UMCU는 unseen private test center입니다. 공개 vessel mask는 organizer의
+            TopBrain model prediction으로 설명됩니다. 즉 design의 500을 public
+            train이라고 쓰거나, planned gold 50개가 어느 case인지 안다고 말할 수
+            없습니다. Landing의 약 850건도 공개 train 수가 아니라 planned 전체
+            train+test 규모와 대응하는 표현입니다.
+          </p>
+          <p>
+            독립 단위도 중요합니다. Scan 417개는 patient 417명이 아닙니다. 공식
+            설명은 409 patient이고, 기존 Git metadata audit은 반복 base patient
+            일곱 명을 확인했습니다. Longitudinal 여부·촬영 순서·growth label이
+            공개되지 않았으므로 이를 longitudinal 학습 pair로 만들 수 없습니다.
+            마찬가지로 private test case가 공개되지 않았으므로 external-center
+            성능을 미리 주장할 수도 없습니다.
+          </p>
+          <p>
+            License도 두 층입니다. Zenodo의 CC BY 4.0은 37-page challenge-design
+            PDF에 붙은 license입니다. 실제 의료 data는 custom usage agreement와
+            verified account를 요구하며, Data page는 download가 agreement를 뜻한다고
+            설명합니다. 따라서 design PDF를 자유롭게 읽을 수 있다는 사실이 medical
+            image/mask download 권한을 주지는 않습니다. 이번 audit은 가입하거나
+            약관을 대신 수락하지 않았고 의료 payload를 열지 않았습니다.
+          </p>
+          <p>
+            Official evaluator도 읽는 단위를 제한합니다. Task 1의 TN 계산은 표준
+            patient×class confusion matrix의 TN과 같지 않습니다. Task 2 active path는
+            class별 full-volume binary overlap이고, code에 있는 connected-component
+            instance 경로는 active score가 아닙니다. 이 문제는 report와 baseline을
+            정확히 만드는 데 중요하지만, metric을 바로잡는 것만으로 새 모델
+            contribution이 생기지는 않습니다.
+          </p>
+          <p>
+            그래서 여섯 후보를 다시 점수화했습니다. Metric/instance-collapse-aware
+            evaluation 31.5, design-to-release fidelity 30.5, external-center
+            generalization 27.5, gold/silver conditioning 26.5, bifurcation uncertainty
+            26.5, longitudinal consistency 20.5입니다. 최고 후보도 novelty 0.5/5이고
+            총점 32에 못 미칩니다. Vessel-aware multi-task, distance attention,
+            artery-aware pretraining, centerline GNN, hierarchy와 silver-label learning은
+            direct prior입니다. 따라서 TopAneu는 장래의 좋은 benchmark일 수 있지만
+            현재 active paper identity나 architecture는 아닙니다.
+          </p>
+          <div class="model-labels">
+            <span class="yes">Official challenge · real 417/409 release</span>
+            <span class="yes">Important provenance/evaluation boundary</span>
+            <span class="no">Plan ≠ realized unit/reference</span>
+            <span class="no">No terms · payload · P0 · model · GPU</span>
+          </div>
+          <a href="../docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md">source, planned-vs-realized table, direct priors와 frozen score 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="topaneu-version-orbit">
           <span>TopAneu annotation version orbit는 무엇이며 왜 바로 학습하지 않나?</span>

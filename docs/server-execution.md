@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.1 execution state:** Public TopAneu registry/design/page/code
+> metadata only. No scientific-server query, transfer, PBS submission, GPU or
+> monitoring occurred. Historical `115645` remains immutable no-verdict.
+> Future gate-authorized work is `introai9` PBS-only; login-node GPU is
+> prohibited. Never access, query, transfer to, submit to or monitor
+> `junjinyong`.
+
 > **Schema 11.0 execution state:** This update performed no scientific-server
 > query, transfer, PBS submission, GPU command or monitoring. Historical
 > `115645.ECE-util1` remains immutable at E/exit 2, walltime 00:27:02, GPU 0,

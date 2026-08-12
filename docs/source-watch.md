@@ -1,5 +1,11 @@
 # Public source watch · thirty-three material/direct-prior source states
 
+> **TopAneu registered/release interpretation · schema 11.1:** Existing v20
+> already freezes Zenodo design record `19848807` revision 4 and the live Data/
+> Evaluation route. No duplicate watch is added. A source change requests manual
+> re-audit only and cannot join the challenge, accept terms, open medical
+> payload, infer realized units, register P0 or authorize a model/GPU.
+
 > **CathAction intervention-release watch · schema 11.0:**
 > `source_watch_v20.json` extends v19 with exact public Hugging Face revision
 > `8b04056…`, access/license/storage state and the six-entry inventory containing

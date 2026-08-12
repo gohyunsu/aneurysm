@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-12 · Schema 11.1 separates TopAneu registered design from release
+
+- Pinned the official MICCAI registry/Zenodo design, live Data page and exact
+  Git/evaluator state without joining the challenge or opening medical payload.
+- Separated planned 500 train/350 private test, 200 public-source train and
+  50/20 gold vessel masks from realized 417 scans/409 patients, public-source
+  count 68 and organizer-predicted vessel masks.
+- Rejected six candidates at 31.5/30.5/27.5/26.5/26.5/20.5. Best residual
+  novelty is 0.5/5; there is no active task, P0, model, GPU or paper claim.
+- Reused source-watch v20 because it already freezes the exact design record and
+  challenge route. Historical TopAneu scores and surface-vector job `115645`
+  remain unchanged and unrepaired.
+- Full local regression passes: 468 tests, 402 pass/66 optional skip, 103
+  protocol invariants, JSON/JavaScript, site links/assets and diff hygiene.
+
 ## 2026-08-12 · Schema 11.0 deployed and privately pinned
 
 - Exact scientific source `b7ef613ee6ac906ba23bdf5df29e51b59ac66899`

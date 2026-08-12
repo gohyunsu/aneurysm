@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.1 readiness:** TopAneu is not an ISBI paper identity. Its scale
+> and held-out center make it a potentially strong future benchmark, but the
+> obvious anatomy-aware/multi-task methods are directly occupied and the
+> registered plan does not identify the realized gold/silver, unit or reference
+> contract. Do not write a title, contribution, method figure or result table.
+> A competitive paper still requires a new evaluation problem, a minimal model
+> tied to an observed failure mechanism and independent confirmation. Current
+> title/contribution/result/figure remain null.
+
 > **Schema 11.0 readiness:** The project is not submission-ready. Pre-contact
 > collision warning could be an application contribution only with a declared
 > temporal event contract, a mechanism-linked minimal model and event-level

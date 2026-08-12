@@ -1,5 +1,16 @@
 # AURORA 연구 방향
 
+> **Schema 11.1 direction · 2026-08-12:** Do not turn TopAneu's
+> registered-to-realized release discrepancy into a model paper. It is a
+> provenance constraint. The actual 417-scan/409-patient release does not expose
+> the design's planned gold/silver distinction, complete patient grouping or
+> private-test units. Anatomy-aware multi-task, hierarchy, vessel supervision,
+> centerline GNN, label-noise and calibration routes are direct prior. All six
+> identities are rejected; problem, estimand and architecture remain null.
+> Surface-vector can re-enter only on a new material transient-field asset after
+> method-free stability and field-error-matched failure, never by repairing
+> job `115645`. [Exact audit](topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md)
+
 > **Schema 11.0 direction · 2026-08-12:** The surface-vector proposal is
 > scientifically coherent only as an inactive failure hypothesis. Do not name
 > an edge-1-form/Hodge/equivariant/periodic stack as the contribution before a

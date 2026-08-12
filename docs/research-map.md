@@ -1,5 +1,14 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.1 map · 2026-08-12:** TopAneu's registered-design node and
+> realized-release node are separate. The former specifies planned counts,
+> gold/silver options and test policy; the latter exposes 417 scans/409 patients
+> and organizer-predicted vessel masks but not the complete casewise reference
+> graph. Evaluation repair, provenance audit, external-center generalization,
+> gold/silver conditioning, bifurcation uncertainty and longitudinal consistency
+> all terminate below a mandatory floor. Model and compute branches remain
+> empty; surface-vector remains a separate inactive hypothesis.
+
 > **Schema 11.0 map · 2026-08-12:** CathAction splits into four already-
 > occupied branches—action anticipation, present collision detection, tool
 > segmentation and phantom→animal adaptation. A fifth, clinically stronger

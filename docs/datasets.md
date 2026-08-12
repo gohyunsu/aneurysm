@@ -1,5 +1,13 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.1 TopAneu asset boundary:** Registered design = 500 train/350
+> private test, 200 public-source train and 50/20 planned gold vessel masks.
+> Realized public train = 417 scan/409 patient, with public-source count 68 and
+> organizer-model-predicted vessel masks. No public casewise gold/silver flag,
+> complete grouped split or private-test manifest is established. The design
+> record license does not replace the custom medical-data agreement. No terms
+> or payload were accessed; TopAneu remains watch-only.
+
 > **Schema 11.0 CathAction boundary:** Exact HF revision `8b04056…` is a
 > material 56,678,352,136-byte release with four archives. The card separates
 > temporal action segments, phantom/animal collision images and phantom/animal/

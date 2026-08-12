@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.0":
-        raise ProtocolError("The current research-state schema must be version 11.0.")
+    if protocol["schema_version"] != "11.1":
+        raise ProtocolError("The current research-state schema must be version 11.1.")
 
     project = protocol["project"]
     _require_keys(
@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_endovascular_collision_anticipation_batch_rejected_best_26_5_no_p0_no_compute"
+        != "no_active_problem_topaneu_registered_release_batch_rejected_best_31_5_novelty_0_5_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -211,6 +211,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "latent_shape_open_cta_transport_reappraisal",
             "synva_release_and_synthetic_utility_source_audit",
             "reference_provenance_and_rsna_release_contract_reappraisal",
+            "topaneu_registered_design_and_realized_release_reappraisal",
             "topaneu_annotation_version_orbit_reappraisal",
             "aaa_cross_scale_source_reappraisal",
             "mris_bench_target_contract_audit",
@@ -291,13 +292,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_endovascular_collision_anticipation_batch_rejected_no_method_no_compute_surface_vector_inactive"
+        != "no_active_problem_topaneu_registered_release_batch_rejected_no_method_no_compute_surface_vector_inactive"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_cathaction_article_challenge_card_and_huggingface_metadata_only_no_terms_archive_image_label_feature_or_patient_payload"
+        != "public_topaneu_registry_design_live_page_code_and_manifest_metadata_only_no_terms_medical_image_mask_or_annotation_payload"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -309,15 +310,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["next_allowed_action"]
         != "fresh_problem_level_source_or_whitelisted_material_task_asset_audit_only_no_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md"
+        != "docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "pre_contact_collision_onset_anticipation_rejected_at_26_5_target_asset_and_independent_unit_floors"
+        != "topaneu_official_metric_instance_collapse_aware_evaluation_rejected_at_31_5_total_and_novelty_floors"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The endovascular collision-anticipation batch must remain rejected and surface-vector "
+            "The TopAneu registered-design/release batch must remain rejected and surface-vector "
             "must remain closed until a material release after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -379,8 +380,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or admission_v2["pass_authorizes_only"]
         != "prospectively_registered_method_free_p0"
         or admission_v2["pass_authorizes_method_architecture_or_gpu"] is not False
-        or admission_v2["current_batch_best_score"] != 26.5
-        or admission_v2["current_batch_best_residual_novelty"] != 3.0
+        or admission_v2["current_batch_best_score"] != 31.5
+        or admission_v2["current_batch_best_residual_novelty"] != 0.5
         or admission_v2["current_batch_admitted_count"] != 0
     ):
         raise ProtocolError(
@@ -4573,6 +4574,230 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "payload, P0, model, server query or compute."
         )
     checks.append("reference-provenance and RSNA release-contract rejection boundary")
+
+    topaneu_release = problem_selection[
+        "topaneu_registered_design_and_realized_release_reappraisal"
+    ]
+    _require_keys(
+        topaneu_release,
+        [
+            "status",
+            "audit_document",
+            "automatic_selection_threshold",
+            "best_candidate_id",
+            "best_score",
+            "best_residual_novelty_score",
+            "all_candidate_scores",
+            "conditional_source_lead_count",
+            "primary_problem_selected",
+            "paper_identity_active",
+            "miccai_registry_doi",
+            "zenodo_record_id",
+            "zenodo_revision",
+            "zenodo_design_pdf_pages",
+            "zenodo_design_pdf_bytes",
+            "zenodo_design_pdf_md5",
+            "zenodo_record_license",
+            "zenodo_license_applies_to_medical_release",
+            "medical_data_license",
+            "registered_task1_train_volumes",
+            "registered_private_test_volumes",
+            "registered_public_source_train_volumes",
+            "registered_train_gold_vessel_masks",
+            "registered_test_gold_vessel_masks",
+            "registered_minimum_positive_per_location_per_split",
+            "registered_minimum_nonaneurysm_control_fraction",
+            "registered_annotation_verifier_count_per_label_or_mask",
+            "registered_multi_annotator_merge_performed",
+            "realized_training_scans",
+            "realized_unique_patients",
+            "realized_unique_patient_source_counts",
+            "realized_held_out_test_center",
+            "realized_location_classes",
+            "realized_aneurysm_types",
+            "realized_vessel_masks_described_as_organizer_topbrain_predictions",
+            "realized_casewise_gold_silver_indicator_publicly_exposed",
+            "realized_complete_patient_grouped_split_manifest_publicly_exposed",
+            "realized_test_case_manifest_publicly_exposed",
+            "realized_minimum_location_support_verified_from_public_contract",
+            "realized_control_fraction_verified_from_public_contract",
+            "official_repository",
+            "official_repository_head",
+            "official_task1_true_negative_is_standard_patient_class_tn",
+            "official_task2_active_path_is_instance_connected_component_evaluation",
+            "direct_prior_threats",
+            "candidates",
+            "historical_topaneu_scores_relabelled",
+            "surface_vector_reactivated",
+            "surface_vector_closed_job_repaired_or_rerun",
+            "user_terms_acceptance_verified",
+            "challenge_joined",
+            "medical_image_mask_json_or_annotation_payload_accessed",
+            "p0_registered",
+            "p1_registered",
+            "method_selected",
+            "architecture_selected",
+            "scientific_server_queried",
+            "gpu_training_authorized",
+            "outer_test_authorized",
+            "submission_identity_active",
+            "existing_source_watch_v20_reused_without_duplicate_watch",
+            "execution_server",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "TopAneu registered-design and realized-release reappraisal",
+    )
+    expected_topaneu_release_candidates = [
+        (
+            "topaneu_official_metric_instance_collapse_aware_evaluation",
+            [4.0, 5.0, 0.5, 5.0, 4.5, 5.0, 3.5, 4.0],
+            31.5,
+        ),
+        (
+            "topaneu_registered_to_realized_benchmark_contract_fidelity",
+            [4.0, 4.5, 0.5, 5.0, 4.0, 5.0, 3.5, 4.0],
+            30.5,
+        ),
+        (
+            "topaneu_external_centre_modality_generalization",
+            [5.0, 3.0, 0.5, 2.0, 4.0, 5.0, 5.0, 3.0],
+            27.5,
+        ),
+        (
+            "topaneu_gold_silver_provenance_conditioned_generalization",
+            [4.5, 2.0, 1.0, 2.0, 4.0, 5.0, 5.0, 3.0],
+            26.5,
+        ),
+        (
+            "topaneu_bifurcation_uncertainty_aware_fine_location",
+            [5.0, 1.5, 2.0, 2.0, 3.5, 4.5, 5.0, 3.0],
+            26.5,
+        ),
+        (
+            "topaneu_longitudinal_patient_set_consistency_v2",
+            [4.5, 1.0, 1.5, 2.0, 0.5, 4.0, 5.0, 2.0],
+            20.5,
+        ),
+    ]
+    observed_topaneu_release_candidates = [
+        (row["id"], row["axis_scores"], float(row["total"]))
+        for row in topaneu_release["candidates"]
+    ]
+    if (
+        topaneu_release["status"]
+        != "fresh_batch_rejected_best_31_5_fails_total_and_residual_novelty_floors_no_active_lead"
+        or topaneu_release["audit_document"]
+        != "docs/topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md"
+        or topaneu_release["automatic_selection_threshold"] != 32.0
+        or topaneu_release["best_candidate_id"]
+        != "topaneu_official_metric_instance_collapse_aware_evaluation"
+        or topaneu_release["best_score"] != 31.5
+        or topaneu_release["best_residual_novelty_score"] != 0.5
+        or topaneu_release["all_candidate_scores"]
+        != [31.5, 30.5, 27.5, 26.5, 26.5, 20.5]
+        or topaneu_release["conditional_source_lead_count"] != 0
+        or topaneu_release["miccai_registry_doi"]
+        != "10.5281/zenodo.19848807"
+        or (
+            topaneu_release["zenodo_record_id"],
+            topaneu_release["zenodo_revision"],
+            topaneu_release["zenodo_design_pdf_pages"],
+            topaneu_release["zenodo_design_pdf_bytes"],
+            topaneu_release["zenodo_design_pdf_md5"],
+        )
+        != (
+            19848807,
+            4,
+            37,
+            150978,
+            "773b04597d4ff2c798837fb5d40b4bf9",
+        )
+        or topaneu_release["zenodo_record_license"] != "cc-by-4.0"
+        or topaneu_release["medical_data_license"]
+        != "custom_data_usage_agreement"
+        or (
+            topaneu_release["registered_task1_train_volumes"],
+            topaneu_release["registered_private_test_volumes"],
+            topaneu_release["registered_public_source_train_volumes"],
+            topaneu_release["registered_train_gold_vessel_masks"],
+            topaneu_release["registered_test_gold_vessel_masks"],
+        )
+        != (500, 350, 200, 50, 20)
+        or (
+            topaneu_release["realized_training_scans"],
+            topaneu_release["realized_unique_patients"],
+            topaneu_release["realized_location_classes"],
+            topaneu_release["realized_aneurysm_types"],
+        )
+        != (417, 409, 52, 3)
+        or topaneu_release["realized_unique_patient_source_counts"]
+        != {
+            "chuv": 200,
+            "hug": 87,
+            "mie_chuo": 54,
+            "public": 68,
+            "insted": 32,
+            "openneuro": 36,
+        }
+        or topaneu_release["realized_held_out_test_center"] != "umcu"
+        or topaneu_release["official_repository"] != "Bangulli/TopAneu-26"
+        or topaneu_release["official_repository_head"]
+        != "018c243445f99199f484018c4c80575c84c72293"
+        or observed_topaneu_release_candidates
+        != expected_topaneu_release_candidates
+        or any(row["critical_axis_pass"] for row in topaneu_release["candidates"])
+        or any(
+            abs(sum(row["axis_scores"]) - row["total"]) > 1e-9
+            for row in topaneu_release["candidates"]
+        )
+        or any(
+            topaneu_release[key] is not True
+            for key in (
+                "realized_vessel_masks_described_as_organizer_topbrain_predictions",
+                "existing_source_watch_v20_reused_without_duplicate_watch",
+            )
+        )
+        or any(
+            topaneu_release[key] is not False
+            for key in (
+                "zenodo_license_applies_to_medical_release",
+                "registered_multi_annotator_merge_performed",
+                "realized_casewise_gold_silver_indicator_publicly_exposed",
+                "realized_complete_patient_grouped_split_manifest_publicly_exposed",
+                "realized_test_case_manifest_publicly_exposed",
+                "realized_minimum_location_support_verified_from_public_contract",
+                "realized_control_fraction_verified_from_public_contract",
+                "official_task1_true_negative_is_standard_patient_class_tn",
+                "official_task2_active_path_is_instance_connected_component_evaluation",
+                "historical_topaneu_scores_relabelled",
+                "surface_vector_reactivated",
+                "surface_vector_closed_job_repaired_or_rerun",
+                "user_terms_acceptance_verified",
+                "challenge_joined",
+                "medical_image_mask_json_or_annotation_payload_accessed",
+                "p0_registered",
+                "p1_registered",
+                "method_selected",
+                "architecture_selected",
+                "scientific_server_queried",
+                "gpu_training_authorized",
+                "outer_test_authorized",
+                "submission_identity_active",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or topaneu_release["execution_server"] != "introai9"
+        or topaneu_release["next_allowed_action"]
+        != "fresh_problem_level_source_audit_or_material_topaneu_casewise_reference_contract_change_only_no_terms_payload_p0_model_or_compute"
+    ):
+        raise ProtocolError(
+            "TopAneu registered design and realized release must remain separated, "
+            "source-only and rejected without terms, payload, P0, model or compute."
+        )
+    checks.append("TopAneu registered-design and realized-release rejection boundary")
 
     topaneu_orbit = problem_selection[
         "topaneu_annotation_version_orbit_reappraisal"
@@ -9291,6 +9516,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("thirty-three-source fail-closed intervention release watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
+        "topaneu_official_metric_instance_collapse_aware_evaluation_total_and_novelty_floors",
+        "topaneu_registered_to_realized_benchmark_contract_fidelity_novelty_floor",
+        "topaneu_external_centre_modality_generalization_direct_challenge_objective_and_private_test",
+        "topaneu_gold_silver_provenance_conditioned_generalization_missing_casewise_manifest",
+        "topaneu_bifurcation_uncertainty_aware_fine_location_missing_adjudicated_reference",
+        "topaneu_longitudinal_patient_set_consistency_v2_no_chronology_growth_or_outcome_reference",
         "pre_contact_collision_onset_anticipation_missing_onset_horizon_and_independent_sequence_unit",
         "phantom_to_animal_collision_calibration_direct_prior_and_specimen_grouping_absent",
         "human_tool_segmentation_domain_generalization_direct_challenge_prior_and_unit_contract_absent",

@@ -1,5 +1,11 @@
 # Dataset acquisition plan
 
+> **Schema 11.1 acquisition decision:** Do not join TopAneu, accept its custom
+> medical-data agreement or download image/mask/JSON payload. The registered
+> plan does not establish realized casewise gold/silver, complete patient
+> grouping or private-test units. Reconsider only after a material public
+> reference-contract change and a fresh problem passes every critical floor.
+
 > **Schema 11.0 acquisition decision:** Do not submit CathAction's download
 > form or accept its requested license agreement. A future manual re-audit may
 > proceed only after a versioned public contract declares complete chronological

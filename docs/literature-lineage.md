@@ -1,5 +1,15 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.1 TopAneu lineage:** TopAneu directly occupies multimodal
+> vessel-specific aneurysm location classification and segmentation. Tri-axial
+> ROI multi-task learning already combines aneurysm location, aneurysm masks
+> and vessel masks across CTA/MRA/T2/T1-post; vessel-distance attention,
+> artery-aware masked pretraining, centerline graph learning and vesselness
+> multi-task are additional direct priors. The remaining official-code issue is
+> evaluation/provenance fidelity, not a standalone method gap. The registered
+> 500/350 design and realized 417-scan/409-patient release must remain separate.
+> [Exact audit](topaneu-registered-design-and-realized-release-reappraisal-2026-08-12.md)
+
 > **Schema 11.0 lineage:** CathAction already occupies catheter action
 > anticipation, action recognition, current-frame collision detection,
 > catheter/guidewire segmentation and phantom→animal domain adaptation. The

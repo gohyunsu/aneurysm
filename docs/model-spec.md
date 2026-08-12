@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.1 model decision: `null`.** No TopAneu network is selected.
+> Metric-aware training, hierarchy, type/location factorization, train-only
+> silver-vessel distillation, bifurcation uncertainty and center/modality
+> invariance are either evaluation corrections, direct-prior components or
+> unsupported targets. Likewise, edge 1-form/Hodge/SE(3)/periodic WSS modules
+> remain an inactive control family until method-free structural failure is
+> observed on a new material asset.
+
 > **Schema 11.0 null-model boundary:** There is no selected current model.
 > Neither a temporal collision-warning network nor an edge-1-form/Hodge/SE(3)
 > surface operator is authorized. For collision anticipation, no architecture

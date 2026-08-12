@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.1 experiment boundary:** No experiment is active. Do not join
+> TopAneu, accept terms, download payload or infer realized units from the
+> registered plan. A material future release must first expose lawful casewise
+> provenance, patient grouping, support/reference semantics and an independently
+> novel failure question. That authorizes only a new CPU/method-free P0, not a
+> model or GPU. Historical surface-vector `115645` remains no-verdict and cannot
+> be repaired/rerun. Scientific-server query/PBS/GPU/monitoring in this update
+> are zero.
+
 > **Schema 11.0 experiment boundary:** No experiment is active. A future
 > CathAction version must first pass a CPU/method-free audit of event counts,
 > onset stability, risk-window construction, complete negatives, independent

@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 TopAneu registered-design/release boundary · schema 11.1:**
+> Registered design 500 train/350 private test, 200 public-source train and
+> 50/20 gold vessel-mask plans are not realized-release facts. The live public
+> train is 417 scan/409 patient with public-source count 68 and organizer-
+> TopBrain-predicted vessel masks; public casewise gold/silver, complete
+> patient-grouped split, test manifest, minimum per-location support and control
+> fraction are not established. Zenodo CC BY 4.0 covers the design record, not
+> the medical-data agreement. Six fresh scores 31.5/30.5/27.5/26.5/26.5/20.5
+> are all rejected; best residual novelty is 0.5/5. Historical TopAneu scores
+> and surface-vector job `115645` are not relabelled or reopened. Active lead,
+> P0/P1, method, architecture, terms/payload, server query, PBS/GPU, result and
+> claim are 0. Source-watch v20 is reused without a duplicate watch. Future
+> gate-authorized work uses `introai9` PBS only; login-node GPU is forbidden.
+> Never access, query, transfer, submit to or monitor `junjinyong`.
+> Full local regression is 468 tests: 402 pass/66 optional skip with 103
+> protocol invariants. Protocol SHA-256 is
+> `872a3917485512c5990d3e46185cddd2f74d1acbf568cfcfc7d8e3582a3d87cd`;
+> unchanged source-watch v20 SHA-256 is
+> `57d2a8671e09a2f49d3e3b265ee87353b86245ecdf2d0199f482c11d50580198`.
+
 > **2026-08-12 schema 11.0 deployment/private synchronization:** Exact public
 > scientific source `b7ef613ee6ac906ba23bdf5df29e51b59ac66899` passed Quality
 > `31561077612` and Pages `31561073271`. Private paper head
