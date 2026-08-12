@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-12 · Schema 10.9 deployed and privately pinned
+
+- Exact scientific source `3a9fa3a1a3146457b7d0e8215db66ee26d5532ac`
+  passed Quality `31559316259` and Pages `31559316027`.
+- Private ledger `a4711543c245fb60617ec8975c4b94923400a3fd` is remote exact,
+  PRIVATE and anonymously returns 404; manuscript/reference bytes are unchanged.
+- Full regression passes: 465 tests, 399 pass/66 optional skip, 100 protocol
+  invariants, site graph, JSON, JavaScript and diff hygiene. This provenance
+  creates no task, model, compute, result or paper claim.
+
 ## 2026-08-12 · Molecular biomarker and treatment-specific outcome reappraisal
 
 - Audited PXD024615 as patient-level serum proteomics: 212 discovery samples

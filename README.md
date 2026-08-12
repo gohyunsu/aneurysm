@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 10.9 deployment/private pin:** Exact scientific source
+> `3a9fa3a1a3146457b7d0e8215db66ee26d5532ac` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31559316259)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31559316027).
+> Private ledger `a4711543c245fb60617ec8975c4b94923400a3fd` is remote
+> exact, PRIVATE and anonymously returns 404. Full regression is 465 tests:
+> 399 pass/66 optional skip with 100 protocol invariants. Manuscript and
+> references remain byte-for-byte unchanged. This provenance opens no task,
+> method, model, result, compute or submission authority.
+
 > **2026-08-12 molecular-biomarker/treatment-outcome reappraisal · schema
 > 10.9:** PXD024615 is a real public patient-level serum-proteomics asset
 > (212 discovery samples and 32 external-cohort samples), but its paper already

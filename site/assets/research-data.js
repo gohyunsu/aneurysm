@@ -1178,6 +1178,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 10.9 molecular/outcome audit is live and the private no-claim ledger is pinned",
+      copy: "Exact public scientific source 3a9fa3a1a3146457b7d0e8215db66ee26d5532ac passed Quality 31559316259 and Pages 31559316027. The live Overview, zero-assumption chapter #molecular-target-time and exact audit expose the same six-way rejection. Private ledger a4711543c245fb60617ec8975c4b94923400a3fd is remote exact, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 465 tests: 399 pass/66 optional skip and 100 protocol invariants. This provenance opens no active problem, method, model, result, compute or submission authority.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "analysis",
       title: "Schema 10.9 rejects molecular-biomarker and treatment-outcome pivots before payload or compute",
       copy: "PXD024615 is a genuine patient-level public serum-proteomics release with 212 discovery and 32 external-cohort samples, but its source already owns aneurysm/control and rupture-state classification. Sampling-time rupture does not identify future risk, and no release joins pre-event blood, baseline image, treatment/censoring and event time in the same patients. PXD013442 has four pooled discovery mixtures, GSE231922 has 30 plasma-miRNA samples, and NBC-GARUDA is internally bootstrapped treatment-specific prognosis rather than counterfactual treatment-effect evidence. Six rows score 31.0/28.0/27.0/27.0/26.0/23.0 and all fail. Surface-vector remains inactive. No payload, P0/P1, method, architecture, scientific server, PBS/GPU, outer test or paper claim opened.",

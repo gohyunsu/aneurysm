@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 10.9 deployment/private synchronization:** Exact public
+> scientific source `3a9fa3a1a3146457b7d0e8215db66ee26d5532ac` passed Quality
+> `31559316259` and Pages `31559316027`. Private paper head
+> `a4711543c245fb60617ec8975c4b94923400a3fd` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` and references SHA-256 remain
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 465 tests: 399 pass/66 optional skip with 100 protocol
+> invariants; canonical protocol SHA-256 is
+> `83cd0e12be0c73af88cfe8a2e020a6be4bd5e29a5971feb91e83360301806a3d`.
+> No title, claim, method, result, figure, server or compute authority is added.
+
 > **2026-08-12 molecular-biomarker/treatment-outcome · schema 10.9:** Exact
 > public-source audit separates downloadable patient-level data, an unoccupied
 > task, and a valid target time. PXD024615 supplies 212 discovery and 32
