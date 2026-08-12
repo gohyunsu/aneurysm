@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.6 deployment/private synchronization:** Exact public
+> scientific source `4dfe08f35934901de5bc8d88a06869a1a5230998` passed Quality
+> `31579905965` and Pages `31579905336`. Private paper ledger head
+> `b32d0c8f9ce7660d5033c6534b99e5dd0c51d9fc` is remote exact, PRIVATE and
+> anonymous API returns 404. `paper/main.tex` and references remain
+> byte-for-byte at SHA-256
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` and
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> Full regression is 486 tests: 420 pass/66 optional-dependency skip. The final
+> public workflow also validates the corrected P0-v2 contract explicitly.
+> This pin creates no executable P0, method, architecture, result, GPU, outer
+> test or manuscript claim. No scientific server was queried; never access,
+> query, transfer to, submit to or monitor `junjinyong`.
+
 > **2026-08-12 AneuX P0 v2 source correction · schema 11.6:** Official
 > `content-description-v1.0.pdf` states that `morpho-per-cut.csv` has the 170
 > morphometrics at mesh resolution `area-005` only. Exact official repository

@@ -1,5 +1,15 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 schema 11.6 deployment/private pin:** Exact scientific source
+> `4dfe08f35934901de5bc8d88a06869a1a5230998` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31579905965) and
+> [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31579905336).
+> Private ledger `b32d0c8f9ce7660d5033c6534b99e5dd0c51d9fc` is remote exact,
+> PRIVATE and anonymously returns 404. Manuscript/reference bytes are
+> unchanged. Full regression is 486 tests: 420 pass/66 optional skip. This pin
+> creates no executable P0, method, model, result, GPU, outer test or paper
+> claim.
+
 > **2026-08-12 AneuX source-semantics correction · schema 11.6:** The official
 > content description states that `morpho-per-cut.csv` contains the 170
 > precomputed morphometrics at **area-005 only**. The exact official code head

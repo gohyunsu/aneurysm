@@ -1255,6 +1255,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "deployment",
+      title: "Schema 11.6 corrected P0 contract is live and the private no-claim ledger is pinned",
+      copy: "Exact scientific source 4dfe08f35934901de5bc8d88a06869a1a5230998 passed Quality 31579905965 and Pages 31579905336. Private ledger b32d0c8f9ce7660d5033c6534b99e5dd0c51d9fc is remote exact, PRIVATE and anonymously returns 404; manuscript and references remain byte-for-byte unchanged. Full regression passes 486 tests: 420 pass/66 optional skip. The public workflow now validates P0 v2 explicitly. This provenance opens no executable P0, method, architecture, result, GPU, outer test or paper claim.",
+      files: ["README.md", "AGENTS.md", "CHANGELOG.md", ".github/workflows/quality.yml", "site/assets/research-data.js"]
+    },
+    {
+      date: "2026.08.12",
       category: "research",
       title: "AneuX P0 v2 corrects an area-005-only source assumption before execution",
       copy: "The official content description confirms that the released 170 morphometrics exist only at area-005, while official code head a6b355e… has no feature implementation. Unchanged v1 is preserved as prospectively superseded with zero rows, jobs and endpoints. Corrected v2 freezes one deterministic signature across three dome resolutions, canonical-view patient-grouped nested CV, patient bootstrap, mandatory AUROC adequacy and two threshold-free materiality checks; decision flip is secondary. Exact path, manifest and reader preflight remain unresolved, so no execution authority opens.",
