@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-13 · schema 11.8 · confirmation and private ledger synchronized
+
+- Exact scientific public source `d827452…` passed Quality `31610409552` and
+  Pages `31610409674`; local and remote main were exact.
+- Private planning head `b35a597…` is remote exact, PRIVATE and anonymously
+  404. Manuscript and reference bytes remain unchanged.
+- Scientific-server query, transfer, PBS/GPU submission and monitoring remain
+  zero; real P0 is 0/11 and no paper claim is active.
+
 ## 2026-08-12 · schema 11.8 · independent confirmation fixed at 100 new families
 
 - Replaced the under-specified “at least 50 untouched families” phrase before

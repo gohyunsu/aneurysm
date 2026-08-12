@@ -1,5 +1,14 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 confirmation/private synchronization:** Exact scientific
+> public source `d82745261c9b62e182a9b82f03207b90b3733960` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31610409552)
+> and [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31610409674).
+> Private planning head `b35a597cdc69694a4b965b6f32d11256e9e9c45c` is remote
+> exact, PRIVATE and anonymously returns 404. Manuscript/reference hashes are
+> unchanged; no title, abstract claim, method, result table, figure or C21 was
+> activated.
+
 > **Schema 11.8 inactive independent-confirmation v1:** The former “at least
 > 50 families” phrase is superseded before any confirmation access by
 > [a machine contract](configs/aneumo_response_fidelity_confirmation_template_v1.json)

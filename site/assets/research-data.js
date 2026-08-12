@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "The 100-family contract and private no-claim ledger are synchronized",
+      copy: "Exact scientific public source d827452… passed Quality 31610409552 and Pages 31610409674. Private planning head b35a597… is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes remain unchanged. This provenance synchronization creates no P0 result, P1 registration, model, GPU run, outer test or paper claim.",
+      status: "Public CI/Pages success · private remote exact/anonymous 404 · manuscript unchanged · real P0 0/11",
+      url: "../docs/isbi-2027-plan.md"
+    },
+    {
+      year: "2026.08",
       title: "Independent confirmation becomes a 100-new-family one-shot conjunction",
       copy: "The earlier at-least-50 phrase left sample enlargement, reuse of the six historical test families, within-family weighting, seed handling and visual cherry-picking open. Inactive confirmation v1 excludes all historical 32 families and fixes exactly 100 new families by field-blind hash selection, every eligible case and all eight flows, node-to-flow-to-case-to-five-seed family aggregation, 10,000 family bootstraps and a conjunction of field non-inferiority, analytic competence and two response superiority endpoints. The figure must disclose candidate worst, typical and best families on matched coordinates and colours.",
       status: "Inactive confirmation design · regression 552/552 · protocol 111 invariants · qualified new family 0/100 · manifest/metadata/field/prediction/server/PBS/GPU/result/claim 0",

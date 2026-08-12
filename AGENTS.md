@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 schema 11.8 confirmation/private synchronization:** Exact
+> scientific public source `d82745261c9b62e182a9b82f03207b90b3733960`
+> passed Quality `31610409552` and Pages `31610409674`. Private planning head
+> `b35a597cdc69694a4b965b6f32d11256e9e9c45c` is remote exact, PRIVATE and
+> anonymously 404. Manuscript/reference SHA-256 remains
+> `42738a36feefcdddfad35b7caa876457470a31f0f2057b4e25139350d8a65b8b` /
+> `5b7d673202784ff6197022855fa0fe04fdbd1de40c67f5684b3bafdad4580aeb`.
+> No title, abstract claim, method, result row, figure or C21 is active. This
+> synchronization queried no scientific server and used no transfer, PBS/GPU
+> or monitoring. Real P0 remains 0/11; never access `junjinyong` and do not
+> retry `introai9` before verified external change.
+
 > **2026-08-12 schema 11.8 inactive independent-confirmation v1:** Supersede
 > the vague historical ≥50-family phrase before any confirmation access. The
 > current non-authoritative template is
