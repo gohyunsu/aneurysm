@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **Current architecture · 2026-08-12: `null`.** DeepAnePose, Graph Physics,
+> Aneumo WSS Transolver and EXPIGEO are source/direct-prior controls, not a
+> selected AURORA stack. An edge-1-form + equivariant mesh encoder + Hodge
+> decomposition + periodic operator remains a scientifically coherent control
+> family, but no module may be implemented or trained until a fresh material
+> version passes method-free stability and matched-failure gates. Adding these
+> modules together is not novelty. See the
+> [pose/operator reappraisal](pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md).
+
 > **2026-08-12 surface-vector no-model closure:** Current architecture is
 > `null`, not GNN. Edge 1-form, Hodge/DEC, SE(3), periodic decoding and
 > critical-point/worldline losses remain unselected controls. The known asset

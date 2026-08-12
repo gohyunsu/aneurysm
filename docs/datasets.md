@@ -1,5 +1,15 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Latest public-source audit · 2026-08-12:** DeepAnePose exact
+> `40042fa…` provides annotations and five folds for 270 selected
+> subject/session IDs: 140 positive JSONs and 164 lesions. Every selected ID is
+> in test exactly once across the folds, with no within-fold train/test overlap;
+> explicit validation sets, checkpoints and a repository license file are
+> absent. OpenNeuro ds003949 supplies CC0 images separately. This makes a useful
+> source/control, not an independent dense pose, reader-utility or annotation-
+> efficiency target. Graph Physics, WSS Transolver and EXPIGEO repositories are
+> direct-prior code, not AURORA patient/field assets. No payload was staged.
+
 > **2026-08-12 surface-vector asset closure:** No fresh phase-resolved WSS
 > asset has appeared. AneuG is the exact closed version, Aneurisk is unchanged
 > revision 4, AneuX remains manually gated without tensor/family semantics,

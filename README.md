@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 pose/workflow and spatiotemporal-operator reappraisal · schema
+> 10.7 unchanged:** DeepAnePose exact `40042fa…` provides 270 selected
+> subject/session IDs, 140 positive annotation JSONs, 164 lesions and clean
+> five-fold test coverage, but its MICCAI 2023 paper already owns weak two-point
+> pose, detection and reformatted planes. New graph-physics `e4ac523…`, Aneumo
+> WSS Transolver `3087fc9…` and EXPIGEO `b287368…` further crowd generic
+> spatiotemporal mesh, derived-WSS and geometry-GNN claims. Six candidates score
+> **29.0/28.5/27.0/26.0/25.5/21.5** and all fail a mandatory novelty,
+> target, asset or unit floor. Surface-vector remains a valid inactive
+> hypothesis, not a model; source-watch v16 freezes 27 public states. No image
+> payload, checkpoint, E0/P0/P1, architecture, server query or compute opened.
+> See the [exact critical reappraisal](docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md)
+> and [beginner explanation](site/learn.html#pose-operator).
+
 > **2026-08-12 surface-vector finite closure deployment and private pin:**
 > Exact public scientific source
 > `a9d79f0446041555585a73f0fc7ed9a0cd990514` passed

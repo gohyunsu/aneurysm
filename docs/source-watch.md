@@ -1,5 +1,11 @@
 # Public source watch · twenty-four material/direct-prior source states
 
+> **Pose/operator and surface-vector finite watch · 2026-08-12:**
+> `source_watch_v16.json` extends v15 with three exact direct-prior code states:
+> Graph Physics `e4ac523…`, Aneumo WSS Transolver `3087fc9…` and EXPIGEO
+> `b287368…`. The total is 27. A change can request only baseline-feasibility
+> re-audit; code availability is not a task asset, E0, method or compute.
+>
 > **Surface-vector finite watch · 2026-08-12:** `source_watch_v15.json`
 > extends v14 with exact Synthetic-AAA release tag `98363a0…` and current main
 > `7872b81…`. Their complete diff changes only README and CITATION metadata;
@@ -263,9 +269,14 @@ historical contract로 보존한다.
 20. TopBrain 2025 data revision/license/file manifest가 바뀜
 21. TopBrain 2025 podium revision/license/Docker manifest가 바뀜
 22. BraveCoWCoW repository head/root/release/license/size가 바뀜
+23. aSAH Zenodo revision/archive/license가 바뀜
+24. aSAH mortality or multiclass baseline repository state가 바뀜
+25. Synthetic-AAA generated population/transient-field material state가 바뀜
+26. Graph Physics 또는 Aneumo WSS Transolver exact code state가 바뀜
+27. EXPIGEO exact code state가 바뀜
 
 1--6, 8--13, 16--20의 변화가 있어도 자동 결과는 **fresh source audit 요청**뿐이다.
-7, 14, 15, 21, 22는 **direct-prior baseline-feasibility review 요청**만 만든다.
+7, 14, 15, 21, 22, 26, 27은 **direct-prior baseline-feasibility review 요청**만 만든다.
 자동 download, 약관 수락, 점수 재가중, frozen snapshot 갱신, P0 등록,
 model/architecture 선택,
 GPU와 outer test는 모두 금지된다. Payload P0는 explicit license/사용자-confirmed terms,
@@ -275,11 +286,11 @@ machine-auditable manifest, independent-unit semantics와 새 direct-prior audit
 
 ```bash
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v12.json \
+  --config configs/source_watch_v16.json \
   --validate-only
 
 PYTHONPATH=src python scripts/audit_source_watch.py \
-  --config configs/source_watch_v12.json \
+  --config configs/source_watch_v16.json \
   --fetch --fail-on-change
 ```
 

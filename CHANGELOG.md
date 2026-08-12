@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-12 · Pose/workflow and spatiotemporal-operator source reappraisal
+
+- Audited DeepAnePose exact `40042fa…`: 270 selected subject/session IDs, 140
+  positive JSONs, 164 lesions and five patient-wise folds, with no explicit
+  validation split, tracked checkpoint or repository license file.
+- Added Graph Physics `e4ac523…`, Aneumo WSS Transolver `3087fc9…` and EXPIGEO
+  `b287368…` to the direct-prior lineage. Derived steady WSS magnitude is not a
+  transient tangent-vector/worldline reference.
+- Rejected six candidates at 29.0/28.5/27.0/26.0/25.5/21.5. The proposed
+  edge-1-form/Hodge/equivariant/periodic stack remains a control family only;
+  no active problem, model or compute opens.
+- Added source-watch v16 with 27 fail-closed states, machine protocol
+  invariants, detailed audit, beginner-facing site chapter and filterable
+  history entry. No scientific server, transfer, PBS/GPU or manuscript claim
+  was touched.
+- Full regression is 458 tests: 392 pass/66 optional-dependency skip with 93
+  machine-protocol invariant groups. Site, JSON/JavaScript and diff hygiene
+  checks pass; team-source hashes are unchanged and no post-2026-08-02 team
+  conversation was found.
+
 ## 2026-08-12 · Surface-vector finite closure deployed and privately pinned
 
 - Exact public scientific source `a9d79f0446041555585a73f0fc7ed9a0cd990514`

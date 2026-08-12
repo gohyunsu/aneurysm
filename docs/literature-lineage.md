@@ -1,5 +1,25 @@
 # 선행연구 계보와 research gap
 
+## 2026-08-12 pose/workflow와 mesh-operator source correction
+
+- [DeepAnePose, MICCAI 2023](https://doi.org/10.1007/978-3-031-43895-0_51)는
+  weak two-point/sphere annotation, one-stage localization·size·orientation
+  estimation과 reformatted planes를 직접 점유한다. Official GitLab exact
+  `40042fa…`의 270-ID five-fold contract는 좋은 baseline provenance지만 새
+  AURORA task가 아니다.
+- [Graph Physics](https://arxiv.org/abs/2605.01542) exact code `e4ac523…`는
+  MeshGraphNet/Transolver/Transformer, multi-node objective, temporal correction
+  and 3D RoPE를 aneurysm을 포함한 physics mesh tasks에 적용한다.
+- [Aneumo WSS Transolver](https://github.com/IsaacLin247/aneurysm-wss-transolver/tree/3087fc9b8370ad39db85db9a61315bb34bf43cbb)는
+  shipped `p,U`에서 steady WSS magnitude를 파생한다. Phase-resolved tangent
+  vector와 signed track reference가 아니다.
+- [EXPIGEO](https://github.com/mohamedaminelayachi/EXPIGEO/tree/b28736842ec521641ea9389e4a9a58bccc5616f3)는
+  IntrA의 interior geometry-aware GNN과 explanation을 직접 점유한다.
+- 따라서 edge 1-form/Hodge/equivariance/periodic temporal loss를 조합하는
+  것만으로 독립 novelty를 주장하지 않는다. 먼저 material task와 stable matched
+  failure가 필요하다.
+
+
 > **2026-08-12 rupture-time lineage delta:** QIMS
 > `10.21037/qims-2025-1-2593` adds a three-centre, 756-patient/877-aneurysm
 > clinical+morphology+radiomics rupture-status study with source external AUC

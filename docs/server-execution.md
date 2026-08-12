@@ -1,5 +1,11 @@
 # AURORA 서버 실행과 provenance
 
+> **2026-08-12 latest audit:** pose/operator source review used no scientific
+> server, transfer, PBS or GPU. Current AURORA job count is 0. Any future
+> gate-authorized execution uses scheduler-allocated `introai9` PBS only;
+> login-node GPU commands remain forbidden. `junjinyong` is excluded from
+> connection, query, transfer, submission and monitoring.
+
 > **2026-08-12 surface-vector finite closure:** This review used official
 > public repository/record metadata only. It queried no scientific server,
 > transferred no field or medical payload and created or monitored no PBS/GPU

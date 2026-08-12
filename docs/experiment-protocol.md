@@ -1,5 +1,15 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Current experiment state · 2026-08-12:** no active experiment. The latest
+> pose/operator batch is rejected at 29.0/40 and registers no E0/P0/P1. Public
+> fold metadata and direct-prior code were audited locally; medical-image
+> payloads and checkpoints were not opened. `115645.ECE-util1` remains closed
+> `E`/exit 2, 0/10 no-verdict and is never repaired or rerun. A future admitted
+> task must first freeze phase-resolved tangent-vector schema, independent
+> family split, method-free degree/track stability and a field-error-matched
+> baseline failure. Only then may validation-only bounded development begin.
+> No scientific server query or PBS/GPU occurred.
+
 > **2026-08-12 surface-vector finite gate:** No fresh E0 exists, so no new P0
 > is registered. Do not repair or rerun `115645`, accept gated terms, generate
 > a replacement synthetic cohort, inspect scientific-server data or select a

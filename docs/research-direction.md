@@ -1,5 +1,16 @@
 # AURORA 연구 방향
 
+> **Latest direction · 2026-08-12:** Do not activate a pose model, GNN, Hodge
+> operator or temporal Transformer. DeepAnePose exposes unusually clean public
+> patient-wise folds, but weak pose/reformatted-view learning is the direct
+> MICCAI 2023 task and the release has no independent dense pose distribution,
+> annotation-time or reader-action reference. Graph Physics, WSS Transolver and
+> EXPIGEO additionally occupy generic spatiotemporal mesh, derived-WSS and
+> geometry-GNN variants. The batch peaks at 29.0/40 with novelty 1.0/5. Keep
+> oriented edge/Hodge/equivariant/periodic modules as possible controls only
+> after a fresh material task version demonstrates stable, field-error-matched
+> structural failure. [Exact reappraisal](pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md)
+
 > **Surface-vector finite decision · 2026-08-12:** Preserve the falsifiable
 > question but stop treating the same public objects as an open research loop.
 > The current family is closed until an official phase-resolved field schema,

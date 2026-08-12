@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · aSAH segmentation/outcome batch best 29.0/40 rejected on residual-novelty and joined-asset floors; all six fail total or a critical floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
-    requirement: "the next admissible action is a fresh problem or official versioned patient-level image–mask–outcome join audit; surface-vector is closed until a whitelisted material release and then requires method-free stability plus a matched failure; no RAR/checkpoint, P0/P1, model or GPU experiment opens, and closed contracts remain unrepaired",
+    status: "Target locked · pose/workflow and spatiotemporal-operator batch best 29.0/40 rejected; all six fail total or a critical novelty/target/asset/unit floor · active lead/paper identity/primary/method/architecture/GPU/outer test/claim 0 · not submission-ready",
+    requirement: "the next admissible action is a fresh problem or whitelisted material task-asset audit; surface-vector is closed until a phase-resolved tangent-vector/family contract enables method-free stability plus a field-error-matched failure; public folds and direct-prior code do not open E0/P0/P1, model or GPU, and closed contracts remain unrepaired",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Clean weak-pose folds are a useful control, while new operator code narrows novelty",
+      copy: "DeepAnePose exact 40042fa… exposes 270 selected subject/session IDs, 140 positive JSONs, 164 lesions and five folds whose test union covers each selected ID once. Its MICCAI 2023 paper already owns weak two-point pose, detection and reformatted planes, and the release has no independent dense pose distribution, annotation-time or reader-action truth. Graph Physics exact e4ac523…, Aneumo WSS Transolver 3087fc9… and EXPIGEO b287368… directly occupy generic spatiotemporal mesh, derived steady WSS and geometry-GNN variants. Six candidates score 29.0/28.5/27.0/26.0/25.5/21.5 and all fail a mandatory floor.",
+      status: "Best 29.0/40 rejected · novelty 1.0/5 · transient-vector task asset 0 · source-watch v16: 27 states · E0/P0/method/model/server/GPU 0",
+      url: "../docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md"
+    },
     {
       year: "2026.08",
       title: "The surface-vector question is retained while the current asset family is finitely closed",
@@ -830,6 +837,11 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "DeepAnePose annotations and patient-wise folds · exact 40042fa…",
+      role: "public weak-pose source and future control only; no active paper or training role",
+      provenance: "270 selected subject/session IDs · 140 positive annotation JSON · 164 lesions · fold tests 54/54/53/54/55 and test union 270 exactly once · validation split 0 · tracked checkpoint 0 · repository LICENSE file 0 · MICCAI 2023 directly owns weak P1/P2 pose, detection and reformatted planes · image payload/P0/model/GPU 0"
+    },
+    {
       name: "QIMS 2026 three-centre rupture-status cohort",
       role: "source-only direct prior; not public training, validation or future-risk data",
       provenance: "756 patients/877 aneurysms/3 centres · centre I 404/450 with reported 314/136 aneurysm-row division · external 125/148 and 227/279 · cross-sectional rupture status · admission glucose includes post-event information for ruptured presentations · public versioned patient/image/feature/split asset 0 · source AUCs not reproduced"
@@ -1121,6 +1133,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "analysis",
+      title: "Pose/workflow and spatiotemporal-operator batch is rejected without opening compute",
+      copy: "DeepAnePose's public folds are clean enough for a control but its weak-pose and reformatted-view task is direct prior. Graph Physics, Aneumo WSS Transolver and EXPIGEO further narrow generic temporal-mesh, derived-WSS and geometry-GNN novelty. The new six-way screen scores 29.0/28.5/27.0/26.0/25.5/21.5; all rows fail a mandatory floor. The edge-1-form/Hodge/equivariant/periodic proposal remains an unselected control family until a new material version demonstrates stable, field-error-matched structural failure. Source-watch v16 freezes 27 states and authorizes review only. No medical-image payload, checkpoint, E0/P0/P1, architecture, scientific server, PBS/GPU, outer test or paper claim opened.",
+      files: ["docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md", "configs/source_watch_v16.json", "configs/aurora_v1.json", "src/aurora/source_watch.py", "src/aurora/protocol.py", "tests/test_source_watch.py", "tests/test_protocol.py", ".github/workflows/source-watch.yml", ".github/workflows/quality.yml", "docs/research-direction.md", "docs/model-spec.md", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "docs/datasets.md", "docs/literature-lineage.md", "docs/source-watch.md", "docs/server-execution.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "analysis",

@@ -1,0 +1,182 @@
+{
+  "schema_version": "aurora.source_watch.v16",
+  "extends": "source_watch_v15.json",
+  "status": "watch_only",
+  "observed_on": "2026-08-12",
+  "added_watches": [
+    {
+      "watch_id": "graph_physics_spatiotemporal_direct_prior_v1",
+      "kind": "github",
+      "review_request": "direct_prior_baseline_feasibility_reaudit_only",
+      "source": {
+        "repository": "DonsetPG/graph-physics",
+        "repository_url": "https://github.com/DonsetPG/graph-physics",
+        "default_branch": "main",
+        "paper_url": "https://arxiv.org/abs/2605.01542"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "e4ac523d749b126f504665fb6270fcb91ac3cbd2",
+        "root_entries": [
+          {"name": ".github", "type": "dir", "size": 0},
+          {"name": ".gitignore", "type": "file", "size": 231},
+          {"name": "dataset_config", "type": "dir", "size": 0},
+          {"name": "graphphysics", "type": "dir", "size": 0},
+          {"name": "jraphphysics", "type": "dir", "size": 0},
+          {"name": "Makefile", "type": "file", "size": 1654},
+          {"name": "mock_training.json", "type": "file", "size": 1226},
+          {"name": "predict.sh", "type": "file", "size": 223},
+          {"name": "README.md", "type": "file", "size": 23006},
+          {"name": "requirements.txt", "type": "file", "size": 347},
+          {"name": "retrain.sh", "type": "file", "size": 422},
+          {"name": "setup.py", "type": "file", "size": 158},
+          {"name": "tests", "type": "dir", "size": 0},
+          {"name": "train.sh", "type": "file", "size": 338},
+          {"name": "training_config", "type": "dir", "size": 0}
+        ],
+        "release_count": 0,
+        "license_spdx_id": null,
+        "repository_size_kib": 1401089,
+        "payload_or_code_entries": [".github", ".gitignore", "dataset_config", "graphphysics", "jraphphysics", "Makefile", "mock_training.json", "predict.sh", "requirements.txt", "retrain.sh", "setup.py", "tests", "train.sh", "training_config"],
+        "availability": "public_direct_prior_code_without_aurora_task_or_compute_authority"
+      }
+    },
+    {
+      "watch_id": "aneurysm_wss_transolver_direct_prior_v1",
+      "kind": "github",
+      "review_request": "direct_prior_baseline_feasibility_reaudit_only",
+      "source": {
+        "repository": "IsaacLin247/aneurysm-wss-transolver",
+        "repository_url": "https://github.com/IsaacLin247/aneurysm-wss-transolver",
+        "default_branch": "master",
+        "paper_url": "https://github.com/IsaacLin247/aneurysm-wss-transolver"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "3087fc9b8370ad39db85db9a61315bb34bf43cbb",
+        "root_entries": [
+          {"name": ".gitignore", "type": "file", "size": 188},
+          {"name": "audit", "type": "dir", "size": 0},
+          {"name": "configs", "type": "dir", "size": 0},
+          {"name": "LICENSE", "type": "file", "size": 1690},
+          {"name": "README.md", "type": "file", "size": 3573},
+          {"name": "reports", "type": "dir", "size": 0},
+          {"name": "RESULTS.md", "type": "file", "size": 13695},
+          {"name": "scripts", "type": "dir", "size": 0},
+          {"name": "src", "type": "dir", "size": 0}
+        ],
+        "release_count": 0,
+        "license_spdx_id": "NOASSERTION",
+        "repository_size_kib": 1843,
+        "payload_or_code_entries": [".gitignore", "RESULTS.md", "audit", "configs", "reports", "scripts", "src"],
+        "availability": "public_direct_prior_code_without_aurora_task_or_compute_authority"
+      }
+    },
+    {
+      "watch_id": "expigeo_geometry_gnn_direct_prior_v1",
+      "kind": "github",
+      "review_request": "direct_prior_baseline_feasibility_reaudit_only",
+      "source": {
+        "repository": "mohamedaminelayachi/EXPIGEO",
+        "repository_url": "https://github.com/mohamedaminelayachi/EXPIGEO",
+        "default_branch": "main",
+        "paper_url": "https://github.com/mohamedaminelayachi/EXPIGEO"
+      },
+      "frozen_snapshot": {
+        "main_head_sha": "b28736842ec521641ea9389e4a9a58bccc5616f3",
+        "root_entries": [
+          {"name": "assets", "type": "dir", "size": 0},
+          {"name": "expigeo", "type": "dir", "size": 0},
+          {"name": "LICENSE", "type": "file", "size": 1078},
+          {"name": "pyproject.toml", "type": "file", "size": 338},
+          {"name": "README.md", "type": "file", "size": 8677},
+          {"name": "uv.lock", "type": "file", "size": 261369}
+        ],
+        "release_count": 0,
+        "license_spdx_id": "MIT",
+        "repository_size_kib": 13817,
+        "payload_or_code_entries": ["assets", "expigeo", "pyproject.toml", "uv.lock"],
+        "availability": "public_direct_prior_code_without_aurora_task_or_compute_authority"
+      }
+    }
+  ],
+  "change_detection": {
+    "manual_review_if_any": [
+      "Any v15 material, direct-prior, target-contract or version-contract source state changes",
+      "graph-physics, aneurysm-wss-transolver or EXPIGEO exact repository state changes"
+    ],
+    "source_reaudit_is_not_asset_access": true,
+    "direct_prior_review_is_not_method_selection": true,
+    "metadata_watch_is_not_payload_access": true,
+    "material_release_signal_is_not_e0_pass": true,
+    "historical_execution_repair_trigger_allowed": false,
+    "terms_acceptance_automatic_allowed": false,
+    "watch_expansion_is_not_new_scientific_evidence": true,
+    "gated_manifest_metadata_is_not_payload_access": true,
+    "visible_case_id_is_not_verified_patient_unit": true,
+    "material_source_change_is_not_e0_pass": true,
+    "partial_baseline_repository_is_not_executable_baseline": true,
+    "repository_change_is_not_architecture_selection": true,
+    "readme_only_stated_code_repository_is_not_executable_baseline": true,
+    "direct_prior_code_release_is_not_task_asset_release": true,
+    "row_count_is_not_independent_patient_count": true,
+    "card_license_is_not_upstream_medical_data_lineage": true,
+    "postreview_metadata_change_is_not_e0_pass": true,
+    "visible_viewer_examples_are_not_registered_quality_prevalence": true,
+    "versioned_annotation_history_is_not_method_novelty": true,
+    "git_blob_change_is_not_terms_acceptance": true,
+    "annotation_metadata_is_not_medical_image_access": true,
+    "registry_or_wiki_change_is_not_terms_acceptance": true,
+    "controlled_access_metadata_is_not_payload_access": true,
+    "release_contract_change_is_not_p0_authority": true,
+    "reference_provenance_issue_is_not_method_novelty": true,
+    "topbrain2025_data_terms_not_automatically_accepted": true,
+    "public_vessel_labels_are_not_aneurysm_targets": true,
+    "podium_dockers_are_direct_priors_not_method_selection": true,
+    "rsna_pseudomasks_are_not_independent_dense_reference": true,
+    "baseline_code_is_not_controlled_challenge_data": true,
+    "derived_trajectory_csv_is_not_source_4dcta_or_intraoperative_reference": true,
+    "visible_case_directory_is_not_verified_independent_patient": true,
+    "source_wall_phenotype_result_is_not_aurora_reproduced_evidence": true,
+    "repository_license_absence_is_not_method_novelty": true,
+    "open_mask_archive_is_not_joined_outcome_asset": true,
+    "pipeline_code_is_not_patient_outcome_release": true,
+    "public_weights_are_direct_prior_not_task_identity": true,
+    "paper_cohort_count_is_not_archive_manifest": true,
+    "doi_badge_only_commit_is_not_material_asset_change": true,
+    "generator_code_is_not_generated_cohort_or_transient_field_asset": true,
+    "surface_vector_reentry_requires_whitelisted_material_change": true,
+    "direct_prior_code_is_not_material_task_asset": true,
+    "public_patientwise_folds_are_not_new_task_novelty": true,
+    "derived_wss_magnitude_is_not_transient_vector_ground_truth": true,
+    "score_repair_allowed": false,
+    "frozen_snapshot_auto_update_allowed": false
+  },
+  "authorization": {
+    "automatic_download": false,
+    "automatic_terms_acceptance": false,
+    "automatic_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "only_automatic_outcome": "manual_review_signal_only",
+    "permitted_review_requests": ["fresh_source_reaudit_only", "direct_prior_baseline_feasibility_reaudit_only"]
+  },
+  "future_gate": {
+    "source_score_required": 32.0,
+    "required_before_any_payload_p0": [
+      "official release or versioned dataset record",
+      "explicit dataset license or user-confirmed terms",
+      "machine-auditable manifest and independent-unit semantics",
+      "fresh direct-prior and residual-gap audit"
+    ],
+    "p0_pass_only_opens": "method_free_task_adequacy_p1",
+    "p1_pass_required_before_architecture_or_gpu": true
+  },
+  "execution_boundary": {
+    "scientific_execution_server": "introai9",
+    "scheduler": "pbs",
+    "excluded_server": "junjinyong",
+    "login_node_gpu_commands_allowed": false,
+    "current_aurora_pbs_jobs": 0
+  }
+}

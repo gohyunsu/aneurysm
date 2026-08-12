@@ -149,7 +149,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError("AURORA v1 must be marked research-only.")
     if (
         project["status"]
-        != "no_active_problem_asah_segmentation_outcome_batch_rejected_best_29_novelty_and_joined_asset_floors_no_p0_no_compute"
+        != "no_active_problem_pose_workflow_and_spatiotemporal_operator_batch_rejected_best_29_no_p0_no_compute"
         or project["execution_server"] != "introai9"
         or project["allowed_pbs_queues"] != ["coss_agpu", "coss_a6gpu"]
         or project["excluded_execution_servers"] != ["junjinyong"]
@@ -187,6 +187,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "next_allowed_action",
             "audit_document",
             "future_source_admission_v2",
+            "pose_workflow_and_spatiotemporal_operator_reappraisal",
             "aneurysmal_sah_segmentation_outcome_reappraisal",
             "rsna_release_layer_and_webgan_utility_delta",
             "rupture_state_future_risk_and_unit_semantics_delta",
@@ -270,6 +271,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v13",
             "public_source_watch_v14",
             "public_source_watch_v15",
+            "public_source_watch_v16",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -280,13 +282,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         problem_selection["status"]
-        != "no_active_problem_asah_segmentation_outcome_batch_rejected_no_method_no_compute_surface_vector_closed_until_material_release"
+        != "no_active_problem_pose_workflow_and_spatiotemporal_operator_batch_rejected_no_method_no_compute_surface_vector_closed_until_material_release"
         or problem_selection["shortlisted_candidate"] is not None
         or problem_selection["conditional_source_lead_count"] != 0
         or problem_selection["candidate_dataset"] is not None
         or problem_selection["candidate_estimand"] is not None
         or problem_selection["asset_access_status"]
-        != "public_asah_zenodo_metadata_and_small_code_repositories_only_no_rar_checkpoint_patient_mask_outcome_join_or_scientific_server"
+        != "public_pose_annotations_fold_metadata_and_direct_prior_code_only_no_medical_image_payload_checkpoint_transient_vector_cohort_or_scientific_server"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not False
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -296,17 +298,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["outer_test_authorized"] is not False
         or problem_selection["submission_identity_active"] is not False
         or problem_selection["next_allowed_action"]
-        != "fresh_problem_level_source_or_material_joined_asset_audit_only_no_data_request_payload_architecture_or_compute"
+        != "fresh_problem_level_source_or_whitelisted_material_task_asset_audit_only_no_payload_architecture_or_compute"
         or problem_selection["audit_document"]
-        != "docs/sah-segmentation-outcome-asset-reappraisal-2026-08-12.md"
+        != "docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
         != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
-        != "cross_aetiology_small_volume_asah_transport_rejected_at_29_residual_novelty_floor"
+        != "patient_wise_weak_pose_benchmark_repair_rejected_at_29_direct_prior_novelty_floor"
         or problem_selection["most_recent_conditional_source_lead"] is not None
     ):
         raise ProtocolError(
-            "The aSAH segmentation-outcome batch must remain rejected and surface-vector "
+            "The pose/operator batch must remain rejected and surface-vector "
             "must remain closed until a material release after its exact CPU P0 ended execution-incomplete; "
             "no active lead, repair, method, GPU, outer test or claim may remain."
         )
@@ -378,6 +380,119 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "baseline floors, and a pass opens only a method-free P0."
         )
     checks.append("prospective non-compensatory source-admission boundary")
+
+    pose_operator = problem_selection[
+        "pose_workflow_and_spatiotemporal_operator_reappraisal"
+    ]
+    _require_keys(
+        pose_operator,
+        [
+            "status", "audit_document", "automatic_selection_threshold",
+            "best_candidate_id", "best_score", "best_residual_novelty_score",
+            "all_candidate_scores", "conditional_source_lead_count",
+            "primary_problem_selected", "paper_identity_active",
+            "deepanepose_official_repository", "deepanepose_exact_head",
+            "deepanepose_selected_sessions", "deepanepose_unique_subject_ids",
+            "deepanepose_positive_annotation_json", "deepanepose_annotated_lesions",
+            "deepanepose_fold_train_counts", "deepanepose_fold_validation_counts",
+            "deepanepose_fold_test_counts", "deepanepose_test_union_subjects",
+            "deepanepose_each_selected_subject_tested_once",
+            "deepanepose_repository_license_file_present",
+            "deepanepose_tracked_checkpoint_present",
+            "source_reported_combined_patients", "source_reported_combined_aneurysms",
+            "source_results_reproduced_by_aurora", "graph_physics_exact_head",
+            "graph_physics_arxiv", "wss_transolver_exact_head",
+            "wss_transolver_source_fields", "wss_transolver_wss_is_derived_magnitude",
+            "wss_transolver_tracked_dataset_checkpoint_or_completed_fold_outputs",
+            "expigeo_exact_head", "expigeo_patient_or_family_grouped_split_public",
+            "hyctor_exact_head", "hyctor_learned_components_validated",
+            "surface_vector_scientific_hypothesis_retained",
+            "surface_vector_reactivated", "architecture_candidate_is_control_family_only",
+            "candidates", "required_reentry_observables", "p0_registered",
+            "p1_registered", "method_selected", "architecture_selected",
+            "scientific_server_queried", "gpu_training_authorized",
+            "outer_test_authorized", "submission_identity_active",
+            "historical_job_repaired_or_rerun", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "next_allowed_action",
+        ],
+        "pose workflow and spatiotemporal operator reappraisal",
+    )
+    expected_pose_operator_candidates = [
+        ("patient_wise_weak_pose_benchmark_repair", 29.0),
+        ("axis_symmetry_aware_selective_pose_sets", 28.5),
+        ("weak_pose_external_transport_to_ds005096", 27.0),
+        ("derived_wss_reference_uncertainty", 26.0),
+        ("family_disjoint_expigeo_explainability", 25.5),
+        ("structure_faithful_transient_wss_operator", 21.5),
+    ]
+    if (
+        pose_operator["status"]
+        != "fresh_problem_level_batch_rejected_best_29_pose_task_direct_prior_and_transient_vector_asset_floors"
+        or pose_operator["audit_document"]
+        != "docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md"
+        or pose_operator["automatic_selection_threshold"] != 32.0
+        or pose_operator["best_candidate_id"]
+        != "patient_wise_weak_pose_benchmark_repair"
+        or pose_operator["best_score"] != 29.0
+        or pose_operator["best_residual_novelty_score"] != 1.0
+        or pose_operator["all_candidate_scores"]
+        != [29.0, 28.5, 27.0, 26.0, 25.5, 21.5]
+        or pose_operator["conditional_source_lead_count"] != 0
+        or pose_operator["deepanepose_exact_head"]
+        != "40042fa4290fe2e36a30dfb100b514cbe2fbaea2"
+        or pose_operator["deepanepose_selected_sessions"] != 270
+        or pose_operator["deepanepose_unique_subject_ids"] != 270
+        or pose_operator["deepanepose_positive_annotation_json"] != 140
+        or pose_operator["deepanepose_annotated_lesions"] != 164
+        or pose_operator["deepanepose_fold_train_counts"]
+        != [216, 216, 217, 216, 215]
+        or pose_operator["deepanepose_fold_validation_counts"] != [0, 0, 0, 0, 0]
+        or pose_operator["deepanepose_fold_test_counts"] != [54, 54, 53, 54, 55]
+        or pose_operator["deepanepose_test_union_subjects"] != 270
+        or pose_operator["deepanepose_each_selected_subject_tested_once"] is not True
+        or pose_operator["deepanepose_repository_license_file_present"] is not False
+        or pose_operator["deepanepose_tracked_checkpoint_present"] is not False
+        or pose_operator["graph_physics_exact_head"]
+        != "e4ac523d749b126f504665fb6270fcb91ac3cbd2"
+        or pose_operator["wss_transolver_exact_head"]
+        != "3087fc9b8370ad39db85db9a61315bb34bf43cbb"
+        or pose_operator["wss_transolver_source_fields"] != ["p", "U"]
+        or pose_operator["wss_transolver_wss_is_derived_magnitude"] is not True
+        or pose_operator["expigeo_exact_head"]
+        != "b28736842ec521641ea9389e4a9a58bccc5616f3"
+        or pose_operator["hyctor_exact_head"]
+        != "31f69e6c0953b4d1d0f52856cd4d16efb9248556"
+        or pose_operator["surface_vector_scientific_hypothesis_retained"] is not True
+        or pose_operator["architecture_candidate_is_control_family_only"] is not True
+        or [
+            (candidate.get("id"), candidate.get("total"))
+            for candidate in pose_operator["candidates"]
+        ]
+        != expected_pose_operator_candidates
+        or any(candidate.get("critical_axis_pass") is not False for candidate in pose_operator["candidates"])
+        or any(
+            pose_operator[key] is not False
+            for key in (
+                "primary_problem_selected", "paper_identity_active",
+                "source_results_reproduced_by_aurora",
+                "wss_transolver_tracked_dataset_checkpoint_or_completed_fold_outputs",
+                "expigeo_patient_or_family_grouped_split_public",
+                "hyctor_learned_components_validated", "surface_vector_reactivated",
+                "p0_registered", "p1_registered", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "gpu_training_authorized", "outer_test_authorized",
+                "submission_identity_active", "historical_job_repaired_or_rerun",
+                "login_node_gpu_command_executed", "junjinyong_accessed",
+            )
+        )
+        or pose_operator["next_allowed_action"]
+        != "fresh_problem_level_source_or_whitelisted_material_task_asset_audit_only_no_payload_architecture_or_compute"
+    ):
+        raise ProtocolError(
+            "The pose/operator source batch must remain rejected: public folds and "
+            "direct-prior code do not create pose novelty or a transient-vector task asset."
+        )
+    checks.append("pose workflow and spatiotemporal operator rejection boundary")
 
     sah = problem_selection["aneurysmal_sah_segmentation_outcome_reappraisal"]
     _require_keys(
@@ -5537,7 +5652,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         is not False
         or surface_closure["current_architecture"] is not None
         or surface_closure["current_architecture_is_gnn"] is not False
-        or surface_closure["reentry_watch_config"] != "configs/source_watch_v15.json"
+        or surface_closure["reentry_watch_config"] != "configs/source_watch_v16.json"
         or surface_closure["whitelisted_material_reentry_signals"]
         != [
             "official_phase_resolved_surface_vector_schema_units_time_correspondence_and_family_manifest",
@@ -8124,6 +8239,67 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "historical repair, method or compute."
         )
     checks.append("twenty-four-source fail-closed Synthetic-AAA material watch boundary")
+    source_watch_v16 = problem_selection["public_source_watch_v16"]
+    _require_keys(
+        source_watch_v16,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "graph_physics_main_head",
+            "wss_transolver_main_head", "expigeo_main_head",
+            "same_as_all_frozen_snapshots", "manual_review_triggered",
+            "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+            "p0_or_p1_authorized", "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized", "server_queried",
+            "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            "decision",
+        ],
+        "public source watch v16",
+    )
+    if (
+        source_watch_v16["status"]
+        != "watch_only_all_twenty_seven_frozen_snapshots_match"
+        or source_watch_v16["config"] != "configs/source_watch_v16.json"
+        or source_watch_v16["extends_historical_config"]
+        != "configs/source_watch_v15.json"
+        or source_watch_v16["config_sha256"]
+        != "fb1b0cb80d764873f5364a4a56d3cd4c64dbd7c620e01bbb64d495da9de0b875"
+        or source_watch_v16["watch_count"] != 27
+        or source_watch_v16["added_watch_ids"]
+        != [
+            "graph_physics_spatiotemporal_direct_prior_v1",
+            "aneurysm_wss_transolver_direct_prior_v1",
+            "expigeo_geometry_gnn_direct_prior_v1",
+        ]
+        or source_watch_v16["graph_physics_main_head"]
+        != "e4ac523d749b126f504665fb6270fcb91ac3cbd2"
+        or source_watch_v16["wss_transolver_main_head"]
+        != "3087fc9b8370ad39db85db9a61315bb34bf43cbb"
+        or source_watch_v16["expigeo_main_head"]
+        != "b28736842ec521641ea9389e4a9a58bccc5616f3"
+        or source_watch_v16["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v16[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "historical_execution_repair_or_rerun_authorized", "score_repair_authorized",
+                "p0_or_p1_authorized", "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized", "server_queried",
+                "login_node_gpu_command_executed", "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v16["decision"]
+        != "continue_fail_closed_twenty_seven_source_watch_new_code_is_direct_prior_only_without_task_asset_method_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v16 must preserve twenty-seven exact public states; "
+            "new code can request direct-prior review only, never a task, method or compute."
+        )
+    checks.append("twenty-seven-source fail-closed direct-prior code watch boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "clipfactor_orbit_morphometry_stability_audit_total_and_novelty_floor",
         "neck_conditioned_roi_isolation_transfer_direct_prior_and_engineering_only",

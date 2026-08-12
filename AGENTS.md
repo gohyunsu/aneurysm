@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 pose/workflow and spatiotemporal-operator reappraisal · schema
+> 10.7 unchanged:** DeepAnePose exact `40042fa…` has 270 selected IDs, 140
+> positive JSON, 164 lesions and patient-wise five-fold test coverage, but weak
+> pose/detection/reformatted planes are direct prior. Graph Physics
+> `e4ac523…`, Aneumo WSS Transolver `3087fc9…` and EXPIGEO `b287368…`
+> further crowd generic operator/GNN claims. Six rows score
+> 29.0/28.5/27.0/26.0/25.5/21.5 and all are rejected. Surface-vector remains a
+> valid inactive hypothesis; edge-1-form/Hodge/equivariant/periodic modules are
+> unselected controls, not novelty. Source-watch v16 freezes 27 states and can
+> request review only. No payload, E0/P0/P1, method, architecture, scientific
+> server, transfer, PBS/GPU, outer test, result or claim opened. `115645` is not
+> repaired/rerun. Future authorized execution is `introai9` PBS only; never
+> access/query/transfer/submit/monitor `junjinyong`, and never use login-node GPU.
+> Full regression: 458 total, 392 pass/66 optional-dependency skip; machine
+> protocol 93 invariant groups. Site link/anchor/asset/app mount, JSON,
+> JavaScript and diff hygiene pass. Team-source hashes remain `ad99cc…` and
+> `6d50cb…`; no conversation newer than 2026-08-02 was present.
+> Machine protocol SHA-256 is `36935be0c3c01147d839bebb767f639e3c306ffd1f2da53f5a35656b69d201eb`;
+> source-watch v16 SHA-256 is `fb1b0cb80d764873f5364a4a56d3cd4c64dbd7c620e01bbb64d495da9de0b875`.
+
 > **2026-08-12 surface-vector finite closure deployment·private
 > synchronization:** Exact public scientific source
 > `a9d79f0446041555585a73f0fc7ed9a0cd990514` passed Quality `31549386632`

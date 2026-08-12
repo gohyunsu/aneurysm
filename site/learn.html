@@ -84,14 +84,59 @@
         </p>
         <div class="answer-card">
           <span>짧은 답 · schema 10.7</span>
-          <strong>공개 마스크는 의미 있는 자산이지만, 환자별 outcome과 연결되지 않아 새 임상 연구 표적을 식별하지 못합니다.</strong>
+          <strong>깨끗한 공개 fold는 좋은 control이지만, 이미 점유된 task를 새 논문으로 바꾸지는 못합니다.</strong>
           <p>
-            최신 여섯 후보는 29.0/28.5/28.0/28.0/27.0/22.5이고 모두
-            기각됐습니다. 공개 record는 NCCT와 expert mask를 말하지만 archive-level
-            patient/centre/split/outcome manifest가 없습니다. 기존 연구가 이미 큰 cohort의
-            segmentation, GOS volume equivalence, mortality, multiclass와 transfer를
-            다룹니다. 따라서 P0, method, model, scientific server와 GPU는 0입니다.
+            최신 pose/operator 여섯 후보는 29.0/28.5/27.0/26.0/25.5/21.5이고
+            모두 기각됐습니다. DeepAnePose fold는 재현성 있는 control이지만 원
+            논문이 weak pose와 reformatted view를 직접 점유합니다. Transient WSS는
+            vector/family/structure reference가 없습니다. 따라서 P0, method, model,
+            scientific server와 GPU는 0입니다.
           </p>
+        </div>
+        <div class="answer-card" id="pose-operator">
+          <span>Pose 자산과 surface operator를 처음부터 이해하기</span>
+          <strong>“자료가 잘 정리돼 있다”, “task가 새롭다”, “모델을 평가할 정답이 있다”는 세 가지 다른 조건입니다.</strong>
+          <p>
+            <b>Pose</b>는 동맥류의 위치만이 아니라 neck 쪽 점 P1, dome 쪽 점 P2,
+            크기와 주축 방향을 뜻합니다. DeepAnePose는 이 두 점을 이용해 sphere를
+            만들고, detection과 main-axis orientation을 한 번에 예측해 적절한
+            reformatted cut plane을 보여줍니다. Official repository에는 270개의
+            selected subject/session ID, 140개의 positive JSON과 164 lesion이 있으며,
+            다섯 fold의 test union에서 각 ID가 정확히 한 번 등장합니다.
+          </p>
+          <p>
+            이 구조는 leakage를 줄이는 좋은 출발점입니다. 그러나 explicit validation
+            split, checkpoint와 repository license file은 없고, P1/P2 한 세트는 여러
+            reader가 동의하는 pose 분포나 dense neck/sac mask가 아닙니다. 더 중요한
+            것은 MICCAI 2023 원 논문이 이미 weak two-point annotation, localization,
+            size, orientation과 reformatted plane을 contribution으로 제시했다는
+            사실입니다. 같은 fold에서 더 큰 network를 쓰는 것은 novelty가 아닙니다.
+          </p>
+          <p>
+            <b>Surface-vector 가설</b>은 다른 질문입니다. CFD가 예측한 WSS vector가
+            각 mesh surface에 놓일 때, 평균 Cartesian error가 작아도 flow의 critical
+            point와 cardiac-cycle track이 사라질 수 있다는 가설입니다. 이는 의미
+            있지만 현재 공개된 Aneumo WSS Transolver는 shipped <code>p,U</code>에서
+            steady WSS <em>magnitude</em>를 파생할 뿐, phase-resolved tangent vector와
+            signed worldline 정답을 제공하지 않습니다.
+          </p>
+          <p>
+            Graph Physics는 이미 MeshGraphNet, Transolver/Transformer, temporal
+            correction과 3D positional encoding을 aneurysm을 포함한 physics mesh에
+            사용하고, EXPIGEO는 interior geometry-aware GNN과 explanation을 직접
+            다룹니다. 따라서 edge 1-form, Hodge decomposition, equivariance와 periodic
+            operator를 합친 이름은 contribution이 아닙니다. 이들은 나중에 실제
+            matched failure가 관측되면 비교할 control family입니다.
+          </p>
+          <p>
+            새 version이 들어오려면 phase별 tangent WSS vector의 단위·mesh·BC·solver,
+            patient 또는 generating-family manifest, mesh/tolerance perturbation에서의
+            degree/track stability, 그리고 같은 field error를 가진 강한 baseline이
+            구조적으로 실패하는 증거가 먼저 필요합니다. 이 method-free evidence가
+            생긴 뒤에도 validation-only development와 untouched confirmation을
+            분리합니다. 현재는 그 첫 단계가 없으므로 GPU를 돌리지 않습니다.
+          </p>
+          <a href="../docs/pose-workflow-and-spatiotemporal-operator-source-reappraisal-2026-08-12.md">source facts, six scores와 re-entry 조건 전체 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asah-outcome">
           <span>aSAH mask와 outcome join을 처음부터 이해하기</span>

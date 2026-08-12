@@ -1,5 +1,11 @@
 # Surface-vector finite closure and re-entry contract
 
+> **2026-08-12 extension:** source-watch v16 supersedes v15 as the active
+> read-only watch and adds Graph Physics, Aneumo WSS Transolver and EXPIGEO as
+> direct-prior code states. This narrows method novelty but does not reopen the
+> closed asset family, create E0 or authorize a model. The material-release
+> re-entry requirements below are unchanged.
+
 > **Decision · 2026-08-12 KST · schema 10.7 unchanged:** preserve the
 > scientific question, but close the research family as
 > **`closed_until_whitelisted_material_release`**. There is no fresh E0, active

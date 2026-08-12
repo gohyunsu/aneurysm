@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Admission checkpoint · 2026-08-12:** the latest pose/workflow and
+> spatiotemporal-operator batch is not an ISBI submission identity. Clean public
+> folds make DeepAnePose reproducible enough for a control, but do not create an
+> unoccupied scientific claim. Surface-vector could become a competitive
+> application contribution only after a stable field-accuracy/structure
+> mismatch is observed on an independently grouped transient-vector asset and a
+> minimal mechanism-linked model improves structural endpoints without field
+> regression. Neither prerequisite exists. Title, abstract, method, results,
+> figures and C21 remain frozen.
+
 > **2026-08-12 surface-vector submission decision:** The potential application
 > identity remains scientifically attractive, but it is not a paper. Do not
 > assign a title, contribution, architecture diagram or result table until a

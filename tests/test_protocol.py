@@ -90,7 +90,7 @@ class ProtocolTests(unittest.TestCase):
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["method_selected"] = True
         with self.assertRaisesRegex(
-            ProtocolError, "aSAH segmentation-outcome batch"
+            ProtocolError, "pose/operator batch"
         ):
             validate_protocol(candidate)
 
@@ -384,6 +384,35 @@ class ProtocolTests(unittest.TestCase):
             "method_or_architecture_authorized"
         ] = True
         with self.assertRaisesRegex(ProtocolError, "Source watch v15"):
+            validate_protocol(candidate)
+
+    def test_pose_operator_batch_and_source_watch_v16_remain_fail_closed(self) -> None:
+        problem = self.protocol["problem_selection"]
+        audit = problem["pose_workflow_and_spatiotemporal_operator_reappraisal"]
+        watch = problem["public_source_watch_v16"]
+        self.assertEqual(audit["best_score"], 29.0)
+        self.assertEqual(audit["all_candidate_scores"], [29.0, 28.5, 27.0, 26.0, 25.5, 21.5])
+        self.assertEqual(audit["deepanepose_selected_sessions"], 270)
+        self.assertEqual(audit["deepanepose_annotated_lesions"], 164)
+        self.assertTrue(audit["deepanepose_each_selected_subject_tested_once"])
+        self.assertTrue(audit["architecture_candidate_is_control_family_only"])
+        self.assertTrue(all(not candidate["critical_axis_pass"] for candidate in audit["candidates"]))
+        self.assertFalse(audit["p0_registered"])
+        self.assertFalse(audit["architecture_selected"])
+        self.assertFalse(audit["scientific_server_queried"])
+        self.assertFalse(audit["junjinyong_accessed"])
+        self.assertEqual(watch["watch_count"], 27)
+        self.assertFalse(watch["method_or_architecture_authorized"])
+        self.assertFalse(watch["gpu_or_outer_test_authorized"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["pose_workflow_and_spatiotemporal_operator_reappraisal"]["architecture_selected"] = True
+        with self.assertRaisesRegex(ProtocolError, "pose/operator"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v16"]["p0_or_p1_authorized"] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v16"):
             validate_protocol(candidate)
 
     def test_future_source_admission_is_noncompensatory_and_prospective(self) -> None:
@@ -1699,7 +1728,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_aetiology_small_volume_asah_transport_rejected_at_29_residual_novelty_floor",
+            "patient_wise_weak_pose_benchmark_repair_rejected_at_29_direct_prior_novelty_floor",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -1754,7 +1783,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_aetiology_small_volume_asah_transport_rejected_at_29_residual_novelty_floor",
+            "patient_wise_weak_pose_benchmark_repair_rejected_at_29_direct_prior_novelty_floor",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -1777,13 +1806,13 @@ class ProtocolTests(unittest.TestCase):
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["coarsening_at_random_assumed"] = True
         with self.assertRaisesRegex(
-            ProtocolError, "aSAH segmentation-outcome batch"
+            ProtocolError, "pose/operator batch"
         ):
             validate_protocol(candidate)
         candidate = copy.deepcopy(self.protocol)
         candidate["problem_selection"]["gpu_training_authorized"] = True
         with self.assertRaisesRegex(
-            ProtocolError, "aSAH segmentation-outcome batch"
+            ProtocolError, "pose/operator batch"
         ):
             validate_protocol(candidate)
 
@@ -2059,7 +2088,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_aetiology_small_volume_asah_transport_rejected_at_29_residual_novelty_floor",
+            "patient_wise_weak_pose_benchmark_repair_rejected_at_29_direct_prior_novelty_floor",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -2225,7 +2254,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed_for_this_audit"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_aetiology_small_volume_asah_transport_rejected_at_29_residual_novelty_floor",
+            "patient_wise_weak_pose_benchmark_repair_rejected_at_29_direct_prior_novelty_floor",
         )
 
         candidate = copy.deepcopy(self.protocol)
@@ -2262,7 +2291,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["junjinyong_accessed"])
         self.assertEqual(
             problem["most_recent_source_rejected_candidate"],
-            "cross_aetiology_small_volume_asah_transport_rejected_at_29_residual_novelty_floor",
+            "patient_wise_weak_pose_benchmark_repair_rejected_at_29_direct_prior_novelty_floor",
         )
 
         candidate = copy.deepcopy(self.protocol)

@@ -45,6 +45,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v13",
         "aurora.source_watch.v14",
         "aurora.source_watch.v15",
+        "aurora.source_watch.v16",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -168,7 +169,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v14_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v14(payload)
-    else:
+    elif schema == "aurora.source_watch.v15":
         if payload.get("extends") != "source_watch_v14.json":
             raise SourceWatchContractError("v15_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -179,6 +180,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v15_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v15(payload)
+    else:
+        if payload.get("extends") != "source_watch_v15.json":
+            raise SourceWatchContractError("v16_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v15":
+            raise SourceWatchContractError("v16_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v16_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v16(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -234,6 +246,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v13",
         "aurora.source_watch.v14",
         "aurora.source_watch.v15",
+        "aurora.source_watch.v16",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -1715,6 +1728,87 @@ def _validate_v15(payload: Mapping[str, Any]) -> None:
         )
     ):
         raise SourceWatchContractError("v15_change_boundary_changed")
+
+
+def _validate_v16(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 27:
+        raise SourceWatchContractError("v16_watch_set_changed")
+    _validate_v15(
+        {
+            "watches": watches[:24],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    graph_physics, wss_transolver, expigeo = watches[24:]
+    expected = [
+        (
+            graph_physics,
+            "graph_physics_spatiotemporal_direct_prior_v1",
+            "DonsetPG/graph-physics",
+            "main",
+            "e4ac523d749b126f504665fb6270fcb91ac3cbd2",
+            None,
+            1401089,
+            [
+                ".github", ".gitignore", "dataset_config", "graphphysics",
+                "jraphphysics", "Makefile", "mock_training.json", "predict.sh",
+                "requirements.txt", "retrain.sh", "setup.py", "tests",
+                "train.sh", "training_config",
+            ],
+        ),
+        (
+            wss_transolver,
+            "aneurysm_wss_transolver_direct_prior_v1",
+            "IsaacLin247/aneurysm-wss-transolver",
+            "master",
+            "3087fc9b8370ad39db85db9a61315bb34bf43cbb",
+            "NOASSERTION",
+            1843,
+            [".gitignore", "RESULTS.md", "audit", "configs", "reports", "scripts", "src"],
+        ),
+        (
+            expigeo,
+            "expigeo_geometry_gnn_direct_prior_v1",
+            "mohamedaminelayachi/EXPIGEO",
+            "main",
+            "b28736842ec521641ea9389e4a9a58bccc5616f3",
+            "MIT",
+            13817,
+            ["assets", "expigeo", "pyproject.toml", "uv.lock"],
+        ),
+    ]
+    for watch, watch_id, repository, branch, head, license_id, size, material in expected:
+        source = watch.get("source", {})
+        snapshot = watch.get("frozen_snapshot", {})
+        if (
+            watch.get("watch_id") != watch_id
+            or watch.get("kind") != "github"
+            or watch.get("review_request")
+            != "direct_prior_baseline_feasibility_reaudit_only"
+            or source.get("repository") != repository
+            or source.get("repository_url") != f"https://github.com/{repository}"
+            or source.get("default_branch") != branch
+            or snapshot.get("main_head_sha") != head
+            or snapshot.get("release_count") != 0
+            or snapshot.get("license_spdx_id") != license_id
+            or snapshot.get("repository_size_kib") != size
+            or snapshot.get("payload_or_code_entries") != material
+            or snapshot.get("availability")
+            != "public_direct_prior_code_without_aurora_task_or_compute_authority"
+        ):
+            raise SourceWatchContractError("v16_direct_prior_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "direct_prior_code_is_not_material_task_asset",
+            "public_patientwise_folds_are_not_new_task_novelty",
+            "derived_wss_magnitude_is_not_transient_vector_ground_truth",
+        )
+    ):
+        raise SourceWatchContractError("v16_change_boundary_changed")
 
 
 def _url_get(url: str, accept: str) -> bytes:

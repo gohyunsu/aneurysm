@@ -34,10 +34,41 @@ CONFIG_V12 = ROOT / "configs" / "source_watch_v12.json"
 CONFIG_V13 = ROOT / "configs" / "source_watch_v13.json"
 CONFIG_V14 = ROOT / "configs" / "source_watch_v14.json"
 CONFIG_V15 = ROOT / "configs" / "source_watch_v15.json"
+CONFIG_V16 = ROOT / "configs" / "source_watch_v16.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
 class SourceWatchContractTests(unittest.TestCase):
+    def test_v16_adds_three_direct_priors_without_scientific_authority(self) -> None:
+        config = load_config(CONFIG_V16)
+        self.assertEqual(config["schema_version"], "aurora.source_watch.v16")
+        self.assertEqual(len(config["watches"]), 27)
+        self.assertEqual(
+            [watch["watch_id"] for watch in config["watches"][-3:]],
+            [
+                "graph_physics_spatiotemporal_direct_prior_v1",
+                "aneurysm_wss_transolver_direct_prior_v1",
+                "expigeo_geometry_gnn_direct_prior_v1",
+            ],
+        )
+        self.assertTrue(
+            all(
+                watch["review_request"]
+                == "direct_prior_baseline_feasibility_reaudit_only"
+                for watch in config["watches"][-3:]
+            )
+        )
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertEqual(result["next_action"], "continue_watch_only")
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
     def test_reference_snapshot_is_readme_only_and_authorizes_nothing(self) -> None:
         config = load_config(CONFIG)
         self.assertEqual(config["status"], "watch_only")
@@ -554,7 +585,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v15.json", workflow)
+        self.assertIn("configs/source_watch_v16.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)
