@@ -1,5 +1,13 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.8 final pre-execution P0 v2:** Unexecuted v1 is preserved. A
+> rank-preserving 8× coordinate-half response distortion passed its Spearman-
+> only gate, so current v2 adds symmetric-relative-difference upper CI ≤0.25
+> while retaining within-flow rank lower CI ≥0.80. Actual cache bytes are
+> hashed and the exact host path remains identical inside the container. V2
+> contains 11 all-pass checks and finalizes red-team; later metric/threshold
+> changes require a new evidence version. Real checks remain 0/11.
+
 > **Schema 11.8 prospective order:** (1) existing 20 train base families에서
 > method-free endpoint stability P0, (2) development-only field-selected strong
 > baselines 사이의 response-fidelity mismatch P1, (3) 통과 시에만 bounded model

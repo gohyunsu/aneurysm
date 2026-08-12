@@ -1,5 +1,13 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.8 P0-v2 writing boundary:** P0 v1 is unexecuted superseded
+> history after rank-preserving 8× coordinate-half magnitude distortion passed
+> its Spearman-only gate. P0 v2 adds magnitude CI upper ≤0.25, hashes observed
+> cache bytes and preserves exact host/container path identity. It has 11
+> checks and is frozen before data. This methodological hygiene is not an ISBI
+> contribution or result; the manuscript remains unchanged until real P0 and
+> field-error-matched P1 evidence exist.
+
 > **Schema 11.8 conditional paper plan:** 현재 provisional identity는
 > **response-faithful multi-flow haemodynamic surrogation**이다. 하나의
 > nominal-flow CFD를 제공받아 대체 유량의 velocity field를 예측할 때, 낮은

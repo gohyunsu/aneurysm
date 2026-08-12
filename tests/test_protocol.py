@@ -43,7 +43,16 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(audit["p0_reference_evaluator_synthetic_validation_passed"])
         self.assertTrue(audit["p0_current_config_refuses_before_cache_access"])
         self.assertTrue(audit["p0_coordinate_half_metric_flow_stratified_by_family"])
+        self.assertTrue(audit["p0_coordinate_half_magnitude_gate_registered"])
+        self.assertTrue(audit["p0_observed_cache_bytes_hashed"])
+        self.assertTrue(audit["p0_host_container_cache_path_identity_preserved"])
+        self.assertTrue(audit["p0_pre_execution_red_team_finalized"])
+        self.assertTrue(
+            audit["p0_future_metric_or_threshold_change_requires_new_evidence_version"]
+        )
         self.assertEqual(audit["p0_registered_bootstrap_replicates"], 5000)
+        self.assertEqual(audit["p0_registered_scientific_check_count"], 11)
+        self.assertTrue(audit["p0_v1_superseded_pre_execution"])
         self.assertFalse(audit["candidate_failure_observed"])
         self.assertFalse(audit["p0_executable"])
         self.assertFalse(audit["p0_submitted"])

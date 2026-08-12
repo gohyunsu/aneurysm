@@ -6,7 +6,7 @@
 > fidelity**다. 하나의 nominal-flow CFD field를 anchor로 받아 다른 유량의
 > velocity response를 재현하는 sensitivity-sweep 문제이며, rupture/clinical
 > target이 아니다. 34.0/40이지만 novelty는 정확히 2.5/5 하한선이므로
-> [method-free P0](../configs/aneumo_response_fidelity_p0.json)와
+> [method-free P0 v2](../configs/aneumo_response_fidelity_p0_v2.json)와
 > [상세 audit](response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md)만
 > 허용한다. P0는 current exact private path가 unresolved라 non-executable이며,
 > method/architecture/GPU/validation/test/claim은 아직 0이다.

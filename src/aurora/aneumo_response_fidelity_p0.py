@@ -44,6 +44,19 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def verify_cache_hash(
+    cache: Path, *, reported_sha256: str, registered_sha256: str
+) -> str:
+    """Hash the cache bytes and require observed, reported and registered equality."""
+
+    observed = _sha256(cache)
+    if observed != reported_sha256 or observed != registered_sha256:
+        raise AneumoResponseFidelityP0Error(
+            "Observed cache SHA-256 differs from the reported or registered value."
+        )
+    return observed
+
+
 def _decode(value: Any) -> str:
     return value.decode("utf-8") if isinstance(value, bytes) else str(value)
 
@@ -89,6 +102,26 @@ def _cosine(first: Any, second: Any) -> float:
     if denominator <= 1e-30:
         raise AneumoResponseFidelityP0Error("Tangent direction has zero norm.")
     return float(np.clip(np.dot(left, right) / denominator, -1.0, 1.0))
+
+
+def _symmetric_relative_difference(first: Any, second: Any) -> Any:
+    """Return ``2|a-b|/(|a|+|b|)`` with a strict nonzero denominator."""
+
+    np = _numpy()
+    left = np.asarray(first, dtype=np.float64)
+    right = np.asarray(second, dtype=np.float64)
+    if left.shape != right.shape or not np.all(np.isfinite(left)) or not np.all(
+        np.isfinite(right)
+    ):
+        raise AneumoResponseFidelityP0Error(
+            "Coordinate-half magnitudes must be finite and shape-matched."
+        )
+    denominator = np.abs(left) + np.abs(right)
+    if np.any(denominator <= 1e-30):
+        raise AneumoResponseFidelityP0Error(
+            "Coordinate-half magnitude comparison has a zero denominator."
+        )
+    return 2.0 * np.abs(left - right) / denominator
 
 
 def _bootstrap_median_interval(
@@ -359,6 +392,7 @@ def evaluate_records(
 
     half_zero_by_family: list[list[float]] = []
     half_one_by_family: list[list[float]] = []
+    half_magnitude_differences: list[float] = []
     tangent_agreements: list[float] = []
     interpolation_errors: list[float] = []
     deformation_zero: list[float] = []
@@ -376,6 +410,15 @@ def evaluate_records(
                 np.asarray([item[1]["half_descriptors"][1] for item in items]),
                 axis=0,
             ).tolist()
+        )
+        half_magnitude_differences.append(
+            float(
+                np.median(
+                    _symmetric_relative_difference(
+                        half_zero_by_family[-1], half_one_by_family[-1]
+                    )
+                )
+            )
         )
         tangent_agreements.append(
             float(np.median([item[1]["tangent_direction_agreement"] for item in items]))
@@ -396,21 +439,27 @@ def evaluate_records(
         seed=seed,
         confidence=confidence,
     )
+    half_magnitude_summary = _bootstrap_median_interval(
+        half_magnitude_differences,
+        replicates=replicates,
+        seed=seed + 1,
+        confidence=confidence,
+    )
     tangent_summary = _bootstrap_median_interval(
         tangent_agreements,
         replicates=replicates,
-        seed=seed + 1,
+        seed=seed + 2,
         confidence=confidence,
     )
     interpolation_summary = _bootstrap_median_interval(
         interpolation_errors,
         replicates=replicates,
-        seed=seed + 2,
+        seed=seed + 3,
         confidence=confidence,
     )
     family_rank = spearman_correlation(deformation_zero, deformation_one)
 
-    checks = {
+    checks: dict[str, bool] = {
         "pinned_cache_and_dependency_hashes": bool(
             dependency_hashes_exact
             and reported_cache_sha256 == source["cache_sha256"]
@@ -424,6 +473,16 @@ def evaluate_records(
         "coordinate_half_response_descriptor_spearman_ci95_lower_at_least_0_80": bool(
             half_summary["ci95"][0] >= 0.80
         ),
+    }
+    magnitude_check = (
+        "coordinate_half_response_symmetric_relative_difference_ci95_upper_at_most_0_25"
+    )
+    if magnitude_check in gate["checks"]:
+        checks[magnitude_check] = bool(
+            half_magnitude_summary["ci95"][1]
+            <= float(gate["coordinate_half_response_symmetric_relative_difference_max"])
+        )
+    checks.update({
         "leave_one_flow_tangent_direction_agreement_ci95_lower_at_least_0_80": bool(
             tangent_summary["ci95"][0] >= 0.80
         ),
@@ -435,7 +494,7 @@ def evaluate_records(
             and config["task"]["case_flow_or_node_as_independent_unit"] is False
         ),
         "no_pressure_validation_test_model_checkpoint_prediction_or_gpu_read": True,
-    }
+    })
     if tuple(checks) != tuple(gate["checks"]):
         raise AneumoResponseFidelityP0Error("Implemented checks differ from registration.")
     passed = all(checks.values())
@@ -465,6 +524,9 @@ def evaluate_records(
         },
         "aggregate_endpoints": {
             "coordinate_half_response_descriptor_spearman": half_summary,
+            "coordinate_half_response_symmetric_relative_difference": (
+                half_magnitude_summary
+            ),
             "leave_one_flow_tangent_direction_agreement": tangent_summary,
             "leave_one_flow_response_interpolation_relative_l2": interpolation_summary,
             "paired_deformation_response_energy_rank_spearman": family_rank,
@@ -554,6 +616,11 @@ def run_authorized_p0(
     _require_execution_authority(config)
     if Path(config["source"]["exact_private_cache_path"]).resolve() != cache.resolve():
         raise AneumoResponseFidelityP0Error("Cache path differs from the frozen exact path.")
+    observed_cache_sha256 = verify_cache_hash(
+        cache,
+        reported_sha256=reported_cache_sha256,
+        registered_sha256=config["source"]["cache_sha256"],
+    )
     dependencies = load_dependencies(config, root=root)
     flows, records = _load_train_hdf5(config, cache)
     result = evaluate_records(
@@ -561,7 +628,7 @@ def run_authorized_p0(
         flows=flows,
         records=records,
         expected_train_mapping=dependencies["train_mapping"],
-        reported_cache_sha256=reported_cache_sha256,
+        reported_cache_sha256=observed_cache_sha256,
         dependency_hashes_exact=dependencies["hashes_exact"],
         historical_velocity_response_exact=dependencies[
             "historical_velocity_response_exact"

@@ -27,7 +27,11 @@ def _numpy() -> Any:
 
 def load_p0_config(path: str | Path) -> dict[str, Any]:
     payload = json.loads(Path(path).read_text(encoding="utf-8"))
-    if payload.get("schema_version") != "aurora.aneumo_response_fidelity_p0.v1":
+    schema = payload.get("schema_version")
+    if schema not in {
+        "aurora.aneumo_response_fidelity_p0.v1",
+        "aurora.aneumo_response_fidelity_p0.v2",
+    }:
         raise ResponseFidelityError("Unexpected response-fidelity P0 schema.")
     if payload.get("status") != (
         "registered_non_executable_pending_external_service_change_and_exact_private_cache_path"
@@ -51,6 +55,20 @@ def load_p0_config(path: str | Path) -> dict[str, Any]:
         raise ResponseFidelityError("P0 is CPU-only and may never use junjinyong.")
     if any(execution.get(key) is not False for key in ("executable", "submitted")):
         raise ResponseFidelityError("The current P0 is not executable or submitted.")
+    if schema == "aurora.aneumo_response_fidelity_p0.v2":
+        if (
+            payload.get("v1_superseded_pre_execution") is not True
+            or payload.get("pre_execution_red_team_finalized") is not True
+            or payload.get("future_metric_or_threshold_change_requires_new_evidence_version")
+            is not True
+            or payload.get("v1_config_sha256")
+            != "07c0c89799e04fbee88a1218383aa7b7fd8fc3a5ab8d7bcb15d286195571135f"
+            or payload["gate"].get(
+                "coordinate_half_response_symmetric_relative_difference_max"
+            )
+            != 0.25
+        ):
+            raise ResponseFidelityError("The response-fidelity P0 v2 boundary changed.")
     for key in ("cache_sha256", "staging_config_sha256", "historical_scaling_result_sha256"):
         value = str(source.get(key, ""))
         if len(value) != 64 or any(character not in "0123456789abcdef" for character in value):

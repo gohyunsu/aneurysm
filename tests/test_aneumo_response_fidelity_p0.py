@@ -11,6 +11,7 @@ from aurora.aneumo_response_fidelity_p0 import (
     load_dependencies,
     run_authorized_p0,
     spearman_correlation,
+    verify_cache_hash,
 )
 from aurora.response_fidelity import load_p0_config
 
@@ -21,7 +22,8 @@ except ImportError:  # pragma: no cover - lightweight local environment
 
 
 ROOT = Path(__file__).parents[1]
-CONFIG = ROOT / "configs" / "aneumo_response_fidelity_p0.json"
+CONFIG = ROOT / "configs" / "aneumo_response_fidelity_p0_v2.json"
+V1_CONFIG = ROOT / "configs" / "aneumo_response_fidelity_p0.json"
 PBS = ROOT / "cluster" / "pbs_aneumo_response_fidelity_p0.pbs"
 
 
@@ -88,12 +90,18 @@ class AneumoResponseFidelityP0Tests(unittest.TestCase):
         self.assertTrue(self.dependencies["historical_velocity_response_exact"])
         self.assertEqual(len(self.dependencies["train_mapping"]), 20)
         self.assertEqual(self.config["gate"]["bootstrap_replicates"], 5000)
+        self.assertEqual(len(self.config["gate"]["checks"]), 11)
+        self.assertTrue(self.config["v1_superseded_pre_execution"])
+        self.assertEqual(
+            load_p0_config(V1_CONFIG)["protocol_id"],
+            "aneumo_response_fidelity_method_free_p0_v1",
+        )
 
     def test_synthetic_smooth_response_passes_all_registered_checks(self) -> None:
         result = self._evaluate()
         self.assertTrue(result["gate_passed"])
-        self.assertEqual(result["passed_checks"], 10)
-        self.assertEqual(result["total_checks"], 10)
+        self.assertEqual(result["passed_checks"], 11)
+        self.assertEqual(result["total_checks"], 11)
         self.assertFalse(result["access"]["pressure_read"])
         self.assertFalse(result["access"]["validation_or_test_fields_read"])
         self.assertFalse(result["authorization"]["method"])
@@ -105,6 +113,32 @@ class AneumoResponseFidelityP0Tests(unittest.TestCase):
         )
         self.assertNotIn("case_ids", result["asset"])
         self.assertNotIn("family_ids", result["asset"])
+
+    def test_rank_preserving_half_magnitude_distortion_fails_v2(self) -> None:
+        from aurora.response_fidelity import coordinate_hash_partition
+
+        records = []
+        for record in self.records:
+            changed = dict(record)
+            velocity = np.asarray(record["velocity_m_s"]).copy()
+            halves = coordinate_hash_partition(record["coordinates_m"])
+            response = velocity - velocity[3][None, :, :]
+            response[:, halves == 1] *= 8.0
+            changed["velocity_m_s"] = velocity[3][None, :, :] + response
+            records.append(changed)
+        result = self._evaluate(records)
+        self.assertGreater(
+            result["aggregate_endpoints"][
+                "coordinate_half_response_descriptor_spearman"
+            ]["ci95"][0],
+            0.99,
+        )
+        self.assertFalse(result["gate_passed"])
+        self.assertFalse(
+            result["checks"][
+                "coordinate_half_response_symmetric_relative_difference_ci95_upper_at_most_0_25"
+            ]
+        )
 
     def test_leave_one_flow_metrics_reject_jagged_response(self) -> None:
         record = self.records[0]
@@ -175,6 +209,30 @@ class AneumoResponseFidelityP0Tests(unittest.TestCase):
                 reported_cache_sha256=self.config["source"]["cache_sha256"],
             )
 
+    def test_cache_bytes_not_only_reported_string_are_verified(self) -> None:
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as directory:
+            cache = Path(directory) / "compact.h5"
+            cache.write_bytes(b"actual-cache-bytes")
+            import hashlib
+
+            observed = hashlib.sha256(cache.read_bytes()).hexdigest()
+            self.assertEqual(
+                verify_cache_hash(
+                    cache,
+                    reported_sha256=observed,
+                    registered_sha256=observed,
+                ),
+                observed,
+            )
+            with self.assertRaisesRegex(AneumoResponseFidelityP0Error, "Observed cache"):
+                verify_cache_hash(
+                    cache,
+                    reported_sha256="0" * 64,
+                    registered_sha256=observed,
+                )
+
     def test_spearman_handles_ties_and_rejects_constant_rank(self) -> None:
         self.assertAlmostEqual(
             spearman_correlation([1, 1, 2, 3], [2, 2, 4, 6]), 1.0
@@ -185,8 +243,15 @@ class AneumoResponseFidelityP0Tests(unittest.TestCase):
     def test_pbs_wrapper_is_cpu_only_one_shot_and_currently_fail_closed(self) -> None:
         script = PBS.read_text(encoding="utf-8")
         self.assertIn("ncpus=4:mem=16gb:ngpus=0", script)
-        self.assertIn("aneumo_response_fidelity_p0.json", script)
+        self.assertIn("aneumo_response_fidelity_p0_v2.json", script)
+        self.assertIn("aneumo_response_fidelity_method_free_p0_v2", script)
+        self.assertNotIn("aneumo_response_fidelity_method_free_p0_v1", script)
         self.assertIn("AURORA_EXTERNAL_SERVICE_CHANGE_ACK", script)
+        self.assertIn(
+            '--bind "$AURORA_CACHE_PATH:$AURORA_CACHE_PATH:ro"', script
+        )
+        self.assertIn('--cache "$AURORA_CACHE_PATH"', script)
+        self.assertNotIn("/data/aneumo_compact.h5", script)
         self.assertIn("exact-source P0 record exists", script)
         self.assertNotIn("nvidia-smi", script)
         self.assertNotIn("ssh ", script)

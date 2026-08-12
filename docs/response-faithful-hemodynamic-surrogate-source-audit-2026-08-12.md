@@ -103,8 +103,8 @@ direction closes.
 
 ## 5. Method-free P0
 
-The frozen contract is
-[`configs/aneumo_response_fidelity_p0.json`](../configs/aneumo_response_fidelity_p0.json).
+The current frozen contract is
+[`configs/aneumo_response_fidelity_p0_v2.json`](../configs/aneumo_response_fidelity_p0_v2.json).
 It is registered but non-executable because the current private cache path has
 not been re-established after the incomplete `introai9` inventory. No server
 retry is allowed until an external administrator/service state change.
@@ -129,6 +129,18 @@ This is a prospective code correction before any private row or scientific
 endpoint was read; the earlier implementation commit remains provenance, not a
 result or a closed confirmatory gate.
 
+The same red-team also showed that rank agreement is necessary but not
+sufficient. Multiplying every non-anchor response in one coordinate half by
+eight preserved the within-flow family ranking and passed the v1 Spearman gate.
+The unexecuted v1 config is therefore preserved rather than rewritten, and v2
+adds an independently preregistered magnitude check: the family-bootstrap upper
+95% bound of the median coordinate-half symmetric relative difference
+`2|a-b|/(|a|+|b|)` must not exceed 0.25. V2 contains 11 all-pass checks. It also
+hashes the observed cache bytes rather than trusting an environment string and
+mounts the exact frozen host path unchanged in the container. This completes
+the pre-execution red-team; any later metric or threshold change requires a
+new evidence version.
+
 P0 reads only the 20 historical train base families and only `coordinates_m`
 plus the three velocity channels. It does not read pressure, validation/test
 fields, a model, checkpoint or prediction. It checks:
@@ -139,7 +151,8 @@ fields, a model, checkpoint or prediction. It checks:
    without relabelling it as a fresh result;
 4. response-descriptor agreement under two deterministic coordinate-hash
    halves, ranking families separately within each non-anchor flow before
-   concatenation so the monotone flow grid cannot manufacture agreement;
+   concatenation so the monotone flow grid cannot manufacture agreement, and
+   bounding their symmetric response-magnitude difference at 0.25;
 5. stability of direction, gain and discrete tangent/curvature summaries under
    leave-one-interior-flow interpolation;
 6. family-bootstrap uncertainty with family, not case/flow/node, as the unit.

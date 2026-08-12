@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-12 final pre-execution P0 v2 · schema 11.8:** The unexecuted v1 is
+> preserved at SHA-256 `07c0c897…135f`. A rank-preserving eight-fold distortion
+> of one coordinate half passed its Spearman-only gate, so v1 is prospectively
+> superseded by [P0 v2](configs/aneumo_response_fidelity_p0_v2.json), SHA-256
+> `b82b3bfd…1381`. V2 adds an unchanged-data, pre-execution magnitude gate:
+> the family-bootstrap upper 95% bound of coordinate-half symmetric relative
+> difference must be at most 0.25. It also hashes actual cache bytes and
+> preserves the frozen host path inside the container. V2 has 11 checks and is
+> final: any later metric/threshold change requires a new evidence version.
+> Real P0 remains 0/11; no server, PBS, GPU, model, test or claim is open.
+> Full dependency-complete regression passes 516/516 tests; protocol retains
+> 111 invariant groups at canonical SHA-256
+> `3e43a5773eb8c4c6b3e47fa82ee97fb1b796cc380d9031ade5af250d14c6eb7a`.
+
 > **Schema 11.8 tangent-correction/private synchronization:** Exact corrected
 > public source `7c48574199e330c2b55ffb29836ede4fee8cfc4b` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31592497232)
@@ -34,7 +48,7 @@
 
 > **2026-08-12 method-free P0 implementation · schema 11.8:** The aggregate
 > reference evaluator and CPU 4/GPU 0 one-shot PBS wrapper are implemented and
-> pinned by the machine protocol. Synthetic validation covers all ten
+> pinned by the machine protocol. Historical v1 synthetic validation covered ten
 > registered checks. Coordinate-half agreement ranks families within each
 > target flow before a 5,000-replicate family bootstrap, avoiding a trivial
 > correlation induced by increasing flow. The current config refuses before
@@ -62,7 +76,7 @@
 > residual novelty exactly at the 2.5/5 floor. The application is a CFD
 > sensitivity-sweep surrogate given one same-case nominal-flow field—not
 > rupture prediction, patient-specific physiology or a geometry-only CFD
-> replacement. A train-only, method-free [P0 contract](configs/aneumo_response_fidelity_p0.json)
+> replacement. A train-only, method-free [P0 v2 contract](configs/aneumo_response_fidelity_p0_v2.json)
 > is registered to test whether response magnitude, direction, discrete
 > tangent and curvature are stable under node partition and flow-grid
 > perturbation. It is not executable until an external service change and one

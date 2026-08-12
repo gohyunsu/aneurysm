@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · final pre-execution response-fidelity P0 v2
+
+- Preserved unexecuted P0 v1 byte-for-byte after an 8× rank-preserving
+  coordinate-half distortion passed its Spearman-only gate.
+- Registered v2 with an additional coordinate-half magnitude gate: family-
+  bootstrap symmetric-relative-difference upper CI ≤0.25. V2 has 11 checks.
+- Hash the observed cache bytes instead of trusting a reported string and keep
+  the frozen host cache path identical inside the container.
+- Finalized pre-execution red-team. Any further metric or threshold change
+  requires a new evidence version. Real P0 remains 0/11; no compute or claim.
+- Full regression passes 516/516 tests; protocol retains 111 invariant groups
+  at canonical SHA-256 `3e43a577…eb7a`.
+
 ## 2026-08-12 · schema 11.8 · tangent correction privately synchronized
 
 - Corrected public source `7c48574…` passed Quality `31592497232` and Pages

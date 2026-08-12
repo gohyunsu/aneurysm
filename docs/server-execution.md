@@ -1,5 +1,13 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.8 P0-v2 execution integrity:** The unexecuted v1 is preserved and
+> v2 is the only current contract. The runner hashes cache bytes against both
+> reported and registered SHA-256 and bind-mounts the frozen host path at the
+> identical container path. V2 remains non-executable and has 0/11 real checks.
+> No server/scheduler query, transfer, PBS submission, monitoring or GPU action
+> occurred. Do not retry `introai9` before verified external change; never
+> access `junjinyong`.
+
 > **Schema 11.8:** 이번 방향 검토와 등록에서 scientific-server query, transfer,
 > scheduler query, PBS submission과 GPU 사용은 모두 0이다. Response-fidelity P0는
 > `introai9` PBS/CPU 4/GPU 0 계약이지만 external service change와 exact private

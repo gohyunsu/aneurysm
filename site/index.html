@@ -61,7 +61,7 @@
         <div class="hero-actions">
           <a class="button primary" href="learn.html#response-fidelity">처음부터 이해하기</a>
           <a class="button ghost" href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">연구 질문·선행·실험 전체 읽기 ↗</a>
-          <a class="button ghost" href="../configs/aneumo_response_fidelity_p0.json">등록된 method-free P0 ↗</a>
+          <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v2.json">등록된 method-free P0 v2 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
@@ -500,12 +500,14 @@
             않도록 각 target flow 안에서 family 순위를 비교하고 5,000회 family
             bootstrap합니다. Omitted center에 무감할 수 있는 centered-difference
             비교는 실행 전에 제거하고, 실제 좌우 one-sided tangent와 neighbour
-            secant를 비교하도록 고쳤습니다. Pass는 baseline-only P1을 열 뿐입니다.
+            secant를 비교하도록 고쳤습니다. Rank가 같아도 크기가 8배 틀릴 수 있어
+            symmetric magnitude difference CI 상한 0.25도 추가했습니다. V2의 11개
+            check가 모두 통과해야 baseline-only P1을 열 뿐입니다.
             P1에서 analytic scaling, interpolation, MLP, DeepONet, DeltaPhi와 graph
             controls를 field error로 먼저 match한 뒤 response 차이를 봅니다. 차이가
             없으면 논문 정체성과 architecture를 함께 닫습니다.
           </p>
-          <a href="../configs/aneumo_response_fidelity_p0.json">Registered P0 contract ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p0_v2.json">Registered P0 v2 contract ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator ↗</a>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">지표·baseline·중단 근거 ↗</a>
         </div>

@@ -8,6 +8,8 @@
 > private path는 unresolved이므로 active train/validation/test는 여전히 0/0/0이고,
 > registered non-executable P0만 1개다. Pressure와 validation/test fields는 P0에서
 > 읽지 않는다. 데이터가 없다는 뜻도, 바로 학습 가능하다는 뜻도 아니다.
+> Current contract는 11-check P0 v2이며, unexecuted Spearman-only v1은
+> coordinate-half magnitude 반례 때문에 pre-execution superseded history다.
 
 > **Schema 11.7 active-assignment correction:** The six audited holding records
 > still exist, but none is assigned to an active paper. AneuX is no longer a

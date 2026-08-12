@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · method-free P0 evaluator implemented but registered/non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
     requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; code readiness does not authorize submission, the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -43,9 +43,16 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "P0 v2 closes rank-only and cache-integrity loopholes before execution",
+      copy: "A rank-preserving eight-fold distortion of one coordinate half passed the unexecuted v1 Spearman-only gate. V1 is preserved and v2 adds a family-bootstrap symmetric-relative-magnitude upper CI of 0.25 while retaining within-flow rank lower CI 0.80. The runner now hashes actual cache bytes and keeps the frozen host path identical inside the container. V2 has 11 all-pass checks and finalizes pre-execution red-team; later metric or threshold changes require a new evidence version.",
+      status: "P0 v1 superseded before data/job/result · v2 registered/non-executable · real 0/11 · PBS/GPU/model/test/claim 0",
+      url: "../configs/aneumo_response_fidelity_p0_v2.json"
+    },
+    {
+      year: "2026.08",
       title: "The method-free response-fidelity P0 becomes code-complete but remains non-executable",
       copy: "A pinned aggregate evaluator now enforces the 20-family/40-case/8-flow/4,096-node train contract and emits only aggregate endpoints. To avoid a trivial correlation from monotonically increasing flow, coordinate-half agreement ranks families separately within every target flow before concatenation and a 5,000-replicate family bootstrap. A CPU 4/GPU 0 one-shot PBS wrapper is also pinned. The current config is tested to reject before probing a private cache, so no real-data result or execution authority exists.",
-      status: "Schema 11.8 implementation only · synthetic 10/10 · real P0 0/10 · PBS 0 · server/GPU/model/test/claim 0",
+      status: "Schema 11.8 historical v1 implementation · superseded before execution · current v2 synthetic 11/11 · real P0 0/11 · PBS 0 · server/GPU/model/test/claim 0",
       url: "../src/aurora/aneumo_response_fidelity_p0.py"
     },
     {
@@ -790,8 +797,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "P0-RF",
       title: "Are multi-flow velocity-response endpoints stable before any model is trained?",
-      copy: "The registered P0 reads only 20 historical Aneumo train families, coordinates and velocity. It checks exact alignment, deterministic coordinate-hash halves, leave-one-interior-flow interpolation, response magnitude/direction and discrete tangent/curvature with family-cluster bootstrap. Pressure, validation/test fields, checkpoints and predictions are forbidden. The current exact private cache path is unresolved, so the contract is deliberately non-executable.",
-      state: "Conditional lead · P0 registered/non-executable · 0 scientific checks · no server query/PBS/GPU/model/test/claim",
+      copy: "The registered v2 P0 reads only 20 historical Aneumo train families, coordinates and velocity. It checks exact alignment, within-flow coordinate-half family ranks, coordinate-half symmetric magnitude difference, leave-one-interior-flow interpolation and one-sided tangent versus neighbour secant with family-cluster bootstrap. It hashes actual cache bytes. Pressure, validation/test fields, checkpoints and predictions are forbidden. The current exact private cache path is unresolved, so the contract is deliberately non-executable.",
+      state: "Conditional lead · P0 v2 registered/non-executable · 0/11 real scientific checks · no server query/PBS/GPU/model/test/claim",
       blocking: true
     },
     {
@@ -1296,6 +1303,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.12",
+      category: "experiment",
+      title: "Final pre-execution P0 v2 rejects rank-preserving magnitude distortion and hashes cache bytes",
+      copy: "An eight-fold coordinate-half response distortion preserved family ranks and passed the unexecuted v1 Spearman-only gate. V1 remains immutable history; v2 adds family-bootstrap symmetric-relative-difference upper CI ≤0.25 and retains rank lower CI ≥0.80. The runner hashes observed cache bytes against registered and reported values and preserves the exact host path in the container. V2 has 11 all-pass checks and finalizes pre-execution red-team. Full regression passes 516/516 tests with 111 protocol invariant groups. Real P0 remains 0/11; no server, PBS, GPU, model, outer test or claim exists.",
+      files: ["configs/aneumo_response_fidelity_p0_v2.json", "src/aurora/aneumo_response_fidelity_p0.py", "cluster/pbs_aneumo_response_fidelity_p0.pbs", "tests/test_aneumo_response_fidelity_p0.py", "configs/aurora_v1.json"]
+    },
+    {
+      date: "2026.08.12",
       category: "deployment",
       title: "The corrected tangent audit and private no-result ledger are synchronized",
       copy: "Exact corrected public source 7c48574… passed Quality 31592497232 and Pages 31592496090. Private paper head b4e78f8… is remote exact and anonymously returns 404 while manuscript/reference bytes remain unchanged. Full regression passes 514/514 tests with 111 protocol invariant groups. No real P0 endpoint, model, GPU, outer test or claim is opened.",
@@ -1334,7 +1348,7 @@ window.AURORA_DATA = Object.freeze({
       category: "research",
       title: "Schema 11.8 admits response-faithful multi-flow surrogation to a method-free P0 only",
       copy: "A fresh acquired-asset screen gives field-error-matched multi-flow response fidelity 34.0/40, with residual novelty exactly at the 2.5/5 floor. The verified Aneumo compact contract has 32 generation families, 64 cases, eight flows and 4,096 aligned nodes. The proposed application accelerates a CFD sensitivity sweep after one nominal solve; it is not rupture prediction or patient-specific physiology. A train-only P0 now checks response endpoints under deterministic node halves and leave-one-flow interpolation. Its exact private path is unresolved, so it is non-executable. Failure mismatch, method, architecture, GPU, validation/test, outer test and claim remain closed. No scientific server was queried.",
-      files: ["docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "configs/aneumo_response_fidelity_p0.json", "src/aurora/response_fidelity.py", "tests/test_response_fidelity.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/isbi-2027-plan.md", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+      files: ["docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "configs/aneumo_response_fidelity_p0_v2.json", "src/aurora/response_fidelity.py", "tests/test_response_fidelity.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/isbi-2027-plan.md", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
     },
     {
       date: "2026.08.12",

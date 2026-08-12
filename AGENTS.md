@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 final pre-execution P0 v2:** Preserve unexecuted v1
+> `configs/aneumo_response_fidelity_p0.json` at SHA-256 `07c0c897…135f`.
+> A rank-preserving 8× coordinate-half response distortion passed v1's
+> Spearman-only gate, so v1 is prospectively superseded before data/job/result.
+> Current v2 is `configs/aneumo_response_fidelity_p0_v2.json`, SHA-256
+> `b82b3bfd3d83713f375378f471ec506e7b8437fd470e98366534d4cb1d021381`.
+> It retains within-flow family-rank CI lower ≥0.80 and adds family-bootstrap
+> coordinate-half symmetric-relative-difference CI upper ≤0.25. It also hashes
+> actual cache bytes and bind-mounts the frozen host path unchanged. Evaluator/
+> wrapper SHA-256 is `3f9667329b2f7f61850eddbd5b118c8cab0520cccb86a3382ecfebf6cc292790` /
+> `d895fa85926cdbd70f7d9b152cc8ace9e91eced1a943d2889c5c398511d6b6ee`.
+> V2 has 11 checks and finalizes pre-execution red-team; further metric or
+> threshold changes require a new evidence version. Real P0 is 0/11; no server,
+> PBS/GPU, P1, model, test or claim. Never access `junjinyong`; do not retry
+> `introai9` before verified external change.
+> Full dependency-complete regression passes 516/516 tests; protocol retains
+> 111 invariant groups at canonical SHA-256
+> `3e43a5773eb8c4c6b3e47fa82ee97fb1b796cc380d9031ade5af250d14c6eb7a`.
+
 > **2026-08-12 schema 11.8 tangent-correction/private synchronization:**
 > Exact corrected source `7c48574199e330c2b55ffb29836ede4fee8cfc4b`
 > passed Quality `31592497232` and Pages `31592496090`. Private paper head
@@ -90,9 +109,10 @@
 > Active train/validation/test remains 0/0/0 because the current exact private
 > path is unresolved.
 >
-> `configs/aneumo_response_fidelity_p0.json` SHA-256
+> Historical v1 `configs/aneumo_response_fidelity_p0.json` SHA-256
 > `07c0c89799e04fbee88a1218383aa7b7fd8fc3a5ab8d7bcb15d286195571135f` is a
-> train-only, method-free, CPU-only, non-executable P0. It audits response
+> train-only, method-free, CPU-only, non-executable P0 superseded before
+> execution by the current v2 contract. V2 audits response
 > magnitude/direction/tangent/curvature under node-hash halves and leave-one-
 > interior-flow interpolation. It cannot read pressure, validation/test fields,
 > models, checkpoints or predictions and cannot use a GPU.

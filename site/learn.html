@@ -149,7 +149,7 @@
             자명한 순서만으로 높은 값이 나올 수 있습니다. 구현된 evaluator는 각
             target flow 안에서 family response 순위를 따로 계산한 뒤 합치고, 독립
             단위인 20개 family를 5,000회 bootstrap합니다. 4,096 node 수와 frozen
-            family/case mapping도 강제합니다. Synthetic test는 10개 check를 모두
+            family/case mapping도 강제합니다. Current v2 synthetic test는 11개 check를 모두
             통과하지만 real Aneumo 결과는 아직 0입니다.
           </p>
           <p>
@@ -160,6 +160,15 @@
             양쪽 이웃의 secant 방향과 직접 비교하도록 고쳤습니다. Smooth response는
             통과하고 일부러 지그재그로 만든 response는 tangent 0.80과 interpolation
             error 0.35 gate를 모두 실패해야 합니다. Threshold는 바꾸지 않았습니다.
+          </p>
+          <p>
+            또 다른 반례에서는 한 좌표 절반의 response를 8배로 바꿔도 family 순위가
+            같아 Spearman-only v1이 통과했습니다. 그래서 실행하지 않은 v1 파일은
+            그대로 보존하고, v2에는 두 절반 response 크기의 symmetric relative
+            difference <code>2|a−b|/(|a|+|b|)</code>에 대한 family-bootstrap CI 상한
+            0.25를 추가했습니다. 실제 cache byte도 직접 SHA-256하고 host의 frozen
+            path를 container에서도 같은 path로 유지합니다. V2 이후 metric이나
+            threshold 변경은 별도 evidence version 없이는 허용하지 않습니다.
           </p>
           <p>
             P0가 통과해도 바로 fancy model을 만들지 않습니다. P1에서 analytic

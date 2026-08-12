@@ -55,7 +55,7 @@ mkdir -p "$record_root" "$job_tmp"
 
 shopt -s nullglob
 for prior_status in "$record_root"/status.*.json; do
-  if grep -Fq '"protocol_id":"aneumo_response_fidelity_method_free_p0_v1"' "$prior_status" \
+  if grep -Fq '"protocol_id":"aneumo_response_fidelity_method_free_p0_v2"' "$prior_status" \
       && grep -Fq "\"public_source_commit\":\"$AURORA_GIT_COMMIT\"" "$prior_status"; then
     echo "An exact-source P0 record exists; resubmission is forbidden." >&2
     exit 94
@@ -68,7 +68,7 @@ write_status() {
   local exit_code="$2"
   local gate_evaluated="$3"
   local temporary="$status_path.partial"
-  printf '{"protocol_id":"aneumo_response_fidelity_method_free_p0_v1","state":"%s","exit_code":%s,"public_source_commit":"%s","scientific_gate_evaluated":%s,"pressure":false,"validation_test":false,"method":false,"gpu":false,"outer_test":false,"paper_claim":false}\n' \
+  printf '{"protocol_id":"aneumo_response_fidelity_method_free_p0_v2","state":"%s","exit_code":%s,"public_source_commit":"%s","scientific_gate_evaluated":%s,"pressure":false,"validation_test":false,"method":false,"gpu":false,"outer_test":false,"paper_claim":false}\n' \
     "$state" "$exit_code" "$AURORA_GIT_COMMIT" "$gate_evaluated" > "$temporary"
   mv "$temporary" "$status_path"
 }
@@ -89,14 +89,14 @@ set +e
 singularity exec --cleanenv \
   --pwd /workspace \
   --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
-  --bind "$AURORA_CACHE_PATH:/data/aneumo_compact.h5:ro" \
+  --bind "$AURORA_CACHE_PATH:$AURORA_CACHE_PATH:ro" \
   --bind "$job_tmp:/run" \
   "$AURORA_CONTAINER" \
   env PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 PYTHONPATH=/workspace/src TMPDIR=/run \
   python -m aurora.aneumo_response_fidelity_p0 \
-    --config /workspace/configs/aneumo_response_fidelity_p0.json \
+    --config /workspace/configs/aneumo_response_fidelity_p0_v2.json \
     --root /workspace \
-    --cache /data/aneumo_compact.h5 \
+    --cache "$AURORA_CACHE_PATH" \
     --reported-cache-sha256 "$AURORA_CACHE_SHA256" \
     --output /run/result.private.json
 audit_exit=$?

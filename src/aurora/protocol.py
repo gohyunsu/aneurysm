@@ -1061,13 +1061,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v1e_absolute_validation_relative_l2", "v1e_response_relative_l2",
             "v1e_repaired_or_rerun", "direct_prior_identifiers",
             "non_novel_components", "primary_response_endpoints",
-            "secondary_response_endpoints", "p0_config", "p0_config_sha256",
+            "secondary_response_endpoints", "p0_v1_config",
+            "p0_v1_config_sha256", "p0_v1_superseded_pre_execution",
+            "p0_v1_supersession_reason", "p0_config", "p0_config_sha256",
             "p0_reference_evaluator", "p0_reference_evaluator_sha256",
             "p0_pbs_wrapper", "p0_pbs_wrapper_sha256",
             "p0_reference_evaluator_synthetic_validation_passed",
             "p0_current_config_refuses_before_cache_access",
             "p0_coordinate_half_metric_flow_stratified_by_family",
+            "p0_coordinate_half_magnitude_gate_registered",
+            "p0_observed_cache_bytes_hashed",
+            "p0_host_container_cache_path_identity_preserved",
+            "p0_pre_execution_red_team_finalized",
+            "p0_future_metric_or_threshold_change_requires_new_evidence_version",
             "p0_registered_bootstrap_replicates",
+            "p0_registered_scientific_check_count",
             "p0_pbs_wrapper_submittable_now",
             "p0_scientific_contract_registered", "p0_status", "p0_method_free",
             "p0_train_only", "p0_exact_private_cache_path_frozen",
@@ -1151,19 +1159,26 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or response_fidelity["direct_prior_identifiers"] != expected_response_priors
         or response_fidelity["primary_response_endpoints"]
         != ["paired_response_relative_l2", "discrete_tangent_relative_l2"]
-        or response_fidelity["p0_config"]
+        or response_fidelity["p0_v1_config"]
         != "configs/aneumo_response_fidelity_p0.json"
-        or response_fidelity["p0_config_sha256"]
+        or response_fidelity["p0_v1_config_sha256"]
         != "07c0c89799e04fbee88a1218383aa7b7fd8fc3a5ab8d7bcb15d286195571135f"
+        or response_fidelity["p0_v1_supersession_reason"]
+        != "spearman_only_coordinate_half_gate_can_pass_arbitrary_response_magnitude_scaling"
+        or response_fidelity["p0_config"]
+        != "configs/aneumo_response_fidelity_p0_v2.json"
+        or response_fidelity["p0_config_sha256"]
+        != "b82b3bfd3d83713f375378f471ec506e7b8437fd470e98366534d4cb1d021381"
         or response_fidelity["p0_reference_evaluator"]
         != "src/aurora/aneumo_response_fidelity_p0.py"
         or response_fidelity["p0_reference_evaluator_sha256"]
-        != "9ce64f931f779d9679ba26924d27a43916fc9d6f902c27a473465361cd2849ba"
+        != "3f9667329b2f7f61850eddbd5b118c8cab0520cccb86a3382ecfebf6cc292790"
         or response_fidelity["p0_pbs_wrapper"]
         != "cluster/pbs_aneumo_response_fidelity_p0.pbs"
         or response_fidelity["p0_pbs_wrapper_sha256"]
-        != "d1341ca525176484ea51619967df50197f3f10381486f517a182df27b3f95974"
+        != "d895fa85926cdbd70f7d9b152cc8ace9e91eced1a943d2889c5c398511d6b6ee"
         or response_fidelity["p0_registered_bootstrap_replicates"] != 5000
+        or response_fidelity["p0_registered_scientific_check_count"] != 11
         or response_fidelity["p0_status"]
         != "registered_non_executable_pending_external_service_change_and_exact_private_cache_path"
         or response_fidelity["candidate_architecture_status"]
@@ -1180,9 +1195,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             for key in (
                 "p0_scientific_contract_registered", "p0_method_free",
                 "p0_train_only",
+                "p0_v1_superseded_pre_execution",
                 "p0_reference_evaluator_synthetic_validation_passed",
                 "p0_current_config_refuses_before_cache_access",
                 "p0_coordinate_half_metric_flow_stratified_by_family",
+                "p0_coordinate_half_magnitude_gate_registered",
+                "p0_observed_cache_bytes_hashed",
+                "p0_host_container_cache_path_identity_preserved",
+                "p0_pre_execution_red_team_finalized",
+                "p0_future_metric_or_threshold_change_requires_new_evidence_version",
                 "p1_requires_field_error_matched_response_mismatch",
             )
         )
@@ -1210,13 +1231,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "lead with a method-free, train-only, non-executable P0; direct-prior "
             "components, architecture, GPU, validation/test, and paper claims stay closed."
         )
-    response_p0_path = Path(__file__).resolve().parents[2] / response_fidelity["p0_config"]
-    if (
-        not response_p0_path.is_file()
-        or hashlib.sha256(response_p0_path.read_bytes()).hexdigest()
-        != response_fidelity["p0_config_sha256"]
+    for path_key, hash_key in (
+        ("p0_v1_config", "p0_v1_config_sha256"),
+        ("p0_config", "p0_config_sha256"),
     ):
-        raise ProtocolError("The registered Aneumo response-fidelity P0 contract changed.")
+        response_p0_path = Path(__file__).resolve().parents[2] / response_fidelity[path_key]
+        if (
+            not response_p0_path.is_file()
+            or hashlib.sha256(response_p0_path.read_bytes()).hexdigest()
+            != response_fidelity[hash_key]
+        ):
+            raise ProtocolError("The registered Aneumo response-fidelity P0 contract changed.")
     for path_key, hash_key in (
         ("p0_reference_evaluator", "p0_reference_evaluator_sha256"),
         ("p0_pbs_wrapper", "p0_pbs_wrapper_sha256"),
