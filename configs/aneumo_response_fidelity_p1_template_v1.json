@@ -1,0 +1,194 @@
+{
+  "schema_version": "aurora.aneumo_response_fidelity_p1_template.v1",
+  "template_id": "aneumo_field_error_iso_matched_failure_p1_template_v1",
+  "status": "draft_non_authoritative_blocked_on_real_p0_v2_all_11_pass",
+  "purpose": "Specify the future development-only falsifier without registering, activating, training, or selecting a model.",
+  "activation_boundary": {
+    "this_file_can_be_executed": false,
+    "this_file_can_be_submitted_to_pbs": false,
+    "p1_registered": false,
+    "real_p0_config": "configs/aneumo_response_fidelity_p0_v2.json",
+    "real_p0_config_sha256": "b82b3bfd3d83713f375378f471ec506e7b8437fd470e98366534d4cb1d021381",
+    "real_p0_required_verdict": "pass_all_11_checks",
+    "real_p0_observed_verdict": null,
+    "real_p0_required_check_count": 11,
+    "real_p0_observed_check_count": 0,
+    "activation_requires_separate_registered_config": true,
+    "activation_requires_exact_cache_path_and_execution_envelope": true,
+    "activation_requires_public_commit_before_any_model_prediction": true,
+    "core_match_or_inference_change_requires_new_evidence_version": true
+  },
+  "scientific_question": {
+    "estimand": "At the same field-relative-L2 level, do strong same-information-set surrogates have materially different anchor-relative response error?",
+    "independent_unit": "aneumo_generation_base_family",
+    "primary_field_metric": "node_weighted_velocity_relative_l2",
+    "primary_response_endpoints": [
+      "paired_response_relative_l2",
+      "discrete_tangent_relative_l2"
+    ],
+    "pass_interpretation": "field_error_is_not_a_sufficient_selection_metric_for_multi_flow_response_fidelity",
+    "fail_interpretation": "close_the_exact_response_fidelity_direction_without_architecture_or_gpu_development",
+    "clinical_or_biological_interpretation_allowed": false
+  },
+  "data_boundary": {
+    "pool": "historical_20_train_base_families_only",
+    "historical_validation_families_read": false,
+    "historical_test_families_read": false,
+    "confirmation_families_read": false,
+    "outer_crossfit_folds": 5,
+    "families_per_outer_fold": 4,
+    "families_per_rotating_calibration_fold": 4,
+    "families_per_fit_partition": 12,
+    "fold_seed": 2027081201,
+    "fold_construction": "seeded_permutation_into_five_equal_blocks_outer_block_k_calibration_block_k_plus_1_mod_5_fit_remaining_three_blocks",
+    "all_cases_flows_nodes_for_a_family_are_atomic": true,
+    "outer_response_metrics_never_select_checkpoint_or_match_level": true
+  },
+  "information_set": {
+    "inputs": [
+      "same_case_geometry",
+      "same_case_nominal_velocity_field_q0",
+      "target_mass_flow_q"
+    ],
+    "target": "same_case_target_flow_velocity_field",
+    "nominal_mass_flow_kg_per_s": 0.0025,
+    "pressure_allowed": false,
+    "rupture_status_allowed": false,
+    "patient_specific_inflow_claim_allowed": false
+  },
+  "baselines": {
+    "deterministic_controls": [
+      "linear_mass_flow_scaling",
+      "train_fitted_power_law_scaling"
+    ],
+    "learned_same_information_set_models": [
+      "pointwise_conditional_mlp",
+      "deeponet_anchor_conditioned",
+      "deltaphi_style_anchor_residual",
+      "meshgraphnet_anchor_conditioned"
+    ],
+    "historical_v1e_role": "diagnostic_only_not_primary_pair_due_to_different_information_set",
+    "proposal_model_present": false,
+    "model_name_can_satisfy_novelty": false,
+    "primary_pairs_in_order": [
+      [
+        "meshgraphnet_anchor_conditioned",
+        "deltaphi_style_anchor_residual"
+      ]
+    ],
+    "secondary_non_gating_pairs": [
+      [
+        "deeponet_anchor_conditioned",
+        "deltaphi_style_anchor_residual"
+      ],
+      [
+        "pointwise_conditional_mlp",
+        "deltaphi_style_anchor_residual"
+      ]
+    ]
+  },
+  "compute_matching": {
+    "training_seeds": [
+      2027081211,
+      2027081212,
+      2027081213,
+      2027081214,
+      2027081215
+    ],
+    "target_trainable_parameters": 2000000,
+    "parameter_relative_tolerance": 0.1,
+    "optimizer_updates_per_run": 20000,
+    "node_condition_samples_per_update": 8192,
+    "checkpoint_fractions": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+    ],
+    "same_container_optimizer_batch_sampler_and_precision": true,
+    "actual_flops_gpu_seconds_peak_memory_and_inference_latency_reported": true,
+    "total_p1_gpu_hour_cap": 160.0,
+    "gpu_authorized_now": false,
+    "execution_server": "introai9",
+    "pbs_only": true,
+    "login_node_gpu_allowed": false,
+    "junjinyong_allowed": false
+  },
+  "field_only_selection_and_matching": {
+    "response_metrics_available_during_selection": false,
+    "checkpoint_selection_metric": "calibration_family_mean_node_weighted_velocity_relative_l2_only",
+    "common_support_scale": "natural_log_field_relative_l2",
+    "iso_error_quantiles": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "iso_error_levels_derived_from": "pair_seed_calibration_fold_common_field_error_support_only",
+    "checkpoint_rule": "nearest_predeclared_checkpoint_in_absolute_log_field_error",
+    "maximum_checkpoint_distance": "log(1.01)",
+    "outer_field_equivalence_estimand": "paired_family_seed_mean_log_field_error_ratio",
+    "outer_field_equivalence_margin_log_ratio": 0.009950330853168092,
+    "outer_field_equivalence_interval_level": 0.9,
+    "both_pair_members_must_be_field_competent_against_power_law": true,
+    "power_law_field_noninferiority_margin_relative": 0.02,
+    "unmatched_pair_level_can_be_replaced_or_widened": false
+  },
+  "inference": {
+    "bootstrap_unit": "aneumo_generation_base_family",
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 2027081221,
+    "response_contrast": "paired_family_seed_mean_log_error_ratio",
+    "response_confidence_level": 0.95,
+    "primary_null_test": "exact_two_sided_sign_flip_over_20_outer_family_seed_mean_log_error_ratios",
+    "familywise_alpha": 0.05,
+    "multiplicity": "holm_over_1_primary_pair_x_3_iso_error_levels_x_2_primary_endpoints",
+    "minimum_multiplicative_response_gap": 0.1,
+    "minimum_same_direction_seed_count": 4,
+    "training_seed_count": 5,
+    "p1_pass_requires": [
+      "at_least_one_predeclared_pair_level_is_field_equivalent",
+      "both_pair_members_are_field_competent_against_power_law",
+      "unadjusted_95_percent_family_bootstrap_interval_excludes_zero_and_holm_rejects_the_corresponding_exact_two_sided_sign_flip_null",
+      "absolute_multiplicative_response_gap_is_at_least_0_10",
+      "response_direction_agrees_in_at_least_4_of_5_seeds"
+    ],
+    "secondary_endpoint_can_rescue_primary_failure": false
+  },
+  "stopping_and_repair": {
+    "all_models_folds_seeds_required": true,
+    "partial_success_aggregation_allowed": false,
+    "outcome_conditioned_pair_checkpoint_margin_or_threshold_change_allowed": false,
+    "same_version_repair_or_rerun_after_metric_access_allowed": false,
+    "missing_common_support_or_no_qualified_pair_action": "close_exact_direction_no_scientific_mismatch",
+    "execution_incomplete_action": "close_exact_p1_no_scientific_verdict",
+    "p1_pass_authorizes_only": "separate_bounded_validation_only_method_development_registration",
+    "p1_pass_authorizes_paper_claim_outer_test_or_submission": false
+  },
+  "current_state": {
+    "config_registered": false,
+    "model_code_authorized": false,
+    "validation_or_test_access_authorized": false,
+    "pbs_job_submitted": false,
+    "gpu_job_submitted": false,
+    "model_prediction_read": false,
+    "response_metric_read": false,
+    "scientific_result_count": 0,
+    "paper_claim_active": false
+  }
+}

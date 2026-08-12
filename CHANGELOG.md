@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-12 · schema 11.8 · inactive P1 design hardened before P0 evidence
+
+- Rechecked the official ISBI 2027 author page: single blind, four technical
+  pages, optional paid nontechnical fifth page, 26 October 2026 deadline and
+  `Coming Soon` submission endpoint are unchanged.
+- Added a non-authoritative P1 template and validator. The template cannot
+  execute or register itself while real P0 remains 0/11.
+- Fixed a train-20-family cyclic 5-fold 12/4/4 fit/calibration/outer design.
+  One mechanism-linked MeshGraphNet--DeltaPhi pair defines six primary cells;
+  MLP/DeepONet pairs are secondary and non-gating. Matching uses response-blind
+  25/50/75% iso-error levels, exact log(1.01) field equivalence, 10% response
+  materiality, exact family sign-flip tests, Holm correction, five seeds and a
+  160 GPU-hour ceiling.
+- Historical validation/test and future confirmation families remain sealed;
+  no server, PBS, GPU, model prediction, response metric or paper claim exists.
+- Dependency-complete regression passes 526/526 tests and the protocol retains
+  111 invariant groups at canonical SHA-256 `f963f06f…729cf`.
+
 ## 2026-08-12 · schema 11.8 · P0 v2 and private ledger synchronized
 
 - Exact v2 source `5e431f8…` passed Quality `31594279674` and Pages

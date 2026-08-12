@@ -1,5 +1,19 @@
 # AURORA 연구 방향
 
+> **Schema 11.8 P1 design hardening:** P1은 아직 등록·실행 가능한 실험이 아니다.
+> 다만 향후 결과를 보고 “비슷한 field error”의 뜻을 바꾸지 못하도록
+> [비활성 설계 템플릿](../configs/aneumo_response_fidelity_p1_template_v1.json)을
+> 먼저 고정했다. 기존 train 20 family를 seeded five-block cyclic rule로 나눠
+> fold마다 12 fit/4 calibration/4 outer family를 사용하고, response를 보지 않은
+> calibration field L2만으로 세 iso-error level을 정한다. Primary는 direct
+> MeshGraphNet 대 anchor-residual DeltaPhi 한 쌍의 3 level×2 endpoint, 총 6 cell이다.
+> Outer 90% log-error-ratio CI 전체가 ±log(1.01) field-equivalence band 안에 들고,
+> exact family sign-flip Holm rejection, unadjusted bootstrap CI zero exclusion,
+> 최소 10% multiplicative gap과 4/5 seed 방향 일치가 함께 있어야 mismatch다.
+> MLP/DeepONet pair는 secondary이며 primary를 구제하지 못한다. Historical
+> validation/test와 향후 confirmation family는
+> 읽지 않는다. Real P0 0/11인 현재 P1/model/GPU/claim은 계속 0이다.
+
 > **Current schema 11.8:** 유일한 conditional source lead는 Aneumo의
 > **response-faithful multi-flow haemodynamic surrogation**이다. 하나의 same-case
 > nominal field 이후의 CFD sensitivity sweep을 빠르게 근사하되, field MSE뿐

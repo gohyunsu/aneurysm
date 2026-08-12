@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-12 schema 11.8 inactive P1 design hardening:** Public
+> `configs/aneumo_response_fidelity_p1_template_v1.json` is a non-authoritative,
+> non-executable template, not P1 registration. It fixes historical-train-20
+> family cyclic 5-fold 12/4/4 fit/calibration/outer rotation; response-blind
+> log-field iso-error levels 25/50/75%; one mechanism-linked primary model pair;
+> exact log(1.01) outer field equivalence; six-cell Holm FWER 0.05 with exact
+> family sign-flip tests; ≥10% response gap; 4/5 seed direction;
+> 2M±10% parameters, 20,000 update budget and 160 GPU-hour cap. Historical
+> validation/test and future confirmation families remain sealed. Validator
+> synthetic tests are code checks only. Real P0 remains 0/11, so P1/model/GPU/
+> claim stay 0. This update makes zero server/PBS/GPU action. Do not retry
+> `introai9` before verified external change and never access `junjinyong`.
+> Full dependency-complete regression passes 526/526 tests; protocol retains
+> 111 invariant groups at canonical SHA-256
+> `f963f06f28109f0abe8403e2baeda8191d26d1c0c0a4a55a686fc05ab90729cf`.
+
 > **2026-08-12 schema 11.8 P0-v2/private synchronization:** Exact v2 public
 > source `5e431f87c996f354ac5ed6aaa62cb1dd2fadac56` passed Quality
 > `31594279674` and Pages `31594278998`. Private paper head

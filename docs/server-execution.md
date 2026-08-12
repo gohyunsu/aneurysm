@@ -1,5 +1,12 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.8 inactive P1 compute ceiling:** The new P1 design template is
+> not executable and authorizes no model code or allocation. Its 160 GPU-hour
+> value is a future hard cap only if a real 11/11 P0 pass first permits a
+> separate registered P1 config. No server/scheduler query, transfer, PBS,
+> model prediction, response metric, monitoring or GPU action occurred. Do not
+> retry `introai9` before verified external change; never access `junjinyong`.
+
 > **Schema 11.8 P0-v2 execution integrity:** The unexecuted v1 is preserved and
 > v2 is the only current contract. The runner hashes cache bytes against both
 > reported and registered SHA-256 and bind-mounts the frozen host path at the

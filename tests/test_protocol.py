@@ -57,6 +57,29 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["p0_executable"])
         self.assertFalse(audit["p0_submitted"])
         self.assertFalse(audit["p0_pbs_wrapper_submittable_now"])
+        self.assertFalse(audit["p1_registered"])
+        self.assertTrue(audit["p1_design_template_non_authoritative"])
+        self.assertTrue(
+            audit["p1_design_family_crossfit_uses_historical_20_train_families_only"]
+        )
+        self.assertTrue(audit["p1_design_response_blind_iso_error_matching"])
+        self.assertEqual(
+            audit["p1_design_predeclared_primary_pair_level_endpoint_cells"], 6
+        )
+        self.assertEqual(
+            audit["p1_design_field_equivalence_margin_log_ratio"],
+            0.009950330853168092,
+        )
+        self.assertTrue(audit["p1_design_exact_family_sign_flip_primary_test"])
+        self.assertEqual(
+            audit["p1_design_minimum_multiplicative_response_gap"], 0.1
+        )
+        self.assertEqual(audit["p1_design_holm_familywise_alpha"], 0.05)
+        self.assertEqual(audit["p1_design_minimum_same_direction_seeds"], 4)
+        self.assertEqual(audit["p1_design_training_seed_count"], 5)
+        self.assertEqual(audit["p1_design_total_gpu_hour_cap"], 160.0)
+        self.assertEqual(audit["p1_design_real_p0_observed_check_count"], 0)
+        self.assertTrue(audit["p1_design_validator_synthetic_tests_passed"])
         self.assertFalse(audit["method_selected"])
         self.assertFalse(audit["gpu_training_authorized"])
         self.assertFalse(audit["outer_test_authorized"])
@@ -76,6 +99,13 @@ class ProtocolTests(unittest.TestCase):
         candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
             "candidate_failure_observed"
         ] = True
+        with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["aneumo_response_fidelity_source_audit"][
+            "p1_design_field_equivalence_margin_log_ratio"
+        ] = 0.05
         with self.assertRaisesRegex(ProtocolError, "Aneumo response-fidelity"):
             validate_protocol(candidate)
 

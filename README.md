@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **Schema 11.8 P1 design hardening:** Added a non-authoritative,
+> P0-gated [P1 template](configs/aneumo_response_fidelity_p1_template_v1.json)
+> and deterministic validator. It fixes a cyclic train-20-family 12/4/4
+> cross-fit, one mechanism-linked primary model pair, response-blind
+> 25/50/75% iso-error matching, exact 1% log-ratio field equivalence, a 10%
+> response-gap floor, Holm correction over six primary cells, exact family
+> sign-flip tests, five seeds and a 160 GPU-hour cap. MLP/DeepONet comparisons
+> are secondary and cannot rescue the primary test. This is design hygiene,
+> not P1 registration, model code,
+> compute or evidence. Real P0 is still 0/11; P1/model/GPU/test/claim remain 0.
+> Dependency-complete regression passes 526/526 tests; the protocol retains
+> 111 invariant groups at canonical SHA-256
+> `f963f06f28109f0abe8403e2baeda8191d26d1c0c0a4a55a686fc05ab90729cf`.
+
 > **Schema 11.8 P0-v2/private synchronization:** Exact v2 source
 > `5e431f87c996f354ac5ed6aaa62cb1dd2fadac56` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31594279674)

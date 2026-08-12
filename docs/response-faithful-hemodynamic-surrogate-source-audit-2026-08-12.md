@@ -166,18 +166,54 @@ family IDs, validation/test fields, checkpoints, predictions and GPU access.
 
 ## 6. P1 and model-selection falsifier
 
-P1 uses development families only. It compares the same-case analytic power
-law, linear response interpolation, a pointwise conditional MLP, DeepONet,
-DeltaPhi, MeshGraphNet and the frozen V1e control. Checkpoints are selected by
-field error only. P1 then asks whether field-error-matched models differ
-materially on response endpoints.
+P1 is not registered or executable. Its
+[inactive design template](../configs/aneumo_response_fidelity_p1_template_v1.json)
+exists only to remove post-result ambiguity before real P0 evidence. If P0
+passes all 11 checks, a separate registered version must be committed before
+any model prediction is produced.
+
+The template uses only the historical 20 train base families. A seeded
+permutation creates five equal blocks; fold \(k\) uses block \(k\) as outer,
+block \(k+1\pmod 5\) as calibration and the remaining three blocks as fit.
+This fixes five rotations of 12 fit, four calibration and four outer families,
+keeping every case, flow and node from a family atomic. Historical validation/test families and
+future confirmation families remain sealed. It compares linear and train-
+fitted power-law controls with a pointwise conditional MLP, anchor-conditioned
+DeepONet, DeltaPhi-style residual and anchor-conditioned MeshGraphNet. Frozen
+V1e is diagnostic only because it lacks the same-case anchor input.
+
+Response endpoints are unavailable during selection. The sole primary
+mechanism contrast is direct field prediction by anchor-conditioned
+MeshGraphNet versus DeltaPhi-style anchor residual prediction. For each seed,
+calibration field-error common support defines 25%, 50% and 75% iso-error
+levels on the log scale. The nearest predeclared checkpoint must lie within
+`log(1.01)` of the target; an unmatched level is not replaced and its caliper
+is not widened. On outer families, the complete paired 90% interval for the
+family/seed-mean log field-error ratio must lie inside `±log(1.01)`. Both
+models must also be field-competent relative to power-law scaling.
+
+One pair × three levels × two primary endpoints forms six tests fixed in
+advance. Each cell uses the seed-mean paired log response-error contrast per
+outer family. Its primary p-value is the exact two-sided sign-flip test over
+all 20 outer-family contrasts; Holm controls family-wise error at 0.05.
+Family-cluster bootstrap with 5,000 replicates supplies an unadjusted 95%
+interval, which must exclude zero. A mismatch additionally needs a
+multiplicative response gap of at least 10% with the same direction in at least
+four of five seeds. MLP--DeltaPhi and DeepONet--DeltaPhi comparisons are
+secondary and cannot rescue the primary test. The 1% band is deliberately
+tight so “matched” cannot hide a meaningful field-accuracy imbalance; the 10%
+floor blocks statistically detectable but application-trivial differences.
+P1 remains a development falsifier rather than a final efficacy claim. Learned
+baselines use 2M±10% parameters, 20,000 equal node-condition update budgets and
+a total P1 cap of 160 GPU-hours; actual FLOPs, GPU-seconds, memory and latency
+must be reported. These numbers are future bounds, not current GPU authority.
 
 The direction stops if either condition holds:
 
-- response metrics are almost completely determined by field relative L2, so
-  they add no distinct evaluation information; or
-- no strong baseline pair with comparable field error exhibits a reproducible
-  response-fidelity difference across base families.
+- no predeclared pair-level cell is field-equivalent and response-distinct under
+  all frozen criteria; or
+- execution is incomplete. In that case the exact P1 closes with no scientific
+  verdict, partial aggregation or same-version repair/rerun.
 
 Only an observed mismatch permits a minimal response-factorized model. The
 model hypothesis is

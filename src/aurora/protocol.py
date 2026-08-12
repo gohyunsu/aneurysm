@@ -1082,6 +1082,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "p0_execution_envelope_frozen", "p0_executable", "p0_submitted",
             "p0_scientific_checks_evaluated", "p1_registered",
             "p1_requires_field_error_matched_response_mismatch",
+            "p1_design_template", "p1_design_template_sha256",
+            "p1_design_validator", "p1_design_validator_sha256",
+            "p1_design_template_status",
+            "p1_design_template_non_authoritative",
+            "p1_design_family_crossfit_uses_historical_20_train_families_only",
+            "p1_design_response_blind_iso_error_matching",
+            "p1_design_predeclared_primary_pair_level_endpoint_cells",
+            "p1_design_field_equivalence_margin_log_ratio",
+            "p1_design_exact_family_sign_flip_primary_test",
+            "p1_design_minimum_multiplicative_response_gap",
+            "p1_design_holm_familywise_alpha",
+            "p1_design_minimum_same_direction_seeds",
+            "p1_design_training_seed_count", "p1_design_total_gpu_hour_cap",
+            "p1_design_real_p0_required_check_count",
+            "p1_design_real_p0_observed_check_count",
+            "p1_design_validator_synthetic_tests_passed",
             "candidate_architecture_status", "candidate_architecture",
             "primary_problem_selected", "method_selected",
             "architecture_selected", "scientific_server_queried",
@@ -1181,6 +1197,27 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or response_fidelity["p0_registered_scientific_check_count"] != 11
         or response_fidelity["p0_status"]
         != "registered_non_executable_pending_external_service_change_and_exact_private_cache_path"
+        or response_fidelity["p1_design_template"]
+        != "configs/aneumo_response_fidelity_p1_template_v1.json"
+        or response_fidelity["p1_design_template_sha256"]
+        != "07d7b89e4a77331fe3dda7f4fe716ef1efaab3561519e5654f47a2841ad32d06"
+        or response_fidelity["p1_design_validator"]
+        != "src/aurora/aneumo_response_fidelity_p1_template.py"
+        or response_fidelity["p1_design_validator_sha256"]
+        != "b14e4c8dcf9a236c5bfeb30b559b5799409d701e42a119f9ba5967394394d9fa"
+        or response_fidelity["p1_design_template_status"]
+        != "draft_non_authoritative_blocked_on_real_p0_v2_all_11_pass"
+        or response_fidelity["p1_design_predeclared_primary_pair_level_endpoint_cells"]
+        != 6
+        or response_fidelity["p1_design_field_equivalence_margin_log_ratio"]
+        != 0.009950330853168092
+        or response_fidelity["p1_design_minimum_multiplicative_response_gap"] != 0.1
+        or response_fidelity["p1_design_holm_familywise_alpha"] != 0.05
+        or response_fidelity["p1_design_minimum_same_direction_seeds"] != 4
+        or response_fidelity["p1_design_training_seed_count"] != 5
+        or response_fidelity["p1_design_total_gpu_hour_cap"] != 160.0
+        or response_fidelity["p1_design_real_p0_required_check_count"] != 11
+        or response_fidelity["p1_design_real_p0_observed_check_count"] != 0
         or response_fidelity["candidate_architecture_status"]
         != "mechanism_linked_hypothesis_only_unselected"
         or response_fidelity["execution_server"] != "introai9"
@@ -1205,6 +1242,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "p0_pre_execution_red_team_finalized",
                 "p0_future_metric_or_threshold_change_requires_new_evidence_version",
                 "p1_requires_field_error_matched_response_mismatch",
+                "p1_design_template_non_authoritative",
+                "p1_design_family_crossfit_uses_historical_20_train_families_only",
+                "p1_design_response_blind_iso_error_matching",
+                "p1_design_exact_family_sign_flip_primary_test",
+                "p1_design_validator_synthetic_tests_passed",
             )
         )
         or any(
@@ -1245,6 +1287,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     for path_key, hash_key in (
         ("p0_reference_evaluator", "p0_reference_evaluator_sha256"),
         ("p0_pbs_wrapper", "p0_pbs_wrapper_sha256"),
+        ("p1_design_template", "p1_design_template_sha256"),
+        ("p1_design_validator", "p1_design_validator_sha256"),
     ):
         implementation_path = (
             Path(__file__).resolve().parents[2] / response_fidelity[path_key]

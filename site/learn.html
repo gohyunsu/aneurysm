@@ -171,11 +171,36 @@
             threshold 변경은 별도 evidence version 없이는 허용하지 않습니다.
           </p>
           <p>
-            P0가 통과해도 바로 fancy model을 만들지 않습니다. P1에서 analytic
-            power-law scaling, linear interpolation, conditional MLP, DeepONet,
-            DeltaPhi, MeshGraphNet과 과거 V1e를 동일 development 조건으로 비교하고,
-            field error가 비슷한 모델 사이에 response fidelity 차이가 실제로 있는지
-            봅니다. 차이가 없으면 이 논문 identity는 닫습니다.
+            P0가 통과해도 바로 fancy model을 만들지 않습니다. P1은 아직 등록되지
+            않았지만, 결과를 보고 “비슷한 field error”의 뜻을 바꾸지 못하도록
+            비활성 template를 먼저 만들었습니다. 기존 train 20 family를 5번
+            순환하며 매번 12 family로 fit, 4 family로 checkpoint calibration,
+            4 family로 outer 평가합니다. 기존 validation/test 12 family와 향후
+            confirmation family는 읽지 않습니다.
+          </p>
+          <p>
+            Linear와 train-fitted power-law scaling은 deterministic control입니다.
+            동일한 anchor 정보 집합을 쓰는 conditional MLP, DeepONet, DeltaPhi-style
+            residual과 MeshGraphNet은 약 2M parameter, 20,000 update와 동일
+            node-condition budget으로 맞춥니다. 과거 V1e는 anchor field를 입력받지
+            않았으므로 primary pair가 아니라 diagnostic history입니다.
+          </p>
+          <p>
+            Response 지표를 숨긴 calibration 단계에서 두 모델의 field-error common
+            support를 찾고, log scale의 25%, 50%, 75% iso-error 수준만 고릅니다.
+            가까운 checkpoint가 목표의 <code>log(1.01)</code> 밖이면 그 cell은 버리고
+            다른 수준으로 대체하거나 caliper를 넓히지 않습니다. Outer family에서는
+            paired log field-error-ratio 90% CI 전체가
+            <code>±log(1.01)</code> 안에 들어야 field-equivalent입니다. Primary는
+            direct MeshGraphNet 대 anchor-residual DeltaPhi 한 쌍뿐이며, 세 수준 × 두
+            endpoint의 6개 검정을 20 family exact two-sided sign-flip p-value와
+            Holm으로 판정합니다. Unadjusted family-bootstrap 95% CI zero exclusion,
+            최소 10% response gap과 4/5 seed 동일 방향도 함께 요구합니다.
+            MLP/DeepONet 비교는 secondary라 primary failure를 구제하지 않습니다.
+            1% band는 field imbalance를 숨기지 못하게 하고 10% floor는 통계적으로만
+            유의한 사소한 차이를 막습니다.
+            하나도 통과하지 않으면 이 논문 identity를 닫습니다. P1 전체 GPU cap은
+            160시간이지만 이는 미래 상한일 뿐 현재 GPU 승인이나 job이 아닙니다.
           </p>
           <p>
             차이가 관측될 때만 최소 hypothesis를 엽니다. Analytic
@@ -202,6 +227,7 @@
             <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
           </p>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">직접 선행·six-way score·P0/P1·ISBI claim 삭제 규칙 전체 읽기 ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p1_template_v1.json">P1 iso-error matching·통계·중단 계약 읽기 ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0.py">Fail-closed aggregate evaluator 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">

@@ -22,6 +22,8 @@ jobs:
           node-version: "22"
       - name: Validate research protocol
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
+      - name: Validate inactive Aneumo response-fidelity P1 design
+        run: PYTHONPATH=src python -m aurora.aneumo_response_fidelity_p1_template validate configs/aneumo_response_fidelity_p1_template_v1.json
       - name: Validate fail-closed public source watch
         run: PYTHONPATH=src python scripts/audit_source_watch.py --config configs/source_watch_v21.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0

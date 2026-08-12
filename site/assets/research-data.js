@@ -3,7 +3,7 @@ window.AURORA_DATA = Object.freeze({
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
     status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at 34.0/40, novelty exactly 2.5/5 · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; code readiness does not authorize submission, the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
+    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; the inactive P1 template fixes a cyclic train-20-family cross-fit, one mechanism-linked primary pair, response-blind iso-error matching, exact family sign-flip inference and multiplicity but does not register or authorize P1; the exact introai9 cache path remains unresolved and no retry is allowed before an external service change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "The future P1 mismatch test is made outcome-blind before P0 evidence",
+      copy: "A non-authoritative template uses only the historical 20 train families in a seeded five-block cycle with 12 fit, 4 calibration and 4 outer families. Calibration field error alone defines 25/50/75% iso-error levels. The sole primary mechanism contrast is direct MeshGraphNet versus anchor-residual DeltaPhi; MLP and DeepONet pairs are secondary and cannot rescue it. Outer 90% log-error-ratio intervals must fit inside ±log(1.01). Six primary cells use exact 20-family two-sided sign-flip p-values, Holm control, an unadjusted bootstrap interval excluding zero, at least 10% multiplicative separation and the same direction in four of five seeds. Historical validation/test and future confirmation families remain sealed.",
+      status: "Design template only · regression 526/526 · real P0 0/11 · P1 registration/model prediction/response metric/PBS/GPU/claim 0",
+      url: "../configs/aneumo_response_fidelity_p1_template_v1.json"
+    },
     {
       year: "2026.08",
       title: "P0 v2 closes rank-only and cache-integrity loopholes before execution",
@@ -1301,6 +1308,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.12",
+      category: "protocol",
+      title: "Inactive P1 template removes post-result matching and multiplicity choices",
+      copy: "Before real P0 evidence, a non-authoritative fail-closed template fixes a seeded cyclic train-20-family 12/4/4 fit/calibration/outer design, response-blind 25/50/75% iso-error selection and exact log(1.01) outer field equivalence. One mechanism-linked MeshGraphNet–DeltaPhi pair defines six primary cells; MLP/DeepONet pairs are secondary and non-gating. Exact family sign-flip p-values, Holm control, an unadjusted bootstrap interval excluding zero, a 10% response gap, four-of-five seed direction and a 160 GPU-hour cap are fixed. The validator rejects self-activation, sealed-data access, margin or pair changes, junjinyong access and partial repair. Dependency-complete regression passes 526/526 with 111 protocol invariants. This is no P1 registration or scientific result; real P0 remains 0/11 and no server/PBS/GPU action occurred.",
+      files: ["configs/aneumo_response_fidelity_p1_template_v1.json", "src/aurora/aneumo_response_fidelity_p1_template.py", "tests/test_aneumo_response_fidelity_p1_template.py", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/experiment-protocol.md", "docs/isbi-2027-plan.md", "site/index.html", "site/learn.html", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.12",
       category: "deployment",

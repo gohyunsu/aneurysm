@@ -1,5 +1,16 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-12 official recheck and P1 page contract:** 공식 ISBI 2027 author
+> page를 재확인했다. Single-blind, 첫 4쪽의 모든 technical content, $200 optional
+> fifth page의 ethics/acknowledgments/COI/references-only 조건과 2026-10-26
+> 23:59 USA EDT 마감은 그대로다. Submission endpoint는 여전히 `Coming Soon`이다.
+> P1은 20 train family cyclic cross-fit, response-blind 3-level iso-error matching,
+> 한 mechanism-linked pair의 6개 primary multiplicity cell, exact family sign-flip
+> 검정과 160 GPU-hour cap을 담은 비활성 템플릿으로
+> 구체화했다. 이 운영 세부를 본문에 나열하지 않고, 논문에는 RF-C1을 판정한
+> field-equivalence와 response-effect 결과만 넣는다. Real P0 0/11이므로 원고의
+> title/abstract/method/result/figure는 계속 동결한다.
+
 > **Schema 11.8 P0-v2 writing boundary:** P0 v1 is unexecuted superseded
 > history after rank-preserving 8× coordinate-half magnitude distortion passed
 > its Spearman-only gate. P0 v2 adds magnitude CI upper ≤0.25, hashes observed

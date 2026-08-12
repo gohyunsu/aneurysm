@@ -1,5 +1,22 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.8 inactive P1 design template:** P1 registration은 여전히 false지만,
+> matching ambiguity는 [template v1](../configs/aneumo_response_fidelity_p1_template_v1.json)에
+> 미리 제거했다. Historical train 20 family를 5-fold nested development로 사용해
+> fold당 12 fit/4 rotating calibration/4 outer family를 둔다. Seeded permutation을
+> 5개 equal block으로 나눈 뒤 outer block k, calibration block k+1(mod 5), 나머지
+> 3개 fit block으로 고정한다. Calibration response는
+> 숨기고 field L2 common support의 25/50/75% iso-error level만 사용한다. 각
+> checkpoint는 log-field-error 거리 log(1.01) 이내여야 하며, outer family의 paired
+> 90% log-error-ratio CI 전체가 ±log(1.01) 안에 들어야 field-equivalent다.
+> Mechanism-linked MeshGraphNet--DeltaPhi 한 primary pair×3 level×2 endpoint의
+> 6개 검정은 20 family exact two-sided sign-flip p-value를 Holm FWER 0.05로
+> 보정한다. Response gap ≥10%, unadjusted family-bootstrap 95% CI zero exclusion,
+> 4/5 seed direction을 모두 요구한다. MLP/DeepONet pair는 secondary/non-gating이다.
+> Unmatched cell 교체, margin 확대, partial
+> aggregation과 metric-read 뒤 same-version repair/rerun은 금지한다. P1 전체
+> GPU-hour cap은 160이지만 현재 GPU authority는 0이다.
+
 > **Schema 11.8 final pre-execution P0 v2:** Unexecuted v1 is preserved. A
 > rank-preserving 8× coordinate-half response distortion passed its Spearman-
 > only gate, so current v2 adds symmetric-relative-difference upper CI ≤0.25
