@@ -44,7 +44,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "P1 v2 and the private no-claim ledger are synchronized",
-      copy: "Exact scientific public source 8b288c0… passed Quality 31601736993 and Pages 31601736273. Private planning head 21a20cf… is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes remain unchanged. The live site exposes duplicate-free matching, median co-primary screening and the cross-fit no-inference boundary. This creates no real P0 result, P1 registration, model, GPU, outer test or paper claim.",
+      copy: "Exact scientific public source 8b288c0… passed Quality 31601736993 and Pages 31601736273. Private planning head 83fc886… is remote exact, PRIVATE and anonymously returns 404; manuscript and reference bytes remain unchanged. The live site exposes duplicate-free matching, median co-primary screening and the cross-fit no-inference boundary. This creates no real P0 result, P1 registration, model, GPU, outer test or paper claim.",
       status: "Public CI/Pages success · private remote exact/anonymous 404 · manuscript unchanged · real P0 0/11",
       url: "../docs/isbi-2027-plan.md"
     },
@@ -1333,7 +1333,7 @@ window.AURORA_DATA = Object.freeze({
       date: "2026.08.12",
       category: "deployment",
       title: "P1 v2 and the private no-claim ledger are synchronized",
-      copy: "Exact scientific public source 8b288c0… passed Quality 31601736993 and Pages 31601736273. Private planning head 21a20cf… is remote exact, PRIVATE and anonymously 404; main.tex and references remain byte-for-byte unchanged. Real P0 remains 0/11, P1 remains unregistered and no server/PBS/GPU action occurred.",
+      copy: "Exact scientific public source 8b288c0… passed Quality 31601736993 and Pages 31601736273. Private planning head 83fc886… is remote exact, PRIVATE and anonymously 404; main.tex and references remain byte-for-byte unchanged. Real P0 remains 0/11, P1 remains unregistered and no server/PBS/GPU action occurred.",
       files: ["README.md", "AGENTS.md", "CHANGELOG.md", "site/assets/research-data.js"]
     },
     {
