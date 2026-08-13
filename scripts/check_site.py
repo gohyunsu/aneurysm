@@ -80,6 +80,8 @@ def check_site(root: Path) -> list[str]:
     missing_mounts = required_mounts - app.ids
     if missing_mounts:
         errors.append(f"site/index.html: missing app mounts {sorted(missing_mounts)}")
+    if "transient-release" not in app.ids:
+        errors.append("site/index.html: missing current transient-release decision panel")
 
     guide = parsed[(root / "site" / "learn.html").resolve()]
     required_guide_panels = {
@@ -101,6 +103,10 @@ def check_site(root: Path) -> list[str]:
         errors.append(
             f"site/learn.html: missing guide panels {sorted(missing_guide_panels)}"
         )
+    if "aneumo-transient-release" not in guide.ids:
+        errors.append(
+            "site/learn.html: missing zero-assumption Aneumo transient-release panel"
+        )
 
     research_data_path = root / "site" / "assets" / "research-data.js"
     research_data = research_data_path.read_text(encoding="utf-8")
@@ -112,6 +118,12 @@ def check_site(root: Path) -> list[str]:
         ),
         "Non-authoritative v3 · v1/v2 metadata/field/prediction 0": (
             "current confirmation evidence state"
+        ),
+        "The structure-faithful candidate scores 28.0/40 and remains inactive": (
+            "current transient-release decision"
+        ),
+        "The 1,000 cases reduce to 40 base families": (
+            "current transient independent-unit boundary"
         ),
     }
     for marker, label in required_current_markers.items():

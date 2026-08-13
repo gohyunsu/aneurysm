@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-08-13 · official Aneumo transient release reopens review, not a task
+
+- Froze official GitHub commit `701d53d…` and Hugging Face revision
+  `f801ade…`. The public HF state contains 370 objects and 3.285 TB: 267
+  numeric steady archives, 100 transient batch archives and three metadata
+  files. The first transient batch is 14.53 GB.
+- Used a 16 MiB ZIP64 tail-range probe instead of downloading that archive.
+  Its outer directory has ten nested case ZIPs; inspected case 10 exposes an
+  initial directory and 100 cycle directories, each with inlet, internal,
+  outlet and wall files. No field value was interpreted.
+- Reconciled released case IDs 1--1000 against `Connection.csv`: they span
+  40 base generation families, not 1,000 independent anatomies.
+- Audited the official transient code. Its geometry split overlaps all ten
+  base families across train and test; its target is scalar WSS magnitude,
+  not vector topology. It has one parser error, two declared missing model
+  modules, no critical-point/worldline metric and data-dependent timestep
+  truncation.
+- Recorded the unresolved license conflict between the HF card's CC
+  BY-NC-ND 4.0 and GitHub datasheet's CC BY 4.0 without making a legal
+  conclusion.
+- Re-scored structure-faithful transient WSS at 28.0/40. It is an inactive
+  re-entry candidate, not a second lead. The existing steady response-fidelity
+  direction remains the sole 32.5/40 conditional source lead at real P0 v3
+  0/12. No payload staging, P0, method, model, server, PBS/GPU, outer test,
+  result or paper claim opened.
+
 ## 2026-08-13 · current-facing evidence labels are synchronized
 
 - Audited current-facing site and research-document summaries against schema

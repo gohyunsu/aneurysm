@@ -21,6 +21,7 @@
     </a>
     <nav class="nav" aria-label="주요 탐색">
       <a href="learn.html">Learn</a>
+      <a href="#transient-release">Transient</a>
       <a href="#thesis">Thesis</a>
       <a href="#lineage">Lineage</a>
       <a href="#architecture">Architecture</a>
@@ -83,6 +84,7 @@
           <a class="button ghost" href="../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md">Confirmation v3 evaluator red-team ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">직접 선행 재감사 ↗</a>
           <a class="button ghost" href="../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md">최신 novelty·대안 후보 감사 ↗</a>
+          <a class="button ghost" href="../docs/aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md">공개 transient release 재판정 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0_v3.py">P0 v3 evaluator code ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0_v3_activation.py">Fail-closed activation runner ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
@@ -252,7 +254,7 @@
             <circle class="sample sample-3" cx="414" cy="280" r="4"/>
           </svg>
           <div class="posterior-card card-a">
-            <b>34.0</b><span>conditional lead · novelty 2.5 / 5</span>
+            <b>32.5</b><span>conditional lead · novelty 2.5 / 5</span>
           </div>
           <div class="posterior-card card-b">
             <b>8 q</b><span>steady mass-flow conditions · one anchor</span>
@@ -274,6 +276,53 @@
         <div><span>Lead / pending P0 / selected model / GPU / claim</span><b>1 / 1 / 0 / 0 / 0</b></div>
         <div><span>Next action</span><b>External service change → exact-path preflight → train-only CPU P0; no current retry</b></div>
       </div>
+    </section>
+
+    <section class="section evidence-section" id="transient-release">
+      <div class="section-heading compact">
+        <p class="eyebrow">SOURCE DELTA · TRANSIENT WSS</p>
+        <h2>공개되었다는 사실과<br><em>연구에 쓸 수 있다는 판단은 다릅니다.</em></h2>
+        <p>
+          Aneumo 공식 릴리스에 transient case 1--1000이 실제로 추가되었습니다.
+          그러나 이 1,000 case는 40개 base generation family의 반복 deformation이며,
+          official “geometry split”도 같은 family를 train과 test에 공유합니다. 제공
+          baseline은 WSS 벡터를 magnitude 한 값으로 축약하므로 direction, signed
+          critical point와 cardiac-cycle worldline을 평가하지 않습니다.
+        </p>
+      </div>
+      <div class="pivot-grid">
+        <article class="pivot-card">
+          <div class="card-index">VERIFIED · PUBLIC RELEASE METADATA</div>
+          <h3>100 batches · 1,000 cases · 40 families</h3>
+          <p>첫 14.53GB batch의 마지막 16MiB만 읽어 ZIP 구조를 확인했습니다.</p>
+          <ul>
+            <li>10개 nested case ZIP</li>
+            <li>검사 case에 initial 1 + cycle 100 time directory</li>
+            <li>각 time에 inlet / internal / outlet / wall file</li>
+            <li>전체 archive나 field value는 읽지 않음</li>
+          </ul>
+        </article>
+        <article class="pivot-card rejected">
+          <div class="card-index">NOT ADMITTED · 28.0 / 40</div>
+          <h3>Structure-faithful vector WSS는 re-entry 후보</h3>
+          <p>아이디어는 중요하지만 target·license·split·baseline 계약이 아직 부족합니다.</p>
+          <ul>
+            <li>HF CC BY-NC-ND 4.0 ↔ GitHub datasheet CC BY 4.0 충돌</li>
+            <li>Vector array name·unit·tangency·mesh correspondence 미확인</li>
+            <li>Equivariance·Hodge·tracking·worldline 보존은 direct prior</li>
+            <li>새 transient P0 / model / GPU / claim = 0</li>
+          </ul>
+        </article>
+      </div>
+      <div class="claims-strip">
+        <p>재진입 전에 반드시 닫을 세 공백</p>
+        <ol>
+          <li><span>01</span> Authoritative license와 exact vector-surface-phase manifest를 확정한다.</li>
+          <li><span>02</span> Family-disjoint strong baseline에서 critical structure가 mesh·tolerance 변화에도 안정적인지 먼저 본다.</li>
+          <li><span>03</span> Matched field error에서도 structure failure가 남을 때만 최소 representation/objective correction을 개발한다.</li>
+        </ol>
+      </div>
+      <p><a class="text-link" href="learn.html#aneumo-transient-release">배경부터 차근차근 읽기 →</a></p>
     </section>
 
     <section class="section thesis" id="thesis">

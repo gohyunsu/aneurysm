@@ -1,5 +1,14 @@
 # AURORA 연구 방향
 
+> **2026-08-13 transient-source adjudication:** Aneumo now has a public
+> 1,000-case transient release, but those cases represent only 40 base
+> families. The official benchmark reduces vector WSS to magnitude and its
+> “geometry” split shares all ten base families between train and test. With an
+> unresolved release-license conflict and unverified wall-vector/mesh contract,
+> structure-faithful transient WSS scores 28.0/40 and is not a second lead.
+> The material source change reopens review only; it is neither task P0 nor an
+> `introai9` recovery signal. [Exact decision](aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md)
+
 > **Schema 11.9 P0-v3 correction:** Current response-fidelity evidence gate is
 > 0/12, not 0/11. The unexecuted v2 is immutable history: a synthetic anchor
 > kink passed all 11 v2 checks because anchor interpolation and anchor tangent

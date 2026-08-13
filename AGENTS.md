@@ -1,5 +1,30 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 official Aneumo transient-release reappraisal:** Freeze GitHub
+> commit `701d53dde3489d84dbe9bc8324254629162eb45a` and Hugging Face revision
+> `f801adee816c18d3e18b23e6fcb147fe4c264209`. HF exposes 370 objects and
+> 3,284,946,024,600 bytes: 267 numeric steady ZIPs, 100 transient batch ZIPs and
+> three metadata files. The first transient batch is 14,530,202,660 bytes. A
+> bounded 16 MiB ZIP-directory probe, not a full download, found ten nested case
+> archives; inspected case 10 has 101 time directories (`0.00` plus 100 labels
+> `4.01`--`5.00`) and four inlet/internal/outlet/wall members per directory. No
+> field value was interpreted. `Connection.csv` maps released case IDs 1--1000
+> to only 40 base families, 3--30 deformations each. Never call cases, phases,
+> points, critical points or tracks independent units.
+>
+> The official cross code reduces vector WSS to magnitude and its declared
+> geometry split shares all ten base families across train and test. It reports
+> only scalar field metrics, has one Python parse error, references two absent
+> model modules and uses data-dependent divergence truncation. Do not relabel
+> it as a family-disjoint vector baseline. HF declares CC BY-NC-ND 4.0 while the
+> GitHub datasheet declares CC BY 4.0; make no legal conclusion and require an
+> authoritative resolution before scientific activation or redistribution.
+> Transient structure-faithful WSS scores 28.0/40 and remains an inactive
+> re-entry candidate. This source delta satisfies only historical material-E0
+> review, not task P0 or introai9 service recovery. The sole conditional lead
+> remains steady response fidelity at 32.5/40; real P0 v3 is 0/12. Transient
+> staging/P0/model/GPU/claim remain zero. Never access `junjinyong`.
+
 > **2026-08-13 current-facing consistency boundary:** Public current-state
 > summaries must say P0 v3 `0/12`, cache identity resolved, private activation
 > manifest absent and current container readability unverified. The current

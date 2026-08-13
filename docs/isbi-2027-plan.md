@@ -1,5 +1,14 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-13 paper-identity comparison:** The newly public Aneumo transient
+> subset makes vector-structure WSS visually attractive but not yet more
+> defensible than the acquired steady response task. Its current score is
+> 28.0/40 because target metadata, license, family-disjoint baselines and
+> structure stability are unresolved. It therefore creates no alternate title,
+> contribution, method, table or figure. The manuscript remains sealed around
+> the sole 32.5/40 conditional response-fidelity lead, real P0 v3 0/12.
+> [Decision audit](aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md)
+
 > **Schema 11.9 manuscript gate:** Real P0 is now 0/12. A pre-data synthetic
 > red team showed that v2 could pass while omitting anchor-tangent stability,
 > so v2 is preserved and v3 adds that endpoint explicitly. The four-page

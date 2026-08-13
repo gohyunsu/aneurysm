@@ -1,0 +1,161 @@
+{
+  "schema_version": "aurora.aneumo_public_transient_release_reappraisal.v1",
+  "status": "source_and_archive_metadata_reappraisal_only_no_p0_model_or_compute",
+  "observed_on": "2026-08-13",
+  "official_sources": {
+    "github_repository": "https://github.com/Xigui-Li/Aneumo",
+    "github_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
+    "huggingface_repository": "SAIS-Life-Science/Aneumo",
+    "huggingface_revision": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "huggingface_last_modified": "2026-03-19T11:17:28.000Z",
+    "huggingface_public": true,
+    "huggingface_gated": false,
+    "huggingface_used_storage_bytes": 3284946024600
+  },
+  "release_manifest": {
+    "total_siblings": 370,
+    "numeric_steady_zip_count": 267,
+    "transient_batch_zip_count": 100,
+    "other_file_count": 3,
+    "numeric_steady_case_range": [1, 10641],
+    "numeric_steady_archive_stride": 40,
+    "transient_released_case_range": [1, 1000],
+    "transient_batch_case_count": 10,
+    "first_transient_batch_bytes": 14530202660,
+    "first_steady_shard_bytes": 6878451054
+  },
+  "bounded_archive_metadata_probe": {
+    "archive": "batch_1-10.zip",
+    "requested_tail_bytes": 16777216,
+    "full_archive_downloaded": false,
+    "field_values_interpreted": false,
+    "outer_case_archives": 10,
+    "inspected_inner_case_id": 10,
+    "inner_member_count": 404,
+    "inner_time_directories": 101,
+    "initial_time_directory": "0.00",
+    "cycle_time_directory_first": "4.01",
+    "cycle_time_directory_last": "5.00",
+    "cycle_time_directory_count": 100,
+    "files_per_time_directory": 4,
+    "file_kinds": ["inlet.vtp", "internal.vtu", "outlet.vtp", "wall.vtp"]
+  },
+  "lineage_units": {
+    "connection_rows": 10660,
+    "released_transient_cases": 1000,
+    "released_transient_base_families": 40,
+    "released_deformations_per_family_min": 3,
+    "released_deformations_per_family_max": 30,
+    "independent_inference_unit": "aneumo_base_generation_family",
+    "case_phase_vertex_or_critical_point_as_independent_unit_allowed": false
+  },
+  "official_code_audit": {
+    "documented_hdf5_wss_shape": "T_M_3",
+    "cross_dataset_converts_wss_vector_to_magnitude": true,
+    "cross_dataset_primary_target_components": 1,
+    "geometry_split_train_cases": 40,
+    "geometry_split_test_cases": 10,
+    "geometry_split_base_families": 10,
+    "geometry_split_train_test_base_family_overlap": 10,
+    "geometry_split_is_base_family_disjoint": false,
+    "reported_metrics": ["mse", "relative_l2", "mae", "mnae"],
+    "critical_point_or_worldline_metric_present": false,
+    "python_files_ast_checked": 19,
+    "python_parse_error_count": 1,
+    "parse_error_file": "baselines/evaluate_cross.py",
+    "declared_but_missing_model_modules": [
+      "baselines.models.transolver",
+      "baselines.models.pointnet2"
+    ],
+    "diverged_timestep_truncation_is_data_dependent": true
+  },
+  "license_audit": {
+    "huggingface_declared_license": "cc-by-nc-nd-4.0",
+    "github_datasheet_declared_license": "cc-by-4.0",
+    "exact_release_license_consistent": false,
+    "license_resolution_required_before_scientific_activation_or_redistribution": true,
+    "legal_conclusion_made": false
+  },
+  "direct_prior_boundary": {
+    "equivariant_transient_vector_wss_is_prior": true,
+    "hodge_or_edge_one_form_operator_is_prior": true,
+    "critical_point_tracking_is_prior": true,
+    "critical_point_worldline_preservation_is_prior": true,
+    "aneurysm_cycle_critical_point_analysis_is_prior": true,
+    "gnn_equivariance_hodge_periodic_decoder_or_topology_loss_claim_allowed": false,
+    "remaining_hypothesis": "field_error_matched_transient_wss_surrogates_may_disagree_on_robust_signed_critical_structures_and_worldlines"
+  },
+  "candidate_screen": {
+    "axis_order": [
+      "biomedical_importance",
+      "target_identifiability",
+      "residual_novelty",
+      "usable_asset_readiness",
+      "effective_independent_units",
+      "strong_baseline_feasibility",
+      "interpretable_figure_value",
+      "isbi_schedule_fit"
+    ],
+    "admission_total": 32.0,
+    "candidates": [
+      {
+        "id": "existing_steady_multi_flow_response_fidelity",
+        "axis_scores": [4.0, 5.0, 2.5, 4.0, 3.0, 5.0, 5.0, 4.0],
+        "total": 32.5,
+        "decision": "retain_as_the_only_conditional_source_lead_pending_immutable_p0_v3"
+      },
+      {
+        "id": "aneumo_transient_structure_faithful_vector_wss_surrogation",
+        "axis_scores": [4.5, 3.0, 2.5, 3.0, 3.0, 3.5, 5.0, 3.5],
+        "total": 28.0,
+        "decision": "reject_now_reentry_only_after_license_vector_schema_family_disjoint_target_stability_and_baseline_feasibility_gates"
+      },
+      {
+        "id": "aneumo_family_disjoint_scalar_wss_benchmark_correction",
+        "axis_scores": [4.0, 5.0, 1.5, 3.0, 3.0, 3.5, 4.0, 3.5],
+        "total": 27.5,
+        "decision": "reject_benchmark_hygiene_is_required_but_not_independent_method_novelty"
+      },
+      {
+        "id": "aneumo_magnitude_to_vector_direction_failure_audit",
+        "axis_scores": [4.5, 3.0, 1.5, 3.0, 3.0, 3.5, 5.0, 3.0],
+        "total": 26.5,
+        "decision": "reject_direction_loss_is_expected_and_not_a_complete_paper_identity"
+      },
+      {
+        "id": "new_transient_aneurysm_gnn_or_operator_benchmark",
+        "axis_scores": [3.5, 4.0, 0.0, 3.0, 3.0, 3.5, 4.0, 3.0],
+        "total": 24.0,
+        "decision": "reject_architecture_space_is_direct_prior_dense"
+      }
+    ],
+    "conditional_source_lead_count": 1,
+    "transient_candidate_admitted_count": 0
+  },
+  "future_transient_reentry_gate": {
+    "p0_registered": false,
+    "required_before_fresh_scoring": [
+      "officially_resolved_release_license",
+      "bounded_member_level_hash_and_manifest",
+      "verified_wall_vector_array_name_components_units_and_tangency",
+      "verified_surface_connectivity_and_phase_correspondence",
+      "base_family_disjoint_train_validation_test_manifest",
+      "method_free_critical_structure_stability_under_mesh_tolerance_and_perturbation",
+      "executable_compute_matched_vector_wss_baselines"
+    ],
+    "source_change_satisfies_historical_material_e0_change_only": true,
+    "source_change_is_not_task_p0_pass": true,
+    "source_change_is_not_introai9_operational_change": true
+  },
+  "authorization": {
+    "transient_payload_staging": false,
+    "transient_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "paper_claim": false,
+    "introai9_retry_before_verified_operational_change": false,
+    "junjinyong_accessed": false
+  }
+}

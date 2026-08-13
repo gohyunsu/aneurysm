@@ -1,5 +1,14 @@
 # AURORA v2 모델 명세
 
+> **2026-08-13 transient no-architecture boundary:** The new public Aneumo
+> transient release does not authorize a vector GNN. Its official baseline
+> converts WSS vectors to scalar magnitude and uses a lineage-leaking split;
+> meanwhile equivariant vector-WSS and Hodge/topology components are direct
+> priors. A future re-entry would first test structure stability and matched
+> baseline failure. Edge 1-forms, Hodge blocks, periodic decoders and topology
+> losses remain controls, not a selected stack. Current selected model remains
+> zero. [Reappraisal](aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md)
+
 > **Schema 11.9 no-model boundary:** Current P0 v3 is method-free and 0/12.
 > Its added anchor-tangent check tests the endpoint directly connected to the
 > hypothesized identity-at-anchor output map. This does not select LaB-GATr,

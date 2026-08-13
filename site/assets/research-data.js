@@ -43,6 +43,13 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
+      title: "Aneumo transient release reopens source review, not task admission",
+      copy: "Exact GitHub 701d53d… and Hugging Face f801ade… expose 100 transient batch ZIPs for case IDs 1–1000. A bounded 16 MiB ZIP64-directory probe found ten nested cases in the first 14.53 GB batch and, for inspected case 10, one initial plus 100 cycle directories with inlet/internal/outlet/wall files. Connection.csv maps the 1,000 cases to only 40 base families. Official cross code leaks all ten benchmark families, converts vector WSS to magnitude, has one parse error and omits two declared model modules. HF and GitHub license declarations conflict. The structure-faithful candidate scores 28.0/40 and remains inactive.",
+      status: "Source metadata only · transient P0/model/GPU/claim 0 · steady lead 32.5/40 · real P0 v3 0/12",
+      url: "../docs/aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md"
+    },
+    {
+      year: "2026.08",
       title: "Exact Aneumo cache identity is resolved without opening execution",
       copy: "A bounded private inventory matches SHA-256 9640b0ef…ab9 to the immutable AURORA cache identity. The exact path and infrastructure metadata are deliberately withheld from this public site. HDF5 schema only was reported checked; array values were not read. This session's Windows SSH attempt was reset before a remote command, so container readability and operational readiness remain no-verdict. The immutable P0 v3 is not edited. A fail-closed activation runner now exists, but no private activation manifest exists.",
       status: "Path/size/SHA resolved · real P0 0/12 · activation/PBS/GPU/field/model/result/claim 0",
@@ -1274,8 +1281,8 @@ window.AURORA_DATA = Object.freeze({
     },
     {
       name: "Aneumo",
-      role: "동일 geometry × 8 steady BC response pilot",
-      provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition 6/9 failed"
+      role: "동일 geometry × 8 steady BC response pilot; public transient subset is inactive re-entry material",
+      provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition 6/9 failed · public transient cases 1–1000 map to 40 families · exact vector/mesh/license task contract unresolved · transient score 28.0/40"
     },
     {
       name: "AneuG-Flow",
@@ -1399,6 +1406,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "data",
+      title: "Official Aneumo transient release changes E0, not the active direction",
+      copy: "Exact official GitHub and Hugging Face states now expose 100 transient batch archives for case IDs 1–1000. A bounded ZIP tail probe confirmed nested VTK/VTU time-directory structure without a full archive download or field-value interpretation. The 1,000 cases reduce to 40 base families. Official code uses a family-overlapping split and scalar WSS magnitude, has one parse error and two declared missing modules; HF and GitHub license declarations conflict. Structure-faithful transient WSS scores 28.0/40 and opens no payload, P0, model or compute. Steady response fidelity remains the sole 32.5/40 conditional lead at real P0 v3 0/12.",
+      files: ["docs/aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md", "configs/aneumo_public_transient_release_reappraisal_v1.json", "tests/test_aneumo_public_transient_release_reappraisal.py", "site/index.html", "site/learn.html", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "site",

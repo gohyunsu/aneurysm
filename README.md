@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-13 official Aneumo transient source delta:** Exact GitHub source
+> `701d53d…` and Hugging Face revision `f801ade…` now expose 100 transient batch
+> archives for case IDs 1--1000. Bounded ZIP metadata confirms ten nested cases
+> per first batch and 100 cycle directories plus one initial directory per
+> inspected case, but the 1,000 cases map to only 40 base families. The official
+> cross-geometry code predicts WSS magnitude, overlaps every test family with
+> training, has one parser error and omits two declared model modules. The HF
+> card says CC BY-NC-ND 4.0 while the GitHub datasheet says CC BY 4.0. Therefore
+> transient structure-faithful WSS is reopened only for review and scores
+> **28.0/40**, not admission. The steady response-fidelity direction remains the
+> sole 32.5/40 conditional lead; real P0 v3 is still 0/12 and no new payload,
+> P0, model, server or GPU is authorized. See the
+> [exact reappraisal](docs/aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md).
+
 > **2026-08-13 P0-v3 activation code · authority still absent:** The audit
 > found that the historical PBS wrapper still invoked v2 and that no code
 > implemented the separately registered private manifest required by the v3
@@ -49,7 +63,7 @@
 > equivalent field error, different multi-flow spatial response, one
 > same-backbone identity-at-anchor mechanism, superiority to learned direct and
 > analytic power-law controls, and 100-new-family confirmation. The prior
-> 34.0/40 remains history. Real P0 is 0/11; method/model/server/PBS/GPU/result/
+> 34.0/40 remains history. Real P0 v3 is 0/12; method/model/server/PBS/GPU/result/
 > claim remain zero. See the [exact audit](docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md).
 
 > **Schema 11.8 inactive independent-confirmation v3:** Preserved v2 is
