@@ -97,6 +97,15 @@ It reports counts and extractor agreement descriptively, with no stability
 threshold. A pass authorizes only registration of a new family-disjoint,
 method-free P0. It cannot change the case, phases or scientific claim.
 
+D0 v2 ran once as introai9 PBS job `116165.ECE-util1` and completed E/exit 0
+in 25 seconds with CPU 4, memory 16 GB and GPU 0. PBS used no network, and the
+two-file raw stage was deleted on exit. Because the release licence statements
+conflict, the detailed field-derived aggregate remains private. The public
+record exposes only execution metadata and the unchanged boundary:
+`scientific_stability_gate_evaluated=false`. D0 is closed against further
+repair/resubmission. The next allowed action is P0 registration before any new
+case or phase field read.
+
 ## Scientific P0 that may follow
 
 A future P0 must be registered before any new case/phase field read. It should

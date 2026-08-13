@@ -1,0 +1,27 @@
+{
+  "schema_version": "aurora.aneumo_transient_vtp_d0_v2.public_execution.v1",
+  "protocol_id": "aneumo_transient_vtp_reader_and_structure_development_d0_v2",
+  "public_source_commit": "158f6bfa45c9eeac93211b875352a64f69a2e69e",
+  "job": {
+    "id": "116165.ECE-util1",
+    "state": "E",
+    "exit_status": 0,
+    "walltime": "00:00:25",
+    "cpu_time": "00:00:22",
+    "memory_kb": 97120,
+    "ncpus": 4,
+    "memory_gb_requested": 16,
+    "ngpus": 0,
+    "run_count": 1
+  },
+  "execution_complete": true,
+  "network_during_pbs": false,
+  "raw_stage_deleted": true,
+  "detailed_field_derived_aggregate_public": false,
+  "detailed_aggregate_location": "private_provenance_only",
+  "scientific_stability_gate_evaluated": false,
+  "paper_identity_active": false,
+  "method_or_architecture_selected": false,
+  "next_boundary": "register_a_separate_family_disjoint_method_free_stability_p0_before_any_new_case_or_phase_field_read",
+  "interpretation": "operational_execution_record_only_not_target_stability_model_or_paper_evidence"
+}

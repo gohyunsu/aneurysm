@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-13 — D0 v2 execution completes without a stability verdict
+
+- Final source `158f6bf…e69e` passed Quality `31708012464` with 629/629 tests
+  and Pages `31708011675`, then ran once as introai9 job `116165.ECE-util1`.
+- PBS completed E/exit 0 in 25 seconds with CPU 4, 16 GB and GPU 0. It used
+  zero network requests. The two-file raw stage was deleted on exit.
+- The exact field-derived aggregate remains private under the stricter licence
+  boundary; the public record exposes operational metadata only. D0 had no
+  scientific stability threshold, so this is not target, model or paper
+  evidence.
+- Development repair 2/2 is consumed and D0 repair/resubmission is closed.
+  The next allowed action is separate family-disjoint method-free P0
+  registration before any new case/phase field read.
+
 ## 2026-08-13 — D0 v1 transport outcome and final repair 2/2
 
 - Exact green source `148848d…0cef` ran once as introai9 PBS job

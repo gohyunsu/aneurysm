@@ -56,8 +56,9 @@ def check_site(root: Path) -> list[str]:
         "execution-incomplete · 0/12 evaluated": "current P0 state",
         "30.0/40 inactive": "current transient candidate boundary",
         "D0 · known-member reader/extractor development": "current D0 evidence stage",
-        "VTP 미획득; 기존 case 1·phase 2개만 재사용": "current D0 transport outcome",
-        "repair 2/2": "final D0 repair boundary",
+        "상세 aggregate private · stability 미평가 · raw stage 삭제": (
+            "current D0 outcome boundary"
+        ),
         "GNN을 포함한 어떤 모델도 current method가 아님": (
             "no-selected-architecture boundary"
         ),
@@ -162,7 +163,9 @@ def check_site(root: Path) -> list[str]:
         "D0 v1 ended execution-incomplete before any VTP payload": (
             "current D0 transport outcome"
         ),
-        "final transport repair 2/2 prospective": "final D0 repair boundary",
+        "v2 execution complete with private aggregate and raw stage deleted": (
+            "final D0 operational outcome"
+        ),
         "closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated": (
             "closed P0 result count"
         ),
@@ -192,7 +195,7 @@ def check_site(root: Path) -> list[str]:
         ),
         "Hodge Spectral Duality": "current topology-operator prior boundary",
         "FaCTz": "latest critical-point-preservation collision boundary",
-        "Prospective D0 reuses only case 1 phases 4.01 and 5.00": (
+        "D0 reuses only case 1 phases 4.01 and 5.00": (
             "known-member-only D0 boundary"
         ),
     }

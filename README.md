@@ -14,9 +14,11 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 > structure-faithful WSS는 **30.0/40 inactive**입니다. 현재 열린 것은 이미
 > 조사한 case 1의 두 phase만 재사용하는 D0 reader/extractor development뿐입니다.
 > D0 v1 job `116160.ECE-util1`은 compute-node network 차단으로 VTP를 얻기 전에
-> execution-incomplete로 끝났습니다. 현재는 exact 두 member를 private 임시
-> stage에서 network-free PBS로 읽는 최종 transport repair 2/2만 열려 있으며,
-> 새로운 scientific stability gate나 모델 학습이 아닙니다.
+> execution-incomplete로 끝났습니다. Final repair 2/2인 D0 v2 job
+> `116165.ECE-util1`은 exact private stage·PBS network 0·GPU 0으로 exit 0
+> 완료했고 raw stage는 삭제됐습니다. 라이선스 충돌 때문에 field-derived 상세
+> aggregate는 private provenance에만 둡니다. Scientific stability는 여전히
+> 미평가이며, 다음 단계는 새 field를 읽기 전 별도 family-disjoint P0 등록입니다.
 
 ## 현재 상태
 
@@ -26,7 +28,7 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 | active 연구 주제 | 없음 | transient 후보는 admission 32 미만 |
 | 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아님 |
 | transient 자산 | 966 complete case · 40 base family | 1,000 case가 1,000 독립 표본은 아님 |
-| D0 | v1 transport-incomplete · final repair 2/2 prospective | VTP 미획득; 기존 case 1·phase 2개만 재사용 |
+| D0 | v1 transport-incomplete · v2 execution complete | 상세 aggregate private · stability 미평가 · raw stage 삭제 |
 | scientific P0 / 모델 / GPU | 미등록 / 미선택 / 0 | GNN을 포함한 어떤 모델도 current method가 아님 |
 | 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
 
@@ -103,8 +105,8 @@ Hugging Face의 `CC BY-NC-ND 4.0` tag와 GitHub datasheet의 `CC BY 4.0` 문구�
 ```text
 D0 · known-member reader/extractor development
   ├─ v1: compute-node network unreachable · VTP/read/extractor 0
-  └─ v2: exact ephemeral stage · final repair 2/2 · PBS network 0
-  └─ pass → 별도 prospective method-free P0 등록만 허용
+  └─ v2: exact ephemeral stage · exit 0 · raw stage 삭제 · 상세 aggregate private
+      └─ 다음 권한: 별도 prospective method-free P0 등록만
 P0 · family-disjoint target stability
   └─ pass → matched baseline screen 등록만 허용
 P1 · compute/field-error-matched structural failure
@@ -120,6 +122,8 @@ implementation defect 하나로 제한됩니다. Case·phase 변경, array 삭�
 threshold 사후 변경과 model training은 금지합니다. 첫 synthetic-fixture 수정이
 repair 1/2를, compute-node egress를 exact private staging으로 바꾸는 transport
 수정이 repair 2/2를 소모합니다. V2 결과와 관계없이 추가 D0 수리·재제출은 없습니다.
+V2는 완료됐고 scientific stability threshold를 평가하지 않았으므로 논문 결과가
+아닙니다. 새 family/phase를 읽기 전 P0 계약을 별도로 공개·고정해야 합니다.
 
 ## 미래 아키텍처의 최소 조건
 

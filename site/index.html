@@ -41,7 +41,7 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · TRANSIENT WSS 30.0/40 INACTIVE · D0 V1 TRANSPORT-INCOMPLETE · FINAL REPAIR 2/2 · MODEL / GPU / CLAIM 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · TRANSIENT WSS 30.0/40 INACTIVE · D0 V2 EXECUTION COMPLETE / STABILITY UNEVALUATED · P0 UNREGISTERED · MODEL / GPU / CLAIM 0</p>
         <h1>
           A low field error<br>
           <em>does not certify flow structure.</em>
@@ -60,9 +60,11 @@
           correction</em>의 application evidence뿐입니다. 후보 점수는 30.0/40으로
           admission 전입니다. 첫 D0 PBS job은 compute-node network 차단으로 VTP를
           받기 전에 execution-incomplete로 종료됐습니다. 현재는 이미 조사한 case
-          1의 두 phase를 exact private stage로 전달해 network-free PBS에서
-          fail-closed VTP reader와 signed critical-point extractor를 검증하는 최종
-          transport repair 2/2만 엽니다. Scientific P0, architecture, GPU, outer test와 paper
+          1의 두 phase를 exact private stage로 전달한 final D0 v2는 network-free
+          PBS에서 exit 0으로 끝났고 raw stage가 삭제됐습니다. Field-derived 상세
+          aggregate는 라이선스 충돌 때문에 private provenance에만 둡니다. D0는
+          stability threshold가 없는 development이므로 다음 단계는 새 field 전 별도
+          family-disjoint P0 등록입니다. Scientific P0, architecture, GPU, outer test와 paper
           claim은 모두 0입니다. 폐쇄된 steady response-fidelity P0 v3는
           execution-incomplete·0/12 evaluated로 역사에 보존하며 재실행하지 않습니다.
         </p>
@@ -71,6 +73,7 @@
           <a class="button ghost" href="../docs/aneumo-transient-structure-reentry-2026-08-13.md">현재 재판정·선행·gate 읽기 ↗</a>
           <a class="button ghost" href="../configs/aneumo_transient_vtp_d0_v2.json">Final D0 v2 contract ↗</a>
           <a class="button ghost" href="../results/aneumo_transient_vtp_d0_v1_execution_20260813.json">D0 v1 transport outcome ↗</a>
+          <a class="button ghost" href="../results/aneumo_transient_vtp_d0_v2_execution_20260813.json">D0 v2 operational outcome ↗</a>
           <a class="button ghost" href="../docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md">P0 v3 outcome · execution-incomplete / 0 of 12 evaluated ↗</a>
           <a class="button ghost" href="../docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md">Transient 전수 target-contract 감사 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_transient_vtp.py">VTP·surface-vector code ↗</a>

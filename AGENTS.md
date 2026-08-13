@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 D0 v2 final operational outcome:** Green public source
+> `158f6bfa45c9eeac93211b875352a64f69a2e69e` passed Quality
+> `31708012464` with 629/629 tests and Pages `31708011675`. Final introai9 PBS
+> job `116165.ECE-util1` ran once with CPU 4, 16 GB, GPU 0 and zero PBS HTTP,
+> then completed E/exit 0 in 25 seconds. Its two-file raw stage was deleted.
+> Keep the exact field-derived aggregate private while release licence
+> declarations conflict; public records may expose operational metadata only.
+> D0 had no scientific stability threshold and activates no paper evidence.
+> Repair 2/2 is consumed; never repair or resubmit D0. A separate prospective,
+> family-disjoint method-free P0 must be registered before any new case/phase
+> field read. Method, architecture, GPU, test and claim remain closed. Never
+> access or query `junjinyong`.
+
 > **2026-08-13 D0 v1 outcome and final transport repair 2/2:** Exact public
 > source `148848d065df46160edc233bfa746748e4f00cef` ran once as introai9 PBS
 > job `116160.ECE-util1` with CPU 4, 16 GB, GPU 0. It ended E/exit 1 after
