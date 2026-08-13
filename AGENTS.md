@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 D0 development repair 1/2:** Quality run `31704718929`
+> executed 624 tests; 623 passed and the sole failure was a synthetic fixture
+> that assigned coordinates and WSS arrays in reverse in the inline-base64
+> representation. Swap only those fixture arrays. This is registered bounded
+> development repair 1 of 2, not a field read or scientific repair. It changes
+> no release member, case, phase, parser behavior, threshold or claim. Preserve
+> the failed run and do not reset the repair count.
+
 > **2026-08-13 post-P0 problem re-entry boundary:** Do not repair or relabel
 > the closed response-fidelity P0 v3. Its 32.5/40 is source history and its
 > scientific state remains execution-incomplete with 0/12 evaluated. The best

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-13 — D0 bounded development repair 1/2
+
+- Preserved failed Quality run `31704718929` as exact provenance: 623 of 624
+  tests passed and the sole failure was an inverted synthetic inline-base64
+  fixture, where the coordinates and WSS arrays had been assigned in reverse.
+- Swapped only those two synthetic arrays. No release member was read and no
+  case, phase, field, parser behavior, scientific threshold or claim changed.
+  This consumes registered D0 development repair 1 of 2; it is not a
+  scientific repair or Aneumo result.
+
 ## 2026-08-13 — Transient WSS problem re-entry and prospective D0
 
 - Kept the response-fidelity P0 v3 one-shot outcome closed and removed it from

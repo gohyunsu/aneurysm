@@ -37,10 +37,10 @@ def _ascii_vtp() -> bytes:
 
 def _base64_vtp() -> bytes:
     arrays = [
-        np.asarray([[-1.2, -0.9, 0], [0.8, -0.9, 0], [0.8, 1.1, 0], [-1.2, 1.1, 0]], dtype="<f8"),
+        np.asarray([[-1, -1, 0], [1, -1, 0], [1, 1, 0], [-1, 1, 0]], dtype="<f8"),
         np.asarray([0, 1, 2, 3], dtype="<i4"),
         np.asarray([4], dtype="<i4"),
-        np.asarray([[-1, -1, 0], [1, -1, 0], [1, 1, 0], [-1, 1, 0]], dtype="<f8"),
+        np.asarray([[-1.2, -0.9, 0], [0.8, -0.9, 0], [0.8, 1.1, 0], [-1.2, 1.1, 0]], dtype="<f8"),
     ]
     encoded = []
     for array in arrays:
