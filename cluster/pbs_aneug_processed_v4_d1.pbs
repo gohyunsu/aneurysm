@@ -1,0 +1,76 @@
+#!/bin/bash
+#PBS -N aurora_aneug_v4_d1
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=0
+#PBS -l walltime=08:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_PYTHON:?set pinned Python executable}"
+
+config="$AURORA_PROJECT_ROOT/configs/aneug_processed_v4_acquisition_d1.json"
+processed_root="$AURORA_DATA_ROOT/processed_v4_d1"
+geometry_root="$AURORA_DATA_ROOT/extracted/aneug_flow/v1/Geometries"
+record_root="$AURORA_OUTPUT_ROOT/aneug_processed_v4_d1"
+mkdir -p "$processed_root" "$record_root"
+
+if compgen -G "$record_root/attempt_*.transport_complete" > /dev/null; then
+  echo "transport already completed; schema rerun is forbidden" >&2
+  exit 91
+fi
+
+attempt=0
+for index in 1 2 3; do
+  marker="$record_root/attempt_${index}.started"
+  if [ ! -e "$marker" ]; then
+    printf '%s\n' "${PBS_JOBID:-unknown}" > "$marker"
+    attempt="$index"
+    break
+  fi
+done
+if [ "$attempt" -eq 0 ]; then
+  echo "transport attempt budget exhausted" >&2
+  exit 90
+fi
+
+base="https://huggingface.co/datasets/whding123/AneuG-Flow/resolve/9dd418083899deddd93a67f9a6fca7a14304fa36/processed_data"
+transient="$processed_root/assembled_registered_data_1k_v4.pth"
+steady="$processed_root/assembled_registered_steady_data_1k_v4.pth.temporary"
+
+download_exact() {
+  local url="$1"
+  local target="$2"
+  local expected_bytes="$3"
+  local expected_sha="$4"
+  local partial="${target}.partial"
+  if [ -f "$target" ] && [ "$(stat -c %s "$target")" = "$expected_bytes" ] && [ "$(sha256sum "$target" | cut -d' ' -f1)" = "$expected_sha" ]; then
+    return 0
+  fi
+  curl --location --fail --show-error --retry 12 --retry-all-errors \
+    --connect-timeout 30 --continue-at - --output "$partial" "$url"
+  [ "$(stat -c %s "$partial")" = "$expected_bytes" ]
+  [ "$(sha256sum "$partial" | cut -d' ' -f1)" = "$expected_sha" ]
+  mv "$partial" "$target"
+}
+
+download_exact "$base/assembled_registered_data_1k_v4.pth?download=true" \
+  "$transient" 23744862051 141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9
+download_exact "$base/assembled_registered_steady_data_1k_v4.pth?download=true" \
+  "$steady" 9632510050 0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f
+printf '%s\n' "complete" > "$record_root/attempt_${attempt}.transport_complete"
+
+PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" -m aurora.aneug_processed_v4_d1 \
+  --config "$config" \
+  --transient "$transient" \
+  --steady "$steady" \
+  --geometry-root "$geometry_root" \
+  --result "$record_root/result.json" \
+  --norm-manifest "$record_root/tensor_norm.json" \
+  --case-manifest "$record_root/case_manifest.json"
+
+rm -f "$steady"
+printf '%s\n' "complete" > "$record_root/attempt_${attempt}.complete"

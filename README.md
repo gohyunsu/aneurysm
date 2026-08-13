@@ -22,8 +22,10 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > model, GPU와 outer test를 열지 않습니다. 다만 기존
 > 탐색 범위 밖의 데이터 트리를 다시 감사해 AneuG geometry 14,712개 디렉터리
 > 중 14,710개 complete bundle과 BenchAnXplore 105×80 transient velocity 자산이
-> 실제로 확보되어 있음을 확인했습니다. 데이터 부재가 아니라 **headline WSS
-> target과 독립 단위의 미확인**이 현재 병목입니다.
+> 실제로 확보되어 있음을 확인했습니다. 공식 transient v4 target은 exact
+> 23,744,862,051-byte object로 확인했고, 60GB cap의 processed-only D1 acquisition을
+> 등록했습니다. 데이터 전체 부재가 아니라 **processed WSS의 local acquisition,
+> schema와 독립 단위**가 현재 병목입니다.
 
 ## 현재 상태
 
@@ -32,6 +34,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | 목표 | IEEE ISBI 2027 | four technical pages · single-blind |
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
+| processed-v4 D1 | 등록 · 실행 전 | transient 23.74GB persistent + steady norm source 9.63GB temporary · peak 33.38GB |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -88,6 +91,11 @@ execution record 외의 payload를 확인하지 못했습니다. 이후 별도 d
 14,712개 geometry directory가 있으나 `shape.obj`/checkpoint/flow-split 3종이 모두
 있는 bundle은 14,710개입니다. 이 tree에는 headline에 필요한 transient WSS target이
 확인되지 않았으므로 geometry 확보를 transient data 확보로 바꾸어 말하지 않습니다.
+대신 공식 revision의 `assembled_registered_data_1k_v4.pth` 정확한 크기와
+LFS SHA-256을 고정했습니다. V4 transient에는 `registered_data_list`와 `mesh_data`가,
+steady v4에는 물리 WSS 복원용 `tensor_norm`이 있습니다. D1은 transient v4만
+persistent하게 두고 steady v4에서는 `label + tensor_norm`만 추출한 뒤 원본을
+삭제합니다. V5, raw blood/wall, 14,000-case steady CFD와 `cfd/`는 받지 않습니다.
 
 ### BenchAnXplore · 즉시 실행 가능한 engineering control
 
@@ -144,15 +152,14 @@ worldline이 불안정하거나 matched failure가 없으면 방향을 닫습니
 ## Evidence ladder
 
 ```text
-G0 · AneuG release/lineage + 2015 Challenge archive source feasibility [closed incomplete]
-  └─ complete → human rescore and independent-unit ruling only
-      └─ admitted → geometry-only leakage/near-duplicate audit
-          └─ stable split → method-free structure-stability P0
-              └─ stable target → matched baseline-failure P1
-                  └─ excess error above solver floor
-                      → bounded validation-only minimal correction
-                          → fresh lineage-disjoint confirmation
-                              → ISBI claim activation
+D1 · exact processed-v4 acquisition + schema/norm/geometry-ID linkage [registered]
+  └─ all pass → geometry-only leakage/near-duplicate grouping + split freeze
+      └─ stable split → method-free structure-stability P0
+          └─ stable target → matched baseline-failure P1
+              └─ excess error above solver floor
+                  → bounded validation-only minimal correction
+                      → fresh lineage-disjoint confirmation
+                          → ISBI claim activation
 ```
 
 G0는 과거 AneuG surface-vector job을 수리하거나 재실행하지 않았습니다. Exact
@@ -162,6 +169,12 @@ lineage manifest 존재 여부만 기록합니다. 2015 Challenge WSS archive는
 size/MD5와 safe member directory만 확인하며 member extraction이나 field-value read를
 하지 않습니다. Pass, fail, execution-incomplete 어느 경우든 동일 계약은 다시
 실행하지 않습니다.
+
+D1은 닫힌 G0의 retry가 아닙니다. 사용자가 선택한 processed-only acquisition이며
+exact v4 두 object와 60GB selected-asset cap만 다룹니다. Transport가 incomplete인
+동안만 동일 partial file을 최대 세 PBS attempt로 resume할 수 있고, object가 모두
+완성된 뒤 schema gate는 한 번만 실행합니다. D1 pass도 scientific result나 method
+승인이 아니라 leakage grouping과 development split 동결만 엽니다.
 
 ## 조건부 architecture와 평가
 
@@ -214,6 +227,8 @@ results/      public aggregate outcomes only
 - [machine-readable 확보 자산 ledger](configs/introai9_acquired_asset_reconciliation_v1.json)
 - [closed source-feasibility G0](configs/aneug_reference_floor_g0_v1.json)
 - [G0 execution record](results/aneug_reference_floor_g0_execution_20260814.json)
+- [processed-v4 D1 acquisition contract](configs/aneug_processed_v4_acquisition_d1.json)
+- [processed-v4 storage audit](docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md)
 - [과거 AneuG P0 no-verdict](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md)
 - [Aneumo source authority watch](docs/aneumo-source-authority-watch-v22-2026-08-14.md)
 - [machine-readable source-watch v22](configs/source_watch_v22.json)

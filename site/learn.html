@@ -578,6 +578,17 @@
           <a href="../docs/introai9-acquired-asset-reconciliation-2026-08-14.md">AAAI 밖 확보 자산과 architecture 선택 읽기 ↗</a>
           <a href="../configs/aneug_reference_floor_g0_v1.json">Fresh source G0 machine contract 읽기 ↗</a>
           <a href="../results/aneug_reference_floor_g0_execution_20260814.json">Closed G0 execution record 읽기 ↗</a>
+          <p>
+            다음 단계는 raw 2 TB release가 아니라 <b>processed-v4 D1</b>입니다.
+            Exact transient v4 23.74GB만 persistent하게 두고, 9.63GB steady v4는
+            physical-unit normalization을 추출한 뒤 삭제합니다. 따라서 peak new
+            storage는 33.38GB이고 60GB cap 아래입니다. V5, raw blood/wall, 14,000
+            steady CFD와 cfd 원본은 scope 밖입니다. D1은 case 수, 80 phase, vector
+            WSS label, mesh/case order와 local geometry-ID linkage를 확인하며 아직
+            field metric, model 성능 또는 novelty를 측정하지 않습니다.
+          </p>
+          <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
+          <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>

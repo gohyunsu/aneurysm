@@ -11198,7 +11198,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "g0_same_contract_repair_or_rerun_allowed",
             "g0_aneug_field_or_mesh_payload_authorized",
             "g0_challenge_member_extraction_or_field_read_authorized",
-            "g0_aneux_payload_authorized", "scientific_gate_registered",
+            "g0_aneux_payload_authorized", "processed_v4_d1_status",
+            "processed_v4_d1_config", "processed_v4_d1_config_sha256",
+            "processed_v4_d1_evaluator", "processed_v4_d1_evaluator_sha256",
+            "processed_v4_d1_test", "processed_v4_d1_test_sha256",
+            "processed_v4_d1_pbs_wrapper",
+            "processed_v4_d1_pbs_wrapper_sha256",
+            "processed_v4_d1_transient_bytes",
+            "processed_v4_d1_transient_sha256",
+            "processed_v4_d1_temporary_steady_norm_source_bytes",
+            "processed_v4_d1_selected_asset_peak_cap_bytes",
+            "processed_v4_d1_transport_attempt_limit",
+            "processed_v4_d1_v5_or_raw_authorized",
+            "processed_v4_d1_scientific_p0_or_gpu_authorized",
+            "scientific_gate_registered",
             "method_selected", "architecture_selected",
             "gpu_training_authorized", "outer_test_authorized",
             "paper_claim_active", "login_node_gpu_command_executed",
@@ -11252,8 +11265,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["g0_reported_reason"] != "public_source_request_failed"
         or reference_floor["g0_scientific_checks_registered"] != 0
         or reference_floor["g0_scientific_checks_evaluated"] != 0
+        or reference_floor["processed_v4_d1_status"]
+        != "registered_storage_bounded_acquisition_and_schema_audit_before_full_v4_access"
+        or reference_floor["processed_v4_d1_transient_bytes"] != 23744862051
+        or reference_floor["processed_v4_d1_transient_sha256"]
+        != "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+        or reference_floor["processed_v4_d1_temporary_steady_norm_source_bytes"]
+        != 9632510050
+        or reference_floor["processed_v4_d1_selected_asset_peak_cap_bytes"]
+        != 60000000000
+        or reference_floor["processed_v4_d1_transport_attempt_limit"] != 3
         or reference_floor["next_allowed_action"]
-        != "human_select_materially_different_acquired_data_task_version_without_g0_repair_or_rerun"
+        != "run_introai9_pbs_processed_v4_d1_acquisition_schema_audit_with_60gb_cap_and_no_g0_repair"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11274,6 +11297,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "g0_scientific_gate_evaluated",
                 "g0_aggregate_source_inventory_materialized",
                 "g0_persistent_probe_or_download_cache_materialized",
+                "processed_v4_d1_v5_or_raw_authorized",
+                "processed_v4_d1_scientific_p0_or_gpu_authorized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",
@@ -11308,6 +11333,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("g0_test", "g0_test_sha256"),
         ("g0_pbs_wrapper", "g0_pbs_wrapper_sha256"),
         ("g0_execution_record", "g0_execution_record_sha256"),
+        ("processed_v4_d1_config", "processed_v4_d1_config_sha256"),
+        ("processed_v4_d1_evaluator", "processed_v4_d1_evaluator_sha256"),
+        ("processed_v4_d1_test", "processed_v4_d1_test_sha256"),
+        ("processed_v4_d1_pbs_wrapper", "processed_v4_d1_pbs_wrapper_sha256"),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
@@ -11318,6 +11347,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             raise ProtocolError("The registered AneuG reference-floor G0 bytes changed.")
     checks.append("AneuG reference-relative source-feasibility G0 boundary")
     checks.append("introai9 acquired-asset reconciliation beyond legacy root")
+    checks.append("AneuG processed-v4 storage-bounded acquisition boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
         "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",

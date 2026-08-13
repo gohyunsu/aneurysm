@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 processed-v4 D1 registration:** The user selected a
+> materially different processed-only AneuG acquisition, not a repair/rerun of
+> closed G0 or historical cycle P0. Official revision `9dd4180…fa36` exposes
+> exact transient v4 at 23,744,862,051 bytes/SHA-256 `141541ed…51c9` and
+> steady v4 at 9,632,510,050 bytes/SHA-256 `0c03c1d9…0177f`. Official code
+> shows transient v4 lacks its own normalization and uses steady `tensor_norm`.
+> Keep transient v4 persistent; use steady v4 temporarily to extract only
+> label/norm metadata, then delete that full object. Selected-AneuG peak cap is
+> 60 GB; v5, per-case raw blood/wall, 14,000-case steady CFD and `cfd/` are
+> forbidden. Transport may resume the same immutable partial object for at
+> most three PBS attempts only while transport is incomplete; once both
+> objects are complete, schema audit gets no rerun. D1 checks weights-only
+> metadata, case count, 80 phases, vector-WSS labels, unique case IDs, mesh
+> order and local-geometry linkage. It opens only leakage grouping/split freeze,
+> never scientific P0, method, GPU or paper result. `introai9` PBS-only, GPU 0;
+> never access/query/transfer/submit/monitor `junjinyong`.
+
 > **2026-08-14 AneuG source G0 execution closure:** Exact public source
 > `01ae2184facd76c9b2056557263fc92dff22831c` ran once on `introai9` as
 > CPU/PBS job `116204.ECE-util1` with CPU 4, 8 GB and GPU 0. It ended state

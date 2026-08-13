@@ -167,8 +167,11 @@ def check_site(root: Path) -> list[str]:
         "AneuG reference-relative transient WSS 31.0/40 inactive": (
             "current reference-relative candidate boundary"
         ),
-        "source-feasibility G0 closed execution-incomplete": (
-            "current source G0 stage"
+        "processed-v4 D1 registered under 60 GB": (
+            "current processed-v4 acquisition stage"
+        ),
+        "33,377,372,101-byte peak below a 60 GB selected-asset cap": (
+            "storage-bound acquisition boundary"
         ),
         "730 cases are not 730 independent patients": (
             "AneuG independent-unit boundary"

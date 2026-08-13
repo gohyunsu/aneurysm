@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-14 · storage-bounded AneuG processed-v4 acquisition registered
+
+- Replaced the false 2 TB requirement with two exact official v4 objects:
+  transient 23,744,862,051 bytes and temporary steady normalization source
+  9,632,510,050 bytes. Peak new processed storage is 33,377,372,101 bytes
+  under a 60 GB selected-asset cap.
+- Made transient v4 the only persistent full object. V5, raw per-case
+  blood/wall, 14,000-case steady CFD and `cfd/` remain excluded; steady v4 is
+  deleted after a compact label/tensor-normalization manifest is verified.
+- Added a weights-only, memory-mapped schema/linkage audit for at least 700
+  unique cases, 80 phases, vector WSS labels, mesh order and local geometry IDs.
+- Allowed at most three resumable PBS transport attempts for the same immutable
+  partial bytes, but no schema rerun once transport completes. This acquisition
+  opens no scientific P0, method, GPU, outer test or paper claim.
+
 ## 2026-08-14 · AneuG source G0 closes execution-incomplete
 
 - Ran the exact source-only contract once as `introai9` CPU/PBS job
