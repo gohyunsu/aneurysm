@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 P0-v3 one-shot final outcome:** Exact Quality/Pages-passed public
+> source `8252d354e22990f480344327f2fce34cf8016dfa` was activated prospectively
+> and submitted once on introai9 PBS as `116146.ECE-util1`. PBS allocated CPU 4,
+> 16 GB and GPU 0. The job finalized F/exit 1 after walltime `00:00:34`, CPU
+> `00:00:19` and 160,404 kB memory. Only a 313-byte private status at SHA-256
+> `4f517743…4c6` materialized; aggregate result and raw PBS output did not.
+> Scientific gate evaluated false, so current evidence is execution-incomplete,
+> no scientific verdict and 0/12 evaluated—not a 0/12 scientific failure.
+> Authorized train-field read extent and low-level cause are unknown and must
+> not be inferred. Public execution record SHA-256 is `bbed8806…d82fd`.
+> Same-contract repair/resubmission is permanently forbidden. P1, method,
+> architecture, GPU, validation/test, outer test, RF-C1--RF-C3 and paper claim
+> remain closed. Preserve 32.5/40 only as conditional source history; active
+> paper identity is zero. Never access, query, transfer to, submit on or monitor
+> `junjinyong`.
+
 > **2026-08-13 introai9 recovery/runtime pre-activation boundary:** Treat the
 > administrator report as the verified external operational change. Public-key
 > login, an empty user queue, enabled/running `coss_agpu`, exact cache identity,

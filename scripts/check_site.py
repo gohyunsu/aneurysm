@@ -53,7 +53,7 @@ def check_site(root: Path) -> list[str]:
             "provenance to CHANGELOG.md or the filterable site history"
         )
     required_readme_markers = {
-        "Real P0 v3는 0/12": "current P0 state",
+        "execution-incomplete · 0/12 evaluated": "current P0 state",
         "RF-C2 · controlled application solution": "application-only RF-C2 role",
         "GNN을 포함한 어떤 모델도 current method가 아님": (
             "no-selected-architecture boundary"
@@ -151,7 +151,9 @@ def check_site(root: Path) -> list[str]:
     research_data = research_data_path.read_text(encoding="utf-8")
     required_current_markers = {
         "current method-free P0 v3": "current P0 version",
-        "real P0 remains non-executable at 0/12": "current P0 result count",
+        "P0 v3 is execution-incomplete with 0/12 scientific checks evaluated": (
+            "current P0 result count"
+        ),
         "The current inactive v3 preserves unexecuted v1 and v2": (
             "current confirmation version"
         ),

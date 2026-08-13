@@ -1,7 +1,7 @@
 # Aneumo response-fidelity P0 v3 activation contract
 
-Status: **execution code ready · private activation manifest absent · current
-container verdict absent · real P0 0/12**
+Status: **historical pre-attempt contract · activation completed prospectively ·
+one-shot execution-incomplete · 0/12 evaluated · exact contract closed**
 
 ## Why this layer is necessary
 
@@ -24,8 +24,9 @@ split, seed or P0 evaluator byte.
 | Activation code ready | A public validator can check a future private manifest | Still no field-array access or submission |
 | Activated after verified change | A private manifest pins all required bytes before a first P0-v3 attempt | Exactly one CPU-only train-field P0-v3 PBS attempt |
 
-The project is currently in the second row. No private activation manifest has
-been registered.
+The project reached the third row prospectively: the final private manifest was
+registered before field access, validated against the exact source and used for
+one CPU-only PBS attempt. That attempt is now closed.
 
 ## Prospective private manifest contract
 
@@ -105,4 +106,10 @@ The validator's synthetic fixtures show only that valid authority is accepted
 and path, container, manifest, compute and scientific-authority drift are
 rejected. They are code tests, not Aneumo evidence. This update performs no
 server query, transfer, scheduler access, PBS submission, cache read, field
-read, monitoring or GPU work. The current status remains 0/12.
+read, monitoring or GPU work. Those sentences describe the pre-attempt source
+state, not the later outcome.
+
+The later exact one-shot outcome is recorded separately in
+[`aneumo-response-fidelity-p0-v3-execution-2026-08-13.md`](aneumo-response-fidelity-p0-v3-execution-2026-08-13.md).
+It is execution-incomplete with 0/12 scientific checks evaluated, no aggregate
+and no scientific verdict. Same-contract repair or resubmission is forbidden.

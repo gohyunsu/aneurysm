@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.9 · one conditional Aneumo application/evaluation lead at fresh 32.5/40, novelty exactly 2.5/5 · PaNO occupies generic field-to-readout mismatch, NOEM occupies hard-constraint output transforms, and cardiovascular ROM work occupies one-CFD repeated-BC tuning · current method-free P0 v3 adds a non-compensatory anchor-tangent check · a fail-closed v3 activation runner exists but private manifest/authority remains 0 and real P0 remains non-executable at 0/12 · historical P1 and confirmation v1-v3 are inactive · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "all 12 train-only P0 v3 endpoint-stability checks and a newly registered field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; a bounded private inventory matches the registered cache SHA-256 while location and infrastructure metadata remain private; public code now implements a future manifest/source/cache/container-pinned v3 CPU-only PBS path, but the immutable v3 config still has no actual activation manifest after a current pre-command connection reset and unverified container readability; the historical inactive P1 v3 shows the intended same-backbone direct-versus-anchor-residual contrast but cannot be activated after the P0 version change; retry only after a verified introai9 operational change",
+    status: "Target locked · schema 11.9 · no active paper identity · Aneumo response fidelity 32.5/40 and novelty 2.5/5 are conditional source history only · PaNO occupies generic field-to-readout mismatch · current method-free P0 v3 is execution-incomplete with 0/12 scientific checks evaluated · exact one-shot contract closed · historical P1 and confirmation v1-v3 remain inactive · active method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    requirement: "job 116146.ECE-util1 consumed the sole CPU-only P0 v3 attempt and produced only a minimal execution-incomplete status; no aggregate or raw PBS output materialized, so there is no scientific pass/fail verdict and the low-level cause plus authorized train-field-read extent remain unknown; same-contract repair or resubmission is forbidden; P1, architecture, GPU, confirmation and claims remain closed; any future direction requires a fresh problem-level evidence decision, not a local runtime repair",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -46,6 +46,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "P0 v3 consumes its one shot without reaching a scientific verdict",
+      copy: "After exact source, manifest, cache, container and runtime pins passed a no-field preflight, introai9 PBS job 116146.ECE-util1 ran with 4 CPU, 16 GB and GPU 0. It finalized F/exit 1 after 34 seconds. A 313-byte private status says execution-incomplete and scientific_gate_evaluated=false; no aggregate or raw PBS output materialized. Therefore all 12 checks are unevaluated, not failed. The low-level cause and authorized train-field read extent are unknown and are not inferred.",
+      status: "Exact contract closed · execution-incomplete · 0/12 evaluated · no scientific verdict · P1/model/GPU/test/claim 0",
+      url: "../docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md"
+    },
     {
       year: "2026.08",
       title: "Latest collisions leave an application audit, not a new method",
@@ -899,16 +906,16 @@ window.AURORA_DATA = Object.freeze({
     ["Task", "one nominal CFD field → velocity fields at seven alternative flows", "Aneumo multi-flow benchmarks; cardiovascular one-CFD BC tuning; analytic q^α scaling", "Aneumo-specific matched spatial-response fidelity", "conditional application/evaluation lead"],
     ["Representation", "same-case anchor plus flow ratio and geometry", "SC-FNO; Hemo-MPO; AB-GATr; DeltaPhi; NOEM hard constraints; DeepONet/FNO", "same-backbone direct versus identity-residual mechanism test", "inactive application adaptation; not method novelty"],
     ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO; PaNO field→readout", "aneurysm-specific matched-field-error response mismatch", "not yet observed"],
-    ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "registered; non-executable"],
+    ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "execution-incomplete; 0/12 evaluated; exact contract closed"],
     ["Confirmation", "100 new families + prefield precision/complete-workload viability", "historical 32 excluded; exact case-log family estimator; ≥59/100 wins per response", "finite-release mean and majority-family generalization", "inactive until P0/P1/development/re-entry/viability pass"],
-    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 32.5; novelty 2.5", "P0 only; no method or claim"]
+    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 32.5; novelty 2.5", "source history only; no active lead, method or claim"]
   ],
   gates: [
     {
       id: "P0-RF",
       title: "Are multi-flow velocity-response endpoints stable before any model is trained?",
-      copy: "Current P0 v3 reads only the 20 historical Aneumo train families, coordinates and velocity and adds an explicit nominal-anchor tangent check to the preserved v2 gates. The private cache identity is matched and a separate fail-closed activation runner now exists, but v3 remains immutable and non-executable because no private activation manifest or current container-readability verdict exists. Pressure, validation/test fields, checkpoints and predictions remain forbidden.",
-      state: "Conditional lead · P0 v3 registered/non-executable · 0/12 real scientific checks · no PBS/GPU/model/test/claim",
+      copy: "Current P0 v3 was activated prospectively and submitted exactly once after a no-field exact-source/runtime preflight. The CPU-only PBS attempt ended execution-incomplete before a scientific aggregate materialized. All twelve checks remain unevaluated; this is neither pass nor failure. Pressure, validation/test fields, models, GPU and claims remain forbidden, and same-contract repair or resubmission is closed.",
+      state: "Closed exact P0 v3 · execution-incomplete · 0/12 evaluated · no scientific verdict · no P1/GPU/model/test/claim",
       blocking: true
     },
     {
@@ -1418,6 +1425,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "experiment",
+      title: "P0 v3 closes execution-incomplete after its sole CPU-only PBS attempt",
+      copy: "Quality/Pages-passed public source 8252d35… and the prospectively registered private manifest passed exact source, hash, queue, wheel-basename, eight-test and actual-manifest no-field validation. Job 116146.ECE-util1 then ran once on introai9 with 4 CPU, 16 GB and GPU 0. It finalized F/exit 1 after 34 seconds. Only a 313-byte status materialized; aggregate and raw PBS output did not. Scientific gate evaluated false, so the result is execution-incomplete/no verdict with 0/12 evaluated—not a scientific failure. The exact contract closes without repair/rerun, P1, method, architecture, GPU, validation/test, outer test or claim.",
+      files: ["results/aneumo_response_fidelity_p0_v3_execution_20260813.json", "tests/test_aneumo_response_fidelity_p0_v3_execution_record.py", "docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "scripts/check_site.py", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "protocol",

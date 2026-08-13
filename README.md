@@ -9,24 +9,25 @@ AURORA는 뇌동맥류 CFD surrogate가 단순한 field error뿐 아니라 **유
 프로젝트 사이트를 관리합니다. 원고와 미공개 결과는 별도 private 저장소에서
 관리합니다.
 
-> **현재 판정 · 2026-08-13:** 유일한 조건부 lead는 Aneumo-specific matched
-> response-fidelity audit, 32.5/40입니다. Residual novelty는 2.5/5로 정확히
-> 하한선이며, active paper identity가 아닙니다. Real P0 v3는 0/12이고 선택된
-> architecture, scientific result, GPU run, outer test와 paper claim은 모두
-> 없습니다.
+> **현재 판정 · 2026-08-13:** Aneumo-specific matched response-fidelity의
+> 32.5/40은 이제 조건부 source history로만 보존됩니다. Exact P0 v3의 단 한 번
+> 허용된 CPU-only PBS 실행은 `execution-incomplete`로 끝났고 12개 scientific
+> check 중 평가된 것은 0개입니다. 과학적 pass/fail verdict는 없지만 one-shot
+> 계약에 따라 같은 contract는 폐쇄됐습니다. Active paper identity, 선택된
+> architecture, GPU run, P1, outer test와 paper claim은 모두 없습니다.
 
 ## 한눈에 보기
 
 | 항목 | 현재 상태 | 의미 |
 |---|---|---|
 | 목표 venue | IEEE ISBI 2027 | 공식 author contract 기준 four technical pages |
-| 연구 lead | Aneumo matched response fidelity | application/evaluation contribution만 조건부 유지 |
-| 데이터 identity | private inventory에서 등록 SHA-256 일치 | field array는 아직 읽지 않음 |
-| Method-free P0 v3 | 0/12 | endpoint 안정성에 대한 과학적 verdict 없음 |
+| 연구 lead | active lead 없음 | 32.5/40은 source history이며 paper identity가 아님 |
+| 데이터 identity | private inventory에서 등록 SHA-256 일치 | 실행 중 train-field read 범위는 aggregate 부재로 불명 |
+| Method-free P0 v3 | execution-incomplete · 0/12 evaluated | 과학적 verdict 없이 exact contract 폐쇄 |
 | P1 / architecture | 미등록 / 미선택 | GNN을 포함한 어떤 모델도 current method가 아님 |
 | Development | 미개방 | test 봉인, prospective bounded repair만 향후 허용 |
 | Confirmation | 0/100 family | 기존 32 family를 제외한 신규 family evidence 필요 |
-| 실행 | activation preflight 완료 | PBS·cache·base container 정상, private manifest와 P0 제출은 아직 0 |
+| 실행 | one-shot PBS 소비 | CPU 4·16 GB·GPU 0, exit 1, aggregate·raw PBS output 없음 |
 | 논문 | internal pre-evidence plan | title·contribution·result·figure 봉인 |
 
 [프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 배경지식이 없는
@@ -113,9 +114,10 @@ exactly 100 new-family one-shot confirmation
 RF-C1–RF-C3 activation and ISBI manuscript population
 ```
 
-현재는 P0 v3 이전입니다. Synthetic fixtures의 12/12는 evaluator code test일
-뿐 Aneumo result가 아닙니다. P0를 통과해도 historical P1이나 confirmation
-template가 자동으로 활성화되지 않으며 fresh evidence version이 필요합니다.
+현재 exact evidence chain은 P0 v3에서 닫혔습니다. Synthetic fixtures의
+12/12는 evaluator code test일 뿐 Aneumo result가 아닙니다. 실제 실행은
+scientific gate 전에 중단되어 0/12 evaluated이며, historical P1이나
+confirmation template는 활성화되지 않습니다.
 
 관리자 확인 뒤 `introai9` 공개키 접속, 빈 사용자 queue, enabled PBS queue,
 정확한 cache checksum과 base-container 가독성을 다시 확인했습니다. Base image에
@@ -124,16 +126,27 @@ network-free·job-local로 설치하는 activation schema v2를 추가했습니�
 manifest를 등록한 뒤 final binary preflight에서 base image의 Git 부재도 찾아
 제출을 보류했습니다. Host wrapper가 검증한 clean commit SHA를 container에
 명시적으로 전달·재검증하고 superseded-manifest SHA와 attempt/field-read 0을
-요구하는 schema v3로 닫았습니다. Field-array read와 PBS attempt는 여전히 0입니다.
+요구하는 schema v3로 닫았습니다. 이 pre-attempt 시점까지 field-array read와
+PBS attempt는 0이었습니다.
 동일 wrapper dry-run에서 wheel basename을 축약하면 `pip`가 거부하는 문제도 찾아,
 등록된 원래 basename을 container 안에서도 그대로 유지하도록 교정했습니다.
+
+그 뒤 exact public source와 private manifest를 field access 전에 고정하고 최종
+no-field preflight를 통과한 후 CPU-only PBS job `116146.ECE-util1`을 정확히 한 번
+제출했습니다. Job은 exit 1, walltime 34초로 끝났고 313-byte private status만
+남았습니다. Aggregate result와 raw PBS output은 materialize되지 않았으며 PBS
+trace에는 post-job file-processing error가 기록됐습니다. 따라서 low-level 원인과
+허가된 train-field read 범위를 추정하지 않습니다. 상세 record는
+[P0 v3 execution 문서](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)에
+있습니다.
 
 ### P0 v3
 
 P0는 모델 성능을 측정하지 않습니다. Train family에서 response magnitude,
 rank, interpolation, paired response, tangent와 anchor tangent가 node subset,
 flow omission과 허용된 deterministic perturbation에 안정적인지 확인합니다.
-12개 gate 중 하나라도 실패하면 이 formulation을 닫습니다.
+이번 one-shot은 gate 평가 전에 execution-incomplete로 끝나 0/12 evaluated이며,
+동일 contract의 수리·재제출 없이 formulation을 닫았습니다.
 
 ### P1과 bounded development
 
@@ -195,7 +208,7 @@ results/      public aggregate historical evidence only
 - [현재 연구 방향](docs/research-direction.md)
 - [실험 프로토콜](docs/experiment-protocol.md)
 - [P0 v3 config](configs/aneumo_response_fidelity_p0_v3.json)
-- [P0 v3 activation boundary](docs/aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md)
+- [P0 v3 execution outcome](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)
 - [Confirmation evaluator red team](docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md)
 - [상세 변경 이력](CHANGELOG.md)
 
@@ -214,10 +227,9 @@ groups, site graph와 browser JavaScript를 통과했습니다. 이는 코드·�
 
 ## 실행 및 보안 경계
 
-- 과학 실행은 향후 `introai9`의 PBS에서만 수행합니다.
+- 과학 실행은 `introai9`의 PBS에서만 수행합니다.
 - Login-node GPU 사용은 금지합니다.
-- 검증된 외부 운영 변화 전에는 현재 P0를 재시도하거나 activation manifest를
-  만들지 않습니다.
+- 현재 exact P0 v3는 운영 변화와 무관하게 수리·재제출하지 않습니다.
 - `junjinyong`에는 접근·조회·전송·제출·모니터링하지 않습니다.
 - Private cache 경로, raw fields, 미공개 결과와 manuscript는 public repository나
   site에 노출하지 않습니다.

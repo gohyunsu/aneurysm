@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-13 · P0 v3 closes execution-incomplete without a scientific verdict
+
+- Quality/Pages-passed source `8252d354…16dfa` and a prospectively registered
+  private manifest passed the final no-field source/hash/runtime validation.
+- The sole CPU-only PBS attempt `116146.ECE-util1` requested 4 CPU, 16 GB and
+  GPU 0, then finalized F/exit 1 after 34 seconds. The 313-byte status says
+  `scientific_gate_evaluated=false`; aggregate result and raw PBS output did not
+  materialize.
+- All 12 scientific checks remain unevaluated. This is no scientific pass or
+  failure. Low-level cause and authorized train-field read extent are unknown.
+- Public aggregate record SHA-256 is `bbed8806…d82fd`. The exact contract closes
+  without repair/rerun, P1, method, architecture, GPU, validation/test, outer
+  test, result row or paper claim. The 32.5/40 score remains source history.
+
 ## 2026-08-13 · introai9 preflight closes infrastructure, not science
 
 - Administrator-reported recovery was followed by successful public-key login,
