@@ -51,6 +51,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
         "aurora.source_watch.v19",
         "aurora.source_watch.v20",
         "aurora.source_watch.v21",
+        "aurora.source_watch.v22",
     }:
         raise SourceWatchContractError("invalid_schema")
     if payload.get("status") != "watch_only":
@@ -240,7 +241,7 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v20_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v20(payload)
-    else:
+    elif schema == "aurora.source_watch.v21":
         if payload.get("extends") != "source_watch_v20.json":
             raise SourceWatchContractError("v21_base_contract_changed")
         base = load_config(source.parent / payload["extends"])
@@ -251,6 +252,17 @@ def load_config(path: str | Path) -> dict[str, Any]:
             raise SourceWatchContractError("v21_added_watches_missing")
         payload["watches"] = list(base["watches"]) + added
         _validate_v21(payload)
+    else:
+        if payload.get("extends") != "source_watch_v21.json":
+            raise SourceWatchContractError("v22_base_contract_changed")
+        base = load_config(source.parent / payload["extends"])
+        if base.get("schema_version") != "aurora.source_watch.v21":
+            raise SourceWatchContractError("v22_base_schema_changed")
+        added = payload.get("added_watches")
+        if not isinstance(added, list):
+            raise SourceWatchContractError("v22_added_watches_missing")
+        payload["watches"] = list(base["watches"]) + added
+        _validate_v22(payload)
 
     _validate_common_boundary(payload)
     payload["_config_sha256"] = _sha256(source.read_bytes())
@@ -312,6 +324,7 @@ def _validate_common_boundary(payload: Mapping[str, Any]) -> None:
         "aurora.source_watch.v19",
         "aurora.source_watch.v20",
         "aurora.source_watch.v21",
+        "aurora.source_watch.v22",
     }:
         if (
             authorization.get("only_automatic_outcome")
@@ -2306,6 +2319,84 @@ def _validate_v21(payload: Mapping[str, Any]) -> None:
         raise SourceWatchContractError("v21_change_boundary_changed")
 
 
+def _validate_v22(payload: Mapping[str, Any]) -> None:
+    watches = payload.get("watches", [])
+    if not isinstance(watches, list) or len(watches) != 35:
+        raise SourceWatchContractError("v22_watch_set_changed")
+    _validate_v21(
+        {
+            "watches": watches[:34],
+            "change_detection": payload.get("change_detection", {}),
+        }
+    )
+    issue = watches[34]
+    if (
+        issue.get("watch_id") != "aneumo_family_mapping_issue_authority_v1"
+        or issue.get("kind") != "github_issue_authority"
+        or issue.get("review_request") != "fresh_source_reaudit_only"
+        or issue.get("source")
+        != {
+            "repository": "Xigui-Li/Aneumo",
+            "issue_number": 4,
+            "issue_url": "https://github.com/Xigui-Li/Aneumo/issues/4",
+            "issue_api_url": "https://api.github.com/repos/Xigui-Li/Aneumo/issues/4",
+            "comments_api_url": "https://api.github.com/repos/Xigui-Li/Aneumo/issues/4/comments?per_page=100",
+        }
+        or issue.get("frozen_snapshot")
+        != {
+            "issue_number": 4,
+            "issue_state": "closed",
+            "issue_updated_at": "2026-07-24T13:38:27Z",
+            "issue_comment_count": 6,
+            "comment_ids": [
+                3236749321,
+                3236756598,
+                5069671178,
+                5070184242,
+                5070219883,
+                5070473308,
+            ],
+            "owner_comment_ids": [3236749321, 5070184242, 5070473308],
+            "comment_body_sha256": {
+                "3236749321": "33d35457a571eb3871f3b407736201c2f4b12783ba0e5ca109b96b5f55df66ac",
+                "3236756598": "453de4b19b0c6409accd317febe0a9fbec58b2575d80fbcaf483d22a6dddc76b",
+                "5069671178": "6d1121cc7e889809a15ce4038ab5d45c97cc0415da867d870a5e6ecf4d798389",
+                "5070184242": "f7c2971bc78ab7cf0b644a2e9e4f1c76a281d8afcb6473aa61fa96e9eda90529",
+                "5070219883": "d866404bbbc1a2e99d33bfde8bdfd4d3c08d6c56eb878047c88752e4175a4012",
+                "5070473308": "2231f399f25b4a98ed57d6fb0414fed23bac697909a409bf3e64e734437ebaf2",
+            },
+            "comment_updated_at": {
+                "3236749321": "2025-08-29T11:41:17Z",
+                "3236756598": "2025-08-29T11:44:28Z",
+                "5069671178": "2026-07-24T12:07:42Z",
+                "5070184242": "2026-07-24T13:09:15Z",
+                "5070219883": "2026-07-24T13:12:20Z",
+                "5070473308": "2026-07-24T13:38:27Z",
+            },
+            "owner_error_acknowledgement_comment_id": 5070184242,
+            "owner_full_review_commitment_comment_id": 5070473308,
+            "availability": (
+                "owner_acknowledged_family_mapping_error_and_promised_complete_"
+                "review_without_authoritative_corrected_mapping"
+            ),
+        }
+    ):
+        raise SourceWatchContractError("aneumo_mapping_issue_contract_changed")
+
+    detection = payload.get("change_detection", {})
+    if any(
+        detection.get(key) is not True
+        for key in (
+            "issue_change_requests_reaudit_only",
+            "issue_comment_is_not_authoritative_mapping_resolution",
+            "repository_head_change_is_not_corrected_mapping_confirmation",
+            "license_tag_change_is_not_legal_resolution",
+            "source_change_cannot_reactivate_withdrawn_p0",
+        )
+    ):
+        raise SourceWatchContractError("v22_change_boundary_changed")
+
+
 def _url_get(url: str, accept: str) -> bytes:
     headers = {
         "Accept": accept,
@@ -2951,6 +3042,44 @@ def fetch_zenodo_record_snapshot(zenodo_api_url: str) -> dict[str, Any]:
     }
 
 
+def fetch_github_issue_authority_snapshot(
+    issue_api_url: str, comments_api_url: str
+) -> dict[str, Any]:
+    """Fetch issue and comment metadata without inferring authoritative resolution."""
+    issue = _json_get(issue_api_url, github=True)
+    comments = _json_get(comments_api_url, github=True)
+    if not isinstance(comments, list):
+        raise SourceWatchContractError("unexpected_github_issue_comments_response")
+    ordered = sorted(comments, key=lambda row: int(row.get("id", 0)))
+    comment_ids = [int(row.get("id", 0)) for row in ordered]
+    owner_comment_ids = [
+        int(row.get("id", 0))
+        for row in ordered
+        if row.get("author_association") == "OWNER"
+    ]
+    return {
+        "issue_number": int(issue.get("number", 0)),
+        "issue_state": str(issue.get("state", "")),
+        "issue_updated_at": str(issue.get("updated_at", "")),
+        "issue_comment_count": int(issue.get("comments", 0)),
+        "comment_ids": comment_ids,
+        "owner_comment_ids": owner_comment_ids,
+        "comment_body_sha256": {
+            str(row.get("id")): _sha256(str(row.get("body", "")).encode("utf-8"))
+            for row in ordered
+        },
+        "comment_updated_at": {
+            str(row.get("id")): str(row.get("updated_at", "")) for row in ordered
+        },
+        "owner_error_acknowledgement_comment_id": 5070184242,
+        "owner_full_review_commitment_comment_id": 5070473308,
+        "availability": (
+            "owner_acknowledged_family_mapping_error_and_promised_complete_"
+            "review_without_authoritative_corrected_mapping"
+        ),
+    }
+
+
 def evaluate_snapshot(
     config: Mapping[str, Any], observed: Mapping[str, Any]
 ) -> dict[str, Any]:
@@ -3015,6 +3144,45 @@ def evaluate_watch(
                     "direct_prior_baseline_feasibility_reaudit_triggered"
                 ] = triggered
         return result
+    if watch.get("kind") == "github_issue_authority":
+        frozen = watch["frozen_snapshot"]
+        signal_names = {
+            "issue_state": "github_issue_state_changed",
+            "issue_updated_at": "github_issue_updated_at_changed",
+            "issue_comment_count": "github_issue_comment_count_changed",
+            "comment_ids": "github_issue_comment_set_changed",
+            "owner_comment_ids": "github_issue_owner_comment_set_changed",
+            "comment_body_sha256": "github_issue_comment_body_changed",
+            "comment_updated_at": "github_issue_comment_updated_at_changed",
+            "availability": "github_issue_authority_state_changed",
+        }
+        signals = [
+            signal
+            for key, signal in signal_names.items()
+            if observed.get(key) != frozen.get(key)
+        ]
+        same_snapshot = all(
+            observed.get(key) == frozen.get(key) for key in frozen.keys()
+        )
+        if not same_snapshot and not signals:
+            signals.append("other_frozen_snapshot_field_changed")
+        triggered = bool(signals)
+        return {
+            "watch_id": watch["watch_id"],
+            "same_as_frozen_snapshot": same_snapshot,
+            "material_change_signals": signals,
+            "fresh_source_reaudit_triggered": triggered,
+            "manual_review_triggered": triggered,
+            "review_request": watch["review_request"],
+            "next_action": (
+                watch["review_request"] if triggered else "continue_watch_only"
+            ),
+            "automatic_download_authorized": False,
+            "p0_authorized": False,
+            "method_or_architecture_authorized": False,
+            "gpu_or_outer_test_authorized": False,
+            "observed": dict(observed),
+        }
     if watch.get("kind") == "github_release_asset_contract":
         frozen = watch["frozen_snapshot"]
         signal_names = {
@@ -3501,6 +3669,10 @@ def fetch_watch_snapshot(watch: Mapping[str, Any]) -> dict[str, Any]:
         return fetch_github_release_asset_contract_snapshot(
             source["repository"], source["default_branch"], source["release_tag"]
         )
+    if watch.get("kind") == "github_issue_authority":
+        return fetch_github_issue_authority_snapshot(
+            source["issue_api_url"], source["comments_api_url"]
+        )
     if watch.get("kind") == "zenodo_challenge":
         return fetch_zenodo_challenge_snapshot(
             source["zenodo_api_url"], source["challenge_page_url"]
@@ -3570,6 +3742,7 @@ def evaluate_config(
         "aurora.source_watch.v19",
         "aurora.source_watch.v20",
         "aurora.source_watch.v21",
+        "aurora.source_watch.v22",
     }:
         source_triggered = any(
             item["fresh_source_reaudit_triggered"] for item in results

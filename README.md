@@ -3,193 +3,215 @@
 [![Research contract and site quality](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml/badge.svg)](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml)
 [![Pages](https://github.com/gohyunsu/aneurysm/actions/workflows/pages/pages-build-deployment/badge.svg)](https://gohyunsu.github.io/aneurysm/site/)
 
-AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
-**방향성 있는 유동 구조**를 보존하는지 검증하는 ISBI 2027 연구 프로젝트입니다.
-공개 저장소에는 코드·평가 계약·선행연구 감사·프로젝트 사이트만 두고, 원고와
-미공개 결과는 별도 private 저장소에서 관리합니다.
+AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
+**방향성 있는 유동 구조를 얼마나 충실하게 보존하는지** 연구하는 ISBI 2027
+프로젝트입니다. 공개 저장소에는 코드·평가 계약·선행연구 감사·프로젝트 사이트를,
+원고와 미공개 결과는 별도 private 저장소에 둡니다.
 
-> **현재 판정 · 2026-08-13:** active paper identity는 없습니다. 폐쇄된
-> steady response-fidelity P0 v3는 `execution-incomplete · 0/12 evaluated`이며
-> 같은 계약을 다시 실행하지 않습니다. 다음 후보인 transient
-> structure-faithful WSS는 **30.0/40 inactive**입니다. 현재 열린 것은 이미
-> 조사한 case 1의 두 phase만 재사용하는 D0 reader/extractor development뿐입니다.
-> D0 v1 job `116160.ECE-util1`은 compute-node network 차단으로 VTP를 얻기 전에
-> execution-incomplete로 끝났습니다. Final repair 2/2인 D0 v2 job
-> `116165.ECE-util1`은 exact private stage·PBS network 0·GPU 0으로 exit 0
-> 완료했고 raw stage는 삭제됐습니다. 라이선스 충돌 때문에 field-derived 상세
-> aggregate는 private provenance에만 둡니다. Scientific stability는 여전히
-> 미평가입니다. Family-disjoint P0 v1은 field 0/60 상태에서 철회했습니다.
-> 라이선스 선언 충돌뿐 아니라 maintainer가 인정하고 전체 재검토를 약속한
-> `Connection.csv` family mapping이 아직 authoritative하지 않기 때문입니다.
+> **현재 판정 · 2026-08-14:** active paper identity는 없습니다. AneuG-Flow를
+> 조건부 주 데이터 후보로, 2015 Aneurysm CFD Challenge를 같은 해부학에서
+> solver마다 생기는 구조 변동의 보조 기준선으로 재배치했습니다. AneuX는 실제
+> 형상의 morphology/OOD 감사에만 쓰고, Aneumo는 family mapping과 licence가
+> 해결될 때까지 필수 의존성에서 제외합니다. 새 질문은
+> **reference-relative transient WSS structure fidelity**이며 **31.0/40 inactive**입니다.
+> 아직 AneuG 생성 계보가 확인되지 않아 730 case를 730 독립 환자로 세지 않습니다.
+> 새 G0는 source/lineage와 Challenge archive schema만 검증하며 AneuG field·mesh,
+> Challenge member field, model, GPU와 outer test를 열지 않습니다. 다만 기존
+> 탐색 범위 밖의 데이터 트리를 다시 감사해 AneuG geometry 14,712개 디렉터리
+> 중 14,710개 complete bundle과 BenchAnXplore 105×80 transient velocity 자산이
+> 실제로 확보되어 있음을 확인했습니다. 데이터 부재가 아니라 **headline WSS
+> target과 독립 단위의 미확인**이 현재 병목입니다.
 
 ## 현재 상태
 
 | 항목 | 상태 | 해석 |
 |---|---|---|
-| 목표 | IEEE ISBI 2027 | four technical pages, single-blind |
-| active 연구 주제 | 없음 | transient 후보는 admission 32 미만 |
-| 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아님 |
-| transient 자산 | 966 complete case · 40 base family | 1,000 case가 1,000 독립 표본은 아님 |
-| D0 | v1 transport-incomplete · v2 execution complete | 상세 aggregate private · stability 미평가 · raw stage 삭제 |
-| stability P0 v1 | field 전 철회 · 0/60 | 12-family panel은 history · licence와 family mapping 모두 unresolved |
+| 목표 | IEEE ISBI 2027 | four technical pages · single-blind |
+| active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
+| 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
+| 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
+| 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
+| geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
+| 선택적 외부 비교 | Aneumo | mapping·licence 해결 전 필수 의존성 아님 |
+| fresh G0 | source-feasibility 1회 계약 | CPU/PBS · GPU 0 · scientific endpoint 아님 |
 | scientific P0 / 모델 / GPU | 미등록 / 미선택 / 0 | GNN을 포함한 어떤 모델도 current method가 아님 |
+| 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아니며 재실행 금지 |
 | 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
 
-[프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 WSS, tangent
-vector, critical point와 evidence gate를 배경지식 없이 읽을 수 있게 설명하고,
-filterable History에 과거 방향과 실패를 보존합니다.
+[프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 WSS, critical
+point, worldline, solver variability와 evidence gate를 배경지식 없이 읽을 수
+있게 설명합니다. 과거 방향과 실패는 filterable History에서 삭제하지 않습니다.
 
-## 다시 정한 연구 질문
+## 연구 질문
 
-Cartesian MSE가 낮은 transient WSS surrogate라도 source·sink·saddle과 그것이
-시간에 따라 이루는 궤적을 훼손할 수 있습니다. 그러나 critical point 자체가
-mesh triangulation, normal construction, tolerance와 작은 field perturbation에
-불안정하다면 보존해야 할 target이 존재하지 않습니다. 따라서 모델보다 먼저
-다음 질문을 검증합니다.
+Cartesian relative L2가 낮은 transient WSS surrogate라도 source·sink·saddle과
+그 cardiac-cycle worldline을 훼손할 수 있습니다. 그러나 CFD reference 자체도
+solver, boundary condition, mesh와 numerical scheme에 따라 달라집니다. 그래서
+raw structure error만 보고하지 않고 다음 질문을 묻습니다.
 
-> Aneumo aneurysm surface의 transient WSS에서 signed critical structure가
-> 합리적인 discretization과 bounded perturbation 아래 안정적인가? 안정적이라면
-> compute-와 vector-field-error가 맞춰진 strong surrogate들이 그 구조를 서로
-> 다르게 훼손하는가?
+> Field error와 compute가 비슷한 learned surrogate가 만드는 signed critical-
+> structure/worldline error는, 같은 aneurysm anatomy를 서로 다른 CFD pipeline이
+> 계산할 때 생기는 structural variability보다 큰가?
 
-첫 질문이 실패하면 방향을 닫습니다. 둘째 질문에서 실제 failure mechanism이
-관측된 뒤에만 최소 representation/objective change를 설계합니다.
+이것을 **reference-relative structural fidelity**라고 부릅니다. 이름 자체는
+novelty가 아닙니다. 아래 세 증거가 모두 있어야 논문 정체성이 생깁니다.
+
+1. AneuG transient WSS의 critical structure가 phase, mesh, tolerance와 bounded
+   perturbation에서 안정적이다.
+2. Field-error/compute-matched strong baseline의 추가 구조 오차가 2015 Challenge의
+   within-anatomy inter-solver 구조 변동보다 크다.
+3. 관측된 failure와 직접 연결된 최소 변경이 field accuracy를 해치지 않으면서
+   untouched lineage-disjoint unit에서 excess structural error를 줄인다.
+
+## 데이터 역할과 기각 경계
+
+### AneuG-Flow · 조건부 주 데이터
+
+공식 릴리스는 14,000 steady case와 730 transient case, surface mesh, velocity,
+pressure와 vector WSS를 보고합니다. 공통 node 수/connectivity는 phase tracking을
+쉽게 하지만 등록 좌표를 암기하거나 관련 생성 shape가 split을 넘는 위험도 만듭니다.
+공식 baseline이 registered WSS relative L2 4.67%를 이미 보고하므로 “GNN으로 WSS를
+예측했다”는 contribution이 될 수 없습니다.
+
+- 730 case ≠ 730 patient
+- random/prefix/timestep split 금지
+- 공식 parent/latent lineage를 우선 사용
+- lineage가 없으면 WSS를 읽기 전에 geometry-only near-duplicate cluster를 고정하고,
+  이를 환자 계보가 아닌 conservative surrogate grouping으로 명시
+
+초기 bounded inventory는 legacy project root만 보았기 때문에 과거 코드·config·
+execution record 외의 payload를 확인하지 못했습니다. 이후 별도 data tree를
+재감사해 AneuG geometry archive와 extraction을 확인했습니다. Inventory에는
+14,712개 geometry directory가 있으나 `shape.obj`/checkpoint/flow-split 3종이 모두
+있는 bundle은 14,710개입니다. 이 tree에는 headline에 필요한 transient WSS target이
+확인되지 않았으므로 geometry 확보를 transient data 확보로 바꾸어 말하지 않습니다.
+
+### BenchAnXplore · 즉시 실행 가능한 engineering control
+
+검증된 coarse release에는 105 HDF5/XDMF pair와 case당 80개 velocity frame이
+있습니다. 과거 geometry-held-out audit에서 train-only POD rank 17/25가 fixed
+Fourier보다 국소 bulge dynamics를 훨씬 잘 보존했습니다. 따라서 POD cycle head의
+설계 근거와 transient mesh pipeline 검증에는 유용합니다. 그러나 audited XDMF에는
+직접 WSS/pressure가 없고 105 case 모두 representation selection에 이미 사용됐으며,
+semi-idealized common parent를 공유합니다. 단독 headline/untouched confirmation으로
+승격하지 않고 engineering benchmark로 사용합니다.
+
+### 2015 Aneurysm CFD Challenge · solver-variability floor
+
+공식 Figshare v2는 CC BY 4.0이며 동일한 다섯 MCA aneurysm anatomy에 여러 팀의
+WSS surface를 제공합니다. 28 submission/26 team을 28 patient로 세지 않습니다.
+Anatomy가 최상위 독립 단위이고 solver submission은 anatomy 안에 nested됩니다.
+학습 cohort나 population outer test가 아니라 다음 calibration에만 씁니다.
+
+```text
+excess structural error
+  = surrogate-to-reference discrepancy
+    − within-anatomy inter-solver discrepancy
+```
+
+실제 estimator는 mesh correspondence·normalization·available WSS representation을
+감사한 뒤에만 고정합니다. 다른 surface의 오차를 단순 subtraction/ratio로 합치는
+것은 허용하지 않습니다.
+
+### AneuX와 Aneumo · 엄격한 보조 역할
+
+AneuX는 750 aneurysm dome과 668 vessel tree를 제공하지만 WSS/transient CFD가
+없습니다. 실제 morphology support와 representation stability만 감사하며 WSS
+성능이나 임상 validation으로 부르지 않습니다. Aneumo는 확보한 이력이 있지만
+공식 family mapping이 authoritative하지 않고 HF/GitHub licence가 충돌합니다.
+철회된 panel은 current panel activation 영구 금지이며, 해결 뒤에도 optional
+comparison만 새 version으로 설계합니다.
 
 ## novelty 경계
 
-구성요소를 조합해 이름을 붙이는 것은 contribution이 아닙니다.
+다음은 direct prior, strong control 또는 protocol hygiene이지 contribution이
+아닙니다.
 
-- [Hodge Spectral Duality](https://arxiv.org/abs/2605.13834)는 discrete form,
-  Hodge decomposition과 topology-preserving mesh operator를 이미 다룹니다.
-- [SE(3)-equivariant artery-wall network](https://arxiv.org/abs/2212.05023),
-  [RHSIA](https://arxiv.org/abs/2601.19876)와
-  [aneurysm GNN](https://doi.org/10.1038/s41746-026-02404-z)은 directional 또는
-  transient WSS surrogation을 이미 다룹니다.
-- [Critical-point-trajectory compression](https://arxiv.org/abs/2510.25143)과
-  [FaCTz](https://arxiv.org/abs/2608.10586)은 critical-point/trajectory 보존을
-  직접 점유합니다.
-- 359-lesion aneurysm 연구는 phase별 WSS critical point를 추출하고 cardiac
-  cycle에서 추적했습니다.
+- Graph U-Net, MeshGraphNet, SE(3)-equivariant GNN과 graph Transformer
+- edge-integrated 1-form, Hodge/DEC decomposition과 tangent projection
+- periodic temporal decoder, critical-point tracking와 topology/worldline loss
+- family-disjoint split, train-only normalization과 validation-only selection
+- CFD pipeline variability가 존재한다는 사실
 
-따라서 GNN, equivariance, edge 1-form, Hodge block, temporal decoder,
-critical-point tracking과 topology loss는 novelty가 아닙니다. 남을 수 있는
-contribution은 모두 결과에 의존합니다.
-
-1. **Target audit:** aneurysm transient WSS에서 구조적 endpoint가 실제로
-   안정적인지 공개하는 재현 가능한 평가 계약.
-2. **Matched failure evidence:** field error와 compute가 같은 strong baseline도
-   robust signed structure/worldline fidelity에서 갈릴 수 있다는 application
-   evidence.
-3. **Mechanism-linked correction:** 관측된 실패에 필요한 최소 변경이 field
-   accuracy를 해치지 않으면서 구조 endpoint를 개선했다는 family-level 증거.
-
-이 세 항목 중 하나라도 없으면 ISBI paper identity를 활성화하지 않습니다.
-
-## 확보한 Aneumo transient 자산
-
-고정된 Hugging Face revision의 case 1–1000 archive directory를 bounded range로
-전수 감사했습니다.
-
-- 966 case: `4.01–5.00` complete cardiac cycle
-- 34 case: incomplete 또는 alternate sequence
-- 961 complete case: official canonical wall filename
-- 40/40 base family: complete case가 최소 하나 존재
-- 선택한 wall file 4개: point/cell 3-component WSS 확인
-- case 1의 두 phase: point/connectivity 동일, WSS는 시간에 따라 변화
-
-관찰된 polygon은 4–9 vertices라 triangulation이 필요합니다. WSS unit,
-release-wide tangency와 critical-structure stability는 아직 검증되지 않았습니다.
-Hugging Face의 `CC BY-NC-ND 4.0` tag와 GitHub datasheet의 `CC BY 4.0` 문구가
-충돌하므로, 저자 확인 전에는 더 엄격한 noncommercial·nonredistribution 경계를
-적용합니다. 법률적 결론이나 raw/derived field 재배포는 하지 않습니다.
-
-또한 maintainer는 공식 issue에서 `Connection.csv` family mapping 오류를
-인정하고 전체 표 재검토를 약속했습니다. 최신 main의 partial correction 뒤에도
-case 2158은 owner 설명과 불일치합니다. 이 case는 transient 1--1000 밖이지만,
-앞 1,000 row가 검증됐다는 증거는 아닙니다. 따라서 현재 40-family 수치는 release
-metadata 기술이며 confirmatory inference unit로 승인되지 않았습니다.
+남을 수 있는 contribution은 **AneuG learned surrogate의 field-matched 구조
+failure를 실제-anatomy solver floor에 상대화하고, 그 excess만 겨냥한 최소 correction을
+lineage-disjoint하게 확인하는 application evidence**입니다. Critical-point 또는
+worldline이 불안정하거나 matched failure가 없으면 방향을 닫습니다.
 
 ## Evidence ladder
 
 ```text
-D0 · known-member reader/extractor development
-  ├─ v1: compute-node network unreachable · VTP/read/extractor 0
-  └─ v2: exact ephemeral stage · exit 0 · raw stage 삭제 · 상세 aggregate private
-      └─ 다음 권한: 별도 prospective method-free P0 등록만
-P0 v1 · 12-family target stability · withdrawn before field access / 0 of 60
-  └─ current panel activation 영구 금지
-successor P0 · unregistered
-  └─ authoritative family mapping + licence clarification 후 새 panel 등록
-  └─ pass → matched baseline screen 등록만 허용
-P1 · compute/field-error-matched structural failure
-  └─ pass → bounded validation-only development
-fresh re-entry · new seed 또는 disjoint split
-  └─ pass → untouched family-level confirmation
-ISBI claim activation
+G0 · AneuG release/lineage + 2015 Challenge archive source feasibility
+  └─ complete → human rescore and independent-unit ruling only
+      └─ admitted → geometry-only leakage/near-duplicate audit
+          └─ stable split → method-free structure-stability P0
+              └─ stable target → matched baseline-failure P1
+                  └─ excess error above solver floor
+                      → bounded validation-only minimal correction
+                          → fresh lineage-disjoint confirmation
+                              → ISBI claim activation
 ```
 
-D0는 scientific result가 아닙니다. 최대 두 번의 bounded repair만 허용하며,
-각 repair는 VTK encoding, ZIP range extraction 또는 deterministic numerical
-implementation defect 하나로 제한됩니다. Case·phase 변경, array 삭제,
-threshold 사후 변경과 model training은 금지합니다. 첫 synthetic-fixture 수정이
-repair 1/2를, compute-node egress를 exact private staging으로 바꾸는 transport
-수정이 repair 2/2를 소모합니다. V2 결과와 관계없이 추가 D0 수리·재제출은 없습니다.
-V2는 완료됐고 scientific stability threshold를 평가하지 않았으므로 논문 결과가
-아닙니다. P0 v1은 새 family/phase를 읽기 전에 공개·고정했지만, 그 후 확인한
-공식 mapping 오류와 미완료 full-review 약속 때문에 field 0/60에서 철회했습니다.
-이 panel은 나중에도 활성화하지 않습니다. Authoritative corrected mapping과
-상충하는 licence 문구가 모두 정리된 뒤 successor를 새로 등록해야 합니다.
+G0는 과거 AneuG surface-vector job을 수리하거나 재실행하지 않습니다. AneuG
+field/mesh payload를 다운로드하지 않고 release tree에서 case coverage와 explicit
+lineage manifest 존재 여부만 기록합니다. 2015 Challenge WSS archive는 exact
+size/MD5와 safe member directory만 확인하며 member extraction이나 field-value read를
+하지 않습니다. Pass, fail, execution-incomplete 어느 경우든 동일 계약은 다시
+실행하지 않습니다.
 
-## 미래 아키텍처의 최소 조건
+## 조건부 architecture와 평가
 
-P0/P1 전에는 아키텍처를 선택하지 않습니다. 나중에 failure가 관측된다면 비교
-단위는 동일 backbone·parameter·update·field error입니다.
+Active architecture는 아직 없습니다. 다만 자산 감사를 반영해 **post-admission
+implementation scaffold**는 SE(3)-equivariant multi-resolution MeshGraphNet,
+train-only POD full-cycle head와 deterministic tangent projection으로 고정했습니다.
+이는 성능 중심의 구현 기본값이지 algorithmic novelty나 실행 승인이 아닙니다.
+P0/P1에서 실제 failure가 확인된 뒤 같은 parameter/update/field-error 조건으로
+다음을 비교합니다.
 
-- mandatory controls: Cartesian output, tangent-projected output,
-  SE(3)-equivariant mesh model, Hodge/discrete-form control
-- candidate change: oriented edge-integral output과 명시적 tangent reconstruction
-- optional objective: stable non-degenerate zero에서만 margin-aware local degree
-  control
-- primary endpoints: signed critical-point precision/recall, index error,
-  trajectory distance, birth/death event F1
-- safeguard: vector field error non-inferiority
+- controls: official Graph U-Net, Cartesian output, tangent-projected output,
+  MeshGraphNet/equivariant mesh model, Hodge/discrete-form model
+- minimal candidate: oriented edge-integral output과 deterministic tangent
+  reconstruction; 추가 loss는 stable non-degenerate structure에만 적용
+- field safeguard: vector relative L2와 tangency non-inferiority
+- structural endpoints: signed critical-point precision/recall, index error,
+  worldline distance와 birth/death event F1
+- reference-relative endpoint: within-anatomy solver floor를 초과하는 structural
+  error와 그 감소량
 
-Hodge나 edge 1-form이 자동으로 zero 또는 worldline을 보존한다고 주장하지
-않습니다. 열린 surface의 boundary condition과 Poincaré–Hopf bookkeeping도
-별도로 정의해야 합니다.
+Edge 1-form이나 Hodge block이 자동으로 zero/worldline을 보존한다고 주장하지
+않습니다. Open surface boundary와 Poincaré–Hopf bookkeeping도 별도 control입니다.
 
-## 논문·figure 원칙
+## 논문·table·figure 원칙
 
-Evidence가 활성화될 경우에만 원고를 채웁니다. 한 main table은 field safeguard와
-구조 endpoint를 함께 보여주고, 한 ablation table은 관측된 failure mechanism만
-분리합니다. Figure는 reference/baseline/candidate WSS, signed critical point와
-track을 같은 mesh·phase·camera·reference-derived colour range에서 표시합니다.
-Rupture risk, patient-specific physiology 또는 clinical utility로 과장하지
-않습니다.
+Evidence가 활성화될 때만 원고를 채웁니다. Main table은 field safeguard, raw
+structure metric, solver-relative excess를 같은 열 체계로 제시합니다. Ablation은
+관측된 failure mechanism만 분리합니다. Figure는 동일 camera·mesh·phase·reference-
+derived colour range에서 reference CFD, matched baseline, candidate의 WSS,
+signed critical point와 track을 보여주고, Challenge anatomy에서는 solver 간
+분산을 함께 표시합니다. Rupture risk, patient-specific physiology와 clinical
+utility로 과장하지 않습니다.
 
 ## 저장소와 검증
 
 ```text
 configs/      machine-readable prospective contracts
-src/aurora/   fail-closed readers, evaluators and validators
-experiments/  bounded development/scientific runners
+src/aurora/   fail-closed source readers, evaluators and validators
 cluster/      PBS wrappers; execution authority는 별도 계약에서만 발생
 tests/        synthetic/adversarial regression
 docs/         current rationale, literature and dated audits
-site/         explanatory project site and filterable history
-results/      public aggregate outcome only
+site/         explanatory site and filterable history
+results/      public aggregate outcomes only
 ```
 
 주요 문서:
 
-- [현재 재판정](docs/aneumo-transient-structure-reentry-2026-08-13.md)
-- [transient release 감사](docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md)
-- [D0 계약](configs/aneumo_transient_vtp_d0.json)
-- [최종 D0 v2 계약](configs/aneumo_transient_vtp_d0_v2.json)
-- [등록된 non-executable stability P0 v1](configs/aneumo_transient_structure_stability_p0_v1.json)
-- [P0 설계와 license blocker](docs/aneumo-transient-structure-stability-p0-v1-2026-08-13.md)
-- [Connection.csv family-mapping integrity 감사](docs/aneumo-connection-mapping-integrity-audit-2026-08-13.md)
-- [폐쇄된 response P0 결과](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)
+- [AneuG reference-relative 재판정](docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md)
+- [introai9 확보 자산 재조정](docs/introai9-acquired-asset-reconciliation-2026-08-14.md)
+- [machine-readable 확보 자산 ledger](configs/introai9_acquired_asset_reconciliation_v1.json)
+- [fresh source-feasibility G0](configs/aneug_reference_floor_g0_v1.json)
+- [과거 AneuG P0 no-verdict](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md)
+- [Aneumo source authority watch](docs/aneumo-source-authority-watch-v22-2026-08-14.md)
+- [machine-readable source-watch v22](configs/source_watch_v22.json)
 - [선행연구 계보](docs/literature-lineage.md)
 - [상세 변경 이력](CHANGELOG.md)
 
@@ -202,5 +224,5 @@ node --check site/assets/research-data.js
 
 과학 실행은 `introai9` PBS에서만 수행하고 login-node GPU를 사용하지 않습니다.
 `junjinyong`에는 접근·조회·전송·제출·모니터링하지 않습니다. Confirmatory
-threshold, seed, outer test와 one-shot 결과는 사후 repair하지 않습니다. 과거
-방향, 실패, superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다.
+threshold, seed와 outer test는 사후 repair하지 않습니다. 과거 실패와
+superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다.

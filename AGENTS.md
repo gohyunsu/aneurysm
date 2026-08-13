@@ -1,5 +1,73 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 acquired-asset reconciliation beyond the legacy root:** The
+> prior “no confirmed AneuG payload” statement was scoped to one legacy
+> project tree and must not be generalized account-wide. A separate read-only
+> data-tree audit confirms an integrity-checked AneuG geometry archive with
+> 14,712 directories and 14,710 complete `shape.obj`/checkpoint/flow-split
+> bundles; `stable_5954` and `stable_16384` lack `shape.obj`. It does **not**
+> confirm the transient WSS target. BenchAnXplore is fully materialized as 105
+> HDF5/XDMF pairs × 80 velocity frames; its audited XDMF exposes coordinates,
+> tetrahedra, velocity and wall mask, not direct WSS/pressure. All 105 cases
+> already informed historical POD representation selection, so use it as an
+> engineering/temporal-head control, not fresh confirmation.
+>
+> AneuX metadata/models, CMHA 99 aneurysm-patient + 44 control extraction,
+> a 24-case Aneurisk image/geometry mirror, Aneumo code/cache history and the
+> IntrA repository are also materialized to the stated extents. Never merge
+> acquisition with scientific admissibility or count generated directories as
+> patients. The headline remains AneuG reference-relative transient WSS after
+> source/lineage/target admission. The post-admission implementation scaffold
+> is SE(3)-equivariant multi-resolution MeshGraphNet + train-only POD cycle
+> head + deterministic tangent projection; this is a performance scaffold,
+> not algorithmic novelty or current execution authority. G0 remains the sole
+> next run. This audit newly read no HDF5 field array, extracted no archive,
+> submitted no PBS job and used no GPU. Broad-scan SSH resets are transport
+> observations, never evidence of asset absence. Never access/query/transfer/
+> submit/monitor `junjinyong`.
+
+> **2026-08-14 AneuG reference-relative structure reappraisal and G0:**
+> AneuG-Flow is the conditional primary candidate, not an active training
+> split. Exact dataset/code remain `9dd4180…`/`4a090a0…`; the release
+> reports 730 transient cases, but generator parent/latent lineage is
+> unverified and 730 cases must never be counted as patients. The 2015
+> Challenge is an auxiliary within-anatomy inter-solver structural-variability
+> floor with five independent anatomies; its 28 submissions are nested solver
+> calculations. AneuX is geometry-only morphology/OOD support. Aneumo is
+> optional only after mapping/licence resolution and no withdrawn panel may
+> reactivate.
+>
+> The residual question is whether field-error/compute-matched learned
+> surrogates add signed critical-point/worldline error beyond solver
+> disagreement. CFD variability, Graph U-Net, GNN, equivariance, edge 1-form,
+> Hodge/DEC, temporal decoding, tracking and topology loss are direct prior or
+> control—not novelty. The fresh score is **31.0/40 inactive** with axes
+> 4.5/4.0/2.5/4.0/3.0/5.0/5.0/3.0. Historical AneuG 32.0 is not repaired.
+>
+> Fresh `aneug_reference_floor_g0_v1` asks a materially different source
+> question and never repairs/reruns job `115645`. It inventories the AneuG
+> transient tree without field/mesh payload, reports explicit lineage paths
+> without inferring independence, verifies the exact Figshare WSS archive and
+> safe tar directory without member extraction, and verifies AneuX metadata
+> only. Exactly one introai9 CPU/PBS attempt is allowed: CPU 4, 8 GB, GPU 0.
+> Any outcome closes without repair/rerun; complete permits human rescoring
+> only. Scientific P0/P1, architecture, field access, GPU, test and claim
+> remain 0. Never use login-node GPU. Never access/query/transfer/submit/
+> monitor `junjinyong`.
+
+
+> **2026-08-14 source-authority watch v22:** Administrator-confirmed introai9
+> recovery does not resolve scientific source authority. V22 extends v21 to 35
+> exact states by freezing official Aneumo issue 4, all six comment IDs, owner
+> comments, timestamps and body hashes. A live refresh matches 35/35 and opens
+> no review signal. This means no new correction exists, not that the mapping
+> is authoritative. Any issue/repository/licence change requests a fresh human
+> source audit only; it cannot resolve the licence conflict, reactivate
+> withdrawn P0 v1, access a field, select a model or authorize GPU. Successor
+> P0 remains unregistered; transient WSS remains 30.0/40 inactive. Future
+> scientific execution is introai9 PBS-only/no login-node GPU. Never access,
+> query, transfer to, submit on or monitor junjinyong.
+
 > **2026-08-13 mapping-integrity withdrawal:** Official Aneumo issue 4 owner
 > comment `5070184242` says cases 2158/2159 belong to family 115 rather than
 > 114; later comment `5070473308` promises a complete mapping review. Current

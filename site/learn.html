@@ -143,6 +143,17 @@
             confirmatory inference에 승인된 ground truth가 아닙니다.
           </p>
           <p>
+            이 상태를 놓치지 않기 위해 <b>source-watch v22</b>가 공식 issue 4의
+            상태, 여섯 comment ID, owner comment, 수정 시각과 comment-body hash를
+            고정했습니다. 2026-08-14 live refresh는 35/35 상태가 모두 같았습니다.
+            이는 mapping 문제가 해결됐다는 뜻이 아니라, 새 authoritative correction이
+            아직 없다는 뜻입니다. 댓글이나 repository head가 바뀌어도 자동으로
+            corrected mapping이라고 해석하지 않으며, 사람의 source re-audit만
+            요청합니다. Withdrawn P0를 다시 켜거나 field download, model, GPU를
+            여는 경로는 없습니다.
+            <a href="../docs/aneumo-source-authority-watch-v22-2026-08-14.md">동결값·감지 규칙·재진입 조건 읽기 ↗</a>
+          </p>
+          <p>
             Official benchmark도 그대로 strong baseline이 되지 않습니다. 소스의
             “geometry split”은 열 family 모두를 train과 test에 겹치게 하고, loader는
             WSS의 세 벡터 성분을 <code>sqrt(x²+y²+z²)</code> magnitude 하나로 바꿉니다.
@@ -449,29 +460,145 @@
           </p>
           <a href="../docs/aneux-reliability-direct-prior-reappraisal-2026-08-12.md">근거 문헌·six-way score·구현 불일치 전체 읽기 ↗</a>
         </div>
+        <div class="answer-card" id="reference-relative-wss">
+          <span>AneuG-Flow와 solver variability를 처음부터 이해하기</span>
+          <strong>정답 CFD도 하나의 계산 결과입니다. Surrogate 오차와 reference 자체의 불확실성을 분리해야 합니다.</strong>
+          <p>
+            혈액은 혈관 벽을 따라 흐르면서 벽을 미는 마찰력을 만듭니다. 이를
+            <b>wall shear stress(WSS)</b>라고 합니다. WSS는 크기만 있는 숫자가 아니라
+            벽의 접평면을 따라 어느 방향으로 미는지를 나타내는 vector입니다. 심장
+            박동 한 주기 동안 vector가 변하므로 transient WSS는 각 surface point와
+            phase마다 세 성분을 갖는 시간변화 field입니다.
+          </p>
+          <p>
+            <b>Critical point</b>는 tangent WSS가 0에 가까워지는 위치입니다. 주변 arrow가
+            퍼져 나오면 source, 모이면 sink, 두 방향은 들어오고 두 방향은 나가면
+            saddle로 분류할 수 있습니다. 각 점에는 회전 방향을 요약하는 signed index가
+            있습니다. Phase가 바뀔 때 같은 구조를 연결하면 <b>worldline</b>이 되고,
+            새 점이 생기거나 사라지는 birth/death event도 기록할 수 있습니다. 이런
+            구조는 평균 vector L2가 작아도 위치·부호·연결이 틀릴 수 있습니다.
+          </p>
+          <p>
+            그렇다고 모든 차이를 neural network 탓으로 돌릴 수는 없습니다.
+            Computational fluid dynamics(CFD)는 geometry, inflow, outlet condition,
+            mesh, blood model, numerical solver와 convergence rule을 정해 Navier–Stokes
+            방정식을 근사합니다. 같은 aneurysm을 여러 팀이 계산해도 WSS가 완전히 같지
+            않을 수 있습니다. 이 차이를 <b>inter-solver variability</b>라고 부릅니다.
+            2015 Aneurysm CFD Challenge는 다섯 MCA aneurysm anatomy를 여러 팀이
+            계산해 제출한 자료라 이 variability를 관찰할 수 있습니다.
+          </p>
+          <p>
+            AURORA의 질문은 단순히 “예측과 reference가 얼마나 다른가?”가 아닙니다.
+            같은 anatomy의 CFD pipelines 사이에도 생기는 차이를 먼저 기준으로 두고,
+            learned surrogate가 그보다 더 큰 구조 오차를 추가하는지 묻습니다. 이를
+            <b>reference-relative structural fidelity</b>라고 부릅니다. 개념적으로는
+            surrogate-to-reference discrepancy에서 within-anatomy solver disagreement를
+            뺀 excess를 보지만, 두 surface의 mesh와 normalization이 다르면 단순한
+            subtraction은 잘못될 수 있습니다. 그래서 exact estimator는 Challenge
+            archive schema와 correspondence를 감사한 뒤에만 고정합니다.
+          </p>
+          <p>
+            <b>AneuG-Flow</b>는 14,000 steady case와 730 pulsatile case를 보고하고,
+            surface mesh, velocity, pressure와 vector WSS를 제공합니다. Processed meshes가
+            공통 node 수와 connectivity를 사용해 같은 vertex를 phase마다 따라가기 쉽다는
+            장점이 있습니다. 반대로 이 정렬이 model에 쉬운 좌표 shortcut을 주거나,
+            같은 생성 parent에서 나온 비슷한 shape가 train과 test에 나뉘는 leakage를
+            만들 수 있습니다. 730 case는 730 환자가 아닙니다.
+          </p>
+          <p>
+            중요한 local correction도 있습니다. 초기 inventory는 legacy project root만
+            보았기 때문에 AneuG payload를 찾지 못했지만, AAAI 밖의 전용 data tree에는
+            integrity-checked geometry archive가 있습니다. 14,712 directory 중
+            `shape.obj`, checkpoint와 flow-split이 모두 있는 것은 14,710개이며 두
+            directory는 `shape.obj`가 없습니다. 그러나 이 tree에서 transient WSS target은
+            확인되지 않았습니다. 따라서 <b>geometry 확보</b>와 <b>headline field target
+            확보</b>를 같은 상태로 표기하지 않습니다.
+          </p>
+          <p>
+            따라서 split의 최상위 단위는 timestep이나 case name이 아닙니다. 공식
+            generator parent/latent lineage가 있으면 그것을 사용합니다. 없다면 WSS를
+            읽거나 model을 학습하기 전에 geometry만으로 near-duplicate cluster를
+            만들고 고정합니다. 이 grouping은 실제 환자 계보가 아니라 leakage를 줄이기
+            위한 보수적 근사라고 명시해야 합니다. Cluster 기준과 threshold를 결과를
+            본 뒤 바꾸지 않습니다.
+          </p>
+          <p>
+            <b>2015 Challenge의 28 submissions</b>도 28 환자가 아닙니다. 독립적인
+            anatomy는 다섯 개이고, solver submission은 각 anatomy 안에 nested된 반복
+            계산입니다. 이 자료는 training cohort나 population outer test가 아니라
+            solver uncertainty floor를 추정하는 보조 control입니다. 다섯 anatomy만으로
+            임상 일반화나 환자 수준 성능을 주장하지 않습니다.
+          </p>
+          <p>
+            <b>AneuX</b>는 750 aneurysm dome과 668 vessel tree를 제공하므로 synthetic
+            AneuG geometry가 실제 morphology support에서 얼마나 벗어나는지, mesh
+            resolution/cut이 representation을 얼마나 흔드는지 볼 수 있습니다. 하지만
+            WSS와 transient CFD가 없으므로 field performance나 worldline accuracy를
+            검증할 수 없습니다. <b>Aneumo</b>는 과거 payload 감사 이력이 있지만 family
+            mapping과 licence가 해결되기 전에는 논문의 필수 데이터가 아닙니다.
+          </p>
+          <p>
+            현재 실행 단계는 scientific P0가 아니라 <b>source G0</b>입니다. Exact AneuG
+            repository tree에서 730 wall object와 required mesh path coverage, 명시적
+            lineage-like manifest 존재 여부만 봅니다. AneuG WSS·mesh body는 받지
+            않습니다. Challenge archive는 exact record/version/licence/file ID/size/MD5와
+            tar member name·size만 확인하고 member를 추출하지 않습니다. AneuX는 exact
+            metadata만 확인합니다. Complete여도 사람의 재점수만 허용합니다.
+          </p>
+          <p>
+            G0 뒤에도 순서는 고정입니다. 먼저 geometry leakage와 independent unit을
+            확정하고, 다음 method-free P0에서 critical point/worldline이 mesh, phase,
+            tolerance와 bounded perturbation에 안정적인지 봅니다. 그 뒤 같은 compute와
+            field error로 맞춘 Graph U-Net, Cartesian/tangent-projected model,
+            MeshGraphNet, equivariant mesh와 Hodge/DEC control을 비교합니다. Baseline의
+            excess structural error가 solver floor보다 클 때만 oriented edge-integral
+            output 같은 최소 correction을 개발합니다.
+          </p>
+          <p>
+            Post-admission 구현 scaffold는 GNN 기반입니다. SE(3)-equivariant
+            multi-resolution MeshGraphNet이 geometry를 encode하고, BenchAnXplore의
+            historical representation audit가 지지한 train-only POD head로 full cycle을
+            복원한 뒤 tangent projection을 적용합니다. 그러나 active trained model과
+            execution authority는 아직 0입니다. Edge 1-form, Hodge decomposition 또는
+            topology loss는 matched failure 뒤의 optional correction이며 각각 direct
+            prior/control입니다. 논문 contribution은
+            안정적인 target, solver-relative matched failure, field accuracy를 유지하는
+            최소 correction과 lineage-disjoint confirmation의 결합에서만 생깁니다.
+          </p>
+          <p>
+            현재 보수적 점수는 <b>31.0/40</b>입니다. Biomedical importance 4.5,
+            identifiability 4.0, residual novelty 2.5, asset 4.0, independent unit 3.0,
+            baseline 5.0, figure 5.0, schedule 3.0입니다. 과거 AneuG 32.0/40보다 낮춘
+            이유는 730 synthetic geometry에 4.5 independent-unit 점수를 준 것이
+            과도했기 때문입니다. 다섯 Challenge anatomy를 더해도 lineage 공백을
+            자동으로 보상하지 않습니다.
+          </p>
+          <a href="../docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md">dataset 역할·score·evidence ladder 전체 읽기 ↗</a>
+          <a href="../docs/introai9-acquired-asset-reconciliation-2026-08-14.md">AAAI 밖 확보 자산과 architecture 선택 읽기 ↗</a>
+          <a href="../configs/aneug_reference_floor_g0_v1.json">Fresh source G0 machine contract 읽기 ↗</a>
+        </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>
           <strong>파일의 존재, payload 감사, task 적합성, 논문 split 배정은 네 개의 독립 상태입니다.</strong>
           <p>
-            <b>Aneumo</b>는 64 case·512 member cache와 family-disjoint 40/12/12
-            split까지 검증됐지만 V1e absolute learnability가 실패했습니다.
-            <b>BenchAnXplore</b> 105×80 transient field는 감사·추출됐고 POD가
-            representation-eligible였지만 모든 case가 discovery에 사용돼 fresh
-            confirmation이 아닙니다. <b>CMHA</b> 공식 archive와 99 patient/105
-            lesion 표는 확인했지만 exact lesion-level image–mesh linkage가 5/9에서
-            실패했고 hemodynamic increment도 지지되지 않았습니다.
+            AAAI 밖 data tree를 다시 확인한 결과 <b>AneuG</b> geometry archive는
+            14,712 directory/14,710 complete bundle로 존재하지만 transient WSS target은
+            확인되지 않았습니다. <b>BenchAnXplore</b>는 verified 105 HDF5/XDMF pair와
+            80-frame velocity를 갖지만 direct WSS는 없고 모든 case가 historical POD
+            discovery에 사용돼 fresh confirmation이 아닙니다. <b>CMHA</b>는 99
+            aneurysm-patient와 44 control이 추출됐지만 exact lesion-level image–mesh
+            linkage와 nodewise transient WSS는 확인되지 않았습니다.
           </p>
           <p>
-            <b>AneuX</b> metadata·geometry archive·extracted copy,
-            <b>AneuG-Flow</b> geometry/release lineage, <b>Aneurisk</b> repository와
-            sample 확인도 기록되어 있습니다. 다만 이들의 최신 exact P0는 scientific
-            check 전에 종료된 no-verdict입니다. 이는 dataset failure가 아니며,
-            기존 job을 고쳐 다시 돌릴 권한도 아닙니다. 새 연구 질문은 확보 자산이
-            고유하게 제공하는 구조를 활용해 fresh version으로 등록해야 합니다.
+            <b>AneuX</b> metadata/model archive와 extraction, 24-case <b>Aneurisk</b>
+            image/geometry mirror, <b>Aneumo</b> code/cache history와 <b>IntrA</b> repository도
+            있습니다. AneuX에는 WSS가 없고, Aneurisk mirror는 별도의 76-case CFD release가
+            아니며, IntrA mesh payload는 audited tree에서 찾지 못했습니다. 각 자산의
+            존재를 확인한 것과 논문 train/test에 배정하는 것은 별개입니다.
           </p>
           <p>
-            따라서 현재 올바른 표기는 <b>historical holding records 6, current
-            introai9 listing incomplete, active train/validation/test 0/0/0</b>입니다.
+            따라서 현재 올바른 표기는 <b>account-level asset reconciliation complete,
+            AneuG transient target unresolved, active train/validation/test 0/0/0</b>입니다.
             각 자산은 performance failure, linkage failure, execution-incomplete,
             task mismatch, controlled access 또는 discovery reuse 중 정확한 이유를
             따로 표시합니다.
@@ -3640,8 +3767,8 @@
             <article><span>P0 · EXACT ORACLE</span><h3>Controlled PDE</h3><p>정답 conditional mean·covariance를 계산할 수 있어, partial/missing mask의 coherence와 coverage pipeline을 먼저 검증합니다.</p><small>method sanity · 통과 자체는 novelty 아님</small></article>
             <article><span>P1 · NONLINEAR</span><h3>Nonlinear PDE</h3><p>ID partial/missing calibration, supplied full-BC response shift, hidden-law OOD detection, parameter shift를 분리해 평가합니다.</p><small>coherence ≠ OOD correctness</small></article>
             <article><span>P0 · SENSITIVITY</span><h3>Aneumo</h3><p>동일·유사 geometry에 여러 steady BC를 적용한 자료로, BC가 바뀌면 wall field가 얼마나 달라지는지 먼저 학습합니다.</p><small>synthetic CFD · clinical evidence 아님</small></article>
-            <article><span>P1 · SCALE</span><h3>AneuG-Flow</h3><p>대규모 synthetic geometry를 geometry encoder pretraining과 분포 stress test에 사용합니다.</p><small>synthetic transfer 확인 필요</small></article>
-            <article><span>P2 · TRANSIENT</span><h3>BenchAnXplore</h3><p>105개 semi-idealized transient CFD case로 autoregressive GNN baseline과 one-shot cycle decoder를 같은 조건에서 비교합니다.</p><small>80 frames/case · geometry-disjoint split</small></article>
+            <article><span>CONDITIONAL PRIMARY · WSS</span><h3>AneuG-Flow</h3><p>Local geometry는 14,710 complete bundle로 확보됐지만 transient vector-WSS target과 generator lineage는 아직 확인 대상입니다.</p><small>source G0 first · 730 cases ≠ patients</small></article>
+            <article><span>ACQUIRED ENGINEERING · VELOCITY</span><h3>BenchAnXplore</h3><p>105×80 transient velocity로 mesh pipeline과 train-only POD head를 검증합니다. Direct WSS와 untouched confirmation은 아닙니다.</p><small>verified archive · all-case representation discovery history</small></article>
             <article><span>SECONDARY · REAL-CFD</span><h3>CMHA</h3><p>clinical·morphology·real-CFD summary를 가진 cohort입니다. 현재 exploratory increment가 음수라 primary method와 분리합니다.</p><small>single-center · patient-grouped analysis</small></article>
             <article><span>P0-O · CLOSED HISTORY</span><h3>AneuX v1.0</h3><p>750 lesion의 동일-lesion 3-resolution × 최대 4-cut variant를 preprocessing orbit으로 감사하려 했지만 initial tabular transport에서 종료됐습니다.</p><small>no verdict · no rerun/P1 · shortlist/primary/model/GPU 0</small></article>
           </div>
@@ -3675,9 +3802,9 @@
               pass 뒤 V1e known-condition baseline만 학습 전에 고정했습니다.
               V1e는 boundary utility가 3/3 seed에서 양수였지만 absolute
               learnability 세 기준을 모두 실패해 6/9로 종료됐습니다.
-              AneuG-Flow는
-              geometry archive만 확인됐고 BC variation이 없어 paired-BC
-              evidence로 쓰지 않습니다.
+              AneuG-Flow geometry archive에는 14,712 directory와 14,710 complete
+              three-file bundle이 있지만, transient WSS target은 확인되지 않았고
+              BC variation도 paired-BC evidence로 쓰지 않습니다.
             </p>
           </div>
 

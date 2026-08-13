@@ -1,0 +1,19 @@
+#!/bin/bash
+#PBS -N aurora-ref-floor-g0-v1
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=8gb:ngpus=0
+#PBS -l walltime=01:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PUBLIC_ROOT:?AURORA_PUBLIC_ROOT is required}"
+: "${AURORA_PRIVATE_OUTPUT_DIR:?AURORA_PRIVATE_OUTPUT_DIR is required}"
+
+cd "${AURORA_PUBLIC_ROOT}"
+mkdir -p "${AURORA_PRIVATE_OUTPUT_DIR}"
+
+export PYTHONPATH="${AURORA_PUBLIC_ROOT}/src"
+python3 -m aurora.aneug_reference_floor_g0 \
+  --config configs/aneug_reference_floor_g0_v1.json \
+  --output "${AURORA_PRIVATE_OUTPUT_DIR}/result.json"

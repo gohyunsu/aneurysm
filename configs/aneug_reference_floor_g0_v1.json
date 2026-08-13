@@ -1,0 +1,134 @@
+{
+  "schema_version": "aurora.aneug_reference_floor_g0.v1",
+  "protocol_id": "aneug_release_lineage_and_challenge_reference_floor_g0_v1",
+  "status": "prospectively_registered_source_feasibility_audit",
+  "as_of": "2026-08-14",
+  "candidate": {
+    "id": "reference_relative_transient_wss_structure_fidelity",
+    "score": 31.0,
+    "maximum_score": 40.0,
+    "admission_threshold": 32.0,
+    "axis_scores": [4.5, 4.0, 2.5, 4.0, 3.0, 5.0, 5.0, 3.0],
+    "status": "inactive_pending_lineage_and_reference_floor_feasibility",
+    "primary_question": "whether_field_error_matched_surrogates_add_critical_structure_error_beyond_within_anatomy_cfd_pipeline_variability",
+    "current_residual_novelty": "reference_relative_validation_of_learned_transient_surrogates_not_discovery_of_cfd_variability_or_a_new_gnn_component",
+    "method_selected": false,
+    "architecture_selected": false,
+    "gpu_training_authorized": false,
+    "outer_test_authorized": false,
+    "submission_identity_active": false
+  },
+  "source_roles": {
+    "aneug_flow": "conditional_primary_training_validation_and_test_source_after_independence_audit",
+    "aneurysm_cfd_challenge_2015": "auxiliary_within_anatomy_inter_solver_reference_variability_floor_only",
+    "aneux": "geometry_only_real_morphology_ood_and_representation_stability_audit",
+    "aneumo": "optional_external_comparison_only_after_mapping_and_license_resolution"
+  },
+  "sources": {
+    "aneug_flow": {
+      "dataset_repository": "whding123/AneuG-Flow",
+      "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+      "dataset_license": "cc-by-sa-4.0",
+      "reported_steady_cases": 14000,
+      "reported_transient_cases": 730,
+      "reported_canonical_connectivity": true,
+      "official_code_repository": "WenHaoDing/AneuG-Flow",
+      "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+      "published_registered_wss_relative_l2_percent": 4.67,
+      "case_count_is_independent_patient_count": false,
+      "generator_parent_or_latent_lineage_verified": false
+    },
+    "aneurysm_cfd_challenge_2015": {
+      "figshare_record_id": 6383516,
+      "figshare_version": 2,
+      "doi": "10.6084/m9.figshare.6383516.v2",
+      "license": "CC BY 4.0",
+      "independent_anatomies": 5,
+      "reported_submissions": 28,
+      "reported_teams": 26,
+      "wss_archive_file_id": 11796854,
+      "wss_archive_name": "WSS_surfaces.tar.gz",
+      "wss_archive_bytes": 425372824,
+      "wss_archive_md5": "d272f7129f22fdb4a19f111f2970cf12",
+      "submission_count_is_independent_anatomy_count": false
+    },
+    "aneux": {
+      "zenodo_record_id": 6678442,
+      "record_revision": 11,
+      "version": "1.0",
+      "license": "CC BY-NC 4.0",
+      "aneurysm_domes": 750,
+      "vessel_trees": 668,
+      "contains_wss_or_transient_cfd": false
+    }
+  },
+  "introai9_inventory_before_registration": {
+    "search_root_scope": "known_AURORA_project_root_max_depth_5",
+    "historical_aneug_code_config_and_execution_records_found": true,
+    "aneug_source_payload_cache_confirmed": false,
+    "absence_outside_bounded_scope_claimed": false,
+    "field_array_read": false,
+    "scheduler_query_performed": true,
+    "gpu_accessed": false
+  },
+  "audit": {
+    "network_operations": [
+      "one_exact_github_code_commit_request",
+      "one_exact_hugging_face_dataset_info_request",
+      "bounded_paginated_transient_tree_metadata_inventory",
+      "one_exact_figshare_record_metadata_request",
+      "one_exact_wss_archive_download_and_md5_verification",
+      "tar_member_name_and_size_inventory_without_member_extraction",
+      "one_exact_zenodo_record_metadata_request"
+    ],
+    "aneug_field_payload_downloaded": false,
+    "aneug_mesh_payload_downloaded": false,
+    "challenge_archive_members_extracted_or_field_values_read": false,
+    "aneux_payload_downloaded": false,
+    "maximum_figshare_download_bytes": 425372824,
+    "maximum_hugging_face_tree_pages": 100,
+    "maximum_challenge_tar_members": 20000,
+    "timeout_seconds_per_request": 900,
+    "retry_count": 0,
+    "output": "aggregate_source_and_archive_schema_only"
+  },
+  "gate": {
+    "all_identity_checks_required": true,
+    "checks": [
+      "aneug_exact_revision_public_ungated_and_license_match",
+      "aneug_transient_tree_reports_exactly_730_wall_objects",
+      "aneug_required_mesh_and_wall_path_coverage_is_reported",
+      "explicit_parent_or_latent_lineage_manifest_presence_is_reported_without_inference",
+      "figshare_record_version_license_file_id_size_and_md5_match",
+      "wss_archive_exact_md5_and_nonempty_safe_tar_member_inventory",
+      "aneux_record_identity_license_counts_and_geometry_only_role_match",
+      "no_field_value_model_gpu_outer_test_or_clinical_claim"
+    ],
+    "pass_authorizes": "human_rescoring_and_registration_of_a_separate_geometry_lineage_or_method_free_structure_stability_audit_only",
+    "failure_action": "close_exact_g0_without_same_contract_repair_or_rerun",
+    "execution_incomplete_action": "close_exact_g0_without_same_contract_repair_or_rerun",
+    "same_contract_repair_or_rerun_allowed": false,
+    "does_not_authorize": [
+      "calling_730_cases_independent_patients",
+      "family_or_latent_disjoint_split_without_evidence",
+      "method_selection",
+      "architecture_selection",
+      "gpu_training",
+      "outer_test",
+      "paper_contribution",
+      "submission_identity"
+    ]
+  },
+  "execution": {
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 8,
+    "ngpus": 0,
+    "walltime": "01:00:00",
+    "maximum_submissions_for_exact_contract": 1,
+    "login_node_gpu_command_allowed": false
+  }
+}

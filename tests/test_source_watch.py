@@ -40,10 +40,83 @@ CONFIG_V18 = ROOT / "configs" / "source_watch_v18.json"
 CONFIG_V19 = ROOT / "configs" / "source_watch_v19.json"
 CONFIG_V20 = ROOT / "configs" / "source_watch_v20.json"
 CONFIG_V21 = ROOT / "configs" / "source_watch_v21.json"
+CONFIG_V22 = ROOT / "configs" / "source_watch_v22.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "source-watch.yml"
 
 
 class SourceWatchContractTests(unittest.TestCase):
+    def test_v22_freezes_aneumo_mapping_issue_without_scientific_authority(self) -> None:
+        config = load_config(CONFIG_V22)
+        self.assertEqual(config["schema_version"], "aurora.source_watch.v22")
+        self.assertEqual(len(config["watches"]), 35)
+        issue = config["watches"][-1]
+        self.assertEqual(
+            issue["watch_id"], "aneumo_family_mapping_issue_authority_v1"
+        )
+        self.assertEqual(issue["kind"], "github_issue_authority")
+        self.assertEqual(issue["frozen_snapshot"]["issue_number"], 4)
+        self.assertEqual(issue["frozen_snapshot"]["issue_comment_count"], 6)
+        self.assertEqual(
+            issue["frozen_snapshot"]["owner_comment_ids"],
+            [3236749321, 5070184242, 5070473308],
+        )
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["same_as_all_frozen_snapshots"])
+        self.assertFalse(result["manual_review_triggered"])
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v22_issue_change_requests_reaudit_only(self) -> None:
+        config = load_config(CONFIG_V22)
+        observations = {
+            watch["watch_id"]: copy.deepcopy(watch["frozen_snapshot"])
+            for watch in config["watches"]
+        }
+        observed = observations["aneumo_family_mapping_issue_authority_v1"]
+        observed["issue_comment_count"] = 7
+        observed["comment_ids"].append(6000000000)
+        observed["comment_body_sha256"]["5070473308"] = "f" * 64
+        result = evaluate_config(config, observations)
+        self.assertTrue(result["fresh_source_reaudit_triggered"])
+        self.assertTrue(result["manual_review_triggered"])
+        self.assertEqual(
+            result["manual_review_requests"], ["fresh_source_reaudit_only"]
+        )
+        self.assertFalse(result["automatic_download_authorized"])
+        self.assertFalse(result["p0_authorized"])
+        self.assertFalse(result["method_or_architecture_authorized"])
+        self.assertFalse(result["gpu_or_outer_test_authorized"])
+
+    def test_v22_snapshot_or_authorization_rewrite_is_rejected(self) -> None:
+        for mutation, error in (
+            ("snapshot", "aneumo_mapping_issue"),
+            ("authorization", "authorization"),
+        ):
+            payload = json.loads(CONFIG_V22.read_text(encoding="utf-8"))
+            if mutation == "snapshot":
+                payload["added_watches"][0]["frozen_snapshot"][
+                    "issue_comment_count"
+                ] = 7
+            else:
+                payload["authorization"]["automatic_p0_registration"] = True
+            with tempfile.TemporaryDirectory() as directory:
+                source = Path(directory)
+                candidate = source / "source_watch_v22.json"
+                candidate.write_text(json.dumps(payload), encoding="utf-8")
+                for version in range(1, 22):
+                    original = ROOT / "configs" / f"source_watch_v{version}.json"
+                    (source / original.name).write_text(
+                        original.read_text(encoding="utf-8"), encoding="utf-8"
+                    )
+                with self.assertRaisesRegex(SourceWatchContractError, error):
+                    load_config(candidate)
+
     def test_v21_freezes_open_clinical_table_without_imaging_or_compute_authority(self) -> None:
         config = load_config(CONFIG_V21)
         self.assertEqual(config["schema_version"], "aurora.source_watch.v21")
@@ -762,7 +835,7 @@ class SourceWatchContractTests(unittest.TestCase):
         self.assertIn('cron: "17 2 * * 1,4"', workflow)
         self.assertIn("workflow_dispatch:", workflow)
         self.assertIn("permissions:\n  contents: read", workflow)
-        self.assertIn("configs/source_watch_v21.json", workflow)
+        self.assertIn("configs/source_watch_v22.json", workflow)
         self.assertIn("--fetch --fail-on-change", workflow)
         self.assertNotIn("contents: write", workflow)
         self.assertNotIn("introai9", workflow)

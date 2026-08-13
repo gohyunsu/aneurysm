@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "audit_id": "introai9_acquired_aneurysm_assets_beyond_legacy_root_v1",
+  "as_of": "2026-08-14",
+  "status": "completed_read_only_asset_reconciliation",
+  "document": "docs/introai9-acquired-asset-reconciliation-2026-08-14.md",
+  "scope": {
+    "legacy_project_root_only": false,
+    "separate_data_tree_checked": true,
+    "legacy_workspace_checked": true,
+    "run_and_deployment_trees_checked": true,
+    "generic_dataset_and_lustre_roots_checked": true,
+    "multi_terabyte_shared_storage_recursively_scanned": false,
+    "large_home_recovery_archive_decompressed": false,
+    "private_absolute_paths_publishable": false,
+    "hdf5_field_arrays_newly_read": false,
+    "archive_extraction_performed": false,
+    "pbs_job_submitted": false,
+    "gpu_used": false,
+    "login_node_gpu_used": false,
+    "junjinyong_accessed": false
+  },
+  "assets": {
+    "aneug_flow_geometry": {
+      "status": "materialized_geometry_only",
+      "archive_integrity_log": "passed_no_errors",
+      "inventory_file_rows": 44134,
+      "geometry_directories": 14712,
+      "complete_three_file_geometry_bundles": 14710,
+      "incomplete_geometry_ids": ["stable_5954", "stable_16384"],
+      "confirmed_transient_field_payload": false,
+      "independent_patient_count": false
+    },
+    "benchanxplore": {
+      "status": "materialized_and_archive_verified",
+      "hdf5_files": 105,
+      "xdmf_files": 105,
+      "timesteps_per_case": 80,
+      "audited_schema_fields": ["coordinates", "tetrahedra", "velocity", "wall_mask"],
+      "direct_pressure_or_wss_in_audited_xdmf": false,
+      "all_cases_previously_informed_representation_selection": true,
+      "paper_role": "engineering_benchmark_and_temporal_head_control"
+    },
+    "aneux": {
+      "status": "metadata_and_model_archives_materialized_and_extracted",
+      "official_aneurysm_domes": 750,
+      "official_vessel_trees": 668,
+      "contains_transient_cfd_or_wss": false,
+      "paper_role": "geometry_morphology_ood_only"
+    },
+    "cmha": {
+      "status": "raw_archives_and_extracted_cohort_materialized",
+      "aneurysm_patients": 99,
+      "controls": 44,
+      "aneurysms": 105,
+      "validated_nodewise_transient_wss": false,
+      "paper_role": "secondary_linkage_and_morphology_only"
+    },
+    "aneurisk_mirror": {
+      "status": "twenty_four_case_image_geometry_morphology_subset_materialized",
+      "manifest_rows": 24,
+      "same_as_separate_aneurisk_cfd_release": false,
+      "paper_role": "small_real_geometry_and_image_support_only"
+    },
+    "aneumo": {
+      "status": "code_and_historical_compact_cache_known",
+      "family_mapping_authoritative": false,
+      "license_conflict_resolved": false,
+      "paper_role": "optional_only_after_source_resolution"
+    },
+    "intra": {
+      "status": "repository_and_split_lists_only_in_audited_tree",
+      "materialized_mesh_payload_confirmed": false,
+      "paper_role": "none_for_current_wss_task"
+    }
+  },
+  "decision": {
+    "headline_dataset": "aneug_flow_after_source_and_lineage_admission",
+    "headline_task": "reference_relative_transient_wss_structural_fidelity",
+    "engineering_dataset": "benchanxplore",
+    "geometry_ood_dataset": "aneux",
+    "selected_post_admission_scaffold": "se3_equivariant_multiresolution_meshgraphnet_train_only_pod_cycle_head_tangent_projection",
+    "scaffold_is_algorithmic_novelty": false,
+    "next_action": "execute_registered_source_only_g0_once_then_human_rescore"
+  }
+}

@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · no active paper identity · transient structure-faithful WSS 30.0/40 inactive · D0 v2 execution complete with private aggregate and raw stage deleted · scientific stability unevaluated · family-disjoint P0 v1 withdrawn before field access · field 0/60 · authoritative family mapping and licence unresolved · result/method/model/GPU/validation/test/outer test/claim 0 · not submission-ready",
-    requirement: "D0 v2 reused only two previously inspected case-1 members, completed with zero PBS HTTP and deleted its raw stage. P0 v1 excluded the D0 family and field-blindly froze 12 families and five phases, but no field was staged. The owner acknowledged a Connection.csv family error and promised a full-table review; the latest partial correction still conflicts with the owner statement for case 2158. That mapping-integrity blocker is independent of the Hugging Face/GitHub licence conflict, so v1 is withdrawn and cannot be reactivated. Hodge, GNN, equivariance, edge forms, tracking and topology preservation remain direct priors or controls",
+    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · source-feasibility G0 registered · scientific P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles but not the transient WSS target. BenchAnXplore is a verified 105×80 velocity engineering asset, not direct-WSS or fresh confirmation. The 2015 Challenge contributes a five-anatomy within-anatomy inter-solver structure-variability floor, not a training cohort or standalone novelty. AneuX is geometry-only OOD support; Aneumo is optional only after mapping and licence resolution. G0 downloads no AneuG field or mesh payload and extracts no Challenge field member. GNN, Hodge, equivariance, edge forms, POD, tracking, topology preservation and CFD variability itself remain direct priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -46,6 +46,27 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "The account-wide asset state is reconciled beyond the legacy project root",
+      copy: "A read-only audit finds a verified AneuG geometry archive with 14,712 directories and 14,710 complete three-file bundles, a verified BenchAnXplore release with 105 HDF5/XDMF pairs and 80 velocity frames, extracted AneuX metadata/models, CMHA 99 aneurysm-patient plus 44 control directories, and a 24-case Aneurisk image/geometry mirror. This corrects the prior narrow inventory without manufacturing a transient WSS target. BenchAnXplore becomes an engineering and train-only-POD control; AneuG remains the conditional headline source. The post-admission scaffold is an equivariant multi-resolution MeshGraphNet with train-only POD and tangent projection, selected for performance but not claimed as novel.",
+      status: "Assets reconciled · AneuG geometry present / transient WSS unconfirmed · active architecture/GPU/claim 0",
+      url: "../docs/introai9-acquired-asset-reconciliation-2026-08-14.md"
+    },
+    {
+      year: "2026.08",
+      title: "AneuG reference-relative structural fidelity is a conditional source question",
+      copy: "A critical reappraisal removes Aneumo from the required paper dependency and assigns four non-overlapping roles: AneuG-Flow for conditional transient development, the 2015 CFD Challenge for a five-anatomy within-anatomy solver-variability floor, AneuX for geometry-only morphology/OOD audit, and Aneumo for optional comparison after mapping and licence resolution. The residual question is whether a field-error-matched learned surrogate adds signed critical-point/worldline error beyond solver disagreement. Because AneuG generator lineage is unresolved, 730 cases are not counted as patients and the direction scores 31.0/40. A fresh one-shot CPU/PBS G0 audits source lineage and archive schema without AneuG field/mesh or Challenge member-field access.",
+      status: "Inactive 31.0/40 · source G0 registered · scientific P0/model/GPU/test/claim 0",
+      url: "../docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md"
+    },
+    {
+      year: "2026.08",
+      title: "Source authority remains blocked after server recovery",
+      copy: "source-watch v22 adds official Aneumo issue 4 as the 35th exact public state, pinning issue state, all six comment IDs, owner comments, timestamps and body hashes. The 35/35 live match means no new correction was found; it does not promote the partially corrected Connection.csv into an authoritative family map. A detected issue, repository or licence change requests only human re-audit and cannot reactivate withdrawn P0 v1. Introai9 is operationally available, but scientific source authority and licence remain independent blockers.",
+      status: "Watch-only · 35/35 unchanged · successor P0 unregistered · field/model/GPU/claim 0",
+      url: "../docs/aneumo-source-authority-watch-v22-2026-08-14.md"
+    },
     {
       year: "2026.08",
       title: "Transient WSS re-enters only as an inactive target-identifiability program",
@@ -917,14 +938,21 @@ window.AURORA_DATA = Object.freeze({
   ],
   competition: [
     ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
-    ["Task", "one nominal CFD field → velocity fields at seven alternative flows", "Aneumo multi-flow benchmarks; cardiovascular one-CFD BC tuning; analytic q^α scaling", "Aneumo-specific matched spatial-response fidelity", "conditional application/evaluation lead"],
-    ["Representation", "same-case anchor plus flow ratio and geometry", "SC-FNO; Hemo-MPO; AB-GATr; DeltaPhi; NOEM hard constraints; DeepONet/FNO", "same-backbone direct versus identity-residual mechanism test", "inactive application adaptation; not method novelty"],
-    ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO; PaNO field→readout", "aneurysm-specific matched-field-error response mismatch", "not yet observed"],
-    ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "execution-incomplete; 0/12 evaluated; exact contract closed"],
-    ["Confirmation", "100 new families + prefield precision/complete-workload viability", "historical 32 excluded; exact case-log family estimator; ≥59/100 wins per response", "finite-release mean and majority-family generalization", "inactive until P0/P1/development/re-entry/viability pass"],
-    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 32.5; novelty 2.5", "source history only; no active lead, method or claim"]
+    ["Task", "transient vector WSS on aneurysm surfaces", "AneuG Graph U-Net; equivariant transient-WSS surrogates", "does low field error hide robust critical-structure failure?", "plausible but target stability untested"],
+    ["Reference", "surrogate-to-CFD structure discrepancy", "2015 Challenge whole-pipeline WSS variability", "how much error exceeds within-anatomy solver disagreement?", "archive schema G0 only"],
+    ["Representation", "Cartesian, tangent-projected and oriented edge-integral heads", "Hodge/DEC, equivariance, tangent projection", "does the smallest representation change reduce observed excess?", "unselected control/candidate; not novelty"],
+    ["Independent unit", "generator lineage or pre-field geometry cluster", "random/prefix/timestep split prohibited", "does the result survive related-shape exclusion?", "unresolved; 730 cases are not patients"],
+    ["External shape", "AneuX morphology support and representation stability", "three resolutions and cut contexts", "is synthetic support visibly different from real geometry?", "geometry-only; no WSS performance claim"],
+    ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh noncompensatory score", "reference-relative failure + minimal correction + confirmation", "31.0/40 inactive; source G0 only"]
   ],
   gates: [
+    {
+      id: "G0-RFLOOR",
+      title: "Can AneuG lineage and the Challenge solver floor be defined before any field or model access?",
+      copy: "One prospective introai9 CPU/PBS source audit pins the exact AneuG dataset/code revisions, inventories the 730-case transient tree without downloading WSS or mesh payloads, and reports any explicit parent/latent manifest without inferring independence from names. It separately verifies the exact 2015 Challenge WSS archive size and MD5, rejects unsafe tar paths and inventories member names/sizes without extraction. AneuX metadata are checked only to preserve its geometry-only role. Complete, failure or transport-incomplete all close this exact contract without repair/rerun.",
+      state: "Registered source feasibility only · scientific endpoint 0 · AneuG field/mesh 0 · Challenge member field 0 · model/GPU/test/claim 0",
+      blocking: true
+    },
     {
       id: "P0-RF",
       title: "Are multi-flow velocity-response endpoints stable before any model is trained?",
@@ -1103,6 +1131,26 @@ window.AURORA_DATA = Object.freeze({
   ],
   datasets: [
     {
+      name: "AneuG-Flow · conditional primary candidate",
+      role: "future transient WSS development/evaluation only after lineage, leakage and target-stability gates",
+      provenance: "official dataset 9dd4180… · code 4a090a0… · CC BY-SA 4.0 · 14,000 steady + 730 transient reported · local geometry archive verified: 14,712 directories / 14,710 complete three-file bundles / two missing shape.obj · transient WSS target locally unconfirmed · official registered-WSS relative L2 4.67% · generator lineage unresolved · directories/cases ≠ patients"
+    },
+    {
+      name: "BenchAnXplore · acquired engineering benchmark",
+      role: "transient mesh-pipeline and train-only temporal-head control; not untouched headline confirmation",
+      provenance: "verified coarse archive · 105 HDF5 + 105 XDMF · 80 velocity frames/case · audited coordinates/tetrahedra/velocity/wall-mask schema · direct WSS/pressure unconfirmed · all 105 cases already informed historical representation selection · fixed Fourier failed / train-only POD 17 and 25 eligible"
+    },
+    {
+      name: "2015 International Aneurysm CFD Challenge · reference floor",
+      role: "auxiliary within-anatomy inter-solver structural-variability calibration; never primary training or population outer test",
+      provenance: "Figshare 6383516 v2 · CC BY 4.0 · 5 independent MCA anatomies · 28 submissions/26 teams nested within anatomy · exact WSS archive 425,372,824 bytes/MD5 d272f712… · archive member schema pending G0 · field values 0"
+    },
+    {
+      name: "AneuX v1.0 · geometry-only support",
+      role: "real morphology OOD/support and representation-stability audit only",
+      provenance: "Zenodo 6678442 revision 11 · CC BY-NC 4.0 · 750 aneurysm domes · 668 vessel trees · three resolutions/four cuts · no WSS or transient CFD · cannot validate field performance or clinical endpoint"
+    },
+    {
       name: "Aneumo verified compact response holding · schema 11.8",
       role: "conditional source for a train-only method-free response-stability P0; not yet an active paper split",
       provenance: "32 generation families × 2 cases × 8 mass flows × 4,096 aligned nodes · frozen 20/6/6 family split · bounded private inventory matches cache SHA-256 9640b0ef…ab9 · public path/infrastructure metadata redacted · activation/container verdict pending · active train/validation/test 0/0/0 · pressure/test/model/GPU read 0"
@@ -1110,7 +1158,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "AURORA historical holdings state ledger · schema 11.5",
       role: "authoritative separation of material history, current persistence, scientific admissibility and active split assignment",
-      provenance: "six named holding records · Aneumo performance-gate failure · BenchAnXplore discovery-used/no-fresh-confirmation · CMHA linkage-gate failure · AneuX/AneuG/Aneurisk latest exact versions execution-incomplete/no-verdict · current introai9 listing incomplete · active train/validation/test 0/0/0"
+      provenance: "external-tree reconciliation supersedes the incomplete account-wide listing · AneuG geometry present but transient target absent · BenchAnXplore discovery-used/no-fresh-confirmation · CMHA linkage gate unresolved · AneuX geometry-only · Aneurisk 24-case mirror not the CFD release · active train/validation/test 0/0/0"
     },
     {
       name: "aSAH-Risk clinical table · Zenodo 17339029 revision 6",
@@ -1223,9 +1271,9 @@ window.AURORA_DATA = Object.freeze({
       provenance: "officially reported 1,338 internal CTA/1,489 aneurysms/6 institutions + 138 external CTA/101 aneurysms/2 institutions · restricted request required · user request/terms/payload 0 · GLIA-Net direct prior · best 30.5/40"
     },
     {
-      name: "2015 International Aneurysm CFD Challenge",
-      role: "source-rejected workflow-variability benchmark; not operator training",
-      provenance: "5 independent MCA aneurysm anatomies · 28 submissions/26 teams · primary paper already quantifies whole-pipeline WSS variability · DICOM/WSS/segmentation/velocity payload 0 · score 29.5/40"
+      name: "2015 International Aneurysm CFD Challenge · historical standalone screen",
+      role: "standalone direction remains rejected; current reuse is only the auxiliary reference-floor role above",
+      provenance: "5 independent MCA aneurysm anatomies · 28 submissions/26 teams · primary paper already quantifies whole-pipeline WSS variability · standalone novelty rejected · current archive schema/field still 0 before G0"
     },
     {
       name: "Open aSAH longitudinal CTP · Dryad v7",
@@ -1439,6 +1487,27 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.14",
+      category: "data",
+      title: "The aneurysm assets outside the legacy project root are reconciled",
+      copy: "A read-only audit confirms the dedicated data tree holds a verified AneuG geometry archive (14,712 directories, 14,710 complete bundles), verified BenchAnXplore 105×80 transient velocity data, extracted AneuX and CMHA assets, and a 24-case Aneurisk mirror. It corrects the earlier narrow inventory but does not relabel geometry as transient WSS or generated cases as patients. BenchAnXplore becomes an engineering/POD control, while AneuG stays the conditional headline source. The post-admission MeshGraphNet+POD+tangent scaffold is an implementation default, not novelty or current execution authority.",
+      files: ["configs/introai9_acquired_asset_reconciliation_v1.json", "docs/introai9-acquired-asset-reconciliation-2026-08-14.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.14",
+      category: "research",
+      title: "The transient direction pivots to AneuG with a solver-relative validation contract",
+      copy: "AneuG-Flow becomes a conditional primary candidate, the 2015 Challenge becomes a five-anatomy within-anatomy solver-variability floor, AneuX becomes geometry-only OOD support, and Aneumo leaves the required dependency chain. The new reference-relative structure candidate scores 31.0/40 because AneuG lineage is unresolved; 730 synthetic cases are not counted as patients. A one-shot CPU/PBS G0 audits exact release lineage and Challenge archive schema without AneuG field/mesh or Challenge member-field access. It cannot activate a scientific P0, architecture, GPU or claim.",
+      files: ["configs/aneug_reference_floor_g0_v1.json", "src/aurora/aneug_reference_floor_g0.py", "tests/test_aneug_reference_floor_g0.py", "cluster/pbs_aneug_reference_floor_g0_v1.pbs", "docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md", "configs/aurora_v1.json", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.14",
+      category: "protocol",
+      title: "Source-watch v22 freezes Aneumo family-mapping authority without reopening science",
+      copy: "The 35th exact state pins official issue 4, all six comments, owner comments, update timestamps and body SHA-256 values. A live read-only refresh matches 35/35 with no review signal. This says no new authoritative correction is visible; it does not validate the present family table. Any issue, repository-head or licence-tag change can request only fresh human source audit. Withdrawn P0 v1 stays immutable, successor P0 remains unregistered, and field access, method, model, GPU, outer test and paper claim remain zero despite introai9 recovery.",
+      files: ["configs/source_watch_v22.json", "src/aurora/source_watch.py", "tests/test_source_watch.py", ".github/workflows/source-watch.yml", ".github/workflows/quality.yml", "docs/aneumo-source-authority-watch-v22-2026-08-14.md", "docs/source-watch.md", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "scripts/check_site.py", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "experiment",

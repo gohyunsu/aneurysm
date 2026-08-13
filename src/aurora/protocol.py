@@ -292,6 +292,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "public_source_watch_v19",
             "public_source_watch_v20",
             "public_source_watch_v21",
+            "public_source_watch_v22",
+            "aneug_reference_relative_structure_reappraisal",
             "most_recent_closed_candidate",
             "most_recent_source_rejected_candidate",
             "most_recent_conditional_source_lead",
@@ -11080,6 +11082,218 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "clinical-table watch may request review only, never download, P0 or compute."
         )
     checks.append("thirty-four-source fail-closed open clinical table watch boundary")
+    source_watch_v22 = problem_selection["public_source_watch_v22"]
+    _require_keys(
+        source_watch_v22,
+        [
+            "status", "config", "extends_historical_config", "config_sha256",
+            "watch_count", "added_watch_ids", "aneumo_issue_number",
+            "aneumo_issue_state", "aneumo_issue_comment_count",
+            "aneumo_owner_comment_ids",
+            "aneumo_owner_error_acknowledgement_comment_id",
+            "aneumo_owner_full_review_commitment_comment_id",
+            "authoritative_corrected_family_mapping_available",
+            "license_conflict_resolved", "same_as_all_frozen_snapshots",
+            "manual_review_triggered", "fresh_source_reaudit_triggered",
+            "direct_prior_baseline_feasibility_reaudit_triggered",
+            "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+            "withdrawn_p0_reactivation_authorized", "score_repair_authorized",
+            "p0_or_p1_authorized", "method_or_architecture_authorized",
+            "gpu_or_outer_test_authorized", "server_queried",
+            "login_node_gpu_command_executed",
+            "junjinyong_accessed_for_this_watch", "decision",
+        ],
+        "source watch v22",
+    )
+    if (
+        source_watch_v22["status"]
+        != "watch_only_all_thirty_five_frozen_snapshots_match"
+        or source_watch_v22["config"] != "configs/source_watch_v22.json"
+        or source_watch_v22["extends_historical_config"]
+        != "configs/source_watch_v21.json"
+        or source_watch_v22["config_sha256"]
+        != "5f799c130dfc63abe279f5020950d7fee2be69ba344dbe32b914e6e4bb8817ff"
+        or source_watch_v22["watch_count"] != 35
+        or source_watch_v22["added_watch_ids"]
+        != ["aneumo_family_mapping_issue_authority_v1"]
+        or source_watch_v22["aneumo_issue_number"] != 4
+        or source_watch_v22["aneumo_issue_state"] != "closed"
+        or source_watch_v22["aneumo_issue_comment_count"] != 6
+        or source_watch_v22["aneumo_owner_comment_ids"]
+        != [3236749321, 5070184242, 5070473308]
+        or source_watch_v22["aneumo_owner_error_acknowledgement_comment_id"]
+        != 5070184242
+        or source_watch_v22["aneumo_owner_full_review_commitment_comment_id"]
+        != 5070473308
+        or source_watch_v22["authoritative_corrected_family_mapping_available"]
+        is not False
+        or source_watch_v22["license_conflict_resolved"] is not False
+        or source_watch_v22["same_as_all_frozen_snapshots"] is not True
+        or any(
+            source_watch_v22[key] is not False
+            for key in (
+                "manual_review_triggered", "fresh_source_reaudit_triggered",
+                "direct_prior_baseline_feasibility_reaudit_triggered",
+                "automatic_download_authorized", "automatic_terms_acceptance_authorized",
+                "withdrawn_p0_reactivation_authorized", "score_repair_authorized",
+                "p0_or_p1_authorized", "method_or_architecture_authorized",
+                "gpu_or_outer_test_authorized", "server_queried",
+                "login_node_gpu_command_executed",
+                "junjinyong_accessed_for_this_watch",
+            )
+        )
+        or source_watch_v22["decision"]
+        != "continue_fail_closed_thirty_five_source_watch_issue_change_requests_reaudit_only_without_mapping_or_license_resolution_p0_reactivation_or_compute"
+    ):
+        raise ProtocolError(
+            "Source watch v22 must preserve thirty-five exact public states; an "
+            "Aneumo issue change requests review only and cannot resolve mapping, "
+            "licence, P0 reactivation or compute."
+        )
+    checks.append("thirty-five-source fail-closed Aneumo authority watch boundary")
+    reference_floor = problem_selection["aneug_reference_relative_structure_reappraisal"]
+    _require_keys(
+        reference_floor,
+        [
+            "status", "audit_document", "candidate_id", "candidate_score",
+            "admission_threshold", "axis_scores", "residual_novelty_score",
+            "aneug_role", "challenge_2015_role", "aneux_role", "aneumo_role",
+            "aneug_dataset_revision", "aneug_code_commit",
+            "aneug_reported_transient_cases",
+            "aneug_case_count_is_independent_patient_count",
+            "aneug_generator_lineage_verified", "challenge_figshare_record_id",
+            "challenge_figshare_version", "challenge_independent_anatomies",
+            "challenge_submission_count_is_independent_anatomy_count",
+            "aneux_record_id", "aneux_contains_wss_or_transient_cfd",
+            "introai9_bounded_inventory_found_historical_code_not_confirmed_aneug_payload",
+            "legacy_bounded_inventory_scope_only",
+            "introai9_external_data_tree_reconciliation_completed",
+            "introai9_aneug_geometry_payload_confirmed",
+            "introai9_aneug_geometry_directories",
+            "introai9_aneug_complete_geometry_bundles",
+            "introai9_aneug_incomplete_geometry_ids",
+            "introai9_aneug_transient_field_payload_confirmed",
+            "introai9_benchanxplore_hdf5_xdmf_pairs",
+            "introai9_benchanxplore_timesteps",
+            "introai9_benchanxplore_direct_wss_confirmed",
+            "asset_reconciliation_document", "asset_reconciliation_config",
+            "asset_reconciliation_config_sha256",
+            "post_admission_implementation_scaffold",
+            "implementation_scaffold_is_algorithmic_novelty",
+            "absence_outside_bounded_inventory_claimed", "g0_config",
+            "g0_config_sha256", "g0_evaluator", "g0_evaluator_sha256",
+            "g0_test", "g0_test_sha256", "g0_pbs_wrapper",
+            "g0_pbs_wrapper_sha256", "g0_maximum_submissions",
+            "g0_same_contract_repair_or_rerun_allowed",
+            "g0_aneug_field_or_mesh_payload_authorized",
+            "g0_challenge_member_extraction_or_field_read_authorized",
+            "g0_aneux_payload_authorized", "scientific_gate_registered",
+            "method_selected", "architecture_selected",
+            "gpu_training_authorized", "outer_test_authorized",
+            "paper_claim_active", "login_node_gpu_command_executed",
+            "junjinyong_accessed", "next_allowed_action",
+        ],
+        "AneuG reference-relative structure reappraisal",
+    )
+    if (
+        reference_floor["status"]
+        != "inactive_31_of_40_with_prospective_source_feasibility_g0_only"
+        or reference_floor["candidate_id"]
+        != "reference_relative_transient_wss_structure_fidelity"
+        or reference_floor["candidate_score"] != 31.0
+        or reference_floor["admission_threshold"] != 32.0
+        or reference_floor["axis_scores"]
+        != [4.5, 4.0, 2.5, 4.0, 3.0, 5.0, 5.0, 3.0]
+        or sum(reference_floor["axis_scores"]) != reference_floor["candidate_score"]
+        or reference_floor["residual_novelty_score"] != 2.5
+        or reference_floor["aneug_role"]
+        != "conditional_primary_after_lineage_and_target_stability_audits"
+        or reference_floor["challenge_2015_role"]
+        != "auxiliary_within_anatomy_inter_solver_structure_variability_floor"
+        or reference_floor["aneux_role"]
+        != "geometry_only_real_morphology_ood_audit"
+        or reference_floor["aneumo_role"]
+        != "optional_only_after_mapping_and_license_resolution"
+        or reference_floor["aneug_dataset_revision"]
+        != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or reference_floor["aneug_code_commit"]
+        != "4a090a0f12538deef6fcea88b81afe78ce38152e"
+        or reference_floor["aneug_reported_transient_cases"] != 730
+        or reference_floor["challenge_figshare_record_id"] != 6383516
+        or reference_floor["challenge_figshare_version"] != 2
+        or reference_floor["challenge_independent_anatomies"] != 5
+        or reference_floor["aneux_record_id"] != 6678442
+        or reference_floor["introai9_aneug_geometry_directories"] != 14712
+        or reference_floor["introai9_aneug_complete_geometry_bundles"] != 14710
+        or reference_floor["introai9_aneug_incomplete_geometry_ids"]
+        != ["stable_5954", "stable_16384"]
+        or reference_floor["introai9_benchanxplore_hdf5_xdmf_pairs"] != 105
+        or reference_floor["introai9_benchanxplore_timesteps"] != 80
+        or reference_floor["asset_reconciliation_document"]
+        != "docs/introai9-acquired-asset-reconciliation-2026-08-14.md"
+        or reference_floor["post_admission_implementation_scaffold"]
+        != "se3_equivariant_multiresolution_meshgraphnet_train_only_pod_cycle_head_tangent_projection"
+        or reference_floor["g0_maximum_submissions"] != 1
+        or reference_floor["next_allowed_action"]
+        != "one_introai9_pbs_cpu_g0_then_human_rescore_no_automatic_scientific_p0_method_gpu_or_claim"
+        or any(
+            reference_floor[key] is not False
+            for key in (
+                "aneug_case_count_is_independent_patient_count",
+                "aneug_generator_lineage_verified",
+                "challenge_submission_count_is_independent_anatomy_count",
+                "aneux_contains_wss_or_transient_cfd",
+                "introai9_aneug_transient_field_payload_confirmed",
+                "introai9_benchanxplore_direct_wss_confirmed",
+                "implementation_scaffold_is_algorithmic_novelty",
+                "absence_outside_bounded_inventory_claimed",
+                "g0_same_contract_repair_or_rerun_allowed",
+                "g0_aneug_field_or_mesh_payload_authorized",
+                "g0_challenge_member_extraction_or_field_read_authorized",
+                "g0_aneux_payload_authorized", "scientific_gate_registered",
+                "method_selected", "architecture_selected",
+                "gpu_training_authorized", "outer_test_authorized",
+                "paper_claim_active", "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or reference_floor[
+            "introai9_bounded_inventory_found_historical_code_not_confirmed_aneug_payload"
+        ] is not True
+        or reference_floor["legacy_bounded_inventory_scope_only"] is not True
+        or reference_floor["introai9_external_data_tree_reconciliation_completed"]
+        is not True
+        or reference_floor["introai9_aneug_geometry_payload_confirmed"] is not True
+    ):
+        raise ProtocolError(
+            "The AneuG reference-relative direction must remain an inactive 31/40 "
+            "source candidate with unresolved lineage and source-only G0 authority."
+        )
+    reconciliation_path = (
+        Path(__file__).resolve().parents[2]
+        / reference_floor["asset_reconciliation_config"]
+    )
+    if (
+        not reconciliation_path.is_file()
+        or hashlib.sha256(reconciliation_path.read_bytes()).hexdigest()
+        != reference_floor["asset_reconciliation_config_sha256"]
+    ):
+        raise ProtocolError("The acquired-asset reconciliation bytes changed.")
+    for path_key, hash_key in (
+        ("g0_config", "g0_config_sha256"),
+        ("g0_evaluator", "g0_evaluator_sha256"),
+        ("g0_test", "g0_test_sha256"),
+        ("g0_pbs_wrapper", "g0_pbs_wrapper_sha256"),
+    ):
+        path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
+        if (
+            not path.is_file()
+            or hashlib.sha256(path.read_bytes()).hexdigest()
+            != reference_floor[hash_key]
+        ):
+            raise ProtocolError("The registered AneuG reference-floor G0 bytes changed.")
+    checks.append("AneuG reference-relative source-feasibility G0 boundary")
+    checks.append("introai9 acquired-asset reconciliation beyond legacy root")
     if set(problem_selection["rejected_candidates"]) != {
         "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
         "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",
@@ -16390,6 +16604,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     aneux = next(item for item in datasets if item["name"] == "aneux")
     aneumo = next(item for item in datasets if item["name"] == "aneumo")
     aneug_flow = next(item for item in datasets if item["name"] == "aneug_flow")
+    benchanxplore = next(
+        item for item in datasets if item["name"] == "benchanxplore"
+    )
     vmr_growth_dataset = next(
         item
         for item in datasets
@@ -16510,6 +16727,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "raw_structure_p0_execution_incomplete_no_verdict_no_rerun_old_processed_cycle_p0_closed_no_rerun"
         or aneug_flow.get("dataset_repository_commit")
         != "9dd418083899deddd93a67f9a6fca7a14304fa36"
+        or aneug_flow.get("local_geometry_archive_integrity")
+        != "passed_no_errors"
+        or aneug_flow.get("local_geometry_directories") != 14712
+        or aneug_flow.get("local_complete_geometry_bundles") != 14710
+        or aneug_flow.get("local_transient_wss_target_confirmed") is not False
         or aneug_flow.get("p0_config")
         != "configs/aneug_surface_vector_structure_p0.json"
         or aneug_flow.get("p0_execution_record")
@@ -16521,6 +16743,26 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         raise ProtocolError(
             "AneuG-Flow must remain synthetic with both raw-structure and processed "
             "P0 versions closed without a verdict, rerun, method, or GPU authority."
+        )
+    if (
+        benchanxplore.get("role")
+        != "acquired_transient_velocity_engineering_and_train_only_pod_head_control_not_fresh_confirmation"
+        or benchanxplore.get("field_provenance") != "synthetic_cfd"
+        or benchanxplore.get("split_unit") != "geometry"
+        or benchanxplore.get("status")
+        != "archive_verified_105_hdf5_xdmf_pairs_all_cases_historical_representation_discovery"
+        or benchanxplore.get("cases") != 105
+        or benchanxplore.get("timesteps") != 80
+        or benchanxplore.get("direct_wss_or_pressure_in_audited_xdmf")
+        is not False
+        or benchanxplore.get("all_cases_previously_informed_representation_selection")
+        is not True
+        or benchanxplore.get("independent_patient_count") is not False
+        or benchanxplore.get("headline_or_fresh_confirmation_role") is not False
+    ):
+        raise ProtocolError(
+            "BenchAnXplore must remain an acquired transient-velocity engineering "
+            "control without direct WSS, patient semantics or fresh confirmation."
         )
     if (
         vmr_growth_dataset.get("role")

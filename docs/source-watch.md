@@ -1,4 +1,12 @@
-# Public source watch · thirty-four material/direct-prior source states
+# Public source watch · thirty-five material/direct-prior/authority states
+
+> **Current contract — schema 11.5 / v22:** `source_watch_v22.json` extends
+> v21 with exact official Aneumo issue 4 metadata, all six comment IDs, owner
+> comment IDs, timestamps and comment-body SHA-256 values. A live 2026-08-14
+> refresh matches all 35 frozen states. Any issue change requests only a fresh
+> source audit. A comment is not an authoritative corrected mapping, a
+> repository-head change is not proof of completed review, and a licence-tag
+> change is not a legal resolution. The withdrawn P0 cannot reactivate.
 
 > **Current contract — schema 11.4 / v21:** `source_watch_v21.json` extends
 > v20 with exact Zenodo record 17339029 revision 6: one open CC-BY-4.0
@@ -185,7 +193,7 @@
 > inverse-flow audit was triggered by a new published direct prior, not by a
 > watched asset change. No server was queried.
 
-상태: **watch-only · 열여덟 개 official public states 모두 frozen snapshot과 동일 ·
+상태: **watch-only · 서른다섯 개 official public states 모두 frozen snapshot과 동일 ·
 manual review 0 · no medical payload/source-score repair/P0/model/GPU**
 
 ## 왜 감시하는가

@@ -391,6 +391,80 @@ class ProtocolTests(unittest.TestCase):
         with self.assertRaisesRegex(ProtocolError, "open aSAH clinical table"):
             validate_protocol(candidate)
 
+    def test_source_watch_v22_cannot_reactivate_withdrawn_aneumo_p0(self) -> None:
+        watch = self.protocol["problem_selection"]["public_source_watch_v22"]
+        self.assertEqual(watch["watch_count"], 35)
+        self.assertEqual(watch["aneumo_issue_number"], 4)
+        self.assertEqual(
+            watch["aneumo_owner_comment_ids"],
+            [3236749321, 5070184242, 5070473308],
+        )
+        self.assertFalse(watch["authoritative_corrected_family_mapping_available"])
+        self.assertFalse(watch["license_conflict_resolved"])
+        self.assertFalse(watch["withdrawn_p0_reactivation_authorized"])
+        self.assertFalse(watch["p0_or_p1_authorized"])
+        self.assertFalse(watch["gpu_or_outer_test_authorized"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"]["public_source_watch_v22"][
+            "withdrawn_p0_reactivation_authorized"
+        ] = True
+        with self.assertRaisesRegex(ProtocolError, "Source watch v22"):
+            validate_protocol(candidate)
+
+    def test_aneug_reference_floor_is_source_only_and_below_admission(self) -> None:
+        audit = self.protocol["problem_selection"][
+            "aneug_reference_relative_structure_reappraisal"
+        ]
+        self.assertEqual(audit["candidate_score"], 31.0)
+        self.assertEqual(audit["admission_threshold"], 32.0)
+        self.assertEqual(audit["aneug_reported_transient_cases"], 730)
+        self.assertFalse(audit["aneug_case_count_is_independent_patient_count"])
+        self.assertFalse(audit["aneug_generator_lineage_verified"])
+        self.assertEqual(audit["challenge_independent_anatomies"], 5)
+        self.assertTrue(audit["introai9_external_data_tree_reconciliation_completed"])
+        self.assertTrue(audit["introai9_aneug_geometry_payload_confirmed"])
+        self.assertEqual(audit["introai9_aneug_geometry_directories"], 14712)
+        self.assertEqual(audit["introai9_aneug_complete_geometry_bundles"], 14710)
+        self.assertEqual(
+            audit["introai9_aneug_incomplete_geometry_ids"],
+            ["stable_5954", "stable_16384"],
+        )
+        self.assertFalse(audit["introai9_aneug_transient_field_payload_confirmed"])
+        self.assertEqual(audit["introai9_benchanxplore_hdf5_xdmf_pairs"], 105)
+        self.assertFalse(audit["introai9_benchanxplore_direct_wss_confirmed"])
+        self.assertFalse(audit["implementation_scaffold_is_algorithmic_novelty"])
+        self.assertFalse(audit["scientific_gate_registered"])
+        self.assertFalse(audit["method_selected"])
+        self.assertFalse(audit["gpu_training_authorized"])
+        self.assertFalse(audit["junjinyong_accessed"])
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "aneug_reference_relative_structure_reappraisal"
+        ]["aneug_case_count_is_independent_patient_count"] = True
+        with self.assertRaisesRegex(ProtocolError, "AneuG reference-relative"):
+            validate_protocol(candidate)
+
+    def test_acquired_benchanxplore_is_engineering_not_fresh_wss_confirmation(self) -> None:
+        dataset = next(
+            item for item in self.protocol["datasets"]
+            if item["name"] == "benchanxplore"
+        )
+        self.assertEqual(dataset["cases"], 105)
+        self.assertEqual(dataset["timesteps"], 80)
+        self.assertFalse(dataset["direct_wss_or_pressure_in_audited_xdmf"])
+        self.assertTrue(dataset["all_cases_previously_informed_representation_selection"])
+        self.assertFalse(dataset["headline_or_fresh_confirmation_role"])
+
+        candidate = copy.deepcopy(self.protocol)
+        next(
+            item for item in candidate["datasets"]
+            if item["name"] == "benchanxplore"
+        )["headline_or_fresh_confirmation_role"] = True
+        with self.assertRaisesRegex(ProtocolError, "BenchAnXplore"):
+            validate_protocol(candidate)
+
     def test_mechanistic_treatment_and_growth_batch_is_fail_closed(self) -> None:
         problem = self.protocol["problem_selection"]
         gate = problem["future_source_admission_v2"]

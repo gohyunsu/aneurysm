@@ -54,16 +54,13 @@ def check_site(root: Path) -> list[str]:
         )
     required_readme_markers = {
         "execution-incomplete · 0/12 evaluated": "current P0 state",
-        "30.0/40 inactive": "current transient candidate boundary",
-        "D0 · known-member reader/extractor development": "current D0 evidence stage",
-        "상세 aggregate private · stability 미평가 · raw stage 삭제": (
-            "current D0 outcome boundary"
+        "31.0/40 inactive": "current reference-relative candidate boundary",
+        "fresh G0 | source-feasibility 1회 계약": "current source G0 boundary",
+        "730 case를 730 독립 환자로 세지 않습니다": (
+            "AneuG independent-unit boundary"
         ),
-        "stability P0 v1 | field 전 철회 · 0/60": "withdrawn P0 boundary",
+        "2015 CFD Challenge | 5 anatomy": "Challenge anatomy boundary",
         "current panel activation 영구 금지": "non-reactivation boundary",
-        "confirmatory inference unit로 승인되지 않았습니다": (
-            "family-mapping integrity boundary"
-        ),
         "GNN을 포함한 어떤 모델도 current method가 아님": (
             "no-selected-architecture boundary"
         ),
@@ -157,28 +154,27 @@ def check_site(root: Path) -> list[str]:
         errors.append(
             "site/learn.html: missing zero-assumption Aneumo transient-release panel"
         )
+    if "reference-relative-wss" not in guide.ids:
+        errors.append(
+            "site/learn.html: missing beginner reference-relative WSS panel"
+        )
 
     research_data_path = root / "site" / "assets" / "research-data.js"
     research_data = research_data_path.read_text(encoding="utf-8")
     required_current_markers = {
-        "transient structure-faithful WSS 30.0/40 inactive": (
-            "current transient candidate boundary"
+        "AneuG reference-relative transient WSS 31.0/40 inactive": (
+            "current reference-relative candidate boundary"
         ),
-        "D0 v2 execution complete with private aggregate and raw stage deleted": (
-            "current D0 evidence stage"
+        "source-feasibility G0 registered": "current source G0 stage",
+        "730 cases are not 730 independent patients": (
+            "AneuG independent-unit boundary"
         ),
-        "V1 job 116160.ECE-util1 ended execution-incomplete before any VTP payload": (
-            "current D0 transport outcome"
+        "five-anatomy within-anatomy inter-solver structure-variability floor": (
+            "Challenge auxiliary role"
         ),
-        "v2 execution complete with private aggregate and raw stage deleted": (
-            "final D0 operational outcome"
-        ),
-        "family-disjoint P0 v1 withdrawn before field access": (
-            "withdrawn P0 boundary"
-        ),
-        "staged zero of 60 fields": "zero-field P0 boundary",
-        "latest partial Connection.csv correction still conflicts": (
-            "family-mapping integrity boundary"
+        "AneuX is geometry-only OOD support": "AneuX geometry-only boundary",
+        "Aneumo is optional only after mapping and licence resolution": (
+            "Aneumo optional-source boundary"
         ),
         "Closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated": (
             "closed P0 result count"
@@ -189,8 +185,8 @@ def check_site(root: Path) -> list[str]:
         "Non-authoritative v3 · v1/v2 metadata/field/prediction 0": (
             "current confirmation evidence state"
         ),
-        "The structure-faithful candidate scores 30.0/40 and remains inactive": (
-            "current transient-release decision"
+        "AneuG reference-relative structural fidelity": (
+            "current reference-relative decision"
         ),
         "966/1,000 cases contain the complete 4.01–5.00 cycle": (
             "current transient release-completeness boundary"
@@ -209,8 +205,10 @@ def check_site(root: Path) -> list[str]:
         ),
         "Hodge Spectral Duality": "current topology-operator prior boundary",
         "FaCTz": "latest critical-point-preservation collision boundary",
-        "D0 reuses only case 1 phases 4.01 and 5.00": (
-            "known-member-only D0 boundary"
+        "downloads no AneuG field or mesh payload": "G0 no-field boundary",
+        "source-watch v22": "current source-authority watch",
+        "35/35 live match means no new correction": (
+            "current source-authority live refresh"
         ),
     }
     for marker, label in required_current_markers.items():

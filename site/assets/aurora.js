@@ -116,24 +116,24 @@
 
   const modes = {
     presence: {
-      description: "Anchor-relative gain should follow the reference CFD sweep.",
-      connector: "gain",
-      title: "Preserve response magnitude",
-      copy: "Compare the norm of each target-minus-anchor field, not only the absolute target field",
+      description: "Vector field accuracy and tangency must remain non-inferior.",
+      connector: "field",
+      title: "Preserve vector field accuracy",
+      copy: "Compare vector relative L2 and normal-component error before any structure claim",
       heights: ["35%", "52%", "73%", "48%", "88%", "64%"]
     },
     point: {
-      description: "The predicted change must point in the same high-dimensional direction as the reference response.",
-      connector: "direction",
-      title: "Preserve response direction",
-      copy: "Measure cosine error on target-minus-anchor response fields so anchor bias cannot masquerade as fidelity",
+      description: "Robust source, sink and saddle locations and signed indices must agree.",
+      connector: "critical points",
+      title: "Preserve signed critical points",
+      copy: "Evaluate spatial precision/recall, count and signed-index error only for stable non-degenerate zeros",
       heights: ["42%", "57%", "69%", "51%", "76%", "61%"]
     },
     mask: {
-      description: "A smooth-looking field can still bend incorrectly as mass flow changes.",
-      connector: "derivative",
-      title: "Preserve tangent and curvature",
-      copy: "Use the registered nonuniform flow grid to evaluate first- and second-order discrete response errors",
+      description: "A frame-wise match can still connect the wrong structures through time.",
+      connector: "worldlines",
+      title: "Preserve tracks and events",
+      copy: "Evaluate trajectory distance and birth/death event F1, then normalize excess against the solver floor",
       heights: ["48%", "61%", "44%", "68%", "51%", "57%"]
     }
   };

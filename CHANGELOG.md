@@ -1,5 +1,63 @@
 # Changelog
 
+## 2026-08-14 · acquired aneurysm assets reconciled outside the legacy root
+
+- Corrected the earlier narrow inventory: a separate data tree contains an
+  integrity-checked AneuG geometry archive with 14,712 directories, of which
+  14,710 have the complete three-file geometry bundle. Two named directories
+  lack `shape.obj`; none of these counts is a patient count.
+- Confirmed a verified BenchAnXplore release with 105 HDF5/XDMF pairs and 80
+  velocity frames per case. Its audited schema has no direct WSS/pressure, and
+  all cases already informed historical POD selection, so it is an engineering
+  benchmark rather than untouched headline confirmation.
+- Reconciled AneuX, CMHA, Aneurisk, Aneumo and IntrA holdings without inflating
+  their roles. Generic breast/liver trees are unrelated; the large home archive
+  and multi-terabyte shared mounts were not recursively scanned on a login node.
+- Selected a post-admission performance scaffold—SE(3)-equivariant
+  multi-resolution MeshGraphNet, train-only POD cycle head and tangent
+  projection—while keeping active architecture, scientific P0, GPU and claim
+  at zero until the registered one-shot G0 completes and is rescored.
+- Added a public-safe machine ledger, detailed audit, site explanations and
+  protocol invariants. No field array, extraction, PBS job or GPU action was
+  part of this reconciliation.
+
+## 2026-08-14 · AneuG reference-relative structural-fidelity source G0
+
+- Reassigned the datasets instead of demanding one source satisfy every role:
+  AneuG-Flow is the conditional primary candidate, the 2015 Challenge is a
+  five-anatomy within-anatomy solver-variability floor, AneuX is geometry-only
+  OOD support, and Aneumo is optional after mapping/licence resolution.
+- Narrowed the residual question to surrogate-added signed critical-point and
+  worldline error beyond solver disagreement. GNN, Graph U-Net, Hodge/DEC,
+  edge 1-form, equivariance, tracking, topology loss and CFD variability itself
+  are explicit priors or controls.
+- Scored the new source formulation 31.0/40 inactive. The 3.0 independent-unit
+  score corrects the historical over-reading of 730 synthetic cases; no model,
+  architecture, scientific P0 or GPU is active.
+- Added a one-shot CPU/PBS source-feasibility G0 that downloads no AneuG field
+  or mesh, extracts no Challenge member, and reads no AneuX payload. It audits
+  exact source identity, release-tree coverage, explicit lineage paths and
+  Challenge archive directory safety. Any outcome closes without repair/rerun
+  and can trigger only human rescoring.
+- Updated the beginner site, machine protocol and filterable History to explain
+  WSS, critical points, worldlines, inter-solver variability, independent-unit
+  leakage and the evidence ladder. Historical AneuG/Aneumo failures remain
+  visible and are not relabelled.
+
+
+## 2026-08-14 — source-watch v22 separates server recovery from source authority
+
+- Added the 35th fail-closed state for official Aneumo issue 4: issue state,
+  six comment IDs, owner comments, timestamps and body hashes are exact.
+- A live read-only refresh matched 35/35 states. This is evidence of no public
+  change, not evidence that `Connection.csv` has completed the promised review.
+- Any issue, repository or licence change can request only a human source
+  re-audit. It cannot reactivate withdrawn P0 v1, access fields, select a model
+  or authorize GPU/outer-test execution.
+- Introai9 recovery is operationally accepted, while successor P0 remains
+  unregistered because authoritative mapping and licence resolution are still
+  absent. `junjinyong` remains excluded.
+
 ## 2026-08-13 — stability P0 v1 withdrawn at field 0/60
 
 - Audited official issue 4 and current main. The owner says cases 2158/2159
