@@ -8,6 +8,11 @@
 > PyTorch 2.5.1 but lacks `h5py`; do not submit it alone. Activation schema v2
 > must pin the separately verified `h5py==3.12.1` wheel and install it
 > network-free with `--no-index --no-deps` into job-local temporary storage.
+> Final binary preflight also found no Git executable in the base image. Preserve
+> the schema-v2 private manifest as superseded before any attempt/field read.
+> Schema v3 must pin that manifest SHA and both zero counters, while the host
+> wrapper verifies a clean checkout and passes its exact commit into the clean
+> container for runner-side equality validation.
 > Immutable P0 v3 config/evaluator bytes and all 12 gates are unchanged. At this
 > source-preparation state the private manifest, field read and PBS attempt are
 > still 0. Freeze and push the public runtime source, then register exactly one

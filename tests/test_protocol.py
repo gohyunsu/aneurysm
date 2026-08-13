@@ -222,6 +222,11 @@ class ProtocolTests(unittest.TestCase):
             anchor_audit["v3_activation_requires_pinned_network_free_runtime_wheel"]
         )
         self.assertTrue(
+            anchor_audit[
+                "v3_activation_requires_host_verified_commit_without_container_git"
+            ]
+        )
+        self.assertTrue(
             anchor_audit["v3_activation_requires_zero_prior_scientific_attempt"]
         )
         self.assertFalse(

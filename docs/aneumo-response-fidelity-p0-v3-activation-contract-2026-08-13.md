@@ -83,8 +83,17 @@ The originally documented base image is readable and pins NumPy 2.1.2 and CPU
 PyTorch 2.5.1, but does not contain `h5py`. The activation layer therefore
 requires a separately hashed `h5py==3.12.1` wheel, verifies it before data
 access and installs it with `--no-index --no-deps` into job-local temporary
-storage. This dependency closure does not change a scientific byte or permit a
+storage. The base image also omits Git. The host wrapper therefore verifies the
+clean checkout and exact commit before entering Singularity, passes that SHA as
+`AURORA_VERIFIED_GIT_COMMIT`, and the runner rejects a missing or different
+value. This dependency closure does not change a scientific byte or permit a
 second attempt.
+
+The first schema-v2 private manifest was frozen before the final container
+binary preflight exposed the absent Git executable. It is preserved as a
+pre-attempt superseded manifest with zero PBS attempts and zero field reads.
+Schema v3 requires that prior manifest's SHA-256 and both zero counters before
+the replacement manifest can validate.
 
 The validator's synthetic fixtures show only that valid authority is accepted
 and path, container, manifest, compute and scientific-authority drift are

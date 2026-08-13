@@ -15,7 +15,6 @@ import hashlib
 import json
 import os
 import re
-import subprocess
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -33,7 +32,7 @@ from .aneumo_response_fidelity_p0_v3 import (
 
 
 PROTOCOL_ID = "aneumo_response_fidelity_method_free_p0_v3"
-ACTIVATION_SCHEMA = "aurora.aneumo_response_fidelity_p0_v3.activation.v2"
+ACTIVATION_SCHEMA = "aurora.aneumo_response_fidelity_p0_v3.activation.v3"
 BASE_CONFIG = "configs/aneumo_response_fidelity_p0_v3.json"
 BASE_CONFIG_SHA256 = (
     "1c7cc85dbd5d4ae5059663cfe3f638a7b4276b0f9fec537f4eec19757adfcc81"
@@ -78,15 +77,21 @@ def _require_absolute_private_path(value: Any, *, label: str) -> str:
 
 
 def _observed_git_commit(root: Path) -> str:
-    try:
-        return subprocess.run(
-            ["git", "-C", str(root), "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip()
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise AneumoP0V3ActivationError("Cannot resolve the public source commit.") from exc
+    """Return the exact commit already verified by the host PBS wrapper.
+
+    The minimal scientific container intentionally does not carry Git. The
+    wrapper validates the clean host checkout before entering Singularity and
+    passes only that exact SHA through the otherwise clean environment.
+    """
+
+    if not root.is_dir():
+        raise AneumoP0V3ActivationError("Public source root is unavailable.")
+    observed = os.environ.get("AURORA_VERIFIED_GIT_COMMIT", "")
+    if not COMMIT_PATTERN.fullmatch(observed):
+        raise AneumoP0V3ActivationError(
+            "Host-verified public source commit was not passed into the container."
+        )
+    return observed
 
 
 def validate_activation_manifest(
@@ -135,6 +140,9 @@ def validate_activation_manifest(
             "cache_readability_verified_without_hdf5_array_read",
             "registered_before_any_p0_v3_field_array_read",
             "prior_p0_v3_scientific_attempt_count",
+            "supersedes_pre_attempt_manifest_sha256",
+            "superseded_manifest_p0_attempt_count",
+            "superseded_manifest_field_array_read",
         },
         label="registration",
     )
@@ -145,6 +153,11 @@ def validate_activation_manifest(
         or evidence_id.lower() in {"unknown", "unverified", "pending"}
         or not UTC_PATTERN.fullmatch(str(registration["registered_at_utc"]))
         or registration["prior_p0_v3_scientific_attempt_count"] != 0
+        or not FULL_SHA_PATTERN.fullmatch(
+            str(registration["supersedes_pre_attempt_manifest_sha256"])
+        )
+        or registration["superseded_manifest_p0_attempt_count"] != 0
+        or registration["superseded_manifest_field_array_read"] is not False
         or any(
             registration[key] is not True
             for key in (

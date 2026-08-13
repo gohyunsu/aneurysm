@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -18,6 +19,7 @@ from aurora.aneumo_response_fidelity_p0_v3_activation import (
     REGISTERED_CACHE_SHA256,
     AneumoP0V3ActivationError,
     load_activation_manifest,
+    _observed_git_commit,
     validate_activation_manifest,
 )
 
@@ -50,6 +52,9 @@ def _manifest() -> dict:
             "cache_readability_verified_without_hdf5_array_read": True,
             "registered_before_any_p0_v3_field_array_read": True,
             "prior_p0_v3_scientific_attempt_count": 0,
+            "supersedes_pre_attempt_manifest_sha256": "d" * 64,
+            "superseded_manifest_p0_attempt_count": 0,
+            "superseded_manifest_field_array_read": False,
         },
         "source": {
             "public_source_commit": COMMIT,
@@ -127,6 +132,14 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
                 observed_runtime_wheel_sha256=RUNTIME_WHEEL_SHA,
                 expected_activation_manifest_sha256="d" * 64,
             )
+
+    def test_container_requires_host_verified_git_commit_without_git_binary(self) -> None:
+        with patch.dict(os.environ, {}, clear=True), self.assertRaisesRegex(
+            AneumoP0V3ActivationError, "Host-verified"
+        ):
+            _observed_git_commit(ROOT)
+        with patch.dict(os.environ, {"AURORA_VERIFIED_GIT_COMMIT": COMMIT}):
+            self.assertEqual(_observed_git_commit(ROOT), COMMIT)
 
     def test_unverified_change_or_prior_attempt_fails_closed(self) -> None:
         for key, value in (
@@ -227,6 +240,7 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
         self.assertIn('AURORA_ACTIVATION_MANIFEST', text)
         self.assertIn('AURORA_ACTIVATION_MANIFEST_SHA256', text)
         self.assertIn('AURORA_RUNTIME_WHEEL_SHA256', text)
+        self.assertIn('AURORA_VERIFIED_GIT_COMMIT="$AURORA_GIT_COMMIT"', text)
         self.assertIn('python -m pip install --no-index --no-deps', text)
         self.assertIn('AURORA_EXTERNAL_SERVICE_CHANGE_ACK', text)
         self.assertIn('PBS_JOBID', text)

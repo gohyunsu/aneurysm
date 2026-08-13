@@ -10,6 +10,11 @@
   `h5py`. Submission was withheld. Activation schema v2 now additionally pins
   an `h5py==3.12.1` wheel and installs it with `--no-index --no-deps` into
   job-local temporary storage before the immutable evaluator starts.
+- Final binary preflight also found that the base image lacks Git. No job was
+  submitted. The host wrapper already checks a clean exact checkout; schema v3
+  now passes only that verified SHA into the clean container and rejects a
+  missing/different value. It also preserves and pins the superseded pre-attempt
+  manifest with attempt count 0 and field read false.
 - The scientific config, evaluator, 12 gates, family split, seed and thresholds
   remain byte-identical. Private activation manifest, field read and P0 attempt
   remain zero; `junjinyong` remains excluded.

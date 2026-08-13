@@ -1571,6 +1571,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v3_activation_requires_verified_operational_change",
             "v3_activation_requires_public_source_cache_container_runner_and_manifest_hash_pins",
             "v3_activation_requires_pinned_network_free_runtime_wheel",
+            "v3_activation_requires_host_verified_commit_without_container_git",
             "v3_activation_requires_zero_prior_scientific_attempt",
             "v3_activation_runner_reads_field_without_manifest",
             "v3_legacy_v2_wrapper_valid_for_v3",
@@ -1649,17 +1650,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or anchor_red_team["v3_activation_runner"]
         != "src/aurora/aneumo_response_fidelity_p0_v3_activation.py"
         or anchor_red_team["v3_activation_runner_sha256"]
-        != "81c6ad9122a9e614c976ea92f29c3df05f819a1af1d4e211ee604e31b714661e"
+        != "63a0aabde6fca6ffb17387f527993a9799f3938d9a928342795262072c5657c8"
         or anchor_red_team["v3_activation_test"]
         != "tests/test_aneumo_response_fidelity_p0_v3_activation.py"
         or anchor_red_team["v3_activation_test_sha256"]
-        != "27c93fd15eac220bcf2019fc0557bd8cb9f4e81b9c6db29c40c8b4f2fde009c2"
+        != "2f9c8f04dd784e85c9b444d37656cbb8eb255f9072c5bec8397d48e3731d55c3"
         or anchor_red_team["v3_pbs_wrapper"]
         != "cluster/pbs_aneumo_response_fidelity_p0_v3.pbs"
         or anchor_red_team["v3_pbs_wrapper_sha256"]
-        != "d4d56a19e3d38c6b17e6aabc5d3f47fd9ccb1667823a704e8a286b18d8b8c69e"
+        != "6a9d6847981fdf67852c51d0c16639e9e16a1fe2e4dca009ea0de72ad78d2cc3"
         or anchor_red_team["v3_activation_manifest_schema"]
-        != "aurora.aneumo_response_fidelity_p0_v3.activation.v2"
+        != "aurora.aneumo_response_fidelity_p0_v3.activation.v3"
         or anchor_red_team["v3_registered_check_count"] != 12
         or anchor_red_team["v3_observed_check_count"] != 0
         or anchor_red_team["v3_anchor_tangent_check"]
@@ -1686,6 +1687,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "v3_activation_requires_verified_operational_change",
                 "v3_activation_requires_public_source_cache_container_runner_and_manifest_hash_pins",
                 "v3_activation_requires_pinned_network_free_runtime_wheel",
+                "v3_activation_requires_host_verified_commit_without_container_git",
                 "v3_activation_requires_zero_prior_scientific_attempt",
                 "v3_method_free",
                 "v3_train_only",

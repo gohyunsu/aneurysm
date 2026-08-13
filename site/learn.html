@@ -110,6 +110,10 @@
             검증했습니다. 그러나 실제 private manifest가
             없으므로 이는 실행 준비 코드일 뿐, cache field를 읽거나 job을 제출할
             권한이 아닙니다.
+            Final binary preflight는 base image에 Git도 없음을 찾았습니다. Host
+            wrapper가 clean checkout의 exact SHA를 검증해 container로 전달하고 runner가
+            재검증하도록 schema v3에서 닫았으며, 이전 manifest는 attempt 0·field read
+            0인 superseded provenance로 보존합니다.
             그래서 train-only method-free P0만 등록된 상태입니다. Active split, method,
             architecture, GPU, outer test, result와 claim은 모두 0입니다.
             현재 evidence contract는 anchor tangent를 별도로 검사하는 P0 v3이며,
@@ -384,7 +388,8 @@
             P0 registered/non-executable입니다. Immutable evaluator와 별도 activation
             runner, CPU 4/GPU 0 v3 one-shot wrapper와 pinned runtime layer는
             code-complete입니다. Operational change·cache·PBS·container preflight는
-            확인됐지만 private manifest는 아직 0이므로 cache access 전에 거부합니다.
+            확인됐고 final manifest는 새 exact public source에 다시 고정해야 하므로
+            그 전에는 cache access 전에 거부합니다.
             공개 source를 고정한 뒤 manifest를 먼저 등록하고 한 번의 CPU P0만 제출하며,
             <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
           </p>

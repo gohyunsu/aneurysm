@@ -67,7 +67,9 @@
           확인했습니다. Base image에 <code>h5py</code>가 없어 그대로 제출하지 않고,
           해시 고정 <code>h5py==3.12.1</code> wheel을 network-free·job-local로
           설치하는 activation schema v2를 검증했습니다. 실제 private manifest와
-          field-array read, PBS attempt는 아직 0입니다. Official
+          final binary preflight에서 base image의 Git 부재도 찾아 제출을 보류했고,
+          host에서 검증한 clean commit만 container에서 재검증하는 schema v3로
+          닫았습니다. Field-array read와 PBS attempt는 아직 0입니다. Official
           Aneumo의 427 base geometry 중 historical 32를 뺀 동일 release에서 future
           100-family 확인을 설계하되, outer field 전에 precision과 전체 2-model×5-seed
           workload가 충분한지도 먼저 통과해야 합니다. 최종 확인에서는 candidate가
@@ -560,7 +562,9 @@
           운영 preflight는 통과했지만 아직 실행 가능한 job은 없습니다. Private cache,
           PBS와 base container는 정상이며, 누락된 <code>h5py</code>는 해시 고정 wheel을
           network-free·job-local로 설치하는 schema v2에서 검증했습니다. Immutable
-          evaluator와 CPU 4/GPU 0 wrapper는 유지되며, private manifest가 없으면 cache
+          evaluator와 CPU 4/GPU 0 wrapper는 유지됩니다. Base image의 Git 부재는
+          host-verified commit 전달·재검증으로 닫았고, superseded pre-attempt manifest의
+          SHA와 attempt/field-read 0까지 schema v3가 요구합니다. Private manifest가 없으면 cache
           byte나 field를 읽기 전에 fail closed합니다.
           P0가 endpoint를 식별한 뒤에도, P1이 field-error-matched response mismatch를
           실제로 보여야만 model development로 넘어갑니다.

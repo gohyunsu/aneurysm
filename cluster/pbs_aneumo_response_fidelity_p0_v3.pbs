@@ -61,7 +61,6 @@ status_path="$record_root/status.$PBS_JOBID.json"
 result_path="$record_root/result.$PBS_JOBID.private.json"
 job_tmp="${TMPDIR:-/tmp}/aurora_response_fidelity_p0_v3_$PBS_JOBID"
 container_result="$job_tmp/result.private.json"
-runtime_python="$job_tmp/python"
 mkdir -p "$record_root" "$job_tmp"
 
 shopt -s nullglob
@@ -133,7 +132,8 @@ singularity exec --cleanenv \
   --bind "$AURORA_ACTIVATION_MANIFEST:/activation/manifest.private.json:ro" \
   --bind "$job_tmp:/run" \
   "$AURORA_CONTAINER" \
-  env PBS_JOBID="$PBS_JOBID" PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 \
+  env PBS_JOBID="$PBS_JOBID" AURORA_VERIFIED_GIT_COMMIT="$AURORA_GIT_COMMIT" \
+    PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 \
     PYTHONPATH=/run/python:/workspace/src TMPDIR=/run \
   python -m aurora.aneumo_response_fidelity_p0_v3_activation \
     --config /workspace/configs/aneumo_response_fidelity_p0_v3.json \

@@ -121,7 +121,10 @@ template가 자동으로 활성화되지 않으며 fresh evidence version이 필
 정확한 cache checksum과 base-container 가독성을 다시 확인했습니다. Base image에
 `h5py`가 없어서 그대로 제출하지 않았고, 해시 고정 `h5py==3.12.1` wheel을
 network-free·job-local로 설치하는 activation schema v2를 추가했습니다. Private
-manifest 등록과 field-array read, PBS attempt는 여전히 0입니다.
+manifest를 등록한 뒤 final binary preflight에서 base image의 Git 부재도 찾아
+제출을 보류했습니다. Host wrapper가 검증한 clean commit SHA를 container에
+명시적으로 전달·재검증하고 superseded-manifest SHA와 attempt/field-read 0을
+요구하는 schema v3로 닫았습니다. Field-array read와 PBS attempt는 여전히 0입니다.
 
 ### P0 v3
 
