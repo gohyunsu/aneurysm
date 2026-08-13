@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-13 — Transient WSS problem re-entry and prospective D0
+
+- Kept the response-fidelity P0 v3 one-shot outcome closed and removed it from
+  the active research identity; 32.5/40 remains source history only.
+- Re-screened the Aneumo transient candidate against Hodge Spectral Duality,
+  SE(3) WSS surrogates, RHSIA, critical-point-trajectory compression, FaCTz and
+  the 359-lesion aneurysm critical-point analysis. GNN/Hodge/edge-form/
+  tracking/topology-loss ingredients are explicit controls, not novelty.
+- Retained transient structure-faithful WSS at 30.0/40 inactive. The residual
+  application path is target stability, matched structural failure and a
+  minimal mechanism-linked correction.
+- Added a fail-closed VTP reader, deterministic polygon/normal utilities,
+  signed critical-point extractor and synthetic adversarial tests.
+- Prospectively registered D0 on only the two exact case-1 phases previously
+  inspected. D0 is bounded reader/extractor development, not a scientific P0,
+  method selection, GPU run or paper evidence.
+- Rebuilt the current README and site hero around the new no-claim boundary;
+  historical response-fidelity records remain available in History.
+
 ## 2026-08-13 · P0 v3 closes execution-incomplete without a scientific verdict
 
 - Quality/Pages-passed source `8252d354…16dfa` and a prospectively registered

@@ -1,0 +1,80 @@
+{
+  "schema_version": "aurora.aneumo_transient_vtp_d0.v1",
+  "protocol_id": "aneumo_transient_vtp_reader_and_structure_development_d0_v1",
+  "status": "prospective_development_before_execution",
+  "as_of": "2026-08-13",
+  "purpose": "validate_one_fail_closed_vtp_reader_and_structure_extractor_on_two_previously_inspected_wall_members_before_any_new_case_or_phase_field_read",
+  "source": {
+    "repository": "SAIS-Life-Science/Aneumo",
+    "huggingface_revision": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "github_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
+    "case_id": 1,
+    "batch": "batch_1-10.zip",
+    "phases": ["4.01", "5.00"],
+    "member_names": ["1/4.01/4.01_wall.vtp", "1/5.00/5.00_wall.vtp"],
+    "expected_vtp_sha256": [
+      "39e0f8028bdb80ce2e32920addeb3dcced611c20d8e3ff713a5bce82b846fc3a",
+      "007c9b72708e468f5d1d8bdde8dbe30bc30a6921938c62fa435375f5a5a8eff9"
+    ],
+    "field_members_are_not_newly_selected": true,
+    "previously_inspected_in_release_audit": true
+  },
+  "license_boundary": {
+    "huggingface_tag": "cc-by-nc-nd-4.0",
+    "github_datasheet_statement": "cc-by-4.0",
+    "declarations_conflict": true,
+    "handling_rule": "apply_stricter_noncommercial_nonredistribution_boundary_until_author_clarification",
+    "raw_or_derived_field_redistribution": false,
+    "legal_conclusion_made": false
+  },
+  "development": {
+    "stage": "D0_reader_and_extractor_development_not_scientific_gate",
+    "repair_rounds_maximum": 2,
+    "repair_scope": [
+      "vtk_xml_encoding_or_compression_support",
+      "zip_range_member_extraction",
+      "deterministic_numerical_implementation_defect"
+    ],
+    "forbidden_repairs": [
+      "changing_source_case_or_phase",
+      "dropping_an_array_or_mesh_contract",
+      "changing_scientific_threshold_after_field_inspection",
+      "reading_new_case_or_phase_fields",
+      "training_a_model"
+    ],
+    "success_checks": [
+      "two_exact_member_hashes_match",
+      "point_and_connectivity_contracts_match_previous_audit",
+      "point_wss_is_three_component_finite_and_time_varying",
+      "two_normal_constructions_and_two_polygon_fans_execute",
+      "critical_points_are_reported_without_claiming_stability"
+    ],
+    "success_authorizes": "register_separate_prospective_method_free_stability_p0_on_new_family_disjoint_members",
+    "does_not_authorize": [
+      "paper_identity",
+      "method_or_architecture_selection",
+      "gpu_training",
+      "critical_point_or_worldline_stability_claim",
+      "outer_test_or_clinical_claim"
+    ]
+  },
+  "transport": {
+    "maximum_http_bytes": 268435456,
+    "maximum_requests": 12,
+    "timeout_seconds": 120,
+    "raw_member_persistence": false,
+    "aggregate_json_only": true
+  },
+  "execution": {
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 16,
+    "ngpus": 0,
+    "walltime": "01:00:00",
+    "runtime_binding": "private_execution_manifest_must_pin_container_path_size_and_sha256_before_submission",
+    "login_node_gpu_allowed": false
+  }
+}

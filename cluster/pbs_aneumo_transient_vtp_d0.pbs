@@ -1,0 +1,24 @@
+#!/bin/bash
+#PBS -N aurora_avtp_d0
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=16gb:ngpus=0
+#PBS -l walltime=01:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_SOURCE_DIR:?AURORA_SOURCE_DIR is required}"
+: "${AURORA_OUTPUT_PATH:?AURORA_OUTPUT_PATH is required}"
+: "${AURORA_CONTAINER:?AURORA_CONTAINER is required}"
+
+cd "$AURORA_SOURCE_DIR"
+test "$(git rev-parse HEAD)" = "${AURORA_SOURCE_COMMIT:?AURORA_SOURCE_COMMIT is required}"
+test -z "$(git status --porcelain)"
+
+singularity exec --cleanenv \
+  --bind "$AURORA_SOURCE_DIR:$AURORA_SOURCE_DIR:ro" \
+  --bind "$(dirname "$AURORA_OUTPUT_PATH"):$(dirname "$AURORA_OUTPUT_PATH")" \
+  "$AURORA_CONTAINER" \
+  python "$AURORA_SOURCE_DIR/experiments/run_aneumo_transient_vtp_d0.py" \
+    --config "$AURORA_SOURCE_DIR/configs/aneumo_transient_vtp_d0.json" \
+    --output "$AURORA_OUTPUT_PATH"

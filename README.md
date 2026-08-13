@@ -3,216 +3,165 @@
 [![Research contract and site quality](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml/badge.svg)](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml)
 [![Pages](https://github.com/gohyunsu/aneurysm/actions/workflows/pages/pages-build-deployment/badge.svg)](https://gohyunsu.github.io/aneurysm/site/)
 
-AURORA는 뇌동맥류 CFD surrogate가 단순한 field error뿐 아니라 **유입 유량
-변화에 대한 공간적 반응**까지 보존하는지를 검증하는 ISBI 2027 연구
-프로젝트입니다. 이 저장소는 공개 코드, 사전등록 계약, 선행연구 감사와
-프로젝트 사이트를 관리합니다. 원고와 미공개 결과는 별도 private 저장소에서
-관리합니다.
+AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
+**방향성 있는 유동 구조**를 보존하는지 검증하는 ISBI 2027 연구 프로젝트입니다.
+공개 저장소에는 코드·평가 계약·선행연구 감사·프로젝트 사이트만 두고, 원고와
+미공개 결과는 별도 private 저장소에서 관리합니다.
 
-> **현재 판정 · 2026-08-13:** Aneumo-specific matched response-fidelity의
-> 32.5/40은 이제 조건부 source history로만 보존됩니다. Exact P0 v3의 단 한 번
-> 허용된 CPU-only PBS 실행은 `execution-incomplete`로 끝났고 12개 scientific
-> check 중 평가된 것은 0개입니다. 과학적 pass/fail verdict는 없지만 one-shot
-> 계약에 따라 같은 contract는 폐쇄됐습니다. Active paper identity, 선택된
-> architecture, GPU run, P1, outer test와 paper claim은 모두 없습니다.
+> **현재 판정 · 2026-08-13:** active paper identity는 없습니다. 폐쇄된
+> steady response-fidelity P0 v3는 `execution-incomplete · 0/12 evaluated`이며
+> 같은 계약을 다시 실행하지 않습니다. 다음 후보인 transient
+> structure-faithful WSS는 **30.0/40 inactive**입니다. 현재 열린 것은 이미
+> 조사한 case 1의 두 phase만 재사용하는 D0 reader/extractor development뿐이며,
+> 새로운 scientific stability gate나 모델 학습이 아닙니다.
 
-## 한눈에 보기
+## 현재 상태
 
-| 항목 | 현재 상태 | 의미 |
+| 항목 | 상태 | 해석 |
 |---|---|---|
-| 목표 venue | IEEE ISBI 2027 | 공식 author contract 기준 four technical pages |
-| 연구 lead | active lead 없음 | 32.5/40은 source history이며 paper identity가 아님 |
-| 데이터 identity | private inventory에서 등록 SHA-256 일치 | 실행 중 train-field read 범위는 aggregate 부재로 불명 |
-| Method-free P0 v3 | execution-incomplete · 0/12 evaluated | 과학적 verdict 없이 exact contract 폐쇄 |
-| P1 / architecture | 미등록 / 미선택 | GNN을 포함한 어떤 모델도 current method가 아님 |
-| Development | 미개방 | test 봉인, prospective bounded repair만 향후 허용 |
-| Confirmation | 0/100 family | 기존 32 family를 제외한 신규 family evidence 필요 |
-| 실행 | one-shot PBS 소비 | CPU 4·16 GB·GPU 0, exit 1, aggregate·raw PBS output 없음 |
-| 논문 | internal pre-evidence plan | title·contribution·result·figure 봉인 |
+| 목표 | IEEE ISBI 2027 | four technical pages, single-blind |
+| active 연구 주제 | 없음 | transient 후보는 admission 32 미만 |
+| 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아님 |
+| transient 자산 | 966 complete case · 40 base family | 1,000 case가 1,000 독립 표본은 아님 |
+| D0 | prospective reader/extractor development | 기존 case 1·phase 2개만 재사용 |
+| scientific P0 / 모델 / GPU | 미등록 / 미선택 / 0 | GNN을 포함한 어떤 모델도 current method가 아님 |
+| 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
 
-[프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 배경지식이 없는
-독자를 위한 단계별 설명과 필터 가능한 변경 이력을 제공합니다.
+[프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 WSS, tangent
+vector, critical point와 evidence gate를 배경지식 없이 읽을 수 있게 설명하고,
+filterable History에 과거 방향과 실패를 보존합니다.
 
-## 연구 질문
+## 다시 정한 연구 질문
 
-한 nominal-flow CFD field를 입력으로 받은 surrogate가 다른 유량에서 낮은
-Cartesian field error를 보인다고 해서, 같은 geometry의 CFD response까지 맞는
-것은 아닙니다. AURORA가 검증하려는 좁은 질문은 다음과 같습니다.
+Cartesian MSE가 낮은 transient WSS surrogate라도 source·sink·saddle과 그것이
+시간에 따라 이루는 궤적을 훼손할 수 있습니다. 그러나 critical point 자체가
+mesh triangulation, normal construction, tolerance와 작은 field perturbation에
+불안정하다면 보존해야 할 target이 존재하지 않습니다. 따라서 모델보다 먼저
+다음 질문을 검증합니다.
 
-> 동일한 field error 범위에서 aneurysm surrogate들이 유량 변화에 따른 spatial
-> response를 다르게 훼손하는가? 그렇다면 동일 backbone의 최소 anchor-identity
-> adaptation이 learned-direct와 train-fitted power-law control 모두보다 그 반응을
-> 더 충실하게 보존하는가?
+> Aneumo aneurysm surface의 transient WSS에서 signed critical structure가
+> 합리적인 discretization과 bounded perturbation 아래 안정적인가? 안정적이라면
+> compute-와 vector-field-error가 맞춰진 strong surrogate들이 그 구조를 서로
+> 다르게 훼손하는가?
 
-평가 단위는 node나 case 수가 아니라 Aneumo base generation family입니다.
-Co-primary endpoint는 paired spatial response와 flow-grid tangent이며, field
-accuracy는 양측 equivalence safeguard로 사용합니다.
+첫 질문이 실패하면 방향을 닫습니다. 둘째 질문에서 실제 failure mechanism이
+관측된 뒤에만 최소 representation/objective change를 설계합니다.
 
-## novelty를 어디까지 주장할 수 있는가
+## novelty 경계
 
-최신 direct-prior 감사는 broad method story를 제거했습니다.
+구성요소를 조합해 이름을 붙이는 것은 contribution이 아닙니다.
 
-- [PaNO](https://arxiv.org/abs/2606.03038)는 global field accuracy와 downstream
-  readout가 어긋날 수 있다는 일반 문제와 readout-aligned operator를 다룹니다.
-- [NOEM](https://doi.org/10.1038/s43588-026-00974-2)은 neural-operator output
-  transformation으로 constraint를 정확히 만족시키는 일반 구성을 다룹니다.
-- [Differentiable cardiovascular BC tuning](https://doi.org/10.1007/s10439-026-04269-5)은
-  한 번의 high-fidelity CFD로 보정한 ROM을 이용한 반복 BC tuning을 다룹니다.
-- Aneumo, SC-FNO, Hemo-MPO, AB-GATr, DeltaPhi와 aneurysm GNN 계보는 multi-flow
-  conditioning, sensitivity supervision, equivariance, physics constraint와
-  residual parameterization을 이미 점유합니다.
+- [Hodge Spectral Duality](https://arxiv.org/abs/2605.13834)는 discrete form,
+  Hodge decomposition과 topology-preserving mesh operator를 이미 다룹니다.
+- [SE(3)-equivariant artery-wall network](https://arxiv.org/abs/2212.05023),
+  [RHSIA](https://arxiv.org/abs/2601.19876)와
+  [aneurysm GNN](https://doi.org/10.1038/s41746-026-02404-z)은 directional 또는
+  transient WSS surrogation을 이미 다룹니다.
+- [Critical-point-trajectory compression](https://arxiv.org/abs/2510.25143)과
+  [FaCTz](https://arxiv.org/abs/2608.10586)은 critical-point/trajectory 보존을
+  직접 점유합니다.
+- 359-lesion aneurysm 연구는 phase별 WSS critical point를 추출하고 cardiac
+  cycle에서 추적했습니다.
 
-따라서 GNN, equivariance, physics loss, response loss, residual head,
-zero-at-anchor factor 또는 “one CFD, many queries”는 contribution이 아닙니다.
-남아 있는 것은 다음 conjunction뿐입니다.
+따라서 GNN, equivariance, edge 1-form, Hodge block, temporal decoder,
+critical-point tracking과 topology loss는 novelty가 아닙니다. 남을 수 있는
+contribution은 모두 결과에 의존합니다.
 
-1. **RF-C1 · matched failure evidence:** Aneumo에서 bilateral field-error
-   equivalence를 만족한 모델 사이에 material spatial-response failure가 존재함.
-2. **RF-C2 · controlled application solution:** 동일 backbone에서 최소
-   anchor-identity adaptation이 learned-direct와 train-fitted power law를 모두
-   이김. 새 algorithm이나 hard-constraint operator claim이 아님.
-3. **RF-C3 · independent-family evidence:** 기존 32 family를 모두 제외한 정확히
-   100개 신규 base family에서 평균 효과와 family prevalence를 함께 확인함.
+1. **Target audit:** aneurysm transient WSS에서 구조적 endpoint가 실제로
+   안정적인지 공개하는 재현 가능한 평가 계약.
+2. **Matched failure evidence:** field error와 compute가 같은 strong baseline도
+   robust signed structure/worldline fidelity에서 갈릴 수 있다는 application
+   evidence.
+3. **Mechanism-linked correction:** 관측된 실패에 필요한 최소 변경이 field
+   accuracy를 해치지 않으면서 구조 endpoint를 개선했다는 family-level 증거.
 
-세 cell은 모두 현재 inactive입니다. *Aneumo*, *matched field error*, *analytic
-scaling*, *independent family*를 빼도 같은 abstract가 된다면 방향을 폐기합니다.
-상세 근거는 [최신 collision recheck](docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md)와
-[선행연구 계보](docs/literature-lineage.md)에 있습니다.
+이 세 항목 중 하나라도 없으면 ISBI paper identity를 활성화하지 않습니다.
 
-## 확보한 데이터가 제공하는 것
+## 확보한 Aneumo transient 자산
 
-검증된 compact Aneumo contract는 다음과 같습니다.
+고정된 Hugging Face revision의 case 1–1000 archive directory를 bounded range로
+전수 감사했습니다.
 
-- 32 base generation families
-- family당 두 deformation case, 총 64 case
-- case당 8 steady mass-flow conditions
-- 서로 정렬된 4,096 internal nodes
-- historical family split 20/6/6
-- velocity-only compact target
+- 966 case: `4.01–5.00` complete cardiac cycle
+- 34 case: incomplete 또는 alternate sequence
+- 961 complete case: official canonical wall filename
+- 40/40 base family: complete case가 최소 하나 존재
+- 선택한 wall file 4개: point/cell 3-component WSS 확인
+- case 1의 두 phase: point/connectivity 동일, WSS는 시간에 따라 변화
 
-등록된 cache digest는 private inventory와 일치하지만 public 저장소에는 서버
-경로와 인프라 metadata를 기록하지 않습니다. 이 holding을 WSS, pressure,
-rupture risk, patient-specific physiology 또는 longitudinal growth dataset으로
-재명명하지 않습니다. 상세 asset 역할과 기각 이유는 [데이터셋 문서](docs/datasets.md)와
-[research direction](docs/research-direction.md)을 참고하십시오.
+관찰된 polygon은 4–9 vertices라 triangulation이 필요합니다. WSS unit,
+release-wide tangency와 critical-structure stability는 아직 검증되지 않았습니다.
+Hugging Face의 `CC BY-NC-ND 4.0` tag와 GitHub datasheet의 `CC BY 4.0` 문구가
+충돌하므로, 저자 확인 전에는 더 엄격한 noncommercial·nonredistribution 경계를
+적용합니다. 법률적 결론이나 raw/derived field 재배포는 하지 않습니다.
 
-## 증거 사다리
+## Evidence ladder
 
 ```text
-primary-source collision audit
-          ↓
-P0 v3 · train-only, method-free endpoint stability · 12/12 required
-          ↓
-fresh P1 · field-error-matched strong-baseline failure
-          ↓
-bounded validation-only development · test sealed
-          ↓
-prospective re-entry · fresh seed or disjoint split
-          ↓
-exactly 100 new-family one-shot confirmation
-          ↓
-RF-C1–RF-C3 activation and ISBI manuscript population
+D0 · known-member reader/extractor development
+  └─ pass → 별도 prospective method-free P0 등록만 허용
+P0 · family-disjoint target stability
+  └─ pass → matched baseline screen 등록만 허용
+P1 · compute/field-error-matched structural failure
+  └─ pass → bounded validation-only development
+fresh re-entry · new seed 또는 disjoint split
+  └─ pass → untouched family-level confirmation
+ISBI claim activation
 ```
 
-현재 exact evidence chain은 P0 v3에서 닫혔습니다. Synthetic fixtures의
-12/12는 evaluator code test일 뿐 Aneumo result가 아닙니다. 실제 실행은
-scientific gate 전에 중단되어 0/12 evaluated이며, historical P1이나
-confirmation template는 활성화되지 않습니다.
+D0는 scientific result가 아닙니다. 최대 두 번의 bounded repair만 허용하며,
+각 repair는 VTK encoding, ZIP range extraction 또는 deterministic numerical
+implementation defect 하나로 제한됩니다. Case·phase 변경, array 삭제,
+threshold 사후 변경과 model training은 금지합니다.
 
-관리자 확인 뒤 `introai9` 공개키 접속, 빈 사용자 queue, enabled PBS queue,
-정확한 cache checksum과 base-container 가독성을 다시 확인했습니다. Base image에
-`h5py`가 없어서 그대로 제출하지 않았고, 해시 고정 `h5py==3.12.1` wheel을
-network-free·job-local로 설치하는 activation schema v2를 추가했습니다. Private
-manifest를 등록한 뒤 final binary preflight에서 base image의 Git 부재도 찾아
-제출을 보류했습니다. Host wrapper가 검증한 clean commit SHA를 container에
-명시적으로 전달·재검증하고 superseded-manifest SHA와 attempt/field-read 0을
-요구하는 schema v3로 닫았습니다. 이 pre-attempt 시점까지 field-array read와
-PBS attempt는 0이었습니다.
-동일 wrapper dry-run에서 wheel basename을 축약하면 `pip`가 거부하는 문제도 찾아,
-등록된 원래 basename을 container 안에서도 그대로 유지하도록 교정했습니다.
+## 미래 아키텍처의 최소 조건
 
-그 뒤 exact public source와 private manifest를 field access 전에 고정하고 최종
-no-field preflight를 통과한 후 CPU-only PBS job `116146.ECE-util1`을 정확히 한 번
-제출했습니다. Job은 exit 1, walltime 34초로 끝났고 313-byte private status만
-남았습니다. Aggregate result와 raw PBS output은 materialize되지 않았으며 PBS
-trace에는 post-job file-processing error가 기록됐습니다. 따라서 low-level 원인과
-허가된 train-field read 범위를 추정하지 않습니다. 상세 record는
-[P0 v3 execution 문서](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)에
-있습니다.
+P0/P1 전에는 아키텍처를 선택하지 않습니다. 나중에 failure가 관측된다면 비교
+단위는 동일 backbone·parameter·update·field error입니다.
 
-### P0 v3
+- mandatory controls: Cartesian output, tangent-projected output,
+  SE(3)-equivariant mesh model, Hodge/discrete-form control
+- candidate change: oriented edge-integral output과 명시적 tangent reconstruction
+- optional objective: stable non-degenerate zero에서만 margin-aware local degree
+  control
+- primary endpoints: signed critical-point precision/recall, index error,
+  trajectory distance, birth/death event F1
+- safeguard: vector field error non-inferiority
 
-P0는 모델 성능을 측정하지 않습니다. Train family에서 response magnitude,
-rank, interpolation, paired response, tangent와 anchor tangent가 node subset,
-flow omission과 허용된 deterministic perturbation에 안정적인지 확인합니다.
-이번 one-shot은 gate 평가 전에 execution-incomplete로 끝나 0/12 evaluated이며,
-동일 contract의 수리·재제출 없이 formulation을 닫았습니다.
+Hodge나 edge 1-form이 자동으로 zero 또는 worldline을 보존한다고 주장하지
+않습니다. 열린 surface의 boundary condition과 Poincaré–Hopf bookkeeping도
+별도로 정의해야 합니다.
 
-### P1과 bounded development
+## 논문·figure 원칙
 
-P0 12/12 이후에만 새 P1을 등록합니다. P1은 같은 information, backbone,
-parameter와 compute 조건에서 direct output과 최소 application adaptation을
-비교하고, field error를 양측으로 matching한 뒤 response gap이 실제로 있는지
-먼저 확인합니다.
+Evidence가 활성화될 경우에만 원고를 채웁니다. 한 main table은 field safeguard와
+구조 endpoint를 함께 보여주고, 한 ablation table은 관측된 failure mechanism만
+분리합니다. Figure는 reference/baseline/candidate WSS, signed critical point와
+track을 같은 mesh·phase·camera·reference-derived colour range에서 표시합니다.
+Rupture risk, patient-specific physiology 또는 clinical utility로 과장하지
+않습니다.
 
-Development가 열리더라도 outer test는 봉인합니다. 각 round는 attribution으로
-지지되는 하나의 실패 가설만 검증하고, variant·선택 규칙·compute를 전부
-기록합니다. 기존 실패를 relabel하지 않으며 개선 후보는 별도 version과 fresh
-seed 또는 disjoint split으로 prospective re-entry를 통과해야 합니다.
-
-### Confirmation
-
-Confirmation은 historical 32를 제외한 정확히 100개 신규 family를 field-blind
-하게 고정합니다. Candidate는 learned-direct와 train-fitted power law 각각에
-대해 bilateral field equivalence를 만족하면서 paired/tangent error를 최소 10%
-낮춰야 합니다. 네 comparator×endpoint contrast 각각에 bootstrap lower > 0,
-최소 4/5 positive seeds와 최소 59/100 family wins가 필요합니다. Secondary
-metric이나 좋은 qualitative sample은 실패를 구제하지 못합니다.
-
-## 논문과 figure 역할
-
-[ISBI 2027 계획](docs/isbi-2027-plan.md)은 공식 author instruction의 four-page
-technical limit, single-blind review와 ethics/funding/COI 요구를 반영합니다.
-현재 organizer가 연결한 template archive는 내부적으로 ISBI 2021이라고 적힌
-legacy layout이므로 최종 제출 전 당시의 공식 template를 다시 받아야 합니다.
-
-Evidence가 활성화될 경우에만 다음 구조를 사용합니다.
-
-- Introduction: application need → direct-prior subtraction → observed matched
-  failure
-- Method: estimand과 controls → failure에 필요한 최소 adaptation
-- Experiments: family grouping → matching → bounded development → untouched
-  confirmation
-- Results: one main table, one mechanism ablation, one matched 3D field figure
-- Discussion: synthetic steady CFD 범위와 비임상적 한계
-
-3D figure는 reference/direct/power-law/candidate를 동일 좌표, camera와
-reference-derived colour range로 표시합니다. Family 선택은 weaker comparator
-기준 candidate worst/typical/best로 기계적으로 결정하며, 결과를 본 뒤 예쁜
-sample을 고르지 않습니다.
-
-## 저장소 구조
+## 저장소와 검증
 
 ```text
-configs/      machine-readable research and evidence contracts
-src/aurora/   validators and aggregate evaluators
-cluster/      future PBS wrappers; not execution authority
-tests/        adversarial and contract regression tests
-docs/         current rationale, literature, datasets and historical audits
+configs/      machine-readable prospective contracts
+src/aurora/   fail-closed readers, evaluators and validators
+experiments/  bounded development/scientific runners
+cluster/      PBS wrappers; execution authority는 별도 계약에서만 발생
+tests/        synthetic/adversarial regression
+docs/         current rationale, literature and dated audits
 site/         explanatory project site and filterable history
-results/      public aggregate historical evidence only
+results/      public aggregate outcome only
 ```
 
-주요 진입점:
+주요 문서:
 
-- [현재 연구 방향](docs/research-direction.md)
-- [실험 프로토콜](docs/experiment-protocol.md)
-- [P0 v3 config](configs/aneumo_response_fidelity_p0_v3.json)
-- [P0 v3 execution outcome](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)
-- [Confirmation evaluator red team](docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md)
+- [현재 재판정](docs/aneumo-transient-structure-reentry-2026-08-13.md)
+- [transient release 감사](docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md)
+- [D0 계약](configs/aneumo_transient_vtp_d0.json)
+- [폐쇄된 response P0 결과](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)
+- [선행연구 계보](docs/literature-lineage.md)
 - [상세 변경 이력](CHANGELOG.md)
-
-## 검증
 
 ```bash
 PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
@@ -221,20 +170,7 @@ python scripts/check_site.py --root .
 node --check site/assets/research-data.js
 ```
 
-최신 dependency-complete GitHub Actions는 609/609 tests, 115 protocol invariant
-groups, site graph와 browser JavaScript를 통과했습니다. 이는 코드·프로토콜
-증거이며 scientific performance가 아닙니다.
-
-## 실행 및 보안 경계
-
-- 과학 실행은 `introai9`의 PBS에서만 수행합니다.
-- Login-node GPU 사용은 금지합니다.
-- 현재 exact P0 v3는 운영 변화와 무관하게 수리·재제출하지 않습니다.
-- `junjinyong`에는 접근·조회·전송·제출·모니터링하지 않습니다.
-- Private cache 경로, raw fields, 미공개 결과와 manuscript는 public repository나
-  site에 노출하지 않습니다.
-- Confirmatory gate, threshold, seed, outer test와 one-shot 결과에는 사후 repair를
-  허용하지 않습니다.
-
-과거 방향, 실패, superseded protocol과 정확한 CI provenance는 삭제하지 않고
-[CHANGELOG](CHANGELOG.md)와 사이트의 History 창에 보존합니다.
+과학 실행은 `introai9` PBS에서만 수행하고 login-node GPU를 사용하지 않습니다.
+`junjinyong`에는 접근·조회·전송·제출·모니터링하지 않습니다. Confirmatory
+threshold, seed, outer test와 one-shot 결과는 사후 repair하지 않습니다. 과거
+방향, 실패, superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다.

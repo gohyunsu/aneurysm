@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.9 · no active paper identity · Aneumo response fidelity 32.5/40 and novelty 2.5/5 are conditional source history only · PaNO occupies generic field-to-readout mismatch · current method-free P0 v3 is execution-incomplete with 0/12 scientific checks evaluated · exact one-shot contract closed · historical P1 and confirmation v1-v3 remain inactive · active method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
-    requirement: "job 116146.ECE-util1 consumed the sole CPU-only P0 v3 attempt and produced only a minimal execution-incomplete status; no aggregate or raw PBS output materialized, so there is no scientific pass/fail verdict and the low-level cause plus authorized train-field-read extent remain unknown; same-contract repair or resubmission is forbidden; P1, architecture, GPU, confirmation and claims remain closed; any future direction requires a fresh problem-level evidence decision, not a local runtime repair",
+    status: "Target locked · no active paper identity · transient structure-faithful WSS 30.0/40 inactive · D0 reader/extractor development only · scientific P0/method/model/GPU/validation/test/outer test/result/claim 0 · closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated · not submission-ready",
+    requirement: "D0 reuses only two previously inspected case-1 wall members to validate bounded extraction, VTP decoding, two normal constructions, two triangulations and signed critical-point reporting; it is not target-stability evidence and can only authorize a separately registered family-disjoint method-free P0; Hodge, GNN, equivariance, edge forms, tracking and topology preservation remain direct priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -46,6 +46,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Transient WSS re-enters only as an inactive target-identifiability program",
+      copy: "The closed response-fidelity P0 is not repaired. A fresh direct-prior subtraction includes Hodge Spectral Duality, SE(3) artery-wall WSS networks, RHSIA, exact critical-point-trajectory compression, FaCTz and a 359-lesion aneurysm critical-point study. GNN, Hodge, edge 1-forms, temporal decoding, tracking and topology losses are therefore controls rather than novelty. The remaining application conjunction is robust target identification, field-error/compute-matched structural failure and a minimal mechanism-linked correction. It stays 30.0/40 inactive. Prospective D0 reuses only case 1 phases 4.01 and 5.00 to validate a fail-closed reader/extractor and cannot activate a scientific P0, model or claim.",
+      status: "Active paper identity 0 · transient 30.0/40 inactive · D0 prospective development · scientific P0/model/GPU/test/claim 0",
+      url: "../docs/aneumo-transient-structure-reentry-2026-08-13.md"
+    },
     {
       year: "2026.08",
       title: "P0 v3 consumes its one shot without reaching a scientific verdict",

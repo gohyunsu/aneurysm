@@ -1,5 +1,33 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 post-P0 problem re-entry boundary:** Do not repair or relabel
+> the closed response-fidelity P0 v3. Its 32.5/40 is source history and its
+> scientific state remains execution-incomplete with 0/12 evaluated. The best
+> remaining acquired-asset candidate is Aneumo transient structure-faithful
+> WSS at **30.0/40 inactive**, not an active paper identity. Hodge Spectral
+> Duality, SE(3) wall-WSS networks, RHSIA, critical-point-trajectory
+> compression, FaCTz and the 359-lesion aneurysm critical-point study make GNN,
+> equivariance, edge 1-forms, Hodge blocks, temporal decoding, tracking and
+> topology loss direct prior/control—not novelty. The only residual
+> application path is robust target identification, field-error/compute-
+> matched structural failure and a minimal mechanism-linked correction.
+>
+> Current prospective D0 is reader/extractor development only. It reuses exact
+> Aneumo case 1 phases `4.01` and `5.00`, already inspected at SHA-256
+> `39e0f802…fc3a` / `007c9b72…eff9`; it must not read a new case or phase.
+> D0 validates bounded ZIP extraction, fail-closed VTP decoding, two normal
+> constructions, two deterministic polygon fans and signed critical-point
+> reporting. It has no scientific threshold and cannot establish target
+> stability. At most two bounded development repairs are allowed, each tied to
+> one encoding, range-extraction or deterministic implementation defect. A
+> pass opens only registration of a separate family-disjoint method-free P0.
+> Method, architecture, GPU, validation/test, outer test and paper claim stay
+> closed. Apply the stricter noncommercial/nonredistribution handling while
+> HF `CC BY-NC-ND 4.0` and GitHub-datasheet `CC BY 4.0` conflict; make no legal
+> conclusion and publish no raw/derived fields or weights. All execution is
+> introai9 PBS-only/no login-node GPU. Never access, query, transfer to, submit
+> on or monitor `junjinyong`.
+
 > **2026-08-13 P0-v3 one-shot final outcome:** Exact Quality/Pages-passed public
 > source `8252d354e22990f480344327f2fce34cf8016dfa` was activated prospectively
 > and submitted once on introai9 PBS as `116146.ECE-util1`. PBS allocated CPU 4,

@@ -54,11 +54,14 @@ def check_site(root: Path) -> list[str]:
         )
     required_readme_markers = {
         "execution-incomplete · 0/12 evaluated": "current P0 state",
-        "RF-C2 · controlled application solution": "application-only RF-C2 role",
+        "30.0/40 inactive": "current transient candidate boundary",
+        "D0 · known-member reader/extractor development": "current D0 evidence stage",
         "GNN을 포함한 어떤 모델도 current method가 아님": (
             "no-selected-architecture boundary"
         ),
-        "과거 방향, 실패, superseded protocol": "history routing boundary",
+        "superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다": (
+            "history routing boundary"
+        ),
     }
     for marker, label in required_readme_markers.items():
         if marker not in readme:
@@ -150,9 +153,12 @@ def check_site(root: Path) -> list[str]:
     research_data_path = root / "site" / "assets" / "research-data.js"
     research_data = research_data_path.read_text(encoding="utf-8")
     required_current_markers = {
-        "current method-free P0 v3": "current P0 version",
-        "P0 v3 is execution-incomplete with 0/12 scientific checks evaluated": (
-            "current P0 result count"
+        "transient structure-faithful WSS 30.0/40 inactive": (
+            "current transient candidate boundary"
+        ),
+        "D0 reader/extractor development only": "current D0 evidence stage",
+        "closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated": (
+            "closed P0 result count"
         ),
         "The current inactive v3 preserves unexecuted v1 and v2": (
             "current confirmation version"
@@ -178,11 +184,10 @@ def check_site(root: Path) -> list[str]:
         "uses unsrt": (
             "pre-evidence bibliography-format boundary"
         ),
-        "PaNO occupies generic field-to-readout mismatch": (
-            "latest generic field-to-readout collision boundary"
-        ),
-        "RF-C2 is a controlled application solution, not algorithmic novelty": (
-            "application-only method-claim boundary"
+        "Hodge Spectral Duality": "current topology-operator prior boundary",
+        "FaCTz": "latest critical-point-preservation collision boundary",
+        "Prospective D0 reuses only case 1 phases 4.01 and 5.00": (
+            "known-member-only D0 boundary"
         ),
     }
     for marker, label in required_current_markers.items():
