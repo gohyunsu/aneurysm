@@ -40,7 +40,8 @@ submission and must contain:
 4. one exact public commit and the immutable v3 config/evaluator hashes;
 5. the activation-runner hash and the separately pinned manifest hash;
 6. exact private cache path, byte count and registered digest;
-7. exact container path and digest;
+7. exact base-container path and digest plus the exact `h5py==3.12.1` wheel
+   path and digest used as a network-free job-local runtime layer;
 8. private output root; and
 9. the fixed introai9 PBS envelope: queue `coss_agpu`, 4 CPU, 16 GB, 0 GPU,
    one hour, no network and one shot.
@@ -61,6 +62,8 @@ private manifest registered and SHA-256 pinned
         ↓
 introai9 PBS wrapper validates source/container/manifest/cache envelope
         ↓
+network-free pinned wheel install in job-local temporary storage
+        ↓
 immutable P0 v3 reads train coordinates + velocity only
         ↓
 private aggregate + minimal attempt status
@@ -75,6 +78,13 @@ preserved and closes the direction. A completed 12/12 pass does not authorize a
 model, GPU, validation/test field, outer test or manuscript claim.
 
 ## Current evidence boundary
+
+The originally documented base image is readable and pins NumPy 2.1.2 and CPU
+PyTorch 2.5.1, but does not contain `h5py`. The activation layer therefore
+requires a separately hashed `h5py==3.12.1` wheel, verifies it before data
+access and installs it with `--no-index --no-deps` into job-local temporary
+storage. This dependency closure does not change a scientific byte or permit a
+second attempt.
 
 The validator's synthetic fixtures show only that valid authority is accepted
 and path, container, manifest, compute and scientific-authority drift are

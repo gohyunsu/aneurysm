@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 introai9 recovery/runtime pre-activation boundary:** Treat the
+> administrator report as the verified external operational change. Public-key
+> login, an empty user queue, enabled/running `coss_agpu`, exact cache identity,
+> storage readability, Singularity 3.11.3 and base-image readability were
+> confirmed without an HDF5 array read. The base image has NumPy 2.1.2 and
+> PyTorch 2.5.1 but lacks `h5py`; do not submit it alone. Activation schema v2
+> must pin the separately verified `h5py==3.12.1` wheel and install it
+> network-free with `--no-index --no-deps` into job-local temporary storage.
+> Immutable P0 v3 config/evaluator bytes and all 12 gates are unchanged. At this
+> source-preparation state the private manifest, field read and PBS attempt are
+> still 0. Freeze and push the public runtime source, then register exactly one
+> private manifest before the first field-array read. One CPU-only PBS attempt
+> is permitted after that; any attempt status forbids same-contract resubmission.
+> Never access, query, transfer to, submit on or monitor `junjinyong`.
+
 > **2026-08-13 current-overview public evidence synchronization:** Exact
 > consolidation source `b5fd69774e00cf58403c0a0fadfceba8b39fd3e4` passed
 > Quality `31689617455` and Pages `31689616910`. Dependency-complete CI records

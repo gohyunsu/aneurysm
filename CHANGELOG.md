@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-13 · introai9 preflight closes infrastructure, not science
+
+- Administrator-reported recovery was followed by successful public-key login,
+  an empty user queue, an enabled/running `coss_agpu` queue, exact cache size and
+  SHA-256, readable storage and a readable Singularity 3.11.3 base image. No
+  HDF5 array, validation/test field, GPU or scientific endpoint was read.
+- The documented base image pins NumPy 2.1.2 and PyTorch 2.5.1 but lacks
+  `h5py`. Submission was withheld. Activation schema v2 now additionally pins
+  an `h5py==3.12.1` wheel and installs it with `--no-index --no-deps` into
+  job-local temporary storage before the immutable evaluator starts.
+- The scientific config, evaluator, 12 gates, family split, seed and thresholds
+  remain byte-identical. Private activation manifest, field read and P0 attempt
+  remain zero; `junjinyong` remains excluded.
+
 ## 2026-08-13 · the consolidated entry point passes public validation
 
 - Exact consolidation source `b5fd69774e00cf58403c0a0fadfceba8b39fd3e4`

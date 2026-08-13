@@ -3,8 +3,9 @@
 The public P0 v3 config deliberately contains no private path and cannot
 authorize execution by itself.  After a *verified* introai9 operational change,
 a separately registered private manifest may bind that immutable evaluator to
-one exact cache, container and public source commit.  Until that private
-manifest exists, this module refuses before reading cache bytes or HDF5 arrays.
+one exact cache, container, runtime wheel and public source commit.  Until that
+private manifest exists, this module refuses before reading cache bytes or HDF5
+arrays.
 """
 
 from __future__ import annotations
@@ -32,7 +33,7 @@ from .aneumo_response_fidelity_p0_v3 import (
 
 
 PROTOCOL_ID = "aneumo_response_fidelity_method_free_p0_v3"
-ACTIVATION_SCHEMA = "aurora.aneumo_response_fidelity_p0_v3.activation.v1"
+ACTIVATION_SCHEMA = "aurora.aneumo_response_fidelity_p0_v3.activation.v2"
 BASE_CONFIG = "configs/aneumo_response_fidelity_p0_v3.json"
 BASE_CONFIG_SHA256 = (
     "1c7cc85dbd5d4ae5059663cfe3f638a7b4276b0f9fec537f4eec19757adfcc81"
@@ -95,8 +96,10 @@ def validate_activation_manifest(
     expected_public_source_commit: str,
     expected_host_cache_path: str,
     expected_container_path: str,
+    expected_runtime_wheel_path: str,
     expected_output_root: str,
     observed_container_sha256: str,
+    observed_runtime_wheel_sha256: str,
 ) -> None:
     """Validate private authority without opening the cache or HDF5 payload."""
 
@@ -172,6 +175,10 @@ def validate_activation_manifest(
             "cache_sha256",
             "container_path",
             "container_sha256",
+            "runtime_wheel_path",
+            "runtime_wheel_sha256",
+            "runtime_wheel_package",
+            "runtime_wheel_version",
         },
         label="source",
     )
@@ -180,6 +187,9 @@ def validate_activation_manifest(
     )
     container_path = _require_absolute_private_path(
         source["container_path"], label="container_path"
+    )
+    runtime_wheel_path = _require_absolute_private_path(
+        source["runtime_wheel_path"], label="runtime_wheel_path"
     )
     runner_path = repository_root / ACTIVATION_RUNNER
     if (
@@ -200,8 +210,16 @@ def validate_activation_manifest(
         or container_path != expected_container_path
         or source["container_sha256"] != observed_container_sha256
         or not FULL_SHA_PATTERN.fullmatch(observed_container_sha256)
+        or runtime_wheel_path != expected_runtime_wheel_path
+        or not runtime_wheel_path.endswith(".whl")
+        or source["runtime_wheel_sha256"] != observed_runtime_wheel_sha256
+        or not FULL_SHA_PATTERN.fullmatch(observed_runtime_wheel_sha256)
+        or source["runtime_wheel_package"] != "h5py"
+        or source["runtime_wheel_version"] != "3.12.1"
     ):
-        raise AneumoP0V3ActivationError("Activation source, cache or container pin drifted.")
+        raise AneumoP0V3ActivationError(
+            "Activation source, cache, container or runtime-wheel pin drifted."
+        )
     for relative, expected_hash in (
         (BASE_CONFIG, BASE_CONFIG_SHA256),
         (BASE_EVALUATOR, BASE_EVALUATOR_SHA256),
@@ -289,8 +307,10 @@ def load_activation_manifest(
     expected_public_source_commit: str,
     expected_host_cache_path: str,
     expected_container_path: str,
+    expected_runtime_wheel_path: str,
     expected_output_root: str,
     observed_container_sha256: str,
+    observed_runtime_wheel_sha256: str,
     expected_activation_manifest_sha256: str,
 ) -> dict[str, Any]:
     if not path.is_file():
@@ -314,8 +334,10 @@ def load_activation_manifest(
         expected_public_source_commit=expected_public_source_commit,
         expected_host_cache_path=expected_host_cache_path,
         expected_container_path=expected_container_path,
+        expected_runtime_wheel_path=expected_runtime_wheel_path,
         expected_output_root=expected_output_root,
         observed_container_sha256=observed_container_sha256,
+        observed_runtime_wheel_sha256=observed_runtime_wheel_sha256,
     )
     return manifest
 
@@ -328,9 +350,11 @@ def run_activated_p0(
     cache: Path,
     expected_host_cache_path: str,
     expected_container_path: str,
+    expected_runtime_wheel_path: str,
     expected_output_root: str,
     public_source_commit: str,
     observed_container_sha256: str,
+    observed_runtime_wheel_sha256: str,
     expected_activation_manifest_sha256: str,
     pbs_job_id: str,
 ) -> dict[str, Any]:
@@ -347,8 +371,10 @@ def run_activated_p0(
         expected_public_source_commit=public_source_commit,
         expected_host_cache_path=expected_host_cache_path,
         expected_container_path=expected_container_path,
+        expected_runtime_wheel_path=expected_runtime_wheel_path,
         expected_output_root=expected_output_root,
         observed_container_sha256=observed_container_sha256,
+        observed_runtime_wheel_sha256=observed_runtime_wheel_sha256,
         expected_activation_manifest_sha256=expected_activation_manifest_sha256,
     )
     if cache.stat().st_size != REGISTERED_CACHE_BYTES:
@@ -393,9 +419,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--expected-host-cache-path", required=True)
     parser.add_argument("--expected-container-path", required=True)
+    parser.add_argument("--expected-runtime-wheel-path", required=True)
     parser.add_argument("--expected-output-root", required=True)
     parser.add_argument("--public-source-commit", required=True)
     parser.add_argument("--observed-container-sha256", required=True)
+    parser.add_argument("--observed-runtime-wheel-sha256", required=True)
     parser.add_argument("--expected-activation-manifest-sha256", required=True)
     parser.add_argument("--pbs-job-id", required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -407,9 +435,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         cache=args.cache,
         expected_host_cache_path=args.expected_host_cache_path,
         expected_container_path=args.expected_container_path,
+        expected_runtime_wheel_path=args.expected_runtime_wheel_path,
         expected_output_root=args.expected_output_root,
         public_source_commit=args.public_source_commit,
         observed_container_sha256=args.observed_container_sha256,
+        observed_runtime_wheel_sha256=args.observed_runtime_wheel_sha256,
         expected_activation_manifest_sha256=(
             args.expected_activation_manifest_sha256
         ),

@@ -102,10 +102,12 @@
             하한선이고, field accuracy가 response를 실제로 망친다는 failure도 아직
             관측하지 않았습니다. Private inventory에서 cache identity와 기존
             SHA-256이 일치함은 보고됐지만, 경로와 infrastructure metadata는
-            public Git에 두지 않습니다. Current connection이 remote command 전 reset되어
-            container 가독성과 별도 activation manifest는 아직 확정되지 않았습니다.
+            public Git에 두지 않습니다. 관리자 확인 뒤 current connection, cache,
+            PBS와 base container 가독성을 배열 접근 없이 확인했습니다.
             기존 wrapper가 v2를 호출하던 문제는 v3 전용 activation runner와
-            CPU-only PBS wrapper로 교정했습니다. 그러나 실제 private manifest가
+            CPU-only PBS wrapper로 교정했습니다. Base image에 없던
+            <code>h5py</code>는 해시 고정 wheel의 network-free·job-local 설치로
+            검증했습니다. 그러나 실제 private manifest가
             없으므로 이는 실행 준비 코드일 뿐, cache field를 읽거나 job을 제출할
             권한이 아닙니다.
             그래서 train-only method-free P0만 등록된 상태입니다. Active split, method,
@@ -380,10 +382,10 @@
           <p>
             현재 상태는 32.5/40 conditional lead, novelty 2.5/5, failure observed 0,
             P0 registered/non-executable입니다. Immutable evaluator와 별도 activation
-            runner, CPU 4/GPU 0 v3 one-shot wrapper는 code-complete지만, 현재는
-            verified operational change·container verdict·private manifest가 없으므로
-            cache access 전에 거부하고 제출할 수 없습니다. External service change가 확인되기
-            전에는 <code>introai9</code> inventory를 재시도하지 않으며,
+            runner, CPU 4/GPU 0 v3 one-shot wrapper와 pinned runtime layer는
+            code-complete입니다. Operational change·cache·PBS·container preflight는
+            확인됐지만 private manifest는 아직 0이므로 cache access 전에 거부합니다.
+            공개 source를 고정한 뒤 manifest를 먼저 등록하고 한 번의 CPU P0만 제출하며,
             <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
           </p>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">직접 선행·six-way score·P0/P1·ISBI claim 삭제 규칙 전체 읽기 ↗</a>

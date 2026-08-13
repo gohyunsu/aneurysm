@@ -155,7 +155,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or project["excluded_execution_servers"] != ["junjinyong"]
         or project["current_gpu_job_count"] != 0
         or project["current_scheduler_observation"]
-        != "introai9_p0_115848_e_exit2_walltime_00_04_44_gpu0_scientific_checks_0_of_10_no_login_node_gpu_command"
+        != "introai9_coss_agpu_enabled_running_user_queue_empty_preflight_20260813_no_job_submitted"
         or project["first_future_gpu_action"]
         != "none_until_a_fresh_problem_passes_source_admission_and_a_later_gate_explicitly_authorizes_gpu"
     ):
@@ -310,7 +310,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["candidate_estimand"]
         != "reference_velocity_multi_flow_response_fidelity_not_clinical_outcome"
         or problem_selection["asset_access_status"]
-        != "verified_historical_aneumo_compact_cache_contract_but_current_introai9_exact_private_path_unresolved_active_assignment_zero"
+        != "exact_private_aneumo_cache_identity_and_readability_verified_without_field_array_read_active_assignment_zero"
         or problem_selection["user_accepted_data_terms_verified"] is not False
         or problem_selection["task_unit_audited"] is not True
         or problem_selection["annotation_selection_mechanism_audited"] is not False
@@ -1570,6 +1570,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "v3_activation_code_ready",
             "v3_activation_requires_verified_operational_change",
             "v3_activation_requires_public_source_cache_container_runner_and_manifest_hash_pins",
+            "v3_activation_requires_pinned_network_free_runtime_wheel",
             "v3_activation_requires_zero_prior_scientific_attempt",
             "v3_activation_runner_reads_field_without_manifest",
             "v3_legacy_v2_wrapper_valid_for_v3",
@@ -1585,10 +1586,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "hdf5_schema_only_reported_checked",
             "hdf5_array_values_reported_read",
             "duplicate_cache_reported_in_bounded_private_scope",
-            "current_session_bounded_connection_attempt_count",
-            "current_session_remote_command_executed",
-            "current_session_connection_state",
+            "current_activation_preflight_round_count",
+            "current_activation_remote_command_executed",
+            "current_activation_connection_state",
             "current_container_readability_verified",
+            "current_pbs_queue_state_verified", "base_container_h5py_present",
+            "network_free_runtime_wheel_compatibility_verified",
             "activation_manifest_registered",
             "v3_exact_private_cache_path_frozen",
             "v3_external_service_change_verified", "v3_executable",
@@ -1608,7 +1611,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         anchor_red_team["status"]
-        != "exact_cache_identity_reported_and_checksum_matched_but_p0_v3_activation_locked_after_current_connection_reset"
+        != "introai9_operational_change_verified_cache_container_pbs_readable_runtime_layer_ready_manifest_absent_p0_v3_zero_of_12"
         or anchor_red_team["audit_document"]
         != "docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md"
         or anchor_red_team["cache_inventory_document"]
@@ -1646,17 +1649,17 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or anchor_red_team["v3_activation_runner"]
         != "src/aurora/aneumo_response_fidelity_p0_v3_activation.py"
         or anchor_red_team["v3_activation_runner_sha256"]
-        != "492c842f27777f0e235ce02cab4f6051993edd425859e6ddf67e8f187c920a9c"
+        != "81c6ad9122a9e614c976ea92f29c3df05f819a1af1d4e211ee604e31b714661e"
         or anchor_red_team["v3_activation_test"]
         != "tests/test_aneumo_response_fidelity_p0_v3_activation.py"
         or anchor_red_team["v3_activation_test_sha256"]
-        != "ed97014d27faaf470d66842fc643f8ae8c558af3e5c62bad84e38b8d767395e4"
+        != "27c93fd15eac220bcf2019fc0557bd8cb9f4e81b9c6db29c40c8b4f2fde009c2"
         or anchor_red_team["v3_pbs_wrapper"]
         != "cluster/pbs_aneumo_response_fidelity_p0_v3.pbs"
         or anchor_red_team["v3_pbs_wrapper_sha256"]
-        != "a5e288d63ae5d59fc7ecfd83026de4ca86e503cd524cc4f61956f1da63daca1d"
+        != "d4d56a19e3d38c6b17e6aabc5d3f47fd9ccb1667823a704e8a286b18d8b8c69e"
         or anchor_red_team["v3_activation_manifest_schema"]
-        != "aurora.aneumo_response_fidelity_p0_v3.activation.v1"
+        != "aurora.aneumo_response_fidelity_p0_v3.activation.v2"
         or anchor_red_team["v3_registered_check_count"] != 12
         or anchor_red_team["v3_observed_check_count"] != 0
         or anchor_red_team["v3_anchor_tangent_check"]
@@ -1666,9 +1669,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or anchor_red_team["v3_independent_unit"] != "aneumo_generation_family"
         or anchor_red_team["exact_cache_sha256"]
         != "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
-        or anchor_red_team["current_session_bounded_connection_attempt_count"] != 2
-        or anchor_red_team["current_session_connection_state"]
-        != "windows_ssh_connection_reset_before_remote_command_after_wsl_alias_resolution_failure"
+        or anchor_red_team["current_activation_preflight_round_count"] != 1
+        or anchor_red_team["current_activation_connection_state"]
+        != "public_key_login_remote_commands_and_bounded_preflight_succeeded"
         or anchor_red_team["execution_server"] != "introai9"
         or anchor_red_team["pbs_only"] is not True
         or any(
@@ -1682,6 +1685,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "v3_activation_code_ready",
                 "v3_activation_requires_verified_operational_change",
                 "v3_activation_requires_public_source_cache_container_runner_and_manifest_hash_pins",
+                "v3_activation_requires_pinned_network_free_runtime_wheel",
                 "v3_activation_requires_zero_prior_scientific_attempt",
                 "v3_method_free",
                 "v3_train_only",
@@ -1692,6 +1696,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "hdf5_schema_only_reported_checked",
                 "real_cache_metadata_or_field_read",
                 "introai9_connection_attempted",
+                "current_activation_remote_command_executed",
+                "current_container_readability_verified",
+                "current_pbs_queue_state_verified",
+                "network_free_runtime_wheel_compatibility_verified",
+                "v3_external_service_change_verified",
+                "scientific_server_queried",
                 "fresh_p1_version_required_after_real_v3_all_12_pass",
             )
         )
@@ -1703,21 +1713,20 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "v3_legacy_v2_wrapper_valid_for_v3",
                 "hdf5_array_values_reported_read",
                 "duplicate_cache_reported_in_bounded_private_scope",
-                "current_session_remote_command_executed",
-                "current_container_readability_verified",
+                "base_container_h5py_present",
                 "activation_manifest_registered",
                 "v3_exact_private_cache_path_frozen",
-                "v3_external_service_change_verified", "v3_executable",
+                "v3_executable",
                 "v3_submitted", "real_cache_field_array_read",
                 "historical_p1_v1_v2_v3_activatable", "method_selected",
-                "architecture_selected", "scientific_server_queried",
+                "architecture_selected",
                 "pbs_or_gpu_job_submitted", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",
                 "junjinyong_accessed",
             )
         )
         or anchor_red_team["next_allowed_action"]
-        != "after_verified_introai9_operational_change_confirm_the_pinned_container_then_register_a_separate_execution_activation_manifest_without_editing_p0_v3"
+        != "freeze_this_public_runtime_source_then_register_one_private_activation_manifest_before_any_p0_v3_field_array_read"
     ):
         raise ProtocolError(
             "The Aneumo anchor-tangent red team must preserve P0 v2, keep P0 v3 "

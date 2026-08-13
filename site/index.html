@@ -61,12 +61,13 @@
           P1에서 실제 mismatch가 관측된 뒤에만 최소 anchor-response factorization을
           평가합니다. 현재 scientific result·selected model·GPU·outer test·paper
           claim은 모두 0입니다. Private inventory에서 cache identity와
-          기존 SHA-256이 일치하는 것으로 보고됐지만, 경로와 infrastructure metadata는
+          기존 SHA-256이 일치하는 것으로 보고됐고, 경로와 infrastructure metadata는
           public Git에 공개하지 않습니다. 현재 세션의 접속은
-          remote command 전 reset되어 container 가독성과 실제 activation manifest가
-          없습니다. 기존 PBS wrapper가 v2를 호출하던 공백은 별도 v3 activation
-          runner와 CPU-only wrapper로 교정했지만, 이것은 서버 복구나 실행 승인이
-          아닙니다. 따라서 아직 실행·제출 가능한 job은 아닙니다. Official
+          성공했으며 cache·PBS·base container 가독성을 field-array read 없이
+          확인했습니다. Base image에 <code>h5py</code>가 없어 그대로 제출하지 않고,
+          해시 고정 <code>h5py==3.12.1</code> wheel을 network-free·job-local로
+          설치하는 activation schema v2를 검증했습니다. 실제 private manifest와
+          field-array read, PBS attempt는 아직 0입니다. Official
           Aneumo의 427 base geometry 중 historical 32를 뺀 동일 release에서 future
           100-family 확인을 설계하되, outer field 전에 precision과 전체 2-model×5-seed
           workload가 충분한지도 먼저 통과해야 합니다. 최종 확인에서는 candidate가
@@ -279,7 +280,7 @@
         <div><span>Latest scientific decision</span><b>Aneumo matched response audit · conditional application/evaluation lead</b></div>
         <div><span>Score / critical floor</span><b>32.5/40 fresh total · residual novelty 2.5/5 = floor</b></div>
         <div><span>Lead / pending P0 / selected model / GPU / claim</span><b>1 / 1 / 0 / 0 / 0</b></div>
-        <div><span>Next action</span><b>External service change → exact-path preflight → train-only CPU P0; no current retry</b></div>
+        <div><span>Next action</span><b>Freeze runtime source → private manifest → one train-only CPU P0</b></div>
       </div>
     </section>
 
@@ -556,11 +557,11 @@
         <p class="eyebrow">04 · EXPERIMENTS</p>
         <h2>Falsify the task.<br><em>Before optimizing the model.</em></h2>
         <p>
-          현재 실행 가능한 job은 없습니다. Private cache identity는 해결됐지만
-          외부 서비스 상태와 container 가독성, 실제 activation manifest가 없어
-          non-executable입니다. Immutable evaluator와 별도 activation runner,
-          CPU 4/GPU 0 v3 wrapper는 구현됐고 synthetic contract test를 통과했지만,
-          manifest가 없으면 cache byte나 field를 읽기 전에 fail closed합니다.
+          운영 preflight는 통과했지만 아직 실행 가능한 job은 없습니다. Private cache,
+          PBS와 base container는 정상이며, 누락된 <code>h5py</code>는 해시 고정 wheel을
+          network-free·job-local로 설치하는 schema v2에서 검증했습니다. Immutable
+          evaluator와 CPU 4/GPU 0 wrapper는 유지되며, private manifest가 없으면 cache
+          byte나 field를 읽기 전에 fail closed합니다.
           P0가 endpoint를 식별한 뒤에도, P1이 field-error-matched response mismatch를
           실제로 보여야만 model development로 넘어갑니다.
         </p>

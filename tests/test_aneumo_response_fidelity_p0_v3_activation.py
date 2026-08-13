@@ -28,6 +28,8 @@ COMMIT = "a" * 40
 CONTAINER_SHA = "b" * 64
 HOST_CACHE = "/home/introai9/private/aneumo_pilot.h5"
 CONTAINER_PATH = "/home/introai9/containers/pinned.sif"
+RUNTIME_WHEEL_PATH = "/home/introai9/runtime/h5py-3.12.1-py3-none-any.whl"
+RUNTIME_WHEEL_SHA = "c" * 64
 OUTPUT_ROOT = "/home/introai9/private/results"
 
 
@@ -62,6 +64,10 @@ def _manifest() -> dict:
             "cache_sha256": REGISTERED_CACHE_SHA256,
             "container_path": CONTAINER_PATH,
             "container_sha256": CONTAINER_SHA,
+            "runtime_wheel_path": RUNTIME_WHEEL_PATH,
+            "runtime_wheel_sha256": RUNTIME_WHEEL_SHA,
+            "runtime_wheel_package": "h5py",
+            "runtime_wheel_version": "3.12.1",
         },
         "execution": {
             "server": "introai9",
@@ -100,8 +106,10 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
             expected_public_source_commit=COMMIT,
             expected_host_cache_path=HOST_CACHE,
             expected_container_path=CONTAINER_PATH,
+            expected_runtime_wheel_path=RUNTIME_WHEEL_PATH,
             expected_output_root=OUTPUT_ROOT,
             observed_container_sha256=CONTAINER_SHA,
+            observed_runtime_wheel_sha256=RUNTIME_WHEEL_SHA,
         )
 
     def test_absent_manifest_refuses_before_cache_access(self) -> None:
@@ -113,8 +121,10 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
                 expected_public_source_commit=COMMIT,
                 expected_host_cache_path=HOST_CACHE,
                 expected_container_path=CONTAINER_PATH,
+                expected_runtime_wheel_path=RUNTIME_WHEEL_PATH,
                 expected_output_root=OUTPUT_ROOT,
                 observed_container_sha256=CONTAINER_SHA,
+                observed_runtime_wheel_sha256=RUNTIME_WHEEL_SHA,
                 expected_activation_manifest_sha256="d" * 64,
             )
 
@@ -134,8 +144,10 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
                     expected_public_source_commit=COMMIT,
                     expected_host_cache_path=HOST_CACHE,
                     expected_container_path=CONTAINER_PATH,
+                    expected_runtime_wheel_path=RUNTIME_WHEEL_PATH,
                     expected_output_root=OUTPUT_ROOT,
                     observed_container_sha256=CONTAINER_SHA,
+                    observed_runtime_wheel_sha256=RUNTIME_WHEEL_SHA,
                 )
 
     def test_path_container_or_authority_drift_fails_closed(self) -> None:
@@ -145,6 +157,9 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
         mutations.append(changed)
         changed = _manifest()
         changed["source"]["container_sha256"] = "c" * 64
+        mutations.append(changed)
+        changed = _manifest()
+        changed["source"]["runtime_wheel_sha256"] = "d" * 64
         mutations.append(changed)
         changed = _manifest()
         changed["execution"]["gpu"] = 1
@@ -162,8 +177,10 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
                     expected_public_source_commit=COMMIT,
                     expected_host_cache_path=HOST_CACHE,
                     expected_container_path=CONTAINER_PATH,
+                    expected_runtime_wheel_path=RUNTIME_WHEEL_PATH,
                     expected_output_root=OUTPUT_ROOT,
                     observed_container_sha256=CONTAINER_SHA,
+                    observed_runtime_wheel_sha256=RUNTIME_WHEEL_SHA,
                 )
 
     def test_unknown_or_extra_manifest_field_is_rejected(self) -> None:
@@ -176,8 +193,10 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
                 expected_public_source_commit=COMMIT,
                 expected_host_cache_path=HOST_CACHE,
                 expected_container_path=CONTAINER_PATH,
+                expected_runtime_wheel_path=RUNTIME_WHEEL_PATH,
                 expected_output_root=OUTPUT_ROOT,
                 observed_container_sha256=CONTAINER_SHA,
+                observed_runtime_wheel_sha256=RUNTIME_WHEEL_SHA,
             )
 
     def test_serialized_private_manifest_is_valid_but_not_registered(self) -> None:
@@ -193,8 +212,10 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
                 expected_public_source_commit=COMMIT,
                 expected_host_cache_path=HOST_CACHE,
                 expected_container_path=CONTAINER_PATH,
+                expected_runtime_wheel_path=RUNTIME_WHEEL_PATH,
                 expected_output_root=OUTPUT_ROOT,
                 observed_container_sha256=CONTAINER_SHA,
+                observed_runtime_wheel_sha256=RUNTIME_WHEEL_SHA,
                 expected_activation_manifest_sha256=manifest_sha,
             )
         self.assertEqual(loaded["protocol_id"], PROTOCOL_ID)
@@ -205,6 +226,8 @@ class AneumoP0V3ActivationTests(unittest.TestCase):
         self.assertIn("aneumo_response_fidelity_p0_v3_activation", text)
         self.assertIn('AURORA_ACTIVATION_MANIFEST', text)
         self.assertIn('AURORA_ACTIVATION_MANIFEST_SHA256', text)
+        self.assertIn('AURORA_RUNTIME_WHEEL_SHA256', text)
+        self.assertIn('python -m pip install --no-index --no-deps', text)
         self.assertIn('AURORA_EXTERNAL_SERVICE_CHANGE_ACK', text)
         self.assertIn('PBS_JOBID', text)
         self.assertIn(

@@ -1420,6 +1420,13 @@ window.AURORA_DATA = Object.freeze({
   changes: [
     {
       date: "2026.08.13",
+      category: "protocol",
+      title: "introai9 is operational; the missing runtime dependency is pinned before submission",
+      copy: "Administrator-reported recovery was verified by public-key login, an empty user queue, enabled/running coss_agpu, exact cache size and SHA-256, and readable Singularity 3.11.3 storage. The base image has NumPy 2.1.2 and PyTorch 2.5.1 but no h5py, so no P0 was submitted. Activation schema v2 additionally pins an h5py 3.12.1 wheel and installs it network-free with --no-index --no-deps into job-local temporary storage. Immutable scientific config/evaluator bytes and all 12 gates are unchanged. Private manifest, HDF5 array read, PBS attempt, GPU, result and claim remain zero; junjinyong remains excluded.",
+      files: ["src/aurora/aneumo_response_fidelity_p0_v3_activation.py", "tests/test_aneumo_response_fidelity_p0_v3_activation.py", "cluster/pbs_aneumo_response_fidelity_p0_v3.pbs", "docs/aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.13",
       category: "site",
       title: "The public entry point is a current overview, not a second changelog",
       copy: "A bounded current-facing audit found that README had grown to 2,598 lines by repeating dated provenance already preserved in CHANGELOG and the filterable History window. It is now a 217-line onboarding path that separates the current 32.5/40 application-only lead, real P0 v3 0/12, dataset scope, claim boundaries, evidence ladder and execution rules. Historical 0/11 states remain unchanged in dated History records. The site checker now caps README at 260 lines, requires current P0/no-architecture/application-only markers and rejects private paths, stale current P0 wording and dated changelog sections.",

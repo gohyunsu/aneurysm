@@ -26,7 +26,7 @@ AURORA는 뇌동맥류 CFD surrogate가 단순한 field error뿐 아니라 **유
 | P1 / architecture | 미등록 / 미선택 | GNN을 포함한 어떤 모델도 current method가 아님 |
 | Development | 미개방 | test 봉인, prospective bounded repair만 향후 허용 |
 | Confirmation | 0/100 family | 기존 32 family를 제외한 신규 family evidence 필요 |
-| 실행 | 중지 | 검증된 `introai9` 운영 변화 전 재시도 금지 |
+| 실행 | activation preflight 완료 | PBS·cache·base container 정상, private manifest와 P0 제출은 아직 0 |
 | 논문 | internal pre-evidence plan | title·contribution·result·figure 봉인 |
 
 [프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 배경지식이 없는
@@ -116,6 +116,12 @@ RF-C1–RF-C3 activation and ISBI manuscript population
 현재는 P0 v3 이전입니다. Synthetic fixtures의 12/12는 evaluator code test일
 뿐 Aneumo result가 아닙니다. P0를 통과해도 historical P1이나 confirmation
 template가 자동으로 활성화되지 않으며 fresh evidence version이 필요합니다.
+
+관리자 확인 뒤 `introai9` 공개키 접속, 빈 사용자 queue, enabled PBS queue,
+정확한 cache checksum과 base-container 가독성을 다시 확인했습니다. Base image에
+`h5py`가 없어서 그대로 제출하지 않았고, 해시 고정 `h5py==3.12.1` wheel을
+network-free·job-local로 설치하는 activation schema v2를 추가했습니다. Private
+manifest 등록과 field-array read, PBS attempt는 여전히 0입니다.
 
 ### P0 v3
 

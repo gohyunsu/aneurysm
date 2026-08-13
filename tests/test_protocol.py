@@ -219,6 +219,9 @@ class ProtocolTests(unittest.TestCase):
             ]
         )
         self.assertTrue(
+            anchor_audit["v3_activation_requires_pinned_network_free_runtime_wheel"]
+        )
+        self.assertTrue(
             anchor_audit["v3_activation_requires_zero_prior_scientific_attempt"]
         )
         self.assertFalse(
@@ -238,8 +241,14 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(anchor_audit["hdf5_schema_only_reported_checked"])
         self.assertFalse(anchor_audit["hdf5_array_values_reported_read"])
         self.assertTrue(anchor_audit["introai9_connection_attempted"])
-        self.assertFalse(anchor_audit["current_session_remote_command_executed"])
-        self.assertFalse(anchor_audit["current_container_readability_verified"])
+        self.assertTrue(anchor_audit["current_activation_remote_command_executed"])
+        self.assertTrue(anchor_audit["current_container_readability_verified"])
+        self.assertTrue(anchor_audit["current_pbs_queue_state_verified"])
+        self.assertFalse(anchor_audit["base_container_h5py_present"])
+        self.assertTrue(
+            anchor_audit["network_free_runtime_wheel_compatibility_verified"]
+        )
+        self.assertTrue(anchor_audit["v3_external_service_change_verified"])
         self.assertFalse(anchor_audit["activation_manifest_registered"])
         self.assertFalse(anchor_audit["v3_executable"])
         self.assertTrue(anchor_audit["real_cache_metadata_or_field_read"])
@@ -248,7 +257,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertTrue(
             anchor_audit["fresh_p1_version_required_after_real_v3_all_12_pass"]
         )
-        self.assertFalse(anchor_audit["scientific_server_queried"])
+        self.assertTrue(anchor_audit["scientific_server_queried"])
         self.assertFalse(anchor_audit["pbs_or_gpu_job_submitted"])
         self.assertFalse(anchor_audit["junjinyong_accessed"])
         self.assertEqual(residual_audit["historical_source_screen_score"], 34.0)

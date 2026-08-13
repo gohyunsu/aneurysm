@@ -14,6 +14,8 @@ umask 077
 : "${AURORA_OUTPUT_ROOT:?set the private aggregate root}"
 : "${AURORA_CONTAINER:?set the pinned readable container}"
 : "${AURORA_CONTAINER_SHA256:?set the preflight-verified container SHA-256}"
+: "${AURORA_RUNTIME_WHEEL:?set the pinned h5py runtime wheel}"
+: "${AURORA_RUNTIME_WHEEL_SHA256:?set the pinned runtime-wheel SHA-256}"
 : "${AURORA_CACHE_PATH:?set the exact frozen private cache path}"
 : "${AURORA_CACHE_SHA256:?set the registered cache SHA-256}"
 : "${AURORA_ACTIVATION_MANIFEST:?set the separately registered private manifest}"
@@ -32,6 +34,10 @@ if [[ "$AURORA_CACHE_SHA256" != "$registered_cache_sha" ]]; then
 fi
 if [[ ! "$AURORA_CONTAINER_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
   echo "AURORA_CONTAINER_SHA256 must be a full lowercase SHA-256." >&2
+  exit 90
+fi
+if [[ ! "$AURORA_RUNTIME_WHEEL_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+  echo "AURORA_RUNTIME_WHEEL_SHA256 must be a full lowercase SHA-256." >&2
   exit 90
 fi
 if [[ ! "$AURORA_ACTIVATION_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
@@ -55,6 +61,7 @@ status_path="$record_root/status.$PBS_JOBID.json"
 result_path="$record_root/result.$PBS_JOBID.private.json"
 job_tmp="${TMPDIR:-/tmp}/aurora_response_fidelity_p0_v3_$PBS_JOBID"
 container_result="$job_tmp/result.private.json"
+runtime_python="$job_tmp/python"
 mkdir -p "$record_root" "$job_tmp"
 
 shopt -s nullglob
@@ -88,7 +95,7 @@ on_exit() {
 }
 trap on_exit EXIT
 
-for required in "$AURORA_CONTAINER" "$AURORA_CACHE_PATH" "$AURORA_ACTIVATION_MANIFEST"; do
+for required in "$AURORA_CONTAINER" "$AURORA_RUNTIME_WHEEL" "$AURORA_CACHE_PATH" "$AURORA_ACTIVATION_MANIFEST"; do
   if [[ ! -r "$required" ]]; then
     echo "A pinned private activation input is unreadable." >&2
     exit 93
@@ -106,6 +113,17 @@ if [[ "$(sha256sum "$AURORA_ACTIVATION_MANIFEST" | awk '{print $1}')" != "$AUROR
   echo "Observed activation-manifest SHA-256 differs from the submission pin." >&2
   exit 93
 fi
+if [[ "$(sha256sum "$AURORA_RUNTIME_WHEEL" | awk '{print $1}')" != "$AURORA_RUNTIME_WHEEL_SHA256" ]]; then
+  echo "Observed runtime-wheel SHA-256 differs from the activation pin." >&2
+  exit 93
+fi
+
+singularity exec --cleanenv \
+  --bind "$AURORA_RUNTIME_WHEEL:/runtime-wheel/h5py.whl:ro" \
+  --bind "$job_tmp:/run" \
+  "$AURORA_CONTAINER" \
+  python -m pip install --no-index --no-deps --target /run/python \
+    /runtime-wheel/h5py.whl
 
 set +e
 singularity exec --cleanenv \
@@ -116,7 +134,7 @@ singularity exec --cleanenv \
   --bind "$job_tmp:/run" \
   "$AURORA_CONTAINER" \
   env PBS_JOBID="$PBS_JOBID" PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 \
-    PYTHONPATH=/workspace/src TMPDIR=/run \
+    PYTHONPATH=/run/python:/workspace/src TMPDIR=/run \
   python -m aurora.aneumo_response_fidelity_p0_v3_activation \
     --config /workspace/configs/aneumo_response_fidelity_p0_v3.json \
     --activation-manifest /activation/manifest.private.json \
@@ -124,9 +142,11 @@ singularity exec --cleanenv \
     --cache /data/aneumo_pilot.h5 \
     --expected-host-cache-path "$AURORA_CACHE_PATH" \
     --expected-container-path "$AURORA_CONTAINER" \
+    --expected-runtime-wheel-path "$AURORA_RUNTIME_WHEEL" \
     --expected-output-root "$AURORA_OUTPUT_ROOT" \
     --public-source-commit "$AURORA_GIT_COMMIT" \
     --observed-container-sha256 "$AURORA_CONTAINER_SHA256" \
+    --observed-runtime-wheel-sha256 "$AURORA_RUNTIME_WHEEL_SHA256" \
     --expected-activation-manifest-sha256 "$AURORA_ACTIVATION_MANIFEST_SHA256" \
     --pbs-job-id "$PBS_JOBID" \
     --output /run/result.private.json
