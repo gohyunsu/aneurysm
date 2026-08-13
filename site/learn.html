@@ -91,7 +91,7 @@
           과거 AURORA 후보들이 왜 실패했는지 차근차근 설명합니다.
         </p>
         <div class="answer-card">
-          <span>짧은 답 · schema 11.8</span>
+          <span>짧은 답 · schema 11.9</span>
           <strong>확보한 Aneumo 자산에서 하나의 조건부 연구 방향을 찾았지만, 아직 모델이나 논문 주장을 승인한 것은 아닙니다.</strong>
           <p>
             Aneumo compact holding은 32 generation family, 64 case, case당 8개
@@ -99,9 +99,14 @@
             뒤 다른 유량의 velocity response를 예측하는 sensitivity-sweep 문제를
             최신 감사에서 32.5/40 조건부 lead로 유지했습니다. 그러나 novelty는 정확히 2.5/5
             하한선이고, field accuracy가 response를 실제로 망친다는 failure도 아직
-            관측하지 않았습니다. 그래서 train-only method-free P0만 등록했으며 exact
-            private path가 unresolved라 실행할 수 없습니다. Active split, method,
+            관측하지 않았습니다. Private inventory에서 cache identity와 기존
+            SHA-256이 일치함은 보고됐지만, 경로와 infrastructure metadata는
+            public Git에 두지 않습니다. Current connection이 remote command 전 reset되어
+            container 가독성과 별도 activation manifest는 아직 확정되지 않았습니다.
+            그래서 train-only method-free P0만 등록된 상태입니다. Active split, method,
             architecture, GPU, outer test, result와 claim은 모두 0입니다.
+            현재 evidence contract는 anchor tangent를 별도로 검사하는 P0 v3이며,
+            실제 상태는 0/12입니다. 합성 fixture는 구현 검증일 뿐 성능 결과가 아닙니다.
           </p>
         </div>
         <div class="answer-card" id="response-fidelity">
@@ -160,8 +165,8 @@
             자명한 순서만으로 높은 값이 나올 수 있습니다. 구현된 evaluator는 각
             target flow 안에서 family response 순위를 따로 계산한 뒤 합치고, 독립
             단위인 20개 family를 5,000회 bootstrap합니다. 4,096 node 수와 frozen
-            family/case mapping도 강제합니다. Current v2 synthetic test는 11개 check를 모두
-            통과하지만 real Aneumo 결과는 아직 0입니다.
+            family/case mapping도 강제합니다. Historical v2 smooth synthetic test는
+            11개 check를 통과했지만 real Aneumo 결과는 없었습니다.
           </p>
           <p>
             구현도 반례로 검증했습니다. 처음 코드는 빠진 유량 값을 보간으로 바꾼
@@ -180,6 +185,18 @@
             0.25를 추가했습니다. 실제 cache byte도 직접 SHA-256하고 host의 frozen
             path를 container에서도 같은 path로 유지합니다. V2 이후 metric이나
             threshold 변경은 별도 evidence version 없이는 허용하지 않습니다.
+          </p>
+          <p>
+            이후의 독립 red team은 v2가 anchor-relative interpolation의 0 denominator를
+            피하려고 nominal anchor를 건너뛸 때, primary endpoint에 포함되는 anchor
+            tangent도 함께 건너뛴다는 점을 찾았습니다. 20개 family를 독립 단위로 한
+            5,000회 bootstrap 합성 반례는 v2 11/11을 통과하면서 omitted anchor-tangent median이
+            <code>0.7987704542950331</code>이었습니다. 이것은 과학적 결과가 아니라
+            검사 누락을 증명하는 contract test입니다. V2를 수정하지 않고 보존하고,
+            current v3는 좌우 anchor tangent와 이웃 secant를 두 coordinate half에서
+            비교하는 CI-lower ≥0.80 check를 추가했습니다. 그래서 real gate는 0/12이며,
+            12/12 pass도 historical P1 v1--v3를 열지 않고 fresh P1 version 등록만
+            허용합니다.
           </p>
           <p>
             P0가 통과해도 바로 fancy model을 만들지 않습니다. P1은 아직 등록되지
@@ -276,8 +293,11 @@
           <a href="../configs/aneumo_response_fidelity_p1_template_v3.json">P1 v3 same-backbone·방향성·bounded-development 계약 읽기 ↗</a>
           <a href="../docs/response-fidelity-confirmation-design-2026-08-12.md">100-family independent-confirmation 설계 읽기 ↗</a>
           <a href="../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md">Confirmation v3 comparator·evaluator red-team 읽기 ↗</a>
+          <a href="../docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md">P0 v3 anchor-tangent red-team 읽기 ↗</a>
+          <a href="../docs/aneumo-cache-path-inventory-2026-08-13.md">Exact cache path·activation boundary 읽기 ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p0_v3.json">Current P0 v3 machine contract 읽기 ↗</a>
           <a href="../configs/aneumo_response_fidelity_confirmation_template_v3.json">비활성 confirmation v3 machine contract 읽기 ↗</a>
-          <a href="../src/aurora/aneumo_response_fidelity_p0.py">Fail-closed aggregate evaluator 읽기 ↗</a>
+          <a href="../src/aurora/aneumo_response_fidelity_p0_v3.py">Fail-closed P0 v3 evaluator 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">
           <span>왜 괜찮아 보이는 AneuX 아이디어를 실행하지 않았나?</span>

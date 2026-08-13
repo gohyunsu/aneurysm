@@ -1,5 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
+> **Schema 11.9 current-use correction:** The Aneumo holding remains a
+> historically verified 32-family/64-case compact cache contract; it was not
+> rejected or lost scientifically. Its bounded private inventory now matches
+> the registered SHA-256; location and infrastructure metadata remain private.
+> The active
+> method-free gate is P0 v3 with 12 checks, including a
+> separate anchor-tangent audit; real status remains 0/12 and active
+> train/validation/test is 0/0/0 because execution activation and current
+> container readability remain locked. V2's 11-check omission was found with
+> synthetic data before any cache read and is preserved as evidence history.
+
 > **Schema 11.8 active-use distinction:** Aneumo에는 checksum이 검증된 compact
 > holding 계약이 있다: 32 base families, family당 2 cases, case당 8 mass flows와
 > 4,096 aligned internal nodes, 기존 20/6/6 family split이다. Historical unit

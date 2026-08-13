@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.8 · one conditional Aneumo response-fidelity source lead at fresh 32.5/40, novelty exactly 2.5/5 · general interventional consistency and aneurysm perturbation-response surrogation are direct priors · independent confirmation v3 requires bilateral field equivalence and response superiority against both learned direct and analytic power-law controls · final pre-execution method-free P0 v2 has 11 checks and remains non-executable · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "the train-only endpoint-stability P0 and a separate field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; inactive P1 v3 holds one LaB-GATr backbone fixed and changes only direct target-field versus identity-preserving anchor-residual output; multi-flow conditioning, Hemo-MPO and AB-GATr architecture components are direct priors, not contributions; post-P1 development requires separate registration, at most two validation-only rounds, 80 additional GPU hours and fresh re-entry; inactive confirmation v3 then fixes exactly 100 new families and requires four development contrast dispersion checks, a complete two-model/five-seed workload within 40 GPU-hours, bilateral ±2% field equivalence to both same-backbone direct and train-fitted power law, ≥10% improvement on all four comparator-by-response contrasts, ≥4/5 positive seeds and ≥59/100 family wins for each, with summaries derived only from complete raw error rows under one pinned shared-family bootstrap; the exact introai9 cache path remains unresolved and no retry is allowed before an external change",
+    status: "Target locked · schema 11.9 · one conditional Aneumo response-fidelity source lead at fresh 32.5/40, novelty exactly 2.5/5 · general interventional consistency and aneurysm perturbation-response surrogation are direct priors · current method-free P0 v3 adds a non-compensatory anchor-tangent check and remains non-executable at real 0/12 · historical P1 and confirmation v1-v3 are inactive · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "all 12 train-only P0 v3 endpoint-stability checks and a newly registered field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; a bounded private inventory matches the registered cache SHA-256 while location and infrastructure metadata remain private, but the immutable v3 config has no activation manifest after a current pre-command connection reset and unverified container readability; the historical inactive P1 v3 shows the intended same-backbone direct-versus-anchor-residual contrast but cannot be activated after the P0 version change; retry only after a verified introai9 operational change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -41,6 +41,20 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Exact Aneumo cache identity is resolved without opening execution",
+      copy: "A bounded private inventory matches SHA-256 9640b0ef…ab9 to the immutable AURORA cache identity. The exact path and infrastructure metadata are deliberately withheld from this public site. HDF5 schema only was reported checked; array values were not read. This session's Windows SSH attempt was reset before a remote command, so container readability and operational readiness remain no-verdict. The immutable P0 v3 is not edited and no activation manifest exists.",
+      status: "Path/size/SHA resolved · real P0 0/12 · activation/PBS/GPU/field/model/result/claim 0",
+      url: "../docs/aneumo-cache-path-inventory-2026-08-13.md"
+    },
+    {
+      year: "2026.08",
+      title: "P0 v3 makes anchor-tangent stability independently falsifiable",
+      copy: "The unexecuted v2 skipped the nominal anchor in a loop that correctly omitted undefined anchor interpolation but consequently also omitted the primary anchor tangent. A deterministic negative control using 5,000 family-cluster bootstrap replicates passed v2 11/11 while the omitted anchor-tangent median was 0.7987704542950331. V2 remains byte-preserved; v3 adds one non-compensatory anchor-tangent CI-lower ≥0.80 check for 12 total. Smooth/pass and anchor-kink/fail fixtures validate code only.",
+      status: "Current schema 11.9 · P0 v3 registered/non-executable · real 0/12 · data/server/PBS/GPU/model/result/claim 0",
+      url: "../docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md"
+    },
     {
       year: "2026.08",
       title: "Fresh direct priors narrow the lead to one application-specific conjunction",
@@ -874,8 +888,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "P0-RF",
       title: "Are multi-flow velocity-response endpoints stable before any model is trained?",
-      copy: "The registered v2 P0 reads only 20 historical Aneumo train families, coordinates and velocity. It checks exact alignment, within-flow coordinate-half family ranks, coordinate-half symmetric magnitude difference, leave-one-interior-flow interpolation and one-sided tangent versus neighbour secant with family-cluster bootstrap. It hashes actual cache bytes. Pressure, validation/test fields, checkpoints and predictions are forbidden. The current exact private cache path is unresolved, so the contract is deliberately non-executable.",
-      state: "Conditional lead · P0 v2 registered/non-executable · 0/11 real scientific checks · no server query/PBS/GPU/model/test/claim",
+      copy: "Current P0 v3 reads only the 20 historical Aneumo train families, coordinates and velocity and adds an explicit nominal-anchor tangent check to the preserved v2 gates. The cache path, byte size and registered SHA-256 are now identity-matched, but v3 remains immutable and non-executable because no activation manifest or current container-readability verdict exists. Pressure, validation/test fields, checkpoints and predictions remain forbidden.",
+      state: "Conditional lead · P0 v3 registered/non-executable · 0/12 real scientific checks · no PBS/GPU/model/test/claim",
       blocking: true
     },
     {
@@ -1051,7 +1065,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo verified compact response holding · schema 11.8",
       role: "conditional source for a train-only method-free response-stability P0; not yet an active paper split",
-      provenance: "32 generation families × 2 cases × 8 mass flows × 4,096 aligned nodes · frozen 20/6/6 family split · cache SHA-256 9640b0ef…ab9 · historical q^1.075 response residual 0.2112 [0.2001, 0.2243] · exact current introai9 path unresolved · active train/validation/test 0/0/0 · pressure/test/model/GPU read 0"
+      provenance: "32 generation families × 2 cases × 8 mass flows × 4,096 aligned nodes · frozen 20/6/6 family split · bounded private inventory matches cache SHA-256 9640b0ef…ab9 · public path/infrastructure metadata redacted · activation/container verdict pending · active train/validation/test 0/0/0 · pressure/test/model/GPU read 0"
     },
     {
       name: "AURORA historical holdings state ledger · schema 11.5",
@@ -1385,6 +1399,20 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "data",
+      title: "Exact Aneumo cache identity is resolved while execution stays fail-closed",
+      copy: "A bounded private inventory matches SHA-256 9640b0ef…ab9 to the registered cache identity; exact path and infrastructure metadata remain private. Schema only was reported inspected. A bounded current Windows SSH attempt reset before a remote command, leaving the pinned container and operational envelope unverified. P0 v3 remains immutable and 0/12; no activation manifest, field-array read, queue query, transfer, PBS/GPU job, model, result or claim opened.",
+      files: ["docs/aneumo-cache-path-inventory-2026-08-13.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.13",
+      category: "protocol",
+      title: "P0 v3 closes a pre-data anchor-tangent coverage loophole",
+      copy: "A synthetic red team showed that unexecuted v2 could pass all 11 registered checks while omitting the nominal anchor tangent used by the primary endpoint and proposed mechanism. V2 config and evaluator remain immutable. V3 adds one family-bootstrap anchor-tangent CI-lower ≥0.80 check and fails the registered anchor-kink negative control. Real status remains 0/12; no cache, field, scientific server, PBS/GPU, model, outer test, result or claim opened. Historical P1 and confirmation v1-v3 remain inactive and a fresh downstream version is required after any real pass.",
+      files: ["configs/aneumo_response_fidelity_p0_v3.json", "src/aurora/aneumo_response_fidelity_p0_v3.py", "tests/test_aneumo_response_fidelity_p0_v3.py", "docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "site",

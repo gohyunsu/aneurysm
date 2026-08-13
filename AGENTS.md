@@ -1,5 +1,26 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 schema 11.9 · current P0 is v3 with 12 checks:** Preserve
+> unexecuted P0 v2 config SHA-256 `b82b3bfd…1381` and evaluator SHA-256
+> `3f966732…2790` byte-for-byte. A deterministic 5,000-replicate
+> family-cluster bootstrap
+> negative control showed v2 11/11 pass while the omitted anchor-tangent median
+> was `0.7987704542950331`; this is contract evidence only, not an Aneumo or
+> model result. Current v3 config/evaluator SHA-256 are
+> `1c7cc85d…fcc81` / `51a7db66…1d25`; it adds the independent anchor tangent
+> CI-lower ≥0.80 check. Real status is 0/12. Do not edit or activate historical
+> P1/confirmation v1--v3; only a real v3 12/12 pass may authorize registration
+> of a fresh P1 evidence version. A user-supplied exact inventory now resolves
+> the private cache identity and registered SHA-256; schema only was reported
+> read. The path and infrastructure metadata stay in a private ledger and must
+> never be copied to this public repository. Do not edit v3 in place. A separate activation manifest remains
+> absent because this session's bounded Windows SSH attempt was reset before a
+> remote command and container readability is unverified. No transfer,
+> scheduler query, PBS submission, field-array read, monitoring, or GPU action
+> occurred. Retry only after a newly verified introai9 operational change and
+> never access
+> `junjinyong`.
+
 > **2026-08-13 Quality coverage failure preserved and v2 correction
 > verified:** The first changelog-only remote Quality run `31624153346`
 > succeeded but discovered only 560 tests with 85 optional skips. Coverage v1

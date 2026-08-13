@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-08-13 · exact Aneumo cache identity resolved; activation remains locked
+
+- Recorded that a bounded private inventory resolves the cache identity and
+  matches SHA-256 `9640b0ef…ab9`; exact path and infrastructure metadata remain
+  private. HDF5 schema only was checked and array values were not read.
+- Preserved P0 v3 instead of writing the path into its registered bytes. No
+  activation manifest exists. One WSL attempt ended before the network because
+  the Windows alias was unavailable; one Windows attempt was reset before any
+  remote command, so current container readability and operational readiness
+  remain no-verdict.
+- Real P0 stays 0/12. No queue query, transfer, PBS/GPU job, field-array read,
+  model, result or claim opened. `junjinyong` was never accessed.
+
+## 2026-08-13 · schema 11.9 · P0 v3 closes the anchor-tangent loophole
+
+- Preserved the unexecuted P0 v2 config and evaluator byte-for-byte. V2 skipped
+  the nominal anchor while omitting undefined anchor interpolation and therefore
+  did not independently test the anchor tangent used by the primary endpoint
+  and proposed identity mechanism.
+- Registered a deterministic negative control: with 5,000 family-cluster
+  bootstrap replicates, v2 passed 11/11 while its omitted anchor-tangent median was
+  `0.7987704542950331`. This is synthetic contract evidence, not a scientific
+  finding.
+- Added fail-closed P0 v3 with one non-compensatory anchor-tangent CI-lower
+  ≥0.80 check. Smooth synthetic response passes 12/12; the anchor-kink control
+  fails v3. V3 also states the independent unit directly as Aneumo generation
+  family.
+- Real P0 remains 0/12. No cache/field, scientific server, scheduler, PBS/GPU,
+  model, outer test, result, or claim was accessed. Historical P1 and
+  confirmation v1--v3 stay inactive; a fresh P1 version may be registered only
+  after a real 12/12 v3 pass.
+
 ## 2026-08-13 · public Quality coverage v1 failed closed; v2 pins the full runtime
 
 - The first changelog-only Quality run `31624153346` succeeded but discovered

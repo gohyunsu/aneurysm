@@ -1,5 +1,23 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-13 schema 11.9 · anchor-tangent P0 v3:** A synthetic red team
+> found that the unexecuted P0 v2 skipped the nominal anchor in the same loop
+> that skipped undefined anchor interpolation. V2 could therefore pass 11/11
+> while the primary anchor tangent fell below its 0.80 adequacy threshold. V2
+> config/evaluator remain byte-for-byte preserved. The current
+> [P0 v3 contract](configs/aneumo_response_fidelity_p0_v3.json) adds one
+> non-compensatory family-bootstrap anchor-tangent check, for 12 total. Smooth
+> synthetic response passes 12/12 and the registered anchor-kink control is
+> rejected; neither is scientific evidence. The exact cache path is now
+> privately inventoried and matches the already registered SHA-256, but the
+> immutable v3 contract remains activation-locked after a bounded current-session
+> connection reset and unverified container readability. Real P0 remains 0/12;
+> no remote command, PBS/GPU, field array, model, outer test, result, or claim is
+> open. Historical P1 and
+> confirmation v1--v3 remain inactive; a real 12/12 pass could authorize only a
+> fresh P1 evidence version. See the [red-team audit](docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md)
+> and [redacted exact-path inventory](docs/aneumo-cache-path-inventory-2026-08-13.md).
+
 > **2026-08-13 residual-novelty synchronization:** Exact scientific source
 > `1cdc360170739894dde6bd71508ade76ed7fb90e` passed
 > [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31621343028)

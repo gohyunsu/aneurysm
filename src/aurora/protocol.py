@@ -124,8 +124,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     checks: list[str] = []
 
-    if protocol["schema_version"] != "11.8":
-        raise ProtocolError("The current research-state schema must be version 11.8.")
+    if protocol["schema_version"] != "11.9":
+        raise ProtocolError("The current research-state schema must be version 11.9.")
 
     project = protocol["project"]
     _require_keys(
@@ -191,6 +191,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "acquired_asset_application_direction",
             "aneux_reliability_direct_prior_reappraisal",
             "aneumo_response_fidelity_source_audit",
+            "aneumo_response_fidelity_p0_anchor_tangent_red_team",
             "aneumo_response_fidelity_residual_novelty_audit",
             "open_clinical_outcome_and_target_time_reappraisal",
             "mechanistic_treatment_and_growth_asset_reappraisal",
@@ -1544,6 +1545,168 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             )
     checks.append("Aneumo response-fidelity conditional lead and fail-closed P0 boundary")
 
+    anchor_red_team = problem_selection[
+        "aneumo_response_fidelity_p0_anchor_tangent_red_team"
+    ]
+    _require_keys(
+        anchor_red_team,
+        [
+            "status", "audit_document", "cache_inventory_document", "decision_date",
+            "v2_config", "v2_config_sha256", "v2_evaluator",
+            "v2_evaluator_sha256", "v2_executed", "v2_cache_or_field_read",
+            "v2_registered_check_count", "v2_anchor_tangent_omitted",
+            "synthetic_negative_control_is_not_scientific_evidence",
+            "synthetic_v2_all_checks_passed",
+            "synthetic_v3_anchor_check_failed",
+            "synthetic_v2_flow_stratified_spearman_ci95_lower",
+            "synthetic_v2_nonanchor_tangent_ci95_lower",
+            "synthetic_omitted_anchor_tangent_median",
+            "v3_config", "v3_config_sha256", "v3_evaluator",
+            "v3_evaluator_sha256", "v3_test", "v3_test_sha256",
+            "v3_current_evidence_version", "v3_registered_check_count",
+            "v3_observed_check_count", "v3_anchor_tangent_check",
+            "v3_anchor_tangent_ci95_lower_threshold",
+            "v3_bootstrap_replicates", "v3_independent_unit",
+            "v3_method_free", "v3_train_only",
+            "exact_cache_path_resolved_from_user_supplied_inventory_report",
+            "exact_cache_path_publicly_redacted", "exact_cache_sha256",
+            "exact_cache_sha256_matches_registered_identity",
+            "adjacent_provenance_files_reported_present",
+            "hdf5_schema_only_reported_checked",
+            "hdf5_array_values_reported_read",
+            "duplicate_cache_reported_in_bounded_private_scope",
+            "current_session_bounded_connection_attempt_count",
+            "current_session_remote_command_executed",
+            "current_session_connection_state",
+            "current_container_readability_verified",
+            "activation_manifest_registered",
+            "v3_exact_private_cache_path_frozen",
+            "v3_external_service_change_verified", "v3_executable",
+            "v3_submitted", "real_cache_metadata_or_field_read",
+            "real_cache_field_array_read",
+            "historical_p1_v1_v2_v3_activatable",
+            "fresh_p1_version_required_after_real_v3_all_12_pass",
+            "method_selected", "architecture_selected",
+            "scientific_server_queried", "introai9_connection_attempted",
+            "pbs_or_gpu_job_submitted",
+            "outer_test_authorized", "paper_claim_active",
+            "execution_server", "pbs_only",
+            "login_node_gpu_command_executed", "junjinyong_accessed",
+            "next_allowed_action",
+        ],
+        "Aneumo anchor-tangent P0 v3 red team",
+    )
+    if (
+        anchor_red_team["status"]
+        != "exact_cache_identity_reported_and_checksum_matched_but_p0_v3_activation_locked_after_current_connection_reset"
+        or anchor_red_team["audit_document"]
+        != "docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md"
+        or anchor_red_team["cache_inventory_document"]
+        != "docs/aneumo-cache-path-inventory-2026-08-13.md"
+        or anchor_red_team["decision_date"] != "2026-08-13"
+        or anchor_red_team["v2_config"]
+        != "configs/aneumo_response_fidelity_p0_v2.json"
+        or anchor_red_team["v2_config_sha256"]
+        != "b82b3bfd3d83713f375378f471ec506e7b8437fd470e98366534d4cb1d021381"
+        or anchor_red_team["v2_evaluator"]
+        != "src/aurora/aneumo_response_fidelity_p0.py"
+        or anchor_red_team["v2_evaluator_sha256"]
+        != "3f9667329b2f7f61850eddbd5b118c8cab0520cccb86a3382ecfebf6cc292790"
+        or anchor_red_team["v2_registered_check_count"] != 11
+        or anchor_red_team["synthetic_v2_flow_stratified_spearman_ci95_lower"]
+        != 0.805536878291973
+        or anchor_red_team["synthetic_v2_nonanchor_tangent_ci95_lower"]
+        != 0.9999441120650744
+        or anchor_red_team["synthetic_omitted_anchor_tangent_median"]
+        != 0.7987704542950331
+        or anchor_red_team["v3_config"]
+        != "configs/aneumo_response_fidelity_p0_v3.json"
+        or anchor_red_team["v3_config_sha256"]
+        != "1c7cc85dbd5d4ae5059663cfe3f638a7b4276b0f9fec537f4eec19757adfcc81"
+        or anchor_red_team["v3_evaluator"]
+        != "src/aurora/aneumo_response_fidelity_p0_v3.py"
+        or anchor_red_team["v3_evaluator_sha256"]
+        != "51a7db669ea1e17917954291819586b827b975bb7d42b0d7f1c87e59b6971d25"
+        or anchor_red_team["v3_test"]
+        != "tests/test_aneumo_response_fidelity_p0_v3.py"
+        or anchor_red_team["v3_test_sha256"]
+        != "cc6c71c8bbf404a48ced83975653611eca2c45089bb6849961742eeea179ca4f"
+        or anchor_red_team["v3_registered_check_count"] != 12
+        or anchor_red_team["v3_observed_check_count"] != 0
+        or anchor_red_team["v3_anchor_tangent_check"]
+        != "anchor_flow_tangent_direction_agreement_ci95_lower_at_least_0_80"
+        or anchor_red_team["v3_anchor_tangent_ci95_lower_threshold"] != 0.8
+        or anchor_red_team["v3_bootstrap_replicates"] != 5000
+        or anchor_red_team["v3_independent_unit"] != "aneumo_generation_family"
+        or anchor_red_team["exact_cache_sha256"]
+        != "9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
+        or anchor_red_team["current_session_bounded_connection_attempt_count"] != 2
+        or anchor_red_team["current_session_connection_state"]
+        != "windows_ssh_connection_reset_before_remote_command_after_wsl_alias_resolution_failure"
+        or anchor_red_team["execution_server"] != "introai9"
+        or anchor_red_team["pbs_only"] is not True
+        or any(
+            anchor_red_team[key] is not True
+            for key in (
+                "v2_anchor_tangent_omitted",
+                "synthetic_negative_control_is_not_scientific_evidence",
+                "synthetic_v2_all_checks_passed",
+                "synthetic_v3_anchor_check_failed",
+                "v3_current_evidence_version",
+                "v3_method_free",
+                "v3_train_only",
+                "exact_cache_path_resolved_from_user_supplied_inventory_report",
+                "exact_cache_path_publicly_redacted",
+                "exact_cache_sha256_matches_registered_identity",
+                "adjacent_provenance_files_reported_present",
+                "hdf5_schema_only_reported_checked",
+                "real_cache_metadata_or_field_read",
+                "introai9_connection_attempted",
+                "fresh_p1_version_required_after_real_v3_all_12_pass",
+            )
+        )
+        or any(
+            anchor_red_team[key] is not False
+            for key in (
+                "v2_executed", "v2_cache_or_field_read",
+                "hdf5_array_values_reported_read",
+                "duplicate_cache_reported_in_bounded_private_scope",
+                "current_session_remote_command_executed",
+                "current_container_readability_verified",
+                "activation_manifest_registered",
+                "v3_exact_private_cache_path_frozen",
+                "v3_external_service_change_verified", "v3_executable",
+                "v3_submitted", "real_cache_field_array_read",
+                "historical_p1_v1_v2_v3_activatable", "method_selected",
+                "architecture_selected", "scientific_server_queried",
+                "pbs_or_gpu_job_submitted", "outer_test_authorized",
+                "paper_claim_active", "login_node_gpu_command_executed",
+                "junjinyong_accessed",
+            )
+        )
+        or anchor_red_team["next_allowed_action"]
+        != "after_verified_introai9_operational_change_confirm_the_pinned_container_then_register_a_separate_execution_activation_manifest_without_editing_p0_v3"
+    ):
+        raise ProtocolError(
+            "The Aneumo anchor-tangent red team must preserve P0 v2, keep P0 v3 "
+            "at 0/12 and keep activation closed after metadata-only inventory evidence."
+        )
+    for path_key, hash_key in (
+        ("v2_config", "v2_config_sha256"),
+        ("v2_evaluator", "v2_evaluator_sha256"),
+        ("v3_config", "v3_config_sha256"),
+        ("v3_evaluator", "v3_evaluator_sha256"),
+        ("v3_test", "v3_test_sha256"),
+    ):
+        path = Path(__file__).resolve().parents[2] / anchor_red_team[path_key]
+        if (
+            not path.is_file()
+            or hashlib.sha256(path.read_bytes()).hexdigest()
+            != anchor_red_team[hash_key]
+        ):
+            raise ProtocolError("An Aneumo P0 anchor-tangent evidence file changed.")
+    checks.append("Aneumo anchor-tangent P0 v3 pre-execution boundary")
+
     residual_novelty = problem_selection[
         "aneumo_response_fidelity_residual_novelty_audit"
     ]
@@ -1596,7 +1759,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "field_equivalence_and_response_superiority_to_learned_direct_and_train_fitted_power_law",
             "exactly_100_new_base_family_confirmation_excluding_all_historical_32",
         ]
-        or residual_novelty["real_p0_required_check_count"] != 11
+        or residual_novelty["real_p0_required_check_count"] != 12
         or residual_novelty["real_p0_observed_check_count"] != 0
         or residual_novelty["active_train_validation_test_counts"] != [0, 0, 0]
         or any(

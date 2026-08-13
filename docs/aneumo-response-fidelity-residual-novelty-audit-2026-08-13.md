@@ -14,9 +14,9 @@ fidelity**—not response-consistent surrogation, multi-flow learning, an
 equivariant GNN, a neural operator, derivative supervision or residual learning
 in general.
 
-This is a conditional source decision, not a result. Real P0 remains 0/11, the
-current exact private cache path is unresolved, and no scientific server, PBS
-job, GPU, model prediction or outer-test field was used in this audit.
+This is a conditional source decision, not a result. Real P0 remains 0/12. A
+later exact-path inventory report resolves the cache identity, but no execution
+activation, PBS job, GPU, model prediction or outer-test field is available.
 
 ## 2. Why Aneumo remains the least-bad acquired asset
 
@@ -83,7 +83,7 @@ residual novelty at least 2.5.
 
 The earlier 34.0/40 score remains provenance. The fresh score is lower because
 the task is a synthetic steady-velocity application rather than a clinical
-endpoint, the exact current cache path is unresolved, and new direct priors
+endpoint, execution activation remains locked despite a resolved cache identity, and new direct priors
 occupy the general intervention-response story. The row still passes only by
 0.5 points and sits exactly on the novelty floor. A failed P0 or matched P1
 closes it; there is no fallback architecture narrative.

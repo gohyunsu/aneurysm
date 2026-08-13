@@ -1,5 +1,13 @@
 # 선행연구 계보와 research gap
 
+> **Schema 11.9 evidence hygiene:** The literature boundary is unchanged by
+> P0 v3. General response preservation, sensitivity-aware operators, Aneumo
+> multi-flow/equivariant models and aneurysm perturbation-response prediction
+> remain direct priors. The new anchor-tangent check is a prospective task-
+> identifiability safeguard, not a contribution. Real evidence is 0/12, so the
+> conditional same-backbone mechanism and exactly-100-family confirmation
+> remain inactive downstream hypotheses.
+
 > **2026-08-13 residual-novelty correction:**
 > [Interventionally Consistent Surrogates](https://proceedings.neurips.cc/paper_files/paper/2024/hash/26b8e3dc3a21fcd660d80c63b767f324-Abstract-Conference.html)는
 > conventional surrogate가 intervention effect를 잘못 판단할 수 있다는 일반 문제를

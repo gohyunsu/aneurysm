@@ -1,11 +1,22 @@
 # 데이터 자산 상태 원장
 
+> **2026-08-13 schema 11.9 current assignment:** Aneumo remains the sole
+> conditional-use holding, not an absent or rejected dataset. Its historical
+> compact contract is 32 generation families, 64 cases, eight flows and 4,096
+> aligned nodes. The private cache identity is now reported with matching
+> SHA-256, but current active split is still 0/0/0 because no execution
+> activation manifest or current container-readability verdict exists.
+> Method-free P0 v3 is registered/non-executable at 0/12;
+> its added anchor-tangent check was validated only on synthetic fixtures.
+> Historical P1/confirmation v1--v3 are inactive and no model or compute is
+> assigned.
+
 > **2026-08-13 reuse decision:** 여섯 holding을 동일한 application 기준으로 다시
 > 비교했다. Aneumo만 동일 geometry의 eight-flow aligned response를 식별하므로
 > 32.5/40 conditional lead를 유지한다. 이는 active split 배정이 아니다. New
 > interventional-consistency와 aneurysm dilation-surrogate priors를 뺀 뒤에도 남는
-> gap은 field-error-matched response fidelity뿐이며, real P0 0/11과 unresolved
-> exact cache path 때문에 active train/validation/test는 계속 0/0/0이다.
+> gap은 field-error-matched response fidelity뿐이며, real P0 0/12와 locked
+> activation envelope 때문에 active train/validation/test는 계속 0/0/0이다.
 > [Fresh reuse audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md)
 
 > **Schema 11.8 current assignment:** Aneumo verified compact holding은 새
@@ -50,7 +61,7 @@ server holding의 역사적 부재를 뜻하지 않는다.
 
 | 자산 | 실물 확인 범위 | 과학적 상태 | active가 아닌 정확한 이유 | 재사용 가능한 역할 |
 |---|---|---|---|---|
-| Aneumo | 32 base family × 2 deformation, 64 case, 8 steady-flow condition, 512-member compact cache; CRC/checksum과 family-disjoint 40/12/12 split 확인. Boundary/volume geometry audit V1b/V1c/V1d는 8/8, 8/8, 9/9 | **geometry-only V1e 성능 gate 실패; response-fidelity P0는 conditional/non-executable** | V1e boundary model은 matched geometry-only control보다 두 primary metric에서 3/3 seed 우수했지만 worst train/validation/response relative L2가 0.77221/0.87796/0.94918로 등록 기준 0.25/0.35/0.50을 모두 실패했다. 새 task는 one-anchor sensitivity sweep이라는 다른 estimand지만 exact current path가 unresolved이고 endpoint stability/matched failure도 미관측이다. | Train-only method-free response-stability P0. 실패한 V1e를 repair하거나 재채점하지 않으며 P0/P1 전 모델을 열지 않음 |
+| Aneumo | 32 base family × 2 deformation, 64 case, 8 steady-flow condition, 512-member compact cache; CRC/checksum과 family-disjoint 40/12/12 split 확인. Boundary/volume geometry audit V1b/V1c/V1d는 8/8, 8/8, 9/9 | **geometry-only V1e 성능 gate 실패; response-fidelity P0는 conditional/non-executable** | V1e boundary model은 matched geometry-only control보다 두 primary metric에서 3/3 seed 우수했지만 worst train/validation/response relative L2가 0.77221/0.87796/0.94918로 등록 기준 0.25/0.35/0.50을 모두 실패했다. 새 task는 one-anchor sensitivity sweep이라는 다른 estimand이다. Private cache identity와 SHA-256은 해결됐지만 activation manifest/container verdict는 잠겨 있고 endpoint stability/matched failure도 미관측이다. | Train-only method-free response-stability P0. 실패한 V1e를 repair하거나 재채점하지 않으며 P0/P1 전 모델을 열지 않음 |
 | BenchAnXplore | Exact archive checksum, 105 geometry × 80 transient velocity frame, HDF5/XDMF, coordinates/connectivity/boundary mask 확인; 해석 가능한 field figure 생성 | **representation-eligible, confirmation에는 사용 불가** | D0/D0b에서 105 case 전체가 architecture discovery에 사용됐다. Train-only POD는 통과했지만 같은 case에서 learned superiority를 확인하면 fresh confirmation이 아니다. Semi-idealized ICA-sidewall velocity이며 verified pressure/WSS contract도 없다. | Compute-matched transient control과 engineering benchmark; 독립 pulsatile test가 있을 때만 confirmatory 보조 |
 | CMHA | 공식 archive 3개의 byte size/MD5, 다섯 CSV, 99 patient/105 lesion, 44 control, 6 multi-lesion group과 extracted patient material 확인 | **asset-linkage gate 실패; exploratory signal negative** | Patient directory 99개, morphology lesion ID 105개, hemodynamic ID 98개가 exact lesion-level image–parent STL–aneurysm STL triplet으로 연결되지 않아 5/9였다. Exploratory hemodynamic increment도 ΔAUPRC −0.04189, patient-bootstrap CI [−0.10834, 0.00664]로 지지되지 않았다. Single-centre cross-sectional rupture state다. | Patient-grouped descriptive/exploratory control. 공식 case map과 fresh task 없이는 primary/outer test 금지 |
 | AneuX v1.0 | 과거 inventory에서 metadata, geometry archive와 extracted copy를 관찰; source는 750 lesion/605 reported patient와 same-lesion multi-resolution/cut orbit을 기술 | **historical P0 no-verdict; fresh reliability direction source-rejected** | 과거 P0는 첫 tabular archive completion 전에 종료됐다. 별개 schema-11.6 P0 v1/v2는 미실행 상태로 동결됐고, schema 11.7 direct-prior screen에서 residual novelty 2.0/5로 기각됐다. Grouping·surface-validity mismatch는 기록하되 repair/v3를 열지 않는다. | Source-qualified grouping, transformation semantics와 casewise reliability를 향후 다른 task의 평가 safeguard로만 재사용. 현재 source lead/P0/train/test 역할 없음 |

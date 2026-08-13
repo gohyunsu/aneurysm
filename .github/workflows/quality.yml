@@ -40,6 +40,8 @@ jobs:
           PY
       - name: Validate research protocol
         run: PYTHONPATH=src python -m aurora.protocol validate configs/aurora_v1.json
+      - name: Validate current non-executable Aneumo response-fidelity P0 v3
+        run: PYTHONPATH=src python -c "from aurora.aneumo_response_fidelity_p0_v3 import load_config; load_config('configs/aneumo_response_fidelity_p0_v3.json')"
       - name: Validate superseded inactive Aneumo response-fidelity P1 v1
         run: PYTHONPATH=src python -m aurora.aneumo_response_fidelity_p1_template validate configs/aneumo_response_fidelity_p1_template_v1.json
       - name: Validate superseded inactive Aneumo response-fidelity P1 v2

@@ -1,5 +1,15 @@
 # Dataset acquisition plan
 
+> **Schema 11.9 exact-path boundary:** No new dataset is required for P0 v3.
+> The private Aneumo cache identity and registered SHA-256 are now resolved
+> from a bounded inventory report; location and infrastructure metadata remain
+> private, and no new dataset or
+> substitute staging is required. HDF5 schema only was reported checked. Keep
+> the immutable v3 contract unchanged and wait for a verified operational
+> introai9 change before checking only the pinned container and registering a
+> separate activation manifest. Raw fields remain private and validation/test
+> fields stay sealed.
+
 > **2026-08-13 Aneumo same-release expansion:** 현재 검증된 과학 자산은
 > 32 base-family/64-case compact holding이며 local project workspace에는 private
 > field cache가 없다. Source는 427 base geometry를 보고하므로 future 100 new

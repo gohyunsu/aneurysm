@@ -1,5 +1,13 @@
 # AURORA v2 모델 명세
 
+> **Schema 11.9 no-model boundary:** Current P0 v3 is method-free and 0/12.
+> Its added anchor-tangent check tests the endpoint directly connected to the
+> hypothesized identity-at-anchor output map. This does not select LaB-GATr,
+> a GNN, an operator, a loss, or an architecture. Historical P1 v1--v3 are
+> inactive design records and cannot be activated; a fresh P1 version may be
+> registered only after a real v3 12/12 pass. Until then model code, dependency
+> installation for training, checkpoints, prediction and GPU work remain zero.
+
 > **Schema 11.8 current model boundary · P1 v3:** Selected architecture remains
 > zero. SC-FNO, Hemo-MPO and AB-GATr make sensitivity loss, Aneumo SE(3)+physics
 > +DeepONet and anatomy-stratified equivariant surrogation controls, not

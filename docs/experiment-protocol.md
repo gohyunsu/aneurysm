@@ -1,5 +1,16 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **Schema 11.9 current method-free P0 v3:** Preserve v2 without repair. V3
+> inherits all 11 checks and adds anchor-flow left/right tangent agreement with
+> the neighbour secant in each coordinate-hash half. The family-bootstrap 95%
+> CI lower bound must be ≥0.80; all 12 checks are non-compensatory. Synthetic
+> smooth/pass and anchor-kink/fail fixtures validate the contract only. Real
+> status is 0/12. The exact cache identity is now path/size/SHA-matched, but the
+> immutable contract has no activation manifest after a current connection
+> reset and unverified container readability. Validation/test field,
+> prediction, model, PBS/GPU and claim remain closed.
+> A pass authorizes only registration of a fresh baseline-only P1 version.
+
 > **Schema 11.8 inactive confirmation v3:** V2는 evidence access 0인 exact
 > history로 보존한다. Current v3는 direct와 power-law 모두에 대해 bilateral
 > ±2% field equivalence와 paired/tangent response ≥10% improvement를 요구한다.

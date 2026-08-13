@@ -40,7 +40,7 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.8 · ONE CONDITIONAL ANEUMO LEAD · P0 REGISTERED / NON-EXECUTABLE · MODEL / GPU / CLAIM 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> SCHEMA 11.9 · ONE CONDITIONAL ANEUMO LEAD · P0 V3 0/12 / NON-EXECUTABLE · MODEL / GPU / CLAIM 0</p>
         <h1>
           One accurate field<br>
           <em>is not necessarily a faithful response.</em>
@@ -55,24 +55,32 @@
           Train-only method-free P0로 endpoint 안정성을 확인하고, field-error-matched
           P1에서 실제 mismatch가 관측된 뒤에만 최소 anchor-response factorization을
           평가합니다. 현재 scientific result·selected model·GPU·outer test·paper
-          claim은 모두 0입니다. P0 evaluator는 구현됐지만 현재 config가 private-cache
-          확인 전에 중단되므로 아직 실행·제출 가능한 job은 아닙니다. Official
+          claim은 모두 0입니다. Private inventory에서 cache identity와
+          기존 SHA-256이 일치하는 것으로 보고됐지만, 경로와 infrastructure metadata는
+          public Git에 공개하지 않습니다. 현재 세션의 접속은
+          remote command 전 reset되어 container 가독성과 activation manifest가
+          없습니다. 따라서 아직 실행·제출 가능한 job은 아닙니다. Official
           Aneumo의 427 base geometry 중 historical 32를 뺀 동일 release에서 future
           100-family 확인을 설계하되, outer field 전에 precision과 전체 2-model×5-seed
           workload가 충분한지도 먼저 통과해야 합니다. 최종 확인에서는 candidate가
           learned direct와 analytic power-law 모두와 field-equivalent하면서 두
           response endpoint에서 모두 우월해야 합니다.
+          실행 전 red team에서는 기존 v2가 nominal anchor tangent를 검사하지 않는
+          허점을 찾았습니다. V2는 보존하고, 현재 v3는 이 검사를 독립적인 12번째
+          gate로 추가했습니다. 합성 fixture 검증일 뿐 실제 결과는 여전히 0/12입니다.
         </p>
         <div class="hero-actions">
           <a class="button primary" href="learn.html#response-fidelity">처음부터 이해하기</a>
           <a class="button ghost" href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">연구 질문·선행·실험 전체 읽기 ↗</a>
-          <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v2.json">등록된 method-free P0 v2 ↗</a>
+          <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v3.json">등록된 method-free P0 v3 · 0/12 ↗</a>
+          <a class="button ghost" href="../docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md">P0 v3 anchor-tangent red-team ↗</a>
+          <a class="button ghost" href="../docs/aneumo-cache-path-inventory-2026-08-13.md">Exact cache path · activation boundary ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v3.json">비활성 P1 v3 same-backbone contract ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_confirmation_template_v3.json">비활성 100-family confirmation v3 ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md">Confirmation v3 evaluator red-team ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">직접 선행 재감사 ↗</a>
           <a class="button ghost" href="../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md">최신 novelty·대안 후보 감사 ↗</a>
-          <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator code ↗</a>
+          <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0_v3.py">P0 v3 evaluator code ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
         <div class="hero-actions" hidden>
@@ -499,7 +507,7 @@
           <span>P0 0 · PBS 0 · GPU 0 · network 0</span>
         </div>
         <div class="g1-result-metrics">
-          <div><span>Fresh score</span><b>34.0</b><small>/ 40 · source admission only</small></div>
+          <div><span>Fresh score</span><b>32.5</b><small>/ 40 · conditional source admission only</small></div>
           <i>→</i>
           <div><span>Residual novelty</span><b>2.5</b><small>/ 5 · exactly at required floor</small></div>
           <div class="delta negative"><span>Execution</span><b>Locked</b><small>external service change required</small></div>
@@ -513,8 +521,12 @@
             bootstrap합니다. Omitted center에 무감할 수 있는 centered-difference
             비교는 실행 전에 제거하고, 실제 좌우 one-sided tangent와 neighbour
             secant를 비교하도록 고쳤습니다. Rank가 같아도 크기가 8배 틀릴 수 있어
-            symmetric magnitude difference CI 상한 0.25도 추가했습니다. V2의 11개
-            check가 모두 통과해야 baseline-only P1을 열 뿐입니다.
+            symmetric magnitude difference CI 상한 0.25도 추가했습니다. 그러나
+            후속 red team에서 v2가 anchor interpolation과 함께 anchor tangent까지
+            생략하는 허점을 찾았습니다. V2는 고치지 않고 보존했으며, v3는 좌우
+            anchor tangent와 neighbour secant의 일치를 독립적인 12번째 check로
+            요구합니다. Real 12/12가 모두 통과해야 fresh baseline-only P1 version을
+            등록할 수 있습니다. 기존 P1 v1--v3는 자동으로 열리지 않습니다.
             P1은 아직 등록되지 않았지만 matching과 추론 규칙은 미리 고정했습니다.
             Train 20 family를 12 fit/4 calibration/4 outer로 순환하고, response를
             숨긴 calibration field L2 common support에서 25/50/75% 수준을 정합니다.
@@ -533,10 +545,11 @@
             P1 뒤 개발도 별도 등록 아래 최대 두 validation-only round와 추가 80
             GPU-hour로 제한하고 fresh seed 또는 disjoint split으로 재진입합니다.
           </p>
-          <a href="../configs/aneumo_response_fidelity_p0_v2.json">Registered P0 v2 contract ↗</a>
+          <a href="../configs/aneumo_response_fidelity_p0_v3.json">Current P0 v3 contract ↗</a>
+          <a href="../docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md">Anchor-tangent red team ↗</a>
           <a href="../configs/aneumo_response_fidelity_p1_template_v3.json">Inactive P1 v3 same-backbone contract ↗</a>
           <a href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">Direct-prior reappraisal ↗</a>
-          <a href="../src/aurora/aneumo_response_fidelity_p0.py">Aggregate evaluator ↗</a>
+          <a href="../src/aurora/aneumo_response_fidelity_p0_v3.py">P0 v3 evaluator ↗</a>
           <a href="../docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md">지표·baseline·중단 근거 ↗</a>
         </div>
       </article>

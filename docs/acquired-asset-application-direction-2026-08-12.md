@@ -1,5 +1,17 @@
 # 확보 자산 기반 ISBI 2027 방향 재선정
 
+> **Later exact-path update:** A bounded private inventory matches the Aneumo
+> cache's registered SHA-256. This resolves the source location privately,
+> not endpoint evidence. Activation remains locked after a current connection
+> reset; real P0 is 0/12 and no model/GPU/claim is active.
+
+> **2026-08-13 schema 11.9 superseding boundary:** Continue to prioritize the
+> verified Aneumo repeated-flow holding, but use current P0 v3 rather than the
+> historical v2 described below. V3 adds a non-compensatory nominal-anchor
+> tangent check after a synthetic red team exposed v2's omission. Real status
+> is 0/12; no data split, model, GPU, result or claim is active. A real pass may
+> register only a fresh P1 evidence version.
+
 > **Schema 11.8 superseding decision:** 아래 AneuX nested-orbit 방향은
 > direct-prior 검토 후 schema 11.7에서 실행 전 기각된 역사다. 현재 유일한
 > conditional source lead는 **Aneumo field-error-matched multi-flow response

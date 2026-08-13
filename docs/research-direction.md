@@ -1,5 +1,15 @@
 # AURORA 연구 방향
 
+> **Schema 11.9 P0-v3 correction:** Current response-fidelity evidence gate is
+> 0/12, not 0/11. The unexecuted v2 is immutable history: a synthetic anchor
+> kink passed all 11 v2 checks because anchor interpolation and anchor tangent
+> were skipped together. V3 adds a separate family-bootstrap anchor-tangent
+> CI-lower ≥0.80 requirement. This changes no research claim or novelty score;
+> it makes the proposed identity-at-anchor mechanism falsifiable at the point
+> it claims to constrain. Historical P1/confirmation v1--v3 are inactive and a
+> fresh downstream evidence version is required after any real 12/12 pass.
+> [Exact red team](response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md)
+
 > **2026-08-13 critical direction decision:** 확보 자산을 같은 기준으로 다시
 > 비교한 결과 Aneumo response fidelity만 32.5/40으로 조건부 admission을 유지한다.
 > Mixed geometry×flow interaction 30.0, selective/UQ response 30.5, WSS/pressure

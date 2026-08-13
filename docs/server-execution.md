@@ -1,5 +1,17 @@
 # AURORA 서버 실행과 provenance
 
+> **Schema 11.9 P0-v3 execution boundary:** A bounded private inventory
+> resolves the cache identity and registered SHA-256; path and infrastructure
+> metadata are intentionally withheld from the public repository.
+> HDF5 schema only was reported checked. This session then made two bounded
+> connection attempts: WSL stopped before networking on alias resolution and
+> Windows SSH was reset before any remote command. No scheduler query,
+> transfer, PBS submission, field-array read, monitoring or GPU command
+> occurred. Current P0 v3 remains non-executable at 0/12 with no activation
+> manifest and no current container-readability verdict. Retry only after a
+> verified operational change; use CPU-only introai9 PBS and never access
+> `junjinyong`.
+
 > **Schema 11.8 inactive P1 v3:** This local direct-prior and design update
 > queried no scientific server and made no transfer, scheduler query, PBS
 > submission, prediction, response read, monitoring or GPU action. V3 is a

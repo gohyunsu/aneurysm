@@ -1,5 +1,15 @@
 # ISBI 2027 제출 계획
 
+> **Schema 11.9 manuscript gate:** Real P0 is now 0/12. A pre-data synthetic
+> red team showed that v2 could pass while omitting anchor-tangent stability,
+> so v2 is preserved and v3 adds that endpoint explicitly. The four-page
+> manuscript must contain no title/abstract/method/result claim from this
+> direction until real v3 passes and a fresh P1 version observes the registered
+> matched-field response failure. Historical P1 and confirmation v1--v3 are
+> planning provenance, not executable protocols. This strengthens the logical
+> bridge `task identifiable → failure observed → mechanism justified` without
+> adding a contribution or consuming paper space prematurely.
+
 > **2026-08-13 novelty and paragraph-role audit:** The fresh acquired-asset
 > screen retains only Aneumo response fidelity at 32.5/40. NeurIPS 2024 already
 > establishes interventional consistency as a general surrogate objective, and

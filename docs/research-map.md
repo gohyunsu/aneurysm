@@ -1,5 +1,13 @@
 # 연구 지형과 현재 작업
 
+> **Schema 11.9 evidence edge:** The current path now begins `real P0 v3
+> 12/12 endpoint stability → fresh baseline-only P1 registration`. P0 v2 and
+> all historical P1/confirmation v1--v3 are immutable inactive nodes. The new
+> anchor-tangent edge is non-compensatory because the primary response tangent
+> and identity-at-anchor mechanism both include the nominal anchor. Current
+> real status is 0/12; cache identity is path/size/SHA-resolved but execution
+> activation, model, GPU, result and claim remain zero.
+
 > **2026-08-13 residual-novelty edge:** General interventional consistency and
 > aneurysm perturbation-response surrogation are now explicit occupied nodes.
 > The current edge is narrower: verified Aneumo repeated-flow asset → stable
