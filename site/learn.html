@@ -103,6 +103,10 @@
             SHA-256이 일치함은 보고됐지만, 경로와 infrastructure metadata는
             public Git에 두지 않습니다. Current connection이 remote command 전 reset되어
             container 가독성과 별도 activation manifest는 아직 확정되지 않았습니다.
+            기존 wrapper가 v2를 호출하던 문제는 v3 전용 activation runner와
+            CPU-only PBS wrapper로 교정했습니다. 그러나 실제 private manifest가
+            없으므로 이는 실행 준비 코드일 뿐, cache field를 읽거나 job을 제출할
+            권한이 아닙니다.
             그래서 train-only method-free P0만 등록된 상태입니다. Active split, method,
             architecture, GPU, outer test, result와 claim은 모두 0입니다.
             현재 evidence contract는 anchor tangent를 별도로 검사하는 P0 v3이며,
@@ -282,9 +286,10 @@
           </p>
           <p>
             현재 상태는 32.5/40 conditional lead, novelty 2.5/5, failure observed 0,
-            P0 registered/non-executable입니다. Evaluator와 CPU 4/GPU 0 one-shot
-            wrapper는 code-complete지만 현재 config가 cache access 전에 거부하므로
-            제출할 수 없습니다. External service change가 확인되기
+            P0 registered/non-executable입니다. Immutable evaluator와 별도 activation
+            runner, CPU 4/GPU 0 v3 one-shot wrapper는 code-complete지만, 현재는
+            verified operational change·container verdict·private manifest가 없으므로
+            cache access 전에 거부하고 제출할 수 없습니다. External service change가 확인되기
             전에는 <code>introai9</code> inventory를 재시도하지 않으며,
             <code>junjinyong</code>에는 어떤 형태로도 접근하지 않습니다.
           </p>
@@ -298,6 +303,8 @@
           <a href="../configs/aneumo_response_fidelity_p0_v3.json">Current P0 v3 machine contract 읽기 ↗</a>
           <a href="../configs/aneumo_response_fidelity_confirmation_template_v3.json">비활성 confirmation v3 machine contract 읽기 ↗</a>
           <a href="../src/aurora/aneumo_response_fidelity_p0_v3.py">Fail-closed P0 v3 evaluator 읽기 ↗</a>
+          <a href="../docs/aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md">Manifest·container·one-shot 실행 경계 읽기 ↗</a>
+          <a href="../src/aurora/aneumo_response_fidelity_p0_v3_activation.py">P0 v3 activation runner 읽기 ↗</a>
         </div>
         <div class="answer-card" id="aneux-reappraisal">
           <span>왜 괜찮아 보이는 AneuX 아이디어를 실행하지 않았나?</span>

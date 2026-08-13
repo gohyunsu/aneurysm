@@ -58,8 +58,10 @@
           claim은 모두 0입니다. Private inventory에서 cache identity와
           기존 SHA-256이 일치하는 것으로 보고됐지만, 경로와 infrastructure metadata는
           public Git에 공개하지 않습니다. 현재 세션의 접속은
-          remote command 전 reset되어 container 가독성과 activation manifest가
-          없습니다. 따라서 아직 실행·제출 가능한 job은 아닙니다. Official
+          remote command 전 reset되어 container 가독성과 실제 activation manifest가
+          없습니다. 기존 PBS wrapper가 v2를 호출하던 공백은 별도 v3 activation
+          runner와 CPU-only wrapper로 교정했지만, 이것은 서버 복구나 실행 승인이
+          아닙니다. 따라서 아직 실행·제출 가능한 job은 아닙니다. Official
           Aneumo의 427 base geometry 중 historical 32를 뺀 동일 release에서 future
           100-family 확인을 설계하되, outer field 전에 precision과 전체 2-model×5-seed
           workload가 충분한지도 먼저 통과해야 합니다. 최종 확인에서는 candidate가
@@ -75,12 +77,14 @@
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p0_v3.json">등록된 method-free P0 v3 · 0/12 ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-p0-anchor-tangent-red-team-2026-08-13.md">P0 v3 anchor-tangent red-team ↗</a>
           <a class="button ghost" href="../docs/aneumo-cache-path-inventory-2026-08-13.md">Exact cache path · activation boundary ↗</a>
+          <a class="button ghost" href="../docs/aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md">P0 v3 activation contract · authority 0 ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_p1_template_v3.json">비활성 P1 v3 same-backbone contract ↗</a>
           <a class="button ghost" href="../configs/aneumo_response_fidelity_confirmation_template_v3.json">비활성 100-family confirmation v3 ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md">Confirmation v3 evaluator red-team ↗</a>
           <a class="button ghost" href="../docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md">직접 선행 재감사 ↗</a>
           <a class="button ghost" href="../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md">최신 novelty·대안 후보 감사 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0_v3.py">P0 v3 evaluator code ↗</a>
+          <a class="button ghost" href="../src/aurora/aneumo_response_fidelity_p0_v3_activation.py">Fail-closed activation runner ↗</a>
           <a class="button ghost" href="learn.html#asset-state-ledger">확보 자산 상태 보기</a>
         </div>
         <div class="hero-actions" hidden>
@@ -492,10 +496,11 @@
         <p class="eyebrow">04 · EXPERIMENTS</p>
         <h2>Falsify the task.<br><em>Before optimizing the model.</em></h2>
         <p>
-          현재 실행 가능한 job은 없습니다. Method-free P0 계약은 등록했지만 exact
-          private cache path와 외부 서비스 상태가 해결되지 않아 non-executable입니다.
-          Aggregate evaluator와 CPU 4/GPU 0 wrapper는 구현됐고 synthetic test를
-          통과했지만, 현재 config는 cache 존재 확인 전에 fail closed합니다.
+          현재 실행 가능한 job은 없습니다. Private cache identity는 해결됐지만
+          외부 서비스 상태와 container 가독성, 실제 activation manifest가 없어
+          non-executable입니다. Immutable evaluator와 별도 activation runner,
+          CPU 4/GPU 0 v3 wrapper는 구현됐고 synthetic contract test를 통과했지만,
+          manifest가 없으면 cache byte나 field를 읽기 전에 fail closed합니다.
           P0가 endpoint를 식별한 뒤에도, P1이 field-error-matched response mismatch를
           실제로 보여야만 model development로 넘어갑니다.
         </p>

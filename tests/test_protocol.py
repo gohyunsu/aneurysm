@@ -206,6 +206,22 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(anchor_audit["v3_registered_check_count"], 12)
         self.assertEqual(anchor_audit["v3_observed_check_count"], 0)
         self.assertTrue(anchor_audit["v3_current_evidence_version"])
+        self.assertTrue(anchor_audit["v3_activation_code_ready"])
+        self.assertTrue(
+            anchor_audit["v3_activation_requires_verified_operational_change"]
+        )
+        self.assertTrue(
+            anchor_audit[
+                "v3_activation_requires_public_source_cache_container_runner_and_manifest_hash_pins"
+            ]
+        )
+        self.assertTrue(
+            anchor_audit["v3_activation_requires_zero_prior_scientific_attempt"]
+        )
+        self.assertFalse(
+            anchor_audit["v3_activation_runner_reads_field_without_manifest"]
+        )
+        self.assertFalse(anchor_audit["v3_legacy_v2_wrapper_valid_for_v3"])
         self.assertTrue(
             anchor_audit[
                 "exact_cache_path_resolved_from_user_supplied_inventory_report"

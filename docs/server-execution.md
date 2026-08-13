@@ -1,5 +1,14 @@
 # AURORA 서버 실행과 provenance
 
+> **P0-v3 executable-path correction:** The historical response-fidelity PBS
+> wrapper remains v2 provenance and is not reused. The new v3 wrapper calls a
+> separate activation runner, requires a pre-pinned private manifest SHA-256,
+> verifies the exact public commit plus cache/container pins and permits one
+> introai9 PBS attempt with 4 CPU, 16 GB and 0 GPU. No manifest has been
+> registered, current container readability remains no-verdict and no command
+> was submitted. This prepares a valid path after a verified operational change;
+> it does not constitute that change or permit a retry.
+
 > **Schema 11.9 P0-v3 execution boundary:** A bounded private inventory
 > resolves the cache identity and registered SHA-256; path and infrastructure
 > metadata are intentionally withheld from the public repository.

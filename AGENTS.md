@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 P0-v3 activation implementation boundary:** Preserve the
+> immutable v3 config/evaluator hashes `1c7cc85d…fcc81` / `51a7db66…1d25`.
+> The historical response-fidelity PBS wrapper is v2 provenance and must never
+> execute v3. The public activation runner SHA-256 is
+> `492c842f27777f0e235ce02cab4f6051993edd425859e6ddf67e8f187c920a9c`;
+> its tests and v3 PBS wrapper SHA-256 are
+> `ed97014d27faaf470d66842fc643f8ae8c558af3e5c62bad84e38b8d767395e4` /
+> `a5e288d63ae5d59fc7ecfd83026de4ca86e503cd524cc4f61956f1da63daca1d`.
+> These bytes implement a future separate private-manifest binding; they do
+> not register one. Do not create that manifest until a verified introai9
+> operational change and container/cache readability evidence exist. It must
+> be registered before any v3 field read, pin its own bytes, and report zero
+> prior P0-v3 scientific attempts. Current manifest/PBS/cache-field/scientific
+> result remain 0 and real P0 is 0/12. Do not retry locally or access
+> `junjinyong`.
+
 > **2026-08-13 schema 11.9 · current P0 is v3 with 12 checks:** Preserve
 > unexecuted P0 v2 config SHA-256 `b82b3bfd…1381` and evaluator SHA-256
 > `3f966732…2790` byte-for-byte. A deterministic 5,000-replicate

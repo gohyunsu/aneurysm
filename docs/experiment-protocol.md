@@ -1,5 +1,14 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **P0-v3 activation code, not activation authority:** The immutable v3
+> config/evaluator remain unchanged. A separate public runner now validates a
+> future private activation manifest and a v3-only CPU PBS wrapper. The
+> manifest must be registered only after verified introai9 operational change,
+> before any v3 field read, and must pin the public source, runner, manifest,
+> cache and container bytes. The manifest is currently absent, so P0 remains
+> non-executable and 0/12. See the exact
+> [activation contract](aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md).
+
 > **Schema 11.9 current method-free P0 v3:** Preserve v2 without repair. V3
 > inherits all 11 checks and adds anchor-flow left/right tangent agreement with
 > the neighbour secant in each coordinate-hash half. The family-bootstrap 95%

@@ -1563,6 +1563,16 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "synthetic_omitted_anchor_tangent_median",
             "v3_config", "v3_config_sha256", "v3_evaluator",
             "v3_evaluator_sha256", "v3_test", "v3_test_sha256",
+            "v3_activation_contract_document", "v3_activation_runner",
+            "v3_activation_runner_sha256", "v3_activation_test",
+            "v3_activation_test_sha256", "v3_pbs_wrapper",
+            "v3_pbs_wrapper_sha256", "v3_activation_manifest_schema",
+            "v3_activation_code_ready",
+            "v3_activation_requires_verified_operational_change",
+            "v3_activation_requires_public_source_cache_container_runner_and_manifest_hash_pins",
+            "v3_activation_requires_zero_prior_scientific_attempt",
+            "v3_activation_runner_reads_field_without_manifest",
+            "v3_legacy_v2_wrapper_valid_for_v3",
             "v3_current_evidence_version", "v3_registered_check_count",
             "v3_observed_check_count", "v3_anchor_tangent_check",
             "v3_anchor_tangent_ci95_lower_threshold",
@@ -1631,6 +1641,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "tests/test_aneumo_response_fidelity_p0_v3.py"
         or anchor_red_team["v3_test_sha256"]
         != "cc6c71c8bbf404a48ced83975653611eca2c45089bb6849961742eeea179ca4f"
+        or anchor_red_team["v3_activation_contract_document"]
+        != "docs/aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md"
+        or anchor_red_team["v3_activation_runner"]
+        != "src/aurora/aneumo_response_fidelity_p0_v3_activation.py"
+        or anchor_red_team["v3_activation_runner_sha256"]
+        != "492c842f27777f0e235ce02cab4f6051993edd425859e6ddf67e8f187c920a9c"
+        or anchor_red_team["v3_activation_test"]
+        != "tests/test_aneumo_response_fidelity_p0_v3_activation.py"
+        or anchor_red_team["v3_activation_test_sha256"]
+        != "ed97014d27faaf470d66842fc643f8ae8c558af3e5c62bad84e38b8d767395e4"
+        or anchor_red_team["v3_pbs_wrapper"]
+        != "cluster/pbs_aneumo_response_fidelity_p0_v3.pbs"
+        or anchor_red_team["v3_pbs_wrapper_sha256"]
+        != "a5e288d63ae5d59fc7ecfd83026de4ca86e503cd524cc4f61956f1da63daca1d"
+        or anchor_red_team["v3_activation_manifest_schema"]
+        != "aurora.aneumo_response_fidelity_p0_v3.activation.v1"
         or anchor_red_team["v3_registered_check_count"] != 12
         or anchor_red_team["v3_observed_check_count"] != 0
         or anchor_red_team["v3_anchor_tangent_check"]
@@ -1653,6 +1679,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "synthetic_v2_all_checks_passed",
                 "synthetic_v3_anchor_check_failed",
                 "v3_current_evidence_version",
+                "v3_activation_code_ready",
+                "v3_activation_requires_verified_operational_change",
+                "v3_activation_requires_public_source_cache_container_runner_and_manifest_hash_pins",
+                "v3_activation_requires_zero_prior_scientific_attempt",
                 "v3_method_free",
                 "v3_train_only",
                 "exact_cache_path_resolved_from_user_supplied_inventory_report",
@@ -1669,6 +1699,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             anchor_red_team[key] is not False
             for key in (
                 "v2_executed", "v2_cache_or_field_read",
+                "v3_activation_runner_reads_field_without_manifest",
+                "v3_legacy_v2_wrapper_valid_for_v3",
                 "hdf5_array_values_reported_read",
                 "duplicate_cache_reported_in_bounded_private_scope",
                 "current_session_remote_command_executed",
@@ -1697,6 +1729,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("v3_config", "v3_config_sha256"),
         ("v3_evaluator", "v3_evaluator_sha256"),
         ("v3_test", "v3_test_sha256"),
+        ("v3_activation_runner", "v3_activation_runner_sha256"),
+        ("v3_activation_test", "v3_activation_test_sha256"),
+        ("v3_pbs_wrapper", "v3_pbs_wrapper_sha256"),
     ):
         path = Path(__file__).resolve().parents[2] / anchor_red_team[path_key]
         if (
@@ -1706,6 +1741,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ):
             raise ProtocolError("An Aneumo P0 anchor-tangent evidence file changed.")
     checks.append("Aneumo anchor-tangent P0 v3 pre-execution boundary")
+    checks.append("Aneumo P0 v3 activation code without authority boundary")
 
     residual_novelty = problem_selection[
         "aneumo_response_fidelity_residual_novelty_audit"

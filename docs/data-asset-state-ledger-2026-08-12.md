@@ -5,7 +5,9 @@
 > compact contract is 32 generation families, 64 cases, eight flows and 4,096
 > aligned nodes. The private cache identity is now reported with matching
 > SHA-256, but current active split is still 0/0/0 because no execution
-> activation manifest or current container-readability verdict exists.
+> activation manifest or current container-readability verdict exists. The
+> newly implemented v3 activation validator is code readiness only and changes
+> no data assignment.
 > Method-free P0 v3 is registered/non-executable at 0/12;
 > its added anchor-tangent check was validated only on synthetic fixtures.
 > Historical P1/confirmation v1--v3 are inactive and no model or compute is

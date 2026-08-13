@@ -7,8 +7,10 @@
 > substitute staging is required. HDF5 schema only was reported checked. Keep
 > the immutable v3 contract unchanged and wait for a verified operational
 > introai9 change before checking only the pinned container and registering a
-> separate activation manifest. Raw fields remain private and validation/test
-> fields stay sealed.
+> separate activation manifest. A public validator and v3 PBS wrapper now
+> define that future binding, but no manifest exists and they authorize no
+> current access. Raw fields remain private and validation/test fields stay
+> sealed.
 
 > **2026-08-13 Aneumo same-release expansion:** 현재 검증된 과학 자산은
 > 32 base-family/64-case compact holding이며 local project workspace에는 private

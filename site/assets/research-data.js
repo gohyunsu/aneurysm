@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.9 · one conditional Aneumo response-fidelity source lead at fresh 32.5/40, novelty exactly 2.5/5 · general interventional consistency and aneurysm perturbation-response surrogation are direct priors · current method-free P0 v3 adds a non-compensatory anchor-tangent check and remains non-executable at real 0/12 · historical P1 and confirmation v1-v3 are inactive · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
-    requirement: "all 12 train-only P0 v3 endpoint-stability checks and a newly registered field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; a bounded private inventory matches the registered cache SHA-256 while location and infrastructure metadata remain private, but the immutable v3 config has no activation manifest after a current pre-command connection reset and unverified container readability; the historical inactive P1 v3 shows the intended same-backbone direct-versus-anchor-residual contrast but cannot be activated after the P0 version change; retry only after a verified introai9 operational change",
+    status: "Target locked · schema 11.9 · one conditional Aneumo response-fidelity source lead at fresh 32.5/40, novelty exactly 2.5/5 · general interventional consistency and aneurysm perturbation-response surrogation are direct priors · current method-free P0 v3 adds a non-compensatory anchor-tangent check · a fail-closed v3 activation runner exists but private manifest/authority remains 0 and real P0 remains non-executable at 0/12 · historical P1 and confirmation v1-v3 are inactive · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    requirement: "all 12 train-only P0 v3 endpoint-stability checks and a newly registered field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; a bounded private inventory matches the registered cache SHA-256 while location and infrastructure metadata remain private; public code now implements a future manifest/source/cache/container-pinned v3 CPU-only PBS path, but the immutable v3 config still has no actual activation manifest after a current pre-command connection reset and unverified container readability; the historical inactive P1 v3 shows the intended same-backbone direct-versus-anchor-residual contrast but cannot be activated after the P0 version change; retry only after a verified introai9 operational change",
     authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -44,7 +44,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "Exact Aneumo cache identity is resolved without opening execution",
-      copy: "A bounded private inventory matches SHA-256 9640b0ef…ab9 to the immutable AURORA cache identity. The exact path and infrastructure metadata are deliberately withheld from this public site. HDF5 schema only was reported checked; array values were not read. This session's Windows SSH attempt was reset before a remote command, so container readability and operational readiness remain no-verdict. The immutable P0 v3 is not edited and no activation manifest exists.",
+      copy: "A bounded private inventory matches SHA-256 9640b0ef…ab9 to the immutable AURORA cache identity. The exact path and infrastructure metadata are deliberately withheld from this public site. HDF5 schema only was reported checked; array values were not read. This session's Windows SSH attempt was reset before a remote command, so container readability and operational readiness remain no-verdict. The immutable P0 v3 is not edited. A fail-closed activation runner now exists, but no private activation manifest exists.",
       status: "Path/size/SHA resolved · real P0 0/12 · activation/PBS/GPU/field/model/result/claim 0",
       url: "../docs/aneumo-cache-path-inventory-2026-08-13.md"
     },
@@ -888,7 +888,7 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "P0-RF",
       title: "Are multi-flow velocity-response endpoints stable before any model is trained?",
-      copy: "Current P0 v3 reads only the 20 historical Aneumo train families, coordinates and velocity and adds an explicit nominal-anchor tangent check to the preserved v2 gates. The cache path, byte size and registered SHA-256 are now identity-matched, but v3 remains immutable and non-executable because no activation manifest or current container-readability verdict exists. Pressure, validation/test fields, checkpoints and predictions remain forbidden.",
+      copy: "Current P0 v3 reads only the 20 historical Aneumo train families, coordinates and velocity and adds an explicit nominal-anchor tangent check to the preserved v2 gates. The private cache identity is matched and a separate fail-closed activation runner now exists, but v3 remains immutable and non-executable because no private activation manifest or current container-readability verdict exists. Pressure, validation/test fields, checkpoints and predictions remain forbidden.",
       state: "Conditional lead · P0 v3 registered/non-executable · 0/12 real scientific checks · no PBS/GPU/model/test/claim",
       blocking: true
     },
@@ -1399,6 +1399,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "protocol",
+      title: "P0 v3 receives an executable path without receiving execution authority",
+      copy: "Audit found that the historical PBS wrapper still invoked v2 and the documented separate v3 activation manifest had no validator. A new runner and v3-only wrapper now require a verified operational-change record, zero prior P0-v3 scientific attempts, exact public source, immutable evaluator, runner, manifest, cache and container hashes, and one introai9 CPU-only PBS envelope. No private manifest was registered, no field was read and no job was submitted; real P0 remains 0/12.",
+      files: ["docs/aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md", "docs/experiment-protocol.md", "docs/server-execution.md", "docs/data-acquisition.md", "docs/data-asset-state-ledger-2026-08-12.md", "docs/datasets.md", "src/aurora/aneumo_response_fidelity_p0_v3_activation.py", "tests/test_aneumo_response_fidelity_p0_v3_activation.py", "cluster/pbs_aneumo_response_fidelity_p0_v3.pbs", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", ".github/workflows/quality.yml", "site/index.html", "site/learn.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "data",

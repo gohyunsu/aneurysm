@@ -1,5 +1,17 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-13 P0-v3 activation code · authority still absent:** The audit
+> found that the historical PBS wrapper still invoked v2 and that no code
+> implemented the separately registered private manifest required by the v3
+> evidence boundary. A new [activation contract](docs/aneumo-response-fidelity-p0-v3-activation-contract-2026-08-13.md),
+> [fail-closed runner](src/aurora/aneumo_response_fidelity_p0_v3_activation.py)
+> and [CPU-only PBS wrapper](cluster/pbs_aneumo_response_fidelity_p0_v3.pbs)
+> now pin a future private manifest, public commit, immutable v3 bytes, cache,
+> container and one-shot output envelope. No actual manifest or private path is
+> stored publicly. The current container is still unverified, no job was
+> submitted and real P0 remains 0/12. This is execution-readiness code, not a
+> scientific result or permission to retry.
+
 > **2026-08-13 schema 11.9 · anchor-tangent P0 v3:** A synthetic red team
 > found that the unexecuted P0 v2 skipped the nominal anchor in the same loop
 > that skipped undefined anchor interpolation. V2 could therefore pass 11/11

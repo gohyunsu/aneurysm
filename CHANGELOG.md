@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-13 · P0-v3 gains a separate fail-closed activation layer
+
+- Found that the preserved historical PBS wrapper still invoked P0 v2 and
+  that the documented separate v3 activation manifest had no implementation.
+- Added a new activation runner without modifying the immutable v3 config or
+  evaluator. A future private manifest must pin the public commit, immutable
+  v3 hashes, runner and manifest hashes, exact cache and container, output root,
+  verified external-change evidence and zero prior P0-v3 scientific attempts.
+- Added a v3-only introai9 PBS wrapper fixed at 4 CPU, 16 GB and 0 GPU. It
+  rejects dirty/different source, unreadable or hash-drifted private inputs,
+  repeat attempts and any authority beyond train coordinates and velocity.
+- Added seven dependency-light contract tests. No actual activation manifest
+  was registered, no private path was published and no server, scheduler,
+  transfer, PBS, cache, field, model, result or GPU was accessed. Real P0
+  remains 0/12; the implementation does not authorize a retry.
+
 ## 2026-08-13 · exact Aneumo cache identity resolved; activation remains locked
 
 - Recorded that a bounded private inventory resolves the cache identity and

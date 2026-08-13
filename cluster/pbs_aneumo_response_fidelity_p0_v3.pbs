@@ -1,0 +1,163 @@
+#!/usr/bin/env bash
+#PBS -N aurora_response_fidelity_p0_v3
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=16gb:ngpus=0
+#PBS -l walltime=01:00:00
+#PBS -j oe
+
+set -euo pipefail
+umask 077
+
+: "${PBS_JOBID:?P0 v3 must run inside PBS}"
+: "${AURORA_PROJECT_ROOT:?set the exact clean public checkout}"
+: "${AURORA_GIT_COMMIT:?set the exact public source SHA}"
+: "${AURORA_OUTPUT_ROOT:?set the private aggregate root}"
+: "${AURORA_CONTAINER:?set the pinned readable container}"
+: "${AURORA_CONTAINER_SHA256:?set the preflight-verified container SHA-256}"
+: "${AURORA_CACHE_PATH:?set the exact frozen private cache path}"
+: "${AURORA_CACHE_SHA256:?set the registered cache SHA-256}"
+: "${AURORA_ACTIVATION_MANIFEST:?set the separately registered private manifest}"
+: "${AURORA_ACTIVATION_MANIFEST_SHA256:?set the registered manifest SHA-256}"
+: "${AURORA_EXTERNAL_SERVICE_CHANGE_ACK:?name the verified operational change}"
+
+protocol_id="aneumo_response_fidelity_method_free_p0_v3"
+registered_cache_sha="9640b0efbc8ff17a8382b1592547bef109620faeced8a004a932b3cde3b97ab9"
+if [[ ! "$AURORA_GIT_COMMIT" =~ ^[0-9a-f]{40}$ ]]; then
+  echo "AURORA_GIT_COMMIT must be a full lowercase SHA." >&2
+  exit 90
+fi
+if [[ "$AURORA_CACHE_SHA256" != "$registered_cache_sha" ]]; then
+  echo "The cache SHA-256 differs from the registered identity." >&2
+  exit 90
+fi
+if [[ ! "$AURORA_CONTAINER_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+  echo "AURORA_CONTAINER_SHA256 must be a full lowercase SHA-256." >&2
+  exit 90
+fi
+if [[ ! "$AURORA_ACTIVATION_MANIFEST_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+  echo "AURORA_ACTIVATION_MANIFEST_SHA256 must be a full lowercase SHA-256." >&2
+  exit 90
+fi
+if [[ "$AURORA_EXTERNAL_SERVICE_CHANGE_ACK" != external_service_change_verified ]]; then
+  echo "No verified introai9 operational change; activation remains closed." >&2
+  exit 91
+fi
+if [[ "$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)" != "$AURORA_GIT_COMMIT" ]]; then
+  echo "Public source commit mismatch." >&2
+  exit 92
+fi
+if [[ -n "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]]; then
+  echo "Public checkout must be clean." >&2
+  exit 92
+fi
+record_root="$AURORA_OUTPUT_ROOT/aneumo_response_fidelity_p0_v3/records"
+status_path="$record_root/status.$PBS_JOBID.json"
+result_path="$record_root/result.$PBS_JOBID.private.json"
+job_tmp="${TMPDIR:-/tmp}/aurora_response_fidelity_p0_v3_$PBS_JOBID"
+container_result="$job_tmp/result.private.json"
+mkdir -p "$record_root" "$job_tmp"
+
+shopt -s nullglob
+for prior_status in "$record_root"/status.*.json; do
+  if grep -Fq "\"protocol_id\":\"$protocol_id\"" "$prior_status"; then
+    echo "A P0 v3 attempt exists; same-contract resubmission is forbidden." >&2
+    exit 94
+  fi
+done
+shopt -u nullglob
+
+write_status() {
+  local state="$1"
+  local exit_code="$2"
+  local gate_evaluated="$3"
+  local temporary="$status_path.partial"
+  printf '{"protocol_id":"%s","state":"%s","exit_code":%s,"public_source_commit":"%s","scientific_gate_evaluated":%s,"pressure":false,"validation_test":false,"method":false,"gpu":false,"outer_test":false,"paper_claim":false}\n' \
+    "$protocol_id" "$state" "$exit_code" "$AURORA_GIT_COMMIT" "$gate_evaluated" > "$temporary"
+  mv "$temporary" "$status_path"
+}
+
+write_status running 0 false
+audit_complete=false
+on_exit() {
+  local exit_code=$?
+  trap - EXIT
+  if [[ "$audit_complete" != true ]]; then
+    write_status execution_incomplete "$exit_code" false
+  fi
+  exit "$exit_code"
+}
+trap on_exit EXIT
+
+for required in "$AURORA_CONTAINER" "$AURORA_CACHE_PATH" "$AURORA_ACTIVATION_MANIFEST"; do
+  if [[ ! -r "$required" ]]; then
+    echo "A pinned private activation input is unreadable." >&2
+    exit 93
+  fi
+done
+if ! command -v singularity >/dev/null 2>&1; then
+  echo "singularity is unavailable." >&2
+  exit 93
+fi
+if [[ "$(sha256sum "$AURORA_CONTAINER" | awk '{print $1}')" != "$AURORA_CONTAINER_SHA256" ]]; then
+  echo "Observed container SHA-256 differs from the activation pin." >&2
+  exit 93
+fi
+if [[ "$(sha256sum "$AURORA_ACTIVATION_MANIFEST" | awk '{print $1}')" != "$AURORA_ACTIVATION_MANIFEST_SHA256" ]]; then
+  echo "Observed activation-manifest SHA-256 differs from the submission pin." >&2
+  exit 93
+fi
+
+set +e
+singularity exec --cleanenv \
+  --pwd /workspace \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_CACHE_PATH:/data/aneumo_pilot.h5:ro" \
+  --bind "$AURORA_ACTIVATION_MANIFEST:/activation/manifest.private.json:ro" \
+  --bind "$job_tmp:/run" \
+  "$AURORA_CONTAINER" \
+  env PBS_JOBID="$PBS_JOBID" PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 \
+    PYTHONPATH=/workspace/src TMPDIR=/run \
+  python -m aurora.aneumo_response_fidelity_p0_v3_activation \
+    --config /workspace/configs/aneumo_response_fidelity_p0_v3.json \
+    --activation-manifest /activation/manifest.private.json \
+    --root /workspace \
+    --cache /data/aneumo_pilot.h5 \
+    --expected-host-cache-path "$AURORA_CACHE_PATH" \
+    --expected-container-path "$AURORA_CONTAINER" \
+    --expected-output-root "$AURORA_OUTPUT_ROOT" \
+    --public-source-commit "$AURORA_GIT_COMMIT" \
+    --observed-container-sha256 "$AURORA_CONTAINER_SHA256" \
+    --expected-activation-manifest-sha256 "$AURORA_ACTIVATION_MANIFEST_SHA256" \
+    --pbs-job-id "$PBS_JOBID" \
+    --output /run/result.private.json
+audit_exit=$?
+set -e
+
+if [[ ! -s "$container_result" ]]; then
+  exit "$audit_exit"
+fi
+cp "$container_result" "$result_path.partial"
+mv "$result_path.partial" "$result_path"
+
+result_status="$(
+  singularity exec --cleanenv --bind "$job_tmp:/run:ro" "$AURORA_CONTAINER" \
+    python - /run/result.private.json <<'PY'
+import json
+with open("/run/result.private.json", encoding="utf-8") as stream:
+    print(json.load(stream).get("status", "invalid"))
+PY
+)"
+case "$result_status" in
+  passed_endpoint_stability_gate)
+    write_status completed_pass 0 true
+    ;;
+  failed_endpoint_stability_gate)
+    write_status completed_fail "$audit_exit" true
+    ;;
+  *)
+    exit 95
+    ;;
+esac
+
+audit_complete=true
+exit "$audit_exit"
