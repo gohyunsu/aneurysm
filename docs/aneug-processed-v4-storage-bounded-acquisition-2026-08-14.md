@@ -59,3 +59,11 @@ the wrapper writes stage transitions and a final exit status directly to the
 private shared record directory. Exact URLs, sizes, SHA-256, storage cap,
 resume semantics, reader and schema checks are unchanged. This is not a
 scientific-contract repair.
+
+## Attempt 2 outcome and final compatibility change
+
+Job `116208.ECE-util1` persisted the missing stage evidence. The compute node
+runs curl 7.58.0, which rejects `--retry-all-errors`; it exited 2 before any
+partial byte. Reader and schema remain untouched. Final attempt 3 replaces
+only that unsupported option with curl-7.58-compatible retry delay and
+connection-refused handling. There is no fourth D1 transport attempt.

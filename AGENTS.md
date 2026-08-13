@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D1 transport attempt 2:** Quality-passed source `0be4d8f…`
+> ran as introai9 job `116208.ECE-util1`, CPU 4, 64 GB, GPU 0. Persistent log
+> proves compute-node curl 7.58.0 rejected unsupported `--retry-all-errors`
+> before any partial object. Exit 2, partial bytes 0, reader/schema 0. This is
+> a transport-client compatibility result, not source/data/science failure.
+> Final attempt 3 changes only that flag to curl-7.58-compatible `--retry-delay`
+> and `--retry-connrefused`; exact objects, hashes, cap and schema remain fixed.
+> No further D1 transport attempt exists after attempt 3. Never use
+> `junjinyong`.
+
 > **2026-08-14 D1 transport attempt 1:** Exact public source
 > `b16ae4b8ebcea99e089034952eb68655b842109a` passed Quality
 > `31728458903`. Introai9 CPU/PBS job `116207.ECE-util1` used CPU 4, 64 GB,

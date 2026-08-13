@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-14 · D1 attempt 2 isolates curl compatibility before transport
+
+- Job `116208.ECE-util1` used CPU 4, 64 GB and GPU 0 and persisted its stage
+  log. Curl 7.58.0 rejected unsupported `--retry-all-errors` before creating
+  any partial byte; schema remains unevaluated.
+- Registered final attempt 3 with exactly one compatibility change: replace
+  that flag with supported retry delay/connection-refused flags. Object,
+  hash, cap, reader/schema and scientific boundaries remain unchanged.
+
 ## 2026-08-14 · D1 attempt 1 closes before any partial object
 
 - Exact Quality-passed source `b16ae4b…` ran as introai9 CPU/PBS job

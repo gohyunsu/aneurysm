@@ -167,7 +167,7 @@ def check_site(root: Path) -> list[str]:
         "AneuG reference-relative transient WSS 31.0/40 inactive": (
             "current reference-relative candidate boundary"
         ),
-        "processed-v4 D1 attempt 1/3 transport-incomplete under 60 GB": (
+        "processed-v4 D1 attempt 2/3 transport-incomplete under 60 GB": (
             "current processed-v4 acquisition stage"
         ),
         "33,377,372,101-byte peak below a 60 GB selected-asset cap": (

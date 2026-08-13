@@ -34,7 +34,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | 목표 | IEEE ISBI 2027 | four technical pages · single-blind |
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
-| processed-v4 D1 | attempt 1/3 transport-incomplete | partial 0 · schema 미평가 · attempt 2는 persistent logging만 추가 |
+| processed-v4 D1 | attempt 2/3 transport-incomplete | partial 0 · curl 7.58 incompatibility confirmed · final attempt 3 only |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -181,6 +181,11 @@ Attempt 1 job `116207.ECE-util1`은 GPU 0으로 배정됐지만 즉시 exit 2로
 미평가입니다. 이를 source/data failure로 해석하지 않습니다. Attempt 2는 exact
 object·hash·storage·schema를 바꾸지 않고 persistent stage log와 exit-status trap만
 추가합니다.
+
+Attempt 2 job `116208.ECE-util1`의 persistent log로 compute-node curl 7.58.0이
+`--retry-all-errors`를 지원하지 않는 정확한 원인이 확인됐습니다. Download 시작 전
+종료되어 partial/schema는 여전히 0입니다. 마지막 attempt 3은 해당 옵션만 curl
+7.58-compatible retry flags로 바꿉니다.
 
 ## 조건부 architecture와 평가
 
