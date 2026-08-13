@@ -158,27 +158,44 @@ def _phase_metrics(phase: str, payload: bytes) -> tuple[dict, dict]:
     return metrics, private
 
 
-def run(config_path: Path) -> dict:
+def run(config_path: Path, member_root: Path | None = None) -> dict:
     config = json.loads(config_path.read_text(encoding="utf-8"))
     source = config["source"]
     transport = config["transport"]
-    client = RangeClient(max_bytes=int(transport["maximum_http_bytes"]), retries=3)
-    url = _url(source["repository"], source["huggingface_revision"], source["batch"])
+    mode = transport.get("mode", "bounded_http_range")
+    client = None
+    if mode == "bounded_http_range":
+        client = RangeClient(max_bytes=int(transport["maximum_http_bytes"]), retries=3)
+        url = _url(source["repository"], source["huggingface_revision"], source["batch"])
+    elif mode == "exact_private_stage":
+        if member_root is None or not member_root.is_dir():
+            raise D0Error("exact private member stage is absent")
+        if len(source.get("staged_filenames", [])) != len(source["phases"]):
+            raise D0Error("staged filename contract is incomplete")
+    else:
+        raise D0Error(f"unsupported transport mode: {mode}")
     phase_rows = []
     private = []
-    for phase, member_name, expected_hash in zip(
-        source["phases"], source["member_names"], source["expected_vtp_sha256"]
+    for index, (phase, member_name, expected_hash) in enumerate(
+        zip(source["phases"], source["member_names"], source["expected_vtp_sha256"])
     ):
-        payload = _get_member(
-            client, url=url, case_id=int(source["case_id"]), member_name=member_name
-        )
+        if mode == "bounded_http_range":
+            assert client is not None
+            payload = _get_member(
+                client, url=url, case_id=int(source["case_id"]), member_name=member_name
+            )
+        else:
+            staged = member_root / source["staged_filenames"][index]
+            if not staged.is_file() or staged.is_symlink():
+                raise D0Error(f"exact staged member absent: {staged.name}")
+            payload = staged.read_bytes()
         observed = hashlib.sha256(payload).hexdigest()
         if observed != expected_hash:
             raise D0Error(f"exact wall-member hash mismatch for phase {phase}")
         metrics, internal = _phase_metrics(phase, payload)
         phase_rows.append({"phase": phase, **metrics})
         private.append(internal)
-    if client.requests > int(transport["maximum_requests"]):
+    if client is not None and client.requests > int(transport["maximum_requests"]):
         raise D0Error("HTTP request ceiling exceeded")
     points_equal = np.array_equal(private[0]["points"], private[1]["points"])
     polygons_equal = len(private[0]["polygons"]) == len(private[1]["polygons"]) and all(
@@ -218,7 +235,16 @@ def run(config_path: Path) -> dict:
         "method_or_architecture_selected": False,
         "gpu_used": False,
         "raw_or_derived_field_redistributed": False,
-        "transport": {"http_requests": client.requests, "http_bytes": client.bytes_read},
+        "transport": {
+            "mode": mode,
+            "http_requests_during_pbs": 0 if client is None else client.requests,
+            "http_bytes_during_pbs": 0 if client is None else client.bytes_read,
+            "staged_member_bytes": (
+                sum(int((member_root / name).stat().st_size) for name in source["staged_filenames"])
+                if client is None and member_root is not None
+                else 0
+            ),
+        },
         "cross_phase": {
             "point_values_equal": points_equal,
             "polygon_connectivity_equal": polygons_equal,
@@ -235,13 +261,19 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--member-root", type=Path)
     args = parser.parse_args()
+    protocol_id = "unknown"
     try:
-        result = run(args.config)
+        protocol_id = json.loads(args.config.read_text(encoding="utf-8"))["protocol_id"]
+    except Exception:
+        pass
+    try:
+        result = run(args.config, args.member_root)
     except Exception as exc:
         result = {
             "schema_version": "aurora.aneumo_transient_vtp_d0.status.v1",
-            "protocol_id": "aneumo_transient_vtp_reader_and_structure_development_d0_v1",
+            "protocol_id": protocol_id,
             "state": "execution_incomplete",
             "error_type": type(exc).__name__,
             "error": str(exc),

@@ -71,8 +71,20 @@ does not raise the score.
 ## D0 contract
 
 [`aneumo_transient_vtp_d0.json`](../configs/aneumo_transient_vtp_d0.json)
-freezes case 1 phases `4.01` and `5.00`, whose exact VTP hashes were already
-observed. D0 verifies:
+froze case 1 phases `4.01` and `5.00`, whose exact VTP hashes were already
+observed. Its sole PBS job `116160.ECE-util1` ended E/exit 1 after 12:10 with
+CPU 1 second and GPU 0 because the compute node returned network unreachable
+before the first bounded range response. No VTP payload was obtained; the
+reader, extractor and scientific stability gate were not evaluated. The
+460-byte status SHA-256 is `6fa462f0…e0a`.
+
+The final transport-only repair
+[`aneumo_transient_vtp_d0_v2.json`](../configs/aneumo_transient_vtp_d0_v2.json)
+keeps the same two members, hashes, reader, extractor and no-threshold checks.
+It changes only member delivery: exact hash-verified bytes are placed in a
+private ephemeral stage, PBS performs zero HTTP requests, and the wrapper
+deletes the two staged files after the attempt. This is development repair
+2/2. No further D0 repair or resubmission is allowed. D0 verifies:
 
 - exact bounded ZIP member extraction and CRC/hash integrity;
 - fail-closed VTK XML parsing;
@@ -83,9 +95,7 @@ observed. D0 verifies:
 
 It reports counts and extractor agreement descriptively, with no stability
 threshold. A pass authorizes only registration of a new family-disjoint,
-method-free P0. D0 permits at most two development repairs, each tied to one
-encoding, range-extraction or deterministic implementation defect. It cannot
-change the case, phases or scientific claim.
+method-free P0. It cannot change the case, phases or scientific claim.
 
 ## Scientific P0 that may follow
 

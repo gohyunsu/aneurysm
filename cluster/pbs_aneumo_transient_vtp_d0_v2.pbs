@@ -1,0 +1,38 @@
+#!/bin/bash
+#PBS -N aurora_avtp_d0v2
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=16gb:ngpus=0
+#PBS -l walltime=01:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_SOURCE_DIR:?AURORA_SOURCE_DIR is required}"
+: "${AURORA_OUTPUT_PATH:?AURORA_OUTPUT_PATH is required}"
+: "${AURORA_CONTAINER:?AURORA_CONTAINER is required}"
+: "${AURORA_MEMBER_ROOT:?AURORA_MEMBER_ROOT is required}"
+
+test "$(basename "$AURORA_MEMBER_ROOT")" = "aurora-avtp-d0-v2-stage"
+test -f "$AURORA_MEMBER_ROOT/case1_phase4.01_wall.vtp"
+test -f "$AURORA_MEMBER_ROOT/case1_phase5.00_wall.vtp"
+
+cleanup_stage() {
+  rm -f "$AURORA_MEMBER_ROOT/case1_phase4.01_wall.vtp"
+  rm -f "$AURORA_MEMBER_ROOT/case1_phase5.00_wall.vtp"
+  rmdir "$AURORA_MEMBER_ROOT" 2>/dev/null || true
+}
+trap cleanup_stage EXIT
+
+cd "$AURORA_SOURCE_DIR"
+test "$(git rev-parse HEAD)" = "${AURORA_SOURCE_COMMIT:?AURORA_SOURCE_COMMIT is required}"
+test -z "$(git status --porcelain)"
+
+singularity exec --cleanenv \
+  --bind "$AURORA_SOURCE_DIR:$AURORA_SOURCE_DIR:ro" \
+  --bind "$AURORA_MEMBER_ROOT:$AURORA_MEMBER_ROOT:ro" \
+  --bind "$(dirname "$AURORA_OUTPUT_PATH"):$(dirname "$AURORA_OUTPUT_PATH")" \
+  "$AURORA_CONTAINER" \
+  python "$AURORA_SOURCE_DIR/experiments/run_aneumo_transient_vtp_d0.py" \
+    --config "$AURORA_SOURCE_DIR/configs/aneumo_transient_vtp_d0_v2.json" \
+    --member-root "$AURORA_MEMBER_ROOT" \
+    --output "$AURORA_OUTPUT_PATH"

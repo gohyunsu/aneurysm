@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-13 — D0 v1 transport outcome and final repair 2/2
+
+- Exact green source `148848d…0cef` ran once as introai9 PBS job
+  `116160.ECE-util1`: CPU 4, memory 16 GB, GPU 0, E/exit 1 after 12:10.
+- Compute-node outbound networking returned `Errno 101` before the first
+  bounded range response. No VTP payload was obtained; reader, extractor and
+  scientific stability were unevaluated. Exact 460-byte private status hashes
+  to `6fa462f0…e0a`; the public record contains no private path or raw field.
+- Registered final development repair 2/2: stage only the same two exact,
+  previously inspected members privately; verify hashes; make PBS network-free;
+  delete the two staged files after the attempt. Case, phase, arrays, reader,
+  extractor and scientific thresholds do not change.
+- Any D0 v2 outcome closes further D0 repair/resubmission. Method-free P0,
+  model, architecture, GPU, test and paper claim remain closed.
+
 ## 2026-08-13 — D0 bounded development repair 1/2
 
 - Preserved failed Quality run `31704718929` as exact provenance: 623 of 624

@@ -1,0 +1,29 @@
+{
+  "schema_version": "aurora.aneumo_transient_vtp_d0.execution.v1",
+  "protocol_id": "aneumo_transient_vtp_reader_and_structure_development_d0_v1",
+  "public_source_commit": "148848d065df46160edc233bfa746748e4f00cef",
+  "job": {
+    "id": "116160.ECE-util1",
+    "state": "E",
+    "exit_status": 1,
+    "walltime": "00:12:10",
+    "cpu_time": "00:00:01",
+    "memory_kb": 85488,
+    "ncpus": 4,
+    "memory_gb_requested": 16,
+    "ngpus": 0,
+    "run_count": 1
+  },
+  "aggregate_status_bytes": 460,
+  "aggregate_status_sha256": "6fa462f090f6789b4095a607aaeef8e99eed43205596315658af59497d875e0a",
+  "outcome": "execution_incomplete",
+  "attribution": "compute_node_outbound_network_unreachable_before_first_bounded_range_response",
+  "vtp_payload_obtained": false,
+  "reader_or_structure_extractor_evaluated": false,
+  "scientific_stability_gate_evaluated": false,
+  "paper_identity_active": false,
+  "method_or_architecture_selected": false,
+  "gpu_used": false,
+  "interpretation": "no_scientific_or_reader_verdict",
+  "next_boundary": "final_registered_development_repair_2_of_2_may_change_only_exact_member_transport_to_ephemeral_private_staging"
+}

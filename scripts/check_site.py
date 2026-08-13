@@ -56,6 +56,8 @@ def check_site(root: Path) -> list[str]:
         "execution-incomplete · 0/12 evaluated": "current P0 state",
         "30.0/40 inactive": "current transient candidate boundary",
         "D0 · known-member reader/extractor development": "current D0 evidence stage",
+        "VTP 미획득; 기존 case 1·phase 2개만 재사용": "current D0 transport outcome",
+        "repair 2/2": "final D0 repair boundary",
         "GNN을 포함한 어떤 모델도 current method가 아님": (
             "no-selected-architecture boundary"
         ),
@@ -157,6 +159,10 @@ def check_site(root: Path) -> list[str]:
             "current transient candidate boundary"
         ),
         "D0 reader/extractor development only": "current D0 evidence stage",
+        "D0 v1 ended execution-incomplete before any VTP payload": (
+            "current D0 transport outcome"
+        ),
+        "final transport repair 2/2 prospective": "final D0 repair boundary",
         "closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated": (
             "closed P0 result count"
         ),

@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 D0 v1 outcome and final transport repair 2/2:** Exact public
+> source `148848d065df46160edc233bfa746748e4f00cef` ran once as introai9 PBS
+> job `116160.ECE-util1` with CPU 4, 16 GB, GPU 0. It ended E/exit 1 after
+> 12:10 because compute-node outbound network returned `Errno 101` before the
+> first bounded range response. No VTP payload was obtained; reader/extractor
+> and scientific stability are unevaluated. Private 460-byte status SHA-256 is
+> `6fa462f0…e0a`. Final repair 2/2 may change only transport: privately stage
+> the same two exact hash-verified known members, use zero PBS HTTP requests,
+> and delete those two staged files after the attempt. Do not change case,
+> phase, array, reader, extractor or threshold. Any v2 outcome closes further
+> D0 repair/resubmission. A pass opens only separate family-disjoint method-free
+> P0 registration. Model, architecture, GPU, test and paper claim stay closed.
+> Never access or query `junjinyong`.
+
 > **2026-08-13 D0 development repair 1/2:** Quality run `31704718929`
 > executed 624 tests; 623 passed and the sole failure was a synthetic fixture
 > that assigned coordinates and WSS arrays in reverse in the inline-base64

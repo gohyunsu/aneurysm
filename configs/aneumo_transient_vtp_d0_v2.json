@@ -1,0 +1,84 @@
+{
+  "schema_version": "aurora.aneumo_transient_vtp_d0.v2",
+  "protocol_id": "aneumo_transient_vtp_reader_and_structure_development_d0_v2",
+  "status": "prospective_final_development_repair_before_member_restaging",
+  "as_of": "2026-08-13",
+  "supersedes": {
+    "version": "aurora.aneumo_transient_vtp_d0.v1",
+    "job_id": "116160.ECE-util1",
+    "outcome": "execution_incomplete_before_vtp_payload_due_compute_node_network_unreachable",
+    "status_sha256": "6fa462f090f6789b4095a607aaeef8e99eed43205596315658af59497d875e0a"
+  },
+  "purpose": "validate_the_same_reader_and_structure_extractor_on_the_same_two_previously_inspected_members_using_exact_ephemeral_private_staging",
+  "source": {
+    "repository": "SAIS-Life-Science/Aneumo",
+    "huggingface_revision": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "github_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
+    "case_id": 1,
+    "batch": "batch_1-10.zip",
+    "phases": ["4.01", "5.00"],
+    "member_names": ["1/4.01/4.01_wall.vtp", "1/5.00/5.00_wall.vtp"],
+    "staged_filenames": ["case1_phase4.01_wall.vtp", "case1_phase5.00_wall.vtp"],
+    "expected_vtp_sha256": [
+      "39e0f8028bdb80ce2e32920addeb3dcced611c20d8e3ff713a5bce82b846fc3a",
+      "007c9b72708e468f5d1d8bdde8dbe30bc30a6921938c62fa435375f5a5a8eff9"
+    ],
+    "field_members_are_not_newly_selected": true,
+    "previously_inspected_in_release_audit": true
+  },
+  "license_boundary": {
+    "huggingface_tag": "cc-by-nc-nd-4.0",
+    "github_datasheet_statement": "cc-by-4.0",
+    "declarations_conflict": true,
+    "handling_rule": "apply_stricter_noncommercial_nonredistribution_boundary_until_author_clarification",
+    "raw_or_derived_field_redistribution": false,
+    "private_raw_stage_is_ephemeral": true,
+    "raw_stage_deleted_after_attempt": true,
+    "legal_conclusion_made": false
+  },
+  "development": {
+    "stage": "D0_reader_and_extractor_development_not_scientific_gate",
+    "repair_round": 2,
+    "repair_rounds_maximum": 2,
+    "repair_attribution": "compute_node_outbound_network_unreachable_requires_exact_offline_zip_member_staging",
+    "repair_scope": "zip_range_member_extraction_transport_only",
+    "further_repair_or_resubmission_allowed": false,
+    "case_phase_array_threshold_or_scientific_code_changed": false,
+    "success_checks": [
+      "two_exact_member_hashes_match",
+      "point_and_connectivity_contracts_match_previous_audit",
+      "point_wss_is_three_component_finite_and_time_varying",
+      "two_normal_constructions_and_two_polygon_fans_execute",
+      "critical_points_are_reported_without_claiming_stability"
+    ],
+    "success_authorizes": "register_separate_prospective_method_free_stability_p0_on_new_family_disjoint_members",
+    "does_not_authorize": [
+      "paper_identity",
+      "method_or_architecture_selection",
+      "gpu_training",
+      "critical_point_or_worldline_stability_claim",
+      "outer_test_or_clinical_claim"
+    ]
+  },
+  "transport": {
+    "mode": "exact_private_stage",
+    "stage_uses_only_exact_hash_verified_known_members": true,
+    "network_during_pbs": false,
+    "maximum_http_bytes": 268435456,
+    "maximum_requests": 12,
+    "raw_member_persistence_after_attempt": false,
+    "aggregate_json_only": true
+  },
+  "execution": {
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "scheduler": "pbs",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 16,
+    "ngpus": 0,
+    "walltime": "01:00:00",
+    "runtime_binding": "private_execution_manifest_must_pin_container_source_stage_and_output_before_restaging",
+    "login_node_gpu_allowed": false
+  }
+}

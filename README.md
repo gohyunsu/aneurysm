@@ -12,7 +12,10 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 > steady response-fidelity P0 v3는 `execution-incomplete · 0/12 evaluated`이며
 > 같은 계약을 다시 실행하지 않습니다. 다음 후보인 transient
 > structure-faithful WSS는 **30.0/40 inactive**입니다. 현재 열린 것은 이미
-> 조사한 case 1의 두 phase만 재사용하는 D0 reader/extractor development뿐이며,
+> 조사한 case 1의 두 phase만 재사용하는 D0 reader/extractor development뿐입니다.
+> D0 v1 job `116160.ECE-util1`은 compute-node network 차단으로 VTP를 얻기 전에
+> execution-incomplete로 끝났습니다. 현재는 exact 두 member를 private 임시
+> stage에서 network-free PBS로 읽는 최종 transport repair 2/2만 열려 있으며,
 > 새로운 scientific stability gate나 모델 학습이 아닙니다.
 
 ## 현재 상태
@@ -23,7 +26,7 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 | active 연구 주제 | 없음 | transient 후보는 admission 32 미만 |
 | 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아님 |
 | transient 자산 | 966 complete case · 40 base family | 1,000 case가 1,000 독립 표본은 아님 |
-| D0 | prospective reader/extractor development | 기존 case 1·phase 2개만 재사용 |
+| D0 | v1 transport-incomplete · final repair 2/2 prospective | VTP 미획득; 기존 case 1·phase 2개만 재사용 |
 | scientific P0 / 모델 / GPU | 미등록 / 미선택 / 0 | GNN을 포함한 어떤 모델도 current method가 아님 |
 | 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
 
@@ -99,6 +102,8 @@ Hugging Face의 `CC BY-NC-ND 4.0` tag와 GitHub datasheet의 `CC BY 4.0` 문구�
 
 ```text
 D0 · known-member reader/extractor development
+  ├─ v1: compute-node network unreachable · VTP/read/extractor 0
+  └─ v2: exact ephemeral stage · final repair 2/2 · PBS network 0
   └─ pass → 별도 prospective method-free P0 등록만 허용
 P0 · family-disjoint target stability
   └─ pass → matched baseline screen 등록만 허용
@@ -112,7 +117,9 @@ ISBI claim activation
 D0는 scientific result가 아닙니다. 최대 두 번의 bounded repair만 허용하며,
 각 repair는 VTK encoding, ZIP range extraction 또는 deterministic numerical
 implementation defect 하나로 제한됩니다. Case·phase 변경, array 삭제,
-threshold 사후 변경과 model training은 금지합니다.
+threshold 사후 변경과 model training은 금지합니다. 첫 synthetic-fixture 수정이
+repair 1/2를, compute-node egress를 exact private staging으로 바꾸는 transport
+수정이 repair 2/2를 소모합니다. V2 결과와 관계없이 추가 D0 수리·재제출은 없습니다.
 
 ## 미래 아키텍처의 최소 조건
 
