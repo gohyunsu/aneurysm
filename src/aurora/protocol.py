@@ -11220,6 +11220,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d1_attempt_2_partial_bytes",
             "processed_v4_d1_attempt_2_schema_evaluated",
             "processed_v4_d1_attempt_3_only_change",
+            "processed_v4_d1_attempt_3_job_id",
+            "processed_v4_d1_attempt_3_status",
+            "processed_v4_d1_attempt_3_partial_bytes",
+            "processed_v4_d1_attempt_3_schema_evaluated",
+            "processed_v4_d1_attempt_3_walltime",
+            "processed_v4_d1_attempt_3_persistent_log_sha256",
+            "processed_v4_d1_attempt_3_persistent_status_sha256",
+            "processed_v4_d1_result",
+            "processed_v4_d1_closed",
             "processed_v4_d1_v5_or_raw_authorized",
             "processed_v4_d1_scientific_p0_or_gpu_authorized",
             "scientific_gate_registered",
@@ -11277,7 +11286,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["g0_scientific_checks_registered"] != 0
         or reference_floor["g0_scientific_checks_evaluated"] != 0
         or reference_floor["processed_v4_d1_status"]
-        != "transport_incomplete_attempt_2_of_3_before_partial_object_exact_curl_compatibility_cause_resolved_only_attempt_3_registered"
+        != "closed_execution_incomplete_after_attempt_3_of_3_connection_timeout_partial_zero_schema_unevaluated_no_data_or_scientific_verdict"
         or reference_floor["processed_v4_d1_transient_bytes"] != 23744862051
         or reference_floor["processed_v4_d1_transient_sha256"]
         != "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
@@ -11286,7 +11295,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d1_selected_asset_peak_cap_bytes"]
         != 60000000000
         or reference_floor["processed_v4_d1_transport_attempt_limit"] != 3
-        or reference_floor["processed_v4_d1_transport_attempts_used"] != 2
+        or reference_floor["processed_v4_d1_transport_attempts_used"] != 3
         or reference_floor["processed_v4_d1_attempt_1_job_id"]
         != "116207.ECE-util1"
         or reference_floor["processed_v4_d1_attempt_1_status"]
@@ -11301,8 +11310,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d1_attempt_2_partial_bytes"] != 0
         or reference_floor["processed_v4_d1_attempt_3_only_change"]
         != "replace_unsupported_retry_all_errors_with_curl_7_58_compatible_retry_delay_and_retry_connrefused"
+        or reference_floor["processed_v4_d1_attempt_3_job_id"]
+        != "116209.ECE-util1"
+        or reference_floor["processed_v4_d1_attempt_3_status"]
+        != "final_state_f_exit_28_connection_timed_out_after_30001_milliseconds_partial_zero_schema_unevaluated"
+        or reference_floor["processed_v4_d1_attempt_3_partial_bytes"] != 0
+        or reference_floor["processed_v4_d1_attempt_3_walltime"] != "00:07:32"
+        or reference_floor["processed_v4_d1_attempt_3_persistent_log_sha256"]
+        != "66d3a2494979456918e96e91c970914f32ff28297b26d2e314963e1cf3cb402d"
+        or reference_floor["processed_v4_d1_attempt_3_persistent_status_sha256"]
+        != "7f093a68d8747a84b0529d164d7474448aa504ce28a38a29602dce41ea0f2a72"
+        or reference_floor["processed_v4_d1_result"]
+        != "results/aneug_processed_v4_d1_execution_20260814.json"
+        or reference_floor["processed_v4_d1_closed"] is not True
         or reference_floor["next_allowed_action"]
-        != "run_final_processed_v4_d1_transport_attempt_3_with_only_curl_7_58_compatibility_change_and_same_objects_schema_storage_boundaries"
+        != "none_under_closed_d1_require_human_selection_of_materially_distinct_acquisition_version_or_verified_external_transport_change"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11327,6 +11349,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d1_scientific_p0_or_gpu_authorized",
                 "processed_v4_d1_attempt_1_schema_evaluated",
                 "processed_v4_d1_attempt_2_schema_evaluated",
+                "processed_v4_d1_attempt_3_schema_evaluated",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",

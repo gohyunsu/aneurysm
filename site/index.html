@@ -41,7 +41,7 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · ANEUG REFERENCE-RELATIVE WSS 31.0/40 INACTIVE · D1 ATTEMPT 2/3 TRANSPORT-INCOMPLETE · SCIENTIFIC P0 / MODEL / GPU / CLAIM 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · ANEUG REFERENCE-RELATIVE WSS 31.0/40 INACTIVE · D1 CLOSED 3/3 · DATA / SCHEMA / SCIENTIFIC VERDICT 0 · MODEL / GPU / CLAIM 0</p>
         <h1>
           A low field error<br>
           <em>does not certify flow structure.</em>
@@ -265,8 +265,8 @@
         <div><span>Latest scientific decision</span><b>AneuG reference-relative structural fidelity · inactive source candidate</b></div>
         <div><span>Score / critical floor</span><b>31.0/40 · residual novelty 2.5/5 · independent unit unresolved</b></div>
         <div><span>Acquired engineering assets</span><b>AneuG geometry 14,710 complete · BenchAnXplore 105×80 velocity</b></div>
-        <div><span>Processed-v4 D1 / scientific P0 / selected model / GPU / claim</span><b>attempt 2 incomplete / 0 / 0 / 0 / 0</b></div>
-        <div><span>Next action</span><b>Final attempt 3/3 · same bytes and schema · curl 7.58 compatibility only</b></div>
+        <div><span>Processed-v4 D1 / scientific P0 / selected model / GPU / claim</span><b>closed 3/3 · partial/schema 0 / 0 / 0 / 0 / 0</b></div>
+        <div><span>Next action</span><b>No action under D1 · explicitly select a materially distinct acquisition route or verify external transport change</b></div>
       </div>
     </section>
 
@@ -594,7 +594,7 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">D1 · PROCESSED-ONLY ACQUISITION / ATTEMPT 2 INCOMPLETE</p>
+          <p class="eyebrow">D1 · PROCESSED-ONLY ACQUISITION / CLOSED AT ATTEMPT 3 OF 3</p>
           <span>selected AneuG asset cap 60 GB · v5/raw CFD excluded</span>
         </div>
         <div class="g1-result-metrics">
@@ -604,7 +604,7 @@
           <div class="delta"><span>Peak new storage</span><b>33.38 GB</b><small>below 60 GB cap</small></div>
         </div>
         <div class="g1-result-decision">
-          <strong>2 TB raw release는 받지 않으며, attempt 2도 data verdict가 아닙니다.</strong>
+          <strong>2 TB raw release는 불필요하지만, D1에서는 processed object 전송이 완료되지 않았습니다.</strong>
           <p>
             Official assembler상 transient v4 root는 registered cases와 mesh data를,
             steady v4는 물리 WSS 복원에 필요한 normalization을 제공합니다. D1은 exact
@@ -613,11 +613,12 @@
             incomplete일 때만 같은 partial bytes를 최대 세 번 resume하며, complete 뒤
             schema audit은 재실행하지 않습니다. Pass도 leakage grouping과 split freeze만
             열고 model·GPU·paper result는 열지 않습니다.
-            Attempt 2 job 116208의 persistent log로 compute-node curl 7.58.0이
-            unsupported <code>--retry-all-errors</code>를 거부해 download byte 0에서
-            exit 2로 종료됐음을 확인했습니다. 마지막 attempt 3은 이 옵션만
-            지원되는 retry flag로 바꾸며 object/hash/cap/schema는 그대로입니다.
-            네 번째 D1 transport attempt는 없습니다.
+            마지막 job 116209는 CPU 4·64GB·GPU 0에서 F/exit 28, walltime
+            00:07:32로 종료됐고 persistent error는 30,001ms connection timeout입니다.
+            Partial byte, transport-complete marker, reader, schema는 모두 0입니다. 이는
+            official object의 부재나 60GB 계획의 실패가 아니라 compute-node transport
+            failure이며 과학적 판정을 만들지 않습니다. D1은 3/3에서 닫혔고
+            네 번째 시도나 동일 contract 수리는 없습니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">D1 machine contract ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">Storage·schema rationale ↗</a>
@@ -871,7 +872,7 @@
         <article><span>SR-C3</span><h3>Lineage-disjoint confirmation</h3><p>Field-blind하게 고정한 independent unit과 모든 prespecified structural endpoint에서 일관된 우위를 요구한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>processed-v4 D1 attempt 2/3 incomplete · final attempt 3 curl-compatibility-only · scientific P0/P1/method/model/GPU/test/result/claim 0</b>
+        <span>Current stage</span><b>processed-v4 D1 closed 3/3 · partial/reader/schema 0 · data/science verdict 0 · P0/P1/method/model/GPU/test/result/claim 0</b>
         <span>Claim boundary</span><b>G0 has no source or science verdict and cannot activate a scientific or manuscript claim</b>
       </div>
     </section>

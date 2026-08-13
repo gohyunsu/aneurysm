@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D1 final closure:** Quality/Pages-passed public source
+> `274bb0e3ced86a908bdb4d6cfa7b61c4c248f9cb` ran as final introai9 job
+> `116209.ECE-util1`, CPU 4, 64 GB, GPU 0. It finalized F/exit 28 after
+> 00:07:32 with exact persistent error `Connection timed out after 30001
+> milliseconds`. Partial bytes, transport-complete marker, reader and schema
+> are 0. Log/status SHA-256 are `66d3a249…402d` / `7f093a68…2a72`; raw PBS
+> output did not materialize. This is compute-node transport failure, not a
+> dataset, storage-plan or scientific verdict. D1 exhausted 3/3 and is closed;
+> never repair/resubmit it or disguise a fourth attempt. Scientific P0/model/
+> GPU/result/claim remain 0. A materially distinct acquisition version needs
+> explicit human selection or a newly verified external transport change.
+> Never use `junjinyong`.
+
 > **2026-08-14 D1 transport attempt 2:** Quality-passed source `0be4d8f…`
 > ran as introai9 job `116208.ECE-util1`, CPU 4, 64 GB, GPU 0. Persistent log
 > proves compute-node curl 7.58.0 rejected unsupported `--retry-all-errors`

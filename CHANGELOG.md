@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-14 · processed-v4 D1 closes after final transport timeout
+
+- Final introai9 job `116209.ECE-util1` used CPU 4, 64 GB and GPU 0 and
+  finalized F/exit 28 after 00:07:32. Persistent curl evidence records a
+  30,001 ms connection timeout.
+- Partial bytes, transport-complete marker, weights-only reader and schema are
+  zero. This neither invalidates the 60 GB plan nor supplies a data/scientific
+  verdict.
+- Exhausted D1 at 3/3 with no repair, resubmission or fourth disguised attempt.
+  Added the exact public execution record and kept every scientific gate shut.
+
 ## 2026-08-14 · D1 attempt 2 isolates curl compatibility before transport
 
 - Job `116208.ECE-util1` used CPU 4, 64 GB and GPU 0 and persisted its stage

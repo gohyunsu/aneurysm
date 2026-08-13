@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · processed-v4 D1 attempt 2/3 transport-incomplete under 60 GB · final attempt only · scientific P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · processed-v4 D1 closed at attempt 3/3 with partial 0 · compute-node connection timeout · data/schema/scientific verdict 0 · scientific P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
     requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles. Exact official processed transient v4 is 23,744,862,051 bytes; D1 retains it and uses the 9,632,510,050-byte steady v4 only temporarily to extract physical-unit normalization, for a 33,377,372,101-byte peak below a 60 GB selected-asset cap. V5, raw blood/wall, 14,000-case steady CFD and cfd are excluded. The closed G0 remains no-verdict and is not retried: neither source feasibility nor science has a verdict. BenchAnXplore is engineering-only. The 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor. AneuX is geometry-only OOD support. Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -1487,6 +1487,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.14",
+      category: "experiment",
+      title: "Processed-v4 D1 closes after the final compute-node transport timeout",
+      copy: "Quality/Pages-passed source 274bb0e… ran as final introai9 job 116209.ECE-util1 with CPU 4, 64 GB and GPU 0. It finalized F/exit 28 after 00:07:32; persistent curl evidence is a 30,001 ms connection timeout. Partial bytes, transport-complete marker, reader and schema are zero. D1 is closed at 3/3 with no repair or fourth attempt. This does not invalidate the official objects or 60 GB plan and is not a data/scientific verdict.",
+      files: ["results/aneug_processed_v4_d1_execution_20260814.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.14",
       category: "experiment",

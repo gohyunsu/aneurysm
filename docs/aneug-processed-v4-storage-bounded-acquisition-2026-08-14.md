@@ -67,3 +67,19 @@ runs curl 7.58.0, which rejects `--retry-all-errors`; it exited 2 before any
 partial byte. Reader and schema remain untouched. Final attempt 3 replaces
 only that unsupported option with curl-7.58-compatible retry delay and
 connection-refused handling. There is no fourth D1 transport attempt.
+
+## Final attempt 3 and D1 closure
+
+Quality/Pages-passed source `274bb0e…` ran as job `116209.ECE-util1` with four
+CPUs, 64 GB and GPU 0. It finalized F/exit 28 after 00:07:32. The persistent
+log records exactly `curl: (28) Connection timed out after 30001 milliseconds`.
+No partial object, transport-complete marker, reader access, schema result or
+raw PBS output materialized. The 199-byte log and 56-byte status SHA-256 are
+`66d3a249…402d` and `7f093a68…2a72`.
+
+D1 is therefore execution-incomplete and closed at 3/3. This is evidence about
+the compute-node transport path, not that the official object is absent, the
+60 GB plan is infeasible, or the scientific task failed. No same-contract
+repair, resubmission or fourth attempt is allowed. A different acquisition
+route requires an explicitly selected new version or a newly verified external
+transport change; it cannot inherit a D1 pass.

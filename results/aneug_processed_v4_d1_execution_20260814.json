@@ -1,0 +1,53 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d1_execution.v1",
+  "protocol_id": "aneug_transient_v4_storage_bounded_acquisition_d1",
+  "as_of": "2026-08-14",
+  "public_source_commit": "274bb0e3ced86a908bdb4d6cfa7b61c4c248f9cb",
+  "public_quality_run": 31730321106,
+  "public_pages_run": 31730319176,
+  "pbs": {
+    "job_id": "116209.ECE-util1",
+    "state": "F",
+    "exit_status": 28,
+    "walltime": "00:07:32",
+    "cpu_time": "00:00:00",
+    "memory_bytes": 9379840,
+    "ncpus": 4,
+    "memory_gb_requested": 64,
+    "ngpus": 0,
+    "run_count": 1,
+    "stageout_status": 0
+  },
+  "transport": {
+    "attempt": 3,
+    "attempt_limit": 3,
+    "attempt_budget_exhausted": true,
+    "partial_bytes": 0,
+    "transport_complete": false,
+    "exact_observed_error": "curl: (28) Connection timed out after 30001 milliseconds",
+    "persistent_log_bytes": 199,
+    "persistent_log_sha256": "66d3a2494979456918e96e91c970914f32ff28297b26d2e314963e1cf3cb402d",
+    "persistent_status_bytes": 56,
+    "persistent_status_sha256": "7f093a68d8747a84b0529d164d7474448aa504ce28a38a29602dce41ea0f2a72",
+    "raw_pbs_output_materialized": false
+  },
+  "schema": {
+    "reader_entered": false,
+    "evaluated": false,
+    "case_count_checked": false,
+    "timesteps_checked": false,
+    "vector_wss_labels_checked": false,
+    "geometry_linkage_checked": false
+  },
+  "decision": {
+    "status": "execution_incomplete_transport_timeout_no_data_or_scientific_verdict",
+    "d1_closed": true,
+    "same_contract_retry_or_resubmission_allowed": false,
+    "dataset_failure_inferred": false,
+    "storage_plan_invalidated": false,
+    "scientific_gate_opened": false,
+    "model_or_gpu_opened": false,
+    "paper_claim_opened": false,
+    "excluded_server_accessed": false
+  }
+}

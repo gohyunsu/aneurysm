@@ -586,14 +586,14 @@
             steady CFD와 cfd 원본은 scope 밖입니다. D1은 case 수, 80 phase, vector
             WSS label, mesh/case order와 local geometry-ID linkage를 확인하며 아직
             field metric, model 성능 또는 novelty를 측정하지 않습니다.
-            첫 PBS attempt는 start marker 뒤 exit 2로 끝나 partial과 schema evidence가
-            없었습니다. 두 번째 attempt의 persistent log는 compute-node curl
-            7.58.0이 <code>--retry-all-errors</code>를 지원하지 않아 download 전 exit
-            2가 났음을 확인했습니다. Partial byte와 schema read는 여전히 0입니다.
-            마지막 attempt 3은 이 옵션만 curl-7.58-compatible retry flag로 대체하고
-            exact object, hash, 60GB cap과 schema를 그대로 유지합니다. 네 번째 D1
-            attempt는 없으며, 이 경계가 endpoint나 데이터셋을 결과에 맞춰 고치는
-            local scientific repair를 막습니다.
+            첫 PBS attempt는 persistent 원인 없이 닫혔고, 두 번째 attempt은 curl
+            7.58.0 옵션 비호환을 확인했습니다. 이 옵션만 바꾼 마지막 attempt 3은
+            F/exit 28, 00:07:32로 종료되었고 exact persistent error는 30,001ms
+            connection timeout입니다. Partial byte, reader, schema는 모두 0이므로 아직
+            processed target이 확보된 것은 아닙니다. 다만 이는 60GB 계획이나 official
+            object의 문제를 입증하지 않으며, 데이터·schema·과학적 판정은 여전히
+            0입니다. D1은 3/3에서 닫혔고 동일 시도를 수리하거나 네 번째로
+            반복하지 않습니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
