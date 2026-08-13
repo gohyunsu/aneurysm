@@ -1,15 +1,16 @@
 # 데이터셋 인벤토리와 통합 방안
 
-> **2026-08-13 public transient-release correction:** Exact Aneumo HF revision
-> `f801ade…` contains 100 transient batch ZIPs covering case IDs 1--1000; the
-> total public repository reports 3.285 TB. A bounded central-directory probe,
-> not a full download, found ten nested case archives in the first 14.53 GB
-> batch and 101 time directories in the inspected case: `0.00` plus 100 cycle
-> labels from `4.01` to `5.00`, each with inlet/outlet/wall/internal files.
-> `Connection.csv` maps these 1,000 cases to 40 base families. Vector array
-> names, units, tangency and mesh correspondence remain unverified, and the HF
-> and GitHub license declarations conflict. This is a real available source,
-> but not an admitted transient training asset. [Full audit](aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md)
+> **2026-08-13 public transient whole-release correction:** Exact Aneumo HF
+> revision `f801ade…` was audited with 2,100 bounded range requests and 72.2 MB,
+> without downloading an inner scientific file during the release-wide pass.
+> All 1,000 case directories were inspected: 966 contain the complete
+> `4.01`--`5.00` cycle, 34 do not, and 961 complete cases use the exact wall
+> filename expected by the official preprocessor. All 40 base families retain
+> at least one complete usable case. Separate selective wall-file probes find a
+> three-component WSS target and phase-static mesh in one complete case, while
+> units, release-wide tangency, polygon triangulation stability and the HF/
+> GitHub license conflict remain unresolved. This is a real, plausible asset,
+> not an admitted training dataset. [Full audit](aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md)
 
 > **Schema 11.9 current-use correction:** The Aneumo holding remains a
 > historically verified 32-family/64-case compact cache contract; it was not

@@ -1,0 +1,152 @@
+{
+  "schema_version": "aurora.aneumo_transient_target_contract_reappraisal.v2",
+  "status": "whole_release_directory_audit_plus_selective_vector_probe_no_task_activation",
+  "observed_on": "2026-08-13",
+  "supersedes_for_current_decision": "aneumo_public_transient_release_reappraisal_v1",
+  "official_sources": {
+    "github_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
+    "huggingface_revision": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "aneumo_arxiv": "2505.14717v1",
+    "aneumo_arxiv_original_scope": "85280_steady_simulations",
+    "transient_release_is_later_source_state_than_arxiv_v1": true
+  },
+  "whole_release_directory_audit": {
+    "scope": "all_public_transient_case_archives_1_to_1000_central_directory_only",
+    "audit_script": "scripts/audit_aneumo_transient_archives.py",
+    "full_inner_file_payload_downloaded": false,
+    "range_requests": 2100,
+    "bytes_read": 72217600,
+    "byte_ceiling": 100000000,
+    "tail_bytes": 65536,
+    "raw_audit_json_sha256": "f3b909773338ea943db8e24ec1b0e0471389b8a2f7da935c4ad3553fd794962a",
+    "case_records_sha256": "8f516cd39c5bb0fb83293f19ff95d996f2299ebd6848d4609ced8aa9dbbde424",
+    "cases": 1000,
+    "base_families": 40,
+    "complete_directory_structural_cases": 966,
+    "official_preprocessor_compatible_cases": 961,
+    "incomplete_cycle_cases": 34,
+    "noncanonical_wall_naming_cases": 5,
+    "families_with_at_least_one_complete_directory_structural_case": 40,
+    "families_with_at_least_one_official_preprocessor_compatible_case": 40,
+    "time_contract_counts": {
+      "initial_plus_complete_4p01_to_5p00_cycle": 966,
+      "zero_based_contiguous_partial_or_alternate_sequence": 32,
+      "irregular_sequence": 2
+    },
+    "incomplete_cycle_case_ids": [7, 28, 93, 103, 167, 234, 236, 238, 251, 259, 260, 273, 354, 361, 471, 477, 512, 522, 524, 533, 586, 599, 629, 630, 668, 673, 702, 796, 808, 825, 843, 908, 944, 972],
+    "noncanonical_wall_case_ids": [4, 9, 15, 583, 728],
+    "all_cases_have_four_files_per_observed_time": true,
+    "all_cases_have_one_identifiable_wall_surface_candidate_per_observed_time": true,
+    "scientific_field_values_interpreted_release_wide": false
+  },
+  "selective_wall_vector_probe": {
+    "scope": "two_complete_cycle_phases_in_case_1_and_two_partial_sequence_phases_in_case_7",
+    "release_wide_generalization_allowed": false,
+    "crc_checked": true,
+    "case_1": {
+      "phase_labels": ["4.01", "5.00"],
+      "point_count": 9399,
+      "polygon_count": 4701,
+      "polygon_vertex_count_min": 4,
+      "polygon_vertex_count_max": 9,
+      "point_arrays": {"p": 1, "U": 3, "wallShearStress": 3},
+      "cell_arrays": {"p": 1, "U": 3, "wallShearStress": 3},
+      "phase_mesh_points_byte_identical": true,
+      "phase_mesh_connectivity_byte_identical": true,
+      "phase_mesh_offsets_byte_identical": true,
+      "phase_wss_byte_identical": false,
+      "phase_4p01_vtp_sha256": "39e0f8028bdb80ce2e32920addeb3dcced611c20d8e3ff713a5bce82b846fc3a",
+      "phase_5p00_vtp_sha256": "007c9b72708e468f5d1d8bdde8dbe30bc30a6921938c62fa435375f5a5a8eff9",
+      "points_sha256": "0151b00a86ce3ab8a047ade1564ef31768335744ed8a2a3d12a8fe1535f75bfa",
+      "connectivity_sha256": "f8401b5fa98e90dad62779bcd4a8f967ab2d8502c011369015de4b227b948095",
+      "offsets_sha256": "366ce2dc33a65f3780d54180d313ac59c49fb26289b2aa3b0124816834123844",
+      "newell_point_normal_absolute_fraction": {
+        "phase_4p01": {"median": 0.004265, "p95": 0.03657, "p99": 0.34293, "max": 0.90899},
+        "phase_5p00": {"median": 0.004233, "p95": 0.03612, "p99": 0.34062, "max": 0.9999}
+      }
+    },
+    "case_7": {
+      "time_directories": 30,
+      "phase_labels": ["0.20", "0.26"],
+      "point_count": 10184,
+      "polygon_count": 5097,
+      "polygon_vertex_count_min": 4,
+      "polygon_vertex_count_max": 9,
+      "point_arrays": {"p": 1, "U": 3, "wallShearStress": 3},
+      "cell_arrays": {"p": 1, "U": 3, "wallShearStress": 3},
+      "phase_mesh_byte_identical": true,
+      "phase_wss_byte_identical": false
+    },
+    "interpretation": {
+      "three_component_wss_target_observed": true,
+      "phase_static_mesh_observed": true,
+      "wss_is_mostly_tangent_on_selected_phases": true,
+      "local_high_normal_tail_requires_mesh_quality_and_stability_audit": true,
+      "wss_units_explicit_in_vtp_or_datasheet": false,
+      "deterministic_polygon_triangulation_required": true
+    }
+  },
+  "official_preprocessor_audit": {
+    "documented_cycle_steps": 100,
+    "discovered_steps_for_complete_cases": 101,
+    "includes_initial_0p00_after_cycle_eligibility_check": true,
+    "exact_canonical_wall_filename_required": true,
+    "noncanonical_wall_can_become_empty_or_zero_wss_without_hard_failure": true,
+    "official_cross_evaluator_also_requires_canonical_wall_filename": true,
+    "provided_pipeline_is_not_a_fail_closed_100_phase_vector_target_builder": true
+  },
+  "license_and_provenance_gate": {
+    "huggingface_declared_license": "cc-by-nc-nd-4.0",
+    "github_datasheet_declared_license": "cc-by-4.0",
+    "exact_release_license_consistent": false,
+    "authoritative_resolution_required_before_scientific_activation_or_redistribution": true,
+    "legal_conclusion_made": false
+  },
+  "candidate_screen": {
+    "axis_order": ["biomedical_importance", "target_identifiability", "residual_novelty", "usable_asset_readiness", "effective_independent_units", "strong_baseline_feasibility", "interpretable_figure_value", "isbi_schedule_fit"],
+    "admission_total": 32.0,
+    "steady_response_fidelity": {
+      "axis_scores": [4.0, 5.0, 2.5, 4.0, 3.0, 5.0, 5.0, 4.0],
+      "total": 32.5,
+      "decision": "sole_conditional_source_lead_pending_immutable_p0_v3"
+    },
+    "transient_structure_faithful_vector_wss": {
+      "axis_scores": [4.5, 4.0, 2.5, 4.0, 3.0, 3.5, 5.0, 3.5],
+      "total": 30.0,
+      "decision": "inactive_near_threshold_reentry_candidate_not_admitted"
+    },
+    "transient_candidate_admitted": false,
+    "why_not_admitted": [
+      "license_conflict_unresolved",
+      "only_40_independent_base_families",
+      "method_free_critical_point_and_worldline_stability_unverified",
+      "wss_units_not_explicit",
+      "polygon_triangulation_and_local_normal_tail_unresolved",
+      "official_baselines_are_scalar_family_leaky_and_not_fail_closed"
+    ]
+  },
+  "next_gate": {
+    "name": "method_free_transient_structure_identifiability",
+    "registered": false,
+    "may_use_only_after_authoritative_license_resolution": true,
+    "must_test": [
+      "deterministic_polygon_triangulation",
+      "critical_point_existence_and_signed_index_consistency",
+      "worldline_stability_across_mesh_tolerance_and_bounded_field_perturbation",
+      "family_disjoint_split_feasibility",
+      "compute_matched_vector_baseline_feasibility"
+    ],
+    "failure_closes_direction_without_architecture_repair": true
+  },
+  "authorization": {
+    "transient_dataset_staging": false,
+    "transient_p0_registration": false,
+    "method_selection": false,
+    "architecture_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "paper_claim": false,
+    "introai9_retry_before_verified_operational_change": false,
+    "junjinyong_accessed": false
+  }
+}

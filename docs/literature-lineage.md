@@ -1,13 +1,15 @@
 # 선행연구 계보와 research gap
 
-> **2026-08-13 vector-structure collision update:** The new Aneumo transient
-> release does not make an edge-1-form/Hodge/equivariant architecture novel.
-> Directional transient WSS estimation, Hodge/discrete-form operators, robust
-> critical-point tracking, critical-point trajectory preservation and
-> aneurysm-cycle critical-point analysis are all direct priors. The only
-> residual question is a field-error-matched structural-fidelity failure and a
-> minimal repair, but the current release/code/lineage audit scores it 28.0/40.
-> [Exact source and collision audit](aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md)
+> **2026-08-13 vector-structure collision and target update:** The full public
+> directory audit verifies 966 complete-cycle cases across all 40 families,
+> and a selective probe verifies three-component WSS plus a phase-static mesh.
+> This raises target/asset plausibility, not novelty. Directional transient WSS
+> estimation, Hodge/discrete-form operators, robust critical-point tracking,
+> trajectory preservation and aneurysm-cycle critical-point analysis remain
+> direct priors. The residual question is only a field-error-matched failure on
+> *stable* structures and a minimal mechanism-linked correction. With licence,
+> units, triangulation and stability unresolved, the candidate is 30.0/40 and
+> inactive. [Exact target and collision audit](aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md)
 
 > **Schema 11.9 evidence hygiene:** The literature boundary is unchanged by
 > P0 v3. General response preservation, sensitivity-aware operators, Aneumo

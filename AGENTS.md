@@ -1,7 +1,46 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 Aneumo transient whole-release target-contract audit:** Current
+> transient decision is **30.0/40, inactive**, superseding the earlier
+> source-level 28.0 score without rewriting it. A fail-closed audit at exact HF
+> revision `f801adee816c18d3e18b23e6fcb147fe4c264209` used 2,100 range requests,
+> 72,217,600 bytes and a 100,000,000-byte ceiling to inspect every case ZIP
+> directory from 1 to 1000. It found 966 complete `4.01`--`5.00` cycles, 34
+> incomplete/alternate sequences, 961 complete cases with canonical wall names
+> and five complete cases with noncanonical wall names. All 40 base families
+> have at least one complete and one official-preprocessor-compatible case.
+> The release-wide audit read zero inner scientific members.
+> Raw audit JSON/canonical case-record SHA-256 are `f3b90977…4962a` /
+> `8f516cd3…de424`. Current compact decision/auditor/two test files/audit-document
+> SHA-256 are `8086224f…720b6` / `db2ba604…1f9f0` /
+> `ae07e7ca…7c0a` / `eef3525d…a09` / `be26643d…22821`.
+>
+> A distinct selective probe read four CRC-checked wall members: complete case
+> 1 phases `4.01`/`5.00` and partial case 7 phases `0.20`/`0.26`. Both point and
+> cell data expose three-component `wallShearStress`; case 1 point/connectivity/
+> offset bytes are phase-identical while WSS differs. Never generalize four
+> files to release-wide units or tangency. Units are unspecified, faces have
+> 4--9 vertices and case-1 Newell-normal WSS p99 is about 0.34, so deterministic
+> triangulation, mesh quality, normal convention and perturbation stability are
+> unresolved. HF CC BY-NC-ND 4.0 versus GitHub CC BY 4.0 remains an unresolved
+> licence conflict; make no legal conclusion.
+>
+> This improves target/asset readiness only. Equivariance, GNN, edge 1-form,
+> Hodge, periodic decoding, critical-point tracking and worldline/topology loss
+> remain controls/direct priors. No transient P0, method, architecture, data
+> staging, GPU, outer test, result or paper claim is authorized. The sole
+> conditional lead remains steady response fidelity 32.5/40 with immutable real
+> P0 v3 0/12. This audit is not an `introai9` operational change; do not retry
+> before one and do not open a local scientific repair loop. Never access,
+> query, transfer to, submit on or monitor `junjinyong`.
+> Targeted 19/19, site graph, JavaScript syntax and diff hygiene pass. The local
+> full regression passes 590/590 with 89 optional-dependency skips after a
+> writable-temp rerun; the earlier sandbox run's 38 errors were exclusively
+> `TemporaryDirectory` environment failures and must not be labelled code
+> failures or dependency-complete CI.
+
 > **2026-08-13 official Aneumo transient-release scientific-source
-> validation:** Exact scientific public source
+> validation · historical source-level score:** Exact scientific public source
 > `86ad5923d56202d9bd8a1748aabdf0783789c142` is remote exact. Quality
 > `31675906790` passed NumPy 2.1.2, h5py 3.12.1, CPU PyTorch 2.5.1, all
 > 588 tests, 114 protocol invariant groups, the site graph and browser
@@ -11,14 +50,16 @@
 > `721b3529ea1a9352f3b0efc6cf69afde363cb9bd0372e3fd9c4caef551eeecd3` /
 > `283e19afe072fd51221baaaa4ff3cac0ff27b2cb8f59e90fea84e4d111a6a559`.
 > This validates the public source/audit contract, not the transient target or
-> the steady P0. Transient status remains inactive 28.0/40; the sole
-> conditional lead remains steady response fidelity 32.5/40 at real P0 v3
-> 0/12. This synchronization made zero scientific server query, remote command,
+> the steady P0. Its 28.0/40 transient score is preserved as the historical
+> pre-whole-release verdict and is superseded for current decisions by 30.0/40;
+> the sole conditional lead remains steady response fidelity 32.5/40 at real
+> P0 v3 0/12. This synchronization made zero scientific server query, remote command,
 > cache-field read, scheduler query, transfer, PBS/GPU submission or monitoring.
 > Do not retry `introai9` before a newly verified operational change or open a
 > local scientific repair loop. Never access `junjinyong`.
 
-> **2026-08-13 official Aneumo transient-release reappraisal:** Freeze GitHub
+> **2026-08-13 official Aneumo transient-release reappraisal · historical
+> one-case probe:** Freeze GitHub
 > commit `701d53dde3489d84dbe9bc8324254629162eb45a` and Hugging Face revision
 > `f801adee816c18d3e18b23e6fcb147fe4c264209`. HF exposes 370 objects and
 > 3,284,946,024,600 bytes: 267 numeric steady ZIPs, 100 transient batch ZIPs and
@@ -37,8 +78,9 @@
 > it as a family-disjoint vector baseline. HF declares CC BY-NC-ND 4.0 while the
 > GitHub datasheet declares CC BY 4.0; make no legal conclusion and require an
 > authoritative resolution before scientific activation or redistribution.
-> Transient structure-faithful WSS scores 28.0/40 and remains an inactive
-> re-entry candidate. This source delta satisfies only historical material-E0
+> The then-current transient structure-faithful WSS score of 28.0/40 remains
+> exact history and is superseded by the 30.0 whole-release verdict above. This
+> source delta satisfies only historical material-E0
 > review, not task P0 or introai9 service recovery. The sole conditional lead
 > remains steady response fidelity at 32.5/40; real P0 v3 is 0/12. Transient
 > staging/P0/model/GPU/claim remain zero. Never access `junjinyong`.

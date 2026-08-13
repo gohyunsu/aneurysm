@@ -1,18 +1,19 @@
 # AURORA · Aneurysm Research
 
-> **2026-08-13 official Aneumo transient source delta:** Exact GitHub source
-> `701d53d…` and Hugging Face revision `f801ade…` now expose 100 transient batch
-> archives for case IDs 1--1000. Bounded ZIP metadata confirms ten nested cases
-> per first batch and 100 cycle directories plus one initial directory per
-> inspected case, but the 1,000 cases map to only 40 base families. The official
-> cross-geometry code predicts WSS magnitude, overlaps every test family with
-> training, has one parser error and omits two declared model modules. The HF
-> card says CC BY-NC-ND 4.0 while the GitHub datasheet says CC BY 4.0. Therefore
-> transient structure-faithful WSS is reopened only for review and scores
-> **28.0/40**, not admission. The steady response-fidelity direction remains the
-> sole 32.5/40 conditional lead; real P0 v3 is still 0/12 and no new payload,
-> P0, model, server or GPU is authorized. See the
-> [exact reappraisal](docs/aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md).
+> **2026-08-13 Aneumo transient whole-release correction:** A fail-closed,
+> directory-only range audit covers all public case IDs 1--1000. It finds
+> **966 complete cycle cases** and 34 incomplete cases; 961 of the complete
+> cases also match the official wall-filename convention. Every one of the 40
+> base families has a usable complete case. Selective CRC-checked wall probes
+> additionally confirm three-component `wallShearStress` and byte-identical
+> phase mesh connectivity in one complete case, but do not establish the full
+> release's units or tangency. Polygon faces, a local high-normal tail, an
+> unresolved HF/GitHub license conflict and method-free critical-structure
+> stability remain open. The transient candidate therefore rises from
+> historical 28.0 to **30.0/40** but is still not admitted. Steady response
+> fidelity remains the sole 32.5/40 conditional lead; real P0 v3 is 0/12 and no
+> dataset staging, P0, model, server or GPU is authorized. See the
+> [whole-release target audit](docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md).
 
 > **2026-08-13 P0-v3 activation code · authority still absent:** The audit
 > found that the historical PBS wrapper still invoked v2 and that no code

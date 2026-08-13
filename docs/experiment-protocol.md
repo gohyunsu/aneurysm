@@ -1,12 +1,16 @@
 # AURORA v2 사전 실험 프로토콜
 
-> **2026-08-13 transient re-entry is not an experiment:** Public archive
-> metadata now satisfy only the historical requirement for a material source
-> change. No transient P0 is registered. Before fresh scoring, an authoritative
-> license, member manifest, vector/units/tangency/mesh/phase contract,
-> base-family-disjoint split, method-free structure stability and executable
-> matched baselines are required. The source delta is not an `introai9`
-> operational change and does not permit retrying steady P0 v3. [Exact gate](aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md)
+> **2026-08-13 transient re-entry is not yet an experiment:** Release-wide
+> directory evidence now verifies 966 complete-cycle cases across all 40 base
+> families; a four-file selective probe verifies a local vector/phase-static
+> mesh contract. The resulting score is 30.0/40, still below admission, and no
+> transient P0 is registered. Before one can exist, the exact licence must be
+> resolved and a prospective method-free gate must freeze triangulation,
+> normals, critical-point tolerance, matching and perturbations. It must test
+> stability before any learned method. Then—and only then—family-disjoint,
+> compute-matched vector baselines may test whether a structural failure exists.
+> This audit is not an `introai9` operational change and does not permit retrying
+> steady P0 v3. [Exact gate](aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md)
 
 > **P0-v3 activation code, not activation authority:** The immutable v3
 > config/evaluator remain unchanged. A separate public runner now validates a

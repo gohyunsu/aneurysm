@@ -119,10 +119,13 @@ def check_site(root: Path) -> list[str]:
         "Non-authoritative v3 · v1/v2 metadata/field/prediction 0": (
             "current confirmation evidence state"
         ),
-        "The structure-faithful candidate scores 28.0/40 and remains inactive": (
+        "The structure-faithful candidate scores 30.0/40 and remains inactive": (
             "current transient-release decision"
         ),
-        "The 1,000 cases reduce to 40 base families": (
+        "966/1,000 cases contain the complete 4.01–5.00 cycle": (
+            "current transient release-completeness boundary"
+        ),
+        "All 40 base families retain a usable complete case": (
             "current transient independent-unit boundary"
         ),
     }

@@ -1,13 +1,16 @@
 # AURORA 연구 방향
 
-> **2026-08-13 transient-source adjudication:** Aneumo now has a public
-> 1,000-case transient release, but those cases represent only 40 base
-> families. The official benchmark reduces vector WSS to magnitude and its
-> “geometry” split shares all ten base families between train and test. With an
-> unresolved release-license conflict and unverified wall-vector/mesh contract,
-> structure-faithful transient WSS scores 28.0/40 and is not a second lead.
-> The material source change reopens review only; it is neither task P0 nor an
-> `introai9` recovery signal. [Exact decision](aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md)
+> **2026-08-13 transient target-contract adjudication:** A bounded audit now
+> verifies 966 complete-cycle cases across all 40 Aneumo base families, and a
+> selective complete-case probe verifies three-component WSS on a phase-static
+> surface. This improves asset and target plausibility, so structure-faithful
+> transient WSS moves from historical 28.0 to **30.0/40**. It is still not a
+> second lead: exact units, release-wide tangency, polygon triangulation,
+> method-free critical-point/worldline stability and the payload licence are
+> unresolved, while the official benchmark remains scalar and family-leaky.
+> The only valid scientific order is `licence → method-free stability →
+> matched baseline failure → minimal method`; no step is registered yet. This
+> audit is not an `introai9` recovery signal. [Exact decision](aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md)
 
 > **Schema 11.9 P0-v3 correction:** Current response-fidelity evidence gate is
 > 0/12, not 0/11. The unexecuted v2 is immutable history: a synthetic anchor

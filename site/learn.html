@@ -120,11 +120,12 @@
           <p>
             공식 Aneumo 저장소는 각 transient case에 3차원 WSS 벡터가 있다고
             설명하고, Hugging Face에는 case 1--1000을 담은 100개 batch ZIP이
-            보입니다. 첫 batch만 14.53GB입니다. 전체를 받지 않고 ZIP의 마지막
-            16MiB 중앙 디렉터리를 확인한 결과, 열 개 case ZIP과 검사 case의
-            <code>0.00</code> 초기 directory, <code>4.01--5.00</code>의 100 cycle
-            directory를 확인했습니다. 각 directory에는 inlet, internal, outlet,
-            wall 파일이 있습니다. 이것은 파일 구조 확인이지 WSS 값 검증이 아닙니다.
+            보입니다. 전체를 받지 않고 HTTP range로 100개 outer archive와 1,000개
+            inner archive의 중앙 directory를 모두 검사했습니다. 966 case에는
+            <code>0.00</code>과 <code>4.01--5.00</code>의 완전 cycle이 있고, 34
+            case는 incomplete 또는 alternate sequence입니다. 961 complete case는
+            공식 wall filename까지 맞습니다. 이 전수 단계는 scientific member
+            payload를 읽지 않은 파일 구조 증거입니다.
           </p>
           <p>
             가장 중요한 숫자는 1,000이 아니라 40입니다. <code>Connection.csv</code>를
@@ -154,20 +155,32 @@
             stability를 모르므로 이 질문조차 실험 단계가 아닙니다.
           </p>
           <p>
+            다음으로 네 wall file을 선택적으로 CRC 검증해 읽었습니다. Complete case
+            1의 두 phase에는 point와 cell 모두 3-component
+            <code>wallShearStress</code>가 있고, point/connectivity/offset bytes는
+            phase 사이에 같지만 WSS는 변합니다. 즉 적어도 이 case에서는 phase-static
+            surface 위의 transient vector target입니다. 그러나 face는 triangle이
+            아니라 4--9 vertex polygon이고, point-normal WSS fraction의 p99가 약
+            0.34여서 local tail이 큽니다. Unit도 명시되어 있지 않습니다. 이 네
+            file의 사실을 966 case 전체의 tangency 증거로 확장하지 않습니다.
+          </p>
+          <p>
             라이선스도 멈춤 조건입니다. 같은 exact release를 두고 Hugging Face card는
             CC BY-NC-ND 4.0, GitHub datasheet는 CC BY 4.0이라고 적습니다. 어느 해석이
             법적으로 맞다고 여기서 단정하지 않습니다. Authoritative statement로
             해결되기 전에는 새 과학 실행이나 재배포를 열지 않습니다.
           </p>
           <p>
-            그래서 fresh score는 28.0/40입니다. 좋은 figure와 중요한 application
-            question은 있지만, identifiability·asset·independent unit·baseline·schedule
-            점수가 부족합니다. License, vector array와 mesh/phase contract, family-
-            disjoint split, method-free structure stability, executable matched baselines를
-            모두 확인한 뒤에만 다시 점수화합니다. 이 source update는
+            그래서 fresh score는 30.0/40입니다. 966 complete case와 selective vector/
+            mesh evidence가 target과 asset 점수를 올렸지만, 32점 admission에는
+            못 미칩니다. License, unit·triangulation·tangency contract, family-disjoint
+            split, method-free structure stability, executable matched baselines를 모두
+            확인한 뒤에만 다시 점수화합니다. 학습 전에 reference critical point와
+            worldline 자체가 mesh·tolerance·bounded perturbation에 안정적인지 보며,
+            실패하면 topology loss를 붙여 구제하지 않고 방향을 닫습니다. 이 update는
             <code>introai9</code> 서비스 복구가 아니며 기존 steady P0 v3 재시도를
             허용하지 않습니다.
-            <a href="../docs/aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md">수치·코드 결함·선행연구·재진입 조건 전체 읽기 ↗</a>
+            <a href="../docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md">전수 수치·벡터 probe·전처리 결함·재진입 조건 전체 읽기 ↗</a>
           </p>
         </div>
         <div class="answer-card" id="response-fidelity">

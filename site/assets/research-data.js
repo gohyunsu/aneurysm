@@ -43,10 +43,10 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
-      title: "Aneumo transient release reopens source review, not task admission",
-      copy: "Exact GitHub 701d53d… and Hugging Face f801ade… expose 100 transient batch ZIPs for case IDs 1–1000. A bounded 16 MiB ZIP64-directory probe found ten nested cases in the first 14.53 GB batch and, for inspected case 10, one initial plus 100 cycle directories with inlet/internal/outlet/wall files. Connection.csv maps the 1,000 cases to only 40 base families. Official cross code leaks all ten benchmark families, converts vector WSS to magnitude, has one parse error and omits two declared model modules. HF and GitHub license declarations conflict. The structure-faithful candidate scores 28.0/40 and remains inactive.",
-      status: "Source metadata only · transient P0/model/GPU/claim 0 · steady lead 32.5/40 · real P0 v3 0/12",
-      url: "../docs/aneumo-public-transient-release-and-vector-structure-reappraisal-2026-08-13.md"
+      title: "Aneumo transient release is usable in principle, not yet an admitted task",
+      copy: "A fail-closed audit of every public case directory uses 2,100 bounded range requests and 72.2 MB: 966/1,000 cases contain the complete 4.01–5.00 cycle, 34 are incomplete or alternate, and 961 complete cases use the exact official wall filename. All 40 base families retain a usable complete case. A separate CRC-checked probe of four wall files confirms three-component WSS and phase-static mesh connectivity in one complete case. Units, release-wide tangency, polygon triangulation, method-free structure stability and the HF/GitHub license conflict remain unresolved. The structure-faithful candidate scores 30.0/40 and remains inactive.",
+      status: "Whole-release directory evidence + selective vector evidence · transient P0/model/GPU/claim 0 · steady lead 32.5/40 · real P0 v3 0/12",
+      url: "../docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md"
     },
     {
       year: "2026.08",
@@ -1282,7 +1282,7 @@ window.AURORA_DATA = Object.freeze({
     {
       name: "Aneumo",
       role: "동일 geometry × 8 steady BC response pilot; public transient subset is inactive re-entry material",
-      provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition 6/9 failed · public transient cases 1–1000 map to 40 families · exact vector/mesh/license task contract unresolved · transient score 28.0/40"
+      provenance: "64-case internal-field cache verified · V1b/V1c/V1d asset gates passed · V1e 40/12/0 known-condition 6/9 failed · public transient 966 complete/34 incomplete across 40 families · selective vector/phase-static mesh verified · unit/tangency/triangulation/license/stability unresolved · transient score 30.0/40"
     },
     {
       name: "AneuG-Flow",
@@ -1406,6 +1406,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "data",
+      title: "Whole-release metadata and selective wall probes narrow the transient target gap",
+      copy: "The bounded audit now covers all 1,000 public transient case archives, not one nested example: 966 complete cycles, 34 incomplete or alternate sequences, 961 exact official wall-name contracts and at least one usable case in every one of 40 base families. The release-wide pass reads no inner scientific member. Four separately selected CRC-checked wall files confirm a three-component wallShearStress target and a phase-static mesh in one complete case, while units, release-wide tangency and polygon stability remain open. Official preprocessing can include 0.00 after a 100-cycle eligibility check and can silently mishandle five noncanonical wall names. The candidate rises from historical 28.0 to 30.0/40 but remains inactive; steady response fidelity remains the sole 32.5/40 conditional lead at real P0 v3 0/12. No server, PBS/GPU, model, result or claim opened.",
+      files: ["scripts/audit_aneumo_transient_archives.py", "tests/test_aneumo_transient_archive_audit.py", "configs/aneumo_transient_target_contract_reappraisal_v2.json", "tests/test_aneumo_transient_target_contract_reappraisal_v2.py", "docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md", "site/index.html", "site/learn.html", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "data",

@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-08-13 · whole-release Aneumo audit raises feasibility, not admission
+
+- Added a fail-closed public archive auditor and synthetic parser tests. It
+  requires bounded HTTP 206 responses, enforces a 100 MB ceiling and reads ZIP
+  headers/directories rather than nested scientific members.
+- Audited all 1,000 public transient case archives at the pinned release using
+  2,100 requests and 72,217,600 bytes. Exactly 966 cases have the complete
+  documented cycle, 34 do not, 961 complete cases use the canonical wall name
+  and five use noncanonical names. Every one of 40 base families has at least
+  one complete usable case.
+- Kept payload evidence separate: four selectively extracted, CRC-checked wall
+  files expose three-component WSS; a complete case has byte-identical points,
+  connectivity and offsets across two phases with changing WSS. This local
+  evidence is not release-wide units or tangency evidence. Polygon faces,
+  high-normal tails and missing explicit units remain target risks.
+- Recorded two official-preprocessor hazards: a complete case can include
+  `0.00` after a 100-cycle eligibility check, and five noncanonical wall names
+  can be silently mishandled rather than rejected. These are required reader
+  fixes, not novelty.
+- Re-scored transient structure-faithful WSS from historical 28.0 to 30.0/40.
+  It remains inactive below 32 because the licence, stable critical structures,
+  independent-unit limit and strong matched baselines are unresolved. Steady
+  response fidelity remains the sole 32.5/40 conditional lead at P0 v3 0/12.
+  No server, scheduler, PBS/GPU, model, result or manuscript claim opened.
+
 ## 2026-08-13 · official Aneumo transient release reopens review, not a task
 
 - Exact scientific source `86ad592…9c142` passed Quality `31675906790` under
