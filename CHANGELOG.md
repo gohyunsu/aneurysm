@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-14 · AneuG source G0 closes execution-incomplete
+
+- Ran the exact source-only contract once as `introai9` CPU/PBS job
+  `116204.ECE-util1` with four CPUs, 8 GB and GPU 0. It ended E/exit 2 after
+  2:14 with a 408-byte minimal result and empty raw PBS log.
+- Recorded only the observed `public_source_request_failed` reason. The failed
+  request and low-level cause are unresolved, so this is neither a source-
+  feasibility verdict nor a dataset/scientific failure.
+- Closed the exact G0 without repair or rerun. Scientific P0/P1, field access,
+  method, architecture, GPU, validation/test, outer test and paper claim remain
+  zero. The independently observed acquired assets remain valid.
+- Added an exact public execution record, provenance test, detailed audit and
+  current-facing site/history update.
+
 ## 2026-08-14 · acquired aneurysm assets reconciled outside the legacy root
 
 - Corrected the earlier narrow inventory: a separate data tree contains an

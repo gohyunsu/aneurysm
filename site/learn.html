@@ -538,15 +538,16 @@
             mapping과 licence가 해결되기 전에는 논문의 필수 데이터가 아닙니다.
           </p>
           <p>
-            현재 실행 단계는 scientific P0가 아니라 <b>source G0</b>입니다. Exact AneuG
-            repository tree에서 730 wall object와 required mesh path coverage, 명시적
-            lineage-like manifest 존재 여부만 봅니다. AneuG WSS·mesh body는 받지
-            않습니다. Challenge archive는 exact record/version/licence/file ID/size/MD5와
-            tar member name·size만 확인하고 member를 추출하지 않습니다. AneuX는 exact
-            metadata만 확인합니다. Complete여도 사람의 재점수만 허용합니다.
+            <b>source G0는 이제 닫혔습니다.</b> Exact one-shot CPU/PBS job 116204는
+            `public_source_request_failed`를 남기고 exit 2로 종료됐습니다. Raw PBS log가
+            비어 있어 어느 public request와 low-level cause였는지는 알 수 없습니다.
+            Source feasibility와 science는 모두 no-verdict이며 동일 G0를 dependency
+            변경이나 local repair 뒤 다시 실행하지 않습니다. 별도 read-only audit에서
+            확인한 local geometry와 다른 acquired asset은 이 실패로 무효화되지 않습니다.
           </p>
           <p>
-            G0 뒤에도 순서는 고정입니다. 먼저 geometry leakage와 independent unit을
+            AneuG 방향을 새로운 자산/계약으로 다시 선택할 경우에도 순서는 고정입니다.
+            먼저 geometry leakage와 independent unit을
             확정하고, 다음 method-free P0에서 critical point/worldline이 mesh, phase,
             tolerance와 bounded perturbation에 안정적인지 봅니다. 그 뒤 같은 compute와
             field error로 맞춘 Graph U-Net, Cartesian/tangent-projected model,
@@ -576,6 +577,7 @@
           <a href="../docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md">dataset 역할·score·evidence ladder 전체 읽기 ↗</a>
           <a href="../docs/introai9-acquired-asset-reconciliation-2026-08-14.md">AAAI 밖 확보 자산과 architecture 선택 읽기 ↗</a>
           <a href="../configs/aneug_reference_floor_g0_v1.json">Fresh source G0 machine contract 읽기 ↗</a>
+          <a href="../results/aneug_reference_floor_g0_execution_20260814.json">Closed G0 execution record 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>
@@ -3767,7 +3769,7 @@
             <article><span>P0 · EXACT ORACLE</span><h3>Controlled PDE</h3><p>정답 conditional mean·covariance를 계산할 수 있어, partial/missing mask의 coherence와 coverage pipeline을 먼저 검증합니다.</p><small>method sanity · 통과 자체는 novelty 아님</small></article>
             <article><span>P1 · NONLINEAR</span><h3>Nonlinear PDE</h3><p>ID partial/missing calibration, supplied full-BC response shift, hidden-law OOD detection, parameter shift를 분리해 평가합니다.</p><small>coherence ≠ OOD correctness</small></article>
             <article><span>P0 · SENSITIVITY</span><h3>Aneumo</h3><p>동일·유사 geometry에 여러 steady BC를 적용한 자료로, BC가 바뀌면 wall field가 얼마나 달라지는지 먼저 학습합니다.</p><small>synthetic CFD · clinical evidence 아님</small></article>
-            <article><span>CONDITIONAL PRIMARY · WSS</span><h3>AneuG-Flow</h3><p>Local geometry는 14,710 complete bundle로 확보됐지만 transient vector-WSS target과 generator lineage는 아직 확인 대상입니다.</p><small>source G0 first · 730 cases ≠ patients</small></article>
+            <article><span>CONDITIONAL PRIMARY · WSS</span><h3>AneuG-Flow</h3><p>Local geometry는 14,710 complete bundle로 확보됐지만 transient vector-WSS target과 generator lineage는 아직 확인 대상입니다.</p><small>source G0 closed incomplete · 730 cases ≠ patients</small></article>
             <article><span>ACQUIRED ENGINEERING · VELOCITY</span><h3>BenchAnXplore</h3><p>105×80 transient velocity로 mesh pipeline과 train-only POD head를 검증합니다. Direct WSS와 untouched confirmation은 아닙니다.</p><small>verified archive · all-case representation discovery history</small></article>
             <article><span>SECONDARY · REAL-CFD</span><h3>CMHA</h3><p>clinical·morphology·real-CFD summary를 가진 cohort입니다. 현재 exploratory increment가 음수라 primary method와 분리합니다.</p><small>single-center · patient-grouped analysis</small></article>
             <article><span>P0-O · CLOSED HISTORY</span><h3>AneuX v1.0</h3><p>750 lesion의 동일-lesion 3-resolution × 최대 4-cut variant를 preprocessing orbit으로 감사하려 했지만 initial tabular transport에서 종료됐습니다.</p><small>no verdict · no rerun/P1 · shortlist/primary/model/GPU 0</small></article>

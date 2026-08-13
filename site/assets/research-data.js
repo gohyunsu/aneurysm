@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · source-feasibility G0 registered · scientific P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
-    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles but not the transient WSS target. BenchAnXplore is a verified 105×80 velocity engineering asset, not direct-WSS or fresh confirmation. The 2015 Challenge contributes a five-anatomy within-anatomy inter-solver structure-variability floor, not a training cohort or standalone novelty. AneuX is geometry-only OOD support; Aneumo is optional only after mapping and licence resolution. G0 downloads no AneuG field or mesh payload and extracts no Challenge field member. GNN, Hodge, equivariance, edge forms, POD, tracking, topology preservation and CFD variability itself remain direct priors or controls",
+    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · source-feasibility G0 closed execution-incomplete · scientific P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles but not the transient WSS target. BenchAnXplore is a verified 105×80 velocity engineering asset, not direct-WSS or fresh confirmation. The 2015 Challenge contributes a five-anatomy within-anatomy inter-solver structure-variability floor, not a training cohort or standalone novelty. AneuX is geometry-only OOD support; Aneumo is optional only after mapping and licence resolution. The exact one-shot G0 ended execution-incomplete at a public source request with an empty raw log, so neither source feasibility nor science has a verdict and the contract cannot be retried. GNN, Hodge, equivariance, edge forms, POD, tracking, topology preservation and CFD variability itself remain direct priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -56,8 +56,8 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "AneuG reference-relative structural fidelity is a conditional source question",
-      copy: "A critical reappraisal removes Aneumo from the required paper dependency and assigns four non-overlapping roles: AneuG-Flow for conditional transient development, the 2015 CFD Challenge for a five-anatomy within-anatomy solver-variability floor, AneuX for geometry-only morphology/OOD audit, and Aneumo for optional comparison after mapping and licence resolution. The residual question is whether a field-error-matched learned surrogate adds signed critical-point/worldline error beyond solver disagreement. Because AneuG generator lineage is unresolved, 730 cases are not counted as patients and the direction scores 31.0/40. A fresh one-shot CPU/PBS G0 audits source lineage and archive schema without AneuG field/mesh or Challenge member-field access.",
-      status: "Inactive 31.0/40 · source G0 registered · scientific P0/model/GPU/test/claim 0",
+      copy: "A critical reappraisal removes Aneumo from the required paper dependency and assigns four non-overlapping roles: AneuG-Flow for conditional transient development, the 2015 CFD Challenge for a five-anatomy within-anatomy solver-variability floor, AneuX for geometry-only morphology/OOD audit, and Aneumo for optional comparison after mapping and licence resolution. The residual question is whether a field-error-matched learned surrogate adds signed critical-point/worldline error beyond solver disagreement. Because AneuG generator lineage is unresolved, 730 cases are not counted as patients and the direction scores 31.0/40. Its exact one-shot CPU/PBS G0 later closed execution-incomplete without source-feasibility or scientific verdict.",
+      status: "Inactive 31.0/40 · source G0 closed incomplete · scientific P0/model/GPU/test/claim 0",
       url: "../docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md"
     },
     {
@@ -1487,6 +1487,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.14",
+      category: "experiment",
+      title: "AneuG source G0 closes incomplete without a source or science verdict",
+      copy: "Exact public source 01ae218… ran once as introai9 CPU/PBS job 116204.ECE-util1 with four CPUs, 8 GB and GPU 0. It ended E/exit 2 after 2:14. The 408-byte minimal result reports public_source_request_failed while the raw PBS log is empty, so the failed request and low-level cause are unresolved. No source-feasibility or scientific gate was evaluated. The exact G0 closes without repair/rerun, and scientific P0/P1, field access, method, architecture, GPU, test, outer test and paper claim remain zero. Independently audited local assets remain acquired evidence rather than being relabelled absent.",
+      files: ["results/aneug_reference_floor_g0_execution_20260814.json", "tests/test_aneug_reference_floor_g0_execution_record.py", "docs/aneug-reference-floor-g0-execution-2026-08-14.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.14",
       category: "data",

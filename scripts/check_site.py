@@ -55,7 +55,9 @@ def check_site(root: Path) -> list[str]:
     required_readme_markers = {
         "execution-incomplete · 0/12 evaluated": "current P0 state",
         "31.0/40 inactive": "current reference-relative candidate boundary",
-        "fresh G0 | source-feasibility 1회 계약": "current source G0 boundary",
+        "source G0 | execution-incomplete · exact contract closed": (
+            "current source G0 boundary"
+        ),
         "730 case를 730 독립 환자로 세지 않습니다": (
             "AneuG independent-unit boundary"
         ),
@@ -165,7 +167,9 @@ def check_site(root: Path) -> list[str]:
         "AneuG reference-relative transient WSS 31.0/40 inactive": (
             "current reference-relative candidate boundary"
         ),
-        "source-feasibility G0 registered": "current source G0 stage",
+        "source-feasibility G0 closed execution-incomplete": (
+            "current source G0 stage"
+        ),
         "730 cases are not 730 independent patients": (
             "AneuG independent-unit boundary"
         ),
@@ -205,7 +209,9 @@ def check_site(root: Path) -> list[str]:
         ),
         "Hodge Spectral Duality": "current topology-operator prior boundary",
         "FaCTz": "latest critical-point-preservation collision boundary",
-        "downloads no AneuG field or mesh payload": "G0 no-field boundary",
+        "neither source feasibility nor science has a verdict": (
+            "G0 no-verdict boundary"
+        ),
         "source-watch v22": "current source-authority watch",
         "35/35 live match means no new correction": (
             "current source-authority live refresh"

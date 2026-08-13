@@ -15,8 +15,11 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > 해결될 때까지 필수 의존성에서 제외합니다. 새 질문은
 > **reference-relative transient WSS structure fidelity**이며 **31.0/40 inactive**입니다.
 > 아직 AneuG 생성 계보가 확인되지 않아 730 case를 730 독립 환자로 세지 않습니다.
-> 새 G0는 source/lineage와 Challenge archive schema만 검증하며 AneuG field·mesh,
-> Challenge member field, model, GPU와 outer test를 열지 않습니다. 다만 기존
+> 새 G0는 `introai9` CPU/PBS에서 정확히 한 번 실행됐으나
+> `public_source_request_failed` 뒤 source-feasibility 판정 전에 종료됐습니다.
+> 빈 raw log로 어느 요청과 원인이었는지는 알 수 없으며, 동일 계약은 닫혀
+> 수리·재제출하지 않습니다. 이 결과는 AneuG field·mesh, Challenge member field,
+> model, GPU와 outer test를 열지 않습니다. 다만 기존
 > 탐색 범위 밖의 데이터 트리를 다시 감사해 AneuG geometry 14,712개 디렉터리
 > 중 14,710개 complete bundle과 BenchAnXplore 105×80 transient velocity 자산이
 > 실제로 확보되어 있음을 확인했습니다. 데이터 부재가 아니라 **headline WSS
@@ -33,7 +36,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
 | 선택적 외부 비교 | Aneumo | mapping·licence 해결 전 필수 의존성 아님 |
-| fresh G0 | source-feasibility 1회 계약 | CPU/PBS · GPU 0 · scientific endpoint 아님 |
+| source G0 | execution-incomplete · exact contract closed | job 116204 · CPU/PBS · GPU 0 · source/science verdict 없음 |
 | scientific P0 / 모델 / GPU | 미등록 / 미선택 / 0 | GNN을 포함한 어떤 모델도 current method가 아님 |
 | 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아니며 재실행 금지 |
 | 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
@@ -141,7 +144,7 @@ worldline이 불안정하거나 matched failure가 없으면 방향을 닫습니
 ## Evidence ladder
 
 ```text
-G0 · AneuG release/lineage + 2015 Challenge archive source feasibility
+G0 · AneuG release/lineage + 2015 Challenge archive source feasibility [closed incomplete]
   └─ complete → human rescore and independent-unit ruling only
       └─ admitted → geometry-only leakage/near-duplicate audit
           └─ stable split → method-free structure-stability P0
@@ -152,7 +155,8 @@ G0 · AneuG release/lineage + 2015 Challenge archive source feasibility
                               → ISBI claim activation
 ```
 
-G0는 과거 AneuG surface-vector job을 수리하거나 재실행하지 않습니다. AneuG
+G0는 과거 AneuG surface-vector job을 수리하거나 재실행하지 않았습니다. Exact
+G0 자체도 한 번의 incomplete outcome으로 닫혀 재실행하지 않습니다. AneuG
 field/mesh payload를 다운로드하지 않고 release tree에서 case coverage와 explicit
 lineage manifest 존재 여부만 기록합니다. 2015 Challenge WSS archive는 exact
 size/MD5와 safe member directory만 확인하며 member extraction이나 field-value read를
@@ -208,7 +212,8 @@ results/      public aggregate outcomes only
 - [AneuG reference-relative 재판정](docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md)
 - [introai9 확보 자산 재조정](docs/introai9-acquired-asset-reconciliation-2026-08-14.md)
 - [machine-readable 확보 자산 ledger](configs/introai9_acquired_asset_reconciliation_v1.json)
-- [fresh source-feasibility G0](configs/aneug_reference_floor_g0_v1.json)
+- [closed source-feasibility G0](configs/aneug_reference_floor_g0_v1.json)
+- [G0 execution record](results/aneug_reference_floor_g0_execution_20260814.json)
 - [과거 AneuG P0 no-verdict](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md)
 - [Aneumo source authority watch](docs/aneumo-source-authority-watch-v22-2026-08-14.md)
 - [machine-readable source-watch v22](configs/source_watch_v22.json)

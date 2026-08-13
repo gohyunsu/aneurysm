@@ -434,6 +434,16 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["introai9_benchanxplore_hdf5_xdmf_pairs"], 105)
         self.assertFalse(audit["introai9_benchanxplore_direct_wss_confirmed"])
         self.assertFalse(audit["implementation_scaffold_is_algorithmic_novelty"])
+        self.assertEqual(audit["g0_job_id"], "116204.ECE-util1")
+        self.assertEqual(audit["g0_submission_count"], 1)
+        self.assertEqual(
+            audit["g0_execution_status"],
+            "execution_incomplete_no_source_feasibility_or_scientific_verdict_exact_contract_closed",
+        )
+        self.assertFalse(audit["g0_source_feasibility_gate_evaluated"])
+        self.assertFalse(audit["g0_scientific_gate_evaluated"])
+        self.assertEqual(audit["g0_scientific_checks_evaluated"], 0)
+        self.assertFalse(audit["g0_same_contract_repair_or_rerun_allowed"])
         self.assertFalse(audit["scientific_gate_registered"])
         self.assertFalse(audit["method_selected"])
         self.assertFalse(audit["gpu_training_authorized"])

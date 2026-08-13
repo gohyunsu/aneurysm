@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 AneuG source G0 execution closure:** Exact public source
+> `01ae2184facd76c9b2056557263fc92dff22831c` ran once on `introai9` as
+> CPU/PBS job `116204.ECE-util1` with CPU 4, 8 GB and GPU 0. It ended state
+> E/exit 2 after `00:02:14`; the 408-byte private result SHA-256 is
+> `524df994…338` and the raw PBS log is empty. The only reported reason is
+> `public_source_request_failed`; the exact request and low-level cause are
+> unresolved. Source-feasibility and scientific gates were not evaluated,
+> and scientific checks remain 0/0. This is not evidence that AneuG is absent
+> or scientifically invalid. The separate acquired-asset observations remain
+> valid. The exact G0 is closed with no repair/rerun; scientific P0/P1, field
+> access, method, architecture, GPU, validation/test, outer test and paper
+> claim remain 0. Any future executable study must be a materially different
+> acquired-data task/version. Never access/query/transfer/submit/monitor
+> `junjinyong`.
+
 > **2026-08-14 acquired-asset reconciliation beyond the legacy root:** The
 > prior “no confirmed AneuG payload” statement was scoped to one legacy
 > project tree and must not be generalized account-wide. A separate read-only
@@ -20,8 +35,9 @@
 > source/lineage/target admission. The post-admission implementation scaffold
 > is SE(3)-equivariant multi-resolution MeshGraphNet + train-only POD cycle
 > head + deterministic tangent projection; this is a performance scaffold,
-> not algorithmic novelty or current execution authority. G0 remains the sole
-> next run. This audit newly read no HDF5 field array, extracted no archive,
+> not algorithmic novelty or current execution authority. G0 is now closed
+> execution-incomplete and may not be repaired or rerun. This audit newly read
+> no HDF5 field array, extracted no archive,
 > submitted no PBS job and used no GPU. Broad-scan SSH resets are transport
 > observations, never evidence of asset absence. Never access/query/transfer/
 > submit/monitor `junjinyong`.

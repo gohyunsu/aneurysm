@@ -326,7 +326,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or problem_selection["audit_document"]
         != "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md"
         or problem_selection["most_recent_closed_candidate"]
-        != "growth_paired_transient_wss_structure_stability_execution_incomplete_no_scientific_verdict"
+        != "aneug_reference_floor_source_g0_execution_incomplete_no_source_or_scientific_verdict"
         or problem_selection["most_recent_source_rejected_candidate"]
         != "aneux_factorized_nested_preprocessing_orbit_reliability_rejected_pre_execution_at_32_residual_novelty_2_below_2_5_floor"
         or problem_selection["most_recent_conditional_source_lead"]
@@ -11183,7 +11183,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "absence_outside_bounded_inventory_claimed", "g0_config",
             "g0_config_sha256", "g0_evaluator", "g0_evaluator_sha256",
             "g0_test", "g0_test_sha256", "g0_pbs_wrapper",
-            "g0_pbs_wrapper_sha256", "g0_maximum_submissions",
+            "g0_pbs_wrapper_sha256", "g0_execution_record",
+            "g0_execution_record_sha256", "g0_job_id",
+            "g0_submission_count", "g0_execution_status",
+            "g0_reported_reason",
+            "g0_failed_request_or_low_level_cause_resolved",
+            "g0_source_feasibility_gate_evaluated",
+            "g0_scientific_gate_evaluated",
+            "g0_scientific_checks_registered",
+            "g0_scientific_checks_evaluated",
+            "g0_aggregate_source_inventory_materialized",
+            "g0_persistent_probe_or_download_cache_materialized",
+            "g0_maximum_submissions",
             "g0_same_contract_repair_or_rerun_allowed",
             "g0_aneug_field_or_mesh_payload_authorized",
             "g0_challenge_member_extraction_or_field_read_authorized",
@@ -11197,7 +11208,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     )
     if (
         reference_floor["status"]
-        != "inactive_31_of_40_with_prospective_source_feasibility_g0_only"
+        != "inactive_31_of_40_after_source_g0_execution_incomplete_exact_contract_closed"
         or reference_floor["candidate_id"]
         != "reference_relative_transient_wss_structure_fidelity"
         or reference_floor["candidate_score"] != 31.0
@@ -11234,8 +11245,15 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["post_admission_implementation_scaffold"]
         != "se3_equivariant_multiresolution_meshgraphnet_train_only_pod_cycle_head_tangent_projection"
         or reference_floor["g0_maximum_submissions"] != 1
+        or reference_floor["g0_job_id"] != "116204.ECE-util1"
+        or reference_floor["g0_submission_count"] != 1
+        or reference_floor["g0_execution_status"]
+        != "execution_incomplete_no_source_feasibility_or_scientific_verdict_exact_contract_closed"
+        or reference_floor["g0_reported_reason"] != "public_source_request_failed"
+        or reference_floor["g0_scientific_checks_registered"] != 0
+        or reference_floor["g0_scientific_checks_evaluated"] != 0
         or reference_floor["next_allowed_action"]
-        != "one_introai9_pbs_cpu_g0_then_human_rescore_no_automatic_scientific_p0_method_gpu_or_claim"
+        != "human_select_materially_different_acquired_data_task_version_without_g0_repair_or_rerun"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11251,6 +11269,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "g0_aneug_field_or_mesh_payload_authorized",
                 "g0_challenge_member_extraction_or_field_read_authorized",
                 "g0_aneux_payload_authorized", "scientific_gate_registered",
+                "g0_failed_request_or_low_level_cause_resolved",
+                "g0_source_feasibility_gate_evaluated",
+                "g0_scientific_gate_evaluated",
+                "g0_aggregate_source_inventory_materialized",
+                "g0_persistent_probe_or_download_cache_materialized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",
@@ -11284,6 +11307,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("g0_evaluator", "g0_evaluator_sha256"),
         ("g0_test", "g0_test_sha256"),
         ("g0_pbs_wrapper", "g0_pbs_wrapper_sha256"),
+        ("g0_execution_record", "g0_execution_record_sha256"),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
