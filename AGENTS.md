@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 official Aneumo transient-release scientific-source
+> validation:** Exact scientific public source
+> `86ad5923d56202d9bd8a1748aabdf0783789c142` is remote exact. Quality
+> `31675906790` passed NumPy 2.1.2, h5py 3.12.1, CPU PyTorch 2.5.1, all
+> 588 tests, 114 protocol invariant groups, the site graph and browser
+> JavaScript syntax; Pages `31675905793` succeeded. Reappraisal config/test/
+> audit-document SHA-256 are
+> `2e8377d523a17bf152f2d2489166df1755f3dc7e4a55a36af3ab0d9dac20bff1` /
+> `721b3529ea1a9352f3b0efc6cf69afde363cb9bd0372e3fd9c4caef551eeecd3` /
+> `283e19afe072fd51221baaaa4ff3cac0ff27b2cb8f59e90fea84e4d111a6a559`.
+> This validates the public source/audit contract, not the transient target or
+> the steady P0. Transient status remains inactive 28.0/40; the sole
+> conditional lead remains steady response fidelity 32.5/40 at real P0 v3
+> 0/12. This synchronization made zero scientific server query, remote command,
+> cache-field read, scheduler query, transfer, PBS/GPU submission or monitoring.
+> Do not retry `introai9` before a newly verified operational change or open a
+> local scientific repair loop. Never access `junjinyong`.
+
 > **2026-08-13 official Aneumo transient-release reappraisal:** Freeze GitHub
 > commit `701d53dde3489d84dbe9bc8324254629162eb45a` and Hugging Face revision
 > `f801adee816c18d3e18b23e6fcb147fe4c264209`. HF exposes 370 objects and

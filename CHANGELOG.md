@@ -2,6 +2,11 @@
 
 ## 2026-08-13 · official Aneumo transient release reopens review, not a task
 
+- Exact scientific source `86ad592…9c142` passed Quality `31675906790` under
+  the pinned NumPy/h5py/CPU-PyTorch environment with 588/588 tests, 114
+  protocol invariant groups, the site graph and browser JavaScript syntax.
+  Pages `31675905793` also succeeded. These are source-integrity results, not
+  transient target evidence or a steady P0 result.
 - Froze official GitHub commit `701d53d…` and Hugging Face revision
   `f801ade…`. The public HF state contains 370 objects and 3.285 TB: 267
   numeric steady archives, 100 transient batch archives and three metadata
