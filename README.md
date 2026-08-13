@@ -18,7 +18,8 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 > `116165.ECE-util1`은 exact private stage·PBS network 0·GPU 0으로 exit 0
 > 완료했고 raw stage는 삭제됐습니다. 라이선스 충돌 때문에 field-derived 상세
 > aggregate는 private provenance에만 둡니다. Scientific stability는 여전히
-> 미평가이며, 다음 단계는 새 field를 읽기 전 별도 family-disjoint P0 등록입니다.
+> 미평가입니다. Family-disjoint P0 v1은 field-blind하게 등록했지만 release
+> licence 선언 충돌의 authoritative resolution 전에는 staging·실행할 수 없습니다.
 
 ## 현재 상태
 
@@ -29,6 +30,7 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 | 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아님 |
 | transient 자산 | 966 complete case · 40 base family | 1,000 case가 1,000 독립 표본은 아님 |
 | D0 | v1 transport-incomplete · v2 execution complete | 상세 aggregate private · stability 미평가 · raw stage 삭제 |
+| stability P0 v1 | 등록 · non-executable | 12 family·60 future member 고정 · licence resolution 전 field 0 |
 | scientific P0 / 모델 / GPU | 미등록 / 미선택 / 0 | GNN을 포함한 어떤 모델도 current method가 아님 |
 | 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
 
@@ -107,7 +109,8 @@ D0 · known-member reader/extractor development
   ├─ v1: compute-node network unreachable · VTP/read/extractor 0
   └─ v2: exact ephemeral stage · exit 0 · raw stage 삭제 · 상세 aggregate private
       └─ 다음 권한: 별도 prospective method-free P0 등록만
-P0 · family-disjoint target stability
+P0 v1 · 12-family target stability · registered / field 0
+  └─ licence clarification + private activation 전 execution 금지
   └─ pass → matched baseline screen 등록만 허용
 P1 · compute/field-error-matched structural failure
   └─ pass → bounded validation-only development
@@ -123,7 +126,9 @@ threshold 사후 변경과 model training은 금지합니다. 첫 synthetic-fixt
 repair 1/2를, compute-node egress를 exact private staging으로 바꾸는 transport
 수정이 repair 2/2를 소모합니다. V2 결과와 관계없이 추가 D0 수리·재제출은 없습니다.
 V2는 완료됐고 scientific stability threshold를 평가하지 않았으므로 논문 결과가
-아닙니다. 새 family/phase를 읽기 전 P0 계약을 별도로 공개·고정해야 합니다.
+아닙니다. P0 v1은 새 family/phase를 읽기 전에 공개·고정했지만, Hugging Face와
+GitHub의 상충하는 licence 문구가 authoritative하게 정리될 때까지 execution
+authorization은 false입니다.
 
 ## 미래 아키텍처의 최소 조건
 
@@ -170,6 +175,9 @@ results/      public aggregate outcome only
 - [현재 재판정](docs/aneumo-transient-structure-reentry-2026-08-13.md)
 - [transient release 감사](docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md)
 - [D0 계약](configs/aneumo_transient_vtp_d0.json)
+- [최종 D0 v2 계약](configs/aneumo_transient_vtp_d0_v2.json)
+- [등록된 non-executable stability P0 v1](configs/aneumo_transient_structure_stability_p0_v1.json)
+- [P0 설계와 license blocker](docs/aneumo-transient-structure-stability-p0-v1-2026-08-13.md)
 - [폐쇄된 response P0 결과](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)
 - [선행연구 계보](docs/literature-lineage.md)
 - [상세 변경 이력](CHANGELOG.md)

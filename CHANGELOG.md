@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-13 — family-disjoint stability P0 v1 registers without field access
+
+- Pinned official Connection.csv SHA-256 09a5344a…d0b and release-directory
+  metadata, excluded D0 family 1, and hash-selected 12 distinct families, one
+  canonical complete case each and five phases: 60 future members.
+- Registered non-compensatory informative-structure, tangency, signed spatial
+  recall, count/index and 1%-RMS perturbation gates. At least 10/12 families
+  must pass at least 4/5 phases; missing data is execution-incomplete.
+- Kept staging and execution false because HF says CC BY-NC-ND 4.0 while the
+  GitHub datasheet says CC BY 4.0. Stricter private handling is not an
+  authoritative licence resolution.
+- P0 field read, scientific result, model, architecture, GPU, test and claim
+  remain 0. Failure would close the direction; a pass could register only a
+  matched-baseline P1.
+
 ## 2026-08-13 — D0 v2 execution completes without a stability verdict
 
 - Final source `158f6bf…e69e` passed Quality `31708012464` with 629/629 tests

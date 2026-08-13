@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 registered non-executable stability P0 v1:** Official
+> Connection.csv SHA-256 09a5344a…d0b and release-directory metadata exclude
+> D0 family 1 and field-blindly freeze 12 distinct families, one canonical
+> complete case each and phases 4.01/4.25/4.50/4.75/5.00: 60 future members.
+> No P0 field has been staged/read. Phase gates for informative structure,
+> tangency, pairwise bidirectional signed recall, exact index, count range and
+> deterministic 1%-RMS perturbation are non-compensatory; 10/12 families must
+> pass 4/5 phases. HF declares CC BY-NC-ND 4.0 while the GitHub datasheet says
+> CC BY 4.0. Stricter private handling is not authoritative resolution, so
+> staging/execution remain false until clarification and a separate private
+> activation manifest. Do not weaken this gate or treat it as a legal
+> conclusion. Field/result/method/model/GPU/test/claim remain 0. Never access
+> or query junjinyong.
+
 > **2026-08-13 D0 v2 final operational outcome:** Green public source
 > `158f6bfa45c9eeac93211b875352a64f69a2e69e` passed Quality
 > `31708012464` with 629/629 tests and Pages `31708011675`. Final introai9 PBS

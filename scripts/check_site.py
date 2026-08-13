@@ -59,6 +59,8 @@ def check_site(root: Path) -> list[str]:
         "상세 aggregate private · stability 미평가 · raw stage 삭제": (
             "current D0 outcome boundary"
         ),
+        "stability P0 v1 | 등록 · non-executable": "registered P0 boundary",
+        "12 family·60 future member 고정": "field-blind P0 panel",
         "GNN을 포함한 어떤 모델도 current method가 아님": (
             "no-selected-architecture boundary"
         ),
@@ -159,14 +161,20 @@ def check_site(root: Path) -> list[str]:
         "transient structure-faithful WSS 30.0/40 inactive": (
             "current transient candidate boundary"
         ),
-        "D0 reader/extractor development only": "current D0 evidence stage",
-        "D0 v1 ended execution-incomplete before any VTP payload": (
+        "D0 v2 execution complete with private aggregate and raw stage deleted": (
+            "current D0 evidence stage"
+        ),
+        "V1 job 116160.ECE-util1 ended execution-incomplete before any VTP payload": (
             "current D0 transport outcome"
         ),
         "v2 execution complete with private aggregate and raw stage deleted": (
             "final D0 operational outcome"
         ),
-        "closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated": (
+        "family-disjoint P0 v1 registered non-executable": (
+            "registered non-executable P0 boundary"
+        ),
+        "stages zero of 60 future members": "zero-field P0 boundary",
+        "Closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated": (
             "closed P0 result count"
         ),
         "The current inactive v3 preserves unexecuted v1 and v2": (

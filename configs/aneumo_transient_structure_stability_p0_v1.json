@@ -1,0 +1,121 @@
+{
+  "schema_version": "aurora.aneumo_transient_structure_stability_p0.v1",
+  "protocol_id": "aneumo_transient_method_free_structure_stability_p0_v1",
+  "status": "registered_non_executable_pending_authoritative_release_license_resolution",
+  "as_of": "2026-08-13",
+  "purpose": "falsify_phasewise_signed_critical_structure_identifiability_before_any_surrogate_model",
+  "provenance": {
+    "d0_v2_public_source": "158f6bfa45c9eeac93211b875352a64f69a2e69e",
+    "d0_v2_job": "116165.ECE-util1",
+    "d0_development_repairs_consumed": 2,
+    "d0_further_repair_or_resubmission_allowed": false,
+    "official_github_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
+    "huggingface_revision": "f801adee816c18d3e18b23e6fcb147fe4c264209",
+    "connection_csv_sha256": "09a5344ac3b3b30a3a677ca619710142782983144362d069b5a2f57caaeabd0b",
+    "release_case_records_sha256": "8f516cd39c5bb0fb83293f19ff95d996f2299ebd6848d4609ced8aa9dbbde424"
+  },
+  "selection": {
+    "selection_seed": "aurora-transient-stability-p0-v1-20260813",
+    "selection_unit": "official_connection_base_family",
+    "eligible_family_count": 39,
+    "excluded_development_families": ["1"],
+    "required_family_count": 12,
+    "family_rule": "sort_eligible_family_ids_by_sha256_of_seed_colon_family_colon_family_id_then_take_first_12",
+    "case_rule": "within_each_selected_family_sort_canonical_complete_cases_by_sha256_of_seed_colon_case_colon_family_id_colon_case_id_then_take_first",
+    "selected": [
+      {"family_id": "34", "case_id": 734},
+      {"family_id": "44", "case_id": 922},
+      {"family_id": "15", "case_id": 311},
+      {"family_id": "46", "case_id": 958},
+      {"family_id": "19", "case_id": 418},
+      {"family_id": "24", "case_id": 523},
+      {"family_id": "27", "case_id": 571},
+      {"family_id": "6", "case_id": 111},
+      {"family_id": "22", "case_id": 468},
+      {"family_id": "42", "case_id": 847},
+      {"family_id": "47", "case_id": 988},
+      {"family_id": "13", "case_id": 240}
+    ],
+    "phases": ["4.01", "4.25", "4.50", "4.75", "5.00"],
+    "field_members": 60,
+    "development_case_or_phase_reused": false,
+    "selected_before_any_p0_field_read": true
+  },
+  "representation": {
+    "normal_modes": ["polygon_newell", "triangle_area"],
+    "triangulation_modes": ["first", "last"],
+    "tangent_projection_required": true,
+    "critical_point_interior_margin": 0.02,
+    "critical_point_determinant_relative_floor": 0.001,
+    "primary_matching_radius_median_edge_multiplier": 2.0,
+    "sensitivity_matching_radius_median_edge_multipliers": [1.0, 2.0, 4.0],
+    "minimum_informative_critical_points_per_configuration": 2
+  },
+  "perturbation": {
+    "type": "three_step_mesh_smoothed_vertex_gaussian_tangent_noise",
+    "primary_amplitude_relative_to_phase_tangent_rms": 0.01,
+    "sensitivity_amplitudes_relative_to_phase_tangent_rms": [0.005, 0.01, 0.02],
+    "smoothing_steps": 3,
+    "seeds": [104729, 130363, 155921, 181081, 205759, 230431, 255079, 279757],
+    "reference_normal_mode": "polygon_newell",
+    "reference_triangulation_mode": "first"
+  },
+  "phase_gates": {
+    "tangency_median_maximum": 0.02,
+    "tangency_p95_maximum": 0.10,
+    "minimum_pairwise_bidirectional_signed_recall": 0.80,
+    "maximum_critical_point_count_range": 1,
+    "maximum_total_signed_index_range": 0,
+    "minimum_passing_perturbation_seeds": 7,
+    "maximum_perturbation_count_difference": 1,
+    "maximum_perturbation_total_index_difference": 0,
+    "all_phase_gate_groups_noncompensatory": true
+  },
+  "family_gate": {
+    "required_passing_phases_of_5": 4,
+    "required_informative_phases_of_5": 4,
+    "phase_mesh_must_be_byte_identical": true,
+    "family_is_only_inference_unit": true
+  },
+  "overall_gate": {
+    "required_passing_families_of_12": 10,
+    "missing_or_extra_family_phase_or_member": "execution_incomplete",
+    "failure_closes_transient_direction_without_model_or_threshold_repair": true,
+    "pass_authorizes": "register_compute_and_field_error_matched_baseline_failure_p1_only"
+  },
+  "license_boundary": {
+    "huggingface_tag": "cc-by-nc-nd-4.0",
+    "github_datasheet_statement": "cc-by-4.0",
+    "declarations_conflict": true,
+    "authoritative_resolution_required_before_staging_or_execution": true,
+    "stricter_noncommercial_nonredistribution_handling_is_not_legal_resolution": true,
+    "raw_derived_field_or_weight_publication": false,
+    "field_derived_p0_result_publication": false,
+    "legal_conclusion_made": false
+  },
+  "execution": {
+    "authorized": false,
+    "server_if_activated": "introai9",
+    "excluded_server": "junjinyong",
+    "scheduler_if_activated": "pbs",
+    "network_during_pbs": false,
+    "ncpus": 4,
+    "memory_gb": 16,
+    "ngpus": 0,
+    "walltime": "02:00:00",
+    "one_shot_after_separate_private_activation_manifest": true,
+    "login_node_gpu_allowed": false
+  },
+  "authorization": {
+    "metadata_only_registration": true,
+    "new_field_member_staging": false,
+    "p0_execution": false,
+    "method_or_architecture": false,
+    "training": false,
+    "gpu": false,
+    "validation_or_test": false,
+    "outer_test": false,
+    "paper_identity": false,
+    "paper_claim": false
+  }
+}
