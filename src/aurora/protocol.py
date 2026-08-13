@@ -11229,6 +11229,25 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d1_attempt_3_persistent_status_sha256",
             "processed_v4_d1_result",
             "processed_v4_d1_closed",
+            "processed_v4_d2_status",
+            "processed_v4_d2_config",
+            "processed_v4_d2_config_sha256",
+            "processed_v4_d2_evaluator",
+            "processed_v4_d2_evaluator_sha256",
+            "processed_v4_d2_test",
+            "processed_v4_d2_test_sha256",
+            "processed_v4_d2_pbs_wrapper",
+            "processed_v4_d2_pbs_wrapper_sha256",
+            "processed_v4_d2_transport_route",
+            "processed_v4_d2_probe_bytes_read_and_discarded",
+            "processed_v4_d2_probe_persistent_output",
+            "processed_v4_d2_workflow_peak_cap_bytes",
+            "processed_v4_d2_maximum_combined_new_bytes",
+            "processed_v4_d2_full_objects_downloaded",
+            "processed_v4_d2_server_objects_staged",
+            "processed_v4_d2_schema_attempts_used",
+            "processed_v4_d2_schema_attempt_limit",
+            "processed_v4_d2_scientific_p0_or_gpu_authorized",
             "processed_v4_d1_v5_or_raw_authorized",
             "processed_v4_d1_scientific_p0_or_gpu_authorized",
             "scientific_gate_registered",
@@ -11323,8 +11342,30 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d1_result"]
         != "results/aneug_processed_v4_d1_execution_20260814.json"
         or reference_floor["processed_v4_d1_closed"] is not True
+        or reference_floor["processed_v4_d2_status"]
+        != "registered_client_staged_before_full_object_download_after_discarded_64mib_route_probe"
+        or reference_floor["processed_v4_d2_config_sha256"]
+        != "cba7a3989471c499fc95f631ec2f60c71b352605a0891810dacb6f9415933121"
+        or reference_floor["processed_v4_d2_evaluator_sha256"]
+        != "d1c4592e6f4ab142c923c288ab2248e0af0b197bb0083ecd1fb1f6b547727685"
+        or reference_floor["processed_v4_d2_test_sha256"]
+        != "5da12d7417faadf370e7ea55e238fdbf98578024bdb13971466c0e591d916532"
+        or reference_floor["processed_v4_d2_pbs_wrapper_sha256"]
+        != "7836345ea6cecfb917bf8bf01d353c90709a3244e845271b92e700f821383219"
+        or reference_floor["processed_v4_d2_transport_route"]
+        != "client_https_exact_download_then_windows_openssh_sftp_to_introai9"
+        or reference_floor["processed_v4_d2_probe_bytes_read_and_discarded"]
+        != 67108864
+        or reference_floor["processed_v4_d2_workflow_peak_cap_bytes"]
+        != 60000000000
+        or reference_floor["processed_v4_d2_maximum_combined_new_bytes"]
+        != 57122234152
+        or reference_floor["processed_v4_d2_full_objects_downloaded"] != 0
+        or reference_floor["processed_v4_d2_server_objects_staged"] != 0
+        or reference_floor["processed_v4_d2_schema_attempts_used"] != 0
+        or reference_floor["processed_v4_d2_schema_attempt_limit"] != 1
         or reference_floor["next_allowed_action"]
-        != "none_under_closed_d1_require_human_selection_of_materially_distinct_acquisition_version_or_verified_external_transport_change"
+        != "execute_registered_d2_sequential_client_stage_steady_then_transient_then_one_shot_introai9_cpu_pbs_checksum_schema"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11350,6 +11391,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d1_attempt_1_schema_evaluated",
                 "processed_v4_d1_attempt_2_schema_evaluated",
                 "processed_v4_d1_attempt_3_schema_evaluated",
+                "processed_v4_d2_probe_persistent_output",
+                "processed_v4_d2_scientific_p0_or_gpu_authorized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",

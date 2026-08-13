@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 client-staged D2 registration:** D1 remains closed 3/3 and is
+> never relabelled. A local HEAD audit verified both official v4 identities,
+> and a 67,108,864-byte transient range probe returned HTTP 206 at 5,697,265
+> B/s to a null sink; no byte persisted or was parsed. D2 uses only official
+> HTTPS to sequential exact client cache, then Windows OpenSSH SFTP to
+> introai9. It forbids compute/login-node external download. Client cap is
+> 30 GB, server peak 33,377,372,101 bytes and maximum simultaneous new bytes
+> 57,122,234,152 under a 60 GB workflow cap. Steady is uploaded first and its
+> client copy deleted before transient download; server steady is deleted only
+> after a successful compact norm/schema record. Up to three same-partial
+> client/SFTP sessions per object are transport bounds, not scientific trials.
+> Exact server sizes permit exactly one CPU 4/64 GB/GPU 0 PBS checksum/schema
+> attempt; any outcome closes it with no repair/rerun. Pass opens only geometry
+> grouping and split freeze, never scientific P0/model/GPU/test/claim. Never
+> use `junjinyong` and never publish private client/server paths.
+
 > **2026-08-14 D1 final closure:** Quality/Pages-passed public source
 > `274bb0e3ced86a908bdb4d6cfa7b61c4c248f9cb` ran as final introai9 job
 > `116209.ECE-util1`, CPU 4, 64 GB, GPU 0. It finalized F/exit 28 after

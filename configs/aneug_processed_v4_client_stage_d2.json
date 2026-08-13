@@ -1,0 +1,104 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_client_stage_d2.v1",
+  "protocol_id": "aneug_transient_v4_client_staged_acquisition_d2",
+  "status": "prospective_after_d1_compute_egress_closure_before_full_object_download",
+  "as_of": "2026-08-14",
+  "d1_boundary": {
+    "result": "results/aneug_processed_v4_d1_execution_20260814.json",
+    "status": "closed_execution_incomplete",
+    "attempts_used": 3,
+    "same_contract_retry_or_repair": false,
+    "d2_relabels_d1": false
+  },
+  "pre_registration_route_probe": {
+    "transient_range_bytes_read_and_discarded": 67108864,
+    "persistent_output": false,
+    "parsed": false,
+    "scientific_metric_computed": false,
+    "http_status": 206,
+    "observed_speed_bytes_per_second": 5697265,
+    "purpose": "client_route_feasibility_only"
+  },
+  "source": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "license": "cc-by-sa-4.0",
+    "official_code_repository": "WenHaoDing/AneuG-Flow",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "transient": {
+      "relative_path": "processed_data/assembled_registered_data_1k_v4.pth",
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "steady_norm_source": {
+      "relative_path": "processed_data/assembled_registered_steady_data_1k_v4.pth",
+      "bytes": 9632510050,
+      "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+      "retention": "temporary_until_successful_schema_and_compact_norm_manifest"
+    }
+  },
+  "storage": {
+    "workflow_peak_cap_bytes": 60000000000,
+    "client_staging_cap_bytes": 30000000000,
+    "server_peak_bytes": 33377372101,
+    "maximum_combined_new_bytes": 57122234152,
+    "server_persistent_after_success_bytes": 23744862051,
+    "sequential_client_download_required": true,
+    "steady_client_copy_deleted_before_transient_download": true,
+    "steady_server_copy_deleted_after_schema_success": true,
+    "transient_server_copy_persistent": true,
+    "v5_downloaded": false,
+    "raw_blood_or_wall_downloaded": false,
+    "steady_14000_case_cfd_downloaded": false,
+    "cfd_directory_downloaded": false
+  },
+  "transport": {
+    "route": "client_https_exact_download_then_windows_openssh_sftp_to_introai9",
+    "compute_node_external_download": false,
+    "login_node_external_download": false,
+    "resumable_client_partial": true,
+    "maximum_client_sessions_per_object": 3,
+    "resumable_sftp_partial": true,
+    "maximum_sftp_sessions_per_object": 3,
+    "same_partial_and_exact_object_only": true,
+    "server_size_preflight_before_pbs": true,
+    "server_sha256_verified_inside_pbs": true,
+    "private_local_or_server_path_public": false
+  },
+  "schema_gate": {
+    "maximum_pbs_attempts": 1,
+    "rerun_after_any_outcome": false,
+    "weights_only_reader": true,
+    "mmap": true,
+    "minimum_cases": 700,
+    "expected_timesteps": 80,
+    "required_vector_wss_labels": ["wss_x", "wss_y", "wss_z"],
+    "required_geometry_labels": ["x", "y", "z"],
+    "unique_case_ids_required": true,
+    "mesh_case_order_match_required": true,
+    "local_geometry_id_linkage_report_required": true,
+    "field_values_or_scientific_metrics_read": false,
+    "case_ids_public": false
+  },
+  "execution": {
+    "schema_server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "authorization": {
+    "client_download_and_sftp_staging": true,
+    "checksum_and_schema_audit": true,
+    "geometry_grouping_and_split_freeze_after_all_pass": true,
+    "scientific_p0_or_confirmatory_test": false,
+    "method_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "paper_result_or_claim": false
+  }
+}

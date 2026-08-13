@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · processed-v4 D1 closed at attempt 3/3 with partial 0 · compute-node connection timeout · data/schema/scientific verdict 0 · scientific P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · processed-v4 D1 closed at 3/3 · processed-v4 D2 registered client staging before full-object access · 57,122,234,152-byte maximum combined new storage below 60 GB · full object/schema/scientific verdict 0 · P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
     requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles. Exact official processed transient v4 is 23,744,862,051 bytes; D1 retains it and uses the 9,632,510,050-byte steady v4 only temporarily to extract physical-unit normalization, for a 33,377,372,101-byte peak below a 60 GB selected-asset cap. V5, raw blood/wall, 14,000-case steady CFD and cfd are excluded. The closed G0 remains no-verdict and is not retried: neither source feasibility nor science has a verdict. BenchAnXplore is engineering-only. The 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor. AneuX is geometry-only OOD support. Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -1487,6 +1487,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.14",
+      category: "protocol",
+      title: "Client-staged D2 replaces compute-node egress without repairing D1",
+      copy: "Both official v4 identities are reachable from the client. A discarded 67,108,864-byte HTTP-206 probe measured 5,697,265 B/s without persistence or parsing. D2 stages steady then transient sequentially through exact client download and Windows OpenSSH SFTP, never compute/login-node external download. Client cap is 30 GB, server peak 33.38 GB and maximum simultaneous new bytes 57.12 GB. Only one introai9 CPU/PBS checksum/schema attempt exists after exact server-size preflight; scientific P0, model, GPU and claim remain zero.",
+      files: ["configs/aneug_processed_v4_client_stage_d2.json", "src/aurora/aneug_processed_v4_d2.py", "tests/test_aneug_processed_v4_d2.py", "cluster/pbs_aneug_processed_v4_d2.pbs", "docs/aneug-processed-v4-client-staging-d2-2026-08-14.md", "configs/aurora_v1.json", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.14",
       category: "experiment",

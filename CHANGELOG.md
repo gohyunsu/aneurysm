@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-14 · client-staged processed-v4 D2 registered
+
+- Preserved D1 as closed and replaced compute-node egress with a materially
+  separate exact client-download plus Windows OpenSSH SFTP route.
+- Registered sequential steady/transient staging with 30 GB client cap,
+  33.38 GB server peak and 57.12 GB maximum combined new storage.
+- Recorded the discarded 64 MiB HTTP-206 route probe and required full access
+  to wait for Quality-passed registration.
+- Added a one-shot CPU/PBS checksum/schema evaluator; no scientific P0, method,
+  GPU, outer test, result or claim is authorized.
+
 ## 2026-08-14 · processed-v4 D1 closes after final transport timeout
 
 - Final introai9 job `116209.ECE-util1` used CPU 4, 64 GB and GPU 0 and

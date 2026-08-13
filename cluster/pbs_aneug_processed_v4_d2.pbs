@@ -1,0 +1,55 @@
+#!/bin/bash
+#PBS -N aurora_aneug_v4_d2
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=0
+#PBS -l walltime=04:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_PYTHON:?set pinned Python executable}"
+: "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+
+config="$AURORA_PROJECT_ROOT/configs/aneug_processed_v4_client_stage_d2.json"
+processed_root="$AURORA_DATA_ROOT/processed_v4_d2"
+geometry_root="$AURORA_DATA_ROOT/extracted/aneug_flow/v1/Geometries"
+record_root="$AURORA_OUTPUT_ROOT/aneug_processed_v4_d2"
+transient="$processed_root/assembled_registered_data_1k_v4.pth"
+steady="$processed_root/assembled_registered_steady_data_1k_v4.pth.temporary"
+mkdir -p "$record_root"
+
+if [ -e "$record_root/schema_attempt.started" ]; then
+  echo "D2 schema attempt already exists; rerun is forbidden" >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-unknown}" > "$record_root/schema_attempt.started"
+
+attempt_log="$record_root/schema_attempt.log"
+attempt_status="$record_root/schema_attempt.status.json"
+exec >>"$attempt_log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s}\n" "$code" "$(test -e "$record_root/schema_attempt.complete" && printf true || printf false)" > "$attempt_status"; exit "$code"' EXIT
+printf 'stage=wrapper_started job=%s commit=%s\n' "${PBS_JOBID:-unknown}" "$actual_commit"
+
+[ "$(stat -c %s "$transient")" = "23744862051" ]
+[ "$(stat -c %s "$steady")" = "9632510050" ]
+printf 'stage=size_preflight_complete\n'
+
+PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" -m aurora.aneug_processed_v4_d2 \
+  --config "$config" \
+  --transient "$transient" \
+  --steady "$steady" \
+  --geometry-root "$geometry_root" \
+  --result "$record_root/result.json" \
+  --norm-manifest "$record_root/tensor_norm.json" \
+  --case-manifest "$record_root/case_manifest.json"
+
+rm -f "$steady"
+printf '%s\n' "complete" > "$record_root/schema_attempt.complete"
+printf 'stage=schema_complete\n'
