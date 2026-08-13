@@ -125,6 +125,8 @@ manifest를 등록한 뒤 final binary preflight에서 base image의 Git 부재�
 제출을 보류했습니다. Host wrapper가 검증한 clean commit SHA를 container에
 명시적으로 전달·재검증하고 superseded-manifest SHA와 attempt/field-read 0을
 요구하는 schema v3로 닫았습니다. Field-array read와 PBS attempt는 여전히 0입니다.
+동일 wrapper dry-run에서 wheel basename을 축약하면 `pip`가 거부하는 문제도 찾아,
+등록된 원래 basename을 container 안에서도 그대로 유지하도록 교정했습니다.
 
 ### P0 v3
 

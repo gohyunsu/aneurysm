@@ -61,6 +61,7 @@ status_path="$record_root/status.$PBS_JOBID.json"
 result_path="$record_root/result.$PBS_JOBID.private.json"
 job_tmp="${TMPDIR:-/tmp}/aurora_response_fidelity_p0_v3_$PBS_JOBID"
 container_result="$job_tmp/result.private.json"
+runtime_wheel_name="${AURORA_RUNTIME_WHEEL##*/}"
 mkdir -p "$record_root" "$job_tmp"
 
 shopt -s nullglob
@@ -118,11 +119,11 @@ if [[ "$(sha256sum "$AURORA_RUNTIME_WHEEL" | awk '{print $1}')" != "$AURORA_RUNT
 fi
 
 singularity exec --cleanenv \
-  --bind "$AURORA_RUNTIME_WHEEL:/runtime-wheel/h5py.whl:ro" \
+  --bind "$AURORA_RUNTIME_WHEEL:/runtime-wheel/$runtime_wheel_name:ro" \
   --bind "$job_tmp:/run" \
   "$AURORA_CONTAINER" \
   python -m pip install --no-index --no-deps --target /run/python \
-    /runtime-wheel/h5py.whl
+    "/runtime-wheel/$runtime_wheel_name"
 
 set +e
 singularity exec --cleanenv \

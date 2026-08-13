@@ -95,6 +95,12 @@ pre-attempt superseded manifest with zero PBS attempts and zero field reads.
 Schema v3 requires that prior manifest's SHA-256 and both zero counters before
 the replacement manifest can validate.
 
+The next no-field wrapper dry-run found that renaming the bound wheel to
+`h5py.whl` violates wheel filename parsing. Submission remained zero. The
+wrapper now preserves the exact registered wheel basename at the container
+mount, so `pip --no-index --no-deps` consumes the same named artifact whose
+bytes were pinned.
+
 The validator's synthetic fixtures show only that valid authority is accepted
 and path, container, manifest, compute and scientific-authority drift are
 rejected. They are code tests, not Aneumo evidence. This update performs no

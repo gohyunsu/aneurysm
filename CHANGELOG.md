@@ -15,6 +15,9 @@
   now passes only that verified SHA into the clean container and rejects a
   missing/different value. It also preserves and pins the superseded pre-attempt
   manifest with attempt count 0 and field read false.
+- A subsequent exact wrapper dry-run rejected the renamed mount
+  `h5py.whl` as an invalid wheel filename, again before qsub or field access.
+  The wrapper now preserves the registered wheel basename inside the container.
 - The scientific config, evaluator, 12 gates, family split, seed and thresholds
   remain byte-identical. Private activation manifest, field read and P0 attempt
   remain zero; `junjinyong` remains excluded.

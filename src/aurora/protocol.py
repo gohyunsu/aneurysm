@@ -1654,11 +1654,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or anchor_red_team["v3_activation_test"]
         != "tests/test_aneumo_response_fidelity_p0_v3_activation.py"
         or anchor_red_team["v3_activation_test_sha256"]
-        != "2f9c8f04dd784e85c9b444d37656cbb8eb255f9072c5bec8397d48e3731d55c3"
+        != "ba37d75ae399d6ca71f63305c13ea3fb3e3d7449f5dae0b7cf253c7782c2606f"
         or anchor_red_team["v3_pbs_wrapper"]
         != "cluster/pbs_aneumo_response_fidelity_p0_v3.pbs"
         or anchor_red_team["v3_pbs_wrapper_sha256"]
-        != "6a9d6847981fdf67852c51d0c16639e9e16a1fe2e4dca009ea0de72ad78d2cc3"
+        != "8cfa471504b3eea2fcff1025ce92cac2c85d283edaf2b0e3430a78d24fae74fe"
         or anchor_red_team["v3_activation_manifest_schema"]
         != "aurora.aneumo_response_fidelity_p0_v3.activation.v3"
         or anchor_red_team["v3_registered_check_count"] != 12

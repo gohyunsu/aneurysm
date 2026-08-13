@@ -13,6 +13,9 @@
 > Schema v3 must pin that manifest SHA and both zero counters, while the host
 > wrapper verifies a clean checkout and passes its exact commit into the clean
 > container for runner-side equality validation.
+> The wrapper must also preserve the registered wheel's full basename inside
+> the container; `h5py.whl` is not a valid wheel filename. The failed no-field
+> dry-run is pre-attempt provenance, not a PBS attempt, and must not be hidden.
 > Immutable P0 v3 config/evaluator bytes and all 12 gates are unchanged. At this
 > source-preparation state the private manifest, field read and PBS attempt are
 > still 0. Freeze and push the public runtime source, then register exactly one
