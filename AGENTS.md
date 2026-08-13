@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 current-overview public evidence synchronization:** Exact
+> consolidation source `b5fd69774e00cf58403c0a0fadfceba8b39fd3e4` passed
+> Quality `31689617455` and Pages `31689616910`. Dependency-complete CI records
+> 609/609 tests, 115 protocol invariant groups and the README/site semantic and
+> link graph pass. README/checker/research-data SHA-256 are
+> `1cea2d86ea30a2b2cca9570069c22284b27fb7a51e4dec208007f679de0546b2` /
+> `2b0801991ae08aa3a90c1430bec39915917ad3f6a7567676bcfad3d9e17ee551` /
+> `619e1ad5d685cbce02526e804f33520fd1579fb42d7f623f4cf4056b87ce9679`.
+> These are documentation/code-quality results, not Aneumo evidence.
+
 > **2026-08-13 current-facing documentation boundary:** Keep `README.md` as a
 > compact current overview, not a second changelog. It must remain at most 260
 > lines, state real P0 v3 0/12, no selected architecture and RF-C2 as an

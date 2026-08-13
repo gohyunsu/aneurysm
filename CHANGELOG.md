@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-13 · the consolidated entry point passes public validation
+
+- Exact consolidation source `b5fd69774e00cf58403c0a0fadfceba8b39fd3e4`
+  passed Quality `31689617455` and Pages `31689616910`.
+- Dependency-complete CI passed 609/609 tests, 115 protocol invariant groups,
+  the README/site link and semantic graph, and browser JavaScript syntax.
+- README/checker/research-data SHA-256 are `1cea2d86…46b2` /
+  `2b080199…551` / `619e1ad5…9679`. This validates public presentation and
+  guardrails; it creates no scientific result or execution authority.
+
 ## 2026-08-13 · the public entry point stops duplicating the history ledger
 
 - Replaced the 2,598-line accumulated README with a 217-line current overview:
