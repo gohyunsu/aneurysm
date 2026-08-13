@@ -16,6 +16,11 @@
 > organizer template before submission. This format audit is not scientific
 > evidence or an `introai9` operational change. Real P0 v3 remains 0/12; do not
 > retry or open a local repair loop. Never access `junjinyong`.
+> Exact source `67ccdd9c0bc740d5763d23a7a4728b9018aefbbf` passed Quality
+> `31682965397` and Pages `31682964734`. Quality verified NumPy 2.1.2,
+> h5py 3.12.1, CPU PyTorch 2.5.1, all 606 tests, 114 protocol invariant
+> groups, the site graph and browser JavaScript syntax. This is format/source
+> integrity evidence only.
 
 > **2026-08-13 Aneumo transient whole-release target-contract audit:** Current
 > transient decision is **30.0/40, inactive**, superseding the earlier

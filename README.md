@@ -12,7 +12,12 @@
 > pre-evidence shell, not final format certification or a submission manuscript.
 > See the [exact author-contract recheck](docs/isbi-2027-author-contract-recheck-2026-08-13.md)
 > and [machine contract](configs/isbi_2027_author_contract_v2.json). Real P0 v3
-> remains 0/12; no server, PBS/GPU, model, result or claim opened.
+> remains 0/12; no server, PBS/GPU, model, result or claim opened. Exact source
+> `67ccdd9c0bc740d5763d23a7a4728b9018aefbbf` passed
+> [Quality](https://github.com/gohyunsu/aneurysm/actions/runs/31682965397)
+> with NumPy 2.1.2, h5py 3.12.1, CPU PyTorch 2.5.1, 606/606 tests and
+> 114 protocol invariant groups; [Pages](https://github.com/gohyunsu/aneurysm/actions/runs/31682964734)
+> also succeeded.
 
 > **2026-08-13 Aneumo transient whole-release correction:** A fail-closed,
 > directory-only range audit covers all public case IDs 1--1000. It finds

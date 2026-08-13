@@ -21,6 +21,9 @@
 - Added a machine-readable venue contract, six fail-closed tests and a detailed
   audit. This changes no scientific gate: real P0 v3 remains 0/12 and no server,
   scheduler, PBS/GPU, model, result or claim opened.
+- Exact source `67ccdd9…8aefbbf` passed Quality `31682965397` with the pinned
+  NumPy/h5py/CPU-PyTorch runtime, 606/606 tests, 114 protocol invariant groups,
+  site graph and JavaScript checks. Pages `31682964734` also succeeded.
 
 ## 2026-08-13 · whole-release Aneumo audit raises feasibility, not admission
 
