@@ -2,6 +2,11 @@
 
 ## 2026-08-13 · whole-release Aneumo audit raises feasibility, not admission
 
+- Exact scientific source `b06f83f…b25b68` is remote exact. Quality
+  `31680411009` and Pages `31680410157` succeeded; public job `94384352300`
+  reports every configured dependency, runtime, protocol, test, site-graph and
+  browser-JavaScript step successful. This is source-integrity evidence, not a
+  transient scientific result.
 - Added a fail-closed public archive auditor and synthetic parser tests. It
   requires bounded HTTP 206 responses, enforces a 100 MB ceiling and reads ZIP
   headers/directories rather than nested scientific members.

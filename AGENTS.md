@@ -38,6 +38,13 @@
 > writable-temp rerun; the earlier sandbox run's 38 errors were exclusively
 > `TemporaryDirectory` environment failures and must not be labelled code
 > failures or dependency-complete CI.
+> Exact scientific public source
+> `b06f83fa3b3339de601f1230b25d60f18ab25b68` is remote exact. Quality
+> `31680411009` and Pages `31680410157` succeeded. Public Quality job
+> `94384352300` reports every configured dependency, pinned-runtime, protocol,
+> full test, site-graph and browser-JavaScript step successful. This CI validates
+> source integrity only and does not change the 30.0 inactive decision or open
+> any scientific execution authority.
 
 > **2026-08-13 official Aneumo transient-release scientific-source
 > validation · historical source-level score:** Exact scientific public source
