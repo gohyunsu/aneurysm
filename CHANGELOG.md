@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-14 · D1 attempt 1 closes before any partial object
+
+- Exact Quality-passed source `b16ae4b…` ran as introai9 CPU/PBS job
+  `116207.ECE-util1` with CPU 4, 64 GB and GPU 0, then exited 2 immediately.
+- Only the 17-byte attempt-start marker materialized. Partial data, persistent
+  PBS log and schema/reader verdict are absent; the cause remains unresolved.
+- Registered attempt 2 with one transport-observability change only: persistent
+  stage logging and an exit-status trap. All object, hash, storage, schema and
+  scientific boundaries are unchanged; two transport attempts remain.
+
 ## 2026-08-14 · storage-bounded AneuG processed-v4 acquisition registered
 
 - Replaced the false 2 TB requirement with two exact official v4 objects:

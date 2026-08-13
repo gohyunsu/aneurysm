@@ -46,3 +46,16 @@ trial. At most three PBS attempts may extend the same partial file. Every
 attempt targets the same immutable revision, byte count and SHA-256; retries
 cannot change an endpoint, split or scientific decision. Execution is
 `introai9` PBS-only with GPU 0. `junjinyong` remains prohibited.
+
+## Attempt 1 outcome and bounded observability change
+
+Exact Quality-passed source `b16ae4b…` ran once as introai9 job
+`116207.ECE-util1` with CPU 4, 64 GB and GPU 0. It exited 2 immediately. Only
+the attempt-start marker exists; no partial object, persistent PBS log, reader
+access or schema verdict materialized. The low-level cause is unresolved.
+
+Attempt 2 consumes the next transport slot and changes only observability:
+the wrapper writes stage transitions and a final exit status directly to the
+private shared record directory. Exact URLs, sizes, SHA-256, storage cap,
+resume semantics, reader and schema checks are unchanged. This is not a
+scientific-contract repair.

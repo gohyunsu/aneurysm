@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D1 transport attempt 1:** Exact public source
+> `b16ae4b8ebcea99e089034952eb68655b842109a` passed Quality
+> `31728458903`. Introai9 CPU/PBS job `116207.ECE-util1` used CPU 4, 64 GB,
+> GPU 0 and run count 1, then exited 2 immediately. Only a 17-byte attempt-start
+> marker exists; transient/steady partial bytes, persistent PBS log, source
+> object, reader and schema verdict are 0. Do not infer the cause or call this
+> a data/source failure. D1 permits at most three resumable transport attempts.
+> Attempt 2 changes only persistent stage logging and an exit-status trap;
+> object URLs, sizes, SHA-256, storage cap, reader/schema and all scientific
+> boundaries remain exact. After transport completes, schema cannot rerun.
+> Never access/query/transfer/submit/monitor `junjinyong`.
+
 > **2026-08-14 processed-v4 D1 registration:** The user selected a
 > materially different processed-only AneuG acquisition, not a repair/rerun of
 > closed G0 or historical cycle P0. Official revision `9dd4180…fa36` exposes

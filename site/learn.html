@@ -586,6 +586,10 @@
             steady CFD와 cfd 원본은 scope 밖입니다. D1은 case 수, 80 phase, vector
             WSS label, mesh/case order와 local geometry-ID linkage를 확인하며 아직
             field metric, model 성능 또는 novelty를 측정하지 않습니다.
+            첫 PBS attempt는 start marker 뒤 exit 2로 끝나 partial과 schema evidence가
+            없습니다. 두 번째 attempt는 동일 bytes를 유지하고 persistent stage log만
+            추가해 실패 위치를 관측합니다. 따라서 endpoint나 데이터셋을 결과에 맞춰
+            고치는 local scientific repair가 아닙니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>

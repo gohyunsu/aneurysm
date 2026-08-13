@@ -37,6 +37,12 @@ if [ "$attempt" -eq 0 ]; then
   exit 90
 fi
 
+attempt_log="$record_root/attempt_${attempt}.log"
+attempt_status="$record_root/attempt_${attempt}.status.json"
+exec >>"$attempt_log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"attempt\":%s,\"exit_code\":%s,\"transport_complete\":%s}\n" "$attempt" "$code" "$(test -e "$record_root/attempt_${attempt}.transport_complete" && printf true || printf false)" > "$attempt_status"; exit "$code"' EXIT
+printf 'stage=wrapper_started job=%s attempt=%s\n' "${PBS_JOBID:-unknown}" "$attempt"
+
 base="https://huggingface.co/datasets/whding123/AneuG-Flow/resolve/9dd418083899deddd93a67f9a6fca7a14304fa36/processed_data"
 transient="$processed_root/assembled_registered_data_1k_v4.pth"
 steady="$processed_root/assembled_registered_steady_data_1k_v4.pth.temporary"
@@ -50,11 +56,15 @@ download_exact() {
   if [ -f "$target" ] && [ "$(stat -c %s "$target")" = "$expected_bytes" ] && [ "$(sha256sum "$target" | cut -d' ' -f1)" = "$expected_sha" ]; then
     return 0
   fi
-  curl --location --fail --show-error --retry 12 --retry-all-errors \
+  printf 'stage=download_start target=%s existing_partial_bytes=%s\n' \
+    "$(basename "$target")" "$(stat -c %s "$partial" 2>/dev/null || printf 0)"
+  curl --location --fail --silent --show-error --retry 12 --retry-all-errors \
     --connect-timeout 30 --continue-at - --output "$partial" "$url"
   [ "$(stat -c %s "$partial")" = "$expected_bytes" ]
   [ "$(sha256sum "$partial" | cut -d' ' -f1)" = "$expected_sha" ]
   mv "$partial" "$target"
+  printf 'stage=download_complete target=%s bytes=%s\n' \
+    "$(basename "$target")" "$expected_bytes"
 }
 
 download_exact "$base/assembled_registered_data_1k_v4.pth?download=true" \
@@ -62,6 +72,7 @@ download_exact "$base/assembled_registered_data_1k_v4.pth?download=true" \
 download_exact "$base/assembled_registered_steady_data_1k_v4.pth?download=true" \
   "$steady" 9632510050 0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f
 printf '%s\n' "complete" > "$record_root/attempt_${attempt}.transport_complete"
+printf 'stage=transport_complete\n'
 
 PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" -m aurora.aneug_processed_v4_d1 \
   --config "$config" \
@@ -74,3 +85,4 @@ PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" -m aurora.aneug_processed
 
 rm -f "$steady"
 printf '%s\n' "complete" > "$record_root/attempt_${attempt}.complete"
+printf 'stage=schema_complete\n'

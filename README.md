@@ -34,7 +34,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | 목표 | IEEE ISBI 2027 | four technical pages · single-blind |
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
-| processed-v4 D1 | 등록 · 실행 전 | transient 23.74GB persistent + steady norm source 9.63GB temporary · peak 33.38GB |
+| processed-v4 D1 | attempt 1/3 transport-incomplete | partial 0 · schema 미평가 · attempt 2는 persistent logging만 추가 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -175,6 +175,12 @@ exact v4 두 object와 60GB selected-asset cap만 다룹니다. Transport가 inc
 동안만 동일 partial file을 최대 세 PBS attempt로 resume할 수 있고, object가 모두
 완성된 뒤 schema gate는 한 번만 실행합니다. D1 pass도 scientific result나 method
 승인이 아니라 leakage grouping과 development split 동결만 엽니다.
+
+Attempt 1 job `116207.ECE-util1`은 GPU 0으로 배정됐지만 즉시 exit 2로
+끝났습니다. Start marker 외의 partial object와 persistent PBS log가 없고 schema는
+미평가입니다. 이를 source/data failure로 해석하지 않습니다. Attempt 2는 exact
+object·hash·storage·schema를 바꾸지 않고 persistent stage log와 exit-status trap만
+추가합니다.
 
 ## 조건부 architecture와 평가
 
