@@ -1,7 +1,8 @@
 # Response-fidelity confirmation v3 evaluator red-team
 
 Status: **inactive pre-evidence design; v2 preserved and superseded with
-eligibility metadata, field and prediction access all zero; real P0 0/11; no
+eligibility metadata, field and prediction access all zero; current real P0
+0/12; no
 model, compute, result or claim**  
 Decision date: 2026-08-13 KST
 

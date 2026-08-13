@@ -14,7 +14,7 @@
 > response endpoint → field-error-matched aneurysm failure → same-backbone
 > identity-at-anchor mechanism → superiority to direct and power-law controls →
 > exactly 100 new-family confirmation. Fresh score is 32.5/40 with novelty at
-> the 2.5 floor. Every downstream node remains inactive at real P0 0/11.
+> the 2.5 floor. Every downstream node remains inactive at current real P0 0/12.
 > [Exact edge audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md)
 
 > **Schema 11.8 confirmation-v3 edge · 2026-08-13:** The final conditional edge
@@ -24,13 +24,14 @@
 > analytic path, and a field-accuracy difference cannot masquerade as a
 > response-specific mechanism.
 
-> **Schema 11.8 confirmation-v2 edge · 2026-08-13:** The 427-family Aneumo
+> **Historical schema 11.8 confirmation-v2 edge · 2026-08-13:** The 427-family Aneumo
 > source node already owns flow-diversity evaluation; Hemo-MPO owns geometry+
 > boundary-condition full-field operator learning. The remaining edge is a
 > matched response-fidelity mechanism. Before 100-family field access, it now
 > passes a two-endpoint precision and complete-workload gate. Confirmation then
 > requires both mean improvement and a majority-family Wilson lower bound.
-> All nodes remain inactive because real P0 is 0/11.
+> This v2 node was frozen while real P0 was 0/11 and was later superseded by
+> confirmation v3 without evidence access.
 
 > **Schema 11.8 confirmation edge · 2026-08-12:** RF-C3 now terminates at a
 > prospective exactly-100-new-family node. All historical 32 compact families
@@ -48,9 +49,10 @@
 > therefore holds one LaB-GATr backbone fixed and changes direct output to an
 > identity-preserving anchor residual. The edge is directional: residual-head
 > improvement may pass; negative or mixed evidence terminates it. This is an
-> inactive template, not a selected architecture. Real P0 is 0/11 and the
-> exact private cache path is unresolved, so P1/model/server/PBS/GPU/outer
-> test/result/claim remain 0.
+> inactive template, not a selected architecture. Current real P0 is 0/12;
+> the private cache identity is resolved, but activation-manifest and current
+> container-readability evidence are absent. P1/model/server/PBS/GPU/outer
+> test/result/claim therefore remain 0.
 
 > **Schema 11.7 map · 2026-08-12:** The AneuX conditional node is closed before
 > execution: 32.0/40 total but 2.0/5 residual novelty. The 11.6 33.0/40 node and

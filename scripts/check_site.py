@@ -101,6 +101,35 @@ def check_site(root: Path) -> list[str]:
         errors.append(
             f"site/learn.html: missing guide panels {sorted(missing_guide_panels)}"
         )
+
+    research_data_path = root / "site" / "assets" / "research-data.js"
+    research_data = research_data_path.read_text(encoding="utf-8")
+    required_current_markers = {
+        "current method-free P0 v3": "current P0 version",
+        "real P0 remains non-executable at 0/12": "current P0 result count",
+        "The current inactive v3 preserves unexecuted v1 and v2": (
+            "current confirmation version"
+        ),
+        "Non-authoritative v3 · v1/v2 metadata/field/prediction 0": (
+            "current confirmation evidence state"
+        ),
+    }
+    for marker, label in required_current_markers.items():
+        if marker not in research_data:
+            errors.append(
+                f"site/assets/research-data.js: missing {label} marker {marker!r}"
+            )
+    stale_current_markers = {
+        "The current inactive v2 preserves unexecuted v1": (
+            "confirmation v2 presented as current"
+        ),
+        "Non-authoritative v2 · v1 metadata/field/prediction 0": (
+            "confirmation v2 state presented as current"
+        ),
+    }
+    for marker, label in stale_current_markers.items():
+        if marker in research_data:
+            errors.append(f"site/assets/research-data.js: stale {label}")
     return errors
 
 

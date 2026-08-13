@@ -22,7 +22,7 @@
 > interpretation. Each Introduction paragraph, contribution, method block,
 > table and figure now has one deletion-linked evidence role in the
 > [fresh audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md).
-> Manuscript prose remains frozen at real P0 0/11.
+> Manuscript prose remains frozen at current real P0 0/12.
 
 > **2026-08-13 confirmation v3:** Preserve unexecuted v2. The current inactive
 > contract requires bilateral ±2% field equivalence and ≥10% response-error
@@ -33,13 +33,13 @@
 > type-7 quantile. This removes a paper-fatal loophole in which a complex model
 > could lose to scaling or win merely through lower field error.
 
-> **2026-08-13 confirmation v2:** Historical 32-family compact holding은
+> **Historical 2026-08-13 confirmation v2:** Historical 32-family compact holding은
 > 그대로 개발 자산이며, exactly 100 new family는 다른 dataset 탐색이 아니라
 > 427-base-geometry Aneumo release 내부 확장이다. V1은 evidence access 전에
-> 보존·supersede되었다. Current v2는 final-candidate development contrast의
+> 보존·supersede되었다. 이 historical v2는 final-candidate development contrast의
 > prefield precision gate, complete 2-model×5-seed workload ≤40 GPU-hour,
 > case-log→family geometric estimator와 두 endpoint 각각 최소 59/100 family
-> win을 추가한다. Aneumo flow diversity와 Hemo-MPO boundary-conditioned
+> win을 추가했다. Aneumo flow diversity와 Hemo-MPO boundary-conditioned
 > operator는 direct prior이므로 contribution에서 제외한다.
 
 > **2026-08-13 official format recheck:** Official author instructions remain
@@ -67,7 +67,7 @@
 > residual-benefit direction만 남긴다. 반대 방향은 method story를 뒤집지 않고
 > identity를 닫는다. P1 통과 뒤 허용 가능한 개발도 별도 등록된 validation-only
 > 최대 2 round/80 GPU-hour이며, fresh seed 또는 disjoint split 재진입이 필요하다.
-> 현재 real P0 0/11, manuscript claim 0이다.
+> 현재 real P0 0/12, manuscript claim 0이다.
 
 > **Historical 2026-08-12 P1 v2 paper contract:** Technical paper에는 checkpoint search
 > mechanics를 장황하게 싣지 않는다. 다만 결과가 활성화되면 Methods에 세 문장으로
@@ -86,7 +86,7 @@
 > 역사적 v1은 20 train family cyclic cross-fit, response-blind 3-level iso-error matching,
 > exact family sign-flip 검정을 담았으나 cross-fit dependence 때문에 v2에서
 > supersede됐다. 이 운영 이력을 본문에 나열하지 않고, 논문에는 RF-C1을 판정한
-> field-equivalence와 response-effect 결과만 넣는다. Real P0 0/11이므로 원고의
+> field-equivalence와 response-effect 결과만 넣는다. Current real P0 0/12이므로 원고의
 > title/abstract/method/result/figure는 계속 동결한다.
 
 > **Schema 11.8 P0-v2 writing boundary:** P0 v1 is unexecuted superseded

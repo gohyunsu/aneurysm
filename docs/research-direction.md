@@ -17,7 +17,7 @@
 > NeurIPS interventional consistency와 2026 aneurysm dilation surrogate 때문에
 > general response story도 contribution에서 제외한다. Current identity는 matched
 > application failure→same-backbone anchor identity→learned+analytic control→100
-> new-family confirmation뿐이다. 34.0/40은 역사이며 real P0 0/11, selected
+> new-family confirmation뿐이다. 34.0/40은 역사이며 current real P0 0/12, selected
 > method/architecture/model/GPU/claim은 0이다. [Fresh audit](aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md)
 
 > **Schema 11.8 confirmation-v3 falsifiability:** Fancy architecture는 analytic
@@ -52,7 +52,7 @@
 > `log(direct/residual)` 방향에서 두 co-primary 모두 ≥10% gap, positive 95%
 > stability lower bound와 4/5 positive seed를 만족해야 한다. 반대 방향은 논리를
 > 뒤집지 않고 종료한다. P1 통과 후에도 별도 등록된 validation-only 최대 2 round/
-> 80 GPU-hour bounded development만 허용한다. 현재 real P0 0/11이며 P1/model/GPU/
+> 80 GPU-hour bounded development만 허용한다. 현재 real P0 0/12이며 P1/model/GPU/
 > claim은 0이다. [상세 재감사](response-fidelity-direct-prior-reappraisal-2026-08-12.md)
 
 > **Schema 11.8 P1 v2 red-team:** P1 v1은 실행되지 않았지만 distinct-checkpoint,
@@ -76,9 +76,9 @@
 > 폐기됐다. V1은 설계 변화 계보일 뿐 현재 분석 계약이 아니다.
 > MLP/DeepONet pair는 secondary이며 primary를 구제하지 못한다. Historical
 > validation/test와 향후 confirmation family는
-> 읽지 않는다. Real P0 0/11인 현재 P1/model/GPU/claim은 계속 0이다.
+> 읽지 않는다. Current real P0 0/12인 상태에서 P1/model/GPU/claim은 계속 0이다.
 
-> **Current schema 11.8:** 유일한 conditional source lead는 Aneumo의
+> **Current direction under schema 11.9:** 유일한 conditional source lead는 Aneumo의
 > **response-faithful multi-flow haemodynamic surrogation**이다. 하나의 same-case
 > nominal field 이후의 CFD sensitivity sweep을 빠르게 근사하되, field MSE뿐
 > 아니라 response magnitude/direction/discrete tangent/curvature/case ranking을

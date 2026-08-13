@@ -11,14 +11,15 @@
 > training/validation flow-condition diversity, and Hemo-MPO maps geometry plus
 > physiological boundary conditions to full hemodynamic fields. Neither
 > multi-flow conditioning nor a boundary-conditioned operator is a contribution.
-> Current confirmation v2 additionally requires prefield viability, exact
-> family estimators and majority-family improvement. The residual claim remains
+> Historical confirmation v2 added prefield viability, exact family estimators
+> and majority-family improvement; current inactive v3 preserves these and adds
+> the dual-comparator safeguards above. The residual claim remains
 > only the field-error-matched response failure and same-backbone anchor-identity
 > mechanism described below.
 
-Status: **conditional application question retained; P1 v2 superseded before
-execution by an inactive v3 design; model, GPU, outer test and paper claim remain
-zero**  
+Status: **conditional application question retained; historical P1 v2 and v3
+remain inactive; a fresh P1 is required after any real P0-v3 pass; model, GPU,
+outer test and paper claim remain zero**
 Decision date: 2026-08-12 KST
 
 ## Decision
@@ -144,7 +145,8 @@ remain inactive.
 
 ## Current execution boundary
 
-Real P0 remains 0/11 and the exact private Aneumo cache path is unresolved.
+Current real P0 remains 0/12. The private cache identity is resolved, but no
+activation manifest or current container-readability verdict exists.
 This reappraisal queried no scientific server, transferred no data, submitted
 no PBS/GPU job and read no validation/test field. Do not retry `introai9` before
 a verified external service or administrator change. Never access, query,

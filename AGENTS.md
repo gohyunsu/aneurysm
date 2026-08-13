@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 current-facing consistency boundary:** Public current-state
+> summaries must say P0 v3 `0/12`, cache identity resolved, private activation
+> manifest absent and current container readability unverified. The current
+> independent-confirmation gate is inactive v3 with direct and power-law
+> controls; v1/v2 remain historical. Do not bulk-relabel dated lineage rows,
+> historical configs or failed runs. This wording synchronization changes no
+> protocol bytes or execution authority and permits no introai9 retry. Never
+> access `junjinyong`.
+
 > **2026-08-13 P0-v3 activation implementation boundary:** Preserve the
 > immutable v3 config/evaluator hashes `1c7cc85d…fcc81` / `51a7db66…1d25`.
 > The historical response-fidelity PBS wrapper is v2 provenance and must never

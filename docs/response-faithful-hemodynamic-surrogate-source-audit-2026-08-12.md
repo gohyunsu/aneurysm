@@ -1,16 +1,22 @@
 # Response-faithful multi-flow haemodynamic surrogation
 
+> **Current superseding boundary · 2026-08-13:** This source audit remains the
+> historical origin of the conditional direction. Current evidence is P0 v3
+> at 0/12, not the v2 state described below. The private cache identity is
+> resolved, but no activation manifest or current container-readability verdict
+> exists; method, architecture, GPU, result and paper claim remain zero.
+
 Status: **one conditional source lead; method-free P0 registered but not
 executable; primary method, architecture, GPU, outer test, result and paper
 claim remain unselected**  
 Target venue: **IEEE ISBI 2027**  
 Decision date: 2026-08-12 KST
 
-> **2026-08-13 confirmation-v2 correction:** Aneumo already studies flow-count
+> **Historical 2026-08-13 confirmation-v2 correction:** Aneumo already studies flow-count
 > diversity and Hemo-MPO already maps geometry and boundary conditions to full
 > fields. Current novelty therefore excludes multi-flow/operator claims. The
-> preserved pre-evidence confirmation v1 is superseded by v2, which keeps 100
-> new families but adds prefield precision/complete-workload viability, an exact
+> preserved pre-evidence confirmation v1 was superseded by v2, which kept 100
+> new families and added prefield precision/complete-workload viability, an exact
 > case-log→family estimator and a ≥59/100 family-win safeguard for both response
 > endpoints. See the [v2 red-team](response-fidelity-confirmation-red-team-2026-08-13.md).
 

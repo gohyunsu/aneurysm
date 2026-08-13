@@ -18,7 +18,7 @@
 > residual-head error in both median co-primary endpoints can support later
 > development. Negative/mixed evidence closes the direction; descriptive
 > MLP/DeepONet/MeshGraphNet cannot rescue it. No model code, dependency install,
-> training or GPU run is authorized while real P0 is 0/11.
+> training or GPU run is authorized while current real P0 is 0/12.
 
 > **Schema 11.8 [P1 v2](../configs/aneumo_response_fidelity_p1_template_v2.json)
 > baseline boundary:** Primary pair는 여전히 direct
@@ -36,8 +36,10 @@
 > 맞춘다. Linear/power-law scaling은 deterministic control이고, 정보 집합이 다른
 > historical V1e는 primary pair에서 제외한다. Primary는 direct field-prediction
 > MeshGraphNet 대 anchor-residual DeltaPhi 한 쌍뿐이다. MLP/DeepONet pair는 범위
-> 확인용 secondary이며 primary failure를 구제하지 못한다. P0가 실제 11/11 pass한 뒤 별도
-> registered config를 만들기 전까지 이 model code·GPU run은 승인되지 않는다.
+> 확인용 secondary이며 primary failure를 구제하지 못한다. This historical v1
+> template required its contemporary 11/11 P0; current authorization instead
+> requires P0 v3 to pass 12/12 followed by a fresh registered P1. Until then
+> this model code·GPU run은 승인되지 않는다.
 
 > **Schema 11.8 model boundary:** selected architecture는 없다. Gate가 열릴 때만
 > 다음 최소 hypothesis를 비교한다:

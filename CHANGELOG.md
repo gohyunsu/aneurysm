@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-13 · current-facing evidence labels are synchronized
+
+- Audited current-facing site and research-document summaries against schema
+  11.9 without altering historical v1/v2 failure records.
+- Corrected the live confirmation gate from v2 to inactive v3, including its
+  mandatory direct-plus-power-law comparisons, bilateral field equivalence,
+  four response contrasts and complete-row inference boundary.
+- Replaced stale current `0/11` and private-path-unresolved wording with real
+  P0 v3 `0/12` and the narrower truth: cache identity is resolved, while the
+  private activation manifest and current container-readability verdict remain
+  absent. Added a site semantic check that rejects v2-as-current confirmation
+  markers. No scientific protocol bytes, server, cache field, PBS/GPU job,
+  result, model or claim changed.
+
 ## 2026-08-13 · P0-v3 gains a separate fail-closed activation layer
 
 - Found that the preserved historical PBS wrapper still invoked P0 v2 and

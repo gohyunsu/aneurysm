@@ -3,11 +3,14 @@
 > **Superseded before evidence on 2026-08-13:** This v1 design remains immutable
 > history. No confirmation metadata, field or prediction was read. Current
 > inactive [v2](../configs/aneumo_response_fidelity_confirmation_template_v2.json)
-> adds a prefield precision/complete-workload viability gate, exact case-log to
-> family geometric estimators and a majority-family Wilson safeguard. See the
-> [v2 red-team](response-fidelity-confirmation-red-team-2026-08-13.md).
+> added a prefield precision/complete-workload viability gate, exact case-log to
+> family geometric estimators and a majority-family Wilson safeguard; current
+> inactive [v3](../configs/aneumo_response_fidelity_confirmation_template_v3.json)
+> preserves those constraints and adds mandatory direct-plus-power-law
+> comparisons. Current real P0 is 0/12. See the
+> [v3 red-team](response-fidelity-confirmation-evaluator-red-team-2026-08-13.md).
 
-Status: **inactive, non-authoritative template; blocked on real P0, P1 v3,
+Status: **inactive, non-authoritative template; blocked on real P0, fresh P1,
 bounded development and fresh re-entry; no data, model, compute or claim**  
 Decision date: 2026-08-12 KST
 

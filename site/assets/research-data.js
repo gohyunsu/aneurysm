@@ -895,8 +895,8 @@ window.AURORA_DATA = Object.freeze({
     {
       id: "C-RF",
       title: "Can the final response claim survive one independent 100-family evaluation?",
-      copy: "The current inactive v2 preserves unexecuted v1 and excludes all historical 32 compact families. Before any outer field, final-candidate development contrasts must support the fixed 100-family precision plan and the full two-model/five-seed workload must project below 40 GPU-hours. Exactly 100 new base families are then selected by field-blind hash. Case log-error ratios are averaged through seed to one row per family; both response endpoints need bootstrap superiority, geometric mean ratio at least 1.10, four of five positive seeds and at least 59 of 100 family wins. Missing families are not replaced. The figure shows candidate worst, typical and best cases with matched coordinates and reference-derived colours.",
-      state: "Non-authoritative v2 · v1 metadata/field/prediction 0 · precision/compute viability 0 · qualified new family 0/100 · manifest/field/prediction/PBS/GPU/result/claim 0",
+      copy: "The current inactive v3 preserves unexecuted v1 and v2 and excludes all historical 32 compact families. Before any outer field, final-candidate development contrasts must support the fixed 100-family precision plan and complete workload. The candidate must remain bilaterally field-equivalent within ±2% to both the same-backbone direct head and train-fitted power law, then reduce paired-response and tangent error by at least 10% against both controls. All four response contrasts require a bootstrap lower bound above zero, at least four of five positive seeds and at least 59 of 100 family wins. Verdicts come only from complete family×case×seed×model×metric rows under one shared family bootstrap; missing families and comparator demotion cannot rescue failure. The figure ranks families by the weaker comparator and uses matched coordinates and reference-derived colours.",
+      state: "Non-authoritative v3 · v1/v2 metadata/field/prediction 0 · precision/compute viability 0 · qualified new family 0/100 · manifest/field/prediction/PBS/GPU/result/claim 0",
       blocking: true
     },
     {
@@ -1399,6 +1399,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "site",
+      title: "Current evidence labels are synchronized without rewriting history",
+      copy: "A current-facing consistency audit corrected the live confirmation gate from v2 to inactive v3 and aligned active summaries with real P0 v3 0/12. It also distinguishes a resolved private cache identity from the still-absent activation manifest and current container-readability verdict. Historical v1/v2 rows and failed-run states remain unchanged. A site semantic check now rejects either stale v2-as-current marker. No protocol bytes, server/cache field access, PBS/GPU job, model, result or claim changed.",
+      files: ["docs/research-map.md", "docs/research-direction.md", "docs/isbi-2027-plan.md", "docs/model-spec.md", "docs/response-fidelity-direct-prior-reappraisal-2026-08-12.md", "docs/response-faithful-hemodynamic-surrogate-source-audit-2026-08-12.md", "docs/response-fidelity-confirmation-design-2026-08-12.md", "docs/response-fidelity-confirmation-evaluator-red-team-2026-08-13.md", "docs/response-fidelity-confirmation-red-team-2026-08-13.md", "scripts/check_site.py", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "protocol",
