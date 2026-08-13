@@ -1421,6 +1421,20 @@ window.AURORA_DATA = Object.freeze({
     {
       date: "2026.08.13",
       category: "site",
+      title: "The public entry point is a current overview, not a second changelog",
+      copy: "A bounded current-facing audit found that README had grown to 2,598 lines by repeating dated provenance already preserved in CHANGELOG and the filterable History window. It is now a 217-line onboarding path that separates the current 32.5/40 application-only lead, real P0 v3 0/12, dataset scope, claim boundaries, evidence ladder and execution rules. Historical 0/11 states remain unchanged in dated History records. The site checker now caps README at 260 lines, requires current P0/no-architecture/application-only markers and rejects private paths, stale current P0 wording and dated changelog sections.",
+      files: ["README.md", "scripts/check_site.py", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.13",
+      category: "research",
+      title: "PaNO, NOEM and cardiovascular BC tuning remove the broad method story",
+      copy: "PaNO already shows that global field accuracy can disagree with a downstream readout and proposes readout alignment; NOEM formulates generic hard-constraint neural-operator output transforms; and a differentiable cardiovascular ROM uses one high-fidelity CFD solve for repeated BC tuning. AURORA therefore retains 32.5/40 without increase only for an Aneumo-specific bilateral field-error-matched audit, learned-direct and train-fitted power-law controls, and exactly 100 new families excluding historical 32. RF-C2 is a controlled application solution, not algorithmic novelty. Real P0 v3 remains 0/12 and no method name, server action, PBS/GPU result or claim opened.",
+      files: ["configs/aneumo_response_fidelity_latest_collision_recheck_v1.json", "tests/test_aneumo_response_fidelity_latest_collision_recheck_v1.py", "docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md", "README.md", "docs/research-direction.md", "docs/isbi-2027-plan.md", "docs/experiment-protocol.md", "docs/literature-lineage.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
+    {
+      date: "2026.08.13",
+      category: "site",
       title: "ISBI rules are exact; the linked template is explicitly legacy",
       copy: "Official home, author instructions and CFP confirm the 26 October 2026 deadline, single-blind review, four technical pages and mandatory ethics/funding/COI disclosures. Their concurrent-review wording differs, so AURORA uses the stricter conference/workshop/journal union. The author-page ZIP internally says ISBI 2021 and is not called a 2027-specific template. The private plan's active spconf commands match the linked layout, but it uses unsrt and remains an internal pre-evidence shell. Exact source 67ccdd9… passed Quality 31682965397 with 606/606 tests and 114 protocol invariants; Pages 31682964734 succeeded. Real P0 v3 stays 0/12; no scientific server, PBS/GPU, result or claim opened.",
       files: ["configs/isbi_2027_author_contract_v2.json", "tests/test_isbi_2027_author_contract_v2.py", "docs/isbi-2027-author-contract-recheck-2026-08-13.md", "docs/isbi-2027-plan.md", "site/index.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]

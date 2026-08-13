@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-13 · the public entry point stops duplicating the history ledger
+
+- Replaced the 2,598-line accumulated README with a 217-line current overview:
+  task, data scope, claim boundary, evidence ladder, paper role and execution
+  rules now appear once in a novice-readable order.
+- Preserved every dated failure and superseded contract in this changelog, git
+  history and the site's filterable History window rather than silently
+  rewriting historical 0/11 states.
+- Added semantic checks that cap the current README at 260 lines, require real
+  P0 v3 0/12, no selected architecture and RF-C2's application-only role, and
+  reject private server paths, stale current P0 wording or embedded dated
+  changelog sections.
+- Rechecked `tmp/kakaotalk` and `tmp/tistory`: modification dates remain
+  2026-08-02 and SHA-256 remain `ad99ccdc…ab175d` / `6d50cb4a…c2b38`.
+  No fresh team evidence, scientific-server action, experiment or claim opens.
+
 ## 2026-08-13 · latest-collision public evidence is green
 
 - Froze scientific source `4f58f9f90cbad68b96058c1c84cb6817730ba69a` after

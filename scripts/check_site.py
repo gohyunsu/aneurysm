@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -43,6 +44,44 @@ def resolve_local_target(document: Path, reference: str) -> tuple[Path, str]:
 
 def check_site(root: Path) -> list[str]:
     errors: list[str] = []
+    readme_path = root / "README.md"
+    readme = readme_path.read_text(encoding="utf-8")
+    readme_lines = readme.splitlines()
+    if len(readme_lines) > 260:
+        errors.append(
+            "README.md: current-facing overview exceeds 260 lines; move dated "
+            "provenance to CHANGELOG.md or the filterable site history"
+        )
+    required_readme_markers = {
+        "Real P0 v3는 0/12": "current P0 state",
+        "RF-C2 · controlled application solution": "application-only RF-C2 role",
+        "GNN을 포함한 어떤 모델도 current method가 아님": (
+            "no-selected-architecture boundary"
+        ),
+        "과거 방향, 실패, superseded protocol": "history routing boundary",
+    }
+    for marker, label in required_readme_markers.items():
+        if marker not in readme:
+            errors.append(f"README.md: missing {label} marker {marker!r}")
+    forbidden_readme_markers = {
+        "/home/introai9/": "private server path",
+        "Real P0 remains 0/11": "stale P0 state presented in current overview",
+        "Real P0 is still 0/11": "stale P0 state presented in current overview",
+        "## 2026-": "dated changelog section duplicated in current overview",
+    }
+    for marker, label in forbidden_readme_markers.items():
+        if marker in readme:
+            errors.append(f"README.md: contains {label}")
+    for reference in re.findall(r"\[[^\]]+\]\(([^)]+)\)", readme):
+        split = urlsplit(reference)
+        if split.scheme in {"http", "https", "mailto", "tel", "data"}:
+            continue
+        target = (root / unquote(split.path)).resolve()
+        if target.is_dir():
+            target = target / "index.html"
+        if not target.exists():
+            errors.append(f"README.md: missing local link target {reference}")
+
     documents = sorted({root / "index.html", *root.glob("site/**/*.html")})
     parsed = {document.resolve(): parse_document(document) for document in documents}
 

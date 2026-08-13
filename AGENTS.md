@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 current-facing documentation boundary:** Keep `README.md` as a
+> compact current overview, not a second changelog. It must remain at most 260
+> lines, state real P0 v3 0/12, no selected architecture and RF-C2 as an
+> application solution, and expose no private path. Route dated evidence to
+> `CHANGELOG.md` and the site's filterable History window. Historical 0/11
+> records remain exact history and are not rewritten. Team source remains
+> unchanged at 2026-08-02 with SHA-256 `ad99ccdc…ab175d` /
+> `6d50cb4a…c2b38`; it supplies no fresh architecture or execution evidence.
+> This documentation consolidation changes no P0 bytes, scientific result or
+> execution authority.
+
 > **2026-08-13 latest-collision public evidence synchronization:** Exact
 > scientific source `4f58f9f90cbad68b96058c1c84cb6817730ba69a` passed Quality
 > `31686226180` and Pages `31686225742`. Dependency-complete CI recorded
