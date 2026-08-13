@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-13 · latest collisions restrict the lead to application evidence
+
+- Added PaNO as a direct collision for the broad field-error-versus-readout
+  story, while preserving its June 2026 arXiv status rather than presenting it
+  as peer-reviewed evidence.
+- Added NOEM as a direct prior for hard-constraint neural-operator output
+  transformations and a 2026 cardiovascular differentiable-ROM study as a
+  direct prior for one-CFD repeated boundary-condition tuning.
+- Retained 32.5/40 without increase only for the exact Aneumo-specific matched
+  evaluation, mandatory learned-direct and analytic controls, and prospective
+  100-new-family confirmation. RF-C2 is now explicitly an application
+  adaptation rather than algorithmic novelty; no method name is active.
+- Added a machine-readable collision contract, fail-closed tests, protocol
+  invariant and detailed acceptance falsifiers. Corrected the current-facing
+  residual-novelty audit from stale P0 0/11 to v3 0/12.
+- No scientific server/scheduler query, cache-field read, transfer, PBS/GPU
+  submission, result, model or paper claim was created. This is not an
+  `introai9` recovery signal, and `junjinyong` remains prohibited.
+
 ## 2026-08-13 · ISBI contract is verified without overstating the legacy template
 
 - Rechecked the official home page, author instructions and CFP. The archival

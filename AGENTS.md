@@ -1,5 +1,24 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 latest response-fidelity collision recheck:** Preserve
+> `configs/aneumo_response_fidelity_latest_collision_recheck_v1.json` and
+> `docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md` as the
+> current claim boundary. PaNO (`arXiv:2606.03038`) owns generic global-field
+> versus downstream-readout mismatch; NOEM
+> (`10.1038/s43588-026-00974-2`) owns generic hard-constraint neural-operator
+> output transformations; differentiable cardiovascular BC tuning
+> (`10.1007/s10439-026-04269-5`) owns one-high-fidelity-CFD repeated-BC tuning.
+> Do not claim any of those, or GNN/equivariance/residual/response loss, as
+> novelty. Retain 32.5/40 with novelty exactly 2.5/5 only for the Aneumo-
+> specific bilateral field-error-matched audit, learned-direct and analytic
+> controls, and exactly-100-new-family evidence. RF-C2 is an application
+> solution, not a general method contribution; no method name is active.
+> Real P0 v3 stays 0/12 and active method/architecture/paper identity/result/
+> claim remain 0. This public-source audit is not a verified `introai9`
+> operational change: do not retry, register a manifest, or open a local
+> scientific repair loop. Never access, query, transfer to, submit on or
+> monitor `junjinyong`.
+
 > **2026-08-13 ISBI 2027 author-contract correction:** Official home page
 > `1019` (modified `2026-07-29T11:16:41`), author page `1026` (modified
 > `2026-07-22T10:39:56`) and CFP SHA-256 `0aed86f4…38a14` confirm the

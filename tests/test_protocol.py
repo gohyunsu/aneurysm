@@ -27,6 +27,9 @@ class ProtocolTests(unittest.TestCase):
             "aneumo_response_fidelity_p0_anchor_tangent_red_team"
         ]
         residual_audit = problem["aneumo_response_fidelity_residual_novelty_audit"]
+        latest_collision = problem[
+            "aneumo_response_fidelity_latest_collision_recheck"
+        ]
         ledger = problem["dataset_asset_state_ledger"]
 
         self.assertEqual(self.protocol["schema_version"], "11.9")
@@ -261,6 +264,13 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(residual_audit["candidate_failure_observed"])
         self.assertEqual(residual_audit["real_p0_required_check_count"], 12)
         self.assertEqual(residual_audit["real_p0_observed_check_count"], 0)
+        self.assertEqual(latest_collision["score"], 32.5)
+        self.assertEqual(latest_collision["residual_novelty"], 2.5)
+        self.assertFalse(latest_collision["method_novelty_claim_allowed"])
+        self.assertFalse(latest_collision["generic_field_to_readout_claim_allowed"])
+        self.assertFalse(latest_collision["hard_constraint_anchor_transform_claim_allowed"])
+        self.assertFalse(latest_collision["one_reference_cfd_sweep_claim_allowed"])
+        self.assertEqual(latest_collision["real_p0_observed_check_count"], 0)
         self.assertEqual(
             ledger["registered_scientific_p0_pending_execution_envelope_count"], 1
         )
@@ -277,6 +287,13 @@ class ProtocolTests(unittest.TestCase):
             "aneumo_response_fidelity_residual_novelty_audit"
         ]["general_response_preserving_surrogate_claim_allowed"] = True
         with self.assertRaisesRegex(ProtocolError, "residual-novelty"):
+            validate_protocol(candidate)
+
+        candidate = copy.deepcopy(self.protocol)
+        candidate["problem_selection"][
+            "aneumo_response_fidelity_latest_collision_recheck"
+        ]["method_novelty_claim_allowed"] = True
+        with self.assertRaisesRegex(ProtocolError, "latest collision"):
             validate_protocol(candidate)
 
         candidate = copy.deepcopy(self.protocol)

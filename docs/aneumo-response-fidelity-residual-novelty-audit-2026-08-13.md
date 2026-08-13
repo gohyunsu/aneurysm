@@ -5,6 +5,16 @@ architecture, experiment or paper claim**
 Target venue: **IEEE ISBI 2027**  
 Decision date: **2026-08-13 KST**
 
+> **Later same-day collision recheck:** PaNO now blocks the generic
+> field-to-readout mismatch story, NOEM blocks hard-constraint output
+> transformation as method novelty, and differentiable cardiovascular
+> boundary-condition calibration blocks “one reference CFD, many BC queries”
+> as an application novelty by itself. The 32.5/40 score is retained without
+> increase only for the exact aneurysm-specific matched evaluation,
+> learned-plus-analytic comparator burden and independent-family evidence.
+> RF-C2 is an application solution, not a new general algorithm. See the
+> [latest collision recheck](aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md).
+
 ## 1. Decision in one sentence
 
 The best defensible use of AURORA's acquired holdings remains an Aneumo
@@ -51,6 +61,9 @@ intersection.
 | [Hemo-MPO](https://doi.org/10.1016/j.aej.2026.05.044) and [AB-GATr](https://arxiv.org/abs/2605.18816) | Aneumo field surrogation with equivariant mesh/operator components and anatomy-stratified evaluation | A complete executable matched reproduction bundle, or the exact response-fidelity estimand | SE(3), mesh encoders, physics loss and equivariance cannot be sold as novelty. |
 | [Aneurysm haemodynamics under vessel dilation](https://doi.org/10.1016/j.cjph.2026.04.015) | POD–Transformer/LSTM surrogation of WSS, OSI and pressure under normal versus dilated vessels in six MCA cases | Multi-inflow response curves, field-error-matched failure, family-disjoint large-scale confirmation or one-anchor identity | “Predicting aneurysm haemodynamic response to a perturbation” is also too broad. |
 | [Physics-constrained aneurysm GNN](https://doi.org/10.1038/s41746-026-02404-z) | Transient full-field GNN prediction, inflow information and unseen-inflow evaluation | The matched response-fidelity failure/repair test | GNN, inflow tokens and physics constraints are baselines. |
+| [PaNO](https://arxiv.org/abs/2606.03038) | A field→mediator→readout mismatch and readout-aligned correction in photonics | An aneurysm-specific spatial-response estimand, matched analytic control or family-level confirmation | “Accurate fields can mislead downstream use” is not AURORA novelty. The preprint is a collision source, not peer-reviewed clinical evidence. |
+| [NOEM](https://doi.org/10.1038/s43588-026-00974-2) | Generic hard-constraint neural-operator output transformations | The proposed application experiment | Exact zero-at-anchor construction is a mechanism control, not method novelty. |
+| [Differentiable cardiovascular BC tuning](https://doi.org/10.1007/s10439-026-04269-5) | One high-fidelity 3D CFD calibration followed by efficient cardiovascular boundary-condition tuning | Aneurysm spatial-field response fidelity | The one-anchor sensitivity-sweep scenario is not by itself a contribution. |
 
 The exact residual gap is therefore:
 
@@ -118,7 +131,8 @@ contributions.
 ## 6. Evidence sequence and stop rules
 
 1. **P0—endpoint identifiability:** train-only, method-free stability of gain,
-   direction and tangent on the eight-flow grid. Real status: 0/11.
+   direction and tangent on the eight-flow grid. Real status: 0/12 under the
+   current v3 anchor-tangent contract.
 2. **P1—matched failure:** same-backbone, response-blind field-error matching.
    If no response gap appears, delete the problem identity.
 3. **Bounded development:** validation-only, at most two rounds and 80

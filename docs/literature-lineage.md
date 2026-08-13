@@ -1,5 +1,19 @@
 # 선행연구 계보와 research gap
 
+> **2026-08-13 latest field/readout and constraint collision:**
+> [PaNO](https://arxiv.org/abs/2606.03038)는 photonics에서 global field error와
+> downstream port readout가 갈릴 수 있다는 Field/Mediator/Readout 구조와
+> readout-aligned operator를 제시한다. 이는 preprint이지만 broad problem claim을
+> 막는 직접 collision이다. [NOEM](https://doi.org/10.1038/s43588-026-00974-2)은
+> neural-operator output transform으로 constraint를 정확히 만족시키는 일반 구성을,
+> [cardiovascular BC tuning](https://doi.org/10.1007/s10439-026-04269-5)은 한 번의
+> high-fidelity 3D CFD로 differentiable ROM을 보정해 반복 BC query를 수행하는
+> application을 점유한다. 따라서 field→readout mismatch, exact anchor transform,
+> one-reference-CFD sweep는 novelty가 아니다. Steady lead는 Aneumo-specific
+> bilateral field-error matching, learned direct+analytic power-law 대조와 exactly
+> 100 new-family confirmation의 결합에 한해 32.5/40을 유지하며 RF-C2는 method가
+> 아닌 application adaptation이다. [Exact recheck](aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md)
+
 > **2026-08-13 vector-structure collision and target update:** The full public
 > directory audit verifies 966 complete-cycle cases across all 40 families,
 > and a selective probe verifies three-component WSS plus a phase-static mesh.

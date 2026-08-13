@@ -1,5 +1,15 @@
 # AURORA v2 사전 실험 프로토콜
 
+> **2026-08-13 latest-collision experimental consequence:** No architecture
+> is opened by the new literature recheck. PaNO, NOEM and differentiable
+> cardiovascular BC tuning make generic readout alignment, exact anchor
+> transforms and one-CFD sweeps controls rather than novelty. A future P1 must
+> therefore hold the backbone/information/compute fixed, enforce bilateral
+> field-error matching and compare the candidate against both learned direct
+> and train-fitted power-law response. Without all of those, no ISBI claim is
+> identifiable. Current real P0 v3 remains 0/12 and no server/PBS/GPU action is
+> authorized. [Exact falsifiers](aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md)
+
 > **2026-08-13 transient re-entry is not yet an experiment:** Release-wide
 > directory evidence now verifies 966 complete-cycle cases across all 40 base
 > families; a four-file selective probe verifies a local vector/phase-static
@@ -57,7 +67,7 @@
 > direct control 대비 field upper bound ≤`log(1.02)`와 두 response lower bound
 > >0, point ratio ≥1.10, 4/5 positive seed를 모두 요구한다. Candidate worst,
 > median, best case를 같은 좌표/색상으로 제시한다. Template는 비실행이며 P0
-> 0/11, P1/model/GPU/outer test/claim 0이다.
+> 0/12 under current v3, P1/model/GPU/outer test/claim 0이다.
 
 > **Schema 11.8 inactive P1 v3:** SC-FNO, Hemo-MPO and AB-GATr make generic
 > sensitivity learning and Aneumo equivariant/physics architecture novelty
@@ -71,7 +81,7 @@
 > MLP/DeepONet/MeshGraphNet are descriptive and non-rescuing. Any post-P1
 > development needs a separate validation-only registration, at most two
 > rounds and 80 additional GPU hours, then fresh-seed/disjoint-split re-entry.
-> Real P0 remains 0/11, so this is neither P1 registration nor compute authority.
+> Real P0 remains 0/12, so this is neither P1 registration nor compute authority.
 
 > **Schema 11.8 inactive P1 v2:** V1은 실행·prediction·response read 없이
 > 보존하고 [v2](../configs/aneumo_response_fidelity_p1_template_v2.json)로

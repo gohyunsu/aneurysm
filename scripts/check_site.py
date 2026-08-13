@@ -137,6 +137,12 @@ def check_site(root: Path) -> list[str]:
         "uses unsrt": (
             "pre-evidence bibliography-format boundary"
         ),
+        "PaNO occupies generic field-to-readout mismatch": (
+            "latest generic field-to-readout collision boundary"
+        ),
+        "RF-C2 is a controlled application solution, not algorithmic novelty": (
+            "application-only method-claim boundary"
+        ),
     }
     for marker, label in required_current_markers.items():
         if marker not in research_data:

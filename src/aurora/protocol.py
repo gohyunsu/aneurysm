@@ -1823,6 +1823,69 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         )
     checks.append("Aneumo residual-novelty and acquired-asset reuse boundary")
 
+    latest_collision = problem_selection[
+        "aneumo_response_fidelity_latest_collision_recheck"
+    ]
+    _require_keys(
+        latest_collision,
+        [
+            "status", "contract", "audit_document", "decision_date", "score",
+            "residual_novelty", "score_increased", "paper_identity_active",
+            "method_novelty_claim_allowed",
+            "generic_field_to_readout_claim_allowed",
+            "hard_constraint_anchor_transform_claim_allowed",
+            "one_reference_cfd_sweep_claim_allowed",
+            "new_direct_prior_identifiers", "real_p0_required_check_count",
+            "real_p0_observed_check_count", "scientific_server_queried",
+            "pbs_or_gpu_job_submitted",
+            "introai9_retry_allowed_before_verified_external_change",
+            "local_scientific_repair_loop_allowed", "junjinyong_accessed",
+        ],
+        "Aneumo response-fidelity latest-collision recheck",
+    )
+    if (
+        latest_collision["status"]
+        != "conditional_application_evaluation_lead_retained_no_method_novelty_compute_or_claim"
+        or latest_collision["contract"]
+        != "configs/aneumo_response_fidelity_latest_collision_recheck_v1.json"
+        or latest_collision["audit_document"]
+        != "docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md"
+        or latest_collision["decision_date"] != "2026-08-13"
+        or latest_collision["score"] != 32.5
+        or latest_collision["residual_novelty"] != 2.5
+        or latest_collision["new_direct_prior_identifiers"]
+        != [
+            "arxiv:2606.03038",
+            "doi:10.1038/s43588-026-00974-2",
+            "doi:10.1007/s10439-026-04269-5",
+        ]
+        or latest_collision["real_p0_required_check_count"] != 12
+        or latest_collision["real_p0_observed_check_count"] != 0
+        or any(
+            latest_collision[key] is not False
+            for key in (
+                "score_increased", "paper_identity_active",
+                "method_novelty_claim_allowed",
+                "generic_field_to_readout_claim_allowed",
+                "hard_constraint_anchor_transform_claim_allowed",
+                "one_reference_cfd_sweep_claim_allowed",
+                "scientific_server_queried", "pbs_or_gpu_job_submitted",
+                "introai9_retry_allowed_before_verified_external_change",
+                "local_scientific_repair_loop_allowed", "junjinyong_accessed",
+            )
+        )
+    ):
+        raise ProtocolError(
+            "The latest collision recheck must retain only the borderline "
+            "application/evaluation lead and open no general method, compute, "
+            "or paper claim."
+        )
+    collision_contract = Path(__file__).resolve().parents[2] / latest_collision["contract"]
+    collision_document = Path(__file__).resolve().parents[2] / latest_collision["audit_document"]
+    if not collision_contract.is_file() or not collision_document.is_file():
+        raise ProtocolError("The latest response-fidelity collision evidence is missing.")
+    checks.append("Aneumo latest-collision application-only claim boundary")
+
     collision = problem_selection[
         "endovascular_collision_anticipation_and_release_reappraisal"
     ]

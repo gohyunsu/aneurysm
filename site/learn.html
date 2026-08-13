@@ -198,6 +198,29 @@
             <a href="../docs/aneumo-response-fidelity-residual-novelty-audit-2026-08-13.md">최신 collision matrix와 대안 후보 전체 읽기 ↗</a>
           </p>
           <p>
+            같은 날의 추가 재검토는 경계를 더 좁혔습니다. PaNO는 photonics에서 이미
+            global field error가 낮아도 downstream port readout과 model ranking이
+            틀릴 수 있음을 보이고 readout-aligned operator를 제안했습니다. 이 논문은
+            2026년 arXiv preprint이므로 peer-reviewed 임상 근거로 쓰지는 않지만,
+            “field가 맞아도 readout은 틀릴 수 있다”는 broad novelty는 차단합니다.
+            NOEM은 neural-operator output을 변환해 constraint를 정확히 만족시키는
+            일반식을 제시하므로 <code>log(q/q0)</code>처럼 anchor에서 0이 되는
+            factor도 새 방법이라고 부를 수 없습니다. 또 최신 cardiovascular ROM은
+            한 번의 high-fidelity 3D CFD로 보정한 뒤 반복 BC tuning을 수행하므로
+            “one CFD, many flow queries”도 독립 application novelty가 아닙니다.
+          </p>
+          <p>
+            그래서 현재 32.5/40은 올라간 점수가 아니라 <b>마지막 경계선</b>입니다.
+            허용되는 contribution은 (1) Aneumo에서 bilateral field-error matching 뒤
+            실제 spatial-response failure를 보이는 evidence, (2) learned direct와
+            train-fitted power law를 모두 이기는 최소 application adaptation, (3)
+            historical 32를 제외한 exactly 100 new family 확인뿐입니다. 두 번째는
+            방법론 novelty가 아니며 method name도 없습니다. Aneumo·matched field
+            error·analytic control·independent family를 빼고도 같은 abstract가
+            성립한다면 이 방향은 novelty floor 아래로 내려가므로 폐기합니다.
+            <a href="../docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md">최신 세 collision과 accept/fail 조건 전체 읽기 ↗</a>
+          </p>
+          <p>
             CFD는 혈관 안의 속도와 압력을 수치적으로 풉니다. 유입 유량
             <code>q</code>를 바꾸면 같은 혈관에서도 전체 속도장이 달라집니다.
             일반 surrogate는 각 조건의 예측 field와 정답 field 사이의 평균 오차를

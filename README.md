@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-13 latest collision recheck · application-only boundary:** PaNO
+> directly occupies the generic claim that low global field error can still
+> yield poor downstream readout; NOEM occupies exact hard-constraint neural-
+> operator output transformations; and a new cardiovascular study calibrates a
+> differentiable ROM from one 3D CFD solve for repeated boundary-condition
+> tuning. The Aneumo direction therefore remains 32.5/40 only as a borderline
+> application/evaluation lead: aneurysm-specific bilateral field-error-matched
+> spatial response, learned-direct plus train-fitted power-law controls and
+> exactly 100 new-family confirmation. The score does not rise, the anchor
+> transform is not method novelty, and RF-C2 can only be an application
+> adaptation. Real P0 v3 remains 0/12; method/model/server/PBS/GPU/result/claim
+> remain zero. See the [exact recheck](docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md)
+> and [machine contract](configs/aneumo_response_fidelity_latest_collision_recheck_v1.json).
+
 > **2026-08-13 ISBI 2027 format-contract correction:** The official home,
 > author page and CFP confirm single-blind review, the 26 October 2026 23:59
 > USA EDT deadline, four technical pages, and mandatory ethics/funding/COI

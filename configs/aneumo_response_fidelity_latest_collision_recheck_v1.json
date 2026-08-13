@@ -1,0 +1,77 @@
+{
+  "schema_version": "aurora.aneumo_response_fidelity_latest_collision_recheck.v1",
+  "status": "conditional_application_evaluation_lead_retained_no_method_novelty_compute_or_claim",
+  "decision_date": "2026-08-13",
+  "audit_document": "docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md",
+  "target_venue": "IEEE_ISBI_2027",
+  "score": {
+    "axis_order": [
+      "biomedical_importance",
+      "target_identifiability",
+      "residual_novelty",
+      "asset_readiness",
+      "effective_independent_units",
+      "strong_baseline_feasibility",
+      "interpretable_evidence",
+      "schedule_fit"
+    ],
+    "axis_scores": [4.0, 5.0, 2.5, 4.0, 3.0, 5.0, 5.0, 4.0],
+    "total": 32.5,
+    "admission_total": 32.0,
+    "residual_novelty_floor": 2.5,
+    "score_increased": false,
+    "historical_34_relabelled": false
+  },
+  "new_direct_priors": [
+    {
+      "id": "arxiv:2606.03038",
+      "scope": "global_field_error_can_disagree_with_downstream_readout_and_readout_aligned_operator",
+      "peer_reviewed": false
+    },
+    {
+      "id": "doi:10.1038/s43588-026-00974-2",
+      "scope": "generic_neural_operator_hard_constraint_output_transformation",
+      "peer_reviewed": true
+    },
+    {
+      "id": "doi:10.1007/s10439-026-04269-5",
+      "scope": "single_high_fidelity_cfd_calibrated_differentiable_rom_for_cardiovascular_boundary_condition_tuning",
+      "peer_reviewed": true
+    }
+  ],
+  "forbidden_novelty_claims": [
+    "generic_field_to_readout_mismatch",
+    "generic_response_preserving_surrogate",
+    "hard_constraint_or_zero_at_anchor_output_transform",
+    "one_reference_cfd_for_boundary_condition_sweeps",
+    "gnn_equivariance_residual_or_response_loss_component"
+  ],
+  "residual_application_conjunction": [
+    "aneumo_specific_bilateral_field_error_matched_spatial_response_failure",
+    "same_backbone_anchor_identity_adaptation_as_mechanism_test_not_method_novelty",
+    "response_superiority_to_learned_direct_and_train_fitted_power_law",
+    "exactly_100_new_base_family_confirmation_excluding_all_historical_32"
+  ],
+  "claim_roles": {
+    "RF_C1": "aneurysm_specific_matched_failure_evidence",
+    "RF_C2": "controlled_application_solution_not_general_algorithmic_novelty",
+    "RF_C3": "independent_family_confirmation_not_clinical_validation"
+  },
+  "paper_activation": {
+    "real_p0_checks": "0/12",
+    "matched_failure_observed": false,
+    "method_selected": false,
+    "architecture_selected": false,
+    "paper_identity_active": false,
+    "result_or_claim_active": false
+  },
+  "execution": {
+    "scientific_server_queried": false,
+    "scheduler_queried": false,
+    "cache_field_read": false,
+    "pbs_or_gpu_submitted": false,
+    "introai9_retry_before_verified_external_change": false,
+    "local_scientific_repair_loop_allowed": false,
+    "junjinyong_accessed": false
+  }
+}

@@ -1,5 +1,16 @@
 # AURORA 연구 방향
 
+> **2026-08-13 latest-collision decision:** PaNO가 generic field-to-readout
+> mismatch와 readout-aligned correction을, NOEM이 exact hard-constraint
+> output transform을, 최신 cardiovascular differentiable ROM이 한 번의 3D
+> CFD 이후 반복 BC tuning을 이미 점유한다. 따라서 현재 방향은 fancy method가
+> 아니라 borderline **application/evaluation contribution**이다. 32.5/40과
+> novelty 2.5/5는 올리지 않는다. 살아남는 교차점은 Aneumo-specific bilateral
+> field-error matching, learned direct+train-fitted power-law 대조와 exactly 100
+> new-family evidence뿐이다. RF-C2는 general algorithm이 아닌 최소 application
+> adaptation이다. 이 네 문구를 빼고도 같은 논문이 되면 방향을 폐기한다.
+> [Exact collision recheck](aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md)
+
 > **2026-08-13 transient target-contract adjudication:** A bounded audit now
 > verifies 966 complete-cycle cases across all 40 Aneumo base families, and a
 > selective complete-case probe verifies three-component WSS on a phase-static

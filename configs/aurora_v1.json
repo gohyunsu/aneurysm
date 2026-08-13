@@ -840,6 +840,32 @@
       "junjinyong_accessed": false,
       "next_allowed_action": "after_verified_external_service_or_administrator_change_run_one_bounded_exact_cache_path_preflight_then_cpu_only_method_free_p0_no_model_gpu_or_test"
     },
+    "aneumo_response_fidelity_latest_collision_recheck": {
+      "status": "conditional_application_evaluation_lead_retained_no_method_novelty_compute_or_claim",
+      "contract": "configs/aneumo_response_fidelity_latest_collision_recheck_v1.json",
+      "audit_document": "docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md",
+      "decision_date": "2026-08-13",
+      "score": 32.5,
+      "residual_novelty": 2.5,
+      "score_increased": false,
+      "paper_identity_active": false,
+      "method_novelty_claim_allowed": false,
+      "generic_field_to_readout_claim_allowed": false,
+      "hard_constraint_anchor_transform_claim_allowed": false,
+      "one_reference_cfd_sweep_claim_allowed": false,
+      "new_direct_prior_identifiers": [
+        "arxiv:2606.03038",
+        "doi:10.1038/s43588-026-00974-2",
+        "doi:10.1007/s10439-026-04269-5"
+      ],
+      "real_p0_required_check_count": 12,
+      "real_p0_observed_check_count": 0,
+      "scientific_server_queried": false,
+      "pbs_or_gpu_job_submitted": false,
+      "introai9_retry_allowed_before_verified_external_change": false,
+      "local_scientific_repair_loop_allowed": false,
+      "junjinyong_accessed": false
+    },
     "endovascular_collision_anticipation_and_release_reappraisal": {
       "status": "fresh_problem_level_batch_rejected_best_26_5_target_asset_unit_and_direct_prior_floors",
       "audit_document": "docs/endovascular-collision-anticipation-and-release-contract-reappraisal-2026-08-12.md",

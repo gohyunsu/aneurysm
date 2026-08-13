@@ -1,5 +1,17 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-13 latest-collision paper-role correction:** PaNO eliminates a
+> generic field-versus-readout contribution, NOEM eliminates hard-constraint
+> output transformation as method novelty, and differentiable cardiovascular
+> BC tuning eliminates the one-reference-CFD sweep scenario as novelty. The
+> four-page plan may retain RF-C1 only as an Aneumo-specific matched failure,
+> RF-C2 only as controlled application effectiveness against learned and
+> analytic controls, and RF-C3 only as independent-family confirmation. Do not
+> invent a method name or list GNN/residual/anchor/response loss as a
+> contribution. Score remains 32.5/40 at the 2.5/5 novelty floor; real P0 v3
+> remains 0/12 and the manuscript stays sealed. [Exact role and deletion
+> rules](aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md)
+
 > **2026-08-13 format-contract correction:** The official home, author page
 > and CFP were rechecked against an exact machine-readable contract. The author
 > page's current ZIP is an organizer-linked legacy layout, not a verified

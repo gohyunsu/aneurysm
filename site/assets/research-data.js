@@ -2,7 +2,7 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · schema 11.9 · one conditional Aneumo response-fidelity source lead at fresh 32.5/40, novelty exactly 2.5/5 · general interventional consistency and aneurysm perturbation-response surrogation are direct priors · current method-free P0 v3 adds a non-compensatory anchor-tangent check · a fail-closed v3 activation runner exists but private manifest/authority remains 0 and real P0 remains non-executable at 0/12 · historical P1 and confirmation v1-v3 are inactive · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
+    status: "Target locked · schema 11.9 · one conditional Aneumo application/evaluation lead at fresh 32.5/40, novelty exactly 2.5/5 · PaNO occupies generic field-to-readout mismatch, NOEM occupies hard-constraint output transforms, and cardiovascular ROM work occupies one-CFD repeated-BC tuning · current method-free P0 v3 adds a non-compensatory anchor-tangent check · a fail-closed v3 activation runner exists but private manifest/authority remains 0 and real P0 remains non-executable at 0/12 · historical P1 and confirmation v1-v3 are inactive · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
     requirement: "all 12 train-only P0 v3 endpoint-stability checks and a newly registered field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; a bounded private inventory matches the registered cache SHA-256 while location and infrastructure metadata remain private; public code now implements a future manifest/source/cache/container-pinned v3 CPU-only PBS path, but the immutable v3 config still has no actual activation manifest after a current pre-command connection reset and unverified container readability; the historical inactive P1 v3 shows the intended same-backbone direct-versus-anchor-residual contrast but cannot be activated after the P0 version change; retry only after a verified introai9 operational change",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
@@ -46,6 +46,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Latest collisions leave an application audit, not a new method",
+      copy: "PaNO already separates global field accuracy from downstream readout and proposes a readout-aligned operator; NOEM formalizes exact hard-constraint neural-operator output transformations; and a cardiovascular differentiable ROM is calibrated from one high-fidelity CFD solve for repeated boundary-condition tuning. AURORA therefore cannot claim the broad mismatch, exact anchor factor or one-CFD sweep scenario. The 32.5/40 score is retained without increase only for an Aneumo-specific bilateral field-error-matched spatial-response audit, learned-direct plus analytic controls and exactly 100 new-family confirmation. RF-C2 is a controlled application solution, not algorithmic novelty.",
+      status: "Conditional application/evaluation lead only · novelty 2.5/5 floor · real P0 v3 0/12 · method name/model/server/PBS/GPU/result/claim 0",
+      url: "../docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md"
+    },
     {
       year: "2026.08",
       title: "Aneumo transient release is usable in principle, not yet an admitted task",
@@ -889,9 +896,9 @@ window.AURORA_DATA = Object.freeze({
   ],
   competition: [
     ["Axis", "Observable contract", "Direct control", "Residual question", "Current decision"],
-    ["Task", "one nominal CFD field → velocity fields at seven alternative flows", "Aneumo multi-flow benchmarks; analytic q^α scaling", "field error versus response fidelity", "conditional application lead"],
-    ["Representation", "same-case anchor plus flow ratio and geometry", "SC-FNO; Hemo-MPO; AB-GATr; DeltaPhi; DeepONet/FNO", "same-backbone direct versus identity-residual mechanism test", "inactive directional falsifier; unselected"],
-    ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO", "matched-field-error structural mismatch", "not yet observed"],
+    ["Task", "one nominal CFD field → velocity fields at seven alternative flows", "Aneumo multi-flow benchmarks; cardiovascular one-CFD BC tuning; analytic q^α scaling", "Aneumo-specific matched spatial-response fidelity", "conditional application/evaluation lead"],
+    ["Representation", "same-case anchor plus flow ratio and geometry", "SC-FNO; Hemo-MPO; AB-GATr; DeltaPhi; NOEM hard constraints; DeepONet/FNO", "same-backbone direct versus identity-residual mechanism test", "inactive application adaptation; not method novelty"],
+    ["Response", "gain, direction, tangent, curvature and family ranking", "Cebral response variables; DINO/DIFNO; PaNO field→readout", "aneurysm-specific matched-field-error response mismatch", "not yet observed"],
     ["P0", "train-only node-half and leave-one-flow stability", "deterministic metrics; family bootstrap", "are endpoints identifiable on eight flows?", "registered; non-executable"],
     ["Confirmation", "100 new families + prefield precision/complete-workload viability", "historical 32 excluded; exact case-log family estimator; ≥59/100 wins per response", "finite-release mean and majority-family generalization", "inactive until P0/P1/development/re-entry/viability pass"],
     ["Admission", "total ≥32 and residual novelty ≥2.5", "fresh six-way direct-prior screen", "best 32.5; novelty 2.5", "P0 only; no method or claim"]
