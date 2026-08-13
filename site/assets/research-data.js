@@ -4,7 +4,7 @@ window.AURORA_DATA = Object.freeze({
     deadline: "2026.10.26 · 23:59 USA EDT",
     status: "Target locked · schema 11.9 · one conditional Aneumo response-fidelity source lead at fresh 32.5/40, novelty exactly 2.5/5 · general interventional consistency and aneurysm perturbation-response surrogation are direct priors · current method-free P0 v3 adds a non-compensatory anchor-tangent check · a fail-closed v3 activation runner exists but private manifest/authority remains 0 and real P0 remains non-executable at 0/12 · historical P1 and confirmation v1-v3 are inactive · active train/validation/test/method/model/GPU/outer test/result/claim 0 · not submission-ready",
     requirement: "all 12 train-only P0 v3 endpoint-stability checks and a newly registered field-error-matched baseline-failure P1 must pass before any architecture, GPU, confirmation test or claim can open; a bounded private inventory matches the registered cache SHA-256 while location and infrastructure metadata remain private; public code now implements a future manifest/source/cache/container-pinned v3 CPU-only PBS path, but the immutable v3 config still has no actual activation manifest after a current pre-command connection reset and unverified container readability; the historical inactive P1 v3 shows the intended same-backbone direct-versus-anchor-residual contrast but cannot be activated after the P0 version change; retry only after a verified introai9 operational change",
-    authorContract: "single blind · max 2 first-author submissions · no substantially similar prior/concurrent peer-reviewed submission · preprints allowed · ethics and COI disclosure required",
+    authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
       {
@@ -36,6 +36,11 @@ window.AURORA_DATA = Object.freeze({
         label: "Submission endpoint",
         title: "Coming Soon",
         copy: "No unofficial or guessed submission URL is recorded while the official author page has not published the endpoint."
+      },
+      {
+        label: "Template provenance",
+        title: "Organizer-linked legacy layout",
+        copy: "The current author-page ZIP internally identifies itself as an ISBI 2021 template. The private plan matches its active spconf layout but uses unsrt, so it is a pre-evidence shell—not 2027-specific final-format certification."
       }
     ],
     plan: "../docs/isbi-2027-plan.md"
@@ -1406,6 +1411,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.13",
+      category: "site",
+      title: "ISBI rules are exact; the linked template is explicitly legacy",
+      copy: "Official home, author instructions and CFP confirm the 26 October 2026 deadline, single-blind review, four technical pages and mandatory ethics/funding/COI disclosures. Their concurrent-review wording differs, so AURORA uses the stricter conference/workshop/journal union. The author-page ZIP internally says ISBI 2021 and is not called a 2027-specific template. The private plan's active spconf commands match the linked layout, but it uses unsrt and remains an internal pre-evidence shell. Real P0 v3 stays 0/12; no scientific server, PBS/GPU, result or claim opened.",
+      files: ["configs/isbi_2027_author_contract_v2.json", "tests/test_isbi_2027_author_contract_v2.py", "docs/isbi-2027-author-contract-recheck-2026-08-13.md", "docs/isbi-2027-plan.md", "site/index.html", "site/assets/research-data.js", "README.md", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.13",
       category: "data",

@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 ISBI 2027 author-contract correction:** Official home page
+> `1019` (modified `2026-07-29T11:16:41`), author page `1026` (modified
+> `2026-07-22T10:39:56`) and CFP SHA-256 `0aed86f4…38a14` confirm the
+> four-page archival deadline and disclosure contract. Apply the conservative
+> union of the official originality clauses: no substantially similar
+> conference/workshop/journal concurrent review. The author-page template ZIP
+> SHA-256 is `3acdec37…13d7`, but its internal README says `ISBI 2021 Paper
+> Submission Templates`; do not call it a 2027-specific template. The private
+> vendored `spconf` active-command stream matches upstream at
+> `c9998f06…766f7`, but comments differ and the current plan uses `unsrt`, not
+> `IEEEbib`. Therefore classify it only as an organizer-linked-layout internal
+> pre-evidence shell. Preserve its sealed scientific bytes; do not relabel it
+> final-format or submission-ready. Recheck and rehash the then-current
+> organizer template before submission. This format audit is not scientific
+> evidence or an `introai9` operational change. Real P0 v3 remains 0/12; do not
+> retry or open a local repair loop. Never access `junjinyong`.
+
 > **2026-08-13 Aneumo transient whole-release target-contract audit:** Current
 > transient decision is **30.0/40, inactive**, superseding the earlier
 > source-level 28.0 score without rewriting it. A fail-closed audit at exact HF

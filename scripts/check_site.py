@@ -128,6 +128,15 @@ def check_site(root: Path) -> list[str]:
         "All 40 base families retain a usable complete case": (
             "current transient independent-unit boundary"
         ),
+        "concurrent conference/workshop/journal review": (
+            "conservative ISBI originality boundary"
+        ),
+        "Organizer-linked legacy layout": (
+            "non-2027-specific template provenance boundary"
+        ),
+        "uses unsrt": (
+            "pre-evidence bibliography-format boundary"
+        ),
     }
     for marker, label in required_current_markers.items():
         if marker not in research_data:

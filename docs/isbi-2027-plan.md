@@ -1,5 +1,20 @@
 # ISBI 2027 제출 계획
 
+> **2026-08-13 format-contract correction:** The official home, author page
+> and CFP were rechecked against an exact machine-readable contract. The author
+> page's current ZIP is an organizer-linked legacy layout, not a verified
+> 2027-specific template: its internal README says `ISBI 2021 Paper Submission
+> Templates`. The private pre-evidence plan has an active `spconf` command
+> stream equal to the linked file but uses `unsrt` rather than `IEEEbib`; it
+> must not be called a final-format submission manuscript. Before submission,
+> re-download the then-current organizer template, use its official
+> bibliography workflow and inspect every page. AURORA also adopts the strict
+> union of the author-page and CFP originality language, excluding
+> substantially similar concurrent conference, workshop or journal review.
+> See [the exact recheck](isbi-2027-author-contract-recheck-2026-08-13.md) and
+> [machine contract](../configs/isbi_2027_author_contract_v2.json). This
+> correction activates no claim; real P0 v3 remains 0/12.
+
 > **2026-08-13 paper-identity comparison:** The Aneumo transient subset is now
 > verified to contain 966 complete-cycle cases across 40 base families, and a
 > selective probe confirms vector WSS on a phase-static surface. Its fresh score

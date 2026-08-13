@@ -1,5 +1,19 @@
 # AURORA · Aneurysm Research
 
+> **2026-08-13 ISBI 2027 format-contract correction:** The official home,
+> author page and CFP confirm single-blind review, the 26 October 2026 23:59
+> USA EDT deadline, four technical pages, and mandatory ethics/funding/COI
+> disclosure. AURORA applies the stricter union of their originality wording:
+> no substantially similar conference, workshop or journal concurrent review.
+> The author page's template link is not a verified 2027-specific bundle: its
+> archive README says `ISBI 2021 Paper Submission Templates` and the URL is
+> under the 2025 site. The private source has an active `spconf` command stream
+> equal to that linked layout but uses `unsrt`; it remains an internal
+> pre-evidence shell, not final format certification or a submission manuscript.
+> See the [exact author-contract recheck](docs/isbi-2027-author-contract-recheck-2026-08-13.md)
+> and [machine contract](configs/isbi_2027_author_contract_v2.json). Real P0 v3
+> remains 0/12; no server, PBS/GPU, model, result or claim opened.
+
 > **2026-08-13 Aneumo transient whole-release correction:** A fail-closed,
 > directory-only range audit covers all public case IDs 1--1000. It finds
 > **966 complete cycle cases** and 34 incomplete cases; 961 of the complete

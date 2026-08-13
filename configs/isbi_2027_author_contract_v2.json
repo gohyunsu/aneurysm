@@ -1,0 +1,122 @@
+{
+  "contract_id": "isbi_2027_author_contract_v2",
+  "checked_at": "2026-08-13T17:22:00+09:00",
+  "status": "verified_current_but_not_submission_ready",
+  "scientific_activation": false,
+  "official_sources": {
+    "home": {
+      "url": "https://biomedicalimaging.org/2027/",
+      "wordpress_page_id": 1019,
+      "wordpress_modified": "2026-07-29T11:16:41",
+      "snapshot_sha256": "ceea948d5a1e3eaf0b151321d7eb618e2916a4e6997c83d5a47be17f9f236ff0"
+    },
+    "author_instructions": {
+      "url": "https://biomedicalimaging.org/2027/papers/",
+      "wordpress_page_id": 1026,
+      "wordpress_modified": "2026-07-22T10:39:56",
+      "snapshot_sha256": "e3cce30c40f2e2b7345b2f3ef263105261c49b7dadc7f651fa411a23e1af911b"
+    },
+    "call_for_papers": {
+      "url": "https://confcats-event-sessions.s3.us-east-1.amazonaws.com/isbi27/isbi27-cfp_web-03.pdf",
+      "pages": 1,
+      "sha256": "0aed86f4a6cc6bf37fd867f869ca01e8c0c4e88c3e30eb83ad2f4dd771538a14"
+    }
+  },
+  "venue": {
+    "conference": "IEEE International Symposium on Biomedical Imaging 2027",
+    "location": "Lausanne, Switzerland",
+    "conference_start": "2027-05-25",
+    "conference_end": "2027-05-28",
+    "regular_paper_deadline": "2026-10-26T23:59:00-04:00",
+    "notification": "2027-01-12",
+    "final_submission": "2027-01-26",
+    "review": "single_blind",
+    "archival_track": "full_length_four_page_paper",
+    "one_page_abstract_archival": false,
+    "one_page_abstract_oral_eligible": false,
+    "submission_endpoint_status": "coming_soon"
+  },
+  "page_contract": {
+    "technical_pages_maximum": 4,
+    "absolute_pages_maximum": 5,
+    "optional_fifth_page_fee_usd": 200,
+    "all_figures_and_tables_must_be_within_first_four_pages": true,
+    "fifth_page_allowed_content_only": [
+      "compliance_with_ethical_standards",
+      "acknowledgments_and_conflict_of_interest",
+      "references"
+    ]
+  },
+  "authorship_and_originality": {
+    "maximum_first_author_submissions_per_person": 2,
+    "substantially_similar_prior_publication_or_acceptance_prohibited": true,
+    "substantially_similar_parallel_isbi_submissions_prohibited": true,
+    "author_page_concurrent_review_scope": [
+      "conference",
+      "workshop"
+    ],
+    "cfp_concurrent_review_scope": [
+      "conference",
+      "journal"
+    ],
+    "aurora_conservative_concurrent_review_scope": [
+      "conference",
+      "workshop",
+      "journal"
+    ],
+    "preprints_allowed_under_ieee_policy": true
+  },
+  "mandatory_disclosures": {
+    "separate_section_title": "Compliance with Ethical Standards",
+    "ethics_statement_required_even_when_approval_not_needed": true,
+    "funding_disclosure_required": true,
+    "conflict_or_explicit_absence_disclosure_required": true,
+    "human_authors_must_verify_final_wording": true
+  },
+  "template_provenance": {
+    "author_page_download_url": "https://biomedicalimaging.org/2025/wp-content/uploads/sites/106/2024/07/ISBI_template-master.zip",
+    "archive_sha256": "3acdec37077eff51b787c710e4d971dcabc69f2cf11bd6a7308836d922b313d7",
+    "archive_internal_readme_title": "ISBI 2021 Paper Submission Templates",
+    "archive_internal_file_timestamps": "2024-07-31 09:01",
+    "upstream_template_tex_sha256": "cd584135bca1b49c3b7b3f18e97dd2a86f22eae4dbff71174873edc7206c686b",
+    "upstream_spconf_sha256": "dc5d632639040cb183f2ab62780f314845aa021be73048c8a9ec9c2072d64a86",
+    "upstream_ieeebib_sha256": "7e6ca0c8b72158d504a12bb091f817c07032a021ba41ca783cca4c2dd80d570b",
+    "vendored_spconf_sha256_before_provenance_comment_correction": "0488f5cce6664841f18ce1c2eabdedc74ba6b6f0040a4945cc9ecb0d26904b68",
+    "upstream_and_vendored_active_command_stream_sha256": "c9998f06a6ae31a8bf454bb93a1194f785993b8bc3bdd0e6f213b830d87766f7",
+    "active_command_stream_equal": true,
+    "upstream_comments_were_removed_from_vendored_copy": true,
+    "organizer_linked_legacy_layout": true,
+    "organizer_published_2027_specific_template_verified": false,
+    "may_call_archive_a_2027_specific_template": false
+  },
+  "current_private_manuscript_classification": {
+    "document_role": "internal_pre_evidence_shell",
+    "uses_organizer_linked_spconf_layout": true,
+    "uses_upstream_ieeebib_style": false,
+    "current_bibliography_style": "unsrt",
+    "may_be_called_final_isbi_submission_format": false,
+    "result_cells_sealed": true,
+    "contribution_cells_sealed": true,
+    "submission_manuscript_active": false
+  },
+  "before_submission_required": [
+    "recheck_author_page_and_submission_endpoint",
+    "redownload_and_rehash_the_then_current_organizer_template",
+    "prefer_a_2027_specific_template_if_the_organizers_publish_one",
+    "build_the_activated_source_with_the_official_bibliography_style",
+    "validate_with_pdflatex_and_visually_inspect_every_page",
+    "keep_every_technical_figure_table_and_claim_within_pages_one_to_four",
+    "replace_author_funding_ethics_and_conflict_placeholders_with_verified_facts",
+    "confirm_no_substantially_similar_concurrent_conference_workshop_or_journal_review"
+  ],
+  "research_boundary": {
+    "real_p0_v3_checks_passed": 0,
+    "real_p0_v3_checks_required": 12,
+    "p1_registered": false,
+    "method_selected": false,
+    "gpu_experiment_authorized": false,
+    "result_available": false,
+    "claim_available": false,
+    "venue_compliance_is_scientific_evidence": false
+  }
+}

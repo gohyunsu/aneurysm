@@ -1,5 +1,27 @@
 # Changelog
 
+## 2026-08-13 · ISBI contract is verified without overstating the legacy template
+
+- Rechecked the official home page, author instructions and CFP. The archival
+  deadline remains 26 October 2026 at 23:59 USA EDT; review is single blind;
+  every technical table and figure must fit in the first four pages; and the
+  optional USD 200 fifth page is restricted to ethics, acknowledgments/COI and
+  references. The submission endpoint is still `Coming Soon`.
+- Applied the stricter union of two official originality wordings: AURORA bars
+  substantially similar concurrent conference, workshop and journal review.
+- Downloaded the exact template link from the 2027 author page. Its archive
+  README says `ISBI 2021 Paper Submission Templates`, despite the organizer
+  link, and its URL is under the 2025 site. It is recorded as an
+  organizer-linked legacy layout rather than a verified 2027-specific template.
+- Verified that the private vendored `spconf` copy and upstream file have the
+  same active LaTeX command stream. The private pre-evidence plan nevertheless
+  uses `unsrt` instead of upstream `IEEEbib`; it is not a final-format or
+  submission manuscript. The sealed manuscript and bibliography were not
+  rewritten.
+- Added a machine-readable venue contract, six fail-closed tests and a detailed
+  audit. This changes no scientific gate: real P0 v3 remains 0/12 and no server,
+  scheduler, PBS/GPU, model, result or claim opened.
+
 ## 2026-08-13 · whole-release Aneumo audit raises feasibility, not admission
 
 - Exact scientific source `b06f83f…b25b68` is remote exact. Quality
