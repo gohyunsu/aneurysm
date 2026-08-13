@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 mapping-integrity withdrawal:** Official Aneumo issue 4 owner
+> comment `5070184242` says cases 2158/2159 belong to family 115 rather than
+> 114; later comment `5070473308` promises a complete mapping review. Current
+> official main remains `701d53d…45a`, the earlier partial correction, whose
+> Connection.csv still maps case 2158 to `114_deform_10`. The known case lies
+> outside transient 1--1000, so do not declare a selected row wrong, but the
+> first 1,000 family labels are not authoritatively verified. Stability P0 v1
+> is withdrawn before field access at 0/60; its 12-family panel is immutable
+> history and may never activate. A successor requires an authoritative
+> corrected mapping, the independent licence resolution, a fresh public
+> selection and a new private manifest. Model/method/GPU/result/claim remain 0.
+> Server recovery does not resolve source integrity. Never access or query
+> junjinyong.
+
 > **2026-08-13 registered non-executable stability P0 v1:** Official
 > scientific source `c5f1cb0a2acdb0841398d1ee52ebcb3140b98dfe` passed
 > Quality `31711690130` with NumPy 2.1.2, h5py 3.12.1, CPU PyTorch

@@ -59,8 +59,11 @@ def check_site(root: Path) -> list[str]:
         "상세 aggregate private · stability 미평가 · raw stage 삭제": (
             "current D0 outcome boundary"
         ),
-        "stability P0 v1 | 등록 · non-executable": "registered P0 boundary",
-        "12 family·60 future member 고정": "field-blind P0 panel",
+        "stability P0 v1 | field 전 철회 · 0/60": "withdrawn P0 boundary",
+        "current panel activation 영구 금지": "non-reactivation boundary",
+        "confirmatory inference unit로 승인되지 않았습니다": (
+            "family-mapping integrity boundary"
+        ),
         "GNN을 포함한 어떤 모델도 current method가 아님": (
             "no-selected-architecture boundary"
         ),
@@ -170,10 +173,13 @@ def check_site(root: Path) -> list[str]:
         "v2 execution complete with private aggregate and raw stage deleted": (
             "final D0 operational outcome"
         ),
-        "family-disjoint P0 v1 registered non-executable": (
-            "registered non-executable P0 boundary"
+        "family-disjoint P0 v1 withdrawn before field access": (
+            "withdrawn P0 boundary"
         ),
-        "stages zero of 60 future members": "zero-field P0 boundary",
+        "staged zero of 60 fields": "zero-field P0 boundary",
+        "latest partial Connection.csv correction still conflicts": (
+            "family-mapping integrity boundary"
+        ),
         "Closed response-fidelity P0 v3 remains execution-incomplete with 0/12 scientific checks evaluated": (
             "closed P0 result count"
         ),

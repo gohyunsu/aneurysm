@@ -50,7 +50,7 @@ class AneumoTransientStabilityP0Tests(unittest.TestCase):
             ],
         )
 
-    def test_license_gate_makes_v1_non_executable(self) -> None:
+    def test_license_and_mapping_gates_withdraw_v1_before_field_access(self) -> None:
         self.assertTrue(
             self.config["license_boundary"][
                 "authoritative_resolution_required_before_staging_or_execution"
@@ -59,6 +59,19 @@ class AneumoTransientStabilityP0Tests(unittest.TestCase):
         self.assertFalse(self.config["execution"]["authorized"])
         self.assertFalse(self.config["authorization"]["new_field_member_staging"])
         self.assertFalse(self.config["authorization"]["p0_execution"])
+        self.assertFalse(self.config["authorization"]["current_panel_activation"])
+        self.assertFalse(
+            self.config["authorization"][
+                "successor_panel_registration_before_authoritative_mapping"
+            ]
+        )
+        self.assertTrue(self.config["selection"]["panel_withdrawn_before_field_access"])
+        self.assertFalse(self.config["selection"]["inference_unit_verified"])
+        mapping = self.config["family_mapping_boundary"]
+        self.assertTrue(mapping["owner_acknowledged_connection_csv_error"])
+        self.assertEqual(mapping["pinned_csv_case_2158"], "114_deform_10")
+        self.assertEqual(mapping["owner_stated_correct_family"], "115_deform")
+        self.assertTrue(mapping["current_12_family_panel_may_not_be_activated"])
         self.assertEqual(self.config["execution"]["ngpus"], 0)
         self.assertEqual(self.config["execution"]["excluded_server"], "junjinyong")
         self.assertEqual(

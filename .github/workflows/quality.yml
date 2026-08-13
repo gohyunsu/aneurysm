@@ -60,7 +60,7 @@ jobs:
         run: PYTHONPATH=src python -m aurora.aneumo_response_fidelity_confirmation_template_v3 validate configs/aneumo_response_fidelity_confirmation_template_v3.json
       - name: Validate fail-closed public source watch
         run: PYTHONPATH=src python scripts/audit_source_watch.py --config configs/source_watch_v21.json --validate-only
-      - name: Validate registered non-executable Aneumo transient stability P0 v1
+      - name: Validate withdrawn-before-field Aneumo transient stability P0 v1
         run: PYTHONPATH=src python -m aurora.aneumo_transient_stability_p0 --config configs/aneumo_transient_structure_stability_p0_v1.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0
         run: PYTHONPATH=src python -m aurora.aneux_preprocessing_orbit_p0 --config configs/aneux_preprocessing_orbit_p0.json --validate-only

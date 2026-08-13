@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-13 — stability P0 v1 withdrawn at field 0/60
+
+- Audited official issue 4 and current main. The owner says cases 2158/2159
+  should map to family 115 and later promises a complete table review, but the
+  latest partial correction still maps case 2158 to family 114.
+- Did not infer that any transient 1--1000 or selected P0 row is wrong. The
+  evidence instead makes the family inference unit unverified until an
+  authoritative corrected mapping is published or confirmed.
+- Withdrew the current 12-family panel before any selected field staging/read.
+  It remains exact history and cannot be reactivated.
+- A successor requires both corrected family mapping and resolution of the
+  independent HF/GitHub licence conflict before a fresh field-blind selection.
+  Model, GPU, result and paper claim remain 0.
+
 ## 2026-08-13 — family-disjoint stability P0 v1 registers without field access
 
 - Exact scientific source `c5f1cb0…8dfe` passed Quality `31711690130` at

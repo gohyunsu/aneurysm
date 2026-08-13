@@ -18,8 +18,9 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 > `116165.ECE-util1`은 exact private stage·PBS network 0·GPU 0으로 exit 0
 > 완료했고 raw stage는 삭제됐습니다. 라이선스 충돌 때문에 field-derived 상세
 > aggregate는 private provenance에만 둡니다. Scientific stability는 여전히
-> 미평가입니다. Family-disjoint P0 v1은 field-blind하게 등록했지만 release
-> licence 선언 충돌의 authoritative resolution 전에는 staging·실행할 수 없습니다.
+> 미평가입니다. Family-disjoint P0 v1은 field 0/60 상태에서 철회했습니다.
+> 라이선스 선언 충돌뿐 아니라 maintainer가 인정하고 전체 재검토를 약속한
+> `Connection.csv` family mapping이 아직 authoritative하지 않기 때문입니다.
 
 ## 현재 상태
 
@@ -30,7 +31,7 @@ AURORA는 뇌동맥류 CFD surrogate가 transient wall-shear-stress(WSS)의
 | 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아님 |
 | transient 자산 | 966 complete case · 40 base family | 1,000 case가 1,000 독립 표본은 아님 |
 | D0 | v1 transport-incomplete · v2 execution complete | 상세 aggregate private · stability 미평가 · raw stage 삭제 |
-| stability P0 v1 | 등록 · non-executable | 12 family·60 future member 고정 · licence resolution 전 field 0 |
+| stability P0 v1 | field 전 철회 · 0/60 | 12-family panel은 history · licence와 family mapping 모두 unresolved |
 | scientific P0 / 모델 / GPU | 미등록 / 미선택 / 0 | GNN을 포함한 어떤 모델도 current method가 아님 |
 | 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
 
@@ -102,6 +103,12 @@ Hugging Face의 `CC BY-NC-ND 4.0` tag와 GitHub datasheet의 `CC BY 4.0` 문구�
 충돌하므로, 저자 확인 전에는 더 엄격한 noncommercial·nonredistribution 경계를
 적용합니다. 법률적 결론이나 raw/derived field 재배포는 하지 않습니다.
 
+또한 maintainer는 공식 issue에서 `Connection.csv` family mapping 오류를
+인정하고 전체 표 재검토를 약속했습니다. 최신 main의 partial correction 뒤에도
+case 2158은 owner 설명과 불일치합니다. 이 case는 transient 1--1000 밖이지만,
+앞 1,000 row가 검증됐다는 증거는 아닙니다. 따라서 현재 40-family 수치는 release
+metadata 기술이며 confirmatory inference unit로 승인되지 않았습니다.
+
 ## Evidence ladder
 
 ```text
@@ -109,8 +116,10 @@ D0 · known-member reader/extractor development
   ├─ v1: compute-node network unreachable · VTP/read/extractor 0
   └─ v2: exact ephemeral stage · exit 0 · raw stage 삭제 · 상세 aggregate private
       └─ 다음 권한: 별도 prospective method-free P0 등록만
-P0 v1 · 12-family target stability · registered / field 0
-  └─ licence clarification + private activation 전 execution 금지
+P0 v1 · 12-family target stability · withdrawn before field access / 0 of 60
+  └─ current panel activation 영구 금지
+successor P0 · unregistered
+  └─ authoritative family mapping + licence clarification 후 새 panel 등록
   └─ pass → matched baseline screen 등록만 허용
 P1 · compute/field-error-matched structural failure
   └─ pass → bounded validation-only development
@@ -126,9 +135,10 @@ threshold 사후 변경과 model training은 금지합니다. 첫 synthetic-fixt
 repair 1/2를, compute-node egress를 exact private staging으로 바꾸는 transport
 수정이 repair 2/2를 소모합니다. V2 결과와 관계없이 추가 D0 수리·재제출은 없습니다.
 V2는 완료됐고 scientific stability threshold를 평가하지 않았으므로 논문 결과가
-아닙니다. P0 v1은 새 family/phase를 읽기 전에 공개·고정했지만, Hugging Face와
-GitHub의 상충하는 licence 문구가 authoritative하게 정리될 때까지 execution
-authorization은 false입니다.
+아닙니다. P0 v1은 새 family/phase를 읽기 전에 공개·고정했지만, 그 후 확인한
+공식 mapping 오류와 미완료 full-review 약속 때문에 field 0/60에서 철회했습니다.
+이 panel은 나중에도 활성화하지 않습니다. Authoritative corrected mapping과
+상충하는 licence 문구가 모두 정리된 뒤 successor를 새로 등록해야 합니다.
 
 ## 미래 아키텍처의 최소 조건
 
@@ -178,6 +188,7 @@ results/      public aggregate outcome only
 - [최종 D0 v2 계약](configs/aneumo_transient_vtp_d0_v2.json)
 - [등록된 non-executable stability P0 v1](configs/aneumo_transient_structure_stability_p0_v1.json)
 - [P0 설계와 license blocker](docs/aneumo-transient-structure-stability-p0-v1-2026-08-13.md)
+- [Connection.csv family-mapping integrity 감사](docs/aneumo-connection-mapping-integrity-audit-2026-08-13.md)
 - [폐쇄된 response P0 결과](docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md)
 - [선행연구 계보](docs/literature-lineage.md)
 - [상세 변경 이력](CHANGELOG.md)

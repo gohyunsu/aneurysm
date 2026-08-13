@@ -1,9 +1,10 @@
 """Method-free transient WSS critical-structure stability audit.
 
-The public v1 contract is deliberately non-executable while the exact release
-licence declarations conflict. This module validates the frozen contract and
-implements deterministic phase/family metrics for synthetic tests and a future
-separately activated private runner. It does not select a model.
+The public v1 contract was withdrawn before field access because the exact
+release licence declarations conflict and the official family mapping is not
+yet authoritative. This module preserves and validates the historical frozen
+contract and deterministic metrics for synthetic tests. It cannot activate a
+runner or select a model.
 """
 
 from __future__ import annotations
@@ -48,10 +49,29 @@ def load_config(path: str | Path) -> dict[str, Any]:
         raise StabilityP0Error("P0 phase panel changed")
     if selection["field_members"] != 60:
         raise StabilityP0Error("P0 member count changed")
+    if config["status"] != (
+        "withdrawn_before_field_access_pending_authoritative_family_mapping_"
+        "and_release_license_resolution"
+    ):
+        raise StabilityP0Error("v1 withdrawal state changed")
+    if (
+        selection["inference_unit_verified"]
+        or not selection["panel_withdrawn_before_field_access"]
+        or not selection["selected_panel_is_historical_and_not_activatable"]
+    ):
+        raise StabilityP0Error("withdrawn family panel was reactivated")
     if config["execution"]["authorized"] or config["authorization"]["p0_execution"]:
         raise StabilityP0Error("v1 must remain non-executable pending licence resolution")
     if not config["license_boundary"]["authoritative_resolution_required_before_staging_or_execution"]:
         raise StabilityP0Error("licence-resolution gate was removed")
+    mapping = config["family_mapping_boundary"]
+    if (
+        not mapping["owner_acknowledged_connection_csv_error"]
+        or not mapping["pinned_csv_still_contradicts_owner_statement_for_case_2158"]
+        or not mapping["authoritative_corrected_mapping_required_before_any_successor_selection"]
+        or not mapping["current_12_family_panel_may_not_be_activated"]
+    ):
+        raise StabilityP0Error("family-mapping integrity gate was removed")
     if config["execution"]["ngpus"] != 0:
         raise StabilityP0Error("method-free P0 must remain CPU-only")
     return config
@@ -336,8 +356,9 @@ def main() -> int:
     config = load_config(args.config)
     if not args.validate_only:
         raise SystemExit(
-            "P0 v1 is registration-only: authoritative release licence resolution "
-            "and a separate private activation manifest are required"
+            "P0 v1 was withdrawn before field access: authoritative family "
+            "mapping and release licence resolutions are required before a "
+            "separately registered successor"
         )
     print(
         json.dumps(
@@ -347,6 +368,7 @@ def main() -> int:
                 "selected_families": len(config["selection"]["selected"]),
                 "field_members_staged": 0,
                 "execution_authorized": False,
+                "panel_withdrawn_before_field_access": True,
             },
             sort_keys=True,
         )

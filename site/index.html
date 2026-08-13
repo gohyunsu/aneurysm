@@ -41,7 +41,7 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · TRANSIENT WSS 30.0/40 INACTIVE · D0 V2 COMPLETE / STABILITY UNEVALUATED · P0 V1 REGISTERED NON-EXECUTABLE · FIELD / MODEL / GPU / CLAIM 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · TRANSIENT WSS 30.0/40 INACTIVE · D0 V2 COMPLETE / STABILITY UNEVALUATED · P0 V1 WITHDRAWN BEFORE FIELD ACCESS · FIELD 0/60 · MODEL / GPU / CLAIM 0</p>
         <h1>
           A low field error<br>
           <em>does not certify flow structure.</em>
@@ -64,8 +64,10 @@
           PBS에서 exit 0으로 끝났고 raw stage가 삭제됐습니다. Field-derived 상세
           aggregate는 라이선스 충돌 때문에 private provenance에만 둡니다. D0는
           stability threshold가 없는 development입니다. Family-disjoint P0 v1은
-          12 family·60 future member를 field-blind하게 고정했지만, 상충하는 release
-          licence가 authoritative하게 정리되기 전에는 staging과 실행을 막습니다.
+          12 family·60 future member를 field-blind하게 고정했지만 field 0/60에서
+          철회했습니다. 상충하는 release licence와, maintainer가 인정한 뒤 전체
+          재검토를 약속했지만 아직 완결되지 않은 family mapping이 서로 독립적인
+          blocker입니다. Current panel은 나중에도 활성화하지 않습니다.
           Scientific P0 result, architecture, GPU, outer test와 paper
           claim은 모두 0입니다. 폐쇄된 steady response-fidelity P0 v3는
           execution-incomplete·0/12 evaluated로 역사에 보존하며 재실행하지 않습니다.
@@ -76,7 +78,8 @@
           <a class="button ghost" href="../configs/aneumo_transient_vtp_d0_v2.json">Final D0 v2 contract ↗</a>
           <a class="button ghost" href="../results/aneumo_transient_vtp_d0_v1_execution_20260813.json">D0 v1 transport outcome ↗</a>
           <a class="button ghost" href="../results/aneumo_transient_vtp_d0_v2_execution_20260813.json">D0 v2 operational outcome ↗</a>
-          <a class="button ghost" href="../docs/aneumo-transient-structure-stability-p0-v1-2026-08-13.md">Registered stability P0 · why execution is locked ↗</a>
+          <a class="button ghost" href="../docs/aneumo-transient-structure-stability-p0-v1-2026-08-13.md">Withdrawn stability P0 · why field stayed 0 ↗</a>
+          <a class="button ghost" href="../docs/aneumo-connection-mapping-integrity-audit-2026-08-13.md">Family-mapping integrity audit ↗</a>
           <a class="button ghost" href="../docs/aneumo-response-fidelity-p0-v3-execution-2026-08-13.md">P0 v3 outcome · execution-incomplete / 0 of 12 evaluated ↗</a>
           <a class="button ghost" href="../docs/aneumo-transient-target-contract-and-release-completeness-audit-2026-08-13.md">Transient 전수 target-contract 감사 ↗</a>
           <a class="button ghost" href="../src/aurora/aneumo_transient_vtp.py">VTP·surface-vector code ↗</a>

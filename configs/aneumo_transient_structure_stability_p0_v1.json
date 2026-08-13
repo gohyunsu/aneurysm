@@ -1,7 +1,7 @@
 {
   "schema_version": "aurora.aneumo_transient_structure_stability_p0.v1",
   "protocol_id": "aneumo_transient_method_free_structure_stability_p0_v1",
-  "status": "registered_non_executable_pending_authoritative_release_license_resolution",
+  "status": "withdrawn_before_field_access_pending_authoritative_family_mapping_and_release_license_resolution",
   "as_of": "2026-08-13",
   "purpose": "falsify_phasewise_signed_critical_structure_identifiability_before_any_surrogate_model",
   "provenance": {
@@ -12,7 +12,11 @@
     "official_github_commit": "701d53dde3489d84dbe9bc8324254629162eb45a",
     "huggingface_revision": "f801adee816c18d3e18b23e6fcb147fe4c264209",
     "connection_csv_sha256": "09a5344ac3b3b30a3a677ca619710142782983144362d069b5a2f57caaeabd0b",
-    "release_case_records_sha256": "8f516cd39c5bb0fb83293f19ff95d996f2299ebd6848d4609ced8aa9dbbde424"
+    "release_case_records_sha256": "8f516cd39c5bb0fb83293f19ff95d996f2299ebd6848d4609ced8aa9dbbde424",
+    "official_mapping_issue": 4,
+    "owner_mapping_error_acknowledgement_comment": 5070184242,
+    "owner_full_mapping_review_commitment_comment": 5070473308,
+    "latest_official_commit_after_review_commitment": false
   },
   "selection": {
     "selection_seed": "aurora-transient-stability-p0-v1-20260813",
@@ -39,7 +43,10 @@
     "phases": ["4.01", "4.25", "4.50", "4.75", "5.00"],
     "field_members": 60,
     "development_case_or_phase_reused": false,
-    "selected_before_any_p0_field_read": true
+    "selected_before_any_p0_field_read": true,
+    "inference_unit_verified": false,
+    "panel_withdrawn_before_field_access": true,
+    "selected_panel_is_historical_and_not_activatable": true
   },
   "representation": {
     "normal_modes": ["polygon_newell", "triangle_area"],
@@ -93,6 +100,18 @@
     "field_derived_p0_result_publication": false,
     "legal_conclusion_made": false
   },
+  "family_mapping_boundary": {
+    "owner_acknowledged_connection_csv_error": true,
+    "owner_stated_cases": [2158, 2159],
+    "owner_stated_correct_family": "115_deform",
+    "pinned_csv_case_2158": "114_deform_10",
+    "pinned_csv_case_2159": "115_deform_1",
+    "pinned_csv_still_contradicts_owner_statement_for_case_2158": true,
+    "owner_promised_full_table_review_after_pinned_commit": true,
+    "authoritative_corrected_mapping_required_before_any_successor_selection": true,
+    "current_12_family_panel_may_not_be_activated": true,
+    "no_claim_that_cases_1_to_1000_are_correctly_grouped": true
+  },
   "execution": {
     "authorized": false,
     "server_if_activated": "introai9",
@@ -108,6 +127,8 @@
   },
   "authorization": {
     "metadata_only_registration": true,
+    "current_panel_activation": false,
+    "successor_panel_registration_before_authoritative_mapping": false,
     "new_field_member_staging": false,
     "p0_execution": false,
     "method_or_architecture": false,
