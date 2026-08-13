@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-13 latest-collision public evidence synchronization:** Exact
+> scientific source `4f58f9f90cbad68b96058c1c84cb6817730ba69a` passed Quality
+> `31686226180` and Pages `31686225742`. Dependency-complete CI recorded
+> 609/609 tests and 115 protocol invariant groups; the local canonical protocol
+> SHA-256 is `7e3e6a4f81189ea8f8364e36eb19c6a0f3341da43f4e806e68948eda55d12739`.
+> Collision config/test/audit SHA-256 are
+> `f217b90daa248592d12db30e33f91f3122da92f1db3e2830ef183c7f53d959f2` /
+> `120fa44e2ab04460b8084715997cdc2de613a0451dda880d216b6041d3897989` /
+> `1f4c737454ed423a91e5511295033e912e99e48d3c6750c06401f32f1b5f62ce`.
+> These are code/provenance results, not Aneumo scientific evidence. Real P0
+> v3 remains 0/12; no scientific server/scheduler/cache-field query, transfer,
+> PBS/GPU submission or monitoring occurred.
+
 > **2026-08-13 latest response-fidelity collision recheck:** Preserve
 > `configs/aneumo_response_fidelity_latest_collision_recheck_v1.json` and
 > `docs/aneumo-response-fidelity-latest-collision-recheck-2026-08-13.md` as the

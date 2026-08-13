@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-13 · latest-collision public evidence is green
+
+- Froze scientific source `4f58f9f90cbad68b96058c1c84cb6817730ba69a` after
+  Quality `31686226180` and Pages `31686225742` succeeded.
+- Dependency-complete CI passed 609/609 tests and 115 protocol invariant
+  groups. Local canonical protocol SHA-256 is
+  `7e3e6a4f81189ea8f8364e36eb19c6a0f3341da43f4e806e68948eda55d12739`.
+- This validation covers code, claim boundaries and the site graph. It does
+  not activate a model, scientific result, server retry or paper claim.
+
 ## 2026-08-13 · latest collisions restrict the lead to application evidence
 
 - Added PaNO as a direct collision for the broad field-error-versus-readout
