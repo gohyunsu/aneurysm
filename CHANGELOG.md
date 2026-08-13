@@ -2,6 +2,9 @@
 
 ## 2026-08-13 — family-disjoint stability P0 v1 registers without field access
 
+- Exact scientific source `c5f1cb0…8dfe` passed Quality `31711690130` at
+  635/635 tests and Pages `31711688753`; the explicit CI validation records
+  execution authorization false and staged field members zero.
 - Pinned official Connection.csv SHA-256 09a5344a…d0b and release-directory
   metadata, excluded D0 family 1, and hash-selected 12 distinct families, one
   canonical complete case each and five phases: 60 future members.

@@ -1,6 +1,10 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
 > **2026-08-13 registered non-executable stability P0 v1:** Official
+> scientific source `c5f1cb0a2acdb0841398d1ee52ebcb3140b98dfe` passed
+> Quality `31711690130` with NumPy 2.1.2, h5py 3.12.1, CPU PyTorch
+> 2.5.1, 635/635 tests, site graph and browser JavaScript; Pages
+> `31711688753` succeeded.
 > Connection.csv SHA-256 09a5344a…d0b and release-directory metadata exclude
 > D0 family 1 and field-blindly freeze 12 distinct families, one canonical
 > complete case each and phases 4.01/4.25/4.50/4.75/5.00: 60 future members.
