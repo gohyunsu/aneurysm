@@ -17,8 +17,8 @@
   },
   "transient": {
     "client_sessions_used": 2,
-    "sftp_sessions_used": 1,
-    "status": "client_size_and_checksum_exact_sftp_session_1_in_progress",
+    "sftp_sessions_used": 2,
+    "status": "client_size_and_checksum_exact_sftp_session_2_reput_in_progress",
     "client_session_1_close_reason": "orchestration_turn_interrupted",
     "client_bytes_at_session_1_close": 4571712088,
     "client_bytes": 23744862051,
@@ -27,6 +27,9 @@
     "client_checksum_verified": true,
     "payload_parsed": false,
     "source_or_checksum_failure": false,
+    "sftp_session_1_close_reason": "orchestration_turn_interrupted",
+    "server_bytes_at_sftp_session_1_close": 2644115456,
+    "sftp_session_2_resumed_same_partial": true,
     "server_staged": false
   },
   "schema": {
@@ -34,7 +37,7 @@
     "evaluated": false
   },
   "decision": {
-    "status": "transport_in_progress_transient_sftp_session_1",
+    "status": "transport_in_progress_transient_sftp_session_2",
     "storage_cap_respected": true,
     "d1_relabelled": false,
     "scientific_evidence_created": false,

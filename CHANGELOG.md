@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-14 · D2 transient SFTP resumes from preserved server partial
+
+- Preserved exactly 2,644,115,456 server partial bytes when SFTP session 1
+  ended with the orchestration-turn interruption; did not relabel it as a
+  source, checksum, storage or schema failure.
+- Opened allowed SFTP session 2/3 with `reput` on the same checksum-exact
+  client object and same incomplete-only remote object. Verified that it
+  resumed from the preserved offset rather than restarting.
+- Kept remote exactness, one-shot checksum/schema PBS, science, model, GPU,
+  test, result and paper claim at zero.
+
 ## 2026-08-14 · D2 transient v4 becomes client-exact and starts SFTP
 
 - Completed transient client session 2/3 at exact size 23,744,862,051 bytes;

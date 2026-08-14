@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D2 transient SFTP resume:** Quality/Pages-passed public source
+> `8e46c0f…` records the exact client object. SFTP session 1 ended only with
+> the orchestration-turn interruption and preserved exactly 2,644,115,456
+> server partial bytes; this is not a source, checksum, storage or schema
+> failure. SFTP session 2/3 uses `reput` on the same exact client object and
+> the same incomplete-only server object; it resumed at the preserved offset
+> and is increasing. Transient server exactness, one-shot schema/PBS, science,
+> P0/model/GPU/test/result/claim remain 0. Never use `junjinyong` or publish
+> private staging paths.
+
 > **2026-08-14 D2 transient client exact and SFTP:** Transient v4 completed
 > allowed client session 2/3 at exact size 23,744,862,051 bytes after three
 > recoverable response interruptions inside that session. Independent full
