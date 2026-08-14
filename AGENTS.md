@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-15 D3 fixed-chunk registration:** The user explicitly selected
+> D3 as a materially distinct acquisition version. D1 and D2 remain closed;
+> D3 never resumes the monolithic D2 partial or creates D2 session 4. The
+> checksum-exact 23,744,862,051-byte client object is partitioned into 22 ×
+> 1,073,741,824-byte chunks plus one 122,541,923-byte chunk. Create/upload only
+> one local chunk at a time, bind each to a private offset/size/SHA-256
+> manifest, delete it only after server size/hash match, and never re-upload a
+> completed chunk. An interrupted chunk permits only one same-chunk resume.
+> After all 23 server chunks pass, and only then, retire the closed D2 partial;
+> one CPU 4/8 GB/GPU 0 PBS finalizer reassembles and checks the exact full
+> identity under a 57,122,234,152-byte peak. Any finalizer outcome closes it.
+> A pass permits exactly one CPU 4/64 GB/GPU 0 checksum/schema PBS; any outcome
+> closes it. Scientific P0, method, architecture, GPU training, test, result
+> and claim remain 0. Never use junjinyong or publish private paths/manifests.
+
 > **2026-08-14 D2 final closure:** Final SFTP session 3/3 ended with exact
 > persistent `Connection reset` / `Couldn't send packet: Broken pipe` after
 > preserving a public-rounded 10.17 GB transient server partial. Client transient

@@ -1,0 +1,46 @@
+#!/bin/bash
+#PBS -N aurora_aneug_v4_d3_finalize
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=8gb:ngpus=0
+#PBS -l walltime=04:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_D3_CHUNK_ROOT:?set private D3 chunk root}"
+: "${AURORA_D3_MANIFEST:?set private D3 chunk manifest}"
+: "${AURORA_D2_PARTIAL:?set closed D2 partial path}"
+: "${AURORA_D3_TARGET:?set final transient target path}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_PYTHON:?set pinned Python executable}"
+: "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+
+record_root="$AURORA_OUTPUT_ROOT/aneug_processed_v4_d3"
+mkdir -p "$record_root"
+if [ -e "$record_root/transport_finalize_attempt.started" ]; then
+  echo "D3 transport finalizer already attempted; rerun is forbidden" >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-unknown}" > "$record_root/transport_finalize_attempt.started"
+attempt_log="$record_root/transport_finalize_attempt.log"
+attempt_status="$record_root/transport_finalize_attempt.status.json"
+exec >>"$attempt_log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s}\n" "$code" "$(test -e "$record_root/transport_finalize_attempt.complete" && printf true || printf false)" > "$attempt_status"; exit "$code"' EXIT
+printf 'stage=wrapper_started job=%s commit=%s\n' "${PBS_JOBID:-unknown}" "$actual_commit"
+
+PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" -m aurora.aneug_processed_v4_d3 \
+  --config "$AURORA_PROJECT_ROOT/configs/aneug_processed_v4_chunk_stage_d3.json" \
+  finalize \
+  --manifest "$AURORA_D3_MANIFEST" \
+  --chunk-root "$AURORA_D3_CHUNK_ROOT" \
+  --closed-d2-partial "$AURORA_D2_PARTIAL" \
+  --target "$AURORA_D3_TARGET" \
+  --result "$record_root/transport_result.json"
+
+printf '%s\n' complete > "$record_root/transport_finalize_attempt.complete"
+printf 'stage=transport_finalize_complete\n'

@@ -461,14 +461,39 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(audit["processed_v4_d2_probe_bytes_read_and_discarded"], 67_108_864)
         self.assertFalse(audit["processed_v4_d2_probe_persistent_output"])
         self.assertEqual(audit["processed_v4_d2_maximum_combined_new_bytes"], 57_122_234_152)
-        self.assertEqual(audit["processed_v4_d2_full_objects_downloaded"], 1)
+        self.assertEqual(audit["processed_v4_d2_full_objects_downloaded"], 2)
         self.assertEqual(audit["processed_v4_d2_steady_client_sessions_used"], 1)
         self.assertEqual(audit["processed_v4_d2_steady_client_exact_bytes"], 9_632_510_050)
         self.assertFalse(audit["processed_v4_d2_steady_payload_parsed"])
-        self.assertEqual(audit["processed_v4_d2_transient_client_sessions_used"], 0)
+        self.assertEqual(audit["processed_v4_d2_transient_client_sessions_used"], 2)
+        self.assertEqual(
+            audit["processed_v4_d2_transient_client_exact_bytes"],
+            23_744_862_051,
+        )
+        self.assertEqual(audit["processed_v4_d2_server_exact_objects"], 1)
+        self.assertEqual(
+            audit["processed_v4_d2_server_transient_partial_gb_rounded_public"],
+            10.17,
+        )
+        self.assertEqual(audit["processed_v4_d2_sftp_sessions_used"], 3)
+        self.assertFalse(audit["processed_v4_d2_further_sftp_session_allowed"])
         self.assertEqual(audit["processed_v4_d2_schema_attempts_used"], 0)
         self.assertEqual(audit["processed_v4_d2_schema_attempt_limit"], 1)
         self.assertFalse(audit["processed_v4_d2_scientific_p0_or_gpu_authorized"])
+        self.assertTrue(audit["processed_v4_d3_human_selected"])
+        self.assertFalse(audit["processed_v4_d3_is_d2_retry_or_repair"])
+        self.assertEqual(audit["processed_v4_d3_chunk_bytes"], 1_073_741_824)
+        self.assertEqual(audit["processed_v4_d3_chunk_count"], 23)
+        self.assertEqual(audit["processed_v4_d3_final_chunk_bytes"], 122_541_923)
+        self.assertEqual(audit["processed_v4_d3_chunks_completed"], 0)
+        self.assertEqual(
+            audit["processed_v4_d3_server_reassembly_peak_bytes"],
+            57_122_234_152,
+        )
+        self.assertFalse(audit["processed_v4_d3_d2_partial_retired"])
+        self.assertEqual(audit["processed_v4_d3_finalizer_attempts_used"], 0)
+        self.assertEqual(audit["processed_v4_d3_schema_attempts_used"], 0)
+        self.assertFalse(audit["processed_v4_d3_scientific_p0_or_gpu_authorized"])
         self.assertFalse(audit["processed_v4_d1_v5_or_raw_authorized"])
         self.assertFalse(audit["processed_v4_d1_scientific_p0_or_gpu_authorized"])
         self.assertFalse(audit["scientific_gate_registered"])

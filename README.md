@@ -8,7 +8,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 프로젝트입니다. 공개 저장소에는 코드·평가 계약·선행연구 감사·프로젝트 사이트를,
 원고와 미공개 결과는 별도 private 저장소에 둡니다.
 
-> **현재 판정 · 2026-08-14:** active paper identity는 없습니다. AneuG-Flow를
+> **현재 판정 · 2026-08-15:** active paper identity는 없습니다. AneuG-Flow를
 > 조건부 주 데이터 후보로, 2015 Aneurysm CFD Challenge를 같은 해부학에서
 > solver마다 생기는 구조 변동의 보조 기준선으로 재배치했습니다. AneuX는 실제
 > 형상의 morphology/OOD 감사에만 쓰고, Aneumo는 family mapping과 licence가
@@ -23,10 +23,9 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > 탐색 범위 밖의 데이터 트리를 다시 감사해 AneuG geometry 14,712개 디렉터리
 > 중 14,710개 complete bundle과 BenchAnXplore 105×80 transient velocity 자산이
 > 실제로 확보되어 있음을 확인했습니다. 공식 transient v4 target은 exact
-> 23,744,862,051-byte object로 확인했고, 60GB cap의 processed-only D1 acquisition을
-> 등록했습니다. 데이터 전체 부재가 아니라 **processed WSS의 local acquisition,
-> schema와 독립 단위**가 현재 병목입니다.
-
+> 23,744,862,051-byte object로 client에서 확인했습니다. 닫힌 D2 monolith를 재개하지
+> 않는 D3는 이를 1 GiB 이하 23개 chunk로 순차 전송하도록 사전 등록했습니다.
+> 데이터 전체 부재가 아니라 **server exactness, schema와 독립 단위**가 현재 병목입니다.
 ## 현재 상태
 
 | 항목 | 상태 | 해석 |
@@ -34,8 +33,8 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | 목표 | IEEE ISBI 2027 | four technical pages · single-blind |
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
-| processed-v4 D1 | closed after attempt 3/3 | partial 0 · connection timeout · schema/data/science verdict 0 |
-| processed-v4 D2 | closed transport-incomplete | client transient exact · server partial 10.17GB · SFTP 3/3 · schema/science 0 |
+| processed-v4 D1 / D2 | 각각 폐쇄 | compute egress 3/3 / monolithic SFTP 3/3 · scientific verdict 0 |
+| processed-v4 D3 | prospective · 실행 전 | 23 × ≤1GiB sequential chunk · schema/science 0 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -48,7 +47,6 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 [프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 WSS, critical
 point, worldline, solver variability와 evidence gate를 배경지식 없이 읽을 수
 있게 설명합니다. 과거 방향과 실패는 filterable History에서 삭제하지 않습니다.
-
 ## 연구 질문
 
 Cartesian relative L2가 낮은 transient WSS surrogate라도 source·sink·saddle과
@@ -153,7 +151,7 @@ worldline이 불안정하거나 matched failure가 없으면 방향을 닫습니
 ## Evidence ladder
 
 ```text
-D1 · exact processed-v4 acquisition + schema/norm/geometry-ID linkage [registered]
+D3 · fixed-chunk exact processed-v4 acquisition + schema/linkage [registered]
   └─ all pass → geometry-only leakage/near-duplicate grouping + split freeze
       └─ stable split → method-free structure-stability P0
           └─ stable target → matched baseline-failure P1
@@ -186,7 +184,9 @@ milliseconds`이며 partial byte, reader, schema는 모두 0입니다. 즉 60GB 
 D2는 client transient exact size/SHA를 확보했지만 마지막 SFTP 3/3이 reset되어
 server에는 10.17GB partial만 남았습니다. 네 번째 session과 schema PBS는 없으며
 schema/science는 0입니다. [폐쇄 근거](docs/aneug-processed-v4-client-staging-d2-closure-2026-08-14.md)를
-보존합니다. 새 acquisition은 explicit selection 또는 검증된 transport 변화가 필요합니다.
+보존합니다. 사용자가 선택한 D3는 monolith를 재개하지 않고 22×1GiB와 마지막
+122,541,923-byte chunk를 개별 검증합니다. 23개가 모두 exact일 때만 D2 partial을
+제거해 재조립 peak를 57,122,234,152 bytes로 제한합니다.
 
 ## 조건부 architecture와 평가
 
@@ -239,8 +239,8 @@ results/      public aggregate outcomes only
 - [machine-readable 확보 자산 ledger](configs/introai9_acquired_asset_reconciliation_v1.json)
 - [closed source-feasibility G0](configs/aneug_reference_floor_g0_v1.json)
 - [G0 execution record](results/aneug_reference_floor_g0_execution_20260814.json)
-- [processed-v4 D1 acquisition contract](configs/aneug_processed_v4_acquisition_d1.json)
-- [processed-v4 storage audit](docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md)
+- [processed-v4 D3 chunk contract](configs/aneug_processed_v4_chunk_stage_d3.json)
+- [processed-v4 D3 storage·execution audit](docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md)
 - [과거 AneuG P0 no-verdict](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md)
 - [Aneumo source authority watch](docs/aneumo-source-authority-watch-v22-2026-08-14.md)
 - [machine-readable source-watch v22](configs/source_watch_v22.json)

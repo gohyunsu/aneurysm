@@ -1,0 +1,142 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_chunk_stage_d3.v1",
+  "protocol_id": "aneug_transient_v4_chunk_staged_acquisition_d3",
+  "status": "prospective_human_selected_after_closed_d2_before_chunk_creation",
+  "as_of": "2026-08-15",
+  "human_selection": {
+    "explicitly_selected": true,
+    "selected_on": "2026-08-15",
+    "selection": "fixed_size_sequential_chunk_transport",
+    "d3_is_d2_retry_or_repair": false
+  },
+  "d2_boundary": {
+    "contract": "configs/aneug_processed_v4_client_stage_d2.json",
+    "closure": "results/aneug_processed_v4_d2_transport_closure_20260814.json",
+    "status": "closed_transport_incomplete_sftp_budget_exhausted",
+    "sftp_sessions_used": 3,
+    "further_d2_sftp_session_allowed": false,
+    "d2_schema_pbs_attempts_used": 0,
+    "d2_relabelled": false
+  },
+  "source": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "license": "cc-by-sa-4.0",
+    "official_code_repository": "WenHaoDing/AneuG-Flow",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "transient": {
+      "relative_path": "processed_data/assembled_registered_data_1k_v4.pth",
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "steady_norm_source": {
+      "relative_path": "processed_data/assembled_registered_steady_data_1k_v4.pth",
+      "bytes": 9632510050,
+      "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+      "retention": "temporary_until_successful_schema_and_compact_norm_manifest"
+    }
+  },
+  "client_precondition": {
+    "transient_exact_bytes": 23744862051,
+    "transient_exact_sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+    "payload_parsed": false,
+    "full_object_redownload_allowed": false
+  },
+  "chunk_contract": {
+    "chunk_bytes": 1073741824,
+    "chunk_count": 23,
+    "full_chunk_count": 22,
+    "final_chunk_bytes": 122541923,
+    "name_template": "transient-v4.part-{index:03d}-of-023.bin",
+    "creation_order": "strictly_ascending",
+    "one_local_chunk_at_a_time": true,
+    "local_chunk_deleted_only_after_remote_size_and_sha256_match": true,
+    "remote_completed_chunk_immutable": true,
+    "maximum_sftp_sessions_per_chunk": 2,
+    "failed_session_may_resume_same_chunk_only": true,
+    "completed_chunk_reupload_forbidden": true,
+    "per_chunk_manifest_private": true
+  },
+  "transport": {
+    "route": "exact_client_object_to_fixed_chunks_then_windows_openssh_sftp_to_introai9",
+    "material_difference_from_d2": [
+      "twenty_three_independently_verifiable_objects_instead_of_one_monolith",
+      "short_bounded_sftp_session_per_chunk",
+      "server_side_chunk_hash_before_local_chunk_deletion",
+      "pbs_reassembly_only_after_complete_chunk_manifest"
+    ],
+    "compute_node_external_download": false,
+    "login_node_external_download": false,
+    "d2_monolithic_partial_resumed": false,
+    "server_chunk_size_and_sha256_required": true,
+    "private_local_or_server_path_public": false
+  },
+  "storage": {
+    "workflow_peak_cap_bytes": 60000000000,
+    "client_staging_cap_bytes": 30000000000,
+    "client_peak_bytes": 24818603875,
+    "server_peak_before_d2_partial_retirement_bytes": 43550459845,
+    "server_reassembly_peak_after_d2_partial_retirement_bytes": 57122234152,
+    "server_after_transport_bytes": 33377372101,
+    "server_after_schema_success_bytes": 23744862051,
+    "d2_partial_retired_only_after_all_chunks_verified": true,
+    "reassembly_starts_only_after_d2_partial_retirement": true,
+    "chunks_deleted_only_after_full_size_and_sha256_match": true,
+    "steady_deleted_only_after_schema_success": true,
+    "v5_downloaded": false,
+    "raw_blood_or_wall_downloaded": false,
+    "steady_14000_case_cfd_downloaded": false,
+    "cfd_directory_downloaded": false
+  },
+  "transport_finalizer": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "maximum_pbs_attempts": 1,
+    "rerun_after_any_outcome": false,
+    "ncpus": 4,
+    "memory_gb": 8,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "checks_all_chunk_hashes_before_retiring_d2_partial": true,
+    "checks_full_size_and_sha256_before_atomic_publish": true
+  },
+  "schema_gate": {
+    "maximum_pbs_attempts": 1,
+    "rerun_after_any_outcome": false,
+    "requires_successful_transport_finalizer": true,
+    "weights_only_reader": true,
+    "mmap": true,
+    "minimum_cases": 700,
+    "expected_timesteps": 80,
+    "required_vector_wss_labels": ["wss_x", "wss_y", "wss_z"],
+    "required_geometry_labels": ["x", "y", "z"],
+    "unique_case_ids_required": true,
+    "mesh_case_order_match_required": true,
+    "local_geometry_id_linkage_report_required": true,
+    "field_values_or_scientific_metrics_read": false,
+    "case_ids_public": false
+  },
+  "execution": {
+    "schema_server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "authorization": {
+    "chunk_creation_and_sftp_staging": true,
+    "transport_finalization": true,
+    "checksum_and_schema_audit": true,
+    "geometry_grouping_and_split_freeze_after_all_pass": true,
+    "scientific_p0_or_confirmatory_test": false,
+    "method_selection": false,
+    "gpu_training": false,
+    "outer_test": false,
+    "paper_result_or_claim": false
+  }
+}

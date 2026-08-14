@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · D1 closed 3/3 · processed-v4 D2 steady exact 1/2 pending SFTP · server 0/2 · schema/science 0 · P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
-    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles. Exact official processed transient v4 is 23,744,862,051 bytes; D1 retains it and uses the 9,632,510,050-byte steady v4 only temporarily to extract physical-unit normalization, for a 33,377,372,101-byte peak below a 60 GB selected-asset cap. V5, raw blood/wall, 14,000-case steady CFD and cfd are excluded. The closed G0 remains no-verdict and is not retried: neither source feasibility nor science has a verdict. BenchAnXplore is engineering-only. The 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor. AneuX is geometry-only OOD support. Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
+    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · D1/D2 closed · processed-v4 D3 fixed-chunk transport registered · chunk 0/23 · schema/science 0 · P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles. Exact official processed transient v4 is 23,744,862,051 bytes on the client. D3 transfers it as 22 one-GiB chunks and one 122,541,923-byte final chunk, retires the closed D2 partial only after all 23 server hashes pass, and caps server reassembly at 57,122,234,152 bytes below 60 GB. V5, raw blood/wall, 14,000-case steady CFD and cfd are excluded. The closed G0 remains no-verdict and is not retried: neither source feasibility nor science has a verdict. BenchAnXplore is engineering-only. The 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor. AneuX is geometry-only OOD support. Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -46,6 +46,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "D3 replaces one fragile monolith with 23 independently verifiable chunks",
+      copy: "The user explicitly selects D3 without reopening D2. The checksum-exact 23,744,862,051-byte client object becomes 22 one-GiB chunks and one 122,541,923-byte final chunk. Each server object must pass size and SHA-256 before the local chunk is deleted. Only after all 23 pass may the closed D2 partial be retired; one CPU/GPU-0 finalizer then reassembles under a 57,122,234,152-byte peak. A pass permits one CPU/GPU-0 metadata-only schema gate, never scientific P0 or training.",
+      status: "Prospective D3 · chunk 0/23 · finalizer/schema/P0/model/GPU/result/claim 0",
+      url: "../docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md"
+    },
     {
       year: "2026.08",
       title: "The account-wide asset state is reconciled beyond the legacy project root",
@@ -1487,6 +1494,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.15",
+      category: "protocol",
+      title: "D3 fixed-chunk transport is registered after explicit human selection",
+      copy: "D1 and D2 remain closed. D3 never resumes the monolithic D2 partial. It stages 23 independently hashed chunks, retires the old partial only after every chunk passes, and reassembles under a 57.12 GB server peak. Transport finalization and metadata-only schema each have one CPU/GPU-0 PBS attempt. Scientific P0, model, training and claims remain closed.",
+      files: ["configs/aneug_processed_v4_chunk_stage_d3.json", "src/aurora/aneug_processed_v4_d3.py", "tests/test_aneug_processed_v4_d3.py", "cluster/pbs_aneug_processed_v4_d3_finalize.pbs", "cluster/pbs_aneug_processed_v4_d3_schema.pbs", "docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md", "README.md", "site/index.html", "site/learn.html", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.14",
       category: "data",

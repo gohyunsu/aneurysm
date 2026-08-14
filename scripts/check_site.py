@@ -167,11 +167,11 @@ def check_site(root: Path) -> list[str]:
         "AneuG reference-relative transient WSS 31.0/40 inactive": (
             "current reference-relative candidate boundary"
         ),
-        "processed-v4 D2 steady exact 1/2 pending SFTP": (
-            "current processed-v4 client-staging stage"
+        "processed-v4 D3 fixed-chunk transport registered": (
+            "current processed-v4 fixed-chunk stage"
         ),
-        "33,377,372,101-byte peak below a 60 GB selected-asset cap": (
-            "storage-bound acquisition boundary"
+        "caps server reassembly at 57,122,234,152 bytes below 60 GB": (
+            "D3 storage-bound reassembly boundary"
         ),
         "730 cases are not 730 independent patients": (
             "AneuG independent-unit boundary"

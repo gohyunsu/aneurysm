@@ -11249,11 +11249,46 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d2_steady_client_exact_sha256",
             "processed_v4_d2_steady_payload_parsed",
             "processed_v4_d2_transient_client_sessions_used",
+            "processed_v4_d2_transient_client_exact_bytes",
+            "processed_v4_d2_transient_client_exact_sha256",
             "processed_v4_d2_transport_result",
-            "processed_v4_d2_server_objects_staged",
+            "processed_v4_d2_server_exact_objects",
+            "processed_v4_d2_server_transient_partial_gb_rounded_public",
+            "processed_v4_d2_sftp_sessions_used",
+            "processed_v4_d2_further_sftp_session_allowed",
+            "processed_v4_d2_closure_result",
+            "processed_v4_d2_closure_result_sha256",
             "processed_v4_d2_schema_attempts_used",
             "processed_v4_d2_schema_attempt_limit",
             "processed_v4_d2_scientific_p0_or_gpu_authorized",
+            "processed_v4_d3_status",
+            "processed_v4_d3_human_selected",
+            "processed_v4_d3_is_d2_retry_or_repair",
+            "processed_v4_d3_config",
+            "processed_v4_d3_config_sha256",
+            "processed_v4_d3_evaluator",
+            "processed_v4_d3_evaluator_sha256",
+            "processed_v4_d3_test",
+            "processed_v4_d3_test_sha256",
+            "processed_v4_d3_finalizer_pbs_wrapper",
+            "processed_v4_d3_finalizer_pbs_wrapper_sha256",
+            "processed_v4_d3_schema_pbs_wrapper",
+            "processed_v4_d3_schema_pbs_wrapper_sha256",
+            "processed_v4_d3_chunk_bytes",
+            "processed_v4_d3_chunk_count",
+            "processed_v4_d3_full_chunk_count",
+            "processed_v4_d3_final_chunk_bytes",
+            "processed_v4_d3_chunks_completed",
+            "processed_v4_d3_chunk_sftp_sessions_used",
+            "processed_v4_d3_client_peak_bytes",
+            "processed_v4_d3_server_pre_retirement_peak_bytes",
+            "processed_v4_d3_server_reassembly_peak_bytes",
+            "processed_v4_d3_d2_partial_retired",
+            "processed_v4_d3_finalizer_attempts_used",
+            "processed_v4_d3_finalizer_attempt_limit",
+            "processed_v4_d3_schema_attempts_used",
+            "processed_v4_d3_schema_attempt_limit",
+            "processed_v4_d3_scientific_p0_or_gpu_authorized",
             "processed_v4_d1_v5_or_raw_authorized",
             "processed_v4_d1_scientific_p0_or_gpu_authorized",
             "scientific_gate_registered",
@@ -11349,13 +11384,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "results/aneug_processed_v4_d1_execution_20260814.json"
         or reference_floor["processed_v4_d1_closed"] is not True
         or reference_floor["processed_v4_d2_status"]
-        != "transport_in_progress_steady_client_exact_complete_pending_sftp_transient_not_started"
+        != "closed_transport_incomplete_after_sftp_3_of_3_client_transient_exact_server_partial_schema_unevaluated_no_scientific_verdict"
         or reference_floor["processed_v4_d2_config_sha256"]
         != "cba7a3989471c499fc95f631ec2f60c71b352605a0891810dacb6f9415933121"
         or reference_floor["processed_v4_d2_evaluator_sha256"]
         != "d1c4592e6f4ab142c923c288ab2248e0af0b197bb0083ecd1fb1f6b547727685"
         or reference_floor["processed_v4_d2_test_sha256"]
-        != "5da12d7417faadf370e7ea55e238fdbf98578024bdb13971466c0e591d916532"
+        != "b37e2a82b6447df376f4c4ab41630da4146c448985804426d7b32065b1538b50"
         or reference_floor["processed_v4_d2_pbs_wrapper_sha256"]
         != "7836345ea6cecfb917bf8bf01d353c90709a3244e845271b92e700f821383219"
         or reference_floor["processed_v4_d2_transport_route"]
@@ -11366,19 +11401,47 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != 60000000000
         or reference_floor["processed_v4_d2_maximum_combined_new_bytes"]
         != 57122234152
-        or reference_floor["processed_v4_d2_full_objects_downloaded"] != 1
+        or reference_floor["processed_v4_d2_full_objects_downloaded"] != 2
         or reference_floor["processed_v4_d2_steady_client_sessions_used"] != 1
         or reference_floor["processed_v4_d2_steady_client_exact_bytes"] != 9632510050
         or reference_floor["processed_v4_d2_steady_client_exact_sha256"]
         != "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
-        or reference_floor["processed_v4_d2_transient_client_sessions_used"] != 0
+        or reference_floor["processed_v4_d2_transient_client_sessions_used"] != 2
+        or reference_floor["processed_v4_d2_transient_client_exact_bytes"]
+        != 23744862051
+        or reference_floor["processed_v4_d2_transient_client_exact_sha256"]
+        != "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
         or reference_floor["processed_v4_d2_transport_result"]
         != "results/aneug_processed_v4_d2_transport_20260814.json"
-        or reference_floor["processed_v4_d2_server_objects_staged"] != 0
+        or reference_floor["processed_v4_d2_server_exact_objects"] != 1
+        or reference_floor["processed_v4_d2_server_transient_partial_gb_rounded_public"]
+        != 10.17
+        or reference_floor["processed_v4_d2_sftp_sessions_used"] != 3
+        or reference_floor["processed_v4_d2_closure_result"]
+        != "results/aneug_processed_v4_d2_transport_closure_20260814.json"
+        or reference_floor["processed_v4_d2_closure_result_sha256"]
+        != "950f1956b6d8b934a07b6b75d4fbafdb60b698206f9c2412d8065ad2658ef272"
         or reference_floor["processed_v4_d2_schema_attempts_used"] != 0
         or reference_floor["processed_v4_d2_schema_attempt_limit"] != 1
+        or reference_floor["processed_v4_d3_status"]
+        != "prospective_human_selected_fixed_chunk_transport_before_chunk_creation"
+        or reference_floor["processed_v4_d3_chunk_bytes"] != 1073741824
+        or reference_floor["processed_v4_d3_chunk_count"] != 23
+        or reference_floor["processed_v4_d3_full_chunk_count"] != 22
+        or reference_floor["processed_v4_d3_final_chunk_bytes"] != 122541923
+        or reference_floor["processed_v4_d3_chunks_completed"] != 0
+        or reference_floor["processed_v4_d3_chunk_sftp_sessions_used"] != 0
+        or reference_floor["processed_v4_d3_client_peak_bytes"] != 24818603875
+        or reference_floor["processed_v4_d3_server_pre_retirement_peak_bytes"]
+        != 43550459845
+        or reference_floor["processed_v4_d3_server_reassembly_peak_bytes"]
+        != 57122234152
+        or reference_floor["processed_v4_d3_finalizer_attempts_used"] != 0
+        or reference_floor["processed_v4_d3_finalizer_attempt_limit"] != 1
+        or reference_floor["processed_v4_d3_schema_attempts_used"] != 0
+        or reference_floor["processed_v4_d3_schema_attempt_limit"] != 1
         or reference_floor["next_allowed_action"]
-        != "sftp_exact_steady_then_verify_server_size_delete_client_steady_and_download_exact_transient"
+        != "create_upload_and_remote_verify_d3_chunks_in_strict_order_starting_at_index_0"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11406,7 +11469,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d1_attempt_3_schema_evaluated",
                 "processed_v4_d2_probe_persistent_output",
                 "processed_v4_d2_steady_payload_parsed",
+                "processed_v4_d2_further_sftp_session_allowed",
                 "processed_v4_d2_scientific_p0_or_gpu_authorized",
+                "processed_v4_d3_is_d2_retry_or_repair",
+                "processed_v4_d3_d2_partial_retired",
+                "processed_v4_d3_scientific_p0_or_gpu_authorized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",
@@ -11420,6 +11487,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["introai9_external_data_tree_reconciliation_completed"]
         is not True
         or reference_floor["introai9_aneug_geometry_payload_confirmed"] is not True
+        or reference_floor["processed_v4_d3_human_selected"] is not True
     ):
         raise ProtocolError(
             "The AneuG reference-relative direction must remain an inactive 31/40 "
@@ -11445,6 +11513,22 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("processed_v4_d1_evaluator", "processed_v4_d1_evaluator_sha256"),
         ("processed_v4_d1_test", "processed_v4_d1_test_sha256"),
         ("processed_v4_d1_pbs_wrapper", "processed_v4_d1_pbs_wrapper_sha256"),
+        ("processed_v4_d2_config", "processed_v4_d2_config_sha256"),
+        ("processed_v4_d2_evaluator", "processed_v4_d2_evaluator_sha256"),
+        ("processed_v4_d2_test", "processed_v4_d2_test_sha256"),
+        ("processed_v4_d2_pbs_wrapper", "processed_v4_d2_pbs_wrapper_sha256"),
+        ("processed_v4_d2_closure_result", "processed_v4_d2_closure_result_sha256"),
+        ("processed_v4_d3_config", "processed_v4_d3_config_sha256"),
+        ("processed_v4_d3_evaluator", "processed_v4_d3_evaluator_sha256"),
+        ("processed_v4_d3_test", "processed_v4_d3_test_sha256"),
+        (
+            "processed_v4_d3_finalizer_pbs_wrapper",
+            "processed_v4_d3_finalizer_pbs_wrapper_sha256",
+        ),
+        (
+            "processed_v4_d3_schema_pbs_wrapper",
+            "processed_v4_d3_schema_pbs_wrapper_sha256",
+        ),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
@@ -11456,6 +11540,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     checks.append("AneuG reference-relative source-feasibility G0 boundary")
     checks.append("introai9 acquired-asset reconciliation beyond legacy root")
     checks.append("AneuG processed-v4 storage-bounded acquisition boundary")
+    checks.append("AneuG processed-v4 D3 fixed-chunk transport boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
         "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",

@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-15 · D3 fixed-chunk transport is prospectively registered
+
+- Recorded the user's explicit selection of a materially distinct D3. It does
+  not reopen D2 or create a fourth monolithic SFTP session.
+- Partitioned the checksum-exact 23,744,862,051-byte client object into 22
+  one-GiB chunks plus one 122,541,923-byte final chunk. Each server chunk must
+  match size and SHA-256 before its local copy is deleted; one interrupted
+  chunk may resume once and a completed chunk may never be re-uploaded.
+- Fixed the storage order: verify all 23 chunks, retire the closed D2 partial,
+  reassemble under a 57,122,234,152-byte peak, verify full identity, then
+  delete chunks. Registered one CPU/GPU-0 PBS finalizer and, only after its
+  pass, one CPU/GPU-0 schema gate. Scientific P0/model/GPU/result remain zero.
+
 ## 2026-08-14 · D2 closes transport-incomplete after final SFTP reset
 
 - Final SFTP session 3/3 ended with remote SSH connection reset and broken
