@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D2 steady server staging and transient resume:** Steady v4
+> completed Windows OpenSSH SFTP session 1 and the introai9 object has exact
+> size 9,632,510,050 bytes. Its independently checksum-matched client copy was
+> deleted before transient acquisition and is recoverable from the official
+> source. Transient client session 1 ended only because the orchestration turn
+> was interrupted, preserving exactly 4,571,712,088 partial bytes; this is not
+> a source, checksum, schema or scientific failure. The same exact partial is
+> increasing in allowed client session 2/3. Steady is server-exact 1/2,
+> transient is not yet client-exact or server-staged, and schema/PBS/science,
+> P0/model/GPU/test/result/claim remain 0. The registered wrapper requires the
+> temporary steady filename and deletes it only after schema success. Never
+> use `junjinyong` or publish private staging paths.
+
 > **2026-08-14 D2 steady client completion:** Quality-passed D2 source
 > `0b8eab2…` downloaded steady v4 in client session 1. Exact size is
 > 9,632,510,050 bytes and full SHA-256 matches official

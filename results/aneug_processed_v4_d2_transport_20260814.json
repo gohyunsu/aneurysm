@@ -6,16 +6,23 @@
   "public_quality_run": 31733388469,
   "steady_norm_source": {
     "client_sessions_used": 1,
-    "status": "client_exact_complete_pending_sftp",
+    "sftp_sessions_used": 1,
+    "status": "client_checksum_and_server_size_exact_client_copy_deleted",
     "bytes": 9632510050,
     "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
     "payload_parsed": false,
-    "server_staged": false
+    "server_staged": true,
+    "server_size_verified": true,
+    "client_copy_deleted": true
   },
   "transient": {
-    "client_sessions_used": 0,
-    "status": "not_started",
-    "client_bytes": 0,
+    "client_sessions_used": 2,
+    "status": "client_session_2_resume_in_progress",
+    "client_session_1_close_reason": "orchestration_turn_interrupted",
+    "client_bytes_at_session_1_close": 4571712088,
+    "latest_observed_client_bytes": 4728883800,
+    "exact_bytes_required": 23744862051,
+    "source_or_checksum_failure": false,
     "server_staged": false
   },
   "schema": {
@@ -23,7 +30,7 @@
     "evaluated": false
   },
   "decision": {
-    "status": "transport_in_progress_steady_exact_complete_pending_sftp",
+    "status": "transport_in_progress_transient_client_session_2",
     "storage_cap_respected": true,
     "d1_relabelled": false,
     "scientific_evidence_created": false,

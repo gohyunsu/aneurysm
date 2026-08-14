@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-14 · D2 stages steady and resumes transient after client interruption
+
+- Completed steady SFTP session 1 and verified the introai9 object at the
+  exact 9,632,510,050-byte size, then deleted only its checksum-matched client
+  copy before transient acquisition.
+- Preserved 4,571,712,088 transient partial bytes when client session 1 ended
+  with the orchestration interruption; resumed the same object and partial in
+  allowed client session 2/3 without relabelling it as source failure.
+- Kept transient checksum/server staging and the one-shot CPU schema gate at
+  zero; no scientific P0, model, GPU, test, result or paper claim opened.
+
 ## 2026-08-14 · D2 steady v4 completes exact on the client
 
 - Completed steady v4 in client session 1 at exact size 9,632,510,050 bytes;

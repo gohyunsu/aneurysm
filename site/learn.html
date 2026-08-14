@@ -601,6 +601,10 @@
             parse·metric은 0입니다. Client 30GB, server peak 33.38GB, 최대 동시 new
             storage 57.12GB로 동결했습니다. Full object 전송 후에도 checksum/schema는
             introai9 CPU/PBS에서 단 한 번만 실행하며, pass 전 model/GPU/claim은 0입니다.
+            Steady는 client checksum과 introai9 exact size를 통과했고 client copy를
+            삭제했습니다. Transient client session 1은 source 오류가 아니라 실행 turn
+            interruption으로 4,571,712,088-byte partial을 보존한 채 닫혔고, 동일 partial을
+            허용된 session 2/3에서 resume하고 있습니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
