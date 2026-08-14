@@ -167,7 +167,7 @@ def check_site(root: Path) -> list[str]:
         "AneuG reference-relative transient WSS 31.0/40 inactive": (
             "current reference-relative candidate boundary"
         ),
-        "processed-v4 D2 registered client staging before full-object access": (
+        "processed-v4 D2 steady exact 1/2 pending SFTP": (
             "current processed-v4 client-staging stage"
         ),
         "33,377,372,101-byte peak below a 60 GB selected-asset cap": (

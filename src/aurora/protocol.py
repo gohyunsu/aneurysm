@@ -11244,6 +11244,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d2_workflow_peak_cap_bytes",
             "processed_v4_d2_maximum_combined_new_bytes",
             "processed_v4_d2_full_objects_downloaded",
+            "processed_v4_d2_steady_client_sessions_used",
+            "processed_v4_d2_steady_client_exact_bytes",
+            "processed_v4_d2_steady_client_exact_sha256",
+            "processed_v4_d2_steady_payload_parsed",
+            "processed_v4_d2_transient_client_sessions_used",
+            "processed_v4_d2_transport_result",
             "processed_v4_d2_server_objects_staged",
             "processed_v4_d2_schema_attempts_used",
             "processed_v4_d2_schema_attempt_limit",
@@ -11343,7 +11349,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "results/aneug_processed_v4_d1_execution_20260814.json"
         or reference_floor["processed_v4_d1_closed"] is not True
         or reference_floor["processed_v4_d2_status"]
-        != "registered_client_staged_before_full_object_download_after_discarded_64mib_route_probe"
+        != "transport_in_progress_steady_client_exact_complete_pending_sftp_transient_not_started"
         or reference_floor["processed_v4_d2_config_sha256"]
         != "cba7a3989471c499fc95f631ec2f60c71b352605a0891810dacb6f9415933121"
         or reference_floor["processed_v4_d2_evaluator_sha256"]
@@ -11360,12 +11366,19 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != 60000000000
         or reference_floor["processed_v4_d2_maximum_combined_new_bytes"]
         != 57122234152
-        or reference_floor["processed_v4_d2_full_objects_downloaded"] != 0
+        or reference_floor["processed_v4_d2_full_objects_downloaded"] != 1
+        or reference_floor["processed_v4_d2_steady_client_sessions_used"] != 1
+        or reference_floor["processed_v4_d2_steady_client_exact_bytes"] != 9632510050
+        or reference_floor["processed_v4_d2_steady_client_exact_sha256"]
+        != "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+        or reference_floor["processed_v4_d2_transient_client_sessions_used"] != 0
+        or reference_floor["processed_v4_d2_transport_result"]
+        != "results/aneug_processed_v4_d2_transport_20260814.json"
         or reference_floor["processed_v4_d2_server_objects_staged"] != 0
         or reference_floor["processed_v4_d2_schema_attempts_used"] != 0
         or reference_floor["processed_v4_d2_schema_attempt_limit"] != 1
         or reference_floor["next_allowed_action"]
-        != "execute_registered_d2_sequential_client_stage_steady_then_transient_then_one_shot_introai9_cpu_pbs_checksum_schema"
+        != "sftp_exact_steady_then_verify_server_size_delete_client_steady_and_download_exact_transient"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11392,6 +11405,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d1_attempt_2_schema_evaluated",
                 "processed_v4_d1_attempt_3_schema_evaluated",
                 "processed_v4_d2_probe_persistent_output",
+                "processed_v4_d2_steady_payload_parsed",
                 "processed_v4_d2_scientific_p0_or_gpu_authorized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",

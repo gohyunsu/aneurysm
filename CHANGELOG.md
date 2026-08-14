@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-14 · D2 steady v4 completes exact on the client
+
+- Completed steady v4 in client session 1 at exact size 9,632,510,050 bytes;
+  full SHA-256 matches official `0c03c1d9…0177f`. No payload was parsed.
+- Kept server objects at 0/2, transient sessions at 0 and schema/science at 0.
+
 ## 2026-08-14 · client-staged processed-v4 D2 registered
 
 - Preserved D1 as closed and replaced compute-node egress with a materially

@@ -1,0 +1,34 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d2_transport.v1",
+  "protocol_id": "aneug_transient_v4_client_staged_acquisition_d2",
+  "as_of": "2026-08-14",
+  "public_registration_commit": "0b8eab2e270fff4af2b486e460cb9ec46b4ca39f",
+  "public_quality_run": 31733388469,
+  "steady_norm_source": {
+    "client_sessions_used": 1,
+    "status": "client_exact_complete_pending_sftp",
+    "bytes": 9632510050,
+    "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "payload_parsed": false,
+    "server_staged": false
+  },
+  "transient": {
+    "client_sessions_used": 0,
+    "status": "not_started",
+    "client_bytes": 0,
+    "server_staged": false
+  },
+  "schema": {
+    "pbs_attempts_used": 0,
+    "evaluated": false
+  },
+  "decision": {
+    "status": "transport_in_progress_steady_exact_complete_pending_sftp",
+    "storage_cap_respected": true,
+    "d1_relabelled": false,
+    "scientific_evidence_created": false,
+    "model_or_gpu_opened": false,
+    "paper_claim_opened": false,
+    "excluded_server_accessed": false
+  }
+}

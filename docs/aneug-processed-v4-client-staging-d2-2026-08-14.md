@@ -37,3 +37,11 @@ A pass deletes the full steady object after writing the compact norm manifest
 and opens only geometry near-duplicate grouping and a development-split freeze.
 It does not open scientific P0, method selection, GPU training, outer test or a
 paper result.
+
+## Current transport state
+
+Steady v4 completed in client session 1 at exact size 9,632,510,050 bytes and
+full official SHA-256 `0c03c1d9…0177f`. Its payload was not parsed. Server
+objects remain 0/2, transient has not started and the one-shot schema gate is
+untouched. Next, upload this exact object through Windows OpenSSH SFTP, verify
+server size, remove the client steady copy and begin transient acquisition.

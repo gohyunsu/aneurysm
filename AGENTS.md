@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D2 steady client completion:** Quality-passed D2 source
+> `0b8eab2…` downloaded steady v4 in client session 1. Exact size is
+> 9,632,510,050 bytes and full SHA-256 matches official
+> `0c03c1d9…0177f`; no payload was parsed. Server staged objects remain 0/2,
+> transient client sessions 0 and schema/PBS/science 0. Next: SFTP the exact
+> steady object, verify server size, delete the client steady copy, then begin
+> transient. Never use `junjinyong` or expose private staging paths.
+
 > **2026-08-14 client-staged D2 registration:** D1 remains closed 3/3 and is
 > never relabelled. A local HEAD audit verified both official v4 identities,
 > and a 67,108,864-byte transient range probe returned HTTP 206 at 5,697,265
