@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D2 final transient SFTP session:** SFTP session 2 also ended
+> only with a turn-lifecycle interruption and preserved exactly 6,272,253,952
+> remote partial bytes. Final allowed SFTP session 3/3 uses the same exact
+> client object and same incomplete-only remote object with `reput`. It runs
+> as a detached Windows OpenSSH batch process so later turn changes cannot
+> terminate it, and the remote partial is increasing. Internal connection
+> attempts are bounded in that one process. Any session-3 outcome closes SFTP;
+> never open a fourth session. Remote exactness, checksum/schema PBS, science,
+> P0/model/GPU/test/result/claim remain 0. Never use `junjinyong` or publish
+> private staging paths.
+
 > **2026-08-14 D2 transient SFTP resume:** Quality/Pages-passed public source
 > `8e46c0f…` records the exact client object. SFTP session 1 ended only with
 > the orchestration-turn interruption and preserved exactly 2,644,115,456

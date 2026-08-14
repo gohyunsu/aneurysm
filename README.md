@@ -35,7 +35,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 | closed after attempt 3/3 | partial 0 · connection timeout · schema/data/science verdict 0 |
-| processed-v4 D2 | transport in progress | steady server exact · transient client checksum exact, SFTP `reput` 2/3 · schema/science 0 |
+| processed-v4 D2 | transport in progress | steady server exact · transient client checksum exact, final detached SFTP `reput` 3/3 · schema/science 0 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |

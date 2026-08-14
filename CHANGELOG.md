@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-14 · D2 enters final bounded transient SFTP session
+
+- Preserved exactly 6,272,253,952 remote partial bytes when SFTP session 2
+  ended with a second turn-lifecycle interruption; did not relabel transport
+  orchestration as a source, checksum, storage, schema or science failure.
+- Started final allowed SFTP session 3/3 with `reput` on the same exact local
+  object and incomplete-only remote partial. Detached the Windows OpenSSH
+  batch process from turn lifecycle and bounded internal connection attempts.
+- Any outcome now closes SFTP and no fourth session exists. Remote exactness,
+  schema/PBS, science, model, GPU, test, result and paper claim remain zero.
+
 ## 2026-08-14 · D2 transient SFTP resumes from preserved server partial
 
 - Preserved exactly 2,644,115,456 server partial bytes when SFTP session 1

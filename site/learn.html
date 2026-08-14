@@ -610,7 +610,11 @@
             incomplete-only 이름에 전송했습니다. Session 1은 orchestration interruption
             시점의 2,644,115,456 server partial bytes를 보존했고, 동일 client object와
             remote partial을 SFTP session 2/3의 <code>reput</code>으로 resume하고
-            있습니다. Remote exact size와 one-shot schema는 아직 0입니다.
+            있었습니다. 두 번째 turn-lifecycle interruption에서도 6,272,253,952
+            server bytes가 보존됐습니다. 마지막 session 3/3은 같은 object/partial의
+            <code>reput</code>을 detached Windows OpenSSH batch로 실행해 turn과
+            분리했습니다. 이 결과가 SFTP를 닫고 네 번째 session은 없습니다. Remote
+            exact size와 one-shot schema는 아직 0입니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
