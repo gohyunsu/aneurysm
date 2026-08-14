@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D2 transient client exact and SFTP:** Transient v4 completed
+> allowed client session 2/3 at exact size 23,744,862,051 bytes after three
+> recoverable response interruptions inside that session. Independent full
+> SHA-256 exactly matches official `141541ed…51c9`; no payload was parsed.
+> Windows OpenSSH SFTP session 1/3 is uploading the exact object to an
+> incomplete-only server filename. Steady remains server-exact and its client
+> copy remains deleted. Transient is client-exact but not yet server-exact;
+> checksum/schema PBS, scientific P0, model, GPU, test, result and claim remain
+> 0. Never use `junjinyong` or publish private staging paths.
+
 > **2026-08-14 D2 steady server staging and transient resume:** Steady v4
 > completed Windows OpenSSH SFTP session 1 and the introai9 object has exact
 > size 9,632,510,050 bytes. Its independently checksum-matched client copy was

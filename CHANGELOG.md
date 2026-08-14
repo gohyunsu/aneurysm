@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-14 · D2 transient v4 becomes client-exact and starts SFTP
+
+- Completed transient client session 2/3 at exact size 23,744,862,051 bytes;
+  independent full SHA-256 matches official `141541ed…51c9` and no payload was
+  parsed. Preserved three recoverable response interruptions inside the same
+  session rather than counting them as new sessions or source failures.
+- Started Windows OpenSSH SFTP session 1/3 to an incomplete-only server name.
+  Kept server exactness and the single CPU/PBS schema attempt at zero until
+  the transfer finishes and the remote size is independently checked.
+- Opened no field read, scientific P0, model, GPU, test, result or paper claim.
+
 ## 2026-08-14 · D2 stages steady and resumes transient after client interruption
 
 - Completed steady SFTP session 1 and verified the introai9 object at the

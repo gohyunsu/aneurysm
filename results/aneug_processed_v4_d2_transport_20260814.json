@@ -17,11 +17,15 @@
   },
   "transient": {
     "client_sessions_used": 2,
-    "status": "client_session_2_resume_in_progress",
+    "sftp_sessions_used": 1,
+    "status": "client_size_and_checksum_exact_sftp_session_1_in_progress",
     "client_session_1_close_reason": "orchestration_turn_interrupted",
     "client_bytes_at_session_1_close": 4571712088,
-    "latest_observed_client_bytes": 4728883800,
-    "exact_bytes_required": 23744862051,
+    "client_bytes": 23744862051,
+    "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+    "client_size_verified": true,
+    "client_checksum_verified": true,
+    "payload_parsed": false,
     "source_or_checksum_failure": false,
     "server_staged": false
   },
@@ -30,7 +34,7 @@
     "evaluated": false
   },
   "decision": {
-    "status": "transport_in_progress_transient_client_session_2",
+    "status": "transport_in_progress_transient_sftp_session_1",
     "storage_cap_respected": true,
     "d1_relabelled": false,
     "scientific_evidence_created": false,
