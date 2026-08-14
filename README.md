@@ -35,7 +35,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 | closed after attempt 3/3 | partial 0 · connection timeout · schema/data/science verdict 0 |
-| processed-v4 D2 | transport in progress | steady server exact · transient client checksum exact, final detached SFTP `reput` 3/3 · schema/science 0 |
+| processed-v4 D2 | closed transport-incomplete | client transient exact · server partial 10.17GB · SFTP 3/3 · schema/science 0 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -183,10 +183,10 @@ milliseconds`이며 partial byte, reader, schema는 모두 0입니다. 즉 60GB 
 계획이 기각된 것이 아니라 compute-node external transport가 완료되지 않은
 것입니다. D1은 3/3에서 닫혔고 동일 contract 재제출은 없습니다.
 
-D2는 compute-node download를 반복하지 않습니다. 접속이 확인된 client에서 steady→transient 순으로 exact object를 하나씩 받고 checksum 한 뒤 Windows
-OpenSSH SFTP로 staging합니다. 최대 동시 new byte는 57.12GB로 60GB
-경계 아래입니다. 두 server object의 size가 맞을 때만 introai9 CPU/PBS에서
-checksum·schema를 단 한 번 검사하며, 현재 full object와 scientific evidence는 0입니다.
+D2는 client transient exact size/SHA를 확보했지만 마지막 SFTP 3/3이 reset되어
+server에는 10.17GB partial만 남았습니다. 네 번째 session과 schema PBS는 없으며
+schema/science는 0입니다. [폐쇄 근거](docs/aneug-processed-v4-client-staging-d2-closure-2026-08-14.md)를
+보존합니다. 새 acquisition은 explicit selection 또는 검증된 transport 변화가 필요합니다.
 
 ## 조건부 architecture와 평가
 

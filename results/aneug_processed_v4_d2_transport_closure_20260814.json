@@ -1,0 +1,66 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d2_transport_closure.v1",
+  "protocol_id": "aneug_transient_v4_client_staged_acquisition_d2",
+  "as_of": "2026-08-14",
+  "status": "closed_transport_incomplete_sftp_budget_exhausted",
+  "client": {
+    "steady_sessions_used": 1,
+    "steady_bytes": 9632510050,
+    "steady_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "steady_copy_deleted_after_server_size_match": true,
+    "transient_sessions_used": 2,
+    "transient_bytes": 23744862051,
+    "transient_sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+    "transient_exact": true,
+    "payload_parsed": false
+  },
+  "server": {
+    "steady_bytes": 9632510050,
+    "steady_size_exact": true,
+    "transient_expected_bytes": 23744862051,
+    "transient_partial_gb_rounded_public": 10.17,
+    "transient_size_exact": false,
+    "sftp_sessions_used": 3,
+    "further_sftp_session_allowed": false
+  },
+  "sftp_session_ledger": [
+    {
+      "session": 1,
+      "close_reason": "orchestration_turn_interrupted",
+      "server_partial_gb_rounded_public": 2.64,
+      "source_or_checksum_failure": false
+    },
+    {
+      "session": 2,
+      "close_reason": "turn_lifecycle_interrupted",
+      "server_partial_gb_rounded_public": 6.27,
+      "same_partial_reput": true,
+      "source_or_checksum_failure": false
+    },
+    {
+      "session": 3,
+      "close_reason": "remote_ssh_connection_reset_broken_pipe",
+      "server_partial_gb_rounded_public": 10.17,
+      "same_partial_reput": true,
+      "detached_from_turn_lifecycle": true,
+      "private_log_metadata_public": false
+    }
+  ],
+  "schema_gate": {
+    "pbs_attempts_used": 0,
+    "attempt_marker_exists": false,
+    "checksum_or_schema_evaluated": false,
+    "scientific_field_read": false
+  },
+  "decision": {
+    "same_contract_repair_or_retry": false,
+    "fourth_sftp_session_allowed": false,
+    "dataset_rejected": false,
+    "storage_plan_rejected": false,
+    "scientific_verdict": false,
+    "model_or_gpu_opened": false,
+    "paper_result_or_claim_opened": false,
+    "excluded_server_accessed": false,
+    "next_action": "materially_distinct_acquisition_version_requires_explicit_human_selection_or_verified_transport_change"
+  }
+}

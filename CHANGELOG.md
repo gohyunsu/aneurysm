@@ -1,8 +1,20 @@
 # Changelog
 
+## 2026-08-14 · D2 closes transport-incomplete after final SFTP reset
+
+- Final SFTP session 3/3 ended with remote SSH connection reset and broken
+  pipe, preserving a public-rounded 10.17 GB transient server partial. Private
+  endpoint and log metadata remain outside the public repository.
+- Preserved client transient as exact 23,744,862,051 bytes with official full
+  SHA-256 match and server steady at exact 9,632,510,050-byte size. Did not
+  rename the server partial or submit the checksum/schema PBS.
+- Closed D2 without repair, resume or fourth SFTP session. Kept schema, field
+  read, science, model, GPU, test, result and paper claim at zero; this is not
+  a dataset, storage-plan or scientific failure.
+
 ## 2026-08-14 · D2 enters final bounded transient SFTP session
 
-- Preserved exactly 6,272,253,952 remote partial bytes when SFTP session 2
+- Preserved a public-rounded 6.27 GB remote partial when SFTP session 2
   ended with a second turn-lifecycle interruption; did not relabel transport
   orchestration as a source, checksum, storage, schema or science failure.
 - Started final allowed SFTP session 3/3 with `reput` on the same exact local
@@ -13,7 +25,7 @@
 
 ## 2026-08-14 · D2 transient SFTP resumes from preserved server partial
 
-- Preserved exactly 2,644,115,456 server partial bytes when SFTP session 1
+- Preserved a public-rounded 2.64 GB server partial when SFTP session 1
   ended with the orchestration-turn interruption; did not relabel it as a
   source, checksum, storage or schema failure.
 - Opened allowed SFTP session 2/3 with `reput` on the same checksum-exact
@@ -38,7 +50,7 @@
 - Completed steady SFTP session 1 and verified the introai9 object at the
   exact 9,632,510,050-byte size, then deleted only its checksum-matched client
   copy before transient acquisition.
-- Preserved 4,571,712,088 transient partial bytes when client session 1 ended
+- Preserved a public-rounded 4.57 GB transient partial when client session 1 ended
   with the orchestration interruption; resumed the same object and partial in
   allowed client session 2/3 without relabelling it as source failure.
 - Kept transient checksum/server staging and the one-shot CPU schema gate at
@@ -967,8 +979,8 @@
   public-key authentication.
 - Obtained no remote shell or SFTP listing because session opening timed out.
   Presence and absence are both unresolved; authentication is not an asset.
-- Preserved the prior bounded fact that `/home/introai9/AAAI` and aneurysm
-  traces existed while IntrA was only a repository skeleton with unverified
+- Preserved the prior bounded fact that a legacy project scope contained
+  aneurysm traces while IntrA was only a repository skeleton with unverified
   mesh payload. Current-direction verified train/validation/test cases remain 0.
 - Submitted no PBS job, queried no scheduler, used no GPU, transferred no file
   and did not access `junjinyong`. A future retry requires an external service

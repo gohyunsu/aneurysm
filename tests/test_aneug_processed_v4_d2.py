@@ -12,9 +12,27 @@ from aurora.aneug_processed_v4_d2 import load_contract
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneug_processed_v4_client_stage_d2.json"
+CLOSURE = ROOT / "results" / "aneug_processed_v4_d2_transport_closure_20260814.json"
 
 
 class AneuGProcessedV4D2Tests(unittest.TestCase):
+    def test_closed_transport_record_preserves_partial_and_forbids_retry(self) -> None:
+        closure = json.loads(CLOSURE.read_text(encoding="utf-8"))
+        self.assertEqual(
+            closure["status"],
+            "closed_transport_incomplete_sftp_budget_exhausted",
+        )
+        self.assertEqual(closure["server"]["sftp_sessions_used"], 3)
+        self.assertEqual(closure["server"]["transient_partial_gb_rounded_public"], 10.17)
+        self.assertFalse(closure["server"]["transient_size_exact"])
+        self.assertFalse(closure["server"]["further_sftp_session_allowed"])
+        self.assertEqual(closure["schema_gate"]["pbs_attempts_used"], 0)
+        self.assertFalse(closure["schema_gate"]["checksum_or_schema_evaluated"])
+        self.assertFalse(closure["decision"]["same_contract_repair_or_retry"])
+        self.assertFalse(closure["decision"]["scientific_verdict"])
+        self.assertNotIn("transient_partial_bytes", closure["server"])
+        self.assertNotIn("persistent_error", closure["sftp_session_ledger"][-1])
+
     def test_route_is_materially_distinct_and_d1_remains_closed(self) -> None:
         contract = load_contract(CONFIG)
         self.assertEqual(contract["d1_boundary"]["attempts_used"], 3)

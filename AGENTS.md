@@ -1,8 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-14 D2 final closure:** Final SFTP session 3/3 ended with exact
+> persistent `Connection reset` / `Couldn't send packet: Broken pipe` after
+> preserving a public-rounded 10.17 GB transient server partial. Client transient
+> remains exact at 23,744,862,051 bytes/SHA-256 `141541ed…51c9`; server steady
+> remains exact-size at 9,632,510,050 bytes. SFTP is exhausted and closed:
+> never repair/resume or open a fourth session. The checksum/schema PBS was
+> not submitted; marker, schema, field read, science, P0/model/GPU/test/result/
+> claim remain 0. This is transport-incomplete, not dataset, storage-plan or
+> scientific failure. A materially distinct version requires explicit human
+> selection or a verified transport change. Never use `junjinyong` or publish
+> private staging paths.
+
 > **2026-08-14 D2 final transient SFTP session:** SFTP session 2 also ended
-> only with a turn-lifecycle interruption and preserved exactly 6,272,253,952
-> remote partial bytes. Final allowed SFTP session 3/3 uses the same exact
+> only with a turn-lifecycle interruption and preserved a public-rounded
+> 6.27 GB remote partial. Final allowed SFTP session 3/3 uses the same exact
 > client object and same incomplete-only remote object with `reput`. It runs
 > as a detached Windows OpenSSH batch process so later turn changes cannot
 > terminate it, and the remote partial is increasing. Internal connection
@@ -13,8 +25,8 @@
 
 > **2026-08-14 D2 transient SFTP resume:** Quality/Pages-passed public source
 > `8e46c0f…` records the exact client object. SFTP session 1 ended only with
-> the orchestration-turn interruption and preserved exactly 2,644,115,456
-> server partial bytes; this is not a source, checksum, storage or schema
+> the orchestration-turn interruption and preserved a public-rounded 2.64 GB
+> server partial; this is not a source, checksum, storage or schema
 > failure. SFTP session 2/3 uses `reput` on the same exact client object and
 > the same incomplete-only server object; it resumed at the preserved offset
 > and is increasing. Transient server exactness, one-shot schema/PBS, science,
@@ -36,7 +48,7 @@
 > size 9,632,510,050 bytes. Its independently checksum-matched client copy was
 > deleted before transient acquisition and is recoverable from the official
 > source. Transient client session 1 ended only because the orchestration turn
-> was interrupted, preserving exactly 4,571,712,088 partial bytes; this is not
+> was interrupted, preserving a public-rounded 4.57 GB partial; this is not
 > a source, checksum, schema or scientific failure. The same exact partial is
 > increasing in allowed client session 2/3. Steady is server-exact 1/2,
 > transient is not yet client-exact or server-staged, and schema/PBS/science,
@@ -1053,8 +1065,8 @@
 > read-only audit attempted the two documented `introai9` login boundaries.
 > TCP/22 was reachable on both; public-key authentication was confirmed on one.
 > Remote shell and SFTP sessions timed out before listing output, so current
-> dataset presence/absence is unresolved. Prior bounded history knows
-> `/home/introai9/AAAI`, aneurysm-related traces and an IntrA repository
+> dataset presence/absence is unresolved. Prior bounded legacy-project history
+> knows aneurysm-related traces and an IntrA repository
 > skeleton, but not verified IntrA mesh payload. Do not relabel those traces as
 > an acquired dataset. Verified current-direction train/validation/test cases
 > are 0. No PBS, scheduler query, GPU, transfer or login-node GPU command ran.

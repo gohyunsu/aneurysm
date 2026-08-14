@@ -603,23 +603,28 @@
             introai9 CPU/PBS에서 단 한 번만 실행하며, pass 전 model/GPU/claim은 0입니다.
             Steady는 client checksum과 introai9 exact size를 통과했고 client copy를
             삭제했습니다. Transient client session 1은 source 오류가 아니라 실행 turn
-            interruption으로 4,571,712,088-byte partial을 보존한 채 닫혔고, 동일 partial을
+            interruption으로 public-rounded 4.57GB partial을 보존한 채 닫혔고, 동일 partial을
             허용된 session 2/3에서 resume했습니다. Session 2는 exact
             23,744,862,051-byte size와 official full SHA-256을 통과했고, payload를
             parse하지 않은 채 Windows OpenSSH SFTP session 1/3으로 introai9의
             incomplete-only 이름에 전송했습니다. Session 1은 orchestration interruption
-            시점의 2,644,115,456 server partial bytes를 보존했고, 동일 client object와
+            시점의 public-rounded 2.64GB server partial을 보존했고, 동일 client object와
             remote partial을 SFTP session 2/3의 <code>reput</code>으로 resume하고
-            있었습니다. 두 번째 turn-lifecycle interruption에서도 6,272,253,952
-            server bytes가 보존됐습니다. 마지막 session 3/3은 같은 object/partial의
+            있었습니다. 두 번째 turn-lifecycle interruption에서도 public-rounded 6.27GB
+            server partial이 보존됐습니다. 마지막 session 3/3은 같은 object/partial의
             <code>reput</code>을 detached Windows OpenSSH batch로 실행해 turn과
-            분리했습니다. 이 결과가 SFTP를 닫고 네 번째 session은 없습니다. Remote
-            exact size와 one-shot schema는 아직 0입니다.
+            분리했습니다. 마지막 session은 <code>Connection reset</code>과 broken pipe로
+            public-rounded 10.17GB server partial에서 닫혔습니다. SFTP 3/3이 소진돼
+            네 번째 session은 없고, remote exact size와 one-shot schema는 0입니다.
+            Client transient exact object는 존재하지만 이를 server/schema/science pass로
+            바꾸어 말하지 않습니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
           <a href="../configs/aneug_processed_v4_client_stage_d2.json">Client-staged D2 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-client-staging-d2-2026-08-14.md">D2 경로와 one-shot schema gate 읽기 ↗</a>
+          <a href="../results/aneug_processed_v4_d2_transport_closure_20260814.json">D2 closure machine record 읽기 ↗</a>
+          <a href="../docs/aneug-processed-v4-client-staging-d2-closure-2026-08-14.md">D2 client/server/schema 경계 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>
@@ -808,8 +813,8 @@
           </p>
           <p>
             <b>그렇다면 introai9에는 무엇이 있는가?</b> Fresh read-only 감사에서는
-            directory output을 한 줄도 얻지 못했습니다. 과거 bounded 기록은
-            <code>/home/introai9/AAAI</code>와 aneurysm-related trace, IntrA repository
+            directory output을 한 줄도 얻지 못했습니다. 과거 bounded legacy-project
+            기록은 aneurysm-related trace와 IntrA repository
             skeleton을 확인했지만 mesh payload는 확인하지 못했고 broad manifest
             search도 미완료였습니다. 따라서 현재 검증된 train/validation/test는
             0/0/0이며, 외부 service 상태가 달라진 뒤 exact-path inventory가

@@ -41,7 +41,7 @@
     <section class="hero dark" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · ANEUG REFERENCE-RELATIVE WSS 31.0/40 INACTIVE · D1 CLOSED 3/3 · D2 STEADY EXACT 1/2 · SERVER / SCHEMA / SCIENCE 0 · MODEL / GPU / CLAIM 0</p>
+        <p class="eyebrow"><span>ISBI 2027 TARGET</span> ACTIVE PAPER IDENTITY 0 · ANEUG REFERENCE-RELATIVE WSS 31.0/40 INACTIVE · D1 CLOSED 3/3 · D2 SFTP CLOSED 3/3 · SCHEMA / SCIENCE 0 · MODEL / GPU / CLAIM 0</p>
         <h1>
           A low field error<br>
           <em>does not certify flow structure.</em>
@@ -265,8 +265,8 @@
         <div><span>Latest scientific decision</span><b>AneuG reference-relative structural fidelity · inactive source candidate</b></div>
         <div><span>Score / critical floor</span><b>31.0/40 · residual novelty 2.5/5 · independent unit unresolved</b></div>
         <div><span>Acquired engineering assets</span><b>AneuG geometry 14,710 complete · BenchAnXplore 105×80 velocity</b></div>
-        <div><span>Processed-v4 D1 / D2 / scientific P0 / selected model / GPU / claim</span><b>closed 3/3 / steady server exact, transient client checksum exact + final detached SFTP reput 3/3 / 0 / 0 / 0 / 0</b></div>
-        <div><span>Next action</span><b>complete transient SFTP · verify remote exact size · one-shot CPU schema gate</b></div>
+        <div><span>Processed-v4 D1 / D2 / scientific P0 / selected model / GPU / claim</span><b>closed 3/3 / closed SFTP 3/3, client exact + server partial 10.17GB / 0 / 0 / 0 / 0</b></div>
+        <div><span>Next action</span><b>explicitly select a materially distinct acquisition version or verify an external transport change</b></div>
       </div>
     </section>
 
@@ -594,7 +594,7 @@
 
       <article class="g1-result">
         <div class="g1-result-head">
-          <p class="eyebrow">D1 CLOSED 3/3 · D2 CLIENT-STAGED PROCESSED-ONLY ACQUISITION REGISTERED</p>
+          <p class="eyebrow">D1 CLOSED 3/3 · D2 SFTP CLOSED 3/3 · SCHEMA / SCIENCE 0</p>
           <span>selected AneuG asset cap 60 GB · v5/raw CFD excluded</span>
         </div>
         <div class="g1-result-metrics">
@@ -623,13 +623,17 @@
             바꾸어 compute/login-node external download를 제거합니다. 64MiB route probe는
             null sink로 폐기됐고 parsed value는 0입니다. Steady를 먼저 upload한 뒤
             client copy를 지우고 transient를 처리하며, 최대 동시 new storage는
-            57.12GB입니다. 두 server size가 맞은 뒤에만 checksum/schema를 PBS에서
-            한 번 실행하며 full object·schema·과학적 evidence는 현재 0입니다.
+            57.12GB입니다. Client transient는 exact size/SHA를 통과했지만 마지막 SFTP
+            session 3/3이 connection reset/broken pipe로 닫혀 server에는
+            public-rounded 10.17GB partial만 남았습니다. 네 번째 session은 없고
+            checksum/schema PBS도 제출하지 않았으므로 schema·과학적 evidence는 0입니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">D1 machine contract ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">Storage·schema rationale ↗</a>
           <a href="../configs/aneug_processed_v4_client_stage_d2.json">D2 machine contract ↗</a>
           <a href="../docs/aneug-processed-v4-client-staging-d2-2026-08-14.md">D2 route·storage·one-shot gate ↗</a>
+          <a href="../results/aneug_processed_v4_d2_transport_closure_20260814.json">D2 exact closure record ↗</a>
+          <a href="../docs/aneug-processed-v4-client-staging-d2-closure-2026-08-14.md">왜 client exact가 schema pass가 아닌지 읽기 ↗</a>
         </div>
       </article>
 
@@ -880,7 +884,7 @@
         <article><span>SR-C3</span><h3>Lineage-disjoint confirmation</h3><p>Field-blind하게 고정한 independent unit과 모든 prespecified structural endpoint에서 일관된 우위를 요구한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>D1 closed 3/3 · D2 steady server exact · transient client size+SHA exact and final detached SFTP reput session 3/3 in progress · schema/science 0 · P0/P1/method/model/GPU/test/result/claim 0</b>
+        <span>Current stage</span><b>D1 closed 3/3 · D2 SFTP closed 3/3 · transient client exact, server partial 10.17GB · schema/science 0 · P0/P1/method/model/GPU/test/result/claim 0</b>
         <span>Claim boundary</span><b>G0 has no source or science verdict and cannot activate a scientific or manuscript claim</b>
       </div>
     </section>
