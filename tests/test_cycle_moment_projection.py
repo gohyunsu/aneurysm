@@ -112,6 +112,34 @@ class CycleMomentProjectionTests(unittest.TestCase):
         for value in (raw.grad, mean.grad, cone_coordinate.grad):
             self.assertIsNotNone(value)
             self.assertTrue(bool(torch.isfinite(value).all().item()))
+        self.assertGreater(float(cone_coordinate.grad.abs().sum().item()), 0.0)
+        self.assertTrue(bool((result["strict_root_derivative"] > 0).all().item()))
+
+    def test_backward_graph_does_not_grow_with_bisection_iterations(self) -> None:
+        raw, mean, target, normals = self._fixture()
+
+        def graph_nodes(iterations: int) -> int:
+            local_raw = raw.clone().requires_grad_(True)
+            local_mean = mean.clone().requires_grad_(True)
+            result = project_cycle_moments(
+                local_raw,
+                local_mean,
+                target,
+                normals,
+                torch,
+                maximum_iterations=iterations,
+            )
+            pending = [result["field"].grad_fn]
+            seen: set[object] = set()
+            while pending:
+                node = pending.pop()
+                if node is None or node in seen:
+                    continue
+                seen.add(node)
+                pending.extend(parent for parent, _ in node.next_functions)
+            return len(seen)
+
+        self.assertEqual(graph_nodes(8), graph_nodes(64))
 
 
 if __name__ == "__main__":

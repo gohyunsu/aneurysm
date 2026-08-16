@@ -123,40 +123,86 @@ def project_cycle_moments(
 
     one = torch.ones_like(target)
     zero = torch.zeros_like(target)
-    value_at_one = _mean_cycle_magnitude(tangent_mean, tangent_residual, one, torch)
-    close_at_one = torch.abs(value_at_one - target) <= tolerance
 
-    # For targets in the strict interior of the Jensen cone, convexity and the
-    # zero-mean residual make F(s)=E||m+s r|| non-decreasing on s>=0.  The
-    # reverse triangle inequality provides a finite upper bracket.
-    strict_solve = strict_target & ~close_at_one
-    needs_scale_up = strict_solve & (value_at_one < target)
-    upper_bound = (target + mean_norm) / torch.clamp(residual_mean_norm, min=activity_epsilon)
-    upper_bound = torch.maximum(one, upper_bound * (1.0 + relative_tolerance) + absolute_tolerance)
-    low = torch.where(needs_scale_up, one, zero)
-    high = torch.where(needs_scale_up, upper_bound, one)
-    for _ in range(maximum_iterations):
-        midpoint = 0.5 * (low + high)
-        midpoint_value = _mean_cycle_magnitude(tangent_mean, tangent_residual, midpoint, torch)
-        below = midpoint_value < target
-        low = torch.where(strict_solve & below, midpoint, low)
-        high = torch.where(strict_solve & ~below, midpoint, high)
-    strict_scale = 0.5 * (low + high)
+    # Bracketing is a numerical root locator, not a learned computation.  Keep
+    # its repeated field evaluations out of the backward graph, then restore
+    # the strict-interior derivative with one implicit correction below.
+    with torch.no_grad():
+        value_at_one = _mean_cycle_magnitude(tangent_mean, tangent_residual, one, torch)
+        close_at_one = torch.abs(value_at_one - target) <= tolerance
 
-    # At a=||m||, F may have a plateau: a purely collinear pulsatile magnitude
-    # residual can preserve both moments for a range of scales.  Select the
-    # feasible root closest to one instead of collapsing automatically to zero.
-    boundary_solve = ~strict_target & ~close_at_one
-    boundary_low = zero
-    boundary_high = one
-    for _ in range(maximum_iterations):
-        midpoint = 0.5 * (boundary_low + boundary_high)
-        midpoint_value = _mean_cycle_magnitude(tangent_mean, tangent_residual, midpoint, torch)
-        acceptable = midpoint_value <= target + tolerance
-        boundary_low = torch.where(boundary_solve & acceptable, midpoint, boundary_low)
-        boundary_high = torch.where(boundary_solve & ~acceptable, midpoint, boundary_high)
+        # For strict Jensen-interior targets, convexity and the zero-mean
+        # residual make F(s)=E||m+s r|| non-decreasing for s>=0.  The reverse
+        # triangle inequality provides a finite upper bracket.
+        strict_solve = strict_target & ~close_at_one
+        needs_scale_up = strict_solve & (value_at_one < target)
+        upper_bound = (target + mean_norm) / torch.clamp(
+            residual_mean_norm, min=activity_epsilon
+        )
+        upper_bound = torch.maximum(
+            one,
+            upper_bound * (1.0 + relative_tolerance) + absolute_tolerance,
+        )
+        low = torch.where(needs_scale_up, one, zero)
+        high = torch.where(needs_scale_up, upper_bound, one)
+        for _ in range(maximum_iterations):
+            midpoint = 0.5 * (low + high)
+            midpoint_value = _mean_cycle_magnitude(
+                tangent_mean, tangent_residual, midpoint, torch
+            )
+            below = midpoint_value < target
+            low = torch.where(strict_solve & below, midpoint, low)
+            high = torch.where(strict_solve & ~below, midpoint, high)
+        strict_scale = 0.5 * (low + high)
 
-    scale = torch.where(close_at_one, one, torch.where(strict_target, strict_scale, boundary_low))
+        # At a=||m||, F may have a plateau: a purely collinear pulsatile
+        # magnitude residual can preserve both moments for a range of scales.
+        # Select the feasible root closest to one rather than collapse to zero.
+        boundary_solve = ~strict_target & ~close_at_one
+        boundary_low = zero
+        boundary_high = one
+        for _ in range(maximum_iterations):
+            midpoint = 0.5 * (boundary_low + boundary_high)
+            midpoint_value = _mean_cycle_magnitude(
+                tangent_mean, tangent_residual, midpoint, torch
+            )
+            acceptable = midpoint_value <= target + tolerance
+            boundary_low = torch.where(
+                boundary_solve & acceptable, midpoint, boundary_low
+            )
+            boundary_high = torch.where(
+                boundary_solve & ~acceptable, midpoint, boundary_high
+            )
+
+        located_scale = torch.where(
+            close_at_one,
+            one,
+            torch.where(strict_target, strict_scale, boundary_low),
+        )
+
+    located_field = tangent_mean.unsqueeze(0) + tangent_residual * located_scale.unsqueeze(
+        0
+    ).unsqueeze(-1)
+    located_norm = torch.linalg.vector_norm(located_field, dim=-1)
+    located_magnitude = located_norm.mean(dim=0)
+    root_derivative = torch.mean(
+        torch.sum(located_field * tangent_residual, dim=-1)
+        / torch.clamp(located_norm, min=activity_epsilon),
+        dim=0,
+    )
+    _require(
+        not bool((strict_target & (root_derivative <= activity_epsilon)).any().item()),
+        "ill_conditioned_strict_root",
+    )
+    safe_derivative = torch.where(
+        strict_target,
+        root_derivative.detach(),
+        torch.ones_like(root_derivative),
+    )
+    implicit_scale = located_scale - (located_magnitude - target) / safe_derivative
+    # The closest-root map can be set-valued at the Jensen boundary and has no
+    # unique implicit derivative.  Keep that selected scale detached.
+    scale = torch.where(strict_target, implicit_scale, located_scale)
     field = tangent_mean.unsqueeze(0) + tangent_residual * scale.unsqueeze(0).unsqueeze(-1)
     achieved_mean = field.mean(dim=0)
     achieved_mean_magnitude = torch.linalg.vector_norm(field, dim=-1).mean(dim=0)
@@ -177,7 +223,9 @@ def project_cycle_moments(
         "achieved_mean_magnitude": achieved_mean_magnitude,
         "maximum_absolute_normal_component": achieved_normal_component.max(),
         "absolute_moment_error": moment_error,
+        "strict_root_derivative": root_derivative,
         "strict_jensen_interior": strict_target,
         "raw_scale_preserved": close_at_one,
+        "boundary_scale_gradient_detached": ~strict_target,
         "correction_applied": torch.abs(scale - one) > relative_tolerance,
     }

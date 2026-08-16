@@ -11,6 +11,15 @@
 > self-consistency properties, not CFD accuracy, model selection, novelty or a
 > paper result. D6 activation/field/PBS/GPU and validation/outer/model/claim
 > remain 0. Never use `junjinyong`; do not maintain the public static site.
+> Root bracketing runs under `no_grad`; one strict-interior implicit correction
+> restores gradients with backward-graph size independent of iteration count.
+> The set-valued Jensen-boundary scale is deliberately detached and requires
+> explicit endpoint supervision if this mechanism ever becomes eligible.
+> A reproducible local CPU-only `[80,13902,3]`, 24-iteration, four-thread
+> synthetic benchmark observed 0.5221--0.8612 s forward, 0.0497--0.0810 s
+> backward and 635,880--649,748 KiB process peak RSS with zero
+> registered-tolerance moment error. The range preserves timing variation; it
+> is not a GPU/model throughput, memory or scientific result.
 
 > **2026-08-16 AneuG transient direct-prior reappraisal:** Current
 > arXiv:2601.19876v2 already occupies AneuG transient vector WSS with a

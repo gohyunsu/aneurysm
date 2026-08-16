@@ -10,6 +10,8 @@
     "constraint": "mean_t_norm(m+s*r_t)=a_with_a_at_least_norm(m)",
     "root_domain": "s_nonnegative",
     "root_selection": "feasible_scale_closest_to_one",
+    "backward": "no_grad_bracketing_plus_strict_interior_implicit_derivative",
+    "boundary_gradient": "detached_because_closest_root_can_be_set_valued",
     "maximum_iterations": 48,
     "absolute_tolerance": 1e-7,
     "relative_tolerance": 1e-6
@@ -19,7 +21,8 @@
     "predicted_mean_vector_self_consistency",
     "predicted_mean_magnitude_self_consistency",
     "rotation_equivariance_of_projection",
-    "finite_autograd_on_nondegenerate_synthetic_interior"
+    "finite_autograd_on_nondegenerate_synthetic_interior",
+    "backward_graph_size_independent_of_root_iterations"
   ],
   "does_not_guarantee": [
     "agreement_with_CFD",
@@ -31,6 +34,19 @@
   "eligibility": {
     "d6_must_pass_before_model_registration": true,
     "matched_baseline_failure_must_precede_method_selection": true
+  },
+  "synthetic_engineering_benchmark": {
+    "environment": "local_x86_64_torch_2.7.0+cu128_cpu_only",
+    "shape": [80, 13902, 3],
+    "iterations": 24,
+    "cpu_threads": 4,
+    "forward_seconds_observed_range": [0.5221, 0.8612],
+    "backward_seconds_observed_range": [0.0497, 0.0810],
+    "process_maxrss_kib_observed_range": [635880, 649748],
+    "maximum_absolute_moment_error_observed": 0.0,
+    "timing_is_environment_sensitive": true,
+    "gpu_performance_inference_allowed": false,
+    "scientific_result": false
   },
   "authorization": {
     "read_real_field": false,
