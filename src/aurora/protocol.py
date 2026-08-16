@@ -11371,6 +11371,54 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d4_draft_document_sha256",
             "processed_v4_d4_draft_synthetic_tests_passed",
             "processed_v4_d4_draft_can_execute",
+            "processed_v4_d5_draft_status",
+            "processed_v4_d5_draft_config",
+            "processed_v4_d5_draft_config_sha256",
+            "processed_v4_d5_draft_evaluator",
+            "processed_v4_d5_draft_evaluator_sha256",
+            "processed_v4_d5_draft_test",
+            "processed_v4_d5_draft_test_sha256",
+            "processed_v4_d5_draft_document",
+            "processed_v4_d5_draft_document_sha256",
+            "processed_v4_d5_draft_synthetic_tests_passed",
+            "processed_v4_d5_draft_can_execute",
+            "processed_v4_d5_human_selected",
+            "processed_v4_d5_registered",
+            "processed_v4_d5_status",
+            "processed_v4_d5_config",
+            "processed_v4_d5_config_sha256",
+            "processed_v4_d5_evaluator",
+            "processed_v4_d5_evaluator_sha256",
+            "processed_v4_d5_test",
+            "processed_v4_d5_test_sha256",
+            "processed_v4_d5_pbs_wrapper",
+            "processed_v4_d5_pbs_wrapper_sha256",
+            "processed_v4_d5_document",
+            "processed_v4_d5_document_sha256",
+            "processed_v4_d5_execution_server",
+            "processed_v4_d5_ncpus",
+            "processed_v4_d5_memory_gb",
+            "processed_v4_d5_ngpus",
+            "processed_v4_d5_attempts_used",
+            "processed_v4_d5_attempt_limit",
+            "processed_v4_d5_same_contract_rerun_allowed",
+            "processed_v4_d5_allowed_value_read",
+            "processed_v4_d5_expected_case_count",
+            "processed_v4_d5_expected_ghd_shape",
+            "processed_v4_d5_exact_duplicate_encoding",
+            "processed_v4_d5_numerical_max_abs",
+            "processed_v4_d5_numerical_rms",
+            "processed_v4_d5_primary_case_regex",
+            "processed_v4_d5_split_unit",
+            "processed_v4_d5_train_validation_outer_fractions",
+            "processed_v4_d5_minimum_primary_components",
+            "processed_v4_d5_minimum_validation_components",
+            "processed_v4_d5_minimum_outer_test_components",
+            "processed_v4_d5_ghd_read_authorized",
+            "processed_v4_d5_field_or_connectivity_read_authorized",
+            "processed_v4_d5_private_split_frozen",
+            "processed_v4_d5_scientific_verdict",
+            "processed_v4_d5_method_gpu_test_or_claim_authorized",
             "processed_v4_d1_v5_or_raw_authorized",
             "processed_v4_d1_scientific_p0_or_gpu_authorized",
             "scientific_gate_registered",
@@ -11608,8 +11656,57 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d4_draft_document_sha256"]
         != "4a1cf31c307644bdf2e25ececae20ff00bf667aa19bf57fdb69bd58e145a8c30"
         or reference_floor["processed_v4_d4_draft_synthetic_tests_passed"] != 5
+        or reference_floor["processed_v4_d5_draft_status"]
+        != "draft_unselected_non_executable_immutable"
+        or reference_floor["processed_v4_d5_draft_config_sha256"]
+        != "1aa92f1f09a6fd2d46782eee9eaf33f42cde7d15ae5c36b087394b1011bddeee"
+        or reference_floor["processed_v4_d5_draft_evaluator_sha256"]
+        != "dbf69f16320e44bc0f0ac2a62e29f480734858c3a5dbd1db1694155a4a68414e"
+        or reference_floor["processed_v4_d5_draft_test_sha256"]
+        != "221b0cd26ce06ab703c1e2d9e26711e517069e2f14cfbb6f963e2a4e3f7ba4b5"
+        or reference_floor["processed_v4_d5_draft_document_sha256"]
+        != "2f049e1b352cb5ceb1632ae1da1c4c6a6e73ba6c98dc122379b0cf246e505e53"
+        or reference_floor["processed_v4_d5_draft_synthetic_tests_passed"] != 4
+        or reference_floor["processed_v4_d5_status"]
+        != "registered_selected_not_executed"
+        or reference_floor["processed_v4_d5_config_sha256"]
+        != "9518a73d04760481a2745b8ed95deb282a91eb4200e54af1fe518c76d493ac7b"
+        or reference_floor["processed_v4_d5_evaluator_sha256"]
+        != "fa78831319d2b00dee651381ae10a2898302d6391ab6a656de37c3112b0f5e36"
+        or reference_floor["processed_v4_d5_test_sha256"]
+        != "b2a20923b4e01111fcdff4fd99a56425c35268c313ecfe3a1b25085b8bcd9eb7"
+        or reference_floor["processed_v4_d5_pbs_wrapper_sha256"]
+        != "0af93a79bd20645470d45f51cd774d8efeb3ce590351a8a6fbd21aaed6f26053"
+        or reference_floor["processed_v4_d5_document_sha256"]
+        != "95cffdd728ad79e3babc256f0cf154913dd8e8e07f42032f65102e72cbad361b"
+        or reference_floor["processed_v4_d5_execution_server"] != "introai9"
+        or (
+            reference_floor["processed_v4_d5_ncpus"],
+            reference_floor["processed_v4_d5_memory_gb"],
+            reference_floor["processed_v4_d5_ngpus"],
+        ) != (4, 64, 0)
+        or reference_floor["processed_v4_d5_attempts_used"] != 0
+        or reference_floor["processed_v4_d5_attempt_limit"] != 1
+        or reference_floor["processed_v4_d5_allowed_value_read"]
+        != "mesh_data.ghd_only"
+        or reference_floor["processed_v4_d5_expected_case_count"] != 578
+        or reference_floor["processed_v4_d5_expected_ghd_shape"] != [578, 432]
+        or reference_floor["processed_v4_d5_exact_duplicate_encoding"]
+        != "little_endian_float32_row_sha256"
+        or reference_floor["processed_v4_d5_numerical_max_abs"] != 0.000001
+        or reference_floor["processed_v4_d5_numerical_rms"] != 0.0000001
+        or reference_floor["processed_v4_d5_primary_case_regex"]
+        != "^stable_[0-9]+$"
+        or reference_floor["processed_v4_d5_split_unit"]
+        != "synthetic_geometry_component_not_patient"
+        or reference_floor["processed_v4_d5_train_validation_outer_fractions"]
+        != [0.8, 0.1, 0.1]
+        or reference_floor["processed_v4_d5_minimum_primary_components"] != 400
+        or reference_floor["processed_v4_d5_minimum_validation_components"] != 40
+        or reference_floor["processed_v4_d5_minimum_outer_test_components"] != 40
+        or reference_floor["processed_v4_d5_scientific_verdict"] is not None
         or reference_floor["next_allowed_action"]
-        != "explicit_human_select_fresh_metadata_only_case_geometry_lineage_mapping_version"
+        != "quality_private_activation_then_single_introai9_cpu_pbs_d5"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11653,6 +11750,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d4_tensor_or_connectivity_values_read",
                 "processed_v4_d4_scientific_p0_or_gpu_authorized",
                 "processed_v4_d4_draft_can_execute",
+                "processed_v4_d5_draft_can_execute",
+                "processed_v4_d5_same_contract_rerun_allowed",
+                "processed_v4_d5_field_or_connectivity_read_authorized",
+                "processed_v4_d5_private_split_frozen",
+                "processed_v4_d5_method_gpu_test_or_claim_authorized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",
@@ -11671,6 +11773,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d4_registered"] is not True
         or reference_floor["processed_v4_d4_metadata_read_authorized"] is not True
         or reference_floor["processed_v4_d4_permits_human_rescoring_only"] is not True
+        or reference_floor["processed_v4_d5_human_selected"] is not True
+        or reference_floor["processed_v4_d5_registered"] is not True
+        or reference_floor["processed_v4_d5_ghd_read_authorized"] is not True
     ):
         raise ProtocolError(
             "The AneuG reference-relative direction must remain an inactive 31/40 "
@@ -11743,6 +11848,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d4_execution_result",
             "processed_v4_d4_execution_result_sha256",
         ),
+        ("processed_v4_d5_draft_config", "processed_v4_d5_draft_config_sha256"),
+        (
+            "processed_v4_d5_draft_evaluator",
+            "processed_v4_d5_draft_evaluator_sha256",
+        ),
+        ("processed_v4_d5_draft_test", "processed_v4_d5_draft_test_sha256"),
+        (
+            "processed_v4_d5_draft_document",
+            "processed_v4_d5_draft_document_sha256",
+        ),
+        ("processed_v4_d5_config", "processed_v4_d5_config_sha256"),
+        ("processed_v4_d5_evaluator", "processed_v4_d5_evaluator_sha256"),
+        ("processed_v4_d5_test", "processed_v4_d5_test_sha256"),
+        ("processed_v4_d5_pbs_wrapper", "processed_v4_d5_pbs_wrapper_sha256"),
+        ("processed_v4_d5_document", "processed_v4_d5_document_sha256"),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
@@ -11758,6 +11878,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     checks.append("AneuG processed-v4 static artifact-semantics boundary")
     checks.append("AneuG processed-v4 D4 dormant-draft boundary")
     checks.append("AneuG processed-v4 D4 selected one-shot census boundary")
+    checks.append("AneuG processed-v4 D5 selected field-blind split boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
         "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",

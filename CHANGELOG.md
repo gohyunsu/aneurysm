@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-16 · D5 field-blind geometry-component gate selected
+
+- Registered the user's explicit D5 selection as a fresh version while
+  preserving closed D4 and the dormant D5 draft byte-for-byte.
+- Added a GHD-only evaluator that groups exact and dual-tolerance numerical
+  copies, seals non-primary/mixed components and conditionally freezes a
+  private 80/10/10 synthetic-component split without reading WSS or mesh
+  connectivity.
+- Fixed one introai9 CPU 4/64 GB/GPU-0 PBS attempt. Any outcome closes D5; a
+  pass permits only later field-audit/development registration, not immediate
+  field access, model training, test access or a paper claim.
+
 ## 2026-08-16 · non-executable D5 geometry-token grouping draft
 
 - Corrected the interpretation of D4's 168/578 external directory-name

@@ -561,6 +561,33 @@ class ProtocolTests(unittest.TestCase):
         )
         self.assertEqual(audit["processed_v4_d4_draft_synthetic_tests_passed"], 5)
         self.assertFalse(audit["processed_v4_d4_draft_can_execute"])
+        self.assertEqual(
+            audit["processed_v4_d5_draft_status"],
+            "draft_unselected_non_executable_immutable",
+        )
+        self.assertEqual(audit["processed_v4_d5_draft_synthetic_tests_passed"], 4)
+        self.assertFalse(audit["processed_v4_d5_draft_can_execute"])
+        self.assertTrue(audit["processed_v4_d5_human_selected"])
+        self.assertTrue(audit["processed_v4_d5_registered"])
+        self.assertEqual(
+            audit["processed_v4_d5_status"], "registered_selected_not_executed"
+        )
+        self.assertEqual(audit["processed_v4_d5_execution_server"], "introai9")
+        self.assertEqual(audit["processed_v4_d5_ngpus"], 0)
+        self.assertEqual(audit["processed_v4_d5_attempts_used"], 0)
+        self.assertEqual(audit["processed_v4_d5_attempt_limit"], 1)
+        self.assertFalse(audit["processed_v4_d5_same_contract_rerun_allowed"])
+        self.assertEqual(audit["processed_v4_d5_allowed_value_read"], "mesh_data.ghd_only")
+        self.assertEqual(audit["processed_v4_d5_expected_ghd_shape"], [578, 432])
+        self.assertEqual(
+            audit["processed_v4_d5_split_unit"],
+            "synthetic_geometry_component_not_patient",
+        )
+        self.assertTrue(audit["processed_v4_d5_ghd_read_authorized"])
+        self.assertFalse(audit["processed_v4_d5_field_or_connectivity_read_authorized"])
+        self.assertFalse(audit["processed_v4_d5_private_split_frozen"])
+        self.assertIsNone(audit["processed_v4_d5_scientific_verdict"])
+        self.assertFalse(audit["processed_v4_d5_method_gpu_test_or_claim_authorized"])
         self.assertFalse(audit["processed_v4_d1_v5_or_raw_authorized"])
         self.assertFalse(audit["processed_v4_d1_scientific_p0_or_gpu_authorized"])
         self.assertFalse(audit["scientific_gate_registered"])

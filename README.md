@@ -1,11 +1,9 @@
 # AURORA · Aneurysm Research
 
 [![Research contract and site quality](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml/badge.svg)](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml)
-[![Pages](https://github.com/gohyunsu/aneurysm/actions/workflows/pages/pages-build-deployment/badge.svg)](https://gohyunsu.github.io/aneurysm/site/)
-
 AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 **방향성 있는 유동 구조를 얼마나 충실하게 보존하는지** 연구하는 ISBI 2027
-프로젝트입니다. 공개 저장소에는 코드·평가 계약·선행연구 감사·프로젝트 사이트를,
+프로젝트입니다. 공개 저장소에는 코드·평가 계약·선행연구 감사를,
 원고와 미공개 결과는 별도 private 저장소에 둡니다.
 
 > **현재 판정 · 2026-08-16:** active paper identity는 없습니다. AneuG-Flow를
@@ -30,8 +28,9 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > 외부 geometry tree와 직접 이름이 겹치는 것은 168개뿐이지만, 공식 builder는
 > transient case-local checkpoint의 GHD를 processed `mesh_data`에 같은 순서로 저장합니다.
 > 따라서 410개 외부-name mismatch는 processed input 부재로 해석하지 않습니다.
-> 현재 D5는 이 578×432 GHD의 중복과 synthetic-case split 가능성만 묻는
-> **비실행 초안**이며, 명시적 선택 전에는 server/PBS/split/model을 열지 않습니다.
+> 선택된 D5는 이 578×432 GHD의 중복과 synthetic-case split 가능성만 묻는
+> fresh one-shot gate입니다. Public Quality와 private activation 뒤 `introai9`
+> CPU/PBS 한 번만 허용하며 field/P0/model/GPU/test는 계속 닫혀 있습니다.
 
 ## 현재 상태
 
@@ -41,7 +40,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 / D2 | 각각 폐쇄 | compute egress 3/3 / monolithic SFTP 3/3 · scientific verdict 0 |
-| processed-v4 D4 / D5 draft | census complete / draft only | 578×80×13,902×9 · D5 GHD grouping 4/4 synthetic test · 실행 불가 |
+| processed-v4 D4 / D5 | census closed / selected gate | 578×80×13,902×9 · GHD-only component split · PBS 0/1 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -51,9 +50,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | 폐쇄된 steady P0 | execution-incomplete · 0/12 evaluated | 과학적 pass/fail이 아니며 재실행 금지 |
 | 논문 | pre-evidence shell | title·contribution·result·figure 봉인 |
 
-[프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 WSS, critical
-point, worldline, solver variability와 evidence gate를 배경지식 없이 읽을 수
-있게 설명합니다. superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다.
+superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다.
 ## 연구 질문
 
 Cartesian relative L2가 낮은 transient WSS surrogate라도 source·sink·saddle과
@@ -179,10 +176,11 @@ metadata/digest만 담습니다. D4는 `scientific_verdict=null`, 31.0/40 inacti
 directory의 `checkpoint.npy`에서 GHD를 읽어 `mesh_data.cases`와 같은 순서로
 `mesh_data.ghd`에 저장합니다. 따라서 processed object는 자체 geometry input을
 이미 포함하며, 168/578 overlap은 별도 archive 간 이름 겹침이지 학습 가능성의
-필수 gate가 아닙니다. 새 [D5 비실행 초안](docs/aneug-processed-v4-d5-draft-design-2026-08-16.md)은
-GHD exact/수치적 copy component와 private 80/10/10 synthetic-case split만 설계합니다.
-4/4 synthetic test를 통과했지만 인간 선택 전에는 GHD value read, PBS와 split freeze가
-모두 0입니다.
+필수 gate가 아닙니다. 보존된 [D5 비실행 초안](docs/aneug-processed-v4-d5-draft-design-2026-08-16.md)을
+변경하지 않고 [fresh D5](docs/aneug-processed-v4-d5-registration-2026-08-16.md)를
+등록했습니다. D5는 exact/수치적 copy component를 split 안에 가두고 private
+80/10/10 split의 가능성만 판정합니다. 현재 attempt는 0/1이며 field/P0/model/GPU/
+test/claim을 열지 않습니다.
 
 ## 조건부 architecture와 평가
 

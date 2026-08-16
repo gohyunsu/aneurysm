@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 D5 selected registration:** The user explicitly
+> selected D5 as a fresh executable evidence version. Closed D4 and the
+> dormant D5 draft remain immutable; D5 is neither their repair nor relabel.
+> Fresh config/evaluator/tests/PBS/document read only the aligned 578×432
+> float32 `mesh_data.ghd`, group exact and prospectively tolerance-matched
+> copies, seal every non-`stable_*` or mixed component as auxiliary, and
+> prepare a private 80/10/10 synthetic-geometry-component split. This unit is
+> never called a patient, site or verified generator family. D5 permits one
+> `introai9` PBS attempt at CPU 4, 64 GB, GPU 0 after public Quality and private
+> activation; any outcome closes it. A gate pass freezes the private split and
+> permits only registration of later field audit/bounded development. Field
+> read, validation/test, method, architecture, GPU, result and paper claim
+> remain 0. Never use `junjinyong` or publish IDs, component membership,
+> private paths/manifests or raw logs. Do not edit the public static site.
+
 > **2026-08-16 processed-v4 D5 non-executable draft:** D4's 168/578 direct
 > external-directory overlap is preserved but is no longer treated as proof
 > that the processed geometry input is absent. Pinned official
