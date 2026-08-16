@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 D5 final synchronization:** Exact public closure
+> source `a610b265b811da97941f1f4ffeced10db3f0863e` passed Quality
+> `31947656106`. Exact private outcome source
+> `c000504ad1da79d3b51b23413bcb1f733d3b9df9` passed integrity
+> `31947694961`; IDs/component membership/log remain private and sealed paper
+> bytes are unchanged. D5 remains closed complete/pass at 1/1 with split
+> 406/51/51 and `scientific_verdict=null`. This synchronization creates no
+> server query, field read, PBS/GPU work, model/test/result claim or site
+> change. Next is registration only of a fresh field audit/bounded-development
+> version. Never use `junjinyong`.
+
 > **2026-08-16 processed-v4 D5 final closure:** Quality-passed public source
 > `483409a…21e6` ran once as introai9 job `116483.ECE-util1`, CPU 4, 64 GB,
 > GPU 0. It finalized F/exit 0 after 00:01:19; D5 is closed 1/1 and may never

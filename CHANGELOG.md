@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-16 · D5 final Git synchronization
+
+- Closure source `a610b26…0863e` passed Quality `31947656106`; private outcome
+  source `c000504…b9df9` passed integrity `31947694961`.
+- Preserved D5 complete/pass, 406/51/51 private split and null scientific
+  verdict without any new server, field, PBS/GPU, model/test/claim or site
+  action.
+
 ## 2026-08-16 · D5 closes with a frozen component-disjoint split
 
 - Ran sole introai9 CPU 4/64 GB/GPU-0 job 116483 to F/exit 0 in 00:01:19;
