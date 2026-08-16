@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-16 · transient WSS functional metric kernel
+
+- Added a synthetic-only, method-free TAWSS/OSI/RRT kernel with mandatory
+  explicit phase quadrature and fail-closed input validation.
+- Replaced silent singular-denominator clamping for future evaluation with NaN
+  plus explicit OSI/RRT validity masks. Historical P0 bytes remain unchanged.
+- Verified rotation/scale/phase-replication properties and RRT's exact
+  redundancy. This is metric hygiene, not novelty, science or D6 activation.
+
 ## 2026-08-16 · cycle-moment projection synthetic feasibility prototype
 
 - Added a dataset-free tangent cycle projection that enforces a predicted mean

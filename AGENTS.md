@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 transient WSS functional metric kernel:** A synthetic-only,
+> method-free kernel now requires explicit phase quadrature for TAWSS/OSI/RRT,
+> returns NaN plus validity masks at singular nodes and verifies the algebraic
+> identity RRT = inverse mean-vector magnitude. Established functionals and the
+> kernel are not novelty or paper results; RRT is redundant secondary evidence,
+> never an independent co-primary. Future comparison masks/floors must be
+> train-defined before validation. D6/field/model/PBS/GPU/result/claim remain
+> 0. Never use `junjinyong`; do not maintain the public static site.
+
 > **2026-08-16 cycle-moment projection synthetic prototype:** A dataset-free,
 > non-executable PyTorch prototype now tests the conditional readout's actual
 > mathematical constraint. It tangent-projects and temporally centres a raw

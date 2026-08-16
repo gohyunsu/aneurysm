@@ -1,0 +1,43 @@
+{
+  "schema_version": "aurora.cycle_functional_metric_kernel.v1",
+  "status": "synthetic_only_non_executable_metric_kernel",
+  "as_of": "2026-08-16",
+  "purpose": "Fix established transient WSS functional definitions and singular-node reporting before D6 or model selection.",
+  "semantics": {
+    "phase_weights_required": true,
+    "uniform_sampling_may_not_be_inferred_silently": true,
+    "tawss": "sum_t_normalized_weight_t_norm_wss_t",
+    "osi": "one_half_times_one_minus_norm_weighted_mean_vector_over_tawss",
+    "rrt": "inverse_norm_weighted_mean_vector",
+    "rrt_role": "redundant_secondary_only",
+    "undefined_value": "nan_with_explicit_validity_mask",
+    "silent_denominator_clamping_for_reporting": false
+  },
+  "properties_tested": [
+    "constant_and_reversing_cycle_identities",
+    "nonuniform_phase_quadrature",
+    "rotation_invariance_and_mean_vector_equivariance",
+    "physical_scale_law",
+    "phase_replication_invariance",
+    "rrt_algebraic_redundancy",
+    "explicit_inactive_node_masks",
+    "fail_closed_invalid_inputs"
+  ],
+  "scientific_boundary": {
+    "tawss_osi_rrt_are_direct_prior": true,
+    "metric_kernel_is_novelty": false,
+    "metric_kernel_is_paper_result": false,
+    "future_error_mask_must_be_train_defined": true,
+    "rrt_cannot_be_an_independent_coprimary_endpoint": true
+  },
+  "authorization": {
+    "read_real_field": false,
+    "read_validation_or_outer": false,
+    "select_architecture": false,
+    "train_model": false,
+    "submit_pbs_or_use_gpu": false,
+    "paper_result_or_claim": false,
+    "maintain_public_static_site": false
+  },
+  "excluded_server": "junjinyong"
+}
