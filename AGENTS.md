@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 D6 train-field registration:** Closed/pass D5
+> permits registration only of a fresh field audit. D6 is now registered but
+> not human-activated and may not be mutated into an executable contract. It
+> would read only the 406 private D5-train tensors plus shared finest faces;
+> validation, outer and auxiliary tensor values remain sealed. The exact
+> physical inverse is the official transient builder rule
+> `normalized*(std+1e-5)+mean`; steady norm is release-decoder metadata and
+> future model statistics must be recomputed from physical D5-train fields.
+> The all-or-none audit covers mesh/stored-normal agreement, WSS tangency,
+> temporal residual, positive TAWSS/finite OSI, unclipped RRT-denominator
+> support and the Jensen cone `a>=||m||`. A pass would permit registration of
+> bounded train/validation baseline development only. Current train-field
+> read, PBS/GPU, method/model, validation/test, result and paper claim are 0.
+> No site file is maintained. Never use `junjinyong`.
+
 > **2026-08-16 processed-v4 D5 final synchronization:** Exact public closure
 > source `a610b265b811da97941f1f4ffeced10db3f0863e` passed Quality
 > `31947656106`. Exact private outcome source

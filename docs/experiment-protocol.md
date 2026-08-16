@@ -2608,3 +2608,25 @@ confirmatory verdict는 unresolved지만, 현재는 real-CFD incremental utility
 
 GPU는 PBS allocation 안에서만 사용한다. 각 run은 commit, command,
 environment, config, dataset checksum, status, aggregate metric을 남긴다.
+
+## 13. AneuG processed-v4 D6 train-field admission
+
+D5가 동결한 synthetic-geometry component split은 406/51/51이다. D6는 별도
+human activation 전까지 비실행이며, 활성화되더라도 406 train tensor와 shared
+finest connectivity만 읽는다. Validation/outer/auxiliary tensor는 index하지 않는다.
+
+공식 transient builder의 역변환은
+`physical = normalized * (std + 1e-5) + mean`으로 고정한다. Steady norm은
+release decoder metadata일 뿐 model-fitted statistics가 아니다. 이후 모델의
+normalization은 physical train field에서 다시 산출한다.
+
+Method-free primary quantities는
+\(m=E_t[\tau]\), \(a=E_t[\|\tau\|]\),
+\(r_t=\tau_t-m\)이다. TAWSS와 OSI는 동일 field에서 유도하고 RRT는 epsilon으로
+가린 값 대신 denominator \(\|m\|\) support를 먼저 감사한다. Static geometry,
+normal norm, triangular-face validity, mesh/stored-normal cosine, WSS tangency,
+temporal residual, positive TAWSS와 \(a\ge\|m\|\) Jensen cone이 모두 prospective
+gate를 통과해야 bounded train/validation baseline development를 새로 등록할 수
+있다. 상세 threshold와 closure rule은
+`configs/aneug_processed_v4_d6_train_field_audit_v1.json`만을 canonical contract로
+사용한다.

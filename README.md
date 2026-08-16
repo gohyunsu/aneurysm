@@ -28,9 +28,11 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > 외부 geometry tree와 직접 이름이 겹치는 것은 168개뿐이지만, 공식 builder는
 > transient case-local checkpoint의 GHD를 processed `mesh_data`에 같은 순서로 저장합니다.
 > 따라서 410개 외부-name mismatch는 processed input 부재로 해석하지 않습니다.
-> D5 one-shot은 578×432 GHD를 576 component로 묶고 gate를 통과했습니다.
-> Primary 508개는 모두 singleton이며 private split은 406/51/51로 동결됐습니다.
-> D5는 1/1로 닫혔고 field/P0/model/GPU/test는 계속 닫혀 있습니다.
+> D5 one-shot은 578×432 GHD를 576 component로 묶고 gate를 통과했습니다. Primary
+> 508개는 모두 singleton이며 private split은 406/51/51로 동결됐습니다. D5는 1/1로
+> 닫혔습니다. 후속 D6는 406개 train field의 물리 복원, mesh-normal 일치, 접선성,
+> 80-phase 변화와 cycle-moment 식별 가능성을 검사하도록 등록했지만 아직 활성화하지
+> 않았으므로 field/P0/model/GPU/test는 계속 닫혀 있습니다.
 
 ## 현재 상태
 
@@ -41,6 +43,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 / D2 | 각각 폐쇄 | compute egress 3/3 / monolithic SFTP 3/3 · scientific verdict 0 |
 | processed-v4 D4 / D5 | census closed / gate passed·closed | 578 case · 576 component · private 406/51/51 · PBS 1/1 |
+| processed-v4 D6 | 등록·미활성 | train-only field admission · field read/PBS/GPU 0 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -181,17 +184,17 @@ directory의 `checkpoint.npy`에서 GHD를 읽어 `mesh_data.cases`와 같은 �
 등록했습니다. Sole job 116483은 exact/tolerance component gate를 통과해 primary
 508개를 private 406/51/51로 동결했습니다. [공개 결과](results/aneug_processed_v4_d5_ghd_component_result_20260816.json)는
 집계와 digest만 담습니다. D5는 1/1로 닫혔고 다음 field audit/development는 새
-등록이 필요하며 field/P0/model/GPU/test/claim은 아직 열리지 않았습니다.
+등록이 필요합니다. 이에 [D6 train-field audit](docs/aneug-processed-v4-d6-registration-2026-08-16.md)을
+별도 등록했습니다. D6는 공식 `std+1e-5` 역변환을 고정하고 406 train case에서만
+mesh-normal 일치, WSS 접선성, temporal residual과 Jensen 제약을 판정합니다. Human activation 전에는 field read/PBS/model/GPU/test/claim이 없습니다.
 
 ## 조건부 architecture와 평가
 
-Active architecture는 아직 없습니다. 다만 자산 감사를 반영해 **post-admission
-implementation scaffold**는 SE(3)-equivariant multi-resolution MeshGraphNet,
-train-only POD full-cycle head와 deterministic tangent projection으로 고정했습니다.
-이는 성능 중심의 구현 기본값이지 algorithmic novelty나 실행 승인이 아닙니다.
-일차 application endpoint는 full-cycle vector field safeguard와 deterministic
-TAWSS/OSI/RRT fidelity로 두고, critical-point/worldline은 method-free stability가
-확인될 때만 보조 구조 endpoint로 승격합니다.
+Active architecture는 없습니다. Post-admission scaffold는 multi-resolution MeshGraphNet과
+train-only periodic low-rank head입니다. D6 통과와 matched-baseline endpoint failure 뒤에만
+tangent local-frame/moment-constrained decoder를 등록합니다. 이는 \(m=E_t[\tau]\),
+\(a=E_t[\|\tau\|]\), zero-mean residual을 결합해 TAWSS/OSI/RRT를 일관되게 합니다.
+Generic hard transform/temporal head는 novelty가 아니며 critical-point/worldline은 보조입니다.
 P0/P1에서 실제 failure가 확인된 뒤 같은 parameter/update/field-error 조건으로
 다음을 비교합니다.
 

@@ -62,6 +62,8 @@ jobs:
         run: PYTHONPATH=src python scripts/audit_source_watch.py --config configs/source_watch_v22.json --validate-only
       - name: Validate withdrawn-before-field Aneumo transient stability P0 v1
         run: PYTHONPATH=src python -m aurora.aneumo_transient_stability_p0 --config configs/aneumo_transient_structure_stability_p0_v1.json --validate-only
+      - name: Validate non-executable AneuG processed-v4 D6 registration
+        run: PYTHONPATH=src python -c "from aurora.aneug_processed_v4_d6 import load_contract; load_contract('configs/aneug_processed_v4_d6_train_field_audit_v1.json')"
       - name: Validate prospective AneuX preprocessing-orbit P0
         run: PYTHONPATH=src python -m aurora.aneux_preprocessing_orbit_p0 --config configs/aneux_preprocessing_orbit_p0.json --validate-only
       - name: Validate frozen historical AneuX nested-orbit P0 contract

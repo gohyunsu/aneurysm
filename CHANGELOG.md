@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-16 · D6 train-only field audit registered, not activated
+
+- Registered a fresh D5-dependent audit for the 406 private training
+  components only; validation, outer-test and auxiliary field access remain
+  forbidden.
+- Fixed the exact official physical inverse at `std + 1e-5`, with the separate
+  cycle-helper `1e-6` convention retained only as sensitivity analysis.
+- Added pure tested diagnostics for mesh/normal agreement, WSS tangency,
+  temporal residual, TAWSS/OSI support, unclipped RRT denominator and the
+  Jensen moment cone. Human activation, field read, PBS/GPU, model and claim
+  are all zero; no public-site file was changed.
+
 ## 2026-08-16 · D5 final Git synchronization
 
 - Closure source `a610b26…0863e` passed Quality `31947656106`; private outcome

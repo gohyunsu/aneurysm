@@ -1,0 +1,147 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d6_train_field_audit.v1",
+  "protocol_id": "aneug_processed_v4_train_only_field_admission_d6_v1",
+  "status": "registered_not_activated",
+  "as_of": "2026-08-16",
+  "authority": {
+    "d5_pass_permits_registration": true,
+    "field_execution_requires_separate_human_activation": true,
+    "human_activation_recorded": false
+  },
+  "source": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "code_repository": "WenHaoDing/AneuG-Flow",
+    "code_revision": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "transient": {
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "steady": {
+      "bytes": 9632510050,
+      "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+      "role": "release_decoder_metadata_not_model_fitted_normalization"
+    },
+    "d5_public_result_sha256": "3545831b50c1fa5b6ada5e2d29c06c25f04c6e02a34845a7a4d147b56b3f3eee",
+    "d5_private_manifest_sha256": "0f95cf303fa63b58c049e722864389c1432460686e335d20402b677c368181d6",
+    "d5_train_split_sha256": "df583f3553ce4efcf0588da5bdc029921025648c1981eba3a85fe3841d2bf26e"
+  },
+  "closed_d5_boundary": {
+    "job_id": "116483.ECE-util1",
+    "attempts_used": 1,
+    "attempt_limit": 1,
+    "gate_pass": true,
+    "primary_components": 508,
+    "train_components": 406,
+    "validation_components": 51,
+    "outer_test_components": 51,
+    "scientific_verdict": null,
+    "rerun_or_repair": false
+  },
+  "read_scope": {
+    "private_split": "d5_train_components_only",
+    "expected_train_cases": 406,
+    "expected_timesteps": 80,
+    "expected_nodes": 13902,
+    "expected_channels": 9,
+    "expected_labels": [
+      "x",
+      "y",
+      "z",
+      "x_normal",
+      "y_normal",
+      "z_normal",
+      "wss_x",
+      "wss_y",
+      "wss_z"
+    ],
+    "mesh_connectivity": "shared_finest_faces_list_0_only",
+    "read_validation_tensor_values": false,
+    "read_outer_test_tensor_values": false,
+    "read_auxiliary_tensor_values": false,
+    "fit_model": false,
+    "select_architecture": false,
+    "use_gpu": false
+  },
+  "physical_decoder": {
+    "formula": "physical=normalized*(std+1e-5)+mean",
+    "epsilon": 0.00001,
+    "source": "official_assemble_registered_transient_data_code_revision",
+    "steady_norm_is_release_decoding_metadata": true,
+    "future_model_normalization_must_be_recomputed_from_d5_train_only": true,
+    "legacy_cycle_helper_epsilon_for_sensitivity_only": 0.000001
+  },
+  "method_free_estimands": {
+    "mean_vector": "m=mean_t(tau_t)",
+    "mean_magnitude": "a=mean_t(norm(tau_t))",
+    "tawss": "a",
+    "osi": "0.5*(1-norm(m)/a)_where_a_positive",
+    "rrt_denominator": "norm(m)",
+    "rrt_policy": "diagnose_denominator_only_no_epsilon_clipped_rrt_headline",
+    "zero_mean_residual": "r_t=tau_t-m",
+    "moment_cone": "a>=norm(m)_by_Jensen",
+    "future_decoder_relevance": "a_train_only_pass_can_support_a_separately_registered_moment_constrained_periodic_decoder"
+  },
+  "gate": {
+    "all_checks_required": true,
+    "threshold_source": "fixed_before_train_field_access_from_release_contract_and_closed_surface_vector_p0_controls",
+    "checks": {
+      "source_sizes_and_sha256_exact": true,
+      "d5_private_manifest_and_train_digest_exact": true,
+      "only_d5_train_tensor_values_read": true,
+      "normalization_mean_std_finite_and_positive_required_scales": true,
+      "maximum_static_normalized_abs_error": 0.000001,
+      "maximum_roundtrip_normalized_abs_error": 0.00001,
+      "normal_norm_minimum": 0.5,
+      "normal_norm_maximum": 1.5,
+      "shared_faces_are_valid_nonrepeated_triangles": true,
+      "minimum_nondegenerate_face_fraction_per_case": 0.999,
+      "minimum_global_p05_absolute_mesh_stored_normal_cosine": 0.9,
+      "tangency_mask_minimum_fraction_of_case_p99_wss_magnitude": 0.01,
+      "maximum_global_median_normal_component_ratio": 0.05,
+      "maximum_global_p95_normal_component_ratio": 0.25,
+      "minimum_cases_with_nonzero_temporal_residual_fraction": 1.0,
+      "minimum_nodes_with_positive_tawss_fraction": 0.99,
+      "maximum_relative_Jensen_violation": 0.000001,
+      "cycle_endpoints_must_be_finite_and_nonconstant": true
+    },
+    "histogram_bins": 10000,
+    "pass_authorizes": "register_bounded_train_validation_baseline_development_only",
+    "pass_does_not_authorize": [
+      "validation_or_outer_field_read_in_d6",
+      "outer_test",
+      "paper_result_or_claim",
+      "clinical_or_patient_interpretation"
+    ],
+    "failure_action": "close_d6_without_threshold_reader_or_same_contract_repair",
+    "execution_incomplete_action": "close_d6_without_same_contract_rerun"
+  },
+  "outputs": {
+    "public": "aggregate_gate_metrics_without_case_ids_norm_values_or_absolute_paths",
+    "private": "train_only_channel_and_endpoint_statistics_plus_exact_provenance",
+    "case_ids_public": false,
+    "validation_or_outer_statistics_written": false,
+    "atomic_writes": true
+  },
+  "execution_if_activated": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "03:00:00",
+    "maximum_pbs_attempts": 1,
+    "rerun_after_any_outcome": false,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "authorization": {
+    "register_d6": true,
+    "execute_d6_now": false,
+    "read_train_field_values_now": false,
+    "read_validation_or_outer_field_values": false,
+    "gpu_training": false,
+    "paper_result_or_claim": false
+  }
+}
