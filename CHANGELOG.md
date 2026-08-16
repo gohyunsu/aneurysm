@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-17 — conditional bounded GPU-development template registered
+
+- Recorded current introai9 queue limits without inferring GPU model identity,
+  and fixed a nonfungible 360 GPU-hour / one-repair / one-shot-outer envelope.
+- Frozen R0/R1/R2/C0 roles, fresh seed sets, 1.02 field non-inferiority, 5%
+  functional floors, 4/5 seed consistency and exact repair menu in a
+  non-executable D7-conditional template. It opens no GPU or data authority.
+
 ## 2026-08-17 — dormant D7 train-field admission draft registered
 
 - Added a non-executable fresh-contract draft that keeps D6/E0 closed, binds

@@ -1,0 +1,180 @@
+{
+  "schema_version": "aurora.aneug_cycle_moment_bounded_development_template.v1",
+  "protocol_id": "aneug_cycle_moment_validation_only_bounded_development_template_v1",
+  "status": "conditional_on_future_d7_pass_unselected_non_executable",
+  "as_of": "2026-08-17",
+  "activation_preconditions": {
+    "d7_selected_executed_and_complete_pass": false,
+    "d7_same_contract_retry_or_repair": false,
+    "fresh_development_contract_required_after_d7_pass": true,
+    "private_activation_before_first_gpu_allocation": true,
+    "current_gpu_or_model_authority": false
+  },
+  "scheduler_observation_not_guarantee": {
+    "server": "introai9",
+    "observed_on": "2026-08-17",
+    "coss_agpu_enabled_and_started": true,
+    "coss_agpu_user_max_running_jobs": 1,
+    "coss_agpu_user_max_running_gpus": 2,
+    "coss_a6gpu_enabled_and_started": true,
+    "coss_a6gpu_user_max_running_jobs": 1,
+    "coss_a6gpu_user_max_running_gpus": 1,
+    "queue_default_walltime_hours": 72,
+    "gpu_model_identity_exposed_by_audited_scheduler_fields": false,
+    "node_availability_is_stable_or_reserved": false,
+    "gpu_model_name_may_be_inferred_from_node_name": false
+  },
+  "immutable_data_boundary": {
+    "unit": "d5_synthetic_geometry_component_not_patient",
+    "train_components": 406,
+    "validation_components": 51,
+    "outer_components": 51,
+    "auxiliary_cases": 70,
+    "all_phases_follow_component": true,
+    "validation_only_selection": true,
+    "outer_values_sealed_until_one_shot_confirmation": true,
+    "auxiliary_values_never_used_for_model_selection_or_confirmation": true,
+    "split_or_unit_change_allowed": false
+  },
+  "resource_budget": {
+    "gpu_per_job": 1,
+    "maximum_concurrent_jobs": 1,
+    "maximum_total_gpu_hours": 360,
+    "round_caps_gpu_hours": {
+      "R0_engineering": 12,
+      "R1_primary_development": 220,
+      "R2_single_repair": 108,
+      "C0_outer_evaluation": 20
+    },
+    "round_caps_are_nonfungible": true,
+    "unused_budget_may_not_create_new_variants": true,
+    "maximum_accepted_gpu_jobs": 32,
+    "maximum_training_jobs": 29,
+    "maximum_accepted_attempts_per_variant_seed": 1,
+    "same_variant_seed_resubmission_after_accepted_job": false,
+    "maximum_repair_rounds": 1,
+    "pbs_walltime_per_job_hours": 24,
+    "stop_before_submission_if_projected_total_exceeds_cap": true,
+    "gpu_hours_definition": "requested_ngpus_times_pbs_resources_used_walltime",
+    "failed_or_preempted_accepted_jobs_consume_budget": true,
+    "scheduler_rejection_before_job_id_does_not_consume_scientific_attempt": true
+  },
+  "runtime_lock": {
+    "first_allocation_is_runtime_smoke_only": true,
+    "record_gpu_name_driver_cuda_torch_memory_and_container_hash": true,
+    "no_gpu_model_assumed_before_smoke": true,
+    "one_epoch_scaling_probe_before_training_schedule": true,
+    "scaling_probe_is_not_performance_evidence": true,
+    "exact_environment_frozen_after_smoke": true,
+    "persistent_internal_log_before_strict_mode_or_environment_checks": true,
+    "scheduler_stdout_stderr_is_not_evidence_channel": true,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "rounds": {
+    "R0": {
+      "role": "runtime_pipeline_and_exact_code_feasibility_only",
+      "maximum_gpu_jobs": 2,
+      "seed": 17,
+      "may_read_train": true,
+      "may_read_validation": false,
+      "may_read_outer": false,
+      "may_select_model": false,
+      "published_metric_reproduction_claim_when_task_or_split_differs": false,
+      "pass_required_before_R1": true
+    },
+    "R1": {
+      "role": "prespecified_validation_only_primary_development",
+      "maximum_training_jobs": 19,
+      "primary_pair_seeds": [1103, 2207, 3301, 4409, 5501],
+      "control_seeds": [1103, 2207, 3301],
+      "rows": [
+        "aneug_release_architecture_graph_unet",
+        "rhsia_exact_if_legally_and_technically_executable_else_source_only",
+        "matched_ghd_graphgps_direct",
+        "matched_direct_plus_soft_moment_loss",
+        "matched_direct_plus_fixed_posthoc_projection_no_retraining",
+        "matched_cycle_moment_readout"
+      ],
+      "may_read_train": true,
+      "may_read_validation": true,
+      "may_read_outer": false,
+      "same_backbone_information_optimizer_and_schedule_for_primary_pair": true,
+      "source_reported_values_never_ranked_with_local_rows": true
+    },
+    "R2": {
+      "role": "at_most_one_attribution_supported_repair",
+      "maximum_training_jobs": 10,
+      "fresh_primary_pair_seeds": [6607, 7703, 8807, 9901, 11113],
+      "may_read_train": true,
+      "may_read_validation": true,
+      "may_read_outer": false,
+      "allowed_only_if_R1_has_single_preregistered_failure_hypothesis": true,
+      "candidate_is_fresh_version_not_R1_relabel": true,
+      "metrics_margins_split_and_selection_rule_unchanged": true,
+      "second_repair_round_allowed": false
+    },
+    "C0": {
+      "role": "one_shot_outer_evaluation_of_frozen_rows_and_checkpoints",
+      "maximum_gpu_jobs": 1,
+      "training_allowed": false,
+      "validation_reopened_after_outer": false,
+      "outer_attempt_limit": 1,
+      "outer_rerun_repair_or_relabel": false,
+      "table_and_figure_rules_frozen_before_open": true
+    }
+  },
+  "repair_hypothesis_menu": {
+    "selection_rule": "choose_exactly_one_from_train_diagnostics_before_R2_validation_evaluation",
+    "allowed": {
+      "optimization_underfit": "change_only_learning_rate_schedule_or_training_length_within_budget",
+      "moment_cone_infeasibility": "replace_only_raw_magnitude_head_with_registered_cone_parameterization",
+      "memory_induced_batch_mismatch": "change_only_gradient_accumulation_to_restore_registered_effective_batch"
+    },
+    "architecture_family_change": false,
+    "new_loss_or_endpoint": false,
+    "new_data_or_split": false,
+    "new_threshold_or_seed_after_observation": false,
+    "multiple_simultaneous_changes": false
+  },
+  "selection_and_confirmation": {
+    "field_error_ratio": "candidate_over_same_seed_direct",
+    "field_noninferiority_upper_ratio": 1.02,
+    "tawss_error_ratio": "candidate_over_same_seed_direct",
+    "tawss_point_ratio_maximum": 0.95,
+    "osi_metric": "area_weighted_mae_on_reference_valid_support",
+    "osi_error_ratio": "candidate_over_same_seed_direct",
+    "osi_point_ratio_maximum": 0.95,
+    "component_bootstrap_replicates": 10000,
+    "component_bootstrap_seed": 271828,
+    "field_bootstrap_upper_must_not_exceed_margin": true,
+    "tawss_and_osi_bootstrap_upper_must_be_below_one": true,
+    "minimum_positive_primary_pair_seeds": 4,
+    "primary_pair_seed_count": 5,
+    "all_field_tawss_osi_and_seed_conditions_form_one_conjunction": true,
+    "rrt_is_redundant_secondary": true,
+    "invalid_predictions_penalized_and_coverage_reported": true,
+    "checkpoint_selection": "lexicographic_conjunction_then_lowest_validation_field_error_no_test_access",
+    "same_rule_used_for_R1_R2_and_C0": true,
+    "outer_failure_is_final": true
+  },
+  "ledger_and_outputs": {
+    "record_every_accepted_job_variant_seed_commit_config_checkpoint_and_resource_use": true,
+    "record_failed_and_killed_variants": true,
+    "private_row_level_results": true,
+    "public_aggregate_only_after_registered_stage_closes": true,
+    "refuse_existing_output_directory": true,
+    "atomic_status_checkpoint_and_metric_manifest": true,
+    "static_site_update_required": false
+  },
+  "current_authorization": {
+    "create_selected_development_contract": false,
+    "create_gpu_runner_or_pbs_wrapper": false,
+    "submit_gpu_smoke_or_training": false,
+    "read_train_validation_or_outer_values": false,
+    "fit_or_select_model": false,
+    "open_outer": false,
+    "populate_result_table_or_figure": false,
+    "paper_claim": false
+  }
+}
