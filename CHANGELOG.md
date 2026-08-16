@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-16 · D4 threshold-free metadata census selected and registered
+
+- Registered the user's explicit D4 selection as a fresh descriptive evidence
+  version while keeping closed D3 and its unrecorded exact count immutable.
+- Added an executable weights-only/mmap metadata census, one-shot CPU 4/64 GB/
+  GPU 0 PBS wrapper and six falsification tests. Exact IDs remain private;
+  public output is aggregate metadata plus an ordered-ID digest.
+- Fixed the contract at no cardinality threshold, no tensor/connectivity value
+  access and `scientific_verdict=null`. Any PBS outcome closes D4 and only a
+  complete census permits human rescoring; science/model/GPU/claim stay closed.
+
 ## 2026-08-16 · non-executable D4 metadata-census draft
 
 - Added a dormant contract with no cardinality threshold, every authorization

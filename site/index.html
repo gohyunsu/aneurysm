@@ -641,10 +641,15 @@
             preprocessing-resolution tag입니다. Builder는 730을 assert하지 않고 기존
             mesh/assembled cache를 재사용할 수 있으므로 specific build cause는 미확정입니다.
             Threshold가 없는 metadata-only D4 census의 non-executable draft와
-            synthetic test 5/5는 준비됐습니다. Official builder의
+            synthetic test 5/5를 먼저 준비했습니다. 이후 사용자가 D4를 명시적으로
+            선택해 초안이나 D3를 바꾸지 않는 fresh executable contract로 등록했습니다.
+            새 test 6/6과 중앙 protocol 123 invariant를 통과했습니다. Official builder의
             <code>case / labels / tensor</code> record와 mesh hierarchy schema를
             독립 대조했고, hierarchy shape/dtype만 기록하며 connectivity/field 값은
-            읽지 않습니다. 선택·등록·실행 권한은 없습니다.
+            읽지 않습니다. Exact count와 ordered IDs는 private manifest에만 쓰고 공개
+            aggregate에는 digest와 histogram만 둡니다. Quality와 private activation 뒤
+            introai9 CPU 4·64GB·GPU 0에서 한 번만 실행하며 현재 attempt는 0/1입니다.
+            어떤 outcome도 D4를 닫고, complete여도 human rescoring만 허용합니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">D1 machine contract ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">Storage·schema rationale ↗</a>
@@ -658,6 +663,8 @@
           <a href="../docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md">왜 raw 730과 processed &lt;700이 함께 참인지 읽기 ↗</a>
           <a href="../results/aneug_processed_v4_semantics_s0_20260816.json">Static S0 machine result ↗</a>
           <a href="../docs/aneug-processed-v4-d4-draft-design-2026-08-16.md">Non-executable D4 draft와 5/5 test 경계 ↗</a>
+          <a href="../docs/aneug-processed-v4-d4-registration-2026-08-16.md">Selected D4 question·privacy·one-shot contract ↗</a>
+          <a href="../configs/aneug_processed_v4_d4_v1.json">D4 registered machine contract ↗</a>
         </div>
       </article>
 
@@ -908,7 +915,7 @@
         <article><span>SR-C3</span><h3>Lineage-disjoint confirmation</h3><p>Field-blind하게 고정한 independent unit과 모든 prespecified structural endpoint에서 일관된 우위를 요구한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>D3 closed · S0 complete · raw 730 / processed &lt;700 · D4 draft 5/5 but unselected/non-executable · P0/P1/method/model/GPU/test/result/claim 0</b>
+        <span>Current stage</span><b>D3 closed · S0 complete · raw 730 / processed &lt;700 · D4 selected/registered, attempt 0/1 · P0/P1/method/model/GPU/test/result/claim 0</b>
         <span>Claim boundary</span><b>G0 has no source or science verdict and cannot activate a scientific or manuscript claim</b>
       </div>
     </section>

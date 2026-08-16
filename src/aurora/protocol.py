@@ -11319,6 +11319,31 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d4_recommended_task",
             "processed_v4_d4_human_selected",
             "processed_v4_d4_registered",
+            "processed_v4_d4_status",
+            "processed_v4_d4_config",
+            "processed_v4_d4_config_sha256",
+            "processed_v4_d4_evaluator",
+            "processed_v4_d4_evaluator_sha256",
+            "processed_v4_d4_test",
+            "processed_v4_d4_test_sha256",
+            "processed_v4_d4_pbs_wrapper",
+            "processed_v4_d4_pbs_wrapper_sha256",
+            "processed_v4_d4_document",
+            "processed_v4_d4_document_sha256",
+            "processed_v4_d4_cardinality_pass_threshold",
+            "processed_v4_d4_execution_server",
+            "processed_v4_d4_ncpus",
+            "processed_v4_d4_memory_gb",
+            "processed_v4_d4_ngpus",
+            "processed_v4_d4_attempts_used",
+            "processed_v4_d4_attempt_limit",
+            "processed_v4_d4_same_contract_rerun_allowed",
+            "processed_v4_d4_metadata_read_authorized",
+            "processed_v4_d4_case_ids_public",
+            "processed_v4_d4_tensor_or_connectivity_values_read",
+            "processed_v4_d4_scientific_verdict",
+            "processed_v4_d4_permits_human_rescoring_only",
+            "processed_v4_d4_scientific_p0_or_gpu_authorized",
             "processed_v4_d4_draft_status",
             "processed_v4_d4_draft_config",
             "processed_v4_d4_draft_config_sha256",
@@ -11520,6 +11545,25 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ] is not True
         or reference_floor["processed_v4_d4_recommended_task"]
         != "prospective_metadata_only_processed_cohort_census_without_cardinality_pass_threshold"
+        or reference_floor["processed_v4_d4_status"]
+        != "registered_selected_not_executed"
+        or reference_floor["processed_v4_d4_config_sha256"]
+        != "f4761ddd8ead236a6764cafd382cbd9db5cfdaa26d6bc9f917c6a997ad45a97c"
+        or reference_floor["processed_v4_d4_evaluator_sha256"]
+        != "d83e72d3e76d4ae75b506965aacc5bf322b021bbb1f58ba5e3f8bd2d10640893"
+        or reference_floor["processed_v4_d4_test_sha256"]
+        != "56c39a7694eb44fc268fe6eb27869258f790d531b0620dd071130ded6fedbfee"
+        or reference_floor["processed_v4_d4_pbs_wrapper_sha256"]
+        != "f9ae046b6761ba73cd10f952b568d68f828fa6f03eb8885261e4ed45349f706e"
+        or reference_floor["processed_v4_d4_document_sha256"]
+        != "17539a84be322cef96c59b1bef962694517d7a98b2a88fe581cdca8d05f857b6"
+        or reference_floor["processed_v4_d4_cardinality_pass_threshold"] is not None
+        or reference_floor["processed_v4_d4_execution_server"] != "introai9"
+        or (reference_floor["processed_v4_d4_ncpus"], reference_floor["processed_v4_d4_memory_gb"], reference_floor["processed_v4_d4_ngpus"])
+        != (4, 64, 0)
+        or reference_floor["processed_v4_d4_attempts_used"] != 0
+        or reference_floor["processed_v4_d4_attempt_limit"] != 1
+        or reference_floor["processed_v4_d4_scientific_verdict"] is not None
         or reference_floor["processed_v4_d4_draft_status"]
         != "draft_unselected_non_executable"
         or reference_floor["processed_v4_d4_draft_config_sha256"]
@@ -11532,7 +11576,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "4a1cf31c307644bdf2e25ececae20ff00bf667aa19bf57fdb69bd58e145a8c30"
         or reference_floor["processed_v4_d4_draft_synthetic_tests_passed"] != 5
         or reference_floor["next_allowed_action"]
-        != "human_select_materially_distinct_d4_metadata_only_processed_cohort_census"
+        != "quality_pass_then_private_activation_and_single_introai9_cpu_d4_census"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11571,8 +11615,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_semantics_s0_builder_enforces_730",
                 "processed_v4_semantics_s0_specific_missing_cases_or_cause_identified",
                 "processed_v4_semantics_s0_official_split_lineage_disjoint",
-                "processed_v4_d4_human_selected",
-                "processed_v4_d4_registered",
+                "processed_v4_d4_same_contract_rerun_allowed",
+                "processed_v4_d4_case_ids_public",
+                "processed_v4_d4_tensor_or_connectivity_values_read",
+                "processed_v4_d4_scientific_p0_or_gpu_authorized",
                 "processed_v4_d4_draft_can_execute",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
@@ -11588,6 +11634,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         is not True
         or reference_floor["introai9_aneug_geometry_payload_confirmed"] is not True
         or reference_floor["processed_v4_d3_human_selected"] is not True
+        or reference_floor["processed_v4_d4_human_selected"] is not True
+        or reference_floor["processed_v4_d4_registered"] is not True
+        or reference_floor["processed_v4_d4_metadata_read_authorized"] is not True
+        or reference_floor["processed_v4_d4_permits_human_rescoring_only"] is not True
     ):
         raise ProtocolError(
             "The AneuG reference-relative direction must remain an inactive 31/40 "
@@ -11647,6 +11697,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d4_draft_document",
             "processed_v4_d4_draft_document_sha256",
         ),
+        ("processed_v4_d4_config", "processed_v4_d4_config_sha256"),
+        ("processed_v4_d4_evaluator", "processed_v4_d4_evaluator_sha256"),
+        ("processed_v4_d4_test", "processed_v4_d4_test_sha256"),
+        ("processed_v4_d4_pbs_wrapper", "processed_v4_d4_pbs_wrapper_sha256"),
+        ("processed_v4_d4_document", "processed_v4_d4_document_sha256"),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
@@ -11661,6 +11716,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     checks.append("AneuG processed-v4 D3 case-floor closure boundary")
     checks.append("AneuG processed-v4 static artifact-semantics boundary")
     checks.append("AneuG processed-v4 D4 dormant-draft boundary")
+    checks.append("AneuG processed-v4 D4 selected one-shot census boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
         "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",

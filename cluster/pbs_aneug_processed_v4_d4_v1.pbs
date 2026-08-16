@@ -1,0 +1,47 @@
+#!/bin/bash
+#PBS -N aurora_aneug_v4_d4
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=0
+#PBS -l walltime=02:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_PYTHON:?set pinned Python executable}"
+: "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ -x "$AURORA_PYTHON" ]
+
+record_root="$AURORA_OUTPUT_ROOT/aneug_processed_v4_d4_v1"
+transient="$AURORA_DATA_ROOT/processed_v4_d3/assembled_registered_data_1k_v4.pth"
+steady="$AURORA_DATA_ROOT/processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary"
+geometry_root="$AURORA_DATA_ROOT/extracted/aneug_flow/v1/Geometries"
+mkdir -p "$record_root"
+
+if [ -e "$record_root/attempt.started" ]; then
+  echo "D4 attempt already exists; rerun is forbidden" >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-unknown}" > "$record_root/attempt.started"
+attempt_log="$record_root/attempt.log"
+attempt_status="$record_root/attempt.status.json"
+exec >>"$attempt_log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s,\"scientific_verdict\":null}\n" "$code" "$(test -e "$record_root/attempt.complete" && printf true || printf false)" > "$attempt_status"; exit "$code"' EXIT
+printf 'stage=wrapper_started job=%s commit=%s\n' "${PBS_JOBID:-unknown}" "$actual_commit"
+
+PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" -m aurora.aneug_processed_v4_d4_v1 \
+  --config "$AURORA_PROJECT_ROOT/configs/aneug_processed_v4_d4_v1.json" \
+  --transient "$transient" \
+  --steady "$steady" \
+  --geometry-root "$geometry_root" \
+  --public-result "$record_root/public_census_result.json" \
+  --private-case-manifest "$record_root/private_case_manifest.json"
+
+printf '%s\n' complete > "$record_root/attempt.complete"
+printf 'stage=census_complete\n'

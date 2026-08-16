@@ -527,8 +527,20 @@ class ProtocolTests(unittest.TestCase):
             audit["processed_v4_semantics_s0_specific_missing_cases_or_cause_identified"]
         )
         self.assertFalse(audit["processed_v4_semantics_s0_official_split_lineage_disjoint"])
-        self.assertFalse(audit["processed_v4_d4_human_selected"])
-        self.assertFalse(audit["processed_v4_d4_registered"])
+        self.assertTrue(audit["processed_v4_d4_human_selected"])
+        self.assertTrue(audit["processed_v4_d4_registered"])
+        self.assertEqual(audit["processed_v4_d4_status"], "registered_selected_not_executed")
+        self.assertIsNone(audit["processed_v4_d4_cardinality_pass_threshold"])
+        self.assertEqual(audit["processed_v4_d4_execution_server"], "introai9")
+        self.assertEqual(audit["processed_v4_d4_ngpus"], 0)
+        self.assertEqual(audit["processed_v4_d4_attempts_used"], 0)
+        self.assertEqual(audit["processed_v4_d4_attempt_limit"], 1)
+        self.assertFalse(audit["processed_v4_d4_same_contract_rerun_allowed"])
+        self.assertTrue(audit["processed_v4_d4_metadata_read_authorized"])
+        self.assertFalse(audit["processed_v4_d4_case_ids_public"])
+        self.assertIsNone(audit["processed_v4_d4_scientific_verdict"])
+        self.assertTrue(audit["processed_v4_d4_permits_human_rescoring_only"])
+        self.assertFalse(audit["processed_v4_d4_scientific_p0_or_gpu_authorized"])
         self.assertEqual(
             audit["processed_v4_d4_draft_status"],
             "draft_unselected_non_executable",

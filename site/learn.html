@@ -644,8 +644,13 @@
             builder의 exact case keys와 <code>idx_list / edge_index_list / faces_list</code>
             hierarchy도 정적 대조했고, shape/dtype만 기록하며 connectivity value는 읽지
             않습니다. Scientific verdict는 실패를 뜻하는 false가 아니라 null입니다.
-            Draft 자체가
-            <code>human_selected=false</code>이며 execution을 거부합니다. 선택·등록·PBS는 0입니다.
+            Draft 자체는 <code>human_selected=false</code>로 계속 execution을 거부합니다.
+            이후 사용자가 D4를 선택해 fresh config/evaluator/test/PBS로 별도 등록했고,
+            전용 test 6/6과 중앙 protocol 123 invariant를 통과했습니다. Exact count와
+            ordered IDs는 private manifest에만, public-safe aggregate에는 digest와
+            metadata histogram만 기록합니다. Quality와 private activation 뒤 introai9
+            CPU 4·64GB·GPU 0에서 한 번만 실행하며 현재 0/1입니다. 어떤 outcome도
+            버전을 닫고 complete여도 human rescoring만 허용합니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
@@ -659,6 +664,8 @@
           <a href="../docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md">Processed artifact 의미와 D4 경계 읽기 ↗</a>
           <a href="../results/aneug_processed_v4_semantics_s0_20260816.json">Static S0 machine result 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-d4-draft-design-2026-08-16.md">D4 draft output·privacy·activation contract 읽기 ↗</a>
+          <a href="../docs/aneug-processed-v4-d4-registration-2026-08-16.md">Selected D4 one-shot census 읽기 ↗</a>
+          <a href="../configs/aneug_processed_v4_d4_v1.json">D4 registered machine contract 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>

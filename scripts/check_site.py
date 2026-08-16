@@ -182,11 +182,11 @@ def check_site(root: Path) -> list[str]:
         "The 1k is a resolution tag, not a case-count promise": (
             "processed filename semantics boundary"
         ),
-        "D4 is recommended but not selected or registered": (
-            "D4 selection boundary"
+        "The user has now selected a materially distinct D4 descriptive census": (
+            "D4 selected-registration boundary"
         ),
-        "D4 draft is non-executable and passes 5/5 synthetic tests": (
-            "D4 dormant implementation boundary"
+        "fresh registered version has no cardinality threshold": (
+            "D4 threshold-free execution boundary"
         ),
         "Official builder exact case keys and mesh hierarchy are statically corroborated": (
             "D4 official-schema corroboration boundary"

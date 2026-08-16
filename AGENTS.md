@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 D4 selected registration:** The user explicitly
+> selected D4 as a materially distinct, threshold-free descriptive metadata
+> census. D3 remains closed and immutable; D4 is not its repair, rerun,
+> backfill or relabel. Fresh config/evaluator/test/PBS/document hashes are
+> registered while the dormant draft remains byte-exact. D4 rechecks both
+> official object identities, uses weights-only/mmap CPU loading, records the
+> exact count and ordered IDs privately, and exposes only deidentified
+> metadata aggregates/digest. Tensor values, connectivity values, WSS metrics
+> and scientific verdict are excluded. It gets exactly one introai9 PBS
+> attempt at CPU 4, 64 GB, GPU 0; any outcome closes the version. Current
+> attempt count is 0/1 pending Quality, private activation and submission. A
+> complete census permits human rescoring only. Grouping/split/P0/method/
+> architecture/GPU/test/result/claim remain zero. Never use `junjinyong` or
+> publish private paths, IDs, manifests or raw logs.
+
 > **2026-08-16 processed-v4 static artifact semantics S0:** Exact official
 > dataset/code remain `9dd4180…` / `4a090a0…`. Filename-only enumeration finds
 > 730 transient directories and all 730 have the seven documented assets, but
@@ -15,9 +30,10 @@
 > private, reject tensor-value access and refuse draft execution. Official
 > builder `loaders.py` independently corroborates the exact case keys and mesh
 > hierarchy; the draft records hierarchy shape/dtype only, never connectivity
-> values, and emits `scientific_verdict=null`. D4 remains
-> unselected/unregistered. Split/P0/method/model/GPU/test/result/claim remain zero. Never
-> use `junjinyong`.
+> values, and emits `scientific_verdict=null`. This entry records the
+> pre-selection S0 state; the newer D4 registration above supersedes its
+> activation status. Split/P0/method/model/GPU/test/result/claim remain zero.
+> Never use `junjinyong`.
 
 > **2026-08-16 D3 final closure:** Exact client source became 23/23 immutable
 > server chunks in 23 first SFTP sessions, with zero resume and zero hash
