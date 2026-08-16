@@ -1,0 +1,76 @@
+{
+  "schema_version": "aurora.aneug_pbs_envelope_e0.v1",
+  "protocol_id": "aneug_data_free_pbs_envelope_e0_v1",
+  "status": "registered_infrastructure_only_not_executed",
+  "as_of": "2026-08-17",
+  "purpose": "separate PBS job-start, environment, persistent-write, exact-checkout and output-staging behavior from the closed D6 v2 scientific contract",
+  "closed_d6_boundary": {
+    "public_source_commit": "2597aec72c80732ad9242b402868ed6dc79597e5",
+    "public_result_sha256": "f3c73f4c2d553af276f392ef6baa2d894cb3a791a3bd73323a4a1a25af396caa",
+    "status": "closed_execution_incomplete",
+    "attempts_used": 1,
+    "attempt_limit": 1,
+    "scientific_verdict": null,
+    "same_contract_resume_repair_or_rerun_allowed": false,
+    "e0_reopens_or_relabels_d6": false
+  },
+  "checks": {
+    "pbs_job_id_present": true,
+    "pbs_work_directory_present": true,
+    "first_persistent_marker_before_shell_strict_mode": true,
+    "exact_quality_passed_commit_injected_at_submission": true,
+    "git_checkout_clean": true,
+    "approved_python_executable": true,
+    "python_minimum": "3.9",
+    "torch_import": true,
+    "atomic_json_roundtrip": true,
+    "separate_scheduler_stdout_stderr_requested_at_submission": true
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 1,
+    "memory_gb": 2,
+    "ngpus": 0,
+    "walltime": "00:05:00",
+    "maximum_pbs_attempts": 1,
+    "one_interrupted_attempt_may_resume": false,
+    "rerun_or_repair_after_any_outcome": false,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "forbidden_scope": {
+    "dataset_or_source_payload_path": true,
+    "tensor_or_field_value_read": true,
+    "private_split_or_manifest_read": true,
+    "scientific_metric_or_gate": true,
+    "model_or_method": true,
+    "training_or_inference": true,
+    "validation_or_outer_test": true,
+    "gpu_request_or_use": true,
+    "paper_result_or_claim": true,
+    "public_site_change": true
+  },
+  "output_contract": {
+    "record_directory_name": "aneug_pbs_envelope_e0_v1",
+    "attempt_marker_filename": "attempt.started",
+    "attempt_log_filename": "attempt.log",
+    "attempt_status_filename": "attempt.status.json",
+    "public_result_filename": "public_envelope_result.json",
+    "atomic_json": true,
+    "refuse_existing_output": true,
+    "absolute_paths_private": true,
+    "raw_scheduler_logs_private": true
+  },
+  "consequence": {
+    "any_attempt_outcome_closes_e0": true,
+    "pass_is_infrastructure_evidence_only": true,
+    "pass_does_not_reopen_d6": true,
+    "pass_does_not_authorize_field_read": true,
+    "pass_does_not_authorize_model_or_gpu": true,
+    "pass_does_not_authorize_validation_or_outer_test": true,
+    "pass_does_not_authorize_paper_result_or_claim": true,
+    "pass_permits_only_design_and_registration_of_a_fresh_scientific_contract": true
+  }
+}

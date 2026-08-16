@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-17 — data-free introai9 PBS envelope E0 registered
+
+- Kept closed D6 v2 immutable and registered a materially separate one-shot
+  infrastructure audit for scheduler start, first persistent write, exact clean
+  checkout, approved Python/Torch import and separate PBS output staging.
+- E0 contains no scientific asset path or read, model, metric, GPU, validation,
+  outer test or paper authority. Any outcome closes it; success is engineering
+  evidence only and cannot reopen D6.
+
 ## 2026-08-17 · D6 v2 closed execution-incomplete
 
 - Exact source `5a5f516…` ran once as introai9 PBS job
