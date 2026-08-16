@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-17 — data-free PBS envelope E0 closed and classified
+
+- One introai9 CPU-only attempt finalized F/exit 0. Exact-checkout, clean-tree,
+  Python/Torch and persistent atomic-result checks passed without any scientific
+  asset access.
+- PBS output staging independently failed with `Post job file processing
+  error`; internal wrapper records remained intact. E0 is closed 1/1, D6 stays
+  closed, and future jobs must use early persistent logs rather than scheduler
+  stdout/stderr as their evidence channel.
+
 ## 2026-08-17 — data-free introai9 PBS envelope E0 registered
 
 - Kept closed D6 v2 immutable and registered a materially separate one-shot

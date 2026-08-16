@@ -1,0 +1,80 @@
+{
+  "schema_version": "aurora.aneug_pbs_envelope_e0.closure.v1",
+  "protocol_id": "aneug_data_free_pbs_envelope_e0_v1",
+  "status": "closed_infrastructure_classified",
+  "as_of": "2026-08-17",
+  "public_source_commit": "28c370eff1d4e3c0f340e207d307b11a2965fa17",
+  "public_quality_run": 31956734659,
+  "pbs": {
+    "job_id": "116512.ECE-util1",
+    "final_state": "F",
+    "exit_status": 0,
+    "queue": "coss_agpu",
+    "ncpus": 1,
+    "memory_gb": 2,
+    "ngpus": 0,
+    "requested_walltime": "00:05:00",
+    "used_cput": "00:00:02",
+    "used_memory_kb": 188044,
+    "used_walltime": "00:00:05"
+  },
+  "runner_envelope": {
+    "runner_envelope_pass": true,
+    "attempt_marker_materialized": true,
+    "attempt_log_materialized": true,
+    "attempt_status_materialized": true,
+    "completion_marker_materialized": true,
+    "public_result_materialized": true,
+    "exact_commit": true,
+    "clean_checkout": true,
+    "pbs_job_id_present": true,
+    "pbs_work_directory_present": true,
+    "python_version": "3.9.12",
+    "torch_version": "2.6.0+cu118",
+    "atomic_json_write": true,
+    "wrapper_exit_status": 0,
+    "public_result_sha256": "26fdf2383455461eb6ce1f30b8b77688b77ed8859a8491f12b75d6404c756b0b",
+    "attempt_status_sha256": "642647350a73c04691562619331547bb4b0211a849045dde96b24a77c62dbdc2"
+  },
+  "scheduler_output_staging": {
+    "separate_stdout_stderr_requested": true,
+    "post_job_file_processing_error": true,
+    "pbs_stdout_materialized": false,
+    "pbs_stderr_materialized": false,
+    "staging_pass": false,
+    "full_envelope_pass": false
+  },
+  "interpretation": {
+    "persistent_wrapper_output_is_available_despite_scheduler_staging_failure": true,
+    "d6_absent_wrapper_record_is_not_explained_by_post_job_staging_alone": true,
+    "d6_exact_pre_runner_failure_line_identified": false,
+    "scientific_asset_or_dataset_failure_evidence": false,
+    "future_pbs_must_write_private_persistent_logs_before_shell_profile_or_scientific_access": true,
+    "future_pbs_must_not_depend_on_scheduler_stdout_stderr_materialization": true
+  },
+  "scientific_boundary": {
+    "scientific_asset_path_queried": false,
+    "payload_or_tensor_read": false,
+    "private_split_or_manifest_read": false,
+    "scientific_metric_or_gate_evaluated": false,
+    "scientific_verdict": null,
+    "model_or_method_executed": false,
+    "training_or_inference_executed": false,
+    "validation_or_outer_test_accessed": false,
+    "gpu_used": false,
+    "paper_result_or_claim_authorized": false
+  },
+  "closure": {
+    "attempts_used": 1,
+    "attempt_limit": 1,
+    "e0_closed": true,
+    "same_contract_resume_repair_or_rerun_allowed": false,
+    "d6_remains_closed": true,
+    "field_read_authorized": false,
+    "model_or_gpu_authorized": false,
+    "validation_or_outer_test_authorized": false,
+    "only_fresh_scientific_contract_design_and_registration_permitted": true
+  },
+  "excluded_server_accessed": false,
+  "public_site_files_changed": false
+}
