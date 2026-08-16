@@ -44,6 +44,10 @@ class CycleMomentProjectionTests(unittest.TestCase):
         self.assertFalse(config["authorization"]["read_real_field"])
         self.assertFalse(config["authorization"]["select_architecture"])
         self.assertFalse(config["authorization"]["submit_pbs_or_use_gpu"])
+        self.assertEqual(
+            config["synthetic_gradient_audit"]["routes"],
+            ["raw_residual", "mean_vector", "cone_coordinate", "joint"],
+        )
         self.assertEqual(config["excluded_server"], "junjinyong")
 
     def test_projection_matches_both_cycle_moments_and_tangency(self) -> None:
@@ -140,6 +144,65 @@ class CycleMomentProjectionTests(unittest.TestCase):
             return len(seen)
 
         self.assertEqual(graph_nodes(8), graph_nodes(64))
+
+    def test_implicit_gradient_matches_central_difference(self) -> None:
+        raw, mean, _, normals = self._fixture()
+        raw_direction = 0.17 * torch.roll(raw, shifts=3, dims=0)
+        mean_direction = torch.tensor(
+            [[0.11, -0.07, 0.0], [-0.05, 0.09, 0.0], [0.03, -0.04, 0.0]],
+            dtype=raw.dtype,
+        )
+        cone = torch.tensor([-0.2, 0.1, -0.4], dtype=raw.dtype)
+        cone_direction = torch.tensor([0.13, -0.08, 0.17], dtype=raw.dtype)
+        weights = torch.linspace(-0.4, 0.7, raw.numel(), dtype=raw.dtype).reshape_as(raw)
+
+        def scalar_loss(parameter: object, route: tuple[float, float, float]) -> object:
+            raw_weight, mean_weight, cone_weight = route
+            varied_raw = raw + raw_weight * parameter * raw_direction
+            varied_mean = mean + mean_weight * parameter * mean_direction
+            varied_cone = cone + cone_weight * parameter * cone_direction
+            varied_target = jensen_cone_mean_magnitude(
+                varied_mean, varied_cone, torch
+            )
+            result = project_cycle_moments(
+                varied_raw,
+                varied_mean,
+                varied_target,
+                normals,
+                torch,
+                maximum_iterations=64,
+                absolute_tolerance=1e-10,
+                relative_tolerance=1e-9,
+            )
+            return (result["field"] * weights).mean() + 0.17 * result[
+                "scale"
+            ].square().mean()
+
+        routes = {
+            "raw_residual": (1.0, 0.0, 0.0),
+            "mean_vector": (0.0, 1.0, 0.0),
+            "cone_coordinate": (0.0, 0.0, 1.0),
+            "joint": (1.0, 1.0, 1.0),
+        }
+        for name, route in routes.items():
+            with self.subTest(route=name):
+                centre = torch.tensor(0.07, dtype=raw.dtype, requires_grad=True)
+                automatic = torch.autograd.grad(
+                    scalar_loss(centre, route), centre
+                )[0]
+                epsilon = torch.tensor(1e-5, dtype=raw.dtype)
+                with torch.no_grad():
+                    finite_difference = (
+                        scalar_loss(centre.detach() + epsilon, route)
+                        - scalar_loss(centre.detach() - epsilon, route)
+                    ) / (2.0 * epsilon)
+                self.assertGreater(float(finite_difference.abs().item()), 1e-7)
+                torch.testing.assert_close(
+                    automatic,
+                    finite_difference,
+                    atol=2e-6,
+                    rtol=2e-4,
+                )
 
 
 if __name__ == "__main__":

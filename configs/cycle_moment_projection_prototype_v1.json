@@ -22,6 +22,7 @@
     "predicted_mean_magnitude_self_consistency",
     "rotation_equivariance_of_projection",
     "finite_autograd_on_nondegenerate_synthetic_interior",
+    "implicit_gradient_matches_central_difference_for_raw_mean_cone_and_joint_routes",
     "backward_graph_size_independent_of_root_iterations"
   ],
   "does_not_guarantee": [
@@ -34,6 +35,12 @@
   "eligibility": {
     "d6_must_pass_before_model_registration": true,
     "matched_baseline_failure_must_precede_method_selection": true
+  },
+  "synthetic_gradient_audit": {
+    "routes": ["raw_residual", "mean_vector", "cone_coordinate", "joint"],
+    "central_difference_epsilon": 1e-5,
+    "absolute_tolerance": 2e-6,
+    "relative_tolerance": 2e-4
   },
   "synthetic_engineering_benchmark": {
     "environment": "local_x86_64_torch_2.7.0+cu128_cpu_only",

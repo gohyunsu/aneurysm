@@ -14,6 +14,9 @@
   restoring the strict-interior implicit derivative in one graph operation.
   Added a graph-size invariance test and documented detached gradients for the
   set-valued Jensen-boundary root.
+- Verified the implicit derivative against central differences through four
+  independent synthetic routes: raw residual, mean vector, cone coordinate
+  and their joint perturbation. This is gradient correctness, not science.
 - Added a deterministic CPU-only benchmark script. At the exact 80×13,902
   released field shape, two 24-iteration local four-thread observations ranged
   from 0.5221--0.8612 s forward, 0.0497--0.0810 s backward and

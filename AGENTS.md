@@ -13,6 +13,9 @@
 > remain 0. Never use `junjinyong`; do not maintain the public static site.
 > Root bracketing runs under `no_grad`; one strict-interior implicit correction
 > restores gradients with backward-graph size independent of iteration count.
+> Autograd agrees with central differences on separate raw-residual,
+> mean-vector, cone-coordinate and joint perturbation routes at the registered
+> synthetic tolerances.
 > The set-valued Jensen-boundary scale is deliberately detached and requires
 > explicit endpoint supervision if this mechanism ever becomes eligible.
 > A reproducible local CPU-only `[80,13902,3]`, 24-iteration, four-thread

@@ -71,6 +71,8 @@ Synthetic tests verify:
 - preservation of collinear unidirectional magnitude pulsatility at the
   Jensen boundary;
 - finite implicit-gradient values in a nondegenerate interior example; and
+- agreement between autograd and central differences for independent raw
+  residual, mean-vector, cone-coordinate and joint perturbation routes; and
 - backward-graph size independent of root-solver iteration count.
 
 ## Bounded full-shape synthetic benchmark
