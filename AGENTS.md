@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 cycle-moment projection synthetic prototype:** A dataset-free,
+> non-executable PyTorch prototype now tests the conditional readout's actual
+> mathematical constraint. It tangent-projects and temporally centres a raw
+> residual, then selects the nonnegative scale closest to one whose cycle has
+> the predicted mean vector and mean magnitude. The closest-root rule avoids
+> erasing valid collinear magnitude pulsatility at the non-unique Jensen
+> boundary. Synthetic tests cover both moments, tangency, rotation
+> equivariance, infeasible/degenerate rejection and finite gradients. These are
+> self-consistency properties, not CFD accuracy, model selection, novelty or a
+> paper result. D6 activation/field/PBS/GPU and validation/outer/model/claim
+> remain 0. Never use `junjinyong`; do not maintain the public static site.
+
 > **2026-08-16 AneuG transient direct-prior reappraisal:** Current
 > arXiv:2601.19876v2 already occupies AneuG transient vector WSS with a
 > GHD-GraphGPS/GINE model, 14k steady augmentation, Graph U-Net/LaB-GATr/

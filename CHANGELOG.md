@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-16 · cycle-moment projection synthetic feasibility prototype
+
+- Added a dataset-free tangent cycle projection that enforces a predicted mean
+  vector and mean magnitude by a bounded vectorized scalar solve.
+- Made the Jensen-boundary ambiguity explicit and selected the feasible scale
+  closest to one so valid unidirectional magnitude pulsatility is not
+  automatically erased.
+- Added synthetic tests for exact moments, tangency, rotation equivariance,
+  infeasible/degenerate rejection and finite gradients. This opens no field,
+  architecture selection, PBS/GPU, result, claim or static-site work.
+
 ## 2026-08-16 · AneuG transient direct-prior reappraisal
 
 - Identified arXiv:2601.19876v2 as the same-dataset, same-task direct prior:

@@ -1,0 +1,45 @@
+{
+  "schema_version": "aurora.cycle_moment_projection_prototype.v1",
+  "status": "synthetic_only_non_executable_prototype",
+  "as_of": "2026-08-16",
+  "purpose": "Falsify the mathematical feasibility of a cycle-moment-consistent readout before D6 activation or architecture selection.",
+  "construction": {
+    "input": "raw_residual_T_N_3_mean_vector_N_3_mean_magnitude_N_normals_N_3",
+    "tangent_projection": true,
+    "temporal_residual_centering": true,
+    "constraint": "mean_t_norm(m+s*r_t)=a_with_a_at_least_norm(m)",
+    "root_domain": "s_nonnegative",
+    "root_selection": "feasible_scale_closest_to_one",
+    "maximum_iterations": 48,
+    "absolute_tolerance": 1e-7,
+    "relative_tolerance": 1e-6
+  },
+  "guarantees_under_feasibility": [
+    "tangent_output",
+    "predicted_mean_vector_self_consistency",
+    "predicted_mean_magnitude_self_consistency",
+    "rotation_equivariance_of_projection",
+    "finite_autograd_on_nondegenerate_synthetic_interior"
+  ],
+  "does_not_guarantee": [
+    "agreement_with_CFD",
+    "better_field_or_functional_error",
+    "training_stability",
+    "clinical_validity",
+    "algorithmic_novelty"
+  ],
+  "eligibility": {
+    "d6_must_pass_before_model_registration": true,
+    "matched_baseline_failure_must_precede_method_selection": true
+  },
+  "authorization": {
+    "read_real_field": false,
+    "read_validation_or_outer": false,
+    "select_architecture": false,
+    "train_model": false,
+    "submit_pbs_or_use_gpu": false,
+    "paper_result_or_claim": false,
+    "maintain_public_static_site": false
+  },
+  "excluded_server": "junjinyong"
+}

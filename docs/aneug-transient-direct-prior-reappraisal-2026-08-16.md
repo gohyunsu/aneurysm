@@ -138,6 +138,10 @@ not from algebraically replacing the reference target. Tangent projection,
 the Jensen cone and scalar root solve are controls. No method name is
 warranted before evidence.
 
+The separate [synthetic feasibility prototype](cycle-moment-projection-prototype-2026-08-16.md)
+tests existence, Jensen-boundary ambiguity, rotation equivariance and finite
+gradients without reading a real field or selecting this mechanism.
+
 Graph U-Net and an official-code LaB-GATr or LaB-VaTr adaptation remain
 external architecture controls where compute permits. The headline comparison
 must use the same GHD-GraphGPS backbone so a head-level effect is attributable.
