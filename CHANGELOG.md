@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-08-16 · AneuG transient direct-prior reappraisal
+
+- Identified arXiv:2601.19876v2 as the same-dataset, same-task direct prior:
+  GHD-GraphGPS/GINE transient WSS, 14,000-case steady augmentation, strong
+  architecture/output-family baselines and TAWSS/OSI/RRT evaluation are
+  occupied. Preserved its reported 2.84% maximum-normalized field error beside
+  26.98% conventional field rL2 and 68.35% OSI rL2.
+- Narrowed the conditional ISBI identity to a same-backbone,
+  field-error-matched cycle-functional audit and minimal moment-consistent
+  readout on the exact D5 component split. Registered explicit baselines,
+  metrics, evidence ladder and kill rules without selecting a model or reading
+  any real field.
+- Corrected a historical citation error: NOEM is a reusable-neural-operator
+  finite-element method, not a generic hard output transform. Recorded
+  arXiv:2505.24579v2 as the relevant generic exact-correction collision while
+  preserving old records in git.
+- Added the machine-readable direction record and detailed audit. D6 remains
+  non-activated; validation/outer fields, PBS/GPU, result, claim and public
+  static-site maintenance remain zero. `junjinyong` remains prohibited.
+
 ## 2026-08-16 · D6 streaming evaluator completed pre-activation
 
 - Added one-case-at-a-time aggregation, fixed-histogram quantiles, all-or-none

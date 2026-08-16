@@ -1,0 +1,83 @@
+{
+  "schema_version": "aurora.aneug_transient_direct_prior_reappraisal.v1",
+  "status": "direction_only_non_executable",
+  "as_of": "2026-08-16",
+  "target_venue": "IEEE_ISBI_2027",
+  "primary_question": "At matched physical vector-field error on held-out synthetic-geometry components, does a same-backbone moment-consistent cycle readout improve transient-WSS functional fidelity?",
+  "direct_priors": [
+    {
+      "id": "arxiv:2601.19876v2",
+      "role": "same_dataset_same_task_primary_collision",
+      "occupies": [
+        "AneuG_transient_vector_WSS",
+        "GHD_GraphGPS_GINE",
+        "steady_data_augmentation",
+        "Graph_UNet_LaB_GATr_LaB_VaTr_sequence_spectral_comparison",
+        "TAWSS_OSI_RRT_evaluation"
+      ]
+    },
+    {
+      "id": "arxiv:2507.22817",
+      "role": "patient_specific_cross_vascular_strong_control",
+      "occupies": [
+        "equivariant_transient_WSS",
+        "external_and_mesh_generalisation",
+        "TAWSS_OSI_and_oversmoothing_analysis"
+      ]
+    },
+    {
+      "id": "doi:10.1016/j.cmpb.2025.108958",
+      "role": "public_vectorised_transient_operator_control"
+    },
+    {
+      "id": "arxiv:2505.24579v2",
+      "role": "generic_exact_linear_quadratic_output_correction_collision"
+    }
+  ],
+  "citation_erratum": {
+    "incorrect_prior_id": "doi:10.1038/s43588-026-00974-2",
+    "incorrect_historical_characterization": "generic_hard_constraint_output_transform",
+    "correct_characterization": "finite_element_method_with_reusable_neural_operator_elements",
+    "historical_records_preserved_but_superseded": true
+  },
+  "acquired_snapshot": {
+    "processed_cases": 578,
+    "d5_components": 576,
+    "d5_primary_singleton_components": 508,
+    "private_split": {
+      "train": 406,
+      "validation": 51,
+      "outer": 51
+    },
+    "independent_unit_label": "synthetic_geometry_component",
+    "patient_or_generator_family_claim": false
+  },
+  "candidate_role": {
+    "label": "conditional_application_evaluation_mechanism",
+    "algorithmic_novelty_claim": false,
+    "backbone_if_later_selected": "shared_GHD_GraphGPS_GINE",
+    "primary_controls": [
+      "direct_tangent_cycle_head",
+      "same_backbone_soft_moment_loss",
+      "same_backbone_moment_consistent_cycle_head"
+    ],
+    "rrt_is_independent_coprimary": false
+  },
+  "gate_order": [
+    "human_activate_and_close_D6_train_only_admission",
+    "register_bounded_train_validation_baseline_reproduction",
+    "observe_field_error_matched_functional_failure",
+    "bounded_same_backbone_mechanism_development",
+    "freeze_then_one_shot_outer_confirmation"
+  ],
+  "authorization": {
+    "activate_d6": false,
+    "read_real_field": false,
+    "read_validation_or_outer": false,
+    "select_architecture_or_loss": false,
+    "submit_pbs_or_use_gpu": false,
+    "paper_result_or_claim": false,
+    "maintain_public_static_site": false
+  },
+  "excluded_server": "junjinyong"
+}

@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 AneuG transient direct-prior reappraisal:** Current
+> arXiv:2601.19876v2 already occupies AneuG transient vector WSS with a
+> GHD-GraphGPS/GINE model, 14k steady augmentation, Graph U-Net/LaB-GATr/
+> LaB-VaTr/sequence/spectral controls and TAWSS/OSI/RRT evaluation. Its best
+> 2.84% maximum-normalized field error coexists with 26.98% conventional field
+> rL2 and 68.35% OSI rL2; the broad mismatch observation is therefore also
+> prior. The only conditional residual question is a same-backbone,
+> field-error-matched cycle-functional audit plus a minimal moment-consistent
+> readout on the exact D5 component split. This is application/evaluation, not
+> new-GNN novelty, and remains unselected until D6 pass plus observed matched
+> baseline failure. RRT equals inverse mean-vector magnitude and is never an
+> independent co-primary. Earlier notes mischaracterized NOEM
+> `10.1038/s43588-026-00974-2`; it is a neural-operator-element FEM, not a hard
+> output transform. The relevant generic correction collision is
+> arXiv:2505.24579v2. D6 activation, real field, validation/outer read,
+> architecture/loss, PBS/GPU, result and claim stay 0. Never use `junjinyong`;
+> do not maintain the public static site.
+
 > **2026-08-16 D6 pre-activation implementation readiness:** The registered
 > non-executable source now has a full one-case-at-a-time aggregate gate,
 > fixed-histogram quantiles, private train-only sufficient statistics and
