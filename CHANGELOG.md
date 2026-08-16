@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-16 · D6 train-field audit execution activation
+
+- Recorded the user's explicit D6 selection in a fresh executable contract;
+  the earlier non-executable registration remains immutable.
+- Added an exact-hash, train-only runner and a CPU 4 / 64 GB / GPU 0 introai9
+  PBS wrapper with a permanent one-attempt boundary.
+- Kept validation, outer-test and auxiliary tensors sealed. Aggregate gate
+  diagnostics are public-safe; physical train statistics and raw logs remain
+  private. No model, architecture, GPU experiment or paper claim is opened.
+- Public-site maintenance remains outside the code-and-experiment workflow.
+
 ## 2026-08-16 · transient WSS functional metric kernel
 
 - Added a synthetic-only, method-free TAWSS/OSI/RRT kernel with mandatory

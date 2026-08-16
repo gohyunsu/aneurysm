@@ -1,0 +1,95 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d6_execution.v1",
+  "protocol_id": "aneug_processed_v4_train_only_field_admission_d6_execution_v1",
+  "status": "human_activated_executable",
+  "as_of": "2026-08-16",
+  "human_activation": {
+    "explicitly_selected": true,
+    "selection": "D6",
+    "selected_on": "2026-08-16",
+    "activates_only_this_execution_version": true,
+    "does_not_mutate_registration": true
+  },
+  "immutable_registration": {
+    "relative_path": "configs/aneug_processed_v4_d6_train_field_audit_v1.json",
+    "sha256": "2965ab58aec4ca7ee890f8f7f1928d4be69fd39f471f75099907809f43e13a66",
+    "schema_version": "aurora.aneug_processed_v4_d6_train_field_audit.v1",
+    "protocol_id": "aneug_processed_v4_train_only_field_admission_d6_v1",
+    "remains_non_executable": true
+  },
+  "bound_prior_evidence": {
+    "closed_d5_public_result_sha256": "3545831b50c1fa5b6ada5e2d29c06c25f04c6e02a34845a7a4d147b56b3f3eee",
+    "closed_d5_private_manifest_sha256": "0f95cf303fa63b58c049e722864389c1432460686e335d20402b677c368181d6",
+    "d5_train_split_sha256": "df583f3553ce4efcf0588da5bdc029921025648c1981eba3a85fe3841d2bf26e",
+    "expected_train_cases": 406,
+    "expected_validation_cases": 51,
+    "expected_outer_test_cases": 51
+  },
+  "source_identity": {
+    "transient": {
+      "relative_server_path": "processed_v4_d3/assembled_registered_data_1k_v4.pth",
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "steady": {
+      "relative_server_path": "processed_v4_d3/assembled_registered_steady_data_1k_v4.pth",
+      "bytes": 9632510050,
+      "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+    }
+  },
+  "read_boundary": {
+    "allowed_tensor_values": "d5_train_cases_only",
+    "read_train_tensor_values": true,
+    "read_validation_tensor_values": false,
+    "read_outer_test_tensor_values": false,
+    "read_auxiliary_tensor_values": false,
+    "publish_case_ids": false,
+    "publish_train_normalization_values": false
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "03:00:00",
+    "maximum_pbs_attempts": 1,
+    "attempts_used_before_submission": 0,
+    "one_interrupted_attempt_may_resume": false,
+    "rerun_or_repair_after_any_outcome": false,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong",
+    "exact_quality_passed_clean_commit_required": true,
+    "private_activation_manifest_required": true
+  },
+  "output_contract": {
+    "record_directory_name": "aneug_processed_v4_d6_execution_v1",
+    "public_result_filename": "public_train_field_audit.json",
+    "private_statistics_filename": "private_train_statistics.json",
+    "attempt_status_filename": "attempt.status.json",
+    "atomic_json": true,
+    "refuse_existing_output": true,
+    "raw_logs_private": true,
+    "absolute_paths_private": true
+  },
+  "consequence": {
+    "any_attempt_outcome_closes_d6": true,
+    "pass_permits_only_bounded_train_validation_baseline_registration": true,
+    "pass_permits_outer_test_access": false,
+    "pass_permits_immediate_gpu_training": false,
+    "pass_is_paper_result": false,
+    "failure_or_incomplete_permits_same_contract_repair": false
+  },
+  "authorization": {
+    "execute_d6_now": true,
+    "submit_one_cpu_pbs": true,
+    "monitor_that_attempt": true,
+    "read_d5_train_field_values": true,
+    "read_validation_or_outer_field_values": false,
+    "fit_or_select_model": false,
+    "gpu_training": false,
+    "paper_result_or_claim": false,
+    "maintain_public_site": false
+  }
+}
