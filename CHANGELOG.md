@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-16 · non-executable D4 metadata-census draft
+
+- Added a dormant contract with no cardinality threshold, every authorization
+  false and mandatory fresh human-selected registration before any execution.
+- Implemented a pure metadata census that keeps ordered IDs private, publishes
+  only aggregates/digest and never indexes or materializes tensor values.
+- Passed 5/5 synthetic falsification tests, including draft execution refusal,
+  sentinel value access, ID leakage and scope/GPU mutation checks. No payload,
+  PBS, scientific gate, model, result or claim opened.
+
 ## 2026-08-16 · processed-v4 static artifact semantics S0
 
 - Verified from the pinned official filename manifest that all 730 raw

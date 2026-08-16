@@ -185,6 +185,9 @@ def check_site(root: Path) -> list[str]:
         "D4 is recommended but not selected or registered": (
             "D4 selection boundary"
         ),
+        "D4 draft is non-executable and passes 5/5 synthetic tests": (
+            "D4 dormant implementation boundary"
+        ),
         "730 cases are not 730 independent patients": (
             "AneuG independent-unit boundary"
         ),

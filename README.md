@@ -33,7 +33,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 / D2 | 각각 폐쇄 | compute egress 3/3 / monolithic SFTP 3/3 · scientific verdict 0 |
-| processed-v4 D3 / static S0 | transport pass · cohort fail / semantics complete | raw 730 complete ≠ processed <700 · D4 미선택 |
+| processed-v4 D3 / S0 / D4 draft | transport pass · cohort fail / semantics complete | raw 730 ≠ processed <700 · draft 5/5·실행 불가 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -187,7 +187,7 @@ schema/science는 0입니다. [폐쇄 근거](docs/aneug-processed-v4-client-sta
 유일한 schema job 116437은 weights-only/mmap root load 뒤 `registered_data_list < 700`인
 `case_floor`에서 F/exit 1로 닫혔습니다. Exact case 수, IDs, timestep/label, mesh order와
 geometry linkage는 materialize되지 않았고 재실행이나 사후 case-count backfill은 없습니다.
-정적 S0는 `1k`가 cohort 크기가 아니며 builder가 730을 assert하지 않고 기존 cache를 재사용할 수 있음을 확인했습니다. D4 metadata census는 권고만 했고 아직 선택하지 않았습니다.
+정적 S0는 `1k`가 cohort 크기가 아니며 builder가 730을 assert하지 않고 기존 cache를 재사용할 수 있음을 확인했습니다. D4 metadata census 초안은 5/5를 통과했지만 선택·등록·실행 권한은 없습니다.
 
 ## 조건부 architecture와 평가
 
@@ -241,7 +241,7 @@ results/      public aggregate outcomes only
 - [closed source-feasibility G0](configs/aneug_reference_floor_g0_v1.json)
 - [G0 execution record](results/aneug_reference_floor_g0_execution_20260814.json)
 - [processed-v4 D3 chunk contract](configs/aneug_processed_v4_chunk_stage_d3.json)
-- [processed-v4 D3 audit](docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md) · [static artifact semantics](docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md)
+- [processed-v4 D3 audit](docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md) · [static semantics](docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md) · [non-executable D4 draft](docs/aneug-processed-v4-d4-draft-design-2026-08-16.md)
 - [processed-v4 D3 execution record](results/aneug_processed_v4_d3_execution_20260816.json)
 - [과거 AneuG P0 no-verdict](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md)
 - [Aneumo source authority watch](docs/aneumo-source-authority-watch-v22-2026-08-14.md)

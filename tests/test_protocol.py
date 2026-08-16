@@ -529,6 +529,12 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["processed_v4_semantics_s0_official_split_lineage_disjoint"])
         self.assertFalse(audit["processed_v4_d4_human_selected"])
         self.assertFalse(audit["processed_v4_d4_registered"])
+        self.assertEqual(
+            audit["processed_v4_d4_draft_status"],
+            "draft_unselected_non_executable",
+        )
+        self.assertEqual(audit["processed_v4_d4_draft_synthetic_tests_passed"], 5)
+        self.assertFalse(audit["processed_v4_d4_draft_can_execute"])
         self.assertFalse(audit["processed_v4_d1_v5_or_raw_authorized"])
         self.assertFalse(audit["processed_v4_d1_scientific_p0_or_gpu_authorized"])
         self.assertFalse(audit["scientific_gate_registered"])

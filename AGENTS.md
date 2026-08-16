@@ -10,8 +10,10 @@
 > caches and provides no lineage-disjoint split. Specific missing IDs and build
 > cause remain unknown; no processed payload was reopened and D3 stays failed
 > without count backfill. Static result `eeb18e27…b56a4` is complete. Recommend
-> only a human-selected, threshold-free metadata D4 census; D4 is unselected/
-> unregistered. Split/P0/method/model/GPU/test/result/claim remain zero. Never
+> only a human-selected, threshold-free metadata D4 census. Its non-executable
+> draft and pure metadata code pass 5/5 synthetic tests, keep ordered IDs
+> private, reject tensor-value access and refuse draft execution. D4 remains
+> unselected/unregistered. Split/P0/method/model/GPU/test/result/claim remain zero. Never
 > use `junjinyong`.
 
 > **2026-08-16 D3 final closure:** Exact client source became 23/23 immutable
