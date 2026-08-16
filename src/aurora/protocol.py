@@ -11523,13 +11523,13 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d4_draft_status"]
         != "draft_unselected_non_executable"
         or reference_floor["processed_v4_d4_draft_config_sha256"]
-        != "dbafe58150540ae60e672fedf2cff93fa88c421ae5bd4e17c3a3d8c76600aa64"
+        != "85a8eef9172ec8f1ab9bc69a7e7a0b65a2054b92dfd04984dda2517ac8d2218f"
         or reference_floor["processed_v4_d4_draft_evaluator_sha256"]
-        != "03dbcbb258821d904845c263f17a217b846a87a008983e562fe8b8783153d139"
+        != "99d98e6077cf3707c0f7227dd671755cba37d22836962855d894715c87dd48ef"
         or reference_floor["processed_v4_d4_draft_test_sha256"]
-        != "54387deda56badaaab10fb6e1059fbb39f3c8a47109cec18a8432b588718b374"
+        != "5879ba864c8e3b9723555d324b4433c50e287300d61b53d71820574d9655243d"
         or reference_floor["processed_v4_d4_draft_document_sha256"]
-        != "a3bdafffd8ba6220f833ca7b9c8793fca6669332c7f8b0896137ebf061898397"
+        != "4a1cf31c307644bdf2e25ececae20ff00bf667aa19bf57fdb69bd58e145a8c30"
         or reference_floor["processed_v4_d4_draft_synthetic_tests_passed"] != 5
         or reference_floor["next_allowed_action"]
         != "human_select_materially_distinct_d4_metadata_only_processed_cohort_census"

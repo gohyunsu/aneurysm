@@ -640,7 +640,11 @@
             원인은 아직 모릅니다. 다음 D4는 threshold를 낮추는 rerun이 아니라 exact
             count·ID digest·shape/label histogram·mesh/linkage만 기록하는 descriptive
             census여야 합니다. Pure metadata implementation은 tensor value access를
-            거부하는 sentinel을 포함해 synthetic test 5/5를 통과했지만, draft 자체가
+            거부하는 sentinel을 포함해 synthetic test 5/5를 통과했습니다. Official
+            builder의 exact case keys와 <code>idx_list / edge_index_list / faces_list</code>
+            hierarchy도 정적 대조했고, shape/dtype만 기록하며 connectivity value는 읽지
+            않습니다. Scientific verdict는 실패를 뜻하는 false가 아니라 null입니다.
+            Draft 자체가
             <code>human_selected=false</code>이며 execution을 거부합니다. 선택·등록·PBS는 0입니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>

@@ -17,6 +17,24 @@ mesh-order agreement and optional geometry-linkage counts without indexing,
 converting or materializing tensor values. Full ordered IDs exist only in a
 private manifest; the public result contains a digest and aggregates.
 
+## Static schema corroboration
+
+The draft is independently aligned to official AneuG-Flow code commit
+`4a090a0f12538deef6fcea88b81afe78ce38152e`, not merely copied from the
+closed D3 reader. Pinned `new_version/loaders.py` constructs transient case
+records with exactly `tensor`, `labels` and `case`; serializes
+`registered_data_list` plus `mesh_data`; and stores case order in
+`mesh_data.cases`. The same builder exposes `idx_list`, `edge_index_list`,
+`faces_list`, `ghd` and `shape_scale`. D4 therefore describes the shape and
+dtype of those hierarchy/geometry objects without reading connectivity or
+field values. The pinned loader SHA-256 is
+`133fc170ab395fe7bf44891ed625837e9b20ed4de7b977a325cc8e44d61393b5`.
+
+Missing or malformed metadata is reported descriptively rather than converted
+into a replacement cohort threshold. The public result uses
+`scientific_verdict=null`, not `false`, because D4 makes no scientific pass or
+failure judgment.
+
 ## Activation boundary
 
 A future D4 requires explicit human selection, a fresh registered config,
@@ -38,6 +56,7 @@ The draft tests require all of the following:
 - execution refusal in draft state;
 - D3 no-backfill/no-relabel and no replacement cardinality threshold;
 - tensor sentinels that fail if values are indexed or materialized;
+- hierarchy sentinels that expose only list length, tensor shape and dtype;
 - case IDs absent from public JSON and present only in the private manifest;
 - malformed metadata recorded descriptively without a scientific verdict;
 - scope, GPU and authorization mutations rejected.

@@ -188,6 +188,9 @@ def check_site(root: Path) -> list[str]:
         "D4 draft is non-executable and passes 5/5 synthetic tests": (
             "D4 dormant implementation boundary"
         ),
+        "Official builder exact case keys and mesh hierarchy are statically corroborated": (
+            "D4 official-schema corroboration boundary"
+        ),
         "730 cases are not 730 independent patients": (
             "AneuG independent-unit boundary"
         ),

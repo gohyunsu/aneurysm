@@ -76,13 +76,21 @@ def validate_draft_contract(contract: Mapping[str, Any]) -> None:
         "record_private_ordered_case_ids",
         "record_public_ordered_case_id_sha256",
         "record_blank_and_duplicate_id_counts",
+        "record_root_and_case_key_histograms",
         "record_label_timestep_shape_dtype_histograms",
         "record_mesh_case_order_agreement",
+        "record_mesh_hierarchy_shape_dtype_metadata",
+        "record_mesh_geometry_tensor_shape_dtype_metadata",
         "record_geometry_linkage_counts",
         "record_normalization_metadata_only",
     ):
         _require(census[key] is True, key)
-    for key in ("read_tensor_values", "compute_scientific_field_metric", "publish_case_ids"):
+    for key in (
+        "read_tensor_values",
+        "read_mesh_connectivity_values",
+        "compute_scientific_field_metric",
+        "publish_case_ids",
+    ):
         _require(census[key] is False, key)
     envelope = contract["execution_envelope_if_selected_in_fresh_version"]
     _require(envelope["server"] == "introai9", "server")
@@ -123,6 +131,26 @@ def _histogram(values: Sequence[Any]) -> dict[str, int]:
     return dict(sorted(Counter(encoded).items()))
 
 
+def _sequence_tensor_metadata(value: Any) -> dict[str, Any]:
+    """Describe a Python metadata sequence without reading tensor elements."""
+
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        return {
+            "present": value is not None,
+            "is_sequence": False,
+            "sequence_length": None,
+            "items": [],
+        }
+    items = [_tensor_metadata(item) for item in value]
+    return {
+        "present": True,
+        "is_sequence": True,
+        "sequence_length": len(value),
+        "items": items,
+        "items_without_tensor_metadata": sum(item is None for item in items),
+    }
+
+
 def _safe_case_component(value: str) -> bool:
     return bool(value) and value not in {".", ".."} and Path(value).name == value
 
@@ -146,11 +174,13 @@ def census_loaded_metadata(
     case_ids: list[str] = []
     labels: list[list[str]] = []
     tensor_metadata: list[dict[str, Any] | None] = []
+    case_keys: list[list[str]] = []
     for case in cases:
         _require(isinstance(case, Mapping), "case_mapping")
         case_ids.append(str(case.get("case", "")))
         labels.append([str(item) for item in case.get("labels", [])])
         tensor_metadata.append(_tensor_metadata(case.get("tensor")))
+        case_keys.append(sorted(str(key) for key in case))
 
     canonical_ids = json.dumps(case_ids, ensure_ascii=False, separators=(",", ":"))
     case_digest = hashlib.sha256(canonical_ids.encode("utf-8")).hexdigest()
@@ -174,6 +204,14 @@ def census_loaded_metadata(
     norm = steady["tensor_norm"]
     _require(isinstance(norm, Mapping), "tensor_norm")
     norm_metadata = {key: _tensor_metadata(norm.get(key)) for key in ("mean", "std")}
+    hierarchy_metadata = {
+        key: _sequence_tensor_metadata(mesh.get(key))
+        for key in ("idx_list", "edge_index_list", "faces_list")
+    }
+    geometry_tensor_metadata = {
+        key: _tensor_metadata(mesh.get(key))
+        for key in ("ghd", "shape_scale")
+    }
     private_manifest = {
         "schema_version": "aurora.aneug_processed_v4_d4.private_case_manifest.v1",
         "ordered_case_ids": case_ids,
@@ -188,6 +226,10 @@ def census_loaded_metadata(
         "blank_case_id_count": blank_count,
         "duplicate_case_id_count": duplicate_id_count,
         "unsafe_case_component_count": unsafe_case_component_count,
+        "transient_root_keys": sorted(str(key) for key in transient),
+        "steady_root_keys": sorted(str(key) for key in steady),
+        "mesh_root_keys": sorted(str(key) for key in mesh),
+        "case_key_histogram": _histogram(case_keys),
         "tensor_metadata_missing_count": sum(item is None for item in tensor_metadata),
         "label_histogram": _histogram(labels),
         "timestep_histogram": _histogram(timesteps),
@@ -197,6 +239,8 @@ def census_loaded_metadata(
         "mesh_case_order_exact": case_ids == mesh_cases,
         "registered_only_case_count": len(case_set - mesh_set),
         "mesh_only_case_count": len(mesh_set - case_set),
+        "mesh_hierarchy_metadata": hierarchy_metadata,
+        "mesh_geometry_tensor_metadata": geometry_tensor_metadata,
         "geometry_linkage_evaluated": geometry_root is not None,
         "geometry_linked_count": geometry_linked_count,
         "steady_labels": [str(item) for item in steady["label"]],
@@ -204,8 +248,10 @@ def census_loaded_metadata(
         "cardinality_pass_threshold": None,
         "case_ids_public": False,
         "tensor_values_read": False,
+        "mesh_connectivity_values_read": False,
         "scientific_field_metric_computed": False,
-        "scientific_verdict": False,
+        "scientific_verdict": None,
+        "census_outcome": "observed_without_pass_fail_threshold",
         "permits_human_rescoring_only": True,
     }
     serialized_public = json.dumps(public_result, ensure_ascii=False, sort_keys=True)

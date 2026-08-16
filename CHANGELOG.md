@@ -6,6 +6,10 @@
   false and mandatory fresh human-selected registration before any execution.
 - Implemented a pure metadata census that keeps ordered IDs private, publishes
   only aggregates/digest and never indexes or materializes tensor values.
+- Independently corroborated `case / labels / tensor` and the mesh hierarchy
+  against pinned official `loaders.py`. The census now records only hierarchy
+  shape/dtype, never connectivity values, and represents no scientific verdict
+  as JSON `null` rather than a misleading failure-like `false`.
 - Passed 5/5 synthetic falsification tests, including draft execution refusal,
   sentinel value access, ID leakage and scope/GPU mutation checks. No payload,
   PBS, scientific gate, model, result or claim opened.

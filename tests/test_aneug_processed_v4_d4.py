@@ -26,6 +26,9 @@ class MetadataOnlyTensor:
     def __getitem__(self, key: object) -> object:
         raise AssertionError("tensor values must not be indexed")
 
+    def __iter__(self) -> object:
+        raise AssertionError("tensor values must not be iterated")
+
     def numpy(self) -> object:
         raise AssertionError("tensor values must not be materialized")
 
@@ -65,7 +68,20 @@ class AneuGProcessedV4D4DraftTests(unittest.TestCase):
                     "tensor": MetadataOnlyTensor((80, 1024, 6)),
                 },
             ],
-            "mesh_data": {"cases": ["synthetic_case_alpha", "synthetic_case_beta"]},
+            "mesh_data": {
+                "cases": ["synthetic_case_alpha", "synthetic_case_beta"],
+                "idx_list": [MetadataOnlyTensor((256,), "torch.int64")],
+                "edge_index_list": [
+                    MetadataOnlyTensor((2, 4096), "torch.int64"),
+                    MetadataOnlyTensor((2, 1024), "torch.int64"),
+                ],
+                "faces_list": [
+                    MetadataOnlyTensor((2048, 3), "torch.int64"),
+                    MetadataOnlyTensor((512, 3), "torch.int64"),
+                ],
+                "ghd": MetadataOnlyTensor((2, 10, 3)),
+                "shape_scale": MetadataOnlyTensor((2, 1)),
+            },
         }
         steady = {
             "label": ["x", "y", "z", "wss_x", "wss_y", "wss_z"],
@@ -77,8 +93,21 @@ class AneuGProcessedV4D4DraftTests(unittest.TestCase):
         public, private = census_loaded_metadata(contract, transient, steady)
         self.assertEqual(public["registered_case_count"], 2)
         self.assertTrue(public["mesh_case_order_exact"])
+        self.assertEqual(
+            public["mesh_hierarchy_metadata"]["faces_list"]["sequence_length"],
+            2,
+        )
+        self.assertEqual(
+            public["mesh_hierarchy_metadata"]["faces_list"]["items"][0]["shape"],
+            [2048, 3],
+        )
+        self.assertEqual(
+            public["mesh_geometry_tensor_metadata"]["ghd"]["shape"],
+            [2, 10, 3],
+        )
         self.assertFalse(public["tensor_values_read"])
-        self.assertFalse(public["scientific_verdict"])
+        self.assertFalse(public["mesh_connectivity_values_read"])
+        self.assertIsNone(public["scientific_verdict"])
         self.assertNotIn("synthetic_case_alpha", json.dumps(public))
         self.assertEqual(
             private["ordered_case_ids"],
@@ -109,6 +138,7 @@ class AneuGProcessedV4D4DraftTests(unittest.TestCase):
         self.assertFalse(public["mesh_case_order_exact"])
         self.assertIsNone(public["cardinality_pass_threshold"])
         self.assertFalse(public["scientific_field_metric_computed"])
+        self.assertIsNone(public["scientific_verdict"])
 
     def test_scope_expansion_and_draft_activation_are_rejected(self) -> None:
         original = json.loads(CONFIG.read_text(encoding="utf-8"))
@@ -116,6 +146,12 @@ class AneuGProcessedV4D4DraftTests(unittest.TestCase):
             ("human_selection", "explicitly_selected", True, "human_selection"),
             ("census_contract", "cardinality_pass_threshold", 600, "cardinality_threshold"),
             ("census_contract", "read_tensor_values", True, "read_tensor_values"),
+            (
+                "census_contract",
+                "read_mesh_connectivity_values",
+                True,
+                "read_mesh_connectivity_values",
+            ),
             ("execution_envelope_if_selected_in_fresh_version", "ngpus", 1, "gpu"),
             ("authorization", "read_processed_payload", True, "authorization"),
         )
