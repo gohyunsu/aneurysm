@@ -1,0 +1,63 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d6_execution_record.v2",
+  "protocol_id": "aneug_processed_v4_train_only_field_admission_d6_execution_v2",
+  "status": "closed_execution_incomplete",
+  "public_source_commit": "5a5f516d455e93dd32ce8da9bb2fe065817ff8e8",
+  "public_quality_run": 31955022917,
+  "public_quality_conclusion": "success",
+  "pbs_job_id": "116501.ECE-util1",
+  "pbs_final_state": "F",
+  "pbs_exit_status": 1,
+  "resources": {
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "requested_walltime": "03:00:00",
+    "used_walltime": "00:00:02",
+    "used_cput": "00:00:00",
+    "used_memory_kb": 9140
+  },
+  "scheduler_trace": {
+    "job_ran": true,
+    "post_job_file_processing_error": true,
+    "pbs_stdout_materialized": false,
+    "pbs_stderr_materialized": false
+  },
+  "wrapper_evidence": {
+    "private_record_directory_materialized": false,
+    "attempt_started_marker_materialized": false,
+    "attempt_status_materialized": false,
+    "public_train_field_audit_materialized": false,
+    "private_train_statistics_materialized": false,
+    "runner_started": false
+  },
+  "field_audit": {
+    "source_identity_reverified_inside_job": false,
+    "train_cases_evaluated": 0,
+    "validation_cases_evaluated": 0,
+    "outer_test_cases_evaluated": 0,
+    "auxiliary_cases_evaluated": 0,
+    "scientific_gate_evaluated": false,
+    "scientific_verdict": null,
+    "gate_pass": null
+  },
+  "closure": {
+    "attempts_used": 1,
+    "attempt_limit": 1,
+    "d6_v2_closed": true,
+    "same_contract_resume_repair_or_rerun_allowed": false,
+    "baseline_development_authorized": false,
+    "model_or_architecture_authorized": false,
+    "gpu_training_authorized": false,
+    "validation_or_outer_test_authorized": false,
+    "paper_result_or_claim_authorized": false
+  },
+  "privacy": {
+    "case_ids_published": false,
+    "absolute_paths_published": false,
+    "private_statistics_published": false,
+    "raw_scheduler_trace_public": false
+  },
+  "excluded_server_accessed": false
+}

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-17 · D6 v2 closed execution-incomplete
+
+- Exact source `5a5f516…` ran once as introai9 PBS job
+  `116501.ECE-util1`, CPU 4 / 64 GB / GPU 0, and finalized F/exit 1 after
+  two seconds with a post-job file-processing error.
+- PBS output and the wrapper record directory did not materialize, proving the
+  runner and train-field audit did not start. Scientific gate/result remain
+  unevaluated, with 0/0/0/0 train/validation/outer/auxiliary cases evaluated.
+- D6 v2 is closed 1/1 without repair or rerun. Baseline development, model,
+  architecture, GPU, validation/outer and paper-claim authority remain closed.
+
 ## 2026-08-17 · D6 v1 preflight withdrawal and fresh v2
 
 - A no-field introai9 preflight found that v1 pointed to a nonexistent steady
