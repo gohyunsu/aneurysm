@@ -580,8 +580,8 @@
           <a href="../results/aneug_reference_floor_g0_execution_20260814.json">Closed G0 execution record 읽기 ↗</a>
           <p>
             raw 2 TB release는 불필요합니다. Compute-node download D1은 3/3에서
-            닫혔고 D2 monolithic SFTP도 3/3에서 닫혔습니다. 현재 단계는
-            <b>processed-v4 fixed-chunk D3</b>입니다.
+            닫혔고 D2 monolithic SFTP도 3/3에서 닫혔습니다. 이후 실행한
+            <b>processed-v4 fixed-chunk D3</b>도 최종 판정으로 닫혔습니다.
             Exact transient v4 23.74GB만 persistent하게 두고, 9.63GB steady v4는
             physical-unit normalization을 추출한 뒤 삭제합니다. 따라서 peak new
             storage는 33.38GB이고 60GB cap 아래입니다. V5, raw blood/wall, 14,000
@@ -620,12 +620,16 @@
             Client transient exact object는 존재하지만 이를 server/schema/science pass로
             바꾸어 말하지 않습니다.
             D3는 같은 monolithic partial의 네 번째 session이 아닙니다. Exact client
-            object를 22×1GiB와 122,541,923-byte final chunk로 나눠, 각 server
-            size/SHA-256을 확인한 뒤에만 local chunk를 삭제합니다. 모든 23개가
-            검증된 뒤에만 closed D2 partial을 제거하고 CPU/PBS에서 재조립합니다.
-            이 순서가 재조립 peak를 57,122,234,152 bytes로 제한합니다. Full identity
-            pass 뒤에만 one-shot CPU/64GB/GPU-0 schema gate를 열며, 현재 chunk와
-            finalizer/schema attempt는 모두 0입니다.
+            object를 22×1GiB와 122,541,923-byte final chunk로 나눴고, 23/23이 각각
+            첫 SFTP session에서 server size/SHA-256을 통과했습니다. Finalizer job
+            116425는 F/exit 0으로 모든 chunk를 먼저 검증하고 D2 partial을 폐기한 뒤
+            exact 23,744,862,051-byte object를 publish했습니다. 유일한 schema job
+            116437은 두 checksum과 weights-only/mmap root load, required keys 뒤
+            <code>registered_data_list &lt; 700</code>인 <code>case_floor</code>에서
+            F/exit 1로 닫혔습니다. 이는 “파일 없음”이나 field 성능 실패가 아니라
+            <b>exact object는 확보됐지만 사전 cohort admission은 실패</b>했다는 뜻입니다.
+            Exact count와 downstream schema/linkage는 기록되지 않았고 동일 run이나
+            사후 payload backfill은 금지됩니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
@@ -635,6 +639,7 @@
           <a href="../docs/aneug-processed-v4-client-staging-d2-closure-2026-08-14.md">D2 client/server/schema 경계 읽기 ↗</a>
           <a href="../configs/aneug_processed_v4_chunk_stage_d3.json">Fixed-chunk D3 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md">D3 저장상한과 실행 순서 읽기 ↗</a>
+          <a href="../results/aneug_processed_v4_d3_execution_20260816.json">D3 transport/schema 결과 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>
@@ -657,7 +662,8 @@
           </p>
           <p>
             따라서 현재 올바른 표기는 <b>account-level asset reconciliation complete,
-            AneuG transient target unresolved, active train/validation/test 0/0/0</b>입니다.
+            exact AneuG processed target acquired, frozen cohort admission failed,
+            active train/validation/test 0/0/0</b>입니다.
             각 자산은 performance failure, linkage failure, execution-incomplete,
             task mismatch, controlled access 또는 discovery reuse 중 정확한 이유를
             따로 표시합니다.
@@ -3862,8 +3868,9 @@
               V1e는 boundary utility가 3/3 seed에서 양수였지만 absolute
               learnability 세 기준을 모두 실패해 6/9로 종료됐습니다.
               AneuG-Flow geometry archive에는 14,712 directory와 14,710 complete
-              three-file bundle이 있지만, transient WSS target은 확인되지 않았고
-              BC variation도 paired-BC evidence로 쓰지 않습니다.
+              three-file bundle이 있습니다. 이 geometry tree 자체에는 transient WSS
+              target이 없지만 별도 D3 processed object는 exact 확보됐고 700-case
+              schema floor를 실패했습니다. BC variation도 paired-BC evidence로 쓰지 않습니다.
             </p>
           </div>
 

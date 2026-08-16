@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · D1/D2 closed · processed-v4 D3 fixed-chunk transport registered · chunk 0/23 · schema/science 0 · P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
-    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits. Its 730 cases are not 730 independent patients. The external data-tree audit confirms 14,710 complete local AneuG geometry bundles. Exact official processed transient v4 is 23,744,862,051 bytes on the client. D3 transfers it as 22 one-GiB chunks and one 122,541,923-byte final chunk, retires the closed D2 partial only after all 23 server hashes pass, and caps server reassembly at 57,122,234,152 bytes below 60 GB. V5, raw blood/wall, 14,000-case steady CFD and cfd are excluded. The closed G0 remains no-verdict and is not retried: neither source feasibility nor science has a verdict. BenchAnXplore is engineering-only. The 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor. AneuX is geometry-only OOD support. Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
+    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · D3 closed: 23/23 transport and full SHA pass, one-shot schema case_floor fail, exact count unrecorded · science/P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits; 730 cases are not 730 independent patients. D3 acquired the exact 23,744,862,051-byte processed transient through 23 independently verified chunks and a successful CPU/GPU-0 finalizer. Its sole schema job passed both checksums and weights-only/mmap root loading, then failed the frozen minimum because registered_data_list contained fewer than 700 cases. Exact count and downstream linkage were not recorded and are not backfilled post hoc. This is object-acquisition pass plus cohort-admission fail, not an overall AneuG or scientific WSS verdict. V5/raw CFD remain excluded. BenchAnXplore is engineering-only; the 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor; AneuX is geometry-only OOD support; Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -48,9 +48,9 @@ window.AURORA_DATA = Object.freeze({
   lineage: [
     {
       year: "2026.08",
-      title: "D3 replaces one fragile monolith with 23 independently verifiable chunks",
-      copy: "The user explicitly selects D3 without reopening D2. The checksum-exact 23,744,862,051-byte client object becomes 22 one-GiB chunks and one 122,541,923-byte final chunk. Each server object must pass size and SHA-256 before the local chunk is deleted. Only after all 23 pass may the closed D2 partial be retired; one CPU/GPU-0 finalizer then reassembles under a 57,122,234,152-byte peak. A pass permits one CPU/GPU-0 metadata-only schema gate, never scientific P0 or training.",
-      status: "Prospective D3 · chunk 0/23 · finalizer/schema/P0/model/GPU/result/claim 0",
+      title: "D3 acquires the exact object but fails the frozen cohort floor",
+      copy: "All 23 fixed chunks pass on their first SFTP session with zero resume or hash mismatch. Finalizer job 116425 finishes F/exit 0, retires the D2 partial only after 23/23 verification and publishes the exact 23,744,862,051-byte object. The sole schema job 116437 passes both checksums, weights-only/mmap root loading and required root keys, then closes F/exit 1 at case_floor because registered_data_list is below the frozen 700-case minimum. Exact count and downstream schema/linkage are not materialized or backfilled.",
+      status: "D3 closed · transport exact pass · schema case-floor fail · scientific P0/model/GPU/result/claim 0",
       url: "../docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md"
     },
     {
@@ -63,7 +63,7 @@ window.AURORA_DATA = Object.freeze({
     {
       year: "2026.08",
       title: "AneuG reference-relative structural fidelity is a conditional source question",
-      copy: "A critical reappraisal removes Aneumo from the required paper dependency and assigns four non-overlapping roles: AneuG-Flow for conditional transient development, the 2015 CFD Challenge for a five-anatomy within-anatomy solver-variability floor, AneuX for geometry-only morphology/OOD audit, and Aneumo for optional comparison after mapping and licence resolution. The residual question is whether a field-error-matched learned surrogate adds signed critical-point/worldline error beyond solver disagreement. Because AneuG generator lineage is unresolved, 730 cases are not counted as patients and the direction scores 31.0/40. Its exact one-shot CPU/PBS G0 later closed execution-incomplete without source-feasibility or scientific verdict.",
+      copy: "A critical reappraisal removes Aneumo from the required paper dependency and assigns four non-overlapping roles: AneuG-Flow for conditional transient development, the 2015 CFD Challenge for a five-anatomy within-anatomy solver-variability floor, AneuX for geometry-only morphology/OOD audit, and Aneumo for optional comparison after mapping and licence resolution. The residual question is whether a field-error-matched learned surrogate adds signed critical-point/worldline error beyond solver disagreement. Because AneuG generator lineage is unresolved, 730 cases are not counted as patients and the direction scores 31.0/40. Its exact one-shot CPU/PBS G0 later closed execution-incomplete; neither source feasibility nor science has a verdict.",
       status: "Inactive 31.0/40 · source G0 closed incomplete · scientific P0/model/GPU/test/claim 0",
       url: "../docs/aneug-reference-relative-structure-reappraisal-2026-08-14.md"
     },
@@ -1494,6 +1494,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.16",
+      category: "data",
+      title: "D3 closes with exact transport pass and schema case-floor failure",
+      copy: "The exact processed transient is now server-published after 23/23 first-session chunks and a successful CPU/GPU-0 finalizer. The single schema job then fails the preregistered minimum because registered_data_list is below 700. Exact count, IDs and downstream schema/linkage are unrecorded; no rerun, backfill, split, P0, model, GPU or claim opens.",
+      files: ["results/aneug_processed_v4_d3_execution_20260816.json", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.15",
       category: "protocol",

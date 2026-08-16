@@ -1,5 +1,29 @@
 # AneuG processed-v4 D3 · fixed-chunk acquisition
 
+## 최종 결과 · 2026-08-16
+
+D3 transport는 성공했고 schema admission은 사전 기준에서 실패했다. 23개 chunk는
+각각 첫 SFTP session 한 번으로 size/SHA-256을 통과했다. CPU 4·8GB·GPU 0 finalizer
+job `116425.ECE-util1`은 F/exit 0, walltime 00:19:16으로 D2 partial을 모든 chunk
+검증 뒤 폐기하고 exact 23,744,862,051-byte/SHA-256 `141541ed…51c9` object를
+publish했다. Full identity 뒤에만 chunk 23개를 삭제했다.
+
+유일한 CPU 4·64GB·GPU 0 schema job `116437.ECE-util1`은 F/exit 1, walltime
+00:10:53으로 닫혔다. 두 object checksum과 weights-only/mmap root load, required
+root keys는 통과했지만 `registered_data_list`가 사전 최소 700개보다 작아
+`AcquisitionContractError: case_floor`가 발생했다. Exact case count, case ID,
+80-phase/vector-label, mesh order, geometry linkage와 compact norm manifest는 결과로
+materialize되지 않았다. 사후 payload 재독으로 count를 채우거나 동일 schema를
+재실행하지 않는다.
+
+따라서 **exact processed object 확보**와 **논문 cohort admission**을 분리한다.
+전자는 pass, 후자는 fail이다. 이 결과는 AneuG 전체 릴리스의 실패나 과학적
+WSS verdict가 아니며 P0, architecture, GPU training, split, test와 paper claim을
+열지 않는다. 다음 단계에는 official artifact semantics를 static하게 재검토한 뒤
+사람이 명시적으로 선택한 materially distinct evidence version이 필요하다.
+[Deidentified execution record](../results/aneug_processed_v4_d3_execution_20260816.json)를
+source of truth로 사용한다.
+
 ## 결정
 
 사용자는 2026-08-15에 **D3 fixed-chunk transport**를 명시적으로 선택했다. D3는
@@ -54,4 +78,5 @@ D2 partial을 보존한 채 23개 chunk를 모두 확보했을 때 server peak�
 - junjinyong은 접근·조회·전송·제출·모니터링하지 않는다.
 
 D3 실패는 발생한 단계의 transport/schema verdict만 만든다. 데이터셋이나 과학 질문의
-실패로 바꾸어 쓰지 않으며, closed D1/D2 결과도 성공으로 relabel하지 않는다.
+실패로 바꾸어 쓰지 않으며, closed D1/D2 결과도 성공으로 relabel하지 않는다. 이
+예측은 실제 결과와 일치했고 D3는 위 `case_floor` outcome으로 영구 폐쇄됐다.

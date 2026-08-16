@@ -167,11 +167,14 @@ def check_site(root: Path) -> list[str]:
         "AneuG reference-relative transient WSS 31.0/40 inactive": (
             "current reference-relative candidate boundary"
         ),
-        "processed-v4 D3 fixed-chunk transport registered": (
-            "current processed-v4 fixed-chunk stage"
+        "D3 closed: 23/23 transport and full SHA pass, one-shot schema case_floor fail": (
+            "current processed-v4 D3 closure"
         ),
-        "caps server reassembly at 57,122,234,152 bytes below 60 GB": (
-            "D3 storage-bound reassembly boundary"
+        "object-acquisition pass plus cohort-admission fail": (
+            "D3 object-versus-cohort boundary"
+        ),
+        "Exact count and downstream linkage were not recorded and are not backfilled post hoc": (
+            "D3 no-post-hoc-backfill boundary"
         ),
         "730 cases are not 730 independent patients": (
             "AneuG independent-unit boundary"

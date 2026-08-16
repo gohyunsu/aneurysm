@@ -11280,14 +11280,29 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d3_final_chunk_bytes",
             "processed_v4_d3_chunks_completed",
             "processed_v4_d3_chunk_sftp_sessions_used",
+            "processed_v4_d3_chunk_resume_sessions_used",
+            "processed_v4_d3_chunk_hash_mismatches",
             "processed_v4_d3_client_peak_bytes",
             "processed_v4_d3_server_pre_retirement_peak_bytes",
             "processed_v4_d3_server_reassembly_peak_bytes",
             "processed_v4_d3_d2_partial_retired",
             "processed_v4_d3_finalizer_attempts_used",
             "processed_v4_d3_finalizer_attempt_limit",
+            "processed_v4_d3_finalizer_job_id",
+            "processed_v4_d3_finalizer_exit_status",
+            "processed_v4_d3_full_object_exact",
             "processed_v4_d3_schema_attempts_used",
             "processed_v4_d3_schema_attempt_limit",
+            "processed_v4_d3_schema_job_id",
+            "processed_v4_d3_schema_exit_status",
+            "processed_v4_d3_schema_failure_reason",
+            "processed_v4_d3_minimum_cases_required",
+            "processed_v4_d3_registered_case_count_below_minimum",
+            "processed_v4_d3_exact_registered_case_count_recorded",
+            "processed_v4_d3_case_ids_or_field_values_public",
+            "processed_v4_d3_schema_rerun_allowed",
+            "processed_v4_d3_execution_result",
+            "processed_v4_d3_execution_result_sha256",
             "processed_v4_d3_scientific_p0_or_gpu_authorized",
             "processed_v4_d1_v5_or_raw_authorized",
             "processed_v4_d1_scientific_p0_or_gpu_authorized",
@@ -11424,24 +11439,43 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d2_schema_attempts_used"] != 0
         or reference_floor["processed_v4_d2_schema_attempt_limit"] != 1
         or reference_floor["processed_v4_d3_status"]
-        != "prospective_human_selected_fixed_chunk_transport_before_chunk_creation"
+        != "closed_transport_passed_schema_failed_case_floor"
         or reference_floor["processed_v4_d3_chunk_bytes"] != 1073741824
         or reference_floor["processed_v4_d3_chunk_count"] != 23
         or reference_floor["processed_v4_d3_full_chunk_count"] != 22
         or reference_floor["processed_v4_d3_final_chunk_bytes"] != 122541923
-        or reference_floor["processed_v4_d3_chunks_completed"] != 0
-        or reference_floor["processed_v4_d3_chunk_sftp_sessions_used"] != 0
+        or reference_floor["processed_v4_d3_chunks_completed"] != 23
+        or reference_floor["processed_v4_d3_chunk_sftp_sessions_used"] != 23
+        or reference_floor["processed_v4_d3_chunk_resume_sessions_used"] != 0
+        or reference_floor["processed_v4_d3_chunk_hash_mismatches"] != 0
         or reference_floor["processed_v4_d3_client_peak_bytes"] != 24818603875
         or reference_floor["processed_v4_d3_server_pre_retirement_peak_bytes"]
         != 43550459845
         or reference_floor["processed_v4_d3_server_reassembly_peak_bytes"]
         != 57122234152
-        or reference_floor["processed_v4_d3_finalizer_attempts_used"] != 0
+        or reference_floor["processed_v4_d3_d2_partial_retired"] is not True
+        or reference_floor["processed_v4_d3_finalizer_attempts_used"] != 1
         or reference_floor["processed_v4_d3_finalizer_attempt_limit"] != 1
-        or reference_floor["processed_v4_d3_schema_attempts_used"] != 0
+        or reference_floor["processed_v4_d3_finalizer_job_id"]
+        != "116425.ECE-util1"
+        or reference_floor["processed_v4_d3_finalizer_exit_status"] != 0
+        or reference_floor["processed_v4_d3_full_object_exact"] is not True
+        or reference_floor["processed_v4_d3_schema_attempts_used"] != 1
         or reference_floor["processed_v4_d3_schema_attempt_limit"] != 1
+        or reference_floor["processed_v4_d3_schema_job_id"]
+        != "116437.ECE-util1"
+        or reference_floor["processed_v4_d3_schema_exit_status"] != 1
+        or reference_floor["processed_v4_d3_schema_failure_reason"]
+        != "case_floor"
+        or reference_floor["processed_v4_d3_minimum_cases_required"] != 700
+        or reference_floor["processed_v4_d3_registered_case_count_below_minimum"]
+        is not True
+        or reference_floor["processed_v4_d3_execution_result"]
+        != "results/aneug_processed_v4_d3_execution_20260816.json"
+        or reference_floor["processed_v4_d3_execution_result_sha256"]
+        != "93f2bbcf77b239cb80860621dba09a891d7d17fea48d391ac4486a933a0c4b73"
         or reference_floor["next_allowed_action"]
-        != "create_upload_and_remote_verify_d3_chunks_in_strict_order_starting_at_index_0"
+        != "human_select_materially_distinct_evidence_version_after_static_official_artifact_semantics_reappraisal"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11472,7 +11506,9 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d2_further_sftp_session_allowed",
                 "processed_v4_d2_scientific_p0_or_gpu_authorized",
                 "processed_v4_d3_is_d2_retry_or_repair",
-                "processed_v4_d3_d2_partial_retired",
+                "processed_v4_d3_exact_registered_case_count_recorded",
+                "processed_v4_d3_case_ids_or_field_values_public",
+                "processed_v4_d3_schema_rerun_allowed",
                 "processed_v4_d3_scientific_p0_or_gpu_authorized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
@@ -11529,6 +11565,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d3_schema_pbs_wrapper",
             "processed_v4_d3_schema_pbs_wrapper_sha256",
         ),
+        (
+            "processed_v4_d3_execution_result",
+            "processed_v4_d3_execution_result_sha256",
+        ),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
@@ -11540,7 +11580,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     checks.append("AneuG reference-relative source-feasibility G0 boundary")
     checks.append("introai9 acquired-asset reconciliation beyond legacy root")
     checks.append("AneuG processed-v4 storage-bounded acquisition boundary")
-    checks.append("AneuG processed-v4 D3 fixed-chunk transport boundary")
+    checks.append("AneuG processed-v4 D3 case-floor closure boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
         "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",

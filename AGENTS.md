@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 D3 final closure:** Exact client source became 23/23 immutable
+> server chunks in 23 first SFTP sessions, with zero resume and zero hash
+> mismatch. Finalizer job `116425.ECE-util1` used CPU 4/8 GB/GPU 0 and finished
+> F/exit 0 after 00:19:16; it retired the closed D2 partial only after all
+> chunks passed, published exact 23,744,862,051 bytes/SHA-256 `141541ed…51c9`,
+> then deleted the chunks. The sole CPU 4/64 GB/GPU 0 schema job
+> `116437.ECE-util1` finished F/exit 1 after 00:10:53. Object checksums,
+> weights-only/mmap root loads and required root keys passed, then the frozen
+> minimum of 700 registered cases failed as `AcquisitionContractError:
+> case_floor`. Exact count, IDs, timestep/label, mesh order, geometry linkage,
+> norm/case manifests and schema result were not materialized. D3 is closed:
+> never rerun, repair or backfill the exact count by post-hoc payload read.
+> Preserve the exact transient and temporary steady object pending a human-
+> selected materially distinct evidence version. Scientific P0/split/method/
+> architecture/GPU/test/result/claim remain 0. Never use `junjinyong` or
+> publish private paths, IDs or raw logs.
+
 > **2026-08-15 D3 fixed-chunk registration:** The user explicitly selected
 > D3 as a materially distinct acquisition version. D1 and D2 remain closed;
 > D3 never resumes the monolithic D2 partial or creates D2 session 4. The

@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-16 · D3 closes after exact transport pass and schema case-floor failure
+
+- Completed 23/23 independently hashed chunks in 23 first SFTP sessions with
+  zero resume/mismatch. Finalizer job `116425.ECE-util1` finished F/exit 0,
+  retired the D2 partial only after all chunks passed and published the exact
+  23,744,862,051-byte object before deleting the chunks.
+- Closed the sole schema job `116437.ECE-util1` at F/exit 1. Both checksums,
+  weights-only/mmap root load and required root keys passed; the frozen
+  minimum 700-case contract then failed as `AcquisitionContractError:
+  case_floor`. Exact count and all downstream schema/linkage outputs remain
+  unrecorded and are not backfilled post hoc.
+- Preserved the exact transient and temporary steady objects without opening
+  grouping, split, P0, architecture, GPU, test, result or paper claim. D3 has
+  no repair/rerun; a new version requires explicit human selection.
+
 ## 2026-08-15 · D3 fixed-chunk transport is prospectively registered
 
 - Recorded the user's explicit selection of a materially distinct D3. It does

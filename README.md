@@ -22,10 +22,10 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > model, GPU와 outer test를 열지 않습니다. 다만 기존
 > 탐색 범위 밖의 데이터 트리를 다시 감사해 AneuG geometry 14,712개 디렉터리
 > 중 14,710개 complete bundle과 BenchAnXplore 105×80 transient velocity 자산이
-> 실제로 확보되어 있음을 확인했습니다. 공식 transient v4 target은 exact
-> 23,744,862,051-byte object로 client에서 확인했습니다. 닫힌 D2 monolith를 재개하지
-> 않는 D3는 이를 1 GiB 이하 23개 chunk로 순차 전송하도록 사전 등록했습니다.
-> 데이터 전체 부재가 아니라 **server exactness, schema와 독립 단위**가 현재 병목입니다.
+> 실제로 확보되어 있음을 확인했습니다. D3는 exact 23,744,862,051-byte transient를
+> 23개 chunk로 전송·재조립해 full SHA를 통과했지만, 유일한 schema job은 사전 기준
+> 700 case 미만인 `case_floor`에서 F/exit 1로 닫혔습니다. Exact case 수는 기록되지
+> 않았고 사후 재독하지 않습니다. 따라서 **객체는 확보됐지만 cohort admission은 실패**했습니다.
 ## 현재 상태
 
 | 항목 | 상태 | 해석 |
@@ -34,7 +34,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 / D2 | 각각 폐쇄 | compute egress 3/3 / monolithic SFTP 3/3 · scientific verdict 0 |
-| processed-v4 D3 | prospective · 실행 전 | 23 × ≤1GiB sequential chunk · schema/science 0 |
+| processed-v4 D3 | transport pass · schema closed fail | exact object 확보 · registered cases <700 · science 0 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -46,7 +46,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 
 [프로젝트 사이트](https://gohyunsu.github.io/aneurysm/site/)는 WSS, critical
 point, worldline, solver variability와 evidence gate를 배경지식 없이 읽을 수
-있게 설명합니다. 과거 방향과 실패는 filterable History에서 삭제하지 않습니다.
+있게 설명합니다. superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다.
 ## 연구 질문
 
 Cartesian relative L2가 낮은 transient WSS surrogate라도 source·sink·saddle과
@@ -151,14 +151,11 @@ worldline이 불안정하거나 matched failure가 없으면 방향을 닫습니
 ## Evidence ladder
 
 ```text
-D3 · fixed-chunk exact processed-v4 acquisition + schema/linkage [registered]
-  └─ all pass → geometry-only leakage/near-duplicate grouping + split freeze
-      └─ stable split → method-free structure-stability P0
-          └─ stable target → matched baseline-failure P1
-              └─ excess error above solver floor
-                  → bounded validation-only minimal correction
-                      → fresh lineage-disjoint confirmation
-                          → ISBI claim activation
+D3 · fixed-chunk acquisition [transport pass → schema case-floor fail · closed]
+  └─ human-selected materially distinct evidence version only
+      └─ eligible cohort → leakage grouping + split freeze → method-free P0
+          └─ stable target → matched baseline P1 → minimal correction
+              └─ fresh lineage-disjoint confirmation → ISBI claim activation
 ```
 
 G0는 과거 AneuG surface-vector job을 수리하거나 재실행하지 않았습니다. Exact
@@ -186,7 +183,11 @@ server에는 10.17GB partial만 남았습니다. 네 번째 session과 schema PB
 schema/science는 0입니다. [폐쇄 근거](docs/aneug-processed-v4-client-staging-d2-closure-2026-08-14.md)를
 보존합니다. 사용자가 선택한 D3는 monolith를 재개하지 않고 22×1GiB와 마지막
 122,541,923-byte chunk를 개별 검증합니다. 23개가 모두 exact일 때만 D2 partial을
-제거해 재조립 peak를 57,122,234,152 bytes로 제한합니다.
+제거해 재조립 peak를 57,122,234,152 bytes로 제한했습니다. 23/23이 첫 SFTP session에
+통과했고 finalizer job 116425는 F/exit 0으로 exact full object를 publish했습니다.
+유일한 schema job 116437은 weights-only/mmap root load 뒤 `registered_data_list < 700`인
+`case_floor`에서 F/exit 1로 닫혔습니다. Exact case 수, IDs, timestep/label, mesh order와
+geometry linkage는 materialize되지 않았고 재실행이나 사후 case-count backfill은 없습니다.
 
 ## 조건부 architecture와 평가
 
@@ -241,6 +242,7 @@ results/      public aggregate outcomes only
 - [G0 execution record](results/aneug_reference_floor_g0_execution_20260814.json)
 - [processed-v4 D3 chunk contract](configs/aneug_processed_v4_chunk_stage_d3.json)
 - [processed-v4 D3 storage·execution audit](docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md)
+- [processed-v4 D3 execution record](results/aneug_processed_v4_d3_execution_20260816.json)
 - [과거 AneuG P0 no-verdict](docs/aneug-surface-vector-structure-source-audit-2026-08-10.md)
 - [Aneumo source authority watch](docs/aneumo-source-authority-watch-v22-2026-08-14.md)
 - [machine-readable source-watch v22](configs/source_watch_v22.json)
@@ -254,7 +256,5 @@ python scripts/check_site.py --root .
 node --check site/assets/research-data.js
 ```
 
-과학 실행은 `introai9` PBS에서만 수행하고 login-node GPU를 사용하지 않습니다.
-`junjinyong`에는 접근·조회·전송·제출·모니터링하지 않습니다. Confirmatory
-threshold, seed와 outer test는 사후 repair하지 않습니다. 과거 실패와
-superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다.
+과학 실행은 `introai9` PBS에서만 수행하고 login-node GPU와 `junjinyong`을 사용하지 않습니다.
+Confirmatory threshold, seed, outer test와 과거 실패는 사후 repair·relabel하지 않습니다.
