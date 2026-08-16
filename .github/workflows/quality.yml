@@ -74,6 +74,8 @@ jobs:
         run: |
           PYTHONPATH=src python -m aurora.aneug_pbs_envelope_e0 --config configs/aneug_pbs_envelope_e0_v1.json --validate-only
           bash -n cluster/pbs_aneug_pbs_envelope_e0_v1.pbs
+      - name: Validate dormant non-executable AneuG processed-v4 D7 draft
+        run: PYTHONPATH=src python -m aurora.aneug_processed_v4_d7_draft --config configs/aneug_processed_v4_d7_train_field_admission_draft_v1.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0
         run: PYTHONPATH=src python -m aurora.aneux_preprocessing_orbit_p0 --config configs/aneux_preprocessing_orbit_p0.json --validate-only
       - name: Validate frozen historical AneuX nested-orbit P0 contract

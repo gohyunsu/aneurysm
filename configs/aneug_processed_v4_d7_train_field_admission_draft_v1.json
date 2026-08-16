@@ -1,0 +1,97 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d7_train_field_admission_draft.v1",
+  "protocol_id": "aneug_processed_v4_train_only_field_admission_d7_draft_v1",
+  "status": "dormant_unselected_non_executable",
+  "as_of": "2026-08-17",
+  "identity": {
+    "purpose": "fresh train-only physical-field admission after the independently closed D6 and E0 evidence versions",
+    "d6_retry_repair_resume_or_relabel": false,
+    "scientific_model_or_architecture": false,
+    "paper_result_or_claim": false
+  },
+  "bound_prior_evidence": {
+    "closed_d5_public_result_sha256": "3545831b50c1fa5b6ada5e2d29c06c25f04c6e02a34845a7a4d147b56b3f3eee",
+    "d5_train_split_sha256": "df583f3553ce4efcf0588da5bdc029921025648c1981eba3a85fe3841d2bf26e",
+    "expected_train_cases": 406,
+    "expected_validation_cases": 51,
+    "expected_outer_test_cases": 51,
+    "closed_d6_public_result_sha256": "f3c73f4c2d553af276f392ef6baa2d894cb3a791a3bd73323a4a1a25af396caa",
+    "closed_d6_status": "closed_execution_incomplete",
+    "closed_d6_attempts": "1/1",
+    "closed_e0_public_result_sha256": "a1ce52b1ba25955a855a1868e854970d9ca6df71c5ed328f4b789ffebf9a74dc",
+    "closed_e0_status": "closed_infrastructure_classified",
+    "closed_e0_attempts": "1/1",
+    "e0_runner_envelope_pass": true,
+    "e0_scheduler_output_staging_pass": false
+  },
+  "immutable_scientific_kernel": {
+    "registration_path": "configs/aneug_processed_v4_d6_train_field_audit_v1.json",
+    "registration_sha256": "2965ab58aec4ca7ee890f8f7f1928d4be69fd39f471f75099907809f43e13a66",
+    "evaluator_path": "src/aurora/aneug_processed_v4_d6.py",
+    "evaluator_sha256": "d38805c3c6c9dcec7081db108ff66be4afda93dbbc578938cc186a972facf907",
+    "threshold_or_metric_change_allowed_after_selection": false,
+    "training_only_threshold_source": true,
+    "method_free": true
+  },
+  "prospective_read_boundary": {
+    "read_d5_train_tensor_values": true,
+    "read_shared_finest_faces": true,
+    "read_validation_tensor_values": false,
+    "read_outer_test_tensor_values": false,
+    "read_auxiliary_tensor_values": false,
+    "publish_case_ids_or_split_members": false,
+    "fit_or_select_model": false,
+    "read_values_now": false
+  },
+  "prospective_gate": {
+    "mesh_stored_normal_agreement": true,
+    "wss_tangency": true,
+    "temporal_residual": true,
+    "positive_tawss_and_finite_osi": true,
+    "unclipped_rrt_denominator_support": true,
+    "jensen_cone_mean_magnitude_at_least_mean_vector_norm": true,
+    "noncompensatory": true,
+    "scientific_verdict_before_execution": null
+  },
+  "required_execution_envelope": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "03:00:00",
+    "maximum_pbs_attempts": 1,
+    "rerun_or_repair_after_any_outcome": false,
+    "precreate_fresh_private_record_directory": true,
+    "attempt_marker_and_internal_log_before_strict_mode": true,
+    "attempt_marker_and_internal_log_before_profile_or_environment_checks": true,
+    "source_etc_profile_inside_wrapper": false,
+    "absolute_approved_python": true,
+    "exact_quality_passed_clean_checkout": true,
+    "atomic_internal_status_and_result": true,
+    "scheduler_stdout_stderr_is_not_evidence_channel": true,
+    "post_job_staging_error_cannot_erase_complete_internal_result": true,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "selection_boundary": {
+    "human_selected": false,
+    "private_activation_registered": false,
+    "executable_config_exists": false,
+    "pbs_wrapper_exists_for_d7": false,
+    "execution_runner_exists_for_d7": false,
+    "pbs_submission_authorized": false,
+    "field_read_authorized": false,
+    "same_file_may_be_mutated_into_executable_contract": false,
+    "selected_contract_must_be_a_fresh_version": true
+  },
+  "conditional_consequence": {
+    "complete_pass_permits_only_fresh_bounded_train_validation_baseline_registration": true,
+    "complete_pass_permits_immediate_model_training": false,
+    "complete_pass_permits_outer_test": false,
+    "complete_pass_is_paper_result": false,
+    "scientific_failure_closes_selected_d7_without_repair": true,
+    "execution_incomplete_closes_selected_d7_without_repair": true
+  }
+}

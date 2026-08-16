@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-17 — dormant D7 train-field admission draft registered
+
+- Added a non-executable fresh-contract draft that keeps D6/E0 closed, binds
+  the immutable train-only method-free gate and incorporates E0's early
+  persistent-record requirement.
+- No D7 runner, PBS wrapper, field read, model, GPU, validation, outer-test or
+  paper authority exists. A selected executable contract must be a fresh
+  version after separate human selection.
+
 ## 2026-08-17 — data-free PBS envelope E0 closed and classified
 
 - One introai9 CPU-only attempt finalized F/exit 0. Exact-checkout, clean-tree,
