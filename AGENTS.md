@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 D5 final closure:** Quality-passed public source
+> `483409a…21e6` ran once as introai9 job `116483.ECE-util1`, CPU 4, 64 GB,
+> GPU 0. It finalized F/exit 0 after 00:01:19; D5 is closed 1/1 and may never
+> be rerun or repaired. Exact source/order passed. The 578 finite 432-D GHD
+> rows form 576 components: 2 exact duplicate components, 0 additional
+> tolerance edges, max size 2. Primary is 508 singleton `stable_*` components;
+> 70 auxiliary cases form 68 components and mixed count is 0. The private
+> split is frozen at 406/51/51 train/validation/outer components, all phases
+> together. This is a synthetic-geometry split, not patient/site/family
+> lineage. No field/connectivity value or scientific endpoint was read;
+> `scientific_verdict=null`. Pass permits registration of field audit/bounded
+> development only. Method, architecture, GPU, test, result and paper claim
+> remain 0. Never use `junjinyong`; do not update the public static site.
+
 > **2026-08-16 processed-v4 D5 selected registration:** The user explicitly
 > selected D5 as a fresh executable evidence version. Closed D4 and the
 > dormant D5 draft remain immutable; D5 is neither their repair nor relabel.

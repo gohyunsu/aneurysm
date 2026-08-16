@@ -28,9 +28,9 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > 외부 geometry tree와 직접 이름이 겹치는 것은 168개뿐이지만, 공식 builder는
 > transient case-local checkpoint의 GHD를 processed `mesh_data`에 같은 순서로 저장합니다.
 > 따라서 410개 외부-name mismatch는 processed input 부재로 해석하지 않습니다.
-> 선택된 D5는 이 578×432 GHD의 중복과 synthetic-case split 가능성만 묻는
-> fresh one-shot gate입니다. Public Quality와 private activation 뒤 `introai9`
-> CPU/PBS 한 번만 허용하며 field/P0/model/GPU/test는 계속 닫혀 있습니다.
+> D5 one-shot은 578×432 GHD를 576 component로 묶고 gate를 통과했습니다.
+> Primary 508개는 모두 singleton이며 private split은 406/51/51로 동결됐습니다.
+> D5는 1/1로 닫혔고 field/P0/model/GPU/test는 계속 닫혀 있습니다.
 
 ## 현재 상태
 
@@ -40,7 +40,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 / D2 | 각각 폐쇄 | compute egress 3/3 / monolithic SFTP 3/3 · scientific verdict 0 |
-| processed-v4 D4 / D5 | census closed / selected gate | 578×80×13,902×9 · GHD-only component split · PBS 0/1 |
+| processed-v4 D4 / D5 | census closed / gate passed·closed | 578 case · 576 component · private 406/51/51 · PBS 1/1 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -178,9 +178,10 @@ directory의 `checkpoint.npy`에서 GHD를 읽어 `mesh_data.cases`와 같은 �
 이미 포함하며, 168/578 overlap은 별도 archive 간 이름 겹침이지 학습 가능성의
 필수 gate가 아닙니다. 보존된 [D5 비실행 초안](docs/aneug-processed-v4-d5-draft-design-2026-08-16.md)을
 변경하지 않고 [fresh D5](docs/aneug-processed-v4-d5-registration-2026-08-16.md)를
-등록했습니다. D5는 exact/수치적 copy component를 split 안에 가두고 private
-80/10/10 split의 가능성만 판정합니다. 현재 attempt는 0/1이며 field/P0/model/GPU/
-test/claim을 열지 않습니다.
+등록했습니다. Sole job 116483은 exact/tolerance component gate를 통과해 primary
+508개를 private 406/51/51로 동결했습니다. [공개 결과](results/aneug_processed_v4_d5_ghd_component_result_20260816.json)는
+집계와 digest만 담습니다. D5는 1/1로 닫혔고 다음 field audit/development는 새
+등록이 필요하며 field/P0/model/GPU/test/claim은 아직 열리지 않았습니다.
 
 ## 조건부 architecture와 평가
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-16 · D5 closes with a frozen component-disjoint split
+
+- Ran sole introai9 CPU 4/64 GB/GPU-0 job 116483 to F/exit 0 in 00:01:19;
+  exact source/order and the field-blind GHD audit passed.
+- Grouped 578 rows into 576 components: two exact duplicate components, no
+  extra tolerance edge, 508 primary singleton components and 68 auxiliary
+  components from 70 cases, with zero mixed component.
+- Froze the private 406/51/51 component split. D5 is closed 1/1 with null
+  scientific verdict; it opens only registration of a later field audit and
+  bounded development, not field access, model/GPU/test or paper claims.
+
 ## 2026-08-16 · D5 field-blind geometry-component gate selected
 
 - Registered the user's explicit D5 selection as a fresh version while

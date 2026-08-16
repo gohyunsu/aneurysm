@@ -11401,6 +11401,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d5_ngpus",
             "processed_v4_d5_attempts_used",
             "processed_v4_d5_attempt_limit",
+            "processed_v4_d5_job_id",
+            "processed_v4_d5_final_state",
+            "processed_v4_d5_exit_status",
+            "processed_v4_d5_walltime",
+            "processed_v4_d5_cpu_time",
+            "processed_v4_d5_memory_kb",
             "processed_v4_d5_same_contract_rerun_allowed",
             "processed_v4_d5_allowed_value_read",
             "processed_v4_d5_expected_case_count",
@@ -11414,6 +11420,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d5_minimum_primary_components",
             "processed_v4_d5_minimum_validation_components",
             "processed_v4_d5_minimum_outer_test_components",
+            "processed_v4_d5_all_geometry_components",
+            "processed_v4_d5_exact_duplicate_components",
+            "processed_v4_d5_numerical_equivalence_edges",
+            "processed_v4_d5_primary_components",
+            "processed_v4_d5_auxiliary_cases",
+            "processed_v4_d5_auxiliary_components",
+            "processed_v4_d5_mixed_components",
+            "processed_v4_d5_train_components",
+            "processed_v4_d5_validation_components",
+            "processed_v4_d5_outer_test_components",
+            "processed_v4_d5_public_result",
+            "processed_v4_d5_public_result_sha256",
+            "processed_v4_d5_execution_result",
+            "processed_v4_d5_execution_result_sha256",
+            "processed_v4_d5_gate_pass",
             "processed_v4_d5_ghd_read_authorized",
             "processed_v4_d5_field_or_connectivity_read_authorized",
             "processed_v4_d5_private_split_frozen",
@@ -11668,7 +11689,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "2f049e1b352cb5ceb1632ae1da1c4c6a6e73ba6c98dc122379b0cf246e505e53"
         or reference_floor["processed_v4_d5_draft_synthetic_tests_passed"] != 4
         or reference_floor["processed_v4_d5_status"]
-        != "registered_selected_not_executed"
+        != "closed_complete_gate_pass"
         or reference_floor["processed_v4_d5_config_sha256"]
         != "9518a73d04760481a2745b8ed95deb282a91eb4200e54af1fe518c76d493ac7b"
         or reference_floor["processed_v4_d5_evaluator_sha256"]
@@ -11685,8 +11706,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             reference_floor["processed_v4_d5_memory_gb"],
             reference_floor["processed_v4_d5_ngpus"],
         ) != (4, 64, 0)
-        or reference_floor["processed_v4_d5_attempts_used"] != 0
+        or reference_floor["processed_v4_d5_attempts_used"] != 1
         or reference_floor["processed_v4_d5_attempt_limit"] != 1
+        or reference_floor["processed_v4_d5_job_id"] != "116483.ECE-util1"
+        or reference_floor["processed_v4_d5_final_state"] != "F"
+        or reference_floor["processed_v4_d5_exit_status"] != 0
+        or reference_floor["processed_v4_d5_walltime"] != "00:01:19"
+        or reference_floor["processed_v4_d5_cpu_time"] != "00:01:05"
+        or reference_floor["processed_v4_d5_memory_kb"] != 396596
         or reference_floor["processed_v4_d5_allowed_value_read"]
         != "mesh_data.ghd_only"
         or reference_floor["processed_v4_d5_expected_case_count"] != 578
@@ -11704,9 +11731,23 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d5_minimum_primary_components"] != 400
         or reference_floor["processed_v4_d5_minimum_validation_components"] != 40
         or reference_floor["processed_v4_d5_minimum_outer_test_components"] != 40
+        or reference_floor["processed_v4_d5_all_geometry_components"] != 576
+        or reference_floor["processed_v4_d5_exact_duplicate_components"] != 2
+        or reference_floor["processed_v4_d5_numerical_equivalence_edges"] != 0
+        or reference_floor["processed_v4_d5_primary_components"] != 508
+        or reference_floor["processed_v4_d5_auxiliary_cases"] != 70
+        or reference_floor["processed_v4_d5_auxiliary_components"] != 68
+        or reference_floor["processed_v4_d5_mixed_components"] != 0
+        or reference_floor["processed_v4_d5_train_components"] != 406
+        or reference_floor["processed_v4_d5_validation_components"] != 51
+        or reference_floor["processed_v4_d5_outer_test_components"] != 51
+        or reference_floor["processed_v4_d5_public_result_sha256"]
+        != "3545831b50c1fa5b6ada5e2d29c06c25f04c6e02a34845a7a4d147b56b3f3eee"
+        or reference_floor["processed_v4_d5_execution_result_sha256"]
+        != "ac17437f2a71821155c7992c1e568d1b9c868add932306cb14c366ec352b24a3"
         or reference_floor["processed_v4_d5_scientific_verdict"] is not None
         or reference_floor["next_allowed_action"]
-        != "quality_private_activation_then_single_introai9_cpu_pbs_d5"
+        != "register_field_audit_and_bounded_development_only_no_execution"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11753,7 +11794,6 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d5_draft_can_execute",
                 "processed_v4_d5_same_contract_rerun_allowed",
                 "processed_v4_d5_field_or_connectivity_read_authorized",
-                "processed_v4_d5_private_split_frozen",
                 "processed_v4_d5_method_gpu_test_or_claim_authorized",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
@@ -11776,6 +11816,8 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d5_human_selected"] is not True
         or reference_floor["processed_v4_d5_registered"] is not True
         or reference_floor["processed_v4_d5_ghd_read_authorized"] is not True
+        or reference_floor["processed_v4_d5_gate_pass"] is not True
+        or reference_floor["processed_v4_d5_private_split_frozen"] is not True
     ):
         raise ProtocolError(
             "The AneuG reference-relative direction must remain an inactive 31/40 "
@@ -11863,6 +11905,11 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("processed_v4_d5_test", "processed_v4_d5_test_sha256"),
         ("processed_v4_d5_pbs_wrapper", "processed_v4_d5_pbs_wrapper_sha256"),
         ("processed_v4_d5_document", "processed_v4_d5_document_sha256"),
+        ("processed_v4_d5_public_result", "processed_v4_d5_public_result_sha256"),
+        (
+            "processed_v4_d5_execution_result",
+            "processed_v4_d5_execution_result_sha256",
+        ),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
