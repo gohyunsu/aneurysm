@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 D5 non-executable draft:** D4's 168/578 direct
+> external-directory overlap is preserved but is no longer treated as proof
+> that the processed geometry input is absent. Pinned official
+> `record_mesh_upsampling` reads each transient case-local `checkpoint.npy`
+> and writes aligned `mesh_data.cases` / `mesh_data.ghd`; it asserts no patient
+> or parent-family lineage. A dormant D5 draft therefore permits only future
+> reading of the 578×432 processed GHD values to group exact/numerical copies
+> and, if feasible, freeze an 80/10/10 synthetic-geometry-component split.
+> Filename-defined non-`stable_*` cases remain sealed auxiliary units and are
+> never patients/sites by inference. Draft config/code/document plus 4/4
+> synthetic tests exist, but D5 is unselected, unregistered and non-executable:
+> processed GHD/field/server/PBS/GPU/split/result/claim remain 0. A fresh D5
+> requires explicit human selection and may never mutate the draft. Never use
+> `junjinyong`.
+
 > **2026-08-16 processed-v4 D4 final closure:** Quality/Pages-passed public
 > source `be233176…9e08` ran exactly once as introai9 PBS job
 > `116482.ECE-util1` with CPU 4, 64 GB and GPU 0. It finalized F/exit 0 after

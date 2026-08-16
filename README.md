@@ -25,6 +25,14 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 > 실제로 확보되어 있음을 확인했습니다. D3는 exact 23,744,862,051-byte transient를
 > 23개 chunk로 전송·재조립해 full SHA를 통과했지만, 유일한 schema job은 사전 기준
 > 700 case 미만인 `case_floor`에서 닫혔습니다. 정적 S0는 raw 730개가 모두 filename-complete지만 processed snapshot은 더 작고, `1k`는 case 수가 아닌 resolution tag임을 확인했습니다. Exact count는 사후 재독하지 않습니다.
+> 이후 선택된 D4 census는 exact processed snapshot이 578 unique case,
+> 80×13,902×9 vector-WSS tensor와 exact mesh order를 가짐을 확인했습니다.
+> 외부 geometry tree와 직접 이름이 겹치는 것은 168개뿐이지만, 공식 builder는
+> transient case-local checkpoint의 GHD를 processed `mesh_data`에 같은 순서로 저장합니다.
+> 따라서 410개 외부-name mismatch는 processed input 부재로 해석하지 않습니다.
+> 현재 D5는 이 578×432 GHD의 중복과 synthetic-case split 가능성만 묻는
+> **비실행 초안**이며, 명시적 선택 전에는 server/PBS/split/model을 열지 않습니다.
+
 ## 현재 상태
 
 | 항목 | 상태 | 해석 |
@@ -33,7 +41,7 @@ AURORA는 뇌동맥류 CFD surrogate의 transient wall-shear-stress(WSS)가
 | active 연구 주제 | 없음 | 새 후보 31.0/40 · admission 32 미만 |
 | 조건부 주 데이터 | AneuG-Flow | 730 transient case 보고 · 독립 lineage 미검증 |
 | processed-v4 D1 / D2 | 각각 폐쇄 | compute egress 3/3 / monolithic SFTP 3/3 · scientific verdict 0 |
-| processed-v4 D3 / S0 / D4 draft | transport pass · cohort fail / semantics complete | raw 730 ≠ processed <700 · official schema 대조·draft 5/5·실행 불가 |
+| processed-v4 D4 / D5 draft | census complete / draft only | 578×80×13,902×9 · D5 GHD grouping 4/4 synthetic test · 실행 불가 |
 | 확보된 engineering 데이터 | BenchAnXplore | 105 HDF5/XDMF × 80 frame · direct WSS 없음 |
 | 외부 기준선 | 2015 CFD Challenge | 5 anatomy · solver submission은 anatomy가 아님 |
 | geometry OOD | AneuX | WSS/CFD가 없는 실제 형상 보조 감사만 허용 |
@@ -78,10 +86,10 @@ pressure와 vector WSS를 보고합니다. 공통 node 수/connectivity는 phase
 예측했다”는 contribution이 될 수 없습니다.
 
 - 730 case ≠ 730 patient
-- random/prefix/timestep split 금지
-- 공식 parent/latent lineage를 우선 사용
-- lineage가 없으면 WSS를 읽기 전에 geometry-only near-duplicate cluster를 고정하고,
-  이를 환자 계보가 아닌 conservative surrogate grouping으로 명시
+- timestep을 geometry와 나누는 split은 금지
+- 공식 parent/latent lineage가 제공되면 우선 사용하되, 존재를 추정하지 않음
+- lineage key가 없으면 WSS를 읽기 전에 processed GHD의 exact/near-copy component를
+  고정하고, 이를 환자 계보가 아닌 synthetic-case leakage grouping으로 명시
 
 초기 bounded inventory는 legacy project root만 보았기 때문에 과거 코드·config·
 execution record 외의 payload를 확인하지 못했습니다. 이후 별도 data tree를
@@ -157,37 +165,24 @@ D3 · fixed-chunk acquisition [transport pass → schema case-floor fail · clos
               └─ fresh lineage-disjoint confirmation → ISBI claim activation
 ```
 
-G0는 과거 AneuG surface-vector job을 수리하거나 재실행하지 않았습니다. Exact
-G0 자체도 한 번의 incomplete outcome으로 닫혀 재실행하지 않습니다. AneuG
-field/mesh payload를 다운로드하지 않고 release tree에서 case coverage와 explicit
-lineage manifest 존재 여부만 기록합니다. 2015 Challenge WSS archive는 exact
-size/MD5와 safe member directory만 확인하며 member extraction이나 field-value read를
-하지 않습니다. Pass, fail, execution-incomplete 어느 경우든 동일 계약은 다시
-실행하지 않습니다.
+G0와 D1/D2/D3의 exact 실패·transport 기록은 [변경 이력](CHANGELOG.md)에 보존하며
+어느 계약도 수리하거나 성공으로 relabel하지 않습니다. 현재 데이터 근거는 D3가
+exact processed object를 확보했지만 frozen 700-case schema floor에서 닫혔고, 이후
+사람이 선택한 threshold-free D4가 별도 job 116482에서 578 unique case,
+80×13,902×9 float32 vector-WSS tensor와 exact mesh order를 확인했다는 것입니다.
+Ordered IDs/raw log는 private이고 [공개 aggregate](results/aneug_processed_v4_d4_census_20260816.json)는
+metadata/digest만 담습니다. D4는 `scientific_verdict=null`, 31.0/40 inactive로
+닫혔으며 split/P0/model/GPU/test/claim을 열지 않았습니다.
 
-D1은 닫힌 G0의 retry가 아닙니다. 사용자가 선택한 processed-only acquisition이며
-exact v4 두 object와 60GB selected-asset cap만 다룹니다. Transport가 incomplete인
-동안만 동일 partial file을 최대 세 PBS attempt로 resume할 수 있고, object가 모두
-완성된 뒤 schema gate는 한 번만 실행합니다. D1 pass도 scientific result나 method
-승인이 아니라 leakage grouping과 development split 동결만 엽니다.
-
-마지막 attempt 3 job `116209.ECE-util1`은 F/exit 28, walltime 00:07:32로
-종료됐습니다. Persistent error는 `Connection timed out after 30001
-milliseconds`이며 partial byte, reader, schema는 모두 0입니다. 즉 60GB 저장
-계획이 기각된 것이 아니라 compute-node external transport가 완료되지 않은
-것입니다. D1은 3/3에서 닫혔고 동일 contract 재제출은 없습니다.
-
-D2는 client transient exact size/SHA를 확보했지만 마지막 SFTP 3/3이 reset되어
-server에는 10.17GB partial만 남았습니다. 네 번째 session과 schema PBS는 없으며
-schema/science는 0입니다. [폐쇄 근거](docs/aneug-processed-v4-client-staging-d2-closure-2026-08-14.md)를
-보존합니다. 사용자가 선택한 D3는 monolith를 재개하지 않고 22×1GiB와 마지막
-122,541,923-byte chunk를 개별 검증합니다. 23개가 모두 exact일 때만 D2 partial을
-제거해 재조립 peak를 57,122,234,152 bytes로 제한했습니다. 23/23이 첫 SFTP session에
-통과했고 finalizer job 116425는 F/exit 0으로 exact full object를 publish했습니다.
-유일한 schema job 116437은 weights-only/mmap root load 뒤 `registered_data_list < 700`인
-`case_floor`에서 F/exit 1로 닫혔습니다. Exact case 수, IDs, timestep/label, mesh order와
-geometry linkage는 materialize되지 않았고 재실행이나 사후 case-count backfill은 없습니다.
-정적 S0는 `1k`가 cohort 크기가 아니며 builder가 730을 assert하지 않고 기존 cache를 재사용할 수 있음을 확인했습니다. 이후 사용자가 D4를 명시적으로 선택했습니다. 새 D4는 초안이나 D3를 수정하지 않는 threshold-free descriptive census로 등록됐고, introai9 job 116482가 CPU 4/64 GB/GPU 0에서 F/exit 0으로 유일한 attempt 1/1을 완료했습니다. Exact processed snapshot은 578 unique cases, 공통 80×13,902×9 float32 tensor, vector-WSS labels와 exact mesh order를 갖습니다. 그러나 현재 geometry root에 직접 연결되는 ID는 168뿐이고 410은 unresolved입니다. Ordered IDs와 raw log는 비공개이며 [공개 aggregate](results/aneug_processed_v4_d4_census_20260816.json)는 metadata/digest만 담습니다. D4는 `scientific_verdict=null`로 닫혔고 human rescore도 31.0/40 inactive를 유지합니다. Split/P0/model/GPU/test/claim은 열리지 않습니다.
+후속 정적 대조는 이 linkage count의 의미를 좁혔습니다. 공식
+`record_mesh_upsampling`은 외부 geometry archive를 join하지 않고 transient case
+directory의 `checkpoint.npy`에서 GHD를 읽어 `mesh_data.cases`와 같은 순서로
+`mesh_data.ghd`에 저장합니다. 따라서 processed object는 자체 geometry input을
+이미 포함하며, 168/578 overlap은 별도 archive 간 이름 겹침이지 학습 가능성의
+필수 gate가 아닙니다. 새 [D5 비실행 초안](docs/aneug-processed-v4-d5-draft-design-2026-08-16.md)은
+GHD exact/수치적 copy component와 private 80/10/10 synthetic-case split만 설계합니다.
+4/4 synthetic test를 통과했지만 인간 선택 전에는 GHD value read, PBS와 split freeze가
+모두 0입니다.
 
 ## 조건부 architecture와 평가
 
@@ -195,6 +190,9 @@ Active architecture는 아직 없습니다. 다만 자산 감사를 반영해 **
 implementation scaffold**는 SE(3)-equivariant multi-resolution MeshGraphNet,
 train-only POD full-cycle head와 deterministic tangent projection으로 고정했습니다.
 이는 성능 중심의 구현 기본값이지 algorithmic novelty나 실행 승인이 아닙니다.
+일차 application endpoint는 full-cycle vector field safeguard와 deterministic
+TAWSS/OSI/RRT fidelity로 두고, critical-point/worldline은 method-free stability가
+확인될 때만 보조 구조 endpoint로 승격합니다.
 P0/P1에서 실제 failure가 확인된 뒤 같은 parameter/update/field-error 조건으로
 다음을 비교합니다.
 

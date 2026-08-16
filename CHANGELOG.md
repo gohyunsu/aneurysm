@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-16 · non-executable D5 geometry-token grouping draft
+
+- Corrected the interpretation of D4's 168/578 external directory-name
+  overlap: pinned official code already stores case-aligned GHD tokens inside
+  the processed object, so the external join is not a processed-input gate.
+- Added a dormant GHD-only contract and pure evaluator that groups exact and
+  fixed-tolerance numerical copies, keeps all 80 phases with the geometry and
+  prepares a private 80/10/10 synthetic-component split while sealing
+  filename-defined auxiliary cases.
+- Passed 4/4 synthetic tests for execution refusal, no field/connectivity read,
+  duplicate-component containment, ID privacy and scope/GPU mutation. D5 is
+  not selected or registered; no server, PBS, split, model or claim opened.
+
 ## 2026-08-16 · D4 closes complete with 578-case processed census
 
 - Ran the sole introai9 CPU 4/64 GB/GPU-0 attempt as job 116482; it finalized

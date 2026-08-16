@@ -1,0 +1,130 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d5_draft.v1",
+  "protocol_id": "aneug_processed_v4_geometry_token_grouping_d5_draft",
+  "status": "draft_unselected_non_executable",
+  "as_of": "2026-08-16",
+  "human_selection": {
+    "explicitly_selected": false,
+    "selected_on": null,
+    "selection": null
+  },
+  "source": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "code_repository": "WenHaoDing/AneuG-Flow",
+    "code_revision": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "transient": {
+      "relative_path": "processed_data/assembled_registered_data_1k_v4.pth",
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "d4_public_census_sha256": "06d111498b62d36a144e47c762bd01b4d059698bbff1f407c96243b83b81de8d",
+    "d4_ordered_case_id_sha256": "5e6fa02faa93f88cef258e4ca8defecad04506e3d3de3081ba647e69b1d29930"
+  },
+  "closed_d4_boundary": {
+    "status": "closed_complete_descriptive_metadata_census",
+    "registered_cases": 578,
+    "timesteps": 80,
+    "surface_nodes": 13902,
+    "channels": 9,
+    "ghd_shape": [578, 432],
+    "direct_external_geometry_links": 168,
+    "unresolved_external_geometry_links": 410,
+    "repair_or_rerun": false,
+    "d5_relabels_d4": false
+  },
+  "official_builder_semantics": {
+    "case_directories_selected_from_transient_root": true,
+    "ghd_loaded_from_each_transient_case_checkpoint": true,
+    "mesh_cases_and_ghd_rows_share_builder_order": true,
+    "external_geometry_directory_join_required_for_processed_input": false,
+    "generator_parent_or_patient_lineage_asserted": false
+  },
+  "geometry_token_contract": {
+    "question": "can_the_processed_geometry_tokens_support_a_field_blind_synthetic_case_disjoint_split",
+    "weights_only": true,
+    "mmap": true,
+    "map_location": "cpu",
+    "allowed_value_read": "mesh_data.ghd_only",
+    "read_registered_case_tensor_values": false,
+    "read_wss_values": false,
+    "read_coordinate_or_normal_values": false,
+    "read_mesh_connectivity_values": false,
+    "read_external_geometry_payload": false,
+    "compute_scientific_field_metric": false,
+    "publish_case_ids_or_split_members": false,
+    "expected_case_count": 578,
+    "expected_ghd_columns": 432,
+    "require_case_mesh_order_exact": true,
+    "require_all_ghd_values_finite": true,
+    "exact_duplicate_encoding": "little_endian_float32_row_sha256",
+    "numerical_equivalence": {
+      "max_abs": 0.000001,
+      "rms": 0.0000001
+    },
+    "primary_case_regex": "^stable_[0-9]+$",
+    "named_case_role": "sealed_filename_defined_auxiliary_only",
+    "near_or_exact_duplicate_components_stay_within_one_split": true
+  },
+  "prospective_split_if_selected_and_feasible": {
+    "unit": "synthetic_geometry_component_not_patient",
+    "primary_bucket": "stable_regex_only",
+    "auxiliary_bucket": "all_non_primary_case_ids",
+    "component_order": "blake2b_256_of_sorted_private_ids_with_fixed_salt",
+    "fixed_salt": "aurora-aneug-d5-v1-20260816",
+    "train_fraction": 0.8,
+    "validation_fraction": 0.1,
+    "outer_test_fraction": 0.1,
+    "minimum_primary_components": 400,
+    "minimum_validation_components": 40,
+    "minimum_outer_test_components": 40,
+    "all_timesteps_follow_geometry_component": true,
+    "validation_only_model_selection": true,
+    "outer_test_sealed": true,
+    "private_split_manifest": true,
+    "public_split_digests_only": true
+  },
+  "execution_envelope_if_selected_in_fresh_version": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "02:00:00",
+    "maximum_pbs_attempts": 1,
+    "rerun_after_any_outcome": false,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "completion_consequence_if_selected": {
+    "pass_permits_private_split_freeze": true,
+    "pass_permits_registration_of_field_audit_and_bounded_development": true,
+    "permits_unregistered_field_read": false,
+    "permits_immediate_gpu_training": false,
+    "permits_validation_or_outer_test_access": false,
+    "permits_paper_result_or_claim": false,
+    "failure_closes_d5_without_repair": true
+  },
+  "activation_requirements": {
+    "explicit_human_selection": true,
+    "fresh_registered_config": true,
+    "quality_passed_public_source": true,
+    "clean_introai9_checkout": true,
+    "private_activation_manifest": true,
+    "draft_file_mutation_into_executable_contract": false
+  },
+  "authorization": {
+    "register_d5": false,
+    "read_processed_ghd_values": false,
+    "read_field_values": false,
+    "freeze_split": false,
+    "submit_pbs": false,
+    "monitor_pbs": false,
+    "method_or_architecture": false,
+    "gpu_training": false,
+    "validation_or_test": false,
+    "outer_test": false,
+    "paper_result_or_claim": false
+  }
+}
