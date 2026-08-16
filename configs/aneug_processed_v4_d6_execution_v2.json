@@ -1,23 +1,23 @@
 {
-  "schema_version": "aurora.aneug_processed_v4_d6_execution.v1",
-  "protocol_id": "aneug_processed_v4_train_only_field_admission_d6_execution_v1",
-  "status": "withdrawn_before_field_read_or_pbs_submission",
-  "as_of": "2026-08-16",
-  "withdrawal": {
-    "discovered_by": "no_field_introai9_preflight",
-    "reason": "registered_steady_server_relative_path_did_not_exist",
-    "train_field_values_read": false,
-    "pbs_attempts_used": 0,
-    "output_record_created": false,
-    "may_execute": false,
-    "replacement_requires_fresh_version": true
-  },
+  "schema_version": "aurora.aneug_processed_v4_d6_execution.v2",
+  "protocol_id": "aneug_processed_v4_train_only_field_admission_d6_execution_v2",
+  "status": "human_activated_executable",
+  "as_of": "2026-08-17",
   "human_activation": {
     "explicitly_selected": true,
     "selection": "D6",
     "selected_on": "2026-08-16",
     "activates_only_this_execution_version": true,
     "does_not_mutate_registration": true
+  },
+  "withdrawn_preexecution_v1": {
+    "public_source_commit": "669a107e8e6e4178c56f3bd153a434bfbe4dff70",
+    "execution_config_sha256": "3829577c646d3e4ed87346a2ba91e6fe7992e5bef1548f1a0d65591c2084290a",
+    "reason": "registered_steady_server_relative_path_did_not_exist",
+    "train_field_values_read": false,
+    "pbs_attempts_used": 0,
+    "output_record_created": false,
+    "same_version_execution_allowed": false
   },
   "immutable_registration": {
     "relative_path": "configs/aneug_processed_v4_d6_train_field_audit_v1.json",
@@ -41,7 +41,7 @@
       "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
     },
     "steady": {
-      "relative_server_path": "processed_v4_d3/assembled_registered_steady_data_1k_v4.pth",
+      "relative_server_path": "processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary",
       "bytes": 9632510050,
       "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
     }
@@ -73,7 +73,7 @@
     "private_activation_manifest_required": true
   },
   "output_contract": {
-    "record_directory_name": "aneug_processed_v4_d6_execution_v1",
+    "record_directory_name": "aneug_processed_v4_d6_execution_v2",
     "public_result_filename": "public_train_field_audit.json",
     "private_statistics_filename": "private_train_statistics.json",
     "attempt_status_filename": "attempt.status.json",

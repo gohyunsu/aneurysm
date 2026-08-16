@@ -35,16 +35,55 @@ def file_sha256(path: str | Path, chunk_bytes: int = 8 * 1024 * 1024) -> str:
 
 
 def validate_execution_contract(contract: Mapping[str, Any]) -> None:
+    schema = contract.get("schema_version")
     _require(
-        contract.get("schema_version") == "aurora.aneug_processed_v4_d6_execution.v1",
+        schema
+        in {
+            "aurora.aneug_processed_v4_d6_execution.v1",
+            "aurora.aneug_processed_v4_d6_execution.v2",
+        },
         "schema_version",
     )
+    version = "v1" if schema.endswith(".v1") else "v2"
     _require(
         contract.get("protocol_id")
-        == "aneug_processed_v4_train_only_field_admission_d6_execution_v1",
+        == f"aneug_processed_v4_train_only_field_admission_d6_execution_{version}",
         "protocol_id",
     )
-    _require(contract.get("status") == "human_activated_executable", "status")
+    if version == "v1":
+        _require(
+            contract.get("status")
+            == "withdrawn_before_field_read_or_pbs_submission",
+            "status",
+        )
+        withdrawal = contract["withdrawal"]
+        _require(
+            withdrawal["reason"]
+            == "registered_steady_server_relative_path_did_not_exist",
+            "v1_withdrawal_reason",
+        )
+        _require(withdrawal["train_field_values_read"] is False, "v1_field_read")
+        _require(withdrawal["pbs_attempts_used"] == 0, "v1_attempts")
+        _require(withdrawal["output_record_created"] is False, "v1_output")
+        _require(withdrawal["may_execute"] is False, "v1_execution")
+        _require(withdrawal["replacement_requires_fresh_version"] is True, "v1_replacement")
+    else:
+        _require(contract.get("status") == "human_activated_executable", "status")
+        predecessor = contract["withdrawn_preexecution_v1"]
+        _require(
+            predecessor["public_source_commit"]
+            == "669a107e8e6e4178c56f3bd153a434bfbe4dff70",
+            "v1_source_commit",
+        )
+        _require(
+            predecessor["execution_config_sha256"]
+            == "3829577c646d3e4ed87346a2ba91e6fe7992e5bef1548f1a0d65591c2084290a",
+            "v1_config_sha256",
+        )
+        _require(predecessor["train_field_values_read"] is False, "v1_field_read")
+        _require(predecessor["pbs_attempts_used"] == 0, "v1_attempts")
+        _require(predecessor["output_record_created"] is False, "v1_output")
+        _require(predecessor["same_version_execution_allowed"] is False, "v1_execution")
     activation = contract["human_activation"]
     _require(activation["explicitly_selected"] is True, "human_selection")
     _require(activation["selection"] == "D6", "human_selection_name")
@@ -85,6 +124,11 @@ def validate_execution_contract(contract: Mapping[str, Any]) -> None:
         "split_counts",
     )
 
+    steady_relative_path = (
+        "processed_v4_d3/assembled_registered_steady_data_1k_v4.pth"
+        if version == "v1"
+        else "processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary"
+    )
     expected = {
         "transient": (
             "processed_v4_d3/assembled_registered_data_1k_v4.pth",
@@ -92,7 +136,7 @@ def validate_execution_contract(contract: Mapping[str, Any]) -> None:
             "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
         ),
         "steady": (
-            "processed_v4_d3/assembled_registered_steady_data_1k_v4.pth",
+            steady_relative_path,
             9_632_510_050,
             "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
         ),
@@ -226,6 +270,10 @@ def run_execution(
     torch: Any,
 ) -> dict[str, Any]:
     execution = load_execution_contract(execution_contract_path)
+    _require(
+        execution["schema_version"] == "aurora.aneug_processed_v4_d6_execution.v2",
+        "only_fresh_d6_v2_may_execute",
+    )
     _require(
         file_sha256(registration_path) == execution["immutable_registration"]["sha256"],
         "registration_file_sha256",

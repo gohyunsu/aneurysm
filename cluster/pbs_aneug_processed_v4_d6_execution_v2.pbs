@@ -1,0 +1,60 @@
+#!/bin/bash
+#PBS -N aurora_aneug_v4_d6v2
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=0
+#PBS -l walltime=03:00:00
+#PBS -j oe
+
+set -euo pipefail
+source /etc/profile
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output parent}"
+: "${AURORA_PYTHON:?set pinned Python executable}"
+: "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
+: "${AURORA_D5_PRIVATE_MANIFEST:?set exact private D5 manifest}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ -x "$AURORA_PYTHON" ]
+[ ! -e "$AURORA_OUTPUT_ROOT/aneug_processed_v4_d6_execution_v1" ]
+
+record_root="$AURORA_OUTPUT_ROOT/aneug_processed_v4_d6_execution_v2"
+registration="$AURORA_PROJECT_ROOT/configs/aneug_processed_v4_d6_train_field_audit_v1.json"
+execution="$AURORA_PROJECT_ROOT/configs/aneug_processed_v4_d6_execution_v2.json"
+transient="$AURORA_DATA_ROOT/processed_v4_d3/assembled_registered_data_1k_v4.pth"
+steady="$AURORA_DATA_ROOT/processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary"
+mkdir -p "$record_root"
+
+if [ -e "$record_root/attempt.started" ]; then
+  echo "D6 v2 attempt already exists; rerun or repair is forbidden" >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-unknown}" > "$record_root/attempt.started"
+attempt_log="$record_root/attempt.log"
+attempt_status="$record_root/attempt.status.json"
+status_tmp="$record_root/attempt.status.json.tmp"
+gate_pass_json=null
+scientific_verdict_json=null
+exec >>"$attempt_log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s,\"gate_pass\":%s,\"scientific_verdict\":%s,\"d6_closed\":true}\n" "$code" "$(test -e "$record_root/attempt.complete" && printf true || printf false)" "$gate_pass_json" "$scientific_verdict_json" > "$status_tmp"; mv -f "$status_tmp" "$attempt_status"; exit "$code"' EXIT
+printf 'stage=wrapper_started job=%s commit=%s\n' "${PBS_JOBID:-unknown}" "$actual_commit"
+
+export OMP_NUM_THREADS=4
+export MKL_NUM_THREADS=4
+PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" \
+  -m aurora.aneug_processed_v4_d6_execution \
+  --execution-config "$execution" \
+  --registration "$registration" \
+  --transient "$transient" \
+  --steady "$steady" \
+  --private-d5-manifest "$AURORA_D5_PRIVATE_MANIFEST" \
+  --public-result "$record_root/public_train_field_audit.json" \
+  --private-statistics "$record_root/private_train_statistics.json"
+
+gate_pass_json="$("$AURORA_PYTHON" -c 'import json,sys; print(str(json.load(open(sys.argv[1], encoding="utf-8"))["gate_pass"]).lower())' "$record_root/public_train_field_audit.json")"
+scientific_verdict_json="$("$AURORA_PYTHON" -c 'import json,sys; print(json.dumps(json.load(open(sys.argv[1], encoding="utf-8"))["scientific_verdict"]))' "$record_root/public_train_field_audit.json")"
+printf '%s\n' complete > "$record_root/attempt.complete"
+printf 'stage=train_field_audit_complete gate_pass=%s\n' "$gate_pass_json"

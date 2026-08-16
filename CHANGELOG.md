@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-17 · D6 v1 preflight withdrawal and fresh v2
+
+- A no-field introai9 preflight found that v1 pointed to a nonexistent steady
+  server path. No train field was read, no output directory was created and no
+  PBS attempt was consumed; v1 is now fail-closed.
+- Registered fresh v2 with the preserved D2 temporary steady-object path used
+  by D3/D4. Object hashes, D5 train split, thresholds, resources and the
+  one-attempt/no-repair boundary are unchanged.
+- Validation, outer-test, auxiliary, model, architecture, GPU and paper-claim
+  authority remain closed. The public site remains outside this workflow.
+
 ## 2026-08-16 · D6 train-field audit execution activation
 
 - Recorded the user's explicit D6 selection in a fresh executable contract;
