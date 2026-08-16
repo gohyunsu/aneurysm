@@ -11337,6 +11337,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d4_ngpus",
             "processed_v4_d4_attempts_used",
             "processed_v4_d4_attempt_limit",
+            "processed_v4_d4_job_id",
+            "processed_v4_d4_exit_status",
+            "processed_v4_d4_walltime",
+            "processed_v4_d4_memory_kb",
             "processed_v4_d4_same_contract_rerun_allowed",
             "processed_v4_d4_metadata_read_authorized",
             "processed_v4_d4_case_ids_public",
@@ -11344,6 +11348,18 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d4_scientific_verdict",
             "processed_v4_d4_permits_human_rescoring_only",
             "processed_v4_d4_scientific_p0_or_gpu_authorized",
+            "processed_v4_d4_registered_case_count",
+            "processed_v4_d4_timestep_count",
+            "processed_v4_d4_node_count",
+            "processed_v4_d4_channel_count",
+            "processed_v4_d4_mesh_case_order_exact",
+            "processed_v4_d4_geometry_linked_count",
+            "processed_v4_d4_geometry_unlinked_count",
+            "processed_v4_d4_public_census_result",
+            "processed_v4_d4_public_census_result_sha256",
+            "processed_v4_d4_execution_result",
+            "processed_v4_d4_execution_result_sha256",
+            "processed_v4_d4_human_rescore",
             "processed_v4_d4_draft_status",
             "processed_v4_d4_draft_config",
             "processed_v4_d4_draft_config_sha256",
@@ -11546,7 +11562,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d4_recommended_task"]
         != "prospective_metadata_only_processed_cohort_census_without_cardinality_pass_threshold"
         or reference_floor["processed_v4_d4_status"]
-        != "registered_selected_not_executed"
+        != "closed_complete_descriptive_metadata_census"
         or reference_floor["processed_v4_d4_config_sha256"]
         != "f4761ddd8ead236a6764cafd382cbd9db5cfdaa26d6bc9f917c6a997ad45a97c"
         or reference_floor["processed_v4_d4_evaluator_sha256"]
@@ -11561,9 +11577,26 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         or reference_floor["processed_v4_d4_execution_server"] != "introai9"
         or (reference_floor["processed_v4_d4_ncpus"], reference_floor["processed_v4_d4_memory_gb"], reference_floor["processed_v4_d4_ngpus"])
         != (4, 64, 0)
-        or reference_floor["processed_v4_d4_attempts_used"] != 0
+        or reference_floor["processed_v4_d4_attempts_used"] != 1
         or reference_floor["processed_v4_d4_attempt_limit"] != 1
+        or reference_floor["processed_v4_d4_job_id"] != "116482.ECE-util1"
+        or reference_floor["processed_v4_d4_exit_status"] != 0
+        or reference_floor["processed_v4_d4_walltime"] != "00:01:56"
+        or reference_floor["processed_v4_d4_memory_kb"] != 222168
         or reference_floor["processed_v4_d4_scientific_verdict"] is not None
+        or reference_floor["processed_v4_d4_registered_case_count"] != 578
+        or reference_floor["processed_v4_d4_timestep_count"] != 80
+        or reference_floor["processed_v4_d4_node_count"] != 13902
+        or reference_floor["processed_v4_d4_channel_count"] != 9
+        or reference_floor["processed_v4_d4_mesh_case_order_exact"] is not True
+        or reference_floor["processed_v4_d4_geometry_linked_count"] != 168
+        or reference_floor["processed_v4_d4_geometry_unlinked_count"] != 410
+        or reference_floor["processed_v4_d4_public_census_result_sha256"]
+        != "06d111498b62d36a144e47c762bd01b4d059698bbff1f407c96243b83b81de8d"
+        or reference_floor["processed_v4_d4_execution_result_sha256"]
+        != "4217b9a4340817aefb5e56dda65b4d3629e146c5bf18bbfe25cb19ea2752e5bb"
+        or reference_floor["processed_v4_d4_human_rescore"]
+        != "inactive_31_of_40_unchanged"
         or reference_floor["processed_v4_d4_draft_status"]
         != "draft_unselected_non_executable"
         or reference_floor["processed_v4_d4_draft_config_sha256"]
@@ -11576,7 +11609,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "4a1cf31c307644bdf2e25ececae20ff00bf667aa19bf57fdb69bd58e145a8c30"
         or reference_floor["processed_v4_d4_draft_synthetic_tests_passed"] != 5
         or reference_floor["next_allowed_action"]
-        != "quality_pass_then_private_activation_and_single_introai9_cpu_d4_census"
+        != "explicit_human_select_fresh_metadata_only_case_geometry_lineage_mapping_version"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11702,6 +11735,14 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         ("processed_v4_d4_test", "processed_v4_d4_test_sha256"),
         ("processed_v4_d4_pbs_wrapper", "processed_v4_d4_pbs_wrapper_sha256"),
         ("processed_v4_d4_document", "processed_v4_d4_document_sha256"),
+        (
+            "processed_v4_d4_public_census_result",
+            "processed_v4_d4_public_census_result_sha256",
+        ),
+        (
+            "processed_v4_d4_execution_result",
+            "processed_v4_d4_execution_result_sha256",
+        ),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (

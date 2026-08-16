@@ -1,0 +1,192 @@
+{
+  "blank_case_id_count": 0,
+  "cardinality_pass_threshold": null,
+  "case_ids_public": false,
+  "case_key_histogram": {
+    "[\"case\",\"labels\",\"tensor\"]": 578
+  },
+  "census_outcome": "observed_without_pass_fail_threshold",
+  "duplicate_case_id_count": 0,
+  "geometry_linkage_evaluated": true,
+  "geometry_linked_count": 168,
+  "label_histogram": {
+    "[\"x\",\"y\",\"z\",\"x_normal\",\"y_normal\",\"z_normal\",\"wss_x\",\"wss_y\",\"wss_z\"]": 578
+  },
+  "mesh_case_count": 578,
+  "mesh_case_order_exact": true,
+  "mesh_connectivity_values_read": false,
+  "mesh_geometry_tensor_metadata": {
+    "ghd": {
+      "dtype": "torch.float32",
+      "shape": [
+        578,
+        432
+      ]
+    },
+    "shape_scale": null
+  },
+  "mesh_hierarchy_metadata": {
+    "edge_index_list": {
+      "is_sequence": true,
+      "items": [
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            2,
+            41507
+          ]
+        },
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            2,
+            10304
+          ]
+        },
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            2,
+            2523
+          ]
+        }
+      ],
+      "items_without_tensor_metadata": 0,
+      "present": true,
+      "sequence_length": 3
+    },
+    "faces_list": {
+      "is_sequence": true,
+      "items": [
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            27604,
+            3
+          ]
+        },
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            6827,
+            3
+          ]
+        },
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            1653,
+            3
+          ]
+        }
+      ],
+      "items_without_tensor_metadata": 0,
+      "present": true,
+      "sequence_length": 3
+    },
+    "idx_list": {
+      "is_sequence": true,
+      "items": [
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            3476
+          ]
+        },
+        {
+          "dtype": "torch.int64",
+          "shape": [
+            869
+          ]
+        }
+      ],
+      "items_without_tensor_metadata": 0,
+      "present": true,
+      "sequence_length": 2
+    }
+  },
+  "mesh_only_case_count": 0,
+  "mesh_root_keys": [
+    "cases",
+    "cleaned_ghd_Meshes",
+    "ds_factors",
+    "edge_index_list",
+    "faces_list",
+    "ghd",
+    "ghd_mean",
+    "ghd_std",
+    "idx_list",
+    "mask",
+    "norm_canonical",
+    "root",
+    "shape_scale",
+    "subdivided_ghd_Meshes"
+  ],
+  "normalization_metadata": {
+    "mean": {
+      "dtype": "torch.float32",
+      "shape": [
+        1,
+        1,
+        9
+      ]
+    },
+    "std": {
+      "dtype": "torch.float32",
+      "shape": [
+        1,
+        1,
+        9
+      ]
+    }
+  },
+  "ordered_case_id_sha256": "5e6fa02faa93f88cef258e4ca8defecad04506e3d3de3081ba647e69b1d29930",
+  "permits_human_rescoring_only": true,
+  "protocol_id": "aneug_processed_v4_threshold_free_metadata_census_d4_v1",
+  "registered_case_count": 578,
+  "registered_only_case_count": 0,
+  "schema_version": "aurora.aneug_processed_v4_d4.public_census_result.v1",
+  "scientific_field_metric_computed": false,
+  "scientific_verdict": null,
+  "source_identity_reverified": true,
+  "status": "descriptive_metadata_census_complete",
+  "steady_labels": [
+    "x",
+    "y",
+    "z",
+    "x_normal",
+    "y_normal",
+    "z_normal",
+    "wss_x",
+    "wss_y",
+    "wss_z"
+  ],
+  "steady_root_keys": [
+    "case_name",
+    "ds_factors",
+    "edge_index_list",
+    "faces_list",
+    "ghd_dict",
+    "idx_list",
+    "label",
+    "subdivided_canonical",
+    "tensor",
+    "tensor_norm"
+  ],
+  "tensor_dtype_histogram": {
+    "\"torch.float32\"": 578
+  },
+  "tensor_metadata_missing_count": 0,
+  "tensor_shape_histogram": {
+    "[80,13902,9]": 578
+  },
+  "tensor_values_read": false,
+  "timestep_histogram": {
+    "80": 578
+  },
+  "transient_root_keys": [
+    "mesh_data",
+    "registered_data_list"
+  ],
+  "unsafe_case_component_count": 0
+}

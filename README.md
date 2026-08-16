@@ -187,7 +187,7 @@ schema/science는 0입니다. [폐쇄 근거](docs/aneug-processed-v4-client-sta
 유일한 schema job 116437은 weights-only/mmap root load 뒤 `registered_data_list < 700`인
 `case_floor`에서 F/exit 1로 닫혔습니다. Exact case 수, IDs, timestep/label, mesh order와
 geometry linkage는 materialize되지 않았고 재실행이나 사후 case-count backfill은 없습니다.
-정적 S0는 `1k`가 cohort 크기가 아니며 builder가 730을 assert하지 않고 기존 cache를 재사용할 수 있음을 확인했습니다. 이후 사용자가 D4를 명시적으로 선택했습니다. 새 D4는 초안이나 D3를 수정하지 않는 threshold-free descriptive census로 등록됐고 전용 test 6/6과 중앙 protocol 123 invariant를 통과했습니다. Exact count와 ordered IDs는 비공개로, 공개 가능한 결과는 aggregate와 ID digest만 기록합니다. Tensor/connectivity 값이나 WSS metric은 읽지 않으며 scientific verdict는 `null`입니다. Quality와 private activation 뒤 introai9 CPU 4/64 GB/GPU 0에서 단 한 번만 실행할 수 있고, 현재 attempt는 0/1입니다.
+정적 S0는 `1k`가 cohort 크기가 아니며 builder가 730을 assert하지 않고 기존 cache를 재사용할 수 있음을 확인했습니다. 이후 사용자가 D4를 명시적으로 선택했습니다. 새 D4는 초안이나 D3를 수정하지 않는 threshold-free descriptive census로 등록됐고, introai9 job 116482가 CPU 4/64 GB/GPU 0에서 F/exit 0으로 유일한 attempt 1/1을 완료했습니다. Exact processed snapshot은 578 unique cases, 공통 80×13,902×9 float32 tensor, vector-WSS labels와 exact mesh order를 갖습니다. 그러나 현재 geometry root에 직접 연결되는 ID는 168뿐이고 410은 unresolved입니다. Ordered IDs와 raw log는 비공개이며 [공개 aggregate](results/aneug_processed_v4_d4_census_20260816.json)는 metadata/digest만 담습니다. D4는 `scientific_verdict=null`로 닫혔고 human rescore도 31.0/40 inactive를 유지합니다. Split/P0/model/GPU/test/claim은 열리지 않습니다.
 
 ## 조건부 architecture와 평가
 

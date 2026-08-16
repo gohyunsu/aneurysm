@@ -1,0 +1,68 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d4.execution_public.v1",
+  "protocol_id": "aneug_processed_v4_threshold_free_metadata_census_d4_v1",
+  "as_of": "2026-08-16",
+  "status": "closed_complete_descriptive_metadata_census",
+  "public_source": {
+    "commit": "be23317606885a7bcfb9f5e4d1ad82dbf6c89e08",
+    "quality_run": 31943078190,
+    "quality_conclusion": "success",
+    "pages_run": 31943077529,
+    "pages_conclusion": "success"
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "job_id": "116482.ECE-util1",
+    "final_state": "F",
+    "exit_status": 0,
+    "walltime": "00:01:56",
+    "memory_kb": 222168,
+    "ncpus": 4,
+    "memory_requested_gb": 64,
+    "ngpus": 0,
+    "attempts_used": 1,
+    "attempt_limit": 1,
+    "rerun_allowed": false
+  },
+  "output": {
+    "public_census_result": "results/aneug_processed_v4_d4_census_20260816.json",
+    "public_census_result_bytes": 3990,
+    "public_census_result_sha256": "06d111498b62d36a144e47c762bd01b4d059698bbff1f407c96243b83b81de8d",
+    "private_ordered_case_manifest_materialized": true,
+    "private_ordered_case_ids_published": false,
+    "raw_log_public": false
+  },
+  "census_summary": {
+    "registered_case_count": 578,
+    "blank_case_id_count": 0,
+    "duplicate_case_id_count": 0,
+    "unsafe_case_component_count": 0,
+    "timestep_count": 80,
+    "node_count": 13902,
+    "channel_count": 9,
+    "vector_wss_labels_present": true,
+    "mesh_case_count": 578,
+    "mesh_case_order_exact": true,
+    "geometry_linked_count": 168,
+    "geometry_unlinked_count": 410,
+    "tensor_metadata_missing_count": 0,
+    "source_identity_reverified": true
+  },
+  "decision": {
+    "cardinality_pass_threshold": null,
+    "census_outcome": "observed_without_pass_fail_threshold",
+    "scientific_verdict": null,
+    "human_rescore": "inactive_31_of_40_unchanged",
+    "rescore_reason": "processed target feasibility improved, but generator lineage and 410-of-578 direct geometry linkages remain unresolved",
+    "permits_human_rescoring_only": true,
+    "grouping_or_split_authorized": false,
+    "scientific_p0_authorized": false,
+    "method_or_architecture_authorized": false,
+    "gpu_training_authorized": false,
+    "validation_or_test_authorized": false,
+    "outer_test_authorized": false,
+    "paper_result_or_claim_authorized": false,
+    "next_possible_action": "explicit_human_selection_of_fresh_metadata_only_case_geometry_lineage_mapping_version"
+  }
+}

@@ -529,18 +529,32 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["processed_v4_semantics_s0_official_split_lineage_disjoint"])
         self.assertTrue(audit["processed_v4_d4_human_selected"])
         self.assertTrue(audit["processed_v4_d4_registered"])
-        self.assertEqual(audit["processed_v4_d4_status"], "registered_selected_not_executed")
+        self.assertEqual(
+            audit["processed_v4_d4_status"],
+            "closed_complete_descriptive_metadata_census",
+        )
         self.assertIsNone(audit["processed_v4_d4_cardinality_pass_threshold"])
         self.assertEqual(audit["processed_v4_d4_execution_server"], "introai9")
         self.assertEqual(audit["processed_v4_d4_ngpus"], 0)
-        self.assertEqual(audit["processed_v4_d4_attempts_used"], 0)
+        self.assertEqual(audit["processed_v4_d4_attempts_used"], 1)
         self.assertEqual(audit["processed_v4_d4_attempt_limit"], 1)
+        self.assertEqual(audit["processed_v4_d4_job_id"], "116482.ECE-util1")
+        self.assertEqual(audit["processed_v4_d4_exit_status"], 0)
         self.assertFalse(audit["processed_v4_d4_same_contract_rerun_allowed"])
         self.assertTrue(audit["processed_v4_d4_metadata_read_authorized"])
         self.assertFalse(audit["processed_v4_d4_case_ids_public"])
         self.assertIsNone(audit["processed_v4_d4_scientific_verdict"])
         self.assertTrue(audit["processed_v4_d4_permits_human_rescoring_only"])
         self.assertFalse(audit["processed_v4_d4_scientific_p0_or_gpu_authorized"])
+        self.assertEqual(audit["processed_v4_d4_registered_case_count"], 578)
+        self.assertEqual(audit["processed_v4_d4_timestep_count"], 80)
+        self.assertEqual(audit["processed_v4_d4_node_count"], 13_902)
+        self.assertEqual(audit["processed_v4_d4_geometry_linked_count"], 168)
+        self.assertEqual(audit["processed_v4_d4_geometry_unlinked_count"], 410)
+        self.assertEqual(
+            audit["processed_v4_d4_human_rescore"],
+            "inactive_31_of_40_unchanged",
+        )
         self.assertEqual(
             audit["processed_v4_d4_draft_status"],
             "draft_unselected_non_executable",

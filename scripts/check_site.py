@@ -167,7 +167,7 @@ def check_site(root: Path) -> list[str]:
         "AneuG reference-relative transient WSS 31.0/40 inactive": (
             "current reference-relative candidate boundary"
         ),
-        "D3 closed: 23/23 transport and full SHA pass, one-shot schema case_floor fail": (
+        "D3 acquired the exact 23,744,862,051-byte processed transient": (
             "current processed-v4 D3 closure"
         ),
         "object-acquisition pass plus cohort-admission fail": (
@@ -182,11 +182,17 @@ def check_site(root: Path) -> list[str]:
         "The 1k is a resolution tag, not a case-count promise": (
             "processed filename semantics boundary"
         ),
-        "The user has now selected a materially distinct D4 descriptive census": (
-            "D4 selected-registration boundary"
+        "D4 closed complete 1/1": (
+            "D4 final closure boundary"
         ),
-        "fresh registered version has no cardinality threshold": (
-            "D4 threshold-free execution boundary"
+        "578 unique nonblank cases": (
+            "D4 exact processed count boundary"
+        ),
+        "Only 168/578 IDs directly link to the current geometry root": (
+            "D4 geometry-linkage boundary"
+        ),
+        "Human rescore remains inactive 31.0/40": (
+            "D4 human-rescore boundary"
         ),
         "Official builder exact case keys and mesh hierarchy are statically corroborated": (
             "D4 official-schema corroboration boundary"

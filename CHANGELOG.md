@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-16 · D4 closes complete with 578-case processed census
+
+- Ran the sole introai9 CPU 4/64 GB/GPU-0 attempt as job 116482; it finalized
+  F/exit 0 in 00:01:56 after exact object revalidation.
+- Recorded 578 unique cases, uniform 80×13,902×9 float32 tensors, vector-WSS
+  labels and exact mesh-case order. Only 168 case IDs directly link to the
+  current geometry root, leaving 410 linkage records unresolved.
+- Published only the 3,990-byte aggregate (`06d11149…de8d`) and kept ordered
+  IDs/raw log private. D4 is closed 1/1 with scientific verdict null; human
+  rescore keeps the source inactive at 31.0/40 and opens no split/model/claim.
+
 ## 2026-08-16 · D4 threshold-free metadata census selected and registered
 
 - Registered the user's explicit D4 selection as a fresh descriptive evidence

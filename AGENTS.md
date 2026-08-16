@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 D4 final closure:** Quality/Pages-passed public
+> source `be233176…9e08` ran exactly once as introai9 PBS job
+> `116482.ECE-util1` with CPU 4, 64 GB and GPU 0. It finalized F/exit 0 after
+> 00:01:56 with 222,168 kB recorded memory. Exact source identities passed and
+> the threshold-free census completed: 578 unique nonblank cases, all
+> `[80,13902,9]` float32 with vector-WSS labels; mesh case count/order is
+> 578/exact. Only 168/578 case IDs link directly to the current geometry root,
+> leaving 410 unresolved. Public aggregate SHA is `06d11149…de8d`; ordered IDs,
+> manifest and raw log remain private. D4 is closed 1/1 with no rerun and
+> `scientific_verdict=null`. Human rescore keeps the AneuG direction inactive
+> at 31.0/40: processed-target feasibility improved, but generator lineage and
+> geometry linkage remain unresolved. D4 opens no grouping/split/P0/method/
+> architecture/GPU/test/result/claim. A fresh metadata-only case↔geometry/
+> lineage mapping version requires explicit human selection. Never use
+> `junjinyong`.
+
 > **2026-08-16 processed-v4 D4 selected registration:** The user explicitly
 > selected D4 as a materially distinct, threshold-free descriptive metadata
 > census. D3 remains closed and immutable; D4 is not its repair, rerun,
