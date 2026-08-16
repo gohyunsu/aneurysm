@@ -123,6 +123,16 @@
     "validation_or_outer_statistics_written": false,
     "atomic_writes": true
   },
+  "implementation_readiness": {
+    "pure_case_evaluator": true,
+    "streaming_aggregate_gate": true,
+    "private_train_statistics": true,
+    "sealed_split_tensor_sentinel_test": true,
+    "strict_public_json_test": true,
+    "real_payload_read": false,
+    "file_io_entry_point": false,
+    "pbs_wrapper": false
+  },
   "execution_if_activated": {
     "server": "introai9",
     "scheduler": "PBS",

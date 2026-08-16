@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 D6 pre-activation implementation readiness:** The registered
+> non-executable source now has a full one-case-at-a-time aggregate gate,
+> fixed-histogram quantiles, private train-only sufficient statistics and
+> strict public/private JSON. Synthetic 406-item and adversarial tests cover
+> tangency, mesh-normal mismatch, temporal degeneracy, Jensen violation and
+> endpoint degeneracy. A sealed-record sentinel proves validation/outer tensor
+> values are never accessed by the iterator. Real payload read, file-I/O entry
+> point, PBS/GPU wrapper, human activation, result and claim remain 0. This is
+> not D6 execution and does not change its fresh-selection requirement. Never
+> use `junjinyong`; do not edit the public static site.
+
 > **2026-08-16 processed-v4 D6 train-field registration:** Closed/pass D5
 > permits registration only of a fresh field audit. D6 is now registered but
 > not human-activated and may not be mutated into an executable contract. It

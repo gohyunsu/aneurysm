@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-16 · D6 streaming evaluator completed pre-activation
+
+- Added one-case-at-a-time aggregation, fixed-histogram quantiles, all-or-none
+  gate decisions and private train-only sufficient statistics.
+- Added sealed-case tensor sentinels and independent adversarial failures for
+  tangency, mesh normals, temporal dynamics, Jensen consistency and endpoint
+  variability; strict JSON rejects NaN/Infinity output.
+- Kept real field access, file I/O entry point, PBS/GPU wrapper and scientific
+  execution at zero. This is implementation readiness, not D6 activation.
+
 ## 2026-08-16 · D6 train-only field audit registered, not activated
 
 - Registered a fresh D5-dependent audit for the 406 private training

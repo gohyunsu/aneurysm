@@ -107,3 +107,18 @@ The prospective execution envelope is one `introai9` PBS job, CPU 4, 64 GB,
 GPU 0. `junjinyong` is prohibited. No login-node GPU is allowed. The public
 static site is deliberately outside this workflow.
 
+## Pre-activation implementation readiness
+
+The registered source now includes the complete in-memory streaming layer, not
+only per-case formulas. It consumes one selected train tensor at a time,
+updates fixed histograms and sufficient statistics, emits a deidentified public
+gate result and keeps physical train normalization in a separate private
+object. Synthetic tests cover a full 406-item pass and independent failures in
+tangency, mesh-normal agreement, temporal variation, the Jensen cone and
+endpoint variability. A sealed-record sentinel raises on tensor access and
+proves that the iterator never touches validation or outer records. Public and
+private outputs must serialize with strict JSON (`allow_nan=False`).
+
+This readiness work did not add a file-loading entry point or PBS wrapper.
+Those artifacts belong only to a fresh human-activated contract so the present
+registration cannot accidentally execute.

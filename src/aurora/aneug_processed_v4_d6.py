@@ -17,7 +17,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Iterable, Mapping, Sequence
 
 
 class D6ContractError(RuntimeError):
@@ -168,6 +168,18 @@ def validate_contract(contract: Mapping[str, Any]) -> None:
     _require(execution["rerun_after_any_outcome"] is False, "rerun")
     _require(execution["login_node_gpu_allowed"] is False, "login_node_gpu")
     _require(execution["excluded_server"] == "junjinyong", "excluded_server")
+
+    readiness = contract["implementation_readiness"]
+    for key in (
+        "pure_case_evaluator",
+        "streaming_aggregate_gate",
+        "private_train_statistics",
+        "sealed_split_tensor_sentinel_test",
+        "strict_public_json_test",
+    ):
+        _require(readiness[key] is True, key)
+    for key in ("real_payload_read", "file_io_entry_point", "pbs_wrapper"):
+        _require(readiness[key] is False, key)
 
     authorization = contract["authorization"]
     _require(authorization["register_d6"] is True, "register_d6")
@@ -351,10 +363,17 @@ def inspect_case_tensor(
         "node_count": int(a.numel()),
         "tawss": a,
         "osi": moments["osi_unclipped"][positive],
+        "mean_vector_magnitude": m_norm[positive],
         "rrt_denominator_ratio": rrt_ratio[positive],
         "relative_residual": relative_residual[positive],
         "relative_jensen_violation": relative_jensen,
         "decoder_epsilon_relative_difference": decoder_relative[torch.isfinite(decoder_relative)],
+        "coordinate_count": int(coordinates.shape[0]),
+        "coordinate_sum": coordinates.sum(dim=0),
+        "coordinate_squared_sum": (coordinates * coordinates).sum(dim=0),
+        "wss_count": int(wss.shape[0] * wss.shape[1]),
+        "wss_sum": wss.sum(dim=(0, 1)),
+        "wss_squared_sum": (wss * wss).sum(dim=(0, 1)),
     }
 
 
@@ -371,3 +390,496 @@ def approximate_histogram_quantile(histogram: Sequence[int], q: float, low: floa
         if cumulative >= target:
             return low + (index + 0.5) * (high - low) / len(histogram)
     return high
+
+
+def _optional_histogram_quantile(
+    histogram: Sequence[int], q: float, low: float, high: float
+) -> float | None:
+    if sum(int(value) for value in histogram) == 0:
+        return None
+    return approximate_histogram_quantile(histogram, q, low, high)
+
+
+def validate_private_split_manifest(
+    contract: Mapping[str, Any], manifest: Mapping[str, Any]
+) -> dict[str, list[str]]:
+    """Validate the exact D5 split structure and return private ID buckets."""
+
+    validate_contract(contract)
+    _require(
+        manifest.get("schema_version")
+        == "aurora.aneug_processed_v4_d5.private_grouping_manifest.v1",
+        "private_manifest_schema",
+    )
+    _require(
+        manifest.get("protocol_id") == "aneug_processed_v4_ghd_component_split_d5_v1",
+        "private_manifest_protocol",
+    )
+    _require(manifest.get("split_frozen") is True, "private_manifest_not_frozen")
+    _require(manifest.get("source_identity_reverified") is True, "private_manifest_source")
+    buckets = {
+        "train": flatten_private_components(manifest.get("train_components", [])),
+        "validation": flatten_private_components(manifest.get("validation_components", [])),
+        "outer_test": flatten_private_components(manifest.get("outer_test_components", [])),
+        "auxiliary": flatten_private_components(manifest.get("auxiliary_components", [])),
+    }
+    expected = contract["closed_d5_boundary"]
+    _require(len(buckets["train"]) == expected["train_components"], "private_train_count")
+    _require(len(buckets["validation"]) == expected["validation_components"], "private_validation_count")
+    _require(len(buckets["outer_test"]) == expected["outer_test_components"], "private_outer_count")
+    all_ids: set[str] = set()
+    for name, case_ids in buckets.items():
+        overlap = all_ids.intersection(case_ids)
+        _require(not overlap, f"private_split_overlap:{name}")
+        all_ids.update(case_ids)
+    _require(
+        canonical_case_digest(buckets["train"])
+        == contract["source"]["d5_train_split_sha256"],
+        "private_train_digest",
+    )
+    return buckets
+
+
+def _histogram_update(
+    histogram: list[int], values: Any, low: float, high: float, torch: Any
+) -> int:
+    finite = values.detach().to(device="cpu", dtype=torch.float64).reshape(-1)
+    finite = finite[torch.isfinite(finite)]
+    if int(finite.numel()) == 0:
+        return 0
+    finite = torch.clamp(finite, min=low, max=high)
+    counts = torch.histc(finite, bins=len(histogram), min=low, max=high)
+    for index, value in enumerate(counts.to(dtype=torch.int64).tolist()):
+        histogram[index] += int(value)
+    return int(finite.numel())
+
+
+def _moments_from_sums(count: int, total: Any, squared: Any, torch: Any) -> dict[str, list[float]]:
+    _require(count > 0, "empty_training_statistics")
+    mean = total / count
+    variance = torch.clamp(squared / count - mean * mean, min=0)
+    std = torch.sqrt(variance)
+    return {
+        "mean": [float(value) for value in mean.tolist()],
+        "std_population": [float(value) for value in std.tolist()],
+    }
+
+
+def _scalar_moments(count: int, total: float, squared: float) -> dict[str, float]:
+    _require(count > 0, "empty_scalar_statistics")
+    mean = total / count
+    variance = max(0.0, squared / count - mean * mean)
+    return {"mean": mean, "std_population": math.sqrt(variance)}
+
+
+def aggregate_case_diagnostics(
+    contract: Mapping[str, Any],
+    diagnostics: Iterable[Mapping[str, Any]],
+    torch: Any,
+    *,
+    source_identity_reverified: bool,
+    private_manifest_reverified: bool,
+    train_scope_enforced: bool,
+    normalization_metadata_valid: bool,
+    shared_faces_valid: bool,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Stream per-case diagnostics into deidentified public and private outputs."""
+
+    validate_contract(contract)
+    checks = contract["gate"]["checks"]
+    bins = int(contract["gate"]["histogram_bins"])
+    tangent_hist = [0] * bins
+    normal_cosine_hist = [0] * bins
+    osi_hist = [0] * bins
+    rrt_ratio_hist = [0] * bins
+    residual_hist = [0] * bins
+    decoder_difference_hist = [0] * bins
+
+    case_count = 0
+    dynamic_case_count = 0
+    static_max = 0.0
+    roundtrip_max = 0.0
+    normal_norm_min = math.inf
+    normal_norm_max = -math.inf
+    face_fraction_min = 1.0
+    positive_tawss_count = 0
+    node_count = 0
+    endpoint_finite = True
+    tawss_min = math.inf
+    tawss_max = -math.inf
+    osi_min = math.inf
+    osi_max = -math.inf
+    jensen_max = 0.0
+    tangent_value_count = 0
+    normal_cosine_value_count = 0
+    rrt_near_zero_count = 0
+    rrt_ratio_count = 0
+
+    coordinate_count = 0
+    coordinate_sum = torch.zeros(3, dtype=torch.float64)
+    coordinate_squared = torch.zeros(3, dtype=torch.float64)
+    wss_count = 0
+    wss_sum = torch.zeros(3, dtype=torch.float64)
+    wss_squared = torch.zeros(3, dtype=torch.float64)
+    endpoint_stats = {
+        key: {"count": 0, "sum": 0.0, "squared": 0.0}
+        for key in ("tawss", "osi", "mean_vector_magnitude", "relative_residual")
+    }
+
+    for item in diagnostics:
+        case_count += 1
+        static_max = max(static_max, float(item["static_max_abs"]))
+        roundtrip_max = max(roundtrip_max, float(item["roundtrip_max_abs"]))
+        normal_norm_min = min(normal_norm_min, float(item["normal_norm_min"]))
+        normal_norm_max = max(normal_norm_max, float(item["normal_norm_max"]))
+        face_fraction_min = min(face_fraction_min, float(item["face_nondegenerate_fraction"]))
+        dynamic_case_count += int(bool(item["temporal_residual_nonzero"]))
+
+        tangent_value_count += _histogram_update(
+            tangent_hist, item["tangent_ratio"], 0.0, 1.0, torch
+        )
+        normal_cosine_value_count += _histogram_update(
+            normal_cosine_hist, item["normal_cosine"], 0.0, 1.0, torch
+        )
+        _histogram_update(osi_hist, item["osi"], 0.0, 0.5, torch)
+        _histogram_update(
+            rrt_ratio_hist, item["rrt_denominator_ratio"], 0.0, 1.0, torch
+        )
+        _histogram_update(residual_hist, item["relative_residual"], 0.0, 4.0, torch)
+        _histogram_update(
+            decoder_difference_hist,
+            item["decoder_epsilon_relative_difference"],
+            0.0,
+            0.01,
+            torch,
+        )
+
+        tawss = item["tawss"].detach().to(device="cpu", dtype=torch.float64)
+        osi = item["osi"].detach().to(device="cpu", dtype=torch.float64)
+        mean_vector_magnitude = item["mean_vector_magnitude"].detach().to(
+            device="cpu", dtype=torch.float64
+        )
+        relative_residual = item["relative_residual"].detach().to(
+            device="cpu", dtype=torch.float64
+        )
+        endpoint_finite = endpoint_finite and all(
+            bool(torch.isfinite(values).all().item())
+            for values in (tawss, osi, mean_vector_magnitude, relative_residual)
+        )
+        endpoint_finite = endpoint_finite and bool(
+            ((osi >= -1e-12) & (osi <= 0.5 + 1e-12)).all().item()
+        )
+        if int(tawss.numel()):
+            tawss_min = min(tawss_min, float(tawss.min().item()))
+            tawss_max = max(tawss_max, float(tawss.max().item()))
+        if int(osi.numel()):
+            osi_min = min(osi_min, float(osi.min().item()))
+            osi_max = max(osi_max, float(osi.max().item()))
+        positive_tawss_count += int(item["positive_tawss_count"])
+        node_count += int(item["node_count"])
+        jensen_max = max(
+            jensen_max,
+            float(item["relative_jensen_violation"].max().item()),
+        )
+        rrt_ratio = item["rrt_denominator_ratio"]
+        rrt_near_zero_count += int((rrt_ratio < 0.001).sum().item())
+        rrt_ratio_count += int(rrt_ratio.numel())
+
+        coordinate_count += int(item["coordinate_count"])
+        coordinate_sum += item["coordinate_sum"].to(dtype=torch.float64)
+        coordinate_squared += item["coordinate_squared_sum"].to(dtype=torch.float64)
+        wss_count += int(item["wss_count"])
+        wss_sum += item["wss_sum"].to(dtype=torch.float64)
+        wss_squared += item["wss_squared_sum"].to(dtype=torch.float64)
+        for name, values in (
+            ("tawss", tawss),
+            ("osi", osi),
+            ("mean_vector_magnitude", mean_vector_magnitude),
+            ("relative_residual", relative_residual),
+        ):
+            stats = endpoint_stats[name]
+            stats["count"] += int(values.numel())
+            stats["sum"] += float(values.sum().item())
+            stats["squared"] += float((values * values).sum().item())
+
+    expected_cases = int(contract["read_scope"]["expected_train_cases"])
+    tangent_median = (
+        approximate_histogram_quantile(tangent_hist, 0.5, 0.0, 1.0)
+        if tangent_value_count
+        else math.inf
+    )
+    tangent_p95 = (
+        approximate_histogram_quantile(tangent_hist, 0.95, 0.0, 1.0)
+        if tangent_value_count
+        else math.inf
+    )
+    normal_cosine_p05 = (
+        approximate_histogram_quantile(normal_cosine_hist, 0.05, 0.0, 1.0)
+        if normal_cosine_value_count
+        else -math.inf
+    )
+    positive_tawss_fraction = positive_tawss_count / node_count if node_count else 0.0
+    dynamic_case_fraction = dynamic_case_count / case_count if case_count else 0.0
+    endpoints_nonconstant = (
+        endpoint_finite
+        and math.isfinite(tawss_min)
+        and math.isfinite(osi_min)
+        and tawss_max > tawss_min
+        and osi_max > osi_min
+    )
+
+    check_results = {
+        "source_sizes_and_sha256_exact": bool(source_identity_reverified),
+        "d5_private_manifest_and_train_digest_exact": bool(private_manifest_reverified),
+        "only_d5_train_tensor_values_read": bool(train_scope_enforced),
+        "normalization_mean_std_finite_and_positive_required_scales": bool(
+            normalization_metadata_valid
+        ),
+        "static_geometry_and_normals": static_max
+        <= float(checks["maximum_static_normalized_abs_error"]),
+        "normalization_roundtrip": roundtrip_max
+        <= float(checks["maximum_roundtrip_normalized_abs_error"]),
+        "normal_norm_bounds": normal_norm_min >= float(checks["normal_norm_minimum"])
+        and normal_norm_max <= float(checks["normal_norm_maximum"]),
+        "shared_faces_valid_nonrepeated_triangles": bool(shared_faces_valid),
+        "nondegenerate_face_fraction": face_fraction_min
+        >= float(checks["minimum_nondegenerate_face_fraction_per_case"]),
+        "mesh_stored_normal_agreement": normal_cosine_p05
+        >= float(checks["minimum_global_p05_absolute_mesh_stored_normal_cosine"]),
+        "wss_tangency": tangent_median
+        <= float(checks["maximum_global_median_normal_component_ratio"])
+        and tangent_p95 <= float(checks["maximum_global_p95_normal_component_ratio"]),
+        "all_cases_temporally_nonzero": dynamic_case_fraction
+        >= float(checks["minimum_cases_with_nonzero_temporal_residual_fraction"]),
+        "positive_tawss_support": positive_tawss_fraction
+        >= float(checks["minimum_nodes_with_positive_tawss_fraction"]),
+        "jensen_moment_cone": jensen_max
+        <= float(checks["maximum_relative_Jensen_violation"]),
+        "cycle_endpoints_finite_and_nonconstant": endpoints_nonconstant,
+        "expected_train_case_count": case_count == expected_cases,
+    }
+    gate_reasons = sorted(key for key, passed in check_results.items() if not passed)
+    gate_pass = not gate_reasons
+    osi_q05 = _optional_histogram_quantile(osi_hist, 0.05, 0.0, 0.5)
+    osi_q50 = _optional_histogram_quantile(osi_hist, 0.5, 0.0, 0.5)
+    osi_q95 = _optional_histogram_quantile(osi_hist, 0.95, 0.0, 0.5)
+    residual_q50 = _optional_histogram_quantile(residual_hist, 0.5, 0.0, 4.0)
+    decoder_difference_q95 = _optional_histogram_quantile(
+        decoder_difference_hist, 0.95, 0.0, 0.01
+    )
+    public_result = {
+        "schema_version": "aurora.aneug_processed_v4_d6.public_result.v1",
+        "protocol_id": contract["protocol_id"],
+        "status": "completed_passed" if gate_pass else "completed_failed",
+        "scientific_gate_evaluated": True,
+        "scientific_verdict": "pass" if gate_pass else "fail",
+        "gate_pass": gate_pass,
+        "gate_reasons": gate_reasons,
+        "train_case_count": case_count,
+        "validation_case_field_count_read": 0,
+        "outer_test_case_field_count_read": 0,
+        "auxiliary_case_field_count_read": 0,
+        "timesteps": int(contract["read_scope"]["expected_timesteps"]),
+        "nodes_per_case": int(contract["read_scope"]["expected_nodes"]),
+        "static_max_abs": static_max,
+        "roundtrip_max_abs": roundtrip_max,
+        "normal_norm_min": normal_norm_min if math.isfinite(normal_norm_min) else None,
+        "normal_norm_max": normal_norm_max if math.isfinite(normal_norm_max) else None,
+        "minimum_case_nondegenerate_face_fraction": face_fraction_min,
+        "global_mesh_stored_normal_abs_cosine_p05_histogram": (
+            normal_cosine_p05 if math.isfinite(normal_cosine_p05) else None
+        ),
+        "global_normal_component_ratio_median_histogram": (
+            tangent_median if math.isfinite(tangent_median) else None
+        ),
+        "global_normal_component_ratio_p95_histogram": (
+            tangent_p95 if math.isfinite(tangent_p95) else None
+        ),
+        "dynamic_case_fraction": dynamic_case_fraction,
+        "positive_tawss_node_fraction": positive_tawss_fraction,
+        "maximum_relative_jensen_violation": jensen_max,
+        "rrt_denominator_ratio_below_0p001_fraction": (
+            rrt_near_zero_count / rrt_ratio_count if rrt_ratio_count else None
+        ),
+        "osi_q05_histogram": osi_q05,
+        "osi_q50_histogram": osi_q50,
+        "osi_q95_histogram": osi_q95,
+        "relative_residual_q50_histogram": residual_q50,
+        "decoder_epsilon_relative_difference_q95_histogram": decoder_difference_q95,
+        "histogram_bins": bins,
+        "check_results": check_results,
+        "private_case_ids_published": False,
+        "private_normalization_values_published": False,
+        "model_fitted_or_selected": False,
+        "gpu_used": False,
+        "paper_result_or_claim_authorized": False,
+    }
+    private_statistics = {
+        "schema_version": "aurora.aneug_processed_v4_d6.private_train_statistics.v1",
+        "protocol_id": contract["protocol_id"],
+        "train_split_sha256": contract["source"]["d5_train_split_sha256"],
+        "train_case_count": case_count,
+        "coordinate_physical": _moments_from_sums(
+            coordinate_count, coordinate_sum, coordinate_squared, torch
+        ),
+        "wss_physical": _moments_from_sums(wss_count, wss_sum, wss_squared, torch),
+        "cycle_endpoints": {
+            name: (
+                _scalar_moments(
+                    int(values["count"]),
+                    float(values["sum"]),
+                    float(values["squared"]),
+                )
+                if int(values["count"]) > 0
+                else None
+            )
+            for name, values in endpoint_stats.items()
+        },
+        "model_normalization_source": "d5_train_physical_values_only",
+        "validation_outer_or_auxiliary_statistics_included": False,
+        "case_ids_included": False,
+    }
+    return public_result, private_statistics
+
+
+def stream_selected_case_diagnostics(
+    case_by_id: Mapping[str, Mapping[str, Any]],
+    train_ids: Sequence[str],
+    sealed_ids: Sequence[str],
+    labels: Sequence[str],
+    mean: Any,
+    std: Any,
+    faces: Any,
+    torch: Any,
+    *,
+    expected_shape: Sequence[int],
+    decoder_epsilon: float,
+    legacy_epsilon: float,
+    tangency_mask_fraction: float,
+) -> Iterable[Mapping[str, Any]]:
+    """Yield diagnostics while making sealed-case tensor access impossible by construction."""
+
+    train = [str(item) for item in train_ids]
+    sealed = {str(item) for item in sealed_ids}
+    _require(len(train) == len(set(train)) and all(train), "stream_train_id_integrity")
+    _require(not set(train).intersection(sealed), "stream_train_sealed_overlap")
+    _require(set(train).issubset(case_by_id), "stream_missing_train_case")
+    for case_id in train:
+        case = case_by_id[case_id]
+        _require([str(item) for item in case.get("labels", [])] == list(labels), "case_labels")
+        tensor = case.get("tensor")
+        _require(hasattr(tensor, "shape") and list(tensor.shape) == list(expected_shape), "case_tensor_shape")
+        yield inspect_case_tensor(
+            tensor,
+            labels,
+            mean,
+            std,
+            faces,
+            torch,
+            decoder_epsilon=decoder_epsilon,
+            legacy_epsilon=legacy_epsilon,
+            tangency_mask_fraction=tangency_mask_fraction,
+        )
+
+
+def audit_loaded_training_payload(
+    contract: Mapping[str, Any],
+    steady: Mapping[str, Any],
+    transient: Mapping[str, Any],
+    private_manifest: Mapping[str, Any],
+    torch: Any,
+    *,
+    source_identity_reverified: bool,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Audit loaded objects while indexing tensor values for D5-train IDs only."""
+
+    validate_contract(contract)
+    buckets = validate_private_split_manifest(contract, private_manifest)
+    _require(isinstance(steady, Mapping), "steady_mapping")
+    _require({"label", "tensor_norm"}.issubset(steady), "steady_keys")
+    labels = [str(item) for item in steady["label"]]
+    _require(labels == contract["read_scope"]["expected_labels"], "steady_labels")
+    norm = steady["tensor_norm"]
+    _require(isinstance(norm, Mapping) and {"mean", "std"}.issubset(norm), "tensor_norm")
+    mean = norm["mean"].detach().to(device="cpu", dtype=torch.float64).reshape(-1)
+    std = norm["std"].detach().to(device="cpu", dtype=torch.float64).reshape(-1)
+    normalization_valid = (
+        int(mean.numel()) == int(std.numel()) == len(labels)
+        and bool(torch.isfinite(mean).all().item())
+        and bool(torch.isfinite(std).all().item())
+        and bool((std > 0).all().item())
+    )
+    _require(normalization_valid, "normalization_metadata")
+
+    _require(isinstance(transient, Mapping), "transient_mapping")
+    _require({"registered_data_list", "mesh_data"}.issubset(transient), "transient_keys")
+    cases = transient["registered_data_list"]
+    mesh = transient["mesh_data"]
+    _require(isinstance(cases, Sequence) and not isinstance(cases, (str, bytes)), "case_sequence")
+    _require(isinstance(mesh, Mapping) and "faces_list" in mesh, "mesh_faces")
+    faces_list = mesh["faces_list"]
+    _require(isinstance(faces_list, Sequence) and faces_list, "faces_list")
+    faces = faces_list[0].detach().to(device="cpu")
+    expected_nodes = int(contract["read_scope"]["expected_nodes"])
+    shared_faces_valid = (
+        faces.ndim == 2
+        and int(faces.shape[1]) == 3
+        and not bool((faces[:, 0] == faces[:, 1]).any().item())
+        and not bool((faces[:, 1] == faces[:, 2]).any().item())
+        and not bool((faces[:, 0] == faces[:, 2]).any().item())
+        and int(faces.min().item()) >= 0
+        and int(faces.max().item()) < expected_nodes
+    )
+    _require(shared_faces_valid, "shared_faces_invalid")
+
+    case_by_id: dict[str, Mapping[str, Any]] = {}
+    for case in cases:
+        _require(isinstance(case, Mapping), "case_mapping")
+        case_id = str(case.get("case", ""))
+        _require(case_id and case_id not in case_by_id, "case_id_integrity")
+        case_by_id[case_id] = case
+    train_ids = buckets["train"]
+    _require(set(train_ids).issubset(case_by_id), "missing_train_case")
+    sealed_ids = set(buckets["validation"] + buckets["outer_test"] + buckets["auxiliary"])
+    _require(not set(train_ids).intersection(sealed_ids), "train_sealed_overlap")
+
+    expected_timesteps = int(contract["read_scope"]["expected_timesteps"])
+    expected_channels = int(contract["read_scope"]["expected_channels"])
+
+    stream = stream_selected_case_diagnostics(
+        case_by_id,
+        train_ids,
+        sorted(sealed_ids),
+        labels,
+        mean,
+        std,
+        faces,
+        torch,
+        expected_shape=[expected_timesteps, expected_nodes, expected_channels],
+        decoder_epsilon=float(contract["physical_decoder"]["epsilon"]),
+        legacy_epsilon=float(
+            contract["physical_decoder"]["legacy_cycle_helper_epsilon_for_sensitivity_only"]
+        ),
+        tangency_mask_fraction=float(
+            contract["gate"]["checks"][
+                "tangency_mask_minimum_fraction_of_case_p99_wss_magnitude"
+            ]
+        ),
+    )
+
+    public_result, private_statistics = aggregate_case_diagnostics(
+        contract,
+        stream,
+        torch,
+        source_identity_reverified=source_identity_reverified,
+        private_manifest_reverified=True,
+        train_scope_enforced=True,
+        normalization_metadata_valid=normalization_valid,
+        shared_faces_valid=shared_faces_valid,
+    )
+    serialized_public = json.dumps(public_result, ensure_ascii=False, sort_keys=True)
+    for case_id in case_by_id:
+        _require(json.dumps(case_id, ensure_ascii=False) not in serialized_public, "case_id_leaked_public")
+    for private_key in ("coordinate_physical", "wss_physical", "train_split_sha256"):
+        _require(private_key not in public_result, "normalization_value_leaked_public")
+    return public_result, private_statistics
