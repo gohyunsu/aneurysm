@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-16 processed-v4 static artifact semantics S0:** Exact official
+> dataset/code remain `9dd4180…` / `4a090a0…`. Filename-only enumeration finds
+> 730 transient directories and all 730 have the seven documented assets, but
+> closed D3 proves the exact processed v4 `registered_data_list` is below 700.
+> Never substitute raw 730 for the processed cohort. Official `1k` is formatted
+> from `n_subdivide=1`, not a 1,000-case promise. The builder asserts no 730
+> floor, uses unsorted `wall_data.pt` directories, may reuse mesh/assembled
+> caches and provides no lineage-disjoint split. Specific missing IDs and build
+> cause remain unknown; no processed payload was reopened and D3 stays failed
+> without count backfill. Static result `eeb18e27…b56a4` is complete. Recommend
+> only a human-selected, threshold-free metadata D4 census; D4 is unselected/
+> unregistered. Split/P0/method/model/GPU/test/result/claim remain zero. Never
+> use `junjinyong`.
+
 > **2026-08-16 D3 final closure:** Exact client source became 23/23 immutable
 > server chunks in 23 first SFTP sessions, with zero resume and zero hash
 > mismatch. Finalizer job `116425.ECE-util1` used CPU 4/8 GB/GPU 0 and finished

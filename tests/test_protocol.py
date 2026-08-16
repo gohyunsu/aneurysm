@@ -505,6 +505,30 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(audit["processed_v4_d3_exact_registered_case_count_recorded"])
         self.assertFalse(audit["processed_v4_d3_schema_rerun_allowed"])
         self.assertFalse(audit["processed_v4_d3_scientific_p0_or_gpu_authorized"])
+        self.assertEqual(
+            audit["processed_v4_semantics_s0_status"],
+            "complete_static_reappraisal_no_processed_payload_read",
+        )
+        self.assertEqual(audit["processed_v4_semantics_s0_raw_tree_unique_cases"], 730)
+        self.assertEqual(
+            audit["processed_v4_semantics_s0_raw_tree_complete_seven_asset_cases"],
+            730,
+        )
+        self.assertFalse(audit["processed_v4_semantics_s0_one_k_is_case_count"])
+        self.assertFalse(audit["processed_v4_semantics_s0_builder_enforces_730"])
+        self.assertTrue(audit["processed_v4_semantics_s0_builder_may_reuse_mesh_cache"])
+        self.assertTrue(
+            audit["processed_v4_semantics_s0_builder_may_reuse_assembled_cache"]
+        )
+        self.assertTrue(
+            audit["processed_v4_semantics_s0_processed_raw_cardinality_drift_proven"]
+        )
+        self.assertFalse(
+            audit["processed_v4_semantics_s0_specific_missing_cases_or_cause_identified"]
+        )
+        self.assertFalse(audit["processed_v4_semantics_s0_official_split_lineage_disjoint"])
+        self.assertFalse(audit["processed_v4_d4_human_selected"])
+        self.assertFalse(audit["processed_v4_d4_registered"])
         self.assertFalse(audit["processed_v4_d1_v5_or_raw_authorized"])
         self.assertFalse(audit["processed_v4_d1_scientific_p0_or_gpu_authorized"])
         self.assertFalse(audit["scientific_gate_registered"])

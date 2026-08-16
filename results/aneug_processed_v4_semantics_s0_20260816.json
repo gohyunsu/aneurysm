@@ -1,0 +1,90 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_semantics_s0.result.v1",
+  "protocol_id": "aneug_processed_v4_static_artifact_semantics_s0",
+  "as_of": "2026-08-16",
+  "status": "complete_static_reappraisal_no_processed_payload_read",
+  "official_sources": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "dataset_card_sha256": "ab57b87c24f01c3831814a184a345681bdaf8793cba12acac842244511787527",
+    "filename_manifest_sha256": "b46cc6f061d3fa96f2a1d9cc3f3992a8230744bc0ff6afab06e83d32755a91dd",
+    "transient_filename_manifest_sha256": "b6e5c87e704c3b57eade653909b6df76515101b738b974c990335840d1ca077b",
+    "official_code_repository": "WenHaoDing/AneuG-Flow",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "official_readme_sha256": "164b546fb068025f26ab0626d052cf077ba7c23180fda93b211c2f91c0c00816",
+    "loaders_sha256": "133fc170ab395fe7bf44891ed625837e9b20ed4de7b977a325cc8e44d61393b5",
+    "dataset_split_sha256": "9eecdaf5aef04bf2da999d685eaf622c87fb52044eb69635172f3d61a2da98e6",
+    "training_entrypoint_sha256": "8eb0b8ed732503d0c514a0ff96b22161fc2a6b0a7365592f410becdecadea2c6"
+  },
+  "release_tree": {
+    "dataset_card_reported_transient_cases": 730,
+    "revision_filename_count": 5121,
+    "transient_filename_count": 5110,
+    "unique_transient_directories": 730,
+    "directories_with_wall_data": 730,
+    "directories_with_checkpoint": 730,
+    "directories_with_all_seven_documented_assets": 730,
+    "incomplete_directories_by_filename_contract": 0,
+    "payload_values_read": false
+  },
+  "processed_artifact": {
+    "relative_path": "processed_data/assembled_registered_data_1k_v4.pth",
+    "bytes": 23744862051,
+    "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+    "d3_exact_object_acquired": true,
+    "d3_registered_case_count_below_700": true,
+    "d3_exact_registered_case_count_recorded": false,
+    "d3_post_hoc_count_backfill_allowed": false
+  },
+  "code_semantics": {
+    "one_k_is_case_count": false,
+    "one_k_origin": "formatted_preprocessing_resolution_tag_from_n_subdivide_equal_1",
+    "builder_enforces_730_cases": false,
+    "builder_case_selection": "unsorted_directories_with_wall_data_pt_at_mesh_cache_creation",
+    "mesh_cache_reused_when_overwrite_mesh_false": true,
+    "assembled_cache_reused_when_overwrite_assembled_false": true,
+    "serialized_root_keys": [
+      "registered_data_list",
+      "mesh_data"
+    ],
+    "serialized_build_revision_required": false,
+    "official_split_is_lineage_disjoint": false,
+    "official_split_rule": "stable_prefix_then_serialized_order_slice"
+  },
+  "adjudication": {
+    "raw_release_and_processed_snapshot_cardinality_match_proven": false,
+    "processed_snapshot_cardinality_drift_proven": true,
+    "specific_missing_cases_or_build_cause_identified": false,
+    "transport_corruption_supported": false,
+    "overall_dataset_failure_supported": false,
+    "scientific_wss_verdict_supported": false,
+    "current_candidate_score": 31.0,
+    "current_candidate_active": false,
+    "d3_repaired_or_relabelled": false
+  },
+  "recommended_successor": {
+    "version": "D4",
+    "task": "prospective_metadata_only_processed_cohort_census",
+    "material_difference": "descriptive_census_without_reusing_or_lowering_the_closed_d3_case_floor",
+    "records_exact_count": true,
+    "records_private_case_ids_and_public_digest": true,
+    "records_label_timestep_shape_histograms": true,
+    "records_case_mesh_order_and_geometry_linkage": true,
+    "reads_scientific_field_values": false,
+    "has_cardinality_pass_threshold": false,
+    "permits_only_human_rescoring_after_completion": true,
+    "human_selection_required_before_registration_or_execution": true,
+    "selected": false
+  },
+  "authorization": {
+    "d4_registered": false,
+    "processed_payload_reread": false,
+    "split_or_grouping": false,
+    "scientific_p0": false,
+    "method_or_architecture": false,
+    "gpu_training": false,
+    "validation_or_test": false,
+    "outer_test": false,
+    "paper_result_or_claim": false
+  }
+}

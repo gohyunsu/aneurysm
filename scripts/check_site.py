@@ -176,6 +176,15 @@ def check_site(root: Path) -> list[str]:
         "Exact count and downstream linkage were not recorded and are not backfilled post hoc": (
             "D3 no-post-hoc-backfill boundary"
         ),
+        "730 filename-complete raw directories but fewer than 700 processed cases": (
+            "processed/raw cardinality boundary"
+        ),
+        "The 1k is a resolution tag, not a case-count promise": (
+            "processed filename semantics boundary"
+        ),
+        "D4 is recommended but not selected or registered": (
+            "D4 selection boundary"
+        ),
         "730 cases are not 730 independent patients": (
             "AneuG independent-unit boundary"
         ),

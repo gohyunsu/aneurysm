@@ -11304,6 +11304,21 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d3_execution_result",
             "processed_v4_d3_execution_result_sha256",
             "processed_v4_d3_scientific_p0_or_gpu_authorized",
+            "processed_v4_semantics_s0_status",
+            "processed_v4_semantics_s0_result",
+            "processed_v4_semantics_s0_result_sha256",
+            "processed_v4_semantics_s0_raw_tree_unique_cases",
+            "processed_v4_semantics_s0_raw_tree_complete_seven_asset_cases",
+            "processed_v4_semantics_s0_one_k_is_case_count",
+            "processed_v4_semantics_s0_builder_enforces_730",
+            "processed_v4_semantics_s0_builder_may_reuse_mesh_cache",
+            "processed_v4_semantics_s0_builder_may_reuse_assembled_cache",
+            "processed_v4_semantics_s0_processed_raw_cardinality_drift_proven",
+            "processed_v4_semantics_s0_specific_missing_cases_or_cause_identified",
+            "processed_v4_semantics_s0_official_split_lineage_disjoint",
+            "processed_v4_d4_recommended_task",
+            "processed_v4_d4_human_selected",
+            "processed_v4_d4_registered",
             "processed_v4_d1_v5_or_raw_authorized",
             "processed_v4_d1_scientific_p0_or_gpu_authorized",
             "scientific_gate_registered",
@@ -11474,8 +11489,28 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
         != "results/aneug_processed_v4_d3_execution_20260816.json"
         or reference_floor["processed_v4_d3_execution_result_sha256"]
         != "93f2bbcf77b239cb80860621dba09a891d7d17fea48d391ac4486a933a0c4b73"
+        or reference_floor["processed_v4_semantics_s0_status"]
+        != "complete_static_reappraisal_no_processed_payload_read"
+        or reference_floor["processed_v4_semantics_s0_result"]
+        != "results/aneug_processed_v4_semantics_s0_20260816.json"
+        or reference_floor["processed_v4_semantics_s0_result_sha256"]
+        != "eeb18e27b86d70c29348bc59dabc9357cf11a1061d8a157a3605d9558c0b56a4"
+        or reference_floor["processed_v4_semantics_s0_raw_tree_unique_cases"] != 730
+        or reference_floor[
+            "processed_v4_semantics_s0_raw_tree_complete_seven_asset_cases"
+        ] != 730
+        or reference_floor["processed_v4_semantics_s0_builder_may_reuse_mesh_cache"]
+        is not True
+        or reference_floor[
+            "processed_v4_semantics_s0_builder_may_reuse_assembled_cache"
+        ] is not True
+        or reference_floor[
+            "processed_v4_semantics_s0_processed_raw_cardinality_drift_proven"
+        ] is not True
+        or reference_floor["processed_v4_d4_recommended_task"]
+        != "prospective_metadata_only_processed_cohort_census_without_cardinality_pass_threshold"
         or reference_floor["next_allowed_action"]
-        != "human_select_materially_distinct_evidence_version_after_static_official_artifact_semantics_reappraisal"
+        != "human_select_materially_distinct_d4_metadata_only_processed_cohort_census"
         or any(
             reference_floor[key] is not False
             for key in (
@@ -11510,6 +11545,12 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
                 "processed_v4_d3_case_ids_or_field_values_public",
                 "processed_v4_d3_schema_rerun_allowed",
                 "processed_v4_d3_scientific_p0_or_gpu_authorized",
+                "processed_v4_semantics_s0_one_k_is_case_count",
+                "processed_v4_semantics_s0_builder_enforces_730",
+                "processed_v4_semantics_s0_specific_missing_cases_or_cause_identified",
+                "processed_v4_semantics_s0_official_split_lineage_disjoint",
+                "processed_v4_d4_human_selected",
+                "processed_v4_d4_registered",
                 "method_selected", "architecture_selected",
                 "gpu_training_authorized", "outer_test_authorized",
                 "paper_claim_active", "login_node_gpu_command_executed",
@@ -11569,6 +11610,10 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
             "processed_v4_d3_execution_result",
             "processed_v4_d3_execution_result_sha256",
         ),
+        (
+            "processed_v4_semantics_s0_result",
+            "processed_v4_semantics_s0_result_sha256",
+        ),
     ):
         path = Path(__file__).resolve().parents[2] / reference_floor[path_key]
         if (
@@ -11581,6 +11626,7 @@ def validate_protocol(protocol: Mapping[str, Any]) -> list[str]:
     checks.append("introai9 acquired-asset reconciliation beyond legacy root")
     checks.append("AneuG processed-v4 storage-bounded acquisition boundary")
     checks.append("AneuG processed-v4 D3 case-floor closure boundary")
+    checks.append("AneuG processed-v4 static artifact-semantics boundary")
     if set(problem_selection["rejected_candidates"]) != {
         "endpoint_provenance_aware_asah_six_month_prognosis_mixed_time_and_no_imaging",
         "asis_management_to_one_year_mrs_direct_prior_and_synthetic_public_rows",

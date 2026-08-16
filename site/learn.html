@@ -630,6 +630,16 @@
             <b>exact object는 확보됐지만 사전 cohort admission은 실패</b>했다는 뜻입니다.
             Exact count와 downstream schema/linkage는 기록되지 않았고 동일 run이나
             사후 payload backfill은 금지됩니다.
+            이어진 static S0는 official revision의 raw filename tree에 730개 complete
+            directory가 있지만 processed snapshot은 그보다 작다는 cardinality drift를
+            확인했습니다. <code>1k</code>는 1,000 case가 아니라
+            <code>n_subdivide=1</code>에서 만들어진 resolution tag입니다. Official builder는
+            730을 assert하지 않으며 <code>overwrite_mesh=False</code>와
+            <code>overwrite_assembled=False</code>일 때 기존 cache를 재사용합니다.
+            따라서 transport corruption은 지지되지 않지만 정확한 누락 case와 build
+            원인은 아직 모릅니다. 다음 D4는 threshold를 낮추는 rerun이 아니라 exact
+            count·ID digest·shape/label histogram·mesh/linkage만 기록하는 descriptive
+            census여야 하며, 현재는 권고 상태로 선택·등록되지 않았습니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">Processed-v4 D1 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">왜 2 TB가 필요 없는지 읽기 ↗</a>
@@ -640,6 +650,8 @@
           <a href="../configs/aneug_processed_v4_chunk_stage_d3.json">Fixed-chunk D3 contract 읽기 ↗</a>
           <a href="../docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md">D3 저장상한과 실행 순서 읽기 ↗</a>
           <a href="../results/aneug_processed_v4_d3_execution_20260816.json">D3 transport/schema 결과 읽기 ↗</a>
+          <a href="../docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md">Processed artifact 의미와 D4 경계 읽기 ↗</a>
+          <a href="../results/aneug_processed_v4_semantics_s0_20260816.json">Static S0 machine result 읽기 ↗</a>
         </div>
         <div class="answer-card" id="asset-state-ledger">
           <span>왜 “active dataset 0”이 “데이터셋 없음”이 아닌가?</span>

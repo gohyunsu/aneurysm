@@ -2,8 +2,8 @@ window.AURORA_DATA = Object.freeze({
   venue: {
     target: "IEEE ISBI 2027 · four-page regular paper",
     deadline: "2026.10.26 · 23:59 USA EDT",
-    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · D3 closed: 23/23 transport and full SHA pass, one-shot schema case_floor fail, exact count unrecorded · science/P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
-    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits; 730 cases are not 730 independent patients. D3 acquired the exact 23,744,862,051-byte processed transient through 23 independently verified chunks and a successful CPU/GPU-0 finalizer. Its sole schema job passed both checksums and weights-only/mmap root loading, then failed the frozen minimum because registered_data_list contained fewer than 700 cases. Exact count and downstream linkage were not recorded and are not backfilled post hoc. This is object-acquisition pass plus cohort-admission fail, not an overall AneuG or scientific WSS verdict. V5/raw CFD remain excluded. BenchAnXplore is engineering-only; the 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor; AneuX is geometry-only OOD support; Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
+    status: "Target locked · no active paper identity · AneuG reference-relative transient WSS 31.0/40 inactive · D3 closed: 23/23 transport and full SHA pass, one-shot schema case_floor fail · static S0 complete: raw 730 complete / processed <700, exact count unrecorded · D4 unselected · science/P0/P1/method/model/GPU/validation/test/outer test/result/claim 0 · not submission-ready",
+    requirement: "AneuG is a conditional primary source only after lineage and target-stability audits; 730 cases are not 730 independent patients. D3 acquired the exact 23,744,862,051-byte processed transient through 23 independently verified chunks and a successful CPU/GPU-0 finalizer. Its sole schema job passed both checksums and weights-only/mmap root loading, then failed the frozen minimum because registered_data_list contained fewer than 700 cases. Exact count and downstream linkage were not recorded and are not backfilled post hoc. This is object-acquisition pass plus cohort-admission fail, not an overall AneuG or scientific WSS verdict. Static S0 proves 730 filename-complete raw directories but fewer than 700 processed cases. The 1k is a resolution tag, not a case-count promise; the official builder does not assert 730 and may reuse mesh and assembled caches. D4 is recommended but not selected or registered. V5/raw CFD remain excluded. BenchAnXplore is engineering-only; the 2015 Challenge is a five-anatomy within-anatomy inter-solver structure-variability floor; AneuX is geometry-only OOD support; Aneumo is optional only after mapping and licence resolution. GNN, Hodge, equivariance, edge forms, POD, tracking and topology preservation remain priors or controls",
     authorContract: "single blind · max 2 first-author submissions · conservative union forbids substantially similar concurrent conference/workshop/journal review · preprints allowed · ethics and COI disclosure required",
     submissionLink: "Coming soon on the official ISBI 2027 author page",
     rules: [
@@ -46,6 +46,13 @@ window.AURORA_DATA = Object.freeze({
     plan: "../docs/isbi-2027-plan.md"
   },
   lineage: [
+    {
+      year: "2026.08",
+      title: "Static semantics separates the 730-case raw tree from the smaller processed snapshot",
+      copy: "At the pinned official revision, all 730 transient directories expose the seven documented filenames. The exact processed-v4 object nevertheless contains fewer than 700 registered cases. Official code shows that 1k is formatted from n_subdivide=1 rather than cohort size, enforces no 730-case assertion, can reuse existing mesh and assembled caches, and uses a non-lineage serialized-order split. This proves processed/raw cardinality drift but not the missing IDs or historical build cause. A threshold-free metadata-only D4 census is recommended but not selected or registered.",
+      status: "Static S0 complete · no processed payload reread · D3 unchanged · D4 unselected · science/model/GPU/claim 0",
+      url: "../docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md"
+    },
     {
       year: "2026.08",
       title: "D3 acquires the exact object but fails the frozen cohort floor",
@@ -1494,6 +1501,13 @@ window.AURORA_DATA = Object.freeze({
     }
   ],
   changes: [
+    {
+      date: "2026.08.16",
+      category: "research",
+      title: "Static artifact semantics explains why raw 730 does not guarantee processed 730",
+      copy: "The pinned official filename tree contains 730 seven-file-complete transient directories, while exact D3 evidence proves the processed registered list is below 700. The 1k tag comes from n_subdivide=1, the builder asserts no cohort cardinality and can reuse caches. Missing IDs and the historical cause remain unknown. D4 is only a recommended threshold-free metadata census and has not been selected, registered or executed.",
+      files: ["results/aneug_processed_v4_semantics_s0_20260816.json", "docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md", "configs/aurora_v1.json", "src/aurora/protocol.py", "tests/test_protocol.py", "README.md", "site/index.html", "site/learn.html", "site/assets/research-data.js", "AGENTS.md", "CHANGELOG.md"]
+    },
     {
       date: "2026.08.16",
       category: "data",

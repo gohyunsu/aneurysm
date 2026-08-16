@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-16 · processed-v4 static artifact semantics S0
+
+- Verified from the pinned official filename manifest that all 730 raw
+  transient directories expose the seven documented assets; no payload value
+  was read.
+- Established that `1k` is a preprocessing-resolution tag, the official
+  builder enforces no 730-case floor and may reuse earlier mesh/assembled
+  caches. The official serialized-order split is not lineage-disjoint.
+- Preserved D3's processed `<700` failure and unknown exact count. Added a
+  machine result and detailed audit; recommended but did not select/register a
+  threshold-free metadata-only D4 census. Science/model/GPU/claim stay zero.
+
 ## 2026-08-16 · D3 closes after exact transport pass and schema case-floor failure
 
 - Completed 23/23 independently hashed chunks in 23 first SFTP sessions with

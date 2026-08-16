@@ -635,6 +635,12 @@
             <code>registered_data_list &lt; 700</code>인 <code>case_floor</code>에서
             F/exit 1로 닫혔습니다. Exact count, case IDs와 downstream schema/linkage는
             기록되지 않았고 같은 contract를 재실행하거나 사후 backfill하지 않습니다.
+            Static S0는 official raw tree의 730개 directory가 모두 seven-file complete인
+            반면 exact processed snapshot은 700 미만임을 분리했습니다. 파일명의
+            <code>1k</code>는 case 수가 아니라 <code>n_subdivide=1</code>에서 나온
+            preprocessing-resolution tag입니다. Builder는 730을 assert하지 않고 기존
+            mesh/assembled cache를 재사용할 수 있으므로 specific build cause는 미확정입니다.
+            Threshold가 없는 metadata-only D4 census는 권고됐지만 선택·등록되지 않았습니다.
           </p>
           <a href="../configs/aneug_processed_v4_acquisition_d1.json">D1 machine contract ↗</a>
           <a href="../docs/aneug-processed-v4-storage-bounded-acquisition-2026-08-14.md">Storage·schema rationale ↗</a>
@@ -645,6 +651,8 @@
           <a href="../configs/aneug_processed_v4_chunk_stage_d3.json">D3 fixed-chunk machine contract ↗</a>
           <a href="../docs/aneug-processed-v4-chunk-staging-d3-2026-08-15.md">D3 partition·storage·one-shot 실행 경계 ↗</a>
           <a href="../results/aneug_processed_v4_d3_execution_20260816.json">D3 deidentified execution record ↗</a>
+          <a href="../docs/aneug-processed-v4-artifact-semantics-reappraisal-2026-08-16.md">왜 raw 730과 processed &lt;700이 함께 참인지 읽기 ↗</a>
+          <a href="../results/aneug_processed_v4_semantics_s0_20260816.json">Static S0 machine result ↗</a>
         </div>
       </article>
 
@@ -895,7 +903,7 @@
         <article><span>SR-C3</span><h3>Lineage-disjoint confirmation</h3><p>Field-blind하게 고정한 independent unit과 모든 prespecified structural endpoint에서 일관된 우위를 요구한다.</p></article>
       </div>
       <div class="scope-line">
-        <span>Current stage</span><b>D3 closed · 23/23 transport + full SHA pass · one-shot schema case-floor fail · exact count unrecorded · P0/P1/method/model/GPU/test/result/claim 0</b>
+        <span>Current stage</span><b>D3 closed · static semantics S0 complete · raw 730 complete / processed &lt;700 · D4 unselected · P0/P1/method/model/GPU/test/result/claim 0</b>
         <span>Claim boundary</span><b>G0 has no source or science verdict and cannot activate a scientific or manuscript claim</b>
       </div>
     </section>
