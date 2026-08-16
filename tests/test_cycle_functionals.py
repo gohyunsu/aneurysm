@@ -9,7 +9,12 @@ try:
 except ImportError:  # PyTorch is pinned in public Quality
     torch = None
 
-from aurora.cycle_functionals import CycleFunctionalError, compute_cycle_functionals
+from aurora.cycle_functionals import (
+    CycleFunctionalError,
+    compute_cycle_functionals,
+    paired_cycle_errors,
+    triangle_lumped_vertex_areas,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -160,6 +165,217 @@ class CycleFunctionalTests(unittest.TestCase):
         nonfinite[0, 0, 0] = float("nan")
         with self.assertRaisesRegex(CycleFunctionalError, "input_nonfinite"):
             compute_cycle_functionals(nonfinite, torch.ones(3), torch)
+
+    def test_triangle_lumped_vertex_areas_preserve_surface_area(self) -> None:
+        vertices = torch.tensor(
+            [
+                [0.0, 0.0, 0.0],
+                [1.0, 0.0, 0.0],
+                [1.0, 1.0, 0.0],
+                [0.0, 1.0, 0.0],
+            ],
+            dtype=torch.float64,
+        )
+        faces = torch.tensor(
+            [[0, 1, 2], [0, 2, 3], [0, 0, 1]],
+            dtype=torch.int64,
+        )
+        result = triangle_lumped_vertex_areas(vertices, faces, torch)
+        torch.testing.assert_close(
+            result["vertex_areas"],
+            torch.tensor(
+                [1.0 / 3.0, 1.0 / 6.0, 1.0 / 3.0, 1.0 / 6.0],
+                dtype=torch.float64,
+            ),
+        )
+        torch.testing.assert_close(
+            result["total_retained_area"],
+            torch.tensor(1.0, dtype=torch.float64),
+        )
+        torch.testing.assert_close(
+            result["nondegenerate_face_fraction"],
+            torch.tensor(2.0 / 3.0, dtype=torch.float64),
+        )
+        with self.assertRaisesRegex(CycleFunctionalError, "face_dtype"):
+            triangle_lumped_vertex_areas(vertices, faces.to(torch.float64), torch)
+
+    @staticmethod
+    def _paired_fixture() -> tuple[object, object, object, object]:
+        phase = torch.arange(8, dtype=torch.float64) * (2.0 * torch.pi / 8.0)
+        reference = torch.zeros((8, 3, 3), dtype=torch.float64)
+        reference[:, 0, 0] = 1.0 + 0.2 * torch.sin(phase)
+        reference[:, 0, 1] = 0.2 * torch.cos(phase)
+        reference[:, 1, 0] = 0.5 * torch.cos(phase)
+        reference[:, 1, 1] = 0.8 + 0.1 * torch.sin(phase)
+        reference[:, 2, 0] = -0.6 + 0.1 * torch.cos(phase)
+        reference[:, 2, 1] = 0.2 * torch.sin(phase)
+        prediction = reference.clone()
+        prediction[:, 0, 0] += 0.08 * torch.cos(phase)
+        prediction[:, 1, 1] *= 0.9
+        prediction[:, 2, 0] -= 0.04 * torch.sin(phase)
+        weights = torch.ones(8, dtype=torch.float64)
+        areas = torch.tensor([0.2, 0.3, 0.5], dtype=torch.float64)
+        return reference, prediction, weights, areas
+
+    def test_paired_metrics_are_zero_for_identical_cycles(self) -> None:
+        reference, _, weights, areas = self._paired_fixture()
+        metrics = paired_cycle_errors(
+            reference,
+            reference.clone(),
+            weights,
+            areas,
+            torch,
+            reference_direction_floor=0.05,
+            reference_tawss_floor=0.05,
+            reference_mean_vector_floor=0.05,
+        )
+        for key in (
+            "field_relative_l2",
+            "mean_vector_relative_l2",
+            "tawss_relative_l2",
+            "direction_cosine_error_with_invalid_penalty",
+            "osi_mae_with_invalid_penalty",
+            "log_rrt_mae",
+        ):
+            torch.testing.assert_close(
+                metrics[key],
+                torch.tensor(0.0, dtype=torch.float64),
+                atol=1e-12,
+                rtol=0.0,
+            )
+        for key in (
+            "direction_prediction_valid_fraction",
+            "osi_prediction_valid_fraction",
+            "rrt_prediction_above_floor_fraction",
+        ):
+            torch.testing.assert_close(
+                metrics[key], torch.tensor(1.0, dtype=torch.float64)
+            )
+
+    def test_paired_metrics_are_rotation_and_common_scale_invariant(self) -> None:
+        reference, prediction, weights, areas = self._paired_fixture()
+
+        def evaluate(left: object, right: object) -> dict[str, object]:
+            return paired_cycle_errors(
+                left,
+                right,
+                weights,
+                areas,
+                torch,
+                reference_direction_floor=0.05,
+                reference_tawss_floor=0.05,
+                reference_mean_vector_floor=0.05,
+            )
+
+        base = evaluate(reference, prediction)
+        angle = torch.tensor(0.53, dtype=torch.float64)
+        cosine, sine = torch.cos(angle), torch.sin(angle)
+        rotation = torch.stack(
+            (
+                torch.stack((cosine, -sine, torch.tensor(0.0, dtype=reference.dtype))),
+                torch.stack((sine, cosine, torch.tensor(0.0, dtype=reference.dtype))),
+                torch.tensor([0.0, 0.0, 1.0], dtype=reference.dtype),
+            )
+        )
+        rotated = evaluate(reference @ rotation.T, prediction @ rotation.T)
+        scaled = evaluate(2.0 * reference, 2.0 * prediction)
+        for key in (
+            "field_relative_l2",
+            "mean_vector_relative_l2",
+            "tawss_relative_l2",
+            "direction_cosine_error_with_invalid_penalty",
+            "osi_mae_with_invalid_penalty",
+            "log_rrt_mae",
+        ):
+            torch.testing.assert_close(rotated[key], base[key], atol=1e-12, rtol=1e-12)
+            torch.testing.assert_close(scaled[key], base[key], atol=1e-12, rtol=1e-12)
+
+    def test_invalid_predictions_are_penalized_and_coverage_is_visible(self) -> None:
+        reference, _, weights, areas = self._paired_fixture()
+        prediction = torch.zeros_like(reference)
+        metrics = paired_cycle_errors(
+            reference,
+            prediction,
+            weights,
+            areas,
+            torch,
+            reference_direction_floor=0.05,
+            reference_tawss_floor=0.05,
+            reference_mean_vector_floor=0.05,
+        )
+        torch.testing.assert_close(
+            metrics["field_relative_l2"], torch.tensor(1.0, dtype=torch.float64)
+        )
+        torch.testing.assert_close(
+            metrics["direction_cosine_error_with_invalid_penalty"],
+            torch.tensor(1.0, dtype=torch.float64),
+        )
+        torch.testing.assert_close(
+            metrics["osi_mae_with_invalid_penalty"],
+            torch.tensor(0.5, dtype=torch.float64),
+        )
+        self.assertGreater(float(metrics["log_rrt_mae"].item()), 20.0)
+        for key in (
+            "direction_prediction_valid_fraction",
+            "osi_prediction_valid_fraction",
+            "rrt_prediction_above_floor_fraction",
+        ):
+            torch.testing.assert_close(
+                metrics[key],
+                torch.tensor(0.0, dtype=torch.float64),
+            )
+
+    def test_paired_field_error_uses_vertex_area_measure(self) -> None:
+        reference = torch.ones((2, 2, 3), dtype=torch.float64)
+        weights = torch.ones(2, dtype=torch.float64)
+
+        def field_error(zero_node: int) -> object:
+            prediction = reference.clone()
+            prediction[:, zero_node, :] = 0.0
+            return paired_cycle_errors(
+                reference,
+                prediction,
+                weights,
+                torch.tensor([0.9, 0.1], dtype=torch.float64),
+                torch,
+                reference_direction_floor=0.05,
+                reference_tawss_floor=0.05,
+                reference_mean_vector_floor=0.05,
+            )["field_relative_l2"]
+
+        torch.testing.assert_close(
+            field_error(0),
+            torch.tensor(0.9**0.5, dtype=torch.float64),
+        )
+        torch.testing.assert_close(
+            field_error(1),
+            torch.tensor(0.1**0.5, dtype=torch.float64),
+        )
+
+    def test_paired_metrics_require_external_floors_and_nonempty_support(self) -> None:
+        reference, prediction, weights, areas = self._paired_fixture()
+        with self.assertRaisesRegex(CycleFunctionalError, "direction_floor"):
+            paired_cycle_errors(
+                reference,
+                prediction,
+                weights,
+                areas,
+                torch,
+                reference_direction_floor=0.0,
+                reference_tawss_floor=0.05,
+                reference_mean_vector_floor=0.05,
+            )
+        with self.assertRaisesRegex(CycleFunctionalError, "empty_osi_support"):
+            paired_cycle_errors(
+                reference,
+                prediction,
+                weights,
+                areas,
+                torch,
+                reference_direction_floor=0.05,
+                reference_tawss_floor=100.0,
+                reference_mean_vector_floor=0.05,
+            )
 
 
 if __name__ == "__main__":

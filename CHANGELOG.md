@@ -8,6 +8,9 @@
   plus explicit OSI/RRT validity masks. Historical P0 bytes remain unchanged.
 - Verified rotation/scale/phase-replication properties and RRT's exact
   redundancy. This is metric hygiene, not novelty, science or D6 activation.
+- Added triangle-lumped areas and a per-case paired evaluator with mandatory
+  external train-derived floors, invalid-prediction penalties and explicit
+  coverage. It performs no threshold fitting, case aggregation or selection.
 
 ## 2026-08-16 · cycle-moment projection synthetic feasibility prototype
 

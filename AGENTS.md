@@ -8,6 +8,11 @@
 > never an independent co-primary. Future comparison masks/floors must be
 > train-defined before validation. D6/field/model/PBS/GPU/result/claim remain
 > 0. Never use `junjinyong`; do not maintain the public static site.
+> The paired per-case evaluator additionally requires external triangle-lumped
+> areas and reference-side direction/TAWSS/mean-vector floors; it never fits
+> them, aggregates cases or infers independence. Invalid predictions are
+> penalized and their coverage is returned beside area/phase-weighted field,
+> mean-vector, TAWSS, direction, OSI and log-RRT sufficient metrics.
 
 > **2026-08-16 cycle-moment projection synthetic prototype:** A dataset-free,
 > non-executable PyTorch prototype now tests the conditional readout's actual
