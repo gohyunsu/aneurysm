@@ -1,5 +1,12 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 selected-rank storage source synchronization:** Exact public
+> scientific source `2ce228364c402433cd4f69836eacd2e68f8ef1b5` is remote
+> exact and passed Research Quality `32056691160` with 850/850 tests. Its
+> automatic Pages run `32056690269` passed but site maintenance remains out of
+> scope. D13B is still dataset-free/non-executable and no rank, field, GPU,
+> result or claim was selected. Never use `junjinyong` or maintain the site.
+
 > **2026-08-18 selected-rank storage correction:** Dataset-free inspection
 > found that a contiguous rank prefix could retain the complete rank-256 basis
 > storage. The decoder now clones only the selected rows, and a storage-level
