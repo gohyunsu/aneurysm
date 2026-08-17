@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 D11 completion and direct-prior next step:** D11 job
+> `116602.ECE-util1`, run ID `d11_gpsunet_r1`, finalized F/exit 0 and stage-out
+> 0 after 161 epochs, selecting epoch 121. It used exactly the 406/51 cache,
+> read no outer/auxiliary values and produced finite field/TAWSS/OSI metrics
+> with full coverage. Raw numeric output, checkpoint and logs are preserved in
+> the PRIVATE repository. Its registered legacy boolean is true, but it is not
+> a paper-success verdict or an absolute gate. D12 directly imports the
+> released official `PyGGraphUNetwTemporalEmbedding` class at `4a090a0…`
+> through the same split/input/metric adapter and has no absolute threshold.
+> The released trainer does not instantiate the repository's GraphGPS/GPSUNet
+> class, so D12 is the actually wired Graph U-Net prior, not an exact RHSIA
+> reproduction. PyG 2.6.1 is isolated from the pinned Torch container. Keep
+> outer sealed, preserve all trials, use only `introai9`, and do not update the
+> site.
+
 > **2026-08-17 highest current operating authority:** Decisions are
 > evidence-led and risk-based, not controlled by an inherited blanket ban.
 > Older statements that a method, repair, retry, question or study family may

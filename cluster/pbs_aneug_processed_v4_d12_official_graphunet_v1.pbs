@@ -1,0 +1,66 @@
+#!/bin/bash
+#PBS -N aurora_d12_prior
+#PBS -q coss_a6gpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=24:00:00
+
+record_root="${PBS_O_WORKDIR:-.}"
+/bin/mkdir -p "$record_root" || exit 70
+if [ -e "$record_root/attempt.started" ]; then
+  printf '%s\n' "This run ID already has an attempt record; choose a new run ID." >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-missing}" > "$record_root/attempt.started" || exit 71
+exec >>"$record_root/attempt.log" 2>&1
+
+attempt_status="$record_root/attempt.status.json"
+status_tmp="$record_root/attempt.status.json.tmp"
+run_complete_json=false
+
+set -euo pipefail
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s,\"run_complete\":%s}\n" "$code" "$(test -e "$record_root/attempt.complete" && printf true || printf false)" "$run_complete_json" > "$status_tmp"; /bin/mv -f "$status_tmp" "$attempt_status"; exit "$code"' EXIT
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_EXPECTED_COMMIT:?set exact Quality-passed commit}"
+: "${AURORA_D12_ACTIVATION:?set private D12 activation}"
+: "${AURORA_D9_CACHE:?set completed private D9 cache}"
+: "${AURORA_OFFICIAL_ROOT:?set clean pinned AneuG-Flow checkout}"
+: "${AURORA_PYG_TARGET:?set isolated PyG target}"
+: "${AURORA_CONTAINER:?set pinned container}"
+: "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+
+actual_commit="$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ "$(/usr/bin/git -C "$AURORA_OFFICIAL_ROOT" rev-parse HEAD)" = "4a090a0f12538deef6fcea88b81afe78ce38152e" ]
+[ -z "$(/usr/bin/git -C "$AURORA_OFFICIAL_ROOT" status --porcelain)" ]
+[ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ]
+[ -f "$AURORA_D9_CACHE/cache_manifest.json" ]
+[ -d "$AURORA_PYG_TARGET/torch_geometric" ]
+[ -r "$AURORA_D12_ACTIVATION" ]
+
+activation_parent="$(/usr/bin/dirname "$AURORA_D12_ACTIVATION")"
+activation_name="$(/usr/bin/basename "$AURORA_D12_ACTIVATION")"
+
+printf 'stage=D12_official_graphunet_started job=%s commit=%s\n' "${PBS_JOBID:-missing}" "$actual_commit"
+/usr/bin/singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$activation_parent:/private/activation:ro" \
+  --bind "$AURORA_D9_CACHE:/cache:ro" \
+  --bind "$AURORA_OFFICIAL_ROOT:/official:ro" \
+  --bind "$AURORA_PYG_TARGET:/pyg:ro" \
+  --bind "$record_root:/output" \
+  "$AURORA_CONTAINER" \
+  /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONPATH=/workspace/src:/pyg:/official \
+  python -m aurora.aneug_processed_v4_d12_official_graphunet \
+  --config /workspace/configs/aneug_processed_v4_d12_official_graphunet_v1.json \
+  --activation "/private/activation/$activation_name" \
+  --expected-commit "$AURORA_EXPECTED_COMMIT" \
+  --cache /cache \
+  --official-root /official \
+  --result /output/d12_result.json \
+  --checkpoint-directory /output/checkpoints
+
+run_complete_json=true
+printf '%s\n' complete > "$record_root/attempt.complete"
+printf '%s\n' 'stage=D12_official_graphunet_complete'

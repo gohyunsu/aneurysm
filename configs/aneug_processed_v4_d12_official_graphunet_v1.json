@@ -1,0 +1,104 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d12_official_graphunet.v1",
+  "protocol_id": "aneug_processed_v4_d12_official_graphunet_v1",
+  "status": "executable_validation_development",
+  "as_of": "2026-08-18",
+  "source": {
+    "repository": "WenHaoDing/AneuG-Flow",
+    "commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "model_class": "new_version.models.DynamicGraphUNet.PyGGraphUNetwTemporalEmbedding",
+    "model_sha256": "5555336cdf09b27a7403aa3c38df871d55c4d2e866ba9ae700aa46ffd635c28a",
+    "graphgps_encoders_sha256": "8c91521c95c6bec745e7d6f23998283c029028874edd0deff444dac38a574f2",
+    "spline_module_sha256": "d1b24314061ff60f7883d4af5866af5cd1d99ded974d229bb01313773a71c15e",
+    "pointnet_module_sha256": "75ff507d8bb19ade126ae840f3273582ca0d0c70a2fd36ab85f09b49775c4b36",
+    "released_trainer_sha256": "8eb0b8ed732503d0c514a0ff96b22161fc2a6b0a7365592f410becdecadea2c6"
+  },
+  "comparison_identity": {
+    "label": "direct_execution_of_released_GraphUNet_model_class_with_protocol_adapter",
+    "exact_end_to_end_reproduction": false,
+    "unchanged_released_model_class_and_forward": true,
+    "declared_adapter_differences": [
+      "D5 component split replaces the released random 90/10 split",
+      "D9 train-defined physical scaling and mesh-derived normals replace release-normalized tensors",
+      "zero waveform is used because waveform_yiying.txt is referenced by code but absent from the pinned code and dataset release",
+      "area-weighted relative field MSE replaces the released composite implementation objective",
+      "deterministic tangent projection is applied before loss and evaluation",
+      "single-GPU snapshot minibatches replace the released DDP launcher",
+      "steady-flow augmentation and wandb are disabled"
+    ],
+    "unused_pytorch3d_import_stub_only": true
+  },
+  "bound_data": {
+    "cache_manifest_sha256": "72e5152fce558cfb9f2a2e36089c28d15a476cb3b943996ad861d07884398247",
+    "train_cases": 406,
+    "validation_cases": 51,
+    "outer_cases": 51,
+    "auxiliary_cases": 70,
+    "phases": 80,
+    "nodes": 13902,
+    "read_outer_or_auxiliary": false
+  },
+  "architecture": {
+    "in_channels": 6,
+    "hidden_channels": 512,
+    "out_channels": 3,
+    "depth": 3,
+    "pool_ratios": [0.25, 0.25, 0.25],
+    "sum_res": true,
+    "activation": "relu",
+    "time_embedding_dim": 8,
+    "waveform_embedding_dim": 8,
+    "waveform": "all_zero_no_extra_information",
+    "output": "snapshot_Cartesian_then_deterministic_tangent_projection"
+  },
+  "optimization": {
+    "seed": 1103,
+    "snapshot_batch_size": 32,
+    "maximum_coverage_epochs": 80,
+    "minimum_coverage_epochs": 20,
+    "validation_interval_coverage_epochs": 5,
+    "early_stopping_validation_checks": 6,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "scheduler": "step_50_gamma_0p75",
+    "step_size_coverage_epochs": 50,
+    "gamma": 0.75,
+    "gradient_clip_norm": 1.0,
+    "loss": "area_weighted_relative_field_MSE",
+    "checkpoint_selection": "lowest_validation_field_relative_L2_then_earliest_check",
+    "checkpoint_policy": "append_only_each_validation_check"
+  },
+  "decision_rule": {
+    "absolute_field_threshold": null,
+    "interpretation": "descriptive_direct_prior_reference_not_pass_fail_gate",
+    "next": "compare_validation_field_functional_compute_and_coverage_then_design_performance_variants"
+  },
+  "dependency": {
+    "torch": "2.5.1+cu118",
+    "torch_geometric": "2.6.1",
+    "torch_geometric_install": "isolated_no_deps_target",
+    "pytorch3d_used_by_model": false
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "24:00:00"
+  },
+  "authorization": {
+    "execute_validation_development": true,
+    "resume_from_interrupted_checkpoint": false,
+    "method_combination_search": false,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}
