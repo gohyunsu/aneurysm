@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 cycle-response residual prototype:** A dataset-free D13B
+> building block now makes the conditional performance method concrete. It
+> predicts positive amplitude and complete-cycle response coordinates from the
+> 432-D GHD token, decodes a case-tangent global field, and combines it through
+> a near-zero-initialized case gate with an interchangeable tangent local
+> backbone. Response-basis overlap is a reported soft penalty; there is no hard
+> projection, rank choice, absolute threshold, field read, GPU job or paper
+> claim. D12 must terminate and D13A must report every oracle rank before a
+> fresh executable D13B contract may exist. Exact implementation/test/config/
+> rationale hashes are `1afc4bb9…6d26` / `e93b9de8…332c` /
+> `2a36db75…8cef` / `291abc0a…f35`; 6 focused and 843 full tests pass. Use
+> only `introai9`, never `junjinyong`, and do not maintain the site.
+
 > **2026-08-18 D13C source synchronization:** Exact public D13C source
 > `0710696abef755ecbb3001641c76052525733d9e` is remote exact and passed
 > Research Quality `32053563054` with 837/837 tests. Automatic Pages run

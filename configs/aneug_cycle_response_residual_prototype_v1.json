@@ -1,0 +1,47 @@
+{
+  "schema_version": "aurora.cycle_response_residual_prototype.v1",
+  "status": "dataset_free_prototype",
+  "as_of": "2026-08-18",
+  "purpose": "verify_global_complete_cycle_response_plus_local_tangent_residual_building_blocks_before_architecture_selection",
+  "representation": {
+    "basis_source": "D13A_train_only_energy_normalized_complete_cycles",
+    "rank_grid": [16, 32, 64, 128, 256],
+    "rank_selected": false,
+    "coefficient_input": "432_dimensional_GHD_geometry_token",
+    "amplitude_pattern_separation": true
+  },
+  "branches": {
+    "positive_amplitude": "centered_exponential",
+    "global_tangent_projection": true,
+    "local_tangent_projection": true,
+    "case_conditioned_residual_gate": "sigmoid_initialized_near_zero",
+    "residual_basis_leakage": "reported_soft_penalty",
+    "hard_basis_projection": false,
+    "allowed_local_backbones": [
+      "D11_GHD_conditioned_GINE_GPS_UNet",
+      "D14_same_information_Transolver_if_validation_competitive"
+    ]
+  },
+  "controlled_variants_after_evidence": [
+    "response_only",
+    "local_backbone_only",
+    "response_plus_local_residual",
+    "response_plus_local_residual_plus_functional_alignment"
+  ],
+  "evidence_boundary": {
+    "absolute_performance_threshold": null,
+    "D12_terminal_required_before_selection": true,
+    "D13A_oracle_required_before_rank_or_execution": true,
+    "rank_choice": "paired_validation_tradeoff_after_reporting_every_registered_oracle_rank",
+    "local_backbone_choice": "D11_or_D14_by_direct_paired_validation_and_compute_evidence",
+    "outer_or_auxiliary_access": false,
+    "paper_claim": false
+  },
+  "runtime_scope": {
+    "execute_now": false,
+    "gpu_job": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "maintain_public_site": false
+  }
+}

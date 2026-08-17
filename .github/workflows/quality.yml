@@ -111,6 +111,8 @@ jobs:
         run: |
           PYTHONPATH=src python -m aurora.aneug_processed_v4_d13c_functional_finetune --config configs/aneug_processed_v4_d13c_functional_finetune_v1.json --validate-only
           bash -n cluster/pbs_aneug_processed_v4_d13c_functional_finetune_v1.pbs
+      - name: Validate cycle-response residual prototype
+        run: PYTHONPATH=src python -c "import json; from pathlib import Path; from aurora.cycle_response_residual import validate_config; validate_config(json.loads(Path('configs/aneug_cycle_response_residual_prototype_v1.json').read_text()))"
       - name: Validate prepared AneuG D14 Transolver control
         run: |
           PYTHONPATH=src python -m aurora.aneug_processed_v4_d14_transolver_control --config configs/aneug_processed_v4_d14_transolver_control_v1.json --validate-only
