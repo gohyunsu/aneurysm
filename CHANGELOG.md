@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-17 · D8 mesh-normal identifiability audit activated
+
+- Registered a fresh user-selected train-only audit of deterministic mesh-
+  derived normals without changing or reopening any closed D7 threshold.
+- Stored-normal magnitude cutoffs are descriptive only. The noncompensatory
+  gate uses frozen mesh-normal coverage, unit norm, direction agreement and
+  global/case-level WSS tangency checks.
+- Added a one-shot introai9 CPU 4 / 64 GB / GPU-0 runner and early-record PBS
+  wrapper. All numeric outcomes stay private; no model, GPU, validation/outer,
+  paper claim or static-site work is authorized by registration.
+
 ## 2026-08-17 · D7 selected train-field admission activation
 
 - Registered a fresh user-selected, one-shot D7 execution contract without

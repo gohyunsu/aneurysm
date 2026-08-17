@@ -80,6 +80,10 @@ jobs:
         run: |
           PYTHONPATH=src python -m aurora.aneug_processed_v4_d7_execution --execution-config configs/aneug_processed_v4_d7_execution_v1.json --validate-only
           bash -n cluster/pbs_aneug_processed_v4_d7_execution_v1.pbs
+      - name: Validate fresh human-activated AneuG processed-v4 D8 geometry audit
+        run: |
+          PYTHONPATH=src python -m aurora.aneug_processed_v4_d8_geometry_normal_audit --config configs/aneug_processed_v4_d8_geometry_normal_audit_v1.json --validate-only
+          bash -n cluster/pbs_aneug_processed_v4_d8_geometry_normal_audit_v1.pbs
       - name: Validate conditional non-executable AneuG bounded GPU development template
         run: PYTHONPATH=src python -m aurora.aneug_cycle_moment_bounded_development_template --config configs/aneug_cycle_moment_bounded_development_template_v1.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0

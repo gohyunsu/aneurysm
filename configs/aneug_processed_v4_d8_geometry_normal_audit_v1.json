@@ -1,0 +1,137 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d8_geometry_normal_audit.v1",
+  "protocol_id": "aneug_processed_v4_mesh_normal_identifiability_d8_v1",
+  "status": "human_activated_executable",
+  "as_of": "2026-08-17",
+  "human_activation": {
+    "explicitly_selected": true,
+    "selection": "D8",
+    "selected_on": "2026-08-17",
+    "fresh_scientifically_distinct_version": true,
+    "does_not_change_or_reinterpret_d7_thresholds": true,
+    "does_not_repair_resume_rerun_reopen_or_relabel_d7": true
+  },
+  "question": {
+    "primary": "whether coordinates and shared faces identify stable unit surface normals whose WSS tangency supports a mesh-canonicalized target representation",
+    "stored_normal_magnitude_is_descriptive_only": true,
+    "deterministic_geometry_repair_is_novelty": false,
+    "model_architecture_or_paper_claim": false
+  },
+  "bound_inputs": {
+    "d5_private_manifest_sha256": "0f95cf303fa63b58c049e722864389c1432460686e335d20402b677c368181d6",
+    "d5_train_split_sha256": "df583f3553ce4efcf0588da5bdc029921025648c1981eba3a85fe3841d2bf26e",
+    "expected_train_cases": 406,
+    "expected_validation_cases": 51,
+    "expected_outer_test_cases": 51,
+    "expected_timesteps": 80,
+    "expected_nodes": 13902,
+    "expected_channels": 9,
+    "expected_labels": [
+      "x",
+      "y",
+      "z",
+      "x_normal",
+      "y_normal",
+      "z_normal",
+      "wss_x",
+      "wss_y",
+      "wss_z"
+    ],
+    "physical_decoder_formula": "physical=normalized*(std+1e-5)+mean",
+    "physical_decoder_epsilon": 0.00001
+  },
+  "source_identity": {
+    "transient": {
+      "relative_server_path": "processed_v4_d3/assembled_registered_data_1k_v4.pth",
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "steady": {
+      "relative_server_path": "processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary",
+      "bytes": 9632510050,
+      "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+    }
+  },
+  "read_boundary": {
+    "allowed_tensor_values": "d5_train_cases_only",
+    "read_train_tensor_values": true,
+    "read_shared_finest_faces": true,
+    "read_validation_tensor_values": false,
+    "read_outer_test_tensor_values": false,
+    "read_auxiliary_tensor_values": false,
+    "publish_case_ids_or_split_members": false,
+    "fit_or_select_model": false
+  },
+  "descriptive_stored_normal_census": {
+    "lower_magnitude_cutoffs": [0.001, 0.01, 0.1, 0.5],
+    "upper_magnitude_cutoff": 1.5,
+    "thresholds_select_or_change_gate": false,
+    "report_counts_and_fractions_only": true
+  },
+  "prospective_gate": {
+    "all_checks_required": true,
+    "maximum_static_coordinate_normalized_abs_error": 0.000001,
+    "minimum_nondegenerate_face_fraction_per_case": 0.999,
+    "minimum_mesh_unit_normal_valid_fraction_per_case": 0.999,
+    "maximum_mesh_unit_normal_abs_error": 1e-12,
+    "direction_support_minimum_stored_normal_magnitude": 0.5,
+    "minimum_global_p05_absolute_mesh_stored_direction_cosine": 0.9,
+    "tangency_mask_minimum_fraction_of_case_p99_wss_magnitude": 0.01,
+    "maximum_global_mesh_normal_component_ratio_median": 0.05,
+    "maximum_global_mesh_normal_component_ratio_p95": 0.25,
+    "minimum_case_fraction_passing_same_tangency_limits": 0.95,
+    "histogram_bins": 10000,
+    "scientific_verdict_before_execution": null
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "03:00:00",
+    "maximum_pbs_attempts": 1,
+    "attempts_used_before_submission": 0,
+    "one_interrupted_attempt_may_resume": false,
+    "rerun_or_repair_after_any_outcome": false,
+    "precreate_private_record_directory": true,
+    "attempt_marker_and_internal_log_before_strict_mode": true,
+    "source_etc_profile_inside_wrapper": false,
+    "scheduler_stdout_stderr_is_evidence": false,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong",
+    "exact_quality_passed_clean_commit_required": true,
+    "private_activation_manifest_required": true
+  },
+  "output_contract": {
+    "record_directory_name": "aneug_processed_v4_d8_geometry_normal_audit_v1",
+    "aggregate_filename": "geometry_normal_audit.json",
+    "private_statistics_filename": "private_geometry_normal_statistics.json",
+    "attempt_status_filename": "attempt.status.json",
+    "all_numeric_results_private": true,
+    "atomic_json": true,
+    "refuse_existing_output": true,
+    "case_ids_absent_from_outputs": true
+  },
+  "consequence": {
+    "any_attempt_outcome_closes_d8": true,
+    "pass_permits_only_fresh_mesh_canonicalized_train_validation_development_registration": true,
+    "pass_permits_outer_test_access": false,
+    "pass_permits_immediate_gpu_training": false,
+    "pass_is_paper_result": false,
+    "failure_or_incomplete_permits_same_contract_repair": false
+  },
+  "authorization": {
+    "execute_d8_now": true,
+    "submit_one_cpu_pbs": true,
+    "monitor_that_attempt": true,
+    "read_d5_train_field_values": true,
+    "read_validation_or_outer_field_values": false,
+    "fit_or_select_model": false,
+    "gpu_training": false,
+    "paper_result_or_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false
+  }
+}
