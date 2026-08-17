@@ -1,0 +1,132 @@
+#!/bin/bash
+#PBS -N aurora_d9_gpuenv2
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=2:mem=16gb:ngpus=1
+#PBS -l walltime=00:15:00
+
+record_root="${PBS_O_WORKDIR:-.}"
+/bin/mkdir -p "$record_root" || exit 70
+if [ -e "$record_root/attempt.started" ]; then
+  printf '%s\n' "This run ID already has an attempt record; choose a new run ID." >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-missing}" > "$record_root/attempt.started" || exit 71
+exec >>"$record_root/attempt.log" 2>&1
+
+attempt_status="$record_root/attempt.status.json"
+status_tmp="$record_root/attempt.status.json.tmp"
+probe_pass=false
+
+set -uo pipefail
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s,\"probe_pass\":%s}\n" "$code" "$(test -e "$record_root/attempt.complete" && printf true || printf false)" "$probe_pass" > "$status_tmp"; /bin/mv -f "$status_tmp" "$attempt_status"; exit "$code"' EXIT
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_EXPECTED_COMMIT:?set exact Quality-passed commit}"
+: "${AURORA_HOST_PYTHON:?set host diagnostic Python}"
+: "${AURORA_CONTAINER:?set pinned container}"
+: "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+
+actual_commit="$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ] || exit 72
+[ -z "$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ] || exit 73
+[ -x "$AURORA_HOST_PYTHON" ] || exit 74
+[ -r "$AURORA_CONTAINER" ] || exit 75
+[ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ] || exit 76
+
+printf 'stage=gpu_runtime_revalidation_v2_started job=%s commit=%s\n' "${PBS_JOBID:-missing}" "$actual_commit"
+
+{
+  printf 'CUDA_VISIBLE_DEVICES=%s\n' "${CUDA_VISIBLE_DEVICES-<unset>}"
+  printf 'NVIDIA_VISIBLE_DEVICES=%s\n' "${NVIDIA_VISIBLE_DEVICES-<unset>}"
+  printf 'LD_LIBRARY_PATH=%s\n' "${LD_LIBRARY_PATH-<unset>}"
+  /usr/bin/nvidia-smi -L
+  /bin/cat /proc/driver/nvidia/version 2>/dev/null || true
+  for device in /dev/nvidiactl /dev/nvidia-uvm /dev/nvidia-uvm-tools /dev/nvidia0 /dev/nvidia1; do
+    if [ -e "$device" ]; then
+      /usr/bin/stat -Lc '%n mode=%a owner=%U group=%G major_minor=%t:%T' "$device"
+    else
+      printf '%s missing\n' "$device"
+    fi
+  done
+} > "$record_root/device_environment.private.log" 2>&1
+
+set +e
+/usr/bin/nvidia-smi > "$record_root/nvidia-smi.private.log" 2>&1
+nvidia_rc=$?
+
+/usr/bin/env PYTHONDONTWRITEBYTECODE=1 "$AURORA_HOST_PYTHON" \
+  "$AURORA_PROJECT_ROOT/experiments/cuda_driver_probe.py" \
+  --output "$record_root/driver_host_inherited.private.json" > "$record_root/driver_host_inherited.private.log" 2>&1
+driver_host_inherited_rc=$?
+/usr/bin/env CUDA_VISIBLE_DEVICES=0 PYTHONDONTWRITEBYTECODE=1 "$AURORA_HOST_PYTHON" \
+  "$AURORA_PROJECT_ROOT/experiments/cuda_driver_probe.py" \
+  --output "$record_root/driver_host_zero.private.json" > "$record_root/driver_host_zero.private.log" 2>&1
+driver_host_zero_rc=$?
+/usr/bin/env -u CUDA_VISIBLE_DEVICES PYTHONDONTWRITEBYTECODE=1 "$AURORA_HOST_PYTHON" \
+  "$AURORA_PROJECT_ROOT/experiments/cuda_driver_probe.py" \
+  --output "$record_root/driver_host_unset.private.json" > "$record_root/driver_host_unset.private.log" 2>&1
+driver_host_unset_rc=$?
+
+/usr/bin/env PYTHONDONTWRITEBYTECODE=1 "$AURORA_HOST_PYTHON" \
+  "$AURORA_PROJECT_ROOT/experiments/gpu_smoke.py" --output "$record_root/torch_host_inherited" \
+  > "$record_root/torch_host_inherited.private.log" 2>&1
+torch_host_inherited_rc=$?
+/usr/bin/env CUDA_VISIBLE_DEVICES=0 PYTHONDONTWRITEBYTECODE=1 "$AURORA_HOST_PYTHON" \
+  "$AURORA_PROJECT_ROOT/experiments/gpu_smoke.py" --output "$record_root/torch_host_zero" \
+  > "$record_root/torch_host_zero.private.log" 2>&1
+torch_host_zero_rc=$?
+/usr/bin/env -u CUDA_VISIBLE_DEVICES PYTHONDONTWRITEBYTECODE=1 "$AURORA_HOST_PYTHON" \
+  "$AURORA_PROJECT_ROOT/experiments/gpu_smoke.py" --output "$record_root/torch_host_unset" \
+  > "$record_root/torch_host_unset.private.log" 2>&1
+torch_host_unset_rc=$?
+
+for visibility in inherited zero unset; do
+  driver_output="/output/driver_container_${visibility}.private.json"
+  driver_log="$record_root/driver_container_${visibility}.private.log"
+  torch_output="/output/torch_container_${visibility}"
+  torch_log="$record_root/torch_container_${visibility}.private.log"
+  if [ "$visibility" = zero ]; then
+    container_env=(/usr/bin/env CUDA_VISIBLE_DEVICES=0 PYTHONDONTWRITEBYTECODE=1)
+  elif [ "$visibility" = unset ]; then
+    container_env=(/usr/bin/env -u CUDA_VISIBLE_DEVICES PYTHONDONTWRITEBYTECODE=1)
+  else
+    container_env=(/usr/bin/env PYTHONDONTWRITEBYTECODE=1)
+  fi
+
+  /usr/bin/singularity exec --nv --cleanenv \
+    --bind "$AURORA_PROJECT_ROOT:/workspace:ro" --bind "$record_root:/output" \
+    "$AURORA_CONTAINER" "${container_env[@]}" \
+    python /workspace/experiments/cuda_driver_probe.py --output "$driver_output" \
+    > "$driver_log" 2>&1
+  eval "driver_container_${visibility}_rc=$?"
+
+  /usr/bin/singularity exec --nv --cleanenv \
+    --bind "$AURORA_PROJECT_ROOT:/workspace:ro" --bind "$record_root:/output" \
+    "$AURORA_CONTAINER" "${container_env[@]}" \
+    python /workspace/experiments/gpu_smoke.py --output "$torch_output" \
+    > "$torch_log" 2>&1
+  eval "torch_container_${visibility}_rc=$?"
+done
+set -e
+
+selected_runtime=null
+if [ "$nvidia_rc" -eq 0 ] && [ "$driver_container_inherited_rc" -eq 0 ] && [ "$torch_container_inherited_rc" -eq 0 ]; then
+  selected_runtime=pinned_container_inherited
+elif [ "$nvidia_rc" -eq 0 ] && [ "$driver_container_zero_rc" -eq 0 ] && [ "$torch_container_zero_rc" -eq 0 ]; then
+  selected_runtime=pinned_container_cuda_visible_devices_0
+elif [ "$nvidia_rc" -eq 0 ] && [ "$driver_container_unset_rc" -eq 0 ] && [ "$torch_container_unset_rc" -eq 0 ]; then
+  selected_runtime=pinned_container_cuda_visible_devices_unset
+fi
+[ "$selected_runtime" = null ] || probe_pass=true
+
+printf '{"schema_version":"aurora.aneug_d9_gpu_runtime_revalidation.result.v2","job_id":"%s","predecessor_job_id":"116551.ECE-util1","nvidia_smi_exit":%s,"driver_host":{"inherited":%s,"zero":%s,"unset":%s},"torch_host":{"inherited":%s,"zero":%s,"unset":%s},"driver_container":{"inherited":%s,"zero":%s,"unset":%s},"torch_container":{"inherited":%s,"zero":%s,"unset":%s},"selected_runtime":"%s","probe_pass":%s}\n' \
+  "${PBS_JOBID:-missing}" "$nvidia_rc" \
+  "$driver_host_inherited_rc" "$driver_host_zero_rc" "$driver_host_unset_rc" \
+  "$torch_host_inherited_rc" "$torch_host_zero_rc" "$torch_host_unset_rc" \
+  "$driver_container_inherited_rc" "$driver_container_zero_rc" "$driver_container_unset_rc" \
+  "$torch_container_inherited_rc" "$torch_container_zero_rc" "$torch_container_unset_rc" \
+  "$selected_runtime" "$probe_pass" > "$record_root/probe_result.private.json"
+
+[ "$probe_pass" = true ]
+printf '%s\n' complete > "$record_root/attempt.complete"
+printf 'stage=gpu_runtime_revalidation_v2_complete selected_runtime=%s\n' "$selected_runtime"

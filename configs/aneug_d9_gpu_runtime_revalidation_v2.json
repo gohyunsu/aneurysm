@@ -1,0 +1,62 @@
+{
+  "schema_version": "aurora.aneug_d9_gpu_runtime_revalidation.v2",
+  "protocol_id": "aneug_d9_gpu_runtime_revalidation_v2",
+  "status": "executable_engineering_diagnostic",
+  "as_of": "2026-08-17",
+  "predecessor": {
+    "run_id": "d9_gpuenv_r1",
+    "job_id": "116551.ECE-util1",
+    "nvidia_smi_exit": 0,
+    "host_torch_exit": 1,
+    "container_torch_exit": 1,
+    "common_error": "cuda_initialization_unknown_error",
+    "scientific_asset_reads": 0
+  },
+  "diagnostic_delta": {
+    "record_selected_cuda_environment_keys": true,
+    "record_nvidia_device_nodes_and_uvm_presence": true,
+    "call_low_level_cu_init_and_device_count": true,
+    "visibility_variants": ["inherited", "explicit_zero", "unset"],
+    "compare_host_and_pinned_container": true,
+    "same_error_without_information_gain": false
+  },
+  "runtime": {
+    "host_python": "/home/introai9/miniconda3/bin/python",
+    "container_path": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+    "container_bytes": 3204870144,
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "preferred_runtime": "pinned_container"
+  },
+  "scope": {
+    "engineering_only": true,
+    "dataset_path_in_wrapper": false,
+    "tensor_mesh_model_or_metric_read": false,
+    "scientific_verdict": false,
+    "raw_results_private": true
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 2,
+    "memory_gb": 16,
+    "ngpus": 1,
+    "walltime": "00:15:00",
+    "new_run_id_required": true,
+    "excluded_server": "junjinyong"
+  },
+  "decision": {
+    "pass": "nvidia_smi_and_matching_container_cu_init_and_torch_smoke_pass",
+    "runtime_priority": [
+      "pinned_container_inherited",
+      "pinned_container_cuda_visible_devices_0",
+      "pinned_container_cuda_visible_devices_unset"
+    ],
+    "pass_authorizes": "new_id_D9_R0_with_selected_environment_normalization",
+    "all_variants_fail": "document_admin_or_scheduler_level_cuda_blocker_and_supply_exact_low_level_evidence"
+  },
+  "privacy": {
+    "public_numeric_result": false,
+    "public_site_update_required": false
+  }
+}

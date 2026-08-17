@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-17 · D9 GPU runtime revalidation R2 registered
+
+- R1 separated working scheduler device reporting from a shared host/container
+  CUDA initialization failure before all scientific access.
+- Added a data-free low-level driver probe, NVIDIA/UVM device-node inventory and
+  inherited/explicit-zero/unset device-visibility comparisons. A matching
+  pinned-container driver and Torch pass selects the exact D9 retry environment;
+  otherwise the records identify an administrator/scheduler-level blocker.
+
 ## 2026-08-17 · D9 GPU runtime revalidation registered
 
 - Added a data-free PBS diagnostic that compares the failed host/user-site

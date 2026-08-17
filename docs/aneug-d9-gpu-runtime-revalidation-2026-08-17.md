@@ -34,3 +34,19 @@ dataset or training access.
 All logs and runtime results remain private. The diagnostic contains no AneuG
 data path, field read, model, metric or scientific endpoint and does not update
 the public site.
+
+## R1 outcome and R2 diagnostic delta
+
+R1 completed with scheduler device visibility but both host and pinned-
+container Torch CUDA initialization failed. This rejects only the narrow
+host-package explanation; it is still compatible with a bad inherited device
+variable, missing/inaccessible UVM nodes, scheduler binding or low-level driver
+initialization failure.
+
+R2 therefore adds information rather than repeating R1. It records only
+selected CUDA/NVIDIA environment keys and `/dev/nvidia*` metadata, calls
+`cuInit` and `cuDeviceGetCount` without Torch, and compares inherited,
+`CUDA_VISIBLE_DEVICES=0` and unset conditions in both runtimes. A matching
+low-level and Torch pass in the pinned container selects the exact environment
+normalization for D9 R0. If every condition fails, the records provide a
+specific administrator/scheduler-level CUDA report and training remains paused.

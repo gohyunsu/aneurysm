@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D9 GPU-runtime R1 outcome and R2 registration:** R1 job
+> `116551.ECE-util1` had working scheduler `nvidia-smi` but the same CUDA
+> initialization failure in host/user-site Torch and the pinned container,
+> before any scientific path or read. R2 is an information-gaining data-free
+> diagnostic: selected environment keys, NVIDIA/UVM device nodes, low-level
+> `cuInit` and inherited/zero/unset visibility variants across both runtimes.
+> A matching pinned-container driver plus Torch pass selects the D9 R0 runtime;
+> all-variant failure produces an administrator-level blocker record. This is
+> engineering evidence, not a dataset/model/scientific failure. Use only
+> `introai9`; never access `junjinyong`, and do not update the site.
+
 > **2026-08-17 D9 GPU-runtime revalidation registration:** The first action
 > under the current iterative policy is a data-free, one-allocation comparison
 > of scheduler `nvidia-smi`, the original host/user-site Torch runtime and the
