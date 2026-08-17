@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 D12 pre-submit source-pin correction:** A field-free introai9
+> import smoke found a one-character transcription error in the pinned
+> `GraphGPS_encoders.py` SHA-256. No PBS job, GPU, case tensor or scientific
+> result was created. The canonical clean-checkout hash is
+> `8c91521c95c6bec7458e7d6f23998283c029028874edd0deff444dac38a574f2`;
+> the corrected config and regression assertion require fresh Quality and
+> private activation before submission. Model, split, input, objective,
+> optimization and metric are unchanged.
+
 > **2026-08-18 D11 completion and direct-prior next step:** D11 job
 > `116602.ECE-util1`, run ID `d11_gpsunet_r1`, finalized F/exit 0 and stage-out
 > 0 after 161 epochs, selecting epoch 121. It used exactly the 406/51 cache,

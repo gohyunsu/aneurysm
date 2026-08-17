@@ -8,7 +8,7 @@
     "commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
     "model_class": "new_version.models.DynamicGraphUNet.PyGGraphUNetwTemporalEmbedding",
     "model_sha256": "5555336cdf09b27a7403aa3c38df871d55c4d2e866ba9ae700aa46ffd635c28a",
-    "graphgps_encoders_sha256": "8c91521c95c6bec745e7d6f23998283c029028874edd0deff444dac38a574f2",
+    "graphgps_encoders_sha256": "8c91521c95c6bec7458e7d6f23998283c029028874edd0deff444dac38a574f2",
     "spline_module_sha256": "d1b24314061ff60f7883d4af5866af5cd1d99ded974d229bb01313773a71c15e",
     "pointnet_module_sha256": "75ff507d8bb19ade126ae840f3273582ca0d0c70a2fd36ab85f09b49775c4b36",
     "released_trainer_sha256": "8eb0b8ed732503d0c514a0ff96b22161fc2a6b0a7365592f410becdecadea2c6"

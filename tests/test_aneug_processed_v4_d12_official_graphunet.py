@@ -30,6 +30,10 @@ class D12OfficialGraphUNetTests(unittest.TestCase):
         )
         self.assertTrue(identity["unchanged_released_model_class_and_forward"])
         self.assertFalse(identity["exact_end_to_end_reproduction"])
+        self.assertEqual(
+            config["source"]["graphgps_encoders_sha256"],
+            "8c91521c95c6bec7458e7d6f23998283c029028874edd0deff444dac38a574f2",
+        )
         self.assertIsNone(config["decision_rule"]["absolute_field_threshold"])
         self.assertFalse(config["bound_data"]["read_outer_or_auxiliary"])
         self.assertFalse(config["authorization"]["outer_test"])
