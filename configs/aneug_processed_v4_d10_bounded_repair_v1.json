@@ -1,0 +1,83 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d10_bounded_repair.v1",
+  "protocol_id": "aneug_processed_v4_d10_bounded_repair_v1",
+  "status": "executable_round1_validation_only",
+  "as_of": "2026-08-17",
+  "bound_evidence": {
+    "cache_manifest_sha256": "72e5152fce558cfb9f2a2e36089c28d15a476cb3b943996ad861d07884398247",
+    "d9_direct_result_sha256": "47eb95e21ea2a0f9fb5d8acf631e2a240a0cad3de514865a1c6cc1e444575d0a",
+    "d9_aggregate_sha256": "817c5d1afb9b29a399f950ace8f0ac79678983c0bc8639dcda05add2725f67c2",
+    "d9a_result_sha256": "0e2751b0aa2ab73b091c369431012bb06ea281f7f9667f82dbd9a96fd6974d2d",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "official_trainer_sha256": "8eb0b8ed732503d0c514a0ff96b22161fc2a6b0a7365592f410becdecadea2c6",
+    "official_default_epochs": 251,
+    "official_settings_are_duration_rationale_not_a_matched_result": true
+  },
+  "immutable_boundary": {
+    "train_cases": 406,
+    "validation_cases": 51,
+    "outer_cases": 51,
+    "auxiliary_cases": 70,
+    "change_backbone": false,
+    "change_loss": false,
+    "change_seed": false,
+    "change_split": false,
+    "change_metric": false,
+    "change_threshold": false,
+    "read_outer_or_auxiliary": false
+  },
+  "bounded_repair_budget": {
+    "maximum_repair_rounds": 2,
+    "current_round": 1,
+    "maximum_training_jobs": 2,
+    "maximum_total_requested_gpu_hours": 8,
+    "maximum_concurrent_jobs": 1,
+    "unused_budget_cannot_create_another_round": true,
+    "all_failed_and_completed_runs_preserved": true
+  },
+  "round1_optimization_horizon": {
+    "single_failure_hypothesis": "D9 direct baseline was under-trained by a 20-epoch cosine horizon",
+    "only_material_change": "extend the same cosine optimization horizon and its early-stopping observation window",
+    "seed": 1103,
+    "maximum_epochs": 251,
+    "minimum_epochs": 60,
+    "early_stopping_patience": 25,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "scheduler": "cosine_to_0p1_initial_over_251_epochs",
+    "gradient_accumulation_cases": 4,
+    "gradient_clip_norm": 1.0,
+    "checkpoint_selection": "lowest_validation_field_relative_L2_then_earliest_epoch",
+    "direct_feasibility_threshold": 0.35,
+    "failure_action": "abandon_custom_backbone_and_register_official_strong_baseline_adaptation"
+  },
+  "conditional_round2_projection_alignment": {
+    "executable_now": false,
+    "requires_round1_pass": true,
+    "requires_separate_public_implementation_quality_and_private_activation": true,
+    "only_allowed_change": "compute moment training field loss through the same exact projection used at validation",
+    "same_round1_horizon_seed_backbone_cache_metrics_and_thresholds": true,
+    "failure_action": "reject_hard_projection_method_identity",
+    "pass_action": "register_fresh_seed_prospective_validation_reentry_not_outer_test"
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "04:00:00"
+  },
+  "authorization": {
+    "execute_round1_once": true,
+    "execute_round2_now": false,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_result_or_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "excluded_server": "junjinyong"
+  }
+}

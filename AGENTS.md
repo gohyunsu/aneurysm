@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D10 bounded repair registration:** D9 remains failed and D9A
+> remains attribution only. D10 predeclares at most two validation repair
+> rounds and two training jobs. Round 1 changes only the direct cosine horizon
+> from 20 to at most 251 epochs, retaining seed/backbone/loss/cache/metric and
+> the original 0.35 threshold. Failure abandons the custom backbone. Round 2
+> stays non-executable and could only align moment train/eval projection after
+> a Round 1 pass and fresh activation. Outer/auxiliary and paper claims remain
+> closed; numeric results are private. Never use `junjinyong` or update site.
+
 > **2026-08-17 D9A projection attribution registration:** D9 completed but
 > failed its private noncompensatory validation screen; outer/auxiliary remain
 > sealed and D9 is not relabelled. D9A is a frozen-checkpoint, validation-only,

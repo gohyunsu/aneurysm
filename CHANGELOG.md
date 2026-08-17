@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-08-17 · D10 bounded optimization-horizon repair registered
+
+- Capped validation repair at two rounds/two training jobs and registered only
+  Round 1: same direct model and evidence contract with a 251-epoch horizon.
+- Kept Round 2 conditional and non-executable; a Round 1 failure abandons the
+  custom backbone rather than opening another tuning loop.
+
 ## 2026-08-17 · D9A projection attribution registered
 
 - Registered a no-fit, validation-only comparison of the frozen moment-POD
