@@ -30,3 +30,9 @@ The decoder copies only the selected basis rows into independent storage.
 Consequently a rank-16 or rank-32 run does not silently retain the full
 rank-256 basis allocation on the GPU; parameter/memory comparisons reflect the
 declared rank rather than an implementation view.
+
+The architectural variants also have real compute boundaries. A response-only
+model may be constructed without a local backbone and never evaluates one; a
+local-only forward never evaluates the response head. Thus the ablation does
+not charge an unused branch to one row or attribute its hidden compute to
+another.

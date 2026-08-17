@@ -102,6 +102,17 @@ def _weighted_flatten(
     return (field * factor).reshape(-1)
 
 
+def _basis_leakage(
+    field: torch.Tensor,
+    basis: torch.Tensor,
+    reference_weights: torch.Tensor,
+) -> torch.Tensor:
+    weighted = _weighted_flatten(field, reference_weights)
+    energy = torch.sum(weighted.square())
+    coordinates = basis @ weighted
+    return torch.sum(coordinates.square()) / torch.clamp(energy, min=1e-12)
+
+
 class CycleResponseResidualDecoder(nn.Module):
     """Decode complete-cycle basis coordinates and a tangent local residual."""
 
@@ -179,11 +190,8 @@ class CycleResponseResidualDecoder(nn.Module):
             coefficients, log_amplitude_offset, normals
         )
         local_residual = tangent_projection(raw_local_residual, normals)
-        weighted_residual = _weighted_flatten(local_residual, self.reference_weights)
-        residual_energy = torch.sum(weighted_residual.square())
-        basis_coordinates = self.response_basis @ weighted_residual
-        leakage = torch.sum(basis_coordinates.square()) / torch.clamp(
-            residual_energy, min=1e-12
+        leakage = _basis_leakage(
+            local_residual, self.response_basis, self.reference_weights
         )
         gate = torch.zeros((), dtype=global_field.dtype, device=global_field.device)
         if not response_only:
@@ -205,7 +213,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
 
     def __init__(
         self,
-        local_backbone: nn.Module,
+        local_backbone: nn.Module | None,
         basis_payload: Mapping[str, Any],
         *,
         rank: int,
@@ -231,26 +239,63 @@ class GHDConditionedCycleResponseResidual(nn.Module):
             final.bias[-1] = -2.0
 
     def forward(
-        self, case: Mapping[str, torch.Tensor], *, response_only: bool = False
+        self,
+        case: Mapping[str, torch.Tensor],
+        *,
+        variant: str = "response_plus_residual",
     ) -> dict[str, torch.Tensor]:
         _require("ghd" in case and "normals" in case, "case_features")
+        _require(
+            variant in {"response_only", "local_only", "response_plus_residual"},
+            "variant",
+        )
+        normals = case["normals"]
+        if variant == "local_only":
+            _require(self.local_backbone is not None, "local_backbone")
+            local = self.local_backbone(case)
+            _require("field" in local, "backbone_output")
+            field = tangent_projection(local["field"], normals)
+            zero = field.new_zeros(())
+            leakage = _basis_leakage(
+                field,
+                self.decoder.response_basis,
+                self.decoder.reference_weights,
+            )
+            return {
+                "field": field,
+                "global_field": torch.zeros_like(field),
+                "local_residual": field,
+                "raw_local_backbone_field": local["field"],
+                "coefficients": field.new_zeros(self.decoder.rank),
+                "amplitude": zero,
+                "residual_gate": field.new_ones(()),
+                "residual_basis_leakage": leakage,
+            }
+
         token = case["ghd"].reshape(-1)
         _require(token.shape == (432,), "ghd_shape")
         response = self.response_head(token)
         coefficients = response[: self.decoder.rank]
         log_amplitude_offset = response[self.decoder.rank : self.decoder.rank + 1]
         residual_gate_logit = response[self.decoder.rank + 1 :]
-        local = self.local_backbone(case)
-        _require("field" in local, "backbone_output")
+        if variant == "response_only":
+            local_field = normals.new_zeros(
+                (self.decoder.phases, self.decoder.nodes, 3)
+            )
+        else:
+            _require(self.local_backbone is not None, "local_backbone")
+            local = self.local_backbone(case)
+            _require("field" in local, "backbone_output")
+            local_field = local["field"]
         decoded = self.decoder(
             coefficients,
             log_amplitude_offset,
-            local["field"],
+            local_field,
             residual_gate_logit,
-            case["normals"],
-            response_only=response_only,
+            normals,
+            response_only=variant == "response_only",
         )
-        decoded["raw_local_backbone_field"] = local["field"]
+        decoded["raw_local_backbone_field"] = local_field
         return decoded
 
 

@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 architecture-ablation compute boundary:** The dataset-free
+> wrapper now has three explicit forwards. `response_only` can be constructed
+> without a local backbone and never calls one; `local_only` never calls the
+> response head but still reports its actual response-basis leakage; and
+> `response_plus_residual` evaluates both branches. This prevents hidden
+> unused-branch compute or parameters from contaminating D13B ablations. Exact
+> implementation/test/rationale hashes are `266f10d5…1ee8` /
+> `702c8964…70a1` / `a280594c…c877`; 9 focused and 852 full tests pass. No
+> architecture, rank, result or execution is selected. Never use `junjinyong`
+> or maintain the site.
+
 > **2026-08-18 selected-rank storage source synchronization:** Exact public
 > scientific source `2ce228364c402433cd4f69836eacd2e68f8ef1b5` is remote
 > exact and passed Research Quality `32056691160` with 850/850 tests. Its

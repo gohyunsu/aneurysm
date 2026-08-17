@@ -43,8 +43,10 @@ class DummyBackbone(nn.Module):
     def __init__(self, phases: int, nodes: int):
         super().__init__()
         self.field = nn.Parameter(torch.randn(phases, nodes, 3) * 0.01)
+        self.calls = 0
 
     def forward(self, case):
+        self.calls += 1
         return {"field": self.field}
 
 
@@ -144,6 +146,45 @@ class CycleResponseResidualTests(unittest.TestCase):
         head_grads = [parameter.grad for parameter in model.response_head.parameters()]
         self.assertTrue(all(gradient is not None for gradient in head_grads))
         self.assertTrue(all(torch.isfinite(gradient).all() for gradient in head_grads))
+
+    def test_response_only_omits_local_backbone_compute_and_parameters(self):
+        payload = synthetic_payload()
+        model = GHDConditionedCycleResponseResidual(
+            None, payload, rank=3, width=16
+        )
+        case = {"ghd": torch.randn(432), "normals": normals(5)}
+        output = model(case, variant="response_only")
+        self.assertEqual(float(output["residual_gate"]), 0.0)
+        self.assertTrue(
+            torch.equal(
+                output["raw_local_backbone_field"], torch.zeros_like(output["field"])
+            )
+        )
+        self.assertFalse(
+            any("local_backbone" in name for name, _ in model.named_parameters())
+        )
+
+    def test_response_only_skips_present_backbone_and_local_only_skips_head(self):
+        payload = synthetic_payload()
+        backbone = DummyBackbone(4, 5)
+        model = GHDConditionedCycleResponseResidual(
+            backbone, payload, rank=3, width=16
+        )
+        case = {"ghd": torch.randn(432), "normals": normals(5)}
+        response = model(case, variant="response_only")
+        self.assertEqual(backbone.calls, 0)
+        response["field"].square().mean().backward()
+        self.assertIsNone(backbone.field.grad)
+        model.zero_grad(set_to_none=True)
+        local = model(case, variant="local_only")
+        self.assertEqual(backbone.calls, 1)
+        self.assertTrue(torch.isfinite(local["residual_basis_leakage"]))
+        self.assertGreaterEqual(float(local["residual_basis_leakage"]), 0.0)
+        local["field"].square().mean().backward()
+        self.assertTrue(torch.isfinite(backbone.field.grad).all())
+        self.assertTrue(
+            all(parameter.grad is None for parameter in model.response_head.parameters())
+        )
 
     def test_rejects_nonorthonormal_basis(self):
         payload = synthetic_payload()
