@@ -76,6 +76,10 @@ jobs:
           bash -n cluster/pbs_aneug_pbs_envelope_e0_v1.pbs
       - name: Validate dormant non-executable AneuG processed-v4 D7 draft
         run: PYTHONPATH=src python -m aurora.aneug_processed_v4_d7_draft --config configs/aneug_processed_v4_d7_train_field_admission_draft_v1.json --validate-only
+      - name: Validate fresh human-activated AneuG processed-v4 D7 execution
+        run: |
+          PYTHONPATH=src python -m aurora.aneug_processed_v4_d7_execution --execution-config configs/aneug_processed_v4_d7_execution_v1.json --validate-only
+          bash -n cluster/pbs_aneug_processed_v4_d7_execution_v1.pbs
       - name: Validate conditional non-executable AneuG bounded GPU development template
         run: PYTHONPATH=src python -m aurora.aneug_cycle_moment_bounded_development_template --config configs/aneug_cycle_moment_bounded_development_template_v1.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0

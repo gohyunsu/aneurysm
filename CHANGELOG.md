@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-17 · D7 selected train-field admission activation
+
+- Registered a fresh user-selected, one-shot D7 execution contract without
+  mutating its dormant draft or reopening closed D6/E0.
+- Bound the exact D5 406-train split and immutable D6 scientific kernel; all
+  validation, outer-test and auxiliary tensor values remain sealed.
+- Added an E0-informed PBS wrapper that creates its attempt marker and internal
+  log before strict mode, never sources `/etc/profile`, requests CPU 4 / 64 GB /
+  GPU 0 and never relies on scheduler output staging.
+- This is prospective execution authority only. No field, model, GPU, result,
+  figure, paper claim or public-site change occurred in this registration.
+
 ## 2026-08-17 — conditional bounded GPU-development template registered
 
 - Recorded current introai9 queue limits without inferring GPU model identity,
