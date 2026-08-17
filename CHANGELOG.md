@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-08-17 · D9A projection attribution registered
+
+- Registered a no-fit, validation-only comparison of the frozen moment-POD
+  checkpoint before and after exact cycle-moment projection.
+- Kept train values, outer/auxiliary cases, model fitting, repair authority,
+  numeric publication and paper claims out of scope.
+
 ## 2026-08-17 · D9 pinned-container execution retry registered
 
 - Bound the passing A6000 route to new R0/R1 wrappers: introai9

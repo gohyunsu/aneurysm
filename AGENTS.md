@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D9A projection attribution registration:** D9 completed but
+> failed its private noncompensatory validation screen; outer/auxiliary remain
+> sealed and D9 is not relabelled. D9A is a frozen-checkpoint, validation-only,
+> no-fit comparison of raw moment-POD versus exact moment projection on the
+> same 51 cases. It changes no checkpoint, metric, threshold, seed or split and
+> cannot authorize repair or a paper claim. Numeric output remains private.
+> Use only introai9 `coss_a6gpu:Qlist=a6000`; never use `junjinyong` or update
+> the site.
+
 > **2026-08-17 D9 container execution retry registration:** Passing R4 job
 > `116555.ECE-util1` selects introai9 `coss_a6gpu:Qlist=a6000` plus the exact
 > pinned Torch 2.5.1+cu118 container. New R0/R1 wrappers reuse byte-exact D9

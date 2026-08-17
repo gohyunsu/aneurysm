@@ -1,0 +1,53 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d9a_projection_attribution.v1",
+  "protocol_id": "aneug_processed_v4_d9a_projection_attribution_v1",
+  "status": "executable_validation_only_no_fit_attribution",
+  "as_of": "2026-08-17",
+  "question": "Does applying the exact moment projection only at validation explain the frozen moment-POD checkpoint's field and OSI degradation?",
+  "bound_evidence": {
+    "d9_public_commit": "75202f557ea6e1fc6528ed8a8baf9c413cb1a236",
+    "d9_scientific_config_sha256": "4b5031a7025649cb8cee22b3238499aa17d4b606756001f248bfd08315b0f804",
+    "d9_implementation_sha256": "d9c9f5d5c1832ad57691658cee5b7cd0a931aba19949de7feb9904d635c18ac5",
+    "cache_manifest_sha256": "72e5152fce558cfb9f2a2e36089c28d15a476cb3b943996ad861d07884398247",
+    "moment_checkpoint_sha256": "6b1341741447cf528290cf30add04a92d3bf77d5cecdfa026f64ad1422f8845e",
+    "moment_result_sha256": "77157ac2d92d696d860bbc93d1a32eb3d58af3a5b409c2b0c705193cacdf7dea",
+    "d9_aggregate_sha256": "817c5d1afb9b29a399f950ace8f0ac79678983c0bc8639dcda05add2725f67c2"
+  },
+  "scope": {
+    "validation_cases": 51,
+    "fit_model": false,
+    "select_checkpoint": false,
+    "read_train_case_values": false,
+    "read_outer_or_auxiliary": false,
+    "change_threshold_seed_split_or_metric": false
+  },
+  "comparison": {
+    "same_frozen_checkpoint_single_forward": true,
+    "modes": ["raw_moment_pod", "exact_moment_projection"],
+    "metrics": ["field_relative_l2", "tawss_normalized_absolute_error", "osi_mae", "osi_coverage"],
+    "additional_diagnostics": ["internal_mean_vector_residual", "internal_mean_magnitude_residual", "projection_relative_displacement"],
+    "case_identifiers_in_output": false,
+    "descriptive_direction_only": true,
+    "automatic_repair_decision": false
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "ncpus": 4,
+    "memory_gb": 32,
+    "ngpus": 1,
+    "walltime": "02:00:00",
+    "maximum_concurrent_jobs": 1
+  },
+  "authorization": {
+    "execute_D9A_once": true,
+    "repair_model": false,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_result_or_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "excluded_server": "junjinyong"
+  }
+}
