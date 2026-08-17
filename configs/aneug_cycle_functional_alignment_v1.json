@@ -1,0 +1,43 @@
+{
+  "schema_version": "aurora.aneug_cycle_functional_alignment.v1",
+  "status": "dataset_free_non_executable_loss_kernel",
+  "as_of": "2026-08-18",
+  "purpose": "prepare_same_backbone_field_and_complete_cycle_functional_ablation",
+  "terms": {
+    "field": "area_phase_weighted_relative_squared_error",
+    "mean_vector": "area_weighted_squared_error_normalized_by_reference_tawss_energy",
+    "tawss": "area_weighted_relative_squared_error",
+    "osi": "area_weighted_pseudo_huber_on_reference_defined_support"
+  },
+  "semantics": {
+    "all_terms_from_one_decoded_field": true,
+    "separate_functional_heads": false,
+    "phase_weights_required": true,
+    "vertex_areas_required": true,
+    "reference_tawss_floor": "external_train_defined_input",
+    "loss_weights": "explicit_validation_development_inputs",
+    "rrt_loss": false,
+    "hard_posthoc_projection": false
+  },
+  "planned_same_backbone_rows": [
+    "field_only",
+    "field_plus_tawss_and_mean_vector",
+    "field_plus_osi",
+    "field_plus_all_functionals"
+  ],
+  "decision_rule": {
+    "absolute_performance_threshold": null,
+    "comparison": "paired_validation_field_tawss_osi_coverage_and_compute_after_direct_baselines",
+    "outer_tuning": false
+  },
+  "authorization": {
+    "read_real_field": false,
+    "run_gpu": false,
+    "select_method": false,
+    "paper_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}

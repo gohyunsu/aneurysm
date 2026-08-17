@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 complete-cycle functional-alignment kernel:** A dataset-free,
+> non-executable D13C building block now computes explicit field, mean-vector,
+> TAWSS and reference-support OSI losses from one decoded WSS cycle. It adds no
+> inconsistent auxiliary head and uses neither RRT nor the failed D9A hard
+> post-hoc projection. The reference support floor and all loss weights remain
+> external inputs; no absolute performance threshold, architecture selection,
+> real-field read, GPU run or paper claim is encoded. Future same-backbone
+> development compares field-only, statistic-aligned, OSI-aligned and complete
+> objectives after the direct controls. Exact implementation/test/config/doc
+> hashes are `b82df3ac…3ec8` / `cbea0781…ec72` / `a78535a7…cba6` /
+> `1a87e625…6b54`; 8 focused and 826 full tests pass. Never use `junjinyong`
+> or the site.
+
 > **2026-08-18 prepared D14 Transolver control:** D14 is implemented and
 > testable but non-executable while D12 has no terminal record. It adapts the
 > exact pinned MIT Transolver physics-slice design into a same-information
