@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 highest current operating authority:** Decisions are
+> evidence-led and risk-based, not controlled by an inherited blanket ban.
+> Older statements that a method, repair, retry, question or study family may
+> “never” be revisited are historical provenance only. Preserve every old run
+> and artifact, but re-test previously under-evaluated ingredients using a new
+> run ID/result directory, linked predecessor, exact source/config/environment
+> and explicit rationale. Exact-config infrastructure retries, bug-fix checks,
+> validation-stage optimization/capacity iterations, ablations and stochastic
+> replications are allowed when they can add information; no cosmetic new
+> hypothesis or arbitrary attempt cap is required. Do not tune on confirmation
+> or outer-test outcomes, and never overwrite or hide evidence. The operational
+> scope remains `introai9` only, with `junjinyong` excluded unless the user
+> explicitly changes it; maintain code and private records, not the site. This
+> paragraph supersedes conflicting execution bans below.
+
 > **2026-08-17 D11 strong-baseline registration:** D10 Round 1 failed its
 > frozen private feasibility gate, so projection repair on the custom backbone
 > stays closed. D11 is one validation-development job on the exact 406/51 D9
