@@ -80,9 +80,13 @@ def _strict_atomic_torch_save(path: str | Path, payload: Mapping[str, Any]) -> N
 
 
 def validate_config(config: Mapping[str, Any]) -> None:
+    schema = config.get("schema_version")
     _require(
-        config.get("schema_version")
-        == "aurora.aneug_processed_v4_d12_official_graphunet.v1",
+        schema
+        in {
+            "aurora.aneug_processed_v4_d12_official_graphunet.v1",
+            "aurora.aneug_processed_v4_d12_official_graphunet.v2",
+        },
         "config_schema",
     )
     _require(config.get("status") == "executable_validation_development", "status")
@@ -127,18 +131,39 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "architecture",
     )
     optimization = config["optimization"]
-    _require(
-        (
-            optimization["seed"],
-            optimization["snapshot_batch_size"],
-            optimization["maximum_coverage_epochs"],
-            optimization["minimum_coverage_epochs"],
-            optimization["validation_interval_coverage_epochs"],
-            optimization["early_stopping_validation_checks"],
+    if schema.endswith(".v1"):
+        _require(
+            (
+                optimization["seed"],
+                optimization["snapshot_batch_size"],
+                optimization["maximum_coverage_epochs"],
+                optimization["minimum_coverage_epochs"],
+                optimization["validation_interval_coverage_epochs"],
+                optimization["early_stopping_validation_checks"],
+            )
+            == (1103, 32, 80, 20, 5, 6),
+            "optimization",
         )
-        == (1103, 32, 80, 20, 5, 6),
-        "optimization",
-    )
+    else:
+        _require(
+            config.get("protocol_id")
+            == "aneug_processed_v4_d12_official_graphunet_v2",
+            "protocol_v2",
+        )
+        _require(
+            (
+                optimization["seed"],
+                optimization["physical_snapshot_batch_size"],
+                optimization["effective_snapshot_batch_size"],
+                optimization["gradient_accumulation_steps"],
+                optimization["maximum_coverage_epochs"],
+                optimization["minimum_coverage_epochs"],
+                optimization["validation_interval_coverage_epochs"],
+                optimization["early_stopping_validation_checks"],
+            )
+            == (1103, 8, 32, 4, 80, 20, 5, 6),
+            "optimization_v2",
+        )
     _require(
         optimization["learning_rate"] == 3e-4
         and optimization["weight_decay"] == 0.01,
@@ -180,9 +205,10 @@ def validate_activation(
     path: str | Path, config: Mapping[str, Any], expected_commit: str
 ) -> dict[str, Any]:
     activation = json.loads(Path(path).read_text(encoding="utf-8"))
+    version = "v2" if config["schema_version"].endswith(".v2") else "v1"
     _require(
         activation.get("schema_version")
-        == "aurora.aneug_processed_v4_d12.private_activation.v1",
+        == f"aurora.aneug_processed_v4_d12.private_activation.{version}",
         "activation_schema",
     )
     _require(activation.get("protocol_id") == config["protocol_id"], "activation_protocol")
@@ -191,10 +217,12 @@ def validate_activation(
         and activation.get("quality_conclusion") == "success",
         "activation_public",
     )
-    _require(
-        activation.get("authorized_stage") == "D12_official_graphunet_validation",
-        "activation_stage",
+    expected_stage = (
+        "D12_official_graphunet_microbatch_validation"
+        if version == "v2"
+        else "D12_official_graphunet_validation"
     )
+    _require(activation.get("authorized_stage") == expected_stage, "activation_stage")
     _require(activation.get("outer_or_auxiliary_access") is False, "activation_scope")
     _require(
         activation.get("cache_manifest_sha256")
@@ -214,11 +242,11 @@ def balanced_snapshot_pairs(
     return pairs
 
 
-def matched_snapshot_loss(
+def matched_snapshot_components(
     prediction: torch.Tensor,
     reference: torch.Tensor,
     vertex_weights: torch.Tensor,
-) -> torch.Tensor:
+) -> tuple[torch.Tensor, torch.Tensor]:
     _require(
         prediction.shape == reference.shape
         and prediction.ndim == 3
@@ -232,7 +260,49 @@ def matched_snapshot_loss(
     )
     numerator = torch.sum(vertex_weights * torch.sum((prediction - reference) ** 2, dim=-1))
     denominator = torch.sum(vertex_weights * torch.sum(reference**2, dim=-1))
-    return numerator / torch.clamp(denominator, min=1e-12)
+    return numerator, torch.clamp(denominator, min=1e-12)
+
+
+def matched_snapshot_loss(
+    prediction: torch.Tensor,
+    reference: torch.Tensor,
+    vertex_weights: torch.Tensor,
+) -> torch.Tensor:
+    numerator, denominator = matched_snapshot_components(
+        prediction, reference, vertex_weights
+    )
+    return numerator / denominator
+
+
+def reference_energy_table(
+    cases: Sequence[Mapping[str, torch.Tensor]],
+) -> torch.Tensor:
+    rows = []
+    for case in cases:
+        rows.append(
+            torch.sum(
+                case["vertex_weights"].unsqueeze(0)
+                * torch.sum(case["wss"] ** 2, dim=-1),
+                dim=-1,
+            )
+        )
+    table = torch.stack(rows)
+    _require(
+        table.shape == (len(cases), 80)
+        and bool(torch.isfinite(table).all().item())
+        and bool((table > 0).all().item()),
+        "reference_energy_table",
+    )
+    return table
+
+
+def indexed_reference_energy(
+    table: torch.Tensor,
+    pairs: Sequence[tuple[int, int]],
+) -> float:
+    energy = sum(float(table[case_index, phase].item()) for case_index, phase in pairs)
+    _require(math.isfinite(energy) and energy > 0.0, "reference_energy")
+    return energy
 
 
 def _install_unused_pytorch3d_import_stub() -> None:
@@ -415,6 +485,7 @@ def run_development(
     topology = torch.load(cache / "topology.pt", map_location="cpu", weights_only=True)
     train_cases = load_cached_split(cache, "train")
     validation_cases = load_cached_split(cache, "validation")
+    train_reference_energy = reference_energy_table(train_cases)
     model = build_released_model(official_root, config, topology).to(device)
     optimizer = torch.optim.AdamW(
         model.parameters(),
@@ -427,7 +498,20 @@ def run_development(
         gamma=float(optimization["gamma"]),
     )
     waveform = torch.zeros((1, 80, 1), dtype=torch.float32, device=device)
-    batch_size = int(optimization["snapshot_batch_size"])
+    physical_batch_size = int(
+        optimization.get(
+            "physical_snapshot_batch_size", optimization.get("snapshot_batch_size", 0)
+        )
+    )
+    effective_batch_size = int(
+        optimization.get("effective_snapshot_batch_size", physical_batch_size)
+    )
+    accumulation_steps = int(optimization.get("gradient_accumulation_steps", 1))
+    _require(
+        physical_batch_size > 0
+        and effective_batch_size == physical_batch_size * accumulation_steps,
+        "effective_batch",
+    )
     maximum_epochs = int(optimization["maximum_coverage_epochs"])
     minimum_epochs = int(optimization["minimum_coverage_epochs"])
     validation_interval = int(optimization["validation_interval_coverage_epochs"])
@@ -444,44 +528,64 @@ def run_development(
     # Exercise the exact registered training batch before the first optimizer
     # step so memory or sparse-kernel infeasibility is an execution result,
     # never a partially trained scientific comparison.
-    smoke_pairs = [(0, phase) for phase in range(batch_size)]
+    smoke_pairs = [(0, phase) for phase in range(effective_batch_size)]
     smoke_started = time.monotonic()
     model.train()
-    prediction, target, weights = _predict_snapshots(
-        model, train_cases, smoke_pairs, device, waveform
-    )
-    smoke_loss = matched_snapshot_loss(prediction, target, weights)
-    smoke_loss.backward()
-    _require(bool(torch.isfinite(smoke_loss).item()), "nonfinite_smoke")
+    smoke_denominator = indexed_reference_energy(train_reference_energy, smoke_pairs)
+    smoke_loss_value = 0.0
+    for micro_start in range(0, len(smoke_pairs), physical_batch_size):
+        micro_pairs = smoke_pairs[micro_start : micro_start + physical_batch_size]
+        prediction, target, weights = _predict_snapshots(
+            model, train_cases, micro_pairs, device, waveform
+        )
+        numerator, _ = matched_snapshot_components(prediction, target, weights)
+        micro_loss = numerator / smoke_denominator
+        _require(bool(torch.isfinite(micro_loss).item()), "nonfinite_smoke")
+        micro_loss.backward()
+        smoke_loss_value += float(micro_loss.detach().item())
+        del prediction, target, weights, numerator, micro_loss
     optimizer.zero_grad(set_to_none=True)
     torch.cuda.synchronize()
     smoke = {
-        "snapshot_batch_size": len(smoke_pairs),
+        "physical_snapshot_batch_size": physical_batch_size,
+        "effective_snapshot_batch_size": len(smoke_pairs),
+        "gradient_accumulation_steps": accumulation_steps,
+        "loss": smoke_loss_value,
         "finite_forward_backward": True,
         "seconds": time.monotonic() - smoke_started,
         "peak_gpu_bytes": int(torch.cuda.max_memory_allocated()),
     }
-    del prediction, target, weights, smoke_loss
 
     for coverage_epoch in range(maximum_epochs):
         model.train()
         pairs = balanced_snapshot_pairs(len(train_cases), 80, seed, coverage_epoch)
         epoch_loss = 0.0
         epoch_batches = 0
-        for start in range(0, len(pairs), batch_size):
-            batch_pairs = pairs[start : start + batch_size]
+        for start in range(0, len(pairs), effective_batch_size):
+            effective_pairs = pairs[start : start + effective_batch_size]
             optimizer.zero_grad(set_to_none=True)
-            prediction, target, weights = _predict_snapshots(
-                model, train_cases, batch_pairs, device, waveform
+            denominator = indexed_reference_energy(
+                train_reference_energy, effective_pairs
             )
-            loss = matched_snapshot_loss(prediction, target, weights)
-            _require(bool(torch.isfinite(loss).item()), "nonfinite_training_loss")
-            loss.backward()
+            effective_loss = 0.0
+            for micro_start in range(0, len(effective_pairs), physical_batch_size):
+                micro_pairs = effective_pairs[
+                    micro_start : micro_start + physical_batch_size
+                ]
+                prediction, target, weights = _predict_snapshots(
+                    model, train_cases, micro_pairs, device, waveform
+                )
+                numerator, _ = matched_snapshot_components(prediction, target, weights)
+                loss = numerator / denominator
+                _require(bool(torch.isfinite(loss).item()), "nonfinite_training_loss")
+                loss.backward()
+                effective_loss += float(loss.detach().item())
+                del prediction, target, weights, numerator, loss
             torch.nn.utils.clip_grad_norm_(
                 model.parameters(), float(optimization["gradient_clip_norm"])
             )
             optimizer.step()
-            epoch_loss += float(loss.detach().item())
+            epoch_loss += effective_loss
             epoch_batches += 1
             total_steps += 1
         scheduler.step()
@@ -499,7 +603,7 @@ def run_development(
             )
             continue
         validation = evaluate_full_cycles(
-            model, validation_cases, device, waveform, batch_size
+            model, validation_cases, device, waveform, physical_batch_size
         )
         validation_field = float(validation["aggregate"]["field_relative_l2"])
         row = {
@@ -540,7 +644,7 @@ def run_development(
     _require(best_state is not None and best_epoch > 0, "missing_best_checkpoint")
     model.load_state_dict(best_state)
     final_validation = evaluate_full_cycles(
-        model, validation_cases, device, waveform, batch_size
+        model, validation_cases, device, waveform, physical_batch_size
     )
     _strict_atomic_torch_save(
         checkpoint_root / "best.pt",
@@ -555,7 +659,11 @@ def run_development(
         },
     )
     result = {
-        "schema_version": "aurora.aneug_processed_v4_d12.private_result.v1",
+        "schema_version": (
+            "aurora.aneug_processed_v4_d12.private_result.v2"
+            if config["schema_version"].endswith(".v2")
+            else "aurora.aneug_processed_v4_d12.private_result.v1"
+        ),
         "protocol_id": config["protocol_id"],
         "status": "complete",
         "comparison_identity": config["comparison_identity"]["label"],
@@ -564,6 +672,9 @@ def run_development(
         "best_coverage_epoch": best_epoch,
         "coverage_epochs_completed": coverage_epoch + 1,
         "optimizer_steps": total_steps,
+        "physical_snapshot_batch_size": physical_batch_size,
+        "effective_snapshot_batch_size": effective_batch_size,
+        "gradient_accumulation_steps": accumulation_steps,
         "parameter_count": model_parameter_count(model),
         "elapsed_seconds": time.monotonic() - started,
         "peak_gpu_bytes": int(torch.cuda.max_memory_allocated()),

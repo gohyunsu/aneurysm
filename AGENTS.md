@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 D12 R1 OOM and effective-batch-preserving retry:** Job
+> `116607.ECE-util1`, run ID `d12_official_graphunet_r1`, finalized F/exit 1,
+> stage-out 0 after the registered physical-batch-32 forward reached CUDA OOM.
+> Failure occurred in the pre-optimizer smoke; no checkpoint, validation,
+> outer/auxiliary read, metric or scientific verdict exists. Preserve R1.
+> D12 v2 changes only execution batching: physical batch 8, four accumulated
+> microbatches and the same effective batch 32 with one shared reference-energy
+> denominator. Official model/forward, seed, split, input, loss, optimizer,
+> schedule, validation and no-threshold interpretation stay fixed. The new
+> run requires fresh Quality and private activation; use only `introai9`.
+
 > **2026-08-18 D12 pre-submit source-pin correction:** A field-free introai9
 > import smoke found a one-character transcription error in the pinned
 > `GraphGPS_encoders.py` SHA-256. No PBS job, GPU, case tensor or scientific

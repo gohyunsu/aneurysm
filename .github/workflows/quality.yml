@@ -100,7 +100,9 @@ jobs:
       - name: Validate AneuG processed-v4 D12 direct official Graph U-Net baseline
         run: |
           PYTHONPATH=src python -c "from aurora.aneug_processed_v4_d12_official_graphunet import load_config; load_config('configs/aneug_processed_v4_d12_official_graphunet_v1.json')"
+          PYTHONPATH=src python -c "from aurora.aneug_processed_v4_d12_official_graphunet import load_config; load_config('configs/aneug_processed_v4_d12_official_graphunet_v2.json')"
           bash -n cluster/pbs_aneug_processed_v4_d12_official_graphunet_v1.pbs
+          bash -n cluster/pbs_aneug_processed_v4_d12_official_graphunet_v2.pbs
       - name: Validate conditional non-executable AneuG bounded GPU development template
         run: PYTHONPATH=src python -m aurora.aneug_cycle_moment_bounded_development_template --config configs/aneug_cycle_moment_bounded_development_template_v1.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0
