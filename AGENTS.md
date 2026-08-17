@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 result-pending paired validation comparison:** A public,
+> dataset-free utility now compares matched validation results through raw
+> endpoint means, paired component-bootstrap candidate-minus-reference deltas,
+> favorable-direction probabilities and a multi-endpoint Pareto set. It has no
+> absolute threshold or automatic winner and explicitly treats the 51 units as
+> synthetic geometry components, not patients or population inference. A
+> future private activation must bind exact result hashes and the shared cache
+> order before numeric use. Exact implementation/test/config/rationale hashes
+> are `9e10a9c3…3b53` / `1b39c1ff…d13f` / `5aff967b…07a7` /
+> `2a5b6529…b941`; 6 focused and 849 full tests pass. No outer/auxiliary read,
+> method selection, result or paper claim exists. Never use `junjinyong` or
+> maintain the site.
+
 > **2026-08-18 cycle-response residual source synchronization:** Exact public
 > scientific source `2d702044d8fff81bee7a9cf258e8aa00ebb189d3` is remote
 > exact and passed Research Quality `32054927814` with 843/843 tests. The

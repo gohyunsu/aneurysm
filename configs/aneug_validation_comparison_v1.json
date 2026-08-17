@@ -1,0 +1,48 @@
+{
+  "schema_version": "aurora.aneug_validation_comparison.v1",
+  "status": "prepared_result_pending",
+  "as_of": "2026-08-18",
+  "purpose": "compare_direct_priors_and_method_combinations_without_an_invented_absolute_gate",
+  "comparison": {
+    "core_metrics": [
+      "field_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae",
+      "osi_coverage"
+    ],
+    "optional_metrics": ["mean_vector_tawss_normalized_l2"],
+    "paired_unit": "synthetic_geometry_component",
+    "validation_case_count": 51,
+    "same_cache_order_required": true,
+    "candidate_rows": [
+      "D11_complete_cycle_GINE_GPS_UNet",
+      "D12_released_GraphUNet_class",
+      "D14_same_information_Transolver",
+      "D13B_response_and_residual_ablations",
+      "D13C_objective_ablations"
+    ]
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 20260818,
+    "interval": "percentile_95pct",
+    "estimand": "paired_mean_candidate_minus_reference",
+    "population_inference": false
+  },
+  "decision": {
+    "absolute_performance_threshold": null,
+    "automatic_winner": false,
+    "report_pareto_set": true,
+    "report_all_pairwise_deltas": true,
+    "interpretation": "continuous_validation_tradeoff_with_uncertainty_compute_and_mechanism_ablations"
+  },
+  "boundary": {
+    "validation_development_only": true,
+    "outer_or_auxiliary_access": false,
+    "paper_claim": false,
+    "requires_exact_result_hashes_and_shared_cache_order_digest_before_private_execution": true,
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "maintain_public_site": false
+  }
+}
