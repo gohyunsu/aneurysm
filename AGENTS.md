@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D10 Round 1 outcome and baseline pivot:** introai9 job
+> `116601.ECE-util1`, run ID `d10_round1_direct_horizon_r1`, finalized F/exit 0
+> and stage-out 0 with zero outer/auxiliary reads. The exact private result
+> fails its frozen validation field-feasibility gate; numeric outputs,
+> checkpoint and logs remain private. The longer horizon added information but
+> did not make the custom backbone feasible, so D10 Round 2 is not authorized.
+> Next is a separately versioned, compute-matched adaptation of an official
+> AneuG/RHSIA strong baseline; establish field feasibility before testing any
+> functional readout. Preserve D10 as negative validation development. Never
+> use `junjinyong` or update the site.
+
 > **2026-08-17 D10 bounded repair registration:** D9 remains failed and D9A
 > remains attribution only. D10 predeclares at most two validation repair
 > rounds and two training jobs. Round 1 changes only the direct cosine horizon
