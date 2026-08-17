@@ -103,6 +103,10 @@ jobs:
           PYTHONPATH=src python -c "from aurora.aneug_processed_v4_d12_official_graphunet import load_config; load_config('configs/aneug_processed_v4_d12_official_graphunet_v2.json')"
           bash -n cluster/pbs_aneug_processed_v4_d12_official_graphunet_v1.pbs
           bash -n cluster/pbs_aneug_processed_v4_d12_official_graphunet_v2.pbs
+      - name: Validate prepared AneuG D13A response-manifold oracle
+        run: |
+          PYTHONPATH=src python -m aurora.aneug_processed_v4_d13a_response_oracle --config configs/aneug_processed_v4_d13a_response_oracle_v1.json --validate-only
+          bash -n cluster/pbs_aneug_processed_v4_d13a_response_oracle_v1.pbs
       - name: Validate conditional non-executable AneuG bounded GPU development template
         run: PYTHONPATH=src python -m aurora.aneug_cycle_moment_bounded_development_template --config configs/aneug_cycle_moment_bounded_development_template_v1.json --validate-only
       - name: Validate prospective AneuX preprocessing-orbit P0

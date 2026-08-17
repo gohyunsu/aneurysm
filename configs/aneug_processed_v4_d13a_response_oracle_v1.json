@@ -1,0 +1,71 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d13a_response_oracle.v1",
+  "protocol_id": "aneug_processed_v4_d13a_response_oracle_v1",
+  "status": "prepared_non_executable",
+  "as_of": "2026-08-18",
+  "purpose": "measure_train_output_response_manifold_ceiling_before_model_selection",
+  "predecessors": {
+    "d11_run_id": "d11_gpsunet_r1",
+    "d12_required_terminal_record": true,
+    "d12_performance_threshold_required": false
+  },
+  "bound_data": {
+    "cache_manifest_sha256": "72e5152fce558cfb9f2a2e36089c28d15a476cb3b943996ad861d07884398247",
+    "train_cases": 406,
+    "validation_cases": 51,
+    "outer_cases": 51,
+    "auxiliary_cases": 70,
+    "phases": 80,
+    "nodes": 13902,
+    "read_outer_or_auxiliary": false
+  },
+  "representation": {
+    "input_field": "complete_tangent_transient_WSS_cycle",
+    "reference_inner_product": "uniform_phase_times_mean_train_vertex_area",
+    "amplitude": "oracle_true_validation_rms",
+    "basis_source": "train_only_centered_normalized_cycles",
+    "basis_solver": "case_Gram_eigendecomposition_then_right_singular_vectors",
+    "rank_grid": [0, 16, 32, 64, 128, 256],
+    "maximum_rank": 256,
+    "post_reconstruction": "case_mesh_tangent_projection",
+    "rank_selection": "none_report_all"
+  },
+  "evaluation": {
+    "role": "oracle_representation_ceiling_not_learned_prediction",
+    "metrics": [
+      "field_relative_l2",
+      "reference_weighted_oracle_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae",
+      "osi_coverage",
+      "explained_variance",
+      "basis_bytes",
+      "elapsed_seconds",
+      "peak_gpu_bytes"
+    ],
+    "case_identifiers": false,
+    "absolute_performance_threshold": null
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "06:00:00"
+  },
+  "authorization": {
+    "execute_now": false,
+    "requires_fresh_private_activation": true,
+    "learned_predictor": false,
+    "rank_selection": false,
+    "outer_test": false,
+    "paper_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}

@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 prepared D13A response-manifold oracle:** D13A is implemented
+> and testable but non-executable while D12 has no terminal record. It fits an
+> area/phase-weighted, energy-normalized complete-cycle basis from the 406
+> train fields and reports validation oracle reconstructions at ranks
+> 0/16/32/64/128/256. True validation RMS amplitude and oracle coefficients
+> make this a representation ceiling, never model performance. It selects no
+> rank, uses no absolute threshold and reads no outer/auxiliary values. A fresh
+> Quality-passed source and private activation binding D12's terminal record
+> are required before one introai9 job; never use `junjinyong` or the site.
+
 > **2026-08-18 D12 R1 OOM and effective-batch-preserving retry:** Job
 > `116607.ECE-util1`, run ID `d12_official_graphunet_r1`, finalized F/exit 1,
 > stage-out 0 after the registered physical-batch-32 forward reached CUDA OOM.
