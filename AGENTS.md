@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 prepared D13C same-backbone functional fine-tuning:** D13C is
+> implemented and testable but non-executable until D12 has a terminal record
+> and one fresh private activation binds one variant. Five rows start from the
+> exact D11 epoch-121 checkpoint: field-only continuation, statistics-only,
+> OSI-only, all-functional scalarization and all-functional field-anchored
+> optimization. Training loss scales come only from all 406 D11-initial train
+> predictions; checkpoint utilities use the identical initial D11 validation
+> endpoints, making field-only selection match D11's average-rL2 grammar.
+> There is no absolute threshold, outer/auxiliary read, confirmation or paper
+> claim. Exact config/implementation/PBS/test/rationale hashes are
+> `b3bf4ba1…82d1` / `ee6bb211…313e` / `bdc962d5…3391` /
+> `9d0136a9…dcd4` / `8bdc189a…c3d9`; 7 focused and 837 full tests pass.
+> D12 job `116609.ECE-util1` remains the sole GPU job. Never use `junjinyong`
+> or maintain the site.
+
 > **2026-08-18 functional-alignment source synchronization:** Exact public
 > scientific source `1e27570753e51a645e800ef846e158b58e5a933a` is remote
 > exact and passed Research Quality `32051075036`. Twelve focused and 830 full

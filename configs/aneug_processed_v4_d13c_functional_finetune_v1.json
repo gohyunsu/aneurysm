@@ -1,0 +1,109 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d13c_functional_finetune.v1",
+  "protocol_id": "aneug_processed_v4_d13c_functional_finetune_v1",
+  "status": "prepared_non_executable",
+  "as_of": "2026-08-18",
+  "purpose": "same_backbone_complete_cycle_functional_objective_ablation",
+  "predecessors": {
+    "d11_public_source": "7623013b3adf3764e2210a2efc62c7d7c6fcda13",
+    "d11_checkpoint_sha256": "e903f244e8cfef04636a846cc2e4a96f49098eea859f0a8a84455fcddcd4a12c",
+    "d11_result_sha256": "36fc5c2f116901b5b91d4ea9f9e6c5a53f856b0dbcd1f5b9c4d6a0e343f0a1b5",
+    "d12_terminal_record_required": true,
+    "d12_performance_threshold_required": false
+  },
+  "bound_data": {
+    "cache_manifest_sha256": "72e5152fce558cfb9f2a2e36089c28d15a476cb3b943996ad861d07884398247",
+    "train_cases": 406,
+    "validation_cases": 51,
+    "outer_cases": 51,
+    "auxiliary_cases": 70,
+    "phases": 80,
+    "nodes": 13902,
+    "read_outer_or_auxiliary": false
+  },
+  "backbone": {
+    "class": "aurora.aneug_processed_v4_d11_strong_baseline.GHDConditionedGPSUNet",
+    "identity": "exact_D11_selected_checkpoint_and_architecture",
+    "width": 128,
+    "attention_heads": 4,
+    "output_phases": 80,
+    "initialization": "same_D11_best_epoch_121_for_every_variant"
+  },
+  "objective": {
+    "variants": [
+      "field_only",
+      "statistics_scalarized",
+      "osi_scalarized",
+      "all_scalarized",
+      "all_field_anchored"
+    ],
+    "field": "area_phase_weighted_relative_squared_error",
+    "statistics": ["mean_vector", "tawss"],
+    "osi": "reference_support_area_weighted_pseudo_huber",
+    "loss_normalizers": "mean_D11_initial_train_term_over_all_406_train_cases",
+    "normalizers_recomputed_identically_per_variant": true,
+    "checkpoint_utility_normalizers": "same_initial_D11_validation_endpoints_recomputed_before_each_variant",
+    "scalarized_combination": "field_plus_mean_of_selected_train_normalized_functional_terms",
+    "field_anchored_combination": "remove_negative_functional_dot_field_component_then_norm_match",
+    "field_anchored_scope": "first_order_control_not_finite_step_guarantee",
+    "functional_to_field_norm_ratio": 1.0,
+    "reference_tawss_floor": "1e-4_times_area_phase_weighted_train_WSS_RMS",
+    "reference_tawss_floor_multiplier": 0.0001,
+    "osi_pseudo_huber_delta": 0.02,
+    "rrt_loss": false,
+    "hard_posthoc_projection": false
+  },
+  "optimization": {
+    "seed": 1103,
+    "maximum_epochs": 60,
+    "minimum_epochs": 15,
+    "early_stopping_patience": 12,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "scheduler": "cosine_to_1e-6",
+    "minimum_learning_rate": 0.000001,
+    "gradient_accumulation_cases": 2,
+    "gradient_clip_norm": 1.0,
+    "checkpoint_selection": "lowest_initial_D11_endpoint_normalized_variant_validation_utility_then_earliest_epoch",
+    "variant_jobs": "one_variant_per_fresh_run_id"
+  },
+  "evaluation": {
+    "metrics": [
+      "field_relative_l2",
+      "mean_vector_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae",
+      "osi_coverage",
+      "variant_validation_utility",
+      "gradient_conflict_fraction",
+      "parameter_count",
+      "peak_gpu_bytes",
+      "elapsed_seconds"
+    ],
+    "case_identifiers": false,
+    "paired_comparison": true,
+    "absolute_performance_threshold": null
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "06:00:00"
+  },
+  "authorization": {
+    "execute_now": false,
+    "requires_fresh_private_activation": true,
+    "one_variant_per_activation": true,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}
