@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 cycle-response residual source synchronization:** Exact public
+> scientific source `2d702044d8fff81bee7a9cf258e8aa00ebb189d3` is remote
+> exact and passed Research Quality `32054927814` with 843/843 tests. The
+> automatic Pages run `32054927242` failed outside research scope; do not
+> repair it. The prototype remains dataset-free and non-executable with no
+> rank choice, field read, GPU job, result or paper claim. Never use
+> `junjinyong` or maintain the site.
+
 > **2026-08-18 cycle-response residual prototype:** A dataset-free D13B
 > building block now makes the conditional performance method concrete. It
 > predicts positive amplitude and complete-cycle response coordinates from the
