@@ -128,7 +128,10 @@ class CycleResponseResidualDecoder(nn.Module):
         self.phases = phases
         self.nodes = nodes
         self.register_buffer("response_mean", mean)
-        self.register_buffer("response_basis", basis[:rank].contiguous())
+        # A contiguous prefix can still share the full rank-256 storage. Clone
+        # the selected rows so low-rank experiments retain only their declared
+        # basis memory on the GPU.
+        self.register_buffer("response_basis", basis[:rank].contiguous().clone())
         self.register_buffer("reference_weights", weights)
         self.register_buffer("log_amplitude_center", torch.log(train_scales).mean())
 

@@ -151,6 +151,15 @@ class CycleResponseResidualTests(unittest.TestCase):
         with self.assertRaisesRegex(CycleResponseResidualError, "orthonormal_basis"):
             CycleResponseResidualDecoder(payload, rank=3)
 
+    def test_selected_rank_does_not_retain_full_basis_storage(self):
+        payload = synthetic_payload(rank=4)
+        decoder = CycleResponseResidualDecoder(payload, rank=2)
+        selected_bytes = (
+            decoder.response_basis.numel() * decoder.response_basis.element_size()
+        )
+        self.assertEqual(decoder.response_basis.untyped_storage().nbytes(), selected_bytes)
+        self.assertLess(selected_bytes, payload["basis"].untyped_storage().nbytes())
+
 
 if __name__ == "__main__":
     unittest.main()

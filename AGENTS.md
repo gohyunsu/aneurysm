@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 selected-rank storage correction:** Dataset-free inspection
+> found that a contiguous rank prefix could retain the complete rank-256 basis
+> storage. The decoder now clones only the selected rows, and a storage-level
+> regression test proves that low-rank variants do not silently carry the full
+> GPU allocation. This changes no response equation, rank choice, evidence
+> gate or result. Exact implementation/test/rationale hashes are
+> `b141e287…1b76` / `0061c6b4…4400` / `c66021a9…3f50`; 7 focused and 850
+> full tests pass. D13B remains non-executable. Never use `junjinyong` or
+> maintain the site.
+
 > **2026-08-18 paired-comparison source synchronization:** Exact public
 > scientific source `416627724435b6ec46bbde9aabea52088aa2eed6` is remote
 > exact and passed Research Quality `32055879571` with 849/849 tests. The

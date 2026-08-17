@@ -25,3 +25,8 @@ functional alignment. Rank and backbone remain unselected until D12 terminates
 and D13A reports every registered oracle rank. There is no absolute performance
 threshold; later comparisons use paired validation endpoints, uncertainty,
 coverage and measured compute. Outer and auxiliary values remain sealed.
+
+The decoder copies only the selected basis rows into independent storage.
+Consequently a rank-16 or rank-32 run does not silently retain the full
+rank-256 basis allocation on the GPU; parameter/memory comparisons reflect the
+declared rank rather than an implementation view.
