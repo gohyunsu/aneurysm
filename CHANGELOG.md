@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-17 · D9 GPU runtime queue-isolation R3 registered
+
+- R2 found working GPU enumeration but missing NVIDIA UVM device nodes and
+  low-level `cuInit` error 999 across every host/container visibility variant on
+  the `coss_agpu` node.
+- Added a data-free `coss_a6gpu` wrapper that reuses the exact R2 probe and
+  pinned container. This single route change tests whether D9 can proceed on a
+  correctly configured introai9 GPU node or requires administrator action.
+
 ## 2026-08-17 · D9 GPU runtime revalidation R2 registered
 
 - R1 separated working scheduler device reporting from a shared host/container

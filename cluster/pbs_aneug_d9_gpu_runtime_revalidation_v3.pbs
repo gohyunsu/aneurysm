@@ -1,0 +1,8 @@
+#!/bin/bash
+#PBS -N aurora_d9_gpuenv3
+#PBS -q coss_a6gpu
+#PBS -l select=1:ncpus=2:mem=16gb:ngpus=1
+#PBS -l walltime=00:15:00
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+exec /bin/bash "$AURORA_PROJECT_ROOT/cluster/pbs_aneug_d9_gpu_runtime_revalidation_v2.pbs"

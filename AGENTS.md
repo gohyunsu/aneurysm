@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D9 GPU-runtime R2 finding and R3 registration:** On
+> `coss_agpu`/`ece-tgpu3`, R2 found a scheduler-visible GPU but no
+> `/dev/nvidia-uvm` or `uvm-tools`; host/container `cuInit(0)` returned 999 in
+> inherited/zero/unset conditions. This is node CUDA/UVM engineering evidence,
+> not D9 science. R3 changes only the introai9 queue to enabled `coss_a6gpu`
+> and reuses the exact probe/container to separate node-route failure from an
+> account-wide runtime problem. A container pass selects that queue for new-ID
+> D9 R0; repeated missing-UVM failure is an administrator blocker. Never use
+> `junjinyong`, read data in this probe or update the site.
+
 > **2026-08-17 D9 GPU-runtime R1 outcome and R2 registration:** R1 job
 > `116551.ECE-util1` had working scheduler `nvidia-smi` but the same CUDA
 > initialization failure in host/user-site Torch and the pinned container,

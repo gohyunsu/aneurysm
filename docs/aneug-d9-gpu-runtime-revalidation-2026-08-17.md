@@ -50,3 +50,17 @@ selected CUDA/NVIDIA environment keys and `/dev/nvidia*` metadata, calls
 low-level and Torch pass in the pinned container selects the exact environment
 normalization for D9 R0. If every condition fails, the records provide a
 specific administrator/scheduler-level CUDA report and training remains paused.
+
+## R2 finding and R3 queue-isolation check
+
+On `coss_agpu`, R2 found the allocated GPU and a functioning `nvidia-smi`, but
+`/dev/nvidia-uvm` and `/dev/nvidia-uvm-tools` were absent. Low-level `cuInit(0)`
+returned `CUDA_ERROR_UNKNOWN` under every visibility condition in both host and
+container, before Torch-specific logic. The evidence therefore points to the
+allocated node's CUDA/UVM configuration rather than D9 code or data.
+
+Introai9 also exposes the enabled `coss_a6gpu` queue. R3 changes only that queue
+route and executes the exact R2 probe and pinned container. Pass establishes a
+usable introai9 runtime for a new-ID D9 R0. The same missing-UVM failure on that
+separate queue establishes an administrator-level GPU-node blocker; no training
+is launched in either case until a finite container CUDA operation passes.

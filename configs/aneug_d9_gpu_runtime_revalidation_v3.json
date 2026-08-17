@@ -1,0 +1,63 @@
+{
+  "schema_version": "aurora.aneug_d9_gpu_runtime_revalidation.v3",
+  "protocol_id": "aneug_d9_gpu_runtime_revalidation_v3",
+  "status": "executable_engineering_diagnostic",
+  "as_of": "2026-08-17",
+  "predecessor": {
+    "run_id": "d9_gpuenv_r2",
+    "job_id": "116553.ECE-util1",
+    "queue": "coss_agpu",
+    "node": "ece-tgpu3",
+    "nvidia_smi_exit": 0,
+    "all_low_level_cu_init_codes": 999,
+    "cuda_error": "CUDA_ERROR_UNKNOWN",
+    "nvidia_uvm_device_present": false,
+    "nvidia_uvm_tools_device_present": false,
+    "all_torch_variants_failed": true,
+    "scientific_asset_reads": 0
+  },
+  "diagnostic_delta": {
+    "only_material_execution_change": "queue_coss_agpu_to_coss_a6gpu",
+    "same_driver_probe": true,
+    "same_torch_smoke": true,
+    "same_visibility_variants": ["inherited", "explicit_zero", "unset"],
+    "same_container_identity": true,
+    "information_gain": "separate_queue_node_configuration_from_account_wide_runtime_failure"
+  },
+  "runtime": {
+    "host_python": "/home/introai9/miniconda3/bin/python",
+    "container_path": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+    "container_bytes": 3204870144,
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2"
+  },
+  "scope": {
+    "engineering_only": true,
+    "dataset_path_in_wrapper": false,
+    "tensor_mesh_model_or_metric_read": false,
+    "scientific_verdict": false,
+    "raw_results_private": true
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_a6gpu",
+    "ncpus": 2,
+    "memory_gb": 16,
+    "ngpus": 1,
+    "walltime": "00:15:00",
+    "queue_enabled_and_started_at_registration": true,
+    "user_gpu_limit": 1,
+    "new_run_id_required": true,
+    "excluded_server": "junjinyong"
+  },
+  "decision": {
+    "pass": "nvidia_smi_and_matching_container_cu_init_and_torch_smoke_pass",
+    "pass_authorizes": "new_id_D9_R0_on_coss_a6gpu_with_selected_environment",
+    "failure_with_missing_uvm": "administrator_level_gpu_node_configuration_blocker",
+    "failure_with_uvm_present": "inspect_exact_new_low_level_error_before_training"
+  },
+  "privacy": {
+    "public_numeric_result": false,
+    "public_site_update_required": false
+  }
+}
