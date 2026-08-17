@@ -1,5 +1,12 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 D13C source synchronization:** Exact public D13C source
+> `0710696abef755ecbb3001641c76052525733d9e` is remote exact and passed
+> Research Quality `32053563054` with 837/837 tests. Automatic Pages run
+> `32053561757` failed but site maintenance is outside scope; do not repair it
+> or alter research code for deployment. D13C remains prepared/non-executable,
+> with no real-field read, job, result or paper claim. Never use `junjinyong`.
+
 > **2026-08-18 prepared D13C same-backbone functional fine-tuning:** D13C is
 > implemented and testable but non-executable until D12 has a terminal record
 > and one fresh private activation binds one variant. Five rows start from the
