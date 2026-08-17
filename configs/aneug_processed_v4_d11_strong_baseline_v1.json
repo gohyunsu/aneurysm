@@ -1,0 +1,99 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d11_strong_baseline.v1",
+  "protocol_id": "aneug_processed_v4_d11_strong_baseline_v1",
+  "status": "executable_validation_development",
+  "as_of": "2026-08-17",
+  "bound_evidence": {
+    "cache_manifest_sha256": "72e5152fce558cfb9f2a2e36089c28d15a476cb3b943996ad861d07884398247",
+    "d10_result_sha256": "32938addd877aeb1a6034cd03372e59f48d5a28f44ad354f0e97851adbde9e8b",
+    "d10_checkpoint_sha256": "c8508f22905effd28ab6ca29fe93f95f1b225f2c2e45386fbf6358debcfd7c49",
+    "official_code_commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "official_graphgps_sha256": "986531dc19f8f1949b565214e0279c292c7664f6ed27e8d91dd36f956cb51ba4",
+    "official_graphgps_encoder_sha256": "8c91521c95c6bec7458e7d6f23998283c029028874edd0deff444dac38a574f2",
+    "official_dataset_encoder_sha256": "9eecdaf5aef04bf2da999d685eaf622c87fb52044eb69635172f3d61a2da98e6",
+    "official_trainer_sha256": "8eb0b8ed732503d0c514a0ff96b22161fc2a6b0a7365592f410becdecadea2c6"
+  },
+  "data_boundary": {
+    "train_cases": 406,
+    "validation_cases": 51,
+    "outer_cases": 51,
+    "auxiliary_cases": 70,
+    "split_unit": "synthetic_geometry_component_not_patient_or_generator_family",
+    "read_outer_or_auxiliary": false,
+    "reuse_exact_d9_cache": true
+  },
+  "adaptation_identity": {
+    "claim": "matched_reimplementation_not_reproduction",
+    "source_anchored_elements": [
+      "Cartesian geometry and normal node inputs",
+      "GINE-style edge-conditioned local message passing",
+      "global attention",
+      "three-resolution graph U-Net hierarchy",
+      "GHD geometry conditioning",
+      "direct vector WSS supervision"
+    ],
+    "declared_differences": [
+      "pure PyTorch instead of PyG and torch-scatter",
+      "exact coarse-mesh attention instead of full-resolution Performer attention",
+      "all 432 cached GHD coefficients instead of separately reconstructed GHD and cotangent encodings",
+      "full 80-phase cycle output instead of snapshot sampling",
+      "no 14000-case steady augmentation"
+    ],
+    "uses_torch_geometric": false,
+    "uses_pytorch3d": false,
+    "uses_steady_augmentation": false
+  },
+  "architecture": {
+    "name": "GHD-conditioned GINE-GPS U-Net",
+    "width": 128,
+    "attention_heads": 4,
+    "fine_encoder_blocks": 2,
+    "middle_encoder_blocks": 2,
+    "coarse_gps_blocks": 3,
+    "middle_decoder_blocks": 1,
+    "fine_decoder_blocks": 1,
+    "output_phases": 80,
+    "output_coordinates": "Cartesian_then_deterministic_tangent_projection"
+  },
+  "optimization": {
+    "seed": 1103,
+    "maximum_epochs": 251,
+    "minimum_epochs": 80,
+    "early_stopping_patience": 40,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "scheduler": "step_50_gamma_0p75",
+    "step_size_epochs": 50,
+    "gamma": 0.75,
+    "gradient_accumulation_cases": 2,
+    "gradient_clip_norm": 1.0,
+    "loss": "area_weighted_relative_field_MSE",
+    "checkpoint_selection": "lowest_validation_field_relative_L2_then_earliest_epoch"
+  },
+  "development_gate": {
+    "field_relative_l2_ceiling": 0.35,
+    "pass_action": "permit_separate_registration_of_same_backbone_functional_readout_development",
+    "fail_action": "retain_negative_result_and_diagnose_capacity_information_or_optimization_with_new_run_ids"
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "12:00:00"
+  },
+  "authorization": {
+    "execute_one_training_job": true,
+    "functional_readout_training": false,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_result_or_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}

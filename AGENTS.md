@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D11 strong-baseline registration:** D10 Round 1 failed its
+> frozen private feasibility gate, so projection repair on the custom backbone
+> stays closed. D11 is one validation-development job on the exact 406/51 D9
+> cache and seed 1103. It is explicitly a pure-Torch matched reimplementation,
+> not a reproduction, of released AneuG/RHSIA elements: Cartesian geometry,
+> GHD conditioning, GINE-style local messages, coarse global attention, graph
+> U-Net hierarchy and direct 80-phase vector WSS. The official exact trainer,
+> PyG/PyTorch3D runtime and cotangent encodings are unavailable and the
+> differences are declared. Field feasibility must pass before any functional
+> readout is registered. Outer/auxiliary, multi-seed confirmation, paper claim
+> and public numeric output remain closed. Use only `introai9`; never use
+> `junjinyong` or update the site.
+
 > **2026-08-17 D10 Round 1 outcome and baseline pivot:** introai9 job
 > `116601.ECE-util1`, run ID `d10_round1_direct_horizon_r1`, finalized F/exit 0
 > and stage-out 0 with zero outer/auxiliary reads. The exact private result
