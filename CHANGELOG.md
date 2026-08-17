@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-17 · D9 GPU runtime revalidation registered
+
+- Added a data-free PBS diagnostic that compares the failed host/user-site
+  Torch path with the existing pinned Torch 2.5.1+cu118 Singularity runtime in
+  one GPU allocation and records scheduler device visibility separately.
+- A passing pinned-container CUDA matmul selects that runtime for a new-ID D9
+  R0 retry. No dataset, model, metric, public numeric result or site update is
+  part of this engineering check.
+
 ## 2026-08-17 · iterative validation and rerun policy
 
 - Replaced the blanket local-repair-loop/no-rerun rule with append-only,

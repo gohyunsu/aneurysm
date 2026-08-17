@@ -1,0 +1,68 @@
+{
+  "schema_version": "aurora.aneug_d9_gpu_runtime_revalidation.v1",
+  "protocol_id": "aneug_d9_gpu_runtime_revalidation_v1",
+  "status": "executable_engineering_diagnostic",
+  "as_of": "2026-08-17",
+  "predecessor": {
+    "study_family": "aneug_processed_v4_mesh_canonicalized_validation_pilot_d9_v1",
+    "job_id": "116549.ECE-util1",
+    "outcome": "execution_incomplete_before_data_model_or_metric_read",
+    "observed_torch": "2.6.0+cu118",
+    "observed_torch_path": "/home/introai9/.local/lib/python3.9/site-packages/torch/__init__.py",
+    "observed_failure": "cuda_initialization_unknown_error"
+  },
+  "scope": {
+    "engineering_only": true,
+    "dataset_paths_or_values_read": false,
+    "model_or_metric_execution": false,
+    "scientific_verdict": false,
+    "public_numeric_result": false
+  },
+  "runtime_candidates": {
+    "host_user_site": {
+      "role": "diagnostic_comparator_not_preferred_runtime",
+      "python": "/home/introai9/miniconda3/bin/python",
+      "expected_torch_path_prefix": "/home/introai9/.local/"
+    },
+    "pinned_container": {
+      "role": "preferred_reproducible_runtime",
+      "path": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+      "bytes": 3204870144,
+      "sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+      "python": "3.11.10",
+      "torch": "2.5.1+cu118",
+      "cuda_runtime": "11.8"
+    }
+  },
+  "checks": {
+    "scheduler_allocates_one_gpu": true,
+    "nvidia_smi_succeeds_inside_allocation": true,
+    "host_runtime_is_recorded_even_if_it_fails": true,
+    "container_cuda_available": true,
+    "container_cuda_device_count_positive": true,
+    "container_finite_2048_square_matmul": true,
+    "container_pass_required": true
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 2,
+    "memory_gb": 16,
+    "ngpus": 1,
+    "walltime": "00:15:00",
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong",
+    "retry_policy": "new_run_id_with_append_only_provenance_and_testable_reason"
+  },
+  "decision": {
+    "pass": "nvidia_smi_and_pinned_container_cuda_smoke_pass",
+    "pass_authorizes": "new_id_D9_R0_rerun_in_exact_pinned_container",
+    "host_failure_with_container_pass": "classify_host_user_site_runtime_as_inadmissible",
+    "container_failure": "inspect_scheduler_driver_container_binding_before_training"
+  },
+  "privacy": {
+    "raw_logs_and_runtime_results_private": true,
+    "public_site_update_required": false
+  }
+}

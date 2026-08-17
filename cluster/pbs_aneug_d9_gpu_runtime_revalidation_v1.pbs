@@ -1,0 +1,71 @@
+#!/bin/bash
+#PBS -N aurora_d9_gpuenv
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=2:mem=16gb:ngpus=1
+#PBS -l walltime=00:15:00
+
+record_root="${PBS_O_WORKDIR:-.}"
+/bin/mkdir -p "$record_root" || exit 70
+if [ -e "$record_root/attempt.started" ]; then
+  printf '%s\n' "This run ID already has an attempt record; choose a new run ID." >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-missing}" > "$record_root/attempt.started" || exit 71
+exec >>"$record_root/attempt.log" 2>&1
+
+attempt_status="$record_root/attempt.status.json"
+status_tmp="$record_root/attempt.status.json.tmp"
+probe_pass=false
+
+set -uo pipefail
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s,\"probe_pass\":%s}\n" "$code" "$(test -e "$record_root/attempt.complete" && printf true || printf false)" "$probe_pass" > "$status_tmp"; /bin/mv -f "$status_tmp" "$attempt_status"; exit "$code"' EXIT
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_EXPECTED_COMMIT:?set exact Quality-passed commit}"
+: "${AURORA_HOST_PYTHON:?set host diagnostic Python}"
+: "${AURORA_CONTAINER:?set pinned container}"
+: "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+
+actual_commit="$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ] || exit 72
+[ -z "$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ] || exit 73
+[ -x "$AURORA_HOST_PYTHON" ] || exit 74
+[ -r "$AURORA_CONTAINER" ] || exit 75
+[ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ] || exit 76
+
+printf 'stage=gpu_runtime_revalidation_started job=%s commit=%s\n' "${PBS_JOBID:-missing}" "$actual_commit"
+
+set +e
+/usr/bin/nvidia-smi > "$record_root/nvidia-smi.private.log" 2>&1
+nvidia_rc=$?
+
+/usr/bin/env PYTHONDONTWRITEBYTECODE=1 \
+  "$AURORA_HOST_PYTHON" "$AURORA_PROJECT_ROOT/experiments/gpu_smoke.py" \
+  --output "$record_root/host_runtime" > "$record_root/host_runtime.private.log" 2>&1
+host_rc=$?
+
+/usr/bin/singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$record_root:/output" \
+  "$AURORA_CONTAINER" \
+  /usr/bin/env PYTHONDONTWRITEBYTECODE=1 \
+  python /workspace/experiments/gpu_smoke.py --output /output/container_runtime \
+  > "$record_root/container_runtime.private.log" 2>&1
+container_rc=$?
+set -e
+
+if [ "$nvidia_rc" -eq 0 ] && [ "$container_rc" -eq 0 ] && \
+   [ -s "$record_root/container_runtime/gpu_smoke.json" ]; then
+  probe_pass=true
+  selected_runtime=pinned_container
+else
+  selected_runtime=null
+fi
+
+printf '{"schema_version":"aurora.aneug_d9_gpu_runtime_revalidation.result.v1","job_id":"%s","predecessor_job_id":"116549.ECE-util1","nvidia_smi_exit":%s,"host_runtime_exit":%s,"container_runtime_exit":%s,"selected_runtime":"%s","probe_pass":%s}\n' \
+  "${PBS_JOBID:-missing}" "$nvidia_rc" "$host_rc" "$container_rc" "$selected_runtime" "$probe_pass" \
+  > "$record_root/probe_result.private.json"
+
+[ "$probe_pass" = true ]
+printf '%s\n' complete > "$record_root/attempt.complete"
+printf 'stage=gpu_runtime_revalidation_complete selected_runtime=%s host_rc=%s\n' "$selected_runtime" "$host_rc"

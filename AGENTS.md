@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D9 GPU-runtime revalidation registration:** The first action
+> under the current iterative policy is a data-free, one-allocation comparison
+> of scheduler `nvidia-smi`, the original host/user-site Torch runtime and the
+> existing pinned Torch 2.5.1+cu118 Singularity runtime. It reads no AneuG path,
+> model or metric. Container CUDA availability plus a finite matrix multiply is
+> the pass condition; host failure is diagnostic and nonblocking. Pass selects
+> the exact pinned image for a new-ID D9 R0 retry with the same scientific
+> split, architecture, loss and thresholds. Runtime outputs remain private.
+> Use only `introai9`; never access `junjinyong`, and do not update the site.
+
 > **2026-08-17 current iterative-validation authority:** The user withdrew the
 > blanket local-repair-loop and no-rerun rule. Historical jobs and artifacts
 > remain immutable, but their dataset, split, architecture, loss, code path and
