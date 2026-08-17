@@ -1,0 +1,101 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d14_transolver_control.v1",
+  "protocol_id": "aneug_processed_v4_d14_transolver_control_v1",
+  "status": "prepared_non_executable",
+  "as_of": "2026-08-18",
+  "purpose": "modern_irregular_mesh_strong_control_before_candidate_selection",
+  "source": {
+    "paper": "Transolver: A Fast Transformer Solver for PDEs on General Geometries",
+    "venue": "ICML 2024",
+    "repository": "thuml/Transolver",
+    "commit": "75e0f67643806a81cd1d3f6adc88dd8c02416fe7",
+    "irregular_mesh_model_sha256": "1d0c1b932411ac408d8d00ca047d7f875c3176e7b001db802d30c065a7416d74",
+    "license": "MIT",
+    "license_sha256": "2c919cd03fa823bf7eefc00a957ff8324c865cd22aa5285e563dc4b558084f25"
+  },
+  "comparison_identity": {
+    "label": "matched_information_full_cycle_Transolver_adaptation_not_reproduction",
+    "proposed_method": false,
+    "source_anchored_elements": [
+      "physics-slice soft assignment",
+      "attention among learned slice tokens",
+      "deslicing to irregular mesh nodes",
+      "pre-normalized residual attention and feed-forward blocks",
+      "official AirfRANS width, depth, head, slice and MLP-ratio defaults"
+    ],
+    "declared_adapter_differences": [
+      "D5 component split and physical WSS cache replace upstream AirfRANS data",
+      "coordinates, mesh normals, relative area and the cached 432-D GHD descriptor match D11 information",
+      "GHD is added through a global conditioner absent from the upstream model",
+      "one forward predicts all 80 WSS phases instead of four steady AirfRANS channels",
+      "Cartesian vectors are deterministically tangent-projected",
+      "a positive temperature clamp prevents a zero or negative soft-assignment denominator",
+      "AURORA field loss, optimizer selection, metrics and append-only provenance replace the upstream trainer"
+    ]
+  },
+  "bound_data": {
+    "cache_manifest_sha256": "72e5152fce558cfb9f2a2e36089c28d15a476cb3b943996ad861d07884398247",
+    "train_cases": 406,
+    "validation_cases": 51,
+    "outer_cases": 51,
+    "auxiliary_cases": 70,
+    "phases": 80,
+    "nodes": 13902,
+    "read_outer_or_auxiliary": false
+  },
+  "architecture": {
+    "name": "GHD-conditioned full-cycle Transolver",
+    "node_features": ["coordinates", "mesh_normals", "log_relative_vertex_area"],
+    "global_features": "432-D cached GHD descriptor",
+    "width": 256,
+    "attention_heads": 8,
+    "blocks": 8,
+    "slices": 32,
+    "mlp_ratio": 2,
+    "dropout": 0.0,
+    "output_phases": 80,
+    "output_coordinates": "Cartesian_then_deterministic_tangent_projection"
+  },
+  "optimization": {
+    "seed": 1103,
+    "maximum_epochs": 251,
+    "minimum_epochs": 80,
+    "early_stopping_patience": 40,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "scheduler": "step_50_gamma_0p75",
+    "step_size_epochs": 50,
+    "gamma": 0.75,
+    "gradient_accumulation_cases": 2,
+    "gradient_clip_norm": 1.0,
+    "loss": "area_weighted_relative_field_MSE",
+    "checkpoint_selection": "lowest_validation_field_relative_L2_then_earliest_epoch"
+  },
+  "decision_rule": {
+    "absolute_field_threshold": null,
+    "interpretation": "strong_comparator_descriptive_not_pass_fail_gate",
+    "comparison": "paired_validation_field_functional_coverage_and_compute_against_D11_and_D12"
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "24:00:00"
+  },
+  "authorization": {
+    "execute_now": false,
+    "requires_fresh_private_activation": true,
+    "method_combination_search": false,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}

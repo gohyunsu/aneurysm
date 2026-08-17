@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 prepared D14 Transolver control:** D14 is implemented and
+> testable but non-executable while D12 has no terminal record. It adapts the
+> exact pinned MIT Transolver physics-slice design into a same-information
+> complete-cycle control: coordinates, mesh normals, relative area and 432-D
+> GHD enter eight 256-wide blocks with eight heads and 32 slices, followed by
+> an 80-phase tangent WSS output. It is a comparator, not the proposed method
+> or an exact upstream reproduction. It has no absolute threshold and reads no
+> outer/auxiliary values. Fresh Quality and private activation are required;
+> never use `junjinyong` or the site.
+
 > **2026-08-18 prepared D13A response-manifold oracle:** D13A is implemented
 > and testable but non-executable while D12 has no terminal record. It fits an
 > area/phase-weighted, energy-normalized complete-cycle basis from the 406
