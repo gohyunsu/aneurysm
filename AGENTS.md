@@ -15,6 +15,20 @@
 > explicitly changes it; maintain code and private records, not the site. This
 > paragraph supersedes conflicting execution bans below.
 
+> **2026-08-17 baseline-first performance authority:** D11's registered 0.35
+> field-rL2 ceiling is retained as a legacy diagnostic, not treated as a
+> literature-calibrated acceptance gate or a ban on continuation. Finish and
+> preserve D11 regardless of that boolean. Before comparative or paper-level
+> judgment, execute a clearly labelled direct AneuG/RHSIA prior baseline under
+> the same data, split, inputs, metric and materially matched compute budget,
+> using the released dependency/feature path wherever possible and recording
+> every deviation. Then permit staged validation exploration of backbone
+> capacity, geometric representation, periodic temporal decoding, objectives
+> and cycle-functional readouts, including justified combinations. Retain all
+> trials and keep outer data sealed until the candidate and confirmatory rule
+> are frozen. This paragraph supersedes D11 text that makes later development
+> conditional on the 0.35 boolean.
+
 > **2026-08-17 D11 strong-baseline registration:** D10 Round 1 failed its
 > frozen private feasibility gate, so projection repair on the custom backbone
 > stays closed. D11 is one validation-development job on the exact 406/51 D9
