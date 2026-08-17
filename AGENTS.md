@@ -16,9 +16,12 @@
 > external inputs; no absolute performance threshold, architecture selection,
 > real-field read, GPU run or paper claim is encoded. Future same-backbone
 > development compares field-only, statistic-aligned, OSI-aligned and complete
-> objectives after the direct controls. Exact implementation/test/config/doc
-> hashes are `b82df3ac…3ec8` / `cbea0781…ec72` / `a78535a7…cba6` /
-> `1a87e625…6b54`; 8 focused and 826 full tests pass. Never use `junjinyong`
+> objectives after the direct controls. An optional field-anchored optimizer
+> removes only first-order functional/field gradient conflict and norm-matches
+> the retained direction; it is a control, not a finite-step guarantee or
+> standalone novelty. Exact implementation/test/config/doc hashes are
+> `a54ded57…82f6` / `d5802bb2…69b4` / `35da75a6…b6f1` /
+> `6dbeee93…85bc`; 12 focused and 830 full tests pass. Never use `junjinyong`
 > or the site.
 
 > **2026-08-18 prepared D14 Transolver control:** D14 is implemented and

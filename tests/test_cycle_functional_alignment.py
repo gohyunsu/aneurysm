@@ -9,6 +9,7 @@ import torch
 from aurora.cycle_functional_alignment import (
     CycleFunctionalAlignmentError,
     complete_cycle_alignment_terms,
+    field_anchored_gradient_combination,
 )
 
 
@@ -195,3 +196,68 @@ class CycleFunctionalAlignmentTests(unittest.TestCase):
             invalid = reference.clone()
             invalid[0, 0, 0] = float("nan")
             all_terms(invalid, reference, phase_weights, areas)
+
+    def test_field_anchored_gradient_removes_only_conflict(self) -> None:
+        result = field_anchored_gradient_combination(
+            [torch.tensor([1.0, 0.0], dtype=torch.float64)],
+            [torch.tensor([-1.0, 1.0], dtype=torch.float64)],
+            functional_to_field_norm_ratio=1.0,
+        )
+        torch.testing.assert_close(
+            result["projected_functional_gradients"][0],
+            torch.tensor([0.0, 1.0], dtype=torch.float64),
+        )
+        torch.testing.assert_close(
+            result["combined_gradients"][0],
+            torch.tensor([1.0, 1.0], dtype=torch.float64),
+        )
+        self.assertTrue(bool(result["projection_applied"].item()))
+        self.assertGreaterEqual(float(result["inner_product_after_projection"]), 0.0)
+
+    def test_anchored_gradient_is_auxiliary_scale_invariant(self) -> None:
+        field = [torch.tensor([1.0, 2.0], dtype=torch.float64)]
+        auxiliary = [torch.tensor([2.0, 1.0], dtype=torch.float64)]
+        base = field_anchored_gradient_combination(
+            field, auxiliary, functional_to_field_norm_ratio=0.5
+        )
+        scaled = field_anchored_gradient_combination(
+            field,
+            [10.0 * auxiliary[0]],
+            functional_to_field_norm_ratio=0.5,
+        )
+        torch.testing.assert_close(
+            base["combined_gradients"][0], scaled["combined_gradients"][0]
+        )
+        self.assertFalse(bool(base["projection_applied"].item()))
+
+    def test_zero_auxiliary_gradient_preserves_field_gradient(self) -> None:
+        field = [torch.tensor([1.0, -2.0], dtype=torch.float64)]
+        result = field_anchored_gradient_combination(
+            field,
+            [torch.zeros(2, dtype=torch.float64)],
+            functional_to_field_norm_ratio=1.0,
+        )
+        torch.testing.assert_close(result["combined_gradients"][0], field[0])
+        torch.testing.assert_close(
+            result["functional_scale"], torch.tensor(0.0, dtype=torch.float64)
+        )
+
+    def test_invalid_gradient_combinations_fail_closed(self) -> None:
+        with self.assertRaisesRegex(CycleFunctionalAlignmentError, "gradient_shape"):
+            field_anchored_gradient_combination(
+                [torch.ones(2)],
+                [torch.ones(3)],
+                functional_to_field_norm_ratio=1.0,
+            )
+        with self.assertRaisesRegex(CycleFunctionalAlignmentError, "zero_field_gradient"):
+            field_anchored_gradient_combination(
+                [torch.zeros(2)],
+                [torch.ones(2)],
+                functional_to_field_norm_ratio=1.0,
+            )
+        with self.assertRaisesRegex(CycleFunctionalAlignmentError, "gradient_ratio"):
+            field_anchored_gradient_combination(
+                [torch.ones(2)],
+                [torch.ones(2)],
+                functional_to_field_norm_ratio=float("inf"),
+            )

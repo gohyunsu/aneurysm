@@ -23,8 +23,15 @@
     "field_only",
     "field_plus_tawss_and_mean_vector",
     "field_plus_osi",
-    "field_plus_all_functionals"
+    "field_plus_all_functionals_scalarized",
+    "field_anchored_all_functionals"
   ],
+  "optimization_controls": {
+    "scalarized": "explicit_loss_weights",
+    "field_anchored": "remove_negative_functional_dot_field_component_then_norm_match",
+    "field_anchored_scope": "first_order_gradient_control_not_finite_step_guarantee",
+    "functional_to_field_norm_ratio": "explicit_validation_development_input"
+  },
   "decision_rule": {
     "absolute_performance_threshold": null,
     "comparison": "paired_validation_field_tawss_osi_coverage_and_compute_after_direct_baselines",

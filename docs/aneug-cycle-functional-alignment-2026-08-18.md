@@ -34,10 +34,19 @@ A functional gain can support the paper only if its paired field trade-off is
 competitive with the empirical direct-baseline distribution; no numerical
 cutoff is set before those baselines run.
 
+Two complete-objective optimizers are retained as controls. The standard row
+uses an explicit scalarized loss. The field-anchored row removes only the
+component of the functional gradient that conflicts with the field gradient,
+then norm-matches the retained functional direction before applying an
+explicit ratio. This is a first-order multi-objective optimization control,
+not a guarantee of finite-step field non-inferiority and not a standalone
+novelty claim. Its purpose is to test whether functional gains otherwise lost
+to gradient conflict can be recovered without choosing a performance cutoff.
+
 ## Synthetic guarantees
 
 The tests require exact-cycle zero loss, finite backward propagation, common
 rotation and scale invariance, explicit reference-only OSI support, finite
-zero-prediction behavior, double-precision autograd agreement and fail-closed
-input validation. These are numerical properties only, not scientific
-evidence.
+zero-prediction behavior, double-precision autograd agreement, conflicting and
+aligned gradient geometry, auxiliary-gradient scale invariance and fail-closed
+input validation. These are numerical properties only, not scientific evidence.

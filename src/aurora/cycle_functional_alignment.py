@@ -196,3 +196,91 @@ def complete_cycle_alignment_terms(
         "reference_jensen_gap_minimum": reference_stats["jensen_gap"].min(),
         "prediction_jensen_gap_minimum": prediction_stats["jensen_gap"].min(),
     }
+
+
+def field_anchored_gradient_combination(
+    field_gradients: list[torch.Tensor],
+    functional_gradients: list[torch.Tensor],
+    *,
+    functional_to_field_norm_ratio: float,
+    numerical_epsilon: float = 1e-12,
+) -> dict[str, object]:
+    """Combine two gradient families while removing first-order field conflict.
+
+    When the functional gradient has a negative inner product with the field
+    gradient, only that conflicting component is removed. The retained
+    functional gradient is then norm-matched to the field gradient before the
+    explicit ratio is applied. This is an optimization control inspired by
+    multi-objective gradient surgery, not a guarantee of finite-step metric
+    non-inferiority.
+    """
+
+    _require(
+        len(field_gradients) == len(functional_gradients)
+        and len(field_gradients) > 0,
+        "gradient_count",
+    )
+    _require(
+        math.isfinite(functional_to_field_norm_ratio)
+        and functional_to_field_norm_ratio >= 0.0,
+        "gradient_ratio",
+    )
+    _require(numerical_epsilon > 0.0, "gradient_epsilon")
+    for field, functional in zip(field_gradients, functional_gradients):
+        _require(tuple(field.shape) == tuple(functional.shape), "gradient_shape")
+        _require(
+            field.dtype == functional.dtype
+            and field.device == functional.device
+            and field.dtype in (torch.float32, torch.float64),
+            "gradient_type",
+        )
+        _require(
+            bool(torch.isfinite(field).all().item())
+            and bool(torch.isfinite(functional).all().item()),
+            "gradient_finite",
+        )
+
+    field_norm_squared = sum(torch.sum(value.square()) for value in field_gradients)
+    functional_norm_squared = sum(
+        torch.sum(value.square()) for value in functional_gradients
+    )
+    inner_before = sum(
+        torch.sum(field * functional)
+        for field, functional in zip(field_gradients, functional_gradients)
+    )
+    _require(
+        bool((field_norm_squared > numerical_epsilon).item()), "zero_field_gradient"
+    )
+    projection_coefficient = torch.clamp(
+        inner_before / field_norm_squared, max=0.0
+    )
+    projected = [
+        functional - projection_coefficient * field
+        for field, functional in zip(field_gradients, functional_gradients)
+    ]
+    projected_norm_squared = sum(torch.sum(value.square()) for value in projected)
+    field_norm = torch.sqrt(field_norm_squared)
+    projected_norm = torch.sqrt(projected_norm_squared)
+    if bool((projected_norm_squared > numerical_epsilon).item()):
+        scale = (
+            functional_to_field_norm_ratio
+            * field_norm
+            / torch.clamp(projected_norm, min=numerical_epsilon)
+        )
+    else:
+        scale = torch.zeros((), dtype=field_norm.dtype, device=field_norm.device)
+    combined = [field + scale * value for field, value in zip(field_gradients, projected)]
+    inner_after = sum(
+        torch.sum(field * value) for field, value in zip(field_gradients, projected)
+    )
+    return {
+        "combined_gradients": combined,
+        "projected_functional_gradients": projected,
+        "field_norm": field_norm,
+        "functional_norm_before": torch.sqrt(functional_norm_squared),
+        "functional_norm_after_projection": projected_norm,
+        "inner_product_before": inner_before,
+        "inner_product_after_projection": inner_after,
+        "projection_applied": inner_before < 0,
+        "functional_scale": scale,
+    }
