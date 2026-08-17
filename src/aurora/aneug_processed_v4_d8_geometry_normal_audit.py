@@ -388,12 +388,12 @@ def aggregate_diagnostics(
         "global_mesh_normal_component_ratio_p95_histogram": global_p95 if math.isfinite(global_p95) else None,
         "case_fraction_passing_same_tangency_limits": case_pass_fraction,
         "stored_normal_census_selects_gate": False,
-        "case_ids_included": false,
-        "model_fitted_or_selected": false,
-        "gpu_used": false,
-        "paper_result_or_claim_authorized": false,
-        "numeric_result_publication_authorized": false,
-        "d8_closes_after_this_outcome": true,
+        "case_ids_included": False,
+        "model_fitted_or_selected": False,
+        "gpu_used": False,
+        "paper_result_or_claim_authorized": False,
+        "numeric_result_publication_authorized": False,
+        "d8_closes_after_this_outcome": True,
     }
     statistics = {
         "schema_version": "aurora.aneug_processed_v4_d8_geometry_normal_audit.private_statistics.v1",
@@ -408,9 +408,9 @@ def aggregate_diagnostics(
         },
         "stored_normal_magnitude_above_1p5_count": upper_count,
         "stored_normal_magnitude_above_1p5_fraction": upper_count / stored_node_count if stored_node_count else None,
-        "stored_normal_census_is_descriptive_only": true,
-        "case_ids_included": false,
-        "validation_outer_or_auxiliary_statistics_included": false,
+        "stored_normal_census_is_descriptive_only": True,
+        "case_ids_included": False,
+        "validation_outer_or_auxiliary_statistics_included": False,
     }
     return result, statistics
 
