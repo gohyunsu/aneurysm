@@ -1,5 +1,12 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 active-branch source synchronization:** Exact public
+> scientific source `27be93fb90391c5981982b0bd5a0c090a3980b25` is remote
+> exact and passed Research Quality `32057390792` with 852/852 tests. Its
+> automatic Pages run `32057389118` passed but site work remains out of scope.
+> D13B stays dataset-free/non-executable with no rank, model, field, GPU,
+> result or claim selected. Never use `junjinyong` or maintain the site.
+
 > **2026-08-18 architecture-ablation compute boundary:** The dataset-free
 > wrapper now has three explicit forwards. `response_only` can be constructed
 > without a local backbone and never calls one; `local_only` never calls the
