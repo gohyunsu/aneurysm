@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 functional-alignment source synchronization:** Exact public
+> scientific source `a89b2c794e4ac61d72b0a4e068e7c0c9bfe46421` is remote
+> exact and passed Research Quality `32050353431`. Eight focused and 826 full
+> tests pass. The unrelated automatic Pages run `32050353372` failed; public
+> site maintenance is outside the current user scope, so do not repair it or
+> change research code for deployment. D12 job `116609.ECE-util1` remains the
+> sole introai9 GPU job. Never use `junjinyong`.
+
 > **2026-08-18 complete-cycle functional-alignment kernel:** A dataset-free,
 > non-executable D13C building block now computes explicit field, mean-vector,
 > TAWSS and reference-support OSI losses from one decoded WSS cycle. It adds no
