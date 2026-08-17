@@ -1,0 +1,63 @@
+{
+  "schema_version": "aurora.aneug_d9_gpu_runtime_revalidation.v4",
+  "protocol_id": "aneug_d9_gpu_runtime_revalidation_v4",
+  "status": "executable_engineering_diagnostic",
+  "as_of": "2026-08-17",
+  "predecessor": {
+    "run_id": "d9_gpuenv_r3",
+    "job_id": "116554.ECE-util1",
+    "requested_queue": "coss_a6gpu",
+    "allocated_node": "ece-tgpu3",
+    "allocated_node_qlist": "tgpu",
+    "nvidia_uvm_present": false,
+    "all_cu_init_codes": 999,
+    "scientific_asset_reads": 0,
+    "finding": "queue_name_without_Qlist_did_not_isolate_A6000_nodes"
+  },
+  "scheduler_evidence": {
+    "a6000_node_resource": "resources_available.Qlist=a6000",
+    "free_a6000_nodes_observed": true,
+    "existing_repository_wrappers_use_select_Qlist_a6000": true
+  },
+  "diagnostic_delta": {
+    "only_material_execution_change": "add_select_resource_Qlist_a6000",
+    "same_queue": "coss_a6gpu",
+    "same_driver_probe_torch_smoke_visibility_variants_and_container": true,
+    "information_gain": "force_actual_A6000_node_instead_of_reusing_tgpu_route"
+  },
+  "runtime": {
+    "host_python": "/home/introai9/miniconda3/bin/python",
+    "container_path": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+    "container_bytes": 3204870144,
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2"
+  },
+  "scope": {
+    "engineering_only": true,
+    "dataset_path_in_wrapper": false,
+    "tensor_mesh_model_or_metric_read": false,
+    "scientific_verdict": false,
+    "raw_results_private": true
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "ncpus": 2,
+    "memory_gb": 16,
+    "ngpus": 1,
+    "walltime": "00:15:00",
+    "new_run_id_required": true,
+    "excluded_server": "junjinyong"
+  },
+  "decision": {
+    "pass": "allocated_node_Qlist_a6000_and_matching_container_cu_init_and_torch_smoke_pass",
+    "pass_authorizes": "new_id_D9_R0_on_coss_a6gpu_Qlist_a6000",
+    "non_a6000_allocation": "scheduler_contract_failure",
+    "a6000_cuda_failure": "administrator_level_A6000_runtime_blocker"
+  },
+  "privacy": {
+    "public_numeric_result": false,
+    "public_site_update_required": false
+  }
+}

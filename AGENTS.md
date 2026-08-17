@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D9 GPU-runtime R3 finding and R4 registration:** Requesting
+> `coss_a6gpu` alone again allocated `ece-tgpu3` (`Qlist=tgpu`) and reproduced
+> missing UVM plus `cuInit` 999; queue name alone is not node isolation. PBS
+> metadata shows actual A6000 nodes advertise `Qlist=a6000`. R4 adds exactly
+> `:Qlist=a6000` to the select resource and reuses the exact data-free probe and
+> pinned container. Pass selects that route for D9 R0; non-A6000 allocation or
+> CUDA failure is an explicit scheduler/admin blocker. Never use `junjinyong`
+> or update the site.
+
 > **2026-08-17 D9 GPU-runtime R2 finding and R3 registration:** On
 > `coss_agpu`/`ece-tgpu3`, R2 found a scheduler-visible GPU but no
 > `/dev/nvidia-uvm` or `uvm-tools`; host/container `cuInit(0)` returned 999 in

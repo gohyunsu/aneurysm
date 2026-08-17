@@ -64,3 +64,10 @@ route and executes the exact R2 probe and pinned container. Pass establishes a
 usable introai9 runtime for a new-ID D9 R0. The same missing-UVM failure on that
 separate queue establishes an administrator-level GPU-node blocker; no training
 is launched in either case until a finite container CUDA operation passes.
+
+R3 showed that the queue name alone is insufficient: PBS again allocated the
+`Qlist=tgpu` node and reproduced missing UVM plus `cuInit` 999. Read-only node
+metadata shows actual A6000 nodes advertise `resources_available.Qlist=a6000`.
+R4 therefore adds only `Qlist=a6000` to the select resource and executes the
+same probe. This is the first check that actually constrains allocation to an
+A6000 node.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-17 · D9 explicit A6000 selector R4 registered
+
+- R3 proved that `coss_a6gpu` without a node resource selector can still land
+  on the same `Qlist=tgpu` node and reproduce the missing-UVM failure.
+- Added `Qlist=a6000` as the sole diagnostic delta while reusing the exact R2
+  low-level and Torch probes. This forces the intended introai9 A6000 route
+  before any D9 data or training access.
+
 ## 2026-08-17 · D9 GPU runtime queue-isolation R3 registered
 
 - R2 found working GPU enumeration but missing NVIDIA UVM device nodes and
