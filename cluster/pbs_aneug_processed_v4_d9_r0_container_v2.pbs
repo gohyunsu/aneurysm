@@ -1,0 +1,79 @@
+#!/bin/bash
+#PBS -N aurora_d9_r0_c
+#PBS -q coss_a6gpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=04:00:00
+
+record_root="${PBS_O_WORKDIR:-.}"
+/bin/mkdir -p "$record_root" || exit 70
+if [ -e "$record_root/attempt.started" ]; then
+  printf '%s\n' "This run ID already has an attempt record; choose a new run ID." >&2
+  exit 90
+fi
+printf '%s\n' "${PBS_JOBID:-missing}" > "$record_root/attempt.started" || exit 71
+exec >>"$record_root/attempt.log" 2>&1
+
+attempt_status="$record_root/attempt.status.json"
+status_tmp="$record_root/attempt.status.json.tmp"
+r0_pass_json=null
+
+set -euo pipefail
+trap 'code=$?; trap - EXIT; printf "{\"exit_code\":%s,\"complete\":%s,\"r0_pass\":%s}\n" "$code" "$(test -e "$record_root/attempt.complete" && printf true || printf false)" "$r0_pass_json" > "$status_tmp"; /bin/mv -f "$status_tmp" "$attempt_status"; exit "$code"' EXIT
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_EXPECTED_COMMIT:?set exact Quality-passed commit}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_D5_PRIVATE_MANIFEST:?set exact private D5 manifest}"
+: "${AURORA_D9_ACTIVATION:?set private retry activation}"
+: "${AURORA_D9_CACHE:?set new private D9 cache path}"
+: "${AURORA_CONTAINER:?set pinned container}"
+: "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+: "${AURORA_GPUENV_RESULT:?set passing R4 result}"
+: "${AURORA_GPUENV_RESULT_SHA256:?set passing R4 result SHA-256}"
+
+actual_commit="$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(/usr/bin/git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ -r "$AURORA_CONTAINER" ]
+[ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ]
+[ -r "$AURORA_GPUENV_RESULT" ]
+[ "$(/usr/bin/sha256sum "$AURORA_GPUENV_RESULT" | /usr/bin/cut -d' ' -f1)" = "$AURORA_GPUENV_RESULT_SHA256" ]
+/usr/bin/python3 -c 'import json,sys; p=json.load(open(sys.argv[1], encoding="utf-8")); assert p["probe_pass"] is True and p["selected_runtime"] == "pinned_container_inherited"' "$AURORA_GPUENV_RESULT"
+[ -r "$AURORA_D5_PRIVATE_MANIFEST" ]
+[ -r "$AURORA_D9_ACTIVATION" ]
+[ ! -e "$AURORA_D9_CACHE" ]
+
+cache_parent="$(/usr/bin/dirname "$AURORA_D9_CACHE")"
+cache_name="$(/usr/bin/basename "$AURORA_D9_CACHE")"
+d5_parent="$(/usr/bin/dirname "$AURORA_D5_PRIVATE_MANIFEST")"
+d5_name="$(/usr/bin/basename "$AURORA_D5_PRIVATE_MANIFEST")"
+activation_parent="$(/usr/bin/dirname "$AURORA_D9_ACTIVATION")"
+activation_name="$(/usr/bin/basename "$AURORA_D9_ACTIVATION")"
+/bin/mkdir -p "$cache_parent"
+
+printf 'stage=R0_container_prepare_started job=%s commit=%s\n' "${PBS_JOBID:-missing}" "$actual_commit"
+/usr/bin/singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_DATA_ROOT:/data:ro" \
+  --bind "$d5_parent:/private/d5:ro" \
+  --bind "$activation_parent:/private/activation:ro" \
+  --bind "$cache_parent:/cache" \
+  --bind "$record_root:/output" \
+  "$AURORA_CONTAINER" \
+  /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONPATH=/workspace/src \
+  python -m aurora.aneug_processed_v4_d9 \
+  --config /workspace/configs/aneug_processed_v4_d9_mesh_canonicalized_pilot_v1.json \
+  --mode prepare \
+  --activation "/private/activation/$activation_name" \
+  --expected-commit "$AURORA_EXPECTED_COMMIT" \
+  --d6-registration /workspace/configs/aneug_processed_v4_d6_train_field_audit_v1.json \
+  --transient /data/processed_v4_d3/assembled_registered_data_1k_v4.pth \
+  --steady /data/processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary \
+  --private-d5-manifest "/private/d5/$d5_name" \
+  --cache "/cache/$cache_name" \
+  --result /output/r0_result.json
+
+r0_pass_json="$(/usr/bin/python3 -c 'import json,sys; print(str(json.load(open(sys.argv[1], encoding="utf-8"))["r0_pass"]).lower())' "$record_root/r0_result.json")"
+[ "$r0_pass_json" = true ]
+printf '%s\n' complete > "$record_root/attempt.complete"
+printf 'stage=R0_container_prepare_complete r0_pass=%s\n' "$r0_pass_json"

@@ -1,0 +1,69 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d9_container_execution.v2",
+  "protocol_id": "aneug_processed_v4_mesh_canonicalized_validation_pilot_d9_v1",
+  "status": "executable_development_retry_after_runtime_revalidation",
+  "as_of": "2026-08-17",
+  "predecessors": {
+    "failed_r0_job": "116549.ECE-util1",
+    "failure_before_data_model_metric": true,
+    "passing_gpu_runtime_job": "116555.ECE-util1",
+    "passing_gpu_runtime_result_sha256": "dbfadfa56d2d48ff028d52913fae43e584e6faae1dfda6865b3b980ed6caec1d",
+    "selected_runtime": "pinned_container_inherited"
+  },
+  "unchanged_scientific_contract": {
+    "config": "configs/aneug_processed_v4_d9_mesh_canonicalized_pilot_v1.json",
+    "config_sha256": "4b5031a7025649cb8cee22b3238499aa17d4b606756001f248bfd08315b0f804",
+    "implementation": "src/aurora/aneug_processed_v4_d9.py",
+    "implementation_sha256": "d9c9f5d5c1832ad57691658cee5b7cd0a931aba19949de7feb9904d635c18ac5",
+    "split_architecture_loss_seed_thresholds_changed": false,
+    "development_not_confirmation": true,
+    "outer_or_auxiliary_access": false
+  },
+  "runtime_delta": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_path": "/home/introai9/AAAI/mipv/containers/torch251-cuda118-pinned.sif",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "container_torch": "2.5.1+cu118",
+    "visibility": "scheduler_inherited",
+    "host_torch_used_for_science": false
+  },
+  "stages": {
+    "R0_prepare_smoke": {
+      "run_id": "d9_r0_container_r1",
+      "ncpus": 4,
+      "memory_gb": 64,
+      "ngpus": 1,
+      "walltime": "04:00:00",
+      "read_train_and_validation": true,
+      "write_private_cache": true
+    },
+    "R1_direct_cycle": {
+      "run_id": "d9_r1_direct_container_r1",
+      "requires_R0_pass": true,
+      "walltime": "12:00:00"
+    },
+    "R1_moment_pod": {
+      "run_id": "d9_r1_moment_container_r1",
+      "requires_R0_pass": true,
+      "walltime": "12:00:00"
+    }
+  },
+  "provenance": {
+    "new_run_id_and_result_directory_each_execution": true,
+    "existing_attempts_never_overwritten_hidden_or_relabelled": true,
+    "retries_require_recorded_reason_and_change": true,
+    "all_numeric_results_private": true
+  },
+  "authorization": {
+    "execute_R0": true,
+    "execute_R1_only_after_R0_pass": true,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_result_or_claim": false,
+    "maintain_public_site": false,
+    "excluded_server": "junjinyong"
+  }
+}

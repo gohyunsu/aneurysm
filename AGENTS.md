@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 D9 container execution retry registration:** Passing R4 job
+> `116555.ECE-util1` selects introai9 `coss_a6gpu:Qlist=a6000` plus the exact
+> pinned Torch 2.5.1+cu118 container. New R0/R1 wrappers reuse byte-exact D9
+> scientific config/code; split, architecture, loss, seed and thresholds do
+> not change. R0 verifies R4, mounts data read-only and writes a new private
+> cache; R1 requires its pass and reads only that cache. Outer/auxiliary,
+> confirmation and paper-claim authority remain zero. Every execution uses a
+> new append-only run ID. Never use `junjinyong` or update the site.
+
 > **2026-08-17 D9 GPU-runtime R3 finding and R4 registration:** Requesting
 > `coss_a6gpu` alone again allocated `ece-tgpu3` (`Qlist=tgpu`) and reproduced
 > missing UVM plus `cuInit` 999; queue name alone is not node isolation. PBS

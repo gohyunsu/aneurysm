@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-17 · D9 pinned-container execution retry registered
+
+- Bound the passing A6000 route to new R0/R1 wrappers: introai9
+  `coss_a6gpu:Qlist=a6000`, exact pinned container and scheduler-inherited GPU
+  visibility.
+- Kept the original D9 scientific config and implementation byte-exact. R0
+  verifies runtime evidence, reads processed data through a read-only bind and
+  writes a new private cache; R1 remains conditional on R0 pass.
+
 ## 2026-08-17 · D9 explicit A6000 selector R4 registered
 
 - R3 proved that `coss_a6gpu` without a node resource selector can still land
