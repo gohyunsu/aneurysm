@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-17 current iterative-validation authority:** The user withdrew the
+> blanket local-repair-loop and no-rerun rule. Historical jobs and artifacts
+> remain immutable, but their dataset, split, architecture, loss, code path and
+> scientific question may be reused in a new run. Infrastructure/dependency/
+> scheduler failures, interrupted jobs, stochastic replications and bug-fix
+> checks may be retried without inventing a new hypothesis. Every repetition
+> uses a new run ID/result directory and append-only provenance containing its
+> predecessor, exact commit/config, seed, environment and rationale; never
+> overwrite, hide or selectively discard an earlier outcome. Training/
+> validation development may iterate, while outer/confirmatory endpoints and
+> rules must be frozen before access and may not be tuned after observation.
+> There is no arbitrary one-attempt cap, but an unchanged failure is repeated
+> only when the run can add information. This paragraph supersedes older
+> one-shot/no-repair statements as current policy; those statements remain
+> historical records. Code and experiment records are maintained, not the
+> public static site. Use only `introai9`; never access/query/transfer/submit/
+> monitor `junjinyong`.
+
 > **2026-08-16 transient WSS functional metric kernel:** A synthetic-only,
 > method-free kernel now requires explicit phase quadrature for TAWSS/OSI/RRT,
 > returns NaN plus validity masks at singular nodes and verifies the algebraic
@@ -4503,33 +4521,33 @@ threshold를 바꾸면 반드시 exploratory로 표시한다.
 2. `docs/model-spec.md`
 3. `docs/experiment-protocol.md`
 4. `configs/aurora_v1.json`
-5. `site/assets/research-data.js`
-6. `CHANGELOG.md`
+5. `CHANGELOG.md`
 
-사이트의 변경 이력은 `site/assets/research-data.js`에서 렌더링한다. 단순
-미관 수정이 아니면 날짜, category, decision, rationale, affected files를
-기록한다. README와 사이트가 서로 다른 연구 질문을 말하면 배포하지 않는다.
+공개 사이트는 더 이상 연구 운영 동기화 대상이 아니다. 코드·설정·실험 문서와
+`CHANGELOG.md`에 날짜, category, decision, rationale, affected files를
+기록한다. README와 연구 문서가 서로 다른 연구 질문을 말하면 배포하지 않는다.
 
-### Local repair loop 금지
+### 반복 검증과 재실행 정책
 
-- 결과가 약하거나 한 check가 실패했다는 이유로 같은 evidence 안에서
-  loss weight, kernel scale, mask, seed, threshold, sample budget을 순차
-  조정하지 않는다.
-- 사전등록 gate는 모든 필수 task가 완료됐을 때만 한 번 집계한다. M0처럼
-  일부 task가 운영상 중단되면 성공 task를 선택 집계하지 않고
-  `execution-incomplete / no scientific verdict`로 닫아 artifact를 보존한다.
-- M0가 과학적으로 실패하거나 one-shot 실행이 미완료되면 해당
-  operator-pullback mechanism을 국소 수선·재실행하지 않는다.
-- 새 가설은 실패 원인을 설명하는 독립 이론·task gap이 있을 때만 새
-  version과 fresh seed로 등록한다. 같은 mechanism의 국소 repair는 새
-  이름을 붙여도 허용하지 않는다.
-- 운영 문제는 `server artifact → scientific decision → public
-  protocol/site/changelog → private manuscript pin` 순서로 처리한다.
-  로컬 dependency·tmp·TeX 문제는 한 번만 bounded diagnosis하고,
-  authoritative validation은 frozen PBS와 GitHub CI로 한다.
-- ISBI target을 이유로 실패한 N1c나 무판정 M0를 완화하지 않는다. Venue pivot은
-  task·evidence 우선순위를 바꾸지만 기존 실패와 test boundary를 바꾸지
-  않는다.
+- 기존 job의 marker·log·status·metric·result는 덮어쓰거나 삭제·은폐·재명명하지
+  않는다. 반복 실행은 새 run ID와 결과 디렉터리를 사용하고 predecessor,
+  exact commit/config, seed, 환경, 반복 사유와 변경점을 기록한다.
+- 인프라·scheduler·전송·dependency·환경 실패, 중단된 job, stochastic
+  replication, 재현성 확인과 bug-fix 검증은 같은 과학 설정으로 재실행할 수
+  있다. 별도의 새 가설이나 이름만 바꾼 evidence version은 필요하지 않다.
+- train/validation 범위에서는 모델·loss·optimizer를 반복 개발할 수 있다. 모든
+  유의미한 trial을 보존하고 development로 표시하며, 선택된 결과를 독립적인
+  confirmation처럼 서술하지 않는다.
+- confirmatory/outer split, endpoint와 decision rule은 접근 전에 동결한다.
+  관측한 outer 결과로 tuning하지 않는다. 실행 무효를 입증한 결함을 수정할
+  때는 원인과 fix를 남기고 비교 가능성이 영향받으면 관련 method 전체를 같은
+  pipeline으로 다시 평가한다. 그 외 유효한 반복 결과는 모두 유지·보고한다.
+- 횟수 자체를 임의로 1회로 제한하지 않는다. 각 재시도는 검증 가능한 이유와
+  계산·저장 예산을 가져야 한다. 동일 실패를 정보 증가 없이 반복하지 않고,
+  진단 후 최소 변경을 적용하거나 unresolved blocker로 보고한다.
+- `execution-incomplete / no scientific verdict`는 해당 실행의 상태이지 연구
+  요소의 영구 폐기 판정이 아니다. 실패했던 dataset, architecture, loss,
+  split과 evaluator도 타당하면 이후 실행에서 재사용할 수 있다.
 
 ### ISBI 2027 제출 규약
 

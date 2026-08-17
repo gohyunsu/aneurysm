@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-17 · iterative validation and rerun policy
+
+- Replaced the blanket local-repair-loop/no-rerun rule with append-only,
+  reasoned iteration. Historical run artifacts remain immutable, while failed
+  infrastructure paths and scientifically useful components may be repeated
+  under a new run ID with exact predecessor, code, config, seed, environment
+  and rationale provenance.
+- Separated iterative train/validation development from confirmatory and outer
+  evaluation. Development may adapt transparently; outer endpoints and rules
+  remain frozen before access, and valid observed outcomes cannot be silently
+  discarded.
+- Removed the public static site from implementation synchronization. Code,
+  experiment records, research documentation and this changelog are the active
+  maintenance targets.
+
 ## 2026-08-17 · D8 mesh-normal identifiability audit activated
 
 - Registered a fresh user-selected train-only audit of deterministic mesh-
