@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 paired-comparison source synchronization:** Exact public
+> scientific source `416627724435b6ec46bbde9aabea52088aa2eed6` is remote
+> exact and passed Research Quality `32055879571` with 849/849 tests. The
+> automatic Pages failure `32055878103` is outside research scope and must not
+> be repaired. No numeric comparison, automatic winner, absolute threshold,
+> outer/auxiliary access or paper claim exists. Never use `junjinyong` or
+> maintain the site.
+
 > **2026-08-18 result-pending paired validation comparison:** A public,
 > dataset-free utility now compares matched validation results through raw
 > endpoint means, paired component-bootstrap candidate-minus-reference deltas,
