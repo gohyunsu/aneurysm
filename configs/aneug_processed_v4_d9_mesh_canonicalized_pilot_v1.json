@@ -1,0 +1,186 @@
+{
+  "schema_version": "aurora.aneug_processed_v4_d9_mesh_canonicalized_pilot.v1",
+  "protocol_id": "aneug_processed_v4_mesh_canonicalized_validation_pilot_d9_v1",
+  "status": "human_selected_executable_bounded_development",
+  "as_of": "2026-08-17",
+  "human_activation": {
+    "explicitly_selected": true,
+    "selection": "D9",
+    "selected_on": "2026-08-17",
+    "fresh_after_closed_d8_pass": true,
+    "does_not_repair_resume_rerun_reopen_or_relabel_d8": true,
+    "old_d7_conditional_gpu_template_remains_inactive": true
+  },
+  "scientific_role": {
+    "question": "whether a geometry-canonicalized transient WSS pipeline is trainable and whether a same-backbone moment-POD readout improves validation cycle functionals without a material field-error tax",
+    "development_not_confirmation": true,
+    "single_seed_is_paper_evidence": false,
+    "architecture_name_is_novelty": false,
+    "deterministic_mesh_normal_and_tangent_projection_are_novelty": false,
+    "broad_field_function_mismatch_is_novelty": false
+  },
+  "bound_upstream": {
+    "d8_private_result_sha256": "b9431fb31570a5db41fd5a968251c1f7676ba5420f50fa1d9ea01407f3b38e9c",
+    "d8_status": "closed_pass_1_of_1",
+    "d8_pass_required": true,
+    "d5_private_manifest_sha256": "0f95cf303fa63b58c049e722864389c1432460686e335d20402b677c368181d6",
+    "d5_train_split_sha256": "df583f3553ce4efcf0588da5bdc029921025648c1981eba3a85fe3841d2bf26e"
+  },
+  "source_identity": {
+    "transient": {
+      "relative_server_path": "processed_v4_d3/assembled_registered_data_1k_v4.pth",
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "steady": {
+      "relative_server_path": "processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary",
+      "bytes": 9632510050,
+      "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+    },
+    "physical_decoder_formula": "physical=normalized*(std+1e-5)+mean",
+    "physical_decoder_epsilon": 0.00001
+  },
+  "immutable_data_boundary": {
+    "unit": "d5_synthetic_geometry_component_not_patient",
+    "train_components": 406,
+    "validation_components": 51,
+    "outer_components": 51,
+    "auxiliary_cases": 70,
+    "timesteps": 80,
+    "nodes": 13902,
+    "channels": 9,
+    "all_phases_follow_component": true,
+    "validation_only_development": true,
+    "outer_tensor_values_read": false,
+    "auxiliary_tensor_values_read": false,
+    "split_or_unit_change_allowed": false,
+    "case_identifiers_in_outputs": false
+  },
+  "canonical_target": {
+    "coordinates": "physical_decoded_phase0_coordinates_centered_and_per_case_rms_scaled",
+    "surface_normal": "area_weighted_unit_normal_from_physical_coordinates_and_shared_finest_faces",
+    "stored_normal_channels_used_by_model_or_loss": false,
+    "target": "physical_vector_WSS_orthogonally_projected_to_mesh_tangent_plane",
+    "global_WSS_scale": "train_only_root_mean_square_vector_magnitude",
+    "vertex_weights": "case_specific_triangle_lumped_area_normalized_to_sum_one",
+    "prediction_tangency": "deterministic_orthogonal_projection",
+    "uniform_80_phase_quadrature": true
+  },
+  "train_only_temporal_basis": {
+    "source": "train_tangent_WSS_residual_after_per_node_cycle_mean",
+    "covariance_dimension": 80,
+    "minimum_rank": 8,
+    "maximum_rank": 32,
+    "minimum_retained_energy": 0.995,
+    "rank_rule": "smallest_rank_reaching_0.995_energy_else_32",
+    "basis_columns_zero_temporal_mean": true,
+    "validation_cannot_select_rank": true
+  },
+  "registered_models": {
+    "shared_backbone": "three_level_scalar_vector_mesh_message_operator",
+    "strict_SE3_claim": false,
+    "hidden_scalar_channels": 64,
+    "hidden_vector_channels": 16,
+    "ghd_input_dimensions": 432,
+    "ghd_embedding_dimensions": 32,
+    "message_blocks_per_level": [2, 2, 2, 1, 1],
+    "direct_cycle": {
+      "output": "80_tangent_vector_phases",
+      "moment_auxiliary_loss": false,
+      "exact_cycle_moment_projection": false
+    },
+    "moment_pod": {
+      "output": "tangent_mean_vector_Jensen_feasible_mean_magnitude_and_train_only_POD_residual",
+      "moment_auxiliary_loss": true,
+      "exact_cycle_moment_projection_at_validation": true,
+      "projection_uses_predicted_not_reference_moments": true
+    },
+    "same_geometry_information_and_backbone": true,
+    "parameter_count_and_runtime_reported": true
+  },
+  "optimization": {
+    "seed": 1103,
+    "maximum_epochs": 20,
+    "minimum_epochs": 8,
+    "early_stopping_patience": 4,
+    "batch_cases": 1,
+    "gradient_accumulation_cases": 4,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "schedule": "cosine_to_0p1_initial",
+    "gradient_clip_norm": 1.0,
+    "direct_loss": "area_phase_weighted_normalized_field_MSE",
+    "moment_loss_weights": {
+      "field": 1.0,
+      "mean_vector": 0.2,
+      "mean_magnitude": 0.2,
+      "raw_projected_magnitude_consistency": 0.1
+    },
+    "checkpoint_selection": "lowest_validation_field_relative_L2_then_earliest_epoch",
+    "same_optimizer_schedule_and_selection_for_both_variants": true
+  },
+  "validation_metrics": {
+    "aggregation_unit": "synthetic_geometry_component",
+    "field": "case_area_phase_weighted_relative_L2",
+    "TAWSS": "case_area_weighted_normalized_absolute_error",
+    "OSI": "case_area_weighted_MAE_on_reference_valid_support",
+    "OSI_reference_TAWSS_floor": "1e-4_times_train_WSS_RMS",
+    "invalid_prediction_penalized": true,
+    "coverage_reported": true,
+    "per_case_arrays_private_without_identifiers": true,
+    "bootstrap_or_confirmatory_inference": false,
+    "RRT_primary": false
+  },
+  "development_screen": {
+    "all_required": true,
+    "maximum_direct_validation_field_relative_L2": 0.35,
+    "maximum_moment_over_direct_field_error_ratio": 1.05,
+    "maximum_moment_over_direct_TAWSS_error_ratio": 0.98,
+    "maximum_moment_over_direct_OSI_error_ratio": 0.98,
+    "minimum_validation_OSI_coverage": 0.99,
+    "screen_pass_is_paper_result": false,
+    "screen_pass_authorizes": "fresh_multi_seed_validation_confirmation_registration_only"
+  },
+  "job_budget": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "gpu_per_job": 1,
+    "maximum_concurrent_jobs": 1,
+    "maximum_accepted_jobs": 3,
+    "jobs": {
+      "R0_prepare_smoke": {"maximum_attempts": 1, "walltime": "04:00:00", "ncpus": 4, "memory_gb": 64, "ngpus": 1},
+      "R1_direct_cycle": {"maximum_attempts": 1, "walltime": "12:00:00", "ncpus": 4, "memory_gb": 64, "ngpus": 1},
+      "R1_moment_pod": {"maximum_attempts": 1, "walltime": "12:00:00", "ncpus": 4, "memory_gb": 64, "ngpus": 1}
+    },
+    "maximum_total_requested_GPU_hours": 28,
+    "accepted_failure_or_preemption_consumes_stage_attempt": true,
+    "same_stage_rerun_repair_or_relabel": false,
+    "R1_requires_R0_complete_pass": true,
+    "persistent_internal_log_before_strict_mode": true,
+    "scheduler_stdout_stderr_is_evidence": false,
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong"
+  },
+  "outputs": {
+    "record_directory_name": "aneug_processed_v4_d9_mesh_canonicalized_pilot_v1",
+    "cache_is_private_and_not_committed": true,
+    "all_numeric_results_private": true,
+    "atomic_JSON_and_checkpoint": true,
+    "refuse_existing_stage_output": true,
+    "static_site_update_required": false
+  },
+  "authorization": {
+    "execute_D9_R0_and_conditional_R1": true,
+    "read_train_and_validation_tensor_values": true,
+    "fit_and_select_registered_models_on_validation": true,
+    "read_outer_or_auxiliary_tensor_values": false,
+    "use_one_GPU_per_registered_job": true,
+    "multi_seed_confirmation": false,
+    "outer_test": false,
+    "paper_result_figure_or_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false
+  }
+}
