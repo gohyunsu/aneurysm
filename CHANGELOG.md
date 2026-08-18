@@ -1,5 +1,34 @@
 # Changelog
 
+## 2026-08-18 · official-source and normalization reconciliation
+
+- Cross-checked the final NeurIPS paper, proceedings HTML, pinned dataset card,
+  exact release tree and pinned preprocessing/training code. Recorded the
+  material 200/730 and 109/116 source conflicts instead of silently choosing
+  whichever value fits the experiment.
+- Established 730 synthetic transient CFD cases as the canonical release while
+  explicitly excluding patient, site and generator-parent interpretations.
+  Corrected the 4.67% result scope to the 14,000-case steady-WSS experiment.
+- Registered a CPU/PBS provenance audit that will compare all 578 overlapping
+  v4/v5 normalized tensors, GHD rows and mesh-hierarchy items and bind the exact
+  external steady `tensor_norm`. Physical-unit v5 metrics remain pending until
+  this audit completes; no model or test outcome is read.
+
+## 2026-08-18 · complete-release AneuG v5 protocol
+
+- Verified the exact 33.23 GB processed-v5 object on `introai9` by official
+  SHA-256 and a separate PBS metadata-schema audit: 809 unique order-aligned
+  cases, 80 phases, 13,902 nodes, nine coordinate/normal/vector-WSS channels
+  and 432-D GHD descriptors.
+- Reconciled the processed object with the pinned public release: v5 contains
+  all 730 documented transient cases plus 79 processed-only extras. The new
+  main cohort is the exact 730-case intersection; the historical v4 split is
+  not reused.
+- Added an outcome-blind, private-keyed geometry-component 80/10/10 split
+  builder and append-only CPU/PBS wrapper. No field result, model result,
+  performance threshold, test access, duplicate download or site change is
+  part of this step.
+
 ## 2026-08-17 · D10 bounded optimization-horizon repair registered
 
 - Capped validation repair at two rounds/two training jobs and registered only

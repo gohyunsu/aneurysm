@@ -1,0 +1,48 @@
+{
+  "schema_version": "aurora.aneug_release_v5_introai9_asset_audit.v1",
+  "as_of": "2026-08-18",
+  "status": "source_complete_schema_pass_release_filter_pending",
+  "server": "introai9",
+  "finalize": {
+    "job_id": "116626.ECE-util1",
+    "exit_code": 0,
+    "piece_count": 64,
+    "assembled_bytes": 33233856917,
+    "assembled_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "official_match": true,
+    "record_sha256": "cde7984f56e8da6b981ee05197bd5b90b32df561ec924ecd03c5f8d62d5b1331"
+  },
+  "schema": {
+    "job_id": "116627.ECE-util1",
+    "exit_code": 0,
+    "schema_pass": true,
+    "registered_case_count": 809,
+    "mesh_case_count": 809,
+    "unique_case_id_count": 809,
+    "mesh_case_order_exact": true,
+    "tensor_shape": [80, 13902, 9],
+    "labels": ["x", "y", "z", "x_normal", "y_normal", "z_normal", "wss_x", "wss_y", "wss_z"],
+    "ghd_shape": [809, 432],
+    "record_sha256": "9e74cb3db68da83adcb0acb373ce47b01525258d1741cf43c3a718b5e25fa6ed"
+  },
+  "cohort_adjudication": {
+    "all_809_processed_entries_are_the_official_release": false,
+    "official_release_case_count": 730,
+    "official_release_case_id_sha256": "cccc90d7932c3584964b3d8456f26812abf8af56edb0882dfa5942fe873c390a",
+    "processed_extra_count": 79,
+    "selected_main_cohort": "exact_case_id_intersection_of_v5_and_pinned_release_tree",
+    "selected_main_cohort_count": 730
+  },
+  "storage": {
+    "assembled_and_staging_directory_bytes": 66467725188,
+    "staging_chunks_retained": true,
+    "duplicate_download_planned": false,
+    "raw_two_tb_release_downloaded": false
+  },
+  "limits": {
+    "field_values_read_by_schema_job": false,
+    "scientific_performance_verdict": null,
+    "old_v4_split_reused": false,
+    "test_opened": false
+  }
+}

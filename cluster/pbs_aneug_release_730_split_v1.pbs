@@ -1,0 +1,46 @@
+#!/bin/bash
+#PBS -N aurora_aneug_730_split
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=0
+#PBS -l walltime=02:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_PYTHON:?set pinned Python executable}"
+: "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
+: "${AURORA_SPLIT_KEY_FILE:?set private 32-byte hex split-key file}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ -x "$AURORA_PYTHON" ]
+
+source_path="$AURORA_DATA_ROOT/processed_v5_9dd4180/assembled_registered_data_1k_v5.pth"
+finalize_record="$AURORA_DATA_ROOT/processed_v5_9dd4180/finalize_116626.ECE-util1.tsv"
+schema_record="$AURORA_DATA_ROOT/processed_v5_9dd4180/schema_116627.ECE-util1.json"
+run_id="${PBS_JOBID:-manual_$(date -u +%Y%m%dT%H%M%SZ)}"
+run_root="$AURORA_OUTPUT_ROOT/aneug_release_730_split_v1/$run_id"
+mkdir -p "$run_root"
+[ ! -e "$run_root/attempt.started" ]
+printf '%s\n' "$run_id" > "$run_root/attempt.started"
+log="$run_root/attempt.log"
+status="$run_root/attempt.status.json"
+exec >>"$log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"job_id\":\"%s\",\"exit_code\":%s,\"complete\":%s}\n" "$run_id" "$code" "$(test -f "$run_root/public_split_result.json" && printf true || printf false)" > "$status"; exit "$code"' EXIT
+
+printf 'stage=split_started job=%s commit=%s\n' "$run_id" "$actual_commit"
+PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" \
+  -m aurora.aneug_release_730_split \
+  --config "$AURORA_PROJECT_ROOT/configs/aneug_release_730_protocol_v1.json" \
+  --source "$source_path" \
+  --finalize-record "$finalize_record" \
+  --schema-record "$schema_record" \
+  --release-api-url "https://huggingface.co/api/datasets/whding123/AneuG-Flow/revision/9dd418083899deddd93a67f9a6fca7a14304fa36" \
+  --split-key "$AURORA_SPLIT_KEY_FILE" \
+  --public-result "$run_root/public_split_result.json" \
+  --private-manifest "$run_root/private_split_manifest.json"
+printf 'stage=split_complete\n'

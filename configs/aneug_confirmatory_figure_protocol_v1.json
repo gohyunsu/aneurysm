@@ -1,0 +1,41 @@
+{
+  "schema_version": "aurora.aneug_confirmatory_figure.v1",
+  "status": "frozen_non_executable",
+  "as_of": "2026-08-18",
+  "purpose": "prediction_blind_selection_and_display_for_the_single_confirmatory_CFD_surface_figure",
+  "reference_only_selection": {
+    "case_metric": "area_weighted_mean_reference_OSI",
+    "case_quantiles": [0.1, 0.5, 0.9],
+    "rank_rule": "nearest_half_up_rank_after_stable_burden_then_outer_ordinal_sort",
+    "trace_vertex_metric": "reference_OSI",
+    "trace_vertex_quantile": 0.9,
+    "trace_tie_breaker": "lowest_outer_vertex_ordinal",
+    "candidate_or_baseline_values_used": false
+  },
+  "display": {
+    "camera": "fixed_canonical_orthographic",
+    "camera_direction": [1.0, -1.0, 0.75],
+    "shared_coordinates": true,
+    "shared_mask": true,
+    "tawss_colour_limits": "full_range_across_the_three_selected_references",
+    "osi_colour_limits": [0.0, 0.5],
+    "candidate_dependent_clipping": false,
+    "panels": [
+      "reference",
+      "strongest_frozen_direct_control",
+      "frozen_candidate",
+      "absolute_error"
+    ],
+    "trace": "80_phase_WSS_magnitude_and_in_plane_direction_at_reference_selected_vertex"
+  },
+  "boundary": {
+    "outer_case_count": 51,
+    "execute_now": false,
+    "outer_access_before_model_freeze": false,
+    "requires_frozen_model_checkpoints_and_outer_open_record": true,
+    "paper_claim": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "maintain_public_site": false
+  }
+}

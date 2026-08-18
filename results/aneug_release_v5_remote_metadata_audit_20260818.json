@@ -1,0 +1,72 @@
+{
+  "schema_version": "aurora.aneug_release_v5_remote_metadata_audit.v1",
+  "as_of": "2026-08-18",
+  "status": "complete_metadata_only_no_tensor_storage_read",
+  "official_release": {
+    "repository": "whding123/AneuG-Flow",
+    "revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "transient_case_directories": 730,
+    "stable_case_directories": 730,
+    "complete_seven_asset_directories": 730,
+    "transient_file_count": 5110,
+    "sorted_case_id_sha256": "cccc90d7932c3584964b3d8456f26812abf8af56edb0882dfa5942fe873c390a"
+  },
+  "processed_v4": {
+    "bytes": 23744862051,
+    "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+    "data_pickle_bytes": 301287,
+    "data_pickle_sha256": "750deba8b66032039696a4abe7681013b9a89ea4f2be5955a19f6dfd0b299202",
+    "case_like_unique_count": 578,
+    "case_prefix_counts": {
+      "Almaha": 32,
+      "Eyad": 19,
+      "Nuzhat": 19,
+      "stable": 508
+    },
+    "official_release_intersection_count": 499,
+    "official_release_missing_count": 231,
+    "extra_count": 79,
+    "zip_member_count": 2339
+  },
+  "processed_v5": {
+    "bytes": 33233856917,
+    "sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "data_pickle_bytes": 418437,
+    "data_pickle_sha256": "b345e16138cb895b2d7ee37eb479994868254db267c69deccf1484a338e890a9",
+    "case_like_unique_count": 809,
+    "case_prefix_counts": {
+      "Almaha": 32,
+      "Eyad": 19,
+      "Nuzhat": 19,
+      "stable": 739
+    },
+    "official_release_intersection_count": 730,
+    "official_release_missing_count": 0,
+    "extra_count": 79,
+    "extra_prefix_counts": {
+      "Almaha": 32,
+      "Eyad": 19,
+      "Nuzhat": 19,
+      "stable": 9
+    },
+    "extra_sorted_sha256": "1a3ca26caa3daf716ac7d95a8c130c1044aee2ed2f7d8a166fe1bae99ced4ff0",
+    "zip_member_count": 3265
+  },
+  "audit_method": {
+    "implementation": "src/aurora/remote_torch_zip_audit.py",
+    "http_range_requests_per_object": 7,
+    "pickle_executed": false,
+    "tensor_storage_bytes_read": 0,
+    "case_identifiers_emitted": false
+  },
+  "adjudication": {
+    "headline_730_is_correct_for_the_documented_release_tree": true,
+    "processed_v4_is_release_complete": false,
+    "processed_v5_contains_every_documented_release_case": true,
+    "processed_v5_equals_the_documented_release_exactly": false,
+    "selected_main_cohort": "intersection_of_processed_v5_and_documented_730_case_release_tree",
+    "selected_main_cohort_count": 730,
+    "extra_79_cases_in_main_cohort": false,
+    "scientific_field_verdict": null
+  }
+}

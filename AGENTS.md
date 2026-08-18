@@ -1,5 +1,33 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 official-source reconciliation and normalization boundary:**
+> Final NeurIPS PDF, pinned dataset card and exact release tree support 730
+> transient synthetic CFD cases, while the proceedings HTML still says 200.
+> The final PDF itself conflicts on 109 versus 116 real generator-training
+> shapes, so do not infer patient or generator-parent lineage. The official
+> 4.67% result is steady WSS, not a transient-cycle baseline. Processed v5 is
+> an official blob but is not named by the card and its 809 entries are not the
+> canonical cohort. The official builder requires an external steady
+> `tensor_norm` and omits it from transient output. Exact steady v4 metadata is
+> present on `introai9`; a CPU/PBS audit will compare all 578 v4/v5 overlapping
+> tensors, GHD rows and shared hierarchy before physical-unit v5 metrics are
+> authorized. This audit is provenance, not performance, and does not open the
+> locked test. Use only `introai9`, never `junjinyong`, and do not maintain the
+> site.
+
+> **2026-08-18 complete-release v5 reconstruction:** The exact processed-v5
+> object is present on `introai9`. CPU/PBS finalize job `116626.ECE-util1`
+> exited 0 after assembling 33,233,856,917 bytes and matching official SHA-256
+> `3edf0d75…f3b0ae`; schema job `116627.ECE-util1` exited 0 with 809 unique,
+> mesh-order-aligned cases, 80 × 13,902 × 9 case tensors and 809 × 432 GHD
+> metadata. The pinned public release tree contains 730 cases; v5 contains all
+> 730 plus 79 extras. The new study cohort is exactly the 730-case intersection,
+> never all 809 and never the historical v4 406/51/51 split. A fresh
+> outcome-blind GHD duplicate-component 584/73/73 assignment is being prepared
+> with a private key; no WSS/model outcome or locked-test value is used. D12
+> remains historical and must not be duplicated. Use only `introai9`, never
+> `junjinyong`, and do not maintain the site.
+
 > **2026-08-18 active-branch source synchronization:** Exact public
 > scientific source `27be93fb90391c5981982b0bd5a0c090a3980b25` is remote
 > exact and passed Research Quality `32057390792` with 852/852 tests. Its

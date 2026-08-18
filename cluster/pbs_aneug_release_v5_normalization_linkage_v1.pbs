@@ -1,0 +1,37 @@
+#!/bin/bash
+#PBS -N aurora_v5_norm_link
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=0
+#PBS -l walltime=04:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_PYTHON:?set pinned Python executable}"
+: "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ -x "$AURORA_PYTHON" ]
+
+run_id="${PBS_JOBID:-manual_$(date -u +%Y%m%dT%H%M%SZ)}"
+run_root="$AURORA_OUTPUT_ROOT/aneug_release_v5_normalization_linkage_v1/$run_id"
+mkdir -p "$run_root"
+[ ! -e "$run_root/attempt.started" ]
+printf '%s\n' "$run_id" > "$run_root/attempt.started"
+log="$run_root/attempt.log"
+status="$run_root/attempt.status.json"
+exec >>"$log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"job_id\":\"%s\",\"exit_code\":%s,\"complete\":%s}\n" "$run_id" "$code" "$(test -f "$run_root/result.json" && printf true || printf false)" > "$status"; exit "$code"' EXIT
+
+printf 'stage=normalization_linkage_started job=%s commit=%s\n' "$run_id" "$actual_commit"
+PYTHONPATH="$AURORA_PROJECT_ROOT/src" "$AURORA_PYTHON" \
+  -m aurora.aneug_release_v5_normalization_linkage \
+  --config "$AURORA_PROJECT_ROOT/configs/aneug_release_v5_normalization_linkage_v1.json" \
+  --data-root "$AURORA_DATA_ROOT" \
+  --result "$run_root/result.json"
+printf 'stage=normalization_linkage_complete\n'

@@ -1,0 +1,143 @@
+{
+  "schema_version": "aurora.aneug_release_730_protocol.v1",
+  "protocol_id": "aneug_release_aligned_730_transient_wss_v1",
+  "status": "canonical_cohort_and_schema_pass_normalization_linkage_and_split_pending",
+  "as_of": "2026-08-18",
+  "source": {
+    "dataset_repository": "whding123/AneuG-Flow",
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "license": "cc-by-sa-4.0",
+    "source_reconciliation_record": "results/aneug_official_source_reconciliation_20260818.json",
+    "proceedings_html_transient_cases": 200,
+    "official_paper_transient_cases": 730,
+    "official_paper_real_shape_counts_conflict": [109, 116],
+    "release_tree_case_count": 730,
+    "release_tree_case_id_sha256": "cccc90d7932c3584964b3d8456f26812abf8af56edb0882dfa5942fe873c390a",
+    "processed_v5": {
+      "relative_path": "processed_data/assembled_registered_data_1k_v5.pth",
+      "bytes": 33233856917,
+      "sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+      "remote_case_like_count": 809,
+      "remote_release_intersection_count": 730,
+      "remote_extra_count": 79,
+      "data_pickle_sha256": "b345e16138cb895b2d7ee37eb479994868254db267c69deccf1484a338e890a9"
+    }
+  },
+  "cohort": {
+    "definition": "exact_case_id_intersection_of_processed_v5_and_the_pinned_release_tree",
+    "expected_case_count": 730,
+    "include_all_80_phases_per_case": true,
+    "exclude_processed_only_extra_cases": 79,
+    "patient_or_site_interpretation": false,
+    "synthetic_geometry_case_interpretation": true,
+    "external_geometry_archive_required": false,
+    "embedded_registered_mesh_is_authoritative": true
+  },
+  "verified_introai9_asset": {
+    "finalize_job_id": "116626.ECE-util1",
+    "finalize_exit_code": 0,
+    "assembled_bytes": 33233856917,
+    "assembled_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "official_match": true,
+    "finalize_record_sha256": "cde7984f56e8da6b981ee05197bd5b90b32df561ec924ecd03c5f8d62d5b1331",
+    "schema_job_id": "116627.ECE-util1",
+    "schema_exit_code": 0,
+    "schema_pass": true,
+    "registered_case_count": 809,
+    "mesh_case_count": 809,
+    "tensor_shape": [80, 13902, 9],
+    "mesh_case_order_exact": true,
+    "schema_record_sha256": "9e74cb3db68da83adcb0acb373ce47b01525258d1741cf43c3a718b5e25fa6ed"
+  },
+  "integrity_audit": {
+    "exact_file_size_and_sha256_required": true,
+    "weights_only": true,
+    "mmap": true,
+    "expected_root_keys": ["registered_data_list", "mesh_data"],
+    "expected_timesteps": 80,
+    "expected_nodes": 13902,
+    "required_labels": ["x", "y", "z", "x_normal", "y_normal", "z_normal", "wss_x", "wss_y", "wss_z"],
+    "case_ids_unique": true,
+    "mesh_case_order_exact": true,
+    "field_values_used_for_split": false
+  },
+  "normalization_provenance": {
+    "transient_archive_embeds_tensor_norm": false,
+    "official_builder_requires_external_steady_tensor_norm": true,
+    "official_builder_denominator_epsilon": 0.00001,
+    "steady_v4_relative_server_path": "processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary",
+    "steady_v4_bytes": 9632510050,
+    "steady_v4_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "v4_v5_overlap_identity_audit_status": "pending",
+    "physical_wss_metrics_authorized_before_linkage": false,
+    "model_normalization_recomputed_from_new_train_only": true
+  },
+  "split_design": {
+    "status": "algorithm_frozen_assignment_pending_schema",
+    "unit": "synthetic_geometry_case_or_geometry_duplicate_component_not_patient",
+    "train_fraction": 0.8,
+    "validation_fraction": 0.1,
+    "test_fraction": 0.1,
+    "singleton_target_counts": {
+      "train": 584,
+      "validation": 73,
+      "test": 73
+    },
+    "grouping_inputs": ["mesh_data.ghd"],
+    "exact_duplicate_rows_stay_together": true,
+    "near_duplicate_max_abs": 0.000001,
+    "near_duplicate_rms": 0.0000001,
+    "assignment_order": "keyed_blake2b_of_sorted_component_case_ids",
+    "assignment_salt": "private_until_test_open_then_released_for_reproducibility",
+    "all_phases_follow_case": true,
+    "model_normalization_fit_on_train_only": true,
+    "validation_only_model_selection": true,
+    "test_locked_until_candidate_and_analysis_freeze": true,
+    "field_or_model_result_used_to_choose_split": false
+  },
+  "evaluation": {
+    "independent_unit": "synthetic_geometry_case",
+    "primary_endpoint": "mean_over_cases_of_area_and_phase_weighted_complete_cycle_vector_wss_relative_l2",
+    "secondary_endpoints": [
+      "case_mean_tawss_normalized_absolute_error",
+      "case_mean_osi_mae",
+      "low_wss_region_error",
+      "peak_systolic_vector_wss_relative_l2"
+    ],
+    "paired_case_level_resampling": true,
+    "phase_level_pseudoreplication": false,
+    "clinical_outcome_claim": false
+  },
+  "storage": {
+    "download_only_processed_v5": true,
+    "raw_per_case_cfd_downloaded": false,
+    "steady_14000_case_data_downloaded": false,
+    "v4_and_v5_used_as_parallel_main_cohorts": false,
+    "resumable_partial_download": true,
+    "compact_cache_optional_after_exact_schema": true,
+    "retain_v5_until_compact_cache_verified": true,
+    "two_tb_release_downloaded": false
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "12:00:00",
+    "login_node_gpu_allowed": false,
+    "excluded_server": "junjinyong",
+    "public_site_maintenance": false
+  },
+  "authorization": {
+    "download_v5": false,
+    "use_verified_v5": true,
+    "resume_incomplete_transport": true,
+    "metadata_and_geometry_only_split_audit": true,
+    "freeze_private_split_after_audit": true,
+    "gpu_training_before_schema_and_split": false,
+    "test_access_before_candidate_freeze": false,
+    "paper_result_before_test": false
+  }
+}

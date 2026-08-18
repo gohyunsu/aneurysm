@@ -1,0 +1,113 @@
+{
+  "schema_version": "aurora.aneug_official_source_reconciliation.v1",
+  "as_of": "2026-08-18",
+  "status": "canonical_730_cohort_reconciled_normalization_linkage_pending",
+  "primary_sources": {
+    "final_neurips_2025_paper": {
+      "url": "https://papers.neurips.cc/paper_files/paper/2025/file/e2b8ff0035bc9f572a7deefbcbea85bc-Paper-Datasets_and_Benchmarks_Track.pdf",
+      "transient_cases": 730,
+      "steady_cases": 14000,
+      "real_shape_count_abstract": 109,
+      "real_shape_count_table_1": 116,
+      "transient_phases": 80,
+      "transient_cycle": "second_of_two_simulated_cycles",
+      "registered_nodes": 13902,
+      "registered_triangles": 14000
+    },
+    "neurips_proceedings_html": {
+      "url": "https://papers.neurips.cc/paper_files/paper/2025/hash/e2b8ff0035bc9f572a7deefbcbea85bc-Abstract-Datasets_and_Benchmarks_Track.html",
+      "transient_cases": 200,
+      "conflicts_with_final_paper": true
+    },
+    "huggingface_dataset_card": {
+      "url": "https://huggingface.co/datasets/whding123/AneuG-Flow/blob/9dd418083899deddd93a67f9a6fca7a14304fa36/README.md",
+      "revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+      "transient_cases": 730,
+      "case_prefix": "stable_",
+      "assets_per_case": 7,
+      "processed_version_explicitly_documented": "v4",
+      "processed_v5_explicitly_documented": false,
+      "license": "cc-by-sa-4.0"
+    },
+    "official_code": {
+      "repository": "https://github.com/WenHaoDing/AneuG-Flow",
+      "commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+      "loaders_sha256": "133fc170ab395fe7bf44891ed625837e9b20ed4de7b977a325cc8e44d61393b5",
+      "datasets_wss_optimized_sha256": "9eecdaf5aef04bf2da999d685eaf622c87fb52044eb69635172f3d61a2da98e6",
+      "datasets_cycle_sha256": "46cc87486f5f753e1df640808dde29f3023afdaad760649a87fd3a06cb322b14",
+      "train_baselines_sha256": "8eb0b8ed732503d0c514a0ff96b22161fc2a6b0a7365592f410becdecadea2c6",
+      "readme_sha256": "164b546fb068025f26ab0626d052cf077ba7c23180fda93b211c2f91c0c00816"
+    }
+  },
+  "release_tree": {
+    "revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "stable_case_directory_count": 730,
+    "complete_seven_asset_directory_count": 730,
+    "transient_file_count": 5110,
+    "sorted_case_id_sha256": "cccc90d7932c3584964b3d8456f26812abf8af56edb0882dfa5942fe873c390a"
+  },
+  "reconciliations": {
+    "canonical_transient_case_count": {
+      "decision": 730,
+      "basis": [
+        "final_paper_repeated_count",
+        "dataset_card",
+        "exact_release_tree"
+      ],
+      "proceedings_html_200_treated_as_inconsistent_metadata": true
+    },
+    "real_parent_cohort_count": {
+      "decision": null,
+      "reason": "final_paper_internal_109_vs_116_conflict",
+      "patient_or_parent_lineage_inference_allowed": false
+    },
+    "canonical_task": {
+      "anatomy": "synthetic_middle_cerebral_artery_bifurcation_with_one_inlet_and_two_outlets",
+      "input_condition": "geometry_under_one_common_average_inlet_waveform_and_geometry_dependent_outlet_flow_split",
+      "target": "registered_complete_cycle_tangent_vector_wss",
+      "case_is_patient": false,
+      "boundary_condition_variation_present": false
+    },
+    "processed_artifact": {
+      "processed_v5_is_official_repository_blob": true,
+      "processed_v5_is_dataset_card_documented": false,
+      "processed_v5_entry_count": 809,
+      "release_intersection_count": 730,
+      "processed_only_extra_count": 79,
+      "all_809_equal_official_release": false,
+      "selected_main_cohort": "exact_v5_and_release_tree_intersection"
+    },
+    "normalization": {
+      "builder_uses_external_steady_tensor_norm": true,
+      "builder_formula": "z=(x-mean)/(std+1e-5)",
+      "transient_output_embeds_tensor_norm": false,
+      "readme_claims_given_norm_none_is_optional_but_code_raises": true,
+      "introai9_exact_steady_v4_source_present": true,
+      "steady_v4_bytes": 9632510050,
+      "steady_v4_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+      "v5_to_steady_norm_linkage_status": "pending_overlap_identity_audit",
+      "physical_wss_claim_ready": false
+    },
+    "official_ml_evaluation": {
+      "task": "steady_wss_only",
+      "split": "80_percent_train_20_percent_test",
+      "best_reported_normalized_wss_relative_l2_percent": 4.67,
+      "valid_transient_full_cycle_baseline": false
+    },
+    "official_transient_split_code": {
+      "default_processed_version": "v4",
+      "train_ratio": 0.9,
+      "selection": "order_dependent_prefix_slice",
+      "published_family_patient_or_site_disjoint_protocol": false,
+      "reused_for_new_730_protocol": false
+    }
+  },
+  "adjudication": {
+    "canonical_730_release_composition_supported": true,
+    "processed_v5_transport_and_schema_supported": true,
+    "processed_v5_equals_canonical_release_without_filter": false,
+    "physical_value_lineage_fully_verified": false,
+    "split_or_model_result_created": false,
+    "scientific_performance_verdict": null
+  }
+}

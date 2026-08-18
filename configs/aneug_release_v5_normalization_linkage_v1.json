@@ -1,0 +1,68 @@
+{
+  "schema_version": "aurora.aneug_release_v5_normalization_linkage.v1",
+  "protocol_id": "aneug_release_v5_normalization_linkage_v1",
+  "status": "authorized_cpu_audit_pending",
+  "as_of": "2026-08-18",
+  "source_code": {
+    "repository": "WenHaoDing/AneuG-Flow",
+    "commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "loaders_sha256": "133fc170ab395fe7bf44891ed625837e9b20ed4de7b977a325cc8e44d61393b5",
+    "normalization_formula": "z=(x-mean)/(std+1e-5)",
+    "transient_output_embeds_norm": false
+  },
+  "inputs": {
+    "steady_v4": {
+      "relative_path": "processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary",
+      "bytes": 9632510050,
+      "sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+    },
+    "transient_v4": {
+      "relative_path": "processed_v4_d3/assembled_registered_data_1k_v4.pth",
+      "bytes": 23744862051,
+      "sha256": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9"
+    },
+    "transient_v5": {
+      "relative_path": "processed_v5_9dd4180/assembled_registered_data_1k_v5.pth",
+      "bytes": 33233856917,
+      "sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae"
+    }
+  },
+  "expected": {
+    "v4_case_count": 578,
+    "v5_case_count": 809,
+    "v4_v5_overlap_count": 578,
+    "v4_only_count": 0,
+    "v5_only_count": 231,
+    "case_tensor_shape": [80, 13902, 9],
+    "labels": ["x", "y", "z", "x_normal", "y_normal", "z_normal", "wss_x", "wss_y", "wss_z"],
+    "ghd_width": 432,
+    "compare_every_overlap_case": true,
+    "compare_all_nine_channels": true,
+    "exact_tensor_equality_required_for_strong_linkage": true,
+    "exact_ghd_equality_required_for_strong_linkage": true,
+    "shared_hierarchy_equality_required_for_strong_linkage": true
+  },
+  "reader": {
+    "weights_only": true,
+    "mmap": true,
+    "full_file_sha256": true,
+    "arbitrary_pickle_globals": false
+  },
+  "interpretation": {
+    "audit_is_performance_evaluation": false,
+    "audit_reads_validation_or_test_outcomes": false,
+    "v5_embedded_creator_manifest_exists": false,
+    "successful_overlap_identity_supports_official_single_normalizer_lineage": true,
+    "model_fitted_normalization_must_still_use_new_train_only_data": true
+  },
+  "execution": {
+    "server": "introai9",
+    "scheduler": "PBS",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "excluded_server": "junjinyong"
+  }
+}
