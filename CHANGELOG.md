@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-18 — Upstream transient split wording corrected
+
+- Directly inspected the pinned release helper: its nominal 90/10 transient
+  path does not shuffle and selects the leading eligible archive entries for
+  test. The paper's 4.67% result instead belongs to steady WSS with 80/20.
+- Preserved the active job's exact config bytes but superseded its imprecise
+  `released random 90/10` prose in documentation. The field-blind keyed
+  584/73/73 split and its unresolved-lineage limitation are unchanged.
+
 ## 2026-08-18 — Train-only objective-scale audit prepared
 
 - Added a CPU-only reproduction of the upstream phasewise train-transient

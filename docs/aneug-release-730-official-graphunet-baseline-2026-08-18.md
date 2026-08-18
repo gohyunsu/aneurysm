@@ -7,6 +7,17 @@ reproduction: the release does not contain the waveform file referenced by
 the trainer, and the paper split, single-GPU environment and common physical
 evaluation differ from upstream.
 
+The split provenance needs one further distinction. The AneuG-Flow paper's
+reported 4.67% experiment is a steady-WSS 80/20 evaluation, not this transient
+task. The pinned transient helper uses a nominal 90/10 ratio but performs no
+shuffle: it takes the leading eligible `stable_*` entries in archive order as
+test cases. The active immutable config's phrase `released random 90/10 split`
+is therefore imprecise and is superseded by this clarification; it means the
+released helper's order-slice 90/10 path. The running bytes are not changed.
+Our keyed, field-blind 584/73/73 assignment additionally supplies a distinct
+validation partition and locked test, while making no unavailable lineage
+claim.
+
 The adapter retains the released six normalized coordinate/normal inputs,
 phase embedding and physical log-magnitude term. Its frame MSE is computed
 directly in the stored steady-normalized coordinates. A later direct source

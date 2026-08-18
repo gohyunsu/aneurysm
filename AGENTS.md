@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 upstream split wording corrected:** The AneuG-Flow paper's
+> 4.67% result is steady WSS under an 80/20 split. The pinned transient helper
+> implements a nominal 90/10 path by taking the leading eligible `stable_*`
+> entries in archive order without shuffling. Therefore the active immutable
+> config's literal `released random 90/10 split` is imprecise; interpret it as
+> the released helper's order-slice 90/10 path and do not alter the running
+> config bytes. The keyed, field-blind 584/73/73 split remains the main
+> protocol, with unresolved source lineage and no family/patient/BC claim.
+
 > **2026-08-18 train-only objective-scale audit prepared:** A CPU-only utility
 > now reproduces the upstream phasewise train-transient WSS channel scale on
 > exactly 584 training fields. It reads no validation, locked-test or 79-extra
