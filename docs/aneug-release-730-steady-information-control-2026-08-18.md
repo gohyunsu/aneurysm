@@ -60,9 +60,13 @@ The augmentation mechanism must be declared precisely. Direct code inspection
 at the pinned revision shows that the released trainer concatenates steady
 snapshots (`time_step=-10`) and transient phase snapshots. Its waveform
 embedder masks the steady rows, but its sinusoidal time embedder still evaluates
-`t=-10`; the loader also applies a transient-weighted mixed-frame objective.
-Consequently, the code path is a source-faithful control with documented
-quirks, not a canonical definition of how steady information must be used. A
+`t=-10`. The same strict `< T-1` mask also zeros the waveform embedding at
+phase 79. The loader applies a transient-weighted mixed-frame objective, and
+the released epoch-level test path evaluates only the first test-loader batch
+rather than the full split. Consequently, the code path is a source-faithful
+implementation control with documented quirks, not a canonical evaluation
+protocol or definition of how steady information must be used. Our matched
+adapter must retain full 73-case validation and state every difference. A
 complete-cycle model cannot pretend that one steady field is an 80-phase cycle;
 it must use a shared-encoder auxiliary steady objective or an explicitly
 separated steady pretraining stage. These mechanisms are separate ablations.

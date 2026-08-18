@@ -4,8 +4,10 @@
 
 - Recorded an exact pinned-source discrepancy: the released mixed trainer
   masks steady waveform features but still evaluates its sinusoidal time
-  embedding at `t=-10`. Source-faithful reproduction and the clean
-  complete-cycle auxiliary objective will therefore be labelled separately.
+  embedding at `t=-10`; the same mask zeros phase 79. Its epoch test path uses
+  only the first loader batch. The source-faithful implementation control,
+  full-validation matched adapter and clean complete-cycle auxiliary objective
+  will therefore be labelled separately.
 
 ## 2026-08-18 — Steady supervision reframed as a matched control
 
