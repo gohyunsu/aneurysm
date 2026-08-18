@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 train-only representation attribution prepared:** A single
+> CPU-only analysis is prepared to distinguish a genuine phase-79-to-0 source
+> discontinuity from an isolated relative-error effect and to quantify whether
+> stored or mesh-derived normals support a tangent target. It may read only the
+> 584 training fields, publishes no case IDs, has no threshold or automatic
+> architecture selection, and cannot delay the new-split direct baselines.
+> Every comparator initially predicts the identical raw physical Cartesian
+> WSS. Validation/test/79-extra fields, GPU, model fitting and paper claims
+> remain closed. Use only `introai9`, never `junjinyong`, and do not maintain
+> the site.
+
 > **2026-08-18 train-audit R2 completed:** Corrected CPU job
 > `117037.ECE-util1` exited 0 in 00:07:10 after reading exactly 584 train
 > fields; validation/test/79-extra reads remain zero. All integrity checks pass.

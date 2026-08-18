@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-18 · train-only representation attribution prepared
+
+- Added one CPU analysis of all cyclic adjacent WSS jumps, near-zero stored
+  normals, mesh/stored normal agreement and reference normal components using
+  only the 584 training fields.
+- Kept the output descriptive and identifier-free in public: it cannot select
+  a model or impose a threshold, and validation/test/79-extra fields stay
+  sealed.
+- Fixed the default supervised target for every baseline to the same raw
+  physical Cartesian WSS; periodic or tangent parameterizations remain
+  optional ablations only if source evidence supports them.
+
 ## 2026-08-18 · release-730 train audit completed
 
 - Corrected R2 passed every train-data integrity check on 584 cases with all
