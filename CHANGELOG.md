@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-08-18 — Released steady-mixture code path audited
+
+- Recorded an exact pinned-source discrepancy: the released mixed trainer
+  masks steady waveform features but still evaluates its sinusoidal time
+  embedding at `t=-10`. Source-faithful reproduction and the clean
+  complete-cycle auxiliary objective will therefore be labelled separately.
+
 ## 2026-08-18 — Steady supervision reframed as a matched control
 
 - Rejected steady pretraining as a standalone novelty because RHSIA already

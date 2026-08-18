@@ -56,11 +56,16 @@ favoured model:
 | proposal transient-only | same 584 cases | none | architecture/objective effect |
 | proposal + steady | same 584 cases | same eligible steady set | information-budget interaction |
 
-The augmentation mechanism must be declared precisely. A per-snapshot RHSIA
-adapter may mask time/waveform features for steady samples. A complete-cycle
-model cannot pretend that one steady field is an 80-phase cycle; it must use a
-shared-encoder auxiliary steady objective or an explicitly separated steady
-pretraining stage. These mechanisms are separate ablations.
+The augmentation mechanism must be declared precisely. Direct code inspection
+at the pinned revision shows that the released trainer concatenates steady
+snapshots (`time_step=-10`) and transient phase snapshots. Its waveform
+embedder masks the steady rows, but its sinusoidal time embedder still evaluates
+`t=-10`; the loader also applies a transient-weighted mixed-frame objective.
+Consequently, the code path is a source-faithful control with documented
+quirks, not a canonical definition of how steady information must be used. A
+complete-cycle model cannot pretend that one steady field is an 80-phase cycle;
+it must use a shared-encoder auxiliary steady objective or an explicitly
+separated steady pretraining stage. These mechanisms are separate ablations.
 
 All model and loss selection remains validation-only. The final candidate and
 strongest comparator receive the same steady eligibility manifest, compute
