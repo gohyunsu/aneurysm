@@ -82,6 +82,12 @@ class SteadyOverlapAuditTests(unittest.TestCase):
             expected_steady_cases=5,
             expected_transient_cases=4,
             expected_ghd_width=2,
+            expected_partition_counts={
+                "train": 1,
+                "validation": 1,
+                "test": 1,
+                "processed_only_extra": 1,
+            },
             max_abs_limit=1.0e-6,
             rms_limit=1.0e-7,
             block_rows=2,

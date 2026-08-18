@@ -228,6 +228,7 @@ def audit_geometry_overlap(
     expected_steady_cases: int,
     expected_transient_cases: int,
     expected_ghd_width: int,
+    expected_partition_counts: Mapping[str, int],
     max_abs_limit: float,
     rms_limit: float,
     block_rows: int,
@@ -264,7 +265,7 @@ def audit_geometry_overlap(
     partition_by_id: dict[str, str] = {}
     for name in ("train", "validation", "test", "processed_only_extra"):
         values = [str(value) for value in partitions[name]]
-        expected = {"train": 584, "validation": 73, "test": 73, "processed_only_extra": 79}[name]
+        expected = int(expected_partition_counts[name])
         _require(len(values) == len(set(values)) == expected, f"{name}_count")
         for value in values:
             _require(value not in partition_by_id, "partition_overlap")
@@ -442,6 +443,7 @@ def execute(
         expected_steady_cases=schema["expected_steady_cases"],
         expected_transient_cases=schema["expected_transient_cases"],
         expected_ghd_width=schema["expected_ghd_width"],
+        expected_partition_counts=schema["expected_main_split"],
         max_abs_limit=config["overlap"]["near_max_abs_limit"],
         rms_limit=config["overlap"]["near_rms_limit"],
         block_rows=config["overlap"]["steady_block_rows"],
