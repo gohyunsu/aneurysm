@@ -22,9 +22,6 @@ from typing import Any, Mapping, Sequence
 
 from aurora.aneug_cycle_functional_p0 import safe_torch_load
 from aurora.aneug_release_730_protocol import load_config
-from aurora.remote_torch_zip_audit import load_huggingface_release_case_ids
-
-
 class Release730SplitError(RuntimeError):
     """Raised when source identity or split invariants are not satisfied."""
 
@@ -280,13 +277,44 @@ def _schema_record_matches(schema: Mapping[str, Any]) -> bool:
     )
 
 
+def _load_release_manifest(
+    path: Path, config: Mapping[str, Any]
+) -> tuple[list[str], str]:
+    expected = config["source"]["release_case_manifest"]
+    manifest_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+    _require(manifest_sha256 == expected["sha256"], "release_manifest_identity")
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    _require(
+        manifest.get("schema_version") == "aurora.aneug_release_case_manifest.v1"
+        and manifest.get("dataset_repository") == "whding123/AneuG-Flow"
+        and manifest.get("dataset_revision") == config["source"]["dataset_revision"]
+        and manifest.get("source_path") == "transient_data",
+        "release_manifest_source",
+    )
+    release_ids = manifest.get("case_ids")
+    _require(
+        isinstance(release_ids, list)
+        and len(release_ids) == expected["case_count"] == 730
+        and len(set(release_ids)) == 730
+        and all(re.fullmatch(r"stable_[0-9]+", value) for value in release_ids),
+        "release_manifest_cases",
+    )
+    _require(
+        _canonical_digest(release_ids)
+        == manifest.get("sorted_case_id_sha256")
+        == config["source"]["release_tree_case_id_sha256"],
+        "release_manifest_digest",
+    )
+    return sorted(release_ids), manifest_sha256
+
+
 def run_split(
     config_path: Path,
     normalization_result_path: Path,
     source_path: Path,
     finalize_record_path: Path,
     schema_record_path: Path,
-    release_api_url: str,
+    release_manifest_path: Path,
     split_key_path: Path,
     public_result_path: Path,
     private_manifest_path: Path,
@@ -343,10 +371,8 @@ def run_split(
     )
     schema = json.loads(schema_record_path.read_text(encoding="utf-8"))
     _require(_schema_record_matches(schema), "schema_record")
-    release_ids = load_huggingface_release_case_ids(release_api_url)
-    _require(
-        _canonical_digest(release_ids) == config["source"]["release_tree_case_id_sha256"],
-        "release_manifest_digest",
+    release_ids, release_manifest_sha256 = _load_release_manifest(
+        release_manifest_path, config
     )
     split_key_text = split_key_path.read_text(encoding="utf-8").strip()
     _require(bool(re.fullmatch(r"[0-9a-f]{64}", split_key_text)), "split_key_format")
@@ -374,9 +400,10 @@ def run_split(
     public["source_finalize_record_sha256"] = finalize_record_sha256
     public["source_schema_record_sha256"] = schema_record_sha256
     public["normalization_result_sha256"] = normalization_result_sha256
+    public["release_manifest_sha256"] = release_manifest_sha256
     private["source_path"] = str(source_path)
     private["source_sha256"] = source["sha256"]
-    private["release_api_url"] = release_api_url
+    private["release_manifest_sha256"] = release_manifest_sha256
     _atomic_json(private_manifest_path, private)
     _atomic_json(public_result_path, public)
     return public
@@ -389,7 +416,7 @@ def main() -> int:
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--finalize-record", type=Path, required=True)
     parser.add_argument("--schema-record", type=Path, required=True)
-    parser.add_argument("--release-api-url", required=True)
+    parser.add_argument("--release-manifest", type=Path, required=True)
     parser.add_argument("--split-key", type=Path, required=True)
     parser.add_argument("--public-result", type=Path, required=True)
     parser.add_argument("--private-manifest", type=Path, required=True)
@@ -402,7 +429,7 @@ def main() -> int:
         arguments.source,
         arguments.finalize_record,
         arguments.schema_record,
-        arguments.release_api_url,
+        arguments.release_manifest,
         arguments.split_key,
         arguments.public_result,
         arguments.private_manifest,

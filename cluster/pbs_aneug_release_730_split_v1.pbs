@@ -50,7 +50,7 @@ split_key_name="$(/usr/bin/basename "$AURORA_SPLIT_KEY_FILE")"
   --source /data/processed_v5_9dd4180/assembled_registered_data_1k_v5.pth \
   --finalize-record /data/processed_v5_9dd4180/finalize_116626.ECE-util1.tsv \
   --schema-record /data/processed_v5_9dd4180/schema_116627.ECE-util1.json \
-  --release-api-url "https://huggingface.co/api/datasets/whding123/AneuG-Flow/revision/9dd418083899deddd93a67f9a6fca7a14304fa36" \
+  --release-manifest /workspace/results/aneug_release_730_case_manifest_9dd4180.json \
   --split-key "/private/key/$split_key_name" \
   --public-result /output/public_split_result.json \
   --private-manifest /output/private_split_manifest.json

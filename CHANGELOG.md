@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-18 · offline pinned release manifest
+
+- Preserved split R2 `117024.ECE-util1` as an exit-1 compute-node network
+  failure after source checksum but before object load, assignment or field
+  access.
+- Materialized the exact 730 public release directory IDs from the pinned
+  Hugging Face revision into a hash-bound source manifest. The split runner is
+  now network-free and rechecks count, syntax and the registered sorted-ID
+  digest before loading GHD.
+
 ## 2026-08-18 · release-730 split R1 schema-key correction
 
 - Preserved CPU/PBS job `117020.ECE-util1` as an exit-1 pre-load failure: no

@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 release-730 split R2 network-preload failure:** CPU-only job
+> `117024.ECE-util1` exited 1 in 00:04:32 after the exact source checksum when
+> the compute node could not reach the pinned Hugging Face API. It did not load
+> the processed object, compute GHD distances or assignments, or read fields/
+> test values. Preserve R2. The exact 730 public directory IDs are now pinned
+> locally in manifest SHA-256 `5218ae05...b20f0`, with the already registered
+> sorted-ID digest `cccc90d7...390a`. A Quality-passed network-free runner may
+> retry under a new job ID with every scientific split input unchanged. D12
+> remains the sole GPU job; never use `junjinyong` or maintain the site.
+
 > **2026-08-18 release-730 split R1 pre-load failure:** CPU-only PBS job
 > `117020.ECE-util1` exited 1 after 27 seconds because the runner requested
 > `mesh_case_order_exact` while the exact pinned schema record emits

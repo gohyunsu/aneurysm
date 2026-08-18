@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import tempfile
 import unittest
+from pathlib import Path
 
 try:
     import torch
@@ -10,9 +12,13 @@ except ImportError:
 
 from aurora.aneug_release_730_split import (
     Release730SplitError,
+    _load_release_manifest,
     _schema_record_matches,
     build_grouped_split,
 )
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 @unittest.skipIf(torch is None, "PyTorch is optional in the local lightweight environment")
@@ -92,6 +98,27 @@ class AneuGRelease730SplitTests(unittest.TestCase):
         self.assertTrue(_schema_record_matches(record))
         record["mesh_case_order_exact"] = record.pop("mesh_order_exact")
         self.assertFalse(_schema_record_matches(record))
+
+    def test_pinned_release_manifest_is_complete_and_offline(self):
+        config = json.loads(
+            (ROOT / "configs" / "aneug_release_730_protocol_v1.json").read_text()
+        )
+        ids, digest = _load_release_manifest(
+            ROOT / config["source"]["release_case_manifest"]["relative_path"],
+            config,
+        )
+        self.assertEqual(len(ids), 730)
+        self.assertEqual(digest, config["source"]["release_case_manifest"]["sha256"])
+
+        with tempfile.TemporaryDirectory() as directory:
+            mutated = json.loads(
+                (ROOT / config["source"]["release_case_manifest"]["relative_path"]).read_text()
+            )
+            mutated["case_ids"] = mutated["case_ids"][:-1]
+            path = Path(directory) / "mutated.json"
+            path.write_text(json.dumps(mutated))
+            with self.assertRaisesRegex(Release730SplitError, "release_manifest_identity"):
+                _load_release_manifest(path, config)
 
 
 if __name__ == "__main__":

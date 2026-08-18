@@ -20,6 +20,9 @@ class AneuGRelease730ProtocolTests(unittest.TestCase):
         self.assertEqual(config["source"]["processed_v5"]["remote_case_like_count"], 809)
         self.assertEqual(config["cohort"]["expected_case_count"], 730)
         self.assertEqual(config["cohort"]["exclude_processed_only_extra_cases"], 79)
+        self.assertFalse(
+            config["source"]["release_case_manifest"]["compute_node_network_required"]
+        )
 
     def test_split_is_case_grouped_outcome_blind_and_test_locked(self):
         split = load_config(CONFIG)["split_design"]

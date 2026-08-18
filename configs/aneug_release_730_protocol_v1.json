@@ -13,6 +13,12 @@
     "official_paper_real_shape_counts_conflict": [109, 116],
     "release_tree_case_count": 730,
     "release_tree_case_id_sha256": "cccc90d7932c3584964b3d8456f26812abf8af56edb0882dfa5942fe873c390a",
+    "release_case_manifest": {
+      "relative_path": "results/aneug_release_730_case_manifest_9dd4180.json",
+      "sha256": "5218ae05c2001e99f3f7d3e56cb72591b3bbf8dbcf4c3123a9edd487ac7b20f0",
+      "case_count": 730,
+      "compute_node_network_required": false
+    },
     "processed_v5": {
       "relative_path": "processed_data/assembled_registered_data_1k_v5.pth",
       "bytes": 33233856917,

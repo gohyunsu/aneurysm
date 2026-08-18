@@ -38,6 +38,17 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
         "dataset_revision",
     )
     _require(source["license"] == "cc-by-sa-4.0", "license")
+    release_manifest = source["release_case_manifest"]
+    _require(
+        release_manifest
+        == {
+            "relative_path": "results/aneug_release_730_case_manifest_9dd4180.json",
+            "sha256": "5218ae05c2001e99f3f7d3e56cb72591b3bbf8dbcf4c3123a9edd487ac7b20f0",
+            "case_count": 730,
+            "compute_node_network_required": False,
+        },
+        "release_case_manifest",
+    )
     _require(
         source["proceedings_html_transient_cases"] == 200
         and source["official_paper_transient_cases"] == 730
