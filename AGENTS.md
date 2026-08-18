@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 release-730 experiment priority reset:** The main paper now
+> uses the completed 584/73/73 processed-v5 release intersection. Historical
+> v4 406/51 D11/D12 records are engineering provenance, not main-table rows or
+> initialization sources. Immediate order is train-only physical audit;
+> train-only response oracle; new-split official Graph U-Net, GHD-GPS/GINE and
+> Transolver; response/local ablations; then functional-objective ablations.
+> Defer LinearNO/Transolver++ and the 79 processed-only cases until the core
+> comparison is complete.
+>
+> A new CPU-only train audit is prepared. It binds the exact R3 public/private
+> split hashes and may index only 584 training tensors. Hard checks cover data
+> identity, finiteness, static geometry, normalization round-trip, faces, GHD
+> and cycle endpoints; tangency, phase-boundary jump and hemodynamic summaries
+> are descriptive rather than model pass thresholds. It creates no tensor
+> duplicate and permits diagnosed append-only retries. Validation/test/extra
+> fields, models, GPU and paper claims remain closed. Use only `introai9`,
+> never `junjinyong`, and do not maintain the site.
+
 > **2026-08-18 release-730 split completed:** Network-free CPU/PBS R3
 > `117026.ECE-util1` exited 0 in 00:00:27 at exact source `0dd4f851...ba1dc`.
 > All 730 canonical cases are singleton GHD components (zero exact duplicates,

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-18 · release-730 train audit prepared
+
+- Added a CPU-only reader that binds the completed private 584/73/73 split and
+  indexes only the 584 training fields.
+- Integrity checks are separated from descriptive tangency, periodicity and
+  functional summaries; no arbitrary model threshold is introduced.
+- Private output provides one train-derived normalization and loader order for
+  every later comparator without copying the 33.2 GB tensor object.
+
 ## 2026-08-18 · independent release-730 split completed
 
 - Network-free CPU/PBS R3 `117026.ECE-util1` exited 0 and created the exact
