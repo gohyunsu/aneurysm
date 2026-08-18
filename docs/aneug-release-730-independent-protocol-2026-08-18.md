@@ -24,10 +24,11 @@ On `introai9`, PBS job `116626.ECE-util1` assembled the exact
 33,233,856,917-byte v5 object and matched the official SHA-256; job
 `116627.ECE-util1` then verified 809 unique, order-aligned mesh/case entries,
 432-D GHD rows and case tensors shaped 80 × 13,902 × 9. Transport and archive
-schema are therefore complete. The remaining construction step is the
-explicit 809→730 release intersection and geometry-component split—not another
-download. The 64 staging chunks are retained for now and are not a second
-scientific cohort.
+schema are therefore complete. CPU/PBS job `117026.ECE-util1` subsequently
+completed the explicit 809→730 release intersection and split: all 730 GHD
+components were singleton, producing exactly 584 train, 73 validation and 73
+locked-test cases. The 64 staging chunks are retained for now and are not a
+second scientific cohort.
 
 Source reconciliation is documented separately in
 [`aneug-official-source-reconciliation-2026-08-18.md`](aneug-official-source-reconciliation-2026-08-18.md).
@@ -36,9 +37,12 @@ final paper, card and exact 730-directory release tree; the final paper's
 109-versus-116 real-shape conflict prevents any parent-lineage claim.
 
 The v5 object does not embed the official steady `tensor_norm`. An exact steady
-v4 normalization source is available, but physical-unit metrics remain closed
-until a v4/v5 overlap audit supports that linkage. This is independent of the
-already completed file-transport and schema checks.
+v4 normalization source is available, and CPU/PBS job `117006.ECE-util1`
+established strong overlap linkage: all nine tensors, GHD rows and mesh
+hierarchy entries were bit-exact for the 578 shared v4/v5 cases. Physical-unit
+metrics are therefore enabled with that exact decoder source while model
+normalization remains train-only. A v5-only creator manifest is still absent,
+so the linkage and its limitation remain explicit.
 
 ## Independent split
 
@@ -67,12 +71,14 @@ waveform and geometry-dependent outlet conditions used by the release. The
 paper should not add an artificial BC-imputation story or claim that a GNN,
 equivariance, temporal basis or functional loss is novel by itself.
 
-The clean candidate is a cycle-native mesh operator: a multiresolution local
-mesh encoder plus a global geometry token predicts train-only temporal
-response coordinates for all 80 phases in one pass. A tangent vector decoder
-reconstructs WSS, and a field-anchored cycle-functional objective can align
+The clean candidate is a cycle-native mesh operator: a train-only global
+complete-cycle response manifold captures broad variation, while a
+multiresolution local mesh branch predicts the remaining Cartesian residual.
+The single decoded field may receive a soft tangency penalty, but it is not
+hard-projected because the released reference contains small nonzero
+mesh-normal components. A field-anchored cycle-functional objective can align
 TAWSS and OSI only if matched validation experiments show a gain without a
-field-error tax. The direct released Graph U-Net, a strong local/global mesh
+field-error tax. The direct released Graph U-Net, a strong GHD-GPS/GINE mesh
 model and Transolver are matched controls. No absolute performance threshold
 is set before those controls run on this new split.
 

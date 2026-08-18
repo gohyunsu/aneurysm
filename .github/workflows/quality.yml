@@ -128,6 +128,10 @@ jobs:
         run: |
           PYTHONPATH=src python -m aurora.aneug_release_730_response_oracle --config configs/aneug_release_730_response_oracle_v1.json --validate-only
           bash -n cluster/pbs_aneug_release_730_response_oracle_v1.pbs
+      - name: Validate release-730 GHD-GPS/GINE strong comparator
+        run: |
+          PYTHONPATH=src python -m aurora.aneug_release_730_ghd_gps_baseline --config configs/aneug_release_730_ghd_gps_baseline_v1.json --validate-only
+          bash -n cluster/pbs_aneug_release_730_ghd_gps_baseline_v1.pbs
       - name: Validate prepared AneuG D14 Transolver control
         run: |
           PYTHONPATH=src python -m aurora.aneug_processed_v4_d14_transolver_control --config configs/aneug_processed_v4_d14_transolver_control_v1.json --validate-only

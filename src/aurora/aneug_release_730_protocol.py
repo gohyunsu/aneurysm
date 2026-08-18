@@ -28,7 +28,7 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
     )
     _require(
         payload.get("status")
-        == "canonical_cohort_schema_and_normalization_pass_split_pending",
+        == "canonical_cohort_schema_normalization_and_split_complete",
         "status",
     )
     source = payload["source"]
@@ -149,6 +149,33 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
         "steady_norm_identity",
     )
     split = payload["split_design"]
+    _require(split["status"] == "complete_frozen_test_sealed", "split_status")
+    _require(
+        (
+            split["assignment_job_id"],
+            split["public_result_path"],
+            split["public_result_sha256"],
+            split["private_manifest_sha256"],
+        )
+        == (
+            "117026.ECE-util1",
+            "results/aneug_release_730_split_r3_20260818.json",
+            "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+            "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+        ),
+        "split_evidence",
+    )
+    _require(
+        (
+            split["geometry_component_count"],
+            split["maximum_component_size"],
+            split["exact_duplicate_component_count"],
+            split["registered_near_duplicate_edge_count"],
+        )
+        == (730, 1, 0, 0),
+        "component_result",
+    )
+    _require(split["test_opened"] is False, "test_opened")
     _require(
         (split["train_fraction"], split["validation_fraction"], split["test_fraction"])
         == (0.8, 0.1, 0.1),
