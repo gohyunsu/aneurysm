@@ -268,6 +268,18 @@ def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
     os.replace(temporary, path)
 
 
+def _schema_record_matches(schema: Mapping[str, Any]) -> bool:
+    """Match the exact field names emitted by the pinned v5 schema audit."""
+
+    return bool(
+        schema.get("schema_pass") is True
+        and schema.get("registered_case_count") == 809
+        and schema.get("mesh_case_count") == 809
+        and schema.get("tensor_shape") == [80, 13_902, 9]
+        and schema.get("mesh_order_exact") is True
+    )
+
+
 def run_split(
     config_path: Path,
     normalization_result_path: Path,
@@ -330,14 +342,7 @@ def run_split(
         "schema_record_identity",
     )
     schema = json.loads(schema_record_path.read_text(encoding="utf-8"))
-    _require(
-        schema.get("schema_pass") is True
-        and schema.get("registered_case_count") == 809
-        and schema.get("mesh_case_count") == 809
-        and schema.get("tensor_shape") == [80, 13_902, 9]
-        and schema.get("mesh_case_order_exact") is True,
-        "schema_record",
-    )
+    _require(_schema_record_matches(schema), "schema_record")
     release_ids = load_huggingface_release_case_ids(release_api_url)
     _require(
         _canonical_digest(release_ids) == config["source"]["release_tree_case_id_sha256"],

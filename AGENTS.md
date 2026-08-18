@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 release-730 split R1 pre-load failure:** CPU-only PBS job
+> `117020.ECE-util1` exited 1 after 27 seconds because the runner requested
+> `mesh_case_order_exact` while the exact pinned schema record emits
+> `mesh_order_exact`. It failed before processed-object load, GHD comparison,
+> assignment or field/test access. Preserve R1. A source-only correction and
+> regression test may rerun the unchanged scientific split under a new job ID
+> after Research Quality passes. D12 remains the sole GPU job. Use only
+> `introai9`, never `junjinyong`, and do not maintain the site.
+
 > **2026-08-18 processed-v5 normalization provenance completed:** CPU-only
 > PBS job `117006.ECE-util1` exited 0 after 00:26:15. Every one of 578 v4/v5
 > overlap cases is bit-exact across all nine tensor channels and 432-D GHD;

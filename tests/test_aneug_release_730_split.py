@@ -10,6 +10,7 @@ except ImportError:
 
 from aurora.aneug_release_730_split import (
     Release730SplitError,
+    _schema_record_matches,
     build_grouped_split,
 )
 
@@ -79,6 +80,18 @@ class AneuGRelease730SplitTests(unittest.TestCase):
         self.assertFalse(public["registered_field_values_read"])
         self.assertFalse(public["test_opened"])
         self.assertNotIn("stable_", serialized)
+
+    def test_schema_guard_uses_exact_emitted_mesh_order_key(self):
+        record = {
+            "schema_pass": True,
+            "registered_case_count": 809,
+            "mesh_case_count": 809,
+            "tensor_shape": [80, 13_902, 9],
+            "mesh_order_exact": True,
+        }
+        self.assertTrue(_schema_record_matches(record))
+        record["mesh_case_order_exact"] = record.pop("mesh_order_exact")
+        self.assertFalse(_schema_record_matches(record))
 
 
 if __name__ == "__main__":

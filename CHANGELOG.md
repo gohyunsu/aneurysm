@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-18 · release-730 split R1 schema-key correction
+
+- Preserved CPU/PBS job `117020.ECE-util1` as an exit-1 pre-load failure: no
+  field, GHD distance, assignment or locked-test value was read.
+- Corrected the runner to consume the exact `mesh_order_exact` key emitted by
+  the pinned schema record instead of an invented summary-field name. Added a
+  focused regression test; scientific inputs and split rules are unchanged.
+
 ## 2026-08-18 · processed-v5 normalization provenance completed
 
 - CPU/PBS job `117006.ECE-util1` exited 0 after comparing all 578 v4/v5
