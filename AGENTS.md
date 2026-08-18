@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 train-audit R1 pre-field failure:** CPU-only job
+> `117034.ECE-util1` exited 1 in 00:02:11 after all exact source/split hashes
+> passed and mmap objects loaded, but before any case tensor index. The reader
+> reimplemented the producer's newline case-digest grammar as compact JSON;
+> its fixture repeated the same error. Train/validation/test/extra field reads
+> are all zero and no scientific verdict exists. Preserve R1. Import the exact
+> producer helper, pin its grammar in a regression test, pass Research Quality,
+> and rerun the unchanged train-only audit under a fresh ID. This is allowed by
+> the diagnosed append-only retry policy.
+
 > **2026-08-18 release-730 experiment priority reset:** The main paper now
 > uses the completed 584/73/73 processed-v5 release intersection. Historical
 > v4 406/51 D11/D12 records are engineering provenance, not main-table rows or

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-08-18 · train-audit digest repair
+
+- Preserved CPU R1 as a pre-field execution failure caused by a duplicated
+  case-digest serialization grammar.
+- Reused the exact release-split digest helper and pinned newline serialization
+  in a regression test; no data, split, read scope or threshold changed.
+
 ## 2026-08-18 · release-730 train audit prepared
 
 - Added a CPU-only reader that binds the completed private 584/73/73 split and

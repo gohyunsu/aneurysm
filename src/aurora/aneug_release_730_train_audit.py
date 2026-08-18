@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from aurora.aneug_cycle_functional_p0 import safe_torch_load
+from aurora.aneug_release_730_split import _canonical_digest
 
 
 class Release730TrainAuditError(RuntimeError):
@@ -34,11 +35,6 @@ def file_sha256(path: str | Path, chunk_bytes: int = 8 * 1024 * 1024) -> str:
         while block := handle.read(chunk_bytes):
             digest.update(block)
     return digest.hexdigest()
-
-
-def _canonical_digest(values: Sequence[str]) -> str:
-    payload = json.dumps(sorted(str(value) for value in values), separators=(",", ":"))
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def _ordered_digest(values: Sequence[str]) -> str:

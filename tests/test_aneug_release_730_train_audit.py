@@ -14,6 +14,7 @@ from aurora.aneug_release_730_train_audit import (
     validate_config,
     validate_split_evidence,
 )
+from aurora.aneug_release_730_split import _canonical_digest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,19 +57,16 @@ class Release730TrainAuditTests(unittest.TestCase):
         validation = [f"stable_validation_{index}" for index in range(73)]
         test = [f"stable_test_{index}" for index in range(73)]
         extras = [f"extra_{index}" for index in range(79)]
-        canonical = lambda values: hashlib.sha256(
-            json.dumps(sorted(values), separators=(",", ":")).encode()
-        ).hexdigest()
         config = copy.deepcopy(config)
-        config["split"]["train_case_digest"] = canonical(train)
-        config["split"]["validation_case_digest"] = canonical(validation)
-        config["split"]["test_case_digest"] = canonical(test)
+        config["split"]["train_case_digest"] = _canonical_digest(train)
+        config["split"]["validation_case_digest"] = _canonical_digest(validation)
+        config["split"]["test_case_digest"] = _canonical_digest(test)
         release = train + validation + test
         public = {
             "status": "complete",
             "registered_field_values_read": False,
             "test_opened": False,
-            "release_case_id_sha256": canonical(release),
+            "release_case_id_sha256": _canonical_digest(release),
         }
         component = lambda value: {
             "case_ids": [value], "case_count": 1, "component_digest": "unused"
@@ -90,6 +88,10 @@ class Release730TrainAuditTests(unittest.TestCase):
         private["test_opened"] = True
         with self.assertRaisesRegex(Release730TrainAuditError, "private_test_opened"):
             validate_split_evidence(config, public, private)
+
+    def test_digest_grammar_is_shared_with_release_split(self):
+        expected = hashlib.sha256(b"stable_a\nstable_b").hexdigest()
+        self.assertEqual(_canonical_digest(["stable_b", "stable_a"]), expected)
 
     def test_sealed_records_are_not_tensor_indexed(self):
         cases = [
