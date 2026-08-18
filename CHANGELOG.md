@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-18 — Release-730 response-oracle paired analysis prepared
+
+- Added a result-pending 73-case analyzer for every registered response-oracle
+  rank versus the released Graph U-Net adapter. It requires exact private
+  result hashes and the shared validation-order provenance.
+- The analyzer reports continuous paired bootstrap deltas, metric Pareto
+  membership and rank-specific active basis storage. It selects no rank,
+  creates no global-branch verdict and cannot read locked-test or 79-extra
+  values.
+- The historical 51-case comparison remains unchanged. No execution,
+  performance result or paper claim is introduced.
+
 ## 2026-08-18 · train representation attribution completed
 
 - Completed 584-case CPU attribution with zero validation/test/extra reads and

@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 release-730 oracle comparison prepared:** A new result-pending
+> analyzer parses only the 73-case released Graph U-Net and true-coefficient
+> response-oracle result roles. It requires exact private hashes and the shared
+> validation-order digest, and reports 10,000-resample paired deltas, metric
+> Pareto membership and rank-specific active basis storage. It has no absolute
+> threshold, automatic rank/global-branch decision, locked-test/79-extra read,
+> public numeric output or paper claim. Do not execute it until both terminal
+> results and a fresh private activation exist. The historical v4 51-case
+> utility remains unchanged. Use only introai9, never junjinyong, and do not
+> maintain the site.
+
 > **2026-08-18 train representation attribution completed:** CPU job
 > `117052.ECE-util1` finalized F/exit 0 in 00:08:32 with 584 train and zero
 > validation/test/79-extra field reads. Exact public/private/log/status hashes

@@ -1,0 +1,58 @@
+{
+  "schema_version": "aurora.aneug_release_730_oracle_comparison.v1",
+  "protocol_id": "aneug_release_730_oracle_comparison_v1",
+  "status": "prepared_result_pending",
+  "as_of": "2026-08-18",
+  "split": {
+    "validation_cases": 73,
+    "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
+    "private_manifest_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+    "shared_loader_order_provenance_required": true,
+    "locked_test_read": false,
+    "processed_only_extra_read": false
+  },
+  "comparison": {
+    "reference": "released_graph_unet_adapter",
+    "candidate_role": "true_amplitude_true_coefficient_response_oracle",
+    "rank_grid": [0, 16, 32, 64, 128, 256],
+    "core_metrics": [
+      "field_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae",
+      "osi_coverage"
+    ],
+    "paired_unit": "synthetic_geometry_case",
+    "basis_width": 3336480,
+    "basis_dtype_bytes": 4
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 20260818,
+    "interval": "percentile_95pct",
+    "estimand": "paired_mean_oracle_minus_direct",
+    "population_inference": false
+  },
+  "decision": {
+    "absolute_performance_threshold": null,
+    "automatic_rank_selection": false,
+    "automatic_global_branch_decision": false,
+    "report_all_ranks": true,
+    "report_paired_deltas": true,
+    "report_metric_pareto_set": true,
+    "report_storage_aware_rank_pareto_set": true,
+    "interpretation": "representation_ceiling_only_learned_response_validation_must_select_any_rank"
+  },
+  "boundary": {
+    "execute_now": false,
+    "requires_direct_terminal_result": true,
+    "requires_oracle_terminal_result": true,
+    "requires_fresh_private_activation": true,
+    "validation_development_only": true,
+    "locked_test_or_extra_access": false,
+    "paper_performance_claim": false,
+    "publish_numeric_result": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "maintain_public_site": false
+  }
+}
