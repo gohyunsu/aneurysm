@@ -126,6 +126,8 @@
     "memory_gb": 64,
     "ngpus": 0,
     "walltime": "12:00:00",
+    "runtime": "torch251-cuda118-pinned.sif_cpu_mode_without_nv",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
     "login_node_gpu_allowed": false,
     "excluded_server": "junjinyong",
     "public_site_maintenance": false

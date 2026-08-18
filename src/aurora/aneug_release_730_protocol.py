@@ -147,6 +147,13 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
     execution = payload["execution"]
     _require(execution["server"] == "introai9", "server")
     _require(execution["ngpus"] == 0, "gpu")
+    _require(
+        execution["runtime"] == "torch251-cuda118-pinned.sif_cpu_mode_without_nv"
+        and execution["container_sha256"]
+        == "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0"
+        "970a61ae05b88681f2",
+        "runtime",
+    )
     _require(execution["excluded_server"] == "junjinyong", "excluded_server")
     authorization = payload["authorization"]
     _require(authorization["download_v5"] is False, "duplicate_download")

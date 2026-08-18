@@ -89,6 +89,9 @@ def load_config(path: str | Path) -> dict[str, Any]:
     _require(
         execution["server"] == "introai9"
         and execution["ngpus"] == 0
+        and execution["runtime"] == "torch251-cuda118-pinned.sif_cpu_mode_without_nv"
+        and execution["container_sha256"]
+        == "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2"
         and execution["excluded_server"] == "junjinyong",
         "execution_scope",
     )
