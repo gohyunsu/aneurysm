@@ -28,6 +28,22 @@ class AneuGRelease730ProtocolTests(unittest.TestCase):
         self.assertFalse(split["field_or_model_result_used_to_choose_split"])
         self.assertTrue(split["test_locked_until_candidate_and_analysis_freeze"])
 
+    def test_physical_decode_is_bound_to_exact_completed_provenance_audit(self):
+        provenance = load_config(CONFIG)["normalization_provenance"]
+        self.assertEqual(
+            provenance["v4_v5_overlap_identity_audit_status"],
+            "complete_strong_overlap_linkage",
+        )
+        self.assertEqual(provenance["audit_job_id"], "117006.ECE-util1")
+        self.assertEqual(
+            provenance["audit_result_sha256"],
+            "a083a4a71abfca55cac4e638daad00c7acd2bd7a66a3a42b2d5302374fb11fdb",
+        )
+        self.assertTrue(
+            provenance["physical_wss_metrics_authorized_after_supported_linkage"]
+        )
+        self.assertFalse(provenance["v5_only_creator_manifest_available"])
+
     def test_no_raw_release_or_premature_gpu_is_authorized(self):
         config = load_config(CONFIG)
         self.assertFalse(config["storage"]["raw_per_case_cfd_downloaded"])

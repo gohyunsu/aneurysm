@@ -1,0 +1,43 @@
+{
+  "case_identifiers_public": false,
+  "field_distribution_statistic_computed": false,
+  "ghd_exact_equal_overlap_count": 578,
+  "input_sha256": {
+    "steady_v4": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "transient_v4": "141541ed9b3f57bcbbda868512b54b57407547fdc1e86eec34195f47b8a451c9",
+    "transient_v5": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae"
+  },
+  "label_equal_overlap_count": 578,
+  "maximum_tensor_mismatch_abs": 0.0,
+  "model_or_performance_metric_computed": false,
+  "overlap_case_count": 578,
+  "overlap_identity_supports_common_preprocessing_lineage": true,
+  "physical_decode_interpretation": "supported_by_official_single_normalizer_builder_and_complete_v4_overlap_identity",
+  "schema_version": "aurora.aneug_release_v5_normalization_linkage_result.v1",
+  "scientific_performance_verdict": null,
+  "shared_hierarchy_equal_item_count": 8,
+  "shared_hierarchy_item_count": 8,
+  "status": "complete_strong_overlap_linkage",
+  "steady_norm_fingerprint_sha256": "5041cfc881669146fff048791e9ad600c90a1dda9c7daa81080fb724df56b6f2",
+  "steady_norm_shape": [
+    [
+      1,
+      1,
+      9
+    ],
+    [
+      1,
+      1,
+      9
+    ]
+  ],
+  "tensor_exact_equal_overlap_count": 578,
+  "tensor_mismatch_overlap_count": 0,
+  "test_outcome_read": false,
+  "v4_case_count": 578,
+  "v4_only_case_count": 0,
+  "v5_case_count": 809,
+  "v5_embeds_normalization_metadata": false,
+  "v5_only_case_count": 231,
+  "v5_only_creator_manifest_available": false
+}

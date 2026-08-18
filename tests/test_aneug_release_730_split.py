@@ -70,6 +70,16 @@ class AneuGRelease730SplitTests(unittest.TestCase):
             invalid = release[:-1] + ["stable_999999"]
             build_grouped_split(case_ids, case_ids, rows, invalid, b"x" * 32, torch)
 
+    def test_public_result_contains_no_identifiers_or_fields(self):
+        release, case_ids, rows = self.fixture()
+        public, _ = build_grouped_split(
+            case_ids, case_ids, rows, release, b"z" * 32, torch
+        )
+        serialized = json.dumps(public, sort_keys=True)
+        self.assertFalse(public["registered_field_values_read"])
+        self.assertFalse(public["test_opened"])
+        self.assertNotIn("stable_", serialized)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -71,11 +71,30 @@ does not embed the normalization record. The official README says
 loads the v4 steady object and passes its `tensor_norm` to the builder.
 
 The exact steady v4 source needed for decoding remains on `introai9`
-(9,632,510,050 bytes; SHA-256 `0c03c1d9…0177f`). This establishes availability,
-not yet lineage for all v5-only cases. A CPU/PBS audit must compare every one
-of the 578 v4/v5 overlapping tensors and geometry rows and bind the steady
-normalization fingerprint. Until that audit completes, transport/schema are
-complete but physical-unit WSS claims remain pending.
+(9,632,510,050 bytes; SHA-256 `0c03c1d9…0177f`). CPU/PBS job
+`117006.ECE-util1` subsequently compared every one of the 578 v4/v5
+overlapping cases. All nine channels, GHD rows and shared hierarchy items were
+bit-exact; the maximum tensor mismatch was zero. The result binds the
+steady-normalizer fingerprint and supports physical decoding under the
+official single-normalizer builder. Because v5 has no embedded creator
+manifest, this is strong common-lineage evidence rather than direct metadata
+proof for the 231 v5-only entries.
+
+## Source-intended composition versus the acquired study object
+
+| Item | Official source intent | Exact acquired evidence | Study use |
+|---|---|---|---|
+| transient cohort | 730 synthetic pulsatile CFD cases in the final paper/card/tree | all 730 occur in v5; no release ID is missing | exact 730-ID intersection |
+| processed v5 | not documented by the card | official blob has 809 entries | exclude 79 processed-only extras |
+| temporal sampling | second simulated cardiac cycle, 80 uniform phases | every canonical case tensor has 80 phases | keep the full cycle within its case split |
+| registered surface | common connectivity, 13,902 nodes and 14,000 triangles | schema has 13,902 nodes and shared hierarchy | registered surface operator task |
+| target | Cartesian vector WSS at the wall | final three channels are `wss_x/y/z` | vector WSS, with derived TAWSS/OSI |
+| boundary conditions | one common inlet waveform; geometry-dependent two-outlet split | no independent BC-varied input is present | geometry-conditioned fixed-protocol prediction only |
+| normalization | external steady `tensor_norm` in official builder | complete v4 overlap is bit-exact in v5 | decode with bound steady norm; fit model transforms on train only |
+
+The raw release additionally contains volume velocity, pressure and derivative
+fields, but they are not present in the acquired processed surface object and
+are not implied by this study.
 
 ## What the published baseline does and does not establish
 

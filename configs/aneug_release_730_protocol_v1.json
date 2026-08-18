@@ -1,7 +1,7 @@
 {
   "schema_version": "aurora.aneug_release_730_protocol.v1",
   "protocol_id": "aneug_release_aligned_730_transient_wss_v1",
-  "status": "canonical_cohort_and_schema_pass_normalization_linkage_and_split_pending",
+  "status": "canonical_cohort_schema_and_normalization_pass_split_pending",
   "as_of": "2026-08-18",
   "source": {
     "dataset_repository": "whding123/AneuG-Flow",
@@ -68,8 +68,15 @@
     "steady_v4_relative_server_path": "processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary",
     "steady_v4_bytes": 9632510050,
     "steady_v4_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
-    "v4_v5_overlap_identity_audit_status": "pending",
+    "v4_v5_overlap_identity_audit_status": "complete_strong_overlap_linkage",
+    "audit_job_id": "117006.ECE-util1",
+    "audit_exit_code": 0,
+    "audit_result_path": "results/aneug_release_v5_normalization_linkage_20260818.json",
+    "audit_result_sha256": "a083a4a71abfca55cac4e638daad00c7acd2bd7a66a3a42b2d5302374fb11fdb",
+    "steady_norm_fingerprint_sha256": "5041cfc881669146fff048791e9ad600c90a1dda9c7daa81080fb724df56b6f2",
     "physical_wss_metrics_authorized_before_linkage": false,
+    "physical_wss_metrics_authorized_after_supported_linkage": true,
+    "v5_only_creator_manifest_available": false,
     "model_normalization_recomputed_from_new_train_only": true
   },
   "split_design": {

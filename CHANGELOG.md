@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-18 · processed-v5 normalization provenance completed
+
+- CPU/PBS job `117006.ECE-util1` exited 0 after comparing all 578 v4/v5
+  overlapping cases. Nine-channel tensors, 432-D GHD rows and eight hierarchy
+  items were bit-exact; maximum tensor mismatch was zero.
+- Bound the exact public result and steady-normalizer fingerprint into the
+  independent 730-case protocol and made the split runner fail closed unless
+  that result is present and exact. The audit opened no field distribution,
+  model result or locked-test outcome.
+- Retained the unresolved limitation that v5 lacks an embedded normalization
+  or creator manifest; common lineage for its 231 new entries is strongly
+  supported by complete overlap identity but not directly attested by source
+  metadata.
+
 ## 2026-08-18 · official-source and normalization reconciliation
 
 - Cross-checked the final NeurIPS paper, proceedings HTML, pinned dataset card,

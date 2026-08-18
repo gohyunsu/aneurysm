@@ -270,6 +270,7 @@ def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
 
 def run_split(
     config_path: Path,
+    normalization_result_path: Path,
     source_path: Path,
     finalize_record_path: Path,
     schema_record_path: Path,
@@ -280,6 +281,32 @@ def run_split(
     torch: Any,
 ) -> dict[str, Any]:
     config = load_config(config_path)
+    normalization = config["normalization_provenance"]
+    normalization_result_sha256 = hashlib.sha256(
+        normalization_result_path.read_bytes()
+    ).hexdigest()
+    _require(
+        normalization_result_sha256 == normalization["audit_result_sha256"],
+        "normalization_result_identity",
+    )
+    normalization_result = json.loads(
+        normalization_result_path.read_text(encoding="utf-8")
+    )
+    _require(
+        normalization_result.get("status") == "complete_strong_overlap_linkage"
+        and normalization_result.get("overlap_case_count") == 578
+        and normalization_result.get("tensor_exact_equal_overlap_count") == 578
+        and normalization_result.get("tensor_mismatch_overlap_count") == 0
+        and normalization_result.get("maximum_tensor_mismatch_abs") == 0.0
+        and normalization_result.get("ghd_exact_equal_overlap_count") == 578
+        and normalization_result.get("shared_hierarchy_equal_item_count")
+        == normalization_result.get("shared_hierarchy_item_count")
+        == 8
+        and normalization_result.get("steady_norm_fingerprint_sha256")
+        == normalization["steady_norm_fingerprint_sha256"]
+        and normalization_result.get("test_outcome_read") is False,
+        "normalization_result",
+    )
     source = config["source"]["processed_v5"]
     _require(source_path.is_file(), "source_missing")
     _require(source_path.stat().st_size == source["bytes"], "source_size")
@@ -341,6 +368,7 @@ def run_split(
     )
     public["source_finalize_record_sha256"] = finalize_record_sha256
     public["source_schema_record_sha256"] = schema_record_sha256
+    public["normalization_result_sha256"] = normalization_result_sha256
     private["source_path"] = str(source_path)
     private["source_sha256"] = source["sha256"]
     private["release_api_url"] = release_api_url
@@ -352,6 +380,7 @@ def run_split(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=Path, required=True)
+    parser.add_argument("--normalization-result", type=Path, required=True)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--finalize-record", type=Path, required=True)
     parser.add_argument("--schema-record", type=Path, required=True)
@@ -364,6 +393,7 @@ def main() -> int:
 
     result = run_split(
         arguments.config,
+        arguments.normalization_result,
         arguments.source,
         arguments.finalize_record,
         arguments.schema_record,

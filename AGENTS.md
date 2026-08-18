@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 processed-v5 normalization provenance completed:** CPU-only
+> PBS job `117006.ECE-util1` exited 0 after 00:26:15. Every one of 578 v4/v5
+> overlap cases is bit-exact across all nine tensor channels and 432-D GHD;
+> all eight hierarchy items match and maximum tensor mismatch is zero. Exact
+> public result SHA-256 is `a083a4a7...11fdb`; steady-normalizer fingerprint
+> is `5041cfc8...6b6f2`. This supports physical decoding under the pinned
+> official single-normalizer builder, but v5 still lacks a creator manifest,
+> so state the v5-only lineage as strong inference, not direct attestation.
+> The split runner must bind this exact result. No field statistic, model
+> endpoint or locked test was read. D12 remains the sole GPU job. Use only
+> `introai9`, never `junjinyong`, and do not maintain the site.
+
 > **2026-08-18 official-source reconciliation and normalization boundary:**
 > Final NeurIPS PDF, pinned dataset card and exact release tree support 730
 > transient synthetic CFD cases, while the proceedings HTML still says 200.

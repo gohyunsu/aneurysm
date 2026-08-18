@@ -46,6 +46,7 @@ split_key_name="$(/usr/bin/basename "$AURORA_SPLIT_KEY_FILE")"
   /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONPATH=/workspace/src \
   python -m aurora.aneug_release_730_split \
   --config /workspace/configs/aneug_release_730_protocol_v1.json \
+  --normalization-result /workspace/results/aneug_release_v5_normalization_linkage_20260818.json \
   --source /data/processed_v5_9dd4180/assembled_registered_data_1k_v5.pth \
   --finalize-record /data/processed_v5_9dd4180/finalize_116626.ECE-util1.tsv \
   --schema-record /data/processed_v5_9dd4180/schema_116627.ECE-util1.json \

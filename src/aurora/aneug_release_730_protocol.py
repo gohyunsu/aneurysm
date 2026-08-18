@@ -26,6 +26,11 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
         payload.get("protocol_id") == "aneug_release_aligned_730_transient_wss_v1",
         "protocol_id",
     )
+    _require(
+        payload.get("status")
+        == "canonical_cohort_schema_and_normalization_pass_split_pending",
+        "status",
+    )
     source = payload["source"]
     _require(
         source["dataset_revision"]
@@ -108,8 +113,19 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
     _require(
         normalization["transient_archive_embeds_tensor_norm"] is False
         and normalization["official_builder_requires_external_steady_tensor_norm"] is True
-        and normalization["v4_v5_overlap_identity_audit_status"] == "pending"
+        and normalization["v4_v5_overlap_identity_audit_status"]
+        == "complete_strong_overlap_linkage"
+        and normalization["audit_job_id"] == "117006.ECE-util1"
+        and normalization["audit_exit_code"] == 0
+        and normalization["audit_result_path"]
+        == "results/aneug_release_v5_normalization_linkage_20260818.json"
+        and normalization["audit_result_sha256"]
+        == "a083a4a71abfca55cac4e638daad00c7acd2bd7a66a3a42b2d5302374fb11fdb"
+        and normalization["steady_norm_fingerprint_sha256"]
+        == "5041cfc881669146fff048791e9ad600c90a1dda9c7daa81080fb724df56b6f2"
         and normalization["physical_wss_metrics_authorized_before_linkage"] is False
+        and normalization["physical_wss_metrics_authorized_after_supported_linkage"] is True
+        and normalization["v5_only_creator_manifest_available"] is False
         and normalization["model_normalization_recomputed_from_new_train_only"] is True,
         "normalization_provenance",
     )
