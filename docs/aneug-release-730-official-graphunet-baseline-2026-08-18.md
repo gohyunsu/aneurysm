@@ -8,11 +8,15 @@ the trainer, and the paper split, single-GPU environment and common physical
 evaluation differ from upstream.
 
 The adapter retains the released six normalized coordinate/normal inputs,
-phase embedding, normalized frame MSE and physical log-magnitude term. It
-uses the common zero waveform because every released case shares one inlet
-waveform and the referenced file is absent. No boundary-condition
-generalization is claimed. The only numerical stabilization clamps undefined
-`log(0)` support.
+phase embedding and physical log-magnitude term. Its frame MSE is computed
+directly in the stored steady-normalized coordinates. A later direct source
+audit found that the upstream default `renormalize_transient=True` first
+rescales this residual with train-transient channel statistics. This bounded
+channel weighting is therefore an additional declared adapter difference: the
+active row is not an objective reproduction. It uses the common zero waveform
+because every released case shares one inlet waveform and the referenced file
+is absent. No boundary-condition generalization is claimed. The only
+log-magnitude stabilization clamps undefined `log(0)` support.
 
 Predictions are decoded to the raw released physical Cartesian WSS. There is
 no hard tangent projection or periodic closure. Checkpoint selection uses the
@@ -25,3 +29,10 @@ One seed is validation development, not a paper result. There is no absolute
 pass threshold or automatic winner. Its purpose is to establish a credible
 direct-prior reference before optimizing the GHD-GPS/GINE, Transolver or
 global-response-plus-local-residual candidates.
+
+The healthy active run is preserved rather than stopped or silently relabelled.
+After its terminal record, an objective-only sensitivity is warranted only if
+exact train-only scale ratios and its validation failure mode indicate that
+the upstream weighting can materially strengthen this comparator. Such a
+sensitivity must hold model, split, seed, schedule, log term, evaluator and
+sealed scope fixed.

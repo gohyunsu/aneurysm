@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-18 — Released Graph U-Net objective boundary corrected
+
+- Directly audited the pinned upstream trainer, transient component builder
+  and loss implementation. The upstream default rescales frame-MSE residuals
+  by train-transient channel statistics; the active adapter uses stored
+  steady-normalized frame MSE directly while retaining the released class and
+  physical log-magnitude term.
+- Corrected the documentation to call the active row a released-class protocol
+  adapter, not an objective reproduction. Its healthy run remains useful and
+  is not stopped or duplicated solely for this bounded weighting difference.
+- Any later objective-only sensitivity must be attribution-supported and hold
+  model, split, seed, schedule, evaluator and sealed test/extra scope fixed.
+
 ## 2026-08-18 — Release-730 response-oracle paired analysis prepared
 
 - Added a result-pending 73-case analyzer for every registered response-oracle

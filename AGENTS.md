@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 released-objective boundary corrected:** Direct inspection of
+> pinned upstream `train_baselines.py`, `datasets_wss_optimized.py` and
+> `losser.py` found that `renormalize_transient=True` rescales frame-MSE
+> residuals by train-transient channel statistics. Active job
+> `117056.ECE-util1` instead applies frame MSE directly in the stored
+> steady-normalized coordinates while retaining the unchanged released class,
+> physical log-magnitude term and common physical evaluator. Preserve it as a
+> released-class protocol adapter, never an objective reproduction. Do not
+> stop or duplicate it solely for this bounded weighting difference. Consider
+> an objective-only sensitivity after its terminal result only if exact
+> train-only scale ratios and validation attribution show material value; hold
+> every other model, split, seed, schedule, metric and sealed-scope field fixed.
+
 > **2026-08-18 release-730 oracle comparison prepared:** A new result-pending
 > analyzer parses only the 73-case released Graph U-Net and true-coefficient
 > response-oracle result roles. It requires exact private hashes and the shared
