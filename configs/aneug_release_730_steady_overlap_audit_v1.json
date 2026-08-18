@@ -13,7 +13,8 @@
     "private_split_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f"
   },
   "schema": {
-    "expected_steady_cases": 14000,
+    "documented_steady_cases": 14000,
+    "expected_steady_cases": 14392,
     "expected_transient_cases": 809,
     "expected_nodes": 13902,
     "expected_channels": 9,
@@ -38,6 +39,7 @@
   "interpretation": {
     "steady_supervision_is_novelty": false,
     "rhsia_already_uses_steady_augmentation": true,
+    "documented_vs_processed_cardinality_discrepancy": true,
     "purpose": "information_budget_and_leakage_control_before_matched_steady_augmented_comparators",
     "automatic_model_selection": false,
     "absolute_performance_threshold": null

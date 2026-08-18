@@ -23,12 +23,16 @@ PBS = ROOT / "cluster" / "pbs_aneug_release_730_steady_overlap_audit_v1.pbs"
 class SteadyOverlapAuditTests(unittest.TestCase):
     def test_contract_is_geometry_only_cpu_and_not_novelty(self) -> None:
         config = load_config(CONFIG)
-        self.assertEqual(config["schema"]["expected_steady_cases"], 14_000)
+        self.assertEqual(config["schema"]["documented_steady_cases"], 14_000)
+        self.assertEqual(config["schema"]["expected_steady_cases"], 14_392)
         self.assertFalse(config["read_scope"]["steady_wss_values"])
         self.assertFalse(config["read_scope"]["locked_test_wss_values"])
         self.assertEqual(config["execution"]["ngpus"], 0)
         self.assertFalse(config["interpretation"]["steady_supervision_is_novelty"])
         self.assertTrue(config["interpretation"]["rhsia_already_uses_steady_augmentation"])
+        self.assertTrue(
+            config["interpretation"]["documented_vs_processed_cardinality_discrepancy"]
+        )
 
     def test_field_gpu_or_novelty_mutation_is_rejected(self) -> None:
         original = json.loads(CONFIG.read_text(encoding="utf-8"))
@@ -93,6 +97,8 @@ class SteadyOverlapAuditTests(unittest.TestCase):
             block_rows=2,
         )
         self.assertEqual(public["case_name_exact_pair_count"], 1)
+        self.assertEqual(public["documented_steady_case_count"], 14_000)
+        self.assertEqual(public["steady_case_count"], 5)
         self.assertEqual(public["ghd_exact_pair_count"], 1)
         self.assertEqual(public["ghd_near_only_pair_count"], 1)
         self.assertEqual(public["excluded_steady_case_count"], 3)

@@ -4,9 +4,11 @@
 
 The frozen 584/73/73 transient split remains the main evaluation protocol.
 The current transient-only released Graph U-Net run remains necessary and is
-not stopped. The 14,000-case steady object is added as an information-budget
-control after a geometry-only overlap audit; it does not redefine the split or
-open locked transient WSS.
+not stopped. The paper documents 14,000 steady cases, but metadata-only
+inspection of the exact processed-v4 object shows 14,392 case names, a
+`14,392 × 13,902 × 9` tensor and a `14,392 × 432` GHD matrix. The processed
+asset is added as an information-budget control after a geometry-only overlap
+audit; it does not redefine the split or open locked transient WSS.
 
 This distinction is important because the two primary sources answer different
 questions. The AneuG-Flow dataset paper reports 14,000 steady and 730 pulsatile
@@ -31,8 +33,9 @@ The exact 9,632,510,050-byte steady-v4 object is already present on
 `case_name`, and `ghd_dict`, so no raw CFD download is needed. Before any
 steady label is used, the CPU-only audit must establish:
 
-1. exactly 14,000 unique steady case names and a `14,000 × 13,902 × 9`
-   float32 tensor by metadata only;
+1. exactly 14,392 unique steady case names and a `14,392 × 13,902 × 9`
+   float32 tensor by metadata only, while preserving the source paper's
+   documented 14,000 count as a provenance discrepancy;
 2. an exact 432-D GHD row for every steady and transient geometry;
 3. case-name, exact-GHD, and fixed-tolerance GHD overlap against train,
    validation, locked test, and the 79 processed-only transient extras;

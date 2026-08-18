@@ -1,6 +1,7 @@
 """Geometry-only leakage audit for AneuG steady supervision.
 
-The exact processed steady object contains 14,000 WSS-labelled geometries.
+The paper documents 14,000 steady cases, while the exact processed object
+contains 14,392 WSS-labelled geometries.  Both cardinalities are preserved.
 Before any of those labels can be used, this module verifies its schema and
 compares its case names and 432-D GHD geometry rows with every partition of
 the frozen 809-case transient object.  It never indexes either WSS tensor.
@@ -106,13 +107,14 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
     schema = payload["schema"]
     _require(
         (
+            schema["documented_steady_cases"],
             schema["expected_steady_cases"],
             schema["expected_transient_cases"],
             schema["expected_nodes"],
             schema["expected_channels"],
             schema["expected_ghd_width"],
         )
-        == (14_000, 809, 13_902, 9, 432),
+        == (14_000, 14_392, 809, 13_902, 9, 432),
         "expected_schema",
     )
     _require(
@@ -143,6 +145,10 @@ def validate_config(payload: dict[str, Any]) -> dict[str, Any]:
     interpretation = payload["interpretation"]
     _require(interpretation["steady_supervision_is_novelty"] is False, "novelty_claim")
     _require(interpretation["rhsia_already_uses_steady_augmentation"] is True, "prior_scope")
+    _require(
+        interpretation["documented_vs_processed_cardinality_discrepancy"] is True,
+        "steady_cardinality_discrepancy",
+    )
     _require(interpretation["automatic_model_selection"] is False, "automatic_selection")
     _require(interpretation["absolute_performance_threshold"] is None, "threshold")
     scope = payload["read_scope"]
@@ -325,6 +331,7 @@ def audit_geometry_overlap(
     public = {
         "schema_version": "aurora.aneug_release_730_steady_overlap_audit.public_result.v1",
         "status": "complete",
+        "documented_steady_case_count": 14_000,
         "steady_case_count": expected_steady_cases,
         "transient_case_count": expected_transient_cases,
         "steady_ghd_shape": list(steady_matrix.shape),

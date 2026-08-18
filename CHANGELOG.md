@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-18 — Exact processed steady cardinality corrected
+
+- Preserved CPU audit R1 `117137.ECE-util1` as an exit-1 schema-precondition
+  failure before any WSS indexing or result creation.
+- Metadata-only mmap inspection found 14,392 case names, tensor shape
+  `14,392 × 13,902 × 9` and GHD shape `14,392 × 432`, whereas the paper
+  documents 14,000 steady cases.
+- Corrected only the processed-object cardinality contract. The overlap rule,
+  exact sources, transient split, thresholds, field blindness and
+  interpretation remain unchanged for a fresh R2 activation.
+
 ## 2026-08-18 — Released steady-mixture code path audited
 
 - Recorded an exact pinned-source discrepancy: the released mixed trainer
@@ -14,8 +25,9 @@
 - Rejected steady pretraining as a standalone novelty because RHSIA already
   uses 14,000 steady cases, a steady-WSS FiLM prior and transient
   label-efficiency ablations.
-- Added a CPU-only, field-blind audit of the exact steady object's 14,000-case
-  schema and case-name/GHD overlap with every frozen transient partition.
+- Added a CPU-only, field-blind audit of the exact processed steady object's
+  cardinality/schema and case-name/GHD overlap with every frozen transient
+  partition; the source paper's 14,000 count remains separately documented.
 - Any exact or fixed-tolerance geometry match is excluded before steady labels
   are used. Subsequent GHD-GPS and proposal experiments must compare matched
   transient-only and audited-steady-supervised information budgets.
