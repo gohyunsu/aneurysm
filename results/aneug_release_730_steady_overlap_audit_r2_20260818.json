@@ -1,0 +1,63 @@
+{
+  "case_ids_public": false,
+  "case_name_exact_pair_count": 398,
+  "case_name_pair_counts_by_transient_partition": {
+    "processed_only_extra": 0,
+    "test": 39,
+    "train": 317,
+    "validation": 42
+  },
+  "documented_steady_case_count": 14000,
+  "eligible_steady_case_count": 13985,
+  "eligible_steady_case_digest": "6dbfde4df94c50e66269ab8cf0e8c755d9f95cfbef43af1376af20036c6c82cc",
+  "excluded_steady_case_count": 407,
+  "ghd_exact_pair_count": 407,
+  "ghd_exact_pair_counts_by_transient_partition": {
+    "processed_only_extra": 9,
+    "test": 39,
+    "train": 317,
+    "validation": 42
+  },
+  "ghd_near_only_pair_count": 0,
+  "ghd_near_only_pair_counts_by_transient_partition": {
+    "processed_only_extra": 0,
+    "test": 0,
+    "train": 0,
+    "validation": 0
+  },
+  "gpu_used": false,
+  "locked_test_wss_values_read": false,
+  "model_fitted_or_selected": false,
+  "near_max_abs_limit": 1e-06,
+  "near_rms_limit": 1e-07,
+  "nearest_transient_ghd_rms_quantiles": {
+    "max": 0.5622236985999827,
+    "median": 0.25980970071022474,
+    "min": 0.0,
+    "q05": 0.17099310144587546,
+    "q95": 0.3409133104747375
+  },
+  "private_split_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+  "processed_only_extra_wss_values_read": false,
+  "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+  "public_commit": "55c4765fd8656fe699578988d14e222051de20c2",
+  "public_split_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+  "schema_version": "aurora.aneug_release_730_steady_overlap_audit.public_result.v1",
+  "scientific_performance_verdict": null,
+  "status": "complete",
+  "steady_case_count": 14392,
+  "steady_case_digest": "5dcc06d156814d814f958a5da954d43afcb3a524e4266dc603316810b2aecf7f",
+  "steady_ghd_shape": [
+    14392,
+    432
+  ],
+  "steady_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+  "steady_tensor_metadata_read": true,
+  "steady_wss_values_read": false,
+  "transient_case_count": 809,
+  "transient_ghd_shape": [
+    809,
+    432
+  ],
+  "transient_wss_values_read": false
+}

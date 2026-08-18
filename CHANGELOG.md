@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-18 — Steady overlap audit completed
+
+- CPU R2 `117143.ECE-util1` exited 0 after 00:02:33 with GPU 0 and no WSS
+  indexing. The exact public/private result hashes are `b3a118ba...a397` and
+  `52219b9a...92ef`.
+- Of 14,392 processed steady geometries, 407 exact-GHD matches were excluded:
+  317 train, 42 validation, 39 locked test and 9 processed-only extras. There
+  were no near-only matches.
+- Fixed the eligible information budget at 13,985 rows with digest
+  `6dbfde4d...c82cc`. Every steady-supervised comparator and proposal must use
+  this identical private index manifest; test and extra WSS remain unopened.
+
 ## 2026-08-18 — Exact processed steady cardinality corrected
 
 - Preserved CPU audit R1 `117137.ECE-util1` as an exit-1 schema-precondition
