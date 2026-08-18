@@ -1,0 +1,67 @@
+{
+  "schema_version": "aurora.aneug_release_730_steady_overlap_audit.v1",
+  "protocol_id": "aneug_release_730_steady_overlap_audit_v1",
+  "status": "prepared_cpu_geometry_only",
+  "source": {
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "official_code_revision": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "steady_v4_bytes": 9632510050,
+    "steady_v4_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "processed_v5_bytes": 33233856917,
+    "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "public_split_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+    "private_split_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f"
+  },
+  "schema": {
+    "expected_steady_cases": 14000,
+    "expected_transient_cases": 809,
+    "expected_nodes": 13902,
+    "expected_channels": 9,
+    "expected_ghd_width": 432,
+    "expected_main_split": {
+      "train": 584,
+      "validation": 73,
+      "test": 73,
+      "processed_only_extra": 79
+    }
+  },
+  "overlap": {
+    "descriptor": "raw_float32_ghd_coefficients",
+    "exact_row_hash": "sha256_little_endian_float32",
+    "near_max_abs_limit": 1e-06,
+    "near_rms_limit": 1e-07,
+    "steady_block_rows": 16,
+    "exclude_if_case_id_exact_with_any_transient_partition": true,
+    "exclude_if_ghd_exact_or_near_with_any_transient_partition": true,
+    "exclude_validation_test_and_extra_neighbors_from_training": true
+  },
+  "interpretation": {
+    "steady_supervision_is_novelty": false,
+    "rhsia_already_uses_steady_augmentation": true,
+    "purpose": "information_budget_and_leakage_control_before_matched_steady_augmented_comparators",
+    "automatic_model_selection": false,
+    "absolute_performance_threshold": null
+  },
+  "read_scope": {
+    "steady_case_names": true,
+    "steady_ghd_geometry": true,
+    "steady_tensor_metadata_only": true,
+    "steady_wss_values": false,
+    "transient_case_names": true,
+    "transient_ghd_geometry": true,
+    "transient_wss_values": false,
+    "locked_test_wss_values": false,
+    "processed_only_extra_wss_values": false
+  },
+  "execution": {
+    "server": "introai9",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "requires_fresh_private_activation": true,
+    "public_result_contains_case_ids": false,
+    "private_result_is_append_only": true
+  }
+}

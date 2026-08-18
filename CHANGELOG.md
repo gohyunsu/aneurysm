@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-18 — Steady supervision reframed as a matched control
+
+- Rejected steady pretraining as a standalone novelty because RHSIA already
+  uses 14,000 steady cases, a steady-WSS FiLM prior and transient
+  label-efficiency ablations.
+- Added a CPU-only, field-blind audit of the exact steady object's 14,000-case
+  schema and case-name/GHD overlap with every frozen transient partition.
+- Any exact or fixed-tolerance geometry match is excluded before steady labels
+  are used. Subsequent GHD-GPS and proposal experiments must compare matched
+  transient-only and audited-steady-supervised information budgets.
+
 ## 2026-08-18 — Upstream transient split wording corrected
 
 - Directly inspected the pinned release helper: its nominal 90/10 transient
