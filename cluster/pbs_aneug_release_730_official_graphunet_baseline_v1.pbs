@@ -1,0 +1,75 @@
+#!/bin/bash
+#PBS -N aurora_730_graphunet
+#PBS -q coss_a6gpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=72:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
+: "${AURORA_ACTIVATION:?set exact private activation}"
+: "${AURORA_PRIVATE_SPLIT_MANIFEST:?set exact private R3 split manifest}"
+: "${AURORA_PRIVATE_TRAIN_AUDIT:?set exact private train-audit R2 statistics}"
+: "${AURORA_OFFICIAL_ROOT:?set exact clean official source checkout}"
+: "${AURORA_PYG_TARGET:?set isolated PyG 2.6.1 target}"
+: "${AURORA_CONTAINER:?set pinned Torch container}"
+: "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ "$(git -C "$AURORA_OFFICIAL_ROOT" rev-parse HEAD)" = "4a090a0f12538deef6fcea88b81afe78ce38152e" ]
+[ -z "$(git -C "$AURORA_OFFICIAL_ROOT" status --porcelain)" ]
+[ -r "$AURORA_ACTIVATION" ]
+[ -r "$AURORA_PRIVATE_SPLIT_MANIFEST" ]
+[ -r "$AURORA_PRIVATE_TRAIN_AUDIT" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_SPLIT_MANIFEST" | /usr/bin/cut -d' ' -f1)" = "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_TRAIN_AUDIT" | /usr/bin/cut -d' ' -f1)" = "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385" ]
+[ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ]
+
+run_id="${PBS_JOBID:-manual_$(date -u +%Y%m%dT%H%M%SZ)}"
+run_root="$AURORA_OUTPUT_ROOT/aneug_release_730_official_graphunet_baseline_v1/$run_id"
+mkdir -p "$run_root"
+[ ! -e "$run_root/attempt.started" ]
+printf '%s\n' "$run_id" > "$run_root/attempt.started"
+log="$run_root/attempt.log"
+status="$run_root/attempt.status.json"
+exec >>"$log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"job_id\":\"%s\",\"exit_code\":%s,\"complete\":%s}\n" "$run_id" "$code" "$(test -f "$run_root/result.json" && printf true || printf false)" > "$status"; exit "$code"' EXIT
+
+activation_parent="$(/usr/bin/dirname "$AURORA_ACTIVATION")"
+activation_name="$(/usr/bin/basename "$AURORA_ACTIVATION")"
+split_parent="$(/usr/bin/dirname "$AURORA_PRIVATE_SPLIT_MANIFEST")"
+split_name="$(/usr/bin/basename "$AURORA_PRIVATE_SPLIT_MANIFEST")"
+audit_parent="$(/usr/bin/dirname "$AURORA_PRIVATE_TRAIN_AUDIT")"
+audit_name="$(/usr/bin/basename "$AURORA_PRIVATE_TRAIN_AUDIT")"
+printf 'stage=release730_graphunet_started job=%s commit=%s\n' "$run_id" "$actual_commit"
+/usr/bin/singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_DATA_ROOT:/data:ro" \
+  --bind "$activation_parent:/private/activation:ro" \
+  --bind "$split_parent:/private/split:ro" \
+  --bind "$audit_parent:/private/audit:ro" \
+  --bind "$AURORA_OFFICIAL_ROOT:/official:ro" \
+  --bind "$AURORA_PYG_TARGET:/pyg:ro" \
+  --bind "$run_root:/output" \
+  "$AURORA_CONTAINER" \
+  /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONPATH=/pyg:/workspace/src:/official \
+  python -m aurora.aneug_release_730_official_graphunet_baseline \
+  --config /workspace/configs/aneug_release_730_official_graphunet_baseline_v1.json \
+  --activation "/private/activation/$activation_name" \
+  --expected-commit "$actual_commit" \
+  --transient /data/processed_v5_9dd4180/assembled_registered_data_1k_v5.pth \
+  --steady /data/processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary \
+  --public-split /workspace/results/aneug_release_730_split_r3_20260818.json \
+  --private-split "/private/split/$split_name" \
+  --train-audit-public /workspace/results/aneug_release_730_train_audit_r2_20260818.json \
+  --train-audit-private "/private/audit/$audit_name" \
+  --official-root /official \
+  --result /output/result.json \
+  --checkpoint-directory /output/checkpoints
+printf 'stage=release730_graphunet_complete\n'

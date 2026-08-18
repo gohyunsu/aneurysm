@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -145,6 +146,33 @@ class TrainRepresentationAttributionKernelTests(unittest.TestCase):
         self.assertEqual(result["mesh_wss_normal_ratio_median"], 0.0)
         self.assertGreater(result["stored_normal_fraction_below_0.001"], 0.0)
         self.assertEqual(result["stored_mesh_normal_abs_cosine_q05"], 1.0)
+
+
+class TrainRepresentationAttributionOutcomeTests(unittest.TestCase):
+    def test_r1_public_result_is_exact_train_only_and_nonselecting(self):
+        path = (
+            ROOT
+            / "results"
+            / "aneug_release_730_train_representation_attribution_r1_20260818.json"
+        )
+        self.assertEqual(
+            hashlib.sha256(path.read_bytes()).hexdigest(),
+            "a44eee330250fb4faee024f21a58f6ff0662cb4a4b3d21c160a17a6176c53b85",
+        )
+        result = json.loads(path.read_text())
+        self.assertEqual(result["status"], "complete_descriptive")
+        self.assertEqual(result["train_case_count"], 584)
+        self.assertEqual(result["validation_field_case_count_read"], 0)
+        self.assertEqual(result["test_field_case_count_read"], 0)
+        self.assertEqual(result["processed_only_extra_field_case_count_read"], 0)
+        self.assertEqual(
+            result["boundary_to_interior_ratio_counts"],
+            {"at_least_10": 6, "at_least_2": 6, "at_least_5": 6},
+        )
+        self.assertEqual(result["boundary_is_largest_transition_case_count"], 5)
+        self.assertFalse(result["case_ids_public"])
+        self.assertFalse(result["automatic_architecture_selection"])
+        self.assertIsNone(result["scientific_performance_verdict"])
 
 
 if __name__ == "__main__":

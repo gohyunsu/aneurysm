@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-18 · train representation attribution completed
+
+- Completed 584-case CPU attribution with zero validation/test/extra reads and
+  published an identifier-free, threshold-free aggregate.
+- Found six genuine cycle-boundary discontinuities, excluding hard periodic
+  closure from all methods while retaining raw 80-phase sequences.
+- Established mesh-derived normals as stable diagnostics but kept raw
+  Cartesian WSS as the common target; corrected the split description from
+  family-like IID language to geometry-ID random with unresolved lineage.
+
+## 2026-08-18 · release-730 official Graph U-Net baseline prepared
+
+- Added a new-split direct-prior adapter around the unchanged released Graph
+  U-Net class, normalized six-channel input and released frame objective.
+- Removed the obsolete v4 adapter's tangent projection and reports every model
+  in the same raw physical Cartesian WSS space.
+- Bound 584 train/73 validation with test and 79 extras sealed, append-only
+  checkpoints, one seed, no absolute threshold and no reproduction overclaim.
+
 ## 2026-08-18 · train-only representation attribution prepared
 
 - Added one CPU analysis of all cyclic adjacent WSS jumps, near-zero stored

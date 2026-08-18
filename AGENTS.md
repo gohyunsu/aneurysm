@@ -1,5 +1,27 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 train representation attribution completed:** CPU job
+> `117052.ECE-util1` finalized F/exit 0 in 00:08:32 with 584 train and zero
+> validation/test/79-extra field reads. Exact public/private/log/status hashes
+> are `a44eee33...3b85` / `3e5ef9dc...9255` / `8c589f88...d1f` /
+> `143bdccd...b42`. Six training cases have genuine boundary discontinuities:
+> boundary/interior-median ratios 11.25--17.29 and absolute jumps 3.43--5.35.
+> Do not force periodic closure. Stored normals are nonunit/near-zero; use
+> mesh-derived normals only as input/diagnostic. Raw Cartesian WSS remains the
+> common target and tangent projection is an optional field-tax ablation.
+> The split remains fixed but must be described as outcome-blind geometry-ID
+> random duplicate-disjoint with unresolved source lineage, never family-IID.
+
+> **2026-08-18 release-730 direct-prior baseline prepared:** A fresh baseline
+> imports the released AneuG Graph U-Net class unchanged and binds the exact
+> 584/73 development split. It uses released normalized six-channel inputs and
+> frame-MSE/log-magnitude objective, but evaluates the unprojected raw physical
+> Cartesian WSS under the common area/phase-weighted metric. The missing common
+> waveform is zero and BC generalization is not claimed. This is a declared
+> protocol adapter, not an end-to-end reproduction. It has no absolute gate,
+> winner, locked-test/79-extra access, multi-seed confirmation or paper claim.
+> Execute only after public Quality and a private activation, on `introai9`.
+
 > **2026-08-18 train-only representation attribution prepared:** A single
 > CPU-only analysis is prepared to distinguish a genuine phase-79-to-0 source
 > discontinuity from an isolated relative-error effect and to quantify whether

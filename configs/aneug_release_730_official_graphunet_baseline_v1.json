@@ -1,0 +1,139 @@
+{
+  "schema_version": "aurora.aneug_release_730_official_graphunet_baseline.v1",
+  "protocol_id": "aneug_release_730_official_graphunet_baseline_v1",
+  "status": "prepared_for_private_activation_after_quality",
+  "as_of": "2026-08-18",
+  "source": {
+    "repository": "WenHaoDing/AneuG-Flow",
+    "commit": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "model_class": "new_version.models.DynamicGraphUNet.PyGGraphUNetwTemporalEmbedding",
+    "model_sha256": "5555336cdf09b27a7403aa3c38df871d55c4d2e866ba9ae700aa46ffd635c28a",
+    "graphgps_encoders_sha256": "8c91521c95c6bec7458e7d6f23998283c029028874edd0deff444dac38a574f2",
+    "spline_module_sha256": "d1b24314061ff60f7883d4af5866af5cd1d99ded974d229bb01313773a71c15e",
+    "pointnet_module_sha256": "75ff507d8bb19ade126ae840f3273582ca0d0c70a2fd36ab85f09b49775c4b36",
+    "released_trainer_sha256": "8eb0b8ed732503d0c514a0ff96b22161fc2a6b0a7365592f410becdecadea2c6",
+    "processed_v5_bytes": 33233856917,
+    "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "steady_norm_bytes": 9632510050,
+    "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+  },
+  "comparison_identity": {
+    "label": "released_graphunet_class_release730_protocol_adapter",
+    "exact_end_to_end_reproduction": false,
+    "unchanged_released_model_class_and_forward": true,
+    "released_normalized_six_channel_input": true,
+    "released_normalized_frame_mse": true,
+    "released_physical_log_magnitude_term": "stabilized_only_at_zero_support",
+    "declared_adapter_differences": [
+      "release-aligned 584/73 split replaces released random 90/10 split",
+      "single GPU physical microbatch 8 with effective batch 56 replaces released DDP batch 56",
+      "zero common waveform replaces an unreleased waveform_yiying.txt file",
+      "steady augmentation and wandb are disabled",
+      "validation checkpoint selection uses the common physical area-weighted field rL2",
+      "log magnitude is clamped only to avoid undefined log zero"
+    ]
+  },
+  "split": {
+    "public_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+    "private_manifest_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+    "train_audit_public_sha256": "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
+    "train_audit_private_sha256": "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385",
+    "train_loader_order_sha256": "83d40e0579c0999fb380029d11811df835131b62e6bbd3557ad33254f22e6b8f",
+    "train_cases": 584,
+    "validation_cases": 73,
+    "test_cases": 73,
+    "processed_only_extra_cases": 79,
+    "train_case_digest": "a23bbda2d74d218e4e77c8e446f54a60ebbed45b906a9acb544988e8bba31aaa",
+    "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
+    "test_case_digest": "1f87f52fc4b819548aebcc6df77f90830d475d1e92df0ca833980347d792aa56",
+    "split_key_sha256": "e75e667def522491a5acb4fe33364c6628db500ae44fd85eba2381cf3b0867a3",
+    "interpretation": "outcome_blind_geometry_id_random_duplicate_disjoint_with_unresolved_source_lineage_not_family_patient_site_or_boundary_condition_generalization",
+    "read_train_fields": true,
+    "read_validation_fields": true,
+    "read_test_fields": false,
+    "read_processed_only_extra_fields": false,
+    "test_opened": false
+  },
+  "target_and_metric": {
+    "supervised_storage_space": "released_steady_normalized_cartesian_wss",
+    "common_report_space": "raw_released_physical_cartesian_wss",
+    "hard_tangent_projection": false,
+    "hard_periodic_closure": false,
+    "primary_metric": "case_mean_area_phase_weighted_physical_vector_wss_relative_l2",
+    "secondary_metrics": [
+      "tawss_normalized_absolute_error",
+      "valid_reference_support_osi_mae",
+      "mean_wss_vector_error",
+      "low_tawss_quartile_field_relative_l2",
+      "peak_systolic_wss_relative_l2",
+      "mesh_normal_component_relative_l2"
+    ]
+  },
+  "architecture": {
+    "in_channels": 6,
+    "hidden_channels": 512,
+    "out_channels": 3,
+    "depth": 3,
+    "pool_ratios": [0.25, 0.25, 0.25],
+    "sum_res": true,
+    "activation": "relu",
+    "time_embedding_dim": 8,
+    "waveform_embedding_dim": 8,
+    "waveform": "all_zero_common_unreleased_file_no_bc_generalization_claim"
+  },
+  "optimization": {
+    "seed": 1103,
+    "physical_snapshot_batch_size": 8,
+    "effective_snapshot_batch_size": 56,
+    "gradient_accumulation_steps": 7,
+    "maximum_coverage_epochs": 30,
+    "minimum_coverage_epochs": 15,
+    "validation_interval_coverage_epochs": 5,
+    "early_stopping_validation_checks": 3,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "scheduler": "step_50_gamma_0p75",
+    "step_size_coverage_epochs": 50,
+    "gamma": 0.75,
+    "gradient_clip_norm": 1.0,
+    "normalized_frame_mse_weight": 1.0,
+    "physical_log_magnitude_weight": 1.0,
+    "log_magnitude_epsilon": 1e-12,
+    "physical_loss_decoder_epsilon": 0.000001,
+    "physical_metric_decoder_epsilon": 0.00001,
+    "checkpoint_selection": "lowest_validation_primary_field_metric_then_earliest_check",
+    "checkpoint_policy": "append_only_each_validation_check_with_optimizer_state"
+  },
+  "decision_rule": {
+    "absolute_performance_threshold": null,
+    "automatic_winner": false,
+    "interpretation": "direct_prior_validation_development_and_not_a_paper_claim"
+  },
+  "dependency": {
+    "torch": "2.5.1+cu118",
+    "torch_geometric": "2.6.1",
+    "torch_geometric_install": "isolated_no_deps_target",
+    "pytorch3d_used_by_model": false
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "72:00:00"
+  },
+  "authorization": {
+    "execute_validation_development_after_private_activation": true,
+    "multi_seed_confirmation": false,
+    "read_locked_test": false,
+    "read_processed_only_extra": false,
+    "paper_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}
