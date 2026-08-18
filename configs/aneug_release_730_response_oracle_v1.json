@@ -1,0 +1,89 @@
+{
+  "schema_version": "aurora.aneug_release_730_response_oracle.v1",
+  "protocol_id": "aneug_release_730_response_oracle_v1",
+  "status": "prepared_non_executable_until_direct_baseline_terminal",
+  "as_of": "2026-08-18",
+  "purpose": "measure_train_basis_validation_response_ceiling_before_learning_a_global_response_branch",
+  "source": {
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "code_revision": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "processed_v5_bytes": 33233856917,
+    "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "steady_norm_bytes": 9632510050,
+    "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f"
+  },
+  "split": {
+    "public_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+    "private_manifest_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+    "train_audit_public_sha256": "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
+    "train_audit_private_sha256": "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385",
+    "train_loader_order_sha256": "83d40e0579c0999fb380029d11811df835131b62e6bbd3557ad33254f22e6b8f",
+    "train_case_digest": "a23bbda2d74d218e4e77c8e446f54a60ebbed45b906a9acb544988e8bba31aaa",
+    "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
+    "test_case_digest": "1f87f52fc4b819548aebcc6df77f90830d475d1e92df0ca833980347d792aa56",
+    "split_key_sha256": "e75e667def522491a5acb4fe33364c6628db500ae44fd85eba2381cf3b0867a3",
+    "train_cases": 584,
+    "validation_cases": 73,
+    "locked_test_cases": 73,
+    "processed_only_extra_cases": 79,
+    "read_train_fields": true,
+    "read_validation_fields": true,
+    "read_locked_test_fields": false,
+    "read_processed_only_extra_fields": false,
+    "test_opened": false
+  },
+  "representation": {
+    "input_field": "raw_released_physical_cartesian_complete_cycle_wss",
+    "hard_tangent_projection": false,
+    "hard_periodic_closure": false,
+    "reference_inner_product": "uniform_phase_times_mean_train_normalized_vertex_area",
+    "case_amplitude": "oracle_true_weighted_validation_rms",
+    "basis_source": "train_only_centered_unit_amplitude_complete_cycles",
+    "basis_solver": "case_gram_eigendecomposition_then_right_singular_vectors",
+    "rank_grid": [0, 16, 32, 64, 128, 256],
+    "maximum_rank": 256,
+    "rank_selection": "none_report_all",
+    "learned_coefficient_predictor": false
+  },
+  "evaluation": {
+    "role": "optimistic_representation_ceiling_not_learned_prediction",
+    "primary_metric": "case_mean_area_phase_weighted_physical_vector_wss_relative_l2",
+    "secondary_metrics": [
+      "reference_weighted_oracle_relative_l2",
+      "tawss_normalized_absolute_error",
+      "valid_reference_support_osi_mae",
+      "mean_wss_vector_error",
+      "low_tawss_quartile_field_relative_l2",
+      "peak_systolic_wss_relative_l2",
+      "mesh_normal_component_relative_l2",
+      "explained_variance"
+    ],
+    "absolute_performance_threshold": null,
+    "automatic_rank_or_method_selection": false,
+    "case_identifiers_in_result": false
+  },
+  "runtime": {
+    "server": "introai9",
+    "queue": "coss_a6gpu",
+    "Qlist": "a6000",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "12:00:00"
+  },
+  "authorization": {
+    "execute_now": false,
+    "requires_direct_baseline_terminal_record": true,
+    "requires_fresh_private_activation": true,
+    "learned_predictor": false,
+    "rank_selection": false,
+    "read_locked_test": false,
+    "read_processed_only_extra": false,
+    "paper_performance_claim": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong"
+  }
+}
