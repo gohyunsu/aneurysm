@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 train-only objective-scale audit prepared:** A CPU-only utility
+> now reproduces the upstream phasewise train-transient WSS channel scale on
+> exactly 584 training fields. It reads no validation, locked-test or 79-extra
+> field, uses no GPU, fits no model, emits no public numeric result and has no
+> materiality threshold or automatic sensitivity decision. It cannot stop or
+> modify active job `117056.ECE-util1`. Execute only after Research Quality and
+> a fresh private activation, on introai9 and never junjinyong.
+
 > **2026-08-18 released-objective boundary corrected:** Direct inspection of
 > pinned upstream `train_baselines.py`, `datasets_wss_optimized.py` and
 > `losser.py` found that `renormalize_transient=True` rescales frame-MSE

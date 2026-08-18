@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-18 — Train-only objective-scale audit prepared
+
+- Added a CPU-only reproduction of the upstream phasewise train-transient
+  channel scale used by the released frame-MSE path.
+- The audit is restricted to 584 training fields and reports no public numeric
+  result, threshold, model decision or performance claim. Validation, locked
+  test, 79 extras and GPU remain closed.
+- Its only role is to determine whether an otherwise identical objective-only
+  sensitivity is attribution-supported; it cannot stop or modify the active
+  Graph U-Net automatically.
+
 ## 2026-08-18 — Released Graph U-Net objective boundary corrected
 
 - Directly audited the pinned upstream trainer, transient component builder

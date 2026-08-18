@@ -1,0 +1,69 @@
+{
+  "schema_version": "aurora.aneug_release_730_objective_scale_audit.v1",
+  "protocol_id": "aneug_release_730_train_only_official_objective_scale_audit_v1",
+  "status": "prepared_non_executable_until_quality_and_private_activation",
+  "as_of": "2026-08-18",
+  "purpose": "quantify_the_exact_train_transient_channel_weighting_difference_between_the_upstream_and_active_graphunet_objectives",
+  "source": {
+    "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
+    "official_code_revision": "4a090a0f12538deef6fcea88b81afe78ce38152e",
+    "processed_v5_bytes": 33233856917,
+    "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "public_split_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+    "private_split_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+    "public_train_audit_sha256": "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
+    "private_train_audit_sha256": "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385",
+    "train_loader_order_sha256": "83d40e0579c0999fb380029d11811df835131b62e6bbd3557ad33254f22e6b8f"
+  },
+  "split": {
+    "train_cases": 584,
+    "validation_cases": 73,
+    "locked_test_cases": 73,
+    "processed_only_extra_cases": 79,
+    "train_case_digest": "a23bbda2d74d218e4e77c8e446f54a60ebbed45b906a9acb544988e8bba31aaa",
+    "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
+    "test_case_digest": "1f87f52fc4b819548aebcc6df77f90830d475d1e92df0ca833980347d792aa56",
+    "split_key_sha256": "e75e667def522491a5acb4fe33364c6628db500ae44fd85eba2381cf3b0867a3",
+    "read_train_fields": true,
+    "read_validation_fields": false,
+    "read_locked_test_fields": false,
+    "read_processed_only_extra_fields": false,
+    "test_opened": false
+  },
+  "audit": {
+    "stored_wss_channels": [6, 7, 8],
+    "expected_phases": 80,
+    "expected_nodes": 13902,
+    "upstream_renormalization_epsilon": 0.000001,
+    "upstream_formula": "mean_over_phase_of_population_std_over_train_cases_and_nodes_plus_1e-6_then_squared_in_frame_mse",
+    "active_formula": "unit_channel_weights_in_stored_steady_normalized_coordinates",
+    "report": [
+      "upstream_phase_averaged_channel_std",
+      "upstream_squared_channel_weights_normalized_by_their_mean",
+      "maximum_to_minimum_squared_channel_weight_ratio"
+    ],
+    "absolute_materiality_threshold": null,
+    "automatic_sensitivity_authorization": false,
+    "model_fit_or_prediction": false
+  },
+  "execution": {
+    "server": "introai9",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "excluded_server": "junjinyong"
+  },
+  "authorization": {
+    "execute_after_quality_and_private_activation": true,
+    "read_validation_test_or_extra": false,
+    "use_gpu": false,
+    "fit_or_select_model": false,
+    "stop_or_modify_active_graphunet": false,
+    "publish_numeric_result": false,
+    "paper_performance_claim": false,
+    "maintain_public_site": false
+  }
+}
