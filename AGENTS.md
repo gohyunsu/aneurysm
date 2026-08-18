@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 train-audit R2 completed:** Corrected CPU job
+> `117037.ECE-util1` exited 0 in 00:07:10 after reading exactly 584 train
+> fields; validation/test/79-extra reads remain zero. All integrity checks pass.
+> Exact public/private/log/status hashes are `3c525820...9587` /
+> `ce1dd6d2...9385` / `2c93523e...9ec` / `e1e0fcbe...d89`.
+>
+> Descriptive evidence changes the architecture boundary. Phase 79-to-0 jump
+> has median 0.01166 and q95 0.01456 but maximum 0.36399. Stored-normal norm
+> reaches 0.000151, and reference WSS has nonzero normal ratios (casewise
+> median-ratio median 0.0211; p95-ratio median 0.1107). Do not hard-project
+> outputs tangent or enforce periodic closure yet. Run one train-only
+> attribution of cyclic adjacent jumps and near-zero-normal support first; keep
+> raw released vector WSS as the common primary target.
+
 > **2026-08-18 train-audit R1 pre-field failure:** CPU-only job
 > `117034.ECE-util1` exited 1 in 00:02:11 after all exact source/split hashes
 > passed and mmap objects loaded, but before any case tensor index. The reader

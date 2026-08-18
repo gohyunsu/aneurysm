@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-18 · release-730 train audit completed
+
+- Corrected R2 passed every train-data integrity check on 584 cases with all
+  validation/test/extra read counts at zero.
+- Preserved one common train loader order and train-derived normalization for
+  later baselines.
+- Flagged a phase-boundary outlier and near-zero stored normals; hard periodic
+  closure and hard tangent projection are deferred pending train attribution.
+
 ## 2026-08-18 · train-audit digest repair
 
 - Preserved CPU R1 as a pre-field execution failure caused by a duplicated

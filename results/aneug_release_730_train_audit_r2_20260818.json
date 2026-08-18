@@ -1,0 +1,113 @@
+{
+  "case_ids_public": false,
+  "descriptive_case_distributions": {
+    "area_mean_osi": {
+      "max": 0.06765265544412151,
+      "mean": 0.009282537930054466,
+      "median": 0.007849929267966155,
+      "min": 0.0022870179159660596,
+      "q05": 0.003656062233494928,
+      "q95": 0.019463068305945574,
+      "std_population": 0.006037171603644128
+    },
+    "area_mean_tawss": {
+      "max": 16.018091837443208,
+      "mean": 8.553384441852476,
+      "median": 8.412851417502624,
+      "min": 3.352429748108245,
+      "q05": 5.493979395128438,
+      "q95": 12.209428021616054,
+      "std_population": 2.0979326315081237
+    },
+    "mesh_normal_abs_cosine_p05": {
+      "max": 0.9971486918621063,
+      "mean": 0.9876792832851594,
+      "median": 0.9910346285603611,
+      "min": 0.9142719308681222,
+      "q05": 0.9679315908127155,
+      "q95": 0.9958331647684593,
+      "std_population": 0.010089127303337511
+    },
+    "phase_boundary_relative_jump": {
+      "max": 0.36399097440701067,
+      "mean": 0.01623075499624822,
+      "median": 0.011659607841994187,
+      "min": 0.008541109712932295,
+      "q05": 0.009783645805524106,
+      "q95": 0.014559037807345441,
+      "std_population": 0.0359633378535289
+    },
+    "response_rms": {
+      "max": 21.979038485050598,
+      "mean": 11.604412075113919,
+      "median": 11.454316829170306,
+      "min": 6.283084608540749,
+      "q05": 7.758617450997363,
+      "q95": 16.230321253454957,
+      "std_population": 2.576534188204688
+    },
+    "surface_area": {
+      "max": 0.0002768307329949536,
+      "mean": 0.0001319619706915948,
+      "median": 0.00012825365609133016,
+      "min": 7.363427801291211e-05,
+      "q05": 9.479340581267215e-05,
+      "q95": 0.00017974429316582416,
+      "std_population": 2.6664594165112192e-05
+    },
+    "wss_normal_ratio_median": {
+      "max": 0.0382981891931158,
+      "mean": 0.021608166640456793,
+      "median": 0.021140198896713362,
+      "min": 0.014225996786787405,
+      "q05": 0.01614745143061014,
+      "q95": 0.028456237660825594,
+      "std_population": 0.00390132681422909
+    },
+    "wss_normal_ratio_p95": {
+      "max": 0.32793437282550675,
+      "mean": 0.12055667824305603,
+      "median": 0.1107100754816966,
+      "min": 0.06459219276273015,
+      "q05": 0.07666530130642522,
+      "q95": 0.2023251094778309,
+      "std_population": 0.03897998132662033
+    }
+  },
+  "descriptive_values_are_not_model_pass_thresholds": true,
+  "gpu_used": false,
+  "integrity_checks": {
+    "all_faces_nondegenerate": true,
+    "cycle_endpoints_finite": true,
+    "expected_train_case_count": true,
+    "normalization_roundtrip": true,
+    "processed_only_extra_field_reads_zero": true,
+    "shared_faces_valid": true,
+    "static_geometry_exact": true,
+    "test_field_reads_zero": true,
+    "train_ghd_finite": true,
+    "validation_field_reads_zero": true
+  },
+  "integrity_failures": [],
+  "integrity_pass": true,
+  "minimum_case_nondegenerate_face_fraction": 1.0,
+  "model_fitted_or_selected": false,
+  "nodes_per_case": 13902,
+  "paper_performance_claim_authorized": false,
+  "processed_only_extra_field_case_count_read": 0,
+  "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+  "roundtrip_normalized_max_abs": 3.552713678800501e-15,
+  "schema_version": "aurora.aneug_release_730_train_audit.public_result.v1",
+  "split_private_manifest_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+  "split_public_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+  "static_normalized_max_abs": 0.0,
+  "status": "complete_passed",
+  "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+  "stored_normal_norm_max": 1.000000106243865,
+  "stored_normal_norm_min": 0.00015148131600675204,
+  "test_field_case_count_read": 0,
+  "test_opened": false,
+  "timesteps": 80,
+  "train_case_count": 584,
+  "validation_field_case_count_read": 0
+}

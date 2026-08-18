@@ -108,5 +108,27 @@ class Release730TrainAuditTests(unittest.TestCase):
         self.assertIs(selected[0]["tensor"], cases[0]["tensor"])
 
 
+class Release730TrainAuditOutcomeTests(unittest.TestCase):
+    def test_r2_public_result_is_exact_train_only_and_threshold_free(self):
+        path = ROOT / "results" / "aneug_release_730_train_audit_r2_20260818.json"
+        self.assertEqual(
+            hashlib.sha256(path.read_bytes()).hexdigest(),
+            "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
+        )
+        result = json.loads(path.read_text())
+        self.assertEqual(result["status"], "complete_passed")
+        self.assertTrue(result["integrity_pass"])
+        self.assertEqual(result["integrity_failures"], [])
+        self.assertEqual(result["train_case_count"], 584)
+        self.assertEqual(result["validation_field_case_count_read"], 0)
+        self.assertEqual(result["test_field_case_count_read"], 0)
+        self.assertEqual(result["processed_only_extra_field_case_count_read"], 0)
+        self.assertFalse(result["test_opened"])
+        self.assertFalse(result["model_fitted_or_selected"])
+        self.assertTrue(result["descriptive_values_are_not_model_pass_thresholds"])
+        boundary = result["descriptive_case_distributions"]["phase_boundary_relative_jump"]
+        self.assertGreater(boundary["max"], boundary["q95"])
+
+
 if __name__ == "__main__":
     unittest.main()
