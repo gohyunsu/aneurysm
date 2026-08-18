@@ -121,5 +121,31 @@ class AneuGRelease730SplitTests(unittest.TestCase):
                 _load_release_manifest(path, config)
 
 
+class AneuGRelease730SplitOutcomeTests(unittest.TestCase):
+    def test_public_outcome_is_exact_complete_and_test_locked(self):
+        path = ROOT / "results" / "aneug_release_730_split_r3_20260818.json"
+        self.assertEqual(
+            __import__("hashlib").sha256(path.read_bytes()).hexdigest(),
+            "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
+        )
+        result = json.loads(path.read_text())
+        self.assertEqual(result["status"], "complete")
+        self.assertEqual(
+            (
+                result["train_case_count"],
+                result["validation_case_count"],
+                result["test_case_count"],
+            ),
+            (584, 73, 73),
+        )
+        self.assertEqual(result["geometry_component_count"], 730)
+        self.assertEqual(result["maximum_component_size"], 1)
+        self.assertEqual(result["exact_duplicate_component_count"], 0)
+        self.assertEqual(result["numerical_equivalence_edge_count"], 0)
+        self.assertFalse(result["registered_field_values_read"])
+        self.assertFalse(result["test_opened"])
+        self.assertFalse(result["case_ids_public"])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-18 · independent release-730 split completed
+
+- Network-free CPU/PBS R3 `117026.ECE-util1` exited 0 and created the exact
+  584/73/73 train/validation/locked-test assignment.
+- All 730 release cases are singleton components under the registered exact
+  and fixed-tolerance GHD rule. Public output contains only counts/digests;
+  private assignment/key remain private, fields were not read and test remains
+  locked.
+
 ## 2026-08-18 · offline pinned release manifest
 
 - Preserved split R2 `117024.ECE-util1` as an exit-1 compute-node network

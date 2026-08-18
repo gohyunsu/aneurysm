@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 release-730 split completed:** Network-free CPU/PBS R3
+> `117026.ECE-util1` exited 0 in 00:00:27 at exact source `0dd4f851...ba1dc`.
+> All 730 canonical cases are singleton GHD components (zero exact duplicates,
+> zero tolerance edges, maximum size 1), yielding exactly 584 train / 73
+> validation / 73 locked test. Public result SHA-256 is
+> `4fa3be7c...5bf991`; private manifest SHA-256 is
+> `4ff88105...3077f`. Independent structure audit found 730 unique union IDs,
+> zero cross-overlap and a matching private-key hash. No field/model outcome
+> was used and test remains unopened. New work may read train fields for
+> source/normalization audit; validation is development only and test stays
+> sealed. D12 remains the sole GPU job. Use only `introai9`, never
+> `junjinyong`, and do not maintain the site.
+
 > **2026-08-18 release-730 split R2 network-preload failure:** CPU-only job
 > `117024.ECE-util1` exited 1 in 00:04:32 after the exact source checksum when
 > the compute node could not reach the pinned Hugging Face API. It did not load
