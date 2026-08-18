@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-18 steady and objective controls completed:** Geometry-only steady
+> audit R2 completed without indexing WSS. The processed object has 14,392
+> rows; excluding 407 exact-GHD matches to train/validation/locked-test/extras
+> leaves the common 13,985-row eligible information budget, digest
+> `6dbfde4d...c82cc`. The same private index list must be used by the strongest
+> comparator and proposal; steady supervision is a control, not novelty.
+> The train-only objective-scale CPU audit also completed after 584 train and
+> zero validation/test/extra field reads. Its numeric output remains private
+> and authorizes no automatic sensitivity. Release-730 Graph U-Net
+> `117056.ECE-util1` remains the sole GPU job, healthy through coverage 9;
+> monitor without stopping, tuning or duplicating it. Use only introai9, never
+> junjinyong, and do not maintain the public site.
+
 > **2026-08-18 upstream split wording corrected:** The AneuG-Flow paper's
 > 4.67% result is steady WSS under an 80/20 split. The pinned transient helper
 > implements a nominal 90/10 path by taking the leading eligible `stable_*`
@@ -9,13 +22,11 @@
 > config bytes. The keyed, field-blind 584/73/73 split remains the main
 > protocol, with unresolved source lineage and no family/patient/BC claim.
 
-> **2026-08-18 train-only objective-scale audit prepared:** A CPU-only utility
-> now reproduces the upstream phasewise train-transient WSS channel scale on
-> exactly 584 training fields. It reads no validation, locked-test or 79-extra
-> field, uses no GPU, fits no model, emits no public numeric result and has no
-> materiality threshold or automatic sensitivity decision. It cannot stop or
-> modify active job `117056.ECE-util1`. Execute only after Research Quality and
-> a fresh private activation, on introai9 and never junjinyong.
+> **2026-08-18 train-only objective-scale audit prepared:** This historical
+> preparation state is superseded by the completed execution above. The exact
+> utility reproduces the upstream phasewise train-transient WSS channel scale
+> on 584 training fields, with no validation/test/extra read, GPU, model fit,
+> public numeric result, threshold or automatic sensitivity decision.
 
 > **2026-08-18 released-objective boundary corrected:** Direct inspection of
 > pinned upstream `train_baselines.py`, `datasets_wss_optimized.py` and

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-18 — Train-only objective-scale audit completed
+
+- Completed one exact-contract CPU audit after proving the earlier job-ID-free
+  qsub failure had created no hidden scheduler job or run directory.
+- Read 584 train and zero validation/test/extra fields, used no GPU and fitted
+  no model. Numeric component weights remain private.
+- Retained the active Graph U-Net unchanged; the descriptive audit creates no
+  automatic objective sensitivity or paper claim.
+
 ## 2026-08-18 — Steady overlap audit completed
 
 - CPU R2 `117143.ECE-util1` exited 0 after 00:02:33 with GPU 0 and no WSS
