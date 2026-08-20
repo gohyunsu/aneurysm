@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-21 matched-information factorial analyzer preparation:** Public
+> code now defines a result-pending 2x2 analysis crossing selected
+> control/proposal with transient-only/the identical 13,985 eligible steady
+> rows. It reports paired method effects, steady effects and their
+> difference-in-differences for field, mean-vector, TAWSS, OSI and coverage.
+> It requires all four terminal validation cells, the frozen 73-case
+> split/order provenance and identical steady digest, and rejects identifiers,
+> locked test/79-extra reads, proposal-only steady labels, incomplete cells,
+> thresholds and automatic conclusions. This is synthetic-tested readiness
+> only; keep the response oracle first after PBS recovery, use only introai9,
+> never junjinyong, and do not maintain the site.
+
 > **2026-08-21 comparator container-hash correction:** The prepared GHD-GPS
 > and Transolver configs/validators had a 61-character transcription of the
 > pinned container digest. Correct it to the verified 64-character SHA-256

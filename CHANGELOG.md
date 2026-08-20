@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-21 — Matched-information factorial analyzer prepared
+
+- Added a result-pending 2x2 paired analyzer that separates proposal effects,
+  steady-information effects and method-by-steady interaction under the exact
+  shared 13,985-row scope.
+- Added fail-closed validation for all four cells, validation order, steady
+  digest, identifiers and sealed test/extra boundaries, with no threshold or
+  automatic scientific conclusion.
+- Added synthetic additive/interaction/direction tests and a reviewer-facing
+  rationale. No real model result or paper claim was created.
+
 ## 2026-08-21 — Correct comparator container provenance
 
 - Corrected a 61-character container-digest transcription in the prepared
