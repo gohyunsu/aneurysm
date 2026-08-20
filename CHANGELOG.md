@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-21 — Eligible-steady scale audit prepared
+
+- Added a CPU-only streaming audit of physical WSS component moments, vector
+  RMS and case-level RMS over the exact 13,985 eligible steady rows.
+- Bound the result to the frozen train-transient aggregate while forbidding
+  transient field, validation, test, extra and GPU access.
+- Added an oracle-terminal ordering guard and no threshold or automatic loss
+  weight; this is objective-scale readiness, not a model or result.
+
 ## 2026-08-21 — Matched steady exposure schedule prepared
 
 - Added a deterministic, exhaustive no-replacement-cycle schedule over the

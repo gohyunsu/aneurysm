@@ -1,0 +1,65 @@
+{
+  "schema_version": "aurora.aneug_release_730_steady_scale_audit.v1",
+  "protocol_id": "aneug_release_730_steady_scale_audit_v1",
+  "status": "prepared_non_executable_until_quality_activation_and_oracle_terminal",
+  "purpose": "measure_eligible_steady_physical_wss_scale_for_matched_auxiliary_objective_without_selecting_a_loss_weight",
+  "source": {
+    "steady_bytes": 9632510050,
+    "steady_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "public_overlap_result_sha256": "b3a118bae156a1dbc6c838b923a594f9b0f452a40f34b8bccb6bc396d28ba397",
+    "private_overlap_result_sha256": "52219b9a7161f0932a4ed80020a339510474431b67e168741426c2a12e5092ef",
+    "steady_scope_config_sha256": "782285c95a7eed7ead983b298426606bdb6d9258d076908c9c65a0ad3d8aa5cf",
+    "private_train_audit_sha256": "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385"
+  },
+  "scope": {
+    "processed_steady_rows": 14392,
+    "eligible_steady_rows": 13985,
+    "nodes": 13902,
+    "channels": 9,
+    "wss_channels": [
+      6,
+      7,
+      8
+    ],
+    "eligible_case_digest": "6dbfde4df94c50e66269ab8cf0e8c755d9f95cfbef43af1376af20036c6c82cc",
+    "decoder_epsilon": 0.00001
+  },
+  "audit": {
+    "accumulator_dtype": "float64",
+    "block_rows": 32,
+    "steady_vector_rms_formula": "sqrt_mean_over_eligible_cases_nodes_of_sum_physical_wss_components_squared",
+    "transient_vector_rms_formula": "sqrt_sum_of_train_component_mean_squared_plus_population_variance",
+    "case_vector_rms_quantiles": [
+      0.05,
+      0.5,
+      0.95
+    ],
+    "report_component_mean_and_population_std": true,
+    "report_steady_to_transient_scale_ratio": true,
+    "absolute_materiality_threshold": null,
+    "automatic_loss_weight": false,
+    "model_fit_or_prediction": false
+  },
+  "execution": {
+    "server": "introai9",
+    "queue": "coss_agpu",
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 0,
+    "walltime": "04:00:00",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+    "excluded_server": "junjinyong"
+  },
+  "authorization": {
+    "execute_after_quality_private_activation_and_response_oracle_terminal": true,
+    "read_eligible_steady_wss": true,
+    "read_transient_wss": false,
+    "read_validation_test_or_extra": false,
+    "use_gpu": false,
+    "fit_or_select_model": false,
+    "select_loss_weight": false,
+    "publish_numeric_result": false,
+    "paper_performance_claim": false,
+    "maintain_public_site": false
+  }
+}

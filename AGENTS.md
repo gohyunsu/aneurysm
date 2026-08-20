@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-21 eligible-steady scale-audit preparation:** A CPU-only audit now
+> prepares the one missing normalization fact for later T+S training: physical
+> vector RMS over exactly the leakage-audited 13,985 steady rows, compared with
+> the frozen 584-train transient aggregate. It reports component moments,
+> case-RMS quantiles and scale ratios but has no threshold, automatic loss
+> weight, model or claim. It reads no transient WSS, validation, test or extra
+> field and uses GPU 0. Execution requires a fresh private activation and a
+> preserved response-oracle terminal record; do not submit it first. PBS is
+> still unavailable, response oracle remains first, use only introai9 and never
+> junjinyong.
+
 > **2026-08-21 matched steady exposure schedule:** A metadata-only schedule now
 > binds the private ordered 13,985-row manifest and gives the selected control
 > and proposal the same SHA-256-ranked no-replacement-cycle rule. Each transient
