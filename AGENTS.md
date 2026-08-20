@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-19 matched steady scope implemented:** Reusable metadata-only
+> validator `aneug_release_730_steady_training_scope` hash-binds the exact
+> public/private overlap results, archive case order, tensor/GHD schema,
+> index-to-name alignment and eligible digest before returning the common
+> 13,985 indices. It indexes no WSS and fixes neither architecture nor training
+> schedule. Both strongest comparator and selected proposal must use this same
+> scope; proposal-only steady labels and steady-as-novelty are rejected.
+
 > **2026-08-18 steady and objective controls completed:** Geometry-only steady
 > audit R2 completed without indexing WSS. The processed object has 14,392
 > rows; excluding 407 exact-GHD matches to train/validation/locked-test/extras

@@ -46,6 +46,14 @@ The audit read geometry metadata but indexed no steady or transient WSS value.
 Its public result contains only counts, digests, and aggregate distance
 summaries; the case-index mapping remains private and append-only.
 
+Reusable scope validator
+`aurora.aneug_release_730_steady_training_scope` hash-binds that public/private
+pair and checks the exact archive case order, tensor/GHD metadata, eligible
+index-to-name alignment and digest before returning row indices. It does not
+index the tensor and deliberately fixes neither architecture nor training
+schedule. Consequently, later validation development remains flexible while
+the comparator and proposal are unable to receive different steady rows.
+
 ### Result
 
 - 14,392 processed steady geometries were present.

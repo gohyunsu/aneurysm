@@ -1,0 +1,40 @@
+{
+  "schema_version": "aurora.aneug_release_730_steady_training_scope.v1",
+  "protocol_id": "aneug_release_730_steady_training_scope_v1",
+  "status": "reusable_scope_validator_not_a_training_run",
+  "source": {
+    "steady_bytes": 9632510050,
+    "steady_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "public_overlap_result_sha256": "b3a118bae156a1dbc6c838b923a594f9b0f452a40f34b8bccb6bc396d28ba397",
+    "private_overlap_result_sha256": "52219b9a7161f0932a4ed80020a339510474431b67e168741426c2a12e5092ef"
+  },
+  "scope": {
+    "processed_steady_rows": 14392,
+    "eligible_steady_rows": 13985,
+    "excluded_overlap_rows": 407,
+    "nodes": 13902,
+    "channels": 9,
+    "ghd_width": 432,
+    "eligible_case_digest": "6dbfde4df94c50e66269ab8cf0e8c755d9f95cfbef43af1376af20036c6c82cc"
+  },
+  "information_control": {
+    "model_roles": [
+      "strongest_comparator",
+      "selected_proposal"
+    ],
+    "modes": [
+      "transient_only",
+      "eligible_steady"
+    ],
+    "same_eligible_indices_for_both_roles": true,
+    "proposal_only_steady_labels": false,
+    "steady_supervision_is_novelty": false,
+    "training_schedule_fixed_here": false,
+    "architecture_fixed_here": false
+  },
+  "read_boundary": {
+    "scope_validation_indexes_wss": false,
+    "locked_test_or_extra_wss_read": false,
+    "case_ids_in_public_output": false
+  }
+}

@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-19 — Matched steady training scope implemented
+
+- Added a metadata-only reusable validator that hash-binds the completed
+  public/private overlap audit and returns the exact 13,985 eligible indices.
+- Enforced identical eligible rows for the strongest comparator and proposal
+  while deliberately leaving architecture and training schedule to subsequent
+  validation development.
+- Added synthetic regression tests for count/digest/order alignment and
+  rejection of proposal-only steady labels.
+
 ## 2026-08-18 — Train-only objective-scale audit completed
 
 - Completed one exact-contract CPU audit after proving the earlier job-ID-free
