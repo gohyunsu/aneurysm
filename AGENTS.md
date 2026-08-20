@@ -1,5 +1,12 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-21 comparator container-hash correction:** The prepared GHD-GPS
+> and Transolver configs/validators had a 61-character transcription of the
+> pinned container digest. Correct it to the verified 64-character SHA-256
+> before either comparator is activated. This changes no model, data, split,
+> loss, schedule or result; all earlier comparator readiness heads are
+> superseded for execution provenance and no comparator job exists.
+
 > **2026-08-19 matched steady scope implemented:** Reusable metadata-only
 > validator `aneug_release_730_steady_training_scope` hash-binds the exact
 > public/private overlap results, archive case order, tensor/GHD schema,

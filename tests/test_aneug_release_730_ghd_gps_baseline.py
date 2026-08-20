@@ -52,6 +52,10 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertFalse(config["target_and_metric"]["hard_periodic_closure"])
         self.assertIsNone(config["decision_rule"]["absolute_performance_threshold"])
         self.assertFalse(config["authorization"]["execute_now"])
+        self.assertEqual(
+            config["runtime"]["container_sha256"],
+            "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
+        )
 
     def test_sealed_read_projection_closure_threshold_or_execution_is_rejected(self) -> None:
         config = json.loads(CONFIG.read_text())

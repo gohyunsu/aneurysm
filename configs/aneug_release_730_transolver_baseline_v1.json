@@ -115,7 +115,7 @@
     "server": "introai9",
     "queue": "coss_a6gpu",
     "Qlist": "a6000",
-    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0a61ae05b88681f2",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
     "ncpus": 4,
     "memory_gb": 64,
     "ngpus": 1,

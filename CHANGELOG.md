@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-21 — Correct comparator container provenance
+
+- Corrected a 61-character container-digest transcription in the prepared
+  release-730 GHD-GPS and Transolver configs and validators.
+- Added regression assertions for the verified 64-character SHA-256. No
+  scientific or optimization setting changed and neither comparator had been
+  activated or executed.
+
 ## 2026-08-19 — Matched steady training scope implemented
 
 - Added a metadata-only reusable validator that hash-binds the completed
