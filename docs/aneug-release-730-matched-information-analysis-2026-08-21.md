@@ -47,6 +47,22 @@ benefited the proposal more than the control. For OSI coverage, the favorable
 direction is positive. This orientation is descriptive and creates no
 automatic winner or novelty conclusion.
 
+## Compute interpretation
+
+T+S performs additional steady-head forward/backward work. Because no
+compute-matched transient-replay cell is registered, the two within-model
+T-to-T+S contrasts estimate the effect of the complete registered augmentation
+protocol, not a causal effect of steady labels alone. The primary method
+comparisons remain proposal versus control within T and within T+S.
+
+Every terminal cell must report its transient-training protocol digest,
+training seed, transient case-cycle exposures, optimizer steps, measured GPU seconds,
+peak memory and active parameters. T and T+S must share the same base
+transient-training protocol within each model role. T+S additionally binds the
+executed steady-scale audit result and declares its extra forward/backward
+work. The analyzer records these quantities but does not normalize away or
+reinterpret unequal compute.
+
 ## Boundary
 
 The kernel accepts four normalized terminal-validation cells only after they

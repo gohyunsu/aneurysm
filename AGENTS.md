@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-21 matched-information compute interpretation:** The four-cell
+> analyzer now fail-closes on terminal optimizer steps, transient case-cycle
+> exposures,
+> GPU seconds, peak memory, active parameters, seed, same within-role base
+> training-protocol digest and T+S scale-audit provenance. Because T+S adds
+> steady-head forward/backward work and no transient-replay compute control is
+> registered, its within-model contrast is the registered augmentation
+> protocol effect, never a causal steady-label-only effect. Primary method
+> comparisons remain within T and within T+S. This creates no result, model,
+> test/extra read or GPU authority; response oracle remains first after PBS
+> recovery, use only introai9 and never junjinyong.
+
 > **2026-08-21 eligible-steady scale-audit preparation:** A CPU-only audit now
 > prepares the one missing normalization fact for later T+S training: physical
 > vector RMS over exactly the leakage-audited 13,985 steady rows, compared with

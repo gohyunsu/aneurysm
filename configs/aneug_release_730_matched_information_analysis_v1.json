@@ -64,6 +64,26 @@
       }
     }
   },
+  "training_accounting": {
+    "required_cell_fields": [
+      "transient_training_protocol_sha256",
+      "training_seed",
+      "transient_case_cycles_consumed",
+      "optimizer_steps",
+      "training_gpu_seconds",
+      "peak_gpu_memory_bytes",
+      "active_parameter_count",
+      "steady_head_active",
+      "steady_objective_scale_result_sha256",
+      "additional_steady_forward_backward_work"
+    ],
+    "same_transient_training_protocol_within_model_role": true,
+    "same_training_seed_across_four_cells": true,
+    "terminal_examples_steps_time_memory_and_parameters_reported": true,
+    "compute_matched_transient_replay_control_present": false,
+    "steady_contrast_estimand": "registered_T_plus_S_augmentation_protocol_including_its_additional_compute_not_a_label_only_causal_effect",
+    "primary_method_comparisons_are_within_information_mode": true
+  },
   "bootstrap": {
     "replicates": 10000,
     "seed": 20260821,
@@ -77,7 +97,7 @@
     "automatic_novelty_conclusion": false,
     "report_all_cells": true,
     "report_all_contrasts": true,
-    "interpretation": "separate_method_information_and_interaction_effects_without_treating_steady_supervision_as_novelty"
+    "interpretation": "report_within_information_method_effects_and_registered_augmentation_protocol_contrasts_without_a_label_only_causal_or_novelty_claim"
   },
   "boundary": {
     "execute_now": false,

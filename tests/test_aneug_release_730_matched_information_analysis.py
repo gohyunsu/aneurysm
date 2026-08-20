@@ -11,6 +11,7 @@ from aurora.aneug_release_730_matched_information_analysis import (
     extract_cell_rows,
     load_config,
     paired_linear_contrast,
+    validate_config,
 )
 
 
@@ -67,6 +68,16 @@ def cell(label: str, offset: float, coverage: float = 0.9) -> dict:
             if steady
             else None
         ),
+        "transient_training_protocol_sha256": ("a" if control else "b") * 64,
+        "training_seed": 1103,
+        "transient_case_cycles_consumed": 46_720,
+        "optimizer_steps": 6_680,
+        "training_gpu_seconds": 3_600.0,
+        "peak_gpu_memory_bytes": 12_000_000_000,
+        "active_parameter_count": 7_000_000 if control else 8_000_000,
+        "steady_head_active": steady,
+        "steady_objective_scale_result_sha256": "c" * 64 if steady else None,
+        "additional_steady_forward_backward_work": steady,
         "case_ids_included": False,
         "locked_test_field_case_count_read": 0,
         "processed_only_extra_field_case_count_read": 0,
@@ -97,6 +108,27 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         self.assertIsNone(config["decision"]["absolute_performance_threshold"])
         self.assertFalse(config["decision"]["automatic_winner"])
         self.assertFalse(config["boundary"]["locked_test_or_extra_access"])
+        self.assertFalse(
+            config["training_accounting"][
+                "compute_matched_transient_replay_control_present"
+            ]
+        )
+
+    def test_config_rejects_causal_or_unaccounted_reinterpretation(self) -> None:
+        config = load_config(CONFIG)
+        changed = copy.deepcopy(config)
+        changed["training_accounting"][
+            "compute_matched_transient_replay_control_present"
+        ] = True
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "training_accounting"
+        ):
+            validate_config(changed)
+
+        changed = copy.deepcopy(config)
+        changed["decision"]["interpretation"] = "causal_steady_label_effect"
+        with self.assertRaisesRegex(MatchedInformationAnalysisError, "decision"):
+            validate_config(changed)
 
     def test_additive_effects_have_zero_interaction(self) -> None:
         output = analyze_matched_information(
@@ -125,6 +157,11 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         self.assertIsNone(output["automatic_winner"])
         self.assertTrue(output["interaction_is_not_standalone_novelty"])
         self.assertEqual(output["steady_exposure"]["control_TS"]["examples"], 46_720)
+        self.assertFalse(output["steady_contrasts_are_label_only_causal_effects"])
+        self.assertEqual(
+            output["training_accounting"]["proposal_TS"]["optimizer_steps"],
+            6_680,
+        )
 
     def test_interaction_detects_extra_proposal_benefit(self) -> None:
         cells = additive_cells()
@@ -203,6 +240,22 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         ):
             analyze_matched_information(transient_with_steady, config, replicates=200)
 
+        mismatched_protocol = additive_cells()
+        mismatched_protocol["proposal_TS"][
+            "transient_training_protocol_sha256"
+        ] = "d" * 64
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "proposal_training_protocol_pair"
+        ):
+            analyze_matched_information(mismatched_protocol, config, replicates=200)
+
+        mismatched_seed = additive_cells()
+        mismatched_seed["control_TS"]["training_seed"] = 1104
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "shared_training_seed"
+        ):
+            analyze_matched_information(mismatched_seed, config, replicates=200)
+
     def test_rejects_identifier_test_or_claim_access(self) -> None:
         config = load_config(CONFIG)
         for key, value, label in (
@@ -216,6 +269,36 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
                 MatchedInformationAnalysisError, label
             ):
                 analyze_matched_information(changed, config, replicates=200)
+
+    def test_rejects_missing_compute_or_steady_scale_provenance(self) -> None:
+        config = load_config(CONFIG)
+        changed = additive_cells()
+        changed["control_T"]["optimizer_steps"] = 0
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "control_T_optimizer_steps"
+        ):
+            analyze_matched_information(changed, config, replicates=200)
+
+        changed = additive_cells()
+        changed["control_T"]["transient_case_cycles_consumed"] = 46_719
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "control_T_transient_case_cycles"
+        ):
+            analyze_matched_information(changed, config, replicates=200)
+
+        changed = additive_cells()
+        changed["proposal_TS"]["steady_objective_scale_result_sha256"] = None
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "proposal_TS_steady_scale"
+        ):
+            analyze_matched_information(changed, config, replicates=200)
+
+        changed = additive_cells()
+        changed["proposal_TS"]["additional_steady_forward_backward_work"] = False
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "proposal_TS_steady_compute"
+        ):
+            analyze_matched_information(changed, config, replicates=200)
 
 
 if __name__ == "__main__":

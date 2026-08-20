@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-21 — Matched-information compute interpretation corrected
+
+- Added fail-closed per-cell accounting for base training protocol, seed,
+  transient case-cycle exposure, optimizer steps, GPU time, memory and active
+  parameters.
+- Required T+S cells to bind steady-scale provenance and disclose their extra
+  forward/backward work.
+- Relabelled T-to-T+S contrasts as registered augmentation-protocol effects,
+  not causal steady-label-only effects without a compute-matched replay cell.
+
 ## 2026-08-21 — Eligible-steady scale audit prepared
 
 - Added a CPU-only streaming audit of physical WSS component moments, vector

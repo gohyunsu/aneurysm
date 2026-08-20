@@ -2,9 +2,11 @@
 
 The four cells cross model role (selected control versus proposal) with
 information mode (transient-only versus the identical audited steady set).
-The module reports case-paired method, information and interaction contrasts.
-It deliberately selects no model, defines no pass threshold and reads no
-locked-test value.
+The module reports case-paired method and registered augmentation-protocol
+contrasts.  Because T+S adds forward/backward work and no compute-matched
+transient-replay control is registered, the within-model T-to-T+S contrast is
+not labelled a causal effect of steady labels alone.  The module deliberately
+selects no model, defines no pass threshold and reads no locked-test value.
 """
 
 from __future__ import annotations
@@ -63,6 +65,14 @@ CONTRASTS = {
 def _require(condition: bool, label: str) -> None:
     if not condition:
         raise MatchedInformationAnalysisError(label)
+
+
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
 
 
 def load_config(path: str | Path) -> dict[str, Any]:
@@ -126,6 +136,36 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "steady_exposure_schedule",
     )
     _require(factorial["contrasts"] == CONTRASTS, "contrasts")
+    accounting = config["training_accounting"]
+    _require(
+        accounting["required_cell_fields"]
+        == [
+            "transient_training_protocol_sha256",
+            "training_seed",
+            "transient_case_cycles_consumed",
+            "optimizer_steps",
+            "training_gpu_seconds",
+            "peak_gpu_memory_bytes",
+            "active_parameter_count",
+            "steady_head_active",
+            "steady_objective_scale_result_sha256",
+            "additional_steady_forward_backward_work",
+        ]
+        and accounting["same_transient_training_protocol_within_model_role"]
+        is True
+        and accounting["same_training_seed_across_four_cells"] is True
+        and accounting[
+            "terminal_examples_steps_time_memory_and_parameters_reported"
+        ]
+        is True
+        and accounting["compute_matched_transient_replay_control_present"]
+        is False
+        and accounting["steady_contrast_estimand"]
+        == "registered_T_plus_S_augmentation_protocol_including_its_additional_compute_not_a_label_only_causal_effect"
+        and accounting["primary_method_comparisons_are_within_information_mode"]
+        is True,
+        "training_accounting",
+    )
     bootstrap = config["bootstrap"]
     _require(
         bootstrap["replicates"] == 10_000
@@ -141,7 +181,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and decision["automatic_winner"] is False
         and decision["automatic_novelty_conclusion"] is False
         and decision["report_all_cells"] is True
-        and decision["report_all_contrasts"] is True,
+        and decision["report_all_contrasts"] is True
+        and decision["interpretation"]
+        == "report_within_information_method_effects_and_registered_augmentation_protocol_contrasts_without_a_label_only_causal_or_novelty_claim",
         "decision",
     )
     boundary = config["boundary"]
@@ -234,6 +276,58 @@ def extract_cell_rows(
             and cell.get("steady_examples_consumed") == 0
             and cell.get("steady_exposure_prefix_sha256") is None,
             f"{label}_transient_exposure",
+        )
+    _require(
+        _is_sha256(cell.get("transient_training_protocol_sha256")),
+        f"{label}_training_protocol",
+    )
+    _require(
+        isinstance(cell.get("training_seed"), int)
+        and not isinstance(cell.get("training_seed"), bool),
+        f"{label}_training_seed",
+    )
+    for key in (
+        "transient_case_cycles_consumed",
+        "optimizer_steps",
+        "peak_gpu_memory_bytes",
+        "active_parameter_count",
+    ):
+        _require(
+            isinstance(cell.get(key), int)
+            and not isinstance(cell.get(key), bool)
+            and cell[key] > 0,
+            f"{label}_{key}",
+        )
+    _require(
+        cell["transient_case_cycles_consumed"] % 584 == 0,
+        f"{label}_transient_case_cycles",
+    )
+    training_gpu_seconds = cell.get("training_gpu_seconds")
+    _require(
+        isinstance(training_gpu_seconds, (int, float))
+        and not isinstance(training_gpu_seconds, bool)
+        and math.isfinite(float(training_gpu_seconds))
+        and float(training_gpu_seconds) > 0.0,
+        f"{label}_training_gpu_seconds",
+    )
+    _require(
+        cell.get("steady_head_active") is (mode == "eligible_steady"),
+        f"{label}_steady_head",
+    )
+    _require(
+        cell.get("additional_steady_forward_backward_work")
+        is (mode == "eligible_steady"),
+        f"{label}_steady_compute",
+    )
+    if mode == "eligible_steady":
+        _require(
+            _is_sha256(cell.get("steady_objective_scale_result_sha256")),
+            f"{label}_steady_scale",
+        )
+    else:
+        _require(
+            cell.get("steady_objective_scale_result_sha256") is None,
+            f"{label}_transient_scale",
         )
     _require(cell.get("case_ids_included") is False, f"{label}_identifiers")
     _require(
@@ -341,6 +435,20 @@ def analyze_matched_information(
     rows = {
         label: extract_cell_rows(cells[label], label, config) for label in CELL_ORDER
     }
+    _require(
+        cells["control_T"]["transient_training_protocol_sha256"]
+        == cells["control_TS"]["transient_training_protocol_sha256"],
+        "control_training_protocol_pair",
+    )
+    _require(
+        cells["proposal_T"]["transient_training_protocol_sha256"]
+        == cells["proposal_TS"]["transient_training_protocol_sha256"],
+        "proposal_training_protocol_pair",
+    )
+    _require(
+        len({int(cells[label]["training_seed"]) for label in CELL_ORDER}) == 1,
+        "shared_training_seed",
+    )
     if replicates is None:
         replicates = int(config["bootstrap"]["replicates"])
     if seed is None:
@@ -381,6 +489,17 @@ def analyze_matched_information(
         "paired_unit": config["bootstrap"]["paired_unit"],
         "same_eligible_steady_indices_for_control_and_proposal": True,
         "same_steady_exposure_schedule_rule_for_control_and_proposal": True,
+        "training_accounting": {
+            label: {
+                key: cells[label][key]
+                for key in config["training_accounting"]["required_cell_fields"]
+            }
+            for label in CELL_ORDER
+        },
+        "primary_method_comparisons_are_within_information_mode": True,
+        "steady_contrasts_are_registered_augmentation_protocol_effects": True,
+        "steady_contrasts_are_label_only_causal_effects": False,
+        "compute_matched_transient_replay_control_present": False,
         "steady_exposure": {
             label: {
                 "epochs": cells[label]["steady_exposure_epochs"],
