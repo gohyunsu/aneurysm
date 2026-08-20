@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-21 direct-prior metadata and novelty correction:** The current
+> arXiv v2 title of Sheng et al. 2601.19876 is *Real-Time Pulsatile Flow
+> Prediction for Realistic, Diverse Intracranial Aneurysm Morphologies using a
+> Graph Transformer and Steady-Flow Data Augmentation*; the current metadata
+> and HTML do not use `RHSIA`. Use the exact title and `Sheng et al.` in the
+> active manuscript. Historical internal `RHSIA-style` labels may remain only
+> as implementation provenance. Direct v2 inspection confirms 808 reported
+> pulsatile cases, mixed steady/transient sampling, a complete-sequence
+> surrogate, a separately predicted steady-WSS FiLM prior and a 512-mode modal
+> surrogate. These occupy steady augmentation, sequence decoding, modal
+> prediction and steady-anchor claims; none is AURORA novelty. Keep the
+> official 730 release intersection distinct from the reported 808 cohort and
+> the exact processed object's 809 rows. This changes no split, model, result
+> or execution authority. Response oracle remains first after PBS recovery;
+> test/79 extras remain sealed and junjinyong remains excluded.
+
 > **2026-08-21 matched-information factorial analyzer preparation:** Public
 > code now defines a result-pending 2x2 analysis crossing selected
 > control/proposal with transient-only/the identical 13,985 eligible steady

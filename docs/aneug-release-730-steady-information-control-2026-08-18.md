@@ -13,17 +13,19 @@ audit; it does not redefine the split or open locked transient WSS.
 This distinction is important because the two primary sources answer different
 questions. The AneuG-Flow dataset paper reports 14,000 steady and 730 pulsatile
 CFD cases, but its 4.67% benchmark is an 80/20 **steady-WSS** experiment. It is
-not a complete-cycle transient result. The later RHSIA preprint already mixes
-the 14,000 steady cases with transient snapshots by masking temporal features,
-tests a separately predicted steady-WSS FiLM prior for a sequence baseline,
-and reports transient label-efficiency ablations. Therefore, merely pretraining
-on steady WSS or calling steady WSS an anchor is prior art, not an independent
-contribution.
+not a complete-cycle transient result. The current Sheng et al. v2 preprint
+already mixes the 14,000 steady cases with transient snapshots by masking
+temporal features, tests a separately predicted steady-WSS FiLM prior for a
+sequence baseline, and reports transient label-efficiency ablations. Therefore,
+merely pretraining on steady WSS or calling steady WSS an anchor is prior art,
+not an independent contribution.
 
 Primary sources:
 
 - [AneuG-Flow final NeurIPS 2025 paper](https://papers.neurips.cc/paper_files/paper/2025/file/e2b8ff0035bc9f572a7deefbcbea85bc-Paper-Datasets_and_Benchmarks_Track.pdf)
-- [RHSIA v2](https://arxiv.org/html/2601.19876v2)
+- [Sheng et al. v2, *Real-Time Pulsatile Flow Prediction for Realistic, Diverse
+  Intracranial Aneurysm Morphologies using a Graph Transformer and Steady-Flow
+  Data Augmentation*](https://arxiv.org/html/2601.19876v2)
 - [Pinned AneuG-Flow code](https://github.com/WenHaoDing/AneuG-Flow/tree/4a090a0f12538deef6fcea88b81afe78ce38152e)
 
 ## Completed leakage audit

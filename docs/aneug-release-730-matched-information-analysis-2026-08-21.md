@@ -2,8 +2,9 @@
 
 ## Purpose
 
-The AneuG-Flow source exposes abundant steady supervision, but RHSIA already
-uses steady augmentation and a predicted steady-WSS prior. Steady data is
+The AneuG-Flow source exposes abundant steady supervision, but Sheng et al.'s
+current v2 preprint already uses steady augmentation and a predicted
+steady-WSS prior. Steady data is
 therefore a required information control rather than the proposed novelty.
 This result-pending contract separates method and information effects before
 the four validation results exist.

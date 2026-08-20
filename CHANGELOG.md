@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-21 — Direct-prior metadata corrected
+
+- Replaced the obsolete arXiv title shorthand for Sheng et al. 2601.19876 with
+  the current v2 title in active research documentation.
+- Recorded that v2 already contains mixed steady/transient supervision, a
+  complete-sequence surrogate, a separately predicted steady-WSS FiLM prior
+  and a 512-mode modal surrogate, so these elements cannot carry novelty.
+- Preserved the distinction among the official 730 release cohort, the
+  preprint's reported 808 pulsatile cases and 809 processed rows without
+  changing any experiment authority or result.
+
 ## 2026-08-21 — Matched-information factorial analyzer prepared
 
 - Added a result-pending 2x2 paired analyzer that separates proposal effects,
