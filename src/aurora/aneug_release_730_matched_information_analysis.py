@@ -110,6 +110,21 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and factorial["steady_supervision_is_novelty"] is False,
         "information_fairness",
     )
+    exposure = factorial["steady_exposure_schedule"]
+    _require(
+        exposure["protocol_id"]
+        == "aneug_release_730_steady_exposure_schedule_v1"
+        and exposure["config_sha256"]
+        == "3509191bd2c3e3294488ab5018109f3beccd402599a17e16dd8696d1deeaceaf"
+        and exposure["algorithm"]
+        == "sha256_ranked_full_cycle_without_replacement_v1"
+        and exposure["seed"] == 20_260_821
+        and exposure["examples_per_epoch"] == 584
+        and exposure["minimum_epochs"] == 80
+        and exposure["maximum_epochs"] == 251
+        and exposure["terminal_prefix_digest_required"] is True,
+        "steady_exposure_schedule",
+    )
     _require(factorial["contrasts"] == CONTRASTS, "contrasts")
     bootstrap = config["bootstrap"]
     _require(
@@ -175,6 +190,7 @@ def extract_cell_rows(
         f"{label}_split",
     )
     if mode == "eligible_steady":
+        exposure = config["factorial"]["steady_exposure_schedule"]
         _require(
             cell.get("eligible_steady_rows")
             == config["factorial"]["eligible_steady_rows"]
@@ -182,11 +198,42 @@ def extract_cell_rows(
             == config["factorial"]["eligible_steady_case_digest"],
             f"{label}_steady_scope",
         )
+        _require(
+            cell.get("steady_exposure_schedule_protocol_id")
+            == exposure["protocol_id"]
+            and cell.get("steady_exposure_schedule_config_sha256")
+            == exposure["config_sha256"]
+            and cell.get("steady_exposure_algorithm") == exposure["algorithm"]
+            and cell.get("steady_exposure_seed") == exposure["seed"],
+            f"{label}_steady_exposure_contract",
+        )
+        epochs = cell.get("steady_exposure_epochs")
+        examples = cell.get("steady_examples_consumed")
+        prefix_digest = cell.get("steady_exposure_prefix_sha256")
+        _require(
+            isinstance(epochs, int)
+            and exposure["minimum_epochs"] <= epochs <= exposure["maximum_epochs"]
+            and examples == epochs * exposure["examples_per_epoch"]
+            and isinstance(prefix_digest, str)
+            and len(prefix_digest) == 64
+            and all(character in "0123456789abcdef" for character in prefix_digest),
+            f"{label}_steady_exposure_terminal",
+        )
     else:
         _require(
             cell.get("eligible_steady_rows") == 0
             and cell.get("eligible_steady_case_digest") is None,
             f"{label}_transient_scope",
+        )
+        _require(
+            cell.get("steady_exposure_schedule_protocol_id") is None
+            and cell.get("steady_exposure_schedule_config_sha256") is None
+            and cell.get("steady_exposure_algorithm") is None
+            and cell.get("steady_exposure_seed") is None
+            and cell.get("steady_exposure_epochs") == 0
+            and cell.get("steady_examples_consumed") == 0
+            and cell.get("steady_exposure_prefix_sha256") is None,
+            f"{label}_transient_exposure",
         )
     _require(cell.get("case_ids_included") is False, f"{label}_identifiers")
     _require(
@@ -333,6 +380,15 @@ def analyze_matched_information(
         "paired_case_count": int(config["split"]["validation_cases"]),
         "paired_unit": config["bootstrap"]["paired_unit"],
         "same_eligible_steady_indices_for_control_and_proposal": True,
+        "same_steady_exposure_schedule_rule_for_control_and_proposal": True,
+        "steady_exposure": {
+            label: {
+                "epochs": cells[label]["steady_exposure_epochs"],
+                "examples": cells[label]["steady_examples_consumed"],
+                "prefix_sha256": cells[label]["steady_exposure_prefix_sha256"],
+            }
+            for label in ("control_TS", "proposal_TS")
+        },
         "case_identifiers_included": False,
         "locked_test_or_extra_values_read": False,
         "population_inference": False,

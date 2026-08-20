@@ -48,6 +48,25 @@ def cell(label: str, offset: float, coverage: float = 0.9) -> dict:
             if steady
             else None
         ),
+        "steady_exposure_schedule_protocol_id": (
+            "aneug_release_730_steady_exposure_schedule_v1" if steady else None
+        ),
+        "steady_exposure_schedule_config_sha256": (
+            "3509191bd2c3e3294488ab5018109f3beccd402599a17e16dd8696d1deeaceaf"
+            if steady
+            else None
+        ),
+        "steady_exposure_algorithm": (
+            "sha256_ranked_full_cycle_without_replacement_v1" if steady else None
+        ),
+        "steady_exposure_seed": 20_260_821 if steady else None,
+        "steady_exposure_epochs": 80 if steady else 0,
+        "steady_examples_consumed": 46_720 if steady else 0,
+        "steady_exposure_prefix_sha256": (
+            "a8370b5b0824b570dab172a619e424dc3ebad79d26c297404ab7e0791f37d2d3"
+            if steady
+            else None
+        ),
         "case_ids_included": False,
         "locked_test_field_case_count_read": 0,
         "processed_only_extra_field_case_count_read": 0,
@@ -71,6 +90,10 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         self.assertEqual(tuple(config["factorial"]["cells"]), CELL_ORDER)
         self.assertEqual(config["factorial"]["eligible_steady_rows"], 13_985)
         self.assertFalse(config["factorial"]["proposal_only_steady_labels"])
+        self.assertEqual(
+            config["factorial"]["steady_exposure_schedule"]["examples_per_epoch"],
+            584,
+        )
         self.assertIsNone(config["decision"]["absolute_performance_threshold"])
         self.assertFalse(config["decision"]["automatic_winner"])
         self.assertFalse(config["boundary"]["locked_test_or_extra_access"])
@@ -101,6 +124,7 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         )
         self.assertIsNone(output["automatic_winner"])
         self.assertTrue(output["interaction_is_not_standalone_novelty"])
+        self.assertEqual(output["steady_exposure"]["control_TS"]["examples"], 46_720)
 
     def test_interaction_detects_extra_proposal_benefit(self) -> None:
         cells = additive_cells()
@@ -164,6 +188,20 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
             MatchedInformationAnalysisError, "proposal_TS_split"
         ):
             analyze_matched_information(changed_order, config, replicates=200)
+
+        changed_exposure = additive_cells()
+        changed_exposure["proposal_TS"]["steady_examples_consumed"] = 46_719
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "proposal_TS_steady_exposure_terminal"
+        ):
+            analyze_matched_information(changed_exposure, config, replicates=200)
+
+        transient_with_steady = additive_cells()
+        transient_with_steady["control_T"]["steady_exposure_epochs"] = 1
+        with self.assertRaisesRegex(
+            MatchedInformationAnalysisError, "control_T_transient_exposure"
+        ):
+            analyze_matched_information(transient_with_steady, config, replicates=200)
 
     def test_rejects_identifier_test_or_claim_access(self) -> None:
         config = load_config(CONFIG)

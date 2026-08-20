@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-21 matched steady exposure schedule:** A metadata-only schedule now
+> binds the private ordered 13,985-row manifest and gives the selected control
+> and proposal the same SHA-256-ranked no-replacement-cycle rule. Each transient
+> epoch pairs 584 steady examples; all eligible rows receive 3--4 visits by the
+> 80-epoch minimum and 10--11 by the 251-epoch ceiling. Terminal T+S cells must
+> report actual epoch, exposure count and prefix digest. This fixes ordering and
+> repetition fairness but selects no backbone, loss weight, optimizer or
+> checkpoint and reads no WSS. A later selected model must use a shared geometry
+> encoder plus separate single-field steady head, never an 80-phase copy. No GPU
+> or paper claim is authorized; response oracle remains first after PBS
+> recovery, test/79 extras stay sealed, use only introai9 and never junjinyong.
+
 > **2026-08-21 direct-prior metadata and novelty correction:** The current
 > arXiv v2 title of Sheng et al. 2601.19876 is *Real-Time Pulsatile Flow
 > Prediction for Realistic, Diverse Intracranial Aneurysm Morphologies using a

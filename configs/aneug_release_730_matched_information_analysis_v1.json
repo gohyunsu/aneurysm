@@ -29,6 +29,16 @@
     "same_steady_indices_for_control_and_proposal": true,
     "proposal_only_steady_labels": false,
     "steady_supervision_is_novelty": false,
+    "steady_exposure_schedule": {
+      "protocol_id": "aneug_release_730_steady_exposure_schedule_v1",
+      "config_sha256": "3509191bd2c3e3294488ab5018109f3beccd402599a17e16dd8696d1deeaceaf",
+      "algorithm": "sha256_ranked_full_cycle_without_replacement_v1",
+      "seed": 20260821,
+      "examples_per_epoch": 584,
+      "minimum_epochs": 80,
+      "maximum_epochs": 251,
+      "terminal_prefix_digest_required": true
+    },
     "contrasts": {
       "proposal_minus_control_T": {
         "control_T": -1.0,

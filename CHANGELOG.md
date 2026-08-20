@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-21 — Matched steady exposure schedule prepared
+
+- Added a deterministic, exhaustive no-replacement-cycle schedule over the
+  exact ordered 13,985-row steady manifest.
+- Fixed one steady example per transient case and common control/proposal
+  exposure prefixes while requiring terminal exposure counts and digests.
+- Added fail-closed metadata validation and tests without reading WSS,
+  selecting a model/loss or authorizing GPU execution.
+
 ## 2026-08-21 — Direct-prior metadata corrected
 
 - Replaced the obsolete arXiv title shorthand for Sheng et al. 2601.19876 with

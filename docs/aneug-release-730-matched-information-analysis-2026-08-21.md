@@ -20,6 +20,10 @@ The exact factorial is:
 
 Both T+S cells must use the identical 13,985-row eligibility list with digest
 `6dbfde4d...c82cc`. A proposal-only steady advantage is rejected.
+They must also bind the same deterministic exposure-schedule contract and
+report the actual terminal epoch, exposure count and prefix digest. This makes
+row order and repetition auditable even when early stopping yields different
+terminal horizons.
 
 ## Prespecified estimands
 
@@ -50,6 +54,7 @@ share both the frozen 73-case set digest and the ordered loader digest
 `cceb0e47...5a24`, as well as the exact private split hash. The distinction is
 essential: the set digest alone cannot prove that identifier-free rows are
 paired in the same order. It rejects incomplete cells, different steady
-eligibility, identifiers, test/79-extra reads and paper claims. A later private
+eligibility or exposure provenance, identifiers, test/79-extra reads and paper
+claims. A later private
 activation must hash-bind the four raw results and the normalization adapter.
 The current code executes only synthetic tests and contains no model result.
