@@ -24,7 +24,10 @@ authorized introai9 GPU.
 5. If the oracle is useful, compare response-only, local-only, and
    response-plus-local-residual with one common backbone and budget.
 6. Only after a field-competitive combined model exists, compare field-only,
-   scalar-functional, OSI, complete-functional and field-anchored objectives.
+   complete scalar-functional and field-anchored objectives. Use the two freed
+   single-seed rows for matched control/proposal T+M auxiliary-path controls;
+   T+S then changes steady information rather than silently adding a head and
+   second geometry pass only to the proposal.
 7. Freeze the candidate, seeds, checkpoint rule, endpoints, paired analysis
    and prediction-blind figure cases before opening the 73-case test once.
 

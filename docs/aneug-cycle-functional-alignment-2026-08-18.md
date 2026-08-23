@@ -18,6 +18,13 @@ objective exposes four terms separately:
 3. area-weighted TAWSS error; and
 4. robust OSI error on reference-defined active support.
 
+The OSI term uses the standard pseudo-Huber definition
+$\delta^2(\sqrt{1+(e/\delta)^2}-1)$. An earlier dataset-free implementation
+used $\delta$ rather than $\delta^2$ as the outer factor. Because the planned
+trainer calibrates each term from initial train predictions this was largely a
+constant-scale discrepancy, but it was corrected before any release-730
+functional training or result.
+
 The support floor and all loss coefficients are explicit inputs. They must be
 defined from training data and selected using validation development; the
 kernel does not infer them or convert them into an absolute pass/fail rule.
@@ -27,12 +34,16 @@ instead pass through the complete predicted cycle.
 
 ## Required controlled comparison
 
-On one fixed backbone and initialization policy, compare field only, field plus
-TAWSS/mean vector, field plus OSI, and the complete objective. Report every
-trial with field, mean-vector, TAWSS, OSI, active-support coverage and compute.
-A functional gain can support the paper only if its paired field trade-off is
-competitive with the empirical direct-baseline distribution; no numerical
-cutoff is set before those baselines run.
+On one fixed backbone and initialization policy, the active release-730 R2
+compares field only, the complete scalarized objective and the complete
+field-anchored objective. The kernel still reports every term separately.
+Historical isolated TAWSS/mean-vector and OSI rows are omitted so the unchanged
+bounded development budget can instead include matched T+M/T+S reviewer
+controls for the 13,985 steady examples. Report every trial with field,
+mean-vector, TAWSS, OSI, active-support coverage and compute. A functional gain
+can support the paper only if its paired field trade-off is competitive with
+the empirical direct-baseline distribution; no numerical cutoff is set before
+those baselines run.
 
 Two complete-objective optimizers are retained as controls. The standard row
 uses an explicit scalarized loss. The field-anchored row removes only the

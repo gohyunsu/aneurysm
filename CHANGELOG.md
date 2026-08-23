@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-24 — Functional kernel and active R2 rows corrected
+
+- Corrected the OSI robust term to the standard pseudo-Huber `delta^2` outer
+  factor before any release-730 functional training.
+- Synchronized the public plan with the three active objective rows and the
+  matched T+M reviewer-control allocation in private R2.
+- Added an exact-formula regression test while preserving separate reporting
+  of field, mean-vector, TAWSS and OSI terms and all sealed scopes.
+- Passed 13 focused tests and the full 970-test suite.
+
 ## 2026-08-24 — Release-730 figure scope corrected
 
 - Preserved the historical 51-case v4 figure selector and added a separate

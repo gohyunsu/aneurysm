@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 functional-kernel correction:** The dataset-free OSI term now
+> uses the standard pseudo-Huber outer factor `delta^2`, not `delta`. No active
+> release-730 functional job or result existed, and train-initial term scaling
+> would have absorbed the missing constant, but the definition is corrected
+> before execution. The public planned objective rows now match private R2:
+> field-only, complete scalarized and complete field-anchored. Isolated
+> functional rows are omitted for the higher-value matched control/proposal
+> T+M reviewer controls; all four kernel terms remain separately reported.
+> This selects no weight/model and grants no execution authority. Response
+> oracle remains first; use only introai9, never junjinyong, and do not maintain
+> the public site. Thirteen focused tests and the full 970-test suite pass.
+
 > **2026-08-24 release-730 figure-scope correction:** The historical
 > prediction-blind figure selector remains fixed to v4's 51-case outer split.
 > The active paper must use the new release-730 selector over exactly 73 locked

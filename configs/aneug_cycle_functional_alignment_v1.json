@@ -15,17 +15,18 @@
     "phase_weights_required": true,
     "vertex_areas_required": true,
     "reference_tawss_floor": "external_train_defined_input",
+    "osi_robust_loss": "standard_pseudo_huber_delta_squared",
     "loss_weights": "explicit_validation_development_inputs",
     "rrt_loss": false,
     "hard_posthoc_projection": false
   },
   "planned_same_backbone_rows": [
     "field_only",
-    "field_plus_tawss_and_mean_vector",
-    "field_plus_osi",
     "field_plus_all_functionals_scalarized",
     "field_anchored_all_functionals"
   ],
+  "isolated_functional_rows_omitted_for_matched_auxiliary_controls": true,
+  "kernel_still_reports_each_functional_term": true,
   "optimization_controls": {
     "scalarized": "explicit_loss_weights",
     "field_anchored": "remove_negative_functional_dot_field_component_then_norm_match",

@@ -58,6 +58,21 @@ class CycleFunctionalAlignmentTests(unittest.TestCase):
         self.assertFalse(config["authorization"]["read_real_field"])
         self.assertFalse(config["authorization"]["select_method"])
         self.assertEqual(config["authorization"]["excluded_server"], "junjinyong")
+        self.assertEqual(
+            config["planned_same_backbone_rows"],
+            [
+                "field_only",
+                "field_plus_all_functionals_scalarized",
+                "field_anchored_all_functionals",
+            ],
+        )
+        self.assertTrue(
+            config["isolated_functional_rows_omitted_for_matched_auxiliary_controls"]
+        )
+        self.assertEqual(
+            config["semantics"]["osi_robust_loss"],
+            "standard_pseudo_huber_delta_squared",
+        )
 
     def test_exact_cycle_has_zero_terms_and_finite_gradient(self) -> None:
         reference, phase_weights, areas = fixture()
@@ -154,6 +169,30 @@ class CycleFunctionalAlignmentTests(unittest.TestCase):
         )
         self.assertTrue(bool(torch.isfinite(result["mean_vector"]).item()))
         self.assertGreater(float(result["mean_vector"].item()), 0.0)
+
+    def test_osi_term_uses_standard_pseudo_huber_definition(self) -> None:
+        reference = torch.tensor(
+            [[[1.0, 0.0, 0.0]], [[-1.0, 0.0, 0.0]]], dtype=torch.float64
+        )
+        prediction = torch.tensor(
+            [[[1.0, 0.0, 0.0]], [[1.0, 0.0, 0.0]]], dtype=torch.float64
+        )
+        delta = 0.2
+        result = complete_cycle_alignment_terms(
+            prediction,
+            reference,
+            torch.ones(2, dtype=torch.float64),
+            torch.ones(1, dtype=torch.float64),
+            {"field": 0.0, "mean_vector": 0.0, "tawss": 0.0, "osi": 1.0},
+            reference_tawss_floor=0.05,
+            osi_pseudo_huber_delta=delta,
+        )
+        expected = torch.tensor(
+            delta**2 * ((1.0 + (0.5 / delta) ** 2) ** 0.5 - 1.0),
+            dtype=torch.float64,
+        )
+        torch.testing.assert_close(result["osi"], expected, atol=1e-14, rtol=0)
+        torch.testing.assert_close(result["total"], expected, atol=1e-14, rtol=0)
 
     def test_invalid_inputs_and_loss_weights_fail_closed(self) -> None:
         reference, phase_weights, areas = fixture()

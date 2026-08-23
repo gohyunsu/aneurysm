@@ -171,7 +171,7 @@ def complete_cycle_alignment_terms(
     delta = torch.as_tensor(
         osi_pseudo_huber_delta, dtype=prediction.dtype, device=prediction.device
     )
-    osi_robust_error = delta * (
+    osi_robust_error = delta.square() * (
         torch.sqrt(1.0 + (osi_difference / delta).square()) - 1.0
     )
     osi_term = torch.sum(
