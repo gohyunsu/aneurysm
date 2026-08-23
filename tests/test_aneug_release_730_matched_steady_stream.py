@@ -60,6 +60,9 @@ def synthetic_archive(rows=5, nodes=4):
 def synthetic_stream(archive, faces):
     eligible = [0, 2, 4]
     digest = hashlib.sha256("0\n2\n4".encode("utf-8")).hexdigest()
+    case_digest = hashlib.sha256(
+        "case-0\ncase-2\ncase-4".encode("utf-8")
+    ).hexdigest()
     return MatchedSteadyStream(
         archive,
         eligible,
@@ -70,6 +73,7 @@ def synthetic_stream(archive, faces):
         expected_nodes=4,
         expected_eligible_rows=3,
         expected_ordered_index_digest=digest,
+        expected_ordered_case_digest=case_digest,
     )
 
 
@@ -136,7 +140,21 @@ class MatchedSteadyStreamTests(unittest.TestCase):
                 expected_nodes=4,
                 expected_eligible_rows=3,
                 expected_ordered_index_digest="0" * 64,
+                expected_ordered_case_digest="0" * 64,
             )
+        self.assertEqual(tensor.indices, [])
+        self.assertEqual(ghd.indices, [])
+
+    def test_archive_case_order_drift_is_rejected_without_field_indexing(self):
+        archive, tensor, ghd, faces = synthetic_archive()
+        archive["case_name"][0], archive["case_name"][2] = (
+            archive["case_name"][2],
+            archive["case_name"][0],
+        )
+        with self.assertRaisesRegex(
+            MatchedSteadyStreamError, "eligible_case_order_digest"
+        ):
+            synthetic_stream(archive, faces)
         self.assertEqual(tensor.indices, [])
         self.assertEqual(ghd.indices, [])
 

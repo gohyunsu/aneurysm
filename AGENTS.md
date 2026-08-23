@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 matched steady stream provenance closure:** The lazy T+S stream
+> now validates unique archive case names plus both exact eligible-index and
+> ordered index-to-case-name digests before any steady WSS row can be indexed.
+> A negative synthetic order-drift test fails with zero tensor/GHD reads. This
+> is metadata-only implementation hardening; scope remains 13,985 rows, the
+> exposure schedule/model/result are unchanged, oracle remains first, and
+> test/79 extras stay sealed. Use only introai9, never junjinyong.
+
 > **2026-08-24 confirmatory renderer readiness:** The active release-730
 > figure protocol now fixes a loader-free renderer before T0: a
 > 7.1-by-1.85-inch two-column layout matching the manuscript's

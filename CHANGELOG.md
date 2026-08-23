@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-24 — Matched steady stream closes index/name drift
+
+- Made the lazy T+S stream validate both the eligible index digest and the
+  ordered eligible case-name digest before indexing any WSS row.
+- Added a negative metadata-only test showing that archive case-order drift
+  fails before tensor/GHD access; this changes no scope, schedule, model or
+  result.
+
 ## 2026-08-24 — Confirmatory surface renderer frozen before T0
 
 - Fixed a loader-free 7.1-by-1.85-inch layout matching the manuscript's

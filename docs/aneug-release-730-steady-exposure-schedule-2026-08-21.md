@@ -32,8 +32,9 @@ require a later version after the strongest transient control is known.
 
 ## Streaming implementation boundary
 
-`MatchedSteadyStream` validates archive shape, normalizers and the private
-eligible-index set without indexing the field tensor. During training it
+`MatchedSteadyStream` validates archive shape, unique case names, normalizers,
+the private eligible-index digest and its ordered index-to-case-name digest
+without indexing the field tensor. During training it
 decodes one scheduled row at a time from the mmap-backed archive, recomputes
 mesh-derived normals and area weights, and uses the frozen transient-train GHD
 normalizer. It never constructs `archive[eligible_indices]` or another eager

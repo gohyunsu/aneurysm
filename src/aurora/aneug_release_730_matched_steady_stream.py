@@ -107,6 +107,9 @@ class MatchedSteadyStream:
         expected_ordered_index_digest: str = (
             "292946acf8857942a68df1626ca58cf46f5260b0d64b277439b42a92d5bd4629"
         ),
+        expected_ordered_case_digest: str = (
+            "403ae3afedcbf755a1ff97e096090930b016fb8ebcfdaf5b2e7540bc6828feb7"
+        ),
     ) -> None:
         _require(isinstance(archive, Mapping), "archive")
         _require(
@@ -127,7 +130,11 @@ class MatchedSteadyStream:
             tuple(int(value) for value in ghd.shape) == (expected_rows, 432),
             "ghd_shape",
         )
-        _require(len(archive["case_name"]) == expected_rows, "case_names")
+        case_names = tuple(str(value) for value in archive["case_name"])
+        _require(
+            len(case_names) == len(set(case_names)) == expected_rows,
+            "case_names",
+        )
         normalized_indices = tuple(int(value) for value in eligible_indices)
         _require(
             len(normalized_indices) == expected_eligible_rows
@@ -140,6 +147,11 @@ class MatchedSteadyStream:
         _require(
             ordered_digest(normalized_indices) == expected_ordered_index_digest,
             "eligible_index_digest",
+        )
+        _require(
+            ordered_digest([case_names[index] for index in normalized_indices])
+            == expected_ordered_case_digest,
+            "eligible_case_order_digest",
         )
         normalizer = archive["tensor_norm"]
         decoder_mean = normalizer["mean"].detach().cpu().to(torch.float32).reshape(-1)
