@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 deterministic oracle-rank nomination:** Before response-oracle
+> values are observed, the release-730 comparison fixes at most three learned
+> R1 candidates as the minimum, lower-median and maximum positive ranks on the
+> storage-aware oracle Pareto front. Rank zero remains a reported mean-response
+> control. This is candidate nomination only, not final rank selection or a
+> global-branch decision; every rank, paired interval and Pareto set remains
+> reported. It creates no threshold, activation, result or execution authority.
+> Response oracle remains first; use only introai9, never junjinyong, and do
+> not maintain the public site.
+
 > **2026-08-24 shared single-field auxiliary interface:** Release-730
 > GHD--GPS and Transolver now expose output-equivalent `encode_geometry` and
 > `decode_cycle` paths while preserving parameter names and the exact pending

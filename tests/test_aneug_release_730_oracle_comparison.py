@@ -13,6 +13,7 @@ from aurora.aneug_release_730_oracle_comparison import (
     extract_direct_rows,
     extract_oracle_rows,
     load_config,
+    nominate_r1_candidate_ranks,
     validate_activation,
 )
 
@@ -80,6 +81,7 @@ class Release730OracleComparisonTests(unittest.TestCase):
         self.assertIsNone(config["decision"]["absolute_performance_threshold"])
         self.assertFalse(config["decision"]["automatic_rank_selection"])
         self.assertFalse(config["decision"]["automatic_global_branch_decision"])
+        self.assertEqual(config["decision"]["maximum_R1_candidate_ranks"], 3)
         self.assertFalse(config["boundary"]["execute_now"])
         self.assertFalse(config["boundary"]["locked_test_or_extra_access"])
 
@@ -100,6 +102,31 @@ class Release730OracleComparisonTests(unittest.TestCase):
         self.assertTrue(output["learned_response_validation_required"])
         self.assertEqual(output["paired_case_count"], 73)
         self.assertEqual(output["paired_unit"], "synthetic_geometry_case")
+        self.assertEqual(output["r1_candidate_rank_nomination"], [16, 64, 256])
+        self.assertFalse(output["r1_nomination_is_final_rank_selection"])
+
+    def test_nomination_spans_positive_storage_pareto_without_selecting_rank(self) -> None:
+        self.assertEqual(
+            nominate_r1_candidate_ranks(
+                [
+                    "oracle_rank_256",
+                    "oracle_rank_0",
+                    "oracle_rank_64",
+                    "oracle_rank_16",
+                    "oracle_rank_128",
+                    "oracle_rank_32",
+                ]
+            ),
+            [16, 64, 256],
+        )
+        self.assertEqual(
+            nominate_r1_candidate_ranks(["oracle_rank_0", "oracle_rank_32"]),
+            [32],
+        )
+        with self.assertRaisesRegex(
+            Release730OracleComparisonError, "nomination_duplicate"
+        ):
+            nominate_r1_candidate_ranks(["oracle_rank_16", "oracle_rank_16"])
 
     def test_storage_accounting_is_rank_specific(self) -> None:
         config = load_config(CONFIG)

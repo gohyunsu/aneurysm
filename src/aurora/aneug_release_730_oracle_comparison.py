@@ -29,6 +29,7 @@ class Release730OracleComparisonError(RuntimeError):
 
 
 RANK_GRID = (0, 16, 32, 64, 128, 256)
+R1_NOMINATION_RULE = "positive_storage_aware_pareto_min_lower_median_max"
 
 
 def _require(condition: bool, label: str) -> None:
@@ -86,6 +87,11 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and decision["report_all_ranks"] is True
         and decision["report_paired_deltas"] is True,
         "decision",
+    )
+    _require(
+        decision["R1_candidate_nomination_rule"] == R1_NOMINATION_RULE
+        and decision["maximum_R1_candidate_ranks"] == 3,
+        "nomination_rule",
     )
     boundary = config["boundary"]
     _require(
@@ -257,6 +263,28 @@ def _storage_aware_rank_pareto(
     return sorted(front, key=lambda value: int(value.split("_")[-1]))
 
 
+def nominate_r1_candidate_ranks(storage_aware_front: Sequence[str]) -> list[int]:
+    """Nominate a deterministic storage/performance span, not a final rank."""
+
+    parsed: list[int] = []
+    for label in storage_aware_front:
+        _require(
+            isinstance(label, str) and label.startswith("oracle_rank_"),
+            "nomination_label",
+        )
+        suffix = label.removeprefix("oracle_rank_")
+        _require(suffix.isdigit(), "nomination_label")
+        rank = int(suffix)
+        _require(rank in RANK_GRID, "nomination_rank")
+        parsed.append(rank)
+    _require(len(parsed) == len(set(parsed)), "nomination_duplicate")
+    positive = sorted(rank for rank in parsed if rank > 0)
+    if len(positive) <= 3:
+        return positive
+    indices = (0, (len(positive) - 1) // 2, len(positive) - 1)
+    return [positive[index] for index in indices]
+
+
 def compare_oracle_to_direct(
     direct_result: Mapping[str, Any],
     oracle_result: Mapping[str, Any],
@@ -301,6 +329,8 @@ def compare_oracle_to_direct(
         for rank in RANK_GRID
     }
     oracle_means = {label: means[label] for label in oracle}
+    storage_front = _storage_aware_rank_pareto(oracle_means, active_bytes)
+    nomination = nominate_r1_candidate_ranks(storage_front)
     return {
         "schema_version": "aurora.private.aneug_release_730_oracle_comparison_result.v1",
         "protocol_id": config["protocol_id"],
@@ -310,9 +340,10 @@ def compare_oracle_to_direct(
         "paired_oracle_minus_direct": paired,
         "metric_pareto_set": pareto_set(means),
         "active_basis_bytes_by_rank": active_bytes,
-        "storage_aware_oracle_rank_pareto_set": _storage_aware_rank_pareto(
-            oracle_means, active_bytes
-        ),
+        "storage_aware_oracle_rank_pareto_set": storage_front,
+        "r1_candidate_rank_nomination": nomination,
+        "r1_candidate_nomination_rule": R1_NOMINATION_RULE,
+        "r1_nomination_is_final_rank_selection": False,
         "automatic_rank_selection": None,
         "automatic_global_branch_decision": None,
         "absolute_performance_threshold": None,

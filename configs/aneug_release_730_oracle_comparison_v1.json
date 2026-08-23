@@ -41,6 +41,8 @@
     "report_paired_deltas": true,
     "report_metric_pareto_set": true,
     "report_storage_aware_rank_pareto_set": true,
+    "R1_candidate_nomination_rule": "positive_storage_aware_pareto_min_lower_median_max",
+    "maximum_R1_candidate_ranks": 3,
     "interpretation": "representation_ceiling_only_learned_response_validation_must_select_any_rank"
   },
   "boundary": {

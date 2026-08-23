@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Oracle rank nomination made deterministic
+
+- Fixed the pre-result R1 nomination to the minimum, lower-median and maximum
+  positive ranks on the storage-aware oracle Pareto front.
+- Kept rank zero as a reported mean-response control and retained all oracle
+  ranks, paired intervals and Pareto sets in the result.
+- Emitted no final rank selection, global-branch decision, threshold, data
+  read or execution authority.
+
 ## 2026-08-24 — Shared single-field auxiliary interface implemented
 
 - Exposed output-equivalent `encode_geometry` and `decode_cycle` paths for
