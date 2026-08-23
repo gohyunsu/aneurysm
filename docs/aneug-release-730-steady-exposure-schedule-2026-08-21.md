@@ -30,6 +30,22 @@ A steady field is never copied into 80 phases and receives no time or waveform
 token. The exact loss integration and any bounded validation-only weight search
 require a later version after the strongest transient control is known.
 
+## Streaming implementation boundary
+
+`MatchedSteadyStream` validates archive shape, normalizers and the private
+eligible-index set without indexing the field tensor. During training it
+decodes one scheduled row at a time from the mmap-backed archive, recomputes
+mesh-derived normals and area weights, and uses the frozen transient-train GHD
+normalizer. It never constructs `archive[eligible_indices]` or another eager
+13,985-row field copy. An incremental ledger emits the exact consumed-prefix
+digest required by the matched-information analyzer.
+
+The steady target has shape `nodes × 3` and uses its own area-weighted
+single-field relative objective. Reusing the transient `80 × nodes × 3` loss
+would introduce an incorrect phase-axis interpretation, so the two objectives
+are kept explicit. The eventual loss coefficient remains validation-only and
+unselected.
+
 ## Boundary
 
 This is schedule readiness, not a training activation or performance result.

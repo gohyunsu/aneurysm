@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-24 — Matched steady streaming boundary implemented
+
+- Added a model-agnostic lazy reader that decodes exactly one scheduled
+  leakage-audited steady row from the mmap-backed processed archive.
+- Added an epoch iterator and incremental prefix digest that reproduce the
+  registered 13,985-row exposure schedule without materializing a full
+  multi-epoch cohort.
+- Added a dedicated area-weighted single-field objective and tests that reject
+  ineligible rows before tensor indexing. No model, weight, activation or GPU
+  execution is selected.
+
 ## 2026-08-24 — Candidate branch units made explicit
 
 - Required an explicit positive scale for every local backbone output before

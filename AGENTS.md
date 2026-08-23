@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 matched steady streaming boundary:** Future T+S cells must use
+> `MatchedSteadyStream` (or a byte-equivalent reviewed successor) so the
+> 9.63-GB mmap archive is never advanced-indexed into a 13,985-row eager copy.
+> Construction is metadata-only; each training exposure decodes exactly one
+> eligible row, and ineligible indices fail before tensor access. Epoch order
+> and the incremental terminal digest reproduce the registered matched
+> schedule. The dedicated steady objective is a single-field area-weighted
+> relative error, never an 80-phase replication. This selects no model, loss
+> weight, rank, activation or execution; response oracle remains first, use
+> only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 candidate branch-unit correction:** The response basis is in
 > raw physical WSS coordinates, while registered comparator backbones emit a
 > train-RMS-normalized field and apply physical scaling in their evaluators.
