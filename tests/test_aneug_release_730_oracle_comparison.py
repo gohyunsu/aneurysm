@@ -73,6 +73,10 @@ class Release730OracleComparisonTests(unittest.TestCase):
     def test_config_is_threshold_free_and_sealed(self) -> None:
         config = load_config(CONFIG)
         self.assertEqual(config["split"]["validation_cases"], 73)
+        self.assertEqual(
+            config["split"]["validation_loader_order_sha256"],
+            "cceb0e475e2f0dc04ce642e29da12dfc3080eac77dfd796644aa6cad88f05a24",
+        )
         self.assertIsNone(config["decision"]["absolute_performance_threshold"])
         self.assertFalse(config["decision"]["automatic_rank_selection"])
         self.assertFalse(config["decision"]["automatic_global_branch_decision"])
@@ -119,7 +123,12 @@ class Release730OracleComparisonTests(unittest.TestCase):
             "direct_result_sha256": "1" * 64,
             "oracle_result_sha256": "2" * 64,
             "validation_case_digest": config["split"]["validation_case_digest"],
+            "validation_loader_order_sha256": config["split"][
+                "validation_loader_order_sha256"
+            ],
             "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
+            "direct_terminal_record_sha256": "3" * 64,
+            "oracle_terminal_record_sha256": "4" * 64,
             "read_locked_test_or_extra": False,
             "rank_selection": False,
             "paper_performance_claim": False,
@@ -131,6 +140,41 @@ class Release730OracleComparisonTests(unittest.TestCase):
             activation["rank_selection"] = True
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaisesRegex(Release730OracleComparisonError, "rank_selection"):
+                validate_activation(path, config, "abc")
+
+    def test_activation_rejects_missing_order_or_terminal_provenance(self) -> None:
+        config = load_config(CONFIG)
+        activation = {
+            "schema_version": "aurora.private.aneug_release_730_oracle_comparison_activation.v1",
+            "protocol_id": config["protocol_id"],
+            "public_commit": "abc",
+            "quality_conclusion": "success",
+            "direct_result_sha256": "1" * 64,
+            "oracle_result_sha256": "2" * 64,
+            "validation_case_digest": config["split"]["validation_case_digest"],
+            "validation_loader_order_sha256": config["split"][
+                "validation_loader_order_sha256"
+            ],
+            "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
+            "direct_terminal_record_sha256": "3" * 64,
+            "oracle_terminal_record_sha256": "4" * 64,
+            "read_locked_test_or_extra": False,
+            "rank_selection": False,
+            "paper_performance_claim": False,
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "activation.json"
+            changed = copy.deepcopy(activation)
+            changed.pop("validation_loader_order_sha256")
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            with self.assertRaisesRegex(Release730OracleComparisonError, "validation_order"):
+                validate_activation(path, config, "abc")
+            changed = copy.deepcopy(activation)
+            changed.pop("oracle_terminal_record_sha256")
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            with self.assertRaisesRegex(
+                Release730OracleComparisonError, "oracle_terminal_record_sha256"
+            ):
                 validate_activation(path, config, "abc")
 
     def test_rejects_sealed_or_interpretation_violations(self) -> None:

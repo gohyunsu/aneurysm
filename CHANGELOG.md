@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Oracle paired-order provenance hardened
+
+- Separated the frozen validation case-set digest from the ordered-loader
+  digest used by paired resampling.
+- Required both direct and oracle terminal-record hashes before the
+  result-pending comparison can run.
+- Added fail-closed tests for missing order and terminal provenance without
+  changing either producer, metric, result or execution scope.
+
 ## 2026-08-24 — Release-730 response prototype representation corrected
 
 - Replaced the historical v4-basis schema with the exact release-730 response

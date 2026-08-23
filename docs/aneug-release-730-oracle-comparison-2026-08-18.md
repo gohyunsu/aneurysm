@@ -8,7 +8,8 @@ schemas.
 
 The comparison accepts only the exact private Graph U-Net and response-oracle
 result roles, zero locked-test/79-extra reads, identifier-free rows, exact
-result hashes and the shared frozen validation-order digest. For each rank it
+result hashes, both terminal-record hashes and the shared frozen validation
+case-set and ordered-loader digests. For each rank it
 reports raw metric means and 10,000 paired case-resample percentile intervals
 for field rL2, TAWSS error, OSI MAE and OSI coverage. It also reports the
 metric Pareto set and a rank-only Pareto set that treats active basis storage
@@ -20,5 +21,6 @@ coefficients: a favorable result is only a representation ceiling. Every
 learned response-only rank must still earn its place through validation
 prediction, and later comparisons must include the strongest learned
 backbone. The tool remains non-executable until both exact results exist and a
-fresh private activation binds their hashes. It never reads the locked test or
+fresh private activation binds their result, terminal and ordering hashes. It
+never reads the locked test or
 processed-only extras and never publishes numeric development results.

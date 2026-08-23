@@ -54,6 +54,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
     split = config["split"]
     _require(
         split["validation_cases"] == 73
+        and split["validation_loader_order_sha256"]
+        == "cceb0e475e2f0dc04ce642e29da12dfc3080eac77dfd796644aa6cad88f05a24"
         and split["shared_loader_order_provenance_required"] is True
         and split["locked_test_read"] is False
         and split["processed_only_extra_read"] is False,
@@ -124,6 +126,11 @@ def validate_activation(
     _require(
         activation.get("validation_case_digest")
         == config["split"]["validation_case_digest"],
+        "validation_cases",
+    )
+    _require(
+        activation.get("validation_loader_order_sha256")
+        == config["split"]["validation_loader_order_sha256"],
         "validation_order",
     )
     _require(
@@ -132,6 +139,9 @@ def validate_activation(
         "split_manifest",
     )
     _require(activation.get("read_locked_test_or_extra") is False, "sealed")
+    for key in ("direct_terminal_record_sha256", "oracle_terminal_record_sha256"):
+        value = activation.get(key)
+        _require(isinstance(value, str) and len(value) == 64, key)
     _require(activation.get("rank_selection") is False, "rank_selection")
     _require(activation.get("paper_performance_claim") is False, "paper_claim")
     return activation
@@ -365,7 +375,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             "direct_result_sha256": activation["direct_result_sha256"],
             "oracle_result_sha256": activation["oracle_result_sha256"],
             "validation_case_digest": config["split"]["validation_case_digest"],
+            "validation_loader_order_sha256": config["split"][
+                "validation_loader_order_sha256"
+            ],
             "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
+            "direct_terminal_record_sha256": activation[
+                "direct_terminal_record_sha256"
+            ],
+            "oracle_terminal_record_sha256": activation[
+                "oracle_terminal_record_sha256"
+            ],
         }
     )
     _strict_atomic_json(args.output, output)

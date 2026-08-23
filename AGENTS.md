@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 oracle paired-order provenance correction:** The result-pending
+> release-730 oracle comparison now distinguishes the 73-case set digest from
+> the ordered-loader digest required by paired resampling. A fresh private
+> activation must bind both direct/oracle result hashes, both terminal-record
+> hashes, the exact split manifest and the ordered validation digest before the
+> comparison can run. This changes no producer, metric, result, rank decision,
+> execution order or sealed scope. The held response oracle remains first; use
+> only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 response-prototype representation correction:** The dormant
 > dataset-free response+residual prototype now accepts only the release-730
 > oracle basis schema and applies its mean-plus-basis reconstruction exactly.
