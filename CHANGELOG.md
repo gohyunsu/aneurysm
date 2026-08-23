@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Release-730 response prototype representation corrected
+
+- Replaced the historical v4-basis schema with the exact release-730 response
+  basis contract.
+- Removed hidden pattern renormalization and all hard tangent projections so
+  the prototype now reproduces the oracle's raw-Cartesian reconstruction.
+- Added regression tests for exact reconstruction, raw residual composition,
+  local-only routing and rejection of the historical v4 basis.
+
 ## 2026-08-24 — Response oracle submitted once and system-held
 
 - Recorded the exact one-time response-oracle submission after PBS recovery

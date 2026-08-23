@@ -2,9 +2,10 @@
 
 The global branch predicts a positive response amplitude and coefficients in a
 train-only complete-cycle basis. The local branch is supplied by an arbitrary
-geometry backbone. Both branches are decoded in physical Cartesian units and
-projected to the case-specific tangent plane. This module deliberately makes
-no rank choice, performance gate or executable experiment decision.
+geometry backbone. Both branches are decoded in the same raw physical
+Cartesian coordinates as the release-730 oracle and common evaluator. This
+module deliberately makes no rank choice, performance gate or executable
+experiment decision.
 """
 
 from __future__ import annotations
@@ -13,8 +14,6 @@ from typing import Any, Mapping
 
 import torch
 from torch import nn
-
-from aurora.aneug_processed_v4_d9 import tangent_projection
 
 
 class CycleResponseResidualError(RuntimeError):
@@ -38,14 +37,14 @@ def validate_config(config: Mapping[str, Any]) -> None:
         representation["rank_grid"] == [16, 32, 64, 128, 256]
         and representation["rank_selected"] is False
         and representation["basis_source"]
-        == "D13A_train_only_energy_normalized_complete_cycles",
+        == "release730_train_only_energy_normalized_complete_cycles",
         "representation",
     )
     branches = config["branches"]
     _require(
         branches["positive_amplitude"] == "centered_exponential"
-        and branches["global_tangent_projection"] is True
-        and branches["local_tangent_projection"] is True
+        and branches["global_tangent_projection"] is False
+        and branches["local_tangent_projection"] is False
         and branches["residual_basis_leakage"] == "reported_soft_penalty"
         and branches["hard_basis_projection"] is False,
         "branches",
@@ -53,8 +52,10 @@ def validate_config(config: Mapping[str, Any]) -> None:
     evidence = config["evidence_boundary"]
     _require(
         evidence["absolute_performance_threshold"] is None
-        and evidence["D12_terminal_required_before_selection"] is True
-        and evidence["D13A_oracle_required_before_rank_or_execution"] is True
+        and evidence["release730_graph_unet_terminal_required_before_selection"]
+        is True
+        and evidence["release730_response_oracle_required_before_rank_or_execution"]
+        is True
         and evidence["outer_or_auxiliary_access"] is False
         and evidence["paper_claim"] is False,
         "evidence_boundary",
@@ -83,14 +84,20 @@ def _basis_contract(
     _require(reference_weights.shape == (nodes,), "weight_shape")
     _require(train_scales.ndim == 1 and train_scales.numel() >= 2, "scale_shape")
     tensors = (mean, basis[:rank], reference_weights, train_scales)
-    _require(all(bool(torch.isfinite(value).all().item()) for value in tensors), "finite")
+    _require(
+        all(bool(torch.isfinite(value).all().item()) for value in tensors),
+        "finite",
+    )
     _require(bool((reference_weights > 0).all().item()), "positive_weights")
     _require(bool((train_scales > 0).all().item()), "positive_scales")
     weight_sum = float(reference_weights.to(torch.float64).sum().item())
     _require(abs(weight_sum - 1.0) < 1e-5, "normalized_weights")
     gram = basis[:rank].to(torch.float64) @ basis[:rank].to(torch.float64).T
     identity = torch.eye(rank, dtype=torch.float64, device=gram.device)
-    _require(float(torch.max(torch.abs(gram - identity)).item()) < 2e-3, "orthonormal_basis")
+    _require(
+        float(torch.max(torch.abs(gram - identity)).item()) < 2e-3,
+        "orthonormal_basis",
+    )
 
 
 def _weighted_flatten(
@@ -114,7 +121,7 @@ def _basis_leakage(
 
 
 class CycleResponseResidualDecoder(nn.Module):
-    """Decode complete-cycle basis coordinates and a tangent local residual."""
+    """Decode complete-cycle basis coordinates and a raw Cartesian residual."""
 
     def __init__(
         self,
@@ -125,8 +132,15 @@ class CycleResponseResidualDecoder(nn.Module):
         super().__init__()
         _require(
             basis_payload.get("schema_version")
-            == "aurora.aneug_processed_v4_d13a.private_basis.v1",
+            == "aurora.private.aneug_release_730_response_basis.v1",
             "basis_schema",
+        )
+        _require(
+            basis_payload.get("protocol_id")
+            == "aneug_release_730_response_oracle_v1"
+            and basis_payload.get("train_cases") == 584
+            and basis_payload.get("case_ids_included") is False,
+            "basis_scope",
         )
         phases = int(basis_payload["phases"])
         nodes = int(basis_payload["nodes"])
@@ -156,19 +170,17 @@ class CycleResponseResidualDecoder(nn.Module):
         _require(log_amplitude_offset.numel() == 1, "amplitude_shape")
         _require(normals.shape == (self.nodes, 3), "normal_shape")
         pattern = self.response_mean + self.response_basis.T @ coefficients
-        pattern = pattern / torch.clamp(torch.linalg.vector_norm(pattern), min=1e-12)
         amplitude = torch.exp(
-            torch.clamp(self.log_amplitude_center + log_amplitude_offset.reshape(()), -20, 20)
+            torch.clamp(
+                self.log_amplitude_center + log_amplitude_offset.reshape(()),
+                -20,
+                20,
+            )
         )
         factor = torch.sqrt(self.reference_weights / self.phases).reshape(
             1, self.nodes, 1
         )
         global_field = pattern.reshape(self.phases, self.nodes, 3) * amplitude / factor
-        global_field = tangent_projection(global_field, normals)
-        tangent_amplitude = torch.linalg.vector_norm(
-            _weighted_flatten(global_field, self.reference_weights)
-        )
-        global_field = global_field * amplitude / torch.clamp(tangent_amplitude, min=1e-12)
         return global_field, amplitude
 
     def forward(
@@ -189,14 +201,14 @@ class CycleResponseResidualDecoder(nn.Module):
         global_field, amplitude = self._global_field(
             coefficients, log_amplitude_offset, normals
         )
-        local_residual = tangent_projection(raw_local_residual, normals)
+        local_residual = raw_local_residual
         leakage = _basis_leakage(
             local_residual, self.response_basis, self.reference_weights
         )
         gate = torch.zeros((), dtype=global_field.dtype, device=global_field.device)
         if not response_only:
             gate = torch.sigmoid(residual_gate_logit.reshape(()))
-        field = tangent_projection(global_field + gate * local_residual, normals)
+        field = global_field + gate * local_residual
         return {
             "field": field,
             "global_field": global_field,
@@ -254,7 +266,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
             _require(self.local_backbone is not None, "local_backbone")
             local = self.local_backbone(case)
             _require("field" in local, "backbone_output")
-            field = tangent_projection(local["field"], normals)
+            field = local["field"]
             zero = field.new_zeros(())
             leakage = _basis_leakage(
                 field,

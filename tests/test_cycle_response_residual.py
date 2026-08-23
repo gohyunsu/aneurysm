@@ -24,13 +24,16 @@ def synthetic_payload(phases: int = 4, nodes: int = 5, rank: int = 3):
     matrix = torch.randn(dimension, rank, generator=generator, dtype=torch.float64)
     basis = torch.linalg.qr(matrix, mode="reduced").Q.T.to(torch.float32)
     return {
-        "schema_version": "aurora.aneug_processed_v4_d13a.private_basis.v1",
+        "schema_version": "aurora.private.aneug_release_730_response_basis.v1",
+        "protocol_id": "aneug_release_730_response_oracle_v1",
         "phases": phases,
         "nodes": nodes,
         "mean": torch.randn(dimension, generator=generator),
         "basis": basis,
         "reference_weights": torch.full((nodes,), 1.0 / nodes),
         "train_scales": torch.tensor([0.8, 1.0, 1.25]),
+        "train_cases": 584,
+        "case_ids_included": False,
     }
 
 
@@ -58,27 +61,59 @@ class CycleResponseResidualTests(unittest.TestCase):
         validate_config(config)
         self.assertIsNone(config["evidence_boundary"]["absolute_performance_threshold"])
         self.assertFalse(config["runtime_scope"]["execute_now"])
+        self.assertFalse(config["branches"]["global_tangent_projection"])
+        self.assertFalse(config["branches"]["local_tangent_projection"])
+        self.assertTrue(
+            config["evidence_boundary"][
+                "release730_graph_unet_terminal_required_before_selection"
+            ]
+        )
+        self.assertTrue(
+            config["evidence_boundary"][
+                "release730_response_oracle_required_before_rank_or_execution"
+            ]
+        )
+        self.assertEqual(
+            config["branches"]["allowed_local_backbones"],
+            [
+                "release730_GHD_conditioned_GINE_GPS_UNet",
+                "release730_same_information_Transolver_if_validation_competitive",
+            ],
+        )
+        self.assertEqual(
+            config["representation"]["basis_source"],
+            "release730_train_only_energy_normalized_complete_cycles",
+        )
 
-    def test_response_only_is_tangent_and_preserves_positive_amplitude(self):
+    def test_response_only_matches_release730_raw_cartesian_reconstruction(self):
         payload = synthetic_payload()
         decoder = CycleResponseResidualDecoder(payload, rank=3)
         normal = normals(5)
+        coefficients = torch.tensor([0.2, -0.1, 0.05])
+        log_offset = torch.tensor([0.3])
         output = decoder(
-            torch.tensor([0.2, -0.1, 0.05]),
-            torch.tensor([0.3]),
+            coefficients,
+            log_offset,
             torch.randn(4, 5, 3),
             torch.tensor([9.0]),
             normal,
             response_only=True,
         )
+        pattern = payload["mean"] + payload["basis"].T @ coefficients
+        amplitude = torch.exp(torch.log(payload["train_scales"]).mean() + log_offset[0])
+        factor = torch.sqrt(payload["reference_weights"] / 4).reshape(1, 5, 1)
+        expected = pattern.reshape(4, 5, 3) * amplitude / factor
+        torch.testing.assert_close(output["field"], expected)
         normal_component = torch.sum(output["field"] * normal.unsqueeze(0), dim=-1)
-        self.assertLess(float(normal_component.abs().max()), 2e-5)
+        self.assertGreater(float(normal_component.abs().max()), 1e-5)
         self.assertEqual(float(output["residual_gate"]), 0.0)
         self.assertGreater(float(output["amplitude"]), 0.0)
-        self.assertAlmostEqual(
-            weighted_global_amplitude(output["global_field"], decoder.reference_weights),
-            float(output["amplitude"]),
-            places=5,
+        self.assertTrue(
+            math.isfinite(
+                weighted_global_amplitude(
+                    output["global_field"], decoder.reference_weights
+                )
+            )
         )
 
     def test_residual_gate_and_leakage_are_finite(self):
@@ -86,10 +121,9 @@ class CycleResponseResidualTests(unittest.TestCase):
         decoder = CycleResponseResidualDecoder(payload, rank=3)
         normal = normals(5)
         raw = torch.randn(4, 5, 3, requires_grad=True)
-        output = decoder(
-            torch.zeros(3), torch.zeros(1), raw, torch.zeros(1), normal
-        )
+        output = decoder(torch.zeros(3), torch.zeros(1), raw, torch.zeros(1), normal)
         self.assertAlmostEqual(float(output["residual_gate"]), 0.5, places=6)
+        torch.testing.assert_close(output["field"], output["global_field"] + 0.5 * raw)
         self.assertTrue(torch.isfinite(output["residual_basis_leakage"]))
         self.assertGreaterEqual(float(output["residual_basis_leakage"]), 0.0)
         loss = output["field"].square().mean() + output["residual_basis_leakage"]
@@ -178,6 +212,7 @@ class CycleResponseResidualTests(unittest.TestCase):
         model.zero_grad(set_to_none=True)
         local = model(case, variant="local_only")
         self.assertEqual(backbone.calls, 1)
+        torch.testing.assert_close(local["field"], backbone.field)
         self.assertTrue(torch.isfinite(local["residual_basis_leakage"]))
         self.assertGreaterEqual(float(local["residual_basis_leakage"]), 0.0)
         local["field"].square().mean().backward()
@@ -190,6 +225,12 @@ class CycleResponseResidualTests(unittest.TestCase):
         payload = synthetic_payload()
         payload["basis"][1] = payload["basis"][0]
         with self.assertRaisesRegex(CycleResponseResidualError, "orthonormal_basis"):
+            CycleResponseResidualDecoder(payload, rank=3)
+
+    def test_rejects_historical_v4_basis_schema(self):
+        payload = synthetic_payload()
+        payload["schema_version"] = "aurora.aneug_processed_v4_d13a.private_basis.v1"
+        with self.assertRaisesRegex(CycleResponseResidualError, "basis_schema"):
             CycleResponseResidualDecoder(payload, rank=3)
 
     def test_selected_rank_does_not_retain_full_basis_storage(self):

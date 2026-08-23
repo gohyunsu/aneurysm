@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 response-prototype representation correction:** The dormant
+> dataset-free response+residual prototype now accepts only the release-730
+> oracle basis schema and applies its mean-plus-basis reconstruction exactly.
+> Historical v4 schema use, hidden pattern renormalization and hard tangent
+> projection were removed. Both branches and the final output remain in the
+> common raw physical Cartesian target space; normals are inputs/diagnostics,
+> not a target transformation. This selects no rank/backbone/loss, reads no
+> field, opens no GPU/test/extra scope and creates no paper claim. Response
+> oracle remains first; use only introai9 and never junjinyong.
+
 > **2026-08-24 response-oracle pre-script system hold:** PBS recovered and
 > exact response-oracle job `118333.ECE-util1` was submitted once after an
 > empty-queue and exact-input preflight. PBS attempted to dispatch that one job

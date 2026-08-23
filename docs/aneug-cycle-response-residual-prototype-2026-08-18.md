@@ -1,30 +1,33 @@
-# Complete-cycle response plus tangent-residual prototype
+# Complete-cycle response plus raw-Cartesian residual prototype
 
-This dataset-free module makes the performance-oriented D13B candidate
+This dataset-free module makes the performance-oriented release-730 candidate
 concrete without selecting or running it before direct evidence exists. It is
 not an experiment result, a rank decision or a novelty claim.
 
-The global branch predicts a positive weighted response amplitude and
-coordinates in D13A's train-only, energy-normalized complete-cycle basis. The
-decoded Cartesian cycle is projected to each geometry's tangent plane and
-rescaled to retain the predicted weighted amplitude. Separating amplitude from
-pattern prevents a large-magnitude case from dominating the response
-coordinates.
+The global branch predicts a positive weighted response scale and coordinates
+in the release-730 oracle's train-only, energy-normalized complete-cycle basis.
+It applies the oracle's reconstruction exactly: the centered mean-plus-basis
+pattern is multiplied by the predicted scale and unweighted without an extra
+pattern renormalization. Separating scale from pattern prevents a
+large-magnitude case from dominating the response coordinates.
 
-The local branch is an interchangeable complete-cycle geometry backbone. D11
-is the current candidate; D14 may replace it only if the same-information
-Transolver control is empirically competitive. A case-conditioned gate mixes
-the tangent residual with the global response. Its weighted overlap with the
-response basis is reported as a soft complementarity penalty. We deliberately
-avoid a hard projection: D9A already showed that an exact post-hoc constraint
-can move an otherwise useful field and severely damage OSI.
+The local branch is an interchangeable complete-cycle geometry backbone. The
+release-730 GHD-GPS/GINE comparator is the current candidate; Transolver may
+replace it only if the same-information control is empirically competitive. A
+case-conditioned gate mixes the raw Cartesian residual with the global
+response. Its weighted overlap with the response basis is reported as a soft
+complementarity penalty. No branch or final output is hard-projected tangent:
+the release-730 oracle and common evaluator retain the raw released Cartesian
+target, and train attribution found nonzero normal components and unreliable
+stored normals.
 
 Four later rows isolate the mechanism: response only, local backbone only,
 response plus local residual, and the same two-branch model with complete-cycle
-functional alignment. Rank and backbone remain unselected until D12 terminates
-and D13A reports every registered oracle rank. There is no absolute performance
-threshold; later comparisons use paired validation endpoints, uncertainty,
-coverage and measured compute. Outer and auxiliary values remain sealed.
+functional alignment. Rank and backbone remain unselected until the terminal
+release-730 Graph U-Net record is preserved and the response oracle reports
+every registered rank. There is no absolute performance threshold; later
+comparisons use paired validation endpoints, uncertainty, coverage and measured
+compute. Locked test and processed-only auxiliary values remain sealed.
 
 The decoder copies only the selected basis rows into independent storage.
 Consequently a rank-16 or rank-32 run does not silently retain the full
