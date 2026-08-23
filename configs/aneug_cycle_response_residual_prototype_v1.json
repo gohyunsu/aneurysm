@@ -14,6 +14,7 @@
     "positive_amplitude": "centered_exponential",
     "global_tangent_projection": false,
     "local_tangent_projection": false,
+    "local_backbone_output_space": "explicit_positive_scale_to_raw_physical_cartesian",
     "case_conditioned_residual_gate": "sigmoid_initialized_near_zero",
     "residual_basis_leakage": "reported_soft_penalty",
     "hard_basis_projection": false,

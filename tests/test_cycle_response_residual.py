@@ -69,6 +69,10 @@ class CycleResponseResidualTests(unittest.TestCase):
         self.assertFalse(config["runtime_scope"]["execute_now"])
         self.assertFalse(config["branches"]["global_tangent_projection"])
         self.assertFalse(config["branches"]["local_tangent_projection"])
+        self.assertEqual(
+            config["branches"]["local_backbone_output_space"],
+            "explicit_positive_scale_to_raw_physical_cartesian",
+        )
         self.assertTrue(
             config["evidence_boundary"][
                 "release730_graph_unet_terminal_required_before_selection"
@@ -176,7 +180,7 @@ class CycleResponseResidualTests(unittest.TestCase):
         payload = synthetic_payload()
         backbone = DummyBackbone(4, 5)
         model = GHDConditionedCycleResponseResidual(
-            backbone, payload, rank=3, width=16
+            backbone, payload, rank=3, local_output_scale=1.0, width=16
         )
         case = {"ghd": torch.randn(432), "normals": normals(5)}
         output = model(case)
@@ -190,14 +194,14 @@ class CycleResponseResidualTests(unittest.TestCase):
     def test_response_only_omits_local_backbone_compute_and_parameters(self):
         payload = synthetic_payload()
         model = GHDConditionedCycleResponseResidual(
-            None, payload, rank=3, width=16
+            None, payload, rank=3, local_output_scale=1.0, width=16
         )
         case = {"ghd": torch.randn(432), "normals": normals(5)}
         output = model(case, variant="response_only")
         self.assertEqual(float(output["residual_gate"]), 0.0)
         self.assertTrue(
             torch.equal(
-                output["raw_local_backbone_field"], torch.zeros_like(output["field"])
+                output["physical_local_backbone_field"], torch.zeros_like(output["field"])
             )
         )
         self.assertFalse(
@@ -208,7 +212,7 @@ class CycleResponseResidualTests(unittest.TestCase):
         payload = synthetic_payload()
         backbone = DummyBackbone(4, 5)
         model = GHDConditionedCycleResponseResidual(
-            backbone, payload, rank=3, width=16
+            backbone, payload, rank=3, local_output_scale=1.0, width=16
         )
         case = {"ghd": torch.randn(432), "normals": normals(5)}
         response = model(case, variant="response_only")
@@ -231,16 +235,31 @@ class CycleResponseResidualTests(unittest.TestCase):
         payload = synthetic_payload()
         backbone = TensorBackbone(4, 5)
         model = GHDConditionedCycleResponseResidual(
-            backbone, payload, rank=3, width=16
+            backbone, payload, rank=3, local_output_scale=2.5, width=16
         )
         case = {"ghd": torch.randn(432), "normals": normals(5)}
         combined = model(case, variant="response_plus_residual")
         self.assertEqual(tuple(combined["field"].shape), (4, 5, 3))
         torch.testing.assert_close(
-            combined["raw_local_backbone_field"], backbone.field
+            combined["physical_local_backbone_field"], 2.5 * backbone.field
         )
         local = model(case, variant="local_only")
-        torch.testing.assert_close(local["field"], backbone.field)
+        torch.testing.assert_close(local["field"], 2.5 * backbone.field)
+
+    def test_invalid_local_output_scale_is_rejected(self):
+        payload = synthetic_payload()
+        for value in (0.0, -1.0, float("nan"), float("inf")):
+            with self.subTest(value=value):
+                with self.assertRaisesRegex(
+                    CycleResponseResidualError, "local_output_scale"
+                ):
+                    GHDConditionedCycleResponseResidual(
+                        None,
+                        payload,
+                        rank=3,
+                        local_output_scale=value,
+                        width=16,
+                    )
 
     def test_rejects_nonorthonormal_basis(self):
         payload = synthetic_payload()

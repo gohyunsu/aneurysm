@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Candidate branch units made explicit
+
+- Required an explicit positive scale for every local backbone output before
+  combining it with the physical-space response basis.
+- Added regression coverage showing that normalized comparator output is
+  converted before both combined and local-only routing.
+- Rejected zero, negative and non-finite scales without selecting a value or
+  authorizing an experiment.
+
 ## 2026-08-24 — Candidate/comparator interface corrected
 
 - Normalized the response-residual wrapper over both tensor-returning

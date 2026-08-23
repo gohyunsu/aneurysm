@@ -1,5 +1,14 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 candidate branch-unit correction:** The response basis is in
+> raw physical WSS coordinates, while registered comparator backbones emit a
+> train-RMS-normalized field and apply physical scaling in their evaluators.
+> The dormant wrapper now requires an explicit finite positive local-output
+> scale and converts before combined or local-only routing. No scale is
+> selected, no result is read and no execution is authorized. Response oracle
+> remains first; use only introai9, never junjinyong, and do not maintain the
+> public site.
+
 > **2026-08-24 candidate/comparator interface correction:** The dormant
 > response-residual wrapper now accepts the tensor output used by both
 > registered release-730 GHD--GPS and Transolver comparators as well as the

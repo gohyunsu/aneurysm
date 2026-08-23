@@ -10,6 +10,7 @@ experiment decision.
 
 from __future__ import annotations
 
+import math
 from typing import Any, Mapping
 
 import torch
@@ -45,6 +46,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
         branches["positive_amplitude"] == "centered_exponential"
         and branches["global_tangent_projection"] is False
         and branches["local_tangent_projection"] is False
+        and branches["local_backbone_output_space"]
+        == "explicit_positive_scale_to_raw_physical_cartesian"
         and branches["residual_basis_leakage"] == "reported_soft_penalty"
         and branches["hard_basis_projection"] is False,
         "branches",
@@ -243,12 +246,22 @@ class GHDConditionedCycleResponseResidual(nn.Module):
         basis_payload: Mapping[str, Any],
         *,
         rank: int,
+        local_output_scale: float,
         width: int = 256,
     ) -> None:
         super().__init__()
         _require(width > 0, "width")
+        _require(
+            math.isfinite(float(local_output_scale))
+            and float(local_output_scale) > 0.0,
+            "local_output_scale",
+        )
         self.local_backbone = local_backbone
         self.decoder = CycleResponseResidualDecoder(basis_payload, rank=rank)
+        self.register_buffer(
+            "local_output_scale",
+            torch.tensor(float(local_output_scale), dtype=torch.float32),
+        )
         self.response_head = nn.Sequential(
             nn.LayerNorm(432),
             nn.Linear(432, width),
@@ -279,6 +292,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
         if variant == "local_only":
             _require(self.local_backbone is not None, "local_backbone")
             field = _backbone_field(self.local_backbone(case))
+            field = field * self.local_output_scale
             zero = field.new_zeros(())
             leakage = _basis_leakage(
                 field,
@@ -289,7 +303,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
                 "field": field,
                 "global_field": torch.zeros_like(field),
                 "local_residual": field,
-                "raw_local_backbone_field": field,
+                "physical_local_backbone_field": field,
                 "coefficients": field.new_zeros(self.decoder.rank),
                 "amplitude": zero,
                 "residual_gate": field.new_ones(()),
@@ -309,6 +323,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
         else:
             _require(self.local_backbone is not None, "local_backbone")
             local_field = _backbone_field(self.local_backbone(case))
+            local_field = local_field * self.local_output_scale
         decoded = self.decoder(
             coefficients,
             log_amplitude_offset,
@@ -317,7 +332,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
             normals,
             response_only=variant == "response_only",
         )
-        decoded["raw_local_backbone_field"] = local_field
+        decoded["physical_local_backbone_field"] = local_field
         return decoded
 
 
