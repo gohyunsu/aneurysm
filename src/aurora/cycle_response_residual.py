@@ -289,7 +289,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
                 "field": field,
                 "global_field": torch.zeros_like(field),
                 "local_residual": field,
-                "raw_local_backbone_field": local["field"],
+                "raw_local_backbone_field": field,
                 "coefficients": field.new_zeros(self.decoder.rank),
                 "amplitude": zero,
                 "residual_gate": field.new_ones(()),
