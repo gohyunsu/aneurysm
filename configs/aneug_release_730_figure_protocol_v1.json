@@ -26,6 +26,24 @@
     "candidate_dependent_clipping": false,
     "trace": "reference_control_proposal_same_vertex_all_80_phases"
   },
+  "render_layout": {
+    "figure_width_inches": 7.1,
+    "figure_height_inches": 1.85,
+    "paper_height_fraction": 0.235,
+    "case_columns": ["low_reference_OSI", "median_reference_OSI", "high_reference_OSI"],
+    "surface_rows": ["TAWSS", "OSI"],
+    "method_columns_within_case": ["reference", "selected_control", "proposal"],
+    "trace_row": "signed_WSS_projection_at_reference_selected_vertex",
+    "trace_direction_anchor": "reference_vector_at_reference_maximum_magnitude_phase",
+    "trace_y_limits": "full_range_across_three_selected_reference_signed_traces",
+    "trace_y_margin_fraction": 0.05,
+    "camera_azimuth_degrees": -60.0,
+    "camera_elevation_degrees": 20.0,
+    "surface_colormap": "viridis",
+    "error_or_candidate_dependent_limits": false,
+    "surface_panels_rasterized_dpi": 600,
+    "outputs": ["vector_text_pdf", "600dpi_png"]
+  },
   "boundary": {
     "execute_now": false,
     "requires_frozen_C0_checkpoints": true,

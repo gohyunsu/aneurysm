@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 confirmatory renderer readiness:** The active release-730
+> figure protocol now fixes a loader-free renderer before T0: a
+> 7.1-by-1.85-inch two-column layout matching the manuscript's
+> `0.235\textheight` slot, three reference-OSI case groups, TAWSS/OSI rows,
+> reference/control/proposal columns and one signed 80-phase trace per case.
+> The orthographic camera is numerically fixed at azimuth -60/elevation 20;
+> TAWSS limits, the common three-case trace y-axis and trace direction come only
+> from selected references, while OSI remains [0,0.5]. The code has no loader,
+> checkpoint reader, CLI or identifier
+> path. Synthetic rendering selects no case/model and does not authorize T0;
+> actual test rendering still requires frozen C0 and private activation. Use
+> only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 candidate shared-encoder correction:** Static inspection found
 > that the dormant response-residual wrapper used a separate GHD-only MLP for
 > the global branch while the local branch owned an independent mesh encoder.

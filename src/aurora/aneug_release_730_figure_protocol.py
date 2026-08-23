@@ -76,6 +76,31 @@ def validate_config(config: Mapping[str, Any]) -> None:
         == "reference_control_proposal_same_vertex_all_80_phases",
         "display",
     )
+    layout = config["render_layout"]
+    _require(
+        layout["figure_width_inches"] == 7.1
+        and layout["figure_height_inches"] == 1.85
+        and layout["paper_height_fraction"] == 0.235
+        and layout["case_columns"]
+        == ["low_reference_OSI", "median_reference_OSI", "high_reference_OSI"]
+        and layout["surface_rows"] == ["TAWSS", "OSI"]
+        and layout["method_columns_within_case"]
+        == ["reference", "selected_control", "proposal"]
+        and layout["trace_row"]
+        == "signed_WSS_projection_at_reference_selected_vertex"
+        and layout["trace_direction_anchor"]
+        == "reference_vector_at_reference_maximum_magnitude_phase"
+        and layout["trace_y_limits"]
+        == "full_range_across_three_selected_reference_signed_traces"
+        and layout["trace_y_margin_fraction"] == 0.05
+        and layout["camera_azimuth_degrees"] == -60.0
+        and layout["camera_elevation_degrees"] == 20.0
+        and layout["surface_colormap"] == "viridis"
+        and layout["error_or_candidate_dependent_limits"] is False
+        and layout["surface_panels_rasterized_dpi"] == 600
+        and layout["outputs"] == ["vector_text_pdf", "600dpi_png"],
+        "render_layout",
+    )
     boundary = config["boundary"]
     _require(
         boundary["execute_now"] is False

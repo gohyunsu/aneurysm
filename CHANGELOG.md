@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-24 — Confirmatory surface renderer frozen before T0
+
+- Fixed a loader-free 7.1-by-1.85-inch layout matching the manuscript's
+  two-column figure slot: three reference-OSI cases, TAWSS/OSI rows,
+  reference/control/proposal columns and signed 80-phase traces.
+- Bound a numeric orthographic camera, reference-only surface/trace limits and
+  trace directions; candidate/control values cannot alter selection, limits or
+  view. All three traces share one reference-derived y-axis.
+- Added a synthetic dual-format PDF/PNG smoke while keeping locked-test fields,
+  identifiers, checkpoints, execution and paper claims unavailable.
+
 ## 2026-08-24 — Candidate global/local branches now share one encoder
 
 - Replaced the active dormant candidate interface's separate GHD-only global

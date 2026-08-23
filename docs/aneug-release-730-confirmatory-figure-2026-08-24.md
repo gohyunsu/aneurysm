@@ -16,10 +16,16 @@ emitted.
 Reference, strongest control and proposal must then use the same coordinates,
 mask and canonical orthographic camera. TAWSS limits come from the full range
 of the three selected references; OSI remains fixed to [0, 0.5]. The 80-phase
-trace uses the same reference-selected vertex for all methods. Candidate or
-control values cannot affect selection or clipping.
+trace uses the same reference-selected vertex for all methods and one common
+y-axis derived from the three reference traces with a fixed five-percent
+margin. Candidate or control values cannot affect selection, limits or
+clipping.
 
 This source does not open T0, read a field, render a figure or create a paper
-claim. The actual renderer and result hashes must be bound only after frozen C0
-checkpoints and a fresh private T0 activation exist. Use only introai9, never
-junjinyong, and do not maintain the public site.
+claim. A separate loader-free renderer now fixes the paper footprint, numeric
+orthographic camera, two functional rows, three method columns per case and
+signed reference-anchored traces. Its synthetic smoke contains no case ID,
+test field or prediction-based display choice. Actual locked-test rendering and
+result hashes remain forbidden until frozen C0 checkpoints and a fresh private
+T0 activation exist. Use only introai9, never junjinyong, and do not maintain
+the public site.
