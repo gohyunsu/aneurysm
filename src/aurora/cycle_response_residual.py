@@ -120,6 +120,20 @@ def _basis_leakage(
     return torch.sum(coordinates.square()) / torch.clamp(energy, min=1e-12)
 
 
+def _backbone_field(output: Any) -> torch.Tensor:
+    """Normalize the two registered comparator output contracts."""
+
+    if isinstance(output, torch.Tensor):
+        field = output
+    elif isinstance(output, Mapping):
+        _require("field" in output, "backbone_output")
+        field = output["field"]
+    else:
+        raise CycleResponseResidualError("backbone_output")
+    _require(isinstance(field, torch.Tensor), "backbone_field")
+    return field
+
+
 class CycleResponseResidualDecoder(nn.Module):
     """Decode complete-cycle basis coordinates and a raw Cartesian residual."""
 
@@ -264,9 +278,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
         normals = case["normals"]
         if variant == "local_only":
             _require(self.local_backbone is not None, "local_backbone")
-            local = self.local_backbone(case)
-            _require("field" in local, "backbone_output")
-            field = local["field"]
+            field = _backbone_field(self.local_backbone(case))
             zero = field.new_zeros(())
             leakage = _basis_leakage(
                 field,
@@ -296,9 +308,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
             )
         else:
             _require(self.local_backbone is not None, "local_backbone")
-            local = self.local_backbone(case)
-            _require("field" in local, "backbone_output")
-            local_field = local["field"]
+            local_field = _backbone_field(self.local_backbone(case))
         decoded = self.decoder(
             coefficients,
             log_amplitude_offset,

@@ -1,5 +1,13 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 candidate/comparator interface correction:** The dormant
+> response-residual wrapper now accepts the tensor output used by both
+> registered release-730 GHD--GPS and Transolver comparators as well as the
+> mapping output used by auxiliary backbones. This corrects a pre-execution
+> smoke failure without changing the branch equation, rank, model selection,
+> loss, data scope or execution authority. Response oracle remains first; use
+> only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 oracle paired-order provenance correction:** The result-pending
 > release-730 oracle comparison now distinguishes the 73-case set digest from
 > the ordered-loader digest required by paired resampling. A fresh private

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-24 — Candidate/comparator interface corrected
+
+- Normalized the response-residual wrapper over both tensor-returning
+  release-730 comparators and mapping-returning auxiliary backbones.
+- Added a regression test covering response-plus-residual and local-only
+  routing with the exact registered comparator output style.
+- Changed no branch equation, rank, loss, data access or execution authority.
+
 ## 2026-08-24 — Oracle paired-order provenance hardened
 
 - Separated the frozen validation case-set digest from the ordered-loader

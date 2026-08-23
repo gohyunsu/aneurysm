@@ -53,6 +53,12 @@ class DummyBackbone(nn.Module):
         return {"field": self.field}
 
 
+class TensorBackbone(DummyBackbone):
+    def forward(self, case):
+        self.calls += 1
+        return self.field
+
+
 class CycleResponseResidualTests(unittest.TestCase):
     def test_config_has_no_threshold_or_execution_authority(self):
         config = json.loads(
@@ -220,6 +226,21 @@ class CycleResponseResidualTests(unittest.TestCase):
         self.assertTrue(
             all(parameter.grad is None for parameter in model.response_head.parameters())
         )
+
+    def test_registered_tensor_backbone_contract_is_supported(self):
+        payload = synthetic_payload()
+        backbone = TensorBackbone(4, 5)
+        model = GHDConditionedCycleResponseResidual(
+            backbone, payload, rank=3, width=16
+        )
+        case = {"ghd": torch.randn(432), "normals": normals(5)}
+        combined = model(case, variant="response_plus_residual")
+        self.assertEqual(tuple(combined["field"].shape), (4, 5, 3))
+        torch.testing.assert_close(
+            combined["raw_local_backbone_field"], backbone.field
+        )
+        local = model(case, variant="local_only")
+        torch.testing.assert_close(local["field"], backbone.field)
 
     def test_rejects_nonorthonormal_basis(self):
         payload = synthetic_payload()
