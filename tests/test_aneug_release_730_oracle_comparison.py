@@ -15,6 +15,8 @@ from aurora.aneug_release_730_oracle_comparison import (
     load_config,
     nominate_r1_candidate_ranks,
     validate_activation,
+    validate_direct_order_attestation,
+    validate_private_split_manifest,
 )
 
 
@@ -44,6 +46,8 @@ def direct_result() -> dict:
         "test_field_case_count_read": 0,
         "processed_only_extra_field_case_count_read": 0,
         "paper_result_or_claim": False,
+        "validation_loader_order_sha256":
+        "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
         "validation": {"per_case_without_identifiers": rows(0.0)},
     }
 
@@ -61,6 +65,8 @@ def oracle_result() -> dict:
         "learned_predictor": False,
         "rank_selected": False,
         "paper_performance_claim": False,
+        "validation_loader_order_sha256":
+        "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
         "rank_grid": list(RANK_GRID),
         "evaluation": {
             "per_case_without_identifiers_by_rank": {
@@ -76,7 +82,7 @@ class Release730OracleComparisonTests(unittest.TestCase):
         self.assertEqual(config["split"]["validation_cases"], 73)
         self.assertEqual(
             config["split"]["validation_loader_order_sha256"],
-            "cceb0e475e2f0dc04ce642e29da12dfc3080eac77dfd796644aa6cad88f05a24",
+            "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
         )
         self.assertIsNone(config["decision"]["absolute_performance_threshold"])
         self.assertFalse(config["decision"]["automatic_rank_selection"])
@@ -156,6 +162,7 @@ class Release730OracleComparisonTests(unittest.TestCase):
             "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
             "direct_terminal_record_sha256": "3" * 64,
             "oracle_terminal_record_sha256": "4" * 64,
+            "direct_order_attestation_sha256": "5" * 64,
             "read_locked_test_or_extra": False,
             "rank_selection": False,
             "paper_performance_claim": False,
@@ -185,6 +192,7 @@ class Release730OracleComparisonTests(unittest.TestCase):
             "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
             "direct_terminal_record_sha256": "3" * 64,
             "oracle_terminal_record_sha256": "4" * 64,
+            "direct_order_attestation_sha256": "5" * 64,
             "read_locked_test_or_extra": False,
             "rank_selection": False,
             "paper_performance_claim": False,
@@ -204,6 +212,47 @@ class Release730OracleComparisonTests(unittest.TestCase):
             ):
                 validate_activation(path, config, "abc")
 
+    def test_legacy_direct_order_requires_bound_attestation(self) -> None:
+        config = load_config(CONFIG)
+        legacy = direct_result()
+        legacy.pop("validation_loader_order_sha256")
+        with self.assertRaisesRegex(
+            Release730OracleComparisonError, "direct_validation_order"
+        ):
+            extract_direct_rows(legacy)
+        self.assertEqual(
+            len(extract_direct_rows(legacy, legacy_order_attested=True)), 73
+        )
+
+        activation = {
+            "direct_result_sha256": "1" * 64,
+            "direct_terminal_record_sha256": "3" * 64,
+        }
+        attestation = {
+            "schema_version": "aurora.private.aneug_release_730_direct_order_attestation.v1",
+            "direct_result_sha256": "1" * 64,
+            "direct_terminal_record_sha256": "3" * 64,
+            "producer_public_commit": "c53b5bc4d0664436de6ae916551448a613e9a4ac",
+            "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
+            "validation_case_digest": config["split"]["validation_case_digest"],
+            "validation_loader_order_sha256": config["split"]
+            ["validation_loader_order_sha256"],
+            "order_derivation": "flatten_private_validation_components_in_stored_order",
+            "case_ids_included": False,
+            "scientific_result_changed": False,
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "attestation.json"
+            path.write_text(json.dumps(attestation), encoding="utf-8")
+            validate_direct_order_attestation(path, config, activation)
+            attestation["validation_loader_order_sha256"] = "0" * 64
+            path.write_text(json.dumps(attestation), encoding="utf-8")
+            with self.assertRaisesRegex(
+                Release730OracleComparisonError,
+                "direct_order_attestation_order",
+            ):
+                validate_direct_order_attestation(path, config, activation)
+
     def test_rejects_sealed_or_interpretation_violations(self) -> None:
         changed = copy.deepcopy(direct_result())
         changed["test_field_case_count_read"] = 1
@@ -215,6 +264,43 @@ class Release730OracleComparisonTests(unittest.TestCase):
             Release730OracleComparisonError, "oracle_interpretation"
         ):
             extract_oracle_rows(changed_oracle, 16)
+
+    def test_private_manifest_recomputes_order_and_set(self) -> None:
+        import hashlib
+
+        from aurora.aneug_release_730_split import (
+            _canonical_digest,
+            _ordered_digest,
+        )
+
+        validation = [f"stable_{index:04d}" for index in range(73)]
+        manifest = {
+            "validation_components": [
+                {"case_ids": [case_id]} for case_id in validation
+            ]
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "split.json"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            config = copy.deepcopy(load_config(CONFIG))
+            config["split"]["private_manifest_sha256"] = digest
+            config["split"]["validation_case_digest"] = _canonical_digest(validation)
+            config["split"]["validation_loader_order_sha256"] = _ordered_digest(validation)
+            activation = {"private_split_manifest_sha256": digest}
+            evidence = validate_private_split_manifest(path, config, activation)
+            self.assertEqual(evidence["validation_case_count"], 73)
+            self.assertFalse(evidence["case_ids_included"])
+
+            manifest["validation_components"].reverse()
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            changed_hash = hashlib.sha256(path.read_bytes()).hexdigest()
+            config["split"]["private_manifest_sha256"] = changed_hash
+            activation["private_split_manifest_sha256"] = changed_hash
+            with self.assertRaisesRegex(
+                Release730OracleComparisonError, "validation_manifest_order"
+            ):
+                validate_private_split_manifest(path, config, activation)
 
 
 if __name__ == "__main__":

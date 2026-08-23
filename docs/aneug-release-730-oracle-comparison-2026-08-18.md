@@ -29,3 +29,12 @@ backbone. The tool remains non-executable until both exact results exist and a
 fresh private activation binds their result, terminal and ordering hashes. It
 never reads the locked test or
 processed-only extras and never publishes numeric development results.
+
+The operative ordered-loader digest is the producer-derived
+`aac001b3...d4dc30`. The earlier planned `cceb0e47...5a24` value is
+superseded before any oracle result exists. New oracle results must carry the
+operative digest natively. The completed Graph U-Net result predates native
+emission, so comparison additionally requires an identifier-free private
+attestation binding its immutable result, terminal record, producer commit,
+split manifest, case-set digest and recomputed order digest. This repairs
+provenance without editing or rerunning the completed comparator.

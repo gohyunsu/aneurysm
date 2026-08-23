@@ -1,5 +1,19 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 validation-row provenance correction:** A read-only
+> recomputation from the exact private split manifest showed that the actual
+> stored validation loader order has SHA-256 `aac001b3...d4dc30`; the earlier
+> manually registered `cceb0e47...5a24` value was not producer-derived and is
+> superseded before any response-oracle or matched-information result exists.
+> Every future producer now recomputes and emits the exact ordered digest; the
+> completed legacy Graph U-Net result is bound to an identifier-free private
+> sidecar rather than modified or rerun. The held pre-script oracle job
+> `118333.ECE-util1` points to superseded bytes and must not be released. After
+> public Quality and a fresh private activation, cancel that unstarted job and
+> submit one corrected replacement only on confirmed hook-clean A6000
+> capacity. Keep locked test/79 extras sealed, use only introai9, never
+> junjinyong, and do not maintain the public site.
+
 > **2026-08-24 functional-kernel correction:** The dataset-free OSI term now
 > uses the standard pseudo-Huber outer factor `delta^2`, not `delta`. No active
 > release-730 functional job or result existed, and train-initial term scaling

@@ -16,6 +16,7 @@ import os
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from aurora.aneug_release_730_split import _canonical_digest, _ordered_digest
 from aurora.aneug_validation_comparison import (
     CORE_METRICS,
     metric_means,
@@ -30,11 +31,22 @@ class Release730OracleComparisonError(RuntimeError):
 
 RANK_GRID = (0, 16, 32, 64, 128, 256)
 R1_NOMINATION_RULE = "positive_storage_aware_pareto_min_lower_median_max"
+VALIDATION_LOADER_ORDER_SHA256 = (
+    "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30"
+)
 
 
 def _require(condition: bool, label: str) -> None:
     if not condition:
         raise Release730OracleComparisonError(label)
+
+
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
 
 
 def file_sha256(path: str | Path, chunk_bytes: int = 8 * 1024 * 1024) -> str:
@@ -56,7 +68,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(
         split["validation_cases"] == 73
         and split["validation_loader_order_sha256"]
-        == "cceb0e475e2f0dc04ce642e29da12dfc3080eac77dfd796644aa6cad88f05a24"
+        == VALIDATION_LOADER_ORDER_SHA256
         and split["shared_loader_order_provenance_required"] is True
         and split["locked_test_read"] is False
         and split["processed_only_extra_read"] is False,
@@ -98,6 +110,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         boundary["execute_now"] is False
         and boundary["requires_direct_terminal_result"] is True
         and boundary["requires_oracle_terminal_result"] is True
+        and boundary["requires_legacy_direct_order_attestation"] is True
         and boundary["requires_fresh_private_activation"] is True
         and boundary["locked_test_or_extra_access"] is False
         and boundary["paper_performance_claim"] is False
@@ -145,12 +158,104 @@ def validate_activation(
         "split_manifest",
     )
     _require(activation.get("read_locked_test_or_extra") is False, "sealed")
-    for key in ("direct_terminal_record_sha256", "oracle_terminal_record_sha256"):
+    for key in (
+        "direct_terminal_record_sha256",
+        "oracle_terminal_record_sha256",
+        "direct_order_attestation_sha256",
+    ):
         value = activation.get(key)
-        _require(isinstance(value, str) and len(value) == 64, key)
+        _require(_is_sha256(value), key)
     _require(activation.get("rank_selection") is False, "rank_selection")
     _require(activation.get("paper_performance_claim") is False, "paper_claim")
     return activation
+
+
+def validate_direct_order_attestation(
+    path: str | Path, config: Mapping[str, Any], activation: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Validate the order sidecar for the immutable legacy Graph U-Net result."""
+
+    attestation = json.loads(Path(path).read_text(encoding="utf-8"))
+    _require(
+        attestation.get("schema_version")
+        == "aurora.private.aneug_release_730_direct_order_attestation.v1",
+        "direct_order_attestation_schema",
+    )
+    _require(
+        attestation.get("direct_result_sha256")
+        == activation["direct_result_sha256"]
+        and attestation.get("direct_terminal_record_sha256")
+        == activation["direct_terminal_record_sha256"],
+        "direct_order_attestation_result",
+    )
+    _require(
+        attestation.get("producer_public_commit")
+        == "c53b5bc4d0664436de6ae916551448a613e9a4ac"
+        and attestation.get("private_split_manifest_sha256")
+        == config["split"]["private_manifest_sha256"],
+        "direct_order_attestation_producer",
+    )
+    _require(
+        attestation.get("validation_case_digest")
+        == config["split"]["validation_case_digest"]
+        and attestation.get("validation_loader_order_sha256")
+        == config["split"]["validation_loader_order_sha256"],
+        "direct_order_attestation_order",
+    )
+    _require(
+        attestation.get("order_derivation")
+        == "flatten_private_validation_components_in_stored_order"
+        and attestation.get("case_ids_included") is False
+        and attestation.get("scientific_result_changed") is False,
+        "direct_order_attestation_scope",
+    )
+    return attestation
+
+
+def validate_private_split_manifest(
+    path: str | Path, config: Mapping[str, Any], activation: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Recompute identifier-free validation provenance from the frozen split."""
+
+    manifest_path = Path(path)
+    observed_hash = file_sha256(manifest_path)
+    _require(
+        observed_hash == config["split"]["private_manifest_sha256"]
+        and observed_hash == activation["private_split_manifest_sha256"],
+        "private_split_manifest_hash",
+    )
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    components = manifest.get("validation_components")
+    _require(isinstance(components, list), "validation_components")
+    validation_ids: list[str] = []
+    for component in components:
+        _require(isinstance(component, Mapping), "validation_component")
+        case_ids = component.get("case_ids")
+        _require(isinstance(case_ids, list) and case_ids, "validation_component_ids")
+        _require(all(isinstance(case_id, str) for case_id in case_ids), "validation_case_id")
+        validation_ids.extend(case_ids)
+    _require(
+        len(validation_ids) == config["split"]["validation_cases"]
+        and len(set(validation_ids)) == len(validation_ids),
+        "validation_manifest_count",
+    )
+    case_digest = _canonical_digest(validation_ids)
+    order_digest = _ordered_digest(validation_ids)
+    _require(
+        case_digest == config["split"]["validation_case_digest"],
+        "validation_manifest_set",
+    )
+    _require(
+        order_digest == config["split"]["validation_loader_order_sha256"],
+        "validation_manifest_order",
+    )
+    return {
+        "private_split_manifest_sha256": observed_hash,
+        "validation_case_count": len(validation_ids),
+        "validation_case_digest": case_digest,
+        "validation_loader_order_sha256": order_digest,
+        "case_ids_included": False,
+    }
 
 
 def _validate_rows(rows: Any, expected_case_count: int) -> list[dict[str, float]]:
@@ -173,7 +278,9 @@ def _validate_rows(rows: Any, expected_case_count: int) -> list[dict[str, float]
 
 
 def extract_direct_rows(
-    result: Mapping[str, Any], *, expected_case_count: int = 73
+    result: Mapping[str, Any], *, expected_case_count: int = 73,
+    expected_validation_loader_order_sha256: str = VALIDATION_LOADER_ORDER_SHA256,
+    legacy_order_attested: bool = False,
 ) -> list[dict[str, float]]:
     _require(
         result.get("schema_version")
@@ -197,6 +304,12 @@ def extract_direct_rows(
         "direct_sealed",
     )
     _require(result.get("paper_result_or_claim") is False, "direct_claim")
+    observed_order = result.get("validation_loader_order_sha256")
+    _require(
+        observed_order == expected_validation_loader_order_sha256
+        or observed_order is None and legacy_order_attested,
+        "direct_validation_order",
+    )
     validation = result.get("validation")
     _require(isinstance(validation, Mapping), "direct_validation")
     return _validate_rows(
@@ -205,7 +318,8 @@ def extract_direct_rows(
 
 
 def extract_oracle_rows(
-    result: Mapping[str, Any], rank: int, *, expected_case_count: int = 73
+    result: Mapping[str, Any], rank: int, *, expected_case_count: int = 73,
+    expected_validation_loader_order_sha256: str = VALIDATION_LOADER_ORDER_SHA256,
 ) -> list[dict[str, float]]:
     _require(
         result.get("schema_version")
@@ -230,6 +344,11 @@ def extract_oracle_rows(
         and result.get("rank_selected") is False
         and result.get("paper_performance_claim") is False,
         "oracle_interpretation",
+    )
+    _require(
+        result.get("validation_loader_order_sha256")
+        == expected_validation_loader_order_sha256,
+        "oracle_validation_order",
     )
     _require(rank in RANK_GRID and tuple(result.get("rank_grid", ())) == RANK_GRID, "rank")
     evaluation = result.get("evaluation")
@@ -292,13 +411,23 @@ def compare_oracle_to_direct(
     *,
     replicates: int | None = None,
     seed: int | None = None,
+    legacy_direct_order_attested: bool = False,
 ) -> dict[str, Any]:
     validate_config(config)
     expected = int(config["split"]["validation_cases"])
-    direct = extract_direct_rows(direct_result, expected_case_count=expected)
+    expected_order = config["split"]["validation_loader_order_sha256"]
+    direct = extract_direct_rows(
+        direct_result,
+        expected_case_count=expected,
+        expected_validation_loader_order_sha256=expected_order,
+        legacy_order_attested=legacy_direct_order_attested,
+    )
     oracle = {
         f"oracle_rank_{rank}": extract_oracle_rows(
-            oracle_result, rank, expected_case_count=expected
+            oracle_result,
+            rank,
+            expected_case_count=expected,
+            expected_validation_loader_order_sha256=expected_order,
         )
         for rank in RANK_GRID
     }
@@ -383,6 +512,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--expected-commit", required=True)
     parser.add_argument("--direct-result", type=Path, required=True)
     parser.add_argument("--oracle-result", type=Path, required=True)
+    parser.add_argument("--direct-order-attestation", type=Path, required=True)
+    parser.add_argument("--private-split-manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     config = load_config(args.config)
@@ -395,9 +526,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         file_sha256(args.oracle_result) == activation["oracle_result_sha256"],
         "oracle_result_hash",
     )
+    _require(
+        file_sha256(args.direct_order_attestation)
+        == activation["direct_order_attestation_sha256"],
+        "direct_order_attestation_hash",
+    )
+    validate_direct_order_attestation(args.direct_order_attestation, config, activation)
+    validate_private_split_manifest(args.private_split_manifest, config, activation)
     direct = json.loads(args.direct_result.read_text(encoding="utf-8"))
     oracle = json.loads(args.oracle_result.read_text(encoding="utf-8"))
-    output = compare_oracle_to_direct(direct, oracle, config)
+    output = compare_oracle_to_direct(
+        direct, oracle, config, legacy_direct_order_attested=True
+    )
     output.update(
         {
             "public_commit": args.expected_commit,
@@ -405,6 +545,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             "activation_sha256": file_sha256(args.activation),
             "direct_result_sha256": activation["direct_result_sha256"],
             "oracle_result_sha256": activation["oracle_result_sha256"],
+            "direct_order_attestation_sha256": activation[
+                "direct_order_attestation_sha256"
+            ],
             "validation_case_digest": config["split"]["validation_case_digest"],
             "validation_loader_order_sha256": config["split"][
                 "validation_loader_order_sha256"

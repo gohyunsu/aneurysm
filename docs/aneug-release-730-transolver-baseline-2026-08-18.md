@@ -26,3 +26,9 @@ diagnosed infrastructure or evidence update. This preserves one-GPU serial
 execution without turning a planning preference into an arbitrary permanent
 gate. One seed remains validation development; multi-seed confirmation and the
 locked test are separate later stages.
+
+The shared loader now verifies the producer-derived validation order
+`aac001b3...d4dc30` before field access, and the terminal result emits both
+case-set and order digests. Terminal-status writes are atomic. The prior
+activation predates this provenance correction and cannot authorize the
+corrected bytes; create a fresh activation before execution.

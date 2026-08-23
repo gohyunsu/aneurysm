@@ -133,6 +133,11 @@ def validate_config(config: Mapping[str, Any]) -> None:
         == (584, 73, 73, 79),
         "split_counts",
     )
+    _require(
+        split["validation_loader_order_sha256"]
+        == "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+        "validation_order",
+    )
     _require(split["read_train_fields"] and split["read_validation_fields"], "development_read")
     _require(
         not split["read_locked_test_fields"]
@@ -583,6 +588,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         "processed_v5_sha256": config["source"]["processed_v5_sha256"],
         "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
         "private_train_audit_sha256": config["split"]["train_audit_private_sha256"],
+        "validation_case_digest": config["split"]["validation_case_digest"],
+        "validation_loader_order_sha256": config["split"]
+        ["validation_loader_order_sha256"],
         "direct_baseline_terminal_record_sha256": activation[
             "direct_baseline_terminal_record_sha256"
         ],

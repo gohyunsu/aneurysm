@@ -96,7 +96,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and split["train_audit_public_sha256"]
         == "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587"
         and split["train_audit_private_sha256"]
-        == "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385",
+        == "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385"
+        and split["validation_loader_order_sha256"]
+        == "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
         "split_evidence",
     )
     _require(split["read_train_fields"] and split["read_validation_fields"], "development_read")
@@ -313,6 +315,11 @@ def load_development_data(
         and _ordered_digest(train_order) == config["split"]["train_loader_order_sha256"]
         and set(train_order) == set(buckets["train"]),
         "train_order",
+    )
+    _require(
+        _ordered_digest(buckets["validation"])
+        == config["split"]["validation_loader_order_sha256"],
+        "validation_order",
     )
     steady = safe_torch_load(steady_path, torch)
     transient = safe_torch_load(transient_path, torch)
@@ -714,6 +721,10 @@ def run_development(
         "validation_check_history": history,
         "train_case_count": len(train),
         "validation_case_count": len(validation),
+        "validation_case_digest": config["split"]["validation_case_digest"],
+        "validation_loader_order_sha256": config["split"]
+        ["validation_loader_order_sha256"],
+        "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
         "test_field_case_count_read": 0,
         "processed_only_extra_field_case_count_read": 0,
         "case_ids_included": False,

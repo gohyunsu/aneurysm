@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-24 — Validation-row provenance corrected before oracle execution
+
+- Recomputed the exact 73-row validation loader order from the frozen private
+  split manifest and replaced the ungrounded planned digest with
+  `aac001b3...d4dc30`.
+- Made Graph U-Net, response-oracle, GHD--GPS and Transolver producers verify
+  and emit the ordered digest; made checkpoint and terminal-status writes
+  atomic.
+- Added a hash-bound, identifier-free private attestation for the already
+  completed legacy Graph U-Net result instead of changing or rerunning it.
+- Marked the held pre-script oracle job as non-releasable because it points to
+  superseded bytes; a corrected activation and one fresh submission are
+  required after public Quality and hook-clean A6000 capacity.
+
 ## 2026-08-24 — Functional kernel and active R2 rows corrected
 
 - Corrected the OSI robust term to the standard pseudo-Huber `delta^2` outer

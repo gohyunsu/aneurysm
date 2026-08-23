@@ -25,9 +25,14 @@ eligible; it does not show that geometry contains enough information to infer
 those coefficients or the amplitude. Learned response-only, local-only and
 combined variants must still be compared on the same validation split.
 
-Execution is serialized behind the currently running direct released-class
-baseline because introai9 provides the sole authorized GPU. A fresh private
-activation must bind that job's terminal record, the Quality-passed source and
-the exact split/audit artifacts. The 73-case locked test and 79 processed-only
-extras remain sealed, the basis stays outside Git, and no numeric oracle result
-is public or entered as learned model performance.
+Execution is serialized behind the completed direct released-class baseline
+because introai9 provides the sole authorized GPU. A fresh private activation
+must bind that job's terminal record, the Quality-passed source and the exact
+split/audit artifacts. Before reading a field, the loader recomputes the
+stored 73-validation-row order as `aac001b3...d4dc30`; both the basis and
+result emit that digest, and basis/result writes are atomic. The held
+pre-script job prepared from older bytes is not releasable and must be
+replaced only after corrected readiness and hook-clean capacity. The 73-case
+locked test and 79 processed-only extras remain sealed, the basis stays
+outside Git, and no numeric oracle result is public or entered as learned
+model performance.

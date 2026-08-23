@@ -10,6 +10,7 @@ import torch
 
 from aurora.aneug_release_730_response_oracle import (
     Release730ResponseOracleError,
+    _strict_atomic_torch_save,
     fit_basis_from_matrix,
     load_config,
     validate_activation,
@@ -28,6 +29,10 @@ class Release730ResponseOracleTests(unittest.TestCase):
         config = load_config(CONFIG)
         self.assertEqual(config["split"]["train_cases"], 584)
         self.assertEqual(config["split"]["validation_cases"], 73)
+        self.assertEqual(
+            config["split"]["validation_loader_order_sha256"],
+            "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+        )
         self.assertFalse(config["split"]["read_locked_test_fields"])
         self.assertFalse(config["representation"]["hard_tangent_projection"])
         self.assertFalse(config["representation"]["hard_periodic_closure"])
@@ -85,12 +90,23 @@ class Release730ResponseOracleTests(unittest.TestCase):
             with self.assertRaises(Release730ResponseOracleError):
                 validate_activation(path, config, "abc")
 
+    def test_basis_save_is_atomic_and_loadable(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "basis.pt"
+            _strict_atomic_torch_save(path, {"basis": torch.arange(5)})
+            self.assertTrue(path.is_file())
+            self.assertFalse(path.with_name("basis.pt.tmp").exists())
+            payload = torch.load(path, weights_only=True)
+            torch.testing.assert_close(payload["basis"], torch.arange(5))
+
     def test_pbs_is_serialized_introai9_gpu_and_has_no_test_binding(self):
         script = PBS.read_text(encoding="utf-8")
         source = SOURCE.read_text(encoding="utf-8")
         self.assertIn("Qlist=a6000", script)
         self.assertIn("ngpus=1", script)
         self.assertIn("AURORA_RESPONSE_ORACLE_ACTIVATION", script)
+        self.assertIn("status_tmp", script)
+        self.assertIn('/bin/mv "$status_tmp" "$status"', script)
         self.assertNotIn("junjinyong", script)
         self.assertNotIn("test_manifest", script)
         self.assertNotIn("tangent_projection(", source)

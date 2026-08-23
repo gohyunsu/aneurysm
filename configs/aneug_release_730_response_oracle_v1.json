@@ -18,6 +18,7 @@
     "train_audit_public_sha256": "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
     "train_audit_private_sha256": "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385",
     "train_loader_order_sha256": "83d40e0579c0999fb380029d11811df835131b62e6bbd3557ad33254f22e6b8f",
+    "validation_loader_order_sha256": "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
     "train_case_digest": "a23bbda2d74d218e4e77c8e446f54a60ebbed45b906a9acb544988e8bba31aaa",
     "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
     "test_case_digest": "1f87f52fc4b819548aebcc6df77f90830d475d1e92df0ca833980347d792aa56",

@@ -66,8 +66,10 @@ reinterpret unequal compute.
 ## Boundary
 
 The kernel accepts four normalized terminal-validation cells only after they
-share both the frozen 73-case set digest and the ordered loader digest
-`cceb0e47...5a24`, as well as the exact private split hash. The distinction is
+share both the frozen 73-case set digest and the producer-derived ordered
+loader digest `aac001b3...d4dc30`, as well as the exact private split hash.
+The earlier planned `cceb0e47...5a24` value is superseded before any of these
+four cells exists. The distinction is
 essential: the set digest alone cannot prove that identifier-free rows are
 paired in the same order. It rejects incomplete cells, different steady
 eligibility or exposure provenance, identifiers, test/79-extra reads and paper

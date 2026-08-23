@@ -11,6 +11,7 @@ import torch
 from aurora.aneug_release_730_ghd_gps_baseline import (
     Release730GHDGPSError,
     Release730GHDGPSUNet,
+    _strict_atomic_torch_save,
     load_config,
     validate_activation,
     validate_config,
@@ -46,6 +47,10 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertFalse(identity["proposed_method"])
         self.assertEqual(config["split"]["train_cases"], 584)
         self.assertEqual(config["split"]["validation_cases"], 73)
+        self.assertEqual(
+            config["split"]["validation_loader_order_sha256"],
+            "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+        )
         self.assertFalse(config["split"]["read_locked_test_fields"])
         self.assertFalse(config["split"]["read_processed_only_extra_fields"])
         self.assertFalse(config["target_and_metric"]["hard_tangent_projection"])
@@ -131,12 +136,23 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             with self.assertRaises(Release730GHDGPSError):
                 validate_activation(path, config, "abc")
 
+    def test_checkpoint_save_is_atomic_and_loadable(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "checkpoint.pt"
+            _strict_atomic_torch_save(path, {"weight": torch.arange(3)})
+            self.assertTrue(path.is_file())
+            self.assertFalse(path.with_name("checkpoint.pt.tmp").exists())
+            payload = torch.load(path, weights_only=True)
+            torch.testing.assert_close(payload["weight"], torch.arange(3))
+
     def test_pbs_is_serialized_introai9_gpu_without_test_binding(self) -> None:
         script = PBS.read_text(encoding="utf-8")
         source = SOURCE.read_text(encoding="utf-8")
         self.assertIn("Qlist=a6000", script)
         self.assertIn("ngpus=1", script)
         self.assertIn("AURORA_GHD_GPS_ACTIVATION", script)
+        self.assertIn("status_tmp", script)
+        self.assertIn('/bin/mv "$status_tmp" "$status"', script)
         self.assertNotIn("junjinyong", script)
         self.assertNotIn("test_manifest", script)
         self.assertNotIn("torch_geometric", source)

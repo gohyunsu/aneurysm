@@ -79,8 +79,9 @@ def _strict_atomic_torch_save(path: str | Path, payload: Mapping[str, Any]) -> N
     temporary = target.with_name(target.name + ".tmp")
     _require(not target.exists() and not temporary.exists(), "checkpoint_exists")
     try:
-        torch.save(dict(payload), temporary)
-        with temporary.open("rb") as handle:
+        with temporary.open("xb") as handle:
+            torch.save(dict(payload), handle)
+            handle.flush()
             os.fsync(handle.fileno())
         os.replace(temporary, target)
     except Exception:
@@ -141,6 +142,11 @@ def validate_config(config: Mapping[str, Any]) -> None:
         )
         == (584, 73, 73, 79),
         "split_counts",
+    )
+    _require(
+        split["validation_loader_order_sha256"]
+        == "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+        "validation_order",
     )
     _require(split["read_train_fields"] and split["read_validation_fields"], "development_read")
     _require(
@@ -475,6 +481,11 @@ def load_development_data(
         and _ordered_digest(train_order) == config["split"]["train_loader_order_sha256"]
         and set(train_order) == set(buckets["train"]),
         "train_order",
+    )
+    _require(
+        _ordered_digest(buckets["validation"])
+        == config["split"]["validation_loader_order_sha256"],
+        "validation_order",
     )
     steady = safe_torch_load(steady_path, torch)
     transient = safe_torch_load(transient_path, torch)
@@ -823,6 +834,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         "processed_v5_sha256": config["source"]["processed_v5_sha256"],
         "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
         "private_train_audit_sha256": config["split"]["train_audit_private_sha256"],
+        "validation_case_digest": config["split"]["validation_case_digest"],
+        "validation_loader_order_sha256": config["split"]
+        ["validation_loader_order_sha256"],
         "direct_baseline_terminal_record_sha256": activation[
             "direct_baseline_terminal_record_sha256"
         ],

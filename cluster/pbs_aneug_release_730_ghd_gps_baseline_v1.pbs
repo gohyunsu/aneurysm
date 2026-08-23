@@ -34,8 +34,9 @@ mkdir -p "$run_root"
 printf '%s\n' "$run_id" > "$run_root/attempt.started"
 log="$run_root/attempt.log"
 status="$run_root/attempt.status.json"
+status_tmp="$run_root/attempt.status.json.tmp"
 exec >>"$log" 2>&1
-trap 'code=$?; trap - EXIT; printf "{\"job_id\":\"%s\",\"exit_code\":%s,\"complete\":%s}\n" "$run_id" "$code" "$(test -f "$run_root/result.json" && printf true || printf false)" > "$status"; exit "$code"' EXIT
+trap 'code=$?; trap - EXIT; printf "{\"job_id\":\"%s\",\"exit_code\":%s,\"complete\":%s}\n" "$run_id" "$code" "$(test -f "$run_root/result.json" && printf true || printf false)" > "$status_tmp"; /bin/mv "$status_tmp" "$status"; exit "$code"' EXIT
 
 activation_parent="$(/usr/bin/dirname "$AURORA_GHD_GPS_ACTIVATION")"
 activation_name="$(/usr/bin/basename "$AURORA_GHD_GPS_ACTIVATION")"

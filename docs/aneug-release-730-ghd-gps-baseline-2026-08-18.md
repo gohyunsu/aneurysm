@@ -28,3 +28,10 @@ terminal record and a fresh private activation binds that record, the
 Quality-passed source, split manifest and train audit. It is prioritized ahead
 of Transolver and all proposed-method ablations because a credible direct
 strong comparator is needed before architectural claims are meaningful.
+
+Before field access, the shared loader now recomputes the exact stored
+validation order and requires `aac001b3...d4dc30`; terminal results emit both
+case-set and ordered-loader digests. Checkpoint and terminal-status writes are
+atomic. The earlier activation predates this correction and is superseded for
+execution provenance; a fresh activation is required after the response
+oracle terminates.

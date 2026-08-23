@@ -38,6 +38,10 @@ class Release730OfficialGraphUNetTests(unittest.TestCase):
         self.assertFalse(config["comparison_identity"]["exact_end_to_end_reproduction"])
         self.assertEqual(config["split"]["train_cases"], 584)
         self.assertEqual(config["split"]["validation_cases"], 73)
+        self.assertEqual(
+            config["split"]["validation_loader_order_sha256"],
+            "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+        )
         self.assertFalse(config["split"]["read_test_fields"])
         self.assertFalse(config["target_and_metric"]["hard_tangent_projection"])
         self.assertIsNone(config["decision_rule"]["absolute_performance_threshold"])

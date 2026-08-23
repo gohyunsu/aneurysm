@@ -101,7 +101,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and split["private_manifest_sha256"]
         == "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f"
         and split["validation_loader_order_sha256"]
-        == "cceb0e475e2f0dc04ce642e29da12dfc3080eac77dfd796644aa6cad88f05a24"
+        == "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30"
         and split["shared_loader_order_required"] is True,
         "split",
     )
