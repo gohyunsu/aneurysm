@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-24 — Five-seed matched-information confirmation contract
+
+- Added a result-pending confirmation protocol for five prospectively frozen
+  fresh seeds across the complete selected-control/proposal by T/T+S factorial.
+- Added crossed training-seed/geometry-case bootstrap reporting, per-seed
+  deltas and favorable-sign counts without a threshold, winner, novelty
+  conclusion, test authorization or locked-test/extra access.
+- Kept the single-seed factorial as development attribution and made the later
+  one-time locked-test evaluation explicitly conditional on freezing all five
+  confirmatory checkpoints and analysis artifacts.
+
 ## 2026-08-24 — Matched steady stream closes index/name drift
 
 - Made the lazy T+S stream validate both the eligible index digest and the

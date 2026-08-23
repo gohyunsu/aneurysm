@@ -32,8 +32,13 @@ authorized introai9 GPU.
    single-seed rows for matched control/proposal T+M auxiliary-path controls;
    T+S then changes steady information rather than silently adding a head and
    second geometry pass only to the proposal.
-7. Freeze the candidate, seeds, checkpoint rule, endpoints, paired analysis
-   and prediction-blind figure cases before opening the 73-case test once.
+7. Retrain the selected control/proposal T/T+S factorial with the five
+   prospectively fixed fresh seeds `20260901`--`20260905`. Report every seed
+   and crossed seed/case uncertainty without a favorable-seed threshold or
+   automatic test gate.
+8. Freeze the candidate, five checkpoints per model/information cell,
+   checkpoint rule, endpoints, paired analysis and prediction-blind figure
+   cases before opening the 73-case test once as one batched scope event.
 
 ## Historical or stopped
 

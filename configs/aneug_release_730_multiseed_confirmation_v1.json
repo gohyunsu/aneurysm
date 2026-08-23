@@ -1,0 +1,67 @@
+{
+  "schema_version": "aurora.aneug_release_730_multiseed_confirmation.v1",
+  "protocol_id": "aneug_release_730_multiseed_confirmation_v1",
+  "status": "prepared_result_pending",
+  "as_of": "2026-08-24",
+  "source": {
+    "matched_information_protocol_id": "aneug_release_730_matched_information_analysis_v1",
+    "matched_information_config_sha256": "782a43384a3b12c56d9cca8335ee249eea2d0751250e2e6a88c0008b31fd036b"
+  },
+  "scope": {
+    "validation_cases": 73,
+    "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
+    "validation_loader_order_sha256": "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+    "fresh_training_seeds": [20260901, 20260902, 20260903, 20260904, 20260905],
+    "seed_count": 5,
+    "cells_per_seed": ["control_T", "control_TS", "proposal_T", "proposal_TS"],
+    "locked_test_read": false,
+    "processed_only_extra_read": false
+  },
+  "analysis": {
+    "metrics": [
+      "field_relative_l2",
+      "mean_wss_vector_error",
+      "tawss_normalized_absolute_error",
+      "osi_mae",
+      "osi_coverage"
+    ],
+    "contrasts": [
+      "proposal_minus_control_T",
+      "proposal_minus_control_TS",
+      "steady_minus_transient_control",
+      "steady_minus_transient_proposal",
+      "method_by_steady_interaction"
+    ],
+    "point_estimand": "mean_over_five_training_seeds_and_73_paired_synthetic_geometry_cases",
+    "report_per_seed_deltas": true,
+    "report_favorable_seed_count": true,
+    "minimum_favorable_seed_count": null
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 20260824,
+    "resampling": "crossed_training_seed_and_geometry_case_with_replacement",
+    "interval": "percentile_95pct",
+    "population_inference": false
+  },
+  "decision": {
+    "absolute_performance_threshold": null,
+    "automatic_winner": false,
+    "automatic_novelty_conclusion": false,
+    "automatic_test_authorization": false,
+    "interpretation": "five_seed_validation_consistency_before_frozen_one_time_test_batch"
+  },
+  "boundary": {
+    "execute_now": false,
+    "requires_selected_control_and_candidate": true,
+    "requires_twenty_terminal_validation_cells": true,
+    "requires_fresh_private_activation": true,
+    "validation_development_only": true,
+    "locked_test_or_extra_access": false,
+    "paper_performance_claim": false,
+    "publish_numeric_result": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "maintain_public_site": false
+  }
+}

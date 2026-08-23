@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 five-seed matched-information confirmation:** The single-seed
+> T/T+S factorial remains development attribution, not headline evidence. Once
+> validation selects the strongest control and candidate, twenty terminal
+> validation cells must cover the full factorial at prospectively fixed fresh
+> seeds `20260901`--`20260905`. The new analyzer reports per-seed effects,
+> favorable-sign counts and a crossed seed/case bootstrap, but fixes no
+> favorable-seed threshold, winner, novelty conclusion or automatic test
+> authorization. It rejects seed/protocol drift and all test/79-extra access.
+> The locked test remains one later batched scope event after all five
+> checkpoints and analysis rules are frozen. Response oracle remains first;
+> use only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 matched steady stream provenance closure:** The lazy T+S stream
 > now validates unique archive case names plus both exact eligible-index and
 > ordered index-to-case-name digests before any steady WSS row can be indexed.
