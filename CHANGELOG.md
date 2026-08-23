@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-24 — Shared single-field auxiliary interface implemented
+
+- Exposed output-equivalent `encode_geometry` and `decode_cycle` paths for
+  both release-730 GHD--GPS and Transolver without changing parameter keys or
+  the registered transient-only execution checkouts.
+- Added one shared-encoder single-field head used identically by future T+M
+  and T+S cells, plus explicit train-only cycle-mean and lazy-steady adapters.
+- Kept target scaling explicit and positive and selected no backbone, loss
+  coefficient, activation or execution.
+
 ## 2026-08-24 — Matched steady streaming boundary implemented
 
 - Added a model-agnostic lazy reader that decodes exactly one scheduled

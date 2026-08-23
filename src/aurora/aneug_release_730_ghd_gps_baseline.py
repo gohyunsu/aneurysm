@@ -267,6 +267,7 @@ class Release730GHDGPSUNet(nn.Module):
     ) -> None:
         super().__init__()
         _require(width % heads == 0, "attention_width")
+        self.encoded_width = int(width)
         for name in (
             "edge0",
             "edge1",
@@ -322,7 +323,9 @@ class Release730GHDGPSUNet(nn.Module):
         scale, shift = self.film[level](condition).chunk(2, dim=-1)
         return features * (1.0 + 0.25 * torch.tanh(scale)) + shift
 
-    def forward(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+    def encode_geometry(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+        """Return the shared per-node representation before the cycle head."""
+
         positions0 = case["coordinates"]
         normals0 = case["normals"]
         weights = case["vertex_weights"]
@@ -371,8 +374,20 @@ class Release730GHDGPSUNet(nn.Module):
         features0 = self._apply_blocks(
             self.fine_decoder, features0, positions0, normals0, self.edge0
         )
-        output = self.output(features0).reshape(features0.shape[0], 80, 3)
+        return features0
+
+    def decode_cycle(self, features: torch.Tensor) -> torch.Tensor:
+        """Decode a normalized complete-cycle field from shared features."""
+
+        _require(
+            features.ndim == 2 and features.shape[1] == self.encoded_width,
+            "encoded_features",
+        )
+        output = self.output(features).reshape(features.shape[0], 80, 3)
         return output.permute(1, 0, 2).contiguous()
+
+    def forward(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+        return self.decode_cycle(self.encode_geometry(case))
 
 
 def _case_from_record(

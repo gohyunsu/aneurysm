@@ -95,6 +95,8 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             "ghd": torch.zeros(432),
         }
         field = model(case)
+        split_field = model.decode_cycle(model.encode_geometry(case))
+        torch.testing.assert_close(split_field, field, rtol=0.0, atol=0.0)
         self.assertEqual(tuple(field.shape), (80, 4, 3))
         self.assertTrue(bool(torch.isfinite(field).all().item()))
         self.assertGreater(float(field[..., 2].abs().mean().item()), 0.5)

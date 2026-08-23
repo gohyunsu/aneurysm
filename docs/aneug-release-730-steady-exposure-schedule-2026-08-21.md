@@ -46,6 +46,16 @@ would introduce an incorrect phase-axis interpretation, so the two objectives
 are kept explicit. The eventual loss coefficient remains validation-only and
 unselected.
 
+The same single-field interface also supports the prospectively registered
+T+M development control. T+M makes a second geometry pass over a training
+transient case and uses its 80-phase mean vector WSS as the `nodes × 3` target.
+Both registered comparator classes expose output-equivalent
+`encode_geometry`/`decode_cycle` methods, and `SharedEncoderSingleFieldAdapter`
+attaches the common auxiliary head. T+M and T+S therefore differ in auxiliary
+information rather than in head shape or the existence of a second encoder
+pass. T+M is a single-seed attribution control, not a confirmatory information
+factor or a causal steady-label-only estimate.
+
 ## Boundary
 
 This is schedule readiness, not a training activation or performance result.

@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 shared single-field auxiliary interface:** Release-730
+> GHD--GPS and Transolver now expose output-equivalent `encode_geometry` and
+> `decode_cycle` paths while preserving parameter names and the exact pending
+> comparator checkouts. Future T+M and T+S development must attach the same
+> `SharedEncoderSingleFieldAdapter` within a model role. T+M derives a
+> train-only cycle-mean vector target; T+S adapts exactly one lazy steady row.
+> Both targets use explicit positive train-only scaling and a `nodes x 3`
+> head, never an 80-phase clone. This selects no backbone, loss weight,
+> activation or run; response oracle remains first, use only introai9, never
+> junjinyong, and do not maintain the public site.
+
 > **2026-08-24 matched steady streaming boundary:** Future T+S cells must use
 > `MatchedSteadyStream` (or a byte-equivalent reviewed successor) so the
 > 9.63-GB mmap archive is never advanced-indexed into a 13,985-row eager copy.

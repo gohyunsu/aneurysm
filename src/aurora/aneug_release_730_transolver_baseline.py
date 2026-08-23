@@ -273,7 +273,13 @@ def validate_activation(
 class Release730FullCycleTransolver(FullCycleTransolver):
     """Transolver adaptation that preserves the released Cartesian target."""
 
-    def forward(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+    def __init__(self, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+        self.encoded_width = int(self.output.in_features)
+
+    def encode_geometry(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+        """Return the shared per-node representation before the cycle head."""
+
         coordinates = case["coordinates"]
         normals = case["normals"]
         weights = case["vertex_weights"]
@@ -289,9 +295,21 @@ class Release730FullCycleTransolver(FullCycleTransolver):
         features = features + condition.unsqueeze(0)
         for block in self.blocks:
             features = block(features)
+        return features
+
+    def decode_cycle(self, features: torch.Tensor) -> torch.Tensor:
+        """Decode a normalized complete-cycle field from shared features."""
+
+        _require(
+            features.ndim == 2 and features.shape[1] == self.encoded_width,
+            "encoded_features",
+        )
         raw = self.output(self.output_norm(features))
         raw = raw.reshape(features.shape[0], self.output_phases, 3)
         return raw.permute(1, 0, 2).contiguous()
+
+    def forward(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+        return self.decode_cycle(self.encode_geometry(case))
 
 
 def _to_device(
