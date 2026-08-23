@@ -53,8 +53,10 @@ Both registered comparator classes expose output-equivalent
 `encode_geometry`/`decode_cycle` methods, and `SharedEncoderSingleFieldAdapter`
 attaches the common auxiliary head. T+M and T+S therefore differ in auxiliary
 information rather than in head shape or the existence of a second encoder
-pass. T+M is a single-seed attribution control, not a confirmatory information
-factor or a causal steady-label-only estimate.
+pass. The active response-residual candidate embeds the same exact head class;
+its global response and local cycle decoder also consume one common geometry
+encoding. T+M is a single-seed attribution control, not a confirmatory
+information factor or a causal steady-label-only estimate.
 
 ## Boundary
 

@@ -81,8 +81,30 @@ def scaled_single_field_target(
     return target / float(target_scale)
 
 
+class SharedEncoderSingleFieldHead(nn.Module):
+    """The common normalized vector-field head used by every T+M/T+S cell."""
+
+    def __init__(self, width: int) -> None:
+        super().__init__()
+        _require(int(width) > 0, "encoded_width")
+        self.encoded_width = int(width)
+        self.network = nn.Sequential(
+            nn.LayerNorm(self.encoded_width),
+            nn.Linear(self.encoded_width, self.encoded_width),
+            nn.SiLU(),
+            nn.Linear(self.encoded_width, 3),
+        )
+
+    def forward(self, features: torch.Tensor) -> torch.Tensor:
+        _require(
+            features.ndim == 2 and features.shape[1] == self.encoded_width,
+            "encoded_features",
+        )
+        return self.network(features)
+
+
 class SharedEncoderSingleFieldAdapter(nn.Module):
-    """Attach one normalized vector-field head to a complete-cycle backbone."""
+    """Attach the common normalized vector-field head to a cycle backbone."""
 
     def __init__(self, backbone: nn.Module) -> None:
         super().__init__()
@@ -91,12 +113,7 @@ class SharedEncoderSingleFieldAdapter(nn.Module):
         width = int(getattr(backbone, "encoded_width", 0))
         _require(width > 0, "encoded_width")
         self.backbone = backbone
-        self.single_field_head = nn.Sequential(
-            nn.LayerNorm(width),
-            nn.Linear(width, width),
-            nn.SiLU(),
-            nn.Linear(width, 3),
-        )
+        self.single_field_head = SharedEncoderSingleFieldHead(width)
 
     def forward(
         self, case: Mapping[str, torch.Tensor], *, mode: str

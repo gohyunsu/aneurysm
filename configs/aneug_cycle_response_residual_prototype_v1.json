@@ -1,14 +1,22 @@
 {
   "schema_version": "aurora.cycle_response_residual_prototype.v1",
   "status": "dataset_free_prototype",
-  "as_of": "2026-08-18",
-  "purpose": "verify_release730_global_complete_cycle_response_plus_local_raw_cartesian_residual_building_blocks_before_architecture_selection",
+  "as_of": "2026-08-24",
+  "purpose": "verify_release730_shared_encoder_global_complete_cycle_response_plus_local_raw_cartesian_residual_building_blocks_before_architecture_selection",
   "representation": {
     "basis_source": "release730_train_only_energy_normalized_complete_cycles",
     "rank_grid": [16, 32, 64, 128, 256],
     "rank_selected": false,
-    "coefficient_input": "432_dimensional_GHD_geometry_token",
+    "coefficient_input": "area_weighted_pool_of_shared_GHD_conditioned_node_features",
     "amplitude_pattern_separation": true
+  },
+  "shared_encoder_contract": {
+    "active_candidate": "SharedEncoderCycleResponseResidual",
+    "one_geometry_encoder_pass_per_cycle_case": true,
+    "global_token": "area_weighted_pool_of_GHD_conditioned_node_features",
+    "local_decoder_input": "the_same_GHD_conditioned_node_features",
+    "separate_GHD_only_global_encoder": false,
+    "common_single_field_head_for_T_plus_M_and_T_plus_S": true
   },
   "branches": {
     "positive_amplitude": "centered_exponential",
@@ -25,7 +33,7 @@
   },
   "controlled_variants_after_evidence": [
     "response_only",
-    "local_backbone_only",
+    "local_only",
     "response_plus_local_residual",
     "response_plus_local_residual_plus_functional_alignment"
   ],

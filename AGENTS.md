@@ -1,5 +1,20 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 candidate shared-encoder correction:** Static inspection found
+> that the dormant response-residual wrapper used a separate GHD-only MLP for
+> the global branch while the local branch owned an independent mesh encoder.
+> That would confound the planned response/local ablation and contradict the
+> manuscript's shared-encoder description. The active candidate interface is
+> now `SharedEncoderCycleResponseResidual`: one GHD-conditioned geometry
+> encoder produces per-node features, their area-weighted pool drives the
+> response coefficients/amplitude/gate, and the same features drive the local
+> cycle decoder. Response-only skips only the local decoder; local-only skips
+> only the response head. T+M and T+S reuse the exact common single-field head
+> class. This pre-result correction selects no backbone, rank, loss or run and
+> does not invalidate queued response-oracle job `118376.ECE-util1`, which is
+> bound to its earlier exact oracle-only source. Keep test/79 extras sealed,
+> use only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 validation-row provenance correction:** A read-only
 > recomputation from the exact private split manifest showed that the actual
 > stored validation loader order has SHA-256 `aac001b3...d4dc30`; the earlier

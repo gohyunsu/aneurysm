@@ -10,8 +10,12 @@ from aurora.cycle_response_residual import (
     CycleResponseResidualDecoder,
     CycleResponseResidualError,
     GHDConditionedCycleResponseResidual,
+    SharedEncoderCycleResponseResidual,
     validate_config,
     weighted_global_amplitude,
+)
+from aurora.aneug_release_730_single_field_auxiliary import (
+    SharedEncoderSingleFieldHead,
 )
 
 
@@ -59,6 +63,38 @@ class TensorBackbone(DummyBackbone):
         return self.field
 
 
+class SharedBackbone(nn.Module):
+    encoded_width = 8
+
+    def __init__(self, phases: int, nodes: int):
+        super().__init__()
+        self.phases = phases
+        self.nodes = nodes
+        self.encoder = nn.Linear(7, self.encoded_width)
+        self.cycle = nn.Linear(self.encoded_width, phases * 3)
+        self.encoder_calls = 0
+        self.decoder_calls = 0
+
+    def encode_geometry(self, case):
+        self.encoder_calls += 1
+        return self.encoder(case["node_features"])
+
+    def decode_cycle(self, features):
+        self.decoder_calls += 1
+        value = self.cycle(features).reshape(self.nodes, self.phases, 3)
+        return value.permute(1, 0, 2).contiguous()
+
+
+def shared_case(nodes: int = 5):
+    generator = torch.Generator().manual_seed(29)
+    return {
+        "node_features": torch.randn(nodes, 7, generator=generator),
+        "vertex_weights": torch.arange(1, nodes + 1, dtype=torch.float32),
+        "normals": normals(nodes),
+        "ghd": torch.randn(432, generator=generator),
+    }
+
+
 class CycleResponseResidualTests(unittest.TestCase):
     def test_config_has_no_threshold_or_execution_authority(self):
         config = json.loads(
@@ -93,6 +129,13 @@ class CycleResponseResidualTests(unittest.TestCase):
         self.assertEqual(
             config["representation"]["basis_source"],
             "release730_train_only_energy_normalized_complete_cycles",
+        )
+        self.assertEqual(
+            config["shared_encoder_contract"]["active_candidate"],
+            "SharedEncoderCycleResponseResidual",
+        )
+        self.assertFalse(
+            config["shared_encoder_contract"]["separate_GHD_only_global_encoder"]
         )
 
     def test_response_only_matches_release730_raw_cartesian_reconstruction(self):
@@ -245,6 +288,85 @@ class CycleResponseResidualTests(unittest.TestCase):
         )
         local = model(case, variant="local_only")
         torch.testing.assert_close(local["field"], 2.5 * backbone.field)
+
+    def test_shared_candidate_uses_one_encoder_pass_and_skips_unused_decoder(self):
+        payload = synthetic_payload()
+        backbone = SharedBackbone(4, 5)
+        model = SharedEncoderCycleResponseResidual(
+            backbone, payload, rank=3, local_output_scale=2.0
+        )
+        self.assertEqual(tuple(model.response_head[0].normalized_shape), (8,))
+        case = shared_case()
+
+        response = model(case, variant="response_only")
+        self.assertEqual(backbone.encoder_calls, 1)
+        self.assertEqual(backbone.decoder_calls, 0)
+        self.assertEqual(tuple(response["field"].shape), (4, 5, 3))
+
+        local = model(case, variant="local_only")
+        self.assertEqual(backbone.encoder_calls, 2)
+        self.assertEqual(backbone.decoder_calls, 1)
+        self.assertEqual(float(local["residual_gate"]), 1.0)
+
+        combined = model(case)
+        self.assertEqual(backbone.encoder_calls, 3)
+        self.assertEqual(backbone.decoder_calls, 2)
+        self.assertEqual(tuple(combined["field"].shape), (4, 5, 3))
+
+    def test_shared_candidate_global_token_is_area_weighted_node_pool(self):
+        payload = synthetic_payload()
+        backbone = SharedBackbone(4, 5)
+        model = SharedEncoderCycleResponseResidual(
+            backbone, payload, rank=3, local_output_scale=1.0
+        )
+        case = shared_case()
+        features, pooled = model._encode_and_pool(case)
+        normalized = case["vertex_weights"] / case["vertex_weights"].sum()
+        torch.testing.assert_close(
+            pooled, torch.sum(features * normalized.unsqueeze(-1), dim=0)
+        )
+        self.assertEqual(backbone.encoder_calls, 1)
+        self.assertEqual(backbone.decoder_calls, 0)
+
+    def test_shared_candidate_routes_both_cycle_branches_to_one_encoder(self):
+        payload = synthetic_payload()
+        backbone = SharedBackbone(4, 5)
+        model = SharedEncoderCycleResponseResidual(
+            backbone, payload, rank=3, local_output_scale=1.0
+        )
+        output = model(shared_case())
+        loss = output["field"].square().mean() + output["residual_basis_leakage"]
+        loss.backward()
+        self.assertEqual(backbone.encoder_calls, 1)
+        self.assertEqual(backbone.decoder_calls, 1)
+        self.assertTrue(torch.isfinite(backbone.encoder.weight.grad).all())
+        self.assertTrue(torch.isfinite(backbone.cycle.weight.grad).all())
+        self.assertTrue(
+            all(
+                parameter.grad is not None and torch.isfinite(parameter.grad).all()
+                for parameter in model.response_head.parameters()
+            )
+        )
+
+    def test_shared_candidate_reuses_exact_auxiliary_head_class(self):
+        payload = synthetic_payload()
+        backbone = SharedBackbone(4, 5)
+        model = SharedEncoderCycleResponseResidual(
+            backbone, payload, rank=3, local_output_scale=1.0
+        )
+        self.assertIsInstance(model.single_field_head, SharedEncoderSingleFieldHead)
+        output = model.forward_single_field(shared_case())
+        self.assertEqual(backbone.encoder_calls, 1)
+        self.assertEqual(backbone.decoder_calls, 0)
+        self.assertEqual(tuple(output.shape), (5, 3))
+        output.square().mean().backward()
+        self.assertTrue(torch.isfinite(backbone.encoder.weight.grad).all())
+        self.assertTrue(
+            all(
+                parameter.grad is not None and torch.isfinite(parameter.grad).all()
+                for parameter in model.single_field_head.parameters()
+            )
+        )
 
     def test_invalid_local_output_scale_is_rejected(self):
         payload = synthetic_payload()

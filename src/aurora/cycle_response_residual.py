@@ -16,6 +16,10 @@ from typing import Any, Mapping
 import torch
 from torch import nn
 
+from aurora.aneug_release_730_single_field_auxiliary import (
+    SharedEncoderSingleFieldHead,
+)
+
 
 class CycleResponseResidualError(RuntimeError):
     """Raised when a response basis or decoder input violates its contract."""
@@ -51,6 +55,20 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and branches["residual_basis_leakage"] == "reported_soft_penalty"
         and branches["hard_basis_projection"] is False,
         "branches",
+    )
+    shared_encoder = config["shared_encoder_contract"]
+    _require(
+        shared_encoder["active_candidate"]
+        == "SharedEncoderCycleResponseResidual"
+        and shared_encoder["one_geometry_encoder_pass_per_cycle_case"] is True
+        and shared_encoder["global_token"]
+        == "area_weighted_pool_of_GHD_conditioned_node_features"
+        and shared_encoder["local_decoder_input"]
+        == "the_same_GHD_conditioned_node_features"
+        and shared_encoder["separate_GHD_only_global_encoder"] is False
+        and shared_encoder["common_single_field_head_for_T_plus_M_and_T_plus_S"]
+        is True,
+        "shared_encoder_contract",
     )
     evidence = config["evidence_boundary"]
     _require(
@@ -238,7 +256,7 @@ class CycleResponseResidualDecoder(nn.Module):
 
 
 class GHDConditionedCycleResponseResidual(nn.Module):
-    """Attach a response head to a complete-cycle local geometry backbone."""
+    """Historical separate-encoder prototype retained for provenance tests."""
 
     def __init__(
         self,
@@ -334,6 +352,154 @@ class GHDConditionedCycleResponseResidual(nn.Module):
         )
         decoded["physical_local_backbone_field"] = local_field
         return decoded
+
+
+class SharedEncoderCycleResponseResidual(nn.Module):
+    """Decode global response and local residual from one geometry encoding.
+
+    The response token is an area-weighted pooling of the same GHD-conditioned
+    per-node features consumed by the local cycle decoder.  Consequently, the
+    response-only, local-only and combined variants change only their decoder
+    branch, rather than changing the geometry information or encoder family.
+    The optional single-field path reuses this encoder and the exact common
+    auxiliary-head class used by matched T+M and T+S controls.
+    """
+
+    def __init__(
+        self,
+        backbone: nn.Module,
+        basis_payload: Mapping[str, Any],
+        *,
+        rank: int,
+        local_output_scale: float,
+    ) -> None:
+        super().__init__()
+        _require(callable(getattr(backbone, "encode_geometry", None)), "encoder")
+        _require(callable(getattr(backbone, "decode_cycle", None)), "cycle_decoder")
+        encoded_width = int(getattr(backbone, "encoded_width", 0))
+        _require(encoded_width > 0, "encoded_width")
+        _require(
+            math.isfinite(float(local_output_scale))
+            and float(local_output_scale) > 0.0,
+            "local_output_scale",
+        )
+        self.backbone = backbone
+        self.encoded_width = encoded_width
+        self.decoder = CycleResponseResidualDecoder(basis_payload, rank=rank)
+        self.register_buffer(
+            "local_output_scale",
+            torch.tensor(float(local_output_scale), dtype=torch.float32),
+        )
+        self.response_head = nn.Sequential(
+            nn.LayerNorm(encoded_width),
+            nn.Linear(encoded_width, encoded_width),
+            nn.SiLU(),
+            nn.Linear(encoded_width, rank + 2),
+        )
+        self.single_field_head = SharedEncoderSingleFieldHead(encoded_width)
+        final = self.response_head[-1]
+        _require(isinstance(final, nn.Linear), "head")
+        nn.init.zeros_(final.weight)
+        nn.init.zeros_(final.bias)
+        with torch.no_grad():
+            final.bias[-1] = -2.0
+
+    def _encode_and_pool(
+        self, case: Mapping[str, torch.Tensor]
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        _require("vertex_weights" in case and "normals" in case, "case_features")
+        features = self.backbone.encode_geometry(case)
+        _require(
+            features.ndim == 2
+            and features.shape[0] == self.decoder.nodes
+            and features.shape[1] == self.encoded_width,
+            "encoded_features",
+        )
+        weights = case["vertex_weights"]
+        normals = case["normals"]
+        _require(
+            weights.shape == (self.decoder.nodes,)
+            and bool(torch.isfinite(weights).all().item())
+            and bool((weights > 0).all().item()),
+            "vertex_weights",
+        )
+        _require(
+            normals.shape == (self.decoder.nodes, 3)
+            and bool(torch.isfinite(normals).all().item()),
+            "normals",
+        )
+        normalized = weights / torch.clamp(weights.sum(), min=1e-12)
+        pooled = torch.sum(features * normalized.unsqueeze(-1), dim=0)
+        return features, pooled
+
+    def _local_field(self, features: torch.Tensor) -> torch.Tensor:
+        field = _backbone_field(self.backbone.decode_cycle(features))
+        _require(
+            field.shape == (self.decoder.phases, self.decoder.nodes, 3),
+            "local_field_shape",
+        )
+        return field * self.local_output_scale
+
+    def forward(
+        self,
+        case: Mapping[str, torch.Tensor],
+        *,
+        variant: str = "response_plus_residual",
+    ) -> dict[str, torch.Tensor]:
+        _require(
+            variant in {"response_only", "local_only", "response_plus_residual"},
+            "variant",
+        )
+        features, pooled = self._encode_and_pool(case)
+        normals = case["normals"]
+
+        if variant == "local_only":
+            field = self._local_field(features)
+            zero = field.new_zeros(())
+            leakage = _basis_leakage(
+                field,
+                self.decoder.response_basis,
+                self.decoder.reference_weights,
+            )
+            return {
+                "field": field,
+                "global_field": torch.zeros_like(field),
+                "local_residual": field,
+                "physical_local_backbone_field": field,
+                "coefficients": field.new_zeros(self.decoder.rank),
+                "amplitude": zero,
+                "residual_gate": field.new_ones(()),
+                "residual_basis_leakage": leakage,
+            }
+
+        response = self.response_head(pooled)
+        coefficients = response[: self.decoder.rank]
+        log_amplitude_offset = response[self.decoder.rank : self.decoder.rank + 1]
+        residual_gate_logit = response[self.decoder.rank + 1 :]
+        if variant == "response_only":
+            local_field = normals.new_zeros(
+                (self.decoder.phases, self.decoder.nodes, 3)
+            )
+        else:
+            local_field = self._local_field(features)
+        decoded = self.decoder(
+            coefficients,
+            log_amplitude_offset,
+            local_field,
+            residual_gate_logit,
+            normals,
+            response_only=variant == "response_only",
+        )
+        decoded["physical_local_backbone_field"] = local_field
+        return decoded
+
+    def forward_single_field(
+        self, case: Mapping[str, torch.Tensor]
+    ) -> torch.Tensor:
+        """Predict one normalized vector field for a matched T+M/T+S row."""
+
+        features, _ = self._encode_and_pool(case)
+        return self.single_field_head(features)
 
 
 def weighted_global_amplitude(

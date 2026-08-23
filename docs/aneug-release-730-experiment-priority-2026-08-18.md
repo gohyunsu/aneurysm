@@ -11,9 +11,10 @@ authorized introai9 GPU.
    patience record is final and must not be extended or duplicated.
 2. Run the train-response oracle. It can reject an inadequate global manifold
    cheaply, but cannot be reported as learned performance or select a final
-   model by itself. Exact job `118333.ECE-util1` was submitted once on
-   2026-08-24 and is system-held before script start by an A6000-node cgroup
-   hook failure. Release that same job only after infrastructure recovery.
+   model by itself. Obsolete pre-script job `118333.ECE-util1` was cancelled
+   after its source became superseded. Corrected exact job
+   `118376.ECE-util1` is queued once on the inspected A6000 host constraint;
+   monitor it without alteration or duplicate submission.
 3. Run the GHD-conditioned GINE-GPS U-Net matched comparator after a preserved
    oracle terminal record. This establishes whether geometry descriptors plus
    local/global mesh processing materially strengthen the backbone under the
@@ -22,7 +23,10 @@ authorized introai9 GPU.
    information, complete-cycle target, validation metric and a disclosed
    compute envelope.
 5. If the oracle is useful, compare response-only, local-only, and
-   response-plus-local-residual with one common backbone and budget.
+   response-plus-local-residual with one common encoder and budget. One
+   GHD-conditioned node encoding is area-weighted into the global response
+   token and passed unchanged to the local decoder. Ablations skip only the
+   inactive decoder head, not a separate encoder family.
 6. Only after a field-competitive combined model exists, compare field-only,
    complete scalar-functional and field-anchored objectives. Use the two freed
    single-seed rows for matched control/proposal T+M auxiliary-path controls;

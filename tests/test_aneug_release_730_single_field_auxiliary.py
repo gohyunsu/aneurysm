@@ -5,6 +5,7 @@ from torch import nn
 
 from aurora.aneug_release_730_single_field_auxiliary import (
     SharedEncoderSingleFieldAdapter,
+    SharedEncoderSingleFieldHead,
     SingleFieldAuxiliaryError,
     scaled_single_field_target,
     steady_auxiliary_case,
@@ -44,6 +45,11 @@ def transient_case(nodes=5):
 
 
 class SingleFieldAuxiliaryTests(unittest.TestCase):
+    def test_common_head_rejects_wrong_width(self):
+        head = SharedEncoderSingleFieldHead(8)
+        with self.assertRaisesRegex(SingleFieldAuxiliaryError, "encoded_features"):
+            head(torch.randn(5, 7))
+
     def test_transient_mean_target_is_exact_and_train_case_only(self):
         case = transient_case()
         auxiliary = transient_mean_auxiliary_case(case)

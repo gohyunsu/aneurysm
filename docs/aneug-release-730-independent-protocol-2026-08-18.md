@@ -71,9 +71,12 @@ waveform and geometry-dependent outlet conditions used by the release. The
 paper should not add an artificial BC-imputation story or claim that a GNN,
 equivariance, temporal basis or functional loss is novel by itself.
 
-The clean candidate is a cycle-native mesh operator: a train-only global
-complete-cycle response manifold captures broad variation, while a
-multiresolution local mesh branch predicts the remaining Cartesian residual.
+The clean candidate is a cycle-native mesh operator with one shared geometry
+encoder. Its GHD-conditioned per-node features are area-weighted into a global
+token for the train-only complete-cycle response manifold and passed unchanged
+to a multiresolution local decoder for the remaining Cartesian residual.
+Response-only and local-only controls retain that encoder and remove only the
+inactive decoding branch, so their difference is not an encoder substitution.
 The single decoded field may receive a soft tangency penalty, but it is not
 hard-projected because the released reference contains small nonzero
 mesh-normal components. A field-anchored cycle-functional objective can align

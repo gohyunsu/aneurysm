@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-24 — Candidate global/local branches now share one encoder
+
+- Replaced the active dormant candidate interface's separate GHD-only global
+  encoder with area-weighted pooling of the same GHD-conditioned node features
+  consumed by the local complete-cycle decoder.
+- Made response-only, local-only and combined ablations share the encoder while
+  skipping only their inactive decoder head, removing an encoder/capacity
+  confound before any candidate run.
+- Reused the exact common single-field head class for later matched T+M/T+S
+  cells. This selects no backbone, rank, objective, activation or result and
+  leaves the queued oracle's earlier exact source untouched.
+
 ## 2026-08-24 — Validation-row provenance corrected before oracle execution
 
 - Recomputed the exact 73-row validation loader order from the frozen private
