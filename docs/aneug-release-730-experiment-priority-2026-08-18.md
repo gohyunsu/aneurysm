@@ -6,18 +6,21 @@ authorized introai9 GPU.
 
 ## Active sequence
 
-1. Finish the released-class Graph U-Net on 584 train and 73 validation cases.
-   This is the indispensable direct prior; job `117056.ECE-util1` must not be
-   stopped or duplicated while healthy.
-2. Run the GHD-conditioned GINE-GPS U-Net matched comparator. This establishes
-   whether geometry descriptors plus local/global mesh processing materially
-   strengthen the backbone under the same raw-field protocol.
-3. Run the train-response oracle. It can reject an inadequate global manifold
+1. Preserve the terminal released-class Graph U-Net on 584 train and 73
+   validation cases as the indispensable weak direct comparator. Its completed
+   patience record is final and must not be extended or duplicated.
+2. Run the train-response oracle. It can reject an inadequate global manifold
    cheaply, but cannot be reported as learned performance or select a final
-   model by itself.
-4. Adapt Transolver only after the first two learned baselines are terminal.
-   It must use the same information, complete-cycle target, validation metric
-   and a disclosed compute envelope.
+   model by itself. Exact job `118333.ECE-util1` was submitted once on
+   2026-08-24 and is system-held before script start by an A6000-node cgroup
+   hook failure. Release that same job only after infrastructure recovery.
+3. Run the GHD-conditioned GINE-GPS U-Net matched comparator after a preserved
+   oracle terminal record. This establishes whether geometry descriptors plus
+   local/global mesh processing materially strengthen the backbone under the
+   same raw-field protocol.
+4. Adapt Transolver after the GHD-GPS comparator. It must use the same
+   information, complete-cycle target, validation metric and a disclosed
+   compute envelope.
 5. If the oracle is useful, compare response-only, local-only, and
    response-plus-local-residual with one common backbone and budget.
 6. Only after a field-competitive combined model exists, compare field-only,
@@ -50,10 +53,10 @@ active.
 
 ## Decision logic
 
-A poor released Graph U-Net does not validate the proposal; it raises the
-importance of the GHD-GPS and Transolver controls. A weak response oracle
-removes the global manifold branch. A strong oracle with weak learned
-response-only performance identifies coefficient prediction—not basis rank—as
-the bottleneck. Functional alignment is retained only if it improves TAWSS/OSI
-without a material paired field-error tax. The paper identity remains
-conditional until these comparisons exist.
+A poor released Graph U-Net does not validate the proposal; its observed weak
+validation result raises the importance of the GHD-GPS and Transolver controls.
+A weak response oracle removes the global manifold branch. A strong oracle
+with weak learned response-only performance identifies coefficient
+prediction—not basis rank—as the bottleneck. Functional alignment is retained
+only if it improves TAWSS/OSI without a material paired field-error tax. The
+paper identity remains conditional until these comparisons exist.

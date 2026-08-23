@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Response oracle submitted once and system-held
+
+- Recorded the exact one-time response-oracle submission after PBS recovery
+  and complete activation/input preflight.
+- Preserved a pre-script system hold caused by the selected A6000 node's
+  cgroup-cleanup hook; no data code, CUDA process or result was created.
+- Prohibited duplicate submission and synchronized the active serial order to
+  response oracle, GHD-GPS and then Transolver.
+
 ## 2026-08-21 — Matched-information compute interpretation corrected
 
 - Added fail-closed per-cell accounting for base training protocol, seed,

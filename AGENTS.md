@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 response-oracle pre-script system hold:** PBS recovered and
+> exact response-oracle job `118333.ECE-util1` was submitted once after an
+> empty-queue and exact-input preflight. PBS attempted to dispatch that one job
+> 21 times to `ece-a6gpu8`, then system-held it with exit status `-18`; the node
+> still reports `Hook pbs_cgroups: Unable to clean up one or more cgroups`.
+> No run root, attempt marker, stdout, stderr, scientific tensor read or CUDA
+> process exists, and PBS run count is not qsub count. Do not duplicate-submit
+> or change scientific bytes. Release this same held job only after the cgroup
+> hook clears or healthy A6000 capacity is confirmed. The serial priority is
+> response oracle, GHD-GPS, then Transolver. Keep locked test/79 extras sealed,
+> use only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-21 matched-information compute interpretation:** The four-cell
 > analyzer now fail-closes on terminal optimizer steps, transient case-cycle
 > exposures,
