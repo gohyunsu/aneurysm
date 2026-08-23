@@ -170,10 +170,12 @@ def build_reference_selection(
     *,
     case_quantiles: Sequence[float] = (0.1, 0.5, 0.9),
     trace_vertex_quantile: float = 0.9,
+    expected_case_count: int = 51,
 ) -> dict[str, Any]:
     """Build an identifier-free outer-figure selection from references only."""
 
-    _require(len(reference_cases) == 51, "outer_case_count")
+    _require(expected_case_count > 0, "expected_case_count")
+    _require(len(reference_cases) == expected_case_count, "outer_case_count")
     summaries = [
         reference_osi_summary(
             case["wss"], phase_weights, case["vertex_weights"]
@@ -198,6 +200,7 @@ def build_reference_selection(
         "selected_reference_trace_vertex_ordinals": traces,
         "case_quantiles": list(case_quantiles),
         "trace_vertex_quantile": trace_vertex_quantile,
+        "reference_case_count": expected_case_count,
         "case_identifiers_included": False,
         "candidate_or_baseline_values_read": False,
     }

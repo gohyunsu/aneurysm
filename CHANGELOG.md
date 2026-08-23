@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Release-730 figure scope corrected
+
+- Preserved the historical 51-case v4 figure selector and added a separate
+  prediction-blind protocol for the active 73-case locked test.
+- Bound reference-only OSI quantile cases, reference-only trace vertices,
+  shared camera/masks and reference-derived colour limits.
+- Kept the selector non-executable until frozen C0 checkpoints and private T0
+  activation; no locked-test, extra, prediction or rendering access occurred.
+
 ## 2026-08-24 — Oracle rank nomination made deterministic
 
 - Fixed the pre-result R1 nomination to the minimum, lower-median and maximum

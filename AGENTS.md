@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 release-730 figure-scope correction:** The historical
+> prediction-blind figure selector remains fixed to v4's 51-case outer split.
+> The active paper must use the new release-730 selector over exactly 73 locked
+> test references, after frozen C0 checkpoints and a private T0 activation.
+> It selects 10/50/90% area-weighted reference-OSI cases and a reference-only
+> 90% OSI trace vertex; model values cannot affect cases, camera, masks or
+> colour limits. This code opens no test/extra scope, performs no rendering and
+> creates no claim. Use only introai9, never junjinyong, and do not maintain
+> the public site.
+
 > **2026-08-24 deterministic oracle-rank nomination:** Before response-oracle
 > values are observed, the release-730 comparison fixes at most three learned
 > R1 candidates as the minimum, lower-median and maximum positive ranks on the
