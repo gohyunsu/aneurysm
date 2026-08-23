@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — GHD–GPS serial predecessor is machine-enforced
+
+- Made the pending GHD–GPS comparator require both the completed Graph U-Net
+  and a preserved response-oracle terminal record in its fresh activation.
+- Added an explicit read-only oracle-terminal input whose SHA-256 is recomputed
+  before data loading; stale pre-oracle activations can no longer execute.
+- Changed no model, split, target, optimization, result or sealed scope. The
+  queued response oracle remains first and no comparator was activated.
+
 ## 2026-08-24 — Five-seed matched-information confirmation contract
 
 - Added a result-pending confirmation protocol for five prospectively frozen

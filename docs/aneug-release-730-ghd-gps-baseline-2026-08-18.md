@@ -34,4 +34,7 @@ validation order and requires `aac001b3...d4dc30`; terminal results emit both
 case-set and ordered-loader digests. Checkpoint and terminal-status writes are
 atomic. The earlier activation predates this correction and is superseded for
 execution provenance; a fresh activation is required after the response
-oracle terminates.
+oracle terminates. The activation must contain a valid response-oracle terminal
+record SHA-256, and the runner recomputes that SHA-256 from an explicitly bound
+read-only terminal-record file before any data load. This enforces the serial
+order in code rather than relying only on the operations log.

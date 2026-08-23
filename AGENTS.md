@@ -1,5 +1,15 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 GHD--GPS serial-predecessor enforcement:** The pending strong
+> comparator now requires a fresh activation containing valid Graph U-Net and
+> response-oracle terminal-record SHA-256 values. Its CLI/PBS runner binds the
+> actual oracle terminal record read-only and recomputes that hash before any
+> data load. This closes the gap between the documented oracle-first priority
+> and executable code; all older GHD--GPS activations are superseded. No model,
+> split, target, optimizer, result or sealed scope changed. Job
+> `118376.ECE-util1` remains first; use only introai9, never junjinyong, and do
+> not maintain the public site.
+
 > **2026-08-24 five-seed matched-information confirmation:** The single-seed
 > T/T+S factorial remains development attribution, not headline evidence. Once
 > validation selects the strongest control and candidate, twenty terminal

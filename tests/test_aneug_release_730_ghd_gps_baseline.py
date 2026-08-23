@@ -15,6 +15,7 @@ from aurora.aneug_release_730_ghd_gps_baseline import (
     load_config,
     validate_activation,
     validate_config,
+    validate_response_oracle_terminal_record,
 )
 
 
@@ -57,6 +58,9 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertFalse(config["target_and_metric"]["hard_periodic_closure"])
         self.assertIsNone(config["decision_rule"]["absolute_performance_threshold"])
         self.assertFalse(config["authorization"]["execute_now"])
+        self.assertTrue(
+            config["authorization"]["requires_response_oracle_terminal_record"]
+        )
         self.assertEqual(
             config["runtime"]["container_sha256"],
             "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
@@ -122,7 +126,8 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             "public_commit": "abc",
             "quality_conclusion": "success",
             "authorized_stage": "single_seed_validation_comparator",
-            "direct_baseline_terminal_record_sha256": "123",
+            "direct_baseline_terminal_record_sha256": "1" * 64,
+            "response_oracle_terminal_record_sha256": "2" * 64,
             "read_locked_test_or_extra": False,
             "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
             "private_train_audit_sha256": config["split"]["train_audit_private_sha256"],
@@ -135,6 +140,11 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaises(Release730GHDGPSError):
                 validate_activation(path, config, "abc")
+            activation["direct_baseline_terminal_record_sha256"] = "1" * 64
+            activation["response_oracle_terminal_record_sha256"] = "short"
+            path.write_text(json.dumps(activation), encoding="utf-8")
+            with self.assertRaisesRegex(Release730GHDGPSError, "oracle_terminal"):
+                validate_activation(path, config, "abc")
 
     def test_checkpoint_save_is_atomic_and_loadable(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -145,12 +155,36 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             payload = torch.load(path, weights_only=True)
             torch.testing.assert_close(payload["weight"], torch.arange(3))
 
+    def test_actual_oracle_terminal_bytes_must_match_activation(self) -> None:
+        import hashlib
+
+        payload = b'{"status":"terminal"}\n'
+        activation = {
+            "response_oracle_terminal_record_sha256": hashlib.sha256(
+                payload
+            ).hexdigest()
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "oracle-terminal.json"
+            path.write_bytes(payload)
+            self.assertEqual(
+                validate_response_oracle_terminal_record(path, activation),
+                activation["response_oracle_terminal_record_sha256"],
+            )
+            path.write_bytes(payload + b"changed")
+            with self.assertRaisesRegex(
+                Release730GHDGPSError, "oracle_terminal_hash"
+            ):
+                validate_response_oracle_terminal_record(path, activation)
+
     def test_pbs_is_serialized_introai9_gpu_without_test_binding(self) -> None:
         script = PBS.read_text(encoding="utf-8")
         source = SOURCE.read_text(encoding="utf-8")
         self.assertIn("Qlist=a6000", script)
         self.assertIn("ngpus=1", script)
         self.assertIn("AURORA_GHD_GPS_ACTIVATION", script)
+        self.assertIn("AURORA_RESPONSE_ORACLE_TERMINAL_RECORD", script)
+        self.assertIn("--response-oracle-terminal-record", script)
         self.assertIn("status_tmp", script)
         self.assertIn('/bin/mv "$status_tmp" "$status"', script)
         self.assertNotIn("junjinyong", script)

@@ -1,7 +1,7 @@
 {
   "schema_version": "aurora.aneug_release_730_ghd_gps_baseline.v1",
   "protocol_id": "aneug_release_730_ghd_gps_baseline_v1",
-  "status": "prepared_non_executable_until_direct_baseline_terminal",
+  "status": "prepared_non_executable_until_response_oracle_terminal",
   "as_of": "2026-08-18",
   "source": {
     "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
@@ -118,6 +118,7 @@
   "authorization": {
     "execute_now": false,
     "requires_direct_baseline_terminal_record": true,
+    "requires_response_oracle_terminal_record": true,
     "requires_fresh_private_activation": true,
     "multi_seed_confirmation": false,
     "read_locked_test": false,

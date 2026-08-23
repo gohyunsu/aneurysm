@@ -47,6 +47,14 @@ def _require(condition: bool, reason: str) -> None:
         raise Release730GHDGPSError(reason)
 
 
+def _is_sha256(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
 def file_sha256(path: str | Path, chunk_bytes: int = 8 * 1024 * 1024) -> str:
     digest = hashlib.sha256()
     with Path(path).open("rb") as handle:
@@ -108,7 +116,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
     )
     _require(
         config.get("status")
-        == "prepared_non_executable_until_direct_baseline_terminal",
+        == "prepared_non_executable_until_response_oracle_terminal",
         "status",
     )
     source = config["source"]
@@ -213,6 +221,10 @@ def validate_config(config: Mapping[str, Any]) -> None:
     authorization = config["authorization"]
     _require(not authorization["execute_now"], "execute_now")
     _require(authorization["requires_direct_baseline_terminal_record"], "predecessor")
+    _require(
+        authorization["requires_response_oracle_terminal_record"],
+        "oracle_predecessor",
+    )
     _require(authorization["requires_fresh_private_activation"], "activation")
     for key in (
         "multi_seed_confirmation",
@@ -249,7 +261,14 @@ def validate_activation(
         activation.get("authorized_stage") == "single_seed_validation_comparator",
         "activation_stage",
     )
-    _require(bool(activation.get("direct_baseline_terminal_record_sha256")), "baseline_terminal")
+    _require(
+        _is_sha256(activation.get("direct_baseline_terminal_record_sha256")),
+        "baseline_terminal",
+    )
+    _require(
+        _is_sha256(activation.get("response_oracle_terminal_record_sha256")),
+        "oracle_terminal",
+    )
     _require(activation.get("read_locked_test_or_extra") is False, "activation_scope")
     _require(
         activation.get("private_split_manifest_sha256")
@@ -259,6 +278,19 @@ def validate_activation(
         "activation_evidence",
     )
     return activation
+
+
+def validate_response_oracle_terminal_record(
+    path: str | Path, activation: Mapping[str, Any]
+) -> str:
+    """Bind execution to the exact preserved response-oracle terminal bytes."""
+
+    observed = file_sha256(path)
+    _require(
+        observed == activation["response_oracle_terminal_record_sha256"],
+        "oracle_terminal_hash",
+    )
+    return observed
 
 
 class Release730GHDGPSUNet(nn.Module):
@@ -800,6 +832,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--activation", type=Path)
+    parser.add_argument("--response-oracle-terminal-record", type=Path)
     parser.add_argument("--expected-commit")
     parser.add_argument("--transient", type=Path)
     parser.add_argument("--steady", type=Path)
@@ -815,6 +848,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     required = (
         args.activation,
+        args.response_oracle_terminal_record,
         args.expected_commit,
         args.transient,
         args.steady,
@@ -827,6 +861,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     _require(all(value is not None for value in required), "execution_arguments")
     activation = validate_activation(args.activation, config, args.expected_commit)
+    validate_response_oracle_terminal_record(
+        args.response_oracle_terminal_record, activation
+    )
     provenance = {
         "public_commit": args.expected_commit,
         "config_sha256": file_sha256(args.config),
@@ -839,6 +876,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         ["validation_loader_order_sha256"],
         "direct_baseline_terminal_record_sha256": activation[
             "direct_baseline_terminal_record_sha256"
+        ],
+        "response_oracle_terminal_record_sha256": activation[
+            "response_oracle_terminal_record_sha256"
         ],
     }
     run_development(
