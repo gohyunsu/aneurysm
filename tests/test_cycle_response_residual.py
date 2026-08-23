@@ -6,6 +6,7 @@ from pathlib import Path
 import torch
 from torch import nn
 
+from aurora.aneug_processed_v4_d13c_functional_finetune import backward_case
 from aurora.cycle_response_residual import (
     CycleResponseResidualDecoder,
     CycleResponseResidualError,
@@ -345,6 +346,45 @@ class CycleResponseResidualTests(unittest.TestCase):
             all(
                 parameter.grad is not None and torch.isfinite(parameter.grad).all()
                 for parameter in model.response_head.parameters()
+            )
+        )
+
+    def test_shared_candidate_supports_anchored_cycle_backward_with_inactive_head(self):
+        payload = synthetic_payload()
+        backbone = SharedBackbone(4, 5)
+        model = SharedEncoderCycleResponseResidual(
+            backbone, payload, rank=3, local_output_scale=1.0
+        )
+        field = model(shared_case())["field"]
+        mean_vector = field.mean(dim=0)
+        magnitude = torch.linalg.vector_norm(field, dim=-1)
+        terms = {
+            "field": field.square().mean(),
+            "mean_vector": mean_vector.square().mean(),
+            "tawss": magnitude.mean(dim=0).square().mean(),
+            "osi": field.sum(dim=0).square().mean(),
+        }
+        diagnostic = backward_case(
+            model,
+            terms,
+            {name: 1.0 for name in terms},
+            "all_field_anchored",
+            1,
+            1.0,
+        )
+        self.assertTrue(bool(diagnostic["gradient_conflict_measured"]))
+        self.assertTrue(torch.isfinite(backbone.encoder.weight.grad).all())
+        self.assertTrue(torch.isfinite(backbone.cycle.weight.grad).all())
+        self.assertTrue(
+            all(
+                parameter.grad is not None and torch.isfinite(parameter.grad).all()
+                for parameter in model.response_head.parameters()
+            )
+        )
+        self.assertTrue(
+            all(
+                parameter.grad is None
+                for parameter in model.single_field_head.parameters()
             )
         )
 

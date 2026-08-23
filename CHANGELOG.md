@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-24 — Anchored cycle gradients tolerate the inactive auxiliary head
+
+- Reproduced the dormant shared candidate's deterministic anchored-backward
+  failure: its T+M/T+S single-field head is registered on the model but is not
+  part of a cycle forward pass.
+- Made anchored backward omit only parameter tensors unused by both field and
+  functional objectives, while rejecting asymmetric objective dependencies.
+- Added both a minimal inactive-head regression and an exact
+  `SharedEncoderCycleResponseResidual` regression. This changes no objective,
+  gradient on an active cycle parameter, model selection, data, result or
+  execution authorization.
+
 ## 2026-08-24 — Transolver serial predecessors are machine-enforced
 
 - Made the pending Transolver comparator require preserved Graph U-Net,

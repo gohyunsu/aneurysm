@@ -408,7 +408,7 @@ def _add_gradients(
 
 
 def backward_case(
-    model: GHDConditionedGPSUNet,
+    model: torch.nn.Module,
     terms: Mapping[str, torch.Tensor],
     normalizers: Mapping[str, float],
     variant: str,
@@ -427,14 +427,43 @@ def backward_case(
 
     _require(functional is not None, "anchored_functional")
     parameters = tuple(parameter for parameter in model.parameters() if parameter.requires_grad)
-    field_gradients = torch.autograd.grad(field, parameters, retain_graph=True)
-    functional_gradients = torch.autograd.grad(functional, parameters)
+    field_gradients = torch.autograd.grad(
+        field,
+        parameters,
+        retain_graph=True,
+        allow_unused=True,
+    )
+    functional_gradients = torch.autograd.grad(
+        functional,
+        parameters,
+        allow_unused=True,
+    )
+    active_parameters: list[torch.nn.Parameter] = []
+    active_field_gradients: list[torch.Tensor] = []
+    active_functional_gradients: list[torch.Tensor] = []
+    for parameter, field_gradient, functional_gradient in zip(
+        parameters, field_gradients, functional_gradients
+    ):
+        _require(
+            (field_gradient is None) == (functional_gradient is None),
+            "anchored_gradient_dependency",
+        )
+        if field_gradient is None:
+            continue
+        active_parameters.append(parameter)
+        active_field_gradients.append(field_gradient)
+        active_functional_gradients.append(functional_gradient)
+    _require(len(active_parameters) > 0, "anchored_active_parameters")
     combined = field_anchored_gradient_combination(
-        list(field_gradients),
-        list(functional_gradients),
+        active_field_gradients,
+        active_functional_gradients,
         functional_to_field_norm_ratio=functional_to_field_norm_ratio,
     )
-    _add_gradients(parameters, combined["combined_gradients"], accumulation)
+    _add_gradients(
+        active_parameters,
+        combined["combined_gradients"],
+        accumulation,
+    )
     denominator = torch.clamp(
         combined["field_norm"] * combined["functional_norm_before"], min=1e-12
     )

@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 candidate anchored-gradient inactive-head correction:** A
+> dataset-free reproduction showed that the planned complete field-anchored
+> objective would fail before an optimizer step because
+> `SharedEncoderCycleResponseResidual` registers the common T+M/T+S
+> single-field head although cycle forward does not use it. Anchored backward
+> now excludes only parameter tensors unused by both field and functional
+> objectives and fails on asymmetric dependencies. Minimal and exact shared-
+> candidate regressions verify finite active-cycle gradients and `grad=None`
+> on the inactive auxiliary head. This changes no active gradient, objective,
+> model, rank, data, result or execution authority. Response oracle
+> `118376.ECE-util1` remains first; use only introai9, never junjinyong, and do
+> not maintain the public site.
+
 > **2026-08-24 Transolver serial-predecessor enforcement:** The pending
 > Transolver comparator now requires fresh activation hashes for the preserved
 > Graph U-Net, response-oracle and GHD--GPS terminal records. Its CLI/PBS

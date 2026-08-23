@@ -125,6 +125,39 @@ class D13CFunctionalFinetuneTests(unittest.TestCase):
         self.assertGreaterEqual(float(anchored["gradient_cosine_before"]), -1.000001)
         self.assertLessEqual(float(anchored["gradient_cosine_before"]), 1.000001)
 
+    def test_anchored_backward_skips_inactive_auxiliary_head(self) -> None:
+        class CycleWithInactiveAuxiliary(nn.Module):
+            def __init__(self) -> None:
+                super().__init__()
+                self.cycle = nn.Linear(2, 2, bias=False)
+                self.single_field_head = nn.Linear(2, 2, bias=False)
+
+            def forward(self, value: torch.Tensor) -> torch.Tensor:
+                return self.cycle(value)
+
+        torch.manual_seed(44)
+        model = CycleWithInactiveAuxiliary().to(torch.float64)
+        output = model(torch.tensor([0.7, -0.4], dtype=torch.float64))
+        terms = {
+            "field": (output[0] - 1.0).square() + 0.1 * output[1].square(),
+            "mean_vector": (output[0] + 1.0).square(),
+            "tawss": (output[1] - 0.5).square(),
+            "osi": (output[0] + output[1]).square(),
+        }
+        normalizers = {name: 1.0 for name in terms}
+        diagnostic = backward_case(
+            model,
+            terms,
+            normalizers,
+            "all_field_anchored",
+            1,
+            1.0,
+        )
+        self.assertTrue(bool(diagnostic["gradient_conflict_measured"]))
+        self.assertIsNotNone(model.cycle.weight.grad)
+        self.assertTrue(bool(torch.isfinite(model.cycle.weight.grad).all().item()))
+        self.assertIsNone(model.single_field_head.weight.grad)
+
     def test_small_exact_backbone_supports_anchored_full_cycle_backward(self) -> None:
         def ring_edges(nodes: int) -> torch.Tensor:
             source = torch.arange(nodes, dtype=torch.int64)

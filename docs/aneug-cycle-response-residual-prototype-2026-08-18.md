@@ -39,3 +39,12 @@ model may be constructed without a local backbone and never evaluates one; a
 local-only forward never evaluates the response head. Thus the ablation does
 not charge an unused branch to one row or attribute its hidden compute to
 another.
+
+The shared wrapper also owns the common single-field auxiliary head required
+by future T+M/T+S cells. That head is intentionally inactive during a cycle
+forward. The field-anchored backward path therefore omits a parameter tensor
+only when both the field and functional objectives report it as unused; a
+one-sided dependency fails closed. Active cycle-parameter gradients are
+combined exactly as before, and the inactive auxiliary head remains without a
+gradient. This is runtime compatibility for the predeclared ablation, not an
+architecture, objective or optimization change.
