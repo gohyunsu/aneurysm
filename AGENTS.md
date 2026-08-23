@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 Transolver serial-predecessor enforcement:** The pending
+> Transolver comparator now requires fresh activation hashes for the preserved
+> Graph U-Net, response-oracle and GHD--GPS terminal records. Its CLI/PBS
+> runner recomputes the oracle/GHD record hashes before any data load. This
+> aligns executable code with the already fixed oracle -> GHD--GPS ->
+> Transolver order; a future evidence-based reprioritization requires a
+> separately versioned contract. Older Transolver activations are superseded.
+> No model, split, target, optimizer, result or sealed scope changed. Oracle
+> `118376.ECE-util1` remains first; use only introai9, never junjinyong, and do
+> not maintain the public site.
+
 > **2026-08-24 GHD--GPS serial-predecessor enforcement:** The pending strong
 > comparator now requires a fresh activation containing valid Graph U-Net and
 > response-oracle terminal-record SHA-256 values. Its CLI/PBS runner binds the

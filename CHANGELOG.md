@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Transolver serial predecessors are machine-enforced
+
+- Made the pending Transolver comparator require preserved Graph U-Net,
+  response-oracle and GHD--GPS terminal hashes in a fresh activation.
+- Added read-only oracle/GHD terminal inputs whose hashes are recomputed before
+  data loading, aligning code with the prospective serial priority.
+- Changed no model, data, split, target, optimization, result or sealed scope;
+  a future evidence-based reprioritization requires a separate version.
+
 ## 2026-08-24 — GHD–GPS serial predecessor is machine-enforced
 
 - Made the pending GHD–GPS comparator require both the completed Graph U-Net

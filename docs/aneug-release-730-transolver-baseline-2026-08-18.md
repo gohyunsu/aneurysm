@@ -18,14 +18,14 @@ the release-730 Graph U-Net and GHD-GPS/GINE controls. No hard phase closure,
 absolute threshold or automatic winner is defined. Test and the 79
 processed-only cases remain unread.
 
-Execution requires the released Graph U-Net terminal record and a fresh
-private activation. GHD-GPS/GINE and the response oracle are normally
-prioritized before this control, but they are not hard prerequisites: their
-terminal hashes are recorded when available, and the order may change after a
-diagnosed infrastructure or evidence update. This preserves one-GPU serial
-execution without turning a planning preference into an arbitrary permanent
-gate. One seed remains validation development; multi-seed confirmation and the
-locked test are separate later stages.
+Under the active evidence-led order, execution requires preserved Graph U-Net,
+response-oracle and GHD-GPS terminal records plus a fresh private activation.
+The runner recomputes the oracle and GHD-GPS terminal hashes before loading any
+data. A diagnosed infrastructure or evidence change may still reprioritize the
+independent comparator through a separately versioned contract; stale
+activations cannot silently bypass the current order. One seed remains
+validation development; multi-seed confirmation and the locked test are
+separate later stages.
 
 The shared loader now verifies the producer-derived validation order
 `aac001b3...d4dc30` before field access, and the terminal result emits both
