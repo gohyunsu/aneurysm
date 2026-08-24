@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-24 — Post-staging queue and storage audit
+
+- Preserved the sole introai9 response oracle as unheld queued work on full,
+  hook-clean host7; recorded that host8 still requires the prepared data-free
+  CUDA smoke before scientific relocation.
+- Recorded the intact 42,866,553,272-byte junjinyong staging, empty user queue,
+  approximately 29.3 GB free on shared `/home`, and 979,930,972,160 bytes free
+  on `/SHARE_ST`.
+- Kept `/SHARE_ST` unused because no AURORA-owned project namespace or explicit
+  storage authorization exists. This audit changed no data, model, split,
+  metric, result or paper claim.
+
 ## 2026-08-24 — Relocation staging completed without scientific execution
 
 - Recorded terminal GPU-0 staging job `118499.ECE-util1` at exit 0 and

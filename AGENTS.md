@@ -1,5 +1,21 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-24 post-staging queue and storage audit
+
+- Introai9 response oracle `118479.ECE-util1` remains unheld `Q` and
+  scientifically unstarted on full, hook-clean host7. Host8 still has two
+  nominally free GPUs and the cgroup-cleanup warning; a data-free CUDA smoke
+  must precede any relocated scientific execution there.
+- Junjinyong's staged 42,866,553,272-byte payload remains intact and its queue
+  is empty. Shared `/home` had approximately 29.3 GB free at 20:54 KST.
+  `/SHARE_ST` had 979,930,972,160 bytes free, but no authorized AURORA-owned
+  namespace was found. Do not infer storage authority from the permissive mode
+  of `/SHARE_ST/acs`.
+- The maximum response-basis artifact is approximately 3.43 GB and uses an
+  atomic temporary write. This is smaller than current free space but does not
+  eliminate shared-home exhaustion risk. No smoke artifact, relocation
+  activation, GPU job, field read, basis or result was created in this audit.
+
 ## 2026-08-24 relocation staging terminal; host8 smoke awaits exact transfer authority
 
 - Approved GPU-0 staging job `118499.ECE-util1` is terminal `F/exit 0`,
