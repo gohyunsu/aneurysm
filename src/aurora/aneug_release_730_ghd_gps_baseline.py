@@ -593,7 +593,11 @@ def load_development_data(
     wss_scale = float(torch.sqrt(torch.sum(wss_mean.square() + wss_std.square())).item())
     _require(math.isfinite(wss_scale) and wss_scale > 0.0, "wss_scale")
     topology = _extract_topology(mesh)
-    faces = topology.pop("faces")
+    # Keep the shared finest faces in the returned topology. Cycle backbones
+    # ignore this extra key, while the matched steady stream needs the same
+    # connectivity to derive geometry features without reopening transient
+    # fields or relying on stored normal channels.
+    faces = topology["faces"]
     train_records = selected_training_records(
         indexed, train_order, buckets["validation"] + buckets["test"] + buckets["extra"]
     )

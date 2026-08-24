@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 matched T/T+S trainer readiness:** The steady cohort is no
+> longer only a downstream analysis promise. A common activation-bound runner
+> now supports the selected GHD--GPS/Transolver control and response/local
+> proposal as transient-only and eligible-steady cells. T+S pairs exactly one
+> scheduled steady row with each of 584 transient cases per epoch, uses a
+> separate shared-encoder single-field head, never replicates a field over 80
+> phases and records exact exposure count/prefix. The same ordered 13,985 rows
+> and schedule serve both roles; T freezes the head. Steady RMS parameterizes
+> physical head output and is not a loss weight; primary inference remains
+> within-information method comparison, not steady-use novelty. Selection,
+> all development evidence, scale result, split/audit/overlap and response
+> basis are hash-bound before data loading. Exact-state resume recomputes the
+> exposure prefix. Twelve focused and 46 related tests pass with PBS syntax;
+> the full local suite passes 1,023/1,023.
+> This selects no model, creates no activation/job/result/claim and cannot run
+> before all predecessors terminal. Locked test/79 extras remain sealed; use
+> only introai9, never junjinyong, and do not maintain the site.
+
 > **2026-08-24 response/local candidate runner readiness:** The active
 > release-730 candidate is now executable as five activation-bound,
 > single-seed validation cells: response-only/combined field training followed

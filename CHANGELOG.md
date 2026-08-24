@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-24 — Matched T/T+S training is executable
+
+- Added one common runner for the selected control/proposal by
+  transient-only/eligible-steady four-cell factorial.
+- Paired one deterministic no-replacement steady row with each of 584
+  transient cases per epoch and hash-bound every terminal exposure prefix.
+- Reused one shared-encoder single-field head, froze it in T, activated it in
+  T+S and prohibited phase replication, proposal-only access and steady-use
+  novelty claims.
+- Added validation-only selection, terminal evidence, scale, split, overlap
+  and response-basis gates plus exact-state exposure-aware continuation.
+- Added 12 focused tests, passed 46 related trainer/stream/analyzer/control
+  regressions and passed the full 1,023-test local suite. No model,
+  activation, job, result or paper claim was created.
+
 ## 2026-08-24 — Release-730 response/local candidate is executable
 
 - Added an activation-bound runner and A6000 PBS contract for two
