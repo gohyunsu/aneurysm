@@ -92,6 +92,11 @@ TAWSS/OSI fidelity를 함께 개선하고, 그 효과가 strong controls와 동�
 steady information 조건에서 유지된다는 application-specific mechanism evidence입니다.
 이 conjunctive evidence가 실패하면 해당 claim을 삭제합니다.
 
+최신 aneurysm GNN과 POD 계열까지 포함한 세부 경계는
+[functional-fidelity direct-prior update](docs/aneug-release-730-functional-prior-update-2026-08-24.md)에
+정리했습니다. 특히 field 중심 학습의 OSI 실패와 shear-metric supervision 제안도
+이미 선행연구에 있으므로, functional loss 하나를 contribution으로 주장하지 않습니다.
+
 ## Evidence ladder
 
 1. Released Graph U-Net — validation development 완료

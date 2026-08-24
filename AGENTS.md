@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 functional-fidelity direct-prior correction:** Primary-source
+> inspection of Garnier et al. `arXiv:2512.09013v1` shows a distinct 51M sparse
+> graph-Transformer aneurysm study, not a bibliographic substitute for the
+> peer-reviewed Lannelongue et al. MeshGraphNet study. It autoregressively
+> derives WSS/TAWSS/OSI, explicitly reports lower OSI accuracy from near-wall
+> directional fluctuations under an overall-flow objective and names
+> shear-metric multi-task supervision as future work. Kheiri et al.
+> `10.1016/j.cjph.2026.04.015` also already combines POD with Transformer/LSTM
+> for pulsatile cerebral-aneurysm hemodynamics in six dilation cases.
+> Therefore neither the domain failure observation, a functional loss, POD nor
+> reduced-order temporal prediction is standalone AURORA novelty. The active
+> conditional contribution remains matched same-field field/TAWSS/OSI evidence
+> from the response/local candidate against strong T and T+S controls. Add no
+> comparator or GPU job from this audit; preserve oracle `118376.ECE-util1` ->
+> GHD--GPS -> Transolver, sealed test/79 extras, introai9-only execution, never
+> junjinyong and no site maintenance.
+
 > **2026-08-24 current-facing README synchronization:** The repository entry
 > point now describes the active release-730 joint field/functional-fidelity
 > study instead of the superseded inactive reference-relative/worldline

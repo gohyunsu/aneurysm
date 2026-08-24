@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-24 — Functional-fidelity prior boundary tightened
+
+- Added a primary-source audit of Garnier et al.'s autoregressive aneurysm
+  surrogate, which directly reports OSI sensitivity to near-wall directional
+  error under an overall-flow objective and anticipates shear-metric
+  multi-task supervision.
+- Recorded the six-case cerebral-aneurysm POD--Transformer/LSTM study as an
+  additional reduced-order collision. Functional loss, POD and the broad
+  field/readout mismatch are therefore not standalone novelty.
+- Kept the response-oracle -> GHD--GPS -> Transolver ladder and matched
+  13,985-row T/T+S factor unchanged. This literature correction creates no
+  model, data read, job, result or claim.
+
 ## 2026-08-24 — README follows the active release-730 study
 
 - Replaced the stale current-facing inactive critical-structure/worldline
