@@ -10,7 +10,8 @@
   roughly 3.18 GiB into each checkpoint without changing any decoded field.
 - Added a regression that fixed buffers are absent from `state_dict` while
   preserving dtype/device movement. No rank, model, data, result or execution
-  was selected.
+  was selected. Exact source `96bb0a9...` passed 1,001 local tests, 42 focused
+  candidate/functional/comparator tests and Research Quality `32685594119`.
 
 ## 2026-08-24 — Comparator interruptions resume exact state
 

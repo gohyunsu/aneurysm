@@ -9,6 +9,9 @@
 > hash-bind and load the separate oracle basis artifact before restoring
 > trainable state. Dataset-free regression verifies both properties. This
 > changes no field, rank, model selection, data, result or execution authority.
+> Exact source head `96bb0a91df03ff571a028e657ea1717c3de5ada8`
+> passed 1,001 local tests and Research Quality `32685594119`; 42 focused
+> candidate/functional/comparator tests also passed.
 > Oracle `118376.ECE-util1` remains first; use only introai9, never junjinyong,
 > and do not maintain the public site.
 
