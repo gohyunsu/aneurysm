@@ -1,5 +1,27 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-24 conditional junjinyong execution relocation
+
+- The user explicitly superseded the earlier absolute `junjinyong` ban while
+  introai9 oracle `118479.ECE-util1` remains queued for host7 capacity. The
+  introai9 job stays untouched during relocation preparation; never submit an
+  unversioned or scientifically different duplicate.
+- `junjinyong` public-key login is healthy, its PBS user queue is empty and it
+  belongs to the `ssu` rather than `introai` group. Use `ssu_a6gpu` with
+  `Qlist=a6000`; do not claim access to `coss_a6gpu`. The shared `/home`
+  filesystem has approximately 183 GB available but is reported 100% used, so
+  stage only the exact 33.23 GB transient and 9.63 GB normalizer assets and
+  preserve checksums.
+- The original oracle config, implementation, activation, split, audit, ranks,
+  metrics and sealed scope remain fixed at scientific public commit
+  `1c5039292d60e9dcbb722318e43bacc66de1ad36`. A separate public execution
+  overlay and fresh private activation may change only account, queue, host
+  constraint and owner-readable paths. It remains a development-only oracle,
+  not learned performance or a paper claim.
+- Use a fresh exact checkout and isolated data/private/output roots under the
+  `junjinyong` account. Do not reuse historical AURORA directories, disturb
+  unrelated work, run GPU code on the login node, or maintain the public site.
+
 > **2026-08-24 fresh five-seed executor closure:** The active manuscript's
 > twenty-cell confirmation is now executable rather than analysis-only. The
 > common matched runner accepts only seeds `20260901`--`20260905` for T/T+S

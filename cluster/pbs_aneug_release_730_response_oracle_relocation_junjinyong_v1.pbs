@@ -1,0 +1,63 @@
+#!/bin/bash
+#PBS -N aurora_730_oracle_jy
+#PBS -q ssu_a6gpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=12:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean public checkout}"
+: "${AURORA_DATA_ROOT:?set owner-readable relocated AneuG data root}"
+: "${AURORA_PRIVATE_ROOT:?set owner-readable relocated private evidence root}"
+: "${AURORA_OUTPUT_ROOT:?set junjinyong private output root}"
+: "${AURORA_EXPECTED_EXECUTION_COMMIT:?set Quality-passed relocation commit}"
+: "${AURORA_RELOCATION_ACTIVATION:?set fresh private relocation activation}"
+: "${AURORA_BASE_ACTIVATION:?set exact base response-oracle activation}"
+: "${AURORA_CONTAINER:?set pinned Torch container}"
+: "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+
+[ "$(id -un)" = "junjinyong" ]
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_EXECUTION_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+[ -r "$AURORA_RELOCATION_ACTIVATION" ]
+[ -r "$AURORA_BASE_ACTIVATION" ]
+[ -r "$AURORA_PRIVATE_ROOT/private_split_manifest.json" ]
+[ -r "$AURORA_PRIVATE_ROOT/private_train_statistics.json" ]
+[ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ]
+
+run_id="${PBS_JOBID:?PBS job id required}"
+run_root="$AURORA_OUTPUT_ROOT/aneug_release_730_response_oracle_relocation_junjinyong_v1/$run_id"
+mkdir -p "$run_root"
+[ ! -e "$run_root/attempt.started" ]
+printf '%s\n' "$run_id" > "$run_root/attempt.started"
+log="$run_root/attempt.log"
+status="$run_root/attempt.status.json"
+status_tmp="$run_root/attempt.status.json.tmp"
+exec >>"$log" 2>&1
+trap 'code=$?; trap - EXIT; printf "{\"job_id\":\"%s\",\"exit_code\":%s,\"complete\":%s}\n" "$run_id" "$code" "$(test -f "$run_root/result.json" && printf true || printf false)" > "$status_tmp"; /bin/mv "$status_tmp" "$status"; exit "$code"' EXIT
+
+printf 'stage=release730_response_oracle_relocation_started job=%s execution_commit=%s\n' "$run_id" "$actual_commit"
+/usr/bin/singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_DATA_ROOT:/data:ro" \
+  --bind "$AURORA_PRIVATE_ROOT:/private:ro" \
+  --bind "$AURORA_OUTPUT_ROOT:/results" \
+  "$AURORA_CONTAINER" \
+  /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONPATH=/workspace/src AURORA_EXECUTION_ACCOUNT=junjinyong \
+  python -m aurora.aneug_release_730_response_oracle_relocation \
+  --relocation-config /workspace/configs/aneug_release_730_response_oracle_relocation_junjinyong_v1.json \
+  --project-root /workspace \
+  --relocation-activation /private/private_relocation_activation.json \
+  --base-activation /private/private_base_activation.json \
+  --expected-execution-commit "$actual_commit" \
+  --transient /data/processed_v5_9dd4180/assembled_registered_data_1k_v5.pth \
+  --steady /data/processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary \
+  --public-split /workspace/results/aneug_release_730_split_r3_20260818.json \
+  --private-split /private/private_split_manifest.json \
+  --train-audit-public /workspace/results/aneug_release_730_train_audit_r2_20260818.json \
+  --train-audit-private /private/private_train_statistics.json \
+  --result "/results/aneug_release_730_response_oracle_relocation_junjinyong_v1/$run_id/result.json" \
+  --basis "/results/aneug_release_730_response_oracle_relocation_junjinyong_v1/$run_id/response_basis.pt"
+printf 'stage=release730_response_oracle_relocation_complete\n'

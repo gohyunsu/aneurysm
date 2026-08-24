@@ -1,0 +1,52 @@
+{
+  "schema_version": "aurora.aneug_release_730_response_oracle_relocation.v1",
+  "protocol_id": "aneug_release_730_response_oracle_relocation_junjinyong_v1",
+  "status": "prepared_execution_relocation_only",
+  "as_of": "2026-08-24",
+  "base_scientific_contract": {
+    "protocol_id": "aneug_release_730_response_oracle_v1",
+    "public_commit": "1c5039292d60e9dcbb722318e43bacc66de1ad36",
+    "config_path": "configs/aneug_release_730_response_oracle_v1.json",
+    "config_sha256": "f3161f7d1d88a7a7f97c8965b3d996b670667d8a6fc2f0efc471429c1327a924",
+    "implementation_path": "src/aurora/aneug_release_730_response_oracle.py",
+    "implementation_sha256": "f58cd12c14d347ebd7d1554577c268fc6cdb8bcc26370b1404681a0c7de3d47a",
+    "pbs_path": "cluster/pbs_aneug_release_730_response_oracle_v1.pbs",
+    "pbs_sha256": "d9fc96dca522494bc025d0fc8717aeefaf5f45720763d9ac65b3571e322a6654",
+    "activation_sha256": "1658182882afc927f0acb849356bb8fc27d331dacad47f96970d34073417a7b5",
+    "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
+    "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
+    "private_split_manifest_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+    "private_train_audit_sha256": "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385"
+  },
+  "scientific_invariants": {
+    "train_cases": 584,
+    "validation_cases": 73,
+    "locked_test_cases_read": 0,
+    "processed_only_extra_cases_read": 0,
+    "rank_grid": [0, 16, 32, 64, 128, 256],
+    "learned_predictor": false,
+    "automatic_rank_selection": false,
+    "paper_performance_claim": false
+  },
+  "runtime": {
+    "execution_account": "junjinyong",
+    "queue": "ssu_a6gpu",
+    "Qlist": "a6000",
+    "host_constraint": null,
+    "ncpus": 4,
+    "memory_gb": 64,
+    "ngpus": 1,
+    "walltime": "12:00:00",
+    "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2"
+  },
+  "authorization": {
+    "requires_fresh_private_relocation_activation": true,
+    "requires_base_private_activation": true,
+    "server_relocation_only": true,
+    "change_scientific_contract": false,
+    "read_locked_test": false,
+    "read_processed_only_extra": false,
+    "publish_numeric_result": false,
+    "maintain_public_site": false
+  }
+}

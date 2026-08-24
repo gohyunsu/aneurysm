@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-24 — Conditional response-oracle execution relocation
+
+- Added a hash-bound `junjinyong`/`ssu_a6gpu` execution overlay for the exact
+  release-730 response oracle after the introai9 host7 job remained queued.
+- Preserved the original scientific configuration, implementation, activation,
+  584/73 split, locked test/extras boundary, rank grid and metrics. The new
+  path changes only execution account, queue, host constraint and private
+  filesystem roots, and requires a fresh private activation.
+- Added regression tests that reject scientific, sealed-scope, queue or
+  activation drift. No result or manuscript performance claim is created.
+
 ## 2026-08-24 — Fresh five-seed confirmation is executable
 
 - Extended the matched runner from seed-1103 development to the prospectively
