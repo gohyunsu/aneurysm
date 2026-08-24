@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-24 relocation staging terminal; host8 smoke awaits exact transfer authority
+
+- Approved GPU-0 staging job `118499.ECE-util1` is terminal `F/exit 0`,
+  stage-out 0, run count one in 00:22:58. The exact 42,866,553,272-byte payload
+  passed destination SHA checks and atomic install, left no partial and decoded
+  no field array or sealed case.
+- Introai9 oracle `118479` remains queued and scientifically unstarted on
+  fully occupied hook-clean host7. Host8 still exposes two nominal free GPUs
+  but retains its cgroup-cleanup warning. Junjinyong has no PBS job/result and
+  shared `/home` free space is approximately 33.1 GB; recheck it before any
+  scientific output allocation.
+- Private integrity-passed head `4153745...` prepares a data-free host8 CUDA
+  smoke, but its 2,267-byte script and 1,477-byte private manifest were not
+  transferred because they were outside the exact staging approval. Do not
+  submit an inline or indirect replacement. The exact two-file transfer and
+  one-time smoke qsub require explicit user approval.
+
 ## 2026-08-24 shared-A6000 relocation safety recheck
 
 - Introai9 oracle `118479.ECE-util1` remains unheld `Q` on the hard

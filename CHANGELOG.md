@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-24 — Relocation staging completed without scientific execution
+
+- Recorded terminal GPU-0 staging job `118499.ECE-util1` at exit 0 and
+  stage-out 0 after exact checksum installation of the approved
+  42,866,553,272-byte relocation payload.
+- Preserved the queued introai9 oracle and every sealed-data boundary. No
+  junjinyong job, result, field decode or paper performance claim exists.
+- Kept host8 scientific execution closed pending an explicitly authorized,
+  data-free CUDA smoke and a fresh storage/node/single-execution preflight.
+
 ## 2026-08-24 — Conditional response-oracle execution relocation
 
 - Added a hash-bound `junjinyong`/`ssu_a6gpu` execution overlay for the exact
