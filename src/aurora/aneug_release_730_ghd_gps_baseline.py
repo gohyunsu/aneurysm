@@ -549,8 +549,10 @@ def load_development_data(
         == config["split"]["validation_loader_order_sha256"],
         "validation_order",
     )
+    # The steady object is about 9.6 GB, whereas this loader needs only its
+    # nine-channel decoder statistics. Release it before opening the roughly
+    # 33.2 GB transient archive to stay inside the 64 GB host-memory contract.
     steady = safe_torch_load(steady_path, torch)
-    transient = safe_torch_load(transient_path, torch)
     labels = [str(value) for value in steady["label"]]
     _require(
         labels
@@ -574,6 +576,8 @@ def load_development_data(
         and bool((decoder_std > 0).all().item()),
         "normalizer",
     )
+    del steady
+    transient = safe_torch_load(transient_path, torch)
     ordered, indexed = index_case_records(transient["registered_data_list"])
     mesh = transient["mesh_data"]
     mesh_cases = [str(value) for value in mesh["cases"]]

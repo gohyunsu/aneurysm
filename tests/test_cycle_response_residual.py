@@ -204,6 +204,18 @@ class CycleResponseResidualTests(unittest.TestCase):
         self.assertIsNotNone(raw.grad)
         self.assertTrue(torch.isfinite(raw.grad).all())
 
+    def test_report_only_leakage_can_be_skipped_without_changing_field(self):
+        payload = synthetic_payload()
+        decoder = CycleResponseResidualDecoder(payload, rank=3)
+        normal = normals(5)
+        raw = torch.randn(4, 5, 3)
+        arguments = (torch.zeros(3), torch.zeros(1), raw, torch.zeros(1), normal)
+        reported = decoder(*arguments)
+        skipped = decoder(*arguments, compute_residual_basis_leakage=False)
+        torch.testing.assert_close(skipped["field"], reported["field"])
+        self.assertGreaterEqual(float(reported["residual_basis_leakage"]), 0.0)
+        self.assertEqual(float(skipped["residual_basis_leakage"]), 0.0)
+
     def test_common_rotation_equivariance(self):
         payload = synthetic_payload()
         decoder = CycleResponseResidualDecoder(payload, rank=3)

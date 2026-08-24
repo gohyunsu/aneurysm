@@ -257,6 +257,7 @@ class CycleResponseResidualDecoder(nn.Module):
         normals: torch.Tensor,
         *,
         response_only: bool = False,
+        compute_residual_basis_leakage: bool = True,
     ) -> dict[str, torch.Tensor]:
         _require(
             raw_local_residual.shape == (self.phases, self.nodes, 3),
@@ -273,9 +274,11 @@ class CycleResponseResidualDecoder(nn.Module):
             coefficients, log_amplitude_offset, normals
         )
         local_residual = raw_local_residual
-        leakage = _basis_leakage(
-            local_residual, self.response_basis, self.reference_weights
-        )
+        leakage = global_field.new_zeros(())
+        if compute_residual_basis_leakage and not response_only:
+            leakage = _basis_leakage(
+                local_residual, self.response_basis, self.reference_weights
+            )
         gate = torch.zeros((), dtype=global_field.dtype, device=global_field.device)
         if not response_only:
             if residual_gate_logit.numel() == 1:
@@ -343,6 +346,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
         case: Mapping[str, torch.Tensor],
         *,
         variant: str = "response_plus_residual",
+        compute_residual_basis_leakage: bool = True,
     ) -> dict[str, torch.Tensor]:
         _require("ghd" in case and "normals" in case, "case_features")
         _require(
@@ -355,11 +359,13 @@ class GHDConditionedCycleResponseResidual(nn.Module):
             field = _backbone_field(self.local_backbone(case))
             field = field * self.local_output_scale
             zero = field.new_zeros(())
-            leakage = _basis_leakage(
-                field,
-                self.decoder.response_basis,
-                self.decoder.reference_weights,
-            )
+            leakage = field.new_zeros(())
+            if compute_residual_basis_leakage:
+                leakage = _basis_leakage(
+                    field,
+                    self.decoder.response_basis,
+                    self.decoder.reference_weights,
+                )
             return {
                 "field": field,
                 "global_field": torch.zeros_like(field),
@@ -392,6 +398,7 @@ class GHDConditionedCycleResponseResidual(nn.Module):
             residual_gate_logit,
             normals,
             response_only=variant == "response_only",
+            compute_residual_basis_leakage=compute_residual_basis_leakage,
         )
         decoded["physical_local_backbone_field"] = local_field
         return decoded
@@ -494,6 +501,7 @@ class SharedEncoderCycleResponseResidual(nn.Module):
         case: Mapping[str, torch.Tensor],
         *,
         variant: str = "response_plus_residual",
+        compute_residual_basis_leakage: bool = True,
     ) -> dict[str, torch.Tensor]:
         _require(
             variant in {"response_only", "local_only", "response_plus_residual"},
@@ -505,11 +513,13 @@ class SharedEncoderCycleResponseResidual(nn.Module):
         if variant == "local_only":
             field = self._local_field(features)
             zero = field.new_zeros(())
-            leakage = _basis_leakage(
-                field,
-                self.decoder.response_basis,
-                self.decoder.reference_weights,
-            )
+            leakage = field.new_zeros(())
+            if compute_residual_basis_leakage:
+                leakage = _basis_leakage(
+                    field,
+                    self.decoder.response_basis,
+                    self.decoder.reference_weights,
+                )
             return {
                 "field": field,
                 "global_field": torch.zeros_like(field),
@@ -539,6 +549,7 @@ class SharedEncoderCycleResponseResidual(nn.Module):
             residual_gate_logit,
             normals,
             response_only=variant == "response_only",
+            compute_residual_basis_leakage=compute_residual_basis_leakage,
         )
         decoded["physical_local_backbone_field"] = local_field
         return decoded

@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-24 — Release-730 response/local candidate is executable
+
+- Added an activation-bound runner and A6000 PBS contract for two
+  architecture cells and three same-initialization functional fine-tunes.
+- Hash-bound the separate oracle basis plus oracle, GHD--GPS and Transolver
+  terminal records before data loading; added exact-state continuation for
+  genuine noncomplete attempts.
+- Froze inactive decoder/steady heads, reported active parameters and added
+  reference-support OSI, gate and basis-leakage diagnostics without opening
+  the locked test or 79 extras.
+- Skipped report-only basis projections during training/intermediate
+  validation and released the 9.6-GB steady normalization object before
+  opening the 33.2-GB transient object, lowering compute and peak host RAM
+  without changing a decoded field or metric definition.
+- Clarified that these T-only cells isolate mechanism only. The final selected
+  control and proposal must still receive the identical ordered 13,985-row
+  steady exposure in the matched T/T+S factorial. No job or result exists.
+
 ## 2026-08-24 — Response/local gate made spatially identifiable
 
 - Replaced the active shared candidate's pooled scalar residual gate with a

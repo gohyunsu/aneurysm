@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 response/local candidate runner readiness:** The active
+> release-730 candidate is now executable as five activation-bound,
+> single-seed validation cells: response-only/combined field training followed
+> by field-only/scalarized/field-anchored fine-tunes from the exact same
+> combined checkpoint. It uses one shared GHD--GPS encoder, a train-only
+> response basis, a phase-specific local field and a nodewise phase-shared
+> gate. Inactive local or steady heads are frozen and active parameter count is
+> reported. Report-only basis leakage is skipped during training/intermediate
+> validation, and the shared loader releases the 9.6-GB steady object before
+> opening the 33.2-GB transient object. Basis, oracle, GHD--GPS and Transolver
+> terminal hashes are checked
+> before data loading; exact-state continuation requires a preserved failed
+> terminal plus checkpoint. Eight candidate tests and 37 related regressions
+> pass. This T-only runner is architecture/objective attribution, not a reason
+> to omit steady supervision: the final selected control and proposal still
+> require matched T/T+S comparison over the same ordered 13,985 eligible steady
+> rows. No rank, activation, job, result or paper claim exists; locked test/79
+> extras remain sealed, use only introai9, never junjinyong, and do not maintain
+> the site.
+
 > **2026-08-24 response/local spatial-gate correction:** The active shared
 > candidate no longer uses one pooled scalar residual gate. It predicts a
 > nodewise, phase-shared gate from the same GHD-conditioned surface features,
