@@ -20,15 +20,20 @@ TAWSS와 OSI fidelity를 함께 높이는 것입니다.
 | 독립 단위 | geometry ID · GHD duplicate-disjoint; 730개를 환자 730명으로 해석하지 않음 |
 | steady 정보 | leakage audit 후 13,985 rows를 selected control과 candidate에 동일 제공 |
 | 직접 비교군 | released Graph U-Net, GHD–GPS/GINE, Transolver |
-| 현재 실행 | response oracle `118376.ECE-util1`이 introai9에서 단일 queued job |
+| 현재 실행 | response oracle 한 건이 introai9에서 GPU 자원 대기; 과학 실행·결과 없음 |
 | 과학 결과 | Graph U-Net validation evidence만 완료; 모든 논문 성능 cell은 pending |
 | 봉인 범위 | locked test 73 cases와 processed-only extras 79 cases 미개방 |
-| 금지 서버 | junjinyong 사용 금지; introai9만 사용 |
+| 실행 정책 | 한 시점에 단일 GPU job; 검증되지 않은 노드로 중복 이동하지 않음 |
 
 Graph U-Net best validation physical field rL2 `0.631375`는 약한 단일-seed 개발
 비교값이며 논문 결과가 아닙니다. Response oracle은 train-output response space의
 reconstruction ceiling이고 학습 성능이 아닙니다. GHD–GPS와 Transolver는 exact
 source/PBS 계약까지 준비됐지만 아직 실행되지 않았습니다.
+
+세 direct control이 끝나면 release-730 전용 분석기가 동일한 73-case 순서와
+봉인 상태를 검증하고 모든 paired contrast를 보존한 뒤, case-mean field rL2가
+가장 낮은 feasible comparator를 direct control로 선택합니다. 과거 51-case
+비교기는 이 결정에 사용하지 않습니다.
 ## 연구 질문
 
 Aggregate Cartesian field error가 비슷한 complete-cycle WSS surrogate도 시간 평균

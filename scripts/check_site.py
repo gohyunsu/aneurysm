@@ -63,7 +63,7 @@ def check_site(root: Path) -> list[str]:
         ),
         "Proposal-only steady": "matched-information fairness boundary",
         "공개 사이트는 유지보수하지 않습니다": "site-scope boundary",
-        "junjinyong 사용 금지": "execution-server boundary",
+        "한 시점에 단일 GPU job": "single-execution boundary",
     }
     for marker, label in required_readme_markers.items():
         if marker not in readme:
