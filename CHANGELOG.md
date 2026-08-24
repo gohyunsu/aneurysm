@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-24 — Comparator walltime matches the registered training horizon
+
+- Corrected GHD--GPS and Transolver PBS requests to the enabled queue's
+  72-hour default after historical PBS evidence showed the weaker Graph U-Net
+  needed 28:41:19 for 25,050 optimizer steps.
+- Preserved each comparator's model, seed, optimizer, loss, 251/80/40 epoch
+  ceiling/minimum/patience and checkpoint rule; no new run or result exists.
+- Made config validation and regression tests reject the obsolete 12/24-hour
+  requests so a predictable walltime cutoff cannot become scientific evidence.
+
 ## 2026-08-24 — Residual overlap is diagnostic, not a hidden objective
 
 - Removed an implementation–manuscript ambiguity that described the local

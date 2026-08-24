@@ -113,7 +113,7 @@
     "ncpus": 4,
     "memory_gb": 64,
     "ngpus": 1,
-    "walltime": "12:00:00"
+    "walltime": "72:00:00"
   },
   "authorization": {
     "execute_now": false,

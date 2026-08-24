@@ -38,3 +38,11 @@ oracle terminates. The activation must contain a valid response-oracle terminal
 record SHA-256, and the runner recomputes that SHA-256 from an explicitly bound
 read-only terminal-record file before any data load. This enforces the serial
 order in code rather than relying only on the operations log.
+
+The PBS execution envelope requests the queue's 72-hour default without
+changing the 251-epoch ceiling, 80-epoch minimum, 40-epoch patience, optimizer
+or stopping rule. This corrects the earlier 12-hour request: the completed
+Graph U-Net needed 28:41:19 for 25,050 optimizer steps, while GHD--GPS already
+requires 23,360 steps at its minimum 80 epochs. The correction prevents a
+predictable infrastructure cutoff from masquerading as comparator evidence;
+unused requested time does not alter the measured GPU-hours.

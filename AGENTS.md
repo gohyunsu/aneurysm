@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 comparator walltime-envelope correction:** Read-only PBS
+> evidence shows completed Graph U-Net `117056.ECE-util1` used 28:41:19 for
+> 25,050 optimizer steps under a 72-hour request. GHD--GPS requires 23,360
+> steps even at its 80-epoch minimum, yet requested 12 hours; Transolver used
+> the same minimum but requested 24 hours. Both pending comparators now request
+> the enabled `coss_a6gpu` queue's 72-hour default. Model, seed, loss, epoch
+> ceiling/minimum, patience, validation cadence and checkpoint rule are
+> unchanged; actual GPU-hours remain the reported cost. This creates no
+> activation, job, result or claim. Oracle `118376.ECE-util1` remains first;
+> use only introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 candidate residual-overlap objective closure:** The dormant
 > candidate described response-basis overlap as a soft complementarity penalty
 > even though the bounded R1/R2 rows register no such loss weight or ablation.

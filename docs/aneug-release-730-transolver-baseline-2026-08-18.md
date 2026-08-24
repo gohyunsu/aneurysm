@@ -32,3 +32,10 @@ The shared loader now verifies the producer-derived validation order
 case-set and order digests. Terminal-status writes are atomic. The prior
 activation predates this provenance correction and cannot authorize the
 corrected bytes; create a fresh activation before execution.
+
+The PBS envelope likewise requests the queue's 72-hour default. The prior
+24-hour request was shorter than the completed Graph U-Net's observed
+28:41:19 despite the same 80-epoch minimum and a materially larger operator.
+Only the resource request changes; model, seed, objective, epoch ceiling,
+patience, validation cadence and checkpoint rule remain fixed, and actual
+rather than requested GPU-hours are reported.

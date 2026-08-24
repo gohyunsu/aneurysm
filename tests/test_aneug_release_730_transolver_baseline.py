@@ -43,6 +43,7 @@ class Release730TransolverBaselineTests(unittest.TestCase):
         self.assertFalse(config["target_and_metric"]["hard_periodic_closure"])
         self.assertIsNone(config["decision_rule"]["absolute_performance_threshold"])
         self.assertFalse(config["authorization"]["execute_now"])
+        self.assertEqual(config["runtime"]["walltime"], "72:00:00")
         self.assertTrue(
             config["authorization"]["requires_response_oracle_terminal_record"]
         )
@@ -182,6 +183,7 @@ class Release730TransolverBaselineTests(unittest.TestCase):
         source = SOURCE.read_text(encoding="utf-8")
         self.assertIn("Qlist=a6000", script)
         self.assertIn("ngpus=1", script)
+        self.assertIn("#PBS -l walltime=72:00:00", script)
         self.assertIn("AURORA_TRANSOLVER_ACTIVATION", script)
         self.assertIn("AURORA_RESPONSE_ORACLE_TERMINAL_RECORD", script)
         self.assertIn("AURORA_GHD_GPS_TERMINAL_RECORD", script)

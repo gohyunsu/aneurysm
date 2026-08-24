@@ -2,7 +2,7 @@
 #PBS -N aurora_730_transolver
 #PBS -q coss_a6gpu
 #PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
-#PBS -l walltime=24:00:00
+#PBS -l walltime=72:00:00
 #PBS -j oe
 
 set -euo pipefail
