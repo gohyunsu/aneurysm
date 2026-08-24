@@ -9,7 +9,7 @@ This file selects no backbone, objective coefficient, activation, or run.
 from __future__ import annotations
 
 import math
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 
 import torch
 from torch import nn
@@ -42,6 +42,32 @@ def transient_mean_auxiliary_case(
     output = {key: case[key] for key in required[:-1]}
     output["single_field_wss"] = wss.mean(dim=0)
     return output
+
+
+def train_cycle_mean_wss_rms(
+    cases: Sequence[Mapping[str, torch.Tensor]],
+) -> float:
+    """Area-weighted RMS of the exact train-only T+M target population."""
+
+    _require(len(cases) > 0, "train_cases")
+    total = 0.0
+    for case in cases:
+        auxiliary = transient_mean_auxiliary_case(case)
+        field = auxiliary["single_field_wss"].to(torch.float64)
+        weights = auxiliary["vertex_weights"].to(torch.float64)
+        _require(weights.shape == (field.shape[0],), "train_weight_shape")
+        _require(
+            bool(torch.isfinite(weights).all().item())
+            and bool((weights >= 0).all().item())
+            and bool((weights.sum() > 0).item()),
+            "train_weights",
+        )
+        normalized_weights = weights / weights.sum()
+        energy = torch.sum(normalized_weights * torch.sum(field.square(), dim=-1))
+        total += float(energy.item())
+    value = math.sqrt(total / len(cases))
+    _require(math.isfinite(value) and value > 0.0, "train_cycle_mean_rms")
+    return value
 
 
 def steady_auxiliary_case(case: Mapping[str, torch.Tensor]) -> dict[str, torch.Tensor]:

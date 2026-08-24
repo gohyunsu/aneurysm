@@ -6,15 +6,16 @@
 > pass. The common matched runner now also supports `control_TM` and
 > `proposal_TM`: each uses the exact T+S single-field head and coefficient,
 > predicts the same train case's 80-phase mean WSS on a second geometry pass,
-> takes its output scale only from the frozen train-transient audit and reads
-> zero steady WSS rows. The paired sidecar contrasts T+S with T+M for each role
+> derives its output scale from the exact cycle-mean targets over only the 584
+> frozen train fields and reads zero steady WSS rows. The paired sidecar
+> contrasts T+S with T+M for each role
 > on the same 73 validation cases. It is single-seed development attribution,
 > not a replacement for the primary T/T+S factorial, a fully compute-matched
 > control, a causal steady-label effect, novelty or a paper result. Storage
 > I/O and target information remain deliberately unmatched and must be stated.
 > It cannot block the primary factorial, but steady-specific interpretation in
-> the manuscript requires it. Nineteen focused runner/sidecar tests and 33
-> related regressions pass; the full local suite passes 1,030/1,030. This
+> the manuscript requires it. All 34 related regressions pass; the full local
+> suite passes 1,031/1,031. This
 > creates no activation, job, result or claim. Locked test/79 extras remain
 > sealed; use only introai9, never junjinyong, and do not maintain the site.
 

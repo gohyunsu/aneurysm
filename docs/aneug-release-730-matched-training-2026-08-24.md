@@ -32,8 +32,8 @@ Two single-seed development sidecars, control T+M and proposal T+M, make the
 steady comparison less confounded. T+M reuses exactly the T+S single-field
 head and coefficient and makes one second geometry forward/backward pass per
 transient training case. Its target is the same case's 80-phase mean vector
-WSS, and its output scale comes only from the frozen train-transient audit. It
-reads no steady WSS row.
+WSS. Its output scale is the area-weighted RMS of exactly those 584 train-only
+cycle-mean targets, and it reads no steady WSS row.
 
 T+S-minus-T+M is narrower than T+S-minus-T: it helps determine whether an
 observed benefit requires the eligible steady labels rather than merely an

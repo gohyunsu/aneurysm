@@ -69,7 +69,7 @@ def cell(label: str, offset: float, coverage: float = 0.9) -> dict:
         "single_field_output_scale_source": (
             "eligible_steady_physical_vector_rms_from_bound_descriptive_audit"
             if steady
-            else "transient_train_physical_vector_rms_from_train_audit"
+            else "transient_train_cycle_mean_physical_vector_rms_computed_from_frozen_train_fields"
         ),
         "single_field_scale_source_sha256": ("c" if steady else "d") * 64,
         "single_field_auxiliary_source": (

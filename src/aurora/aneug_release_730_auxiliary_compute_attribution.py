@@ -257,7 +257,7 @@ def extract_cell_rows(
             cell.get("single_field_auxiliary_source")
             == "same_train_case_cycle_mean"
             and cell.get("single_field_output_scale_source")
-            == "transient_train_physical_vector_rms_from_train_audit"
+            == "transient_train_cycle_mean_physical_vector_rms_computed_from_frozen_train_fields"
             and _is_sha256(cell.get("single_field_scale_source_sha256"))
             and cell.get("steady_head_active") is False
             and cell.get("additional_steady_forward_backward_work") is False

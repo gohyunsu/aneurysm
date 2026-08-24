@@ -123,6 +123,10 @@ class MatchedTrainingTests(unittest.TestCase):
         self.assertEqual(
             value["auxiliary_attribution"]["steady_wss_rows_read"], 0
         )
+        self.assertEqual(
+            value["auxiliary_attribution"]["head_output_scale"],
+            "transient_train_cycle_mean_physical_vector_rms",
+        )
         self.assertFalse(value["objective"]["steady_scale_is_loss_weight"])
         self.assertEqual(value["objective"]["steady_pair_coefficient"], 1.0)
         self.assertFalse(value["split"]["read_locked_test_fields"])

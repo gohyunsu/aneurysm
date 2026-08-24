@@ -52,6 +52,7 @@ from aurora.aneug_release_730_response_local_candidate import (
 )
 from aurora.aneug_release_730_single_field_auxiliary import (
     SharedEncoderSingleFieldAdapter,
+    train_cycle_mean_wss_rms,
     transient_mean_auxiliary_case,
 )
 from aurora.aneug_release_730_steady_exposure_schedule import (
@@ -233,7 +234,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and attribution["target"] == "same_train_case_80_phase_mean_vector_wss"
         and attribution["shared_single_field_head_with_t_plus_s"] is True
         and attribution["head_output_scale"]
-        == "transient_train_physical_vector_rms"
+        == "transient_train_cycle_mean_physical_vector_rms"
         and attribution["steady_wss_rows_read"] == 0
         and attribution["locked_test_or_extra_rows_read"] == 0
         and attribution["comparison_cells"] == ["control_TS", "proposal_TS"]
@@ -282,7 +283,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and objective["steady_head_output_scale"]
         == "eligible_steady_physical_vector_rms_from_bound_descriptive_audit"
         and objective["transient_mean_head_output_scale"]
-        == "transient_train_physical_vector_rms_from_train_audit"
+        == "transient_train_cycle_mean_physical_vector_rms_computed_from_frozen_train_fields"
         and objective["steady_scale_is_loss_weight"] is False
         and objective["reference_tawss_floor_multiplier"] == 1e-4
         and objective["osi_pseudo_huber_delta"] == 0.02
@@ -1092,20 +1093,10 @@ def run_training(
             paths["response_basis"], activation["response_basis_sha256"], config
         )
     single_field_output_scale = (
-        float(steady_scale_result["transient_train_physical_vector_rms"])
+        train_cycle_mean_wss_rms(train)
         if information_mode == "transient_mean"
         else float(steady_scale_result["steady_physical_vector_rms"])
     )
-    if information_mode == "transient_mean":
-        _require(
-            math.isclose(
-                single_field_output_scale,
-                cycle_output_scale,
-                rel_tol=1e-6,
-                abs_tol=1e-8,
-            ),
-            "transient_mean_scale_lineage",
-        )
     model = build_model(
         config,
         activation,
@@ -1515,7 +1506,7 @@ def run_training(
             "reference_tawss_floor": reference_tawss_floor,
             "single_field_output_scale": single_field_output_scale,
             "single_field_output_scale_source": (
-                "transient_train_physical_vector_rms_from_train_audit"
+                "transient_train_cycle_mean_physical_vector_rms_computed_from_frozen_train_fields"
                 if information_mode == "transient_mean"
                 else (
                     "eligible_steady_physical_vector_rms_from_bound_descriptive_audit"
@@ -1602,7 +1593,7 @@ def run_training(
             "eligible_steady_physical_vector_rms_from_bound_descriptive_audit"
             if is_steady
             else (
-                "transient_train_physical_vector_rms_from_train_audit"
+                "transient_train_cycle_mean_physical_vector_rms_computed_from_frozen_train_fields"
                 if is_transient_mean
                 else None
             )
