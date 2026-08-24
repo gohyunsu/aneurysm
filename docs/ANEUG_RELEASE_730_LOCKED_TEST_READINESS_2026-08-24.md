@@ -52,4 +52,3 @@ the validation-only selection record and the train-only response basis. The
 PBS wrapper permits exactly one GPU job and records whether locked-test access
 began even if the process terminates. This is readiness only: no activation,
 checkpoint manifest, T0 job, result, figure or paper claim currently exists.
-
