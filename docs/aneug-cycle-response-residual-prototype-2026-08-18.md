@@ -36,6 +36,14 @@ Consequently a rank-16 or rank-32 run does not silently retain the full
 rank-256 basis allocation on the GPU; parameter/memory comparisons reflect the
 declared rank rather than an implementation view.
 
+The selected response mean, basis, quadrature weights and amplitude center are
+immutable buffers that move with the model but are non-persistent in
+`state_dict`. At rank 256 the basis alone is about 3.18 GiB, so embedding it in
+every periodic optimizer checkpoint would create tens of GiB of scientifically
+redundant copies. A future executable runner must hash-bind and load the
+separate oracle basis artifact before restoring trainable model, optimizer and
+scheduler state. This changes neither the decoded field nor the declared rank.
+
 The architectural variants also have real compute boundaries. A response-only
 model may be constructed without a local backbone and never evaluates one; a
 local-only forward never evaluates the response head. Thus the ablation does

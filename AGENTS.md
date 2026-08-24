@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 candidate checkpoint-storage correction:** The dormant
+> response/local candidate previously registered the immutable oracle response
+> mean, selected basis, reference weights and amplitude center as persistent
+> buffers. A rank-256 basis is about 3.18 GiB and would therefore be copied
+> into every periodic optimizer checkpoint. These fixed tensors now remain
+> device-moving buffers but are absent from `state_dict`; a future runner must
+> hash-bind and load the separate oracle basis artifact before restoring
+> trainable state. Dataset-free regression verifies both properties. This
+> changes no field, rank, model selection, data, result or execution authority.
+> Oracle `118376.ECE-util1` remains first; use only introai9, never junjinyong,
+> and do not maintain the public site.
+
 > **2026-08-24 comparator exact-state continuation closure:** The pending
 > GHD--GPS and Transolver jobs can now survive a genuine scheduler/walltime
 > interruption without restarting or changing science. Version-2 checkpoints

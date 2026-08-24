@@ -42,7 +42,15 @@ def validate_config(config: Mapping[str, Any]) -> None:
         representation["rank_grid"] == [16, 32, 64, 128, 256]
         and representation["rank_selected"] is False
         and representation["basis_source"]
-        == "release730_train_only_energy_normalized_complete_cycles",
+        == "release730_train_only_energy_normalized_complete_cycles"
+        and representation[
+            "immutable_basis_buffers_persistent_in_model_checkpoint"
+        ]
+        is False
+        and representation[
+            "basis_artifact_must_be_hash_bound_before_model_restore"
+        ]
+        is True,
         "representation",
     )
     branches = config["branches"]
@@ -194,13 +202,26 @@ class CycleResponseResidualDecoder(nn.Module):
         self.rank = int(rank)
         self.phases = phases
         self.nodes = nodes
-        self.register_buffer("response_mean", mean)
+        # These tensors are immutable, hash-bound oracle artifacts. They must
+        # follow the module across devices, but serializing them inside every
+        # optimizer checkpoint would replicate up to several GiB per file.
+        # A future runner must reload the separately bound basis artifact
+        # before restoring trainable state.
+        self.register_buffer("response_mean", mean, persistent=False)
         # A contiguous prefix can still share the full rank-256 storage. Clone
         # the selected rows so low-rank experiments retain only their declared
         # basis memory on the GPU.
-        self.register_buffer("response_basis", basis[:rank].contiguous().clone())
-        self.register_buffer("reference_weights", weights)
-        self.register_buffer("log_amplitude_center", torch.log(train_scales).mean())
+        self.register_buffer(
+            "response_basis",
+            basis[:rank].contiguous().clone(),
+            persistent=False,
+        )
+        self.register_buffer("reference_weights", weights, persistent=False)
+        self.register_buffer(
+            "log_amplitude_center",
+            torch.log(train_scales).mean(),
+            persistent=False,
+        )
 
     def _global_field(
         self,

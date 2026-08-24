@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-24 — Fixed response artifacts no longer inflate checkpoints
+
+- Marked the immutable oracle response mean, selected basis, quadrature
+  weights and amplitude center as non-persistent model buffers: they still
+  move across devices but no longer repeat inside every optimizer checkpoint.
+- Required a future runner to hash-bind and load the separate oracle basis
+  artifact before restoring trainable state. At rank 256 this avoids copying
+  roughly 3.18 GiB into each checkpoint without changing any decoded field.
+- Added a regression that fixed buffers are absent from `state_dict` while
+  preserving dtype/device movement. No rank, model, data, result or execution
+  was selected.
+
 ## 2026-08-24 — Comparator interruptions resume exact state
 
 - Added a common version-2 checkpoint contract for GHD--GPS and Transolver

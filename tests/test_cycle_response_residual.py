@@ -131,6 +131,16 @@ class CycleResponseResidualTests(unittest.TestCase):
             config["representation"]["basis_source"],
             "release730_train_only_energy_normalized_complete_cycles",
         )
+        self.assertFalse(
+            config["representation"][
+                "immutable_basis_buffers_persistent_in_model_checkpoint"
+            ]
+        )
+        self.assertTrue(
+            config["representation"][
+                "basis_artifact_must_be_hash_bound_before_model_restore"
+            ]
+        )
         self.assertEqual(
             config["shared_encoder_contract"]["active_candidate"],
             "SharedEncoderCycleResponseResidual",
@@ -450,6 +460,45 @@ class CycleResponseResidualTests(unittest.TestCase):
         )
         self.assertEqual(decoder.response_basis.untyped_storage().nbytes(), selected_bytes)
         self.assertLess(selected_bytes, payload["basis"].untyped_storage().nbytes())
+
+    def test_fixed_oracle_basis_buffers_move_but_do_not_repeat_in_checkpoints(self):
+        payload = synthetic_payload(rank=4)
+        decoder = CycleResponseResidualDecoder(payload, rank=2)
+        state = decoder.state_dict()
+        for name in (
+            "response_mean",
+            "response_basis",
+            "reference_weights",
+            "log_amplitude_center",
+        ):
+            self.assertNotIn(name, state)
+        self.assertEqual(state, {})
+        decoder = decoder.to(dtype=torch.float64)
+        self.assertEqual(decoder.response_mean.dtype, torch.float64)
+        self.assertEqual(decoder.response_basis.dtype, torch.float64)
+        self.assertEqual(decoder.reference_weights.dtype, torch.float64)
+        self.assertEqual(decoder.log_amplitude_center.dtype, torch.float64)
+
+    def test_parent_checkpoint_keeps_trainable_state_but_omits_fixed_basis(self):
+        payload = synthetic_payload(rank=4)
+        model = SharedEncoderCycleResponseResidual(
+            SharedBackbone(4, 5),
+            payload,
+            rank=2,
+            local_output_scale=1.0,
+        )
+        state = model.state_dict()
+        self.assertIn("backbone.encoder.weight", state)
+        self.assertIn("backbone.cycle.weight", state)
+        self.assertIn("response_head.1.weight", state)
+        self.assertIn("single_field_head.network.1.weight", state)
+        for name in (
+            "decoder.response_mean",
+            "decoder.response_basis",
+            "decoder.reference_weights",
+            "decoder.log_amplitude_center",
+        ):
+            self.assertNotIn(name, state)
 
 
 if __name__ == "__main__":

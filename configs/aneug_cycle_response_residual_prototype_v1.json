@@ -8,7 +8,9 @@
     "rank_grid": [16, 32, 64, 128, 256],
     "rank_selected": false,
     "coefficient_input": "area_weighted_pool_of_shared_GHD_conditioned_node_features",
-    "amplitude_pattern_separation": true
+    "amplitude_pattern_separation": true,
+    "immutable_basis_buffers_persistent_in_model_checkpoint": false,
+    "basis_artifact_must_be_hash_bound_before_model_restore": true
   },
   "shared_encoder_contract": {
     "active_candidate": "SharedEncoderCycleResponseResidual",
