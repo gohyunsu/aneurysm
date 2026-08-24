@@ -15,11 +15,46 @@ from aurora.aneug_release_730_direct_control_selection import (
     load_config,
     main,
     validate_activation,
+    validate_graph_order_attestation,
 )
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneug_release_730_direct_control_selection_v1.json"
+GRAPH_RESULT_SHA256 = "a" * 64
+GRAPH_TERMINAL_OUTCOME_SHA256 = "b" * 64
+
+
+def graph_attestation(
+    *,
+    result_sha256: str = GRAPH_RESULT_SHA256,
+    terminal_outcome_sha256: str = GRAPH_TERMINAL_OUTCOME_SHA256,
+) -> dict:
+    config = load_config(CONFIG)
+    return {
+        "schema_version": "aurora.private.aneug_release_730_direct_order_attestation.v1",
+        "direct_result_sha256": result_sha256,
+        "direct_terminal_record_sha256": terminal_outcome_sha256,
+        "producer_public_commit": "1" * 40,
+        "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
+        "validation_case_digest": config["split"]["validation_case_digest"],
+        "validation_loader_order_sha256": config["split"]
+        ["validation_loader_order_sha256"],
+        "order_derivation": "flatten_private_validation_components_in_stored_order",
+        "producer_order_path": "validate_split_evidence_then_selected_training_records_over_buckets_validation",
+        "manifest_digest_recomputed_without_identifier_output": True,
+        "case_ids_included": False,
+        "scientific_result_changed": False,
+        "locked_test_or_extra_read": False,
+    }
+
+
+def analysis_kwargs() -> dict:
+    return {
+        "graph_order_attestation": graph_attestation(),
+        "graph_result_sha256": GRAPH_RESULT_SHA256,
+        "graph_terminal_outcome_sha256": GRAPH_TERMINAL_OUTCOME_SHA256,
+    }
 
 
 def rows(
@@ -60,10 +95,6 @@ def result(
             if label == "released_graph_unet_adapter"
             else "complete"
         ),
-        "validation_case_digest": config["split"]["validation_case_digest"],
-        "validation_loader_order_sha256": config["split"]
-        ["validation_loader_order_sha256"],
-        "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
         "validation_case_count": 73,
         "case_ids_included": False,
         "processed_only_extra_field_case_count_read": 0,
@@ -82,6 +113,11 @@ def result(
     else:
         value.update(
             {
+                "validation_case_digest": config["split"]["validation_case_digest"],
+                "validation_loader_order_sha256": config["split"]
+                ["validation_loader_order_sha256"],
+                "private_split_manifest_sha256": config["split"]
+                ["private_manifest_sha256"],
                 "development_only": True,
                 "locked_test_field_case_count_read": 0,
                 "paper_performance_claim": False,
@@ -127,10 +163,15 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
     def test_extractors_accept_all_three_exact_result_contracts(self) -> None:
         config = load_config(CONFIG)
         for label, value in all_results().items():
-            self.assertEqual(len(extract_control_rows(label, value, config)), 73)
+            self.assertEqual(
+                len(extract_control_rows(label, value, config, **analysis_kwargs())),
+                73,
+            )
 
     def test_field_mean_selects_control_not_functional_tradeoff(self) -> None:
-        output = analyze_direct_controls(all_results(), load_config(CONFIG), replicates=200)
+        output = analyze_direct_controls(
+            all_results(), load_config(CONFIG), replicates=200, **analysis_kwargs()
+        )
         self.assertEqual(output["selected_direct_control"], "ghd_gps_unet")
         self.assertIn("transolver", output["pareto_set"])
         self.assertIsNone(output["automatic_paper_winner"])
@@ -145,7 +186,9 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
         values["transolver"]["validation"]["per_case_without_identifiers"] = rows(
             0.4, 0.1, 0.01
         )
-        output = analyze_direct_controls(values, load_config(CONFIG), replicates=200)
+        output = analyze_direct_controls(
+            values, load_config(CONFIG), replicates=200, **analysis_kwargs()
+        )
         self.assertEqual(output["selected_direct_control"], "ghd_gps_unet")
 
     def test_prediction_validity_coverage_is_reported_but_not_a_pareto_axis(self) -> None:
@@ -161,7 +204,7 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
             ),
         }
         output = analyze_direct_controls(
-            values, load_config(CONFIG), replicates=200
+            values, load_config(CONFIG), replicates=200, **analysis_kwargs()
         )
         self.assertEqual(output["pareto_set"], ["released_graph_unet_adapter"])
         self.assertEqual(
@@ -195,6 +238,24 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
         ):
             extract_control_rows("ghd_gps_unet", changed, config)
 
+    def test_historical_graph_result_requires_matching_separate_attestation(self) -> None:
+        config = load_config(CONFIG)
+        graph = result("released_graph_unet_adapter", 0.63, 0.2, 0.02)
+        with self.assertRaisesRegex(
+            Release730DirectControlSelectionError, "attestation_required"
+        ):
+            extract_control_rows("released_graph_unet_adapter", graph, config)
+        changed = graph_attestation(result_sha256="0" * 64)
+        with self.assertRaisesRegex(
+            Release730DirectControlSelectionError, "attestation_artifacts"
+        ):
+            validate_graph_order_attestation(
+                changed,
+                config,
+                direct_result_sha256=GRAPH_RESULT_SHA256,
+                direct_terminal_outcome_sha256=GRAPH_TERMINAL_OUTCOME_SHA256,
+            )
+
     def test_activation_binds_all_result_and_terminal_hashes(self) -> None:
         config = load_config(CONFIG)
         activation = {
@@ -210,6 +271,8 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
                 label: str(index + 4) * 64
                 for index, label in enumerate(CONTROL_ORDER)
             },
+            "released_graph_unet_order_attestation_sha256": "7" * 64,
+            "released_graph_unet_terminal_outcome_sha256": "8" * 64,
             "validation_case_digest": config["split"]["validation_case_digest"],
             "validation_loader_order_sha256": config["split"]
             ["validation_loader_order_sha256"],
@@ -240,9 +303,44 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
                 result_path = root / f"{label}.result.json"
                 terminal_path = root / f"{label}.terminal.json"
                 result_path.write_text(json.dumps(value), encoding="utf-8")
-                terminal_path.write_text("{}\n", encoding="utf-8")
+                terminal = (
+                    {"job_id": "117056.ECE-util1", "exit_code": 0, "complete": True}
+                    if label == "released_graph_unet_adapter"
+                    else {}
+                )
+                terminal_path.write_text(json.dumps(terminal) + "\n", encoding="utf-8")
                 result_paths[label] = result_path
                 terminal_paths[label] = terminal_path
+            graph_result_sha256 = file_sha256(
+                result_paths["released_graph_unet_adapter"]
+            )
+            graph_terminal_sha256 = file_sha256(
+                terminal_paths["released_graph_unet_adapter"]
+            )
+            terminal_outcome = {
+                "schema_version": "aurora.private.aneug_release_730_graphunet_terminal_outcome.v1",
+                "job_id": "117056.ECE-util1",
+                "public_training_commit": "1" * 40,
+                "terminal_status": {
+                    "exit_code": 0,
+                    "complete": True,
+                    "result_status": "complete_validation_development",
+                },
+                "raw_artifacts": {
+                    "attempt_status_sha256": graph_terminal_sha256,
+                    "result_sha256": graph_result_sha256,
+                },
+            }
+            terminal_outcome_path = root / "graph.terminal_outcome.json"
+            terminal_outcome_path.write_text(
+                json.dumps(terminal_outcome), encoding="utf-8"
+            )
+            attestation = graph_attestation(
+                result_sha256=graph_result_sha256,
+                terminal_outcome_sha256=file_sha256(terminal_outcome_path),
+            )
+            attestation_path = root / "graph.order_attestation.json"
+            attestation_path.write_text(json.dumps(attestation), encoding="utf-8")
             activation = {
                 "schema_version": "aurora.private.aneug_release_730_direct_control_selection_activation.v1",
                 "protocol_id": config["protocol_id"],
@@ -254,6 +352,12 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
                 "terminal_record_sha256": {
                     label: file_sha256(terminal_paths[label]) for label in CONTROL_ORDER
                 },
+                "released_graph_unet_order_attestation_sha256": file_sha256(
+                    attestation_path
+                ),
+                "released_graph_unet_terminal_outcome_sha256": file_sha256(
+                    terminal_outcome_path
+                ),
                 "validation_case_digest": config["split"]["validation_case_digest"],
                 "validation_loader_order_sha256": config["split"]
                 ["validation_loader_order_sha256"],
@@ -272,6 +376,10 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
                 str(activation_path),
                 "--expected-commit",
                 "abc",
+                "--released-graph-unet-order-attestation",
+                str(attestation_path),
+                "--released-graph-unet-terminal-outcome",
+                str(terminal_outcome_path),
                 "--output",
                 str(output_path),
             ]

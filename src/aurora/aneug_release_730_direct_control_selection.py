@@ -56,6 +56,12 @@ PERFORMANCE_METRICS = (
     "osi_mae",
 )
 DIAGNOSTIC_METRICS = ("osi_coverage",)
+GRAPH_ORDER_ATTESTATION_SCHEMA = (
+    "aurora.private.aneug_release_730_direct_order_attestation.v1"
+)
+GRAPH_TERMINAL_OUTCOME_SCHEMA = (
+    "aurora.private.aneug_release_730_graphunet_terminal_outcome.v1"
+)
 
 
 def _require(condition: bool, label: str) -> None:
@@ -67,6 +73,14 @@ def _is_sha256(value: Any) -> bool:
     return (
         isinstance(value, str)
         and len(value) == 64
+        and all(character in "0123456789abcdef" for character in value)
+    )
+
+
+def _is_git_sha(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and len(value) == 40
         and all(character in "0123456789abcdef" for character in value)
     )
 
@@ -179,6 +193,13 @@ def validate_activation(
             group,
         )
         _require(all(_is_sha256(values[label]) for label in CONTROL_ORDER), group)
+    _require(
+        _is_sha256(activation.get("released_graph_unet_order_attestation_sha256"))
+        and _is_sha256(
+            activation.get("released_graph_unet_terminal_outcome_sha256")
+        ),
+        "activation_graph_provenance",
+    )
     split = config["split"]
     _require(
         activation.get("validation_case_digest") == split["validation_case_digest"]
@@ -195,6 +216,102 @@ def validate_activation(
         "activation_boundary",
     )
     return activation
+
+
+def validate_graph_order_attestation(
+    attestation: Mapping[str, Any],
+    config: Mapping[str, Any],
+    *,
+    direct_result_sha256: str,
+    direct_terminal_outcome_sha256: str,
+) -> None:
+    """Validate the separately preserved order evidence for the historical result."""
+
+    _require(
+        attestation.get("schema_version") == GRAPH_ORDER_ATTESTATION_SCHEMA,
+        "released_graph_unet_adapter_attestation_schema",
+    )
+    _require(
+        _is_sha256(direct_result_sha256)
+        and _is_sha256(direct_terminal_outcome_sha256)
+        and attestation.get("direct_result_sha256") == direct_result_sha256
+        and attestation.get("direct_terminal_record_sha256")
+        == direct_terminal_outcome_sha256,
+        "released_graph_unet_adapter_attestation_artifacts",
+    )
+    split = config["split"]
+    _require(
+        attestation.get("validation_case_digest")
+        == split["validation_case_digest"]
+        and attestation.get("validation_loader_order_sha256")
+        == split["validation_loader_order_sha256"]
+        and attestation.get("private_split_manifest_sha256")
+        == split["private_manifest_sha256"]
+        and attestation.get("order_derivation")
+        == "flatten_private_validation_components_in_stored_order"
+        and attestation.get("producer_order_path")
+        == "validate_split_evidence_then_selected_training_records_over_buckets_validation",
+        "released_graph_unet_adapter_attestation_split",
+    )
+    _require(
+        _is_git_sha(attestation.get("producer_public_commit"))
+        and attestation.get("manifest_digest_recomputed_without_identifier_output")
+        is True
+        and attestation.get("case_ids_included") is False
+        and attestation.get("scientific_result_changed") is False
+        and attestation.get("locked_test_or_extra_read") is False,
+        "released_graph_unet_adapter_attestation_boundary",
+    )
+
+
+def validate_graph_terminal_chain(
+    *,
+    result_sha256: str,
+    terminal_sha256: str,
+    terminal: Mapping[str, Any],
+    terminal_outcome_sha256: str,
+    terminal_outcome: Mapping[str, Any],
+    order_attestation: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> None:
+    """Bind the raw terminal marker, terminal summary, result and order evidence."""
+
+    _require(
+        terminal.get("exit_code") == 0 and terminal.get("complete") is True,
+        "released_graph_unet_adapter_terminal",
+    )
+    _require(
+        terminal_outcome.get("schema_version") == GRAPH_TERMINAL_OUTCOME_SCHEMA
+        and terminal_outcome.get("job_id") == terminal.get("job_id"),
+        "released_graph_unet_adapter_terminal_outcome_identity",
+    )
+    terminal_status = terminal_outcome.get("terminal_status")
+    raw_artifacts = terminal_outcome.get("raw_artifacts")
+    _require(
+        isinstance(terminal_status, Mapping)
+        and terminal_status.get("exit_code") == 0
+        and terminal_status.get("complete") is True
+        and terminal_status.get("result_status")
+        == RESULT_CONTRACTS["released_graph_unet_adapter"]["status"],
+        "released_graph_unet_adapter_terminal_outcome_status",
+    )
+    _require(
+        isinstance(raw_artifacts, Mapping)
+        and raw_artifacts.get("attempt_status_sha256") == terminal_sha256
+        and raw_artifacts.get("result_sha256") == result_sha256,
+        "released_graph_unet_adapter_terminal_outcome_artifacts",
+    )
+    validate_graph_order_attestation(
+        order_attestation,
+        config,
+        direct_result_sha256=result_sha256,
+        direct_terminal_outcome_sha256=terminal_outcome_sha256,
+    )
+    _require(
+        terminal_outcome.get("public_training_commit")
+        == order_attestation.get("producer_public_commit"),
+        "released_graph_unet_adapter_producer_commit",
+    )
 
 
 def _parse_rows(rows: Any, expected_count: int) -> list[dict[str, float]]:
@@ -217,7 +334,13 @@ def _parse_rows(rows: Any, expected_count: int) -> list[dict[str, float]]:
 
 
 def extract_control_rows(
-    label: str, result: Mapping[str, Any], config: Mapping[str, Any]
+    label: str,
+    result: Mapping[str, Any],
+    config: Mapping[str, Any],
+    *,
+    graph_order_attestation: Mapping[str, Any] | None = None,
+    graph_result_sha256: str | None = None,
+    graph_terminal_outcome_sha256: str | None = None,
 ) -> list[dict[str, float]]:
     _require(label in RESULT_CONTRACTS, "control_label")
     contract = RESULT_CONTRACTS[label]
@@ -228,15 +351,45 @@ def extract_control_rows(
         f"{label}_identity",
     )
     split = config["split"]
-    _require(
-        result.get("validation_case_digest") == split["validation_case_digest"]
-        and result.get("validation_loader_order_sha256")
-        == split["validation_loader_order_sha256"]
-        and result.get("private_split_manifest_sha256")
-        == split["private_manifest_sha256"]
-        and result.get("validation_case_count") == split["validation_cases"],
-        f"{label}_split",
-    )
+    if label == "released_graph_unet_adapter":
+        _require(
+            graph_order_attestation is not None
+            and graph_result_sha256 is not None
+            and graph_terminal_outcome_sha256 is not None,
+            f"{label}_attestation_required",
+        )
+        validate_graph_order_attestation(
+            graph_order_attestation,
+            config,
+            direct_result_sha256=graph_result_sha256,
+            direct_terminal_outcome_sha256=graph_terminal_outcome_sha256,
+        )
+        _require(
+            result.get("validation_case_count") == split["validation_cases"],
+            f"{label}_split",
+        )
+        optional_result_split = {
+            "validation_case_digest": split["validation_case_digest"],
+            "validation_loader_order_sha256": split[
+                "validation_loader_order_sha256"
+            ],
+            "private_split_manifest_sha256": split["private_manifest_sha256"],
+        }
+        for key, expected in optional_result_split.items():
+            _require(
+                key not in result or result.get(key) == expected,
+                f"{label}_split_conflict",
+            )
+    else:
+        _require(
+            result.get("validation_case_digest") == split["validation_case_digest"]
+            and result.get("validation_loader_order_sha256")
+            == split["validation_loader_order_sha256"]
+            and result.get("private_split_manifest_sha256")
+            == split["private_manifest_sha256"]
+            and result.get("validation_case_count") == split["validation_cases"],
+            f"{label}_split",
+        )
     _require(result.get("case_ids_included") is False, f"{label}_identifiers")
     if label == "released_graph_unet_adapter":
         _require(
@@ -266,13 +419,23 @@ def analyze_direct_controls(
     results: Mapping[str, Mapping[str, Any]],
     config: Mapping[str, Any],
     *,
+    graph_order_attestation: Mapping[str, Any],
+    graph_result_sha256: str,
+    graph_terminal_outcome_sha256: str,
     replicates: int | None = None,
     seed: int | None = None,
 ) -> dict[str, Any]:
     validate_config(config)
     _require(tuple(results) == CONTROL_ORDER, "result_order")
     rows = {
-        label: extract_control_rows(label, results[label], config)
+        label: extract_control_rows(
+            label,
+            results[label],
+            config,
+            graph_order_attestation=graph_order_attestation,
+            graph_result_sha256=graph_result_sha256,
+            graph_terminal_outcome_sha256=graph_terminal_outcome_sha256,
+        )
         for label in CONTROL_ORDER
     }
     means = {label: metric_means(rows[label]) for label in CONTROL_ORDER}
@@ -352,6 +515,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--activation", type=Path)
     parser.add_argument("--expected-commit")
+    parser.add_argument("--released-graph-unet-order-attestation", type=Path)
+    parser.add_argument("--released-graph-unet-terminal-outcome", type=Path)
     for label in CONTROL_ORDER:
         option = label.replace("_", "-")
         parser.add_argument(f"--{option}-result", type=Path)
@@ -364,6 +529,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     _require(
         args.activation is not None
         and args.expected_commit is not None
+        and args.released_graph_unet_order_attestation is not None
+        and args.released_graph_unet_terminal_outcome is not None
         and args.output is not None,
         "execution_arguments",
     )
@@ -380,10 +547,56 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"{label}_hash",
         )
         results[label] = json.loads(result_path.read_text(encoding="utf-8"))
-    output = analyze_direct_controls(results, config)
+    graph_label = "released_graph_unet_adapter"
+    graph_result_path = getattr(args, f"{graph_label}_result")
+    graph_terminal_path = getattr(args, f"{graph_label}_terminal")
+    graph_result_sha256 = file_sha256(graph_result_path)
+    graph_terminal_sha256 = file_sha256(graph_terminal_path)
+    graph_order_attestation_sha256 = file_sha256(
+        args.released_graph_unet_order_attestation
+    )
+    graph_terminal_outcome_sha256 = file_sha256(
+        args.released_graph_unet_terminal_outcome
+    )
+    _require(
+        graph_order_attestation_sha256
+        == activation["released_graph_unet_order_attestation_sha256"]
+        and graph_terminal_outcome_sha256
+        == activation["released_graph_unet_terminal_outcome_sha256"],
+        "released_graph_unet_adapter_provenance_hash",
+    )
+    graph_order_attestation = json.loads(
+        args.released_graph_unet_order_attestation.read_text(encoding="utf-8")
+    )
+    graph_terminal_outcome = json.loads(
+        args.released_graph_unet_terminal_outcome.read_text(encoding="utf-8")
+    )
+    graph_terminal = json.loads(graph_terminal_path.read_text(encoding="utf-8"))
+    validate_graph_terminal_chain(
+        result_sha256=graph_result_sha256,
+        terminal_sha256=graph_terminal_sha256,
+        terminal=graph_terminal,
+        terminal_outcome_sha256=graph_terminal_outcome_sha256,
+        terminal_outcome=graph_terminal_outcome,
+        order_attestation=graph_order_attestation,
+        config=config,
+    )
+    output = analyze_direct_controls(
+        results,
+        config,
+        graph_order_attestation=graph_order_attestation,
+        graph_result_sha256=graph_result_sha256,
+        graph_terminal_outcome_sha256=graph_terminal_outcome_sha256,
+    )
     output["activation_sha256"] = file_sha256(args.activation)
     output["result_sha256"] = dict(activation["result_sha256"])
     output["terminal_record_sha256"] = dict(activation["terminal_record_sha256"])
+    output["released_graph_unet_order_attestation_sha256"] = (
+        graph_order_attestation_sha256
+    )
+    output["released_graph_unet_terminal_outcome_sha256"] = (
+        graph_terminal_outcome_sha256
+    )
     _atomic_json(args.output, output)
     return 0
 
