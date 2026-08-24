@@ -14,6 +14,7 @@ from aurora.aneug_release_730_locked_test_evaluation import (
     FIGURE_SEED,
     FRESH_TRAINING_SEEDS,
     Release730LockedTestError,
+    _common_reference_tawss_floor,
     _validate_checkpoint_payload,
     analyze_locked_test,
     file_sha256,
@@ -160,6 +161,13 @@ class LockedTestConfigTests(unittest.TestCase):
 
 
 class LockedTestManifestTests(unittest.TestCase):
+    def test_all_frozen_checkpoints_must_share_the_train_only_osi_floor(self) -> None:
+        self.assertEqual(_common_reference_tawss_floor([0.001] * 20), 0.001)
+        with self.assertRaisesRegex(
+            Release730LockedTestError, "reference_tawss_floor_mismatch"
+        ):
+            _common_reference_tawss_floor([0.001] * 19 + [0.002])
+
     def test_exact_twenty_checkpoint_grid_is_required(self) -> None:
         config = load_config(CONFIG)
         payload = manifest()
@@ -264,7 +272,10 @@ class LockedTestManifestTests(unittest.TestCase):
             entry["terminal_record_sha256"] = file_sha256(
                 root / entry["terminal_record_relative_path"]
             )
-            preflight_frozen_evidence({"entries": [entry]}, root, config)
+            self.assertEqual(
+                preflight_frozen_evidence({"entries": [entry]}, root, config),
+                0.001,
+            )
             terminal["complete"] = False
             (root / entry["terminal_record_relative_path"]).write_text(
                 json.dumps(terminal), encoding="utf-8"

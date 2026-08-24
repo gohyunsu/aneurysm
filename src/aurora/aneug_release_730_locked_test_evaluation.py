@@ -150,9 +150,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "matched_training_config_sha256": "08aa39d3f3f8380e0d28fa1838b56bec5fa774941683b809fb04c8ab321d2ecf",
         "matched_information_config_sha256": "9632456e59283b951ddeeb6cd40dfe568a5b3e7bb99fdc9a6c8004e624bafe50",
         "multiseed_confirmation_config_sha256": "75cd2e6c5d7545dd56274d7dd1b14d8b07380b0711cf10573d5b9fcaa1b57d92",
-        "figure_protocol_config_sha256": "6bae547ab03edfc04979aeb2508d08b4f4488d44696f822d6592a5c51f122d91",
-        "figure_protocol_source_sha256": "4d9fdd0fdf73cd14b907d84a6b38019f24fa97723fbc132f4482df3e78951399",
-        "figure_renderer_source_sha256": "d15b68ae200002cb059f2c3c0ee9d1b21cd4c29c2ab9efd51ea1d7f26a99a013",
+        "figure_protocol_config_sha256": "782396a37d16d9b8edec0e014d9fa18c8a3c28df1c8118cacb3cecac1b9fbcf2",
+        "figure_protocol_source_sha256": "b466aa67b964b55aa01eeb95d22121c43f47af7526230c83ea690ed17bc1899e",
+        "figure_renderer_source_sha256": "26eb2211d40a1f02cf1a75030284b89ab3fa184f8ab85f4953fcabaa2883d899",
         "public_split_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
         "public_train_audit_sha256": "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
     }
@@ -627,12 +627,28 @@ def _resolved_evidence_path(root: Path, relative: str) -> Path:
     return candidate
 
 
+def _common_reference_tawss_floor(values: Sequence[float]) -> float:
+    _require(bool(values), "reference_tawss_floor_missing")
+    parsed = [float(value) for value in values]
+    _require(
+        all(math.isfinite(value) and value > 0.0 for value in parsed),
+        "reference_tawss_floor_invalid",
+    )
+    common = parsed[0]
+    _require(
+        all(value == common for value in parsed),
+        "reference_tawss_floor_mismatch",
+    )
+    return common
+
+
 def preflight_frozen_evidence(
     manifest: Mapping[str, Any], checkpoint_root: Path, config: Mapping[str, Any]
-) -> None:
+) -> float:
     """Verify every frozen C0 artifact before the one-time test marker exists."""
 
     _require(checkpoint_root.is_dir(), "checkpoint_root")
+    reference_tawss_floors: list[float] = []
     for entry in manifest["entries"]:
         checkpoint_path = _resolved_evidence_path(
             checkpoint_root, str(entry["checkpoint_relative_path"])
@@ -655,6 +671,7 @@ def preflight_frozen_evidence(
         )
         _require(isinstance(checkpoint, Mapping), "checkpoint_mapping")
         _validate_checkpoint_payload(checkpoint, entry, config)
+        reference_tawss_floors.append(float(checkpoint["reference_tawss_floor"]))
         validation = json.loads(validation_path.read_text(encoding="utf-8"))
         terminal = json.loads(terminal_path.read_text(encoding="utf-8"))
         _require(
@@ -681,6 +698,7 @@ def preflight_frozen_evidence(
             "terminal_record_incomplete",
         )
         del checkpoint
+    return _common_reference_tawss_floor(reference_tawss_floors)
 def analyze_locked_test(
     rows_by_seed: Mapping[int, Mapping[str, Sequence[Mapping[str, float]]]],
     config: Mapping[str, Any],
@@ -769,7 +787,9 @@ def run_locked_test(
     device = torch.device("cuda")
     started = time.monotonic()
     torch.cuda.reset_peak_memory_stats()
-    preflight_frozen_evidence(manifest, paths["checkpoint_root"], config)
+    reference_tawss_floor = preflight_frozen_evidence(
+        manifest, paths["checkpoint_root"], config
+    )
     basis_payload = load_response_basis(
         paths["response_basis"], activation["response_basis_sha256"], matched_config
     )
@@ -786,7 +806,12 @@ def run_locked_test(
         str(activation["test_loader_order_sha256"]),
     )
     phase_weights = torch.full((80,), 1.0 / 80.0, dtype=torch.float32)
-    selection = build_release730_reference_selection(cases, phase_weights, figure_config)
+    selection = build_release730_reference_selection(
+        cases,
+        phase_weights,
+        figure_config,
+        reference_tawss_floor,
+    )
     _strict_atomic_json(selection_path, selection)
     selected_ordinals = [int(value) for value in selection["selected_locked_test_ordinals"]]
     entries = {
@@ -809,6 +834,11 @@ def run_locked_test(
             checkpoint = torch.load(str(checkpoint_path), map_location="cpu", weights_only=True)
             _require(isinstance(checkpoint, Mapping), "checkpoint_mapping")
             _validate_checkpoint_payload(checkpoint, entry, config)
+            _require(
+                float(checkpoint["reference_tawss_floor"])
+                == reference_tawss_floor,
+                "reference_tawss_floor_mismatch",
+            )
             model_activation = {
                 "model_role": entry["model_role"],
                 "model_family": entry["model_family"],
@@ -903,6 +933,7 @@ def run_locked_test(
         "figure_selection": selection,
         "figure_display_training_seed": FIGURE_SEED,
         "figure_display_information_mode": FIGURE_MODE,
+        "figure_reference_tawss_floor": reference_tawss_floor,
         "figure_payload_sha256": file_sha256(figure_payload_path),
         "elapsed_seconds": time.monotonic() - started,
         "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),

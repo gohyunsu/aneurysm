@@ -80,16 +80,34 @@ def reference_osi_summary(
     wss: torch.Tensor,
     phase_weights: torch.Tensor,
     vertex_weights: torch.Tensor,
+    *,
+    reference_tawss_floor: float | None = None,
 ) -> dict[str, Any]:
     """Return reference-only area-weighted OSI burden and support coverage."""
 
-    functionals = compute_cycle_functionals(wss, phase_weights, torch)
+    if reference_tawss_floor is None:
+        activity_epsilon = 1e-12
+    else:
+        _require(
+            math.isfinite(float(reference_tawss_floor))
+            and float(reference_tawss_floor) > 0.0,
+            "reference_tawss_floor",
+        )
+        activity_epsilon = float(reference_tawss_floor)
+    functionals = compute_cycle_functionals(
+        wss,
+        phase_weights,
+        torch,
+        activity_epsilon=activity_epsilon,
+    )
     weights = _normalized_vertex_weights(vertex_weights.to(wss), wss.shape[1])
     valid = functionals["osi_valid"] & torch.isfinite(functionals["osi"])
     support = weights * valid.to(weights.dtype)
     support_weight = support.sum()
     _require(bool((support_weight > 0).item()), "empty_osi_support")
-    burden = torch.sum(support * functionals["osi"]) / support_weight
+    burden = torch.sum(
+        weights[valid] * functionals["osi"][valid]
+    ) / support_weight
     _require(bool(torch.isfinite(burden).item()), "nonfinite_burden")
     return {
         "area_weighted_mean_reference_osi": float(burden.item()),
@@ -171,6 +189,7 @@ def build_reference_selection(
     case_quantiles: Sequence[float] = (0.1, 0.5, 0.9),
     trace_vertex_quantile: float = 0.9,
     expected_case_count: int = 51,
+    reference_tawss_floor: float | None = None,
 ) -> dict[str, Any]:
     """Build an identifier-free outer-figure selection from references only."""
 
@@ -178,7 +197,10 @@ def build_reference_selection(
     _require(len(reference_cases) == expected_case_count, "outer_case_count")
     summaries = [
         reference_osi_summary(
-            case["wss"], phase_weights, case["vertex_weights"]
+            case["wss"],
+            phase_weights,
+            case["vertex_weights"],
+            reference_tawss_floor=reference_tawss_floor,
         )
         for case in reference_cases
     ]

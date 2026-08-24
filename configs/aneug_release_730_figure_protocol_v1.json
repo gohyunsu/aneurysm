@@ -2,7 +2,7 @@
   "schema_version": "aurora.aneug_release_730_confirmatory_figure.v1",
   "protocol_id": "aneug_release_730_confirmatory_figure_v1",
   "status": "frozen_non_executable_until_T0",
-  "as_of": "2026-08-24",
+  "as_of": "2026-08-25",
   "split": {
     "locked_test_cases": 73,
     "test_case_digest": "1f87f52fc4b819548aebcc6df77f90830d475d1e92df0ca833980347d792aa56",
@@ -14,6 +14,7 @@
     "case_quantiles": [0.1, 0.5, 0.9],
     "trace_vertex_metric": "reference_OSI",
     "trace_vertex_quantile": 0.9,
+    "reference_tawss_floor_source": "common_frozen_checkpoint_train_only_value",
     "ordinal_tie_break": "frozen_private_test_loader_order",
     "candidate_or_baseline_values_used": false
   },
@@ -21,6 +22,8 @@
     "camera": "fixed_canonical_orthographic",
     "shared_coordinates": true,
     "shared_mask": true,
+    "osi_reference_support": "reference_TAWSS_above_train_frozen_floor",
+    "invalid_prediction_osi_rendering": "masked_not_imputed",
     "tawss_colour_limits": "full_range_across_the_three_selected_references",
     "osi_colour_limits": [0.0, 0.5],
     "candidate_dependent_clipping": false,

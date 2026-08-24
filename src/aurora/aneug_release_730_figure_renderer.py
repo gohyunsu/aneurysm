@@ -45,6 +45,7 @@ def _case_payload(
     case: Mapping[str, torch.Tensor],
     trace_vertex: int,
     phase_weights: torch.Tensor,
+    reference_tawss_floor: float,
 ) -> dict[str, Any]:
     required = (
         "coordinates",
@@ -95,13 +96,25 @@ def _case_payload(
             cycle.shape == (80, nodes, 3) and _finite_tensor(cycle),
             f"{label}_cycle",
         )
-        functionals = compute_cycle_functionals(cycle, phase_weights, torch)
+        functionals = compute_cycle_functionals(
+            cycle,
+            phase_weights,
+            torch,
+            activity_epsilon=reference_tawss_floor,
+        )
         methods[label] = {
             "tawss": functionals["tawss"].detach().cpu(),
             "osi": functionals["osi"].detach().cpu(),
             "osi_valid": functionals["osi_valid"].detach().cpu(),
             "cycle": cycle.detach().cpu(),
         }
+
+    reference_osi_support = (
+        methods["reference"]["osi_valid"]
+        & torch.isfinite(methods["reference"]["osi"])
+        & display_mask.detach().cpu()
+    )
+    _require(bool(reference_osi_support.any().item()), "empty_reference_osi_support")
 
     reference_trace = methods["reference"]["cycle"][:, int(trace_vertex), :]
     reference_magnitude = torch.linalg.vector_norm(reference_trace, dim=-1)
@@ -121,6 +134,7 @@ def _case_payload(
         "retained_faces": retained_faces.detach().cpu(),
         "trace_vertex_ordinal": int(trace_vertex),
         "trace_anchor_phase": anchor_phase,
+        "reference_osi_support": reference_osi_support,
         "methods": methods,
     }
 
@@ -160,6 +174,15 @@ def build_release730_render_payload(
         and selection.get("case_identifiers_included") is False,
         "prediction_blind_selection",
     )
+    reference_tawss_floor = selection.get("reference_tawss_floor")
+    _require(
+        isinstance(reference_tawss_floor, (int, float))
+        and math.isfinite(float(reference_tawss_floor))
+        and float(reference_tawss_floor) > 0.0
+        and selection.get("reference_tawss_floor_source")
+        == "common_frozen_checkpoint_train_only_value",
+        "reference_tawss_floor",
+    )
     _require(
         phase_weights.shape == (80,)
         and _finite_tensor(phase_weights)
@@ -168,7 +191,12 @@ def build_release730_render_payload(
         "phase_weights",
     )
     cases = [
-        _case_payload(case, int(trace), phase_weights)
+        _case_payload(
+            case,
+            int(trace),
+            phase_weights,
+            float(reference_tawss_floor),
+        )
         for case, trace in zip(selected_cases, traces)
     ]
     reference_tawss = torch.cat(
@@ -210,6 +238,9 @@ def build_release730_render_payload(
         "surface_colormap": layout["surface_colormap"],
         "tawss_limits": [tawss_min, tawss_max],
         "osi_limits": [0.0, 0.5],
+        "reference_tawss_floor": float(reference_tawss_floor),
+        "osi_support_is_reference_defined": True,
+        "invalid_prediction_osi_rendering": "masked_not_imputed",
         "signed_trace_limits": [trace_min - trace_padding, trace_max + trace_padding],
         "cases": cases,
         "case_identifiers_included": False,
@@ -352,7 +383,11 @@ def render_release730_confirmatory_figure(
                 valid = (
                     torch.isfinite(values)
                     if metric == "tawss"
-                    else case["methods"][method]["osi_valid"] & torch.isfinite(values)
+                    else (
+                        case["reference_osi_support"]
+                        & case["methods"][method]["osi_valid"]
+                        & torch.isfinite(values)
+                    )
                 )
                 collection = _surface_panel(
                     axis,

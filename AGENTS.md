@@ -1,5 +1,30 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 confirmatory-figure OSI-support correction
+
+- A result-blind source audit found that the prepared release-730 figure
+  selector described valid-support OSI but used only the generic `1e-12`
+  numerical activity epsilon. Low-activity OSI could therefore select the
+  low/median/high cases or trace vertices outside the paper's registered
+  train-frozen reference support.
+- Before any T0 activation or locked-test read, case burden, trace selection and
+  rendered OSI support now require the common train-only
+  `reference_tawss_floor` stored by every frozen C0 checkpoint. T0 preflight
+  fails closed if the twenty values disagree. Prediction-invalid regions on
+  reference support are masked, never imputed.
+- This is prospective display/endpoint consistency, not a changed threshold or
+  outcome-driven figure choice. It changes no split, model, loss, endpoint,
+  seed, checkpoint rule, test attempt or claim. Keep test/79 extras sealed,
+  public push held, introai9-only execution, junjinyong exclusion and oracle
+  `118479.ECE-util1` first.
+- Exact figure config/protocol/renderer hashes are `782396a3...bcf2` /
+  `b466aa67...899e` / `26eb2211...d899`; corrected locked-test config/runner/
+  test hashes are `53316b0d...bbf0` / `68262503...1360` /
+  `2001ee03...fd8`. The first focused run exposed the pre-existing
+  zero-weight-times-NaN aggregation failure; valid-index aggregation corrected
+  it. The repeated focused suite passed 27/27, full Research Quality passed
+  1,064/1,064 in 490.936 seconds, and unchanged site/JavaScript checks passed.
+
 ## 2026-08-25 common fine-tune checkpoint-selection correction
 
 - A pre-execution source audit found that the downstream candidate selector

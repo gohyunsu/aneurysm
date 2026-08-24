@@ -8,6 +8,7 @@ it neither loads fields nor renders predictions by itself.
 from __future__ import annotations
 
 import json
+import math
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -59,6 +60,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and selection["case_quantiles"] == [0.1, 0.5, 0.9]
         and selection["trace_vertex_metric"] == "reference_OSI"
         and selection["trace_vertex_quantile"] == 0.9
+        and selection["reference_tawss_floor_source"]
+        == "common_frozen_checkpoint_train_only_value"
         and selection["ordinal_tie_break"] == "frozen_private_test_loader_order"
         and selection["candidate_or_baseline_values_used"] is False,
         "selection",
@@ -68,6 +71,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         display["camera"] == "fixed_canonical_orthographic"
         and display["shared_coordinates"] is True
         and display["shared_mask"] is True
+        and display["osi_reference_support"]
+        == "reference_TAWSS_above_train_frozen_floor"
+        and display["invalid_prediction_osi_rendering"] == "masked_not_imputed"
         and display["tawss_colour_limits"]
         == "full_range_across_the_three_selected_references"
         and display["osi_colour_limits"] == [0.0, 0.5]
@@ -127,12 +133,18 @@ def build_release730_reference_selection(
     reference_cases: Sequence[Mapping[str, torch.Tensor]],
     phase_weights: torch.Tensor,
     config: Mapping[str, Any],
+    reference_tawss_floor: float,
 ) -> dict[str, Any]:
     """Select three locked-test ordinals using references only."""
 
     validate_config(config)
     _require(torch is not None, "torch_required")
     _require(tuple(phase_weights.shape) == (80,), "phase_count")
+    _require(
+        math.isfinite(float(reference_tawss_floor))
+        and float(reference_tawss_floor) > 0.0,
+        "reference_tawss_floor",
+    )
     _require(
         all(
             isinstance(case, Mapping)
@@ -149,6 +161,7 @@ def build_release730_reference_selection(
         case_quantiles=selection["case_quantiles"],
         trace_vertex_quantile=float(selection["trace_vertex_quantile"]),
         expected_case_count=73,
+        reference_tawss_floor=float(reference_tawss_floor),
     )
     return {
         "schema_version": "aurora.aneug_release_730_confirmatory_figure.selection.v1",
@@ -166,6 +179,10 @@ def build_release730_reference_selection(
         ],
         "case_quantiles": generic["case_quantiles"],
         "trace_vertex_quantile": generic["trace_vertex_quantile"],
+        "reference_tawss_floor": float(reference_tawss_floor),
+        "reference_tawss_floor_source": selection[
+            "reference_tawss_floor_source"
+        ],
         "case_identifiers_included": False,
         "candidate_or_baseline_values_read": False,
         "processed_only_extra_values_read": False,

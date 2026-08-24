@@ -11,6 +11,7 @@ except ImportError:
 
 from aurora.aneug_figure_protocol import (
     AneuGFigureProtocolError,
+    reference_osi_summary,
     select_case_ordinals,
 )
 from aurora.aneug_release_730_figure_protocol import (
@@ -52,6 +53,12 @@ class Release730FigureProtocolConfigTests(unittest.TestCase):
                 True,
                 "selection",
             ),
+            (
+                "reference_only_selection",
+                "reference_tawss_floor_source",
+                "locked_test_derived",
+                "selection",
+            ),
         ):
             changed = copy.deepcopy(config)
             changed[section][key] = value
@@ -83,6 +90,7 @@ class Release730FigureProtocolTensorTests(unittest.TestCase):
             cases,
             torch.full((80,), 1.0 / 80.0, dtype=torch.float64),
             config,
+            0.1,
         )
         self.assertEqual(output["locked_test_case_count"], 73)
         self.assertEqual(output["reference_phase_count"], 80)
@@ -95,6 +103,7 @@ class Release730FigureProtocolTensorTests(unittest.TestCase):
                 cases,
                 torch.full((79,), 1.0 / 79.0, dtype=torch.float64),
                 config,
+                0.1,
             )
         changed = list(cases)
         changed[0] = {
@@ -108,7 +117,28 @@ class Release730FigureProtocolTensorTests(unittest.TestCase):
                 changed,
                 torch.full((80,), 1.0 / 80.0, dtype=torch.float64),
                 config,
+                0.1,
             )
+
+    def test_train_frozen_floor_excludes_low_activity_osi_from_burden(self) -> None:
+        signs = torch.tensor(
+            [-1.0] * 40 + [1.0] * 40,
+            dtype=torch.float64,
+        ).reshape(80, 1, 1)
+        low_activity = 1e-6 * signs * torch.tensor(
+            [1.0, 0.0, 0.0], dtype=torch.float64
+        ).reshape(1, 1, 3)
+        active = torch.tensor(
+            [1.0, 0.0, 0.0], dtype=torch.float64
+        ).reshape(1, 1, 3).expand(80, -1, -1)
+        summary = reference_osi_summary(
+            torch.cat((low_activity, active), dim=1),
+            torch.full((80,), 1.0 / 80.0, dtype=torch.float64),
+            torch.ones(2, dtype=torch.float64),
+            reference_tawss_floor=1e-4,
+        )
+        self.assertEqual(summary["osi_valid"].tolist(), [False, True])
+        self.assertAlmostEqual(summary["area_weighted_mean_reference_osi"], 0.0)
 
     def test_historical_51_case_scope_is_rejected(self) -> None:
         config = load_config(CONFIG)
@@ -124,6 +154,7 @@ class Release730FigureProtocolTensorTests(unittest.TestCase):
                 cases,
                 torch.full((80,), 1.0 / 80.0, dtype=torch.float64),
                 config,
+                0.1,
             )
 
 
