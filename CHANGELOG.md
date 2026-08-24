@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-24 — Separated OSI support from prediction-valid coverage
+
+- Clarified that the reference-defined OSI support fraction is a common
+  evaluator property, whereas `osi_coverage` is a model-specific prediction-
+  validity diagnostic within that support.
+- Kept all coverage values and paired deltas reportable, but removed coverage
+  from the release-730 direct-control Pareto axes. Direct-control selection
+  remains lowest case-mean field error; invalid OSI predictions remain
+  penalized in OSI MAE.
+- Added a regression showing that higher validity coverage cannot retain an
+  otherwise error-dominated comparator on the performance Pareto front. No
+  result, threshold, test access or site change is created.
+
 ## 2026-08-24 — Post-staging queue and storage audit
 
 - Preserved the sole introai9 response oracle as unheld queued work on full,

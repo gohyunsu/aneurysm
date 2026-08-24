@@ -23,6 +23,14 @@
       "osi_mae",
       "osi_coverage"
     ],
+    "performance_metrics": [
+      "field_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae"
+    ],
+    "diagnostic_metrics": [
+      "osi_coverage"
+    ],
     "paired_unit": "synthetic_geometry_case",
     "same_validation_order_required": true
   },
@@ -42,6 +50,13 @@
     "report_all_controls": true,
     "report_all_pairwise_deltas": true,
     "report_pareto_set": true,
+    "pareto_metrics": [
+      "field_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae"
+    ],
+    "model_specific_osi_coverage_is_selection_endpoint": false,
+    "invalid_osi_predictions_are_penalized_in_osi_mae": true,
     "zero_crossing_interval_is_equivalence": false
   },
   "boundary": {

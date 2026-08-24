@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-24 OSI support and prediction-validity separation
+
+- In release-730 evaluation, the reference-defined OSI support is common, but
+  `osi_coverage` is the model-specific prediction-valid fraction within that
+  support. Do not describe those two quantities as the same coverage.
+- The direct-control selector still reports paired `osi_coverage` diagnostics,
+  while field, TAWSS and OSI error alone define its Pareto set and field error
+  alone selects the comparator. Invalid OSI predictions already receive the
+  registered worst-case OSI error and coverage is not a second selection axis.
+- This correction changes no model, data, split, result, threshold or sealed
+  scope. It creates no paper claim and does not maintain the public site.
+
 ## 2026-08-24 post-staging queue and storage audit
 
 - Introai9 response oracle `118479.ECE-util1` remains unheld `Q` and

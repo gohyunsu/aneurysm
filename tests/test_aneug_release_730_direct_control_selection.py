@@ -22,19 +22,27 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneug_release_730_direct_control_selection_v1.json"
 
 
-def rows(field: float, tawss: float, osi: float) -> list[dict[str, float]]:
+def rows(
+    field: float, tawss: float, osi: float, coverage: float = 1.0
+) -> list[dict[str, float]]:
     return [
         {
             "field_relative_l2": field + index * 1e-6,
             "tawss_normalized_absolute_error": tawss,
             "osi_mae": osi,
-            "osi_coverage": 1.0,
+            "osi_coverage": coverage,
         }
         for index in range(73)
     ]
 
 
-def result(label: str, field: float, tawss: float, osi: float) -> dict:
+def result(
+    label: str,
+    field: float,
+    tawss: float,
+    osi: float,
+    coverage: float = 1.0,
+) -> dict:
     config = load_config(CONFIG)
     value = {
         "schema_version": {
@@ -60,7 +68,7 @@ def result(label: str, field: float, tawss: float, osi: float) -> dict:
         "case_ids_included": False,
         "processed_only_extra_field_case_count_read": 0,
         "validation": {
-            "per_case_without_identifiers": rows(field, tawss, osi)
+            "per_case_without_identifiers": rows(field, tawss, osi, coverage)
         },
     }
     if label == "released_graph_unet_adapter":
@@ -100,6 +108,19 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
         self.assertEqual(tuple(config["controls"]["ordered_labels"]), CONTROL_ORDER)
         self.assertIsNone(config["selection"]["absolute_performance_threshold"])
         self.assertFalse(config["selection"]["automatic_paper_winner"])
+        self.assertEqual(
+            config["selection"]["pareto_metrics"],
+            [
+                "field_relative_l2",
+                "tawss_normalized_absolute_error",
+                "osi_mae",
+            ],
+        )
+        self.assertFalse(
+            config["selection"][
+                "model_specific_osi_coverage_is_selection_endpoint"
+            ]
+        )
         self.assertFalse(config["selection"]["zero_crossing_interval_is_equivalence"])
         self.assertFalse(config["boundary"]["execute_now"])
 
@@ -126,6 +147,38 @@ class Release730DirectControlSelectionTests(unittest.TestCase):
         )
         output = analyze_direct_controls(values, load_config(CONFIG), replicates=200)
         self.assertEqual(output["selected_direct_control"], "ghd_gps_unet")
+
+    def test_prediction_validity_coverage_is_reported_but_not_a_pareto_axis(self) -> None:
+        values = {
+            "released_graph_unet_adapter": result(
+                "released_graph_unet_adapter", 0.20, 0.20, 0.01, coverage=0.50
+            ),
+            "ghd_gps_unet": result(
+                "ghd_gps_unet", 0.30, 0.30, 0.02, coverage=1.00
+            ),
+            "transolver": result(
+                "transolver", 0.40, 0.40, 0.03, coverage=1.00
+            ),
+        }
+        output = analyze_direct_controls(
+            values, load_config(CONFIG), replicates=200
+        )
+        self.assertEqual(output["pareto_set"], ["released_graph_unet_adapter"])
+        self.assertEqual(
+            output["pareto_metrics"],
+            [
+                "field_relative_l2",
+                "tawss_normalized_absolute_error",
+                "osi_mae",
+            ],
+        )
+        self.assertEqual(output["diagnostic_metrics"], ["osi_coverage"])
+        self.assertIn(
+            "osi_coverage",
+            output["all_pairwise_deltas"][
+                "released_graph_unet_adapter_minus_ghd_gps_unet"
+            ],
+        )
 
     def test_sealed_scope_or_order_violation_is_rejected(self) -> None:
         config = load_config(CONFIG)

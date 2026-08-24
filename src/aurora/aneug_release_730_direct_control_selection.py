@@ -50,6 +50,12 @@ RESULT_CONTRACTS = {
         "status": "complete",
     },
 }
+PERFORMANCE_METRICS = (
+    "field_relative_l2",
+    "tawss_normalized_absolute_error",
+    "osi_mae",
+)
+DIAGNOSTIC_METRICS = ("osi_coverage",)
 
 
 def _require(condition: bool, label: str) -> None:
@@ -99,6 +105,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(
         tuple(controls["ordered_labels"]) == CONTROL_ORDER
         and tuple(controls["core_metrics"]) == CORE_METRICS
+        and tuple(controls["performance_metrics"]) == PERFORMANCE_METRICS
+        and tuple(controls["diagnostic_metrics"]) == DIAGNOSTIC_METRICS
         and controls["paired_unit"] == "synthetic_geometry_case"
         and controls["same_validation_order_required"] is True,
         "controls",
@@ -123,6 +131,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and selection["report_all_controls"] is True
         and selection["report_all_pairwise_deltas"] is True
         and selection["report_pareto_set"] is True
+        and tuple(selection["pareto_metrics"]) == PERFORMANCE_METRICS
+        and selection["model_specific_osi_coverage_is_selection_endpoint"] is False
+        and selection["invalid_osi_predictions_are_penalized_in_osi_mae"] is True
         and selection["zero_crossing_interval_is_equivalence"] is False,
         "selection",
     )
@@ -300,7 +311,12 @@ def analyze_direct_controls(
         "evidence_role": "validation_development_direct_control_selection",
         "control_means": means,
         "all_pairwise_deltas": paired,
-        "pareto_set": pareto_set(means),
+        "pareto_set": pareto_set(means, metrics=PERFORMANCE_METRICS),
+        "pareto_metrics": list(PERFORMANCE_METRICS),
+        "diagnostic_metrics": list(DIAGNOSTIC_METRICS),
+        "osi_coverage_role": (
+            "model_specific_prediction_validity_diagnostic_not_selection_endpoint"
+        ),
         "selected_direct_control": selected,
         "selection_metric": "case_mean_field_relative_l2",
         "selection_rule": config["selection"]["rule"],
