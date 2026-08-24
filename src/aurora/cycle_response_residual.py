@@ -52,7 +52,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and branches["local_tangent_projection"] is False
         and branches["local_backbone_output_space"]
         == "explicit_positive_scale_to_raw_physical_cartesian"
-        and branches["residual_basis_leakage"] == "reported_soft_penalty"
+        and branches["residual_basis_leakage"]
+        == "detached_reported_diagnostic_not_optimized"
         and branches["hard_basis_projection"] is False,
         "branches",
     )
@@ -138,7 +139,13 @@ def _basis_leakage(
     weighted = _weighted_flatten(field, reference_weights)
     energy = torch.sum(weighted.square())
     coordinates = basis @ weighted
-    return torch.sum(coordinates.square()) / torch.clamp(energy, min=1e-12)
+    # This quantity diagnoses whether the nominally local branch reuses the
+    # train-output response subspace.  It is deliberately detached so that a
+    # caller cannot silently turn an unregistered diagnostic into an extra
+    # training objective by summing every returned scalar.
+    return (
+        torch.sum(coordinates.square()) / torch.clamp(energy, min=1e-12)
+    ).detach()
 
 
 def _backbone_field(output: Any) -> torch.Tensor:

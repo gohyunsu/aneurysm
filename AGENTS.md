@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 candidate residual-overlap objective closure:** The dormant
+> candidate described response-basis overlap as a soft complementarity penalty
+> even though the bounded R1/R2 rows register no such loss weight or ablation.
+> It is now an explicitly detached, reported diagnostic and cannot silently
+> enter optimization. Field decoding, gate behavior and every active field/
+> functional gradient remain unchanged; registered branch ablations provide
+> the mechanism evidence. This removes an unbudgeted regularizer before any
+> candidate execution and selects no rank, backbone, loss, data, result or
+> claim. Response oracle `118376.ECE-util1` remains first; use only introai9,
+> never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 candidate anchored-gradient inactive-head correction:** A
 > dataset-free reproduction showed that the planned complete field-anchored
 > objective would fail before an optimizer step because

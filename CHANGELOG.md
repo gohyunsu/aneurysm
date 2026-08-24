@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-24 — Residual overlap is diagnostic, not a hidden objective
+
+- Removed an implementation–manuscript ambiguity that described the local
+  residual's response-basis overlap as a soft penalty without a registered
+  weight or ablation.
+- Detached the reported overlap scalar from autograd and made tests optimize
+  only the declared field output, preventing accidental objective injection.
+- Kept field decoding and active gradients unchanged; branch roles remain
+  testable through the registered response/local ablations.
+
 ## 2026-08-24 — Anchored cycle gradients tolerate the inactive auxiliary head
 
 - Reproduced the dormant shared candidate's deterministic anchored-backward

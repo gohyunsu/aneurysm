@@ -138,6 +138,10 @@ class CycleResponseResidualTests(unittest.TestCase):
         self.assertFalse(
             config["shared_encoder_contract"]["separate_GHD_only_global_encoder"]
         )
+        self.assertEqual(
+            config["branches"]["residual_basis_leakage"],
+            "detached_reported_diagnostic_not_optimized",
+        )
 
     def test_response_only_matches_release730_raw_cartesian_reconstruction(self):
         payload = synthetic_payload()
@@ -180,7 +184,8 @@ class CycleResponseResidualTests(unittest.TestCase):
         torch.testing.assert_close(output["field"], output["global_field"] + 0.5 * raw)
         self.assertTrue(torch.isfinite(output["residual_basis_leakage"]))
         self.assertGreaterEqual(float(output["residual_basis_leakage"]), 0.0)
-        loss = output["field"].square().mean() + output["residual_basis_leakage"]
+        self.assertFalse(output["residual_basis_leakage"].requires_grad)
+        loss = output["field"].square().mean()
         loss.backward()
         self.assertIsNotNone(raw.grad)
         self.assertTrue(torch.isfinite(raw.grad).all())
@@ -228,7 +233,8 @@ class CycleResponseResidualTests(unittest.TestCase):
         )
         case = {"ghd": torch.randn(432), "normals": normals(5)}
         output = model(case)
-        loss = output["field"].square().mean() + output["residual_basis_leakage"]
+        self.assertFalse(output["residual_basis_leakage"].requires_grad)
+        loss = output["field"].square().mean()
         loss.backward()
         self.assertTrue(torch.isfinite(backbone.field.grad).all())
         head_grads = [parameter.grad for parameter in model.response_head.parameters()]
@@ -336,7 +342,8 @@ class CycleResponseResidualTests(unittest.TestCase):
             backbone, payload, rank=3, local_output_scale=1.0
         )
         output = model(shared_case())
-        loss = output["field"].square().mean() + output["residual_basis_leakage"]
+        self.assertFalse(output["residual_basis_leakage"].requires_grad)
+        loss = output["field"].square().mean()
         loss.backward()
         self.assertEqual(backbone.encoder_calls, 1)
         self.assertEqual(backbone.decoder_calls, 1)

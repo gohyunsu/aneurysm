@@ -15,11 +15,13 @@ The local branch is an interchangeable complete-cycle geometry backbone. The
 release-730 GHD-GPS/GINE comparator is the current candidate; Transolver may
 replace it only if the same-information control is empirically competitive. A
 case-conditioned gate mixes the raw Cartesian residual with the global
-response. Its weighted overlap with the response basis is reported as a soft
-complementarity penalty. No branch or final output is hard-projected tangent:
-the release-730 oracle and common evaluator retain the raw released Cartesian
-target, and train attribution found nonzero normal components and unreliable
-stored normals.
+response. Its weighted overlap with the response basis is a detached reported
+diagnostic, not an optimized penalty or a hidden loss-weight choice. The
+registered branch ablations, rather than a decomposition regularizer, establish
+the roles of the two branches. No branch or final output is hard-projected
+tangent: the release-730 oracle and common evaluator retain the raw released
+Cartesian target, and train attribution found nonzero normal components and
+unreliable stored normals.
 
 Four later rows isolate the mechanism: response only, local backbone only,
 response plus local residual, and the same two-branch model with complete-cycle
