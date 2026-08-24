@@ -27,8 +27,8 @@ terminal horizons.
 
 ## Prespecified estimands
 
-For every main-table endpoint, the analyzer reports five case-paired mean
-contrasts with 10,000-resample percentile intervals:
+The analyzer reports five case-paired mean contrasts with 10,000-resample
+percentile intervals for all recorded metrics:
 
 1. proposal minus control under T;
 2. proposal minus control under T+S;
@@ -42,10 +42,15 @@ The interaction is
 (proposal_TS - proposal_T) - (control_TS - control_T).
 ```
 
-For lower-is-better errors, a negative value means that steady information
-benefited the proposal more than the control. For OSI coverage, the favorable
-direction is positive. This orientation is descriptive and creates no
-automatic winner or novelty conclusion.
+Field relative L2, TAWSS error and OSI MAE are the three primary claim errors.
+Mean-vector error is supporting evidence. Model-specific prediction-valid OSI
+coverage within the common reference support is a diagnostic only; it is not
+a gate or claim endpoint because invalid predictions already receive the
+registered worst-case OSI error. For lower-is-better errors, a negative value
+means that steady information benefited the proposal more than the control.
+For diagnostic coverage, the favorable direction is positive. These roles and
+orientations are descriptive and create no automatic winner or novelty
+conclusion.
 
 ## Compute interpretation
 

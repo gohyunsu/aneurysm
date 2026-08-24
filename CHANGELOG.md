@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-24 — Closed metric roles through five-seed confirmation
+
+- Added explicit primary-claim, supporting and diagnostic metric lists to the
+  matched-information and five-seed confirmation contracts and result schemas.
+- Kept every cell, contrast and coverage diagnostic reportable while preventing
+  prediction-valid coverage from becoming a gate, test authority or claim.
+- Updated matched-training hash lineage to the corrected confirmation config;
+  no training rule, seed, data scope, model or result changed.
+
 ## 2026-08-24 — Separated OSI support from prediction-valid coverage
 
 - Clarified that the reference-defined OSI support fraction is a common

@@ -38,6 +38,13 @@ METRIC_DIRECTIONS = {
     "osi_coverage": "higher",
 }
 METRICS = tuple(METRIC_DIRECTIONS)
+PRIMARY_CLAIM_ERROR_METRICS = (
+    "field_relative_l2",
+    "tawss_normalized_absolute_error",
+    "osi_mae",
+)
+SUPPORTING_ERROR_METRICS = ("mean_wss_vector_error",)
+DIAGNOSTIC_METRICS = ("osi_coverage",)
 MATCHED_DEVELOPMENT_STAGE = "single_seed_matched_information_validation_development"
 CONFIRMATION_STAGE = "five_seed_matched_information_validation_confirmation"
 CONTRASTS = {
@@ -111,7 +118,22 @@ def validate_config(config: Mapping[str, Any]) -> None:
     )
     factorial = config["factorial"]
     _require(tuple(factorial["cells"]) == CELL_ORDER, "cells")
-    _require(tuple(factorial["metrics"]) == METRICS, "metrics")
+    _require(
+        tuple(factorial["metrics"]) == METRICS
+        and tuple(factorial["primary_claim_error_metrics"])
+        == PRIMARY_CLAIM_ERROR_METRICS
+        and tuple(factorial["supporting_error_metrics"])
+        == SUPPORTING_ERROR_METRICS
+        and tuple(factorial["diagnostic_metrics"]) == DIAGNOSTIC_METRICS
+        and (
+            set(PRIMARY_CLAIM_ERROR_METRICS)
+            | set(SUPPORTING_ERROR_METRICS)
+            | set(DIAGNOSTIC_METRICS)
+        )
+        == set(METRICS)
+        and factorial["invalid_osi_predictions_are_penalized_in_osi_mae"] is True,
+        "metrics",
+    )
     _require(
         factorial["eligible_steady_rows"] == 13_985
         and factorial["eligible_steady_case_digest"]
@@ -193,6 +215,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and decision["automatic_novelty_conclusion"] is False
         and decision["report_all_cells"] is True
         and decision["report_all_contrasts"] is True
+        and decision["prediction_valid_coverage_is_gate_or_claim_endpoint"] is False
         and decision["interpretation"]
         == "report_within_information_method_effects_and_registered_augmentation_protocol_contrasts_without_a_label_only_causal_or_novelty_claim",
         "decision",
@@ -505,6 +528,10 @@ def analyze_matched_information(
         "evidence_role": "validation_development_matched_information_factorial",
         "cell_means": means,
         "paired_contrasts": contrasts,
+        "primary_claim_error_metrics": list(PRIMARY_CLAIM_ERROR_METRICS),
+        "supporting_error_metrics": list(SUPPORTING_ERROR_METRICS),
+        "diagnostic_metrics": list(DIAGNOSTIC_METRICS),
+        "prediction_valid_coverage_is_gate_or_claim_endpoint": False,
         "automatic_winner": None,
         "automatic_novelty_conclusion": None,
         "absolute_performance_threshold": None,

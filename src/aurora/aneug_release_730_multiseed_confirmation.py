@@ -19,8 +19,11 @@ from aurora.aneug_release_730_matched_information_analysis import (
     CELL_ORDER,
     CONFIRMATION_STAGE,
     CONTRASTS,
+    DIAGNOSTIC_METRICS,
     METRIC_DIRECTIONS,
     METRICS,
+    PRIMARY_CLAIM_ERROR_METRICS,
+    SUPPORTING_ERROR_METRICS,
     extract_cell_rows,
     validate_config as validate_matched_config,
 )
@@ -67,7 +70,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         source["matched_information_protocol_id"]
         == "aneug_release_730_matched_information_analysis_v1"
         and source["matched_information_config_sha256"]
-        == "0210c83172b01106ec5482f27dcc08a3aca048d46922eb5b5b8501bcba4d407c",
+        == "9632456e59283b951ddeeb6cd40dfe568a5b3e7bb99fdc9a6c8004e624bafe50",
         "source",
     )
     scope = config["scope"]
@@ -90,12 +93,18 @@ def validate_config(config: Mapping[str, Any]) -> None:
     analysis = config["analysis"]
     _require(
         tuple(analysis["metrics"]) == METRICS
+        and tuple(analysis["primary_claim_error_metrics"])
+        == PRIMARY_CLAIM_ERROR_METRICS
+        and tuple(analysis["supporting_error_metrics"])
+        == SUPPORTING_ERROR_METRICS
+        and tuple(analysis["diagnostic_metrics"]) == DIAGNOSTIC_METRICS
         and tuple(analysis["contrasts"]) == tuple(CONTRASTS)
         and analysis["point_estimand"]
         == "mean_over_five_training_seeds_and_73_paired_synthetic_geometry_cases"
         and analysis["report_per_seed_deltas"] is True
         and analysis["report_favorable_seed_count"] is True
-        and analysis["minimum_favorable_seed_count"] is None,
+        and analysis["minimum_favorable_seed_count"] is None
+        and analysis["prediction_valid_coverage_is_gate_or_claim_endpoint"] is False,
         "analysis",
     )
     bootstrap = config["bootstrap"]
@@ -349,6 +358,10 @@ def analyze_multiseed_confirmation(
         "fresh_training_seeds": list(expected_seeds),
         "cell_means_by_seed": cell_means_by_seed,
         "crossed_seed_case_contrasts": aggregate,
+        "primary_claim_error_metrics": list(PRIMARY_CLAIM_ERROR_METRICS),
+        "supporting_error_metrics": list(SUPPORTING_ERROR_METRICS),
+        "diagnostic_metrics": list(DIAGNOSTIC_METRICS),
+        "prediction_valid_coverage_is_gate_or_claim_endpoint": False,
         "transient_training_protocol_sha256_by_role": {
             role: next(iter(values)) for role, values in protocol_digests.items()
         },

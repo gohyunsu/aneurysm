@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-24 confirmatory metric-role closure
+
+- Matched-information and five-seed analyzers now schema-label field rL2,
+  TAWSS error and OSI MAE as primary claim errors, mean-vector error as
+  supporting evidence and `osi_coverage` as a prediction-validity diagnostic.
+- All five metrics and paired contrasts remain reportable. Coverage cannot
+  become a Pareto axis, favorable-seed gate, test-authorization condition or
+  claim endpoint. Matched-training hashes follow the corrected analyzer
+  configs without changing any training semantics.
+- This creates no activation, job, result, threshold, test access or paper
+  claim and does not maintain the public site.
+
 ## 2026-08-24 OSI support and prediction-validity separation
 
 - In release-730 evaluation, the reference-defined OSI support is common, but

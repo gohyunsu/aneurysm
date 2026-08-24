@@ -108,6 +108,26 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         )
         self.assertIsNone(config["decision"]["absolute_performance_threshold"])
         self.assertFalse(config["decision"]["automatic_winner"])
+        self.assertEqual(
+            config["factorial"]["primary_claim_error_metrics"],
+            [
+                "field_relative_l2",
+                "tawss_normalized_absolute_error",
+                "osi_mae",
+            ],
+        )
+        self.assertEqual(
+            config["factorial"]["supporting_error_metrics"],
+            ["mean_wss_vector_error"],
+        )
+        self.assertEqual(
+            config["factorial"]["diagnostic_metrics"], ["osi_coverage"]
+        )
+        self.assertFalse(
+            config["decision"][
+                "prediction_valid_coverage_is_gate_or_claim_endpoint"
+            ]
+        )
         self.assertFalse(config["boundary"]["locked_test_or_extra_access"])
         self.assertFalse(
             config["training_accounting"][
@@ -141,6 +161,13 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         with self.assertRaisesRegex(MatchedInformationAnalysisError, "decision"):
             validate_config(changed)
 
+        changed = copy.deepcopy(config)
+        changed["factorial"]["primary_claim_error_metrics"].append(
+            "osi_coverage"
+        )
+        with self.assertRaisesRegex(MatchedInformationAnalysisError, "metrics"):
+            validate_config(changed)
+
     def test_additive_effects_have_zero_interaction(self) -> None:
         output = analyze_matched_information(
             additive_cells(), load_config(CONFIG), replicates=200, seed=7
@@ -166,6 +193,18 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
             places=12,
         )
         self.assertIsNone(output["automatic_winner"])
+        self.assertEqual(
+            output["primary_claim_error_metrics"],
+            [
+                "field_relative_l2",
+                "tawss_normalized_absolute_error",
+                "osi_mae",
+            ],
+        )
+        self.assertEqual(output["diagnostic_metrics"], ["osi_coverage"])
+        self.assertFalse(
+            output["prediction_valid_coverage_is_gate_or_claim_endpoint"]
+        )
         self.assertTrue(output["interaction_is_not_standalone_novelty"])
         self.assertEqual(output["steady_exposure"]["control_TS"]["examples"], 46_720)
         self.assertFalse(output["steady_contrasts_are_label_only_causal_effects"])
