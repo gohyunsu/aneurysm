@@ -119,6 +119,17 @@ class ResponseLocalCandidateTests(unittest.TestCase):
         self.assertFalse(value["split"]["read_locked_test_fields"])
         self.assertFalse(value["split"]["read_processed_only_extra_fields"])
         self.assertEqual(value["cells"]["maximum_candidate_gpu_jobs_before_confirmation"], 5)
+        self.assertEqual(value["model"]["maximum_learned_response_ranks"], 1)
+        self.assertEqual(
+            value["model"]["rank_execution_rule"],
+            "lower_median_of_oracle_storage_aware_r1_nomination",
+        )
+        self.assertTrue(
+            value["cells"]["selected_rank_fixed_before_candidate_validation"]
+        )
+        self.assertFalse(
+            value["cells"]["oracle_rank_nomination_is_learned_performance"]
+        )
         self.assertIn("osi_coverage", value["evaluation"]["secondary_metrics"])
         self.assertNotIn("osi_area_coverage", value["evaluation"]["secondary_metrics"])
         self.assertEqual(
@@ -131,6 +142,7 @@ class ResponseLocalCandidateTests(unittest.TestCase):
             (("split", "read_locked_test_fields"), True),
             (("runtime", "server"), "junjinyong"),
             (("evaluation", "absolute_performance_threshold"), 0.2),
+            (("model", "maximum_learned_response_ranks"), 3),
         ):
             value = config()
             value[path[0]][path[1]] = replacement

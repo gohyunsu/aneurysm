@@ -20,12 +20,15 @@ Rank zero stays a reported mean-response control rather than consuming a
 learned-coordinate candidate slot.
 
 No absolute cutoff, learned-model interpretation, final rank selection or
-global-branch decision is emitted. Nomination only bounds the ranks that may
-enter learned validation. The oracle uses true validation amplitude and
-coefficients: a favorable result is only a representation ceiling. Every
-learned response-only rank must still earn its place through validation
-prediction, and later comparisons must include the strongest learned
-backbone. The tool remains non-executable until both exact results exist and a
+global-branch decision is emitted by this utility. The downstream candidate
+contract uses the lower median of the sorted nomination as one execution rank,
+fixed before any learned candidate result; this is a compute-bounded
+prospective rule rather than a conclusion emitted by the oracle. The oracle
+uses true validation amplitude and coefficients, so a favorable value remains
+only a representation ceiling. The selected response-only model must still
+establish learned predictive performance, and later comparisons must include
+the field-selected direct control. The tool remains non-executable until both
+exact results exist and a
 fresh private activation binds their result, terminal and ordering hashes. It
 never reads the locked test or
 processed-only extras and never publishes numeric development results.

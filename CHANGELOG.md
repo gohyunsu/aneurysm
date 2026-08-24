@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-25 — Closed the candidate rank and development-job count
+
+- Fixed one compute-bounded response rank before learned candidate validation:
+  the lower median of the oracle's sorted storage-aware nomination.
+- Retained exactly five candidate jobs and documented why ridge/MLP
+  coefficient controls and a fixed-gate variant are not default paper rows.
+- Separated those five jobs from the six later single-seed control/proposal by
+  T/T+M/T+S jobs. This is a prospective contract correction, not a rank,
+  result, activation, data read or paper claim.
+
 ## 2026-08-24 — Implemented the one-time release-730 T0 boundary
 
 - Added a non-executable evaluator and one-job PBS wrapper for all twenty

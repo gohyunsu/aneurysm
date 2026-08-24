@@ -41,6 +41,8 @@
     "response_basis_source": "release730_train_only_energy_normalized_complete_cycles",
     "rank_grid": [16, 32, 64, 128, 256],
     "rank_selected_in_config": false,
+    "rank_execution_rule": "lower_median_of_oracle_storage_aware_r1_nomination",
+    "maximum_learned_response_ranks": 1,
     "global_token": "area_weighted_pool_of_shared_node_features",
     "local_residual": "phase_specific_raw_cartesian_field",
     "local_gate": "nodewise_phase_shared_sigmoid_from_shared_features",
@@ -61,6 +63,8 @@
       "response_plus_residual__all_field_anchored"
     ],
     "local_only_source": "release730_GHD_GPS_direct_comparator",
+    "oracle_rank_nomination_is_learned_performance": false,
+    "selected_rank_fixed_before_candidate_validation": true,
     "one_cell_per_activation": true,
     "maximum_candidate_gpu_jobs_before_confirmation": 5
   },

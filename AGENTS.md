@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 bounded candidate-rank closure
+
+- The response/local candidate learns exactly one response rank. After the
+  oracle comparison emits its at-most-three sorted storage-aware nomination,
+  choose the lower median (or the sole rank) and freeze it before reading any
+  learned candidate validation result. The oracle uses true validation
+  coefficients and is representation evidence, not learned performance.
+- Keep exactly five candidate jobs: two architecture cells at that rank and
+  three objective-matched fine-tunes from the same combined checkpoint. Do
+  not add ridge/MLP coefficient controls or a fixed-gate row by default; they
+  support no separate main-paper claim beyond the oracle, response-only,
+  combined and direct-local evidence already registered.
+- The later single-seed matched-information stage is separate and contains six
+  fresh jobs: control/proposal by T, T+M and T+S. Locked test and 79 extras
+  remain sealed, use only introai9, never junjinyong, and do not maintain the
+  public site.
+
 ## 2026-08-25 candidate OSI-support consistency audit
 
 - A pre-execution static audit found that the response/local candidate

@@ -171,6 +171,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         == (128, 4, 80)
         and model["rank_grid"] == [16, 32, 64, 128, 256]
         and model["rank_selected_in_config"] is False
+        and model["rank_execution_rule"]
+        == "lower_median_of_oracle_storage_aware_r1_nomination"
+        and model["maximum_learned_response_ranks"] == 1
         and model["local_gate"]
         == "nodewise_phase_shared_sigmoid_from_shared_features"
         and model["basis_buffers_in_checkpoint"] is False
@@ -190,6 +193,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
             "response_plus_residual__all_field_anchored",
         ]
         and cells["local_only_source"] == "release730_GHD_GPS_direct_comparator"
+        and cells["oracle_rank_nomination_is_learned_performance"] is False
+        and cells["selected_rank_fixed_before_candidate_validation"] is True
         and cells["one_cell_per_activation"] is True
         and cells["maximum_candidate_gpu_jobs_before_confirmation"] == 5,
         "cells",
