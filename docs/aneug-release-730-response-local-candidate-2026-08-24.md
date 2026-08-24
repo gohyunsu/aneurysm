@@ -104,7 +104,11 @@ fine-tuning schedule:
 
 The training normalizers use all and only the 584 training cases. Checkpoint
 utility normalizers use the same initial checkpoint on all and only the 73
-validation cases. No absolute threshold or automatic winner is defined.
+validation cases. Every fine-tune selects its checkpoint with the identical
+utility: normalized field error plus the mean of normalized mean-vector,
+TAWSS and OSI errors. Thus only the training objective differs across the
+three cells; objective-specific checkpoint selection cannot confound their
+comparison. No absolute threshold or automatic winner is defined.
 
 ## Evaluation and reviewer-facing interpretation
 

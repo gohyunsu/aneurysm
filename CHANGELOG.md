@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-25 — Unified functional fine-tune checkpoint selection
+
+- Corrected a pre-execution mismatch: the final selector used one common
+  four-endpoint utility, but each fine-tune previously chose its best
+  checkpoint with a different objective-dependent utility.
+- All three fine-tunes now use the same initial-checkpoint-normalized field,
+  mean-vector, TAWSS and OSI checkpoint utility; only their training objectives
+  differ. The final selector fails closed if a result does not record the exact
+  common selection rule and value.
+- Updated the stale response/local-config hash in matched training and carried
+  the resulting hash through the locked-test contract. This changes no result,
+  data scope, architecture, rank, metric or public site.
+
 ## 2026-08-25 — Froze candidate selection before candidate evidence
 
 - Added a validation-only analyzer for the exact five registered candidate

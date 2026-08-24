@@ -4,8 +4,8 @@
   "status": "prepared_result_pending",
   "as_of": "2026-08-25",
   "source": {
-    "candidate_config_sha256": "ca271c698ccb987f15936dcd37a5b520077a3e20343f55971b9b3893568a6686",
-    "candidate_implementation_sha256": "2f63e6e66224f1a870da73f33162dcd29a626d816ca43e371fea0339dc1b6933",
+    "candidate_config_sha256": "38f256d4e60e2a7c748bb59b7e3de910a1bf1f464d18b7ec99ef0f435aa415b4",
+    "candidate_implementation_sha256": "881bde96e6aa49f3f4fd700fc631fddebb9ae9367c0444fcacf26a0c756af968",
     "direct_control_selection_config_sha256": "326071333f4a7c909f1011c3125a593b3d8f6488899cb3000d1f9b6ce7568c3b"
   },
   "split": {
@@ -56,6 +56,7 @@
     "selection_rule": "minimum_common_initial_checkpoint_endpoint_normalized_validation_utility_then_fixed_objective_order_exact_tie",
     "common_utility": "field_over_initial_field_plus_mean_of_mean_vector_tawss_and_osi_over_their_shared_initial_values",
     "normalizers_fixed_at_shared_initial_combined_checkpoint": true,
+    "common_utility_is_each_finetune_checkpoint_selector": true,
     "absolute_performance_threshold": null,
     "noninferiority_margin": null,
     "automatic_paper_winner": false,

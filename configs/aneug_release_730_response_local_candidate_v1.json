@@ -77,6 +77,7 @@
     "osi_pseudo_huber_delta": 0.02,
     "finetune_loss_normalizers": "same_initial_architecture_field_checkpoint_mean_over_all_584_train_cases",
     "finetune_checkpoint_normalizers": "same_initial_architecture_field_checkpoint_validation_endpoints",
+    "finetune_checkpoint_utility": "common_field_plus_mean_of_mean_vector_tawss_and_osi_for_every_objective_variant",
     "functional_to_field_norm_ratio": 1.0,
     "rrt_loss": false,
     "separate_functional_head": false
@@ -108,7 +109,7 @@
     "gradient_accumulation_cases": 2,
     "gradient_clip_norm": 1.0,
     "checkpoint_interval_epochs": 10,
-    "selection": "lowest_initial_checkpoint_endpoint_normalized_validation_utility_then_earliest_epoch"
+    "selection": "lowest_common_initial_checkpoint_endpoint_normalized_validation_utility_then_earliest_epoch"
   },
   "evaluation": {
     "common_report_space": "raw_released_physical_cartesian_wss",

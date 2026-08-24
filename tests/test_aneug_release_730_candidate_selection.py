@@ -53,7 +53,7 @@ def candidate_result(cell: str, metrics: dict[str, float]) -> dict:
         "private_split_manifest_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
         "response_basis_sha256": HEX,
         "public_commit": "1" * 40,
-        "config_sha256": "ca271c698ccb987f15936dcd37a5b520077a3e20343f55971b9b3893568a6686",
+        "config_sha256": "38f256d4e60e2a7c748bb59b7e3de910a1bf1f464d18b7ec99ef0f435aa415b4",
         "initial_combined_field_checkpoint_sha256": "b" * 64 if functional else None,
         "selection_endpoint_normalizers": (
             {"field": 1.0, "mean_vector": 1.0, "tawss": 1.0, "osi": 1.0}
@@ -62,6 +62,22 @@ def candidate_result(cell: str, metrics: dict[str, float]) -> dict:
         ),
         "initial_validation": (
             {"aggregate": initial_metrics, "case_count": 73} if functional else None
+        ),
+        "selection_name": (
+            "common_initial_checkpoint_endpoint_normalized_validation_utility"
+            if functional
+            else "validation_field_relative_l2"
+        ),
+        "best_selection_value": (
+            metrics["field_relative_l2"]
+            + (
+                metrics["mean_vector_tawss_normalized_l2"]
+                + metrics["tawss_normalized_absolute_error"]
+                + metrics["osi_mae"]
+            )
+            / 3.0
+            if functional
+            else metrics["field_relative_l2"]
         ),
         "validation": {
             "aggregate": metrics,
@@ -159,6 +175,12 @@ class CandidateSelectionTests(unittest.TestCase):
         ]["osi"] = 2.0
         with self.assertRaisesRegex(
             Release730CandidateSelectionError, "normalizer_initial_alignment"
+        ):
+            analyze_candidate_selection(results, direct_selection(), load_config(CONFIG))
+        results = candidate_results()
+        results["finetune_response_plus_residual_field"]["best_selection_value"] += 0.1
+        with self.assertRaisesRegex(
+            Release730CandidateSelectionError, "common_checkpoint_selection"
         ):
             analyze_candidate_selection(results, direct_selection(), load_config(CONFIG))
 

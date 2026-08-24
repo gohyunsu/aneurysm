@@ -109,9 +109,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(
         isinstance(source, Mapping)
         and source.get("candidate_config_sha256")
-        == "ca271c698ccb987f15936dcd37a5b520077a3e20343f55971b9b3893568a6686"
+        == "38f256d4e60e2a7c748bb59b7e3de910a1bf1f464d18b7ec99ef0f435aa415b4"
         and source.get("candidate_implementation_sha256")
-        == "2f63e6e66224f1a870da73f33162dcd29a626d816ca43e371fea0339dc1b6933"
+        == "881bde96e6aa49f3f4fd700fc631fddebb9ae9367c0444fcacf26a0c756af968"
         and source.get("direct_control_selection_config_sha256")
         == "326071333f4a7c909f1011c3125a593b3d8f6488899cb3000d1f9b6ce7568c3b",
         "source",
@@ -166,6 +166,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and proposal.get("common_utility")
         == "field_over_initial_field_plus_mean_of_mean_vector_tawss_and_osi_over_their_shared_initial_values"
         and proposal.get("normalizers_fixed_at_shared_initial_combined_checkpoint")
+        is True
+        and proposal.get("common_utility_is_each_finetune_checkpoint_selector")
         is True
         and proposal.get("absolute_performance_threshold") is None
         and proposal.get("noninferiority_margin") is None
@@ -310,6 +312,18 @@ def _validate_candidate_result(
     metrics = _parse_finite_mapping(
         validation.get("aggregate"), tuple(NORMALIZER_TO_METRIC.values()), f"{cell}_metrics"
     )
+    expected_selection_name = (
+        "validation_field_relative_l2"
+        if mode == "architecture"
+        else "common_initial_checkpoint_endpoint_normalized_validation_utility"
+    )
+    best_selection_value = float(result.get("best_selection_value", math.nan))
+    _require(
+        result.get("selection_name") == expected_selection_name
+        and math.isfinite(best_selection_value)
+        and best_selection_value >= 0.0,
+        f"{cell}_checkpoint_selection",
+    )
     return {
         "metrics": metrics,
         "rank": int(result["selected_response_rank"]),
@@ -326,6 +340,7 @@ def _validate_candidate_result(
         "parameter_count": int(result.get("parameter_count", 0)),
         "active_parameter_count": int(result.get("active_parameter_count", 0)),
         "elapsed_seconds": float(result.get("elapsed_seconds", math.nan)),
+        "best_selection_value": best_selection_value,
     }
 
 
@@ -451,6 +466,17 @@ def analyze_candidate_selection(
                 "initial_validation_alignment",
             )
     _require(normalizers is not None, "normalizers")
+    for cell in SELECTION_CELLS:
+        expected = _common_utility(parsed[cell]["metrics"], normalizers)
+        _require(
+            math.isclose(
+                parsed[cell]["best_selection_value"],
+                expected,
+                rel_tol=0.0,
+                abs_tol=1e-12,
+            ),
+            f"{cell}_common_checkpoint_selection",
+        )
     utilities = {
         cell: _common_utility(parsed[cell]["metrics"], normalizers)
         for cell in SELECTION_CELLS

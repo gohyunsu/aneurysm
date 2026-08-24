@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 common fine-tune checkpoint-selection correction
+
+- A pre-execution source audit found that the downstream candidate selector
+  recomputed one common four-endpoint utility, but each fine-tune had already
+  selected its best checkpoint with its own training-objective utility. This
+  contradicted the prospective fairness description and could confound the
+  objective comparison.
+- Every functional fine-tune now differs only in its training loss and selects
+  checkpoints with the identical initial-checkpoint-normalized utility: field
+  plus the mean of mean-vector, TAWSS and OSI errors. The candidate selector
+  verifies the recorded selection name and exact best-checkpoint utility before
+  comparing cells.
+- The audit also corrected a stale matched-training hash that still bound the
+  pre-rank candidate config. Candidate, matched-training and locked-test hash
+  lineage now follows the current source chain. Fifty-three focused tests pass.
+- This is prospective result-blind correction only. No activation, field read,
+  job, result, rank, objective, model choice, locked-test/extra access or paper
+  claim exists. Keep public push held, use only introai9, never junjinyong and
+  do not maintain the site.
+
 ## 2026-08-25 prospective candidate-selection closure
 
 - Before any learned candidate validation result exists, freeze candidate

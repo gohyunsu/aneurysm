@@ -11,6 +11,7 @@ from aurora.aneug_release_730_response_local_candidate import (
     Release730ResponseLocalError,
     _valid_support_osi,
     active_parameter_count,
+    common_validation_utility,
     configure_trainable_cell,
     evaluate,
     make_candidate_checkpoint,
@@ -136,6 +137,31 @@ class ResponseLocalCandidateTests(unittest.TestCase):
             value["model"]["local_gate"],
             "nodewise_phase_shared_sigmoid_from_shared_features",
         )
+        self.assertEqual(
+            value["finetune_optimization"]["selection"],
+            "lowest_common_initial_checkpoint_endpoint_normalized_validation_utility_then_earliest_epoch",
+        )
+
+    def test_every_finetune_uses_one_common_four_endpoint_checkpoint_utility(self):
+        metrics = {
+            "field_relative_l2": 0.8,
+            "mean_vector_tawss_normalized_l2": 0.6,
+            "tawss_normalized_absolute_error": 0.4,
+            "osi_mae": 0.2,
+        }
+        normalizers = {
+            "field": 0.4,
+            "mean_vector": 0.3,
+            "tawss": 0.2,
+            "osi": 0.1,
+        }
+        self.assertEqual(common_validation_utility(metrics, normalizers), 4.0)
+        invalid = dict(normalizers)
+        invalid["osi"] = 0.0
+        with self.assertRaisesRegex(
+            Release730ResponseLocalError, "common_validation_utility_osi"
+        ):
+            common_validation_utility(metrics, invalid)
 
     def test_config_rejects_test_access_server_and_threshold_changes(self):
         for path, replacement in (
