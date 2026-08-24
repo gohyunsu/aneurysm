@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-24 shared-A6000 relocation safety recheck
+
+- Introai9 oracle `118479.ECE-util1` remains unheld `Q` on the hard
+  hook-clean-host7 contract with no run root or scientific execution.
+  Junjinyong's authorized queue `ssu_a6gpu` uses the same A6000 node pool.
+- Host7 is hook-clean but 4/4 occupied. Host8 has two nominally free GPUs but
+  retains the cgroup-cleanup warning that caused 15 pre-script rejections and
+  terminal `F/-18` for this exact oracle; the other A6000 nodes are full,
+  down/offline or warning-marked. Do not treat account relocation as an
+  independent capacity source or submit the current unconstrained wrapper.
+- The exact public checkout, container and focused tests on junjinyong remain
+  ready, but no data has been staged. Cross-account transfer of the exact
+  42,866,553,272-byte private payload still requires explicit approval of its
+  scope and destination. After approval, GPU submission additionally requires
+  hook-clean capacity and proof that the introai9 oracle has not begun, so the
+  same scientific execution can never run twice.
+
 ## 2026-08-24 conditional junjinyong execution relocation
 
 - The user explicitly superseded the earlier absolute `junjinyong` ban while
