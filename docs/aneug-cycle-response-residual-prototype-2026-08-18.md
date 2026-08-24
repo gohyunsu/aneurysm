@@ -14,9 +14,13 @@ large-magnitude case from dominating the response coordinates.
 The local branch is an interchangeable complete-cycle geometry backbone. The
 release-730 GHD-GPS/GINE comparator is the current candidate; Transolver may
 replace it only if the same-information control is empirically competitive. A
-case-conditioned gate mixes the raw Cartesian residual with the global
-response. Its weighted overlap with the response basis is a detached reported
-diagnostic, not an optimized penalty or a hidden loss-weight choice. The
+nodewise gate predicted from the same per-node geometry features mixes the raw
+Cartesian residual with the global response. A scalar pooled gate was rejected
+because it could not support the claimed neck/junction-local correction. The
+gate is shared across phase while the residual itself remains phase-specific,
+which localizes where correction is needed without adding another 80-channel
+temporal head. Its weighted overlap with the response basis is a detached
+reported diagnostic, not an optimized penalty or a hidden loss-weight choice. The
 registered branch ablations, rather than a decomposition regularizer, establish
 the roles of the two branches. No branch or final output is hard-projected
 tangent: the release-730 oracle and common evaluator retain the raw released

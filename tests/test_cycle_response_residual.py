@@ -152,6 +152,10 @@ class CycleResponseResidualTests(unittest.TestCase):
             config["branches"]["residual_basis_leakage"],
             "detached_reported_diagnostic_not_optimized",
         )
+        self.assertEqual(
+            config["branches"]["shared_candidate_residual_gate"],
+            "nodewise_sigmoid_from_shared_features_initialized_near_zero",
+        )
 
     def test_response_only_matches_release730_raw_cartesian_reconstruction(self):
         payload = synthetic_payload()
@@ -329,6 +333,11 @@ class CycleResponseResidualTests(unittest.TestCase):
         self.assertEqual(backbone.encoder_calls, 3)
         self.assertEqual(backbone.decoder_calls, 2)
         self.assertEqual(tuple(combined["field"].shape), (4, 5, 3))
+        self.assertEqual(tuple(combined["residual_gate"].shape), (1, 5, 1))
+        torch.testing.assert_close(
+            combined["residual_gate"],
+            torch.full((1, 5, 1), torch.sigmoid(torch.tensor(-2.0))),
+        )
 
     def test_shared_candidate_global_token_is_area_weighted_node_pool(self):
         payload = synthetic_payload()
@@ -363,6 +372,55 @@ class CycleResponseResidualTests(unittest.TestCase):
             all(
                 parameter.grad is not None and torch.isfinite(parameter.grad).all()
                 for parameter in model.response_head.parameters()
+            )
+        )
+        self.assertTrue(
+            all(
+                parameter.grad is not None and torch.isfinite(parameter.grad).all()
+                for parameter in model.residual_gate_head.parameters()
+            )
+        )
+
+    def test_shared_candidate_gate_is_spatial_and_skipped_by_single_branch_rows(self):
+        payload = synthetic_payload()
+        backbone = SharedBackbone(4, 5)
+        model = SharedEncoderCycleResponseResidual(
+            backbone, payload, rank=3, local_output_scale=1.0
+        )
+        case = shared_case()
+        with torch.no_grad():
+            gate = model.residual_gate_head[-1]
+            gate.weight.zero_()
+            gate.weight[0, 0] = 0.1
+        combined = model(case)
+        self.assertEqual(tuple(combined["residual_gate"].shape), (1, 5, 1))
+        self.assertGreater(
+            float(combined["residual_gate"].max() - combined["residual_gate"].min()),
+            0.0,
+        )
+        combined["field"].square().mean().backward()
+        self.assertTrue(
+            all(
+                parameter.grad is not None
+                for parameter in model.residual_gate_head.parameters()
+            )
+        )
+
+        model.zero_grad(set_to_none=True)
+        model(case, variant="response_only")["field"].square().mean().backward()
+        self.assertTrue(
+            all(
+                parameter.grad is None
+                for parameter in model.residual_gate_head.parameters()
+            )
+        )
+
+        model.zero_grad(set_to_none=True)
+        model(case, variant="local_only")["field"].square().mean().backward()
+        self.assertTrue(
+            all(
+                parameter.grad is None
+                for parameter in model.residual_gate_head.parameters()
             )
         )
 
@@ -491,6 +549,7 @@ class CycleResponseResidualTests(unittest.TestCase):
         self.assertIn("backbone.encoder.weight", state)
         self.assertIn("backbone.cycle.weight", state)
         self.assertIn("response_head.1.weight", state)
+        self.assertIn("residual_gate_head.1.weight", state)
         self.assertIn("single_field_head.network.1.weight", state)
         for name in (
             "decoder.response_mean",

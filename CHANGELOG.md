@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-24 — Response/local gate made spatially identifiable
+
+- Replaced the active shared candidate's pooled scalar residual gate with a
+  nodewise gate predicted from the same encoded surface features.
+- Kept the residual phase-specific but the gate phase-shared, allowing
+  localized correction without another 80-channel gate head.
+- Added gradient/compute tests proving the gate is active only for the combined
+  row and remains unused for response-only, local-only and steady-head paths.
+  This is architecture readiness, not a novelty or performance claim.
+
 ## 2026-08-24 — Functional-fidelity prior boundary tightened
 
 - Added a primary-source audit of Garnier et al.'s autoregressive aneurysm

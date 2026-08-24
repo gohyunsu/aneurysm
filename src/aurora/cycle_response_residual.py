@@ -62,6 +62,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
         == "explicit_positive_scale_to_raw_physical_cartesian"
         and branches["residual_basis_leakage"]
         == "detached_reported_diagnostic_not_optimized"
+        and branches["shared_candidate_residual_gate"]
+        == "nodewise_sigmoid_from_shared_features_initialized_near_zero"
         and branches["hard_basis_projection"] is False,
         "branches",
     )
@@ -260,7 +262,13 @@ class CycleResponseResidualDecoder(nn.Module):
             raw_local_residual.shape == (self.phases, self.nodes, 3),
             "residual_shape",
         )
-        _require(residual_gate_logit.numel() == 1, "gate_shape")
+        _require(
+            residual_gate_logit.numel() == 1
+            or residual_gate_logit.shape == (self.nodes,)
+            or residual_gate_logit.shape == (self.nodes, 1)
+            or residual_gate_logit.shape == (self.phases, self.nodes),
+            "gate_shape",
+        )
         global_field, amplitude = self._global_field(
             coefficients, log_amplitude_offset, normals
         )
@@ -270,7 +278,14 @@ class CycleResponseResidualDecoder(nn.Module):
         )
         gate = torch.zeros((), dtype=global_field.dtype, device=global_field.device)
         if not response_only:
-            gate = torch.sigmoid(residual_gate_logit.reshape(()))
+            if residual_gate_logit.numel() == 1:
+                gate = torch.sigmoid(residual_gate_logit.reshape(()))
+            elif residual_gate_logit.shape in ((self.nodes,), (self.nodes, 1)):
+                gate = torch.sigmoid(residual_gate_logit.reshape(1, self.nodes, 1))
+            else:
+                gate = torch.sigmoid(
+                    residual_gate_logit.reshape(self.phases, self.nodes, 1)
+                )
         field = global_field + gate * local_residual
         return {
             "field": field,
@@ -422,15 +437,21 @@ class SharedEncoderCycleResponseResidual(nn.Module):
             nn.LayerNorm(encoded_width),
             nn.Linear(encoded_width, encoded_width),
             nn.SiLU(),
-            nn.Linear(encoded_width, rank + 2),
+            nn.Linear(encoded_width, rank + 1),
+        )
+        self.residual_gate_head = nn.Sequential(
+            nn.LayerNorm(encoded_width),
+            nn.Linear(encoded_width, 1),
         )
         self.single_field_head = SharedEncoderSingleFieldHead(encoded_width)
         final = self.response_head[-1]
+        gate_final = self.residual_gate_head[-1]
         _require(isinstance(final, nn.Linear), "head")
+        _require(isinstance(gate_final, nn.Linear), "gate_head")
         nn.init.zeros_(final.weight)
         nn.init.zeros_(final.bias)
-        with torch.no_grad():
-            final.bias[-1] = -2.0
+        nn.init.zeros_(gate_final.weight)
+        nn.init.constant_(gate_final.bias, -2.0)
 
     def _encode_and_pool(
         self, case: Mapping[str, torch.Tensor]
@@ -503,13 +524,14 @@ class SharedEncoderCycleResponseResidual(nn.Module):
         response = self.response_head(pooled)
         coefficients = response[: self.decoder.rank]
         log_amplitude_offset = response[self.decoder.rank : self.decoder.rank + 1]
-        residual_gate_logit = response[self.decoder.rank + 1 :]
         if variant == "response_only":
             local_field = normals.new_zeros(
                 (self.decoder.phases, self.decoder.nodes, 3)
             )
+            residual_gate_logit = normals.new_zeros(())
         else:
             local_field = self._local_field(features)
+            residual_gate_logit = self.residual_gate_head(features)
         decoded = self.decoder(
             coefficients,
             log_amplitude_offset,

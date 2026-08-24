@@ -26,6 +26,7 @@
     "local_tangent_projection": false,
     "local_backbone_output_space": "explicit_positive_scale_to_raw_physical_cartesian",
     "case_conditioned_residual_gate": "sigmoid_initialized_near_zero",
+    "shared_candidate_residual_gate": "nodewise_sigmoid_from_shared_features_initialized_near_zero",
     "residual_basis_leakage": "detached_reported_diagnostic_not_optimized",
     "hard_basis_projection": false,
     "allowed_local_backbones": [

@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 response/local spatial-gate correction:** The active shared
+> candidate no longer uses one pooled scalar residual gate. It predicts a
+> nodewise, phase-shared gate from the same GHD-conditioned surface features,
+> while the residual remains phase-specific. This makes the claimed local
+> correction executable without adding a second temporal head. Tests must
+> prove the gate receives gradients only in the combined row and is skipped in
+> response-only/local-only/steady-head paths. This selects no rank or method,
+> creates no job/result/novelty claim and does not change the oracle ->
+> GHD--GPS -> Transolver order, sealed test/79 extras, introai9-only execution,
+> never-junjinyong rule or no-site scope.
+
 > **2026-08-24 functional-fidelity direct-prior correction:** Primary-source
 > inspection of Garnier et al. `arXiv:2512.09013v1` shows a distinct 51M sparse
 > graph-Transformer aneurysm study, not a bibliographic substitute for the
