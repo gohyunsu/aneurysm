@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 comparator exact-state continuation closure:** The pending
+> GHD--GPS and Transolver jobs can now survive a genuine scheduler/walltime
+> interruption without restarting or changing science. Version-2 checkpoints
+> preserve current/best model state, optimizer, scheduler, patience counter,
+> full history, smoke record, accumulated time and Python/Torch/CUDA RNG.
+> Continuation requires a fresh activation plus the actual read-only prior
+> attempt terminal record and checkpoint; both hashes are recomputed before
+> restore. Only nonzero-exit/noncomplete attempts qualify, completed runs are
+> rejected, and the continuation writes a new run root. Model, seed, data,
+> objective, epoch rule and sealed scope are unchanged. No activation, job,
+> result or claim exists; oracle `118376.ECE-util1` remains first. Use only
+> introai9, never junjinyong, and do not maintain the public site.
+
 > **2026-08-24 comparator walltime-envelope correction:** Read-only PBS
 > evidence shows completed Graph U-Net `117056.ECE-util1` used 28:41:19 for
 > 25,050 optimizer steps under a 72-hour request. GHD--GPS requires 23,360

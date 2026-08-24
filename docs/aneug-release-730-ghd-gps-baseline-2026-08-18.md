@@ -46,3 +46,14 @@ Graph U-Net needed 28:41:19 for 25,050 optimizer steps, while GHD--GPS already
 requires 23,360 steps at its minimum 80 epochs. The correction prevents a
 predictable infrastructure cutoff from masquerading as comparator evidence;
 unused requested time does not alter the measured GPU-hours.
+
+Every tenth-epoch checkpoint now contains the current model, optimizer and
+scheduler, the best model and metric, stale-epoch counter, complete history,
+smoke record, accumulated elapsed time and Python/Torch/CUDA RNG states. A
+continuation is allowed only after a nonzero-exit, noncomplete attempt record.
+A fresh private activation must bind both that actual read-only terminal file
+and the exact checkpoint SHA-256; the runner recomputes both before restoring.
+The next run writes to a new run root and resumes at the next epoch with the
+same schedule. A completed scientific run cannot enter this path, and any
+lost work after the latest checkpoint remains visible in total PBS GPU-hour
+accounting rather than being silently erased.

@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-24 — Comparator interruptions resume exact state
+
+- Added a common version-2 checkpoint contract for GHD--GPS and Transolver
+  that retains current/best weights, optimizer, scheduler, patience, history,
+  accumulated time and all stochastic states.
+- Required a fresh continuation activation to bind both the actual prior
+  noncomplete/nonzero-exit terminal record and exact checkpoint; runners
+  recompute both hashes and reject completed runs or provenance drift.
+- Preserved the scientific contract and append-only run roots. This is dormant
+  resilience only; no activation, job, result or claim was created.
+
 ## 2026-08-24 — Comparator walltime matches the registered training horizon
 
 - Corrected GHD--GPS and Transolver PBS requests to the enabled queue's

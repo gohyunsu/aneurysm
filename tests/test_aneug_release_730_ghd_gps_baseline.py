@@ -62,6 +62,14 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertTrue(
             config["authorization"]["requires_response_oracle_terminal_record"]
         )
+        self.assertTrue(
+            config["authorization"][
+                "genuine_infrastructure_interruption_exact_state_resume_allowed"
+            ]
+        )
+        self.assertFalse(
+            config["authorization"]["completed_scientific_run_resume_allowed"]
+        )
         self.assertEqual(
             config["runtime"]["container_sha256"],
             "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
@@ -132,6 +140,9 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             "read_locked_test_or_extra": False,
             "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
             "private_train_audit_sha256": config["split"]["train_audit_private_sha256"],
+            "continuation_mode": False,
+            "resume_checkpoint_sha256": None,
+            "prior_attempt_terminal_record_sha256": None,
         }
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "activation.json"
@@ -145,6 +156,34 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             activation["response_oracle_terminal_record_sha256"] = "short"
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaisesRegex(Release730GHDGPSError, "oracle_terminal"):
+                validate_activation(path, config, "abc")
+
+    def test_continuation_activation_requires_both_exact_evidence_hashes(self) -> None:
+        config = load_config(CONFIG)
+        activation = {
+            "schema_version": "aurora.private.aneug_release_730_ghd_gps_activation.v1",
+            "protocol_id": config["protocol_id"],
+            "public_commit": "abc",
+            "quality_conclusion": "success",
+            "authorized_stage": "single_seed_validation_comparator",
+            "direct_baseline_terminal_record_sha256": "1" * 64,
+            "response_oracle_terminal_record_sha256": "2" * 64,
+            "read_locked_test_or_extra": False,
+            "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
+            "private_train_audit_sha256": config["split"]["train_audit_private_sha256"],
+            "continuation_mode": True,
+            "resume_checkpoint_sha256": "3" * 64,
+            "prior_attempt_terminal_record_sha256": "4" * 64,
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "activation.json"
+            path.write_text(json.dumps(activation), encoding="utf-8")
+            validate_activation(path, config, "abc")
+            activation["prior_attempt_terminal_record_sha256"] = None
+            path.write_text(json.dumps(activation), encoding="utf-8")
+            with self.assertRaisesRegex(
+                Release730GHDGPSError, "continuation_evidence"
+            ):
                 validate_activation(path, config, "abc")
 
     def test_checkpoint_save_is_atomic_and_loadable(self) -> None:
@@ -187,6 +226,10 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertIn("AURORA_GHD_GPS_ACTIVATION", script)
         self.assertIn("AURORA_RESPONSE_ORACLE_TERMINAL_RECORD", script)
         self.assertIn("--response-oracle-terminal-record", script)
+        self.assertIn("AURORA_GHD_GPS_RESUME_CHECKPOINT", script)
+        self.assertIn("AURORA_GHD_GPS_PRIOR_ATTEMPT_TERMINAL_RECORD", script)
+        self.assertIn("--resume-checkpoint", script)
+        self.assertIn("--prior-attempt-terminal-record", script)
         self.assertIn("status_tmp", script)
         self.assertIn('/bin/mv "$status_tmp" "$status"', script)
         self.assertNotIn("junjinyong", script)

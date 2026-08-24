@@ -36,6 +36,11 @@ from aurora.aneug_release_730_train_audit import (
     selected_training_records,
     validate_split_evidence,
 )
+from aurora.release730_training_continuation import (
+    make_training_checkpoint,
+    restore_training_checkpoint,
+    validate_interrupted_attempt_record,
+)
 
 
 class Release730GHDGPSError(RuntimeError):
@@ -227,7 +232,15 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "oracle_predecessor",
     )
     _require(authorization["requires_fresh_private_activation"], "activation")
+    _require(
+        authorization["genuine_infrastructure_interruption_exact_state_resume_allowed"]
+        and authorization[
+            "continuation_requires_fresh_private_activation_and_checkpoint_sha256"
+        ],
+        "continuation",
+    )
     for key in (
+        "completed_scientific_run_resume_allowed",
         "multi_seed_confirmation",
         "read_locked_test",
         "read_processed_only_extra",
@@ -278,6 +291,22 @@ def validate_activation(
         == config["split"]["train_audit_private_sha256"],
         "activation_evidence",
     )
+    continuation = activation.get("continuation_mode")
+    _require(isinstance(continuation, bool), "continuation_mode")
+    if continuation:
+        _require(
+            _is_sha256(activation.get("resume_checkpoint_sha256"))
+            and _is_sha256(
+                activation.get("prior_attempt_terminal_record_sha256")
+            ),
+            "continuation_evidence",
+        )
+    else:
+        _require(
+            activation.get("resume_checkpoint_sha256") is None
+            and activation.get("prior_attempt_terminal_record_sha256") is None,
+            "continuation_evidence",
+        )
     return activation
 
 
@@ -645,7 +674,9 @@ def run_development(
     paths: Mapping[str, Path],
     result_path: Path,
     checkpoint_directory: Path,
-    provenance: Mapping[str, str],
+    provenance: Mapping[str, Any],
+    resume_checkpoint: Path | None = None,
+    resume_expected_provenance: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     _require(torch.cuda.is_available(), "cuda_required")
     optimization = config["optimization"]
@@ -683,22 +714,6 @@ def run_development(
         step_size=int(optimization["step_size_epochs"]),
         gamma=float(optimization["gamma"]),
     )
-    smoke_case = _to_device(train[0], device)
-    smoke_output = model(smoke_case)
-    smoke_loss = field_loss(
-        smoke_output,
-        smoke_case["wss"] / wss_scale,
-        smoke_case["vertex_weights"],
-    )
-    smoke_loss.backward()
-    _require(bool(torch.isfinite(smoke_loss).item()), "smoke")
-    optimizer.zero_grad(set_to_none=True)
-    smoke = {
-        "finite_forward_backward": True,
-        "peak_gpu_bytes": int(torch.cuda.max_memory_allocated()),
-    }
-    del smoke_case, smoke_output, smoke_loss
-
     maximum_epochs = int(optimization["maximum_epochs"])
     minimum_epochs = int(optimization["minimum_epochs"])
     patience = int(optimization["early_stopping_patience"])
@@ -706,13 +721,60 @@ def run_development(
     checkpoint_interval = int(optimization["checkpoint_interval_epochs"])
     checkpoint_directory.mkdir(parents=True, exist_ok=True)
     _require(not any(checkpoint_directory.iterdir()), "checkpoint_directory_not_empty")
+    start_epoch = 0
     best_field = math.inf
     best_epoch = -1
     best_state: dict[str, torch.Tensor] | None = None
     stale = 0
     history: list[dict[str, float | int]] = []
     optimizer_steps = 0
-    for epoch in range(maximum_epochs):
+    elapsed_seconds_prior = 0.0
+    resumed_from_epoch: int | None = None
+    if resume_checkpoint is None:
+        smoke_case = _to_device(train[0], device)
+        smoke_output = model(smoke_case)
+        smoke_loss = field_loss(
+            smoke_output,
+            smoke_case["wss"] / wss_scale,
+            smoke_case["vertex_weights"],
+        )
+        smoke_loss.backward()
+        _require(bool(torch.isfinite(smoke_loss).item()), "smoke")
+        optimizer.zero_grad(set_to_none=True)
+        smoke = {
+            "finite_forward_backward": True,
+            "peak_gpu_bytes": int(torch.cuda.max_memory_allocated()),
+        }
+        del smoke_case, smoke_output, smoke_loss
+    else:
+        _require(resume_expected_provenance is not None, "resume_provenance")
+        restored = restore_training_checkpoint(
+            resume_checkpoint,
+            schema_version="aurora.private.aneug_release_730_ghd_gps_checkpoint.v2",
+            protocol_id=config["protocol_id"],
+            expected_provenance=resume_expected_provenance,
+            model=model,
+            optimizer=optimizer,
+            scheduler=scheduler,
+            maximum_epochs=maximum_epochs,
+        )
+        start_epoch = int(restored["epoch"])
+        resumed_from_epoch = start_epoch
+        optimizer_steps = int(restored["optimizer_steps"])
+        best_field = float(restored["best_field_relative_l2"])
+        best_epoch = int(restored["best_epoch"])
+        best_state = dict(restored["best_state_dict"])
+        stale = int(restored["stale_epochs"])
+        history = [dict(row) for row in restored["history"]]
+        smoke = dict(restored["smoke"])
+        elapsed_seconds_prior = float(restored["elapsed_seconds_accumulated"])
+
+    training_epochs = (
+        range(start_epoch, start_epoch)
+        if start_epoch >= minimum_epochs and stale >= patience
+        else range(start_epoch, maximum_epochs)
+    )
+    for epoch in training_epochs:
         model.train()
         order = list(range(len(train)))
         random.Random(seed + epoch).shuffle(order)
@@ -764,17 +826,26 @@ def run_development(
         if (epoch + 1) % checkpoint_interval == 0:
             _strict_atomic_torch_save(
                 checkpoint_directory / f"epoch_{epoch + 1:03d}.pt",
-                {
-                    "schema_version": "aurora.private.aneug_release_730_ghd_gps_checkpoint.v1",
-                    "protocol_id": config["protocol_id"],
-                    "epoch": epoch + 1,
-                    "optimizer_steps": optimizer_steps,
-                    "validation_field_relative_l2": validation_field,
-                    "model_state_dict": state,
-                    "optimizer_state_dict": optimizer.state_dict(),
-                    "scheduler_state_dict": scheduler.state_dict(),
-                    **provenance,
-                },
+                make_training_checkpoint(
+                    schema_version="aurora.private.aneug_release_730_ghd_gps_checkpoint.v2",
+                    protocol_id=config["protocol_id"],
+                    epoch=epoch + 1,
+                    optimizer_steps=optimizer_steps,
+                    validation_field_relative_l2=validation_field,
+                    model_state_dict=state,
+                    optimizer_state_dict=optimizer.state_dict(),
+                    scheduler_state_dict=scheduler.state_dict(),
+                    best_state_dict=best_state,
+                    best_field_relative_l2=best_field,
+                    best_epoch=best_epoch,
+                    stale_epochs=stale,
+                    history=history,
+                    smoke=smoke,
+                    elapsed_seconds_accumulated=elapsed_seconds_prior
+                    + time.monotonic()
+                    - started,
+                    provenance=provenance,
+                ),
             )
         if epoch + 1 >= minimum_epochs and stale >= patience:
             break
@@ -807,7 +878,9 @@ def run_development(
         "epochs_completed": len(history),
         "optimizer_steps": optimizer_steps,
         "parameter_count": model_parameter_count(model),
-        "elapsed_seconds": time.monotonic() - started,
+        "elapsed_seconds": elapsed_seconds_prior + time.monotonic() - started,
+        "continuation_mode": resume_checkpoint is not None,
+        "resumed_from_epoch": resumed_from_epoch,
         "peak_gpu_bytes": int(torch.cuda.max_memory_allocated()),
         "train_physical_vector_rms_scale": wss_scale,
         "smoke": smoke,
@@ -843,6 +916,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--train-audit-private", type=Path)
     parser.add_argument("--result", type=Path)
     parser.add_argument("--checkpoint-directory", type=Path)
+    parser.add_argument("--resume-checkpoint", type=Path)
+    parser.add_argument("--prior-attempt-terminal-record", type=Path)
     args = parser.parse_args(argv)
     config = load_config(args.config)
     if args.validate_only:
@@ -862,13 +937,36 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     _require(all(value is not None for value in required), "execution_arguments")
     activation = validate_activation(args.activation, config, args.expected_commit)
+    continuation_mode = args.resume_checkpoint is not None
+    _require(
+        activation["continuation_mode"] is continuation_mode,
+        "continuation_mode_mismatch",
+    )
+    if continuation_mode:
+        _require(
+            args.prior_attempt_terminal_record is not None,
+            "prior_attempt_terminal_required",
+        )
+        validate_interrupted_attempt_record(
+            args.prior_attempt_terminal_record,
+            activation["prior_attempt_terminal_record_sha256"],
+        )
+        _require(
+            file_sha256(args.resume_checkpoint)
+            == activation["resume_checkpoint_sha256"],
+            "resume_checkpoint_hash",
+        )
+    else:
+        _require(
+            args.prior_attempt_terminal_record is None,
+            "unexpected_prior_attempt_terminal",
+        )
     validate_response_oracle_terminal_record(
         args.response_oracle_terminal_record, activation
     )
-    provenance = {
+    scientific_provenance = {
         "public_commit": args.expected_commit,
         "config_sha256": file_sha256(args.config),
-        "activation_sha256": file_sha256(args.activation),
         "processed_v5_sha256": config["source"]["processed_v5_sha256"],
         "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],
         "private_train_audit_sha256": config["split"]["train_audit_private_sha256"],
@@ -880,6 +978,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         ],
         "response_oracle_terminal_record_sha256": activation[
             "response_oracle_terminal_record_sha256"
+        ],
+    }
+    provenance = {
+        **scientific_provenance,
+        "activation_sha256": file_sha256(args.activation),
+        "continuation_mode": continuation_mode,
+        "resume_checkpoint_sha256": activation["resume_checkpoint_sha256"],
+        "prior_attempt_terminal_record_sha256": activation[
+            "prior_attempt_terminal_record_sha256"
         ],
     }
     run_development(
@@ -895,6 +1002,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.result,
         args.checkpoint_directory,
         provenance,
+        args.resume_checkpoint,
+        scientific_provenance,
     )
     return 0
 

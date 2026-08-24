@@ -39,3 +39,11 @@ The PBS envelope likewise requests the queue's 72-hour default. The prior
 Only the resource request changes; model, seed, objective, epoch ceiling,
 patience, validation cadence and checkpoint rule remain fixed, and actual
 rather than requested GPU-hours are reported.
+
+The same exact-state continuation contract applies to Transolver. Version-2
+periodic checkpoints retain current/best model state, optimizer, scheduler,
+patience state, full history, accumulated time and all RNG states. Only a
+fresh activation binding an actual noncomplete/nonzero-exit terminal record
+and checkpoint digest can resume into a new run root. Both file hashes are
+recomputed before restoration; a completed run, provenance drift, partial
+state or one-sided environment binding fails closed.
