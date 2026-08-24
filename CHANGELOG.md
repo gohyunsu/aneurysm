@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-25 — Froze candidate selection before candidate evidence
+
+- Added a validation-only analyzer for the exact five registered candidate
+  cells and the completed direct-control decision.
+- Candidate objectives are compared with one common four-endpoint utility
+  derived from the shared initial combined checkpoint, preventing their
+  objective-specific checkpoint utilities from being compared as if they had
+  the same scale.
+- Added an explicit fail-closed branch if Graph U-Net is the direct selector's
+  winner because the matched-training runner currently implements only GHD--
+  GPS and Transolver controls. No silent fallback, threshold, result, job or
+  paper claim is introduced.
+
 ## 2026-08-25 — Closed the candidate rank and development-job count
 
 - Fixed one compute-bounded response rank before learned candidate validation:

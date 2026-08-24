@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 prospective candidate-selection closure
+
+- Before any learned candidate validation result exists, freeze candidate
+  selection to the minimum common initial-checkpoint endpoint-normalized
+  validation utility over the three matched fine-tunes. The utility is field
+  rL2 divided by its shared initial value plus the mean of similarly normalized
+  mean-vector, TAWSS and OSI errors. Do not compare the variants' different
+  training/checkpoint objectives directly.
+- The exact objective tie order is field-only, scalarized, then field-anchored.
+  Response-only and response-plus-residual field cells remain architecture
+  ablations and cannot enter this objective selection. Report all five cells;
+  no threshold, margin, automatic winner, novelty conclusion or repair
+  authority is created.
+- The direct selector's chosen control must be GHD--GPS or Transolver, the two
+  families implemented by matched T/T+S training. If the released Graph U-Net
+  adapter is selected, fail closed instead of silently substituting another
+  control; resolving that outcome requires a fresh prospective version or a
+  matched Graph U-Net implementation.
+- This is result-blind local public-contract readiness under the disclosure
+  hold. It creates no activation, result, data read, job, model choice or paper
+  claim. Keep test/79 extras sealed, use only introai9, never junjinyong and do
+  not maintain the site.
+
 ## 2026-08-25 bounded candidate-rank closure
 
 - The response/local candidate learns exactly one response rank. After the

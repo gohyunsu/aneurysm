@@ -142,6 +142,8 @@ jobs:
           bash -n cluster/pbs_aneug_release_730_transolver_baseline_v1.pbs
       - name: Validate release-730 direct-control selection analyzer
         run: PYTHONPATH=src python -m aurora.aneug_release_730_direct_control_selection --config configs/aneug_release_730_direct_control_selection_v1.json --validate-only
+      - name: Validate release-730 candidate selection analyzer
+        run: PYTHONPATH=src python -m aurora.aneug_release_730_candidate_selection --config configs/aneug_release_730_candidate_selection_v1.json --validate-only
       - name: Validate matched release-730 steady training scope
         run: PYTHONPATH=src python -c "from aurora.aneug_release_730_steady_training_scope import load_config; load_config('configs/aneug_release_730_steady_training_scope_v1.json')"
       - name: Validate release-730 five-seed confirmation contract

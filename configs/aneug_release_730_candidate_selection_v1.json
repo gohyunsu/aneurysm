@@ -1,0 +1,77 @@
+{
+  "schema_version": "aurora.aneug_release_730_candidate_selection.v1",
+  "protocol_id": "aneug_release_730_candidate_selection_v1",
+  "status": "prepared_result_pending",
+  "as_of": "2026-08-25",
+  "source": {
+    "candidate_config_sha256": "ca271c698ccb987f15936dcd37a5b520077a3e20343f55971b9b3893568a6686",
+    "candidate_implementation_sha256": "2f63e6e66224f1a870da73f33162dcd29a626d816ca43e371fea0339dc1b6933",
+    "direct_control_selection_config_sha256": "326071333f4a7c909f1011c3125a593b3d8f6488899cb3000d1f9b6ce7568c3b"
+  },
+  "split": {
+    "validation_cases": 73,
+    "validation_case_digest": "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
+    "validation_loader_order_sha256": "aac001b3092d11fa0204b49ada2788d21afdb35d015f9c626a5dcae992d4dc30",
+    "private_split_manifest_sha256": "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f",
+    "locked_test_read": false,
+    "processed_only_extra_read": false
+  },
+  "candidate_cells": {
+    "ordered": [
+      "architecture_response_only_field",
+      "architecture_response_plus_residual_field",
+      "finetune_response_plus_residual_field",
+      "finetune_response_plus_residual_scalarized",
+      "finetune_response_plus_residual_anchored"
+    ],
+    "seed": 1103,
+    "same_oracle_nominated_rank_required": true,
+    "same_train_only_response_basis_required": true,
+    "same_initial_combined_checkpoint_for_finetunes": true,
+    "report_all_cells": true,
+    "architecture_cells_are_ablation_not_final_objective_selection": true
+  },
+  "control": {
+    "source": "completed_direct_control_selection",
+    "eligible_matched_training_labels": ["ghd_gps_unet", "transolver"],
+    "family_mapping": {
+      "ghd_gps_unet": "release730_ghd_gps",
+      "transolver": "release730_transolver"
+    },
+    "released_graph_unet_is_development_reference_not_matched_training_family": true,
+    "silent_fallback_if_graph_unet_is_selected": false
+  },
+  "proposal": {
+    "family": "release730_response_plus_local_residual",
+    "objective_candidates_in_tie_order": [
+      "field_only",
+      "all_scalarized",
+      "all_field_anchored"
+    ],
+    "selection_cells": [
+      "finetune_response_plus_residual_field",
+      "finetune_response_plus_residual_scalarized",
+      "finetune_response_plus_residual_anchored"
+    ],
+    "selection_rule": "minimum_common_initial_checkpoint_endpoint_normalized_validation_utility_then_fixed_objective_order_exact_tie",
+    "common_utility": "field_over_initial_field_plus_mean_of_mean_vector_tawss_and_osi_over_their_shared_initial_values",
+    "normalizers_fixed_at_shared_initial_combined_checkpoint": true,
+    "absolute_performance_threshold": null,
+    "noninferiority_margin": null,
+    "automatic_paper_winner": false,
+    "automatic_novelty_conclusion": false
+  },
+  "boundary": {
+    "execute_now": false,
+    "requires_five_terminal_candidate_results": true,
+    "requires_fresh_private_activation": true,
+    "validation_development_only": true,
+    "locked_test_or_extra_access": false,
+    "repair_or_new_variant_authorization": false,
+    "paper_performance_claim": false,
+    "publish_numeric_result": false,
+    "server": "introai9",
+    "excluded_server": "junjinyong",
+    "maintain_public_site": false
+  }
+}
