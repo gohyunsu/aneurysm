@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-24 — Implemented the one-time release-730 T0 boundary
+
+- Added a non-executable evaluator and one-job PBS wrapper for all twenty
+  frozen five-seed control/proposal by T/T+S checkpoints on the same 73-case
+  locked test.
+- Added fail-closed preflight over checkpoint, validation-result and terminal-
+  record hashes before the access marker, and separated the public test-set
+  digest from the private ordered-loader digest.
+- Integrated the crossed seed/case analysis with the prediction-blind figure
+  selector. The compact figure payload uses predeclared seed `20260903` and
+  T+S cells and contains no case identifiers.
+- Added synthetic regressions for scope, activation attempt, complete
+  checkpoint grid, evidence preflight, model-identity alignment, contrast sign
+  and PBS single-job structure. No activation, test read, job, result, figure
+  or paper claim was created.
+
 ## 2026-08-24 — Closed metric roles through five-seed confirmation
 
 - Added explicit primary-claim, supporting and diagnostic metric lists to the

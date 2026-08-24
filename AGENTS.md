@@ -1,5 +1,30 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-24 one-time release-730 locked-test readiness
+
+- The final T0 boundary is implemented but remains non-executable. It accepts
+  exactly twenty frozen C0 checkpoints (five fixed seeds by control/proposal
+  and T/T+S), verifies every checkpoint, validation result and terminal record
+  before creating a test-access marker, then evaluates all cells in one GPU
+  batch without training or checkpoint selection.
+- The public test-case digest is a set digest, not a loader-order digest. A
+  fresh private T0 activation must bind the separate ordered-test digest; the
+  evaluator recomputes it from the private manifest before indexing all 73
+  test cases. The 79 processed-only extras remain unindexed and no case ID is
+  written to any output.
+- Reference-only OSI burden selects the three figure cases before any model is
+  loaded. The displayed fields use prospectively designated seed `20260903`
+  and the T+S control/proposal cells, never a seed selected from test outcomes.
+  A compact payload permits later rendering without reopening test data.
+- Test analysis preserves the five registered metrics and crossed seed/case
+  bootstrap. Field, TAWSS and OSI errors are claim endpoints, mean-vector
+  error is supporting and `osi_coverage` remains diagnostic. No automatic
+  winner, novelty conclusion or population inference is emitted.
+- This is readiness only. No private T0 activation, checkpoint manifest, job,
+  test read, result, figure or paper claim exists. Oracle `118479.ECE-util1`
+  remains the sole queued scientific path on introai9; do not modify,
+  duplicate or bypass it, and do not maintain the public site.
+
 ## 2026-08-24 confirmatory metric-role closure
 
 - Matched-information and five-seed analyzers now schema-label field rL2,
