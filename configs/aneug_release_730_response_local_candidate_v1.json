@@ -112,6 +112,7 @@
     "secondary_metrics": [
       "tawss_normalized_absolute_error",
       "valid_reference_support_osi_mae",
+      "osi_coverage",
       "mean_wss_vector_error",
       "low_tawss_quartile_field_relative_l2",
       "peak_systolic_wss_relative_l2",

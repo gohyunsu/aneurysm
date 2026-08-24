@@ -12,6 +12,7 @@ from aurora.aneug_release_730_response_local_candidate import (
     _valid_support_osi,
     active_parameter_count,
     configure_trainable_cell,
+    evaluate,
     make_candidate_checkpoint,
     restore_candidate_checkpoint,
     validate_activation,
@@ -118,6 +119,8 @@ class ResponseLocalCandidateTests(unittest.TestCase):
         self.assertFalse(value["split"]["read_locked_test_fields"])
         self.assertFalse(value["split"]["read_processed_only_extra_fields"])
         self.assertEqual(value["cells"]["maximum_candidate_gpu_jobs_before_confirmation"], 5)
+        self.assertIn("osi_coverage", value["evaluation"]["secondary_metrics"])
+        self.assertNotIn("osi_area_coverage", value["evaluation"]["secondary_metrics"])
         self.assertEqual(
             value["model"]["local_gate"],
             "nodewise_phase_shared_sigmoid_from_shared_features",
@@ -218,6 +221,33 @@ class ResponseLocalCandidateTests(unittest.TestCase):
         )
         self.assertAlmostEqual(mae, 0.0, places=7)
         self.assertAlmostEqual(coverage, 1.0, places=7)
+
+    def test_evaluation_overwrites_legacy_osi_coverage_on_train_support(self):
+        model = SharedEncoderCycleResponseResidual(
+            TinySharedBackbone(phases=4, nodes=5),
+            synthetic_payload(phases=4, nodes=5, rank=3),
+            rank=3,
+            local_output_scale=2.0,
+        )
+        case = tiny_case(nodes=5)
+        reference = torch.zeros(4, 5, 3)
+        reference[:, 0, 0] = torch.tensor([1.0, -1.0, 1.0, -1.0])
+        reference[:, 1:, 0] = 0.01
+        case["wss"] = reference
+        observed = evaluate(
+            model,
+            [case],
+            config(),
+            "response_only",
+            "field_only",
+            reference_tawss_floor=0.1,
+            selection_normalizers=None,
+            device=torch.device("cpu"),
+        )
+        row = observed["per_case_without_identifiers"][0]
+        self.assertIn("osi_coverage", row)
+        self.assertNotIn("osi_area_coverage", row)
+        self.assertEqual(row["osi_coverage"], 1.0)
 
     def test_candidate_checkpoint_restores_selection_and_rng_state(self):
         model = nn.Linear(3, 2)

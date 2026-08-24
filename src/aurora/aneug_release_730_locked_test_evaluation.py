@@ -147,7 +147,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "processed_v5_sha256": "3edf0d75ed8c83b10ebc23bb14fcb59392025b8b6ce9ce49f966377ce8f3b0ae",
         "steady_norm_bytes": 9_632_510_050,
         "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
-        "matched_training_config_sha256": "a8664c1221381421a07cc7f16dd09f7b5e856f68ddcb0e88a4c2a8dc72ced98c",
+        "matched_training_config_sha256": "2da43b08b871cd5ed2fc8d7dfa04d3d4267e7a0c1d8cde4892ac11ea32ef13ea",
         "matched_information_config_sha256": "9632456e59283b951ddeeb6cd40dfe568a5b3e7bb99fdc9a6c8004e624bafe50",
         "multiseed_confirmation_config_sha256": "75cd2e6c5d7545dd56274d7dd1b14d8b07380b0711cf10573d5b9fcaa1b57d92",
         "figure_protocol_config_sha256": "6bae547ab03edfc04979aeb2508d08b4f4488d44696f822d6592a5c51f122d91",

@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 candidate OSI-support consistency audit
+
+- A pre-execution static audit found that the response/local candidate
+  replaced valid-support OSI MAE but left the legacy fixed-threshold
+  `osi_coverage` value in the same result row, writing the matched-support
+  coverage under a second name. The runner now overwrites the canonical
+  `osi_coverage` key, so error and diagnostic coverage use the identical
+  train-defined reference support. `osi_area_coverage` is rejected from the
+  registered metric list.
+- The response/local, matched-training and locked-test configs remain
+  hash-bound after the correction. This changes no model, split, target,
+  objective, threshold, selection, data access or result; no candidate GPU job
+  or paper performance claim exists. Locked test and 79 extras remain sealed.
+- The shared-encoder parameter audit found no freeze bug: response-only uses
+  the full GHD-conditioned down/up mesh representation and freezes only the
+  unused cycle-output, residual-gate and single-field heads. Continue using
+  only introai9, never junjinyong, and do not maintain the public site.
+
 ## 2026-08-24 one-time release-730 locked-test readiness
 
 - The final T0 boundary is implemented but remains non-executable. It accepts

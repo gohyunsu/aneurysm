@@ -241,6 +241,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(
         evaluation["common_report_space"]
         == "raw_released_physical_cartesian_wss"
+        and "osi_coverage" in evaluation["secondary_metrics"]
+        and "osi_area_coverage" not in evaluation["secondary_metrics"]
         and evaluation["absolute_performance_threshold"] is None
         and evaluation["automatic_winner"] is False
         and evaluation["case_identifiers"] is False,
@@ -512,7 +514,11 @@ def evaluate(
             reference_tawss_floor,
         )
         metrics["osi_mae"] = osi
-        metrics["osi_area_coverage"] = coverage
+        # Keep the OSI error and its diagnostic coverage on the exact same
+        # train-defined reference support.  ``extended_case_metrics`` emits a
+        # legacy fixed-threshold ``osi_coverage`` value, so overwrite that
+        # canonical key instead of introducing a second, inconsistent name.
+        metrics["osi_coverage"] = coverage
         metrics["residual_basis_leakage"] = float(
             output["residual_basis_leakage"].item()
         )

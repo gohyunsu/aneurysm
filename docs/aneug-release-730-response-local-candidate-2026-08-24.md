@@ -95,7 +95,8 @@ validation cases. No absolute threshold or automatic winner is defined.
 
 Every decoded output is evaluated in the raw released physical Cartesian WSS
 space. The result reports case-level field relative L2, TAWSS normalized
-absolute error, reference-support OSI MAE, mean-vector error, low-TAWSS error,
+absolute error, reference-support OSI MAE and its same-support area coverage,
+mean-vector error, low-TAWSS error,
 peak-systolic error, normal-component error, gate mean and basis leakage,
 together with active parameters, peak GPU memory and elapsed time. Phases and
 vertices are never treated as independent statistical samples.
