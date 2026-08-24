@@ -53,28 +53,28 @@ def check_site(root: Path) -> list[str]:
             "provenance to CHANGELOG.md or the filterable site history"
         )
     required_readme_markers = {
-        "execution-incomplete · 0/12 evaluated": "current P0 state",
-        "31.0/40 inactive": "current reference-relative candidate boundary",
-        "source G0 | execution-incomplete · exact contract closed": (
-            "current source G0 boundary"
+        "584 / 73 / 73 train/validation/locked test": "active split",
+        "730개를 환자 730명으로 해석하지 않음": "independent-unit boundary",
+        "13,985 rows": "matched steady-information scope",
+        "released Graph U-Net, GHD–GPS/GINE, Transolver": "direct comparators",
+        "모든 논문 성능 cell은 pending": "result-pending boundary",
+        "locked test 73 cases와 processed-only extras 79 cases 미개방": (
+            "sealed-scope boundary"
         ),
-        "730 case를 730 독립 환자로 세지 않습니다": (
-            "AneuG independent-unit boundary"
-        ),
-        "2015 CFD Challenge | 5 anatomy": "Challenge anatomy boundary",
-        "current panel activation 영구 금지": "non-reactivation boundary",
-        "GNN을 포함한 어떤 모델도 current method가 아님": (
-            "no-selected-architecture boundary"
-        ),
-        "superseded protocol은 삭제하거나 성공으로 relabel하지 않습니다": (
-            "history routing boundary"
-        ),
+        "Proposal-only steady": "matched-information fairness boundary",
+        "공개 사이트는 유지보수하지 않습니다": "site-scope boundary",
+        "junjinyong 사용 금지": "execution-server boundary",
     }
     for marker, label in required_readme_markers.items():
         if marker not in readme:
             errors.append(f"README.md: missing {label} marker {marker!r}")
     forbidden_readme_markers = {
         "/home/introai9/": "private server path",
+        "active paper identity는 없습니다": "superseded no-paper state",
+        "reference-relative structural fidelity": "superseded research identity",
+        "GNN을 포함한 어떤 모델도 current method가 아님": (
+            "superseded no-model state"
+        ),
         "Real P0 remains 0/11": "stale P0 state presented in current overview",
         "Real P0 is still 0/11": "stale P0 state presented in current overview",
         "## 2026-": "dated changelog section duplicated in current overview",

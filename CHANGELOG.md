@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-24 — README follows the active release-730 study
+
+- Replaced the stale current-facing inactive critical-structure/worldline
+  narrative with the release-730 joint field/TAWSS/OSI question, 584/73/73
+  split, matched 13,985-row T/T+S protocol and direct-comparator ladder.
+- Made the sealed test/extras scope, synthetic-unit limitations, queued oracle
+  and result-pending boundary visible without exposing private identifiers or
+  performance.
+- Updated the README quality markers to reject the superseded identity. This
+  changes no site asset, scientific contract, model, data, job or claim.
+
 ## 2026-08-24 — Fixed response artifacts no longer inflate checkpoints
 
 - Marked the immutable oracle response mean, selected basis, quadrature

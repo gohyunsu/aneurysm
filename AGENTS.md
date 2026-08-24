@@ -1,5 +1,17 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 current-facing README synchronization:** The repository entry
+> point now describes the active release-730 joint field/functional-fidelity
+> study instead of the superseded inactive reference-relative/worldline
+> direction. It exposes the 584/73/73 split, sealed 73-test/79-extra scope,
+> matched 13,985-row T/T+S factor, direct comparators and queued response
+> oracle without publishing private identifiers or results. `check_site.py`
+> now enforces these current markers and rejects the obsolete paper identity.
+> This is documentation/quality-contract synchronization only; no site asset,
+> scientific byte, split, model, rank, execution or claim changed. Continue
+> oracle `118376.ECE-util1` without duplication, use only introai9, never
+> junjinyong, and do not maintain the public site.
+
 > **2026-08-24 candidate checkpoint-storage correction:** The dormant
 > response/local candidate previously registered the immutable oracle response
 > mean, selected basis, reference weights and amplitude center as persistent
