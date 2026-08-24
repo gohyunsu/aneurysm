@@ -113,6 +113,16 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
                 "compute_matched_transient_replay_control_present"
             ]
         )
+        self.assertTrue(
+            config["training_accounting"][
+                "bounded_auxiliary_attribution_sidecar_registered"
+            ]
+        )
+        self.assertFalse(
+            config["training_accounting"][
+                "auxiliary_attribution_is_primary_factorial_gate"
+            ]
+        )
 
     def test_config_rejects_causal_or_unaccounted_reinterpretation(self) -> None:
         config = load_config(CONFIG)
@@ -158,6 +168,8 @@ class MatchedInformationAnalysisTests(unittest.TestCase):
         self.assertTrue(output["interaction_is_not_standalone_novelty"])
         self.assertEqual(output["steady_exposure"]["control_TS"]["examples"], 46_720)
         self.assertFalse(output["steady_contrasts_are_label_only_causal_effects"])
+        self.assertTrue(output["bounded_auxiliary_attribution_sidecar_registered"])
+        self.assertFalse(output["auxiliary_attribution_is_primary_factorial_gate"])
         self.assertEqual(
             output["training_accounting"]["proposal_TS"]["optimizer_steps"],
             6_680,

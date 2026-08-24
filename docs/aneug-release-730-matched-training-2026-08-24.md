@@ -26,6 +26,22 @@ within T+S. Within-model T-to-T+S differences and the interaction estimate the
 registered augmentation protocol, including its additional compute; they are
 not label-only causal effects.
 
+### Bounded auxiliary-path attribution
+
+Two single-seed development sidecars, control T+M and proposal T+M, make the
+steady comparison less confounded. T+M reuses exactly the T+S single-field
+head and coefficient and makes one second geometry forward/backward pass per
+transient training case. Its target is the same case's 80-phase mean vector
+WSS, and its output scale comes only from the frozen train-transient audit. It
+reads no steady WSS row.
+
+T+S-minus-T+M is narrower than T+S-minus-T: it helps determine whether an
+observed benefit requires the eligible steady labels rather than merely an
+auxiliary head and second model pass. It is still not a causal steady-label
+effect because the targets, storage I/O and some system-level work differ.
+Accordingly T+M neither replaces nor blocks the primary T/T+S factorial. It
+is required only before making a steady-specific interpretation.
+
 ## Exact pairing and target
 
 Each epoch contains all 584 transient training cases. In T+S, exactly 584
@@ -45,11 +61,12 @@ separate descriptive scale audit. That scale is a numerical output
 parameterization, not a loss weight.
 
 The T+S loss adds one area-weighted, case-relative steady field squared error
-to the dimensionless transient cycle objective with coefficient one. The T
-cell freezes the same registered head. Thus both cells retain identical cycle
-initialization, transient order, seed, optimizer and validation rule; T+S
-differs only by the declared auxiliary data, active head and additional
-forward/backward work.
+to the dimensionless transient cycle objective with coefficient one. T+M adds
+the corresponding cycle-mean field term with coefficient one, while T freezes
+the registered head. All cells retain identical cycle initialization,
+transient order, seed, optimizer and validation rule. T+M and T+S activate the
+same head and one auxiliary model pass per transient case; their target and
+output scale follow their distinct train-only information sources.
 
 ## Selected model space
 
@@ -70,7 +87,8 @@ identical cycle weights and objective normalization.
 
 ## Executable boundary
 
-`src/aurora/aneug_release_730_matched_training.py` implements all four cells.
+`src/aurora/aneug_release_730_matched_training.py` implements the four primary
+factorial cells and two T+M sidecars.
 `cluster/pbs_aneug_release_730_matched_training_v1.pbs` executes exactly one
 activation-bound cell on one introai9 A6000. Before data loading it requires:
 
@@ -102,6 +120,12 @@ TAWSS normalized absolute error, valid-support OSI MAE/coverage, training
 steps, active parameters, GPU reservation time, memory and exact data
 exposure. It creates no automatic winner, novelty conclusion, test authority
 or paper claim.
+
+The separate auxiliary-attribution analyzer accepts only the two T+M and two
+T+S terminal cells, enforces matching model/protocol lineage within each role
+and reports paired T+S-minus-T+M contrasts. It explicitly records that this is
+not fully compute-matched, not a causal steady-label effect and not an
+automatic method-selection gate.
 
 This code is readiness only. It cannot run until the oracle, direct controls,
 candidate ablations, scale audit and selection record all exist and a fresh

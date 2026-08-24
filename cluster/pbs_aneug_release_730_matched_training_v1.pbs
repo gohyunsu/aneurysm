@@ -13,7 +13,7 @@ set -euo pipefail
 : "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
 : "${AURORA_MATCHED_ACTIVATION:?set fresh one-cell private activation}"
 : "${AURORA_MATCHED_MODEL_ROLE:?set selected_control or selected_proposal}"
-: "${AURORA_MATCHED_INFORMATION_MODE:?set transient_only or eligible_steady}"
+: "${AURORA_MATCHED_INFORMATION_MODE:?set transient_only, transient_mean or eligible_steady}"
 : "${AURORA_DEVELOPMENT_EVIDENCE_BUNDLE:?set exact terminal development bundle}"
 : "${AURORA_SELECTED_MODEL_RECORD:?set exact validation-only selection record}"
 : "${AURORA_STEADY_SCALE_RESULT:?set exact descriptive steady-scale result}"
@@ -33,7 +33,7 @@ case "$AURORA_MATCHED_MODEL_ROLE" in
   *) exit 64 ;;
 esac
 case "$AURORA_MATCHED_INFORMATION_MODE" in
-  transient_only|eligible_steady) ;;
+  transient_only|transient_mean|eligible_steady) ;;
   *) exit 64 ;;
 esac
 

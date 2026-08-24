@@ -3,10 +3,12 @@
 The four cells cross model role (selected control versus proposal) with
 information mode (transient-only versus the identical audited steady set).
 The module reports case-paired method and registered augmentation-protocol
-contrasts.  Because T+S adds forward/backward work and no compute-matched
-transient-replay control is registered, the within-model T-to-T+S contrast is
-not labelled a causal effect of steady labels alone.  The module deliberately
-selects no model, defines no pass threshold and reads no locked-test value.
+contrasts.  Because T+S adds forward/backward work, the within-model T-to-T+S
+contrast is not labelled a causal effect of steady labels alone. A separate
+bounded T+M sidecar controls the auxiliary model path but not target
+information, storage I/O or all system compute; it does not replace or gate
+this primary factorial. The module deliberately selects no model, defines no
+pass threshold and reads no locked-test value.
 """
 
 from __future__ import annotations
@@ -159,6 +161,12 @@ def validate_config(config: Mapping[str, Any]) -> None:
         ]
         is True
         and accounting["compute_matched_transient_replay_control_present"]
+        is False
+        and accounting["bounded_auxiliary_attribution_sidecar_registered"]
+        is True
+        and accounting["auxiliary_attribution_protocol_id"]
+        == "aneug_release_730_auxiliary_compute_attribution_v1"
+        and accounting["auxiliary_attribution_is_primary_factorial_gate"]
         is False
         and accounting["steady_contrast_estimand"]
         == "registered_T_plus_S_augmentation_protocol_including_its_additional_compute_not_a_label_only_causal_effect"
@@ -500,6 +508,11 @@ def analyze_matched_information(
         "steady_contrasts_are_registered_augmentation_protocol_effects": True,
         "steady_contrasts_are_label_only_causal_effects": False,
         "compute_matched_transient_replay_control_present": False,
+        "bounded_auxiliary_attribution_sidecar_registered": True,
+        "auxiliary_attribution_protocol_id": (
+            "aneug_release_730_auxiliary_compute_attribution_v1"
+        ),
+        "auxiliary_attribution_is_primary_factorial_gate": False,
         "steady_exposure": {
             label: {
                 "epochs": cells[label]["steady_exposure_epochs"],

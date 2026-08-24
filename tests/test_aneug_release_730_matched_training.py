@@ -45,7 +45,11 @@ def activation(role="selected_control", information="transient_only"):
         "protocol_id": "aneug_release_730_matched_training_v1",
         "public_commit": "1" * 40,
         "quality_conclusion": "success",
-        "authorized_stage": "single_seed_matched_information_validation_development",
+        "authorized_stage": (
+            "single_seed_auxiliary_compute_attribution_development"
+            if information == "transient_mean"
+            else "single_seed_matched_information_validation_development"
+        ),
         "model_role": role,
         "information_mode": information,
         "model_family": (
@@ -112,6 +116,13 @@ class MatchedTrainingTests(unittest.TestCase):
             "control_T", "control_TS", "proposal_T", "proposal_TS"
         ])
         self.assertFalse(value["factorial"]["proposal_only_steady_access"])
+        self.assertEqual(
+            value["auxiliary_attribution"]["cells"],
+            ["control_TM", "proposal_TM"],
+        )
+        self.assertEqual(
+            value["auxiliary_attribution"]["steady_wss_rows_read"], 0
+        )
         self.assertFalse(value["objective"]["steady_scale_is_loss_weight"])
         self.assertEqual(value["objective"]["steady_pair_coefficient"], 1.0)
         self.assertFalse(value["split"]["read_locked_test_fields"])
@@ -159,6 +170,20 @@ class MatchedTrainingTests(unittest.TestCase):
             )
             self.assertEqual(observed["selected_response_rank"], 32)
 
+            transient_mean = activation("selected_control", "transient_mean")
+            write_json(path, transient_mean)
+            observed = validate_activation(
+                path,
+                config(),
+                "1" * 40,
+                "selected_control",
+                "transient_mean",
+            )
+            self.assertEqual(
+                observed["authorized_stage"],
+                "single_seed_auxiliary_compute_attribution_development",
+            )
+
             proposal["response_basis_sha256"] = None
             write_json(path, proposal)
             with self.assertRaises(Release730MatchedTrainingError):
@@ -201,6 +226,7 @@ class MatchedTrainingTests(unittest.TestCase):
             "status": "complete_eligible_steady_descriptive",
             "eligible_steady_rows": 13_985,
             "steady_physical_vector_rms": 2.5,
+            "transient_train_physical_vector_rms": 1.75,
             "automatic_loss_weight": None,
             "steady_wss_rows_read": 13_985,
             "model_fit_or_prediction": False,
@@ -260,7 +286,7 @@ class MatchedTrainingTests(unittest.TestCase):
             model_role="selected_control",
             model_family="release730_ghd_gps",
             cycle_output_scale=2.0,
-            steady_output_scale=3.0,
+            single_field_output_scale=3.0,
         )
         case = {
             "normalized_cycle": torch.ones(4, 5, 3),
@@ -274,6 +300,8 @@ class MatchedTrainingTests(unittest.TestCase):
         self.assertTrue(all(not p.requires_grad for p in model.single_field_head.parameters()))
         configure_information_mode(model, "eligible_steady")
         self.assertTrue(all(p.requires_grad for p in model.single_field_head.parameters()))
+        configure_information_mode(model, "transient_mean")
+        self.assertTrue(all(p.requires_grad for p in model.single_field_head.parameters()))
 
     def test_proposal_wrapper_keeps_physical_cycle_and_scales_only_steady_head(self):
         model = MatchedCycleSingleFieldModel(
@@ -281,7 +309,7 @@ class MatchedTrainingTests(unittest.TestCase):
             model_role="selected_proposal",
             model_family="release730_response_plus_local_residual",
             cycle_output_scale=7.0,
-            steady_output_scale=3.0,
+            single_field_output_scale=3.0,
         )
         case = {
             "physical_cycle": torch.full((4, 5, 3), 2.0),
@@ -306,6 +334,11 @@ class MatchedTrainingTests(unittest.TestCase):
         self.assertEqual(
             transient_protocol_digest(config(), control_t),
             transient_protocol_digest(config(), control_ts),
+        )
+        control_tm = activation("selected_control", "transient_mean")
+        self.assertEqual(
+            transient_protocol_digest(config(), control_t),
+            transient_protocol_digest(config(), control_tm),
         )
         proposal = activation("selected_proposal", "transient_only")
         self.assertNotEqual(
@@ -409,6 +442,43 @@ class MatchedTrainingTests(unittest.TestCase):
                     optimizer=optimizer,
                     scheduler=scheduler,
                 )
+
+    def test_transient_mean_checkpoint_counts_auxiliary_without_steady_exposure(self):
+        model = nn.Linear(3, 2)
+        optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
+        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2)
+        activated = activation("selected_control", "transient_mean")
+        state = {key: value.detach().clone() for key, value in model.state_dict().items()}
+        payload = make_checkpoint(
+            config=config(),
+            activation=activated,
+            epoch=2,
+            optimizer_steps=584,
+            selection_name="validation_field_relative_l2",
+            selection_value=0.4,
+            best_selection_value=0.4,
+            best_epoch=1,
+            stale_epochs=1,
+            model_state_dict=state,
+            optimizer_state_dict=optimizer.state_dict(),
+            scheduler_state_dict=scheduler.state_dict(),
+            best_state_dict=state,
+            history=[{"epoch": 1}, {"epoch": 2}],
+            smoke={},
+            train_term_normalizers=None,
+            selection_endpoint_normalizers=None,
+            reference_tawss_floor=1e-4,
+            steady_exposure_count=0,
+            steady_exposure_prefix_sha256=None,
+            elapsed_seconds_accumulated=1.0,
+            provenance={},
+        )
+        self.assertEqual(payload["single_field_auxiliary_examples_consumed"], 1168)
+        self.assertEqual(
+            payload["single_field_auxiliary_source"],
+            "same_train_case_cycle_mean",
+        )
+        self.assertEqual(payload["steady_exposure_count"], 0)
 
     def test_common_loader_preserves_faces_for_steady_geometry(self):
         source = (

@@ -63,6 +63,27 @@
     "proposal_only_steady_access": false,
     "steady_supervision_is_novelty": false
   },
+  "auxiliary_attribution": {
+    "information_mode": "transient_mean",
+    "cells": [
+      "control_TM",
+      "proposal_TM"
+    ],
+    "single_seed_development_only": true,
+    "examples_per_transient_epoch": 584,
+    "one_second_geometry_pass_per_transient_case": true,
+    "target": "same_train_case_80_phase_mean_vector_wss",
+    "shared_single_field_head_with_t_plus_s": true,
+    "head_output_scale": "transient_train_physical_vector_rms",
+    "steady_wss_rows_read": 0,
+    "locked_test_or_extra_rows_read": 0,
+    "comparison_cells": [
+      "control_TS",
+      "proposal_TS"
+    ],
+    "causal_steady_label_effect": false,
+    "standalone_novelty": false
+  },
   "eligible_steady": {
     "processed_rows": 14392,
     "eligible_rows": 13985,
@@ -102,8 +123,10 @@
     ],
     "steady_single_field": "area_weighted_relative_squared_error",
     "steady_pair_coefficient": 1.0,
+    "transient_mean_pair_coefficient": 1.0,
     "pairing_interpretation": "one_dimensionless_steady_auxiliary_term_added_per_transient_case_not_a_label_only_causal_estimand",
     "steady_head_output_scale": "eligible_steady_physical_vector_rms_from_bound_descriptive_audit",
+    "transient_mean_head_output_scale": "transient_train_physical_vector_rms_from_train_audit",
     "steady_scale_is_loss_weight": false,
     "reference_tawss_floor_multiplier": 0.0001,
     "osi_pseudo_huber_delta": 0.02,

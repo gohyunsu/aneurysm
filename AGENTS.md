@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 bounded T+M attribution readiness:** Omitting the processed
+> steady cohort is not the active plan, but steady supervision cannot be
+> credited for effects caused only by adding a shared head and a second model
+> pass. The common matched runner now also supports `control_TM` and
+> `proposal_TM`: each uses the exact T+S single-field head and coefficient,
+> predicts the same train case's 80-phase mean WSS on a second geometry pass,
+> takes its output scale only from the frozen train-transient audit and reads
+> zero steady WSS rows. The paired sidecar contrasts T+S with T+M for each role
+> on the same 73 validation cases. It is single-seed development attribution,
+> not a replacement for the primary T/T+S factorial, a fully compute-matched
+> control, a causal steady-label effect, novelty or a paper result. Storage
+> I/O and target information remain deliberately unmatched and must be stated.
+> It cannot block the primary factorial, but steady-specific interpretation in
+> the manuscript requires it. Nineteen focused runner/sidecar tests and 33
+> related regressions pass; the full local suite passes 1,030/1,030. This
+> creates no activation, job, result or claim. Locked test/79 extras remain
+> sealed; use only introai9, never junjinyong, and do not maintain the site.
+
 > **2026-08-24 matched T/T+S trainer readiness:** The steady cohort is no
 > longer only a downstream analysis promise. A common activation-bound runner
 > now supports the selected GHD--GPS/Transolver control and response/local

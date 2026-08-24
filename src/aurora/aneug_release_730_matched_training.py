@@ -1,9 +1,11 @@
-"""Symmetric T/T+S training for selected release-730 control and proposal.
+"""Symmetric T/T+S training and T+M attribution for release-730 models.
 
 One activation executes one cell of the selected-control/proposal by
 transient-only/eligible-steady factorial. Eligible-steady cells add exactly
 one leakage-audited single-field example per transient training case using the
-common deterministic exposure stream. Test and processed-only rows have no
+common deterministic exposure stream. A separate single-seed transient-mean
+mode uses a second pass over the same train case to attribute the auxiliary
+head/pass without reading steady WSS. Test and processed-only rows have no
 runner input and are never indexed.
 """
 
@@ -50,6 +52,7 @@ from aurora.aneug_release_730_response_local_candidate import (
 )
 from aurora.aneug_release_730_single_field_auxiliary import (
     SharedEncoderSingleFieldAdapter,
+    transient_mean_auxiliary_case,
 )
 from aurora.aneug_release_730_steady_exposure_schedule import (
     load_config as load_exposure_config,
@@ -69,7 +72,9 @@ from aurora.release730_training_continuation import (
 
 
 MODEL_ROLES = ("selected_control", "selected_proposal")
-INFORMATION_MODES = ("transient_only", "eligible_steady")
+FACTORIAL_INFORMATION_MODES = ("transient_only", "eligible_steady")
+INFORMATION_MODES = (*FACTORIAL_INFORMATION_MODES, "transient_mean")
+AUXILIARY_INFORMATION_MODES = ("eligible_steady", "transient_mean")
 CONTROL_FAMILIES = ("release730_ghd_gps", "release730_transolver")
 PROPOSAL_FAMILY = "release730_response_plus_local_residual"
 PROPOSAL_OBJECTIVES = ("field_only", "all_scalarized", "all_field_anchored")
@@ -207,7 +212,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
     factorial = config["factorial"]
     _require(
         factorial["model_roles"] == list(MODEL_ROLES)
-        and factorial["information_modes"] == list(INFORMATION_MODES)
+        and factorial["information_modes"] == list(FACTORIAL_INFORMATION_MODES)
         and factorial["cells"]
         == ["control_T", "control_TS", "proposal_T", "proposal_TS"]
         and factorial["one_cell_per_activation"] is True
@@ -217,6 +222,24 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and factorial["proposal_only_steady_access"] is False
         and factorial["steady_supervision_is_novelty"] is False,
         "factorial",
+    )
+    attribution = config["auxiliary_attribution"]
+    _require(
+        attribution["information_mode"] == "transient_mean"
+        and attribution["cells"] == ["control_TM", "proposal_TM"]
+        and attribution["single_seed_development_only"] is True
+        and attribution["examples_per_transient_epoch"] == 584
+        and attribution["one_second_geometry_pass_per_transient_case"] is True
+        and attribution["target"] == "same_train_case_80_phase_mean_vector_wss"
+        and attribution["shared_single_field_head_with_t_plus_s"] is True
+        and attribution["head_output_scale"]
+        == "transient_train_physical_vector_rms"
+        and attribution["steady_wss_rows_read"] == 0
+        and attribution["locked_test_or_extra_rows_read"] == 0
+        and attribution["comparison_cells"] == ["control_TS", "proposal_TS"]
+        and attribution["causal_steady_label_effect"] is False
+        and attribution["standalone_novelty"] is False,
+        "auxiliary_attribution",
     )
     steady = config["eligible_steady"]
     _require(
@@ -255,8 +278,11 @@ def validate_config(config: Mapping[str, Any]) -> None:
     objective = config["objective"]
     _require(
         objective["steady_pair_coefficient"] == 1.0
+        and objective["transient_mean_pair_coefficient"] == 1.0
         and objective["steady_head_output_scale"]
         == "eligible_steady_physical_vector_rms_from_bound_descriptive_audit"
+        and objective["transient_mean_head_output_scale"]
+        == "transient_train_physical_vector_rms_from_train_audit"
         and objective["steady_scale_is_loss_weight"] is False
         and objective["reference_tawss_floor_multiplier"] == 1e-4
         and objective["osi_pseudo_huber_delta"] == 0.02
@@ -367,7 +393,11 @@ def validate_activation(
         activation.get("public_commit") == expected_commit
         and activation.get("quality_conclusion") == "success"
         and activation.get("authorized_stage")
-        == "single_seed_matched_information_validation_development",
+        == (
+            "single_seed_auxiliary_compute_attribution_development"
+            if information_mode == "transient_mean"
+            else "single_seed_matched_information_validation_development"
+        ),
         "activation_public",
     )
     _require(
@@ -509,6 +539,7 @@ def validate_steady_scale_result(
     _require(file_sha256(path) == expected_sha256, "steady_scale_hash")
     payload = json.loads(Path(path).read_text(encoding="utf-8"))
     scale = payload.get("steady_physical_vector_rms")
+    transient_scale = payload.get("transient_train_physical_vector_rms")
     _require(
         payload.get("schema_version")
         == "aurora.private.aneug_release_730_steady_scale_audit_result.v1"
@@ -518,6 +549,9 @@ def validate_steady_scale_result(
         and isinstance(scale, (int, float))
         and math.isfinite(float(scale))
         and float(scale) > 0.0
+        and isinstance(transient_scale, (int, float))
+        and math.isfinite(float(transient_scale))
+        and float(transient_scale) > 0.0
         and payload.get("automatic_loss_weight") is None
         and payload.get("steady_wss_rows_read")
         == config["eligible_steady"]["eligible_rows"]
@@ -532,7 +566,7 @@ def validate_steady_scale_result(
 
 
 class MatchedCycleSingleFieldModel(nn.Module):
-    """Expose physical cycle and steady fields from one shared encoder."""
+    """Expose a physical cycle and one auxiliary field from a shared encoder."""
 
     def __init__(
         self,
@@ -541,7 +575,7 @@ class MatchedCycleSingleFieldModel(nn.Module):
         model_role: str,
         model_family: str,
         cycle_output_scale: float,
-        steady_output_scale: float,
+        single_field_output_scale: float,
     ) -> None:
         super().__init__()
         _require(model_role in MODEL_ROLES, "model_role")
@@ -550,8 +584,9 @@ class MatchedCycleSingleFieldModel(nn.Module):
             "cycle_output_scale",
         )
         _require(
-            math.isfinite(steady_output_scale) and steady_output_scale > 0.0,
-            "steady_output_scale",
+            math.isfinite(single_field_output_scale)
+            and single_field_output_scale > 0.0,
+            "single_field_output_scale",
         )
         self.inner = inner
         self.model_role = model_role
@@ -560,7 +595,8 @@ class MatchedCycleSingleFieldModel(nn.Module):
             "cycle_output_scale", torch.tensor(float(cycle_output_scale))
         )
         self.register_buffer(
-            "steady_output_scale", torch.tensor(float(steady_output_scale))
+            "single_field_output_scale",
+            torch.tensor(float(single_field_output_scale)),
         )
 
     @property
@@ -582,7 +618,7 @@ class MatchedCycleSingleFieldModel(nn.Module):
             normalized = self.inner.forward_single_field(case)
         else:
             normalized = self.inner(case, mode="single_field")
-        return normalized * self.steady_output_scale
+        return normalized * self.single_field_output_scale
 
 
 def build_model(
@@ -590,7 +626,7 @@ def build_model(
     activation: Mapping[str, Any],
     topology: Mapping[str, torch.Tensor],
     cycle_output_scale: float,
-    steady_output_scale: float,
+    single_field_output_scale: float,
     basis_payload: Mapping[str, Any] | None,
 ) -> MatchedCycleSingleFieldModel:
     role = activation["model_role"]
@@ -625,7 +661,7 @@ def build_model(
         model_role=role,
         model_family=family,
         cycle_output_scale=cycle_output_scale,
-        steady_output_scale=steady_output_scale,
+        single_field_output_scale=single_field_output_scale,
     )
 
 
@@ -872,6 +908,17 @@ def make_checkpoint(
             and steady_exposure_prefix_sha256 is None,
             "checkpoint_transient_exposure",
         )
+    information_mode = activation["information_mode"]
+    auxiliary_examples = (
+        epoch * config["auxiliary_attribution"]["examples_per_transient_epoch"]
+        if information_mode in AUXILIARY_INFORMATION_MODES
+        else 0
+    )
+    auxiliary_source = {
+        "transient_only": None,
+        "transient_mean": "same_train_case_cycle_mean",
+        "eligible_steady": "eligible_steady_wss",
+    }[information_mode]
     return {
         "schema_version": "aurora.private.aneug_release_730_matched_training_checkpoint.v1",
         "protocol_id": config["protocol_id"],
@@ -904,6 +951,8 @@ def make_checkpoint(
         "reference_tawss_floor": reference_tawss_floor,
         "steady_exposure_count": steady_exposure_count,
         "steady_exposure_prefix_sha256": steady_exposure_prefix_sha256,
+        "single_field_auxiliary_examples_consumed": auxiliary_examples,
+        "single_field_auxiliary_source": auxiliary_source,
         "elapsed_seconds_accumulated": elapsed_seconds_accumulated,
         "rng_state": capture_rng_state(),
         **dict(provenance),
@@ -970,6 +1019,23 @@ def restore_checkpoint(
             and payload.get("steady_exposure_prefix_sha256") is None,
             "checkpoint_transient_exposure",
         )
+    expected_auxiliary_examples = (
+        epoch * config["auxiliary_attribution"]["examples_per_transient_epoch"]
+        if activation["information_mode"] in AUXILIARY_INFORMATION_MODES
+        else 0
+    )
+    expected_auxiliary_source = {
+        "transient_only": None,
+        "transient_mean": "same_train_case_cycle_mean",
+        "eligible_steady": "eligible_steady_wss",
+    }[activation["information_mode"]]
+    _require(
+        payload.get("single_field_auxiliary_examples_consumed")
+        == expected_auxiliary_examples
+        and payload.get("single_field_auxiliary_source")
+        == expected_auxiliary_source,
+        "checkpoint_auxiliary_accounting",
+    )
     model.load_state_dict(payload["model_state_dict"], strict=True)
     optimizer.load_state_dict(payload["optimizer_state_dict"])
     scheduler.load_state_dict(payload["scheduler_state_dict"])
@@ -1025,12 +1091,27 @@ def run_training(
         basis_payload = load_response_basis(
             paths["response_basis"], activation["response_basis_sha256"], config
         )
+    single_field_output_scale = (
+        float(steady_scale_result["transient_train_physical_vector_rms"])
+        if information_mode == "transient_mean"
+        else float(steady_scale_result["steady_physical_vector_rms"])
+    )
+    if information_mode == "transient_mean":
+        _require(
+            math.isclose(
+                single_field_output_scale,
+                cycle_output_scale,
+                rel_tol=1e-6,
+                abs_tol=1e-8,
+            ),
+            "transient_mean_scale_lineage",
+        )
     model = build_model(
         config,
         activation,
         topology,
         cycle_output_scale,
-        float(steady_scale_result["steady_physical_vector_rms"]),
+        single_field_output_scale,
         basis_payload,
     ).to(device)
     configure_information_mode(model, information_mode)
@@ -1126,13 +1207,15 @@ def run_training(
                 "projection_applied": False,
                 "gradient_conflict_measured": False,
             }
-        if information_mode == "eligible_steady":
-            transient_mean = smoke_case["wss"].mean(dim=0)
-            smoke_single = model.forward_single_field(smoke_case)
-            smoke_steady_loss = single_field_relative_squared_error(
-                smoke_single, transient_mean, smoke_case["vertex_weights"]
+        if information_mode in AUXILIARY_INFORMATION_MODES:
+            smoke_auxiliary = transient_mean_auxiliary_case(smoke_case)
+            smoke_single = model.forward_single_field(smoke_auxiliary)
+            smoke_auxiliary_loss = single_field_relative_squared_error(
+                smoke_single,
+                smoke_auxiliary["single_field_wss"],
+                smoke_auxiliary["vertex_weights"],
             )
-            smoke_steady_loss.backward()
+            smoke_auxiliary_loss.backward()
             smoke_diagnostic["single_field_head_finite_backward"] = True
         _require(
             all(
@@ -1145,6 +1228,11 @@ def run_training(
         smoke = {
             "finite_forward_backward": True,
             "diagnostic": smoke_diagnostic,
+            "single_field_smoke_target": (
+                "train_transient_cycle_mean"
+                if information_mode in AUXILIARY_INFORMATION_MODES
+                else None
+            ),
             "used_steady_wss": False,
             "peak_gpu_bytes": int(torch.cuda.max_memory_allocated()),
         }
@@ -1216,7 +1304,7 @@ def run_training(
             _require(len(steady_order) == len(transient_order) == 584, "paired_epoch")
         optimizer.zero_grad(set_to_none=True)
         cycle_sum = 0.0
-        steady_sum = 0.0
+        auxiliary_sum = 0.0
         conflicts = 0
         cosine_sum = 0.0
         for step, transient_index in enumerate(transient_order):
@@ -1254,18 +1342,32 @@ def run_training(
                 steady_index = steady_order[step]
                 steady_case = _to_device(steady_stream.decode(steady_index), device)
                 steady_prediction = model.forward_single_field(steady_case)
-                steady_loss = single_field_relative_squared_error(
+                auxiliary_loss = single_field_relative_squared_error(
                     steady_prediction,
                     steady_case["steady_wss"],
                     steady_case["vertex_weights"],
                 )
                 (
                     float(config["objective"]["steady_pair_coefficient"])
-                    * steady_loss
+                    * auxiliary_loss
                     / accumulation
                 ).backward()
-                steady_sum += float(steady_loss.detach().item())
+                auxiliary_sum += float(auxiliary_loss.detach().item())
                 exposure.update(steady_index)
+            elif information_mode == "transient_mean":
+                auxiliary_case = transient_mean_auxiliary_case(case)
+                auxiliary_prediction = model.forward_single_field(auxiliary_case)
+                auxiliary_loss = single_field_relative_squared_error(
+                    auxiliary_prediction,
+                    auxiliary_case["single_field_wss"],
+                    auxiliary_case["vertex_weights"],
+                )
+                (
+                    float(config["objective"]["transient_mean_pair_coefficient"])
+                    * auxiliary_loss
+                    / accumulation
+                ).backward()
+                auxiliary_sum += float(auxiliary_loss.detach().item())
             if (step + 1) % accumulation == 0:
                 torch.nn.utils.clip_grad_norm_(
                     trainable, float(optimization["gradient_clip_norm"])
@@ -1294,8 +1396,10 @@ def run_training(
             "epoch": epoch + 1,
             "optimizer_steps": optimizer_steps,
             "mean_cycle_objective": cycle_sum / len(transient_order),
-            "mean_steady_relative_squared_error": (
-                steady_sum / len(steady_order) if steady_order else None
+            "mean_single_field_auxiliary_relative_squared_error": (
+                auxiliary_sum / len(transient_order)
+                if information_mode in AUXILIARY_INFORMATION_MODES
+                else None
             ),
             "selection_value": selection_value,
             "validation_field_relative_l2": validation_field,
@@ -1314,6 +1418,11 @@ def run_training(
                 else None
             ),
             "steady_examples_consumed_cumulative": exposure.count,
+            "transient_mean_examples_consumed_cumulative": (
+                (epoch + 1) * len(transient_order)
+                if information_mode == "transient_mean"
+                else 0
+            ),
             "steady_exposure_prefix_sha256": (
                 exposure.hexdigest() if steady_order else None
             ),
@@ -1404,14 +1513,34 @@ def run_training(
             "train_term_normalizers": train_normalizers,
             "selection_endpoint_normalizers": selection_normalizers,
             "reference_tawss_floor": reference_tawss_floor,
+            "single_field_output_scale": single_field_output_scale,
+            "single_field_output_scale_source": (
+                "transient_train_physical_vector_rms_from_train_audit"
+                if information_mode == "transient_mean"
+                else (
+                    "eligible_steady_physical_vector_rms_from_bound_descriptive_audit"
+                    if information_mode == "eligible_steady"
+                    else None
+                )
+            ),
             **dict(provenance),
         },
     )
     epochs_completed = len(history)
     is_steady = information_mode == "eligible_steady"
+    is_transient_mean = information_mode == "transient_mean"
+    uses_auxiliary = information_mode in AUXILIARY_INFORMATION_MODES
     result = {
-        "schema_version": "aurora.aneug_release_730_matched_information_cell.v1",
-        "protocol_id": "aneug_release_730_matched_information_analysis_v1",
+        "schema_version": (
+            "aurora.aneug_release_730_auxiliary_compute_cell.v1"
+            if is_transient_mean
+            else "aurora.aneug_release_730_matched_information_cell.v1"
+        ),
+        "protocol_id": (
+            "aneug_release_730_auxiliary_compute_attribution_v1"
+            if is_transient_mean
+            else "aneug_release_730_matched_information_analysis_v1"
+        ),
         "training_protocol_id": config["protocol_id"],
         "status": "complete_validation_development",
         "model_role": role,
@@ -1459,12 +1588,56 @@ def run_training(
         "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),
         "parameter_count": model_parameter_count(model),
         "active_parameter_count": active_parameter_count(model),
+        "single_field_head_active": uses_auxiliary,
         "steady_head_active": is_steady,
         "steady_objective_scale_result_sha256": activation[
             "steady_scale_result_sha256"
         ]
         if is_steady
         else None,
+        "single_field_output_scale": single_field_output_scale
+        if uses_auxiliary
+        else None,
+        "single_field_output_scale_source": (
+            "eligible_steady_physical_vector_rms_from_bound_descriptive_audit"
+            if is_steady
+            else (
+                "transient_train_physical_vector_rms_from_train_audit"
+                if is_transient_mean
+                else None
+            )
+        ),
+        "single_field_scale_source_sha256": (
+            activation["steady_scale_result_sha256"]
+            if is_steady
+            else (
+                config["split"]["train_audit_private_sha256"]
+                if is_transient_mean
+                else None
+            )
+        ),
+        "single_field_auxiliary_source": (
+            "eligible_steady_wss"
+            if is_steady
+            else ("same_train_case_cycle_mean" if is_transient_mean else None)
+        ),
+        "single_field_auxiliary_coefficient": (
+            float(config["objective"]["steady_pair_coefficient"])
+            if is_steady
+            else (
+                float(config["objective"]["transient_mean_pair_coefficient"])
+                if is_transient_mean
+                else None
+            )
+        ),
+        "single_field_auxiliary_examples_consumed": (
+            epochs_completed * len(train) if uses_auxiliary else 0
+        ),
+        "transient_mean_auxiliary_examples_consumed": (
+            epochs_completed * len(train) if is_transient_mean else 0
+        ),
+        "steady_wss_rows_read_for_auxiliary": exposure.count if is_steady else 0,
+        "additional_auxiliary_forward_backward_work": uses_auxiliary,
         "additional_steady_forward_backward_work": is_steady,
         "best_epoch": best_epoch,
         "epochs_completed": epochs_completed,

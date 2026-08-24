@@ -81,6 +81,9 @@
     "same_training_seed_across_four_cells": true,
     "terminal_examples_steps_time_memory_and_parameters_reported": true,
     "compute_matched_transient_replay_control_present": false,
+    "bounded_auxiliary_attribution_sidecar_registered": true,
+    "auxiliary_attribution_protocol_id": "aneug_release_730_auxiliary_compute_attribution_v1",
+    "auxiliary_attribution_is_primary_factorial_gate": false,
     "steady_contrast_estimand": "registered_T_plus_S_augmentation_protocol_including_its_additional_compute_not_a_label_only_causal_effect",
     "primary_method_comparisons_are_within_information_mode": true
   },

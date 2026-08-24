@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-24 — Steady augmentation receives a bounded T+M attribution
+
+- Added transient-mean (T+M) cells for the selected control and proposal.
+  They reuse the T+S single-field head, coefficient and one auxiliary
+  geometry forward/backward per transient case but consume no steady WSS.
+- Kept T/T+S as the primary matched-information factorial. T+M is a
+  single-seed development sidecar that helps distinguish steady information
+  from merely adding the auxiliary path; it does not match storage I/O,
+  target information or all system-level compute and is not a causal effect.
+- Added terminal accounting, exact-state continuation checks and a paired
+  73-case analyzer for T+S-minus-T+M field, mean-vector, TAWSS and OSI
+  contrasts. Nineteen focused and 33 related tests pass; the full local suite
+  passes 1,030/1,030. It sets no threshold, winner, novelty conclusion or test
+  access and creates no activation, job or result.
+
 ## 2026-08-24 — Matched T/T+S training is executable
 
 - Added one common runner for the selected control/proposal by
