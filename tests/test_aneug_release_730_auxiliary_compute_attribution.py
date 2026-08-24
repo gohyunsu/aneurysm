@@ -49,6 +49,11 @@ def cell(label: str, offset: float, coverage: float = 0.9) -> dict:
         "status": "complete_validation_development",
         "model_role": "selected_control" if control else "selected_proposal",
         "information_mode": "eligible_steady" if steady else "transient_mean",
+        "training_stage": (
+            "single_seed_matched_information_validation_development"
+            if steady
+            else "single_seed_auxiliary_compute_attribution_development"
+        ),
         "model_family": "control_family" if control else "proposal_family",
         "objective_variant": "field_only" if control else "all_field_anchored",
         "selected_response_rank": None if control else 64,

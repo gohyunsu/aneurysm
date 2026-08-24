@@ -66,8 +66,9 @@
   },
   "training_accounting": {
     "required_cell_fields": [
-      "transient_training_protocol_sha256",
-      "training_seed",
+            "transient_training_protocol_sha256",
+            "training_stage",
+            "training_seed",
       "transient_case_cycles_consumed",
       "optimizer_steps",
       "training_gpu_seconds",

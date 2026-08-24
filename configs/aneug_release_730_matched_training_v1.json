@@ -18,7 +18,8 @@
     "private_overlap_result_sha256": "52219b9a7161f0932a4ed80020a339510474431b67e168741426c2a12e5092ef",
     "response_local_config_sha256": "eed4da6c5d827131826d63855affbb298107d4ab64c48060939a2edabf648d10",
     "ghd_gps_config_sha256": "0d9ee4615b5af9bf9058920e70252addf5146f06178fb058a2c193be1692bfc9",
-    "transolver_config_sha256": "0cb20c0c3041e63043d92a4a4062e7b8f9b63deb2e7390dbbaeaf1c9bad86fcb"
+    "transolver_config_sha256": "0cb20c0c3041e63043d92a4a4062e7b8f9b63deb2e7390dbbaeaf1c9bad86fcb",
+    "multiseed_confirmation_config_sha256": "c2dd08282f0f50f387a124e51926ffa51c1c4d86605422c8e4f607a2e707771c"
   },
   "split": {
     "public_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
@@ -84,6 +85,19 @@
     "causal_steady_label_effect": false,
     "standalone_novelty": false
   },
+  "confirmation": {
+    "protocol_id": "aneug_release_730_multiseed_confirmation_v1",
+    "activation_stage": "five_seed_matched_information_validation_confirmation",
+    "fresh_training_seeds": [20260901, 20260902, 20260903, 20260904, 20260905],
+    "cells_per_seed": ["control_T", "control_TS", "proposal_T", "proposal_TS"],
+    "cell_count": 20,
+    "selected_models_frozen_before_confirmation": true,
+    "single_seed_matched_information_result_required": true,
+    "same_seed_shared_across_four_cells": true,
+    "seed_excluded_from_transient_protocol_digest_and_recorded_separately": true,
+    "transient_mean_sidecar_in_confirmation": false,
+    "locked_test_or_extra_rows_read": 0
+  },
   "eligible_steady": {
     "processed_rows": 14392,
     "eligible_rows": 13985,
@@ -137,7 +151,7 @@
     "rrt_loss": false
   },
   "optimization": {
-    "seed": 1103,
+    "development_seed": 1103,
     "maximum_epochs": 251,
     "minimum_epochs": 80,
     "early_stopping_patience": 40,
@@ -184,7 +198,7 @@
     "requires_fresh_private_activation": true,
     "genuine_infrastructure_interruption_exact_state_resume_allowed": true,
     "continuation_requires_checkpoint_and_terminal_hashes": true,
-    "multi_seed_confirmation": false,
+    "multi_seed_confirmation": true,
     "read_locked_test": false,
     "read_processed_only_extra": false,
     "paper_performance_claim": false,

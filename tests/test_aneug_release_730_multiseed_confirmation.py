@@ -42,9 +42,12 @@ def cell(label: str, training_seed: int, offset: float, coverage: float) -> dict
     control = label.startswith("control")
     return {
         "schema_version": "aurora.aneug_release_730_matched_information_cell.v1",
-        "status": "complete_validation_development",
+        "status": "complete_validation_confirmation",
         "model_role": "selected_control" if control else "selected_proposal",
         "information_mode": "eligible_steady" if steady else "transient_only",
+        "model_family": "release730_ghd_gps" if control else "release730_response_plus_local_residual",
+        "objective_variant": "field_only" if control else "all_field_anchored",
+        "selected_response_rank": None if control else 64,
         "validation_case_digest":
         "666913e21e291511af73dcecd287416d20eb673c4f47861e4df7ffb52297e024",
         "private_split_manifest_sha256":
@@ -73,6 +76,7 @@ def cell(label: str, training_seed: int, offset: float, coverage: float) -> dict
         "steady_examples_consumed": 46_720 if steady else 0,
         "steady_exposure_prefix_sha256": "a" * 64 if steady else None,
         "transient_training_protocol_sha256": "b" * 64 if control else "c" * 64,
+        "training_stage": "five_seed_matched_information_validation_confirmation",
         "training_seed": training_seed,
         "transient_case_cycles_consumed": 46_720,
         "optimizer_steps": 6_680,
@@ -135,6 +139,11 @@ class MultiseedConfirmationTests(unittest.TestCase):
         self.assertEqual(coverage["favorable_seed_count"], 5)
         self.assertIsNone(output["automatic_test_authorization"])
         self.assertFalse(output["locked_test_or_extra_values_read"])
+        self.assertEqual(
+            output["selected_model_identity_by_role"]["selected_proposal"]
+            ["selected_response_rank"],
+            64,
+        )
 
     def test_is_deterministic(self) -> None:
         inputs = five_seed_cells()
@@ -175,6 +184,19 @@ class MultiseedConfirmationTests(unittest.TestCase):
             inputs[changed_seed][label]["transient_training_protocol_sha256"] = "e" * 64
         with self.assertRaisesRegex(
             MultiseedConfirmationError, "cross_seed_training_protocol"
+        ):
+            analyze_multiseed_confirmation(
+                inputs,
+                load_matched_config(MATCHED),
+                load_config(CONFIG),
+                replicates=100,
+            )
+
+        inputs = five_seed_cells()
+        inputs[changed_seed]["proposal_T"]["selected_response_rank"] = 128
+        inputs[changed_seed]["proposal_TS"]["selected_response_rank"] = 128
+        with self.assertRaisesRegex(
+            MultiseedConfirmationError, "cross_seed_selected_model_identity"
         ):
             analyze_multiseed_confirmation(
                 inputs,

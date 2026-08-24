@@ -21,6 +21,7 @@ from aurora.aneug_release_730_matched_training import (
     validate_config,
     validate_development_bundle,
     validate_selection_record,
+    validate_single_seed_matched_information_result,
     validate_steady_scale_result,
 )
 from aurora.aneug_release_730_steady_exposure_schedule import (
@@ -38,18 +39,26 @@ def config():
     return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
 
 
-def activation(role="selected_control", information="transient_only"):
+def activation(
+    role="selected_control", information="transient_only", training_seed=1103
+):
     proposal = role == "selected_proposal"
+    confirmation = training_seed != 1103
     return {
         "schema_version": "aurora.private.aneug_release_730_matched_training_activation.v1",
         "protocol_id": "aneug_release_730_matched_training_v1",
         "public_commit": "1" * 40,
         "quality_conclusion": "success",
         "authorized_stage": (
-            "single_seed_auxiliary_compute_attribution_development"
-            if information == "transient_mean"
-            else "single_seed_matched_information_validation_development"
+            "five_seed_matched_information_validation_confirmation"
+            if confirmation
+            else (
+                "single_seed_auxiliary_compute_attribution_development"
+                if information == "transient_mean"
+                else "single_seed_matched_information_validation_development"
+            )
         ),
+        "training_seed": training_seed,
         "model_role": role,
         "information_mode": information,
         "model_family": (
@@ -66,6 +75,14 @@ def activation(role="selected_control", information="transient_only"):
         "private_split_manifest_sha256": config()["split"]["private_manifest_sha256"],
         "private_train_audit_sha256": config()["split"]["train_audit_private_sha256"],
         "private_overlap_result_sha256": config()["source"]["private_overlap_result_sha256"],
+        "multiseed_confirmation_config_sha256": (
+            config()["source"]["multiseed_confirmation_config_sha256"]
+            if confirmation
+            else None
+        ),
+        "single_seed_matched_information_result_sha256": (
+            "6" * 64 if confirmation else None
+        ),
         "read_locked_test_or_extra": False,
         "continuation_mode": False,
         "resume_checkpoint_sha256": None,
@@ -127,6 +144,11 @@ class MatchedTrainingTests(unittest.TestCase):
             value["auxiliary_attribution"]["head_output_scale"],
             "transient_train_cycle_mean_physical_vector_rms",
         )
+        self.assertEqual(
+            value["confirmation"]["fresh_training_seeds"],
+            [20260901, 20260902, 20260903, 20260904, 20260905],
+        )
+        self.assertEqual(value["confirmation"]["cell_count"], 20)
         self.assertFalse(value["objective"]["steady_scale_is_loss_weight"])
         self.assertEqual(value["objective"]["steady_pair_coefficient"], 1.0)
         self.assertFalse(value["split"]["read_locked_test_fields"])
@@ -160,6 +182,7 @@ class MatchedTrainingTests(unittest.TestCase):
                 "1" * 40,
                 "selected_control",
                 "transient_only",
+                1103,
             )
             self.assertEqual(observed["model_family"], "release730_ghd_gps")
 
@@ -171,6 +194,7 @@ class MatchedTrainingTests(unittest.TestCase):
                 "1" * 40,
                 "selected_proposal",
                 "eligible_steady",
+                1103,
             )
             self.assertEqual(observed["selected_response_rank"], 32)
 
@@ -182,11 +206,45 @@ class MatchedTrainingTests(unittest.TestCase):
                 "1" * 40,
                 "selected_control",
                 "transient_mean",
+                1103,
             )
             self.assertEqual(
                 observed["authorized_stage"],
                 "single_seed_auxiliary_compute_attribution_development",
             )
+
+            confirmation = activation(
+                "selected_proposal", "eligible_steady", 20_260_903
+            )
+            write_json(path, confirmation)
+            observed = validate_activation(
+                path,
+                config(),
+                "1" * 40,
+                "selected_proposal",
+                "eligible_steady",
+                20_260_903,
+            )
+            self.assertEqual(
+                observed["authorized_stage"],
+                "five_seed_matched_information_validation_confirmation",
+            )
+
+            invalid_confirmation = activation(
+                "selected_control", "transient_mean", 20_260_901
+            )
+            write_json(path, invalid_confirmation)
+            with self.assertRaisesRegex(
+                Release730MatchedTrainingError, "confirmation_seed_mode"
+            ):
+                validate_activation(
+                    path,
+                    config(),
+                    "1" * 40,
+                    "selected_control",
+                    "transient_mean",
+                    20_260_901,
+                )
 
             proposal["response_basis_sha256"] = None
             write_json(path, proposal)
@@ -197,6 +255,7 @@ class MatchedTrainingTests(unittest.TestCase):
                     "1" * 40,
                     "selected_proposal",
                     "eligible_steady",
+                    1103,
                 )
 
     def test_bundle_selection_and_scale_are_hash_bound_and_sealed(self):
@@ -239,6 +298,16 @@ class MatchedTrainingTests(unittest.TestCase):
             "case_ids_included": False,
             "paper_performance_claim": False,
         }
+        matched_result = {
+            "schema_version": "aurora.private.aneug_release_730_matched_information_analysis_result.v1",
+            "protocol_id": "aneug_release_730_matched_information_analysis_v1",
+            "status": "complete",
+            "evidence_role": "validation_development_matched_information_factorial",
+            "paired_case_count": 73,
+            "case_identifiers_included": False,
+            "locked_test_or_extra_values_read": False,
+            "paper_performance_claim": False,
+        }
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             bundle_path = root / "bundle.json"
@@ -261,6 +330,14 @@ class MatchedTrainingTests(unittest.TestCase):
                 scale_path, scale_hash, config()
             )
             self.assertEqual(observed_scale["steady_physical_vector_rms"], 2.5)
+            matched_path = root / "matched.json"
+            matched_hash = write_json(matched_path, matched_result)
+            self.assertEqual(
+                validate_single_seed_matched_information_result(
+                    matched_path, matched_hash, config()
+                )["paired_case_count"],
+                73,
+            )
 
             selection["selected_response_basis_sha256"] = "0" * 64
             changed_hash = write_json(selection_path, selection)
@@ -275,6 +352,15 @@ class MatchedTrainingTests(unittest.TestCase):
             with self.assertRaises(Release730MatchedTrainingError):
                 validate_steady_scale_result(
                     scale_path, changed_scale_hash, config()
+                )
+
+            matched_result["locked_test_or_extra_values_read"] = True
+            changed_matched_hash = write_json(matched_path, matched_result)
+            with self.assertRaisesRegex(
+                Release730MatchedTrainingError, "single_seed_matched_result"
+            ):
+                validate_single_seed_matched_information_result(
+                    matched_path, changed_matched_hash, config()
                 )
 
             selection["locked_test_or_79_extra_used"] = True
@@ -349,6 +435,16 @@ class MatchedTrainingTests(unittest.TestCase):
             transient_protocol_digest(config(), control_t),
             transient_protocol_digest(config(), proposal),
         )
+        fresh_one = activation(
+            "selected_control", "transient_only", 20_260_901
+        )
+        fresh_two = activation(
+            "selected_control", "transient_only", 20_260_902
+        )
+        self.assertEqual(
+            transient_protocol_digest(config(), fresh_one),
+            transient_protocol_digest(config(), fresh_two),
+        )
 
     def test_checkpoint_restores_exact_cell_state(self):
         model = nn.Linear(3, 2)
@@ -399,6 +495,60 @@ class MatchedTrainingTests(unittest.TestCase):
         self.assertEqual(restored["optimizer_steps"], 292)
         for key, value in model.state_dict().items():
             torch.testing.assert_close(value, state[key])
+
+    def test_checkpoint_rejects_cross_seed_resume(self):
+        model = nn.Linear(3, 2)
+        optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3)
+        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2)
+        activated = activation(
+            "selected_control", "transient_only", 20_260_901
+        )
+        state = {
+            key: value.detach().clone()
+            for key, value in model.state_dict().items()
+        }
+        payload = make_checkpoint(
+            config=config(),
+            activation=activated,
+            epoch=1,
+            optimizer_steps=292,
+            selection_name="validation_field_relative_l2",
+            selection_value=0.4,
+            best_selection_value=0.4,
+            best_epoch=1,
+            stale_epochs=0,
+            model_state_dict=state,
+            optimizer_state_dict=optimizer.state_dict(),
+            scheduler_state_dict=scheduler.state_dict(),
+            best_state_dict=state,
+            history=[{"epoch": 1}],
+            smoke={},
+            train_term_normalizers=None,
+            selection_endpoint_normalizers=None,
+            reference_tawss_floor=1e-4,
+            steady_exposure_count=0,
+            steady_exposure_prefix_sha256=None,
+            elapsed_seconds_accumulated=1.0,
+            provenance={},
+        )
+        self.assertEqual(payload["training_seed"], 20_260_901)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "checkpoint.pt"
+            torch.save(payload, path)
+            with self.assertRaisesRegex(
+                Release730MatchedTrainingError, "checkpoint_identity"
+            ):
+                restore_checkpoint(
+                    path,
+                    config=config(),
+                    activation=activation(
+                        "selected_control", "transient_only", 20_260_902
+                    ),
+                    expected_provenance={},
+                    model=model,
+                    optimizer=optimizer,
+                    scheduler=scheduler,
+                )
 
     def test_restore_rejects_steady_cell_with_wrong_exposure_count(self):
         model = nn.Linear(3, 2)
@@ -500,17 +650,20 @@ class MatchedTrainingTests(unittest.TestCase):
             "AURORA_MATCHED_ACTIVATION",
             "AURORA_MATCHED_MODEL_ROLE",
             "AURORA_MATCHED_INFORMATION_MODE",
+            "AURORA_MATCHED_TRAINING_SEED",
             "AURORA_DEVELOPMENT_EVIDENCE_BUNDLE",
             "AURORA_SELECTED_MODEL_RECORD",
             "AURORA_STEADY_SCALE_RESULT",
             "AURORA_PRIVATE_OVERLAP_RESULT",
             "AURORA_MATCHED_RESUME_CHECKPOINT",
             "AURORA_MATCHED_PRIOR_ATTEMPT_TERMINAL_RECORD",
+            "AURORA_SINGLE_SEED_MATCHED_INFORMATION_RESULT",
         ):
             self.assertIn(marker, script)
         self.assertIn("--response-basis", script)
         self.assertIn("--resume-checkpoint", script)
         self.assertIn("--prior-attempt-terminal-record", script)
+        self.assertIn("--multiseed-confirmation-config", script)
         self.assertNotIn("junjinyong", script)
         self.assertNotIn("test_manifest", script)
         self.assertNotIn("processed_only", script)

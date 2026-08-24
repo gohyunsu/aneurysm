@@ -38,6 +38,8 @@ METRIC_DIRECTIONS = {
     "osi_coverage": "higher",
 }
 METRICS = tuple(METRIC_DIRECTIONS)
+MATCHED_DEVELOPMENT_STAGE = "single_seed_matched_information_validation_development"
+CONFIRMATION_STAGE = "five_seed_matched_information_validation_confirmation"
 CONTRASTS = {
     "proposal_minus_control_T": {
         "control_T": -1.0,
@@ -143,6 +145,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         accounting["required_cell_fields"]
         == [
             "transient_training_protocol_sha256",
+            "training_stage",
             "training_seed",
             "transient_case_cycles_consumed",
             "optimizer_steps",
@@ -217,7 +220,11 @@ def _expected_role_and_mode(label: str) -> tuple[str, str]:
 
 
 def extract_cell_rows(
-    cell: Mapping[str, Any], label: str, config: Mapping[str, Any]
+    cell: Mapping[str, Any],
+    label: str,
+    config: Mapping[str, Any],
+    *,
+    expected_training_stage: str = MATCHED_DEVELOPMENT_STAGE,
 ) -> list[dict[str, float]]:
     """Validate one normalized terminal-validation cell and return metric rows."""
 
@@ -227,7 +234,12 @@ def extract_cell_rows(
         == "aurora.aneug_release_730_matched_information_cell.v1",
         f"{label}_schema",
     )
-    _require(cell.get("status") == "complete_validation_development", f"{label}_status")
+    expected_status = (
+        "complete_validation_confirmation"
+        if expected_training_stage == CONFIRMATION_STAGE
+        else "complete_validation_development"
+    )
+    _require(cell.get("status") == expected_status, f"{label}_status")
     _require(cell.get("model_role") == role, f"{label}_role")
     _require(cell.get("information_mode") == mode, f"{label}_mode")
     _require(
@@ -288,6 +300,10 @@ def extract_cell_rows(
     _require(
         _is_sha256(cell.get("transient_training_protocol_sha256")),
         f"{label}_training_protocol",
+    )
+    _require(
+        cell.get("training_stage") == expected_training_stage,
+        f"{label}_training_stage",
     )
     _require(
         isinstance(cell.get("training_seed"), int)

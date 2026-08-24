@@ -14,6 +14,7 @@ set -euo pipefail
 : "${AURORA_MATCHED_ACTIVATION:?set fresh one-cell private activation}"
 : "${AURORA_MATCHED_MODEL_ROLE:?set selected_control or selected_proposal}"
 : "${AURORA_MATCHED_INFORMATION_MODE:?set transient_only, transient_mean or eligible_steady}"
+: "${AURORA_MATCHED_TRAINING_SEED:?set 1103 or one registered fresh confirmation seed}"
 : "${AURORA_DEVELOPMENT_EVIDENCE_BUNDLE:?set exact terminal development bundle}"
 : "${AURORA_SELECTED_MODEL_RECORD:?set exact validation-only selection record}"
 : "${AURORA_STEADY_SCALE_RESULT:?set exact descriptive steady-scale result}"
@@ -36,6 +37,13 @@ case "$AURORA_MATCHED_INFORMATION_MODE" in
   transient_only|transient_mean|eligible_steady) ;;
   *) exit 64 ;;
 esac
+case "$AURORA_MATCHED_TRAINING_SEED" in
+  1103|20260901|20260902|20260903|20260904|20260905) ;;
+  *) exit 64 ;;
+esac
+if [ "$AURORA_MATCHED_INFORMATION_MODE" = "transient_mean" ]; then
+  [ "$AURORA_MATCHED_TRAINING_SEED" = "1103" ]
+fi
 
 actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
 [ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
@@ -112,9 +120,25 @@ else
   [ -z "${AURORA_MATCHED_PRIOR_ATTEMPT_TERMINAL_RECORD:-}" ]
 fi
 
-printf 'stage=release730_matched_training_started job=%s commit=%s role=%s information=%s\n' \
+confirmation_bind_args=()
+confirmation_cli_args=()
+if [ "$AURORA_MATCHED_TRAINING_SEED" != "1103" ]; then
+  [ -r "${AURORA_SINGLE_SEED_MATCHED_INFORMATION_RESULT:?set completed single-seed factorial result}" ]
+  confirmation_parent="$(/usr/bin/dirname "$AURORA_SINGLE_SEED_MATCHED_INFORMATION_RESULT")"
+  confirmation_name="$(/usr/bin/basename "$AURORA_SINGLE_SEED_MATCHED_INFORMATION_RESULT")"
+  confirmation_bind_args=(
+    --bind "$confirmation_parent:/private/single_seed_matched:ro"
+  )
+  confirmation_cli_args=(
+    --single-seed-matched-information-result "/private/single_seed_matched/$confirmation_name"
+  )
+else
+  [ -z "${AURORA_SINGLE_SEED_MATCHED_INFORMATION_RESULT:-}" ]
+fi
+
+printf 'stage=release730_matched_training_started job=%s commit=%s role=%s information=%s seed=%s\n' \
   "$run_id" "$actual_commit" "$AURORA_MATCHED_MODEL_ROLE" \
-  "$AURORA_MATCHED_INFORMATION_MODE"
+  "$AURORA_MATCHED_INFORMATION_MODE" "$AURORA_MATCHED_TRAINING_SEED"
 /usr/bin/singularity exec --nv --cleanenv \
   --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
   --bind "$AURORA_DATA_ROOT:/data:ro" \
@@ -127,6 +151,7 @@ printf 'stage=release730_matched_training_started job=%s commit=%s role=%s infor
   --bind "$overlap_parent:/private/overlap:ro" \
   "${basis_bind_args[@]}" \
   "${resume_bind_args[@]}" \
+  "${confirmation_bind_args[@]}" \
   --bind "$run_root:/output" \
   "$AURORA_CONTAINER" \
   /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONPATH=/workspace/src \
@@ -136,6 +161,7 @@ printf 'stage=release730_matched_training_started job=%s commit=%s role=%s infor
   --expected-commit "$actual_commit" \
   --model-role "$AURORA_MATCHED_MODEL_ROLE" \
   --information-mode "$AURORA_MATCHED_INFORMATION_MODE" \
+  --training-seed "$AURORA_MATCHED_TRAINING_SEED" \
   --development-evidence-bundle "/private/bundle/$bundle_name" \
   --selection-record "/private/selection/$selection_name" \
   --steady-scale-result "/private/scale/$scale_name" \
@@ -152,8 +178,10 @@ printf 'stage=release730_matched_training_started job=%s commit=%s role=%s infor
   --response-local-config /workspace/configs/aneug_release_730_response_local_candidate_v1.json \
   --ghd-gps-config /workspace/configs/aneug_release_730_ghd_gps_baseline_v1.json \
   --transolver-config /workspace/configs/aneug_release_730_transolver_baseline_v1.json \
+  --multiseed-confirmation-config /workspace/configs/aneug_release_730_multiseed_confirmation_v1.json \
   --result /output/result.json \
   --checkpoint-directory /output/checkpoints \
   "${basis_cli_args[@]}" \
-  "${resume_cli_args[@]}"
+  "${resume_cli_args[@]}" \
+  "${confirmation_cli_args[@]}"
 printf 'stage=release730_matched_training_complete\n'

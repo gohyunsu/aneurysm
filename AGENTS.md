@@ -1,5 +1,23 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+> **2026-08-24 fresh five-seed executor closure:** The active manuscript's
+> twenty-cell confirmation is now executable rather than analysis-only. The
+> common matched runner accepts only seeds `20260901`--`20260905` for T/T+S
+> confirmation, keeps seed 1103 for single-seed development/T+M and rejects
+> T+M at fresh seeds. Every activation, checkpoint, best checkpoint, result
+> and scientific provenance records the exact seed and stage; cross-seed
+> resume is rejected. A fresh-seed activation also binds the exact multiseed
+> config and a completed sealed single-seed 2x2 result before data loading.
+> The training-protocol digest deliberately excludes the separately reported
+> seed but remains exact for every other training field. The analyzer requires
+> the same selected family/objective/rank and protocol within role across all
+> five seeds and the confirmation stage on every cell. This sets no favorable-
+> seed threshold, winner, test authorization or paper claim. All 51 related
+> regressions and the full 1,032-test local suite pass with PBS syntax. This
+> creates no activation, job or result. Locked test/79
+> extras remain sealed; use only introai9, never junjinyong, and do not
+> maintain the site.
+
 > **2026-08-24 bounded T+M attribution readiness:** Omitting the processed
 > steady cohort is not the active plan, but steady supervision cannot be
 > credited for effects caused only by adding a shared head and a second model

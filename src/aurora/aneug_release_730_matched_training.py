@@ -79,6 +79,17 @@ AUXILIARY_INFORMATION_MODES = ("eligible_steady", "transient_mean")
 CONTROL_FAMILIES = ("release730_ghd_gps", "release730_transolver")
 PROPOSAL_FAMILY = "release730_response_plus_local_residual"
 PROPOSAL_OBJECTIVES = ("field_only", "all_scalarized", "all_field_anchored")
+DEVELOPMENT_SEED = 1103
+FRESH_CONFIRMATION_SEEDS = (
+    20_260_901,
+    20_260_902,
+    20_260_903,
+    20_260_904,
+    20_260_905,
+)
+MATCHED_DEVELOPMENT_STAGE = "single_seed_matched_information_validation_development"
+AUXILIARY_DEVELOPMENT_STAGE = "single_seed_auxiliary_compute_attribution_development"
+CONFIRMATION_STAGE = "five_seed_matched_information_validation_confirmation"
 
 
 class Release730MatchedTrainingError(RuntimeError):
@@ -183,6 +194,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "response_local_config_sha256": "eed4da6c5d827131826d63855affbb298107d4ab64c48060939a2edabf648d10",
         "ghd_gps_config_sha256": "0d9ee4615b5af9bf9058920e70252addf5146f06178fb058a2c193be1692bfc9",
         "transolver_config_sha256": "0cb20c0c3041e63043d92a4a4062e7b8f9b63deb2e7390dbbaeaf1c9bad86fcb",
+        "multiseed_confirmation_config_sha256": "c2dd08282f0f50f387a124e51926ffa51c1c4d86605422c8e4f607a2e707771c",
     }
     _require(all(source.get(key) == value for key, value in expected_source.items()), "source")
     split = config["split"]
@@ -242,6 +254,28 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and attribution["standalone_novelty"] is False,
         "auxiliary_attribution",
     )
+    confirmation = config["confirmation"]
+    _require(
+        confirmation["protocol_id"]
+        == "aneug_release_730_multiseed_confirmation_v1"
+        and confirmation["activation_stage"] == CONFIRMATION_STAGE
+        and tuple(confirmation["fresh_training_seeds"])
+        == FRESH_CONFIRMATION_SEEDS
+        and confirmation["cells_per_seed"]
+        == ["control_T", "control_TS", "proposal_T", "proposal_TS"]
+        and confirmation["cell_count"] == 20
+        and confirmation["selected_models_frozen_before_confirmation"] is True
+        and confirmation["single_seed_matched_information_result_required"]
+        is True
+        and confirmation["same_seed_shared_across_four_cells"] is True
+        and confirmation[
+            "seed_excluded_from_transient_protocol_digest_and_recorded_separately"
+        ]
+        is True
+        and confirmation["transient_mean_sidecar_in_confirmation"] is False
+        and confirmation["locked_test_or_extra_rows_read"] == 0,
+        "confirmation",
+    )
     steady = config["eligible_steady"]
     _require(
         (
@@ -295,7 +329,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
     optimization = config["optimization"]
     _require(
         (
-            optimization["seed"],
+            optimization["development_seed"],
             optimization["maximum_epochs"],
             optimization["minimum_epochs"],
             optimization["early_stopping_patience"],
@@ -303,7 +337,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
             optimization["validation_interval_epochs"],
             optimization["checkpoint_interval_epochs"],
         )
-        == (1103, 251, 80, 40, 2, 1, 10)
+        == (DEVELOPMENT_SEED, 251, 80, 40, 2, 1, 10)
         and optimization["learning_rate"] == 3e-4
         and optimization["weight_decay"] == 1e-4
         and optimization["scheduler"] == "step_50_gamma_0p75",
@@ -354,8 +388,11 @@ def validate_config(config: Mapping[str, Any]) -> None:
         is True,
         "authorization",
     )
+    _require(
+        authorization["multi_seed_confirmation"] is True,
+        "authorization_confirmation",
+    )
     for key in (
-        "multi_seed_confirmation",
         "read_locked_test",
         "read_processed_only_extra",
         "paper_performance_claim",
@@ -376,12 +413,36 @@ def load_config(path: str | Path) -> dict[str, Any]:
     return config
 
 
+def activation_training_stage(
+    config: Mapping[str, Any], information_mode: str, training_seed: int
+) -> str:
+    """Return the sole stage authorized for one mode/seed combination."""
+
+    _require(
+        isinstance(training_seed, int) and not isinstance(training_seed, bool),
+        "training_seed_type",
+    )
+    if training_seed == int(config["optimization"]["development_seed"]):
+        return (
+            AUXILIARY_DEVELOPMENT_STAGE
+            if information_mode == "transient_mean"
+            else MATCHED_DEVELOPMENT_STAGE
+        )
+    _require(
+        information_mode in FACTORIAL_INFORMATION_MODES
+        and training_seed in tuple(config["confirmation"]["fresh_training_seeds"]),
+        "confirmation_seed_mode",
+    )
+    return CONFIRMATION_STAGE
+
+
 def validate_activation(
     path: str | Path,
     config: Mapping[str, Any],
     expected_commit: str,
     model_role: str,
     information_mode: str,
+    expected_training_seed: int,
 ) -> dict[str, Any]:
     activation = json.loads(Path(path).read_text(encoding="utf-8"))
     _require(
@@ -390,15 +451,14 @@ def validate_activation(
         "activation_schema",
     )
     _require(activation.get("protocol_id") == config["protocol_id"], "activation_protocol")
+    expected_stage = activation_training_stage(
+        config, information_mode, expected_training_seed
+    )
     _require(
         activation.get("public_commit") == expected_commit
         and activation.get("quality_conclusion") == "success"
-        and activation.get("authorized_stage")
-        == (
-            "single_seed_auxiliary_compute_attribution_development"
-            if information_mode == "transient_mean"
-            else "single_seed_matched_information_validation_development"
-        ),
+        and activation.get("authorized_stage") == expected_stage
+        and activation.get("training_seed") == expected_training_seed,
         "activation_public",
     )
     _require(
@@ -445,6 +505,23 @@ def validate_activation(
         == config["source"]["private_overlap_result_sha256"]
         and activation.get("read_locked_test_or_extra") is False,
         "activation_scope",
+    )
+    confirmation = expected_stage == CONFIRMATION_STAGE
+    _require(
+        (
+            activation.get("multiseed_confirmation_config_sha256")
+            == config["source"]["multiseed_confirmation_config_sha256"]
+            and _is_sha256(
+                activation.get("single_seed_matched_information_result_sha256")
+            )
+        )
+        if confirmation
+        else (
+            activation.get("multiseed_confirmation_config_sha256") is None
+            and activation.get("single_seed_matched_information_result_sha256")
+            is None
+        ),
+        "activation_confirmation_lineage",
     )
     continuation = activation.get("continuation_mode")
     _require(isinstance(continuation, bool), "continuation_mode")
@@ -562,6 +639,30 @@ def validate_steady_scale_result(
         and payload.get("case_ids_included") is False
         and payload.get("paper_performance_claim") is False,
         "steady_scale_scope",
+    )
+    return dict(payload)
+
+
+def validate_single_seed_matched_information_result(
+    path: str | Path, expected_sha256: str, config: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Validate the completed four-cell development result before fresh seeds."""
+
+    _require(file_sha256(path) == expected_sha256, "single_seed_matched_hash")
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    _require(
+        payload.get("schema_version")
+        == "aurora.private.aneug_release_730_matched_information_analysis_result.v1"
+        and payload.get("protocol_id")
+        == "aneug_release_730_matched_information_analysis_v1"
+        and payload.get("status") == "complete"
+        and payload.get("evidence_role")
+        == "validation_development_matched_information_factorial"
+        and payload.get("paired_case_count") == config["split"]["validation_cases"]
+        and payload.get("case_identifiers_included") is False
+        and payload.get("locked_test_or_extra_values_read") is False
+        and payload.get("paper_performance_claim") is False,
+        "single_seed_matched_result",
     )
     return dict(payload)
 
@@ -768,6 +869,11 @@ def transient_protocol_digest(
 ) -> str:
     """Return the information-mode-independent protocol identifier."""
 
+    optimization = {
+        key: value
+        for key, value in config["optimization"].items()
+        if key != "development_seed"
+    }
     payload = {
         "protocol_id": config["protocol_id"],
         "model_role": activation["model_role"],
@@ -776,7 +882,8 @@ def transient_protocol_digest(
         "selected_response_rank": activation["selected_response_rank"],
         "split": config["split"],
         "objective": config["objective"],
-        "optimization": config["optimization"],
+        "optimization_without_training_seed": optimization,
+        "training_seed_recorded_separately": True,
     }
     return canonical_digest(payload)
 
@@ -910,6 +1017,10 @@ def make_checkpoint(
             "checkpoint_transient_exposure",
         )
     information_mode = activation["information_mode"]
+    training_seed = int(activation["training_seed"])
+    training_stage = activation_training_stage(
+        config, information_mode, training_seed
+    )
     auxiliary_examples = (
         epoch * config["auxiliary_attribution"]["examples_per_transient_epoch"]
         if information_mode in AUXILIARY_INFORMATION_MODES
@@ -928,6 +1039,8 @@ def make_checkpoint(
         "model_family": activation["model_family"],
         "objective_variant": activation["objective_variant"],
         "selected_response_rank": activation["selected_response_rank"],
+        "training_seed": training_seed,
+        "training_stage": training_stage,
         "epoch": epoch,
         "optimizer_steps": optimizer_steps,
         "selection_name": selection_name,
@@ -981,7 +1094,14 @@ def restore_checkpoint(
         and payload.get("model_family") == activation["model_family"]
         and payload.get("objective_variant") == activation["objective_variant"]
         and payload.get("selected_response_rank")
-        == activation["selected_response_rank"],
+        == activation["selected_response_rank"]
+        and payload.get("training_seed") == activation.get("training_seed")
+        and payload.get("training_stage")
+        == activation_training_stage(
+            config,
+            activation["information_mode"],
+            int(activation["training_seed"]),
+        ),
         "checkpoint_identity",
     )
     for key, value in expected_provenance.items():
@@ -1069,7 +1189,8 @@ def run_training(
     role = activation["model_role"]
     information_mode = activation["information_mode"]
     objective_variant = activation["objective_variant"]
-    seed = int(optimization["seed"])
+    seed = int(activation["training_seed"])
+    training_stage = activation_training_stage(config, information_mode, seed)
     random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
@@ -1495,7 +1616,8 @@ def run_training(
             "model_family": activation["model_family"],
             "objective_variant": objective_variant,
             "selected_response_rank": activation["selected_response_rank"],
-            "seed": seed,
+            "training_seed": seed,
+            "training_stage": training_stage,
             "best_epoch": best_epoch,
             "selection_name": selection_name,
             "best_selection_value": best_selection,
@@ -1533,7 +1655,11 @@ def run_training(
             else "aneug_release_730_matched_information_analysis_v1"
         ),
         "training_protocol_id": config["protocol_id"],
-        "status": "complete_validation_development",
+        "status": (
+            "complete_validation_confirmation"
+            if training_stage == CONFIRMATION_STAGE
+            else "complete_validation_development"
+        ),
         "model_role": role,
         "information_mode": information_mode,
         "model_family": activation["model_family"],
@@ -1573,6 +1699,7 @@ def run_training(
             config, activation
         ),
         "training_seed": seed,
+        "training_stage": training_stage,
         "transient_case_cycles_consumed": epochs_completed * len(train),
         "optimizer_steps": optimizer_steps,
         "training_gpu_seconds": elapsed_prior + time.monotonic() - started,
@@ -1663,9 +1790,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--expected-commit")
     parser.add_argument("--model-role", choices=MODEL_ROLES)
     parser.add_argument("--information-mode", choices=INFORMATION_MODES)
+    parser.add_argument("--training-seed", type=int)
     parser.add_argument("--development-evidence-bundle", type=Path)
     parser.add_argument("--selection-record", type=Path)
     parser.add_argument("--steady-scale-result", type=Path)
+    parser.add_argument("--single-seed-matched-information-result", type=Path)
     parser.add_argument("--response-basis", type=Path)
     parser.add_argument("--transient", type=Path)
     parser.add_argument("--steady", type=Path)
@@ -1680,6 +1809,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--response-local-config", type=Path)
     parser.add_argument("--ghd-gps-config", type=Path)
     parser.add_argument("--transolver-config", type=Path)
+    parser.add_argument("--multiseed-confirmation-config", type=Path)
     parser.add_argument("--result", type=Path)
     parser.add_argument("--checkpoint-directory", type=Path)
     parser.add_argument("--resume-checkpoint", type=Path)
@@ -1693,6 +1823,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.expected_commit,
         args.model_role,
         args.information_mode,
+        args.training_seed,
         args.development_evidence_bundle,
         args.selection_record,
         args.steady_scale_result,
@@ -1709,6 +1840,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.response_local_config,
         args.ghd_gps_config,
         args.transolver_config,
+        args.multiseed_confirmation_config,
         args.result,
         args.checkpoint_directory,
     )
@@ -1719,7 +1851,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.expected_commit,
         args.model_role,
         args.information_mode,
+        args.training_seed,
     )
+    confirmation = activation["authorized_stage"] == CONFIRMATION_STAGE
+    _require(
+        (args.single_seed_matched_information_result is not None) is confirmation,
+        "single_seed_matched_result_argument",
+    )
+    if confirmation:
+        validate_single_seed_matched_information_result(
+            args.single_seed_matched_information_result,
+            activation["single_seed_matched_information_result_sha256"],
+            config,
+        )
     _require(
         (args.response_basis is not None)
         is (args.model_role == "selected_proposal"),
@@ -1760,6 +1904,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             config["source"]["transolver_config_sha256"],
             "transolver_config",
         ),
+        (
+            args.multiseed_confirmation_config,
+            config["source"]["multiseed_confirmation_config_sha256"],
+            "multiseed_confirmation_config",
+        ),
     ):
         _require(file_sha256(path) == expected, f"{label}_hash")
     continuation = args.resume_checkpoint is not None
@@ -1779,6 +1928,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         _require(args.prior_attempt_terminal_record is None, "unexpected_prior_terminal")
     scientific_provenance = {
         "public_commit": args.expected_commit,
+        "training_seed": int(activation["training_seed"]),
+        "training_stage": activation["authorized_stage"],
         "training_config_sha256": file_sha256(args.config),
         "development_evidence_bundle_sha256": activation[
             "development_evidence_bundle_sha256"
@@ -1795,6 +1946,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         "response_basis_sha256": activation["response_basis_sha256"],
         "bound_steady_scale_result_sha256": activation[
             "steady_scale_result_sha256"
+        ],
+        "multiseed_confirmation_config_sha256": config["source"][
+            "multiseed_confirmation_config_sha256"
+        ],
+        "single_seed_matched_information_result_sha256": activation[
+            "single_seed_matched_information_result_sha256"
         ],
         "evidence_entries": bundle["terminal_or_result_sha256"],
     }

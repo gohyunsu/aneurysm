@@ -5,7 +5,7 @@
   "as_of": "2026-08-24",
   "source": {
     "matched_information_protocol_id": "aneug_release_730_matched_information_analysis_v1",
-    "matched_information_config_sha256": "782a43384a3b12c56d9cca8335ee249eea2d0751250e2e6a88c0008b31fd036b"
+    "matched_information_config_sha256": "0210c83172b01106ec5482f27dcc08a3aca048d46922eb5b5b8501bcba4d407c"
   },
   "scope": {
     "validation_cases": 73,

@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-08-24 — Fresh five-seed confirmation is executable
+
+- Extended the matched runner from seed-1103 development to the prospectively
+  fixed seeds `20260901`--`20260905`, four T/T+S cells per seed and no T+M.
+- Bound seed and execution stage into activations, optimizer checkpoints,
+  best checkpoints, terminal results and scientific provenance; cross-seed
+  continuation now fails closed.
+- Required every fresh-seed activation to bind the exact multiseed contract
+  and the completed sealed single-seed factorial result before data loading.
+- Updated the crossed seed/case analyzer to reject changes in the selected
+  family, objective or response rank across seeds. It still defines no
+  favorable-seed threshold, automatic winner, test authorization or claim.
+  All 51 related regressions and the full 1,032-test suite pass with PBS
+  syntax; no activation, job or result was created.
+
 ## 2026-08-24 — Steady augmentation receives a bounded T+M attribution
 
 - Added transient-mean (T+M) cells for the selected control and proposal.

@@ -17,6 +17,7 @@ from typing import Any, Mapping, Sequence
 
 from aurora.aneug_release_730_matched_information_analysis import (
     CELL_ORDER,
+    CONFIRMATION_STAGE,
     CONTRASTS,
     METRIC_DIRECTIONS,
     METRICS,
@@ -66,7 +67,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         source["matched_information_protocol_id"]
         == "aneug_release_730_matched_information_analysis_v1"
         and source["matched_information_config_sha256"]
-        == "782a43384a3b12c56d9cca8335ee249eea2d0751250e2e6a88c0008b31fd036b",
+        == "0210c83172b01106ec5482f27dcc08a3aca048d46922eb5b5b8501bcba4d407c",
         "source",
     )
     scope = config["scope"]
@@ -234,6 +235,10 @@ def analyze_multiseed_confirmation(
         "selected_control": set(),
         "selected_proposal": set(),
     }
+    selected_identities: dict[str, set[tuple[Any, Any, Any]]] = {
+        "selected_control": set(),
+        "selected_proposal": set(),
+    }
     for training_seed in expected_seeds:
         cells = cells_by_seed[training_seed]
         _require(set(cells) == set(CELL_ORDER), f"seed_{training_seed}_cells")
@@ -257,13 +262,43 @@ def analyze_multiseed_confirmation(
         protocol_digests["selected_proposal"].add(
             cells["proposal_T"]["transient_training_protocol_sha256"]
         )
+        for role, prefix in (
+            ("selected_control", "control"),
+            ("selected_proposal", "proposal"),
+        ):
+            transient = cells[f"{prefix}_T"]
+            steady = cells[f"{prefix}_TS"]
+            identity = (
+                transient.get("model_family"),
+                transient.get("objective_variant"),
+                transient.get("selected_response_rank"),
+            )
+            _require(
+                identity
+                == (
+                    steady.get("model_family"),
+                    steady.get("objective_variant"),
+                    steady.get("selected_response_rank"),
+                ),
+                f"seed_{training_seed}_{role}_identity_pair",
+            )
+            selected_identities[role].add(identity)
         rows_by_seed[training_seed] = {
-            label: extract_cell_rows(cells[label], label, matched_config)
+            label: extract_cell_rows(
+                cells[label],
+                label,
+                matched_config,
+                expected_training_stage=CONFIRMATION_STAGE,
+            )
             for label in CELL_ORDER
         }
     _require(
         all(len(values) == 1 for values in protocol_digests.values()),
         "cross_seed_training_protocol",
+    )
+    _require(
+        all(len(values) == 1 for values in selected_identities.values()),
+        "cross_seed_selected_model_identity",
     )
     if replicates is None:
         replicates = int(config["bootstrap"]["replicates"])
@@ -316,6 +351,14 @@ def analyze_multiseed_confirmation(
         "crossed_seed_case_contrasts": aggregate,
         "transient_training_protocol_sha256_by_role": {
             role: next(iter(values)) for role, values in protocol_digests.items()
+        },
+        "selected_model_identity_by_role": {
+            role: {
+                "model_family": next(iter(values))[0],
+                "objective_variant": next(iter(values))[1],
+                "selected_response_rank": next(iter(values))[2],
+            }
+            for role, values in selected_identities.items()
         },
         "automatic_winner": None,
         "automatic_novelty_conclusion": None,

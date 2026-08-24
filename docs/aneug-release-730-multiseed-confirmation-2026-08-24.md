@@ -33,9 +33,27 @@ synthetic cohort into patient-population inference.
 Every raw cell must pass the existing matched-information validator. The four
 cells of one seed share that exact seed. Control T/T+S and proposal T/T+S must
 share their within-role training-protocol digest, and each role's digest must
-remain identical across all five seeds. The validator also preserves the same
-73-case order, exact 13,985-row steady scope and exposure protocol, zero
-locked-test/extra reads and identifier-free output.
+remain identical across all five seeds. The selected model family, objective
+and response rank must also remain identical within role across all seeds.
+The validator preserves the same 73-case order, exact 13,985-row steady scope
+and exposure protocol, zero locked-test/extra reads and identifier-free output.
+
+## Executable boundary
+
+The common matched-training runner and PBS wrapper execute one fresh-seed cell
+per private activation. Seed 1103 remains reserved for single-seed development
+and T+M; confirmation accepts only `20260901`--`20260905` and only T/T+S. The
+activation, optimizer checkpoint, best checkpoint, terminal result and
+scientific provenance all record the exact seed and stage. A checkpoint from
+another seed or stage cannot be resumed.
+
+Before any fresh-seed field is loaded, the runner hash-validates the exact
+multiseed config and the completed, sealed single-seed four-cell analysis.
+The seed is excluded from the shared training-protocol digest because it is
+the replicated factor, but it is recorded separately everywhere. All other
+model, objective, split, schedule and information fields remain in the digest.
+This is execution readiness only; no fresh-seed activation, job or result
+exists.
 
 The one-time locked-test batch remains a later prospective stage after model,
 checkpoint rule, all five seeds, endpoints, analysis and figure selection have

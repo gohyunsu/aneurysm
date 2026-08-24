@@ -69,6 +69,7 @@ def cell(label: str, offset: float, coverage: float = 0.9) -> dict:
             else None
         ),
         "transient_training_protocol_sha256": ("a" if control else "b") * 64,
+        "training_stage": "single_seed_matched_information_validation_development",
         "training_seed": 1103,
         "transient_case_cycles_consumed": 46_720,
         "optimizer_steps": 6_680,

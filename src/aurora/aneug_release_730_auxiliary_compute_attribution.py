@@ -178,6 +178,15 @@ def extract_cell_rows(
     _require(cell.get("status") == "complete_validation_development", f"{label}_status")
     _require(cell.get("model_role") == role, f"{label}_role")
     _require(cell.get("information_mode") == mode, f"{label}_mode")
+    _require(
+        cell.get("training_stage")
+        == (
+            "single_seed_matched_information_validation_development"
+            if is_steady
+            else "single_seed_auxiliary_compute_attribution_development"
+        ),
+        f"{label}_training_stage",
+    )
     split = config["split"]
     _require(
         cell.get("validation_case_digest") == split["validation_case_digest"]

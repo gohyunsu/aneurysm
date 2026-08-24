@@ -78,12 +78,18 @@ field-anchored alignment. Selection requires a private, validation-only record
 binding all terminal development evidence. The record rejects locked-test or
 79-extra use and defines no absolute threshold.
 
-Every factorial cell starts from scratch with seed 1103 and the common
-251/80/40 maximum/minimum/patience schedule. For an aligned proposal, the
+Every single-seed development factorial cell starts from scratch with seed
+1103 and the common 251/80/40 maximum/minimum/patience schedule. For an
+aligned proposal, the
 field/mean-vector/TAWSS/OSI training normalizers use all and only the initial
 584 training predictions. Checkpoint utility normalizers use the same initial
 model on all and only the 73 validation cases. T and T+S therefore begin from
 identical cycle weights and objective normalization.
+
+After the single-seed factorial is complete and the selected models are
+frozen, the same runner supports the five prospective confirmation seeds
+`20260901`--`20260905`. Each seed contains all four T/T+S cells. T+M remains a
+seed-1103 attribution sidecar and is not expanded into the confirmation.
 
 ## Executable boundary
 
