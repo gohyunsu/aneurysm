@@ -87,8 +87,13 @@ def validate_config(config: Mapping[str, Any]) -> None:
         layout["figure_width_inches"] == 7.1
         and layout["figure_height_inches"] == 1.85
         and layout["paper_height_fraction"] == 0.235
-        and layout["case_columns"]
+        and layout["audit_case_columns"]
         == ["low_reference_OSI", "median_reference_OSI", "high_reference_OSI"]
+        and layout["main_case_column"] == "high_reference_OSI"
+        and layout["main_case_index"] == 2
+        and layout["main_figure_left_panel"] == "method_schematic"
+        and layout["main_figure_right_panel"]
+        == "high_reference_OSI_surfaces_and_trace"
         and layout["surface_rows"] == ["TAWSS", "OSI"]
         and layout["method_columns_within_case"]
         == ["reference", "selected_control", "proposal"]

@@ -150,9 +150,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "matched_training_config_sha256": "08aa39d3f3f8380e0d28fa1838b56bec5fa774941683b809fb04c8ab321d2ecf",
         "matched_information_config_sha256": "9632456e59283b951ddeeb6cd40dfe568a5b3e7bb99fdc9a6c8004e624bafe50",
         "multiseed_confirmation_config_sha256": "75cd2e6c5d7545dd56274d7dd1b14d8b07380b0711cf10573d5b9fcaa1b57d92",
-        "figure_protocol_config_sha256": "782396a37d16d9b8edec0e014d9fa18c8a3c28df1c8118cacb3cecac1b9fbcf2",
-        "figure_protocol_source_sha256": "b466aa67b964b55aa01eeb95d22121c43f47af7526230c83ea690ed17bc1899e",
-        "figure_renderer_source_sha256": "26eb2211d40a1f02cf1a75030284b89ab3fa184f8ab85f4953fcabaa2883d899",
+        "figure_protocol_config_sha256": "68e6a3e1b331ca30db1ec309cdfc60e1a13cc8645885c75d87641a6c36cbeff9",
+        "figure_protocol_source_sha256": "9d35fcc1e267231ca7b8a9c0f66815b28c0c9ea38f4b00a432191701e385276e",
+        "figure_renderer_source_sha256": "6d06deb9b9a9627f8c1af2b54eeda9f66043fdcad621269995bfa1a86339876d",
         "public_split_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
         "public_train_audit_sha256": "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
     }

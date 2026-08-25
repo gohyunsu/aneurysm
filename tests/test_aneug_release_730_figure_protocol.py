@@ -65,6 +65,31 @@ class Release730FigureProtocolConfigTests(unittest.TestCase):
             with self.assertRaisesRegex(AneuGFigureProtocolError, reason):
                 validate_config(changed)
 
+    def test_main_figure_layout_is_prospectively_fixed(self) -> None:
+        config = load_config(CONFIG)
+        layout = config["render_layout"]
+        self.assertEqual(
+            layout["audit_case_columns"],
+            ["low_reference_OSI", "median_reference_OSI", "high_reference_OSI"],
+        )
+        self.assertEqual(layout["main_case_index"], 2)
+        self.assertEqual(layout["main_case_column"], "high_reference_OSI")
+        self.assertEqual(layout["main_figure_left_panel"], "method_schematic")
+        self.assertEqual(
+            layout["main_figure_right_panel"],
+            "high_reference_OSI_surfaces_and_trace",
+        )
+        for key, value in (
+            ("main_case_index", 1),
+            ("main_case_column", "median_reference_OSI"),
+            ("main_figure_left_panel", "three_case_grid"),
+            ("main_figure_right_panel", "all_reference_OSI_surfaces"),
+        ):
+            changed = copy.deepcopy(config)
+            changed["render_layout"][key] = value
+            with self.assertRaisesRegex(AneuGFigureProtocolError, "render_layout"):
+                validate_config(changed)
+
 
 @unittest.skipIf(torch is None, "PyTorch is optional")
 class Release730FigureProtocolTensorTests(unittest.TestCase):

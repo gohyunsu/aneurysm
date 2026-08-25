@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-25 — Made the confirmatory figure legible without changing selection
+
+- Preserved all three prediction-blind low/median/high reference-OSI cases in
+  the compact T0 audit payload, while fixing the ISBI main figure to the
+  predesignated high-reference-OSI case only.
+- Replaced the unreadable 18-surface main-paper grid with a compact method
+  schematic, six Ref./Control/Ours TAWSS/OSI surfaces and one signed 80-phase
+  trace. Camera, color limits and trace direction remain reference-only.
+- Carried the prospective figure hashes through the locked-test evaluator and
+  added fail-closed layout regressions. No case, prediction, checkpoint,
+  locked-test value or paper result was read or selected.
+
 ## 2026-08-25 — Unified functional fine-tune checkpoint selection
 
 - Corrected a pre-execution mismatch: the final selector used one common

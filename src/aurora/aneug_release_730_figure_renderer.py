@@ -1,10 +1,13 @@
 """Dataset-loader-free renderer for the frozen release-730 figure layout.
 
-The builder accepts exactly three cases already selected by the reference-only
-T0 selector.  It has no data loader, checkpoint loader, CLI, case identifier,
-or selection logic.  Reference values alone determine display limits and trace
-directions.  The optional Matplotlib renderer is imported only when called so
-the scientific contract remains testable in the lightweight CI environment.
+The builder preserves all three cases selected by the reference-only T0
+selector for audit.  The paper renderer displays only the predesignated
+high-burden case beside a compact method schematic, keeping the surface panels
+legible at the frozen ISBI footprint.  It has no data loader, checkpoint
+loader, CLI, case identifier, or selection logic.  Reference values alone
+determine display limits and trace directions.  The optional Matplotlib
+renderer is imported only when called so the scientific contract remains
+testable in the lightweight CI environment.
 """
 
 from __future__ import annotations
@@ -222,7 +225,11 @@ def build_release730_render_payload(
         "schema_version": "aurora.aneug_release_730_confirmatory_figure.render_payload.v1",
         "protocol_id": config["protocol_id"],
         "selection_ordinals": [int(value) for value in ordinals],
-        "case_labels": list(layout["case_columns"]),
+        "case_labels": list(layout["audit_case_columns"]),
+        "main_case_index": int(layout["main_case_index"]),
+        "main_case_label": str(layout["main_case_column"]),
+        "main_figure_left_panel": str(layout["main_figure_left_panel"]),
+        "main_figure_right_panel": str(layout["main_figure_right_panel"]),
         "method_labels": list(layout["method_columns_within_case"]),
         "surface_rows": list(layout["surface_rows"]),
         "camera": {
@@ -326,6 +333,16 @@ def render_release730_confirmatory_figure(
         is False,
         "display_scope",
     )
+    _require(
+        isinstance(payload.get("cases"), list)
+        and len(payload["cases"]) == 3
+        and payload.get("main_case_index") == 2
+        and payload.get("main_case_label") == "high_reference_OSI"
+        and payload.get("main_figure_left_panel") == "method_schematic"
+        and payload.get("main_figure_right_panel")
+        == "high_reference_OSI_surfaces_and_trace",
+        "main_layout_scope",
+    )
     pdf = Path(pdf_path)
     png = Path(png_path)
     _require(pdf.suffix.lower() == ".pdf" and png.suffix.lower() == ".png", "outputs")
@@ -341,16 +358,14 @@ def render_release730_confirmatory_figure(
     from matplotlib.colors import Normalize
 
     cases = payload["cases"]
+    main_case_index = int(payload["main_case_index"])
+    case = cases[main_case_index]
     camera = payload["camera"]
-    projected_points = []
-    for case in cases:
-        points, _ = _project(
-            case["coordinates"][case["display_mask"]].numpy(),
-            camera["azimuth_degrees"],
-            camera["elevation_degrees"],
-        )
-        projected_points.append(points)
-    stacked = np.concatenate(projected_points, axis=0)
+    stacked, _ = _project(
+        case["coordinates"][case["display_mask"]].numpy(),
+        camera["azimuth_degrees"],
+        camera["elevation_degrees"],
+    )
     margin = 0.04 * max(float(np.ptp(stacked[:, 0])), float(np.ptp(stacked[:, 1])))
     xy_limits = [
         float(stacked[:, 0].min() - margin),
@@ -363,6 +378,7 @@ def render_release730_confirmatory_figure(
     grid = figure.add_gridspec(
         3,
         9,
+        width_ratios=[0.92, 0.92, 0.92, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
         height_ratios=[1.0, 1.0, 0.62],
         left=0.035,
         right=0.955,
@@ -371,97 +387,164 @@ def render_release730_confirmatory_figure(
         wspace=0.02,
         hspace=0.04,
     )
+    schematic_axis = figure.add_subplot(grid[:, :3])
+    schematic_axis.set_xlim(0.0, 1.0)
+    schematic_axis.set_ylim(0.0, 1.0)
+    schematic_axis.axis("off")
+    from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+
+    def box(
+        x: float,
+        y: float,
+        width: float,
+        height: float,
+        label: str,
+        color: str,
+    ) -> None:
+        schematic_axis.add_patch(
+            FancyBboxPatch(
+                (x, y),
+                width,
+                height,
+                boxstyle="round,pad=0.012,rounding_size=0.018",
+                linewidth=0.55,
+                edgecolor=color,
+                facecolor="white",
+            )
+        )
+        schematic_axis.text(
+            x + width / 2.0,
+            y + height / 2.0,
+            label,
+            ha="center",
+            va="center",
+            fontsize=5.0,
+            color="black",
+        )
+
+    def arrow(start: tuple[float, float], end: tuple[float, float]) -> None:
+        schematic_axis.add_patch(
+            FancyArrowPatch(
+                start,
+                end,
+                arrowstyle="-|>",
+                mutation_scale=5.5,
+                linewidth=0.55,
+                color="0.3",
+                shrinkA=1.5,
+                shrinkB=1.5,
+            )
+        )
+
+    box(0.18, 0.84, 0.64, 0.10, "surface mesh + GHD", "#4477AA")
+    box(0.18, 0.66, 0.64, 0.10, "shared mesh encoder", "#4477AA")
+    box(0.03, 0.45, 0.43, 0.12, "joint cycle\nresponse basis", "#228833")
+    box(0.54, 0.45, 0.43, 0.12, "mesh-local residual\n+ spatial gate", "#CC6677")
+    box(0.18, 0.25, 0.64, 0.10, "single decoded WSS cycle", "#AA3377")
+    box(0.10, 0.05, 0.80, 0.11, "field + mean vector + TAWSS + OSI", "#AA3377")
+    arrow((0.50, 0.84), (0.50, 0.76))
+    arrow((0.43, 0.66), (0.25, 0.57))
+    arrow((0.57, 0.66), (0.75, 0.57))
+    arrow((0.25, 0.45), (0.42, 0.35))
+    arrow((0.75, 0.45), (0.58, 0.35))
+    arrow((0.50, 0.25), (0.50, 0.16))
+    schematic_axis.text(
+        0.5,
+        0.985,
+        "Aligned complete-cycle surrogate",
+        ha="center",
+        va="top",
+        fontsize=5.8,
+        fontweight="bold",
+    )
+
     method_titles = {"reference": "Ref.", "selected_control": "Control", "proposal": "Ours"}
     metric_rows = (("tawss", payload["tawss_limits"]), ("osi", payload["osi_limits"]))
     collections: dict[str, list[Any]] = {"tawss": [], "osi": []}
-    for case_index, case in enumerate(cases):
-        for metric_index, (metric, limits) in enumerate(metric_rows):
-            for method_index, method in enumerate(payload["method_labels"]):
-                column = case_index * 3 + method_index
-                axis = figure.add_subplot(grid[metric_index, column])
-                values = case["methods"][method][metric]
-                valid = (
-                    torch.isfinite(values)
-                    if metric == "tawss"
-                    else (
-                        case["reference_osi_support"]
-                        & case["methods"][method]["osi_valid"]
-                        & torch.isfinite(values)
-                    )
+    for metric_index, (metric, limits) in enumerate(metric_rows):
+        for method_index, method in enumerate(payload["method_labels"]):
+            column = 3 + method_index * 2
+            axis = figure.add_subplot(grid[metric_index, column : column + 2])
+            values = case["methods"][method][metric]
+            valid = (
+                torch.isfinite(values)
+                if metric == "tawss"
+                else (
+                    case["reference_osi_support"]
+                    & case["methods"][method]["osi_valid"]
+                    & torch.isfinite(values)
                 )
-                collection = _surface_panel(
-                    axis,
-                    case,
-                    values,
-                    valid,
-                    limits=limits,
-                    colormap=payload["surface_colormap"],
-                    azimuth=camera["azimuth_degrees"],
-                    elevation=camera["elevation_degrees"],
-                    xy_limits=xy_limits,
+            )
+            collection = _surface_panel(
+                axis,
+                case,
+                values,
+                valid,
+                limits=limits,
+                colormap=payload["surface_colormap"],
+                azimuth=camera["azimuth_degrees"],
+                elevation=camera["elevation_degrees"],
+                xy_limits=xy_limits,
+            )
+            collections[metric].append(collection)
+            if metric_index == 0:
+                axis.set_title(method_titles[method], fontsize=5.2, pad=0.5)
+            if method_index == 0:
+                axis.text(
+                    -0.04,
+                    0.5,
+                    metric.upper(),
+                    transform=axis.transAxes,
+                    rotation=90,
+                    va="center",
+                    ha="right",
+                    fontsize=5.0,
                 )
-                collections[metric].append(collection)
-                if metric_index == 0:
-                    axis.set_title(method_titles[method], fontsize=5.2, pad=0.5)
-                if method_index == 0:
-                    axis.text(
-                        -0.04,
-                        0.5,
-                        metric.upper(),
-                        transform=axis.transAxes,
-                        rotation=90,
-                        va="center",
-                        ha="right",
-                        fontsize=5.0,
-                    )
-                if metric_index == 0 and method_index == 1:
-                    axis.text(
-                        0.5,
-                        1.28,
-                        payload["case_labels"][case_index].replace("_", " "),
-                        transform=axis.transAxes,
-                        ha="center",
-                        va="bottom",
-                        fontsize=5.4,
-                        fontweight="bold",
-                    )
-        trace_axis = figure.add_subplot(grid[2, case_index * 3 : case_index * 3 + 3])
-        phase = np.arange(80)
-        styles = {
-            "reference": ("black", "-"),
-            "selected_control": ("#4477AA", "--"),
-            "proposal": ("#CC6677", "-"),
-        }
-        for method in payload["method_labels"]:
-            color, style = styles[method]
-            trace_axis.plot(
-                phase,
-                case["methods"][method]["signed_trace"].numpy(),
-                color=color,
-                linestyle=style,
-                linewidth=0.65,
-                label=method_titles[method],
-            )
-        trace_axis.axhline(0.0, color="0.75", linewidth=0.35)
-        trace_axis.set_xlim(0, 79)
-        trace_axis.set_ylim(payload["signed_trace_limits"])
-        trace_axis.set_xticks([0, 40, 79] if case_index == 2 else [0, 40])
-        trace_axis.tick_params(labelsize=4.2, width=0.3, length=1.5, pad=0.8)
-        for spine in trace_axis.spines.values():
-            spine.set_linewidth(0.35)
-        if case_index == 0:
-            trace_axis.set_ylabel("signed WSS", fontsize=4.5, labelpad=1.0)
-            trace_axis.legend(
-                loc="upper center",
-                ncol=3,
-                fontsize=3.8,
-                frameon=False,
-                handlelength=1.5,
-                columnspacing=0.8,
-            )
-        else:
-            trace_axis.tick_params(labelleft=False)
-        trace_axis.set_xlabel("phase", fontsize=4.5, labelpad=0.4)
+            if metric_index == 0 and method_index == 1:
+                axis.text(
+                    0.5,
+                    1.28,
+                    "high reference OSI",
+                    transform=axis.transAxes,
+                    ha="center",
+                    va="bottom",
+                    fontsize=5.4,
+                    fontweight="bold",
+                )
+    trace_axis = figure.add_subplot(grid[2, 3:9])
+    phase = np.arange(80)
+    styles = {
+        "reference": ("black", "-"),
+        "selected_control": ("#4477AA", "--"),
+        "proposal": ("#CC6677", "-"),
+    }
+    for method in payload["method_labels"]:
+        color, style = styles[method]
+        trace_axis.plot(
+            phase,
+            case["methods"][method]["signed_trace"].numpy(),
+            color=color,
+            linestyle=style,
+            linewidth=0.75,
+            label=method_titles[method],
+        )
+    trace_axis.axhline(0.0, color="0.75", linewidth=0.35)
+    trace_axis.set_xlim(0, 79)
+    trace_axis.set_ylim(payload["signed_trace_limits"])
+    trace_axis.set_xticks([0, 40, 79])
+    trace_axis.tick_params(labelsize=4.5, width=0.3, length=1.5, pad=0.8)
+    for spine in trace_axis.spines.values():
+        spine.set_linewidth(0.35)
+    trace_axis.set_ylabel("signed WSS", fontsize=4.7, labelpad=1.0)
+    trace_axis.legend(
+        loc="upper center",
+        ncol=3,
+        fontsize=4.1,
+        frameon=False,
+        handlelength=1.5,
+        columnspacing=0.9,
+    )
+    trace_axis.set_xlabel("cardiac phase", fontsize=4.7, labelpad=0.4)
 
     for metric, limits, vertical_position in (
         ("tawss", payload["tawss_limits"], 0.865),
@@ -489,6 +572,9 @@ def render_release730_confirmatory_figure(
         "png_sha256": _file_sha256(png),
         "pdf_bytes": pdf.stat().st_size,
         "png_bytes": png.stat().st_size,
+        "audit_case_count": len(cases),
+        "main_case_index": main_case_index,
+        "main_case_label": payload["main_case_label"],
         "case_identifiers_included": False,
         "paper_claim": False,
     }
