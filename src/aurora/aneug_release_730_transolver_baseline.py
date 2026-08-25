@@ -214,6 +214,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(
         runtime["allowed_servers"] == ["introai9", "junjinyong"]
         and runtime["server_from_activation"] is True
+        and runtime["queue_by_server"]
+        == {"introai9": "coss_a6gpu", "junjinyong": "ssu_a6gpu"}
+        and runtime["queue_from_activation"] is True
         and runtime["ngpus"] == 1
         and runtime["memory_gb"] == 64
         and runtime["walltime"] == "72:00:00"
@@ -281,6 +284,8 @@ def validate_activation(
     _require(
         expected_execution_server in config["runtime"]["allowed_servers"]
         and activation.get("server") == expected_execution_server
+        and activation.get("queue")
+        == config["runtime"]["queue_by_server"][expected_execution_server]
         and activation.get("excluded_server") is None
         and activation.get("single_server_per_activation") is True
         and activation.get("duplicate_scientific_cell_across_accounts") is False,
@@ -730,6 +735,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     scientific_provenance = {
         "public_commit": args.expected_commit,
+        "execution_server": args.expected_execution_server,
+        "execution_queue": config["runtime"]["queue_by_server"][
+            args.expected_execution_server
+        ],
         "config_sha256": file_sha256(args.config),
         "processed_v5_sha256": config["source"]["processed_v5_sha256"],
         "private_split_manifest_sha256": config["split"]["private_manifest_sha256"],

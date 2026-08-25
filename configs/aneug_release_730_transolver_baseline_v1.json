@@ -115,7 +115,11 @@
   "runtime": {
     "allowed_servers": ["introai9", "junjinyong"],
     "server_from_activation": true,
-    "queue": "coss_a6gpu",
+    "queue_by_server": {
+      "introai9": "coss_a6gpu",
+      "junjinyong": "ssu_a6gpu"
+    },
+    "queue_from_activation": true,
     "Qlist": "a6000",
     "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
     "ncpus": 4,
