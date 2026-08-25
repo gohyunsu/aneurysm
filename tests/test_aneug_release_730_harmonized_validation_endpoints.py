@@ -22,6 +22,7 @@ from aurora.aneug_release_730_harmonized_validation_endpoints import (
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "aneug_release_730_harmonized_validation_endpoints_v1.json"
+SIDECAR = ROOT / "cluster" / "pbs_aneug_release_730_harmonized_validation_endpoints_v1.pbs"
 
 
 def endpoint_row(offset: float = 0.0, support: float = 0.75) -> dict[str, float]:
@@ -72,6 +73,18 @@ def activation() -> dict:
 
 
 class HarmonizedValidationEndpointTests(unittest.TestCase):
+    def test_sidecar_is_pbs_only_frozen_validation_scope(self) -> None:
+        text = SIDECAR.read_text(encoding="utf-8")
+        self.assertIn("#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000", text)
+        self.assertIn("${PBS_JOBID:?harmonized validation evaluation is PBS-only}", text)
+        self.assertIn("python -m aurora.aneug_release_730_harmonized_validation_endpoints", text)
+        self.assertIn("--bind \"$AURORA_DATA_ROOT:/data:ro\"", text)
+        self.assertIn("--bind \"$AURORA_PROJECT_ROOT:/workspace:ro\"", text)
+        self.assertNotIn("qsub", text)
+        self.assertNotIn("junjinyong", text.lower())
+        self.assertNotIn("locked_test", text.lower())
+        self.assertNotIn("processed_only_extra", text.lower())
+
     def test_config_is_common_floor_frozen_inference_only(self) -> None:
         config = load_config(CONFIG)
         self.assertEqual(config["split"]["validation_cases"], 73)
