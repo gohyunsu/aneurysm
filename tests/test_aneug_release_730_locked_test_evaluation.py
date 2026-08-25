@@ -20,6 +20,7 @@ from aurora.aneug_release_730_locked_test_evaluation import (
     file_sha256,
     load_config,
     preflight_frozen_evidence,
+    summarize_reference_osi_support,
     validate_activation,
     validate_checkpoint_manifest,
     validate_config,
@@ -161,6 +162,31 @@ class LockedTestConfigTests(unittest.TestCase):
 
 
 class LockedTestManifestTests(unittest.TestCase):
+    def test_reference_support_is_model_independent_area_weighted_and_identifier_free(self) -> None:
+        reference = torch.zeros(80, 2, 3)
+        reference[:, 0, 0] = torch.where(
+            torch.arange(80) % 2 == 0,
+            torch.tensor(1.0),
+            torch.tensor(-1.0),
+        )
+        reference[:, 1, 0] = 0.01
+        cases = [
+            {
+                "wss": reference.clone(),
+                "vertex_weights": torch.tensor([0.75, 0.25]),
+            }
+            for _ in range(73)
+        ]
+        result = summarize_reference_osi_support(cases, 0.1)
+        self.assertEqual(result["case_count"], 73)
+        self.assertTrue(result["model_independent"])
+        self.assertTrue(result["area_weighted"])
+        self.assertAlmostEqual(result["case_mean_area_fraction"], 0.75)
+        self.assertEqual(
+            result["per_case_area_fraction_without_identifiers"], [0.75] * 73
+        )
+        self.assertNotIn("case_ids", result)
+
     def test_all_frozen_checkpoints_must_share_the_train_only_osi_floor(self) -> None:
         self.assertEqual(_common_reference_tawss_floor([0.001] * 20), 0.001)
         with self.assertRaisesRegex(

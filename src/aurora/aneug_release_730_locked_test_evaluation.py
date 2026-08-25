@@ -769,6 +769,57 @@ def analyze_locked_test(
     }
 
 
+def summarize_reference_osi_support(
+    cases: Sequence[Mapping[str, torch.Tensor]], reference_tawss_floor: float
+) -> dict[str, Any]:
+    """Summarize the model-independent, area-weighted OSI reference support."""
+
+    _require(
+        len(cases) == 73
+        and math.isfinite(float(reference_tawss_floor))
+        and float(reference_tawss_floor) > 0.0,
+        "reference_support_scope",
+    )
+    fractions: list[float] = []
+    for case in cases:
+        reference = case.get("wss")
+        weights = case.get("vertex_weights")
+        _require(
+            isinstance(reference, torch.Tensor)
+            and isinstance(weights, torch.Tensor)
+            and reference.ndim == 3
+            and reference.shape[0] == 80
+            and reference.shape[-1] == 3
+            and weights.shape == (reference.shape[1],),
+            "reference_support_shape",
+        )
+        reference = reference.detach().cpu().to(torch.float64)
+        weights = weights.detach().cpu().to(torch.float64)
+        _require(
+            bool(torch.isfinite(reference).all().item())
+            and bool(torch.isfinite(weights).all().item())
+            and bool((weights >= 0.0).all().item())
+            and bool((weights.sum() > 0.0).item()),
+            "reference_support_values",
+        )
+        tawss = torch.linalg.vector_norm(reference, dim=-1).mean(dim=0)
+        support = tawss > float(reference_tawss_floor)
+        fraction = torch.sum(weights[support]) / torch.sum(weights)
+        value = float(fraction.item())
+        _require(math.isfinite(value) and 0.0 <= value <= 1.0, "reference_support_fraction")
+        fractions.append(value)
+    return {
+        "definition": "reference_TAWSS_above_common_train_frozen_floor",
+        "reference_tawss_floor": float(reference_tawss_floor),
+        "model_independent": True,
+        "area_weighted": True,
+        "case_count": 73,
+        "per_case_area_fraction_without_identifiers": fractions,
+        "case_mean_area_fraction": sum(fractions) / len(fractions),
+        "distinct_from_model_specific_prediction_valid_coverage": True,
+    }
+
+
 def run_locked_test(
     config: Mapping[str, Any],
     matched_config: Mapping[str, Any],
@@ -804,6 +855,9 @@ def run_locked_test(
         access_marker_path,
         provenance["activation_sha256"],
         str(activation["test_loader_order_sha256"]),
+    )
+    reference_support = summarize_reference_osi_support(
+        cases, reference_tawss_floor
     )
     phase_weights = torch.full((80,), 1.0 / 80.0, dtype=torch.float32)
     selection = build_release730_reference_selection(
@@ -934,6 +988,7 @@ def run_locked_test(
         "figure_display_training_seed": FIGURE_SEED,
         "figure_display_information_mode": FIGURE_MODE,
         "figure_reference_tawss_floor": reference_tawss_floor,
+        "osi_reference_support": reference_support,
         "figure_payload_sha256": file_sha256(figure_payload_path),
         "elapsed_seconds": time.monotonic() - started,
         "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),
