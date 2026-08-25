@@ -12,6 +12,7 @@ from aurora.aneug_release_730_transolver_baseline import (
     Release730FullCycleTransolver,
     Release730TransolverError,
     load_config,
+    main,
     validate_activation,
     validate_config,
     validate_predecessor_terminal_record,
@@ -26,6 +27,9 @@ LICENSE = ROOT / "third_party" / "TRANSOLVER_LICENSE.txt"
 
 
 class Release730TransolverBaselineTests(unittest.TestCase):
+    def test_validate_only_does_not_require_execution_server(self) -> None:
+        self.assertEqual(main(["--config", str(CONFIG), "--validate-only"]), 0)
+
     def test_config_is_strong_comparator_on_raw_sealed_protocol(self) -> None:
         config = load_config(CONFIG)
         identity = config["comparison_identity"]

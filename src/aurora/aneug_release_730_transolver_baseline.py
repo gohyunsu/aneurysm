@@ -664,7 +664,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--response-oracle-terminal-record", type=Path)
     parser.add_argument("--ghd-gps-terminal-record", type=Path)
     parser.add_argument("--expected-commit")
-    parser.add_argument("--expected-execution-server", choices=("introai9", "junjinyong"), required=True)
+    parser.add_argument("--expected-execution-server", choices=("introai9", "junjinyong"))
     parser.add_argument("--transient", type=Path)
     parser.add_argument("--steady", type=Path)
     parser.add_argument("--public-split", type=Path)
@@ -682,6 +682,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     required = (
         args.activation,
         args.expected_commit,
+        args.expected_execution_server,
         args.transient,
         args.steady,
         args.public_split,

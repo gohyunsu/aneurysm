@@ -13,6 +13,7 @@ from aurora.aneug_release_730_ghd_gps_baseline import (
     Release730GHDGPSUNet,
     _strict_atomic_torch_save,
     load_config,
+    main,
     validate_activation,
     validate_config,
     validate_response_oracle_terminal_record,
@@ -41,6 +42,9 @@ def synthetic_topology() -> dict[str, torch.Tensor]:
 
 
 class Release730GHDGPSBaselineTests(unittest.TestCase):
+    def test_validate_only_does_not_require_execution_server(self) -> None:
+        self.assertEqual(main(["--config", str(CONFIG), "--validate-only"]), 0)
+
     def test_config_is_matched_comparator_on_raw_sealed_protocol(self) -> None:
         config = load_config(CONFIG)
         identity = config["comparison_identity"]
