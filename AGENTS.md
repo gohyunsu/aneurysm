@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 harmonized direct-control validation readiness
+
+- Held public head `69ae35347da95de7fe76a30e00676ffec5e7c717`
+  implements a frozen-checkpoint, common-evaluator re-evaluation for the three
+  single-seed direct controls: released Graph U-Net adapter, GHD--GPS and
+  Transolver. It derives the OSI support floor from the 584 train references
+  and reads the same ordered 73 validation references; locked test and 79
+  extras have no CLI or sidecar path.
+- Every model is loaded weights-only from an activation-bound selected
+  checkpoint. The job recomputes field rL2, mean-vector error, TAWSS error,
+  OSI MAE and prediction-valid coverage together and reports one
+  model-independent, area-weighted reference-support fraction. It performs no
+  training, selection, state change or paper claim and does not alter the
+  preserved historical results.
+- Exact config/implementation/test/sidecar hashes are `80c1475b...6807` /
+  `64f4e12e...90cd` / `0169c0a8...c05a` / `b2551842...bb1c`. Exact archive
+  tests on introai9 passed focused 6/6 and release-730 regression 189 with one
+  existing skip. No data, checkpoint or GPU was opened in validation.
+- This is readiness only. GHD--GPS and Transolver terminal checkpoints do not
+  yet exist, no private activation/result/job exists, and public push remains
+  held. Preserve oracle `118479.ECE-util1`, test/extra seals, introai9-only
+  execution, junjinyong exclusion and no-site scope.
+
 ## 2026-08-25 confirmatory-figure OSI-support correction
 
 - A result-blind source audit found that the prepared release-730 figure
