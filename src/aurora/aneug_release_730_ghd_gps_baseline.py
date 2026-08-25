@@ -120,8 +120,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "protocol_id",
     )
     _require(
-        config.get("status")
-        == "prepared_non_executable_until_response_oracle_terminal",
+        config.get("status") == "prepared_validation_development",
         "status",
     )
     source = config["source"]
@@ -216,7 +215,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(config["decision_rule"]["automatic_winner"] is False, "winner")
     runtime = config["runtime"]
     _require(
-        runtime["server"] == "introai9"
+        runtime["allowed_servers"] == ["introai9", "junjinyong"]
+        and runtime["server_from_activation"] is True
         and runtime["ngpus"] == 1
         and runtime["memory_gb"] == 64
         and runtime["walltime"] == "72:00:00"
@@ -226,11 +226,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
     )
     authorization = config["authorization"]
     _require(not authorization["execute_now"], "execute_now")
-    _require(authorization["requires_direct_baseline_terminal_record"], "predecessor")
-    _require(
-        authorization["requires_response_oracle_terminal_record"],
-        "oracle_predecessor",
-    )
+    _require(not authorization["requires_direct_baseline_terminal_record"], "predecessor")
+    _require(not authorization["requires_response_oracle_terminal_record"], "oracle_predecessor")
     _require(authorization["requires_fresh_private_activation"], "activation")
     _require(
         authorization["genuine_infrastructure_interruption_exact_state_resume_allowed"]
@@ -250,14 +247,18 @@ def validate_config(config: Mapping[str, Any]) -> None:
     ):
         _require(authorization[key] is False, f"authorization_{key}")
     _require(
-        authorization["server"] == "introai9"
-        and authorization["excluded_server"] == "junjinyong",
+        authorization["allowed_servers"] == ["introai9", "junjinyong"]
+        and authorization["single_server_per_activation"] is True
+        and authorization["duplicate_scientific_cell_across_accounts"] is False,
         "server_scope",
     )
 
 
 def validate_activation(
-    path: str | Path, config: Mapping[str, Any], expected_commit: str
+    path: str | Path,
+    config: Mapping[str, Any],
+    expected_commit: str,
+    expected_execution_server: str,
 ) -> dict[str, Any]:
     activation = json.loads(Path(path).read_text(encoding="utf-8"))
     _require(
@@ -276,14 +277,25 @@ def validate_activation(
         "activation_stage",
     )
     _require(
-        _is_sha256(activation.get("direct_baseline_terminal_record_sha256")),
+        activation.get("direct_baseline_terminal_record_sha256") is None
+        or _is_sha256(activation.get("direct_baseline_terminal_record_sha256")),
         "baseline_terminal",
     )
     _require(
-        _is_sha256(activation.get("response_oracle_terminal_record_sha256")),
+        activation.get("response_oracle_terminal_record_sha256") is None
+        or _is_sha256(activation.get("response_oracle_terminal_record_sha256")),
         "oracle_terminal",
     )
+    _require(activation.get("response_oracle_dependency") is False, "oracle_dependency")
     _require(activation.get("read_locked_test_or_extra") is False, "activation_scope")
+    _require(
+        expected_execution_server in config["runtime"]["allowed_servers"]
+        and activation.get("server") == expected_execution_server
+        and activation.get("excluded_server") is None
+        and activation.get("single_server_per_activation") is True
+        and activation.get("duplicate_scientific_cell_across_accounts") is False,
+        "activation_server",
+    )
     _require(
         activation.get("private_split_manifest_sha256")
         == config["split"]["private_manifest_sha256"]
@@ -311,15 +323,17 @@ def validate_activation(
 
 
 def validate_response_oracle_terminal_record(
-    path: str | Path, activation: Mapping[str, Any]
-) -> str:
-    """Bind execution to the exact preserved response-oracle terminal bytes."""
+    path: str | Path | None, activation: Mapping[str, Any]
+) -> str | None:
+    """Optionally bind a diagnostic oracle record without gating training."""
 
+    expected = activation.get("response_oracle_terminal_record_sha256")
+    if path is None:
+        _require(expected is None, "unexpected_oracle_terminal_binding")
+        return None
+    _require(_is_sha256(expected), "oracle_terminal")
     observed = file_sha256(path)
-    _require(
-        observed == activation["response_oracle_terminal_record_sha256"],
-        "oracle_terminal_hash",
-    )
+    _require(observed == expected, "oracle_terminal_hash")
     return observed
 
 
@@ -916,6 +930,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--activation", type=Path)
     parser.add_argument("--response-oracle-terminal-record", type=Path)
     parser.add_argument("--expected-commit")
+    parser.add_argument(
+        "--expected-execution-server",
+        choices=("introai9", "junjinyong"),
+        required=True,
+    )
     parser.add_argument("--transient", type=Path)
     parser.add_argument("--steady", type=Path)
     parser.add_argument("--public-split", type=Path)
@@ -932,7 +951,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     required = (
         args.activation,
-        args.response_oracle_terminal_record,
         args.expected_commit,
         args.transient,
         args.steady,
@@ -944,7 +962,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.checkpoint_directory,
     )
     _require(all(value is not None for value in required), "execution_arguments")
-    activation = validate_activation(args.activation, config, args.expected_commit)
+    activation = validate_activation(
+        args.activation, config, args.expected_commit, args.expected_execution_server
+    )
     continuation_mode = args.resume_checkpoint is not None
     _require(
         activation["continuation_mode"] is continuation_mode,
@@ -969,9 +989,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.prior_attempt_terminal_record is None,
             "unexpected_prior_attempt_terminal",
         )
-    validate_response_oracle_terminal_record(
-        args.response_oracle_terminal_record, activation
-    )
+    validate_response_oracle_terminal_record(args.response_oracle_terminal_record, activation)
     scientific_provenance = {
         "public_commit": args.expected_commit,
         "config_sha256": file_sha256(args.config),
