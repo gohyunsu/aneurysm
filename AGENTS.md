@@ -1,5 +1,22 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 pragmatic execution policy
+
+- Repairs, retries, checkpoint resumes and justified host/queue/server
+  migration are normal operational tools. Preserve every attempt and avoid
+  counting duplicate scientific evidence, but do not use historical oracle
+  order, server pins or failed commands as unrelated experiment gates.
+- Independent development cells may run concurrently when capacity permits.
+  Retain the validity boundaries: fixed splits, train-only preprocessing,
+  validation-only selection, locked-test isolation, case-level evaluation and
+  exact code/config/data/result provenance.
+- Both comparator PBS templates explicitly request the queue's Singularity
+  capability. Host pinning remains an incident-specific qsub override rather
+  than a permanent source constraint.
+- Either `introai9/coss_a6gpu` or `junjinyong/ssu_a6gpu` may be used when an
+  activation records the actual server. Public-site work is out of scope and
+  credentials must never enter the repository.
+
 ## 2026-08-24 post-staging queue and storage audit
 
 - Introai9 response oracle `118479.ECE-util1` remains unheld `Q` and
