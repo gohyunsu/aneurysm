@@ -59,8 +59,11 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertIsNone(config["decision_rule"]["absolute_performance_threshold"])
         self.assertFalse(config["authorization"]["execute_now"])
         self.assertEqual(config["runtime"]["walltime"], "72:00:00")
-        self.assertTrue(
+        self.assertFalse(
             config["authorization"]["requires_response_oracle_terminal_record"]
+        )
+        self.assertEqual(
+            config["runtime"]["allowed_servers"], ["introai9", "junjinyong"]
         )
         self.assertTrue(
             config["authorization"][
@@ -143,20 +146,25 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             "continuation_mode": False,
             "resume_checkpoint_sha256": None,
             "prior_attempt_terminal_record_sha256": None,
+            "response_oracle_dependency": False,
+            "server": "junjinyong",
+            "excluded_server": None,
+            "single_server_per_activation": True,
+            "duplicate_scientific_cell_across_accounts": False,
         }
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "activation.json"
             path.write_text(json.dumps(activation), encoding="utf-8")
-            validate_activation(path, config, "abc")
+            validate_activation(path, config, "abc", "junjinyong")
             activation["direct_baseline_terminal_record_sha256"] = ""
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaises(Release730GHDGPSError):
-                validate_activation(path, config, "abc")
+                validate_activation(path, config, "abc", "junjinyong")
             activation["direct_baseline_terminal_record_sha256"] = "1" * 64
             activation["response_oracle_terminal_record_sha256"] = "short"
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaisesRegex(Release730GHDGPSError, "oracle_terminal"):
-                validate_activation(path, config, "abc")
+                validate_activation(path, config, "abc", "junjinyong")
 
     def test_continuation_activation_requires_both_exact_evidence_hashes(self) -> None:
         config = load_config(CONFIG)
@@ -174,17 +182,22 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             "continuation_mode": True,
             "resume_checkpoint_sha256": "3" * 64,
             "prior_attempt_terminal_record_sha256": "4" * 64,
+            "response_oracle_dependency": False,
+            "server": "junjinyong",
+            "excluded_server": None,
+            "single_server_per_activation": True,
+            "duplicate_scientific_cell_across_accounts": False,
         }
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "activation.json"
             path.write_text(json.dumps(activation), encoding="utf-8")
-            validate_activation(path, config, "abc")
+            validate_activation(path, config, "abc", "junjinyong")
             activation["prior_attempt_terminal_record_sha256"] = None
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaisesRegex(
                 Release730GHDGPSError, "continuation_evidence"
             ):
-                validate_activation(path, config, "abc")
+                validate_activation(path, config, "abc", "junjinyong")
 
     def test_checkpoint_save_is_atomic_and_loadable(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -217,22 +230,22 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             ):
                 validate_response_oracle_terminal_record(path, activation)
 
-    def test_pbs_is_serialized_introai9_gpu_without_test_binding(self) -> None:
+    def test_pbs_is_server_bound_gpu_without_oracle_or_test_gate(self) -> None:
         script = PBS.read_text(encoding="utf-8")
         source = SOURCE.read_text(encoding="utf-8")
         self.assertIn("Qlist=a6000", script)
         self.assertIn("ngpus=1", script)
         self.assertIn("#PBS -l walltime=72:00:00", script)
         self.assertIn("AURORA_GHD_GPS_ACTIVATION", script)
-        self.assertIn("AURORA_RESPONSE_ORACLE_TERMINAL_RECORD", script)
-        self.assertIn("--response-oracle-terminal-record", script)
+        self.assertIn("AURORA_EXECUTION_SERVER", script)
+        self.assertIn("--expected-execution-server", script)
         self.assertIn("AURORA_GHD_GPS_RESUME_CHECKPOINT", script)
         self.assertIn("AURORA_GHD_GPS_PRIOR_ATTEMPT_TERMINAL_RECORD", script)
         self.assertIn("--resume-checkpoint", script)
         self.assertIn("--prior-attempt-terminal-record", script)
         self.assertIn("status_tmp", script)
         self.assertIn('/bin/mv "$status_tmp" "$status"', script)
-        self.assertNotIn("junjinyong", script)
+        self.assertNotIn("AURORA_RESPONSE_ORACLE_TERMINAL_RECORD", script)
         self.assertNotIn("test_manifest", script)
         self.assertNotIn("torch_geometric", source)
         self.assertNotIn("pytorch3d", source)

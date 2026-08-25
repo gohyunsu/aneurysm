@@ -1,5 +1,28 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 pragmatic multi-server comparator execution
+
+- The latest user instruction supersedes historical oracle-first,
+  comparator-serial, introai9-only and no-retry operational pins. Response
+  oracle evidence is diagnostic; it is not a scientific prerequisite for
+  independent GHD--GPS or Transolver validation development.
+- Both comparator configs now accept the actual activation-bound server from
+  `introai9` or `junjinyong`. PBS sidecars require the same declared server.
+  GHD--GPS no longer requires an oracle terminal, and Transolver no longer
+  requires oracle or GHD--GPS terminal records. Optional predecessor records
+  may be retained as context but never gate training.
+- Independent baselines may run concurrently when GPU capacity permits.
+  Repairs, fresh retries, checkpoint resumes and server migration are allowed
+  after observed failures. Preserve each attempt and avoid counting duplicate
+  results twice; do not permanently freeze a model family after one failure.
+- Keep fixed split membership, train-only statistics, validation-only model
+  selection, locked-test isolation and exact provenance. Do not create
+  arbitrary performance thresholds before direct comparison. Public-site work
+  remains out of scope.
+- The changed comparator contracts passed 15 focused tests and the complete
+  data-free public suite passed 1,072 tests. No CFD field, checkpoint, GPU,
+  locked-test case or processed-only extra was opened.
+
 ## 2026-08-25 prospective training-loop static audit
 
 - Exact held scientific source `ba07e95007256af01ac9c4404f545bab63d9687a`
