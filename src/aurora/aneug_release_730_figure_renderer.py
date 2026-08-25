@@ -383,7 +383,7 @@ def render_release730_confirmatory_figure(
         left=0.035,
         right=0.955,
         bottom=0.12,
-        top=0.93,
+        top=0.86,
         wspace=0.02,
         hspace=0.04,
     )
@@ -436,21 +436,21 @@ def render_release730_confirmatory_figure(
             )
         )
 
-    box(0.18, 0.84, 0.64, 0.10, "surface mesh + GHD", "#4477AA")
-    box(0.18, 0.66, 0.64, 0.10, "shared mesh encoder", "#4477AA")
-    box(0.03, 0.45, 0.43, 0.12, "joint cycle\nresponse basis", "#228833")
-    box(0.54, 0.45, 0.43, 0.12, "mesh-local residual\n+ spatial gate", "#CC6677")
-    box(0.18, 0.25, 0.64, 0.10, "single decoded WSS cycle", "#AA3377")
-    box(0.10, 0.05, 0.80, 0.11, "field + mean vector + TAWSS + OSI", "#AA3377")
-    arrow((0.50, 0.84), (0.50, 0.76))
-    arrow((0.43, 0.66), (0.25, 0.57))
-    arrow((0.57, 0.66), (0.75, 0.57))
-    arrow((0.25, 0.45), (0.42, 0.35))
-    arrow((0.75, 0.45), (0.58, 0.35))
-    arrow((0.50, 0.25), (0.50, 0.16))
+    box(0.18, 0.78, 0.64, 0.10, "surface mesh + GHD", "#4477AA")
+    box(0.18, 0.61, 0.64, 0.10, "shared mesh encoder", "#4477AA")
+    box(0.03, 0.40, 0.43, 0.12, "joint cycle\nresponse basis", "#228833")
+    box(0.54, 0.40, 0.43, 0.12, "mesh-local residual\n+ spatial gate", "#CC6677")
+    box(0.18, 0.22, 0.64, 0.10, "single decoded WSS cycle", "#AA3377")
+    box(0.10, 0.04, 0.80, 0.10, "field + mean vector + TAWSS + OSI", "#AA3377")
+    arrow((0.50, 0.78), (0.50, 0.71))
+    arrow((0.43, 0.61), (0.25, 0.52))
+    arrow((0.57, 0.61), (0.75, 0.52))
+    arrow((0.25, 0.40), (0.42, 0.32))
+    arrow((0.75, 0.40), (0.58, 0.32))
+    arrow((0.50, 0.22), (0.50, 0.14))
     schematic_axis.text(
         0.5,
-        0.985,
+        0.97,
         "Aligned complete-cycle surrogate",
         ha="center",
         va="top",
@@ -500,17 +500,15 @@ def render_release730_confirmatory_figure(
                     ha="right",
                     fontsize=5.0,
                 )
-            if metric_index == 0 and method_index == 1:
-                axis.text(
-                    0.5,
-                    1.28,
-                    "high reference OSI",
-                    transform=axis.transAxes,
-                    ha="center",
-                    va="bottom",
-                    fontsize=5.4,
-                    fontweight="bold",
-                )
+    figure.text(
+        0.655,
+        0.955,
+        "High reference-OSI case",
+        ha="center",
+        va="top",
+        fontsize=5.6,
+        fontweight="bold",
+    )
     trace_axis = figure.add_subplot(grid[2, 3:9])
     phase = np.arange(80)
     styles = {
@@ -547,8 +545,8 @@ def render_release730_confirmatory_figure(
     trace_axis.set_xlabel("cardiac phase", fontsize=4.7, labelpad=0.4)
 
     for metric, limits, vertical_position in (
-        ("tawss", payload["tawss_limits"], 0.865),
-        ("osi", payload["osi_limits"], 0.54),
+        ("tawss", payload["tawss_limits"], 0.67),
+        ("osi", payload["osi_limits"], 0.38),
     ):
         color_axis = figure.add_axes([0.965, vertical_position, 0.007, 0.17])
         figure.colorbar(

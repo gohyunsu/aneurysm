@@ -152,7 +152,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "multiseed_confirmation_config_sha256": "75cd2e6c5d7545dd56274d7dd1b14d8b07380b0711cf10573d5b9fcaa1b57d92",
         "figure_protocol_config_sha256": "68e6a3e1b331ca30db1ec309cdfc60e1a13cc8645885c75d87641a6c36cbeff9",
         "figure_protocol_source_sha256": "9d35fcc1e267231ca7b8a9c0f66815b28c0c9ea38f4b00a432191701e385276e",
-        "figure_renderer_source_sha256": "6d06deb9b9a9627f8c1af2b54eeda9f66043fdcad621269995bfa1a86339876d",
+        "figure_renderer_source_sha256": "0ef3b0b36471d8bb32acd4117333f73a94db903b77db77346f1c494140e54335",
         "public_split_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
         "public_train_audit_sha256": "3c525820023a56862c6652441c5d00f43412d3c868840149e5f120b8ed2a9587",
     }
