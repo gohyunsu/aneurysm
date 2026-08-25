@@ -102,8 +102,7 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "protocol_id",
     )
     _require(
-        config.get("status")
-        == "prepared_non_executable_until_response_oracle_and_ghd_gps_terminal",
+        config.get("status") == "prepared_validation_development",
         "status",
     )
     source = config["source"]

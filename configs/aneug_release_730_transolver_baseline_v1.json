@@ -1,7 +1,7 @@
 {
   "schema_version": "aurora.aneug_release_730_transolver_baseline.v1",
   "protocol_id": "aneug_release_730_transolver_baseline_v1",
-  "status": "prepared_non_executable_until_response_oracle_and_ghd_gps_terminal",
+  "status": "prepared_validation_development",
   "as_of": "2026-08-18",
   "source": {
     "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",

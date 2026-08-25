@@ -13,6 +13,10 @@
 - Both comparator PBS templates explicitly request the queue's Singularity
   capability. Host pinning remains an incident-specific qsub override rather
   than a permanent source constraint.
+- The Transolver config now states `prepared_validation_development`; the
+  obsolete oracle/GHD-terminal status string is removed. Execution still
+  requires its own exact activation and normal scientific safeguards, not
+  another comparator's outcome.
 - Either `introai9/coss_a6gpu` or `junjinyong/ssu_a6gpu` may be used when an
   activation records the actual server. Public-site work is out of scope and
   credentials must never enter the repository.
