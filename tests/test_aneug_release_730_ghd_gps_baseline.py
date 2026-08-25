@@ -69,6 +69,10 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertEqual(
             config["runtime"]["allowed_servers"], ["introai9", "junjinyong"]
         )
+        self.assertEqual(
+            config["runtime"]["queue_by_server"],
+            {"introai9": "coss_a6gpu", "junjinyong": "ssu_a6gpu"},
+        )
         self.assertTrue(
             config["authorization"][
                 "genuine_infrastructure_interruption_exact_state_resume_allowed"
@@ -152,6 +156,7 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             "prior_attempt_terminal_record_sha256": None,
             "response_oracle_dependency": False,
             "server": "junjinyong",
+            "queue": "ssu_a6gpu",
             "excluded_server": None,
             "single_server_per_activation": True,
             "duplicate_scientific_cell_across_accounts": False,
@@ -168,6 +173,11 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             activation["response_oracle_terminal_record_sha256"] = "short"
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaisesRegex(Release730GHDGPSError, "oracle_terminal"):
+                validate_activation(path, config, "abc", "junjinyong")
+            activation["response_oracle_terminal_record_sha256"] = None
+            activation["queue"] = "coss_a6gpu"
+            path.write_text(json.dumps(activation), encoding="utf-8")
+            with self.assertRaisesRegex(Release730GHDGPSError, "activation_server"):
                 validate_activation(path, config, "abc", "junjinyong")
 
     def test_continuation_activation_requires_both_exact_evidence_hashes(self) -> None:
@@ -188,6 +198,7 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
             "prior_attempt_terminal_record_sha256": "4" * 64,
             "response_oracle_dependency": False,
             "server": "junjinyong",
+            "queue": "ssu_a6gpu",
             "excluded_server": None,
             "single_server_per_activation": True,
             "duplicate_scientific_cell_across_accounts": False,
@@ -242,6 +253,9 @@ class Release730GHDGPSBaselineTests(unittest.TestCase):
         self.assertIn("#PBS -l walltime=72:00:00", script)
         self.assertIn("AURORA_GHD_GPS_ACTIVATION", script)
         self.assertIn("AURORA_EXECUTION_SERVER", script)
+        self.assertIn("AURORA_EXECUTION_QUEUE", script)
+        self.assertIn('PBS_QUEUE:-', script)
+        self.assertNotIn("#PBS -q", script)
         self.assertIn("--expected-execution-server", script)
         self.assertIn("AURORA_GHD_GPS_RESUME_CHECKPOINT", script)
         self.assertIn("AURORA_GHD_GPS_PRIOR_ATTEMPT_TERMINAL_RECORD", script)

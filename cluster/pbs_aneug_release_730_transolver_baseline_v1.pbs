@@ -1,6 +1,5 @@
 #!/bin/bash
 #PBS -N aurora_730_transolver
-#PBS -q coss_a6gpu
 #PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
 #PBS -l walltime=72:00:00
 #PBS -j oe
@@ -12,11 +11,20 @@ set -euo pipefail
 : "${AURORA_OUTPUT_ROOT:?set private output root}"
 : "${AURORA_EXPECTED_COMMIT:?set Quality-passed exact commit}"
 : "${AURORA_EXECUTION_SERVER:?set introai9 or junjinyong to match activation}"
+: "${AURORA_EXECUTION_QUEUE:?set coss_a6gpu or ssu_a6gpu to match server}"
 : "${AURORA_TRANSOLVER_ACTIVATION:?set fresh private activation}"
 : "${AURORA_PRIVATE_SPLIT_MANIFEST:?set exact private R3 split manifest}"
 : "${AURORA_PRIVATE_TRAIN_AUDIT:?set exact private train-audit R2 statistics}"
 : "${AURORA_CONTAINER:?set pinned Torch container}"
 : "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+
+case "$AURORA_EXECUTION_SERVER" in
+  introai9) expected_queue="coss_a6gpu" ;;
+  junjinyong) expected_queue="ssu_a6gpu" ;;
+  *) exit 64 ;;
+esac
+[ "$AURORA_EXECUTION_QUEUE" = "$expected_queue" ]
+[ "${PBS_QUEUE:-}" = "$expected_queue" ]
 
 actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
 [ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]

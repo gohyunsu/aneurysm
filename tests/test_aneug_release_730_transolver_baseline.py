@@ -53,6 +53,10 @@ class Release730TransolverBaselineTests(unittest.TestCase):
         )
         self.assertFalse(config["authorization"]["requires_ghd_gps_terminal_record"])
         self.assertEqual(config["runtime"]["allowed_servers"], ["introai9", "junjinyong"])
+        self.assertEqual(
+            config["runtime"]["queue_by_server"],
+            {"introai9": "coss_a6gpu", "junjinyong": "ssu_a6gpu"},
+        )
         self.assertTrue(
             config["authorization"][
                 "genuine_infrastructure_interruption_exact_state_resume_allowed"
@@ -151,6 +155,7 @@ class Release730TransolverBaselineTests(unittest.TestCase):
             "prior_attempt_terminal_record_sha256": None,
             "predecessor_result_dependency": False,
             "server": "junjinyong",
+            "queue": "ssu_a6gpu",
             "excluded_server": None,
             "single_server_per_activation": True,
             "duplicate_scientific_cell_across_accounts": False,
@@ -171,6 +176,10 @@ class Release730TransolverBaselineTests(unittest.TestCase):
             validate_activation(path, config, "abc", "junjinyong")
             with self.assertRaisesRegex(Release730TransolverError, "activation_server"):
                 validate_activation(path, config, "abc", "introai9")
+            changed["queue"] = "coss_a6gpu"
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            with self.assertRaisesRegex(Release730TransolverError, "activation_server"):
+                validate_activation(path, config, "abc", "junjinyong")
 
     def test_continuation_activation_requires_checkpoint_and_prior_terminal(self) -> None:
         config = load_config(CONFIG)
@@ -191,6 +200,7 @@ class Release730TransolverBaselineTests(unittest.TestCase):
             "prior_attempt_terminal_record_sha256": "5" * 64,
             "predecessor_result_dependency": False,
             "server": "junjinyong",
+            "queue": "ssu_a6gpu",
             "excluded_server": None,
             "single_server_per_activation": True,
             "duplicate_scientific_cell_across_accounts": False,
@@ -239,6 +249,9 @@ class Release730TransolverBaselineTests(unittest.TestCase):
         self.assertIn("#PBS -l walltime=72:00:00", script)
         self.assertIn("AURORA_TRANSOLVER_ACTIVATION", script)
         self.assertIn("AURORA_EXECUTION_SERVER", script)
+        self.assertIn("AURORA_EXECUTION_QUEUE", script)
+        self.assertIn('PBS_QUEUE:-', script)
+        self.assertNotIn("#PBS -q", script)
         self.assertIn("--expected-execution-server", script)
         self.assertIn("AURORA_TRANSOLVER_RESUME_CHECKPOINT", script)
         self.assertIn("AURORA_TRANSOLVER_PRIOR_ATTEMPT_TERMINAL_RECORD", script)
