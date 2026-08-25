@@ -1,5 +1,29 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 confirmatory-figure legibility completion
+
+- Exact held source head `ba07e95007256af01ac9c4404f545bab63d9687a`
+  keeps all three prediction-blind low/median/high reference-OSI cases in the
+  compact T0 audit payload but displays only the predesignated high-burden case
+  in the main ISBI figure. The other two cases remain auditable and cannot be
+  replaced after prediction.
+- The fixed 7.1-by-1.85-inch main layout contains a method schematic, six
+  Ref./Control/Ours TAWSS/OSI surfaces and one signed 80-phase trace. Camera,
+  masks, limits, trace vertex and trace direction remain reference-only.
+- Exact introai9 archive `a391ecd2...e2f7` passed 23 focused tests and all
+  1,072 protocol tests in 124.037 seconds. A data-free synthetic render passed
+  PDF/PNG creation; visual inspection then found no clipped title, colorbar or
+  panel after a separately preserved clipping-only correction. Site graph and
+  JavaScript syntax also pass without any site content change.
+- Exact figure config/protocol/renderer hashes are `68e6a3e1...eff9` /
+  `9d35fcc1...276e` / `0ef3b0b3...4335`; locked-test config/implementation/test
+  hashes are `402b6474...8a62` / `a80c36e6...ab70` / `cae00cdd...361e`.
+- This is result-blind local readiness only. Public push remains held; no
+  remote-exact Quality, activation, locked-test read, checkpoint read,
+  scientific figure, result or paper claim exists. Preserve oracle
+  `118479.ECE-util1`, keep 73 test cases and 79 extras sealed, use only
+  introai9, never junjinyong, and do not maintain the public site.
+
 ## 2026-08-25 harmonized direct-control validation readiness
 
 - Held public head `69ae35347da95de7fe76a30e00676ffec5e7c717`
