@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-25 — Re-audited prospective candidate and matched training
+
+- Rechecked the response/local decoder, functional fine-tuning, lazy steady
+  stream, T/T+S factorial, continuation state and downstream accounting before
+  any candidate execution.
+- Confirmed shared initialization within seed, one auxiliary steady surface per
+  transient case, no 80-phase steady replication, common eligible-steady order,
+  train-only normalizers and fail-closed test/extra scope.
+- Passed 87 focused tests in the pinned introai9 Torch container. This was a
+  data-free static audit and changed no scientific implementation, result,
+  selection or public site.
+
 ## 2026-08-25 — Made the confirmatory figure legible without changing selection
 
 - Preserved all three prediction-blind low/median/high reference-OSI cases in

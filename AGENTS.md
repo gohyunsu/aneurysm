@@ -1,5 +1,40 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-25 prospective training-loop static audit
+
+- Exact held scientific source `ba07e95007256af01ac9c4404f545bab63d9687a`
+  passed a second, data-free audit of the response/local candidate and the
+  matched T/T+S training path. Exact local documentation head before this
+  record was `de8e4492739f61c73c5f28643d332f670817f757`; public push remains
+  held.
+- The response-only cell trains the shared geometry encoder and response head
+  while freezing only the unused cycle-output, residual-gate and single-field
+  heads. The combined cell activates the local cycle head and nodewise,
+  phase-shared gate. The oracle and decoder use the same square-root
+  area/phase weighting and restore raw physical Cartesian WSS.
+- Within a model role and seed, T and T+S instantiate the same model before
+  mode-specific freezing. T+S adds one scheduled eligible steady surface per
+  transient cycle case through a separate single-field head; it does not
+  replicate a steady field over 80 phases. Control and proposal use the same
+  13,985-row ordered scope and exposure rule. Terminal exposure count and
+  compute remain reportable rather than being misdescribed as a label-only
+  causal effect.
+- Train-term and validation-endpoint normalizers use only the frozen 584/73
+  development partitions. Functional endpoints come from the same decoded
+  vector field; invalid prediction support is penalized in OSI MAE and its
+  coverage is diagnostic only. Checkpoint continuation restores model,
+  optimizer, scheduler, RNG, best state and steady-prefix accounting.
+- The exact clean introai9 checkout passed 87 focused Torch-container tests.
+  No data field, checkpoint, GPU, locked test or 79-extra value was read and no
+  model/result/claim was selected. A local test invocation without Torch and
+  one remote module-addressing invocation both failed before source/data code;
+  corrected discovery changed no bytes.
+- At `2026-08-25T11:59:33+09:00`, read-only PBS status for sole oracle
+  `118479.ECE-util1` still returned connection refused, errno 15010. Its root
+  remains exactly six metadata files with no log, result, basis or checkpoint.
+  Do not submit, duplicate, relocate or bypass it; keep test/79 extras sealed,
+  use only introai9, never junjinyong, and do not maintain the public site.
+
 ## 2026-08-25 confirmatory-figure legibility completion
 
 - Exact held source head `ba07e95007256af01ac9c4404f545bab63d9687a`
