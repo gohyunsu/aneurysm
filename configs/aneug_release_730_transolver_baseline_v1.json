@@ -1,7 +1,7 @@
 {
   "schema_version": "aurora.aneug_release_730_transolver_baseline.v1",
   "protocol_id": "aneug_release_730_transolver_baseline_v1",
-  "status": "prepared_non_executable_until_response_oracle_and_ghd_gps_terminal",
+  "status": "prepared_validation_development",
   "as_of": "2026-08-18",
   "source": {
     "dataset_revision": "9dd418083899deddd93a67f9a6fca7a14304fa36",
@@ -113,8 +113,13 @@
     "interpretation": "single_seed_strong_comparator_validation_development"
   },
   "runtime": {
-    "server": "introai9",
-    "queue": "coss_a6gpu",
+    "allowed_servers": ["introai9", "junjinyong"],
+    "server_from_activation": true,
+    "queue_by_server": {
+      "introai9": "coss_a6gpu",
+      "junjinyong": "ssu_a6gpu"
+    },
+    "queue_from_activation": true,
     "Qlist": "a6000",
     "container_sha256": "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",
     "ncpus": 4,
@@ -124,9 +129,9 @@
   },
   "authorization": {
     "execute_now": false,
-    "requires_direct_baseline_terminal_record": true,
-    "requires_ghd_gps_terminal_record": true,
-    "requires_response_oracle_terminal_record": true,
+    "requires_direct_baseline_terminal_record": false,
+    "requires_ghd_gps_terminal_record": false,
+    "requires_response_oracle_terminal_record": false,
     "record_other_prior_terminal_context_if_available": true,
     "requires_fresh_private_activation": true,
     "genuine_infrastructure_interruption_exact_state_resume_allowed": true,
@@ -138,7 +143,8 @@
     "paper_performance_claim": false,
     "publish_numeric_result": false,
     "maintain_public_site": false,
-    "server": "introai9",
-    "excluded_server": "junjinyong"
+    "allowed_servers": ["introai9", "junjinyong"],
+    "single_server_per_activation": true,
+    "duplicate_scientific_cell_across_accounts": false
   }
 }

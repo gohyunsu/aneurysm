@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-25 — Declare the required Singularity queue resource
+
+- Added `container_engine=singularity` to both release-730 comparator PBS
+  templates, matching the resource request used by healthy jobs in the
+  authorized queues.
+- Replaced Transolver's obsolete predecessor-gated status label with
+  `prepared_validation_development`, consistent with its independent
+  activation and runtime contract.
+- Kept host selection outside the templates so a diagnosed node incident can
+  be handled without imposing a permanent topology constraint. No model,
+  data, split, seed, objective or metric changed.
+
 ## 2026-08-24 — Post-staging queue and storage audit
 
 - Preserved the sole introai9 response oracle as unheld queued work on full,
