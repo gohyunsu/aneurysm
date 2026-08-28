@@ -1,5 +1,16 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-29 generic GHD cross-regime transfer core
+
+- Added an algorithm-only adapter that attaches a disposable single-field
+  head to a complete-cycle GHD backbone without changing cycle inference.
+- Added symmetric `naive_sum` and field-anchored paired-gradient rules. The
+  anchored rule removes only opposing auxiliary shared-encoder gradient and
+  caps its norm; cycle and auxiliary heads retain task-specific gradients.
+- This core contains no dataset identity, split, server, activation, schedule
+  or claim. It is not an executed method or novelty result until a private
+  leak-free validation protocol binds and tests it.
+
 ## 2026-08-29 evidence-driven GHD functional-development pivot
 
 - Response-only completed at validation field rL2 `0.34880180595672294` and

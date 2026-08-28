@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-08-29 — Added the generic GHD cross-regime transfer core
+
+- Added a complete-cycle-preserving GHD adapter with a disposable
+  single-field auxiliary head.
+- Added naive and field-anchored paired-gradient implementations plus
+  synthetic tests for inference identity, conflict projection, norm capping
+  and parameter partitioning.
+- Added no operational metadata, data access, training activation or result.
+
 ## 2026-08-29 — Pivoted functional development to the selected GHD control
 
 - Preserved the completed response-only and response-plus-local-residual
