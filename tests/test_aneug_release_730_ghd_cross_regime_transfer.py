@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import unittest
 
 import torch
@@ -7,8 +8,10 @@ from torch import nn
 
 from aurora.aneug_release_730_ghd_cross_regime_transfer import (
     GHDCrossRegimeTransferError,
+    Release730GHDSharedDecoderSteadyControl,
     Release730GHDSteadyTransferModel,
     paired_cross_regime_backward,
+    shared_decoder_cross_regime_backward,
 )
 
 
@@ -148,6 +151,39 @@ class GHDCrossRegimeTransferTests(unittest.TestCase):
         self.assertAlmostEqual(float(shared.grad.item()), 1.5)
         self.assertAlmostEqual(float(cycle.grad.item()), 1.0)
         self.assertAlmostEqual(float(auxiliary.grad.item()), 1.0)
+
+    def test_shared_decoder_control_has_no_auxiliary_parameters(self) -> None:
+        torch.manual_seed(7)
+        backbone = TinyCycleBackbone()
+        case = {"features": torch.randn(5, 2)}
+        expected_cycle = backbone(case) * 2.5
+        expected_parameter_ids = {id(value) for value in backbone.parameters()}
+        model = Release730GHDSharedDecoderSteadyControl(
+            backbone, cycle_output_scale=2.5
+        )
+        self.assertTrue(torch.equal(model.forward_cycle(case), expected_cycle))
+        self.assertTrue(
+            torch.equal(model.forward_single_field(case), expected_cycle.mean(dim=0))
+        )
+        self.assertEqual(
+            {id(value) for value in model.transfer_parameters()},
+            expected_parameter_ids,
+        )
+
+    def test_shared_decoder_control_adds_both_gradients(self) -> None:
+        first = nn.Parameter(torch.tensor(1.0))
+        second = nn.Parameter(torch.tensor(2.0))
+        diagnostic = shared_decoder_cross_regime_backward(
+            transient_loss=2.0 * first + second,
+            auxiliary_loss=-first + 3.0 * second,
+            parameters=(first, second),
+            auxiliary_coefficient=0.5,
+            accumulation_steps=2,
+        )
+        self.assertAlmostEqual(float(first.grad.item()), 0.75)
+        self.assertAlmostEqual(float(second.grad.item()), 1.25)
+        self.assertEqual(diagnostic["variant"], "shared_decoder_naive_sum")
+        self.assertTrue(math.isfinite(diagnostic["gradient_cosine"]))
 
 
 if __name__ == "__main__":

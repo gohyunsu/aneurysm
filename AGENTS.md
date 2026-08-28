@@ -1,5 +1,27 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-29 shared-decoder steady control readiness
+
+- Added a deliberately parameter-free control for the separate steady head:
+  the same one-shot 80-phase decoder predicts both transient cycles and the
+  steady target, with the latter applied to its temporal-mean field. Both
+  losses update the same backbone/decoder parameters and expose their raw
+  gradient cosine and norms.
+- This is a release-aligned shared-decoder adaptation, not an exact
+  reproduction of Sheng et al.'s phase-conditioned snapshot model. It is a
+  direct control for whether separate regime heads matter; it is never a
+  proposal or novelty claim, and no steady field is required at inference.
+- Nine focused Torch tests pass in the exact pinned container. A broader
+  1,014-test invocation reached only an environment-incomplete state because
+  the base container lacks h5py and the invocation omitted repository-root
+  `experiments`/`scripts` paths; none of its failures touched the modified
+  module. Remote dependency-complete Quality remains required before any
+  execution activation.
+- This source creates no activation, checkpoint, result or performance claim.
+  It must use train 584/validation 73 only, the same leakage-audited steady
+  schedule, initial GHD checkpoint and evaluator as the separate-head cell;
+  test 73 and extras 79 remain sealed.
+
 ## 2026-08-29 audited steady-mesh admissibility repair
 
 - The leakage-eligible 13,985-row steady cohort contains six zero-area faces
