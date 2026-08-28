@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-29 — Pivoted functional development to the selected GHD control
+
+- Preserved the completed response-only and response-plus-local-residual
+  validation evidence. Their paired field, TAWSS and OSI differences did not
+  establish a residual gain, while the residual candidate was clearly worse
+  than the selected GHD--GPS direct control on all three endpoints.
+- Demoted the response/local architecture from prospective proposal to a
+  negative ablation and moved same-field functional development to the exact
+  terminal GHD--GPS best checkpoint.
+- Added three symmetric validation-only fine-tunes: field-only, scalarized
+  functional alignment and field-anchored functional alignment. They share
+  one initialization, seed, split, budget and checkpoint utility; epoch zero
+  remains an admissible fallback.
+- Kept locked test 73 and processed-only extras 79 inaccessible. No activation,
+  new GPU result, steady experiment or paper claim is created by this change.
+
 ## 2026-08-28 — Added prospective ICCE inference evidence
 
 - Added a synchronized, model-forward-only latency benchmark to the frozen

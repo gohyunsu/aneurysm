@@ -1,5 +1,35 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-29 evidence-driven GHD functional-development pivot
+
+- Response-only completed at validation field rL2 `0.34880180595672294` and
+  response-plus-local-residual at `0.34832491327638493`. The paired residual
+  minus response-only field interval `[-0.006532996, 0.005272925]` crosses
+  zero; TAWSS and OSI show no established improvement either.
+- The residual candidate is clearly worse than selected GHD--GPS: paired
+  residual-minus-GHD field `+0.061705737` (95% interval
+  `[+0.052912871,+0.070559495]`), TAWSS `+0.040813652` and OSI
+  `+0.000581721`, with all three intervals above zero. Preserve this as
+  negative architecture evidence; do not keep response/local as the proposal
+  merely because it was prospectively planned.
+- Functional development now starts from the exact terminal seed-1103 GHD--GPS
+  best checkpoint. Compare `field_only`, `all_scalarized` and
+  `all_field_anchored` with the same backbone, checkpoint, seed, 584/73 scope,
+  optimizer budget and common initial-checkpoint-normalized validation
+  utility. The epoch-0 initial checkpoint remains eligible.
+- Functional endpoints must come from the same decoded 80-phase vector field;
+  do not add a separate TAWSS/OSI head. Train normalizers use train 584 only,
+  model selection uses validation 73 only, and locked test 73 plus extras 79
+  remain inaccessible.
+- Only after objective selection may the same GHD backbone proceed to a
+  symmetric T versus T+S comparison using the audited eligible steady scope.
+  Record the extra encoder pass, exposures and compute; do not call it a
+  label-only causal effect or activate a paper claim before direct evidence.
+- Both introai9 and junjinyong remain available. Repairs, resumes, PBS-envelope
+  replacement and evidence-based host migration are allowed; preserve every
+  attempt and never run the same scientific cell concurrently on both servers.
+  Public-site maintenance remains out of scope.
+
 ## 2026-08-28 ICCE inference-evidence implementation
 
 - The existing candidate and matched-training results record active/trainable

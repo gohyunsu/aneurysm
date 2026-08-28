@@ -2,7 +2,7 @@
 
 [![Research contract and site quality](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml/badge.svg)](https://github.com/gohyunsu/aneurysm/actions/workflows/quality.yml)
 AURORA는 합성 뇌동맥류 표면에서 한 cardiac cycle의 vector wall shear
-stress(WSS)를 예측하는 ISBI 2027 연구입니다. 목표는 새 GNN이라는 이름이 아니라,
+stress(WSS)를 예측하는 ICCE 2027 연구입니다. 목표는 새 GNN이라는 이름이 아니라,
 강한 동일조건 complete-cycle controls보다 physical field error를 악화시키지 않으면서
 TAWSS와 OSI fidelity를 함께 높이는 것입니다.
 
@@ -14,35 +14,40 @@ TAWSS와 OSI fidelity를 함께 높이는 것입니다.
 
 | 항목 | 상태 |
 |---|---|
-| 제출 목표 | IEEE ISBI 2027 · four technical pages |
+| 제출 목표 | ICCE 2027 · 공식 author contract에 맞춘 최종 원고 |
 | 주 데이터 | AneuG-Flow release/processed-v5 교집합 730 cases |
 | split | 584 / 73 / 73 train/validation/locked test |
 | 독립 단위 | geometry ID · GHD duplicate-disjoint; 730개를 환자 730명으로 해석하지 않음 |
 | steady 정보 | leakage audit 후 13,985 rows를 selected control과 candidate에 동일 제공 |
 | 직접 비교군 | released Graph U-Net, GHD–GPS/GINE, Transolver |
-| 현재 실행 | response oracle 한 건이 introai9에서 GPU 자원 대기; 과학 실행·결과 없음 |
-| 과학 결과 | Graph U-Net validation evidence만 완료; 모든 논문 성능 cell은 pending |
+| 완료된 개발 비교 | Graph U-Net, GHD–GPS, Transolver, response-only, response+residual |
+| 선택된 직접 비교군 | GHD–GPS · validation field rL2 `0.286619` |
+| 현재 개발 단계 | GHD–GPS 공통 checkpoint에서 same-field functional objective 세 가지 비교 준비 |
+| 현재 과학 판단 | response/local residual은 기각; functional alignment와 steady supervision은 미검증 |
 | 봉인 범위 | locked test 73 cases와 processed-only extras 79 cases 미개방 |
-| 실행 정책 | 한 시점에 단일 GPU job; 검증되지 않은 노드로 중복 이동하지 않음 |
+| 실행 정책 | PBS 자원에 따라 양 서버 사용; 동일 scientific cell의 동시 중복만 금지 |
 
-Graph U-Net best validation physical field rL2 `0.631375`는 약한 단일-seed 개발
-비교값이며 논문 결과가 아닙니다. Response oracle은 train-output response space의
-reconstruction ceiling이고 학습 성능이 아닙니다. GHD–GPS와 Transolver는 exact
-source/PBS 계약까지 준비됐지만 아직 실행되지 않았습니다.
+동일 73-case validation evaluator에서 GHD–GPS는 Transolver의 `0.292427`보다 낮은
+field rL2를 보였고 paired difference는 `-0.005808`, 95% case-bootstrap interval은
+`[-0.011793, -0.000211]`이었습니다. 이는 single-seed validation 개발 근거이지
+locked-test 또는 최종 논문 성능이 아닙니다.
 
-세 direct control이 끝나면 release-730 전용 분석기가 동일한 73-case 순서와
-봉인 상태를 검증하고 모든 paired contrast를 보존한 뒤, case-mean field rL2가
-가장 낮은 feasible comparator를 direct control로 선택합니다. 과거 51-case
-비교기는 이 결정에 사용하지 않습니다.
+Rank-64 response-only와 response+local-residual은 각각 field rL2 `0.348802`와
+`0.348325`였습니다. Residual-minus-response-only field difference의 95% interval
+`[-0.006533, 0.005273]`은 0을 포함했고 TAWSS와 OSI도 개선되지 않았습니다. 더
+중요하게 residual 후보는 GHD–GPS보다 field `+0.061706`, TAWSS `+0.040814`, OSI
+`+0.000582`만큼 나빴으며 세 interval 모두 0보다 컸습니다. 따라서 global/local
+candidate를 최종 architecture로 유지하지 않고 보존된 negative ablation으로
+내렸습니다.
 ## 연구 질문
 
 Aggregate Cartesian field error가 비슷한 complete-cycle WSS surrogate도 시간 평균
 magnitude와 방향 상쇄를 다르게 복원할 수 있습니다. 이 차이는 같은 예측 field에서
 계산되는 TAWSS와 OSI 오차로 이어집니다. 현재 질문은 다음과 같습니다.
 
-> Train-output cycle response, mesh-local correction, 같은-field functional
-> alignment를 결합한 모델이 strong complete-cycle controls보다 field accuracy를
-> 유지하면서 TAWSS와 OSI를 함께 개선하는가?
+> 가장 강한 GHD–GPS complete-cycle control에 same-field functional alignment와
+> leakage-audited steady supervision을 더하면 field accuracy를 보존하면서 TAWSS와
+> OSI fidelity 및 transient-label efficiency를 함께 개선할 수 있는가?
 
 Low-rank response, global/local fusion, residual learning, steady augmentation과
 derived-functional 평가는 각각 선행연구가 존재합니다. 논문 contribution은 이
@@ -92,10 +97,12 @@ steady-WSS anchor와 post-hoc TAWSS/OSI 평가는 direct prior입니다. Generic
 basis, global/local operator, residual learning과 endpoint alignment도 단독 novelty로
 주장하지 않습니다.
 
-남을 수 있는 contribution은 하나의 complete-cycle WSS field에서 field accuracy와
-TAWSS/OSI fidelity를 함께 개선하고, 그 효과가 strong controls와 동일 transient 및
-steady information 조건에서 유지된다는 application-specific mechanism evidence입니다.
-이 conjunctive evidence가 실패하면 해당 claim을 삭제합니다.
+현재 남을 수 있는 contribution은 강한 GHD–GPS backbone에서 하나의 complete-cycle
+WSS field의 field accuracy와 TAWSS/OSI fidelity를 함께 개선하고, 14,000 steady / 730
+transient 비대칭을 누수 없이 활용해 label efficiency를 높인다는 application-specific
+evidence입니다. Functional alignment나 steady supervision 자체는 prior art이므로,
+동일 backbone·동일 evaluator에서의 결합 효과가 입증되지 않으면 해당 claim을
+삭제합니다.
 
 최신 aneurysm GNN과 POD 계열까지 포함한 세부 경계는
 [functional-fidelity direct-prior update](docs/aneug-release-730-functional-prior-update-2026-08-24.md)에
@@ -104,13 +111,13 @@ steady information 조건에서 유지된다는 application-specific mechanism e
 
 ## Evidence ladder
 
-1. Released Graph U-Net — validation development 완료
-2. Train-only response oracle — 단일 queued job, 결과 없음
-3. GHD–GPS/GINE — oracle terminal 후 실행
-4. Transolver — GHD–GPS terminal 후 실행
-5. Validation-only bounded candidate와 ablation
-6. Selected control/candidate의 fresh five-seed T/T+S confirmation
-7. Frozen checkpoints의 locked test 1회 batched evaluation
+1. Released Graph U-Net, GHD–GPS, Transolver — validation development 완료
+2. Train-only response oracle와 rank selection — 완료
+3. Response-only 및 response+local-residual — 완료; residual hypothesis 기각
+4. GHD–GPS field-only/scalarized/field-anchored objective selection — 현재 단계
+5. 선택 objective의 leakage-audited T/T+S 및 label-efficiency 비교
+6. 선택된 control/proposal의 fresh multi-seed confirmation
+7. 모든 개발 선택을 고정한 뒤 frozen checkpoint의 locked test 1회 평가
 
 선택은 임의의 절대 pass threshold가 아니라 case-paired differences, 10,000-resample
 bootstrap uncertainty, field/TAWSS/OSI Pareto relation과 measured compute를 사용합니다.
@@ -119,21 +126,24 @@ bootstrap uncertainty, field/TAWSS/OSI Pareto relation과 measured compute를 �
 계약은 [confirmation protocol](docs/aneug-release-730-multiseed-confirmation-2026-08-24.md)에
 정리되어 있습니다.
 
-## 조건부 architecture와 평가
+## 현재 선택된 개발 경로
 
-Candidate는 아직 선택된 최종 모델이 아닙니다. 현재의 bounded hypothesis는 다음 네
-부분으로 구성됩니다.
+최종 architecture는 아직 확정하지 않았습니다. 다만 직접 결과에 따라 출발점을
+response/local 후보가 아니라 exact terminal GHD–GPS best checkpoint로 바꿨습니다.
 
-1. 하나의 GHD-conditioned mesh encoder가 node features를 만듭니다.
-2. Area-pooled global branch가 train-only complete-cycle response basis의 amplitude와
-   coefficients를 예측합니다.
-3. 같은 node features를 쓰는 local decoder가 고주파·국소 WSS residual을 복원합니다.
-4. 하나의 raw Cartesian WSS cycle에서 mean magnitude, mean vector와 valid-support
-   OSI를 계산해 field objective와 함께 정렬합니다.
+1. `field_only`, `all_scalarized`, `all_field_anchored` 세 cell은 동일 checkpoint,
+   backbone, seed, split과 optimizer budget에서 시작합니다.
+2. Mean-vector, TAWSS와 valid-reference-support OSI는 별도 head가 아니라 하나의 raw
+   Cartesian WSS cycle에서 계산합니다.
+3. 모든 objective는 초기 checkpoint로 정규화한 동일 validation utility로 checkpoint를
+   선택하며, epoch-0 checkpoint도 fallback으로 허용해 강제 열화를 막습니다.
+4. Validation에서 objective를 고른 뒤에만 같은 GHD backbone에서 transient-only(T)와
+   eligible steady augmentation(T+S)을 대칭 비교합니다.
 
-Response-only, local-only, combined, functional-aligned rows는 encoder와 정보량을
-유지하여 각 역할을 분리합니다. Oracle ceiling이 약하면 global branch를 제거하고,
-functional gain이 명확한 field tax를 동반하면 joint-fidelity claim을 폐기합니다.
+구현과 해석 경계는
+[GHD functional fine-tuning protocol](docs/aneug-release-730-ghd-functional-finetune-2026-08-29.md)에
+정리했습니다. Functional gain이 field tax를 동반하거나 steady gain이 누수·추가
+compute와 분리되지 않으면 proposal claim을 활성화하지 않습니다.
 
 ## 논문·table·figure 원칙
 
