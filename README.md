@@ -27,6 +27,11 @@ TAWSS와 OSI fidelity를 함께 높이는 것입니다.
 | 봉인 범위 | locked test 73 cases와 processed-only extras 79 cases 미개방 |
 | 실행 정책 | PBS 자원에 따라 양 서버 사용; 동일 scientific cell의 동시 중복만 금지 |
 
+위 수치는 모두 single-seed validation 개발 근거이며 모든 논문 성능 cell은 pending
+상태입니다. 현재 junjinyong `ssu_a6gpu`의 사용자 제한에서는 한 시점에 단일 GPU job만
+실행되고, 나머지 독립 objective cell은 중복 없이 순차 대기합니다. 이는 영구적인
+연구 직렬화 규칙이 아니라 관측된 queue 정책입니다.
+
 동일 73-case validation evaluator에서 GHD–GPS는 Transolver의 `0.292427`보다 낮은
 field rL2를 보였고 paired difference는 `-0.005808`, 95% case-bootstrap interval은
 `[-0.011793, -0.000211]`이었습니다. 이는 single-seed validation 개발 근거이지
