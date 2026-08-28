@@ -1,5 +1,29 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-28 ICCE inference-evidence implementation
+
+- The existing candidate and matched-training results record active/trainable
+  parameters, peak GPU allocation and whole-run elapsed time, but none is a
+  model-only inference-latency measurement. Never relabel training elapsed or
+  full metric-evaluation elapsed as inference latency.
+- The one-time frozen T0 evaluator now prospectively benchmarks only the
+  predesignated seed-20260903 T+S control/proposal pair. It uses the same 73
+  geometries, batch size one, five warm-up cases and three fixed-order repeats,
+  synchronizing CUDA immediately around each complete-cycle forward.
+- Host-to-device transfer, target WSS and metric kernels are outside the timed
+  interval. The result reports identifier-free mean/median/IQR/min/max,
+  resident/peak allocation, total parameters and cycle-forward parameters.
+- This is an A6000 reference-server compute measurement, not consumer-device
+  deployment, on-device execution or clinical-utility evidence. It does not
+  select a model or affect the field/TAWSS/OSI claim.
+- An exact Linux copy of the prospective code/config/test change passed all 1,076
+  public unit/regression tests, the site-integrity checker and all three
+  JavaScript syntax checks. This is code-contract evidence only; it opened no
+  scientific tensor, checkpoint, locked-test value or GPU execution.
+- The change is prospective: no T0 activation, locked-test read, checkpoint,
+  GPU run, result or paper number exists. Current candidate jobs remain bound
+  to earlier exact source `8339f403...f7052` and must not be relabeled.
+
 ## 2026-08-25 pragmatic multi-server comparator execution
 
 - The latest user instruction supersedes historical oracle-first,

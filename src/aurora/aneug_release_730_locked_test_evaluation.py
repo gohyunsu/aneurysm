@@ -44,6 +44,7 @@ from aurora.aneug_release_730_matched_training import (
     CONTROL_FAMILIES,
     PROPOSAL_FAMILY,
     PROPOSAL_OBJECTIVES,
+    _to_device,
     build_model,
     evaluate,
     load_config as load_matched_training_config,
@@ -194,6 +195,25 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "frozen_checkpoints",
     )
     evaluation = config["evaluation"]
+    benchmark = evaluation.get("inference_benchmark")
+    _require(
+        isinstance(benchmark, Mapping)
+        and set(benchmark)
+        == {
+            "cells",
+            "training_seed",
+            "batch_size_cases",
+            "warmup_cases",
+            "measurement_repeats",
+            "timing_scope",
+            "host_to_device_transfer_included",
+            "metric_computation_included",
+            "reference_wss_loaded_to_device",
+            "cuda_synchronize_before_and_after_each_forward",
+            "hardware_interpretation",
+        },
+        "inference_benchmark",
+    )
     _require(
         tuple(evaluation["metrics"]) == METRICS
         and tuple(evaluation["primary_claim_error_metrics"])
@@ -210,6 +230,22 @@ def validate_config(config: Mapping[str, Any]) -> None:
         and evaluation["automatic_novelty_conclusion"] is False
         and evaluation["population_inference"] is False,
         "evaluation",
+    )
+    _require(
+        tuple(benchmark["cells"]) == ("control_TS", "proposal_TS")
+        and benchmark["training_seed"] == FIGURE_SEED
+        and benchmark["batch_size_cases"] == 1
+        and benchmark["warmup_cases"] == 5
+        and benchmark["measurement_repeats"] == 3
+        and benchmark["timing_scope"]
+        == "device_resident_geometry_to_complete_cycle_model_forward_only"
+        and benchmark["host_to_device_transfer_included"] is False
+        and benchmark["metric_computation_included"] is False
+        and benchmark["reference_wss_loaded_to_device"] is False
+        and benchmark["cuda_synchronize_before_and_after_each_forward"] is True
+        and benchmark["hardware_interpretation"]
+        == "A6000_reference_server_measurement_not_consumer_device_or_on_device_evidence",
+        "inference_benchmark",
     )
     figure = config["figure"]
     _require(
@@ -820,6 +856,134 @@ def summarize_reference_osi_support(
     }
 
 
+def _quantile_linear(values: Sequence[float], probability: float) -> float:
+    _require(bool(values) and 0.0 <= probability <= 1.0, "latency_quantile_scope")
+    ordered = sorted(float(value) for value in values)
+    _require(all(math.isfinite(value) and value >= 0.0 for value in ordered), "latency_values")
+    position = (len(ordered) - 1) * probability
+    lower = math.floor(position)
+    upper = math.ceil(position)
+    if lower == upper:
+        return ordered[lower]
+    fraction = position - lower
+    return ordered[lower] * (1.0 - fraction) + ordered[upper] * fraction
+
+
+def summarize_latency_ms(values: Sequence[float]) -> dict[str, float | int]:
+    """Summarize identifier-free per-case forward latency observations."""
+
+    _require(bool(values), "latency_empty")
+    parsed = [float(value) for value in values]
+    _require(
+        all(math.isfinite(value) and value >= 0.0 for value in parsed),
+        "latency_values",
+    )
+    return {
+        "observation_count": len(parsed),
+        "mean_ms": sum(parsed) / len(parsed),
+        "median_ms": _quantile_linear(parsed, 0.5),
+        "p25_ms": _quantile_linear(parsed, 0.25),
+        "p75_ms": _quantile_linear(parsed, 0.75),
+        "minimum_ms": min(parsed),
+        "maximum_ms": max(parsed),
+    }
+
+
+def cycle_forward_parameter_count(model: torch.nn.Module) -> tuple[int, int]:
+    """Return total and actually invoked complete-cycle parameter counts."""
+
+    total = sum(parameter.numel() for parameter in model.parameters())
+    head = getattr(model, "single_field_head", None)
+    _require(isinstance(head, torch.nn.Module), "single_field_head")
+    auxiliary = sum(parameter.numel() for parameter in head.parameters())
+    cycle = total - auxiliary
+    _require(total > 0 and 0 < cycle <= total, "cycle_parameter_count")
+    return total, cycle
+
+
+@torch.no_grad()
+def benchmark_cycle_inference(
+    model: torch.nn.Module,
+    cases: Sequence[Mapping[str, torch.Tensor]],
+    device: torch.device,
+    contract: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Measure batch-one model-only latency without labels or metric kernels."""
+
+    _require(
+        device.type == "cuda"
+        and torch.cuda.is_available()
+        and len(cases) == 73
+        and contract["batch_size_cases"] == 1
+        and contract["warmup_cases"] == 5
+        and contract["measurement_repeats"] == 3,
+        "inference_benchmark_scope",
+    )
+    model.eval()
+
+    def geometry_only(cpu_case: Mapping[str, torch.Tensor]) -> dict[str, torch.Tensor]:
+        _require("wss" in cpu_case and "coordinates" in cpu_case, "benchmark_case")
+        return _to_device(
+            {key: value for key, value in cpu_case.items() if key != "wss"},
+            device,
+        )
+
+    for cpu_case in cases[: int(contract["warmup_cases"])]:
+        case = geometry_only(cpu_case)
+        prediction = model.forward_cycle(case)
+        _require(
+            tuple(prediction.shape) == (80, int(case["coordinates"].shape[0]), 3),
+            "benchmark_prediction_shape",
+        )
+        del prediction, case
+    torch.cuda.synchronize()
+    torch.cuda.reset_peak_memory_stats()
+    resident_before = int(torch.cuda.memory_allocated())
+    latencies_ms: list[float] = []
+    for _ in range(int(contract["measurement_repeats"])):
+        for cpu_case in cases:
+            case = geometry_only(cpu_case)
+            torch.cuda.synchronize()
+            started_ns = time.perf_counter_ns()
+            prediction = model.forward_cycle(case)
+            torch.cuda.synchronize()
+            latencies_ms.append((time.perf_counter_ns() - started_ns) / 1_000_000.0)
+            _require(
+                tuple(prediction.shape) == (80, int(case["coordinates"].shape[0]), 3),
+                "benchmark_prediction_shape",
+            )
+            del prediction, case
+    total_parameters, cycle_parameters = cycle_forward_parameter_count(model)
+    summary = summarize_latency_ms(latencies_ms)
+    _require(
+        summary["observation_count"]
+        == len(cases) * int(contract["measurement_repeats"]),
+        "latency_observation_count",
+    )
+    return {
+        "timing_scope": contract["timing_scope"],
+        "batch_size_cases": 1,
+        "warmup_case_count": int(contract["warmup_cases"]),
+        "measurement_repeats": int(contract["measurement_repeats"]),
+        "geometry_case_count": len(cases),
+        "host_to_device_transfer_included": False,
+        "metric_computation_included": False,
+        "reference_wss_loaded_to_device": False,
+        "cuda_synchronize_before_and_after_each_forward": True,
+        "hardware_interpretation": contract["hardware_interpretation"],
+        "cuda_device_name": torch.cuda.get_device_name(),
+        "torch_version": torch.__version__,
+        "torch_cuda_version": torch.version.cuda,
+        "resident_gpu_memory_bytes_before_measurement": resident_before,
+        "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),
+        "total_parameter_count": total_parameters,
+        "cycle_forward_parameter_count": cycle_parameters,
+        "latency": summary,
+        "case_identifiers_included": False,
+        "consumer_device_or_on_device_claim": False,
+    }
+
+
 def run_locked_test(
     config: Mapping[str, Any],
     matched_config: Mapping[str, Any],
@@ -875,6 +1039,7 @@ def run_locked_test(
     rows_by_seed: dict[int, dict[str, list[dict[str, float]]]] = {}
     cell_outputs: dict[str, dict[str, Any]] = {}
     figure_predictions: dict[str, list[torch.Tensor]] = {}
+    inference_benchmarks: dict[str, dict[str, Any]] = {}
     for seed in FRESH_TRAINING_SEEDS:
         rows_by_seed[seed] = {}
         cell_outputs[str(seed)] = {}
@@ -908,6 +1073,13 @@ def run_locked_test(
                 basis_payload if entry["model_role"] == "selected_proposal" else None,
             ).to(device)
             model.load_state_dict(checkpoint["model_state_dict"], strict=True)
+            if seed == FIGURE_SEED and cell in ("control_TS", "proposal_TS"):
+                inference_benchmarks[cell] = benchmark_cycle_inference(
+                    model,
+                    cases,
+                    device,
+                    config["evaluation"]["inference_benchmark"],
+                )
             evaluated = evaluate(
                 model,
                 cases,
@@ -948,6 +1120,10 @@ def run_locked_test(
             del model, checkpoint
             torch.cuda.empty_cache()
     _require(set(figure_predictions) == {"control_TS", "proposal_TS"}, "figure_predictions")
+    _require(
+        set(inference_benchmarks) == {"control_TS", "proposal_TS"},
+        "inference_benchmarks",
+    )
     figure_cases = []
     faces = topology["faces"].detach().cpu().to(torch.int64)
     for index, ordinal in enumerate(selected_ordinals):
@@ -989,6 +1165,12 @@ def run_locked_test(
         "figure_display_information_mode": FIGURE_MODE,
         "figure_reference_tawss_floor": reference_tawss_floor,
         "osi_reference_support": reference_support,
+        "inference_benchmark": {
+            "training_seed": FIGURE_SEED,
+            "information_mode": FIGURE_MODE,
+            "cells": inference_benchmarks,
+            "selection_or_claim_endpoint": False,
+        },
         "figure_payload_sha256": file_sha256(figure_payload_path),
         "elapsed_seconds": time.monotonic() - started,
         "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),

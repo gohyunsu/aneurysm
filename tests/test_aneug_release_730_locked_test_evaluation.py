@@ -15,12 +15,15 @@ from aurora.aneug_release_730_locked_test_evaluation import (
     FRESH_TRAINING_SEEDS,
     Release730LockedTestError,
     _common_reference_tawss_floor,
+    _quantile_linear,
     _validate_checkpoint_payload,
     analyze_locked_test,
+    cycle_forward_parameter_count,
     file_sha256,
     load_config,
     preflight_frozen_evidence,
     summarize_reference_osi_support,
+    summarize_latency_ms,
     validate_activation,
     validate_checkpoint_manifest,
     validate_config,
@@ -99,6 +102,14 @@ class LockedTestConfigTests(unittest.TestCase):
         self.assertFalse(config["authorization"]["read_processed_only_extra"])
         self.assertEqual(config["figure"]["display_training_seed"], FIGURE_SEED)
         self.assertFalse(config["figure"]["seed_selected_from_test_outcomes"])
+        benchmark = config["evaluation"]["inference_benchmark"]
+        self.assertEqual(benchmark["cells"], ["control_TS", "proposal_TS"])
+        self.assertEqual(benchmark["training_seed"], FIGURE_SEED)
+        self.assertEqual(benchmark["warmup_cases"], 5)
+        self.assertEqual(benchmark["measurement_repeats"], 3)
+        self.assertFalse(benchmark["host_to_device_transfer_included"])
+        self.assertFalse(benchmark["metric_computation_included"])
+        self.assertFalse(benchmark["reference_wss_loaded_to_device"])
 
     def test_scope_mutations_fail_closed(self) -> None:
         config = load_config(CONFIG)
@@ -108,11 +119,39 @@ class LockedTestConfigTests(unittest.TestCase):
             ("figure", "seed_selected_from_test_outcomes", True, "figure"),
             ("authorization", "training", True, "authorization"),
             ("authorization", "read_processed_only_extra", True, "authorization"),
+            ("evaluation", "inference_benchmark", {}, "inference_benchmark"),
         ):
             changed = copy.deepcopy(config)
             changed[section][key] = value
             with self.assertRaisesRegex(Release730LockedTestError, reason):
                 validate_config(changed)
+
+    def test_latency_summary_and_cycle_parameter_count_are_explicit(self) -> None:
+        self.assertEqual(_quantile_linear([1.0, 2.0, 3.0, 4.0], 0.25), 1.75)
+        summary = summarize_latency_ms([1.0, 2.0, 3.0, 4.0])
+        self.assertEqual(summary["observation_count"], 4)
+        self.assertEqual(summary["median_ms"], 2.5)
+        self.assertEqual(summary["p75_ms"], 3.25)
+
+        class TinyCycle(torch.nn.Module):
+            def __init__(self) -> None:
+                super().__init__()
+                self.body = torch.nn.Linear(2, 3)
+                self.single_field_head = torch.nn.Linear(3, 1)
+
+        model = TinyCycle()
+        total, cycle = cycle_forward_parameter_count(model)
+        self.assertEqual(total, 13)
+        self.assertEqual(cycle, 9)
+
+    def test_inference_benchmark_source_times_only_synchronized_forward(self) -> None:
+        source = (
+            ROOT / "src" / "aurora" / "aneug_release_730_locked_test_evaluation.py"
+        ).read_text(encoding="utf-8")
+        self.assertIn("torch.cuda.synchronize()", source)
+        self.assertIn("time.perf_counter_ns()", source)
+        self.assertIn('if key != "wss"', source)
+        self.assertIn('"consumer_device_or_on_device_claim": False', source)
 
     def test_activation_requires_first_and_only_test_attempt(self) -> None:
         config = load_config(CONFIG)

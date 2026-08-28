@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-28 — Added prospective ICCE inference evidence
+
+- Added a synchronized, model-forward-only latency benchmark to the frozen
+  one-time T0 evaluator for the predesignated T+S control/proposal pair.
+- Excluded data transfer, reference WSS and metric computation from timing and
+  added explicit latency distribution, memory and cycle-forward parameter
+  reporting on the reference A6000 server.
+- Kept compute evidence outside model selection and scientific endpoints, and
+  explicitly prohibited consumer-device or on-device interpretation. No test
+  data, checkpoint, GPU job, result or paper number was opened.
+- Verified the exact code/config/test change in a Linux worktree with all 1,076 public tests,
+  the site-integrity checker and the three JavaScript syntax checks passing.
+
 ## 2026-08-25 — Re-audited prospective candidate and matched training
 
 - Rechecked the response/local decoder, functional fine-tuning, lazy steady
