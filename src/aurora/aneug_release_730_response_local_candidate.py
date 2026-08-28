@@ -27,7 +27,6 @@ from aurora.aneug_processed_v4_d13c_functional_finetune import (
     LOSS_TERMS,
     backward_case,
     train_wss_rms,
-    validation_utility,
 )
 from aurora.aneug_processed_v4_d9 import field_loss, model_parameter_count
 from aurora.aneug_release_730_ghd_gps_baseline import (
@@ -171,6 +170,9 @@ def validate_config(config: Mapping[str, Any]) -> None:
         == (128, 4, 80)
         and model["rank_grid"] == [16, 32, 64, 128, 256]
         and model["rank_selected_in_config"] is False
+        and model["rank_execution_rule"]
+        == "lower_median_of_oracle_storage_aware_r1_nomination"
+        and model["maximum_learned_response_ranks"] == 1
         and model["local_gate"]
         == "nodewise_phase_shared_sigmoid_from_shared_features"
         and model["basis_buffers_in_checkpoint"] is False
@@ -190,6 +192,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
             "response_plus_residual__all_field_anchored",
         ]
         and cells["local_only_source"] == "release730_GHD_GPS_direct_comparator"
+        and cells["oracle_rank_nomination_is_learned_performance"] is False
+        and cells["selected_rank_fixed_before_candidate_validation"] is True
         and cells["one_cell_per_activation"] is True
         and cells["maximum_candidate_gpu_jobs_before_confirmation"] == 5,
         "cells",
@@ -198,6 +202,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(
         objective["reference_tawss_floor_multiplier"] == 1e-4
         and objective["osi_pseudo_huber_delta"] == 0.02
+        and objective["finetune_checkpoint_utility"]
+        == "common_field_plus_mean_of_mean_vector_tawss_and_osi_for_every_objective_variant"
         and objective["functional_to_field_norm_ratio"] == 1.0
         and objective["rrt_loss"] is False
         and objective["separate_functional_head"] is False,
@@ -234,13 +240,17 @@ def validate_config(config: Mapping[str, Any]) -> None:
         == (1103, 60, 15, 12, 2, 10)
         and finetune["learning_rate"] == 1e-4
         and finetune["weight_decay"] == 1e-4
-        and finetune["scheduler"] == "cosine_to_1e-6",
+        and finetune["scheduler"] == "cosine_to_1e-6"
+        and finetune["selection"]
+        == "lowest_common_initial_checkpoint_endpoint_normalized_validation_utility_then_earliest_epoch",
         "finetune_optimization",
     )
     evaluation = config["evaluation"]
     _require(
         evaluation["common_report_space"]
         == "raw_released_physical_cartesian_wss"
+        and "osi_coverage" in evaluation["secondary_metrics"]
+        and "osi_area_coverage" not in evaluation["secondary_metrics"]
         and evaluation["absolute_performance_threshold"] is None
         and evaluation["automatic_winner"] is False
         and evaluation["case_identifiers"] is False,
@@ -512,7 +522,11 @@ def evaluate(
             reference_tawss_floor,
         )
         metrics["osi_mae"] = osi
-        metrics["osi_area_coverage"] = coverage
+        # Keep the OSI error and its diagnostic coverage on the exact same
+        # train-defined reference support.  ``extended_case_metrics`` emits a
+        # legacy fixed-threshold ``osi_coverage`` value, so overwrite that
+        # canonical key instead of introducing a second, inconsistent name.
+        metrics["osi_coverage"] = coverage
         metrics["residual_basis_leakage"] = float(
             output["residual_basis_leakage"].item()
         )
@@ -529,11 +543,11 @@ def evaluate(
     }
     utility = None
     if selection_normalizers is not None:
-        utility = validation_utility(aggregate, selection_normalizers, objective_variant)
+        utility = common_validation_utility(aggregate, selection_normalizers)
     return {
         "aggregate": aggregate,
         "aggregate_alignment_terms": aggregate_terms,
-        "variant_validation_utility": utility,
+        "common_validation_utility": utility,
         "per_case_without_identifiers": per_case,
         "per_case_alignment_terms_without_identifiers": per_case_terms,
         "case_count": len(per_case),
@@ -581,6 +595,43 @@ def _selection_normalizers(initial_validation: Mapping[str, Any]) -> dict[str, f
         "selection_normalizers",
     )
     return result
+
+
+def common_validation_utility(
+    aggregate_metrics: Mapping[str, float],
+    normalizers: Mapping[str, float],
+) -> float:
+    """Return the shared checkpoint utility for every functional fine-tune.
+
+    Training objectives differ across the three fine-tunes, but checkpoint
+    selection must not. All variants therefore use the same field endpoint
+    plus the mean of the three functional endpoints, each divided by its value
+    at the common initial combined checkpoint.
+    """
+
+    metric_keys = {
+        "field": "field_relative_l2",
+        "mean_vector": "mean_vector_tawss_normalized_l2",
+        "tawss": "tawss_normalized_absolute_error",
+        "osi": "osi_mae",
+    }
+    ratios: dict[str, float] = {}
+    for name, metric_key in metric_keys.items():
+        denominator = float(normalizers.get(name, math.nan))
+        numerator = float(aggregate_metrics.get(metric_key, math.nan))
+        _require(
+            math.isfinite(denominator)
+            and denominator > 1e-12
+            and math.isfinite(numerator)
+            and numerator >= 0.0,
+            f"common_validation_utility_{name}",
+        )
+        ratios[name] = numerator / denominator
+    value = ratios["field"] + (
+        ratios["mean_vector"] + ratios["tawss"] + ratios["osi"]
+    ) / 3.0
+    _require(math.isfinite(value), "common_validation_utility")
+    return value
 
 
 def make_candidate_checkpoint(
@@ -868,7 +919,7 @@ def run_development(
     selection_name = (
         "validation_field_relative_l2"
         if mode == "architecture"
-        else "initial_checkpoint_endpoint_normalized_validation_utility"
+        else "common_initial_checkpoint_endpoint_normalized_validation_utility"
     )
     if resume_checkpoint is None:
         smoke_case = _to_device(train[0], device)
@@ -1020,7 +1071,7 @@ def run_development(
         selection_value = (
             validation_field
             if mode == "architecture"
-            else float(validation_result["variant_validation_utility"])
+            else float(validation_result["common_validation_utility"])
         )
         row: dict[str, Any] = {
             "epoch": epoch + 1,

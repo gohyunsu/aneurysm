@@ -5,7 +5,7 @@
   "as_of": "2026-08-24",
   "source": {
     "matched_information_protocol_id": "aneug_release_730_matched_information_analysis_v1",
-    "matched_information_config_sha256": "0210c83172b01106ec5482f27dcc08a3aca048d46922eb5b5b8501bcba4d407c"
+    "matched_information_config_sha256": "9632456e59283b951ddeeb6cd40dfe568a5b3e7bb99fdc9a6c8004e624bafe50"
   },
   "scope": {
     "validation_cases": 73,
@@ -25,6 +25,17 @@
       "osi_mae",
       "osi_coverage"
     ],
+    "primary_claim_error_metrics": [
+      "field_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae"
+    ],
+    "supporting_error_metrics": [
+      "mean_wss_vector_error"
+    ],
+    "diagnostic_metrics": [
+      "osi_coverage"
+    ],
     "contrasts": [
       "proposal_minus_control_T",
       "proposal_minus_control_TS",
@@ -35,7 +46,8 @@
     "point_estimand": "mean_over_five_training_seeds_and_73_paired_synthetic_geometry_cases",
     "report_per_seed_deltas": true,
     "report_favorable_seed_count": true,
-    "minimum_favorable_seed_count": null
+    "minimum_favorable_seed_count": null,
+    "prediction_valid_coverage_is_gate_or_claim_endpoint": false
   },
   "bootstrap": {
     "replicates": 10000,

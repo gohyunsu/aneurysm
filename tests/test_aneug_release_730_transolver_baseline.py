@@ -12,6 +12,7 @@ from aurora.aneug_release_730_transolver_baseline import (
     Release730FullCycleTransolver,
     Release730TransolverError,
     load_config,
+    main,
     validate_activation,
     validate_config,
     validate_predecessor_terminal_record,
@@ -26,6 +27,9 @@ LICENSE = ROOT / "third_party" / "TRANSOLVER_LICENSE.txt"
 
 
 class Release730TransolverBaselineTests(unittest.TestCase):
+    def test_validate_only_does_not_require_execution_server(self) -> None:
+        self.assertEqual(main(["--config", str(CONFIG), "--validate-only"]), 0)
+
     def test_config_is_strong_comparator_on_raw_sealed_protocol(self) -> None:
         config = load_config(CONFIG)
         identity = config["comparison_identity"]
@@ -44,10 +48,15 @@ class Release730TransolverBaselineTests(unittest.TestCase):
         self.assertIsNone(config["decision_rule"]["absolute_performance_threshold"])
         self.assertFalse(config["authorization"]["execute_now"])
         self.assertEqual(config["runtime"]["walltime"], "72:00:00")
-        self.assertTrue(
+        self.assertFalse(
             config["authorization"]["requires_response_oracle_terminal_record"]
         )
-        self.assertTrue(config["authorization"]["requires_ghd_gps_terminal_record"])
+        self.assertFalse(config["authorization"]["requires_ghd_gps_terminal_record"])
+        self.assertEqual(config["runtime"]["allowed_servers"], ["introai9", "junjinyong"])
+        self.assertEqual(
+            config["runtime"]["queue_by_server"],
+            {"introai9": "coss_a6gpu", "junjinyong": "ssu_a6gpu"},
+        )
         self.assertTrue(
             config["authorization"][
                 "genuine_infrastructure_interruption_exact_state_resume_allowed"
@@ -127,7 +136,7 @@ class Release730TransolverBaselineTests(unittest.TestCase):
         self.assertTrue(gradients)
         self.assertTrue(all(bool(torch.isfinite(value).all().item()) for value in gradients))
 
-    def test_activation_requires_all_serial_predecessor_records(self) -> None:
+    def test_activation_allows_optional_predecessor_context_and_binds_server(self) -> None:
         config = load_config(CONFIG)
         activation = {
             "schema_version": "aurora.private.aneug_release_730_transolver_activation.v1",
@@ -144,25 +153,33 @@ class Release730TransolverBaselineTests(unittest.TestCase):
             "continuation_mode": False,
             "resume_checkpoint_sha256": None,
             "prior_attempt_terminal_record_sha256": None,
+            "predecessor_result_dependency": False,
+            "server": "junjinyong",
+            "queue": "ssu_a6gpu",
+            "excluded_server": None,
+            "single_server_per_activation": True,
+            "duplicate_scientific_cell_across_accounts": False,
         }
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "activation.json"
             path.write_text(json.dumps(activation), encoding="utf-8")
-            validate_activation(path, config, "abc")
+            validate_activation(path, config, "abc", "junjinyong")
             changed = copy.deepcopy(activation)
             changed["direct_baseline_terminal_record_sha256"] = ""
             path.write_text(json.dumps(changed), encoding="utf-8")
             with self.assertRaises(Release730TransolverError):
-                validate_activation(path, config, "abc")
-            for key in (
-                "ghd_gps_terminal_record_sha256",
-                "response_oracle_terminal_record_sha256",
-            ):
-                changed = copy.deepcopy(activation)
-                changed[key] = None
-                path.write_text(json.dumps(changed), encoding="utf-8")
-                with self.assertRaises(Release730TransolverError):
-                    validate_activation(path, config, "abc")
+                validate_activation(path, config, "abc", "junjinyong")
+            changed = copy.deepcopy(activation)
+            changed["ghd_gps_terminal_record_sha256"] = None
+            changed["response_oracle_terminal_record_sha256"] = None
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            validate_activation(path, config, "abc", "junjinyong")
+            with self.assertRaisesRegex(Release730TransolverError, "activation_server"):
+                validate_activation(path, config, "abc", "introai9")
+            changed["queue"] = "coss_a6gpu"
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            with self.assertRaisesRegex(Release730TransolverError, "activation_server"):
+                validate_activation(path, config, "abc", "junjinyong")
 
     def test_continuation_activation_requires_checkpoint_and_prior_terminal(self) -> None:
         config = load_config(CONFIG)
@@ -181,17 +198,23 @@ class Release730TransolverBaselineTests(unittest.TestCase):
             "continuation_mode": True,
             "resume_checkpoint_sha256": "4" * 64,
             "prior_attempt_terminal_record_sha256": "5" * 64,
+            "predecessor_result_dependency": False,
+            "server": "junjinyong",
+            "queue": "ssu_a6gpu",
+            "excluded_server": None,
+            "single_server_per_activation": True,
+            "duplicate_scientific_cell_across_accounts": False,
         }
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "activation.json"
             path.write_text(json.dumps(activation), encoding="utf-8")
-            validate_activation(path, config, "abc")
+            validate_activation(path, config, "abc", "junjinyong")
             activation["resume_checkpoint_sha256"] = "short"
             path.write_text(json.dumps(activation), encoding="utf-8")
             with self.assertRaisesRegex(
                 Release730TransolverError, "continuation_evidence"
             ):
-                validate_activation(path, config, "abc")
+                validate_activation(path, config, "abc", "junjinyong")
 
     def test_actual_predecessor_terminal_bytes_must_match_activation(self) -> None:
         import hashlib
@@ -225,17 +248,19 @@ class Release730TransolverBaselineTests(unittest.TestCase):
         self.assertIn("ngpus=1", script)
         self.assertIn("#PBS -l walltime=72:00:00", script)
         self.assertIn("AURORA_TRANSOLVER_ACTIVATION", script)
-        self.assertIn("AURORA_RESPONSE_ORACLE_TERMINAL_RECORD", script)
-        self.assertIn("AURORA_GHD_GPS_TERMINAL_RECORD", script)
-        self.assertIn("--response-oracle-terminal-record", script)
-        self.assertIn("--ghd-gps-terminal-record", script)
+        self.assertIn("AURORA_EXECUTION_SERVER", script)
+        self.assertIn("AURORA_EXECUTION_QUEUE", script)
+        self.assertIn('PBS_QUEUE:-', script)
+        self.assertNotIn("#PBS -q", script)
+        self.assertIn("--expected-execution-server", script)
         self.assertIn("AURORA_TRANSOLVER_RESUME_CHECKPOINT", script)
         self.assertIn("AURORA_TRANSOLVER_PRIOR_ATTEMPT_TERMINAL_RECORD", script)
         self.assertIn("--resume-checkpoint", script)
         self.assertIn("--prior-attempt-terminal-record", script)
         self.assertIn("status_tmp", script)
         self.assertIn('/bin/mv "$status_tmp" "$status"', script)
-        self.assertNotIn("junjinyong", script)
+        self.assertNotIn("AURORA_RESPONSE_ORACLE_TERMINAL_RECORD", script)
+        self.assertNotIn("AURORA_GHD_GPS_TERMINAL_RECORD", script)
         self.assertNotIn("test_manifest", script)
         self.assertNotIn("tangent_projection(", source)
         license_text = LICENSE.read_text(encoding="utf-8")

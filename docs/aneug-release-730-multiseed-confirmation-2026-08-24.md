@@ -15,8 +15,8 @@ replication summary from becoming a post-hoc gate.
 
 ## Estimation
 
-For each of the five registered factorial contrasts and five metrics, the
-analyzer reports:
+For each of the five registered factorial contrasts and five recorded metrics,
+the analyzer reports:
 
 - the point effect for each training seed;
 - the number of seeds with the favorable sign, descriptively;
@@ -27,6 +27,12 @@ analyzer reports:
 The crossed resampling recognizes that seeds and geometries are distinct
 sources of variability. It does not turn five algorithmic repetitions of a
 synthetic cohort into patient-population inference.
+
+The metric roles are fixed rather than inferred from results: field relative
+L2, TAWSS error and OSI MAE are primary claim errors; mean-vector error is
+supporting; model-specific prediction-valid OSI coverage is diagnostic. The
+coverage contrast remains reported with its higher-is-better direction but is
+never a favorable-seed gate, test-authorization condition or claim endpoint.
 
 ## Integrity boundary
 

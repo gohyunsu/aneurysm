@@ -24,6 +24,18 @@
       "osi_mae",
       "osi_coverage"
     ],
+    "primary_claim_error_metrics": [
+      "field_relative_l2",
+      "tawss_normalized_absolute_error",
+      "osi_mae"
+    ],
+    "supporting_error_metrics": [
+      "mean_wss_vector_error"
+    ],
+    "diagnostic_metrics": [
+      "osi_coverage"
+    ],
+    "invalid_osi_predictions_are_penalized_in_osi_mae": true,
     "eligible_steady_rows": 13985,
     "eligible_steady_case_digest": "6dbfde4df94c50e66269ab8cf0e8c755d9f95cfbef43af1376af20036c6c82cc",
     "same_steady_indices_for_control_and_proposal": true,
@@ -101,6 +113,7 @@
     "automatic_novelty_conclusion": false,
     "report_all_cells": true,
     "report_all_contrasts": true,
+    "prediction_valid_coverage_is_gate_or_claim_endpoint": false,
     "interpretation": "report_within_information_method_effects_and_registered_augmentation_protocol_contrasts_without_a_label_only_causal_or_novelty_claim"
   },
   "boundary": {

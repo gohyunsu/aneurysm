@@ -1,5 +1,327 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-29 generic GHD cross-regime transfer core
+
+- Added an algorithm-only adapter that attaches a disposable single-field
+  head to a complete-cycle GHD backbone without changing cycle inference.
+- Added symmetric `naive_sum` and field-anchored paired-gradient rules. The
+  anchored rule removes only opposing auxiliary shared-encoder gradient and
+  caps its norm; cycle and auxiliary heads retain task-specific gradients.
+- This core contains no dataset identity, split, server, activation, schedule
+  or claim. It is not an executed method or novelty result until a private
+  leak-free validation protocol binds and tests it.
+
+## 2026-08-29 evidence-driven GHD functional-development pivot
+
+- Response-only completed at validation field rL2 `0.34880180595672294` and
+  response-plus-local-residual at `0.34832491327638493`. The paired residual
+  minus response-only field interval `[-0.006532996, 0.005272925]` crosses
+  zero; TAWSS and OSI show no established improvement either.
+- The residual candidate is clearly worse than selected GHD--GPS: paired
+  residual-minus-GHD field `+0.061705737` (95% interval
+  `[+0.052912871,+0.070559495]`), TAWSS `+0.040813652` and OSI
+  `+0.000581721`, with all three intervals above zero. Preserve this as
+  negative architecture evidence; do not keep response/local as the proposal
+  merely because it was prospectively planned.
+- Functional development now starts from the exact terminal seed-1103 GHD--GPS
+  best checkpoint. Compare `field_only`, `all_scalarized` and
+  `all_field_anchored` with the same backbone, checkpoint, seed, 584/73 scope,
+  optimizer budget and common initial-checkpoint-normalized validation
+  utility. The epoch-0 initial checkpoint remains eligible.
+- Functional endpoints must come from the same decoded 80-phase vector field;
+  do not add a separate TAWSS/OSI head. Train normalizers use train 584 only,
+  model selection uses validation 73 only, and locked test 73 plus extras 79
+  remain inaccessible.
+- Only after objective selection may the same GHD backbone proceed to a
+  symmetric T versus T+S comparison using the audited eligible steady scope.
+  Record the extra encoder pass, exposures and compute; do not call it a
+  label-only causal effect or activate a paper claim before direct evidence.
+- Both introai9 and junjinyong remain available. Repairs, resumes, PBS-envelope
+  replacement and evidence-based host migration are allowed; preserve every
+  attempt and never run the same scientific cell concurrently on both servers.
+  Public-site maintenance remains out of scope.
+
+## 2026-08-28 ICCE inference-evidence implementation
+
+- The existing candidate and matched-training results record active/trainable
+  parameters, peak GPU allocation and whole-run elapsed time, but none is a
+  model-only inference-latency measurement. Never relabel training elapsed or
+  full metric-evaluation elapsed as inference latency.
+- The one-time frozen T0 evaluator now prospectively benchmarks only the
+  predesignated seed-20260903 T+S control/proposal pair. It uses the same 73
+  geometries, batch size one, five warm-up cases and three fixed-order repeats,
+  synchronizing CUDA immediately around each complete-cycle forward.
+- Host-to-device transfer, target WSS and metric kernels are outside the timed
+  interval. The result reports identifier-free mean/median/IQR/min/max,
+  resident/peak allocation, total parameters and cycle-forward parameters.
+- This is an A6000 reference-server compute measurement, not consumer-device
+  deployment, on-device execution or clinical-utility evidence. It does not
+  select a model or affect the field/TAWSS/OSI claim.
+- An exact Linux copy of the prospective code/config/test change passed all 1,076
+  public unit/regression tests, the site-integrity checker and all three
+  JavaScript syntax checks. This is code-contract evidence only; it opened no
+  scientific tensor, checkpoint, locked-test value or GPU execution.
+- The change is prospective: no T0 activation, locked-test read, checkpoint,
+  GPU run, result or paper number exists. Current candidate jobs remain bound
+  to earlier exact source `8339f403...f7052` and must not be relabeled.
+
+## 2026-08-25 pragmatic multi-server comparator execution
+
+- The latest user instruction supersedes historical oracle-first,
+  comparator-serial, introai9-only and no-retry operational pins. Response
+  oracle evidence is diagnostic; it is not a scientific prerequisite for
+  independent GHD--GPS or Transolver validation development.
+- Both comparator configs now accept the actual activation-bound server from
+  `introai9` or `junjinyong`. PBS sidecars require the same declared server.
+  GHD--GPS no longer requires an oracle terminal, and Transolver no longer
+  requires oracle or GHD--GPS terminal records. Optional predecessor records
+  may be retained as context but never gate training.
+- Independent baselines may run concurrently when GPU capacity permits.
+  Repairs, fresh retries, checkpoint resumes and server migration are allowed
+  after observed failures. Preserve each attempt and avoid counting duplicate
+  results twice; do not permanently freeze a model family after one failure.
+- Keep fixed split membership, train-only statistics, validation-only model
+  selection, locked-test isolation and exact provenance. Do not create
+  arbitrary performance thresholds before direct comparison. Public-site work
+  remains out of scope.
+- The changed comparator contracts passed 15 focused tests and the complete
+  data-free public suite passed 1,072 tests. No CFD field, checkpoint, GPU,
+  locked-test case or processed-only extra was opened.
+
+## 2026-08-25 prospective training-loop static audit
+
+- Exact held scientific source `ba07e95007256af01ac9c4404f545bab63d9687a`
+  passed a second, data-free audit of the response/local candidate and the
+  matched T/T+S training path. Exact local documentation head before this
+  record was `de8e4492739f61c73c5f28643d332f670817f757`; public push remains
+  held.
+- The response-only cell trains the shared geometry encoder and response head
+  while freezing only the unused cycle-output, residual-gate and single-field
+  heads. The combined cell activates the local cycle head and nodewise,
+  phase-shared gate. The oracle and decoder use the same square-root
+  area/phase weighting and restore raw physical Cartesian WSS.
+- Within a model role and seed, T and T+S instantiate the same model before
+  mode-specific freezing. T+S adds one scheduled eligible steady surface per
+  transient cycle case through a separate single-field head; it does not
+  replicate a steady field over 80 phases. Control and proposal use the same
+  13,985-row ordered scope and exposure rule. Terminal exposure count and
+  compute remain reportable rather than being misdescribed as a label-only
+  causal effect.
+- Train-term and validation-endpoint normalizers use only the frozen 584/73
+  development partitions. Functional endpoints come from the same decoded
+  vector field; invalid prediction support is penalized in OSI MAE and its
+  coverage is diagnostic only. Checkpoint continuation restores model,
+  optimizer, scheduler, RNG, best state and steady-prefix accounting.
+- The exact clean introai9 checkout passed 87 focused Torch-container tests.
+  No data field, checkpoint, GPU, locked test or 79-extra value was read and no
+  model/result/claim was selected. A local test invocation without Torch and
+  one remote module-addressing invocation both failed before source/data code;
+  corrected discovery changed no bytes.
+- At `2026-08-25T11:59:33+09:00`, read-only PBS status for sole oracle
+  `118479.ECE-util1` still returned connection refused, errno 15010. Its root
+  remains exactly six metadata files with no log, result, basis or checkpoint.
+  Do not submit, duplicate, relocate or bypass it; keep test/79 extras sealed,
+  use only introai9, never junjinyong, and do not maintain the public site.
+
+## 2026-08-25 confirmatory-figure legibility completion
+
+- Exact held source head `ba07e95007256af01ac9c4404f545bab63d9687a`
+  keeps all three prediction-blind low/median/high reference-OSI cases in the
+  compact T0 audit payload but displays only the predesignated high-burden case
+  in the main ISBI figure. The other two cases remain auditable and cannot be
+  replaced after prediction.
+- The fixed 7.1-by-1.85-inch main layout contains a method schematic, six
+  Ref./Control/Ours TAWSS/OSI surfaces and one signed 80-phase trace. Camera,
+  masks, limits, trace vertex and trace direction remain reference-only.
+- Exact introai9 archive `a391ecd2...e2f7` passed 23 focused tests and all
+  1,072 protocol tests in 124.037 seconds. A data-free synthetic render passed
+  PDF/PNG creation; visual inspection then found no clipped title, colorbar or
+  panel after a separately preserved clipping-only correction. Site graph and
+  JavaScript syntax also pass without any site content change.
+- Exact figure config/protocol/renderer hashes are `68e6a3e1...eff9` /
+  `9d35fcc1...276e` / `0ef3b0b3...4335`; locked-test config/implementation/test
+  hashes are `402b6474...8a62` / `a80c36e6...ab70` / `cae00cdd...361e`.
+- This is result-blind local readiness only. Public push remains held; no
+  remote-exact Quality, activation, locked-test read, checkpoint read,
+  scientific figure, result or paper claim exists. Preserve oracle
+  `118479.ECE-util1`, keep 73 test cases and 79 extras sealed, use only
+  introai9, never junjinyong, and do not maintain the public site.
+
+## 2026-08-25 harmonized direct-control validation readiness
+
+- Held public head `69ae35347da95de7fe76a30e00676ffec5e7c717`
+  implements a frozen-checkpoint, common-evaluator re-evaluation for the three
+  single-seed direct controls: released Graph U-Net adapter, GHD--GPS and
+  Transolver. It derives the OSI support floor from the 584 train references
+  and reads the same ordered 73 validation references; locked test and 79
+  extras have no CLI or sidecar path.
+- Every model is loaded weights-only from an activation-bound selected
+  checkpoint. The job recomputes field rL2, mean-vector error, TAWSS error,
+  OSI MAE and prediction-valid coverage together and reports one
+  model-independent, area-weighted reference-support fraction. It performs no
+  training, selection, state change or paper claim and does not alter the
+  preserved historical results.
+- Exact config/implementation/test/sidecar hashes are `80c1475b...6807` /
+  `64f4e12e...90cd` / `0169c0a8...c05a` / `b2551842...bb1c`. Exact archive
+  tests on introai9 passed focused 6/6 and release-730 regression 189 with one
+  existing skip. No data, checkpoint or GPU was opened in validation.
+- This is readiness only. GHD--GPS and Transolver terminal checkpoints do not
+  yet exist, no private activation/result/job exists, and public push remains
+  held. Preserve oracle `118479.ECE-util1`, test/extra seals, introai9-only
+  execution, junjinyong exclusion and no-site scope.
+
+## 2026-08-25 confirmatory-figure OSI-support correction
+
+- A result-blind source audit found that the prepared release-730 figure
+  selector described valid-support OSI but used only the generic `1e-12`
+  numerical activity epsilon. Low-activity OSI could therefore select the
+  low/median/high cases or trace vertices outside the paper's registered
+  train-frozen reference support.
+- Before any T0 activation or locked-test read, case burden, trace selection and
+  rendered OSI support now require the common train-only
+  `reference_tawss_floor` stored by every frozen C0 checkpoint. T0 preflight
+  fails closed if the twenty values disagree. Prediction-invalid regions on
+  reference support are masked, never imputed.
+- This is prospective display/endpoint consistency, not a changed threshold or
+  outcome-driven figure choice. It changes no split, model, loss, endpoint,
+  seed, checkpoint rule, test attempt or claim. Keep test/79 extras sealed,
+  public push held, introai9-only execution, junjinyong exclusion and oracle
+  `118479.ECE-util1` first.
+- Exact figure config/protocol/renderer hashes are `782396a3...bcf2` /
+  `b466aa67...899e` / `26eb2211...d899`; corrected locked-test config/runner/
+  test hashes are `53316b0d...bbf0` / `68262503...1360` /
+  `2001ee03...fd8`. The first focused run exposed the pre-existing
+  zero-weight-times-NaN aggregation failure; valid-index aggregation corrected
+  it. The repeated focused suite passed 27/27, full Research Quality passed
+  1,064/1,064 in 490.936 seconds, and unchanged site/JavaScript checks passed.
+
+## 2026-08-25 common fine-tune checkpoint-selection correction
+
+- A pre-execution source audit found that the downstream candidate selector
+  recomputed one common four-endpoint utility, but each fine-tune had already
+  selected its best checkpoint with its own training-objective utility. This
+  contradicted the prospective fairness description and could confound the
+  objective comparison.
+- Every functional fine-tune now differs only in its training loss and selects
+  checkpoints with the identical initial-checkpoint-normalized utility: field
+  plus the mean of mean-vector, TAWSS and OSI errors. The candidate selector
+  verifies the recorded selection name and exact best-checkpoint utility before
+  comparing cells.
+- The audit also corrected a stale matched-training hash that still bound the
+  pre-rank candidate config. Candidate, matched-training and locked-test hash
+  lineage now follows the current source chain. Fifty-three focused tests pass.
+- This is prospective result-blind correction only. No activation, field read,
+  job, result, rank, objective, model choice, locked-test/extra access or paper
+  claim exists. Keep public push held, use only introai9, never junjinyong and
+  do not maintain the site.
+
+## 2026-08-25 prospective candidate-selection closure
+
+- Before any learned candidate validation result exists, freeze candidate
+  selection to the minimum common initial-checkpoint endpoint-normalized
+  validation utility over the three matched fine-tunes. The utility is field
+  rL2 divided by its shared initial value plus the mean of similarly normalized
+  mean-vector, TAWSS and OSI errors. Do not compare the variants' different
+  training/checkpoint objectives directly.
+- The exact objective tie order is field-only, scalarized, then field-anchored.
+  Response-only and response-plus-residual field cells remain architecture
+  ablations and cannot enter this objective selection. Report all five cells;
+  no threshold, margin, automatic winner, novelty conclusion or repair
+  authority is created.
+- The direct selector's chosen control must be GHD--GPS or Transolver, the two
+  families implemented by matched T/T+S training. If the released Graph U-Net
+  adapter is selected, fail closed instead of silently substituting another
+  control; resolving that outcome requires a fresh prospective version or a
+  matched Graph U-Net implementation.
+- This is result-blind local public-contract readiness under the disclosure
+  hold. It creates no activation, result, data read, job, model choice or paper
+  claim. Keep test/79 extras sealed, use only introai9, never junjinyong and do
+  not maintain the site.
+
+## 2026-08-25 bounded candidate-rank closure
+
+- The response/local candidate learns exactly one response rank. After the
+  oracle comparison emits its at-most-three sorted storage-aware nomination,
+  choose the lower median (or the sole rank) and freeze it before reading any
+  learned candidate validation result. The oracle uses true validation
+  coefficients and is representation evidence, not learned performance.
+- Keep exactly five candidate jobs: two architecture cells at that rank and
+  three objective-matched fine-tunes from the same combined checkpoint. Do
+  not add ridge/MLP coefficient controls or a fixed-gate row by default; they
+  support no separate main-paper claim beyond the oracle, response-only,
+  combined and direct-local evidence already registered.
+- The later single-seed matched-information stage is separate and contains six
+  fresh jobs: control/proposal by T, T+M and T+S. Locked test and 79 extras
+  remain sealed, use only introai9, never junjinyong, and do not maintain the
+  public site.
+
+## 2026-08-25 candidate OSI-support consistency audit
+
+- A pre-execution static audit found that the response/local candidate
+  replaced valid-support OSI MAE but left the legacy fixed-threshold
+  `osi_coverage` value in the same result row, writing the matched-support
+  coverage under a second name. The runner now overwrites the canonical
+  `osi_coverage` key, so error and diagnostic coverage use the identical
+  train-defined reference support. `osi_area_coverage` is rejected from the
+  registered metric list.
+- The response/local, matched-training and locked-test configs remain
+  hash-bound after the correction. This changes no model, split, target,
+  objective, threshold, selection, data access or result; no candidate GPU job
+  or paper performance claim exists. Locked test and 79 extras remain sealed.
+- The shared-encoder parameter audit found no freeze bug: response-only uses
+  the full GHD-conditioned down/up mesh representation and freezes only the
+  unused cycle-output, residual-gate and single-field heads. Continue using
+  only introai9, never junjinyong, and do not maintain the public site.
+
+## 2026-08-24 one-time release-730 locked-test readiness
+
+- The final T0 boundary is implemented but remains non-executable. It accepts
+  exactly twenty frozen C0 checkpoints (five fixed seeds by control/proposal
+  and T/T+S), verifies every checkpoint, validation result and terminal record
+  before creating a test-access marker, then evaluates all cells in one GPU
+  batch without training or checkpoint selection.
+- The public test-case digest is a set digest, not a loader-order digest. A
+  fresh private T0 activation must bind the separate ordered-test digest; the
+  evaluator recomputes it from the private manifest before indexing all 73
+  test cases. The 79 processed-only extras remain unindexed and no case ID is
+  written to any output.
+- Reference-only OSI burden selects the three figure cases before any model is
+  loaded. The displayed fields use prospectively designated seed `20260903`
+  and the T+S control/proposal cells, never a seed selected from test outcomes.
+  A compact payload permits later rendering without reopening test data.
+- Test analysis preserves the five registered metrics and crossed seed/case
+  bootstrap. Field, TAWSS and OSI errors are claim endpoints, mean-vector
+  error is supporting and `osi_coverage` remains diagnostic. No automatic
+  winner, novelty conclusion or population inference is emitted.
+- This is readiness only. No private T0 activation, checkpoint manifest, job,
+  test read, result, figure or paper claim exists. Oracle `118479.ECE-util1`
+  remains the sole queued scientific path on introai9; do not modify,
+  duplicate or bypass it, and do not maintain the public site.
+
+## 2026-08-24 confirmatory metric-role closure
+
+- Matched-information and five-seed analyzers now schema-label field rL2,
+  TAWSS error and OSI MAE as primary claim errors, mean-vector error as
+  supporting evidence and `osi_coverage` as a prediction-validity diagnostic.
+- All five metrics and paired contrasts remain reportable. Coverage cannot
+  become a Pareto axis, favorable-seed gate, test-authorization condition or
+  claim endpoint. Matched-training hashes follow the corrected analyzer
+  configs without changing any training semantics.
+- This creates no activation, job, result, threshold, test access or paper
+  claim and does not maintain the public site.
+
+## 2026-08-24 OSI support and prediction-validity separation
+
+- In release-730 evaluation, the reference-defined OSI support is common, but
+  `osi_coverage` is the model-specific prediction-valid fraction within that
+  support. Do not describe those two quantities as the same coverage.
+- The direct-control selector still reports paired `osi_coverage` diagnostics,
+  while field, TAWSS and OSI error alone define its Pareto set and field error
+  alone selects the comparator. Invalid OSI predictions already receive the
+  registered worst-case OSI error and coverage is not a second selection axis.
+- This correction changes no model, data, split, result, threshold or sealed
+  scope. It creates no paper claim and does not maintain the public site.
+
 ## 2026-08-24 post-staging queue and storage audit
 
 - Introai9 response oracle `118479.ECE-util1` remains unheld `Q` and

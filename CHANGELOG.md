@@ -1,5 +1,141 @@
 # Changelog
 
+## 2026-08-29 — Added the generic GHD cross-regime transfer core
+
+- Added a complete-cycle-preserving GHD adapter with a disposable
+  single-field auxiliary head.
+- Added naive and field-anchored paired-gradient implementations plus
+  synthetic tests for inference identity, conflict projection, norm capping
+  and parameter partitioning.
+- Added no operational metadata, data access, training activation or result.
+
+## 2026-08-29 — Pivoted functional development to the selected GHD control
+
+- Preserved the completed response-only and response-plus-local-residual
+  validation evidence. Their paired field, TAWSS and OSI differences did not
+  establish a residual gain, while the residual candidate was clearly worse
+  than the selected GHD--GPS direct control on all three endpoints.
+- Demoted the response/local architecture from prospective proposal to a
+  negative ablation and moved same-field functional development to the exact
+  terminal GHD--GPS best checkpoint.
+- Added three symmetric validation-only fine-tunes: field-only, scalarized
+  functional alignment and field-anchored functional alignment. They share
+  one initialization, seed, split, budget and checkpoint utility; epoch zero
+  remains an admissible fallback.
+- Kept locked test 73 and processed-only extras 79 inaccessible. No activation,
+  new GPU result, steady experiment or paper claim is created by this change.
+
+## 2026-08-28 — Added prospective ICCE inference evidence
+
+- Added a synchronized, model-forward-only latency benchmark to the frozen
+  one-time T0 evaluator for the predesignated T+S control/proposal pair.
+- Excluded data transfer, reference WSS and metric computation from timing and
+  added explicit latency distribution, memory and cycle-forward parameter
+  reporting on the reference A6000 server.
+- Kept compute evidence outside model selection and scientific endpoints, and
+  explicitly prohibited consumer-device or on-device interpretation. No test
+  data, checkpoint, GPU job, result or paper number was opened.
+- Verified the exact code/config/test change in a Linux worktree with all 1,076 public tests,
+  the site-integrity checker and the three JavaScript syntax checks passing.
+
+## 2026-08-25 — Re-audited prospective candidate and matched training
+
+- Rechecked the response/local decoder, functional fine-tuning, lazy steady
+  stream, T/T+S factorial, continuation state and downstream accounting before
+  any candidate execution.
+- Confirmed shared initialization within seed, one auxiliary steady surface per
+  transient case, no 80-phase steady replication, common eligible-steady order,
+  train-only normalizers and fail-closed test/extra scope.
+- Passed 87 focused tests in the pinned introai9 Torch container. This was a
+  data-free static audit and changed no scientific implementation, result,
+  selection or public site.
+
+## 2026-08-25 — Made the confirmatory figure legible without changing selection
+
+- Preserved all three prediction-blind low/median/high reference-OSI cases in
+  the compact T0 audit payload, while fixing the ISBI main figure to the
+  predesignated high-reference-OSI case only.
+- Replaced the unreadable 18-surface main-paper grid with a compact method
+  schematic, six Ref./Control/Ours TAWSS/OSI surfaces and one signed 80-phase
+  trace. Camera, color limits and trace direction remain reference-only.
+- Carried the prospective figure hashes through the locked-test evaluator and
+  added fail-closed layout regressions. No case, prediction, checkpoint,
+  locked-test value or paper result was read or selected.
+
+## 2026-08-25 — Unified functional fine-tune checkpoint selection
+
+- Corrected a pre-execution mismatch: the final selector used one common
+  four-endpoint utility, but each fine-tune previously chose its best
+  checkpoint with a different objective-dependent utility.
+- All three fine-tunes now use the same initial-checkpoint-normalized field,
+  mean-vector, TAWSS and OSI checkpoint utility; only their training objectives
+  differ. The final selector fails closed if a result does not record the exact
+  common selection rule and value.
+- Updated the stale response/local-config hash in matched training and carried
+  the resulting hash through the locked-test contract. This changes no result,
+  data scope, architecture, rank, metric or public site.
+
+## 2026-08-25 — Froze candidate selection before candidate evidence
+
+- Added a validation-only analyzer for the exact five registered candidate
+  cells and the completed direct-control decision.
+- Candidate objectives are compared with one common four-endpoint utility
+  derived from the shared initial combined checkpoint, preventing their
+  objective-specific checkpoint utilities from being compared as if they had
+  the same scale.
+- Added an explicit fail-closed branch if Graph U-Net is the direct selector's
+  winner because the matched-training runner currently implements only GHD--
+  GPS and Transolver controls. No silent fallback, threshold, result, job or
+  paper claim is introduced.
+
+## 2026-08-25 — Closed the candidate rank and development-job count
+
+- Fixed one compute-bounded response rank before learned candidate validation:
+  the lower median of the oracle's sorted storage-aware nomination.
+- Retained exactly five candidate jobs and documented why ridge/MLP
+  coefficient controls and a fixed-gate variant are not default paper rows.
+- Separated those five jobs from the six later single-seed control/proposal by
+  T/T+M/T+S jobs. This is a prospective contract correction, not a rank,
+  result, activation, data read or paper claim.
+
+## 2026-08-24 — Implemented the one-time release-730 T0 boundary
+
+- Added a non-executable evaluator and one-job PBS wrapper for all twenty
+  frozen five-seed control/proposal by T/T+S checkpoints on the same 73-case
+  locked test.
+- Added fail-closed preflight over checkpoint, validation-result and terminal-
+  record hashes before the access marker, and separated the public test-set
+  digest from the private ordered-loader digest.
+- Integrated the crossed seed/case analysis with the prediction-blind figure
+  selector. The compact figure payload uses predeclared seed `20260903` and
+  T+S cells and contains no case identifiers.
+- Added synthetic regressions for scope, activation attempt, complete
+  checkpoint grid, evidence preflight, model-identity alignment, contrast sign
+  and PBS single-job structure. No activation, test read, job, result, figure
+  or paper claim was created.
+
+## 2026-08-24 — Closed metric roles through five-seed confirmation
+
+- Added explicit primary-claim, supporting and diagnostic metric lists to the
+  matched-information and five-seed confirmation contracts and result schemas.
+- Kept every cell, contrast and coverage diagnostic reportable while preventing
+  prediction-valid coverage from becoming a gate, test authority or claim.
+- Updated matched-training hash lineage to the corrected confirmation config;
+  no training rule, seed, data scope, model or result changed.
+
+## 2026-08-24 — Separated OSI support from prediction-valid coverage
+
+- Clarified that the reference-defined OSI support fraction is a common
+  evaluator property, whereas `osi_coverage` is a model-specific prediction-
+  validity diagnostic within that support.
+- Kept all coverage values and paired deltas reportable, but removed coverage
+  from the release-730 direct-control Pareto axes. Direct-control selection
+  remains lowest case-mean field error; invalid OSI predictions remain
+  penalized in OSI MAE.
+- Added a regression showing that higher validity coverage cannot retain an
+  otherwise error-dominated comparator on the performance Pareto front. No
+  result, threshold, test access or site change is created.
+
 ## 2026-08-24 — Post-staging queue and storage audit
 
 - Preserved the sole introai9 response oracle as unheld queued work on full,

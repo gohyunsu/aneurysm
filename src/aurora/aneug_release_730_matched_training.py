@@ -191,10 +191,10 @@ def validate_config(config: Mapping[str, Any]) -> None:
         "steady_exposure_config_sha256": "3509191bd2c3e3294488ab5018109f3beccd402599a17e16dd8696d1deeaceaf",
         "public_overlap_result_sha256": "b3a118bae156a1dbc6c838b923a594f9b0f452a40f34b8bccb6bc396d28ba397",
         "private_overlap_result_sha256": "52219b9a7161f0932a4ed80020a339510474431b67e168741426c2a12e5092ef",
-        "response_local_config_sha256": "eed4da6c5d827131826d63855affbb298107d4ab64c48060939a2edabf648d10",
+        "response_local_config_sha256": "38f256d4e60e2a7c748bb59b7e3de910a1bf1f464d18b7ec99ef0f435aa415b4",
         "ghd_gps_config_sha256": "0d9ee4615b5af9bf9058920e70252addf5146f06178fb058a2c193be1692bfc9",
         "transolver_config_sha256": "0cb20c0c3041e63043d92a4a4062e7b8f9b63deb2e7390dbbaeaf1c9bad86fcb",
-        "multiseed_confirmation_config_sha256": "c2dd08282f0f50f387a124e51926ffa51c1c4d86605422c8e4f607a2e707771c",
+        "multiseed_confirmation_config_sha256": "75cd2e6c5d7545dd56274d7dd1b14d8b07380b0711cf10573d5b9fcaa1b57d92",
     }
     _require(all(source.get(key) == value for key, value in expected_source.items()), "source")
     split = config["split"]

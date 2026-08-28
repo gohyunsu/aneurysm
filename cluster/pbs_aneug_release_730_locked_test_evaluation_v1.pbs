@@ -1,0 +1,108 @@
+#!/bin/bash
+#PBS -N aurora_730_T0
+#PBS -q coss_a6gpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
+#PBS -l walltime=24:00:00
+#PBS -j oe
+
+set -euo pipefail
+
+: "${AURORA_PROJECT_ROOT:?set exact clean Quality-passed public checkout}"
+: "${AURORA_DATA_ROOT:?set private AneuG data root}"
+: "${AURORA_OUTPUT_ROOT:?set private output root}"
+: "${AURORA_EXPECTED_COMMIT:?set exact public commit}"
+: "${AURORA_LOCKED_TEST_ACTIVATION:?set fresh private T0 activation}"
+: "${AURORA_C0_CHECKPOINT_MANIFEST:?set exact frozen twenty-checkpoint manifest}"
+: "${AURORA_C0_CHECKPOINT_ROOT:?set read-only root containing the twenty checkpoints}"
+: "${AURORA_MULTI_SEED_CONFIRMATION_RESULT:?set complete five-seed validation result}"
+: "${AURORA_SELECTED_MODEL_RECORD:?set validation-only selected-model record}"
+: "${AURORA_RESPONSE_BASIS:?set exact train-only selected response basis}"
+: "${AURORA_PRIVATE_SPLIT_MANIFEST:?set exact private R3 split manifest}"
+: "${AURORA_PRIVATE_TRAIN_AUDIT:?set exact private train-audit statistics}"
+: "${AURORA_CONTAINER:?set pinned Torch container}"
+: "${AURORA_CONTAINER_SHA256:?set pinned container SHA-256}"
+
+actual_commit="$(git -C "$AURORA_PROJECT_ROOT" rev-parse HEAD)"
+[ "$actual_commit" = "$AURORA_EXPECTED_COMMIT" ]
+[ -z "$(git -C "$AURORA_PROJECT_ROOT" status --porcelain)" ]
+for evidence in \
+  "$AURORA_LOCKED_TEST_ACTIVATION" \
+  "$AURORA_C0_CHECKPOINT_MANIFEST" \
+  "$AURORA_MULTI_SEED_CONFIRMATION_RESULT" \
+  "$AURORA_SELECTED_MODEL_RECORD" \
+  "$AURORA_RESPONSE_BASIS" \
+  "$AURORA_PRIVATE_SPLIT_MANIFEST" \
+  "$AURORA_PRIVATE_TRAIN_AUDIT"
+do
+  [ -r "$evidence" ]
+done
+[ -d "$AURORA_C0_CHECKPOINT_ROOT" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_SPLIT_MANIFEST" | /usr/bin/cut -d' ' -f1)" = "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_TRAIN_AUDIT" | /usr/bin/cut -d' ' -f1)" = "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385" ]
+[ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ]
+
+run_id="${PBS_JOBID:?T0 is PBS-only}"
+run_root="$AURORA_OUTPUT_ROOT/aneug_release_730_locked_test_evaluation_v1/$run_id"
+mkdir -p "$run_root"
+[ ! -e "$run_root/attempt.started" ]
+/usr/bin/printf '%s\n' "$run_id" > "$run_root/attempt.started"
+log="$run_root/attempt.log"
+status="$run_root/attempt.status.json"
+status_tmp="$run_root/attempt.status.json.tmp"
+exec >>"$log" 2>&1
+trap 'code=$?; trap - EXIT; /usr/bin/printf "{\"job_id\":\"%s\",\"exit_code\":%s,\"locked_test_access_started\":%s,\"complete\":%s}\n" "$run_id" "$code" "$(test -f "$run_root/locked_test_access.started.json" && printf true || printf false)" "$(test -f "$run_root/result.json" && printf true || printf false)" > "$status_tmp"; /bin/mv "$status_tmp" "$status"; exit "$code"' EXIT
+
+activation_parent="$(/usr/bin/dirname "$AURORA_LOCKED_TEST_ACTIVATION")"
+activation_name="$(/usr/bin/basename "$AURORA_LOCKED_TEST_ACTIVATION")"
+manifest_parent="$(/usr/bin/dirname "$AURORA_C0_CHECKPOINT_MANIFEST")"
+manifest_name="$(/usr/bin/basename "$AURORA_C0_CHECKPOINT_MANIFEST")"
+confirmation_parent="$(/usr/bin/dirname "$AURORA_MULTI_SEED_CONFIRMATION_RESULT")"
+confirmation_name="$(/usr/bin/basename "$AURORA_MULTI_SEED_CONFIRMATION_RESULT")"
+selection_parent="$(/usr/bin/dirname "$AURORA_SELECTED_MODEL_RECORD")"
+selection_name="$(/usr/bin/basename "$AURORA_SELECTED_MODEL_RECORD")"
+basis_parent="$(/usr/bin/dirname "$AURORA_RESPONSE_BASIS")"
+basis_name="$(/usr/bin/basename "$AURORA_RESPONSE_BASIS")"
+split_parent="$(/usr/bin/dirname "$AURORA_PRIVATE_SPLIT_MANIFEST")"
+split_name="$(/usr/bin/basename "$AURORA_PRIVATE_SPLIT_MANIFEST")"
+audit_parent="$(/usr/bin/dirname "$AURORA_PRIVATE_TRAIN_AUDIT")"
+audit_name="$(/usr/bin/basename "$AURORA_PRIVATE_TRAIN_AUDIT")"
+
+/usr/bin/printf 'stage=release730_T0_started job=%s commit=%s\n' "$run_id" "$actual_commit"
+/usr/bin/singularity exec --nv --cleanenv \
+  --bind "$AURORA_PROJECT_ROOT:/workspace:ro" \
+  --bind "$AURORA_DATA_ROOT:/data:ro" \
+  --bind "$activation_parent:/private/activation:ro" \
+  --bind "$manifest_parent:/private/manifest:ro" \
+  --bind "$AURORA_C0_CHECKPOINT_ROOT:/private/checkpoints:ro" \
+  --bind "$confirmation_parent:/private/confirmation:ro" \
+  --bind "$selection_parent:/private/selection:ro" \
+  --bind "$basis_parent:/private/basis:ro" \
+  --bind "$split_parent:/private/split:ro" \
+  --bind "$audit_parent:/private/audit:ro" \
+  --bind "$run_root:/output" \
+  "$AURORA_CONTAINER" \
+  /usr/bin/env PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONPATH=/workspace/src \
+  python -m aurora.aneug_release_730_locked_test_evaluation \
+  --config /workspace/configs/aneug_release_730_locked_test_evaluation_v1.json \
+  --expected-commit "$actual_commit" \
+  --activation "/private/activation/$activation_name" \
+  --checkpoint-manifest "/private/manifest/$manifest_name" \
+  --checkpoint-root /private/checkpoints \
+  --multiseed-confirmation-result "/private/confirmation/$confirmation_name" \
+  --selected-model-record "/private/selection/$selection_name" \
+  --matched-training-config /workspace/configs/aneug_release_730_matched_training_v1.json \
+  --matched-information-config /workspace/configs/aneug_release_730_matched_information_analysis_v1.json \
+  --multiseed-config /workspace/configs/aneug_release_730_multiseed_confirmation_v1.json \
+  --figure-config /workspace/configs/aneug_release_730_figure_protocol_v1.json \
+  --response-basis "/private/basis/$basis_name" \
+  --transient /data/processed_v5_9dd4180/assembled_registered_data_1k_v5.pth \
+  --steady /data/processed_v4_d2/assembled_registered_steady_data_1k_v4.pth.temporary \
+  --public-split /workspace/results/aneug_release_730_split_r3_20260818.json \
+  --private-split "/private/split/$split_name" \
+  --train-audit-public /workspace/results/aneug_release_730_train_audit_r2_20260818.json \
+  --train-audit-private "/private/audit/$audit_name" \
+  --access-marker /output/locked_test_access.started.json \
+  --result /output/result.json \
+  --figure-selection /output/figure_selection.json \
+  --figure-payload /output/figure_payload.pt
+/usr/bin/printf 'stage=release730_T0_complete\n'

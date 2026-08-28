@@ -26,6 +26,8 @@ def selection() -> dict:
         "protocol_id": "aneug_release_730_confirmatory_figure_v1",
         "selected_locked_test_ordinals": [7, 36, 65],
         "selected_reference_trace_vertex_ordinals": [2, 2, 2],
+        "reference_tawss_floor": 0.01,
+        "reference_tawss_floor_source": "common_frozen_checkpoint_train_only_value",
         "candidate_or_baseline_values_read": False,
         "processed_only_extra_values_read": False,
         "case_identifiers_included": False,
@@ -72,11 +74,14 @@ class Release730FigureRendererTests(unittest.TestCase):
     def test_layout_matches_reserved_paper_footprint(self) -> None:
         layout = self.config["render_layout"]
         self.assertEqual(layout["paper_height_fraction"], 0.235)
-        self.assertEqual(layout["case_columns"], [
+        self.assertEqual(layout["audit_case_columns"], [
             "low_reference_OSI",
             "median_reference_OSI",
             "high_reference_OSI",
         ])
+        self.assertEqual(layout["main_case_column"], "high_reference_OSI")
+        self.assertEqual(layout["main_case_index"], 2)
+        self.assertEqual(layout["main_figure_left_panel"], "method_schematic")
         self.assertEqual(
             layout["method_columns_within_case"],
             ["reference", "selected_control", "proposal"],
@@ -104,17 +109,40 @@ class Release730FigureRendererTests(unittest.TestCase):
         self.assertFalse(
             first["candidate_or_control_used_for_selection_limits_or_camera"]
         )
+        self.assertTrue(first["osi_support_is_reference_defined"])
+        self.assertEqual(first["reference_tawss_floor"], 0.01)
         self.assertEqual(len(first["cases"]), 3)
+        self.assertEqual(first["main_case_index"], 2)
+        self.assertEqual(first["main_case_label"], "high_reference_OSI")
         self.assertEqual(
             tuple(first["cases"][0]["methods"]["reference"]["signed_trace"].shape),
             (80,),
         )
+
+    def test_osi_display_support_is_reference_defined_and_floor_aware(self) -> None:
+        changed = copy.deepcopy(self.cases)
+        changed[0]["reference_wss"][:, 0, :] *= 1e-6
+        changed[0]["selected_control_wss"][:, 0, :] *= 1e-6
+        changed[0]["proposal_wss"][:, 0, :] *= 1e-6
+        payload = build_release730_render_payload(
+            changed, selection(), self.phases, self.config
+        )
+        self.assertFalse(payload["cases"][0]["reference_osi_support"][0].item())
+        self.assertTrue(payload["cases"][0]["reference_osi_support"][1:].all().item())
 
     def test_identifier_or_prediction_selected_payload_is_rejected(self) -> None:
         changed = selection()
         changed["case_identifiers_included"] = True
         with self.assertRaisesRegex(
             Release730FigureRendererError, "prediction_blind_selection"
+        ):
+            build_release730_render_payload(
+                self.cases, changed, self.phases, self.config
+            )
+        changed = selection()
+        del changed["reference_tawss_floor"]
+        with self.assertRaisesRegex(
+            Release730FigureRendererError, "reference_tawss_floor"
         ):
             build_release730_render_payload(
                 self.cases, changed, self.phases, self.config
@@ -135,6 +163,9 @@ class Release730FigureRendererTests(unittest.TestCase):
             self.assertTrue(pdf.is_file() and png.is_file())
             self.assertGreater(result["pdf_bytes"], 0)
             self.assertGreater(result["png_bytes"], 0)
+            self.assertEqual(result["audit_case_count"], 3)
+            self.assertEqual(result["main_case_index"], 2)
+            self.assertEqual(result["main_case_label"], "high_reference_OSI")
             self.assertFalse(result["case_identifiers_included"])
 
 

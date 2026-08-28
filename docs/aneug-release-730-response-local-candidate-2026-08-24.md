@@ -44,6 +44,14 @@ The serial evidence order is:
 The 73 locked-test cases and 79 processed-only rows are absent from every
 runner input. They cannot be opened by setting a command-line flag.
 
+The oracle comparison may nominate at most three positive ranks on its
+storage-aware Pareto front, but the candidate runner learns exactly one. To
+avoid spending candidate validation repeatedly on an optimistic true-
+coefficient ceiling, the execution rank is fixed before any learned candidate
+result as the lower median of that sorted nomination (the sole rank when only
+one is nominated). The oracle value is not learned performance and cannot
+select the final model by itself.
+
 ## Executable model
 
 One release-730 GHD-conditioned GINE/GPS mesh U-Net encodes coordinates,
@@ -78,6 +86,13 @@ schedule as GHD--GPS. It contains exactly two GPU cells:
 - response only, field only;
 - response plus local residual, field only.
 
+Both cells use the single prospectively fixed execution rank. Ridge/MLP
+coefficient controls and a fixed-gate variant are not default rows: the oracle,
+response-only cell, combined cell and direct local comparator already isolate
+representation capacity, learned global response, local correction and strong
+local prediction. Adding those variants would not support an additional paper
+claim under the four-page budget.
+
 Functional development contains exactly three cells. Every cell reloads the
 same selected combined field-only checkpoint and receives the same 60/15/12
 fine-tuning schedule:
@@ -89,13 +104,18 @@ fine-tuning schedule:
 
 The training normalizers use all and only the 584 training cases. Checkpoint
 utility normalizers use the same initial checkpoint on all and only the 73
-validation cases. No absolute threshold or automatic winner is defined.
+validation cases. Every fine-tune selects its checkpoint with the identical
+utility: normalized field error plus the mean of normalized mean-vector,
+TAWSS and OSI errors. Thus only the training objective differs across the
+three cells; objective-specific checkpoint selection cannot confound their
+comparison. No absolute threshold or automatic winner is defined.
 
 ## Evaluation and reviewer-facing interpretation
 
 Every decoded output is evaluated in the raw released physical Cartesian WSS
 space. The result reports case-level field relative L2, TAWSS normalized
-absolute error, reference-support OSI MAE, mean-vector error, low-TAWSS error,
+absolute error, reference-support OSI MAE and its same-support area coverage,
+mean-vector error, low-TAWSS error,
 peak-systolic error, normal-component error, gate mean and basis leakage,
 together with active parameters, peak GPU memory and elapsed time. Phases and
 vertices are never treated as independent statistical samples.

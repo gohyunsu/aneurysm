@@ -113,6 +113,22 @@ class MultiseedConfirmationTests(unittest.TestCase):
         self.assertEqual(tuple(config["scope"]["fresh_training_seeds"]), FRESH_TRAINING_SEEDS)
         self.assertEqual(config["scope"]["seed_count"], 5)
         self.assertIsNone(config["analysis"]["minimum_favorable_seed_count"])
+        self.assertEqual(
+            config["analysis"]["primary_claim_error_metrics"],
+            [
+                "field_relative_l2",
+                "tawss_normalized_absolute_error",
+                "osi_mae",
+            ],
+        )
+        self.assertEqual(
+            config["analysis"]["diagnostic_metrics"], ["osi_coverage"]
+        )
+        self.assertFalse(
+            config["analysis"][
+                "prediction_valid_coverage_is_gate_or_claim_endpoint"
+            ]
+        )
         self.assertFalse(config["decision"]["automatic_test_authorization"])
         self.assertFalse(config["boundary"]["locked_test_or_extra_access"])
 
@@ -137,6 +153,18 @@ class MultiseedConfirmationTests(unittest.TestCase):
         ]["osi_coverage"]
         self.assertEqual(coverage["direction"], "higher")
         self.assertEqual(coverage["favorable_seed_count"], 5)
+        self.assertEqual(
+            output["primary_claim_error_metrics"],
+            [
+                "field_relative_l2",
+                "tawss_normalized_absolute_error",
+                "osi_mae",
+            ],
+        )
+        self.assertEqual(output["diagnostic_metrics"], ["osi_coverage"])
+        self.assertFalse(
+            output["prediction_valid_coverage_is_gate_or_claim_endpoint"]
+        )
         self.assertIsNone(output["automatic_test_authorization"])
         self.assertFalse(output["locked_test_or_extra_values_read"])
         self.assertEqual(

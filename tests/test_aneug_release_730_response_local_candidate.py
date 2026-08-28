@@ -11,7 +11,9 @@ from aurora.aneug_release_730_response_local_candidate import (
     Release730ResponseLocalError,
     _valid_support_osi,
     active_parameter_count,
+    common_validation_utility,
     configure_trainable_cell,
+    evaluate,
     make_candidate_checkpoint,
     restore_candidate_checkpoint,
     validate_activation,
@@ -118,16 +120,55 @@ class ResponseLocalCandidateTests(unittest.TestCase):
         self.assertFalse(value["split"]["read_locked_test_fields"])
         self.assertFalse(value["split"]["read_processed_only_extra_fields"])
         self.assertEqual(value["cells"]["maximum_candidate_gpu_jobs_before_confirmation"], 5)
+        self.assertEqual(value["model"]["maximum_learned_response_ranks"], 1)
+        self.assertEqual(
+            value["model"]["rank_execution_rule"],
+            "lower_median_of_oracle_storage_aware_r1_nomination",
+        )
+        self.assertTrue(
+            value["cells"]["selected_rank_fixed_before_candidate_validation"]
+        )
+        self.assertFalse(
+            value["cells"]["oracle_rank_nomination_is_learned_performance"]
+        )
+        self.assertIn("osi_coverage", value["evaluation"]["secondary_metrics"])
+        self.assertNotIn("osi_area_coverage", value["evaluation"]["secondary_metrics"])
         self.assertEqual(
             value["model"]["local_gate"],
             "nodewise_phase_shared_sigmoid_from_shared_features",
         )
+        self.assertEqual(
+            value["finetune_optimization"]["selection"],
+            "lowest_common_initial_checkpoint_endpoint_normalized_validation_utility_then_earliest_epoch",
+        )
+
+    def test_every_finetune_uses_one_common_four_endpoint_checkpoint_utility(self):
+        metrics = {
+            "field_relative_l2": 0.8,
+            "mean_vector_tawss_normalized_l2": 0.6,
+            "tawss_normalized_absolute_error": 0.4,
+            "osi_mae": 0.2,
+        }
+        normalizers = {
+            "field": 0.4,
+            "mean_vector": 0.3,
+            "tawss": 0.2,
+            "osi": 0.1,
+        }
+        self.assertEqual(common_validation_utility(metrics, normalizers), 4.0)
+        invalid = dict(normalizers)
+        invalid["osi"] = 0.0
+        with self.assertRaisesRegex(
+            Release730ResponseLocalError, "common_validation_utility_osi"
+        ):
+            common_validation_utility(metrics, invalid)
 
     def test_config_rejects_test_access_server_and_threshold_changes(self):
         for path, replacement in (
             (("split", "read_locked_test_fields"), True),
             (("runtime", "server"), "junjinyong"),
             (("evaluation", "absolute_performance_threshold"), 0.2),
+            (("model", "maximum_learned_response_ranks"), 3),
         ):
             value = config()
             value[path[0]][path[1]] = replacement
@@ -218,6 +259,33 @@ class ResponseLocalCandidateTests(unittest.TestCase):
         )
         self.assertAlmostEqual(mae, 0.0, places=7)
         self.assertAlmostEqual(coverage, 1.0, places=7)
+
+    def test_evaluation_overwrites_legacy_osi_coverage_on_train_support(self):
+        model = SharedEncoderCycleResponseResidual(
+            TinySharedBackbone(phases=4, nodes=5),
+            synthetic_payload(phases=4, nodes=5, rank=3),
+            rank=3,
+            local_output_scale=2.0,
+        )
+        case = tiny_case(nodes=5)
+        reference = torch.zeros(4, 5, 3)
+        reference[:, 0, 0] = torch.tensor([1.0, -1.0, 1.0, -1.0])
+        reference[:, 1:, 0] = 0.01
+        case["wss"] = reference
+        observed = evaluate(
+            model,
+            [case],
+            config(),
+            "response_only",
+            "field_only",
+            reference_tawss_floor=0.1,
+            selection_normalizers=None,
+            device=torch.device("cpu"),
+        )
+        row = observed["per_case_without_identifiers"][0]
+        self.assertIn("osi_coverage", row)
+        self.assertNotIn("osi_area_coverage", row)
+        self.assertEqual(row["osi_coverage"], 1.0)
 
     def test_candidate_checkpoint_restores_selection_and_rng_state(self):
         model = nn.Linear(3, 2)

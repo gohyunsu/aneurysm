@@ -122,10 +122,12 @@ scientific run is not a continuation input.
 
 Each cell emits the schema already consumed by the matched-information
 analyzer: 73 identifier-free case rows, field relative L2, mean-vector error,
-TAWSS normalized absolute error, valid-support OSI MAE/coverage, training
-steps, active parameters, GPU reservation time, memory and exact data
-exposure. It creates no automatic winner, novelty conclusion, test authority
-or paper claim.
+TAWSS normalized absolute error, valid-support OSI MAE, model-specific
+prediction-valid coverage, training steps, active parameters, GPU reservation
+time, memory and exact data exposure. The first three claim errors are field,
+TAWSS and OSI; mean-vector error is supporting and prediction-valid coverage
+is diagnostic. It creates no automatic winner, novelty conclusion, test
+authority or paper claim.
 
 The separate auxiliary-attribution analyzer accepts only the two T+M and two
 T+S terminal cells, enforces matching model/protocol lineage within each role
