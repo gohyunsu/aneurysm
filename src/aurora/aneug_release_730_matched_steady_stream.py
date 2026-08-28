@@ -217,8 +217,15 @@ class MatchedSteadyStream:
             "coordinate_scale",
         )
         weights, normals, twice_area = _vertex_areas(coordinates, self._faces, torch)
+        total_weight = weights.sum()
         _require(
-            bool((weights > 0).all().item()) and bool((twice_area > 0).all().item()),
+            bool(torch.isfinite(weights).all().item())
+            and bool(torch.isfinite(normals).all().item())
+            and bool(torch.isfinite(twice_area).all().item())
+            and bool(torch.isfinite(total_weight).item())
+            and bool((weights > 0).all().item())
+            and bool((twice_area >= 0).all().item())
+            and float(total_weight.item()) > 0.0,
             "mesh",
         )
         ghd = (raw_ghd - self._ghd_mean) / self._ghd_std
@@ -226,7 +233,7 @@ class MatchedSteadyStream:
         return {
             "coordinates": (centered / coordinate_scale).to(torch.float32).contiguous(),
             "normals": normals.to(torch.float32).contiguous(),
-            "vertex_weights": (weights / weights.sum()).to(torch.float32).contiguous(),
+            "vertex_weights": (weights / total_weight).to(torch.float32).contiguous(),
             "ghd": ghd.contiguous(),
             "steady_wss": physical[:, 6:9].to(torch.float32).contiguous(),
         }

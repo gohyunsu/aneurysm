@@ -1,5 +1,25 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-29 audited steady-mesh admissibility repair
+
+- The leakage-eligible 13,985-row steady cohort contains six zero-area faces
+  across three rows, but every row retains strictly positive lumped vertex
+  weights, valid stored normals and positive total surface area. The old
+  requirement that every individual face have strictly positive area was
+  therefore over-constrained.
+- `MatchedSteadyStream.decode` now admits finite zero-area faces while still
+  requiring finite nonnegative face areas, finite normals, strictly positive
+  vertex weights and positive total weight. It does not exclude or reorder a
+  row and changes no WSS decoder, model, loss, schedule, split or metric.
+- Focused tests must cover both the accepted isolated-degenerate-face case and
+  rejection of an all-degenerate mesh with zero vertex weights. This source
+  is readiness only until a private exact activation runs the T+S cells;
+  locked test 73 and extras 79 remain outside scope.
+- The 41 directly related Torch tests and all 1,092 public tests pass locally
+  in the dependency-complete environment. A first full invocation in an
+  environment without `h5py` is dependency-incomplete, not a source result.
+  Remote Quality is still required before execution activation.
+
 ## 2026-08-29 generic GHD cross-regime transfer core
 
 - Added an algorithm-only adapter that attaches a disposable single-field
