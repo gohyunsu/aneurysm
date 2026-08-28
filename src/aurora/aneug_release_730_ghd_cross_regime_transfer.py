@@ -157,6 +157,115 @@ class Release730GHDSteadyTransferModel(nn.Module):
         )
 
 
+class Release730GHDSharedDecoderSteadyControl(nn.Module):
+    """Use the complete-cycle decoder itself for steady supervision.
+
+    This is a matched shared-decoder control for the separate steady head, not
+    an exact reproduction of a phase-conditioned snapshot surrogate.  A
+    steady target supervises the temporal mean of the one-shot cycle output;
+    no auxiliary parameters or steady field are used at inference.
+    """
+
+    def __init__(self, backbone: nn.Module, *, cycle_output_scale: float) -> None:
+        super().__init__()
+        _require(callable(getattr(backbone, "encode_geometry", None)), "encoder")
+        _require(callable(getattr(backbone, "decode_cycle", None)), "cycle_decoder")
+        _require(
+            math.isfinite(float(cycle_output_scale)) and cycle_output_scale > 0.0,
+            "cycle_output_scale",
+        )
+        self.backbone = backbone
+        self.register_buffer(
+            "cycle_output_scale", torch.tensor(float(cycle_output_scale))
+        )
+
+    def forward_cycle(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+        prediction = (
+            self.backbone.decode_cycle(self.backbone.encode_geometry(case))
+            * self.cycle_output_scale
+        )
+        _require(
+            prediction.ndim == 3
+            and prediction.shape[0] >= 2
+            and prediction.shape[-1] == 3,
+            "cycle_prediction",
+        )
+        return prediction
+
+    def forward_single_field(self, case: Mapping[str, torch.Tensor]) -> torch.Tensor:
+        """Return the cycle decoder's mean field for a steady target."""
+
+        return self.forward_cycle(case).mean(dim=0)
+
+    def transfer_parameters(self) -> tuple[nn.Parameter, ...]:
+        return _parameter_tuple(tuple(self.backbone.parameters()), "shared_decoder")
+
+
+def shared_decoder_cross_regime_backward(
+    *,
+    transient_loss: torch.Tensor,
+    auxiliary_loss: torch.Tensor,
+    parameters: Sequence[nn.Parameter],
+    auxiliary_coefficient: float = 1.0,
+    accumulation_steps: int = 1,
+    epsilon: float = 1e-12,
+) -> dict[str, float | str]:
+    """Add transient and steady gradients through one shared cycle decoder."""
+
+    _require(
+        transient_loss.ndim == auxiliary_loss.ndim == 0
+        and bool(torch.isfinite(transient_loss).item())
+        and bool(torch.isfinite(auxiliary_loss).item()),
+        "loss",
+    )
+    _require(
+        math.isfinite(float(auxiliary_coefficient)) and auxiliary_coefficient > 0.0,
+        "auxiliary_coefficient",
+    )
+    _require(accumulation_steps > 0 and epsilon > 0.0, "numerical_parameters")
+    shared = _parameter_tuple(parameters, "shared_decoder")
+    transient_gradients = torch.autograd.grad(
+        transient_loss, shared, retain_graph=False, create_graph=False
+    )
+    auxiliary_gradients = torch.autograd.grad(
+        auxiliary_loss, shared, retain_graph=False, create_graph=False
+    )
+    _validate_gradients(shared, transient_gradients, "transient_shared_decoder")
+    _validate_gradients(shared, auxiliary_gradients, "auxiliary_shared_decoder")
+    weighted_auxiliary = tuple(
+        gradient * float(auxiliary_coefficient)
+        for gradient in auxiliary_gradients
+    )
+    transient_norm_squared = _squared_norm(transient_gradients)
+    auxiliary_norm_squared = _squared_norm(weighted_auxiliary)
+    _require(
+        bool(torch.isfinite(transient_norm_squared).item())
+        and bool(torch.isfinite(auxiliary_norm_squared).item())
+        and float(transient_norm_squared.item()) > epsilon
+        and float(auxiliary_norm_squared.item()) > epsilon,
+        "shared_decoder_gradient_norm",
+    )
+    transient_norm = torch.sqrt(transient_norm_squared)
+    auxiliary_norm = torch.sqrt(auxiliary_norm_squared)
+    cosine = _dot(transient_gradients, weighted_auxiliary) / torch.clamp(
+        transient_norm * auxiliary_norm, min=epsilon
+    )
+    combined = tuple(
+        transient_gradient + auxiliary_gradient
+        for transient_gradient, auxiliary_gradient in zip(
+            transient_gradients, weighted_auxiliary, strict=True
+        )
+    )
+    _validate_gradients(shared, combined, "combined_shared_decoder")
+    _accumulate(shared, combined, accumulation_steps)
+    return {
+        "variant": "shared_decoder_naive_sum",
+        "transient_gradient_norm": float(transient_norm.item()),
+        "weighted_auxiliary_gradient_norm": float(auxiliary_norm.item()),
+        "gradient_cosine": float(cosine.item()),
+    }
+
+
 def paired_cross_regime_backward(
     *,
     transient_loss: torch.Tensor,

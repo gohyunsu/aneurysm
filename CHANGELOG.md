@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-08-29 — Added a shared-decoder steady control
+
+- Added a no-extra-parameter control that supervises the one-shot cycle
+  decoder's temporal mean with each scheduled steady field.
+- Added joint transient/steady gradient accumulation and diagnostic norms and
+  cosine without projection, capping or a separate steady head.
+- Passed nine focused tests in the pinned Torch container. The broader base
+  container run remained dependency/path incomplete and is not a source
+  verdict; remote Quality is required before execution.
+- Explicitly labelled the method as a matched adaptation rather than an exact
+  reproduction or a contribution, and opened no data, checkpoint or result.
+
 ## 2026-08-29 — Accepted audited zero-area faces in the steady stream
 
 - Relaxed only the per-face strict-positivity check after a full eligible-row
