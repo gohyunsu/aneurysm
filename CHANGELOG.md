@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-08-29 — Accepted audited zero-area faces in the steady stream
+
+- Relaxed only the per-face strict-positivity check after a full eligible-row
+  audit isolated six zero-area faces in otherwise usable surfaces.
+- Retained finite mesh quantities, strictly positive vertex weights and
+  positive total surface area as fail-closed requirements.
+- Added regression coverage for an isolated zero-area face and an unusable
+  all-degenerate mesh. No row membership, model, loss or evaluator changed.
+- Passed 41 focused and all 1,092 public tests in the dependency-complete
+  environment; remote CI remains the execution boundary.
+
 ## 2026-08-29 — Added the generic GHD cross-regime transfer core
 
 - Added a complete-cycle-preserving GHD adapter with a disposable

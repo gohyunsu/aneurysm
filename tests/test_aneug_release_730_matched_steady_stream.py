@@ -117,6 +117,34 @@ class MatchedSteadyStreamTests(unittest.TestCase):
         self.assertTrue(torch.isfinite(case["normals"]).all())
         self.assertTrue(torch.isfinite(case["ghd"]).all())
 
+    def test_decode_accepts_zero_area_face_when_all_vertex_weights_stay_positive(self):
+        archive, tensor, _, _ = synthetic_archive()
+        tensor.value[:, 3, :3] = tensor.value[:, 0, :3]
+        faces = torch.tensor(
+            [
+                [0, 1, 2],
+                [3, 2, 1],
+                [0, 1, 3],
+            ]
+        )
+        case = synthetic_stream(archive, faces).decode(2)
+        self.assertTrue(torch.isfinite(case["normals"]).all())
+        self.assertTrue(torch.all(case["vertex_weights"] > 0))
+        self.assertAlmostEqual(float(case["vertex_weights"].sum()), 1.0, places=6)
+
+    def test_decode_rejects_zero_area_mesh_with_zero_vertex_weights(self):
+        archive, tensor, _, faces = synthetic_archive()
+        tensor.value[:, :, :3] = torch.tensor(
+            [
+                [0.0, 0.0, 0.0],
+                [1.0, 0.0, 0.0],
+                [2.0, 0.0, 0.0],
+                [3.0, 0.0, 0.0],
+            ]
+        )
+        with self.assertRaisesRegex(MatchedSteadyStreamError, "mesh"):
+            synthetic_stream(archive, faces).decode(2)
+
     def test_ineligible_row_is_rejected_before_archive_indexing(self):
         archive, tensor, ghd, faces = synthetic_archive()
         stream = synthetic_stream(archive, faces)
