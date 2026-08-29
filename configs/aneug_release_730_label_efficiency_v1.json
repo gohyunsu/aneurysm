@@ -1,0 +1,65 @@
+{
+  "schema_version": "aurora.aneug_release_730_label_efficiency.v1",
+  "protocol_id": "aneug_release_730_label_efficiency_v1",
+  "status": "prospective_validation_only_readiness",
+  "purpose": "measure_transient_label_efficiency_of_fresh_ghd_gps_T_versus_separated_T_plus_S",
+  "base_protocol": {
+    "official_transient_train_cases": 584,
+    "fixed_validation_cases": 73,
+    "locked_test_cases": 73,
+    "processed_only_extra_cases": 79,
+    "matched_training_config_sha256": "08aa39d3f3f8380e0d28fa1838b56bec5fa774941683b809fb04c8ab321d2ecf"
+  },
+  "label_budgets": [
+    {"percent": 10, "unique_transient_cases": 58},
+    {"percent": 25, "unique_transient_cases": 146},
+    {"percent": 50, "unique_transient_cases": 292},
+    {"percent": 100, "unique_transient_cases": 584}
+  ],
+  "subset_selection": {
+    "algorithm": "sha256_ranked_case_identifier_nested_prefix_v1",
+    "public_salt": "aurora-release730-label-efficiency-v1",
+    "uses_geometry_or_field_values": false,
+    "nested": true,
+    "selected_membership_remains_private": true,
+    "training_loader_preserves_original_train_order": true
+  },
+  "subset_only_statistics": {
+    "ghd_component_mean_and_population_std": true,
+    "physical_wss_component_mean_and_population_std": true,
+    "cycle_output_scale": "sqrt_sum_component_second_moments",
+    "reference_tawss_floor": true,
+    "functional_train_normalizers_if_used": true,
+    "validation_or_test_values_used": false
+  },
+  "training_exposure": {
+    "transient_examples_per_reference_epoch": 584,
+    "algorithm": "balanced_repeated_seeded_permutations_v1",
+    "same_compute_schedule_across_label_budgets": true,
+    "each_unique_case_repetitions_differ_by_at_most_one_per_epoch": true,
+    "steady_examples_per_reference_epoch_for_T_plus_S": 584,
+    "same_eligible_steady_scope_and_schedule_as_full_data": true
+  },
+  "model": {
+    "family": "release730_ghd_gps",
+    "objective": "field_only",
+    "information_modes": ["transient_only", "eligible_steady"],
+    "initialization": "fresh_seeded_initialization",
+    "separate_single_field_head_for_T_plus_S": true,
+    "steady_field_required_at_inference": false
+  },
+  "seeds": {
+    "10_25_50_percent": [20260901, 20260902, 20260903],
+    "100_percent": [20260901, 20260902, 20260903, 20260904, 20260905]
+  },
+  "evaluation": {
+    "selection_partition": "fixed_validation_73",
+    "primary_endpoint": "case_mean_area_phase_weighted_physical_vector_wss_relative_l2",
+    "secondary_endpoints": ["tawss_normalized_absolute_error", "osi_mae"],
+    "paired_case_bootstrap_replicates": 10000,
+    "absolute_performance_threshold": null,
+    "read_locked_test": false,
+    "read_processed_only_extras": false,
+    "paper_performance_claim": false
+  }
+}

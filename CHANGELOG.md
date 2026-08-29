@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-29 — Added a prospective transient label-efficiency protocol
+
+- Fixed deterministic, label-blind nested train memberships of
+  58/146/292/584 cases for the 10/25/50/100% settings.
+- Added subset-only GHD and physical-WSS statistics, including the cycle output
+  scale used by both transient and validation decoding.
+- Added balanced repeated train permutations so every label budget receives
+  584 transient exposures per reference epoch; T+S retains the same 584-case
+  eligible-steady schedule.
+- Extended the matched GHD training core without changing its default
+  full-train path. Locked test 73 and processed-only extras 79 remain sealed,
+  and this prospective source creates no activation or performance claim.
+
 ## 2026-08-29 — Added a shared-decoder steady control
 
 - Added a no-extra-parameter control that supervises the one-shot cycle

@@ -29,6 +29,10 @@ from aurora.aneug_processed_v4_d9 import (
 from aurora.aneug_release_730_official_graphunet_baseline import (
     extended_case_metrics,
 )
+from aurora.aneug_release_730_label_efficiency import (
+    loader_order_for_membership,
+    subset_training_statistics,
+)
 from aurora.aneug_release_730_train_audit import (
     _ordered_digest,
     _vertex_areas,
@@ -531,6 +535,7 @@ def load_development_data(
     private_split_path: Path,
     train_audit_public_path: Path,
     train_audit_private_path: Path,
+    train_subset_case_ids: Sequence[str] | None = None,
 ) -> tuple[
     list[dict[str, torch.Tensor]],
     list[dict[str, torch.Tensor]],
@@ -562,6 +567,11 @@ def load_development_data(
         and _ordered_digest(train_order) == config["split"]["train_loader_order_sha256"]
         and set(train_order) == set(buckets["train"]),
         "train_order",
+    )
+    selected_train_order = (
+        train_order
+        if train_subset_case_ids is None
+        else list(loader_order_for_membership(train_order, train_subset_case_ids))
     )
     _require(
         _ordered_digest(buckets["validation"])
@@ -604,28 +614,65 @@ def load_development_data(
     ghd = mesh["ghd"].detach().cpu().to(torch.float32)
     _require(tuple(ghd.shape) == (809, 432) and bool(torch.isfinite(ghd).all().item()), "ghd")
     ghd_by_id = {case_id: ghd[index] for index, case_id in enumerate(mesh_cases)}
-    ghd_mean = torch.tensor(audit["ghd"]["mean"], dtype=torch.float32)
-    ghd_std = torch.tensor(audit["ghd"]["std_population"], dtype=torch.float32).clamp(min=1e-6)
+    selected_train_membership = set(selected_train_order)
+    excluded_train = [
+        case_id for case_id in train_order if case_id not in selected_train_membership
+    ]
+    train_records = selected_training_records(
+        indexed,
+        selected_train_order,
+        excluded_train
+        + buckets["validation"]
+        + buckets["test"]
+        + buckets["extra"],
+    )
+    if train_subset_case_ids is None:
+        ghd_mean = torch.tensor(audit["ghd"]["mean"], dtype=torch.float32)
+        ghd_std = torch.tensor(
+            audit["ghd"]["std_population"], dtype=torch.float32
+        ).clamp(min=1e-6)
+        wss_mean = torch.tensor(audit["wss_physical"]["mean"], dtype=torch.float64)
+        wss_std = torch.tensor(
+            audit["wss_physical"]["std_population"], dtype=torch.float64
+        )
+        wss_scale = float(
+            torch.sqrt(torch.sum(wss_mean.square() + wss_std.square())).item()
+        )
+    else:
+        subset_statistics = subset_training_statistics(
+            train_records,
+            torch.stack([ghd_by_id[case_id] for case_id in selected_train_order]),
+            decoder_mean,
+            decoder_std,
+        )
+        ghd_mean = subset_statistics["ghd_mean"]
+        ghd_std = subset_statistics["ghd_std_population"].clamp(min=1e-6)
+        wss_scale = float(subset_statistics["cycle_output_scale"])
     _require(ghd_mean.shape == ghd_std.shape == (432,), "ghd_statistics")
-    wss_mean = torch.tensor(audit["wss_physical"]["mean"], dtype=torch.float64)
-    wss_std = torch.tensor(audit["wss_physical"]["std_population"], dtype=torch.float64)
-    wss_scale = float(torch.sqrt(torch.sum(wss_mean.square() + wss_std.square())).item())
     _require(math.isfinite(wss_scale) and wss_scale > 0.0, "wss_scale")
     topology = _extract_topology(mesh)
+    if train_subset_case_ids is not None:
+        # The matched steady stream must use the same subset-only geometry
+        # normalization as the transient branch. Cycle backbones consume only
+        # their named topology tensors and ignore these private in-memory keys.
+        topology["train_subset_ghd_mean"] = ghd_mean
+        topology["train_subset_ghd_std"] = ghd_std
+        topology["train_subset_statistics_sha256"] = subset_statistics[
+            "statistics_sha256"
+        ]
     # Keep the shared finest faces in the returned topology. Cycle backbones
     # ignore this extra key, while the matched steady stream needs the same
     # connectivity to derive geometry features without reopening transient
     # fields or relying on stored normal channels.
     faces = topology["faces"]
-    train_records = selected_training_records(
-        indexed, train_order, buckets["validation"] + buckets["test"] + buckets["extra"]
-    )
     validation_records = selected_training_records(
         indexed, buckets["validation"], train_order + buckets["test"] + buckets["extra"]
     )
     train: list[dict[str, torch.Tensor]] = []
     validation: list[dict[str, torch.Tensor]] = []
-    for index, (case_id, record) in enumerate(zip(train_order, train_records), start=1):
+    for index, (case_id, record) in enumerate(
+        zip(selected_train_order, train_records), start=1
+    ):
         train.append(
             _case_from_record(
                 record,
@@ -637,7 +684,7 @@ def load_development_data(
                 faces,
             )
         )
-        if index % 50 == 0 or index == 584:
+        if index % 50 == 0 or index == len(selected_train_order):
             print(json.dumps({"stage": "load_train", "cases": index}), flush=True)
     for index, (case_id, record) in enumerate(
         zip(buckets["validation"], validation_records), start=1
