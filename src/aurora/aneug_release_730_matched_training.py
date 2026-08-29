@@ -1257,6 +1257,7 @@ def run_training(
             "label_efficiency_contract",
         )
         epoch_transient_exposures = int(transient_examples_per_epoch)
+        training_stage = "transient_label_efficiency_validation"
     else:
         _require(
             transient_examples_per_epoch is None
