@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -N aurora_730_harmonized_V
-#PBS -q coss_a6gpu
-#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000
+#PBS -q coss_agpu
+#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=agpu
 #PBS -l walltime=06:00:00
 #PBS -j oe
 
@@ -50,9 +50,9 @@ do
   [ -r "$evidence" ]
 done
 [ -d "$AURORA_PYG_TARGET" ]
-[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/configs/aneug_release_730_harmonized_validation_endpoints_v1.json" | /usr/bin/cut -d' ' -f1)" = "80c1475b4a51015b3bc63afc63cd4d903cf4bb7be70c73e0753f63fb24836807" ]
-[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/src/aurora/aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "64f4e12e03aa75a67bccd117b213ed5dc0a470a290aa20ef864540ab2cb290cd" ]
-[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/tests/test_aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "0169c0a8034bf686ed7d8d2362512f3c5f953e0d9cddaae9a637aff9bbffc05a" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/configs/aneug_release_730_harmonized_validation_endpoints_v1.json" | /usr/bin/cut -d' ' -f1)" = "b4fe3314e0b696aab6e02b4307afd2bf6e7013a38d526e6767da1e8788ba4cf8" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/src/aurora/aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "22ecff062a8c69a712638108b8c83ba1451b5758268d5a0104a7222f78291cb6" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/tests/test_aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "ed9cca6d2a5e65a051b1452265ca10c8410e464d9cbb194a620871616d2781f1" ]
 [ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_SPLIT_MANIFEST" | /usr/bin/cut -d' ' -f1)" = "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f" ]
 [ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_TRAIN_AUDIT" | /usr/bin/cut -d' ' -f1)" = "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385" ]
 [ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ]
