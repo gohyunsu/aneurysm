@@ -1,5 +1,29 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-29 prospective transient label-efficiency protocol
+
+- Label efficiency uses deterministic, label-blind nested prefixes of the
+  official 584-case train membership: 58/146/292/584 unique cases for
+  10/25/50/100%. The SHA-256 ranking uses only the private case identifier and
+  a public fixed salt; membership stays private and the frozen full-train
+  loader order is filtered after selection.
+- Every budget recomputes GHD component statistics, physical-WSS output scale,
+  reference-TAWSS support and any train-loss normalizer from its selected
+  unique cases only. Validation 73 is fixed; locked test 73 and extras 79 have
+  no role in membership, statistics, training or selection.
+- A reference epoch always contains 584 transient exposures through balanced
+  repeated seeded permutations. This holds optimization opportunity and the
+  T+S steady exposure count fixed across label budgets while making unique
+  transient supervision the varied quantity. T and T+S retain identical
+  transient schedules within seed and budget.
+- The prospective grid is T versus separated-head T+S on fresh GHD--GPS:
+  three seeds at 10/25/50% and the already-running five seeds at 100%. The
+  implementation is readiness only until exact private activations, remote
+  Quality and GPU results exist; it creates no test read or paper claim.
+- The local base Python lacks Torch, so a first focused invocation is
+  environment-incomplete. Run the focused and full suites in the pinned
+  dependency-complete environment before activation.
+
 ## 2026-08-29 shared-decoder steady control readiness
 
 - Added a deliberately parameter-free control for the separate steady head:

@@ -38,6 +38,10 @@ from aurora.aneug_release_730_ghd_gps_baseline import (
     extended_case_metrics,
     load_development_data,
 )
+from aurora.aneug_release_730_label_efficiency import (
+    balanced_epoch_indices,
+    canonical_digest as label_membership_digest,
+)
 from aurora.aneug_release_730_matched_steady_stream import (
     ExposureDigest,
     MatchedSteadyStream,
@@ -892,6 +896,9 @@ def _build_steady_stream(
     config: Mapping[str, Any],
     paths: Mapping[str, Path],
     topology: Mapping[str, torch.Tensor],
+    *,
+    ghd_mean: torch.Tensor | None = None,
+    ghd_std: torch.Tensor | None = None,
 ) -> tuple[MatchedSteadyStream, tuple[int, ...]]:
     scope_config = load_scope_config(paths["steady_scope_config"])
     exposure_config = load_exposure_config(paths["steady_exposure_config"])
@@ -911,17 +918,31 @@ def _build_steady_stream(
         paths["private_overlap"],
         archive,
     )
-    audit = json.loads(paths["train_audit_private"].read_text(encoding="utf-8"))
+    _require((ghd_mean is None) is (ghd_std is None), "steady_ghd_statistics_pair")
+    if ghd_mean is None:
+        audit = json.loads(
+            paths["train_audit_private"].read_text(encoding="utf-8")
+        )
+        _require(
+            audit.get("schema_version")
+            == "aurora.aneug_release_730_train_audit.private_statistics.v1"
+            and audit.get("validation_test_or_extra_statistics_included") is False,
+            "train_audit_scope",
+        )
+        ghd_mean = torch.tensor(audit["ghd"]["mean"], dtype=torch.float32)
+        ghd_std = torch.tensor(
+            audit["ghd"]["std_population"], dtype=torch.float32
+        ).clamp(min=1e-6)
+    else:
+        ghd_mean = ghd_mean.detach().cpu().to(torch.float32)
+        ghd_std = ghd_std.detach().cpu().to(torch.float32).clamp(min=1e-6)
     _require(
-        audit.get("schema_version")
-        == "aurora.aneug_release_730_train_audit.private_statistics.v1"
-        and audit.get("validation_test_or_extra_statistics_included") is False,
-        "train_audit_scope",
+        ghd_mean.shape == ghd_std.shape == (432,)
+        and bool(torch.isfinite(ghd_mean).all().item())
+        and bool(torch.isfinite(ghd_std).all().item())
+        and bool((ghd_std > 0).all().item()),
+        "steady_ghd_statistics",
     )
-    ghd_mean = torch.tensor(audit["ghd"]["mean"], dtype=torch.float32)
-    ghd_std = torch.tensor(
-        audit["ghd"]["std_population"], dtype=torch.float32
-    ).clamp(min=1e-6)
     _require("faces" in topology, "topology_faces")
     stream = MatchedSteadyStream(
         archive,
@@ -1183,6 +1204,9 @@ def run_training(
     provenance: Mapping[str, Any],
     resume_checkpoint: Path | None = None,
     resume_expected_provenance: Mapping[str, Any] | None = None,
+    train_subset_case_ids: Sequence[str] | None = None,
+    transient_examples_per_epoch: int | None = None,
+    label_efficiency_metadata: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     _require(torch.cuda.is_available(), "cuda_required")
     optimization = config["optimization"]
@@ -1207,7 +1231,39 @@ def run_training(
         paths["private_split"],
         paths["train_audit_public"],
         paths["train_audit_private"],
+        train_subset_case_ids,
     )
+    label_efficiency = train_subset_case_ids is not None
+    if label_efficiency:
+        expected_cases_by_percent = {10: 58, 25: 146, 50: 292, 100: 584}
+        _require(
+            isinstance(label_efficiency_metadata, Mapping),
+            "label_efficiency_metadata",
+        )
+        label_percent = int(label_efficiency_metadata.get("label_percent", 0))
+        _require(
+            expected_cases_by_percent.get(label_percent) == len(train)
+            and int(label_efficiency_metadata.get("unique_transient_cases", 0))
+            == len(train)
+            and label_efficiency_metadata.get("selection_algorithm")
+            == "sha256_ranked_case_identifier_nested_prefix_v1"
+            and label_efficiency_metadata.get("statistics_scope")
+            == "selected_unique_train_cases_only"
+            and label_efficiency_metadata.get("subset_ranked_membership_sha256")
+            == label_membership_digest(
+                [str(value) for value in train_subset_case_ids]
+            )
+            and transient_examples_per_epoch == 584,
+            "label_efficiency_contract",
+        )
+        epoch_transient_exposures = int(transient_examples_per_epoch)
+    else:
+        _require(
+            transient_examples_per_epoch is None
+            and label_efficiency_metadata is None,
+            "unexpected_label_efficiency_contract",
+        )
+        epoch_transient_exposures = len(train)
     basis_payload = None
     if role == "selected_proposal":
         basis_payload = load_response_basis(
@@ -1252,7 +1308,13 @@ def run_training(
     steady_stream = None
     eligible_indices: tuple[int, ...] = ()
     if information_mode == "eligible_steady":
-        steady_stream, eligible_indices = _build_steady_stream(config, paths, topology)
+        steady_stream, eligible_indices = _build_steady_stream(
+            config,
+            paths,
+            topology,
+            ghd_mean=topology.get("train_subset_ghd_mean"),
+            ghd_std=topology.get("train_subset_ghd_std"),
+        )
     trainable = [parameter for parameter in model.parameters() if parameter.requires_grad]
     _require(bool(trainable), "trainable_parameters")
     optimizer = torch.optim.AdamW(
@@ -1401,8 +1463,18 @@ def run_training(
     )
     for epoch in training_epochs:
         model.train()
-        transient_order = list(range(len(train)))
-        random.Random(seed + epoch).shuffle(transient_order)
+        if label_efficiency:
+            transient_order = list(
+                balanced_epoch_indices(
+                    len(train),
+                    training_seed=seed,
+                    epoch=epoch,
+                    exposures=epoch_transient_exposures,
+                )
+            )
+        else:
+            transient_order = list(range(len(train)))
+            random.Random(seed + epoch).shuffle(transient_order)
         steady_order: list[int] = []
         if information_mode == "eligible_steady":
             steady_order = list(
@@ -1413,7 +1485,12 @@ def run_training(
                     seed=steady_seed,
                 )
             )
-            _require(len(steady_order) == len(transient_order) == 584, "paired_epoch")
+            _require(
+                len(steady_order)
+                == len(transient_order)
+                == epoch_transient_exposures,
+                "paired_epoch",
+            )
         optimizer.zero_grad(set_to_none=True)
         cycle_sum = 0.0
         auxiliary_sum = 0.0
@@ -1626,6 +1703,7 @@ def run_training(
             "train_term_normalizers": train_normalizers,
             "selection_endpoint_normalizers": selection_normalizers,
             "reference_tawss_floor": reference_tawss_floor,
+            "cycle_output_scale": cycle_output_scale,
             "single_field_output_scale": single_field_output_scale,
             "single_field_output_scale_source": (
                 "transient_train_cycle_mean_physical_vector_rms_computed_from_frozen_train_fields"
@@ -1700,7 +1778,14 @@ def run_training(
         ),
         "training_seed": seed,
         "training_stage": training_stage,
-        "transient_case_cycles_consumed": epochs_completed * len(train),
+        "unique_transient_train_cases": len(train),
+        "transient_examples_per_reference_epoch": epoch_transient_exposures,
+        "label_efficiency": (
+            dict(label_efficiency_metadata) if label_efficiency else None
+        ),
+        "transient_case_cycles_consumed": (
+            epochs_completed * epoch_transient_exposures
+        ),
         "optimizer_steps": optimizer_steps,
         "training_gpu_seconds": elapsed_prior + time.monotonic() - started,
         "peak_gpu_memory_bytes": int(torch.cuda.max_memory_allocated()),
@@ -1749,10 +1834,10 @@ def run_training(
             )
         ),
         "single_field_auxiliary_examples_consumed": (
-            epochs_completed * len(train) if uses_auxiliary else 0
+            epochs_completed * epoch_transient_exposures if uses_auxiliary else 0
         ),
         "transient_mean_auxiliary_examples_consumed": (
-            epochs_completed * len(train) if is_transient_mean else 0
+            epochs_completed * epoch_transient_exposures if is_transient_mean else 0
         ),
         "steady_wss_rows_read_for_auxiliary": exposure.count if is_steady else 0,
         "additional_auxiliary_forward_backward_work": uses_auxiliary,
@@ -1762,6 +1847,7 @@ def run_training(
         "best_selection_value": best_selection,
         "selection_name": selection_name,
         "reference_tawss_floor": reference_tawss_floor,
+        "cycle_output_scale": cycle_output_scale,
         "train_term_normalizers": train_normalizers,
         "selection_endpoint_normalizers": selection_normalizers,
         "initial_validation": initial_validation,
