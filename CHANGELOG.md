@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-29 — Repaired harmonized comparator provenance
+
+- Corrected stale GHD--GPS and Transolver config hashes to the exact configs
+  recorded by their frozen terminal results; the first evaluator attempt had
+  failed on this check before any scientific tensor was read.
+- Added repository-integrity tests that compare all three configured hashes
+  directly with their sibling baseline config files, preventing the same
+  drift from passing synthetic validation again.
+- Aligned the frozen-inference sidecar and runtime metadata with the observed
+  independent `coss_agpu/Qlist=agpu` capacity. Model, data, split, checkpoint,
+  endpoint and sealed test/extra contracts are unchanged. All 1,100 public
+  tests pass in a dependency-complete environment.
+
 ## 2026-08-29 — Added a prospective transient label-efficiency protocol
 
 - Fixed deterministic, label-blind nested train memberships of

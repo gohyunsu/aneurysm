@@ -193,6 +193,8 @@ def validate_config(config: Mapping[str, Any]) -> None:
     _require(
         runtime["server"] == "introai9"
         and runtime["excluded_server"] == "junjinyong"
+        and runtime["queue"] == "coss_agpu"
+        and runtime["Qlist"] == "agpu"
         and runtime["ngpus"] == 1
         and runtime["container_sha256"]
         == "2da7b186ba8fc25efb1a5ffcbb5251974d11a57198a7c0970a61ae05b88681f2",

@@ -9,8 +9,8 @@
     "steady_norm_bytes": 9632510050,
     "steady_norm_sha256": "0c03c1d9cc5bdcfc32d663a82a6ac7f22db757fa40a4960a83038fb62890177f",
     "graph_config_sha256": "956f6c9aa3b954b900b6bb0b6d0527e63ba288cc51d85ac96f1173a437504cf6",
-    "ghd_gps_config_sha256": "0d9ee4615b5af9bf9058920e70252addf5146f06178fb058a2c193be1692bfc9",
-    "transolver_config_sha256": "0cb20c0c3041e63043d92a4a4062e7b8f9b63deb2e7390dbbaeaf1c9bad86fcb"
+    "ghd_gps_config_sha256": "9fe5a68565701470e69110ef1f09bcd4bfa47717a57f6bda2c699d41fa170b99",
+    "transolver_config_sha256": "6b5489b5a126fd508cf1aa44ce099336ed76d942d5ddb5c28653bb9753f58316"
   },
   "split": {
     "public_result_sha256": "4fa3be7c217c3a84b86f477c90112377fb913f6b0b47b829d684b270555bf991",
@@ -59,8 +59,8 @@
   "runtime": {
     "server": "introai9",
     "excluded_server": "junjinyong",
-    "queue": "coss_a6gpu",
-    "Qlist": "a6000",
+    "queue": "coss_agpu",
+    "Qlist": "agpu",
     "ncpus": 4,
     "memory_gb": 64,
     "ngpus": 1,
