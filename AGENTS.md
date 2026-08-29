@@ -1,5 +1,33 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-30 prospective current GHD T/T+S locked-test path
+
+- The current confirmatory target is five fresh GHD--GPS seeds with exactly
+  two information modes per seed: transient-only T and regime-separated
+  eligible-steady T+S. A separate ten-checkpoint evaluator now represents
+  this pair; do not mutate or relabel the historical twenty-checkpoint
+  response/local T0.
+- Checkpoint producer `c686dff...8bbd8`, private training runtime
+  `92812f1...b9b74`, and the future Quality-passed evaluator successor are
+  distinct identities. The future private activation must bind all three,
+  the exact config/source hashes, complete five-seed validation analysis and
+  every checkpoint/result/terminal hash before any test field is opened.
+- The evaluator has no response basis, proposal-family checkpoint, training,
+  selection, threshold search or extras input. It evaluates all ten frozen
+  checkpoints on one ordered 73-case loader and reports the prespecified
+  T+S-minus-T crossed seed/case contrast without an automatic winner or paper
+  claim.
+- A single stable access-session marker is written before either scientific
+  archive opens. Scheduler repair or exact retry is allowed only with the
+  same activation and frozen batch; a changed model, seed, endpoint, figure
+  selection or access-session identity fails closed. Preserve all attempts.
+- The compact figure payload uses reference-only low/median/high OSI cases,
+  labels the displayed seed-20260903 pair as T and T+S, and records the
+  disposable train-only steady head rather than the rejected response/local
+  schematic. Eleven synthetic focused tests pass in the pinned Torch 2.5.1
+  environment. This is prospective source readiness only: no activation,
+  locked-test value, extra, result, figure or performance claim exists.
+
 ## 2026-08-29 prospective transient label-efficiency protocol
 
 - Label efficiency uses deterministic, label-blind nested prefixes of the
