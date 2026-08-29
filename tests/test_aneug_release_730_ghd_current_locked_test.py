@@ -367,6 +367,12 @@ class CurrentLockedTestContractTests(unittest.TestCase):
 
     def test_pbs_is_one_gpu_one_batch_and_has_stable_access_session(self) -> None:
         text = PBS.read_text(encoding="utf-8")
+        source = (
+            ROOT
+            / "src"
+            / "aurora"
+            / "aneug_release_730_ghd_current_locked_test.py"
+        ).read_text(encoding="utf-8")
         self.assertIn("${PBS_JOBID:?current locked test is PBS-only}", text)
         self.assertIn("#PBS -l select=1:ncpus=4:mem=64gb:ngpus=1:Qlist=a6000", text)
         self.assertEqual(
@@ -374,6 +380,13 @@ class CurrentLockedTestContractTests(unittest.TestCase):
             1,
         )
         self.assertIn("AURORA_ACCESS_SESSION_ROOT", text)
+        self.assertIn(
+            '--expected-execution-server "$AURORA_EXECUTION_SERVER"', text
+        )
+        self.assertIn(
+            'activation["execution_server"] == args.expected_execution_server',
+            source,
+        )
         self.assertIn(
             "--access-marker /private/access/locked_test_access_session.json", text
         )

@@ -77,6 +77,7 @@ audit_name="$(/usr/bin/basename "$AURORA_PRIVATE_TRAIN_AUDIT")"
   python -m aurora.aneug_release_730_ghd_current_locked_test \
   --config /workspace/configs/aneug_release_730_ghd_current_locked_test_v1.json \
   --expected-evaluator-commit "$actual_commit" \
+  --expected-execution-server "$AURORA_EXECUTION_SERVER" \
   --activation "/private/activation/$activation_name" \
   --checkpoint-manifest "/private/manifest/$manifest_name" \
   --checkpoint-root /private/checkpoints \

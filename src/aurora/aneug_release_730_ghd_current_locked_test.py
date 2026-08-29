@@ -1308,6 +1308,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--validate-only", action="store_true")
     parser.add_argument("--expected-evaluator-commit")
+    parser.add_argument("--expected-execution-server", choices=("introai9", "junjinyong"))
     parser.add_argument("--activation", type=Path)
     parser.add_argument("--checkpoint-manifest", type=Path)
     parser.add_argument("--checkpoint-root", type=Path)
@@ -1329,6 +1330,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     required = (
         args.expected_evaluator_commit,
+        args.expected_execution_server,
         args.activation,
         args.checkpoint_manifest,
         args.checkpoint_root,
@@ -1366,6 +1368,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         activation["config_sha256"] == file_sha256(args.config)
         and activation["evaluator_source_sha256"] == file_sha256(__file__),
         "activation_source_hash",
+    )
+    _require(
+        activation["execution_server"] == args.expected_execution_server,
+        "activation_execution_server",
     )
     manifest = validate_checkpoint_manifest(
         args.checkpoint_manifest,
