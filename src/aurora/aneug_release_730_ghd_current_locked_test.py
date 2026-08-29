@@ -74,6 +74,32 @@ def _is_sha256(value: Any) -> bool:
     )
 
 
+def _is_single_scientific_execution(terminal: Mapping[str, Any]) -> bool:
+    """Accept scheduler retries only with explicit one-entry provenance."""
+
+    run_count = terminal.get("run_count")
+    scheduler_run_count = terminal.get("scheduler_run_count", run_count)
+    if (
+        not isinstance(run_count, int)
+        or isinstance(run_count, bool)
+        or not isinstance(scheduler_run_count, int)
+        or isinstance(scheduler_run_count, bool)
+        or run_count < 1
+        or scheduler_run_count != run_count
+    ):
+        return False
+    scientific_entries = terminal.get("scientific_script_entry_count")
+    pre_script_attempts = terminal.get("pre_script_scheduler_attempt_count")
+    if scientific_entries is None and pre_script_attempts is None:
+        return run_count == 1
+    return (
+        scientific_entries == 1
+        and isinstance(pre_script_attempts, int)
+        and not isinstance(pre_script_attempts, bool)
+        and pre_script_attempts == run_count - 1
+    )
+
+
 def file_sha256(path: str | Path, chunk_bytes: int = 8 * 1024 * 1024) -> str:
     digest = hashlib.sha256()
     with Path(path).open("rb") as handle:
@@ -666,7 +692,7 @@ def preflight_frozen_evidence(
             and terminal.get("scheduler_state") == "F"
             and terminal.get("scheduler_substate") == 92
             and terminal.get("exit_status") == 0
-            and terminal.get("run_count") == 1
+            and _is_single_scientific_execution(terminal)
             and terminal.get("result_sha256") == entry["validation_result_sha256"]
             and terminal.get("best_checkpoint_sha256") == entry["checkpoint_sha256"]
             and terminal.get("fresh_information_activation_sha256")

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-08-30 — Distinguish scheduler retries in current locked-test preflight
+
+- Accepted PBS run counts above one only with explicit provenance proving one
+  scientific script entry and accounting for every earlier pre-script attempt.
+- Retained strict legacy compatibility for run-count-one terminals and fail-
+  closed rejection of duplicated scientific entries. No scientific artifact,
+  test access or metric changed. Twelve focused pinned-container tests pass.
+
 ## 2026-08-30 — Added the current five-seed GHD locked-test evaluator
 
 - Added a separate one-access-session evaluator for the current five-seed

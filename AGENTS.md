@@ -1,5 +1,18 @@
 # AGENTS.md — AURORA 연구 운영 규약
 
+## 2026-08-30 current locked-test scheduler provenance compatibility
+
+- The current 10-checkpoint locked-test preflight now separates PBS scheduler
+  attempts from scientific executions. Historical terminal records remain
+  valid only with legacy `run_count = 1`; a larger scheduler count requires
+  explicit equal `scheduler_run_count`, exactly one scientific script entry,
+  and `pre_script_scheduler_attempt_count = run_count - 1`.
+- This supports a valid single training that enters its script after pre-script
+  dispatch retries without accepting duplicated scientific execution. It does
+  not alter any checkpoint, split, metric, figure rule, access session, test
+  seal or performance value. Twelve focused tests pass in the pinned Torch
+  2.5.1 environment.
+
 ## 2026-08-30 prospective current GHD T/T+S locked-test path
 
 - The current confirmatory target is five fresh GHD--GPS seeds with exactly
