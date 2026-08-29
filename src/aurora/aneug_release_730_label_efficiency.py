@@ -271,12 +271,30 @@ def subset_training_statistics(
         math.isfinite(cycle_output_scale) and cycle_output_scale > 0.0,
         "cycle_output_scale",
     )
-    return {
+    statistics_payload = {
         "unique_train_cases": len(normalized_records),
+        "ghd_mean": [float(value) for value in ghd_mean.tolist()],
+        "ghd_std_population": [float(value) for value in ghd_std.tolist()],
+        "wss_physical_mean": [float(value) for value in wss_mean.tolist()],
+        "wss_physical_std_population": [
+            float(value) for value in wss_std.tolist()
+        ],
+        "cycle_output_scale": cycle_output_scale,
+        "validation_test_or_extra_statistics_included": False,
+    }
+    statistics_sha256 = hashlib.sha256(
+        json.dumps(
+            statistics_payload,
+            sort_keys=True,
+            separators=(",", ":"),
+            allow_nan=False,
+        ).encode("utf-8")
+    ).hexdigest()
+    return {
+        **statistics_payload,
         "ghd_mean": ghd_mean.to(torch.float32),
         "ghd_std_population": ghd_std.to(torch.float32),
         "wss_physical_mean": wss_mean,
         "wss_physical_std_population": wss_std,
-        "cycle_output_scale": cycle_output_scale,
-        "validation_test_or_extra_statistics_included": False,
+        "statistics_sha256": statistics_sha256,
     }

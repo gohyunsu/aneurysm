@@ -1705,6 +1705,9 @@ def run_training(
             "selection_endpoint_normalizers": selection_normalizers,
             "reference_tawss_floor": reference_tawss_floor,
             "cycle_output_scale": cycle_output_scale,
+            "subset_train_statistics_sha256": topology.get(
+                "train_subset_statistics_sha256"
+            ),
             "single_field_output_scale": single_field_output_scale,
             "single_field_output_scale_source": (
                 "transient_train_cycle_mean_physical_vector_rms_computed_from_frozen_train_fields"
@@ -1849,6 +1852,9 @@ def run_training(
         "selection_name": selection_name,
         "reference_tawss_floor": reference_tawss_floor,
         "cycle_output_scale": cycle_output_scale,
+        "subset_train_statistics_sha256": topology.get(
+            "train_subset_statistics_sha256"
+        ),
         "train_term_normalizers": train_normalizers,
         "selection_endpoint_normalizers": selection_normalizers,
         "initial_validation": initial_validation,

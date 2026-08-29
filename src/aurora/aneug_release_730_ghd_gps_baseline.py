@@ -657,6 +657,9 @@ def load_development_data(
         # their named topology tensors and ignore these private in-memory keys.
         topology["train_subset_ghd_mean"] = ghd_mean
         topology["train_subset_ghd_std"] = ghd_std
+        topology["train_subset_statistics_sha256"] = subset_statistics[
+            "statistics_sha256"
+        ]
     # Keep the shared finest faces in the returned topology. Cycle backbones
     # ignore this extra key, while the matched steady stream needs the same
     # connectivity to derive geometry features without reopening transient

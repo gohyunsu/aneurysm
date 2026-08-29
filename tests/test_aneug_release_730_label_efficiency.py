@@ -114,6 +114,7 @@ class Release730LabelEfficiencyTests(unittest.TestCase):
             torch.full((3,), 0.5, dtype=torch.float64),
         )
         self.assertAlmostEqual(result["cycle_output_scale"], (1.5) ** 0.5)
+        self.assertEqual(len(result["statistics_sha256"]), 64)
         self.assertFalse(result["validation_test_or_extra_statistics_included"])
 
 
