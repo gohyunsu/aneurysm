@@ -64,7 +64,10 @@ class Release730LabelEfficiencyTests(unittest.TestCase):
         self.assertLessEqual(set(forward[10]), set(forward[25]))
         self.assertLessEqual(set(forward[25]), set(forward[50]))
         self.assertLessEqual(set(forward[50]), set(forward[100]))
-        self.assertEqual(len(canonical_digest(forward[10])), 64)
+        self.assertEqual(
+            canonical_digest(forward[10]),
+            "3509e5fbe9b22ea91d71da75e87c74fa819886b28a91ebe3a846471fd6071182",
+        )
 
     def test_loader_order_is_frozen_full_order_filtered_by_membership(self):
         full = [f"case-{index:04d}" for index in range(584)]
