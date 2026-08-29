@@ -8,6 +8,9 @@
 - Added repository-integrity tests that compare all three configured hashes
   directly with their sibling baseline config files, preventing the same
   drift from passing synthetic validation again.
+- Made activation hash maps order-insensitive, as JSON objects require, and
+  exercised the exact sorted-key serialization emitted by the private
+  materializer. The prior order-sensitive check failed before tensor access.
 - Aligned the frozen-inference sidecar and runtime metadata with the observed
   independent `coss_agpu/Qlist=agpu` capacity. Model, data, split, checkpoint,
   endpoint and sealed test/extra contracts are unchanged. All 1,100 public

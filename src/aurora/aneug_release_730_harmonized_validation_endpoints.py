@@ -239,7 +239,7 @@ def validate_activation(
         value = activation.get(key)
         _require(
             isinstance(value, Mapping)
-            and tuple(value) == DIRECT_LABELS
+            and set(value) == set(DIRECT_LABELS)
             and all(_is_sha256(value[label]) for label in DIRECT_LABELS),
             f"activation_{key}",
         )
