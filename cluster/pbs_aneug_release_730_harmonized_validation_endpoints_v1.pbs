@@ -51,8 +51,8 @@ do
 done
 [ -d "$AURORA_PYG_TARGET" ]
 [ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/configs/aneug_release_730_harmonized_validation_endpoints_v1.json" | /usr/bin/cut -d' ' -f1)" = "b4fe3314e0b696aab6e02b4307afd2bf6e7013a38d526e6767da1e8788ba4cf8" ]
-[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/src/aurora/aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "22ecff062a8c69a712638108b8c83ba1451b5758268d5a0104a7222f78291cb6" ]
-[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/tests/test_aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "ed9cca6d2a5e65a051b1452265ca10c8410e464d9cbb194a620871616d2781f1" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/src/aurora/aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "d6e48fff67b2249d0be77bdbabdb5218c5eb930d897fc3ee6f60b4434f2d91b7" ]
+[ "$(/usr/bin/sha256sum "$AURORA_PROJECT_ROOT/tests/test_aneug_release_730_harmonized_validation_endpoints.py" | /usr/bin/cut -d' ' -f1)" = "1f573b0760dbc3ad93bb7c7708db1f4a7e23d1ee5a0a10a17b264bb8d529d17b" ]
 [ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_SPLIT_MANIFEST" | /usr/bin/cut -d' ' -f1)" = "4ff881055c45ee87c917fbfe1a7ed5102ef63b9426539aea647eea7b65e3077f" ]
 [ "$(/usr/bin/sha256sum "$AURORA_PRIVATE_TRAIN_AUDIT" | /usr/bin/cut -d' ' -f1)" = "ce1dd6d2852e290fbe187ac062af155f522cd4b8a82c1580b5430d15ed519385" ]
 [ "$(/usr/bin/sha256sum "$AURORA_CONTAINER" | /usr/bin/cut -d' ' -f1)" = "$AURORA_CONTAINER_SHA256" ]

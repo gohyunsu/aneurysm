@@ -198,11 +198,11 @@ class HarmonizedValidationEndpointTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "activation.json"
             value = activation()
-            path.write_text(json.dumps(value), encoding="utf-8")
+            path.write_text(json.dumps(value, sort_keys=True), encoding="utf-8")
             observed = validate_activation(path, config, "a" * 40)
             self.assertFalse(observed["read_locked_test_or_extra"])
             value["read_locked_test_or_extra"] = True
-            path.write_text(json.dumps(value), encoding="utf-8")
+            path.write_text(json.dumps(value, sort_keys=True), encoding="utf-8")
             with self.assertRaisesRegex(
                 HarmonizedValidationEndpointError, "activation_boundary"
             ):
