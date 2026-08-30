@@ -75,7 +75,15 @@ def _is_sha256(value: Any) -> bool:
 
 
 def _is_single_scientific_execution(terminal: Mapping[str, Any]) -> bool:
-    """Accept scheduler retries only with explicit one-entry provenance."""
+    """Accept scheduler retries only with explicit one-entry provenance.
+
+    A PBS ``run_count`` is an envelope-level counter.  After one completed
+    scientific entry, MOM acknowledgement/obituary retries may increase it
+    without launching the training script again.  New terminal records bind
+    that case with an explicit count of all non-scientific attempts; older
+    records remain admissible only through the narrower pre-script field or a
+    legacy single run.
+    """
 
     run_count = terminal.get("run_count")
     scheduler_run_count = terminal.get("scheduler_run_count", run_count)
@@ -89,6 +97,16 @@ def _is_single_scientific_execution(terminal: Mapping[str, Any]) -> bool:
     ):
         return False
     scientific_entries = terminal.get("scientific_script_entry_count")
+    non_scientific_attempts = terminal.get(
+        "non_scientific_scheduler_attempt_count"
+    )
+    if non_scientific_attempts is not None:
+        return (
+            scientific_entries == 1
+            and isinstance(non_scientific_attempts, int)
+            and not isinstance(non_scientific_attempts, bool)
+            and non_scientific_attempts == run_count - scientific_entries
+        )
     pre_script_attempts = terminal.get("pre_script_scheduler_attempt_count")
     if scientific_entries is None and pre_script_attempts is None:
         return run_count == 1
@@ -98,6 +116,28 @@ def _is_single_scientific_execution(terminal: Mapping[str, Any]) -> bool:
         and not isinstance(pre_script_attempts, bool)
         and pre_script_attempts == run_count - 1
     )
+
+
+def _is_scientifically_terminal_execution(terminal: Mapping[str, Any]) -> bool:
+    """Accept a clean PBS exit or a hash-bound post-science envelope failure."""
+
+    disposition = terminal.get("scheduler_envelope_disposition", "clean_exit")
+    if disposition == "clean_exit":
+        return (
+            terminal.get("scheduler_state") == "F"
+            and terminal.get("scheduler_substate") == 92
+            and terminal.get("exit_status") == 0
+            and terminal.get("scheduler_acknowledged_clean_exit", True) is True
+        )
+    if disposition == "science_complete_post_execution_envelope_failure":
+        return (
+            terminal.get("scheduler_state") == "F"
+            and terminal.get("scheduler_substate") == 91
+            and terminal.get("exit_status") == -18
+            and terminal.get("scheduler_acknowledged_clean_exit") is False
+            and terminal.get("run_count", 0) > 1
+        )
+    return False
 
 
 def file_sha256(path: str | Path, chunk_bytes: int = 8 * 1024 * 1024) -> str:
@@ -689,9 +729,7 @@ def preflight_frozen_evidence(
             == "aneug_release_730_ghd_fresh_information_v1"
             and terminal.get("information_mode") == entry["information_mode"]
             and terminal.get("training_seed") == entry["training_seed"]
-            and terminal.get("scheduler_state") == "F"
-            and terminal.get("scheduler_substate") == 92
-            and terminal.get("exit_status") == 0
+            and _is_scientifically_terminal_execution(terminal)
             and _is_single_scientific_execution(terminal)
             and terminal.get("result_sha256") == entry["validation_result_sha256"]
             and terminal.get("best_checkpoint_sha256") == entry["checkpoint_sha256"]

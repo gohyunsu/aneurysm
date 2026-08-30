@@ -465,6 +465,48 @@ class CurrentLockedTestEvidenceTests(unittest.TestCase):
             ):
                 preflight_frozen_evidence(payload, root, config)
 
+    def test_preflight_accepts_only_accounted_post_science_envelope_failure(self) -> None:
+        config = load_config(CONFIG)
+        payload = manifest()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            materialize_evidence(root, payload, config)
+            entry = payload["entries"][0]
+            terminal_path = root / entry["terminal_record_relative_path"]
+            terminal = json.loads(terminal_path.read_text(encoding="utf-8"))
+            terminal.update(
+                {
+                    "scheduler_state": "F",
+                    "scheduler_substate": 91,
+                    "exit_status": -18,
+                    "run_count": 21,
+                    "scheduler_run_count": 21,
+                    "scientific_script_entry_count": 1,
+                    "pre_script_scheduler_attempt_count": None,
+                    "non_scientific_scheduler_attempt_count": 20,
+                    "scheduler_acknowledged_clean_exit": False,
+                    "scheduler_envelope_disposition": (
+                        "science_complete_post_execution_envelope_failure"
+                    ),
+                }
+            )
+            terminal_path.write_text(
+                json.dumps(terminal, sort_keys=True), encoding="utf-8"
+            )
+            entry["terminal_record_sha256"] = file_sha256(terminal_path)
+            floor, scale = preflight_frozen_evidence(payload, root, config)
+            self.assertEqual((floor, scale), (0.001, 2.0))
+
+            terminal["non_scientific_scheduler_attempt_count"] = 19
+            terminal_path.write_text(
+                json.dumps(terminal, sort_keys=True), encoding="utf-8"
+            )
+            entry["terminal_record_sha256"] = file_sha256(terminal_path)
+            with self.assertRaisesRegex(
+                CurrentGHDLockedTestError, "terminal_record_identity"
+            ):
+                preflight_frozen_evidence(payload, root, config)
+
     def test_multiseed_result_must_bind_exact_manifest_result_and_terminal_hashes(self) -> None:
         config = load_config(CONFIG)
         payload = manifest()
